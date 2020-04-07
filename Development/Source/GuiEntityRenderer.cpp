@@ -1,20 +1,20 @@
-#include <WE3D/GuiEntityRenderer.hpp>
+#include "GuiEntityRenderer.hpp"
 
 void GuiEntityRenderer::bind()
 {
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-	p_shader.bind();
+	_shader.bind();
 
-	p_shader.uploadUniform("u_nearZ", p_shaderBus.getNearZ());
-	p_shader.uploadUniform("u_farZ", p_shaderBus.getFarZ());
+	_shader.uploadUniform("u_nearZ", _shaderBus.getNearZ());
+	_shader.uploadUniform("u_farZ", _shaderBus.getFarZ());
 }
 
 void GuiEntityRenderer::unbind()
 {
 	glDisable(GL_BLEND);
-	p_shader.unbind();
+	_shader.unbind();
 }
 
 void GuiEntityRenderer::render(const GuiEntity * entity)
@@ -24,12 +24,12 @@ void GuiEntityRenderer::render(const GuiEntity * entity)
 		if (entity->isEnabled())
 		{
 			// Uniforms
-			p_shader.uploadUniform("u_modelMatrix",   entity->getModelMatrix());
-			p_shader.uploadUniform("u_mirrorHor",     entity->isMirroredHorizonally());
-			p_shader.uploadUniform("u_mirrorVer",     entity->isMirroredVertically());
-			p_shader.uploadUniform("u_color",         entity->getColor());
-			p_shader.uploadUniform("u_isDepthEntity", entity->isDepthEntity());
-			p_shader.uploadUniform("u_sampler_diffuse", 0);
+			_shader.uploadUniform("u_modelMatrix",   entity->getModelMatrix());
+			_shader.uploadUniform("u_mirrorHor",     entity->isMirroredHorizonally());
+			_shader.uploadUniform("u_mirrorVer",     entity->isMirroredVertically());
+			_shader.uploadUniform("u_color",         entity->getColor());
+			_shader.uploadUniform("u_isDepthEntity", entity->isDepthEntity());
+			_shader.uploadUniform("u_sampler_diffuse", 0);
 
 			// Bind
 			glBindVertexArray(entity->getOglBuffer()->getVAO());

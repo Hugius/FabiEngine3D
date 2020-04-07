@@ -1,31 +1,31 @@
-#include <WE3D/OpenGLBuffer.hpp>
+#include "OpenGLBuffer.hpp"
 
 // 3D
 OpenGLBuffer::OpenGLBuffer(int type, float data[], int dataCount)
 {
-	p_create3D(type, data, dataCount);
+	_create3D(type, data, dataCount);
 }
 
 OpenGLBuffer::OpenGLBuffer(float data[], int dataCount, const vector<vec3> & offsets)
 {
-	p_create3D_instanced(data, dataCount, offsets);
+	_create3D_instanced(data, dataCount, offsets);
 }
 
 // 2D
 OpenGLBuffer::OpenGLBuffer(float x, float y, float w, float h, bool centered)
 {
-	p_create2D(x, y, w, h, centered);
+	_create2D(x, y, w, h, centered);
 }
 
-void OpenGLBuffer::p_create3D(int type, float data[], int dataCount)
+void OpenGLBuffer::_create3D(int type, float data[], int dataCount)
 {
 	// Create buffers
-	glGenVertexArrays(1, &p_vao);
-	glGenBuffers(1, &p_vbo);
+	glGenVertexArrays(1, &_vao);
+	glGenBuffers(1, &_vbo);
 
 	// Bind buffers
-	glBindVertexArray(p_vao);
-	glBindBuffer(GL_ARRAY_BUFFER, p_vbo);
+	glBindVertexArray(_vao);
+	glBindBuffer(GL_ARRAY_BUFFER, _vbo);
 
 	// Allocate buffer dataCount
 	glBufferData(GL_ARRAY_BUFFER, dataCount * sizeof(float), &data[0], GL_STATIC_DRAW);
@@ -34,7 +34,7 @@ void OpenGLBuffer::p_create3D(int type, float data[], int dataCount)
 	switch (type)
 	{
 	case SHAPE_3D: // Fill 3D buffers
-		p_vertexCount = dataCount / 8;
+		_vertexCount = dataCount / 8;
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (GLvoid*)(0 * sizeof(float)));
 		glEnableVertexAttribArray(0);
 		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (GLvoid*)(3 * sizeof(float)));
@@ -44,7 +44,7 @@ void OpenGLBuffer::p_create3D(int type, float data[], int dataCount)
 		break;
 
 	case SHAPE_SURFACE: // Fill surface buffers
-		p_vertexCount = dataCount / 5;
+		_vertexCount = dataCount / 5;
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (GLvoid*)(0 * sizeof(float)));
 		glEnableVertexAttribArray(0);
 		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (GLvoid*)(3 * sizeof(float)));
@@ -52,13 +52,13 @@ void OpenGLBuffer::p_create3D(int type, float data[], int dataCount)
 		break;
 
 	case SHAPE_AABB: // Fill AABB buffers
-		p_vertexCount = dataCount / 3;
+		_vertexCount = dataCount / 3;
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (GLvoid*)(0 * sizeof(float)));
 		glEnableVertexAttribArray(0);
 		break;
 
 	case SHAPE_CUBEMAP: // Fill cubemap buffers
-		p_vertexCount = dataCount / 3;
+		_vertexCount = dataCount / 3;
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (GLvoid*)(0 * sizeof(float)));
 		glEnableVertexAttribArray(0);
 		break;
@@ -69,19 +69,19 @@ void OpenGLBuffer::p_create3D(int type, float data[], int dataCount)
 	glBindVertexArray(0);
 }
 
-void OpenGLBuffer::p_create3D_instanced(float data[], int dataCount, const vector<vec3> & offsets)
+void OpenGLBuffer::_create3D_instanced(float data[], int dataCount, const vector<vec3> & offsets)
 {
 	// Create 3D
-	p_create3D(SHAPE_3D, data, dataCount);
+	_create3D(SHAPE_3D, data, dataCount);
 
 	// Create instanced VBO
-	glGenBuffers(1, &p_vbo_instanced);
+	glGenBuffers(1, &_vbo_instanced);
 
 	// Bind VAO
-	glBindVertexArray(p_vao);
+	glBindVertexArray(_vao);
 
 	// Bind instanced VBO
-	glBindBuffer(GL_ARRAY_BUFFER, p_vbo_instanced);
+	glBindBuffer(GL_ARRAY_BUFFER, _vbo_instanced);
 	glBufferData(GL_ARRAY_BUFFER, offsets.size() * sizeof(vec3), &offsets[0], GL_STATIC_DRAW);
 
 	// Fill instanced VBO
@@ -94,11 +94,11 @@ void OpenGLBuffer::p_create3D_instanced(float data[], int dataCount, const vecto
 	glBindVertexArray(0);
 
 	// Other
-	p_isInstanced = true;
-	p_offsetCount = offsets.size();
+	_isInstanced = true;
+	_offsetCount = offsets.size();
 }
 
-void OpenGLBuffer::p_create2D(float x, float y, float w, float h, bool centered)
+void OpenGLBuffer::_create2D(float x, float y, float w, float h, bool centered)
 {
 	// Generate vertices
 	float* data = nullptr;
@@ -131,12 +131,12 @@ void OpenGLBuffer::p_create2D(float x, float y, float w, float h, bool centered)
 	}
 
 	// Create buffers
-	glGenVertexArrays(1, &p_vao);
-	glGenBuffers(1, &p_vbo);
+	glGenVertexArrays(1, &_vao);
+	glGenBuffers(1, &_vbo);
 
 	// Bind buffers
-	glBindVertexArray(p_vao);
-	glBindBuffer(GL_ARRAY_BUFFER, p_vbo);
+	glBindVertexArray(_vao);
+	glBindBuffer(GL_ARRAY_BUFFER, _vbo);
 
 	// Allocate buffer data
 	glBufferData(GL_ARRAY_BUFFER, 24 * sizeof(float), &data[0], GL_STATIC_DRAW);
@@ -151,32 +151,32 @@ void OpenGLBuffer::p_create2D(float x, float y, float w, float h, bool centered)
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
 
-	p_vertexCount = 6;
+	_vertexCount = 6;
 }
 
 OpenGLBuffer::~OpenGLBuffer()
 {
-	glDeleteVertexArrays(1, &p_vao);
-	glDeleteBuffers(1, &p_vbo);
-	glDeleteBuffers(1, &p_vbo_instanced);
+	glDeleteVertexArrays(1, &_vao);
+	glDeleteBuffers(1, &_vbo);
+	glDeleteBuffers(1, &_vbo_instanced);
 }
 
 const GLuint OpenGLBuffer::getVAO() const
 {
-	return p_vao;
+	return _vao;
 }
 
 const int OpenGLBuffer::getVertexCount() const
 {
-	return p_vertexCount;
+	return _vertexCount;
 }
 
 const int OpenGLBuffer::getOffsetCount() const
 {
-	return p_offsetCount;
+	return _offsetCount;
 }
 
 const bool OpenGLBuffer::isInstanced() const
 {
-	return p_isInstanced;
+	return _isInstanced;
 }

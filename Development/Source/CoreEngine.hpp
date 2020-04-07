@@ -1,6 +1,6 @@
 #pragma once
 
-#include "WoodEngine3D.hpp"
+#include "FabiEngine3D.hpp"
 #include "OBJLoader.hpp"
 #include "TextureLoader.hpp"
 #include "AudioLoader.hpp"
@@ -27,67 +27,75 @@
 #include "AudioManager.hpp"
 #include "AudioPlayer.hpp"
 
+enum class EngineState
+{
+	STATE_GUI,
+	STATE_MODEL_EDITOR,
+	STATE_WORLD_EDITOR,
+	STATE_GAME
+};
+
 class CoreEngine
 {
-	friend class WoodEngine3D;
+	friend class FabiEngine3D;
 private:
 	// Core
-	CoreEngine(WoodEngine3D & we3d, EngineState engineState);
+	CoreEngine(FabiEngine3D & fe3d, EngineState engineState);
 	virtual ~CoreEngine() = default;
 
 	// Core instances
-	OBJLoader              p_objLoader;
-	TextureLoader          p_texLoader;
-	AudioLoader			   p_audioLoader;
-	InputHandler           p_inputHandler;
-	ShaderBus			   p_shaderBus;
-	WindowManager          p_windowManager;
-	CameraManager          p_cameraManager;
-	RenderEngine           p_renderEngine;
-	SkyEntityManager       p_skyEntityManager;
-	TerrainEntityManager   p_terrainEntityManager;
-	WaterEntityManager     p_waterEntityManager;
-	GameEntityManager      p_gameEntityManager;
-	BillboardEntityManager p_billboardEntityManager;
-	AabbEntityManager      p_aabbEntityManager;
-	LightEntityManager     p_lightEntityManager;
-	GuiEntityManager       p_guiEntityManager;
-	TextEntityManager      p_textEntityManager;
-	ShadowManager          p_shadowManager;
-	MousePicker            p_mousePicker;
-	ModelEditor            p_modelEditor;
-	WorldEditor            p_worldEditor;
-	CollisionDetector      p_collisionDetector;
-	CollisionResolver      p_collisionResolver;
-	Timer                  p_timer;
-	AudioManager		   p_audioManager;
-	AudioPlayer			   p_audioPlayer;
+	WindowManager          _windowManager;
+	OBJLoader              _objLoader;
+	TextureLoader          _texLoader;
+	AudioLoader			   _audioLoader;
+	InputHandler           _inputHandler;
+	ShaderBus			   _shaderBus;
+	CameraManager          _cameraManager;
+	RenderEngine           _renderEngine;
+	SkyEntityManager       _skyEntityManager;
+	TerrainEntityManager   _terrainEntityManager;
+	WaterEntityManager     _waterEntityManager;
+	GameEntityManager      _gameEntityManager;
+	BillboardEntityManager _billboardEntityManager;
+	AabbEntityManager      _aabbEntityManager;
+	LightEntityManager     _lightEntityManager;
+	GuiEntityManager       _guiEntityManager;
+	TextEntityManager      _textEntityManager;
+	ShadowManager          _shadowManager;
+	MousePicker            _mousePicker;
+	ModelEditor            _modelEditor;
+	WorldEditor            _worldEditor;
+	CollisionDetector      _collisionDetector;
+	CollisionResolver      _collisionResolver;
+	Timer                  _timer;
+	AudioManager		   _audioManager;
+	AudioPlayer			   _audioPlayer;
 	
 	// Core functions
-	void p_start();
-	void p_stop();
-	void p_setupApplication();
-	void p_updateApplication();
-	void p_renderApplication();
+	void _start();
+	void _stop();
+	void _setupApplication();
+	void _updateApplication();
+	void _renderApplication();
 
 	// Misc functions
-	void p_displayIntroScene();
-	void p_initWindow();
-	void p_initGame();
-	void p_initModelEditor();
-	void p_initWorldEditor();
-	void p_updateGame();
-	void p_updateModelEditor();
-	void p_updateWorldEditor();
-	void p_updatePerformanceProfiler();
+	void _displayIntroScene();
+	void _initWindow();
+	void _initGame();
+	void _initModelEditor();
+	void _initWorldEditor();
+	void _updateGame();
+	void _updateModelEditor();
+	void _updateWorldEditor();
+	void _updatePerformanceProfiler();
 
-	// Other
-	WoodEngine3D & p_we3d;
+	// Engine interface instance
+	FabiEngine3D & _fe3d;
 
-	bool p_isRunning = false;
-	bool p_isPaused  = false;
-	bool p_showStats = false;
-	bool p_entitiesPaused = false;
+	bool _isRunning = false;
+	bool _isPaused  = false;
+	bool _showStats = false;
+	bool _entitiesPaused = false;
 
-	const EngineState p_engineState;
+	const EngineState _engineState;
 };

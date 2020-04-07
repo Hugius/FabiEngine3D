@@ -1,21 +1,21 @@
-#include <WE3D/TextEntity.hpp>
+#include "TextEntity.hpp"
 
 void TextEntity::setText(const string & text)
 {
-	p_textContent = text;
+	_textContent = text;
 }
 
 void TextEntity::setFontName(const string& fontName)
 {
-	p_fontName = fontName;
+	_fontName = fontName;
 }
 
 const string & TextEntity::getText() const
 {
-	return p_textContent;
+	return _textContent;
 }
 
 const string& TextEntity::getFontName() const
 {
-	return p_fontName;
+	return _fontName;
 }

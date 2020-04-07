@@ -3,9 +3,9 @@
 #include <SDL/SDL_mixer.h>
 #include <SDL/SDL_ttf.h>
 
-#include <WE3D/WindowManager.hpp>
-#include <WE3D/Logger.hpp>
-#include <WE3D/Configuration.hpp>
+#include "WindowManager.hpp"
+#include "Logger.hpp"
+#include "Configuration.hpp"
 
 WindowManager::WindowManager()
 {
@@ -19,10 +19,10 @@ WindowManager::WindowManager()
 
 	// Window stuff
 	Logger::getInst().throwInfo("Initializing window...");
-	p_window = SDL_CreateWindow(
-		"WoodEngine3D Application(32 bit)", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 0, 0,
+	_window = SDL_CreateWindow(
+		"FabiEngine3D", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 0, 0,
 		SDL_WINDOW_HIDDEN | SDL_WINDOW_OPENGL);
-	p_context = SDL_GL_CreateContext(p_window);
+	_context = SDL_GL_CreateContext(_window);
 	hideBorder();
 
 	// Glew
@@ -72,7 +72,7 @@ WindowManager::WindowManager()
 
 WindowManager::~WindowManager()
 {
-	SDL_DestroyWindow(p_window);
+	SDL_DestroyWindow(_window);
 	IMG_Quit();
 	TTF_Quit();
 	Mix_Quit();
@@ -81,48 +81,48 @@ WindowManager::~WindowManager()
 
 void WindowManager::setTitle(const string & title)
 {
-	SDL_SetWindowTitle(p_window, title.c_str());
+	SDL_SetWindowTitle(_window, title.c_str());
 }
 
 void WindowManager::setSize(ivec2 size)
 {
-	SDL_SetWindowSize(p_window, size.x, size.y);
-	SDL_SetWindowPosition(p_window, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
+	SDL_SetWindowSize(_window, size.x, size.y);
+	SDL_SetWindowPosition(_window, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
 }
 
 void WindowManager::showBorder()
 {
-	SDL_SetWindowBordered(p_window, SDL_TRUE);
+	SDL_SetWindowBordered(_window, SDL_TRUE);
 }
 
 void WindowManager::hideBorder()
 {
-	SDL_SetWindowBordered(p_window, SDL_FALSE);
+	SDL_SetWindowBordered(_window, SDL_FALSE);
 }
 
 void WindowManager::enableFullscreen()
 {
-	SDL_SetWindowFullscreen(p_window, SDL_TRUE);
+	SDL_SetWindowFullscreen(_window, SDL_TRUE);
 }
 
 void WindowManager::disableFullscreen()
 {
-	SDL_SetWindowFullscreen(p_window, SDL_FALSE);
+	SDL_SetWindowFullscreen(_window, SDL_FALSE);
 }
 
 void WindowManager::swapBackBuffer()
 {
-	SDL_GL_SwapWindow(p_window);
+	SDL_GL_SwapWindow(_window);
 }
 
 void WindowManager::showWindow()
 {
-	SDL_ShowWindow(p_window);
+	SDL_ShowWindow(_window);
 }
 
 void WindowManager::hideWindow()
 {
-	SDL_HideWindow(p_window);
+	SDL_HideWindow(_window);
 }
 
 void WindowManager::showMouseCursor()
@@ -137,7 +137,7 @@ void WindowManager::hideMouseCursor()
 
 void WindowManager::setMousePos(ivec2 pos)
 {
-	SDL_WarpMouseInWindow(p_window, pos.x, pos.y);
+	SDL_WarpMouseInWindow(_window, pos.x, pos.y);
 }
 
 const ivec2 WindowManager::getMousePos() const

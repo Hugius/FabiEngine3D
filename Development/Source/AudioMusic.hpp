@@ -10,5 +10,5 @@ public:
 	Mix_Music* getMixMusic() const;
 
 private:
-	Mix_Music* p_music = nullptr;
+	Mix_Music* _music = nullptr;
 };

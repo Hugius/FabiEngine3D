@@ -28,7 +28,7 @@ public:
 	const ivec2 getMousePos() const;
 
 private:
-	SDL_Window * p_window = nullptr;
+	SDL_Window * _window = nullptr;
 
-	SDL_GLContext p_context;
+	SDL_GLContext _context;
 };

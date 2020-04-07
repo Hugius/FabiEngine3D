@@ -1,26 +1,26 @@
 #include <GLM/gtc/matrix_transform.hpp>
 #include <algorithm>
 
-#include <WE3D/CameraManager.hpp>
-#include <WE3D/Configuration.hpp>
-#include <WE3D/ShaderBus.hpp>
+#include "CameraManager.hpp"
+#include "Configuration.hpp"
+#include "ShaderBus.hpp"
 
 CameraManager::CameraManager(ShaderBus& shaderBus) :
-	p_shaderBus(shaderBus)
+	_shaderBus(shaderBus)
 {
-	p_aspectRatio = float(Config::getInst().getWindowWidth()) / float(Config::getInst().getWindowHeight());
+	_aspectRatio = float(Config::getInst().getWindowWidth()) / float(Config::getInst().getWindowHeight());
 }
 
 void CameraManager::update(WindowManager & windowManager, float delta)
 {
-	if (p_firstPersonViewEnabled)
+	if (_firstPersonViewEnabled)
 	{
 		// Get mouse position
 		ivec2 mousePos;
-		if (p_mustCenter)
+		if (_mustCenter)
 		{
 			mousePos = Config::getInst().getWindowSize() / 2;
-			p_mustCenter = false;
+			_mustCenter = false;
 		}
 		else
 		{
@@ -35,26 +35,26 @@ void CameraManager::update(WindowManager & windowManager, float delta)
 		float yoffset = float(Config::getInst().getWindowHeight() / 2) - float(mousePos.y);
 
 		// Applying mouse sensitivity
-		xoffset *= (p_mouseSensitivity * delta) / 100.0f;
-		yoffset *= (p_mouseSensitivity * delta) / 100.0f;
+		xoffset *= (_mouseSensitivity * delta) / 100.0f;
+		yoffset *= (_mouseSensitivity * delta) / 100.0f;
 
 		// Calculate overall mouse offset
-		p_mouseOffset = (xoffset + yoffset) / 2.0f;
+		_mouseOffset = (xoffset + yoffset) / 2.0f;
 
 		// Calculate pitch & yaw
-		p_pitch += yoffset;
-		p_yaw = std::fmod((p_yaw + xoffset), 360.0f); // Can't be higher than 360 degrees
+		_pitch += yoffset;
+		_yaw = std::fmod((_yaw + xoffset), 360.0f); // Can't be higher than 360 degrees
 
 		// So the player cannot unnaturally vertically turn its head 
-		p_pitch = std::clamp(p_pitch, -89.0f, 89.0f);
+		_pitch = std::clamp(_pitch, -89.0f, 89.0f);
 	}
 
 	// Limit yaw
-	if (p_yaw < 0.0f)
+	if (_yaw < 0.0f)
 	{
-		p_yaw = 360.0f - fabsf(p_yaw);
+		_yaw = 360.0f - fabsf(_yaw);
 	}
-	p_yaw = std::fmod(p_yaw, 360.0f);
+	_yaw = std::fmod(_yaw, 360.0f);
 
 	// Update matrices
 	updateMatrices();
@@ -63,192 +63,192 @@ void CameraManager::update(WindowManager & windowManager, float delta)
 void CameraManager::updateMatrices()
 {
 	// Front vector(look direction)
-	p_front.x = cos(glm::radians(p_pitch)) * cos(glm::radians(p_yaw));
-	p_front.y = sin(glm::radians(p_pitch));
-	p_front.z = cos(glm::radians(p_pitch)) * sin(glm::radians(p_yaw));
+	_front.x = cos(glm::radians(_pitch)) * cos(glm::radians(_yaw));
+	_front.y = sin(glm::radians(_pitch));
+	_front.z = cos(glm::radians(_pitch)) * sin(glm::radians(_yaw));
 
 	// Calculate the view matrix input
-	p_front = glm::normalize(p_front);
-	p_right = glm::normalize(glm::cross(p_front, vec3(0.0f, 1.0f, 0.0f)));
-	p_up    = glm::normalize(glm::cross(p_right, p_front));
+	_front = glm::normalize(_front);
+	_right = glm::normalize(glm::cross(_front, vec3(0.0f, 1.0f, 0.0f)));
+	_up    = glm::normalize(glm::cross(_right, _front));
 
 	// Projection matrix
-	p_projectionMatrix = glm::perspective(glm::radians(p_fov), p_aspectRatio, p_nearZ, p_farZ);
+	_projectionMatrix = glm::perspective(glm::radians(_fov), _aspectRatio, _nearZ, _farZ);
 
 	// View matrix
-	p_viewMatrix[0][0] =  p_right.x;
-	p_viewMatrix[1][0] =  p_right.y;
-	p_viewMatrix[2][0] =  p_right.z;
-	p_viewMatrix[0][1] =  p_up.x;
-	p_viewMatrix[1][1] =  p_up.y;
-	p_viewMatrix[2][1] =  p_up.z;
-	p_viewMatrix[0][2] = -p_front.x;
-	p_viewMatrix[1][2] = -p_front.y;
-	p_viewMatrix[2][2] = -p_front.z;
-	p_viewMatrix[3][0] = -glm::dot(p_right, p_pos);
-	p_viewMatrix[3][1] = -glm::dot(p_up, p_pos);
-	p_viewMatrix[3][2] =  glm::dot(p_front, p_pos);
+	_viewMatrix[0][0] =  _right.x;
+	_viewMatrix[1][0] =  _right.y;
+	_viewMatrix[2][0] =  _right.z;
+	_viewMatrix[0][1] =  _up.x;
+	_viewMatrix[1][1] =  _up.y;
+	_viewMatrix[2][1] =  _up.z;
+	_viewMatrix[0][2] = -_front.x;
+	_viewMatrix[1][2] = -_front.y;
+	_viewMatrix[2][2] = -_front.z;
+	_viewMatrix[3][0] = -glm::dot(_right, _pos);
+	_viewMatrix[3][1] = -glm::dot(_up, _pos);
+	_viewMatrix[3][2] =  glm::dot(_front, _pos);
 	
 	// Update shaderbus
-	p_shaderBus.setCameraYaw(p_yaw);
-	p_shaderBus.setCameraPitch(p_pitch);
-	p_shaderBus.setCameraPos(p_pos);
-	p_shaderBus.setViewMatrix(p_viewMatrix);
-	p_shaderBus.setProjectionMatrix(p_projectionMatrix);
-	p_shaderBus.setNearZ(p_nearZ);
-	p_shaderBus.setFarZ(p_farZ);
+	_shaderBus.setCameraYaw(_yaw);
+	_shaderBus.setCameraPitch(_pitch);
+	_shaderBus.setCameraPos(_pos);
+	_shaderBus.setViewMatrix(_viewMatrix);
+	_shaderBus.setProjectionMatrix(_projectionMatrix);
+	_shaderBus.setNearZ(_nearZ);
+	_shaderBus.setFarZ(_farZ);
 }
 
 void CameraManager::translateFollowX(float speed, float delta) // Side movement
 { 
-	if (p_freeMovementEnabled)
+	if (_freeMovementEnabled)
 	{
-		p_pos += p_right * ((speed * delta) / 100.0f);
+		_pos += _right * ((speed * delta) / 100.0f);
 	}
 }
 
 void CameraManager::translateFollowZ(float speed, float delta) // Forward movement
 {
-	if (p_freeMovementEnabled)
+	if (_freeMovementEnabled)
 	{
-		vec3 tempFront = p_front;
-		tempFront.x = cos(glm::radians(p_yaw));
-		tempFront.z = sin(glm::radians(p_yaw));
-		p_pos.x += tempFront.x * ((speed * delta) / 100.0f);
-		p_pos.z += tempFront.z * ((speed * delta) / 100.0f);
+		vec3 tempFront = _front;
+		tempFront.x = cos(glm::radians(_yaw));
+		tempFront.z = sin(glm::radians(_yaw));
+		_pos.x += tempFront.x * ((speed * delta) / 100.0f);
+		_pos.z += tempFront.z * ((speed * delta) / 100.0f);
 	}
 }
 
 void CameraManager::translateFollowZY(float speed, float delta) // Forward movement
 {
-	if (p_freeMovementEnabled)
+	if (_freeMovementEnabled)
 	{
-		p_pos.x += p_front.x * ((speed * delta) / 100.0f);
-		p_pos.y += p_front.y * ((speed * delta) / 100.0f);
-		p_pos.z += p_front.z * ((speed * delta) / 100.0f);
+		_pos.x += _front.x * ((speed * delta) / 100.0f);
+		_pos.y += _front.y * ((speed * delta) / 100.0f);
+		_pos.z += _front.z * ((speed * delta) / 100.0f);
 	}
 }
 
 void CameraManager::enableFirstPersonView()
 {
-	p_firstPersonViewEnabled = true;
+	_firstPersonViewEnabled = true;
 }
 
 void CameraManager::disableFirstPersonView()
 {
-	p_firstPersonViewEnabled = false;
+	_firstPersonViewEnabled = false;
 }
 
 void CameraManager::enableFreeMovement()
 {
-	p_freeMovementEnabled = true;
+	_freeMovementEnabled = true;
 }
 
 void CameraManager::disableFreeMovement()
 {
-	p_freeMovementEnabled = false;
+	_freeMovementEnabled = false;
 }
 
 void CameraManager::setFOV(float val)
 {
-	p_viewMatrix[3][2] = glm::dot(p_front, p_pos);
-	p_fov = val;
+	_viewMatrix[3][2] = glm::dot(_front, _pos);
+	_fov = val;
 }
 
 void CameraManager::setMouseSensitivity(float speed)
 {
-	p_mouseSensitivity = speed;
+	_mouseSensitivity = speed;
 }
 
 void CameraManager::setYaw(float val)
 {
-	p_yaw = val;
-	p_yaw = std::fmod(p_yaw, 360.0f);
+	_yaw = val;
+	_yaw = std::fmod(_yaw, 360.0f);
 }
 
 void CameraManager::setPitch(float val)
 {
-	p_pitch = val;
-	p_pitch = std::clamp(p_pitch, -89.0f, 89.0f);
+	_pitch = val;
+	_pitch = std::clamp(_pitch, -89.0f, 89.0f);
 }
 
 void CameraManager::setNearZ(float val)
 {
-	p_nearZ = val;
+	_nearZ = val;
 }
 
 void CameraManager::setFarZ(float val)
 {
-	p_farZ = val;
+	_farZ = val;
 }
 
 const vec3 CameraManager::getPosition() const
 {
-	return p_pos;
+	return _pos;
 }
 
 const vec3 CameraManager::getFront() const
 {
-	return p_front;
+	return _front;
 }
 
 const float CameraManager::getYaw() const
 {
-	return p_yaw;
+	return _yaw;
 }
 
 const float CameraManager::getPitch() const
 {
-	return p_pitch;
+	return _pitch;
 }
 
 const float CameraManager::getMouseOffset() const
 {
-	return p_mouseOffset;
+	return _mouseOffset;
 }
 
 const bool CameraManager::isFirstPersonViewEnabled() const
 {
-	return p_firstPersonViewEnabled;
+	return _firstPersonViewEnabled;
 }
 
 void CameraManager::translate(vec3 translation, float delta)
 {
-	if (p_freeMovementEnabled)
+	if (_freeMovementEnabled)
 	{
-		p_pos += translation * delta;
+		_pos += translation * delta;
 	}
 }
 
 void CameraManager::setPosition(vec3 val)
 {
-	if (p_freeMovementEnabled)
+	if (_freeMovementEnabled)
 	{
-		p_pos = val;
+		_pos = val;
 	}
 }
 
 void CameraManager::invertYaw()
 {
-	p_yaw = -p_yaw;
+	_yaw = -_yaw;
 }
 
 void CameraManager::invertPitch()
 {
-	p_pitch = -p_pitch;
+	_pitch = -_pitch;
 }
 
 void CameraManager::center()
 {
-	p_mustCenter = true;
+	_mustCenter = true;
 }
 
 const mat4 & CameraManager::getViewMatrix() const
 {
-	return p_viewMatrix;
+	return _viewMatrix;
 }
 
 const mat4 & CameraManager::getProjectionMatrix() const
 {
-	return p_projectionMatrix;
+	return _projectionMatrix;
 }

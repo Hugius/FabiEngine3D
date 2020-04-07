@@ -1,4 +1,4 @@
-#include <WE3D/TextEntityManager.hpp>
+#include "TextEntityManager.hpp"
 
 TextEntityManager::TextEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, ShaderBus& shaderBus) :
 	EntityManager(objLoader, texLoader, shaderBus)
@@ -8,13 +8,13 @@ TextEntityManager::TextEntityManager(OBJLoader& objLoader, TextureLoader& texLoa
 
 TextEntity * TextEntityManager::getEntity(const string & ID)
 {
-	return dynamic_cast<TextEntity*>(p_getBaseEntity(ID, EntityType::TEXT));
+	return dynamic_cast<TextEntity*>(_getBaseEntity(ID, EntityType::TEXT));
 }
 
 const vector<TextEntity*> TextEntityManager::getEntities()
 {
 	vector<TextEntity*> newVector;
-	for (auto & entity : p_getBaseEntities())
+	for (auto & entity : _getBaseEntities())
 	{
 		newVector.push_back(dynamic_cast<TextEntity*>(entity));
 	}
@@ -40,7 +40,7 @@ void TextEntityManager::addTextEntity
 	}
 
 	// Create entity
-	p_createEntity(EntityType::TEXT, ID)->load(ID);
+	_createEntity(EntityType::TEXT, ID)->load(ID);
 	getEntity(ID)->addOglBuffer(new OpenGLBuffer(0.0f, 0.0f, 1.0f, 1.0f, centered));
 	getEntity(ID)->setText(text);
 	getEntity(ID)->setFontName(fontName);
@@ -55,17 +55,17 @@ void TextEntityManager::addTextEntity
 	// Load diffuse map
 	if (engine)
 	{
-		getEntity(ID)->setDiffuseMap(p_texLoader.getText(text, "../Engine/Fonts/" + fontName));
+		getEntity(ID)->setDiffuseMap(_texLoader.getText(text, "../Engine/Fonts/" + fontName));
 	}
 	else
 	{
-		getEntity(ID)->setDiffuseMap(p_texLoader.getText(text, "../Game/Fonts/" + fontName));
+		getEntity(ID)->setDiffuseMap(_texLoader.getText(text, "../Game/Fonts/" + fontName));
 	}
 }
 
 void TextEntityManager::update(float delta)
 {
-	for (auto & baseEntity : p_getBaseEntities())
+	for (auto & baseEntity : _getBaseEntities())
 	{
 		// Create temporary game entity object
 		auto * entity = getEntity(baseEntity->getID());

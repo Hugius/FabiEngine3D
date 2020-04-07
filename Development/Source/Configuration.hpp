@@ -41,9 +41,9 @@ private:
 	Config();
 	~Config() = default;
 
-	void p_processOption(std::ifstream& file, bool& option);
-	void p_processOption(std::ifstream& file, int& option);
-	void p_processOption(std::ifstream& file, float& option);
+	void _processOption(std::ifstream& file, bool& option);
+	void _processOption(std::ifstream& file, int& option);
+	void _processOption(std::ifstream& file, float& option);
 	
 	// Variables
 	int   window_width;

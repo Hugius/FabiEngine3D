@@ -1,21 +1,21 @@
-#include <WE3D/WaterEntityRenderer.hpp>
-#include <WE3D/Configuration.hpp>
+#include "WaterEntityRenderer.hpp"
+#include "Configuration.hpp"
 
 void WaterEntityRenderer::bind()
 {
 	// Bind shader
-	p_shader.bind();
+	_shader.bind();
 
 	// Global shader uniforms
-	p_shader.uploadUniform("u_viewMatrix",       p_shaderBus.getViewMatrix());
-	p_shader.uploadUniform("u_projectionMatrix", p_shaderBus.getProjectionMatrix());
-	p_shader.uploadUniform("u_dirLightPos",      p_shaderBus.getDirLightPos());
-	p_shader.uploadUniform("u_cameraPos",        p_shaderBus.getCameraPos());
-	p_shader.uploadUniform("u_fogEnabled",       p_shaderBus.isFogEnabled());
-	p_shader.uploadUniform("u_fogMinDistance",   p_shaderBus.getFogMinDistance());
-	p_shader.uploadUniform("u_effectsEnabled",   p_shaderBus.isWaterEffectsEnabled());
-	p_shader.uploadUniform("u_nearZ",            p_shaderBus.getNearZ());
-	p_shader.uploadUniform("u_farZ",             p_shaderBus.getFarZ());
+	_shader.uploadUniform("u_viewMatrix",       _shaderBus.getViewMatrix());
+	_shader.uploadUniform("u_projectionMatrix", _shaderBus.getProjectionMatrix());
+	_shader.uploadUniform("u_dirLightPos",      _shaderBus.getDirLightPos());
+	_shader.uploadUniform("u_cameraPos",        _shaderBus.getCameraPos());
+	_shader.uploadUniform("u_fogEnabled",       _shaderBus.isFogEnabled());
+	_shader.uploadUniform("u_fogMinDistance",   _shaderBus.getFogMinDistance());
+	_shader.uploadUniform("u_effectsEnabled",   _shaderBus.isWaterEffectsEnabled());
+	_shader.uploadUniform("u_nearZ",            _shaderBus.getNearZ());
+	_shader.uploadUniform("u_farZ",             _shaderBus.getFarZ());
 
 	// Depth testing
 	glEnable(GL_DEPTH_TEST);
@@ -31,7 +31,7 @@ void WaterEntityRenderer::unbind()
 	glDisable(GL_DEPTH_TEST);
 	glDisable(GL_BLEND);
 
-	p_shader.unbind();
+	_shader.unbind();
 }
 
 void WaterEntityRenderer::render(const WaterEntity * entity)
@@ -41,30 +41,30 @@ void WaterEntityRenderer::render(const WaterEntity * entity)
 		if (entity->isEnabled())
 		{
 			// Shader uniforms
-			p_shader.uploadUniform("u_wavePos", entity->getWaveValue());
-			p_shader.uploadUniform("u_timeX", entity->getTimeX());
-			p_shader.uploadUniform("u_timeZ", entity->getTimeZ());
-			p_shader.uploadUniform("u_tileAmount", entity->getTileRepeat());
-			p_shader.uploadUniform("u_waving", entity->isWaving());
-			p_shader.uploadUniform("u_rippling", entity->isRippling());
-			p_shader.uploadUniform("u_color", entity->getColor());
-			p_shader.uploadUniform("u_shininess", entity->getShininess());
-			p_shader.uploadUniform("u_transparency", entity->getTransparency());
+			_shader.uploadUniform("u_wavePos", entity->getWaveValue());
+			_shader.uploadUniform("u_timeX", entity->getTimeX());
+			_shader.uploadUniform("u_timeZ", entity->getTimeZ());
+			_shader.uploadUniform("u_tileAmount", entity->getTileRepeat());
+			_shader.uploadUniform("u_waving", entity->isWaving());
+			_shader.uploadUniform("u_rippling", entity->isRippling());
+			_shader.uploadUniform("u_color", entity->getColor());
+			_shader.uploadUniform("u_shininess", entity->getShininess());
+			_shader.uploadUniform("u_transparency", entity->getTransparency());
 
 			// Texture uniforms
-			p_shader.uploadUniform("u_sampler_reflectionMap", 0);
-			p_shader.uploadUniform("u_sampler_refractionMap", 1);
-			p_shader.uploadUniform("u_sampler_depthMap", 2);
-			p_shader.uploadUniform("u_sampler_dudvMap", 3);
-			p_shader.uploadUniform("u_sampler_normalMap", 4);
+			_shader.uploadUniform("u_sampler_reflectionMap", 0);
+			_shader.uploadUniform("u_sampler_refractionMap", 1);
+			_shader.uploadUniform("u_sampler_depthMap", 2);
+			_shader.uploadUniform("u_sampler_dudvMap", 3);
+			_shader.uploadUniform("u_sampler_normalMap", 4);
 
 			// Textures
 			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(GL_TEXTURE_2D, p_shaderBus.getSSRMap());
+			glBindTexture(GL_TEXTURE_2D, _shaderBus.getSSRMap());
 			glActiveTexture(GL_TEXTURE1);
-			glBindTexture(GL_TEXTURE_2D, p_shaderBus.getWaterRefractionMap());
+			glBindTexture(GL_TEXTURE_2D, _shaderBus.getWaterRefractionMap());
 			glActiveTexture(GL_TEXTURE2);
-			glBindTexture(GL_TEXTURE_2D, p_shaderBus.getDepthMap());
+			glBindTexture(GL_TEXTURE_2D, _shaderBus.getDepthMap());
 			glActiveTexture(GL_TEXTURE3);
 			glBindTexture(GL_TEXTURE_2D, entity->getDudvMap());
 			glActiveTexture(GL_TEXTURE4);

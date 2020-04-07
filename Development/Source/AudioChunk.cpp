@@ -1,48 +1,48 @@
-#include <WE3D/AudioChunk.hpp>
+#include "AudioChunk.hpp"
 
 AudioChunk::AudioChunk(const std::string& ID, Mix_Chunk* chunk) :
-	p_ID(ID),
-	p_chunk(chunk)
+	_ID(ID),
+	_chunk(chunk)
 {
 
 }
 
 AudioChunk::AudioChunk(const std::string& ID, Mix_Chunk* chunk, vec3 position, float maxDistance) :
-	p_ID(ID),
-	p_chunk(chunk),
-	p_position(position),
-	p_maxDistance(maxDistance),
-	p_hasPosition(true)
+	_ID(ID),
+	_chunk(chunk),
+	_position(position),
+	_maxDistance(maxDistance),
+	_hasPosition(true)
 {
 
 }
 
 const std::string& AudioChunk::getID() const
 {
-	return p_ID;
+	return _ID;
 }
 
 Mix_Chunk* AudioChunk::getMixChunk() const
 {
-	return p_chunk;
+	return _chunk;
 }
 
 void AudioChunk::setPosition(vec3 position)
 {
-	p_position = position;
+	_position = position;
 }
 
 vec3 AudioChunk::getPosition() const
 {
-	return p_position;
+	return _position;
 }
 
 float AudioChunk::getMaxDistance() const
 {
-	return p_maxDistance;
+	return _maxDistance;
 }
 
 bool AudioChunk::hasPosition() const
 {
-	return p_hasPosition;
+	return _hasPosition;
 }

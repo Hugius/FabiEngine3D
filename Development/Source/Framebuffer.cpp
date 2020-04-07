@@ -1,10 +1,10 @@
 #include <vector>
 #include <GLEW/glew.h>
 
-#include <WE3D/Framebuffer.hpp>
-#include <WE3D/Logger.hpp>
-#include <WE3D/Configuration.hpp>
-#include <WE3D/ShaderBus.hpp>
+#include "Framebuffer.hpp"
+#include "Logger.hpp"
+#include "Configuration.hpp"
+#include "ShaderBus.hpp"
 
 #define GL_TEXTURE_MAX_ANISOTROPY_EXT     0x84FE
 #define GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT 0x84FF
@@ -14,12 +14,12 @@
 ////////////////
 Framebuffer::~Framebuffer()
 {
-	if (p_textureInitialized) 
+	if (_textureInitialized) 
 	{
-		glDeleteFramebuffers(1, &p_fbo);
-		glDeleteBuffers(1, &p_rbo);
-		glDeleteTextures(1, &p_textures[0]);
-		glDeleteTextures(1, &p_textures[1]);
+		glDeleteFramebuffers(1, &_fbo);
+		glDeleteBuffers(1, &_rbo);
+		glDeleteTextures(1, &_textures[0]);
+		glDeleteTextures(1, &_textures[1]);
 	}
 
 }
@@ -29,17 +29,17 @@ Framebuffer::~Framebuffer()
 //////////////////////////////////
 void Framebuffer::createMsaaTexture(ivec2 size, int amount, int aaSamples)
 {
-	p_size = size;
+	_size = size;
 
 	// Enable OpenGL Anti-Aliasing
-	p_aaSamples = aaSamples;
+	_aaSamples = aaSamples;
 	glEnable(GL_MULTISAMPLE);
 
 	// Initialize
-	if (!p_textureInitialized) 
+	if (!_textureInitialized) 
 	{
-		glGenFramebuffers(1, &p_fbo);
-		p_textureInitialized = true;
+		glGenFramebuffers(1, &_fbo);
+		_textureInitialized = true;
 	}
 	
 	// Bind
@@ -48,20 +48,20 @@ void Framebuffer::createMsaaTexture(ivec2 size, int amount, int aaSamples)
 	// Texture generation
 	for (int i = 0; i < amount; i++)
 	{
-		p_textures.push_back(0);
-		glGenTextures(1, &p_textures[i]);
-		glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, p_textures[i]);
-		glTexImage2DMultisample(GL_TEXTURE_2D_MULTISAMPLE, aaSamples, GL_RGBA16, p_size.x, p_size.y, GL_TRUE);
+		_textures.push_back(0);
+		glGenTextures(1, &_textures[i]);
+		glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, _textures[i]);
+		glTexImage2DMultisample(GL_TEXTURE_2D_MULTISAMPLE, aaSamples, GL_RGBA16, _size.x, _size.y, GL_TRUE);
 		glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, 0);
-		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D_MULTISAMPLE, p_textures[i], 0);
+		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D_MULTISAMPLE, _textures[i], 0);
 	}
 
 	// Renderbuffers
-	glGenRenderbuffers(1, &p_rbo);
-	glBindRenderbuffer(GL_RENDERBUFFER, p_rbo);
-	glRenderbufferStorageMultisample(GL_RENDERBUFFER, aaSamples, GL_DEPTH24_STENCIL8, p_size.x, p_size.y);
+	glGenRenderbuffers(1, &_rbo);
+	glBindRenderbuffer(GL_RENDERBUFFER, _rbo);
+	glRenderbufferStorageMultisample(GL_RENDERBUFFER, aaSamples, GL_DEPTH24_STENCIL8, _size.x, _size.y);
 	glBindRenderbuffer(GL_RENDERBUFFER, 0);
-	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, p_rbo);
+	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, _rbo);
 
 	// Unbind
 	unbind();
@@ -78,13 +78,13 @@ void Framebuffer::createMsaaTexture(ivec2 size, int amount, int aaSamples)
 //////////////////////////
 void Framebuffer::createColorTexture(ivec2 size, int amount, bool textureClamp)
 {
-	p_size = size;
+	_size = size;
 
 	// Frame buffer object
-	if (!p_textureInitialized)
+	if (!_textureInitialized)
 	{
-		glGenFramebuffers(1, &p_fbo);
-		p_textureInitialized = true;
+		glGenFramebuffers(1, &_fbo);
+		_textureInitialized = true;
 	}
 	
 	// Bind
@@ -93,19 +93,19 @@ void Framebuffer::createColorTexture(ivec2 size, int amount, bool textureClamp)
 	// Texture generation
 	for (int i = 0; i < amount; i++)
 	{
-		p_textures.push_back(0);
+		_textures.push_back(0);
 
 		// Texture generation
-		glGenTextures(1, &p_textures[i]);
-		glBindTexture(GL_TEXTURE_2D, p_textures[i]);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA16F, p_size.x, p_size.y, 0, GL_RGB, GL_UNSIGNED_BYTE, nullptr);
+		glGenTextures(1, &_textures[i]);
+		glBindTexture(GL_TEXTURE_2D, _textures[i]);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA16F, _size.x, _size.y, 0, GL_RGB, GL_UNSIGNED_BYTE, nullptr);
 
 		// Optional texture clamp
 		if (textureClamp)
 		{
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRA_S, GL_CLAM_TO_EDGE);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRA_T, GL_CLAM_TO_EDGE);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRA_R, GL_CLAM_TO_EDGE);
 		}
 
 		// Texture filtering
@@ -115,15 +115,15 @@ void Framebuffer::createColorTexture(ivec2 size, int amount, bool textureClamp)
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		glBindTexture(GL_TEXTURE_2D, 0);
-		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + i, GL_TEXTURE_2D, p_textures[i], 0);
+		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + i, GL_TEXTURE_2D, _textures[i], 0);
 	}
 
 	// Render buffer object
-	glGenRenderbuffers(1, &p_rbo);
-	glBindRenderbuffer(GL_RENDERBUFFER, p_rbo);
-	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, p_size.x, p_size.y);
+	glGenRenderbuffers(1, &_rbo);
+	glBindRenderbuffer(GL_RENDERBUFFER, _rbo);
+	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, _size.x, _size.y);
 	glBindRenderbuffer(GL_RENDERBUFFER, 0);
-	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, p_rbo);
+	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, _rbo);
 
 	// Multiple textures
 	std::vector<GLuint> attachments;
@@ -148,32 +148,32 @@ void Framebuffer::createColorTexture(ivec2 size, int amount, bool textureClamp)
 //////////////////////////
 void Framebuffer::createDepthTexture(ivec2 size, int amount)
 {
-	p_size = size;
+	_size = size;
 
-	if (!p_textureInitialized)
+	if (!_textureInitialized)
 	{
-		glGenFramebuffers(1, &p_fbo);
-		p_textureInitialized = true;
+		glGenFramebuffers(1, &_fbo);
+		_textureInitialized = true;
 	}
 
 	bind();
 
 	for (int i = 0; i < amount; i++)
 	{
-		p_textures.push_back(0);
-		glGenTextures(1, &p_textures[i]);
-		glBindTexture(GL_TEXTURE_2D, p_textures[i]);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT32F, p_size.x, p_size.y, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
+		_textures.push_back(0);
+		glGenTextures(1, &_textures[i]);
+		glBindTexture(GL_TEXTURE_2D, _textures[i]);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT32F, _size.x, _size.y, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
 		float aniso;
 		glGetFloatv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, &aniso);
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, aniso);
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRA_S, GL_CLAM_TO_BORDER);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRA_T, GL_CLAM_TO_BORDER);
 		float borderColor[] = { 1.0, 1.0, 1.0, 1.0 };
 		glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, borderColor);
-		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, p_textures[i], 0);
+		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, _textures[i], 0);
 		glDrawBuffer(GL_NONE);
 		glReadBuffer(GL_NONE);
 	}

@@ -1,12 +1,12 @@
-#include <WE3D/AudioMusic.hpp>
+#include "AudioMusic.hpp"
 
 AudioMusic::AudioMusic(Mix_Music* music) :
-	p_music(music)
+	_music(music)
 {
 	
 }
 
 Mix_Music* AudioMusic::getMixMusic() const
 {
-	return p_music;
+	return _music;
 }

@@ -1,9 +1,9 @@
-#include <WE3D/Entity.hpp>
-#include <WE3D/Logger.hpp>
+#include "Entity.hpp"
+#include "Logger.hpp"
 
 Entity::~Entity()
 {
-	for (auto & buffer : p_oglBuffers)
+	for (auto & buffer : _oglBuffers)
 	{
 		if (buffer != nullptr)
 		{
@@ -20,41 +20,41 @@ void Entity::load(const string & ID)
 	}
 	else
 	{
-		p_ID = ID;
+		_ID = ID;
 	}
 }
 
 void Entity::addOglBuffer(OpenGLBuffer * buffer)
 {
-	p_oglBuffers.push_back(buffer);
+	_oglBuffers.push_back(buffer);
 }
 
 void Entity::setEnabled(bool val)
 {
-	p_enabled = val;
+	_enabled = val;
 }
 
 const vector<OpenGLBuffer*> & Entity::getOglBuffers() const
 {
-	return p_oglBuffers;
+	return _oglBuffers;
 }
 
 const OpenGLBuffer * Entity::getOglBuffer(int index) const
 {
-	return p_oglBuffers[index];
+	return _oglBuffers[index];
 }
 
 const OpenGLBuffer * Entity::getOglBuffer() const
 {
-	return p_oglBuffers[0];
+	return _oglBuffers[0];
 }
 
 const string & Entity::getID() const
 {
-	return p_ID;
+	return _ID;
 }
 
 const bool Entity::isEnabled() const
 {
-	return p_enabled;
+	return _enabled;
 }

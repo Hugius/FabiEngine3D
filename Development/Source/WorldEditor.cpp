@@ -2,18 +2,18 @@
 #include <filesystem>
 
 
-#include <WE3D/WorldEditor.hpp>
-#include <WE3D/Configuration.hpp>
-#include <WE3D/Logger.hpp>
-#include <WE3D/TextureLoader.hpp>
+#include "WorldEditor.hpp"
+#include "Configuration.hpp"
+#include "Logger.hpp"
+#include "TextureLoader.hpp"
 
 WorldEditor::WorldEditor(vector<string> modelNames, GameEntityManager& gameEntityManager) :
-	p_game(gameEntityManager)
+	_game(gameEntityManager)
 {
 	for (auto & name : modelNames)
 	{
-		p_modelNames.push_back(name);
-		p_modelAmounts.push_back(0);
+		_modelNames.push_back(name);
+		_modelAmounts.push_back(0);
 	}
 }
 
@@ -56,18 +56,18 @@ void WorldEditor::loadWorld(const string& worldName)
 		}
 
 		unsigned int index = 0;
-		for (auto& name : p_modelNames)
+		for (auto& name : _modelNames)
 		{
 			if (modelName == name)
 			{
-				p_modelAmounts[index]++;
+				_modelAmounts[index]++;
 			}
 
 			index++;
 		}
 
 		// Add new entity
-		p_game.addGameEntity(ID, modelName, vec3(tx, ty, tz), vec3(rx, ry, rz), vec3(sx, sy, sz), transparent, culling, lightmap, reflective, specular);
+		_game.addGameEntity(ID, modelName, vec3(tx, ty, tz), vec3(rx, ry, rz), vec3(sx, sy, sz), transparent, culling, lightmap, reflective, specular);
 	}
 
 	file.close();
@@ -79,7 +79,7 @@ void WorldEditor::exportWorld(const string& worldName)
 	std::ofstream fileData(string("../Game/Worlds/" + worldName + ".we3d").c_str());
 
 	// Write actor data to the .fabworld file
-	for (auto & entity : p_game.getEntities())
+	for (auto & entity : _game.getEntities())
 	{
 		// Creating actor line
 		string line =
@@ -99,23 +99,23 @@ void WorldEditor::exportWorld(const string& worldName)
 bool WorldEditor::hasWorldLoadedBefore(const string & worldID)
 {
 	// Check if world file is loaded already
-	for (auto & world : p_loadedWorlds)
+	for (auto & world : _loadedWorlds)
 	{
 		if (world == worldID)
 		{
-			p_loadedWorlds.push_back(worldID);
+			_loadedWorlds.push_back(worldID);
 			return true;
 		}
 	}
 
 	// Add to loaded worlds
-	p_loadedWorlds.push_back(worldID);
+	_loadedWorlds.push_back(worldID);
 
 	// Not loaded
 	return false;
 }
 
-string WorldEditor::p_getSelectedID()
+string WorldEditor::_getSelectedID()
 {
-	return p_modelNames[p_modelIndex] + "_" + std::to_string(p_modelAmounts[p_modelIndex]);
+	return _modelNames[_modelIndex] + "_" + std::to_string(_modelAmounts[_modelIndex]);
 }

@@ -23,14 +23,14 @@ public:
 	vector<float> & getHeightMap(const string & filePath, int size);
 
 private:
-	map<string, GLuint>        p_textureMap;
-	map<string, GLuint>        p_textMap;
-	map<string, TTF_Font*>     p_fontMap;
-	map<string, vector<float>> p_pixelMap;
+	map<string, GLuint>        _textureMap;
+	map<string, GLuint>        _textMap;
+	map<string, TTF_Font*>     _fontMap;
+	map<string, vector<float>> _pixelMap;
 
-	TTF_Font *    p_loadFont(const string & fontPath);
-	GLuint        p_loadText(const string & text, const string &fontPath);
-	GLuint        p_loadTexture(const string & filePath, bool mipmap, bool aniso, bool repeat);
-	GLuint        p_loadCubemap(const string & filePath);
-	vector<float> p_loadHeightmap(const string & filePath, int size);
+	TTF_Font *    _loadFont(const string & fontPath);
+	GLuint        _loadText(const string & text, const string &fontPath);
+	GLuint        _loadTexture(const string & filePath, bool mipmap, bool aniso, bool repeat);
+	GLuint        _loadCubemap(const string & filePath);
+	vector<float> _loadHeightmap(const string & filePath, int size);
 };

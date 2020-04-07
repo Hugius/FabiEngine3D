@@ -1,4 +1,4 @@
-#include <WE3D/EntityBus.hpp>
+#include "EntityBus.hpp"
 
 EntityBus::EntityBus
 (
@@ -12,60 +12,60 @@ EntityBus::EntityBus
 	const vector<GuiEntity*>       & guiEntities,
 	const vector<TextEntity*>      & textEntities
 ) :
-	p_skyEntity(skyEntity),
-	p_terrainEntity(terrainEntity),
-	p_waterEntity(waterEntity),
-	p_gameEntities(gameEntities),
-	p_billboardEntities(billboardEntities),
-	p_aabbEntities(aabbEntities),
-	p_lightEntities(lightEntities),
-	p_guiEntities(guiEntities),
-	p_textEntities(textEntities)
+	_skyEntity(skyEntity),
+	_terrainEntity(terrainEntity),
+	_waterEntity(waterEntity),
+	_gameEntities(gameEntities),
+	_billboardEntities(billboardEntities),
+	_aabbEntities(aabbEntities),
+	_lightEntities(lightEntities),
+	_guiEntities(guiEntities),
+	_textEntities(textEntities)
 {
 	
 }
 
 const vector<GameEntity*> & EntityBus::getGameEntities() const
 {
-	return p_gameEntities;
+	return _gameEntities;
 }
 
 const vector<BillboardEntity*> & EntityBus::getBillboardEntities() const
 {
-	return p_billboardEntities;
+	return _billboardEntities;
 }
 
 const vector<AabbEntity*>& EntityBus::getAabbEntities() const
 {
-	return p_aabbEntities;
+	return _aabbEntities;
 }
 
 const vector<GuiEntity*> & EntityBus::getGuiEntities() const
 {
-	return p_guiEntities;
+	return _guiEntities;
 }
 
 const vector<TextEntity*> & EntityBus::getTextEntities() const
 {
-	return p_textEntities;
+	return _textEntities;
 }
 
 const vector<LightEntity*> & EntityBus::getLightEntities() const
 {
-	return p_lightEntities;
+	return _lightEntities;
 }
 
 const SkyEntity * EntityBus::getSkyEntity() const
 {
-	return p_skyEntity;
+	return _skyEntity;
 }
 
 const TerrainEntity * EntityBus::getTerrainEntity() const
 {
-	return p_terrainEntity;
+	return _terrainEntity;
 }
 
 const WaterEntity * EntityBus::getWaterEntity() const
 {
-	return p_waterEntity;
+	return _waterEntity;
 }

@@ -1,49 +1,49 @@
 #include <algorithm>
 
-#include <WE3D/AudioManager.hpp>
-#include <WE3D/Logger.hpp>
+#include "AudioManager.hpp"
+#include "Logger.hpp"
 
 AudioManager::AudioManager(AudioLoader& audioLoader) :
-	p_audioLoader(audioLoader)
+	_audioLoader(audioLoader)
 {
 
 }
 
 void AudioManager::deleteAllMusic()
 {
-	p_musicList.clear();
+	_musicList.clear();
 }
 
 void AudioManager::deleteAllChunks()
 {
-	p_chunks.clear();
+	_chunks.clear();
 }
 
 void AudioManager::addMusic(const string& fileName)
 {
-	p_musicList.push_back(AudioMusic(p_audioLoader.getMusic("../Game/Audio/" + fileName)));
+	_musicList.push_back(AudioMusic(_audioLoader.getMusic("../Game/Audio/" + fileName)));
 }
 
 void AudioManager::removeMusic()
 {
-	p_musicList.clear();
+	_musicList.clear();
 }
 
 void AudioManager::addGlobalChunk(const std::string& ID, const std::string& fileName)
 {
-	p_checkValidAdd(ID);
-	p_chunks.push_back(AudioChunk(ID, p_audioLoader.getChunk("../Game/Audio/" + fileName)));
+	_checkValidAdd(ID);
+	_chunks.push_back(AudioChunk(ID, _audioLoader.getChunk("../Game/Audio/" + fileName)));
 }
 
 void AudioManager::addPointChunk(const std::string& ID, const std::string& fileName, vec3 position, float maxDistance)
 {
-	p_checkValidAdd(ID);
-	p_chunks.push_back(AudioChunk(ID, p_audioLoader.getChunk("../Game/Audio/" + fileName), position, maxDistance));
+	_checkValidAdd(ID);
+	_chunks.push_back(AudioChunk(ID, _audioLoader.getChunk("../Game/Audio/" + fileName), position, maxDistance));
 }
 
 void AudioManager::removeChunk(const std::string& ID)
 {
-	auto index = p_findIndex(ID);
+	auto index = _findIndex(ID);
 
 	if (index == -1) // Does not exist
 	{
@@ -51,18 +51,18 @@ void AudioManager::removeChunk(const std::string& ID)
 	}
 	else // Remove chunk
 	{
-		p_chunks.erase(p_chunks.begin() + index);
+		_chunks.erase(_chunks.begin() + index);
 	}
 }
 
 bool AudioManager::isChunkExisting(const string& ID)
 {
-	return p_findIndex(ID) != -1;
+	return _findIndex(ID) != -1;
 }
 
 AudioChunk& AudioManager::getChunk(const std::string& ID)
 {
-	auto index = p_findIndex(ID);
+	auto index = _findIndex(ID);
 
 	if (index == -1)
 	{
@@ -70,23 +70,23 @@ AudioChunk& AudioManager::getChunk(const std::string& ID)
 	}
 	else
 	{
-		return p_chunks[index];
+		return _chunks[index];
 	}
 }
 
 std::vector<AudioChunk>& AudioManager::getChunks()
 {
-	return p_chunks;
+	return _chunks;
 }
 
 std::vector<AudioMusic>& AudioManager::getMusic()
 {
-	return p_musicList;
+	return _musicList;
 }
 
-void AudioManager::p_checkValidAdd(const std::string& ID)
+void AudioManager::_checkValidAdd(const std::string& ID)
 {
-	if (p_findIndex(ID) != -1) // Already exists
+	if (_findIndex(ID) != -1) // Already exists
 	{
 		Logger::getInst().throwError("Audio chunk with ID \'", ID, "\' already exists!");
 	}
@@ -96,11 +96,11 @@ void AudioManager::p_checkValidAdd(const std::string& ID)
 	}
 }
 
-int AudioManager::p_findIndex(const std::string& ID)
+int AudioManager::_findIndex(const std::string& ID)
 {
-	for (size_t i = 0; i < p_chunks.size(); i++)
+	for (size_t i = 0; i < _chunks.size(); i++)
 	{
-		if (p_chunks[i].getID() == ID)
+		if (_chunks[i].getID() == ID)
 		{
 			return i;
 		}

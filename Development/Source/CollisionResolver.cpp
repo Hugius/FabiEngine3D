@@ -1,8 +1,8 @@
-#include <WE3D/CollisionResolver.hpp>
-#include <WE3D/Logger.hpp>
+#include "CollisionResolver.hpp"
+#include "Logger.hpp"
 
 CollisionResolver::CollisionResolver(CollisionDetector& collisionDetector) :
-	p_collisionDetector(collisionDetector)
+	_collisionDetector(collisionDetector)
 {
 	
 }
@@ -10,7 +10,7 @@ CollisionResolver::CollisionResolver(CollisionDetector& collisionDetector) :
 void CollisionResolver::update(const vector<AabbEntity*> & boxes, TerrainEntityManager& terrainManager, CameraManager & camera, float delta)
 {
 	// Check if AABB collision is needed in the first place
-	if (p_aabbResponseEnabled)
+	if (_aabbResponseEnabled)
 	{
 		// Init
 		static vec3 oldCameraPos;
@@ -23,7 +23,7 @@ void CollisionResolver::update(const vector<AabbEntity*> & boxes, TerrainEntityM
 		for (auto& box : boxes)
 		{
 			auto direction = box->getCollisionDirection();
-			auto result = p_collisionDetector.check(*box, currentCameraPos, posDifference, direction);
+			auto result = _collisionDetector.check(*box, currentCameraPos, posDifference, direction);
 			box->setCollisionDirection(direction);
 
 			// If responsive to camera
@@ -56,34 +56,34 @@ void CollisionResolver::update(const vector<AabbEntity*> & boxes, TerrainEntityM
 	}
 	
 	// Check if terrain collision is needed in the first place
-	if (p_terrainResponseEnabled)
+	if (_terrainResponseEnabled)
 	{
 		if (terrainManager.getSelectedTerrain() != nullptr)
 		{
 			float camX = camera.getPosition().x;
 			float camY = camera.getPosition().y;
 			float camZ = camera.getPosition().z;
-			float targetY = terrainManager.getPixelHeight(camX, camZ) + p_cameraHeight;
+			float targetY = terrainManager.getPixelHeight(camX, camZ) + _cameraHeight;
 
 			// If camera goes underground
 			if (camY < targetY)
 			{
-				p_aboveGround = false;
-				p_underGround = true;
-				camera.translate(vec3(0.0f, p_cameraSpeed, 0.0f), delta);
+				_aboveGround = false;
+				_underGround = true;
+				camera.translate(vec3(0.0f, _cameraSpeed, 0.0f), delta);
 				camY = camera.getPosition().y;
 
 				// Check again
 				if (camY > targetY)
 				{
 					camera.setPosition(vec3(camX, targetY, camZ));
-					p_underGround = false;
+					_underGround = false;
 				}
 			}
 			else if (camY > targetY)
 			{
-				p_aboveGround = true;
-				p_underGround = false;
+				_aboveGround = true;
+				_underGround = false;
 			}
 		}
 	}
@@ -91,32 +91,32 @@ void CollisionResolver::update(const vector<AabbEntity*> & boxes, TerrainEntityM
 
 void CollisionResolver::enableAabbResponse()
 {
-	p_aabbResponseEnabled = true;
+	_aabbResponseEnabled = true;
 }
 
 void CollisionResolver::disableAabbResponse()
 {
-	p_aabbResponseEnabled = false;
+	_aabbResponseEnabled = false;
 }
 
 void CollisionResolver::enableTerrainResponse(float cameraHeight, float cameraSpeed)
 {
-	p_terrainResponseEnabled = true;
-	p_cameraHeight = cameraHeight;
-	p_cameraSpeed = cameraSpeed;
+	_terrainResponseEnabled = true;
+	_cameraHeight = cameraHeight;
+	_cameraSpeed = cameraSpeed;
 }
 
 void CollisionResolver::disableTerrainResponse()
 {
-	p_terrainResponseEnabled = false;
+	_terrainResponseEnabled = false;
 }
 
 bool CollisionResolver::isCameraAboveGround()
 {
-	return p_aboveGround;
+	return _aboveGround;
 }
 
 bool CollisionResolver::isCameraUnderGround()
 {
-	return p_underGround;
+	return _underGround;
 }

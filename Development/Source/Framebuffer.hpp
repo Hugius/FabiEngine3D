@@ -28,12 +28,12 @@ public:
 	GLuint getTexture(int ID);
 
 private:
-	GLuint p_fbo = 0;
-	GLuint p_rbo = 0;
-	std::vector<GLuint> p_textures;
+	GLuint _fbo = 0;
+	GLuint _rbo = 0;
+	std::vector<GLuint> _textures;
 
-	int p_aaSamples = 0;
-	ivec2 p_size = ivec2(0);
+	int _aaSamples = 0;
+	ivec2 _size = ivec2(0);
 
-	bool p_textureInitialized = false;
+	bool _textureInitialized = false;
 };

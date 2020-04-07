@@ -2,27 +2,27 @@
 
 using glm::ivec2;
 
-#include <WE3D/ModelEditor.hpp>
-#include <WE3D/TextureLoader.hpp>
-#include <WE3D/InputHandler.hpp>
+#include "ModelEditor.hpp"
+#include "TextureLoader.hpp"
+#include "InputHandler.hpp"
 
 void ModelEditor::update(ivec2 mousePos, InputHandler& inputHandler, float delta)
 {
 	// Previous model
 	if (inputHandler.getKeyPressed(Input::KEY_Q))
 	{
-		if (p_modelIndex > 0)  // Limit
+		if (_modelIndex > 0)  // Limit
 		{
 			if (inputHandler.getKeyDown(Input::KEY_LSHIFT)) // Faster swapping
 			{
-				if (p_modelIndex > 4) // Limit
+				if (_modelIndex > 4) // Limit
 				{
-					p_modelIndex -= 5;
+					_modelIndex -= 5;
 				}
 			}
 			else // Normal speed
 			{
-				p_modelIndex--;
+				_modelIndex--;
 			}
 		}
 	}
@@ -31,18 +31,18 @@ void ModelEditor::update(ivec2 mousePos, InputHandler& inputHandler, float delta
 	if (inputHandler.getKeyPressed(Input::KEY_E))
 	{
 		// Change model index
-		if (p_modelIndex < p_modelNames.size() - 1)  // Limit
+		if (_modelIndex < _modelNames.size() - 1)  // Limit
 		{
 			if (inputHandler.getKeyDown(Input::KEY_LSHIFT)) // Faster swapping
 			{
-				if (p_modelIndex < (p_modelNames.size() - 5))  // Limit
+				if (_modelIndex < (_modelNames.size() - 5))  // Limit
 				{
-					p_modelIndex += 5;
+					_modelIndex += 5;
 				}
 			}
 			else // Normal speed
 			{
-				p_modelIndex++;
+				_modelIndex++;
 			}
 		}
 	}
@@ -51,10 +51,10 @@ void ModelEditor::update(ivec2 mousePos, InputHandler& inputHandler, float delta
 	if (inputHandler.getKeyPressed(Input::KEY_L))
 	{
 		getSelectedModel()->setLightMapped(!getSelectedModel()->isLightMapped());
-		auto parts = p_objLoader.loadOBJ(getSelectedModel()->getModelName());
+		auto parts = _objLoader.loadOBJ(getSelectedModel()->getModelName());
 		for (auto & part : parts)
 		{
-			getSelectedModel()->addLightmap(p_texLoader.getTexture("../Game/Textures/LightMaps/" + part.textureName, false, false));
+			getSelectedModel()->addLightmap(_texLoader.getTexture("../Game/Textures/LightMaps/" + part.textureName, false, false));
 		}
 	}
 
@@ -74,10 +74,10 @@ void ModelEditor::update(ivec2 mousePos, InputHandler& inputHandler, float delta
 	if (inputHandler.getKeyPressed(Input::KEY_R))
 	{
 		getSelectedModel()->setSkyReflective(!getSelectedModel()->isSkyReflective());
-		auto parts = p_objLoader.loadOBJ(getSelectedModel()->getModelName());
+		auto parts = _objLoader.loadOBJ(getSelectedModel()->getModelName());
 		for (auto & part : parts)
 		{
-			getSelectedModel()->addReflectionMap(p_texLoader.getTexture("../Game/Textures/ReflectionMaps/" + part.textureName, false, false));
+			getSelectedModel()->addReflectionMap(_texLoader.getTexture("../Game/Textures/ReflectionMaps/" + part.textureName, false, false));
 		}
 	}
 
@@ -90,17 +90,17 @@ void ModelEditor::update(ivec2 mousePos, InputHandler& inputHandler, float delta
 	// Chaning rotation direction
 	if (inputHandler.getKeyPressed(Input::KEY_D))
 	{
-		if (p_rotationType == RotationType::X)
+		if (_rotationType == RotationType::X)
 		{
-			p_rotationType = RotationType::Y;
+			_rotationType = RotationType::Y;
 		}
-		else if (p_rotationType == RotationType::Y)
+		else if (_rotationType == RotationType::Y)
 		{
-			p_rotationType = RotationType::Z;
+			_rotationType = RotationType::Z;
 		}
-		else if (p_rotationType == RotationType::Z)
+		else if (_rotationType == RotationType::Z)
 		{
-			p_rotationType = RotationType::X;
+			_rotationType = RotationType::X;
 		}
 	}
 
@@ -118,15 +118,15 @@ void ModelEditor::update(ivec2 mousePos, InputHandler& inputHandler, float delta
 	// Rotating the model
 	if (inputHandler.getMouseDown(Input::MOUSE_BUTTON_RIGHT))
 	{
-		if (p_rotationType == RotationType::X)
+		if (_rotationType == RotationType::X)
 		{
 			getSelectedModel()->rotate(vec3(float(yDifference) / 2.0f, 0.0f, 0.0f), delta);
 		}
-		else if (p_rotationType == RotationType::Y)
+		else if (_rotationType == RotationType::Y)
 		{
 			getSelectedModel()->rotate(vec3(0.0f, float(xDifference) / 2.0f, 0.0f), delta);
 		}
-		else if (p_rotationType == RotationType::Z)
+		else if (_rotationType == RotationType::Z)
 		{
 			getSelectedModel()->rotate(vec3(0.0f, 0.0f, float(xDifference) / 2.0f), delta);
 		}
@@ -142,6 +142,6 @@ void ModelEditor::update(ivec2 mousePos, InputHandler& inputHandler, float delta
 	// Saving
 	if (inputHandler.getKeyPressed(Input::KEY_O))
 	{
-		p_saveModelData();
+		_saveModelData();
 	}
 }

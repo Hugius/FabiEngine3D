@@ -38,20 +38,20 @@ public:
 	const bool   isRippling()       const;
 
 private:
-	vec3 p_color = vec3(0.0f);
+	vec3 _color = vec3(0.0f);
 
-	GLuint p_dudvMap   = 0;
-	GLuint p_normalMap = 0;
+	GLuint _dudvMap   = 0;
+	GLuint _normalMap = 0;
 
-	float p_waveValue     = 0.0f;
-	float p_tileRepeat    = 1.0f;
-	float p_wavingSpeed   = 0.0f;
-	float p_timeX         = 0.1f;
-	float p_timeZ         = 0.25f;
-	float p_shininess     = 0.0f;
-	float p_surfaceHeight = 0.0f;
-	float p_transparency  = 0.0f;
+	float _waveValue     = 0.0f;
+	float _tileRepeat    = 1.0f;
+	float _wavingSpeed   = 0.0f;
+	float _timeX         = 0.1f;
+	float _timeZ         = 0.25f;
+	float _shininess     = 0.0f;
+	float _surfaceHeight = 0.0f;
+	float _transparency  = 0.0f;
 	
-	bool p_waving   = false;
-	bool p_rippling = false;
+	bool _waving   = false;
+	bool _rippling = false;
 };

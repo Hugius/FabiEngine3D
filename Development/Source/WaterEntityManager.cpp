@@ -1,5 +1,5 @@
-#include <WE3D/WaterEntityManager.hpp>
-#include <WE3D/ShaderBus.hpp>
+#include "WaterEntityManager.hpp"
+#include "ShaderBus.hpp"
 
 WaterEntityManager::WaterEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, ShaderBus& shaderBus) :
 	EntityManager(objLoader, texLoader, shaderBus)
@@ -9,24 +9,24 @@ WaterEntityManager::WaterEntityManager(OBJLoader& objLoader, TextureLoader& texL
 
 WaterEntity * WaterEntityManager::getEntity(const string & ID)
 {
-	return dynamic_cast<WaterEntity*>(p_getBaseEntity(ID, EntityType::WATER));
+	return dynamic_cast<WaterEntity*>(_getBaseEntity(ID, EntityType::WATER));
 }
 
 WaterEntity * WaterEntityManager::getSelectedWater()
 {
-	if (p_getBaseEntities().empty() || p_selectedID == "")
+	if (_getBaseEntities().empty() || _selectedID == "")
 	{
 		return nullptr;
 	}
 	else
 	{
-		return getEntity(p_selectedID);
+		return getEntity(_selectedID);
 	}
 }
 
 void WaterEntityManager::selectWater(const string & ID)
 {
-	p_selectedID = ID;
+	_selectedID = ID;
 }
 
 void WaterEntityManager::addWaterEntity
@@ -113,12 +113,12 @@ void WaterEntityManager::addWaterEntity
 	}
 	
 	// Create entity
-	p_createEntity(EntityType::WATER, ID)->load(ID);
+	_createEntity(EntityType::WATER, ID)->load(ID);
 
 	// Filly entity
 	getEntity(ID)->addOglBuffer(new OpenGLBuffer(SHAPE_SURFACE, &waterVertices[0], waterVertices.size()));
-	getEntity(ID)->setDudvMap(p_texLoader.getTexture("../Game/Textures/DudvMaps/" + assetName, true, true));
-	getEntity(ID)->setNormalMap(p_texLoader.getTexture("../Game/Textures/NormalMaps/" + assetName, true, true));
+	getEntity(ID)->setDudvMap(_texLoader.getTexture("../Game/Textures/DudvMaps/" + assetName, true, true));
+	getEntity(ID)->setNormalMap(_texLoader.getTexture("../Game/Textures/NormalMaps/" + assetName, true, true));
 	getEntity(ID)->setTileRepeat(tileRepeat);
 	getEntity(ID)->setWavingSpeed(speed);
 	getEntity(ID)->setWaving(waving);
@@ -131,18 +131,18 @@ void WaterEntityManager::addWaterEntity
 void WaterEntityManager::update(float delta)
 {
 	// Update reflection height
-	if (getSelectedWater() != nullptr && p_shaderBus.isWaterEffectsEnabled())
+	if (getSelectedWater() != nullptr && _shaderBus.isWaterEffectsEnabled())
 	{
-		p_shaderBus.setSSRHeight(getSelectedWater()->getSurfaceHeight());
+		_shaderBus.setSSRHeight(getSelectedWater()->getSurfaceHeight());
 	}
 
 	// Update all water entities
-	for (auto & baseEntity : p_getBaseEntities())
+	for (auto & baseEntity : _getBaseEntities())
 	{
 		// Create temporary water entity object
 		auto * water = getEntity(baseEntity->getID());
 
-		if (water->isEnabled() && p_shaderBus.isWaterEffectsEnabled())
+		if (water->isEnabled() && _shaderBus.isWaterEffectsEnabled())
 		{
 			water->setWaveValue(water->getWaveValue() + water->getWavingSpeed() / 100.0f);
 			water->setWaveValue(fmod(water->getWaveValue(), 1.0f));

@@ -1,13 +1,13 @@
-#include <WE3D/Framebuffer.hpp>
-#include <WE3D/Configuration.hpp>
+#include "Framebuffer.hpp"
+#include "Configuration.hpp"
 
 //////////////////////
 // Bind framebuffer //
 //////////////////////
 void Framebuffer::bind()
 {
-	glViewport(0, 0, p_size.x, p_size.y);
-	glBindFramebuffer(GL_FRAMEBUFFER, p_fbo);
+	glViewport(0, 0, _size.x, _size.y);
+	glBindFramebuffer(GL_FRAMEBUFFER, _fbo);
 }
 
 ///////////////////////
@@ -24,9 +24,9 @@ void Framebuffer::unbind()
 /////////////////////////////////////////////////////////////////////////////////
 void Framebuffer::processAAData(Framebuffer * renderBuffer)
 {
-	glBindFramebuffer(GL_READ_FRAMEBUFFER, p_fbo);
+	glBindFramebuffer(GL_READ_FRAMEBUFFER, _fbo);
 	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, renderBuffer->getFBO());
-	glBlitFramebuffer(0, 0, GLint(p_size.x), GLint(p_size.y), 0, 0, GLint(p_size.x), GLint(p_size.y), GL_COLOR_BUFFER_BIT, GL_LINEAR);
+	glBlitFramebuffer(0, 0, GLint(_size.x), GLint(_size.y), 0, 0, GLint(_size.x), GLint(_size.y), GL_COLOR_BUFFER_BIT, GL_LINEAR);
 }
 
 ///////////////////////
@@ -34,7 +34,7 @@ void Framebuffer::processAAData(Framebuffer * renderBuffer)
 ///////////////////////
 int Framebuffer::getAASamples()
 {
-	return p_aaSamples;
+	return _aaSamples;
 }
 
 /////////////////
@@ -42,7 +42,7 @@ int Framebuffer::getAASamples()
 /////////////////
 ivec2 Framebuffer::getSize()
 {
-	return p_size;
+	return _size;
 }
 
 //////////////////////////
@@ -50,7 +50,7 @@ ivec2 Framebuffer::getSize()
 //////////////////////////
 GLuint Framebuffer::getFBO()
 {
-	return p_fbo;
+	return _fbo;
 }
 
 ////////////////////
@@ -58,5 +58,5 @@ GLuint Framebuffer::getFBO()
 ////////////////////
 GLuint Framebuffer::getTexture(int ID)
 {
-	return p_textures[ID];
+	return _textures[ID];
 }

@@ -3,7 +3,7 @@
 
 using std::vector;
 
-#include <WE3D/CollisionDetector.hpp>
+#include "CollisionDetector.hpp"
 
 Collision CollisionDetector::check(const AabbEntity& box, vec3 point, vec3 pointDifference, CollisionDir& collisionDir)
 {

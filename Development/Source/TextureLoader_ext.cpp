@@ -1,9 +1,9 @@
 #include <SDL/SDL_image.h>
 
-#include <WE3D/TextureLoader.hpp>
-#include <WE3D/Logger.hpp>
+#include "TextureLoader.hpp"
+#include "Logger.hpp"
 
-GLuint TextureLoader::p_loadText(const string& text, const string &fontPath)
+GLuint TextureLoader::_loadText(const string& text, const string &fontPath)
 {
 	std::string newText;
 
@@ -18,7 +18,7 @@ GLuint TextureLoader::p_loadText(const string& text, const string &fontPath)
 	}
 
 	// Load font
-	auto font = p_loadFont(fontPath);
+	auto font = _loadFont(fontPath);
 
 	// Load color
 	SDL_Color * sdlColor = new SDL_Color{ 255, 255, 255 };
@@ -57,7 +57,7 @@ GLuint TextureLoader::p_loadText(const string& text, const string &fontPath)
 	return tex;
 }
 
-GLuint TextureLoader::p_loadTexture(const string & filePath, bool mipmap, bool aniso, bool repeat)
+GLuint TextureLoader::_loadTexture(const string & filePath, bool mipmap, bool aniso, bool repeat)
 {
 	// Load actual texture
 	SDL_Surface * surface = IMG_Load((filePath + ".png").c_str());
@@ -92,7 +92,7 @@ GLuint TextureLoader::p_loadTexture(const string & filePath, bool mipmap, bool a
 	if (mipmap)
 	{
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMA_LINEAR);
 		glGenerateMipmap(GL_TEXTURE_2D);
 	}
 	else
@@ -112,9 +112,9 @@ GLuint TextureLoader::p_loadTexture(const string & filePath, bool mipmap, bool a
 	// Repeat dimensions
 	if (repeat)
 	{
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_R, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRA_S, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRA_T, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRA_R, GL_REPEAT);
 	}
 
 	// Logging
@@ -125,7 +125,7 @@ GLuint TextureLoader::p_loadTexture(const string & filePath, bool mipmap, bool a
 }
 
 // http://stackoverflow.com/questions/1968561/getting-the-pixel-value-of-bmp-file
-vector<float> TextureLoader::p_loadHeightmap(const string & filePath, int size)
+vector<float> TextureLoader::_loadHeightmap(const string & filePath, int size)
 {
 	vector<float> pixelColors;
 
@@ -157,7 +157,7 @@ vector<float> TextureLoader::p_loadHeightmap(const string & filePath, int size)
 	return pixelColors;
 }
 
-GLuint TextureLoader::p_loadCubemap(const string & filePath)
+GLuint TextureLoader::_loadCubemap(const string & filePath)
 {
 	// Init
 	GLuint textureID;
@@ -178,7 +178,7 @@ GLuint TextureLoader::p_loadCubemap(const string & filePath)
 		}
 
 		// Convert to OpenGL texture
-		glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGB, surface->w, surface->h, 0, GL_RGB, GL_UNSIGNED_BYTE, surface->pixels);
+		glTexImage2D(GL_TEXTURE_CUBE_MA_POSITIVE_X + i, 0, GL_RGB, surface->w, surface->h, 0, GL_RGB, GL_UNSIGNED_BYTE, surface->pixels);
 
 		// Logging
 		Logger::getInst().throwInfo("Loaded cubemap texture: " + filePath + fileNames[i] + ".png");
@@ -187,19 +187,19 @@ GLuint TextureLoader::p_loadCubemap(const string & filePath)
 	// OpenGL magic
 	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRA_S, GL_CLAM_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRA_T, GL_CLAM_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRA_R, GL_CLAM_TO_EDGE);
 	glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 
 	// Return new texture
 	return textureID;
 }
 
-TTF_Font * TextureLoader::p_loadFont(const string & fontPath)
+TTF_Font * TextureLoader::_loadFont(const string & fontPath)
 {
-	auto it = p_fontMap.find(fontPath);
-	if (it == p_fontMap.end()) //Not in map (yet)
+	auto it = _fontMap.find(fontPath);
+	if (it == _fontMap.end()) //Not in map (yet)
 	{
 		// Font loading
 		TTF_Font * font = TTF_OpenFont((fontPath + ".ttf").c_str(), 50);
@@ -207,7 +207,7 @@ TTF_Font * TextureLoader::p_loadFont(const string & fontPath)
 		{
 			Logger::getInst().throwError(string("Font could not be loaded: " + fontPath + ".ttf").c_str());
 		}
-		p_fontMap.insert(std::make_pair(fontPath, font));
+		_fontMap.insert(std::make_pair(fontPath, font));
 
 		Logger::getInst().throwInfo("Loaded font: " + fontPath + ".ttf");
 

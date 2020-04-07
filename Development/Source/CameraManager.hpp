@@ -51,30 +51,30 @@ public:
 	const bool   isFirstPersonViewEnabled() const;
 
 private:
-	ShaderBus& p_shaderBus;
+	ShaderBus& _shaderBus;
 
 	// Matrices
-	mat4 p_viewMatrix = mat4(1.0f);
-	mat4 p_projectionMatrix = mat4(1.0f);
+	mat4 _viewMatrix = mat4(1.0f);
+	mat4 _projectionMatrix = mat4(1.0f);
 
 	// Vectors
-	vec3 p_up = vec3(0.0f);
-	vec3 p_right = vec3(0.0f);
-	vec3 p_front = vec3(0.0f);
-	vec3 p_pos = vec3(0.0f);
+	vec3 _up = vec3(0.0f);
+	vec3 _right = vec3(0.0f);
+	vec3 _front = vec3(0.0f);
+	vec3 _pos = vec3(0.0f);
 
 	// Floats
-	float p_fov = 0.0f;
-	float p_aspectRatio = 0.0f;
-	float p_pitch = 0.0f;
-	float p_yaw = 0.0f;
-	float p_nearZ = 0.0f;
-	float p_farZ = 0.0f;
-	float p_mouseSensitivity = 0.0f;
-	float p_mouseOffset = 0.0f;
+	float _fov = 0.0f;
+	float _aspectRatio = 0.0f;
+	float _pitch = 0.0f;
+	float _yaw = 0.0f;
+	float _nearZ = 0.0f;
+	float _farZ = 0.0f;
+	float _mouseSensitivity = 0.0f;
+	float _mouseOffset = 0.0f;
 
 	// Booleans
-	bool p_firstPersonViewEnabled = false;
-	bool p_freeMovementEnabled    = true;
-	bool p_mustCenter             = false;
+	bool _firstPersonViewEnabled = false;
+	bool _freeMovementEnabled    = true;
+	bool _mustCenter             = false;
 };

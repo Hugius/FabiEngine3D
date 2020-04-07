@@ -48,7 +48,7 @@ public:
 
 private:
 	Tools();
-	std::mt19937 p_generator;
+	std::mt19937 _generator;
 };
 
 extern Tools g_tools;

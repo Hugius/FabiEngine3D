@@ -1,4 +1,4 @@
-#include <WE3D/GameEntityManager.hpp>
+#include "GameEntityManager.hpp"
 
 GameEntityManager::GameEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, ShaderBus& shaderBus) :
 	EntityManager(objLoader, texLoader, shaderBus)
@@ -8,14 +8,14 @@ GameEntityManager::GameEntityManager(OBJLoader& objLoader, TextureLoader& texLoa
 
 GameEntity* GameEntityManager::getEntity(const string & ID)
 {
-	return dynamic_cast<GameEntity*>(p_getBaseEntity(ID, EntityType::GAME));
+	return dynamic_cast<GameEntity*>(_getBaseEntity(ID, EntityType::GAME));
 }
 
 const vector<GameEntity*> GameEntityManager::getEntities()
 {
 	vector<GameEntity*> newVector;
 
-	for (auto& entity : p_getBaseEntities())
+	for (auto& entity : _getBaseEntities())
 	{
 		newVector.push_back(dynamic_cast<GameEntity*>(entity));
 	}
@@ -31,10 +31,10 @@ void GameEntityManager::addGameEntity
 )
 {
 	// Load OBJ model
-	auto parts = p_objLoader.loadOBJ(modelName);
+	auto parts = _objLoader.loadOBJ(modelName);
 
 	// Create entity
-	p_createEntity(EntityType::GAME, ID)->load(ID);
+	_createEntity(EntityType::GAME, ID)->load(ID);
 	getEntity(ID)->setModelName(modelName);
 
 	// Create OpenGL buffers
@@ -60,18 +60,18 @@ void GameEntityManager::addGameEntity
 		getEntity(ID)->addOglBuffer(new OpenGLBuffer(SHAPE_3D, &data[0], data.size()));
 
 		// Diffuse map
-		getEntity(ID)->addDiffuseMap(p_texLoader.getTexture("../Game/Textures/DiffuseMaps/" + part.textureName, true, true, false));
+		getEntity(ID)->addDiffuseMap(_texLoader.getTexture("../Game/Textures/DiffuseMaps/" + part.textureName, true, true, false));
 
 		// Light map
 		if (lightMapped)
 		{
-			getEntity(ID)->addLightmap(p_texLoader.getTexture("../Game/Textures/LightMaps/" + part.textureName, false, false, false));
+			getEntity(ID)->addLightmap(_texLoader.getTexture("../Game/Textures/LightMaps/" + part.textureName, false, false, false));
 		}
 
 		// Reflection map
 		if (reflective)
 		{
-			getEntity(ID)->addReflectionMap(p_texLoader.getTexture("../Game/Textures/ReflectionMaps/" + part.textureName, false, false, false));
+			getEntity(ID)->addReflectionMap(_texLoader.getTexture("../Game/Textures/ReflectionMaps/" + part.textureName, false, false, false));
 		}
 	}
 
@@ -96,10 +96,10 @@ void GameEntityManager::addGameEntity
 )
 {
 	// Load OBJ model
-	auto parts = p_objLoader.loadOBJ(modelName);
+	auto parts = _objLoader.loadOBJ(modelName);
 
 	// Create entity
-	p_createEntity(EntityType::GAME, ID)->load(ID);
+	_createEntity(EntityType::GAME, ID)->load(ID);
 	getEntity(ID)->setModelName(modelName);
 
 	// Create OpenGL buffers
@@ -122,7 +122,7 @@ void GameEntityManager::addGameEntity
 		}
 
 		getEntity(ID)->addOglBuffer(new OpenGLBuffer(&data[0], data.size(), offsets));
-		getEntity(ID)->addDiffuseMap(p_texLoader.getTexture("../Game/Textures/DiffuseMaps/" + part.textureName, true, true));
+		getEntity(ID)->addDiffuseMap(_texLoader.getTexture("../Game/Textures/DiffuseMaps/" + part.textureName, true, true));
 	}
 
 	// Load transformation
@@ -132,13 +132,13 @@ void GameEntityManager::addGameEntity
 	// Load light map
 	if (lightMapped)
 	{
-		getEntity(ID)->addLightmap(p_texLoader.getTexture("../Game/Textures/LightMaps/" + modelName, false, false));
+		getEntity(ID)->addLightmap(_texLoader.getTexture("../Game/Textures/LightMaps/" + modelName, false, false));
 	}
 
 	// Load reflection map
 	if (reflective)
 	{
-		getEntity(ID)->addReflectionMap(p_texLoader.getTexture("../Game/Textures/ReflectionMaps/" + modelName, false, false));
+		getEntity(ID)->addReflectionMap(_texLoader.getTexture("../Game/Textures/ReflectionMaps/" + modelName, false, false));
 	}
 
 	// Edit entity
@@ -151,7 +151,7 @@ void GameEntityManager::addGameEntity
 
 void GameEntityManager::update(float delta)
 {
-	for (auto & baseEntity : p_getBaseEntities())
+	for (auto & baseEntity : _getBaseEntities())
 	{
 		// Create temporary game entity object
 		auto * entity = getEntity(baseEntity->getID());

@@ -1,26 +1,26 @@
 #include <fstream>
 #include <sstream>
 
-#include <WE3D/OpenGLShader.hpp>
-#include <WE3D/Logger.hpp>
+#include "OpenGLShader.hpp"
+#include "Logger.hpp"
 
 OpenGLShader::OpenGLShader(const string & vertexPath, const string & fragmentPath)
 {
-	p_name = vertexPath.substr(0, vertexPath.size() - 5);
+	_name = vertexPath.substr(0, vertexPath.size() - 5);
 	string vertexCode;
 	string fragmentCode;
 	std::ifstream vShaderFile;
 	std::ifstream fShaderFile;
 	vShaderFile.exceptions(std::ifstream::badbit);
 	fShaderFile.exceptions(std::ifstream::badbit);
-	p_vertexPath   = vertexPath;
-	p_fragmentPath = fragmentPath;
+	_vertexPath   = vertexPath;
+	_fragmentPath = fragmentPath;
 
 	// Open the shader text files
 	try 
 	{
-		vShaderFile.open("../Engine/Shaders/" + p_vertexPath);
-		fShaderFile.open("../Engine/Shaders/" + p_fragmentPath);
+		vShaderFile.open("../Engine/Shaders/" + _vertexPath);
+		fShaderFile.open("../Engine/Shaders/" + _fragmentPath);
 		std::stringstream vShaderStream, fShaderStream;
 		vShaderStream << vShaderFile.rdbuf();
 		fShaderStream << fShaderFile.rdbuf();
@@ -37,7 +37,7 @@ OpenGLShader::OpenGLShader(const string & vertexPath, const string & fragmentPat
 	const GLchar* vShaderCode = vertexCode.c_str();
 	const GLchar * fShaderCode = fragmentCode.c_str();
 
-	p_createProgram(vShaderCode, fShaderCode);
+	_createProgram(vShaderCode, fShaderCode);
 }
 
 OpenGLShader::~OpenGLShader()
@@ -45,7 +45,7 @@ OpenGLShader::~OpenGLShader()
 
 }
 
-void OpenGLShader::p_createProgram(const GLchar * vShaderCode, const GLchar * fShaderCode)
+void OpenGLShader::_createProgram(const GLchar * vShaderCode, const GLchar * fShaderCode)
 {
 	// Compile the shaders
 	GLuint vertex, fragment;
@@ -62,7 +62,7 @@ void OpenGLShader::p_createProgram(const GLchar * vShaderCode, const GLchar * fS
 	if (!success) 
 	{
 		glGetShaderInfoLog(vertex, 512, NULL, infoLog);
-		Logger::getInst().throwError("Shader error at " + p_vertexPath + ": " + infoLog);
+		Logger::getInst().throwError("Shader error at " + _vertexPath + ": " + infoLog);
 	}
 
 	// Fragment shader
@@ -75,34 +75,34 @@ void OpenGLShader::p_createProgram(const GLchar * vShaderCode, const GLchar * fS
 	if (!success) 
 	{
 		glGetShaderInfoLog(fragment, 512, NULL, infoLog);
-		Logger::getInst().throwError("Shader error at " + p_fragmentPath + ": " + infoLog);
+		Logger::getInst().throwError("Shader error at " + _fragmentPath + ": " + infoLog);
 	}
 
 	// Shader program
-	p_program = glCreateProgram();
-	glAttachShader(p_program, vertex);
-	glAttachShader(p_program, fragment);
-	glLinkProgram(p_program);
+	_program = glCreateProgram();
+	glAttachShader(_program, vertex);
+	glAttachShader(_program, fragment);
+	glLinkProgram(_program);
 
 	// Linking errors 
-	glGetProgramiv(p_program, GL_LINK_STATUS, &success);
+	glGetProgramiv(_program, GL_LINK_STATUS, &success);
 	if (!success) 
 	{
-		glGetProgramInfoLog(p_program, 512, NULL, infoLog);
-		Logger::getInst().throwError("Shader error at " + p_fragmentPath.substr(0, p_fragmentPath.size()-5) + ": " + infoLog);
+		glGetProgramInfoLog(_program, 512, NULL, infoLog);
+		Logger::getInst().throwError("Shader error at " + _fragmentPath.substr(0, _fragmentPath.size()-5) + ": " + infoLog);
 	}
 
 	// Delete the no longer needed shaders
 	glDeleteShader(vertex);
 	glDeleteShader(fragment);
 
-	Logger::getInst().throwInfo("Loaded vertex shader: ../Engine/Shaders/" + p_vertexPath);
-	Logger::getInst().throwInfo("Loaded fragment shader: ../Engine/Shaders/" + p_fragmentPath);
+	Logger::getInst().throwInfo("Loaded vertex shader: ../Engine/Shaders/" + _vertexPath);
+	Logger::getInst().throwInfo("Loaded fragment shader: ../Engine/Shaders/" + _fragmentPath);
 }
 
 void OpenGLShader::bind()
 {
-	glUseProgram(p_program);
+	glUseProgram(_program);
 }
 
 void OpenGLShader::unbind()

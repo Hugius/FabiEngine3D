@@ -1,6 +1,6 @@
-#include <WE3D/BillboardEntityManager.hpp>
-#include <WE3D/ShaderBus.hpp>
-#include <WE3D/Logger.hpp>
+#include "BillboardEntityManager.hpp"
+#include "ShaderBus.hpp"
+#include "Logger.hpp"
 
 BillboardEntityManager::BillboardEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, ShaderBus& shaderBus) :
 	EntityManager(objLoader, texLoader, shaderBus)
@@ -10,14 +10,14 @@ BillboardEntityManager::BillboardEntityManager(OBJLoader& objLoader, TextureLoad
 
 BillboardEntity * BillboardEntityManager::getEntity(const string & ID)
 {
-	return dynamic_cast<BillboardEntity*>(p_getBaseEntity(ID, EntityType::BILLBOARD));
+	return dynamic_cast<BillboardEntity*>(_getBaseEntity(ID, EntityType::BILLBOARD));
 }
 
 const vector<BillboardEntity*> BillboardEntityManager::getEntities()
 {
 	vector<BillboardEntity*> newVector;
 
-	for (auto& entity : p_getBaseEntities())
+	for (auto& entity : _getBaseEntities())
 	{
 		newVector.push_back(dynamic_cast<BillboardEntity*>(entity));
 	}
@@ -44,11 +44,11 @@ void BillboardEntityManager::addBillboardEntity
 	};
 
 	// Create entity
-	p_createEntity(EntityType::BILLBOARD, ID)->load(ID);
+	_createEntity(EntityType::BILLBOARD, ID)->load(ID);
 	getEntity(ID)->addOglBuffer(new OpenGLBuffer(SHAPE_SURFACE, plane_data, sizeof(plane_data) / sizeof(float)));
 
 	// Texture
-	getEntity(ID)->setDiffuseMap(p_texLoader.getTexture("../Game/Textures/BillboardMaps/" + textureName, textureFiltering, true));
+	getEntity(ID)->setDiffuseMap(_texLoader.getTexture("../Game/Textures/BillboardMaps/" + textureName, textureFiltering, true));
 
 	// Other
 	getEntity(ID)->setTranslation(T);
@@ -78,11 +78,11 @@ void BillboardEntityManager::addBillboardEntity
 	};
 
 	// Create entity
-	p_createEntity(EntityType::BILLBOARD, ID)->load(ID);
+	_createEntity(EntityType::BILLBOARD, ID)->load(ID);
 	getEntity(ID)->addOglBuffer(new OpenGLBuffer(SHAPE_SURFACE, plane_data, sizeof(plane_data) / sizeof(float)));
 
 	// Texture
-	getEntity(ID)->setDiffuseMap(p_texLoader.getText(text, "../Game/Fonts/" + fontName));
+	getEntity(ID)->setDiffuseMap(_texLoader.getText(text, "../Game/Fonts/" + fontName));
 
 	// Other
 	getEntity(ID)->setTranslation(T);
@@ -97,7 +97,7 @@ void BillboardEntityManager::addBillboardEntity
 
 void BillboardEntityManager::update(float delta)
 {
-	for (auto & baseEntity : p_getBaseEntities())
+	for (auto & baseEntity : _getBaseEntities())
 	{
 		// Create temporary billboard entity object
 		auto * entity = getEntity(baseEntity->getID());
@@ -107,8 +107,8 @@ void BillboardEntityManager::update(float delta)
 		{
 			auto facing = entity->getCameraFacing();
 			vec3 rotation = vec3(0.0f);
-			rotation.x = (((p_shaderBus.getCameraPitch())) + entity->getInitialRotation().x) * facing.x;
-			rotation.y = (((-p_shaderBus.getCameraYaw() - 90.0f)) + entity->getInitialRotation().y) * facing.y;
+			rotation.x = (((_shaderBus.getCameraPitch())) + entity->getInitialRotation().x) * facing.x;
+			rotation.y = (((-_shaderBus.getCameraYaw() - 90.0f)) + entity->getInitialRotation().y) * facing.y;
 			rotation.z = entity->getInitialRotation().z;
 			entity->setRotation(rotation);
 		}

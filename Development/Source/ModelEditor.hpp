@@ -34,17 +34,17 @@ public:
 
 private:
 	// Functions
-	void p_loadFileNames();
-	void p_saveModelData();
-	void p_updateModelData();
+	void _loadFileNames();
+	void _saveModelData();
+	void _updateModelData();
 
 	// Vectors
-	vector<GameEntity*> p_models;
-	vector<string> p_modelNames;
+	vector<GameEntity*> _models;
+	vector<string> _modelNames;
 
 	// Other
-	unsigned int p_modelIndex = 0;
-	RotationType p_rotationType = RotationType::Y;
-	OBJLoader& p_objLoader;
-	TextureLoader& p_texLoader;
+	unsigned int _modelIndex = 0;
+	RotationType _rotationType = RotationType::Y;
+	OBJLoader& _objLoader;
+	TextureLoader& _texLoader;
 };

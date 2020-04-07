@@ -49,17 +49,17 @@ public:
 	const bool isDepthEntity() const;
 
 private:
-	mat4 p_modelMatrix = mat4(1.0f);
+	mat4 _modelMatrix = mat4(1.0f);
 
-	GLuint p_diffuseMap = 0;
+	GLuint _diffuseMap = 0;
 
-	vec3 p_color = vec3(1.0f);
+	vec3 _color = vec3(1.0f);
 
-	vec2  p_translation = vec2(0.0f);
-	float p_rotation    = 0.0f;
-	vec2  p_scaling     = vec2(1.0f);
+	vec2  _translation = vec2(0.0f);
+	float _rotation    = 0.0f;
+	vec2  _scaling     = vec2(1.0f);
 
-	bool p_mirroredHorizontally = false;
-	bool p_mirroredVertically   = false;
-	bool p_isDepthEntity        = false;
+	bool _mirroredHorizontally = false;
+	bool _mirroredVertically   = false;
+	bool _isDepthEntity        = false;
 };

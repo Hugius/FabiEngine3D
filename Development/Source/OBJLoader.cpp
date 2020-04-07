@@ -1,17 +1,17 @@
-#pragma warning(disable:4996) //Disabling annoying warning
+#pragma warning(disable:4996) // Disabling annoying warning
 
 #include <GLEW/glew.h>
 
-#include <WE3D/OBJLoader.hpp>
-#include <WE3D/Logger.hpp>
+#include "OBJLoader.hpp"
+#include "Logger.hpp"
 
 vector<ObjPart> & OBJLoader::loadOBJ(const string & fileName)
 {
 	// Check if mesh data was loaded already, if not, load data and store in std::map
-	begin : auto iterator = p_objPartsMap.find(fileName); // Search for existing OBJ parts
-	if (iterator == p_objPartsMap.end()) 
+	begin : auto iterator = _objPartsMap.find(fileName); // Search for existing OBJ parts
+	if (iterator == _objPartsMap.end()) 
 	{
-		p_objPartsMap.insert(std::make_pair(fileName, p_loadOBJ(fileName))); // Insert new data
+		_objPartsMap.insert(std::make_pair(fileName, _loadOBJ(fileName))); // Insert new data
 		goto begin;
 	}
 	else 
@@ -20,13 +20,13 @@ vector<ObjPart> & OBJLoader::loadOBJ(const string & fileName)
 	}
 }
 
-vector<ObjPart> OBJLoader::p_loadOBJ(const string & fileName)
+vector<ObjPart> OBJLoader::_loadOBJ(const string & fileName)
 {
 	// Declare variables
 	vector<ObjPart> objParts;
-	vector<vec3> temp_positions;
-	vector<vec2> temp_uvs;
-	vector<vec3> temp_normals;
+	vector<vec3> tem_positions;
+	vector<vec2> tem_uvs;
+	vector<vec3> tem_normals;
 	string selectedTextureName = fileName;
 
 	// Load OBJ file
@@ -65,21 +65,21 @@ vector<ObjPart> OBJLoader::p_loadOBJ(const string & fileName)
 		{
 			vec3 vertex;
 			fscanf(file, "%f %f %f\n", &vertex.x, &vertex.y, &vertex.z);
-			temp_positions.push_back(vertex);
+			tem_positions.push_back(vertex);
 			continue;
 		}
 		else if (strcmp(lineHeader, "vt") == 0) // Uv coords
 		{
 			vec2 uv;
 			fscanf(file, "%f %f\n", &uv.x, &uv.y);
-			temp_uvs.push_back(uv);
+			tem_uvs.push_back(uv);
 			continue;
 		}
 		else if (strcmp(lineHeader, "vn") == 0) // Normals
 		{
 			vec3 normal;
 			fscanf(file, "%f %f %f\n", &normal.x, &normal.y, &normal.z);
-			temp_normals.push_back(normal);
+			tem_normals.push_back(normal);
 			continue;
 		}
 		else if (strcmp(lineHeader, "WE3DTexture") == 0) // Material
@@ -117,9 +117,9 @@ vector<ObjPart> OBJLoader::p_loadOBJ(const string & fileName)
 					// Add vertices
 					for (int i = 0; i < 3; i++)
 					{
-						objPart.vertices.push_back(temp_positions[posIndex[i] - 1]);
-						objPart.uvCoords.push_back(temp_uvs[uvIndex[i] - 1]);
-						objPart.normals.push_back(temp_normals[normalIndex[i] - 1]);
+						objPart.vertices.push_back(tem_positions[posIndex[i] - 1]);
+						objPart.uvCoords.push_back(tem_uvs[uvIndex[i] - 1]);
+						objPart.normals.push_back(tem_normals[normalIndex[i] - 1]);
 					}
 
 					break;
@@ -134,9 +134,9 @@ vector<ObjPart> OBJLoader::p_loadOBJ(const string & fileName)
 				// Add vertices
 				for (int i = 0; i < 3; i++)
 				{
-					newPart.vertices.push_back(temp_positions[posIndex[i] - 1]);
-					newPart.uvCoords.push_back(temp_uvs[uvIndex[i] - 1]);
-					newPart.normals.push_back(temp_normals[normalIndex[i] - 1]);
+					newPart.vertices.push_back(tem_positions[posIndex[i] - 1]);
+					newPart.uvCoords.push_back(tem_uvs[uvIndex[i] - 1]);
+					newPart.normals.push_back(tem_normals[normalIndex[i] - 1]);
 				}
 
 				// Set texture name

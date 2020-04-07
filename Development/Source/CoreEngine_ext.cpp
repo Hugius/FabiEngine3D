@@ -1,197 +1,172 @@
 #include <fstream>
 
-#include <WE3D/CoreEngine.hpp>
-#include <WE3D/Configuration.hpp>
-#include <WE3D/ShaderBus.hpp>
+#include "CoreEngine.hpp"
+#include "Configuration.hpp"
+#include "ShaderBus.hpp"
 
-void CoreEngine::p_setupApplication()
+void CoreEngine::_setupApplication()
 {
 	// Engine intro
-	p_displayIntroScene();
-
-	// Setup selected engine state
-	switch (p_engineState)
-	{
-		case(EngineState::STATE_GAME): // Setup game
-		{
-			p_initGame();
-			break;
-		}
-		
-		case(EngineState::STATE_MODEL_EDITOR): // Setup model editor
-		{
-			p_initModelEditor();
-			break;
-		}
-
-		case(EngineState::STATE_WORLD_EDITOR): // Setup world editor
-		{
-			p_initWorldEditor();
-			break;
-		}
-	}
+	_displayIntroScene();
 
 	// Window properties
-	p_initWindow();
+	_initWindow();
+
+	// Setup selected engine state
+	//switch (_engineState)
+	//{
+	//	case(EngineState::STATE_GAME): // Setup game
+	//	{
+	//		_initGame();
+	//		break;
+	//	}
+	//	
+	//	case(EngineState::STATE_MODEL_EDITOR): // Setup model editor
+	//	{
+	//		_initModelEditor();
+	//		break;
+	//	}
+
+	//	case(EngineState::STATE_WORLD_EDITOR): // Setup world editor
+	//	{
+	//		_initWorldEditor();
+	//		break;
+	//	}
+	//}
 }
 
-void CoreEngine::p_updateApplication()
+void CoreEngine::_updateApplication()
 {
 	// Exit application
-	if (p_inputHandler.getKeyDown(Input::WINDOW_X_BUTTON))
+	if (_inputHandler.getKeyDown(Input::WINDOW_X_BUTTON))
 	{
-		p_stop();
+		_stop();
 	}
 
 	// Update selected engine state
-	switch (p_engineState)
+	switch (_engineState)
 	{
 		case(EngineState::STATE_GAME): // Update game
 		{
-			if (p_isPaused)
+			if (_isPaused)
 			{
-				p_we3d.WE3D_UPDATE_GAME(p_timer.getDeltaTime());
+				_fe3d.WE3D_UPDATE_GAME(_timer.getDeltaTime());
 			}
 			else
 			{
-				p_updateGame();
+				_updateGame();
 			}
 			break;
 		}
 	
 		case(EngineState::STATE_MODEL_EDITOR): // Update model editor
 		{
-			p_updateModelEditor();
+			_updateModelEditor();
 			break;
 		}
 
 		case(EngineState::STATE_WORLD_EDITOR): // Update world editor
 		{
-			if (p_isPaused)
+			if (_isPaused)
 			{
-				p_we3d.WE3D_UPDATE_EDITOR(p_timer.getDeltaTime());
+				_fe3d.WE3D_UPDATE_EDITOR(_timer.getDeltaTime());
 			}
 			else
 			{
-				p_updateWorldEditor();
+				_updateWorldEditor();
 			}
 			break;
 		}
 	}
 }
 
-void CoreEngine::p_renderApplication()
+void CoreEngine::_renderApplication()
 {
-	p_timer.start("entityBus");
+	_timer.start("entityBus");
 	EntityBus entityBus
 	(
-		p_skyEntityManager.getSelectedSky(), p_terrainEntityManager.getSelectedTerrain(), p_waterEntityManager.getSelectedWater(), 
-		p_engineState == EngineState::STATE_MODEL_EDITOR ? vector<GameEntity*>{p_modelEditor.getSelectedModel()} : p_gameEntityManager.getEntities(),
-		p_billboardEntityManager.getEntities(), p_aabbEntityManager.getEntities(),
-		p_lightEntityManager.getEntities(), p_guiEntityManager.getEntities(), p_textEntityManager.getEntities()
+		_skyEntityManager.getSelectedSky(), _terrainEntityManager.getSelectedTerrain(), _waterEntityManager.getSelectedWater(), 
+		_engineState == EngineState::STATE_MODEL_EDITOR ? vector<GameEntity*>{_modelEditor.getSelectedModel()} : _gameEntityManager.getEntities(),
+		_billboardEntityManager.getEntities(), _aabbEntityManager.getEntities(),
+		_lightEntityManager.getEntities(), _guiEntityManager.getEntities(), _textEntityManager.getEntities()
 	);
-	p_timer.stop();
+	_timer.stop();
 
 	// Render entities
-	p_renderEngine.renderScene(&entityBus, p_cameraManager, p_isPaused ? ivec2(0) : p_windowManager.getMousePos());
+	_renderEngine.renderScene(&entityBus, _cameraManager, _isPaused ? ivec2(0) : _windowManager.getMousePos());
 
 	// Swap GPU buffer
-	p_timer.start("renderSwap");
-	p_windowManager.swapBackBuffer();
-	p_timer.stop();
+	_timer.start("renderSwap");
+	_windowManager.swapBackBuffer();
+	_timer.stop();
 }
 
-void CoreEngine::p_displayIntroScene()
+void CoreEngine::_displayIntroScene()
 {
-	// Update intro index
-	std::fstream file;
-	file.open("../Engine/IntroIndex.we3d", std::ios::in | std::ios::out);
-	string temp;
-	std::getline(file, temp);
-	int index = std::stoi(temp);
-	int newIndex = index == 6 ? 1 : index + 1;
-	file.seekg(0);
-	file << newIndex;
-	file.flush();
-	file.close();
-
-	// Prepare intro screen
 	GuiEntity intro;
 	intro.load("intro");
 	intro.addOglBuffer(new OpenGLBuffer(0.0f, 0.0f, 2.0f, 2.0f, true));
-	intro.setDiffuseMap(p_texLoader.getTexture("../Engine/Textures/intro" + std::to_string(index), true, true));
-	p_windowManager.showWindow();
-	p_windowManager.setSize(ivec2(720, 480));
-	p_renderEngine.renderEngineIntro(&intro, ivec2(720, 480));
-	p_windowManager.swapBackBuffer();
+	intro.setDiffuseMap(_texLoader.getTexture("../Engine/Textures/intro", true, true));
+	_windowManager.setSize(ivec2(720, 480));
+	_windowManager.showWindow();
+	_renderEngine.renderEngineIntro(&intro, ivec2(720, 480));
+	_windowManager.swapBackBuffer();
 }
 
-void CoreEngine::p_initWindow()
+void CoreEngine::_initWindow()
 {
-	// Window size
-	p_windowManager.setSize(Config::getInst().getWindowSize());
-
-	// Window borderless option
-	if (!Config::getInst().isWindowBorderless())
-	{
-		p_windowManager.showBorder();
-	}
-
-	// Window fullscreen option
-	if (Config::getInst().isWindowFullscreen())
-	{
-		p_windowManager.enableFullscreen();
-	}
+	_windowManager.setSize(Config::getInst().getWindowSize());
+	_windowManager.showBorder();
 }
 
-void CoreEngine::p_initGame()
+void CoreEngine::_initGame()
 {
-	p_we3d.WE3D_INIT_GAME();
+	_fe3d.WE3D_INIT_GAME();
 }
 
-void CoreEngine::p_initModelEditor()
+void CoreEngine::_initModelEditor()
 {
-	p_modelEditor.loadModels(p_gameEntityManager);
-	p_we3d.camera_load(90.0f, 0.1f, 100.0f, vec3(-1.5f, 5.0f, 15.0f), 0.0f);
-	p_cameraManager.setYaw(-90.0f);
-	p_cameraManager.updateMatrices();
-	p_we3d.gfx_addAmbientLighting(1.0f);
-	p_we3d.gfx_addDirectionalLighting(vec3(1000.0f), 1.0f);
-	p_we3d.gfx_addMSAA();
-	p_we3d.gfx_addBloom(0.975f, 0.0f, 10);
-	p_we3d.gfx_addLightMapping();
-	p_we3d.gfx_addShadows(vec3(15.0f), vec3(0.0f), 40.0f, 40.0f);
-	p_we3d.gfx_addSkyReflections(0.5f);
-	p_we3d.gfx_addSpecularLighting(32.0f);
-	p_shaderBus.setDayReflectionCubeMap(p_texLoader.getCubeMap("../Engine/Textures/Skybox/"));
-	p_modelEditor.loadGUI(p_guiEntityManager, p_textEntityManager);
+	_modelEditor.loadModels(_gameEntityManager);
+	_fe3d.camera_load(90.0f, 0.1f, 100.0f, vec3(-1.5f, 5.0f, 15.0f), 0.0f);
+	_cameraManager.setYaw(-90.0f);
+	_cameraManager.updateMatrices();
+	_fe3d.gfx_addAmbientLighting(1.0f);
+	_fe3d.gfx_addDirectionalLighting(vec3(1000.0f), 1.0f);
+	_fe3d.gfx_addMSAA();
+	_fe3d.gfx_addBloom(0.975f, 0.0f, 10);
+	_fe3d.gfx_addLightMapping();
+	_fe3d.gfx_addShadows(vec3(15.0f), vec3(0.0f), 40.0f, 40.0f);
+	_fe3d.gfx_addSkyReflections(0.5f);
+	_fe3d.gfx_addSpecularLighting(32.0f);
+	_shaderBus.setDayReflectionCubeMap(_texLoader.getCubeMap("../Engine/Textures/Skybox/"));
+	_modelEditor.loadGUI(_guiEntityManager, _textEntityManager);
 }
 
-void CoreEngine::p_initWorldEditor()
+void CoreEngine::_initWorldEditor()
 {
-	p_we3d.WE3D_INIT_EDITOR();
-	p_modelEditor.loadModels(p_gameEntityManager);
+	_fe3d.WE3D_INIT_EDITOR();
+	_modelEditor.loadModels(_gameEntityManager);
 
 	// Check if a terrain selected
-	if (p_terrainEntityManager.getSelectedTerrain() == nullptr)
+	if (_terrainEntityManager.getSelectedTerrain() == nullptr)
 	{
 		Logger::getInst().throwError("No terrain selected while in world editor state!");
 	}
 }
 
-void CoreEngine::p_updateGame()
+void CoreEngine::_updateGame()
 {
 	// Delta time problems
-	if (p_timer.getDeltaTime() >= 100.0f)
+	if (_timer.getDeltaTime() >= 100.0f)
 	{
 		// Correct delta after resource loading
-		if (p_timer.getDeltaTime() >= 500.0f)
+		if (_timer.getDeltaTime() >= 500.0f)
 		{
-			p_timer.setCustomDeltaTime(1.0f);
+			_timer.setCustomDeltaTime(1.0f);
 		}
 		else // Lag warning
 		{
-			Logger::getInst().throwWarning("WoodEngine3D is lagging, possible causes:");
+			Logger::getInst().throwWarning("FabiEngine3D is lagging, possible causes:");
 			Logger::getInst().throwWarning("	- GFX settings too high in Config.we3d");
 			Logger::getInst().throwWarning("	- Too much game entities");
 			Logger::getInst().throwWarning("	- Too high poly OBJ models");
@@ -200,105 +175,105 @@ void CoreEngine::p_updateGame()
 	}
 
 	// Camera updates
-	p_timer.start("cameraUpdates");
-	p_cameraManager.update(p_windowManager, p_timer.getDeltaTime());
-	p_timer.stop();
+	_timer.start("cameraUpdates");
+	_cameraManager.update(_windowManager, _timer.getDeltaTime());
+	_timer.stop();
 
 	// User updates
-	p_timer.start("gameUpdates");
-	p_we3d.WE3D_UPDATE_GAME(p_timer.getDeltaTime());
-	p_timer.stop();
+	_timer.start("gameUpdates");
+	_fe3d.WE3D_UPDATE_GAME(_timer.getDeltaTime());
+	_timer.stop();
 
 	// Physics updates
-	p_timer.start("raycastUpdates");
-	p_mousePicker.update(p_windowManager.getMousePos(), p_terrainEntityManager);
-	p_timer.stop();
-	p_timer.start("physicsUpdates");
-	p_collisionResolver.update(p_aabbEntityManager.getEntities(), p_terrainEntityManager, p_cameraManager, p_timer.getDeltaTime());
-	p_timer.stop();
+	_timer.start("raycastUpdates");
+	_mousePicker.update(_windowManager.getMousePos(), _terrainEntityManager);
+	_timer.stop();
+	_timer.start("physicsUpdates");
+	_collisionResolver.update(_aabbEntityManager.getEntities(), _terrainEntityManager, _cameraManager, _timer.getDeltaTime());
+	_timer.stop();
 
 	// 3D entity updates
-	p_timer.start("entityUpdates");
-	if (!p_entitiesPaused)
+	_timer.start("entityUpdates");
+	if (!_entitiesPaused)
 	{
-		p_skyEntityManager.update(p_timer.getDeltaTime());
-		p_waterEntityManager.update(p_timer.getDeltaTime());
-		p_gameEntityManager.update(p_timer.getDeltaTime());
-		p_billboardEntityManager.update(p_timer.getDeltaTime());
-		p_aabbEntityManager.update(p_gameEntityManager.getEntities());
+		_skyEntityManager.update(_timer.getDeltaTime());
+		_waterEntityManager.update(_timer.getDeltaTime());
+		_gameEntityManager.update(_timer.getDeltaTime());
+		_billboardEntityManager.update(_timer.getDeltaTime());
+		_aabbEntityManager.update(_gameEntityManager.getEntities());
 	}
 
 	// 2D entity updates
-	p_guiEntityManager.update(p_timer.getDeltaTime());
-	p_textEntityManager.update(p_timer.getDeltaTime());
-	p_timer.stop();
+	_guiEntityManager.update(_timer.getDeltaTime());
+	_textEntityManager.update(_timer.getDeltaTime());
+	_timer.stop();
 
 	// Miscellaneous updates
-	p_timer.start("shadowUpdates");
-	p_shadowManager.update(p_shaderBus);
-	p_cameraManager.updateMatrices();
-	p_timer.stop();
-	p_timer.start("audioUpdates");
-	p_audioPlayer.update(p_cameraManager, p_audioManager.getChunks(), p_audioManager.getMusic(), p_timer.getDeltaTime());
-	p_timer.stop();
+	_timer.start("shadowUpdates");
+	_shadowManager.update(_shaderBus);
+	_cameraManager.updateMatrices();
+	_timer.stop();
+	_timer.start("audioUpdates");
+	_audioPlayer.update(_cameraManager, _audioManager.getChunks(), _audioManager.getMusic(), _timer.getDeltaTime());
+	_timer.stop();
 
 	// Performance profiling updates
-	p_updatePerformanceProfiler();
+	_updatePerformanceProfiler();
 }
 
-void CoreEngine::p_updateModelEditor()
+void CoreEngine::_updateModelEditor()
 {
-	p_modelEditor.update(p_windowManager.getMousePos(), p_inputHandler, p_timer.getDeltaTime());
-	p_textEntityManager.addTextEntity("modelName", "Model: " + p_modelEditor.getSelectedModel()->getModelName(), "font", vec3(1.0f), vec2(0.3f, -0.75f), 0.0f, vec2(0.5f, 0.15f), true, true, true);
-	p_shadowManager.update(p_shaderBus);
-	p_guiEntityManager.update(p_timer.getDeltaTime());
-	p_textEntityManager.update(p_timer.getDeltaTime());
+	_modelEditor.update(_windowManager.getMousePos(), _inputHandler, _timer.getDeltaTime());
+	_textEntityManager.addTextEntity("modelName", "Model: " + _modelEditor.getSelectedModel()->getModelName(), "font", vec3(1.0f), vec2(0.3f, -0.75f), 0.0f, vec2(0.5f, 0.15f), true, true, true);
+	_shadowManager.update(_shaderBus);
+	_guiEntityManager.update(_timer.getDeltaTime());
+	_textEntityManager.update(_timer.getDeltaTime());
 }
 
-void CoreEngine::p_updateWorldEditor()
+void CoreEngine::_updateWorldEditor()
 {
-	p_timer.start("worldEditor");
-	if (p_terrainEntityManager.getSelectedTerrain() != nullptr)
+	_timer.start("worldEditor");
+	if (_terrainEntityManager.getSelectedTerrain() != nullptr)
 	{
 		bool placementMode;
-		if (p_inputHandler.getMouseToggled(Input::MOUSE_BUTTON_MIDDLE)) // Mouse picker
+		if (_inputHandler.getMouseToggled(Input::MOUSE_BUTTON_MIDDLE)) // Mouse picker
 		{
-			p_windowManager.showMouseCursor();
-			p_cameraManager.disableFirstPersonView();
+			_windowManager.showMouseCursor();
+			_cameraManager.disableFirstPersonView();
 			placementMode = true;
 		}
 		else // Free movement
 		{
-			p_windowManager.hideMouseCursor();
-			p_cameraManager.enableFirstPersonView();
+			_windowManager.hideMouseCursor();
+			_cameraManager.enableFirstPersonView();
 			placementMode = false;
 		}
 
 		// Update
-		p_we3d.WE3D_UPDATE_EDITOR(p_timer.getDeltaTime());
-		p_mousePicker.update(p_windowManager.getMousePos(), p_terrainEntityManager);
-		p_skyEntityManager.update(p_timer.getDeltaTime());
-		p_waterEntityManager.update(p_timer.getDeltaTime());
-		p_gameEntityManager.update(p_timer.getDeltaTime());
-		p_guiEntityManager.update(p_timer.getDeltaTime());
-		p_shadowManager.update(p_shaderBus);
-		p_worldEditor.update(p_windowManager.getMousePos(), p_mousePicker.getTerrainPoint(), placementMode,
-			p_modelEditor.getModels(), p_cameraManager, p_textEntityManager, p_inputHandler, p_timer.getDeltaTime());
-		p_cameraManager.update(p_windowManager, p_timer.getDeltaTime());
-		p_textEntityManager.update(p_timer.getDeltaTime());
+		_fe3d.WE3D_UPDATE_EDITOR(_timer.getDeltaTime());
+		_mousePicker.update(_windowManager.getMousePos(), _terrainEntityManager);
+		_skyEntityManager.update(_timer.getDeltaTime());
+		_waterEntityManager.update(_timer.getDeltaTime());
+		_gameEntityManager.update(_timer.getDeltaTime());
+		_guiEntityManager.update(_timer.getDeltaTime());
+		_shadowManager.update(_shaderBus);
+		_worldEditor.update(_windowManager.getMousePos(), _mousePicker.getTerrainPoint(), placementMode,
+			_modelEditor.getModels(), _cameraManager, _textEntityManager, _inputHandler, _timer.getDeltaTime());
+		_cameraManager.update(_windowManager, _timer.getDeltaTime());
+		_textEntityManager.update(_timer.getDeltaTime());
 	}
 	else
 	{
 		Logger::getInst().throwInfo("No terrain selected for editing!");
 	}
-	p_timer.stop();
+	_timer.stop();
 }
 
-void CoreEngine::p_updatePerformanceProfiler()
+void CoreEngine::_updatePerformanceProfiler()
 {
 	// Update statistics GUI
-	p_timer.start("stats");
-	if (p_showStats)
+	_timer.start("stats");
+	if (_showStats)
 	{
 		static int steps = 0;
 		const float x = 0.6f;
@@ -309,9 +284,9 @@ void CoreEngine::p_updatePerformanceProfiler()
 		if (steps == 50) // Update interval
 		{
 			// FPS
-			auto fps = 1000.0f / p_timer.getDeltaTime();
+			auto fps = 1000.0f / _timer.getDeltaTime();
 			auto fpsText = "FPS: " + std::to_string(fps);
-			p_textEntityManager.addTextEntity("fps", fpsText, "font", vec3(1.0f), vec2(x, y), 0.0f, vec2(width * fpsText.size(), height), true, true, false);
+			_textEntityManager.addTextEntity("fps", fpsText, "font", vec3(1.0f), vec2(x, y), 0.0f, vec2(width * fpsText.size(), height), true, true, false);
 			steps = 0;
 
 			// Performance profiling
@@ -327,24 +302,24 @@ void CoreEngine::p_updatePerformanceProfiler()
 			{
 				auto nameText = elements[i];
 				nameText[0] = toupper(nameText[0]);
-				auto percentage = std::to_string((p_timer.getDeltaPart(elements[i]) / p_timer.getDeltaTime()) * 100.0f);
+				auto percentage = std::to_string((_timer.getDeltaPart(elements[i]) / _timer.getDeltaTime()) * 100.0f);
 				auto pcText = nameText + ": " + percentage + "%";
-				p_textEntityManager.addTextEntity(elements[i], pcText, "font", vec3(1.0f), vec2(x, y - height - (height * float(int(i)))), 0.0f, vec2(width * pcText.size(), height), true, true, false);
+				_textEntityManager.addTextEntity(elements[i], pcText, "font", vec3(1.0f), vec2(x, y - height - (height * float(int(i)))), 0.0f, vec2(width * pcText.size(), height), true, true, false);
 			}
 
 			// Other percentage
 			float percentage = 0.0f;
-			percentage += (p_timer.getDeltaPart("entityBus") / p_timer.getDeltaTime()) * 100.0f;
-			percentage += (p_timer.getDeltaPart("aaBind") / p_timer.getDeltaTime()) * 100.0f;
-			percentage += (p_timer.getDeltaPart("aaUnbind") / p_timer.getDeltaTime()) * 100.0f;
-			percentage += (p_timer.getDeltaPart("stats") / p_timer.getDeltaTime()) * 100.0f;
+			percentage += (_timer.getDeltaPart("entityBus") / _timer.getDeltaTime()) * 100.0f;
+			percentage += (_timer.getDeltaPart("aaBind") / _timer.getDeltaTime()) * 100.0f;
+			percentage += (_timer.getDeltaPart("aaUnbind") / _timer.getDeltaTime()) * 100.0f;
+			percentage += (_timer.getDeltaPart("stats") / _timer.getDeltaTime()) * 100.0f;
 			auto pcText = "Misc: " + std::to_string(percentage) + "%";
-			p_textEntityManager.addTextEntity("misc", pcText, "font", vec3(1.0f), vec2(x, y - height - (height * float(int(elements.size())))), 0.0f, vec2(width * pcText.size(), height), true, true, false);
+			_textEntityManager.addTextEntity("misc", pcText, "font", vec3(1.0f), vec2(x, y - height - (height * float(int(elements.size())))), 0.0f, vec2(width * pcText.size(), height), true, true, false);
 		}
 		else
 		{
 			steps++;
 		}
 	}
-	p_timer.stop();
+	_timer.stop();
 }

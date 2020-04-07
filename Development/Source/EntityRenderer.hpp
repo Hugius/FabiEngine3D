@@ -19,7 +19,7 @@ public:
 	virtual void unbind() = 0;
 
 protected:
-	OpenGLShader p_shader;
+	OpenGLShader _shader;
 
-	ShaderBus& p_shaderBus;
+	ShaderBus& _shaderBus;
 };

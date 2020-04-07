@@ -27,12 +27,12 @@ public:
 	std::vector<AudioMusic>& getMusic();
 
 private:
-	void p_checkValidAdd(const string& ID);
+	void _checkValidAdd(const string& ID);
 
-	std::vector<AudioChunk> p_chunks;
-	std::vector<AudioMusic> p_musicList;
+	std::vector<AudioChunk> _chunks;
+	std::vector<AudioMusic> _musicList;
 
-	AudioLoader& p_audioLoader;
+	AudioLoader& _audioLoader;
 
-	int p_findIndex(const string& ID);
+	int _findIndex(const string& ID);
 };

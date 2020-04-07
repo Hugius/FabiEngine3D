@@ -1,111 +1,111 @@
 #include <GLM/gtc/matrix_transform.hpp>
 
-#include <WE3D/GuiEntity.hpp>
+#include "GuiEntity.hpp"
 
 void GuiEntity::updateModelMatrix()
 {
-	p_modelMatrix = mat4(1.0f);
-	p_modelMatrix = glm::translate(p_modelMatrix, vec3(p_translation, 0.0f));
-	p_modelMatrix = glm::rotate(p_modelMatrix, glm::radians(p_rotation), vec3(0.0f, 0.0f, 1.0f));
-	p_modelMatrix = glm::scale(p_modelMatrix, vec3(p_scaling, 1.0f));
+	_modelMatrix = mat4(1.0f);
+	_modelMatrix = glm::translate(_modelMatrix, vec3(_translation, 0.0f));
+	_modelMatrix = glm::rotate(_modelMatrix, glm::radians(_rotation), vec3(0.0f, 0.0f, 1.0f));
+	_modelMatrix = glm::scale(_modelMatrix, vec3(_scaling, 1.0f));
 }
 
 void GuiEntity::setDiffuseMap(GLuint diffuseMap)
 {
-	p_diffuseMap = diffuseMap;
+	_diffuseMap = diffuseMap;
 }
 
 void GuiEntity::setColor(vec3 color)
 {
-	p_color = color;
+	_color = color;
 }
 
 void GuiEntity::setMirroredHorizontally(bool val)
 {
-	p_mirroredHorizontally = val;
+	_mirroredHorizontally = val;
 }
 
 void GuiEntity::setMirroredVertically(bool val)
 {
-	p_mirroredVertically = val;
+	_mirroredVertically = val;
 }
 
 void GuiEntity::setTranslation(vec2 val)
 {
-	p_translation = val;
+	_translation = val;
 }
 
 void GuiEntity::setRotation(float val)
 {
-	p_rotation = val;
+	_rotation = val;
 }
 
 void GuiEntity::setScaling(vec2 val)
 {
-	p_scaling = val;
+	_scaling = val;
 }
 
 void GuiEntity::translate(vec2 val, float delta)
 {
-	p_translation += val * delta;
+	_translation += val * delta;
 }
 
 void GuiEntity::rotate(float val, float delta)
 {
-	p_rotation += val * delta;
+	_rotation += val * delta;
 }
 
 void GuiEntity::scale(vec2 val, float delta)
 {
-	p_scaling += val * delta;
+	_scaling += val * delta;
 }
 
 const GLuint GuiEntity::getDiffuseMap() const
 {
-	return p_diffuseMap;
+	return _diffuseMap;
 }
 
 const vec3 GuiEntity::getColor() const
 {
-	return p_color;
+	return _color;
 }
 
 const bool GuiEntity::isMirroredHorizonally() const
 {
-	return p_mirroredHorizontally;
+	return _mirroredHorizontally;
 }
 
 const bool GuiEntity::isMirroredVertically() const
 {
-	return p_mirroredVertically;
+	return _mirroredVertically;
 }
 
 const mat4 GuiEntity::getModelMatrix() const
 {
-	return p_modelMatrix;
+	return _modelMatrix;
 }
 
 const vec2 GuiEntity::getTranslation() const
 {
-	return p_translation;
+	return _translation;
 }
 
 const float GuiEntity::getRotation() const
 {
-	return p_rotation;
+	return _rotation;
 }
 
 const vec2 GuiEntity::getScaling() const
 {
-	return p_scaling;
+	return _scaling;
 }
 
 void GuiEntity::setDepthEntity(bool val)
 {
-	p_isDepthEntity = val;
+	_isDepthEntity = val;
 }
 
 const bool GuiEntity::isDepthEntity() const
 {
-	return p_isDepthEntity;
+	return _isDepthEntity;
 }

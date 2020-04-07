@@ -2,14 +2,14 @@
 #include <iostream>
 #include <sstream>
 
-#include <WE3D/Tools.hpp>
-#include <WE3D/Logger.hpp>
+#include "Tools.hpp"
+#include "Logger.hpp"
 
 #define PI      3.14159265359f
 #define DEG2RAD 0.01745329251994329576923690768489f
 
 Tools::Tools() :
-	p_generator(std::random_device{}())
+	_generator(std::random_device{}())
 {
 	srand((unsigned int)time(NULL));
 }
@@ -32,13 +32,13 @@ void Tools::printDouble(double val)
 int Tools::getRandomInt(int min, int max) 
 {
 	std::uniform_int_distribution<> dist(min, max);
-	return dist(p_generator);
+	return dist(_generator);
 }
 
 float Tools::getRandomFloat(float min, float max)
 {
-	//std::uniforp_real_distribution<> dist(static_cast<float>(min), static_cast<float>(max));
-	//return static_cast<float>(dist(p_generator));
+	//std::unifor_real_distribution<> dist(static_cast<float>(min), static_cast<float>(max));
+	//return static_cast<float>(dist(_generator));
 
 	float randomNumber = min + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (max - min)));
 	return randomNumber;

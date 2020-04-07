@@ -1,17 +1,17 @@
-#include <WE3D/BillboardEntityRenderer.hpp>
-#include <WE3D/Configuration.hpp>
+#include "BillboardEntityRenderer.hpp"
+#include "Configuration.hpp"
 
 void BillboardEntityRenderer::bind()
 {
 	// Bind shader
-	p_shader.bind();
+	_shader.bind();
 
 	// Vertex shader uniforms
-	p_shader.uploadUniform("u_viewMatrix",              p_shaderBus.getViewMatrix());
-	p_shader.uploadUniform("u_projMatrix",              p_shaderBus.getProjectionMatrix());
+	_shader.uploadUniform("u_viewMatrix",              _shaderBus.getViewMatrix());
+	_shader.uploadUniform("u_projMatrix",              _shaderBus.getProjectionMatrix());
 
 	// Texture uniforms
-	p_shader.uploadUniform("u_sampler_diffuseMap", 0);
+	_shader.uploadUniform("u_sampler_diffuseMap", 0);
 
 	// Depth testing
 	glEnable(GL_DEPTH_TEST);
@@ -20,7 +20,7 @@ void BillboardEntityRenderer::bind()
 
 void BillboardEntityRenderer::unbind()
 {
-	p_shader.unbind();
+	_shader.unbind();
 	glDisable(GL_DEPTH_TEST);
 }
 
@@ -40,11 +40,11 @@ void BillboardEntityRenderer::render(const BillboardEntity * entity)
 			}
 
 			// Shader uniforms
-			p_shader.uploadUniform("u_modelMatrix",   entity->getModelMatrix());
-			p_shader.uploadUniform("u_isAlphaObject", entity->isTransparent());
-			p_shader.uploadUniform("u_color",         entity->getColor());
-			p_shader.uploadUniform("u_uvAdder",       uvAdder);
-			p_shader.uploadUniform("u_uvMultiplier",  uvMultiplier);
+			_shader.uploadUniform("u_modelMatrix",   entity->getModelMatrix());
+			_shader.uploadUniform("u_isAlphaObject", entity->isTransparent());
+			_shader.uploadUniform("u_color",         entity->getColor());
+			_shader.uploadUniform("u_uvAdder",       uvAdder);
+			_shader.uploadUniform("u_uvMultiplier",  uvMultiplier);
 
 			// Texture
 			glActiveTexture(GL_TEXTURE0);

@@ -42,20 +42,20 @@ public:
 	const bool isBlendMapped()    const;
 
 private:
-	vector<float> p_pixelColors;
+	vector<float> _pixelColors;
 
-	GLuint p_diffuseMap = 0;
-	GLuint p_blendMap = 0;
-	GLuint p_blendMapR = 0;
-	GLuint p_blendMapG = 0;
-	GLuint p_blendMapB = 0;
+	GLuint _diffuseMap = 0;
+	GLuint _blendMap = 0;
+	GLuint _blendMapR = 0;
+	GLuint _blendMapG = 0;
+	GLuint _blendMapB = 0;
 
-	float p_blendRepeat  = 1.0f;
-	float p_blendRepeatR = 1.0f;
-	float p_blendRepeatG = 1.0f;
-	float p_blendRepeatB = 1.0f;
-	float p_height       = 0.0f;
-	float p_size         = 0.0f;
+	float _blendRepeat  = 1.0f;
+	float _blendRepeatR = 1.0f;
+	float _blendRepeatG = 1.0f;
+	float _blendRepeatB = 1.0f;
+	float _height       = 0.0f;
+	float _size         = 0.0f;
 
-	bool p_blendMapped = false;
+	bool _blendMapped = false;
 };

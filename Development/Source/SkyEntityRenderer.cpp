@@ -1,15 +1,15 @@
-#include <WE3D/SkyEntityRenderer.hpp>
+#include "SkyEntityRenderer.hpp"
 
 void SkyEntityRenderer::bind()
 {
 	// Bind shader
-	p_shader.bind();
+	_shader.bind();
 
 	// Global shader uniforms
-	p_shader.uploadUniform("u_viewMatrix", mat4(mat3(p_shaderBus.getViewMatrix())));
-	p_shader.uploadUniform("u_projectionMatrix",     p_shaderBus.getProjectionMatrix());
-	p_shader.uploadUniform("u_rotationMatrix",       p_shaderBus.getSkyRotationMatrix());
-	p_shader.uploadUniform("u_brightness",           p_shaderBus.getSkyBrightness());
+	_shader.uploadUniform("u_viewMatrix", mat4(mat3(_shaderBus.getViewMatrix())));
+	_shader.uploadUniform("u_projectionMatrix",     _shaderBus.getProjectionMatrix());
+	_shader.uploadUniform("u_rotationMatrix",       _shaderBus.getSkyRotationMatrix());
+	_shader.uploadUniform("u_brightness",           _shaderBus.getSkyBrightness());
 
 	// Depth testing
 	glEnable(GL_DEPTH_TEST);
@@ -19,7 +19,7 @@ void SkyEntityRenderer::bind()
 void SkyEntityRenderer::unbind()
 {
 	glDisable(GL_DEPTH_TEST);
-	p_shader.unbind();
+	_shader.unbind();
 }
 
 void SkyEntityRenderer::render(const SkyEntity * entity)
@@ -29,15 +29,15 @@ void SkyEntityRenderer::render(const SkyEntity * entity)
 		if (entity->isEnabled())
 		{
 			// Uniforms
-			p_shader.uploadUniform("u_mixValue", entity->getMixValue());
+			_shader.uploadUniform("u_mixValue", entity->getMixValue());
 
 			// Day texture
-			p_shader.uploadUniform("u_sampler_day", 0);
+			_shader.uploadUniform("u_sampler_day", 0);
 			glActiveTexture(GL_TEXTURE0);
 			glBindTexture(GL_TEXTURE_CUBE_MAP, entity->getDayCubeMap());
 
 			// Night texture
-			p_shader.uploadUniform("u_sampler_night", 1);
+			_shader.uploadUniform("u_sampler_night", 1);
 			glActiveTexture(GL_TEXTURE1);
 			glBindTexture(GL_TEXTURE_CUBE_MAP, entity->getNightCubeMap());
 

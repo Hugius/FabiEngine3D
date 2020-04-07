@@ -1,4 +1,4 @@
-#include <WE3D/Configuration.hpp>
+#include "Configuration.hpp"
 
 Config::Config()
 {
@@ -12,22 +12,22 @@ Config::Config()
 	}
 
 	// Store config file content
-	p_processOption(file, window_width);
-	p_processOption(file, window_height);
-	p_processOption(file, window_fullscreen);
-	p_processOption(file, window_borderless);
-	p_processOption(file, window_vsync);
-	p_processOption(file, window_dpi_scale);
-	p_processOption(file, msaa_quality);
-	p_processOption(file, shadow_quality);
-	p_processOption(file, water_quality);
-	p_processOption(file, bloom_quality);
-	p_processOption(file, max_lights);
-	p_processOption(file, audio_channels);
-	p_processOption(file, ssr_quality);
+	_processOption(file, window_width);
+	_processOption(file, window_height);
+	_processOption(file, window_fullscreen);
+	_processOption(file, window_borderless);
+	_processOption(file, window_vsync);
+	_processOption(file, window_dpi_scale);
+	_processOption(file, msaa_quality);
+	_processOption(file, shadow_quality);
+	_processOption(file, water_quality);
+	_processOption(file, bloom_quality);
+	_processOption(file, max_lights);
+	_processOption(file, audio_channels);
+	_processOption(file, ssr_quality);
 }
 
-void Config::p_processOption(std::ifstream& file, bool& option)
+void Config::_processOption(std::ifstream& file, bool& option)
 {
 	// Loading
 	string line;
@@ -52,7 +52,7 @@ void Config::p_processOption(std::ifstream& file, bool& option)
 	}
 }
 
-void Config::p_processOption(std::ifstream& file, int& option)
+void Config::_processOption(std::ifstream& file, int& option)
 {
 	// Loading
 	string line;
@@ -62,7 +62,7 @@ void Config::p_processOption(std::ifstream& file, int& option)
 	iss >> temp >> temp >> option;
 }
 
-void Config::p_processOption(std::ifstream& file, float& option)
+void Config::_processOption(std::ifstream& file, float& option)
 {
 	// Loading
 	string line;

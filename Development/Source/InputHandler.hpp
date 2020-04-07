@@ -5,7 +5,7 @@
 
 using std::vector;
 
-#include <WE3D/InputTypes.hpp>
+#include "InputTypes.hpp"
 #include "Logger.hpp"
 #include "Timer.hpp"
 
@@ -28,30 +28,30 @@ public:
 private:
 	void f_checkInput();
 
-	Timer& p_timer;
+	Timer& _timer;
 
 	// Keys
-	vector<Input> p_keysDown;
-	vector<Input> p_keysPressed;
-	vector<Input> p_keysPressed_mayNotPress;
-	vector<Input> p_keysToggled;
-	vector<Input> p_keysToggled_mayNotPress;
+	vector<Input> _keysDown;
+	vector<Input> _keysPressed;
+	vector<Input> _keysPressed_mayNotPress;
+	vector<Input> _keysToggled;
+	vector<Input> _keysToggled_mayNotPress;
 	
-	bool p_keysEnabled = true;
+	bool _keysEnabled = true;
 
 	// Mouse buttons
-	vector<Input> p_mouseDown;
-	vector<Input> p_mousePressed;
-	vector<Input> p_mousePressed_mayNotPress;
-	vector<Input> p_mouseToggled;
-	vector<Input> p_mouseToggled_mayNotPress;
+	vector<Input> _mouseDown;
+	vector<Input> _mousePressed;
+	vector<Input> _mousePressed_mayNotPress;
+	vector<Input> _mouseToggled;
+	vector<Input> _mouseToggled_mayNotPress;
 
 	// Mouse scrolling wheel
-	int p_mouseWheelX = 0;
-	int p_mouseWheelY = 0;
+	int _mouseWheelX = 0;
+	int _mouseWheelY = 0;
 
 	// Extra functions
-	inline int p_getVectorIndex(vector<Input>& list, Input element)
+	inline int _getVectorIndex(vector<Input>& list, Input element)
 	{
 		auto it = std::find(list.begin(), list.end(), element);
 
@@ -65,7 +65,7 @@ private:
 		}
 	}
 
-	inline bool p_isInVector(vector<Input>& list, Input element)
+	inline bool _isInVector(vector<Input>& list, Input element)
 	{
 		return std::find(list.begin(), list.end(), element) != list.end();
 	}

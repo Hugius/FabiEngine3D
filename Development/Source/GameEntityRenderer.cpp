@@ -1,51 +1,51 @@
-#include <WE3D/GameEntityRenderer.hpp>
-#include <WE3D/Configuration.hpp>
+#include "GameEntityRenderer.hpp"
+#include "Configuration.hpp"
 
 void GameEntityRenderer::bind()
 {
 	// Define clipping plane for SSR (Screen Space Reflections)
-	float offset = 1.0f * float(int(p_shaderBus.isWaterEffectsEnabled()));
-	vec4 clippingPlane = vec4(0.0f, 1.0f, 0.0f, -(p_shaderBus.getSSRHeight()) + offset);
+	float offset = 1.0f * float(int(_shaderBus.isWaterEffectsEnabled()));
+	vec4 clippingPlane = vec4(0.0f, 1.0f, 0.0f, -(_shaderBus.getSSRHeight()) + offset);
 
 	// Bind shader
-	p_shader.bind();
+	_shader.bind();
 
 	// Vertex shader uniforms
-	p_shader.uploadUniform("u_viewMatrix",        p_shaderBus.getViewMatrix());
-	p_shader.uploadUniform("u_projMatrix",        p_shaderBus.getProjectionMatrix());
-	p_shader.uploadUniform("u_skyRotationMatrix", p_shaderBus.getSkyRotationMatrix());
-	p_shader.uploadUniform("u_shadowMatrix",      p_shaderBus.getShadowMatrix());
-	p_shader.uploadUniform("u_clippingPlane",     clippingPlane);
+	_shader.uploadUniform("u_viewMatrix",        _shaderBus.getViewMatrix());
+	_shader.uploadUniform("u_projMatrix",        _shaderBus.getProjectionMatrix());
+	_shader.uploadUniform("u_skyRotationMatrix", _shaderBus.getSkyRotationMatrix());
+	_shader.uploadUniform("u_shadowMatrix",      _shaderBus.getShadowMatrix());
+	_shader.uploadUniform("u_clippingPlane",     clippingPlane);
 	
 	// Fragment shader uniforms
-	p_shader.uploadUniform("u_cameraPos",                p_shaderBus.getCameraPos());
-	p_shader.uploadUniform("u_dirLightPos",              p_shaderBus.getDirLightPos());
-	p_shader.uploadUniform("u_ambientStrength",          p_shaderBus.getAmbLightStrength());
-	p_shader.uploadUniform("u_dirLightStrength",         p_shaderBus.getDirLightStrength());
-	p_shader.uploadUniform("u_specLightStrength",        p_shaderBus.getSpecLightStrength());
-	p_shader.uploadUniform("u_fogMinDistance",           p_shaderBus.getFogMinDistance());
-	p_shader.uploadUniform("u_ambientLightingEnabled",   p_shaderBus.isAmbLightingEnabled());
-	p_shader.uploadUniform("u_dirLightingEnabled",       p_shaderBus.isDirLightingEnabled());
-	p_shader.uploadUniform("u_specLightingEnabled",      p_shaderBus.isSpecLightingEnabled());
-	p_shader.uploadUniform("u_pointLightingEnabled",     p_shaderBus.isPointLightingEnabled());
-	p_shader.uploadUniform("u_lightMappingEnabled",      p_shaderBus.isLightMappingEnabled());
-	p_shader.uploadUniform("u_skyReflectionsEnabled",    p_shaderBus.isSkyReflectionsEnabled());
-	p_shader.uploadUniform("u_screenReflectionsEnabled", p_shaderBus.isSSREnabled());
-	p_shader.uploadUniform("u_fogEnabled",               p_shaderBus.isFogEnabled());
-	p_shader.uploadUniform("u_shadowsEnabled",           p_shaderBus.isShadowsEnabled());
-	p_shader.uploadUniform("u_skyReflectionMixValue",    p_shaderBus.getSkyReflectionMixValue());
-	p_shader.uploadUniform("u_skyReflectionFactor",      p_shaderBus.getSkyReflectionFactor());
-	p_shader.uploadUniform("u_screenReflectionFactor",   p_shaderBus.getSSRFactor());
-	p_shader.uploadUniform("u_shadowMapSize",            Config::getInst().getShadowQuality());
+	_shader.uploadUniform("u_cameraPos",                _shaderBus.getCameraPos());
+	_shader.uploadUniform("u_dirLightPos",              _shaderBus.getDirLightPos());
+	_shader.uploadUniform("u_ambientStrength",          _shaderBus.getAmbLightStrength());
+	_shader.uploadUniform("u_dirLightStrength",         _shaderBus.getDirLightStrength());
+	_shader.uploadUniform("u_specLightStrength",        _shaderBus.getSpecLightStrength());
+	_shader.uploadUniform("u_fogMinDistance",           _shaderBus.getFogMinDistance());
+	_shader.uploadUniform("u_ambientLightingEnabled",   _shaderBus.isAmbLightingEnabled());
+	_shader.uploadUniform("u_dirLightingEnabled",       _shaderBus.isDirLightingEnabled());
+	_shader.uploadUniform("u_specLightingEnabled",      _shaderBus.isSpecLightingEnabled());
+	_shader.uploadUniform("u_pointLightingEnabled",     _shaderBus.isPointLightingEnabled());
+	_shader.uploadUniform("u_lightMappingEnabled",      _shaderBus.isLightMappingEnabled());
+	_shader.uploadUniform("u_skyReflectionsEnabled",    _shaderBus.isSkyReflectionsEnabled());
+	_shader.uploadUniform("u_screenReflectionsEnabled", _shaderBus.isSSREnabled());
+	_shader.uploadUniform("u_fogEnabled",               _shaderBus.isFogEnabled());
+	_shader.uploadUniform("u_shadowsEnabled",           _shaderBus.isShadowsEnabled());
+	_shader.uploadUniform("u_skyReflectionMixValue",    _shaderBus.getSkyReflectionMixValue());
+	_shader.uploadUniform("u_skyReflectionFactor",      _shaderBus.getSkyReflectionFactor());
+	_shader.uploadUniform("u_screenReflectionFactor",   _shaderBus.getSSRFactor());
+	_shader.uploadUniform("u_shadowMapSize",            Config::getInst().getShadowQuality());
 
 	// Texture uniforms
-	p_shader.uploadUniform("u_sampler_diffuseMap", 0);
-	p_shader.uploadUniform("u_sampler_lightMap", 1);
-	p_shader.uploadUniform("u_sampler_skyReflectionMap", 2);
-	p_shader.uploadUniform("u_sampler_screenReflectionMap", 3);
-	p_shader.uploadUniform("u_sampler_shadowMap", 4);
-	p_shader.uploadUniform("u_sampler_dayCubeMap", 5);
-	p_shader.uploadUniform("u_sampler_nightCubeMap", 6);
+	_shader.uploadUniform("u_sampler_diffuseMap", 0);
+	_shader.uploadUniform("u_sampler_lightMap", 1);
+	_shader.uploadUniform("u_sampler_skyReflectionMap", 2);
+	_shader.uploadUniform("u_sampler_screenReflectionMap", 3);
+	_shader.uploadUniform("u_sampler_shadowMap", 4);
+	_shader.uploadUniform("u_sampler_dayCubeMap", 5);
+	_shader.uploadUniform("u_sampler_nightCubeMap", 6);
 
 	// Depth testing
 	glEnable(GL_DEPTH_TEST);
@@ -56,13 +56,13 @@ void GameEntityRenderer::bind()
 
 	// Texture binding
 	glActiveTexture(GL_TEXTURE3);
-	glBindTexture(GL_TEXTURE_2D, p_shaderBus.getSSRMap());
+	glBindTexture(GL_TEXTURE_2D, _shaderBus.getSSRMap());
 	glActiveTexture(GL_TEXTURE4);
-	glBindTexture(GL_TEXTURE_2D, p_shaderBus.getShadowMap());
+	glBindTexture(GL_TEXTURE_2D, _shaderBus.getShadowMap());
 	glActiveTexture(GL_TEXTURE5);
-	glBindTexture(GL_TEXTURE_CUBE_MAP, p_shaderBus.getDayReflectionCubeMap());
+	glBindTexture(GL_TEXTURE_CUBE_MAP, _shaderBus.getDayReflectionCubeMap());
 	glActiveTexture(GL_TEXTURE6);
-	glBindTexture(GL_TEXTURE_CUBE_MAP, p_shaderBus.getNightReflectionCubeMap());
+	glBindTexture(GL_TEXTURE_CUBE_MAP, _shaderBus.getNightReflectionCubeMap());
 }
 
 void GameEntityRenderer::unbind()
@@ -71,8 +71,8 @@ void GameEntityRenderer::unbind()
 	glDisable(GL_CLIP_DISTANCE1);
 	glDisable(GL_DEPTH_TEST);
 
-	p_shader.unbind();
-	p_lightCounter = 0;
+	_shader.unbind();
+	_lightCounter = 0;
 }
 
 void GameEntityRenderer::placeLightEntity(const LightEntity * light)
@@ -81,10 +81,10 @@ void GameEntityRenderer::placeLightEntity(const LightEntity * light)
 	{
 		if (light->isEnabled())
 		{
-			p_shader.uploadUniform("u_pointLightsPos[" + std::to_string(p_lightCounter) + "]", light->getPosition());
-			p_shader.uploadUniform("u_pointLightsColor[" + std::to_string(p_lightCounter) + "]", light->getColor());
-			p_shader.uploadUniform("u_pointLightsStrength[" + std::to_string(p_lightCounter) + "]", light->getStrength());
-			p_lightCounter++;
+			_shader.uploadUniform("u_pointLightsPos[" + std::to_string(_lightCounter) + "]", light->getPosition());
+			_shader.uploadUniform("u_pointLightsColor[" + std::to_string(_lightCounter) + "]", light->getColor());
+			_shader.uploadUniform("u_pointLightsStrength[" + std::to_string(_lightCounter) + "]", light->getStrength());
+			_lightCounter++;
 		}
 	}
 }
@@ -102,17 +102,17 @@ void GameEntityRenderer::render(const GameEntity * entity)
 			}
 
 			// Shader uniforms
-			p_shader.uploadUniform("u_modelMatrix",        entity->getModelMatrix());
-			p_shader.uploadUniform("u_color",              entity->getColor());
-			p_shader.uploadUniform("u_isTransparent",      entity->isTransparent());
-			p_shader.uploadUniform("u_isLightmapped",      entity->isLightMapped());
-			p_shader.uploadUniform("u_isSkyReflective",    entity->isSkyReflective());
-			p_shader.uploadUniform("u_isScreenReflective", entity->isScreenReflective());
-			p_shader.uploadUniform("u_isSpecular",         entity->isSpecular());
-			p_shader.uploadUniform("u_maxY",               entity->getMaxY());
-			p_shader.uploadUniform("u_customAlpha",        entity->getAlpha());
-			p_shader.uploadUniform("u_isShadowed",         entity->isShadowed());
-			p_shader.uploadUniform("u_uvRepeat",		   entity->getUvRepeat());
+			_shader.uploadUniform("u_modelMatrix",        entity->getModelMatrix());
+			_shader.uploadUniform("u_color",              entity->getColor());
+			_shader.uploadUniform("u_isTransparent",      entity->isTransparent());
+			_shader.uploadUniform("u_isLightmapped",      entity->isLightMapped());
+			_shader.uploadUniform("u_isSkyReflective",    entity->isSkyReflective());
+			_shader.uploadUniform("u_isScreenReflective", entity->isScreenReflective());
+			_shader.uploadUniform("u_isSpecular",         entity->isSpecular());
+			_shader.uploadUniform("u_maxY",               entity->getMaxY());
+			_shader.uploadUniform("u_customAlpha",        entity->getAlpha());
+			_shader.uploadUniform("u_isShadowed",         entity->isShadowed());
+			_shader.uploadUniform("u_uvRepeat",		   entity->getUvRepeat());
 
 			// Bind
 			int index = 0;
@@ -142,12 +142,12 @@ void GameEntityRenderer::render(const GameEntity * entity)
 				// Render
 				if (buffer->isInstanced())
 				{
-					p_shader.uploadUniform("u_isInstanced", true);
+					_shader.uploadUniform("u_isInstanced", true);
 					glDrawArraysInstanced(GL_TRIANGLES, 0, buffer->getVertexCount(), buffer->getOffsetCount());
 				}
 				else
 				{
-					p_shader.uploadUniform("u_isInstanced", false);
+					_shader.uploadUniform("u_isInstanced", false);
 					glDrawArrays(GL_TRIANGLES, 0, buffer->getVertexCount());
 				}
 

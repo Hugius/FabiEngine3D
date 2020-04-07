@@ -1,13 +1,13 @@
-#include <WE3D/TextureLoader.hpp>
-#include <WE3D/Logger.hpp>
+#include "TextureLoader.hpp"
+#include "Logger.hpp"
 
 GLuint TextureLoader::getText(const string & text, const string & fontPath)
 {
-	auto it = p_textMap.find(text);
-	if (it == p_textMap.end()) // Not in map (yet)
+	auto it = _textMap.find(text);
+	if (it == _textMap.end()) // Not in map (yet)
 	{
-		GLuint tempTxt = p_loadText(text, fontPath);
-		p_textMap.insert(std::make_pair(text, tempTxt));
+		GLuint tempTxt = _loadText(text, fontPath);
+		_textMap.insert(std::make_pair(text, tempTxt));
 		return tempTxt; // Use new texture
 	}
 
@@ -16,11 +16,11 @@ GLuint TextureLoader::getText(const string & text, const string & fontPath)
 
 GLuint TextureLoader::getTexture(const string &filePath, bool mipmap, bool aniso, bool repeat)
 {
-	auto it = p_textureMap.find(filePath);
-	if (it == p_textureMap.end()) // Not in map (yet)
+	auto it = _textureMap.find(filePath);
+	if (it == _textureMap.end()) // Not in map (yet)
 	{ 
-		GLuint tempTxt = p_loadTexture(filePath, mipmap, aniso, repeat);
-		p_textureMap.insert(std::make_pair(filePath, tempTxt));
+		GLuint tempTxt = _loadTexture(filePath, mipmap, aniso, repeat);
+		_textureMap.insert(std::make_pair(filePath, tempTxt));
 		return tempTxt; // Use new texture
 	}
 
@@ -29,11 +29,11 @@ GLuint TextureLoader::getTexture(const string &filePath, bool mipmap, bool aniso
 
 GLuint TextureLoader::getCubeMap(const string & filePath)
 {
-	auto it = p_textureMap.find(filePath);
-	if (it == p_textureMap.end()) // Not in map (yet)
+	auto it = _textureMap.find(filePath);
+	if (it == _textureMap.end()) // Not in map (yet)
 	{
-		GLuint tempTxt = p_loadCubemap(filePath);
-		p_textureMap.insert(std::make_pair(filePath, tempTxt));
+		GLuint tempTxt = _loadCubemap(filePath);
+		_textureMap.insert(std::make_pair(filePath, tempTxt));
 		return tempTxt; // Use new texture
 	}
 
@@ -42,11 +42,11 @@ GLuint TextureLoader::getCubeMap(const string & filePath)
 
 vector<float> & TextureLoader::getHeightMap(const string &filePath, int size)
 {
-	cuzRef : auto it = p_pixelMap.find(filePath);
-	if (it == p_pixelMap.end()) // Not in map (yet)
+	cuzRef : auto it = _pixelMap.find(filePath);
+	if (it == _pixelMap.end()) // Not in map (yet)
 	{
-		auto tempPixels = p_loadHeightmap(filePath, size);
-		p_pixelMap.insert(std::make_pair(filePath, tempPixels));
+		auto tempPixels = _loadHeightmap(filePath, size);
+		_pixelMap.insert(std::make_pair(filePath, tempPixels));
 		goto cuzRef;
 	}
 

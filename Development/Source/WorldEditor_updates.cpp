@@ -1,7 +1,7 @@
-#include <WE3D/WorldEditor.hpp>
-#include <WE3D/InputHandler.hpp>
-#include <WE3D/Configuration.hpp>
-#include <WE3D/ShaderBus.hpp>
+#include "WorldEditor.hpp"
+#include "InputHandler.hpp"
+#include "Configuration.hpp"
+#include "ShaderBus.hpp"
 
 void WorldEditor::update
 (
@@ -15,27 +15,27 @@ void WorldEditor::update
 		// Place new entity
 		if (input.getMousePressed(Input::MOUSE_BUTTON_LEFT))
 		{
-			p_modelAmounts[p_modelIndex]++;
-			auto * newModel = models[p_modelIndex];
-			p_game.addGameEntity
+			_modelAmounts[_modelIndex]++;
+			auto * newModel = models[_modelIndex];
+			_game.addGameEntity
 			(
-				p_getSelectedID(), newModel->getModelName(),
-				p_game.getEntity("previewEntity")->getTranslation(), p_game.getEntity("previewEntity")->getRotation(),
-				p_game.getEntity("previewEntity")->getScaling(),
+				_getSelectedID(), newModel->getModelName(),
+				_game.getEntity("previewEntity")->getTranslation(), _game.getEntity("previewEntity")->getRotation(),
+				_game.getEntity("previewEntity")->getScaling(),
 				newModel->isTransparent(), newModel->isFaceCulled(),
 				newModel->isLightMapped(), newModel->isSkyReflective(), newModel->isSpecular()
 			);
 		}
 
 		// Update preview entity
-		if (p_game.isExisting("previewEntity"))
+		if (_game.isExisting("previewEntity"))
 		{
-			p_game.getEntity("previewEntity")->setTranslation(terrainPoint);
+			_game.getEntity("previewEntity")->setTranslation(terrainPoint);
 		}
 		else // Create new preview entity
 		{
-			GameEntity * model = models[p_modelIndex];
-			p_game.addGameEntity
+			GameEntity * model = models[_modelIndex];
+			_game.addGameEntity
 			(
 				"previewEntity", model->getModelName(),
 				vec3(0.0f), model->getRotation(), model->getScaling(),
@@ -47,55 +47,55 @@ void WorldEditor::update
 	else
 	{
 		// Delete example entity if existing
-		if (p_game.isExisting("previewEntity"))
+		if (_game.isExisting("previewEntity"))
 		{
-			p_game.deleteEntity("previewEntity");
+			_game.deleteEntity("previewEntity");
 		}
 
 		// Changing transformation type to translation
 		if (input.getKeyPressed(Input::KEY_T))
 		{
-			p_transformationType = TransformationType::T;
+			_transformationType = TransformationType::T;
 		}
 		
 		// Changing transformation type to rotation
 		if (input.getKeyPressed(Input::KEY_R))
 		{
-			p_transformationType = TransformationType::R;
+			_transformationType = TransformationType::R;
 		}
 
 		// Changing transformation type to scaling
 		if (input.getKeyPressed(Input::KEY_L))
 		{
-			p_transformationType = TransformationType::S;
+			_transformationType = TransformationType::S;
 		}
 
 		// Changing direction type to X
 		if (input.getKeyPressed(Input::KEY_X))
 		{
-			p_directionType = DirectionType::X;
+			_directionType = DirectionType::X;
 		}
 
 		// Changing direction type to Y
 		if (input.getKeyPressed(Input::KEY_Y))
 		{
-			p_directionType = DirectionType::Y;
+			_directionType = DirectionType::Y;
 		}
 
 		// Changing direction type to Z
 		if (input.getKeyPressed(Input::KEY_Z))
 		{
-			p_directionType = DirectionType::Z;
+			_directionType = DirectionType::Z;
 		}
 
 		// Resetting rotation
 		if (input.getKeyDown(Input::KEY_V))
 		{
-			p_game.getEntity(p_getSelectedID())->setRotation(vec3(0.0f));
+			_game.getEntity(_getSelectedID())->setRotation(vec3(0.0f));
 		}
 
 		// Rotate or scale placed model
-		if (p_game.isExisting(p_getSelectedID()))
+		if (_game.isExisting(_getSelectedID()))
 		{
 			// Mouse position
 			static ivec2 oldMousePos;
@@ -106,53 +106,53 @@ void WorldEditor::update
 			if (input.getMouseDown(Input::MOUSE_BUTTON_RIGHT))
 			{
 				// Translation
-				if (p_transformationType == TransformationType::T)
+				if (_transformationType == TransformationType::T)
 				{
-					if (p_directionType == DirectionType::X)
+					if (_directionType == DirectionType::X)
 					{
-						p_game.getEntity(p_getSelectedID())->translate(vec3(float(xDifference) / 50.0f, 0.0f, 0.0f), delta);
+						_game.getEntity(_getSelectedID())->translate(vec3(float(xDifference) / 50.0f, 0.0f, 0.0f), delta);
 					}
-					else if (p_directionType == DirectionType::Y)
+					else if (_directionType == DirectionType::Y)
 					{
-						p_game.getEntity(p_getSelectedID())->translate(vec3(0.0f, -(float(yDifference) / 75.0f), 0.0f), delta);
+						_game.getEntity(_getSelectedID())->translate(vec3(0.0f, -(float(yDifference) / 75.0f), 0.0f), delta);
 					}
-					else if (p_directionType == DirectionType::Z)
+					else if (_directionType == DirectionType::Z)
 					{
-						p_game.getEntity(p_getSelectedID())->translate(vec3(0.0f, 0.0f, float(xDifference) / 50.0f), delta);
+						_game.getEntity(_getSelectedID())->translate(vec3(0.0f, 0.0f, float(xDifference) / 50.0f), delta);
 					}
 				}
 
 				// Rotation
-				if (p_transformationType == TransformationType::R)
+				if (_transformationType == TransformationType::R)
 				{
-					if (p_directionType == DirectionType::X)
+					if (_directionType == DirectionType::X)
 					{
-						p_game.getEntity(p_getSelectedID())->rotate(vec3(float(xDifference) / 10.0f, 0.0f, 0.0f), delta);
+						_game.getEntity(_getSelectedID())->rotate(vec3(float(xDifference) / 10.0f, 0.0f, 0.0f), delta);
 					}
-					else if (p_directionType == DirectionType::Y)
+					else if (_directionType == DirectionType::Y)
 					{
-						p_game.getEntity(p_getSelectedID())->rotate(vec3(0.0f, float(xDifference) / 10.0f, 0.0f), delta);
+						_game.getEntity(_getSelectedID())->rotate(vec3(0.0f, float(xDifference) / 10.0f, 0.0f), delta);
 					}
-					else if (p_directionType == DirectionType::Z)
+					else if (_directionType == DirectionType::Z)
 					{
-						p_game.getEntity(p_getSelectedID())->rotate(vec3(0.0f, 0.0f, float(xDifference) / 10.0f), delta);
+						_game.getEntity(_getSelectedID())->rotate(vec3(0.0f, 0.0f, float(xDifference) / 10.0f), delta);
 					}
 				}
 				
 				// Scaling
-				if (p_transformationType == TransformationType::S)
+				if (_transformationType == TransformationType::S)
 				{
-					if (p_directionType == DirectionType::X)
+					if (_directionType == DirectionType::X)
 					{
-						p_game.getEntity(p_getSelectedID())->scale(vec3(float(xDifference) / 100.0f, 0.0f, 0.0f), delta);
+						_game.getEntity(_getSelectedID())->scale(vec3(float(xDifference) / 100.0f, 0.0f, 0.0f), delta);
 					}
-					else if (p_directionType == DirectionType::Y)
+					else if (_directionType == DirectionType::Y)
 					{
-						p_game.getEntity(p_getSelectedID())->scale(vec3(0.0f, float(yDifference) / 100.0f, 0.0f), delta);
+						_game.getEntity(_getSelectedID())->scale(vec3(0.0f, float(yDifference) / 100.0f, 0.0f), delta);
 					}
-					else if (p_directionType == DirectionType::Z)
+					else if (_directionType == DirectionType::Z)
 					{
-						p_game.getEntity(p_getSelectedID())->scale(vec3(0.0f, 0.0f, float(xDifference) / 100.0f), delta);
+						_game.getEntity(_getSelectedID())->scale(vec3(0.0f, 0.0f, float(xDifference) / 100.0f), delta);
 					}
 				}
 
@@ -163,7 +163,7 @@ void WorldEditor::update
 			oldMousePos = mousePos;
 
 			// Scaling the model
-			p_game.getEntity(p_getSelectedID())->scale(vec3(input.getMouseWheelY() / 50.0f), delta);
+			_game.getEntity(_getSelectedID())->scale(vec3(input.getMouseWheelY() / 50.0f), delta);
 		}
 
 		// World save button
@@ -179,24 +179,24 @@ void WorldEditor::update
 	// Previous model
 	if (input.getKeyPressed(Input::KEY_Q))
 	{
-		if (p_modelIndex > 0)  // Limit
+		if (_modelIndex > 0)  // Limit
 		{
 			if (input.getKeyDown(Input::KEY_LSHIFT)) // Faster swapping
 			{
-				if (p_modelIndex > 4) // Limit
+				if (_modelIndex > 4) // Limit
 				{
-					p_modelIndex -= 5;
+					_modelIndex -= 5;
 				}
 			}
 			else // Normal speed
 			{
-				p_modelIndex--;
+				_modelIndex--;
 			}
 
 			// Remove preview entity
-			if (p_game.isExisting("previewEntity"))
+			if (_game.isExisting("previewEntity"))
 			{
-				p_game.deleteEntity("previewEntity");
+				_game.deleteEntity("previewEntity");
 			}
 		}
 	}
@@ -205,24 +205,24 @@ void WorldEditor::update
 	if (input.getKeyPressed(Input::KEY_E))
 	{
 		// Change model index
-		if (p_modelIndex < p_modelAmounts.size() - 1)  // Limit
+		if (_modelIndex < _modelAmounts.size() - 1)  // Limit
 		{
 			if (input.getKeyDown(Input::KEY_LSHIFT)) // Faster swapping
 			{
-				if (p_modelIndex < (p_modelAmounts.size() - 5))  // Limit
+				if (_modelIndex < (_modelAmounts.size() - 5))  // Limit
 				{
-					p_modelIndex += 5;
+					_modelIndex += 5;
 				}
 			}
 			else // Normal speed
 			{
-				p_modelIndex++;
+				_modelIndex++;
 			}
 
 			// Remove preview entity
-			if (p_game.isExisting("previewEntity"))
+			if (_game.isExisting("previewEntity"))
 			{
-				p_game.deleteEntity("previewEntity");
+				_game.deleteEntity("previewEntity");
 			}
 		}
 	}
@@ -230,36 +230,36 @@ void WorldEditor::update
 	// Remove last entity
 	if (input.getKeyPressed(Input::KEY_DELETE))
 	{
-		if (p_game.isExisting(p_getSelectedID())) // Check if exists
+		if (_game.isExisting(_getSelectedID())) // Check if exists
 		{
-			p_game.deleteEntity(p_getSelectedID()); // Delete
-			p_modelAmounts[p_modelIndex]--;
+			_game.deleteEntity(_getSelectedID()); // Delete
+			_modelAmounts[_modelIndex]--;
 		}
 	}
 
 	// Update GUI text
-	text.addTextEntity("modelName", "Model: " + models[p_modelIndex]->getModelName(), "font", vec3(1.0f), vec2(-0.75f, 0.95f), 0.0f, vec2(0.5f, 0.15f), true, true, true);
-	if (p_directionType == DirectionType::X)
+	text.addTextEntity("modelName", "Model: " + models[_modelIndex]->getModelName(), "font", vec3(1.0f), vec2(-0.75f, 0.95f), 0.0f, vec2(0.5f, 0.15f), true, true, true);
+	if (_directionType == DirectionType::X)
 	{
 		text.addTextEntity("dirType", "Direction: X", "font", vec3(1.0f), vec2(-0.75f, 0.7f), 0.0f, vec2(0.5f, 0.15f), true, true, true);
 	}
-	if (p_directionType == DirectionType::Y)
+	if (_directionType == DirectionType::Y)
 	{
 		text.addTextEntity("dirType", "Direction: Y", "font", vec3(1.0f), vec2(-0.75f, 0.7f), 0.0f, vec2(0.5f, 0.15f), true, true, true);
 	}
-	if (p_directionType == DirectionType::Z)
+	if (_directionType == DirectionType::Z)
 	{
 		text.addTextEntity("dirType", "Direction: Z", "font", vec3(1.0f), vec2(-0.75f, 0.7f), 0.0f, vec2(0.5f, 0.15f), true, true, true);
 	}
-	if (p_transformationType == TransformationType::T)
+	if (_transformationType == TransformationType::T)
 	{
 		text.addTextEntity("transType", "Transformation: T", "font", vec3(1.0f), vec2(-0.75f, 0.825f), 0.0f, vec2(0.5f, 0.15f), true, true, true);
 	}
-	if (p_transformationType == TransformationType::R)
+	if (_transformationType == TransformationType::R)
 	{
 		text.addTextEntity("transType", "Transformation: R", "font", vec3(1.0f), vec2(-0.75f, 0.825f), 0.0f, vec2(0.5f, 0.15f), true, true, true);
 	}
-	if (p_transformationType == TransformationType::S)
+	if (_transformationType == TransformationType::S)
 	{
 		text.addTextEntity("transType", "Transformation: S", "font", vec3(1.0f), vec2(-0.75f, 0.825f), 0.0f, vec2(0.5f, 0.15f), true, true, true);
 	}

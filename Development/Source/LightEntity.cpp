@@ -1,31 +1,31 @@
-#include <WE3D/LightEntity.hpp>
+#include "LightEntity.hpp"
 
 void LightEntity::setPosition(vec3 position)
 {
-	p_position = position;
+	_position = position;
 }
 
 void LightEntity::setColor(vec3 color)
 {
-	p_color = color;
+	_color = color;
 }
 
 void LightEntity::setStrength(float strength)
 {
-	p_strength = strength;
+	_strength = strength;
 }
 
 const vec3 LightEntity::getPosition() const
 {
-	return p_position;
+	return _position;
 }
 
 const vec3 LightEntity::getColor() const
 {
-	return p_color;
+	return _color;
 }
 
 const float LightEntity::getStrength() const
 {
-	return p_strength;
+	return _strength;
 }

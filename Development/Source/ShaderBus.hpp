@@ -140,66 +140,66 @@ public:
 
 private:
 	// Textures
-	GLuint p_sceneMap               = 0;
-	GLuint p_dayReflectionCubeMap   = 0;
-	GLuint p_nightReflectionCubeMap = 0;
-	GLuint p_ssrMap                 = 0;
-	GLuint p_waterRefractionMap     = 0;
-	GLuint p_shadowMap              = 0;
-	GLuint p_bloomMap               = 0;
-	GLuint p_bloomedDofSceneMap     = 0;
-	GLuint p_depthMap               = 0;
-	GLuint p_blurMap                = 0;
-	GLuint p_motionBlurMap          = 0;
+	GLuint _sceneMap               = 0;
+	GLuint _dayReflectionCubeMap   = 0;
+	GLuint _nightReflectionCubeMap = 0;
+	GLuint _ssrMap                 = 0;
+	GLuint _waterRefractionMap     = 0;
+	GLuint _shadowMap              = 0;
+	GLuint _bloomMap               = 0;
+	GLuint _bloomedDofSceneMap     = 0;
+	GLuint _depthMap               = 0;
+	GLuint _blurMap                = 0;
+	GLuint _motionBlurMap          = 0;
 	
 	// Matrices
-	mat4 p_viewMatrix        = mat4(1.0f);
-	mat4 p_projectionMatrix  = mat4(1.0f);
-	mat4 p_skyRotationMatrix = mat4(1.0f);
-	mat4 p_shadowMatrix      = mat4(1.0f);
+	mat4 _viewMatrix        = mat4(1.0f);
+	mat4 _projectionMatrix  = mat4(1.0f);
+	mat4 _skyRotationMatrix = mat4(1.0f);
+	mat4 _shadowMatrix      = mat4(1.0f);
 
 	// Vectors
-	vec3  p_cameraPosition   = vec3(0.0f);
-	vec3  p_dirLightPosition = vec3(0.0f);
+	vec3  _cameraPosition   = vec3(0.0f);
+	vec3  _dirLightPosition = vec3(0.0f);
 
 	// Floats
-	float p_ambientLightingStrength     = 0.0f;
-	float p_directionalLightingStrength = 0.0f;
-	float p_specularLightingStrength    = 0.0f;
-	float p_fogMinDistance              = 0.0f;
-	float p_bloomIntensity              = 0.0f;
-	float p_bloomTreshold               = 0.0f;
-	float p_cameraYaw                   = 0.0f;
-	float p_cameraPitch                 = 0.0f;
-	float p_skyBrightness               = 0.0f;
-	float p_nearZ                       = 0.0f;
-	float p_farZ                        = 0.0f;
-	float p_dofMinDistance              = 0.0f;
-	float p_skyReflectionMixValue       = 0.0f;
-	float p_skyReflectionFactor         = 0.0f;
-	float p_ssrHeight                   = 0.0f;
-	float p_ssrFactor                   = 0.0f;
+	float _ambientLightingStrength     = 0.0f;
+	float _directionalLightingStrength = 0.0f;
+	float _specularLightingStrength    = 0.0f;
+	float _fogMinDistance              = 0.0f;
+	float _bloomIntensity              = 0.0f;
+	float _bloomTreshold               = 0.0f;
+	float _cameraYaw                   = 0.0f;
+	float _cameraPitch                 = 0.0f;
+	float _skyBrightness               = 0.0f;
+	float _nearZ                       = 0.0f;
+	float _farZ                        = 0.0f;
+	float _dofMinDistance              = 0.0f;
+	float _skyReflectionMixValue       = 0.0f;
+	float _skyReflectionFactor         = 0.0f;
+	float _ssrHeight                   = 0.0f;
+	float _ssrFactor                   = 0.0f;
 	
 	// Integers
-	int p_bloomBlurSize = 0;
+	int _bloomBlurSize = 0;
 
 	// Booleans
-	bool p_msaaEnabled                = false;
-	bool p_ambientLightingEnabled     = false;
-	bool p_directionalLightingEnabled = false;
-	bool p_specularLightingEnabled    = false;
-	bool p_pointLightingEnabled       = false;
-	bool p_fogEnabled                 = false;
-	bool p_lightMappingEnabled        = false;
-	bool p_skyReflectionsEnabled      = false;
-	bool p_ssrEnabled                 = false;
-	bool p_bloomEnabled               = false;
-	bool p_waterEffectsEnabled        = false;
-	bool p_skyHdrEnabled              = false;
-	bool p_shadowsEnabled             = false;
-	bool p_dofEnabled                 = false;
-	bool p_motionBlurEnabled          = false;
-	bool p_wireframeEnabled           = false;
-	bool p_aabbFrameEnabled           = false;
-	bool p_debugRenderEnabled         = false;
+	bool _msaaEnabled                = false;
+	bool _ambientLightingEnabled     = false;
+	bool _directionalLightingEnabled = false;
+	bool _specularLightingEnabled    = false;
+	bool _pointLightingEnabled       = false;
+	bool _fogEnabled                 = false;
+	bool _lightMappingEnabled        = false;
+	bool _skyReflectionsEnabled      = false;
+	bool _ssrEnabled                 = false;
+	bool _bloomEnabled               = false;
+	bool _waterEffectsEnabled        = false;
+	bool _skyHdrEnabled              = false;
+	bool _shadowsEnabled             = false;
+	bool _dofEnabled                 = false;
+	bool _motionBlurEnabled          = false;
+	bool _wireframeEnabled           = false;
+	bool _aabbFrameEnabled           = false;
+	bool _debugRenderEnabled         = false;
 };

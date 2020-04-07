@@ -1,201 +1,201 @@
-#include <WE3D/BillboardEntity.hpp>
+#include "BillboardEntity.hpp"
 
 void BillboardEntity::updateModelMatrix()
 {
-	p_modelMatrix = mat4(1.0f);
-	p_modelMatrix = glm::translate(p_modelMatrix, p_translation);
-	p_modelMatrix = glm::rotate(p_modelMatrix, glm::radians(p_rotation.z), vec3(0.0f, 0.0f, 1.0f));
-	p_modelMatrix = glm::rotate(p_modelMatrix, glm::radians(p_rotation.y), vec3(0.0f, 1.0f, 0.0f));
-	p_modelMatrix = glm::rotate(p_modelMatrix, glm::radians(p_rotation.x), vec3(1.0f, 0.0f, 0.0f));
-	p_modelMatrix = glm::scale(p_modelMatrix, p_scaling);
+	_modelMatrix = mat4(1.0f);
+	_modelMatrix = glm::translate(_modelMatrix, _translation);
+	_modelMatrix = glm::rotate(_modelMatrix, glm::radians(_rotation.z), vec3(0.0f, 0.0f, 1.0f));
+	_modelMatrix = glm::rotate(_modelMatrix, glm::radians(_rotation.y), vec3(0.0f, 1.0f, 0.0f));
+	_modelMatrix = glm::rotate(_modelMatrix, glm::radians(_rotation.x), vec3(1.0f, 0.0f, 0.0f));
+	_modelMatrix = glm::scale(_modelMatrix, _scaling);
 }
 
 void BillboardEntity::setCameraFacing(ivec2 val)
 {
-	p_cameraFacing = val;
+	_cameraFacing = val;
 }
 
 void BillboardEntity::setDiffuseMap(GLuint val)
 {
-	p_diffuseMap = val;
+	_diffuseMap = val;
 }
 
 void BillboardEntity::setTranslation(vec3 val)
 {
-	p_translation = val;
+	_translation = val;
 }
 
 void BillboardEntity::setInitialRotation(vec3 val)
 {
-	p_initialRotation = val;
+	_initialRotation = val;
 }
 
 void BillboardEntity::setRotation(vec3 val)
 {
-	p_rotation = val;
+	_rotation = val;
 }
 
 void BillboardEntity::setScaling(vec3 val)
 {
-	p_scaling = val;
+	_scaling = val;
 }
 
 void BillboardEntity::setColor(vec3 color)
 {
-	p_color = color;
+	_color = color;
 }
 
 void BillboardEntity::translate(vec3 val, float delta)
 {
-	p_translation += val * delta;
+	_translation += val * delta;
 }
 
 void BillboardEntity::rotate(vec3 val, float delta)
 {
-	p_rotation += val * delta;
+	_rotation += val * delta;
 }
 
 void BillboardEntity::scale(vec3 val, float delta)
 {
-	p_scaling += val * delta;
+	_scaling += val * delta;
 }
 
 void BillboardEntity::setText(const string & text)
 {
-	p_textContent = text;
+	_textContent = text;
 }
 
 void BillboardEntity::setTransparent(bool val)
 {
-	p_isTransparent = val;
+	_isTransparent = val;
 }
 
 void BillboardEntity::setSpriteAnimation(int rows, int columns, float maxDelta, int repeats)
 {
-	p_hasSpriteAnimation = true;
-	p_totalSpriteRows = rows;
-	p_totalSpriteColumns = columns;
-	p_maxDelta = maxDelta;
-	p_repeats = 0;
-	p_maxRepeats = repeats;
+	_hasSpriteAnimation = true;
+	_totalSpriteRows = rows;
+	_totalSpriteColumns = columns;
+	_maxDelta = maxDelta;
+	_repeats = 0;
+	_maxRepeats = repeats;
 }
 
 void BillboardEntity::setSpriteRowIndex(int val)
 {
-	p_spriteRowIndex = val;
+	_spriteRowIndex = val;
 }
 
 void BillboardEntity::setSpriteColumnIndex(int val)
 {
-	p_spriteColumnIndex = val;
+	_spriteColumnIndex = val;
 }
 
 void BillboardEntity::addToDelta(float val)
 {
-	p_totalDelta += val;
+	_totalDelta += val;
 }
 
 void BillboardEntity::resetDelta()
 {
-	p_totalDelta = 0.0f;
+	_totalDelta = 0.0f;
 }
 
 void BillboardEntity::increaseRepeats()
 {
-	p_repeats++;
+	_repeats++;
 }
 
 const mat4 & BillboardEntity::getModelMatrix() const
 {
-	return p_modelMatrix;
+	return _modelMatrix;
 }
 
 const GLuint BillboardEntity::getDiffuseMap() const
 {
-	return p_diffuseMap;
+	return _diffuseMap;
 }
 
 const vec3 BillboardEntity::getTranslation() const
 {
-	return p_translation;
+	return _translation;
 }
 
 const vec3 BillboardEntity::getInitialRotation() const
 {
-	return p_initialRotation;
+	return _initialRotation;
 }
 
 const vec3 BillboardEntity::getRotation() const
 {
-	return p_rotation;
+	return _rotation;
 }
 
 const vec3 BillboardEntity::getScaling() const
 {
-	return p_scaling;
+	return _scaling;
 }
 
 const vec3 BillboardEntity::getColor() const
 {
-	return p_color;
+	return _color;
 }
 
 const string & BillboardEntity::getText() const
 {
-	return p_textContent;
+	return _textContent;
 }
 
 const float BillboardEntity::getMaxDelta() const
 {
-	return p_maxDelta;
+	return _maxDelta;
 }
 
 const float BillboardEntity::getTotalDelta() const
 {
-	return p_totalDelta;
+	return _totalDelta;
 }
 
 const int BillboardEntity::getTotalSpriteRows() const
 {
-	return p_totalSpriteRows;
+	return _totalSpriteRows;
 }
 
 const int BillboardEntity::getTotalSpriteColumns() const
 {
-	return p_totalSpriteColumns;
+	return _totalSpriteColumns;
 }
 
 const int BillboardEntity::getSpriteRowIndex() const
 {
-	return p_spriteRowIndex;
+	return _spriteRowIndex;
 }
 
 const int BillboardEntity::getSpriteColumnIndex() const
 {
-	return p_spriteColumnIndex;
+	return _spriteColumnIndex;
 }
 
 const int BillboardEntity::getRepeats() const
 {
-	return p_repeats;
+	return _repeats;
 }
 
 const int BillboardEntity::getMaxRepeats() const
 {
-	return p_maxRepeats;
+	return _maxRepeats;
 }
 
 const ivec2 BillboardEntity::getCameraFacing() const
 {
-	return p_cameraFacing;
+	return _cameraFacing;
 }
 
 const bool BillboardEntity::isTransparent() const
 {
-	return p_isTransparent;
+	return _isTransparent;
 }
 
 const bool BillboardEntity::hasSpriteAnimation() const
 {
-	return p_hasSpriteAnimation;
+	return _hasSpriteAnimation;
 }

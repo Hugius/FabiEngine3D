@@ -36,64 +36,64 @@ public:
 
 private:
 	// Timer for performance profiling
-	Timer& p_timer;
+	Timer& _timer;
 
 	// Shaderbus
-	ShaderBus& p_shaderBus;
+	ShaderBus& _shaderBus;
 
 	// Temp entitybus
-	EntityBus * p_entityBus = nullptr;
+	EntityBus * _entityBus = nullptr;
 
 	// Final screen texture
-	GuiEntity p_finalSurface;
+	GuiEntity _finalSurface;
 
 	// Renderers
-	SkyEntityRenderer        p_skyEntityRenderer;
-	TerrainEntityRenderer    p_terrainEntityRenderer;
-	WaterEntityRenderer      p_waterEntityRenderer;
-	GameEntityRenderer       p_gameEntityRenderer;
-	BillboardEntityRenderer	 p_billboardEntityRenderer;
-	AabbEntityRenderer       p_aabbEntityRenderer;
-	GuiEntityRenderer        p_guiEntityRenderer;
-	BlurRenderer             p_blurRenderer;
-	BloomHdrRenderer         p_bloomHdrRenderer;
-	ShadowRenderer           p_shadowRenderer;
-	DepthRenderer            p_depthRenderer;
-	PostRenderer             p_postRenderer;
-	FinalRenderer            p_finalRenderer;
+	SkyEntityRenderer        _skyEntityRenderer;
+	TerrainEntityRenderer    _terrainEntityRenderer;
+	WaterEntityRenderer      _waterEntityRenderer;
+	GameEntityRenderer       _gameEntityRenderer;
+	BillboardEntityRenderer	 _billboardEntityRenderer;
+	AabbEntityRenderer       _aabbEntityRenderer;
+	GuiEntityRenderer        _guiEntityRenderer;
+	BlurRenderer             _blurRenderer;
+	BloomHdrRenderer         _bloomHdrRenderer;
+	ShadowRenderer           _shadowRenderer;
+	DepthRenderer            _depthRenderer;
+	PostRenderer             _postRenderer;
+	FinalRenderer            _finalRenderer;
 
 	// Framebuffers
-	Framebuffer p_screenFramebuffer;
-	Framebuffer p_msaaFramebuffer;
-	Framebuffer p_aaProcessorFramebuffer;
-	Framebuffer p_ssrFramebuffer;
-	Framebuffer p_waterRefractionFramebuffer;
-	Framebuffer p_shadowFramebuffer;
-	Framebuffer p_bloomHdrFramebuffer;
-	Framebuffer p_bloomDofAdditionFramebuffer;
-	Framebuffer p_depthFramebuffer;
+	Framebuffer _screenFramebuffer;
+	Framebuffer _msaaFramebuffer;
+	Framebuffer _aaProcessorFramebuffer;
+	Framebuffer _ssrFramebuffer;
+	Framebuffer _waterRefractionFramebuffer;
+	Framebuffer _shadowFramebuffer;
+	Framebuffer _bloomHdrFramebuffer;
+	Framebuffer _bloomDofAdditionFramebuffer;
+	Framebuffer _depthFramebuffer;
 
 	// Capturing functions
-	void p_captureSSR(CameraManager & camera);
-	void p_captureWaterRefractions();
-	void p_captureShadows();
-	void p_captureBloom();
-	void p_captureDepth();
-	void p_capturePostProcessing();
-	void p_captureDofBlur();
-	void p_captureMotionBlur(CameraManager & camera, ivec2 mousePos);
+	void _captureSSR(CameraManager & camera);
+	void _captureWaterRefractions();
+	void _captureShadows();
+	void _captureBloom();
+	void _captureDepth();
+	void _capturePostProcessing();
+	void _captureDofBlur();
+	void _captureMotionBlur(CameraManager & camera, ivec2 mousePos);
 
 	// Scene rendering functions
-	void p_renderSkyEntity();
-	void p_renderTerrainEntity();
-	void p_renderWaterEntity();
-	void p_renderGameEntities();
-	void p_renderBillboardEntities();
-	void p_renderAabbEntities();
-	void p_renderFinalTexture();
-	void p_renderGuiEntities();
-	void p_renderTextEntities();
+	void _renderSkyEntity();
+	void _renderTerrainEntity();
+	void _renderWaterEntity();
+	void _renderGameEntities();
+	void _renderBillboardEntities();
+	void _renderAabbEntities();
+	void _renderFinalTexture();
+	void _renderGuiEntities();
+	void _renderTextEntities();
 
 	// Other
-	void p_renderDebugScreens();
+	void _renderDebugScreens();
 };

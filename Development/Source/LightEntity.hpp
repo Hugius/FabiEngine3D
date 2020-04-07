@@ -16,8 +16,8 @@ public:
 	const float getStrength() const;
 
 private:
-	vec3 p_position = vec3(0.0f);
-	vec3 p_color    = vec3(0.0f);
+	vec3 _position = vec3(0.0f);
+	vec3 _color    = vec3(0.0f);
 
-	float p_strength;
+	float _strength;
 };

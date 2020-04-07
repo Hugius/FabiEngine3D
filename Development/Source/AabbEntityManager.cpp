@@ -1,6 +1,6 @@
-#include <WE3D/AabbEntityManager.hpp>
-#include <WE3D/ShaderBus.hpp>
-#include <WE3D/Logger.hpp>
+#include "AabbEntityManager.hpp"
+#include "ShaderBus.hpp"
+#include "Logger.hpp"
 
 AabbEntityManager::AabbEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, ShaderBus& shaderBus) :
 	EntityManager(objLoader, texLoader, shaderBus)
@@ -10,14 +10,14 @@ AabbEntityManager::AabbEntityManager(OBJLoader& objLoader, TextureLoader& texLoa
 
 AabbEntity * AabbEntityManager::getEntity(const string & ID)
 {
-	return dynamic_cast<AabbEntity*>(p_getBaseEntity(ID, EntityType::AABB));
+	return dynamic_cast<AabbEntity*>(_getBaseEntity(ID, EntityType::AABB));
 }
 
 const vector<AabbEntity*> AabbEntityManager::getEntities()
 {
 	vector<AabbEntity*> newVector;
 
-	for (auto& entity : p_getBaseEntities())
+	for (auto& entity : _getBaseEntities())
 	{
 		newVector.push_back(dynamic_cast<AabbEntity*>(entity));
 	}
@@ -49,7 +49,7 @@ void AabbEntityManager::addAabbEntity(const string & ID, vec3 T, vec3 R, vec3 S,
 	};
 
 	// Create entity
-	p_createEntity(EntityType::AABB, ID)->load(ID);
+	_createEntity(EntityType::AABB, ID)->load(ID);
 	getEntity(ID)->addOglBuffer(new OpenGLBuffer(SHAPE_AABB, box_data, sizeof(box_data) / sizeof(float)));
 
 	// Other
@@ -67,7 +67,7 @@ void AabbEntityManager::bindAabbEntity(const string & ID, const string & parentI
 
 void AabbEntityManager::update(const vector<GameEntity*> & gameEntities)
 {
-	for (auto & baseEntity : p_getBaseEntities())
+	for (auto & baseEntity : _getBaseEntities())
 	{
 		// Create temporary billboard entity object
 		auto * entity = getEntity(baseEntity->getID());

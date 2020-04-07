@@ -25,13 +25,13 @@ public:
 	bool hasPosition() const;
 
 private:
-	std::string p_ID = "";
+	std::string _ID = "";
 	
-	Mix_Chunk* p_chunk = nullptr;
+	Mix_Chunk* _chunk = nullptr;
 
-	vec3 p_position = vec3(0.0f);
+	vec3 _position = vec3(0.0f);
 
-	float p_maxDistance = 0.0f;
+	float _maxDistance = 0.0f;
 
-	bool p_hasPosition = false;
+	bool _hasPosition = false;
 };

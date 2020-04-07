@@ -1,14 +1,14 @@
-#include <WE3D/BloomHdrRenderer.hpp>
-#include <WE3D/ShaderBus.hpp>
+#include "BloomHdrRenderer.hpp"
+#include "ShaderBus.hpp"
 
 void BloomHdrRenderer::bind()
 {
-	p_shader.bind();
+	_shader.bind();
 }
 
 void BloomHdrRenderer::unbind()
 {
-	p_shader.unbind();
+	_shader.unbind();
 }
 
 void BloomHdrRenderer::render(const GuiEntity * entity, GLuint sceneMap)
@@ -16,11 +16,11 @@ void BloomHdrRenderer::render(const GuiEntity * entity, GLuint sceneMap)
 	if (entity->isEnabled())
 	{
 		// Uniforms
-		p_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix());
-		p_shader.uploadUniform("u_mirrorHor",   entity->isMirroredHorizonally());
-		p_shader.uploadUniform("u_mirrorVer",   entity->isMirroredVertically());
-		p_shader.uploadUniform("u_bloomBrightnessTreshold", p_shaderBus.getBloomTreshold());
-		p_shader.uploadUniform("u_sampler_diffuse", 0);
+		_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix());
+		_shader.uploadUniform("u_mirrorHor",   entity->isMirroredHorizonally());
+		_shader.uploadUniform("u_mirrorVer",   entity->isMirroredVertically());
+		_shader.uploadUniform("u_bloomBrightnessTreshold", _shaderBus.getBloomTreshold());
+		_shader.uploadUniform("u_sampler_diffuse", 0);
 
 		// Bind
 		glBindVertexArray(entity->getOglBuffer()->getVAO());

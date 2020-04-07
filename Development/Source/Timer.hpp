@@ -22,12 +22,12 @@ public:
 	void uSleep(int waitTime);
 
 private:
-	LARGE_INTEGER p_frequency;
-	LARGE_INTEGER p_time1, p_time2;
+	LARGE_INTEGER _frequency;
+	LARGE_INTEGER _time1, _time2;
 
-	std::map<string, float> p_deltaParts;
+	std::map<string, float> _deltaParts;
 
-	string p_currentID = "";
+	string _currentID = "";
 
-	float p_deltaTime = 0.0f;
+	float _deltaTime = 0.0f;
 };

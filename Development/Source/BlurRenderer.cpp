@@ -1,25 +1,25 @@
-#include <WE3D/BlurRenderer.hpp>
-#include <WE3D/ShaderBus.hpp>
-#include <WE3D/Configuration.hpp>
+#include "BlurRenderer.hpp"
+#include "ShaderBus.hpp"
+#include "Configuration.hpp"
 
 void BlurRenderer::addFramebuffer(int index, bool textureClamp)
 {
-	p_horizontalFramebuffers.push_back(new Framebuffer());
-	p_verticalFramebuffers.push_back(new Framebuffer());
-	p_horizontalFramebuffers.back()->createColorTexture(Config::getInst().getWindowSize() / 2, 1, textureClamp);
-	p_verticalFramebuffers.back()->createColorTexture(Config::getInst().getWindowSize() / 2, 1, textureClamp);
+	_horizontalFramebuffers.push_back(new Framebuffer());
+	_verticalFramebuffers.push_back(new Framebuffer());
+	_horizontalFramebuffers.back()->createColorTexture(Config::getInst().getWindowSize() / 2, 1, textureClamp);
+	_verticalFramebuffers.back()->createColorTexture(Config::getInst().getWindowSize() / 2, 1, textureClamp);
 }
 
 void BlurRenderer::bind()
 {
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	p_shader.bind();
+	_shader.bind();
 }
 
 void BlurRenderer::unbind()
 {
-	p_shader.unbind();
+	_shader.unbind();
 	glDisable(GL_BLEND);
 }
 
@@ -28,34 +28,34 @@ GLuint BlurRenderer::blurTexture(const GuiEntity * entity, GLuint texture, int i
 	//GLuint newTexture;
 	bool first = true;
 	bool horizontal = true;
-	p_shader.uploadUniform("u_intensity", intensity);
+	_shader.uploadUniform("u_intensity", intensity);
 
 	if (direction == BLUR_DIR_BOTH)
 	{
 		for (int i = 0; i < size; i++)
 		{
 			// Bind framebuffer
-			if (horizontal) { p_horizontalFramebuffers[index]->bind(); }
-			else { p_verticalFramebuffers[index]->bind(); }
+			if (horizontal) { _horizontalFramebuffers[index]->bind(); }
+			else { _verticalFramebuffers[index]->bind(); }
 
 			// Upload uniforms
-			p_shader.uploadUniform("u_horizontal", horizontal);
-			p_shader.uploadUniform("u_radius", i * (i / 7.5f));
+			_shader.uploadUniform("u_horizontal", horizontal);
+			_shader.uploadUniform("u_radius", i * (i / 7.5f));
 
 			// First time use normal texture
 			if (first)
 			{
-				p_render(entity, texture);
+				_render(entity, texture);
 				first = false;
 			}
 			else // Use blurred texture from last time
 			{
-				texture = horizontal ? p_verticalFramebuffers[index]->getTexture(0) : p_horizontalFramebuffers[index]->getTexture(0);
-				p_render(entity, texture);
+				texture = horizontal ? _verticalFramebuffers[index]->getTexture(0) : _horizontalFramebuffers[index]->getTexture(0);
+				_render(entity, texture);
 			}
 
-			if (horizontal) { p_horizontalFramebuffers[index]->unbind(); }
-			else { p_verticalFramebuffers[index]->unbind(); }
+			if (horizontal) { _horizontalFramebuffers[index]->unbind(); }
+			else { _verticalFramebuffers[index]->unbind(); }
 
 			horizontal = !horizontal;
 		}
@@ -66,43 +66,43 @@ GLuint BlurRenderer::blurTexture(const GuiEntity * entity, GLuint texture, int i
 		{
 			if (direction == BLUR_DIR_HORIZONTAL)
 			{
-				p_shader.uploadUniform("u_horizontal", true);
-				p_shader.uploadUniform("u_radius", i*(i / 7.5f));
-				p_horizontalFramebuffers[index]->bind();
+				_shader.uploadUniform("u_horizontal", true);
+				_shader.uploadUniform("u_radius", i*(i / 7.5f));
+				_horizontalFramebuffers[index]->bind();
 				
 				if (first)
 				{
-					p_render(entity, texture);
+					_render(entity, texture);
 					first = false;
 				}
 				else
 				{
-					texture = p_horizontalFramebuffers[index]->getTexture(0);
-					p_render(entity, texture);
+					texture = _horizontalFramebuffers[index]->getTexture(0);
+					_render(entity, texture);
 				}
 				
-				p_horizontalFramebuffers[index]->unbind();
-				texture = p_horizontalFramebuffers[index]->getTexture(0);
+				_horizontalFramebuffers[index]->unbind();
+				texture = _horizontalFramebuffers[index]->getTexture(0);
 			}
 			else if (direction == BLUR_DIR_VERTICAL)
 			{
-				p_shader.uploadUniform("u_horizontal", false);
-				p_shader.uploadUniform("u_radius", i*(i / 7.5f));
-				p_verticalFramebuffers[index]->bind();
+				_shader.uploadUniform("u_horizontal", false);
+				_shader.uploadUniform("u_radius", i*(i / 7.5f));
+				_verticalFramebuffers[index]->bind();
 				
 				if (first)
 				{
-					p_render(entity, texture);
+					_render(entity, texture);
 					first = false;
 				}
 				else
 				{
-					texture = p_verticalFramebuffers[index]->getTexture(0);
-					p_render(entity, texture);
+					texture = _verticalFramebuffers[index]->getTexture(0);
+					_render(entity, texture);
 				}
 
-				p_verticalFramebuffers[index]->unbind();
-				texture = p_verticalFramebuffers[index]->getTexture(0);
+				_verticalFramebuffers[index]->unbind();
+				texture = _verticalFramebuffers[index]->getTexture(0);
 			}
 		}
 	}
@@ -110,10 +110,10 @@ GLuint BlurRenderer::blurTexture(const GuiEntity * entity, GLuint texture, int i
 	return texture;
 }
 
-void BlurRenderer::p_render(const GuiEntity * entity, GLuint texture)
+void BlurRenderer::_render(const GuiEntity * entity, GLuint texture)
 {
 	// Uniforms
-	p_shader.uploadUniform("u_sampler_diffuse", 0);
+	_shader.uploadUniform("u_sampler_diffuse", 0);
 
 	// Bind
 	glBindVertexArray(entity->getOglBuffer()->getVAO());

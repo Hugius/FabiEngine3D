@@ -1,222 +1,222 @@
 #include <GLM/gtc/matrix_transform.hpp>
 
-#include <WE3D/GameEntity.hpp>
+#include "GameEntity.hpp"
 
 void GameEntity::updateModelMatrix()
 {
-	p_modelMatrix = mat4(1.0f);
-	p_modelMatrix = glm::translate(p_modelMatrix, p_translation);
-	p_modelMatrix = glm::rotate(p_modelMatrix, glm::radians(p_rotation.x), vec3(1.0f, 0.0f, 0.0f));
-	p_modelMatrix = glm::rotate(p_modelMatrix, glm::radians(p_rotation.y), vec3(0.0f, 1.0f, 0.0f));
-	p_modelMatrix = glm::rotate(p_modelMatrix, glm::radians(p_rotation.z), vec3(0.0f, 0.0f, 1.0f));
-	p_modelMatrix = glm::scale(p_modelMatrix, p_scaling);
+	_modelMatrix = mat4(1.0f);
+	_modelMatrix = glm::translate(_modelMatrix, _translation);
+	_modelMatrix = glm::rotate(_modelMatrix, glm::radians(_rotation.x), vec3(1.0f, 0.0f, 0.0f));
+	_modelMatrix = glm::rotate(_modelMatrix, glm::radians(_rotation.y), vec3(0.0f, 1.0f, 0.0f));
+	_modelMatrix = glm::rotate(_modelMatrix, glm::radians(_rotation.z), vec3(0.0f, 0.0f, 1.0f));
+	_modelMatrix = glm::scale(_modelMatrix, _scaling);
 }
 
 void GameEntity::addDiffuseMap(GLuint val)
 {
-	if (std::find(p_diffuseMaps.begin(), p_diffuseMaps.end(), val) == p_diffuseMaps.end())
+	if (std::find(_diffuseMaps.begin(), _diffuseMaps.end(), val) == _diffuseMaps.end())
 	{
-		p_diffuseMaps.push_back(val);
+		_diffuseMaps.push_back(val);
 	}
 }
 
 void GameEntity::addLightmap(GLuint val)
 {
-	if (std::find(p_lightMaps.begin(), p_lightMaps.end(), val) == p_lightMaps.end())
+	if (std::find(_lightMaps.begin(), _lightMaps.end(), val) == _lightMaps.end())
 	{
-		p_lightMaps.push_back(val);
+		_lightMaps.push_back(val);
 	}
 }
 
 void GameEntity::addReflectionMap(GLuint val)
 {
-	if (std::find(p_reflectionMaps.begin(), p_reflectionMaps.end(), val) == p_reflectionMaps.end())
+	if (std::find(_reflectionMaps.begin(), _reflectionMaps.end(), val) == _reflectionMaps.end())
 	{
-		p_reflectionMaps.push_back(val);
+		_reflectionMaps.push_back(val);
 	}
 }
 
 void GameEntity::setTranslation(vec3 val)
 {
-	p_translation = val;
+	_translation = val;
 }
 
 void GameEntity::setRotation(vec3 val)
 {
-	p_rotation = val;
+	_rotation = val;
 }
 
 void GameEntity::setScaling(vec3 val)
 {
-	p_scaling = val;
+	_scaling = val;
 }
 
 void GameEntity::translate(vec3 val, float delta)
 {
-	p_translation += val * delta;
+	_translation += val * delta;
 }
 
 void GameEntity::rotate(vec3 val, float delta)
 {
-	p_rotation += val * delta;
+	_rotation += val * delta;
 }
 
 void GameEntity::scale(vec3 val, float delta)
 {
-	p_scaling += val * delta;
+	_scaling += val * delta;
 }
 
 void GameEntity::setColor(vec3 val)
 {
-	p_color = val;
+	_color = val;
 }
 
 void GameEntity::setModelName(const string & val)
 {
-	p_modelName = val;
+	_modelName = val;
 }
 
 void GameEntity::setTransparent(bool val)
 {
-	p_isTransparent = val;
+	_isTransparent = val;
 }
 
 void GameEntity::setFaceCulled(bool val)
 {
-	p_isFaceCulled = val;
+	_isFaceCulled = val;
 }
 
 void GameEntity::setLightMapped(bool val)
 {
-	p_isLightMapped = val;
+	_isLightMapped = val;
 }
 
 void GameEntity::setSkyReflective(bool val)
 {
-	p_isSkyReflective = val;
+	_isSkyReflective = val;
 }
 
 void GameEntity::setScreenReflective(bool val)
 {
-	p_isScreenReflective = val;
+	_isScreenReflective = val;
 }
 
 void GameEntity::setSpecular(bool val)
 {
-	p_isSpecular = val;
+	_isSpecular = val;
 }
 
 void GameEntity::setShadowed(bool val)
 {
-	p_isShadowed = val;
+	_isShadowed = val;
 }
 
 void GameEntity::setMaxY(float val)
 {
-	p_maxY = val;
+	_maxY = val;
 }
 
 void GameEntity::setAlpha(float alpha)
 {
-	p_alpha = alpha;
+	_alpha = alpha;
 }
 
 void GameEntity::setUvRepeat(float val)
 {
-	p_uvRepeat = val;
+	_uvRepeat = val;
 }
 
 const mat4 & GameEntity::getModelMatrix() const
 {
-	return p_modelMatrix;
+	return _modelMatrix;
 }
 
 const GLuint GameEntity::getDiffuseMap(int index) const
 {
-	return p_diffuseMaps[index];
+	return _diffuseMaps[index];
 }
 
 const GLuint GameEntity::getLightMap(int index) const
 {
-	return p_lightMaps[index];
+	return _lightMaps[index];
 }
 
 const GLuint GameEntity::getReflectionMap(int index) const
 {
-	return p_reflectionMaps[index];
+	return _reflectionMaps[index];
 }
 
 const vec3 GameEntity::getTranslation() const
 {
-	return p_translation;
+	return _translation;
 }
 
 const vec3 GameEntity::getRotation() const
 {
-	return p_rotation;
+	return _rotation;
 }
 
 const vec3 GameEntity::getScaling() const
 {
-	return p_scaling;
+	return _scaling;
 }
 
 const vec3 GameEntity::getColor() const
 {
-	return p_color;
+	return _color;
 }
 
 const string & GameEntity::getModelName() const
 {
-	return p_modelName;
+	return _modelName;
 }
 
 const bool GameEntity::isTransparent() const
 {
-	return p_isTransparent;
+	return _isTransparent;
 }
 
 const bool GameEntity::isFaceCulled() const
 {
-	return p_isFaceCulled;
+	return _isFaceCulled;
 }
 
 const bool GameEntity::isLightMapped() const
 {
-	return p_isLightMapped;
+	return _isLightMapped;
 }
 
 const bool GameEntity::isSkyReflective() const
 {
-	return p_isSkyReflective;
+	return _isSkyReflective;
 }
 
 const bool GameEntity::isScreenReflective() const
 {
-	return p_isScreenReflective;
+	return _isScreenReflective;
 }
 
 const bool GameEntity::isSpecular() const
 {
-	return p_isSpecular;
+	return _isSpecular;
 }
 
 const bool GameEntity::isShadowed() const
 {
-	return p_isShadowed;
+	return _isShadowed;
 }
 
 const float GameEntity::getMaxY() const
 {
-	return p_maxY;
+	return _maxY;
 }
 
 const float GameEntity::getAlpha() const
 {
-	return p_alpha;
+	return _alpha;
 }
 
 const float GameEntity::getUvRepeat() const
 {
-	return p_uvRepeat;
+	return _uvRepeat;
 }

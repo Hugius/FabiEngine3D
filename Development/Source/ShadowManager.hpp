@@ -17,11 +17,11 @@ public:
 	void update(ShaderBus& shaderBus);
 
 private:
-	mat4 p_createLightSpaceMatrix();
+	mat4 _createLightSpaceMatrix();
 
-	vec3 p_eye = vec3(0.0f);
-	vec3 p_center = vec3(0.0f);
+	vec3 _eye = vec3(0.0f);
+	vec3 _center = vec3(0.0f);
 
-	float p_size = 0.0f;
-	float p_reach = 0.0f;
+	float _size = 0.0f;
+	float _reach = 0.0f;
 };

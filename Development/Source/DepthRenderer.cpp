@@ -1,18 +1,18 @@
-#include <WE3D/DepthRenderer.hpp>
-#include <WE3D/ShaderBus.hpp>
-#include <WE3D/Configuration.hpp>
+#include "DepthRenderer.hpp"
+#include "ShaderBus.hpp"
+#include "Configuration.hpp"
 
 void DepthRenderer::bind()
 {
 	// Bind shader
-	p_shader.bind();
+	_shader.bind();
 
 	// Vertex shader uniforms
-	p_shader.uploadUniform("u_viewMatrix", p_shaderBus.getViewMatrix());
-	p_shader.uploadUniform("u_projMatrix", p_shaderBus.getProjectionMatrix());
+	_shader.uploadUniform("u_viewMatrix", _shaderBus.getViewMatrix());
+	_shader.uploadUniform("u_projMatrix", _shaderBus.getProjectionMatrix());
 
 	// Texture uniforms
-	p_shader.uploadUniform("u_sampler_diffuseMap", 0);
+	_shader.uploadUniform("u_sampler_diffuseMap", 0);
 
 	// Depth testing
 	glEnable(GL_DEPTH_TEST);
@@ -25,7 +25,7 @@ void DepthRenderer::unbind()
 	glDisable(GL_CLIP_DISTANCE1);
 	glDisable(GL_DEPTH_TEST);
 
-	p_shader.unbind();
+	_shader.unbind();
 }
 
 void DepthRenderer::renderTerrainEntity(const TerrainEntity * entity)
@@ -38,10 +38,10 @@ void DepthRenderer::renderTerrainEntity(const TerrainEntity * entity)
 			glEnable(GL_CULL_FACE);
 
 			// Shader uniforms
-			p_shader.uploadUniform("u_modelMatrix",   mat4(1.0f));
-			p_shader.uploadUniform("u_isAlphaObject", false);
-			p_shader.uploadUniform("u_isInstanced",   false);
-			p_shader.uploadUniform("u_maxY",          (std::numeric_limits<float>::max)());
+			_shader.uploadUniform("u_modelMatrix",   mat4(1.0f));
+			_shader.uploadUniform("u_isAlphaObject", false);
+			_shader.uploadUniform("u_isInstanced",   false);
+			_shader.uploadUniform("u_maxY",          (std::numeric_limits<float>::max)());
 
 			// Bind
 			glBindVertexArray(entity->getOglBuffer()->getVAO());
@@ -73,9 +73,9 @@ void DepthRenderer::renderGameEntity(const GameEntity * entity)
 			}
 
 			// Shader uniforms
-			p_shader.uploadUniform("u_modelMatrix",   entity->getModelMatrix());
-			p_shader.uploadUniform("u_isAlphaObject", entity->isTransparent());
-			p_shader.uploadUniform("u_maxY",          entity->getMaxY());
+			_shader.uploadUniform("u_modelMatrix",   entity->getModelMatrix());
+			_shader.uploadUniform("u_isAlphaObject", entity->isTransparent());
+			_shader.uploadUniform("u_maxY",          entity->getMaxY());
 
 			// OpenGL parts
 			int index = 0;
@@ -91,12 +91,12 @@ void DepthRenderer::renderGameEntity(const GameEntity * entity)
 				// Render
 				if (buffer->isInstanced())
 				{
-					p_shader.uploadUniform("u_isInstanced", true);
+					_shader.uploadUniform("u_isInstanced", true);
 					glDrawArraysInstanced(GL_TRIANGLES, 0, buffer->getVertexCount(), buffer->getOffsetCount());
 				}
 				else
 				{
-					p_shader.uploadUniform("u_isInstanced", false);
+					_shader.uploadUniform("u_isInstanced", false);
 					glDrawArrays(GL_TRIANGLES, 0, buffer->getVertexCount());
 				}
 
@@ -124,9 +124,9 @@ void DepthRenderer::renderBillboardEntity(const BillboardEntity * entity)
 		if (entity->isEnabled())
 		{
 			// Shader uniforms
-			p_shader.uploadUniform("u_modelMatrix",   entity->getModelMatrix());
-			p_shader.uploadUniform("u_isAlphaObject", entity->isTransparent());
-			p_shader.uploadUniform("u_isInstanced",   false);
+			_shader.uploadUniform("u_modelMatrix",   entity->getModelMatrix());
+			_shader.uploadUniform("u_isAlphaObject", entity->isTransparent());
+			_shader.uploadUniform("u_isInstanced",   false);
 
 			// Texture
 			glActiveTexture(GL_TEXTURE0);
@@ -153,9 +153,9 @@ void DepthRenderer::renderAabbEntity(const AabbEntity* entity)
 		if (entity->isEnabled())
 		{
 			// Shader uniforms
-			p_shader.uploadUniform("u_modelMatrix",   entity->getModelMatrix());
-			p_shader.uploadUniform("u_isAlphaObject", false);
-			p_shader.uploadUniform("u_isInstanced",   false);
+			_shader.uploadUniform("u_modelMatrix",   entity->getModelMatrix());
+			_shader.uploadUniform("u_isAlphaObject", false);
+			_shader.uploadUniform("u_isInstanced",   false);
 
 			// VAO
 			glBindVertexArray(entity->getOglBuffer()->getVAO());
@@ -176,9 +176,9 @@ void DepthRenderer::renderWaterEntity(const WaterEntity* entity)
 		if (entity->isEnabled())
 		{
 			// Shader uniforms
-			p_shader.uploadUniform("u_modelMatrix",   mat4(1.0f));
-			p_shader.uploadUniform("u_isAlphaObject", false);
-			p_shader.uploadUniform("u_isInstanced",   false);
+			_shader.uploadUniform("u_modelMatrix",   mat4(1.0f));
+			_shader.uploadUniform("u_isAlphaObject", false);
+			_shader.uploadUniform("u_isInstanced",   false);
 
 			// Bind
 			glBindVertexArray(entity->getOglBuffer()->getVAO());

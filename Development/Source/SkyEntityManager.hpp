@@ -20,9 +20,9 @@ public:
 	void update(float delta) override;
 
 private:
-	void p_updateRotation(float delta);
-	void p_updateBrightness(float delta);
-	void p_updateEyeAdaption(float delta);
+	void _updateRotation(float delta);
+	void _updateBrightness(float delta);
+	void _updateEyeAdaption(float delta);
 
-	string p_selectedID = "";
+	string _selectedID = "";
 };

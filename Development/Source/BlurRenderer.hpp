@@ -24,9 +24,9 @@ public:
 	GLuint blurTexture(const GuiEntity * entity, GLuint texture, int index, int size, float intensity, int direction);
 
 private:
-	void p_render(const GuiEntity * entity, GLuint texture);
+	void _render(const GuiEntity * entity, GLuint texture);
 
-	vector<Framebuffer*> p_horizontalFramebuffers;
-	vector<Framebuffer*> p_verticalFramebuffers;
+	vector<Framebuffer*> _horizontalFramebuffers;
+	vector<Framebuffer*> _verticalFramebuffers;
 };
 

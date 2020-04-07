@@ -1,42 +1,42 @@
-#include <WE3D/SkyEntityManager.hpp>
-#include <WE3D/ShaderBus.hpp>
+#include "SkyEntityManager.hpp"
+#include "ShaderBus.hpp"
 #include <iostream>
 
 SkyEntityManager::SkyEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, ShaderBus& shaderBus) :
 	EntityManager(objLoader, texLoader, shaderBus)
 {
-	p_shaderBus.setSkyBrightness(1.0f);
+	_shaderBus.setSkyBrightness(1.0f);
 }
 
 SkyEntity * SkyEntityManager::getEntity(const string & ID)
 {
-	return dynamic_cast<SkyEntity*>(p_getBaseEntity(ID, EntityType::SKY));
+	return dynamic_cast<SkyEntity*>(_getBaseEntity(ID, EntityType::SKY));
 }
 
 SkyEntity * SkyEntityManager::getSelectedSky()
 {
-	if (p_getBaseEntities().empty() || p_selectedID == "")
+	if (_getBaseEntities().empty() || _selectedID == "")
 	{
 		return nullptr;
 	}
 	else
 	{
-		return getEntity(p_selectedID);
+		return getEntity(_selectedID);
 	}
 }
 
 void SkyEntityManager::selectSky(const string & ID)
 {
-	p_selectedID = ID;
+	_selectedID = ID;
 
 	if (getSelectedSky()->getAmbStrength() != -1.0f)
 	{
-		p_shaderBus.setAmbLightStrength(getSelectedSky()->getAmbStrength());
+		_shaderBus.setAmbLightStrength(getSelectedSky()->getAmbStrength());
 	}
 
 	if (getSelectedSky()->getDirStrength() != -1.0f)
 	{
-		p_shaderBus.setDirLightStrength(getSelectedSky()->getDirStrength());
+		_shaderBus.setDirLightStrength(getSelectedSky()->getDirStrength());
 	}
 }
 
@@ -92,7 +92,7 @@ void SkyEntityManager::addSkyEntity
 	};
 
 	// Create entity
-	p_createEntity(EntityType::SKY, ID)->load(ID);
+	_createEntity(EntityType::SKY, ID)->load(ID);
 
 	// Fill entity
 	getEntity(ID)->addOglBuffer(new OpenGLBuffer(SHAPE_CUBEMAP, skybox_data, sizeof(skybox_data) / sizeof(float)));
@@ -104,24 +104,24 @@ void SkyEntityManager::addSkyEntity
 void SkyEntityManager::update(float delta)
 {
 	// Check if any sky exists and if one selected
-	if (!p_getBaseEntities().empty() && getSelectedSky() != nullptr)
+	if (!_getBaseEntities().empty() && getSelectedSky() != nullptr)
 	{
 		// Shaderbus updates
-		p_shaderBus.setSkyRotationMatrix(getSelectedSky()->getRotationMatrix());
-		p_shaderBus.setDayReflectionCubeMap(getSelectedSky()->getDayCubeMap());
-		p_shaderBus.setNightReflectionCubeMap(getSelectedSky()->getNightCubeMap());
-		p_shaderBus.setSkyReflectionMixValue(getSelectedSky()->getMixValue());
+		_shaderBus.setSkyRotationMatrix(getSelectedSky()->getRotationMatrix());
+		_shaderBus.setDayReflectionCubeMap(getSelectedSky()->getDayCubeMap());
+		_shaderBus.setNightReflectionCubeMap(getSelectedSky()->getNightCubeMap());
+		_shaderBus.setSkyReflectionMixValue(getSelectedSky()->getMixValue());
 
 		// Core updates
-		p_updateRotation(delta);
-		p_updateBrightness(delta);
-		p_updateEyeAdaption(delta);
+		_updateRotation(delta);
+		_updateBrightness(delta);
+		_updateEyeAdaption(delta);
 	}
 }
 
-void SkyEntityManager::p_updateRotation(float delta)
+void SkyEntityManager::_updateRotation(float delta)
 {
-	for (auto & baseEntity : p_getBaseEntities())
+	for (auto & baseEntity : _getBaseEntities())
 	{
 		// Create temporary sky object
 		auto * sky = getEntity(baseEntity->getID());
@@ -141,9 +141,9 @@ void SkyEntityManager::p_updateRotation(float delta)
 	}
 }
 
-void SkyEntityManager::p_updateBrightness(float delta)
+void SkyEntityManager::_updateBrightness(float delta)
 {
-	for (auto & baseEntity : p_getBaseEntities())
+	for (auto & baseEntity : _getBaseEntities())
 	{
 		// Create temporary sky object
 		auto * sky = getEntity(baseEntity->getID());
@@ -170,63 +170,63 @@ void SkyEntityManager::p_updateBrightness(float delta)
 	// Ambient lighting
 	if (getSelectedSky()->getAmbStrength() != -1.0f)
 	{
-		if (p_shaderBus.getAmbLightStrength() < getSelectedSky()->getAmbStrength())
+		if (_shaderBus.getAmbLightStrength() < getSelectedSky()->getAmbStrength())
 		{
-			p_shaderBus.setAmbLightStrength(p_shaderBus.getAmbLightStrength() + (0.00005f * delta));
+			_shaderBus.setAmbLightStrength(_shaderBus.getAmbLightStrength() + (0.00005f * delta));
 		}
-		else if (p_shaderBus.getAmbLightStrength() > getSelectedSky()->getAmbStrength())
+		else if (_shaderBus.getAmbLightStrength() > getSelectedSky()->getAmbStrength())
 		{
-			p_shaderBus.setAmbLightStrength(p_shaderBus.getAmbLightStrength() - (0.00005f * delta));
+			_shaderBus.setAmbLightStrength(_shaderBus.getAmbLightStrength() - (0.00005f * delta));
 		}
 	}
 
 	// Directional lighting
 	if (getSelectedSky()->getDirStrength() != -1.0f)
 	{
-		if (p_shaderBus.getDirLightStrength() < getSelectedSky()->getDirStrength())
+		if (_shaderBus.getDirLightStrength() < getSelectedSky()->getDirStrength())
 		{
-			p_shaderBus.setDirLightStrength(p_shaderBus.getDirLightStrength() + (0.00005f * delta));
+			_shaderBus.setDirLightStrength(_shaderBus.getDirLightStrength() + (0.00005f * delta));
 		}
-		else if (p_shaderBus.getDirLightStrength() > getSelectedSky()->getDirStrength())
+		else if (_shaderBus.getDirLightStrength() > getSelectedSky()->getDirStrength())
 		{
-			p_shaderBus.setDirLightStrength(p_shaderBus.getDirLightStrength() - (0.00005f * delta));
+			_shaderBus.setDirLightStrength(_shaderBus.getDirLightStrength() - (0.00005f * delta));
 		}
 	}
 }
 
-void SkyEntityManager::p_updateEyeAdaption(float delta)
+void SkyEntityManager::_updateEyeAdaption(float delta)
 {
 	// Sky brightness changer
-	static float oldIntensity = p_shaderBus.getBloomIntensity();
+	static float oldIntensity = _shaderBus.getBloomIntensity();
 	
-	if (p_shaderBus.isSkyHdrEnabled())
+	if (_shaderBus.isSkyHdrEnabled())
 	{
 		if (getSelectedSky()->isDayTime())
 		{
-			if (p_shaderBus.getCameraPitch() > 10.0f) // Looking at sky
+			if (_shaderBus.getCameraPitch() > 10.0f) // Looking at sky
 			{
-				float targetIntensity = oldIntensity - ((p_shaderBus.getCameraPitch() - 10.0f) / 90.0f); // Based on verticle angle
+				float targetIntensity = oldIntensity - ((_shaderBus.getCameraPitch() - 10.0f) / 90.0f); // Based on verticle angle
 
-				if (p_shaderBus.getBloomIntensity() > targetIntensity) // Decrease bloom intensity
+				if (_shaderBus.getBloomIntensity() > targetIntensity) // Decrease bloom intensity
 				{
-					p_shaderBus.setBloomIntensity(p_shaderBus.getBloomIntensity() - (0.005f * delta));
+					_shaderBus.setBloomIntensity(_shaderBus.getBloomIntensity() - (0.005f * delta));
 				}
-				else if (p_shaderBus.getBloomIntensity() < targetIntensity) // Increase bloom intensity
+				else if (_shaderBus.getBloomIntensity() < targetIntensity) // Increase bloom intensity
 				{
-					p_shaderBus.setBloomIntensity(p_shaderBus.getBloomIntensity() + (0.0015f * delta));
+					_shaderBus.setBloomIntensity(_shaderBus.getBloomIntensity() + (0.0015f * delta));
 				}
 			}
 			else
 			{
-				if (p_shaderBus.getBloomIntensity() < oldIntensity) // Not looking at sky
+				if (_shaderBus.getBloomIntensity() < oldIntensity) // Not looking at sky
 				{
-					p_shaderBus.setBloomIntensity(p_shaderBus.getBloomIntensity() + (0.0035f * delta));
+					_shaderBus.setBloomIntensity(_shaderBus.getBloomIntensity() + (0.0035f * delta));
 				}
 			}
 		}
 		else
 		{
-			p_shaderBus.setBloomIntensity(oldIntensity); // Revert bloom intensity
+			_shaderBus.setBloomIntensity(oldIntensity); // Revert bloom intensity
 		}
 	}
 }

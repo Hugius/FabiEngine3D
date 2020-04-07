@@ -38,19 +38,19 @@ public:
 	bool hasWorldLoadedBefore(const string& worldID);
 
 private:
-	GameEntityManager& p_game;
+	GameEntityManager& _game;
 
 	// Getters
-	string p_getSelectedID();
+	string _getSelectedID();
 	
 	// Vectors
-	vector<string>       p_loadedWorlds;
-	vector<string>       p_modelNames;
-	vector<unsigned int> p_modelAmounts;
+	vector<string>       _loadedWorlds;
+	vector<string>       _modelNames;
+	vector<unsigned int> _modelAmounts;
 
 	// Other
-	DirectionType p_directionType           = DirectionType::Y;
-	TransformationType p_transformationType = TransformationType::T;
-	unsigned int p_modelIndex               = 0;
-	bool p_rotating                         = false;
+	DirectionType _directionType           = DirectionType::Y;
+	TransformationType _transformationType = TransformationType::T;
+	unsigned int _modelIndex               = 0;
+	bool _rotating                         = false;
 };

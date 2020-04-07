@@ -1,29 +1,29 @@
-#include <WE3D/TerrainEntityRenderer.hpp>
-#include <WE3D/Configuration.hpp>
+#include "TerrainEntityRenderer.hpp"
+#include "Configuration.hpp"
 
 void TerrainEntityRenderer::bind()
 {
 	// Bind shader
-	p_shader.bind();
+	_shader.bind();
 	
 	// Vertex shader uniforms
-	p_shader.uploadUniform("u_viewMatrix",    p_shaderBus.getViewMatrix());
-	p_shader.uploadUniform("u_projMatrix",    p_shaderBus.getProjectionMatrix());
-	p_shader.uploadUniform("u_shadowMatrix",  p_shaderBus.getShadowMatrix());
-	p_shader.uploadUniform("u_clippingPlane", vec4(0.0f, 1.0f, 0.0f, -(p_shaderBus.getSSRHeight()) + 1.0f));
+	_shader.uploadUniform("u_viewMatrix",    _shaderBus.getViewMatrix());
+	_shader.uploadUniform("u_projMatrix",    _shaderBus.getProjectionMatrix());
+	_shader.uploadUniform("u_shadowMatrix",  _shaderBus.getShadowMatrix());
+	_shader.uploadUniform("u_clippingPlane", vec4(0.0f, 1.0f, 0.0f, -(_shaderBus.getSSRHeight()) + 1.0f));
 													   
 	// Fragment shader uniforms						   
-	p_shader.uploadUniform("u_cameraPos",              p_shaderBus.getCameraPos());
-	p_shader.uploadUniform("u_dirLightPos",            p_shaderBus.getDirLightPos());
-	p_shader.uploadUniform("u_ambientStrength",        p_shaderBus.getAmbLightStrength());
-	p_shader.uploadUniform("u_dirLightStrength",       p_shaderBus.getDirLightStrength());
-	p_shader.uploadUniform("u_fogMinDistance",         p_shaderBus.getFogMinDistance());
-	p_shader.uploadUniform("u_ambientLightingEnabled", p_shaderBus.isAmbLightingEnabled());
-	p_shader.uploadUniform("u_dirLightingEnabled",     p_shaderBus.isDirLightingEnabled());
-	p_shader.uploadUniform("u_pointLightingEnabled",   p_shaderBus.isPointLightingEnabled());
-	p_shader.uploadUniform("u_fogEnabled",             p_shaderBus.isFogEnabled());
-	p_shader.uploadUniform("u_shadowsEnabled",         p_shaderBus.isShadowsEnabled());
-	p_shader.uploadUniform("u_shadowMapSize",          Config::getInst().getShadowQuality());
+	_shader.uploadUniform("u_cameraPos",              _shaderBus.getCameraPos());
+	_shader.uploadUniform("u_dirLightPos",            _shaderBus.getDirLightPos());
+	_shader.uploadUniform("u_ambientStrength",        _shaderBus.getAmbLightStrength());
+	_shader.uploadUniform("u_dirLightStrength",       _shaderBus.getDirLightStrength());
+	_shader.uploadUniform("u_fogMinDistance",         _shaderBus.getFogMinDistance());
+	_shader.uploadUniform("u_ambientLightingEnabled", _shaderBus.isAmbLightingEnabled());
+	_shader.uploadUniform("u_dirLightingEnabled",     _shaderBus.isDirLightingEnabled());
+	_shader.uploadUniform("u_pointLightingEnabled",   _shaderBus.isPointLightingEnabled());
+	_shader.uploadUniform("u_fogEnabled",             _shaderBus.isFogEnabled());
+	_shader.uploadUniform("u_shadowsEnabled",         _shaderBus.isShadowsEnabled());
+	_shader.uploadUniform("u_shadowMapSize",          Config::getInst().getShadowQuality());
 
 	// Depth testing
 	glEnable(GL_DEPTH_TEST);
@@ -33,8 +33,8 @@ void TerrainEntityRenderer::bind()
 void TerrainEntityRenderer::unbind()
 {
 	glDisable(GL_DEPTH_TEST);
-	p_shader.unbind();
-	p_lightCounter = 0;
+	_shader.unbind();
+	_lightCounter = 0;
 }
 
 void TerrainEntityRenderer::placeLightEntity(const LightEntity * light)
@@ -43,10 +43,10 @@ void TerrainEntityRenderer::placeLightEntity(const LightEntity * light)
 	{
 		if (light->isEnabled())
 		{
-			p_shader.uploadUniform("u_pointLightsPos[" + std::to_string(p_lightCounter) + "]", light->getPosition());
-			p_shader.uploadUniform("u_pointLightsColor[" + std::to_string(p_lightCounter) + "]", light->getColor());
-			p_shader.uploadUniform("u_pointLightsStrength[" + std::to_string(p_lightCounter) + "]", light->getStrength());
-			p_lightCounter++;
+			_shader.uploadUniform("u_pointLightsPos[" + std::to_string(_lightCounter) + "]", light->getPosition());
+			_shader.uploadUniform("u_pointLightsColor[" + std::to_string(_lightCounter) + "]", light->getColor());
+			_shader.uploadUniform("u_pointLightsStrength[" + std::to_string(_lightCounter) + "]", light->getStrength());
+			_lightCounter++;
 		}
 	}
 }
@@ -61,19 +61,19 @@ void TerrainEntityRenderer::render(const TerrainEntity * entity)
 			glEnable(GL_CULL_FACE);
 
 			// Shader uniforms
-			p_shader.uploadUniform("u_blendmappingEnabled", entity->isBlendMapped());
-			p_shader.uploadUniform("u_blendmapRepeat",      entity->getBlendRepeat());
-			p_shader.uploadUniform("u_blendmapRepeatR",     entity->getBlendRepeatR());
-			p_shader.uploadUniform("u_blendmapRepeatG",     entity->getBlendRepeatG());
-			p_shader.uploadUniform("u_blendmapRepeatB",     entity->getBlendRepeatB());
+			_shader.uploadUniform("u_blendmappingEnabled", entity->isBlendMapped());
+			_shader.uploadUniform("u_blendmapRepeat",      entity->getBlendRepeat());
+			_shader.uploadUniform("u_blendmapRepeatR",     entity->getBlendRepeatR());
+			_shader.uploadUniform("u_blendmapRepeatG",     entity->getBlendRepeatG());
+			_shader.uploadUniform("u_blendmapRepeatB",     entity->getBlendRepeatB());
 
 			// Texture uniforms
-			p_shader.uploadUniform("u_sampler_diffuseMap", 0);
-			p_shader.uploadUniform("u_sampler_blendMap",   1);
-			p_shader.uploadUniform("u_sampler_blendMapR",  2);
-			p_shader.uploadUniform("u_sampler_blendMapG",  3);
-			p_shader.uploadUniform("u_sampler_blendMapB",  4);
-			p_shader.uploadUniform("u_sampler_shadowMap",  5);
+			_shader.uploadUniform("u_sampler_diffuseMap", 0);
+			_shader.uploadUniform("u_sampler_blendMap",   1);
+			_shader.uploadUniform("u_sampler_blendMapR",  2);
+			_shader.uploadUniform("u_sampler_blendMapG",  3);
+			_shader.uploadUniform("u_sampler_blendMapB",  4);
+			_shader.uploadUniform("u_sampler_shadowMap",  5);
 
 			// Texture binding
 			glActiveTexture(GL_TEXTURE0);
@@ -87,7 +87,7 @@ void TerrainEntityRenderer::render(const TerrainEntity * entity)
 			glActiveTexture(GL_TEXTURE4);
 			glBindTexture(GL_TEXTURE_2D, entity->getBlendMapB());
 			glActiveTexture(GL_TEXTURE5);
-			glBindTexture(GL_TEXTURE_2D, p_shaderBus.getShadowMap());
+			glBindTexture(GL_TEXTURE_2D, _shaderBus.getShadowMap());
 
 			// Bind
 			glBindVertexArray(entity->getOglBuffer()->getVAO());

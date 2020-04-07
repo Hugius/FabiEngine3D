@@ -15,5 +15,5 @@ public:
 	void render(const GameEntity * entity);
 
 private:
-	unsigned int p_lightCounter = 0;
+	unsigned int _lightCounter = 0;
 };

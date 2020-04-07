@@ -38,18 +38,18 @@ public:
 	int getUsedChannelCount();
 
 private:
-	std::pair<const int, string>& p_getPair(AudioChunk& chunk);
-	bool p_isInMap(AudioChunk& chunk);
+	std::pair<const int, string>& _getPair(AudioChunk& chunk);
+	bool _isInMap(AudioChunk& chunk);
 
-	int p_getFreeChannel();
+	int _getFreeChannel();
 
-	std::map<int, string> p_channelMap;
+	std::map<int, string> _channelMap;
 
-	int p_musicIndex = 0;
+	int _musicIndex = 0;
 
-	bool p_debugging = false;
-	bool p_soundEnabled = true;
-	bool p_musicEnabled = true;
+	bool _debugging = false;
+	bool _soundEnabled = true;
+	bool _musicEnabled = true;
 
-	float p_totalDelta = 0.0f;
+	float _totalDelta = 0.0f;
 };

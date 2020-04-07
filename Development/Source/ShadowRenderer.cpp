@@ -1,12 +1,12 @@
-#include <WE3D/ShadowRenderer.hpp>
-#include <WE3D/ShaderBus.hpp>
-#include <WE3D/Configuration.hpp>
+#include "ShadowRenderer.hpp"
+#include "ShaderBus.hpp"
+#include "Configuration.hpp"
 
 void ShadowRenderer::bind()
 {	
 	// Shader
-	p_shader.bind();
-	p_shader.uploadUniform("u_lightSpaceMatrix", p_shaderBus.getShadowMatrix());
+	_shader.bind();
+	_shader.uploadUniform("u_lightSpaceMatrix", _shaderBus.getShadowMatrix());
 
 	// OpenGL
 	glEnable(GL_DEPTH_TEST);
@@ -19,7 +19,7 @@ void ShadowRenderer::unbind()
 	glDisable(GL_CLIP_DISTANCE1);
 	glDisable(GL_DEPTH_TEST);
 
-	p_shader.unbind();
+	_shader.unbind();
 }
 
 void ShadowRenderer::renderGameEntity(const GameEntity * entity)
@@ -33,10 +33,10 @@ void ShadowRenderer::renderGameEntity(const GameEntity * entity)
 		}
 
 		// Uniforms
-		p_shader.uploadUniform("u_modelMatrix",        entity->getModelMatrix());
-		p_shader.uploadUniform("u_alphaObject",        entity->isTransparent());
-		p_shader.uploadUniform("u_maxY",               entity->getMaxY());
-		p_shader.uploadUniform("u_sampler_diffuseMap", 0);
+		_shader.uploadUniform("u_modelMatrix",        entity->getModelMatrix());
+		_shader.uploadUniform("u_alphaObject",        entity->isTransparent());
+		_shader.uploadUniform("u_maxY",               entity->getMaxY());
+		_shader.uploadUniform("u_sampler_diffuseMap", 0);
 
 		// Bind
 		int index = 0;
@@ -53,12 +53,12 @@ void ShadowRenderer::renderGameEntity(const GameEntity * entity)
 			// Render
 			if (buffer->isInstanced())
 			{
-				p_shader.uploadUniform("u_isInstanced", true);
+				_shader.uploadUniform("u_isInstanced", true);
 				glDrawArraysInstanced(GL_TRIANGLES, 0, buffer->getVertexCount(), buffer->getOffsetCount());
 			}
 			else
 			{
-				p_shader.uploadUniform("u_isInstanced", false);
+				_shader.uploadUniform("u_isInstanced", false);
 				glDrawArrays(GL_TRIANGLES, 0, buffer->getVertexCount());
 			}
 

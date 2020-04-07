@@ -1,13 +1,13 @@
-#include <WE3D/AabbEntityRenderer.hpp>
+#include "AabbEntityRenderer.hpp"
 
 void AabbEntityRenderer::bind()
 {
 	// Bind shader
-	p_shader.bind();
+	_shader.bind();
 
 	// Vertex shader uniforms
-	p_shader.uploadUniform("u_viewMatrix", p_shaderBus.getViewMatrix());
-	p_shader.uploadUniform("u_projMatrix", p_shaderBus.getProjectionMatrix());
+	_shader.uploadUniform("u_viewMatrix", _shaderBus.getViewMatrix());
+	_shader.uploadUniform("u_projMatrix", _shaderBus.getProjectionMatrix());
 
 	// Depth testing
 	glEnable(GL_DEPTH_TEST);
@@ -16,7 +16,7 @@ void AabbEntityRenderer::bind()
 
 void AabbEntityRenderer::unbind()
 {
-	p_shader.unbind();
+	_shader.unbind();
 	glDisable(GL_DEPTH_TEST);
 }
 
@@ -27,7 +27,7 @@ void AabbEntityRenderer::render(const AabbEntity* entity)
 		if (entity->isEnabled())
 		{
 			// Shader uniforms
-			p_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix());
+			_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix());
 
 			// VAO
 			glBindVertexArray(entity->getOglBuffer()->getVAO());

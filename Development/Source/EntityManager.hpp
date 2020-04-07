@@ -43,16 +43,16 @@ public:
 	virtual void update(float delta) = 0;
 
 protected:
-	OBJLoader&     p_objLoader;
-	TextureLoader& p_texLoader;
-	ShaderBus&     p_shaderBus;
+	OBJLoader&     _objLoader;
+	TextureLoader& _texLoader;
+	ShaderBus&     _shaderBus;
 
-	Entity * p_createEntity(EntityType type, const string & ID);
+	Entity * _createEntity(EntityType type, const string & ID);
 
-	vector<Entity*> & p_getBaseEntities();
+	vector<Entity*> & _getBaseEntities();
 	
-	Entity * p_getBaseEntity(const string & ID, EntityType type);
+	Entity * _getBaseEntity(const string & ID, EntityType type);
 
 private:
-	vector<Entity*> p_entities;
+	vector<Entity*> _entities;
 };

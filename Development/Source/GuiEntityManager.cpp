@@ -1,4 +1,4 @@
-#include <WE3D/GuiEntityManager.hpp>
+#include "GuiEntityManager.hpp"
 
 GuiEntityManager::GuiEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, ShaderBus& shaderBus) :
 	EntityManager(objLoader, texLoader, shaderBus)
@@ -8,14 +8,14 @@ GuiEntityManager::GuiEntityManager(OBJLoader& objLoader, TextureLoader& texLoade
 
 GuiEntity* GuiEntityManager::getEntity(const string & ID)
 {
-	return dynamic_cast<GuiEntity*>(p_getBaseEntity(ID, EntityType::GUI));
+	return dynamic_cast<GuiEntity*>(_getBaseEntity(ID, EntityType::GUI));
 }
 
 const vector<GuiEntity*> GuiEntityManager::getEntities()
 {
 	vector<GuiEntity*> newVector;
 
-	for (auto& entity : p_getBaseEntities())
+	for (auto& entity : _getBaseEntities())
 	{
 		newVector.push_back(dynamic_cast<GuiEntity*>(entity));
 	}
@@ -26,7 +26,7 @@ const vector<GuiEntity*> GuiEntityManager::getEntities()
 void GuiEntityManager::addGuiEntity(const string & ID, const string & assetName, vec2 translation, float rotation, vec2 scaling, bool engine, bool centered)
 {
 	// Create entity
-	p_createEntity(EntityType::GUI, ID)->load(ID);
+	_createEntity(EntityType::GUI, ID)->load(ID);
 	getEntity(ID)->addOglBuffer(new OpenGLBuffer(0.0f, 0.0f, 1.0f, 1.0f, centered));
 
 	// Load transformation
@@ -37,18 +37,18 @@ void GuiEntityManager::addGuiEntity(const string & ID, const string & assetName,
 	// Load diffuse map
 	if (engine)
 	{
-		getEntity(ID)->setDiffuseMap(p_texLoader.getTexture("../Engine/Textures/" + assetName, true, true, false));
+		getEntity(ID)->setDiffuseMap(_texLoader.getTexture("../Engine/Textures/" + assetName, true, true, false));
 	}
 	else
 	{
-		getEntity(ID)->setDiffuseMap(p_texLoader.getTexture("../Game/Textures/GuiMaps/" + assetName, true, true, false));
+		getEntity(ID)->setDiffuseMap(_texLoader.getTexture("../Game/Textures/GuiMaps/" + assetName, true, true, false));
 	}
 }
 
 void GuiEntityManager::addGuiEntity(const string & ID, vec3 color, vec2 translation, float rotation, vec2 scaling, bool centered)
 {
 	// Create entity
-	p_createEntity(EntityType::GUI, ID)->load(ID);
+	_createEntity(EntityType::GUI, ID)->load(ID);
 	getEntity(ID)->addOglBuffer(new OpenGLBuffer(0.0f, 0.0f, 1.0f, 1.0f, centered));
 
 	// Load transformation
@@ -62,7 +62,7 @@ void GuiEntityManager::addGuiEntity(const string & ID, vec3 color, vec2 translat
 
 void GuiEntityManager::update(float delta)
 {
-	for (auto & baseEntity : p_getBaseEntities())
+	for (auto & baseEntity : _getBaseEntities())
 	{
 		// Create temporary game entity object
 		auto * entity = getEntity(baseEntity->getID());

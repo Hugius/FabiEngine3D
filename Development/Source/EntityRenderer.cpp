@@ -1,8 +1,8 @@
-#include <WE3D/EntityRenderer.hpp>
+#include "EntityRenderer.hpp"
 
 EntityRenderer::EntityRenderer(const string & vertexFile, const string & fragmentFile, ShaderBus& shaderBus) :
-	p_shader(vertexFile, fragmentFile),
-	p_shaderBus(shaderBus)
+	_shader(vertexFile, fragmentFile),
+	_shaderBus(shaderBus)
 {
 	
 }

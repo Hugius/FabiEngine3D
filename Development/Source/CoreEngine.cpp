@@ -1,56 +1,56 @@
-#include <WE3D/CoreEngine.hpp>
-#include <WE3D/Configuration.hpp>
+#include "CoreEngine.hpp"
+#include "Configuration.hpp"
 
-CoreEngine::CoreEngine(WoodEngine3D & we3d, EngineState engineState) :
-	p_we3d(we3d),
-	p_engineState(engineState),
-	p_objLoader(),
-	p_texLoader(),
-	p_audioLoader(),
-	p_inputHandler(p_timer),
-	p_shaderBus(),
-	p_windowManager(),
-	p_cameraManager(p_shaderBus),
-	p_renderEngine(p_shaderBus, p_timer),
-	p_skyEntityManager(p_objLoader, p_texLoader, p_shaderBus),
-	p_terrainEntityManager(p_objLoader, p_texLoader, p_shaderBus),
-	p_waterEntityManager(p_objLoader, p_texLoader, p_shaderBus),
-	p_gameEntityManager(p_objLoader, p_texLoader, p_shaderBus),
-	p_billboardEntityManager(p_objLoader, p_texLoader, p_shaderBus),
-	p_aabbEntityManager(p_objLoader, p_texLoader, p_shaderBus),
-	p_lightEntityManager(p_objLoader, p_texLoader, p_shaderBus),
-	p_guiEntityManager(p_objLoader, p_texLoader, p_shaderBus),
-	p_textEntityManager(p_objLoader, p_texLoader, p_shaderBus),
-	p_shadowManager(),
-	p_mousePicker(p_shaderBus),
-	p_modelEditor(p_objLoader, p_texLoader),
-	p_worldEditor(p_modelEditor.getModelNames(), p_gameEntityManager),
-	p_collisionDetector(),
-	p_collisionResolver(p_collisionDetector),
-	p_timer(),
-	p_audioManager(p_audioLoader),
-	p_audioPlayer()
+CoreEngine::CoreEngine(FabiEngine3D & fe3d, EngineState engineState) :
+	_fe3d(fe3d),
+	_engineState(engineState),
+	_windowManager(),
+	_objLoader(),
+	_texLoader(),
+	_audioLoader(),
+	_inputHandler(_timer),
+	_shaderBus(),
+	_cameraManager(_shaderBus),
+	_renderEngine(_shaderBus, _timer),
+	_skyEntityManager(_objLoader, _texLoader, _shaderBus),
+	_terrainEntityManager(_objLoader, _texLoader, _shaderBus),
+	_waterEntityManager(_objLoader, _texLoader, _shaderBus),
+	_gameEntityManager(_objLoader, _texLoader, _shaderBus),
+	_billboardEntityManager(_objLoader, _texLoader, _shaderBus),
+	_aabbEntityManager(_objLoader, _texLoader, _shaderBus),
+	_lightEntityManager(_objLoader, _texLoader, _shaderBus),
+	_guiEntityManager(_objLoader, _texLoader, _shaderBus),
+	_textEntityManager(_objLoader, _texLoader, _shaderBus),
+	_shadowManager(),
+	_mousePicker(_shaderBus),
+	_modelEditor(_objLoader, _texLoader),
+	_worldEditor(_modelEditor.getModelNames(), _gameEntityManager),
+	_collisionDetector(),
+	_collisionResolver(_collisionDetector),
+	_timer(),
+	_audioManager(_audioLoader),
+	_audioPlayer()
 {
 	
 }
 
-void CoreEngine::p_start()
+void CoreEngine::_start()
 {
-	p_setupApplication();
-	p_isRunning = true;
+	_setupApplication();
+	_isRunning = true;
 
-	while (p_isRunning)
+	while (_isRunning)
 	{
-		p_timer.calculateDeltaTime();
-		p_inputHandler.f_checkInput();
-		p_updateApplication();
-		p_renderApplication();
+		_timer.calculateDeltaTime();
+		_inputHandler.f_checkInput();
+		_updateApplication();
+		_renderApplication();
 	}
 
-	p_we3d.WE3D_DESTROY();
+	_fe3d.WE3D_DESTROY();
 }
 
-void CoreEngine::p_stop()
+void CoreEngine::_stop()
 {
-	p_isRunning = false;
+	_isRunning = false;
 }

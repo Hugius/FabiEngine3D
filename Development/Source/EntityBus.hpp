@@ -37,14 +37,14 @@ public:
 	const vector<TextEntity*>      & getTextEntities()      const;
 
 private:
-	const SkyEntity     * p_skyEntity     = nullptr;
-	const TerrainEntity * p_terrainEntity = nullptr;
-	const WaterEntity   * p_waterEntity   = nullptr;
+	const SkyEntity     * _skyEntity     = nullptr;
+	const TerrainEntity * _terrainEntity = nullptr;
+	const WaterEntity   * _waterEntity   = nullptr;
 	
-	const vector<GameEntity*>      p_gameEntities;
-	const vector<BillboardEntity*> p_billboardEntities;
-	const vector<AabbEntity*>      p_aabbEntities;
-	const vector<LightEntity*>     p_lightEntities;
-	const vector<GuiEntity*>       p_guiEntities;
-	const vector<TextEntity*>      p_textEntities;
+	const vector<GameEntity*>      _gameEntities;
+	const vector<BillboardEntity*> _billboardEntities;
+	const vector<AabbEntity*>      _aabbEntities;
+	const vector<LightEntity*>     _lightEntities;
+	const vector<GuiEntity*>       _guiEntities;
+	const vector<TextEntity*>      _textEntities;
 };

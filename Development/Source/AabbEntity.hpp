@@ -45,15 +45,15 @@ public:
 	const bool isResponsive() const;
 
 private:
-	mat4 p_modelMatrix = mat4(1.0f);
+	mat4 _modelMatrix = mat4(1.0f);
 
-	vec3 p_translation = vec3(0.0f, 0.0f, 0.0f);
-	vec3 p_rotation    = vec3(0.0f, 0.0f, 0.0f);
-	vec3 p_scaling     = vec3(1.0f, 1.0f, 1.0f);
+	vec3 _translation = vec3(0.0f, 0.0f, 0.0f);
+	vec3 _rotation    = vec3(0.0f, 0.0f, 0.0f);
+	vec3 _scaling     = vec3(1.0f, 1.0f, 1.0f);
 	
-	string p_parentID = "";
+	string _parentID = "";
 
-	CollisionDir p_collisionDirection = CollisionDir::NONE;
+	CollisionDir _collisionDirection = CollisionDir::NONE;
 
-	bool p_responsive = false;
+	bool _responsive = false;
 };

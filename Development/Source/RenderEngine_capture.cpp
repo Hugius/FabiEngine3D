@@ -1,17 +1,17 @@
-#include <WE3D/RenderEngine.hpp>
-#include <WE3D/ShaderBus.hpp>
+#include "RenderEngine.hpp"
+#include "ShaderBus.hpp"
 
 // Capturing reflection texture
-void RenderEngine::p_captureSSR(CameraManager & camera)
+void RenderEngine::_captureSSR(CameraManager & camera)
 {
-	if ((p_entityBus->getWaterEntity() != nullptr && p_shaderBus.isWaterEffectsEnabled()) || p_shaderBus.isSSREnabled())
+	if ((_entityBus->getWaterEntity() != nullptr && _shaderBus.isWaterEffectsEnabled()) || _shaderBus.isSSREnabled())
 	{
 		// Calculate distance between camera and reflection surface
-		float cameraDistance = (camera.getPosition().y - p_shaderBus.getSSRHeight());
+		float cameraDistance = (camera.getPosition().y - _shaderBus.getSSRHeight());
 
 		// Start capturing reflection
 		glEnable(GL_CLIP_DISTANCE0);
-		p_ssrFramebuffer.bind();
+		_ssrFramebuffer.bind();
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		// Change camera angle
@@ -22,12 +22,12 @@ void RenderEngine::p_captureSSR(CameraManager & camera)
 		camera.updateMatrices();
 
 		// Render scene
-		bool shadows = p_shaderBus.isShadowsEnabled();
-		p_shaderBus.setShadowsEnabled(false);
-		p_renderSkyEntity();
-		p_renderTerrainEntity();
-		p_renderGameEntities();
-		p_shaderBus.setShadowsEnabled(shadows);
+		bool shadows = _shaderBus.isShadowsEnabled();
+		_shaderBus.setShadowsEnabled(false);
+		_renderSkyEntity();
+		_renderTerrainEntity();
+		_renderGameEntities();
+		_shaderBus.setShadowsEnabled(shadows);
 
 		// Revert camera angle
 		cameraPos = camera.getPosition();
@@ -37,127 +37,127 @@ void RenderEngine::p_captureSSR(CameraManager & camera)
 		camera.updateMatrices();
 
 		// Stop capturing reflection
-		p_ssrFramebuffer.unbind();
+		_ssrFramebuffer.unbind();
 		glDisable(GL_CLIP_DISTANCE0);
 
 		// Assign texture
-		p_shaderBus.setSSRMap(p_ssrFramebuffer.getTexture(0));
+		_shaderBus.setSSRMap(_ssrFramebuffer.getTexture(0));
 	}
 }
 
 // Capturing water refraction texture
-void RenderEngine::p_captureWaterRefractions()
+void RenderEngine::_captureWaterRefractions()
 {
-	if ((p_entityBus->getWaterEntity() != nullptr && p_shaderBus.isWaterEffectsEnabled()))
+	if ((_entityBus->getWaterEntity() != nullptr && _shaderBus.isWaterEffectsEnabled()))
 	{
 		// Bind
-		p_waterRefractionFramebuffer.bind();
+		_waterRefractionFramebuffer.bind();
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		// Render scene
-		p_renderTerrainEntity();
+		_renderTerrainEntity();
 
 		// Unbind
-		p_waterRefractionFramebuffer.unbind();
+		_waterRefractionFramebuffer.unbind();
 
 		// Assign texture
-		p_shaderBus.setWaterRefractionMap(p_waterRefractionFramebuffer.getTexture(0));
+		_shaderBus.setWaterRefractionMap(_waterRefractionFramebuffer.getTexture(0));
 	}
 }
 
 // Capturing shadows
-void RenderEngine::p_captureShadows()
+void RenderEngine::_captureShadows()
 {
-	if (p_shaderBus.isShadowsEnabled())
+	if (_shaderBus.isShadowsEnabled())
 	{
 		// Bind
-		p_shadowFramebuffer.bind();
+		_shadowFramebuffer.bind();
 		glClear(GL_DEPTH_BUFFER_BIT);
-		p_shadowRenderer.bind();
+		_shadowRenderer.bind();
 
 		// Render game entities
-		for (auto & entity : p_entityBus->getGameEntities()) { p_shadowRenderer.renderGameEntity(entity); }
+		for (auto & entity : _entityBus->getGameEntities()) { _shadowRenderer.renderGameEntity(entity); }
 
 		// Unbind
-		p_shadowRenderer.unbind();
-		p_shadowFramebuffer.unbind();
-		p_shaderBus.setShadowMap(p_shadowFramebuffer.getTexture(0));
+		_shadowRenderer.unbind();
+		_shadowFramebuffer.unbind();
+		_shaderBus.setShadowMap(_shadowFramebuffer.getTexture(0));
 	}
 }
 
 // Capturing bloom parts
-void RenderEngine::p_captureBloom()
+void RenderEngine::_captureBloom()
 {
-	if (p_shaderBus.isBloomEnabled())
+	if (_shaderBus.isBloomEnabled())
 	{
 		// Process scene texture
-		p_bloomHdrFramebuffer.bind();
+		_bloomHdrFramebuffer.bind();
 		glClear(GL_COLOR_BUFFER_BIT);
-		p_bloomHdrRenderer.bind();
-		p_bloomHdrRenderer.render(&p_finalSurface, p_shaderBus.getSceneMap());
-		p_bloomHdrRenderer.unbind();
-		p_bloomHdrFramebuffer.unbind();
+		_bloomHdrRenderer.bind();
+		_bloomHdrRenderer.render(&_finalSurface, _shaderBus.getSceneMap());
+		_bloomHdrRenderer.unbind();
+		_bloomHdrFramebuffer.unbind();
 	
 		// Blur scene texture
-		p_blurRenderer.bind();
-		p_shaderBus.setBloomMap(p_blurRenderer.blurTexture(&p_finalSurface, p_bloomHdrFramebuffer.getTexture(0), BLUR_BLOOM, p_shaderBus.getBloomBlurSize(), p_shaderBus.getBloomIntensity(), BLUR_DIR_BOTH));
-		p_blurRenderer.unbind();
+		_blurRenderer.bind();
+		_shaderBus.setBloomMap(_blurRenderer.blurTexture(&_finalSurface, _bloomHdrFramebuffer.getTexture(0), BLUR_BLOOM, _shaderBus.getBloomBlurSize(), _shaderBus.getBloomIntensity(), BLUR_DIR_BOTH));
+		_blurRenderer.unbind();
 	}
 }
 
-void RenderEngine::p_captureDepth()
+void RenderEngine::_captureDepth()
 {
-	if (p_shaderBus.isDofEnabled() || p_shaderBus.isWaterEffectsEnabled())
+	if (_shaderBus.isDofEnabled() || _shaderBus.isWaterEffectsEnabled())
 	{
 		// Bind
-		p_depthFramebuffer.bind();
+		_depthFramebuffer.bind();
 		glClear(GL_DEPTH_BUFFER_BIT);
-		p_depthRenderer.bind();
+		_depthRenderer.bind();
 
 		// Render terrain entity
-		p_depthRenderer.renderTerrainEntity(p_entityBus->getTerrainEntity());
+		_depthRenderer.renderTerrainEntity(_entityBus->getTerrainEntity());
 
 		// Render game entities
-		for (auto & entity : p_entityBus->getGameEntities())
+		for (auto & entity : _entityBus->getGameEntities())
 		{
-			p_depthRenderer.renderGameEntity(entity);
+			_depthRenderer.renderGameEntity(entity);
 		}
 
 		// Render billboard entities
-		for (auto & entity : p_entityBus->getBillboardEntities())
+		for (auto & entity : _entityBus->getBillboardEntities())
 		{
-			p_depthRenderer.renderBillboardEntity(entity);
+			_depthRenderer.renderBillboardEntity(entity);
 		}
 
 		// Unbind
-		p_depthRenderer.unbind();
-		p_depthFramebuffer.unbind();
-		p_shaderBus.setDepthMap(p_depthFramebuffer.getTexture(0));
+		_depthRenderer.unbind();
+		_depthFramebuffer.unbind();
+		_shaderBus.setDepthMap(_depthFramebuffer.getTexture(0));
 	}
 }
 
-void RenderEngine::p_captureDofBlur()
+void RenderEngine::_captureDofBlur()
 {
-	if (p_shaderBus.isDofEnabled())
+	if (_shaderBus.isDofEnabled())
 	{
-		p_blurRenderer.bind();
-		p_shaderBus.setBlurMap(p_blurRenderer.blurTexture(&p_finalSurface, p_shaderBus.getSceneMap(), BLUR_DOF, 4, 1.0f, BLUR_DIR_BOTH));
-		p_blurRenderer.unbind();
+		_blurRenderer.bind();
+		_shaderBus.setBlurMap(_blurRenderer.blurTexture(&_finalSurface, _shaderBus.getSceneMap(), BLUR_DOF, 4, 1.0f, BLUR_DIR_BOTH));
+		_blurRenderer.unbind();
 	}
 }
 
-void RenderEngine::p_capturePostProcessing()
+void RenderEngine::_capturePostProcessing()
 {	
 	// Apply bloom and DOF on scene texture
-	p_bloomDofAdditionFramebuffer.bind();
-	p_postRenderer.bind();
-	p_postRenderer.render(&p_finalSurface, p_shaderBus.getSceneMap(), p_shaderBus.getBloomMap(), p_shaderBus.getDepthMap(), p_shaderBus.getBlurMap());
-	p_postRenderer.unbind();
-	p_bloomDofAdditionFramebuffer.unbind();
-	p_shaderBus.setBloomedDofSceneMap(p_bloomDofAdditionFramebuffer.getTexture(0));
+	_bloomDofAdditionFramebuffer.bind();
+	_postRenderer.bind();
+	_postRenderer.render(&_finalSurface, _shaderBus.getSceneMap(), _shaderBus.getBloomMap(), _shaderBus.getDepthMap(), _shaderBus.getBlurMap());
+	_postRenderer.unbind();
+	_bloomDofAdditionFramebuffer.unbind();
+	_shaderBus.setBloomedDofSceneMap(_bloomDofAdditionFramebuffer.getTexture(0));
 }
 
-void RenderEngine::p_captureMotionBlur(CameraManager & camera, ivec2 mousePos)
+void RenderEngine::_captureMotionBlur(CameraManager & camera, ivec2 mousePos)
 {
 	// Declare variables
 	static float oldYaw;
@@ -183,12 +183,12 @@ void RenderEngine::p_captureMotionBlur(CameraManager & camera, ivec2 mousePos)
 		strength = yDifference > 8 ? 8 : yDifference;
 	}
 
-	strength *= p_shaderBus.isMotionBlurEnabled();
+	strength *= _shaderBus.isMotionBlurEnabled();
 
 	// Blur the scene
-	p_blurRenderer.bind();
-	p_shaderBus.setMotionBlurMap(p_blurRenderer.blurTexture(&p_finalSurface, p_shaderBus.getBloomedDofSceneMap(), BLUR_MOTION, strength, 1.0f, type));
-	p_blurRenderer.unbind();
+	_blurRenderer.bind();
+	_shaderBus.setMotionBlurMap(_blurRenderer.blurTexture(&_finalSurface, _shaderBus.getBloomedDofSceneMap(), BLUR_MOTION, strength, 1.0f, type));
+	_blurRenderer.unbind();
 
 	// Set for next iteration
 	oldYaw = camera.getYaw();

@@ -59,30 +59,30 @@ public:
 	const bool hasSpriteAnimation() const;
 
 private:
-	mat4 p_modelMatrix = mat4(1.0f);
+	mat4 _modelMatrix = mat4(1.0f);
 
-	vec3 p_translation     = vec3(0.0f, 0.0f, 0.0f);
-	vec3 p_rotation        = vec3(0.0f, 0.0f, 0.0f);
-	vec3 p_initialRotation = vec3(0.0f, 0.0f, 0.0f);
-	vec3 p_scaling         = vec3(1.0f, 1.0f, 1.0f);
-	vec3 p_color           = vec3(1.0f);
+	vec3 _translation     = vec3(0.0f, 0.0f, 0.0f);
+	vec3 _rotation        = vec3(0.0f, 0.0f, 0.0f);
+	vec3 _initialRotation = vec3(0.0f, 0.0f, 0.0f);
+	vec3 _scaling         = vec3(1.0f, 1.0f, 1.0f);
+	vec3 _color           = vec3(1.0f);
 
-	ivec2 p_cameraFacing = ivec2(0);
+	ivec2 _cameraFacing = ivec2(0);
 
-	float p_maxDelta   = 0.0f;
-	float p_totalDelta = 0.0f;
+	float _maxDelta   = 0.0f;
+	float _totalDelta = 0.0f;
 	
-	int p_totalSpriteRows    = 0;
-	int p_totalSpriteColumns = 0;
-	int p_spriteRowIndex     = 0;
-	int p_spriteColumnIndex  = 0;
-	int p_repeats            = 0;
-	int p_maxRepeats         = 0;
+	int _totalSpriteRows    = 0;
+	int _totalSpriteColumns = 0;
+	int _spriteRowIndex     = 0;
+	int _spriteColumnIndex  = 0;
+	int _repeats            = 0;
+	int _maxRepeats         = 0;
 	
-	GLuint p_diffuseMap = 0;
+	GLuint _diffuseMap = 0;
 
-	string p_textContent = "";
+	string _textContent = "";
 
-	bool p_isTransparent      = false;
-	bool p_hasSpriteAnimation = false;
+	bool _isTransparent      = false;
+	bool _hasSpriteAnimation = false;
 };

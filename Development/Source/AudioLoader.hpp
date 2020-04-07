@@ -16,6 +16,6 @@ public:
 	Mix_Music* getMusic(const string& filePath);
 
 private:
-	std::map<string, Mix_Chunk*> p_chunkMap;
-	std::map<string, Mix_Music*> p_musicMap;
+	std::map<string, Mix_Chunk*> _chunkMap;
+	std::map<string, Mix_Music*> _musicMap;
 };

@@ -1,0 +1,578 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Source\AabbEntity.cpp">
+      <Filter>src\Entity System\Data Structures</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\BillboardEntity.cpp">
+      <Filter>src\Entity System\Data Structures</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Entity.cpp">
+      <Filter>src\Entity System\Data Structures</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEntity.cpp">
+      <Filter>src\Entity System\Data Structures</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GuiEntity.cpp">
+      <Filter>src\Entity System\Data Structures</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\LightEntity.cpp">
+      <Filter>src\Entity System\Data Structures</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SkyEntity.cpp">
+      <Filter>src\Entity System\Data Structures</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\TerrainEntity.cpp">
+      <Filter>src\Entity System\Data Structures</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\TextEntity.cpp">
+      <Filter>src\Entity System\Data Structures</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\WaterEntity.cpp">
+      <Filter>src\Entity System\Data Structures</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\AabbEntityManager.cpp">
+      <Filter>src\Entity System\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\BillboardEntityManager.cpp">
+      <Filter>src\Entity System\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEntityManager.cpp">
+      <Filter>src\Entity System\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GuiEntityRenderer.cpp">
+      <Filter>src\Entity System\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\LightEntityManager.cpp">
+      <Filter>src\Entity System\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SkyEntityManager.cpp">
+      <Filter>src\Entity System\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\TerrainEntityManager.cpp">
+      <Filter>src\Entity System\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\TextEntityManager.cpp">
+      <Filter>src\Entity System\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\WaterEntityManager.cpp">
+      <Filter>src\Entity System\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\AabbEntityRenderer.cpp">
+      <Filter>src\Rendering System\Renderers</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\BillboardEntityRenderer.cpp">
+      <Filter>src\Rendering System\Renderers</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\BloomHdrRenderer.cpp">
+      <Filter>src\Rendering System\Renderers</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\BlurRenderer.cpp">
+      <Filter>src\Rendering System\Renderers</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EntityRenderer.cpp">
+      <Filter>src\Rendering System\Renderers</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\FinalRenderer.cpp">
+      <Filter>src\Rendering System\Renderers</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEntityRenderer.cpp">
+      <Filter>src\Rendering System\Renderers</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\PostRenderer.cpp">
+      <Filter>src\Rendering System\Renderers</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ShadowRenderer.cpp">
+      <Filter>src\Rendering System\Renderers</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SkyEntityRenderer.cpp">
+      <Filter>src\Rendering System\Renderers</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\TerrainEntityRenderer.cpp">
+      <Filter>src\Rendering System\Renderers</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\WaterEntityRenderer.cpp">
+      <Filter>src\Rendering System\Renderers</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\RenderEngine_render.cpp">
+      <Filter>src\Rendering System\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\RenderEngine_capture.cpp">
+      <Filter>src\Rendering System\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\RenderEngine.cpp">
+      <Filter>src\Rendering System\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CoreEngine.cpp">
+      <Filter>src\Core System</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CoreEngine_ext.cpp">
+      <Filter>src\Core System</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GuiEntityManager.cpp">
+      <Filter>src\Entity System\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EntityManager.cpp">
+      <Filter>src\Entity System\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DepthRenderer.cpp">
+      <Filter>src\Rendering System\Renderers</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Framebuffer.cpp">
+      <Filter>src\Rendering System\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Framebuffer_ext.cpp">
+      <Filter>src\Rendering System\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\OpenGLBuffer.cpp">
+      <Filter>src\Rendering System\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\OpenGLShader.cpp">
+      <Filter>src\Rendering System\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EntityBus.cpp">
+      <Filter>src\Entity System\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ShaderBus.cpp">
+      <Filter>src\Rendering System\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\WindowManager.cpp">
+      <Filter>src\Rendering System\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ShadowManager.cpp">
+      <Filter>src\Rendering System\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CameraManager.cpp">
+      <Filter>src\Unassiged</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Configuration.cpp">
+      <Filter>src\Unassiged</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\InputHandler.cpp">
+      <Filter>src\Unassiged</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Timer.cpp">
+      <Filter>src\Unassiged</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Tools.cpp">
+      <Filter>src\Unassiged</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\AudioChunk.cpp">
+      <Filter>src\Audio System\Data Structures</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\AudioMusic.cpp">
+      <Filter>src\Audio System\Data Structures</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\AudioLoader.cpp">
+      <Filter>src\Audio System\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\AudioManager.cpp">
+      <Filter>src\Audio System\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\AudioPlayer.cpp">
+      <Filter>src\Audio System\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ModelEditor.cpp">
+      <Filter>src\Editor System\Model Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ModelEditor_updates.cpp">
+      <Filter>src\Editor System\Model Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\WorldEditor_updates.cpp">
+      <Filter>src\Editor System\World Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MousePicker.cpp">
+      <Filter>src\Editor System\World Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\WorldEditor.cpp">
+      <Filter>src\Editor System\World Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CollisionDetector.cpp">
+      <Filter>src\Physics System\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CollisionResolver.cpp">
+      <Filter>src\Physics System\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Collision.cpp">
+      <Filter>src\Physics System\Data Structures</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Main.cpp">
+      <Filter>src\Core System</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EngineController.cpp">
+      <Filter>src\Core System</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\OBJLoader.cpp">
+      <Filter>src\Asset Management System\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\TextureLoader_ext.cpp">
+      <Filter>src\Asset Management System\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\TextureLoader.cpp">
+      <Filter>src\Asset Management System\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\FabiEngine3D.cpp">
+      <Filter>src\Core System</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\AabbEntity.hpp">
+      <Filter>src\Entity System\Data Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\BillboardEntity.hpp">
+      <Filter>src\Entity System\Data Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Entity.hpp">
+      <Filter>src\Entity System\Data Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameEntity.hpp">
+      <Filter>src\Entity System\Data Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GuiEntity.hpp">
+      <Filter>src\Entity System\Data Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\LightEntity.hpp">
+      <Filter>src\Entity System\Data Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SkyEntity.hpp">
+      <Filter>src\Entity System\Data Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\TerrainEntity.hpp">
+      <Filter>src\Entity System\Data Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\TextEntity.hpp">
+      <Filter>src\Entity System\Data Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\WaterEntity.hpp">
+      <Filter>src\Entity System\Data Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\AabbEntityManager.hpp">
+      <Filter>src\Entity System\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\BillboardEntityManager.hpp">
+      <Filter>src\Entity System\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EntityManager.hpp">
+      <Filter>src\Entity System\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameEntityManager.hpp">
+      <Filter>src\Entity System\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GuiEntityManager.hpp">
+      <Filter>src\Entity System\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\LightEntityManager.hpp">
+      <Filter>src\Entity System\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SkyEntityManager.hpp">
+      <Filter>src\Entity System\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\TerrainEntityManager.hpp">
+      <Filter>src\Entity System\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\TextEntityManager.hpp">
+      <Filter>src\Entity System\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\WaterEntityManager.hpp">
+      <Filter>src\Entity System\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\AabbEntityRenderer.hpp">
+      <Filter>src\Rendering System\Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\BillboardEntityRenderer.hpp">
+      <Filter>src\Rendering System\Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameEntityRenderer.hpp">
+      <Filter>src\Rendering System\Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DepthRenderer.hpp">
+      <Filter>src\Rendering System\Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\BloomHdrRenderer.hpp">
+      <Filter>src\Rendering System\Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\BlurRenderer.hpp">
+      <Filter>src\Rendering System\Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EntityRenderer.hpp">
+      <Filter>src\Rendering System\Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GuiEntityRenderer.hpp">
+      <Filter>src\Rendering System\Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PostRenderer.hpp">
+      <Filter>src\Rendering System\Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\TerrainEntityRenderer.hpp">
+      <Filter>src\Rendering System\Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ShadowRenderer.hpp">
+      <Filter>src\Rendering System\Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SkyEntityRenderer.hpp">
+      <Filter>src\Rendering System\Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\WaterEntityRenderer.hpp">
+      <Filter>src\Rendering System\Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CoreEngine.hpp">
+      <Filter>src\Core System</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Framebuffer.hpp">
+      <Filter>src\Rendering System\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\OpenGLBuffer.hpp">
+      <Filter>src\Rendering System\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\OpenGLShader.hpp">
+      <Filter>src\Rendering System\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\FinalRenderer.hpp">
+      <Filter>src\Rendering System\Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\RenderEngine.hpp">
+      <Filter>src\Rendering System\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EntityBus.hpp">
+      <Filter>src\Entity System\Miscellaneous</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ShaderBus.hpp">
+      <Filter>src\Rendering System\Miscellaneous</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\WindowManager.hpp">
+      <Filter>src\Rendering System\Miscellaneous</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Tools.hpp">
+      <Filter>src\Unassiged</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CameraManager.hpp">
+      <Filter>src\Unassiged</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Configuration.hpp">
+      <Filter>src\Unassiged</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\InputHandler.hpp">
+      <Filter>src\Unassiged</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\InputTypes.hpp">
+      <Filter>src\Unassiged</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Logger.hpp">
+      <Filter>src\Unassiged</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Timer.hpp">
+      <Filter>src\Unassiged</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ShadowManager.hpp">
+      <Filter>src\Rendering System\Miscellaneous</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\AudioChunk.hpp">
+      <Filter>src\Audio System\Data Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\AudioMusic.hpp">
+      <Filter>src\Audio System\Data Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\AudioLoader.hpp">
+      <Filter>src\Audio System\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\AudioManager.hpp">
+      <Filter>src\Audio System\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\AudioPlayer.hpp">
+      <Filter>src\Audio System\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ModelEditor.hpp">
+      <Filter>src\Editor System\Model Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MousePicker.hpp">
+      <Filter>src\Editor System\World Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\WorldEditor.hpp">
+      <Filter>src\Editor System\World Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CollisionDetector.hpp">
+      <Filter>src\Physics System\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CollisionResolver.hpp">
+      <Filter>src\Physics System\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Collision.hpp">
+      <Filter>src\Physics System\Data Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EngineController.hpp">
+      <Filter>src\Core System</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\OBJLoader.hpp">
+      <Filter>src\Asset Management System\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\TextureLoader.hpp">
+      <Filter>src\Asset Management System\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\FabiEngine3D.hpp">
+      <Filter>src\Core System</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\WE3D\Engine\Shaders\AabbEntityShader.frag">
+      <Filter>src\Rendering System\Shaders</Filter>
+    </None>
+    <None Include="..\WE3D\Engine\Shaders\AabbEntityShader.vert">
+      <Filter>src\Rendering System\Shaders</Filter>
+    </None>
+    <None Include="..\WE3D\Engine\Shaders\BlurShader.frag">
+      <Filter>src\Rendering System\Shaders</Filter>
+    </None>
+    <None Include="..\WE3D\Engine\Shaders\BlurShader.vert">
+      <Filter>src\Rendering System\Shaders</Filter>
+    </None>
+    <None Include="..\WE3D\Engine\Shaders\DepthShader.frag">
+      <Filter>src\Rendering System\Shaders</Filter>
+    </None>
+    <None Include="..\WE3D\Engine\Shaders\DepthShader.vert">
+      <Filter>src\Rendering System\Shaders</Filter>
+    </None>
+    <None Include="..\WE3D\Engine\Shaders\FinalShader.frag">
+      <Filter>src\Rendering System\Shaders</Filter>
+    </None>
+    <None Include="..\WE3D\Engine\Shaders\FinalShader.vert">
+      <Filter>src\Rendering System\Shaders</Filter>
+    </None>
+    <None Include="..\WE3D\Engine\Shaders\GameEntityShader.frag">
+      <Filter>src\Rendering System\Shaders</Filter>
+    </None>
+    <None Include="..\WE3D\Engine\Shaders\GameEntityShader.vert">
+      <Filter>src\Rendering System\Shaders</Filter>
+    </None>
+    <None Include="..\WE3D\Engine\Shaders\GuiEntityShader.frag">
+      <Filter>src\Rendering System\Shaders</Filter>
+    </None>
+    <None Include="..\WE3D\Engine\Shaders\GuiEntityShader.vert">
+      <Filter>src\Rendering System\Shaders</Filter>
+    </None>
+    <None Include="..\WE3D\Engine\Shaders\PostShader.frag">
+      <Filter>src\Rendering System\Shaders</Filter>
+    </None>
+    <None Include="..\WE3D\Engine\Shaders\PostShader.vert">
+      <Filter>src\Rendering System\Shaders</Filter>
+    </None>
+    <None Include="..\WE3D\Engine\Shaders\ShadowShader.frag">
+      <Filter>src\Rendering System\Shaders</Filter>
+    </None>
+    <None Include="..\WE3D\Engine\Shaders\ShadowShader.vert">
+      <Filter>src\Rendering System\Shaders</Filter>
+    </None>
+    <None Include="..\WE3D\Engine\Shaders\SkyEntityShader.frag">
+      <Filter>src\Rendering System\Shaders</Filter>
+    </None>
+    <None Include="..\WE3D\Engine\Shaders\SkyEntityShader.vert">
+      <Filter>src\Rendering System\Shaders</Filter>
+    </None>
+    <None Include="..\WE3D\Engine\Shaders\TerrainEntityShader.frag">
+      <Filter>src\Rendering System\Shaders</Filter>
+    </None>
+    <None Include="..\WE3D\Engine\Shaders\TerrainEntityShader.vert">
+      <Filter>src\Rendering System\Shaders</Filter>
+    </None>
+    <None Include="..\WE3D\Engine\Shaders\WaterEntityShader.frag">
+      <Filter>src\Rendering System\Shaders</Filter>
+    </None>
+    <None Include="..\WE3D\Engine\Shaders\WaterEntityShader.vert">
+      <Filter>src\Rendering System\Shaders</Filter>
+    </None>
+    <None Include="..\WE3D\Engine\Shaders\BillboardEntityShader.frag">
+      <Filter>src\Rendering System\Shaders</Filter>
+    </None>
+    <None Include="..\WE3D\Engine\Shaders\BillboardEntityShader.vert">
+      <Filter>src\Rendering System\Shaders</Filter>
+    </None>
+    <None Include="..\WE3D\Engine\Shaders\BloomHdrShader.frag">
+      <Filter>src\Rendering System\Shaders</Filter>
+    </None>
+    <None Include="..\WE3D\Engine\Shaders\BloomHdrShader.vert">
+      <Filter>src\Rendering System\Shaders</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{bc06f263-fac4-43ce-9538-74713bac6026}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Scripting System">
+      <UniqueIdentifier>{66b5b776-14b5-4e28-b097-e30c8ce0cb37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Physics System">
+      <UniqueIdentifier>{75557977-53ff-4cfc-806f-eed57831ba34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Rendering System">
+      <UniqueIdentifier>{e9f298fb-a872-49c0-a35d-35fa73466a91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Rendering System\Shaders">
+      <UniqueIdentifier>{440d9f47-a6e1-4a10-9e27-c47bebabcdff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Rendering System\Renderers">
+      <UniqueIdentifier>{b5b89d31-2832-4f44-85dd-a84bcfca9b3d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Rendering System\Core">
+      <UniqueIdentifier>{5b4059b8-26d7-4cdf-a4fe-6519113f74f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Rendering System\OpenGL">
+      <UniqueIdentifier>{30487a92-5701-4893-8750-39fbd5335d0c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Rendering System\Miscellaneous">
+      <UniqueIdentifier>{b72c0402-30db-4107-9507-7df679c190bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Entity System">
+      <UniqueIdentifier>{c4f63f5b-6652-4b41-845d-38b4f82486c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Entity System\Managers">
+      <UniqueIdentifier>{8349d534-6683-47a7-82df-798f5743f887}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Entity System\Miscellaneous">
+      <UniqueIdentifier>{a9383fde-24d2-4de4-a47c-903abf1b7f05}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Editor System">
+      <UniqueIdentifier>{8ca24fe3-a649-4483-b1b1-2837c12a5264}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Core System">
+      <UniqueIdentifier>{b28fd9fc-ea3d-4ea5-b1eb-7ed64679c6f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Audio System">
+      <UniqueIdentifier>{48f63bff-ec2c-4a9e-b2e9-b9f2dba9c765}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Asset Management System">
+      <UniqueIdentifier>{fc66ec1d-2a5f-4b21-bd69-5c97bdd2cb50}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Audio System\Data Structures">
+      <UniqueIdentifier>{412a7d32-270f-499c-8d25-11e2a3f24ca2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Audio System\Core">
+      <UniqueIdentifier>{e4b03c05-682e-4cc6-900b-acbd387da2f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Editor System\Model Editor">
+      <UniqueIdentifier>{06b28638-e83d-4d54-abcf-c2c9adef26f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Editor System\World Editor">
+      <UniqueIdentifier>{f2efcfc8-0ca8-4e00-93b6-56ca366b00b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Physics System\Core">
+      <UniqueIdentifier>{122040e7-a21b-4601-8455-4f3c46a93e92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Physics System\Data Structures">
+      <UniqueIdentifier>{85d6b054-b6d8-4ce0-8705-825ac70350bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Entity System\Data Structures">
+      <UniqueIdentifier>{92fda4cb-6e05-4e02-8f6a-a76bd5d1c326}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\GUI System">
+      <UniqueIdentifier>{1dca8087-942c-4fd8-a32e-1cec42430193}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Unassiged">
+      <UniqueIdentifier>{9232271b-e823-495c-8b98-23b8a2564d81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Asset Management System\Models">
+      <UniqueIdentifier>{921aaa51-52b5-4d6a-a33b-f48c1e440469}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Asset Management System\Textures">
+      <UniqueIdentifier>{079f90fa-d7da-4f97-8a7b-9b286362b158}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

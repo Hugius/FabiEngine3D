@@ -59,28 +59,28 @@ public:
 	const float getUvRepeat() const;
 
 private:
-	mat4 p_modelMatrix = mat4(1.0f);
+	mat4 _modelMatrix = mat4(1.0f);
 
-	string p_modelName = "";
+	string _modelName = "";
 
-	vec3 p_translation = vec3(0.0f);
-	vec3 p_rotation    = vec3(0.0f);
-	vec3 p_scaling     = vec3(1.0f);
-	vec3 p_color       = vec3(1.0f);
+	vec3 _translation = vec3(0.0f);
+	vec3 _rotation    = vec3(0.0f);
+	vec3 _scaling     = vec3(1.0f);
+	vec3 _color       = vec3(1.0f);
 
-	vector<GLuint> p_diffuseMaps;
-	vector<GLuint> p_lightMaps;
-	vector<GLuint> p_reflectionMaps;
+	vector<GLuint> _diffuseMaps;
+	vector<GLuint> _lightMaps;
+	vector<GLuint> _reflectionMaps;
 
-	bool p_isTransparent      = false;
-	bool p_isFaceCulled       = false;
-	bool p_isLightMapped      = false;
-	bool p_isSkyReflective    = false;
-	bool p_isScreenReflective = false;
-	bool p_isSpecular         = false;
-	bool p_isShadowed         = true;
+	bool _isTransparent      = false;
+	bool _isFaceCulled       = false;
+	bool _isLightMapped      = false;
+	bool _isSkyReflective    = false;
+	bool _isScreenReflective = false;
+	bool _isSpecular         = false;
+	bool _isShadowed         = true;
 
-	float p_alpha = 1.0f;
-	float p_uvRepeat = 1.0f;
-	float p_maxY = (std::numeric_limits<float>::max)();
+	float _alpha = 1.0f;
+	float _uvRepeat = 1.0f;
+	float _maxY = (std::numeric_limits<float>::max)();
 };

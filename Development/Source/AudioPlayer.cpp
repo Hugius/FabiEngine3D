@@ -1,9 +1,9 @@
 #include <GLM/gtc/matrix_transform.hpp>
 #include <algorithm>
 
-#include <WE3D/AudioPlayer.hpp>
-#include <WE3D/Logger.hpp>
-#include <WE3D/Configuration.hpp>
+#include "AudioPlayer.hpp"
+#include "Logger.hpp"
+#include "Configuration.hpp"
 
 AudioPlayer::AudioPlayer()
 {
@@ -13,33 +13,33 @@ AudioPlayer::AudioPlayer()
 	// Initialize audio channels to none
 	for (int i = 0; i < Config::getInst().getTotalAudioChannels(); i++)
 	{
-		p_channelMap.insert(std::make_pair(i, ""));
+		_channelMap.insert(std::make_pair(i, ""));
 	}
 }
 
 void AudioPlayer::update(CameraManager& camera, std::vector<AudioChunk>& chunks, std::vector<AudioMusic>& music, float delta)
 {
 	// Channel debugging
-	if (p_debugging)
+	if (_debugging)
 	{
-		if (p_totalDelta >= 1000.0f)
+		if (_totalDelta >= 1000.0f)
 		{
-			p_totalDelta = 0.0f;
+			_totalDelta = 0.0f;
 			system("cls");
 
-			for (auto& element : p_channelMap)
+			for (auto& element : _channelMap)
 			{
 				Logger::getInst().throwDebug("Channel", std::to_string(element.first + 1), " : ", element.second);
 			}
 		}
 		else
 		{
-			p_totalDelta += delta;
+			_totalDelta += delta;
 		}
 	}
 
 	// Update stopped playing
-	for (auto& channelPair : p_channelMap)
+	for (auto& channelPair : _channelMap)
 	{
 		if (!Mix_Playing(channelPair.first) && !Mix_Paused(channelPair.first)) // If audio stopped playing, but is not paused
 		{
@@ -48,13 +48,13 @@ void AudioPlayer::update(CameraManager& camera, std::vector<AudioChunk>& chunks,
 	}
 
 	// Update sound disable
-	if (!p_soundEnabled)
+	if (!_soundEnabled)
 	{
 		Mix_HaltChannel(-1);
 	}
 	
 	// Music
-	if (p_musicEnabled)
+	if (_musicEnabled)
 	{
 		if (!music.empty()) // Music added
 		{
@@ -63,16 +63,16 @@ void AudioPlayer::update(CameraManager& camera, std::vector<AudioChunk>& chunks,
 				// Select next song
 				if (music.size() == 1)
 				{
-					p_musicIndex = 0;
+					_musicIndex = 0;
 				}
 				else
 				{
 					srand((unsigned int)time(NULL));
-					p_musicIndex = rand() % music.size();
+					_musicIndex = rand() % music.size();
 				}
 
 				// Play song
-				Mix_PlayMusic(music[p_musicIndex].getMixMusic(), 0);
+				Mix_PlayMusic(music[_musicIndex].getMixMusic(), 0);
 			}
 		}
 		else // No music added
@@ -116,7 +116,7 @@ void AudioPlayer::update(CameraManager& camera, std::vector<AudioChunk>& chunks,
 				float range = (dot / 2.0f) + 0.5f; // Convert (-1 to 1) scale to (0.0f to 1.0f) scale
 				Uint8 leftStrength = Uint8(255.0f * range); // Left ear
 				Uint8 rightStrength = Uint8(255.0f - (255.0f * range)); // Right ear
-				Mix_SetPanning(p_getPair(chunk).first, leftStrength, rightStrength); // Apply stereo panning
+				Mix_SetPanning(_getPair(chunk).first, leftStrength, rightStrength); // Apply stereo panning
 			}
 		}
 	}
@@ -124,12 +124,12 @@ void AudioPlayer::update(CameraManager& camera, std::vector<AudioChunk>& chunks,
 
 void AudioPlayer::setSoundEnabled(bool val)
 {
-	p_soundEnabled = val;
+	_soundEnabled = val;
 }
 
 void AudioPlayer::setMusicEnabled(bool val)
 {
-	p_musicEnabled = val;
+	_musicEnabled = val;
 }
 
 void AudioPlayer::stopAllSounds()
@@ -144,26 +144,26 @@ void AudioPlayer::stopAllMusic()
 
 void AudioPlayer::playChunk(AudioChunk& chunk, int loops, int initialVolume, bool noRestart, int fadeMillis)
 {
-	if (p_soundEnabled)
+	if (_soundEnabled)
 	{
-		if (p_isInMap(chunk)) // If already playing
+		if (_isInMap(chunk)) // If already playing
 		{
 			if (!noRestart)
 			{
 				if (fadeMillis == 0)
 				{
-					Mix_PlayChannel(p_getPair(chunk).first, chunk.getMixChunk(), loops); // Play chunk again on same channel
+					Mix_PlayChannel(_getPair(chunk).first, chunk.getMixChunk(), loops); // Play chunk again on same channel
 				}
 				else
 				{
-					Mix_FadeInChannel(p_getPair(chunk).first, chunk.getMixChunk(), loops, fadeMillis); // Fade in chunk again on same channel
+					Mix_FadeInChannel(_getPair(chunk).first, chunk.getMixChunk(), loops, fadeMillis); // Fade in chunk again on same channel
 				}
 				setChunkVolume(chunk, initialVolume);
 			}
 		}
 		else // If not playing yet
 		{
-			int channel = p_getFreeChannel(); // Allocate new channel
+			int channel = _getFreeChannel(); // Allocate new channel
 
 			if (fadeMillis == 0)
 			{
@@ -174,7 +174,7 @@ void AudioPlayer::playChunk(AudioChunk& chunk, int loops, int initialVolume, boo
 				Mix_FadeInChannel(channel, chunk.getMixChunk(), loops, fadeMillis); // Fade in chunk
 			}
 
-			p_channelMap[channel] = chunk.getID(); // Assign to new channel
+			_channelMap[channel] = chunk.getID(); // Assign to new channel
 			setChunkVolume(chunk, initialVolume);
 		}
 	}
@@ -182,9 +182,9 @@ void AudioPlayer::playChunk(AudioChunk& chunk, int loops, int initialVolume, boo
 
 void AudioPlayer::pauseChunk(AudioChunk& chunk)
 {
-	if (p_isInMap(chunk))
+	if (_isInMap(chunk))
 	{
-		Mix_Pause(p_getPair(chunk).first); // Pause chunk
+		Mix_Pause(_getPair(chunk).first); // Pause chunk
 	}
 	else
 	{
@@ -194,9 +194,9 @@ void AudioPlayer::pauseChunk(AudioChunk& chunk)
 
 void AudioPlayer::resumeChunk(AudioChunk& chunk)
 {
-	if (p_isInMap(chunk))
+	if (_isInMap(chunk))
 	{
-		Mix_Resume(p_getPair(chunk).first); // Resume chunk
+		Mix_Resume(_getPair(chunk).first); // Resume chunk
 	}
 	else
 	{
@@ -206,9 +206,9 @@ void AudioPlayer::resumeChunk(AudioChunk& chunk)
 
 void AudioPlayer::stopChunk(AudioChunk& chunk, int fadeMillis)
 {
-	if (p_isInMap(chunk))
+	if (_isInMap(chunk))
 	{
-		Mix_FadeOutChannel(p_getPair(chunk).first, fadeMillis); // Stop chunk
+		Mix_FadeOutChannel(_getPair(chunk).first, fadeMillis); // Stop chunk
 	}
 	else
 	{
@@ -218,9 +218,9 @@ void AudioPlayer::stopChunk(AudioChunk& chunk, int fadeMillis)
 
 void AudioPlayer::setChunkVolume(AudioChunk& chunk, int volume)
 {
-	if (p_isInMap(chunk))
+	if (_isInMap(chunk))
 	{
-		Mix_Volume(p_getPair(chunk).first, volume); // Set volume
+		Mix_Volume(_getPair(chunk).first, volume); // Set volume
 	}
 	else
 	{
@@ -235,14 +235,14 @@ void AudioPlayer::setMusicVolume(int volume)
 
 void AudioPlayer::setChannelDebugging(bool val)
 {
-	p_debugging = val;
+	_debugging = val;
 }
 
 bool AudioPlayer::isPlaying(AudioChunk& chunk)
 {
-	if (p_isInMap(chunk))
+	if (_isInMap(chunk))
 	{
-		if (Mix_Playing(p_getPair(chunk).first))
+		if (Mix_Playing(_getPair(chunk).first))
 		{
 			return true;
 		}
@@ -259,9 +259,9 @@ bool AudioPlayer::isPlaying(AudioChunk& chunk)
 
 int AudioPlayer::getVolume(AudioChunk& chunk)
 {
-	if (p_isInMap(chunk))
+	if (_isInMap(chunk))
 	{
-		return Mix_Volume(p_getPair(chunk).first, -1); // Get volume
+		return Mix_Volume(_getPair(chunk).first, -1); // Get volume
 	}
 	else
 	{
@@ -273,7 +273,7 @@ int AudioPlayer::getUsedChannelCount()
 {
 	int count = 0;
 
-	for (auto& element : p_channelMap)
+	for (auto& element : _channelMap)
 	{
 		if (element.second != "")
 		{
@@ -284,9 +284,9 @@ int AudioPlayer::getUsedChannelCount()
 	return count;
 }
 
-std::pair<const int, string>& AudioPlayer::p_getPair(AudioChunk& chunk)
+std::pair<const int, string>& AudioPlayer::_getPair(AudioChunk& chunk)
 {
-	for (auto& pair : p_channelMap)
+	for (auto& pair : _channelMap)
 	{
 		if (pair.second == chunk.getID())
 		{
@@ -297,9 +297,9 @@ std::pair<const int, string>& AudioPlayer::p_getPair(AudioChunk& chunk)
 	Logger::getInst().throwError("Trying to get audio chunk pair with ID \'", chunk.getID(), " \', but does not exist!"); // Error
 }
 
-bool AudioPlayer::p_isInMap(AudioChunk& chunk)
+bool AudioPlayer::_isInMap(AudioChunk& chunk)
 {
-	for (auto& pair : p_channelMap)
+	for (auto& pair : _channelMap)
 	{
 		if (pair.second == chunk.getID())
 		{
@@ -310,9 +310,9 @@ bool AudioPlayer::p_isInMap(AudioChunk& chunk)
 	return false; // Chunk not found
 }
 
-int AudioPlayer::p_getFreeChannel()
+int AudioPlayer::_getFreeChannel()
 {
-	for (auto& element : p_channelMap)
+	for (auto& element : _channelMap)
 	{
 		if (element.second == "")
 		{

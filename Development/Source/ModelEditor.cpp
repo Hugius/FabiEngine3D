@@ -2,35 +2,35 @@
 #include <fstream>
 #include <sstream>
 
-#include <WE3D/ModelEditor.hpp>
-#include <WE3D/TextureLoader.hpp>
-#include <WE3D/OBJLoader.hpp>
-#include <WE3D/ShaderBus.hpp>
-#include <WE3D/Logger.hpp>
+#include "ModelEditor.hpp"
+#include "TextureLoader.hpp"
+#include "OBJLoader.hpp"
+#include "ShaderBus.hpp"
+#include "Logger.hpp"
 
 ModelEditor::ModelEditor(OBJLoader& objLoader, TextureLoader& texLoader) :
-	p_objLoader(objLoader),
-	p_texLoader(texLoader)
+	_objLoader(objLoader),
+	_texLoader(texLoader)
 {
-	p_loadFileNames();
+	_loadFileNames();
 }
 
 ModelEditor::~ModelEditor()
 {
-	for (auto & model : p_models)
+	for (auto & model : _models)
 	{
 		delete model;
 	}
 
-	p_models.clear();
+	_models.clear();
 }
 
-void ModelEditor::p_loadFileNames()
+void ModelEditor::_loadFileNames()
 {
 	// Remove potential previous filenames
-	if (!p_modelNames.empty())
+	if (!_modelNames.empty())
 	{
-		p_modelNames.clear();
+		_modelNames.clear();
 	}
 
 	string path = "../Game/OBJs/";
@@ -51,14 +51,14 @@ void ModelEditor::p_loadFileNames()
 				endOfNameIndex = i;
 			}
 		}
-		p_modelNames.push_back(path.substr(0, endOfNameIndex));
+		_modelNames.push_back(path.substr(0, endOfNameIndex));
 	}
 }
 
 void ModelEditor::loadModels(GameEntityManager & gameEntityManager)
 {
 	// If new models added
-	p_updateModelData();
+	_updateModelData();
 
 	// Open models file
 	string line;
@@ -87,19 +87,19 @@ void ModelEditor::loadModels(GameEntityManager & gameEntityManager)
 		}
 
 		// Load OBJ model
-		auto parts = p_objLoader.loadOBJ(fileName);
+		auto parts = _objLoader.loadOBJ(fileName);
 
 		// Create entity
-		p_models.push_back(new GameEntity());
-		p_models.back()->load(fileName);
-		p_models.back()->setModelName(fileName);
-		p_models.back()->setRotation(vec3(rotationX, rotationY, rotationZ));
-		p_models.back()->setScaling(vec3(scaleX, scaleY, scaleZ));
-		p_models.back()->setTransparent(alpha);
-		p_models.back()->setFaceCulled(culled);
-		p_models.back()->setLightMapped(lightMapped);
-		p_models.back()->setSkyReflective(reflective);
-		p_models.back()->setSpecular(specular);
+		_models.push_back(new GameEntity());
+		_models.back()->load(fileName);
+		_models.back()->setModelName(fileName);
+		_models.back()->setRotation(vec3(rotationX, rotationY, rotationZ));
+		_models.back()->setScaling(vec3(scaleX, scaleY, scaleZ));
+		_models.back()->setTransparent(alpha);
+		_models.back()->setFaceCulled(culled);
+		_models.back()->setLightMapped(lightMapped);
+		_models.back()->setSkyReflective(reflective);
+		_models.back()->setSpecular(specular);
 
 		// Create OpenGL buffers
 		for (auto & part : parts)
@@ -121,21 +121,21 @@ void ModelEditor::loadModels(GameEntityManager & gameEntityManager)
 			}
 
 			// OpenGL buffer
-			p_models.back()->addOglBuffer(new OpenGLBuffer(SHAPE_3D, &data[0], data.size()));
+			_models.back()->addOglBuffer(new OpenGLBuffer(SHAPE_3D, &data[0], data.size()));
 
 			// Diffuse map
-			p_models.back()->addDiffuseMap(p_texLoader.getTexture("../Game/Textures/DiffuseMaps/" + part.textureName, true, true));
+			_models.back()->addDiffuseMap(_texLoader.getTexture("../Game/Textures/DiffuseMaps/" + part.textureName, true, true));
 
 			// Light map
 			if (lightMapped)
 			{
-				p_models.back()->addLightmap(p_texLoader.getTexture("../Game/Textures/LightMaps/" + part.textureName, false, false));
+				_models.back()->addLightmap(_texLoader.getTexture("../Game/Textures/LightMaps/" + part.textureName, false, false));
 			}
 
 			// Reflection map
 			if (reflective)
 			{
-				p_models.back()->addReflectionMap(p_texLoader.getTexture("../Game/Textures/ReflectionMaps/" + part.textureName, false, false));
+				_models.back()->addReflectionMap(_texLoader.getTexture("../Game/Textures/ReflectionMaps/" + part.textureName, false, false));
 			}
 		}
 	}
@@ -143,15 +143,15 @@ void ModelEditor::loadModels(GameEntityManager & gameEntityManager)
 	file.close();
 }
 
-void ModelEditor::p_saveModelData()
+void ModelEditor::_saveModelData()
 {
-	if (!p_models.empty())
+	if (!_models.empty())
 	{
 		// Load file
 		std::ofstream file(string("../Engine/Models.we3d").c_str());
 
 		// Write to file
-		for (auto& model : p_models)
+		for (auto& model : _models)
 		{
 			file <<
 				model->getID() << " " <<
@@ -171,7 +171,7 @@ void ModelEditor::p_saveModelData()
 
 bool compareFunction(std::string a, std::string b) { return a < b; }
 
-void ModelEditor::p_updateModelData()
+void ModelEditor::_updateModelData()
 {
 	// Load file
 	std::ifstream inFile(string("../Engine/Models.we3d").c_str());  // Read
@@ -193,7 +193,7 @@ void ModelEditor::p_updateModelData()
 	}
 
 	// Check if new model was added
-	for (auto& fileName : p_modelNames)
+	for (auto& fileName : _modelNames)
 	{
 		if (std::find(knownFilenames.begin(), knownFilenames.end(), fileName) == knownFilenames.end()) // New model not known
 		{
@@ -204,7 +204,7 @@ void ModelEditor::p_updateModelData()
 	// Check if old model was removed
 	for (auto& fileName : knownFilenames)
 	{
-		if (std::find(p_modelNames.begin(), p_modelNames.end(), fileName) == p_modelNames.end()) // Known model not existing anymore
+		if (std::find(_modelNames.begin(), _modelNames.end(), fileName) == _modelNames.end()) // Known model not existing anymore
 		{
 			// Remove from file
 			for (auto& line : lines)
@@ -256,15 +256,15 @@ void ModelEditor::loadGUI(GuiEntityManager & guiEntityManager, TextEntityManager
 
 GameEntity * ModelEditor::getSelectedModel()
 {
-	return p_models[p_modelIndex];
+	return _models[_modelIndex];
 }
 
 vector<string> & ModelEditor::getModelNames()
 {
-	return p_modelNames;
+	return _modelNames;
 }
 
 vector<GameEntity*> & ModelEditor::getModels()
 {
-	return p_models;
+	return _models;
 }

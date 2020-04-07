@@ -1,127 +1,127 @@
-#include <WE3D/SkyEntity.hpp>
+#include "SkyEntity.hpp"
 
 void SkyEntity::setRotationMatrix(const mat4 & val)
 {
-	p_rotationMatrix = val;
+	_rotationMatrix = val;
 }
 
 void SkyEntity::setDayCubeMap(GLuint val)
 {
-	p_dayCubeMap = val;
+	_dayCubeMap = val;
 }
 
 void SkyEntity::setNightCubeMap(GLuint val)
 {
-	p_nightCubeMap = val;
+	_nightCubeMap = val;
 }
 
 void SkyEntity::setMixValue(float val)
 {
-	p_mixValue = val;
+	_mixValue = val;
 }
 
 void SkyEntity::setDayAmbStrength(float val)
 {
-	p_dayAmbStrength = val;
+	_dayAmbStrength = val;
 }
 
 void SkyEntity::setNightAmbStrength(float val)
 {
-	p_nightAmbStrength = val;
+	_nightAmbStrength = val;
 }
 
 void SkyEntity::setDayDirStrength(float val)
 {
-	p_dayDirStrength = val;
+	_dayDirStrength = val;
 }
 
 void SkyEntity::setNightDirStrength(float val)
 {
-	p_nightDirStrength = val;
+	_nightDirStrength = val;
 }
 
 void SkyEntity::setRotationSpeed(float val)
 {
-	p_rotationSpeed = val;
+	_rotationSpeed = val;
 }
 
 void SkyEntity::setDayTime()
 {
-	p_dayTime = true;
+	_dayTime = true;
 }
 
 void SkyEntity::setNightTime()
 {
-	p_dayTime = false;
+	_dayTime = false;
 }
 
 const mat4 & SkyEntity::getRotationMatrix() const
 {
-	return p_rotationMatrix;
+	return _rotationMatrix;
 }
 
 const GLuint SkyEntity::getDayCubeMap() const
 {
-	return p_dayCubeMap;
+	return _dayCubeMap;
 }
 
 const GLuint SkyEntity::getNightCubeMap() const
 {
-	return p_nightCubeMap;
+	return _nightCubeMap;
 }
 
 const float SkyEntity::getMixValue() const
 {
-	return p_mixValue;
+	return _mixValue;
 }
 
 const float SkyEntity::getAmbStrength() const
 {
-	if (p_dayTime)
+	if (_dayTime)
 	{
-		return p_dayAmbStrength;
+		return _dayAmbStrength;
 	}
 	else
 	{
-		return p_nightAmbStrength;
+		return _nightAmbStrength;
 	}
 }
 
 const float SkyEntity::getDirStrength() const
 {
-	if (p_dayTime)
+	if (_dayTime)
 	{
-		return p_dayDirStrength;
+		return _dayDirStrength;
 	}
 	else
 	{
-		return p_nightDirStrength;
+		return _nightDirStrength;
 	}
 }
 
 const float SkyEntity::getRotationSpeed() const
 {
-	return p_rotationSpeed;
+	return _rotationSpeed;
 }
 
 const bool SkyEntity::isDayTime() const
 {
-	return p_dayTime;
+	return _dayTime;
 }
 
 const bool SkyEntity::isNightTime() const
 {
-	return !p_dayTime;
+	return !_dayTime;
 }
 
 const GLuint SkyEntity::getCurrentCubeMap() const
 {
-	if (p_mixValue > 0.5f) // Night
+	if (_mixValue > 0.5f) // Night
 	{
-		return p_nightCubeMap;
+		return _nightCubeMap;
 	}
 	else // Day
 	{
-		return p_dayCubeMap;
+		return _dayCubeMap;
 	}
 }

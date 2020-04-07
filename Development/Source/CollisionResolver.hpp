@@ -21,13 +21,13 @@ public:
 	bool isCameraUnderGround();
 
 private:
-	CollisionDetector& p_collisionDetector;
+	CollisionDetector& _collisionDetector;
 
-	float p_cameraHeight = 0.0f;
-	float p_cameraSpeed = 0.0f;
+	float _cameraHeight = 0.0f;
+	float _cameraSpeed = 0.0f;
 
-	bool p_aabbResponseEnabled    = false;
-	bool p_terrainResponseEnabled = false;
-	bool p_aboveGround			  = false;
-	bool p_underGround			  = false;
+	bool _aabbResponseEnabled    = false;
+	bool _terrainResponseEnabled = false;
+	bool _aboveGround			  = false;
+	bool _underGround			  = false;
 };

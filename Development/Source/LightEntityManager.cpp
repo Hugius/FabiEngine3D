@@ -1,5 +1,5 @@
-#include <WE3D/LightEntityManager.hpp>
-#include <WE3D/Configuration.hpp>
+#include "LightEntityManager.hpp"
+#include "Configuration.hpp"
 
 LightEntityManager::LightEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, ShaderBus& shaderBus) :
 	EntityManager(objLoader, texLoader, shaderBus)
@@ -38,14 +38,14 @@ LightEntityManager::LightEntityManager(OBJLoader& objLoader, TextureLoader& texL
 
 LightEntity * LightEntityManager::getEntity(const string & ID)
 {
-	return dynamic_cast<LightEntity*>(p_getBaseEntity(ID, EntityType::LIGHT));
+	return dynamic_cast<LightEntity*>(_getBaseEntity(ID, EntityType::LIGHT));
 }
 
 const vector<LightEntity*> LightEntityManager::getEntities()
 {
 	vector<LightEntity*> newVector;
 
-	for (auto& entity : p_getBaseEntities())
+	for (auto& entity : _getBaseEntities())
 	{
 		newVector.push_back(dynamic_cast<LightEntity*>(entity));
 	}
@@ -56,7 +56,7 @@ const vector<LightEntity*> LightEntityManager::getEntities()
 void LightEntityManager::addLightEntity(const string & ID, vec3 position, vec3 color, float strength)
 {
 	// Create entity
-	p_createEntity(EntityType::LIGHT, ID)->load(ID);
+	_createEntity(EntityType::LIGHT, ID)->load(ID);
 
 	// Fill entity
 	getEntity(ID)->setPosition(position);

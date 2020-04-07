@@ -24,9 +24,9 @@ public:
 	const bool isEnabled() const;
 
 private:
-	vector<OpenGLBuffer*> p_oglBuffers;
+	vector<OpenGLBuffer*> _oglBuffers;
 
-	string p_ID = "ID_NULL";
+	string _ID = "ID_NULL";
 
-	bool p_enabled = true;
+	bool _enabled = true;
 };

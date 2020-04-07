@@ -1,132 +1,132 @@
 #pragma once
-#include <WE3D/WaterEntity.hpp>
+#include "WaterEntity.hpp"
 
 void WaterEntity::setColor(vec3 val)
 {
-	p_color = val;
+	_color = val;
 }
 
 void WaterEntity::setDudvMap(GLuint val)
 {
-	p_dudvMap = val;
+	_dudvMap = val;
 }
 
 void WaterEntity::setNormalMap(GLuint val)
 {
-	p_normalMap = val;
+	_normalMap = val;
 }
 
 void WaterEntity::setWaveValue(float val)
 {
-	p_waveValue = val;
+	_waveValue = val;
 }
 
 void WaterEntity::setTileRepeat(float val)
 {
-	p_tileRepeat = val;
+	_tileRepeat = val;
 }
 
 void WaterEntity::setWavingSpeed(float val)
 {
-	p_wavingSpeed = val;
+	_wavingSpeed = val;
 }
 
 void WaterEntity::setTimeX(float val)
 {
-	p_timeX = val;
+	_timeX = val;
 }
 
 void WaterEntity::setTimeZ(float val)
 {
-	p_timeZ = val;
+	_timeZ = val;
 }
 
 void WaterEntity::setShininess(float val)
 {
-	p_shininess = val;
+	_shininess = val;
 }
 
 void WaterEntity::setWaving(bool val)
 {
-	p_waving = val;
+	_waving = val;
 }
 
 void WaterEntity::setRippling(bool val)
 {
-	p_rippling = val;
+	_rippling = val;
 }
 
 void WaterEntity::setSurfaceHeight(float val)
 {
-	p_surfaceHeight = val;
+	_surfaceHeight = val;
 }
 
 void WaterEntity::setTransparency(float val)
 {
-	p_transparency = val;
+	_transparency = val;
 }
 
 const vec3 WaterEntity::getColor() const
 {
-	return p_color;
+	return _color;
 }
 
 const GLuint WaterEntity::getDudvMap() const
 {
-	return p_dudvMap;
+	return _dudvMap;
 }
 
 const GLuint WaterEntity::getNormalMap() const
 {
-	return p_normalMap;
+	return _normalMap;
 }
 
 const float WaterEntity::getWaveValue() const
 {
-	return p_waveValue;
+	return _waveValue;
 }
 
 const float WaterEntity::getTileRepeat() const
 {
-	return p_tileRepeat;
+	return _tileRepeat;
 }
 
 const float WaterEntity::getWavingSpeed() const
 {
-	return p_wavingSpeed;
+	return _wavingSpeed;
 }
 
 const float WaterEntity::getTimeX() const
 {
-	return p_timeX;
+	return _timeX;
 }
 
 const float WaterEntity::getTimeZ() const
 {
-	return p_timeZ;
+	return _timeZ;
 }
 
 const float WaterEntity::getShininess() const
 {
-	return p_shininess;
+	return _shininess;
 }
 
 const float WaterEntity::getSurfaceHeight() const
 {
-	return p_surfaceHeight;
+	return _surfaceHeight;
 }
 
 const float WaterEntity::getTransparency() const
 {
-	return p_transparency;
+	return _transparency;
 }
 
 const bool WaterEntity::isWaving() const
 {
-	return p_waving;
+	return _waving;
 }
 
 const bool WaterEntity::isRippling() const
 {
-	return p_rippling;
+	return _rippling;
 }

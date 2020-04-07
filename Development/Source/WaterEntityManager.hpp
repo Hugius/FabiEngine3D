@@ -22,5 +22,5 @@ public:
 	void update(float delta) override;
 
 private:
-	string p_selectedID = "";
+	string _selectedID = "";
 };

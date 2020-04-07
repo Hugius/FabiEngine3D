@@ -1,11 +1,11 @@
 #include <algorithm>
 
-#include <WE3D/AudioLoader.hpp>
-#include <WE3D/Logger.hpp>
+#include "AudioLoader.hpp"
+#include "Logger.hpp"
 
 AudioLoader::~AudioLoader()
 {
-	for (auto& element : p_chunkMap)
+	for (auto& element : _chunkMap)
 	{
 		Mix_FreeChunk(element.second);
 	}
@@ -14,9 +14,9 @@ AudioLoader::~AudioLoader()
 Mix_Chunk* AudioLoader::getChunk(const string& filePath)
 {
 	// Check if audio chunk was loaded already, if not, load data and store in std::map
-	auto iterator = p_chunkMap.find(filePath);
+	auto iterator = _chunkMap.find(filePath);
 
-	if (iterator == p_chunkMap.end())
+	if (iterator == _chunkMap.end())
 	{
 		Mix_Chunk* chunk = Mix_LoadWAV(filePath.c_str());
 
@@ -31,7 +31,7 @@ Mix_Chunk* AudioLoader::getChunk(const string& filePath)
 			auto extension = filePath.substr(filePath.size() - reversed.find("."), reversed.find(".")); // Substring file extension
 			std::transform(extension.begin(), extension.end(), extension.begin(), ::toupper); // Convert to uppercase
 			Logger::getInst().throwInfo("Loaded ", extension, " audio file: " + filePath); // Log loaded
-			p_chunkMap.insert(std::make_pair(filePath, chunk)); // Insert new data
+			_chunkMap.insert(std::make_pair(filePath, chunk)); // Insert new data
 			return chunk;
 		}
 	}
@@ -44,9 +44,9 @@ Mix_Chunk* AudioLoader::getChunk(const string& filePath)
 Mix_Music* AudioLoader::getMusic(const string& filePath)
 {
 	// Check if audio music was loaded already, if not, load data and store in std::map
-	auto iterator = p_musicMap.find(filePath);
+	auto iterator = _musicMap.find(filePath);
 
-	if (iterator == p_musicMap.end())
+	if (iterator == _musicMap.end())
 	{
 		Mix_Music* music = Mix_LoadMUS(filePath.c_str());
 
@@ -61,7 +61,7 @@ Mix_Music* AudioLoader::getMusic(const string& filePath)
 			auto extension = filePath.substr(filePath.size() - reversed.find("."), reversed.find(".")); // Substring file extension
 			std::transform(extension.begin(), extension.end(), extension.begin(), ::toupper); // Convert to uppercase
 			Logger::getInst().throwInfo("Loaded ", extension, " audio file: " + filePath); // Log loaded
-			p_musicMap.insert(std::make_pair(filePath, music)); // Insert new data
+			_musicMap.insert(std::make_pair(filePath, music)); // Insert new data
 			return music;
 		}
 	}

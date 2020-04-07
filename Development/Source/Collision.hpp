@@ -16,7 +16,7 @@ public:
 	inline bool zCollided() const;
 
 private:
-	int p_x;
-	int p_y;
-	int p_z;
+	int _x;
+	int _y;
+	int _z;
 };

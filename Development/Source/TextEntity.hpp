@@ -14,7 +14,7 @@ public:
 	const string& getFontName() const;
 
 private:
-	string p_textContent = "";
+	string _textContent = "";
 
-	string p_fontName = "";
+	string _fontName = "";
 };

@@ -1,18 +1,18 @@
-#include <WE3D/PostRenderer.hpp>
-#include <WE3D/ShaderBus.hpp>
+#include "PostRenderer.hpp"
+#include "ShaderBus.hpp"
 
 void PostRenderer::bind()
 {
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-	p_shader.bind();
+	_shader.bind();
 }
 
 void PostRenderer::unbind()
 {
 	glDisable(GL_BLEND);
-	p_shader.unbind();
+	_shader.unbind();
 }
 
 void PostRenderer::render(const GuiEntity * entity, GLuint sceneMap, GLuint bloomMap, GLuint dofMap, GLuint blurMap)
@@ -22,20 +22,20 @@ void PostRenderer::render(const GuiEntity * entity, GLuint sceneMap, GLuint bloo
 		if (entity->isEnabled())
 		{
 			// Shader uniforms
-			p_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix());
-			p_shader.uploadUniform("u_mirrorHor", entity->isMirroredHorizonally());
-			p_shader.uploadUniform("u_mirrorVer", entity->isMirroredVertically());
-			p_shader.uploadUniform("u_nearZ", p_shaderBus.getNearZ());
-			p_shader.uploadUniform("u_farZ", p_shaderBus.getFarZ());
-			p_shader.uploadUniform("u_dofMinDistance", p_shaderBus.getDofMinDistance() / 1000.0f);
-			p_shader.uploadUniform("u_bloomEnabled", p_shaderBus.isBloomEnabled());
-			p_shader.uploadUniform("u_dofEnabled", p_shaderBus.isDofEnabled());
+			_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix());
+			_shader.uploadUniform("u_mirrorHor", entity->isMirroredHorizonally());
+			_shader.uploadUniform("u_mirrorVer", entity->isMirroredVertically());
+			_shader.uploadUniform("u_nearZ", _shaderBus.getNearZ());
+			_shader.uploadUniform("u_farZ", _shaderBus.getFarZ());
+			_shader.uploadUniform("u_dofMinDistance", _shaderBus.getDofMinDistance() / 1000.0f);
+			_shader.uploadUniform("u_bloomEnabled", _shaderBus.isBloomEnabled());
+			_shader.uploadUniform("u_dofEnabled", _shaderBus.isDofEnabled());
 
 			// Texture uniforms
-			p_shader.uploadUniform("u_sampler_scene", 0);
-			p_shader.uploadUniform("u_sampler_bloom", 1);
-			p_shader.uploadUniform("u_sampler_dof",   2);
-			p_shader.uploadUniform("u_sampler_blur",  3);
+			_shader.uploadUniform("u_sampler_scene", 0);
+			_shader.uploadUniform("u_sampler_bloom", 1);
+			_shader.uploadUniform("u_sampler_dof",   2);
+			_shader.uploadUniform("u_sampler_blur",  3);
 
 			// Bind
 			glBindVertexArray(entity->getOglBuffer()->getVAO());

@@ -1,43 +1,43 @@
-#include <WE3D/Timer.hpp>
+#include "Timer.hpp"
 	
 void Timer::setCustomDeltaTime(float delta)
 {
-	p_deltaTime = delta;
+	_deltaTime = delta;
 }
 
 void Timer::calculateDeltaTime()
 {
-	p_deltaTime = 0.0f;
+	_deltaTime = 0.0f;
 
-	for (auto& element : p_deltaParts)
+	for (auto& element : _deltaParts)
 	{
-		p_deltaTime += element.second;
+		_deltaTime += element.second;
 	}
 }
 
 // Start measuring time
 void Timer::start(const string& ID)
 {
-	QueryPerformanceFrequency(&p_frequency);
-	QueryPerformanceCounter(&p_time1);
-	p_currentID = ID;
+	QueryPerformanceFrequency(&_frequency);
+	QueryPerformanceCounter(&_time1);
+	_currentID = ID;
 }
 
 // Calculate the delta time
 void Timer::stop()
 {
-	QueryPerformanceCounter(&p_time2);
-	p_deltaParts[p_currentID] = static_cast<float>((p_time2.QuadPart - p_time1.QuadPart) * 1000.0f / p_frequency.QuadPart);
+	QueryPerformanceCounter(&_time2);
+	_deltaParts[_currentID] = static_cast<float>((_time2.QuadPart - _time1.QuadPart) * 1000.0f / _frequency.QuadPart);
 }
 
 float Timer::getDeltaPart(const string& ID)
 {
-	return p_deltaParts[ID];
+	return _deltaParts[ID];
 }
 
 float Timer::getDeltaTime()
 {
-	return p_deltaTime;
+	return _deltaTime;
 }
 
 void Timer::uSleep(int waitTime)

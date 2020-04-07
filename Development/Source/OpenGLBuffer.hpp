@@ -32,17 +32,17 @@ public:
 	const bool isInstanced() const;
 
 private:
-	void p_create3D(int type, float data[], int dataCount);
-	void p_create3D_instanced(float data[], int dataCount, const vector<vec3> & offsets);
-	void p_create2D(float x, float y, float w, float h, bool centered);
+	void _create3D(int type, float data[], int dataCount);
+	void _create3D_instanced(float data[], int dataCount, const vector<vec3> & offsets);
+	void _create2D(float x, float y, float w, float h, bool centered);
 	
-	int p_vertexCount;
-	int p_offsetCount;
+	int _vertexCount;
+	int _offsetCount;
 
-	bool p_isInstanced = false;
+	bool _isInstanced = false;
 
-	GLuint p_vao;
-	GLuint p_vbo;
-	GLuint p_vbo_instanced;
+	GLuint _vao;
+	GLuint _vbo;
+	GLuint _vbo_instanced;
 };
 

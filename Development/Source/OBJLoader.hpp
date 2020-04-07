@@ -27,7 +27,7 @@ public:
 	vector<ObjPart> & loadOBJ(const string & fileName);
 
 private:
-	vector<ObjPart> p_loadOBJ(const string & fileName);
+	vector<ObjPart> _loadOBJ(const string & fileName);
 
-	std::map<string, vector<ObjPart>> p_objPartsMap;
+	std::map<string, vector<ObjPart>> _objPartsMap;
 };

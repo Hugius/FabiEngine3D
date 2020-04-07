@@ -1,131 +1,131 @@
-#include <WE3D/TerrainEntity.hpp>
+#include "TerrainEntity.hpp"
 
 void TerrainEntity::setPixelColors(vector<float>& val)
 {
-	p_pixelColors = val;
+	_pixelColors = val;
 }
 
 void TerrainEntity::setDiffuseMap(GLuint val)
 {
-	p_diffuseMap = val;
+	_diffuseMap = val;
 }
 
 void TerrainEntity::setBlendMap(GLuint val)
 {
-	p_blendMap = val;
+	_blendMap = val;
 }
 
 void TerrainEntity::setBlendMapR(GLuint val)
 {
-	p_blendMapR = val;
+	_blendMapR = val;
 }
 
 void TerrainEntity::setBlendMapG(GLuint val)
 {
-	p_blendMapG = val;
+	_blendMapG = val;
 }
 
 void TerrainEntity::setBlendMapB(GLuint val)
 {
-	p_blendMapB = val;
+	_blendMapB = val;
 }
 
 void TerrainEntity::setBlendRepeat(float val)
 {
-	p_blendRepeat = val;
+	_blendRepeat = val;
 }
 
 void TerrainEntity::setBlendRepeatR(float val)
 {
-	p_blendRepeatR = val;
+	_blendRepeatR = val;
 }
 
 void TerrainEntity::setBlendRepeatG(float val)
 {
-	p_blendRepeatG = val;
+	_blendRepeatG = val;
 }
 
 void TerrainEntity::setBlendRepeatB(float val)
 {
-	p_blendRepeatB = val;
+	_blendRepeatB = val;
 }
 
 void TerrainEntity::setSize(float val)
 {
-	p_size = val;
+	_size = val;
 }
 
 void TerrainEntity::setHeight(float val)
 {
-	p_height = val;
+	_height = val;
 }
 
 void TerrainEntity::setBlendMapped(bool val)
 {
-	p_blendMapped = val;
+	_blendMapped = val;
 }
 
 const GLuint TerrainEntity::getDiffuseMap() const
 {
-	return p_diffuseMap;
+	return _diffuseMap;
 }
 
 const GLuint TerrainEntity::getBlendMap() const
 {
-	return p_blendMap;
+	return _blendMap;
 }
 
 const GLuint TerrainEntity::getBlendMapR() const
 {
-	return p_blendMapR;
+	return _blendMapR;
 }
 
 const GLuint TerrainEntity::getBlendMapG() const
 {
-	return p_blendMapG;
+	return _blendMapG;
 }
 
 const GLuint TerrainEntity::getBlendMapB() const
 {
-	return p_blendMapB;
+	return _blendMapB;
 }
 
 const float TerrainEntity::getBlendRepeat() const
 {
-	return p_blendRepeat;
+	return _blendRepeat;
 }
 
 const float TerrainEntity::getBlendRepeatR() const
 {
-	return p_blendRepeatR;
+	return _blendRepeatR;
 }
 
 const float TerrainEntity::getBlendRepeatG() const
 {
-	return p_blendRepeatG;
+	return _blendRepeatG;
 }
 
 const float TerrainEntity::getBlendRepeatB() const
 {
-	return p_blendRepeatB;
+	return _blendRepeatB;
 }
 
 const float TerrainEntity::getSize() const
 {
-	return p_size;
+	return _size;
 }
 
 const float TerrainEntity::getHeight() const
 {
-	return p_height;
+	return _height;
 }
 
 const vector<float>& TerrainEntity::getPixelColors() const
 {
-	return p_pixelColors;
+	return _pixelColors;
 }
 
 const bool TerrainEntity::isBlendMapped() const
 {
-	return p_blendMapped;
+	return _blendMapped;
 }

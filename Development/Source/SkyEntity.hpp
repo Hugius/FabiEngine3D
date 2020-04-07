@@ -36,17 +36,17 @@ public:
 	const bool  isNightTime()        const;
 
 private:
-	mat4 p_rotationMatrix = mat4(1.0f);
+	mat4 _rotationMatrix = mat4(1.0f);
 
-	GLuint p_dayCubeMap   = 0;
-	GLuint p_nightCubeMap = 0;
+	GLuint _dayCubeMap   = 0;
+	GLuint _nightCubeMap = 0;
 
-	float p_mixValue         = 0.0f;
-	float p_dayAmbStrength   = -1.0f;
-	float p_dayDirStrength   = -1.0f;
-	float p_nightAmbStrength = -1.0f;
-	float p_nightDirStrength = -1.0f;
-	float p_rotationSpeed    = 0.0f;
+	float _mixValue         = 0.0f;
+	float _dayAmbStrength   = -1.0f;
+	float _dayDirStrength   = -1.0f;
+	float _nightAmbStrength = -1.0f;
+	float _nightDirStrength = -1.0f;
+	float _rotationSpeed    = 0.0f;
 
-	bool p_dayTime = true;
+	bool _dayTime = true;
 };

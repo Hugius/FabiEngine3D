@@ -1,10 +1,10 @@
-#include <WE3D/EntityManager.hpp>
-#include <WE3D/Logger.hpp>
+#include "EntityManager.hpp"
+#include "Logger.hpp"
 
 EntityManager::EntityManager(OBJLoader& objLoader, TextureLoader& texLoader, ShaderBus& shaderBus) :
-	p_objLoader(objLoader),
-	p_texLoader(texLoader),
-	p_shaderBus(shaderBus)
+	_objLoader(objLoader),
+	_texLoader(texLoader),
+	_shaderBus(shaderBus)
 {
 	
 }
@@ -12,22 +12,22 @@ EntityManager::EntityManager(OBJLoader& objLoader, TextureLoader& texLoader, Sha
 // Free dynamic memory
 EntityManager::~EntityManager()
 {
-	for (size_t i = 0; i < p_entities.size(); i++)
+	for (size_t i = 0; i < _entities.size(); i++)
 	{
-		delete p_entities[i];
-		p_entities.erase(p_entities.begin() + i);
+		delete _entities[i];
+		_entities.erase(_entities.begin() + i);
 	}
 }
 
 // Deleting entity
 void EntityManager::deleteEntity(const string & ID)
 {
-	for (size_t i = 0; i < p_entities.size(); i++)
+	for (size_t i = 0; i < _entities.size(); i++)
 	{
-		if (p_entities[i]->getID() == ID)
+		if (_entities[i]->getID() == ID)
 		{
-			delete p_entities[i];
-			p_entities.erase(p_entities.begin() + i);
+			delete _entities[i];
+			_entities.erase(_entities.begin() + i);
 			return;
 		}
 	}
@@ -38,15 +38,15 @@ void EntityManager::deleteEntity(const string & ID)
 
 void EntityManager::deleteEntities()
 {
-	p_entities.clear();
+	_entities.clear();
 }
 
 // Checking if entity exists
 bool EntityManager::isExisting(const string & ID)
 {
-	for (size_t i = 0; i < p_entities.size(); i++)
+	for (size_t i = 0; i < _entities.size(); i++)
 	{
-		if (p_entities[i]->getID() == ID)
+		if (_entities[i]->getID() == ID)
 		{
 			return true;
 		}
@@ -56,9 +56,9 @@ bool EntityManager::isExisting(const string & ID)
 }
 
 // Finding and returning entity
-Entity * EntityManager::p_getBaseEntity(const string & ID, EntityType type)
+Entity * EntityManager::_getBaseEntity(const string & ID, EntityType type)
 {
-	for (auto & entity : p_entities)
+	for (auto & entity : _entities)
 	{
 		if (entity->getID() == ID)
 		{
@@ -76,14 +76,14 @@ Entity * EntityManager::p_getBaseEntity(const string & ID, EntityType type)
 	Logger::getInst().throwError("Nonexisting " + temp[type] + " entity with ID " + ID + " requested");
 }
 
-vector<Entity*> & EntityManager::p_getBaseEntities()
+vector<Entity*> & EntityManager::_getBaseEntities()
 {
-	return p_entities;
+	return _entities;
 }
 
-Entity * EntityManager::p_createEntity(EntityType type, const string & ID)
+Entity * EntityManager::_createEntity(EntityType type, const string & ID)
 {
-	for (auto & entity : p_entities)
+	for (auto & entity : _entities)
 	{
 		if (entity->getID() == ID)
 		{
@@ -124,64 +124,64 @@ Entity * EntityManager::p_createEntity(EntityType type, const string & ID)
 	{
 		case(EntityType::SKY):
 		{
-			p_entities.push_back(new SkyEntity());
-			return dynamic_cast<SkyEntity*>(p_entities.back());
+			_entities.push_back(new SkyEntity());
+			return dynamic_cast<SkyEntity*>(_entities.back());
 			break;
 		}
 
 		case(EntityType::TERRAIN):
 		{
-			p_entities.push_back(new TerrainEntity());
-			return dynamic_cast<TerrainEntity*>(p_entities.back());
+			_entities.push_back(new TerrainEntity());
+			return dynamic_cast<TerrainEntity*>(_entities.back());
 			break;
 		}
 
 		case(EntityType::WATER):
 		{
-			p_entities.push_back(new WaterEntity());
-			return dynamic_cast<WaterEntity*>(p_entities.back());
+			_entities.push_back(new WaterEntity());
+			return dynamic_cast<WaterEntity*>(_entities.back());
 			break;
 		}
 
 		case(EntityType::GAME):
 		{
-			p_entities.push_back(new GameEntity());
-			return dynamic_cast<GameEntity*>(p_entities.back());
+			_entities.push_back(new GameEntity());
+			return dynamic_cast<GameEntity*>(_entities.back());
 			break;
 		}
 
 		case(EntityType::BILLBOARD):
 		{
-			p_entities.push_back(new BillboardEntity());
-			return dynamic_cast<BillboardEntity*>(p_entities.back());
+			_entities.push_back(new BillboardEntity());
+			return dynamic_cast<BillboardEntity*>(_entities.back());
 			break;
 		}
 
 		case(EntityType::AABB):
 		{
-			p_entities.push_back(new AabbEntity());
-			return dynamic_cast<AabbEntity*>(p_entities.back());
+			_entities.push_back(new AabbEntity());
+			return dynamic_cast<AabbEntity*>(_entities.back());
 			break;
 		}
 
 		case(EntityType::LIGHT):
 		{
-			p_entities.push_back(new LightEntity());
-			return dynamic_cast<LightEntity*>(p_entities.back());
+			_entities.push_back(new LightEntity());
+			return dynamic_cast<LightEntity*>(_entities.back());
 			break;
 		}
 
 		case(EntityType::GUI):
 		{
-			p_entities.push_back(new GuiEntity());
-			return dynamic_cast<GuiEntity*>(p_entities.back());
+			_entities.push_back(new GuiEntity());
+			return dynamic_cast<GuiEntity*>(_entities.back());
 			break;
 		}
 
 		case(EntityType::TEXT):
 		{
-			p_entities.push_back(new TextEntity());
-			return dynamic_cast<TextEntity*>(p_entities.back());
+			_entities.push_back(new TextEntity());
+			return dynamic_cast<TextEntity*>(_entities.back());
 			break;
 		}
 	}

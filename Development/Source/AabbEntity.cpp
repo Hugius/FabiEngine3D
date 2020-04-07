@@ -1,93 +1,93 @@
 #include <GLM/gtc/matrix_transform.hpp>
 
-#include <WE3D/AabbEntity.hpp>
+#include "AabbEntity.hpp"
 
 void AabbEntity::updateModelMatrix()
 {
-	p_modelMatrix = mat4(1.0f);
-	p_modelMatrix = glm::translate(p_modelMatrix, p_translation);
-	p_modelMatrix = glm::rotate(p_modelMatrix, glm::radians(p_rotation.z), vec3(0.0f, 0.0f, 1.0f));
-	p_modelMatrix = glm::rotate(p_modelMatrix, glm::radians(p_rotation.y), vec3(0.0f, 1.0f, 0.0f));
-	p_modelMatrix = glm::rotate(p_modelMatrix, glm::radians(p_rotation.x), vec3(1.0f, 0.0f, 0.0f));
-	p_modelMatrix = glm::scale(p_modelMatrix, p_scaling);
+	_modelMatrix = mat4(1.0f);
+	_modelMatrix = glm::translate(_modelMatrix, _translation);
+	_modelMatrix = glm::rotate(_modelMatrix, glm::radians(_rotation.z), vec3(0.0f, 0.0f, 1.0f));
+	_modelMatrix = glm::rotate(_modelMatrix, glm::radians(_rotation.y), vec3(0.0f, 1.0f, 0.0f));
+	_modelMatrix = glm::rotate(_modelMatrix, glm::radians(_rotation.x), vec3(1.0f, 0.0f, 0.0f));
+	_modelMatrix = glm::scale(_modelMatrix, _scaling);
 }
 
 void AabbEntity::setTranslation(vec3 val)
 {
-	p_translation = val;
+	_translation = val;
 }
 
 void AabbEntity::setRotation(vec3 val)
 {
-	p_rotation = val;
+	_rotation = val;
 }
 
 void AabbEntity::setScaling(vec3 val)
 {
-	p_scaling = val;
+	_scaling = val;
 }
 
 void AabbEntity::setParentID(const string & ID)
 {
-	p_parentID = ID;
+	_parentID = ID;
 }
 
 void AabbEntity::setCollisionDirection(const CollisionDir& direction)
 {
-	p_collisionDirection = direction;
+	_collisionDirection = direction;
 }
 
 void AabbEntity::setResponsiveness(bool val)
 {
-	p_responsive = val;
+	_responsive = val;
 }
 
 void AabbEntity::translate(vec3 val, float delta)
 {
-	p_translation += val * delta;
+	_translation += val * delta;
 }
 
 void AabbEntity::rotate(vec3 val, float delta)
 {
-	p_rotation += val * delta;
+	_rotation += val * delta;
 }
 
 void AabbEntity::scale(vec3 val, float delta)
 {
-	p_scaling += val * delta;
+	_scaling += val * delta;
 }
 
 const mat4 & AabbEntity::getModelMatrix() const
 {
-	return p_modelMatrix;
+	return _modelMatrix;
 }
 
 const vec3 AabbEntity::getTranslation() const
 {
-	return p_translation;
+	return _translation;
 }
 
 const vec3 AabbEntity::getRotation() const
 {
-	return p_rotation;
+	return _rotation;
 }
 
 const vec3 AabbEntity::getScaling() const
 {
-	return p_scaling;
+	return _scaling;
 }
 
 const string& AabbEntity::getParentID() const
 {
-	return p_parentID;
+	return _parentID;
 }
 
 const CollisionDir& AabbEntity::getCollisionDirection() const
 {
-	return p_collisionDirection;
+	return _collisionDirection;
 }
 
 const bool AabbEntity::isResponsive() const
 {
-	return p_responsive;
+	return _responsive;
 }

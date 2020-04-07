@@ -1,48 +1,48 @@
-#include <WE3D/Collision.hpp>
+#include "Collision.hpp"
 
 Collision::Collision(bool x, bool y, bool z) :
-	p_x(x), p_y(y), p_z(z)
+	_x(x), _y(y), _z(z)
 {
 
 }
 
 void Collision::operator+=(const Collision& c)
 {
-	p_x += c.xCollided();
-	p_y += c.yCollided();
-	p_z += c.zCollided();
+	_x += c.xCollided();
+	_y += c.yCollided();
+	_z += c.zCollided();
 
-	if (p_x > 1) p_x = 1;
-	if (p_y > 1) p_y = 1;
-	if (p_z > 1) p_z = 1;
+	if (_x > 1) _x = 1;
+	if (_y > 1) _y = 1;
+	if (_z > 1) _z = 1;
 }
 
 void Collision::setX(bool val)
 { 
-	p_x = val;
+	_x = val;
 }
 
 void Collision::setY(bool val)
 {
-	p_y = val;
+	_y = val;
 }
 
 void Collision::setZ(bool val)
 { 
-	p_z = val; 
+	_z = val; 
 }
 
 inline bool Collision::xCollided() const
 { 
-	return p_x;
+	return _x;
 }
 
 inline bool Collision::yCollided() const
 {
-	return p_y; 
+	return _y; 
 }
 
 inline bool Collision::zCollided() const
 { 
-	return p_z;
+	return _z;
 }

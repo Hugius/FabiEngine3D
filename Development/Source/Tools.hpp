@@ -1,0 +1,54 @@
+#pragma once
+#include <string>
+#include <random>
+#include <Windows.h>
+
+using std::string;
+
+class Tools final
+{
+public:
+	// Global instance
+	static Tools& getInst()
+	{
+		static Tools instance;
+		return instance;
+	}
+
+	// Safe singleton
+	Tools(Tools const&) = delete;
+	void operator=(Tools const&) = delete;
+
+	void  printInteger(int val);
+	void  printFloat(float val);
+	void  printDouble(double val);
+	int   getRandomInt(int min, int max);
+	int   DWORD_to_int(DWORD dword);
+	bool  compareData_string(const string & firstString, string targetString, string errorMsg);
+	float getRandomFloat(float min, float max);
+	float degreeToRadians(float degree);
+	float getPI();
+	float squared(float val);
+
+	template<typename T> inline const T & getMin(const T & first, const T & second)
+	{
+		return (first < second ? first : second);
+	}
+
+	template<typename T> inline const T & getMax(const T & first, const T & second)
+	{
+		return (first > second ? first : second);
+	}
+
+	template<typename BufferType, typename ElementType>
+	void storeData(BufferType buffer, int count, FILE * fileStream)
+	{
+		fread((void*)(buffer), sizeof(ElementType), count, fileStream);
+	}
+
+private:
+	Tools();
+	std::mt19937 p_generator;
+};
+
+extern Tools g_tools;

@@ -1,0 +1,171 @@
+#include <WE3D/WaterEntityManager.hpp>
+#include <WE3D/ShaderBus.hpp>
+
+WaterEntityManager::WaterEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, ShaderBus& shaderBus) :
+	EntityManager(objLoader, texLoader, shaderBus)
+{
+
+}
+
+WaterEntity * WaterEntityManager::getEntity(const string & ID)
+{
+	return dynamic_cast<WaterEntity*>(p_getBaseEntity(ID, EntityType::WATER));
+}
+
+WaterEntity * WaterEntityManager::getSelectedWater()
+{
+	if (p_getBaseEntities().empty() || p_selectedID == "")
+	{
+		return nullptr;
+	}
+	else
+	{
+		return getEntity(p_selectedID);
+	}
+}
+
+void WaterEntityManager::selectWater(const string & ID)
+{
+	p_selectedID = ID;
+}
+
+void WaterEntityManager::addWaterEntity
+(
+	const string & ID, const string & assetName, vec3 pos, float size,
+	float tileRepeat, float speed, bool waving, 
+	bool rippling, vec3 color, float shininess
+)
+{
+	// Total surface size
+	size /= 2.0f;
+
+	// Variables
+	vector<float> waterVertices;
+	float x = pos.x;
+	float y = pos.y;
+	float z = pos.z;
+
+	// Creating flat tiled water surface
+	for (float x = -size; x < size; x++)
+	{
+		for (float z = -size; z < size; z++)
+		{
+			float firstVertexX = pos.x + x;
+			float firstVertexY = y;
+			float firstVertexZ = pos.z + z + 1;
+			float firstUvX = (x / size);
+			float firstUvY = ((z / size) + (1.0f / size));
+
+			float secondVertexX = pos.x + x + 1;
+			float secondVertexY = y;
+			float secondVertexZ = pos.z + z + 1;
+			float secondUvX = ((x / size) + (1.0f / size));
+			float secondUvY = ((z / size) + (1.0f / size));
+
+			float thirdVertexX = pos.x + x + 1;
+			float thirdVertexY = y;
+			float thirdVertexZ = pos.z + z;
+			float thirdUvX = ((x / size) + (1.0f / size));
+			float thirdUvY = (z / size);
+
+			float fourthVertexX = pos.x + x;
+			float fourthVertexY = y;
+			float fourthVertexZ = pos.z + z;
+			float fourthUvX = (x / size);
+			float fourthUvY = (z / size);
+
+			waterVertices.push_back(firstVertexX);
+			waterVertices.push_back(firstVertexY);
+			waterVertices.push_back(firstVertexZ);
+			waterVertices.push_back(firstUvX);
+			waterVertices.push_back(firstUvY);
+
+			waterVertices.push_back(secondVertexX);
+			waterVertices.push_back(secondVertexY);
+			waterVertices.push_back(secondVertexZ);
+			waterVertices.push_back(secondUvX);
+			waterVertices.push_back(secondUvY);
+
+			waterVertices.push_back(thirdVertexX);
+			waterVertices.push_back(thirdVertexY);
+			waterVertices.push_back(thirdVertexZ);
+			waterVertices.push_back(thirdUvX);
+			waterVertices.push_back(thirdUvY);
+
+			waterVertices.push_back(thirdVertexX);
+			waterVertices.push_back(thirdVertexY);
+			waterVertices.push_back(thirdVertexZ);
+			waterVertices.push_back(thirdUvX);
+			waterVertices.push_back(thirdUvY);
+
+			waterVertices.push_back(fourthVertexX);
+			waterVertices.push_back(fourthVertexY);
+			waterVertices.push_back(fourthVertexZ);
+			waterVertices.push_back(fourthUvX);
+			waterVertices.push_back(fourthUvY);
+
+			waterVertices.push_back(firstVertexX);
+			waterVertices.push_back(firstVertexY);
+			waterVertices.push_back(firstVertexZ);
+			waterVertices.push_back(firstUvX);
+			waterVertices.push_back(firstUvY);
+		}
+	}
+	
+	// Create entity
+	p_createEntity(EntityType::WATER, ID)->load(ID);
+
+	// Filly entity
+	getEntity(ID)->addOglBuffer(new OpenGLBuffer(SHAPE_SURFACE, &waterVertices[0], waterVertices.size()));
+	getEntity(ID)->setDudvMap(p_texLoader.getTexture("../Game/Textures/DudvMaps/" + assetName, true, true));
+	getEntity(ID)->setNormalMap(p_texLoader.getTexture("../Game/Textures/NormalMaps/" + assetName, true, true));
+	getEntity(ID)->setTileRepeat(tileRepeat);
+	getEntity(ID)->setWavingSpeed(speed);
+	getEntity(ID)->setWaving(waving);
+	getEntity(ID)->setRippling(rippling);
+	getEntity(ID)->setColor(color);
+	getEntity(ID)->setShininess(shininess);
+	getEntity(ID)->setSurfaceHeight(pos.y);
+}
+
+void WaterEntityManager::update(float delta)
+{
+	// Update reflection height
+	if (getSelectedWater() != nullptr && p_shaderBus.isWaterEffectsEnabled())
+	{
+		p_shaderBus.setSSRHeight(getSelectedWater()->getSurfaceHeight());
+	}
+
+	// Update all water entities
+	for (auto & baseEntity : p_getBaseEntities())
+	{
+		// Create temporary water entity object
+		auto * water = getEntity(baseEntity->getID());
+
+		if (water->isEnabled() && p_shaderBus.isWaterEffectsEnabled())
+		{
+			water->setWaveValue(water->getWaveValue() + water->getWavingSpeed() / 100.0f);
+			water->setWaveValue(fmod(water->getWaveValue(), 1.0f));
+
+			// X waves
+			if (water->getTimeX() >= 2.5f)
+			{
+				water->setTimeX(0.25f);
+			}
+			else
+			{
+				water->setTimeX(water->getTimeX() + water->getWavingSpeed() / 3000.0f);
+			}
+
+			// Z waves
+			if (water->getTimeZ() >= 2.5f)
+			{
+				water->setTimeZ(0.25f);
+			}
+			else
+			{
+				water->setTimeZ(water->getTimeZ() + water->getWavingSpeed() / 3000.0f);
+			}
+		}
+	}
+}

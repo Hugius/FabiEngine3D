@@ -199,9 +199,6 @@
     <ClCompile Include="Source\Main.cpp">
       <Filter>src\Core System</Filter>
     </ClCompile>
-    <ClCompile Include="Source\EngineController.cpp">
-      <Filter>src\Core System</Filter>
-    </ClCompile>
     <ClCompile Include="Source\OBJLoader.cpp">
       <Filter>src\Asset Management System\Models</Filter>
     </ClCompile>
@@ -213,6 +210,15 @@
     </ClCompile>
     <ClCompile Include="Source\FabiEngine3D.cpp">
       <Filter>src\Core System</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EngineControllerGUI.cpp">
+      <Filter>src\Core System</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EngineGuiManager.cpp">
+      <Filter>src\GUI System</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EngineGuiButton.cpp">
+      <Filter>src\GUI System</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -399,9 +405,6 @@
     <ClInclude Include="Source\Collision.hpp">
       <Filter>src\Physics System\Data Structures</Filter>
     </ClInclude>
-    <ClInclude Include="Source\EngineController.hpp">
-      <Filter>src\Core System</Filter>
-    </ClInclude>
     <ClInclude Include="Source\OBJLoader.hpp">
       <Filter>src\Asset Management System\Models</Filter>
     </ClInclude>
@@ -410,6 +413,15 @@
     </ClInclude>
     <ClInclude Include="Source\FabiEngine3D.hpp">
       <Filter>src\Core System</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EngineControllerGUI.hpp">
+      <Filter>src\Core System</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EngineGuiManager.hpp">
+      <Filter>src\GUI System</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EngineGuiButton.hpp">
+      <Filter>src\GUI System</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

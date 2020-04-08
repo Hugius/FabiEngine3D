@@ -108,8 +108,8 @@ void SkyEntityManager::update(float delta)
 	{
 		// Shaderbus updates
 		_shaderBus.setSkyRotationMatrix(getSelectedSky()->getRotationMatrix());
-		_shaderBus.setDayReflectionCubeMap(getSelectedSky()->getDayCubeMap());
-		_shaderBus.setNightReflectionCubeMap(getSelectedSky()->getNightCubeMap());
+		_shaderBus.setSkyReflectionCubeMapDay(getSelectedSky()->getDayCubeMap());
+		_shaderBus.setSkyReflectionCubeMapNight(getSelectedSky()->getNightCubeMap());
 		_shaderBus.setSkyReflectionMixValue(getSelectedSky()->getMixValue());
 
 		// Core updates

@@ -1,18 +1,18 @@
 #include "ShaderBus.hpp"
 
-void ShaderBus::setDayReflectionCubeMap(GLuint val)
+void ShaderBus::setSkyReflectionCubeMapDay(GLuint val)
 {
-	_dayReflectionCubeMap = val;
+	_skyReflectionCubeMapDay = val;
 }
 
-void ShaderBus::setNightReflectionCubeMap(GLuint val)
+void ShaderBus::setSkyReflectionCubeMapNight(GLuint val)
 {
-	_nightReflectionCubeMap = val;
+	_skyReflectionCubeMapNight = val;
 }
 
-void ShaderBus::setSSRMap(GLuint val)
+void ShaderBus::setSceneReflectionMap(GLuint val)
 {
-	_ssrMap = val;
+	_sceneReflectionMap = val;
 }
 
 void ShaderBus::setWaterRefractionMap(GLuint val)
@@ -85,14 +85,14 @@ void ShaderBus::setDirLightPos(vec3 val)
 	_dirLightPosition = val;
 }
 
-void ShaderBus::setSSRHeight(float val)
+void ShaderBus::setSceneReflectionHeight(float val)
 {
-	_ssrHeight = val;
+	_sceneReflectionHeight = val;
 }
 
-void ShaderBus::setSSRFactor(float val)
+void ShaderBus::setSceneReflectionFactor(float val)
 {
-	_ssrFactor = val;
+	_sceneReflectionFactor = val;
 }
 
 void ShaderBus::setAmbLightStrength(float val)
@@ -175,9 +175,9 @@ void ShaderBus::setMSAAEnabled(bool val)
 	_msaaEnabled = val;
 }
 
-void ShaderBus::setSSREnabled(bool val)
+void ShaderBus::setSceneReflectionsEnabled(bool val)
 {
-	_ssrEnabled = val;
+	_sceneReflectionsEnabled = val;
 }
 
 void ShaderBus::setAmbLightEnabled(bool val)
@@ -260,19 +260,19 @@ void ShaderBus::setDebugRenderEnabled(bool val)
 	_debugRenderEnabled = val;
 }
 
-const GLuint ShaderBus::getDayReflectionCubeMap() const
+const GLuint ShaderBus::getSkyReflectionCubeMapDay() const
 {
-	return _dayReflectionCubeMap;
+	return _skyReflectionCubeMapDay;
 }
 
-const GLuint ShaderBus::getNightReflectionCubeMap() const
+const GLuint ShaderBus::getSceneReflectionCubeMapNight() const
 {
-	return _nightReflectionCubeMap;
+	return _skyReflectionCubeMapNight;
 }
 
-const GLuint ShaderBus::getSSRMap() const
+const GLuint ShaderBus::getSceneReflectionMap() const
 {
-	return _ssrMap;
+	return _sceneReflectionMap;
 }
 
 const GLuint ShaderBus::getWaterRefractionMap() const
@@ -345,14 +345,14 @@ const vec3 ShaderBus::getDirLightPos() const
 	return _dirLightPosition;
 }
 
-const float ShaderBus::getSSRHeight() const
+const float ShaderBus::getSceneReflectionHeight() const
 {
-	return _ssrHeight;
+	return _sceneReflectionHeight;
 }
 
-const float ShaderBus::getSSRFactor() const
+const float ShaderBus::getSceneReflectionFactor() const
 {
-	return _ssrFactor;
+	return _sceneReflectionFactor;
 }
 
 const float ShaderBus::getAmbLightStrength() const
@@ -435,9 +435,9 @@ const bool ShaderBus::isMSAAEnabled() const
 	return _msaaEnabled;
 }
 
-const bool ShaderBus::isSSREnabled() const
+const bool ShaderBus::isSceneReflectionsEnabled() const
 {
-	return _ssrEnabled;
+	return _sceneReflectionsEnabled;
 }
 
 const bool ShaderBus::isAmbLightingEnabled() const

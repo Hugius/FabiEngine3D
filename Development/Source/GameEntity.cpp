@@ -96,9 +96,9 @@ void GameEntity::setSkyReflective(bool val)
 	_isSkyReflective = val;
 }
 
-void GameEntity::setScreenReflective(bool val)
+void GameEntity::setSceneReflective(bool val)
 {
-	_isScreenReflective = val;
+	_isSceneReflective = val;
 }
 
 void GameEntity::setSpecular(bool val)
@@ -191,9 +191,9 @@ const bool GameEntity::isSkyReflective() const
 	return _isSkyReflective;
 }
 
-const bool GameEntity::isScreenReflective() const
+const bool GameEntity::isSceneReflective() const
 {
-	return _isScreenReflective;
+	return _isSceneReflective;
 }
 
 const bool GameEntity::isSpecular() const

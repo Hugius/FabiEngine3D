@@ -10,7 +10,7 @@ void TerrainEntityRenderer::bind()
 	_shader.uploadUniform("u_viewMatrix",    _shaderBus.getViewMatrix());
 	_shader.uploadUniform("u_projMatrix",    _shaderBus.getProjectionMatrix());
 	_shader.uploadUniform("u_shadowMatrix",  _shaderBus.getShadowMatrix());
-	_shader.uploadUniform("u_clippingPlane", vec4(0.0f, 1.0f, 0.0f, -(_shaderBus.getSSRHeight()) + 1.0f));
+	_shader.uploadUniform("u_clippingPlane", vec4(0.0f, 1.0f, 0.0f, -(_shaderBus.getSceneReflectionHeight()) + 1.0f));
 													   
 	// Fragment shader uniforms						   
 	_shader.uploadUniform("u_cameraPos",              _shaderBus.getCameraPos());

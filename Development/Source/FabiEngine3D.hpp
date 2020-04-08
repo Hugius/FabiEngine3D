@@ -30,13 +30,9 @@ public:
 	FabiEngine3D();
 	virtual ~FabiEngine3D();
 
-	// Game interface
-	void game_start();
-	void game_pause();
-	void game_unpause();
-	void game_pauseEntityUpdates();
-	void game_unpauseEntityUpdates();
-	void game_stop();
+	// Engine interface
+	void engine_start();
+	void engine_stop();
 
 	// Camera interface
 	void  camera_load(float fov, float nearZ, float farZ, vec3 startPos, float yaw = 0.0f, float pitch = 0.0f);
@@ -147,7 +143,7 @@ public:
 	vec3 gameEntity_getSize(const string& ID);
 	void gameEntity_enable(const string& ID);
 	void gameEntity_disable(const string& ID);
-	void gameEntity_setScreenReflective(const string& ID, bool enabled);
+	void gameEntity_setSceneReflective(const string& ID, bool enabled);
 	void gameEntity_setAlpha(const string& ID, float alpha);
 	void gameEntity_setShadowed(const string& ID, bool shadowed);
 	void gameEntity_setColor(const string& ID, vec3 color);
@@ -290,7 +286,7 @@ public:
 	void gfx_addPointLighting();
 	void gfx_addFog(float minDistance);
 	void gfx_addSkyReflections(float factor);
-	void gfx_addSSR(float height, float factor);
+	void gfx_addSceneReflections(float height, float factor);
 	void gfx_addLightMapping();
 	void gfx_addMSAA();
 	void gfx_addShadows(vec3 eye, vec3 center, float size, float reach);
@@ -305,7 +301,7 @@ public:
 	void gfx_removePointLighting();
 	void gfx_removeFog();
 	void gfx_removeSkyReflections();
-	void gfx_removeSSR();
+	void gfx_removeSceneReflections();
 	void gfx_removeLightMapping();
 	void gfx_removeMSAA();
 	void gfx_removeShadows();
@@ -405,11 +401,9 @@ public:
 
 protected:
 	// Virtual interface
-	virtual void WE3D_INIT_GAME() = 0;
-	virtual void WE3D_INIT_EDITOR() = 0;
-	virtual void WE3D_UPDATE_GAME(float delta) = 0;
-	virtual void WE3D_UPDATE_EDITOR(float delta) = 0;
-	virtual void WE3D_DESTROY() = 0;
+	virtual void FE3D_CONTROLLER_INIT() = 0;
+	virtual void FE3D_CONTROLLER_UPDATE(float delta) = 0;
+	virtual void FE3D_CONTROLLER_DESTROY() = 0;
 
 private:
 	CoreEngine* _core = nullptr;

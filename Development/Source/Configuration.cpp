@@ -5,26 +5,21 @@ Config::Config()
 	std::ifstream file;
 
 	// Open config file
-	file.open("../Config.we3d");
+	file.open("../Config.fe3d");
 	if (errno != 0)
 	{
-		Logger::getInst().throwError("Could not load config file!");
+		Logger::getInst().throwError("Could not load engine configuration file!");
 	}
 
 	// Store config file content
 	_processOption(file, window_width);
 	_processOption(file, window_height);
-	_processOption(file, window_fullscreen);
-	_processOption(file, window_borderless);
-	_processOption(file, window_vsync);
-	_processOption(file, window_dpi_scale);
+	_processOption(file, window_zoom_scale);
 	_processOption(file, msaa_quality);
 	_processOption(file, shadow_quality);
 	_processOption(file, water_quality);
-	_processOption(file, bloom_quality);
-	_processOption(file, max_lights);
-	_processOption(file, audio_channels);
-	_processOption(file, ssr_quality);
+	_processOption(file, reflection_quality);
+	_processOption(file, max_audio_channels);
 }
 
 void Config::_processOption(std::ifstream& file, bool& option)
@@ -74,37 +69,22 @@ void Config::_processOption(std::ifstream& file, float& option)
 
 const ivec2 Config::getWindowSize() const 
 { 
-	return ivec2(window_width / window_dpi_scale, window_height / window_dpi_scale); 
-}
-
-const float Config::getWindowScale() const 
-{
-	return window_dpi_scale; 
+	return ivec2(window_width / window_zoom_scale, window_height / window_zoom_scale); 
 }
 
 const int Config::getWindowWidth() const 
 {
-	return int(float(window_width) / window_dpi_scale); 
+	return int(float(window_width) / window_zoom_scale); 
 }
 
 const int Config::getWindowHeight() const 
 {
-	return int(float(window_height) / window_dpi_scale); 
+	return int(float(window_height) / window_zoom_scale); 
 }
 
-const bool Config::isWindowFullscreen() const 
+const float Config::getWindowZoomScale() const
 {
-	return window_fullscreen; 
-}
-
-const bool Config::isWindowBorderless() const
-{ 
-	return window_borderless; 
-}
-
-const bool Config::isWindowVsynced() const 
-{ 
-	return window_vsync; 
+	return window_zoom_scale;
 }
 
 const int Config::getMsaaQuality() const 
@@ -122,22 +102,12 @@ const int Config::getWaterQuality() const
 	return water_quality;
 }
 
-const int Config::getSSRQuality() const 
-{ 
-	return ssr_quality; 
-}
-
-const int Config::getBloomQuality() const 
-{ 
-	return bloom_quality; 
-}
-
-const int Config::getMaxLights() const 
-{ 
-	return max_lights; 
-}
-
-const int Config::getTotalAudioChannels() const
+const int Config::getMaxAudioChannels() const
 {
-	return audio_channels;
+	return max_audio_channels;
+}
+
+const int Config::getReflectionQuality() const
+{
+	return reflection_quality;
 }

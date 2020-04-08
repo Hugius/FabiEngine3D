@@ -23,7 +23,7 @@ LightEntityManager::LightEntityManager(OBJLoader& objLoader, TextureLoader& texL
 
 		// Change
 		lines[4].erase(27);
-		lines[4] += std::to_string(Config::getInst().getMaxLights());
+		lines[4] += std::to_string(10); // 10 IS TEMPORARILY SO IT DOESN'T CRASH!
 
 		// Write
 		std::ofstream outFile;

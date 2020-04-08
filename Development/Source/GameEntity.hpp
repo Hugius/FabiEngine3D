@@ -30,7 +30,7 @@ public:
 	void setFaceCulled(bool val);
 	void setLightMapped(bool val);
 	void setSkyReflective(bool val);
-	void setScreenReflective(bool val);
+	void setSceneReflective(bool val);
 	void setSpecular(bool val);
 	void setShadowed(bool val);
 	void setMaxY(float val);
@@ -51,7 +51,7 @@ public:
 	const bool isFaceCulled() const;
 	const bool isLightMapped() const;
 	const bool isSkyReflective() const;
-	const bool isScreenReflective() const;
+	const bool isSceneReflective() const;
 	const bool isSpecular() const;
 	const bool isShadowed() const;
 	const float getMaxY() const;
@@ -76,7 +76,7 @@ private:
 	bool _isFaceCulled       = false;
 	bool _isLightMapped      = false;
 	bool _isSkyReflective    = false;
-	bool _isScreenReflective = false;
+	bool _isSceneReflective = false;
 	bool _isSpecular         = false;
 	bool _isShadowed         = true;
 

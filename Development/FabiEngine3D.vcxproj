@@ -33,7 +33,7 @@
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -71,16 +71,16 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>$(SolutionDir)..\Starvation\WE3D\Engine\Libraries\lib\</OutDir>
-    <IncludePath>$(IncludePath)</IncludePath>
-    <LibraryPath>$(LibraryPath)</LibraryPath>
+    <OutDir>$(SolutionDir)FabiEngine3D\Binaries\</OutDir>
+    <IncludePath>$(SolutionDir)FabiEngine3D\Engine\Libraries\includes\;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)FabiEngine3D\Engine\Libraries\lib\;$(LibraryPath)</LibraryPath>
     <TargetName>FabiEngine3D</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>$(SolutionDir)Binaries\</OutDir>
+    <OutDir>$(SolutionDir)FabiEngine3D\Binaries\</OutDir>
     <TargetName>FabiEngine3D</TargetName>
-    <IncludePath>$(SolutionDir)Engine\Libraries\includes\;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)Engine\Libraries\lib\;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)FabiEngine3D\Engine\Libraries\includes\;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)FabiEngine3D\Engine\Libraries\lib\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -157,7 +157,8 @@
     <ClInclude Include="Source\Configuration.hpp" />
     <ClInclude Include="Source\CoreEngine.hpp" />
     <ClInclude Include="Source\DepthRenderer.hpp" />
-    <ClInclude Include="Source\EngineController.hpp" />
+    <ClInclude Include="Source\EngineControllerGUI.hpp" />
+    <ClInclude Include="Source\EngineGuiManager.hpp" />
     <ClInclude Include="Source\Entity.hpp" />
     <ClInclude Include="Source\EntityBus.hpp" />
     <ClInclude Include="Source\EntityManager.hpp" />
@@ -167,6 +168,7 @@
     <ClInclude Include="Source\GameEntity.hpp" />
     <ClInclude Include="Source\GameEntityManager.hpp" />
     <ClInclude Include="Source\GameEntityRenderer.hpp" />
+    <ClInclude Include="Source\EngineGuiButton.hpp" />
     <ClInclude Include="Source\GuiEntity.hpp" />
     <ClInclude Include="Source\GuiEntityManager.hpp" />
     <ClInclude Include="Source\GuiEntityRenderer.hpp" />
@@ -221,7 +223,9 @@
     <ClCompile Include="Source\CollisionResolver.cpp" />
     <ClCompile Include="Source\Configuration.cpp" />
     <ClCompile Include="Source\DepthRenderer.cpp" />
-    <ClCompile Include="Source\EngineController.cpp" />
+    <ClCompile Include="Source\EngineControllerGUI.cpp" />
+    <ClCompile Include="Source\EngineGuiButton.cpp" />
+    <ClCompile Include="Source\EngineGuiManager.cpp" />
     <ClCompile Include="Source\FinalRenderer.cpp" />
     <ClCompile Include="Source\GuiEntityRenderer.cpp" />
     <ClCompile Include="Source\EntityBus.cpp" />

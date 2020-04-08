@@ -66,7 +66,7 @@ private:
 	Framebuffer _screenFramebuffer;
 	Framebuffer _msaaFramebuffer;
 	Framebuffer _aaProcessorFramebuffer;
-	Framebuffer _ssrFramebuffer;
+	Framebuffer _sceneReflectionFramebuffer;
 	Framebuffer _waterRefractionFramebuffer;
 	Framebuffer _shadowFramebuffer;
 	Framebuffer _bloomHdrFramebuffer;
@@ -74,7 +74,7 @@ private:
 	Framebuffer _depthFramebuffer;
 
 	// Capturing functions
-	void _captureSSR(CameraManager & camera);
+	void _captureSceneReflections(CameraManager & camera);
 	void _captureWaterRefractions();
 	void _captureShadows();
 	void _captureBloom();

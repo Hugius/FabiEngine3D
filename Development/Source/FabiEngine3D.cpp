@@ -11,7 +11,7 @@
 
 FabiEngine3D::FabiEngine3D()
 {
-	_core = new CoreEngine(*this, EngineState::STATE_GUI);
+	_core = new CoreEngine(*this);
 }
 
 FabiEngine3D::~FabiEngine3D()
@@ -21,32 +21,12 @@ FabiEngine3D::~FabiEngine3D()
 
 /* --------------------------------------------- Game interface --------------------------------------------- */
 
-void FabiEngine3D::game_start()
+void FabiEngine3D::engine_start()
 {
 	_core->_start();
 }
 
-void FabiEngine3D::game_pause()
-{
-	_core->_isPaused = true;
-}
-
-void FabiEngine3D::game_unpause()
-{
-	_core->_isPaused = false;
-}
-
-void FabiEngine3D::game_pauseEntityUpdates()
-{
-	_core->_entitiesPaused = true;
-}
-
-void FabiEngine3D::game_unpauseEntityUpdates()
-{
-	_core->_entitiesPaused = false;
-}
-
-void FabiEngine3D::game_stop()
+void FabiEngine3D::engine_stop()
 {
 	_core->_stop();
 }
@@ -603,9 +583,9 @@ void FabiEngine3D::gameEntity_setColor(const string& ID, vec3 color)
 	_core->_gameEntityManager.getEntity(ID)->setColor(color);
 }
 
-void FabiEngine3D::gameEntity_setScreenReflective(const string& ID, bool enabled)
+void FabiEngine3D::gameEntity_setSceneReflective(const string& ID, bool enabled)
 {
-	_core->_gameEntityManager.getEntity(ID)->setScreenReflective(enabled);
+	_core->_gameEntityManager.getEntity(ID)->setSceneReflective(enabled);
 }
 
 vector<string> FabiEngine3D::gameEntity_getGroupIDs(const string& ID)
@@ -1386,18 +1366,18 @@ void FabiEngine3D::gfx_addSkyReflections(float factor)
 	_core->_shaderBus.setSkyReflectionFactor(factor);
 }
 
-void FabiEngine3D::gfx_addSSR(float height, float factor)
+void FabiEngine3D::gfx_addSceneReflections(float height, float factor)
 {
 	// Check if water is already using reflection graphics
 	if (_core->_shaderBus.isWaterEffectsEnabled())
 	{
-		Logger::getInst().throwWarning("Cannot enable SSR graphics; \"water effects\" is currently using it!");
+		Logger::getInst().throwWarning("Cannot enable screen reflection graphics; \"water effects\" is currently using it!");
 	}
 	else
 	{
-		_core->_shaderBus.setSSREnabled(true);
-		_core->_shaderBus.setSSRHeight(height);
-		_core->_shaderBus.setSSRFactor(factor);
+		_core->_shaderBus.setSceneReflectionsEnabled(true);
+		_core->_shaderBus.setSceneReflectionHeight(height);
+		_core->_shaderBus.setSceneReflectionFactor(factor);
 	}
 
 }
@@ -1477,9 +1457,9 @@ void FabiEngine3D::gfx_removeSkyReflections()
 	_core->_shaderBus.setSkyReflectionsEnabled(false);
 }
 
-void FabiEngine3D::gfx_removeSSR()
+void FabiEngine3D::gfx_removeSceneReflections()
 {
-	_core->_shaderBus.setSSREnabled(false);
+	_core->_shaderBus.setSceneReflectionsEnabled(false);
 }
 
 void FabiEngine3D::gfx_removeLightMapping()
@@ -1817,7 +1797,7 @@ void FabiEngine3D::misc_hidePerformanceProfiling()
 	vector<string> elements =
 	{
 		"inputHandle", "gameUpdates", "raycastUpdates", "physicsUpdates", "cameraUpdates", "entityUpdates", "shadowUpdates", "audioUpdates",
-		"renderSwap", "SSRPreRender", "waterPreRender", "shadowPreRender", "depthPreRender", "skyEntity", "terrainEntity", "waterEntity",
+		"renderSwap", "reflectionPreRender", "waterPreRender", "shadowPreRender", "depthPreRender", "skyEntity", "terrainEntity", "waterEntity",
 		"gameEntities", "bBoardEntities", "aabbEntities", "postProcessing", "guiRender", "textRender", "misc", "fps"
 	};
 

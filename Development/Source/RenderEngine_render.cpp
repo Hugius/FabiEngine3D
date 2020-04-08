@@ -147,7 +147,7 @@ void RenderEngine::_renderDebugScreens()
 
 	// Reflection scene
 	GuiEntity reflectionSurface;
-	reflectionSurface.setDiffuseMap(_shaderBus.getSSRMap());
+	reflectionSurface.setDiffuseMap(_shaderBus.getSceneReflectionMap());
 	reflectionSurface.load("reflectionSurface");
 	reflectionSurface.addOglBuffer(new OpenGLBuffer(0.25f, 0.75f, 0.5f, 0.5f, true));
 	reflectionSurface.setMirroredVertically(true);

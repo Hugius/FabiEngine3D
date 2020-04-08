@@ -1,9 +1,8 @@
 #include "CoreEngine.hpp"
 #include "Configuration.hpp"
 
-CoreEngine::CoreEngine(FabiEngine3D & fe3d, EngineState engineState) :
+CoreEngine::CoreEngine(FabiEngine3D & fe3d) :
 	_fe3d(fe3d),
-	_engineState(engineState),
 	_windowManager(),
 	_objLoader(),
 	_texLoader(),
@@ -34,6 +33,11 @@ CoreEngine::CoreEngine(FabiEngine3D & fe3d, EngineState engineState) :
 	
 }
 
+CoreEngine::~CoreEngine()
+{
+
+}
+
 void CoreEngine::_start()
 {
 	_setupApplication();
@@ -47,7 +51,7 @@ void CoreEngine::_start()
 		_renderApplication();
 	}
 
-	_fe3d.WE3D_DESTROY();
+	_fe3d.FE3D_CONTROLLER_DESTROY();
 }
 
 void CoreEngine::_stop()

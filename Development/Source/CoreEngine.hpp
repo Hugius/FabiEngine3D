@@ -40,8 +40,8 @@ class CoreEngine
 	friend class FabiEngine3D;
 private:
 	// Core
-	CoreEngine(FabiEngine3D & fe3d, EngineState engineState);
-	virtual ~CoreEngine() = default;
+	CoreEngine(FabiEngine3D & fe3d);
+	virtual ~CoreEngine();
 
 	// Core instances
 	WindowManager          _windowManager;
@@ -79,23 +79,13 @@ private:
 	void _renderApplication();
 
 	// Misc functions
-	void _displayIntroScene();
-	void _initWindow();
-	void _initGame();
-	void _initModelEditor();
-	void _initWorldEditor();
-	void _updateGame();
-	void _updateModelEditor();
-	void _updateWorldEditor();
 	void _updatePerformanceProfiler();
 
 	// Engine interface instance
 	FabiEngine3D & _fe3d;
 
 	bool _isRunning = false;
-	bool _isPaused  = false;
 	bool _showStats = false;
-	bool _entitiesPaused = false;
 
-	const EngineState _engineState;
+	EngineState _engineState;
 };

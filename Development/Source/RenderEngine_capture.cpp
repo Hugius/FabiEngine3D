@@ -2,16 +2,16 @@
 #include "ShaderBus.hpp"
 
 // Capturing reflection texture
-void RenderEngine::_captureSSR(CameraManager & camera)
+void RenderEngine::_captureSceneReflections(CameraManager & camera)
 {
-	if ((_entityBus->getWaterEntity() != nullptr && _shaderBus.isWaterEffectsEnabled()) || _shaderBus.isSSREnabled())
+	if ((_entityBus->getWaterEntity() != nullptr && _shaderBus.isWaterEffectsEnabled()) || _shaderBus.isSceneReflectionsEnabled())
 	{
 		// Calculate distance between camera and reflection surface
-		float cameraDistance = (camera.getPosition().y - _shaderBus.getSSRHeight());
+		float cameraDistance = (camera.getPosition().y - _shaderBus.getSceneReflectionHeight());
 
 		// Start capturing reflection
 		glEnable(GL_CLIP_DISTANCE0);
-		_ssrFramebuffer.bind();
+		_sceneReflectionFramebuffer.bind();
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		// Change camera angle
@@ -37,11 +37,11 @@ void RenderEngine::_captureSSR(CameraManager & camera)
 		camera.updateMatrices();
 
 		// Stop capturing reflection
-		_ssrFramebuffer.unbind();
+		_sceneReflectionFramebuffer.unbind();
 		glDisable(GL_CLIP_DISTANCE0);
 
 		// Assign texture
-		_shaderBus.setSSRMap(_ssrFramebuffer.getTexture(0));
+		_shaderBus.setSceneReflectionMap(_sceneReflectionFramebuffer.getTexture(0));
 	}
 }
 

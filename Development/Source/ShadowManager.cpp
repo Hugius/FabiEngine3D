@@ -18,7 +18,7 @@ void ShadowManager::update(ShaderBus& shaderBus)
 
 mat4 ShadowManager::_createLightSpaceMatrix()
 {
-	glEnable(GL_DEPTH_CLAM_NV);
+	glEnable(GL_DEPTH_CLAMP_NV);
 
 	// Matrix generation
 	mat4 lightView = glm::lookAt(_eye, _center, vec3(0.0f, 1.0f, 0.0f));

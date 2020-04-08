@@ -12,7 +12,7 @@ ModelEditor::ModelEditor(OBJLoader& objLoader, TextureLoader& texLoader) :
 	_objLoader(objLoader),
 	_texLoader(texLoader)
 {
-	_loadFileNames();
+	//_loadFileNames();
 }
 
 ModelEditor::~ModelEditor()

@@ -22,20 +22,15 @@ public:
 	void operator=(Config const&) = delete;
 
 	// Interface functions
-	const ivec2 getWindowSize()         const;
-	const float getWindowScale()        const;
-	const int   getWindowWidth()        const;
-	const int   getWindowHeight()       const;
-	const bool  isWindowFullscreen()    const;
-	const bool  isWindowBorderless()    const;
-	const bool  isWindowVsynced()       const;
-	const int   getMsaaQuality()        const;
-	const int   getShadowQuality()      const;
-	const int   getWaterQuality()       const;
-	const int   getBloomQuality()       const;
-	const int   getMaxLights()          const;
-	const int   getTotalAudioChannels() const;
-	const int   getSSRQuality()         const;
+	const ivec2 getWindowSize()        const;
+	const int   getWindowWidth()       const;
+	const int   getWindowHeight()      const;
+	const float getWindowZoomScale()   const;
+	const int   getMsaaQuality()       const;
+	const int   getShadowQuality()     const;
+	const int   getWaterQuality()      const;
+	const int   getReflectionQuality() const;
+	const int   getMaxAudioChannels()  const;
 
 private:
 	Config();
@@ -46,17 +41,12 @@ private:
 	void _processOption(std::ifstream& file, float& option);
 	
 	// Variables
-	int   window_width;
-	int   window_height;
-	bool  window_fullscreen;
-	bool  window_borderless;
-	bool  window_vsync;
-	float window_dpi_scale;
-	int   msaa_quality;
-	int   shadow_quality;
-	int   water_quality;
-	int   bloom_quality;
-	int   max_lights;
-	int   audio_channels;
-	int   ssr_quality;
+	int   window_width = 800;
+	int   window_height = 600;
+	float window_zoom_scale = 1.0f;
+	int   msaa_quality = 16;
+	int   shadow_quality = 4096;
+	int   water_quality = 1024;
+	int   reflection_quality = 1024;
+	int   max_audio_channels = 512;
 };

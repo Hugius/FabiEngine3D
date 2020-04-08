@@ -133,7 +133,7 @@ void WaterEntityManager::update(float delta)
 	// Update reflection height
 	if (getSelectedWater() != nullptr && _shaderBus.isWaterEffectsEnabled())
 	{
-		_shaderBus.setSSRHeight(getSelectedWater()->getSurfaceHeight());
+		_shaderBus.setSceneReflectionHeight(getSelectedWater()->getSurfaceHeight());
 	}
 
 	// Update all water entities

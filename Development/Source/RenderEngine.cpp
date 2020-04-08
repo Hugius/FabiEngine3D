@@ -25,8 +25,8 @@ RenderEngine::RenderEngine(ShaderBus& shaderBus, Timer& timer) :
 	_aaProcessorFramebuffer.createColorTexture(Config::getInst().getWindowSize(), 1, false);
 	_bloomDofAdditionFramebuffer.createColorTexture(Config::getInst().getWindowSize(), 1, false);
 	_waterRefractionFramebuffer.createColorTexture(ivec2(Config::getInst().getWaterQuality()), 1, false);
-	_ssrFramebuffer.createColorTexture(ivec2(Config::getInst().getSSRQuality()), 1, false);
-	_bloomHdrFramebuffer.createColorTexture(Config::getInst().getWindowSize()*Config::getInst().getBloomQuality(), 1, false);
+	_sceneReflectionFramebuffer.createColorTexture(ivec2(Config::getInst().getReflectionQuality()), 1, false);
+	_bloomHdrFramebuffer.createColorTexture(Config::getInst().getWindowSize(), 1, false);
 	_shadowFramebuffer.createDepthTexture(ivec2(Config::getInst().getShadowQuality()), 1);
 	_depthFramebuffer.createDepthTexture(Config::getInst().getWindowSize(), 1);
 	_blurRenderer.addFramebuffer(BLUR_BLOOM,  true);
@@ -71,8 +71,8 @@ void RenderEngine::renderScene(EntityBus * entityBus, CameraManager & camera, iv
 	else
 	{
 		// Pre-rendering
-		_timer.start("SSRPreRender");
-		_captureSSR(camera);
+		_timer.start("reflectionPreRender");
+		_captureSceneReflections(camera);
 		_timer.stop();
 		_timer.start("waterPreRender");
 		_captureWaterRefractions();

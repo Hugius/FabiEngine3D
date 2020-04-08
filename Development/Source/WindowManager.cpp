@@ -67,7 +67,7 @@ WindowManager::WindowManager()
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 	SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
-	SDL_GL_SetSwapInterval(Config::getInst().isWindowVsynced());
+	SDL_GL_SetSwapInterval(0);
 }
 
 WindowManager::~WindowManager()

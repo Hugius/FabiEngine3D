@@ -18,8 +18,12 @@ Framebuffer::~Framebuffer()
 	{
 		glDeleteFramebuffers(1, &_fbo);
 		glDeleteBuffers(1, &_rbo);
-		glDeleteTextures(1, &_textures[0]);
-		glDeleteTextures(1, &_textures[1]);
+
+		for (size_t i = 0; i < _textures.size(); i++)
+		{
+			glDeleteTextures(1, &_textures[i]);
+		}
+		
 	}
 
 }
@@ -103,9 +107,9 @@ void Framebuffer::createColorTexture(ivec2 size, int amount, bool textureClamp)
 		// Optional texture clamp
 		if (textureClamp)
 		{
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRA_S, GL_CLAM_TO_EDGE);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRA_T, GL_CLAM_TO_EDGE);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRA_R, GL_CLAM_TO_EDGE);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
 		}
 
 		// Texture filtering
@@ -169,8 +173,8 @@ void Framebuffer::createDepthTexture(ivec2 size, int amount)
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, aniso);
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRA_S, GL_CLAM_TO_BORDER);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRA_T, GL_CLAM_TO_BORDER);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
 		float borderColor[] = { 1.0, 1.0, 1.0, 1.0 };
 		glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, borderColor);
 		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, _textures[i], 0);

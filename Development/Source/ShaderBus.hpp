@@ -12,9 +12,9 @@ public:
 
 	// Textures
 	void setSceneMap(GLuint val);
-	void setDayReflectionCubeMap(GLuint val);
-	void setNightReflectionCubeMap(GLuint val);
-	void setSSRMap(GLuint val);
+	void setSkyReflectionCubeMapDay(GLuint val);
+	void setSkyReflectionCubeMapNight(GLuint val);
+	void setSceneReflectionMap(GLuint val);
 	void setWaterRefractionMap(GLuint val);
 	void setShadowMap(GLuint val);
 	void setBloomMap(GLuint val);
@@ -48,15 +48,14 @@ public:
 	void setDofMinDistance(float val);
 	void setSkyReflectionMixValue(float val);
 	void setSkyReflectionFactor(float val);
-	void setSSRHeight(float val);
-	void setSSRFactor(float val);
+	void setSceneReflectionHeight(float val);
+	void setSceneReflectionFactor(float val);
 
 	// Integers
 	void setBloomBlurSize(int val);
 
 	// Booleans
 	void setMSAAEnabled(bool val);
-	void setSSREnabled(bool val);
 	void setAmbLightEnabled(bool val);
 	void setDirLightEnabled(bool val);
 	void setSpecLightEnabled(bool val);
@@ -64,6 +63,7 @@ public:
 	void setFogEnabled(bool val);
 	void setLightMappingEnabled(bool val);
 	void setSkyReflectionsEnabled(bool val);
+	void setSceneReflectionsEnabled(bool val);
 	void setBloomEnabled(bool val);
 	void setWaterEffectsEnabled(bool val);
 	void setSkyHdrEnabled(bool val);
@@ -75,17 +75,17 @@ public:
 	void setDebugRenderEnabled(bool val);
 
 	// Textures
-	const GLuint getSceneMap()               const;
-	const GLuint getDayReflectionCubeMap()   const;
-	const GLuint getNightReflectionCubeMap() const;
-	const GLuint getSSRMap()                 const;
-	const GLuint getWaterRefractionMap()     const;
-	const GLuint getShadowMap()              const;
-	const GLuint getBloomMap()               const;
-	const GLuint getBloomedDofSceneMap()     const;
-	const GLuint getDepthMap()               const;
-	const GLuint getBlurMap()                const;
-	const GLuint getMotionBlurMap()          const;
+	const GLuint getSceneMap()                    const;
+	const GLuint getSkyReflectionCubeMapDay()     const;
+	const GLuint getSceneReflectionCubeMapNight() const;
+	const GLuint getSceneReflectionMap()          const;
+	const GLuint getWaterRefractionMap()          const;
+	const GLuint getShadowMap()                   const;
+	const GLuint getBloomMap()                    const;
+	const GLuint getBloomedDofSceneMap()          const;
+	const GLuint getDepthMap()                    const;
+	const GLuint getBlurMap()                     const;
+	const GLuint getMotionBlurMap()               const;
 
 	// Matrices
 	const mat4 & getViewMatrix()        const;
@@ -112,45 +112,45 @@ public:
 	const float getDofMinDistance()        const;
 	const float getSkyReflectionMixValue() const;
 	const float getSkyReflectionFactor()   const;
-	const float getSSRHeight()             const;
-	const float getSSRFactor()             const;
+	const float getSceneReflectionHeight() const;
+	const float getSceneReflectionFactor() const;
 
 	// Integers
 	const int getBloomBlurSize() const;
 
 	// Booleans
-	const bool isMSAAEnabled()           const;
-	const bool isSSREnabled()            const;
-	const bool isAmbLightingEnabled()    const;
-	const bool isDirLightingEnabled()    const;
-	const bool isSpecLightingEnabled()   const;
-	const bool isPointLightingEnabled()  const;
-	const bool isFogEnabled()            const;
-	const bool isLightMappingEnabled()   const;
-	const bool isSkyReflectionsEnabled() const;
-	const bool isBloomEnabled()          const;
-	const bool isWaterEffectsEnabled()   const;
-	const bool isSkyHdrEnabled()         const;
-	const bool isShadowsEnabled()        const;
-	const bool isDofEnabled()            const;
-	const bool isMotionBlurEnabled()     const;
-	const bool isWireframeEnabled()      const;
-	const bool isAabbFrameEnabled()      const;
-	const bool isDebugRenderEnabled()    const;
+	const bool isMSAAEnabled()             const;
+	const bool isAmbLightingEnabled()      const;
+	const bool isDirLightingEnabled()      const;
+	const bool isSpecLightingEnabled()     const;
+	const bool isPointLightingEnabled()    const;
+	const bool isFogEnabled()              const;
+	const bool isLightMappingEnabled()     const;
+	const bool isSkyReflectionsEnabled()   const;
+	const bool isSceneReflectionsEnabled() const;
+	const bool isBloomEnabled()            const;
+	const bool isWaterEffectsEnabled()     const;
+	const bool isSkyHdrEnabled()           const;
+	const bool isShadowsEnabled()          const;
+	const bool isDofEnabled()              const;
+	const bool isMotionBlurEnabled()       const;
+	const bool isWireframeEnabled()        const;
+	const bool isAabbFrameEnabled()        const;
+	const bool isDebugRenderEnabled()      const;
 
 private:
 	// Textures
-	GLuint _sceneMap               = 0;
-	GLuint _dayReflectionCubeMap   = 0;
-	GLuint _nightReflectionCubeMap = 0;
-	GLuint _ssrMap                 = 0;
-	GLuint _waterRefractionMap     = 0;
-	GLuint _shadowMap              = 0;
-	GLuint _bloomMap               = 0;
-	GLuint _bloomedDofSceneMap     = 0;
-	GLuint _depthMap               = 0;
-	GLuint _blurMap                = 0;
-	GLuint _motionBlurMap          = 0;
+	GLuint _sceneMap                  = 0;
+	GLuint _skyReflectionCubeMapDay   = 0;
+	GLuint _skyReflectionCubeMapNight = 0;
+	GLuint _sceneReflectionMap        = 0;
+	GLuint _waterRefractionMap        = 0;
+	GLuint _shadowMap                 = 0;
+	GLuint _bloomMap                  = 0;
+	GLuint _bloomedDofSceneMap        = 0;
+	GLuint _depthMap                  = 0;
+	GLuint _blurMap                   = 0;
+	GLuint _motionBlurMap             = 0;
 	
 	// Matrices
 	mat4 _viewMatrix        = mat4(1.0f);
@@ -177,8 +177,8 @@ private:
 	float _dofMinDistance              = 0.0f;
 	float _skyReflectionMixValue       = 0.0f;
 	float _skyReflectionFactor         = 0.0f;
-	float _ssrHeight                   = 0.0f;
-	float _ssrFactor                   = 0.0f;
+	float _sceneReflectionHeight       = 0.0f;
+	float _sceneReflectionFactor       = 0.0f;
 	
 	// Integers
 	int _bloomBlurSize = 0;
@@ -192,7 +192,7 @@ private:
 	bool _fogEnabled                 = false;
 	bool _lightMappingEnabled        = false;
 	bool _skyReflectionsEnabled      = false;
-	bool _ssrEnabled                 = false;
+	bool _sceneReflectionsEnabled    = false;
 	bool _bloomEnabled               = false;
 	bool _waterEffectsEnabled        = false;
 	bool _skyHdrEnabled              = false;

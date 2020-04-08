@@ -1840,28 +1840,40 @@ ivec2 FabiEngine3D::misc_getMousePos()
 	return _core->_windowManager.getMousePos();
 }
 
-vec2 FabiEngine3D::misc_convertToNDC(ivec2 pos)
+vec2 FabiEngine3D::misc_convertToNDC(vec2 pos)
 {
-	float x = float(pos.x) / float(misc_getWindowWidth());
-	float y = float(pos.y) / float(misc_getWindowHeight());
-	x = (x * 2.0f) - 1.0f;
-	y = (y * 2.0f) - 1.0f;
-	y *= -1.0f;
+	pos.x = (pos.x * 2.0f) - 1.0f;
+	pos.y = (pos.y * 2.0f) - 1.0f;
+	pos.y *= -1.0f;
 	
-	return vec2(x, y);
+	return vec2(pos.x, pos.y);
 }
 
-ivec2 FabiEngine3D::misc_convertFromNDC(vec2 pos)
+vec2 FabiEngine3D::misc_convertFromNDC(vec2 pos)
 {
 	pos.y *= -1.0f;
 	pos.x += 1.0f;
 	pos.x /= 2.0f;
 	pos.y += 1.0f;
 	pos.y /= 2.0f;
+
+	return vec2(pos.x, pos.y);
+}
+
+ivec2 FabiEngine3D::misc_convertToScreenCoords(vec2 pos)
+{
 	float x = float(pos.x) * float(misc_getWindowWidth());
 	float y = float(pos.y) * float(misc_getWindowHeight());
 
 	return ivec2(int(x), int(y));
+}
+
+vec2 FabiEngine3D::misc_convertFromScreenCoords(ivec2 pos)
+{
+	float x = float(pos.x) / float(misc_getWindowWidth());
+	float y = float(pos.y) / float(misc_getWindowHeight());
+
+	return vec2(x, y);
 }
 
 bool FabiEngine3D::world_check(const string& worldName)

@@ -391,8 +391,10 @@ public:
 	string misc_vec2str(vec3 vec);
 	string misc_vec2str(vec4 vec);
 	ivec2 misc_getMousePos();
-	vec2 misc_convertToNDC(ivec2 pos);
-	ivec2 misc_convertFromNDC(vec2 pos);
+	vec2 misc_convertToNDC(vec2 pos);
+	vec2 misc_convertFromNDC(vec2 pos);
+	ivec2 misc_convertToScreenCoords(vec2 pos);
+	vec2 misc_convertFromScreenCoords(ivec2 pos);
 
 	// World interface
 	bool world_check(const string& worldName);

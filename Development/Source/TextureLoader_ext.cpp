@@ -60,7 +60,7 @@ GLuint TextureLoader::_loadText(const string& text, const string &fontPath)
 GLuint TextureLoader::_loadTexture(const string & filePath, bool mipmap, bool aniso, bool repeat)
 {
 	// Load actual texture
-	SDL_Surface * surface = IMG_Load((filePath + ".png").c_str());
+	SDL_Surface * surface = IMG_Load((filePath).c_str());
 	if (surface == nullptr)
 	{
 		Logger::getInst().throwError("Texture error: " + string(SDL_GetError()));
@@ -82,7 +82,7 @@ GLuint TextureLoader::_loadTexture(const string & filePath, bool mipmap, bool an
 	}
 	else
 	{
-		Logger::getInst().throwError("Pixel format not recognized at image: " + filePath + ".png");
+		Logger::getInst().throwError("Pixel format not recognized at image: " + filePath);
 	}
 
 	// Memory management
@@ -118,7 +118,7 @@ GLuint TextureLoader::_loadTexture(const string & filePath, bool mipmap, bool an
 	}
 
 	// Logging
-	Logger::getInst().throwInfo("Loaded PNG texture: " + filePath + ".png");
+	Logger::getInst().throwInfo("Loaded texture: " + filePath);
 
 	// Return new texture
 	return tex;
@@ -171,7 +171,7 @@ GLuint TextureLoader::_loadCubemap(const string & filePath)
 	for (GLuint i = 0; i < fileNames.size(); i++)
 	{
 		// Load SDL surface
-		SDL_Surface * surface = IMG_Load((filePath + fileNames[i] + ".png").c_str());
+		SDL_Surface * surface = IMG_Load((filePath + fileNames[i]).c_str());
 		if (surface == nullptr) 
 		{
 			Logger::getInst().throwError("Skybox textures could not be loaded: " + string(SDL_GetError()));
@@ -181,7 +181,7 @@ GLuint TextureLoader::_loadCubemap(const string & filePath)
 		glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGB, surface->w, surface->h, 0, GL_RGB, GL_UNSIGNED_BYTE, surface->pixels);
 
 		// Logging
-		Logger::getInst().throwInfo("Loaded cubemap texture: " + filePath + fileNames[i] + ".png");
+		Logger::getInst().throwInfo("Loaded cubemap texture: " + filePath + fileNames[i]);
 	}
 
 	// OpenGL magic

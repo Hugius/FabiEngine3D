@@ -220,6 +220,18 @@
     <ClCompile Include="Source\EngineGuiButton.cpp">
       <Filter>src\GUI System</Filter>
     </ClCompile>
+    <ClCompile Include="Source\EngineGuiScreen.cpp">
+      <Filter>src\GUI System</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EngineGuiWindow.cpp">
+      <Filter>src\GUI System</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EngineGuiViewport.cpp">
+      <Filter>src\GUI System</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EngineGuiTextfield.cpp">
+      <Filter>src\GUI System</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\AabbEntity.hpp">
@@ -421,6 +433,18 @@
       <Filter>src\GUI System</Filter>
     </ClInclude>
     <ClInclude Include="Source\EngineGuiButton.hpp">
+      <Filter>src\GUI System</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EngineGuiScreen.hpp">
+      <Filter>src\GUI System</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EngineGuiWindow.hpp">
+      <Filter>src\GUI System</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EngineGuiViewport.hpp">
+      <Filter>src\GUI System</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EngineGuiTextfield.hpp">
       <Filter>src\GUI System</Filter>
     </ClInclude>
   </ItemGroup>

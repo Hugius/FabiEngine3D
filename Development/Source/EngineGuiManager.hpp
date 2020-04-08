@@ -1,5 +1,7 @@
 #pragma once
+
 #include "FabiEngine3D.hpp"
+#include "EngineGuiViewport.hpp"
 
 class EngineGuiManager
 {
@@ -12,6 +14,8 @@ public:
 
 private:
 	FabiEngine3D& FE3D;
+
+	std::vector<EngineGuiViewport> _viewports;
 
 	float _delta = 0.0f;
 };

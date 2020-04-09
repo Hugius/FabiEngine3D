@@ -48,7 +48,7 @@ GLuint TextureLoader::_loadText(const string& text, const string &fontPath)
 	}
 	else
 	{
-		Logger::getInst().throwError("Pixel format not recognized at text texture: " + text + ".ttf");
+		Logger::getInst().throwError("Pixel format not recognized at text texture: " + text);
 	}
 
 	// Memory management
@@ -202,14 +202,14 @@ TTF_Font * TextureLoader::_loadFont(const string & fontPath)
 	if (it == _fontMap.end()) //Not in map (yet)
 	{
 		// Font loading
-		TTF_Font * font = TTF_OpenFont((fontPath + ".ttf").c_str(), 50);
+		TTF_Font * font = TTF_OpenFont((fontPath).c_str(), 50);
 		if (font == nullptr)
 		{
-			Logger::getInst().throwError(string("Font could not be loaded: " + fontPath + ".ttf").c_str());
+			Logger::getInst().throwError(string("Font could not be loaded: " + fontPath).c_str());
 		}
 		_fontMap.insert(std::make_pair(fontPath, font));
 
-		Logger::getInst().throwInfo("Loaded font: " + fontPath + ".ttf");
+		Logger::getInst().throwInfo("Loaded font: " + fontPath);
 
 		return font; //Use new texture
 	}

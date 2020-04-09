@@ -158,6 +158,7 @@
     <ClInclude Include="Source\CoreEngine.hpp" />
     <ClInclude Include="Source\DepthRenderer.hpp" />
     <ClInclude Include="Source\EngineControllerGUI.hpp" />
+    <ClInclude Include="Source\EngineGuiRectangle.hpp" />
     <ClInclude Include="Source\EngineGuiManager.hpp" />
     <ClInclude Include="Source\EngineGuiScreen.hpp" />
     <ClInclude Include="Source\EngineGuiTextfield.hpp" />
@@ -229,6 +230,7 @@
     <ClCompile Include="Source\DepthRenderer.cpp" />
     <ClCompile Include="Source\EngineControllerGUI.cpp" />
     <ClCompile Include="Source\EngineGuiButton.cpp" />
+    <ClCompile Include="Source\EngineGuiRectangle.cpp" />
     <ClCompile Include="Source\EngineGuiManager.cpp" />
     <ClCompile Include="Source\EngineGuiScreen.cpp" />
     <ClCompile Include="Source\EngineGuiTextfield.cpp" />

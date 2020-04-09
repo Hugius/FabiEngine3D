@@ -35,14 +35,7 @@ void GuiEntityManager::addGuiEntity(const string & ID, const string & assetName,
 	getEntity(ID)->setScaling(scaling);
 
 	// Load diffuse map
-	if (engine)
-	{
-		getEntity(ID)->setDiffuseMap(_texLoader.getTexture("../Engine/Textures/" + assetName, true, true, false));
-	}
-	else
-	{
-		getEntity(ID)->setDiffuseMap(_texLoader.getTexture("../Game/Textures/GuiMaps/" + assetName, true, true, false));
-	}
+	getEntity(ID)->setDiffuseMap(_texLoader.getTexture("../Engine/Textures/" + assetName, true, true, false));
 }
 
 void GuiEntityManager::addGuiEntity(const string & ID, vec3 color, vec2 translation, float rotation, vec2 scaling, bool centered)

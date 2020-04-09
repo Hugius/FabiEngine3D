@@ -40,9 +40,6 @@
     <ClCompile Include="Source\GameEntityManager.cpp">
       <Filter>src\Entity System\Managers</Filter>
     </ClCompile>
-    <ClCompile Include="Source\GuiEntityRenderer.cpp">
-      <Filter>src\Entity System\Managers</Filter>
-    </ClCompile>
     <ClCompile Include="Source\LightEntityManager.cpp">
       <Filter>src\Entity System\Managers</Filter>
     </ClCompile>
@@ -230,6 +227,12 @@
       <Filter>src\GUI System</Filter>
     </ClCompile>
     <ClCompile Include="Source\EngineGuiTextfield.cpp">
+      <Filter>src\GUI System</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GuiEntityRenderer.cpp">
+      <Filter>src\Rendering System\Renderers</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EngineGuiRectangle.cpp">
       <Filter>src\GUI System</Filter>
     </ClCompile>
   </ItemGroup>
@@ -445,6 +448,9 @@
       <Filter>src\GUI System</Filter>
     </ClInclude>
     <ClInclude Include="Source\EngineGuiTextfield.hpp">
+      <Filter>src\GUI System</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EngineGuiRectangle.hpp">
       <Filter>src\GUI System</Filter>
     </ClInclude>
   </ItemGroup>

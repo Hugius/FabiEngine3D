@@ -8,6 +8,7 @@ uniform vec3      u_color;
 uniform float     u_nearZ;
 uniform float     u_farZ;
 uniform bool      u_isDepthEntity;
+uniform bool      u_noTexture;
 
 // Out variables
 layout (location = 0) out vec4 o_finalColor;
@@ -28,7 +29,14 @@ void main()
 	}
 	else
 	{
-		vec4 texColor = texture(u_sampler_diffuse, f_uv);
-		o_finalColor = vec4(texColor.rgb * u_color, texColor.a);
+		if(u_noTexture)
+		{
+			o_finalColor = vec4(u_color, 1.0f);
+		}
+		else
+		{
+			vec4 texColor = texture(u_sampler_diffuse, f_uv);
+			o_finalColor = vec4(texColor.rgb * u_color, texColor.a);
+		}
 	}
 }

@@ -1257,6 +1257,11 @@ void FabiEngine3D::textEntity_changeText(const string& ID, const string& text, f
 	entity->setDiffuseMap(_core->_texLoader.getText(text, "../Game/Fonts/" + entity->getFontName()));
 }
 
+void FabiEngine3D::textEntity_setColor(const string& ID, vec3 color)
+{
+	_core->_textEntityManager.getEntity(ID)->setColor(color);
+}
+
 void FabiEngine3D::textEntity_hide(const string& ID)
 {
 	_core->_textEntityManager.getEntity(ID)->setEnabled(false);
@@ -1844,14 +1849,12 @@ vec2 FabiEngine3D::misc_convertToNDC(vec2 pos)
 {
 	pos.x = (pos.x * 2.0f) - 1.0f;
 	pos.y = (pos.y * 2.0f) - 1.0f;
-	pos.y *= -1.0f;
 	
 	return vec2(pos.x, pos.y);
 }
 
 vec2 FabiEngine3D::misc_convertFromNDC(vec2 pos)
 {
-	pos.y *= -1.0f;
 	pos.x += 1.0f;
 	pos.x /= 2.0f;
 	pos.y += 1.0f;
@@ -1864,6 +1867,7 @@ ivec2 FabiEngine3D::misc_convertToScreenCoords(vec2 pos)
 {
 	float x = float(pos.x) * float(misc_getWindowWidth());
 	float y = float(pos.y) * float(misc_getWindowHeight());
+	y = float(misc_getWindowHeight()) - y;
 
 	return ivec2(int(x), int(y));
 }
@@ -1872,6 +1876,7 @@ vec2 FabiEngine3D::misc_convertFromScreenCoords(ivec2 pos)
 {
 	float x = float(pos.x) / float(misc_getWindowWidth());
 	float y = float(pos.y) / float(misc_getWindowHeight());
+	y = 1.0f - y;
 
 	return vec2(x, y);
 }

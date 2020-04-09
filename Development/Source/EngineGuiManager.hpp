@@ -13,9 +13,16 @@ public:
 	void unload();
 
 private:
-	FabiEngine3D& FE3D;
+	FabiEngine3D& _fe3d;
 
 	std::vector<EngineGuiViewport> _viewports;
 
 	float _delta = 0.0f;
+
+	EngineGuiViewport& _getViewport(const string& ID);
+
+	void _updateTopViewport();
+	void _updateLeftViewport();
+	void _updateRightViewport();
+	void _updateBottomViewport();
 };

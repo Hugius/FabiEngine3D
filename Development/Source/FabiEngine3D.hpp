@@ -266,6 +266,7 @@ public:
 	void textEntity_delete(const string& ID);
 	bool textEntity_isExisting(const string& ID);
 	void textEntity_changeText(const string& ID, const string& text, float charWidth, vec3 color);
+	void textEntity_setColor(const string& ID, vec3 color);
 	void textEntity_hide(const string& ID);
 	void textEntity_show(const string& ID);
 	void textEntity_setPosition(const string& ID, vec2 position);

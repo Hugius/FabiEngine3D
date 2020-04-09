@@ -6,22 +6,22 @@
 
 void CoreEngine::_setupApplication()
 {
-	// Engine intro
+	// Display engine intro
 	GuiEntity intro;
 	intro.load("intro");
 	intro.addOglBuffer(new OpenGLBuffer(0.0f, 0.0f, 2.0f, 2.0f, true));
-	intro.setDiffuseMap(_texLoader.getTexture("../Engine/Textures/intro", true, true));
+	intro.setDiffuseMap(_texLoader.getTexture("../Engine/Textures/intro.png", true, true));
 	_windowManager.setSize(ivec2(720, 480));
 	_windowManager.showWindow();
 	_renderEngine.renderEngineIntro(&intro, ivec2(720, 480));
 	_windowManager.swapBackBuffer();
 
-	// Window properties
+	// Initialize engine controller
+	_fe3d.FE3D_CONTROLLER_INIT();
+
+	// Set new window properties
 	_windowManager.setSize(Config::getInst().getWindowSize());
 	_windowManager.showBorder();
-
-	// Initialize engine GUI
-	_fe3d.FE3D_CONTROLLER_INIT();
 }
 
 void CoreEngine::_updateApplication()

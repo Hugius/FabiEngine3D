@@ -12,20 +12,16 @@ public:
 	void load();
 	void update(float delta);
 	void unload();
+	void setFocus(bool focused);
 
+	shared_ptr<EngineGuiGlobalScreen> getGlobalScreen();
 	shared_ptr<EngineGuiViewport> getViewport(const string& ID);
 
 private:
 	FabiEngine3D& _fe3d;
 
+	shared_ptr<EngineGuiGlobalScreen> _globalScreen;
 	std::vector<shared_ptr<EngineGuiViewport>> _viewports;
 
-	EngineGuiGlobalScreen _globalScreen;
-
-	float _delta = 0.0f;
-
-	void _updateTopViewport();
-	void _updateLeftViewport();
-	void _updateRightViewport();
-	void _updateBottomViewport();
+	bool _isFocused = false;
 };

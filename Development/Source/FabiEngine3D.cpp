@@ -1247,7 +1247,7 @@ bool FabiEngine3D::textEntity_isExisting(const string& ID)
 	return _core->_textEntityManager.isExisting(ID);
 }
 
-void FabiEngine3D::textEntity_setText(const string& ID, const string& textContent, float charWidth)
+void FabiEngine3D::textEntity_setTextContent(const string& ID, const string& textContent, float charWidth)
 {
 	auto entity = _core->_textEntityManager.getEntity(ID);
 
@@ -1316,7 +1316,7 @@ vec2 FabiEngine3D::textEntity_getSize(const string& ID)
 	return _core->_textEntityManager.getEntity(ID)->getScaling();
 }
 
-string FabiEngine3D::textEntity_getText(const string& ID)
+string FabiEngine3D::textEntity_getTextContent(const string& ID)
 {
 	return _core->_textEntityManager.getEntity(ID)->getTextContent();
 }

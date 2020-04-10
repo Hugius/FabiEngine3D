@@ -32,17 +32,11 @@ const string& EngineGuiWindow::getParentID()
 	return _parentID;
 }
 
-void EngineGuiWindow::addScreen(const string& ID, bool active)
+void EngineGuiWindow::addScreen(const string& ID)
 {
 	vec2 windowPosition = _fe3d.guiEntity_getPosition(_entityID);
 	vec2 windowSize = _fe3d.guiEntity_getSize(_entityID);
 	_screens.push_back(make_shared<EngineGuiScreen>(_fe3d, _ID, ID, windowPosition, windowSize));
-
-	// Set as active screen
-	if (active)
-	{
-		_activeScreenID = ID;
-	}
 }
 
 void EngineGuiWindow::setActiveScreen(const string& ID)

@@ -265,7 +265,7 @@ public:
 	);
 	void textEntity_delete(const string& ID);
 	bool textEntity_isExisting(const string& ID);
-	void textEntity_setText(const string& ID, const string& textContent, float charWidth);
+	void textEntity_setTextContent(const string& ID, const string& textContent, float charWidth);
 	void textEntity_setColor(const string& ID, vec3 color);
 	void textEntity_hide(const string& ID);
 	void textEntity_show(const string& ID);
@@ -278,7 +278,7 @@ public:
 	vec2 textEntity_getPosition(const string& ID);
 	float textEntity_getRotation(const string& ID);
 	vec2 textEntity_getSize(const string& ID);
-	string textEntity_getText(const string& ID);
+	string textEntity_getTextContent(const string& ID);
 
 	// Graphics interface
 	void gfx_addAmbientLighting(float strength = 0.0f);

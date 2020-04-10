@@ -2,10 +2,6 @@
 
 enum class Input
 {
-	KEY_RETURN          = '\r',
-	KEY_ESCAPE          = '\033',
-	KEY_BACKSPACE       = '\b',
-	KEY_TAB             = '\t',
 	KEY_SPACE           = ' ',
 	KEY_EXCLAIM         = '!',
 	KEY_QUOTEDBL        = '"',
@@ -71,6 +67,10 @@ enum class Input
 	KEY_X               = 'x',
 	KEY_Y               = 'y',
 	KEY_Z               = 'z',
+	KEY_RETURN          = '\r',
+	KEY_ESCAPE          = '\033',
+	KEY_BACKSPACE       = '\b',
+	KEY_TAB             = '\t',
 	KEY_LCTRL           = 1073742048,
 	KEY_RCTRL           = 1073742052,
 	KEY_LSHIFT          = 1073742049,

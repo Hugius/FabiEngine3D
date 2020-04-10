@@ -148,62 +148,66 @@ vector<shared_ptr<EngineGuiTextfield>>& EngineGuiScreen::getTextfields()
 
 void EngineGuiScreen::deleteWritefield(const string& ID)
 {
-	// Check if existing
-	getWritefield(ID);
-
 	// Delete writefield
 	for (size_t i = 0; i < _writefields.size(); i++)
 	{
 		if (ID == _writefields[i]->getID())
 		{
 			_writefields.erase(_writefields.begin() + i);
+			return;
 		}
 	}
+
+	// Error
+	_fe3d.logger_throwError("Writefield \"" + ID + "\" not deleted!");
 }
 
 void EngineGuiScreen::deleteButton(const string& ID)
 {
-	// Check if existing
-	getButton(ID);
-
 	// Delete button
 	for (size_t i = 0; i < _buttons.size(); i++)
 	{
 		if (ID == _buttons[i]->getID())
 		{
 			_buttons.erase(_buttons.begin() + i);
+			return;
 		}
 	}
+
+	// Error
+	_fe3d.logger_throwError("Button \"" + ID + "\" not deleted!");
 }
 
 void EngineGuiScreen::deleteRectangle(const string& ID)
 {
-	// Check if existing
-	getButton(ID);
-
 	// Delete rectangle
 	for (size_t i = 0; i < _rectangles.size(); i++)
 	{
 		if (ID == _rectangles[i]->getID())
 		{
 			_rectangles.erase(_rectangles.begin() + i);
+			return;
 		}
 	}
+
+	// Error
+	_fe3d.logger_throwError("Rectangle \"" + ID + "\" not deleted!");
 }
 
 void EngineGuiScreen::deleteTextfield(const string& ID)
 {
-	// Check if existing
-	getButton(ID);
-
 	// Delete textfield
 	for (size_t i = 0; i < _textfields.size(); i++)
 	{
 		if (ID == _textfields[i]->getID())
 		{
 			_textfields.erase(_textfields.begin() + i);
+			return;
 		}
 	}
+
+	// Error
+	_fe3d.logger_throwError("Textfield \"" + ID + "\" not deleted!");
 }
 
 const string& EngineGuiScreen::getHoveredItemID()

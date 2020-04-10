@@ -30,6 +30,8 @@ public:
 	vector<shared_ptr<EngineGuiRectangle>>& getRectangles();
 	vector<shared_ptr<EngineGuiTextfield>>& getTextfields();
 
+	const string& getHoveredItemID();
+
 private:
 	FabiEngine3D& _fe3d;
 

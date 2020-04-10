@@ -8,26 +8,143 @@ EngineGuiWritefield::EngineGuiWritefield(FabiEngine3D& fe3d, const string& paren
 
 void EngineGuiWritefield::update(float delta)
 {
-	_updateHovering();
+	if(!_isActive) _updateHovering();
+	_updateActivation();
 	_updateTyping(delta);
+}
+
+void EngineGuiWritefield::setActive(bool active)
+{
+	_isActive = active;
+}
+
+bool EngineGuiWritefield::cancelledInput()
+{
+	return _cancelledInput;
+}
+
+bool EngineGuiWritefield::confirmedInput()
+{
+	return _confirmedInput;
+}
+
+string EngineGuiWritefield::getTextContent()
+{
+	return _currentTextContent;
+}
+
+void EngineGuiWritefield::_updateActivation()
+{
+	if (_isHovered)
+	{
+		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
+		{
+			_isActive = true;
+		}
+	}
 }
 
 void EngineGuiWritefield::_updateTyping(float delta)
 {
-	static float passedDelta = 0.0f;
-	static bool barEnabled = true;
-	
-	// Check if time passed
-	if (passedDelta >= 500.0f)
+	if (_isActive)
 	{
-		passedDelta = 0.0f;
+		static float passedBarDelta = 500.0f;
+		static float passedBackspaceDelta = 100.0f;
+		static bool barEnabled = true;
 
-		// Toggle bar animation
-		barEnabled = !barEnabled;
-		_fe3d.textEntity_setText(_textfield->getEntityID(), barEnabled ? "|" : " ", 0.02f);
+		// Update bar animation time
+		if (passedBarDelta >= 500.0f)
+		{
+			passedBarDelta = 0.0f;
+			
+			// Toggle bar animation
+			barEnabled = !barEnabled;
+		}
+		else
+		{
+			passedBarDelta += delta;
+		}
+
+		// Check if not writing out of border
+		if ((float(_currentTextContent.size() + 1) * _charWidth) < _textfield->getOriginalSize().x)
+		{
+			// Writable characters
+			string lowercaseCharacters = " abcdefghijklmnopqrstuvwxyz1234567890";
+			string specialCharacters = ")!@#$%^&*(";
+
+			// Add character
+			for (auto& c : lowercaseCharacters)
+			{
+				// Check if character is pressed on keyboard
+				if (_fe3d.input_getKeyPressed(Input(c)))
+				{
+					if (_fe3d.input_getKeyDown(Input::KEY_LSHIFT) || _fe3d.input_getKeyDown(Input::KEY_RSHIFT)) // Uppercase character
+					{
+						// Only if number
+						if (isdigit(c))
+						{
+							_currentTextContent += specialCharacters[int(c-48)];
+						}
+						else // Convert to uppercase
+						{
+							_currentTextContent += (c - 32);
+						}
+					}
+					else if (_fe3d.input_getKeyToggled(Input::KEY_CAPSLOCK)) // Uppercase character
+					{
+						// Only if not a number
+						if (!isdigit(c))
+						{
+							_currentTextContent += (c - 32);
+						}
+					}
+					else
+					{
+						_currentTextContent += c; // Lowercase character
+					}
+				}
+			}
+		}
+
+		// Remove character
+		if (_fe3d.input_getKeyDown(Input::KEY_BACKSPACE))
+		{
+			// Check if enough time passed
+			if (passedBackspaceDelta >= 100.0f)
+			{
+				passedBackspaceDelta = 0.0f;
+				_currentTextContent = _currentTextContent.substr(0, _currentTextContent.size() - 1); // Remove last characters
+			}
+			else
+			{
+				passedBackspaceDelta += delta;
+			}
+		}
+		else
+		{
+			passedBackspaceDelta = 100.0f;
+		}
+
+		// Update text content with or without bar
+		_fe3d.textEntity_setTextContent(_textfield->getEntityID(), _currentTextContent + (barEnabled ? "|" : ""), _charWidth);
+		
+		// Input cancellation
+		if (_fe3d.input_getKeyPressed(Input::KEY_ESCAPE))
+		{
+			_cancelledInput = true;
+			_isActive = false;
+		}
+
+		// Input confirmation
+		if (_fe3d.input_getKeyPressed(Input::KEY_RETURN))
+		{
+			_confirmedInput = true;
+			_isActive = false;
+		}
 	}
 	else
 	{
-		passedDelta += delta;
+		// Update text content
+		_fe3d.textEntity_setTextContent(_textfield->getEntityID(), _currentTextContent, 0.01f);
 	}
 }

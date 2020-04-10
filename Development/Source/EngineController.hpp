@@ -13,5 +13,14 @@ public:
 	void FE3D_CONTROLLER_DESTROY();
 
 private:
-	EngineGuiManager _guiManager;
+	shared_ptr<EngineGuiManager> _gui;
+
+	float _delta = 0.0f;
+
+	bool _creatingProject = false;
+	bool _loadingProject = false;
+
+	void _updateGuiInteraction();
+	void _updateProjectCreation();
+	void _updateProjectLoading();
 };

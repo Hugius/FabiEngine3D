@@ -14,7 +14,7 @@ public:
 	const string& getEntityID();
 	const string& getParentID();
 
-	void addScreen(const string& ID, bool active);
+	void addScreen(const string& ID);
 	void setActiveScreen(const string& ID);
 
 	vector<shared_ptr<EngineGuiScreen>>& getScreens();

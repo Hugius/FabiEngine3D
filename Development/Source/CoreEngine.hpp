@@ -35,7 +35,7 @@ enum class EngineState
 	STATE_GAME
 };
 
-class CoreEngine
+class CoreEngine final
 {
 	friend class FabiEngine3D;
 private:

@@ -7,26 +7,33 @@
 class EngineGuiButton
 {
 public:
-	EngineGuiButton(FabiEngine3D& fe3d, const string& parentID, const string& ID, vec2 position, vec2 size, vec3 color, string textContent, vec3 textColor);
-	
-	void update();
+	EngineGuiButton(FabiEngine3D& fe3d, const string& parentID, const string& ID, vec2 position, vec2 size, vec3 color, 
+		string textContent, vec3 textColor, bool sizeIncreaseEnabled = true, bool colorChangeEnabled = true);
+
+	virtual void update(float delta);
 
 	bool isHovered();
 
 	const string& getID();
 	const string& getParentID();
 
-	EngineGuiRectangle& getRectangle();
-	EngineGuiTextfield& getText();
+	shared_ptr<EngineGuiRectangle> getRectangle();
+	shared_ptr<EngineGuiTextfield> getText();
 
-private:
+protected:
 	FabiEngine3D& _fe3d;
 
 	const string _ID;
 	const string _parentID;
 
-	EngineGuiRectangle _rectangle;
-	EngineGuiTextfield _textfield;
+	shared_ptr<EngineGuiRectangle> _rectangle;
+	shared_ptr<EngineGuiTextfield> _textfield;
 
 	bool _isHovered = false;
+
+	void _updateHovering();
+
+private:
+	const bool _sizeIncreaseEnabled = true;
+	const bool _colorChangeEnabled  = true;
 };

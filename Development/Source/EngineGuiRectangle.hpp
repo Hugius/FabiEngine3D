@@ -2,10 +2,12 @@
 
 #include "FabiEngine3D.hpp"
 
-class EngineGuiRectangle
+class EngineGuiRectangle final
 {
 public:
+	//EngineGuiRectangle(EngineGuiRectangle&& other) = default;
 	EngineGuiRectangle(FabiEngine3D& fe3d, const string& parentID, const string& ID, vec2 position, vec2 size, vec3 color);
+	~EngineGuiRectangle();
 
 	vec2 getOriginalPosition();
 	vec2 getOriginalSize();

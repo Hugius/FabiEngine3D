@@ -1,8 +1,8 @@
-#include "EngineControllerGUI.hpp"
+#include "EngineController.hpp"
 
 int main(int argc, char* argv[])
 {
-	EngineControllerGUI fe3d;
+	EngineController fe3d;
 	fe3d.engine_start();
 	return 0;
 }

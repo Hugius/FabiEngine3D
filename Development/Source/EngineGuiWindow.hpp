@@ -3,12 +3,12 @@
 #include "FabiEngine3D.hpp"
 #include "EngineGuiScreen.hpp"
 
-class EngineGuiWindow
+class EngineGuiWindow final
 {
 public:
 	EngineGuiWindow(FabiEngine3D& fe3d, const string& parentID, const string& ID, vec2 position, vec2 size);
 
-	void update();
+	void update(float delta);
 
 	const string& getID();
 	const string& getEntityID();
@@ -17,10 +17,10 @@ public:
 	void addScreen(const string& ID, bool active);
 	void setActiveScreen(const string& ID);
 
-	vector<EngineGuiScreen>& getScreens();
+	vector<shared_ptr<EngineGuiScreen>>& getScreens();
 
-	EngineGuiScreen& getActiveScreen();
-	EngineGuiScreen& getScreen(const string& ID);
+	shared_ptr<EngineGuiScreen> getActiveScreen();
+	shared_ptr<EngineGuiScreen> getScreen(const string& ID);
 
 private:
 	FabiEngine3D& _fe3d;
@@ -31,5 +31,5 @@ private:
 
 	string _activeScreenID = "";
 
-	vector<EngineGuiScreen> _screens;
+	vector<shared_ptr<EngineGuiScreen>> _screens;
 };

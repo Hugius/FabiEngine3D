@@ -12,6 +12,11 @@ EngineGuiTextfield::EngineGuiTextfield(FabiEngine3D& fe3d, const string& parentI
 	_fe3d.textEntity_add(_entityID, textContent, "futura.ttf", textColor, position, 0.0f, size, false);
 }
 
+EngineGuiTextfield::~EngineGuiTextfield()
+{
+	_fe3d.textEntity_delete(_entityID);
+}
+
 vec3 EngineGuiTextfield::getOriginalColor()
 {
 	return _originalColor;

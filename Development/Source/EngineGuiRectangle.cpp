@@ -12,6 +12,11 @@ EngineGuiRectangle::EngineGuiRectangle(FabiEngine3D& fe3d, const string& parentI
 	_fe3d.guiEntity_add(_entityID, color, position, 0.0f, size, false);
 }
 
+EngineGuiRectangle::~EngineGuiRectangle()
+{
+	_fe3d.guiEntity_delete(_entityID);
+}
+
 vec2 EngineGuiRectangle::getOriginalPosition()
 {
 	return _originalPosition;

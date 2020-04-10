@@ -2,8 +2,9 @@
 
 #include "FabiEngine3D.hpp"
 #include "EngineGuiViewport.hpp"
+#include "EngineGuiGlobalScreen.hpp"
 
-class EngineGuiManager
+class EngineGuiManager final
 {
 public:
 	EngineGuiManager(FabiEngine3D& fe3d);
@@ -12,14 +13,16 @@ public:
 	void update(float delta);
 	void unload();
 
+	shared_ptr<EngineGuiViewport> getViewport(const string& ID);
+
 private:
 	FabiEngine3D& _fe3d;
 
-	std::vector<EngineGuiViewport> _viewports;
+	std::vector<shared_ptr<EngineGuiViewport>> _viewports;
+
+	EngineGuiGlobalScreen _globalScreen;
 
 	float _delta = 0.0f;
-
-	EngineGuiViewport& _getViewport(const string& ID);
 
 	void _updateTopViewport();
 	void _updateLeftViewport();

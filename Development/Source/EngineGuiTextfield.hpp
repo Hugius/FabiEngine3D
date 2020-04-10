@@ -2,10 +2,12 @@
 
 #include "FabiEngine3D.hpp"
 
-class EngineGuiTextfield
+class EngineGuiTextfield final
 {
 public:
+	//EngineGuiTextfield(EngineGuiTextfield&& other) = default;
 	EngineGuiTextfield(FabiEngine3D& fe3d, const string& parentID, const string& ID, vec2 position, vec2 size, string textContent, vec3 textColor);
+	~EngineGuiTextfield();
 
 	vec3 getOriginalColor();
 	vec2 getOriginalPosition();

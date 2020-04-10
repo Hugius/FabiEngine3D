@@ -42,7 +42,7 @@ void TextEntityManager::addTextEntity
 	// Create entity
 	_createEntity(EntityType::TEXT, ID)->load(ID);
 	getEntity(ID)->addOglBuffer(new OpenGLBuffer(0.0f, 0.0f, 1.0f, 1.0f, centered));
-	getEntity(ID)->setText(text);
+	getEntity(ID)->setTextContent(text);
 	getEntity(ID)->setFontName(fontName);
 	getEntity(ID)->setColor(color);
 

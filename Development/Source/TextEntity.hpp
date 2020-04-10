@@ -7,10 +7,10 @@ public:
 	TextEntity() = default;
 	~TextEntity() = default;
 
-	void setText(const string& text);
+	void setTextContent(const string& text);
 	void setFontName(const string& fontName);
 
-	const string& getText() const;
+	const string& getTextContent() const;
 	const string& getFontName() const;
 
 private:

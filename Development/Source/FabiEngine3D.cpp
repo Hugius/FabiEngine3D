@@ -1247,14 +1247,13 @@ bool FabiEngine3D::textEntity_isExisting(const string& ID)
 	return _core->_textEntityManager.isExisting(ID);
 }
 
-void FabiEngine3D::textEntity_changeText(const string& ID, const string& text, float charWidth, vec3 color)
+void FabiEngine3D::textEntity_setText(const string& ID, const string& textContent, float charWidth)
 {
 	auto entity = _core->_textEntityManager.getEntity(ID);
 
-	entity->setText(text);
-	entity->setColor(color);
-	entity->setScaling(vec2(charWidth*float(text.size()), entity->getScaling().y));
-	entity->setDiffuseMap(_core->_texLoader.getText(text, "../Game/Fonts/" + entity->getFontName()));
+	entity->setTextContent(textContent);
+	entity->setScaling(vec2(charWidth*float(textContent.size()), entity->getScaling().y));
+	entity->setDiffuseMap(_core->_texLoader.getText(textContent, "../Engine/Fonts/" + entity->getFontName()));
 }
 
 void FabiEngine3D::textEntity_setColor(const string& ID, vec3 color)
@@ -1319,7 +1318,7 @@ vec2 FabiEngine3D::textEntity_getSize(const string& ID)
 
 string FabiEngine3D::textEntity_getText(const string& ID)
 {
-	return _core->_textEntityManager.getEntity(ID)->getText();
+	return _core->_textEntityManager.getEntity(ID)->getTextContent();
 }
 
 /* --------------------------------------------- Graphics interface --------------------------------------------- */

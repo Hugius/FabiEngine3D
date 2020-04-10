@@ -6,14 +6,14 @@ EngineGuiWindow::EngineGuiWindow(FabiEngine3D& fe3d, const string& parentID, con
 	_entityID(parentID + "_" + ID),
 	_parentID(parentID)
 {
-	fe3d.guiEntity_add(_entityID, vec3(0.5f), position, 0.0f, size, false);
+	fe3d.guiEntity_add(_entityID, vec3(0.5f), position, 0.0f, size, true);
 }
 
-void EngineGuiWindow::update(float delta)
+void EngineGuiWindow::update(float delta, bool hoverable)
 {
 	for (auto& screen : _screens)
 	{
-		screen->update(delta);
+		screen->update(delta, hoverable);
 	}
 }
 

@@ -19,8 +19,12 @@ private:
 
 	bool _creatingProject = false;
 	bool _loadingProject = false;
+	bool _savingProject = false;
+
+	string _currentProject = "";
 
 	void _updateGuiInteraction();
 	void _updateProjectCreation();
 	void _updateProjectLoading();
+	void _updateProjectSaving();
 };

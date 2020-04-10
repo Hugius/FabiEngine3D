@@ -14,7 +14,7 @@ void EngineGuiGlobalScreen::update(float delta)
 	// Update buttons
 	for (auto& button : _buttons)
 	{
-		button->update(delta);
+		button->update(delta, true);
 
 		// Set hovered button ID
 		if (button->isHovered())
@@ -26,7 +26,7 @@ void EngineGuiGlobalScreen::update(float delta)
 	// Update writefields
 	for (auto& writefield : _writefields)
 	{
-		writefield->update(delta);
+		writefield->update(delta, true);
 
 		// Set hovered button ID
 		if (writefield->isHovered())

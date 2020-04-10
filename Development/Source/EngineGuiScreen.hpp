@@ -8,7 +8,7 @@ class EngineGuiScreen final
 public:
 	EngineGuiScreen(FabiEngine3D& fe3d, const string& parentID, const string& ID, vec2 position, vec2 size);
 
-	void update(float delta);
+	void update(float delta, bool hoverable);
 
 	const string& getID();
 	const string& getParentID();

@@ -8,7 +8,7 @@ class EngineGuiWritefield final : public EngineGuiButton
 public:
 	EngineGuiWritefield(FabiEngine3D& fe3d, const string& parentID, const string& ID, vec2 position, vec2 size, vec3 color, vec3 textColor);
 
-	void update(float delta) override;
+	void update(float delta, bool hoverable) override;
 	void setActive(bool active);
 
 	bool cancelledInput();

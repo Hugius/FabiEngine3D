@@ -4,6 +4,7 @@
 #include <sstream>
 
 using glm::ivec2;
+using glm::ivec4;
 
 #include "Logger.hpp"
 
@@ -31,6 +32,8 @@ public:
 	const int   getWaterQuality()      const;
 	const int   getReflectionQuality() const;
 	const int   getMaxAudioChannels()  const;
+	const ivec2 getVpPos()			   const;
+	const ivec2 getVpSize()			   const;
 
 private:
 	Config();
@@ -41,12 +44,14 @@ private:
 	void _processOption(std::ifstream& file, float& option);
 	
 	// Variables
-	int   window_width = 800;
-	int   window_height = 600;
-	float window_zoom_scale = 1.0f;
-	int   msaa_quality = 16;
-	int   shadow_quality = 4096;
-	int   water_quality = 1024;
-	int   reflection_quality = 1024;
-	int   max_audio_channels = 512;
+	int   _windowWidth = 800;
+	int   _windowHeight = 600;
+	float _windowZoomScale = 1.0f;
+	int   _msaaQuality = 16;
+	int   _shadowQuality = 4096;
+	int   _waterQuality = 1024;
+	int   _reflectionQuality = 1024;
+	int   _maxAudioChannels = 512;
+	ivec2 _viewportPosition = ivec2(0);
+	ivec2 _viewportSize = ivec2(0);
 };

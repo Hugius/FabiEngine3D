@@ -45,6 +45,10 @@ void Framebuffer::createMsaaTexture(ivec2 size, int amount, int aaSamples)
 		glGenFramebuffers(1, &_fbo);
 		_textureInitialized = true;
 	}
+	else
+	{
+		_textures.clear();
+	}
 	
 	// Bind
 	bind();
@@ -89,6 +93,10 @@ void Framebuffer::createColorTexture(ivec2 size, int amount, bool textureClamp)
 	{
 		glGenFramebuffers(1, &_fbo);
 		_textureInitialized = true;
+	}
+	else
+	{
+		_textures.clear();
 	}
 	
 	// Bind
@@ -158,6 +166,10 @@ void Framebuffer::createDepthTexture(ivec2 size, int amount)
 	{
 		glGenFramebuffers(1, &_fbo);
 		_textureInitialized = true;
+	}
+	else
+	{
+		_textures.clear();
 	}
 
 	bind();

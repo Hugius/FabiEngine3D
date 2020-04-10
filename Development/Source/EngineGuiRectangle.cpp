@@ -9,7 +9,7 @@ EngineGuiRectangle::EngineGuiRectangle(FabiEngine3D& fe3d, const string& parentI
 	_originalSize(size),
 	_originalColor(color)
 {
-	_fe3d.guiEntity_add(_entityID, color, position, 0.0f, size, false);
+	_fe3d.guiEntity_add(_entityID, color, position, 0.0f, size, true);
 }
 
 EngineGuiRectangle::~EngineGuiRectangle()

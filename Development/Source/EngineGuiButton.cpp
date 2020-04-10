@@ -6,16 +6,16 @@ EngineGuiButton::EngineGuiButton(FabiEngine3D& fe3d, const string& parentID, con
 	_ID(ID),
 	_parentID(parentID),
 	_rectangle(make_shared<EngineGuiRectangle>(fe3d, parentID + "_button", ID, position, size, color)),
-	_textfield(make_shared<EngineGuiTextfield>(fe3d, parentID + "_button", ID, position + (size * 0.1f), size * 0.8f, textContent, textColor)),
+	_textfield(make_shared<EngineGuiTextfield>(fe3d, parentID + "_button", ID, position, size * 0.8f, textContent, textColor)),
 	_sizeIncreaseEnabled(sizeIncreaseEnabled),
 	_colorChangeEnabled(colorChangeEnabled)
 {
 
 }
 
-void EngineGuiButton::update(float delta)
+void EngineGuiButton::update(float delta, bool hoverable)
 {
-	_updateHovering();
+	_updateHovering(hoverable);
 }
 
 bool EngineGuiButton::isHovered()
@@ -38,12 +38,12 @@ shared_ptr<EngineGuiRectangle> EngineGuiButton::getRectangle()
 	return _rectangle;
 }
 
-shared_ptr<EngineGuiTextfield> EngineGuiButton::getText()
+shared_ptr<EngineGuiTextfield> EngineGuiButton::getTextfield()
 {
 	return _textfield;
 }
 
-void EngineGuiButton::_updateHovering()
+void EngineGuiButton::_updateHovering(bool hoverable)
 {
 	_isHovered = false;
 
@@ -55,18 +55,17 @@ void EngineGuiButton::_updateHovering()
 		vec2 buttonSize = _fe3d.guiEntity_getSize(_rectangle->getEntityID());
 
 		// Check if cursor inside button
-		if (mousePos.x > buttonPos.x && mousePos.x < buttonPos.x + buttonSize.x) // X axis
+		if (mousePos.x > buttonPos.x - (buttonSize.x / 2.0f) && mousePos.x < buttonPos.x + (buttonSize.x / 2.0f)) // X axis
 		{
-			if (mousePos.y > buttonPos.y && mousePos.y < buttonPos.y + buttonSize.y) // Y axis
+			if (mousePos.y > buttonPos.y - (buttonSize.y / 2.0f) && mousePos.y < buttonPos.y + (buttonSize.y / 2.0f)) // Y axis
 			{
 				_isHovered = true;
 
 				// Update increased size
 				if (_sizeIncreaseEnabled)
 				{
-					_fe3d.guiEntity_setPosition(_rectangle->getEntityID(), _rectangle->getOriginalPosition() - (_rectangle->getOriginalSize() * 0.125f));
 					_fe3d.guiEntity_setSize(_rectangle->getEntityID(), _rectangle->getOriginalSize() * 1.25f);
-					_fe3d.textEntity_setPosition(_textfield->getEntityID(), _textfield->getOriginalPosition() - (_rectangle->getOriginalSize() * 0.125f));
+
 					_fe3d.textEntity_setSize(_textfield->getEntityID(), _textfield->getOriginalSize() * 1.25f);
 
 				}
@@ -82,14 +81,12 @@ void EngineGuiButton::_updateHovering()
 	}
 
 	// Default properties
-	if (!_isHovered)
+	if (!_isHovered || !hoverable)
 	{
 		// Update default size
 		if (_sizeIncreaseEnabled)
 		{
-			_fe3d.guiEntity_setPosition(_rectangle->getEntityID(), _rectangle->getOriginalPosition());
 			_fe3d.guiEntity_setSize(_rectangle->getEntityID(), _rectangle->getOriginalSize());
-			_fe3d.textEntity_setPosition(_textfield->getEntityID(), _textfield->getOriginalPosition());
 			_fe3d.textEntity_setSize(_textfield->getEntityID(), _textfield->getOriginalSize());
 		}
 

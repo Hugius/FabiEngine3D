@@ -53,46 +53,46 @@ void EngineController::_updateGuiInteraction()
 		}
 		else if (hoveredItemID == "loadProject")
 		{
-			// Open file explorer
-			OPENFILENAME ofn;
-			char szFile[100];
-			ZeroMemory(&ofn, sizeof(ofn));
-			ofn.lStructSize = sizeof(ofn);
-			ofn.hwndOwner = NULL;
-			ofn.lpstrFile = szFile;
-			ofn.lpstrFile[0] = '\0';
-			ofn.nMaxFile = sizeof(szFile);
-			ofn.lpstrFilter = "All\0*.*\0Text\0*.TXT\0";
-			ofn.nFilterIndex = 1;
-			ofn.lpstrFileTitle = NULL;
-			ofn.nMaxFileTitle = 0;
-			ofn.lpstrInitialDir = "..\\User\\"; // Projects folder
-			ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
-			GetOpenFileName(&ofn);
-
-			string fileName;
+			_loadingProject = true;
+		}
+		else if (hoveredItemID == "saveProject")
+		{
+			_savingProject = true;
+		}
+		else if (hoveredItemID == "loadProject")
+		{
+			engine_stop();
 		}
 	}
 
 	// Update specific processes
 	_updateProjectCreation();
 	_updateProjectLoading();
+	_updateProjectSaving();
 }
 
 void EngineController::_updateProjectCreation()
 {
 	if (_creatingProject)
 	{
-		if (_gui->getGlobalScreen()->getWritefield("newProjectName")->cancelledInput()) // Pressed ESCAPE
+		// Check if pressed ESCAPE or ENTER
+		if (_gui->getGlobalScreen()->getWritefield("newProjectName")->cancelledInput() ||
+			_gui->getGlobalScreen()->getWritefield("newProjectName")->confirmedInput())
 		{
+			// Extract new name
+			string projectName = _gui->getGlobalScreen()->getWritefield("newProjectName")->getTextContent();
+
+			// Cleanup
 			_creatingProject = false;
 			_gui->setFocus(false);
 			_gui->getGlobalScreen()->deleteTextfield("newProjectName");
 			_gui->getGlobalScreen()->deleteWritefield("newProjectName");
-		}
-		else if (_gui->getGlobalScreen()->getWritefield("newProjectName")->confirmedInput()) // Pressed ENTER
-		{
-			
+
+			// Create new project
+			if (_gui->getGlobalScreen()->getWritefield("newProjectName")->confirmedInput())
+			{
+
+			}
 		}
 	}
 }
@@ -100,6 +100,40 @@ void EngineController::_updateProjectCreation()
 void EngineController::_updateProjectLoading()
 {
 	if (_loadingProject)
+	{
+		// Open file explorer
+		OPENFILENAME ofn;
+		char szFile[100];
+		ZeroMemory(&ofn, sizeof(ofn));
+		ofn.lStructSize = sizeof(ofn);
+		ofn.hwndOwner = NULL;
+		ofn.lpstrFile = szFile;
+		ofn.lpstrFile[0] = '\0';
+		ofn.nMaxFile = sizeof(szFile);
+		ofn.lpstrFilter = "*.FE3D\0";
+		ofn.nFilterIndex = 1;
+		ofn.lpstrFileTitle = NULL;
+		ofn.nMaxFileTitle = 0;
+		ofn.lpstrInitialDir = "..\\User\\"; // Projects folder
+		ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
+		GetOpenFileName(&ofn);
+		
+		// Get the loaded filename
+		string fileName = ofn.lpstrFile;
+		if (fileName == "") // Cancelled
+		{
+			_loadingProject = false;
+		}
+		else // Confirmed
+		{
+			
+		}
+	}
+}
+
+void EngineController::_updateProjectSaving()
+{
+	if (_savingProject)
 	{
 
 	}

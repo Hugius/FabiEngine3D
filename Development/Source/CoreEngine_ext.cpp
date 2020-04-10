@@ -11,9 +11,16 @@ void CoreEngine::_setupApplication()
 	intro.load("intro");
 	intro.addOglBuffer(new OpenGLBuffer(0.0f, 0.0f, 2.0f, 2.0f, true));
 	intro.setDiffuseMap(_texLoader.getTexture("../Engine/Textures/intro.png", true, true));
-	_windowManager.setSize(ivec2(720, 480));
+
+	// Get intro resolution
+	SDL_DisplayMode DM;
+	SDL_GetDesktopDisplayMode(0, &DM);
+	float width = float(DM.w);
+	float height = float(DM.h);
+	ivec2 introResolution = ivec2(int(width * 0.4f), int(height * 0.4f));
+	_windowManager.setSize(introResolution);
 	_windowManager.showWindow();
-	_renderEngine.renderEngineIntro(&intro, ivec2(720, 480));
+	_renderEngine.renderEngineIntro(&intro, introResolution);
 	_windowManager.swapBackBuffer();
 
 	// Initialize engine controller

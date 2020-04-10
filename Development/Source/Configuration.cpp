@@ -12,14 +12,19 @@ Config::Config()
 	}
 
 	// Store config file content
-	_processOption(file, window_width);
-	_processOption(file, window_height);
-	_processOption(file, window_zoom_scale);
-	_processOption(file, msaa_quality);
-	_processOption(file, shadow_quality);
-	_processOption(file, water_quality);
-	_processOption(file, reflection_quality);
-	_processOption(file, max_audio_channels);
+	_processOption(file, _windowWidth);
+	_processOption(file, _windowHeight);
+	_processOption(file, _windowZoomScale);
+	_processOption(file, _msaaQuality);
+	_processOption(file, _shadowQuality);
+	_processOption(file, _waterQuality);
+	_processOption(file, _reflectionQuality);
+	_processOption(file, _maxAudioChannels);
+	
+	_viewportPosition.x = 0.125f * float(_windowWidth);
+	_viewportPosition.y = 0.0f * float(_windowHeight);
+	_viewportSize.x = 0.75f * float(_windowWidth);
+	_viewportSize.y = 0.75f * float(_windowHeight);
 }
 
 void Config::_processOption(std::ifstream& file, bool& option)
@@ -69,45 +74,55 @@ void Config::_processOption(std::ifstream& file, float& option)
 
 const ivec2 Config::getWindowSize() const 
 { 
-	return ivec2(window_width / window_zoom_scale, window_height / window_zoom_scale); 
+	return ivec2(_windowWidth / _windowZoomScale, _windowHeight / _windowZoomScale); 
 }
 
 const int Config::getWindowWidth() const 
 {
-	return int(float(window_width) / window_zoom_scale); 
+	return int(float(_windowWidth) / _windowZoomScale); 
 }
 
 const int Config::getWindowHeight() const 
 {
-	return int(float(window_height) / window_zoom_scale); 
+	return int(float(_windowHeight) / _windowZoomScale); 
 }
 
 const float Config::getWindowZoomScale() const
 {
-	return window_zoom_scale;
+	return _windowZoomScale;
 }
 
 const int Config::getMsaaQuality() const 
 { 
-	return msaa_quality; 
+	return _msaaQuality; 
 }
 
 const int Config::getShadowQuality() const 
 { 
-	return shadow_quality; 
+	return _shadowQuality; 
 }
 
 const int Config::getWaterQuality() const
 {
-	return water_quality;
+	return _waterQuality;
 }
 
 const int Config::getMaxAudioChannels() const
 {
-	return max_audio_channels;
+	return _maxAudioChannels;
+}
+
+const ivec2 Config::getVpPos() const
+{
+	return _viewportPosition;
+}
+
+const ivec2 Config::getVpSize() const
+{
+	return _viewportSize;
 }
 
 const int Config::getReflectionQuality() const
 {
-	return reflection_quality;
+	return _reflectionQuality;
 }

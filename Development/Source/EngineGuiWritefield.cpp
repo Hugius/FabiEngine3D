@@ -6,9 +6,9 @@ EngineGuiWritefield::EngineGuiWritefield(FabiEngine3D& fe3d, const string& paren
 
 }
 
-void EngineGuiWritefield::update(float delta)
+void EngineGuiWritefield::update(float delta, bool hoverable)
 {
-	if(!_isActive) _updateHovering();
+	_updateHovering(hoverable && !_isActive);
 	_updateActivation();
 	_updateTyping(delta);
 }

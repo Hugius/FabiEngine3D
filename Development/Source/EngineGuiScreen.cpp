@@ -10,7 +10,7 @@ EngineGuiScreen::EngineGuiScreen(FabiEngine3D& fe3d, const string& parentID, con
 
 }
 
-void EngineGuiScreen::update(float delta)
+void EngineGuiScreen::update(float delta, bool hoverable)
 {
 	// Set to default
 	_hoveredItemID = "";
@@ -18,7 +18,7 @@ void EngineGuiScreen::update(float delta)
 	// Update buttons
 	for (auto& button : _buttons)
 	{
-		button->update(delta);
+		button->update(delta, hoverable);
 		
 		// Set hovered button ID
 		if (button->isHovered())
@@ -30,7 +30,7 @@ void EngineGuiScreen::update(float delta)
 	// Update writefields
 	for (auto& writefield : _writefields)
 	{
-		writefield->update(delta);
+		writefield->update(delta, hoverable);
 
 		// Set hovered button ID
 		if (writefield->isHovered())
@@ -219,7 +219,7 @@ vec4 EngineGuiScreen::_convertDimensions(vec2 position, vec2 size)
 {
 	vec2 screenPosition = _parentPosition;
 	vec2 screenSize = _parentSize;
-	vec2 buttonPosition = screenPosition + (_fe3d.misc_convertFromNDC(position) * screenSize);
+	vec2 buttonPosition = screenPosition + (position * (screenSize / 2.0f));
 	vec2 buttonSize = (size / 2.0f) * screenSize;
 
 	return vec4(buttonPosition, buttonSize);

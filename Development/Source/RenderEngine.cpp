@@ -20,15 +20,15 @@ RenderEngine::RenderEngine(ShaderBus& shaderBus, Timer& timer) :
 	_finalRenderer            ("FinalShader.vert",           "FinalShader.frag",           shaderBus)
 {
 	// Framebuffers
-	_screenFramebuffer.createColorTexture(Config::getInst().getWindowSize(), 1, false);
-	_msaaFramebuffer.createMsaaTexture(Config::getInst().getWindowSize(), 1, Config::getInst().getMsaaQuality() < 1 ? 1 : Config::getInst().getMsaaQuality() > 16 ? 16 : Config::getInst().getMsaaQuality());
-	_aaProcessorFramebuffer.createColorTexture(Config::getInst().getWindowSize(), 1, false);
-	_bloomDofAdditionFramebuffer.createColorTexture(Config::getInst().getWindowSize(), 1, false);
+	_screenFramebuffer.createColorTexture(Config::getInst().getVpSize(), 1, false);
+	_msaaFramebuffer.createMsaaTexture(Config::getInst().getVpSize(), 1, Config::getInst().getMsaaQuality() < 1 ? 1 : Config::getInst().getMsaaQuality() > 16 ? 16 : Config::getInst().getMsaaQuality());
+	_aaProcessorFramebuffer.createColorTexture(Config::getInst().getVpSize(), 1, false);
+	_bloomDofAdditionFramebuffer.createColorTexture(Config::getInst().getVpSize(), 1, false);
 	_waterRefractionFramebuffer.createColorTexture(ivec2(Config::getInst().getWaterQuality()), 1, false);
 	_sceneReflectionFramebuffer.createColorTexture(ivec2(Config::getInst().getReflectionQuality()), 1, false);
-	_bloomHdrFramebuffer.createColorTexture(Config::getInst().getWindowSize(), 1, false);
+	_bloomHdrFramebuffer.createColorTexture(Config::getInst().getVpSize(), 1, false);
 	_shadowFramebuffer.createDepthTexture(ivec2(Config::getInst().getShadowQuality()), 1);
-	_depthFramebuffer.createDepthTexture(Config::getInst().getWindowSize(), 1);
+	_depthFramebuffer.createDepthTexture(Config::getInst().getVpSize(), 1);
 	_blurRenderer.addFramebuffer(BLUR_BLOOM,  true);
 	_blurRenderer.addFramebuffer(BLUR_DOF,    true);
 	_blurRenderer.addFramebuffer(BLUR_MOTION, true);
@@ -52,7 +52,7 @@ void RenderEngine::renderScene(EntityBus * entityBus, CameraManager & camera, iv
 {
 	// General stuff
 	_entityBus = entityBus;
-	glViewport(0, 0, Config::getInst().getWindowWidth(), Config::getInst().getWindowHeight());
+	glViewport(Config::getInst().getVpPos().x, Config::getInst().getVpPos().y, Config::getInst().getVpSize().x, Config::getInst().getVpSize().y);
 
 	// Wireframe or non-wireframe rendering
 	if (_shaderBus.isWireframeEnabled())
@@ -163,17 +163,7 @@ void RenderEngine::renderScene(EntityBus * entityBus, CameraManager & camera, iv
 
 			// MSAA text
 			_timer.start("textRender");
-			_msaaFramebuffer.bind();
-			glClear(GL_COLOR_BUFFER_BIT);
 			_renderTextEntities();
-			_msaaFramebuffer.processAAData(&_aaProcessorFramebuffer);
-			_msaaFramebuffer.unbind();
-			_finalSurface.setDiffuseMap(_aaProcessorFramebuffer.getTexture(0));
-			
-			// Render text
-			_guiEntityRenderer.bind();
-			_guiEntityRenderer.render(&_finalSurface);
-			_guiEntityRenderer.unbind();
 			_timer.stop();
 		}
 	}

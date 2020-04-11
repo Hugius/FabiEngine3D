@@ -40,10 +40,7 @@ void SkyEntityManager::selectSky(const string & ID)
 	}
 }
 
-void SkyEntityManager::addSkyEntity
-(
-	const string & ID, const string & dayDirectory, const string & nightDirectory, float rotationSpeed, TextureLoader& texLoader
-)
+void SkyEntityManager::addSkyEntity(const string & ID, float rotationSpeed, TextureLoader& texLoader)
 {
 	// Skybox vertices
 	float skybox_data[] =
@@ -96,8 +93,8 @@ void SkyEntityManager::addSkyEntity
 
 	// Fill entity
 	getEntity(ID)->addOglBuffer(new OpenGLBuffer(SHAPE_CUBEMAP, skybox_data, sizeof(skybox_data) / sizeof(float)));
-	getEntity(ID)->setDayCubeMap(texLoader.getCubeMap("../Game/Textures/CubeMaps/" + dayDirectory + "/"));
-	getEntity(ID)->setNightCubeMap(texLoader.getCubeMap("../Game/Textures/CubeMaps/" + nightDirectory + "/"));
+	getEntity(ID)->setDayCubeMap(texLoader.getCubeMap("../User/Assets/Textures/CubeMaps/Day/"));
+	getEntity(ID)->setNightCubeMap(texLoader.getCubeMap("../User/Assets/Textures/CubeMaps/Night/"));
 	getEntity(ID)->setRotationSpeed(rotationSpeed);
 }
 

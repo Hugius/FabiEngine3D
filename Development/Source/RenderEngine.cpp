@@ -52,12 +52,12 @@ void RenderEngine::renderScene(EntityBus * entityBus, CameraManager & camera, iv
 {
 	// General stuff
 	_entityBus = entityBus;
-	glViewport(Config::getInst().getVpPos().x, Config::getInst().getVpPos().y, Config::getInst().getVpSize().x, Config::getInst().getVpSize().y);
 
 	// Wireframe or non-wireframe rendering
 	if (_shaderBus.isWireframeEnabled())
 	{
 		_timer.start("wireframe");
+		glViewport(Config::getInst().getVpPos().x, Config::getInst().getVpPos().y, Config::getInst().getVpSize().x, Config::getInst().getVpSize().y);
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		_renderSkyEntity();
@@ -153,7 +153,9 @@ void RenderEngine::renderScene(EntityBus * entityBus, CameraManager & camera, iv
 		else
 		{
 			// Render final postprocessed texture
+			glViewport(Config::getInst().getVpPos().x, Config::getInst().getVpPos().y, Config::getInst().getVpSize().x, Config::getInst().getVpSize().y);
 			_renderFinalTexture();
+			glViewport(0, 0, Config::getInst().getWindowWidth(), Config::getInst().getWindowHeight());
 			_timer.stop();
 
 			// Render GUI

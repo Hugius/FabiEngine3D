@@ -20,7 +20,7 @@ vector<ObjPart> & OBJLoader::loadOBJ(const string & fileName)
 	}
 }
 
-vector<ObjPart> OBJLoader::_loadOBJ(const string & fileName)
+vector<ObjPart> OBJLoader::_loadOBJ(const string& fileName)
 {
 	// Declare variables
 	vector<ObjPart> objParts;
@@ -31,14 +31,14 @@ vector<ObjPart> OBJLoader::_loadOBJ(const string & fileName)
 
 	// Load OBJ file
 	//std::ifstream file;
-	//file.open(("../Game/OBJs/" + fileName + ".obj").c_str());
+	//file.open(("../User/Assets/OBJs/" + fileName + ".obj").c_str());
 	//if (errno != 0)
 	//{
 	//	Logger::getInstance().throwError("Could not load .obj file: " + string("../Game/OBJs/" + fileName + ".obj"));
 	//}
 
 	// Load .obj file
-	FILE * file = fopen(("../Game/OBJs/" + fileName + ".obj").c_str(), "r");
+	FILE * file = fopen(("../User/Assets/OBJs/" + fileName).c_str(), "r");
 	if (file == NULL)
 	{
 		Logger::getInst().throwError("Could not load .obj file: " + string("../Game/OBJs/" + fileName + ".obj"));

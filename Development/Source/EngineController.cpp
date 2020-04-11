@@ -14,6 +14,9 @@ EngineController::~EngineController()
 void EngineController::FE3D_CONTROLLER_INIT()
 {
 	_gui->load();
+	camera_load(90.0f, 1.0f, 1000.0f, vec3(0.0f));
+	skyEntity_add("sky", 0.01f);
+	skyEntity_select("sky");
 }
 
 void EngineController::FE3D_CONTROLLER_UPDATE(float delta)
@@ -35,7 +38,7 @@ void EngineController::_updateGuiInteraction()
 	auto vp = _gui->getViewport("topViewport");
 
 	// Getting hovered button
-	string hoveredItemID = vp->getWindow("mainWindow")->getActiveScreen()->getHoveredItemID();
+	string hoveredItemID = vp->getWindow("projectWindow")->getActiveScreen()->getHoveredItemID();
 
 	// Check if LMB pressed
 	if (input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
@@ -44,8 +47,8 @@ void EngineController::_updateGuiInteraction()
 		{
 			if (!_creatingProject)
 			{
-				_gui->getGlobalScreen()->addTextfield("newProjectName", vec2(-0.25f, 0.05f), vec2(0.5f, 0.1f), "Enter project name:", vec3(1.0f));
-				_gui->getGlobalScreen()->addWritefield("newProjectName", vec2(-0.25f, -0.05f), vec2(0.5f, 0.1f), vec3(0.25f), vec3(1.0f));
+				_gui->getGlobalScreen()->addTextfield("newProjectName", vec2(0.0f, 0.1f), vec2(0.3f, 0.1f), "Enter project name:", vec3(1.0f));
+				_gui->getGlobalScreen()->addWritefield("newProjectName", vec2(0.0f, 0.0f), vec2(0.5f, 0.1f), vec3(0.25f), vec3(1.0f));
 				_gui->getGlobalScreen()->getWritefield("newProjectName")->setActive(true);
 				_gui->setFocus(true);
 				_creatingProject = true;
@@ -59,7 +62,7 @@ void EngineController::_updateGuiInteraction()
 		{
 			_savingProject = true;
 		}
-		else if (hoveredItemID == "loadProject")
+		else if (hoveredItemID == "quit")
 		{
 			engine_stop();
 		}

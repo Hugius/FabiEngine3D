@@ -60,18 +60,18 @@ void GameEntityManager::addGameEntity
 		getEntity(ID)->addOglBuffer(new OpenGLBuffer(SHAPE_3D, &data[0], data.size()));
 
 		// Diffuse map
-		getEntity(ID)->addDiffuseMap(_texLoader.getTexture("../Game/Textures/DiffuseMaps/" + part.textureName, true, true, false));
+		getEntity(ID)->addDiffuseMap(_texLoader.getTexture("../User/Assets/Textures/DiffuseMaps/" + part.textureName, true, true, false));
 
 		// Light map
 		if (lightMapped)
 		{
-			getEntity(ID)->addLightmap(_texLoader.getTexture("../Game/Textures/LightMaps/" + part.textureName, false, false, false));
+			getEntity(ID)->addLightmap(_texLoader.getTexture("../User/Assets/Textures/LightMaps/" + part.textureName, false, false, false));
 		}
 
 		// Reflection map
 		if (reflective)
 		{
-			getEntity(ID)->addReflectionMap(_texLoader.getTexture("../Game/Textures/ReflectionMaps/" + part.textureName, false, false, false));
+			getEntity(ID)->addReflectionMap(_texLoader.getTexture("../User/Assets/Textures/ReflectionMaps/" + part.textureName, false, false, false));
 		}
 	}
 
@@ -122,7 +122,7 @@ void GameEntityManager::addGameEntity
 		}
 
 		getEntity(ID)->addOglBuffer(new OpenGLBuffer(&data[0], data.size(), offsets));
-		getEntity(ID)->addDiffuseMap(_texLoader.getTexture("../Game/Textures/DiffuseMaps/" + part.textureName, true, true));
+		getEntity(ID)->addDiffuseMap(_texLoader.getTexture("../User/Assets/Textures/DiffuseMaps/" + part.textureName, true, true));
 	}
 
 	// Load transformation
@@ -132,13 +132,13 @@ void GameEntityManager::addGameEntity
 	// Load light map
 	if (lightMapped)
 	{
-		getEntity(ID)->addLightmap(_texLoader.getTexture("../Game/Textures/LightMaps/" + modelName, false, false));
+		getEntity(ID)->addLightmap(_texLoader.getTexture("../User/Assets/Textures/LightMaps/" + modelName, false, false));
 	}
 
 	// Load reflection map
 	if (reflective)
 	{
-		getEntity(ID)->addReflectionMap(_texLoader.getTexture("../Game/Textures/ReflectionMaps/" + modelName, false, false));
+		getEntity(ID)->addReflectionMap(_texLoader.getTexture("../User/Assets/Textures/ReflectionMaps/" + modelName, false, false));
 	}
 
 	// Edit entity

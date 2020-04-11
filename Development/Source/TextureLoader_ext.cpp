@@ -60,7 +60,7 @@ GLuint TextureLoader::_loadText(const string& text, const string &fontPath)
 GLuint TextureLoader::_loadTexture(const string & filePath, bool mipmap, bool aniso, bool repeat)
 {
 	// Load actual texture
-	SDL_Surface * surface = IMG_Load((filePath).c_str());
+	SDL_Surface * surface = IMG_Load((filePath + ".png").c_str());
 	if (surface == nullptr)
 	{
 		Logger::getInst().throwError("Texture error: " + string(SDL_GetError()));
@@ -171,7 +171,7 @@ GLuint TextureLoader::_loadCubemap(const string & filePath)
 	for (GLuint i = 0; i < fileNames.size(); i++)
 	{
 		// Load SDL surface
-		SDL_Surface * surface = IMG_Load((filePath + fileNames[i]).c_str());
+		SDL_Surface * surface = IMG_Load((filePath + fileNames[i] + ".png").c_str());
 		if (surface == nullptr) 
 		{
 			Logger::getInst().throwError("Skybox textures could not be loaded: " + string(SDL_GetError()));
@@ -181,7 +181,7 @@ GLuint TextureLoader::_loadCubemap(const string & filePath)
 		glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGB, surface->w, surface->h, 0, GL_RGB, GL_UNSIGNED_BYTE, surface->pixels);
 
 		// Logging
-		Logger::getInst().throwInfo("Loaded cubemap texture: " + filePath + fileNames[i]);
+		Logger::getInst().throwInfo("Loaded cubemap texture: " + filePath + fileNames[i] + ".png");
 	}
 
 	// OpenGL magic
@@ -202,7 +202,7 @@ TTF_Font * TextureLoader::_loadFont(const string & fontPath)
 	if (it == _fontMap.end()) //Not in map (yet)
 	{
 		// Font loading
-		TTF_Font * font = TTF_OpenFont((fontPath).c_str(), 50);
+		TTF_Font * font = TTF_OpenFont((fontPath).c_str(), 25);
 		if (font == nullptr)
 		{
 			Logger::getInst().throwError(string("Font could not be loaded: " + fontPath).c_str());

@@ -6,13 +6,13 @@
 class EngineGuiViewport final
 {
 public:
-	EngineGuiViewport(FabiEngine3D& fe3d, const string& ID, vec2 position, vec2 size);
+	EngineGuiViewport(FabiEngine3D& fe3d, const string& ID, vec2 position, vec2 size, vec3 color);
 
 	void update(float delta, bool hoverable);
 
 	const string& getID();
 
-	void addWindow(const string& ID, vec2 position, vec2 size);
+	void addWindow(const string& ID, vec2 position, vec2 size, vec3 color);
 	
 	vector<shared_ptr<EngineGuiWindow>>& getWindows();
 

@@ -147,7 +147,7 @@ void TerrainEntityManager::addTerrainEntity
 	// Create entity
 	_createEntity(EntityType::TERRAIN, ID)->load(ID);
 	getEntity(ID)->addOglBuffer(new OpenGLBuffer(SHAPE_3D, &terrainVertices[0], terrainVertices.size()));
-	getEntity(ID)->setDiffuseMap(_texLoader.getTexture("../Game/Textures/DiffuseMaps/" + textureName, true, true));
+	getEntity(ID)->setDiffuseMap(_texLoader.getTexture("../User/Assets/Textures/DiffuseMaps/" + textureName, true, true));
 	getEntity(ID)->setPixelColors(pixelColors);
 	getEntity(ID)->setSize(size);
 	getEntity(ID)->setHeight(maxHeight);
@@ -162,10 +162,10 @@ void TerrainEntityManager::addBlendingToTerrain
 )
 {
 	getEntity(ID)->setBlendMapped(true);
-	getEntity(ID)->setBlendMap(_texLoader.getTexture("../Game/Textures/BlendMaps/"    + blendMap,  true, true));
-	getEntity(ID)->setBlendMapR(_texLoader.getTexture("../Game/Textures/DiffuseMaps/" + blendMapR, true, true));
-	getEntity(ID)->setBlendMapG(_texLoader.getTexture("../Game/Textures/DiffuseMaps/" + blendMapG, true, true));
-	getEntity(ID)->setBlendMapB(_texLoader.getTexture("../Game/Textures/DiffuseMaps/" + blendMapB, true, true));
+	getEntity(ID)->setBlendMap(_texLoader.getTexture("../User/Assets/Textures/BlendMaps/"    + blendMap,  true, true));
+	getEntity(ID)->setBlendMapR(_texLoader.getTexture("../User/Assets/Textures/DiffuseMaps/" + blendMapR, true, true));
+	getEntity(ID)->setBlendMapG(_texLoader.getTexture("../User/Assets/Textures/DiffuseMaps/" + blendMapG, true, true));
+	getEntity(ID)->setBlendMapB(_texLoader.getTexture("../User/Assets/Textures/DiffuseMaps/" + blendMapB, true, true));
 	getEntity(ID)->setBlendRepeatR(blendRepeatR);
 	getEntity(ID)->setBlendRepeatG(blendRepeatG);
 	getEntity(ID)->setBlendRepeatB(blendRepeatB);

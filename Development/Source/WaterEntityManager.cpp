@@ -117,8 +117,8 @@ void WaterEntityManager::addWaterEntity
 
 	// Filly entity
 	getEntity(ID)->addOglBuffer(new OpenGLBuffer(SHAPE_SURFACE, &waterVertices[0], waterVertices.size()));
-	getEntity(ID)->setDudvMap(_texLoader.getTexture("../Game/Textures/DudvMaps/" + assetName, true, true));
-	getEntity(ID)->setNormalMap(_texLoader.getTexture("../Game/Textures/NormalMaps/" + assetName, true, true));
+	getEntity(ID)->setDudvMap(_texLoader.getTexture("../User/Assets/Textures/DudvMaps/" + assetName, true, true));
+	getEntity(ID)->setNormalMap(_texLoader.getTexture("../User/Assets/Textures/NormalMaps/" + assetName, true, true));
 	getEntity(ID)->setTileRepeat(tileRepeat);
 	getEntity(ID)->setWavingSpeed(speed);
 	getEntity(ID)->setWaving(waving);

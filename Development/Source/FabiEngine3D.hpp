@@ -60,7 +60,7 @@ public:
 	// Sky entity interface
 	void skyEntity_add
 	(
-		const string& ID, const string& dayDirectory, const string& nightDirectory, float rotationSpeed
+		const string& ID, float rotationSpeed
 	);
 	void skyEntity_delete(const string& ID);
 	void skyEntity_setAmbientLighting(const string& ID, float nightAmbStrength, float dayAmbStrength);

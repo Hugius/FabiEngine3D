@@ -146,12 +146,9 @@ vec3 FabiEngine3D::camera_getFront()
 
 /* --------------------------------------------- Sky interface --------------------------------------------- */
 
-void FabiEngine3D::skyEntity_add
-(
-	const string& ID, const string& dayDirectory, const string& nightDirectory, float rotationSpeed
-)
+void FabiEngine3D::skyEntity_add(const string& ID, float rotationSpeed)
 {
-	_core->_skyEntityManager.addSkyEntity(ID, dayDirectory, nightDirectory, rotationSpeed, _core->_texLoader);
+	_core->_skyEntityManager.addSkyEntity(ID, rotationSpeed, _core->_texLoader);
 }
 
 void FabiEngine3D::skyEntity_delete(const string& ID)

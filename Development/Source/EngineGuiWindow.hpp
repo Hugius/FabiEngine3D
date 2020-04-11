@@ -6,7 +6,7 @@
 class EngineGuiWindow final
 {
 public:
-	EngineGuiWindow(FabiEngine3D& fe3d, const string& parentID, const string& ID, vec2 position, vec2 size);
+	EngineGuiWindow(FabiEngine3D& fe3d, const string& parentID, const string& ID, vec2 position, vec2 size, vec3 color);
 
 	void update(float delta, bool hoverable);
 

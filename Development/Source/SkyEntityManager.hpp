@@ -14,7 +14,7 @@ public:
 
 	void addSkyEntity
 	(
-		const string & ID, const string & dayDirectory, const string & nightDirectory, float rotationSpeed, TextureLoader& texLoader
+		const string & ID, float rotationSpeed, TextureLoader& texLoader
 	);
 
 	void update(float delta) override;

@@ -21,10 +21,11 @@ Config::Config()
 	_processOption(file, _reflectionQuality);
 	_processOption(file, _maxAudioChannels);
 	
-	_viewportPosition.x = 0.125f * float(_windowWidth);
-	_viewportPosition.y = 0.0f * float(_windowHeight);
-	_viewportSize.x = 0.75f * float(_windowWidth);
-	_viewportSize.y = 0.75f * float(_windowHeight);
+	// Set viewport dimensions
+	_viewportPosition.x = int(0.125f * float(_windowWidth));
+	_viewportPosition.y = int(0.2f * float(_windowHeight));
+	_viewportSize.x		= int(0.75f * float(_windowWidth));
+	_viewportSize.y		= int(0.75f * float(_windowHeight));
 }
 
 void Config::_processOption(std::ifstream& file, bool& option)

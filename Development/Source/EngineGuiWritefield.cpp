@@ -126,7 +126,7 @@ void EngineGuiWritefield::_updateTyping(float delta)
 		}
 
 		// Update text content with or without bar
-		_fe3d.textEntity_setTextContent(_textfield->getEntityID(), _currentTextContent + (barEnabled ? "|" : ""), _charWidth);
+		_fe3d.textEntity_setTextContent(_textfield->getEntityID(), _currentTextContent + (barEnabled ? "|" : " "), _charWidth);
 		
 		// Input cancellation
 		if (_fe3d.input_getKeyPressed(Input::KEY_ESCAPE))

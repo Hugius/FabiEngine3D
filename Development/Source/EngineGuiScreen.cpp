@@ -12,32 +12,95 @@ EngineGuiScreen::EngineGuiScreen(FabiEngine3D& fe3d, const string& parentID, con
 
 void EngineGuiScreen::update(float delta, bool hoverable)
 {
-	// Set to default
-	_hoveredItemID = "";
-
-	// Update buttons
-	for (auto& button : _buttons)
+	if (_enabled)
 	{
-		button->update(delta, hoverable);
-		
-		// Set hovered button ID
-		if (button->isHovered())
+		// Writefields show
+		for (auto& writefield : _writefields)
 		{
-			_hoveredItemID = button->getID();
+			writefield->show();
+		}
+
+		// Buttons show
+		for (auto& button : _buttons)
+		{
+			button->show();
+		}
+
+		// Rectangles show
+		for (auto& rectangle : _rectangles)
+		{
+			rectangle->show();
+		}
+
+		// Textfields show
+		for (auto& textfield : _textfields)
+		{
+			textfield->show();
+		}
+
+		// Set to default
+		_hoveredItemID = "";
+
+		// Update buttons
+		for (auto& button : _buttons)
+		{
+			button->update(delta, hoverable);
+
+			// Set hovered button ID
+			if (button->isHovered())
+			{
+				_hoveredItemID = button->getID();
+			}
+		}
+
+		// Update writefields
+		for (auto& writefield : _writefields)
+		{
+			writefield->update(delta, hoverable);
+
+			// Set hovered button ID
+			if (writefield->isHovered())
+			{
+				_hoveredItemID = writefield->getID();
+			}
 		}
 	}
-
-	// Update writefields
-	for (auto& writefield : _writefields)
+	else
 	{
-		writefield->update(delta, hoverable);
-
-		// Set hovered button ID
-		if (writefield->isHovered())
+		// Writefields hide
+		for (auto& writefield : _writefields)
 		{
-			_hoveredItemID = writefield->getID();
+			writefield->hide();
+		}
+
+		// Buttons hide
+		for (auto& button : _buttons)
+		{
+			button->hide();
+		}
+
+		// Rectangles hide
+		for (auto& rectangle : _rectangles)
+		{
+			rectangle->hide();
+		}
+
+		// Textfields hide
+		for (auto& textfield : _textfields)
+		{
+			textfield->hide();
 		}
 	}
+}
+
+void EngineGuiScreen::show()
+{
+	_enabled = true;
+}
+
+void EngineGuiScreen::hide()
+{
+	_enabled = false;
 }
 
 const string& EngineGuiScreen::getID()
@@ -50,16 +113,16 @@ const string& EngineGuiScreen::getParentID()
 	return _parentID;
 }
 
-void EngineGuiScreen::addWritefield(const string& ID, vec2 position, vec2 size, vec3 color, vec3 textColor)
+void EngineGuiScreen::addWritefield(const string& ID, vec2 position, vec2 size, vec3 color, vec3 hoverColor, vec3 textColor, vec3 textHoverColor)
 {
 	auto dimensions = _convertDimensions(position, size);
-	_writefields.push_back(make_shared<EngineGuiWritefield>(_fe3d, _ID, ID, vec2(dimensions.x, dimensions.y), vec2(dimensions.z, dimensions.w), color, textColor));
+	_writefields.push_back(make_shared<EngineGuiWritefield>(_fe3d, _ID, ID, vec2(dimensions.x, dimensions.y), vec2(dimensions.z, dimensions.w), color, hoverColor, textColor, textHoverColor));
 }
 
-void EngineGuiScreen::addButton(const string& ID, vec2 position, vec2 size, vec3 color, string textContent, vec3 textColor)
+void EngineGuiScreen::addButton(const string& ID, vec2 position, vec2 size, vec3 color, vec3 hoverColor, string textContent, vec3 textColor, vec3 textHoverColor)
 {
 	auto dimensions = _convertDimensions(position, size);
-	_buttons.push_back(make_shared<EngineGuiButton>(_fe3d, _ID, ID, vec2(dimensions.x, dimensions.y), vec2(dimensions.z, dimensions.w), color, textContent, textColor));
+	_buttons.push_back(make_shared<EngineGuiButton>(_fe3d, _ID, ID, vec2(dimensions.x, dimensions.y), vec2(dimensions.z, dimensions.w), color, hoverColor, textContent, textColor, textHoverColor));
 }
 
 void EngineGuiScreen::addRectangle(const string& ID, vec2 position, vec2 size, vec3 color)

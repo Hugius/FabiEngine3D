@@ -17,6 +17,16 @@ EngineGuiTextfield::~EngineGuiTextfield()
 	_fe3d.textEntity_delete(_entityID);
 }
 
+void EngineGuiTextfield::show()
+{
+	_fe3d.textEntity_show(_entityID);
+}
+
+void EngineGuiTextfield::hide()
+{
+	_fe3d.textEntity_hide(_entityID);
+}
+
 vec3 EngineGuiTextfield::getOriginalColor()
 {
 	return _originalColor;

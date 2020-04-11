@@ -1,7 +1,9 @@
 #include "EngineGuiWritefield.hpp"
 
-EngineGuiWritefield::EngineGuiWritefield(FabiEngine3D& fe3d, const string& parentID, const string& ID, vec2 position, vec2 size, vec3 color, vec3 textColor) :
-	EngineGuiButton(fe3d, parentID, ID, position, size, color, "|", textColor, false, true)
+EngineGuiWritefield::EngineGuiWritefield(
+	FabiEngine3D& fe3d, const string& parentID, const string& ID, vec2 position, vec2 size, 
+	vec3 color, vec3 hoverColor, vec3 textColor, vec3 textHoverColor) :
+	EngineGuiButton(fe3d, parentID, ID, position, size, color, hoverColor, "|", textColor, textHoverColor, false, true)
 {
 
 }

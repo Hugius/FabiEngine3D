@@ -17,14 +17,40 @@ private:
 
 	float _delta = 0.0f;
 
-	bool _creatingProject = false;
-	bool _loadingProject = false;
-	bool _savingProject = false;
-
 	string _currentProject = "";
 
 	void _updateGuiInteraction();
+
+	void _updateTopViewport();
+	void _updateLeftViewport();
+	void _updateRightViewport();
+	void _updateBottomViewport();
+
+	// Top viewport
+	bool _creatingProject = false;
+	bool _loadingProject = false;
+	bool _savingProject = false;
+	bool _openingDocs = false;
+	bool _quittingEngine = false;
 	void _updateProjectCreation();
 	void _updateProjectLoading();
 	void _updateProjectSaving();
+	void _updateDocsOpening();
+	void _updateEngineQuitting();
+	
+	// Left viewport
+	bool _modelEditorEnabled = false;
+	bool _worldlEditorEnabled = false;
+	bool _placingEditorEnabled = false;
+	bool _lightingEditorEnabled = false;
+	bool _scriptEditorEnabled = false;
+	void _updateModelEditor();
+	void _updateWorldEditor();
+	void _updatePlacingEditor();
+	void _updateLightingEditor();
+	void _updateScriptEditor();
+
+	// Right viewport
+
+	// Bottom viewport
 };

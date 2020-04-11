@@ -17,6 +17,16 @@ EngineGuiRectangle::~EngineGuiRectangle()
 	_fe3d.guiEntity_delete(_entityID);
 }
 
+void EngineGuiRectangle::show()
+{
+	_fe3d.guiEntity_show(_entityID);
+}
+
+void EngineGuiRectangle::hide()
+{
+	_fe3d.guiEntity_hide(_entityID);
+}
+
 vec2 EngineGuiRectangle::getOriginalPosition()
 {
 	return _originalPosition;

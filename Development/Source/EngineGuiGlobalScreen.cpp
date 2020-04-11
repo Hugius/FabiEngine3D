@@ -36,14 +36,14 @@ void EngineGuiGlobalScreen::update(float delta)
 	}
 }
 
-void EngineGuiGlobalScreen::addWritefield(const string& ID, vec2 position, vec2 size, vec3 color, vec3 textColor)
+void EngineGuiGlobalScreen::addWritefield(const string& ID, vec2 position, vec2 size, vec3 color, vec3 hoverColor, vec3 textColor, vec3 textHoverColor)
 {
-	_writefields.push_back(make_shared<EngineGuiWritefield>(_fe3d, "globalScreen", ID, position, size, color, textColor));
+	_writefields.push_back(make_shared<EngineGuiWritefield>(_fe3d, "globalScreen", ID, position, size, color, hoverColor, textColor, textHoverColor));
 }
 
-void EngineGuiGlobalScreen::addButton(const string& ID, vec2 position, vec2 size, vec3 color, string textContent, vec3 textColor)
+void EngineGuiGlobalScreen::addButton(const string& ID, vec2 position, vec2 size, vec3 color, vec3 hoverColor, string textContent, vec3 textColor, vec3 textHoverColor)
 {
-	_buttons.push_back(make_shared<EngineGuiButton>(_fe3d, "globalScreen", ID, position, size, color, textContent, textColor));
+	_buttons.push_back(make_shared<EngineGuiButton>(_fe3d, "globalScreen", ID, position, size, color, hoverColor, textContent, textColor, textHoverColor));
 }
 
 void EngineGuiGlobalScreen::addRectangle(const string& ID, vec2 position, vec2 size, vec3 color)

@@ -238,8 +238,20 @@
     <ClCompile Include="Source\EngineGuiGlobalScreen.cpp">
       <Filter>src\GUI System</Filter>
     </ClCompile>
+    <ClCompile Include="Source\EngineController_topViewport.cpp">
+      <Filter>src\Engine Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EngineController_bottomViewport.cpp">
+      <Filter>src\Engine Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EngineController_leftViewport.cpp">
+      <Filter>src\Engine Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EngineController_rightViewport.cpp">
+      <Filter>src\Engine Controller</Filter>
+    </ClCompile>
     <ClCompile Include="Source\EngineController.cpp">
-      <Filter>src\Core System</Filter>
+      <Filter>src\Engine Controller</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -463,7 +475,7 @@
       <Filter>src\GUI System</Filter>
     </ClInclude>
     <ClInclude Include="Source\EngineController.hpp">
-      <Filter>src\Core System</Filter>
+      <Filter>src\Engine Controller</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -627,6 +639,9 @@
     </Filter>
     <Filter Include="src\Asset Management System\Textures">
       <UniqueIdentifier>{079f90fa-d7da-4f97-8a7b-9b286362b158}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Engine Controller">
+      <UniqueIdentifier>{a49d2036-9114-4ebe-9349-1f64805d444c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

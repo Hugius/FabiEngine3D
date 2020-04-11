@@ -1,14 +1,16 @@
 #include "EngineGuiButton.hpp"
 
-EngineGuiButton::EngineGuiButton(FabiEngine3D& fe3d, const string& parentID, const string& ID, vec2 position, vec2 size, vec3 color, 
-	string textContent, vec3 textColor, bool sizeIncreaseEnabled, bool colorChangeEnabled) :
+EngineGuiButton::EngineGuiButton(FabiEngine3D& fe3d, const string& parentID, const string& ID, vec2 position, vec2 size, vec3 color, vec3 hoverColor,
+	string textContent, vec3 textColor, vec3 textHoverColor, bool sizeIncreaseEnabled, bool colorChangeEnabled) :
 	_fe3d(fe3d),
 	_ID(ID),
 	_parentID(parentID),
 	_rectangle(make_shared<EngineGuiRectangle>(fe3d, parentID + "_button", ID, position, size, color)),
 	_textfield(make_shared<EngineGuiTextfield>(fe3d, parentID + "_button", ID, position, size * 0.8f, textContent, textColor)),
 	_sizeIncreaseEnabled(sizeIncreaseEnabled),
-	_colorChangeEnabled(colorChangeEnabled)
+	_colorChangeEnabled(colorChangeEnabled),
+	_hoverColor(hoverColor),
+	_textHoverColor(textHoverColor)
 {
 
 }
@@ -16,6 +18,18 @@ EngineGuiButton::EngineGuiButton(FabiEngine3D& fe3d, const string& parentID, con
 void EngineGuiButton::update(float delta, bool hoverable)
 {
 	_updateHovering(hoverable);
+}
+
+void EngineGuiButton::show()
+{
+	_rectangle->show();
+	_textfield->show();
+}
+
+void EngineGuiButton::hide()
+{
+	_rectangle->hide();
+	_textfield->hide();
 }
 
 bool EngineGuiButton::isHovered()
@@ -73,8 +87,8 @@ void EngineGuiButton::_updateHovering(bool hoverable)
 				// Update changed color
 				if (_colorChangeEnabled)
 				{
-					_fe3d.guiEntity_setColor(_rectangle->getEntityID(), vec3(1.0f) - _rectangle->getOriginalColor());
-					_fe3d.textEntity_setColor(_textfield->getEntityID(), vec3(1.0f) - _textfield->getOriginalColor());
+					_fe3d.guiEntity_setColor(_rectangle->getEntityID(), _hoverColor);
+					_fe3d.textEntity_setColor(_textfield->getEntityID(), _textHoverColor);
 				}
 			}
 		}

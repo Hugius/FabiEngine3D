@@ -7,10 +7,12 @@
 class EngineGuiButton
 {
 public:
-	EngineGuiButton(FabiEngine3D& fe3d, const string& parentID, const string& ID, vec2 position, vec2 size, vec3 color, 
-		string textContent, vec3 textColor, bool sizeIncreaseEnabled = true, bool colorChangeEnabled = true);
+	EngineGuiButton(FabiEngine3D& fe3d, const string& parentID, const string& ID, vec2 position, vec2 size, vec3 color, vec3 hoverColor,
+		string textContent, vec3 textColor, vec3 textHoverColor, bool sizeIncreaseEnabled = true, bool colorChangeEnabled = true);
 
 	virtual void update(float delta, bool hoverable);
+	void show();
+	void hide();
 
 	bool isHovered();
 
@@ -25,6 +27,9 @@ protected:
 
 	const string _ID;
 	const string _parentID;
+
+	const vec3 _hoverColor;
+	const vec3 _textHoverColor;
 
 	shared_ptr<EngineGuiRectangle> _rectangle;
 	shared_ptr<EngineGuiTextfield> _textfield;

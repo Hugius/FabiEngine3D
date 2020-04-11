@@ -10,8 +10,8 @@ public:
 
 	void update(float delta);
 
-	void addWritefield(const string& ID, vec2 position, vec2 size, vec3 color, vec3 textColor);
-	void addButton(const string& ID, vec2 position, vec2 size, vec3 color, string textContent, vec3 textColor);
+	void addWritefield(const string& ID, vec2 position, vec2 size, vec3 color, vec3 hoverColor, vec3 textColor, vec3 textHoverColor);
+	void addButton(const string& ID, vec2 position, vec2 size, vec3 color, vec3 hoverColor, string textContent, vec3 textColor, vec3 textHoverColor);
 	void addRectangle(const string& ID, vec2 position, vec2 size, vec3 color);
 	void addTextfield(const string& ID, vec2 position, vec2 size, string textContent, vec3 textColor);
 

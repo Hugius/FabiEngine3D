@@ -231,6 +231,10 @@
     <ClCompile Include="Source\Configuration.cpp" />
     <ClCompile Include="Source\DepthRenderer.cpp" />
     <ClCompile Include="Source\EngineController.cpp" />
+    <ClCompile Include="Source\EngineController_bottomViewport.cpp" />
+    <ClCompile Include="Source\EngineController_leftViewport.cpp" />
+    <ClCompile Include="Source\EngineController_rightViewport.cpp" />
+    <ClCompile Include="Source\EngineController_topViewport.cpp" />
     <ClCompile Include="Source\EngineGuiButton.cpp" />
     <ClCompile Include="Source\EngineGuiGlobalScreen.cpp" />
     <ClCompile Include="Source\EngineGuiRectangle.cpp" />

@@ -2,6 +2,8 @@
 #include <SDL/SDL_image.h>
 #include <SDL/SDL_mixer.h>
 #include <SDL/SDL_ttf.h>
+#include <Windows.h>
+#include <ShellScalingAPI.h>
 
 #include "WindowManager.hpp"
 #include "Logger.hpp"
@@ -16,6 +18,9 @@ WindowManager::WindowManager()
 		string error = "SDL could not be initialized: " + string(SDL_GetError());
 		Logger::getInst().throwError(error.c_str());
 	}
+
+	// Make sure scaled monitors still show the correct resolution
+	SetProcessDpiAwareness(PROCESS_SYSTEM_DPI_AWARE);
 
 	// Window stuff
 	Logger::getInst().throwInfo("Initializing window...");

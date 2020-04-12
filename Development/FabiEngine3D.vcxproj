@@ -158,6 +158,10 @@
     <ClInclude Include="Source\CoreEngine.hpp" />
     <ClInclude Include="Source\DepthRenderer.hpp" />
     <ClInclude Include="Source\EngineController.hpp" />
+    <ClInclude Include="Source\BottomViewportController.hpp" />
+    <ClInclude Include="Source\LeftViewportController.hpp" />
+    <ClInclude Include="Source\RightViewportController.hpp" />
+    <ClInclude Include="Source\TopViewportController.hpp" />
     <ClInclude Include="Source\EngineGuiGlobalScreen.hpp" />
     <ClInclude Include="Source\EngineGuiRectangle.hpp" />
     <ClInclude Include="Source\EngineGuiManager.hpp" />
@@ -205,6 +209,7 @@
     <ClInclude Include="Source\TextureLoader.hpp" />
     <ClInclude Include="Source\Timer.hpp" />
     <ClInclude Include="Source\Tools.hpp" />
+    <ClInclude Include="Source\ViewportController.hpp" />
     <ClInclude Include="Source\WaterEntity.hpp" />
     <ClInclude Include="Source\WaterEntityManager.hpp" />
     <ClInclude Include="Source\WaterEntityRenderer.hpp" />
@@ -231,10 +236,10 @@
     <ClCompile Include="Source\Configuration.cpp" />
     <ClCompile Include="Source\DepthRenderer.cpp" />
     <ClCompile Include="Source\EngineController.cpp" />
-    <ClCompile Include="Source\EngineController_bottomViewport.cpp" />
-    <ClCompile Include="Source\EngineController_leftViewport.cpp" />
-    <ClCompile Include="Source\EngineController_rightViewport.cpp" />
-    <ClCompile Include="Source\EngineController_topViewport.cpp" />
+    <ClCompile Include="Source\BottomViewportController.cpp" />
+    <ClCompile Include="Source\LeftViewportController.cpp" />
+    <ClCompile Include="Source\RightViewportController.cpp" />
+    <ClCompile Include="Source\TopViewportController.cpp" />
     <ClCompile Include="Source\EngineGuiButton.cpp" />
     <ClCompile Include="Source\EngineGuiGlobalScreen.cpp" />
     <ClCompile Include="Source\EngineGuiRectangle.cpp" />
@@ -273,6 +278,7 @@
     <ClCompile Include="Source\TextEntity.cpp" />
     <ClCompile Include="Source\TextEntityManager.cpp" />
     <ClCompile Include="Source\Timer.cpp" />
+    <ClCompile Include="Source\ViewportController.cpp" />
     <ClCompile Include="Source\WaterEntity.cpp" />
     <ClCompile Include="Source\WaterEntityManager.cpp" />
     <ClCompile Include="Source\CoreEngine.cpp" />

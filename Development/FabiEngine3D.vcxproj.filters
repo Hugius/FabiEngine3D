@@ -238,19 +238,22 @@
     <ClCompile Include="Source\EngineGuiGlobalScreen.cpp">
       <Filter>src\GUI System</Filter>
     </ClCompile>
-    <ClCompile Include="Source\EngineController_topViewport.cpp">
-      <Filter>src\Engine Controller</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\EngineController_bottomViewport.cpp">
-      <Filter>src\Engine Controller</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\EngineController_leftViewport.cpp">
-      <Filter>src\Engine Controller</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\EngineController_rightViewport.cpp">
-      <Filter>src\Engine Controller</Filter>
-    </ClCompile>
     <ClCompile Include="Source\EngineController.cpp">
+      <Filter>src\Engine Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\TopViewportController.cpp">
+      <Filter>src\Engine Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\RightViewportController.cpp">
+      <Filter>src\Engine Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\LeftViewportController.cpp">
+      <Filter>src\Engine Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\BottomViewportController.cpp">
+      <Filter>src\Engine Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ViewportController.cpp">
       <Filter>src\Engine Controller</Filter>
     </ClCompile>
   </ItemGroup>
@@ -475,6 +478,21 @@
       <Filter>src\GUI System</Filter>
     </ClInclude>
     <ClInclude Include="Source\EngineController.hpp">
+      <Filter>src\Engine Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ViewportController.hpp">
+      <Filter>src\Engine Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\TopViewportController.hpp">
+      <Filter>src\Engine Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\RightViewportController.hpp">
+      <Filter>src\Engine Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\LeftViewportController.hpp">
+      <Filter>src\Engine Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\BottomViewportController.hpp">
       <Filter>src\Engine Controller</Filter>
     </ClInclude>
   </ItemGroup>

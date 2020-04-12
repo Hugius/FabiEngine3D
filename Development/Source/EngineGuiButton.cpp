@@ -78,9 +78,9 @@ void EngineGuiButton::_updateHovering(bool hoverable)
 				// Update increased size
 				if (_sizeIncreaseEnabled)
 				{
-					_fe3d.guiEntity_setSize(_rectangle->getEntityID(), _rectangle->getOriginalSize() * 1.25f);
+					_fe3d.guiEntity_setSize(_rectangle->getEntityID(), _rectangle->getOriginalSize() * 1.15f);
 
-					_fe3d.textEntity_setSize(_textfield->getEntityID(), _textfield->getOriginalSize() * 1.25f);
+					_fe3d.textEntity_setSize(_textfield->getEntityID(), _textfield->getOriginalSize() * 1.15f);
 
 				}
 

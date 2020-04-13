@@ -17,8 +17,6 @@ public:
 	void FE3D_CONTROLLER_DESTROY();
 
 private:
-	void _updateGuiInteraction();
-
 	shared_ptr<EngineGuiManager> _gui;
 
 	float _delta = 0.0f;

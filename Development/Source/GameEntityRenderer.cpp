@@ -119,8 +119,11 @@ void GameEntityRenderer::render(const GameEntity * entity)
 			for (auto & buffer : entity->getOglBuffers())
 			{
 				// Diffuse map
-				glActiveTexture(GL_TEXTURE0);
-				glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap(index));
+				if (entity->hasTexture())
+				{
+					glActiveTexture(GL_TEXTURE0);
+					glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap(index));
+				}
 
 				// Light map
 				if (entity->isLightMapped())

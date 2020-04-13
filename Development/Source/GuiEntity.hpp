@@ -23,6 +23,7 @@ public:
 	void setColor(vec3 color);
 	void setMirroredHorizontally(bool val);
 	void setMirroredVertically(bool val);
+	void setAlpha(float val);
 
 	// Transformation
 	void setTranslation(vec2 val);
@@ -35,6 +36,7 @@ public:
 	// Texture & color
 	const GLuint getDiffuseMap() const;
 	const vec3 getColor() const;
+	const float getAlpha() const;
 	const bool isMirroredHorizonally() const;
 	const bool isMirroredVertically() const;
 
@@ -58,6 +60,8 @@ private:
 	vec2  _translation = vec2(0.0f);
 	float _rotation    = 0.0f;
 	vec2  _scaling     = vec2(1.0f);
+
+	float _alpha = 1.0f;
 
 	bool _mirroredHorizontally = false;
 	bool _mirroredVertically   = false;

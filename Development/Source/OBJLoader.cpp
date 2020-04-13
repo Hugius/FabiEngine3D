@@ -27,38 +27,31 @@ vector<ObjPart> OBJLoader::_loadOBJ(const string& fileName)
 	vector<vec3> tem_positions;
 	vector<vec2> tem_uvs;
 	vector<vec3> tem_normals;
-	string selectedTextureName = fileName;
+	string selectedTextureName = "";
 
-	// Load OBJ file
-	//std::ifstream file;
-	//file.open(("../User/Assets/OBJs/" + fileName + ".obj").c_str());
-	//if (errno != 0)
-	//{
-	//	Logger::getInstance().throwError("Could not load .obj file: " + string("../Game/OBJs/" + fileName + ".obj"));
-	//}
+	// Get application root directory
+	char pBuf[256]; size_t len = sizeof(pBuf);
+	GetModuleFileName(NULL, pBuf, len);
+	string fullDir = pBuf;
+	fullDir = fullDir.substr(0, fullDir.size() - 25);
 
 	// Load .obj file
-	FILE * file = fopen(("../User/Assets/OBJs/" + fileName).c_str(), "r");
-	if (file == NULL)
+	FILE * file = fopen((fullDir + "User\\Assets\\OBJs\\" + fileName + ".obj").c_str(), "r");
+	if (errno != 0)
 	{
-		Logger::getInst().throwError("Could not load .obj file: " + string("../Game/OBJs/" + fileName + ".obj"));
+		Logger::getInst().throwError("Could not load .obj file: " + string("User\\Assets\\OBJs\\" + fileName + ".obj"));
 	}
 
 	// Fill the vector with the data from the file
 	while (true)
 	{
+		// Check for end of file
 		char lineHeader[128];
 		int res = fscanf(file, "%s", lineHeader);
-		if (res == EOF) // End of file
+		if (res == EOF)
+		{
 			break;
-
-		// Load line
-		//string line;
-		//string header;
-		//std::getline(file, line);
-		//std::replace(line.begin(), line.end(), '/', ' ');
-		//std::istringstream iss(line);
-		//iss >> header;
+		}
 		
 		// File content
 		if (strcmp(lineHeader, "v") == 0) // Vertices
@@ -151,11 +144,11 @@ vector<ObjPart> OBJLoader::_loadOBJ(const string& fileName)
 	// Error checking
 	if (objParts.empty())
 	{
-		Logger::getInst().throwError("Incorrect or too little content at file: " + string(fileName + ".obj"));
+		Logger::getInst().throwError("Incorrect or too little content at file: " + string("User\\Assets\\OBJs\\" + fileName + ".obj"));
 	}
 
 	// Logging
-	Logger::getInst().throwInfo("Loaded OBJ model: " + string("../Game/OBJs/" + fileName + ".obj"));
+	Logger::getInst().throwInfo("Loaded OBJ model: " + string("User\\Assets\\OBJs\\" + fileName + ".obj"));
 
 	// Return new OBJ parts
 	return objParts;

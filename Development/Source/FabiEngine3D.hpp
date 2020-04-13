@@ -113,9 +113,8 @@ public:
 	// Game entity interface
 	void gameEntity_add
 	(
-		const string& ID, const string& modelName,
-		vec3 position, vec3 rotation, vec3 size,
-		bool transparent, bool faceCulled, bool lightMapped, bool reflective, bool specular, bool visible = true
+		const string& ID, const string& objName,
+		vec3 position, vec3 rotation, vec3 size, bool visible = true
 	);
 	void gameEntity_addInstanced
 	(
@@ -130,8 +129,12 @@ public:
 	void gameEntity_showAll();
 	void gameEntity_hide(const string& ID);
 	void gameEntity_show(const string& ID);
+	void gameEntity_setDiffuseMap(const string& ID, const string& fileName);
+	void gameEntity_setLightMap(const string& ID, const string& fileName);
+	void gameEntity_setReflectionMap(const string& ID, const string& fileName);
 	bool gameEntity_isExisting(const string& ID);
 	bool gameEntity_isVisible(const string& ID);
+	bool gameEntity_isMultiTextured(const string& ID);
 	void gameEntity_move(const string& ID, vec3 factor);
 	void gameEntity_rotate(const string& ID, vec3 factor);
 	void gameEntity_scale(const string& ID, vec3 factor);
@@ -248,6 +251,7 @@ public:
 	void guiEntity_rotate(const string& ID, float rotation);
 	void guiEntity_scale(const string& ID, vec2 size);
 	void guiEntity_setColor(const string& ID, vec3 color);
+	void guiEntity_setAlpha(const string& ID, float alpha);
 	vec2 guiEntity_getPosition(const string& ID);
 	float guiEntity_getRotation(const string& ID);
 	vec2 guiEntity_getSize(const string& ID);
@@ -267,6 +271,7 @@ public:
 	bool textEntity_isExisting(const string& ID);
 	void textEntity_setTextContent(const string& ID, const string& textContent, float charWidth);
 	void textEntity_setColor(const string& ID, vec3 color);
+	void textEntity_setAlpha(const string& ID, float alpha);
 	void textEntity_hide(const string& ID);
 	void textEntity_show(const string& ID);
 	void textEntity_setPosition(const string& ID, vec2 position);
@@ -388,6 +393,7 @@ public:
 	void misc_hidePerformanceProfiling();
 	void misc_showAudioDebugging();
 	void misc_hideAudioDebugging();
+	string misc_getWinExplorerFilename(string startingDir, string fileType);
 	string misc_vec2str(vec2 vec);
 	string misc_vec2str(vec3 vec);
 	string misc_vec2str(vec4 vec);

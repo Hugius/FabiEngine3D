@@ -26,7 +26,6 @@ public:
 	const ivec2 getWindowSize()        const;
 	const int   getWindowWidth()       const;
 	const int   getWindowHeight()      const;
-	const float getWindowZoomScale()   const;
 	const int   getMsaaQuality()       const;
 	const int   getShadowQuality()     const;
 	const int   getWaterQuality()      const;
@@ -44,14 +43,14 @@ private:
 	void _processOption(std::ifstream& file, float& option);
 	
 	// Variables
-	int   _windowWidth = 800;
-	int   _windowHeight = 600;
-	float _windowZoomScale = 1.0f;
-	int   _msaaQuality = 16;
-	int   _shadowQuality = 4096;
-	int   _waterQuality = 1024;
-	int   _reflectionQuality = 1024;
-	int   _maxAudioChannels = 512;
+	bool  _windowFullscreen = false;
+	int   _windowWidth = 0;
+	int   _windowHeight = 0;
+	int   _msaaQuality = 0;
+	int   _shadowQuality = 0;
+	int   _waterQuality = 0;
+	int   _reflectionQuality = 0;
+	int   _maxAudioChannels = 0;
 	ivec2 _viewportPosition = ivec2(0);
 	ivec2 _viewportSize = ivec2(0);
 };

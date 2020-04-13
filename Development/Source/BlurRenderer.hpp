@@ -2,7 +2,7 @@
 
 #include "EntityRenderer.hpp"
 #include "GuiEntity.hpp"
-#include "Framebuffer.hpp"
+#include "OpenGLFramebuffer.hpp"
 
 enum BlurDirections
 {
@@ -26,7 +26,7 @@ public:
 private:
 	void _render(const GuiEntity * entity, GLuint texture);
 
-	vector<Framebuffer*> _horizontalFramebuffers;
-	vector<Framebuffer*> _verticalFramebuffers;
+	vector<OpenGLFramebuffer*> _horizontalFramebuffers;
+	vector<OpenGLFramebuffer*> _verticalFramebuffers;
 };
 

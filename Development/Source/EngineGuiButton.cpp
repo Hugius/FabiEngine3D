@@ -20,43 +20,6 @@ void EngineGuiButton::update(float delta, bool hoverable)
 	_updateHovering(hoverable);
 }
 
-void EngineGuiButton::show()
-{
-	_rectangle->show();
-	_textfield->show();
-}
-
-void EngineGuiButton::hide()
-{
-	_rectangle->hide();
-	_textfield->hide();
-}
-
-bool EngineGuiButton::isHovered()
-{
-	return _isHovered;
-}
-
-const string& EngineGuiButton::getID()
-{
-	return _ID;
-}
-
-const string& EngineGuiButton::getParentID()
-{
-	return _parentID;
-}
-
-shared_ptr<EngineGuiRectangle> EngineGuiButton::getRectangle()
-{
-	return _rectangle;
-}
-
-shared_ptr<EngineGuiTextfield> EngineGuiButton::getTextfield()
-{
-	return _textfield;
-}
-
 void EngineGuiButton::_updateHovering(bool hoverable)
 {
 	_isHovered = false;
@@ -95,7 +58,7 @@ void EngineGuiButton::_updateHovering(bool hoverable)
 	}
 
 	// Default properties
-	if (!_isHovered || !hoverable)
+	if (!_isHovered || !hoverable || !_isHoverable)
 	{
 		// Update default size
 		if (_sizeIncreaseEnabled)
@@ -111,4 +74,57 @@ void EngineGuiButton::_updateHovering(bool hoverable)
 			_fe3d.textEntity_setColor(_textfield->getEntityID(), _textfield->getOriginalColor());
 		}
 	}
+}
+
+void EngineGuiButton::show()
+{
+	_rectangle->show();
+	_textfield->show();
+}
+
+void EngineGuiButton::hide()
+{
+	_rectangle->hide();
+	_textfield->hide();
+}
+
+void EngineGuiButton::setHoverable(bool hoverable)
+{
+	_isHoverable = hoverable;
+
+	if (hoverable)
+	{
+		_fe3d.guiEntity_setAlpha(_rectangle->getEntityID(), 1.0f);
+		_fe3d.textEntity_setAlpha(_textfield->getEntityID(), 1.0f);
+	}
+	else
+	{
+		_fe3d.guiEntity_setAlpha(_rectangle->getEntityID(), 0.25f);
+		_fe3d.textEntity_setAlpha(_textfield->getEntityID(), 0.25f);
+	}
+}
+
+bool EngineGuiButton::isHovered()
+{
+	return _isHovered;
+}
+
+const string& EngineGuiButton::getID()
+{
+	return _ID;
+}
+
+const string& EngineGuiButton::getParentID()
+{
+	return _parentID;
+}
+
+shared_ptr<EngineGuiRectangle> EngineGuiButton::getRectangle()
+{
+	return _rectangle;
+}
+
+shared_ptr<EngineGuiTextfield> EngineGuiButton::getTextfield()
+{
+	return _textfield;
 }

@@ -25,17 +25,16 @@ const vector<GameEntity*> GameEntityManager::getEntities()
 
 void GameEntityManager::addGameEntity
 (
-	const string & ID, const string & modelName,
-	vec3 T, vec3 R, vec3 S, 
-	bool transparent, bool faceCulled, bool lightMapped, bool reflective, bool specular
+	const string & ID, const string & objName,
+	vec3 T, vec3 R, vec3 S
 )
 {
 	// Load OBJ model
-	auto parts = _objLoader.loadOBJ(modelName);
+	auto parts = _objLoader.loadOBJ(objName);
 
 	// Create entity
 	_createEntity(EntityType::GAME, ID)->load(ID);
-	getEntity(ID)->setModelName(modelName);
+	getEntity(ID)->setModelName(objName);
 
 	// Create OpenGL buffers
 	for (auto & part : parts)
@@ -58,20 +57,12 @@ void GameEntityManager::addGameEntity
 
 		// OpenGL buffer
 		getEntity(ID)->addOglBuffer(new OpenGLBuffer(SHAPE_3D, &data[0], data.size()));
+		getEntity(ID)->setColor(vec3(0.5f, 0.5f, 1.0f));
 
-		// Diffuse map
-		getEntity(ID)->addDiffuseMap(_texLoader.getTexture("../User/Assets/Textures/DiffuseMaps/" + part.textureName, true, true, false));
-
-		// Light map
-		if (lightMapped)
+		// Load model-specified texture
+		if (part.textureName != "")
 		{
-			getEntity(ID)->addLightmap(_texLoader.getTexture("../User/Assets/Textures/LightMaps/" + part.textureName, false, false, false));
-		}
-
-		// Reflection map
-		if (reflective)
-		{
-			getEntity(ID)->addReflectionMap(_texLoader.getTexture("../User/Assets/Textures/ReflectionMaps/" + part.textureName, false, false, false));
+			getEntity(ID)->setDiffuseMap(_texLoader.getTexture("User\\Assets\\Textures\\DiffuseMaps\\" + part.textureName, true, true, true));
 		}
 	}
 
@@ -79,13 +70,6 @@ void GameEntityManager::addGameEntity
 	getEntity(ID)->setTranslation(T);
 	getEntity(ID)->setRotation(R);
 	getEntity(ID)->setScaling(S);
-
-	// Edit entity
-	getEntity(ID)->setTransparent(transparent);
-	getEntity(ID)->setFaceCulled(faceCulled);
-	getEntity(ID)->setLightMapped(lightMapped);
-	getEntity(ID)->setSkyReflective(reflective);
-	getEntity(ID)->setSpecular(specular);
 }
 
 void GameEntityManager::addGameEntity
@@ -122,7 +106,7 @@ void GameEntityManager::addGameEntity
 		}
 
 		getEntity(ID)->addOglBuffer(new OpenGLBuffer(&data[0], data.size(), offsets));
-		getEntity(ID)->addDiffuseMap(_texLoader.getTexture("../User/Assets/Textures/DiffuseMaps/" + part.textureName, true, true));
+		getEntity(ID)->setDiffuseMap(_texLoader.getTexture("../User/Assets/Textures/DiffuseMaps/" + part.textureName, true, true));
 	}
 
 	// Load transformation
@@ -132,13 +116,13 @@ void GameEntityManager::addGameEntity
 	// Load light map
 	if (lightMapped)
 	{
-		getEntity(ID)->addLightmap(_texLoader.getTexture("../User/Assets/Textures/LightMaps/" + modelName, false, false));
+		getEntity(ID)->setLightMap(_texLoader.getTexture("../User/Assets/Textures/LightMaps/" + modelName, false, false));
 	}
 
 	// Load reflection map
 	if (reflective)
 	{
-		getEntity(ID)->addReflectionMap(_texLoader.getTexture("../User/Assets/Textures/ReflectionMaps/" + modelName, false, false));
+		getEntity(ID)->setReflectionMap(_texLoader.getTexture("../User/Assets/Textures/ReflectionMaps/" + modelName, false, false));
 	}
 
 	// Edit entity

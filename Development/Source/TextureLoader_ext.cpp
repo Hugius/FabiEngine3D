@@ -57,10 +57,16 @@ GLuint TextureLoader::_loadText(const string& text, const string &fontPath)
 	return tex;
 }
 
-GLuint TextureLoader::_loadTexture(const string & filePath, bool mipmap, bool aniso, bool repeat)
+GLuint TextureLoader::_loadTexture(const string& filePath, bool mipmap, bool aniso, bool repeat)
 {
-	// Load actual texture
-	SDL_Surface * surface = IMG_Load((filePath + ".png").c_str());
+	// Get application root directory
+	char pBuf[256]; size_t len = sizeof(pBuf);
+	GetModuleFileName(NULL, pBuf, len);
+	string fullDir = pBuf;
+	fullDir = fullDir.substr(0, fullDir.size() - 25);
+
+	// Load actual texture data
+	SDL_Surface * surface = IMG_Load((fullDir + filePath + ".png").c_str());
 	if (surface == nullptr)
 	{
 		Logger::getInst().throwError("Texture error: " + string(SDL_GetError()));
@@ -118,7 +124,7 @@ GLuint TextureLoader::_loadTexture(const string & filePath, bool mipmap, bool an
 	}
 
 	// Logging
-	Logger::getInst().throwInfo("Loaded texture: " + filePath);
+	Logger::getInst().throwInfo("Loaded texture: " + filePath + ".png");
 
 	// Return new texture
 	return tex;
@@ -127,8 +133,10 @@ GLuint TextureLoader::_loadTexture(const string & filePath, bool mipmap, bool an
 // http://stackoverflow.com/questions/1968561/getting-the-pixel-value-of-bmp-file
 vector<float> TextureLoader::_loadHeightmap(const string & filePath, int size)
 {
-	vector<float> pixelColors;
+	// Pixels
+	vector<float> pixelIntensities;
 
+	// Open file
 	FILE * streamIn;
 	fopen_s(&streamIn, (filePath + ".bmp").c_str(), "rb");
 	if (streamIn == (FILE *)0) 
@@ -136,25 +144,28 @@ vector<float> TextureLoader::_loadHeightmap(const string & filePath, int size)
 		Logger::getInst().throwError("Could not open heightmap: " + filePath + ".bmp");
 	}
 
+	// File header
 	int byte;
 	for (int i = 0; i < 54; i++) byte = getc(streamIn);
 
+	// Read pixels
 	for (int i = 0; i < (size * size); i++)
 	{
-		pixelColors.push_back(0.0f);
+		pixelIntensities.push_back(0.0f);
 		auto r = getc(streamIn);
 		auto g = getc(streamIn);
 		auto b = getc(streamIn);
-		pixelColors.back() = static_cast<float>(r);
+		pixelIntensities.back() = static_cast<float>(r);
 	}
 
+	// Close file
 	fclose(streamIn);
 
 	// Logging
 	Logger::getInst().throwInfo("Loaded BMP heightmap: " + filePath + ".bmp");
 
 	// Return new texture
-	return pixelColors;
+	return pixelIntensities;
 }
 
 GLuint TextureLoader::_loadCubemap(const string & filePath)
@@ -196,20 +207,27 @@ GLuint TextureLoader::_loadCubemap(const string & filePath)
 	return textureID;
 }
 
-TTF_Font * TextureLoader::_loadFont(const string & fontPath)
+TTF_Font * TextureLoader::_loadFont(const string& fontName)
 {
-	auto it = _fontMap.find(fontPath);
+	// Get application root directory
+	char pBuf[256]; size_t len = sizeof(pBuf);
+	GetModuleFileName(NULL, pBuf, len);
+	string fullDir = pBuf;
+	fullDir = fullDir.substr(0, fullDir.size() - 25);
+
+	// Load font
+	auto it = _fontMap.find(fontName);
 	if (it == _fontMap.end()) //Not in map (yet)
 	{
 		// Font loading
-		TTF_Font * font = TTF_OpenFont((fontPath).c_str(), 25);
+		TTF_Font * font = TTF_OpenFont((fullDir + "Engine\\Fonts\\" + fontName + ".ttf").c_str(), 25);
 		if (font == nullptr)
 		{
-			Logger::getInst().throwError(string("Font could not be loaded: " + fontPath).c_str());
+			Logger::getInst().throwError("Texture error: " + string(SDL_GetError()));
 		}
-		_fontMap.insert(std::make_pair(fontPath, font));
+		_fontMap.insert(std::make_pair(fontName, font));
 
-		Logger::getInst().throwInfo("Loaded font: " + fontPath);
+		Logger::getInst().throwInfo("Loaded font: " + string("Engine\\Fonts\\" + fontName + ".ttf"));
 
 		return font; //Use new texture
 	}

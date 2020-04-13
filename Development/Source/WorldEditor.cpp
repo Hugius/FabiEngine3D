@@ -67,7 +67,7 @@ void WorldEditor::loadWorld(const string& worldName)
 		}
 
 		// Add new entity
-		_game.addGameEntity(ID, modelName, vec3(tx, ty, tz), vec3(rx, ry, rz), vec3(sx, sy, sz), transparent, culling, lightmap, reflective, specular);
+		//_game.addGameEntity(ID, modelName, vec3(tx, ty, tz), vec3(rx, ry, rz), vec3(sx, sy, sz), transparent, culling, lightmap, reflective, specular);
 	}
 
 	file.close();

@@ -9,9 +9,7 @@ class EngineGuiManager final
 public:
 	EngineGuiManager(FabiEngine3D& fe3d);
 
-	void load();
 	void update(float delta);
-	void unload();
 	void setFocus(bool focused);
 
 	shared_ptr<EngineGuiGlobalScreen> getGlobalScreen();

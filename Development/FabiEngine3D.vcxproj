@@ -160,6 +160,7 @@
     <ClInclude Include="Source\EngineController.hpp" />
     <ClInclude Include="Source\BottomViewportController.hpp" />
     <ClInclude Include="Source\LeftViewportController.hpp" />
+    <ClInclude Include="Source\ModelEditorr.hpp" />
     <ClInclude Include="Source\RightViewportController.hpp" />
     <ClInclude Include="Source\TopViewportController.hpp" />
     <ClInclude Include="Source\EngineGuiGlobalScreen.hpp" />
@@ -175,7 +176,7 @@
     <ClInclude Include="Source\EntityManager.hpp" />
     <ClInclude Include="Source\EntityRenderer.hpp" />
     <ClInclude Include="Source\FinalRenderer.hpp" />
-    <ClInclude Include="Source\Framebuffer.hpp" />
+    <ClInclude Include="Source\OpenGLFramebuffer.hpp" />
     <ClInclude Include="Source\GameEntity.hpp" />
     <ClInclude Include="Source\GameEntityManager.hpp" />
     <ClInclude Include="Source\GameEntityRenderer.hpp" />
@@ -238,6 +239,7 @@
     <ClCompile Include="Source\EngineController.cpp" />
     <ClCompile Include="Source\BottomViewportController.cpp" />
     <ClCompile Include="Source\LeftViewportController.cpp" />
+    <ClCompile Include="Source\ModelEditorr.cpp" />
     <ClCompile Include="Source\RightViewportController.cpp" />
     <ClCompile Include="Source\TopViewportController.cpp" />
     <ClCompile Include="Source\EngineGuiButton.cpp" />
@@ -282,8 +284,8 @@
     <ClCompile Include="Source\WaterEntity.cpp" />
     <ClCompile Include="Source\WaterEntityManager.cpp" />
     <ClCompile Include="Source\CoreEngine.cpp" />
-    <ClCompile Include="Source\Framebuffer.cpp" />
-    <ClCompile Include="Source\Framebuffer_ext.cpp" />
+    <ClCompile Include="Source\OpenGLFramebuffer.cpp" />
+    <ClCompile Include="Source\OpenGLFramebuffer_ext.cpp" />
     <ClCompile Include="Source\OBJLoader.cpp" />
     <ClCompile Include="Source\OpenGLBuffer.cpp" />
     <ClCompile Include="Source\InputHandler.cpp" />

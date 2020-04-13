@@ -1,5 +1,7 @@
 #include "Configuration.hpp"
 
+#include <SDL/SDL.h>
+
 Config::Config()
 {
 	std::ifstream file;
@@ -12,15 +14,27 @@ Config::Config()
 	}
 
 	// Store config file content
-	_processOption(file, _windowWidth);
-	_processOption(file, _windowHeight);
-	_processOption(file, _windowZoomScale);
+	_processOption(file, _windowFullscreen);
 	_processOption(file, _msaaQuality);
 	_processOption(file, _shadowQuality);
 	_processOption(file, _waterQuality);
 	_processOption(file, _reflectionQuality);
 	_processOption(file, _maxAudioChannels);
 	
+	// Set window dimensions
+	SDL_DisplayMode DM;
+	SDL_GetDesktopDisplayMode(0, &DM);
+	if (_windowFullscreen)
+	{
+		_windowWidth = int(float(DM.w));
+		_windowHeight = int(float(DM.h));
+	}
+	else
+	{
+		_windowWidth = int(float(DM.w) * 0.83f);
+		_windowHeight = int(float(DM.h) * 0.83f);
+	}
+
 	// Set viewport dimensions
 	_viewportPosition.x = int(0.125f * float(_windowWidth));
 	_viewportPosition.y = int(0.2f * float(_windowHeight));
@@ -75,22 +89,17 @@ void Config::_processOption(std::ifstream& file, float& option)
 
 const ivec2 Config::getWindowSize() const 
 { 
-	return ivec2(_windowWidth / _windowZoomScale, _windowHeight / _windowZoomScale); 
+	return ivec2(_windowWidth, _windowHeight); 
 }
 
 const int Config::getWindowWidth() const 
 {
-	return int(float(_windowWidth) / _windowZoomScale); 
+	return _windowWidth;
 }
 
 const int Config::getWindowHeight() const 
 {
-	return int(float(_windowHeight) / _windowZoomScale); 
-}
-
-const float Config::getWindowZoomScale() const
-{
-	return _windowZoomScale;
+	return _windowHeight; 
 }
 
 const int Config::getMsaaQuality() const 

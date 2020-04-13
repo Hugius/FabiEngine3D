@@ -115,12 +115,6 @@
     <ClCompile Include="Source\DepthRenderer.cpp">
       <Filter>src\Rendering System\Renderers</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Framebuffer.cpp">
-      <Filter>src\Rendering System\OpenGL</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Framebuffer_ext.cpp">
-      <Filter>src\Rendering System\OpenGL</Filter>
-    </ClCompile>
     <ClCompile Include="Source\OpenGLBuffer.cpp">
       <Filter>src\Rendering System\OpenGL</Filter>
     </ClCompile>
@@ -256,6 +250,15 @@
     <ClCompile Include="Source\ViewportController.cpp">
       <Filter>src\Engine Controller</Filter>
     </ClCompile>
+    <ClCompile Include="Source\ModelEditorr.cpp">
+      <Filter>src\Editor System\Model Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\OpenGLFramebuffer.cpp">
+      <Filter>src\Rendering System\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\OpenGLFramebuffer_ext.cpp">
+      <Filter>src\Rendering System\OpenGL</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\AabbEntity.hpp">
@@ -359,9 +362,6 @@
     </ClInclude>
     <ClInclude Include="Source\CoreEngine.hpp">
       <Filter>src\Core System</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Framebuffer.hpp">
-      <Filter>src\Rendering System\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="Source\OpenGLBuffer.hpp">
       <Filter>src\Rendering System\OpenGL</Filter>
@@ -494,6 +494,12 @@
     </ClInclude>
     <ClInclude Include="Source\BottomViewportController.hpp">
       <Filter>src\Engine Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ModelEditorr.hpp">
+      <Filter>src\Editor System\Model Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\OpenGLFramebuffer.hpp">
+      <Filter>src\Rendering System\OpenGL</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

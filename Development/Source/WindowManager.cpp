@@ -30,15 +30,15 @@ WindowManager::WindowManager()
 	_context = SDL_GL_CreateContext(_window);
 	hideBorder();
 
-	// Glew
+	// GLEW (GL Extension Wrangler)
 	Logger::getInst().throwInfo("Initializing glew...");
 	glewExperimental = GL_TRUE;
 	GLenum initGlew = glewInit();
-	if (initGlew != GLEW_OK)
+	if (initGlew != GLEW_OK) // Error
 	{
 		Logger::getInst().throwError(reinterpret_cast<char const *>(glewGetErrorString(initGlew)));
 	}
-	Logger::getInst().throwInfo("Using GLEW version " + string(reinterpret_cast<char const *>(glewGetString(GLEW_VERSION))));
+	//Logger::getInst().throwInfo("Using GLEW version " + string(reinterpret_cast<char const *>(glewGetString(GLEW_VERSION))));
 
 	// Image stuff
 	Logger::getInst().throwInfo("Initializing SDL_Image...");

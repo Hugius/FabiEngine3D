@@ -12,7 +12,7 @@ void GameEntity::updateModelMatrix()
 	_modelMatrix = glm::scale(_modelMatrix, _scaling);
 }
 
-void GameEntity::addDiffuseMap(GLuint val)
+void GameEntity::setDiffuseMap(GLuint val)
 {
 	if (std::find(_diffuseMaps.begin(), _diffuseMaps.end(), val) == _diffuseMaps.end())
 	{
@@ -20,7 +20,7 @@ void GameEntity::addDiffuseMap(GLuint val)
 	}
 }
 
-void GameEntity::addLightmap(GLuint val)
+void GameEntity::setLightMap(GLuint val)
 {
 	if (std::find(_lightMaps.begin(), _lightMaps.end(), val) == _lightMaps.end())
 	{
@@ -28,7 +28,7 @@ void GameEntity::addLightmap(GLuint val)
 	}
 }
 
-void GameEntity::addReflectionMap(GLuint val)
+void GameEntity::setReflectionMap(GLuint val)
 {
 	if (std::find(_reflectionMaps.begin(), _reflectionMaps.end(), val) == _reflectionMaps.end())
 	{
@@ -204,6 +204,11 @@ const bool GameEntity::isSpecular() const
 const bool GameEntity::isShadowed() const
 {
 	return _isShadowed;
+}
+
+const bool GameEntity::hasTexture() const
+{
+	return !_diffuseMaps.empty();
 }
 
 const float GameEntity::getMaxY() const

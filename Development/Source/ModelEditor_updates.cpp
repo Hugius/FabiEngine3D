@@ -54,7 +54,7 @@ void ModelEditor::update(ivec2 mousePos, InputHandler& inputHandler, float delta
 		auto parts = _objLoader.loadOBJ(getSelectedModel()->getModelName());
 		for (auto & part : parts)
 		{
-			getSelectedModel()->addLightmap(_texLoader.getTexture("../Game/Textures/LightMaps/" + part.textureName, false, false));
+			getSelectedModel()->setLightMap(_texLoader.getTexture("../Game/Textures/LightMaps/" + part.textureName, false, false));
 		}
 	}
 
@@ -77,7 +77,7 @@ void ModelEditor::update(ivec2 mousePos, InputHandler& inputHandler, float delta
 		auto parts = _objLoader.loadOBJ(getSelectedModel()->getModelName());
 		for (auto & part : parts)
 		{
-			getSelectedModel()->addReflectionMap(_texLoader.getTexture("../Game/Textures/ReflectionMaps/" + part.textureName, false, false));
+			getSelectedModel()->setReflectionMap(_texLoader.getTexture("../Game/Textures/ReflectionMaps/" + part.textureName, false, false));
 		}
 	}
 

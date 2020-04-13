@@ -28,6 +28,7 @@ void GuiEntityRenderer::render(const GuiEntity * entity)
 			_shader.uploadUniform("u_mirrorHor",       entity->isMirroredHorizonally());
 			_shader.uploadUniform("u_mirrorVer",       entity->isMirroredVertically());
 			_shader.uploadUniform("u_color",           entity->getColor());
+			_shader.uploadUniform("u_alpha",		   entity->getAlpha());
 			_shader.uploadUniform("u_isDepthEntity",   entity->isDepthEntity());
 			_shader.uploadUniform("u_noTexture",	   entity->getDiffuseMap() == 0);
 			_shader.uploadUniform("u_sampler_diffuse", 0);

@@ -10,7 +10,7 @@ LightEntityManager::LightEntityManager(OBJLoader& objLoader, TextureLoader& texL
 	{
 		// Open
 		std::ifstream inFile;
-		inFile.open("../Engine/Shaders/" + shader + ".frag");
+		inFile.open("..\\Engine\\Shaders\\" + shader + ".frag");
 
 		// Read
 		string temp;
@@ -27,7 +27,7 @@ LightEntityManager::LightEntityManager(OBJLoader& objLoader, TextureLoader& texL
 
 		// Write
 		std::ofstream outFile;
-		outFile.open("../Engine/Shaders/" + shader + ".frag");
+		outFile.open("..\\Engine\\Shaders\\" + shader + ".frag");
 		for (auto & line : lines)
 		{
 			outFile << line << std::endl;

@@ -393,12 +393,11 @@ void FabiEngine3D::gameEntity_deleteAll()
 
 void FabiEngine3D::gameEntity_add
 (
-	const string& ID, const string& modelName,
-	vec3 position, vec3 rotation, vec3 size,
-	bool transparent, bool faceCulled, bool lightMapped, bool reflective, bool specular, bool visible
+	const string& ID, const string& objName,
+	vec3 position, vec3 rotation, vec3 size, bool visible
 )
 {
-	_core->_gameEntityManager.addGameEntity(ID, modelName, position, rotation, size, transparent, faceCulled, lightMapped, reflective, specular);
+	_core->_gameEntityManager.addGameEntity(ID, objName, position, rotation, size);
 	_core->_gameEntityManager.getEntity(ID)->setEnabled(visible);
 }
 
@@ -473,6 +472,21 @@ void FabiEngine3D::gameEntity_show(const string& ID)
 	_core->_gameEntityManager.getEntity(ID)->setEnabled(true);
 }
 
+void FabiEngine3D::gameEntity_setDiffuseMap(const string& ID, const string& fileName)
+{
+	_core->_gameEntityManager.getEntity(ID)->setDiffuseMap(_core->_texLoader.getTexture("User\\Assets\\Textures\\DiffuseMaps\\" + fileName, true, true));
+}
+
+void FabiEngine3D::gameEntity_setLightMap(const string& ID, const string& fileName)
+{
+	_core->_gameEntityManager.getEntity(ID)->setLightMap(_core->_texLoader.getTexture("User\\Assets\\Textures\\LightMaps\\" + fileName, true, true));
+}
+
+void FabiEngine3D::gameEntity_setReflectionMap(const string& ID, const string& fileName)
+{
+	_core->_gameEntityManager.getEntity(ID)->setReflectionMap(_core->_texLoader.getTexture("User\\Assets\\Textures\\ReflectionMaps\\" + fileName, true, true));
+}
+
 bool FabiEngine3D::gameEntity_isExisting(const string& ID)
 {
 	return _core->_gameEntityManager.isExisting(ID);
@@ -481,6 +495,11 @@ bool FabiEngine3D::gameEntity_isExisting(const string& ID)
 bool FabiEngine3D::gameEntity_isVisible(const string& ID)
 {
 	return _core->_gameEntityManager.getEntity(ID)->isEnabled();
+}
+
+bool FabiEngine3D::gameEntity_isMultiTextured(const string& ID)
+{
+	return (_core->_gameEntityManager.getEntity(ID)->getOglBuffers().size() > 1);
 }
 
 void FabiEngine3D::gameEntity_move(const string& ID, vec3 factor)
@@ -1143,7 +1162,7 @@ void FabiEngine3D::guiEntity_delete(const string& ID)
 
 void FabiEngine3D::guiEntity_changeTexture(const string& ID, const string& assetName)
 {
-	_core->_guiEntityManager.getEntity(ID)->setDiffuseMap(_core->_texLoader.getTexture("../Game/Textures/GuiMaps/" + assetName, true, true));
+	_core->_guiEntityManager.getEntity(ID)->setDiffuseMap(_core->_texLoader.getTexture("User\\Assets\\Textures\\GuiMaps" + assetName, true, true));
 }
 
 bool FabiEngine3D::guiEntity_isExisting(const string& ID)
@@ -1185,6 +1204,11 @@ void FabiEngine3D::guiEntity_setColor(const string& ID, vec3 color)
 {
 	_core->_guiEntityManager.getEntity(ID)->setColor(color);
 }
+
+void FabiEngine3D::guiEntity_setAlpha(const string& ID, float alpha)
+{
+	_core->_guiEntityManager.getEntity(ID)->setAlpha(alpha);
+ }
 
 vec2 FabiEngine3D::guiEntity_getPosition(const string& ID)
 {
@@ -1250,12 +1274,17 @@ void FabiEngine3D::textEntity_setTextContent(const string& ID, const string& tex
 
 	entity->setTextContent(textContent);
 	entity->setScaling(vec2(charWidth*float(textContent.size()), entity->getScaling().y));
-	entity->setDiffuseMap(_core->_texLoader.getText(textContent, "../Engine/Fonts/" + entity->getFontName()));
+	entity->setDiffuseMap(_core->_texLoader.getText(textContent, entity->getFontName()));
 }
 
 void FabiEngine3D::textEntity_setColor(const string& ID, vec3 color)
 {
 	_core->_textEntityManager.getEntity(ID)->setColor(color);
+}
+
+void FabiEngine3D::textEntity_setAlpha(const string& ID, float alpha)
+{
+	_core->_textEntityManager.getEntity(ID)->setAlpha(alpha);
 }
 
 void FabiEngine3D::textEntity_hide(const string& ID)
@@ -1819,6 +1848,31 @@ void FabiEngine3D::misc_showAudioDebugging()
 void FabiEngine3D::misc_hideAudioDebugging()
 {
 	_core->_audioPlayer.setChannelDebugging(false);
+}
+
+string FabiEngine3D::misc_getWinExplorerFilename(string startingDir, string fileType)
+{
+	// Open file explorer
+	OPENFILENAME ofn;
+	char pathBuffer[100];
+	char titleBuffer[100];
+	ZeroMemory(&ofn, sizeof(ofn));
+	ofn.lStructSize = sizeof(ofn);
+	ofn.hwndOwner = NULL;
+	ofn.lpstrFile = pathBuffer;
+	ofn.lpstrFile[0] = '\0';
+	ofn.nMaxFile = sizeof(pathBuffer);
+	ofn.lpstrFilter = string("*." + fileType + "\0").c_str();
+	ofn.nFilterIndex = 1;
+	ofn.lpstrFileTitle = titleBuffer;
+	ofn.lpstrFileTitle[0] = '\0';
+	ofn.nMaxFileTitle = sizeof(titleBuffer);
+	ofn.lpstrInitialDir = startingDir.c_str(); // Projects folder
+	ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
+	GetOpenFileName(&ofn);
+
+	// Return chosen filename
+	return ofn.lpstrFileTitle;
 }
 
 string FabiEngine3D::misc_vec2str(vec2 vec)

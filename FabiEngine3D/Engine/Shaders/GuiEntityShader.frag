@@ -5,6 +5,7 @@ in vec2 f_uv;
 
 uniform sampler2D u_sampler_diffuse;
 uniform vec3      u_color;
+uniform float 	  u_alpha;
 uniform float     u_nearZ;
 uniform float     u_farZ;
 uniform bool      u_isDepthEntity;
@@ -31,12 +32,12 @@ void main()
 	{
 		if(u_noTexture)
 		{
-			o_finalColor = vec4(u_color, 1.0f);
+			o_finalColor = vec4(u_color, u_alpha);
 		}
 		else
 		{
 			vec4 texColor = texture(u_sampler_diffuse, f_uv);
-			o_finalColor = vec4(texColor.rgb * u_color, texColor.a);
+			o_finalColor = vec4(texColor.rgb * u_color, texColor.a * u_alpha);
 		}
 	}
 }

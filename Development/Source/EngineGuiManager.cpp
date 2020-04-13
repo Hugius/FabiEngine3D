@@ -3,11 +3,6 @@
 EngineGuiManager::EngineGuiManager(FabiEngine3D& fe3d) : 
 	_fe3d(fe3d)
 {
-
-}
-
-void EngineGuiManager::load()
-{
 	// Global screen
 	_globalScreen = make_shared<EngineGuiGlobalScreen>(_fe3d);
 
@@ -39,7 +34,7 @@ void EngineGuiManager::load()
 	getViewport("leftViewport")->getWindow("mainWindow")->getScreen("mainScreen")->addButton("modelEditor", vec2(0.0f, 0.7f), vec2(1.5f, 0.1f), leftColor, leftHoverColor, "Model editor", vec3(1.0f), vec3(0.0f));
 	getViewport("leftViewport")->getWindow("mainWindow")->getScreen("mainScreen")->addButton("worldEditor", vec2(0.0f, 0.35f), vec2(1.5f, 0.1f), leftColor, leftHoverColor, "World editor", vec3(1.0f), vec3(0.0f));
 	getViewport("leftViewport")->getWindow("mainWindow")->getScreen("mainScreen")->addButton("placingEditor", vec2(0.0f, 0.0f), vec2(1.5f, 0.1f), leftColor, leftHoverColor, "Placing editor", vec3(1.0f), vec3(0.0f));
-	getViewport("leftViewport")->getWindow("mainWindow")->getScreen("mainScreen")->addButton("lightingEditor", vec2(0.0f, -0.35f), vec2(1.5f, 0.1f), leftColor, leftHoverColor, "Lighting editor", vec3(1.0f), vec3(0.0f));
+	getViewport("leftViewport")->getWindow("mainWindow")->getScreen("mainScreen")->addButton("lightingEditor", vec2(0.0f, -0.35f), vec2(1.6f, 0.1f), leftColor, leftHoverColor, "Lighting editor", vec3(1.0f), vec3(0.0f));
 	getViewport("leftViewport")->getWindow("mainWindow")->getScreen("mainScreen")->addButton("scriptEditor", vec2(0.0f, -0.7f), vec2(1.5f, 0.1f), leftColor, leftHoverColor, "Script editor", vec3(1.0f), vec3(0.0f));
 
 	// Left-viewport: mainWindow - modelManagementScreen
@@ -81,11 +76,6 @@ void EngineGuiManager::update(float delta)
 	
 	// Update global screen
 	_globalScreen->update(delta);
-}
-
-void EngineGuiManager::unload()
-{
-
 }
 
 void EngineGuiManager::setFocus(bool focused)

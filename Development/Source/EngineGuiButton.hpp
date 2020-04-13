@@ -13,6 +13,7 @@ public:
 	virtual void update(float delta, bool hoverable);
 	void show();
 	void hide();
+	void setHoverable(bool val);
 
 	bool isHovered();
 
@@ -35,6 +36,7 @@ protected:
 	shared_ptr<EngineGuiTextfield> _textfield;
 
 	bool _isHovered = false;
+	bool _isHoverable = true;
 
 	void _updateHovering(bool hoverable);
 

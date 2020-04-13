@@ -17,14 +17,14 @@ void WorldEditor::update
 		{
 			_modelAmounts[_modelIndex]++;
 			auto * newModel = models[_modelIndex];
-			_game.addGameEntity
-			(
-				_getSelectedID(), newModel->getModelName(),
-				_game.getEntity("previewEntity")->getTranslation(), _game.getEntity("previewEntity")->getRotation(),
-				_game.getEntity("previewEntity")->getScaling(),
-				newModel->isTransparent(), newModel->isFaceCulled(),
-				newModel->isLightMapped(), newModel->isSkyReflective(), newModel->isSpecular()
-			);
+			//_game.addGameEntity
+			//(
+			//	_getSelectedID(), newModel->getModelName(),
+			//	_game.getEntity("previewEntity")->getTranslation(), _game.getEntity("previewEntity")->getRotation(),
+			//	_game.getEntity("previewEntity")->getScaling(),
+			//	newModel->isTransparent(), newModel->isFaceCulled(),
+			//	newModel->isLightMapped(), newModel->isSkyReflective(), newModel->isSpecular()
+			//);
 		}
 
 		// Update preview entity
@@ -35,13 +35,13 @@ void WorldEditor::update
 		else // Create new preview entity
 		{
 			GameEntity * model = models[_modelIndex];
-			_game.addGameEntity
-			(
-				"previewEntity", model->getModelName(),
-				vec3(0.0f), model->getRotation(), model->getScaling(),
-				model->isTransparent(), model->isFaceCulled(),
-				model->isLightMapped(), model->isSkyReflective(), model->isSpecular()
-			);
+			//_game.addGameEntity
+			//(
+			//	"previewEntity", model->getModelName(),
+			//	vec3(0.0f), model->getRotation(), model->getScaling(),
+			//	model->isTransparent(), model->isFaceCulled(),
+			//	model->isLightMapped(), model->isSkyReflective(), model->isSpecular()
+			//);
 		}
 	}
 	else

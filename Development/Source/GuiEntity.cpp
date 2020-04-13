@@ -30,6 +30,11 @@ void GuiEntity::setMirroredVertically(bool val)
 	_mirroredVertically = val;
 }
 
+void GuiEntity::setAlpha(float val)
+{
+	_alpha = val;
+}
+
 void GuiEntity::setTranslation(vec2 val)
 {
 	_translation = val;
@@ -68,6 +73,11 @@ const GLuint GuiEntity::getDiffuseMap() const
 const vec3 GuiEntity::getColor() const
 {
 	return _color;
+}
+
+const float GuiEntity::getAlpha() const
+{
+	return _alpha;
 }
 
 const bool GuiEntity::isMirroredHorizonally() const

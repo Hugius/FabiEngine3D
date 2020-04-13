@@ -140,13 +140,18 @@ void EngineGuiWritefield::_updateTyping(float delta)
 		// Input confirmation
 		if (_fe3d.input_getKeyPressed(Input::KEY_RETURN))
 		{
-			_confirmedInput = true;
-			_isActive = false;
+			if (_currentTextContent != "")
+			{
+				_confirmedInput = true;
+				_isActive = false;
+			}
 		}
 	}
 	else
 	{
 		// Update text content
 		_fe3d.textEntity_setTextContent(_textfield->getEntityID(), _currentTextContent, 0.01f);
+		_confirmedInput = false;
+		_cancelledInput = false;
 	}
 }

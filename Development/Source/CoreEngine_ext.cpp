@@ -10,7 +10,7 @@ void CoreEngine::_setupApplication()
 	GuiEntity intro;
 	intro.load("intro");
 	intro.addOglBuffer(new OpenGLBuffer(0.0f, 0.0f, 2.0f, 2.0f, true));
-	intro.setDiffuseMap(_texLoader.getTexture("../Engine/Textures/intro", true, true));
+	intro.setDiffuseMap(_texLoader.getTexture("Engine\\Textures\\intro", true, true));
 
 	// Get intro resolution
 	SDL_DisplayMode DM;
@@ -89,8 +89,7 @@ void CoreEngine::_renderApplication()
 	EntityBus entityBus
 	(
 		_skyEntityManager.getSelectedSky(), _terrainEntityManager.getSelectedTerrain(), _waterEntityManager.getSelectedWater(), 
-		_engineState == EngineState::STATE_MODEL_EDITOR ? vector<GameEntity*>{_modelEditor.getSelectedModel()} : _gameEntityManager.getEntities(),
-		_billboardEntityManager.getEntities(), _aabbEntityManager.getEntities(),
+		_gameEntityManager.getEntities(), _billboardEntityManager.getEntities(), _aabbEntityManager.getEntities(),
 		_lightEntityManager.getEntities(), _guiEntityManager.getEntities(), _textEntityManager.getEntities()
 	);
 	_timer.stop();

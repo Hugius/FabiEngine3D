@@ -27,14 +27,6 @@
 #include "AudioManager.hpp"
 #include "AudioPlayer.hpp"
 
-enum class EngineState
-{
-	STATE_GUI,
-	STATE_MODEL_EDITOR,
-	STATE_WORLD_EDITOR,
-	STATE_GAME
-};
-
 class CoreEngine final
 {
 	friend class FabiEngine3D;
@@ -86,6 +78,4 @@ private:
 
 	bool _isRunning = false;
 	bool _showStats = false;
-
-	EngineState _engineState;
 };

@@ -13,9 +13,8 @@ public:
 
 	void addGameEntity
 	(
-		const string & ID, const string & modelName,
-		vec3 T, vec3 R, vec3 S,
-		bool transparent, bool faceCulled, bool lightMapped, bool reflective, bool specular
+		const string & ID, const string & objName,
+		vec3 T, vec3 R, vec3 S
 	);
 
 	void addGameEntity

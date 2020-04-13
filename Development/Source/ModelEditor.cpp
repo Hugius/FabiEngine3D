@@ -124,18 +124,18 @@ void ModelEditor::loadModels(GameEntityManager & gameEntityManager)
 			_models.back()->addOglBuffer(new OpenGLBuffer(SHAPE_3D, &data[0], data.size()));
 
 			// Diffuse map
-			_models.back()->addDiffuseMap(_texLoader.getTexture("../Game/Textures/DiffuseMaps/" + part.textureName, true, true));
+			_models.back()->setDiffuseMap(_texLoader.getTexture("../Game/Textures/DiffuseMaps/" + part.textureName, true, true));
 
 			// Light map
 			if (lightMapped)
 			{
-				_models.back()->addLightmap(_texLoader.getTexture("../Game/Textures/LightMaps/" + part.textureName, false, false));
+				_models.back()->setLightMap(_texLoader.getTexture("../Game/Textures/LightMaps/" + part.textureName, false, false));
 			}
 
 			// Reflection map
 			if (reflective)
 			{
-				_models.back()->addReflectionMap(_texLoader.getTexture("../Game/Textures/ReflectionMaps/" + part.textureName, false, false));
+				_models.back()->setReflectionMap(_texLoader.getTexture("../Game/Textures/ReflectionMaps/" + part.textureName, false, false));
 			}
 		}
 	}

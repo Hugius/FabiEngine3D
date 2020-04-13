@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Framebuffer.hpp"
+#include "OpenGLFramebuffer.hpp"
 #include "CameraManager.hpp"
 #include "EntityBus.hpp"
 #include "SkyEntityRenderer.hpp"
@@ -63,15 +63,15 @@ private:
 	FinalRenderer            _finalRenderer;
 
 	// Framebuffers
-	Framebuffer _screenFramebuffer;
-	Framebuffer _msaaFramebuffer;
-	Framebuffer _aaProcessorFramebuffer;
-	Framebuffer _sceneReflectionFramebuffer;
-	Framebuffer _waterRefractionFramebuffer;
-	Framebuffer _shadowFramebuffer;
-	Framebuffer _bloomHdrFramebuffer;
-	Framebuffer _bloomDofAdditionFramebuffer;
-	Framebuffer _depthFramebuffer;
+	OpenGLFramebuffer _screenFramebuffer;
+	OpenGLFramebuffer _msaaFramebuffer;
+	OpenGLFramebuffer _aaProcessorFramebuffer;
+	OpenGLFramebuffer _sceneReflectionFramebuffer;
+	OpenGLFramebuffer _waterRefractionFramebuffer;
+	OpenGLFramebuffer _shadowFramebuffer;
+	OpenGLFramebuffer _bloomHdrFramebuffer;
+	OpenGLFramebuffer _bloomDofAdditionFramebuffer;
+	OpenGLFramebuffer _depthFramebuffer;
 
 	// Capturing functions
 	void _captureSceneReflections(CameraManager & camera);

@@ -77,25 +77,8 @@ void TopViewportController::_updateProjectLoading()
 {
 	if (_loadingProject)
 	{
-		// Open file explorer
-		OPENFILENAME ofn;
-		char szFile[100];
-		ZeroMemory(&ofn, sizeof(ofn));
-		ofn.lStructSize = sizeof(ofn);
-		ofn.hwndOwner = NULL;
-		ofn.lpstrFile = szFile;
-		ofn.lpstrFile[0] = '\0';
-		ofn.nMaxFile = sizeof(szFile);
-		ofn.lpstrFilter = "*.fe3dproj\0";
-		ofn.nFilterIndex = 1;
-		ofn.lpstrFileTitle = NULL;
-		ofn.nMaxFileTitle = 0;
-		ofn.lpstrInitialDir = "..\\User\\"; // Projects folder
-		ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
-		GetOpenFileName(&ofn);
-
 		// Get the loaded filename
-		string fileName = ofn.lpstrFile;
+		string fileName = _fe3d.misc_getWinExplorerFilename("..\\User\\", "fe3dproj");
 		if (fileName == "") // Cancelled
 		{
 			_loadingProject = false;

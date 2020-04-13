@@ -17,7 +17,7 @@ using std::map;
 class OpenGLShader final
 {
 public:
-	OpenGLShader(const string & vertexPath, const string & fragmentPath);
+	OpenGLShader(const string & vertexFileName, const string & fragmentFileName);
 	~OpenGLShader();
 
 	void bind();
@@ -33,8 +33,8 @@ private:
 	GLuint _program;
 	void _createProgram(const GLchar * vShaderCode, const GLchar * fShaderCode);
 	map<string, GLint> _uniformMap;
-	string _vertexPath;
-	string _fragmentPath;
+	string _vertexFileName;
+	string _fragmentFileName;
 	string _name;
 
 	// Get uniform location

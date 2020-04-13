@@ -53,7 +53,7 @@ void TextEntityManager::addTextEntity
 	getEntity(ID)->updateModelMatrix();
 
 	// Load diffuse map
-	getEntity(ID)->setDiffuseMap(_texLoader.getText(text, "../Engine/Fonts/" + fontName));
+	getEntity(ID)->setDiffuseMap(_texLoader.getText(text, fontName));
 }
 
 void TextEntityManager::update(float delta)

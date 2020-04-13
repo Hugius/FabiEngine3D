@@ -1,6 +1,4 @@
-window_width       = 1600
-window_height      = 900
-window_zoom_scale  = 1.0
+window_fullscreen  = false
 msaa_quality       = 16
 shadow_quality     = 4096
 water_quality      = 1024

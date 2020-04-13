@@ -15,9 +15,9 @@ public:
 
 	// Setters
 	void updateModelMatrix();
-	void addDiffuseMap(GLuint val);
-	void addLightmap(GLuint val);
-	void addReflectionMap(GLuint val);
+	void setDiffuseMap(GLuint val);
+	void setLightMap(GLuint val);
+	void setReflectionMap(GLuint val);
 	void setTranslation(vec3 val);
 	void setRotation(vec3 val);
 	void setScaling(vec3 val);
@@ -54,6 +54,7 @@ public:
 	const bool isSceneReflective() const;
 	const bool isSpecular() const;
 	const bool isShadowed() const;
+	const bool hasTexture() const;
 	const float getMaxY() const;
 	const float getAlpha() const;
 	const float getUvRepeat() const;

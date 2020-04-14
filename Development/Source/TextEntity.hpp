@@ -8,13 +8,13 @@ public:
 	~TextEntity() = default;
 
 	void setTextContent(const string& text);
-	void setFontName(const string& fontName);
+	void setFontPath(const string& fontPath);
 
 	const string& getTextContent() const;
-	const string& getFontName() const;
+	const string& getFontPath() const;
 
 private:
 	string _textContent = "";
 
-	string _fontName = "";
+	string _fontPath = "";
 };

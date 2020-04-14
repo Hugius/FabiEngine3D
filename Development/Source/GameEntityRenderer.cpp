@@ -113,6 +113,7 @@ void GameEntityRenderer::render(const GameEntity * entity)
 			_shader.uploadUniform("u_customAlpha",       entity->getAlpha());
 			_shader.uploadUniform("u_isShadowed",        entity->isShadowed());
 			_shader.uploadUniform("u_uvRepeat",		     entity->getUvRepeat());
+			_shader.uploadUniform("u_hasDiffuseMap",	 entity->hasTexture());
 
 			// Bind
 			int index = 0;

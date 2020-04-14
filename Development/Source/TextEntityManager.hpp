@@ -14,9 +14,9 @@ public:
 	void addTextEntity
 	(
 		const string& ID, const string& text,
-		const string& fontName, vec3 color,
+		const string& fontPath, vec3 color,
 		vec2 translation, float rotation, vec2 scaling,
-		bool engine, bool overwrite, bool centered
+		bool overwrite, bool centered
 	);
 
 	void update(float delta) override;

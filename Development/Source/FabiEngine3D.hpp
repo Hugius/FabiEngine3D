@@ -159,7 +159,7 @@ public:
 	void billBoardEntity_add
 	(
 		const string& ID, const string& text,
-		const string& fontName, vec3 color,
+		const string& fontPath, vec3 color,
 		vec3 T, vec3 R, vec3 S, bool facingCameraX, bool facingCameraY, bool visible = true
 	);
 	void billBoardEntity_add
@@ -187,7 +187,8 @@ public:
 	void billboardEntity_enable(const string& ID);
 	void billboardEntity_disable(const string& ID);
 	void billBoardEntity_playSpriteAnimation(const string& ID, int rows, int columns, float maxDelta, int repeats);
-	void billBoardEntity_changeText(const string& ID, const string& text, const string& fontName, vec3 color);
+	void billBoardEntity_changeText(const string& ID, const string& text, vec3 color);
+	void billboardEntity_setUvRepeat(const string& ID, float repeat);
 	bool billboardEntity_isFinished(const string& ID);
 
 	// AABB entity interface
@@ -264,7 +265,7 @@ public:
 	void textEntity_add
 	(
 		const string& ID, const string& text,
-		const string& fontName, vec3 color,
+		const string& fontPath, vec3 color,
 		vec2 position, float rotation, vec2 size, bool centered
 	);
 	void textEntity_delete(const string& ID);
@@ -393,6 +394,7 @@ public:
 	void misc_hidePerformanceProfiling();
 	void misc_showAudioDebugging();
 	void misc_hideAudioDebugging();
+	void misc_setMainColor(vec3 color);
 	string misc_getWinExplorerFilename(string startingDir, string fileType);
 	string misc_vec2str(vec2 vec);
 	string misc_vec2str(vec3 vec);

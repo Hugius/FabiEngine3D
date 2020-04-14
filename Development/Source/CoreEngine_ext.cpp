@@ -180,7 +180,7 @@ void CoreEngine::_updatePerformanceProfiler()
 			// FPS
 			auto fps = 1000.0f / _timer.getDeltaTime();
 			auto fpsText = "FPS: " + std::to_string(fps);
-			_textEntityManager.addTextEntity("fps", fpsText, "font", vec3(1.0f), vec2(x, y), 0.0f, vec2(width * fpsText.size(), height), true, true, false);
+			//_textEntityManager.addTextEntity("fps", fpsText, "font", vec3(1.0f), vec2(x, y), 0.0f, vec2(width * fpsText.size(), height), true, true, false);
 			steps = 0;
 
 			// Performance profiling
@@ -198,7 +198,7 @@ void CoreEngine::_updatePerformanceProfiler()
 				nameText[0] = toupper(nameText[0]);
 				auto percentage = std::to_string((_timer.getDeltaPart(elements[i]) / _timer.getDeltaTime()) * 100.0f);
 				auto pcText = nameText + ": " + percentage + "%";
-				_textEntityManager.addTextEntity(elements[i], pcText, "font", vec3(1.0f), vec2(x, y - height - (height * float(int(i)))), 0.0f, vec2(width * pcText.size(), height), true, true, false);
+				//_textEntityManager.addTextEntity(elements[i], pcText, "font", vec3(1.0f), vec2(x, y - height - (height * float(int(i)))), 0.0f, vec2(width * pcText.size(), height), true, true, false);
 			}
 
 			// Other percentage
@@ -208,7 +208,7 @@ void CoreEngine::_updatePerformanceProfiler()
 			percentage += (_timer.getDeltaPart("aaUnbind") / _timer.getDeltaTime()) * 100.0f;
 			percentage += (_timer.getDeltaPart("stats") / _timer.getDeltaTime()) * 100.0f;
 			auto pcText = "Misc: " + std::to_string(percentage) + "%";
-			_textEntityManager.addTextEntity("misc", pcText, "font", vec3(1.0f), vec2(x, y - height - (height * float(int(elements.size())))), 0.0f, vec2(width * pcText.size(), height), true, true, false);
+			//_textEntityManager.addTextEntity("misc", pcText, "font", vec3(1.0f), vec2(x, y - height - (height * float(int(elements.size())))), 0.0f, vec2(width * pcText.size(), height), true, true, false);
 		}
 		else
 		{

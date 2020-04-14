@@ -18,9 +18,9 @@ OpenGLShader::OpenGLShader(const string & vertexFileName, const string & fragmen
 	_fragmentFileName = fragmentFileName;
 
 	// Get application root directory
-	char pBuf[256]; size_t len = sizeof(pBuf);
-	GetModuleFileName(NULL, pBuf, len);
-	string fullDir = pBuf;
+	char buffer[256]; size_t len = sizeof(buffer);
+	GetModuleFileName(NULL, buffer, len);
+	string fullDir = buffer;
 	fullDir = fullDir.substr(0, fullDir.size() - 25);
 
 	// Open the shader text files

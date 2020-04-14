@@ -24,10 +24,10 @@ public:
 	OBJLoader() = default;
 	~OBJLoader() = default;
 
-	vector<ObjPart> & loadOBJ(const string & fileName);
+	vector<ObjPart> & loadOBJ(const string & filePath);
 
 private:
-	vector<ObjPart> _loadOBJ(const string & fileName);
+	vector<ObjPart> _loadOBJ(const string & filePath);
 
 	std::map<string, vector<ObjPart>> _objPartsMap;
 };

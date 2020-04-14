@@ -1,12 +1,12 @@
 #include "TextureLoader.hpp"
 #include "Logger.hpp"
 
-GLuint TextureLoader::getText(const string & text, const string & fontName)
+GLuint TextureLoader::getText(const string & text, const string& filePath)
 {
 	auto it = _textMap.find(text);
 	if (it == _textMap.end()) // Not in map (yet)
 	{
-		GLuint tempTxt = _loadText(text, fontName);
+		GLuint tempTxt = _loadText(text, filePath);
 		_textMap.insert(std::make_pair(text, tempTxt));
 		return tempTxt; // Use new texture
 	}

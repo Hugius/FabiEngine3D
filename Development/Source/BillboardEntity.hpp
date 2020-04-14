@@ -28,14 +28,16 @@ public:
 	void setRotation(vec3 val);
 	void setScaling(vec3 val);
 	void setColor(vec3 color);
-	void setText(const string & text);
+	void setText(const string& text);
+	void setFontPath(const string& fontPath);
 	void setTransparent(bool val);
-	void setSpriteAnimation(int rows, int columns, float maxDelta, int repeats);
+	void setSpriteAnimation(int rows, int columns, float maxDelta, int animationRepeats);
 	void setSpriteRowIndex(int val);
 	void setSpriteColumnIndex(int val);
 	void addToDelta(float val);
 	void resetDelta();
-	void increaseRepeats();
+	void increaseAnimationRepeats();
+	void setUvRepeat(float val);
 
 	// Getters
 	const mat4 & getModelMatrix() const;
@@ -47,14 +49,16 @@ public:
 	const vec3 getColor() const;
 	const ivec2 getCameraFacing() const;
 	const string & getText() const;
+	const string& getFontPath() const;
 	const float getMaxDelta() const;
 	const float getTotalDelta() const;
+	const float getUvRepeat() const;
 	const int getTotalSpriteRows() const;
 	const int getTotalSpriteColumns() const;
 	const int getSpriteRowIndex() const;
 	const int getSpriteColumnIndex() const;
-	const int getRepeats() const;
-	const int getMaxRepeats() const;
+	const int getAnimationRepeats() const;
+	const int getMaxAnimationRepeats() const;
 	const bool isTransparent() const;
 	const bool hasSpriteAnimation() const;
 
@@ -71,17 +75,19 @@ private:
 
 	float _maxDelta   = 0.0f;
 	float _totalDelta = 0.0f;
+	float _uvRepeat	  = 1.0f;
 	
-	int _totalSpriteRows    = 0;
-	int _totalSpriteColumns = 0;
-	int _spriteRowIndex     = 0;
-	int _spriteColumnIndex  = 0;
-	int _repeats            = 0;
-	int _maxRepeats         = 0;
+	int _totalSpriteRows     = 0;
+	int _totalSpriteColumns  = 0;
+	int _spriteRowIndex      = 0;
+	int _spriteColumnIndex   = 0;
+	int _animationRepeats    = 0;
+	int _maxAnimationRepeats = 0;
 	
 	GLuint _diffuseMap = 0;
 
 	string _textContent = "";
+	string _fontPath = "";
 
 	bool _isTransparent      = false;
 	bool _hasSpriteAnimation = false;

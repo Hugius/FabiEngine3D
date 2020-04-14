@@ -5,9 +5,9 @@ void TextEntity::setTextContent(const string & text)
 	_textContent = text;
 }
 
-void TextEntity::setFontName(const string& fontName)
+void TextEntity::setFontPath(const string& fontPath)
 {
-	_fontName = fontName;
+	_fontPath = fontPath;
 }
 
 const string & TextEntity::getTextContent() const
@@ -15,7 +15,7 @@ const string & TextEntity::getTextContent() const
 	return _textContent;
 }
 
-const string& TextEntity::getFontName() const
+const string& TextEntity::getFontPath() const
 {
-	return _fontName;
+	return _fontPath;
 }

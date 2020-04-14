@@ -25,9 +25,9 @@ const vector<TextEntity*> TextEntityManager::getEntities()
 void TextEntityManager::addTextEntity
 (
 	const string & ID, const string & text,
-	const string & fontName, vec3 color,
+	const string & fontPath, vec3 color,
 	vec2 translation, float rotation, vec2 scaling,
-	bool engine, bool overwrite, bool centered
+	bool overwrite, bool centered
 )
 {
 	// Optional overwrite
@@ -43,7 +43,7 @@ void TextEntityManager::addTextEntity
 	_createEntity(EntityType::TEXT, ID)->load(ID);
 	getEntity(ID)->addOglBuffer(new OpenGLBuffer(0.0f, 0.0f, 1.0f, 1.0f, centered));
 	getEntity(ID)->setTextContent(text);
-	getEntity(ID)->setFontName(fontName);
+	getEntity(ID)->setFontPath(fontPath);
 	getEntity(ID)->setColor(color);
 
 	// Load transformation
@@ -53,7 +53,7 @@ void TextEntityManager::addTextEntity
 	getEntity(ID)->updateModelMatrix();
 
 	// Load diffuse map
-	getEntity(ID)->setDiffuseMap(_texLoader.getText(text, fontName));
+	getEntity(ID)->setDiffuseMap(_texLoader.getText(text, fontPath));
 }
 
 void TextEntityManager::update(float delta)

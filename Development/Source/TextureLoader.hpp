@@ -17,10 +17,10 @@ public:
 	TextureLoader()  = default;
 	~TextureLoader() = default;
 
-	GLuint		   getText(const string & text, const string &fontName);
-	GLuint         getTexture(const string & filePath, bool mipmap, bool aniso, bool repeat = true);
-	GLuint         getCubeMap(const string & filePath);
-	vector<float> & getHeightMap(const string & filePath, int size);
+	GLuint		   getText(const string &text, const string &filePath);
+	GLuint         getTexture(const string &filePath, bool mipmap, bool aniso, bool repeat = true);
+	GLuint         getCubeMap(const string &filePath);
+	vector<float> & getHeightMap(const string &filePath, int size);
 
 private:
 	map<string, GLuint>        _textureMap;
@@ -28,9 +28,9 @@ private:
 	map<string, TTF_Font*>     _fontMap;
 	map<string, vector<float>> _pixelMap;
 
-	TTF_Font *    _loadFont(const string & fontPath);
-	GLuint        _loadText(const string & text, const string &fontName);
-	GLuint        _loadTexture(const string & filePath, bool mipmap, bool aniso, bool repeat);
-	GLuint        _loadCubemap(const string & filePath);
-	vector<float> _loadHeightmap(const string & filePath, int size);
+	TTF_Font *    _loadFont(const string &filePath);
+	GLuint        _loadText(const string &text, const string &filePath);
+	GLuint        _loadTexture(const string &filePath, bool mipmap, bool aniso, bool repeat);
+	GLuint        _loadCubemap(const string &filePath);
+	vector<float> _loadHeightmap(const string &filePath, int size);
 };

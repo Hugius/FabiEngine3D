@@ -57,6 +57,7 @@ uniform bool u_skyReflectionsEnabled;
 uniform bool u_sceneReflectionsEnabled;
 uniform bool u_fogEnabled;
 uniform bool u_shadowsEnabled;
+uniform bool u_hasDiffuseMap;
 
 // Integer uniforms
 uniform int u_shadowMapSize;
@@ -102,20 +103,27 @@ void main()
 // Calculate texture color
 vec3 getTextureColor()
 {
-	// Calculating the texel color
-	vec4 texColor = texture(u_sampler_diffuseMap, f_uv);
-
-	// Removing white alpha background
-	if(u_isTransparent)
+	if(!u_hasDiffuseMap)
 	{
-		if(texColor.a <= 0.25f)
-		{
-			discard;
-		}
+		return vec3(1.0f);
 	}
+	else
+	{
+		// Calculating the texel color
+		vec4 texColor = texture(u_sampler_diffuseMap, f_uv);
 
-	// Returning the texture color
-	return texColor.rgb;
+		// Removing white alpha background
+		if(u_isTransparent)
+		{
+			if(texColor.a <= 0.25f)
+			{
+				discard;
+			}
+		}
+
+		// Returning the texture color
+		return texColor.rgb;
+	}
 }
 
 // Calculate ambient lighting

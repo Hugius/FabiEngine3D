@@ -57,12 +57,11 @@ void GameEntityManager::addGameEntity
 
 		// OpenGL buffer
 		getEntity(ID)->addOglBuffer(new OpenGLBuffer(SHAPE_3D, &data[0], data.size()));
-		getEntity(ID)->setColor(vec3(0.5f, 0.5f, 1.0f));
 
 		// Load model-specified texture
 		if (part.textureName != "")
 		{
-			getEntity(ID)->setDiffuseMap(_texLoader.getTexture("User\\Assets\\Textures\\DiffuseMaps\\" + part.textureName, true, true, true));
+			getEntity(ID)->addDiffuseMap(_texLoader.getTexture("User\\Assets\\Textures\\DiffuseMaps\\" + part.textureName, true, true, true));
 		}
 	}
 

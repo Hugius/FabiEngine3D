@@ -23,6 +23,7 @@ public:
 private:
 	// Functions
 	void _loadObjFileNames();
+	void _initializeEditor();
 	void _updateModelCreation();
 	void _updateModelEditing();
 	void _updateModelRemoval();

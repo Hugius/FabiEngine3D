@@ -24,6 +24,7 @@ void EngineGuiButton::_updateHovering(bool hoverable)
 {
 	_isHovered = false;
 
+	// Check if button is visible anyway
 	if (_fe3d.guiEntity_isVisible(_rectangle->getEntityID()))
 	{
 		// Convert dimensions to same space
@@ -36,40 +37,38 @@ void EngineGuiButton::_updateHovering(bool hoverable)
 		{
 			if (mousePos.y > buttonPos.y - (buttonSize.y / 2.0f) && mousePos.y < buttonPos.y + (buttonSize.y / 2.0f)) // Y axis
 			{
-				_isHovered = true;
-
-				// Update increased size
-				if (_sizeIncreaseEnabled)
+				// Check if button is hoverable
+				if (hoverable && _isHoverable)
 				{
-					_fe3d.guiEntity_setSize(_rectangle->getEntityID(), _rectangle->getOriginalSize() * 1.15f);
+					_isHovered = true;
 
-					_fe3d.textEntity_setSize(_textfield->getEntityID(), _textfield->getOriginalSize() * 1.15f);
+					// Update increased size
+					if (_sizeIncreaseEnabled)
+					{
+						_fe3d.guiEntity_setSize(_rectangle->getEntityID(), _rectangle->getOriginalSize() * 1.15f);
 
-				}
+						_fe3d.textEntity_setSize(_textfield->getEntityID(), _textfield->getOriginalSize() * 1.15f);
 
-				// Update changed color
-				if (_colorChangeEnabled)
-				{
-					_fe3d.guiEntity_setColor(_rectangle->getEntityID(), _hoverColor);
-					_fe3d.textEntity_setColor(_textfield->getEntityID(), _textHoverColor);
+					}
+
+					// Update changed color
+					if (_colorChangeEnabled)
+					{
+						_fe3d.guiEntity_setColor(_rectangle->getEntityID(), _hoverColor);
+						_fe3d.textEntity_setColor(_textfield->getEntityID(), _textHoverColor);
+					}
 				}
 			}
 		}
-	}
 
-	// Default properties
-	if (!_isHovered || !hoverable || !_isHoverable)
-	{
-		// Update default size
-		if (_sizeIncreaseEnabled)
+		// Default properties
+		if (!_isHovered)
 		{
+			// Set default size
 			_fe3d.guiEntity_setSize(_rectangle->getEntityID(), _rectangle->getOriginalSize());
 			_fe3d.textEntity_setSize(_textfield->getEntityID(), _textfield->getOriginalSize());
-		}
 
-		// Update default color
-		if (_colorChangeEnabled)
-		{
+			// Set default color
 			_fe3d.guiEntity_setColor(_rectangle->getEntityID(), _rectangle->getOriginalColor());
 			_fe3d.textEntity_setColor(_textfield->getEntityID(), _textfield->getOriginalColor());
 		}

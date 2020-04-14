@@ -60,9 +60,9 @@ GLuint TextureLoader::_loadText(const string& text, const string &fontPath)
 GLuint TextureLoader::_loadTexture(const string& filePath, bool mipmap, bool aniso, bool repeat)
 {
 	// Get application root directory
-	char pBuf[256]; size_t len = sizeof(pBuf);
-	GetModuleFileName(NULL, pBuf, len);
-	string fullDir = pBuf;
+	char buffer[256]; size_t len = sizeof(buffer);
+	GetModuleFileName(NULL, buffer, len);
+	string fullDir = buffer;
 	fullDir = fullDir.substr(0, fullDir.size() - 25);
 
 	// Load actual texture data
@@ -170,6 +170,12 @@ vector<float> TextureLoader::_loadHeightmap(const string & filePath, int size)
 
 GLuint TextureLoader::_loadCubemap(const string & filePath)
 {
+	// Get application root directory
+	char buffer[256]; size_t len = sizeof(buffer);
+	GetModuleFileName(NULL, buffer, len);
+	string fullDir = buffer;
+	fullDir = fullDir.substr(0, fullDir.size() - 25);
+
 	// Init
 	GLuint textureID;
 	glGenTextures(1, &textureID);
@@ -182,7 +188,7 @@ GLuint TextureLoader::_loadCubemap(const string & filePath)
 	for (GLuint i = 0; i < fileNames.size(); i++)
 	{
 		// Load SDL surface
-		SDL_Surface * surface = IMG_Load((filePath + fileNames[i] + ".png").c_str());
+		SDL_Surface * surface = IMG_Load((fullDir + filePath + fileNames[i] + ".png").c_str());
 		if (surface == nullptr) 
 		{
 			Logger::getInst().throwError("Skybox textures could not be loaded: " + string(SDL_GetError()));
@@ -207,27 +213,27 @@ GLuint TextureLoader::_loadCubemap(const string & filePath)
 	return textureID;
 }
 
-TTF_Font * TextureLoader::_loadFont(const string& fontName)
+TTF_Font * TextureLoader::_loadFont(const string& fontPath)
 {
 	// Get application root directory
-	char pBuf[256]; size_t len = sizeof(pBuf);
-	GetModuleFileName(NULL, pBuf, len);
-	string fullDir = pBuf;
+	char buffer[256]; size_t len = sizeof(buffer);
+	GetModuleFileName(NULL, buffer, len);
+	string fullDir = buffer;
 	fullDir = fullDir.substr(0, fullDir.size() - 25);
 
 	// Load font
-	auto it = _fontMap.find(fontName);
+	auto it = _fontMap.find(fontPath);
 	if (it == _fontMap.end()) //Not in map (yet)
 	{
 		// Font loading
-		TTF_Font * font = TTF_OpenFont((fullDir + "Engine\\Fonts\\" + fontName + ".ttf").c_str(), 25);
+		TTF_Font * font = TTF_OpenFont((fullDir + fontPath + ".ttf").c_str(), 25);
 		if (font == nullptr)
 		{
 			Logger::getInst().throwError("Texture error: " + string(SDL_GetError()));
 		}
-		_fontMap.insert(std::make_pair(fontName, font));
+		_fontMap.insert(std::make_pair(fontPath, font));
 
-		Logger::getInst().throwInfo("Loaded font: " + string("Engine\\Fonts\\" + fontName + ".ttf"));
+		Logger::getInst().throwInfo("Loaded font: " + string(fontPath + ".ttf"));
 
 		return font; //Use new texture
 	}

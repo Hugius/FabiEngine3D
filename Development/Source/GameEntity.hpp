@@ -18,6 +18,9 @@ public:
 	void setDiffuseMap(GLuint val);
 	void setLightMap(GLuint val);
 	void setReflectionMap(GLuint val);
+	void addDiffuseMap(GLuint val);
+	void addLightMap(GLuint val);
+	void addReflectionMap(GLuint val);
 	void setTranslation(vec3 val);
 	void setRotation(vec3 val);
 	void setScaling(vec3 val);

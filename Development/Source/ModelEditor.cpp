@@ -238,20 +238,20 @@ void ModelEditor::_updateModelData()
 
 void ModelEditor::loadGUI(GuiEntityManager & guiEntityManager, TextEntityManager & textEntityManager)
 {
-	guiEntityManager.addGuiEntity("title", "board", vec2(0.15f, 0.8f), 0.0f, vec2(0.85f, 0.3f), true, true);
-	guiEntityManager.addGuiEntity("scroll", "scroll", vec2(-0.7f, 0.0f), 0.0f, vec2(0.6f, 2.0f), true, true);
-	textEntityManager.addTextEntity("title", "Model Editor", "medieval",   vec3(0), vec2(0.15f, 0.8f), 0.0f, vec2(0.6f, 0.2f), true, true, true);
-	textEntityManager.addTextEntity("move", "Move: LMB", "medieval",       vec3(0), vec2(-0.7f, 0.625f), 0.0f, vec2(0.3f, 0.1f), true, true, true);
-	textEntityManager.addTextEntity("rotate", "Rotate: RMB", "medieval",   vec3(0), vec2(-0.7f, 0.5f), 0.0f, vec2(0.3f, 0.1f), true, true, true);
-	textEntityManager.addTextEntity("resize", "Resize: MMB", "medieval",   vec3(0), vec2(-0.7f, 0.375f), 0.0f, vec2(0.3f, 0.1f), true, true, true);
-	textEntityManager.addTextEntity("next", "Next model: E", "medieval",   vec3(0), vec2(-0.7f, 0.25f), 0.0f, vec2(0.3f, 0.1f), true, true, true);
-	textEntityManager.addTextEntity("prev", "Prev model: Q", "medieval",   vec3(0), vec2(-0.7f, 0.125f), 0.0f, vec2(0.3f, 0.1f), true, true, true);
-	textEntityManager.addTextEntity("dir", "Direction: D", "medieval",     vec3(0), vec2(-0.7f, 0.0f), 0.0f, vec2(0.3f, 0.1f), true, true, true);
-	textEntityManager.addTextEntity("light", "Lightmap: L", "medieval",    vec3(0), vec2(-0.7f, -0.125f), 0.0f, vec2(0.3f, 0.1f), true, true, true);
-	textEntityManager.addTextEntity("refl", "Reflective: R", "medieval",   vec3(0), vec2(-0.7f, -0.25f), 0.0f, vec2(0.3f, 0.1f), true, true, true);
-	textEntityManager.addTextEntity("trans", "Transparent: T", "medieval", vec3(0), vec2(-0.7f, -0.375f), 0.0f, vec2(0.3f, 0.1f), true, true, true);
-	textEntityManager.addTextEntity("face", "Faceculling: F", "medieval",  vec3(0), vec2(-0.7f, -0.5f), 0.0f, vec2(0.3f, 0.1f), true, true, true);
-	textEntityManager.addTextEntity("spec", "Specular: S", "medieval",     vec3(0), vec2(-0.7f, -0.625f), 0.0f, vec2(0.3f, 0.1f), true, true, true);
+	//guiEntityManager.addGuiEntity("title", "board", vec2(0.15f, 0.8f), 0.0f, vec2(0.85f, 0.3f), true, true);
+	//guiEntityManager.addGuiEntity("scroll", "scroll", vec2(-0.7f, 0.0f), 0.0f, vec2(0.6f, 2.0f), true, true);
+	//textEntityManager.addTextEntity("title", "Model Editor", "medieval",   vec3(0), vec2(0.15f, 0.8f), 0.0f, vec2(0.6f, 0.2f), true, true, true);
+	//textEntityManager.addTextEntity("move", "Move: LMB", "medieval",       vec3(0), vec2(-0.7f, 0.625f), 0.0f, vec2(0.3f, 0.1f), true, true, true);
+	//textEntityManager.addTextEntity("rotate", "Rotate: RMB", "medieval",   vec3(0), vec2(-0.7f, 0.5f), 0.0f, vec2(0.3f, 0.1f), true, true, true);
+	//textEntityManager.addTextEntity("resize", "Resize: MMB", "medieval",   vec3(0), vec2(-0.7f, 0.375f), 0.0f, vec2(0.3f, 0.1f), true, true, true);
+	//textEntityManager.addTextEntity("next", "Next model: E", "medieval",   vec3(0), vec2(-0.7f, 0.25f), 0.0f, vec2(0.3f, 0.1f), true, true, true);
+	//textEntityManager.addTextEntity("prev", "Prev model: Q", "medieval",   vec3(0), vec2(-0.7f, 0.125f), 0.0f, vec2(0.3f, 0.1f), true, true, true);
+	//textEntityManager.addTextEntity("dir", "Direction: D", "medieval",     vec3(0), vec2(-0.7f, 0.0f), 0.0f, vec2(0.3f, 0.1f), true, true, true);
+	//textEntityManager.addTextEntity("light", "Lightmap: L", "medieval",    vec3(0), vec2(-0.7f, -0.125f), 0.0f, vec2(0.3f, 0.1f), true, true, true);
+	//textEntityManager.addTextEntity("refl", "Reflective: R", "medieval",   vec3(0), vec2(-0.7f, -0.25f), 0.0f, vec2(0.3f, 0.1f), true, true, true);
+	//textEntityManager.addTextEntity("trans", "Transparent: T", "medieval", vec3(0), vec2(-0.7f, -0.375f), 0.0f, vec2(0.3f, 0.1f), true, true, true);
+	//textEntityManager.addTextEntity("face", "Faceculling: F", "medieval",  vec3(0), vec2(-0.7f, -0.5f), 0.0f, vec2(0.3f, 0.1f), true, true, true);
+	//textEntityManager.addTextEntity("spec", "Specular: S", "medieval",     vec3(0), vec2(-0.7f, -0.625f), 0.0f, vec2(0.3f, 0.1f), true, true, true);
 }
 
 GameEntity * ModelEditor::getSelectedModel()

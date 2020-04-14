@@ -14,7 +14,7 @@ public:
 	void addBillboardEntity
 	(
 		const string & ID, const string & text, 
-		const string & fontName, vec3 color,
+		const string & fontPath, vec3 color,
 		vec3 T, vec3 R, vec3 S, bool facingCameraX, bool facingCameraY
 	);
 

@@ -14,11 +14,6 @@ ModelEditorr::ModelEditorr(FabiEngine3D& fe3d, shared_ptr<EngineGuiManager> gui)
 	// Current model name textfield
 	_gui->getGlobalScreen()->addTextfield("currentModelName", vec2(0.0f, 0.85f), vec2(0.5f, 0.1f), "", vec3(1.0f));
 	_modelNameTextfieldEntityID = _gui->getGlobalScreen()->getTextfield("currentModelName")->getEntityID();
-
-	// Initialize camera & graphics
-	_fe3d.camera_load(90.0f, 1.0f, 1000.0f, vec3(0.0f, 0.0f, -5.0f), 0.0f, 0.0f);
-	_fe3d.gfx_addAmbientLighting(0.5f);
-	_fe3d.gfx_addDirectionalLighting(vec3(1000.0f), 1.0f);
 }
 
 void ModelEditorr::update(float delta)
@@ -34,7 +29,7 @@ void ModelEditorr::update(float delta)
 		{
 			if (_hoveredItemID == "modelEditor")
 			{
-				_gui->getViewport("leftViewport")->getWindow("mainWindow")->setActiveScreen("modelManagementScreen");
+				_initializeEditor();
 			}
 		}
 		else if (_activeScreenID == "modelManagementScreen") // Model management screen
@@ -160,7 +155,7 @@ void ModelEditorr::_updateModelRemoval()
 void ModelEditorr::_loadOBJ()
 {
 	// Get the loaded filename
-	string objName = _fe3d.misc_getWinExplorerFilename("..\\User\\Assets\\OBJs\\", "obj");
+	string objName = _fe3d.misc_getWinExplorerFilename("User\\Assets\\OBJs\\", "OBJ");
 	if (objName != "") // Not cancelled
 	{
 		// Already exists
@@ -170,7 +165,8 @@ void ModelEditorr::_loadOBJ()
 		}
 
 		// Add new game entity
-		_fe3d.gameEntity_add(_currentModelName, objName.substr(0, objName.size() - 4), vec3(0.0f), vec3(0.0f), vec3(1.0f));
+		_fe3d.gameEntity_add(_currentModelName, "User\\Assets\\OBJs\\" + objName.substr(0, objName.size() - 4), vec3(0.0f), vec3(0.0f), vec3(1.0f));
+		_fe3d.gameEntity_setColor(_currentModelName, vec3(0.5f));
 
 		// Enable texturing if not pre-multitextured
 		if (_fe3d.gameEntity_isMultiTextured(_currentModelName))
@@ -190,7 +186,9 @@ void ModelEditorr::_loadOBJ()
 
 void ModelEditorr::_loadDiffuseMap()
 {
-
+	// Get the loaded filename
+	string texName = _fe3d.misc_getWinExplorerFilename("User\\Assets\\Textures\\DiffuseMaps\\", "PNG");
+	_fe3d.gameEntity_setDiffuseMap(_currentModelName, "User\\Assets\\Textures\\DiffuseMaps\\" + texName.substr(0, texName.size() - 4));
 }
 
 void ModelEditorr::_loadLightMap()
@@ -231,6 +229,17 @@ void ModelEditorr::_loadObjFileNames()
 		}
 		_totalObjFileNames.push_back(path.substr(0, endOfNameIndex));
 	}
+}
+
+void ModelEditorr::_initializeEditor()
+{
+	_gui->getViewport("leftViewport")->getWindow("mainWindow")->setActiveScreen("modelManagementScreen");
+	_fe3d.camera_load(90.0f, 0.1f, 1000.0f, vec3(0.0f, 2.5f, 5.0f), -90.0f, 0.0f);
+	_fe3d.gfx_addAmbientLighting(0.5f);
+	_fe3d.gfx_addDirectionalLighting(vec3(1000.0f), 1.0f);
+	_fe3d.gameEntity_add("grid", "Engine\\OBJs\\plane", vec3(0.0f), vec3(0.0f), vec3(100.0f, 1.0f, 100.0f));
+	_fe3d.gameEntity_setDiffuseMap("grid", "Engine\\Textures\\grass");
+	_fe3d.gameEntity_setUvRepeat("grid", 10.0f);
 }
 
 vector<string>& ModelEditorr::getTotalObjFileNames()

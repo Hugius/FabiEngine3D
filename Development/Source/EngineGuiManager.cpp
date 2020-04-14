@@ -42,7 +42,7 @@ EngineGuiManager::EngineGuiManager(FabiEngine3D& fe3d) :
 	getViewport("leftViewport")->getWindow("mainWindow")->getScreen("modelManagementScreen")->addButton("addModel", vec2(0.0f, 0.63f), vec2(1.5f, 0.1f), leftColor, leftHoverColor, "Add model", vec3(1.0f), vec3(0.0f));
 	getViewport("leftViewport")->getWindow("mainWindow")->getScreen("modelManagementScreen")->addButton("editModel", vec2(0.0f, 0.21), vec2(1.5f, 0.1f), leftColor, leftHoverColor, "Edit model", vec3(1.0f), vec3(0.0f));
 	getViewport("leftViewport")->getWindow("mainWindow")->getScreen("modelManagementScreen")->addButton("deleteModel", vec2(0.0f, -0.21), vec2(1.5f, 0.1f), leftColor, leftHoverColor, "Delete model", vec3(1.0f), vec3(0.0f));
-	getViewport("leftViewport")->getWindow("mainWindow")->getScreen("modelManagementScreen")->addButton("back", vec2(0.0f, -0.63f), vec2(1.5f, 0.1f), leftColor, leftHoverColor, "Go back", vec3(1.0f), vec3(0.0f));
+	getViewport("leftViewport")->getWindow("mainWindow")->getScreen("modelManagementScreen")->addButton("back", vec2(0.0f, -0.63f), vec2(0.75f, 0.1f), leftColor, leftHoverColor, "Go back", vec3(1.0f), vec3(0.0f));
 
 	// Left-viewport: mainWindow - modelEditingScreen
 	getViewport("leftViewport")->getWindow("mainWindow")->addScreen("modelEditingScreen");
@@ -66,12 +66,9 @@ EngineGuiManager::EngineGuiManager(FabiEngine3D& fe3d) :
 void EngineGuiManager::update(float delta)
 {
 	// Update viewports
-	if (!_isFocused)
+	for (auto& viewport : _viewports)
 	{
-		for (auto& viewport : _viewports)
-		{
-			viewport->update(delta, !_isFocused);
-		}
+		viewport->update(delta, !_isFocused);
 	}
 	
 	// Update global screen

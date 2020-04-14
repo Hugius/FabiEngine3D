@@ -48,7 +48,7 @@ void BillboardEntityManager::addBillboardEntity
 	getEntity(ID)->addOglBuffer(new OpenGLBuffer(SHAPE_SURFACE, plane_data, sizeof(plane_data) / sizeof(float)));
 
 	// Texture
-	getEntity(ID)->setDiffuseMap(_texLoader.getTexture("../Game/Textures/BillboardMaps/" + textureName, textureFiltering, true));
+	getEntity(ID)->setDiffuseMap(_texLoader.getTexture(textureName, textureFiltering, true));
 
 	// Other
 	getEntity(ID)->setTranslation(T);
@@ -62,7 +62,7 @@ void BillboardEntityManager::addBillboardEntity
 void BillboardEntityManager::addBillboardEntity
 (
 	const string & ID, const string & text,
-	const string & fontName, vec3 color,
+	const string & fontPath, vec3 color,
 	vec3 T, vec3 R, vec3 S, bool facingCameraX, bool facingCameraY
 )
 {
@@ -82,7 +82,7 @@ void BillboardEntityManager::addBillboardEntity
 	getEntity(ID)->addOglBuffer(new OpenGLBuffer(SHAPE_SURFACE, plane_data, sizeof(plane_data) / sizeof(float)));
 
 	// Texture
-	getEntity(ID)->setDiffuseMap(_texLoader.getText(text, "../Game/Fonts/" + fontName));
+	getEntity(ID)->setDiffuseMap(_texLoader.getText(text, "../Game/Fonts/" + fontPath));
 
 	// Other
 	getEntity(ID)->setTranslation(T);
@@ -92,6 +92,7 @@ void BillboardEntityManager::addBillboardEntity
 	getEntity(ID)->setTransparent(true);
 	getEntity(ID)->setCameraFacing({ facingCameraX, facingCameraY });
 	getEntity(ID)->setText(text);
+	getEntity(ID)->setFontPath(fontPath);
 	getEntity(ID)->setColor(color);
 }
 
@@ -120,7 +121,7 @@ void BillboardEntityManager::update(float delta)
 		}
 
 		// Update sprite animation
-		if (entity->hasSpriteAnimation() && entity->getRepeats() != entity->getMaxRepeats())
+		if (entity->hasSpriteAnimation() && entity->getAnimationRepeats() != entity->getMaxAnimationRepeats())
 		{
 			if (entity->getTotalDelta() >= entity->getMaxDelta()) // Is allowed to update
 			{
@@ -132,7 +133,7 @@ void BillboardEntityManager::update(float delta)
 
 					if (entity->getSpriteRowIndex() == entity->getTotalSpriteRows() - 1) // Reached total rows
 					{
-						entity->increaseRepeats();
+						entity->increaseAnimationRepeats();
 						entity->setSpriteRowIndex(0); // Reset row index (animation finished)
 					}
 					else // Next row

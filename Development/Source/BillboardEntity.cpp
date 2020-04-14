@@ -65,19 +65,24 @@ void BillboardEntity::setText(const string & text)
 	_textContent = text;
 }
 
+void BillboardEntity::setFontPath(const string& fontPath)
+{
+	_fontPath = fontPath;
+}
+
 void BillboardEntity::setTransparent(bool val)
 {
 	_isTransparent = val;
 }
 
-void BillboardEntity::setSpriteAnimation(int rows, int columns, float maxDelta, int repeats)
+void BillboardEntity::setSpriteAnimation(int rows, int columns, float maxDelta, int animationRepeats)
 {
 	_hasSpriteAnimation = true;
 	_totalSpriteRows = rows;
 	_totalSpriteColumns = columns;
 	_maxDelta = maxDelta;
-	_repeats = 0;
-	_maxRepeats = repeats;
+	_animationRepeats = 0;
+	_maxAnimationRepeats = animationRepeats;
 }
 
 void BillboardEntity::setSpriteRowIndex(int val)
@@ -100,9 +105,14 @@ void BillboardEntity::resetDelta()
 	_totalDelta = 0.0f;
 }
 
-void BillboardEntity::increaseRepeats()
+void BillboardEntity::increaseAnimationRepeats()
 {
-	_repeats++;
+	_animationRepeats++;
+}
+
+void BillboardEntity::setUvRepeat(float val)
+{
+	_uvRepeat = val;
 }
 
 const mat4 & BillboardEntity::getModelMatrix() const
@@ -145,6 +155,11 @@ const string & BillboardEntity::getText() const
 	return _textContent;
 }
 
+const string& BillboardEntity::getFontPath() const
+{
+	return _fontPath;
+}
+
 const float BillboardEntity::getMaxDelta() const
 {
 	return _maxDelta;
@@ -153,6 +168,11 @@ const float BillboardEntity::getMaxDelta() const
 const float BillboardEntity::getTotalDelta() const
 {
 	return _totalDelta;
+}
+
+const float BillboardEntity::getUvRepeat() const
+{
+	return _uvRepeat;
 }
 
 const int BillboardEntity::getTotalSpriteRows() const
@@ -175,14 +195,14 @@ const int BillboardEntity::getSpriteColumnIndex() const
 	return _spriteColumnIndex;
 }
 
-const int BillboardEntity::getRepeats() const
+const int BillboardEntity::getAnimationRepeats() const
 {
-	return _repeats;
+	return _animationRepeats;
 }
 
-const int BillboardEntity::getMaxRepeats() const
+const int BillboardEntity::getMaxAnimationRepeats() const
 {
-	return _maxRepeats;
+	return _maxAnimationRepeats;
 }
 
 const ivec2 BillboardEntity::getCameraFacing() const

@@ -78,7 +78,7 @@ void TopViewportController::_updateProjectLoading()
 	if (_loadingProject)
 	{
 		// Get the loaded filename
-		string fileName = _fe3d.misc_getWinExplorerFilename("..\\User\\", "fe3dproj");
+		string fileName = _fe3d.misc_getWinExplorerFilename("User\\", "FE3D");
 		if (fileName == "") // Cancelled
 		{
 			_loadingProject = false;

@@ -474,17 +474,17 @@ void FabiEngine3D::gameEntity_show(const string& ID)
 
 void FabiEngine3D::gameEntity_setDiffuseMap(const string& ID, const string& fileName)
 {
-	_core->_gameEntityManager.getEntity(ID)->setDiffuseMap(_core->_texLoader.getTexture("User\\Assets\\Textures\\DiffuseMaps\\" + fileName, true, true));
+	_core->_gameEntityManager.getEntity(ID)->setDiffuseMap(_core->_texLoader.getTexture(fileName, true, true));
 }
 
 void FabiEngine3D::gameEntity_setLightMap(const string& ID, const string& fileName)
 {
-	_core->_gameEntityManager.getEntity(ID)->setLightMap(_core->_texLoader.getTexture("User\\Assets\\Textures\\LightMaps\\" + fileName, true, true));
+	_core->_gameEntityManager.getEntity(ID)->setLightMap(_core->_texLoader.getTexture(fileName, true, true));
 }
 
 void FabiEngine3D::gameEntity_setReflectionMap(const string& ID, const string& fileName)
 {
-	_core->_gameEntityManager.getEntity(ID)->setReflectionMap(_core->_texLoader.getTexture("User\\Assets\\Textures\\ReflectionMaps\\" + fileName, true, true));
+	_core->_gameEntityManager.getEntity(ID)->setReflectionMap(_core->_texLoader.getTexture(fileName, true, true));
 }
 
 bool FabiEngine3D::gameEntity_isExisting(const string& ID)
@@ -624,9 +624,9 @@ vector<string> FabiEngine3D::gameEntity_getGroupIDs(const string& ID)
 
 /* --------------------------------------------- Billboard interface --------------------------------------------- */
 
-void FabiEngine3D::billBoardEntity_add(const string& ID, const string& text, const string& fontName, vec3 color, vec3 T, vec3 R, vec3 S, bool facingCameraX, bool facingCameraY, bool visible)
+void FabiEngine3D::billBoardEntity_add(const string& ID, const string& text, const string& fontPath, vec3 color, vec3 T, vec3 R, vec3 S, bool facingCameraX, bool facingCameraY, bool visible)
 {
-	_core->_billboardEntityManager.addBillboardEntity(ID, text, fontName, color, T, R, S, facingCameraX, facingCameraY);
+	_core->_billboardEntityManager.addBillboardEntity(ID, text, fontPath, color, T, R, S, facingCameraX, facingCameraY);
 	_core->_billboardEntityManager.getEntity(ID)->setEnabled(visible);
 }
 
@@ -737,17 +737,24 @@ void FabiEngine3D::billBoardEntity_playSpriteAnimation(const string& ID, int row
 	_core->_billboardEntityManager.getEntity(ID)->setSpriteAnimation(rows, columns, maxDelta, repeats);
 }
 
-void FabiEngine3D::billBoardEntity_changeText(const string& ID, const string& text, const string& fontName, vec3 color)
+void FabiEngine3D::billBoardEntity_changeText(const string& ID, const string& text, vec3 color)
 {
+	string fontPath = _core->_billboardEntityManager.getEntity(ID)->getFontPath();
+
 	_core->_billboardEntityManager.getEntity(ID)->setText(text);
 	_core->_billboardEntityManager.getEntity(ID)->setColor(color);
-	_core->_billboardEntityManager.getEntity(ID)->setDiffuseMap(_core->_texLoader.getText(text, "../Game/Fonts/" + fontName));
+	_core->_billboardEntityManager.getEntity(ID)->setDiffuseMap(_core->_texLoader.getText(text, fontPath));
+}
+
+void FabiEngine3D::billboardEntity_setUvRepeat(const string& ID, float repeat)
+{
+	_core->_billboardEntityManager.getEntity(ID)->setUvRepeat(repeat);
 }
 
 bool FabiEngine3D::billboardEntity_isFinished(const string& ID)
 {
-	int repeats = _core->_billboardEntityManager.getEntity(ID)->getRepeats();
-	int maxRepeats = _core->_billboardEntityManager.getEntity(ID)->getMaxRepeats();
+	int repeats = _core->_billboardEntityManager.getEntity(ID)->getAnimationRepeats();
+	int maxRepeats = _core->_billboardEntityManager.getEntity(ID)->getMaxAnimationRepeats();
 	return (repeats == maxRepeats);
 }
 
@@ -1253,9 +1260,9 @@ void FabiEngine3D::textEntity_showAll()
 	}
 }
 
-void FabiEngine3D::textEntity_add(const string& ID, const string& text, const string& fontName, vec3 color, vec2 position, float rotation, vec2 size, bool centered)
+void FabiEngine3D::textEntity_add(const string& ID, const string& text, const string& fontPath, vec3 color, vec2 position, float rotation, vec2 size, bool centered)
 {
-	_core->_textEntityManager.addTextEntity(ID, text, fontName, color, position, rotation, size, false, false, centered);
+	_core->_textEntityManager.addTextEntity(ID, text, fontPath, color, position, rotation, size, false, centered);
 }
 
 void FabiEngine3D::textEntity_delete(const string& ID)
@@ -1274,7 +1281,7 @@ void FabiEngine3D::textEntity_setTextContent(const string& ID, const string& tex
 
 	entity->setTextContent(textContent);
 	entity->setScaling(vec2(charWidth*float(textContent.size()), entity->getScaling().y));
-	entity->setDiffuseMap(_core->_texLoader.getText(textContent, entity->getFontName()));
+	entity->setDiffuseMap(_core->_texLoader.getText(textContent, entity->getFontPath()));
 }
 
 void FabiEngine3D::textEntity_setColor(const string& ID, vec3 color)
@@ -1850,8 +1857,24 @@ void FabiEngine3D::misc_hideAudioDebugging()
 	_core->_audioPlayer.setChannelDebugging(false);
 }
 
+void FabiEngine3D::misc_setMainColor(vec3 color)
+{
+	glClearColor(color.r, color.g, color.b, 1.0f);
+}
+
 string FabiEngine3D::misc_getWinExplorerFilename(string startingDir, string fileType)
 {
+	// Get application root directory
+	char buffer[256]; size_t len = sizeof(buffer);
+	GetModuleFileName(NULL, buffer, len);
+	string fullDir = buffer;
+	fullDir = fullDir.substr(0, fullDir.size() - 25);
+
+	// Prepare filter C-string
+	string filter = fileType;
+	filter.push_back('\0');
+	filter += "*." + fileType + '\0';
+
 	// Open file explorer
 	OPENFILENAME ofn;
 	char pathBuffer[100];
@@ -1862,12 +1885,12 @@ string FabiEngine3D::misc_getWinExplorerFilename(string startingDir, string file
 	ofn.lpstrFile = pathBuffer;
 	ofn.lpstrFile[0] = '\0';
 	ofn.nMaxFile = sizeof(pathBuffer);
-	ofn.lpstrFilter = string("*." + fileType + "\0").c_str();
+	ofn.lpstrFilter = filter.c_str();
 	ofn.nFilterIndex = 1;
 	ofn.lpstrFileTitle = titleBuffer;
 	ofn.lpstrFileTitle[0] = '\0';
 	ofn.nMaxFileTitle = sizeof(titleBuffer);
-	ofn.lpstrInitialDir = startingDir.c_str(); // Projects folder
+	ofn.lpstrInitialDir = string(fullDir + startingDir).c_str(); // Projects folder
 	ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
 	GetOpenFileName(&ofn);
 

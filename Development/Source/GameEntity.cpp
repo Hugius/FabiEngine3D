@@ -14,13 +14,49 @@ void GameEntity::updateModelMatrix()
 
 void GameEntity::setDiffuseMap(GLuint val)
 {
+	if (_diffuseMaps.empty())
+	{
+		_diffuseMaps.push_back(val);
+	}
+	else
+	{
+		_diffuseMaps[0] = val;
+	}
+}
+
+void GameEntity::setLightMap(GLuint val)
+{
+	if (_lightMaps.empty())
+	{
+		_lightMaps.push_back(val);
+	}
+	else
+	{
+		_lightMaps[0] = val;
+	}
+}
+
+void GameEntity::setReflectionMap(GLuint val)
+{
+	if (_reflectionMaps.empty())
+	{
+		_reflectionMaps.push_back(val);
+	}
+	else
+	{
+		_reflectionMaps[0] = val;
+	}
+}
+
+void GameEntity::addDiffuseMap(GLuint val)
+{
 	if (std::find(_diffuseMaps.begin(), _diffuseMaps.end(), val) == _diffuseMaps.end())
 	{
 		_diffuseMaps.push_back(val);
 	}
 }
 
-void GameEntity::setLightMap(GLuint val)
+void GameEntity::addLightMap(GLuint val)
 {
 	if (std::find(_lightMaps.begin(), _lightMaps.end(), val) == _lightMaps.end())
 	{
@@ -28,7 +64,7 @@ void GameEntity::setLightMap(GLuint val)
 	}
 }
 
-void GameEntity::setReflectionMap(GLuint val)
+void GameEntity::addReflectionMap(GLuint val)
 {
 	if (std::find(_reflectionMaps.begin(), _reflectionMaps.end(), val) == _reflectionMaps.end())
 	{

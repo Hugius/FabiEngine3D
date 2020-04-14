@@ -238,7 +238,7 @@ void WorldEditor::update
 	}
 
 	// Update GUI text
-	text.addTextEntity("modelName", "Model: " + models[_modelIndex]->getModelName(), "font", vec3(1.0f), vec2(-0.75f, 0.95f), 0.0f, vec2(0.5f, 0.15f), true, true, true);
+	/*text.addTextEntity("modelName", "Model: " + models[_modelIndex]->getModelName(), "font", vec3(1.0f), vec2(-0.75f, 0.95f), 0.0f, vec2(0.5f, 0.15f), true, true, true);
 	if (_directionType == DirectionType::X)
 	{
 		text.addTextEntity("dirType", "Direction: X", "font", vec3(1.0f), vec2(-0.75f, 0.7f), 0.0f, vec2(0.5f, 0.15f), true, true, true);
@@ -270,21 +270,21 @@ void WorldEditor::update
 	if (!placementMode)
 	{
 		text.addTextEntity("mode", "Mode: editing", "font", vec3(1.0f), vec2(-0.75f, 0.575f), 0.0f, vec2(0.5f, 0.15f), true, true, true);
-	}
+	}*/
 	
 	// Controls display
 	if (input.getKeyDown(Input::KEY_C))
 	{
-		text.addTextEntity("move", "Move: WASD", "font", vec3(0.0f), vec2(-0.75f, 0.45f), 0.0f, vec2(0.5f, 0.15f), true, true, true);
-		text.addTextEntity("ascend", "Ascend: SPACE", "font", vec3(0.0f), vec2(-0.75f, 0.325f), 0.0f, vec2(0.5f, 0.15f), true, true, true);
-		text.addTextEntity("descend", "Descend: LCTRL", "font", vec3(0.0f), vec2(-0.75f, 0.2f), 0.0f, vec2(0.5f, 0.15f), true, true, true);
-		text.addTextEntity("switchMode", "Switch mode: MMB", "font", vec3(0.0f), vec2(-0.75f, 0.075f), 0.0f, vec2(0.5f, 0.15f), true, true, true);
-		text.addTextEntity("place", "Place: LMB", "font", vec3(0.0f), vec2(-0.75f, -0.05f), 0.0f, vec2(0.5f, 0.15f), true, true, true);
-		text.addTextEntity("transform", "Transform: RMB", "font", vec3(0.0f), vec2(-0.75f, -0.175), 0.0f, vec2(0.5f, 0.15f), true, true, true);
-		text.addTextEntity("changeDir", "Change dir: X Y Z", "font", vec3(0.0f), vec2(-0.75f, -0.3f), 0.0f, vec2(0.5f, 0.15f), true, true, true);
-		text.addTextEntity("changeTrans", "Change trans: T R L", "font", vec3(0.0f), vec2(-0.75f, -0.425f), 0.0f, vec2(0.5f, 0.15f), true, true, true);
-		text.addTextEntity("resetRot", "Reset rotation: V", "font", vec3(0.0f), vec2(-0.75f, -0.55f), 0.0f, vec2(0.5f, 0.15f), true, true, true);
-		text.addTextEntity("export", "Export: O", "font", vec3(0.0f), vec2(-0.75f, -0.675f), 0.0f, vec2(0.5f, 0.15f), true, true, true);
+		//text.addTextEntity("move", "Move: WASD", "font", vec3(0.0f), vec2(-0.75f, 0.45f), 0.0f, vec2(0.5f, 0.15f), true, true, true);
+		//text.addTextEntity("ascend", "Ascend: SPACE", "font", vec3(0.0f), vec2(-0.75f, 0.325f), 0.0f, vec2(0.5f, 0.15f), true, true, true);
+		//text.addTextEntity("descend", "Descend: LCTRL", "font", vec3(0.0f), vec2(-0.75f, 0.2f), 0.0f, vec2(0.5f, 0.15f), true, true, true);
+		//text.addTextEntity("switchMode", "Switch mode: MMB", "font", vec3(0.0f), vec2(-0.75f, 0.075f), 0.0f, vec2(0.5f, 0.15f), true, true, true);
+		//text.addTextEntity("place", "Place: LMB", "font", vec3(0.0f), vec2(-0.75f, -0.05f), 0.0f, vec2(0.5f, 0.15f), true, true, true);
+		//text.addTextEntity("transform", "Transform: RMB", "font", vec3(0.0f), vec2(-0.75f, -0.175), 0.0f, vec2(0.5f, 0.15f), true, true, true);
+		//text.addTextEntity("changeDir", "Change dir: X Y Z", "font", vec3(0.0f), vec2(-0.75f, -0.3f), 0.0f, vec2(0.5f, 0.15f), true, true, true);
+		//text.addTextEntity("changeTrans", "Change trans: T R L", "font", vec3(0.0f), vec2(-0.75f, -0.425f), 0.0f, vec2(0.5f, 0.15f), true, true, true);
+		//text.addTextEntity("resetRot", "Reset rotation: V", "font", vec3(0.0f), vec2(-0.75f, -0.55f), 0.0f, vec2(0.5f, 0.15f), true, true, true);
+		//text.addTextEntity("export", "Export: O", "font", vec3(0.0f), vec2(-0.75f, -0.675f), 0.0f, vec2(0.5f, 0.15f), true, true, true);
 	}
 	else
 	{

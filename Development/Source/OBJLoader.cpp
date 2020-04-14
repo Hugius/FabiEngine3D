@@ -5,13 +5,13 @@
 #include "OBJLoader.hpp"
 #include "Logger.hpp"
 
-vector<ObjPart> & OBJLoader::loadOBJ(const string & fileName)
+vector<ObjPart> & OBJLoader::loadOBJ(const string & filePath)
 {
 	// Check if mesh data was loaded already, if not, load data and store in std::map
-	begin : auto iterator = _objPartsMap.find(fileName); // Search for existing OBJ parts
+	begin : auto iterator = _objPartsMap.find(filePath); // Search for existing OBJ parts
 	if (iterator == _objPartsMap.end()) 
 	{
-		_objPartsMap.insert(std::make_pair(fileName, _loadOBJ(fileName))); // Insert new data
+		_objPartsMap.insert(std::make_pair(filePath, _loadOBJ(filePath))); // Insert new data
 		goto begin;
 	}
 	else 
@@ -20,7 +20,7 @@ vector<ObjPart> & OBJLoader::loadOBJ(const string & fileName)
 	}
 }
 
-vector<ObjPart> OBJLoader::_loadOBJ(const string& fileName)
+vector<ObjPart> OBJLoader::_loadOBJ(const string& filePath)
 {
 	// Declare variables
 	vector<ObjPart> objParts;
@@ -30,16 +30,16 @@ vector<ObjPart> OBJLoader::_loadOBJ(const string& fileName)
 	string selectedTextureName = "";
 
 	// Get application root directory
-	char pBuf[256]; size_t len = sizeof(pBuf);
-	GetModuleFileName(NULL, pBuf, len);
-	string fullDir = pBuf;
+	char buffer[256]; size_t len = sizeof(buffer);
+	GetModuleFileName(NULL, buffer, len);
+	string fullDir = buffer;
 	fullDir = fullDir.substr(0, fullDir.size() - 25);
 
 	// Load .obj file
-	FILE * file = fopen((fullDir + "User\\Assets\\OBJs\\" + fileName + ".obj").c_str(), "r");
+	FILE * file = fopen((fullDir + filePath + ".obj").c_str(), "r");
 	if (errno != 0)
 	{
-		Logger::getInst().throwError("Could not load .obj file: " + string("User\\Assets\\OBJs\\" + fileName + ".obj"));
+		Logger::getInst().throwError("Could not load .obj file: " + string(filePath + ".obj"));
 	}
 
 	// Fill the vector with the data from the file
@@ -95,7 +95,7 @@ vector<ObjPart> OBJLoader::_loadOBJ(const string& fileName)
 			matches = fscanf(file, "%d/%d/%d %d/%d/%d %d/%d/%d\n", &posIndex[0], &uvIndex[0], &normalIndex[0], &posIndex[1], &uvIndex[1], &normalIndex[1], &posIndex[2], &uvIndex[2], &normalIndex[2]);
 			if (matches != 9)
 			{
-				Logger::getInst().throwError("Too many or not enough faces at file: " + string(fileName + ".obj"));
+				Logger::getInst().throwError("Too many or not enough faces at file: " + string(filePath + ".obj"));
 			}
 
 			bool alreadyExisting = false;
@@ -144,11 +144,11 @@ vector<ObjPart> OBJLoader::_loadOBJ(const string& fileName)
 	// Error checking
 	if (objParts.empty())
 	{
-		Logger::getInst().throwError("Incorrect or too little content at file: " + string("User\\Assets\\OBJs\\" + fileName + ".obj"));
+		Logger::getInst().throwError("Incorrect or too little content at file: " + string("User\\Assets\\OBJs\\" + filePath + ".obj"));
 	}
 
 	// Logging
-	Logger::getInst().throwInfo("Loaded OBJ model: " + string("User\\Assets\\OBJs\\" + fileName + ".obj"));
+	Logger::getInst().throwInfo("Loaded OBJ model: " + string("User\\Assets\\OBJs\\" + filePath + ".obj"));
 
 	// Return new OBJ parts
 	return objParts;

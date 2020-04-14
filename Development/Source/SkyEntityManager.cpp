@@ -93,8 +93,8 @@ void SkyEntityManager::addSkyEntity(const string & ID, float rotationSpeed, Text
 
 	// Fill entity
 	getEntity(ID)->addOglBuffer(new OpenGLBuffer(SHAPE_CUBEMAP, skybox_data, sizeof(skybox_data) / sizeof(float)));
-	getEntity(ID)->setDayCubeMap(texLoader.getCubeMap("../User/Assets/Textures/CubeMaps/Day/"));
-	getEntity(ID)->setNightCubeMap(texLoader.getCubeMap("../User/Assets/Textures/CubeMaps/Night/"));
+	getEntity(ID)->setDayCubeMap(texLoader.getCubeMap("User\\Assets\\Textures\\CubeMaps\\Day\\"));
+	getEntity(ID)->setNightCubeMap(texLoader.getCubeMap("User\\Assets\\Textures\\CubeMaps\\Night\\"));
 	getEntity(ID)->setRotationSpeed(rotationSpeed);
 }
 

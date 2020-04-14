@@ -43,6 +43,11 @@ void FabiEngine3D::camera_load(float fov, float nearZ, float farZ, vec3 startPos
 	_core->_cameraManager.setPitch(pitch);
 }
 
+void FabiEngine3D::camera_enableLookat(vec3 position)
+{
+	_core->_cameraManager.enableLookat(position);
+}
+
 void FabiEngine3D::camera_enableFirstPersonView(float mouseSensitivity)
 {
 	_core->_cameraManager.enableFirstPersonView();
@@ -132,6 +137,11 @@ float FabiEngine3D::camera_getPitch()
 float FabiEngine3D::camera_getMouseOffset()
 {
 	return _core->_cameraManager.getMouseOffset();
+}
+
+float FabiEngine3D::camera_getFOV()
+{
+	return _core->_cameraManager.getFOV();
 }
 
 vec3 FabiEngine3D::camera_getPos()

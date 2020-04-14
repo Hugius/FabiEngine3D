@@ -53,6 +53,7 @@ void ModelEditorr::update(float delta)
 			else if (_hoveredItemID == "back")
 			{
 				_gui->getViewport("leftViewport")->getWindow("mainWindow")->setActiveScreen("mainScreen");
+				_fe3d.gameEntity_delete("grid");
 			}
 		}
 		else if (_activeScreenID == "modelEditingScreen") // Model editing screen
@@ -77,6 +78,7 @@ void ModelEditorr::update(float delta)
 			{
 				_gui->getViewport("leftViewport")->getWindow("mainWindow")->setActiveScreen("modelManagementScreen");
 				_fe3d.textEntity_hide(_modelNameTextfieldEntityID);
+				_fe3d.gameEntity_hide(_currentModelName);
 			}
 		}
 	}
@@ -140,7 +142,36 @@ void ModelEditorr::_updateModelEditing()
 {
 	if (_modelEditingEnabled)
 	{
+		// Update cursor difference
+		static vec2 totalCursorDifference = vec2(0.0f);
+		static vec2 oldPos = _fe3d.misc_convertFromScreenCoords(_fe3d.misc_getMousePos());
+		vec2 currentPos = _fe3d.misc_convertFromScreenCoords(_fe3d.misc_getMousePos());;
+		vec2 difference = currentPos - oldPos;
+		oldPos = _fe3d.misc_convertFromScreenCoords(_fe3d.misc_getMousePos());
 
+		// Update scrolling
+		static float totalScrolling = 1.0f;
+		static float scollSpeed = 0.0f;
+		scollSpeed += float(-_fe3d.input_getMouseWheelY() / 100.0f);
+		scollSpeed *= 0.995f;
+		scollSpeed = std::clamp(scollSpeed, -1.0f, 1.0f);
+		totalScrolling += scollSpeed;
+		totalScrolling = std::clamp(totalScrolling, 1.0f, 10.0f);
+
+		// Check if LMB pressed
+		if (_fe3d.input_getMouseDown(Input::MOUSE_BUTTON_MIDDLE))
+		{
+			totalCursorDifference.x += difference.x * _cameraSpeed;
+			totalCursorDifference.y += difference.y * _cameraSpeed;
+		}
+
+		// Calculate new camera position
+		float x = (_minCameraDistance * totalScrolling * sin(totalCursorDifference.x));
+		float y = (_minCameraDistance * totalScrolling);
+		float z = (_minCameraDistance * totalScrolling * cos(totalCursorDifference.x));
+
+		// Update camera
+		_fe3d.camera_setPosition(vec3(x, y, z));
 	}
 }
 
@@ -193,12 +224,16 @@ void ModelEditorr::_loadDiffuseMap()
 
 void ModelEditorr::_loadLightMap()
 {
-
+	// Get the loaded filename
+	string texName = _fe3d.misc_getWinExplorerFilename("User\\Assets\\Textures\\LightMaps\\", "PNG");
+	_fe3d.gameEntity_setLightMap(_currentModelName, "User\\Assets\\Textures\\LightMaps\\" + texName.substr(0, texName.size() - 4));
 }
 
 void ModelEditorr::_loadReflectionMap()
 {
-
+	// Get the loaded filename
+	string texName = _fe3d.misc_getWinExplorerFilename("User\\Assets\\Textures\\ReflectionMaps\\", "PNG");
+	_fe3d.gameEntity_setReflectionMap(_currentModelName, "User\\Assets\\Textures\\ReflectionMaps\\" + texName.substr(0, texName.size() - 4));
 }
 
 void ModelEditorr::_loadObjFileNames()
@@ -235,11 +270,12 @@ void ModelEditorr::_initializeEditor()
 {
 	_gui->getViewport("leftViewport")->getWindow("mainWindow")->setActiveScreen("modelManagementScreen");
 	_fe3d.camera_load(90.0f, 0.1f, 1000.0f, vec3(0.0f, 2.5f, 5.0f), -90.0f, 0.0f);
+	_fe3d.camera_enableLookat(vec3(0.0f, 1.0f, 0.0f));
 	_fe3d.gfx_addAmbientLighting(0.5f);
 	_fe3d.gfx_addDirectionalLighting(vec3(1000.0f), 1.0f);
 	_fe3d.gameEntity_add("grid", "Engine\\OBJs\\plane", vec3(0.0f), vec3(0.0f), vec3(100.0f, 1.0f, 100.0f));
 	_fe3d.gameEntity_setDiffuseMap("grid", "Engine\\Textures\\grass");
-	_fe3d.gameEntity_setUvRepeat("grid", 10.0f);
+	_fe3d.gameEntity_setUvRepeat("grid", 25.0f);
 }
 
 vector<string>& ModelEditorr::getTotalObjFileNames()

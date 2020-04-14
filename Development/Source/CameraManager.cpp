@@ -62,13 +62,20 @@ void CameraManager::update(WindowManager & windowManager, float delta)
 
 void CameraManager::updateMatrices()
 {
-	// Front vector(look direction)
+	// Normal front vector
 	_front.x = cos(glm::radians(_pitch)) * cos(glm::radians(_yaw));
 	_front.y = sin(glm::radians(_pitch));
 	_front.z = cos(glm::radians(_pitch)) * sin(glm::radians(_yaw));
+	_front = glm::normalize(_front);
+
+	// Lookat front vector
+	if(_lookatEabled)
+	{
+		_front = _lookat;
+		_front = glm::normalize(_front - _pos);
+	}
 
 	// Calculate the view matrix input
-	_front = glm::normalize(_front);
 	_right = glm::normalize(glm::cross(_front, vec3(0.0f, 1.0f, 0.0f)));
 	_up    = glm::normalize(glm::cross(_right, _front));
 
@@ -127,6 +134,17 @@ void CameraManager::translateFollowZY(float speed, float delta) // Forward movem
 		_pos.y += _front.y * ((speed * delta) / 100.0f);
 		_pos.z += _front.z * ((speed * delta) / 100.0f);
 	}
+}
+
+void CameraManager::enableLookat(vec3 position)
+{
+	_lookatEabled = true;
+	_lookat = position;
+}
+
+void CameraManager::disableLookat()
+{
+	_lookatEabled = false;
 }
 
 void CameraManager::enableFirstPersonView()
@@ -205,6 +223,11 @@ const float CameraManager::getPitch() const
 const float CameraManager::getMouseOffset() const
 {
 	return _mouseOffset;
+}
+
+const float CameraManager::getFOV() const
+{
+	return _fov;
 }
 
 const bool CameraManager::isFirstPersonViewEnabled() const

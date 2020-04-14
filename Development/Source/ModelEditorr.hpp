@@ -36,6 +36,10 @@ private:
 	bool _modelEditingEnabled = false;
 	bool _modelRemovalEnabled = false;
 
+	const float _cameraHeight = 2.5f;
+	const float _minCameraDistance = 1.0f;
+	const float _cameraSpeed = 5.0f;
+
 	FabiEngine3D& _fe3d;
 	shared_ptr<EngineGuiManager> _gui;
 

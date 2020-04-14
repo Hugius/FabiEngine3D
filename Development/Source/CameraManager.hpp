@@ -28,6 +28,8 @@ public:
 	void setFarZ(float val);
 
 	// Other
+	void enableLookat(vec3 position);
+	void disableLookat();
 	void enableFirstPersonView();
 	void disableFirstPersonView();
 	void enableFreeMovement();
@@ -48,6 +50,7 @@ public:
 	const float  getYaw()                   const;
 	const float  getPitch()                 const;
 	const float  getMouseOffset()           const;
+	const float  getFOV()					const;
 	const bool   isFirstPersonViewEnabled() const;
 
 private:
@@ -62,6 +65,7 @@ private:
 	vec3 _right = vec3(0.0f);
 	vec3 _front = vec3(0.0f);
 	vec3 _pos = vec3(0.0f);
+	vec3 _lookat = vec3(0.0f);
 
 	// Floats
 	float _fov = 0.0f;
@@ -74,6 +78,7 @@ private:
 	float _mouseOffset = 0.0f;
 
 	// Booleans
+	bool _lookatEabled = false;
 	bool _firstPersonViewEnabled = false;
 	bool _freeMovementEnabled    = true;
 	bool _mustCenter             = false;

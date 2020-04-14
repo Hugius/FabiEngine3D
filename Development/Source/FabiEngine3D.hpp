@@ -36,6 +36,7 @@ public:
 
 	// Camera interface
 	void  camera_load(float fov, float nearZ, float farZ, vec3 startPos, float yaw = 0.0f, float pitch = 0.0f);
+	void  camera_enableLookat(vec3 position);
 	void  camera_enableFirstPersonView(float mouseSensitivity);
 	void  camera_disableFirstPersonView();
 	void  camera_enableFreeMovement();
@@ -54,6 +55,7 @@ public:
 	float camera_getYaw();
 	float camera_getPitch();
 	float camera_getMouseOffset();
+	float camera_getFOV();
 	vec3  camera_getPos();
 	vec3  camera_getFront();
 

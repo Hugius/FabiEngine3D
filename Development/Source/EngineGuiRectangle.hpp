@@ -2,7 +2,7 @@
 
 #include "FabiEngine3D.hpp"
 
-class EngineGuiRectangle final
+class EngineGuiRectangle
 {
 public:
 	EngineGuiRectangle(FabiEngine3D& fe3d, const string& parentID, const string& ID, vec2 position, vec2 size, vec3 color);
@@ -19,7 +19,7 @@ public:
 	const string& getEntityID();
 	const string& getParentID();
 
-private:
+protected:
 	FabiEngine3D& _fe3d;
 
 	const vec2 _originalPosition;

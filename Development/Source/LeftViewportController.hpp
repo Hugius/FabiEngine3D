@@ -1,7 +1,7 @@
 #pragma once
 
 #include "ViewportController.hpp"
-#include "ModelEditorr.hpp"
+#include "ModelEditor.hpp"
 
 class LeftViewportController final : public ViewportController
 {
@@ -11,5 +11,5 @@ public:
 	void update(float delta) override;
 
 private:
-	ModelEditorr _modelEditor;
+	ModelEditor _modelEditor;
 };

@@ -1,14 +1,7 @@
 #pragma once
 
-#include <GLM/glm.hpp>
-
-using glm::ivec2;
-
-#include "GameEntity.hpp"
-#include "GameEntityManager.hpp"
-#include "GuiEntityManager.hpp"
-#include "TextEntityManager.hpp"
-#include "InputHandler.hpp"
+#include "FabiEngine3D.hpp"
+#include "EngineGuiManager.hpp"
 
 enum class RotationType
 {
@@ -20,31 +13,50 @@ enum class RotationType
 class ModelEditor final
 {
 public:
-	ModelEditor(OBJLoader& objLoader, TextureLoader& texLoader);
-	~ModelEditor();
+	ModelEditor(FabiEngine3D& fe3d, shared_ptr<EngineGuiManager> gui);
+	~ModelEditor() = default;
 
-	GameEntity * getSelectedModel();
+	vector<string>& getTotalObjFileNames();
 
-	vector<string>      & getModelNames();
-	vector<GameEntity*> & getModels();
-
-	void loadModels(GameEntityManager & gameEntityManager);
-	void loadGUI(GuiEntityManager & guiEntityManager, TextEntityManager & textEntityManager);
-	void update(ivec2 mousePos, InputHandler& inputHandler, float delta);
+	void update(float delta);
 
 private:
 	// Functions
-	void _loadFileNames();
-	void _saveModelData();
-	void _updateModelData();
+	void _loadObjFileNames();
+	void _initializeEditor();
+	void _updateModelCreation();
+	void _updateModelChoosing();
+	void _updateModelEditing();
+	void _updateModelRemoval();
+	void _loadOBJ();
+	void _loadDiffuseMap();
+	void _loadLightMap();
+	void _loadReflectionMap();
 
-	// Vectors
-	vector<GameEntity*> _models;
+	bool _modelCreationEnabled = false;
+	bool _modelChoosingEnabled = false;
+	bool _modelEditingEnabled = false;
+	bool _modelRemovalEnabled = false;
+
+	const vec3 _startingCameraPos = vec3(0.0f, 5.0f, 5.0f);
+
+	float _cameraDistance = 5.0f;
+	const float _minCameraDistance = 1.0f;
+	const float _maxCameraDistance = 20.0f;
+	const float _minCameraHeight = 1.0f;
+	const float _maxCameraHeight = 25.0f;
+	const float _cameraSpeed = 5.0f;
+
+	FabiEngine3D& _fe3d;
+	shared_ptr<EngineGuiManager> _gui;
+
+	string _modelNameTextfieldEntityID = "";
+	string _currentModelName = "";
+	string _activeScreenID = "";
+	string _hoveredItemID = "";
 	vector<string> _modelNames;
+	vector<string> _totalObjFileNames;
 
-	// Other
 	unsigned int _modelIndex = 0;
 	RotationType _rotationType = RotationType::Y;
-	OBJLoader& _objLoader;
-	TextureLoader& _texLoader;
 };

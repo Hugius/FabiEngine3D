@@ -14,6 +14,12 @@ void EngineGuiScreen::update(float delta, bool hoverable)
 {
 	if (_enabled)
 	{
+		// Scrolling lists show
+		for (auto& scrollingList : _scrollingLists)
+		{
+			scrollingList->show();
+		}
+
 		// Writefields show
 		for (auto& writefield : _writefields)
 		{
@@ -41,15 +47,15 @@ void EngineGuiScreen::update(float delta, bool hoverable)
 		// Set to default
 		_hoveredItemID = "";
 
-		// Update buttons
-		for (auto& button : _buttons)
+		// Update scrolling lists
+		for (auto& scrollingList : _scrollingLists)
 		{
-			button->update(delta, hoverable);
+			scrollingList->update(delta, hoverable);
 
 			// Set hovered button ID
-			if (button->isHovered())
+			if (scrollingList->isHovered())
 			{
-				_hoveredItemID = button->getID();
+				_hoveredItemID = scrollingList->getID();
 			}
 		}
 
@@ -64,9 +70,27 @@ void EngineGuiScreen::update(float delta, bool hoverable)
 				_hoveredItemID = writefield->getID();
 			}
 		}
+
+		// Update buttons
+		for (auto& button : _buttons)
+		{
+			button->update(delta, hoverable);
+
+			// Set hovered button ID
+			if (button->isHovered())
+			{
+				_hoveredItemID = button->getID();
+			}
+		}
 	}
 	else
 	{
+		// Scrolling lists hide
+		for (auto& scrollingList : _scrollingLists)
+		{
+			scrollingList->hide();
+		}
+
 		// Writefields hide
 		for (auto& writefield : _writefields)
 		{
@@ -113,6 +137,13 @@ const string& EngineGuiScreen::getParentID()
 	return _parentID;
 }
 
+void EngineGuiScreen::addScrollingList(const string& ID, vec2 position, vec2 size, vec3 color,
+	vec3 buttonColor, vec3 buttonHoverColor, vec3 textColor, vec3 textHoverColor)
+{
+	auto dimensions = _convertDimensions(position, size);
+	_scrollingLists.push_back(make_shared<EngineGuiScrollingList>(_fe3d, _ID, ID, vec2(dimensions.x, dimensions.y), vec2(dimensions.z, dimensions.w), color, buttonColor, buttonHoverColor, textColor, textHoverColor));
+}
+
 void EngineGuiScreen::addWritefield(const string& ID, vec2 position, vec2 size, vec3 color, vec3 hoverColor, vec3 textColor, vec3 textHoverColor)
 {
 	auto dimensions = _convertDimensions(position, size);
@@ -135,6 +166,19 @@ void EngineGuiScreen::addTextfield(const string& ID, vec2 position, vec2 size, s
 {
 	auto dimensions = _convertDimensions(position, size);
 	_textfields.push_back(make_shared<EngineGuiTextfield>(_fe3d, _ID, ID, vec2(dimensions.x, dimensions.y), vec2(dimensions.z, dimensions.w), textContent, textColor));
+}
+
+shared_ptr<EngineGuiScrollingList> EngineGuiScreen::getScrollingList(const string& ID)
+{
+	for (auto& scrollingList : _scrollingLists)
+	{
+		if (ID == scrollingList->getID())
+		{
+			return scrollingList;
+		}
+	}
+
+	return nullptr;
 }
 
 shared_ptr<EngineGuiWritefield> EngineGuiScreen::getWritefield(const string& ID)
@@ -189,6 +233,11 @@ shared_ptr<EngineGuiTextfield> EngineGuiScreen::getTextfield(const string& ID)
 	return nullptr;
 }
 
+vector<shared_ptr<EngineGuiScrollingList>>& EngineGuiScreen::getScrollingFields()
+{
+	return _scrollingLists;
+}
+
 vector<shared_ptr<EngineGuiWritefield>>& EngineGuiScreen::getWritefields()
 {
 	return _writefields;
@@ -207,6 +256,22 @@ vector<shared_ptr<EngineGuiRectangle>>& EngineGuiScreen::getRectangles()
 vector<shared_ptr<EngineGuiTextfield>>& EngineGuiScreen::getTextfields()
 {
 	return _textfields;
+}
+
+void EngineGuiScreen::deleteScrollingList(const string& ID)
+{
+	// Delete scrollingList
+	for (size_t i = 0; i < _scrollingLists.size(); i++)
+	{
+		if (ID == _scrollingLists[i]->getID())
+		{
+			_scrollingLists.erase(_scrollingLists.begin() + i);
+			return;
+		}
+	}
+
+	// Error
+	_fe3d.logger_throwError("ScrollingList \"" + ID + "\" not deleted!");
 }
 
 void EngineGuiScreen::deleteWritefield(const string& ID)

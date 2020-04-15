@@ -3,37 +3,269 @@
 #include <sstream>
 
 #include "ModelEditor.hpp"
-#include "TextureLoader.hpp"
-#include "OBJLoader.hpp"
-#include "ShaderBus.hpp"
-#include "Logger.hpp"
 
-ModelEditor::ModelEditor(OBJLoader& objLoader, TextureLoader& texLoader) :
-	_objLoader(objLoader),
-	_texLoader(texLoader)
+ModelEditor::ModelEditor(FabiEngine3D& fe3d, shared_ptr<EngineGuiManager> gui) :
+	_fe3d(fe3d),
+	_gui(gui)
 {
-	//_loadFileNames();
+	// Load all OBJ filenames from assets folder
+	_loadObjFileNames();
+
+	// Current model name textfield
+	_gui->getGlobalScreen()->addTextfield("currentModelName", vec2(0.0f, 0.85f), vec2(0.5f, 0.1f), "", vec3(1.0f));
+	_modelNameTextfieldEntityID = _gui->getGlobalScreen()->getTextfield("currentModelName")->getEntityID();
 }
 
-ModelEditor::~ModelEditor()
+void ModelEditor::update(float delta)
 {
-	for (auto & model : _models)
+	// Variables
+	_activeScreenID = _gui->getViewport("leftViewport")->getWindow("mainWindow")->getActiveScreen()->getID();
+	_hoveredItemID = _gui->getViewport("leftViewport")->getWindow("mainWindow")->getActiveScreen()->getHoveredItemID();
+
+	// Check if LMB pressed
+	if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
 	{
-		delete model;
+		if (_activeScreenID == "mainScreen") // Main screen
+		{
+			if (_hoveredItemID == "modelEditor")
+			{
+				_initializeEditor();
+			}
+		}
+		else if (_activeScreenID == "modelManagementScreen") // Model management screen
+		{
+			if (_hoveredItemID == "addModel")
+			{
+				_gui->getGlobalScreen()->addTextfield("newModelName", vec2(0.0f, 0.1f), vec2(0.3f, 0.1f), "Enter model name:", vec3(1.0f));
+				_gui->getGlobalScreen()->addWritefield("newModelName", vec2(0.0f, 0.0f), vec2(0.5f, 0.1f), vec3(0.25f), vec3(0.5f), vec3(1.0f), vec3(0.0f));
+				_gui->getGlobalScreen()->getWritefield("newModelName")->setActive(true);
+				_gui->setFocus(true);
+				_modelCreationEnabled = true;
+			}
+			else if (_hoveredItemID == "editModel")
+			{
+				_modelChoosingEnabled = true;
+				_gui->getViewport("leftViewport")->getWindow("mainWindow")->setActiveScreen("modelChoiceScreen");
+			}
+			else if (_hoveredItemID == "deleteModel")
+			{
+				_modelRemovalEnabled = true;
+			}
+			else if (_hoveredItemID == "back")
+			{
+				_gui->getViewport("leftViewport")->getWindow("mainWindow")->setActiveScreen("mainScreen");
+				_fe3d.gameEntity_delete("grid");
+			}
+		}
+		else if (_activeScreenID == "modelChoiceScreen") // Model choice screen
+		{
+			if (_hoveredItemID == "back")
+			{
+				_gui->getViewport("leftViewport")->getWindow("mainWindow")->setActiveScreen("modelManagementScreen");
+			}
+		}
+		else if (_activeScreenID == "modelEditingScreen") // Model editing screen
+		{
+			if (_hoveredItemID == "loadOBJ")
+			{
+				_loadOBJ();
+			}
+			else if (_hoveredItemID == "loadDiffuseMap")
+			{
+				_loadDiffuseMap();
+			}
+			else if (_hoveredItemID == "loadLightMap")
+			{
+				_loadLightMap();
+			}
+			else if (_hoveredItemID == "loadReflectionMap")
+			{
+				_loadReflectionMap();
+			}
+			else if (_hoveredItemID == "back")
+			{
+				_gui->getViewport("leftViewport")->getWindow("mainWindow")->setActiveScreen("modelChoiceScreen");
+				_fe3d.textEntity_hide(_modelNameTextfieldEntityID);
+
+				// Check if game entiy loaded
+				if (_fe3d.gameEntity_isExisting(_currentModelName))
+				{
+					_fe3d.gameEntity_hide(_currentModelName);
+				}
+			}
+		}
 	}
 
-	_models.clear();
+	// Update all processes
+	_updateModelCreation();
+	_updateModelEditing();
+	_updateModelRemoval();
 }
 
-void ModelEditor::_loadFileNames()
+void ModelEditor::_updateModelCreation()
+{
+	if (_modelCreationEnabled)
+	{
+		// Check if pressed ESCAPE or ENTER
+		if (_gui->getGlobalScreen()->getWritefield("newModelName")->cancelledInput() ||
+			_gui->getGlobalScreen()->getWritefield("newModelName")->confirmedInput())
+		{
+			// Extract new name
+			string modelName = _gui->getGlobalScreen()->getWritefield("newModelName")->getTextContent();
+
+			// Create new project
+			if (_gui->getGlobalScreen()->getWritefield("newModelName")->confirmedInput())
+			{
+				// If modelname not existing yet
+				if (std::find(_modelNames.begin(), _modelNames.end(), modelName) == _modelNames.end())
+				{
+					// Add model name
+					_modelNames.push_back(modelName);
+					_currentModelName = modelName;
+					_modelEditingEnabled = true;
+
+					// Show model name
+					_fe3d.textEntity_setTextContent(_modelNameTextfieldEntityID, "Model: " + modelName, 0.025f);
+					_fe3d.textEntity_show(_modelNameTextfieldEntityID);
+
+					// Disable texturing buttons
+					_gui->getViewport("leftViewport")->getWindow("mainWindow")->getScreen("modelEditingScreen")->getButton("loadDiffuseMap")->setHoverable(false);
+					_gui->getViewport("leftViewport")->getWindow("mainWindow")->getScreen("modelEditingScreen")->getButton("loadLightMap")->setHoverable(false);
+					_gui->getViewport("leftViewport")->getWindow("mainWindow")->getScreen("modelEditingScreen")->getButton("loadReflectionMap")->setHoverable(false);
+
+					// Go to editor screen
+					_gui->getViewport("leftViewport")->getWindow("mainWindow")->setActiveScreen("modelEditingScreen");
+				}
+				else
+				{
+					_fe3d.logger_throwWarning("This modelname is already in use!");
+				}
+			}
+
+			// Cleanup
+			_modelCreationEnabled = false;
+			_gui->setFocus(false);
+			_gui->getGlobalScreen()->deleteTextfield("newModelName");
+			_gui->getGlobalScreen()->deleteWritefield("newModelName");
+		}
+	}
+}
+
+void ModelEditor::_updateModelChoosing()
+{
+	if (_modelChoosingEnabled)
+	{
+		
+	}
+}
+
+void ModelEditor::_updateModelEditing()
+{
+	if (_modelEditingEnabled)
+	{
+		// Update cursor difference
+		static vec2 totalCursorDifference = vec2(0.0f);
+		static vec2 oldPos = _fe3d.misc_convertFromScreenCoords(_fe3d.misc_getMousePos());
+		vec2 currentPos = _fe3d.misc_convertFromScreenCoords(_fe3d.misc_getMousePos());;
+		vec2 difference = currentPos - oldPos;
+		oldPos = _fe3d.misc_convertFromScreenCoords(_fe3d.misc_getMousePos());
+
+		// Update scrolling
+		static float scollSpeed = 0.0f;
+		scollSpeed += float(-_fe3d.input_getMouseWheelY() / 100.0f);
+		scollSpeed *= 0.998f;
+		scollSpeed = std::clamp(scollSpeed, -1.0f, 1.0f);
+		_cameraDistance += scollSpeed;
+		_cameraDistance = std::clamp(_cameraDistance, _minCameraDistance, _maxCameraDistance);
+
+		// Check if LMB pressed
+		if (_fe3d.input_getMouseDown(Input::MOUSE_BUTTON_MIDDLE))
+		{
+			totalCursorDifference.x += difference.x * _cameraSpeed;
+			totalCursorDifference.y += difference.y * _cameraSpeed;
+			totalCursorDifference.y = std::clamp(totalCursorDifference.y, 0.0f, 1.0f);
+		}
+
+		// Calculate new camera position
+		float x = (_cameraDistance * sin(totalCursorDifference.x));
+		float y = _minCameraHeight + (_cameraDistance * totalCursorDifference.y);
+		float z = (_cameraDistance * cos(totalCursorDifference.x));
+
+		// Update camera position
+		_fe3d.camera_setPosition(vec3(x, y, z));
+	}
+}
+
+void ModelEditor::_updateModelRemoval()
+{
+	if (_modelRemovalEnabled)
+	{
+
+	}
+}
+
+void ModelEditor::_loadOBJ()
+{
+	// Get the loaded filename
+	string objName = _fe3d.misc_getWinExplorerFilename("User\\Assets\\OBJs\\", "OBJ");
+	if (objName != "") // Not cancelled
+	{
+		// Already exists
+		if (_fe3d.gameEntity_isExisting(_currentModelName))
+		{
+			_fe3d.gameEntity_delete(_currentModelName);
+		}
+
+		// Add new game entity
+		_fe3d.gameEntity_add(_currentModelName, "User\\Assets\\OBJs\\" + objName.substr(0, objName.size() - 4), vec3(0.0f), vec3(0.0f), vec3(1.0f));
+		_fe3d.gameEntity_setColor(_currentModelName, vec3(0.5f));
+
+		// Enable texturing if not pre-multitextured
+		if (_fe3d.gameEntity_isMultiTextured(_currentModelName))
+		{
+			_gui->getViewport("leftViewport")->getWindow("mainWindow")->getScreen("modelEditingScreen")->getButton("loadDiffuseMap")->setHoverable(false);
+			_gui->getViewport("leftViewport")->getWindow("mainWindow")->getScreen("modelEditingScreen")->getButton("loadLightMap")->setHoverable(false);
+			_gui->getViewport("leftViewport")->getWindow("mainWindow")->getScreen("modelEditingScreen")->getButton("loadReflectionMap")->setHoverable(false);
+		}
+		else
+		{
+			_gui->getViewport("leftViewport")->getWindow("mainWindow")->getScreen("modelEditingScreen")->getButton("loadDiffuseMap")->setHoverable(true);
+			_gui->getViewport("leftViewport")->getWindow("mainWindow")->getScreen("modelEditingScreen")->getButton("loadLightMap")->setHoverable(true);
+			_gui->getViewport("leftViewport")->getWindow("mainWindow")->getScreen("modelEditingScreen")->getButton("loadReflectionMap")->setHoverable(true);
+		}
+	}
+}
+
+void ModelEditor::_loadDiffuseMap()
+{
+	// Get the loaded filename
+	string texName = _fe3d.misc_getWinExplorerFilename("User\\Assets\\Textures\\DiffuseMaps\\", "PNG");
+	_fe3d.gameEntity_setDiffuseMap(_currentModelName, "User\\Assets\\Textures\\DiffuseMaps\\" + texName.substr(0, texName.size() - 4));
+}
+
+void ModelEditor::_loadLightMap()
+{
+	// Get the loaded filename
+	string texName = _fe3d.misc_getWinExplorerFilename("User\\Assets\\Textures\\LightMaps\\", "PNG");
+	_fe3d.gameEntity_setLightMap(_currentModelName, "User\\Assets\\Textures\\LightMaps\\" + texName.substr(0, texName.size() - 4));
+}
+
+void ModelEditor::_loadReflectionMap()
+{
+	// Get the loaded filename
+	string texName = _fe3d.misc_getWinExplorerFilename("User\\Assets\\Textures\\ReflectionMaps\\", "PNG");
+	_fe3d.gameEntity_setReflectionMap(_currentModelName, "User\\Assets\\Textures\\ReflectionMaps\\" + texName.substr(0, texName.size() - 4));
+}
+
+void ModelEditor::_loadObjFileNames()
 {
 	// Remove potential previous filenames
-	if (!_modelNames.empty())
+	if (!_totalObjFileNames.empty())
 	{
-		_modelNames.clear();
+		_totalObjFileNames.clear();
 	}
 
-	string path = "../Game/OBJs/";
+	string path = "../User/Assets/OBJs/";
 	int endOfNameIndex = 0;
 
 	// Get all filenames
@@ -51,220 +283,23 @@ void ModelEditor::_loadFileNames()
 				endOfNameIndex = i;
 			}
 		}
-		_modelNames.push_back(path.substr(0, endOfNameIndex));
+		_totalObjFileNames.push_back(path.substr(0, endOfNameIndex));
 	}
 }
 
-void ModelEditor::loadModels(GameEntityManager & gameEntityManager)
+void ModelEditor::_initializeEditor()
 {
-	// If new models added
-	_updateModelData();
-
-	// Open models file
-	string line;
-	std::ifstream file(string("../Engine/Models.we3d").c_str());
-	if (errno != 0)
-	{
-		Logger::getInst().throwError("Could not load models file");
-	}
-
-	// Load all existing models
-	while(std::getline(file, line))
-	{
-		// Parse next line
-		std::stringstream iss(line);
-
-		// Data of current line
-		string fileName;
-		float scaleX, scaleY, scaleZ;
-		float rotationX, rotationY, rotationZ;
-		bool alpha, culled, lightMapped, reflective, specular;
-
-		// Get data and store into variables
-		if (!(iss >> fileName >> scaleX >> scaleY >> scaleZ >> rotationX >> rotationY >> rotationZ >> alpha >> culled >> lightMapped >> reflective >> specular))
-		{
-			Logger::getInst().throwError("Could not process model: " + fileName);
-		}
-
-		// Load OBJ model
-		auto parts = _objLoader.loadOBJ(fileName);
-
-		// Create entity
-		_models.push_back(new GameEntity());
-		_models.back()->load(fileName);
-		_models.back()->setModelName(fileName);
-		_models.back()->setRotation(vec3(rotationX, rotationY, rotationZ));
-		_models.back()->setScaling(vec3(scaleX, scaleY, scaleZ));
-		_models.back()->setTransparent(alpha);
-		_models.back()->setFaceCulled(culled);
-		_models.back()->setLightMapped(lightMapped);
-		_models.back()->setSkyReflective(reflective);
-		_models.back()->setSpecular(specular);
-
-		// Create OpenGL buffers
-		for (auto & part : parts)
-		{
-			vector<float> data;
-			
-			for (unsigned int i = 0; i < part.vertices.size(); i++)
-			{
-				data.push_back(part.vertices[i].x);
-				data.push_back(part.vertices[i].y);
-				data.push_back(part.vertices[i].z);
-
-				data.push_back(part.uvCoords[i].x);
-				data.push_back(part.uvCoords[i].y);
-
-				data.push_back(part.normals[i].x);
-				data.push_back(part.normals[i].y);
-				data.push_back(part.normals[i].z);
-			}
-
-			// OpenGL buffer
-			_models.back()->addOglBuffer(new OpenGLBuffer(SHAPE_3D, &data[0], data.size()));
-
-			// Diffuse map
-			_models.back()->setDiffuseMap(_texLoader.getTexture("../Game/Textures/DiffuseMaps/" + part.textureName, true, true));
-
-			// Light map
-			if (lightMapped)
-			{
-				_models.back()->setLightMap(_texLoader.getTexture("../Game/Textures/LightMaps/" + part.textureName, false, false));
-			}
-
-			// Reflection map
-			if (reflective)
-			{
-				_models.back()->setReflectionMap(_texLoader.getTexture("../Game/Textures/ReflectionMaps/" + part.textureName, false, false));
-			}
-		}
-	}
-
-	file.close();
+	_gui->getViewport("leftViewport")->getWindow("mainWindow")->setActiveScreen("modelManagementScreen");
+	_fe3d.camera_load(90.0f, 0.1f, 1000.0f, vec3(_startingCameraPos), -90.0f, 0.0f);
+	_fe3d.camera_enableLookat(vec3(0.0f));
+	_fe3d.gfx_addAmbientLighting(0.5f);
+	_fe3d.gfx_addDirectionalLighting(vec3(1000.0f), 1.0f);
+	_fe3d.gameEntity_add("grid", "Engine\\OBJs\\plane", vec3(0.0f), vec3(0.0f), vec3(100.0f, 1.0f, 100.0f));
+	_fe3d.gameEntity_setDiffuseMap("grid", "Engine\\Textures\\grass");
+	_fe3d.gameEntity_setUvRepeat("grid", 25.0f);
 }
 
-void ModelEditor::_saveModelData()
+vector<string>& ModelEditor::getTotalObjFileNames()
 {
-	if (!_models.empty())
-	{
-		// Load file
-		std::ofstream file(string("../Engine/Models.we3d").c_str());
-
-		// Write to file
-		for (auto& model : _models)
-		{
-			file <<
-				model->getID() << " " <<
-				model->getScaling().x << " " << model->getScaling().y << " " << model->getScaling().z << " " <<
-				model->getRotation().x << " " << model->getRotation().y << " " << model->getRotation().z << " " <<
-				model->isTransparent() << " " << model->isFaceCulled() << " " <<
-				model->isLightMapped() << " " << model->isSkyReflective() << " " << model->isSpecular() << "\n";
-		}
-
-		// Close file
-		file.close();
-
-		// Log
-		Logger::getInst().throwInfo("Saved model data");
-	}
-}
-
-bool compareFunction(std::string a, std::string b) { return a < b; }
-
-void ModelEditor::_updateModelData()
-{
-	// Load file
-	std::ifstream inFile(string("../Engine/Models.we3d").c_str());  // Read
-	
-	string tempLine;
-	vector<string> lines;
-
-	// All known OBJ files
-	vector<string> knownFilenames;
-
-	// Retrieving known ID's
-	while (std::getline(inFile, tempLine))
-	{
-		lines.push_back(tempLine);
-		string fileName;
-		std::stringstream iss(tempLine);
-		iss >> fileName;
-		knownFilenames.push_back(fileName);
-	}
-
-	// Check if new model was added
-	for (auto& fileName : _modelNames)
-	{
-		if (std::find(knownFilenames.begin(), knownFilenames.end(), fileName) == knownFilenames.end()) // New model not known
-		{
-			lines.push_back(fileName + " 1 1 1 0 0 0 0 0 0 0 0"); // Add to file
-		}
-	}
-
-	// Check if old model was removed
-	for (auto& fileName : knownFilenames)
-	{
-		if (std::find(_modelNames.begin(), _modelNames.end(), fileName) == _modelNames.end()) // Known model not existing anymore
-		{
-			// Remove from file
-			for (auto& line : lines)
-			{
-				if (line.substr(0, fileName.size()) == fileName)
-				{
-					lines.erase(std::remove(lines.begin(), lines.end(), line), lines.end());
-				}
-			}
-		}
-	}
-
-	// Sorting the file alphabetically
-	std::sort(lines.begin(), lines.end(), compareFunction);
-
-	// Closing reading file
-	inFile.close();
-
-	// Opening writing file
-	std::ofstream outFile(string("../Engine/Models.we3d").c_str()); // Write
-
-	// Write to file
-	for (auto & line : lines)
-	{
-		outFile << line << "\n";
-	}
-
-	// Close file
-	outFile.close();
-}
-
-void ModelEditor::loadGUI(GuiEntityManager & guiEntityManager, TextEntityManager & textEntityManager)
-{
-	//guiEntityManager.addGuiEntity("title", "board", vec2(0.15f, 0.8f), 0.0f, vec2(0.85f, 0.3f), true, true);
-	//guiEntityManager.addGuiEntity("scroll", "scroll", vec2(-0.7f, 0.0f), 0.0f, vec2(0.6f, 2.0f), true, true);
-	//textEntityManager.addTextEntity("title", "Model Editor", "medieval",   vec3(0), vec2(0.15f, 0.8f), 0.0f, vec2(0.6f, 0.2f), true, true, true);
-	//textEntityManager.addTextEntity("move", "Move: LMB", "medieval",       vec3(0), vec2(-0.7f, 0.625f), 0.0f, vec2(0.3f, 0.1f), true, true, true);
-	//textEntityManager.addTextEntity("rotate", "Rotate: RMB", "medieval",   vec3(0), vec2(-0.7f, 0.5f), 0.0f, vec2(0.3f, 0.1f), true, true, true);
-	//textEntityManager.addTextEntity("resize", "Resize: MMB", "medieval",   vec3(0), vec2(-0.7f, 0.375f), 0.0f, vec2(0.3f, 0.1f), true, true, true);
-	//textEntityManager.addTextEntity("next", "Next model: E", "medieval",   vec3(0), vec2(-0.7f, 0.25f), 0.0f, vec2(0.3f, 0.1f), true, true, true);
-	//textEntityManager.addTextEntity("prev", "Prev model: Q", "medieval",   vec3(0), vec2(-0.7f, 0.125f), 0.0f, vec2(0.3f, 0.1f), true, true, true);
-	//textEntityManager.addTextEntity("dir", "Direction: D", "medieval",     vec3(0), vec2(-0.7f, 0.0f), 0.0f, vec2(0.3f, 0.1f), true, true, true);
-	//textEntityManager.addTextEntity("light", "Lightmap: L", "medieval",    vec3(0), vec2(-0.7f, -0.125f), 0.0f, vec2(0.3f, 0.1f), true, true, true);
-	//textEntityManager.addTextEntity("refl", "Reflective: R", "medieval",   vec3(0), vec2(-0.7f, -0.25f), 0.0f, vec2(0.3f, 0.1f), true, true, true);
-	//textEntityManager.addTextEntity("trans", "Transparent: T", "medieval", vec3(0), vec2(-0.7f, -0.375f), 0.0f, vec2(0.3f, 0.1f), true, true, true);
-	//textEntityManager.addTextEntity("face", "Faceculling: F", "medieval",  vec3(0), vec2(-0.7f, -0.5f), 0.0f, vec2(0.3f, 0.1f), true, true, true);
-	//textEntityManager.addTextEntity("spec", "Specular: S", "medieval",     vec3(0), vec2(-0.7f, -0.625f), 0.0f, vec2(0.3f, 0.1f), true, true, true);
-}
-
-GameEntity * ModelEditor::getSelectedModel()
-{
-	return _models[_modelIndex];
-}
-
-vector<string> & ModelEditor::getModelNames()
-{
-	return _modelNames;
-}
-
-vector<GameEntity*> & ModelEditor::getModels()
-{
-	return _models;
+	return _totalObjFileNames;
 }

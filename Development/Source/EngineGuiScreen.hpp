@@ -1,7 +1,11 @@
 #pragma once
 
 #include "FabiEngine3D.hpp"
+#include "EngineGuiScrollingList.hpp"
 #include "EngineGuiWritefield.hpp"
+#include "EngineGuiButton.hpp"
+#include "EngineGuiRectangle.hpp"
+#include "EngineGuiTextfield.hpp"
 
 class EngineGuiScreen final
 {
@@ -15,25 +19,29 @@ public:
 	const string& getID();
 	const string& getParentID();
 
+	void addScrollingList(const string& ID, vec2 position, vec2 size, vec3 color, vec3 buttonColor, vec3 buttonHoverColor, vec3 textColor, vec3 textHoverColor);
 	void addWritefield(const string& ID, vec2 position, vec2 size, vec3 color, vec3 hoverColor, vec3 textColor, vec3 textHoverColor);
 	void addButton(const string& ID, vec2 position, vec2 size, vec3 color, vec3 hoverColor, string textContent, vec3 textColor, vec3 textHoverColor);
 	void addRectangle(const string& ID, vec2 position, vec2 size, vec3 color);
 	void addTextfield(const string& ID, vec2 position, vec2 size, string textContent, vec3 textColor);
 
+	void deleteScrollingList(const string& ID);
 	void deleteWritefield(const string& ID);
 	void deleteButton(const string& ID);
 	void deleteRectangle(const string& ID);
 	void deleteTextfield(const string& ID);
 
-	shared_ptr<EngineGuiWritefield> getWritefield(const string& ID);
-	shared_ptr<EngineGuiButton>     getButton(const string& ID);
-	shared_ptr<EngineGuiRectangle>  getRectangle(const string& ID);
-	shared_ptr<EngineGuiTextfield>  getTextfield(const string& ID);
+	shared_ptr<EngineGuiScrollingList> getScrollingList(const string& ID);
+	shared_ptr<EngineGuiWritefield>    getWritefield(const string& ID);
+	shared_ptr<EngineGuiButton>        getButton(const string& ID);
+	shared_ptr<EngineGuiRectangle>     getRectangle(const string& ID);
+	shared_ptr<EngineGuiTextfield>     getTextfield(const string& ID);
 
-	vector<shared_ptr<EngineGuiWritefield>>& getWritefields();
-	vector<shared_ptr<EngineGuiButton>>& getButtons();
-	vector<shared_ptr<EngineGuiRectangle>>& getRectangles();
-	vector<shared_ptr<EngineGuiTextfield>>& getTextfields();
+	vector<shared_ptr<EngineGuiScrollingList>>& getScrollingFields();
+	vector<shared_ptr<EngineGuiWritefield>>&    getWritefields();
+	vector<shared_ptr<EngineGuiButton>>&		getButtons();
+	vector<shared_ptr<EngineGuiRectangle>>&		getRectangles();
+	vector<shared_ptr<EngineGuiTextfield>>&		getTextfields();
 
 	const string& getHoveredItemID();
 
@@ -50,6 +58,7 @@ private:
 
 	bool _enabled = false;
 
+	vector<shared_ptr<EngineGuiScrollingList>> _scrollingLists;
 	vector<shared_ptr<EngineGuiWritefield>> _writefields;
 	vector<shared_ptr<EngineGuiButton>> _buttons;
 	vector<shared_ptr<EngineGuiRectangle>> _rectangles;

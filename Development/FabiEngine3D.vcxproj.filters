@@ -163,12 +163,6 @@
     <ClCompile Include="Source\AudioPlayer.cpp">
       <Filter>src\Audio System\Core</Filter>
     </ClCompile>
-    <ClCompile Include="Source\ModelEditor.cpp">
-      <Filter>src\Editor System\Model Editor</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\ModelEditor_updates.cpp">
-      <Filter>src\Editor System\Model Editor</Filter>
-    </ClCompile>
     <ClCompile Include="Source\WorldEditor_updates.cpp">
       <Filter>src\Editor System\World Editor</Filter>
     </ClCompile>
@@ -250,14 +244,17 @@
     <ClCompile Include="Source\ViewportController.cpp">
       <Filter>src\Engine Controller</Filter>
     </ClCompile>
-    <ClCompile Include="Source\ModelEditorr.cpp">
-      <Filter>src\Editor System\Model Editor</Filter>
-    </ClCompile>
     <ClCompile Include="Source\OpenGLFramebuffer.cpp">
       <Filter>src\Rendering System\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="Source\OpenGLFramebuffer_ext.cpp">
       <Filter>src\Rendering System\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ModelEditor.cpp">
+      <Filter>src\Editor System\Model Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EngineGuiScrollingList.cpp">
+      <Filter>src\GUI System</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -423,9 +420,6 @@
     <ClInclude Include="Source\AudioPlayer.hpp">
       <Filter>src\Audio System\Core</Filter>
     </ClInclude>
-    <ClInclude Include="Source\ModelEditor.hpp">
-      <Filter>src\Editor System\Model Editor</Filter>
-    </ClInclude>
     <ClInclude Include="Source\MousePicker.hpp">
       <Filter>src\Editor System\World Editor</Filter>
     </ClInclude>
@@ -495,11 +489,14 @@
     <ClInclude Include="Source\BottomViewportController.hpp">
       <Filter>src\Engine Controller</Filter>
     </ClInclude>
-    <ClInclude Include="Source\ModelEditorr.hpp">
-      <Filter>src\Editor System\Model Editor</Filter>
-    </ClInclude>
     <ClInclude Include="Source\OpenGLFramebuffer.hpp">
       <Filter>src\Rendering System\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ModelEditor.hpp">
+      <Filter>src\Editor System\Model Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EngineGuiScrollingList.hpp">
+      <Filter>src\GUI System</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

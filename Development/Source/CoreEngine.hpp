@@ -55,7 +55,6 @@ private:
 	TextEntityManager      _textEntityManager;
 	ShadowManager          _shadowManager;
 	MousePicker            _mousePicker;
-	ModelEditor            _modelEditor;
 	WorldEditor            _worldEditor;
 	CollisionDetector      _collisionDetector;
 	CollisionResolver      _collisionResolver;

@@ -23,12 +23,20 @@ private:
 
 	bool _isFocused = false;
 
-	const vec3 topColor = vec3(0.0f, 0.25f, 0.0f);
-	const vec3 leftColor = vec3(0.0f, 0.0f, 0.5f);
-	const vec3 rightColor = vec3(0.0f, 0.25f, 0.0f);
-	const vec3 bottomColor = vec3(0.0f, 0.25f, 0.0f);
-	const vec3 topHoverColor = vec3(0.0f, 0.5f, 0.0f);
-	const vec3 leftHoverColor = vec3(0.5f, 0.5f, 1.0f);
-	const vec3 rightHoverColor = vec3(0.0f, 0.25f, 0.0f);
-	const vec3 bottomHoverColor = vec3(0.0f, 0.25f, 0.0f);
+	const vec3 _topViewportButtonColor = vec3(0.0f, 0.25f, 0.0f);
+	const vec3 _leftViewportButtonColor = vec3(0.0f, 0.0f, 0.5f);
+	const vec3 _rightViewportButtonColor = vec3(0.0f, 0.25f, 0.0f);
+	const vec3 _bottomViewportButtonColor = vec3(0.0f, 0.25f, 0.0f);
+	const vec3 _topViewportButtonHoverColor = vec3(0.0f, 0.5f, 0.0f);
+	const vec3 _leftViewportButtonHoverColor = vec3(0.5f, 0.5f, 1.0f);
+	const vec3 _rightViewportButtonHoverColor = vec3(0.0f, 0.25f, 0.0f);
+	const vec3 _bottomViewportButtonHoverColor = vec3(0.0f, 0.25f, 0.0f);
+	const vec3 _topViewportTextColor = vec3(1.0f);
+	const vec3 _leftViewportTextColor = vec3(1.0f);
+	const vec3 _rightViewportTextColor = vec3(1.0f);
+	const vec3 _bottomViewportTextColor = vec3(1.0f);
+	const vec3 _topViewportTextHoverColor = vec3(0.0f);
+	const vec3 _leftViewportTextHoverColor = vec3(0.0f);
+	const vec3 _rightViewportTextHoverColor = vec3(0.0f);
+	const vec3 _bottomViewportTextHoverColor = vec3(0.0f);
 };

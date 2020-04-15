@@ -159,8 +159,9 @@
     <ClInclude Include="Source\DepthRenderer.hpp" />
     <ClInclude Include="Source\EngineController.hpp" />
     <ClInclude Include="Source\BottomViewportController.hpp" />
+    <ClInclude Include="Source\EngineGuiScrollingList.hpp" />
     <ClInclude Include="Source\LeftViewportController.hpp" />
-    <ClInclude Include="Source\ModelEditorr.hpp" />
+    <ClInclude Include="Source\ModelEditor.hpp" />
     <ClInclude Include="Source\RightViewportController.hpp" />
     <ClInclude Include="Source\TopViewportController.hpp" />
     <ClInclude Include="Source\EngineGuiGlobalScreen.hpp" />
@@ -189,7 +190,6 @@
     <ClInclude Include="Source\LightEntity.hpp" />
     <ClInclude Include="Source\LightEntityManager.hpp" />
     <ClInclude Include="Source\Logger.hpp" />
-    <ClInclude Include="Source\ModelEditor.hpp" />
     <ClInclude Include="Source\MousePicker.hpp" />
     <ClInclude Include="Source\OBJLoader.hpp" />
     <ClInclude Include="Source\OpenGLBuffer.hpp" />
@@ -238,8 +238,9 @@
     <ClCompile Include="Source\DepthRenderer.cpp" />
     <ClCompile Include="Source\EngineController.cpp" />
     <ClCompile Include="Source\BottomViewportController.cpp" />
+    <ClCompile Include="Source\EngineGuiScrollingList.cpp" />
     <ClCompile Include="Source\LeftViewportController.cpp" />
-    <ClCompile Include="Source\ModelEditorr.cpp" />
+    <ClCompile Include="Source\ModelEditor.cpp" />
     <ClCompile Include="Source\RightViewportController.cpp" />
     <ClCompile Include="Source\TopViewportController.cpp" />
     <ClCompile Include="Source\EngineGuiButton.cpp" />
@@ -268,8 +269,6 @@
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\RenderEngine_capture.cpp" />
     <ClCompile Include="Source\RenderEngine_render.cpp" />
-    <ClCompile Include="Source\ModelEditor.cpp" />
-    <ClCompile Include="Source\ModelEditor_updates.cpp" />
     <ClCompile Include="Source\MousePicker.cpp" />
     <ClCompile Include="Source\ShaderBus.cpp" />
     <ClCompile Include="Source\SkyEntity.cpp" />

@@ -1,6 +1,6 @@
-#include "EngineGuiWritefield.hpp"
+#include "EngineGuiWriteField.hpp"
 
-EngineGuiWritefield::EngineGuiWritefield(
+EngineGuiWriteField::EngineGuiWriteField(
 	FabiEngine3D& fe3d, const string& parentID, const string& ID, vec2 position, vec2 size, 
 	vec3 color, vec3 hoverColor, vec3 textColor, vec3 textHoverColor) :
 	EngineGuiButton(fe3d, parentID, ID, position, size, color, hoverColor, "|", textColor, textHoverColor, false, true)
@@ -8,34 +8,34 @@ EngineGuiWritefield::EngineGuiWritefield(
 
 }
 
-void EngineGuiWritefield::update(float delta, bool hoverable)
+void EngineGuiWriteField::update(float delta, bool hoverable)
 {
 	_updateHovering(hoverable && !_isActive);
 	_updateActivation();
 	_updateTyping(delta);
 }
 
-void EngineGuiWritefield::setActive(bool active)
+void EngineGuiWriteField::setActive(bool active)
 {
 	_isActive = active;
 }
 
-bool EngineGuiWritefield::cancelledInput()
+bool EngineGuiWriteField::cancelledInput()
 {
 	return _cancelledInput;
 }
 
-bool EngineGuiWritefield::confirmedInput()
+bool EngineGuiWriteField::confirmedInput()
 {
 	return _confirmedInput;
 }
 
-string EngineGuiWritefield::getTextContent()
+string EngineGuiWriteField::getTextContent()
 {
 	return _currentTextContent;
 }
 
-void EngineGuiWritefield::_updateActivation()
+void EngineGuiWriteField::_updateActivation()
 {
 	if (_isHovered)
 	{
@@ -46,7 +46,7 @@ void EngineGuiWritefield::_updateActivation()
 	}
 }
 
-void EngineGuiWritefield::_updateTyping(float delta)
+void EngineGuiWriteField::_updateTyping(float delta)
 {
 	if (_isActive)
 	{

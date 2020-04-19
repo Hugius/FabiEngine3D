@@ -3,10 +3,10 @@
 #include "FabiEngine3D.hpp"
 #include "EngineGuiButton.hpp"
 
-class EngineGuiWritefield final : public EngineGuiButton
+class EngineGuiWriteField final : public EngineGuiButton
 {
 public:
-	EngineGuiWritefield(FabiEngine3D& fe3d, const string& parentID, const string& ID, vec2 position, vec2 size, vec3 color, vec3 hoverColor, vec3 textColor, vec3 textHoverColor);
+	EngineGuiWriteField(FabiEngine3D& fe3d, const string& parentID, const string& ID, vec2 position, vec2 size, vec3 color, vec3 hoverColor, vec3 textColor, vec3 textHoverColor);
 
 	void update(float delta, bool hoverable) override;
 	void setActive(bool active);

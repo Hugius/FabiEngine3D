@@ -15,8 +15,8 @@ void TopViewportController::update(float delta)
 			if (!_creatingProject)
 			{
 				_gui->getGlobalScreen()->addTextfield("newProjectName", vec2(0.0f, 0.1f), vec2(0.3f, 0.1f), "Enter project name:", vec3(1.0f));
-				_gui->getGlobalScreen()->addWritefield("newProjectName", vec2(0.0f, 0.0f), vec2(0.5f, 0.1f), vec3(0.25f), vec3(0.5f), vec3(1.0f), vec3(0.0f));
-				_gui->getGlobalScreen()->getWritefield("newProjectName")->setActive(true);
+				_gui->getGlobalScreen()->addWriteField("newProjectName", vec2(0.0f, 0.0f), vec2(0.5f, 0.1f), vec3(0.25f), vec3(0.5f), vec3(1.0f), vec3(0.0f));
+				_gui->getGlobalScreen()->getWriteField("newProjectName")->setActive(true);
 				_gui->setFocus(true);
 				_creatingProject = true;
 			}
@@ -52,14 +52,14 @@ void TopViewportController::_updateProjectCreation()
 	if (_creatingProject)
 	{
 		// Check if pressed ESCAPE or ENTER
-		if (_gui->getGlobalScreen()->getWritefield("newProjectName")->cancelledInput() ||
-			_gui->getGlobalScreen()->getWritefield("newProjectName")->confirmedInput())
+		if (_gui->getGlobalScreen()->getWriteField("newProjectName")->cancelledInput() ||
+			_gui->getGlobalScreen()->getWriteField("newProjectName")->confirmedInput())
 		{
 			// Extract new name
-			string projectName = _gui->getGlobalScreen()->getWritefield("newProjectName")->getTextContent();
+			string projectName = _gui->getGlobalScreen()->getWriteField("newProjectName")->getTextContent();
 
 			// Create new project
-			if (_gui->getGlobalScreen()->getWritefield("newProjectName")->confirmedInput())
+			if (_gui->getGlobalScreen()->getWriteField("newProjectName")->confirmedInput())
 			{
 
 			}
@@ -68,7 +68,7 @@ void TopViewportController::_updateProjectCreation()
 			_creatingProject = false;
 			_gui->setFocus(false);
 			_gui->getGlobalScreen()->deleteTextfield("newProjectName");
-			_gui->getGlobalScreen()->deleteWritefield("newProjectName");
+			_gui->getGlobalScreen()->deleteWriteField("newProjectName");
 		}
 	}
 }

@@ -2,8 +2,13 @@
 
 EngineGuiScrollingList::EngineGuiScrollingList(
 	FabiEngine3D& fe3d, const string& parentID, const string& ID, vec2 position, vec2 size, vec3 color,
-	vec3 buttonColor, vec3 buttonHoverColor, vec3 textColor, vec3 textHoverColor) :
-	EngineGuiRectangle(fe3d, parentID, ID, position, size, color)
+	vec3 buttonColor, vec3 buttonHoverColor, vec3 textColor, vec3 textHoverColor, float charWidth) :
+	EngineGuiRectangle(fe3d, parentID, ID, position, size, color),
+	_buttonColor(buttonColor),
+	_buttonHoverColor(buttonHoverColor),
+	_textColor(textColor),
+	_textHoverColor(textHoverColor),
+	_charWidth(charWidth)
 {
 
 }
@@ -18,7 +23,7 @@ void EngineGuiScrollingList::update(float delta, bool hoverable)
 
 void EngineGuiScrollingList::addButton(const string& ID, string textContent)
 {
-	vec4 dimensions = _convertDimensions(vec2(0.0f), vec2(1.5f, 0.1f));
+	vec4 dimensions = _convertDimensions(vec2(0.0f, 0.9f - (_buttons.size() * 0.15f)), vec2(_charWidth * textContent.size(), 0.1f));
 	_buttons.push_back(make_shared<EngineGuiButton>(_fe3d, _ID, ID, vec2(dimensions.x, dimensions.y), vec2(dimensions.z, dimensions.w), _buttonColor, _buttonHoverColor, textContent, _textColor, _textHoverColor));
 }
 
@@ -108,6 +113,8 @@ void EngineGuiScrollingList::_updateScolling()
 	{
 
 	}
+
+	// Update
 }
 
 vec4 EngineGuiScrollingList::_convertDimensions(vec2 position, vec2 size)

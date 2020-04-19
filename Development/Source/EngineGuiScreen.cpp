@@ -20,8 +20,8 @@ void EngineGuiScreen::update(float delta, bool hoverable)
 			scrollingList->show();
 		}
 
-		// Writefields show
-		for (auto& writefield : _writefields)
+		// WriteFields show
+		for (auto& writefield : _writeFields)
 		{
 			writefield->show();
 		}
@@ -60,7 +60,7 @@ void EngineGuiScreen::update(float delta, bool hoverable)
 		}
 
 		// Update writefields
-		for (auto& writefield : _writefields)
+		for (auto& writefield : _writeFields)
 		{
 			writefield->update(delta, hoverable);
 
@@ -91,8 +91,8 @@ void EngineGuiScreen::update(float delta, bool hoverable)
 			scrollingList->hide();
 		}
 
-		// Writefields hide
-		for (auto& writefield : _writefields)
+		// WriteFields hide
+		for (auto& writefield : _writeFields)
 		{
 			writefield->hide();
 		}
@@ -138,16 +138,16 @@ const string& EngineGuiScreen::getParentID()
 }
 
 void EngineGuiScreen::addScrollingList(const string& ID, vec2 position, vec2 size, vec3 color,
-	vec3 buttonColor, vec3 buttonHoverColor, vec3 textColor, vec3 textHoverColor)
+	vec3 buttonColor, vec3 buttonHoverColor, vec3 textColor, vec3 textHoverColor, float charWidth)
 {
 	auto dimensions = _convertDimensions(position, size);
-	_scrollingLists.push_back(make_shared<EngineGuiScrollingList>(_fe3d, _ID, ID, vec2(dimensions.x, dimensions.y), vec2(dimensions.z, dimensions.w), color, buttonColor, buttonHoverColor, textColor, textHoverColor));
+	_scrollingLists.push_back(make_shared<EngineGuiScrollingList>(_fe3d, _ID, ID, vec2(dimensions.x, dimensions.y), vec2(dimensions.z, dimensions.w), color, buttonColor, buttonHoverColor, textColor, textHoverColor, charWidth));
 }
 
-void EngineGuiScreen::addWritefield(const string& ID, vec2 position, vec2 size, vec3 color, vec3 hoverColor, vec3 textColor, vec3 textHoverColor)
+void EngineGuiScreen::addWriteField(const string& ID, vec2 position, vec2 size, vec3 color, vec3 hoverColor, vec3 textColor, vec3 textHoverColor)
 {
 	auto dimensions = _convertDimensions(position, size);
-	_writefields.push_back(make_shared<EngineGuiWritefield>(_fe3d, _ID, ID, vec2(dimensions.x, dimensions.y), vec2(dimensions.z, dimensions.w), color, hoverColor, textColor, textHoverColor));
+	_writeFields.push_back(make_shared<EngineGuiWriteField>(_fe3d, _ID, ID, vec2(dimensions.x, dimensions.y), vec2(dimensions.z, dimensions.w), color, hoverColor, textColor, textHoverColor));
 }
 
 void EngineGuiScreen::addButton(const string& ID, vec2 position, vec2 size, vec3 color, vec3 hoverColor, string textContent, vec3 textColor, vec3 textHoverColor)
@@ -181,9 +181,9 @@ shared_ptr<EngineGuiScrollingList> EngineGuiScreen::getScrollingList(const strin
 	return nullptr;
 }
 
-shared_ptr<EngineGuiWritefield> EngineGuiScreen::getWritefield(const string& ID)
+shared_ptr<EngineGuiWriteField> EngineGuiScreen::getWriteField(const string& ID)
 {
-	for (auto& writefield : _writefields)
+	for (auto& writefield : _writeFields)
 	{
 		if (ID == writefield->getID())
 		{
@@ -233,14 +233,14 @@ shared_ptr<EngineGuiTextfield> EngineGuiScreen::getTextfield(const string& ID)
 	return nullptr;
 }
 
-vector<shared_ptr<EngineGuiScrollingList>>& EngineGuiScreen::getScrollingFields()
+vector<shared_ptr<EngineGuiScrollingList>>& EngineGuiScreen::getScrollingLists()
 {
 	return _scrollingLists;
 }
 
-vector<shared_ptr<EngineGuiWritefield>>& EngineGuiScreen::getWritefields()
+vector<shared_ptr<EngineGuiWriteField>>& EngineGuiScreen::getWriteFields()
 {
-	return _writefields;
+	return _writeFields;
 }
 
 vector<shared_ptr<EngineGuiButton>>& EngineGuiScreen::getButtons()
@@ -274,20 +274,20 @@ void EngineGuiScreen::deleteScrollingList(const string& ID)
 	_fe3d.logger_throwError("ScrollingList \"" + ID + "\" not deleted!");
 }
 
-void EngineGuiScreen::deleteWritefield(const string& ID)
+void EngineGuiScreen::deleteWriteField(const string& ID)
 {
 	// Delete writefield
-	for (size_t i = 0; i < _writefields.size(); i++)
+	for (size_t i = 0; i < _writeFields.size(); i++)
 	{
-		if (ID == _writefields[i]->getID())
+		if (ID == _writeFields[i]->getID())
 		{
-			_writefields.erase(_writefields.begin() + i);
+			_writeFields.erase(_writeFields.begin() + i);
 			return;
 		}
 	}
 
 	// Error
-	_fe3d.logger_throwError("Writefield \"" + ID + "\" not deleted!");
+	_fe3d.logger_throwError("WriteField \"" + ID + "\" not deleted!");
 }
 
 void EngineGuiScreen::deleteButton(const string& ID)

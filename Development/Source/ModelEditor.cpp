@@ -37,8 +37,8 @@ void ModelEditor::update(float delta)
 			if (_hoveredItemID == "addModel")
 			{
 				_gui->getGlobalScreen()->addTextfield("newModelName", vec2(0.0f, 0.1f), vec2(0.3f, 0.1f), "Enter model name:", vec3(1.0f));
-				_gui->getGlobalScreen()->addWritefield("newModelName", vec2(0.0f, 0.0f), vec2(0.5f, 0.1f), vec3(0.25f), vec3(0.5f), vec3(1.0f), vec3(0.0f));
-				_gui->getGlobalScreen()->getWritefield("newModelName")->setActive(true);
+				_gui->getGlobalScreen()->addWriteField("newModelName", vec2(0.0f, 0.0f), vec2(0.5f, 0.1f), vec3(0.25f), vec3(0.5f), vec3(1.0f), vec3(0.0f));
+				_gui->getGlobalScreen()->getWriteField("newModelName")->setActive(true);
 				_gui->setFocus(true);
 				_modelCreationEnabled = true;
 			}
@@ -107,14 +107,14 @@ void ModelEditor::_updateModelCreation()
 	if (_modelCreationEnabled)
 	{
 		// Check if pressed ESCAPE or ENTER
-		if (_gui->getGlobalScreen()->getWritefield("newModelName")->cancelledInput() ||
-			_gui->getGlobalScreen()->getWritefield("newModelName")->confirmedInput())
+		if (_gui->getGlobalScreen()->getWriteField("newModelName")->cancelledInput() ||
+			_gui->getGlobalScreen()->getWriteField("newModelName")->confirmedInput())
 		{
 			// Extract new name
-			string modelName = _gui->getGlobalScreen()->getWritefield("newModelName")->getTextContent();
+			string modelName = _gui->getGlobalScreen()->getWriteField("newModelName")->getTextContent();
 
 			// Create new project
-			if (_gui->getGlobalScreen()->getWritefield("newModelName")->confirmedInput())
+			if (_gui->getGlobalScreen()->getWriteField("newModelName")->confirmedInput())
 			{
 				// If modelname not existing yet
 				if (std::find(_modelNames.begin(), _modelNames.end(), modelName) == _modelNames.end())
@@ -146,7 +146,7 @@ void ModelEditor::_updateModelCreation()
 			_modelCreationEnabled = false;
 			_gui->setFocus(false);
 			_gui->getGlobalScreen()->deleteTextfield("newModelName");
-			_gui->getGlobalScreen()->deleteWritefield("newModelName");
+			_gui->getGlobalScreen()->deleteWriteField("newModelName");
 		}
 	}
 }

@@ -220,9 +220,6 @@
     <ClCompile Include="Source\EngineGuiRectangle.cpp">
       <Filter>src\GUI System</Filter>
     </ClCompile>
-    <ClCompile Include="Source\EngineGuiWritefield.cpp">
-      <Filter>src\GUI System</Filter>
-    </ClCompile>
     <ClCompile Include="Source\EngineGuiGlobalScreen.cpp">
       <Filter>src\GUI System</Filter>
     </ClCompile>
@@ -254,6 +251,9 @@
       <Filter>src\Editor System\Model Editor</Filter>
     </ClCompile>
     <ClCompile Include="Source\EngineGuiScrollingList.cpp">
+      <Filter>src\GUI System</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EngineGuiWriteField.cpp">
       <Filter>src\GUI System</Filter>
     </ClCompile>
   </ItemGroup>
@@ -465,9 +465,6 @@
     <ClInclude Include="Source\EngineGuiRectangle.hpp">
       <Filter>src\GUI System</Filter>
     </ClInclude>
-    <ClInclude Include="Source\EngineGuiWritefield.hpp">
-      <Filter>src\GUI System</Filter>
-    </ClInclude>
     <ClInclude Include="Source\EngineGuiGlobalScreen.hpp">
       <Filter>src\GUI System</Filter>
     </ClInclude>
@@ -496,6 +493,9 @@
       <Filter>src\Editor System\Model Editor</Filter>
     </ClInclude>
     <ClInclude Include="Source\EngineGuiScrollingList.hpp">
+      <Filter>src\GUI System</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EngineGuiWriteField.hpp">
       <Filter>src\GUI System</Filter>
     </ClInclude>
   </ItemGroup>

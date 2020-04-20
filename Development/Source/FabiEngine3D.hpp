@@ -255,6 +255,8 @@ public:
 	void guiEntity_scale(const string& ID, vec2 size);
 	void guiEntity_setColor(const string& ID, vec3 color);
 	void guiEntity_setAlpha(const string& ID, float alpha);
+	void guiEntity_setMinPosition(const string& ID, vec2 minPos);
+	void guiEntity_setMaxPosition(const string& ID, vec2 maxPos);
 	vec2 guiEntity_getPosition(const string& ID);
 	float guiEntity_getRotation(const string& ID);
 	vec2 guiEntity_getSize(const string& ID);
@@ -283,6 +285,8 @@ public:
 	void textEntity_move(const string& ID, vec2 position);
 	void textEntity_rotate(const string& ID, float rotation);
 	void textEntity_scale(const string& ID, vec2 size);
+	void textEntity_setMinPosition(const string& ID, vec2 minPos);
+	void textEntity_setMaxPosition(const string& ID, vec2 maxPos);
 	vec2 textEntity_getPosition(const string& ID);
 	float textEntity_getRotation(const string& ID);
 	vec2 textEntity_getSize(const string& ID);
@@ -406,6 +410,9 @@ public:
 	vec2 misc_convertFromNDC(vec2 pos);
 	ivec2 misc_convertToScreenCoords(vec2 pos);
 	vec2 misc_convertFromScreenCoords(ivec2 pos);
+	vec2 misc_getViewportPosition();
+	vec2 misc_getViewportSize();
+	bool misc_isMouseInsideViewport();
 
 	// World interface
 	bool world_check(const string& worldName);

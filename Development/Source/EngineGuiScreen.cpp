@@ -55,7 +55,14 @@ void EngineGuiScreen::update(float delta, bool hoverable)
 			// Set hovered button ID
 			if (scrollingList->isHovered())
 			{
-				_hoveredItemID = scrollingList->getID();
+				if (scrollingList->getHoveredButtonID() == "")
+				{
+					_hoveredItemID = scrollingList->getID();
+				}
+				else
+				{
+					_hoveredItemID = scrollingList->getHoveredButtonID();
+				}
 			}
 		}
 

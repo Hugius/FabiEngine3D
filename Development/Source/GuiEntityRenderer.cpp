@@ -1,4 +1,5 @@
 #include "GuiEntityRenderer.hpp"
+#include "Configuration.hpp"
 
 void GuiEntityRenderer::bind()
 {
@@ -28,6 +29,9 @@ void GuiEntityRenderer::render(const GuiEntity * entity)
 			_shader.uploadUniform("u_mirrorHor",       entity->isMirroredHorizonally());
 			_shader.uploadUniform("u_mirrorVer",       entity->isMirroredVertically());
 			_shader.uploadUniform("u_color",           entity->getColor());
+			_shader.uploadUniform("u_windowSize",	   Config::getInst().getWindowSize());
+			_shader.uploadUniform("u_minPosition",	   entity->getMinPosition());
+			_shader.uploadUniform("u_maxPosition",	   entity->getMaxPosition());
 			_shader.uploadUniform("u_alpha",		   entity->getAlpha());
 			_shader.uploadUniform("u_isDepthEntity",   entity->isDepthEntity());
 			_shader.uploadUniform("u_noTexture",	   entity->getDiffuseMap() == 0);

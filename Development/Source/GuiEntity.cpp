@@ -65,6 +65,16 @@ void GuiEntity::scale(vec2 val, float delta)
 	_scaling += val * delta;
 }
 
+void GuiEntity::setMinPosition(vec2 val)
+{
+	_minPosition = val;
+}
+
+void GuiEntity::setMaxPosition(vec2 val)
+{
+	_maxPosition = val;
+}
+
 const GLuint GuiEntity::getDiffuseMap() const
 {
 	return _diffuseMap;
@@ -108,6 +118,16 @@ const float GuiEntity::getRotation() const
 const vec2 GuiEntity::getScaling() const
 {
 	return _scaling;
+}
+
+const vec2 GuiEntity::getMinPosition() const
+{
+	return _minPosition;
+}
+
+const vec2 GuiEntity::getMaxPosition() const
+{
+	return _maxPosition;
 }
 
 void GuiEntity::setDepthEntity(bool val)

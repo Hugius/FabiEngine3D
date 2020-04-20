@@ -28,6 +28,8 @@ private:
 	vec4 _convertDimensions(vec2 position, vec2 size);
 
 	float _delta = 0.0f;
+	float _scrollingOffset = 0.0f;
+	float _scrollingSpeed = 0.0f;
 
 	const vec3 _buttonColor;
 	const vec3 _buttonHoverColor;

@@ -1227,6 +1227,16 @@ void FabiEngine3D::guiEntity_setAlpha(const string& ID, float alpha)
 	_core->_guiEntityManager.getEntity(ID)->setAlpha(alpha);
  }
 
+void FabiEngine3D::guiEntity_setMinPosition(const string& ID, vec2 minPos)
+{
+	_core->_guiEntityManager.getEntity(ID)->setMinPosition(minPos);
+}
+
+void FabiEngine3D::guiEntity_setMaxPosition(const string& ID, vec2 maxPos)
+{
+	_core->_guiEntityManager.getEntity(ID)->setMaxPosition(maxPos);
+}
+
 vec2 FabiEngine3D::guiEntity_getPosition(const string& ID)
 {
 	return _core->_guiEntityManager.getEntity(ID)->getTranslation();
@@ -1342,6 +1352,16 @@ void FabiEngine3D::textEntity_rotate(const string& ID, float rotation)
 void FabiEngine3D::textEntity_scale(const string& ID, vec2 size)
 {
 	_core->_textEntityManager.getEntity(ID)->scale(size, _core->_timer.getDeltaTime());
+}
+
+void FabiEngine3D::textEntity_setMinPosition(const string& ID, vec2 minPos)
+{
+	_core->_textEntityManager.getEntity(ID)->setMinPosition(minPos);
+}
+
+void FabiEngine3D::textEntity_setMaxPosition(const string& ID, vec2 maxPos)
+{
+	_core->_textEntityManager.getEntity(ID)->setMaxPosition(maxPos);
 }
 
 vec2 FabiEngine3D::textEntity_getPosition(const string& ID)
@@ -1925,7 +1945,9 @@ string FabiEngine3D::misc_vec2str(vec4 vec)
 
 ivec2 FabiEngine3D::misc_getMousePos()
 {
-	return _core->_windowManager.getMousePos();
+	ivec2 mousePos = _core->_windowManager.getMousePos();
+
+	return ivec2(mousePos.x, misc_getWindowHeight() - mousePos.y);
 }
 
 vec2 FabiEngine3D::misc_convertToNDC(vec2 pos)
@@ -1950,7 +1972,6 @@ ivec2 FabiEngine3D::misc_convertToScreenCoords(vec2 pos)
 {
 	float x = float(pos.x) * float(misc_getWindowWidth());
 	float y = float(pos.y) * float(misc_getWindowHeight());
-	y = float(misc_getWindowHeight()) - y;
 
 	return ivec2(int(x), int(y));
 }
@@ -1959,9 +1980,37 @@ vec2 FabiEngine3D::misc_convertFromScreenCoords(ivec2 pos)
 {
 	float x = float(pos.x) / float(misc_getWindowWidth());
 	float y = float(pos.y) / float(misc_getWindowHeight());
-	y = 1.0f - y;
 
 	return vec2(x, y);
+}
+
+vec2 FabiEngine3D::misc_getViewportPosition()
+{
+	return Config::getInst().getVpPos();
+}
+
+vec2 FabiEngine3D::misc_getViewportSize()
+{
+	return Config::getInst().getVpSize();
+}
+
+bool FabiEngine3D::misc_isMouseInsideViewport()
+{
+	// Variables for calculating the scrolling speed
+	vec2 mousePos = misc_getMousePos();
+	vec2 viewportPos = misc_getViewportPosition();
+	vec2 viewportSize = misc_getViewportSize();
+
+	// Checking if cursor is inside scrolling list
+	if (mousePos.x > viewportPos.x && mousePos.x < viewportPos.x + viewportSize.x)
+	{
+		if (mousePos.y > viewportPos.y && mousePos.y < viewportPos.y + viewportSize.y)
+		{
+			return true;
+		}
+	}
+
+	return false;
 }
 
 bool FabiEngine3D::world_check(const string& worldName)

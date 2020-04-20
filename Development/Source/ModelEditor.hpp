@@ -25,7 +25,6 @@ private:
 	void _loadObjFileNames();
 	void _initializeEditor();
 	void _updateModelCreation();
-	void _updateModelChoosing();
 	void _updateModelEditing();
 	void _updateModelRemoval();
 	void _loadOBJ();
@@ -34,7 +33,6 @@ private:
 	void _loadReflectionMap();
 
 	bool _modelCreationEnabled = false;
-	bool _modelChoosingEnabled = false;
 	bool _modelEditingEnabled = false;
 	bool _modelRemovalEnabled = false;
 

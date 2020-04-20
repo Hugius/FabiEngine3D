@@ -44,7 +44,6 @@ void ModelEditor::update(float delta)
 			}
 			else if (_hoveredItemID == "editModel")
 			{
-				_modelChoosingEnabled = true;
 				_gui->getViewport("leftViewport")->getWindow("mainWindow")->setActiveScreen("modelChoiceScreen");
 			}
 			else if (_hoveredItemID == "deleteModel")
@@ -62,6 +61,17 @@ void ModelEditor::update(float delta)
 			if (_hoveredItemID == "back")
 			{
 				_gui->getViewport("leftViewport")->getWindow("mainWindow")->setActiveScreen("modelManagementScreen");
+			}
+			else if (std::find(_modelNames.begin(), _modelNames.end(), _hoveredItemID) != _modelNames.end()) // Check if model selected
+			{
+				_currentModelName = _hoveredItemID;
+				_gui->getViewport("leftViewport")->getWindow("mainWindow")->setActiveScreen("modelEditingScreen");
+
+				// Check if game entity exists
+				if (_fe3d.gameEntity_isExisting(_currentModelName))
+				{
+					_fe3d.gameEntity_show(_currentModelName);
+				}
 			}
 		}
 		else if (_activeScreenID == "modelEditingScreen") // Model editing screen
@@ -84,10 +94,10 @@ void ModelEditor::update(float delta)
 			}
 			else if (_hoveredItemID == "back")
 			{
-				_gui->getViewport("leftViewport")->getWindow("mainWindow")->setActiveScreen("modelChoiceScreen");
+				_gui->getViewport("leftViewport")->getWindow("mainWindow")->setActiveScreen("modelManagementScreen");
 				_fe3d.textEntity_hide(_modelNameTextfieldEntityID);
 
-				// Check if game entiy loaded
+				// Check if game entity exists
 				if (_fe3d.gameEntity_isExisting(_currentModelName))
 				{
 					_fe3d.gameEntity_hide(_currentModelName);
@@ -124,6 +134,9 @@ void ModelEditor::_updateModelCreation()
 					_currentModelName = modelName;
 					_modelEditingEnabled = true;
 
+					// Add scrolling list button
+					_gui->getViewport("leftViewport")->getWindow("mainWindow")->getScreen("modelChoiceScreen")->getScrollingList("modelList")->addButton(modelName, modelName);
+
 					// Show model name
 					_fe3d.textEntity_setTextContent(_modelNameTextfieldEntityID, "Model: " + modelName, 0.025f);
 					_fe3d.textEntity_show(_modelNameTextfieldEntityID);
@@ -151,14 +164,6 @@ void ModelEditor::_updateModelCreation()
 	}
 }
 
-void ModelEditor::_updateModelChoosing()
-{
-	if (_modelChoosingEnabled)
-	{
-		
-	}
-}
-
 void ModelEditor::_updateModelEditing()
 {
 	if (_modelEditingEnabled)
@@ -172,7 +177,10 @@ void ModelEditor::_updateModelEditing()
 
 		// Update scrolling
 		static float scollSpeed = 0.0f;
-		scollSpeed += float(-_fe3d.input_getMouseWheelY() / 100.0f);
+		if (_fe3d.misc_isMouseInsideViewport()) // Only if cursor inside 3d screen
+		{
+			scollSpeed += float(-_fe3d.input_getMouseWheelY() / 100.0f);
+		}
 		scollSpeed *= 0.998f;
 		scollSpeed = std::clamp(scollSpeed, -1.0f, 1.0f);
 		_cameraDistance += scollSpeed;
@@ -181,9 +189,12 @@ void ModelEditor::_updateModelEditing()
 		// Check if LMB pressed
 		if (_fe3d.input_getMouseDown(Input::MOUSE_BUTTON_MIDDLE))
 		{
-			totalCursorDifference.x += difference.x * _cameraSpeed;
-			totalCursorDifference.y += difference.y * _cameraSpeed;
-			totalCursorDifference.y = std::clamp(totalCursorDifference.y, 0.0f, 1.0f);
+			if (_fe3d.misc_isMouseInsideViewport()) // Only if cursor inside 3d screen
+			{
+				totalCursorDifference.x += difference.x * _cameraSpeed;
+				totalCursorDifference.y += difference.y * _cameraSpeed;
+				totalCursorDifference.y = std::clamp(totalCursorDifference.y, 0.0f, 1.0f);
+			}
 		}
 
 		// Calculate new camera position
@@ -296,7 +307,7 @@ void ModelEditor::_initializeEditor()
 	_fe3d.gfx_addDirectionalLighting(vec3(1000.0f), 1.0f);
 	_fe3d.gameEntity_add("grid", "Engine\\OBJs\\plane", vec3(0.0f), vec3(0.0f), vec3(100.0f, 1.0f, 100.0f));
 	_fe3d.gameEntity_setDiffuseMap("grid", "Engine\\Textures\\grass");
-	_fe3d.gameEntity_setUvRepeat("grid", 25.0f);
+	_fe3d.gameEntity_setUvRepeat("grid", 10.0f);
 }
 
 vector<string>& ModelEditor::getTotalObjFileNames()

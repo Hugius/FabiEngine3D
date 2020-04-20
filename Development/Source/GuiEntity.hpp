@@ -32,6 +32,8 @@ public:
 	void translate(vec2 val, float delta);
 	void rotate(float val, float delta);
 	void scale(vec2 val, float delta);
+	void setMinPosition(vec2 val);
+	void setMaxPosition(vec2 val);
 
 	// Texture & color
 	const GLuint getDiffuseMap() const;
@@ -45,6 +47,8 @@ public:
 	const vec2 getTranslation() const;
 	const float getRotation() const;
 	const vec2 getScaling() const;
+	const vec2 getMinPosition() const;
+	const vec2 getMaxPosition() const;
 
 	// Other
 	void setDepthEntity(bool val);
@@ -60,6 +64,9 @@ private:
 	vec2  _translation = vec2(0.0f);
 	float _rotation    = 0.0f;
 	vec2  _scaling     = vec2(1.0f);
+
+	vec2 _minPosition = vec2(-1.0f);
+	vec2 _maxPosition = vec2(1.0f);
 
 	float _alpha = 1.0f;
 

@@ -11,15 +11,22 @@ void EngineGuiGlobalScreen::update(float delta)
 	// Set to default
 	_hoveredItemID = "";
 
-	// Update buttons
-	for (auto& button : _buttons)
+	// Update scrolling lists
+	for (auto& scrollingList : _scrollingLists)
 	{
-		button->update(delta, true);
+		scrollingList->update(delta, true);
 
 		// Set hovered button ID
-		if (button->isHovered())
+		if (scrollingList->isHovered())
 		{
-			_hoveredItemID = button->getID();
+			if (scrollingList->getHoveredButtonID() == "")
+			{
+				_hoveredItemID = scrollingList->getID();
+			}
+			else
+			{
+				_hoveredItemID = scrollingList->getHoveredButtonID();
+			}
 		}
 	}
 
@@ -32,6 +39,18 @@ void EngineGuiGlobalScreen::update(float delta)
 		if (writefield->isHovered())
 		{
 			_hoveredItemID = writefield->getID();
+		}
+	}
+
+	// Update buttons
+	for (auto& button : _buttons)
+	{
+		button->update(delta, true);
+
+		// Set hovered button ID
+		if (button->isHovered())
+		{
+			_hoveredItemID = button->getID();
 		}
 	}
 }

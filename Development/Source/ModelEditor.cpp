@@ -44,11 +44,13 @@ void ModelEditor::update(float delta)
 			}
 			else if (_hoveredItemID == "editModel")
 			{
+				_modelEditingEnabled = true;
 				_gui->getViewport("leftViewport")->getWindow("mainWindow")->setActiveScreen("modelChoiceScreen");
 			}
 			else if (_hoveredItemID == "deleteModel")
 			{
 				_modelRemovalEnabled = true;
+				_gui->getViewport("leftViewport")->getWindow("mainWindow")->setActiveScreen("modelChoiceScreen");
 			}
 			else if (_hoveredItemID == "back")
 			{
@@ -64,13 +66,40 @@ void ModelEditor::update(float delta)
 			}
 			else if (std::find(_modelNames.begin(), _modelNames.end(), _hoveredItemID) != _modelNames.end()) // Check if model selected
 			{
-				_currentModelName = _hoveredItemID;
-				_gui->getViewport("leftViewport")->getWindow("mainWindow")->setActiveScreen("modelEditingScreen");
-
-				// Check if game entity exists
-				if (_fe3d.gameEntity_isExisting(_currentModelName))
+				if (_modelEditingEnabled)
 				{
-					_fe3d.gameEntity_show(_currentModelName);
+					// Show game entity
+					if (_fe3d.gameEntity_isExisting(_hoveredItemID))
+					{
+						_fe3d.gameEntity_show(_hoveredItemID);
+					}
+
+					// Set new current model name
+					_currentModelName = _hoveredItemID;
+					_gui->getViewport("leftViewport")->getWindow("mainWindow")->setActiveScreen("modelEditingScreen");
+				}
+				else if (_modelRemovalEnabled)
+				{
+					// Remove game entity
+					if (_fe3d.gameEntity_isExisting(_hoveredItemID))
+					{
+						_fe3d.gameEntity_delete(_hoveredItemID);
+					}
+
+					// Delete from model names vector
+					for (size_t i = 0; i < _modelNames.size(); i++)
+					{
+						if (_modelNames[i] == _hoveredItemID)
+						{
+							_modelNames.erase(_modelNames.begin() + i);
+						}
+					}
+
+					// Delete choice button and go back to management screen
+					_gui->getViewport("leftViewport")->getWindow("mainWindow")->getScreen("modelChoiceScreen")->getScrollingList("modelList")->deleteButton(_hoveredItemID);
+					_gui->getViewport("leftViewport")->getWindow("mainWindow")->setActiveScreen("modelManagementScreen");
+					_currentModelName = "";
+					_modelRemovalEnabled = false;
 				}
 			}
 		}
@@ -94,14 +123,16 @@ void ModelEditor::update(float delta)
 			}
 			else if (_hoveredItemID == "back")
 			{
-				_gui->getViewport("leftViewport")->getWindow("mainWindow")->setActiveScreen("modelManagementScreen");
-				_fe3d.textEntity_hide(_modelNameTextfieldEntityID);
-
-				// Check if game entity exists
+				// Hide game entity
 				if (_fe3d.gameEntity_isExisting(_currentModelName))
 				{
 					_fe3d.gameEntity_hide(_currentModelName);
 				}
+
+				_currentModelName = "";
+				_modelEditingEnabled = false;
+				_gui->getViewport("leftViewport")->getWindow("mainWindow")->setActiveScreen("modelManagementScreen");
+				_fe3d.textEntity_hide(_modelNameTextfieldEntityID);
 			}
 		}
 	}
@@ -251,21 +282,38 @@ void ModelEditor::_loadDiffuseMap()
 {
 	// Get the loaded filename
 	string texName = _fe3d.misc_getWinExplorerFilename("User\\Assets\\Textures\\DiffuseMaps\\", "PNG");
-	_fe3d.gameEntity_setDiffuseMap(_currentModelName, "User\\Assets\\Textures\\DiffuseMaps\\" + texName.substr(0, texName.size() - 4));
+
+	// Check if user chose a filename
+	if (texName != "")
+	{
+		_fe3d.gameEntity_setDiffuseMap(_currentModelName, "User\\Assets\\Textures\\DiffuseMaps\\" + texName.substr(0, texName.size() - 4));
+	}
 }
 
 void ModelEditor::_loadLightMap()
 {
 	// Get the loaded filename
 	string texName = _fe3d.misc_getWinExplorerFilename("User\\Assets\\Textures\\LightMaps\\", "PNG");
-	_fe3d.gameEntity_setLightMap(_currentModelName, "User\\Assets\\Textures\\LightMaps\\" + texName.substr(0, texName.size() - 4));
+
+	// Check if user chose a filename
+	if (texName != "")
+	{
+		_fe3d.gameEntity_setLightMap(_currentModelName, "User\\Assets\\Textures\\LightMaps\\" + texName.substr(0, texName.size() - 4));
+		_fe3d.gameEntity_setLightmapped(_currentModelName, true);
+	}
 }
 
 void ModelEditor::_loadReflectionMap()
 {
 	// Get the loaded filename
 	string texName = _fe3d.misc_getWinExplorerFilename("User\\Assets\\Textures\\ReflectionMaps\\", "PNG");
-	_fe3d.gameEntity_setReflectionMap(_currentModelName, "User\\Assets\\Textures\\ReflectionMaps\\" + texName.substr(0, texName.size() - 4));
+
+	// Check if user chose a filename
+	if (texName != "")
+	{
+		_fe3d.gameEntity_setReflectionMap(_currentModelName, "User\\Assets\\Textures\\ReflectionMaps\\" + texName.substr(0, texName.size() - 4));
+		_fe3d.gameEntity_setSkyReflective(_currentModelName, true);
+	}
 }
 
 void ModelEditor::_loadObjFileNames()
@@ -303,8 +351,11 @@ void ModelEditor::_initializeEditor()
 	_gui->getViewport("leftViewport")->getWindow("mainWindow")->setActiveScreen("modelManagementScreen");
 	_fe3d.camera_load(90.0f, 0.1f, 1000.0f, vec3(_startingCameraPos), -90.0f, 0.0f);
 	_fe3d.camera_enableLookat(vec3(0.0f));
-	_fe3d.gfx_addAmbientLighting(0.5f);
-	_fe3d.gfx_addDirectionalLighting(vec3(1000.0f), 1.0f);
+	_fe3d.gfx_addAmbientLighting(0.25f);
+	_fe3d.gfx_addDirectionalLighting(vec3(1000.0f), 0.5f);
+	_fe3d.gfx_addLightMapping();
+	_fe3d.gfx_addSkyReflections(0.25f);
+	_fe3d.gfx_addBloom(1.0f, 0.0f, 10);
 	_fe3d.gameEntity_add("grid", "Engine\\OBJs\\plane", vec3(0.0f), vec3(0.0f), vec3(100.0f, 1.0f, 100.0f));
 	_fe3d.gameEntity_setDiffuseMap("grid", "Engine\\Textures\\grass");
 	_fe3d.gameEntity_setUvRepeat("grid", 10.0f);

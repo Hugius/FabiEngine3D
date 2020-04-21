@@ -490,11 +490,37 @@ void FabiEngine3D::gameEntity_setDiffuseMap(const string& ID, const string& file
 void FabiEngine3D::gameEntity_setLightMap(const string& ID, const string& fileName)
 {
 	_core->_gameEntityManager.getEntity(ID)->setLightMap(_core->_texLoader.getTexture(fileName, true, true));
+	_core->_gameEntityManager.getEntity(ID)->setLightMapped(true);
 }
 
 void FabiEngine3D::gameEntity_setReflectionMap(const string& ID, const string& fileName)
 {
 	_core->_gameEntityManager.getEntity(ID)->setReflectionMap(_core->_texLoader.getTexture(fileName, true, true));
+}
+
+void FabiEngine3D::gameEntity_setTransparent(const string& ID, bool enabled)
+{
+	_core->_gameEntityManager.getEntity(ID)->setTransparent(enabled);
+}
+
+void FabiEngine3D::gameEntity_setFaceCulled(const string& ID, bool enabled)
+{
+	_core->_gameEntityManager.getEntity(ID)->setFaceCulled(enabled);
+}
+
+void FabiEngine3D::gameEntity_setLightmapped(const string& ID, bool enabled)
+{
+	_core->_gameEntityManager.getEntity(ID)->setLightMapped(enabled);
+}
+
+void FabiEngine3D::gameEntity_setSkyReflective(const string& ID, bool enabled)
+{
+	_core->_gameEntityManager.getEntity(ID)->setSkyReflective(enabled);
+}
+
+void FabiEngine3D::gameEntity_setSpecularLighted(const string& ID, bool enabled)
+{
+	_core->_gameEntityManager.getEntity(ID)->setSpecular(enabled);
 }
 
 bool FabiEngine3D::gameEntity_isExisting(const string& ID)

@@ -134,6 +134,12 @@ public:
 	void gameEntity_setDiffuseMap(const string& ID, const string& fileName);
 	void gameEntity_setLightMap(const string& ID, const string& fileName);
 	void gameEntity_setReflectionMap(const string& ID, const string& fileName);
+	void gameEntity_setTransparent(const string& ID, bool enabled);
+	void gameEntity_setFaceCulled(const string& ID, bool enabled);
+	void gameEntity_setLightmapped(const string& ID, bool enabled);
+	void gameEntity_setSkyReflective(const string& ID, bool enabled);
+	void gameEntity_setSpecularLighted(const string& ID, bool enabled);
+	void gameEntity_setSceneReflective(const string& ID, bool enabled);
 	bool gameEntity_isExisting(const string& ID);
 	bool gameEntity_isVisible(const string& ID);
 	bool gameEntity_isMultiTextured(const string& ID);
@@ -148,7 +154,6 @@ public:
 	vec3 gameEntity_getSize(const string& ID);
 	void gameEntity_enable(const string& ID);
 	void gameEntity_disable(const string& ID);
-	void gameEntity_setSceneReflective(const string& ID, bool enabled);
 	void gameEntity_setAlpha(const string& ID, float alpha);
 	void gameEntity_setShadowed(const string& ID, bool shadowed);
 	void gameEntity_setColor(const string& ID, vec3 color);

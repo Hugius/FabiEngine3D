@@ -1,4 +1,4 @@
-#include "Configuration.hpp"
+#include "configuration.hpp"
 
 #include <SDL/SDL.h>
 

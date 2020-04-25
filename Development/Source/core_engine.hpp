@@ -1,0 +1,80 @@
+#pragma once
+
+#include "fabi_engine_3d.hpp"
+#include "obj_loader.hpp"
+#include "texture_loader.hpp"
+#include "audio_loader.hpp"
+#include "input_handler.hpp"
+#include "shader_bus.hpp"
+#include "window_manager.hpp"
+#include "camera_manager.hpp"
+#include "render_engine.hpp"
+#include "sky_entity_manager.hpp"
+#include "terrain_entity_manager.hpp"
+#include "water_entity_manager.hpp"
+#include "game_entity_manager.hpp"
+#include "billboard_entity_manager.hpp"
+#include "aabb_entity_manager.hpp"
+#include "light_entity_manager.hpp"
+#include "gui_entity_manager.hpp"
+#include "text_entity_manager.hpp"
+#include "shadow_manager.hpp"
+#include "mouse_picker.hpp"
+#include "model_editor.hpp"
+#include "world_editor.hpp"
+#include "collision_resolver.hpp"
+#include "Timer.hpp"
+#include "audio_manager.hpp"
+#include "audio_player.hpp"
+
+class CoreEngine final
+{
+	friend class FabiEngine3D;
+private:
+	// Core
+	CoreEngine(FabiEngine3D & fe3d);
+	virtual ~CoreEngine();
+
+	// Core instances
+	WindowManager          _windowManager;
+	OBJLoader              _objLoader;
+	TextureLoader          _texLoader;
+	AudioLoader			   _audioLoader;
+	InputHandler           _inputHandler;
+	ShaderBus			   _shaderBus;
+	CameraManager          _cameraManager;
+	RenderEngine           _renderEngine;
+	SkyEntityManager       _skyEntityManager;
+	TerrainEntityManager   _terrainEntityManager;
+	WaterEntityManager     _waterEntityManager;
+	GameEntityManager      _gameEntityManager;
+	BillboardEntityManager _billboardEntityManager;
+	AabbEntityManager      _aabbEntityManager;
+	LightEntityManager     _lightEntityManager;
+	GuiEntityManager       _guiEntityManager;
+	TextEntityManager      _textEntityManager;
+	ShadowManager          _shadowManager;
+	MousePicker            _mousePicker;
+	WorldEditor            _worldEditor;
+	CollisionDetector      _collisionDetector;
+	CollisionResolver      _collisionResolver;
+	Timer                  _timer;
+	AudioManager		   _audioManager;
+	AudioPlayer			   _audioPlayer;
+	
+	// Core functions
+	void _start();
+	void _stop();
+	void _setupApplication();
+	void _updateApplication();
+	void _renderApplication();
+
+	// Misc functions
+	void _updatePerformanceProfiler();
+
+	// Engine interface instance
+	FabiEngine3D & _fe3d;
+
+	bool _isRunning = false;
+	bool _showStats = false;
+};

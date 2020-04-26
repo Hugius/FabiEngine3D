@@ -28,7 +28,6 @@ void SkyEntityRenderer::render(const SkyEntity * entity)
 	{
 		if (entity->isEnabled())
 		{
-			std::cout << "hoi";
 			// Uniforms
 			_shader.uploadUniform("u_mixValue", entity->getMixValue());
 

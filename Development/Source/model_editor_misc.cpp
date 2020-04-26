@@ -14,7 +14,7 @@ ModelEditor::ModelEditor(FabiEngine3D& fe3d, shared_ptr<EngineGuiManager> gui) :
 	_modelNameTextfieldEntityID = _gui->getGlobalScreen()->getTextfield("currentModelName")->getEntityID();
 }
 
-void ModelEditor::_initializeEditor()
+void ModelEditor::_loadGraphics()
 {
 	_fe3d.camera_load(90.0f, 0.1f, 1000.0f, vec3(_startingCameraPos), -90.0f, 0.0f);
 	_fe3d.camera_enableLookat(vec3(0.0f));
@@ -29,6 +29,11 @@ void ModelEditor::_initializeEditor()
 	_fe3d.gameEntity_setUvRepeat("modelEditorGrid", 10.0f);
 	_fe3d.skyEntity_add("modelEditorSky", 0.1f, "Engine\\Textures\\Skybox\\");
 	_fe3d.skyEntity_select("modelEditorSky");
+}
+
+void ModelEditor::_unloadGraphics()
+{
+
 }
 
 void ModelEditor::_loadObjFileNames()

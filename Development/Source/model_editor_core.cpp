@@ -15,7 +15,7 @@ void ModelEditor::update(float delta)
 		{
 			if (_hoveredItemID == "modelEditor")
 			{
-				_initializeEditor();
+				_loadGraphics();
 				_gui->getViewport("leftViewport")->getWindow("mainWindow")->setActiveScreen("modelManagementScreen");
 			}
 		}
@@ -32,64 +32,57 @@ void ModelEditor::update(float delta)
 			else if (_hoveredItemID == "editModel")
 			{
 				_modelChoosingEnabled = true;
+				_modelEditingEnabled = true;
 				_gui->getViewport("leftViewport")->getWindow("mainWindow")->setActiveScreen("modelChoiceScreen");
 			}
 			else if (_hoveredItemID == "deleteModel")
 			{
+				_modelChoosingEnabled = true;
 				_modelRemovalEnabled = true;
 				_gui->getViewport("leftViewport")->getWindow("mainWindow")->setActiveScreen("modelChoiceScreen");
 			}
 			else if (_hoveredItemID == "back")
 			{
 				_gui->getViewport("leftViewport")->getWindow("mainWindow")->setActiveScreen("mainScreen");
-				_fe3d.gameEntity_delete("grid");
+				_fe3d.gameEntity_delete("modelEditorGrid");
 				_fe3d.skyEntity_delete("modelEditorSky");
 			}
 		}
 		else if (_activeScreenID == "modelChoiceScreen") // Model choice screen
 		{
-			if (std::find(_modelNames.begin(), _modelNames.end(), _hoveredItemID) != _modelNames.end()) // Check if model selected
+			if (_modelChoosingEnabled) // Start choosing model
 			{
-				if (_modelChoosingEnabled)
+				if (std::find(_modelNames.begin(), _modelNames.end(), _hoveredItemID) != _modelNames.end()) // Check if model selected
 				{
-					// Show game entity
-					if (_fe3d.gameEntity_isExisting(_hoveredItemID))
-					{
-						_fe3d.gameEntity_show(_hoveredItemID);
-					}
-
 					// Set new current model name
 					_currentModelName = _hoveredItemID;
-					_modelEditingEnabled = true;
-					_gui->getViewport("leftViewport")->getWindow("mainWindow")->setActiveScreen("modelEditingScreen");
-				}
-				else if (_modelRemovalEnabled)
-				{
-					// Remove game entity
-					if (_fe3d.gameEntity_isExisting(_hoveredItemID))
-					{
-						_fe3d.gameEntity_delete(_hoveredItemID);
-					}
 
-					// Delete from model names vector
-					for (size_t i = 0; i < _modelNames.size(); i++)
+					// Send user to editing screen
+					if (_modelEditingEnabled)
 					{
-						if (_modelNames[i] == _hoveredItemID)
+						// Show game entity
+						if (_fe3d.gameEntity_isExisting(_hoveredItemID))
 						{
-							_modelNames.erase(_modelNames.begin() + i);
+							_fe3d.gameEntity_show(_hoveredItemID);
 						}
-					}
 
-					// Delete choice button and go back to management screen
-					_gui->getViewport("leftViewport")->getWindow("mainWindow")->getScreen("modelChoiceScreen")->getScrollingList("modelList")->deleteButton(_hoveredItemID);
-					_gui->getViewport("leftViewport")->getWindow("mainWindow")->setActiveScreen("modelManagementScreen");
-					_currentModelName = "";
-					_modelRemovalEnabled = false;
+						// Go to editing screen
+						_gui->getViewport("leftViewport")->getWindow("mainWindow")->setActiveScreen("modelEditingScreen");
+					}
+					else if (_modelRemovalEnabled) // Add confirmation choice
+					{
+						_gui->getGlobalScreen()->addTextfield("areYouSure", vec2(0.0f, 0.1f), vec2(0.3f, 0.1f), "Are you sure?", vec3(1.0f));
+						_gui->getGlobalScreen()->addButton("yes", vec2(-0.1f, -0.1f), vec2(0.1f, 0.1f), vec3(0.0f, 0.5f, 0.0f), vec3(0.0f, 1.0f, 0.0f), "Yes", vec3(1.0f), vec3(0.0f));
+						_gui->getGlobalScreen()->addButton("no", vec2(0.1f, -0.1f), vec2(0.1f, 0.1f), vec3(0.5f, 0.0f, 0.0f), vec3(1.0f, 0.0f, 0.0f), "No", vec3(1.0f), vec3(0.0f));
+					}
 				}
-			}
-			else if (_hoveredItemID == "back")
-			{
-				_gui->getViewport("leftViewport")->getWindow("mainWindow")->setActiveScreen("modelManagementScreen");
+				else if (_hoveredItemID == "back")
+				{
+					_modelChoosingEnabled = false;
+					_modelRemovalEnabled = false;
+					_modelEditingEnabled = false;
+					_gui->getViewport("leftViewport")->getWindow("mainWindow")->setActiveScreen("modelManagementScreen");
+				}
 			}
 		}
 		else if (_activeScreenID == "modelEditingScreen") // Model editing screen
@@ -231,7 +224,44 @@ void ModelEditor::_updateModelRemoval()
 {
 	if (_modelRemovalEnabled)
 	{
+		if (_currentModelName != "")
+		{
+			if (_gui->getGlobalScreen()->getButton("yes")->isHovered() && _fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT)) // Confirmed
+			{
+				// Remove game entity
+				if (_fe3d.gameEntity_isExisting(_currentModelName))
+				{
+					_fe3d.gameEntity_delete(_currentModelName);
+				}
 
+				// Delete from model names vector
+				for (size_t i = 0; i < _modelNames.size(); i++)
+				{
+					if (_modelNames[i] == _currentModelName)
+					{
+						_modelNames.erase(_modelNames.begin() + i);
+					}
+				}
+
+				// Delete choice button and go back to management screen
+				_gui->getViewport("leftViewport")->getWindow("mainWindow")->getScreen("modelChoiceScreen")->getScrollingList("modelList")->deleteButton(_currentModelName);
+				_currentModelName = "";
+
+				// Delete confirmation GUI
+				_gui->getGlobalScreen()->deleteTextfield("areYouSure");
+				_gui->getGlobalScreen()->deleteButton("yes");
+				_gui->getGlobalScreen()->deleteButton("no");
+			}
+			else if (_gui->getGlobalScreen()->getButton("no")->isHovered() && _fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT)) // Cancelled
+			{
+				_currentModelName = "";
+
+				// Delete confirmation GUI
+				_gui->getGlobalScreen()->deleteTextfield("areYouSure");
+				_gui->getGlobalScreen()->deleteButton("yes");
+				_gui->getGlobalScreen()->deleteButton("no");
+			}
+		}
 	}
 }
 

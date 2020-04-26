@@ -148,9 +148,6 @@
     <ClCompile Include="Source\engine_gui_screen.cpp">
       <Filter>src\GUI System</Filter>
     </ClCompile>
-    <ClCompile Include="Source\engine_gui_scrolling_list.cpp">
-      <Filter>src\GUI System</Filter>
-    </ClCompile>
     <ClCompile Include="Source\engine_gui_textfield.cpp">
       <Filter>src\GUI System</Filter>
     </ClCompile>
@@ -258,6 +255,9 @@
     </ClCompile>
     <ClCompile Include="Source\configuration.cpp">
       <Filter>src\Unassiged</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\engine_gui_scrollinglist.cpp">
+      <Filter>src\GUI System</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -393,9 +393,6 @@
     <ClInclude Include="Source\engine_gui_screen.hpp">
       <Filter>src\GUI System</Filter>
     </ClInclude>
-    <ClInclude Include="Source\engine_gui_scrolling_list.hpp">
-      <Filter>src\GUI System</Filter>
-    </ClInclude>
     <ClInclude Include="Source\engine_gui_textfield.hpp">
       <Filter>src\GUI System</Filter>
     </ClInclude>
@@ -500,6 +497,9 @@
     </ClInclude>
     <ClInclude Include="Source\configuration.hpp">
       <Filter>src\Unassiged</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\engine_gui_scrollinglist.hpp">
+      <Filter>src\GUI System</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

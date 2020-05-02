@@ -15,7 +15,7 @@ void ModelEditor::update(float delta)
 		{
 			if (_hoveredItemID == "modelEditor")
 			{
-				_loadGraphics();
+				_loadEnvironment();
 				_gui->getViewport("leftViewport")->getWindow("mainWindow")->setActiveScreen("modelManagementScreen");
 			}
 		}
@@ -44,8 +44,7 @@ void ModelEditor::update(float delta)
 			else if (_hoveredItemID == "back")
 			{
 				_gui->getViewport("leftViewport")->getWindow("mainWindow")->setActiveScreen("mainScreen");
-				_fe3d.gameEntity_delete("modelEditorGrid");
-				_fe3d.skyEntity_delete("modelEditorSky");
+				_unloadEnvironment();
 			}
 		}
 		else if (_activeScreenID == "modelChoiceScreen") // Model choice screen
@@ -158,6 +157,8 @@ void ModelEditor::_updateModelCreation()
 					_gui->getViewport("leftViewport")->getWindow("mainWindow")->getScreen("modelEditingScreen")->getButton("loadDiffuseMap")->setHoverable(false);
 					_gui->getViewport("leftViewport")->getWindow("mainWindow")->getScreen("modelEditingScreen")->getButton("loadLightMap")->setHoverable(false);
 					_gui->getViewport("leftViewport")->getWindow("mainWindow")->getScreen("modelEditingScreen")->getButton("loadReflectionMap")->setHoverable(false);
+
+
 
 					// Go to editor screen
 					_gui->getViewport("leftViewport")->getWindow("mainWindow")->setActiveScreen("modelEditingScreen");

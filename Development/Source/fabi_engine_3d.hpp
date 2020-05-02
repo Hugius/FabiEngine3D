@@ -415,6 +415,7 @@ public:
 	string misc_vec2str(vec2 vec);
 	string misc_vec2str(vec3 vec);
 	string misc_vec2str(vec4 vec);
+	string misc_getRootDirectory();
 	ivec2 misc_getMousePos();
 	vec2 misc_convertToNDC(vec2 pos);
 	vec2 misc_convertFromNDC(vec2 pos);

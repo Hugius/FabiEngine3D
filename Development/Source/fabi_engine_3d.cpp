@@ -1923,12 +1923,6 @@ void FabiEngine3D::misc_setMainColor(vec3 color)
 
 string FabiEngine3D::misc_getWinExplorerFilename(string startingDir, string fileType)
 {
-	// Get application root directory
-	char buffer[256]; size_t len = sizeof(buffer);
-	GetModuleFileName(NULL, buffer, len);
-	string fullDir = buffer;
-	fullDir = fullDir.substr(0, fullDir.size() - 25);
-
 	// Prepare filter C-string
 	string filter = fileType;
 	filter.push_back('\0');
@@ -1949,7 +1943,7 @@ string FabiEngine3D::misc_getWinExplorerFilename(string startingDir, string file
 	ofn.lpstrFileTitle = titleBuffer;
 	ofn.lpstrFileTitle[0] = '\0';
 	ofn.nMaxFileTitle = sizeof(titleBuffer);
-	ofn.lpstrInitialDir = string(fullDir + startingDir).c_str(); // Projects folder
+	ofn.lpstrInitialDir = string(misc_getRootDirectory() + startingDir).c_str(); // Projects folder
 	ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
 	GetOpenFileName(&ofn);
 
@@ -1970,6 +1964,15 @@ string FabiEngine3D::misc_vec2str(vec3 vec)
 string FabiEngine3D::misc_vec2str(vec4 vec)
 {
 	return std::to_string(vec.x) + " " + std::to_string(vec.y) + " " + std::to_string(vec.z) + " " + std::to_string(vec.w);
+}
+
+string FabiEngine3D::misc_getRootDirectory()
+{
+	char buffer[256]; size_t len = sizeof(buffer);
+	GetModuleFileName(NULL, buffer, len);
+	string fullDir = buffer;
+	fullDir = fullDir.substr(0, fullDir.size() - 25);
+	return fullDir;
 }
 
 ivec2 FabiEngine3D::misc_getMousePos()

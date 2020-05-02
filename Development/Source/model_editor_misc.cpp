@@ -6,6 +6,10 @@ ModelEditor::ModelEditor(FabiEngine3D& fe3d, shared_ptr<EngineGuiManager> gui) :
 	_fe3d(fe3d),
 	_gui(gui)
 {
+	// Pre-load environment
+	_loadEnvironment();
+	_unloadEnvironment();
+
 	// Load all OBJ filenames from assets folder
 	_loadObjFileNames();
 
@@ -14,7 +18,7 @@ ModelEditor::ModelEditor(FabiEngine3D& fe3d, shared_ptr<EngineGuiManager> gui) :
 	_modelNameTextfieldEntityID = _gui->getGlobalScreen()->getTextfield("currentModelName")->getEntityID();
 }
 
-void ModelEditor::_loadGraphics()
+void ModelEditor::_loadEnvironment()
 {
 	_fe3d.camera_load(90.0f, 0.1f, 1000.0f, vec3(_startingCameraPos), -90.0f, 0.0f);
 	_fe3d.camera_enableLookat(vec3(0.0f));
@@ -31,9 +35,15 @@ void ModelEditor::_loadGraphics()
 	_fe3d.skyEntity_select("modelEditorSky");
 }
 
-void ModelEditor::_unloadGraphics()
+void ModelEditor::_unloadEnvironment()
 {
-
+	_fe3d.gfx_removeAmbientLighting();
+	_fe3d.gfx_removeDirectionalLighting();
+	_fe3d.gfx_removeLightMapping();
+	_fe3d.gfx_removeSkyReflections();
+	_fe3d.gfx_removeBloom();
+	_fe3d.gameEntity_delete("modelEditorGrid");
+	_fe3d.skyEntity_delete("modelEditorSky");
 }
 
 void ModelEditor::_loadObjFileNames()
@@ -44,13 +54,8 @@ void ModelEditor::_loadObjFileNames()
 		_totalObjFileNames.clear();
 	}
 
-	// Get application root directory
-	char buffer[256]; size_t len = sizeof(buffer);
-	GetModuleFileName(NULL, buffer, len);
-	string fullDir = buffer;
-	fullDir = fullDir.substr(0, fullDir.size() - 25);
-
-	string path = fullDir + "User\\Assets\\OBJs\\";
+	// Get new path
+	string path = _fe3d.misc_getRootDirectory() + "User\\Assets\\OBJs\\";
 	int endOfNameIndex = 0;
 
 	// Get all filenames

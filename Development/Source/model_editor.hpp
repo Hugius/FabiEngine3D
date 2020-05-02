@@ -23,8 +23,8 @@ public:
 private:
 	// Functions
 	void _loadObjFileNames();
-	void _loadGraphics();
-	void _unloadGraphics();
+	void _loadEnvironment();
+	void _unloadEnvironment();
 	void _updateModelCreation();
 	void _updateModelEditing();
 	void _updateModelRemoval();

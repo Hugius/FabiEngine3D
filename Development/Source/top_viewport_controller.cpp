@@ -1,5 +1,10 @@
 #include "top_viewport_controller.hpp"
 
+#include <fstream>
+#include <direct.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+
 void TopViewportController::update(float delta)
 {
 	auto vp = _gui->getViewport("topViewport");
@@ -61,7 +66,23 @@ void TopViewportController::_updateProjectCreation()
 			// Create new project
 			if (_gui->getGlobalScreen()->getWriteField("newProjectName")->confirmedInput())
 			{
+				std::cout << _fe3d.misc_getRootDirectory() << std::endl;
+				string newDirectoryPath = _fe3d.misc_getRootDirectory() + "User";
 
+				struct stat info;
+				//stat(pathname, &info);
+
+				// Create new directory if not already existing
+				_mkdir(newDirectoryPath.c_str());
+
+				std::ofstream file;
+
+				// Create or overwrite new project file
+				file.open("../User/" + projectName + ".fe3dproj");
+				if (errno != 0)
+				{
+					Logger::getInst().throwError("Could not create new project \"" + projectName + "\"");
+				}
 			}
 
 			// Cleanup

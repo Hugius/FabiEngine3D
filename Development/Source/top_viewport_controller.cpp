@@ -66,22 +66,26 @@ void TopViewportController::_updateProjectCreation()
 			// Create new project
 			if (_gui->getGlobalScreen()->getWriteField("newProjectName")->confirmedInput())
 			{
-				std::cout << _fe3d.misc_getRootDirectory() << std::endl;
-				string newDirectoryPath = _fe3d.misc_getRootDirectory() + "User";
+				// Get directory path for the new project
+				string newDirectoryPath = _fe3d.misc_getRootDirectory() + "User\\" + projectName;
 
+				// Check if project already exists
 				struct stat info;
-				//stat(pathname, &info);
-
-				// Create new directory if not already existing
-				_mkdir(newDirectoryPath.c_str());
-
-				std::ofstream file;
-
-				// Create or overwrite new project file
-				file.open("../User/" + projectName + ".fe3dproj");
-				if (errno != 0)
+				stat(newDirectoryPath.c_str(), &info);
+				if (info.st_mode & S_IFDIR) // Project already exists
 				{
-					Logger::getInst().throwError("Could not create new project \"" + projectName + "\"");
+					Logger::getInst().throwWarning("Project \"" + projectName + "\"" + " already exists!");
+				}
+				else // Project non-existent
+				{
+					// Create new directory
+					_mkdir(newDirectoryPath.c_str());
+
+					// Create new models file
+					std::ofstream file;
+					file.open(_fe3d.misc_getRootDirectory() + "User\\" + projectName + "\\models.fe3d");
+					file << "test";
+					file.close();
 				}
 			}
 

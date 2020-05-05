@@ -8,7 +8,7 @@ class EngineGuiScrollingList final : public EngineGuiRectangle
 {
 public:
 	EngineGuiScrollingList(FabiEngine3D& fe3d, const string& parentID, const string& ID, vec2 position, vec2 size, vec3 color, 
-		vec3 buttonColor, vec3 buttonHoverColor, vec3 textColor, vec3 textHoverColor, float charWidth);
+		vec3 buttonColor, vec3 buttonHoverColor, vec3 textColor, vec3 textHoverColor, float charWidth, int maxButtonsPerPage);
 
 	void update(float delta, bool hoverable);
 	void addButton(const string& ID, string textContent);
@@ -38,7 +38,7 @@ private:
 
 	const float _charWidth;
 
-	const int _maxButtonsPerPage = 13;
+	const int _maxButtonsPerPage;
 
 	vector<shared_ptr<EngineGuiButton>> _buttons;
 

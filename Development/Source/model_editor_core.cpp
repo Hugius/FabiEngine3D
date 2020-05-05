@@ -23,23 +23,15 @@ void ModelEditor::update(float delta)
 		{
 			if (_hoveredItemID == "addModel")
 			{
-				_gui->getGlobalScreen()->addTextfield("newModelName", vec2(0.0f, 0.1f), vec2(0.3f, 0.1f), "Enter model name:", vec3(1.0f));
-				_gui->getGlobalScreen()->addWriteField("newModelName", vec2(0.0f, 0.0f), vec2(0.5f, 0.1f), vec3(0.25f), vec3(0.5f), vec3(1.0f), vec3(0.0f));
-				_gui->getGlobalScreen()->getWriteField("newModelName")->setActive(true);
-				_gui->setFocus(true);
-				_modelCreationEnabled = true;
+				_initializeModelCreation();
 			}
 			else if (_hoveredItemID == "editModel")
 			{
-				_modelChoosingEnabled = true;
-				_modelEditingEnabled = true;
-				_gui->getViewport("leftViewport")->getWindow("mainWindow")->setActiveScreen("modelChoiceScreen");
+				_initializeModelEditing();
 			}
 			else if (_hoveredItemID == "deleteModel")
 			{
-				_modelChoosingEnabled = true;
-				_modelRemovalEnabled = true;
-				_gui->getViewport("leftViewport")->getWindow("mainWindow")->setActiveScreen("modelChoiceScreen");
+				_initializeModelRemoval();
 			}
 			else if (_hoveredItemID == "back")
 			{
@@ -122,6 +114,99 @@ void ModelEditor::update(float delta)
 	_updateModelCreation();
 	_updateModelEditing();
 	_updateModelRemoval();
+}
+
+void ModelEditor::_loadOBJ()
+{
+	// Get the loaded filename
+	string objName = _fe3d.misc_getWinExplorerFilename("User\\Assets\\OBJs\\", "OBJ");
+	if (objName != "") // Not cancelled
+	{
+		// Already exists
+		if (_fe3d.gameEntity_isExisting(_currentModelName))
+		{
+			_fe3d.gameEntity_delete(_currentModelName);
+		}
+
+		// Add new game entity
+		_fe3d.gameEntity_add(_currentModelName, "User\\Assets\\OBJs\\" + objName.substr(0, objName.size() - 4), vec3(0.0f), vec3(0.0f), vec3(1.0f));
+		_fe3d.gameEntity_setColor(_currentModelName, vec3(0.5f));
+
+		// Enable texturing if not pre-multitextured
+		if (_fe3d.gameEntity_isMultiTextured(_currentModelName))
+		{
+			_gui->getViewport("leftViewport")->getWindow("mainWindow")->getScreen("modelEditingScreen")->getButton("loadDiffuseMap")->setHoverable(false);
+			_gui->getViewport("leftViewport")->getWindow("mainWindow")->getScreen("modelEditingScreen")->getButton("loadLightMap")->setHoverable(false);
+			_gui->getViewport("leftViewport")->getWindow("mainWindow")->getScreen("modelEditingScreen")->getButton("loadReflectionMap")->setHoverable(false);
+		}
+		else
+		{
+			_gui->getViewport("leftViewport")->getWindow("mainWindow")->getScreen("modelEditingScreen")->getButton("loadDiffuseMap")->setHoverable(true);
+			_gui->getViewport("leftViewport")->getWindow("mainWindow")->getScreen("modelEditingScreen")->getButton("loadLightMap")->setHoverable(true);
+			_gui->getViewport("leftViewport")->getWindow("mainWindow")->getScreen("modelEditingScreen")->getButton("loadReflectionMap")->setHoverable(true);
+		}
+	}
+}
+
+void ModelEditor::_loadDiffuseMap()
+{
+	// Get the loaded filename
+	string texName = _fe3d.misc_getWinExplorerFilename("User\\Assets\\Textures\\DiffuseMaps\\", "PNG");
+
+	// Check if user chose a filename
+	if (texName != "")
+	{
+		_fe3d.gameEntity_setDiffuseMap(_currentModelName, "User\\Assets\\Textures\\DiffuseMaps\\" + texName.substr(0, texName.size() - 4));
+	}
+}
+
+void ModelEditor::_loadLightMap()
+{
+	// Get the loaded filename
+	string texName = _fe3d.misc_getWinExplorerFilename("User\\Assets\\Textures\\LightMaps\\", "PNG");
+
+	// Check if user chose a filename
+	if (texName != "")
+	{
+		_fe3d.gameEntity_setLightMap(_currentModelName, "User\\Assets\\Textures\\LightMaps\\" + texName.substr(0, texName.size() - 4));
+		_fe3d.gameEntity_setLightmapped(_currentModelName, true);
+	}
+}
+
+void ModelEditor::_loadReflectionMap()
+{
+	// Get the loaded filename
+	string texName = _fe3d.misc_getWinExplorerFilename("User\\Assets\\Textures\\ReflectionMaps\\", "PNG");
+
+	// Check if user chose a filename
+	if (texName != "")
+	{
+		_fe3d.gameEntity_setReflectionMap(_currentModelName, "User\\Assets\\Textures\\ReflectionMaps\\" + texName.substr(0, texName.size() - 4));
+		_fe3d.gameEntity_setSkyReflective(_currentModelName, true);
+	}
+}
+
+void ModelEditor::_initializeModelCreation()
+{
+	_gui->getGlobalScreen()->addTextfield("newModelName", vec2(0.0f, 0.1f), vec2(0.3f, 0.1f), "Enter model name:", vec3(1.0f));
+	_gui->getGlobalScreen()->addWriteField("newModelName", vec2(0.0f, 0.0f), vec2(0.5f, 0.1f), vec3(0.25f), vec3(0.5f), vec3(1.0f), vec3(0.0f));
+	_gui->getGlobalScreen()->getWriteField("newModelName")->setActive(true);
+	_gui->setFocus(true);
+	_modelCreationEnabled = true;
+}
+
+void ModelEditor::_initializeModelEditing()
+{
+	_modelChoosingEnabled = true;
+	_modelEditingEnabled = true;
+	_gui->getViewport("leftViewport")->getWindow("mainWindow")->setActiveScreen("modelChoiceScreen");
+}
+
+void ModelEditor::_initializeModelRemoval()
+{
+	_modelChoosingEnabled = true;
+	_modelRemovalEnabled = true;
+	_gui->getViewport("leftViewport")->getWindow("mainWindow")->setActiveScreen("modelChoiceScreen");
 }
 
 void ModelEditor::_updateModelCreation()
@@ -263,75 +348,5 @@ void ModelEditor::_updateModelRemoval()
 				_gui->getGlobalScreen()->deleteButton("no");
 			}
 		}
-	}
-}
-
-void ModelEditor::_loadOBJ()
-{
-	// Get the loaded filename
-	string objName = _fe3d.misc_getWinExplorerFilename("User\\Assets\\OBJs\\", "OBJ");
-	if (objName != "") // Not cancelled
-	{
-		// Already exists
-		if (_fe3d.gameEntity_isExisting(_currentModelName))
-		{
-			_fe3d.gameEntity_delete(_currentModelName);
-		}
-
-		// Add new game entity
-		_fe3d.gameEntity_add(_currentModelName, "User\\Assets\\OBJs\\" + objName.substr(0, objName.size() - 4), vec3(0.0f), vec3(0.0f), vec3(1.0f));
-		_fe3d.gameEntity_setColor(_currentModelName, vec3(0.5f));
-
-		// Enable texturing if not pre-multitextured
-		if (_fe3d.gameEntity_isMultiTextured(_currentModelName))
-		{
-			_gui->getViewport("leftViewport")->getWindow("mainWindow")->getScreen("modelEditingScreen")->getButton("loadDiffuseMap")->setHoverable(false);
-			_gui->getViewport("leftViewport")->getWindow("mainWindow")->getScreen("modelEditingScreen")->getButton("loadLightMap")->setHoverable(false);
-			_gui->getViewport("leftViewport")->getWindow("mainWindow")->getScreen("modelEditingScreen")->getButton("loadReflectionMap")->setHoverable(false);
-		}
-		else
-		{
-			_gui->getViewport("leftViewport")->getWindow("mainWindow")->getScreen("modelEditingScreen")->getButton("loadDiffuseMap")->setHoverable(true);
-			_gui->getViewport("leftViewport")->getWindow("mainWindow")->getScreen("modelEditingScreen")->getButton("loadLightMap")->setHoverable(true);
-			_gui->getViewport("leftViewport")->getWindow("mainWindow")->getScreen("modelEditingScreen")->getButton("loadReflectionMap")->setHoverable(true);
-		}
-	}
-}
-
-void ModelEditor::_loadDiffuseMap()
-{
-	// Get the loaded filename
-	string texName = _fe3d.misc_getWinExplorerFilename("User\\Assets\\Textures\\DiffuseMaps\\", "PNG");
-
-	// Check if user chose a filename
-	if (texName != "")
-	{
-		_fe3d.gameEntity_setDiffuseMap(_currentModelName, "User\\Assets\\Textures\\DiffuseMaps\\" + texName.substr(0, texName.size() - 4));
-	}
-}
-
-void ModelEditor::_loadLightMap()
-{
-	// Get the loaded filename
-	string texName = _fe3d.misc_getWinExplorerFilename("User\\Assets\\Textures\\LightMaps\\", "PNG");
-
-	// Check if user chose a filename
-	if (texName != "")
-	{
-		_fe3d.gameEntity_setLightMap(_currentModelName, "User\\Assets\\Textures\\LightMaps\\" + texName.substr(0, texName.size() - 4));
-		_fe3d.gameEntity_setLightmapped(_currentModelName, true);
-	}
-}
-
-void ModelEditor::_loadReflectionMap()
-{
-	// Get the loaded filename
-	string texName = _fe3d.misc_getWinExplorerFilename("User\\Assets\\Textures\\ReflectionMaps\\", "PNG");
-
-	// Check if user chose a filename
-	if (texName != "")
-	{
-		_fe3d.gameEntity_setReflectionMap(_currentModelName, "User\\Assets\\Textures\\ReflectionMaps\\" + texName.substr(0, texName.size() - 4));
-		_fe3d.gameEntity_setSkyReflective(_currentModelName, true);
 	}
 }

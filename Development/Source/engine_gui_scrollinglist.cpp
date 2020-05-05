@@ -2,13 +2,14 @@
 
 EngineGuiScrollingList::EngineGuiScrollingList(
 	FabiEngine3D& fe3d, const string& parentID, const string& ID, vec2 position, vec2 size, vec3 color,
-	vec3 buttonColor, vec3 buttonHoverColor, vec3 textColor, vec3 textHoverColor, float charWidth) :
+	vec3 buttonColor, vec3 buttonHoverColor, vec3 textColor, vec3 textHoverColor, float charWidth, int maxButtonsPerPage) :
 	EngineGuiRectangle(fe3d, parentID, ID, position, size, color),
 	_buttonColor(buttonColor),
 	_buttonHoverColor(buttonHoverColor),
 	_textColor(textColor),
 	_textHoverColor(textHoverColor),
-	_charWidth(charWidth)
+	_charWidth(charWidth),
+	_maxButtonsPerPage(maxButtonsPerPage)
 {
 
 }
@@ -25,7 +26,13 @@ void EngineGuiScrollingList::update(float delta, bool hoverable)
 
 void EngineGuiScrollingList::addButton(const string& ID, string textContent)
 {
-	vec4 dimensions = _convertDimensions(vec2(0.0f, 0.9f - (_buttons.size() * 0.15f)), vec2(min(_charWidth * textContent.size(), 1.5f), 0.1f));
+	
+	float x = 0.0f;
+	float y = 1.0f - (2.0f / float((_maxButtonsPerPage * 2) + 1)) - (_buttons.size() * (2.0f / float(_maxButtonsPerPage)));
+	std::cout << y << std::endl;
+	float w = min(_charWidth * textContent.size(), 1.5f);
+	float h = (2.0f / float((_maxButtonsPerPage * 2) + 1));
+	vec4 dimensions = _convertDimensions(vec2(x, y), vec2(w, h));
 	_buttons.push_back(make_shared<EngineGuiButton>(_fe3d, _ID, ID, vec2(dimensions.x, dimensions.y), vec2(dimensions.z, dimensions.w), _buttonColor, _buttonHoverColor, textContent, _textColor, _textHoverColor));
 	string rectangleID = _buttons.back()->getRectangle()->getEntityID();
 	string textID = _buttons.back()->getTextfield()->getEntityID();

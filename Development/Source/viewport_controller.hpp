@@ -8,6 +8,7 @@ class ViewportController
 public:
 	ViewportController(FabiEngine3D& fe3d, shared_ptr<EngineGuiManager> gui);
 
+	virtual void initialize() = 0;
 	virtual void update(float delta) = 0;
 
 protected:

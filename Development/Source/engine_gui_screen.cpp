@@ -145,10 +145,10 @@ const string& EngineGuiScreen::getParentID()
 }
 
 void EngineGuiScreen::addScrollingList(const string& ID, vec2 position, vec2 size, vec3 color,
-	vec3 buttonColor, vec3 buttonHoverColor, vec3 textColor, vec3 textHoverColor, float charWidth)
+	vec3 buttonColor, vec3 buttonHoverColor, vec3 textColor, vec3 textHoverColor, float charWidth, int maxButtonsPerPage)
 {
 	auto dimensions = _convertDimensions(position, size);
-	_scrollingLists.push_back(make_shared<EngineGuiScrollingList>(_fe3d, _ID, ID, vec2(dimensions.x, dimensions.y), vec2(dimensions.z, dimensions.w), color, buttonColor, buttonHoverColor, textColor, textHoverColor, charWidth));
+	_scrollingLists.push_back(make_shared<EngineGuiScrollingList>(_fe3d, _ID, ID, vec2(dimensions.x, dimensions.y), vec2(dimensions.z, dimensions.w), color, buttonColor, buttonHoverColor, textColor, textHoverColor, charWidth, maxButtonsPerPage));
 }
 
 void EngineGuiScreen::addWriteField(const string& ID, vec2 position, vec2 size, vec3 color, vec3 hoverColor, vec3 textColor, vec3 textHoverColor)

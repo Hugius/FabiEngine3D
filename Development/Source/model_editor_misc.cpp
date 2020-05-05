@@ -54,26 +54,26 @@ void ModelEditor::_loadObjFileNames()
 		_totalObjFileNames.clear();
 	}
 
-	// Get new path
-	string path = _fe3d.misc_getRootDirectory() + "User\\Assets\\OBJs\\";
+	// Determine full OBJ directory
+	string objDirectoryPath = _fe3d.misc_getRootDirectory() + "User\\Assets\\OBJs\\";
 	int endOfNameIndex = 0;
 
 	// Get all filenames
-	for (const auto& entry : std::filesystem::directory_iterator(path))
+	for (const auto& entry : std::filesystem::directory_iterator(objDirectoryPath))
 	{
-		string path = string(entry.path().u8string());
-		path.erase(0, 13);
+		string objPath = string(entry.path().u8string());
+		objPath.erase(0, objDirectoryPath.size());
 
 		// Loop over file path
-		for (unsigned int i = 0; i < path.size(); i++)
+		for (unsigned int i = 0; i < objPath.size(); i++)
 		{
 			// End of file name
-			if (path[i] == '.')
+			if (objPath[i] == '.')
 			{
 				endOfNameIndex = i;
 			}
 		}
-		_totalObjFileNames.push_back(path.substr(0, endOfNameIndex));
+		_totalObjFileNames.push_back(objPath.substr(0, endOfNameIndex));
 	}
 }
 

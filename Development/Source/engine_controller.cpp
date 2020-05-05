@@ -18,6 +18,10 @@ EngineController::~EngineController()
 void EngineController::FE3D_CONTROLLER_INIT()
 {
 	misc_setMainColor(vec3(0.5f, 0.5f, 1.0f));
+	_topViewportController.initialize();
+	_leftViewportController.initialize();
+	_rightViewportController.initialize();
+	_bottomViewportController.initialize();
 }
 
 void EngineController::FE3D_CONTROLLER_UPDATE(float delta)

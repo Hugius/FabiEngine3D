@@ -21,17 +21,19 @@ public:
 	void update(float delta);
 
 private:
-	// Functions
 	void _loadObjFileNames();
 	void _loadEnvironment();
 	void _unloadEnvironment();
-	void _updateModelCreation();
-	void _updateModelEditing();
-	void _updateModelRemoval();
 	void _loadOBJ();
 	void _loadDiffuseMap();
 	void _loadLightMap();
 	void _loadReflectionMap();
+	void _initializeModelCreation();
+	void _initializeModelEditing();
+	void _initializeModelRemoval();
+	void _updateModelCreation();
+	void _updateModelEditing();
+	void _updateModelRemoval();
 
 	bool _modelCreationEnabled = false;
 	bool _modelChoosingEnabled = false;

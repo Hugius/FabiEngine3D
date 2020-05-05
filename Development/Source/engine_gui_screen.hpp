@@ -19,7 +19,7 @@ public:
 	const string& getID();
 	const string& getParentID();
 
-	void addScrollingList(const string& ID, vec2 position, vec2 size, vec3 color, vec3 buttonColor, vec3 buttonHoverColor, vec3 textColor, vec3 textHoverColor, float charWidth);
+	void addScrollingList(const string& ID, vec2 position, vec2 size, vec3 color, vec3 buttonColor, vec3 buttonHoverColor, vec3 textColor, vec3 textHoverColor, float charWidth, int maxButtonsPerPage);
 	void addWriteField(const string& ID, vec2 position, vec2 size, vec3 color, vec3 hoverColor, vec3 textColor, vec3 textHoverColor);
 	void addButton(const string& ID, vec2 position, vec2 size, vec3 color, vec3 hoverColor, string textContent, vec3 textColor, vec3 textHoverColor);
 	void addRectangle(const string& ID, vec2 position, vec2 size, vec3 color);

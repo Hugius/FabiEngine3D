@@ -28,10 +28,9 @@ private:
 	void _loadDiffuseMap();
 	void _loadLightMap();
 	void _loadReflectionMap();
-	void _initializeModelCreation();
-	void _initializeModelEditing();
-	void _initializeModelRemoval();
+	void _updateModelManagement();
 	void _updateModelCreation();
+	void _updateModelChoosing();
 	void _updateModelEditing();
 	void _updateModelRemoval();
 
@@ -54,8 +53,6 @@ private:
 
 	string _modelNameTextfieldEntityID = "";
 	string _currentModelName = "";
-	string _activeScreenID = "";
-	string _hoveredItemID = "";
 	vector<string> _modelNames;
 	vector<string> _totalObjFileNames;
 

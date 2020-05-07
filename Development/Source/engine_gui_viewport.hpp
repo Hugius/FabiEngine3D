@@ -10,6 +10,8 @@ public:
 
 	void update(float delta, bool hoverable);
 
+	bool isHovered();
+
 	const string& getID();
 
 	void addWindow(const string& ID, vec2 position, vec2 size, vec3 color);

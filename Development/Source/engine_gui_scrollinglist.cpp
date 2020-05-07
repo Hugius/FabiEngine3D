@@ -2,14 +2,13 @@
 
 EngineGuiScrollingList::EngineGuiScrollingList(
 	FabiEngine3D& fe3d, const string& parentID, const string& ID, vec2 position, vec2 size, vec3 color,
-	vec3 buttonColor, vec3 buttonHoverColor, vec3 textColor, vec3 textHoverColor, float charWidth, int maxButtonsPerPage) :
+	vec3 buttonColor, vec3 buttonHoverColor, vec3 textColor, vec3 textHoverColor, vec2 charSize) :
 	EngineGuiRectangle(fe3d, parentID, ID, position, size, color),
 	_buttonColor(buttonColor),
 	_buttonHoverColor(buttonHoverColor),
 	_textColor(textColor),
 	_textHoverColor(textHoverColor),
-	_charWidth(charWidth),
-	_maxButtonsPerPage(maxButtonsPerPage)
+	_charSize(charSize)
 {
 
 }
@@ -17,7 +16,6 @@ EngineGuiScrollingList::EngineGuiScrollingList(
 void EngineGuiScrollingList::update(float delta, bool hoverable)
 {
 	_delta = delta;
-	_hoveredButtonID = "";
 
 	_updateHovering();
 	_updateScolling();
@@ -28,10 +26,9 @@ void EngineGuiScrollingList::addButton(const string& ID, string textContent)
 {
 	
 	float x = 0.0f;
-	float y = 1.0f - (2.0f / float((_maxButtonsPerPage * 2) + 1)) - (_buttons.size() * (2.0f / float(_maxButtonsPerPage)));
-	std::cout << y << std::endl;
-	float w = min(_charWidth * textContent.size(), 1.5f);
-	float h = (2.0f / float((_maxButtonsPerPage * 2) + 1));
+	float y = 1.0f - _charSize.y - (_buttons.size() * (_charSize.y * 1.5f));
+	float w = min(_charSize.x * textContent.size(), 1.5f);
+	float h = _charSize.y;
 	vec4 dimensions = _convertDimensions(vec2(x, y), vec2(w, h));
 	_buttons.push_back(make_shared<EngineGuiButton>(_fe3d, _ID, ID, vec2(dimensions.x, dimensions.y), vec2(dimensions.z, dimensions.w), _buttonColor, _buttonHoverColor, textContent, _textColor, _textHoverColor));
 	string rectangleID = _buttons.back()->getRectangle()->getEntityID();
@@ -77,67 +74,70 @@ void EngineGuiScrollingList::_updateHovering()
 
 void EngineGuiScrollingList::_updateScolling()
 {
-	// Variables
-	bool mustReset = false;
-	
-	// Checking if cursor is inside scrolling list
-	vec2 mousePos = _fe3d.misc_convertToNDC(_fe3d.misc_convertFromScreenCoords(_fe3d.misc_getMousePos()));
-	if (mousePos.x > _originalPosition.x - (_originalSize.x / 2.0f) && mousePos.x < _originalPosition.x + (_originalSize.x / 2.0f))
+	if (!_buttons.empty())
 	{
-		if (mousePos.y > _originalPosition.y - (_originalSize.y / 2.0f) && mousePos.y < _originalPosition.y + (_originalSize.y / 2.0f))
+		// Variables
+		bool mustReset = false;
+
+		// Checking if cursor is inside scrolling list
+		vec2 mousePos = _fe3d.misc_convertToNDC(_fe3d.misc_convertFromScreenCoords(_fe3d.misc_getMousePos()));
+		if (mousePos.x > _originalPosition.x - (_originalSize.x / 2.0f) && mousePos.x < _originalPosition.x + (_originalSize.x / 2.0f))
 		{
-			float scrollingAcceleration = (float(-_fe3d.input_getMouseWheelY()) * 0.001f);
-			_scrollingSpeed += scrollingAcceleration;
+			if (mousePos.y > _originalPosition.y - (_originalSize.y / 2.0f) && mousePos.y < _originalPosition.y + (_originalSize.y / 2.0f))
+			{
+				float scrollingAcceleration = (float(-_fe3d.input_getMouseWheelY()) * 0.001f);
+				_scrollingSpeed += scrollingAcceleration;
+			}
 		}
-	}
 
-	// Slowing down the scrolling speed
-	_scrollingSpeed *= 0.995f;
+		// Slowing down the scrolling speed
+		_scrollingSpeed *= 0.995f;
 
-	// Update the total offset
-	_scrollingOffset += (_scrollingSpeed * _delta);
+		// Update the total offset
+		_scrollingOffset += (_scrollingSpeed * _delta);
 
-	// Reset if below zero
-	if (_scrollingOffset < 0.0f)
-	{
-		_scrollingOffset = 0.0f;
-		_scrollingSpeed = 0.0f;
-		mustReset = true;
-	}
-
-	// Reset if maximum offset reached
-	float maximumOffset = (float(_buttons.size()) * 0.1f) - (float(_maxButtonsPerPage) * 0.1f);
-	if (_scrollingOffset > (maximumOffset - 0.025f))
-	{
-		// Check if offset incorrect
-		if (maximumOffset < 0.0f)
+		// Reset if below zero
+		if (_scrollingOffset < 0.0f)
 		{
 			_scrollingOffset = 0.0f;
 			_scrollingSpeed = 0.0f;
+			mustReset = true;
 		}
-		else
-		{
-			_scrollingOffset = (maximumOffset - 0.025f);
-			_scrollingSpeed = 0.0f;
-		}
-	}
 
-	// Update
-	for (auto& button : _buttons)
-	{
-		string rectangleID = button->getRectangle()->getEntityID();
-		string textID = button->getTextfield()->getEntityID();
-
-		// Determine whether moving or resetting the positions
-		if (mustReset)
+		// Reset if maximum offset reached
+		float maximumOffset = fabsf(_buttons.back()->getRectangle()->getOriginalPosition().y) - (_charSize.y * 1.1f);
+		if (_scrollingOffset >= maximumOffset)
 		{
-			_fe3d.guiEntity_setPosition(rectangleID, button->getRectangle()->getOriginalPosition());
-			_fe3d.textEntity_setPosition(textID, button->getTextfield()->getOriginalPosition());
+			// Check if offset incorrect
+			if (maximumOffset < 0.0f)
+			{
+				_scrollingOffset = 0.0f;
+				_scrollingSpeed = 0.0f;
+			}
+			else
+			{
+				_scrollingOffset = maximumOffset;
+				_scrollingSpeed = 0.0f;
+			}
 		}
-		else
+
+		// Update
+		for (auto& button : _buttons)
 		{
-			_fe3d.guiEntity_move(rectangleID, vec2(0.0f, _scrollingSpeed));
-			_fe3d.textEntity_move(textID, vec2(0.0f, _scrollingSpeed));
+			string rectangleID = button->getRectangle()->getEntityID();
+			string textID = button->getTextfield()->getEntityID();
+
+			// Determine whether moving or resetting the positions
+			if (mustReset)
+			{
+				_fe3d.guiEntity_setPosition(rectangleID, button->getRectangle()->getOriginalPosition());
+				_fe3d.textEntity_setPosition(textID, button->getTextfield()->getOriginalPosition());
+			}
+			else
+			{
+				_fe3d.guiEntity_move(rectangleID, vec2(0.0f, _scrollingSpeed));
+				_fe3d.textEntity_move(textID, vec2(0.0f, _scrollingSpeed));
+			}
 		}
 	}
 }
@@ -148,12 +148,6 @@ void EngineGuiScrollingList::_updateButtons(bool hoverable)
 	for (auto& button : _buttons)
 	{
 		button->update(_delta, hoverable);
-
-		// Set hovered button ID
-		if (button->isHovered())
-		{
-			_hoveredButtonID = button->getID();
-		}
 	}
 }
 
@@ -194,7 +188,20 @@ bool EngineGuiScrollingList::isHovered()
 	return _isHovered;
 }
 
-const string& EngineGuiScrollingList::getHoveredButtonID()
+shared_ptr<EngineGuiButton> EngineGuiScrollingList::getButton(const string& ID)
 {
-	return _hoveredButtonID;
+	for (auto& button : _buttons)
+	{
+		if (ID == button->getID())
+		{
+			return button;
+		}
+	}
+
+	return nullptr;
+}
+
+vector<shared_ptr<EngineGuiButton>>& EngineGuiScrollingList::getButtons()
+{
+	return _buttons;
 }

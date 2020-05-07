@@ -8,57 +8,29 @@ EngineGuiGlobalScreen::EngineGuiGlobalScreen(FabiEngine3D& fe3d) :
 
 void EngineGuiGlobalScreen::update(float delta)
 {
-	// Set to default
-	_hoveredItemID = "";
-
 	// Update scrolling lists
 	for (auto& scrollingList : _scrollingLists)
 	{
 		scrollingList->update(delta, true);
-
-		// Set hovered button ID
-		if (scrollingList->isHovered())
-		{
-			if (scrollingList->getHoveredButtonID() == "")
-			{
-				_hoveredItemID = scrollingList->getID();
-			}
-			else
-			{
-				_hoveredItemID = scrollingList->getHoveredButtonID();
-			}
-		}
 	}
 
 	// Update writefields
 	for (auto& writefield : _writeFields)
 	{
 		writefield->update(delta, true);
-
-		// Set hovered button ID
-		if (writefield->isHovered())
-		{
-			_hoveredItemID = writefield->getID();
-		}
 	}
 
 	// Update buttons
 	for (auto& button : _buttons)
 	{
 		button->update(delta, true);
-
-		// Set hovered button ID
-		if (button->isHovered())
-		{
-			_hoveredItemID = button->getID();
-		}
 	}
 }
 
 void EngineGuiGlobalScreen::addScrollingList(const string& ID, vec2 position, vec2 size, vec3 color,
-	vec3 buttonColor, vec3 buttonHoverColor, vec3 textColor, vec3 textHoverColor, float charWidth, int maxButtonsPerPage)
+	vec3 buttonColor, vec3 buttonHoverColor, vec3 textColor, vec3 textHoverColor, vec2 charSize)
 {
-	_scrollingLists.push_back(make_shared<EngineGuiScrollingList>(_fe3d, "globalScreen", ID, position, size, color, buttonColor, buttonHoverColor, textColor, textHoverColor, charWidth, maxButtonsPerPage));
+	_scrollingLists.push_back(make_shared<EngineGuiScrollingList>(_fe3d, "globalScreen", ID, position, size, color, buttonColor, buttonHoverColor, textColor, textHoverColor, charSize));
 }
 
 void EngineGuiGlobalScreen::addWriteField(const string& ID, vec2 position, vec2 size, vec3 color, vec3 hoverColor, vec3 textColor, vec3 textHoverColor)
@@ -169,11 +141,6 @@ vector<shared_ptr<EngineGuiRectangle>>& EngineGuiGlobalScreen::getRectangles()
 vector<shared_ptr<EngineGuiTextfield>>& EngineGuiGlobalScreen::getTextfields()
 {
 	return _textfields;
-}
-
-const string& EngineGuiGlobalScreen::getHoveredItemID()
-{
-	return _hoveredItemID;
 }
 
 void EngineGuiGlobalScreen::deleteScrollingList(const string& ID)

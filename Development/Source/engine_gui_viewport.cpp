@@ -15,6 +15,29 @@ void EngineGuiViewport::update(float delta, bool hoverable)
 	}
 }
 
+bool EngineGuiViewport::isHovered()
+{
+	// Check if entity is visible anyway
+	if (_fe3d.guiEntity_isVisible(_ID))
+	{
+		// Convert dimensions to same space
+		vec2 mousePos = _fe3d.misc_convertToNDC(_fe3d.misc_convertFromScreenCoords(_fe3d.misc_getMousePos()));
+		vec2 buttonPos = _fe3d.guiEntity_getPosition(_ID);
+		vec2 buttonSize = _fe3d.guiEntity_getSize(_ID);
+
+		// Check if cursor inside entity
+		if (mousePos.x > buttonPos.x - (buttonSize.x / 2.0f) && mousePos.x < buttonPos.x + (buttonSize.x / 2.0f)) // X axis
+		{
+			if (mousePos.y > buttonPos.y - (buttonSize.y / 2.0f) && mousePos.y < buttonPos.y + (buttonSize.y / 2.0f)) // Y axis
+			{
+				return true;
+			}
+		}
+	}
+
+	return false;
+}
+
 const string& EngineGuiViewport::getID()
 {
 	return _ID;

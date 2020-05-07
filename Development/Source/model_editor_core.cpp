@@ -4,114 +4,23 @@
 
 void ModelEditor::update(float delta)
 {
-	// Variables
-	_activeScreenID = _gui->getViewport("leftViewport")->getWindow("mainWindow")->getActiveScreen()->getID();
-	_hoveredItemID = _gui->getViewport("leftViewport")->getWindow("mainWindow")->getActiveScreen()->getHoveredItemID();
-
+	auto window = _gui->getViewport("leftViewport")->getWindow("mainWindow");
+	auto mainScreen = window->getScreen("mainScreen");
+	
 	// Check if LMB pressed
 	if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
 	{
-		if (_activeScreenID == "mainScreen") // Main screen
+		if (mainScreen->getButton("modelEditor")->isHovered()) // Model editor button
 		{
-			if (_hoveredItemID == "modelEditor")
-			{
-				_loadEnvironment();
-				_gui->getViewport("leftViewport")->getWindow("mainWindow")->setActiveScreen("modelManagementScreen");
-			}
-		}
-		else if (_activeScreenID == "modelManagementScreen") // Model management screen
-		{
-			if (_hoveredItemID == "addModel")
-			{
-				_initializeModelCreation();
-			}
-			else if (_hoveredItemID == "editModel")
-			{
-				_initializeModelEditing();
-			}
-			else if (_hoveredItemID == "deleteModel")
-			{
-				_initializeModelRemoval();
-			}
-			else if (_hoveredItemID == "back")
-			{
-				_gui->getViewport("leftViewport")->getWindow("mainWindow")->setActiveScreen("mainScreen");
-				_unloadEnvironment();
-			}
-		}
-		else if (_activeScreenID == "modelChoiceScreen") // Model choice screen
-		{
-			if (_modelChoosingEnabled) // Start choosing model
-			{
-				if (std::find(_modelNames.begin(), _modelNames.end(), _hoveredItemID) != _modelNames.end()) // Check if model selected
-				{
-					// Set new current model name
-					_currentModelName = _hoveredItemID;
-
-					// Send user to editing screen
-					if (_modelEditingEnabled)
-					{
-						// Show game entity
-						if (_fe3d.gameEntity_isExisting(_hoveredItemID))
-						{
-							_fe3d.gameEntity_show(_hoveredItemID);
-						}
-
-						// Go to editing screen
-						_gui->getViewport("leftViewport")->getWindow("mainWindow")->setActiveScreen("modelEditingScreen");
-					}
-					else if (_modelRemovalEnabled) // Add confirmation choice
-					{
-						_gui->getGlobalScreen()->addTextfield("areYouSure", vec2(0.0f, 0.1f), vec2(0.3f, 0.1f), "Are you sure?", vec3(1.0f));
-						_gui->getGlobalScreen()->addButton("yes", vec2(-0.1f, -0.1f), vec2(0.1f, 0.1f), vec3(0.0f, 0.5f, 0.0f), vec3(0.0f, 1.0f, 0.0f), "Yes", vec3(1.0f), vec3(0.0f));
-						_gui->getGlobalScreen()->addButton("no", vec2(0.1f, -0.1f), vec2(0.1f, 0.1f), vec3(0.5f, 0.0f, 0.0f), vec3(1.0f, 0.0f, 0.0f), "No", vec3(1.0f), vec3(0.0f));
-					}
-				}
-				else if (_hoveredItemID == "back")
-				{
-					_modelChoosingEnabled = false;
-					_modelRemovalEnabled = false;
-					_modelEditingEnabled = false;
-					_gui->getViewport("leftViewport")->getWindow("mainWindow")->setActiveScreen("modelManagementScreen");
-				}
-			}
-		}
-		else if (_activeScreenID == "modelEditingScreen") // Model editing screen
-		{
-			if (_hoveredItemID == "loadOBJ")
-			{
-				_loadOBJ();
-			}
-			else if (_hoveredItemID == "loadDiffuseMap")
-			{
-				_loadDiffuseMap();
-			}
-			else if (_hoveredItemID == "loadLightMap")
-			{
-				_loadLightMap();
-			}
-			else if (_hoveredItemID == "loadReflectionMap")
-			{
-				_loadReflectionMap();
-			}
-			else if (_hoveredItemID == "back")
-			{
-				// Hide game entity
-				if (_fe3d.gameEntity_isExisting(_currentModelName))
-				{
-					_fe3d.gameEntity_hide(_currentModelName);
-				}
-
-				_currentModelName = "";
-				_modelEditingEnabled = false;
-				_gui->getViewport("leftViewport")->getWindow("mainWindow")->setActiveScreen("modelManagementScreen");
-				_fe3d.textEntity_hide(_modelNameTextfieldEntityID);
-			}
+			_loadEnvironment();
+			window->setActiveScreen("modelManagementScreen");
 		}
 	}
 
 	// Update all processes
+	_updateModelManagement();
 	_updateModelCreation();
+	_updateModelChoosing();
 	_updateModelEditing();
 	_updateModelRemoval();
 }
@@ -186,27 +95,35 @@ void ModelEditor::_loadReflectionMap()
 	}
 }
 
-void ModelEditor::_initializeModelCreation()
+void ModelEditor::_updateModelManagement()
 {
-	_gui->getGlobalScreen()->addTextfield("newModelName", vec2(0.0f, 0.1f), vec2(0.3f, 0.1f), "Enter model name:", vec3(1.0f));
-	_gui->getGlobalScreen()->addWriteField("newModelName", vec2(0.0f, 0.0f), vec2(0.5f, 0.1f), vec3(0.25f), vec3(0.5f), vec3(1.0f), vec3(0.0f));
-	_gui->getGlobalScreen()->getWriteField("newModelName")->setActive(true);
-	_gui->setFocus(true);
-	_modelCreationEnabled = true;
-}
+	auto window = _gui->getViewport("leftViewport")->getWindow("mainWindow");
+	auto managementScreen = window->getScreen("modelManagementScreen");
 
-void ModelEditor::_initializeModelEditing()
-{
-	_modelChoosingEnabled = true;
-	_modelEditingEnabled = true;
-	_gui->getViewport("leftViewport")->getWindow("mainWindow")->setActiveScreen("modelChoiceScreen");
-}
-
-void ModelEditor::_initializeModelRemoval()
-{
-	_modelChoosingEnabled = true;
-	_modelRemovalEnabled = true;
-	_gui->getViewport("leftViewport")->getWindow("mainWindow")->setActiveScreen("modelChoiceScreen");
+	// GUI management
+	if (managementScreen->getButton("addModel")->isHovered()) // Add model button
+	{
+		_gui->getGlobalScreen()->addTextfield("newModelName", vec2(0.0f, 0.1f), vec2(0.3f, 0.1f), "Enter model name:", vec3(1.0f));
+		_gui->getGlobalScreen()->addWriteField("newModelName", vec2(0.0f, 0.0f), vec2(0.5f, 0.1f), vec3(0.25f), vec3(0.5f), vec3(1.0f), vec3(0.0f));
+		_gui->getGlobalScreen()->getWriteField("newModelName")->setActive(true);
+		_gui->setFocus(true);
+		_modelCreationEnabled = true;
+	}
+	else if (managementScreen->getButton("editModel")->isHovered()) // Edit model button
+	{
+		_modelEditingEnabled = true;
+		window->setActiveScreen("modelChoiceScreen");
+	}
+	else if (managementScreen->getButton("deleteModel")->isHovered()) // Deelete model button
+	{
+		_modelRemovalEnabled = true;
+		window->setActiveScreen("modelChoiceScreen");
+	}
+	else if (managementScreen->getButton("back")->isHovered()) // Back button
+	{
+		window->setActiveScreen("mainScreen");
+		_unloadEnvironment();
+	}
 }
 
 void ModelEditor::_updateModelCreation()
@@ -263,10 +180,84 @@ void ModelEditor::_updateModelCreation()
 	}
 }
 
+void ModelEditor::_updateModelChoosing()
+{
+	auto window = _gui->getViewport("leftViewport")->getWindow("mainWindow");
+	auto choiceScreen = window->getScreen("modelChoiceScreen");
+
+	for (auto& modelName : _modelNames)
+	{
+		if (choiceScreen->getScrollingList("modelList")->getButton(modelName)->isHovered())
+		{
+			// Set new current model name
+			_currentModelName = modelName;
+
+			// Send user to editing screen
+			if (_modelEditingEnabled)
+			{
+				// Show game entity
+				if (_fe3d.gameEntity_isExisting(modelName))
+				{
+					_fe3d.gameEntity_show(modelName);
+				}
+
+				// Go to editing screen
+				_gui->getViewport("leftViewport")->getWindow("mainWindow")->setActiveScreen("modelEditingScreen");
+			}
+			else if (_modelRemovalEnabled) // Add confirmation choice
+			{
+				_gui->getGlobalScreen()->addTextfield("areYouSure", vec2(0.0f, 0.1f), vec2(0.3f, 0.1f), "Are you sure?", vec3(1.0f));
+				_gui->getGlobalScreen()->addButton("yes", vec2(-0.1f, -0.1f), vec2(0.1f, 0.1f), vec3(0.0f, 0.5f, 0.0f), vec3(0.0f, 1.0f, 0.0f), "Yes", vec3(1.0f), vec3(0.0f));
+				_gui->getGlobalScreen()->addButton("no", vec2(0.1f, -0.1f), vec2(0.1f, 0.1f), vec3(0.5f, 0.0f, 0.0f), vec3(1.0f, 0.0f, 0.0f), "No", vec3(1.0f), vec3(0.0f));
+			}
+		}
+		else if (choiceScreen->getButton("back")->isHovered())
+		{
+			_modelRemovalEnabled = false;
+			_modelEditingEnabled = false;
+			_gui->getViewport("leftViewport")->getWindow("mainWindow")->setActiveScreen("modelManagementScreen");
+		}
+	}
+}
+
 void ModelEditor::_updateModelEditing()
 {
 	if (_modelEditingEnabled)
 	{
+		auto window = _gui->getViewport("leftViewport")->getWindow("mainWindow");
+		auto editingScreen = window->getScreen("modelEditingScreen");
+
+		// GUI management
+		if (editingScreen->getButton("loadOBJ")->isHovered())
+		{
+			_loadOBJ();
+		}
+		else if (editingScreen->getButton("loadDiffuseMap")->isHovered())
+		{
+			_loadDiffuseMap();
+		}
+		else if (editingScreen->getButton("loadLightMap")->isHovered())
+		{
+			_loadLightMap();
+		}
+		else if (editingScreen->getButton("loadReflectionMap")->isHovered())
+		{
+			_loadReflectionMap();
+		}
+		else if (editingScreen->getButton("back")->isHovered())
+		{
+			// Hide game entity
+			if (_fe3d.gameEntity_isExisting(_currentModelName))
+			{
+				_fe3d.gameEntity_hide(_currentModelName);
+			}
+
+			_currentModelName = "";
+			_modelEditingEnabled = false;
+			_gui->getViewport("leftViewport")->getWindow("mainWindow")->setActiveScreen("modelManagementScreen");
+			_fe3d.textEntity_hide(_modelNameTextfieldEntityID);
+		}
+
 		// Update cursor difference
 		static vec2 totalCursorDifference = vec2(0.0f);
 		static vec2 oldPos = _fe3d.misc_convertFromScreenCoords(_fe3d.misc_getMousePos());

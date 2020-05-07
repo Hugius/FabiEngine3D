@@ -28,7 +28,7 @@ void LeftViewportController::initialize()
 
 	// Left-viewport: mainWindow - modelChoiceScreen
 	_gui->getViewport("leftViewport")->getWindow("mainWindow")->addScreen("modelChoiceScreen");
-	_gui->getViewport("leftViewport")->getWindow("mainWindow")->getScreen("modelChoiceScreen")->addScrollingList("modelList", vec2(0.0f, 0.1f), vec2(1.8, 1.75f), vec3(0.3f), _leftVpButtonColor, _leftVpButtonHoverColor, _leftVpTextColor, _leftVpTextHoverColor, 0.25f, 10);
+	_gui->getViewport("leftViewport")->getWindow("mainWindow")->getScreen("modelChoiceScreen")->addScrollingList("modelList", vec2(0.0f, 0.1f), vec2(1.8, 1.75f), vec3(0.3f), _leftVpButtonColor, _leftVpButtonHoverColor, _leftVpTextColor, _leftVpTextHoverColor, vec2(0.25f, 0.1f));
 	_gui->getViewport("leftViewport")->getWindow("mainWindow")->getScreen("modelChoiceScreen")->addButton("back", vec2(0.0f, -0.9f), vec2(1.0f, 0.1f), _leftVpButtonColor, _leftVpButtonHoverColor, "Go back", _leftVpTextColor, _leftVpTextHoverColor);
 
 	// Left-viewport: mainWindow - modelEditingScreen

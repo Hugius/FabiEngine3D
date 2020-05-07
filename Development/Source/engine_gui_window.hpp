@@ -10,6 +10,8 @@ public:
 
 	void update(float delta, bool hoverable);
 
+	bool isHovered();
+
 	const string& getID();
 	const string& getEntityID();
 	const string& getParentID();

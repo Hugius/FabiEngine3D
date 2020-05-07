@@ -14,7 +14,7 @@ public:
 
 	void update(float delta);
 
-	void addScrollingList(const string& ID, vec2 position, vec2 size, vec3 color, vec3 buttonColor, vec3 buttonHoverColor, vec3 textColor, vec3 textHoverColor, float charWidth, int maxButtonsPerPage);
+	void addScrollingList(const string& ID, vec2 position, vec2 size, vec3 color, vec3 buttonColor, vec3 buttonHoverColor, vec3 textColor, vec3 textHoverColor, vec2 charSize);
 	void addWriteField(const string& ID, vec2 position, vec2 size, vec3 color, vec3 hoverColor, vec3 textColor, vec3 textHoverColor);
 	void addButton(const string& ID, vec2 position, vec2 size, vec3 color, vec3 hoverColor, string textContent, vec3 textColor, vec3 textHoverColor);
 	void addRectangle(const string& ID, vec2 position, vec2 size, vec3 color);
@@ -38,12 +38,8 @@ public:
 	vector<shared_ptr<EngineGuiRectangle>>& getRectangles();
 	vector<shared_ptr<EngineGuiTextfield>>& getTextfields();
 
-	const string& getHoveredItemID();
-
 private:
 	FabiEngine3D& _fe3d;
-
-	string _hoveredItemID = "";
 
 	vector<shared_ptr<EngineGuiScrollingList>> _scrollingLists;
 	vector<shared_ptr<EngineGuiWriteField>> _writeFields;

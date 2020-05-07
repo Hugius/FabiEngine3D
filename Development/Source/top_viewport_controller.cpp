@@ -26,31 +26,28 @@ void TopViewportController::initialize()
 
 void TopViewportController::update(float delta)
 {
-	auto vp = _gui->getViewport("topViewport");
-
-	// Getting hovered button
-	string hoveredItemID = vp->getWindow("projectWindow")->getActiveScreen()->getHoveredItemID();
+	auto projectWindow = _gui->getViewport("topViewport")->getWindow("projectWindow");
 
 	// Check if LMB pressed
 	if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
 	{
-		if (hoveredItemID == "newProject")
+		if (projectWindow->getScreen("mainScreen")->getButton("newProject")->isHovered())
 		{
 			_initializeProjectCreation();
 		}
-		else if (hoveredItemID == "loadProject")
+		else if (projectWindow->getScreen("mainScreen")->getButton("loadProject")->isHovered())
 		{
 			_initializeProjectLoading();
 		}
-		else if (hoveredItemID == "saveProject")
+		else if (projectWindow->getScreen("mainScreen")->getButton("saveProject")->isHovered())
 		{
 			_initializeProjectSaving();
 		}
-		else if (hoveredItemID == "openDocs")
+		else if (projectWindow->getScreen("mainScreen")->getButton("openDocs")->isHovered())
 		{
 			_initializeDocsOpening();
 		}
-		else if (hoveredItemID == "quitEngine")
+		else if (projectWindow->getScreen("mainScreen")->getButton("quitEngine")->isHovered())
 		{
 			_initializeEngineQuitting();
 		}
@@ -73,7 +70,7 @@ void TopViewportController::update(float delta)
 
 void TopViewportController::_initializeProjectCreation()
 {
-	if (!_creatingProject)
+	if (!_creatingProject && !_loadingProject)
 	{
 		_gui->getGlobalScreen()->addTextfield("newProjectName", vec2(0.0f, 0.1f), vec2(0.3f, 0.1f), "Enter project name:", vec3(1.0f));
 		_gui->getGlobalScreen()->addWriteField("newProjectName", vec2(0.0f, 0.0f), vec2(0.5f, 0.1f), vec3(0.25f), vec3(0.5f), vec3(1.0f), vec3(0.0f));
@@ -85,20 +82,23 @@ void TopViewportController::_initializeProjectCreation()
 
 void TopViewportController::_initializeProjectLoading()
 {
-	_loadingProject = true;
-	_gui->getGlobalScreen()->addTextfield("projectList", vec2(0.0f, 0.45f), vec2(0.3f, 0.1f), "Select project:", vec3(1.0f));
-	_gui->getGlobalScreen()->addScrollingList("projectList", vec2(0.0f, 0.0f), vec2(0.5, 0.75f), vec3(0.3f), _buttonColor, _buttonHoverColor, _textColor, _textHoverColor, 0.1f, 5);
-
-	// Get new path
-	string userDirectoryPath = _fe3d.misc_getRootDirectory() + "User\\Projects\\";
-	int endOfNameIndex = 0;
-
-	// Get all project names
-	for (const auto& entry : std::filesystem::directory_iterator(userDirectoryPath))
+	if (!_creatingProject && !_loadingProject)
 	{
-		string projectName = string(entry.path().u8string());
-		projectName.erase(0, userDirectoryPath.size());
-		_gui->getGlobalScreen()->getScrollingList("projectList")->addButton(projectName, projectName);
+		_loadingProject = true;
+		_gui->getGlobalScreen()->addTextfield("projectList", vec2(0.0f, 0.45f), vec2(0.3f, 0.1f), "Select project:", vec3(1.0f));
+		_gui->getGlobalScreen()->addScrollingList("projectList", vec2(0.0f, 0.0f), vec2(0.5, 0.75f), vec3(0.3f), _buttonColor, _buttonHoverColor, _textColor, _textHoverColor, vec2(0.1f, 0.25f));
+
+		// Get new path
+		string userDirectoryPath = _fe3d.misc_getRootDirectory() + "User\\Projects\\";
+		int endOfNameIndex = 0;
+
+		// Get all project names
+		for (const auto& entry : std::filesystem::directory_iterator(userDirectoryPath))
+		{
+			string projectName = string(entry.path().u8string());
+			projectName.erase(0, userDirectoryPath.size());
+			_gui->getGlobalScreen()->getScrollingList("projectList")->addButton(projectName, projectName);
+		}
 	}
 }
 

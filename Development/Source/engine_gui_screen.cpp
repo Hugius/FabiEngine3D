@@ -44,50 +44,22 @@ void EngineGuiScreen::update(float delta, bool hoverable)
 			textfield->show();
 		}
 
-		// Set to default
-		_hoveredItemID = "";
-
 		// Update scrolling lists
 		for (auto& scrollingList : _scrollingLists)
 		{
 			scrollingList->update(delta, hoverable);
-
-			// Set hovered button ID
-			if (scrollingList->isHovered())
-			{
-				if (scrollingList->getHoveredButtonID() == "")
-				{
-					_hoveredItemID = scrollingList->getID();
-				}
-				else
-				{
-					_hoveredItemID = scrollingList->getHoveredButtonID();
-				}
-			}
 		}
 
 		// Update writefields
 		for (auto& writefield : _writeFields)
 		{
 			writefield->update(delta, hoverable);
-
-			// Set hovered button ID
-			if (writefield->isHovered())
-			{
-				_hoveredItemID = writefield->getID();
-			}
 		}
 
 		// Update buttons
 		for (auto& button : _buttons)
 		{
 			button->update(delta, hoverable);
-
-			// Set hovered button ID
-			if (button->isHovered())
-			{
-				_hoveredItemID = button->getID();
-			}
 		}
 	}
 	else
@@ -145,10 +117,10 @@ const string& EngineGuiScreen::getParentID()
 }
 
 void EngineGuiScreen::addScrollingList(const string& ID, vec2 position, vec2 size, vec3 color,
-	vec3 buttonColor, vec3 buttonHoverColor, vec3 textColor, vec3 textHoverColor, float charWidth, int maxButtonsPerPage)
+	vec3 buttonColor, vec3 buttonHoverColor, vec3 textColor, vec3 textHoverColor, vec2 charSize)
 {
 	auto dimensions = _convertDimensions(position, size);
-	_scrollingLists.push_back(make_shared<EngineGuiScrollingList>(_fe3d, _ID, ID, vec2(dimensions.x, dimensions.y), vec2(dimensions.z, dimensions.w), color, buttonColor, buttonHoverColor, textColor, textHoverColor, charWidth, maxButtonsPerPage));
+	_scrollingLists.push_back(make_shared<EngineGuiScrollingList>(_fe3d, _ID, ID, vec2(dimensions.x, dimensions.y), vec2(dimensions.z, dimensions.w), color, buttonColor, buttonHoverColor, textColor, textHoverColor, charSize));
 }
 
 void EngineGuiScreen::addWriteField(const string& ID, vec2 position, vec2 size, vec3 color, vec3 hoverColor, vec3 textColor, vec3 textHoverColor)
@@ -343,11 +315,6 @@ void EngineGuiScreen::deleteTextfield(const string& ID)
 
 	// Error
 	_fe3d.logger_throwError("Textfield \"" + ID + "\" not deleted!");
-}
-
-const string& EngineGuiScreen::getHoveredItemID()
-{
-	return _hoveredItemID;
 }
 
 vec4 EngineGuiScreen::_convertDimensions(vec2 position, vec2 size)

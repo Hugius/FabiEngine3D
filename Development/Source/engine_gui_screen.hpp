@@ -52,7 +52,7 @@ private:
 	const string _ID;
 	const string _parentID;
 
-	bool _enabled = false;
+	bool _isActive = false;
 
 	vector<shared_ptr<EngineGuiScrollingList>> _scrollingLists;
 	vector<shared_ptr<EngineGuiWriteField>> _writeFields;

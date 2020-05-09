@@ -55,6 +55,11 @@ void EngineGuiScrollingList::deleteButton(const string& ID)
 	_fe3d.logger_throwError("Button \"" + ID + "\" not deleted!");
 }
 
+void EngineGuiScrollingList::deleteButtons()
+{
+	_buttons.clear();
+}
+
 void EngineGuiScrollingList::_updateHovering()
 {
 	// Convert dimensions to same space

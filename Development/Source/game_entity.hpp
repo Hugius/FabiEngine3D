@@ -57,7 +57,9 @@ public:
 	const bool isSceneReflective() const;
 	const bool isSpecular() const;
 	const bool isShadowed() const;
-	const bool hasTexture() const;
+	const bool hasDiffuseMap() const;
+	const bool hasLightMap() const;
+	const bool hasReflectionMap() const;
 	const float getMaxY() const;
 	const float getAlpha() const;
 	const float getUvRepeat() const;

@@ -1,71 +1,82 @@
 #include "top_viewport_controller.hpp"
 
 #include <fstream>
+#include <sstream>
 #include <filesystem>
 #include <direct.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 
+TopViewportController::TopViewportController(FabiEngine3D& fe3d, shared_ptr<EngineGuiManager> gui, ModelEditor& modelEditor) :
+	ViewportController(fe3d, gui),
+	_modelEditor(modelEditor)
+	
+{
+
+}
+
+TopViewportController::~TopViewportController()
+{
+	_saveCurrentProject();
+}
+
 void TopViewportController::initialize()
 {
 	// Top-viewport: projectWindow
-	_gui->getViewport("topViewport")->addWindow("projectWindow", vec2(-0.25f, 0.0f), vec2(0.9825f, 1.5f), vec3(0.25f));
-	_gui->getViewport("topViewport")->getWindow("projectWindow")->addScreen("mainScreen");
-	_gui->getViewport("topViewport")->getWindow("projectWindow")->setActiveScreen("mainScreen");
-	_gui->getViewport("topViewport")->getWindow("projectWindow")->getScreen("mainScreen")->addButton("newProject", vec2(-0.767f, 0.0f), vec2(0.3f, 1.25f), _buttonColor, _buttonHoverColor, "New project", _textColor, _textHoverColor);
-	_gui->getViewport("topViewport")->getWindow("projectWindow")->getScreen("mainScreen")->addButton("loadProject", vec2(-0.384, 0.0f), vec2(0.3f, 1.25f), _buttonColor, _buttonHoverColor, "Load project", _textColor, _textHoverColor);
-	_gui->getViewport("topViewport")->getWindow("projectWindow")->getScreen("mainScreen")->addButton("saveProject", vec2(0.0f, 0.0f), vec2(0.3f, 1.25f), _buttonColor, _buttonHoverColor, "Save project", _textColor, _textHoverColor);
-	_gui->getViewport("topViewport")->getWindow("projectWindow")->getScreen("mainScreen")->addButton("openDocs", vec2(0.384, 0.0f), vec2(0.3f, 1.25f), _buttonColor, _buttonHoverColor, "Open docs", _textColor, _textHoverColor);
-	_gui->getViewport("topViewport")->getWindow("projectWindow")->getScreen("mainScreen")->addButton("quitEngine", vec2(0.767f, 0.0f), vec2(0.3f, 1.25f), _buttonColor, _buttonHoverColor, "Quit engine", _textColor, _textHoverColor);
+	_gui->getViewport("top")->addWindow("projectWindow", vec2(-0.25f, 0.0f), vec2(0.9825f, 1.5f), vec3(0.25f));
+	_gui->getViewport("top")->getWindow("projectWindow")->addScreen("main");
+	_gui->getViewport("top")->getWindow("projectWindow")->setActiveScreen("main");
+	_gui->getViewport("top")->getWindow("projectWindow")->getScreen("main")->addButton("newProject", vec2(-0.767f, 0.0f), vec2(0.3f, 1.25f), _buttonColor, _buttonHoverColor, "New project", _textColor, _textHoverColor);
+	_gui->getViewport("top")->getWindow("projectWindow")->getScreen("main")->addButton("loadProject", vec2(-0.384, 0.0f), vec2(0.3f, 1.25f), _buttonColor, _buttonHoverColor, "Load project", _textColor, _textHoverColor);
+	_gui->getViewport("top")->getWindow("projectWindow")->getScreen("main")->addButton("saveProject", vec2(0.0f, 0.0f), vec2(0.3f, 1.25f), _buttonColor, _buttonHoverColor, "Save project", _textColor, _textHoverColor);
+	_gui->getViewport("top")->getWindow("projectWindow")->getScreen("main")->addButton("openDocs", vec2(0.384, 0.0f), vec2(0.3f, 1.25f), _buttonColor, _buttonHoverColor, "Open docs", _textColor, _textHoverColor);
+	_gui->getViewport("top")->getWindow("projectWindow")->getScreen("main")->addButton("quitEngine", vec2(0.767f, 0.0f), vec2(0.3f, 1.25f), _buttonColor, _buttonHoverColor, "Quit engine", _textColor, _textHoverColor);
 
 	// Top-viewport: gameWindow
-	_gui->getViewport("topViewport")->addWindow("gameWindow", vec2(0.25f, 0.0f), vec2(0.9825f, 1.5f), vec3(0.25f));
-	_gui->getViewport("topViewport")->getWindow("gameWindow")->addScreen("mainScreen");
-	_gui->getViewport("topViewport")->getWindow("gameWindow")->setActiveScreen("mainScreen");
+	_gui->getViewport("top")->addWindow("gameWindow", vec2(0.25f, 0.0f), vec2(0.9825f, 1.5f), vec3(0.25f));
+	_gui->getViewport("top")->getWindow("gameWindow")->addScreen("main");
+	_gui->getViewport("top")->getWindow("gameWindow")->setActiveScreen("main");
 }
 
 void TopViewportController::update(float delta)
 {
-	auto projectWindow = _gui->getViewport("topViewport")->getWindow("projectWindow");
+	auto projectWindow = _gui->getViewport("top")->getWindow("projectWindow");
 
 	// Check if LMB pressed
 	if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
 	{
-		if (projectWindow->getScreen("mainScreen")->getButton("newProject")->isHovered())
+		if (projectWindow->getScreen("main")->getButton("newProject")->isHovered())
 		{
 			_initializeProjectCreation();
 		}
-		else if (projectWindow->getScreen("mainScreen")->getButton("loadProject")->isHovered())
+		else if (projectWindow->getScreen("main")->getButton("loadProject")->isHovered())
 		{
 			_initializeProjectLoading();
 		}
-		else if (projectWindow->getScreen("mainScreen")->getButton("saveProject")->isHovered())
+		else if (projectWindow->getScreen("main")->getButton("saveProject")->isHovered())
 		{
-			_initializeProjectSaving();
+			_saveCurrentProject();
 		}
-		else if (projectWindow->getScreen("mainScreen")->getButton("openDocs")->isHovered())
+		else if (projectWindow->getScreen("main")->getButton("openDocs")->isHovered())
 		{
-			_initializeDocsOpening();
+			
 		}
-		else if (projectWindow->getScreen("mainScreen")->getButton("quitEngine")->isHovered())
+		else if (projectWindow->getScreen("main")->getButton("quitEngine")->isHovered())
 		{
-			_initializeEngineQuitting();
+			_fe3d.engine_stop();
 		}
 	}
 
 	// Update specific processes
 	_updateProjectCreation();
 	_updateProjectLoading();
-	_updateProjectSaving();
-	_updateDocsOpening();
-	_updateEngineQuitting();
 
 	// Update button hoverability
-	_gui->getViewport("leftViewport")->getWindow("mainWindow")->getScreen("mainScreen")->getButton("modelEditor")->setHoverable(_currentProjectName != "");
-	_gui->getViewport("leftViewport")->getWindow("mainWindow")->getScreen("mainScreen")->getButton("worldEditor")->setHoverable(_currentProjectName != "");
-	_gui->getViewport("leftViewport")->getWindow("mainWindow")->getScreen("mainScreen")->getButton("placingEditor")->setHoverable(_currentProjectName != "");
-	_gui->getViewport("leftViewport")->getWindow("mainWindow")->getScreen("mainScreen")->getButton("lightingEditor")->setHoverable(_currentProjectName != "");
-	_gui->getViewport("leftViewport")->getWindow("mainWindow")->getScreen("mainScreen")->getButton("scriptEditor")->setHoverable(_currentProjectName != "");
+	_gui->getViewport("left")->getWindow("main")->getScreen("main")->getButton("modelEditor")->setHoverable(_currentProjectName != "");
+	_gui->getViewport("left")->getWindow("main")->getScreen("main")->getButton("worldEditor")->setHoverable(_currentProjectName != "");
+	_gui->getViewport("left")->getWindow("main")->getScreen("main")->getButton("placingEditor")->setHoverable(_currentProjectName != "");
+	_gui->getViewport("left")->getWindow("main")->getScreen("main")->getButton("lightingEditor")->setHoverable(_currentProjectName != "");
+	_gui->getViewport("left")->getWindow("main")->getScreen("main")->getButton("scriptEditor")->setHoverable(_currentProjectName != "");
 }
 
 void TopViewportController::_initializeProjectCreation()
@@ -84,9 +95,10 @@ void TopViewportController::_initializeProjectLoading()
 {
 	if (!_creatingProject && !_loadingProject)
 	{
-		_loadingProject = true;
 		_gui->getGlobalScreen()->addTextfield("projectList", vec2(0.0f, 0.45f), vec2(0.3f, 0.1f), "Select project:", vec3(1.0f));
 		_gui->getGlobalScreen()->addScrollingList("projectList", vec2(0.0f, 0.0f), vec2(0.5, 0.75f), vec3(0.3f), _buttonColor, _buttonHoverColor, _textColor, _textHoverColor, vec2(0.1f, 0.25f));
+		_gui->setFocus(true);
+		_loadingProject = true;
 
 		// Get new path
 		string userDirectoryPath = _fe3d.misc_getRootDirectory() + "User\\Projects\\";
@@ -100,21 +112,6 @@ void TopViewportController::_initializeProjectLoading()
 			_gui->getGlobalScreen()->getScrollingList("projectList")->addButton(projectName, projectName);
 		}
 	}
-}
-
-void TopViewportController::_initializeProjectSaving()
-{
-	_savingProject = true;
-}
-
-void TopViewportController::_initializeDocsOpening()
-{
-	_openingDocs = true;
-}
-
-void TopViewportController::_initializeEngineQuitting()
-{
-	_quittingEngine = true;
 }
 
 void TopViewportController::_updateProjectCreation()
@@ -148,12 +145,20 @@ void TopViewportController::_updateProjectCreation()
 
 					// Create new models file
 					std::ofstream file;
-					file.open(_fe3d.misc_getRootDirectory() + "User\\Projects\\" + projectName + "\\models.fe3d");
-					file << "test";
+					file.open(_fe3d.misc_getRootDirectory() + "User\\Projects\\" + projectName + "\\models.fe3d");;
 					file.close();
 
 					// Apply to current project
 					_currentProjectName = projectName;
+
+					// Go back to main editor screen
+					_gui->getViewport("left")->getWindow("main")->setActiveScreen("main");
+
+					// Unload model editor
+					if (_modelEditor.isLoaded())
+					{
+						_modelEditor.unload();
+					}
 				}
 			}
 
@@ -170,30 +175,74 @@ void TopViewportController::_updateProjectLoading()
 {
 	if (_loadingProject)
 	{
-		
+		bool loaded = false;
+
+		// Check if project must be loaded
+		for (auto& button : _gui->getGlobalScreen()->getScrollingList("projectList")->getButtons())
+		{
+			if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
+			{
+				if (button->isHovered())
+				{
+					// Change active project
+					_currentProjectName = button->getID();
+					_fe3d.misc_setWindowTitle("FabiEngine3D - " + _currentProjectName);
+					loaded = true;
+
+					// Go back to main editor screen
+					_gui->getViewport("left")->getWindow("main")->setActiveScreen("main");
+
+					// Unload model editor
+					if (_modelEditor.isLoaded())
+					{
+						_modelEditor.unload();
+					}
+
+					// Load models file
+					std::ifstream file;
+					file.open(_fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\models.fe3d");
+					string line;
+
+					// Read model data
+					while (std::getline(file, line))
+					{
+						string modelName;
+						std::istringstream iss(line);
+						
+						iss >> modelName;
+						_modelEditor.addModel(modelName);
+					}
+
+					// Close file
+					file.close();
+				}
+			}
+		}
+
+		// Cleaning up
+		if (_fe3d.input_getKeyDown(Input::KEY_ESCAPE) || loaded)
+		{
+
+			_gui->getGlobalScreen()->deleteTextfield("projectList");
+			_gui->getGlobalScreen()->deleteScrollingList("projectList");
+			_gui->setFocus(false);
+			_loadingProject = false;
+			return;
+		}
 	}
 }
 
-void TopViewportController::_updateProjectSaving()
+void TopViewportController::_saveCurrentProject()
 {
-	if (_savingProject)
+	std::ofstream file;
+	file.open(_fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\models.fe3d");
+
+	for (auto& modelName : _modelEditor.getModelNames())
 	{
-
+		file << modelName << "\n";
 	}
-}
 
-void TopViewportController::_updateDocsOpening()
-{
-	if (_openingDocs)
-	{
+	file.close();
 
-	}
-}
-
-void TopViewportController::_updateEngineQuitting()
-{
-	if (_quittingEngine)
-	{
-		_fe3d.engine_stop();
-	}
+	_fe3d.logger_throwInfo("Current project saved!");
 }

@@ -13,6 +13,7 @@ public:
 	void update(float delta, bool hoverable);
 	void addButton(const string& ID, string textContent);
 	void deleteButton(const string& ID);
+	void deleteButtons();
 	void show();
 	void hide();
 

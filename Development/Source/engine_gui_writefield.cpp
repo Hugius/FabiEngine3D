@@ -35,6 +35,11 @@ string EngineGuiWriteField::getTextContent()
 	return _currentTextContent;
 }
 
+void EngineGuiWriteField::setTextContent(string content)
+{
+	_currentTextContent = content;
+}
+
 void EngineGuiWriteField::_updateActivation()
 {
 	if (_isHovered)
@@ -42,6 +47,13 @@ void EngineGuiWriteField::_updateActivation()
 		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
 		{
 			_isActive = true;
+		}
+	}
+	else
+	{
+		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
+		{
+			_isActive = false;
 		}
 	}
 }
@@ -150,7 +162,7 @@ void EngineGuiWriteField::_updateTyping(float delta)
 	else
 	{
 		// Update text content
-		_fe3d.textEntity_setTextContent(_textfield->getEntityID(), _currentTextContent, 0.01f);
+		_fe3d.textEntity_setTextContent(_textfield->getEntityID(), _currentTextContent, _charWidth);
 		_confirmedInput = false;
 		_cancelledInput = false;
 	}

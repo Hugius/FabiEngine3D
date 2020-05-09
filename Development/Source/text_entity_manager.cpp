@@ -35,7 +35,7 @@ void TextEntityManager::addTextEntity
 	{
 		if (isExisting(ID))
 		{
-			deleteEntity(ID);
+			deleteEntity(ID, EntityType::TEXT);
 		}
 	}
 

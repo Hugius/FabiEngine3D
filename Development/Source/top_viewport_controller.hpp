@@ -1,11 +1,13 @@
 #pragma once
 
 #include "viewport_controller.hpp"
+#include "model_editor.hpp"
 
 class TopViewportController final : public ViewportController
 {
 public:
-	using ViewportController::ViewportController;
+	TopViewportController(FabiEngine3D& fe3d, shared_ptr<EngineGuiManager> gui, ModelEditor& modelEditor);
+	~TopViewportController();
 
 	void initialize() override;
 	void update(float delta) override;
@@ -13,14 +15,11 @@ public:
 private:
 	void _initializeProjectCreation();
 	void _initializeProjectLoading();
-	void _initializeProjectSaving();
-	void _initializeDocsOpening();
-	void _initializeEngineQuitting();
+	void _saveCurrentProject();
 	void _updateProjectCreation();
 	void _updateProjectLoading();
-	void _updateProjectSaving();
-	void _updateDocsOpening();
-	void _updateEngineQuitting();
+
+	ModelEditor& _modelEditor;
 
 	string _currentProjectName = "";
 

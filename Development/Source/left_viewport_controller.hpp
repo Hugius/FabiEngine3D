@@ -11,6 +11,8 @@ public:
 	void initialize() override;
 	void update(float delta) override;
 
+	ModelEditor& getModelEditor();
+
 private:
 	ModelEditor _modelEditor;
 

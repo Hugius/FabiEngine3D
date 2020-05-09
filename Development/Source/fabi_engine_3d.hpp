@@ -148,6 +148,9 @@ public:
 	bool gameEntity_isExisting(const string& ID);
 	bool gameEntity_isVisible(const string& ID);
 	bool gameEntity_isMultiTextured(const string& ID);
+	bool gameEntity_hasDiffuseMap(const string& ID);
+	bool gameEntity_hasLightMap(const string& ID);
+	bool gameEntity_hasReflectionMap(const string& ID);
 	void gameEntity_move(const string& ID, vec3 factor);
 	void gameEntity_rotate(const string& ID, vec3 factor);
 	void gameEntity_scale(const string& ID, vec3 factor);
@@ -410,7 +413,8 @@ public:
 	void misc_hidePerformanceProfiling();
 	void misc_showAudioDebugging();
 	void misc_hideAudioDebugging();
-	void misc_setMainColor(vec3 color);
+	void misc_setMainRenderingColor(vec3 color);
+	void misc_setWindowTitle(string title);
 	string misc_getWinExplorerFilename(string startingDir, string fileType);
 	string misc_vec2str(vec2 vec);
 	string misc_vec2str(vec3 vec);

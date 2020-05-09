@@ -20,7 +20,7 @@ BaseEntityManager::~BaseEntityManager()
 }
 
 // Deleting entity
-void BaseEntityManager::deleteEntity(const string & ID)
+void BaseEntityManager::deleteEntity(const string & ID, EntityType type)
 {
 	for (size_t i = 0; i < _entities.size(); i++)
 	{
@@ -32,8 +32,14 @@ void BaseEntityManager::deleteEntity(const string & ID)
 		}
 	}
 
+	// Temporary entity type map
+	std::map<EntityType, string> temp;
+	temp[EntityType::SKY] = "SKY"; temp[EntityType::TERRAIN] = "TERRAIN"; temp[EntityType::WATER] = "WATER";
+	temp[EntityType::GAME] = "GAME"; temp[EntityType::BILLBOARD] = "BILLBOARD"; temp[EntityType::AABB] = "AABB";
+	temp[EntityType::LIGHT] = "LIGHT"; temp[EntityType::GUI] = "GUI"; temp[EntityType::TEXT] = "TEXT";
+
 	// Error logging
-	Logger::getInst().throwError("Nonexisting Entity with ID " + ID + " requested for removal");
+	Logger::getInst().throwError("Nonexisting " + temp[type] + " entity with ID " + ID + " requested for removal");
 }
 
 void BaseEntityManager::deleteEntities()

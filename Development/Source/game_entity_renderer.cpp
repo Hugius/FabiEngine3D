@@ -113,14 +113,14 @@ void GameEntityRenderer::render(const GameEntity * entity)
 			_shader.uploadUniform("u_customAlpha",       entity->getAlpha());
 			_shader.uploadUniform("u_isShadowed",        entity->isShadowed());
 			_shader.uploadUniform("u_uvRepeat",		     entity->getUvRepeat());
-			_shader.uploadUniform("u_hasDiffuseMap",	 entity->hasTexture());
+			_shader.uploadUniform("u_hasDiffuseMap",	 entity->hasDiffuseMap());
 
 			// Bind
 			int index = 0;
 			for (auto & buffer : entity->getOglBuffers())
 			{
 				// Diffuse map
-				if (entity->hasTexture())
+				if (entity->hasDiffuseMap())
 				{
 					glActiveTexture(GL_TEXTURE0);
 					glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap(index));

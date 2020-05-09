@@ -33,7 +33,7 @@ public:
 	BaseEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, ShaderBus& shaderBus);
 	virtual ~BaseEntityManager();
 
-	void deleteEntity(const string & ID);
+	void deleteEntity(const string & ID, EntityType type);
 	void deleteEntities();
 
 	bool isExisting(const string & ID);

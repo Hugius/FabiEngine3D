@@ -16,6 +16,8 @@ public:
 
 	string getTextContent();
 
+	void setTextContent(string content);
+
 private:
 	void _updateActivation();
 	void _updateTyping(float delta);

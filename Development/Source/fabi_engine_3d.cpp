@@ -168,7 +168,7 @@ void FabiEngine3D::skyEntity_addNightCubemap(const string& ID, const string& tex
 
 void FabiEngine3D::skyEntity_delete(const string& ID)
 {
-	_core->_skyEntityManager.deleteEntity(ID);
+	_core->_skyEntityManager.deleteEntity(ID, EntityType::SKY);
 	_core->_skyEntityManager.selectSky("");
 }
 
@@ -245,7 +245,7 @@ void FabiEngine3D::terrainEntity_add(const string& ID, const string& heightmapNa
 
 void FabiEngine3D::terrainEntity_delete(const string& ID)
 {
-	_core->_terrainEntityManager.deleteEntity(ID);
+	_core->_terrainEntityManager.deleteEntity(ID, EntityType::TERRAIN);
 	_core->_terrainEntityManager.selectTerrain("");
 }
 
@@ -313,7 +313,7 @@ void FabiEngine3D::waterEntity_add(const string& ID, const string& assetName, ve
 
 void FabiEngine3D::waterEntity_delete(const string& ID)
 {
-	_core->_waterEntityManager.deleteEntity(ID);
+	_core->_waterEntityManager.deleteEntity(ID, EntityType::WATER);
 	_core->_waterEntityManager.selectWater("");
 }
 
@@ -396,7 +396,7 @@ void FabiEngine3D::gameEntity_deleteAll()
 		if (_core->_aabbEntityManager.isExisting(entity->getID()))
 		{
 			// If the case, delete it too
-			_core->_aabbEntityManager.deleteEntity(entity->getID());
+			_core->_aabbEntityManager.deleteEntity(entity->getID(), EntityType::AABB);
 		}
 
 		// Delete GAME entity
@@ -430,11 +430,11 @@ void FabiEngine3D::gameEntity_delete(const string& ID)
 	if (_core->_aabbEntityManager.isExisting(ID))
 	{
 		// If the case, delete it too
-		_core->_aabbEntityManager.deleteEntity(ID);
+		_core->_aabbEntityManager.deleteEntity(ID, EntityType::AABB);
 	}
 
 	// Delete GAME entity
-	_core->_gameEntityManager.deleteEntity(ID);
+	_core->_gameEntityManager.deleteEntity(ID, EntityType::GAME);
 }
 
 void FabiEngine3D::gameEntity_deleteGroup(const string& ID)
@@ -453,7 +453,7 @@ void FabiEngine3D::gameEntity_deleteGroup(const string& ID)
 				}
 
 				// Delete game entity
-				_core->_gameEntityManager.deleteEntity(entity->getID());
+				_core->_gameEntityManager.deleteEntity(entity->getID(), EntityType::GAME);
 			}
 		}
 	}
@@ -539,6 +539,21 @@ bool FabiEngine3D::gameEntity_isVisible(const string& ID)
 bool FabiEngine3D::gameEntity_isMultiTextured(const string& ID)
 {
 	return (_core->_gameEntityManager.getEntity(ID)->getOglBuffers().size() > 1);
+}
+
+bool FabiEngine3D::gameEntity_hasDiffuseMap(const string& ID)
+{
+	return _core->_gameEntityManager.getEntity(ID)->hasDiffuseMap();
+}
+
+bool FabiEngine3D::gameEntity_hasLightMap(const string& ID)
+{
+	return _core->_gameEntityManager.getEntity(ID)->hasLightMap();
+}
+
+bool FabiEngine3D::gameEntity_hasReflectionMap(const string& ID)
+{
+	return _core->_gameEntityManager.getEntity(ID)->hasReflectionMap();
 }
 
 void FabiEngine3D::gameEntity_move(const string& ID, vec3 factor)
@@ -682,7 +697,7 @@ void FabiEngine3D::billboardEntity_deleteAll()
 
 void FabiEngine3D::billboardEntity_delete(const string& ID)
 {
-	_core->_billboardEntityManager.deleteEntity(ID);
+	_core->_billboardEntityManager.deleteEntity(ID, EntityType::BILLBOARD);
 }
 
 void FabiEngine3D::billboardEntity_hideAll()
@@ -846,7 +861,7 @@ void FabiEngine3D::aabbEntity_bindToGameEntityGroup(const string& parentID, vec3
 
 void FabiEngine3D::aabbEntity_delete(const string& ID)
 {
-	_core->_aabbEntityManager.deleteEntity(ID);
+	_core->_aabbEntityManager.deleteEntity(ID, EntityType::AABB);
 }
 
 void FabiEngine3D::aabbEntity_setResponsiveness(const string& ID, bool responsive)
@@ -1123,7 +1138,7 @@ void FabiEngine3D::lightEntity_add(const string& ID, vec3 position, vec3 color, 
 
 void FabiEngine3D::lightEntity_delete(const string& ID)
 {
-	_core->_lightEntityManager.deleteEntity(ID);
+	_core->_lightEntityManager.deleteEntity(ID, EntityType::LIGHT);
 }
 
 void FabiEngine3D::lightEntity_hide(const string& ID)
@@ -1203,7 +1218,7 @@ void FabiEngine3D::guiEntity_show(const string& ID)
 
 void FabiEngine3D::guiEntity_delete(const string& ID)
 {
-	_core->_guiEntityManager.deleteEntity(ID);
+	_core->_guiEntityManager.deleteEntity(ID, EntityType::GUI);
 }
 
 void FabiEngine3D::guiEntity_changeTexture(const string& ID, const string& assetName)
@@ -1316,7 +1331,7 @@ void FabiEngine3D::textEntity_add(const string& ID, const string& text, const st
 
 void FabiEngine3D::textEntity_delete(const string& ID)
 {
-	_core->_textEntityManager.deleteEntity(ID);
+	_core->_textEntityManager.deleteEntity(ID, EntityType::TEXT);
 }
 
 bool FabiEngine3D::textEntity_isExisting(const string& ID)
@@ -1916,9 +1931,14 @@ void FabiEngine3D::misc_hideAudioDebugging()
 	_core->_audioPlayer.setChannelDebugging(false);
 }
 
-void FabiEngine3D::misc_setMainColor(vec3 color)
+void FabiEngine3D::misc_setMainRenderingColor(vec3 color)
 {
 	glClearColor(color.r, color.g, color.b, 1.0f);
+}
+
+void FabiEngine3D::misc_setWindowTitle(string title)
+{
+	_core->_windowManager.setTitle(title);
 }
 
 string FabiEngine3D::misc_getWinExplorerFilename(string startingDir, string fileType)

@@ -17,13 +17,17 @@ public:
 	~ModelEditor() = default;
 
 	vector<string>& getTotalObjFileNames();
+	vector<string>& getModelNames();
 
+	void load();
+	void unload();
 	void update(float delta);
+	void addModel(string modelName);
+
+	bool isLoaded();
 
 private:
 	void _loadObjFileNames();
-	void _loadEnvironment();
-	void _unloadEnvironment();
 	void _loadOBJ();
 	void _loadDiffuseMap();
 	void _loadLightMap();
@@ -37,7 +41,9 @@ private:
 	bool _modelCreationEnabled = false;
 	bool _modelChoosingEnabled = false;
 	bool _modelEditingEnabled = false;
+	bool _modelResizingEnabled = false;
 	bool _modelRemovalEnabled = false;
+	bool _loaded = false;
 
 	const vec3 _startingCameraPos = vec3(0.0f, 5.0f, 5.0f);
 
@@ -55,7 +61,4 @@ private:
 	string _currentModelName = "";
 	vector<string> _modelNames;
 	vector<string> _totalObjFileNames;
-
-	unsigned int _modelIndex = 0;
-	RotationType _rotationType = RotationType::Y;
 };

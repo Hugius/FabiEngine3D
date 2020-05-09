@@ -2,9 +2,9 @@
 
 EngineController::EngineController() :
 	_gui(make_shared<EngineGuiManager>(*this)),
-	_topViewportController(*this, _gui),
 	_leftViewportController(*this, _gui),
 	_rightViewportController(*this, _gui),
+	_topViewportController(*this, _gui, _leftViewportController.getModelEditor()),
 	_bottomViewportController(*this, _gui)
 {
 
@@ -17,7 +17,7 @@ EngineController::~EngineController()
 
 void EngineController::FE3D_CONTROLLER_INIT()
 {
-	misc_setMainColor(vec3(0.5f, 0.5f, 1.0f));
+	misc_setMainRenderingColor(vec3(0.5f, 0.5f, 1.0f));
 	_topViewportController.initialize();
 	_leftViewportController.initialize();
 	_rightViewportController.initialize();

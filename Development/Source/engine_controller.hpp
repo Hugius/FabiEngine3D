@@ -23,8 +23,8 @@ private:
 
 	string _currentProject = "";
 	
-	TopViewportController _topViewportController;
 	LeftViewportController _leftViewportController;
 	RightViewportController _rightViewportController;
+	TopViewportController _topViewportController;
 	BottomViewportController _bottomViewportController;
 };

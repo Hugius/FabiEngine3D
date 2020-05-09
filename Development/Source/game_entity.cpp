@@ -242,9 +242,19 @@ const bool GameEntity::isShadowed() const
 	return _isShadowed;
 }
 
-const bool GameEntity::hasTexture() const
+const bool GameEntity::hasDiffuseMap() const
 {
 	return !_diffuseMaps.empty();
+}
+
+const bool GameEntity::hasLightMap() const
+{
+	return !_lightMaps.empty();
+}
+
+const bool GameEntity::hasReflectionMap() const
+{
+	return !_reflectionMaps.empty();
 }
 
 const float GameEntity::getMaxY() const

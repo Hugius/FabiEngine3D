@@ -107,9 +107,24 @@ void GameEntity::setColor(vec3 val)
 	_color = val;
 }
 
-void GameEntity::setModelName(const string & val)
+void GameEntity::setObjName(const string & val)
 {
-	_modelName = val;
+	_objName = val;
+}
+
+void GameEntity::setDiffuseMapName(const string& val)
+{
+	_diffuseMapName = val;
+}
+
+void GameEntity::setLightMapName(const string& val)
+{
+	_lightMapName = val;
+}
+
+void GameEntity::setReflectionMapName(const string& val)
+{
+	_reflectionMapName = val;
 }
 
 void GameEntity::setTransparent(bool val)
@@ -202,9 +217,24 @@ const vec3 GameEntity::getColor() const
 	return _color;
 }
 
-const string & GameEntity::getModelName() const
+const string & GameEntity::getObjName() const
 {
-	return _modelName;
+	return _objName;
+}
+
+const string& GameEntity::getDiffuseMapName() const
+{
+	return _diffuseMapName;
+}
+
+const string& GameEntity::getLightMapName() const
+{
+	return _lightMapName;
+}
+
+const string& GameEntity::getReflectionMapName() const
+{
+	return _reflectionMapName;
 }
 
 const bool GameEntity::isTransparent() const

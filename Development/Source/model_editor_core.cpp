@@ -61,7 +61,7 @@ void ModelEditor::_updateModelCreation()
 			if (_gui->getGlobalScreen()->getWriteField("newModelName")->confirmedInput())
 			{
 				// Add model
-				addModel(modelName);
+				addModel(modelName, "", "", "", "", vec3(0.0f));
 
 				// Go to editor screen
 				_currentModelName = modelName;
@@ -152,13 +152,21 @@ void ModelEditor::_updateModelEditing()
 			else if (editingScreen->getButton("setSize")->isHovered())
 			{
 				_modelResizingEnabled = true;
+
+				// Add textfields and writefields
 				_gui->getGlobalScreen()->addTextfield("modelSizeX", vec2(-0.3f, 0.1f), vec2(0.05f, 0.1f), "X", vec3(1.0f));
 				_gui->getGlobalScreen()->addTextfield("modelSizeY", vec2(0.0f, 0.1f), vec2(0.05f, 0.1f), "Y", vec3(1.0f));
 				_gui->getGlobalScreen()->addTextfield("modelSizeZ", vec2(0.3f, 0.1f), vec2(0.05f, 0.1f), "Z", vec3(1.0f));
-				_gui->getGlobalScreen()->addWriteField("modelSizeX", vec2(-0.3f, 0.0f), vec2(0.2f, 0.1f), vec3(0.25f), vec3(0.5f), vec3(1.0f), vec3(0.0f));
-				_gui->getGlobalScreen()->addWriteField("modelSizeY", vec2(0.0f, 0.0f), vec2(0.2f, 0.1f), vec3(0.25f), vec3(0.5f), vec3(1.0f), vec3(0.0f));
-				_gui->getGlobalScreen()->addWriteField("modelSizeZ", vec2(0.3f, 0.0f), vec2(0.2f, 0.1f), vec3(0.25f), vec3(0.5f), vec3(1.0f), vec3(0.0f));
+				_gui->getGlobalScreen()->addWriteField("modelSizeX", vec2(-0.3f, 0.0f), vec2(0.2f, 0.1f), vec3(0.25f), vec3(0.5f), vec3(1.0f), vec3(0.0f), 0, 1, 1, 1);
+				_gui->getGlobalScreen()->addWriteField("modelSizeY", vec2(0.0f, 0.0f), vec2(0.2f, 0.1f), vec3(0.25f), vec3(0.5f), vec3(1.0f), vec3(0.0f), 0, 1, 1, 1);
+				_gui->getGlobalScreen()->addWriteField("modelSizeZ", vec2(0.3f, 0.0f), vec2(0.2f, 0.1f), vec3(0.25f), vec3(0.5f), vec3(1.0f), vec3(0.0f)), 0, 1, 1, 1;
 				_gui->getGlobalScreen()->addButton("done", vec2(0.0f, -0.2f), vec2(0.15f, 0.1f), vec3(0.0f, 0.5f, 0.0f), vec3(0.0f, 1.0f, 0.0f), "Done", vec3(1.0f), vec3(0.0f));
+				
+				// Set default model size
+				vec3 currentSize = _fe3d.gameEntity_getSize(_currentModelName);
+				_gui->getGlobalScreen()->getWriteField("modelSizeX")->setTextContent(std::to_string(int(currentSize.x * 10.0f)));
+				_gui->getGlobalScreen()->getWriteField("modelSizeY")->setTextContent(std::to_string(int(currentSize.y * 10.0f)));
+				_gui->getGlobalScreen()->getWriteField("modelSizeZ")->setTextContent(std::to_string(int(currentSize.z * 10.0f)));
 			}
 			else if (editingScreen->getButton("back")->isHovered()) 
 			{
@@ -216,28 +224,24 @@ void ModelEditor::_updateModelEditing()
 		if (_modelResizingEnabled)
 		{
 			// Current model size
-			vec3 currentSize = _fe3d.gameEntity_getSize(_currentModelName);
-			vec3 newSize = currentSize;
-			_gui->getGlobalScreen()->getWriteField("modelSizeX")->setTextContent(std::to_string(currentSize.x));
-			_gui->getGlobalScreen()->getWriteField("modelSizeY")->setTextContent(std::to_string(currentSize.y));
-			_gui->getGlobalScreen()->getWriteField("modelSizeZ")->setTextContent(std::to_string(currentSize.z));
+			vec3 newSize = _fe3d.gameEntity_getSize(_currentModelName);
 
 			// X
 			if (_gui->getGlobalScreen()->getWriteField("modelSizeX")->getTextContent() != "")
 			{
-				newSize.x = float(stoi(_gui->getGlobalScreen()->getWriteField("modelSizeX")->getTextContent()));
+				newSize.x = float(stoi(_gui->getGlobalScreen()->getWriteField("modelSizeX")->getTextContent())) / 10.0f;
 			}
 
 			// Y
 			if (_gui->getGlobalScreen()->getWriteField("modelSizeY")->getTextContent() != "")
 			{
-				newSize.y = float(stoi(_gui->getGlobalScreen()->getWriteField("modelSizeY")->getTextContent()));
+				newSize.y = float(stoi(_gui->getGlobalScreen()->getWriteField("modelSizeY")->getTextContent())) / 10.0f;
 			}
 
 			// Z
 			if (_gui->getGlobalScreen()->getWriteField("modelSizeZ")->getTextContent() != "")
 			{
-				newSize.z = float(stoi(_gui->getGlobalScreen()->getWriteField("modelSizeZ")->getTextContent()));
+				newSize.z = float(stoi(_gui->getGlobalScreen()->getWriteField("modelSizeZ")->getTextContent())) / 10.0f;
 			}
 
 			// Set new model size

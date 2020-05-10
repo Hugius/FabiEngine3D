@@ -22,7 +22,7 @@ public:
 	void load();
 	void unload();
 	void update(float delta);
-	void addModel(string modelName);
+	void addModel(string modelName, string objName, string diffuseMapName, string lightMapName, string reflectionMapName, vec3 size);
 
 	bool isLoaded();
 

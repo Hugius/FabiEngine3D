@@ -1,6 +1,7 @@
 #pragma warning(disable:4996) // Disabling annoying warning
 
 #include <GLEW/glew.h>
+#include <filesystem>
 
 #include "obj_loader.hpp"
 #include "Logger.hpp"
@@ -36,8 +37,9 @@ vector<ObjPart> OBJLoader::_loadOBJ(const string& filePath)
 	fullDir = fullDir.substr(0, fullDir.size() - 25);
 
 	// Load .obj file
-	FILE * file = fopen((fullDir + filePath + ".obj").c_str(), "r");
-	if (errno != 0)
+	string path = fullDir + filePath + ".obj";
+	FILE * file = fopen(path.c_str(), "r");
+	if (!std::filesystem::exists(path))
 	{
 		Logger::getInst().throwError("Could not load .obj file: " + string(filePath + ".obj"));
 	}

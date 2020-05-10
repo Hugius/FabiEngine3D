@@ -33,9 +33,10 @@ void EngineGuiGlobalScreen::addScrollingList(const string& ID, vec2 position, ve
 	_scrollingLists.push_back(make_shared<EngineGuiScrollingList>(_fe3d, "globalScreen", ID, position, size, color, buttonColor, buttonHoverColor, textColor, textHoverColor, charSize));
 }
 
-void EngineGuiGlobalScreen::addWriteField(const string& ID, vec2 position, vec2 size, vec3 color, vec3 hoverColor, vec3 textColor, vec3 textHoverColor)
+void EngineGuiGlobalScreen::addWriteField(const string& ID, vec2 position, vec2 size, vec3 color, vec3 hoverColor, vec3 textColor, vec3 textHoverColor, 
+	bool noNumbers, bool noCaps, bool noSpecials, bool noLetters)
 {
-	_writeFields.push_back(make_shared<EngineGuiWriteField>(_fe3d, "globalScreen", ID, position, size, color, hoverColor, textColor, textHoverColor));
+	_writeFields.push_back(make_shared<EngineGuiWriteField>(_fe3d, "globalScreen", ID, position, size, color, hoverColor, textColor, textHoverColor, noNumbers, noCaps, noSpecials, noLetters));
 }
 
 void EngineGuiGlobalScreen::addButton(const string& ID, vec2 position, vec2 size, vec3 color, vec3 hoverColor, string textContent, vec3 textColor, vec3 textHoverColor)

@@ -34,7 +34,7 @@ void GameEntityManager::addGameEntity
 
 	// Create entity
 	_createEntity(EntityType::GAME, ID)->load(ID);
-	getEntity(ID)->setModelName(objName);
+	getEntity(ID)->setObjName(objName);
 
 	// Create OpenGL buffers
 	for (auto & part : parts)
@@ -83,7 +83,7 @@ void GameEntityManager::addGameEntity
 
 	// Create entity
 	_createEntity(EntityType::GAME, ID)->load(ID);
-	getEntity(ID)->setModelName(modelName);
+	getEntity(ID)->setObjName(modelName);
 
 	// Create OpenGL buffers
 	for (auto & part : parts)

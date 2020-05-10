@@ -76,6 +76,47 @@ void ModelEditor::unload()
 	_currentModelName = "";
 }
 
+void ModelEditor::addModel(string modelName, string objName, string diffuseMapName, string lightMapName, string reflectionMapName, vec3 size)
+{
+	// If modelname not existing yet
+	if (std::find(_modelNames.begin(), _modelNames.end(), modelName) == _modelNames.end())
+	{
+		// Add model name
+		_modelNames.push_back(modelName);
+
+		// Add 3D model
+		if (objName != "")
+		{
+			_fe3d.gameEntity_add(modelName, objName, vec3(0.0f), vec3(0.0f), size * 10.0f, false);
+
+			// Diffuse map
+			if (diffuseMapName != "")
+			{
+				_fe3d.gameEntity_setDiffuseMap(modelName, diffuseMapName);
+			}
+
+			// Light map
+			if (lightMapName != "")
+			{
+				_fe3d.gameEntity_setLightMap(modelName, lightMapName);
+			}
+
+			// Reflection map
+			if (reflectionMapName != "")
+			{
+				_fe3d.gameEntity_setReflectionMap(modelName, reflectionMapName);
+			}
+		}
+
+		// Add scrolling list button
+		_gui->getViewport("left")->getWindow("main")->getScreen("modelChoice")->getScrollingList("modelList")->addButton(modelName, modelName);
+	}
+	else
+	{
+		_fe3d.logger_throwWarning("Modelname \"" + modelName + "\" is already in use!");
+	}
+}
+
 void ModelEditor::_loadObjFileNames()
 {
 	// Remove potential previous filenames
@@ -106,24 +147,6 @@ void ModelEditor::_loadObjFileNames()
 		_totalObjFileNames.push_back(objPath.substr(0, endOfNameIndex));
 	}
 }
-
-void ModelEditor::addModel(string modelName)
-{
-	// If modelname not existing yet
-	if (std::find(_modelNames.begin(), _modelNames.end(), modelName) == _modelNames.end())
-	{
-		// Add model name
-		_modelNames.push_back(modelName);
-
-		// Add scrolling list button
-		_gui->getViewport("left")->getWindow("main")->getScreen("modelChoice")->getScrollingList("modelList")->addButton(modelName, modelName);
-	}
-	else
-	{
-		_fe3d.logger_throwWarning("Modelname \"" + modelName + "\" is already in use!");
-	}
-}
-
 
 void ModelEditor::_loadOBJ()
 {

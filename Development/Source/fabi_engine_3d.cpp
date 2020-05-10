@@ -488,17 +488,19 @@ void FabiEngine3D::gameEntity_show(const string& ID)
 void FabiEngine3D::gameEntity_setDiffuseMap(const string& ID, const string& fileName)
 {
 	_core->_gameEntityManager.getEntity(ID)->setDiffuseMap(_core->_texLoader.getTexture(fileName, true, true));
+	_core->_gameEntityManager.getEntity(ID)->setDiffuseMapName(fileName);
 }
 
 void FabiEngine3D::gameEntity_setLightMap(const string& ID, const string& fileName)
 {
 	_core->_gameEntityManager.getEntity(ID)->setLightMap(_core->_texLoader.getTexture(fileName, true, true));
-	_core->_gameEntityManager.getEntity(ID)->setLightMapped(true);
+	_core->_gameEntityManager.getEntity(ID)->setLightMapName(fileName);
 }
 
 void FabiEngine3D::gameEntity_setReflectionMap(const string& ID, const string& fileName)
 {
 	_core->_gameEntityManager.getEntity(ID)->setReflectionMap(_core->_texLoader.getTexture(fileName, true, true));
+	_core->_gameEntityManager.getEntity(ID)->setReflectionMapName(fileName);
 }
 
 void FabiEngine3D::gameEntity_setTransparent(const string& ID, bool enabled)
@@ -636,6 +638,26 @@ void FabiEngine3D::gameEntity_setUvRepeat(const string& ID, float repeat)
 float FabiEngine3D::gameEntity_getMaxY(const string& ID)
 {
 	return _core->_gameEntityManager.getEntity(ID)->getMaxY();
+}
+
+string FabiEngine3D::gameEntity_getObjName(const string& ID)
+{
+	return _core->_gameEntityManager.getEntity(ID)->getObjName();
+}
+
+string FabiEngine3D::gameEntity_getDiffuseMapName(const string& ID)
+{
+	return _core->_gameEntityManager.getEntity(ID)->getDiffuseMapName();
+}
+
+string FabiEngine3D::gameEntity_getLightMapName(const string& ID)
+{
+	return _core->_gameEntityManager.getEntity(ID)->getLightMapName();
+}
+
+string FabiEngine3D::gameEntity_getReflectionMapName(const string& ID)
+{
+	return _core->_gameEntityManager.getEntity(ID)->getReflectionMapName();
 }
 
 void FabiEngine3D::gameEntity_setAlpha(const string& ID, float alpha)

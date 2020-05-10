@@ -2,8 +2,12 @@
 
 EngineGuiWriteField::EngineGuiWriteField(
 	FabiEngine3D& fe3d, const string& parentID, const string& ID, vec2 position, vec2 size, 
-	vec3 color, vec3 hoverColor, vec3 textColor, vec3 textHoverColor) :
-	EngineGuiButton(fe3d, parentID, ID, position, size, color, hoverColor, "|", textColor, textHoverColor, false, true)
+	vec3 color, vec3 hoverColor, vec3 textColor, vec3 textHoverColor, bool noNumbers, bool noCaps, bool noSpecials, bool noLetters) :
+	EngineGuiButton(fe3d, parentID, ID, position, size, color, hoverColor, "|", textColor, textHoverColor, false, true),
+	_noNumbers(noNumbers),
+	_noCaps(noCaps),
+	_noSpecials(noSpecials),
+	_noLetters(noLetters)
 {
 
 }
@@ -92,29 +96,59 @@ void EngineGuiWriteField::_updateTyping(float delta)
 				// Check if character is pressed on keyboard
 				if (_fe3d.input_getKeyPressed(Input(c)))
 				{
-					if (_fe3d.input_getKeyDown(Input::KEY_LSHIFT) || _fe3d.input_getKeyDown(Input::KEY_RSHIFT)) // Uppercase character
+					if (_fe3d.input_getKeyDown(Input::KEY_LSHIFT) || _fe3d.input_getKeyDown(Input::KEY_RSHIFT)) // Uppercase or special character
 					{
 						// Only if number
 						if (isdigit(c))
 						{
-							_currentTextContent += specialCharacters[int(c-48)];
+							if (!_noSpecials) // ! - )
+							{
+								_currentTextContent += specialCharacters[int(c - 48)];
+							}
 						}
 						else // Convert to uppercase
 						{
-							_currentTextContent += (c - 32);
+							if (!_noLetters) // A - Z
+							{
+								_currentTextContent += (c - 32);
+							}
 						}
 					}
 					else if (_fe3d.input_getKeyToggled(Input::KEY_CAPSLOCK)) // Uppercase character
 					{
-						// Only if not a number
-						if (!isdigit(c))
+						// Check if number
+						if (isdigit(c)) // 0 - 9
 						{
-							_currentTextContent += (c - 32);
+							if (!_noNumbers)
+							{
+								_currentTextContent += c;
+							}
+						}
+						else
+						{
+							if (!_noLetters && !_noCaps) // A - Z
+							{
+								_currentTextContent += (c - 32);
+							}
 						}
 					}
-					else
+					else // Lowercase character
 					{
-						_currentTextContent += c; // Lowercase character
+						// Check if number
+						if (isdigit(c)) // 0 - 9
+						{
+							if (!_noNumbers)
+							{
+								_currentTextContent += c;
+							}
+						}
+						else
+						{
+							if (!_noLetters) // a- z
+							{
+								_currentTextContent += c;
+							}
+						}
 					}
 				}
 			}
@@ -127,7 +161,15 @@ void EngineGuiWriteField::_updateTyping(float delta)
 			if (passedBackspaceDelta >= 100.0f)
 			{
 				passedBackspaceDelta = 0.0f;
-				_currentTextContent = _currentTextContent.substr(0, _currentTextContent.size() - 1); // Remove last characters
+
+				if (_currentTextContent.size() == 1)
+				{
+					_currentTextContent = "";
+				}
+				else
+				{
+					_currentTextContent = _currentTextContent.substr(0, _currentTextContent.size() - 1); // Remove last characters
+				}
 			}
 			else
 			{

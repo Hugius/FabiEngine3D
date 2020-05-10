@@ -83,7 +83,7 @@ void WorldEditor::exportWorld(const string& worldName)
 	{
 		// Creating actor line
 		string line =
-			entity->getID() + " " + entity->getModelName() + " " +
+			entity->getID() + " " + entity->getObjName() + " " +
 			std::to_string(entity->getTranslation().x) + " " + std::to_string(entity->getTranslation().y) + " " +
 			std::to_string(entity->getTranslation().z) + " " + std::to_string(entity->getRotation().x)    + " " + 
 			std::to_string(entity->getRotation().y)    + " " + std::to_string(entity->getRotation().z)    + " " +

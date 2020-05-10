@@ -1,14 +1,16 @@
 #include "configuration.hpp"
 
 #include <SDL/SDL.h>
+#include <filesystem>
 
 Config::Config()
 {
 	std::ifstream file;
 
 	// Open config file
-	file.open("../Config.fe3d");
-	if (errno != 0)
+	string path = "../Config.fe3d";
+	file.open(path);
+	if (!std::filesystem::exists(path))
 	{
 		Logger::getInst().throwError("Could not load engine configuration file!");
 	}

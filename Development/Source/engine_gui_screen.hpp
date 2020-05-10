@@ -19,8 +19,10 @@ public:
 	const string& getID();
 	const string& getParentID();
 
-	void addScrollingList(const string& ID, vec2 position, vec2 size, vec3 color, vec3 buttonColor, vec3 buttonHoverColor, vec3 textColor, vec3 textHoverColor, vec2 charSize);
-	void addWriteField(const string& ID, vec2 position, vec2 size, vec3 color, vec3 hoverColor, vec3 textColor, vec3 textHoverColor);
+	void addScrollingList(const string& ID, vec2 position, vec2 size, vec3 color, vec3 buttonColor, vec3 buttonHoverColor, vec3 textColor, 
+		vec3 textHoverColor, vec2 charSize);
+	void addWriteField(const string& ID, vec2 position, vec2 size, vec3 color, vec3 hoverColor, vec3 textColor, vec3 textHoverColor, 
+		bool noNumbers = false, bool noCaps = false, bool noSpecials = false, bool noLetters = false);
 	void addButton(const string& ID, vec2 position, vec2 size, vec3 color, vec3 hoverColor, string textContent, vec3 textColor, vec3 textHoverColor);
 	void addRectangle(const string& ID, vec2 position, vec2 size, vec3 color);
 	void addTextfield(const string& ID, vec2 position, vec2 size, string textContent, vec3 textColor);

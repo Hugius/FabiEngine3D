@@ -25,11 +25,14 @@ void ModelEditor::load()
 	_fe3d.gfx_setSkyBrightness(0.75f);
 
 	// 3D Environment
-	_fe3d.gameEntity_add("modelEditorGrid", "Engine\\OBJs\\plane", vec3(0.0f), vec3(0.0f), vec3(100.0f, 1.0f, 100.0f));
-	_fe3d.gameEntity_setDiffuseMap("modelEditorGrid", "Engine\\Textures\\grass");
-	_fe3d.gameEntity_setUvRepeat("modelEditorGrid", 10.0f);
-	_fe3d.skyEntity_add("modelEditorSky", 0.1f, "Engine\\Textures\\Skybox\\");
-	_fe3d.skyEntity_select("modelEditorSky");
+	_fe3d.gameEntity_add("@modelEditorGrid", "Engine\\OBJs\\plane", vec3(0.0f), vec3(0.0f), vec3(1000.0f, 1.0f, 1000.0f));
+	_fe3d.gameEntity_setDiffuseMap("@modelEditorGrid", "Engine\\Textures\\grass");
+	_fe3d.gameEntity_setUvRepeat("@modelEditorGrid", 100.0f);
+	_fe3d.gameEntity_add("@cube", "Engine\\OBJs\\cube", vec3(5.0f, 0.0f, 0.0f), vec3(0.0f), vec3(1.0f, 1.0f, 1.0f));
+	_fe3d.gameEntity_setDiffuseMap("@cube", "Engine\\Textures\\cube");
+	_fe3d.gameEntity_setAlpha("@cube", 0.5f);
+	_fe3d.skyEntity_add("@modelEditorSky", 0.1f, "Engine\\Textures\\Skybox\\");
+	_fe3d.skyEntity_select("@modelEditorSky");
 
 	// Other
 	_gui->getGlobalScreen()->addTextfield("currentModelName", vec2(0.0f, 0.85f), vec2(0.5f, 0.1f), "", vec3(1.0f));
@@ -47,8 +50,9 @@ void ModelEditor::unload()
 	_fe3d.gfx_removeBloom();
 
 	// 3D environment
-	_fe3d.gameEntity_delete("modelEditorGrid");
-	_fe3d.skyEntity_delete("modelEditorSky");
+	_fe3d.gameEntity_delete("@modelEditorGrid");
+	_fe3d.gameEntity_delete("@cube");
+	_fe3d.skyEntity_delete("@modelEditorSky");
 
 	// Delete models
 	for (auto& modelName : _modelNames)
@@ -87,7 +91,7 @@ void ModelEditor::addModel(string modelName, string objName, string diffuseMapNa
 		// Add 3D model
 		if (objName != "")
 		{
-			_fe3d.gameEntity_add(modelName, objName, vec3(0.0f), vec3(0.0f), size * 10.0f, false);
+			_fe3d.gameEntity_add(modelName, objName, vec3(0.0f), vec3(0.0f), size, false);
 
 			// Diffuse map
 			if (diffuseMapName != "")
@@ -114,6 +118,22 @@ void ModelEditor::addModel(string modelName, string objName, string diffuseMapNa
 	else
 	{
 		_fe3d.logger_throwWarning("Modelname \"" + modelName + "\" is already in use!");
+	}
+}
+
+void ModelEditor::_updateMiscellaneous()
+{
+	// Update reference model visibility
+	if (_loaded)
+	{
+		if (_fe3d.input_getKeyToggled(Input::KEY_R))
+		{
+			_fe3d.gameEntity_hide("@cube");
+		}
+		else
+		{
+			_fe3d.gameEntity_show("@cube");
+		}
 	}
 }
 

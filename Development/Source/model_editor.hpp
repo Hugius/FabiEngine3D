@@ -37,6 +37,7 @@ private:
 	void _updateModelChoosing();
 	void _updateModelEditing();
 	void _updateModelRemoval();
+	void _updateMiscellaneous();
 
 	bool _modelCreationEnabled = false;
 	bool _modelChoosingEnabled = false;

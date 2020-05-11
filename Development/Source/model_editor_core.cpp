@@ -4,12 +4,12 @@
 
 void ModelEditor::update(float delta)
 {
-	// Update all processes
 	_updateModelManagement();
 	_updateModelCreation();
-	_updateModelChoosing();  
+	_updateModelChoosing();
 	_updateModelEditing();
 	_updateModelRemoval();
+	_updateMiscellaneous();
 }
 
 void ModelEditor::_updateModelManagement()
@@ -23,7 +23,7 @@ void ModelEditor::_updateModelManagement()
 		if (managementScreen->getButton("addModel")->isHovered()) // Add model button
 		{
 			_gui->getGlobalScreen()->addTextfield("newModelName", vec2(0.0f, 0.1f), vec2(0.3f, 0.1f), "Enter model name:", vec3(1.0f));
-			_gui->getGlobalScreen()->addWriteField("newModelName", vec2(0.0f, 0.0f), vec2(0.5f, 0.1f), vec3(0.25f), vec3(0.5f), vec3(1.0f), vec3(0.0f));
+			_gui->getGlobalScreen()->addWriteField("newModelName", vec2(0.0f, 0.0f), vec2(0.5f, 0.1f), vec3(0.25f), vec3(0.5f), vec3(1.0f), vec3(0.0f), 0, 0, 1, 0);
 			_gui->getGlobalScreen()->getWriteField("newModelName")->setActive(true);
 			_gui->setFocus(true);
 			_modelCreationEnabled = true;
@@ -161,14 +161,14 @@ void ModelEditor::_updateModelEditing()
 				_gui->getGlobalScreen()->addWriteField("modelSizeY", vec2(0.0f, 0.0f), vec2(0.2f, 0.1f), vec3(0.25f), vec3(0.5f), vec3(1.0f), vec3(0.0f), 0, 1, 1, 1);
 				_gui->getGlobalScreen()->addWriteField("modelSizeZ", vec2(0.3f, 0.0f), vec2(0.2f, 0.1f), vec3(0.25f), vec3(0.5f), vec3(1.0f), vec3(0.0f)), 0, 1, 1, 1;
 				_gui->getGlobalScreen()->addButton("done", vec2(0.0f, -0.2f), vec2(0.15f, 0.1f), vec3(0.0f, 0.5f, 0.0f), vec3(0.0f, 1.0f, 0.0f), "Done", vec3(1.0f), vec3(0.0f));
-				
+
 				// Set default model size
 				vec3 currentSize = _fe3d.gameEntity_getSize(_currentModelName);
 				_gui->getGlobalScreen()->getWriteField("modelSizeX")->setTextContent(std::to_string(int(currentSize.x * 10.0f)));
 				_gui->getGlobalScreen()->getWriteField("modelSizeY")->setTextContent(std::to_string(int(currentSize.y * 10.0f)));
 				_gui->getGlobalScreen()->getWriteField("modelSizeZ")->setTextContent(std::to_string(int(currentSize.z * 10.0f)));
 			}
-			else if (editingScreen->getButton("back")->isHovered()) 
+			else if (editingScreen->getButton("back")->isHovered())
 			{
 				// Hide game entity
 				if (_fe3d.gameEntity_isExisting(_currentModelName))
@@ -219,6 +219,12 @@ void ModelEditor::_updateModelEditing()
 
 		// Update camera position
 		_fe3d.camera_setPosition(vec3(x, y, z));
+
+		// Update model resizing
+		if(_fe3d.input_getKeyDown(Input::KEY_S))
+		{
+			_fe3d.gameEntity_setSize(_currentModelName, _fe3d.gameEntity_getSize(_currentModelName) * (1.0f + (cursorDifference.x * 10.0f)));
+		}
 
 		// Update model resizing
 		if (_modelResizingEnabled)

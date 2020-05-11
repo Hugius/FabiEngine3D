@@ -241,37 +241,40 @@ void TopViewportController::_updateProjectLoading()
 
 void TopViewportController::_saveCurrentProject()
 {
-	std::ofstream file;
-	file.open(_fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\models.fe3d");
-
-	// Write model data into file
-	for (auto& modelName : _modelEditor.getModelNames())
+	if (_currentProjectName != "")
 	{
-		// Check if 3D entity exists
-		if (_fe3d.gameEntity_isExisting(modelName))
-		{
-			auto objName = _fe3d.gameEntity_getObjName(modelName);
-			auto diffuseMapName = _fe3d.gameEntity_getDiffuseMapName(modelName); 
-			diffuseMapName = (diffuseMapName == "") ? "-" : diffuseMapName;
-			auto lightMapName = _fe3d.gameEntity_getLightMapName(modelName); 
-			lightMapName = (lightMapName == "") ? "-" : lightMapName;
-			auto reflectionMapName = _fe3d.gameEntity_getReflectionMapName(modelName); 
-			reflectionMapName = (reflectionMapName == "") ? "-" : reflectionMapName;
-			auto modelSize = _fe3d.gameEntity_getSize(modelName);
+		std::ofstream file;
+		file.open(_fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\models.fe3d");
 
-			// 1 model -> 1 line in file
-			file << modelName << " " << objName << " " << diffuseMapName << " " << lightMapName << " " << reflectionMapName << " " <<
-				std::to_string(modelSize.x) << " " << std::to_string(modelSize.y) << " " << std::to_string(modelSize.z) << "\n";
-		}
-		else
+		// Write model data into file
+		for (auto& modelName : _modelEditor.getModelNames())
 		{
-			file << modelName << " -  -  -  -  0  0  0\n";
+			// Check if 3D entity exists
+			if (_fe3d.gameEntity_isExisting(modelName))
+			{
+				auto objName = _fe3d.gameEntity_getObjName(modelName);
+				auto diffuseMapName = _fe3d.gameEntity_getDiffuseMapName(modelName);
+				diffuseMapName = (diffuseMapName == "") ? "-" : diffuseMapName;
+				auto lightMapName = _fe3d.gameEntity_getLightMapName(modelName);
+				lightMapName = (lightMapName == "") ? "-" : lightMapName;
+				auto reflectionMapName = _fe3d.gameEntity_getReflectionMapName(modelName);
+				reflectionMapName = (reflectionMapName == "") ? "-" : reflectionMapName;
+				auto modelSize = _fe3d.gameEntity_getSize(modelName);
+
+				// 1 model -> 1 line in file
+				file << modelName << " " << objName << " " << diffuseMapName << " " << lightMapName << " " << reflectionMapName << " " <<
+					std::to_string(modelSize.x) << " " << std::to_string(modelSize.y) << " " << std::to_string(modelSize.z) << "\n";
+			}
+			else
+			{
+				file << modelName << " -  -  -  -  0  0  0\n";
+			}
 		}
+
+		// Close file
+		file.close();
+
+		// Logging
+		_fe3d.logger_throwInfo("Current project saved!");
 	}
-
-	// Close file
-	file.close();
-
-	// Logging
-	_fe3d.logger_throwInfo("Current project saved!");
 }

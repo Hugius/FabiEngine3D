@@ -259,6 +259,9 @@
     <ClCompile Include="Source\engine_gui_scrollinglist.cpp">
       <Filter>src\GUI System</Filter>
     </ClCompile>
+    <ClCompile Include="Source\model_editor_updates.cpp">
+      <Filter>src\Editor System\Model Editor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\obj_loader.hpp">

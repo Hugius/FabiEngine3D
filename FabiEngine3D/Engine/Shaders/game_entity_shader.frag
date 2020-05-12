@@ -154,11 +154,11 @@ vec3 getSpecularLighting()
 {
 	if(u_specLightingEnabled && u_isSpecular)
 	{
-		vec3 lightDir   = normalize(u_dirLightPos - f_pos);
+		vec3 lightDir   = normalize(f_pos - u_dirLightPos);
 		vec3 viewDir    = normalize(f_pos - u_cameraPos);
 		vec3 reflectDir = reflect(-lightDir, f_normal);
 		float specular  = pow(max(dot(viewDir, reflectDir), 0.0f), u_specLightStrength);
-		return vec3(specular*10.0f);
+		return vec3(specular);
 	}
 
 	return vec3(0.0f);
@@ -215,7 +215,16 @@ vec3 getShadowLighting()
 		
 		// Return shadow value
 		shadow /= 9.0f;
-		return vec3(shadow);
+
+		// Check if truly shadowed or just a small PCF mistake
+		if(shadow > 0.6f)
+		{
+			return vec3(1.0f);
+		}
+		else
+		{
+			return vec3(shadow);
+		}
 	}
 
 	return vec3(1.0f);

@@ -19,8 +19,9 @@ public:
 	vector<string>& getTotalObjFileNames();
 	vector<string>& getModelNames();
 
-	void load();
-	void unload();
+	void initialize();
+	void loadEnvironment();
+	void unloadEnvironment();
 	void update(float delta);
 	void addModel(string modelName, string objName, string diffuseMapName, string lightMapName, string reflectionMapName, vec3 size);
 
@@ -36,6 +37,9 @@ private:
 	void _updateModelCreation();
 	void _updateModelChoosing();
 	void _updateModelEditing();
+	void _updateModelEditingMain();
+	void _updateModelEditingMesh();
+	void _updateModelEditingOptions();
 	void _updateModelRemoval();
 	void _updateMiscellaneous();
 
@@ -50,16 +54,16 @@ private:
 
 	float _cameraDistance = 5.0f;
 	const float _minCameraDistance = 1.0f;
-	const float _maxCameraDistance = 20.0f;
+	const float _maxCameraDistance = 50.0f;
 	const float _minCameraHeight = 1.0f;
-	const float _maxCameraHeight = 25.0f;
-	const float _cameraSpeed = 5.0f;
+	const float _cameraSpeed = 0.1f;
 
 	FabiEngine3D& _fe3d;
 	shared_ptr<EngineGuiManager> _gui;
 
-	string _modelNameTextfieldEntityID = "";
+	shared_ptr<EngineGuiWindow> _window;
+	
 	string _currentModelName = "";
 	vector<string> _modelNames;
-	vector<string> _totalObjFileNames;
+	vector<string> _objFileNamesList;
 };

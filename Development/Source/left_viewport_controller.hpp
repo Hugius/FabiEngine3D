@@ -15,9 +15,4 @@ public:
 
 private:
 	ModelEditor _modelEditor;
-
-	const vec3 _leftVpButtonColor = vec3(0.0f, 0.0f, 0.5f);
-	const vec3 _leftVpButtonHoverColor = vec3(0.5f, 0.5f, 1.0f);
-	const vec3 _leftVpTextColor = vec3(1.0f);
-	const vec3 _leftVpTextHoverColor = vec3(0.0f);
 };

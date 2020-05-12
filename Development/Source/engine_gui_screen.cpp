@@ -159,6 +159,8 @@ shared_ptr<EngineGuiScrollingList> EngineGuiScreen::getScrollingList(const strin
 		}
 	}
 
+	_fe3d.logger_throwError("Scrollinglist \"" + ID + " \" requested in screen \"" + _ID + "\": not found!");
+
 	return nullptr;
 }
 
@@ -171,6 +173,8 @@ shared_ptr<EngineGuiWriteField> EngineGuiScreen::getWriteField(const string& ID)
 			return writefield;
 		}
 	}
+
+	_fe3d.logger_throwError("Writefield \"" + ID + " \" requested in screen \"" + _ID + "\": not found!");
 
 	return nullptr;
 }
@@ -185,6 +189,8 @@ shared_ptr<EngineGuiButton> EngineGuiScreen::getButton(const string& ID)
 		}
 	}
 
+	_fe3d.logger_throwError("Button \"" + ID + " \" requested in screen \"" + _ID + "\": not found!");
+
 	return nullptr;
 }
 
@@ -198,6 +204,8 @@ shared_ptr<EngineGuiRectangle> EngineGuiScreen::getRectangle(const string& ID)
 		}
 	}
 
+	_fe3d.logger_throwError("Rectangle \"" + ID + " \" requested in screen \"" + _ID + "\": not found!");
+
 	return nullptr;
 }
 
@@ -210,6 +218,8 @@ shared_ptr<EngineGuiTextfield> EngineGuiScreen::getTextfield(const string& ID)
 			return textfield;
 		}
 	}
+	
+	_fe3d.logger_throwError("Textfield \"" + ID + " \" requested in screen \"" + _ID + "\": not found!");
 
 	return nullptr;
 }

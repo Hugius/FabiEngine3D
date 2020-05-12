@@ -7,7 +7,7 @@ class TopViewportController final : public ViewportController
 {
 public:
 	TopViewportController(FabiEngine3D& fe3d, shared_ptr<EngineGuiManager> gui, ModelEditor& modelEditor);
-	~TopViewportController();
+	~TopViewportController() = default;
 
 	void initialize() override;
 	void update(float delta) override;
@@ -28,9 +28,4 @@ private:
 	bool _savingProject = false;
 	bool _openingDocs = false;
 	bool _quittingEngine = false;
-
-	const vec3 _buttonColor = vec3(0.0f, 0.25f, 0.0f);
-	const vec3 _buttonHoverColor = vec3(0.0f, 0.5f, 0.0f);
-	const vec3 _textColor = vec3(1.0f);
-	const vec3 _textHoverColor = vec3(0.0f);
 };

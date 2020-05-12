@@ -24,13 +24,17 @@ void EngineGuiScrollingList::update(float delta, bool hoverable)
 
 void EngineGuiScrollingList::addButton(const string& ID, string textContent)
 {
-	
+	// Calculate dimensions
 	float x = 0.0f;
 	float y = 1.0f - _charSize.y - (_buttons.size() * (_charSize.y * 1.5f));
 	float w = min(_charSize.x * textContent.size(), 1.5f);
 	float h = _charSize.y;
+
+	// Add button
 	vec4 dimensions = _convertDimensions(vec2(x, y), vec2(w, h));
 	_buttons.push_back(make_shared<EngineGuiButton>(_fe3d, _ID, ID, vec2(dimensions.x, dimensions.y), vec2(dimensions.z, dimensions.w), _buttonColor, _buttonHoverColor, textContent, _textColor, _textHoverColor));
+	
+	// Define list boundaries
 	string rectangleID = _buttons.back()->getRectangle()->getEntityID();
 	string textID = _buttons.back()->getTextfield()->getEntityID();
 	_fe3d.guiEntity_setMinPosition(rectangleID, vec2(-1.0f, _originalPosition.y - (_originalSize.y / 2.0f)));
@@ -47,6 +51,26 @@ void EngineGuiScrollingList::deleteButton(const string& ID)
 		if (ID == _buttons[i]->getID())
 		{
 			_buttons.erase(_buttons.begin() + i);
+			
+			// Retrieve info of all remaining buttons
+			vector<string> buttonIDs;
+			vector<string> textContents;
+			for (size_t j = 0; j < _buttons.size(); j++)
+			{
+				buttonIDs.push_back(_buttons[j]->getID());
+				textContents.push_back(_fe3d.textEntity_getTextContent(_buttons[j]->getTextfield()->getEntityID()));
+			}
+
+			// Delete all buttons
+			deleteButtons();
+
+			// Create newly positioned buttons
+			for (size_t j = 0; j < buttonIDs.size(); j++)
+			{
+				addButton(buttonIDs[j], textContents[j]);
+			}
+
+			// Return
 			return;
 		}
 	}
@@ -58,6 +82,8 @@ void EngineGuiScrollingList::deleteButton(const string& ID)
 void EngineGuiScrollingList::deleteButtons()
 {
 	_buttons.clear();
+	_scrollingOffset = 0.0f;
+	_scrollingSpeed = 0.0f;
 }
 
 void EngineGuiScrollingList::_updateHovering()

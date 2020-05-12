@@ -15,22 +15,17 @@ TopViewportController::TopViewportController(FabiEngine3D& fe3d, shared_ptr<Engi
 
 }
 
-TopViewportController::~TopViewportController()
-{
-	_saveCurrentProject();
-}
-
 void TopViewportController::initialize()
 {
 	// Top-viewport: projectWindow
 	_gui->getViewport("top")->addWindow("projectWindow", vec2(-0.25f, 0.0f), vec2(0.9825f, 1.5f), vec3(0.25f));
 	_gui->getViewport("top")->getWindow("projectWindow")->addScreen("main");
 	_gui->getViewport("top")->getWindow("projectWindow")->setActiveScreen("main");
-	_gui->getViewport("top")->getWindow("projectWindow")->getScreen("main")->addButton("newProject", vec2(-0.767f, 0.0f), vec2(0.3f, 1.25f), _buttonColor, _buttonHoverColor, "New project", _textColor, _textHoverColor);
-	_gui->getViewport("top")->getWindow("projectWindow")->getScreen("main")->addButton("loadProject", vec2(-0.384, 0.0f), vec2(0.3f, 1.25f), _buttonColor, _buttonHoverColor, "Load project", _textColor, _textHoverColor);
-	_gui->getViewport("top")->getWindow("projectWindow")->getScreen("main")->addButton("saveProject", vec2(0.0f, 0.0f), vec2(0.3f, 1.25f), _buttonColor, _buttonHoverColor, "Save project", _textColor, _textHoverColor);
-	_gui->getViewport("top")->getWindow("projectWindow")->getScreen("main")->addButton("openDocs", vec2(0.384, 0.0f), vec2(0.3f, 1.25f), _buttonColor, _buttonHoverColor, "Open docs", _textColor, _textHoverColor);
-	_gui->getViewport("top")->getWindow("projectWindow")->getScreen("main")->addButton("quitEngine", vec2(0.767f, 0.0f), vec2(0.3f, 1.25f), _buttonColor, _buttonHoverColor, "Quit engine", _textColor, _textHoverColor);
+	_gui->getViewport("top")->getWindow("projectWindow")->getScreen("main")->addButton("newProject", vec2(-0.767f, 0.0f), vec2(0.3f, 1.25f), _gui->topVpButtonColor, _gui->topVpButtonHoverColor, "New project", _gui->topVpTextColor, _gui->topVpTextHoverColor);
+	_gui->getViewport("top")->getWindow("projectWindow")->getScreen("main")->addButton("loadProject", vec2(-0.384, 0.0f), vec2(0.3f, 1.25f), _gui->topVpButtonColor, _gui->topVpButtonHoverColor, "Load project", _gui->topVpTextColor, _gui->topVpTextHoverColor);
+	_gui->getViewport("top")->getWindow("projectWindow")->getScreen("main")->addButton("saveProject", vec2(0.0f, 0.0f), vec2(0.3f, 1.25f), _gui->topVpButtonColor, _gui->topVpButtonHoverColor, "Save project", _gui->topVpTextColor, _gui->topVpTextHoverColor);
+	_gui->getViewport("top")->getWindow("projectWindow")->getScreen("main")->addButton("openDocs", vec2(0.384, 0.0f), vec2(0.3f, 1.25f), _gui->topVpButtonColor, _gui->topVpButtonHoverColor, "Open docs", _gui->topVpTextColor, _gui->topVpTextHoverColor);
+	_gui->getViewport("top")->getWindow("projectWindow")->getScreen("main")->addButton("quitEngine", vec2(0.767f, 0.0f), vec2(0.3f, 1.25f), _gui->topVpButtonColor, _gui->topVpButtonHoverColor, "Quit engine", _gui->topVpTextColor, _gui->topVpTextHoverColor);
 
 	// Top-viewport: gameWindow
 	_gui->getViewport("top")->addWindow("gameWindow", vec2(0.25f, 0.0f), vec2(0.9825f, 1.5f), vec3(0.25f));
@@ -96,7 +91,7 @@ void TopViewportController::_initializeProjectLoading()
 	if (!_creatingProject && !_loadingProject)
 	{
 		_gui->getGlobalScreen()->addTextfield("projectList", vec2(0.0f, 0.45f), vec2(0.3f, 0.1f), "Select project:", vec3(1.0f));
-		_gui->getGlobalScreen()->addScrollingList("projectList", vec2(0.0f, 0.0f), vec2(0.5, 0.75f), vec3(0.3f), _buttonColor, _buttonHoverColor, _textColor, _textHoverColor, vec2(0.1f, 0.25f));
+		_gui->getGlobalScreen()->addScrollingList("projectList", vec2(0.0f, 0.0f), vec2(0.5, 0.75f), vec3(0.3f), _gui->topVpButtonColor, _gui->topVpButtonHoverColor, _gui->topVpTextColor, _gui->topVpTextHoverColor, vec2(0.1f, 0.25f));
 		_gui->setFocus(true);
 		_loadingProject = true;
 
@@ -157,7 +152,7 @@ void TopViewportController::_updateProjectCreation()
 					// Unload model editor
 					if (_modelEditor.isLoaded())
 					{
-						_modelEditor.unload();
+						_modelEditor.unloadEnvironment();
 					}
 				}
 			}
@@ -195,7 +190,7 @@ void TopViewportController::_updateProjectLoading()
 					// Unload model editor
 					if (_modelEditor.isLoaded())
 					{
-						_modelEditor.unload();
+						_modelEditor.unloadEnvironment();
 					}
 
 					// Load models file

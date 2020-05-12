@@ -242,6 +242,7 @@
     <ClCompile Include="Source\left_viewport_controller.cpp" />
     <ClCompile Include="Source\model_editor_misc.cpp" />
     <ClCompile Include="Source\model_editor_core.cpp" />
+    <ClCompile Include="Source\model_editor_updates.cpp" />
     <ClCompile Include="Source\right_viewport_controller.cpp" />
     <ClCompile Include="Source\top_viewport_controller.cpp" />
     <ClCompile Include="Source\engine_gui_button.cpp" />

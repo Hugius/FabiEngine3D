@@ -525,7 +525,7 @@ void FabiEngine3D::gameEntity_setSkyReflective(const string& ID, bool enabled)
 
 void FabiEngine3D::gameEntity_setSpecularLighted(const string& ID, bool enabled)
 {
-	_core->_gameEntityManager.getEntity(ID)->setSpecular(enabled);
+	_core->_gameEntityManager.getEntity(ID)->setSpecularLighted(enabled);
 }
 
 bool FabiEngine3D::gameEntity_isExisting(const string& ID)
@@ -541,6 +541,41 @@ bool FabiEngine3D::gameEntity_isVisible(const string& ID)
 bool FabiEngine3D::gameEntity_isMultiTextured(const string& ID)
 {
 	return (_core->_gameEntityManager.getEntity(ID)->getOglBuffers().size() > 1);
+}
+
+bool FabiEngine3D::gameEntity_isTransparent(const string& ID)
+{
+	return _core->_gameEntityManager.getEntity(ID)->isTransparent();
+}
+
+bool FabiEngine3D::gameEntity_isFaceCulled(const string& ID)
+{
+	return _core->_gameEntityManager.getEntity(ID)->isFaceCulled();
+}
+
+bool FabiEngine3D::gameEntity_isLightmapped(const string& ID)
+{
+	return _core->_gameEntityManager.getEntity(ID)->isLightMapped();
+}
+
+bool FabiEngine3D::gameEntity_isSkyReflective(const string& ID)
+{
+	return _core->_gameEntityManager.getEntity(ID)->isSkyReflective();
+}
+
+bool FabiEngine3D::gameEntity_isSpecularLighted(const string& ID)
+{
+	return _core->_gameEntityManager.getEntity(ID)->isSpecularLighted();
+}
+
+bool FabiEngine3D::gameEntity_isSceneReflective(const string& ID)
+{
+	return _core->_gameEntityManager.getEntity(ID)->isSceneReflective();
+}
+
+bool FabiEngine3D::gameEntity_isShadowed(const string& ID)
+{
+	return _core->_gameEntityManager.getEntity(ID)->isShadowed();
 }
 
 bool FabiEngine3D::gameEntity_hasDiffuseMap(const string& ID)
@@ -635,9 +670,24 @@ void FabiEngine3D::gameEntity_setUvRepeat(const string& ID, float repeat)
 	_core->_gameEntityManager.getEntity(ID)->setUvRepeat(repeat);
 }
 
+float FabiEngine3D::gameEntity_getAlpha(const string& ID)
+{
+	return _core->_gameEntityManager.getEntity(ID)->getAlpha();
+}
+
 float FabiEngine3D::gameEntity_getMaxY(const string& ID)
 {
 	return _core->_gameEntityManager.getEntity(ID)->getMaxY();
+}
+
+float FabiEngine3D::gameEntity_getUvRepeat(const string& ID)
+{
+	return _core->_gameEntityManager.getEntity(ID)->getUvRepeat();
+}
+
+vec3 FabiEngine3D::gameEntity_getColor(const string& ID)
+{
+	return _core->_gameEntityManager.getEntity(ID)->getColor();
 }
 
 string FabiEngine3D::gameEntity_getObjName(const string& ID)
@@ -665,9 +715,9 @@ void FabiEngine3D::gameEntity_setAlpha(const string& ID, float alpha)
 	_core->_gameEntityManager.getEntity(ID)->setAlpha(alpha);
 }
 
-void FabiEngine3D::gameEntity_setShadowed(const string& ID, bool shadowed)
+void FabiEngine3D::gameEntity_setShadowed(const string& ID, bool enabled)
 {
-	_core->_gameEntityManager.getEntity(ID)->setShadowed(shadowed);
+	_core->_gameEntityManager.getEntity(ID)->setShadowed(enabled);
 }
 
 void FabiEngine3D::gameEntity_setColor(const string& ID, vec3 color)
@@ -1366,8 +1416,12 @@ void FabiEngine3D::textEntity_setTextContent(const string& ID, const string& tex
 	auto entity = _core->_textEntityManager.getEntity(ID);
 
 	entity->setTextContent(textContent);
-	entity->setScaling(vec2(charWidth*float(textContent.size()), entity->getScaling().y));
 	entity->setDiffuseMap(_core->_texLoader.getText(textContent, entity->getFontPath()));
+
+	if (charWidth != -1.0f)
+	{
+		entity->setScaling(vec2(charWidth * float(textContent.size()), entity->getScaling().y));
+	}
 }
 
 void FabiEngine3D::textEntity_setColor(const string& ID, vec3 color)

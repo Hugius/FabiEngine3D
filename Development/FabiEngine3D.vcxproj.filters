@@ -259,7 +259,13 @@
     <ClCompile Include="Source\engine_gui_scrollinglist.cpp">
       <Filter>src\GUI System</Filter>
     </ClCompile>
-    <ClCompile Include="Source\model_editor_updates.cpp">
+    <ClCompile Include="Source\model_editor_management.cpp">
+      <Filter>src\Editor System\Model Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\model_editor_mesh_updates.cpp">
+      <Filter>src\Editor System\Model Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\model_editor_option_updates.cpp">
       <Filter>src\Editor System\Model Editor</Filter>
     </ClCompile>
   </ItemGroup>

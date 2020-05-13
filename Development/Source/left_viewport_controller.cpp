@@ -21,10 +21,6 @@ void LeftViewportController::initialize()
 	
 	// Initialize model editor GUI
 	_modelEditor.initialize();
-
-	// Pre-load model editor environment
-	_modelEditor.loadEnvironment();
-	_modelEditor.unloadEnvironment();
 }
 
 void LeftViewportController::update(float delta)
@@ -34,7 +30,7 @@ void LeftViewportController::update(float delta)
 	{
 		if (_gui->getViewport("left")->getWindow("main")->getScreen("main")->getButton("modelEditor")->isHovered()) // Model editor button
 		{
-			_modelEditor.loadEnvironment();
+			_modelEditor.load();
 			_gui->getViewport("left")->getWindow("main")->setActiveScreen("modelManagement");
 		}
 	}

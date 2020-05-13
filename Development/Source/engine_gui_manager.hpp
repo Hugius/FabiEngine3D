@@ -12,6 +12,8 @@ public:
 	void update(float delta);
 	void setFocus(bool focused);
 
+	bool isFocused();
+
 	shared_ptr<EngineGuiGlobalScreen> getGlobalScreen();
 	shared_ptr<EngineGuiViewport> getViewport(const string& ID);
 

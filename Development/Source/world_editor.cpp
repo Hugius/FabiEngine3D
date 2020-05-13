@@ -90,7 +90,7 @@ void WorldEditor::exportWorld(const string& worldName)
 			std::to_string(entity->getScaling().x)     + " " + std::to_string(entity->getScaling().y)     + " " + 
 			std::to_string(entity->getScaling().z)     + " " + std::to_string(entity->isTransparent())    + " " + 
 			std::to_string(entity->isFaceCulled())     + " " + std::to_string(entity->isLightMapped())    + " " +
-			std::to_string(entity->isSkyReflective())     + " " + std::to_string(entity->isSpecular());
+			std::to_string(entity->isSkyReflective())     + " " + std::to_string(entity->isSpecularLighted());
 
 		fileData << line << std::endl;
 	}

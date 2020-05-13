@@ -118,6 +118,11 @@ void ModelEditor::_loadReflectionMap()
 	}
 }
 
+void ModelEditor::setCurrentProjectName(string projectName)
+{
+	_currentProjectName = projectName;
+}
+
 bool ModelEditor::isLoaded()
 {
 	return _loaded;

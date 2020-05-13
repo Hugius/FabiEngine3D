@@ -1,4 +1,6 @@
 #include <filesystem>
+#include <fstream>
+#include <sstream>
 
 #include "model_editor.hpp"
 
@@ -30,7 +32,7 @@ void ModelEditor::initialize()
 	// Left-viewport: mainWindow - modelEditingMain
 	_window->addScreen("modelEditingMain");
 	_window->getScreen("modelEditingMain")->addButton("mesh", vec2(0.0f, 0.5f), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "3D mesh", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
-	_window->getScreen("modelEditingMain")->addButton("options", vec2(0.0f, 0.0f), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Options", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_window->getScreen("modelEditingMain")->addButton("options", vec2(0.0f, 0.0f), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "options", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 	_window->getScreen("modelEditingMain")->addButton("back", vec2(0.0f, -0.5f), vec2(1.0f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Go back", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 
 	// Left-viewport: mainWindow - modelEditingMesh
@@ -40,7 +42,7 @@ void ModelEditor::initialize()
 	_window->getScreen("modelEditingMesh")->addButton("loadLightMap", vec2(0.0f, 0.0f), vec2(1.5f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Lightmap", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 	_window->getScreen("modelEditingMesh")->addButton("loadReflectionMap", vec2(0.0f, -0.35f), vec2(1.6f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Reflectmap", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 	_window->getScreen("modelEditingMesh")->addButton("back", vec2(0.0f, -0.7f), vec2(1.0f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Go back", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
-
+	
 	// Left-viewport: mainWindow - modelEditingOptions
 	_window->addScreen("modelEditingOptions");
 	_window->getScreen("modelEditingOptions")->addScrollingList("optionsList", vec2(0.0f, 0.1f), vec2(1.8, 1.75f), vec3(0.3f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, _gui->leftVpTextColor, _gui->leftVpTextHoverColor, vec2(0.15f, 0.1f));
@@ -54,7 +56,7 @@ void ModelEditor::initialize()
 	_window->getScreen("modelEditingOptions")->addButton("back", vec2(0.0f, -0.9f), vec2(1.0f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Go back", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 }
 
-void ModelEditor::loadEnvironment()
+void ModelEditor::load()
 {
 	// Camera
 	_fe3d.camera_load(90.0f, 0.1f, 1000.0f, vec3(_startingCameraPos), -90.0f, 0.0f);
@@ -85,9 +87,35 @@ void ModelEditor::loadEnvironment()
 	// Other
 	_gui->getGlobalScreen()->addTextfield("currentModelName", vec2(0.0f, 0.85f), vec2(0.5f, 0.1f), "", vec3(1.0f));
 	_loaded = true;
+
+	// Load models file
+	std::ifstream file;
+	file.open(_fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\models.fe3d");
+	string line;
+
+	// Read model data
+	while (std::getline(file, line))
+	{
+		string modelName, objName, diffuseName, lightName, reflectionName;
+		float width, height, depth;
+		std::istringstream iss(line);
+
+		// Extract from file
+		iss >> modelName >> objName >> diffuseName >> lightName >> reflectionName >> width >> height >> depth;
+		objName = (objName == "-") ? "" : objName;
+		diffuseName = (diffuseName == "-") ? "" : diffuseName;
+		lightName = (lightName == "-") ? "" : lightName;
+		reflectionName = (reflectionName == "-") ? "" : reflectionName;
+
+		// Add new model
+		addModel(modelName, objName, diffuseName, lightName, reflectionName, vec3(width, height, depth));
+	}
+
+	// Close file
+	file.close();
 }
 
-void ModelEditor::unloadEnvironment()
+void ModelEditor::unload()
 {
 	// Graphics
 	_fe3d.gfx_removeAmbientLighting();

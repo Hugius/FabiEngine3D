@@ -30,6 +30,11 @@ void EngineGuiManager::setFocus(bool focused)
 	_isFocused = focused;
 }
 
+bool EngineGuiManager::isFocused()
+{
+	return _isFocused;
+}
+
 shared_ptr<EngineGuiGlobalScreen> EngineGuiManager::getGlobalScreen()
 {
 	return _globalScreen;

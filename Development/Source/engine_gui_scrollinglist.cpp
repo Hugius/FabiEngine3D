@@ -105,7 +105,7 @@ void EngineGuiScrollingList::_updateHovering()
 
 void EngineGuiScrollingList::_updateScolling()
 {
-	if (!_buttons.empty())
+	if (!_buttons.empty() && (_buttons.back()->getRectangle()->getOriginalPosition().y - (_charSize.y / 2.0f)) < -1.0f)
 	{
 		// Variables
 		bool mustReset = false;
@@ -136,7 +136,7 @@ void EngineGuiScrollingList::_updateScolling()
 		}
 
 		// Reset if maximum offset reached
-		float maximumOffset = fabsf(_buttons.back()->getRectangle()->getOriginalPosition().y) - (_charSize.y * 1.1f);
+		float maximumOffset = fabsf(_buttons.back()->getRectangle()->getOriginalPosition().y) - (_charSize.y * 1.15f);
 		if (_scrollingOffset >= maximumOffset)
 		{
 			// Check if offset incorrect

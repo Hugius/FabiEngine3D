@@ -129,7 +129,7 @@ void GameEntityManager::addGameEntity
 	getEntity(ID)->setFaceCulled(faceCulled);
 	getEntity(ID)->setLightMapped(lightMapped);
 	getEntity(ID)->setSkyReflective(reflective);
-	getEntity(ID)->setSpecular(specular);
+	getEntity(ID)->setSpecularLighted(specular);
 }
 
 void GameEntityManager::update(float delta)

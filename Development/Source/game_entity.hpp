@@ -37,7 +37,7 @@ public:
 	void setLightMapped(bool val);
 	void setSkyReflective(bool val);
 	void setSceneReflective(bool val);
-	void setSpecular(bool val);
+	void setSpecularLighted(bool val);
 	void setShadowed(bool val);
 	void setMaxY(float val);
 	void setAlpha(float val);
@@ -61,7 +61,7 @@ public:
 	const bool isLightMapped() const;
 	const bool isSkyReflective() const;
 	const bool isSceneReflective() const;
-	const bool isSpecular() const;
+	const bool isSpecularLighted() const;
 	const bool isShadowed() const;
 	const bool hasDiffuseMap() const;
 	const bool hasLightMap() const;

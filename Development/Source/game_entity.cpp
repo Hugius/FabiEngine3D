@@ -152,7 +152,7 @@ void GameEntity::setSceneReflective(bool val)
 	_isSceneReflective = val;
 }
 
-void GameEntity::setSpecular(bool val)
+void GameEntity::setSpecularLighted(bool val)
 {
 	_isSpecular = val;
 }
@@ -262,7 +262,7 @@ const bool GameEntity::isSceneReflective() const
 	return _isSceneReflective;
 }
 
-const bool GameEntity::isSpecular() const
+const bool GameEntity::isSpecularLighted() const
 {
 	return _isSpecular;
 }

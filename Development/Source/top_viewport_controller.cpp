@@ -152,7 +152,7 @@ void TopViewportController::_updateProjectCreation()
 					// Unload model editor
 					if (_modelEditor.isLoaded())
 					{
-						_modelEditor.unloadEnvironment();
+						_modelEditor.unload();
 					}
 				}
 			}
@@ -190,34 +190,11 @@ void TopViewportController::_updateProjectLoading()
 					// Unload model editor
 					if (_modelEditor.isLoaded())
 					{
-						_modelEditor.unloadEnvironment();
+						_modelEditor.unload();
 					}
 
-					// Load models file
-					std::ifstream file;
-					file.open(_fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\models.fe3d");
-					string line;
-
-					// Read model data
-					while (std::getline(file, line))
-					{
-						string modelName, objName, diffuseName, lightName, reflectionName;
-						float width, height, depth;
-						std::istringstream iss(line);
-						
-						// Extract from file
-						iss >> modelName >> objName >> diffuseName >> lightName >> reflectionName >> width >> height >> depth;
-						objName        = (objName == "-") ? "" : objName;
-						diffuseName    = (diffuseName == "-") ? "" : diffuseName;
-						lightName      = (lightName == "-") ? "" : lightName;
-						reflectionName = (reflectionName == "-") ? "" : reflectionName;
-
-						// Add new model
-						_modelEditor.addModel(modelName, objName, diffuseName, lightName, reflectionName, vec3(width, height, depth));
-					}
-
-					// Close file
-					file.close();
+					// Give new project name
+					_modelEditor.setCurrentProjectName(_currentProjectName);
 				}
 			}
 		}

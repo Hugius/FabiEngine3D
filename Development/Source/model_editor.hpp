@@ -20,10 +20,11 @@ public:
 	vector<string>& getModelNames();
 
 	void initialize();
-	void loadEnvironment();
-	void unloadEnvironment();
+	void load();
+	void unload();
 	void update(float delta);
 	void addModel(string modelName, string objName, string diffuseMapName, string lightMapName, string reflectionMapName, vec3 size);
+	void setCurrentProjectName(string projectName);
 
 	bool isLoaded();
 
@@ -47,6 +48,8 @@ private:
 	bool _modelChoosingEnabled = false;
 	bool _modelEditingEnabled = false;
 	bool _modelResizingEnabled = false;
+	bool _modelColorPicking = false;
+	bool _settingModelUvRepeat = false;
 	bool _modelRemovalEnabled = false;
 	bool _loaded = false;
 
@@ -64,6 +67,7 @@ private:
 	shared_ptr<EngineGuiWindow> _window;
 	
 	string _currentModelName = "";
+	string _currentProjectName = "";
 	vector<string> _modelNames;
 	vector<string> _objFileNamesList;
 };

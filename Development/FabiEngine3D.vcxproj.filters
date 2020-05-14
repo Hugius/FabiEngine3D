@@ -53,22 +53,22 @@
       <Filter>src\Editor System\World Editor</Filter>
     </ClCompile>
     <ClCompile Include="Source\bottom_viewport_controller.cpp">
-      <Filter>src\Engine Controller</Filter>
+      <Filter>src\Engine Controller System</Filter>
     </ClCompile>
     <ClCompile Include="Source\engine_controller.cpp">
-      <Filter>src\Engine Controller</Filter>
+      <Filter>src\Engine Controller System</Filter>
     </ClCompile>
     <ClCompile Include="Source\left_viewport_controller.cpp">
-      <Filter>src\Engine Controller</Filter>
+      <Filter>src\Engine Controller System</Filter>
     </ClCompile>
     <ClCompile Include="Source\right_viewport_controller.cpp">
-      <Filter>src\Engine Controller</Filter>
+      <Filter>src\Engine Controller System</Filter>
     </ClCompile>
     <ClCompile Include="Source\top_viewport_controller.cpp">
-      <Filter>src\Engine Controller</Filter>
+      <Filter>src\Engine Controller System</Filter>
     </ClCompile>
     <ClCompile Include="Source\viewport_controller.cpp">
-      <Filter>src\Engine Controller</Filter>
+      <Filter>src\Engine Controller System</Filter>
     </ClCompile>
     <ClCompile Include="Source\aabb_entity.cpp">
       <Filter>src\Entity System\Data Structures</Filter>
@@ -199,62 +199,20 @@
     <ClCompile Include="Source\opengl_framebuffer_misc.cpp">
       <Filter>src\Rendering System\OpenGL</Filter>
     </ClCompile>
-    <ClCompile Include="Source\aabb_entity_renderer.cpp">
-      <Filter>src\Rendering System\Renderers</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\billboard_entity_renderer.cpp">
-      <Filter>src\Rendering System\Renderers</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\bloom_hdr_renderer.cpp">
-      <Filter>src\Rendering System\Renderers</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\blur_renderer.cpp">
-      <Filter>src\Rendering System\Renderers</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\depth_renderer.cpp">
-      <Filter>src\Rendering System\Renderers</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\base_entity_renderer.cpp">
-      <Filter>src\Rendering System\Renderers</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\final_renderer.cpp">
-      <Filter>src\Rendering System\Renderers</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\game_entity_renderer.cpp">
-      <Filter>src\Rendering System\Renderers</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\gui_entity_renderer.cpp">
-      <Filter>src\Rendering System\Renderers</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\post_renderer.cpp">
-      <Filter>src\Rendering System\Renderers</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\shadow_renderer.cpp">
-      <Filter>src\Rendering System\Renderers</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\sky_entity_renderer.cpp">
-      <Filter>src\Rendering System\Renderers</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\terrain_entity_renderer.cpp">
-      <Filter>src\Rendering System\Renderers</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\water_entity_renderer.cpp">
-      <Filter>src\Rendering System\Renderers</Filter>
-    </ClCompile>
     <ClCompile Include="Source\camera_manager.cpp">
-      <Filter>src\Unassiged</Filter>
+      <Filter>src\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="Source\input_handler.cpp">
-      <Filter>src\Unassiged</Filter>
+      <Filter>src\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="Source\timer.cpp">
-      <Filter>src\Unassiged</Filter>
+      <Filter>src\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="Source\tools.cpp">
-      <Filter>src\Unassiged</Filter>
+      <Filter>src\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="Source\configuration.cpp">
-      <Filter>src\Unassiged</Filter>
+      <Filter>src\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="Source\engine_gui_scrollinglist.cpp">
       <Filter>src\GUI System</Filter>
@@ -262,11 +220,56 @@
     <ClCompile Include="Source\model_editor_management.cpp">
       <Filter>src\Editor System\Model Editor</Filter>
     </ClCompile>
-    <ClCompile Include="Source\model_editor_mesh_updates.cpp">
+    <ClCompile Include="Source\model_editor_updates_size.cpp">
       <Filter>src\Editor System\Model Editor</Filter>
     </ClCompile>
-    <ClCompile Include="Source\model_editor_option_updates.cpp">
+    <ClCompile Include="Source\model_editor_updates_options.cpp">
       <Filter>src\Editor System\Model Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\model_editor_updates_mesh.cpp">
+      <Filter>src\Editor System\Model Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\aabb_entity_renderer.cpp">
+      <Filter>src\Rendering System\Renderers\Entity Renderers</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\base_entity_renderer.cpp">
+      <Filter>src\Rendering System\Renderers\Entity Renderers</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\billboard_entity_renderer.cpp">
+      <Filter>src\Rendering System\Renderers\Entity Renderers</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\game_entity_renderer.cpp">
+      <Filter>src\Rendering System\Renderers\Entity Renderers</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\gui_entity_renderer.cpp">
+      <Filter>src\Rendering System\Renderers\Entity Renderers</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\sky_entity_renderer.cpp">
+      <Filter>src\Rendering System\Renderers\Entity Renderers</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\terrain_entity_renderer.cpp">
+      <Filter>src\Rendering System\Renderers\Entity Renderers</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\water_entity_renderer.cpp">
+      <Filter>src\Rendering System\Renderers\Entity Renderers</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\bloom_hdr_renderer.cpp">
+      <Filter>src\Rendering System\Renderers\Miscellaneous Renderers</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\blur_renderer.cpp">
+      <Filter>src\Rendering System\Renderers\Miscellaneous Renderers</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\depth_renderer.cpp">
+      <Filter>src\Rendering System\Renderers\Miscellaneous Renderers</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\final_renderer.cpp">
+      <Filter>src\Rendering System\Renderers\Miscellaneous Renderers</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\post_renderer.cpp">
+      <Filter>src\Rendering System\Renderers\Miscellaneous Renderers</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\shadow_renderer.cpp">
+      <Filter>src\Rendering System\Renderers\Miscellaneous Renderers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -307,22 +310,22 @@
       <Filter>src\Editor System\World Editor</Filter>
     </ClInclude>
     <ClInclude Include="Source\bottom_viewport_controller.hpp">
-      <Filter>src\Engine Controller</Filter>
+      <Filter>src\Engine Controller System</Filter>
     </ClInclude>
     <ClInclude Include="Source\engine_controller.hpp">
-      <Filter>src\Engine Controller</Filter>
+      <Filter>src\Engine Controller System</Filter>
     </ClInclude>
     <ClInclude Include="Source\left_viewport_controller.hpp">
-      <Filter>src\Engine Controller</Filter>
+      <Filter>src\Engine Controller System</Filter>
     </ClInclude>
     <ClInclude Include="Source\right_viewport_controller.hpp">
-      <Filter>src\Engine Controller</Filter>
+      <Filter>src\Engine Controller System</Filter>
     </ClInclude>
     <ClInclude Include="Source\top_viewport_controller.hpp">
-      <Filter>src\Engine Controller</Filter>
+      <Filter>src\Engine Controller System</Filter>
     </ClInclude>
     <ClInclude Include="Source\viewport_controller.hpp">
-      <Filter>src\Engine Controller</Filter>
+      <Filter>src\Engine Controller System</Filter>
     </ClInclude>
     <ClInclude Include="Source\aabb_entity.hpp">
       <Filter>src\Entity System\Data Structures</Filter>
@@ -444,71 +447,71 @@
     <ClInclude Include="Source\opengl_shader.hpp">
       <Filter>src\Rendering System\OpenGL</Filter>
     </ClInclude>
-    <ClInclude Include="Source\aabb_entity_renderer.hpp">
-      <Filter>src\Rendering System\Renderers</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\billboard_entity_renderer.hpp">
-      <Filter>src\Rendering System\Renderers</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\bloom_hdr_renderer.hpp">
-      <Filter>src\Rendering System\Renderers</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\blur_renderer.hpp">
-      <Filter>src\Rendering System\Renderers</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\depth_renderer.hpp">
-      <Filter>src\Rendering System\Renderers</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\base_entity_renderer.hpp">
-      <Filter>src\Rendering System\Renderers</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\final_renderer.hpp">
-      <Filter>src\Rendering System\Renderers</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\game_entity_renderer.hpp">
-      <Filter>src\Rendering System\Renderers</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\gui_entity_renderer.hpp">
-      <Filter>src\Rendering System\Renderers</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\post_renderer.hpp">
-      <Filter>src\Rendering System\Renderers</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\shadow_renderer.hpp">
-      <Filter>src\Rendering System\Renderers</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\sky_entity_renderer.hpp">
-      <Filter>src\Rendering System\Renderers</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\terrain_entity_renderer.hpp">
-      <Filter>src\Rendering System\Renderers</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\water_entity_renderer.hpp">
-      <Filter>src\Rendering System\Renderers</Filter>
-    </ClInclude>
     <ClInclude Include="Source\camera_manager.hpp">
-      <Filter>src\Unassiged</Filter>
+      <Filter>src\Miscellaneous</Filter>
     </ClInclude>
     <ClInclude Include="Source\input_handler.hpp">
-      <Filter>src\Unassiged</Filter>
+      <Filter>src\Miscellaneous</Filter>
     </ClInclude>
     <ClInclude Include="Source\input_types.hpp">
-      <Filter>src\Unassiged</Filter>
+      <Filter>src\Miscellaneous</Filter>
     </ClInclude>
     <ClInclude Include="Source\logger.hpp">
-      <Filter>src\Unassiged</Filter>
+      <Filter>src\Miscellaneous</Filter>
     </ClInclude>
     <ClInclude Include="Source\timer.hpp">
-      <Filter>src\Unassiged</Filter>
+      <Filter>src\Miscellaneous</Filter>
     </ClInclude>
     <ClInclude Include="Source\tools.hpp">
-      <Filter>src\Unassiged</Filter>
+      <Filter>src\Miscellaneous</Filter>
     </ClInclude>
     <ClInclude Include="Source\configuration.hpp">
-      <Filter>src\Unassiged</Filter>
+      <Filter>src\Miscellaneous</Filter>
     </ClInclude>
     <ClInclude Include="Source\engine_gui_scrollinglist.hpp">
       <Filter>src\GUI System</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\aabb_entity_renderer.hpp">
+      <Filter>src\Rendering System\Renderers\Entity Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\base_entity_renderer.hpp">
+      <Filter>src\Rendering System\Renderers\Entity Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\billboard_entity_renderer.hpp">
+      <Filter>src\Rendering System\Renderers\Entity Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\game_entity_renderer.hpp">
+      <Filter>src\Rendering System\Renderers\Entity Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\gui_entity_renderer.hpp">
+      <Filter>src\Rendering System\Renderers\Entity Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\sky_entity_renderer.hpp">
+      <Filter>src\Rendering System\Renderers\Entity Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\terrain_entity_renderer.hpp">
+      <Filter>src\Rendering System\Renderers\Entity Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\water_entity_renderer.hpp">
+      <Filter>src\Rendering System\Renderers\Entity Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\bloom_hdr_renderer.hpp">
+      <Filter>src\Rendering System\Renderers\Miscellaneous Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\blur_renderer.hpp">
+      <Filter>src\Rendering System\Renderers\Miscellaneous Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\depth_renderer.hpp">
+      <Filter>src\Rendering System\Renderers\Miscellaneous Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\final_renderer.hpp">
+      <Filter>src\Rendering System\Renderers\Miscellaneous Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\post_renderer.hpp">
+      <Filter>src\Rendering System\Renderers\Miscellaneous Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\shadow_renderer.hpp">
+      <Filter>src\Rendering System\Renderers\Miscellaneous Renderers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -584,97 +587,109 @@
     <Filter Include="src\GUI System">
       <UniqueIdentifier>{1dca8087-942c-4fd8-a32e-1cec42430193}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\Unassiged">
-      <UniqueIdentifier>{9232271b-e823-495c-8b98-23b8a2564d81}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\Asset Management System\Models">
       <UniqueIdentifier>{921aaa51-52b5-4d6a-a33b-f48c1e440469}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\Asset Management System\Textures">
       <UniqueIdentifier>{079f90fa-d7da-4f97-8a7b-9b286362b158}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\Engine Controller">
+    <Filter Include="src\Rendering System\Renderers\Entity Renderers">
+      <UniqueIdentifier>{54c25f09-3220-4c6c-b15e-45083cb939f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Rendering System\Renderers\Miscellaneous Renderers">
+      <UniqueIdentifier>{cccd91a7-d567-439a-9320-89a021725512}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Rendering System\Shaders\Entity Shaders">
+      <UniqueIdentifier>{eec82fec-b749-4b59-9130-723362e30bfd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Rendering System\Shaders\Miscellaneous Shaders">
+      <UniqueIdentifier>{ba3f977f-60c8-4394-a904-03e654361fbd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Miscellaneous">
+      <UniqueIdentifier>{9232271b-e823-495c-8b98-23b8a2564d81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Engine Controller System">
       <UniqueIdentifier>{a49d2036-9114-4ebe-9349-1f64805d444c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\FabiEngine3D\Engine\Shaders\sky_entity_shader.frag">
-      <Filter>src\Rendering System\Shaders</Filter>
-    </None>
-    <None Include="..\FabiEngine3D\Engine\Shaders\sky_entity_shader.vert">
-      <Filter>src\Rendering System\Shaders</Filter>
-    </None>
-    <None Include="..\FabiEngine3D\Engine\Shaders\terrain_entity_shader.frag">
-      <Filter>src\Rendering System\Shaders</Filter>
-    </None>
-    <None Include="..\FabiEngine3D\Engine\Shaders\terrain_entity_shader.vert">
-      <Filter>src\Rendering System\Shaders</Filter>
-    </None>
-    <None Include="..\FabiEngine3D\Engine\Shaders\water_entity_shader.frag">
-      <Filter>src\Rendering System\Shaders</Filter>
-    </None>
-    <None Include="..\FabiEngine3D\Engine\Shaders\water_entity_shader.vert">
-      <Filter>src\Rendering System\Shaders</Filter>
-    </None>
     <None Include="..\FabiEngine3D\Engine\Shaders\aabb_entity_shader.frag">
-      <Filter>src\Rendering System\Shaders</Filter>
+      <Filter>src\Rendering System\Shaders\Entity Shaders</Filter>
     </None>
     <None Include="..\FabiEngine3D\Engine\Shaders\aabb_entity_shader.vert">
-      <Filter>src\Rendering System\Shaders</Filter>
+      <Filter>src\Rendering System\Shaders\Entity Shaders</Filter>
     </None>
     <None Include="..\FabiEngine3D\Engine\Shaders\billboard_entity_shader.frag">
-      <Filter>src\Rendering System\Shaders</Filter>
+      <Filter>src\Rendering System\Shaders\Entity Shaders</Filter>
     </None>
     <None Include="..\FabiEngine3D\Engine\Shaders\billboard_entity_shader.vert">
-      <Filter>src\Rendering System\Shaders</Filter>
-    </None>
-    <None Include="..\FabiEngine3D\Engine\Shaders\bloom_hdr_shader.frag">
-      <Filter>src\Rendering System\Shaders</Filter>
-    </None>
-    <None Include="..\FabiEngine3D\Engine\Shaders\bloom_hdr_shader.vert">
-      <Filter>src\Rendering System\Shaders</Filter>
-    </None>
-    <None Include="..\FabiEngine3D\Engine\Shaders\depth_shader.frag">
-      <Filter>src\Rendering System\Shaders</Filter>
-    </None>
-    <None Include="..\FabiEngine3D\Engine\Shaders\depth_shader.vert">
-      <Filter>src\Rendering System\Shaders</Filter>
-    </None>
-    <None Include="..\FabiEngine3D\Engine\Shaders\final_shader.frag">
-      <Filter>src\Rendering System\Shaders</Filter>
-    </None>
-    <None Include="..\FabiEngine3D\Engine\Shaders\final_shader.vert">
-      <Filter>src\Rendering System\Shaders</Filter>
+      <Filter>src\Rendering System\Shaders\Entity Shaders</Filter>
     </None>
     <None Include="..\FabiEngine3D\Engine\Shaders\game_entity_shader.frag">
-      <Filter>src\Rendering System\Shaders</Filter>
+      <Filter>src\Rendering System\Shaders\Entity Shaders</Filter>
     </None>
     <None Include="..\FabiEngine3D\Engine\Shaders\game_entity_shader.vert">
-      <Filter>src\Rendering System\Shaders</Filter>
+      <Filter>src\Rendering System\Shaders\Entity Shaders</Filter>
+    </None>
+    <None Include="..\FabiEngine3D\Engine\Shaders\sky_entity_shader.frag">
+      <Filter>src\Rendering System\Shaders\Entity Shaders</Filter>
+    </None>
+    <None Include="..\FabiEngine3D\Engine\Shaders\sky_entity_shader.vert">
+      <Filter>src\Rendering System\Shaders\Entity Shaders</Filter>
+    </None>
+    <None Include="..\FabiEngine3D\Engine\Shaders\terrain_entity_shader.frag">
+      <Filter>src\Rendering System\Shaders\Entity Shaders</Filter>
+    </None>
+    <None Include="..\FabiEngine3D\Engine\Shaders\terrain_entity_shader.vert">
+      <Filter>src\Rendering System\Shaders\Entity Shaders</Filter>
+    </None>
+    <None Include="..\FabiEngine3D\Engine\Shaders\water_entity_shader.frag">
+      <Filter>src\Rendering System\Shaders\Entity Shaders</Filter>
+    </None>
+    <None Include="..\FabiEngine3D\Engine\Shaders\water_entity_shader.vert">
+      <Filter>src\Rendering System\Shaders\Entity Shaders</Filter>
     </None>
     <None Include="..\FabiEngine3D\Engine\Shaders\gui_entity_shader.frag">
-      <Filter>src\Rendering System\Shaders</Filter>
+      <Filter>src\Rendering System\Shaders\Entity Shaders</Filter>
     </None>
     <None Include="..\FabiEngine3D\Engine\Shaders\gui_entity_shader.vert">
-      <Filter>src\Rendering System\Shaders</Filter>
+      <Filter>src\Rendering System\Shaders\Entity Shaders</Filter>
     </None>
-    <None Include="..\FabiEngine3D\Engine\Shaders\post_shader.frag">
-      <Filter>src\Rendering System\Shaders</Filter>
+    <None Include="..\FabiEngine3D\Engine\Shaders\bloom_hdr_shader.frag">
+      <Filter>src\Rendering System\Shaders\Miscellaneous Shaders</Filter>
     </None>
-    <None Include="..\FabiEngine3D\Engine\Shaders\post_shader.vert">
-      <Filter>src\Rendering System\Shaders</Filter>
-    </None>
-    <None Include="..\FabiEngine3D\Engine\Shaders\shadow_shader.frag">
-      <Filter>src\Rendering System\Shaders</Filter>
-    </None>
-    <None Include="..\FabiEngine3D\Engine\Shaders\shadow_shader.vert">
-      <Filter>src\Rendering System\Shaders</Filter>
+    <None Include="..\FabiEngine3D\Engine\Shaders\bloom_hdr_shader.vert">
+      <Filter>src\Rendering System\Shaders\Miscellaneous Shaders</Filter>
     </None>
     <None Include="..\FabiEngine3D\Engine\Shaders\blur_shader.frag">
-      <Filter>src\Rendering System\Shaders</Filter>
+      <Filter>src\Rendering System\Shaders\Miscellaneous Shaders</Filter>
     </None>
     <None Include="..\FabiEngine3D\Engine\Shaders\blur_shader.vert">
-      <Filter>src\Rendering System\Shaders</Filter>
+      <Filter>src\Rendering System\Shaders\Miscellaneous Shaders</Filter>
+    </None>
+    <None Include="..\FabiEngine3D\Engine\Shaders\depth_shader.frag">
+      <Filter>src\Rendering System\Shaders\Miscellaneous Shaders</Filter>
+    </None>
+    <None Include="..\FabiEngine3D\Engine\Shaders\depth_shader.vert">
+      <Filter>src\Rendering System\Shaders\Miscellaneous Shaders</Filter>
+    </None>
+    <None Include="..\FabiEngine3D\Engine\Shaders\final_shader.frag">
+      <Filter>src\Rendering System\Shaders\Miscellaneous Shaders</Filter>
+    </None>
+    <None Include="..\FabiEngine3D\Engine\Shaders\final_shader.vert">
+      <Filter>src\Rendering System\Shaders\Miscellaneous Shaders</Filter>
+    </None>
+    <None Include="..\FabiEngine3D\Engine\Shaders\post_shader.frag">
+      <Filter>src\Rendering System\Shaders\Miscellaneous Shaders</Filter>
+    </None>
+    <None Include="..\FabiEngine3D\Engine\Shaders\post_shader.vert">
+      <Filter>src\Rendering System\Shaders\Miscellaneous Shaders</Filter>
+    </None>
+    <None Include="..\FabiEngine3D\Engine\Shaders\shadow_shader.frag">
+      <Filter>src\Rendering System\Shaders\Miscellaneous Shaders</Filter>
+    </None>
+    <None Include="..\FabiEngine3D\Engine\Shaders\shadow_shader.vert">
+      <Filter>src\Rendering System\Shaders\Miscellaneous Shaders</Filter>
     </None>
   </ItemGroup>
 </Project>

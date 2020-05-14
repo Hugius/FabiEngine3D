@@ -38,9 +38,11 @@ private:
 	void _updateModelCreation();
 	void _updateModelChoosing();
 	void _updateModelEditing();
+	void _updateModelEditingCamera();
 	void _updateModelEditingMain();
 	void _updateModelEditingMesh();
 	void _updateModelEditingOptions();
+	void _updateModelEditingSize();
 	void _updateModelRemoval();
 	void _updateMiscellaneous();
 
@@ -49,6 +51,8 @@ private:
 	bool _modelEditingEnabled = false;
 	bool _modelResizingEnabled = false;
 	bool _modelColorPicking = false;
+	bool _meshResizingToggled = false;
+	bool _boxResizingToggled = false;
 	bool _settingModelUvRepeat = false;
 	bool _modelRemovalEnabled = false;
 	bool _loaded = false;

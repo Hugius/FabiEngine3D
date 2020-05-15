@@ -2,6 +2,7 @@
 
 #include "viewport_controller.hpp"
 #include "model_editor.hpp"
+#include "world_editor.hpp"
 
 class LeftViewportController final : public ViewportController
 {
@@ -12,7 +13,9 @@ public:
 	void update(float delta) override;
 
 	ModelEditor& getModelEditor();
+	WorldEditor& getWorldEditor();
 
 private:
 	ModelEditor _modelEditor;
+	WorldEditor _worldEditor;
 };

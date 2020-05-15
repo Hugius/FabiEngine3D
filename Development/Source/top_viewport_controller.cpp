@@ -81,6 +81,8 @@ void TopViewportController::_initializeProjectCreation()
 		_gui->getGlobalScreen()->addTextfield("newProjectName", vec2(0.0f, 0.1f), vec2(0.3f, 0.1f), "Enter project name:", vec3(1.0f));
 		_gui->getGlobalScreen()->addWriteField("newProjectName", vec2(0.0f, 0.0f), vec2(0.5f, 0.1f), vec3(0.25f), vec3(0.5f), vec3(1.0f), vec3(0.0f));
 		_gui->getGlobalScreen()->getWriteField("newProjectName")->setActive(true);
+		_gui->getGlobalScreen()->addButton("done", vec2(-0.15f, -0.2f), vec2(0.1f, 0.1f), vec3(0.0f, 0.5f, 0.0f), vec3(0.0f, 1.0f, 0.0f), "Done", vec3(1.0f), vec3(0.0f));
+		_gui->getGlobalScreen()->addButton("cancel", vec2(0.15f, -0.2f), vec2(0.15f, 0.1f), vec3(0.5f, 0.0f, 0.0f), vec3(1.0f, 0.0f, 0.0f), "Cancel", vec3(1.0f), vec3(0.0f));
 		_gui->setFocus(true);
 		_creatingProject = true;
 	}
@@ -92,6 +94,7 @@ void TopViewportController::_initializeProjectLoading()
 	{
 		_gui->getGlobalScreen()->addTextfield("projectList", vec2(0.0f, 0.45f), vec2(0.3f, 0.1f), "Select project:", vec3(1.0f));
 		_gui->getGlobalScreen()->addScrollingList("projectList", vec2(0.0f, 0.0f), vec2(0.5, 0.75f), vec3(0.3f), _gui->topVpButtonColor, _gui->topVpButtonHoverColor, _gui->topVpTextColor, _gui->topVpTextHoverColor, vec2(0.1f, 0.25f));
+		_gui->getGlobalScreen()->addButton("cancel", vec2(0.0f, -0.45f), vec2(0.15f, 0.1f), vec3(0.5f, 0.0f, 0.0f), vec3(1.0f, 0.0f, 0.0f), "Cancel", vec3(1.0f), vec3(0.0f));
 		_gui->setFocus(true);
 		_loadingProject = true;
 
@@ -113,55 +116,75 @@ void TopViewportController::_updateProjectCreation()
 {
 	if (_creatingProject)
 	{
+		bool done = _fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT) && _gui->getGlobalScreen()->getButton("done")->isHovered();
+		bool entered = _gui->getGlobalScreen()->getWriteField("newProjectName")->confirmedInput();
+		bool cancelled = _fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT) && _gui->getGlobalScreen()->getButton("cancel")->isHovered();
+		bool escaped = _gui->getGlobalScreen()->getWriteField("newProjectName")->cancelledInput();
+		bool cleanup = false;
+
 		// Check if pressed ESCAPE or ENTER
-		if (_gui->getGlobalScreen()->getWriteField("newProjectName")->cancelledInput() ||
-			_gui->getGlobalScreen()->getWriteField("newProjectName")->confirmedInput())
+		if (done || entered || cancelled || escaped)
 		{
 			// Extract new name
 			string projectName = _gui->getGlobalScreen()->getWriteField("newProjectName")->getTextContent();
 
 			// Create new project
-			if (_gui->getGlobalScreen()->getWriteField("newProjectName")->confirmedInput())
+			if (done || entered)
 			{
-				// Get directory path for the new project
-				string newDirectoryPath = _fe3d.misc_getRootDirectory() + "User\\Projects\\" + projectName;
-
-				// Check if project already exists
-				struct stat info;
-				stat(newDirectoryPath.c_str(), &info);
-				if (info.st_mode & S_IFDIR) // Project already exists
+				// Projectname must be valid
+				if (projectName != "")
 				{
-					Logger::getInst().throwWarning("Project \"" + projectName + "\"" + " already exists!");
-				}
-				else // Project non-existent
-				{
-					// Create new directory
-					_mkdir(newDirectoryPath.c_str());
+					cleanup = true;
 
-					// Create new models file
-					std::ofstream file;
-					file.open(_fe3d.misc_getRootDirectory() + "User\\Projects\\" + projectName + "\\models.fe3d");;
-					file.close();
+					// Get directory path for the new project
+					string newDirectoryPath = _fe3d.misc_getRootDirectory() + "User\\Projects\\" + projectName;
 
-					// Apply to current project
-					_currentProjectName = projectName;
-
-					// Go back to main editor screen
-					_gui->getViewport("left")->getWindow("main")->setActiveScreen("main");
-
-					// Unload model editor
-					if (_modelEditor.isLoaded())
+					// Check if project already exists
+					struct stat info;
+					stat(newDirectoryPath.c_str(), &info);
+					if (info.st_mode & S_IFDIR) // Project already exists
 					{
-						_modelEditor.unload();
+						Logger::getInst().throwWarning("Project \"" + projectName + "\"" + " already exists!");
+					}
+					else // Project non-existent
+					{
+						// Create new directory
+						_mkdir(newDirectoryPath.c_str());
+
+						// Create new models file
+						std::ofstream file;
+						file.open(_fe3d.misc_getRootDirectory() + "User\\Projects\\" + projectName + "\\models.fe3d");;
+						file.close();
+
+						// Apply to current project
+						_currentProjectName = projectName;
+
+						// Go back to main editor screen
+						_gui->getViewport("left")->getWindow("main")->setActiveScreen("main");
+
+						// Unload model editor
+						if (_modelEditor.isLoaded())
+						{
+							_modelEditor.unloadProject();
+						}
 					}
 				}
 			}
+			else
+			{
+				cleanup = true;
+			}
 
 			// Cleanup
-			_creatingProject = false;
-			_gui->setFocus(false);
-			_gui->getGlobalScreen()->deleteTextfield("newProjectName");
-			_gui->getGlobalScreen()->deleteWriteField("newProjectName");
+			if (cleanup)
+			{
+				_creatingProject = false;
+				_gui->setFocus(false);
+				_gui->getGlobalScreen()->deleteTextfield("newProjectName");
+				_gui->getGlobalScreen()->deleteWriteField("newProjectName");
+				_gui->getGlobalScreen()->deleteButton("done");
+				_gui->getGlobalScreen()->deleteButton("cancel");
+			}
 		}
 	}
 }
@@ -190,7 +213,7 @@ void TopViewportController::_updateProjectLoading()
 					// Unload model editor
 					if (_modelEditor.isLoaded())
 					{
-						_modelEditor.unload();
+						_modelEditor.unloadProject();
 					}
 
 					// Give new project name
@@ -200,10 +223,11 @@ void TopViewportController::_updateProjectLoading()
 		}
 
 		// Cleaning up
-		if (_fe3d.input_getKeyDown(Input::KEY_ESCAPE) || loaded)
+		if (loaded || _fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT) && _gui->getGlobalScreen()->getButton("cancel")->isHovered())
 		{
 			_gui->getGlobalScreen()->deleteTextfield("projectList");
 			_gui->getGlobalScreen()->deleteScrollingList("projectList");
+			_gui->getGlobalScreen()->deleteButton("cancel");
 			_gui->setFocus(false);
 			_loadingProject = false;
 			return;
@@ -213,40 +237,5 @@ void TopViewportController::_updateProjectLoading()
 
 void TopViewportController::_saveCurrentProject()
 {
-	if (_currentProjectName != "")
-	{
-		std::ofstream file;
-		file.open(_fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\models.fe3d");
-
-		// Write model data into file
-		for (auto& modelName : _modelEditor.getModelNames())
-		{
-			// Check if 3D entity exists
-			if (_fe3d.gameEntity_isExisting(modelName))
-			{
-				auto objName = _fe3d.gameEntity_getObjName(modelName);
-				auto diffuseMapName = _fe3d.gameEntity_getDiffuseMapName(modelName);
-				diffuseMapName = (diffuseMapName == "") ? "-" : diffuseMapName;
-				auto lightMapName = _fe3d.gameEntity_getLightMapName(modelName);
-				lightMapName = (lightMapName == "") ? "-" : lightMapName;
-				auto reflectionMapName = _fe3d.gameEntity_getReflectionMapName(modelName);
-				reflectionMapName = (reflectionMapName == "") ? "-" : reflectionMapName;
-				auto modelSize = _fe3d.gameEntity_getSize(modelName);
-
-				// 1 model -> 1 line in file
-				file << modelName << " " << objName << " " << diffuseMapName << " " << lightMapName << " " << reflectionMapName << " " <<
-					std::to_string(modelSize.x) << " " << std::to_string(modelSize.y) << " " << std::to_string(modelSize.z) << "\n";
-			}
-			else
-			{
-				file << modelName << " -  -  -  -  0  0  0\n";
-			}
-		}
-
-		// Close file
-		file.close();
-
-		// Logging
-		_fe3d.logger_throwInfo("Current project saved!");
-	}
+	_modelEditor.saveProject();
 }

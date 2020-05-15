@@ -443,11 +443,6 @@ public:
 	vec2 misc_getViewportSize();
 	bool misc_isMouseInsideViewport();
 
-	// World interface
-	bool world_check(const string& worldName);
-	void world_load(const string& worldName);
-	void world_export(const string& worldName);
-
 protected:
 	// Virtual interface
 	virtual void FE3D_CONTROLLER_INIT() = 0;

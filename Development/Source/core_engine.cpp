@@ -22,7 +22,6 @@ CoreEngine::CoreEngine(FabiEngine3D & fe3d) :
 	_textEntityManager(_objLoader, _texLoader, _shaderBus),
 	_shadowManager(),
 	_mousePicker(_shaderBus),
-	_worldEditor({}, _gameEntityManager),
 	_collisionDetector(),
 	_collisionResolver(_collisionDetector),
 	_timer(),

@@ -307,8 +307,7 @@
     <ClCompile Include="Source\window_manager.cpp" />
     <ClCompile Include="Source\core_engine_core.cpp" />
     <ClCompile Include="Source\fabi_engine_3d.cpp" />
-    <ClCompile Include="Source\world_editor.cpp" />
-    <ClCompile Include="Source\world_editor_updates.cpp" />
+    <ClCompile Include="Source\world_editor_core.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\FabiEngine3D\Engine\Shaders\aabb_entity_shader.frag" />

@@ -11,35 +11,19 @@ void ModelEditor::_updateModelEditingOptions()
 	{
 		if (screen->getScrollingList("optionsList")->getButton("faceculled")->isHovered())
 		{
-			auto textfieldID = screen->getScrollingList("optionsList")->getButton("faceculled")->getTextfield()->getEntityID();
-			auto isCulled = _fe3d.gameEntity_isFaceCulled(_currentModelName);
-
-			_fe3d.textEntity_setTextContent(textfieldID, isCulled ? "Culling: OFF" : "Culling: ON");
-			_fe3d.gameEntity_setFaceCulled(_currentModelName, !isCulled);
+			_fe3d.gameEntity_setFaceCulled(_currentModelName, !_fe3d.gameEntity_isFaceCulled(_currentModelName));
 		}
 		else if (screen->getScrollingList("optionsList")->getButton("shadowed")->isHovered())
 		{
-			auto textfieldID = screen->getScrollingList("optionsList")->getButton("shadowed")->getTextfield()->getEntityID();
-			auto isShadowed = _fe3d.gameEntity_isShadowed(_currentModelName);
-
-			_fe3d.textEntity_setTextContent(textfieldID, isShadowed ? "Shadowed: OFF" : "Shadowed: ON");
-			_fe3d.gameEntity_setShadowed(_currentModelName, !isShadowed);
+			_fe3d.gameEntity_setShadowed(_currentModelName, !_fe3d.gameEntity_isShadowed(_currentModelName));
 		}
 		else if (screen->getScrollingList("optionsList")->getButton("transparent")->isHovered())
 		{
-			auto textfieldID = screen->getScrollingList("optionsList")->getButton("transparent")->getTextfield()->getEntityID();
-			auto isTransparent = _fe3d.gameEntity_isTransparent(_currentModelName);
-
-			_fe3d.textEntity_setTextContent(textfieldID, isTransparent ? "No-white: OFF" : "No-white: ON");
-			_fe3d.gameEntity_setTransparent(_currentModelName, !isTransparent);
+			_fe3d.gameEntity_setTransparent(_currentModelName, !_fe3d.gameEntity_isTransparent(_currentModelName));
 		}
 		else if (screen->getScrollingList("optionsList")->getButton("specular")->isHovered())
 		{
-			auto textfieldID = screen->getScrollingList("optionsList")->getButton("specular")->getTextfield()->getEntityID();
-			auto isSpecular = _fe3d.gameEntity_isSpecularLighted(_currentModelName);
-
-			_fe3d.textEntity_setTextContent(textfieldID, isSpecular ? "Specular: OFF" : "Specular: ON");
-			_fe3d.gameEntity_setSpecularLighted(_currentModelName, !isSpecular);
+			_fe3d.gameEntity_setSpecularLighted(_currentModelName, !_fe3d.gameEntity_isSpecularLighted(_currentModelName));
 		}
 		else if (screen->getScrollingList("optionsList")->getButton("setColor")->isHovered())
 		{
@@ -83,6 +67,20 @@ void ModelEditor::_updateModelEditingOptions()
 			_window->setActiveScreen("modelEditingMain");
 		}
 	}
+
+	// Update GUI button contents
+	auto faceculledID = screen->getScrollingList("optionsList")->getButton("faceculled")->getTextfield()->getEntityID();
+	auto isCulled = _fe3d.gameEntity_isFaceCulled(_currentModelName);
+	auto shadowedID = screen->getScrollingList("optionsList")->getButton("shadowed")->getTextfield()->getEntityID();
+	auto isShadowed = _fe3d.gameEntity_isShadowed(_currentModelName);
+	auto transparentID = screen->getScrollingList("optionsList")->getButton("transparent")->getTextfield()->getEntityID();
+	auto isTransparent = _fe3d.gameEntity_isTransparent(_currentModelName);
+	auto specularID = screen->getScrollingList("optionsList")->getButton("specular")->getTextfield()->getEntityID();
+	auto isSpecular = _fe3d.gameEntity_isSpecularLighted(_currentModelName);
+	_fe3d.textEntity_setTextContent(faceculledID, isCulled ? "Culling: ON" : "Culling: OFF");
+	_fe3d.textEntity_setTextContent(shadowedID, isShadowed ? "Shadowed: ON" : "Shadowed: OFF");
+	_fe3d.textEntity_setTextContent(transparentID, isTransparent ? "No-white: ON" : "No-white: OFF");
+	_fe3d.textEntity_setTextContent(specularID, isSpecular ? "Specular: ON" : "Specular: OFF");
 
 	// Update model color changing through buttons
 	if (_modelColorPicking)

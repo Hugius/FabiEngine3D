@@ -2,7 +2,8 @@
 
 LeftViewportController::LeftViewportController(FabiEngine3D& fe3d, shared_ptr<EngineGuiManager> gui) :
 	ViewportController(fe3d, gui),
-	_modelEditor(fe3d, gui)
+	_modelEditor(fe3d, gui),
+	_worldEditor(fe3d, gui)
 {
 
 }
@@ -20,26 +21,41 @@ void LeftViewportController::initialize()
 	_gui->getViewport("left")->getWindow("main")->getScreen("main")->addButton("scriptEditor", vec2(0.0f, -0.7f), vec2(1.5f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Script editor", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 	
 	// Initialize model editor GUI
-	_modelEditor.initialize();
+	_modelEditor.initializeGUI();
+	_worldEditor.initializeGUI();
 }
 
 void LeftViewportController::update(float delta)
 {
+	auto window = _gui->getViewport("left")->getWindow("main");
+	auto screen = window->getScreen("main");
+
 	// Check if LMB is pressed
 	if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
 	{
-		if (_gui->getViewport("left")->getWindow("main")->getScreen("main")->getButton("modelEditor")->isHovered()) // Model editor button
+		if (screen->getButton("modelEditor")->isHovered()) // Model editor button
 		{
-			_modelEditor.load();
-			_gui->getViewport("left")->getWindow("main")->setActiveScreen("modelManagement");
+			_modelEditor.loadProject();
+			window->setActiveScreen("modelManagement");
+		}
+		else if (screen->getButton("worldEditor")->isHovered()) // World editor button
+		{
+			_worldEditor.loadProject();
+			window->setActiveScreen("worldManagement");
 		}
 	}
 
 	// Update all editors
 	_modelEditor.update(delta);
+	_worldEditor.update(delta);
 }
 
 ModelEditor& LeftViewportController::getModelEditor()
 {
 	return _modelEditor;
+}
+
+WorldEditor& LeftViewportController::getWorldEditor()
+{
+	return _worldEditor;
 }

@@ -46,12 +46,6 @@
     <ClCompile Include="Source\mouse_picker.cpp">
       <Filter>src\Editor System\World Editor</Filter>
     </ClCompile>
-    <ClCompile Include="Source\world_editor.cpp">
-      <Filter>src\Editor System\World Editor</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\world_editor_updates.cpp">
-      <Filter>src\Editor System\World Editor</Filter>
-    </ClCompile>
     <ClCompile Include="Source\bottom_viewport_controller.cpp">
       <Filter>src\Engine Controller System</Filter>
     </ClCompile>
@@ -271,6 +265,9 @@
     <ClCompile Include="Source\shadow_renderer.cpp">
       <Filter>src\Rendering System\Renderers\Miscellaneous Renderers</Filter>
     </ClCompile>
+    <ClCompile Include="Source\world_editor_core.cpp">
+      <Filter>src\Editor System\World Editor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\obj_loader.hpp">
@@ -304,9 +301,6 @@
       <Filter>src\Editor System\Model Editor</Filter>
     </ClInclude>
     <ClInclude Include="Source\mouse_picker.hpp">
-      <Filter>src\Editor System\World Editor</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\world_editor.hpp">
       <Filter>src\Editor System\World Editor</Filter>
     </ClInclude>
     <ClInclude Include="Source\bottom_viewport_controller.hpp">
@@ -513,6 +507,9 @@
     <ClInclude Include="Source\shadow_renderer.hpp">
       <Filter>src\Rendering System\Renderers\Miscellaneous Renderers</Filter>
     </ClInclude>
+    <ClInclude Include="Source\world_editor.hpp">
+      <Filter>src\Editor System\World Editor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -610,6 +607,15 @@
     </Filter>
     <Filter Include="src\Engine Controller System">
       <UniqueIdentifier>{a49d2036-9114-4ebe-9349-1f64805d444c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Editor System\Placement Editor">
+      <UniqueIdentifier>{73f39bce-8d65-416c-abaa-6ed990784a08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Editor System\Lighting Editor">
+      <UniqueIdentifier>{b1578728-7271-4241-baad-ee69304d28ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Editor System\Script Editor">
+      <UniqueIdentifier>{da14d31f-6d01-4e12-a50c-99a603867d27}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

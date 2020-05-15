@@ -3,7 +3,7 @@
 #include "fabi_engine_3d.hpp"
 #include "engine_gui_manager.hpp"
 
-enum class RotationType
+enum class Direction
 {
 	X,
 	Y,
@@ -19,16 +19,18 @@ public:
 	vector<string>& getTotalObjFileNames();
 	vector<string>& getModelNames();
 
-	void initialize();
-	void load();
-	void unload();
+	void initializeGUI();
+	void loadProject();
+	void saveProject();
+	void unloadProject();
 	void update(float delta);
-	void addModel(string modelName, string objName, string diffuseMapName, string lightMapName, string reflectionMapName, vec3 size);
 	void setCurrentProjectName(string projectName);
 
 	bool isLoaded();
 
 private:
+	void _addModel(string modelName, string objName, string diffuseMapName, string lightMapName, string reflectionMapName, vec3 size,
+		bool faceCulled, bool shadowed, bool transparent, bool specular, vec3 color, float uvRepeat, vec3 aabbSize);
 	void _loadObjFileNames();
 	void _loadOBJ();
 	void _loadDiffuseMap();
@@ -52,10 +54,10 @@ private:
 	bool _modelResizingEnabled = false;
 	bool _modelColorPicking = false;
 	bool _meshResizingToggled = false;
-	bool _boxResizingToggled = false;
+	bool _boxResizingToggled = false;  
 	bool _settingModelUvRepeat = false;
 	bool _modelRemovalEnabled = false;
-	bool _loaded = false;
+	bool _isLoaded = false;
 
 	const vec3 _startingCameraPos = vec3(0.0f, 5.0f, 5.0f);
 

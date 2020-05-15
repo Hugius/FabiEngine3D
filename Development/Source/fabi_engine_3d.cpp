@@ -2140,18 +2140,3 @@ bool FabiEngine3D::misc_isMouseInsideViewport()
 
 	return false;
 }
-
-bool FabiEngine3D::world_check(const string& worldName)
-{
-	return _core->_worldEditor.checkWorld(worldName);
-}
-
-void FabiEngine3D::world_load(const string& worldName)
-{
-	_core->_worldEditor.loadWorld(worldName);
-}
-
-void FabiEngine3D::world_export(const string& worldName)
-{
-	_core->_worldEditor.exportWorld(worldName);
-}

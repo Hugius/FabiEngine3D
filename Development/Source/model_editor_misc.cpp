@@ -5,7 +5,7 @@
 void ModelEditor::_updateMiscellaneous()
 {
 	// Update reference model visibility
-	if (_loaded)
+	if (_isLoaded)
 	{
 		if (_fe3d.input_getKeyToggled(Input::KEY_R))
 		{
@@ -125,7 +125,7 @@ void ModelEditor::setCurrentProjectName(string projectName)
 
 bool ModelEditor::isLoaded()
 {
-	return _loaded;
+	return _isLoaded;
 }
 
 vector<string>& ModelEditor::getTotalObjFileNames()

@@ -1,56 +1,30 @@
 #pragma once
 
-#include "camera_manager.hpp"
-#include "game_entity_manager.hpp"
-#include "text_entity_manager.hpp"
-#include "input_handler.hpp"
-
-enum class TransformationType
-{
-	T,
-	R,
-	S
-};
-
-enum class DirectionType
-{
-	X,
-	Y,
-	Z
-};
+#include "fabi_engine_3d.hpp"
+#include "engine_gui_manager.hpp"
 
 class WorldEditor final
 {
 public:
-	WorldEditor(vector<string> modelNames, GameEntityManager& gameEntityManager);
-	~WorldEditor();
+	WorldEditor(FabiEngine3D& fe3d, shared_ptr<EngineGuiManager> gui);
+	~WorldEditor() = default;
 
-	bool checkWorld(const string& worldName);
-	void loadWorld(const string & worldName);
-	void exportWorld(const string& worldName);
-	void update
-	(
-		ivec2 mousePos, vec3 terrainPoint, 
-		bool placementMode, vector<GameEntity*> & models,
-		CameraManager& camera, TextEntityManager& text, InputHandler& input, float delta
-	);
+	void initializeGUI();
+	void loadProject();
+	void saveProject();
+	void unloadProject();
+	void update(float delta);
+	void setCurrentProjectName(string projectName);
 
-	bool hasWorldLoadedBefore(const string& worldID);
+	bool isLoaded();
 
 private:
-	GameEntityManager& _game;
+	bool _isLoaded = false;
 
-	// Getters
-	string _getSelectedID();
-	
-	// Vectors
-	vector<string>       _loadedWorlds;
-	vector<string>       _modelNames;
-	vector<unsigned int> _modelAmounts;
+	string _currentProjectName = "";
 
-	// Other
-	DirectionType _directionType           = DirectionType::Y;
-	TransformationType _transformationType = TransformationType::T;
-	unsigned int _modelIndex               = 0;
-	bool _rotating                         = false;
+	FabiEngine3D& _fe3d;
+	shared_ptr<EngineGuiManager> _gui;
+
+	shared_ptr<EngineGuiWindow> _window;
 };

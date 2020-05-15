@@ -40,7 +40,7 @@ void ModelEditor::_updateModelManagement()
 		else if (managementScreen->getButton("back")->isHovered()) // Back button
 		{
 			_window->setActiveScreen("main");
-			unload();
+			unloadProject();
 		}
 	}
 }
@@ -60,7 +60,7 @@ void ModelEditor::_updateModelCreation()
 			if (_gui->getGlobalScreen()->getWriteField("newModelName")->confirmedInput())
 			{
 				// Add model
-				addModel(modelName, "", "", "", "", vec3(0.0f));
+				_addModel(modelName, "", "", "", "", vec3(0.0f), 0, 1, 0, 0, vec3(1.0f), 1.0f, vec3(1.0f));
 
 				// Go to editor screen
 				_currentModelName = modelName;

@@ -12,9 +12,9 @@ ModelEditor::ModelEditor(FabiEngine3D& fe3d, shared_ptr<EngineGuiManager> gui) :
 	_loadObjFileNames();
 }
 
-void ModelEditor::initialize()
+void ModelEditor::initializeGUI()
 {
-	// Global window instance of left viewport
+	// Private window instance of left viewport
 	_window = _gui->getViewport("left")->getWindow("main");
 
 	// Left-viewport: mainWindow - modelManagement
@@ -33,7 +33,7 @@ void ModelEditor::initialize()
 	_window->addScreen("modelEditingMain");
 	_window->getScreen("modelEditingMain")->addButton("mesh", vec2(0.0f, 0.63f), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "3D mesh", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 	_window->getScreen("modelEditingMain")->addButton("options", vec2(0.0f, 0.21), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Options", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
-	_window->getScreen("modelEditingMain")->addButton("size", vec2(0.0f, -0.21), vec2(1.0f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Size", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_window->getScreen("modelEditingMain")->addButton("size", vec2(0.0f, -0.21), vec2(0.9f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Size", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 	_window->getScreen("modelEditingMain")->addButton("back", vec2(0.0f, -0.63f), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Go back", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 
 	// Left-viewport: mainWindow - modelEditingMesh
@@ -57,14 +57,17 @@ void ModelEditor::initialize()
 
 	// Left-viewport: mainWindow - modelEditingSize
 	_window->addScreen("modelEditingSize");
-	_window->getScreen("modelEditingSize")->addButton("setSize", vec2(0.0f, 0.7f), vec2(1.6f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Set mesh size", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
-	_window->getScreen("modelEditingSize")->addButton("toggleResizeMesh", vec2(0.0f, 0.35f), vec2(1.6f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Mesh resize: OFF", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
-	_window->getScreen("modelEditingSize")->addButton("toggleBoxView", vec2(0.0f, 0.0f), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Hitbox: ON", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
-	_window->getScreen("modelEditingSize")->addButton("toggleResizeBox", vec2(0.0f, -0.35f), vec2(1.6f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Box resize: OFF", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
-	_window->getScreen("modelEditingSize")->addButton("back", vec2(0.0f, -0.7f), vec2(1.0f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Go back", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_window->getScreen("modelEditingSize")->addScrollingList("sizeList", vec2(0.0f, 0.1f), vec2(1.9, 1.75f), vec3(0.3f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, _gui->leftVpTextColor, _gui->leftVpTextHoverColor, vec2(0.15f, 0.1f));
+	_window->getScreen("modelEditingSize")->getScrollingList("sizeList")->addButton("setSize", "Set mesh size");
+	_window->getScreen("modelEditingSize")->getScrollingList("sizeList")->addButton("toggleResizeMesh", "Mesh resize: OFF");
+	_window->getScreen("modelEditingSize")->getScrollingList("sizeList")->addButton("toggleBoxView", "Hitbox: OFF");
+	_window->getScreen("modelEditingSize")->getScrollingList("sizeList")->addButton("toggleResizeBox", "Box resize: OFF");
+	_window->getScreen("modelEditingSize")->getScrollingList("sizeList")->addButton("resizeBoxDir", "Direction: X");
+	_window->getScreen("modelEditingSize")->addButton("back", vec2(0.0f, -0.9f), vec2(1.0f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Go back", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+
 }
 
-void ModelEditor::load()
+void ModelEditor::loadProject()
 {
 	// Camera
 	_fe3d.camera_load(90.0f, 0.1f, 1000.0f, vec3(_startingCameraPos), -90.0f, 0.0f);
@@ -76,7 +79,7 @@ void ModelEditor::load()
 	_fe3d.gfx_addLightMapping();
 	_fe3d.gfx_addSkyReflections(0.25f);
 	_fe3d.gfx_addMSAA();
-	_fe3d.gfx_addSceneReflections(0.0f, 0.25f);
+	_fe3d.gfx_addSceneReflections(0.0f, 0.15f);
 	_fe3d.gfx_addShadows(vec3(50.0f, 50.0f, 0.0f), vec3(0.0f), 100.0f, 150.0);
 	_fe3d.gfx_addSpecularLighting(16.0f);
 	
@@ -93,8 +96,8 @@ void ModelEditor::load()
 	_fe3d.skyEntity_select("@modelEditorSky");
 
 	// Other
-	_gui->getGlobalScreen()->addTextfield("currentModelName", vec2(0.0f, 0.85f), vec2(0.5f, 0.1f), "", vec3(1.0f));
-	_loaded = true;
+	_gui->getGlobalScreen()->addTextfield("currentModelName", vec2(-0.625f, 0.85f), vec2(0.5f, 0.1f), "", vec3(1.0f));
+	_isLoaded = true;
 
 	// Load models file
 	std::ifstream file;
@@ -104,26 +107,92 @@ void ModelEditor::load()
 	// Read model data
 	while (std::getline(file, line))
 	{
+		// Placeholder variables
 		string modelName, objName, diffuseName, lightName, reflectionName;
-		float width, height, depth;
+		float width, height, depth, colorR, colorG, colorB, uvRepeat, boxSizeX, boxSizeY, boxSizeZ;
+		bool faceCulled, shadowed, transparent, specular;
+
+		// For item extraction
 		std::istringstream iss(line);
 
 		// Extract from file
-		iss >> modelName >> objName >> diffuseName >> lightName >> reflectionName >> width >> height >> depth;
+		iss >> modelName >> objName >> diffuseName >> lightName >> reflectionName 
+			>> width >> height >> depth >> faceCulled >> shadowed >> transparent >> specular
+			>> colorR >> colorG >> colorB >> uvRepeat >> boxSizeX >> boxSizeY >> boxSizeZ;
+
+		// Run checks on string values
 		objName = (objName == "-") ? "" : objName;
 		diffuseName = (diffuseName == "-") ? "" : diffuseName;
 		lightName = (lightName == "-") ? "" : lightName;
 		reflectionName = (reflectionName == "-") ? "" : reflectionName;
 
 		// Add new model
-		addModel(modelName, objName, diffuseName, lightName, reflectionName, vec3(width, height, depth));
+		_addModel(modelName, objName, diffuseName, lightName, reflectionName, vec3(width, height, depth), 
+			faceCulled, shadowed, transparent, specular, vec3(colorR, colorG, colorB), uvRepeat, vec3(boxSizeX, boxSizeY, boxSizeZ));
 	}
 
 	// Close file
 	file.close();
 }
 
-void ModelEditor::unload()
+void ModelEditor::saveProject()
+{
+	if (_currentProjectName != "")
+	{
+		std::ofstream file;
+		file.open(_fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\models.fe3d");
+
+		// Write model data into file
+		for (auto& modelName : _modelNames)
+		{
+			// Check if 3D entity exists
+			if (_fe3d.gameEntity_isExisting(modelName))
+			{
+				auto objName = _fe3d.gameEntity_getObjName(modelName);
+				auto diffuseMapName = _fe3d.gameEntity_getDiffuseMapName(modelName);
+				diffuseMapName = (diffuseMapName == "") ? "-" : diffuseMapName;
+				auto lightMapName = _fe3d.gameEntity_getLightMapName(modelName);
+				lightMapName = (lightMapName == "") ? "-" : lightMapName;
+				auto reflectionMapName = _fe3d.gameEntity_getReflectionMapName(modelName);
+				reflectionMapName = (reflectionMapName == "") ? "-" : reflectionMapName;
+				auto modelSizeX = std::to_string(_fe3d.gameEntity_getSize(modelName).x);
+				auto modelSizeY = std::to_string(_fe3d.gameEntity_getSize(modelName).y);
+				auto modelSizeZ = std::to_string(_fe3d.gameEntity_getSize(modelName).z);
+				auto faceCulled = std::to_string(_fe3d.gameEntity_isFaceCulled(modelName));
+				auto shadowed = std::to_string(_fe3d.gameEntity_isShadowed(modelName));
+				auto transparent = std::to_string(_fe3d.gameEntity_isTransparent(modelName));
+				auto specular = std::to_string(_fe3d.gameEntity_isSpecularLighted(modelName));
+				auto colorR = std::to_string(_fe3d.gameEntity_getColor(modelName).x);
+				auto colorG = std::to_string(_fe3d.gameEntity_getColor(modelName).y);
+				auto colorB = std::to_string(_fe3d.gameEntity_getColor(modelName).z);
+				auto uvRepeat = std::to_string(_fe3d.gameEntity_getUvRepeat(modelName));
+				auto boxSizeX = std::to_string(_fe3d.aabbEntity_getSize(modelName).x);
+				auto boxSizeY = std::to_string(_fe3d.aabbEntity_getSize(modelName).y);
+				auto boxSizeZ = std::to_string(_fe3d.aabbEntity_getSize(modelName).z);
+
+				// 1 model -> 1 line in file
+				file << modelName << " " << 
+					objName << " " << diffuseMapName << " " << lightMapName << " " << reflectionMapName << " " <<
+					modelSizeX << " " << modelSizeY << " " << modelSizeZ << " " << 
+					faceCulled << " " << shadowed << " " << transparent << " " << specular << " " <<
+					colorR << " " << colorG << " " << colorB << " " << uvRepeat << " " << 
+					boxSizeX << " " << boxSizeY << " " << boxSizeZ << "\n";
+			}
+			else
+			{
+				file << modelName << " -  -  -  -  0  0  0\n";
+			}
+		}
+
+		// Close file
+		file.close();
+
+		// Logging
+		_fe3d.logger_throwInfo("Current project saved!");
+	}
+}
+
+void ModelEditor::unloadProject()
 {
 	// Graphics
 	_fe3d.gfx_removeAmbientLighting();
@@ -160,11 +229,12 @@ void ModelEditor::unload()
 	_modelEditingEnabled = false;
 	_modelResizingEnabled = false;
 	_modelRemovalEnabled = false;
-	_loaded = false;
+	_isLoaded = false;
 	_cameraDistance = 5.0f;
 }
 
-void ModelEditor::addModel(string modelName, string objName, string diffuseMapName, string lightMapName, string reflectionMapName, vec3 size)
+void ModelEditor::_addModel(string modelName, string objName, string diffuseMapName, string lightMapName, string reflectionMapName, vec3 size,
+	bool faceCulled, bool shadowed, bool transparent, bool specular, vec3 color, float uvRepeat, vec3 aabbSize)
 {
 	// If modelname not existing yet
 	if (std::find(_modelNames.begin(), _modelNames.end(), modelName) == _modelNames.end())
@@ -176,6 +246,7 @@ void ModelEditor::addModel(string modelName, string objName, string diffuseMapNa
 		if (objName != "")
 		{
 			_fe3d.gameEntity_add(modelName, objName, vec3(0.0f), vec3(0.0f), size, false);
+			_fe3d.aabbEntity_bindToGameEntity(modelName, aabbSize, true);
 
 			// Diffuse map
 			if (diffuseMapName != "")
@@ -194,6 +265,16 @@ void ModelEditor::addModel(string modelName, string objName, string diffuseMapNa
 			{
 				_fe3d.gameEntity_setReflectionMap(modelName, reflectionMapName);
 			}
+
+			// Set boolean options
+			_fe3d.gameEntity_setFaceCulled(modelName, faceCulled);
+			_fe3d.gameEntity_setShadowed(modelName, shadowed);
+			_fe3d.gameEntity_setTransparent(modelName, transparent);
+			_fe3d.gameEntity_setSpecularLighted(modelName, specular);
+
+			// Set other options
+			_fe3d.gameEntity_setColor(modelName, color);
+			_fe3d.gameEntity_setUvRepeat(modelName, uvRepeat);
 		}
 
 		// Add scrolling list button

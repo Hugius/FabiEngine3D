@@ -107,24 +107,24 @@ void GameEntity::setColor(vec3 val)
 	_color = val;
 }
 
-void GameEntity::setObjName(const string & val)
+void GameEntity::setObjPath(const string & val)
 {
-	_objName = val;
+	_objPath = val;
 }
 
-void GameEntity::setDiffuseMapName(const string& val)
+void GameEntity::setDiffuseMapPath(const string& val)
 {
-	_diffuseMapName = val;
+	_diffuseMapPath = val;
 }
 
-void GameEntity::setLightMapName(const string& val)
+void GameEntity::setLightMapPath(const string& val)
 {
-	_lightMapName = val;
+	_lightMapPath = val;
 }
 
-void GameEntity::setReflectionMapName(const string& val)
+void GameEntity::setReflectionMapPath(const string& val)
 {
-	_reflectionMapName = val;
+	_reflectionMapPath = val;
 }
 
 void GameEntity::setTransparent(bool val)
@@ -217,24 +217,24 @@ const vec3 GameEntity::getColor() const
 	return _color;
 }
 
-const string & GameEntity::getObjName() const
+const string & GameEntity::getObjPath() const
 {
-	return _objName;
+	return _objPath;
 }
 
-const string& GameEntity::getDiffuseMapName() const
+const string& GameEntity::getDiffuseMapPath() const
 {
-	return _diffuseMapName;
+	return _diffuseMapPath;
 }
 
-const string& GameEntity::getLightMapName() const
+const string& GameEntity::getLightMapPath() const
 {
-	return _lightMapName;
+	return _lightMapPath;
 }
 
-const string& GameEntity::getReflectionMapName() const
+const string& GameEntity::getReflectionMapPath() const
 {
-	return _reflectionMapName;
+	return _reflectionMapPath;
 }
 
 const bool GameEntity::isTransparent() const

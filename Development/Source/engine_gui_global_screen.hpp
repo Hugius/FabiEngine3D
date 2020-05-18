@@ -21,6 +21,12 @@ public:
 	void addRectangle(const string& ID, vec2 position, vec2 size, vec3 color);
 	void addTextfield(const string& ID, vec2 position, vec2 size, string textContent, vec3 textColor);
 
+	bool checkScrollingList(const string& ID);
+	bool checkWriteField(const string& ID);
+	bool checkButton(const string& ID);
+	bool checkRectangle(const string& ID);
+	bool checkTextfield(const string& ID);
+
 	void deleteScrollingList(const string& ID);
 	void deleteWriteField(const string& ID);
 	void deleteButton(const string& ID);

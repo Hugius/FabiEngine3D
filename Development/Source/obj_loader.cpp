@@ -37,11 +37,11 @@ vector<ObjPart> OBJLoader::_loadOBJ(const string& filePath)
 	fullDir = fullDir.substr(0, fullDir.size() - 25);
 
 	// Load .obj file
-	string path = fullDir + filePath + ".obj";
+	string path = fullDir + filePath;
 	FILE * file = fopen(path.c_str(), "r");
 	if (!std::filesystem::exists(path))
 	{
-		Logger::getInst().throwError("Could not load .obj file: " + string(filePath + ".obj"));
+		Logger::getInst().throwError("Could not load .obj file: " + filePath);
 	}
 
 	// Fill the vector with the data from the file
@@ -77,7 +77,7 @@ vector<ObjPart> OBJLoader::_loadOBJ(const string& filePath)
 			tem_normals.push_back(normal);
 			continue;
 		}
-		else if (strcmp(lineHeader, "WE3DTexture") == 0) // Material
+		else if (strcmp(lineHeader, "FE3DTexture") == 0) // Material
 		{
 			char temp[101];
 			fscanf(file, "%100s\n", temp);
@@ -97,7 +97,7 @@ vector<ObjPart> OBJLoader::_loadOBJ(const string& filePath)
 			matches = fscanf(file, "%d/%d/%d %d/%d/%d %d/%d/%d\n", &posIndex[0], &uvIndex[0], &normalIndex[0], &posIndex[1], &uvIndex[1], &normalIndex[1], &posIndex[2], &uvIndex[2], &normalIndex[2]);
 			if (matches != 9)
 			{
-				Logger::getInst().throwError("Too many or not enough faces at file: " + string(filePath + ".obj"));
+				Logger::getInst().throwError("Too many or not enough faces at file: " + filePath);
 			}
 
 			bool alreadyExisting = false;
@@ -146,11 +146,11 @@ vector<ObjPart> OBJLoader::_loadOBJ(const string& filePath)
 	// Error checking
 	if (objParts.empty())
 	{
-		Logger::getInst().throwError("Incorrect or too little content at file: " + string("User\\Assets\\OBJs\\" + filePath + ".obj"));
+		Logger::getInst().throwError("Incorrect or too little content at file: " + filePath);
 	}
 
 	// Logging
-	Logger::getInst().throwInfo("Loaded OBJ model: " + string("User\\Assets\\OBJs\\" + filePath + ".obj"));
+	Logger::getInst().throwInfo("Loaded OBJ model: " + filePath);
 
 	// Return new OBJ parts
 	return objParts;

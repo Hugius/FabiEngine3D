@@ -1,5 +1,10 @@
 #include "sky_entity.hpp"
 
+void SkyEntity::setTexturePaths(const vector<string>& val)
+{
+	_texturesPaths = val;
+}
+
 void SkyEntity::setRotationMatrix(const mat4 & val)
 {
 	_rotationMatrix = val;
@@ -33,6 +38,11 @@ void SkyEntity::setDayTime()
 void SkyEntity::setNightTime()
 {
 	_dayTime = false;
+}
+
+const vector<string>& SkyEntity::getTexturePaths() const
+{
+	return _texturesPaths;
 }
 
 const mat4 & SkyEntity::getRotationMatrix() const

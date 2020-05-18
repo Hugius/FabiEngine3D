@@ -12,10 +12,7 @@ public:
 
 	void selectSky(const string & ID);
 
-	void addSkyEntity
-	(
-		const string & ID, float rotationSpeed, TextureLoader& texLoader, const string& textureDirectoryPath, const string& optionalNightPath = ""
-	);
+	void addSkyEntity(const string & ID, float rotationSpeed, TextureLoader& texLoader, const vector<string> texturePaths);
 
 	void update(float delta) override;
 

@@ -19,18 +19,19 @@ public:
 
 	GLuint		   getText(const string &text, const string &filePath);
 	GLuint         getTexture(const string &filePath, bool mipmap, bool aniso, bool repeat = true);
-	GLuint         getCubeMap(const string &filePath);
-	vector<float> & getHeightMap(const string &filePath, int size);
+	GLuint         getCubeMap(const vector<string> filePaths);
+	vector<float>& getHeightMap(const string &filePath);
 
 private:
-	map<string, GLuint>        _textureMap;
-	map<string, GLuint>        _textMap;
-	map<string, TTF_Font*>     _fontMap;
-	map<string, vector<float>> _pixelMap;
+	map<string, GLuint>         _textureMap;
+	map<string, GLuint>         _textMap;
+	map<string, TTF_Font*>      _fontMap;
+	map<string, vector<float>>  _pixelMap;
+	map<vector<string>, GLuint> _cubemapMap;
 
 	TTF_Font *    _loadFont(const string &filePath);
 	GLuint        _loadText(const string &text, const string &filePath);
 	GLuint        _loadTexture(const string &filePath, bool mipmap, bool aniso, bool repeat);
-	GLuint        _loadCubemap(const string &filePath);
-	vector<float> _loadHeightmap(const string &filePath, int size);
+	GLuint        _loadCubemap(const vector<string> fileNames);
+	vector<float> _loadHeightmap(const string &filePath);
 };

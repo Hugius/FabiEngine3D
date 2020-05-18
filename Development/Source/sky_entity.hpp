@@ -12,6 +12,7 @@ public:
 	SkyEntity()  = default;
 	~SkyEntity() = default;
 
+	void setTexturePaths(const vector<string>& val);
 	void setRotationMatrix(const mat4 & val);
 	void setDayCubeMap(GLuint val);
 	void setNightCubeMap(GLuint val);
@@ -20,16 +21,19 @@ public:
 	void setDayTime();
 	void setNightTime();
 
-	const mat4 & getRotationMatrix() const;
-	const GLuint getCurrentCubeMap() const;
-	const GLuint getDayCubeMap()     const;
-	const GLuint getNightCubeMap()   const;
-	const float getMixValue()        const;
-	const float getRotationSpeed()   const;
-	const bool  isDayTime()          const;
-	const bool  isNightTime()        const;
+	const vector<string>& getTexturePaths() const;
+	const mat4 & getRotationMatrix()		const;
+	const GLuint getCurrentCubeMap()		const;
+	const GLuint getDayCubeMap()			const;
+	const GLuint getNightCubeMap()			const;
+	const float getMixValue()				const;
+	const float getRotationSpeed()			const;
+	const bool  isDayTime()					const;
+	const bool  isNightTime()				const;
 
 private:
+	vector<string> _texturesPaths;
+
 	mat4 _rotationMatrix = mat4(1.0f);
 
 	GLuint _dayCubeMap   = 0;

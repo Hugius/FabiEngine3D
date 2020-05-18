@@ -18,7 +18,7 @@ public:
 
 	void addTerrainEntity
 	(
-		const string& ID, const string& heightmapName, const string& textureName,
+		const string& ID, const string& heightmapPath, const string& textureName,
 		vec3 pos, float size, float maxHeight, float uvRepeat
 	);
 

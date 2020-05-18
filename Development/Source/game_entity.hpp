@@ -28,10 +28,10 @@ public:
 	void rotate(vec3 val, float delta);
 	void scale(vec3 val, float delta);
 	void setColor(vec3 val);
-	void setObjName(const string & val);
-	void setDiffuseMapName(const string& val);
-	void setLightMapName(const string& val);
-	void setReflectionMapName(const string& val);
+	void setObjPath(const string & val);
+	void setDiffuseMapPath(const string& val);
+	void setLightMapPath(const string& val);
+	void setReflectionMapPath(const string& val);
 	void setTransparent(bool val);
 	void setFaceCulled(bool val);
 	void setLightMapped(bool val);
@@ -52,10 +52,10 @@ public:
 	const vec3 getRotation() const;
 	const vec3 getScaling() const;
 	const vec3 getColor() const;
-	const string& getObjName() const;
-	const string& getDiffuseMapName() const;
-	const string& getLightMapName() const;
-	const string& getReflectionMapName() const;
+	const string& getObjPath() const;
+	const string& getDiffuseMapPath() const;
+	const string& getLightMapPath() const;
+	const string& getReflectionMapPath() const;
 	const bool isTransparent() const;
 	const bool isFaceCulled() const;
 	const bool isLightMapped() const;
@@ -73,10 +73,10 @@ public:
 private:
 	mat4 _modelMatrix = mat4(1.0f);
 
-	string _objName = "";
-	string _diffuseMapName = "";
-	string _lightMapName = "";
-	string _reflectionMapName = "";
+	string _objPath = "";
+	string _diffuseMapPath = "";
+	string _lightMapPath = "";
+	string _reflectionMapPath = "";
 
 	vec3 _translation = vec3(0.0f);
 	vec3 _rotation    = vec3(0.0f);

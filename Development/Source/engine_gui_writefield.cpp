@@ -22,6 +22,7 @@ void EngineGuiWriteField::update(float delta, bool hoverable)
 void EngineGuiWriteField::setActive(bool active)
 {
 	_isActive = active;
+	_mustBeActive = active;
 }
 
 bool EngineGuiWriteField::cancelledInput()
@@ -46,18 +47,18 @@ void EngineGuiWriteField::setTextContent(string content)
 
 void EngineGuiWriteField::_updateActivation()
 {
-	if (_isHovered)
+	if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
 	{
-		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
+		if (_isHovered)
 		{
 			_isActive = true;
 		}
-	}
-	else
-	{
-		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
+		else
 		{
-			_isActive = false;
+			if (!_mustBeActive)
+			{
+				_isActive = false;
+			}
 		}
 	}
 }

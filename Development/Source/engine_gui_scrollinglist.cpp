@@ -27,7 +27,7 @@ void EngineGuiScrollingList::addButton(const string& ID, string textContent)
 	// Calculate dimensions
 	float x = 0.0f;
 	float y = 1.0f - _charSize.y - (_buttons.size() * (_charSize.y * 1.5f));
-	float w = min(_charSize.x * textContent.size(), 1.5f);
+	float w = min(_charSize.x * textContent.size(), 1.7f);
 	float h = _charSize.y;
 
 	// Add button

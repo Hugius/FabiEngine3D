@@ -156,14 +156,14 @@ vec3 FabiEngine3D::camera_getFront()
 
 /* --------------------------------------------- Sky interface --------------------------------------------- */
 
-void FabiEngine3D::skyEntity_add(const string& ID, float rotationSpeed, const string& textureDirectoryPath)
+void FabiEngine3D::skyEntity_add(const string& ID, float rotationSpeed, const vector<string> texturePaths)
 {
-	_core->_skyEntityManager.addSkyEntity(ID, rotationSpeed, _core->_texLoader, textureDirectoryPath);
+	_core->_skyEntityManager.addSkyEntity(ID, rotationSpeed, _core->_texLoader, texturePaths);
 }
 
 void FabiEngine3D::skyEntity_addNightCubemap(const string& ID, const string& textureDirectoryPath)
 {
-	_core->_skyEntityManager.getEntity(ID)->setNightCubeMap(_core->_texLoader.getCubeMap(textureDirectoryPath));
+	//_core->_skyEntityManager.getEntity(ID)->setNightCubeMap(_core->_texLoader.getCubeMap(textureDirectoryPath));
 }
 
 void FabiEngine3D::skyEntity_delete(const string& ID)
@@ -262,6 +262,11 @@ void FabiEngine3D::terrainEntity_show(const string& ID)
 bool FabiEngine3D::terrainEntity_isExisting(const string& ID)
 {
 	return _core->_terrainEntityManager.isExisting(ID);
+}
+
+float FabiEngine3D::terrainEntity_getSize(const string& ID)
+{
+	return _core->_terrainEntityManager.getEntity(ID)->getSize();
 }
 
 bool FabiEngine3D::terrainEntity_isInside(float x, float z)
@@ -488,19 +493,19 @@ void FabiEngine3D::gameEntity_show(const string& ID)
 void FabiEngine3D::gameEntity_setDiffuseMap(const string& ID, const string& fileName)
 {
 	_core->_gameEntityManager.getEntity(ID)->setDiffuseMap(_core->_texLoader.getTexture(fileName, true, true));
-	_core->_gameEntityManager.getEntity(ID)->setDiffuseMapName(fileName);
+	_core->_gameEntityManager.getEntity(ID)->setDiffuseMapPath(fileName);
 }
 
 void FabiEngine3D::gameEntity_setLightMap(const string& ID, const string& fileName)
 {
 	_core->_gameEntityManager.getEntity(ID)->setLightMap(_core->_texLoader.getTexture(fileName, true, true));
-	_core->_gameEntityManager.getEntity(ID)->setLightMapName(fileName);
+	_core->_gameEntityManager.getEntity(ID)->setLightMapPath(fileName);
 }
 
 void FabiEngine3D::gameEntity_setReflectionMap(const string& ID, const string& fileName)
 {
 	_core->_gameEntityManager.getEntity(ID)->setReflectionMap(_core->_texLoader.getTexture(fileName, true, true));
-	_core->_gameEntityManager.getEntity(ID)->setReflectionMapName(fileName);
+	_core->_gameEntityManager.getEntity(ID)->setReflectionMapPath(fileName);
 }
 
 void FabiEngine3D::gameEntity_setTransparent(const string& ID, bool enabled)
@@ -690,24 +695,24 @@ vec3 FabiEngine3D::gameEntity_getColor(const string& ID)
 	return _core->_gameEntityManager.getEntity(ID)->getColor();
 }
 
-string FabiEngine3D::gameEntity_getObjName(const string& ID)
+string FabiEngine3D::gameEntity_getObjPath(const string& ID)
 {
-	return _core->_gameEntityManager.getEntity(ID)->getObjName();
+	return _core->_gameEntityManager.getEntity(ID)->getObjPath();
 }
 
-string FabiEngine3D::gameEntity_getDiffuseMapName(const string& ID)
+string FabiEngine3D::gameEntity_getDiffuseMapPath(const string& ID)
 {
-	return _core->_gameEntityManager.getEntity(ID)->getDiffuseMapName();
+	return _core->_gameEntityManager.getEntity(ID)->getDiffuseMapPath();
 }
 
-string FabiEngine3D::gameEntity_getLightMapName(const string& ID)
+string FabiEngine3D::gameEntity_getLightMapPath(const string& ID)
 {
-	return _core->_gameEntityManager.getEntity(ID)->getLightMapName();
+	return _core->_gameEntityManager.getEntity(ID)->getLightMapPath();
 }
 
-string FabiEngine3D::gameEntity_getReflectionMapName(const string& ID)
+string FabiEngine3D::gameEntity_getReflectionMapPath(const string& ID)
 {
-	return _core->_gameEntityManager.getEntity(ID)->getReflectionMapName();
+	return _core->_gameEntityManager.getEntity(ID)->getReflectionMapPath();
 }
 
 void FabiEngine3D::gameEntity_setAlpha(const string& ID, float alpha)
@@ -1945,31 +1950,6 @@ void FabiEngine3D::misc_setMousePos(ivec2 pos)
 {
 	_core->_mousePicker.update(pos, _core->_terrainEntityManager);
 	_core->_windowManager.setMousePos(pos);
-}
-
-void FabiEngine3D::misc_preLoadGameEntity(const std::string& assetName, bool lightMapped, bool reflective)
-{
-	// Load OBJ model
-	auto parts = _core->_objLoader.loadOBJ(assetName);
-
-	// Create OpenGL buffers
-	for (auto& part : parts)
-	{
-		// Diffuse map
-		_core->_texLoader.getTexture("../Game/Textures/DiffuseMaps/" + part.textureName, true, true);
-
-		// Light map
-		if (lightMapped)
-		{
-			_core->_texLoader.getTexture("../Game/Textures/LightMaps/" + part.textureName, false, false);
-		}
-
-		// Reflection map
-		if (reflective)
-		{
-			_core->_texLoader.getTexture("../Game/Textures/ReflectionMaps/" + part.textureName, false, false);
-		}
-	}
 }
 
 void FabiEngine3D::misc_showPerformanceProfiling()

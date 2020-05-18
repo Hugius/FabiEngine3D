@@ -42,7 +42,7 @@ void ModelEditor::initializeGUI()
 	_window->getScreen("modelEditingMesh")->addButton("loadDiffuseMap", vec2(0.0f, 0.35f), vec2(1.6f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Diffusemap", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 	_window->getScreen("modelEditingMesh")->addButton("loadLightMap", vec2(0.0f, 0.0f), vec2(1.5f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Lightmap", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 	_window->getScreen("modelEditingMesh")->addButton("loadReflectionMap", vec2(0.0f, -0.35f), vec2(1.6f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Reflectmap", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
-	_window->getScreen("modelEditingMesh")->addButton("back", vec2(0.0f, -0.7f), vec2(1.0f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Go back", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_window->getScreen("modelEditingMesh")->addButton("back", vec2(0.0f, -0.7f), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Go back", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 	
 	// Left-viewport: mainWindow - modelEditingOptions
 	_window->addScreen("modelEditingOptions");
@@ -53,7 +53,7 @@ void ModelEditor::initializeGUI()
 	_window->getScreen("modelEditingOptions")->getScrollingList("optionsList")->addButton("specular", "Specular: OFF");
 	_window->getScreen("modelEditingOptions")->getScrollingList("optionsList")->addButton("setColor", "Set color");
 	_window->getScreen("modelEditingOptions")->getScrollingList("optionsList")->addButton("uvRepeat", "Set UV-repeat");
-	_window->getScreen("modelEditingOptions")->addButton("back", vec2(0.0f, -0.9f), vec2(1.0f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Go back", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_window->getScreen("modelEditingOptions")->addButton("back", vec2(0.0f, -0.9f), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Go back", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 
 	// Left-viewport: mainWindow - modelEditingSize
 	_window->addScreen("modelEditingSize");
@@ -63,8 +63,7 @@ void ModelEditor::initializeGUI()
 	_window->getScreen("modelEditingSize")->getScrollingList("sizeList")->addButton("toggleBoxView", "Hitbox: OFF");
 	_window->getScreen("modelEditingSize")->getScrollingList("sizeList")->addButton("toggleResizeBox", "Box resize: OFF");
 	_window->getScreen("modelEditingSize")->getScrollingList("sizeList")->addButton("resizeBoxDir", "Direction: X");
-	_window->getScreen("modelEditingSize")->addButton("back", vec2(0.0f, -0.9f), vec2(1.0f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Go back", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
-
+	_window->getScreen("modelEditingSize")->addButton("back", vec2(0.0f, -0.9f), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Go back", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 }
 
 void ModelEditor::loadProject()
@@ -84,15 +83,16 @@ void ModelEditor::loadProject()
 	_fe3d.gfx_addSpecularLighting(16.0f);
 	
 	// 3D Environment
-	_fe3d.gameEntity_add("@modelEditorGrid", "Engine\\OBJs\\plane", vec3(0.0f), vec3(0.0f), vec3(100.0f, 1.0f, 100.0f));
-	_fe3d.gameEntity_setDiffuseMap("@modelEditorGrid", "Engine\\Textures\\metal");
+	_fe3d.gameEntity_add("@modelEditorGrid", "Engine\\OBJs\\plane.obj", vec3(0.0f), vec3(0.0f), vec3(100.0f, 1.0f, 100.0f));
+	_fe3d.gameEntity_setDiffuseMap("@modelEditorGrid", "Engine\\Textures\\metal.png");
 	_fe3d.gameEntity_setUvRepeat("@modelEditorGrid", 25.0f);
 	_fe3d.gameEntity_setSceneReflective("@modelEditorGrid", true);
 	_fe3d.gameEntity_setSpecularLighted("@modelEditorGrid", true);
-	_fe3d.gameEntity_add("@cube", "Engine\\OBJs\\cube", vec3(5.0f, 0.0f, 0.0f), vec3(0.0f), vec3(1.0f, 1.0f, 1.0f));
-	_fe3d.gameEntity_setDiffuseMap("@cube", "Engine\\Textures\\cube");
+	_fe3d.gameEntity_add("@cube", "Engine\\OBJs\\cube.obj", vec3(5.0f, 0.0f, 0.0f), vec3(0.0f), vec3(1.0f, 1.0f, 1.0f));
+	_fe3d.gameEntity_setDiffuseMap("@cube", "Engine\\Textures\\cube.png");
 	_fe3d.gameEntity_setFaceCulled("@cube", true);
-	_fe3d.skyEntity_add("@modelEditorSky", 0.1f, "Engine\\Textures\\Skybox\\");
+	string path = "Engine\\Textures\\";
+	_fe3d.skyEntity_add("@modelEditorSky", 0.1f, { path + "right.png", path + "left.png", path + "top.png", path + "bottom.png", path + "back.png", path + "front.png" });
 	_fe3d.skyEntity_select("@modelEditorSky");
 
 	// Other
@@ -148,13 +148,13 @@ void ModelEditor::saveProject()
 			// Check if 3D entity exists
 			if (_fe3d.gameEntity_isExisting(modelName))
 			{
-				auto objName = _fe3d.gameEntity_getObjName(modelName);
-				auto diffuseMapName = _fe3d.gameEntity_getDiffuseMapName(modelName);
-				diffuseMapName = (diffuseMapName == "") ? "-" : diffuseMapName;
-				auto lightMapName = _fe3d.gameEntity_getLightMapName(modelName);
-				lightMapName = (lightMapName == "") ? "-" : lightMapName;
-				auto reflectionMapName = _fe3d.gameEntity_getReflectionMapName(modelName);
-				reflectionMapName = (reflectionMapName == "") ? "-" : reflectionMapName;
+				auto objPath = _fe3d.gameEntity_getObjPath(modelName);
+				auto diffuseMapPath = _fe3d.gameEntity_getDiffuseMapPath(modelName);
+				diffuseMapPath = (diffuseMapPath == "") ? "-" : diffuseMapPath;
+				auto lightMapPath = _fe3d.gameEntity_getLightMapPath(modelName);
+				lightMapPath = (lightMapPath == "") ? "-" : lightMapPath;
+				auto reflectionMapPath = _fe3d.gameEntity_getReflectionMapPath(modelName);
+				reflectionMapPath = (reflectionMapPath == "") ? "-" : reflectionMapPath;
 				auto modelSizeX = std::to_string(_fe3d.gameEntity_getSize(modelName).x);
 				auto modelSizeY = std::to_string(_fe3d.gameEntity_getSize(modelName).y);
 				auto modelSizeZ = std::to_string(_fe3d.gameEntity_getSize(modelName).z);
@@ -172,7 +172,7 @@ void ModelEditor::saveProject()
 
 				// 1 model -> 1 line in file
 				file << modelName << " " << 
-					objName << " " << diffuseMapName << " " << lightMapName << " " << reflectionMapName << " " <<
+					objPath << " " << diffuseMapPath << " " << lightMapPath << " " << reflectionMapPath << " " <<
 					modelSizeX << " " << modelSizeY << " " << modelSizeZ << " " << 
 					faceCulled << " " << shadowed << " " << transparent << " " << specular << " " <<
 					colorR << " " << colorG << " " << colorB << " " << uvRepeat << " " << 

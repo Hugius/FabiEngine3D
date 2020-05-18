@@ -66,7 +66,7 @@ GLuint TextureLoader::_loadTexture(const string& filePath, bool mipmap, bool ani
 	fullDir = fullDir.substr(0, fullDir.size() - 25);
 
 	// Load actual texture data
-	SDL_Surface * surface = IMG_Load((fullDir + filePath + ".png").c_str());
+	SDL_Surface * surface = IMG_Load((fullDir + filePath).c_str());
 	if (surface == nullptr)
 	{
 		Logger::getInst().throwError("Texture error: " + string(SDL_GetError()));
@@ -124,51 +124,64 @@ GLuint TextureLoader::_loadTexture(const string& filePath, bool mipmap, bool ani
 	}
 
 	// Logging
-	Logger::getInst().throwInfo("Loaded texture: " + filePath + ".png");
+	Logger::getInst().throwInfo("Loaded texture: " + filePath);
 
 	// Return new texture
 	return tex;
 }
 
 // http://stackoverflow.com/questions/1968561/getting-the-pixel-value-of-bmp-file
-vector<float> TextureLoader::_loadHeightmap(const string & filePath, int size)
+vector<float> TextureLoader::_loadHeightmap(const string &filePath)
 {
+	// Get application root directory
+	char buffer[256]; size_t len = sizeof(buffer);
+	GetModuleFileName(NULL, buffer, len);
+	string fullDir = buffer;
+	fullDir = fullDir.substr(0, fullDir.size() - 25);
+
 	// Pixels
 	vector<float> pixelIntensities;
 
 	// Open file
 	FILE * streamIn;
-	fopen_s(&streamIn, (filePath + ".bmp").c_str(), "rb");
+	fopen_s(&streamIn, (fullDir + filePath).c_str(), "rb");
 	if (streamIn == (FILE *)0) 
 	{
-		Logger::getInst().throwError("Could not open heightmap: " + filePath + ".bmp");
+		Logger::getInst().throwError("Could not open heightmap: " + filePath);
 	}
 
 	// File header
-	int byte;
-	for (int i = 0; i < 54; i++) byte = getc(streamIn);
+	uint8_t header[54];
+	uint32_t width, height = 5;
+	for (int i = 0; i < 54; i++)
+	{
+		header[i] = getc(streamIn);
+	}
+
+	// Extract resolution
+	width = (header[21] << 24) | (header[20] << 16) | (header[19] << 8) | header[18];
+	height = (header[25] << 24) | (header[24] << 16) | (header[23] << 8) | header[22];
 
 	// Read pixels
-	for (int i = 0; i < (size * size); i++)
+	for (unsigned int i = 0; i < (width * height); i++)
 	{
-		pixelIntensities.push_back(0.0f);
 		auto r = getc(streamIn);
 		auto g = getc(streamIn);
 		auto b = getc(streamIn);
-		pixelIntensities.back() = static_cast<float>(r);
+		pixelIntensities.push_back(static_cast<float>(r));
 	}
 
 	// Close file
 	fclose(streamIn);
 
 	// Logging
-	Logger::getInst().throwInfo("Loaded BMP heightmap: " + filePath + ".bmp");
+	Logger::getInst().throwInfo("Loaded BMP heightmap: " + filePath);
 
 	// Return new texture
 	return pixelIntensities;
 }
 
-GLuint TextureLoader::_loadCubemap(const string & filePath)
+GLuint TextureLoader::_loadCubemap(const vector<string> fileNames)
 {
 	// Get application root directory
 	char buffer[256]; size_t len = sizeof(buffer);
@@ -182,13 +195,11 @@ GLuint TextureLoader::_loadCubemap(const string & filePath)
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_CUBE_MAP, textureID);
 
-	vector<string> fileNames = { "right", "left", "top", "bottom", "back", "front" };
-
 	// Add the faces images to the texture buffer(textureID)
 	for (GLuint i = 0; i < fileNames.size(); i++)
 	{
 		// Load SDL surface
-		SDL_Surface * surface = IMG_Load((fullDir + filePath + fileNames[i] + ".png").c_str());
+		SDL_Surface * surface = IMG_Load((fullDir + fileNames[i]).c_str());
 		if (surface == nullptr) 
 		{
 			Logger::getInst().throwError("Skybox textures could not be loaded: " + string(SDL_GetError()));
@@ -198,7 +209,7 @@ GLuint TextureLoader::_loadCubemap(const string & filePath)
 		glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGB, surface->w, surface->h, 0, GL_RGB, GL_UNSIGNED_BYTE, surface->pixels);
 
 		// Logging
-		Logger::getInst().throwInfo("Loaded cubemap texture: " + filePath + fileNames[i] + ".png");
+		Logger::getInst().throwInfo("Loaded cubemap texture: " + fileNames[i]);
 	}
 
 	// OpenGL magic
@@ -226,14 +237,14 @@ TTF_Font * TextureLoader::_loadFont(const string& fontPath)
 	if (it == _fontMap.end()) //Not in map (yet)
 	{
 		// Font loading
-		TTF_Font * font = TTF_OpenFont((fullDir + fontPath + ".ttf").c_str(), 25);
+		TTF_Font * font = TTF_OpenFont((fullDir + fontPath).c_str(), 25);
 		if (font == nullptr)
 		{
 			Logger::getInst().throwError("Texture error: " + string(SDL_GetError()));
 		}
 		_fontMap.insert(std::make_pair(fontPath, font));
 
-		Logger::getInst().throwInfo("Loaded font: " + string(fontPath + ".ttf"));
+		Logger::getInst().throwInfo("Loaded font: " + fontPath);
 
 		return font; //Use new texture
 	}

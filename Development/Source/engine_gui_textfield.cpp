@@ -9,7 +9,7 @@ EngineGuiTextfield::EngineGuiTextfield(FabiEngine3D& fe3d, const string& parentI
 	_originalPosition(position),
 	_originalSize(size)
 {
-	_fe3d.textEntity_add(_entityID, textContent, "Engine\\Fonts\\lucida", textColor, position, 0.0f, size, true);
+	_fe3d.textEntity_add(_entityID, textContent, "Engine\\Fonts\\lucida.ttf", textColor, position, 0.0f, size, true);
 }
 
 EngineGuiTextfield::~EngineGuiTextfield()

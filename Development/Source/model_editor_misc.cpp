@@ -65,7 +65,7 @@ void ModelEditor::_loadOBJ()
 			}
 
 			// Add new game entity
-			_fe3d.gameEntity_add(_currentModelName, "User\\Assets\\OBJs\\" + objName.substr(0, objName.size() - 4), vec3(0.0f), vec3(0.0f), vec3(1.0f));
+			_fe3d.gameEntity_add(_currentModelName, "User\\Assets\\OBJs\\" + objName, vec3(0.0f), vec3(0.0f), vec3(1.0f));
 			_fe3d.gameEntity_setColor(_currentModelName, vec3(0.5f));
 		}
 	}
@@ -81,7 +81,7 @@ void ModelEditor::_loadDiffuseMap()
 		// Check if user chose a filename
 		if (texName != "")
 		{
-			_fe3d.gameEntity_setDiffuseMap(_currentModelName, "User\\Assets\\Textures\\DiffuseMaps\\" + texName.substr(0, texName.size() - 4));
+			_fe3d.gameEntity_setDiffuseMap(_currentModelName, "User\\Assets\\Textures\\DiffuseMaps\\" + texName);
 		}
 	}
 }
@@ -96,7 +96,7 @@ void ModelEditor::_loadLightMap()
 		// Check if user chose a filename
 		if (texName != "")
 		{
-			_fe3d.gameEntity_setLightMap(_currentModelName, "User\\Assets\\Textures\\LightMaps\\" + texName.substr(0, texName.size() - 4));
+			_fe3d.gameEntity_setLightMap(_currentModelName, "User\\Assets\\Textures\\LightMaps\\" + texName);
 			_fe3d.gameEntity_setLightmapped(_currentModelName, true);
 		}
 	}
@@ -112,7 +112,7 @@ void ModelEditor::_loadReflectionMap()
 		// Check if user chose a filename
 		if (texName != "")
 		{
-			_fe3d.gameEntity_setReflectionMap(_currentModelName, "User\\Assets\\Textures\\ReflectionMaps\\" + texName.substr(0, texName.size() - 4));
+			_fe3d.gameEntity_setReflectionMap(_currentModelName, "User\\Assets\\Textures\\ReflectionMaps\\" + texName);
 			_fe3d.gameEntity_setSkyReflective(_currentModelName, true);
 		}
 	}

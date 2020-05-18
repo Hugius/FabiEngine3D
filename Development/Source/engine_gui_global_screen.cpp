@@ -54,6 +54,71 @@ void EngineGuiGlobalScreen::addTextfield(const string& ID, vec2 position, vec2 s
 	_textfields.push_back(make_shared<EngineGuiTextfield>(_fe3d, "globalScreen", ID, position, size, textContent, textColor));
 }
 
+bool EngineGuiGlobalScreen::checkScrollingList(const string& ID)
+{
+	for (auto& scrollingList : _scrollingLists)
+	{
+		if (ID == scrollingList->getID())
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
+bool EngineGuiGlobalScreen::checkWriteField(const string& ID)
+{
+	for (auto& scrollingList : _scrollingLists)
+	{
+		if (ID == scrollingList->getID())
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
+bool EngineGuiGlobalScreen::checkButton(const string& ID)
+{
+	for (auto& button : _buttons)
+	{
+		if (ID == button->getID())
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
+bool EngineGuiGlobalScreen::checkRectangle(const string& ID)
+{
+	for (auto& rectangle : _rectangles)
+	{
+		if (ID == rectangle->getID())
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
+bool EngineGuiGlobalScreen::checkTextfield(const string& ID)
+{
+	for (auto& textfield : _textfields)
+	{
+		if (ID == textfield->getID())
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
 shared_ptr<EngineGuiScrollingList> EngineGuiGlobalScreen::getScrollingList(const string& ID)
 {
 	for (auto& scrollingList : _scrollingLists)

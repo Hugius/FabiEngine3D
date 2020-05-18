@@ -6,8 +6,6 @@ void ModelEditor::_updateModelEditingSize()
 {
 	auto screen = _window->getScreen("modelEditingSize");
 	auto scrollingList = screen->getScrollingList("sizeList");
-	static Direction resizeDir = Direction::X;
-
 	// GUI management 
 	if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
 	{
@@ -43,12 +41,11 @@ void ModelEditor::_updateModelEditingSize()
 		}
 		else if (scrollingList->getButton("toggleBoxView")->isHovered())
 		{
-			static bool frameRendering = false;
-			frameRendering = !frameRendering;
+			_aabbRenderingEnabled = !_aabbRenderingEnabled;
 
 			// Toggle view
-			frameRendering ? _fe3d.collision_enableFrameRendering() : _fe3d.collision_disableFrameRendering();
-			string newContent = frameRendering ? "Hitbox: ON" : "Hitbox: OFF";
+			_aabbRenderingEnabled ? _fe3d.collision_enableFrameRendering() : _fe3d.collision_disableFrameRendering();
+			string newContent = _aabbRenderingEnabled ? "Hitbox: ON" : "Hitbox: OFF";
 			_fe3d.textEntity_setTextContent(scrollingList->getButton("toggleBoxView")->getTextfield()->getEntityID(), newContent);
 		}
 		else if (scrollingList->getButton("toggleResizeBox")->isHovered())
@@ -63,8 +60,8 @@ void ModelEditor::_updateModelEditingSize()
 		{
 			// Change resize direction
 			string directions[3] = { "X", "Y", "Z" };
-			resizeDir = (resizeDir == Direction::X) ? Direction::Y : (resizeDir == Direction::Y) ? Direction::Z : Direction::X;
-			string newContent = "Direction: " + directions[int(resizeDir)];
+			_modelResizeDirection = (_modelResizeDirection == Direction::X) ? Direction::Y : (_modelResizeDirection == Direction::Y) ? Direction::Z : Direction::X;
+			string newContent = "Direction: " + directions[int(_modelResizeDirection)];
 			_fe3d.textEntity_setTextContent(scrollingList->getButton("resizeBoxDir")->getTextfield()->getEntityID(), newContent);
 		}
 		else if (screen->getButton("back")->isHovered())
@@ -85,7 +82,7 @@ void ModelEditor::_updateModelEditingSize()
 		float scrollSpeed = float(_fe3d.input_getMouseWheelY()) * 0.05f;
 		vec3 newSize = _fe3d.aabbEntity_getSize(_currentModelName);
 
-		switch (resizeDir)
+		switch (_modelResizeDirection)
 		{
 		case Direction::X:
 			newSize.x *= (1.0f + (scrollSpeed));

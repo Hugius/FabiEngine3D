@@ -23,6 +23,7 @@ private:
 	void _updateActivation();
 	void _updateTyping(float delta);
 
+	bool _mustBeActive = false;
 	bool _isActive = false;
 	bool _cancelledInput = false;
 	bool _confirmedInput = false;

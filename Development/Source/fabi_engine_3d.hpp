@@ -62,7 +62,7 @@ public:
 	// Sky entity interface
 	void skyEntity_add
 	(
-		const string& ID, float rotationSpeed, const string& textureDirectoryPath
+		const string& ID, float rotationSpeed, const vector<string> texturePaths
 	);
 	void skyEntity_addNightCubemap(const string& ID, const string& textureDirectoryPath);
 	void skyEntity_delete(const string& ID);
@@ -79,27 +79,28 @@ public:
 	string skyEntity_getSelectedID();
 
 	// Terrain entity interface
-	void terrainEntity_add(const string& ID, const string& heightmapName, const string& textureName, vec3 pos, float size, float maxHeight, float uvRepeat);
+	void terrainEntity_add(const string& ID, const string& heightmapPath, const string& texturePath, vec3 pos, float size, float maxHeight, float uvRepeat);
 	void terrainEntity_delete(const string& ID);
 	void terrainEntity_hide(const string& ID);
 	void terrainEntity_show(const string& ID);
 	void terrainEntity_select(const string& ID);
 	bool terrainEntity_isExisting(const string& ID);
+	float terrainEntity_getSize(const string& ID);
+	float terrainEntity_getPixelHeight(float x, float z);
 	bool terrainEntity_isInside(float x, float z);
 	vec3 terrainEntity_getMousePoint();
-	float terrainEntity_getPixelHeight(float x, float z);
 	string terrainEntity_getSelectedID();
 	void terrainEntity_addBlending
 	(
-		const string& ID, const string blendmapName, const string blendmapNameR,
-		const string blendmapNameG, const string blendmapNameB,
+		const string& ID, const string blendmapPath, const string blendmapPathR,
+		const string blendmapPathG, const string blendmapPathB,
 		float blendRepeatR, float blendRepeatG, float blendRepeatB
 	);
 
 	// Water entity interface
 	void waterEntity_add
 	(
-		const string& ID, const string& assetName, vec3 pos, float size,
+		const string& ID, const string& texturePath, vec3 pos, float size,
 		float tileRepeat, float speed, bool waving,
 		bool rippling, vec3 color, float shininess
 	);
@@ -120,12 +121,12 @@ public:
 	// Game entity interface
 	void gameEntity_add
 	(
-		const string& ID, const string& objName,
+		const string& ID, const string& objPath,
 		vec3 position, vec3 rotation, vec3 size, bool visible = true
 	);
 	void gameEntity_addInstanced
 	(
-		const string& ID, const string& modelName,
+		const string& ID, const string& objPath,
 		const vector<vec3>& positions, vec3 rotation, vec3 size,
 		bool transparent, bool faceCulled, bool lightMapped, bool reflective, bool specular
 	);
@@ -136,9 +137,9 @@ public:
 	void		   gameEntity_showAll();
 	void		   gameEntity_hide(const string& ID);
 	void		   gameEntity_show(const string& ID);
-	void		   gameEntity_setDiffuseMap(const string& ID, const string& fileName);
-	void		   gameEntity_setLightMap(const string& ID, const string& fileName);
-	void		   gameEntity_setReflectionMap(const string& ID, const string& fileName);
+	void		   gameEntity_setDiffuseMap(const string& ID, const string& texturePath);
+	void		   gameEntity_setLightMap(const string& ID, const string& texturePath);
+	void		   gameEntity_setReflectionMap(const string& ID, const string& texturePath);
 	void		   gameEntity_setTransparent(const string& ID, bool enabled);
 	void		   gameEntity_setFaceCulled(const string& ID, bool enabled);
 	void		   gameEntity_setLightmapped(const string& ID, bool enabled);
@@ -178,10 +179,10 @@ public:
 	vec3		   gameEntity_getRotation(const string& ID);
 	vec3		   gameEntity_getSize(const string& ID);
 	vec3		   gameEntity_getColor(const string& ID);
-	string		   gameEntity_getObjName(const string& ID);
-	string		   gameEntity_getDiffuseMapName(const string& ID);
-	string		   gameEntity_getLightMapName(const string& ID);
-	string		   gameEntity_getReflectionMapName(const string& ID);
+	string		   gameEntity_getObjPath(const string& ID);
+	string		   gameEntity_getDiffuseMapPath(const string& ID);
+	string		   gameEntity_getLightMapPath(const string& ID);
+	string		   gameEntity_getReflectionMapPath(const string& ID);
 	vector<string> gameEntity_getGroupIDs(const string& ID);
 
 	// Billboard entity interface
@@ -193,7 +194,7 @@ public:
 	);
 	void billBoardEntity_add
 	(
-		const string& ID, const string& textureName,
+		const string& ID, const string& texturePath,
 		vec3 T, vec3 R, vec3 S,
 		bool transparent, bool facingCameraX, bool facingCameraY, bool textureFiltering, bool visible = true
 	);
@@ -267,12 +268,12 @@ public:
 	void guiEntity_deleteAll();
 	void guiEntity_hideAll();
 	void guiEntity_showAll();
-	void guiEntity_add(const string& ID, const string& assetName, vec2 translation, float rotation, vec2 scaling, bool centered, bool visible = true);
+	void guiEntity_add(const string& ID, const string& texturePath, vec2 translation, float rotation, vec2 scaling, bool centered, bool visible = true);
 	void guiEntity_add(const string& ID, vec3 color, vec2 translation, float rotation, vec2 scaling, bool centered, bool visible = true);
 	void guiEntity_hide(const string& ID);
 	void guiEntity_show(const string& ID);
 	void guiEntity_delete(const string& ID);
-	void guiEntity_changeTexture(const string& ID, const string& assetName);
+	void guiEntity_changeTexture(const string& ID, const string& texturePath);
 	bool guiEntity_isExisting(const string& ID);
 	void guiEntity_setPosition(const string& ID, vec2 position);
 	void guiEntity_setRotation(const string& ID, float rotation);
@@ -370,11 +371,11 @@ public:
 	void audioEntity_deleteAllMusic();
 	void audioEntity_stopAllSounds();
 	void audioEntity_stopAllMusic();
-	void audioEntity_addMusic(const std::string& fileName);
+	void audioEntity_addMusic(const std::string& audioPath);
 	void audioEntity_deleteMusic();
 	void audioEntity_setMusicVolume(int volume);
-	void audioEntity_addGlobal(const std::string& ID, const std::string& fileName);
-	void audioEntity_addPoint(const std::string& ID, const std::string& fileName, vec3 position, float maxDistance);
+	void audioEntity_addGlobal(const std::string& ID, const std::string& audioPath);
+	void audioEntity_addPoint(const std::string& ID, const std::string& audioPath, vec3 position, float maxDistance);
 	void audioEntity_delete(const std::string& ID);
 	void audioEntity_play(const std::string& ID, int loops, int initialVolume, bool noRestart = false, int fadeMillis = 0);
 	void audioEntity_pause(const std::string& ID);
@@ -422,7 +423,6 @@ public:
 	void misc_enableDebugRendering();
 	void misc_disableDebugRendering();
 	void misc_setMousePos(ivec2 pos);
-	void misc_preLoadGameEntity(const std::string& assetName, bool lightMapped, bool reflective);
 	void misc_showPerformanceProfiling();
 	void misc_hidePerformanceProfiling();
 	void misc_showAudioDebugging();

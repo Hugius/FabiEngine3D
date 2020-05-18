@@ -240,7 +240,7 @@
     <ClCompile Include="Source\bottom_viewport_controller.cpp" />
     <ClCompile Include="Source\engine_gui_scrollinglist.cpp" />
     <ClCompile Include="Source\left_viewport_controller.cpp" />
-    <ClCompile Include="Source\model_editor_management.cpp" />
+    <ClCompile Include="Source\model_editor_updates.cpp" />
     <ClCompile Include="Source\model_editor_updates_mesh.cpp" />
     <ClCompile Include="Source\model_editor_misc.cpp" />
     <ClCompile Include="Source\model_editor_core.cpp" />
@@ -308,6 +308,8 @@
     <ClCompile Include="Source\core_engine_core.cpp" />
     <ClCompile Include="Source\fabi_engine_3d.cpp" />
     <ClCompile Include="Source\world_editor_core.cpp" />
+    <ClCompile Include="Source\world_editor_misc.cpp" />
+    <ClCompile Include="Source\world_editor_updates.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\FabiEngine3D\Engine\Shaders\aabb_entity_shader.frag" />

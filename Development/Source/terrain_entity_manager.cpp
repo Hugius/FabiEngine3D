@@ -31,13 +31,19 @@ void TerrainEntityManager::selectTerrain(const string & ID)
 
 void TerrainEntityManager::addTerrainEntity
 (
-	const string& ID, const string& heightmapName, const string& textureName,
+	const string& ID, const string& heightmapPath, const string& textureName,
 	vec3 pos, float size, float maxHeight, float uvRepeat
 )
 {
 	// Variables
 	vector<float> terrainVertices;
-	auto& pixelColors = _texLoader.getHeightMap("../Game/Textures/HeightMaps/" + heightmapName, static_cast<int>(size));
+	auto& pixelColors = _texLoader.getHeightMap(heightmapPath);
+
+	// Size correction if needed
+	if ((size * size) > pixelColors.size())
+	{
+		size = float(sqrt(pixelColors.size()));
+	}
 
 	// Generate terrain vertices
 	for (float x = 0.0f; x < size; x++)
@@ -147,7 +153,7 @@ void TerrainEntityManager::addTerrainEntity
 	// Create entity
 	_createEntity(EntityType::TERRAIN, ID)->load(ID);
 	getEntity(ID)->addOglBuffer(new OpenGLBuffer(SHAPE_3D, &terrainVertices[0], terrainVertices.size()));
-	getEntity(ID)->setDiffuseMap(_texLoader.getTexture("../User/Assets/Textures/DiffuseMaps/" + textureName, true, true));
+	getEntity(ID)->setDiffuseMap(_texLoader.getTexture(textureName, true, true));
 	getEntity(ID)->setPixelColors(pixelColors);
 	getEntity(ID)->setSize(size);
 	getEntity(ID)->setHeight(maxHeight);

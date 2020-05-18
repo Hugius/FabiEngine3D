@@ -309,7 +309,9 @@
     <ClCompile Include="Source\fabi_engine_3d.cpp" />
     <ClCompile Include="Source\world_editor_core.cpp" />
     <ClCompile Include="Source\world_editor_misc.cpp" />
-    <ClCompile Include="Source\world_editor_updates.cpp" />
+    <ClCompile Include="Source\world_editor_updates_sky.cpp" />
+    <ClCompile Include="Source\world_editor_updates_terrain.cpp" />
+    <ClCompile Include="Source\world_editor_updates_water.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\FabiEngine3D\Engine\Shaders\aabb_entity_shader.frag" />

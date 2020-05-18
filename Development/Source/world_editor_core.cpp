@@ -61,7 +61,13 @@ void WorldEditor::initializeGUI()
 	// Left-viewport: mainWindow - terrainBlendmap
 	_window->addScreen("terrainBlendmap");
 	_window->getScreen("terrainBlendmap")->addScrollingList("blendmapList", vec2(0.0f, 0.2f), vec2(1.9, 1.5f), vec3(0.3f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, _gui->leftVpTextColor, _gui->leftVpTextHoverColor, vec2(0.15f, 0.1f));
-	_window->getScreen("terrainBlendmap")->getScrollingList("blendmapList")->addButton("heightmap", "Load heightmap");
+	_window->getScreen("terrainBlendmap")->getScrollingList("blendmapList")->addButton("blendmap", "Load blendmap");
+	_window->getScreen("terrainBlendmap")->getScrollingList("blendmapList")->addButton("red", "Red texture");
+	_window->getScreen("terrainBlendmap")->getScrollingList("blendmapList")->addButton("green", "Green texture");
+	_window->getScreen("terrainBlendmap")->getScrollingList("blendmapList")->addButton("blue", "Blue texture");
+	_window->getScreen("terrainBlendmap")->getScrollingList("blendmapList")->addButton("redRepeat", "Red UV");
+	_window->getScreen("terrainBlendmap")->getScrollingList("blendmapList")->addButton("greenRepeat", "Green UV");
+	_window->getScreen("terrainBlendmap")->getScrollingList("blendmapList")->addButton("blueRepeat", "Blue UV");
 	_window->getScreen("terrainBlendmap")->addButton("load", vec2(0.0f, -0.7f), vec2(1.0f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Load", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 	_window->getScreen("terrainBlendmap")->addButton("back", vec2(0.0f, -0.9f), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Go back", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 }
@@ -92,6 +98,81 @@ void WorldEditor::unloadProject()
 	_fe3d.gfx_removeDirectionalLighting();
 	_fe3d.gfx_removeMSAA();
 
+	// Delete sky
+	if (_fe3d.skyEntity_isExisting("@sky"))
+	{
+		_fe3d.skyEntity_delete("@sky");
+	}
+
+	// Delete terrain
+	if (_fe3d.skyEntity_isExisting("@terrain"))
+	{
+		_fe3d.skyEntity_delete("@terrain");
+	}
+
+	// Delete water
+	if (_fe3d.skyEntity_isExisting("@water"))
+	{
+		_fe3d.skyEntity_delete("@water");
+	}
+
+	// Clear variables
+	_currentWorldPart = WorldPart::NONE;
+	_currentProjectName = "";
+	_terrainHeightmapPath = "";
+	_terrainDiffusemapPath = "";
+	_activeWritefield = "";
+	_terrainBlendmapPath = "";
+	_terrainRedPath = "";
+	_terrainGreenPath = "";
+	_terrainBluePath = "";
+	_terrainSize = 0.0f;
+	_maxTerrainHeight = 0.0f;
+	_terrainUvRepeat = 0.0f;
+	_redUvRepeat = 0.0f;
+	_greenUvRepeat = 0.0f;
+	_blueUvRepeat = 0.0f;
+	_cameraRotationSpeed = 0.0f;
+	_cameraDistance = 0.0f;
+	_cameraHeight = 0.0f;
+	_totalCameraRotation = 0.0f;
 	_skyTexturePaths.clear();
 	_isLoaded = false;
+}
+
+void WorldEditor::update(float delta)
+{
+	if (_isLoaded)
+	{
+		auto screen = _window->getScreen("worldManagement");
+
+		// GUI management
+		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
+		{
+			if (screen->getButton("sky")->isHovered())
+			{
+				_window->setActiveScreen("skyManagement");
+				_currentWorldPart = WorldPart::SKY;
+			}
+			else if (screen->getButton("terrain")->isHovered())
+			{
+				_window->setActiveScreen("terrainManagement");
+				_currentWorldPart = WorldPart::TERRAIN;
+			}
+			else if (screen->getButton("water")->isHovered())
+			{
+				_currentWorldPart = WorldPart::WATER;
+			}
+			else if (screen->getButton("back")->isHovered())
+			{
+				_window->setActiveScreen("main");
+				unloadProject();
+			}
+		}
+
+		// Update sub-menus
+		_upateSkyManagement();
+		_upateTerrainManagement();
+		_upateWaterManagement();
+	}
 }

@@ -56,67 +56,27 @@ void EngineGuiGlobalScreen::addTextfield(const string& ID, vec2 position, vec2 s
 
 bool EngineGuiGlobalScreen::checkScrollingList(const string& ID)
 {
-	for (auto& scrollingList : _scrollingLists)
-	{
-		if (ID == scrollingList->getID())
-		{
-			return true;
-		}
-	}
-
-	return false;
+	return getScrollingList(ID) != nullptr;
 }
 
 bool EngineGuiGlobalScreen::checkWriteField(const string& ID)
 {
-	for (auto& scrollingList : _scrollingLists)
-	{
-		if (ID == scrollingList->getID())
-		{
-			return true;
-		}
-	}
-
-	return false;
+	return getWriteField(ID) != nullptr;
 }
 
 bool EngineGuiGlobalScreen::checkButton(const string& ID)
 {
-	for (auto& button : _buttons)
-	{
-		if (ID == button->getID())
-		{
-			return true;
-		}
-	}
-
-	return false;
+	return getButton(ID) != nullptr;
 }
 
 bool EngineGuiGlobalScreen::checkRectangle(const string& ID)
 {
-	for (auto& rectangle : _rectangles)
-	{
-		if (ID == rectangle->getID())
-		{
-			return true;
-		}
-	}
-
-	return false;
+	return getRectangle(ID) != nullptr;
 }
 
 bool EngineGuiGlobalScreen::checkTextfield(const string& ID)
 {
-	for (auto& textfield : _textfields)
-	{
-		if (ID == textfield->getID())
-		{
-			return true;
-		}
-	}
-
-	return false;
+	return getTextfield(ID) != nullptr;
 }
 
 shared_ptr<EngineGuiScrollingList> EngineGuiGlobalScreen::getScrollingList(const string& ID)
@@ -128,8 +88,6 @@ shared_ptr<EngineGuiScrollingList> EngineGuiGlobalScreen::getScrollingList(const
 			return scrollingList;
 		}
 	}
-
-	_fe3d.logger_throwError("Scrollinglist \"" + ID + " \" requested in GlobalScreen: not found!");
 
 	return nullptr;
 }
@@ -144,8 +102,6 @@ shared_ptr<EngineGuiWriteField> EngineGuiGlobalScreen::getWriteField(const strin
 		}
 	}
 
-	_fe3d.logger_throwError("Writefield \"" + ID + " \" requested in GlobalScreen: not found!");
-
 	return nullptr;
 }
 
@@ -158,8 +114,6 @@ shared_ptr<EngineGuiButton> EngineGuiGlobalScreen::getButton(const string& ID)
 			return button;
 		}
 	}
-
-	_fe3d.logger_throwError("Button \"" + ID + " \" requested in GlobalScreen: not found!");
 
 	return nullptr;
 }
@@ -174,8 +128,6 @@ shared_ptr<EngineGuiRectangle> EngineGuiGlobalScreen::getRectangle(const string&
 		}
 	}
 
-	_fe3d.logger_throwError("Rectangle \"" + ID + " \" requested in GlobalScreen: not found!");
-
 	return nullptr;
 }
 
@@ -188,8 +140,6 @@ shared_ptr<EngineGuiTextfield> EngineGuiGlobalScreen::getTextfield(const string&
 			return textfield;
 		}
 	}
-
-	_fe3d.logger_throwError("Textfield \"" + ID + " \" requested in GlobalScreen: not found!");
 
 	return nullptr;
 }

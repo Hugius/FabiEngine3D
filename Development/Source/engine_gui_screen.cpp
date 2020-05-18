@@ -149,6 +149,31 @@ void EngineGuiScreen::addTextfield(const string& ID, vec2 position, vec2 size, s
 	_textfields.push_back(make_shared<EngineGuiTextfield>(_fe3d, _ID, ID, vec2(dimensions.x, dimensions.y), vec2(dimensions.z, dimensions.w), textContent, textColor));
 }
 
+bool EngineGuiScreen::checkScrollingList(const string& ID)
+{
+	return getScrollingList(ID) != nullptr;
+}
+
+bool EngineGuiScreen::checkWriteField(const string& ID)
+{
+	return getWriteField(ID) != nullptr;
+}
+
+bool EngineGuiScreen::checkButton(const string& ID)
+{
+	return getButton(ID) != nullptr;
+}
+
+bool EngineGuiScreen::checkRectangle(const string& ID)
+{
+	return getRectangle(ID) != nullptr;
+}
+
+bool EngineGuiScreen::checkTextfield(const string& ID)
+{
+	return getTextfield(ID) != nullptr;
+}
+
 shared_ptr<EngineGuiScrollingList> EngineGuiScreen::getScrollingList(const string& ID)
 {
 	for (auto& scrollingList : _scrollingLists)
@@ -158,8 +183,6 @@ shared_ptr<EngineGuiScrollingList> EngineGuiScreen::getScrollingList(const strin
 			return scrollingList;
 		}
 	}
-
-	_fe3d.logger_throwError("Scrollinglist \"" + ID + " \" requested in screen \"" + _ID + "\": not found!");
 
 	return nullptr;
 }
@@ -174,8 +197,6 @@ shared_ptr<EngineGuiWriteField> EngineGuiScreen::getWriteField(const string& ID)
 		}
 	}
 
-	_fe3d.logger_throwError("Writefield \"" + ID + " \" requested in screen \"" + _ID + "\": not found!");
-
 	return nullptr;
 }
 
@@ -188,8 +209,6 @@ shared_ptr<EngineGuiButton> EngineGuiScreen::getButton(const string& ID)
 			return button;
 		}
 	}
-
-	_fe3d.logger_throwError("Button \"" + ID + " \" requested in screen \"" + _ID + "\": not found!");
 
 	return nullptr;
 }
@@ -204,8 +223,6 @@ shared_ptr<EngineGuiRectangle> EngineGuiScreen::getRectangle(const string& ID)
 		}
 	}
 
-	_fe3d.logger_throwError("Rectangle \"" + ID + " \" requested in screen \"" + _ID + "\": not found!");
-
 	return nullptr;
 }
 
@@ -218,8 +235,6 @@ shared_ptr<EngineGuiTextfield> EngineGuiScreen::getTextfield(const string& ID)
 			return textfield;
 		}
 	}
-	
-	_fe3d.logger_throwError("Textfield \"" + ID + " \" requested in screen \"" + _ID + "\": not found!");
 
 	return nullptr;
 }

@@ -3,6 +3,8 @@
 #include "fabi_engine_3d.hpp"
 #include "engine_gui_manager.hpp"
 
+enum class WorldPart { NONE, SKY, TERRAIN, WATER };
+
 class WorldEditor final
 {
 public:
@@ -19,8 +21,8 @@ public:
 	bool isLoaded();
 
 private:
-	void _updateWorldManagement();
 	void _upateSkyManagement();
+	void _updateSkyCamera();
 	void _updateSkyMesh();
 	void _updateSkyOptions();
 	void _upateTerrainManagement();
@@ -28,17 +30,29 @@ private:
 	void _updateTerrainMesh();
 	void _updateTerrainBlendmap();
 	void _upateWaterManagement();
+	void _addValueForm(string ID, float value);
+	void _checkValueForm(string ID, float& value);
+	void _removeValueForm();
 
 	bool _isLoaded = false;
+
+	WorldPart _currentWorldPart = WorldPart::NONE;
 
 	string _currentProjectName = "";
 	string _terrainHeightmapPath = "";
 	string _terrainDiffusemapPath = "";
 	string _activeWritefield = "";
+	string _terrainBlendmapPath = "";
+	string _terrainRedPath = "";
+	string _terrainGreenPath = "";
+	string _terrainBluePath = "";
 
-	float _terrainSize = 384.0f;
-	float _maxTerrainHeight = 50.0f;
-	float _terrainUvRepeat = 10.0f;
+	float _terrainSize = 0.0f;
+	float _maxTerrainHeight = 0.0f;
+	float _terrainUvRepeat = 0.0f;
+	float _redUvRepeat = 0.0f;
+	float _greenUvRepeat = 0.0f;
+	float _blueUvRepeat = 0.0f;
 	float _cameraRotationSpeed = 0.0f;
 	float _cameraDistance = 0.0f;
 	float _cameraHeight = 0.0f;
@@ -48,6 +62,5 @@ private:
 
 	FabiEngine3D& _fe3d;
 	shared_ptr<EngineGuiManager> _gui;
-
 	shared_ptr<EngineGuiWindow> _window;
 };

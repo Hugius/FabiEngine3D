@@ -117,12 +117,12 @@ void TopViewportController::_updateProjectCreation()
 	if (_creatingProject)
 	{
 		bool done = _fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT) && _gui->getGlobalScreen()->getButton("done")->isHovered();
-		bool entered = _gui->getGlobalScreen()->getWriteField("newProjectName")->confirmedInput();
 		bool cancelled = _fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT) && _gui->getGlobalScreen()->getButton("cancel")->isHovered();
+		bool entered = _gui->getGlobalScreen()->getWriteField("newProjectName")->confirmedInput();
 		bool escaped = _gui->getGlobalScreen()->getWriteField("newProjectName")->cancelledInput();
 		bool cleanup = false;
 
-		// Check if pressed ESCAPE or ENTER
+		// Check if user confirmed or cancelled
 		if (done || entered || cancelled || escaped)
 		{
 			// Extract new name

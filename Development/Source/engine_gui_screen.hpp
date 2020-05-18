@@ -33,6 +33,12 @@ public:
 	void deleteRectangle(const string& ID);
 	void deleteTextfield(const string& ID);
 
+	bool checkScrollingList(const string& ID);
+	bool checkWriteField(const string& ID);
+	bool checkButton(const string& ID);
+	bool checkRectangle(const string& ID);
+	bool checkTextfield(const string& ID);
+
 	shared_ptr<EngineGuiScrollingList> getScrollingList(const string& ID);
 	shared_ptr<EngineGuiWriteField>    getWriteField(const string& ID);
 	shared_ptr<EngineGuiButton>        getButton(const string& ID);

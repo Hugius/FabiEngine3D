@@ -168,10 +168,10 @@ void TerrainEntityManager::addBlendingToTerrain
 )
 {
 	getEntity(ID)->setBlendMapped(true);
-	getEntity(ID)->setBlendMap(_texLoader.getTexture("../User/Assets/Textures/BlendMaps/"    + blendMap,  true, true));
-	getEntity(ID)->setBlendMapR(_texLoader.getTexture("../User/Assets/Textures/DiffuseMaps/" + blendMapR, true, true));
-	getEntity(ID)->setBlendMapG(_texLoader.getTexture("../User/Assets/Textures/DiffuseMaps/" + blendMapG, true, true));
-	getEntity(ID)->setBlendMapB(_texLoader.getTexture("../User/Assets/Textures/DiffuseMaps/" + blendMapB, true, true));
+	getEntity(ID)->setBlendMap(_texLoader.getTexture(blendMap,  true, true));
+	getEntity(ID)->setBlendMapR(_texLoader.getTexture(blendMapR, true, true));
+	getEntity(ID)->setBlendMapG(_texLoader.getTexture(blendMapG, true, true));
+	getEntity(ID)->setBlendMapB(_texLoader.getTexture(blendMapB, true, true));
 	getEntity(ID)->setBlendRepeatR(blendRepeatR);
 	getEntity(ID)->setBlendRepeatG(blendRepeatG);
 	getEntity(ID)->setBlendRepeatB(blendRepeatB);

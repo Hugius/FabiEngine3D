@@ -9,23 +9,23 @@ void ModelEditor::_updateModelEditingOptions()
 	// GUI management
 	if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
 	{
-		if (screen->getScrollingList("optionsList")->getButton("faceculled")->isHovered())
+		if (screen->getScrollingList("buttonList")->getButton("faceculled")->isHovered())
 		{
 			_fe3d.gameEntity_setFaceCulled(_currentModelName, !_fe3d.gameEntity_isFaceCulled(_currentModelName));
 		}
-		else if (screen->getScrollingList("optionsList")->getButton("shadowed")->isHovered())
+		else if (screen->getScrollingList("buttonList")->getButton("shadowed")->isHovered())
 		{
 			_fe3d.gameEntity_setShadowed(_currentModelName, !_fe3d.gameEntity_isShadowed(_currentModelName));
 		}
-		else if (screen->getScrollingList("optionsList")->getButton("transparent")->isHovered())
+		else if (screen->getScrollingList("buttonList")->getButton("transparent")->isHovered())
 		{
 			_fe3d.gameEntity_setTransparent(_currentModelName, !_fe3d.gameEntity_isTransparent(_currentModelName));
 		}
-		else if (screen->getScrollingList("optionsList")->getButton("specular")->isHovered())
+		else if (screen->getScrollingList("buttonList")->getButton("specular")->isHovered())
 		{
 			_fe3d.gameEntity_setSpecularLighted(_currentModelName, !_fe3d.gameEntity_isSpecularLighted(_currentModelName));
 		}
-		else if (screen->getScrollingList("optionsList")->getButton("setColor")->isHovered())
+		else if (screen->getScrollingList("buttonList")->getButton("setColor")->isHovered())
 		{
 			_modelColorPicking = true;
 
@@ -47,7 +47,7 @@ void ModelEditor::_updateModelEditingOptions()
 			// Set GUI focus
 			_gui->setFocus(true);
 		}
-		else if (screen->getScrollingList("optionsList")->getButton("uvRepeat")->isHovered())
+		else if (screen->getScrollingList("buttonList")->getButton("uvRepeat")->isHovered())
 		{
 			_settingModelUvRepeat = true;
 
@@ -69,13 +69,13 @@ void ModelEditor::_updateModelEditingOptions()
 	}
 
 	// Update GUI button contents
-	auto faceculledID = screen->getScrollingList("optionsList")->getButton("faceculled")->getTextfield()->getEntityID();
+	auto faceculledID = screen->getScrollingList("buttonList")->getButton("faceculled")->getTextfield()->getEntityID();
 	auto isCulled = _fe3d.gameEntity_isFaceCulled(_currentModelName);
-	auto shadowedID = screen->getScrollingList("optionsList")->getButton("shadowed")->getTextfield()->getEntityID();
+	auto shadowedID = screen->getScrollingList("buttonList")->getButton("shadowed")->getTextfield()->getEntityID();
 	auto isShadowed = _fe3d.gameEntity_isShadowed(_currentModelName);
-	auto transparentID = screen->getScrollingList("optionsList")->getButton("transparent")->getTextfield()->getEntityID();
+	auto transparentID = screen->getScrollingList("buttonList")->getButton("transparent")->getTextfield()->getEntityID();
 	auto isTransparent = _fe3d.gameEntity_isTransparent(_currentModelName);
-	auto specularID = screen->getScrollingList("optionsList")->getButton("specular")->getTextfield()->getEntityID();
+	auto specularID = screen->getScrollingList("buttonList")->getButton("specular")->getTextfield()->getEntityID();
 	auto isSpecular = _fe3d.gameEntity_isSpecularLighted(_currentModelName);
 	_fe3d.textEntity_setTextContent(faceculledID, isCulled ? "Culling: ON" : "Culling: OFF");
 	_fe3d.textEntity_setTextContent(shadowedID, isShadowed ? "Shadowed: ON" : "Shadowed: OFF");

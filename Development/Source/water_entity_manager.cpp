@@ -31,19 +31,20 @@ void WaterEntityManager::selectWater(const string & ID)
 
 void WaterEntityManager::addWaterEntity
 (
-	const string & ID, const string & assetName, vec3 pos, float size,
+	const string & ID, const string& dudvMapPath, const string& normalMapPath, vec3 pos, float size,
 	float tileRepeat, float speed, bool waving, 
 	bool rippling, vec3 color, float shininess
 )
 {
-	// Total surface size
+	// Saving the surface height
+	float surfaceHeight = pos.y;
+	pos.y = 0.0f;
+
+	// Make (0,0) the center
 	size /= 2.0f;
 
 	// Variables
 	vector<float> waterVertices;
-	float x = pos.x;
-	float y = pos.y;
-	float z = pos.z;
 
 	// Creating flat tiled water surface
 	for (float x = -size; x < size; x++)
@@ -51,25 +52,25 @@ void WaterEntityManager::addWaterEntity
 		for (float z = -size; z < size; z++)
 		{
 			float firstVertexX = pos.x + x;
-			float firstVertexY = y;
+			float firstVertexY = pos.y;
 			float firstVertexZ = pos.z + z + 1;
 			float firstUvX = (x / size);
 			float firstUvY = ((z / size) + (1.0f / size));
 
 			float secondVertexX = pos.x + x + 1;
-			float secondVertexY = y;
+			float secondVertexY = pos.y;
 			float secondVertexZ = pos.z + z + 1;
 			float secondUvX = ((x / size) + (1.0f / size));
 			float secondUvY = ((z / size) + (1.0f / size));
 
 			float thirdVertexX = pos.x + x + 1;
-			float thirdVertexY = y;
+			float thirdVertexY = pos.y;
 			float thirdVertexZ = pos.z + z;
 			float thirdUvX = ((x / size) + (1.0f / size));
 			float thirdUvY = (z / size);
 
 			float fourthVertexX = pos.x + x;
-			float fourthVertexY = y;
+			float fourthVertexY = pos.y;
 			float fourthVertexZ = pos.z + z;
 			float fourthUvX = (x / size);
 			float fourthUvY = (z / size);
@@ -117,15 +118,16 @@ void WaterEntityManager::addWaterEntity
 
 	// Filly entity
 	getEntity(ID)->addOglBuffer(new OpenGLBuffer(SHAPE_SURFACE, &waterVertices[0], waterVertices.size()));
-	getEntity(ID)->setDudvMap(_texLoader.getTexture("../User/Assets/Textures/DudvMaps/" + assetName, true, true));
-	getEntity(ID)->setNormalMap(_texLoader.getTexture("../User/Assets/Textures/NormalMaps/" + assetName, true, true));
+	getEntity(ID)->setDudvMap(_texLoader.getTexture(dudvMapPath, true, true));
+	getEntity(ID)->setNormalMap(_texLoader.getTexture(normalMapPath, true, true));
 	getEntity(ID)->setTileRepeat(tileRepeat);
 	getEntity(ID)->setWavingSpeed(speed);
 	getEntity(ID)->setWaving(waving);
 	getEntity(ID)->setRippling(rippling);
 	getEntity(ID)->setColor(color);
 	getEntity(ID)->setShininess(shininess);
-	getEntity(ID)->setSurfaceHeight(pos.y);
+	getEntity(ID)->setSurfaceHeight(surfaceHeight);
+	getEntity(ID)->setSize(size * 2.0f);
 }
 
 void WaterEntityManager::update(float delta)

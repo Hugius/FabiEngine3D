@@ -48,6 +48,11 @@ void FabiEngine3D::camera_enableLookat(vec3 position)
 	_core->_cameraManager.enableLookat(position);
 }
 
+void FabiEngine3D::camera_disableLookat()
+{
+	_core->_cameraManager.disableLookat();
+}
+
 void FabiEngine3D::camera_enableFirstPersonView(float mouseSensitivity)
 {
 	_core->_cameraManager.enableFirstPersonView();
@@ -311,9 +316,10 @@ void FabiEngine3D::terrainEntity_addBlending
 	_core->_terrainEntityManager.addBlendingToTerrain(ID, blendmapName, blendmapNameR, blendmapNameG, blendmapNameB, blendRepeatR, blendRepeatG, blendRepeatB);
 }
 
-void FabiEngine3D::waterEntity_add(const string& ID, const string& assetName, vec3 pos, float size, float tileRepeat, float speed, bool waving, bool rippling, vec3 color, float shininess)
+void FabiEngine3D::waterEntity_add(const string& ID, const string& dudvMapPath, const string& normalMapPath, vec3 pos, 
+	float size, float tileRepeat, float speed, bool waving, bool rippling, vec3 color, float shininess)
 {
-	_core->_waterEntityManager.addWaterEntity(ID, assetName, pos, size, tileRepeat, speed, waving, rippling, color, shininess);
+	_core->_waterEntityManager.addWaterEntity(ID, dudvMapPath, normalMapPath, pos, size, tileRepeat, speed, waving, rippling, color, shininess);
 }
 
 void FabiEngine3D::waterEntity_delete(const string& ID)
@@ -340,6 +346,11 @@ bool FabiEngine3D::waterEntity_isExisting(const string& ID)
 void FabiEngine3D::waterEntity_select(const string& ID)
 {
 	_core->_waterEntityManager.selectWater(ID);
+}
+
+void FabiEngine3D::waterEntity_setSpeed(const string& ID, float speed)
+{
+	_core->_waterEntityManager.getEntity(ID)->setWavingSpeed(speed);
 }
 
 void FabiEngine3D::waterEntity_enableWaving(const string& ID)
@@ -376,6 +387,11 @@ void FabiEngine3D::waterEntity_setTransparency(const string& ID, float transpare
 {
 	transparency = std::clamp(transparency, 0.0f, 1.0f);
 	_core->_waterEntityManager.getEntity(ID)->setTransparency(transparency * 10.0f);
+}
+
+void FabiEngine3D::waterEntity_setSurfaceHeight(const string& ID, float height)
+{
+	return _core->_waterEntityManager.getEntity(ID)->setSurfaceHeight(height);
 }
 
 string FabiEngine3D::waterEntity_getSelectedID()
@@ -1511,7 +1527,7 @@ string FabiEngine3D::textEntity_getTextContent(const string& ID)
 
 /* --------------------------------------------- Graphics interface --------------------------------------------- */
 
-void FabiEngine3D::gfx_addAmbientLighting(float strength)
+void FabiEngine3D::gfx_enableAmbientLighting(float strength)
 {
 	_core->_shaderBus.setAmbLightEnabled(true);
 
@@ -1522,7 +1538,7 @@ void FabiEngine3D::gfx_addAmbientLighting(float strength)
 	}
 }
 
-void FabiEngine3D::gfx_addDirectionalLighting(vec3 position, float strength)
+void FabiEngine3D::gfx_enableDirectionalLighting(vec3 position, float strength)
 {
 	_core->_shaderBus.setDirLightEnabled(true);
 	_core->_shaderBus.setDirLightPos(position);
@@ -1535,30 +1551,30 @@ void FabiEngine3D::gfx_addDirectionalLighting(vec3 position, float strength)
 	}
 }
 
-void FabiEngine3D::gfx_addSpecularLighting(float shininess)
+void FabiEngine3D::gfx_enableSpecularLighting(float shininess)
 {
 	_core->_shaderBus.setSpecLightEnabled(true);
 	_core->_shaderBus.setSpecLightStrength(shininess);
 }
 
-void FabiEngine3D::gfx_addPointLighting()
+void FabiEngine3D::gfx_enablePointLighting()
 {
 	_core->_shaderBus.setPointLightEnabled(true);
 }
 
-void FabiEngine3D::gfx_addFog(float minDistance)
+void FabiEngine3D::gfx_enableFog(float minDistance)
 {
 	_core->_shaderBus.setFogEnabled(true);
 	_core->_shaderBus.setFogMinDistance(minDistance);
 }
 
-void FabiEngine3D::gfx_addSkyReflections(float factor)
+void FabiEngine3D::gfx_enableSkyReflections(float factor)
 {
 	_core->_shaderBus.setSkyReflectionsEnabled(true);
 	_core->_shaderBus.setSkyReflectionFactor(factor);
 }
 
-void FabiEngine3D::gfx_addSceneReflections(float height, float factor)
+void FabiEngine3D::gfx_enableSceneReflections(float height, float factor)
 {
 	// Check if water is already using reflection graphics
 	if (_core->_shaderBus.isWaterEffectsEnabled())
@@ -1574,23 +1590,23 @@ void FabiEngine3D::gfx_addSceneReflections(float height, float factor)
 
 }
 
-void FabiEngine3D::gfx_addLightMapping()
+void FabiEngine3D::gfx_enableLightMapping()
 {
 	_core->_shaderBus.setLightMappingEnabled(true);
 }
 
-void FabiEngine3D::gfx_addMSAA()
+void FabiEngine3D::gfx_enableMSAA()
 {
 	_core->_shaderBus.setMSAAEnabled(true);
 }
 
-void FabiEngine3D::gfx_addShadows(vec3 eye, vec3 center, float size, float reach)
+void FabiEngine3D::gfx_enableShadows(vec3 eye, vec3 center, float size, float reach)
 {
 	_core->_shadowManager.loadShadows(eye, center, size, reach);
 	_core->_shaderBus.setShadowsEnabled(true);
 }
 
-void FabiEngine3D::gfx_addBloom(float intensity, float brightnessTreshold, int blurSize)
+void FabiEngine3D::gfx_enableBloom(float intensity, float brightnessTreshold, int blurSize)
 {
 	_core->_shaderBus.setBloomEnabled(true);
 	_core->_shaderBus.setBloomIntensity(intensity);
@@ -1598,98 +1614,98 @@ void FabiEngine3D::gfx_addBloom(float intensity, float brightnessTreshold, int b
 	_core->_shaderBus.setBloomBlurSize(blurSize);
 }
 
-void FabiEngine3D::gfx_addWaterEffects()
+void FabiEngine3D::gfx_enableWaterEffects()
 {
 	_core->_shaderBus.setWaterEffectsEnabled(true);
 }
 
-void FabiEngine3D::gfx_addSkyHDR()
+void FabiEngine3D::gfx_enableSkyHDR()
 {
 	_core->_shaderBus.setSkyHdrEnabled(true);
 }
 
-void FabiEngine3D::gfx_addDOF(float minDistance)
+void FabiEngine3D::gfx_enableDOF(float minDistance)
 {
 	_core->_shaderBus.setDofEnabled(true);
 	_core->_shaderBus.setDofMinDistance(minDistance);
 }
 
-void FabiEngine3D::gfx_addMotionBlur()
+void FabiEngine3D::gfx_enableMotionBlur()
 {
 	_core->_shaderBus.setMotionBlurEnabled(true);
 }
 
-void FabiEngine3D::gfx_removeAmbientLighting()
+void FabiEngine3D::gfx_disableAmbientLighting()
 {
 	_core->_shaderBus.setAmbLightEnabled(false);
 }
 
-void FabiEngine3D::gfx_removeDirectionalLighting()
+void FabiEngine3D::gfx_disableDirectionalLighting()
 {
 	_core->_shaderBus.setDirLightEnabled(false);
 }
 
-void FabiEngine3D::gfx_removeSpecularLighting()
+void FabiEngine3D::gfx_disableSpecularLighting()
 {
 	_core->_shaderBus.setSpecLightEnabled(false);
 }
 
-void FabiEngine3D::gfx_removePointLighting()
+void FabiEngine3D::gfx_disablePointLighting()
 {
 	_core->_shaderBus.setPointLightEnabled(false);
 }
 
-void FabiEngine3D::gfx_removeFog()
+void FabiEngine3D::gfx_disableFog()
 {
 	_core->_shaderBus.setFogEnabled(false);
 }
 
-void FabiEngine3D::gfx_removeSkyReflections()
+void FabiEngine3D::gfx_disableSkyReflections()
 {
 	_core->_shaderBus.setSkyReflectionsEnabled(false);
 }
 
-void FabiEngine3D::gfx_removeSceneReflections()
+void FabiEngine3D::gfx_disableSceneReflections()
 {
 	_core->_shaderBus.setSceneReflectionsEnabled(false);
 }
 
-void FabiEngine3D::gfx_removeLightMapping()
+void FabiEngine3D::gfx_disableLightMapping()
 {
 	_core->_shaderBus.setLightMappingEnabled(false);
 }
 
-void FabiEngine3D::gfx_removeMSAA()
+void FabiEngine3D::gfx_disableMSAA()
 {
 	_core->_shaderBus.setMSAAEnabled(false);
 }
 
-void FabiEngine3D::gfx_removeShadows()
+void FabiEngine3D::gfx_disableShadows()
 {
 	_core->_shaderBus.setShadowsEnabled(false);
 }
 
-void FabiEngine3D::gfx_removeBloom()
+void FabiEngine3D::gfx_disableBloom()
 {
 	_core->_shaderBus.setBloomEnabled(false);
 }
 
-void FabiEngine3D::gfx_removeWaterEffects()
+void FabiEngine3D::gfx_disableWaterEffects()
 {
 	_core->_shaderBus.setWaterEffectsEnabled(false);
 }
 
-void FabiEngine3D::gfx_removeSkyHDR()
+void FabiEngine3D::gfx_disableSkyHDR()
 {
 	_core->_shaderBus.setSkyHdrEnabled(false);
 }
 
-void FabiEngine3D::gfx_removeDOF()
+void FabiEngine3D::gfx_disableDOF()
 {
 	_core->_shaderBus.setDofEnabled(false);
 }
 
-void FabiEngine3D::gfx_removeMotionBlur()
+void FabiEngine3D::gfx_disableMotionBlur()
 {
 	_core->_shaderBus.setMotionBlurEnabled(false);
 }

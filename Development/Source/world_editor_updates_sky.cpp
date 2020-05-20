@@ -28,23 +28,9 @@ void WorldEditor::_upateSkyManagement()
 		screen->getButton("options")->setHoverable(_fe3d.skyEntity_isExisting("@sky"));
 
 		// Update sub-menus
-		_updateSkyCamera();
+		_updateFPSCamera();
 		_updateSkyMesh();
 		_updateSkyOptions();
-	}
-}
-
-void WorldEditor::_updateSkyCamera()
-{
-	if (_fe3d.misc_isMouseInsideViewport() && _fe3d.input_getMouseDown(Input::MOUSE_BUTTON_RIGHT))
-	{
-		_fe3d.camera_enableFirstPersonView(5.0f);
-		_fe3d.misc_hideCursor();
-	}
-	else
-	{
-		_fe3d.camera_disableFirstPersonView();
-		_fe3d.misc_showCursor();
 	}
 }
 

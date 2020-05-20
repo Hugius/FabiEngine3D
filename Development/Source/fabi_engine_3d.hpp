@@ -37,6 +37,7 @@ public:
 	// Camera interface
 	void  camera_load(float fov, float nearZ, float farZ, vec3 startPos, float yaw = 0.0f, float pitch = 0.0f);
 	void  camera_enableLookat(vec3 position);
+	void  camera_disableLookat();
 	void  camera_enableFirstPersonView(float mouseSensitivity);
 	void  camera_disableFirstPersonView();
 	void  camera_enableFreeMovement();
@@ -100,7 +101,7 @@ public:
 	// Water entity interface
 	void waterEntity_add
 	(
-		const string& ID, const string& texturePath, vec3 pos, float size,
+		const string& ID, const string& dudvMapPath, const string& normalMapPath, vec3 pos, float size,
 		float tileRepeat, float speed, bool waving,
 		bool rippling, vec3 color, float shininess
 	);
@@ -109,6 +110,7 @@ public:
 	void waterEntity_show(const string& ID);
 	bool waterEntity_isExisting(const string& ID);
 	void waterEntity_select(const string& ID);
+	void waterEntity_setSpeed(const string& ID, float speed);
 	void waterEntity_enableWaving(const string& ID);
 	void waterEntity_disableWaving(const string& ID);
 	void waterEntity_enableRippling(const string& ID);
@@ -116,6 +118,7 @@ public:
 	void waterEntity_setColor(const string& ID, vec3 color);
 	void waterEntity_setShininess(const string& ID, float shininess);
 	void waterEntity_setTransparency(const string& ID, float transparency);
+	void waterEntity_setSurfaceHeight(const string& ID, float height);
 	string waterEntity_getSelectedID();
 
 	// Game entity interface
@@ -321,36 +324,36 @@ public:
 	string textEntity_getTextContent(const string& ID);
 
 	// Graphics interface
-	void gfx_addAmbientLighting(float strength = 0.0f);
-	void gfx_addDirectionalLighting(vec3 position, float strength = 0.0f);
-	void gfx_addSpecularLighting(float shininess);
-	void gfx_addPointLighting();
-	void gfx_addFog(float minDistance);
-	void gfx_addSkyReflections(float factor);
-	void gfx_addSceneReflections(float height, float factor);
-	void gfx_addLightMapping();
-	void gfx_addMSAA();
-	void gfx_addShadows(vec3 eye, vec3 center, float size, float reach);
-	void gfx_addBloom(float intensity, float brightnessTreshold, int blurSize);
-	void gfx_addWaterEffects();
-	void gfx_addSkyHDR();
-	void gfx_addDOF(float minDistance);
-	void gfx_addMotionBlur();
-	void gfx_removeAmbientLighting();
-	void gfx_removeDirectionalLighting();
-	void gfx_removeSpecularLighting();
-	void gfx_removePointLighting();
-	void gfx_removeFog();
-	void gfx_removeSkyReflections();
-	void gfx_removeSceneReflections();
-	void gfx_removeLightMapping();
-	void gfx_removeMSAA();
-	void gfx_removeShadows();
-	void gfx_removeBloom();
-	void gfx_removeWaterEffects();
-	void gfx_removeSkyHDR();
-	void gfx_removeDOF();
-	void gfx_removeMotionBlur();
+	void gfx_enableAmbientLighting(float strength = 0.0f);
+	void gfx_enableDirectionalLighting(vec3 position, float strength = 0.0f);
+	void gfx_enableSpecularLighting(float shininess);
+	void gfx_enablePointLighting();
+	void gfx_enableFog(float minDistance);
+	void gfx_enableSkyReflections(float factor);
+	void gfx_enableSceneReflections(float height, float factor);
+	void gfx_enableLightMapping();
+	void gfx_enableMSAA();
+	void gfx_enableShadows(vec3 eye, vec3 center, float size, float reach);
+	void gfx_enableBloom(float intensity, float brightnessTreshold, int blurSize);
+	void gfx_enableWaterEffects();
+	void gfx_enableSkyHDR();
+	void gfx_enableDOF(float minDistance);
+	void gfx_enableMotionBlur();
+	void gfx_disableAmbientLighting();
+	void gfx_disableDirectionalLighting();
+	void gfx_disableSpecularLighting();
+	void gfx_disablePointLighting();
+	void gfx_disableFog();
+	void gfx_disableSkyReflections();
+	void gfx_disableSceneReflections();
+	void gfx_disableLightMapping();
+	void gfx_disableMSAA();
+	void gfx_disableShadows();
+	void gfx_disableBloom();
+	void gfx_disableWaterEffects();
+	void gfx_disableSkyHDR();
+	void gfx_disableDOF();
+	void gfx_disableMotionBlur();
 	void gfx_setSkyBrightness(float brightness);
 	float gfx_getSkyBrightness();
 

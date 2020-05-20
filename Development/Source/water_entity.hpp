@@ -20,6 +20,7 @@ public:
 	void setWaving(bool val);
 	void setRippling(bool val);
 	void setSurfaceHeight(float val);
+	void setSize(float val);
 	void setTransparency(float val);
 
 	// Getters
@@ -33,7 +34,8 @@ public:
 	const float  getTimeZ()         const;
 	const float  getShininess()     const;
 	const float  getSurfaceHeight() const;
-	const float  getTransparency() const;
+	const float  getSize()          const;
+	const float  getTransparency()  const;
 	const bool   isWaving()         const;
 	const bool   isRippling()       const;
 
@@ -43,6 +45,7 @@ private:
 	GLuint _dudvMap   = 0;
 	GLuint _normalMap = 0;
 
+	float _size			 = 0.0f;
 	float _waveValue     = 0.0f;
 	float _tileRepeat    = 1.0f;
 	float _wavingSpeed   = 0.0f;

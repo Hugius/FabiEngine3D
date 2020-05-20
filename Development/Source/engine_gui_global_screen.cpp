@@ -30,28 +30,28 @@ void EngineGuiGlobalScreen::update(float delta)
 void EngineGuiGlobalScreen::addScrollingList(const string& ID, vec2 position, vec2 size, vec3 color,
 	vec3 buttonColor, vec3 buttonHoverColor, vec3 textColor, vec3 textHoverColor, vec2 charSize)
 {
-	_scrollingLists.push_back(make_shared<EngineGuiScrollingList>(_fe3d, "globalScreen", ID, position, size, color, buttonColor, buttonHoverColor, textColor, textHoverColor, charSize));
+	_scrollingLists.push_back(make_shared<EngineGuiScrollingList>(_fe3d, "globalscreen", ID, position, size, color, buttonColor, buttonHoverColor, textColor, textHoverColor, charSize));
 }
 
 void EngineGuiGlobalScreen::addWriteField(const string& ID, vec2 position, vec2 size, vec3 color, vec3 hoverColor, vec3 textColor, vec3 textHoverColor, 
 	bool noNumbers, bool noCaps, bool noSpecials, bool noLetters)
 {
-	_writeFields.push_back(make_shared<EngineGuiWriteField>(_fe3d, "globalScreen", ID, position, size, color, hoverColor, textColor, textHoverColor, noNumbers, noCaps, noSpecials, noLetters));
+	_writeFields.push_back(make_shared<EngineGuiWriteField>(_fe3d, "globalscreen", ID, position, size, color, hoverColor, textColor, textHoverColor, noNumbers, noCaps, noSpecials, noLetters));
 }
 
 void EngineGuiGlobalScreen::addButton(const string& ID, vec2 position, vec2 size, vec3 color, vec3 hoverColor, string textContent, vec3 textColor, vec3 textHoverColor)
 {
-	_buttons.push_back(make_shared<EngineGuiButton>(_fe3d, "globalScreen", ID, position, size, color, hoverColor, textContent, textColor, textHoverColor));
+	_buttons.push_back(make_shared<EngineGuiButton>(_fe3d, "globalscreen", ID, position, size, color, hoverColor, textContent, textColor, textHoverColor));
 }
 
 void EngineGuiGlobalScreen::addRectangle(const string& ID, vec2 position, vec2 size, vec3 color)
 {
-	_rectangles.push_back(make_shared<EngineGuiRectangle>(_fe3d, "globalScreen", ID, position, size, color));
+	_rectangles.push_back(make_shared<EngineGuiRectangle>(_fe3d, "globalscreen", ID, position, size, color));
 }
 
 void EngineGuiGlobalScreen::addTextfield(const string& ID, vec2 position, vec2 size, string textContent, vec3 textColor)
 {
-	_textfields.push_back(make_shared<EngineGuiTextfield>(_fe3d, "globalScreen", ID, position, size, textContent, textColor));
+	_textfields.push_back(make_shared<EngineGuiTextfield>(_fe3d, "globalscreen", ID, position, size, textContent, textColor));
 }
 
 bool EngineGuiGlobalScreen::checkScrollingList(const string& ID)

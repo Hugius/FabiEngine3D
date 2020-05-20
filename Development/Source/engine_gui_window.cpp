@@ -69,7 +69,7 @@ void EngineGuiWindow::addScreen(const string& ID)
 	// Add new screen
 	vec2 windowPosition = _fe3d.guiEntity_getPosition(_entityID);
 	vec2 windowSize = _fe3d.guiEntity_getSize(_entityID);
-	_screens.push_back(make_shared<EngineGuiScreen>(_fe3d, _ID, ID, windowPosition, windowSize));
+	_screens.push_back(make_shared<EngineGuiScreen>(_fe3d, _parentID + "_" + _ID, ID, windowPosition, windowSize));
 	getScreen(ID)->hide();
 }
 

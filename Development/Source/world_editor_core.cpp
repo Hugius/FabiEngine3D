@@ -49,27 +49,57 @@ void WorldEditor::initializeGUI()
 
 	// Left-viewport: mainWindow - terrainMesh
 	_window->addScreen("terrainMesh");
-	_window->getScreen("terrainMesh")->addScrollingList("terrainList", vec2(0.0f, 0.2f), vec2(1.9, 1.5f), vec3(0.3f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, _gui->leftVpTextColor, _gui->leftVpTextHoverColor, vec2(0.15f, 0.1f));
-	_window->getScreen("terrainMesh")->getScrollingList("terrainList")->addButton("heightmap", "Load heightmap");
-	_window->getScreen("terrainMesh")->getScrollingList("terrainList")->addButton("diffusemap", "Load diffusemap");
-	_window->getScreen("terrainMesh")->getScrollingList("terrainList")->addButton("size", "Set size");
-	_window->getScreen("terrainMesh")->getScrollingList("terrainList")->addButton("maxHeight", "Set height");
-	_window->getScreen("terrainMesh")->getScrollingList("terrainList")->addButton("uvRepeat", "UV repeat");
+	_window->getScreen("terrainMesh")->addScrollingList("buttonList", vec2(0.0f, 0.2f), vec2(1.9, 1.5f), vec3(0.3f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, _gui->leftVpTextColor, _gui->leftVpTextHoverColor, vec2(0.15f, 0.1f));
+	_window->getScreen("terrainMesh")->getScrollingList("buttonList")->addButton("heightmap", "Height map");
+	_window->getScreen("terrainMesh")->getScrollingList("buttonList")->addButton("diffusemap", "Diffuse map");
+	_window->getScreen("terrainMesh")->getScrollingList("buttonList")->addButton("size", "Size");
+	_window->getScreen("terrainMesh")->getScrollingList("buttonList")->addButton("maxHeight", "Max height");
+	_window->getScreen("terrainMesh")->getScrollingList("buttonList")->addButton("uvRepeat", "UV repeat");
 	_window->getScreen("terrainMesh")->addButton("load", vec2(0.0f, -0.7f), vec2(1.0f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Load", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 	_window->getScreen("terrainMesh")->addButton("back", vec2(0.0f, -0.9f), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Go back", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 
 	// Left-viewport: mainWindow - terrainBlendmap
 	_window->addScreen("terrainBlendmap");
-	_window->getScreen("terrainBlendmap")->addScrollingList("blendmapList", vec2(0.0f, 0.2f), vec2(1.9, 1.5f), vec3(0.3f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, _gui->leftVpTextColor, _gui->leftVpTextHoverColor, vec2(0.15f, 0.1f));
-	_window->getScreen("terrainBlendmap")->getScrollingList("blendmapList")->addButton("blendmap", "Load blendmap");
-	_window->getScreen("terrainBlendmap")->getScrollingList("blendmapList")->addButton("red", "Red texture");
-	_window->getScreen("terrainBlendmap")->getScrollingList("blendmapList")->addButton("green", "Green texture");
-	_window->getScreen("terrainBlendmap")->getScrollingList("blendmapList")->addButton("blue", "Blue texture");
-	_window->getScreen("terrainBlendmap")->getScrollingList("blendmapList")->addButton("redRepeat", "Red UV");
-	_window->getScreen("terrainBlendmap")->getScrollingList("blendmapList")->addButton("greenRepeat", "Green UV");
-	_window->getScreen("terrainBlendmap")->getScrollingList("blendmapList")->addButton("blueRepeat", "Blue UV");
+	_window->getScreen("terrainBlendmap")->addScrollingList("buttonList", vec2(0.0f, 0.2f), vec2(1.9, 1.5f), vec3(0.3f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, _gui->leftVpTextColor, _gui->leftVpTextHoverColor, vec2(0.15f, 0.1f));
+	_window->getScreen("terrainBlendmap")->getScrollingList("buttonList")->addButton("blendmap", "Blend map");
+	_window->getScreen("terrainBlendmap")->getScrollingList("buttonList")->addButton("red", "Red texture");
+	_window->getScreen("terrainBlendmap")->getScrollingList("buttonList")->addButton("green", "Green texture");
+	_window->getScreen("terrainBlendmap")->getScrollingList("buttonList")->addButton("blue", "Blue texture");
+	_window->getScreen("terrainBlendmap")->getScrollingList("buttonList")->addButton("redRepeat", "Red UV");
+	_window->getScreen("terrainBlendmap")->getScrollingList("buttonList")->addButton("greenRepeat", "Green UV");
+	_window->getScreen("terrainBlendmap")->getScrollingList("buttonList")->addButton("blueRepeat", "Blue UV");
 	_window->getScreen("terrainBlendmap")->addButton("load", vec2(0.0f, -0.7f), vec2(1.0f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Load", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 	_window->getScreen("terrainBlendmap")->addButton("back", vec2(0.0f, -0.9f), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Go back", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+
+	// Left-viewport: mainWindow - waterManagement
+	_window->addScreen("waterManagement");
+	_window->getScreen("waterManagement")->addButton("mesh", vec2(0.0f, 0.475f), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "3D mesh", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_window->getScreen("waterManagement")->addButton("options", vec2(0.0f, 0.0f), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Options", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_window->getScreen("waterManagement")->addButton("back", vec2(0.0f, -0.475f), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Go back", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+
+	// Left-viewport: mainWindow - waterMesh
+	_window->addScreen("waterMesh");
+	_window->getScreen("waterMesh")->addScrollingList("buttonList", vec2(0.0f, 0.2f), vec2(1.9, 1.5f), vec3(0.3f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, _gui->leftVpTextColor, _gui->leftVpTextHoverColor, vec2(0.15f, 0.1f));
+	_window->getScreen("waterMesh")->getScrollingList("buttonList")->addButton("dudvmap", "Dudv map");
+	_window->getScreen("waterMesh")->getScrollingList("buttonList")->addButton("normalmap", "Normal map");
+	_window->getScreen("waterMesh")->getScrollingList("buttonList")->addButton("size", "Size");
+	_window->getScreen("waterMesh")->getScrollingList("buttonList")->addButton("repeat", "Tile repeat");
+	_window->getScreen("waterMesh")->getScrollingList("buttonList")->addButton("height", "Height");
+	_window->getScreen("waterMesh")->getScrollingList("buttonList")->addButton("up", "Move up");
+	_window->getScreen("waterMesh")->getScrollingList("buttonList")->addButton("down", "Move down");
+	_window->getScreen("waterMesh")->addButton("load", vec2(0.0f, -0.7f), vec2(1.0f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Load", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_window->getScreen("waterMesh")->addButton("back", vec2(0.0f, -0.9f), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Go back", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+
+	// Left-viewport: mainWindow - waterOptions
+	_window->addScreen("waterOptions");
+	_window->getScreen("waterOptions")->addScrollingList("buttonList", vec2(0.0f, 0.2f), vec2(1.9, 1.5f), vec3(0.3f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, _gui->leftVpTextColor, _gui->leftVpTextHoverColor, vec2(0.15f, 0.1f));
+	_window->getScreen("waterOptions")->getScrollingList("buttonList")->addButton("speed", "Wave speed");
+	_window->getScreen("waterOptions")->getScrollingList("buttonList")->addButton("waving", "Waves: OFF");
+	_window->getScreen("waterOptions")->getScrollingList("buttonList")->addButton("rippling", "Rippling: OFF");
+	_window->getScreen("waterOptions")->getScrollingList("buttonList")->addButton("transparency", "Transparency");
+	_window->getScreen("waterOptions")->getScrollingList("buttonList")->addButton("color", "Color");
+	_window->getScreen("waterOptions")->getScrollingList("buttonList")->addButton("shininess", "Shininess");
+	_window->getScreen("waterOptions")->addButton("back", vec2(0.0f, -0.9f), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Go back", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 }
 
 void WorldEditor::loadProject()
@@ -78,9 +108,10 @@ void WorldEditor::loadProject()
 	_fe3d.camera_load(90.0f, 0.1f, 1000.0f, vec3(0.0f), 0.0f, 0.0f);
 
 	// Graphics
-	_fe3d.gfx_addAmbientLighting(0.75f);
-	_fe3d.gfx_addDirectionalLighting(vec3(1000.0f), 0.75f);
-	_fe3d.gfx_addMSAA();
+	_fe3d.gfx_enableAmbientLighting(0.75f);
+	_fe3d.gfx_enableDirectionalLighting(vec3(1000.0f), 0.75f);
+	_fe3d.gfx_enableMSAA();
+	_fe3d.gfx_enableWaterEffects();
 
 	// Other
 	_skyTexturePaths = { "", "", "", "", "", "" };
@@ -94,9 +125,10 @@ void WorldEditor::saveProject()
 
 void WorldEditor::unloadProject()
 {
-	_fe3d.gfx_removeAmbientLighting();
-	_fe3d.gfx_removeDirectionalLighting();
-	_fe3d.gfx_removeMSAA();
+	_fe3d.gfx_disableAmbientLighting();
+	_fe3d.gfx_disableDirectionalLighting();
+	_fe3d.gfx_disableMSAA();
+	_fe3d.gfx_disableWaterEffects();
 
 	// Delete sky
 	if (_fe3d.skyEntity_isExisting("@sky"))
@@ -105,15 +137,15 @@ void WorldEditor::unloadProject()
 	}
 
 	// Delete terrain
-	if (_fe3d.skyEntity_isExisting("@terrain"))
+	if (_fe3d.terrainEntity_isExisting("@terrain"))
 	{
-		_fe3d.skyEntity_delete("@terrain");
+		_fe3d.terrainEntity_delete("@terrain");
 	}
 
 	// Delete water
-	if (_fe3d.skyEntity_isExisting("@water"))
+	if (_fe3d.waterEntity_isExisting("@water"))
 	{
-		_fe3d.skyEntity_delete("@water");
+		_fe3d.waterEntity_delete("@water");
 	}
 
 	// Clear variables
@@ -121,22 +153,30 @@ void WorldEditor::unloadProject()
 	_currentProjectName = "";
 	_terrainHeightmapPath = "";
 	_terrainDiffusemapPath = "";
-	_activeWritefield = "";
+	_activeWritefieldID = "";
 	_terrainBlendmapPath = "";
 	_terrainRedPath = "";
 	_terrainGreenPath = "";
 	_terrainBluePath = "";
+	_waterDudvmapPath = "";
+	_waterNormalmapPath = "";
 	_terrainSize = 0.0f;
 	_maxTerrainHeight = 0.0f;
 	_terrainUvRepeat = 0.0f;
-	_redUvRepeat = 0.0f;
-	_greenUvRepeat = 0.0f;
-	_blueUvRepeat = 0.0f;
+	_terrainRedUvRepeat = 0.0f;
+	_terrainGreenUvRepeat = 0.0f;
+	_terrainBlueUvRepeat = 0.0f;
+	_terrainCameraHeight = 0.0f;
+	_terrainCameraDistance = 0.0f;
+	_waterSize = 0.0f;
+	_waterRepeat = 0.0f;
+	_waterHeight = 0.0f;
+	_waterCameraHeight = 0.0f;
+	_waterCameraDistance = 0.0f;
 	_cameraRotationSpeed = 0.0f;
 	_cameraDistance = 0.0f;
 	_cameraHeight = 0.0f;
 	_totalCameraRotation = 0.0f;
-	_skyTexturePaths.clear();
 	_isLoaded = false;
 }
 
@@ -158,10 +198,25 @@ void WorldEditor::update(float delta)
 			{
 				_window->setActiveScreen("terrainManagement");
 				_currentWorldPart = WorldPart::TERRAIN;
+
+				// Load camera options
+				if (_fe3d.terrainEntity_isExisting("@terrain"))
+				{
+					_cameraHeight = _terrainCameraHeight;
+					_cameraDistance = _terrainCameraDistance;
+				}
 			}
 			else if (screen->getButton("water")->isHovered())
 			{
+				_window->setActiveScreen("waterManagement");
 				_currentWorldPart = WorldPart::WATER;
+
+				// Load camera options
+				if (_fe3d.waterEntity_isExisting("@water"))
+				{
+					_cameraHeight = _waterCameraHeight;
+					_cameraDistance = _waterCameraDistance;
+				}
 			}
 			else if (screen->getButton("back")->isHovered())
 			{

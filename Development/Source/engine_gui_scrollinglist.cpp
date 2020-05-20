@@ -3,7 +3,7 @@
 EngineGuiScrollingList::EngineGuiScrollingList(
 	FabiEngine3D& fe3d, const string& parentID, const string& ID, vec2 position, vec2 size, vec3 color,
 	vec3 buttonColor, vec3 buttonHoverColor, vec3 textColor, vec3 textHoverColor, vec2 charSize) :
-	EngineGuiRectangle(fe3d, parentID, ID, position, size, color),
+	EngineGuiRectangle(fe3d, parentID + "_scrollinglist", ID, position, size, color),
 	_buttonColor(buttonColor),
 	_buttonHoverColor(buttonHoverColor),
 	_textColor(textColor),
@@ -32,7 +32,7 @@ void EngineGuiScrollingList::addButton(const string& ID, string textContent)
 
 	// Add button
 	vec4 dimensions = _convertDimensions(vec2(x, y), vec2(w, h));
-	_buttons.push_back(make_shared<EngineGuiButton>(_fe3d, _ID, ID, vec2(dimensions.x, dimensions.y), vec2(dimensions.z, dimensions.w), _buttonColor, _buttonHoverColor, textContent, _textColor, _textHoverColor));
+	_buttons.push_back(make_shared<EngineGuiButton>(_fe3d, _parentID, ID, vec2(dimensions.x, dimensions.y), vec2(dimensions.z, dimensions.w), _buttonColor, _buttonHoverColor, textContent, _textColor, _textHoverColor));
 	
 	// Define list boundaries
 	string rectangleID = _buttons.back()->getRectangle()->getEntityID();

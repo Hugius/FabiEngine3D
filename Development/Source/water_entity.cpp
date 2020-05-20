@@ -61,6 +61,11 @@ void WaterEntity::setSurfaceHeight(float val)
 	_surfaceHeight = val;
 }
 
+void WaterEntity::setSize(float val)
+{
+	_size = val;
+}
+
 void WaterEntity::setTransparency(float val)
 {
 	_transparency = val;
@@ -114,6 +119,11 @@ const float WaterEntity::getShininess() const
 const float WaterEntity::getSurfaceHeight() const
 {
 	return _surfaceHeight;
+}
+
+const float WaterEntity::getSize() const
+{
+	return _size;
 }
 
 const float WaterEntity::getTransparency() const

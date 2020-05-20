@@ -45,34 +45,37 @@ void TerrainEntityManager::addTerrainEntity
 		size = float(sqrt(pixelColors.size()));
 	}
 
+	// Define half size
+	float halfSize = size / 2.0f;
+
 	// Generate terrain vertices
-	for (float x = 0.0f; x < size; x++)
+	for (float x = -halfSize; x < halfSize; x++)
 	{
-		for (float z = 0.0f; z < size; z++)
+		for (float z = -halfSize; z < halfSize; z++)
 		{
 			float firstVertexX = pos.x + x;
-			float firstVertexY = pos.y + _getPixelHeight(x, z + 1, size, maxHeight, pixelColors);
+			float firstVertexY = pos.y + _getPixelHeight(x + halfSize, z + halfSize + 1, size, maxHeight, pixelColors);
 			float firstVertexZ = pos.z + z + 1;
-			float firstUvX = (x / size)*uvRepeat;
-			float firstUvY = ((z / size) + (1.0f / size))*uvRepeat;
+			float firstUvX = (x / size) * uvRepeat;
+			float firstUvY = ((z / size) + (1.0f / size)) * uvRepeat;
 
 			float secondVertexX = pos.x + x + 1;
-			float secondVertexY = pos.y + _getPixelHeight(x + 1, z + 1, size, maxHeight, pixelColors);
+			float secondVertexY = pos.y + _getPixelHeight(x + halfSize + 1, z + halfSize + 1, size, maxHeight, pixelColors);
 			float secondVertexZ = pos.z + z + 1;
-			float secondUvX = ((x / size) + (1.0f / size))*uvRepeat;
-			float secondUvY = ((z / size) + (1.0f / size))*uvRepeat;
+			float secondUvX = ((x / size) + (1.0f / size)) * uvRepeat;
+			float secondUvY = ((z / size) + (1.0f / size)) * uvRepeat;
 
 			float thirdVertexX = pos.x + x + 1;
-			float thirdVertexY = pos.y + _getPixelHeight(x + 1, z, size, maxHeight, pixelColors);
+			float thirdVertexY = pos.y + _getPixelHeight(x + halfSize + 1, z + halfSize, size, maxHeight, pixelColors);
 			float thirdVertexZ = pos.z + z;
-			float thirdUvX = ((x / size) + (1.0f / size))*uvRepeat;
-			float thirdUvY = (z / size)*uvRepeat;
+			float thirdUvX = ((x / size) + (1.0f / size)) * uvRepeat;
+			float thirdUvY = (z / size) * uvRepeat;
 
 			float fourthVertexX = pos.x + x;
-			float fourthVertexY = pos.y + _getPixelHeight(x, z, size, maxHeight, pixelColors);
+			float fourthVertexY = pos.y + _getPixelHeight(x + halfSize, z + halfSize, size, maxHeight, pixelColors);
 			float fourthVertexZ = pos.z + z;
-			float fourthUvX = (x / size)*uvRepeat;
-			float fourthUvY = (z / size)*uvRepeat;
+			float fourthUvX = (x / size) * uvRepeat;
+			float fourthUvY = (z / size) * uvRepeat;
 
 			//// First triangle normals
 			//vec3 tempOne = vec3(secondVertexX, secondVertexY, secondVertexZ) - vec3(firstVertexX, firstVertexY, firstVertexZ);
@@ -87,10 +90,10 @@ void TerrainEntityManager::addTerrainEntity
 			//normalTwo = glm::normalize(normalTwo);
 
 			// Calculate normals
-			float LH = _getPixelHeight(x - 1, z, size, maxHeight, pixelColors);
-			float RH = _getPixelHeight(x + 1, z, size, maxHeight, pixelColors);
-			float UH = _getPixelHeight(x, z + 1, size, maxHeight, pixelColors);
-			float DH = _getPixelHeight(x, z - 1, size, maxHeight, pixelColors);
+			float LH = _getPixelHeight(x + halfSize - 1, z + halfSize, size, maxHeight, pixelColors);
+			float RH = _getPixelHeight(x + halfSize + 1, z + halfSize, size, maxHeight, pixelColors);
+			float UH = _getPixelHeight(x + halfSize, z + halfSize + 1, size, maxHeight, pixelColors);
+			float DH = _getPixelHeight(x + halfSize, z + halfSize - 1, size, maxHeight, pixelColors);
 			vec3 normal = vec3(LH - RH, 2.0f, DH - UH);
 			normal = glm::normalize(normal);
 
@@ -155,9 +158,9 @@ void TerrainEntityManager::addTerrainEntity
 	getEntity(ID)->addOglBuffer(new OpenGLBuffer(SHAPE_3D, &terrainVertices[0], terrainVertices.size()));
 	getEntity(ID)->setDiffuseMap(_texLoader.getTexture(textureName, true, true));
 	getEntity(ID)->setPixelColors(pixelColors);
-	getEntity(ID)->setSize(size);
 	getEntity(ID)->setHeight(maxHeight);
 	getEntity(ID)->setBlendRepeat(uvRepeat);
+	getEntity(ID)->setSize(size);
 }
 
 void TerrainEntityManager::addBlendingToTerrain
@@ -183,17 +186,29 @@ float TerrainEntityManager::getPixelHeight(float x, float z)
 	return _getPixelHeight(x, z, entity->getSize(), entity->getHeight(), entity->getPixelColors());
 }
 
-float TerrainEntityManager::_getPixelHeight(float x, float z, float size, float height, const vector<float>& pixelColors)
+float TerrainEntityManager::_getPixelHeight(float x, float z, float size, float maxHeight, const vector<float>& pixelColors)
 {
+	// If reached end of terrain X
+	if (x == size)
+	{
+		x--;
+	}
+
+	// If reached end of terrain Z
+	if(z == size)
+	{
+		z--;
+	}
+
 	// Checking if coordinate inside bounds
-	if (x < 0 || x >= size || z < 0 || z >= size)
+	if (x < 0 || x > size || z < 0 || z > size)
 	{
 		return 0.0f;
 	}
 
 	// Returning the corresponding height
 	int index = (int(x) * int(size)) + int(z);
-	return ((pixelColors[index]) / 255.0f) * height;
+	return ((pixelColors[index]) / 255.0f) * maxHeight;
 }
 
 bool TerrainEntityManager::isInside(float x, float z)

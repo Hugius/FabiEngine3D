@@ -11,6 +11,7 @@ uniform mat4  u_projectionMatrix;
 uniform float u_tileAmount;
 uniform float u_timeX;
 uniform float u_timeZ;
+uniform float u_customHeightOffset;
 uniform bool  u_waving;
 
 // Out variables
@@ -23,6 +24,7 @@ void main()
 {
 	// In variables
 	vec3 newPos = v_pos;
+	newPos.y += u_customHeightOffset;
 
 	// Water sine waves
 	if(u_waving)
@@ -30,6 +32,7 @@ void main()
 		newPos.y += (0.3f * (sin(newPos.x*u_timeX*3.141592654f) * cos(newPos.z*u_timeZ*3.141592654f)));
 	}
 
+	// Camera spaces
 	vec4 worldSpace = vec4(v_pos, 1.0);
 	vec4 clipSpace  = u_projectionMatrix * u_viewMatrix * vec4(newPos, 1.0);
 

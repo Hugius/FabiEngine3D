@@ -6,7 +6,7 @@ EngineGuiButton::EngineGuiButton(FabiEngine3D& fe3d, const string& parentID, con
 	_ID(ID),
 	_parentID(parentID),
 	_rectangle(make_shared<EngineGuiRectangle>(fe3d, parentID + "_button", ID, position, size, color)),
-	_textfield(make_shared<EngineGuiTextfield>(fe3d, parentID + "_button", ID, position, size * 0.8f, textContent, textColor)),
+	_textfield(make_shared<EngineGuiTextfield>(fe3d, parentID + "_button", ID, position, vec2(size.x * 0.8f, size.y * 0.7f), textContent, textColor)),
 	_sizeIncreaseEnabled(sizeIncreaseEnabled),
 	_colorChangeEnabled(colorChangeEnabled),
 	_hoverColor(hoverColor),
@@ -45,9 +45,8 @@ void EngineGuiButton::_updateHovering(bool hoverable)
 					// Update increased size
 					if (_sizeIncreaseEnabled)
 					{
-						_fe3d.guiEntity_setSize(_rectangle->getEntityID(), _rectangle->getOriginalSize() * 1.15f);
-
-						_fe3d.textEntity_setSize(_textfield->getEntityID(), _textfield->getOriginalSize() * 1.15f);
+						_fe3d.guiEntity_setSize(_rectangle->getEntityID(), _rectangle->getOriginalSize() * 1.1f);
+						_fe3d.textEntity_setSize(_textfield->getEntityID(), _textfield->getOriginalSize() * 1.1f);
 
 					}
 

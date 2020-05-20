@@ -33,7 +33,7 @@ void ModelEditor::initializeGUI()
 	_window->addScreen("modelEditingMain");
 	_window->getScreen("modelEditingMain")->addButton("mesh", vec2(0.0f, 0.63f), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "3D mesh", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 	_window->getScreen("modelEditingMain")->addButton("options", vec2(0.0f, 0.21), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Options", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
-	_window->getScreen("modelEditingMain")->addButton("size", vec2(0.0f, -0.21), vec2(0.9f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Size", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_window->getScreen("modelEditingMain")->addButton("size", vec2(0.0f, -0.21), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Size", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 	_window->getScreen("modelEditingMain")->addButton("back", vec2(0.0f, -0.63f), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Go back", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 
 	// Left-viewport: mainWindow - modelEditingMesh
@@ -46,23 +46,23 @@ void ModelEditor::initializeGUI()
 	
 	// Left-viewport: mainWindow - modelEditingOptions
 	_window->addScreen("modelEditingOptions");
-	_window->getScreen("modelEditingOptions")->addScrollingList("optionsList", vec2(0.0f, 0.1f), vec2(1.8, 1.75f), vec3(0.3f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, _gui->leftVpTextColor, _gui->leftVpTextHoverColor, vec2(0.15f, 0.1f));
-	_window->getScreen("modelEditingOptions")->getScrollingList("optionsList")->addButton("faceculled", "Culling: OFF");
-	_window->getScreen("modelEditingOptions")->getScrollingList("optionsList")->addButton("shadowed", "Shadowed : ON");
-	_window->getScreen("modelEditingOptions")->getScrollingList("optionsList")->addButton("transparent", "No-white: OFF");
-	_window->getScreen("modelEditingOptions")->getScrollingList("optionsList")->addButton("specular", "Specular: OFF");
-	_window->getScreen("modelEditingOptions")->getScrollingList("optionsList")->addButton("setColor", "Set color");
-	_window->getScreen("modelEditingOptions")->getScrollingList("optionsList")->addButton("uvRepeat", "Set UV-repeat");
+	_window->getScreen("modelEditingOptions")->addScrollingList("buttonList", vec2(0.0f, 0.1f), vec2(1.8, 1.75f), vec3(0.3f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, _gui->leftVpTextColor, _gui->leftVpTextHoverColor, vec2(0.15f, 0.1f));
+	_window->getScreen("modelEditingOptions")->getScrollingList("buttonList")->addButton("faceculled", "Culling: OFF");
+	_window->getScreen("modelEditingOptions")->getScrollingList("buttonList")->addButton("shadowed", "Shadowed : ON");
+	_window->getScreen("modelEditingOptions")->getScrollingList("buttonList")->addButton("transparent", "No-white: OFF");
+	_window->getScreen("modelEditingOptions")->getScrollingList("buttonList")->addButton("specular", "Specular: OFF");
+	_window->getScreen("modelEditingOptions")->getScrollingList("buttonList")->addButton("setColor", "Set color");
+	_window->getScreen("modelEditingOptions")->getScrollingList("buttonList")->addButton("uvRepeat", "Set UV-repeat");
 	_window->getScreen("modelEditingOptions")->addButton("back", vec2(0.0f, -0.9f), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Go back", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 
 	// Left-viewport: mainWindow - modelEditingSize
 	_window->addScreen("modelEditingSize");
-	_window->getScreen("modelEditingSize")->addScrollingList("sizeList", vec2(0.0f, 0.1f), vec2(1.9, 1.75f), vec3(0.3f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, _gui->leftVpTextColor, _gui->leftVpTextHoverColor, vec2(0.15f, 0.1f));
-	_window->getScreen("modelEditingSize")->getScrollingList("sizeList")->addButton("setSize", "Set mesh size");
-	_window->getScreen("modelEditingSize")->getScrollingList("sizeList")->addButton("toggleResizeMesh", "Mesh resize: OFF");
-	_window->getScreen("modelEditingSize")->getScrollingList("sizeList")->addButton("toggleBoxView", "Hitbox: OFF");
-	_window->getScreen("modelEditingSize")->getScrollingList("sizeList")->addButton("toggleResizeBox", "Box resize: OFF");
-	_window->getScreen("modelEditingSize")->getScrollingList("sizeList")->addButton("resizeBoxDir", "Direction: X");
+	_window->getScreen("modelEditingSize")->addScrollingList("buttonList", vec2(0.0f, 0.1f), vec2(1.9, 1.75f), vec3(0.3f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, _gui->leftVpTextColor, _gui->leftVpTextHoverColor, vec2(0.15f, 0.1f));
+	_window->getScreen("modelEditingSize")->getScrollingList("buttonList")->addButton("setSize", "Set mesh size");
+	_window->getScreen("modelEditingSize")->getScrollingList("buttonList")->addButton("toggleResizeMesh", "Mesh resize: OFF");
+	_window->getScreen("modelEditingSize")->getScrollingList("buttonList")->addButton("toggleBoxView", "Hitbox: OFF");
+	_window->getScreen("modelEditingSize")->getScrollingList("buttonList")->addButton("toggleResizeBox", "Box resize: OFF");
+	_window->getScreen("modelEditingSize")->getScrollingList("buttonList")->addButton("resizeBoxDir", "Direction: X");
 	_window->getScreen("modelEditingSize")->addButton("back", vec2(0.0f, -0.9f), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Go back", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 }
 
@@ -73,14 +73,14 @@ void ModelEditor::loadProject()
 	_fe3d.camera_enableLookat(vec3(0.0f));
 
 	// Graphics
-	_fe3d.gfx_addAmbientLighting(0.75f);
-	_fe3d.gfx_addDirectionalLighting(vec3(1000.0f), 0.75f);
-	_fe3d.gfx_addLightMapping();
-	_fe3d.gfx_addSkyReflections(0.25f);
-	_fe3d.gfx_addMSAA();
-	_fe3d.gfx_addSceneReflections(0.0f, 0.15f);
-	_fe3d.gfx_addShadows(vec3(50.0f, 50.0f, 0.0f), vec3(0.0f), 100.0f, 150.0);
-	_fe3d.gfx_addSpecularLighting(16.0f);
+	_fe3d.gfx_enableAmbientLighting(0.75f);
+	_fe3d.gfx_enableDirectionalLighting(vec3(1000.0f), 0.75f);
+	_fe3d.gfx_enableLightMapping();
+	_fe3d.gfx_enableSkyReflections(0.25f);
+	_fe3d.gfx_enableMSAA();
+	_fe3d.gfx_enableSceneReflections(0.0f, 0.15f);
+	_fe3d.gfx_enableShadows(vec3(50.0f, 50.0f, 0.0f), vec3(0.0f), 100.0f, 150.0);
+	_fe3d.gfx_enableSpecularLighting(16.0f);
 	
 	// 3D Environment
 	_fe3d.gameEntity_add("@modelEditorGrid", "Engine\\OBJs\\plane.obj", vec3(0.0f), vec3(0.0f), vec3(100.0f, 1.0f, 100.0f));
@@ -96,7 +96,7 @@ void ModelEditor::loadProject()
 	_fe3d.skyEntity_select("@modelEditorSky");
 
 	// Other
-	_gui->getGlobalScreen()->addTextfield("currentModelName", vec2(-0.625f, 0.85f), vec2(0.5f, 0.1f), "", vec3(1.0f));
+	_gui->getGlobalScreen()->addTextfield("currentModelName", vec2(0.0f, 0.85f), vec2(0.5f, 0.1f), "", vec3(1.0f));
 	_isLoaded = true;
 
 	// Load models file
@@ -195,14 +195,14 @@ void ModelEditor::saveProject()
 void ModelEditor::unloadProject()
 {
 	// Graphics
-	_fe3d.gfx_removeAmbientLighting();
-	_fe3d.gfx_removeDirectionalLighting();
-	_fe3d.gfx_removeLightMapping();
-	_fe3d.gfx_removeSkyReflections();
-	_fe3d.gfx_removeMSAA();
-	_fe3d.gfx_removeSceneReflections();
-	_fe3d.gfx_removeShadows();
-	_fe3d.gfx_removeSpecularLighting();
+	_fe3d.gfx_disableAmbientLighting();
+	_fe3d.gfx_disableDirectionalLighting();
+	_fe3d.gfx_disableLightMapping();
+	_fe3d.gfx_disableSkyReflections();
+	_fe3d.gfx_disableMSAA();
+	_fe3d.gfx_disableSceneReflections();
+	_fe3d.gfx_disableShadows();
+	_fe3d.gfx_disableSpecularLighting();
 
 	// 3D environment
 	_fe3d.gameEntity_delete("@modelEditorGrid");

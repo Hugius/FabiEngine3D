@@ -28,9 +28,6 @@
     <ClCompile Include="Source\core_engine.cpp">
       <Filter>src\Core System</Filter>
     </ClCompile>
-    <ClCompile Include="Source\core_engine_core.cpp">
-      <Filter>src\Core System</Filter>
-    </ClCompile>
     <ClCompile Include="Source\fabi_engine_3d.cpp">
       <Filter>src\Core System</Filter>
     </ClCompile>
@@ -279,6 +276,9 @@
     </ClCompile>
     <ClCompile Include="Source\world_editor_updates_water.cpp">
       <Filter>src\Editor System\World Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\core_engine_updates.cpp">
+      <Filter>src\Core System</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

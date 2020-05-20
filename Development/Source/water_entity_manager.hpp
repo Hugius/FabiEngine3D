@@ -14,7 +14,7 @@ public:
 
 	void addWaterEntity
 	(
-		const string & ID, const string & assetName, vec3 pos, float size,
+		const string & ID, const string& dudvMapPath, const string& normalMapPath, vec3 pos, float size,
 		float tileRepeat, float speed, bool waving, 
 		bool rippling, vec3 color, float shininess
 	);

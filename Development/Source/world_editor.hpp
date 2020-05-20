@@ -22,45 +22,65 @@ public:
 
 private:
 	void _upateSkyManagement();
-	void _updateSkyCamera();
 	void _updateSkyMesh();
 	void _updateSkyOptions();
 	void _upateTerrainManagement();
-	void _updateTerrainCamera();
 	void _updateTerrainMesh();
 	void _updateTerrainBlendmap();
 	void _upateWaterManagement();
-	void _addValueForm(string ID, float value);
+	void _updateWaterMesh();
+	void _updateWaterOptions();
+	void _updateFPSCamera();
+	void _updateTPSCamera();
+	void _addValueForm(string ID, string title, float value);
 	void _checkValueForm(string ID, float& value);
 	void _removeValueForm();
 
+	// General
 	bool _isLoaded = false;
-
 	WorldPart _currentWorldPart = WorldPart::NONE;
-
-	string _currentProjectName = "";
-	string _terrainHeightmapPath = "";
-	string _terrainDiffusemapPath = "";
-	string _activeWritefield = "";
-	string _terrainBlendmapPath = "";
-	string _terrainRedPath = "";
-	string _terrainGreenPath = "";
-	string _terrainBluePath = "";
-
-	float _terrainSize = 0.0f;
-	float _maxTerrainHeight = 0.0f;
-	float _terrainUvRepeat = 0.0f;
-	float _redUvRepeat = 0.0f;
-	float _greenUvRepeat = 0.0f;
-	float _blueUvRepeat = 0.0f;
+	float _delta = 0.0f;
 	float _cameraRotationSpeed = 0.0f;
 	float _cameraDistance = 0.0f;
 	float _cameraHeight = 0.0f;
 	float _totalCameraRotation = 0.0f;
-
-	vector<string> _skyTexturePaths;
-
+	string _currentProjectName = "";
+	string _activeWritefieldID = "";
 	FabiEngine3D& _fe3d;
 	shared_ptr<EngineGuiManager> _gui;
 	shared_ptr<EngineGuiWindow> _window;
+
+	// Sky
+	vector<string> _skyTexturePaths;
+
+	// Terrain
+	string _terrainHeightmapPath = "";
+	string _terrainDiffusemapPath = "";
+	string _terrainBlendmapPath = "";
+	string _terrainRedPath = "";
+	string _terrainGreenPath = "";
+	string _terrainBluePath = "";
+	float _terrainSize = 0.0f;
+	float _maxTerrainHeight = 0.0f;
+	float _terrainUvRepeat = 0.0f;
+	float _terrainRedUvRepeat = 0.0f;
+	float _terrainGreenUvRepeat = 0.0f;
+	float _terrainBlueUvRepeat = 0.0f;
+	float _terrainCameraHeight = 0.0f;
+	float _terrainCameraDistance = 0.0f;
+
+	// Water
+	string _waterDudvmapPath = "";
+	string _waterNormalmapPath = "";
+	bool _waterWavesEnabled = false;
+	bool _waterRipplingEnabled = false;
+	vec3 _waterColor = vec3(1.0f);
+	float _waterSize = 0.0f;
+	float _waterRepeat = 0.0f;
+	float _waterHeight = 0.0f;
+	float _waterSpeed = 0.0f;
+	float _waterTransparency = 0.0f;
+	float _waterShininess = 16.0f;
+	float _waterCameraHeight = 0.0f;
+	float _waterCameraDistance = 0.0f;
 };

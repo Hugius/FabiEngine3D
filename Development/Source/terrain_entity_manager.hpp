@@ -32,7 +32,7 @@ public:
 	void update(float delta) override {}
 
 private:
-	float _getPixelHeight(float x, float z, float size, float height, const vector<float>& pixelColors);
+	float _getPixelHeight(float x, float z, float size, float maxHeight, const vector<float>& pixelColors);
 
 	string _selectedID = "";
 };

@@ -50,6 +50,7 @@ void WaterEntityRenderer::render(const WaterEntity * entity)
 			_shader.uploadUniform("u_color", entity->getColor());
 			_shader.uploadUniform("u_shininess", entity->getShininess());
 			_shader.uploadUniform("u_transparency", entity->getTransparency());
+			_shader.uploadUniform("u_customHeightOffset", entity->getSurfaceHeight());
 
 			// Texture uniforms
 			_shader.uploadUniform("u_sampler_reflectionMap", 0);

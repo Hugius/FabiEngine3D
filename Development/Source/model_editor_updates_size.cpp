@@ -5,7 +5,7 @@
 void ModelEditor::_updateModelEditingSize()
 {
 	auto screen = _window->getScreen("modelEditingSize");
-	auto scrollingList = screen->getScrollingList("sizeList");
+	auto scrollingList = screen->getScrollingList("buttonList");
 	// GUI management 
 	if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
 	{

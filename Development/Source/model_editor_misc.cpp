@@ -7,13 +7,16 @@ void ModelEditor::_updateMiscellaneous()
 	// Update reference model visibility
 	if (_isLoaded)
 	{
-		if (_fe3d.input_getKeyToggled(Input::KEY_R))
+		if (!_gui->isFocused())
 		{
-			_fe3d.gameEntity_hide("@cube");
-		}
-		else
-		{
-			_fe3d.gameEntity_show("@cube");
+			if (_fe3d.input_getKeyToggled(Input::KEY_R))
+			{
+				_fe3d.gameEntity_hide("@cube");
+			}
+			else
+			{
+				_fe3d.gameEntity_show("@cube");
+			}
 		}
 	}
 }

@@ -99,26 +99,22 @@ public:
 	);
 
 	// Water entity interface
-	void waterEntity_add
-	(
-		const string& ID, const string& dudvMapPath, const string& normalMapPath, vec3 pos, float size,
-		float tileRepeat, float speed, bool waving,
-		bool rippling, vec3 color, float shininess
-	);
+	void waterEntity_add(const string& ID, vec3 pos, float size);
 	void waterEntity_delete(const string& ID);
 	void waterEntity_hide(const string& ID);
 	void waterEntity_show(const string& ID);
 	bool waterEntity_isExisting(const string& ID);
 	void waterEntity_select(const string& ID);
-	void waterEntity_setSpeed(const string& ID, float speed);
-	void waterEntity_enableWaving(const string& ID);
-	void waterEntity_disableWaving(const string& ID);
-	void waterEntity_enableRippling(const string& ID);
-	void waterEntity_disableRippling(const string& ID);
-	void waterEntity_setColor(const string& ID, vec3 color);
-	void waterEntity_setShininess(const string& ID, float shininess);
+	void waterEntity_setReflective(const string& ID, bool enabled);
+	void waterEntity_setRefractive(const string& ID, bool enabled);
+	void waterEntity_setWaving(const string& ID, bool enabled);
+	void waterEntity_setRippling(const string& ID, const string& dudvMapPath, bool enabled);
+	void waterEntity_setSpecular(const string& ID, const string& normalMapPath, float shininess, bool enabled);
 	void waterEntity_setTransparency(const string& ID, float transparency);
+	void waterEntity_setColor(const string& ID, vec3 color);
 	void waterEntity_setSurfaceHeight(const string& ID, float height);
+	void waterEntity_setUvRepeat(const string& ID, float repeat);
+	void waterEntity_setSpeed(const string& ID, float speed);
 	string waterEntity_getSelectedID();
 
 	// Game entity interface

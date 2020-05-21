@@ -11,14 +11,7 @@ public:
 	WaterEntity * getSelectedWater();
 
 	void selectWater(const string & ID);
-
-	void addWaterEntity
-	(
-		const string & ID, const string& dudvMapPath, const string& normalMapPath, vec3 pos, float size,
-		float tileRepeat, float speed, bool waving, 
-		bool rippling, vec3 color, float shininess
-	);
-
+	void addWaterEntity(const string & ID, vec3 pos, float size);
 	void update(float delta) override;
 
 private:

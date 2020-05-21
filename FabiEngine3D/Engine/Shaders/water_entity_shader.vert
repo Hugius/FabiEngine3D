@@ -8,7 +8,7 @@ layout(location = 1) in vec2 v_uv;
 // Uniforms
 uniform mat4  u_viewMatrix;
 uniform mat4  u_projectionMatrix;
-uniform float u_tileAmount;
+uniform float u_uvRepeat;
 uniform float u_timeX;
 uniform float u_timeZ;
 uniform float u_customHeightOffset;
@@ -41,6 +41,6 @@ void main()
 
 	// Out variables
 	f_pos  = worldSpace.xyz;
-	f_uv   = vec2(v_uv.x / 2.0 + 0.5, v_uv.y / 2.0 + 0.5) * u_tileAmount;
+	f_uv   = vec2(v_uv.x / 2.0 + 0.5, v_uv.y / 2.0 + 0.5) * u_uvRepeat;
 	f_clip = clipSpace;
 }

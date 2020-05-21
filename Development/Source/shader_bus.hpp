@@ -15,7 +15,7 @@ public:
 	void setSkyReflectionCubeMapDay(GLuint val);
 	void setSkyReflectionCubeMapNight(GLuint val);
 	void setSceneReflectionMap(GLuint val);
-	void setWaterRefractionMap(GLuint val);
+	void setSceneRefractionMap(GLuint val);
 	void setShadowMap(GLuint val);
 	void setBloomMap(GLuint val);
 	void setBloomedDofSceneMap(GLuint val);
@@ -79,7 +79,7 @@ public:
 	const GLuint getSkyReflectionCubeMapDay()     const;
 	const GLuint getSceneReflectionCubeMapNight() const;
 	const GLuint getSceneReflectionMap()          const;
-	const GLuint getWaterRefractionMap()          const;
+	const GLuint getSceneRefractionMap()          const;
 	const GLuint getShadowMap()                   const;
 	const GLuint getBloomMap()                    const;
 	const GLuint getBloomedDofSceneMap()          const;
@@ -144,7 +144,7 @@ private:
 	GLuint _skyReflectionCubeMapDay   = 0;
 	GLuint _skyReflectionCubeMapNight = 0;
 	GLuint _sceneReflectionMap        = 0;
-	GLuint _waterRefractionMap        = 0;
+	GLuint _sceneRefractionMap        = 0;
 	GLuint _shadowMap                 = 0;
 	GLuint _bloomMap                  = 0;
 	GLuint _bloomedDofSceneMap        = 0;

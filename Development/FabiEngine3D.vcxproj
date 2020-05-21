@@ -295,7 +295,7 @@
     <ClCompile Include="Source\input_handler.cpp" />
     <ClCompile Include="Source\post_renderer.cpp" />
     <ClCompile Include="Source\base_entity_renderer.cpp" />
-    <ClCompile Include="Source\render_engine.cpp" />
+    <ClCompile Include="Source\render_engine_core.cpp" />
     <ClCompile Include="Source\opengl_shader.cpp" />
     <ClCompile Include="Source\shadow_manager.cpp" />
     <ClCompile Include="Source\shadow_renderer.cpp" />

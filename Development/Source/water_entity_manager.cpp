@@ -29,12 +29,7 @@ void WaterEntityManager::selectWater(const string & ID)
 	_selectedID = ID;
 }
 
-void WaterEntityManager::addWaterEntity
-(
-	const string & ID, const string& dudvMapPath, const string& normalMapPath, vec3 pos, float size,
-	float tileRepeat, float speed, bool waving, 
-	bool rippling, vec3 color, float shininess
-)
+void WaterEntityManager::addWaterEntity(const string & ID, vec3 pos, float size)
 {
 	// Saving the surface height
 	float surfaceHeight = pos.y;
@@ -118,14 +113,6 @@ void WaterEntityManager::addWaterEntity
 
 	// Filly entity
 	getEntity(ID)->addOglBuffer(new OpenGLBuffer(SHAPE_SURFACE, &waterVertices[0], waterVertices.size()));
-	getEntity(ID)->setDudvMap(_texLoader.getTexture(dudvMapPath, true, true));
-	getEntity(ID)->setNormalMap(_texLoader.getTexture(normalMapPath, true, true));
-	getEntity(ID)->setTileRepeat(tileRepeat);
-	getEntity(ID)->setWavingSpeed(speed);
-	getEntity(ID)->setWaving(waving);
-	getEntity(ID)->setRippling(rippling);
-	getEntity(ID)->setColor(color);
-	getEntity(ID)->setShininess(shininess);
 	getEntity(ID)->setSurfaceHeight(surfaceHeight);
 	getEntity(ID)->setSize(size * 2.0f);
 }

@@ -25,7 +25,10 @@ uniform float u_farZ;
 uniform float u_transparency;
 uniform bool  u_fogEnabled;
 uniform bool  u_effectsEnabled;
-uniform bool  u_rippling;
+uniform bool  u_isRippling;
+uniform bool  u_isSpecular;
+uniform bool  u_isReflective;
+uniform bool  u_isRefractive;
 
 // Out variables
 layout(location = 0) out vec4 o_finalColor;
@@ -51,8 +54,9 @@ void main()
 
 vec4 getMainColor()
 {
-	// Normal definition
+	// Variables to be used
 	vec3 normal = vec3(0.0f, 1.0f, 0.0f);
+	float specStrength = 0.0f;
 
 	// Projective texture mapping
 	vec2 ndc = (f_clip.xy / f_clip.w) / 2.0 + 0.5;
@@ -66,7 +70,7 @@ vec4 getMainColor()
 	waterDepth = clamp(waterDepth / u_transparency, 0.0f, 1.0f);
 
 	// Rippling effect
-	if(u_rippling)
+	if(u_isRippling)
 	{
 		// DUDV mapping
 		vec2 distortedTexCoords = f_uv + texture(u_sampler_dudvMap, vec2(f_uv.x + u_wavePos, f_uv.y + u_wavePos)).rg * 0.1;
@@ -82,20 +86,42 @@ vec4 getMainColor()
 	}
 
 	// Specular lighting
-	vec3 lightDir      = normalize(u_dirLightPos - f_pos);
-	vec3 viewDir       = normalize(f_pos - u_cameraPos);
-	vec3 reflectDir    = reflect(normalize(lightDir), normal);
-	float specStrength = pow(max(dot(reflectDir, viewDir), 0.0f), u_shininess) * 0.5f;
+	if(u_isSpecular)
+	{
+		vec3 lightDir      = normalize(u_dirLightPos - f_pos);
+		vec3 viewDir       = normalize(f_pos - u_cameraPos);
+		vec3 reflectDir    = reflect(normalize(lightDir), normal);
+		specStrength = pow(max(dot(reflectDir, viewDir), 0.0f), u_shininess) * 0.5f;
+	}
 
 	// Finalizing fragment color
 	vec3 finalColor;
-	vec4 reflectionColor = texture(u_sampler_reflectionMap, vec2(texCoords.x,  texCoords.y)); // Reflection color
-	vec4 refractionColor = texture(u_sampler_refractionMap, vec2(texCoords.x, -texCoords.y)); // Refraction color
-	finalColor = mix(reflectionColor.rgb, refractionColor.rgb, 0.5f); // Combining reflection & refraction
-	finalColor = mix(finalColor, u_color, 0.1f); // Water color tint
+	vec3 reflectionColor = texture(u_sampler_reflectionMap, vec2(texCoords.x,  texCoords.y)).rgb; // Reflection color
+	vec3 refractionColor = texture(u_sampler_refractionMap, vec2(texCoords.x, -texCoords.y)).rgb; // Refraction color
+
+	if(u_isReflective && u_isRefractive) // Both
+	{
+		finalColor = mix(reflectionColor, refractionColor, 0.5f); // Combining reflection & refraction
+		finalColor = mix(finalColor, u_color, 0.1f); // Water color tint
+	}
+	else if(u_isReflective) // Only reflection
+	{
+		finalColor = reflectionColor;
+	}
+	else if(u_isRefractive) // Only refraction
+	{
+		finalColor = refractionColor;
+	}
+	else // None
+	{
+		finalColor = u_color;
+	}
 
 	// Specular highlights
-	finalColor += vec3(specStrength);
+	if(u_isSpecular)
+	{
+		finalColor += vec3(specStrength);
+	}
 
 	// Return final color
 	return vec4(finalColor, waterDepth);

@@ -210,6 +210,11 @@ const vec3 CameraManager::getFront() const
 	return _front;
 }
 
+const vec3 CameraManager::getLookat() const
+{
+	return _lookat;
+}
+
 const float CameraManager::getYaw() const
 {
 	return _yaw;
@@ -233,6 +238,11 @@ const float CameraManager::getFOV() const
 const bool CameraManager::isFirstPersonViewEnabled() const
 {
 	return _firstPersonViewEnabled;
+}
+
+const bool CameraManager::isLookatEnabled() const
+{
+	return _lookatEabled;
 }
 
 void CameraManager::translate(vec3 translation, float delta)

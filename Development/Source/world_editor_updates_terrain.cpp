@@ -28,7 +28,7 @@ void WorldEditor::_upateTerrainManagement()
 		screen->getButton("blendmap")->setHoverable(_fe3d.terrainEntity_isExisting("@terrain"));
 
 		// Update sub-menus
-		_updateTPSCamera();
+		_updateTerrainCamera();
 		_updateTerrainMesh();
 		_updateTerrainBlendmap();
 	}
@@ -85,8 +85,6 @@ void WorldEditor::_updateTerrainMesh()
 				// Camera
 				_terrainCameraHeight = _maxTerrainHeight * 1.25f;
 				_terrainCameraDistance = _terrainSize / 2.0f;
-				_cameraHeight = _terrainCameraHeight;
-				_cameraDistance = _terrainCameraDistance;
 			}
 			else if (screen->getButton("back")->isHovered())
 			{
@@ -190,5 +188,26 @@ void WorldEditor::_updateTerrainBlendmap()
 		screen->getScrollingList("buttonList")->getButton("greenRepeat")->setHoverable(loadedBlendmap && loadedGreenTex);
 		screen->getScrollingList("buttonList")->getButton("blueRepeat")->setHoverable(loadedBlendmap && loadedBlueTex);
 		screen->getButton("load")->setHoverable(loadedBlendmap && loadedRedTex && loadedGreenTex && loadedBlueTex && loadedRedUV && loadedGreenUV && loadedBlueUV);
+	}
+}
+
+void WorldEditor::_updateTerrainCamera()
+{
+	if (_fe3d.terrainEntity_isExisting("@terrain"))
+	{
+		// Get scroll wheel input
+		float rotationAcceleration = float(_fe3d.input_getMouseWheelY()) * 0.001f;
+		_cameraRotationSpeed += rotationAcceleration;
+		_cameraRotationSpeed *= 0.995f;
+		_totalCameraRotation += _cameraRotationSpeed;
+
+		// Calculate new camera position
+		float x = _terrainCameraDistance * sin(_totalCameraRotation);
+		float y = _terrainCameraHeight;
+		float z = _terrainCameraDistance * cos(_totalCameraRotation);
+
+		// Update camera position
+		_fe3d.camera_setPosition(vec3(x, y, z));
+		_fe3d.camera_enableLookat(vec3(0.0f));
 	}
 }

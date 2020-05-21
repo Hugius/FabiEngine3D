@@ -4,10 +4,23 @@
 // Capturing reflection texture
 void RenderEngine::_captureSceneReflections(CameraManager & camera)
 {
-	if ((_entityBus->getWaterEntity() != nullptr && _shaderBus.isWaterEffectsEnabled()) || _shaderBus.isSceneReflectionsEnabled())
+	bool waterReflectionEnabled = _entityBus->getWaterEntity() != nullptr && _shaderBus.isWaterEffectsEnabled();
+	waterReflectionEnabled = waterReflectionEnabled && _entityBus->getWaterEntity()->isReflective();
+	bool sceneReflectionEnabled = _shaderBus.isSceneReflectionsEnabled();
+
+	// Check if needed to capture scene
+	if (waterReflectionEnabled || sceneReflectionEnabled)
 	{
 		// Calculate distance between camera and reflection surface
-		float cameraDistance = (camera.getPosition().y - _shaderBus.getSceneReflectionHeight());
+		float cameraDistance;
+		if (camera.isLookatEnabled())
+		{
+			cameraDistance = (camera.getPosition().y - camera.getLookat().y);
+		}
+		else
+		{
+			cameraDistance = (camera.getPosition().y - _shaderBus.getSceneReflectionHeight());
+		}
 
 		// Start capturing reflection
 		glEnable(GL_CLIP_DISTANCE0);
@@ -46,22 +59,22 @@ void RenderEngine::_captureSceneReflections(CameraManager & camera)
 }
 
 // Capturing water refraction texture
-void RenderEngine::_captureWaterRefractions()
+void RenderEngine::_captureSceneRefractions()
 {
-	if ((_entityBus->getWaterEntity() != nullptr && _shaderBus.isWaterEffectsEnabled()))
+	if (_entityBus->getWaterEntity() != nullptr && _shaderBus.isWaterEffectsEnabled() && _entityBus->getWaterEntity()->isRefractive())
 	{
 		// Bind
-		_waterRefractionFramebuffer.bind();
+		_sceneRefractionFramebuffer.bind();
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		// Render scene
 		_renderTerrainEntity();
 
 		// Unbind
-		_waterRefractionFramebuffer.unbind();
+		_sceneRefractionFramebuffer.unbind();
 
 		// Assign texture
-		_shaderBus.setWaterRefractionMap(_waterRefractionFramebuffer.getTexture(0));
+		_shaderBus.setSceneRefractionMap(_sceneRefractionFramebuffer.getTexture(0));
 	}
 }
 

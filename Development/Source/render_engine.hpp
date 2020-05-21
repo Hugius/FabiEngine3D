@@ -67,7 +67,7 @@ private:
 	OpenGLFramebuffer _msaaFramebuffer;
 	OpenGLFramebuffer _aaProcessorFramebuffer;
 	OpenGLFramebuffer _sceneReflectionFramebuffer;
-	OpenGLFramebuffer _waterRefractionFramebuffer;
+	OpenGLFramebuffer _sceneRefractionFramebuffer;
 	OpenGLFramebuffer _shadowFramebuffer;
 	OpenGLFramebuffer _bloomHdrFramebuffer;
 	OpenGLFramebuffer _bloomDofAdditionFramebuffer;
@@ -75,7 +75,7 @@ private:
 
 	// Capturing functions
 	void _captureSceneReflections(CameraManager & camera);
-	void _captureWaterRefractions();
+	void _captureSceneRefractions();
 	void _captureShadows();
 	void _captureBloom();
 	void _captureDepth();

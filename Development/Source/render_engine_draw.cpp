@@ -154,7 +154,7 @@ void RenderEngine::_renderDebugScreens()
 
 	// Refraction scene
 	GuiEntity refractionSurface;
-	refractionSurface.setDiffuseMap(_shaderBus.getWaterRefractionMap());
+	refractionSurface.setDiffuseMap(_shaderBus.getSceneRefractionMap());
 	refractionSurface.load("refractionSurface");
 	refractionSurface.addOglBuffer(new OpenGLBuffer(0.75f, 0.75f, 0.5f, 0.5f, true));
 	refractionSurface.setMirroredVertically(true);

@@ -21,28 +21,16 @@ public:
 	bool isLoaded();
 
 private:
-	void _upateSkyManagement();
-	void _updateSkyMesh();
-	void _updateSkyOptions();
-	void _upateTerrainManagement();
-	void _updateTerrainMesh();
-	void _updateTerrainBlendmap();
-	void _upateWaterManagement();
-	void _updateWaterMesh();
-	void _updateWaterOptions();
-	void _updateFPSCamera();
-	void _updateTPSCamera();
+	// General functions
 	void _addValueForm(string ID, string title, float value);
 	void _checkValueForm(string ID, float& value);
 	void _removeValueForm();
 
-	// General
+	// General variables
 	bool _isLoaded = false;
 	WorldPart _currentWorldPart = WorldPart::NONE;
 	float _delta = 0.0f;
 	float _cameraRotationSpeed = 0.0f;
-	float _cameraDistance = 0.0f;
-	float _cameraHeight = 0.0f;
 	float _totalCameraRotation = 0.0f;
 	string _currentProjectName = "";
 	string _activeWritefieldID = "";
@@ -50,10 +38,22 @@ private:
 	shared_ptr<EngineGuiManager> _gui;
 	shared_ptr<EngineGuiWindow> _window;
 
-	// Sky
+	// Sky functions
+	void _updateSkyCamera();
+	void _upateSkyManagement();
+	void _updateSkyMesh();
+	void _updateSkyOptions();
+
+	// Sky variables
 	vector<string> _skyTexturePaths;
 
-	// Terrain
+	// Terrain function
+	void _updateTerrainCamera();
+	void _upateTerrainManagement();
+	void _updateTerrainMesh();
+	void _updateTerrainBlendmap();
+
+	// Terrain variables
 	string _terrainHeightmapPath = "";
 	string _terrainDiffusemapPath = "";
 	string _terrainBlendmapPath = "";
@@ -69,14 +69,25 @@ private:
 	float _terrainCameraHeight = 0.0f;
 	float _terrainCameraDistance = 0.0f;
 
-	// Water
+	// Water functions
+	void _loadWaterPlane();
+	void _updateWaterCamera();
+	void _upateWaterManagement();
+	void _updateWaterMesh();
+	void _updateWaterEffects();
+	void _updateWaterOptions();
+	
+	// Water variables
 	string _waterDudvmapPath = "";
 	string _waterNormalmapPath = "";
-	bool _waterWavesEnabled = false;
+	bool _waterWavingEnabled = false;
 	bool _waterRipplingEnabled = false;
-	vec3 _waterColor = vec3(1.0f);
+	bool _waterSpecularEnabled = false;
+	bool _waterReflectionEnabled = false;
+	bool _waterRefractionEnabled = false;
+	vec3 _waterColor = vec3(0.0f);
 	float _waterSize = 0.0f;
-	float _waterRepeat = 0.0f;
+	float _waterUvRepeat = 0.0f;
 	float _waterHeight = 0.0f;
 	float _waterSpeed = 0.0f;
 	float _waterTransparency = 0.0f;

@@ -47,11 +47,13 @@ public:
 	const mat4 & getProjectionMatrix()      const;
 	const vec3   getPosition()              const;
 	const vec3   getFront()                 const;
+	const vec3   getLookat()                const;
 	const float  getYaw()                   const;
 	const float  getPitch()                 const;
 	const float  getMouseOffset()           const;
 	const float  getFOV()					const;
 	const bool   isFirstPersonViewEnabled() const;
+	const bool   isLookatEnabled()			const;
 
 private:
 	ShaderBus& _shaderBus;

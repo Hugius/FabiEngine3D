@@ -28,7 +28,7 @@ void WorldEditor::_upateSkyManagement()
 		screen->getButton("options")->setHoverable(_fe3d.skyEntity_isExisting("@sky"));
 
 		// Update sub-menus
-		_updateFPSCamera();
+		_updateSkyCamera();
 		_updateSkyMesh();
 		_updateSkyOptions();
 	}
@@ -111,5 +111,28 @@ void WorldEditor::_updateSkyOptions()
 				_window->setActiveScreen("skyManagement");
 			}
 		}
+	}
+}
+
+void WorldEditor::_updateSkyCamera()
+{
+	if (_fe3d.misc_isMouseInsideViewport() && _fe3d.input_getMouseDown(Input::MOUSE_BUTTON_RIGHT))
+	{
+		// Move mouse to middle when pressed first time
+		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_RIGHT))
+		{
+			_fe3d.misc_setMousePos(_fe3d.misc_convertToScreenCoords(vec2(0.5f)));
+			return;
+		}
+
+		// Enable FPS camera
+		_fe3d.camera_enableFirstPersonView(5.0f);
+		_fe3d.camera_disableLookat();
+		_fe3d.misc_hideCursor();
+	}
+	else
+	{
+		_fe3d.camera_disableFirstPersonView();
+		_fe3d.misc_showCursor();
 	}
 }

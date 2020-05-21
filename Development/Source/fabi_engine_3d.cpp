@@ -316,10 +316,9 @@ void FabiEngine3D::terrainEntity_addBlending
 	_core->_terrainEntityManager.addBlendingToTerrain(ID, blendmapName, blendmapNameR, blendmapNameG, blendmapNameB, blendRepeatR, blendRepeatG, blendRepeatB);
 }
 
-void FabiEngine3D::waterEntity_add(const string& ID, const string& dudvMapPath, const string& normalMapPath, vec3 pos, 
-	float size, float tileRepeat, float speed, bool waving, bool rippling, vec3 color, float shininess)
+void FabiEngine3D::waterEntity_add(const string& ID, vec3 pos, float size)
 {
-	_core->_waterEntityManager.addWaterEntity(ID, dudvMapPath, normalMapPath, pos, size, tileRepeat, speed, waving, rippling, color, shininess);
+	_core->_waterEntityManager.addWaterEntity(ID, pos, size);
 }
 
 void FabiEngine3D::waterEntity_delete(const string& ID)
@@ -348,29 +347,39 @@ void FabiEngine3D::waterEntity_select(const string& ID)
 	_core->_waterEntityManager.selectWater(ID);
 }
 
+void FabiEngine3D::waterEntity_setUvRepeat(const string& ID, float repeat)
+{
+	_core->_waterEntityManager.getEntity(ID)->setUvRepeat(repeat);
+}
+
+void FabiEngine3D::waterEntity_setReflective(const string& ID, bool enabled)
+{
+	_core->_waterEntityManager.getEntity(ID)->setReflective(enabled);
+}
+
+void FabiEngine3D::waterEntity_setRefractive(const string& ID, bool enabled)
+{
+	_core->_waterEntityManager.getEntity(ID)->setRefractive(enabled);
+}
+
 void FabiEngine3D::waterEntity_setSpeed(const string& ID, float speed)
 {
 	_core->_waterEntityManager.getEntity(ID)->setWavingSpeed(speed);
 }
 
-void FabiEngine3D::waterEntity_enableWaving(const string& ID)
+void FabiEngine3D::waterEntity_setWaving(const string& ID, bool enabled)
 {
-	_core->_waterEntityManager.getEntity(ID)->setWaving(true);
+	_core->_waterEntityManager.getEntity(ID)->setWaving(enabled);
 }
 
-void FabiEngine3D::waterEntity_disableWaving(const string& ID)
+void FabiEngine3D::waterEntity_setRippling(const string& ID, const string& dudvMapPath, bool enabled)
 {
-	_core->_waterEntityManager.getEntity(ID)->setWaving(false);
-}
-
-void FabiEngine3D::waterEntity_enableRippling(const string& ID)
-{
-	_core->_waterEntityManager.getEntity(ID)->setRippling(true);
-}
-
-void FabiEngine3D::waterEntity_disableRippling(const string& ID)
-{
-	_core->_waterEntityManager.getEntity(ID)->setRippling(false);
+	if (enabled)
+	{
+		_core->_waterEntityManager.getEntity(ID)->setDudvMap(_core->_texLoader.getTexture(dudvMapPath, true, true));
+	}
+	
+	_core->_waterEntityManager.getEntity(ID)->setRippling(enabled);
 }
 
 void FabiEngine3D::waterEntity_setColor(const string& ID, vec3 color)
@@ -378,9 +387,15 @@ void FabiEngine3D::waterEntity_setColor(const string& ID, vec3 color)
 	_core->_waterEntityManager.getEntity(ID)->setColor(color);
 }
 
-void FabiEngine3D::waterEntity_setShininess(const string& ID, float shininess)
+void FabiEngine3D::waterEntity_setSpecular(const string& ID, const string& normalMapPath, float shininess, bool enabled)
 {
-	_core->_waterEntityManager.getEntity(ID)->setShininess(shininess);
+	if (enabled)
+	{
+		_core->_waterEntityManager.getEntity(ID)->setNormalMap(_core->_texLoader.getTexture(normalMapPath, true, true));
+		_core->_waterEntityManager.getEntity(ID)->setShininess(shininess);
+	}
+
+	_core->_waterEntityManager.getEntity(ID)->setSpecular(enabled);
 }
 
 void FabiEngine3D::waterEntity_setTransparency(const string& ID, float transparency)

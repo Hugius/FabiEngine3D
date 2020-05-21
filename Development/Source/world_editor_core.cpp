@@ -80,22 +80,30 @@ void WorldEditor::initializeGUI()
 	// Left-viewport: mainWindow - waterMesh
 	_window->addScreen("waterMesh");
 	_window->getScreen("waterMesh")->addScrollingList("buttonList", vec2(0.0f, 0.2f), vec2(1.9, 1.5f), vec3(0.3f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, _gui->leftVpTextColor, _gui->leftVpTextHoverColor, vec2(0.15f, 0.1f));
-	_window->getScreen("waterMesh")->getScrollingList("buttonList")->addButton("dudvmap", "Dudv map");
-	_window->getScreen("waterMesh")->getScrollingList("buttonList")->addButton("normalmap", "Normal map");
 	_window->getScreen("waterMesh")->getScrollingList("buttonList")->addButton("size", "Size");
-	_window->getScreen("waterMesh")->getScrollingList("buttonList")->addButton("repeat", "Tile repeat");
 	_window->getScreen("waterMesh")->getScrollingList("buttonList")->addButton("height", "Height");
 	_window->getScreen("waterMesh")->getScrollingList("buttonList")->addButton("up", "Move up");
 	_window->getScreen("waterMesh")->getScrollingList("buttonList")->addButton("down", "Move down");
 	_window->getScreen("waterMesh")->addButton("load", vec2(0.0f, -0.7f), vec2(1.0f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Load", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 	_window->getScreen("waterMesh")->addButton("back", vec2(0.0f, -0.9f), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Go back", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 
+	// Left-viewport: mainWindow - waterEffects
+	_window->addScreen("waterEffects");
+	_window->getScreen("waterEffects")->addScrollingList("buttonList", vec2(0.0f, 0.2f), vec2(1.9, 1.5f), vec3(0.3f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, _gui->leftVpTextColor, _gui->leftVpTextHoverColor, vec2(0.15f, 0.1f));
+	_window->getScreen("waterEffects")->getScrollingList("buttonList")->addButton("uvRepeat", "UV repeat");
+	_window->getScreen("waterEffects")->getScrollingList("buttonList")->addButton("dudvmap", "Dudv map");
+	_window->getScreen("waterEffects")->getScrollingList("buttonList")->addButton("normalmap", "Normal map");
+	_window->getScreen("waterEffects")->getScrollingList("buttonList")->addButton("reflective", "Reflective: OFF");
+	_window->getScreen("waterEffects")->getScrollingList("buttonList")->addButton("refractive", "Refractive: OFF");
+	_window->getScreen("waterEffects")->getScrollingList("buttonList")->addButton("waving", "Waving: OFF");
+	_window->getScreen("waterEffects")->getScrollingList("buttonList")->addButton("rippling", "Rippling: OFF");
+	_window->getScreen("waterEffects")->getScrollingList("buttonList")->addButton("specular", "Specular: OFF");
+	_window->getScreen("waterEffects")->addButton("back", vec2(0.0f, -0.9f), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Go back", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+
 	// Left-viewport: mainWindow - waterOptions
 	_window->addScreen("waterOptions");
 	_window->getScreen("waterOptions")->addScrollingList("buttonList", vec2(0.0f, 0.2f), vec2(1.9, 1.5f), vec3(0.3f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, _gui->leftVpTextColor, _gui->leftVpTextHoverColor, vec2(0.15f, 0.1f));
-	_window->getScreen("waterOptions")->getScrollingList("buttonList")->addButton("speed", "Wave speed");
-	_window->getScreen("waterOptions")->getScrollingList("buttonList")->addButton("waving", "Waves: OFF");
-	_window->getScreen("waterOptions")->getScrollingList("buttonList")->addButton("rippling", "Rippling: OFF");
+	_window->getScreen("waterOptions")->getScrollingList("buttonList")->addButton("speed", "Water speed");
 	_window->getScreen("waterOptions")->getScrollingList("buttonList")->addButton("transparency", "Transparency");
 	_window->getScreen("waterOptions")->getScrollingList("buttonList")->addButton("color", "Color");
 	_window->getScreen("waterOptions")->getScrollingList("buttonList")->addButton("shininess", "Shininess");
@@ -169,13 +177,11 @@ void WorldEditor::unloadProject()
 	_terrainCameraHeight = 0.0f;
 	_terrainCameraDistance = 0.0f;
 	_waterSize = 0.0f;
-	_waterRepeat = 0.0f;
+	_waterUvRepeat = 0.0f;
 	_waterHeight = 0.0f;
 	_waterCameraHeight = 0.0f;
 	_waterCameraDistance = 0.0f;
 	_cameraRotationSpeed = 0.0f;
-	_cameraDistance = 0.0f;
-	_cameraHeight = 0.0f;
 	_totalCameraRotation = 0.0f;
 	_isLoaded = false;
 }
@@ -185,6 +191,7 @@ void WorldEditor::update(float delta)
 	if (_isLoaded)
 	{
 		auto screen = _window->getScreen("worldManagement");
+		_delta = delta;
 
 		// GUI management
 		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
@@ -193,17 +200,34 @@ void WorldEditor::update(float delta)
 			{
 				_window->setActiveScreen("skyManagement");
 				_currentWorldPart = WorldPart::SKY;
+
+				// Hide terrain
+				if (_fe3d.terrainEntity_isExisting("@terrain"))
+				{
+					_fe3d.terrainEntity_hide("@terrain");
+				}
+
+				// Hide water
+				if (_fe3d.waterEntity_isExisting("@water"))
+				{
+					_fe3d.waterEntity_hide("@water");
+				}
 			}
 			else if (screen->getButton("terrain")->isHovered())
 			{
 				_window->setActiveScreen("terrainManagement");
 				_currentWorldPart = WorldPart::TERRAIN;
 
-				// Load camera options
+				// Show terrain
 				if (_fe3d.terrainEntity_isExisting("@terrain"))
 				{
-					_cameraHeight = _terrainCameraHeight;
-					_cameraDistance = _terrainCameraDistance;
+					_fe3d.terrainEntity_show("@terrain");
+				}
+
+				// Hide water
+				if (_fe3d.waterEntity_isExisting("@water"))
+				{
+					_fe3d.waterEntity_hide("@water");
 				}
 			}
 			else if (screen->getButton("water")->isHovered())
@@ -211,11 +235,10 @@ void WorldEditor::update(float delta)
 				_window->setActiveScreen("waterManagement");
 				_currentWorldPart = WorldPart::WATER;
 
-				// Load camera options
+				// Show water
 				if (_fe3d.waterEntity_isExisting("@water"))
 				{
-					_cameraHeight = _waterCameraHeight;
-					_cameraDistance = _waterCameraDistance;
+					_fe3d.waterEntity_show("@water");
 				}
 			}
 			else if (screen->getButton("back")->isHovered())

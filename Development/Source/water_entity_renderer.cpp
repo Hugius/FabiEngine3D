@@ -44,13 +44,16 @@ void WaterEntityRenderer::render(const WaterEntity * entity)
 			_shader.uploadUniform("u_wavePos", entity->getWaveValue());
 			_shader.uploadUniform("u_timeX", entity->getTimeX());
 			_shader.uploadUniform("u_timeZ", entity->getTimeZ());
-			_shader.uploadUniform("u_tileAmount", entity->getTileRepeat());
-			_shader.uploadUniform("u_waving", entity->isWaving());
-			_shader.uploadUniform("u_rippling", entity->isRippling());
-			_shader.uploadUniform("u_color", entity->getColor());
+			_shader.uploadUniform("u_customHeightOffset", entity->getSurfaceHeight());
+			_shader.uploadUniform("u_uvRepeat", entity->getUvRepeat());
 			_shader.uploadUniform("u_shininess", entity->getShininess());
 			_shader.uploadUniform("u_transparency", entity->getTransparency());
-			_shader.uploadUniform("u_customHeightOffset", entity->getSurfaceHeight());
+			_shader.uploadUniform("u_waving", entity->isWaving());
+			_shader.uploadUniform("u_rippling", entity->isRippling());
+			_shader.uploadUniform("u_isSpecular", entity->isSpecular());
+			_shader.uploadUniform("u_isReflective", entity->isReflective());
+			_shader.uploadUniform("u_isRefractive", entity->isRefractive());
+			_shader.uploadUniform("u_color", entity->getColor());
 
 			// Texture uniforms
 			_shader.uploadUniform("u_sampler_reflectionMap", 0);
@@ -63,7 +66,7 @@ void WaterEntityRenderer::render(const WaterEntity * entity)
 			glActiveTexture(GL_TEXTURE0);
 			glBindTexture(GL_TEXTURE_2D, _shaderBus.getSceneReflectionMap());
 			glActiveTexture(GL_TEXTURE1);
-			glBindTexture(GL_TEXTURE_2D, _shaderBus.getWaterRefractionMap());
+			glBindTexture(GL_TEXTURE_2D, _shaderBus.getSceneRefractionMap());
 			glActiveTexture(GL_TEXTURE2);
 			glBindTexture(GL_TEXTURE_2D, _shaderBus.getDepthMap());
 			glActiveTexture(GL_TEXTURE3);

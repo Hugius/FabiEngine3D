@@ -21,9 +21,9 @@ void WaterEntity::setWaveValue(float val)
 	_waveValue = val;
 }
 
-void WaterEntity::setTileRepeat(float val)
+void WaterEntity::setUvRepeat(float val)
 {
-	_tileRepeat = val;
+	_uvRepeat = val;
 }
 
 void WaterEntity::setWavingSpeed(float val)
@@ -54,6 +54,21 @@ void WaterEntity::setWaving(bool val)
 void WaterEntity::setRippling(bool val)
 {
 	_rippling = val;
+}
+
+void WaterEntity::setSpecular(bool val)
+{
+	_specular = val;
+}
+
+void WaterEntity::setReflective(bool val)
+{
+	_reflective = val;
+}
+
+void WaterEntity::setRefractive(bool val)
+{
+	_refractive = val;
 }
 
 void WaterEntity::setSurfaceHeight(float val)
@@ -91,9 +106,9 @@ const float WaterEntity::getWaveValue() const
 	return _waveValue;
 }
 
-const float WaterEntity::getTileRepeat() const
+const float WaterEntity::getUvRepeat() const
 {
-	return _tileRepeat;
+	return _uvRepeat;
 }
 
 const float WaterEntity::getWavingSpeed() const
@@ -139,4 +154,19 @@ const bool WaterEntity::isWaving() const
 const bool WaterEntity::isRippling() const
 {
 	return _rippling;
+}
+
+const bool WaterEntity::isSpecular() const
+{
+	return _specular;;
+}
+
+const bool WaterEntity::isReflective() const
+{
+	return _reflective;
+}
+
+const bool WaterEntity::isRefractive() const
+{
+	return _refractive;
 }

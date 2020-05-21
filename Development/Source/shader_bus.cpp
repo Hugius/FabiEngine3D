@@ -15,9 +15,9 @@ void ShaderBus::setSceneReflectionMap(GLuint val)
 	_sceneReflectionMap = val;
 }
 
-void ShaderBus::setWaterRefractionMap(GLuint val)
+void ShaderBus::setSceneRefractionMap(GLuint val)
 {
-	_waterRefractionMap = val;
+	_sceneRefractionMap = val;
 }
 
 void ShaderBus::setBloomMap(GLuint val)
@@ -275,9 +275,9 @@ const GLuint ShaderBus::getSceneReflectionMap() const
 	return _sceneReflectionMap;
 }
 
-const GLuint ShaderBus::getWaterRefractionMap() const
+const GLuint ShaderBus::getSceneRefractionMap() const
 {
-	return _waterRefractionMap;
+	return _sceneRefractionMap;
 }
 
 const GLuint ShaderBus::getBloomMap() const

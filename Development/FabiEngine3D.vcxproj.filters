@@ -127,9 +127,6 @@
     <ClCompile Include="Source\engine_gui_button.cpp">
       <Filter>src\GUI System</Filter>
     </ClCompile>
-    <ClCompile Include="Source\engine_gui_global_screen.cpp">
-      <Filter>src\GUI System</Filter>
-    </ClCompile>
     <ClCompile Include="Source\engine_gui_manager.cpp">
       <Filter>src\GUI System</Filter>
     </ClCompile>
@@ -279,6 +276,12 @@
     </ClCompile>
     <ClCompile Include="Source\render_engine_core.cpp">
       <Filter>src\Rendering System\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\engine_gui_global_screen_misc.cpp">
+      <Filter>src\GUI System</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\engine_gui_global_screen_core.cpp">
+      <Filter>src\GUI System</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -238,6 +238,7 @@
     <ClCompile Include="Source\depth_renderer.cpp" />
     <ClCompile Include="Source\engine_controller.cpp" />
     <ClCompile Include="Source\bottom_viewport_controller.cpp" />
+    <ClCompile Include="Source\engine_gui_global_screen_misc.cpp" />
     <ClCompile Include="Source\engine_gui_scrollinglist.cpp" />
     <ClCompile Include="Source\left_viewport_controller.cpp" />
     <ClCompile Include="Source\model_editor_updates.cpp" />
@@ -249,7 +250,7 @@
     <ClCompile Include="Source\right_viewport_controller.cpp" />
     <ClCompile Include="Source\top_viewport_controller.cpp" />
     <ClCompile Include="Source\engine_gui_button.cpp" />
-    <ClCompile Include="Source\engine_gui_global_screen.cpp" />
+    <ClCompile Include="Source\engine_gui_global_screen_core.cpp" />
     <ClCompile Include="Source\engine_gui_rectangle.cpp" />
     <ClCompile Include="Source\engine_gui_manager.cpp" />
     <ClCompile Include="Source\engine_gui_screen.cpp" />

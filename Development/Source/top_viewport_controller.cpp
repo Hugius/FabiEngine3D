@@ -80,10 +80,10 @@ void TopViewportController::_initializeProjectCreation()
 	{
 		_gui->getGlobalScreen()->addTextfield("newProjectName", vec2(0.0f, 0.1f), vec2(0.3f, 0.1f), "Enter project name", vec3(1.0f));
 		_gui->getGlobalScreen()->addWriteField("newProjectName", vec2(0.0f, 0.0f), vec2(0.5f, 0.1f), vec3(0.25f), vec3(0.5f), vec3(1.0f), vec3(0.0f));
-		_gui->getGlobalScreen()->getWriteField("newProjectName")->setActive(true);
+		_gui->getGlobalScreen()->getWriteField("newProjectName")->setPermActive(true);
 		_gui->getGlobalScreen()->addButton("done", vec2(-0.15f, -0.2f), vec2(0.15f, 0.1f), vec3(0.0f, 0.5f, 0.0f), vec3(0.0f, 1.0f, 0.0f), "Done", vec3(1.0f), vec3(0.0f));
 		_gui->getGlobalScreen()->addButton("cancel", vec2(0.15f, -0.2f), vec2(0.15f, 0.1f), vec3(0.5f, 0.0f, 0.0f), vec3(1.0f, 0.0f, 0.0f), "Cancel", vec3(1.0f), vec3(0.0f));
-		_gui->setFocus(true);
+		_gui->getGlobalScreen()->setFocus(true);
 		_creatingProject = true;
 	}
 }
@@ -95,7 +95,7 @@ void TopViewportController::_initializeProjectLoading()
 		_gui->getGlobalScreen()->addTextfield("projectList", vec2(0.0f, 0.45f), vec2(0.3f, 0.1f), "Select project", vec3(1.0f));
 		_gui->getGlobalScreen()->addScrollingList("projectList", vec2(0.0f, 0.0f), vec2(0.5, 0.75f), vec3(0.3f), _gui->topVpButtonColor, _gui->topVpButtonHoverColor, _gui->topVpTextColor, _gui->topVpTextHoverColor, vec2(0.1f, 0.25f));
 		_gui->getGlobalScreen()->addButton("cancel", vec2(0.0f, -0.45f), vec2(0.15f, 0.1f), vec3(0.5f, 0.0f, 0.0f), vec3(1.0f, 0.0f, 0.0f), "Cancel", vec3(1.0f), vec3(0.0f));
-		_gui->setFocus(true);
+		_gui->getGlobalScreen()->setFocus(true);
 		_loadingProject = true;
 
 		// Get new path
@@ -185,7 +185,7 @@ void TopViewportController::_updateProjectCreation()
 			if (cleanup)
 			{
 				_creatingProject = false;
-				_gui->setFocus(false);
+				_gui->getGlobalScreen()->setFocus(false);
 				_gui->getGlobalScreen()->deleteTextfield("newProjectName");
 				_gui->getGlobalScreen()->deleteWriteField("newProjectName");
 				_gui->getGlobalScreen()->deleteButton("done");
@@ -240,7 +240,7 @@ void TopViewportController::_updateProjectLoading()
 			_gui->getGlobalScreen()->deleteTextfield("projectList");
 			_gui->getGlobalScreen()->deleteScrollingList("projectList");
 			_gui->getGlobalScreen()->deleteButton("cancel");
-			_gui->setFocus(false);
+			_gui->getGlobalScreen()->setFocus(false);
 			_loadingProject = false;
 			return;
 		}

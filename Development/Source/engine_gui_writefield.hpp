@@ -11,6 +11,7 @@ public:
 
 	void update(float delta, bool hoverable) override;
 	void setActive(bool active);
+	void setPermActive(bool active);
 
 	bool cancelledInput();
 	bool confirmedInput();

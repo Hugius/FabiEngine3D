@@ -31,7 +31,7 @@ void ModelEditor::_updateModelEditing()
 void ModelEditor::_updateModelEditingCamera()
 {
 	// Check if the GUI is not focused
-	if (!_gui->isFocused())
+	if (!_gui->getGlobalScreen()->isFocused())
 	{
 		// Update cursor difference
 		static vec2 totalCursorDifference = vec2(0.0f);

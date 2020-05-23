@@ -57,15 +57,15 @@ void WorldEditor::_updateTerrainMesh()
 			}
 			else if (screen->getScrollingList("buttonList")->getButton("size")->isHovered())
 			{
-				_addValueForm("size", "Size", _terrainSize);
+				_gui->getGlobalScreen()->addValueForm("size", "Size", _terrainSize, vec2(0.0f));
 			}
 			else if (screen->getScrollingList("buttonList")->getButton("maxHeight")->isHovered())
 			{
-				_addValueForm("maxHeight", "Max height", _maxTerrainHeight);
+				_gui->getGlobalScreen()->addValueForm("maxHeight", "Max height", _maxTerrainHeight, vec2(0.0f));
 			}
 			else if (screen->getScrollingList("buttonList")->getButton("uvRepeat")->isHovered())
 			{
-				_addValueForm("uvRepeat", "UV repeat", _terrainUvRepeat);
+				_gui->getGlobalScreen()->addValueForm("uvRepeat", "UV repeat", _terrainUvRepeat, vec2(0.0f));
 			}
 			else if (screen->getButton("load")->isHovered())
 			{
@@ -93,9 +93,9 @@ void WorldEditor::_updateTerrainMesh()
 		}
 
 		// Check if value confirmed
-		_checkValueForm("size", _terrainSize);
-		_checkValueForm("maxHeight", _maxTerrainHeight);
-		_checkValueForm("uvRepeat", _terrainUvRepeat);
+		_gui->getGlobalScreen()->checkValueForm("size", _terrainSize);
+		_gui->getGlobalScreen()->checkValueForm("maxHeight", _maxTerrainHeight);
+		_gui->getGlobalScreen()->checkValueForm("uvRepeat", _terrainUvRepeat);
 
 		// Filling statuses
 		bool heightmap = _terrainHeightmapPath != "";
@@ -146,15 +146,15 @@ void WorldEditor::_updateTerrainBlendmap()
 			}
 			else if (screen->getScrollingList("buttonList")->getButton("redRepeat")->isHovered())
 			{
-				_addValueForm("redRepeat", "Red repeat", _terrainRedUvRepeat);
+				_gui->getGlobalScreen()->addValueForm("redRepeat", "Red repeat", _terrainRedUvRepeat, vec2(0.0f));
 			}
 			else if (screen->getScrollingList("buttonList")->getButton("greenRepeat")->isHovered())
 			{
-				_addValueForm("greenRepeat", "Green repeat", _terrainGreenUvRepeat);
+				_gui->getGlobalScreen()->addValueForm("greenRepeat", "Green repeat", _terrainGreenUvRepeat, vec2(0.0f));
 			}
 			else if (screen->getScrollingList("buttonList")->getButton("blueRepeat")->isHovered())
 			{
-				_addValueForm("blueRepeat", "Blue repeat", _terrainBlueUvRepeat);
+				_gui->getGlobalScreen()->addValueForm("blueRepeat", "Blue repeat", _terrainBlueUvRepeat, vec2(0.0f));
 			}
 			else if (screen->getButton("load")->isHovered())
 			{
@@ -167,9 +167,9 @@ void WorldEditor::_updateTerrainBlendmap()
 		}
 
 		// Check if value confirmed
-		_checkValueForm("redRepeat", _terrainRedUvRepeat);
-		_checkValueForm("greenRepeat", _terrainGreenUvRepeat);
-		_checkValueForm("blueRepeat", _terrainBlueUvRepeat);
+		_gui->getGlobalScreen()->checkValueForm("redRepeat", _terrainRedUvRepeat);
+		_gui->getGlobalScreen()->checkValueForm("greenRepeat", _terrainGreenUvRepeat);
+		_gui->getGlobalScreen()->checkValueForm("blueRepeat", _terrainBlueUvRepeat);
 
 		// Filling statuses
 		bool loadedBlendmap = _terrainBlendmapPath != "";

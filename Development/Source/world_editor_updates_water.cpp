@@ -81,11 +81,11 @@ void WorldEditor::_updateWaterMesh()
 		{
 			if (screen->getScrollingList("buttonList")->getButton("size")->isHovered())
 			{
-				_addValueForm("size", "Size", _waterSize);
+				_gui->getGlobalScreen()->addValueForm("size", "Size", _waterSize, vec2(0.0f));
 			}
 			else if (screen->getScrollingList("buttonList")->getButton("height")->isHovered())
 			{
-				_addValueForm("height", "Height", _waterHeight);
+				_gui->getGlobalScreen()->addValueForm("height", "Height", _waterHeight, vec2(0.0f));
 			}
 			else if (screen->getButton("back")->isHovered())
 			{
@@ -110,8 +110,8 @@ void WorldEditor::_updateWaterMesh()
 
 		// Check if values confirmed
 		float oldSize = _waterSize;
-		_checkValueForm("size", _waterSize);
-		_checkValueForm("height", _waterHeight);
+		_gui->getGlobalScreen()->checkValueForm("size", _waterSize);
+		_gui->getGlobalScreen()->checkValueForm("height", _waterHeight);
 
 		// Reload water plane if size changed
 		if (_waterSize != oldSize)
@@ -130,7 +130,7 @@ void WorldEditor::_updateWaterMesh()
 			_waterCameraDistance = _waterSize / 2.0f;
 
 			// Update wireframe visibility
-			if (!_gui->isFocused())
+			if (!_gui->getGlobalScreen()->isFocused())
 			{
 				_fe3d.input_getKeyToggled(Input::KEY_W) ? _fe3d.misc_enableWireframeRendering() : _fe3d.misc_disableWireframeRendering();
 			}
@@ -156,7 +156,7 @@ void WorldEditor::_updateWaterEffects()
 		{
 			if (screen->getScrollingList("buttonList")->getButton("uvRepeat")->isHovered())
 			{
-				_addValueForm("uvRepeat", "UV repeat", _waterUvRepeat);
+				_gui->getGlobalScreen()->addValueForm("uvRepeat", "UV repeat", _waterUvRepeat, vec2(0.0f));
 			}
 			else if (screen->getScrollingList("buttonList")->getButton("dudvmap")->isHovered())
 			{
@@ -205,7 +205,7 @@ void WorldEditor::_updateWaterEffects()
 		}
 
 		// Check if value confirmed
-		_checkValueForm("uvRepeat", _waterUvRepeat);
+		_gui->getGlobalScreen()->checkValueForm("uvRepeat", _waterUvRepeat);
 
 		// Button hoverabilities
 		screen->getScrollingList("buttonList")->getButton("rippling")->setHoverable(_waterDudvmapPath != "");
@@ -224,19 +224,21 @@ void WorldEditor::_updateWaterOptions()
 		{
 			if (screen->getScrollingList("buttonList")->getButton("speed")->isHovered())
 			{
-				_addValueForm("speed", "Water speed", _waterSpeed * 1000.0f);
+				_gui->getGlobalScreen()->addValueForm("speed", "Water speed", _waterSpeed * 1000.0f, vec2(0.0f));
 			}
 			else if (screen->getScrollingList("buttonList")->getButton("transparency")->isHovered())
 			{
-				_addValueForm("transparency", "Transparency(0 - 10)", _waterTransparency * 10.0f);
+				_gui->getGlobalScreen()->addValueForm("transparency", "Transparency(0 - 10)", _waterTransparency * 10.0f, vec2(0.0f));
 			}
 			else if (screen->getScrollingList("buttonList")->getButton("color")->isHovered())
 			{
-
+				_gui->getGlobalScreen()->addValueForm("colorR", "R(0-255)", _waterColor.r * 255.0f, vec2(-0.25f, 0.0f));
+				_gui->getGlobalScreen()->addValueForm("colorG", "G(0-255)", _waterColor.g * 255.0f, vec2(0.0f, 0.0f));
+				_gui->getGlobalScreen()->addValueForm("colorB", "B(0-255)", _waterColor.b * 255.0f, vec2(0.25f, 0.0f));
 			}
 			else if (screen->getScrollingList("buttonList")->getButton("shininess")->isHovered())
 			{
-				_addValueForm("shininess", "Shininess(0 - ~)", _waterShininess);
+				_gui->getGlobalScreen()->addValueForm("shininess", "Shininess(0 - 256)", _waterShininess, vec2(0.0f));
 			}
 			else if (screen->getButton("back")->isHovered())
 			{
@@ -244,23 +246,41 @@ void WorldEditor::_updateWaterOptions()
 			}
 		}
 
-		// Check if value confirmed
-		float oldSpeed = _waterSpeed;
-		_checkValueForm("speed", _waterSpeed);
-		if (oldSpeed != _waterSpeed)
+		// Speed value conversion
+		if (_gui->getGlobalScreen()->checkValueForm("speed", _waterSpeed))
 		{
 			_waterSpeed /= 1000.0f;
 		}
 
-		float oldTransparency = _waterTransparency;
-		_checkValueForm("transparency", _waterTransparency);
-		if (oldTransparency != _waterTransparency)
+		// Transparency value conversion
+		if (_gui->getGlobalScreen()->checkValueForm("transparency", _waterTransparency))
 		{
-			_waterTransparency /= 10.0f;
-			_waterTransparency = std::clamp(_waterTransparency, 0.0f, 1.0f);
+			_waterTransparency = std::clamp(_waterTransparency / 10.0f, 0.0f, 1.0f);
 		}
 
-		_checkValueForm("shininess", _waterShininess);
+		// Color R values conversion
+		if (_gui->getGlobalScreen()->checkValueForm("colorR", _waterColor.r))
+		{
+			_waterColor.r = std::clamp(_waterColor.r / 255.0f, 0.0f, 1.0f);
+		}
+
+		// Color G values conversion
+		if (_gui->getGlobalScreen()->checkValueForm("colorG", _waterColor.g))
+		{
+			_waterColor.g = std::clamp(_waterColor.g / 255.0f, 0.0f, 1.0f);
+		}
+
+		// Color B values conversion
+		if (_gui->getGlobalScreen()->checkValueForm("colorB", _waterColor.b))
+		{
+			_waterColor.b = std::clamp(_waterColor.b / 255.0f, 0.0f, 1.0f);
+		}
+
+		// Check if shininess confirmed
+		if (_gui->getGlobalScreen()->checkValueForm("shininess", _waterShininess))
+		{
+			_waterShininess = std::clamp(_waterShininess, 0.0f, 256.0f);
+		}
 	}
 }
 

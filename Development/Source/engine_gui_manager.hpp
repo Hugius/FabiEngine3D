@@ -10,9 +10,6 @@ public:
 	EngineGuiManager(FabiEngine3D& fe3d);
 
 	void update(float delta);
-	void setFocus(bool focused);
-
-	bool isFocused();
 
 	shared_ptr<EngineGuiGlobalScreen> getGlobalScreen();
 	shared_ptr<EngineGuiViewport> getViewport(const string& ID);
@@ -42,6 +39,4 @@ private:
 
 	shared_ptr<EngineGuiGlobalScreen> _globalScreen;
 	std::vector<shared_ptr<EngineGuiViewport>> _viewports;
-
-	bool _isFocused = false;
 };

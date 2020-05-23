@@ -22,6 +22,11 @@ void EngineGuiWriteField::update(float delta, bool hoverable)
 void EngineGuiWriteField::setActive(bool active)
 {
 	_isActive = active;
+}
+
+void EngineGuiWriteField::setPermActive(bool active)
+{
+	_isActive = active;
 	_mustBeActive = active;
 }
 

@@ -13,6 +13,9 @@ public:
 	EngineGuiGlobalScreen(FabiEngine3D& fe3d);
 
 	void update(float delta);
+	void setFocus(bool focused);
+
+	bool isFocused();
 
 	void addScrollingList(const string& ID, vec2 position, vec2 size, vec3 color, vec3 buttonColor, vec3 buttonHoverColor, vec3 textColor, vec3 textHoverColor, vec2 charSize);
 	void addWriteField(const string& ID, vec2 position, vec2 size, vec3 color, vec3 hoverColor, vec3 textColor, vec3 textHoverColor, 
@@ -45,7 +48,13 @@ public:
 	vector<shared_ptr<EngineGuiRectangle>>& getRectangles();
 	vector<shared_ptr<EngineGuiTextfield>>& getTextfields();
 
+	void addValueForm(string ID, string title, float value, vec2 position);
+	bool checkValueForm(string ID, float& value);
+
 private:
+	void _updateValueFilling();
+	void _removeValueForm(string ID);
+
 	FabiEngine3D& _fe3d;
 
 	vector<shared_ptr<EngineGuiScrollingList>> _scrollingLists;
@@ -53,4 +62,8 @@ private:
 	vector<shared_ptr<EngineGuiButton>> _buttons;
 	vector<shared_ptr<EngineGuiRectangle>> _rectangles;
 	vector<shared_ptr<EngineGuiTextfield>> _textfields;
+
+	vector<string> _valueFormIDs;
+	bool _isFocused = false;
+	bool _exitValueFilling = false;
 };

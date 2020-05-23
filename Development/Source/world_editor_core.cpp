@@ -161,7 +161,6 @@ void WorldEditor::unloadProject()
 	_currentProjectName = "";
 	_terrainHeightmapPath = "";
 	_terrainDiffusemapPath = "";
-	_activeWritefieldID = "";
 	_terrainBlendmapPath = "";
 	_terrainRedPath = "";
 	_terrainGreenPath = "";

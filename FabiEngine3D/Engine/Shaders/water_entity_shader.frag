@@ -101,7 +101,7 @@ vec4 getMainColor()
 
 	if(u_isReflective && u_isRefractive) // Both
 	{
-		finalColor = mix(reflectionColor, refractionColor, 1.0f - waterDepth); // Combining reflection & refraction
+		finalColor = mix(reflectionColor, refractionColor, 0.5f); // Combining reflection & refraction
 		finalColor = mix(finalColor, u_color, 0.1f); // Water color tint
 	}
 	else if(u_isReflective) // Only reflection

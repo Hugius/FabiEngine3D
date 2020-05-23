@@ -4,9 +4,8 @@
 void GameEntityRenderer::bind()
 {
 	// Define clipping plane for scene reflections
-	const float waterOffset = 1.0f * float(int(_shaderBus.isWaterEffectsEnabled()));
 	const float zeroOffset = 0.0000001f;
-	vec4 clippingPlane = vec4(0.0f, 1.0f, 0.0f, -(_shaderBus.getSceneReflectionHeight() + zeroOffset) + waterOffset);
+	vec4 clippingPlane = vec4(0.0f, 1.0f, 0.0f, -(_shaderBus.getSceneReflectionHeight() + zeroOffset));
 
 	// Bind shader
 	_shader.bind();

@@ -29,7 +29,7 @@ void ModelEditor::_updateModelEditingSize()
 			_gui->getGlobalScreen()->getWriteField("modelSizeZ")->setTextContent(std::to_string(int(currentSize.z * 10.0f)));
 
 			// Set GUI focus
-			_gui->setFocus(true);
+			_gui->getGlobalScreen()->setFocus(true);
 		}
 		else if (scrollingList->getButton("toggleResizeMesh")->isHovered())
 		{
@@ -148,7 +148,7 @@ void ModelEditor::_updateModelEditingSize()
 				_gui->getGlobalScreen()->deleteTextfield("modelSizeZ");
 				_gui->getGlobalScreen()->deleteWriteField("modelSizeZ");
 				_gui->getGlobalScreen()->deleteButton("done");
-				_gui->setFocus(false);
+				_gui->getGlobalScreen()->setFocus(false);
 			}
 		}
 	}

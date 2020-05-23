@@ -45,7 +45,7 @@ void ModelEditor::_updateModelEditingOptions()
 			_gui->getGlobalScreen()->getWriteField("modelColorB")->setTextContent(std::to_string(int(currentColor.z * 255.0f)));
 
 			// Set GUI focus
-			_gui->setFocus(true);
+			_gui->getGlobalScreen()->setFocus(true);
 		}
 		else if (screen->getScrollingList("buttonList")->getButton("uvRepeat")->isHovered())
 		{
@@ -60,7 +60,7 @@ void ModelEditor::_updateModelEditingOptions()
 			_gui->getGlobalScreen()->getWriteField("uvRepeat")->setTextContent(std::to_string(int(currentRepeat)));
 
 			// Set GUI focus
-			_gui->setFocus(true);
+			_gui->getGlobalScreen()->setFocus(true);
 		}
 		else if (screen->getButton("back")->isHovered())
 		{
@@ -126,7 +126,7 @@ void ModelEditor::_updateModelEditingOptions()
 				_gui->getGlobalScreen()->deleteTextfield("modelColorB");
 				_gui->getGlobalScreen()->deleteWriteField("modelColorB");
 				_gui->getGlobalScreen()->deleteButton("done");
-				_gui->setFocus(false);
+				_gui->getGlobalScreen()->setFocus(false);
 			}
 		}
 	}
@@ -156,7 +156,7 @@ void ModelEditor::_updateModelEditingOptions()
 				_gui->getGlobalScreen()->deleteTextfield("uvRepeat");
 				_gui->getGlobalScreen()->deleteWriteField("uvRepeat");
 				_gui->getGlobalScreen()->deleteButton("done");
-				_gui->setFocus(false);
+				_gui->getGlobalScreen()->setFocus(false);
 			}
 		}
 	}

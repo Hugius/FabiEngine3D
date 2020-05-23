@@ -26,10 +26,10 @@ void ModelEditor::_updateModelManagement()
 		{
 			_gui->getGlobalScreen()->addTextfield("newModelName", vec2(0.0f, 0.1f), vec2(0.3f, 0.1f), "Enter model name:", vec3(1.0f));
 			_gui->getGlobalScreen()->addWriteField("newModelName", vec2(0.0f, 0.0f), vec2(0.5f, 0.1f), vec3(0.25f), vec3(0.5f), vec3(1.0f), vec3(0.0f), 0, 0, 1, 0);
-			_gui->getGlobalScreen()->getWriteField("newModelName")->setActive(true);
+			_gui->getGlobalScreen()->getWriteField("newModelName")->setPermActive(true);
 			_gui->getGlobalScreen()->addButton("done", vec2(-0.15f, -0.2f), vec2(0.15f, 0.1f), vec3(0.0f, 0.5f, 0.0f), vec3(0.0f, 1.0f, 0.0f), "Done", vec3(1.0f), vec3(0.0f));
 			_gui->getGlobalScreen()->addButton("cancel", vec2(0.15f, -0.2f), vec2(0.15f, 0.1f), vec3(0.5f, 0.0f, 0.0f), vec3(1.0f, 0.0f, 0.0f), "Cancel", vec3(1.0f), vec3(0.0f));
-			_gui->setFocus(true);
+			_gui->getGlobalScreen()->setFocus(true);
 			_modelCreationEnabled = true;
 		}
 		else if (screen->getButton("editModel")->isHovered()) // Edit model button
@@ -91,7 +91,7 @@ void ModelEditor::_updateModelCreation()
 			if (cleanup)
 			{
 				_modelCreationEnabled = false;
-				_gui->setFocus(false);
+				_gui->getGlobalScreen()->setFocus(false);
 				_gui->getGlobalScreen()->deleteTextfield("newModelName");
 				_gui->getGlobalScreen()->deleteWriteField("newModelName");
 				_gui->getGlobalScreen()->deleteButton("done");

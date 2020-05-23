@@ -21,11 +21,6 @@ public:
 	bool isLoaded();
 
 private:
-	// General functions
-	void _addValueForm(string ID, string title, float value);
-	void _checkValueForm(string ID, float& value);
-	void _removeValueForm();
-
 	// General variables
 	bool _isLoaded = false;
 	WorldPart _currentWorldPart = WorldPart::NONE;
@@ -33,7 +28,6 @@ private:
 	float _cameraRotationSpeed = 0.0f;
 	float _totalCameraRotation = 0.0f;
 	string _currentProjectName = "";
-	string _activeWritefieldID = "";
 	FabiEngine3D& _fe3d;
 	shared_ptr<EngineGuiManager> _gui;
 	shared_ptr<EngineGuiWindow> _window;

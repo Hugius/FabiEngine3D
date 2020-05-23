@@ -18,21 +18,11 @@ void EngineGuiManager::update(float delta)
 	// Update viewports
 	for (auto& viewport : _viewports)
 	{
-		viewport->update(delta, !_isFocused);
+		viewport->update(delta, !_globalScreen->isFocused());
 	}
 	
 	// Update global screen
 	_globalScreen->update(delta);
-}
-
-void EngineGuiManager::setFocus(bool focused)
-{
-	_isFocused = focused;
-}
-
-bool EngineGuiManager::isFocused()
-{
-	return _isFocused;
 }
 
 shared_ptr<EngineGuiGlobalScreen> EngineGuiManager::getGlobalScreen()

@@ -186,9 +186,6 @@ void ModelEditor::saveProject()
 
 		// Close file
 		file.close();
-
-		// Logging
-		_fe3d.logger_throwInfo("Current project saved!");
 	}
 }
 

@@ -1,5 +1,9 @@
 #include "world_editor.hpp"
 
+#include <filesystem>
+#include <fstream>
+#include <sstream>
+
 WorldEditor::WorldEditor(FabiEngine3D& fe3d, shared_ptr<EngineGuiManager> gui) :
 	_fe3d(fe3d),
 	_gui(gui)
@@ -128,7 +132,65 @@ void WorldEditor::loadProject()
 
 void WorldEditor::saveProject()
 {
+	if (_currentProjectName != "")
+	{
+		// Save sky data
+		if (_fe3d.skyEntity_isExisting("@sky"))
+		{
+			// Load file
+			std::ofstream skyFile(_fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\sky.fe3d");
+			string line = "";
 
+			// Add path to line
+			for (auto& path : _skyTexturePaths)
+			{
+				line += path + " ";
+			}
+
+			// Write line to file
+			skyFile << line;
+
+			// Close file
+			skyFile.close();
+		}
+
+		// Save terrain data
+		if (_fe3d.terrainEntity_isExisting("@terrain"))
+		{
+			// Load file
+			std::ofstream terrainFile(_fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\terrain.fe3d");
+
+			// Write base data to file
+			terrainFile << _terrainHeightmapPath << " " << _terrainDiffusemapPath << " " << _terrainSize << " " << _maxTerrainHeight << " " << _terrainUvRepeat << " " << _isTerrainBlendmapped << " ";
+			
+			// Write blendmapping data to file
+			if (_isTerrainBlendmapped)
+			{
+				terrainFile << _terrainBlendmapPath << " " << _terrainRedPath << " " << _terrainGreenPath << " " << _terrainBluePath << " " <<
+					_terrainRedUvRepeat << " " << _terrainGreenUvRepeat << " " << _terrainBlueUvRepeat;
+			}
+
+			// Close file
+			terrainFile.close();
+		}
+
+		// Save water data
+		if (_fe3d.waterEntity_isExisting("@water"))
+		{
+			// Load file
+			std::ofstream waterFile(_fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\water.fe3d");
+
+			// Write data to file
+			waterFile << 
+				(_waterDudvmapPath == "" ? "-" : _waterDudvmapPath) << " " << (_waterNormalmapPath == "" ? "-" : _waterNormalmapPath) << " " <<
+				_waterWavingEnabled << " " << _waterRipplingEnabled << " " << _waterSpecularEnabled << " " << _waterReflectionEnabled << " " << 
+				_waterRefractionEnabled << " " << _waterColor.r << " " << _waterColor.g << " " << _waterColor.b << " " << _waterSize << " " <<
+				_waterUvRepeat << " " << _waterHeight << " " << _waterSpeed << " " << _waterTransparency << " " << _waterShininess;
+
+			// Close file
+			waterFile.close();
+		}
+	}
 }
 
 void WorldEditor::unloadProject()
@@ -157,16 +219,20 @@ void WorldEditor::unloadProject()
 	}
 
 	// Clear variables
+	_isLoaded = false;
 	_currentWorldPart = WorldPart::NONE;
+	_delta = 0.0f;
+	_cameraRotationSpeed = 0.0f;
+	_totalCameraRotation = 0.0f;
 	_currentProjectName = "";
+	_skyTexturePaths.clear();
+	_isTerrainBlendmapped = false;
 	_terrainHeightmapPath = "";
 	_terrainDiffusemapPath = "";
 	_terrainBlendmapPath = "";
 	_terrainRedPath = "";
 	_terrainGreenPath = "";
 	_terrainBluePath = "";
-	_waterDudvmapPath = "";
-	_waterNormalmapPath = "";
 	_terrainSize = 0.0f;
 	_maxTerrainHeight = 0.0f;
 	_terrainUvRepeat = 0.0f;
@@ -175,14 +241,22 @@ void WorldEditor::unloadProject()
 	_terrainBlueUvRepeat = 0.0f;
 	_terrainCameraHeight = 0.0f;
 	_terrainCameraDistance = 0.0f;
+	_waterDudvmapPath = "";
+	_waterNormalmapPath = "";
+	_waterWavingEnabled = false;
+	_waterRipplingEnabled = false;
+	_waterSpecularEnabled = false;
+	_waterReflectionEnabled = false;
+	_waterRefractionEnabled = false;
+	_waterColor = vec3(0.0f);
 	_waterSize = 0.0f;
 	_waterUvRepeat = 0.0f;
 	_waterHeight = 0.0f;
+	_waterSpeed = 0.0f;
+	_waterTransparency = 0.0f;
+	_waterShininess = 16.0f;
 	_waterCameraHeight = 0.0f;
 	_waterCameraDistance = 0.0f;
-	_cameraRotationSpeed = 0.0f;
-	_totalCameraRotation = 0.0f;
-	_isLoaded = false;
 }
 
 void WorldEditor::update(float delta)

@@ -250,4 +250,6 @@ void TopViewportController::_updateProjectLoading()
 void TopViewportController::_saveCurrentProject()
 {
 	_modelEditor.saveProject();
+	_worldEditor.saveProject();
+	_fe3d.logger_throwInfo("Current project saved!");
 }

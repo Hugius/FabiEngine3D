@@ -42,12 +42,14 @@ private:
 	vector<string> _skyTexturePaths;
 
 	// Terrain function
+	void _loadTerrainMesh();
 	void _updateTerrainCamera();
 	void _upateTerrainManagement();
 	void _updateTerrainMesh();
 	void _updateTerrainBlendmap();
 
 	// Terrain variables
+	bool _isTerrainBlendmapped = false;
 	string _terrainHeightmapPath = "";
 	string _terrainDiffusemapPath = "";
 	string _terrainBlendmapPath = "";

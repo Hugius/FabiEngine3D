@@ -1,5 +1,31 @@
 #include "world_editor.hpp"
 
+void WorldEditor::_loadTerrainMesh()
+{
+	// Remove existing terrain
+	if (_fe3d.terrainEntity_isExisting("@terrain"))
+	{
+		_fe3d.terrainEntity_delete("@terrain");
+	}
+
+	// Add new terrain
+	_fe3d.terrainEntity_add("@terrain", _terrainHeightmapPath, _terrainDiffusemapPath, vec3(0.0f), _terrainSize, _maxTerrainHeight, _terrainUvRepeat);
+	_fe3d.terrainEntity_select("@terrain");
+
+	// Get possibly corrected size
+	_terrainSize = _fe3d.terrainEntity_getSize("@terrain");
+
+	// Camera
+	_terrainCameraHeight = _maxTerrainHeight * 1.25f;
+	_terrainCameraDistance = _terrainSize / 2.0f;
+
+	// Blendmapping
+	if (_isTerrainBlendmapped)
+	{
+		_fe3d.terrainEntity_addBlending("@terrain", _terrainBlendmapPath, _terrainRedPath, _terrainGreenPath, _terrainBluePath, _terrainRedUvRepeat, _terrainGreenUvRepeat, _terrainBlueUvRepeat);
+	}
+}
+
 void WorldEditor::_upateTerrainManagement()
 {
 	if (_currentWorldPart == WorldPart::TERRAIN)
@@ -69,22 +95,7 @@ void WorldEditor::_updateTerrainMesh()
 			}
 			else if (screen->getButton("load")->isHovered())
 			{
-				// Remove existing terrain
-				if (_fe3d.terrainEntity_isExisting("@terrain"))
-				{
-					_fe3d.terrainEntity_delete("@terrain");
-				}
-
-				// Add new terrain
-				_fe3d.terrainEntity_add("@terrain", _terrainHeightmapPath, _terrainDiffusemapPath, vec3(0.0f), _terrainSize, _maxTerrainHeight, _terrainUvRepeat);
-				_fe3d.terrainEntity_select("@terrain");
-
-				// Get possibly corrected size
-				_terrainSize = _fe3d.terrainEntity_getSize("@terrain");
-
-				// Camera
-				_terrainCameraHeight = _maxTerrainHeight * 1.25f;
-				_terrainCameraDistance = _terrainSize / 2.0f;
+				_loadTerrainMesh();
 			}
 			else if (screen->getButton("back")->isHovered())
 			{

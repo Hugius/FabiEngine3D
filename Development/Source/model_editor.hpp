@@ -20,9 +20,9 @@ public:
 	vector<string>& getModelNames();
 
 	void initializeGUI();
-	void loadProject();
-	void saveProject();
-	void unloadProject();
+	void load();
+	void save();
+	void unload();
 	void update(float delta);
 	void setCurrentProjectName(string projectName);
 

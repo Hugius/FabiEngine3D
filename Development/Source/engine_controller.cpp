@@ -10,11 +10,6 @@ EngineController::EngineController() :
 
 }
 
-EngineController::~EngineController()
-{
-
-}
-
 void EngineController::FE3D_CONTROLLER_INIT()
 {
 	misc_setMainRenderingColor(vec3(0.5f, 0.5f, 1.0f));

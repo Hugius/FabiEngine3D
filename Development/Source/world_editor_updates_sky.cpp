@@ -31,6 +31,12 @@ void WorldEditor::_upateSkyManagement()
 		_updateSkyCamera();
 		_updateSkyMesh();
 		_updateSkyOptions();
+		
+		// Dynamic updates
+		if (_fe3d.skyEntity_isExisting("@sky"))
+		{
+			_fe3d.skyEntity_setRotationSpeed("@sky", _skyRotationSpeed);
+		}
 	}
 }
 
@@ -44,46 +50,39 @@ void WorldEditor::_updateSkyMesh()
 		// GUI management
 		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
 		{
-			if (screen->getScrollingList("textureList")->getButton("rightTexture")->isHovered())
+			if (screen->getScrollingList("buttonList")->getButton("rightTexture")->isHovered())
 			{
 				string fileName = _fe3d.misc_getWinExplorerFilename(cubemapPath, "PNG");
 				_skyTexturePaths[0] = (fileName == "") ? _skyTexturePaths[0] : (cubemapPath + fileName);
 			}
-			else if (screen->getScrollingList("textureList")->getButton("leftTexture")->isHovered())
+			else if (screen->getScrollingList("buttonList")->getButton("leftTexture")->isHovered())
 			{
 				string fileName = _fe3d.misc_getWinExplorerFilename(cubemapPath, "PNG");
 				_skyTexturePaths[1] = (fileName == "") ? _skyTexturePaths[1] : (cubemapPath + fileName);
 			}
-			else if (screen->getScrollingList("textureList")->getButton("topTexture")->isHovered())
+			else if (screen->getScrollingList("buttonList")->getButton("topTexture")->isHovered())
 			{
 				string fileName = _fe3d.misc_getWinExplorerFilename(cubemapPath, "PNG");
 				_skyTexturePaths[2] = (fileName == "") ? _skyTexturePaths[2] : (cubemapPath + fileName);
 			}
-			else if (screen->getScrollingList("textureList")->getButton("bottomTexture")->isHovered())
+			else if (screen->getScrollingList("buttonList")->getButton("bottomTexture")->isHovered())
 			{
 				string fileName = _fe3d.misc_getWinExplorerFilename(cubemapPath, "PNG");
 				_skyTexturePaths[3] = (fileName == "") ? _skyTexturePaths[3] : (cubemapPath + fileName);
 			}
-			else if (screen->getScrollingList("textureList")->getButton("backTexture")->isHovered())
+			else if (screen->getScrollingList("buttonList")->getButton("backTexture")->isHovered())
 			{
 				string fileName = _fe3d.misc_getWinExplorerFilename(cubemapPath, "PNG");
 				_skyTexturePaths[4] = (fileName == "") ? _skyTexturePaths[4] : (cubemapPath + fileName);
 			}
-			else if (screen->getScrollingList("textureList")->getButton("frontTexture")->isHovered())
+			else if (screen->getScrollingList("buttonList")->getButton("frontTexture")->isHovered())
 			{
 				string fileName = _fe3d.misc_getWinExplorerFilename(cubemapPath, "PNG");
 				_skyTexturePaths[5] = (fileName == "") ? _skyTexturePaths[5] : (cubemapPath + fileName);
 			}
 			else if (screen->getButton("load")->isHovered())
 			{
-				if (_fe3d.skyEntity_isExisting("@sky"))
-				{
-					_fe3d.skyEntity_delete("@sky");
-				}
-
-				// Add new skybox
-				_fe3d.skyEntity_add("@sky", 0.0f, _skyTexturePaths);
-				_fe3d.skyEntity_select("@sky");
+				_loadSkybox();
 			}
 			else if (screen->getButton("back")->isHovered())
 			{
@@ -106,12 +105,34 @@ void WorldEditor::_updateSkyOptions()
 		// GUI management
 		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
 		{
-			if (screen->getButton("back")->isHovered())
+			if (screen->getScrollingList("buttonList")->getButton("rotationSpeed")->isHovered())
+			{
+				_gui->getGlobalScreen()->addValueForm("rotationSpeed", "Rotation speed", _skyRotationSpeed * 100.0f, vec2(0.0f));
+			}
+			else if (screen->getButton("back")->isHovered())
 			{
 				_window->setActiveScreen("skyManagement");
 			}
 		}
+
+		// Speed value conversion
+		if (_gui->getGlobalScreen()->checkValueForm("rotationSpeed", _skyRotationSpeed))
+		{
+			_skyRotationSpeed /= 100.0f;
+		}
 	}
+}
+
+void WorldEditor::_loadSkybox()
+{
+	if (_fe3d.skyEntity_isExisting("@sky"))
+	{
+		_fe3d.skyEntity_delete("@sky");
+	}
+
+	// Add new skybox
+	_fe3d.skyEntity_add("@sky", _skyTexturePaths);
+	_fe3d.skyEntity_select("@sky");
 }
 
 void WorldEditor::_updateSkyCamera()
@@ -121,17 +142,18 @@ void WorldEditor::_updateSkyCamera()
 		// Move mouse to middle when pressed first time
 		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_RIGHT))
 		{
-			_fe3d.misc_setMousePos(_fe3d.misc_convertToScreenCoords(vec2(0.5f)));
-			return;
+			_fe3d.misc_centerMousePos();
 		}
 
 		// Enable FPS camera
+		_fe3d.gfx_enableMotionBlur();
 		_fe3d.camera_enableFirstPersonView(5.0f);
 		_fe3d.camera_disableLookat();
 		_fe3d.misc_hideCursor();
 	}
 	else
 	{
+		_fe3d.gfx_disableMotionBlur();
 		_fe3d.camera_disableFirstPersonView();
 		_fe3d.misc_showCursor();
 	}

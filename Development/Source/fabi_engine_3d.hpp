@@ -63,7 +63,7 @@ public:
 	// Sky entity interface
 	void skyEntity_add
 	(
-		const string& ID, float rotationSpeed, const vector<string> texturePaths
+		const string& ID, const vector<string> texturePaths
 	);
 	void skyEntity_addNightCubemap(const string& ID, const string& textureDirectoryPath);
 	void skyEntity_delete(const string& ID);
@@ -71,6 +71,7 @@ public:
 	void skyEntity_show(const string& ID);
 	bool skyEntity_isExisting(const string& ID);
 	void skyEntity_select(const string& ID);
+	void skyEntity_setRotationSpeed(const string& ID, float speed);
 	void skyEntity_setDayTime(const string& ID);
 	void skyEntity_setNightTime(const string& ID);
 	void skyEntity_fadeDayTime(const string& ID);
@@ -428,6 +429,7 @@ public:
 	void misc_hideAudioDebugging();
 	void misc_setMainRenderingColor(vec3 color);
 	void misc_setWindowTitle(string title);
+	void misc_centerMousePos();
 	string misc_getWinExplorerFilename(string startingDir, string fileType);
 	string misc_vec2str(vec2 vec);
 	string misc_vec2str(vec3 vec);
@@ -441,6 +443,8 @@ public:
 	vec2 misc_getViewportPosition();
 	vec2 misc_getViewportSize();
 	bool misc_isMouseInsideViewport();
+	bool misc_isDirectory(const string& path);
+	bool misc_isFileExisting(const string& path);
 
 protected:
 	// Virtual interface

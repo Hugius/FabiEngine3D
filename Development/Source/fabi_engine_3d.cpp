@@ -35,12 +35,13 @@ void FabiEngine3D::engine_stop()
 
 void FabiEngine3D::camera_load(float fov, float nearZ, float farZ, vec3 startPos, float yaw, float pitch)
 {
-	_core->_cameraManager.setFOV(fov);
-	_core->_cameraManager.setNearZ(nearZ);
-	_core->_cameraManager.setFarZ(farZ);
+	_core->_cameraManager.reset();
 	_core->_cameraManager.setPosition(startPos);
+	_core->_cameraManager.setFOV(fov);
 	_core->_cameraManager.setYaw(yaw);
 	_core->_cameraManager.setPitch(pitch);
+	_core->_cameraManager.setNearZ(nearZ);
+	_core->_cameraManager.setFarZ(farZ);
 }
 
 void FabiEngine3D::camera_enableLookat(vec3 position)
@@ -161,9 +162,9 @@ vec3 FabiEngine3D::camera_getFront()
 
 /* --------------------------------------------- Sky interface --------------------------------------------- */
 
-void FabiEngine3D::skyEntity_add(const string& ID, float rotationSpeed, const vector<string> texturePaths)
+void FabiEngine3D::skyEntity_add(const string& ID, const vector<string> texturePaths)
 {
-	_core->_skyEntityManager.addSkyEntity(ID, rotationSpeed, _core->_texLoader, texturePaths);
+	_core->_skyEntityManager.addSkyEntity(ID, _core->_texLoader, texturePaths);
 }
 
 void FabiEngine3D::skyEntity_addNightCubemap(const string& ID, const string& textureDirectoryPath)
@@ -190,6 +191,11 @@ void FabiEngine3D::skyEntity_show(const string& ID)
 void FabiEngine3D::skyEntity_select(const string& ID)
 {
 	_core->_skyEntityManager.selectSky(ID);
+}
+
+void FabiEngine3D::skyEntity_setRotationSpeed(const string& ID, float speed)
+{
+	_core->_skyEntityManager.getEntity(ID)->setRotationSpeed(speed);
 }
 
 void FabiEngine3D::skyEntity_setDayTime(const string& ID)
@@ -2028,6 +2034,11 @@ void FabiEngine3D::misc_setWindowTitle(string title)
 	_core->_windowManager.setTitle(title);
 }
 
+void FabiEngine3D::misc_centerMousePos()
+{
+	_core->_cameraManager.center();
+}
+
 string FabiEngine3D::misc_getWinExplorerFilename(string startingDir, string fileType)
 {
 	// Prepare filter C-string
@@ -2150,4 +2161,17 @@ bool FabiEngine3D::misc_isMouseInsideViewport()
 	}
 
 	return false;
+}
+
+bool FabiEngine3D::misc_isDirectory(const string& path)
+{
+	struct stat fileInfo;
+	stat(path.c_str(), &fileInfo);
+	return (fileInfo.st_mode & S_IFDIR);
+}
+
+bool FabiEngine3D::misc_isFileExisting(const string& path)
+{
+	struct stat fileInfo;
+	return stat(path.c_str(), &fileInfo) == 0;
 }

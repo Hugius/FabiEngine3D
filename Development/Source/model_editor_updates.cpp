@@ -45,7 +45,7 @@ void ModelEditor::_updateModelManagement()
 		else if (screen->getButton("back")->isHovered()) // Back button
 		{
 			_window->setActiveScreen("main");
-			unloadProject();
+			unload();
 		}
 	}
 }

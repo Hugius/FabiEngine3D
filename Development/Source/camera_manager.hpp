@@ -14,6 +14,8 @@ public:
 	CameraManager(ShaderBus& shaderBus);
 	~CameraManager() = default;
 
+	void reset();
+
 	// Update
 	void update(WindowManager & windowManager, float delta);
 	void updateMatrices();
@@ -80,7 +82,7 @@ private:
 	float _mouseOffset = 0.0f;
 
 	// Booleans
-	bool _lookatEabled = false;
+	bool _lookatEabled			 = false;
 	bool _firstPersonViewEnabled = false;
 	bool _freeMovementEnabled    = true;
 	bool _mustCenter             = false;

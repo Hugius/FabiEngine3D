@@ -35,12 +35,12 @@ void LeftViewportController::update(float delta)
 	{
 		if (screen->getButton("modelEditor")->isHovered()) // Model editor button
 		{
-			_modelEditor.loadProject();
+			_modelEditor.load();
 			window->setActiveScreen("modelManagement");
 		}
 		else if (screen->getButton("worldEditor")->isHovered()) // World editor button
 		{
-			_worldEditor.loadProject();
+			_worldEditor.load();
 			window->setActiveScreen("worldManagement");
 		}
 	}

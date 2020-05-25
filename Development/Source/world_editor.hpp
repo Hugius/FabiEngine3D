@@ -12,15 +12,18 @@ public:
 	~WorldEditor() = default;
 
 	void initializeGUI();
-	void loadProject();
-	void saveProject();
-	void unloadProject();
+	void load();
+	void save();
+	void unload();
 	void update(float delta);
 	void setCurrentProjectName(string projectName);
 
 	bool isLoaded();
 
 private:
+	// General functions
+	void _updateMiscellaneous();
+
 	// General variables
 	bool _isLoaded = false;
 	WorldPart _currentWorldPart = WorldPart::NONE;
@@ -33,6 +36,7 @@ private:
 	shared_ptr<EngineGuiWindow> _window;
 
 	// Sky functions
+	void _loadSkybox();
 	void _updateSkyCamera();
 	void _upateSkyManagement();
 	void _updateSkyMesh();
@@ -40,6 +44,7 @@ private:
 
 	// Sky variables
 	vector<string> _skyTexturePaths;
+	float _skyRotationSpeed = 0.0f;
 
 	// Terrain function
 	void _loadTerrainMesh();

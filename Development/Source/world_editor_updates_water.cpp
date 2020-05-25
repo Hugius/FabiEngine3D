@@ -53,9 +53,10 @@ void WorldEditor::_upateWaterManagement()
 		_updateWaterEffects();
 		_updateWaterOptions();
 
-		// Update water properties
+		// Dnyamic water updates
 		if (_fe3d.waterEntity_isExisting("@water"))
 		{
+			// Update water properties
 			_fe3d.waterEntity_setReflective("@water", _waterReflectionEnabled);
 			_fe3d.waterEntity_setRefractive("@water", _waterRefractionEnabled);
 			_fe3d.waterEntity_setWaving("@water", _waterWavingEnabled);
@@ -66,6 +67,10 @@ void WorldEditor::_upateWaterManagement()
 			_fe3d.waterEntity_setSurfaceHeight("@water", _waterHeight);
 			_fe3d.waterEntity_setUvRepeat("@water", _waterUvRepeat);
 			_fe3d.waterEntity_setSpeed("@water", _waterSpeed);
+
+			// Update camera values
+			_waterCameraHeight = _waterHeight + (_waterSize / 16.0f);
+			_waterCameraDistance = _waterSize / 2.0f;
 		}
 	}
 }
@@ -119,20 +124,6 @@ void WorldEditor::_updateWaterMesh()
 			if (_waterSize != 0.0f)
 			{
 				_loadWaterPlane();
-			}
-		}
-
-		// Miscellaneous
-		if (_fe3d.waterEntity_isExisting("@water"))
-		{
-			// Update camera values
-			_waterCameraHeight = _waterHeight + (_waterSize / 16.0f);
-			_waterCameraDistance = _waterSize / 2.0f;
-
-			// Update wireframe visibility
-			if (!_gui->getGlobalScreen()->isFocused())
-			{
-				_fe3d.input_getKeyToggled(Input::KEY_W) ? _fe3d.misc_enableWireframeRendering() : _fe3d.misc_disableWireframeRendering();
 			}
 		}
 

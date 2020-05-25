@@ -283,6 +283,9 @@
     <ClCompile Include="Source\engine_gui_global_screen_core.cpp">
       <Filter>src\GUI System</Filter>
     </ClCompile>
+    <ClCompile Include="Source\world_editor_updates.cpp">
+      <Filter>src\Editor System\World Editor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\obj_loader.hpp">

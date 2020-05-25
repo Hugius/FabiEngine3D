@@ -65,7 +65,9 @@ void RenderEngine::renderScene(EntityBus * entityBus, CameraManager & camera, iv
 		_renderWaterEntity();
 		_renderGameEntities();
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		glViewport(0, 0, Config::getInst().getWindowWidth(), Config::getInst().getWindowHeight());
 		_renderGuiEntities();
+		_renderTextEntities();
 		_timer.stop();
 	}
 	else

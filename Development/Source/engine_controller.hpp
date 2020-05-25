@@ -10,7 +10,7 @@ class EngineController final : public FabiEngine3D
 {
 public:
 	EngineController();
-	~EngineController();
+	~EngineController() = default;
 
 	void FE3D_CONTROLLER_INIT();
 	void FE3D_CONTROLLER_UPDATE(float delta);

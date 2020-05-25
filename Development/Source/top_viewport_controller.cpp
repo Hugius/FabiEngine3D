@@ -134,19 +134,15 @@ void TopViewportController::_updateProjectCreation()
 				// Projectname must be valid
 				if (projectName != "")
 				{
-					cleanup = true;
-
 					// Get directory path for the new project
 					string newDirectoryPath = _fe3d.misc_getRootDirectory() + "User\\Projects\\" + projectName;
 
 					// Check if project already exists
-					struct stat info;
-					stat(newDirectoryPath.c_str(), &info);
-					if (info.st_mode & S_IFDIR) // Project already exists
+					if(_fe3d.misc_isFileExisting(newDirectoryPath) && _fe3d.misc_isDirectory(newDirectoryPath)) // Project is existent
 					{
 						Logger::getInst().throwWarning("Project \"" + projectName + "\"" + " already exists!");
 					}
-					else // Project non-existent
+					else // Project is non-existent
 					{
 						// Create new directory
 						_mkdir(newDirectoryPath.c_str());
@@ -156,23 +152,29 @@ void TopViewportController::_updateProjectCreation()
 						file.open(_fe3d.misc_getRootDirectory() + "User\\Projects\\" + projectName + "\\models.fe3d");;
 						file.close();
 
-						// Apply to current project
-						_currentProjectName = projectName;
-
-						// Go back to main editor screen
-						_gui->getViewport("left")->getWindow("main")->setActiveScreen("main");
-
 						// Unload model editor
 						if (_modelEditor.isLoaded())
 						{
-							_modelEditor.unloadProject();
+							_modelEditor.unload();
 						}
 
 						// Unload world editor
 						if (_worldEditor.isLoaded())
 						{
-							_worldEditor.unloadProject();
+							_worldEditor.unload();
 						}
+
+						// Apply to current project
+						_currentProjectName = projectName;
+
+						// Pass loaded project name
+						_modelEditor.setCurrentProjectName(_currentProjectName);
+						_worldEditor.setCurrentProjectName(_currentProjectName);
+
+						// Go back to main editor screen
+						_gui->getViewport("left")->getWindow("main")->setActiveScreen("main");
+
+						cleanup = true;
 					}
 				}
 			}
@@ -219,17 +221,18 @@ void TopViewportController::_updateProjectLoading()
 					// Unload model editor
 					if (_modelEditor.isLoaded())
 					{
-						_modelEditor.unloadProject();
+						_modelEditor.unload();
 					}
 
 					// Unload world editor
 					if (_worldEditor.isLoaded())
 					{
-						_worldEditor.unloadProject();
+						_worldEditor.unload();
 					}
 
-					// Give new project name
+					// Pass loaded project name
 					_modelEditor.setCurrentProjectName(_currentProjectName);
+					_worldEditor.setCurrentProjectName(_currentProjectName);
 				}
 			}
 		}
@@ -249,7 +252,7 @@ void TopViewportController::_updateProjectLoading()
 
 void TopViewportController::_saveCurrentProject()
 {
-	_modelEditor.saveProject();
-	_worldEditor.saveProject();
-	_fe3d.logger_throwInfo("Current project saved!");
+	_modelEditor.save();
+	_worldEditor.save();
+	_fe3d.logger_throwInfo("Project \"" + _currentProjectName + "\" saved!");
 }

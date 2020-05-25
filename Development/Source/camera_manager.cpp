@@ -11,39 +11,74 @@ CameraManager::CameraManager(ShaderBus& shaderBus) :
 	_aspectRatio = float(Config::getInst().getWindowWidth()) / float(Config::getInst().getWindowHeight());
 }
 
+void CameraManager::reset()
+{
+	// Matrices
+	_viewMatrix = mat4(1.0f);
+	_projectionMatrix = mat4(1.0f);
+
+	// Vectors
+	_up = vec3(0.0f);
+	_right = vec3(0.0f);
+	_front = vec3(0.0f);
+	_pos = vec3(0.0f);
+	_lookat = vec3(0.0f);
+
+	// Floats
+	_fov = 0.0f;
+	_pitch = 0.0f;
+	_yaw = 0.0f;
+	_nearZ = 0.0f;
+	_farZ = 0.0f;
+	_mouseSensitivity = 0.0f;
+	_mouseOffset = 0.0f;
+
+	// Booleans
+	_lookatEabled = false;
+	_firstPersonViewEnabled = false;
+	_freeMovementEnabled = true;
+	_mustCenter = false;
+}
+
 void CameraManager::update(WindowManager & windowManager, float delta)
 {
 	if (_firstPersonViewEnabled)
 	{
 		// Get mouse position
-		ivec2 mousePos;
+		ivec2 mousePos = windowManager.getMousePos();
+		float tempOffsetX = float(mousePos.x) - float(Config::getInst().getWindowWidth() / 2);
+		float tempOffsetY = float(Config::getInst().getWindowHeight() / 2) - float(mousePos.y);
+
+		// Center cursor if needed
 		if (_mustCenter)
 		{
-			mousePos = Config::getInst().getWindowSize() / 2;
-			_mustCenter = false;
-		}
-		else
-		{
-			mousePos = windowManager.getMousePos();
+			if (tempOffsetX == 0.0f && tempOffsetY == 0.0f)
+			{
+				_mustCenter = false;
+			}
+			else
+			{
+				mousePos = Config::getInst().getWindowSize() / 2;
+			}
 		}
 
 		// Reset mouse position in the middle of the screen
 		windowManager.setMousePos(ivec2(Config::getInst().getWindowWidth() / 2, Config::getInst().getWindowHeight() / 2));
 
 		// Offset between current and last mouse pos
-		float xoffset = float(mousePos.x)                              - float(Config::getInst().getWindowWidth() / 2);
-		float yoffset = float(Config::getInst().getWindowHeight() / 2) - float(mousePos.y);
+		float xOffset = float(mousePos.x)                              - float(Config::getInst().getWindowWidth() / 2);
+		float yOffset = float(Config::getInst().getWindowHeight() / 2) - float(mousePos.y);
 
 		// Applying mouse sensitivity
-		xoffset *= (_mouseSensitivity * delta) / 100.0f;
-		yoffset *= (_mouseSensitivity * delta) / 100.0f;
+		xOffset *= (_mouseSensitivity * delta) / 100.0f;
+		yOffset *= (_mouseSensitivity * delta) / 100.0f;
 
 		// Calculate overall mouse offset
-		_mouseOffset = (xoffset + yoffset) / 2.0f;
+		_mouseOffset = (xOffset + yOffset) / 2.0f;
 
 		// Calculate pitch & yaw
-		_pitch += yoffset;
-		_yaw = std::fmod((_yaw + xoffset), 360.0f); // Can't be higher than 360 degrees
+		_pitch += yOffset;
+		_yaw = std::fmod((_yaw + xOffset), 360.0f); // Can't be higher than 360 degrees
 
 		// So the player cannot unnaturally vertically turn its head 
 		_pitch = std::clamp(_pitch, -89.0f, 89.0f);

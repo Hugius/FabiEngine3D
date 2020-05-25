@@ -30,7 +30,7 @@ void SkyEntityManager::selectSky(const string & ID)
 	_selectedID = ID;
 }
 
-void SkyEntityManager::addSkyEntity(const string & ID,  float rotationSpeed, TextureLoader& texLoader, const vector<string> texturePaths)
+void SkyEntityManager::addSkyEntity(const string & ID, TextureLoader& texLoader, const vector<string> texturePaths)
 {
 	// Skybox vertices
 	float skybox_data[] =
@@ -84,7 +84,6 @@ void SkyEntityManager::addSkyEntity(const string & ID,  float rotationSpeed, Tex
 	// Fill entity
 	getEntity(ID)->addOglBuffer(new OpenGLBuffer(SHAPE_CUBEMAP, skybox_data, sizeof(skybox_data) / sizeof(float)));
 	getEntity(ID)->setDayCubeMap(texLoader.getCubeMap(texturePaths));
-	getEntity(ID)->setRotationSpeed(rotationSpeed);
 	getEntity(ID)->setDayTime();
 	getEntity(ID)->setTexturePaths(texturePaths);
 }

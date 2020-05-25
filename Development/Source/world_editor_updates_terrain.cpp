@@ -169,6 +169,7 @@ void WorldEditor::_updateTerrainBlendmap()
 			}
 			else if (screen->getButton("load")->isHovered())
 			{
+				_isTerrainBlendmapped = true;
 				_fe3d.terrainEntity_addBlending("@terrain", _terrainBlendmapPath, _terrainRedPath, _terrainGreenPath, _terrainBluePath, _terrainRedUvRepeat, _terrainGreenUvRepeat, _terrainBlueUvRepeat);
 			}
 			else if (screen->getButton("back")->isHovered())

@@ -1,4 +1,3 @@
-#include <filesystem>
 #include <fstream>
 #include <sstream>
 
@@ -66,7 +65,7 @@ void ModelEditor::initializeGUI()
 	_window->getScreen("modelEditingSize")->addButton("back", vec2(0.0f, -0.9f), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Go back", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 }
 
-void ModelEditor::loadProject()
+void ModelEditor::load()
 {
 	// Camera
 	_fe3d.camera_load(90.0f, 0.1f, 1000.0f, vec3(_startingCameraPos), -90.0f, 0.0f);
@@ -83,17 +82,18 @@ void ModelEditor::loadProject()
 	_fe3d.gfx_enableSpecularLighting(16.0f);
 	
 	// 3D Environment
-	_fe3d.gameEntity_add("@modelEditorGrid", "Engine\\OBJs\\plane.obj", vec3(0.0f), vec3(0.0f), vec3(100.0f, 1.0f, 100.0f));
-	_fe3d.gameEntity_setDiffuseMap("@modelEditorGrid", "Engine\\Textures\\metal.png");
-	_fe3d.gameEntity_setUvRepeat("@modelEditorGrid", 25.0f);
-	_fe3d.gameEntity_setSceneReflective("@modelEditorGrid", true);
-	_fe3d.gameEntity_setSpecularLighted("@modelEditorGrid", true);
+	_fe3d.gameEntity_add("@grid", "Engine\\OBJs\\plane.obj", vec3(0.0f), vec3(0.0f), vec3(100.0f, 1.0f, 100.0f));
+	_fe3d.gameEntity_setDiffuseMap("@grid", "Engine\\Textures\\metal.png");
+	_fe3d.gameEntity_setUvRepeat("@grid", 25.0f);
+	_fe3d.gameEntity_setSceneReflective("@grid", true);
+	_fe3d.gameEntity_setSpecularLighted("@grid", true);
 	_fe3d.gameEntity_add("@cube", "Engine\\OBJs\\cube.obj", vec3(5.0f, 0.0f, 0.0f), vec3(0.0f), vec3(1.0f, 1.0f, 1.0f));
 	_fe3d.gameEntity_setDiffuseMap("@cube", "Engine\\Textures\\cube.png");
 	_fe3d.gameEntity_setFaceCulled("@cube", true);
 	string path = "Engine\\Textures\\";
-	_fe3d.skyEntity_add("@modelEditorSky", 0.1f, { path + "right.png", path + "left.png", path + "top.png", path + "bottom.png", path + "back.png", path + "front.png" });
-	_fe3d.skyEntity_select("@modelEditorSky");
+	_fe3d.skyEntity_add("@sky", { path + "right.png", path + "left.png", path + "top.png", path + "bottom.png", path + "back.png", path + "front.png" });
+	_fe3d.skyEntity_setRotationSpeed("@sky", 0.1f);
+	_fe3d.skyEntity_select("@sky");
 
 	// Other
 	_gui->getGlobalScreen()->addTextfield("currentModelName", vec2(0.0f, 0.85f), vec2(0.5f, 0.1f), "", vec3(1.0f));
@@ -135,7 +135,7 @@ void ModelEditor::loadProject()
 	file.close();
 }
 
-void ModelEditor::saveProject()
+void ModelEditor::save()
 {
 	if (_currentProjectName != "")
 	{
@@ -189,7 +189,7 @@ void ModelEditor::saveProject()
 	}
 }
 
-void ModelEditor::unloadProject()
+void ModelEditor::unload()
 {
 	// Graphics
 	_fe3d.gfx_disableAmbientLighting();
@@ -202,9 +202,9 @@ void ModelEditor::unloadProject()
 	_fe3d.gfx_disableSpecularLighting();
 
 	// 3D environment
-	_fe3d.gameEntity_delete("@modelEditorGrid");
+	_fe3d.gameEntity_delete("@grid");
 	_fe3d.gameEntity_delete("@cube");
-	_fe3d.skyEntity_delete("@modelEditorSky");
+	_fe3d.skyEntity_delete("@sky");
 
 	// Delete models
 	for (auto& modelName : _modelNames)

@@ -1,6 +1,6 @@
 #include "world_editor.hpp"
 
-#include <filesystem>
+#include <sys/stat.h>
 #include <fstream>
 #include <sstream>
 
@@ -31,19 +31,21 @@ void WorldEditor::initializeGUI()
 
 	// Left-viewport: mainWindow - skyMesh
 	_window->addScreen("skyMesh");
-	_window->getScreen("skyMesh")->addScrollingList("textureList", vec2(0.0f, 0.2f), vec2(1.9, 1.5f), vec3(0.3f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, _gui->leftVpTextColor, _gui->leftVpTextHoverColor, vec2(0.15f, 0.1f));
-	_window->getScreen("skyMesh")->getScrollingList("textureList")->addButton("leftTexture", "Left texture");
-	_window->getScreen("skyMesh")->getScrollingList("textureList")->addButton("rightTexture", "Right texture");
-	_window->getScreen("skyMesh")->getScrollingList("textureList")->addButton("frontTexture", "Front texture");
-	_window->getScreen("skyMesh")->getScrollingList("textureList")->addButton("backTexture", "Back texture");
-	_window->getScreen("skyMesh")->getScrollingList("textureList")->addButton("topTexture", "Top texture");
-	_window->getScreen("skyMesh")->getScrollingList("textureList")->addButton("bottomTexture", "Bottom texture");
+	_window->getScreen("skyMesh")->addScrollingList("buttonList", vec2(0.0f, 0.2f), vec2(1.9, 1.5f), vec3(0.3f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, _gui->leftVpTextColor, _gui->leftVpTextHoverColor, vec2(0.15f, 0.1f));
+	_window->getScreen("skyMesh")->getScrollingList("buttonList")->addButton("leftTexture", "Left texture");
+	_window->getScreen("skyMesh")->getScrollingList("buttonList")->addButton("rightTexture", "Right texture");
+	_window->getScreen("skyMesh")->getScrollingList("buttonList")->addButton("frontTexture", "Front texture");
+	_window->getScreen("skyMesh")->getScrollingList("buttonList")->addButton("backTexture", "Back texture");
+	_window->getScreen("skyMesh")->getScrollingList("buttonList")->addButton("topTexture", "Top texture");
+	_window->getScreen("skyMesh")->getScrollingList("buttonList")->addButton("bottomTexture", "Bottom texture");
 	_window->getScreen("skyMesh")->addButton("load", vec2(0.0f, -0.7f), vec2(1.0f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Load", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 	_window->getScreen("skyMesh")->addButton("back", vec2(0.0f, -0.9f), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Go back", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 
 	// Left-viewport: mainWindow - skyOptions
 	_window->addScreen("skyOptions");
-	_window->getScreen("skyOptions")->addButton("back", vec2(0.0f, -0.475f), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Go back", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_window->getScreen("skyOptions")->addScrollingList("buttonList", vec2(0.0f, 0.2f), vec2(1.9, 1.5f), vec3(0.3f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, _gui->leftVpTextColor, _gui->leftVpTextHoverColor, vec2(0.15f, 0.1f));
+	_window->getScreen("skyOptions")->getScrollingList("buttonList")->addButton("rotationSpeed", "Rotation speed");
+	_window->getScreen("skyOptions")->addButton("back", vec2(0.0f, -0.9f), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Go back", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 
 	// Left-viewport: mainWindow - terrainManagement
 	_window->addScreen("terrainManagement");
@@ -114,7 +116,7 @@ void WorldEditor::initializeGUI()
 	_window->getScreen("waterOptions")->addButton("back", vec2(0.0f, -0.9f), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Go back", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 }
 
-void WorldEditor::loadProject()
+void WorldEditor::load()
 {
 	// Camera
 	_fe3d.camera_load(90.0f, 0.1f, 1000.0f, vec3(0.0f), 0.0f, 0.0f);
@@ -128,9 +130,74 @@ void WorldEditor::loadProject()
 	// Other
 	_skyTexturePaths = { "", "", "", "", "", "" };
 	_isLoaded = true;
+
+	// File paths
+	string skyPath = _fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\sky.fe3d";
+	string terrainPath = _fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\terrain.fe3d";
+	string waterPath = _fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\water.fe3d";
+	
+	// Load sky file
+	if (_fe3d.misc_isFileExisting(skyPath))
+	{
+		std::ifstream skyFile(skyPath);
+
+		// Load base data
+		skyFile >> 
+			_skyTexturePaths[0] >> _skyTexturePaths[1] >> _skyTexturePaths[2] >> _skyTexturePaths[3] >> _skyTexturePaths[4] >> _skyTexturePaths[5] >> 
+			_skyRotationSpeed;
+
+		skyFile.close();
+
+		_loadSkybox();
+		_fe3d.skyEntity_hide("@sky");
+	}
+	
+	// Load terrain file
+	if (_fe3d.misc_isFileExisting(terrainPath))
+	{
+		std::ifstream terrainFile(terrainPath);
+
+		// Load base data
+		terrainFile >> _terrainHeightmapPath >> _terrainDiffusemapPath >> _terrainSize >> _maxTerrainHeight >> _terrainUvRepeat >> _isTerrainBlendmapped;
+
+		// Load blendmapping data
+		if (_isTerrainBlendmapped)
+		{
+			terrainFile >> 
+				_terrainBlendmapPath >> _terrainRedPath >> _terrainGreenPath >> _terrainBluePath >> 
+				_terrainRedUvRepeat >> _terrainGreenUvRepeat >> _terrainBlueUvRepeat;
+		}
+
+		terrainFile.close();
+
+		_loadTerrainMesh();
+		_fe3d.terrainEntity_hide("@terrain");
+	}
+
+	// Load water file
+	if (_fe3d.misc_isFileExisting(waterPath))
+	{
+		std::ifstream waterFile(waterPath);
+
+		// Load base data
+		waterFile >>
+			_waterDudvmapPath >> _waterNormalmapPath >>
+			_waterWavingEnabled >> _waterRipplingEnabled >> _waterSpecularEnabled >> _waterReflectionEnabled >>
+			_waterRefractionEnabled >> _waterColor.r >> _waterColor.g >> _waterColor.b >> _waterSize >>
+			_waterUvRepeat >> _waterHeight >> _waterSpeed >> _waterTransparency >> _waterShininess;
+
+		// Perform checks
+		_waterDudvmapPath = (_waterDudvmapPath == "-" ? "" : _waterDudvmapPath);
+		_waterNormalmapPath = (_waterNormalmapPath == "-" ? "" : _waterNormalmapPath);
+
+		waterFile.close();
+
+		_loadWaterPlane();
+		_fe3d.waterEntity_hide("@water");
+	}
 }
 
-void WorldEditor::saveProject()
+void WorldEditor::save()
 {
 	if (_currentProjectName != "")
 	{
@@ -139,16 +206,15 @@ void WorldEditor::saveProject()
 		{
 			// Load file
 			std::ofstream skyFile(_fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\sky.fe3d");
-			string line = "";
 
-			// Add path to line
+			// Add path to file
 			for (auto& path : _skyTexturePaths)
 			{
-				line += path + " ";
+				skyFile << path << " ";
 			}
 
-			// Write line to file
-			skyFile << line;
+			// Add options to file
+			skyFile << _skyRotationSpeed;
 
 			// Close file
 			skyFile.close();
@@ -193,7 +259,7 @@ void WorldEditor::saveProject()
 	}
 }
 
-void WorldEditor::unloadProject()
+void WorldEditor::unload()
 {
 	_fe3d.gfx_disableAmbientLighting();
 	_fe3d.gfx_disableDirectionalLighting();
@@ -224,8 +290,8 @@ void WorldEditor::unloadProject()
 	_delta = 0.0f;
 	_cameraRotationSpeed = 0.0f;
 	_totalCameraRotation = 0.0f;
-	_currentProjectName = "";
 	_skyTexturePaths.clear();
+	_skyRotationSpeed = 0.0f;
 	_isTerrainBlendmapped = false;
 	_terrainHeightmapPath = "";
 	_terrainDiffusemapPath = "";
@@ -257,73 +323,4 @@ void WorldEditor::unloadProject()
 	_waterShininess = 16.0f;
 	_waterCameraHeight = 0.0f;
 	_waterCameraDistance = 0.0f;
-}
-
-void WorldEditor::update(float delta)
-{
-	if (_isLoaded)
-	{
-		auto screen = _window->getScreen("worldManagement");
-		_delta = delta;
-
-		// GUI management
-		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
-		{
-			if (screen->getButton("sky")->isHovered())
-			{
-				_window->setActiveScreen("skyManagement");
-				_currentWorldPart = WorldPart::SKY;
-
-				// Hide terrain
-				if (_fe3d.terrainEntity_isExisting("@terrain"))
-				{
-					_fe3d.terrainEntity_hide("@terrain");
-				}
-
-				// Hide water
-				if (_fe3d.waterEntity_isExisting("@water"))
-				{
-					_fe3d.waterEntity_hide("@water");
-				}
-			}
-			else if (screen->getButton("terrain")->isHovered())
-			{
-				_window->setActiveScreen("terrainManagement");
-				_currentWorldPart = WorldPart::TERRAIN;
-
-				// Show terrain
-				if (_fe3d.terrainEntity_isExisting("@terrain"))
-				{
-					_fe3d.terrainEntity_show("@terrain");
-				}
-
-				// Hide water
-				if (_fe3d.waterEntity_isExisting("@water"))
-				{
-					_fe3d.waterEntity_hide("@water");
-				}
-			}
-			else if (screen->getButton("water")->isHovered())
-			{
-				_window->setActiveScreen("waterManagement");
-				_currentWorldPart = WorldPart::WATER;
-
-				// Show water
-				if (_fe3d.waterEntity_isExisting("@water"))
-				{
-					_fe3d.waterEntity_show("@water");
-				}
-			}
-			else if (screen->getButton("back")->isHovered())
-			{
-				_window->setActiveScreen("main");
-				unloadProject();
-			}
-		}
-
-		// Update sub-menus
-		_upateSkyManagement();
-		_upateTerrainManagement();
-		_upateWaterManagement();
-	}
 }

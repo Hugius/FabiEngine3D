@@ -10,7 +10,7 @@ bool EngineGuiGlobalScreen::isFocused()
 	return _isFocused;
 }
 
-void EngineGuiGlobalScreen::addValueForm(string ID, string title, float value, vec2 position)
+void EngineGuiGlobalScreen::addValueForm(const string& ID, string title, float value, vec2 position)
 {
 	if (ID != "" && std::find(_valueFormIDs.begin(), _valueFormIDs.end(), ID) == _valueFormIDs.end())
 	{
@@ -36,7 +36,7 @@ void EngineGuiGlobalScreen::addValueForm(string ID, string title, float value, v
 }
 
 
-bool EngineGuiGlobalScreen::checkValueForm(string ID, float& value)
+bool EngineGuiGlobalScreen::checkValueForm(const string& ID, float& value)
 {
 	bool changed = false;
 
@@ -82,6 +82,62 @@ bool EngineGuiGlobalScreen::checkValueForm(string ID, float& value)
 	}
 
 	return changed;
+}
+
+void EngineGuiGlobalScreen::addAnswerForm(const string& ID, string title, vec2 position)
+{
+	if (_answerFormID == "")
+	{
+		addTextfield("question", position, vec2(0.3f, 0.1f), title, vec3(1.0f));
+		addButton("yes", position + vec2(-0.1f, -0.2f), vec2(0.1f, 0.1f), vec3(0.0f, 0.5f, 0.0f), vec3(0.0f, 1.0f, 0.0f), "Yes", vec3(1.0f), vec3(0.0f));
+		addButton("no", position + vec2(0.1f, -0.2f), vec2(0.1f, 0.1f), vec3(0.5f, 0.0f, 0.0f), vec3(1.0f, 0.0f, 0.0f), "No", vec3(1.0f), vec3(0.0f));
+		_isFocused = true;
+		_answerFormID = ID;
+	}
+}
+
+bool EngineGuiGlobalScreen::checkAnswerFormConfirmed(const string& ID)
+{
+	if (checkButton("yes") && (ID == _answerFormID))
+	{
+		if (getButton("yes")->isHovered() && _fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
+		{
+			removeAnswerForm(ID);
+			return true;
+		}
+
+		return false;
+	}
+
+	return false;
+}
+
+bool EngineGuiGlobalScreen::checkAnswerFormDeclined(const string& ID)
+{
+	if (checkButton("no") && (ID == _answerFormID))
+	{
+		if (getButton("no")->isHovered() && _fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
+		{
+			removeAnswerForm(ID);
+			return true;
+		}
+
+		return false;
+	}
+
+	return false;
+}
+
+void EngineGuiGlobalScreen::removeAnswerForm(const string& ID)
+{
+	if (ID == _answerFormID)
+	{
+		deleteTextfield("question");
+		deleteButton("yes");
+		deleteButton("no");
+		_isFocused = false;
+		_answerFormID = "";
+	}
 }
 
 void EngineGuiGlobalScreen::_updateValueFilling()

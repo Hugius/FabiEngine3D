@@ -36,29 +36,37 @@ void TopViewportController::initialize()
 void TopViewportController::update(float delta)
 {
 	auto projectWindow = _gui->getViewport("top")->getWindow("projectWindow");
+	auto mainScreen = projectWindow->getScreen("main");
 
 	// Check if LMB pressed
 	if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
 	{
-		if (projectWindow->getScreen("main")->getButton("newProject")->isHovered())
+		if (mainScreen->getButton("newProject")->isHovered())
 		{
 			_initializeProjectCreation();
 		}
-		else if (projectWindow->getScreen("main")->getButton("loadProject")->isHovered())
+		else if (mainScreen->getButton("loadProject")->isHovered())
 		{
 			_initializeProjectLoading();
 		}
-		else if (projectWindow->getScreen("main")->getButton("saveProject")->isHovered())
+		else if (mainScreen->getButton("saveProject")->isHovered())
 		{
 			_saveCurrentProject();
 		}
-		else if (projectWindow->getScreen("main")->getButton("openDocs")->isHovered())
+		else if (mainScreen->getButton("openDocs")->isHovered())
 		{
 			
 		}
-		else if (projectWindow->getScreen("main")->getButton("quitEngine")->isHovered())
+		else if (mainScreen->getButton("quitEngine")->isHovered())
 		{
-			_fe3d.engine_stop();
+			if (_currentProjectName != "") // A project must be loaded
+			{
+				_gui->getGlobalScreen()->addAnswerForm("exitEngine", "Save changes?", vec2(0.0f, 0.25f));
+			}
+			else // Otherwise, just exit the engine
+			{
+				_fe3d.engine_stop();
+			}
 		}
 	}
 
@@ -67,11 +75,23 @@ void TopViewportController::update(float delta)
 	_updateProjectLoading();
 
 	// Update button hoverability
+	mainScreen->getButton("saveProject")->setHoverable(_currentProjectName != "");
 	_gui->getViewport("left")->getWindow("main")->getScreen("main")->getButton("modelEditor")->setHoverable(_currentProjectName != "");
 	_gui->getViewport("left")->getWindow("main")->getScreen("main")->getButton("worldEditor")->setHoverable(_currentProjectName != "");
 	_gui->getViewport("left")->getWindow("main")->getScreen("main")->getButton("placingEditor")->setHoverable(_currentProjectName != "");
 	_gui->getViewport("left")->getWindow("main")->getScreen("main")->getButton("lightingEditor")->setHoverable(_currentProjectName != "");
 	_gui->getViewport("left")->getWindow("main")->getScreen("main")->getButton("scriptEditor")->setHoverable(_currentProjectName != "");
+
+	// Check if user wants to save changes
+	if (_gui->getGlobalScreen()->checkAnswerFormConfirmed("exitEngine"))
+	{
+		_saveCurrentProject();
+		_fe3d.engine_stop();
+	}
+	else if (_gui->getGlobalScreen()->checkAnswerFormDeclined("exitEngine"))
+	{
+		_fe3d.engine_stop();
+	}
 }
 
 void TopViewportController::_initializeProjectCreation()
@@ -147,11 +167,6 @@ void TopViewportController::_updateProjectCreation()
 						// Create new directory
 						_mkdir(newDirectoryPath.c_str());
 
-						// Create new models file
-						std::ofstream file;
-						file.open(_fe3d.misc_getRootDirectory() + "User\\Projects\\" + projectName + "\\models.fe3d");;
-						file.close();
-
 						// Unload model editor
 						if (_modelEditor.isLoaded())
 						{
@@ -173,6 +188,9 @@ void TopViewportController::_updateProjectCreation()
 
 						// Go back to main editor screen
 						_gui->getViewport("left")->getWindow("main")->setActiveScreen("main");
+
+						// Logging
+						_fe3d.logger_throwInfo("New project \"" + _currentProjectName + "\" created!");
 
 						cleanup = true;
 					}
@@ -233,6 +251,9 @@ void TopViewportController::_updateProjectLoading()
 					// Pass loaded project name
 					_modelEditor.setCurrentProjectName(_currentProjectName);
 					_worldEditor.setCurrentProjectName(_currentProjectName);
+
+					// Logging
+					_fe3d.logger_throwInfo("Existing project \"" + _currentProjectName + "\" loaded!");
 				}
 			}
 		}
@@ -252,7 +273,16 @@ void TopViewportController::_updateProjectLoading()
 
 void TopViewportController::_saveCurrentProject()
 {
+	// Error checking
+	if (_currentProjectName == "")
+	{
+		_fe3d.logger_throwError("Tried to save as empty project!");
+	}
+
+	// Save everything
 	_modelEditor.save();
 	_worldEditor.save();
+
+	// Logging
 	_fe3d.logger_throwInfo("Project \"" + _currentProjectName + "\" saved!");
 }

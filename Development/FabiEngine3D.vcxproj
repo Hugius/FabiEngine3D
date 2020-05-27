@@ -309,6 +309,9 @@
     <ClCompile Include="Source\core_engine_updates.cpp" />
     <ClCompile Include="Source\fabi_engine_3d.cpp" />
     <ClCompile Include="Source\world_editor_core.cpp" />
+    <ClCompile Include="Source\world_editor_core_sky.cpp" />
+    <ClCompile Include="Source\world_editor_core_terrain.cpp" />
+    <ClCompile Include="Source\world_editor_core_water.cpp" />
     <ClCompile Include="Source\world_editor_misc.cpp" />
     <ClCompile Include="Source\world_editor_updates.cpp" />
     <ClCompile Include="Source\world_editor_updates_sky.cpp" />

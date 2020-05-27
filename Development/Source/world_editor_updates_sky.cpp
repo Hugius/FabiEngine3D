@@ -1,6 +1,58 @@
 #include "world_editor.hpp"
 
-void WorldEditor::_upateSkyManagement()
+void WorldEditor::_updateSkyMenu()
+{
+	if (_currentWorldPart == WorldPart::SKY)
+	{
+		auto screen = _window->getScreen("skyMenu");
+
+		// Update sky management if possible
+		_updateSkyManagement();
+
+		// Update buttons hoverability
+		screen->getButton("create")->setHoverable(!_fe3d.skyEntity_isExisting("@sky"));
+		screen->getButton("edit")->setHoverable(_fe3d.skyEntity_isExisting("@sky"));
+		screen->getButton("remove")->setHoverable(_fe3d.skyEntity_isExisting("@sky"));
+
+		// GUI management
+		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
+		{
+			if (screen->getButton("create")->isHovered() && screen->getButton("edit")->isHovered())
+			{
+				_window->setActiveScreen("skyManagement");
+
+				// Show sky
+				if (_fe3d.skyEntity_isExisting("@sky"))
+				{
+					_fe3d.skyEntity_show("@sky");
+				}
+
+				// Hide terrain
+				if (_fe3d.terrainEntity_isExisting("@terrain"))
+				{
+					_fe3d.terrainEntity_hide("@terrain");
+				}
+
+				// Hide water
+				if (_fe3d.waterEntity_isExisting("@water"))
+				{
+					_fe3d.waterEntity_hide("@water");
+				}
+			}
+			else if (screen->getButton("remove")->isHovered())
+			{
+				_unloadSkyData();
+			}
+			else if (screen->getButton("back")->isHovered())
+			{
+				_window->setActiveScreen("worldManagement");
+				_currentWorldPart = WorldPart::NONE;
+			}
+		}
+	}
+}
+
+void WorldEditor::_updateSkyManagement()
 {
 	if (_currentWorldPart == WorldPart::SKY)
 	{
@@ -19,8 +71,13 @@ void WorldEditor::_upateSkyManagement()
 			}
 			else if (screen->getButton("back")->isHovered())
 			{
-				_window->setActiveScreen("worldManagement");
-				_currentWorldPart = WorldPart::NONE;
+				_window->setActiveScreen("skyMenu");
+
+				// Hide sky
+				if (_fe3d.skyEntity_isExisting("@sky"))
+				{
+					_fe3d.skyEntity_hide("@sky");
+				}
 			}
 		}
 
@@ -82,7 +139,7 @@ void WorldEditor::_updateSkyMesh()
 			}
 			else if (screen->getButton("load")->isHovered())
 			{
-				_loadSkybox();
+				_loadSkyEntity();
 			}
 			else if (screen->getButton("back")->isHovered())
 			{
@@ -121,18 +178,6 @@ void WorldEditor::_updateSkyOptions()
 			_skyRotationSpeed /= 100.0f;
 		}
 	}
-}
-
-void WorldEditor::_loadSkybox()
-{
-	if (_fe3d.skyEntity_isExisting("@sky"))
-	{
-		_fe3d.skyEntity_delete("@sky");
-	}
-
-	// Add new skybox
-	_fe3d.skyEntity_add("@sky", _skyTexturePaths);
-	_fe3d.skyEntity_select("@sky");
 }
 
 void WorldEditor::_updateSkyCamera()

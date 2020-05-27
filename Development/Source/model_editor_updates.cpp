@@ -44,9 +44,21 @@ void ModelEditor::_updateModelManagement()
 		}
 		else if (screen->getButton("back")->isHovered()) // Back button
 		{
-			_window->setActiveScreen("main");
-			unload();
+			_gui->getGlobalScreen()->addAnswerForm("exitModelEditor", "Save changes?", vec2(0.0f, 0.25f));
 		}
+	}
+
+	// Check if user wants to save changes
+	if (_gui->getGlobalScreen()->checkAnswerFormConfirmed("exitModelEditor"))
+	{
+		save();
+		_window->setActiveScreen("main");
+		unload();
+	}
+	else if (_gui->getGlobalScreen()->checkAnswerFormDeclined("exitModelEditor"))
+	{
+		_window->setActiveScreen("main");
+		unload();
 	}
 }
 

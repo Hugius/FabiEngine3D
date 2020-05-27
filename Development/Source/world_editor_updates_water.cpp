@@ -2,20 +2,59 @@
 
 #include <algorithm>
 
-void WorldEditor::_loadWaterPlane()
+void WorldEditor::_updateWaterMenu()
 {
-	// Remove existing terrain
-	if (_fe3d.waterEntity_isExisting("@water"))
+	if (_currentWorldPart == WorldPart::WATER)
 	{
-		_fe3d.waterEntity_delete("@water");
-	}
+		auto screen = _window->getScreen("waterMenu");
 
-	// Add new terrain
-	_fe3d.waterEntity_add("@water", vec3(0.0f, _waterHeight, 0.0f), _waterSize);
-	_fe3d.waterEntity_select("@water");
+		// Update water management if possible
+		_updateWaterManagement();
+
+		// Update buttons hoverability
+		screen->getButton("create")->setHoverable(!_fe3d.waterEntity_isExisting("@water"));
+		screen->getButton("edit")->setHoverable(_fe3d.waterEntity_isExisting("@water"));
+		screen->getButton("remove")->setHoverable(_fe3d.waterEntity_isExisting("@water"));
+
+		// GUI management
+		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
+		{
+			if (screen->getButton("create")->isHovered() || screen->getButton("edit")->isHovered())
+			{
+				_window->setActiveScreen("waterManagement");
+
+				// Show sky
+				if (_fe3d.skyEntity_isExisting("@sky"))
+				{
+					_fe3d.skyEntity_show("@sky");
+				}
+
+				// Show terrain
+				if (_fe3d.terrainEntity_isExisting("@terrain"))
+				{
+					_fe3d.terrainEntity_show("@terrain");
+				}
+
+				// Show water
+				if (_fe3d.waterEntity_isExisting("@water"))
+				{
+					_fe3d.waterEntity_show("@water");
+				}
+			}
+			else if (screen->getButton("remove")->isHovered())
+			{
+				_unloadWaterData();
+			}
+			else if (screen->getButton("back")->isHovered())
+			{
+				_window->setActiveScreen("worldManagement");
+				_currentWorldPart = WorldPart::NONE;
+			}
+		}
+	}
 }
 
-void WorldEditor::_upateWaterManagement()
+void WorldEditor::_updateWaterManagement()
 {
 	if (_currentWorldPart == WorldPart::WATER)
 	{
@@ -38,8 +77,25 @@ void WorldEditor::_upateWaterManagement()
 			}
 			else if (screen->getButton("back")->isHovered())
 			{
-				_window->setActiveScreen("worldManagement");
-				_currentWorldPart = WorldPart::NONE;
+				_window->setActiveScreen("waterMenu");
+
+				// Hide sky
+				if (_fe3d.skyEntity_isExisting("@sky"))
+				{
+					_fe3d.skyEntity_hide("@sky");
+				}
+
+				// Hide terrain
+				if (_fe3d.terrainEntity_isExisting("@terrain"))
+				{
+					_fe3d.terrainEntity_hide("@terrain");
+				}
+
+				// Hide water
+				if (_fe3d.waterEntity_isExisting("@water"))
+				{
+					_fe3d.waterEntity_hide("@water");
+				}
 			}
 		}
 
@@ -123,7 +179,7 @@ void WorldEditor::_updateWaterMesh()
 		{
 			if (_waterSize != 0.0f)
 			{
-				_loadWaterPlane();
+				_loadWaterEntity();
 			}
 		}
 

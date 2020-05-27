@@ -36,22 +36,30 @@ private:
 	shared_ptr<EngineGuiWindow> _window;
 
 	// Sky functions
-	void _loadSkybox();
-	void _updateSkyCamera();
-	void _upateSkyManagement();
+	void _loadSkyData();
+	void _saveSkyData();
+	void _unloadSkyData();
+	void _loadSkyEntity();
+	void _updateSkyMenu();
+	void _updateSkyManagement();
 	void _updateSkyMesh();
 	void _updateSkyOptions();
+	void _updateSkyCamera();
 
 	// Sky variables
 	vector<string> _skyTexturePaths;
 	float _skyRotationSpeed = 0.0f;
 
 	// Terrain function
-	void _loadTerrainMesh();
-	void _updateTerrainCamera();
-	void _upateTerrainManagement();
+	void _loadTerrainData();
+	void _saveTerrainData();
+	void _unloadTerrainData();
+	void _loadTerrainEntity();
+	void _updateTerrainMenu();
+	void _updateTerrainManagement();
 	void _updateTerrainMesh();
 	void _updateTerrainBlendmap();
+	void _updateTerrainCamera();
 
 	// Terrain variables
 	bool _isTerrainBlendmapped = false;
@@ -71,12 +79,16 @@ private:
 	float _terrainCameraDistance = 0.0f;
 
 	// Water functions
-	void _loadWaterPlane();
-	void _updateWaterCamera();
-	void _upateWaterManagement();
+	void _loadWaterData();
+	void _saveWaterData();
+	void _unloadWaterData();
+	void _loadWaterEntity();
+	void _updateWaterMenu();
+	void _updateWaterManagement();
 	void _updateWaterMesh();
 	void _updateWaterEffects();
 	void _updateWaterOptions();
+	void _updateWaterCamera();
 	
 	// Water variables
 	string _waterDudvmapPath = "";

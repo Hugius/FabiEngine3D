@@ -1,6 +1,5 @@
 #include "world_editor.hpp"
 
-
 void WorldEditor::update(float delta)
 {
 	if (_isLoaded)
@@ -33,86 +32,44 @@ void WorldEditor::update(float delta)
 			{
 				if (screen->getButton("sky")->isHovered())
 				{
-					_window->setActiveScreen("skyManagement");
+					_window->setActiveScreen("skyMenu");
 					_currentWorldPart = WorldPart::SKY;
-
-					// Show sky
-					if (_fe3d.skyEntity_isExisting("@sky"))
-					{
-						_fe3d.skyEntity_show("@sky");
-					}
-
-					// Hide terrain
-					if (_fe3d.terrainEntity_isExisting("@terrain"))
-					{
-						_fe3d.terrainEntity_hide("@terrain");
-					}
-
-					// Hide water
-					if (_fe3d.waterEntity_isExisting("@water"))
-					{
-						_fe3d.waterEntity_hide("@water");
-					}
 				}
 				else if (screen->getButton("terrain")->isHovered())
 				{
-					_window->setActiveScreen("terrainManagement");
+					_window->setActiveScreen("terrainMenu");
 					_currentWorldPart = WorldPart::TERRAIN;
-
-					// Show sky
-					if (_fe3d.skyEntity_isExisting("@sky"))
-					{
-						_fe3d.skyEntity_show("@sky");
-					}
-
-					// Show terrain
-					if (_fe3d.terrainEntity_isExisting("@terrain"))
-					{
-						_fe3d.terrainEntity_show("@terrain");
-					}
-
-					// Hide water
-					if (_fe3d.waterEntity_isExisting("@water"))
-					{
-						_fe3d.waterEntity_hide("@water");
-					}
 				}
 				else if (screen->getButton("water")->isHovered())
 				{
-					_window->setActiveScreen("waterManagement");
+					_window->setActiveScreen("waterMenu");
 					_currentWorldPart = WorldPart::WATER;
-
-					// Show sky
-					if (_fe3d.skyEntity_isExisting("@sky"))
-					{
-						_fe3d.skyEntity_show("@sky");
-					}
-
-					// Show terrain
-					if (_fe3d.terrainEntity_isExisting("@terrain"))
-					{
-						_fe3d.terrainEntity_show("@terrain");
-					}
-
-					// Show water
-					if (_fe3d.waterEntity_isExisting("@water"))
-					{
-						_fe3d.waterEntity_show("@water");
-					}
 				}
 				else if (screen->getButton("back")->isHovered())
 				{
-					_window->setActiveScreen("main");
-					unload();
+					_gui->getGlobalScreen()->addAnswerForm("exitWorldEditor", "Save changes?", vec2(0.0f, 0.25f));
 				}
+			}
+
+			// Check if user wants to save changes
+			if (_gui->getGlobalScreen()->checkAnswerFormConfirmed("exitWorldEditor"))
+			{
+				save();
+				_window->setActiveScreen("main");
+				unload();
+			}
+			else if (_gui->getGlobalScreen()->checkAnswerFormDeclined("exitWorldEditor"))
+			{
+				_window->setActiveScreen("main");
+				unload();
 			}
 		}
 		else
 		{
 			// Update sub-menus
-			_upateSkyManagement();
-			_upateTerrainManagement();
-			_upateWaterManagement();
+			_updateSkyMenu();
+			_updateTerrainMenu();
+			_updateWaterMenu();
 			_updateMiscellaneous();
 		}
 	}

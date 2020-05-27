@@ -48,8 +48,12 @@ public:
 	vector<shared_ptr<EngineGuiRectangle>>& getRectangles();
 	vector<shared_ptr<EngineGuiTextfield>>& getTextfields();
 
-	void addValueForm(string ID, string title, float value, vec2 position);
-	bool checkValueForm(string ID, float& value);
+	void addValueForm(const string& ID, string title, float value, vec2 position);
+	bool checkValueForm(const string& ID, float& value);
+	void addAnswerForm(const string& ID, string title, vec2 position);
+	bool checkAnswerFormConfirmed(const string& ID);
+	bool checkAnswerFormDeclined(const string& ID);
+	void removeAnswerForm(const string& ID);
 
 private:
 	void _updateValueFilling();
@@ -64,6 +68,7 @@ private:
 	vector<shared_ptr<EngineGuiTextfield>> _textfields;
 
 	vector<string> _valueFormIDs;
+	string _answerFormID = "";
 	bool _isFocused = false;
 	bool _exitValueFilling = false;
 };

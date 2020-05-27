@@ -286,6 +286,15 @@
     <ClCompile Include="Source\world_editor_updates.cpp">
       <Filter>src\Editor System\World Editor</Filter>
     </ClCompile>
+    <ClCompile Include="Source\world_editor_core_sky.cpp">
+      <Filter>src\Editor System\World Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\world_editor_core_terrain.cpp">
+      <Filter>src\Editor System\World Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\world_editor_core_water.cpp">
+      <Filter>src\Editor System\World Editor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\obj_loader.hpp">

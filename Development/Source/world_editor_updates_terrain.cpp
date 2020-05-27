@@ -1,47 +1,47 @@
 #include "world_editor.hpp"
 
-void WorldEditor::_loadTerrainMesh()
-{
-	// Remove existing terrain
-	if (_fe3d.terrainEntity_isExisting("@terrain"))
-	{
-		_fe3d.terrainEntity_delete("@terrain");
-	}
-
-	// Add new terrain
-	_fe3d.terrainEntity_add("@terrain", _terrainHeightmapPath, _terrainDiffusemapPath, vec3(0.0f), _terrainSize, _maxTerrainHeight, _terrainUvRepeat);
-	_fe3d.terrainEntity_select("@terrain");
-
-	// Get possibly corrected size
-	_terrainSize = _fe3d.terrainEntity_getSize("@terrain");
-
-	// Camera
-	_terrainCameraHeight = _maxTerrainHeight * 1.25f;
-	_terrainCameraDistance = _terrainSize / 2.0f;
-
-	// Blendmapping
-	if (_isTerrainBlendmapped)
-	{
-		_fe3d.terrainEntity_addBlending("@terrain", _terrainBlendmapPath, _terrainRedPath, _terrainGreenPath, _terrainBluePath, _terrainRedUvRepeat, _terrainGreenUvRepeat, _terrainBlueUvRepeat);
-	}
-}
-
-void WorldEditor::_upateTerrainManagement()
+void WorldEditor::_updateTerrainMenu()
 {
 	if (_currentWorldPart == WorldPart::TERRAIN)
 	{
-		auto screen = _window->getScreen("terrainManagement");
+		auto screen = _window->getScreen("terrainMenu");
+
+		// Update terrain management if possible
+		_updateTerrainManagement();
+
+		// Update buttons hoverability
+		screen->getButton("create")->setHoverable(!_fe3d.terrainEntity_isExisting("@terrain"));
+		screen->getButton("edit")->setHoverable(_fe3d.terrainEntity_isExisting("@terrain"));
+		screen->getButton("remove")->setHoverable(_fe3d.terrainEntity_isExisting("@terrain"));
 
 		// GUI management
 		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
 		{
-			if (screen->getButton("mesh")->isHovered())
+			if (screen->getButton("create")->isHovered() || screen->getButton("edit")->isHovered())
 			{
-				_window->setActiveScreen("terrainMesh");
+				_window->setActiveScreen("terrainManagement");
+
+				// Show sky
+				if (_fe3d.skyEntity_isExisting("@sky"))
+				{
+					_fe3d.skyEntity_show("@sky");
+				}
+
+				// Show terrain
+				if (_fe3d.terrainEntity_isExisting("@terrain"))
+				{
+					_fe3d.terrainEntity_show("@terrain");
+				}
+
+				// Hide water
+				if (_fe3d.waterEntity_isExisting("@water"))
+				{
+					_fe3d.waterEntity_hide("@water");
+				}
 			}
-			else if (screen->getButton("blendmap")->isHovered())
+			else if (screen->getButton("remove")->isHovered())
 			{
-				_window->setActiveScreen("terrainBlendmap");
+				_unloadTerrainData();
 			}
 			else if (screen->getButton("back")->isHovered())
 			{
@@ -49,15 +49,49 @@ void WorldEditor::_upateTerrainManagement()
 				_currentWorldPart = WorldPart::NONE;
 			}
 		}
-
-		// Options screen hoverability
-		screen->getButton("blendmap")->setHoverable(_fe3d.terrainEntity_isExisting("@terrain"));
-
-		// Update sub-menus
-		_updateTerrainCamera();
-		_updateTerrainMesh();
-		_updateTerrainBlendmap();
 	}
+}
+
+void WorldEditor::_updateTerrainManagement()
+{
+	auto screen = _window->getScreen("terrainManagement");
+
+	// GUI management
+	if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
+	{
+		if (screen->getButton("mesh")->isHovered())
+		{
+			_window->setActiveScreen("terrainMesh");
+		}
+		else if (screen->getButton("blendmap")->isHovered())
+		{
+			_window->setActiveScreen("terrainBlendmap");
+		}
+		else if (screen->getButton("back")->isHovered())
+		{
+			_window->setActiveScreen("terrainMenu");
+
+			// Hide sky
+			if (_fe3d.skyEntity_isExisting("@sky"))
+			{
+				_fe3d.skyEntity_hide("@sky");
+			}
+
+			// Hide terrain
+			if (_fe3d.terrainEntity_isExisting("@terrain"))
+			{
+				_fe3d.terrainEntity_hide("@terrain");
+			}
+		}
+	}
+
+	// Options screen hoverability
+	screen->getButton("blendmap")->setHoverable(_fe3d.terrainEntity_isExisting("@terrain"));
+
+	// Update sub-menus
+	_updateTerrainCamera();
+	_updateTerrainMesh();
+	_updateTerrainBlendmap();
 }
 
 void WorldEditor::_updateTerrainMesh()
@@ -95,7 +129,7 @@ void WorldEditor::_updateTerrainMesh()
 			}
 			else if (screen->getButton("load")->isHovered())
 			{
-				_loadTerrainMesh();
+				_loadTerrainEntity();
 			}
 			else if (screen->getButton("back")->isHovered())
 			{

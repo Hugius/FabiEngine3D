@@ -1,9 +1,5 @@
 #include "world_editor.hpp"
 
-#include <sys/stat.h>
-#include <fstream>
-#include <sstream>
-
 WorldEditor::WorldEditor(FabiEngine3D& fe3d, shared_ptr<EngineGuiManager> gui) :
 	_fe3d(fe3d),
 	_gui(gui)
@@ -22,6 +18,13 @@ void WorldEditor::initializeGUI()
 	_window->getScreen("worldManagement")->addButton("terrain", vec2(0.0f, 0.21), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Terrain", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 	_window->getScreen("worldManagement")->addButton("water", vec2(0.0f, -0.21), vec2(1.0f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Water", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 	_window->getScreen("worldManagement")->addButton("back", vec2(0.0f, -0.63f), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Go back", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	
+	// Left-viewport: mainWindow - skyMenu
+	_window->addScreen("skyMenu");
+	_window->getScreen("skyMenu")->addButton("create", vec2(0.0f, 0.63f), vec2(1.5f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Create sky", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_window->getScreen("skyMenu")->addButton("edit", vec2(0.0f, 0.21f), vec2(1.5f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Edit sky", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_window->getScreen("skyMenu")->addButton("remove", vec2(0.0f, -0.21f), vec2(1.5f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Remove sky", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_window->getScreen("skyMenu")->addButton("back", vec2(0.0f, -0.63f), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Go back", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 
 	// Left-viewport: mainWindow - skyManagement
 	_window->addScreen("skyManagement");
@@ -38,7 +41,7 @@ void WorldEditor::initializeGUI()
 	_window->getScreen("skyMesh")->getScrollingList("buttonList")->addButton("backTexture", "Back texture");
 	_window->getScreen("skyMesh")->getScrollingList("buttonList")->addButton("topTexture", "Top texture");
 	_window->getScreen("skyMesh")->getScrollingList("buttonList")->addButton("bottomTexture", "Bottom texture");
-	_window->getScreen("skyMesh")->addButton("load", vec2(0.0f, -0.7f), vec2(1.0f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Load", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_window->getScreen("skyMesh")->addButton("load", vec2(0.0f, -0.7f), vec2(0.8f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Load", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 	_window->getScreen("skyMesh")->addButton("back", vec2(0.0f, -0.9f), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Go back", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 
 	// Left-viewport: mainWindow - skyOptions
@@ -46,6 +49,13 @@ void WorldEditor::initializeGUI()
 	_window->getScreen("skyOptions")->addScrollingList("buttonList", vec2(0.0f, 0.2f), vec2(1.9, 1.5f), vec3(0.3f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, _gui->leftVpTextColor, _gui->leftVpTextHoverColor, vec2(0.15f, 0.1f));
 	_window->getScreen("skyOptions")->getScrollingList("buttonList")->addButton("rotationSpeed", "Rotation speed");
 	_window->getScreen("skyOptions")->addButton("back", vec2(0.0f, -0.9f), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Go back", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+
+	// Left-viewport: mainWindow - terrainMenu
+	_window->addScreen("terrainMenu");
+	_window->getScreen("terrainMenu")->addButton("create", vec2(0.0f, 0.63f), vec2(1.5f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Create terain", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_window->getScreen("terrainMenu")->addButton("edit", vec2(0.0f, 0.21f), vec2(1.5f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Edit terrain", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_window->getScreen("terrainMenu")->addButton("remove", vec2(0.0f, -0.21f), vec2(1.5f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Remove terrain", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_window->getScreen("terrainMenu")->addButton("back", vec2(0.0f, -0.63f), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Go back", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 
 	// Left-viewport: mainWindow - terrainManagement
 	_window->addScreen("terrainManagement");
@@ -74,8 +84,15 @@ void WorldEditor::initializeGUI()
 	_window->getScreen("terrainBlendmap")->getScrollingList("buttonList")->addButton("redRepeat", "Red UV");
 	_window->getScreen("terrainBlendmap")->getScrollingList("buttonList")->addButton("greenRepeat", "Green UV");
 	_window->getScreen("terrainBlendmap")->getScrollingList("buttonList")->addButton("blueRepeat", "Blue UV");
-	_window->getScreen("terrainBlendmap")->addButton("load", vec2(0.0f, -0.7f), vec2(1.0f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Load", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_window->getScreen("terrainBlendmap")->addButton("load", vec2(0.0f, -0.7f), vec2(0.8f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Load", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 	_window->getScreen("terrainBlendmap")->addButton("back", vec2(0.0f, -0.9f), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Go back", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+
+	// Left-viewport: mainWindow - waterMenu
+	_window->addScreen("waterMenu");
+	_window->getScreen("waterMenu")->addButton("create", vec2(0.0f, 0.63f), vec2(1.5f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Create water", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_window->getScreen("waterMenu")->addButton("edit", vec2(0.0f, 0.21f), vec2(1.5f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Edit water", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_window->getScreen("waterMenu")->addButton("remove", vec2(0.0f, -0.21f), vec2(1.5f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Remove water", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_window->getScreen("waterMenu")->addButton("back", vec2(0.0f, -0.63f), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Go back", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 
 	// Left-viewport: mainWindow - waterManagement
 	_window->addScreen("waterManagement");
@@ -131,158 +148,26 @@ void WorldEditor::load()
 	_skyTexturePaths = { "", "", "", "", "", "" };
 	_isLoaded = true;
 
-	// File paths
-	string skyPath = _fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\sky.fe3d";
-	string terrainPath = _fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\terrain.fe3d";
-	string waterPath = _fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\water.fe3d";
-	
-	// Load sky file
-	if (_fe3d.misc_isFileExisting(skyPath))
-	{
-		std::ifstream skyFile(skyPath);
-
-		// Load base data
-		skyFile >> 
-			_skyTexturePaths[0] >> _skyTexturePaths[1] >> _skyTexturePaths[2] >> _skyTexturePaths[3] >> _skyTexturePaths[4] >> _skyTexturePaths[5] >> 
-			_skyRotationSpeed;
-
-		skyFile.close();
-
-		_loadSkybox();
-		_fe3d.skyEntity_hide("@sky");
-	}
-	
-	// Load terrain file
-	if (_fe3d.misc_isFileExisting(terrainPath))
-	{
-		std::ifstream terrainFile(terrainPath);
-
-		// Load base data
-		terrainFile >> _terrainHeightmapPath >> _terrainDiffusemapPath >> _terrainSize >> _maxTerrainHeight >> _terrainUvRepeat >> _isTerrainBlendmapped;
-
-		// Load blendmapping data
-		if (_isTerrainBlendmapped)
-		{
-			terrainFile >> 
-				_terrainBlendmapPath >> _terrainRedPath >> _terrainGreenPath >> _terrainBluePath >> 
-				_terrainRedUvRepeat >> _terrainGreenUvRepeat >> _terrainBlueUvRepeat;
-		}
-
-		terrainFile.close();
-
-		_loadTerrainMesh();
-		_fe3d.terrainEntity_hide("@terrain");
-	}
-
-	// Load water file
-	if (_fe3d.misc_isFileExisting(waterPath))
-	{
-		std::ifstream waterFile(waterPath);
-
-		// Load base data
-		waterFile >>
-			_waterDudvmapPath >> _waterNormalmapPath >>
-			_waterWavingEnabled >> _waterRipplingEnabled >> _waterSpecularEnabled >> _waterReflectionEnabled >>
-			_waterRefractionEnabled >> _waterColor.r >> _waterColor.g >> _waterColor.b >> _waterSize >>
-			_waterUvRepeat >> _waterHeight >> _waterSpeed >> _waterTransparency >> _waterShininess;
-
-		// Perform checks
-		_waterDudvmapPath = (_waterDudvmapPath == "-" ? "" : _waterDudvmapPath);
-		_waterNormalmapPath = (_waterNormalmapPath == "-" ? "" : _waterNormalmapPath);
-
-		waterFile.close();
-
-		_loadWaterPlane();
-		_fe3d.waterEntity_hide("@water");
-	}
+	// Core
+	_loadSkyData();
+	_loadTerrainData();
+	_loadWaterData();
 }
 
 void WorldEditor::save()
 {
-	if (_currentProjectName != "")
-	{
-		// Save sky data
-		if (_fe3d.skyEntity_isExisting("@sky"))
-		{
-			// Load file
-			std::ofstream skyFile(_fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\sky.fe3d");
-
-			// Add path to file
-			for (auto& path : _skyTexturePaths)
-			{
-				skyFile << path << " ";
-			}
-
-			// Add options to file
-			skyFile << _skyRotationSpeed;
-
-			// Close file
-			skyFile.close();
-		}
-
-		// Save terrain data
-		if (_fe3d.terrainEntity_isExisting("@terrain"))
-		{
-			// Load file
-			std::ofstream terrainFile(_fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\terrain.fe3d");
-
-			// Write base data to file
-			terrainFile << _terrainHeightmapPath << " " << _terrainDiffusemapPath << " " << _terrainSize << " " << _maxTerrainHeight << " " << _terrainUvRepeat << " " << _isTerrainBlendmapped << " ";
-			
-			// Write blendmapping data to file
-			if (_isTerrainBlendmapped)
-			{
-				terrainFile << _terrainBlendmapPath << " " << _terrainRedPath << " " << _terrainGreenPath << " " << _terrainBluePath << " " <<
-					_terrainRedUvRepeat << " " << _terrainGreenUvRepeat << " " << _terrainBlueUvRepeat;
-			}
-
-			// Close file
-			terrainFile.close();
-		}
-
-		// Save water data
-		if (_fe3d.waterEntity_isExisting("@water"))
-		{
-			// Load file
-			std::ofstream waterFile(_fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\water.fe3d");
-
-			// Write data to file
-			waterFile << 
-				(_waterDudvmapPath == "" ? "-" : _waterDudvmapPath) << " " << (_waterNormalmapPath == "" ? "-" : _waterNormalmapPath) << " " <<
-				_waterWavingEnabled << " " << _waterRipplingEnabled << " " << _waterSpecularEnabled << " " << _waterReflectionEnabled << " " << 
-				_waterRefractionEnabled << " " << _waterColor.r << " " << _waterColor.g << " " << _waterColor.b << " " << _waterSize << " " <<
-				_waterUvRepeat << " " << _waterHeight << " " << _waterSpeed << " " << _waterTransparency << " " << _waterShininess;
-
-			// Close file
-			waterFile.close();
-		}
-	}
+	_saveSkyData();
+	_saveTerrainData();
+	_saveWaterData();
 }
 
 void WorldEditor::unload()
 {
+	// Disable graphics
 	_fe3d.gfx_disableAmbientLighting();
 	_fe3d.gfx_disableDirectionalLighting();
 	_fe3d.gfx_disableMSAA();
 	_fe3d.gfx_disableWaterEffects();
-
-	// Delete sky
-	if (_fe3d.skyEntity_isExisting("@sky"))
-	{
-		_fe3d.skyEntity_delete("@sky");
-	}
-
-	// Delete terrain
-	if (_fe3d.terrainEntity_isExisting("@terrain"))
-	{
-		_fe3d.terrainEntity_delete("@terrain");
-	}
-
-	// Delete water
-	if (_fe3d.waterEntity_isExisting("@water"))
-	{
-		_fe3d.waterEntity_delete("@water");
-	}
 
 	// Clear variables
 	_isLoaded = false;
@@ -290,37 +175,9 @@ void WorldEditor::unload()
 	_delta = 0.0f;
 	_cameraRotationSpeed = 0.0f;
 	_totalCameraRotation = 0.0f;
-	_skyTexturePaths.clear();
-	_skyRotationSpeed = 0.0f;
-	_isTerrainBlendmapped = false;
-	_terrainHeightmapPath = "";
-	_terrainDiffusemapPath = "";
-	_terrainBlendmapPath = "";
-	_terrainRedPath = "";
-	_terrainGreenPath = "";
-	_terrainBluePath = "";
-	_terrainSize = 0.0f;
-	_maxTerrainHeight = 0.0f;
-	_terrainUvRepeat = 0.0f;
-	_terrainRedUvRepeat = 0.0f;
-	_terrainGreenUvRepeat = 0.0f;
-	_terrainBlueUvRepeat = 0.0f;
-	_terrainCameraHeight = 0.0f;
-	_terrainCameraDistance = 0.0f;
-	_waterDudvmapPath = "";
-	_waterNormalmapPath = "";
-	_waterWavingEnabled = false;
-	_waterRipplingEnabled = false;
-	_waterSpecularEnabled = false;
-	_waterReflectionEnabled = false;
-	_waterRefractionEnabled = false;
-	_waterColor = vec3(0.0f);
-	_waterSize = 0.0f;
-	_waterUvRepeat = 0.0f;
-	_waterHeight = 0.0f;
-	_waterSpeed = 0.0f;
-	_waterTransparency = 0.0f;
-	_waterShininess = 16.0f;
-	_waterCameraHeight = 0.0f;
-	_waterCameraDistance = 0.0f;
+
+	// Core
+	_unloadSkyData();
+	_unloadTerrainData();
+	_unloadWaterData();
 }

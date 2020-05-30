@@ -7,11 +7,11 @@ EngineGuiViewport::EngineGuiViewport(FabiEngine3D& fe3d, const string& ID, vec2 
 	fe3d.guiEntity_add(ID, color, position, 0.0f, size, true);
 }
 
-void EngineGuiViewport::update(float delta, bool hoverable)
+void EngineGuiViewport::update(bool hoverable)
 {
 	for (auto& window : _windows)
 	{
-		window->update(delta, hoverable);
+		window->update(hoverable);
 	}
 }
 

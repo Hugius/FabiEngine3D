@@ -216,7 +216,7 @@ public:
 	vec3 billboardEntity_getSize(const string& ID);
 	void billboardEntity_enable(const string& ID);
 	void billboardEntity_disable(const string& ID);
-	void billBoardEntity_playSpriteAnimation(const string& ID, int rows, int columns, float maxDelta, int repeats);
+	void billBoardEntity_playSpriteAnimation(const string& ID, int rows, int columns, int maxAnimationRepeats);
 	void billBoardEntity_changeText(const string& ID, const string& text, vec3 color);
 	void billboardEntity_setUvRepeat(const string& ID, float repeat);
 	bool billboardEntity_isFinished(const string& ID);
@@ -449,7 +449,7 @@ public:
 protected:
 	// Virtual interface
 	virtual void FE3D_CONTROLLER_INIT() = 0;
-	virtual void FE3D_CONTROLLER_UPDATE(float delta) = 0;
+	virtual void FE3D_CONTROLLER_UPDATE() = 0;
 	virtual void FE3D_CONTROLLER_DESTROY() = 0;
 
 private:

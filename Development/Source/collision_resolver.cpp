@@ -7,7 +7,7 @@ CollisionResolver::CollisionResolver(CollisionDetector& collisionDetector) :
 	
 }
 
-void CollisionResolver::update(const vector<AabbEntity*> & boxes, TerrainEntityManager& terrainManager, CameraManager & camera, float delta)
+void CollisionResolver::update(const vector<AabbEntity*> & boxes, TerrainEntityManager& terrainManager, CameraManager & camera)
 {
 	// Check if AABB collision is needed in the first place
 	if (_aabbResponseEnabled)
@@ -70,7 +70,7 @@ void CollisionResolver::update(const vector<AabbEntity*> & boxes, TerrainEntityM
 			{
 				_aboveGround = false;
 				_underGround = true;
-				camera.translate(vec3(0.0f, _cameraSpeed, 0.0f), delta);
+				camera.translate(vec3(0.0f, _cameraSpeed, 0.0f));
 				camY = camera.getPosition().y;
 
 				// Check again

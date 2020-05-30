@@ -17,7 +17,7 @@ public:
 	void reset();
 
 	// Update
-	void update(WindowManager & windowManager, float delta);
+	void update(WindowManager & windowManager);
 	void updateMatrices();
 
 	// Setters
@@ -36,10 +36,10 @@ public:
 	void disableFirstPersonView();
 	void enableFreeMovement();
 	void disableFreeMovement();
-	void translateFollowX(float speed, float delta);
-	void translateFollowZY(float speed, float delta);
-	void translateFollowZ(float speed, float delta);
-	void translate(vec3 translation, float delta);
+	void translateFollowX(float speed);
+	void translateFollowZY(float speed);
+	void translateFollowZ(float speed);
+	void translate(vec3 translation);
 	void invertYaw();
 	void invertPitch();
 	void center();

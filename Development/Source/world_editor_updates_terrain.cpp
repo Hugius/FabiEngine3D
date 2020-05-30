@@ -242,9 +242,9 @@ void WorldEditor::_updateTerrainCamera()
 	if (_fe3d.terrainEntity_isExisting("@terrain"))
 	{
 		// Get scroll wheel input
-		float rotationAcceleration = float(_fe3d.input_getMouseWheelY()) * 0.001f;
+		float rotationAcceleration = float(_fe3d.input_getMouseWheelY()) / _scrollWheelDivider;
 		_cameraRotationSpeed += rotationAcceleration;
-		_cameraRotationSpeed *= 0.995f;
+		_cameraRotationSpeed *= 0.975f;
 		_totalCameraRotation += _cameraRotationSpeed;
 
 		// Calculate new camera position

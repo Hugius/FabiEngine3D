@@ -96,7 +96,7 @@ void BillboardEntityManager::addBillboardEntity
 	getEntity(ID)->setColor(color);
 }
 
-void BillboardEntityManager::update(float delta)
+void BillboardEntityManager::update()
 {
 	for (auto & baseEntity : _getBaseEntities())
 	{
@@ -148,7 +148,7 @@ void BillboardEntityManager::update(float delta)
 			}
 			else // Increase counter
 			{
-				entity->addToDelta(delta);
+				//entity->addToDelta();
 			}
 		}
 	}

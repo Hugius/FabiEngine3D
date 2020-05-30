@@ -3,8 +3,6 @@
 
 void InputHandler::f_checkInput()
 {
-	_timer.start("inputHandle");
-
 	_keysPressed.clear();
 	_mousePressed.clear();
 	_mouseWheelX = 0;
@@ -123,8 +121,6 @@ void InputHandler::f_checkInput()
 			}
 		}
 	}
-
-	_timer.stop();
 }
 
 InputHandler::InputHandler(Timer& timer) :

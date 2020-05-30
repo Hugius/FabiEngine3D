@@ -17,24 +17,16 @@ AudioPlayer::AudioPlayer()
 	}
 }
 
-void AudioPlayer::update(CameraManager& camera, std::vector<AudioChunk>& chunks, std::vector<AudioMusic>& music, float delta)
+void AudioPlayer::update(CameraManager& camera, std::vector<AudioChunk>& chunks, std::vector<AudioMusic>& music)
 {
 	// Channel debugging
 	if (_debugging)
 	{
-		if (_totalDelta >= 1000.0f)
-		{
-			_totalDelta = 0.0f;
-			system("cls");
+		system("cls");
 
-			for (auto& element : _channelMap)
-			{
-				Logger::getInst().throwDebug("Channel", std::to_string(element.first + 1), " : ", element.second);
-			}
-		}
-		else
+		for (auto& element : _channelMap)
 		{
-			_totalDelta += delta;
+			Logger::getInst().throwDebug("Channel", std::to_string(element.first + 1), " : ", element.second);
 		}
 	}
 

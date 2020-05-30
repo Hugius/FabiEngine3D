@@ -40,7 +40,7 @@ public:
 
 	virtual BaseEntity * getEntity(const string & ID) = 0;
 
-	virtual void update(float delta) = 0;
+	virtual void update() = 0;
 
 protected:
 	OBJLoader&     _objLoader;

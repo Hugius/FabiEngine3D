@@ -12,11 +12,11 @@ EngineGuiWriteField::EngineGuiWriteField(
 
 }
 
-void EngineGuiWriteField::update(float delta, bool hoverable)
+void EngineGuiWriteField::update(bool hoverable)
 {
 	_updateHovering(hoverable && !_isActive);
 	_updateActivation();
-	_updateTyping(delta);
+	_updateTyping();
 }
 
 void EngineGuiWriteField::setActive(bool active)
@@ -68,25 +68,27 @@ void EngineGuiWriteField::_updateActivation()
 	}
 }
 
-void EngineGuiWriteField::_updateTyping(float delta)
+void EngineGuiWriteField::_updateTyping()
 {
 	if (_isActive)
 	{
-		static float passedBarDelta = 500.0f;
-		static float passedBackspaceDelta = 100.0f;
+		const int maxPassedBarFrames = 50;
+		const int maxPassedBackspaceFrames = 10;
+		static int passedBarFrames = maxPassedBarFrames;
+		static int passedBackspaceFrames = maxPassedBackspaceFrames;
 		static bool barEnabled = true;
 
 		// Update bar animation time
-		if (passedBarDelta >= 500.0f)
+		if (passedBarFrames >= maxPassedBarFrames)
 		{
-			passedBarDelta = 0.0f;
+			passedBarFrames = 0;
 			
 			// Toggle bar animation
 			barEnabled = !barEnabled;
 		}
 		else
 		{
-			passedBarDelta += delta;
+			passedBarFrames++;
 		}
 
 		// Check if not writing out of border
@@ -164,9 +166,9 @@ void EngineGuiWriteField::_updateTyping(float delta)
 		if (_fe3d.input_getKeyDown(Input::KEY_BACKSPACE))
 		{
 			// Check if enough time passed
-			if (passedBackspaceDelta >= 100.0f)
+			if (passedBackspaceFrames >= maxPassedBackspaceFrames)
 			{
-				passedBackspaceDelta = 0.0f;
+				passedBackspaceFrames = 0;
 
 				if (_currentTextContent.size() == 1)
 				{
@@ -179,12 +181,12 @@ void EngineGuiWriteField::_updateTyping(float delta)
 			}
 			else
 			{
-				passedBackspaceDelta += delta;
+				passedBackspaceFrames++;
 			}
 		}
 		else
 		{
-			passedBackspaceDelta = 100.0f;
+			passedBackspaceFrames = maxPassedBackspaceFrames;
 		}
 
 		// Update text content with or without bar

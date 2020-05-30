@@ -13,13 +13,11 @@ public:
 	~EngineController() = default;
 
 	void FE3D_CONTROLLER_INIT();
-	void FE3D_CONTROLLER_UPDATE(float delta);
+	void FE3D_CONTROLLER_UPDATE();
 	void FE3D_CONTROLLER_DESTROY();
 
 private:
 	shared_ptr<EngineGuiManager> _gui;
-
-	float _delta = 0.0f;
 
 	string _currentProject = "";
 	

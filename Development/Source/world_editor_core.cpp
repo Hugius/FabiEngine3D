@@ -172,7 +172,6 @@ void WorldEditor::unload()
 	// Clear variables
 	_isLoaded = false;
 	_currentWorldPart = WorldPart::NONE;
-	_delta = 0.0f;
 	_cameraRotationSpeed = 0.0f;
 	_totalCameraRotation = 0.0f;
 

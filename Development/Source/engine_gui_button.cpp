@@ -15,7 +15,7 @@ EngineGuiButton::EngineGuiButton(FabiEngine3D& fe3d, const string& parentID, con
 
 }
 
-void EngineGuiButton::update(float delta, bool hoverable)
+void EngineGuiButton::update(bool hoverable)
 {
 	_updateHovering(hoverable);
 }

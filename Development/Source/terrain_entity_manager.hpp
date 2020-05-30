@@ -29,7 +29,7 @@ public:
 		float blendRepeatR, float blendRepeatG, float blendRepeatB
 	);
 
-	void update(float delta) override {}
+	void update() override {}
 
 private:
 	float _getPixelHeight(float x, float z, float size, float maxHeight, const vector<float>& pixelColors);

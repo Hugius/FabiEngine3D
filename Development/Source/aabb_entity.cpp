@@ -42,19 +42,19 @@ void AabbEntity::setResponsiveness(bool val)
 	_responsive = val;
 }
 
-void AabbEntity::translate(vec3 val, float delta)
+void AabbEntity::translate(vec3 val)
 {
-	_translation += val * delta;
+	_translation += val;
 }
 
-void AabbEntity::rotate(vec3 val, float delta)
+void AabbEntity::rotate(vec3 val)
 {
-	_rotation += val * delta;
+	_rotation += val;
 }
 
-void AabbEntity::scale(vec3 val, float delta)
+void AabbEntity::scale(vec3 val)
 {
-	_scaling += val * delta;
+	_scaling += val;
 }
 
 const mat4 & AabbEntity::getModelMatrix() const

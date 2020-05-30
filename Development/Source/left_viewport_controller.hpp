@@ -10,7 +10,7 @@ public:
 	LeftViewportController(FabiEngine3D& fe3d, shared_ptr<EngineGuiManager> gui);
 
 	void initialize() override;
-	void update(float delta) override;
+	void update() override;
 
 	ModelEditor& getModelEditor();
 	WorldEditor& getWorldEditor();

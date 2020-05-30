@@ -23,9 +23,9 @@ public:
 
 	// Updates
 	void updateModelMatrix();
-	void translate(vec3 val, float delta);
-	void rotate(vec3 val, float delta);
-	void scale(vec3 val, float delta);
+	void translate(vec3 val);
+	void rotate(vec3 val);
+	void scale(vec3 val);
 
 	// Setters
 	void setTranslation(vec3 val);

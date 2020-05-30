@@ -45,9 +45,9 @@ void ModelEditor::_updateModelEditingCamera()
 		static float scollSpeed = 0.0f;
 		if (_fe3d.misc_isMouseInsideViewport() && !_meshResizingToggled && !_boxResizingToggled) // Only if cursor inside 3d screen and not resizing
 		{
-			scollSpeed += float(-_fe3d.input_getMouseWheelY() / 100.0f);
+			scollSpeed += float(-_fe3d.input_getMouseWheelY() / _scrollWheelDivider);
 		}
-		scollSpeed *= 0.995f;
+		scollSpeed *= 0.975f;
 		scollSpeed = std::clamp(scollSpeed, -1.0f, 1.0f);
 		_cameraDistance += scollSpeed;
 		_cameraDistance = std::clamp(_cameraDistance, _minCameraDistance, _maxCameraDistance);
@@ -63,7 +63,7 @@ void ModelEditor::_updateModelEditingCamera()
 		}
 
 		// Calculate cursor moving speed
-		cameraAcceleration *= 0.99f;
+		cameraAcceleration *= 0.975f;
 		totalCursorDifference += cameraAcceleration;
 		totalCursorDifference.y = std::clamp(totalCursorDifference.y, 0.0f, 1.0f);
 

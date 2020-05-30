@@ -19,7 +19,7 @@ public:
 	AudioPlayer();
 	~AudioPlayer() = default;
 
-	void update(CameraManager& camera, std::vector<AudioChunk>& chunks, std::vector<AudioMusic>& music, float delta);	
+	void update(CameraManager& camera, std::vector<AudioChunk>& chunks, std::vector<AudioMusic>& music);	
 	void setSoundEnabled(bool val);
 	void setMusicEnabled(bool val);
 	void stopAllSounds();
@@ -50,6 +50,4 @@ private:
 	bool _debugging = false;
 	bool _soundEnabled = true;
 	bool _musicEnabled = true;
-
-	float _totalDelta = 0.0f;
 };

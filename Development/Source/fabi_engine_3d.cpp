@@ -77,22 +77,22 @@ void FabiEngine3D::camera_disableFreeMovement()
 
 void FabiEngine3D::camera_translateFollowX(float speed)
 {
-	_core->_cameraManager.translateFollowX(speed, _core->_timer.getDeltaTime());
+	_core->_cameraManager.translateFollowX(speed);
 }
 
 void FabiEngine3D::camera_translateFollowZY(float speed)
 {
-	_core->_cameraManager.translateFollowZY(speed, _core->_timer.getDeltaTime());
+	_core->_cameraManager.translateFollowZY(speed);
 }
 
 void FabiEngine3D::camera_translateFollowZ(float speed)
 {
-	_core->_cameraManager.translateFollowZ(speed, _core->_timer.getDeltaTime());
+	_core->_cameraManager.translateFollowZ(speed);
 }
 
 void FabiEngine3D::camera_translate(vec3 translation)
 {
-	_core->_cameraManager.translate(translation, _core->_timer.getDeltaTime());
+	_core->_cameraManager.translate(translation);
 }
 
 void FabiEngine3D::camera_setPosition(vec3 pos)
@@ -637,23 +637,23 @@ bool FabiEngine3D::gameEntity_hasReflectionMap(const string& ID)
 
 void FabiEngine3D::gameEntity_move(const string& ID, vec3 factor)
 {
-	_core->_gameEntityManager.getEntity(ID)->translate(factor, _core->_timer.getDeltaTime());
+	_core->_gameEntityManager.getEntity(ID)->translate(factor);
 
 	// Also update potential bound AABB entities
 	if (_core->_aabbEntityManager.isExisting(ID))
 	{
-		_core->_aabbEntityManager.getEntity(ID)->translate(factor, _core->_timer.getDeltaTime());
+		_core->_aabbEntityManager.getEntity(ID)->translate(factor);
 	}
 }
 
 void FabiEngine3D::gameEntity_rotate(const string& ID, vec3 factor)
 {
-	_core->_gameEntityManager.getEntity(ID)->rotate(factor, _core->_timer.getDeltaTime());
+	_core->_gameEntityManager.getEntity(ID)->rotate(factor);
 }
 
 void FabiEngine3D::gameEntity_scale(const string& ID, vec3 factor)
 {
-	_core->_gameEntityManager.getEntity(ID)->scale(factor, _core->_timer.getDeltaTime());
+	_core->_gameEntityManager.getEntity(ID)->scale(factor);
 }
 
 void FabiEngine3D::gameEntity_setPosition(const string& ID, vec3 position)
@@ -847,17 +847,17 @@ bool FabiEngine3D::billboardEntity_isExisting(const string& ID)
 
 void FabiEngine3D::billboardEntity_move(const string& ID, vec3 factor)
 {
-	_core->_billboardEntityManager.getEntity(ID)->translate(factor, _core->_timer.getDeltaTime());
+	_core->_billboardEntityManager.getEntity(ID)->translate(factor);
 }
 
 void FabiEngine3D::billboardEntity_rotate(const string& ID, vec3 factor)
 {
-	_core->_billboardEntityManager.getEntity(ID)->rotate(factor, _core->_timer.getDeltaTime());
+	_core->_billboardEntityManager.getEntity(ID)->rotate(factor);
 }
 
 void FabiEngine3D::billboardEntity_scale(const string& ID, vec3 factor)
 {
-	_core->_billboardEntityManager.getEntity(ID)->scale(factor, _core->_timer.getDeltaTime());
+	_core->_billboardEntityManager.getEntity(ID)->scale(factor);
 }
 
 void FabiEngine3D::billboardEntity_setPosition(const string& ID, vec3 position)
@@ -900,9 +900,9 @@ void FabiEngine3D::billboardEntity_disable(const string& ID)
 	_core->_billboardEntityManager.getEntity(ID)->setEnabled(false);
 }
 
-void FabiEngine3D::billBoardEntity_playSpriteAnimation(const string& ID, int rows, int columns, float maxDelta, int repeats)
+void FabiEngine3D::billBoardEntity_playSpriteAnimation(const string& ID, int rows, int columns, int maxAnimationRepeats)
 {
-	_core->_billboardEntityManager.getEntity(ID)->setSpriteAnimation(rows, columns, maxDelta, repeats);
+	_core->_billboardEntityManager.getEntity(ID)->setSpriteAnimation(rows, columns, maxAnimationRepeats);
 }
 
 void FabiEngine3D::billBoardEntity_changeText(const string& ID, const string& text, vec3 color)
@@ -1362,17 +1362,17 @@ void FabiEngine3D::guiEntity_setSize(const string& ID, vec2 size)
 
 void FabiEngine3D::guiEntity_move(const string& ID, vec2 position)
 {
-	_core->_guiEntityManager.getEntity(ID)->translate(position, _core->_timer.getDeltaTime());
+	_core->_guiEntityManager.getEntity(ID)->translate(position);
 }
 
 void FabiEngine3D::guiEntity_rotate(const string& ID, float rotation)
 {
-	_core->_guiEntityManager.getEntity(ID)->rotate(rotation, _core->_timer.getDeltaTime());
+	_core->_guiEntityManager.getEntity(ID)->rotate(rotation);
 }
 
 void FabiEngine3D::guiEntity_scale(const string& ID, vec2 size)
 {
-	_core->_guiEntityManager.getEntity(ID)->scale(size, _core->_timer.getDeltaTime());
+	_core->_guiEntityManager.getEntity(ID)->scale(size);
 }
 
 void FabiEngine3D::guiEntity_setColor(const string& ID, vec3 color)
@@ -1503,17 +1503,17 @@ void FabiEngine3D::textEntity_setSize(const string& ID, vec2 size)
 
 void FabiEngine3D::textEntity_move(const string& ID, vec2 position)
 {
-	_core->_textEntityManager.getEntity(ID)->translate(position, _core->_timer.getDeltaTime());
+	_core->_textEntityManager.getEntity(ID)->translate(position);
 }
 
 void FabiEngine3D::textEntity_rotate(const string& ID, float rotation)
 {
-	_core->_textEntityManager.getEntity(ID)->rotate(rotation, _core->_timer.getDeltaTime());
+	_core->_textEntityManager.getEntity(ID)->rotate(rotation);
 }
 
 void FabiEngine3D::textEntity_scale(const string& ID, vec2 size)
 {
-	_core->_textEntityManager.getEntity(ID)->scale(size, _core->_timer.getDeltaTime());
+	_core->_textEntityManager.getEntity(ID)->scale(size);
 }
 
 void FabiEngine3D::textEntity_setMinPosition(const string& ID, vec2 minPos)
@@ -1998,13 +1998,14 @@ void FabiEngine3D::misc_hidePerformanceProfiling()
 {
 	_core->_showStats = false;
 	
+	// List of element IDs
 	vector<string> elements =
 	{
-		"inputHandle", "gameUpdates", "raycastUpdates", "physicsUpdates", "cameraUpdates", "entityUpdates", "shadowUpdates", "audioUpdates",
-		"renderSwap", "reflectionPreRender", "waterPreRender", "shadowPreRender", "depthPreRender", "skyEntity", "terrainEntity", "waterEntity",
-		"gameEntities", "bBoardEntities", "aabbEntities", "postProcessing", "guiRender", "textRender", "misc", "fps"
+		"reflectionPreRender", "refractionPreRender", "shadowPreRender", "depthPreRender", "skyEntityRender", "terrainEntityRender", "waterEntityRender",
+		"gameEntityRender", "billboardEntityRender", "aabbEntityRender", "antiAliasing", "postProcessing", "guiEntityRender", "textEntityRender"
 	};
 
+	// Hide all text entities
 	for (auto& e : elements)
 	{
 		if (_core->_textEntityManager.isExisting(e))

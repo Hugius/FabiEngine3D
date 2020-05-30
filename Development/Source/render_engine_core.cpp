@@ -56,7 +56,6 @@ void RenderEngine::renderScene(EntityBus * entityBus, CameraManager & camera, iv
 	// Wireframe or non-wireframe rendering
 	if (_shaderBus.isWireframeEnabled())
 	{
-		_timer.start("wireframe");
 		glViewport(Config::getInst().getVpPos().x, Config::getInst().getVpPos().y, Config::getInst().getVpSize().x, Config::getInst().getVpSize().y);
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -68,7 +67,6 @@ void RenderEngine::renderScene(EntityBus * entityBus, CameraManager & camera, iv
 		glViewport(0, 0, Config::getInst().getWindowWidth(), Config::getInst().getWindowHeight());
 		_renderGuiEntities();
 		_renderTextEntities();
-		_timer.stop();
 	}
 	else
 	{
@@ -76,7 +74,7 @@ void RenderEngine::renderScene(EntityBus * entityBus, CameraManager & camera, iv
 		_timer.start("reflectionPreRender");
 		_captureSceneReflections(camera);
 		_timer.stop();
-		_timer.start("waterPreRender");
+		_timer.start("refractionPreRender");
 		_captureSceneRefractions();
 		_timer.stop();
 		_timer.start("shadowPreRender");
@@ -87,7 +85,6 @@ void RenderEngine::renderScene(EntityBus * entityBus, CameraManager & camera, iv
 		_timer.stop();
 
 		// Bind screen framebuffer
-		_timer.start("aaBind");
 		if (_shaderBus.isMSAAEnabled())
 		{
 			_msaaFramebuffer.bind();
@@ -96,31 +93,30 @@ void RenderEngine::renderScene(EntityBus * entityBus, CameraManager & camera, iv
 		{
 			_screenFramebuffer.bind();
 		}
-		_timer.stop();
 
 		// 3D rendering
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		_timer.start("skyEntity");
+		_timer.start("skyEntityRender");
 		_renderSkyEntity();
 		_timer.stop();
-		_timer.start("terrainEntity");
+		_timer.start("terrainEntityRender");
 		_renderTerrainEntity();
 		_timer.stop();
-		_timer.start("waterEntity");
+		_timer.start("waterEntityRender");
 		_renderWaterEntity();
 		_timer.stop();
-		_timer.start("gameEntities");
+		_timer.start("gameEntityRender");
 		_renderGameEntities();
 		_timer.stop();
-		_timer.start("billboardEntities");
+		_timer.start("billboardEntityRender");
 		_renderBillboardEntities();
 		_timer.stop();
-		_timer.start("aabbEntities");
+		_timer.start("aabbEntityRender");
 		_renderAabbEntities();
 		_timer.stop();
 
 		// Unbind screen framebuffer
-		_timer.start("aaUnbind");
+		_timer.start("antiAliasing");
 		if (_shaderBus.isMSAAEnabled())
 		{
 			_msaaFramebuffer.processAAData(&_aaProcessorFramebuffer);
@@ -161,12 +157,12 @@ void RenderEngine::renderScene(EntityBus * entityBus, CameraManager & camera, iv
 			_timer.stop();
 
 			// Render GUI
-			_timer.start("guiRender");
+			_timer.start("guiEntityRender");
 			_renderGuiEntities();
 			_timer.stop();
 
 			// MSAA text
-			_timer.start("textRender");
+			_timer.start("textEntityRender");
 			_renderTextEntities();
 			_timer.stop();
 		}

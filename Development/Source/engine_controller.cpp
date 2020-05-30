@@ -19,15 +19,13 @@ void EngineController::FE3D_CONTROLLER_INIT()
 	_bottomViewportController.initialize();
 }
 
-void EngineController::FE3D_CONTROLLER_UPDATE(float delta)
+void EngineController::FE3D_CONTROLLER_UPDATE()
 {
-	_delta = delta;
-
-	_gui->update(delta);
-	_topViewportController.update(_delta);
-	_leftViewportController.update(_delta);
-	_rightViewportController.update(_delta);
-	_bottomViewportController.update(_delta);
+	_gui->update();
+	_topViewportController.update();
+	_leftViewportController.update();
+	_rightViewportController.update();
+	_bottomViewportController.update();
 }
 
 void EngineController::FE3D_CONTROLLER_DESTROY()

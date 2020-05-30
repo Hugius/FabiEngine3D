@@ -45,19 +45,19 @@ void BillboardEntity::setColor(vec3 color)
 	_color = color;
 }
 
-void BillboardEntity::translate(vec3 val, float delta)
+void BillboardEntity::translate(vec3 val)
 {
-	_translation += val * delta;
+	_translation += val;
 }
 
-void BillboardEntity::rotate(vec3 val, float delta)
+void BillboardEntity::rotate(vec3 val)
 {
-	_rotation += val * delta;
+	_rotation += val;
 }
 
-void BillboardEntity::scale(vec3 val, float delta)
+void BillboardEntity::scale(vec3 val)
 {
-	_scaling += val * delta;
+	_scaling += val;
 }
 
 void BillboardEntity::setText(const string & text)
@@ -75,14 +75,14 @@ void BillboardEntity::setTransparent(bool val)
 	_isTransparent = val;
 }
 
-void BillboardEntity::setSpriteAnimation(int rows, int columns, float maxDelta, int animationRepeats)
+void BillboardEntity::setSpriteAnimation(int rows, int columns, int maxAnimationRepeats)
 {
 	_hasSpriteAnimation = true;
 	_totalSpriteRows = rows;
 	_totalSpriteColumns = columns;
-	_maxDelta = maxDelta;
+	_maxDelta = 0.0f;
 	_animationRepeats = 0;
-	_maxAnimationRepeats = animationRepeats;
+	_maxAnimationRepeats = maxAnimationRepeats;
 }
 
 void BillboardEntity::setSpriteRowIndex(int val)

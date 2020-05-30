@@ -2,7 +2,7 @@
 
 #include "model_editor.hpp"
 
-void ModelEditor::update(float delta)
+void ModelEditor::update()
 {
 	if (_isLoaded)
 	{
@@ -140,7 +140,7 @@ void ModelEditor::_updateModelChoosing()
 				}
 				else if (_modelRemovalEnabled) // Add confirmation choice
 				{
-					_gui->getGlobalScreen()->addTextfield("areYouSure", vec2(0.0f, 0.1f), vec2(0.3f, 0.1f), "Are you sure?", vec3(1.0f));
+					_gui->getGlobalScreen()->addTextfield("areYouSure", vec2(0.0f, 0.1f), vec2(0.3f, 0.1f), "Are you sure?", vec3(0.0f));
 					_gui->getGlobalScreen()->addButton("yes", vec2(-0.1f, -0.1f), vec2(0.1f, 0.1f), vec3(0.0f, 0.5f, 0.0f), vec3(0.0f, 1.0f, 0.0f), "Yes", vec3(1.0f), vec3(0.0f));
 					_gui->getGlobalScreen()->addButton("no", vec2(0.1f, -0.1f), vec2(0.1f, 0.1f), vec3(0.5f, 0.0f, 0.0f), vec3(1.0f, 0.0f, 0.0f), "No", vec3(1.0f), vec3(0.0f));
 				}

@@ -8,7 +8,7 @@ public:
 	using ViewportController::ViewportController;
 
 	void initialize() override;
-	void update(float delta) override;
+	void update() override;
 
 private:
 

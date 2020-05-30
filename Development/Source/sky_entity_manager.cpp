@@ -88,7 +88,7 @@ void SkyEntityManager::addSkyEntity(const string & ID, TextureLoader& texLoader,
 	getEntity(ID)->setTexturePaths(texturePaths);
 }
 
-void SkyEntityManager::update(float delta)
+void SkyEntityManager::update()
 {
 	// Check if any sky exists and if one selected
 	if (!_getBaseEntities().empty() && getSelectedSky() != nullptr)
@@ -100,13 +100,13 @@ void SkyEntityManager::update(float delta)
 		_shaderBus.setSkyReflectionMixValue(getSelectedSky()->getMixValue());
 
 		// Core updates
-		_updateRotation(delta);
-		_updateTextureMixing(delta);
-		_updateEyeAdaption(delta);
+		_updateRotation();
+		_updateTextureMixing();
+		_updateEyeAdaption();
 	}
 }
 
-void SkyEntityManager::_updateRotation(float delta)
+void SkyEntityManager::_updateRotation()
 {
 	for (auto & baseEntity : _getBaseEntities())
 	{
@@ -121,14 +121,14 @@ void SkyEntityManager::_updateRotation(float delta)
 				// Rotate matrix
 				sky->setRotationMatrix(glm::rotate(
 					sky->getRotationMatrix(),
-					glm::radians((sky->getRotationSpeed() * delta) / 100.0f),
+					glm::radians((sky->getRotationSpeed()) / 100.0f),
 					vec3(0.0f, 1.0f, 0.0f)));
 			}
 		}
 	}
 }
 
-void SkyEntityManager::_updateTextureMixing(float delta)
+void SkyEntityManager::_updateTextureMixing()
 {
 	for (auto & baseEntity : _getBaseEntities())
 	{
@@ -141,7 +141,7 @@ void SkyEntityManager::_updateTextureMixing(float delta)
 			// Daytime skybox
 			if (sky->getMixValue() > 0.0f)
 			{
-				sky->setMixValue(sky->getMixValue() - (0.0001f * delta));
+				sky->setMixValue(sky->getMixValue() - 0.0001f);
 			}
 		}
 		else
@@ -149,13 +149,13 @@ void SkyEntityManager::_updateTextureMixing(float delta)
 			// Nighttime skybox
 			if (sky->getMixValue() < 1.0f)
 			{
-				sky->setMixValue(sky->getMixValue() + (0.0001f * delta));
+				sky->setMixValue(sky->getMixValue() + 0.0001f);
 			}
 		}
 	}
 }
 
-void SkyEntityManager::_updateEyeAdaption(float delta)
+void SkyEntityManager::_updateEyeAdaption()
 {
 	// Sky brightness changer
 	static float oldIntensity = _shaderBus.getBloomIntensity();
@@ -170,18 +170,18 @@ void SkyEntityManager::_updateEyeAdaption(float delta)
 
 				if (_shaderBus.getBloomIntensity() > targetIntensity) // Decrease bloom intensity
 				{
-					_shaderBus.setBloomIntensity(_shaderBus.getBloomIntensity() - (0.005f * delta));
+					_shaderBus.setBloomIntensity(_shaderBus.getBloomIntensity() - 0.005f);
 				}
 				else if (_shaderBus.getBloomIntensity() < targetIntensity) // Increase bloom intensity
 				{
-					_shaderBus.setBloomIntensity(_shaderBus.getBloomIntensity() + (0.0015f * delta));
+					_shaderBus.setBloomIntensity(_shaderBus.getBloomIntensity() + 0.0015f);
 				}
 			}
 			else
 			{
 				if (_shaderBus.getBloomIntensity() < oldIntensity) // Not looking at sky
 				{
-					_shaderBus.setBloomIntensity(_shaderBus.getBloomIntensity() + (0.0035f * delta));
+					_shaderBus.setBloomIntensity(_shaderBus.getBloomIntensity() + 0.0035f);
 				}
 			}
 		}

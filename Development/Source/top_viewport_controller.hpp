@@ -11,7 +11,7 @@ public:
 	~TopViewportController() = default;
 
 	void initialize() override;
-	void update(float delta) override;
+	void update() override;
 
 private:
 	void _initializeProjectCreation();

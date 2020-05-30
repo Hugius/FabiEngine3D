@@ -11,7 +11,7 @@ public:
 	CollisionResolver(CollisionDetector& collisionDetector);
 	virtual ~CollisionResolver() = default;
 	
-	void update(const vector<AabbEntity*> & boxes, TerrainEntityManager& terrainManager, CameraManager & camera, float delta);
+	void update(const vector<AabbEntity*> & boxes, TerrainEntityManager& terrainManager, CameraManager & camera);
 	void enableAabbResponse();
 	void disableAabbResponse();
 	void enableTerrainResponse(float cameraHeight, float cameraSpeed);

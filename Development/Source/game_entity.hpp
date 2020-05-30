@@ -24,9 +24,9 @@ public:
 	void setTranslation(vec3 val);
 	void setRotation(vec3 val);
 	void setScaling(vec3 val);
-	void translate(vec3 val, float delta);
-	void rotate(vec3 val, float delta);
-	void scale(vec3 val, float delta);
+	void translate(vec3 val);
+	void rotate(vec3 val);
+	void scale(vec3 val);
 	void setColor(vec3 val);
 	void setObjPath(const string & val);
 	void setDiffuseMapPath(const string& val);

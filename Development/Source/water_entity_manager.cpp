@@ -117,7 +117,7 @@ void WaterEntityManager::addWaterEntity(const string & ID, vec3 pos, float size)
 	getEntity(ID)->setSize(size * 2.0f);
 }
 
-void WaterEntityManager::update(float delta)
+void WaterEntityManager::update()
 {
 	// Update reflection height
 	if (getSelectedWater() != nullptr && _shaderBus.isWaterEffectsEnabled())

@@ -14,6 +14,6 @@ public:
 	void addAabbEntity(const string & ID, vec3 T, vec3 R, vec3 S, bool rresponsiveesponse);
 	void bindAabbEntity(const string & ID, const string & parentID, vec3 R, vec3 S, bool responsive);
 
-	void update(float delta) override {}
+	void update() override {}
 	void update(const vector<GameEntity*> & gameEntities);
 };

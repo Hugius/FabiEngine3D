@@ -25,7 +25,7 @@ void LeftViewportController::initialize()
 	_worldEditor.initializeGUI();
 }
 
-void LeftViewportController::update(float delta)
+void LeftViewportController::update()
 {
 	auto window = _gui->getViewport("left")->getWindow("main");
 	auto screen = window->getScreen("main");
@@ -46,8 +46,8 @@ void LeftViewportController::update(float delta)
 	}
 
 	// Update all editors
-	_modelEditor.update(delta);
-	_worldEditor.update(delta);
+	_modelEditor.update();
+	_worldEditor.update();
 }
 
 ModelEditor& LeftViewportController::getModelEditor()

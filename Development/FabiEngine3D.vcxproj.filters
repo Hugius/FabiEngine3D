@@ -644,6 +644,9 @@
     <Filter Include="src\Editor System\Script Editor">
       <UniqueIdentifier>{da14d31f-6d01-4e12-a50c-99a603867d27}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Editor System\Billboard Editor">
+      <UniqueIdentifier>{4902a467-bd9d-455d-a931-8ac0469043e9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\FabiEngine3D\Engine\Shaders\aabb_entity_shader.frag">

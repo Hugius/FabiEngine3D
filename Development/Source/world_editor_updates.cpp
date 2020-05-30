@@ -1,13 +1,12 @@
 #include "world_editor.hpp"
 
-void WorldEditor::update(float delta)
+void WorldEditor::update()
 {
 	if (_isLoaded)
 	{
 		if (_currentWorldPart == WorldPart::NONE)
 		{
 			auto screen = _window->getScreen("worldManagement");
-			_delta = delta;
 
 			// Hide sky
 			if (_fe3d.skyEntity_isExisting("@sky"))

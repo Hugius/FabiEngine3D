@@ -1,6 +1,9 @@
 #include "core_engine.hpp"
 #include "configuration.hpp"
-
+#include <ctime>
+#include <ratio>
+#include <chrono>
+using namespace std::chrono;
 CoreEngine::CoreEngine(FabiEngine3D & fe3d) :
 	_fe3d(fe3d),
 	_windowManager(),
@@ -38,14 +41,33 @@ CoreEngine::~CoreEngine()
 
 void CoreEngine::_start()
 {
+	// Setup
 	_setupApplication();
 	_isRunning = true;
 
+	// Variables
+	high_resolution_clock::time_point previous = high_resolution_clock::now();
+	float lag = 0.0f;
+
+	// Main game-loop
 	while (_isRunning)
 	{
-		_timer.calculateDeltaTime();
-		_inputHandler.f_checkInput();
-		_updateApplication();
+		// Calculate timing values
+		high_resolution_clock::time_point current = high_resolution_clock::now();
+		duration<double> time_span = duration_cast<duration<double>>(current - previous);
+		float elapsed = static_cast<float>(time_span.count()) * 1000.0f;
+		previous = current;
+		lag += elapsed;
+
+		// Update 144 times per second
+		while (lag >= 6.94f)
+		{
+			_inputHandler.f_checkInput();
+			_updateApplication();
+			lag -= 6.94f;
+		}
+
+		// Render at full speed
 		_renderApplication();
 	}
 

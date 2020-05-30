@@ -11,15 +11,13 @@ public:
 	Timer()  = default;
 	~Timer() = default;
 
-	void setCustomDeltaTime(float delta);
-	void calculateDeltaTime();
 	void start(const string& ID);
 	void stop();
 
 	float getDeltaPart(const string& ID);
-	float getDeltaTime();
+	float getDeltaPartSum();
 
-	void uSleep(int waitTime);
+	void sleep(int microseconds);
 
 private:
 	LARGE_INTEGER _frequency;

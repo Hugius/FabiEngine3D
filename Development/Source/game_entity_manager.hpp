@@ -24,5 +24,5 @@ public:
 		bool transparent, bool faceCulled, bool lightMapped, bool reflective, bool specular
 	);
 
-	void update(float delta) override;
+	void update() override;
 };

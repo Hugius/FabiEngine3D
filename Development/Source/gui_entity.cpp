@@ -50,19 +50,19 @@ void GuiEntity::setScaling(vec2 val)
 	_scaling = val;
 }
 
-void GuiEntity::translate(vec2 val, float delta)
+void GuiEntity::translate(vec2 val)
 {
-	_translation += val * delta;
+	_translation += val;
 }
 
-void GuiEntity::rotate(float val, float delta)
+void GuiEntity::rotate(float val)
 {
-	_rotation += val * delta;
+	_rotation += val;
 }
 
-void GuiEntity::scale(vec2 val, float delta)
+void GuiEntity::scale(vec2 val)
 {
-	_scaling += val * delta;
+	_scaling += val;
 }
 
 void GuiEntity::setMinPosition(vec2 val)

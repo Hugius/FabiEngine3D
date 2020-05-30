@@ -6,24 +6,24 @@ EngineGuiGlobalScreen::EngineGuiGlobalScreen(FabiEngine3D& fe3d) :
 
 }
 
-void EngineGuiGlobalScreen::update(float delta)
+void EngineGuiGlobalScreen::update()
 {
 	// Update scrolling lists
 	for (auto& scrollingList : _scrollingLists)
 	{
-		scrollingList->update(delta, true);
+		scrollingList->update(true);
 	}
 
 	// Update writefields
 	for (auto& writefield : _writeFields)
 	{
-		writefield->update(delta, true);
+		writefield->update(true);
 	}
 
 	// Update buttons
 	for (auto& button : _buttons)
 	{
-		button->update(delta, true);
+		button->update(true);
 	}
 
 	// Miscellaneous

@@ -159,12 +159,12 @@ void WorldEditor::_updateWaterMesh()
 		{
 			if (screen->getScrollingList("buttonList")->getButton("up")->isHovered())
 			{
-				_waterHeight += 0.01f * _delta;
+				_waterHeight += 0.01f;
 				_fe3d.waterEntity_setSurfaceHeight("@water", _waterHeight);
 			}
 			else if (screen->getScrollingList("buttonList")->getButton("down")->isHovered())
 			{
-				_waterHeight -= 0.01f * _delta;
+				_waterHeight -= 0.01f;
 				_fe3d.waterEntity_setSurfaceHeight("@water", _waterHeight);
 			}
 		}
@@ -336,9 +336,9 @@ void WorldEditor::_updateWaterCamera()
 	if (_fe3d.waterEntity_isExisting("@water"))
 	{
 		// Get scroll wheel input
-		float rotationAcceleration = float(_fe3d.input_getMouseWheelY()) * 0.001f;
+		float rotationAcceleration = float(_fe3d.input_getMouseWheelY()) / _scrollWheelDivider;
 		_cameraRotationSpeed += rotationAcceleration;
-		_cameraRotationSpeed *= 0.995f;
+		_cameraRotationSpeed *= 0.975f;
 		_totalCameraRotation += _cameraRotationSpeed;
 
 		// Calculate new camera position

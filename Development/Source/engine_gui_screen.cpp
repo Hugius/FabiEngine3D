@@ -10,7 +10,7 @@ EngineGuiScreen::EngineGuiScreen(FabiEngine3D& fe3d, const string& parentID, con
 
 }
 
-void EngineGuiScreen::update(float delta, bool hoverable)
+void EngineGuiScreen::update(bool hoverable)
 {
 	// Check if screen is active
 	if (_isActive)
@@ -81,19 +81,19 @@ void EngineGuiScreen::update(float delta, bool hoverable)
 	// Update scrolling lists
 	for (auto& scrollingList : _scrollingLists)
 	{
-		scrollingList->update(delta, hoverable);
+		scrollingList->update(hoverable);
 	}
 
 	// Update writefields
 	for (auto& writefield : _writeFields)
 	{
-		writefield->update(delta, hoverable);
+		writefield->update(hoverable);
 	}
 
 	// Update buttons
 	for (auto& button : _buttons)
 	{
-		button->update(delta, hoverable);
+		button->update(hoverable);
 	}
 }
 

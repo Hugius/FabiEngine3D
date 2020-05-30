@@ -25,5 +25,5 @@ public:
 		bool transparent, bool facingCameraX, bool facingCameraY, bool textureFiltering
 	);
 
-	void update(float delta) override;
+	void update() override;
 };

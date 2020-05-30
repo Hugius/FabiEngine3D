@@ -12,7 +12,7 @@ class EngineGuiGlobalScreen final
 public:
 	EngineGuiGlobalScreen(FabiEngine3D& fe3d);
 
-	void update(float delta);
+	void update();
 	void setFocus(bool focused);
 
 	bool isFocused();

@@ -13,5 +13,5 @@ public:
 
 	void addLightEntity(const string & ID, vec3 position, vec3 color, float strength);
 
-	void update(float delta) override {}
+	void update() override {}
 };

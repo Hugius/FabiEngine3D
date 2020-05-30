@@ -40,44 +40,30 @@ void CoreEngine::_updateApplication()
 	}
 
 	// User updates
-	_timer.start("engineGuiUpdates");
-	_fe3d.FE3D_CONTROLLER_UPDATE(_timer.getDeltaTime());
-	_timer.stop();
+	_fe3d.FE3D_CONTROLLER_UPDATE();
 
 	// Camera updates
-	_timer.start("cameraUpdates");
-	_cameraManager.update(_windowManager, _timer.getDeltaTime());
-	_timer.stop();
+	_cameraManager.update(_windowManager);
 
 	// Physics updates
-	_timer.start("raycastUpdates");
 	_mousePicker.update(_windowManager.getMousePos(), _terrainEntityManager);
-	_timer.stop();
-	_timer.start("physicsUpdates");
-	_collisionResolver.update(_aabbEntityManager.getEntities(), _terrainEntityManager, _cameraManager, _timer.getDeltaTime());
-	_timer.stop();
+	_collisionResolver.update(_aabbEntityManager.getEntities(), _terrainEntityManager, _cameraManager);
 
 	// 3D entity updates
-	_timer.start("entityUpdates");
-	_skyEntityManager.update(_timer.getDeltaTime());
-	_waterEntityManager.update(_timer.getDeltaTime());
-	_gameEntityManager.update(_timer.getDeltaTime());
-	_billboardEntityManager.update(_timer.getDeltaTime());
+	_skyEntityManager.update();
+	_waterEntityManager.update();
+	_gameEntityManager.update();
+	_billboardEntityManager.update();
 	_aabbEntityManager.update(_gameEntityManager.getEntities());
 
 	// 2D entity updates
-	_guiEntityManager.update(_timer.getDeltaTime());
-	_textEntityManager.update(_timer.getDeltaTime());
-	_timer.stop();
+	_guiEntityManager.update();
+	_textEntityManager.update();
 
 	// Miscellaneous updates
-	_timer.start("shadowUpdates");
 	_shadowManager.update(_shaderBus);
 	_cameraManager.updateMatrices();
-	_timer.stop();
-	_timer.start("audioUpdates");
-	_audioPlayer.update(_cameraManager, _audioManager.getChunks(), _audioManager.getMusic(), _timer.getDeltaTime());
-	_timer.stop();
+	_audioPlayer.update(_cameraManager, _audioManager.getChunks(), _audioManager.getMusic());
 
 	// Performance profiling updates
 	_updatePerformanceProfiler();
@@ -85,22 +71,18 @@ void CoreEngine::_updateApplication()
 
 void CoreEngine::_renderApplication()
 {
-	_timer.start("entityBus");
 	EntityBus entityBus
 	(
 		_skyEntityManager.getSelectedSky(), _terrainEntityManager.getSelectedTerrain(), _waterEntityManager.getSelectedWater(), 
 		_gameEntityManager.getEntities(), _billboardEntityManager.getEntities(), _aabbEntityManager.getEntities(),
 		_lightEntityManager.getEntities(), _guiEntityManager.getEntities(), _textEntityManager.getEntities()
 	);
-	_timer.stop();
 
 	// Render entities
 	_renderEngine.renderScene(&entityBus, _cameraManager, _windowManager.getMousePos());
 
 	// Swap GPU buffer
-	_timer.start("renderSwap");
 	_windowManager.swapBackBuffer();
-	_timer.stop();
 }
 
 //void CoreEngine::_initWorldEditor()
@@ -117,11 +99,11 @@ void CoreEngine::_renderApplication()
 
 //void CoreEngine::_updateModelEditor()
 //{
-//	_modelEditor.update(_windowManager.getMousePos(), _inputHandler, _timer.getDeltaTime());
+//	_modelEditor.update(_windowManager.getMousePos(), _inputHandler);
 //	_textEntityManager.addTextEntity("modelName", "Model: " + _modelEditor.getSelectedModel()->getModelName(), "font", vec3(1.0f), vec2(0.3f, -0.75f), 0.0f, vec2(0.5f, 0.15f), true, true, true);
 //	_shadowManager.update(_shaderBus);
-//	_guiEntityManager.update(_timer.getDeltaTime());
-//	_textEntityManager.update(_timer.getDeltaTime());
+//	_guiEntityManager.update();
+//	_textEntityManager.update();
 //}
 
 //void CoreEngine::_updateWorldEditor()
@@ -144,17 +126,17 @@ void CoreEngine::_renderApplication()
 //		}
 //
 //		// Update
-//		_fe3d.WE3D_UPDATE_EDITOR(_timer.getDeltaTime());
+//		_fe3d.WE3D_UPDATE_EDITOR();
 //		_mousePicker.update(_windowManager.getMousePos(), _terrainEntityManager);
-//		_skyEntityManager.update(_timer.getDeltaTime());
-//		_waterEntityManager.update(_timer.getDeltaTime());
-//		_gameEntityManager.update(_timer.getDeltaTime());
-//		_guiEntityManager.update(_timer.getDeltaTime());
+//		_skyEntityManager.update();
+//		_waterEntityManager.update();
+//		_gameEntityManager.update();
+//		_guiEntityManager.update();
 //		_shadowManager.update(_shaderBus);
 //		_worldEditor.update(_windowManager.getMousePos(), _mousePicker.getTerrainPoint(), placementMode,
-//			_modelEditor.getModels(), _cameraManager, _textEntityManager, _inputHandler, _timer.getDeltaTime());
-//		_cameraManager.update(_windowManager, _timer.getDeltaTime());
-//		_textEntityManager.update(_timer.getDeltaTime());
+//			_modelEditor.getModels(), _cameraManager, _textEntityManager, _inputHandler);
+//		_cameraManager.update(_windowManager);
+//		_textEntityManager.update();
 //	}
 //	else
 //	{
@@ -166,7 +148,6 @@ void CoreEngine::_renderApplication()
 void CoreEngine::_updatePerformanceProfiler()
 {
 	// Update statistics GUI
-	_timer.start("stats");
 	if (_showStats)
 	{
 		static int steps = 0;
@@ -178,42 +159,29 @@ void CoreEngine::_updatePerformanceProfiler()
 		if (steps == 50) // Update interval
 		{
 			// FPS
-			auto fps = 1000.0f / _timer.getDeltaTime();
+			auto fps = 1000.0f;
 			auto fpsText = "FPS: " + std::to_string(fps);
-			//_textEntityManager.addTextEntity("fps", fpsText, "font", vec3(1.0f), vec2(x, y), 0.0f, vec2(width * fpsText.size(), height), true, true, false);
+			_textEntityManager.addTextEntity("fps", fpsText, "font", vec3(1.0f), vec2(x, y), 0.0f, vec2(width * fpsText.size(), height), true, true);
 			steps = 0;
 
 			// Performance profiling
-			vector<string> elements =
+			vector<string> elementNames =
 			{
-				"inputHandle", "engineGuiUpdates", "raycastUpdates", "physicsUpdates", "cameraUpdates", "entityUpdates", "shadowUpdates", "audioUpdates",
-				"renderSwap", "reflectionPreRender", "waterPreRender", "shadowPreRender", "depthPreRender", "skyEntity", "terrainEntity", "waterEntity",
-				"gameEntities", "bBoardEntities", "aabbEntities", "postProcessing", "guiRender", "textRender"
+				"reflectionPreRender", "refractionPreRender", "shadowPreRender", "depthPreRender", "skyEntityRender", "terrainEntityRender", "waterEntityRender",
+				"gameEntityRender", "billboardEntityRender", "aabbEntityRender", "antiAliasing", "postProcessing", "guiEntityRender", "textEntityRender"
 			};
 
 			// Add new text entities
-			for (size_t i = 0; i < elements.size(); i++)
+			for (size_t i = 0; i < elementNames.size(); i++)
 			{
-				auto nameText = elements[i];
-				nameText[0] = toupper(nameText[0]);
-				auto percentage = std::to_string((_timer.getDeltaPart(elements[i]) / _timer.getDeltaTime()) * 100.0f);
-				auto pcText = nameText + ": " + percentage + "%";
-				//_textEntityManager.addTextEntity(elements[i], pcText, "font", vec3(1.0f), vec2(x, y - height - (height * float(int(i)))), 0.0f, vec2(width * pcText.size(), height), true, true, false);
+				auto percentage = std::to_string((_timer.getDeltaPart(elementNames[i]) / _timer.getDeltaPartSum()) * 100.0f);
+				auto text = elementNames[i] + ": " + percentage + "%";
+				_textEntityManager.addTextEntity(elementNames[i], text, "font", vec3(1.0f), vec2(x, y - height - (height * float(int(i)))), 0.0f, vec2(width * text.size(), height), true, true);
 			}
-
-			// Other percentage
-			float percentage = 0.0f;
-			percentage += (_timer.getDeltaPart("entityBus") / _timer.getDeltaTime()) * 100.0f;
-			percentage += (_timer.getDeltaPart("aaBind") / _timer.getDeltaTime()) * 100.0f;
-			percentage += (_timer.getDeltaPart("aaUnbind") / _timer.getDeltaTime()) * 100.0f;
-			percentage += (_timer.getDeltaPart("stats") / _timer.getDeltaTime()) * 100.0f;
-			auto pcText = "Misc: " + std::to_string(percentage) + "%";
-			//_textEntityManager.addTextEntity("misc", pcText, "font", vec3(1.0f), vec2(x, y - height - (height * float(int(elements.size())))), 0.0f, vec2(width * pcText.size(), height), true, true, false);
 		}
 		else
 		{
 			steps++;
 		}
 	}
-	_timer.stop();
 }

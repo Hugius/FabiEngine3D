@@ -13,10 +13,8 @@ EngineGuiScrollingList::EngineGuiScrollingList(
 
 }
 
-void EngineGuiScrollingList::update(float delta, bool hoverable)
+void EngineGuiScrollingList::update(bool hoverable)
 {
-	_delta = delta;
-
 	_updateHovering();
 	_updateScolling();
 	_updateButtons(hoverable);
@@ -129,7 +127,7 @@ void EngineGuiScrollingList::_updateScolling()
 			_scrollingSpeed *= 0.995f;
 
 			// Update the total offset
-			_scrollingOffset += (_scrollingSpeed * _delta);
+			_scrollingOffset += _scrollingSpeed;
 
 			// Reset if below zero
 			if (_scrollingOffset < 0.0f)
@@ -183,7 +181,7 @@ void EngineGuiScrollingList::_updateButtons(bool hoverable)
 	// Update buttons
 	for (auto& button : _buttons)
 	{
-		button->update(_delta, hoverable && _isHovered);
+		button->update(hoverable && _isHovered);
 	}
 }
 

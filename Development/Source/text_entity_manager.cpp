@@ -56,7 +56,7 @@ void TextEntityManager::addTextEntity
 	getEntity(ID)->setDiffuseMap(_texLoader.getText(text, fontPath));
 }
 
-void TextEntityManager::update(float delta)
+void TextEntityManager::update()
 {
 	for (auto & baseEntity : _getBaseEntities())
 	{

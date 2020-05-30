@@ -23,7 +23,7 @@ public:
 	void load();
 	void save();
 	void unload();
-	void update(float delta);
+	void update();
 	void setCurrentProjectName(string projectName);
 
 	bool isLoaded();
@@ -68,7 +68,8 @@ private:
 	const float _minCameraDistance = 1.0f;
 	const float _maxCameraDistance = 50.0f;
 	const float _minCameraHeight = 1.0f;
-	const float _cameraSpeed = 0.1f;
+	const float _cameraSpeed = 0.25f;
+	const float _scrollWheelDivider = 10.0f;
 
 	FabiEngine3D& _fe3d;
 	shared_ptr<EngineGuiManager> _gui;

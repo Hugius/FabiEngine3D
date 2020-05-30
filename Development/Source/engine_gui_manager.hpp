@@ -9,7 +9,7 @@ class EngineGuiManager final
 public:
 	EngineGuiManager(FabiEngine3D& fe3d);
 
-	void update(float delta);
+	void update();
 
 	shared_ptr<EngineGuiGlobalScreen> getGlobalScreen();
 	shared_ptr<EngineGuiViewport> getViewport(const string& ID);

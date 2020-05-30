@@ -8,7 +8,7 @@ void RightViewportController::initialize()
 	_gui->getViewport("right")->getWindow("main")->setActiveScreen("main");
 }
 
-void RightViewportController::update(float delta)
+void RightViewportController::update()
 {
 
 }

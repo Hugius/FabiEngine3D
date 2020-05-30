@@ -15,7 +15,7 @@ public:
 	void load();
 	void save();
 	void unload();
-	void update(float delta);
+	void update();
 	void setCurrentProjectName(string projectName);
 
 	bool isLoaded();
@@ -27,7 +27,7 @@ private:
 	// General variables
 	bool _isLoaded = false;
 	WorldPart _currentWorldPart = WorldPart::NONE;
-	float _delta = 0.0f;
+	const float _scrollWheelDivider = 250.0f;
 	float _cameraRotationSpeed = 0.0f;
 	float _totalCameraRotation = 0.0f;
 	string _currentProjectName = "";

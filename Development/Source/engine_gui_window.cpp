@@ -9,11 +9,11 @@ EngineGuiWindow::EngineGuiWindow(FabiEngine3D& fe3d, const string& parentID, con
 	fe3d.guiEntity_add(_entityID, color, position, 0.0f, size, true);
 }
 
-void EngineGuiWindow::update(float delta, bool hoverable)
+void EngineGuiWindow::update(bool hoverable)
 {
 	for (auto& screen : _screens)
 	{
-		screen->update(delta, hoverable);
+		screen->update(hoverable);
 	}
 }
 

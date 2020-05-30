@@ -29,9 +29,9 @@ public:
 	void setTranslation(vec2 val);
 	void setRotation(float val);
 	void setScaling(vec2 val);
-	void translate(vec2 val, float delta);
-	void rotate(float val, float delta);
-	void scale(vec2 val, float delta);
+	void translate(vec2 val);
+	void rotate(float val);
+	void scale(vec2 val);
 	void setMinPosition(vec2 val);
 	void setMaxPosition(vec2 val);
 

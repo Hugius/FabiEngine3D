@@ -9,7 +9,7 @@ public:
 	EngineGuiWriteField(FabiEngine3D& fe3d, const string& parentID, const string& ID, vec2 position, vec2 size, vec3 color, vec3 hoverColor, 
 		vec3 textColor, vec3 textHoverColor, bool noNumbers = false, bool noCaps = false, bool noSpecials = false, bool noLetters = false);
 
-	void update(float delta, bool hoverable) override;
+	void update(bool hoverable) override;
 	void setActive(bool active);
 	void setPermActive(bool active);
 
@@ -22,7 +22,7 @@ public:
 
 private:
 	void _updateActivation();
-	void _updateTyping(float delta);
+	void _updateTyping();
 
 	bool _mustBeActive = false;
 	bool _isActive = false;

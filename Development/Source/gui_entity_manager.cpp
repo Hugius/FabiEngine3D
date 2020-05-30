@@ -53,7 +53,7 @@ void GuiEntityManager::addGuiEntity(const string & ID, vec3 color, vec2 translat
 	getEntity(ID)->setColor(color);
 }
 
-void GuiEntityManager::update(float delta)
+void GuiEntityManager::update()
 {
 	for (auto & baseEntity : _getBaseEntities())
 	{

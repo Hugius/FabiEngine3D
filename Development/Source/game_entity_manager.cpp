@@ -132,7 +132,7 @@ void GameEntityManager::addGameEntity
 	getEntity(ID)->setSpecularLighted(specular);
 }
 
-void GameEntityManager::update(float delta)
+void GameEntityManager::update()
 {
 	for (auto & baseEntity : _getBaseEntities())
 	{

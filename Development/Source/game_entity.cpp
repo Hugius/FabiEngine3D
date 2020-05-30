@@ -87,19 +87,19 @@ void GameEntity::setScaling(vec3 val)
 	_scaling = val;
 }
 
-void GameEntity::translate(vec3 val, float delta)
+void GameEntity::translate(vec3 val)
 {
-	_translation += val * delta;
+	_translation += val;
 }
 
-void GameEntity::rotate(vec3 val, float delta)
+void GameEntity::rotate(vec3 val)
 {
-	_rotation += val * delta;
+	_rotation += val;
 }
 
-void GameEntity::scale(vec3 val, float delta)
+void GameEntity::scale(vec3 val)
 {
-	_scaling += val * delta;
+	_scaling += val;
 }
 
 void GameEntity::setColor(vec3 val)

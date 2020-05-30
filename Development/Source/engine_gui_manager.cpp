@@ -13,16 +13,16 @@ EngineGuiManager::EngineGuiManager(FabiEngine3D& fe3d) :
 	_viewports.push_back(make_shared<EngineGuiViewport>(_fe3d, "bottom", vec2(0.0f, -0.8f), vec2(2.0f, 0.4f), vec3(0.15f)));
 }
 
-void EngineGuiManager::update(float delta)
+void EngineGuiManager::update()
 {
 	// Update viewports
 	for (auto& viewport : _viewports)
 	{
-		viewport->update(delta, !_globalScreen->isFocused());
+		viewport->update(!_globalScreen->isFocused());
 	}
 	
 	// Update global screen
-	_globalScreen->update(delta);
+	_globalScreen->update();
 }
 
 shared_ptr<EngineGuiGlobalScreen> EngineGuiManager::getGlobalScreen()

@@ -19,5 +19,5 @@ public:
 		bool overwrite, bool centered
 	);
 
-	void update(float delta) override;
+	void update() override;
 };

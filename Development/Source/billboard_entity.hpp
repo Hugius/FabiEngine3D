@@ -16,9 +16,9 @@ public:
 
 	// Updates
 	void updateModelMatrix();
-	void translate(vec3 val, float delta);
-	void rotate(vec3 val, float delta);
-	void scale(vec3 val, float delta);
+	void translate(vec3 val);
+	void rotate(vec3 val);
+	void scale(vec3 val);
 
 	// Setters
 	void setCameraFacing(ivec2 val);
@@ -31,7 +31,7 @@ public:
 	void setText(const string& text);
 	void setFontPath(const string& fontPath);
 	void setTransparent(bool val);
-	void setSpriteAnimation(int rows, int columns, float maxDelta, int animationRepeats);
+	void setSpriteAnimation(int rows, int columns, int maxAnimationRepeats);
 	void setSpriteRowIndex(int val);
 	void setSpriteColumnIndex(int val);
 	void addToDelta(float val);

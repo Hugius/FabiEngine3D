@@ -33,7 +33,7 @@ void TopViewportController::initialize()
 	_gui->getViewport("top")->getWindow("gameWindow")->setActiveScreen("main");
 }
 
-void TopViewportController::update(float delta)
+void TopViewportController::update()
 {
 	auto projectWindow = _gui->getViewport("top")->getWindow("projectWindow");
 	auto mainScreen = projectWindow->getScreen("main");

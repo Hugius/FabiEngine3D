@@ -14,12 +14,12 @@ public:
 
 	void addSkyEntity(const string & ID, TextureLoader& texLoader, const vector<string> texturePaths);
 
-	void update(float delta) override;
+	void update() override;
 
 private:
-	void _updateRotation(float delta);
-	void _updateTextureMixing(float delta);
-	void _updateEyeAdaption(float delta);
+	void _updateRotation();
+	void _updateTextureMixing();
+	void _updateEyeAdaption();
 
 	string _selectedID = "";
 };

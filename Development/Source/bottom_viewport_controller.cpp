@@ -8,7 +8,7 @@ void BottomViewportController::initialize()
 	_gui->getViewport("bottom")->getWindow("main")->setActiveScreen("main");
 }
 
-void BottomViewportController::update(float delta)
+void BottomViewportController::update()
 {
 
 }

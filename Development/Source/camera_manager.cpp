@@ -40,7 +40,7 @@ void CameraManager::reset()
 	_mustCenter = false;
 }
 
-void CameraManager::update(WindowManager & windowManager, float delta)
+void CameraManager::update(WindowManager & windowManager)
 {
 	if (_firstPersonViewEnabled)
 	{
@@ -70,8 +70,8 @@ void CameraManager::update(WindowManager & windowManager, float delta)
 		float yOffset = float(Config::getInst().getWindowHeight() / 2) - float(mousePos.y);
 
 		// Applying mouse sensitivity
-		xOffset *= (_mouseSensitivity * delta) / 100.0f;
-		yOffset *= (_mouseSensitivity * delta) / 100.0f;
+		xOffset *= (_mouseSensitivity) / 100.0f;
+		yOffset *= (_mouseSensitivity) / 100.0f;
 
 		// Calculate overall mouse offset
 		_mouseOffset = (xOffset + yOffset) / 2.0f;
@@ -141,33 +141,33 @@ void CameraManager::updateMatrices()
 	_shaderBus.setFarZ(_farZ);
 }
 
-void CameraManager::translateFollowX(float speed, float delta) // Side movement
+void CameraManager::translateFollowX(float speed) // Side movement
 { 
 	if (_freeMovementEnabled)
 	{
-		_pos += _right * ((speed * delta) / 100.0f);
+		_pos += _right * (speed / 100.0f);
 	}
 }
 
-void CameraManager::translateFollowZ(float speed, float delta) // Forward movement
+void CameraManager::translateFollowZ(float speed) // Forward movement
 {
 	if (_freeMovementEnabled)
 	{
 		vec3 tempFront = _front;
 		tempFront.x = cos(glm::radians(_yaw));
 		tempFront.z = sin(glm::radians(_yaw));
-		_pos.x += tempFront.x * ((speed * delta) / 100.0f);
-		_pos.z += tempFront.z * ((speed * delta) / 100.0f);
+		_pos.x += tempFront.x * (speed / 100.0f);
+		_pos.z += tempFront.z * (speed / 100.0f);
 	}
 }
 
-void CameraManager::translateFollowZY(float speed, float delta) // Forward movement
+void CameraManager::translateFollowZY(float speed) // Forward movement
 {
 	if (_freeMovementEnabled)
 	{
-		_pos.x += _front.x * ((speed * delta) / 100.0f);
-		_pos.y += _front.y * ((speed * delta) / 100.0f);
-		_pos.z += _front.z * ((speed * delta) / 100.0f);
+		_pos.x += _front.x * (speed / 100.0f);
+		_pos.y += _front.y * (speed / 100.0f);
+		_pos.z += _front.z * (speed / 100.0f);
 	}
 }
 
@@ -280,11 +280,11 @@ const bool CameraManager::isLookatEnabled() const
 	return _lookatEabled;
 }
 
-void CameraManager::translate(vec3 translation, float delta)
+void CameraManager::translate(vec3 translation)
 {
 	if (_freeMovementEnabled)
 	{
-		_pos += translation * delta;
+		_pos += translation;
 	}
 }
 

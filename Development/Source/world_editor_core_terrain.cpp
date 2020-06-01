@@ -44,44 +44,47 @@ void WorldEditor::_loadTerrainData()
 
 void WorldEditor::_saveTerrainData()
 {
-	// Error checking
-	if (_currentProjectName == "")
+	if (_isLoaded)
 	{
-		_fe3d.logger_throwError("Tried to save as empty project!");
-	}
-
-	string terrainPath = _fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\terrain.fe3d";
-
-	// Save terrain data
-	if (_fe3d.terrainEntity_isExisting("@terrain"))
-	{
-		// Load file
-		std::ofstream terrainFile(terrainPath);
-
-		// Write base data to file
-		terrainFile << _terrainHeightmapPath << " " << _terrainDiffusemapPath << " " << _terrainSize << " " << _maxTerrainHeight << " " << _terrainUvRepeat << " " << _isTerrainBlendmapped << " ";
-
-		// Write blendmapping data to file
-		if (_isTerrainBlendmapped)
+		// Error checking
+		if (_currentProjectName == "")
 		{
-			terrainFile << _terrainBlendmapPath << " " << _terrainRedPath << " " << _terrainGreenPath << " " << _terrainBluePath << " " <<
-				_terrainRedUvRepeat << " " << _terrainGreenUvRepeat << " " << _terrainBlueUvRepeat;
+			_fe3d.logger_throwError("Tried to save as empty project!");
 		}
 
-		// Close file
-		terrainFile.close();
-	}
-	else
-	{
-		// Remove file if non-existent
-		if (_fe3d.misc_isFileExisting(terrainPath))
-		{
-			std::remove(terrainPath.c_str());
-		}
-	}
+		string terrainPath = _fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\terrain.fe3d";
 
-	// Logging
-	_fe3d.logger_throwInfo("Terrain data from project \"" + _currentProjectName + "\" saved!");
+		// Save terrain data
+		if (_fe3d.terrainEntity_isExisting("@terrain"))
+		{
+			// Load file
+			std::ofstream terrainFile(terrainPath);
+
+			// Write base data to file
+			terrainFile << _terrainHeightmapPath << " " << _terrainDiffusemapPath << " " << _terrainSize << " " << _maxTerrainHeight << " " << _terrainUvRepeat << " " << _isTerrainBlendmapped << " ";
+
+			// Write blendmapping data to file
+			if (_isTerrainBlendmapped)
+			{
+				terrainFile << _terrainBlendmapPath << " " << _terrainRedPath << " " << _terrainGreenPath << " " << _terrainBluePath << " " <<
+					_terrainRedUvRepeat << " " << _terrainGreenUvRepeat << " " << _terrainBlueUvRepeat;
+			}
+
+			// Close file
+			terrainFile.close();
+		}
+		else
+		{
+			// Remove file if non-existent
+			if (_fe3d.misc_isFileExisting(terrainPath))
+			{
+				std::remove(terrainPath.c_str());
+			}
+		}
+
+		// Logging
+		_fe3d.logger_throwInfo("Terrain data from project \"" + _currentProjectName + "\" saved!");
+	}
 }
 
 void WorldEditor::_unloadTerrainData()

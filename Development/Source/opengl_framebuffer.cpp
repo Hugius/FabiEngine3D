@@ -31,8 +31,9 @@ OpenGLFramebuffer::~OpenGLFramebuffer()
 //////////////////////////////////
 // Create Anti Aliasing texture //
 //////////////////////////////////
-void OpenGLFramebuffer::createMsaaTexture(ivec2 size, int amount, int aaSamples)
+void OpenGLFramebuffer::createMsaaTexture(ivec2 position, ivec2 size, int amount, int aaSamples)
 {
+	_position = position;
 	_size = size;
 
 	// Enable OpenGL Anti-Aliasing
@@ -84,8 +85,9 @@ void OpenGLFramebuffer::createMsaaTexture(ivec2 size, int amount, int aaSamples)
 //////////////////////////
 // Create color texture //
 //////////////////////////
-void OpenGLFramebuffer::createColorTexture(ivec2 size, int amount, bool textureClamp)
+void OpenGLFramebuffer::createColorTexture(ivec2 position, ivec2 size, int amount, bool textureClamp)
 {
+	_position = position;
 	_size = size;
 
 	// Frame buffer object
@@ -158,8 +160,9 @@ void OpenGLFramebuffer::createColorTexture(ivec2 size, int amount, bool textureC
 //////////////////////////
 // Create depth texture //
 //////////////////////////
-void OpenGLFramebuffer::createDepthTexture(ivec2 size, int amount)
+void OpenGLFramebuffer::createDepthTexture(ivec2 position, ivec2 size, int amount)
 {
+	_position = position;
 	_size = size;
 
 	if (!_textureInitialized)

@@ -191,14 +191,14 @@ void WorldEditor::_updateSkyCamera()
 		}
 
 		// Enable FPS camera
-		//_fe3d.gfx_enableMotionBlur();
+		_fe3d.gfx_enableMotionBlur();
 		_fe3d.camera_enableFirstPersonView(5.0f);
 		_fe3d.camera_disableLookat();
 		_fe3d.misc_hideCursor();
 	}
 	else
 	{
-		//_fe3d.gfx_disableMotionBlur();
+		_fe3d.gfx_disableMotionBlur();
 		_fe3d.camera_disableFirstPersonView();
 		_fe3d.misc_showCursor();
 	}

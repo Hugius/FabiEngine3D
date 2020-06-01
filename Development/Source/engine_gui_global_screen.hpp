@@ -48,8 +48,8 @@ public:
 	vector<shared_ptr<EngineGuiRectangle>>& getRectangles();
 	vector<shared_ptr<EngineGuiTextfield>>& getTextfields();
 
-	void addValueForm(const string& ID, string title, float value, vec2 position);
-	bool checkValueForm(const string& ID, float& value);
+	template <typename T> void addValueForm(const string& ID, string title, T value, vec2 position);
+	template <typename T> bool checkValueForm(const string& ID, T& value);
 	void addAnswerForm(const string& ID, string title, vec2 position);
 	bool checkAnswerFormConfirmed(const string& ID);
 	bool checkAnswerFormDeclined(const string& ID);

@@ -7,10 +7,12 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 
-TopViewportController::TopViewportController(FabiEngine3D& fe3d, shared_ptr<EngineGuiManager> gui, ModelEditor& modelEditor, WorldEditor& worldEditor) :
+TopViewportController::TopViewportController(FabiEngine3D& fe3d, shared_ptr<EngineGuiManager> gui, 
+	ModelEditor& modelEditor, WorldEditor& worldEditor, BillboardEditor& billboardEditor) :
 	ViewportController(fe3d, gui),
 	_modelEditor(modelEditor),
-	_worldEditor(worldEditor)
+	_worldEditor(worldEditor),
+	_billboardEditor(billboardEditor)
 {
 
 }
@@ -78,8 +80,8 @@ void TopViewportController::update()
 	mainScreen->getButton("saveProject")->setHoverable(_currentProjectName != "");
 	_gui->getViewport("left")->getWindow("main")->getScreen("main")->getButton("modelEditor")->setHoverable(_currentProjectName != "");
 	_gui->getViewport("left")->getWindow("main")->getScreen("main")->getButton("worldEditor")->setHoverable(_currentProjectName != "");
-	_gui->getViewport("left")->getWindow("main")->getScreen("main")->getButton("placingEditor")->setHoverable(_currentProjectName != "");
-	_gui->getViewport("left")->getWindow("main")->getScreen("main")->getButton("lightingEditor")->setHoverable(_currentProjectName != "");
+	_gui->getViewport("left")->getWindow("main")->getScreen("main")->getButton("billboardEditor")->setHoverable(_currentProjectName != "");
+	_gui->getViewport("left")->getWindow("main")->getScreen("main")->getButton("entityPlacer")->setHoverable(_currentProjectName != "");
 	_gui->getViewport("left")->getWindow("main")->getScreen("main")->getButton("scriptEditor")->setHoverable(_currentProjectName != "");
 
 	// Check if user wants to save changes
@@ -179,12 +181,19 @@ void TopViewportController::_updateProjectCreation()
 							_worldEditor.unload();
 						}
 
+						// Unload billboard editor
+						if (_billboardEditor.isLoaded())
+						{
+							_billboardEditor.unload();
+						}
+
 						// Apply to current project
 						_currentProjectName = projectName;
 
 						// Pass loaded project name
 						_modelEditor.setCurrentProjectName(_currentProjectName);
 						_worldEditor.setCurrentProjectName(_currentProjectName);
+						_billboardEditor.setCurrentProjectName(_currentProjectName);
 
 						// Go back to main editor screen
 						_gui->getViewport("left")->getWindow("main")->setActiveScreen("main");
@@ -248,9 +257,16 @@ void TopViewportController::_updateProjectLoading()
 						_worldEditor.unload();
 					}
 
+					// Unload billboard editor
+					if (_billboardEditor.isLoaded())
+					{
+						_billboardEditor.unload();
+					}
+
 					// Pass loaded project name
 					_modelEditor.setCurrentProjectName(_currentProjectName);
 					_worldEditor.setCurrentProjectName(_currentProjectName);
+					_billboardEditor.setCurrentProjectName(_currentProjectName);
 
 					// Logging
 					_fe3d.logger_throwInfo("Existing project \"" + _currentProjectName + "\" loaded!");
@@ -282,6 +298,7 @@ void TopViewportController::_saveCurrentProject()
 	// Save everything
 	_modelEditor.save();
 	_worldEditor.save();
+	_billboardEditor.save();
 
 	// Logging
 	_fe3d.logger_throwInfo("Project \"" + _currentProjectName + "\" saved!");

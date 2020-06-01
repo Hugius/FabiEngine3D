@@ -38,43 +38,46 @@ void WorldEditor::_loadSkyData()
 
 void WorldEditor::_saveSkyData()
 {
-	// Error checking
-	if (_currentProjectName == "")
+	if (_isLoaded)
 	{
-		_fe3d.logger_throwError("Tried to save as empty project!");
-	}
-
-	string skyPath = _fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\sky.fe3d";
-
-	// Save sky data
-	if (_fe3d.skyEntity_isExisting("@sky"))
-	{
-		// Load file
-		std::ofstream skyFile(skyPath);
-
-		// Add path to file
-		for (auto& path : _skyTexturePaths)
+		// Error checking
+		if (_currentProjectName == "")
 		{
-			skyFile << path << " ";
+			_fe3d.logger_throwError("Tried to save as empty project!");
 		}
 
-		// Add options to file
-		skyFile << _skyRotationSpeed;
+		string skyPath = _fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\sky.fe3d";
 
-		// Close file
-		skyFile.close();
-	}
-	else
-	{
-		// Remove file if non-existent
-		if (_fe3d.misc_isFileExisting(skyPath))
+		// Save sky data
+		if (_fe3d.skyEntity_isExisting("@sky"))
 		{
-			std::remove(skyPath.c_str());
-		}
-	}
+			// Load file
+			std::ofstream skyFile(skyPath);
 
-	// Logging
-	_fe3d.logger_throwInfo("Sky data from project \"" + _currentProjectName + "\" saved!");
+			// Add path to file
+			for (auto& path : _skyTexturePaths)
+			{
+				skyFile << path << " ";
+			}
+
+			// Add options to file
+			skyFile << _skyRotationSpeed;
+
+			// Close file
+			skyFile.close();
+		}
+		else
+		{
+			// Remove file if non-existent
+			if (_fe3d.misc_isFileExisting(skyPath))
+			{
+				std::remove(skyPath.c_str());
+			}
+		}
+
+		// Logging
+		_fe3d.logger_throwInfo("Sky data from project \"" + _currentProjectName + "\" saved!");
+	}
 }
 
 void WorldEditor::_unloadSkyData()

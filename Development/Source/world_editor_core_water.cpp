@@ -44,41 +44,44 @@ void WorldEditor::_loadWaterData()
 
 void WorldEditor::_saveWaterData()
 {
-	// Error checking
-	if (_currentProjectName == "")
+	if (_isLoaded)
 	{
-		_fe3d.logger_throwError("Tried to save as empty project!");
-	}
-
-	string waterPath = _fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\water.fe3d";
-
-	// Save water dat
-	if (_fe3d.waterEntity_isExisting("@water"))
-	{
-		// Load file
-		std::ofstream waterFile(waterPath);
-
-		// Write data to file
-		waterFile <<
-			(_waterDudvmapPath == "" ? "-" : _waterDudvmapPath) << " " << (_waterNormalmapPath == "" ? "-" : _waterNormalmapPath) << " " <<
-			_waterWavingEnabled << " " << _waterRipplingEnabled << " " << _waterSpecularEnabled << " " << _waterReflectionEnabled << " " <<
-			_waterRefractionEnabled << " " << _waterColor.r << " " << _waterColor.g << " " << _waterColor.b << " " << _waterSize << " " <<
-			_waterUvRepeat << " " << _waterHeight << " " << _waterSpeed << " " << _waterTransparency << " " << _waterShininess;
-
-		// Close file
-		waterFile.close();
-	}
-	else
-	{
-		// Remove file if non-existent
-		if (_fe3d.misc_isFileExisting(waterPath))
+		// Error checking
+		if (_currentProjectName == "")
 		{
-			std::remove(waterPath.c_str());
+			_fe3d.logger_throwError("Tried to save as empty project!");
 		}
-	}
 
-	// Logging
-	_fe3d.logger_throwInfo("Water data from project \"" + _currentProjectName + "\" saved!");
+		string waterPath = _fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\water.fe3d";
+
+		// Save water dat
+		if (_fe3d.waterEntity_isExisting("@water"))
+		{
+			// Load file
+			std::ofstream waterFile(waterPath);
+
+			// Write data to file
+			waterFile <<
+				(_waterDudvmapPath == "" ? "-" : _waterDudvmapPath) << " " << (_waterNormalmapPath == "" ? "-" : _waterNormalmapPath) << " " <<
+				_waterWavingEnabled << " " << _waterRipplingEnabled << " " << _waterSpecularEnabled << " " << _waterReflectionEnabled << " " <<
+				_waterRefractionEnabled << " " << _waterColor.r << " " << _waterColor.g << " " << _waterColor.b << " " << _waterSize << " " <<
+				_waterUvRepeat << " " << _waterHeight << " " << _waterSpeed << " " << _waterTransparency << " " << _waterShininess;
+
+			// Close file
+			waterFile.close();
+		}
+		else
+		{
+			// Remove file if non-existent
+			if (_fe3d.misc_isFileExisting(waterPath))
+			{
+				std::remove(waterPath.c_str());
+			}
+		}
+
+		// Logging
+		_fe3d.logger_throwInfo("Water data from project \"" + _currentProjectName + "\" saved!");
+	}
 }
 
 void WorldEditor::_unloadWaterData()

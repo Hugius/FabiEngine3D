@@ -4,7 +4,7 @@ EngineController::EngineController() :
 	_gui(make_shared<EngineGuiManager>(*this)),
 	_leftViewportController(*this, _gui),
 	_rightViewportController(*this, _gui),
-	_topViewportController(*this, _gui, _leftViewportController.getModelEditor(), _leftViewportController.getWorldEditor()),
+	_topViewportController(*this, _gui, _leftViewportController.getModelEditor(), _leftViewportController.getWorldEditor(), _leftViewportController.getBillboardEditor()),
 	_bottomViewportController(*this, _gui)
 {
 

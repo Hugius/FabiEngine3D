@@ -20,15 +20,15 @@ RenderEngine::RenderEngine(ShaderBus& shaderBus, Timer& timer) :
 	_finalRenderer            ("final_shader.vert",           "final_shader.frag",           shaderBus)
 {
 	// Framebuffers
-	_screenFramebuffer.createColorTexture(Config::getInst().getVpSize(), 1, false);
-	_msaaFramebuffer.createMsaaTexture(Config::getInst().getVpSize(), 1, Config::getInst().getMsaaQuality() < 1 ? 1 : Config::getInst().getMsaaQuality() > 16 ? 16 : Config::getInst().getMsaaQuality());
-	_aaProcessorFramebuffer.createColorTexture(Config::getInst().getVpSize(), 1, false);
-	_bloomDofAdditionFramebuffer.createColorTexture(Config::getInst().getVpSize(), 1, false);
-	_sceneRefractionFramebuffer.createColorTexture(ivec2(Config::getInst().getWaterQuality()), 1, false);
-	_sceneReflectionFramebuffer.createColorTexture(ivec2(Config::getInst().getReflectionQuality()), 1, false);
-	_bloomHdrFramebuffer.createColorTexture(Config::getInst().getVpSize(), 1, false);
-	_shadowFramebuffer.createDepthTexture(ivec2(Config::getInst().getShadowQuality()), 1);
-	_depthFramebuffer.createDepthTexture(Config::getInst().getVpSize(), 1);
+	_screenFramebuffer.createColorTexture(ivec2(0), Config::getInst().getVpSize(), 1, false);
+	_msaaFramebuffer.createMsaaTexture(ivec2(0), Config::getInst().getVpSize(), 1, Config::getInst().getMsaaQuality() < 1 ? 1 : Config::getInst().getMsaaQuality() > 16 ? 16 : Config::getInst().getMsaaQuality());
+	_aaProcessorFramebuffer.createColorTexture(ivec2(0), Config::getInst().getVpSize(), 1, false);
+	_bloomDofAdditionFramebuffer.createColorTexture(ivec2(0), Config::getInst().getVpSize(), 1, false);
+	_sceneRefractionFramebuffer.createColorTexture(ivec2(0), ivec2(Config::getInst().getWaterQuality()), 1, false);
+	_sceneReflectionFramebuffer.createColorTexture(ivec2(0), ivec2(Config::getInst().getReflectionQuality()), 1, false);
+	_bloomHdrFramebuffer.createColorTexture(ivec2(0), Config::getInst().getVpSize(), 1, false);
+	_shadowFramebuffer.createDepthTexture(ivec2(0), ivec2(Config::getInst().getShadowQuality()), 1);
+	_depthFramebuffer.createDepthTexture(ivec2(0), Config::getInst().getVpSize(), 1);
 	_blurRenderer.addFramebuffer(BLUR_BLOOM,  true);
 	_blurRenderer.addFramebuffer(BLUR_DOF,    true);
 	_blurRenderer.addFramebuffer(BLUR_MOTION, true);

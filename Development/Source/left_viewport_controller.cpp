@@ -3,7 +3,8 @@
 LeftViewportController::LeftViewportController(FabiEngine3D& fe3d, shared_ptr<EngineGuiManager> gui) :
 	ViewportController(fe3d, gui),
 	_modelEditor(fe3d, gui),
-	_worldEditor(fe3d, gui)
+	_worldEditor(fe3d, gui),
+	_billboardEditor(fe3d, gui)
 {
 
 }
@@ -16,13 +17,14 @@ void LeftViewportController::initialize()
 	_gui->getViewport("left")->getWindow("main")->setActiveScreen("main");
 	_gui->getViewport("left")->getWindow("main")->getScreen("main")->addButton("modelEditor", vec2(0.0f, 0.7f), vec2(1.5f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Model editor", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 	_gui->getViewport("left")->getWindow("main")->getScreen("main")->addButton("worldEditor", vec2(0.0f, 0.35f), vec2(1.5f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "World editor", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
-	_gui->getViewport("left")->getWindow("main")->getScreen("main")->addButton("placingEditor", vec2(0.0f, 0.0f), vec2(1.5f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Placing editor", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
-	_gui->getViewport("left")->getWindow("main")->getScreen("main")->addButton("lightingEditor", vec2(0.0f, -0.35f), vec2(1.6f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Lighting editor", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_gui->getViewport("left")->getWindow("main")->getScreen("main")->addButton("billboardEditor", vec2(0.0f, 0.0f), vec2(1.6f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Billboard editor", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_gui->getViewport("left")->getWindow("main")->getScreen("main")->addButton("entityPlacer", vec2(0.0f, -0.35f), vec2(1.5f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Entity placer", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 	_gui->getViewport("left")->getWindow("main")->getScreen("main")->addButton("scriptEditor", vec2(0.0f, -0.7f), vec2(1.5f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Script editor", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 	
 	// Initialize model editor GUI
 	_modelEditor.initializeGUI();
 	_worldEditor.initializeGUI();
+	_billboardEditor.initializeGUI();
 }
 
 void LeftViewportController::update()
@@ -43,11 +45,17 @@ void LeftViewportController::update()
 			_worldEditor.load();
 			window->setActiveScreen("worldManagement");
 		}
+		else if (screen->getButton("billboardEditor")->isHovered()) // Billboard editor button
+		{
+			_billboardEditor.load();
+			window->setActiveScreen("billboardManagement");
+		}
 	}
 
 	// Update all editors
 	_modelEditor.update();
 	_worldEditor.update();
+	_billboardEditor.update();
 }
 
 ModelEditor& LeftViewportController::getModelEditor()
@@ -58,4 +66,9 @@ ModelEditor& LeftViewportController::getModelEditor()
 WorldEditor& LeftViewportController::getWorldEditor()
 {
 	return _worldEditor;
+}
+
+BillboardEditor& LeftViewportController::getBillboardEditor()
+{
+	return _billboardEditor;
 }

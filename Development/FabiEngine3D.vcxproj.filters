@@ -295,6 +295,15 @@
     <ClCompile Include="Source\world_editor_core_water.cpp">
       <Filter>src\Editor System\World Editor</Filter>
     </ClCompile>
+    <ClCompile Include="Source\billboard_editor_core.cpp">
+      <Filter>src\Editor System\Billboard Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\billboard_editor_updates.cpp">
+      <Filter>src\Editor System\Billboard Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\billboard_editor_misc.cpp">
+      <Filter>src\Editor System\Billboard Editor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\obj_loader.hpp">
@@ -537,6 +546,9 @@
     <ClInclude Include="Source\world_editor.hpp">
       <Filter>src\Editor System\World Editor</Filter>
     </ClInclude>
+    <ClInclude Include="Source\billboard_editor.hpp">
+      <Filter>src\Editor System\Billboard Editor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -635,17 +647,14 @@
     <Filter Include="src\Engine Controller System">
       <UniqueIdentifier>{a49d2036-9114-4ebe-9349-1f64805d444c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\Editor System\Placement Editor">
-      <UniqueIdentifier>{73f39bce-8d65-416c-abaa-6ed990784a08}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\Editor System\Lighting Editor">
-      <UniqueIdentifier>{b1578728-7271-4241-baad-ee69304d28ba}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\Editor System\Script Editor">
       <UniqueIdentifier>{da14d31f-6d01-4e12-a50c-99a603867d27}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\Editor System\Billboard Editor">
       <UniqueIdentifier>{4902a467-bd9d-455d-a931-8ac0469043e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Editor System\World Placer">
+      <UniqueIdentifier>{73f39bce-8d65-416c-abaa-6ed990784a08}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

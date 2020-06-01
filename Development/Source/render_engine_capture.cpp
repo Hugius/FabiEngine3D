@@ -172,38 +172,43 @@ void RenderEngine::_capturePostProcessing()
 
 void RenderEngine::_captureMotionBlur(CameraManager & camera, ivec2 mousePos)
 {
-	// Declare variables
-	static float oldYaw;
-	static float oldPitch;
-	int xDifference = int((camera.getYaw() - oldYaw));
-	int yDifference = int((camera.getPitch() - oldPitch));
-	int type;
-	int strength;
-
-	// No negative differences
-	xDifference = abs(xDifference) * 2;
-	yDifference = abs(yDifference) * 2;
-	
-	// Horizontal blur
-	if (xDifference > yDifference)
+	if (_shaderBus.isMotionBlurEnabled())
 	{
-		type = BLUR_DIR_HORIZONTAL;
-		strength = xDifference > 8 ? 8 : xDifference;
+		// Declare variables
+		static float oldMouseX;
+		static float oldMouseY;
+		int xDifference = mousePos.x - oldMouseX;
+		int yDifference = mousePos.y - oldMouseY;
+		int blurType;
+		int blurStrength;
+
+		// No negative differences
+		xDifference = abs(xDifference);
+		yDifference = abs(yDifference);
+
+		// Horizontal blur
+		if (xDifference > yDifference)
+		{
+			blurType = BLUR_DIR_HORIZONTAL;
+			blurStrength = xDifference > 10 ? 10 : xDifference;
+		}
+		else // Vertical blur
+		{
+			blurType = BLUR_DIR_VERTICAL;
+			blurStrength = yDifference > 10 ? 10 : yDifference;
+		}
+
+		// Blur the scene
+		_blurRenderer.bind();
+		_shaderBus.setMotionBlurMap(_blurRenderer.blurTexture(&_finalSurface, _shaderBus.getBloomedDofSceneMap(), BLUR_MOTION, blurStrength, 1.0f, blurType));
+		_blurRenderer.unbind();
+
+		// Set for next iteration
+		oldMouseX = mousePos.x;
+		oldMouseY = mousePos.y;
 	}
-	else // Vertical blur
+	else
 	{
-		type = BLUR_DIR_VERTICAL;
-		strength = yDifference > 8 ? 8 : yDifference;
+		_shaderBus.setMotionBlurMap(_shaderBus.getBloomedDofSceneMap());
 	}
-
-	strength *= _shaderBus.isMotionBlurEnabled();
-
-	// Blur the scene
-	_blurRenderer.bind();
-	_shaderBus.setMotionBlurMap(_blurRenderer.blurTexture(&_finalSurface, _shaderBus.getBloomedDofSceneMap(), BLUR_MOTION, strength, 1.0f, type));
-	_blurRenderer.unbind();
-
-	// Set for next iteration
-	oldYaw = camera.getYaw();
-	oldPitch = camera.getPitch();
 }

@@ -108,11 +108,11 @@ void OpenGLBuffer::_create2D(float x, float y, float w, float h, bool centered)
 		data = new float[24]
 		{
 			x - (w / 2.0f) , y - (h / 2.0f) , 0.0f,  0.0f,
-			x + (w / 2.0f) , y - (h / 2.0f) , 0.99f, 0.0f,
-			x + (w / 2.0f) , y + (h / 2.0f) , 0.99f, 0.99f,
+			x + (w / 2.0f) , y - (h / 2.0f) , 1.0f, 0.0f,
+			x + (w / 2.0f) , y + (h / 2.0f) , 1.0f, 1.0f,
 
-			x + (w / 2.0f) , y + (h / 2.0f) , 0.99f, 0.99f,
-			x - (w / 2.0f) , y + (h / 2.0f) , 0.0f,  0.99f,
+			x + (w / 2.0f) , y + (h / 2.0f) , 1.0f, 1.0f,
+			x - (w / 2.0f) , y + (h / 2.0f) , 0.0f,  1.0f,
 			x - (w / 2.0f) , y - (h / 2.0f) , 0.0f,  0.0f
 		};
 	}
@@ -121,11 +121,11 @@ void OpenGLBuffer::_create2D(float x, float y, float w, float h, bool centered)
 		data = new float[24]
 		{
 			x, y, 0.0f, 0.0f,
-			x + w, y, 0.99f, 0.0f,
-			x + w, y + h, 0.99f, 0.99f,
+			x + w, y, 1.0f, 0.0f,
+			x + w, y + h, 1.0f, 1.0f,
 
-			x + w, y + h, 0.99f, 0.99f,
-			x, y + h, 0.0f, 0.99f,
+			x + w, y + h, 1.0f, 1.0f,
+			x, y + h, 0.0f, 1.0f,
 			x, y, 0.0f, 0.0f
 		};
 	}

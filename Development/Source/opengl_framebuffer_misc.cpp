@@ -6,7 +6,7 @@
 //////////////////////
 void OpenGLFramebuffer::bind()
 {
-	glViewport(0, 0, _size.x, _size.y);
+	glViewport(_position.x, _position.y, _size.x, _size.y);
 	glBindFramebuffer(GL_FRAMEBUFFER, _fbo);
 }
 

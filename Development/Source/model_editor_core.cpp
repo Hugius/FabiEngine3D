@@ -150,63 +150,66 @@ void ModelEditor::load()
 
 void ModelEditor::save()
 {
-	// Error checking
-	if (_currentProjectName == "")
+	if (_isLoaded)
 	{
-		_fe3d.logger_throwError("Tried to save as empty project!");
-	}
-
-	// Create or overwrite models file
-	std::ofstream file;
-	file.open(_fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\models.fe3d");
-
-	// Write model data into file
-	for (auto& modelName : _modelNames)
-	{
-		// Check if 3D entity exists
-		if (_fe3d.gameEntity_isExisting(modelName))
+		// Error checking
+		if (_currentProjectName == "")
 		{
-			auto objPath = _fe3d.gameEntity_getObjPath(modelName);
-			auto diffuseMapPath = _fe3d.gameEntity_getDiffuseMapPath(modelName);
-			diffuseMapPath = (diffuseMapPath == "") ? "-" : diffuseMapPath;
-			auto lightMapPath = _fe3d.gameEntity_getLightMapPath(modelName);
-			lightMapPath = (lightMapPath == "") ? "-" : lightMapPath;
-			auto reflectionMapPath = _fe3d.gameEntity_getReflectionMapPath(modelName);
-			reflectionMapPath = (reflectionMapPath == "") ? "-" : reflectionMapPath;
-			auto modelSizeX = std::to_string(_fe3d.gameEntity_getSize(modelName).x);
-			auto modelSizeY = std::to_string(_fe3d.gameEntity_getSize(modelName).y);
-			auto modelSizeZ = std::to_string(_fe3d.gameEntity_getSize(modelName).z);
-			auto faceCulled = std::to_string(_fe3d.gameEntity_isFaceCulled(modelName));
-			auto shadowed = std::to_string(_fe3d.gameEntity_isShadowed(modelName));
-			auto transparent = std::to_string(_fe3d.gameEntity_isTransparent(modelName));
-			auto specular = std::to_string(_fe3d.gameEntity_isSpecularLighted(modelName));
-			auto colorR = std::to_string(_fe3d.gameEntity_getColor(modelName).x);
-			auto colorG = std::to_string(_fe3d.gameEntity_getColor(modelName).y);
-			auto colorB = std::to_string(_fe3d.gameEntity_getColor(modelName).z);
-			auto uvRepeat = std::to_string(_fe3d.gameEntity_getUvRepeat(modelName));
-			auto boxSizeX = std::to_string(_fe3d.aabbEntity_getSize(modelName).x);
-			auto boxSizeY = std::to_string(_fe3d.aabbEntity_getSize(modelName).y);
-			auto boxSizeZ = std::to_string(_fe3d.aabbEntity_getSize(modelName).z);
-
-			// 1 model -> 1 line in file
-			file << modelName << " " <<
-				objPath << " " << diffuseMapPath << " " << lightMapPath << " " << reflectionMapPath << " " <<
-				modelSizeX << " " << modelSizeY << " " << modelSizeZ << " " <<
-				faceCulled << " " << shadowed << " " << transparent << " " << specular << " " <<
-				colorR << " " << colorG << " " << colorB << " " << uvRepeat << " " <<
-				boxSizeX << " " << boxSizeY << " " << boxSizeZ << "\n";
+			_fe3d.logger_throwError("Tried to save as empty project!");
 		}
-		else
+
+		// Create or overwrite models file
+		std::ofstream file;
+		file.open(_fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\models.fe3d");
+
+		// Write model data into file
+		for (auto& modelName : _modelNames)
 		{
-			file << modelName << " -  -  -  -  0  0  0\n";
+			// Check if 3D entity exists
+			if (_fe3d.gameEntity_isExisting(modelName))
+			{
+				auto objPath = _fe3d.gameEntity_getObjPath(modelName);
+				auto diffuseMapPath = _fe3d.gameEntity_getDiffuseMapPath(modelName);
+				diffuseMapPath = (diffuseMapPath == "") ? "-" : diffuseMapPath;
+				auto lightMapPath = _fe3d.gameEntity_getLightMapPath(modelName);
+				lightMapPath = (lightMapPath == "") ? "-" : lightMapPath;
+				auto reflectionMapPath = _fe3d.gameEntity_getReflectionMapPath(modelName);
+				reflectionMapPath = (reflectionMapPath == "") ? "-" : reflectionMapPath;
+				auto modelSizeX = std::to_string(_fe3d.gameEntity_getSize(modelName).x);
+				auto modelSizeY = std::to_string(_fe3d.gameEntity_getSize(modelName).y);
+				auto modelSizeZ = std::to_string(_fe3d.gameEntity_getSize(modelName).z);
+				auto faceCulled = std::to_string(_fe3d.gameEntity_isFaceCulled(modelName));
+				auto shadowed = std::to_string(_fe3d.gameEntity_isShadowed(modelName));
+				auto transparent = std::to_string(_fe3d.gameEntity_isTransparent(modelName));
+				auto specular = std::to_string(_fe3d.gameEntity_isSpecularLighted(modelName));
+				auto colorR = std::to_string(_fe3d.gameEntity_getColor(modelName).x);
+				auto colorG = std::to_string(_fe3d.gameEntity_getColor(modelName).y);
+				auto colorB = std::to_string(_fe3d.gameEntity_getColor(modelName).z);
+				auto uvRepeat = std::to_string(_fe3d.gameEntity_getUvRepeat(modelName));
+				auto boxSizeX = std::to_string(_fe3d.aabbEntity_getSize(modelName).x);
+				auto boxSizeY = std::to_string(_fe3d.aabbEntity_getSize(modelName).y);
+				auto boxSizeZ = std::to_string(_fe3d.aabbEntity_getSize(modelName).z);
+
+				// 1 model -> 1 line in file
+				file << modelName << " " <<
+					objPath << " " << diffuseMapPath << " " << lightMapPath << " " << reflectionMapPath << " " <<
+					modelSizeX << " " << modelSizeY << " " << modelSizeZ << " " <<
+					faceCulled << " " << shadowed << " " << transparent << " " << specular << " " <<
+					colorR << " " << colorG << " " << colorB << " " << uvRepeat << " " <<
+					boxSizeX << " " << boxSizeY << " " << boxSizeZ << "\n";
+			}
+			else
+			{
+				file << modelName << " -  -  -  -  0  0  0\n";
+			}
 		}
+
+		// Close file
+		file.close();
+
+		// Logging
+		_fe3d.logger_throwInfo("Model editor data from project \"" + _currentProjectName + "\" saved!");
 	}
-
-	// Close file
-	file.close();
-
-	// Logging
-	_fe3d.logger_throwInfo("Model editor data from project \"" + _currentProjectName + "\" saved!");
 }
 
 void ModelEditor::unload()

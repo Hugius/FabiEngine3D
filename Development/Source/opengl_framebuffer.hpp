@@ -12,9 +12,9 @@ public:
 	OpenGLFramebuffer() = default;
 	~OpenGLFramebuffer();
 
-	void createMsaaTexture (ivec2 size, int amount, int aaSamples);
-	void createColorTexture(ivec2 size, int amount, bool textureClamp);
-	void createDepthTexture(ivec2 size, int amount);
+	void createMsaaTexture (ivec2 position, ivec2 size, int amount, int aaSamples);
+	void createColorTexture(ivec2 position, ivec2 size, int amount, bool textureClamp);
+	void createDepthTexture(ivec2 position, ivec2 size, int amount);
 
 	void bind();
 	void unbind();
@@ -33,6 +33,7 @@ private:
 	std::vector<GLuint> _textures;
 
 	int _aaSamples = 0;
+	ivec2 _position = ivec2(0);
 	ivec2 _size = ivec2(0);
 
 	bool _textureInitialized = false;

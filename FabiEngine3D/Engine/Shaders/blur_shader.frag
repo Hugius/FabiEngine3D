@@ -23,8 +23,8 @@ void main()
 	kernel[3] = 0.054054f;
 	kernel[4] = 0.016216f;
 
-    vec2 tex_offset = (1.0 / textureSize(u_sampler_diffuse, 0))*u_radius; 
-    vec3 result = texture(u_sampler_diffuse, f_uv).rgb * kernel[0];
+    vec2 tex_offset = (1.0 / textureSize(u_sampler_diffuse, 0)) * u_radius; 
+    vec3 result = texture(u_sampler_diffuse, f_uv).rgb * kernel[0] * u_intensity;
     if(u_horizontal)
     {
         for(int i = 1; i < WEIGHT_AMOUNT; ++i)

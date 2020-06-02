@@ -16,7 +16,6 @@ public:
 	void update() override;
 
 private:
-	void _initializeProjectCreation();
 	void _initializeProjectLoading();
 	void _saveCurrentProject();
 	void _updateProjectCreation();
@@ -30,7 +29,4 @@ private:
 
 	bool _creatingProject = false;
 	bool _loadingProject = false;
-	bool _savingProject = false;
-	bool _openingDocs = false;
-	bool _quittingEngine = false;
 };

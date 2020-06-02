@@ -10,14 +10,64 @@ bool EngineGuiGlobalScreen::isFocused()
 	return _isFocused;
 }
 
-template <typename T> void EngineGuiGlobalScreen::addValueForm(const string& ID, string title, T value, vec2 position)
+void EngineGuiGlobalScreen::addValueForm(const string& ID, string title, int value, vec2 position)
+{
+	_addValueForm(ID, title, std::to_string(value), position, true);
+}
+
+void EngineGuiGlobalScreen::addValueForm(const string& ID, string title, float value, vec2 position)
+{
+	_addValueForm(ID, title, std::to_string(static_cast<int>(value)), position, true);
+}
+
+void EngineGuiGlobalScreen::addValueForm(const string& ID, string title, double value, vec2 position)
+{
+	_addValueForm(ID, title, std::to_string(static_cast<int>(value)), position, true);
+}
+
+void EngineGuiGlobalScreen::addValueForm(const string& ID, string title, string value, vec2 position)
+{
+	_addValueForm(ID, title, value, position, false);
+}
+
+bool EngineGuiGlobalScreen::checkValueForm(const string& ID, int& value)
+{
+	int tempValue = value; // Dereference
+	string valueString = std::to_string(tempValue); // Convert to string
+	bool result = _checkValueForm(ID, valueString); // Execute function
+	value = std::stoi(valueString); // Apply to value
+	return result; // Return
+}
+
+bool EngineGuiGlobalScreen::checkValueForm(const string& ID, float& value)
+{
+	int tempValue = static_cast<int>(value); // Convert type
+	bool result = checkValueForm(ID, tempValue); // Execute function
+	value = static_cast<float>(tempValue); // Apply to value
+	return result; // Return
+}
+
+bool EngineGuiGlobalScreen::checkValueForm(const string& ID, double& value)
+{
+	int tempValue = static_cast<int>(value); // Convert type
+	bool result = checkValueForm(ID, tempValue); // Execute function
+	value = static_cast<double>(tempValue); // Apply to value
+	return result; // Return
+}
+
+bool EngineGuiGlobalScreen::checkValueForm(const string& ID, string& value)
+{
+	return _checkValueForm(ID, value);
+}
+
+void EngineGuiGlobalScreen::_addValueForm(const string& ID, string title, string valueString, vec2 position, bool onlyNumbers)
 {
 	if (ID != "" && std::find(_valueFormIDs.begin(), _valueFormIDs.end(), ID) == _valueFormIDs.end())
 	{
 		_valueFormIDs.push_back(ID);
 		addTextfield(ID, position + vec2(0.0f, 0.15f), vec2(title.size() * 0.025f, 0.1f), title, vec3(1.0f));
-		addWriteField(ID, position, vec2(0.2f, 0.1f), vec3(0.25f), vec3(0.5f), vec3(1.0f), vec3(0.0f), 0, 1, 1, 1);
-		getWriteField(ID)->setTextContent(std::to_string(static_cast<int>(value)));
+		addWriteField(ID, position, vec2(0.2f, 0.1f), vec3(0.25f), vec3(0.5f), vec3(1.0f), vec3(0.0f), !onlyNumbers, onlyNumbers, onlyNumbers, onlyNumbers);
+		getWriteField(ID)->setTextContent(valueString);
 
 		// GUI focus & set first writefield active
 		if (!_isFocused)
@@ -35,11 +85,7 @@ template <typename T> void EngineGuiGlobalScreen::addValueForm(const string& ID,
 	}
 }
 
-template void EngineGuiGlobalScreen::addValueForm<int>(const string& ID, string title, int value, vec2 position);
-template void EngineGuiGlobalScreen::addValueForm<float>(const string& ID, string title, float value, vec2 position);
-template void EngineGuiGlobalScreen::addValueForm<double>(const string& ID, string title, double value, vec2 position);
-
-template <typename T> bool EngineGuiGlobalScreen::checkValueForm(const string& ID, T& value)
+bool EngineGuiGlobalScreen::_checkValueForm(const string& ID, string& valueString)
 {
 	bool changed = false;
 
@@ -60,9 +106,9 @@ template <typename T> bool EngineGuiGlobalScreen::checkValueForm(const string& I
 				// Check if writefield is not empty
 				if (content != "")
 				{
-					T oldValue = value;
-					value = static_cast<T>(std::stoi(content));
-					changed = (value != oldValue);
+					string oldValueString = valueString;
+					valueString = content;
+					changed = (valueString != oldValueString);
 				}
 			}
 
@@ -87,18 +133,14 @@ template <typename T> bool EngineGuiGlobalScreen::checkValueForm(const string& I
 	return changed;
 }
 
-template bool EngineGuiGlobalScreen::checkValueForm<int>(const string& ID, int& value);
-template bool EngineGuiGlobalScreen::checkValueForm<float>(const string& ID, float& value);
-template bool EngineGuiGlobalScreen::checkValueForm<double>(const string& ID, double& value);
-
 void EngineGuiGlobalScreen::addAnswerForm(const string& ID, string title, vec2 position)
 {
 	if (_answerFormID == "")
 	{
 		addRectangle("question", position - vec2(0.0f, 0.1f), vec2(0.03f * title.size(), 0.5f), vec3(0.25f));
 		addTextfield("question", position, vec2(0.025f * title.size(), 0.1f), title, vec3(1.0f));
-		addButton("yes", position + vec2(-0.1f, -0.2f), vec2(0.1f, 0.1f), vec3(0.0f, 0.5f, 0.0f), vec3(0.0f, 1.0f, 0.0f), "Yes", vec3(1.0f), vec3(0.0f));
-		addButton("no", position + vec2(0.1f, -0.2f), vec2(0.1f, 0.1f), vec3(0.5f, 0.0f, 0.0f), vec3(1.0f, 0.0f, 0.0f), "No", vec3(1.0f), vec3(0.0f));
+		addButton("yes", position + vec2(-0.1f, -0.2f), vec2(0.075f, 0.1f), vec3(0.0f, 0.5f, 0.0f), vec3(0.0f, 1.0f, 0.0f), "Yes", vec3(1.0f), vec3(0.0f));
+		addButton("no", position + vec2(0.1f, -0.2f), vec2(0.075f, 0.1f), vec3(0.5f, 0.0f, 0.0f), vec3(1.0f, 0.0f, 0.0f), "No", vec3(1.0f), vec3(0.0f));
 		_isFocused = true;
 		_answerFormID = ID;
 	}

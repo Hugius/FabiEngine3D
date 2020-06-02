@@ -48,8 +48,17 @@ public:
 	vector<shared_ptr<EngineGuiRectangle>>& getRectangles();
 	vector<shared_ptr<EngineGuiTextfield>>& getTextfields();
 
-	template <typename T> void addValueForm(const string& ID, string title, T value, vec2 position);
-	template <typename T> bool checkValueForm(const string& ID, T& value);
+	// Value form
+	void addValueForm(const string& ID, string title, int value, vec2 position);
+	void addValueForm(const string& ID, string title, float value, vec2 position);
+	void addValueForm(const string& ID, string title, double value, vec2 position);
+	void addValueForm(const string& ID, string title, string value, vec2 position);
+	bool checkValueForm(const string& ID, int& value);
+	bool checkValueForm(const string& ID, float& value);
+	bool checkValueForm(const string& ID, double& value);
+	bool checkValueForm(const string& ID, string& value);
+
+	// Answer form
 	void addAnswerForm(const string& ID, string title, vec2 position);
 	bool checkAnswerFormConfirmed(const string& ID);
 	bool checkAnswerFormDeclined(const string& ID);
@@ -58,6 +67,8 @@ public:
 private:
 	void _updateValueFilling();
 	void _removeValueForm(string ID);
+	void _addValueForm(const string& ID, string title, string valueString, vec2 position, bool onlyNumbers);
+	bool _checkValueForm(const string& ID, string& valueString);
 
 	FabiEngine3D& _fe3d;
 

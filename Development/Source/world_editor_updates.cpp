@@ -51,13 +51,13 @@ void WorldEditor::update()
 			}
 
 			// Check if user wants to save changes
-			if (_gui->getGlobalScreen()->checkAnswerFormConfirmed("exitWorldEditor"))
+			if (_gui->getGlobalScreen()->isAnswerFormConfirmed("exitWorldEditor"))
 			{
 				save();
 				_window->setActiveScreen("main");
 				unload();
 			}
-			else if (_gui->getGlobalScreen()->checkAnswerFormDeclined("exitWorldEditor"))
+			else if (_gui->getGlobalScreen()->isAnswerFormCancelled("exitWorldEditor"))
 			{
 				_window->setActiveScreen("main");
 				unload();

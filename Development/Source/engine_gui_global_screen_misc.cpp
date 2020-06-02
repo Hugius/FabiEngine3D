@@ -66,7 +66,7 @@ void EngineGuiGlobalScreen::_addValueForm(const string& ID, string title, string
 	{
 		_valueFormIDs.push_back(ID);
 		addTextfield(ID, position + vec2(0.0f, 0.15f), vec2(title.size() * 0.025f, 0.1f), title, vec3(1.0f));
-		addWriteField(ID, position, vec2(0.2f, 0.1f), vec3(0.25f), vec3(0.5f), vec3(1.0f), vec3(0.0f), !onlyNumbers, onlyNumbers, onlyNumbers, onlyNumbers);
+		addWriteField(ID, position, vec2(0.5f, 0.1f), vec3(0.25f), vec3(0.5f), vec3(1.0f), vec3(0.0f), !onlyNumbers, onlyNumbers, onlyNumbers, onlyNumbers);
 		getWriteField(ID)->setTextContent(valueString);
 
 		// GUI focus & set first writefield active
@@ -77,10 +77,10 @@ void EngineGuiGlobalScreen::_addValueForm(const string& ID, string title, string
 		}
 
 		// Add done & cancel buttons
-		if (!checkButton("done"))
+		if (!checkButton("value_form_done"))
 		{
-			addButton("done", vec2(-0.15f, -0.2f), vec2(0.15f, 0.1f), vec3(0.0f, 0.5f, 0.0f), vec3(0.0f, 1.0f, 0.0f), "Done", vec3(1.0f), vec3(0.0f));
-			addButton("cancel", vec2(0.15f, -0.2f), vec2(0.15f, 0.1f), vec3(0.5f, 0.0f, 0.0f), vec3(1.0f, 0.0f, 0.0f), "Cancel", vec3(1.0f), vec3(0.0f));
+			addButton("value_form_done", vec2(-0.15f, -0.2f), vec2(0.15f, 0.1f), vec3(0.0f, 0.5f, 0.0f), vec3(0.0f, 1.0f, 0.0f), "Done", vec3(1.0f), vec3(0.0f));
+			addButton("value_form_cancel", vec2(0.15f, -0.2f), vec2(0.15f, 0.1f), vec3(0.5f, 0.0f, 0.0f), vec3(1.0f, 0.0f, 0.0f), "Cancel", vec3(1.0f), vec3(0.0f));
 		}
 	}
 }
@@ -91,8 +91,8 @@ bool EngineGuiGlobalScreen::_checkValueForm(const string& ID, string& valueStrin
 
 	if (std::find(_valueFormIDs.begin(), _valueFormIDs.end(), ID) != _valueFormIDs.end())
 	{
-		bool done = _fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT) && getButton("done")->isHovered();
-		bool cancelled = _fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT) && getButton("cancel")->isHovered();
+		bool done = _fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT) && getButton("value_form_done")->isHovered();
+		bool cancelled = _fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT) && getButton("value_form_cancel")->isHovered();
 		bool entered = getWriteField(ID)->confirmedInput();
 		bool escaped = getWriteField(ID)->cancelledInput();
 
@@ -116,8 +116,8 @@ bool EngineGuiGlobalScreen::_checkValueForm(const string& ID, string& valueStrin
 			if (_valueFormIDs.size() == 1)
 			{
 				_removeValueForm(ID);
-				deleteButton("done");
-				deleteButton("cancel");
+				deleteButton("value_form_done");
+				deleteButton("value_form_cancel");
 				_isFocused = false;
 			}
 			else
@@ -133,24 +133,99 @@ bool EngineGuiGlobalScreen::_checkValueForm(const string& ID, string& valueStrin
 	return changed;
 }
 
+void EngineGuiGlobalScreen::addChoiceForm(const string& ID, string title, vec2 position, vector<string> buttonTitles)
+{
+	if (_choiceFormID == "")
+	{
+		// Add GUI elements
+		addTextfield(ID, vec2(0.0f, 0.45f), vec2(0.3f, 0.1f), "Select project", vec3(1.0f));
+		addScrollingList(ID, vec2(0.0f, 0.0f), vec2(0.5, 0.75f), vec3(_scrollListColor), _buttonColor, _buttonHoverColor, _textColor, _textHoverColor, vec2(0.1f, 0.25f));
+		addButton("choice_form_cancel", vec2(0.0f, -0.45f), vec2(0.15f, 0.1f), vec3(0.5f, 0.0f, 0.0f), vec3(1.0f, 0.0f, 0.0f), "Cancel", vec3(1.0f), vec3(0.0f));
+
+		// Add buttons to scrolling list
+		for (auto& title : buttonTitles)
+		{
+			getScrollingList(ID)->addButton(title, title);
+		}
+		
+		// Miscellaneous
+		_isFocused = true;
+		_choiceFormID = ID;
+	}
+}
+
+string EngineGuiGlobalScreen::getClickedChoiceFormButtonID(const string& ID)
+{
+	if (ID == _choiceFormID)
+	{
+		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT)) // LMB pressed
+		{
+			if (!getButton("choice_form_cancel")->isHovered() && !_fe3d.input_getKeyDown(Input::KEY_ESCAPE)) // Check if cancelled or escaped
+			{
+				for (auto& button : getScrollingList(ID)->getButtons()) // For every button
+				{
+					if (button->isHovered()) // If button is clicked
+					{
+						string buttonID = button->getID();
+						removeChoiceForm(ID);
+						return buttonID;
+					}
+				}
+
+				return "";
+			}
+
+			return "";
+		}
+			
+		return "";
+	}
+
+	return "";
+}
+
+bool EngineGuiGlobalScreen::isChoiceFormCancelled(const string& ID)
+{
+	if (ID == _choiceFormID)
+	{
+		return (getButton("choice_form_cancel")->isHovered() && _fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT));
+	}
+	else
+	{
+		return false;
+	}
+}
+
+void EngineGuiGlobalScreen::removeChoiceForm(const string& ID)
+{
+	if (ID == _choiceFormID)
+	{
+		deleteTextfield(_choiceFormID);
+		deleteScrollingList(_choiceFormID);
+		deleteButton("choice_form_cancel");
+		_isFocused = false;
+		_choiceFormID = "";
+	}
+}
+
 void EngineGuiGlobalScreen::addAnswerForm(const string& ID, string title, vec2 position)
 {
 	if (_answerFormID == "")
 	{
 		addRectangle("question", position - vec2(0.0f, 0.1f), vec2(0.03f * title.size(), 0.5f), vec3(0.25f));
 		addTextfield("question", position, vec2(0.025f * title.size(), 0.1f), title, vec3(1.0f));
-		addButton("yes", position + vec2(-0.1f, -0.2f), vec2(0.075f, 0.1f), vec3(0.0f, 0.5f, 0.0f), vec3(0.0f, 1.0f, 0.0f), "Yes", vec3(1.0f), vec3(0.0f));
-		addButton("no", position + vec2(0.1f, -0.2f), vec2(0.075f, 0.1f), vec3(0.5f, 0.0f, 0.0f), vec3(1.0f, 0.0f, 0.0f), "No", vec3(1.0f), vec3(0.0f));
+		addButton("answer_form_yes", position + vec2(-0.1f, -0.2f), vec2(0.075f, 0.1f), vec3(0.0f, 0.5f, 0.0f), vec3(0.0f, 1.0f, 0.0f), "Yes", vec3(1.0f), vec3(0.0f));
+		addButton("answer_form_no", position + vec2(0.1f, -0.2f), vec2(0.075f, 0.1f), vec3(0.5f, 0.0f, 0.0f), vec3(1.0f, 0.0f, 0.0f), "No", vec3(1.0f), vec3(0.0f));
 		_isFocused = true;
 		_answerFormID = ID;
 	}
 }
 
-bool EngineGuiGlobalScreen::checkAnswerFormConfirmed(const string& ID)
+bool EngineGuiGlobalScreen::isAnswerFormConfirmed(const string& ID)
 {
-	if (checkButton("yes") && (ID == _answerFormID))
+	if (ID == _answerFormID)
 	{
-		if (getButton("yes")->isHovered() && _fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
+		if (getButton("answer_form_yes")->isHovered() && _fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
 		{
 			removeAnswerForm(ID);
 			return true;
@@ -162,11 +237,11 @@ bool EngineGuiGlobalScreen::checkAnswerFormConfirmed(const string& ID)
 	return false;
 }
 
-bool EngineGuiGlobalScreen::checkAnswerFormDeclined(const string& ID)
+bool EngineGuiGlobalScreen::isAnswerFormCancelled(const string& ID)
 {
-	if (checkButton("no") && (ID == _answerFormID))
+	if (checkButton("answer_form_no") && (ID == _answerFormID))
 	{
-		if (getButton("no")->isHovered() && _fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
+		if (getButton("answer_form_no")->isHovered() && _fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
 		{
 			removeAnswerForm(ID);
 			return true;
@@ -184,8 +259,8 @@ void EngineGuiGlobalScreen::removeAnswerForm(const string& ID)
 	{
 		deleteRectangle("question");
 		deleteTextfield("question");
-		deleteButton("yes");
-		deleteButton("no");
+		deleteButton("answer_form_yes");
+		deleteButton("answer_form_no");
 		_isFocused = false;
 		_answerFormID = "";
 	}
@@ -207,8 +282,8 @@ void EngineGuiGlobalScreen::_updateValueFilling()
 		_valueFormIDs.clear();
 
 		// Remove confirmation and cancellation buttons
-		deleteButton("done");
-		deleteButton("cancel");
+		deleteButton("value_form_done");
+		deleteButton("value_form_cancel");
 	}
 }
 

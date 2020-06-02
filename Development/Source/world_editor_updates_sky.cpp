@@ -182,7 +182,7 @@ void WorldEditor::_updateSkyOptions()
 
 void WorldEditor::_updateSkyCamera()
 {
-	if (_fe3d.misc_isMouseInsideViewport() && _fe3d.input_getMouseDown(Input::MOUSE_BUTTON_RIGHT))
+	if (_fe3d.misc_isMouseInsideViewport() && _fe3d.input_getMouseDown(Input::MOUSE_BUTTON_RIGHT) && !_gui->getGlobalScreen()->isFocused())
 	{
 		// Move mouse to middle when pressed first time
 		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_RIGHT))

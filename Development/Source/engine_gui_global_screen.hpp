@@ -58,10 +58,16 @@ public:
 	bool checkValueForm(const string& ID, double& value);
 	bool checkValueForm(const string& ID, string& value);
 
+	// Choice form
+	void addChoiceForm(const string& ID, string title, vec2 position, vector<string> buttonTitles);
+	string getClickedChoiceFormButtonID(const string& ID);
+	bool isChoiceFormCancelled(const string& ID);
+	void removeChoiceForm(const string& ID);
+
 	// Answer form
 	void addAnswerForm(const string& ID, string title, vec2 position);
-	bool checkAnswerFormConfirmed(const string& ID);
-	bool checkAnswerFormDeclined(const string& ID);
+	bool isAnswerFormConfirmed(const string& ID);
+	bool isAnswerFormCancelled(const string& ID);
 	void removeAnswerForm(const string& ID);
 
 private:
@@ -78,8 +84,16 @@ private:
 	vector<shared_ptr<EngineGuiRectangle>> _rectangles;
 	vector<shared_ptr<EngineGuiTextfield>> _textfields;
 
+	const vec3 _scrollListColor = vec3(0.3f);
+	const vec3 _buttonColor = vec3(0.0f, 0.25f, 0.0f);
+	const vec3 _buttonHoverColor = vec3(0.0f, 0.25f, 0.0f);
+	const vec3 _textColor = vec3(1.0f);
+	const vec3 _textHoverColor = vec3(0.0f);
+
 	vector<string> _valueFormIDs;
+	string _choiceFormID = "";
 	string _answerFormID = "";
+
 	bool _isFocused = false;
 	bool _exitValueFilling = false;
 };

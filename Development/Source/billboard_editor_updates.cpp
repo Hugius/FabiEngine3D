@@ -20,7 +20,7 @@ void BillboardEditor::_updateBillboardManagement()
 	{
 		if (screen->getButton("addBillboard")->isHovered()) // Add billboard button
 		{
-			//_gui->getGlobalScreen()->addValueForm("newBillboardName", "New billboard name", "", vec2(0.0f));
+			_gui->getGlobalScreen()->addValueForm("newBillboardName", "New billboard name", "", vec2(0.0f));
 			_billboardCreationEnabled = true;
 		}
 		else if (screen->getButton("editBillboard")->isHovered()) // Edit billboard button
@@ -40,13 +40,13 @@ void BillboardEditor::_updateBillboardManagement()
 	}
 
 	// Check if user wants to save changes
-	if (_gui->getGlobalScreen()->checkAnswerFormConfirmed("exitBillboardEditor"))
+	if (_gui->getGlobalScreen()->isAnswerFormConfirmed("exitBillboardEditor"))
 	{
 		save();
 		_window->setActiveScreen("main");
 		unload();
 	}
-	else if (_gui->getGlobalScreen()->checkAnswerFormDeclined("exitBillboardEditor"))
+	else if (_gui->getGlobalScreen()->isAnswerFormCancelled("exitBillboardEditor"))
 	{
 		_window->setActiveScreen("main");
 		unload();
@@ -55,8 +55,16 @@ void BillboardEditor::_updateBillboardManagement()
 
 void BillboardEditor::_updateBillboardCreation()
 {
-	string newBillboardName = "";
-	//_gui->getGlobalScreen()->checkValueForm("newBillboardName", newBillboardName);
+	if (_billboardCreationEnabled)
+	{
+		string newBillboardName = "";
+
+		if (_gui->getGlobalScreen()->checkValueForm("newBillboardName", newBillboardName))
+		{
+			_billboardCreationEnabled = false;
+			_billboardEditingEnabled = true;
+		}
+	}
 }
 
 void BillboardEditor::_updateBillboardChoosing()

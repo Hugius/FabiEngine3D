@@ -24,12 +24,7 @@ void ModelEditor::_updateModelManagement()
 	{
 		if (screen->getButton("addModel")->isHovered()) // Add model button
 		{
-			_gui->getGlobalScreen()->addTextfield("newModelName", vec2(0.0f, 0.1f), vec2(0.3f, 0.1f), "Enter model name:", vec3(1.0f));
-			_gui->getGlobalScreen()->addWriteField("newModelName", vec2(0.0f, 0.0f), vec2(0.5f, 0.1f), vec3(0.25f), vec3(0.5f), vec3(1.0f), vec3(0.0f), 0, 0, 1, 0);
-			_gui->getGlobalScreen()->getWriteField("newModelName")->setPermActive(true);
-			_gui->getGlobalScreen()->addButton("done", vec2(-0.15f, -0.2f), vec2(0.15f, 0.1f), vec3(0.0f, 0.5f, 0.0f), vec3(0.0f, 1.0f, 0.0f), "Done", vec3(1.0f), vec3(0.0f));
-			_gui->getGlobalScreen()->addButton("cancel", vec2(0.15f, -0.2f), vec2(0.15f, 0.1f), vec3(0.5f, 0.0f, 0.0f), vec3(1.0f, 0.0f, 0.0f), "Cancel", vec3(1.0f), vec3(0.0f));
-			_gui->getGlobalScreen()->setFocus(true);
+			_gui->getGlobalScreen()->addValueForm("newModelName", "New model name", "", vec2(0.0f)); 
 			_modelCreationEnabled = true;
 		}
 		else if (screen->getButton("editModel")->isHovered()) // Edit model button
@@ -49,13 +44,13 @@ void ModelEditor::_updateModelManagement()
 	}
 
 	// Check if user wants to save changes
-	if (_gui->getGlobalScreen()->checkAnswerFormConfirmed("exitModelEditor"))
+	if (_gui->getGlobalScreen()->isAnswerFormConfirmed("exitModelEditor"))
 	{
 		save();
 		_window->setActiveScreen("main");
 		unload();
 	}
-	else if (_gui->getGlobalScreen()->checkAnswerFormDeclined("exitModelEditor"))
+	else if (_gui->getGlobalScreen()->isAnswerFormCancelled("exitModelEditor"))
 	{
 		_window->setActiveScreen("main");
 		unload();
@@ -66,49 +61,19 @@ void ModelEditor::_updateModelCreation()
 {
 	if (_modelCreationEnabled)
 	{
-		bool done = _fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT) && _gui->getGlobalScreen()->getButton("done")->isHovered();
-		bool entered = _gui->getGlobalScreen()->getWriteField("newModelName")->confirmedInput();
-		bool cancelled = _fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT) && _gui->getGlobalScreen()->getButton("cancel")->isHovered();
-		bool escaped = _gui->getGlobalScreen()->getWriteField("newModelName")->cancelledInput();
-		bool cleanup = false;
+		string modelName;
 
-		// Check if pressed ESCAPE or ENTER
-		if (done || entered || cancelled || escaped)
+		// Create new model
+		if (_gui->getGlobalScreen()->checkValueForm("newModelName", modelName))
 		{
-			// Extract new name
-			string modelName = _gui->getGlobalScreen()->getWriteField("newModelName")->getTextContent();
+			// Add model
+			_addModel(modelName, "", "", "", "", vec3(0.0f), 0, 1, 0, 0, vec3(1.0f), 1.0f, vec3(1.0f));
 
-			// Create new project
-			if (done || entered)
-			{
-				if (modelName != "")
-				{
-					cleanup = true;
-
-					// Add model
-					_addModel(modelName, "", "", "", "", vec3(0.0f), 0, 1, 0, 0, vec3(1.0f), 1.0f, vec3(1.0f));
-
-					// Go to editor screen
-					_currentModelName = modelName;
-					_modelEditingEnabled = true;
-					_gui->getViewport("left")->getWindow("main")->setActiveScreen("modelEditingMain");
-				}
-			}
-			else
-			{
-				cleanup = true;
-			}
-
-			// Cleanup
-			if (cleanup)
-			{
-				_modelCreationEnabled = false;
-				_gui->getGlobalScreen()->setFocus(false);
-				_gui->getGlobalScreen()->deleteTextfield("newModelName");
-				_gui->getGlobalScreen()->deleteWriteField("newModelName");
-				_gui->getGlobalScreen()->deleteButton("done");
-				_gui->getGlobalScreen()->deleteButton("cancel");
-			}
+			// Go to editor screen
+			_currentModelName = modelName;
+			_modelCreationEnabled = false;
+			_modelEditingEnabled = true;
+			_gui->getViewport("left")->getWindow("main")->setActiveScreen("modelEditingMain");
 		}
 	}
 }

@@ -30,9 +30,9 @@ class RenderEngine final
 public:
 	RenderEngine(ShaderBus& shaderBus, Timer& timer);
 	~RenderEngine() = default;
-	
-	void renderEngineIntro(GuiEntity * entity, ivec2 viewport);
-	void renderScene(EntityBus * entityBus, CameraManager & camera, ivec2 mousePos);
+
+	void renderEngineIntro(GuiEntity* entity, ivec2 viewport);
+	void renderScene(EntityBus* entityBus, CameraManager& camera, ivec2 mousePos);
 
 private:
 	// Timer for performance profiling
@@ -42,10 +42,10 @@ private:
 	ShaderBus& _shaderBus;
 
 	// Temp entitybus
-	EntityBus * _entityBus = nullptr;
+	EntityBus* _entityBus = nullptr;
 
 	// Final screen texture
-	GuiEntity _finalSurface;
+	GuiEntity* _finalSurface = nullptr;
 
 	// Renderers
 	SkyEntityRenderer        _skyEntityRenderer;
@@ -74,14 +74,14 @@ private:
 	OpenGLFramebuffer _depthFramebuffer;
 
 	// Capturing functions
-	void _captureSceneReflections(CameraManager & camera);
+	void _captureSceneReflections(CameraManager& camera);
 	void _captureSceneRefractions();
 	void _captureShadows();
 	void _captureBloom();
 	void _captureDepth();
 	void _capturePostProcessing();
 	void _captureDofBlur();
-	void _captureMotionBlur(CameraManager & camera, ivec2 mousePos);
+	void _captureMotionBlur(CameraManager& camera, ivec2 mousePos);
 
 	// Scene rendering functions
 	void _renderSkyEntity();

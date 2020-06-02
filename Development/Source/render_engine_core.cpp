@@ -34,9 +34,10 @@ RenderEngine::RenderEngine(ShaderBus& shaderBus, Timer& timer) :
 	_blurRenderer.addFramebuffer(BLUR_MOTION, true);
 
 	// Final screen texture
-	_finalSurface.load("finalSurface");
-	_finalSurface.addOglBuffer(new OpenGLBuffer(0.0f, 0.0f, 2.0f, 2.0f, true));
-	_finalSurface.setMirroredVertically(true);
+	_finalSurface = new GuiEntity();
+	_finalSurface->load("finalSurface");
+	_finalSurface->addOglBuffer(new OpenGLBuffer(0.0f, 0.0f, 2.0f, 2.0f, true));
+	_finalSurface->setMirroredVertically(true);
 }
 
 void RenderEngine::renderEngineIntro(GuiEntity * entity, ivec2 viewport)
@@ -121,13 +122,13 @@ void RenderEngine::renderScene(EntityBus * entityBus, CameraManager & camera, iv
 		{
 			_msaaFramebuffer.processAAData(&_aaProcessorFramebuffer);
 			_msaaFramebuffer.unbind();
-			_finalSurface.setDiffuseMap(_aaProcessorFramebuffer.getTexture(0));
+			_finalSurface->setDiffuseMap(_aaProcessorFramebuffer.getTexture(0));
 			_shaderBus.setSceneMap(_aaProcessorFramebuffer.getTexture(0));
 		}
 		else
 		{
 			_screenFramebuffer.unbind();
-			_finalSurface.setDiffuseMap(_screenFramebuffer.getTexture(0));
+			_finalSurface->setDiffuseMap(_screenFramebuffer.getTexture(0));
 			_shaderBus.setSceneMap(_screenFramebuffer.getTexture(0));
 		}
 		_timer.stop();

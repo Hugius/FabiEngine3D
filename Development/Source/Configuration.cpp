@@ -42,6 +42,9 @@ Config::Config()
 	_viewportPosition.y = int(0.2f * float(_windowHeight));
 	_viewportSize.x		= int(0.75f * float(_windowWidth));
 	_viewportSize.y		= int(0.75f * float(_windowHeight));
+
+	// Set update speed
+	_updateMsPerFrame = 6.94f; // 144 hz
 }
 
 void Config::_processOption(std::ifstream& file, bool& option)
@@ -132,6 +135,11 @@ const ivec2 Config::getVpPos() const
 const ivec2 Config::getVpSize() const
 {
 	return _viewportSize;
+}
+
+const float Config::getUpdateMsPerFrame() const
+{
+	return _updateMsPerFrame;
 }
 
 const int Config::getReflectionQuality() const

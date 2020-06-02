@@ -1,8 +1,11 @@
 #include "render_engine.hpp"
 #include "shader_bus.hpp"
+#include "configuration.hpp"
+
+#include <chrono>
 
 // Capturing reflection texture
-void RenderEngine::_captureSceneReflections(CameraManager & camera)
+void RenderEngine::_captureSceneReflections(CameraManager& camera)
 {
 	bool waterReflectionEnabled = _entityBus->getWaterEntity() != nullptr && _shaderBus.isWaterEffectsEnabled();
 	waterReflectionEnabled = waterReflectionEnabled && _entityBus->getWaterEntity()->isReflective();
@@ -89,7 +92,7 @@ void RenderEngine::_captureShadows()
 		_shadowRenderer.bind();
 
 		// Render game entities
-		for (auto & entity : _entityBus->getGameEntities()) { _shadowRenderer.renderGameEntity(entity); }
+		for (auto& entity : _entityBus->getGameEntities()) { _shadowRenderer.renderGameEntity(entity); }
 
 		// Unbind
 		_shadowRenderer.unbind();
@@ -107,13 +110,13 @@ void RenderEngine::_captureBloom()
 		_bloomHdrFramebuffer.bind();
 		glClear(GL_COLOR_BUFFER_BIT);
 		_bloomHdrRenderer.bind();
-		_bloomHdrRenderer.render(&_finalSurface, _shaderBus.getSceneMap());
+		_bloomHdrRenderer.render(_finalSurface, _shaderBus.getSceneMap());
 		_bloomHdrRenderer.unbind();
 		_bloomHdrFramebuffer.unbind();
-	
+
 		// Blur scene texture
 		_blurRenderer.bind();
-		_shaderBus.setBloomMap(_blurRenderer.blurTexture(&_finalSurface, _bloomHdrFramebuffer.getTexture(0), BLUR_BLOOM, _shaderBus.getBloomBlurSize(), _shaderBus.getBloomIntensity(), BLUR_DIR_BOTH));
+		_shaderBus.setBloomMap(_blurRenderer.blurTexture(_finalSurface, _bloomHdrFramebuffer.getTexture(0), BLUR_BLOOM, _shaderBus.getBloomBlurSize(), _shaderBus.getBloomIntensity(), BLUR_DIR_BOTH));
 		_blurRenderer.unbind();
 	}
 }
@@ -131,13 +134,13 @@ void RenderEngine::_captureDepth()
 		_depthRenderer.renderTerrainEntity(_entityBus->getTerrainEntity());
 
 		// Render game entities
-		for (auto & entity : _entityBus->getGameEntities())
+		for (auto& entity : _entityBus->getGameEntities())
 		{
 			_depthRenderer.renderGameEntity(entity);
 		}
 
 		// Render billboard entities
-		for (auto & entity : _entityBus->getBillboardEntities())
+		for (auto& entity : _entityBus->getBillboardEntities())
 		{
 			_depthRenderer.renderBillboardEntity(entity);
 		}
@@ -154,58 +157,68 @@ void RenderEngine::_captureDofBlur()
 	if (_shaderBus.isDofEnabled())
 	{
 		_blurRenderer.bind();
-		_shaderBus.setBlurMap(_blurRenderer.blurTexture(&_finalSurface, _shaderBus.getSceneMap(), BLUR_DOF, 4, 1.0f, BLUR_DIR_BOTH));
+		_shaderBus.setBlurMap(_blurRenderer.blurTexture(_finalSurface, _shaderBus.getSceneMap(), BLUR_DOF, 4, 1.0f, BLUR_DIR_BOTH));
 		_blurRenderer.unbind();
 	}
 }
 
 void RenderEngine::_capturePostProcessing()
-{	
+{
 	// Apply bloom and DOF on scene texture
 	_bloomDofAdditionFramebuffer.bind();
 	_postRenderer.bind();
-	_postRenderer.render(&_finalSurface, _shaderBus.getSceneMap(), _shaderBus.getBloomMap(), _shaderBus.getDepthMap(), _shaderBus.getBlurMap());
+	_postRenderer.render(_finalSurface, _shaderBus.getSceneMap(), _shaderBus.getBloomMap(), _shaderBus.getDepthMap(), _shaderBus.getBlurMap());
 	_postRenderer.unbind();
 	_bloomDofAdditionFramebuffer.unbind();
 	_shaderBus.setBloomedDofSceneMap(_bloomDofAdditionFramebuffer.getTexture(0));
 }
 
-void RenderEngine::_captureMotionBlur(CameraManager & camera, ivec2 mousePos)
+void RenderEngine::_captureMotionBlur(CameraManager& camera, ivec2 mousePos)
 {
 	if (_shaderBus.isMotionBlurEnabled())
 	{
-		// Declare variables
-		static float oldMouseX;
-		static float oldMouseY;
-		int xDifference = mousePos.x - oldMouseX;
-		int yDifference = mousePos.y - oldMouseY;
-		int blurType;
-		int blurStrength;
+		// Timing variables
+		static std::chrono::high_resolution_clock::time_point previous = std::chrono::high_resolution_clock::now();
+		std::chrono::high_resolution_clock::time_point current = std::chrono::high_resolution_clock::now();
+		std::chrono::duration<double> timeDifference = std::chrono::duration_cast<std::chrono::duration<double>>(current - previous);
+		float elapsedMS = static_cast<float>(timeDifference.count()) * 1000.0f;
 
-		// No negative differences
-		xDifference = abs(xDifference);
-		yDifference = abs(yDifference);
+		// Blur variables
+		static int blurStrength;
+		static bool firstTime = true;
 
-		// Horizontal blur
-		if (xDifference > yDifference)
+		// If 1 frame passed
+		if (elapsedMS >= Config::getInst().getUpdateMsPerFrame() || firstTime)
 		{
-			blurType = BLUR_DIR_HORIZONTAL;
-			blurStrength = xDifference > 10 ? 10 : xDifference;
-		}
-		else // Vertical blur
-		{
-			blurType = BLUR_DIR_VERTICAL;
-			blurStrength = yDifference > 10 ? 10 : yDifference;
+			// Set for next frame
+			previous = current;
+
+			// Miscellaneous variables
+			static int oldMouseX;
+			static int oldMouseY;
+			int xDifference = abs(mousePos.x - oldMouseX);
+			int yDifference = abs(mousePos.y - oldMouseY);
+			firstTime = false;
+
+			// Horizontal blur
+			if (xDifference > yDifference)
+			{
+				blurStrength = xDifference > 8 ? 8 : xDifference;
+			}
+			else
+			{
+				blurStrength = 0;
+			}
+
+			// Set for next iteration
+			oldMouseX = mousePos.x;
+			oldMouseY = mousePos.y;
 		}
 
-		// Blur the scene
+		// Apply motion blur
 		_blurRenderer.bind();
-		_shaderBus.setMotionBlurMap(_blurRenderer.blurTexture(&_finalSurface, _shaderBus.getBloomedDofSceneMap(), BLUR_MOTION, blurStrength, 1.0f, blurType));
+		_shaderBus.setMotionBlurMap(_blurRenderer.blurTexture(_finalSurface, _shaderBus.getBloomedDofSceneMap(), BLUR_MOTION, blurStrength, 1.0f, BLUR_DIR_HORIZONTAL));
 		_blurRenderer.unbind();
-
-		// Set for next iteration
-		oldMouseX = mousePos.x;
-		oldMouseY = mousePos.y;
 	}
 	else
 	{

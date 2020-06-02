@@ -3,7 +3,7 @@
 #include <ctime>
 #include <ratio>
 #include <chrono>
-using namespace std::chrono;
+
 CoreEngine::CoreEngine(FabiEngine3D & fe3d) :
 	_fe3d(fe3d),
 	_windowManager(),
@@ -46,25 +46,25 @@ void CoreEngine::_start()
 	_isRunning = true;
 
 	// Variables
-	high_resolution_clock::time_point previous = high_resolution_clock::now();
+	std::chrono::high_resolution_clock::time_point previous = std::chrono::high_resolution_clock::now();
 	float lag = 0.0f;
 
 	// Main game-loop
 	while (_isRunning)
 	{
 		// Calculate timing values
-		high_resolution_clock::time_point current = high_resolution_clock::now();
-		duration<double> time_span = duration_cast<duration<double>>(current - previous);
-		float elapsed = static_cast<float>(time_span.count()) * 1000.0f;
+		std::chrono::high_resolution_clock::time_point current = std::chrono::high_resolution_clock::now();
+		std::chrono::duration<double> timeDifference = std::chrono::duration_cast<std::chrono::duration<double>>(current - previous);
+		float elapsedMS = static_cast<float>(timeDifference.count()) * 1000.0f;
 		previous = current;
-		lag += elapsed;
+		lag += elapsedMS;
 
 		// Update 144 times per second
-		while (lag >= 6.94f)
+		while (lag >= Config::getInst().getUpdateMsPerFrame())
 		{
 			_inputHandler.f_checkInput();
 			_updateApplication();
-			lag -= 6.94f;
+			lag -= Config::getInst().getUpdateMsPerFrame();
 		}
 
 		// Render at full speed

@@ -33,6 +33,7 @@ public:
 	const int   getMaxAudioChannels()  const;
 	const ivec2 getVpPos()			   const;
 	const ivec2 getVpSize()			   const;
+	const float getUpdateMsPerFrame()  const;
 
 private:
 	Config();
@@ -53,4 +54,5 @@ private:
 	int   _maxAudioChannels = 0;
 	ivec2 _viewportPosition = ivec2(0);
 	ivec2 _viewportSize = ivec2(0);
+	float _updateMsPerFrame = 0.0f;
 };

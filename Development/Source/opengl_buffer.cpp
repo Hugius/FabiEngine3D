@@ -103,6 +103,7 @@ void OpenGLBuffer::_create2D(float x, float y, float w, float h, bool centered)
 	// Generate vertices
 	float* data = nullptr;
 
+	// Determine center point of the quad
 	if (centered)
 	{
 		data = new float[24]
@@ -120,13 +121,13 @@ void OpenGLBuffer::_create2D(float x, float y, float w, float h, bool centered)
 	{
 		data = new float[24]
 		{
-			x, y, 0.0f, 0.0f,
-			x + w, y, 1.0f, 0.0f,
+			x,     y,     0.0f, 0.0f,
+			x + w, y,     1.0f, 0.0f,
 			x + w, y + h, 1.0f, 1.0f,
 
 			x + w, y + h, 1.0f, 1.0f,
-			x, y + h, 0.0f, 1.0f,
-			x, y, 0.0f, 0.0f
+			x,     y + h, 0.0f, 1.0f,
+			x,     y,     0.0f, 0.0f
 		};
 	}
 

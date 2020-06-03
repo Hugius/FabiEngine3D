@@ -23,6 +23,7 @@ private:
 	void _updateBillboardCreation();
 	void _updateBillboardChoosing();
 	void _updateBillboardEditing();
+	void _updateBillboardRemoval();
 
 	bool _billboardCreationEnabled = false;
 	bool _billboardChoosingEnabled = false;

@@ -792,6 +792,12 @@ vector<string> FabiEngine3D::gameEntity_getGroupIDs(const string& ID)
 
 /* --------------------------------------------- Billboard interface --------------------------------------------- */
 
+void FabiEngine3D::billBoardEntity_add(const string& ID, vec3 color, vec3 T, vec3 R, vec3 S, bool facingCameraX, bool facingCameraY, bool visible)
+{
+	_core->_billboardEntityManager.addBillboardEntity(ID, color, T, R, S, facingCameraX, facingCameraY);
+	_core->_billboardEntityManager.getEntity(ID)->setEnabled(visible);
+}
+
 void FabiEngine3D::billBoardEntity_add(const string& ID, const string& text, const string& fontPath, vec3 color, vec3 T, vec3 R, vec3 S, bool facingCameraX, bool facingCameraY, bool visible)
 {
 	_core->_billboardEntityManager.addBillboardEntity(ID, text, fontPath, color, T, R, S, facingCameraX, facingCameraY);

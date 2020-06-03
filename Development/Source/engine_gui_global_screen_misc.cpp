@@ -30,34 +30,57 @@ void EngineGuiGlobalScreen::addValueForm(const string& ID, string title, string 
 	_addValueForm(ID, title, value, position, false);
 }
 
-bool EngineGuiGlobalScreen::checkValueForm(const string& ID, int& value)
+bool EngineGuiGlobalScreen::checkValueForm(const string& ID, int& value, vector<int> forbiddenValues)
 {
+	// Convert from integer to string
+	vector<string> forbiddenValueStrings;
+	for (auto forbiddenValue : forbiddenValues)
+	{
+		forbiddenValueStrings.push_back(std::to_string(forbiddenValue));
+	}
+
 	int tempValue = value; // Dereference
 	string valueString = std::to_string(tempValue); // Convert to string
-	bool result = _checkValueForm(ID, valueString); // Execute function
+	bool result = _checkValueForm(ID, valueString, forbiddenValueStrings); // Execute function
 	value = std::stoi(valueString); // Apply to value
 	return result; // Return
 }
 
-bool EngineGuiGlobalScreen::checkValueForm(const string& ID, float& value)
+bool EngineGuiGlobalScreen::checkValueForm(const string& ID, float& value, vector<float> forbiddenValues)
 {
-	int tempValue = static_cast<int>(value); // Convert type
-	bool result = checkValueForm(ID, tempValue); // Execute function
-	value = static_cast<float>(tempValue); // Apply to value
+	// Convert from float to integer to string
+	vector<string> forbiddenValueStrings;
+	for (auto forbiddenValue : forbiddenValues)
+	{
+		forbiddenValueStrings.push_back(std::to_string(static_cast<int>(forbiddenValue)));
+	}
+
+	int tempValue = static_cast<int>(value); // Dereference
+	string valueString = std::to_string(tempValue); // Convert to string
+	bool result = _checkValueForm(ID, valueString, forbiddenValueStrings); // Execute function
+	value = static_cast<float>(std::stoi(valueString)); // Apply to value
 	return result; // Return
 }
 
-bool EngineGuiGlobalScreen::checkValueForm(const string& ID, double& value)
+bool EngineGuiGlobalScreen::checkValueForm(const string& ID, double& value, vector<double> forbiddenValues)
 {
-	int tempValue = static_cast<int>(value); // Convert type
-	bool result = checkValueForm(ID, tempValue); // Execute function
-	value = static_cast<double>(tempValue); // Apply to value
+	// Convert from double to integer to string
+	vector<string> forbiddenValueStrings;
+	for (auto forbiddenValue : forbiddenValues)
+	{
+		forbiddenValueStrings.push_back(std::to_string(static_cast<int>(forbiddenValue)));
+	}
+
+	int tempValue = static_cast<int>(value); // Dereference
+	string valueString = std::to_string(tempValue); // Convert to string
+	bool result = _checkValueForm(ID, valueString, forbiddenValueStrings); // Execute function
+	value = static_cast<double>(std::stoi(valueString)); // Apply to value
 	return result; // Return
 }
 
-bool EngineGuiGlobalScreen::checkValueForm(const string& ID, string& value)
+bool EngineGuiGlobalScreen::checkValueForm(const string& ID, string& value, vector<string> forbiddenValues)
 {
-	return _checkValueForm(ID, value);
+	return _checkValueForm(ID, value, forbiddenValues);
 }
 
 void EngineGuiGlobalScreen::_addValueForm(const string& ID, string title, string valueString, vec2 position, bool onlyNumbers)
@@ -85,7 +108,7 @@ void EngineGuiGlobalScreen::_addValueForm(const string& ID, string title, string
 	}
 }
 
-bool EngineGuiGlobalScreen::_checkValueForm(const string& ID, string& valueString)
+bool EngineGuiGlobalScreen::_checkValueForm(const string& ID, string& valueString, vector<string> forbiddenValueStrings)
 {
 	bool changed = false;
 
@@ -104,12 +127,24 @@ bool EngineGuiGlobalScreen::_checkValueForm(const string& ID, string& valueStrin
 				string content = getWriteField(ID)->getTextContent();
 
 				// Check if writefield is not empty
-				if (content != "")
+				if (content == "")
 				{
-					string oldValueString = valueString;
-					valueString = content;
-					changed = (valueString != oldValueString);
+					return false;
 				}
+
+				// Check if written content is not forbidden
+				for (auto& forbiddenValue : forbiddenValueStrings)
+				{
+					if (content == forbiddenValue)
+					{
+						return false;
+					}
+				}
+
+				// Apply to value
+				string oldValueString = valueString;
+				valueString = content;
+				changed = (valueString != oldValueString);
 			}
 
 			// Remove valueform(s)
@@ -160,25 +195,16 @@ string EngineGuiGlobalScreen::getClickedChoiceFormButtonID(const string& ID)
 	{
 		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT)) // LMB pressed
 		{
-			if (!getButton("choice_form_cancel")->isHovered() && !_fe3d.input_getKeyDown(Input::KEY_ESCAPE)) // Check if cancelled or escaped
+			for (auto& button : getScrollingList(ID)->getButtons()) // For every button
 			{
-				for (auto& button : getScrollingList(ID)->getButtons()) // For every button
+				if (button->isHovered()) // If button is clicked
 				{
-					if (button->isHovered()) // If button is clicked
-					{
-						string buttonID = button->getID();
-						removeChoiceForm(ID);
-						return buttonID;
-					}
+					string buttonID = button->getID();
+					removeChoiceForm(ID);
+					return buttonID;
 				}
-
-				return "";
 			}
-
-			return "";
 		}
-			
-		return "";
 	}
 
 	return "";

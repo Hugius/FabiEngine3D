@@ -25,12 +25,7 @@ const vector<BillboardEntity*> BillboardEntityManager::getEntities()
 	return newVector;
 }
 
-void BillboardEntityManager::addBillboardEntity
-(
-	const string & ID, const string & textureName,
-	vec3 T, vec3 R, vec3 S,
-	bool transparent, bool facingCameraX, bool facingCameraY, bool textureFiltering
-)
+void BillboardEntityManager::addBillboardEntity(const string& ID, vec3 color, vec3 T, vec3 R, vec3 S, bool facingCameraX, bool facingCameraY)
 {
 	// Load OBJ model
 	float plane_data[] =
@@ -47,16 +42,24 @@ void BillboardEntityManager::addBillboardEntity
 	_createEntity(EntityType::BILLBOARD, ID)->load(ID);
 	getEntity(ID)->addOglBuffer(new OpenGLBuffer(SHAPE_SURFACE, plane_data, sizeof(plane_data) / sizeof(float)));
 
-	// Texture
-	getEntity(ID)->setDiffuseMap(_texLoader.getTexture(textureName, textureFiltering, true));
-
 	// Other
 	getEntity(ID)->setTranslation(T);
 	getEntity(ID)->setRotation(R);
 	getEntity(ID)->setInitialRotation(R);
 	getEntity(ID)->setScaling(S);
-	getEntity(ID)->setTransparent(transparent);
 	getEntity(ID)->setCameraFacing({ facingCameraX, facingCameraY });
+}
+
+void BillboardEntityManager::addBillboardEntity
+(
+	const string & ID, const string & textureName,
+	vec3 T, vec3 R, vec3 S,
+	bool transparent, bool facingCameraX, bool facingCameraY, bool textureFiltering
+)
+{
+	addBillboardEntity(ID, vec3(1.0f), T, R, S, facingCameraX, facingCameraY);
+	getEntity(ID)->setDiffuseMap(_texLoader.getTexture(textureName, textureFiltering, true));
+	getEntity(ID)->setTransparent(transparent);
 }
 
 void BillboardEntityManager::addBillboardEntity

@@ -53,10 +53,10 @@ public:
 	void addValueForm(const string& ID, string title, float value, vec2 position);
 	void addValueForm(const string& ID, string title, double value, vec2 position);
 	void addValueForm(const string& ID, string title, string value, vec2 position);
-	bool checkValueForm(const string& ID, int& value);
-	bool checkValueForm(const string& ID, float& value);
-	bool checkValueForm(const string& ID, double& value);
-	bool checkValueForm(const string& ID, string& value);
+	bool checkValueForm(const string& ID, int& value, vector<int> forbiddenValues = {});
+	bool checkValueForm(const string& ID, float& value, vector<float> forbiddenValues = {});
+	bool checkValueForm(const string& ID, double& value, vector<double> forbiddenValues = {});
+	bool checkValueForm(const string& ID, string& value, vector<string> forbiddenValues = {});
 
 	// Choice form
 	void addChoiceForm(const string& ID, string title, vec2 position, vector<string> buttonTitles);
@@ -74,7 +74,7 @@ private:
 	void _updateValueFilling();
 	void _removeValueForm(string ID);
 	void _addValueForm(const string& ID, string title, string valueString, vec2 position, bool onlyNumbers);
-	bool _checkValueForm(const string& ID, string& valueString);
+	bool _checkValueForm(const string& ID, string& valueString, vector<string> forbiddenValueStrings);
 
 	FabiEngine3D& _fe3d;
 

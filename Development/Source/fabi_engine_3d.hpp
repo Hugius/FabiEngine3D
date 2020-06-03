@@ -188,6 +188,11 @@ public:
 	// Billboard entity interface
 	void billBoardEntity_add
 	(
+		const string& ID, vec3 color,
+		vec3 T, vec3 R, vec3 S, bool facingCameraX, bool facingCameraY, bool visible = true
+	);
+	void billBoardEntity_add
+	(
 		const string& ID, const string& text,
 		const string& fontPath, vec3 color,
 		vec3 T, vec3 R, vec3 S, bool facingCameraX, bool facingCameraY, bool visible = true

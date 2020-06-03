@@ -32,7 +32,7 @@ void ModelEditor::_updateModelManagement()
 			_modelEditingEnabled = true;
 			_window->setActiveScreen("modelChoice");
 		}
-		else if (screen->getButton("deleteModel")->isHovered()) // Deelete model button
+		else if (screen->getButton("deleteModel")->isHovered()) // Delete model button
 		{
 			_modelRemovalEnabled = true;
 			_window->setActiveScreen("modelChoice");

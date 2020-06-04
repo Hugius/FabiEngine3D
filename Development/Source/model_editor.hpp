@@ -41,7 +41,6 @@ private:
 	void _updateModelChoosing();
 	void _updateModelEditing();
 	void _updateModelEditingCamera();
-	void _updateModelEditingMain();
 	void _updateModelEditingMesh();
 	void _updateModelEditingOptions();
 	void _updateModelEditingSize();

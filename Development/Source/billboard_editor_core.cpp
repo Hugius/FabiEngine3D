@@ -42,7 +42,7 @@ void BillboardEditor::load()
 {
 	// Camera
 	_fe3d.camera_load(90.0f, 0.1f, 1000.0f, vec3(_startingCameraPos), -90.0f, 0.0f);
-	_fe3d.camera_enableLookat(vec3(0.0f));
+	_fe3d.camera_enableLookat(vec3(0.0f, _cameraHeight, 0.0f));
 
 	// Graphics
 	_fe3d.gfx_enableAmbientLighting(0.75f);
@@ -72,35 +72,38 @@ void BillboardEditor::load()
 
 void BillboardEditor::save()
 {
-	// Error checking
-	if (_currentProjectName == "")
+	if (_isLoaded)
 	{
-		_fe3d.logger_throwError("Tried to save as empty project!");
-	}
-
-	// Create or overwrite billboards file
-	std::ofstream file;
-	file.open(_fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\billboards.fe3d");
-
-	// Write billboard data into file
-	for (auto& billboardName : _billboardNames)
-	{
-		// Check if 3D entity exists
-		if (_fe3d.billboardEntity_isExisting(billboardName))
+		// Error checking
+		if (_currentProjectName == "")
 		{
-
+			_fe3d.logger_throwError("Tried to save as empty project!");
 		}
-		else
+
+		// Create or overwrite billboards file
+		std::ofstream file;
+		file.open(_fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\billboards.fe3d");
+
+		// Write billboard data into file
+		for (auto& billboardName : _billboardNames)
 		{
-			file << billboardName << " -  -  -  -  0  0  0\n";
+			// Check if 3D entity exists
+			if (_fe3d.billboardEntity_isExisting(billboardName))
+			{
+
+			}
+			else
+			{
+				file << billboardName << " -  -  -  -  0  0  0\n";
+			}
 		}
+
+		// Close file
+		file.close();
+
+		// Logging
+		_fe3d.logger_throwInfo("Billboard editor data from project \"" + _currentProjectName + "\" saved!");
 	}
-
-	// Close file
-	file.close();
-
-	// Logging
-	_fe3d.logger_throwInfo("Billboard editor data from project \"" + _currentProjectName + "\" saved!");
 }
 
 void BillboardEditor::unload()
@@ -129,7 +132,6 @@ void BillboardEditor::unload()
 
 	// Delete model name textfield & scrolling list buttons
 	_gui->getGlobalScreen()->deleteTextfield("currentBillboardName");
-	_gui->getViewport("left")->getWindow("main")->getScreen("modelChoice")->getScrollingList("modelList")->deleteButtons();
 
 	// Other
 	_isLoaded = false;

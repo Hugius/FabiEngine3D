@@ -23,11 +23,6 @@ void ModelEditor::initializeGUI()
 	_window->getScreen("modelManagement")->addButton("deleteModel", vec2(0.0f, -0.21), vec2(1.5f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Delete model", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 	_window->getScreen("modelManagement")->addButton("back", vec2(0.0f, -0.63f), vec2(1.0f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Go back", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 
-	// Left-viewport: mainWindow - modelChoice
-	_window->addScreen("modelChoice");
-	_window->getScreen("modelChoice")->addScrollingList("modelList", vec2(0.0f, 0.1f), vec2(1.8, 1.75f), vec3(0.3f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, _gui->leftVpTextColor, _gui->leftVpTextHoverColor, vec2(0.25f, 0.1f));
-	_window->getScreen("modelChoice")->addButton("back", vec2(0.0f, -0.9f), vec2(1.0f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Go back", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
-
 	// Left-viewport: mainWindow - modelEditingMain
 	_window->addScreen("modelEditingMain");
 	_window->getScreen("modelEditingMain")->addButton("mesh", vec2(0.0f, 0.63f), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "3D mesh", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
@@ -56,7 +51,7 @@ void ModelEditor::initializeGUI()
 
 	// Left-viewport: mainWindow - modelEditingSize
 	_window->addScreen("modelEditingSize");
-	_window->getScreen("modelEditingSize")->addScrollingList("buttonList", vec2(0.0f, 0.1f), vec2(1.9, 1.75f), vec3(0.3f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, _gui->leftVpTextColor, _gui->leftVpTextHoverColor, vec2(0.15f, 0.1f));
+	_window->getScreen("modelEditingSize")->addScrollingList("buttonList", vec2(0.0f, 0.1f), vec2(1.9, 1.75f), vec3(0.3f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, _gui->leftVpTextColor, _gui->leftVpTextHoverColor, vec2(0.1f, 0.1f));
 	_window->getScreen("modelEditingSize")->getScrollingList("buttonList")->addButton("setSize", "Set mesh size");
 	_window->getScreen("modelEditingSize")->getScrollingList("buttonList")->addButton("toggleResizeMesh", "Mesh resize: OFF");
 	_window->getScreen("modelEditingSize")->getScrollingList("buttonList")->addButton("toggleBoxView", "Hitbox: OFF");
@@ -241,7 +236,6 @@ void ModelEditor::unload()
 
 	// Delete model name textfield & scrolling list buttons
 	_gui->getGlobalScreen()->deleteTextfield("currentModelName");
-	_gui->getViewport("left")->getWindow("main")->getScreen("modelChoice")->getScrollingList("modelList")->deleteButtons();
 
 	// Other
 	_modelCreationEnabled = false;
@@ -261,13 +255,13 @@ void ModelEditor::_addModel(string modelName, string objName, string diffuseMapN
 	{
 		// Add model name
 		_modelNames.push_back(modelName);
-
+		
 		// Add 3D model
 		if (objName != "")
 		{
 			_fe3d.gameEntity_add(modelName, objName, vec3(0.0f), vec3(0.0f), size, false);
 			_fe3d.aabbEntity_bindToGameEntity(modelName, aabbSize, true);
-
+			
 			// Diffuse map
 			if (diffuseMapName != "")
 			{
@@ -296,9 +290,6 @@ void ModelEditor::_addModel(string modelName, string objName, string diffuseMapN
 			_fe3d.gameEntity_setColor(modelName, color);
 			_fe3d.gameEntity_setUvRepeat(modelName, uvRepeat);
 		}
-
-		// Add scrolling list button
-		_gui->getViewport("left")->getWindow("main")->getScreen("modelChoice")->getScrollingList("modelList")->addButton(modelName, modelName);
 	}
 	else
 	{

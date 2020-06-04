@@ -9,6 +9,7 @@ void BillboardEditor::update()
 		_updateBillboardChoosing();
 		_updateBillboardEditing();
 		_updateBillboardRemoval();
+		_updateBillboardCamera();
 	}
 }
 
@@ -30,7 +31,7 @@ void BillboardEditor::_updateBillboardManagement()
 			_billboardEditingEnabled = true;
 			_gui->getGlobalScreen()->addChoiceForm("billboardList", "Select billboard", vec2(0.0f), _billboardNames);
 		}
-		else if (screen->getButton("deleteBillboard")->isHovered()) // Deelete billboard button
+		else if (screen->getButton("deleteBillboard")->isHovered()) // Delete billboard button
 		{
 			_billboardChoosingEnabled = true;
 			_billboardRemovalEnabled = true;
@@ -71,7 +72,7 @@ void BillboardEditor::_updateBillboardCreation()
 				_billboardEditingEnabled = true;
 				_currentBillboardName = newBillboardName;
 				_billboardNames.push_back(newBillboardName);
-				_fe3d.billBoardEntity_add(newBillboardName, vec3(1.0f), vec3(0.0f), vec3(0.0f), vec3(1.0f), false, false);
+				_fe3d.billBoardEntity_add(newBillboardName, vec3(1.0f), vec3(0.0f, _cameraHeight, 0.0f), vec3(0.0f), vec3(1.0f), false, false);
 			}
 			else // Name already exists
 			{
@@ -97,6 +98,8 @@ void BillboardEditor::_updateBillboardChoosing()
 			if (_gui->getGlobalScreen()->isChoiceFormCancelled("billboardList"))
 			{
 				_billboardChoosingEnabled = false;
+				_billboardEditingEnabled = false;
+				_billboardRemovalEnabled = false;
 				_gui->getGlobalScreen()->removeChoiceForm("billboardList");
 			}
 		}
@@ -105,14 +108,21 @@ void BillboardEditor::_updateBillboardChoosing()
 
 void BillboardEditor::_updateBillboardEditing()
 {
-	if (_billboardEditingEnabled && !_billboardChoosingEnabled)
+	if (_billboardEditingEnabled && _currentBillboardName != "")
 	{
+		static bool firstTime = true;
 		auto screen = _window->getScreen("billboardEditingMain");
 
-		// Update current billboard text
-		_fe3d.textEntity_setTextContent(_gui->getGlobalScreen()->getTextfield("currentBillboardName")->getEntityID(), "Billboard: " + _currentBillboardName);
-		_fe3d.textEntity_show(_gui->getGlobalScreen()->getTextfield("currentBillboardName")->getEntityID());
-
+		// First time initializations
+		if (firstTime)
+		{
+			firstTime = false;
+			_fe3d.textEntity_setTextContent(_gui->getGlobalScreen()->getTextfield("currentBillboardName")->getEntityID(), "Billboard: " + _currentBillboardName, 0.025f);
+			_fe3d.textEntity_show(_gui->getGlobalScreen()->getTextfield("currentBillboardName")->getEntityID());
+			_fe3d.billboardEntity_show(_currentBillboardName);
+			_window->setActiveScreen("billboardEditingMain");
+		}
+		
 		// GUI management
 		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
 		{
@@ -134,8 +144,12 @@ void BillboardEditor::_updateBillboardEditing()
 			}
 			else if (screen->getButton("back")->isHovered())
 			{
-				_window->setActiveScreen("billboardManagement");
+				_fe3d.billboardEntity_hide(_currentBillboardName);
 				_fe3d.textEntity_hide(_gui->getGlobalScreen()->getTextfield("currentBillboardName")->getEntityID());
+				_currentBillboardName = "";
+				_billboardEditingEnabled = false;
+				firstTime = true;
+				_window->setActiveScreen("billboardManagement");
 			}
 		}
 	}
@@ -143,9 +157,31 @@ void BillboardEditor::_updateBillboardEditing()
 
 void BillboardEditor::_updateBillboardRemoval()
 {
-	if (_billboardRemovalEnabled && !_billboardChoosingEnabled)
+	if (_billboardRemovalEnabled && _currentBillboardName != "")
 	{
-		_fe3d.billboardEntity_delete(_currentBillboardName);
-		_billboardNames.erase(std::remove(_billboardNames.begin(), _billboardNames.end(), _currentBillboardName), _billboardNames.end());
+		_gui->getGlobalScreen()->addAnswerForm("removeBillboard", "Are you sure?", vec2(0.0f));
+
+		if (_gui->getGlobalScreen()->isAnswerFormConfirmed("removeBillboard"))
+		{
+			_gui->getGlobalScreen()->removeAnswerForm("removeBillboard");
+			_fe3d.billboardEntity_delete(_currentBillboardName);
+			_billboardNames.erase(std::remove(_billboardNames.begin(), _billboardNames.end(), _currentBillboardName), _billboardNames.end());
+			_billboardRemovalEnabled = false;
+			_currentBillboardName = "";
+		}
+		else if (_gui->getGlobalScreen()->isAnswerFormCancelled("removeBillboard"))
+		{
+			_billboardChoosingEnabled = true;
+			_currentBillboardName = "";
+		}
+	}
+}
+
+void BillboardEditor::_updateBillboardCamera()
+{
+	if (_currentBillboardName != "")
+	{
+		vec3 billboardSize = _fe3d.billboardEntity_getSize(_currentBillboardName);
+		_fe3d.camera_setPosition(vec3(0.0f, _cameraHeight + billboardSize.y / 2.0f, (billboardSize.x * 4.0f)));
 	}
 }

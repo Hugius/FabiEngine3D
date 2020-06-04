@@ -69,6 +69,7 @@ void ModelEditor::_loadOBJ()
 
 			// Add new game entity
 			_fe3d.gameEntity_add(_currentModelName, "User\\Assets\\OBJs\\" + objName, vec3(0.0f), vec3(0.0f), vec3(1.0f));
+			_fe3d.aabbEntity_bindToGameEntity(_currentModelName, vec3(1.0f), true);
 			_fe3d.gameEntity_setColor(_currentModelName, vec3(0.5f));
 		}
 	}

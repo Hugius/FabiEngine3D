@@ -24,6 +24,7 @@ private:
 	void _updateBillboardChoosing();
 	void _updateBillboardEditing();
 	void _updateBillboardRemoval();
+	void _updateBillboardCamera();
 
 	bool _billboardCreationEnabled = false;
 	bool _billboardChoosingEnabled = false;
@@ -31,7 +32,9 @@ private:
 	bool _billboardRemovalEnabled = false;
 	bool _isLoaded = false;
 
-	const vec3 _startingCameraPos = vec3(0.0f, 5.0f, 5.0f);
+	const float _cameraHeight = 2.5f;
+
+	const vec3 _startingCameraPos = vec3(0.0f, _cameraHeight, 5.0f);
 
 	FabiEngine3D& _fe3d;
 	shared_ptr<EngineGuiManager> _gui;

@@ -32,9 +32,11 @@ private:
 	bool _billboardRemovalEnabled = false;
 	bool _isLoaded = false;
 
-	const float _cameraHeight = 2.5f;
-
-	const vec3 _startingCameraPos = vec3(0.0f, _cameraHeight, 5.0f);
+	const vec3 _defaultCameraPosition = vec3(0.0f, 2.5f, 5.0f);
+	const vec3 _billboardPosition = vec3(0.0f, 2.5f, 0.0f);
+	const float _scrollWheelDivider = 250.0f;
+	float _cameraRotationSpeed = 0.0f;
+	float _totalCameraRotation = 0.0f;
 
 	FabiEngine3D& _fe3d;
 	shared_ptr<EngineGuiManager> _gui;

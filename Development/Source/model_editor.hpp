@@ -59,7 +59,7 @@ private:
 	bool _aabbRenderingEnabled = false;
 	bool _isLoaded = false;
 
-	const vec3 _startingCameraPos = vec3(0.0f, 5.0f, 5.0f);
+	const vec3 _defaultCameraPosition = vec3(0.0f, 5.0f, 5.0f);
 
 	Direction _modelResizeDirection = Direction::X;
 

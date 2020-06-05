@@ -63,7 +63,7 @@ void ModelEditor::initializeGUI()
 void ModelEditor::load()
 {
 	// Camera
-	_fe3d.camera_load(90.0f, 0.1f, 1000.0f, vec3(_startingCameraPos), -90.0f, 0.0f);
+	_fe3d.camera_load(90.0f, 0.1f, 1000.0f, _defaultCameraPosition, -90.0f, 0.0f);
 	_fe3d.camera_enableLookat(vec3(0.0f));
 
 	// Graphics
@@ -72,7 +72,7 @@ void ModelEditor::load()
 	_fe3d.gfx_enableLightMapping();
 	_fe3d.gfx_enableSkyReflections(0.25f);
 	_fe3d.gfx_enableMSAA();
-	_fe3d.gfx_enableSceneReflections(0.0f, 0.15f);
+	_fe3d.gfx_enableSceneReflections(0.0f, 0.25f);
 	_fe3d.gfx_enableShadows(vec3(50.0f, 50.0f, 0.0f), vec3(0.0f), 100.0f, 150.0);
 	_fe3d.gfx_enableSpecularLighting(16.0f);
 	

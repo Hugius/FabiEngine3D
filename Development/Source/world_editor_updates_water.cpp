@@ -336,8 +336,11 @@ void WorldEditor::_updateWaterCamera()
 	if (_fe3d.waterEntity_isExisting("@water"))
 	{
 		// Get scroll wheel input
-		float rotationAcceleration = float(_fe3d.input_getMouseWheelY()) / _scrollWheelDivider;
-		_cameraRotationSpeed += rotationAcceleration;
+		if (!_gui->getGlobalScreen()->isFocused() && _fe3d.misc_isMouseInsideViewport())
+		{
+			float rotationAcceleration = float(_fe3d.input_getMouseWheelY()) / _scrollWheelDivider;
+			_cameraRotationSpeed += rotationAcceleration;
+		}
 		_cameraRotationSpeed *= 0.975f;
 		_totalCameraRotation += _cameraRotationSpeed;
 

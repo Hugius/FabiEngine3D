@@ -41,14 +41,14 @@ void BillboardEditor::initializeGUI()
 void BillboardEditor::load()
 {
 	// Camera
-	_fe3d.camera_load(90.0f, 0.1f, 1000.0f, vec3(_startingCameraPos), -90.0f, 0.0f);
-	_fe3d.camera_enableLookat(vec3(0.0f, _cameraHeight, 0.0f));
+	_fe3d.camera_load(90.0f, 0.1f, 1000.0f, _defaultCameraPosition, -90.0f, 0.0f);
+	_fe3d.camera_enableLookat(_billboardPosition);
 
 	// Graphics
 	_fe3d.gfx_enableAmbientLighting(0.75f);
 	_fe3d.gfx_enableDirectionalLighting(vec3(1000.0f), 0.75f);
 	_fe3d.gfx_enableMSAA();
-	_fe3d.gfx_enableSceneReflections(0.0f, 0.15f);
+	_fe3d.gfx_enableSceneReflections(0.0f, 0.25f);
 	_fe3d.gfx_enableSpecularLighting(16.0f);
 	
 	// 3D Environment

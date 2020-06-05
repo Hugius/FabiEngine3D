@@ -12,6 +12,7 @@ void ModelEditor::update()
 		_updateModelEditing();
 		_updateModelRemoval();
 		_updateMiscellaneous();
+		_updateModelEditingCamera();
 	}
 }
 
@@ -126,5 +127,65 @@ void ModelEditor::_updateModelRemoval()
 			_modelChoosingEnabled = true;
 			_currentModelName = "";
 		}
+	}
+}
+
+void ModelEditor::_updateModelEditingCamera()
+{
+	// Update cursor difference
+	static vec2 totalCursorDifference = vec2(0.0f);
+	static vec2 cameraAcceleration = vec2(0.0f);
+	static vec2 lastCursorPos = _fe3d.misc_convertFromScreenCoords(_fe3d.misc_getMousePos());
+	vec2 cursorPosition = _fe3d.misc_convertFromScreenCoords(_fe3d.misc_getMousePos());
+	vec2 cursorDifference = cursorPosition - lastCursorPos;
+	lastCursorPos = _fe3d.misc_convertFromScreenCoords(_fe3d.misc_getMousePos());
+
+	// Update scrolling
+	static float scollSpeed = 0.0f;
+	if (!_gui->getGlobalScreen()->isFocused() && _fe3d.misc_isMouseInsideViewport()) // No GUI focus and cursor must be within viewport
+	{
+		if (!_meshResizingToggled && !_boxResizingToggled) // No active resizing
+		{
+			scollSpeed += float(-_fe3d.input_getMouseWheelY() / _scrollWheelDivider); // Add scroll speed
+		}
+	}
+	scollSpeed *= 0.975f; // Slowing down
+	scollSpeed = std::clamp(scollSpeed, -1.0f, 1.0f);
+	_cameraDistance += scollSpeed;
+	_cameraDistance = std::clamp(_cameraDistance, _minCameraDistance, _maxCameraDistance);
+
+	// Check if MMB pressed
+	if (!_gui->getGlobalScreen()->isFocused() && _fe3d.misc_isMouseInsideViewport())
+	{
+		if (_fe3d.input_getMouseDown(Input::MOUSE_BUTTON_MIDDLE))
+		{
+			if (_fe3d.misc_isMouseInsideViewport()) // Only if cursor inside 3d screen
+			{
+				cameraAcceleration.x += cursorDifference.x * _cameraSpeed;
+				cameraAcceleration.y += cursorDifference.y * _cameraSpeed;
+			}
+		}
+	}
+
+	// Calculate cursor moving speed
+	cameraAcceleration *= 0.975f;
+	totalCursorDifference += cameraAcceleration;
+	totalCursorDifference.y = std::clamp(totalCursorDifference.y, 0.0f, 1.0f);
+
+	// Calculate new camera position
+	float x = (_cameraDistance * sin(totalCursorDifference.x));
+	float y = _minCameraHeight + (_cameraDistance * totalCursorDifference.y);
+	float z = (_cameraDistance * cos(totalCursorDifference.x));
+
+	// Update camera position
+	_fe3d.camera_setPosition(vec3(x, y, z));
+
+	// Update shadow caster position
+	static int frameCounter = 0;
+	frameCounter++;
+	if ((frameCounter % 250) == 0)
+	{
+		float distance = max(min(_cameraDistance * 2.0f, 50.0f), 10.0f);
+		_fe3d.gfx_enableShadows(vec3(distance), vec3(0.0f), distance * 2.0f, distance * 3.0f);
 	}
 }

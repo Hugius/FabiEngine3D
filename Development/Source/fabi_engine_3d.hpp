@@ -189,18 +189,18 @@ public:
 	void billBoardEntity_add
 	(
 		const string& ID, vec3 color,
-		vec3 T, vec3 R, vec3 S, bool facingCameraX, bool facingCameraY, bool visible = true
+		vec3 T, vec3 R, vec2 S, bool facingCameraX, bool facingCameraY, bool visible = true
 	);
 	void billBoardEntity_add
 	(
 		const string& ID, const string& text,
 		const string& fontPath, vec3 color,
-		vec3 T, vec3 R, vec3 S, bool facingCameraX, bool facingCameraY, bool visible = true
+		vec3 T, vec3 R, vec2 S, bool facingCameraX, bool facingCameraY, bool visible = true
 	);
 	void billBoardEntity_add
 	(
 		const string& ID, const string& texturePath,
-		vec3 T, vec3 R, vec3 S,
+		vec3 T, vec3 R, vec2 S,
 		bool transparent, bool facingCameraX, bool facingCameraY, bool textureFiltering, bool visible = true
 	);
 	void billboardEntity_deleteAll();
@@ -215,7 +215,7 @@ public:
 	void billboardEntity_scale(const string& ID, vec3 factor);
 	void billboardEntity_setPosition(const string& ID, vec3 position);
 	void billboardEntity_setRotation(const string& ID, vec3 rotation);
-	void billboardEntity_setSize(const string& ID, vec3 size);
+	void billboardEntity_setSize(const string& ID, vec2 size);
 	vec3 billboardEntity_getPosition(const string& ID);
 	vec3 billboardEntity_getRotation(const string& ID);
 	vec3 billboardEntity_getSize(const string& ID);

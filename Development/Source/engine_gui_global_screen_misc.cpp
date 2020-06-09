@@ -10,24 +10,24 @@ bool EngineGuiGlobalScreen::isFocused()
 	return _isFocused;
 }
 
-void EngineGuiGlobalScreen::addValueForm(const string& ID, string title, int value, vec2 position)
+void EngineGuiGlobalScreen::addValueForm(const string& ID, string title, int value, vec2 position, vec2 size)
 {
-	_addValueForm(ID, title, std::to_string(value), position, true);
+	_addValueForm(ID, title, std::to_string(value), position, size, true);
 }
 
-void EngineGuiGlobalScreen::addValueForm(const string& ID, string title, float value, vec2 position)
+void EngineGuiGlobalScreen::addValueForm(const string& ID, string title, float value, vec2 position, vec2 size)
 {
-	_addValueForm(ID, title, std::to_string(static_cast<int>(value)), position, true);
+	_addValueForm(ID, title, std::to_string(static_cast<int>(value)), position, size, true);
 }
 
-void EngineGuiGlobalScreen::addValueForm(const string& ID, string title, double value, vec2 position)
+void EngineGuiGlobalScreen::addValueForm(const string& ID, string title, double value, vec2 position, vec2 size)
 {
-	_addValueForm(ID, title, std::to_string(static_cast<int>(value)), position, true);
+	_addValueForm(ID, title, std::to_string(static_cast<int>(value)), position, size, true);
 }
 
-void EngineGuiGlobalScreen::addValueForm(const string& ID, string title, string value, vec2 position)
+void EngineGuiGlobalScreen::addValueForm(const string& ID, string title, string value, vec2 position, vec2 size)
 {
-	_addValueForm(ID, title, value, position, false);
+	_addValueForm(ID, title, value, position, size, false);
 }
 
 bool EngineGuiGlobalScreen::checkValueForm(const string& ID, int& value, vector<int> forbiddenValues)
@@ -83,13 +83,13 @@ bool EngineGuiGlobalScreen::checkValueForm(const string& ID, string& value, vect
 	return _checkValueForm(ID, value, forbiddenValues);
 }
 
-void EngineGuiGlobalScreen::_addValueForm(const string& ID, string title, string valueString, vec2 position, bool onlyNumbers)
+void EngineGuiGlobalScreen::_addValueForm(const string& ID, string title, string valueString, vec2 position, vec2 size, bool onlyNumbers)
 {
 	if (ID != "" && std::find(_valueFormIDs.begin(), _valueFormIDs.end(), ID) == _valueFormIDs.end())
 	{
 		_valueFormIDs.push_back(ID);
 		addTextfield(ID, position + vec2(0.0f, 0.15f), vec2(title.size() * 0.025f, 0.1f), title, vec3(1.0f));
-		addWriteField(ID, position, vec2(0.5f, 0.1f), vec3(0.25f), vec3(0.5f), vec3(1.0f), vec3(0.0f), !onlyNumbers, onlyNumbers, onlyNumbers, onlyNumbers);
+		addWriteField(ID, position, size, vec3(0.25f), vec3(0.5f), vec3(1.0f), vec3(0.0f), !onlyNumbers, onlyNumbers, onlyNumbers, onlyNumbers);
 		getWriteField(ID)->setTextContent(valueString);
 
 		// GUI focus & set first writefield active

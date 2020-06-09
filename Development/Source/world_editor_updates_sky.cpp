@@ -164,7 +164,7 @@ void WorldEditor::_updateSkyOptions()
 		{
 			if (screen->getScrollingList("buttonList")->getButton("rotationSpeed")->isHovered())
 			{
-				_gui->getGlobalScreen()->addValueForm("rotationSpeed", "Rotation speed", _skyRotationSpeed * 100.0f, vec2(0.0f));
+				_gui->getGlobalScreen()->addValueForm("rotationSpeed", "Rotation speed", _skyRotationSpeed * 100.0f, vec2(0.0f), vec2(0.3f, 0.1f));
 			}
 			else if (screen->getButton("back")->isHovered())
 			{

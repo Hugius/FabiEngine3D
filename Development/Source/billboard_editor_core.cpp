@@ -24,7 +24,7 @@ void BillboardEditor::initializeGUI()
 	
 	// Left-viewport: mainWindow - billboardEditingMain
 	_window->addScreen("billboardEditingMain");
-	_window->getScreen("billboardEditingMain")->addButton("size", vec2(0.0f, 0.7f), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Size", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_window->getScreen("billboardEditingMain")->addButton("size", vec2(0.0f, 0.7f), vec2(1.0f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Size", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 	_window->getScreen("billboardEditingMain")->addButton("color", vec2(0.0f, 0.35f), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Color", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 	_window->getScreen("billboardEditingMain")->addButton("texture", vec2(0.0f, 0.0f), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Texture", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 	_window->getScreen("billboardEditingMain")->addButton("animation", vec2(0.0f, -0.35f), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Animation", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);

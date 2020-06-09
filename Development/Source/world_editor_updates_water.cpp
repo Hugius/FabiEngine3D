@@ -142,11 +142,11 @@ void WorldEditor::_updateWaterMesh()
 		{
 			if (screen->getScrollingList("buttonList")->getButton("size")->isHovered())
 			{
-				_gui->getGlobalScreen()->addValueForm("size", "Size", _waterSize, vec2(0.0f));
+				_gui->getGlobalScreen()->addValueForm("size", "Size", _waterSize, vec2(0.0f), vec2(0.3f, 0.1f));
 			}
 			else if (screen->getScrollingList("buttonList")->getButton("height")->isHovered())
 			{
-				_gui->getGlobalScreen()->addValueForm("height", "Height", _waterHeight, vec2(0.0f));
+				_gui->getGlobalScreen()->addValueForm("height", "Height", _waterHeight, vec2(0.0f), vec2(0.3f, 0.1f));
 			}
 			else if (screen->getButton("back")->isHovered())
 			{
@@ -203,7 +203,7 @@ void WorldEditor::_updateWaterEffects()
 		{
 			if (screen->getScrollingList("buttonList")->getButton("uvRepeat")->isHovered())
 			{
-				_gui->getGlobalScreen()->addValueForm("uvRepeat", "UV repeat", _waterUvRepeat, vec2(0.0f));
+				_gui->getGlobalScreen()->addValueForm("uvRepeat", "UV repeat", _waterUvRepeat, vec2(0.0f), vec2(0.3f, 0.1f));
 			}
 			else if (screen->getScrollingList("buttonList")->getButton("dudvmap")->isHovered())
 			{
@@ -271,21 +271,21 @@ void WorldEditor::_updateWaterOptions()
 		{
 			if (screen->getScrollingList("buttonList")->getButton("speed")->isHovered())
 			{
-				_gui->getGlobalScreen()->addValueForm("speed", "Water speed", _waterSpeed * 1000.0f, vec2(0.0f));
+				_gui->getGlobalScreen()->addValueForm("speed", "Water speed", _waterSpeed * 1000.0f, vec2(0.0f), vec2(0.3f, 0.1f));
 			}
 			else if (screen->getScrollingList("buttonList")->getButton("transparency")->isHovered())
 			{
-				_gui->getGlobalScreen()->addValueForm("transparency", "Transparency(0 - 10)", _waterTransparency * 10.0f, vec2(0.0f));
+				_gui->getGlobalScreen()->addValueForm("transparency", "Transparency(0 - 10)", _waterTransparency * 10.0f, vec2(0.0f), vec2(0.3f, 0.1f));
 			}
 			else if (screen->getScrollingList("buttonList")->getButton("color")->isHovered())
 			{
-				_gui->getGlobalScreen()->addValueForm("colorR", "R(0-255)", _waterColor.r * 255.0f, vec2(-0.25f, 0.0f));
-				_gui->getGlobalScreen()->addValueForm("colorG", "G(0-255)", _waterColor.g * 255.0f, vec2(0.0f, 0.0f));
-				_gui->getGlobalScreen()->addValueForm("colorB", "B(0-255)", _waterColor.b * 255.0f, vec2(0.25f, 0.0f));
+				_gui->getGlobalScreen()->addValueForm("colorR", "R(0-255)", _waterColor.r * 255.0f, vec2(-0.25f, 0.0f), vec2(0.3f, 0.1f));
+				_gui->getGlobalScreen()->addValueForm("colorG", "G(0-255)", _waterColor.g * 255.0f, vec2(0.0f, 0.0f), vec2(0.3f, 0.1f));
+				_gui->getGlobalScreen()->addValueForm("colorB", "B(0-255)", _waterColor.b * 255.0f, vec2(0.25f, 0.0f), vec2(0.3f, 0.1f));
 			}
 			else if (screen->getScrollingList("buttonList")->getButton("shininess")->isHovered())
 			{
-				_gui->getGlobalScreen()->addValueForm("shininess", "Shininess(0 - 256)", _waterShininess, vec2(0.0f));
+				_gui->getGlobalScreen()->addValueForm("shininess", "Shininess(0 - 256)", _waterShininess, vec2(0.0f), vec2(0.3f, 0.1f));
 			}
 			else if (screen->getButton("back")->isHovered())
 			{

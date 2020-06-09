@@ -117,15 +117,15 @@ void WorldEditor::_updateTerrainMesh()
 			}
 			else if (screen->getScrollingList("buttonList")->getButton("size")->isHovered())
 			{
-				_gui->getGlobalScreen()->addValueForm("size", "Size", _terrainSize, vec2(0.0f));
+				_gui->getGlobalScreen()->addValueForm("size", "Size", _terrainSize, vec2(0.0f), vec2(0.3f, 0.1f));
 			}
 			else if (screen->getScrollingList("buttonList")->getButton("maxHeight")->isHovered())
 			{
-				_gui->getGlobalScreen()->addValueForm("maxHeight", "Max height", _maxTerrainHeight, vec2(0.0f));
+				_gui->getGlobalScreen()->addValueForm("maxHeight", "Max height", _maxTerrainHeight, vec2(0.0f), vec2(0.3f, 0.1f));
 			}
 			else if (screen->getScrollingList("buttonList")->getButton("uvRepeat")->isHovered())
 			{
-				_gui->getGlobalScreen()->addValueForm("uvRepeat", "UV repeat", _terrainUvRepeat, vec2(0.0f));
+				_gui->getGlobalScreen()->addValueForm("uvRepeat", "UV repeat", _terrainUvRepeat, vec2(0.0f), vec2(0.3f, 0.1f));
 			}
 			else if (screen->getButton("load")->isHovered())
 			{
@@ -191,15 +191,15 @@ void WorldEditor::_updateTerrainBlendmap()
 			}
 			else if (screen->getScrollingList("buttonList")->getButton("redRepeat")->isHovered())
 			{
-				_gui->getGlobalScreen()->addValueForm("redRepeat", "Red repeat", _terrainRedUvRepeat, vec2(0.0f));
+				_gui->getGlobalScreen()->addValueForm("redRepeat", "Red repeat", _terrainRedUvRepeat, vec2(0.0f), vec2(0.3f, 0.1f));
 			}
 			else if (screen->getScrollingList("buttonList")->getButton("greenRepeat")->isHovered())
 			{
-				_gui->getGlobalScreen()->addValueForm("greenRepeat", "Green repeat", _terrainGreenUvRepeat, vec2(0.0f));
+				_gui->getGlobalScreen()->addValueForm("greenRepeat", "Green repeat", _terrainGreenUvRepeat, vec2(0.0f), vec2(0.3f, 0.1f));
 			}
 			else if (screen->getScrollingList("buttonList")->getButton("blueRepeat")->isHovered())
 			{
-				_gui->getGlobalScreen()->addValueForm("blueRepeat", "Blue repeat", _terrainBlueUvRepeat, vec2(0.0f));
+				_gui->getGlobalScreen()->addValueForm("blueRepeat", "Blue repeat", _terrainBlueUvRepeat, vec2(0.0f), vec2(0.3f, 0.1f));
 			}
 			else if (screen->getButton("load")->isHovered())
 			{

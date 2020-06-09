@@ -49,10 +49,10 @@ public:
 	vector<shared_ptr<EngineGuiTextfield>>& getTextfields();
 
 	// Value form
-	void addValueForm(const string& ID, string title, int value, vec2 position);
-	void addValueForm(const string& ID, string title, float value, vec2 position);
-	void addValueForm(const string& ID, string title, double value, vec2 position);
-	void addValueForm(const string& ID, string title, string value, vec2 position);
+	void addValueForm(const string& ID, string title, int value, vec2 position, vec2 size);
+	void addValueForm(const string& ID, string title, float value, vec2 position, vec2 size);
+	void addValueForm(const string& ID, string title, double value, vec2 position, vec2 size);
+	void addValueForm(const string& ID, string title, string value, vec2 position, vec2 size);
 	bool checkValueForm(const string& ID, int& value, vector<int> forbiddenValues = {});
 	bool checkValueForm(const string& ID, float& value, vector<float> forbiddenValues = {});
 	bool checkValueForm(const string& ID, double& value, vector<double> forbiddenValues = {});
@@ -73,7 +73,7 @@ public:
 private:
 	void _updateValueFilling();
 	void _removeValueForm(string ID);
-	void _addValueForm(const string& ID, string title, string valueString, vec2 position, bool onlyNumbers);
+	void _addValueForm(const string& ID, string title, string valueString, vec2 position, vec2 size, bool onlyNumbers);
 	bool _checkValueForm(const string& ID, string& valueString, vector<string> forbiddenValueStrings);
 
 	FabiEngine3D& _fe3d;

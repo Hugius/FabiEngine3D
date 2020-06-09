@@ -25,7 +25,7 @@ void ModelEditor::_updateModelManagement()
 	{
 		if (screen->getButton("addModel")->isHovered()) // Add model button
 		{
-			_gui->getGlobalScreen()->addValueForm("newModelName", "New model name", "", vec2(0.0f)); 
+			_gui->getGlobalScreen()->addValueForm("newModelName", "New model name", "", vec2(0.0f), vec2(0.5f, 0.1f));
 			_modelCreationEnabled = true;
 		}
 		else if (screen->getButton("editModel")->isHovered()) // Edit model button

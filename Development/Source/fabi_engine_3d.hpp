@@ -216,9 +216,11 @@ public:
 	void billboardEntity_setPosition(const string& ID, vec3 position);
 	void billboardEntity_setRotation(const string& ID, vec3 rotation);
 	void billboardEntity_setSize(const string& ID, vec2 size);
+	void billboardEntity_setColor(const string& ID, vec3 color);
 	vec3 billboardEntity_getPosition(const string& ID);
 	vec3 billboardEntity_getRotation(const string& ID);
-	vec3 billboardEntity_getSize(const string& ID);
+	vec2 billboardEntity_getSize(const string& ID);
+	vec3 billboardEntity_getColor(const string& ID);
 	void billboardEntity_enable(const string& ID);
 	void billboardEntity_disable(const string& ID);
 	void billBoardEntity_playSpriteAnimation(const string& ID, int rows, int columns, int maxAnimationRepeats);

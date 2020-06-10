@@ -126,15 +126,15 @@ void BillboardEntityManager::update()
 		// Update sprite animation
 		if (entity->hasSpriteAnimation() && entity->getAnimationRepeats() != entity->getMaxAnimationRepeats())
 		{
-			if (entity->getTotalDelta() >= entity->getMaxDelta()) // Is allowed to update
+			if (entity->getPassedFrames() >= entity->getMaxPassedFrames()) // Is allowed to update
 			{
-				entity->resetDelta(); // Reset counter
+				entity->resetPassedFrames(); // Reset counter
 
-				if (entity->getSpriteColumnIndex() == entity->getTotalSpriteColumns() - 1) // Reached total columns
+				if (entity->getSpriteColumnIndex() >= entity->getTotalSpriteColumns() - 1) // Reached total columns
 				{
 					entity->setSpriteColumnIndex(0); // Reset column index
-
-					if (entity->getSpriteRowIndex() == entity->getTotalSpriteRows() - 1) // Reached total rows
+					
+					if (entity->getSpriteRowIndex() >= entity->getTotalSpriteRows() - 1) // Reached total rows
 					{
 						entity->increaseAnimationRepeats();
 						entity->setSpriteRowIndex(0); // Reset row index (animation finished)
@@ -151,7 +151,7 @@ void BillboardEntityManager::update()
 			}
 			else // Increase counter
 			{
-				//entity->addToDelta();
+				entity->increasePassedFrames();
 			}
 		}
 	}

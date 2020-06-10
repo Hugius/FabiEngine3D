@@ -1,5 +1,5 @@
 #include "billboard_entity.hpp"
-
+#include <iostream>
 void BillboardEntity::updateModelMatrix()
 {
 	_modelMatrix = mat4(1.0f);
@@ -75,14 +75,20 @@ void BillboardEntity::setTransparent(bool val)
 	_isTransparent = val;
 }
 
-void BillboardEntity::setSpriteAnimation(int rows, int columns, int maxAnimationRepeats)
+void BillboardEntity::playSpriteAnimation(int rows, int columns, int maxAnimationRepeats, int frameStep)
 {
 	_hasSpriteAnimation = true;
 	_totalSpriteRows = rows;
 	_totalSpriteColumns = columns;
-	_maxDelta = 0.0f;
+	_totalPassedFrames = 0;
+	_maxPassedFrames = frameStep;
 	_animationRepeats = 0;
 	_maxAnimationRepeats = maxAnimationRepeats;
+}
+
+void BillboardEntity::stopSpriteAnimation()
+{
+	_hasSpriteAnimation = false;
 }
 
 void BillboardEntity::setSpriteRowIndex(int val)
@@ -95,14 +101,19 @@ void BillboardEntity::setSpriteColumnIndex(int val)
 	_spriteColumnIndex = val;
 }
 
-void BillboardEntity::addToDelta(float val)
+void BillboardEntity::setMaxPassedFrames(int val)
 {
-	_totalDelta += val;
+	_maxPassedFrames = val;
 }
 
-void BillboardEntity::resetDelta()
+void BillboardEntity::increasePassedFrames()
 {
-	_totalDelta = 0.0f;
+	_totalPassedFrames++;
+}
+
+void BillboardEntity::resetPassedFrames()
+{
+	_totalPassedFrames = 0;
 }
 
 void BillboardEntity::increaseAnimationRepeats()
@@ -160,19 +171,19 @@ const string& BillboardEntity::getFontPath() const
 	return _fontPath;
 }
 
-const float BillboardEntity::getMaxDelta() const
-{
-	return _maxDelta;
-}
-
-const float BillboardEntity::getTotalDelta() const
-{
-	return _totalDelta;
-}
-
 const float BillboardEntity::getUvRepeat() const
 {
 	return _uvRepeat;
+}
+
+const int BillboardEntity::getPassedFrames() const
+{
+	return _totalPassedFrames;
+}
+
+const int BillboardEntity::getMaxPassedFrames() const
+{
+	return _maxPassedFrames;
 }
 
 const int BillboardEntity::getTotalSpriteRows() const

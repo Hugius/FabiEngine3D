@@ -31,11 +31,13 @@ public:
 	void setText(const string& text);
 	void setFontPath(const string& fontPath);
 	void setTransparent(bool val);
-	void setSpriteAnimation(int rows, int columns, int maxAnimationRepeats);
+	void playSpriteAnimation(int rows, int columns, int maxAnimationRepeats, int frameStep);
+	void stopSpriteAnimation();
 	void setSpriteRowIndex(int val);
 	void setSpriteColumnIndex(int val);
-	void addToDelta(float val);
-	void resetDelta();
+	void setMaxPassedFrames(int val);
+	void increasePassedFrames();
+	void resetPassedFrames();
 	void increaseAnimationRepeats();
 	void setUvRepeat(float val);
 
@@ -50,9 +52,9 @@ public:
 	const ivec2 getCameraFacing() const;
 	const string & getText() const;
 	const string& getFontPath() const;
-	const float getMaxDelta() const;
-	const float getTotalDelta() const;
 	const float getUvRepeat() const;
+	const int getPassedFrames() const;
+	const int getMaxPassedFrames() const;
 	const int getTotalSpriteRows() const;
 	const int getTotalSpriteColumns() const;
 	const int getSpriteRowIndex() const;
@@ -73,10 +75,10 @@ private:
 
 	ivec2 _cameraFacing = ivec2(0);
 
-	float _maxDelta   = 0.0f;
-	float _totalDelta = 0.0f;
 	float _uvRepeat	  = 1.0f;
 	
+	int _maxPassedFrames     = 0;
+	int _totalPassedFrames	 = 0;
 	int _totalSpriteRows     = 0;
 	int _totalSpriteColumns  = 0;
 	int _spriteRowIndex      = 0;

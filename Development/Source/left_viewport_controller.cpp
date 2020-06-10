@@ -17,7 +17,7 @@ void LeftViewportController::initialize()
 	_gui->getViewport("left")->getWindow("main")->setActiveScreen("main");
 	_gui->getViewport("left")->getWindow("main")->getScreen("main")->addButton("modelEditor", vec2(0.0f, 0.7f), vec2(1.5f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Model editor", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 	_gui->getViewport("left")->getWindow("main")->getScreen("main")->addButton("worldEditor", vec2(0.0f, 0.35f), vec2(1.5f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "World editor", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
-	_gui->getViewport("left")->getWindow("main")->getScreen("main")->addButton("billboardEditor", vec2(0.0f, 0.0f), vec2(1.6f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Billboard editor", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_gui->getViewport("left")->getWindow("main")->getScreen("main")->addButton("billboardEditor", vec2(0.0f, 0.0f), vec2(1.7f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Billboard editor", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 	_gui->getViewport("left")->getWindow("main")->getScreen("main")->addButton("entityPlacer", vec2(0.0f, -0.35f), vec2(1.5f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Entity placer", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 	_gui->getViewport("left")->getWindow("main")->getScreen("main")->addButton("scriptEditor", vec2(0.0f, -0.7f), vec2(1.5f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Script editor", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 	

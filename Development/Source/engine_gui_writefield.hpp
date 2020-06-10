@@ -28,10 +28,14 @@ private:
 	bool _isActive = false;
 	bool _cancelledInput = false;
 	bool _confirmedInput = false;
+
 	const bool _noNumbers;
 	const bool _noCaps;
 	const bool _noSpecials;
 	const bool _noLetters;
+
+	const int _maxPassedBarFrames = 50;
+	const int _maxPassedBackspaceFrames = 20;
 
 	string _currentTextContent = "";
 

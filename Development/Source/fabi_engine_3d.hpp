@@ -217,16 +217,21 @@ public:
 	void billboardEntity_setRotation(const string& ID, vec3 rotation);
 	void billboardEntity_setSize(const string& ID, vec2 size);
 	void billboardEntity_setColor(const string& ID, vec3 color);
+	void billboardEntity_setDiffuseMap(const string& ID, const string& texturePath, bool textureFiltering);
+	void billboardEntity_setTransparent(const string& ID, bool enabled);
 	vec3 billboardEntity_getPosition(const string& ID);
 	vec3 billboardEntity_getRotation(const string& ID);
 	vec2 billboardEntity_getSize(const string& ID);
 	vec3 billboardEntity_getColor(const string& ID);
 	void billboardEntity_enable(const string& ID);
 	void billboardEntity_disable(const string& ID);
-	void billBoardEntity_playSpriteAnimation(const string& ID, int rows, int columns, int maxAnimationRepeats);
+	void billBoardEntity_playSpriteAnimation(const string& ID, int rows, int columns, int maxAnimationRepeats, int frameStep);
+	void billboardEntity_stopSpriteAnimation(const string& ID);
 	void billBoardEntity_changeText(const string& ID, const string& text, vec3 color);
 	void billboardEntity_setUvRepeat(const string& ID, float repeat);
-	bool billboardEntity_isFinished(const string& ID);
+	bool billboardEntity_isAnimationFinished(const string& ID);
+	bool billboardEntity_isAnimationPlaying(const string& ID);
+	bool billboardEntity_isTransparent(const string& ID);
 
 	// AABB entity interface
 	void aabbEntity_deleteAll();

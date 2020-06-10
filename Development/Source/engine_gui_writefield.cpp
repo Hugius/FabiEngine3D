@@ -72,14 +72,12 @@ void EngineGuiWriteField::_updateTyping()
 {
 	if (_isActive)
 	{
-		const int maxPassedBarFrames = 50;
-		const int maxPassedBackspaceFrames = 10;
-		static int passedBarFrames = maxPassedBarFrames;
-		static int passedBackspaceFrames = maxPassedBackspaceFrames;
+		static int passedBarFrames = _maxPassedBarFrames;
+		static int passedBackspaceFrames = _maxPassedBackspaceFrames;
 		static bool barEnabled = true;
 
 		// Update bar animation time
-		if (passedBarFrames >= maxPassedBarFrames)
+		if (passedBarFrames >= _maxPassedBarFrames)
 		{
 			passedBarFrames = 0;
 			
@@ -166,7 +164,7 @@ void EngineGuiWriteField::_updateTyping()
 		if (_fe3d.input_getKeyDown(Input::KEY_BACKSPACE))
 		{
 			// Check if enough time passed
-			if (passedBackspaceFrames >= maxPassedBackspaceFrames)
+			if (passedBackspaceFrames >= _maxPassedBackspaceFrames)
 			{
 				passedBackspaceFrames = 0;
 
@@ -186,7 +184,7 @@ void EngineGuiWriteField::_updateTyping()
 		}
 		else
 		{
-			passedBackspaceFrames = maxPassedBackspaceFrames;
+			passedBackspaceFrames = _maxPassedBackspaceFrames;
 		}
 
 		// Update text content with or without bar

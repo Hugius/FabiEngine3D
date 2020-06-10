@@ -886,6 +886,16 @@ void FabiEngine3D::billboardEntity_setColor(const string& ID, vec3 color)
 	_core->_billboardEntityManager.getEntity(ID)->setColor(color);
 }
 
+void FabiEngine3D::billboardEntity_setDiffuseMap(const string& ID, const string& texturePath, bool textureFiltering)
+{
+	_core->_billboardEntityManager.getEntity(ID)->setDiffuseMap(_core->_texLoader.getTexture(texturePath, textureFiltering, textureFiltering));
+}
+
+void FabiEngine3D::billboardEntity_setTransparent(const string& ID, bool enabled)
+{
+	_core->_billboardEntityManager.getEntity(ID)->setTransparent(enabled);
+}
+
 vec3 FabiEngine3D::billboardEntity_getPosition(const string& ID)
 {
 	return _core->_billboardEntityManager.getEntity(ID)->getTranslation();
@@ -916,9 +926,14 @@ void FabiEngine3D::billboardEntity_disable(const string& ID)
 	_core->_billboardEntityManager.getEntity(ID)->setEnabled(false);
 }
 
-void FabiEngine3D::billBoardEntity_playSpriteAnimation(const string& ID, int rows, int columns, int maxAnimationRepeats)
+void FabiEngine3D::billBoardEntity_playSpriteAnimation(const string& ID, int rows, int columns, int maxAnimationRepeats, int frameStep)
 {
-	_core->_billboardEntityManager.getEntity(ID)->setSpriteAnimation(rows, columns, maxAnimationRepeats);
+	_core->_billboardEntityManager.getEntity(ID)->playSpriteAnimation(rows, columns, maxAnimationRepeats, frameStep);
+}
+
+void FabiEngine3D::billboardEntity_stopSpriteAnimation(const string& ID)
+{
+	_core->_billboardEntityManager.getEntity(ID)->stopSpriteAnimation();
 }
 
 void FabiEngine3D::billBoardEntity_changeText(const string& ID, const string& text, vec3 color)
@@ -935,11 +950,21 @@ void FabiEngine3D::billboardEntity_setUvRepeat(const string& ID, float repeat)
 	_core->_billboardEntityManager.getEntity(ID)->setUvRepeat(repeat);
 }
 
-bool FabiEngine3D::billboardEntity_isFinished(const string& ID)
+bool FabiEngine3D::billboardEntity_isAnimationFinished(const string& ID)
 {
 	int repeats = _core->_billboardEntityManager.getEntity(ID)->getAnimationRepeats();
 	int maxRepeats = _core->_billboardEntityManager.getEntity(ID)->getMaxAnimationRepeats();
 	return (repeats == maxRepeats);
+}
+
+bool FabiEngine3D::billboardEntity_isAnimationPlaying(const string& ID)
+{
+	return _core->_billboardEntityManager.getEntity(ID)->hasSpriteAnimation();
+}
+
+bool FabiEngine3D::billboardEntity_isTransparent(const string& ID)
+{
+	return _core->_billboardEntityManager.getEntity(ID)->isTransparent();
 }
 
 /* --------------------------------------------- AABB entity interface --------------------------------------------- */

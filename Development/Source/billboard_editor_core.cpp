@@ -24,18 +24,28 @@ void BillboardEditor::initializeGUI()
 	
 	// Left-viewport: mainWindow - billboardEditingMain
 	_window->addScreen("billboardEditingMain");
-	_window->getScreen("billboardEditingMain")->addButton("size", vec2(0.0f, 0.7f), vec2(1.0f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Size", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
-	_window->getScreen("billboardEditingMain")->addButton("color", vec2(0.0f, 0.35f), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Color", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
-	_window->getScreen("billboardEditingMain")->addButton("texture", vec2(0.0f, 0.0f), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Texture", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
-	_window->getScreen("billboardEditingMain")->addButton("animation", vec2(0.0f, -0.35f), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Animation", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
-	_window->getScreen("billboardEditingMain")->addButton("back", vec2(0.0f, -0.7f), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Go back", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_window->getScreen("billboardEditingMain")->addButton("size", vec2(0.0f, 0.75f), vec2(1.0f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Size", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_window->getScreen("billboardEditingMain")->addButton("color", vec2(0.0f, 0.45f), vec2(1.1f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Color", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_window->getScreen("billboardEditingMain")->addButton("texture", vec2(0.0f, 0.15f), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Texture", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_window->getScreen("billboardEditingMain")->addButton("animation", vec2(0.0f, -0.15f), vec2(1.5f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Animation", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_window->getScreen("billboardEditingMain")->addButton("text", vec2(0.0f, -0.45f), vec2(1.0f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Text", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_window->getScreen("billboardEditingMain")->addButton("back", vec2(0.0f, -0.75f), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Go back", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 
 	// Left-viewport: mainWindow - modelEditingAnimation
-	_window->addScreen("modelEditingAnimation");
-	_window->getScreen("modelEditingAnimation")->addButton("rows", vec2(0.0f, 0.63f), vec2(1.0f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Rows", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
-	_window->getScreen("modelEditingAnimation")->addButton("columns", vec2(0.0f, 0.21), vec2(1.0f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Columns", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
-	_window->getScreen("modelEditingAnimation")->addButton("speed", vec2(0.0f, -0.21), vec2(1.0f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Speed", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
-	_window->getScreen("modelEditingAnimation")->addButton("back", vec2(0.0f, -0.63f), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Go back", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_window->addScreen("billboardEditingAnimation");
+	_window->getScreen("billboardEditingAnimation")->addButton("animated", vec2(0.0f, 0.75f), vec2(1.7f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Animation: OFF", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_window->getScreen("billboardEditingAnimation")->addButton("rows", vec2(0.0f, 0.45f), vec2(1.0f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Rows", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_window->getScreen("billboardEditingAnimation")->addButton("columns", vec2(0.0f, 0.15f), vec2(1.1f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Columns", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_window->getScreen("billboardEditingAnimation")->addButton("speed", vec2(0.0f, -0.15f), vec2(1.3f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Frame step", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_window->getScreen("billboardEditingAnimation")->addButton("transparent", vec2(0.0f, -0.45f), vec2(1.5f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "No-white: OFF", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_window->getScreen("billboardEditingAnimation")->addButton("back", vec2(0.0f, -0.75f), vec2(1.0f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Go back", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	
+	// Left-viewport: mainWindow - modelEditingText
+	_window->addScreen("billboardEditingText");
+	_window->getScreen("billboardEditingText")->addButton("font", vec2(0.0f, 0.63f), vec2(1.0f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Font", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_window->getScreen("billboardEditingText")->addButton("color", vec2(0.0f, 0.21), vec2(1.0f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Color", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_window->getScreen("billboardEditingText")->addButton("content", vec2(0.0f, -0.21), vec2(1.0f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Content", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_window->getScreen("billboardEditingText")->addButton("back", vec2(0.0f, -0.63f), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Go back", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 }
 
 void BillboardEditor::load()

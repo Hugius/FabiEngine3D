@@ -19,16 +19,16 @@ public:
 
 	void addBillboardEntity
 	(
-		const string & ID, const string & text, 
-		const string & fontPath, vec3 color,
-		vec3 T, vec3 R, vec3 S, bool facingCameraX, bool facingCameraY
+		const string& ID, const string& textureName,
+		vec3 T, vec3 R, vec3 S,
+		bool transparent, bool facingCameraX, bool facingCameraY, bool textureFiltering
 	);
 
 	void addBillboardEntity
 	(
-		const string & ID, const string & textureName,
-		vec3 T, vec3 R, vec3 S,
-		bool transparent, bool facingCameraX, bool facingCameraY, bool textureFiltering
+		const string & ID, const string & text, 
+		const string & fontPath, vec3 color,
+		vec3 T, vec3 R, vec3 S, bool facingCameraX, bool facingCameraY
 	);
 
 	void update() override;

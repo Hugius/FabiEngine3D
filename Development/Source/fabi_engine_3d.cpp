@@ -506,6 +506,12 @@ void FabiEngine3D::gameEntity_hideAll()
 	for (auto entity : _core->_gameEntityManager.getEntities())
 	{
 		entity->setEnabled(false);
+
+		// Hide possible AABB
+		if (aabbEntity_isExisting(entity->getID()))
+		{
+			aabbEntity_hide(entity->getID());
+		}
 	}
 }
 
@@ -514,17 +520,35 @@ void FabiEngine3D::gameEntity_showAll()
 	for (auto entity : _core->_gameEntityManager.getEntities())
 	{
 		entity->setEnabled(true);
+
+		// Show possible AABB
+		if (aabbEntity_isExisting(entity->getID()))
+		{
+			aabbEntity_show(entity->getID());
+		}
 	}
 }
 
 void FabiEngine3D::gameEntity_hide(const string& ID)
 {
 	_core->_gameEntityManager.getEntity(ID)->setEnabled(false);
+
+	// Hide possible AABB
+	if (aabbEntity_isExisting(ID))
+	{
+		aabbEntity_hide(ID);
+	}
 }
 
 void FabiEngine3D::gameEntity_show(const string& ID)
 {
 	_core->_gameEntityManager.getEntity(ID)->setEnabled(true);
+	
+	// Show possible AABB
+	if (aabbEntity_isExisting(ID))
+	{
+		aabbEntity_show(ID);
+	}
 }
 
 void FabiEngine3D::gameEntity_setDiffuseMap(const string& ID, const string& fileName)
@@ -1017,6 +1041,16 @@ void FabiEngine3D::aabbEntity_bindToGameEntityGroup(const string& parentID, vec3
 void FabiEngine3D::aabbEntity_delete(const string& ID)
 {
 	_core->_aabbEntityManager.deleteEntity(ID, EntityType::AABB);
+}
+
+void FabiEngine3D::aabbEntity_hide(const string& ID)
+{
+	_core->_aabbEntityManager.getEntity(ID)->setEnabled(false);
+}
+
+void FabiEngine3D::aabbEntity_show(const string& ID)
+{
+	_core->_aabbEntityManager.getEntity(ID)->setEnabled(true);
 }
 
 void FabiEngine3D::aabbEntity_setResponsiveness(const string& ID, bool responsive)

@@ -234,11 +234,13 @@ public:
 	bool billboardEntity_isTransparent(const string& ID);
 
 	// AABB entity interface
-	void aabbEntity_deleteAll();
 	void aabbEntity_add(const string& ID, vec3 T, vec3 S, bool responsive);
 	void aabbEntity_bindToGameEntity(const string& parentID, vec3 S, bool responsive);
 	void aabbEntity_bindToGameEntityGroup(const string& parentID, vec3 S, bool responsive);
+	void aabbEntity_deleteAll();
 	void aabbEntity_delete(const string& ID);
+	void aabbEntity_hide(const string& ID);
+	void aabbEntity_show(const string& ID);
 	void aabbEntity_setResponsiveness(const string& ID, bool responsive);
 	void aabbEntity_setGroupResponsiveness(const string& ID, bool responsive);
 	void aabbEntity_setPosition(const string& ID, vec3 position);

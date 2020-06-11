@@ -8,7 +8,7 @@ void RenderEngine::_renderSkyEntity()
 		// Bind
 		_skyEntityRenderer.bind();
 
-		// Render
+		// Render SKY entity
 		_skyEntityRenderer.render(_entityBus->getSkyEntity());
 
 		// Unbind
@@ -29,7 +29,7 @@ void RenderEngine::_renderTerrainEntity()
 			_terrainEntityRenderer.placeLightEntity(light);
 		}
 
-		// Render terrain
+		// Render TERRAIN entity
 		_terrainEntityRenderer.render(_entityBus->getTerrainEntity());
 
 		// Unbind
@@ -44,7 +44,7 @@ void RenderEngine::_renderWaterEntity()
 		// Bind
 		_waterEntityRenderer.bind();
 
-		// Render water
+		// Render WATER entity
 		_waterEntityRenderer.render(_entityBus->getWaterEntity());
 
 		// Unbind
@@ -63,7 +63,7 @@ void RenderEngine::_renderGameEntities()
 		_gameEntityRenderer.placeLightEntity(light);
 	}
 
-	// Render game entities
+	// Render GAME entities
 	for (auto & entity : _entityBus->getGameEntities())
 	{
 		_gameEntityRenderer.render(entity);
@@ -78,7 +78,7 @@ void RenderEngine::_renderBillboardEntities()
 	// Bind
 	_billboardEntityRenderer.bind();
 
-	// Render game entities
+	// Render BILLBOARD entities
 	for (auto & entity : _entityBus->getBillboardEntities())
 	{
 		_billboardEntityRenderer.render(entity);
@@ -92,11 +92,16 @@ void RenderEngine::_renderAabbEntities()
 {
 	if (_shaderBus.isAabbFrameEnabled())
 	{
+		// Bind
 		_aabbEntityRenderer.bind();
+
+		// Render AABB entities
 		for (auto& entity : _entityBus->getAabbEntities())
 		{
 			_aabbEntityRenderer.render(entity);
 		}
+
+		// Unbind
 		_aabbEntityRenderer.unbind();
 	}
 }

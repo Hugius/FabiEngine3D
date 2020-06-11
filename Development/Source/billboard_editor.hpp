@@ -32,8 +32,8 @@ private:
 	bool _billboardRemovalEnabled = false;
 	bool _isLoaded = false;
 
-	const vec3 _defaultCameraPosition = vec3(0.0f, 2.5f, 5.0f);
-	const vec3 _billboardPosition = vec3(0.0f, 2.5f, 0.0f);
+	const vec3 _defaultCameraPosition = vec3(0.0f, 1.5f, 5.0f);
+	const vec3 _billboardPosition = vec3(0.0f, 1.5f, 0.0f);
 	const float _scrollWheelDivider = 250.0f;
 	float _cameraRotationSpeed = 0.0f;
 	float _totalCameraRotation = 0.0f;

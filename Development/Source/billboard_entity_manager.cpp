@@ -30,12 +30,12 @@ void BillboardEntityManager::addBillboardEntity(const string& ID, vec3 color, ve
 	// Load OBJ model
 	float plane_data[] =
 	{
-		-1.0f,  1.0f, 0.0f, 0.0f, 1.0f,
-		-1.0f, -1.0f, 0.0f, 0.0f, 0.0f,
-		 1.0f, -1.0f, 0.0f, 1.0f, 0.0f,
-		 1.0f, -1.0f, 0.0f, 1.0f, 0.0f,
-		 1.0f,  1.0f, 0.0f, 1.0f, 1.0f,
-		-1.0f,  1.0f, 0.0f, 0.0f, 1.0f
+		-0.5f,  1.0f, 0.0f, 0.0f, 1.0f,
+		-0.5f,  0.0f, 0.0f, 0.0f, 0.0f,
+		 0.5f,  0.0f, 0.0f, 1.0f, 0.0f,
+		 0.5f,  0.0f, 0.0f, 1.0f, 0.0f,
+		 0.5f,  1.0f, 0.0f, 1.0f, 1.0f,
+		-0.5f,  1.0f, 0.0f, 0.0f, 1.0f
 	};
 
 	// Create entity
@@ -69,34 +69,11 @@ void BillboardEntityManager::addBillboardEntity
 	vec3 T, vec3 R, vec3 S, bool facingCameraX, bool facingCameraY
 )
 {
-	// Load OBJ model
-	float plane_data[] =
-	{
-		-1.0f,  1.0f, 0.0f, 0.0f, 1.0f,
-		-1.0f, -1.0f, 0.0f, 0.0f, 0.0f,
-		 1.0f, -1.0f, 0.0f, 1.0f, 0.0f,
-		 1.0f, -1.0f, 0.0f, 1.0f, 0.0f,
-		 1.0f,  1.0f, 0.0f, 1.0f, 1.0f,
-		-1.0f,  1.0f, 0.0f, 0.0f, 1.0f
-	};
-
-	// Create entity
-	_createEntity(EntityType::BILLBOARD, ID)->load(ID);
-	getEntity(ID)->addOglBuffer(new OpenGLBuffer(SHAPE_SURFACE, plane_data, sizeof(plane_data) / sizeof(float)));
-
-	// Texture
+	addBillboardEntity(ID, color, T, R, S, facingCameraX, facingCameraY);
 	getEntity(ID)->setDiffuseMap(_texLoader.getText(text, "../Game/Fonts/" + fontPath));
-
-	// Other
-	getEntity(ID)->setTranslation(T);
-	getEntity(ID)->setRotation(R);
-	getEntity(ID)->setInitialRotation(R);
-	getEntity(ID)->setScaling(S);
 	getEntity(ID)->setTransparent(true);
-	getEntity(ID)->setCameraFacing({ facingCameraX, facingCameraY });
 	getEntity(ID)->setText(text);
 	getEntity(ID)->setFontPath(fontPath);
-	getEntity(ID)->setColor(color);
 }
 
 void BillboardEntityManager::update()

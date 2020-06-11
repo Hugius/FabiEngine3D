@@ -185,23 +185,11 @@ public:
 	string		   gameEntity_getReflectionMapPath(const string& ID);
 	vector<string> gameEntity_getGroupIDs(const string& ID);
 
-	// Billboard entity interface
+	// Billboard entity interface (core)
 	void billBoardEntity_add
 	(
 		const string& ID, vec3 color,
 		vec3 T, vec3 R, vec2 S, bool facingCameraX, bool facingCameraY, bool visible = true
-	);
-	void billBoardEntity_add
-	(
-		const string& ID, const string& text,
-		const string& fontPath, vec3 color,
-		vec3 T, vec3 R, vec2 S, bool facingCameraX, bool facingCameraY, bool visible = true
-	);
-	void billBoardEntity_add
-	(
-		const string& ID, const string& texturePath,
-		vec3 T, vec3 R, vec2 S,
-		bool transparent, bool facingCameraX, bool facingCameraY, bool textureFiltering, bool visible = true
 	);
 	void billboardEntity_deleteAll();
 	void billboardEntity_delete(const string& ID);
@@ -217,21 +205,53 @@ public:
 	void billboardEntity_setRotation(const string& ID, vec3 rotation);
 	void billboardEntity_setSize(const string& ID, vec2 size);
 	void billboardEntity_setColor(const string& ID, vec3 color);
-	void billboardEntity_setDiffuseMap(const string& ID, const string& texturePath, bool textureFiltering);
-	void billboardEntity_setTransparent(const string& ID, bool enabled);
 	vec3 billboardEntity_getPosition(const string& ID);
 	vec3 billboardEntity_getRotation(const string& ID);
 	vec2 billboardEntity_getSize(const string& ID);
 	vec3 billboardEntity_getColor(const string& ID);
 	void billboardEntity_enable(const string& ID);
 	void billboardEntity_disable(const string& ID);
-	void billBoardEntity_playSpriteAnimation(const string& ID, int rows, int columns, int maxAnimationRepeats, int frameStep);
-	void billboardEntity_stopSpriteAnimation(const string& ID);
-	void billBoardEntity_changeText(const string& ID, const string& text, vec3 color);
+	void billboardEntity_setCameraFacingX(const string& ID, bool enabled);
+	void billboardEntity_setCameraFacingY(const string& ID, bool enabled);
+	bool billboardEntity_isFacingCameraX(const string& ID);
+	bool billboardEntity_isFacingCameraY(const string& ID);
+
+	// Billboard entity interface (diffusemap)
+	void billBoardEntity_add
+	(
+		const string& ID, const string& texturePath,
+		vec3 T, vec3 R, vec2 S,
+		bool transparent, bool facingCameraX, bool facingCameraY, bool textureFiltering, bool visible = true
+	);
+	void billboardEntity_setDiffuseMap(const string& ID, const string& texturePath, bool textureFiltering);
+	void billboardEntity_setTransparent(const string& ID, bool enabled);
 	void billboardEntity_setUvRepeat(const string& ID, float repeat);
+	string billboardEntity_getDiffuseMapPath(const string& ID);
+	bool billboardEntity_isTransparent(const string& ID);
+
+	// Billboard entity interface (text)
+	void billBoardEntity_add
+	(
+		const string& ID, const string& text,
+		const string& fontPath, vec3 color,
+		vec3 T, vec3 R, vec2 S, bool facingCameraX, bool facingCameraY, bool visible = true
+	);
+	void billBoardEntity_setFont(const string& ID, const string& fontPath);
+	void billBoardEntity_setTextContent(const string& ID, const string& textContent);
+	string billboardEntity_getFontPath(const string& ID);
+	string billboardEntity_getTextContent(const string& ID);
+	
+	// Billboard entity interface (animation)
+	void billBoardEntity_playSpriteAnimation(const string& ID, int maxAnimationRepeats);
+	void billboardEntity_stopSpriteAnimation(const string& ID);
+	void billboardEntity_setAnimationRows(const string& ID, int rows);
+	void billboardEntity_setAnimationColumns(const string& ID, int columns);
+	void billboardEntity_setAnimationFramestep(const string& ID, int framestep);
 	bool billboardEntity_isAnimationFinished(const string& ID);
 	bool billboardEntity_isAnimationPlaying(const string& ID);
-	bool billboardEntity_isTransparent(const string& ID);
+	int billboardEntity_getAnimationRows(const string& ID);
+	int billboardEntity_getAnimationColumns(const string& ID);
+	int billboardEntity_getAnimationFramestep(const string& ID);
 
 	// AABB entity interface
 	void aabbEntity_add(const string& ID, vec3 T, vec3 S, bool responsive);

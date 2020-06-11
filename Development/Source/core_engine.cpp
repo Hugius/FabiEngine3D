@@ -18,7 +18,7 @@ CoreEngine::CoreEngine(FabiEngine3D & fe3d) :
 	_terrainEntityManager(_objLoader, _texLoader, _shaderBus),
 	_waterEntityManager(_objLoader, _texLoader, _shaderBus),
 	_gameEntityManager(_objLoader, _texLoader, _shaderBus),
-	_billboardEntityManager(_objLoader, _texLoader, _shaderBus),
+	_billboardEntityManager(_objLoader, _texLoader, _shaderBus, _cameraManager),
 	_aabbEntityManager(_objLoader, _texLoader, _shaderBus),
 	_lightEntityManager(_objLoader, _texLoader, _shaderBus),
 	_guiEntityManager(_objLoader, _texLoader, _shaderBus),

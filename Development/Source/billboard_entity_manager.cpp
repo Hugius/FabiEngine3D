@@ -2,8 +2,9 @@
 #include "shader_bus.hpp"
 #include "Logger.hpp"
 
-BillboardEntityManager::BillboardEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, ShaderBus& shaderBus) :
-	BaseEntityManager(objLoader, texLoader, shaderBus)
+BillboardEntityManager::BillboardEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, ShaderBus& shaderBus, CameraManager& camera) :
+	BaseEntityManager(objLoader, texLoader, shaderBus),
+	_camera(camera)
 {
 
 }
@@ -47,18 +48,20 @@ void BillboardEntityManager::addBillboardEntity(const string& ID, vec3 color, ve
 	getEntity(ID)->setRotation(R);
 	getEntity(ID)->setInitialRotation(R);
 	getEntity(ID)->setScaling(S);
-	getEntity(ID)->setCameraFacing({ facingCameraX, facingCameraY });
+	getEntity(ID)->setCameraFacingX(facingCameraX);
+	getEntity(ID)->setCameraFacingY(facingCameraY);
 }
 
 void BillboardEntityManager::addBillboardEntity
 (
-	const string & ID, const string & textureName,
+	const string & ID, const string & texturePath,
 	vec3 T, vec3 R, vec3 S,
 	bool transparent, bool facingCameraX, bool facingCameraY, bool textureFiltering
 )
 {
 	addBillboardEntity(ID, vec3(1.0f), T, R, S, facingCameraX, facingCameraY);
-	getEntity(ID)->setDiffuseMap(_texLoader.getTexture(textureName, textureFiltering, true));
+	getEntity(ID)->setDiffuseMap(_texLoader.getTexture(texturePath, textureFiltering, true));
+	getEntity(ID)->setDiffuseMapPath(texturePath);
 	getEntity(ID)->setTransparent(transparent);
 }
 
@@ -72,7 +75,7 @@ void BillboardEntityManager::addBillboardEntity
 	addBillboardEntity(ID, color, T, R, S, facingCameraX, facingCameraY);
 	getEntity(ID)->setDiffuseMap(_texLoader.getText(text, "../Game/Fonts/" + fontPath));
 	getEntity(ID)->setTransparent(true);
-	getEntity(ID)->setText(text);
+	getEntity(ID)->setTextContent(text);
 	getEntity(ID)->setFontPath(fontPath);
 }
 
@@ -84,15 +87,29 @@ void BillboardEntityManager::update()
 		auto * entity = getEntity(baseEntity->getID());
 
 		// 3D camera facing
-		if (entity->getCameraFacing() != ivec2(0))
+		auto facingX = entity->isCameraFacingX();
+		auto facingY = entity->isCameraFacingY();
+		vec3 rotation = entity->getInitialRotation();
+		if (facingX || facingY)
 		{
-			auto facing = entity->getCameraFacing();
-			vec3 rotation = vec3(0.0f);
-			rotation.x = (((_shaderBus.getCameraPitch())) + entity->getInitialRotation().x) * facing.x;
-			rotation.y = (((-_shaderBus.getCameraYaw() - 90.0f)) + entity->getInitialRotation().y) * facing.y;
-			rotation.z = entity->getInitialRotation().z;
-			entity->setRotation(rotation);
+			if (_camera.isFirstPersonViewEnabled())
+			{
+				rotation.x = (((_shaderBus.getCameraPitch())) + entity->getInitialRotation().x) * facingX;
+				rotation.y = (((-_shaderBus.getCameraYaw() - 90.0f)) + entity->getInitialRotation().y) * facingY;
+				rotation.z = entity->getInitialRotation().z;
+			}
+			else
+			{
+				vec3 direction = entity->getTranslation() - _shaderBus.getCameraPos();
+				float radiansX = atan2f(direction.y, (fabsf(direction.x) + fabsf(direction.z)) / 2.0f);
+				float radiansY = atan2f(direction.z, direction.x);
+				rotation.x = (radiansX * (180.0f / 3.141592653589793238463f)) * facingX;
+				rotation.y = (-(radiansY * (180.0f / 3.141592653589793238463f)) - 90.0f) * facingY;
+			}
 		}
+
+		// Update rotation
+		entity->setRotation(rotation);
 		
 		// Calculate model matrix
 		if (entity->isEnabled())
@@ -103,7 +120,7 @@ void BillboardEntityManager::update()
 		// Update sprite animation
 		if (entity->hasSpriteAnimation() && entity->getAnimationRepeats() != entity->getMaxAnimationRepeats())
 		{
-			if (entity->getPassedFrames() >= entity->getMaxPassedFrames()) // Is allowed to update
+			if (entity->getPassedFrames() >= entity->getMaxFramestep()) // Is allowed to update
 			{
 				entity->resetPassedFrames(); // Reset counter
 

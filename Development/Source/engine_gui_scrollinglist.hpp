@@ -31,6 +31,7 @@ private:
 	
 	float _scrollingOffset = 0.0f;
 	float _scrollingSpeed = 0.0f;
+	const float _scrollWheelDivider = 200.0f;
 
 	const vec3 _buttonColor;
 	const vec3 _buttonHoverColor;

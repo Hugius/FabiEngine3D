@@ -1,5 +1,5 @@
 #include "billboard_entity.hpp"
-#include <iostream>
+
 void BillboardEntity::updateModelMatrix()
 {
 	_modelMatrix = mat4(1.0f);
@@ -10,9 +10,14 @@ void BillboardEntity::updateModelMatrix()
 	_modelMatrix = glm::scale(_modelMatrix, _scaling);
 }
 
-void BillboardEntity::setCameraFacing(ivec2 val)
+void BillboardEntity::setCameraFacingX(bool val)
 {
-	_cameraFacing = val;
+	_isCameraFacingX = val;
+}
+
+void BillboardEntity::setCameraFacingY(bool val)
+{
+	_isCameraFacingY = val;
 }
 
 void BillboardEntity::setDiffuseMap(GLuint val)
@@ -60,7 +65,7 @@ void BillboardEntity::scale(vec3 val)
 	_scaling += val;
 }
 
-void BillboardEntity::setText(const string & text)
+void BillboardEntity::setTextContent(const string & text)
 {
 	_textContent = text;
 }
@@ -70,18 +75,20 @@ void BillboardEntity::setFontPath(const string& fontPath)
 	_fontPath = fontPath;
 }
 
+void BillboardEntity::setDiffuseMapPath(const string& diffuseMapPath)
+{
+	_diffuseMapPath = diffuseMapPath;
+}
+
 void BillboardEntity::setTransparent(bool val)
 {
 	_isTransparent = val;
 }
 
-void BillboardEntity::playSpriteAnimation(int rows, int columns, int maxAnimationRepeats, int frameStep)
+void BillboardEntity::playSpriteAnimation(int maxAnimationRepeats)
 {
 	_hasSpriteAnimation = true;
-	_totalSpriteRows = rows;
-	_totalSpriteColumns = columns;
-	_totalPassedFrames = 0;
-	_maxPassedFrames = frameStep;
+	_passedFrames = 0;
 	_animationRepeats = 0;
 	_maxAnimationRepeats = maxAnimationRepeats;
 }
@@ -101,19 +108,29 @@ void BillboardEntity::setSpriteColumnIndex(int val)
 	_spriteColumnIndex = val;
 }
 
-void BillboardEntity::setMaxPassedFrames(int val)
+void BillboardEntity::setTotalSpriteRows(int val)
 {
-	_maxPassedFrames = val;
+	_totalSpriteRows = val;
+}
+
+void BillboardEntity::setTotalSpriteColumns(int val)
+{
+	_totalSpriteColumns = val;
+}
+
+void BillboardEntity::setMaxFramestep(int val)
+{
+	_maxFramestep = val;
 }
 
 void BillboardEntity::increasePassedFrames()
 {
-	_totalPassedFrames++;
+	_passedFrames++;
 }
 
 void BillboardEntity::resetPassedFrames()
 {
-	_totalPassedFrames = 0;
+	_passedFrames = 0;
 }
 
 void BillboardEntity::increaseAnimationRepeats()
@@ -161,7 +178,7 @@ const vec3 BillboardEntity::getColor() const
 	return _color;
 }
 
-const string & BillboardEntity::getText() const
+const string & BillboardEntity::getTextContent() const
 {
 	return _textContent;
 }
@@ -171,6 +188,11 @@ const string& BillboardEntity::getFontPath() const
 	return _fontPath;
 }
 
+const string& BillboardEntity::getDiffuseMapPath() const
+{
+	return _diffuseMapPath;
+}
+
 const float BillboardEntity::getUvRepeat() const
 {
 	return _uvRepeat;
@@ -178,12 +200,12 @@ const float BillboardEntity::getUvRepeat() const
 
 const int BillboardEntity::getPassedFrames() const
 {
-	return _totalPassedFrames;
+	return _passedFrames;
 }
 
-const int BillboardEntity::getMaxPassedFrames() const
+const int BillboardEntity::getMaxFramestep() const
 {
-	return _maxPassedFrames;
+	return _maxFramestep;
 }
 
 const int BillboardEntity::getTotalSpriteRows() const
@@ -216,11 +238,6 @@ const int BillboardEntity::getMaxAnimationRepeats() const
 	return _maxAnimationRepeats;
 }
 
-const ivec2 BillboardEntity::getCameraFacing() const
-{
-	return _cameraFacing;
-}
-
 const bool BillboardEntity::isTransparent() const
 {
 	return _isTransparent;
@@ -229,4 +246,14 @@ const bool BillboardEntity::isTransparent() const
 const bool BillboardEntity::hasSpriteAnimation() const
 {
 	return _hasSpriteAnimation;
+}
+
+const bool BillboardEntity::isCameraFacingX() const
+{
+	return _isCameraFacingX;
+}
+
+const bool BillboardEntity::isCameraFacingY() const
+{
+	return _isCameraFacingY;
 }

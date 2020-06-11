@@ -94,7 +94,7 @@ void EngineGuiWriteField::_updateTyping()
 		{
 			// Writable characters
 			string lowercaseCharacters = " abcdefghijklmnopqrstuvwxyz1234567890";
-			string specialCharacters = ")!@#$%^&*(";
+			string specialCharacters   = ")!@#$%^&*(";
 
 			// Add character
 			for (auto& c : lowercaseCharacters)

@@ -118,13 +118,13 @@ void EngineGuiScrollingList::_updateScolling()
 			{
 				if (mousePos.y > _originalPosition.y - (_originalSize.y / 2.0f) && mousePos.y < _originalPosition.y + (_originalSize.y / 2.0f))
 				{
-					float scrollingAcceleration = (float(-_fe3d.input_getMouseWheelY()) * 0.001f);
+					float scrollingAcceleration = (float(-_fe3d.input_getMouseWheelY()) / _scrollWheelDivider);
 					_scrollingSpeed += scrollingAcceleration;
 				}
 			}
 
 			// Slowing down the scrolling speed
-			_scrollingSpeed *= 0.995f;
+			_scrollingSpeed *= 0.95f;
 
 			// Update the total offset
 			_scrollingOffset += _scrollingSpeed;

@@ -38,10 +38,6 @@ private:
 	float _cameraRotationSpeed = 0.0f;
 	float _totalCameraRotation = 0.0f;
 
-	int _animationRowCount = 0;
-	int _animationColumnCount = 0;
-	int _animationSpeed = 0;
-
 	FabiEngine3D& _fe3d;
 	shared_ptr<EngineGuiManager> _gui;
 

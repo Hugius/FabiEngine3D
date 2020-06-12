@@ -54,8 +54,8 @@ void BillboardEditor::initializeGUI()
 	
 	// Left-viewport: mainWindow - billboardEditingText
 	_window->addScreen("billboardEditingText");
-	_window->getScreen("billboardEditingText")->addButton("color", vec2(0.0f, 0.63f), vec2(1.0f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Color", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
-	_window->getScreen("billboardEditingText")->addButton("font", vec2(0.0f, 0.21), vec2(0.8f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Font", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_window->getScreen("billboardEditingText")->addButton("font", vec2(0.0f, 0.63f), vec2(0.8f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Font", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_window->getScreen("billboardEditingText")->addButton("color", vec2(0.0f, 0.21), vec2(1.0f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Color", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 	_window->getScreen("billboardEditingText")->addButton("content", vec2(0.0f, -0.21), vec2(1.0f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Content", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 	_window->getScreen("billboardEditingText")->addButton("back", vec2(0.0f, -0.63f), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Go back", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 }
@@ -116,42 +116,39 @@ void BillboardEditor::load()
 		std::istringstream iss(line);
 
 		// Extract from file
-		iss >> size.x >> size.y >> color.r >> color.g >> color.b >> facingX >> facingY >> diffusePath >>
+		iss >> name >> size.x >> size.y >> color.r >> color.g >> color.b >> facingX >> facingY >> diffusePath >>
 			transparent >> fontPath >> content >> playing >> rows >> columns >> framestep;
-
+		
 		// Run checks on string values
 		diffusePath = (diffusePath == "-") ? "" : diffusePath;
 		fontPath = (fontPath == "-") ? "" : fontPath;
 		content = (content == "-") ? "" : content;
 
-		// If billboard name not existing yet
-		if (std::find(_billboardNames.begin(), _billboardNames.end(), name) == _billboardNames.end())
-		{
-			// Add billboard name
-			_billboardNames.push_back(name);
+		// Add billboard name
+		_billboardNames.push_back(name);
 
-			// Check if billboard has a diffuse map
-			if (diffusePath != "")
+		// Check if billboard has a diffuse map
+		if (diffusePath != "")
+		{
+			_fe3d.billBoardEntity_add(name, diffusePath, _billboardPosition, vec3(0.0f), size, transparent, facingX, facingY, false, false);
+			_fe3d.billboardEntity_setColor(name, color);
+
+			// Playing sprite animation
+			if (playing)
 			{
-				// Animation aspects
 				_fe3d.billboardEntity_setAnimationFramestep(name, framestep);
 				_fe3d.billboardEntity_setAnimationRows(name, rows);
 				_fe3d.billboardEntity_setAnimationColumns(name, columns);
-
-				// Playing sprite animation
-				if (playing)
-				{
-					_fe3d.billBoardEntity_playSpriteAnimation(name, -1);
-				}
+				_fe3d.billBoardEntity_playSpriteAnimation(name, -1);
 			}
-			else if (content != "")
-			{
-				_fe3d.billBoardEntity_add(name, content, fontPath, color, _billboardPosition, vec3(0.0f), size, facingX, facingY);
-			}
-			else
-			{
-				_fe3d.billBoardEntity_add(name, color, _billboardPosition, vec3(0.0f), size, facingX, facingY);
-			}
+		}
+		else if (content != "")
+		{
+			_fe3d.billBoardEntity_add(name, content, fontPath, color, _billboardPosition, vec3(0.0f), size, facingX, facingY, false);
+		}
+		else
+		{
+			_fe3d.billBoardEntity_add(name, color, _billboardPosition, vec3(0.0f), size, facingX, facingY, false);
 		}
 	}
 
@@ -159,7 +156,7 @@ void BillboardEditor::load()
 	file.close();
 
 	// Logging
-	_fe3d.logger_throwInfo("Billboard editor data from project \"" + _currentProjectName + "\" saved!");
+	_fe3d.logger_throwInfo("Billboard editor data from project \"" + _currentProjectName + "\" loaded!");
 }
 
 void BillboardEditor::save()
@@ -179,15 +176,24 @@ void BillboardEditor::save()
 		// Write billboard data into file
 		for (auto& billboardName : _billboardNames)
 		{
+			// Convert string values
+			string diffusePath = _fe3d.billboardEntity_getDiffuseMapPath(billboardName);
+			string fontPath = _fe3d.billboardEntity_getFontPath(billboardName);
+			string textContent = _fe3d.billboardEntity_getTextContent(billboardName);
+			diffusePath = (diffusePath == "") ? "-" : diffusePath;
+			fontPath = (fontPath == "") ? "-" : fontPath;
+			textContent = (textContent == "") ? "-" : textContent;
+
+			// Export data
 			file << billboardName
 				<< " " << _fe3d.billboardEntity_getSize(billboardName).x << " " << _fe3d.billboardEntity_getSize(billboardName).y
 				<< " " << _fe3d.billboardEntity_getColor(billboardName).r << " " << _fe3d.billboardEntity_getColor(billboardName).g
 				<< " " << _fe3d.billboardEntity_getColor(billboardName).b << " " << _fe3d.billboardEntity_isFacingCameraX(billboardName)
-				<< " " << _fe3d.billboardEntity_isFacingCameraY(billboardName) << " " << _fe3d.billboardEntity_getDiffuseMapPath(billboardName)
-				<< " " << _fe3d.billboardEntity_isTransparent(billboardName) << " " << _fe3d.billboardEntity_getFontPath(billboardName)
-				<< " " << _fe3d.billboardEntity_getTextContent(billboardName) << " " << _fe3d.billboardEntity_isAnimationPlaying(billboardName)
-				<< " " << _fe3d.billboardEntity_getAnimationRows(billboardName) << " " << _fe3d.billboardEntity_getAnimationColumns(billboardName)
-				<< " " << _fe3d.billboardEntity_getAnimationFramestep(billboardName);
+				<< " " << _fe3d.billboardEntity_isFacingCameraY(billboardName) << " " << diffusePath
+				<< " " << _fe3d.billboardEntity_isTransparent(billboardName) << " " << fontPath << " " << textContent
+				<< " " << _fe3d.billboardEntity_isAnimationPlaying(billboardName) << " " << _fe3d.billboardEntity_getAnimationRows(billboardName)
+				<< " " << _fe3d.billboardEntity_getAnimationColumns(billboardName) << " " << _fe3d.billboardEntity_getAnimationFramestep(billboardName)
+				<< std::endl;
 		}
 
 		// Close file

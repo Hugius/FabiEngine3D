@@ -50,6 +50,7 @@ void BillboardEntityManager::addBillboardEntity(const string& ID, vec3 color, ve
 	getEntity(ID)->setScaling(S);
 	getEntity(ID)->setCameraFacingX(facingCameraX);
 	getEntity(ID)->setCameraFacingY(facingCameraY);
+	getEntity(ID)->setColor(color);
 }
 
 void BillboardEntityManager::addBillboardEntity
@@ -73,7 +74,7 @@ void BillboardEntityManager::addBillboardEntity
 )
 {
 	addBillboardEntity(ID, color, T, R, S, facingCameraX, facingCameraY);
-	getEntity(ID)->setDiffuseMap(_texLoader.getText(text, "../Game/Fonts/" + fontPath));
+	getEntity(ID)->setDiffuseMap(_texLoader.getText(text, fontPath));
 	getEntity(ID)->setTransparent(true);
 	getEntity(ID)->setTextContent(text);
 	getEntity(ID)->setFontPath(fontPath);

@@ -822,15 +822,15 @@ void FabiEngine3D::billBoardEntity_add(const string& ID, vec3 color, vec3 T, vec
 	_core->_billboardEntityManager.getEntity(ID)->setEnabled(visible);
 }
 
-void FabiEngine3D::billBoardEntity_add(const string& ID, const string& text, const string& fontPath, vec3 color, vec3 T, vec3 R, vec2 S, bool facingCameraX, bool facingCameraY, bool visible)
-{
-	_core->_billboardEntityManager.addBillboardEntity(ID, text, fontPath, color, T, R, vec3(S.x, S.y, 1.0f), facingCameraX, facingCameraY);
-	_core->_billboardEntityManager.getEntity(ID)->setEnabled(visible);
-}
-
 void FabiEngine3D::billBoardEntity_add(const string& ID, const string& textureName, vec3 T, vec3 R, vec2 S, bool transparent, bool facingCameraX, bool facingCameraY, bool textureFiltering, bool visible)
 {
 	_core->_billboardEntityManager.addBillboardEntity(ID, textureName, T, R, vec3(S.x, S.y, 1.0f), transparent, facingCameraX, facingCameraY, textureFiltering);
+	_core->_billboardEntityManager.getEntity(ID)->setEnabled(visible);
+}
+
+void FabiEngine3D::billBoardEntity_add(const string& ID, const string& text, const string& fontPath, vec3 color, vec3 T, vec3 R, vec2 S, bool facingCameraX, bool facingCameraY, bool visible)
+{
+	_core->_billboardEntityManager.addBillboardEntity(ID, text, fontPath, color, T, R, vec3(S.x, S.y, 1.0f), facingCameraX, facingCameraY);
 	_core->_billboardEntityManager.getEntity(ID)->setEnabled(visible);
 }
 

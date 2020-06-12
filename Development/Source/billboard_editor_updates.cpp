@@ -197,9 +197,9 @@ void BillboardEditor::_updateBillboardEditing()
 			_fe3d.billboardEntity_setSize(_currentBillboardName, newSize / 10.0f);
 
 			// Update facing buttons text
-			string textEntityIDx = screen->getButton("facingY")->getTextfield()->getEntityID();
+			string textEntityIDx = screen->getButton("facingX")->getTextfield()->getEntityID();
 			string textEntityIDy = screen->getButton("facingY")->getTextfield()->getEntityID();
-			bool isFacedX = _fe3d.billboardEntity_isFacingCameraY(_currentBillboardName);
+			bool isFacedX = _fe3d.billboardEntity_isFacingCameraX(_currentBillboardName);
 			bool isFacedY = _fe3d.billboardEntity_isFacingCameraY(_currentBillboardName);
 			_fe3d.textEntity_setTextContent(textEntityIDx, isFacedX ? "Facing X: ON" : "Facing X: OFF");
 			_fe3d.textEntity_setTextContent(textEntityIDy, isFacedY ? "Facing Y: ON" : "Facing Y: OFF");
@@ -306,13 +306,7 @@ void BillboardEditor::_updateBillboardEditing()
 		{
 			if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
 			{
-				if (screen->getButton("color")->isHovered())
-				{
-					_gui->getGlobalScreen()->addValueForm("colorR", "R(0-255)", _fe3d.billboardEntity_getColor(_currentBillboardName).r * 255.0f, vec2(-0.25f, 0.0f), vec2(0.2f, 0.1f));
-					_gui->getGlobalScreen()->addValueForm("colorG", "G(0-255)", _fe3d.billboardEntity_getColor(_currentBillboardName).g * 255.0f, vec2(0.0f, 0.0f), vec2(0.2f, 0.1f));
-					_gui->getGlobalScreen()->addValueForm("colorB", "B(0-255)", _fe3d.billboardEntity_getColor(_currentBillboardName).b * 255.0f, vec2(0.25f, 0.0f), vec2(0.2f, 0.1f));
-				}
-				else if (screen->getButton("font")->isHovered())
+				if (screen->getButton("font")->isHovered())
 				{
 					string path = "User\\Assets\\Fonts\\";
 					string fileName = _fe3d.misc_getWinExplorerFilename(path, "TTF");
@@ -323,6 +317,12 @@ void BillboardEditor::_updateBillboardEditing()
 						_fe3d.billBoardEntity_setFont(_currentBillboardName, path + fileName);
 					}
 				}
+				else if (screen->getButton("color")->isHovered())
+				{
+					_gui->getGlobalScreen()->addValueForm("colorR", "R(0-255)", _fe3d.billboardEntity_getColor(_currentBillboardName).r * 255.0f, vec2(-0.25f, 0.0f), vec2(0.2f, 0.1f));
+					_gui->getGlobalScreen()->addValueForm("colorG", "G(0-255)", _fe3d.billboardEntity_getColor(_currentBillboardName).g * 255.0f, vec2(0.0f, 0.0f), vec2(0.2f, 0.1f));
+					_gui->getGlobalScreen()->addValueForm("colorB", "B(0-255)", _fe3d.billboardEntity_getColor(_currentBillboardName).b * 255.0f, vec2(0.25f, 0.0f), vec2(0.2f, 0.1f));
+				}
 				else if (screen->getButton("content")->isHovered())
 				{
 					_gui->getGlobalScreen()->addValueForm("content", "Text content", _fe3d.billboardEntity_getTextContent(_currentBillboardName), vec2(0.0f), vec2(0.3f, 0.1f));
@@ -332,6 +332,10 @@ void BillboardEditor::_updateBillboardEditing()
 					_window->setActiveScreen("billboardEditingMain");
 				}
 			}
+
+			// Updating buttons hoverability
+			screen->getButton("color")->setHoverable(_fe3d.billboardEntity_getFontPath(_currentBillboardName) != "");
+			screen->getButton("content")->setHoverable(_fe3d.billboardEntity_getFontPath(_currentBillboardName) != "");
 
 			// Setting text color
 			vec3 newColor = _fe3d.billboardEntity_getColor(_currentBillboardName) * 255.0f;

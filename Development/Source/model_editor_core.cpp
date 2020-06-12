@@ -272,6 +272,7 @@ void ModelEditor::_addModel(string modelName, string objName, string diffuseMapN
 			if (lightMapName != "")
 			{
 				_fe3d.gameEntity_setLightMap(modelName, lightMapName);
+				std::cout << "hoiiiiiiiii";
 			}
 
 			// Reflection map

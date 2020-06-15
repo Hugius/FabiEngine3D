@@ -55,9 +55,9 @@ void TerrainEntity::setSize(float val)
 	_size = val;
 }
 
-void TerrainEntity::setHeight(float val)
+void TerrainEntity::setMaxHeight(float val)
 {
-	_height = val;
+	_maxHeight = val;
 }
 
 void TerrainEntity::setBlendMapped(bool val)
@@ -115,9 +115,9 @@ const float TerrainEntity::getSize() const
 	return _size;
 }
 
-const float TerrainEntity::getHeight() const
+const float TerrainEntity::getMaxHeight() const
 {
-	return _height;
+	return _maxHeight;
 }
 
 const vector<float>& TerrainEntity::getPixelColors() const

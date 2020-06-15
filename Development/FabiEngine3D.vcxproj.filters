@@ -304,6 +304,15 @@
     <ClCompile Include="Source\billboard_editor_misc.cpp">
       <Filter>src\Editor System\Billboard Editor</Filter>
     </ClCompile>
+    <ClCompile Include="Source\entity_placer_core.cpp">
+      <Filter>src\Editor System\Entity Placer</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\entity_placer_misc.cpp">
+      <Filter>src\Editor System\Entity Placer</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\entity_placer_updates.cpp">
+      <Filter>src\Editor System\Entity Placer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\obj_loader.hpp">
@@ -549,6 +558,9 @@
     <ClInclude Include="Source\billboard_editor.hpp">
       <Filter>src\Editor System\Billboard Editor</Filter>
     </ClInclude>
+    <ClInclude Include="Source\entity_placer.hpp">
+      <Filter>src\Editor System\Entity Placer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -653,7 +665,7 @@
     <Filter Include="src\Editor System\Billboard Editor">
       <UniqueIdentifier>{4902a467-bd9d-455d-a931-8ac0469043e9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\Editor System\World Placer">
+    <Filter Include="src\Editor System\Entity Placer">
       <UniqueIdentifier>{73f39bce-8d65-416c-abaa-6ed990784a08}</UniqueIdentifier>
     </Filter>
   </ItemGroup>

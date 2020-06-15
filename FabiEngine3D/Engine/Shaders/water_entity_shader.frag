@@ -91,7 +91,7 @@ vec4 getMainColor()
 		vec3 lightDir      = normalize(u_dirLightPos - f_pos);
 		vec3 viewDir       = normalize(f_pos - u_cameraPos);
 		vec3 reflectDir    = reflect(normalize(lightDir), normal);
-		specStrength = pow(max(dot(reflectDir, viewDir), 0.0f), u_shininess) * 0.5f;
+		specStrength = pow(max(dot(reflectDir, viewDir), 0.0f), u_shininess);
 	}
 
 	// Finalizing fragment color

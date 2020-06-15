@@ -19,7 +19,7 @@ public:
 	void setBlendRepeatG(float val);
 	void setBlendRepeatB(float val);
 	void setSize(float val);
-	void setHeight(float val);
+	void setMaxHeight(float val);
 	void setBlendMapped(bool val);
 
 	// Textures
@@ -35,7 +35,7 @@ public:
 	const float getBlendRepeatG() const;
 	const float getBlendRepeatB() const;
 	const float getSize()         const;
-	const float getHeight()       const;
+	const float getMaxHeight()       const;
 
 	// Other
 	const vector<float>& getPixelColors() const;
@@ -54,7 +54,7 @@ private:
 	float _blendRepeatR = 1.0f;
 	float _blendRepeatG = 1.0f;
 	float _blendRepeatB = 1.0f;
-	float _height       = 0.0f;
+	float _maxHeight       = 0.0f;
 	float _size         = 0.0f;
 
 	bool _blendMapped = false;

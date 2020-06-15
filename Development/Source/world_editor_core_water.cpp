@@ -3,7 +3,7 @@
 #include <fstream>
 #include <sstream>
 
-void WorldEditor::_loadWaterData()
+void WorldEditor::loadWaterEntity()
 {
 	// Error checking
 	if (_currentProjectName == "")
@@ -122,4 +122,14 @@ void WorldEditor::_loadWaterEntity()
 	// Add new terrain
 	_fe3d.waterEntity_add("@water", vec3(0.0f, _waterHeight, 0.0f), _waterSize);
 	_fe3d.waterEntity_select("@water");
+	_fe3d.waterEntity_setReflective("@water", _waterReflectionEnabled);
+	_fe3d.waterEntity_setRefractive("@water", _waterRefractionEnabled);
+	_fe3d.waterEntity_setWaving("@water", _waterWavingEnabled);
+	_fe3d.waterEntity_setRippling("@water", _waterDudvmapPath, _waterRipplingEnabled);
+	_fe3d.waterEntity_setSpecular("@water", _waterNormalmapPath, _waterShininess, _waterSpecularEnabled);
+	_fe3d.waterEntity_setTransparency("@water", _waterTransparency);
+	_fe3d.waterEntity_setColor("@water", _waterColor);
+	_fe3d.waterEntity_setSurfaceHeight("@water", _waterHeight);
+	_fe3d.waterEntity_setUvRepeat("@water", _waterUvRepeat);
+	_fe3d.waterEntity_setSpeed("@water", _waterSpeed);
 }

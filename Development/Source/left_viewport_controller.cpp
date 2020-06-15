@@ -4,7 +4,8 @@ LeftViewportController::LeftViewportController(FabiEngine3D& fe3d, shared_ptr<En
 	ViewportController(fe3d, gui),
 	_modelEditor(fe3d, gui),
 	_worldEditor(fe3d, gui),
-	_billboardEditor(fe3d, gui)
+	_billboardEditor(fe3d, gui),
+	_entityPlacer(fe3d, gui, _modelEditor, _worldEditor)
 {
 
 }
@@ -25,6 +26,7 @@ void LeftViewportController::initialize()
 	_modelEditor.initializeGUI();
 	_worldEditor.initializeGUI();
 	_billboardEditor.initializeGUI();
+	_entityPlacer.initializeGUI();
 }
 
 void LeftViewportController::update()
@@ -50,12 +52,18 @@ void LeftViewportController::update()
 			_billboardEditor.load();
 			window->setActiveScreen("billboardManagement");
 		}
+		else if (screen->getButton("entityPlacer")->isHovered()) // Entity placer button
+		{
+			_entityPlacer.load();
+			window->setActiveScreen("placeManagement");
+		}
 	}
 
 	// Update all editors
 	_modelEditor.update();
 	_worldEditor.update();
 	_billboardEditor.update();
+	_entityPlacer.update();
 }
 
 ModelEditor& LeftViewportController::getModelEditor()
@@ -71,4 +79,9 @@ WorldEditor& LeftViewportController::getWorldEditor()
 BillboardEditor& LeftViewportController::getBillboardEditor()
 {
 	return _billboardEditor;
+}
+
+EntityPlacer& LeftViewportController::getEntityPlacer()
+{
+	return _entityPlacer;
 }

@@ -88,6 +88,7 @@ public:
 	void terrainEntity_select(const string& ID);
 	bool terrainEntity_isExisting(const string& ID);
 	float terrainEntity_getSize(const string& ID);
+	float terrainEntity_getMaxHeight(const string& ID);
 	float terrainEntity_getPixelHeight(float x, float z);
 	bool terrainEntity_isInside(float x, float z);
 	vec3 terrainEntity_getMousePoint();
@@ -117,6 +118,8 @@ public:
 	void waterEntity_setUvRepeat(const string& ID, float repeat);
 	void waterEntity_setSpeed(const string& ID, float speed);
 	string waterEntity_getSelectedID();
+	float waterEntity_getSize(const string& ID);
+	float waterEntity_getSurfaceHeight(const string& ID);
 
 	// Game entity interface
 	void gameEntity_add

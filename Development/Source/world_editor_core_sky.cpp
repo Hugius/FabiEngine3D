@@ -3,7 +3,7 @@
 #include <fstream>
 #include <sstream>
 
-void WorldEditor::_loadSkyData()
+void WorldEditor::loadSkyEntity()
 {
 	// Error checking
 	if (_currentProjectName == "")
@@ -12,6 +12,9 @@ void WorldEditor::_loadSkyData()
 	}
 
 	string skyPath = _fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\sky.fe3d";
+
+	_skyTexturePaths.clear();
+	_skyTexturePaths.resize(6);
 
 	// Load sky file
 	if (_fe3d.misc_isFileExisting(skyPath))

@@ -280,6 +280,11 @@ float FabiEngine3D::terrainEntity_getSize(const string& ID)
 	return _core->_terrainEntityManager.getEntity(ID)->getSize();
 }
 
+float FabiEngine3D::terrainEntity_getMaxHeight(const string& ID)
+{
+	return _core->_terrainEntityManager.getEntity(ID)->getMaxHeight();
+}
+
 bool FabiEngine3D::terrainEntity_isInside(float x, float z)
 {
 	return _core->_terrainEntityManager.isInside(x, z);
@@ -425,6 +430,16 @@ string FabiEngine3D::waterEntity_getSelectedID()
 	{
 		return "";
 	}
+}
+
+float FabiEngine3D::waterEntity_getSize(const string& ID)
+{
+	return _core->_waterEntityManager.getEntity(ID)->getSize();
+}
+
+float FabiEngine3D::waterEntity_getSurfaceHeight(const string& ID)
+{
+	return _core->_waterEntityManager.getEntity(ID)->getSurfaceHeight();
 }
 
 /* --------------------------------------------- Game entity interface --------------------------------------------- */

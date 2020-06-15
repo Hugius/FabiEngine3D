@@ -4,12 +4,13 @@
 #include "model_editor.hpp"
 #include "world_editor.hpp"
 #include "billboard_editor.hpp"
+#include "entity_placer.hpp"
 
 class TopViewportController final : public ViewportController
 {
 public:
 	TopViewportController(FabiEngine3D& fe3d, shared_ptr<EngineGuiManager> gui, 
-		ModelEditor& modelEditor, WorldEditor& worldEditor, BillboardEditor& billboardEditor);
+		ModelEditor& modelEditor, WorldEditor& worldEditor, BillboardEditor& billboardEditor, EntityPlacer& entityPlacer);
 	~TopViewportController() = default;
 
 	void initialize() override;
@@ -24,6 +25,7 @@ private:
 	ModelEditor& _modelEditor;
 	WorldEditor& _worldEditor;
 	BillboardEditor& _billboardEditor;
+	EntityPlacer& _entityPlacer;
 
 	string _currentProjectName = "";
 

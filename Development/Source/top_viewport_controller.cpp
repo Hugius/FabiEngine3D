@@ -8,11 +8,12 @@
 #include <sys/stat.h>
 
 TopViewportController::TopViewportController(FabiEngine3D& fe3d, shared_ptr<EngineGuiManager> gui, 
-	ModelEditor& modelEditor, WorldEditor& worldEditor, BillboardEditor& billboardEditor) :
+	ModelEditor& modelEditor, WorldEditor& worldEditor, BillboardEditor& billboardEditor, EntityPlacer& entityPlacer) :
 	ViewportController(fe3d, gui),
 	_modelEditor(modelEditor),
 	_worldEditor(worldEditor),
-	_billboardEditor(billboardEditor)
+	_billboardEditor(billboardEditor),
+	_entityPlacer(entityPlacer)
 {
 
 }
@@ -157,6 +158,12 @@ void TopViewportController::_updateProjectCreation()
 					_billboardEditor.unload();
 				}
 
+				// Unload entity placer
+				if (_entityPlacer.isLoaded())
+				{
+					_entityPlacer.unload();
+				}
+
 				// Apply to current project
 				_currentProjectName = projectName;
 
@@ -164,6 +171,7 @@ void TopViewportController::_updateProjectCreation()
 				_modelEditor.setCurrentProjectName(_currentProjectName);
 				_worldEditor.setCurrentProjectName(_currentProjectName);
 				_billboardEditor.setCurrentProjectName(_currentProjectName);
+				_entityPlacer.setCurrentProjectName(_currentProjectName);
 
 				// Go back to main editor screen
 				_gui->getViewport("left")->getWindow("main")->setActiveScreen("main");
@@ -210,10 +218,17 @@ void TopViewportController::_updateProjectLoading()
 				_billboardEditor.unload();
 			}
 
+			// Unload entity placer
+			if (_entityPlacer.isLoaded())
+			{
+				_entityPlacer.unload();
+			}
+
 			// Pass loaded project name
 			_modelEditor.setCurrentProjectName(_currentProjectName);
 			_worldEditor.setCurrentProjectName(_currentProjectName);
 			_billboardEditor.setCurrentProjectName(_currentProjectName);
+			_entityPlacer.setCurrentProjectName(_currentProjectName);
 
 			// Logging
 			_fe3d.logger_throwInfo("Existing project \"" + _currentProjectName + "\" loaded!");

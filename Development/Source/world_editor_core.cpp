@@ -52,9 +52,9 @@ void WorldEditor::initializeGUI()
 
 	// Left-viewport: mainWindow - terrainMenu
 	_window->addScreen("terrainMenu");
-	_window->getScreen("terrainMenu")->addButton("create", vec2(0.0f, 0.63f), vec2(1.5f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Create terain", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_window->getScreen("terrainMenu")->addButton("create", vec2(0.0f, 0.63f), vec2(1.8f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Create terain", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 	_window->getScreen("terrainMenu")->addButton("edit", vec2(0.0f, 0.21f), vec2(1.5f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Edit terrain", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
-	_window->getScreen("terrainMenu")->addButton("remove", vec2(0.0f, -0.21f), vec2(1.5f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Remove terrain", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_window->getScreen("terrainMenu")->addButton("remove", vec2(0.0f, -0.21f), vec2(1.85f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Remove terrain", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 	_window->getScreen("terrainMenu")->addButton("back", vec2(0.0f, -0.63f), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Go back", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 
 	// Left-viewport: mainWindow - terrainManagement
@@ -145,13 +145,12 @@ void WorldEditor::load()
 	_fe3d.gfx_enableWaterEffects();
 
 	// Other
-	_skyTexturePaths = { "", "", "", "", "", "" };
 	_isLoaded = true;
 
 	// Core
-	_loadSkyData();
-	_loadTerrainData();
-	_loadWaterData();
+	loadSkyEntity();
+	loadTerrainEntity();
+	loadWaterEntity();
 }
 
 void WorldEditor::save()

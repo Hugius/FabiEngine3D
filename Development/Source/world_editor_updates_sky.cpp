@@ -192,7 +192,7 @@ void WorldEditor::_updateSkyCamera()
 
 		// Enable FPS camera
 		_fe3d.gfx_enableMotionBlur();
-		_fe3d.camera_enableFirstPersonView(5.0f);
+		_fe3d.camera_enableFirstPersonView(10.0f);
 		_fe3d.camera_disableLookat();
 		_fe3d.misc_hideCursor();
 	}

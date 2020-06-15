@@ -3,7 +3,7 @@
 #include <fstream>
 #include <sstream>
 
-void WorldEditor::_loadTerrainData()
+void WorldEditor::loadTerrainEntity()
 {
 	// Error checking
 	if (_currentProjectName == "")

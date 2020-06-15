@@ -161,6 +161,7 @@
     <ClInclude Include="Source\engine_controller.hpp" />
     <ClInclude Include="Source\bottom_viewport_controller.hpp" />
     <ClInclude Include="Source\engine_gui_scrollinglist.hpp" />
+    <ClInclude Include="Source\entity_placer.hpp" />
     <ClInclude Include="Source\left_viewport_controller.hpp" />
     <ClInclude Include="Source\model_editor.hpp" />
     <ClInclude Include="Source\right_viewport_controller.hpp" />
@@ -244,6 +245,9 @@
     <ClCompile Include="Source\bottom_viewport_controller.cpp" />
     <ClCompile Include="Source\engine_gui_global_screen_misc.cpp" />
     <ClCompile Include="Source\engine_gui_scrollinglist.cpp" />
+    <ClCompile Include="Source\entity_placer_core.cpp" />
+    <ClCompile Include="Source\entity_placer_misc.cpp" />
+    <ClCompile Include="Source\entity_placer_updates.cpp" />
     <ClCompile Include="Source\left_viewport_controller.cpp" />
     <ClCompile Include="Source\model_editor_updates.cpp" />
     <ClCompile Include="Source\model_editor_updates_mesh.cpp" />

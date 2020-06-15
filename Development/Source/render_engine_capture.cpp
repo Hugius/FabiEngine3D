@@ -196,8 +196,8 @@ void RenderEngine::_captureMotionBlur(CameraManager& camera, ivec2 mousePos)
 			// Miscellaneous variables
 			static int oldMouseX;
 			static int oldMouseY;
-			int xDifference = abs(mousePos.x - oldMouseX);
-			int yDifference = abs(mousePos.y - oldMouseY);
+			int xDifference = abs(mousePos.x - oldMouseX) / 2;
+			int yDifference = abs(mousePos.y - oldMouseY) / 2;
 			firstTime = false;
 			
 			// Determine blur type

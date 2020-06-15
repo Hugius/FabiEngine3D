@@ -158,7 +158,7 @@ void TerrainEntityManager::addTerrainEntity
 	getEntity(ID)->addOglBuffer(new OpenGLBuffer(SHAPE_3D, &terrainVertices[0], terrainVertices.size()));
 	getEntity(ID)->setDiffuseMap(_texLoader.getTexture(textureName, true, true));
 	getEntity(ID)->setPixelColors(pixelColors);
-	getEntity(ID)->setHeight(maxHeight);
+	getEntity(ID)->setMaxHeight(maxHeight);
 	getEntity(ID)->setBlendRepeat(uvRepeat);
 	getEntity(ID)->setSize(size);
 }
@@ -183,7 +183,7 @@ void TerrainEntityManager::addBlendingToTerrain
 float TerrainEntityManager::getPixelHeight(float x, float z)
 {
 	auto entity = getSelectedTerrain();
-	return _getPixelHeight(x, z, entity->getSize(), entity->getHeight(), entity->getPixelColors());
+	return _getPixelHeight(x, z, entity->getSize(), entity->getMaxHeight(), entity->getPixelColors());
 }
 
 float TerrainEntityManager::_getPixelHeight(float x, float z, float size, float maxHeight, const vector<float>& pixelColors)

@@ -36,6 +36,7 @@ GLuint TextureLoader::_loadText(const string& text, const string &fontPath)
 	glBindTexture(GL_TEXTURE_2D, tex);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
 
 	// Determine pixel format
 	if (surface->format->BytesPerPixel == 4)
@@ -237,7 +238,7 @@ TTF_Font * TextureLoader::_loadFont(const string& fontPath)
 	if (it == _fontMap.end()) //Not in map (yet)
 	{
 		// Font loading
-		TTF_Font * font = TTF_OpenFont((fullDir + fontPath).c_str(), 25);
+		TTF_Font * font = TTF_OpenFont((fullDir + fontPath).c_str(), 50);
 		if (font == nullptr)
 		{
 			Logger::getInst().throwError("Texture error: " + string(SDL_GetError()));

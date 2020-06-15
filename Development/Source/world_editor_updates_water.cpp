@@ -159,28 +159,23 @@ void WorldEditor::_updateWaterMesh()
 		{
 			if (screen->getScrollingList("buttonList")->getButton("up")->isHovered())
 			{
-				_waterHeight += 0.01f;
+				_waterHeight += _waterHeightSpeed;
 				_fe3d.waterEntity_setSurfaceHeight("@water", _waterHeight);
 			}
 			else if (screen->getScrollingList("buttonList")->getButton("down")->isHovered())
 			{
-				_waterHeight -= 0.01f;
+				_waterHeight -= _waterHeightSpeed;
 				_fe3d.waterEntity_setSurfaceHeight("@water", _waterHeight);
 			}
 		}
 
-		// Check if values confirmed
-		float oldSize = _waterSize;
-		_gui->getGlobalScreen()->checkValueForm("size", _waterSize);
+		// Check if height changed
 		_gui->getGlobalScreen()->checkValueForm("height", _waterHeight);
 
 		// Reload water plane if size changed
-		if (_waterSize != oldSize)
+		if (_gui->getGlobalScreen()->checkValueForm("size", _waterSize, { 0.0f }))
 		{
-			if (_waterSize != 0.0f)
-			{
-				_loadWaterEntity();
-			}
+			_loadWaterEntity();
 		}
 
 		// Button hoverabilities

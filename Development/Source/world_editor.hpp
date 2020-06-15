@@ -17,6 +17,9 @@ public:
 	void unload();
 	void update();
 	void setCurrentProjectName(string projectName);
+	void loadSkyEntity();
+	void loadTerrainEntity();
+	void loadWaterEntity();
 
 	bool isLoaded();
 
@@ -36,7 +39,6 @@ private:
 	shared_ptr<EngineGuiWindow> _window;
 
 	// Sky functions
-	void _loadSkyData();
 	void _saveSkyData();
 	void _unloadSkyData();
 	void _loadSkyEntity();
@@ -51,7 +53,6 @@ private:
 	float _skyRotationSpeed = 0.0f;
 
 	// Terrain function
-	void _loadTerrainData();
 	void _saveTerrainData();
 	void _unloadTerrainData();
 	void _loadTerrainEntity();
@@ -79,7 +80,6 @@ private:
 	float _terrainCameraDistance = 0.0f;
 
 	// Water functions
-	void _loadWaterData();
 	void _saveWaterData();
 	void _unloadWaterData();
 	void _loadWaterEntity();
@@ -107,4 +107,5 @@ private:
 	float _waterShininess = 16.0f;
 	float _waterCameraHeight = 0.0f;
 	float _waterCameraDistance = 0.0f;
+	float _waterHeightSpeed = 0.1f;
 };

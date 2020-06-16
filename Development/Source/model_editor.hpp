@@ -25,6 +25,7 @@ public:
 	void unload();
 	void update();
 	void setCurrentProjectName(string projectName);
+	void loadModels();
 
 	bool isLoaded();
 

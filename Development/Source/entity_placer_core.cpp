@@ -67,6 +67,14 @@ void EntityPlacer::load()
 		}
 	}
 
+	// Model loading
+	_modelEditor.loadModels();
+	for (auto& modelName : _modelEditor.getModelNames())
+	{
+		_leftWindow->getScreen("modelPlaceManagement")->getScrollingList("modelList")->addButton("@" + modelName, modelName);
+		_counterMap.insert(std::make_pair(modelName, 0));
+	}
+
 	// Other
 	_isLoaded = true;
 }

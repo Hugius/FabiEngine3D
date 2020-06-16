@@ -1,9 +1,12 @@
 #pragma once
 
+#include <map>
+
 #include "fabi_engine_3d.hpp"
 #include "engine_gui_manager.hpp"
 #include "model_editor.hpp"
 #include "world_editor.hpp"
+
 
 class EntityPlacer final
 {
@@ -37,5 +40,9 @@ private:
 	shared_ptr<EngineGuiWindow> _leftWindow;
 	shared_ptr<EngineGuiWindow> _rightWindow;
 	
+	string _currentModelName = "";
+	string _currentBillboardName = "";
 	string _currentProjectName = "";
+
+	std::map<string, unsigned int> _counterMap;
 };

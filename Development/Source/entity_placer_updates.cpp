@@ -58,7 +58,42 @@ void EntityPlacer::_updateModelScreen()
 	// GUI management
 	if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
 	{
+		for (auto& modelName : _modelEditor.getModelNames())
+		{
+			if (_leftWindow->getScreen("modelPlaceManagement")->getScrollingList("modelList")->getButton("@" + modelName)->isHovered())
+			{
+				// Hide old preview model
+				if (_currentModelName != "")
+				{
+					_fe3d.gameEntity_hide(_currentModelName);
+				}
 
+				// Set new preview model
+				_currentModelName = "@" + _modelEditor.getModelNames()[0];
+				_fe3d.gameEntity_show(_currentModelName);
+				break;
+			}
+		}
+	}
+
+	// Update model placing
+	if (_currentModelName != "")
+	{
+		if (_fe3d.misc_isMouseInsideViewport() && !_fe3d.input_getMouseDown(Input::MOUSE_BUTTON_RIGHT) && !_gui->getGlobalScreen()->isFocused())
+		{
+			// Update preview model position
+			_fe3d.gameEntity_setPosition(_currentModelName, _fe3d.terrainEntity_getMousePoint());
+
+			// Placing model
+			if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
+			{
+				_fe3d.gameEntity_add(_currentModelName + std::to_string(_counterMap[_currentModelName]), _fe3d.gameEntity_getObjPath(_currentModelName),
+					_fe3d.terrainEntity_getMousePoint(), vec3(0.0f), _fe3d.gameEntity_getSize(_currentModelName));
+
+				// Increase 
+				_counterMap[_currentModelName]++;
+			}
+		}
 	}
 }
 

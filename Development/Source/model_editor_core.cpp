@@ -91,9 +91,13 @@ void ModelEditor::load()
 	_fe3d.skyEntity_select("@sky");
 
 	// Other
+	loadModels();
 	_gui->getGlobalScreen()->addTextfield("currentModelName", vec2(0.0f, 0.85f), vec2(0.5f, 0.1f), "", vec3(1.0f));
 	_isLoaded = true;
+}
 
+void ModelEditor::loadModels()
+{
 	// Error checking
 	if (_currentProjectName == "")
 	{
@@ -272,7 +276,6 @@ void ModelEditor::_addModel(string modelName, string objName, string diffuseMapN
 			if (lightMapName != "")
 			{
 				_fe3d.gameEntity_setLightMap(modelName, lightMapName);
-				std::cout << "hoiiiiiiiii";
 			}
 
 			// Reflection map

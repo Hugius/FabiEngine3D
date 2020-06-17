@@ -85,66 +85,6 @@ void CoreEngine::_renderApplication()
 	_windowManager.swapBackBuffer();
 }
 
-//void CoreEngine::_initWorldEditor()
-//{
-//	_fe3d.WE3D_INIT_EDITOR();
-//	_modelEditor.loadModels(_gameEntityManager);
-//
-//	// Check if a terrain selected
-//	if (_terrainEntityManager.getSelectedTerrain() == nullptr)
-//	{
-//		Logger::getInst().throwError("No terrain selected while in world editor state!");
-//	}
-//}
-
-//void CoreEngine::_updateModelEditor()
-//{
-//	_modelEditor.update(_windowManager.getMousePos(), _inputHandler);
-//	_textEntityManager.addTextEntity("modelName", "Model: " + _modelEditor.getSelectedModel()->getModelName(), "font", vec3(1.0f), vec2(0.3f, -0.75f), 0.0f, vec2(0.5f, 0.15f), true, true, true);
-//	_shadowManager.update(_shaderBus);
-//	_guiEntityManager.update();
-//	_textEntityManager.update();
-//}
-
-//void CoreEngine::_updateWorldEditor()
-//{
-//	_timer.start("worldEditor");
-//	if (_terrainEntityManager.getSelectedTerrain() != nullptr)
-//	{
-//		bool placementMode;
-//		if (_inputHandler.getMouseToggled(Input::MOUSE_BUTTON_MIDDLE)) // Mouse picker
-//		{
-//			_windowManager.showMouseCursor();
-//			_cameraManager.disableFirstPersonView();
-//			placementMode = true;
-//		}
-//		else // Free movement
-//		{
-//			_windowManager.hideMouseCursor();
-//			_cameraManager.enableFirstPersonView();
-//			placementMode = false;
-//		}
-//
-//		// Update
-//		_fe3d.WE3D_UPDATE_EDITOR();
-//		_mousePicker.update(_windowManager.getMousePos(), _terrainEntityManager);
-//		_skyEntityManager.update();
-//		_waterEntityManager.update();
-//		_gameEntityManager.update();
-//		_guiEntityManager.update();
-//		_shadowManager.update(_shaderBus);
-//		_worldEditor.update(_windowManager.getMousePos(), _mousePicker.getTerrainPoint(), placementMode,
-//			_modelEditor.getModels(), _cameraManager, _textEntityManager, _inputHandler);
-//		_cameraManager.update(_windowManager);
-//		_textEntityManager.update();
-//	}
-//	else
-//	{
-//		Logger::getInst().throwInfo("No terrain selected for editing!");
-//	}
-//	_timer.stop();
-//}
-
 void CoreEngine::_updatePerformanceProfiler()
 {
 	// Update statistics GUI

@@ -23,7 +23,7 @@ void MousePicker::update(ivec2 mousePos, TerrainEntityManager& terrainManager)
 		// Check if looking at terrain
 		if (_notUnderTerrain(0, RAY_RANGE, mouseRay, terrainManager))
 		{
-			_terrainPoint = _binarySearch(0, 0, RAY_RANGE, mouseRay, terrainManager); // Looking at terrain
+			_terrainPoint = _binarySearch(0, 0, RAY_RANGE, mouseRay, terrainManager);
 		}
 		else // Looking at sky
 		{
@@ -106,8 +106,14 @@ bool MousePicker::_notUnderTerrain(float start, float finish, vec3 ray, TerrainE
 {
 	vec3 startPoint = _getPointOnRay(ray, start);
 	vec3 endPoint   = _getPointOnRay(ray, finish);
-	float startHeight = terrainManager.getPixelHeight(startPoint.x, startPoint.z);
-	float endHeight   = terrainManager.getPixelHeight(endPoint.x, endPoint.z);
+
+	float startHeight = terrainManager.getPixelHeight(
+		startPoint.x + terrainManager.getSelectedTerrain()->getSize() / 2.0f, 
+		startPoint.z + terrainManager.getSelectedTerrain()->getSize() / 2.0f);
+
+	float endHeight = terrainManager.getPixelHeight(
+		endPoint.x + terrainManager.getSelectedTerrain()->getSize() / 2.0f, 
+		endPoint.z + terrainManager.getSelectedTerrain()->getSize() / 2.0f);
 	
 	return (startPoint.y > startHeight && endPoint.y < endHeight);
 }
@@ -122,14 +128,18 @@ vec3 MousePicker::getTerrainPoint()
 	return _terrainPoint;
 }
 
-vec3 MousePicker::_binarySearch(int count, float start, float finish, vec3 ray, TerrainEntityManager & terrainManager)
+vec3 MousePicker::_binarySearch(int count, float start, float finish, vec3 ray, TerrainEntityManager& terrainManager)
 {
 	// Binary search algorithm
 	float half = start + ((finish - start) / 2.0f);
 	if (count >= RECURSION_COUNT) 
 	{
 		vec3 endPoint = _getPointOnRay(ray, half);
-		if (terrainManager.isInside(endPoint.x, endPoint.z))
+		
+		// Check if selected point is inside the terrain size
+		if (terrainManager.isInside(
+			endPoint.x + terrainManager.getSelectedTerrain()->getSize() / 2.0f, 
+			endPoint.z + terrainManager.getSelectedTerrain()->getSize() / 2.0f))
 		{
 			return endPoint;
 		}

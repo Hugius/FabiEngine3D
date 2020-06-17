@@ -25,6 +25,7 @@ void EntityPlacer::initializeGUI()
 	// Left-viewport: mainWindow - modelPlaceManagement
 	_leftWindow->addScreen("modelPlaceManagement");
 	_leftWindow->getScreen("modelPlaceManagement")->addScrollingList("modelList", vec2(0.0f, 0.1f), vec2(1.8, 1.75f), vec3(0.3f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, _gui->leftVpTextColor, _gui->leftVpTextHoverColor, vec2(0.15f, 0.1f));
+	_leftWindow->getScreen("modelPlaceManagement")->addButton("back", vec2(0.0f, -0.63f), vec2(1.0f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Go back", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 
 	// Left-viewport: mainWindow - billboardPlaceManagement
 	_leftWindow->addScreen("billboardPlaceManagement");
@@ -51,15 +52,15 @@ void EntityPlacer::load()
 	_fe3d.terrainEntity_show("@terrain");
 	_fe3d.waterEntity_show("@water");
 
-	// Camera
-	if (_fe3d.terrainEntity_isExisting("@terrain"))
+	// Camera properties
+	if (_fe3d.terrainEntity_isExisting("@terrain")) // Terrain over water
 	{
 		float height = _fe3d.terrainEntity_getMaxHeight("@terrain");
 		_fe3d.camera_load(90.0f, 0.1f, 1000.0f, vec3(0.0f, height, 0.0f), 0.0f, 0.0f);
 	}
-	else
+	else // No terrain
 	{
-		if (_fe3d.waterEntity_isExisting("@water"))
+		if (_fe3d.waterEntity_isExisting("@water")) // If water loaded
 		{
 			float size =  _fe3d.waterEntity_getSize("@water") / 2.0f;
 			float height = _fe3d.waterEntity_getSurfaceHeight("@water") + (size / 10.0f);
@@ -71,11 +72,12 @@ void EntityPlacer::load()
 	_modelEditor.loadModels();
 	for (auto& modelName : _modelEditor.getModelNames())
 	{
-		_leftWindow->getScreen("modelPlaceManagement")->getScrollingList("modelList")->addButton("@" + modelName, modelName);
+		_leftWindow->getScreen("modelPlaceManagement")->getScrollingList("modelList")->addButton(modelName, modelName.substr(1, modelName.size()));
 		_counterMap.insert(std::make_pair(modelName, 0));
 	}
 
 	// Other
+	_gui->getGlobalScreen()->addTextfield("selectedModelName", vec2(0.0f, 0.85f), vec2(0.5f, 0.1f), "", vec3(1.0f));
 	_isLoaded = true;
 }
 

@@ -28,6 +28,8 @@ void EngineGuiGlobalScreen::update()
 
 	// Miscellaneous
 	_updateValueFilling();
+
+	_isFocused = _newFocusValue;
 }
 
 void EngineGuiGlobalScreen::addScrollingList(const string& ID, vec2 position, vec2 size, vec3 color,

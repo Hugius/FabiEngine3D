@@ -1,2 +1,2 @@
-rgeergre User\Assets\OBJs\sheep.obj - - - 1.000000 1.000000 1.000000 0 1 0 0 0.500000 0.500000 0.500000 1.000000 1.000000 1.000000 1.000000
-hh User\Assets\OBJs\sheep.obj User\Assets\Textures\DiffuseMaps\sheep.png User\Assets\Textures\LightMaps\sheep.png - 1.000000 1.000000 1.000000 0 1 0 0 0.500000 0.500000 0.500000 1.000000 1.000000 1.000000 1.000000
+@noTex User\Assets\OBJs\sheep.obj - - - 1.000000 1.000000 1.000000 0 1 0 0 0.500000 0.500000 0.500000 1.000000 1.000000 1.000000 1.000000
+@yesTex User\Assets\OBJs\sheep.obj User\Assets\Textures\DiffuseMaps\sheep.png User\Assets\Textures\LightMaps\sheep.png - 1.000000 1.000000 1.000000 0 1 0 0 0.500000 0.500000 0.500000 1.000000 1.000000 1.000000 1.000000

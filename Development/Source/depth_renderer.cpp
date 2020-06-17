@@ -79,11 +79,14 @@ void DepthRenderer::renderGameEntity(const GameEntity * entity)
 
 			// OpenGL parts
 			int index = 0;
-			for (auto & buffer : entity->getOglBuffers())
+			for (auto& buffer : entity->getOglBuffers())
 			{
-				// Texture
-				glActiveTexture(GL_TEXTURE0);
-				glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap(index));
+				if (entity->hasDiffuseMap())
+				{
+					// Texture
+					glActiveTexture(GL_TEXTURE0);
+					glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap(index));
+				}
 
 				// VAO
 				glBindVertexArray(buffer->getVAO());

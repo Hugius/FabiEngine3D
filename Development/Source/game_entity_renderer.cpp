@@ -134,7 +134,7 @@ void GameEntityRenderer::render(const GameEntity * entity)
 				}
 
 				// Reflection map for sky reflections
-				if (entity->isSkyReflective())
+				if (entity->hasReflectionMap())
 				{
 					glActiveTexture(GL_TEXTURE2);
 					glBindTexture(GL_TEXTURE_2D, entity->getReflectionMap(index));

@@ -118,8 +118,8 @@ void BillboardEditor::_updateBillboardEditing()
 		if (firstTime)
 		{
 			firstTime = false;
-			_fe3d.textEntity_setTextContent(_gui->getGlobalScreen()->getTextfield("currentBillboardName")->getEntityID(), "Billboard: " + _currentBillboardName, 0.025f);
-			_fe3d.textEntity_show(_gui->getGlobalScreen()->getTextfield("currentBillboardName")->getEntityID());
+			_fe3d.textEntity_setTextContent(_gui->getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID(), "Billboard: " + _currentBillboardName, 0.025f);
+			_fe3d.textEntity_show(_gui->getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID());
 			_fe3d.billboardEntity_show(_currentBillboardName);
 			_window->setActiveScreen("billboardEditingMain");
 		}
@@ -151,7 +151,7 @@ void BillboardEditor::_updateBillboardEditing()
 				else if (screen->getButton("back")->isHovered())
 				{
 					_fe3d.billboardEntity_hide(_currentBillboardName);
-					_fe3d.textEntity_hide(_gui->getGlobalScreen()->getTextfield("currentBillboardName")->getEntityID());
+					_fe3d.textEntity_hide(_gui->getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID());
 					_currentBillboardName = "";
 					_billboardEditingEnabled = false;
 					firstTime = true;

@@ -12,8 +12,9 @@ void ModelEditor::_updateModelEditing()
 		if (firstTime)
 		{
 			firstTime = false;
-			_fe3d.textEntity_setTextContent(_gui->getGlobalScreen()->getTextfield("currentModelName")->getEntityID(), "Model: " + _currentModelName, 0.025f);
-			_fe3d.textEntity_show(_gui->getGlobalScreen()->getTextfield("currentModelName")->getEntityID());
+			_fe3d.textEntity_setTextContent(_gui->getGlobalScreen()->getTextfield("selectedModelName")->getEntityID(), 
+				"Model: " + _currentModelName.substr(1, _currentModelName.size()), 0.025f);
+			_fe3d.textEntity_show(_gui->getGlobalScreen()->getTextfield("selectedModelName")->getEntityID());
 			_window->setActiveScreen("modelEditingMain");
 		}
 		
@@ -52,7 +53,7 @@ void ModelEditor::_updateModelEditing()
 					_modelEditingEnabled = false;
 					_currentModelName = "";
 					_window->setActiveScreen("modelManagement");
-					_fe3d.textEntity_hide(_gui->getGlobalScreen()->getTextfield("currentModelName")->getEntityID());
+					_fe3d.textEntity_hide(_gui->getGlobalScreen()->getTextfield("selectedModelName")->getEntityID());
 				}
 			}
 

@@ -292,7 +292,7 @@ bool FabiEngine3D::terrainEntity_isInside(float x, float z)
 
 vec3 FabiEngine3D::terrainEntity_getMousePoint()
 {
-return _core->_mousePicker.getTerrainPoint();
+	return _core->_mousePicker.getTerrainPoint();
 }
 
 float FabiEngine3D::terrainEntity_getPixelHeight(float x, float z)

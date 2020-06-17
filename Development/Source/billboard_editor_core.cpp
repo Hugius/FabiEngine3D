@@ -89,7 +89,7 @@ void BillboardEditor::load()
 	_fe3d.skyEntity_select("@sky");
 
 	// Other
-	_gui->getGlobalScreen()->addTextfield("currentBillboardName", vec2(0.0f, 0.85f), vec2(0.5f, 0.1f), "", vec3(1.0f));
+	_gui->getGlobalScreen()->addTextfield("selectedBillboardName", vec2(0.0f, 0.85f), vec2(0.5f, 0.1f), "", vec3(1.0f));
 	_isLoaded = true;
 
 	// Error checking
@@ -229,7 +229,7 @@ void BillboardEditor::unload()
 	_billboardNames.clear();
 
 	// Delete model name textfield & scrolling list buttons
-	_gui->getGlobalScreen()->deleteTextfield("currentBillboardName");
+	_gui->getGlobalScreen()->deleteTextfield("selectedBillboardName");
 
 	// Other
 	_isLoaded = false;

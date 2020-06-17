@@ -42,7 +42,7 @@ void ShadowRenderer::renderGameEntity(const GameEntity * entity)
 		int index = 0;
 		for (auto & buffer : entity->getOglBuffers())
 		{
-			if (entity->isTransparent())
+			if (entity->isTransparent() && entity->hasDiffuseMap())
 			{
 				glActiveTexture(GL_TEXTURE0);
 				glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap(index));

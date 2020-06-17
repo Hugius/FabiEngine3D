@@ -92,7 +92,7 @@ void ModelEditor::load()
 
 	// Other
 	loadModels();
-	_gui->getGlobalScreen()->addTextfield("currentModelName", vec2(0.0f, 0.85f), vec2(0.5f, 0.1f), "", vec3(1.0f));
+	_gui->getGlobalScreen()->addTextfield("selectedModelName", vec2(0.0f, 0.85f), vec2(0.5f, 0.1f), "", vec3(1.0f));
 	_isLoaded = true;
 }
 
@@ -239,7 +239,7 @@ void ModelEditor::unload()
 	_modelNames.clear();
 
 	// Delete model name textfield & scrolling list buttons
-	_gui->getGlobalScreen()->deleteTextfield("currentModelName");
+	_gui->getGlobalScreen()->deleteTextfield("selectedModelName");
 
 	// Other
 	_modelCreationEnabled = false;

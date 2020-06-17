@@ -32,13 +32,17 @@ void ModelEditor::_updateModelManagement()
 		{
 			_modelChoosingEnabled = true;
 			_modelEditingEnabled = true;
-			_gui->getGlobalScreen()->addChoiceForm("modelList", "Select mode;", vec2(0.0f), _modelNames);
+			for (auto& name : _modelNames) { name = name.substr(1, name.size()); }
+			_gui->getGlobalScreen()->addChoiceForm("modelList", "Select mode", vec2(0.0f), _modelNames);
+			for (auto& name : _modelNames) { name = "@" + name; }
 		}
 		else if (screen->getButton("deleteModel")->isHovered()) // Delete model button
 		{
 			_modelChoosingEnabled = true;
 			_modelRemovalEnabled = true;
-			_gui->getGlobalScreen()->addChoiceForm("modelList", "Select mode;", vec2(0.0f), _modelNames);
+			for (auto& name : _modelNames) { name = name.substr(1, name.size()); }
+			_gui->getGlobalScreen()->addChoiceForm("modelList", "Select mode", vec2(0.0f), _modelNames);
+			for (auto& name : _modelNames) { name = "@" + name; }
 		}
 		else if (screen->getButton("back")->isHovered()) // Back button
 		{
@@ -64,16 +68,16 @@ void ModelEditor::_updateModelCreation()
 {
 	if (_modelCreationEnabled)
 	{
-		string modelName;
+		string newModelName;
 
 		// Create new model
-		if (_gui->getGlobalScreen()->checkValueForm("newModelName", modelName))
+		if (_gui->getGlobalScreen()->checkValueForm("newModelName", newModelName))
 		{
 			// Add model
-			_addModel(modelName, "", "", "", "", vec3(0.0f), 0, 1, 0, 0, vec3(1.0f), 1.0f, vec3(1.0f));
+			_addModel("@" + newModelName, "", "", "", "", vec3(0.0f), 0, 1, 0, 0, vec3(1.0f), 1.0f, vec3(1.0f));
 
 			// Go to editor screen
-			_currentModelName = modelName;
+			_currentModelName = newModelName;
 			_modelCreationEnabled = false;
 			_modelEditingEnabled = true;
 			_gui->getViewport("left")->getWindow("main")->setActiveScreen("modelEditingMain");
@@ -89,7 +93,7 @@ void ModelEditor::_updateModelChoosing()
 
 		if (clickedButtonID != "")
 		{
-			_currentModelName = clickedButtonID;
+			_currentModelName = "@" + clickedButtonID;
 			_modelChoosingEnabled = false;
 		}
 		else

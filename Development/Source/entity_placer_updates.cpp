@@ -53,14 +53,14 @@ void EntityPlacer::_updateManagementScreen()
 
 void EntityPlacer::_updateModelScreen()
 {
-	auto screen = _leftWindow->getScreen("placeModel");
+	auto screen = _leftWindow->getScreen("modelPlaceManagement");
 
 	// GUI management
 	if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
 	{
 		for (auto& modelName : _modelEditor.getModelNames())
 		{
-			if (_leftWindow->getScreen("modelPlaceManagement")->getScrollingList("modelList")->getButton("@" + modelName)->isHovered())
+			if (screen->getScrollingList("modelList")->getButton(modelName)->isHovered())
 			{
 				// Hide old preview model
 				if (_currentModelName != "")
@@ -69,9 +69,15 @@ void EntityPlacer::_updateModelScreen()
 				}
 
 				// Set new preview model
-				_currentModelName = "@" + _modelEditor.getModelNames()[0];
+				_currentModelName = modelName;
 				_fe3d.gameEntity_show(_currentModelName);
+				_fe3d.textEntity_setTextContent(_gui->getGlobalScreen()->getTextfield("selectedModelName")->getEntityID(),
+					"Model: " + _currentModelName.substr(1, _currentModelName.size()), 0.025f);
 				break;
+			}
+			else if (screen->getButton("back")->isHovered()) // Back button
+			{
+				_leftWindow->setActiveScreen("placeManagement");
 			}
 		}
 	}
@@ -81,6 +87,9 @@ void EntityPlacer::_updateModelScreen()
 	{
 		if (_fe3d.misc_isMouseInsideViewport() && !_fe3d.input_getMouseDown(Input::MOUSE_BUTTON_RIGHT) && !_gui->getGlobalScreen()->isFocused())
 		{
+			// Show preview model
+			_fe3d.gameEntity_show(_currentModelName);
+
 			// Update preview model position
 			_fe3d.gameEntity_setPosition(_currentModelName, _fe3d.terrainEntity_getMousePoint());
 
@@ -93,6 +102,11 @@ void EntityPlacer::_updateModelScreen()
 				// Increase 
 				_counterMap[_currentModelName]++;
 			}
+		}
+		else
+		{
+			// Hide preview model
+			_fe3d.gameEntity_hide(_currentModelName);
 		}
 	}
 }

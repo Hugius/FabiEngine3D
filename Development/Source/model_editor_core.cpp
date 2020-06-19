@@ -276,12 +276,14 @@ void ModelEditor::_addModel(string modelName, string objName, string diffuseMapN
 			if (lightMapName != "")
 			{
 				_fe3d.gameEntity_setLightMap(modelName, lightMapName);
+				_fe3d.gameEntity_setLightmapped(modelName, true);
 			}
 
 			// Reflection map
 			if (reflectionMapName != "")
 			{
 				_fe3d.gameEntity_setReflectionMap(modelName, reflectionMapName);
+				_fe3d.gameEntity_setSkyReflective(modelName, true);
 			}
 
 			// Set boolean options

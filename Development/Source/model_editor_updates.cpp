@@ -6,6 +6,7 @@ void ModelEditor::update()
 {
 	if (_isLoaded)
 	{
+		_fe3d.gfx_enableLightMapping();
 		_updateModelManagement();
 		_updateModelCreation();
 		_updateModelChoosing();
@@ -13,6 +14,7 @@ void ModelEditor::update()
 		_updateModelRemoval();
 		_updateMiscellaneous();
 		_updateModelEditingCamera();
+
 	}
 }
 

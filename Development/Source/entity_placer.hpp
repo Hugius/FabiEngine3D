@@ -45,4 +45,6 @@ private:
 	string _currentProjectName = "";
 
 	std::map<string, unsigned int> _counterMap;
+
+	float _cameraMovementSpeed = 10.0f;
 };

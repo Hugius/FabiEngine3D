@@ -31,11 +31,18 @@ void EntityPlacer::_updateManagementScreen()
 		{
 			_leftWindow->setActiveScreen("lightPlaceManagement");
 		}
+		else if (screen->getButton("setSpeed")->isHovered()) // Set speed button
+		{
+			_gui->getGlobalScreen()->addValueForm("setSpeed", "Camera speed", _cameraMovementSpeed, vec2(0.0f), vec2(0.3f, 0.1f));
+		}
 		else if (screen->getButton("back")->isHovered()) // Back button
 		{
 			_gui->getGlobalScreen()->addAnswerForm("exitEntityPlacer", "Save changes?", vec2(0.0f, 0.25f));
 		}
 	}
+
+	// Setting camera speed
+	_gui->getGlobalScreen()->checkValueForm("setSpeed", _cameraMovementSpeed, {});
 
 	// Check if user wants to save changes
 	if (_gui->getGlobalScreen()->isAnswerFormConfirmed("exitEntityPlacer"))
@@ -123,17 +130,21 @@ void EntityPlacer::_updateLightScreen()
 
 void EntityPlacer::_updateCamera()
 {
-	// Looking
+	// Camera looking
 	if (_fe3d.misc_isMouseInsideViewport() && _fe3d.input_getMouseDown(Input::MOUSE_BUTTON_RIGHT) && !_gui->getGlobalScreen()->isFocused())
 	{
 		// Move mouse to middle when pressed first time
 		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_RIGHT))
 		{
+			_fe3d.gfx_disableMotionBlur();
 			_fe3d.misc_centerMousePos();
+		}
+		else
+		{
+			_fe3d.gfx_enableMotionBlur();
 		}
 
 		// Enable FPS camera
-		_fe3d.gfx_enableMotionBlur();
 		_fe3d.camera_enableFirstPersonView(10.0f);
 		_fe3d.camera_disableLookat();
 		_fe3d.misc_hideCursor();
@@ -145,33 +156,37 @@ void EntityPlacer::_updateCamera()
 		_fe3d.misc_showCursor();
 	}
 
-	// X movement
-	if (_fe3d.input_getKeyDown(Input::KEY_A))
+	// Camera movement
+	if (!_gui->getGlobalScreen()->isFocused())
 	{
-		_fe3d.camera_translateFollowX(-20.0f);
-	}
-	else if (_fe3d.input_getKeyDown(Input::KEY_D))
-	{
-		_fe3d.camera_translateFollowX(20.0f);
-	}
+		// X movement
+		if (_fe3d.input_getKeyDown(Input::KEY_A))
+		{
+			_fe3d.camera_translateFollowX(-_cameraMovementSpeed);
+		}
+		else if (_fe3d.input_getKeyDown(Input::KEY_D))
+		{
+			_fe3d.camera_translateFollowX(_cameraMovementSpeed);
+		}
 
-	// Y movement
-	if (_fe3d.input_getKeyDown(Input::KEY_SPACE))
-	{
-		_fe3d.camera_translate(vec3(0.0f, 0.5f, 0.0f));
-	}
-	else if (_fe3d.input_getKeyDown(Input::KEY_LSHIFT))
-	{
-		_fe3d.camera_translate(vec3(0.0f, -0.5f, 0.0f));
-	}
+		// Y movement
+		if (_fe3d.input_getKeyDown(Input::KEY_SPACE))
+		{
+			_fe3d.camera_translate(vec3(0.0f, _cameraMovementSpeed / 50.0f, 0.0f));
+		}
+		else if (_fe3d.input_getKeyDown(Input::KEY_LSHIFT))
+		{
+			_fe3d.camera_translate(vec3(0.0f, -(_cameraMovementSpeed / 50.0f), 0.0f));
+		}
 
-	// Z movement
-	if (_fe3d.input_getKeyDown(Input::KEY_W))
-	{
-		_fe3d.camera_translateFollowZ(20.0f);
-	}
-	else if (_fe3d.input_getKeyDown(Input::KEY_S))
-	{
-		_fe3d.camera_translateFollowZ(-20.0f);
+		// Z movement
+		if (_fe3d.input_getKeyDown(Input::KEY_W))
+		{
+			_fe3d.camera_translateFollowZ(_cameraMovementSpeed);
+		}
+		else if (_fe3d.input_getKeyDown(Input::KEY_S))
+		{
+			_fe3d.camera_translateFollowZ(-_cameraMovementSpeed);
+		}
 	}
 }

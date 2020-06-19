@@ -46,7 +46,10 @@ void CoreEngine::_updateApplication()
 	_cameraManager.update(_windowManager);
 
 	// Physics updates
-	_mousePicker.update(_windowManager.getMousePos(), _terrainEntityManager);
+	vec2 offset = vec2(Config::getInst().getVpPos().x, Config::getInst().getWindowSize().y - (Config::getInst().getVpPos().y + Config::getInst().getVpSize().y));
+	vec2 mousePos = vec2(_windowManager.getMousePos()) - offset;
+	mousePos = (mousePos / vec2(Config::getInst().getVpSize())) * vec2(Config::getInst().getWindowSize()); // Convert fullscreen coords to viewport coords
+	_mousePicker.update(mousePos, _terrainEntityManager);
 	_collisionResolver.update(_aabbEntityManager.getEntities(), _terrainEntityManager, _cameraManager);
 
 	// 3D entity updates

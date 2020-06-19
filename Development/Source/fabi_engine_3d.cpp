@@ -2308,12 +2308,12 @@ vec2 FabiEngine3D::misc_convertFromScreenCoords(ivec2 pos)
 	return vec2(x, y);
 }
 
-vec2 FabiEngine3D::misc_getViewportPosition()
+ivec2 FabiEngine3D::misc_getViewportPosition()
 {
 	return Config::getInst().getVpPos();
 }
 
-vec2 FabiEngine3D::misc_getViewportSize()
+ivec2 FabiEngine3D::misc_getViewportSize()
 {
 	return Config::getInst().getVpSize();
 }

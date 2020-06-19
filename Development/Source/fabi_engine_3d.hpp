@@ -477,8 +477,8 @@ public:
 	vec2 misc_convertFromNDC(vec2 pos);
 	ivec2 misc_convertToScreenCoords(vec2 pos);
 	vec2 misc_convertFromScreenCoords(ivec2 pos);
-	vec2 misc_getViewportPosition();
-	vec2 misc_getViewportSize();
+	ivec2 misc_getViewportPosition();
+	ivec2 misc_getViewportSize();
 	bool misc_isMouseInsideViewport();
 	bool misc_isDirectory(const string& path);
 	bool misc_isFileExisting(const string& path);

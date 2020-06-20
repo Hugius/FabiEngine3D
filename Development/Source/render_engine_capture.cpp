@@ -3,6 +3,7 @@
 #include "configuration.hpp"
 
 #include <chrono>
+#include <algorithm>
 
 // Capturing reflection texture
 void RenderEngine::_captureSceneReflections(CameraManager& camera)
@@ -116,7 +117,8 @@ void RenderEngine::_captureBloom()
 
 		// Blur scene texture
 		_blurRenderer.bind();
-		_shaderBus.setBloomMap(_blurRenderer.blurTexture(_finalSurface, _bloomHdrFramebuffer.getTexture(0), BLUR_BLOOM, _shaderBus.getBloomBlurSize(), _shaderBus.getBloomIntensity(), BLUR_DIR_BOTH));
+		_shaderBus.setBloomMap(_blurRenderer.blurTexture(_finalSurface, _bloomHdrFramebuffer.getTexture(0), 
+			static_cast<int>(BlurType::BLOOM), _shaderBus.getBloomBlurSize(), _shaderBus.getBloomIntensity(), BlurDirection::BOTH));
 		_blurRenderer.unbind();
 	}
 }
@@ -157,7 +159,8 @@ void RenderEngine::_captureDofBlur()
 	if (_shaderBus.isDofEnabled())
 	{
 		_blurRenderer.bind();
-		_shaderBus.setBlurMap(_blurRenderer.blurTexture(_finalSurface, _shaderBus.getSceneMap(), BLUR_DOF, 4, 1.0f, BLUR_DIR_BOTH));
+		_shaderBus.setBlurMap(_blurRenderer.blurTexture(_finalSurface, _shaderBus.getSceneMap(), 
+			static_cast<int>(BlurType::DOF), 4, 1.0f, BlurDirection::BOTH));
 		_blurRenderer.unbind();
 	}
 }
@@ -175,56 +178,79 @@ void RenderEngine::_capturePostProcessing()
 
 void RenderEngine::_captureMotionBlur(CameraManager& camera, ivec2 mousePos)
 {
-	if (_shaderBus.isMotionBlurEnabled())
+	static ivec2 lastMousePos;
+
+	// Timing variables
+	static std::chrono::high_resolution_clock::time_point previous = std::chrono::high_resolution_clock::now();
+	std::chrono::high_resolution_clock::time_point current = std::chrono::high_resolution_clock::now();
+	std::chrono::duration<double> timeDifference = std::chrono::duration_cast<std::chrono::duration<double>>(current - previous);
+	float elapsedMS = static_cast<float>(timeDifference.count()) * 1000.0f;
+
+	// Blur variables
+	static int blurStrength;
+	static bool firstTime = true;
+
+	// If 1 frame passed
+	if (elapsedMS >= Config::getInst().getUpdateMsPerFrame() || firstTime)
 	{
-		// Timing variables
-		static std::chrono::high_resolution_clock::time_point previous = std::chrono::high_resolution_clock::now();
-		std::chrono::high_resolution_clock::time_point current = std::chrono::high_resolution_clock::now();
-		std::chrono::duration<double> timeDifference = std::chrono::duration_cast<std::chrono::duration<double>>(current - previous);
-		float elapsedMS = static_cast<float>(timeDifference.count()) * 1000.0f;
-
-		// Blur variables
-		static int blurStrength;
-		static bool firstTime = true;
-
-		// If 1 frame passed
-		if (elapsedMS >= Config::getInst().getUpdateMsPerFrame() || firstTime)
+		if (_shaderBus.isMotionBlurEnabled())
 		{
 			// Set for next frame
 			previous = current;
 
 			// Miscellaneous variables
-			static int oldMouseX;
-			static int oldMouseY;
-			int xDifference = abs(mousePos.x - oldMouseX) / 2;
-			int yDifference = abs(mousePos.y - oldMouseY) / 2;
+			int xDifference = int(fabsf(float(mousePos.x) - float(lastMousePos.x)) / 3.0f);
+			int yDifference = int(fabsf(float(mousePos.y) - float(lastMousePos.y)) / 3.0f);
+			static BlurDirection lastDirection = BlurDirection::NONE;
+			BlurDirection direction = BlurDirection::NONE;
 			firstTime = false;
-			
-			// Determine blur type
-			if (xDifference > yDifference)
+
+			// Determine blur type & strength
+			if (xDifference != 0 && yDifference != 0)
 			{
-				blurStrength = xDifference > 10 ? 10 : xDifference;
+				if (xDifference >= yDifference)
+				{
+					blurStrength = xDifference;
+					direction = BlurDirection::HORIZONTAL;
+				}
+				else
+				{
+					blurStrength = yDifference;
+					direction = BlurDirection::VERTICAL;
+				}
 			}
-			else
+			else // No mouse movement
 			{
+				// Slowly fade out
 				if (blurStrength > 0)
 				{
+					direction = lastDirection;
 					blurStrength--;
 				}
 			}
 			
+			// Blur strength must be between 0 and 10
+			blurStrength = std::clamp(blurStrength, 0, 8);
+
 			// Set for next iteration
-			oldMouseX = mousePos.x;
-			oldMouseY = mousePos.y;
+			lastMousePos.x = mousePos.x;
+			lastMousePos.y = mousePos.y;
+
+			// Apply motion blur
+			_blurRenderer.bind();
+			_shaderBus.setMotionBlurMap(_blurRenderer.blurTexture(_finalSurface, _shaderBus.getBloomedDofSceneMap(), 
+				static_cast<int>(BlurType::MOTION), blurStrength, 1.0f, direction));
+			_blurRenderer.unbind();
+
+			// Set last direction
+			lastDirection = direction;
+		}
+		else
+		{
+			_shaderBus.setMotionBlurMap(_shaderBus.getBloomedDofSceneMap());
 		}
 
-		// Apply motion blur
-		_blurRenderer.bind();
-		_shaderBus.setMotionBlurMap(_blurRenderer.blurTexture(_finalSurface, _shaderBus.getBloomedDofSceneMap(), BLUR_MOTION, blurStrength, 1.0f, BLUR_DIR_HORIZONTAL));
-		_blurRenderer.unbind();
-	}
-	else
-	{
-		_shaderBus.setMotionBlurMap(_shaderBus.getBloomedDofSceneMap());
+		// Set last mouse position
+		lastMousePos = mousePos;
 	}
 }

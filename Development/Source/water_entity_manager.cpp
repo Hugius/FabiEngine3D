@@ -1,6 +1,8 @@
 #include "water_entity_manager.hpp"
 #include "shader_bus.hpp"
 
+#include <iostream>
+
 WaterEntityManager::WaterEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, ShaderBus& shaderBus) :
 	BaseEntityManager(objLoader, texLoader, shaderBus)
 {
@@ -133,28 +135,18 @@ void WaterEntityManager::update()
 
 		if (water->isEnabled() && _shaderBus.isWaterEffectsEnabled())
 		{
-			water->setWaveValue(water->getWaveValue() + water->getWavingSpeed() / 100.0f);
-			water->setWaveValue(fmod(water->getWaveValue(), 1.0f));
+			water->setRipplePos(water->getRipplePos() + water->getWavingSpeed() / 100.0f);
+			water->setRipplePos(fmod(water->getRipplePos(), 1.0f));
 
 			// X waves
-			if (water->getTimeX() >= 2.5f)
-			{
-				water->setTimeX(0.25f);
-			}
-			else
-			{
-				water->setTimeX(water->getTimeX() + water->getWavingSpeed() / 3000.0f);
-			}
+			//float timeX = water->getTimeX() + water->getWavingSpeed() / 300.0f;
+			//timeX = timeX > 0.235f ? 0.2f : timeX;
+			//water->setTimeX(timeX);
 
-			// Z waves
-			if (water->getTimeZ() >= 2.5f)
-			{
-				water->setTimeZ(0.25f);
-			}
-			else
-			{
-				water->setTimeZ(water->getTimeZ() + water->getWavingSpeed() / 3000.0f);
-			}
+			//// Z waves
+			//float timeZ = water->getTimeZ() + water->getWavingSpeed() / 300.0f;
+			//timeZ = timeX > 0.235f ? 0.2f : timeX;
+			//water->setTimeZ(timeZ);
 		}
 	}
 }

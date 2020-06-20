@@ -4,11 +4,12 @@
 #include "gui_entity.hpp"
 #include "opengl_framebuffer.hpp"
 
-enum BlurDirections
+enum class BlurDirection
 {
-	BLUR_DIR_HORIZONTAL,
-	BLUR_DIR_VERTICAL,
-	BLUR_DIR_BOTH
+	NONE,
+	HORIZONTAL,
+	VERTICAL,
+	BOTH
 };
 
 class BlurRenderer final : public BaseEntityRenderer
@@ -21,7 +22,7 @@ public:
 	void bind()   override;
 	void unbind() override;
 
-	GLuint blurTexture(const GuiEntity * entity, GLuint texture, int index, int size, float intensity, int direction);
+	GLuint blurTexture(const GuiEntity * entity, GLuint texture, int index, int size, float intensity, BlurDirection direction);
 
 private:
 	void _render(const GuiEntity * entity, GLuint texture);

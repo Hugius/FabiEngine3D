@@ -4,9 +4,9 @@
 
 void ModelEditor::_updateMiscellaneous()
 {
-	// Update reference model visibility
 	if (_isLoaded)
 	{
+		// Update reference model visibility
 		if (!_gui->getGlobalScreen()->isFocused())
 		{
 			if (_fe3d.input_getKeyToggled(Input::KEY_R))

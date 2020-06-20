@@ -42,33 +42,49 @@ void CameraManager::reset()
 
 void CameraManager::update(WindowManager & windowManager)
 {
+	// Variables
+	ivec2 currentMousePos = windowManager.getMousePos();
+	static ivec2 lastMousePos = currentMousePos;
+
 	if (_firstPersonViewEnabled)
 	{
-		// Get mouse position
-		ivec2 mousePos = windowManager.getMousePos();
-		float tempOffsetX = float(mousePos.x) - float(Config::getInst().getWindowWidth() / 2);
-		float tempOffsetY = float(Config::getInst().getWindowHeight() / 2) - float(mousePos.y);
-
-		// Center cursor if needed
-		if (_mustCenter)
+		// Variable
+		int left = Config::getInst().getVpPos().x;
+		int right = Config::getInst().getVpPos().x + Config::getInst().getVpSize().x;
+		int bottom = Config::getInst().getWindowSize().y - (Config::getInst().getVpPos().y + Config::getInst().getVpSize().y);
+		int top = Config::getInst().getWindowSize().y - Config::getInst().getVpPos().y;
+		
+		// Reset mouse position if going out of screen (horizontal)
+		if (currentMousePos.x < left)
 		{
-			if (tempOffsetX == 0.0f && tempOffsetY == 0.0f)
-			{
-				_mustCenter = false;
-			}
-			else
-			{
-				mousePos = Config::getInst().getWindowSize() / 2;
-				_mustCenter = false;
-			}
+			windowManager.setMousePos({ right, currentMousePos.y });
+			lastMousePos.x = right;
+			return;
+		}
+		else if (currentMousePos.x > right)
+		{
+			windowManager.setMousePos({ left, currentMousePos.y });
+			lastMousePos.x = left;
+			return;
 		}
 
-		// Reset mouse position in the middle of the screen
-		windowManager.setMousePos(Config::getInst().getWindowSize() / 2);
+		// Reset mouse position if going out of screen (vertical)
+		if (currentMousePos.y < bottom)
+		{
+			windowManager.setMousePos({ currentMousePos.x, top});
+			lastMousePos.y = top;
+			return;
+		}
+		else if (currentMousePos.y > top)
+		{
+			windowManager.setMousePos({ currentMousePos.x, bottom });
+			lastMousePos.y = bottom;
+			return;
+		}
 
 		// Offset between current and last mouse pos
-		float xOffset = float(mousePos.x)                              - float(Config::getInst().getWindowWidth() / 2);
-		float yOffset = float(Config::getInst().getWindowHeight() / 2) - float(mousePos.y);
+		float xOffset = static_cast<float>(currentMousePos.x - lastMousePos.x);
+		float yOffset = static_cast<float>(lastMousePos.y - currentMousePos.y);
 
 		// Applying mouse sensitivity
 		xOffset *= (_mouseSensitivity) / 100.0f;
@@ -94,6 +110,9 @@ void CameraManager::update(WindowManager & windowManager)
 
 	// Update matrices
 	updateMatrices();
+
+	// Set last mouse position
+	lastMousePos = currentMousePos;
 }
 
 void CameraManager::updateMatrices()

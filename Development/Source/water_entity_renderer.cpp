@@ -41,7 +41,7 @@ void WaterEntityRenderer::render(const WaterEntity * entity)
 		if (entity->isEnabled())
 		{
 			// Shader uniforms
-			_shader.uploadUniform("u_wavePos", entity->getWaveValue());
+			_shader.uploadUniform("u_ripplePos", entity->getRipplePos());
 			_shader.uploadUniform("u_timeX", entity->getTimeX());
 			_shader.uploadUniform("u_timeZ", entity->getTimeZ());
 			_shader.uploadUniform("u_customHeightOffset", entity->getSurfaceHeight());

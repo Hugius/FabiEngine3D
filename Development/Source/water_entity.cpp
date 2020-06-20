@@ -16,9 +16,9 @@ void WaterEntity::setNormalMap(GLuint val)
 	_normalMap = val;
 }
 
-void WaterEntity::setWaveValue(float val)
+void WaterEntity::setRipplePos(float val)
 {
-	_waveValue = val;
+	_ripplePos = val;
 }
 
 void WaterEntity::setUvRepeat(float val)
@@ -101,9 +101,9 @@ const GLuint WaterEntity::getNormalMap() const
 	return _normalMap;
 }
 
-const float WaterEntity::getWaveValue() const
+const float WaterEntity::getRipplePos() const
 {
-	return _waveValue;
+	return _ripplePos;
 }
 
 const float WaterEntity::getUvRepeat() const

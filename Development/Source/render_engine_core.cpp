@@ -29,9 +29,9 @@ RenderEngine::RenderEngine(ShaderBus& shaderBus, Timer& timer) :
 	_bloomHdrFramebuffer.createColorTexture(ivec2(0), Config::getInst().getVpSize(), 1, false);
 	_shadowFramebuffer.createDepthTexture(ivec2(0), ivec2(Config::getInst().getShadowQuality()), 1);
 	_depthFramebuffer.createDepthTexture(ivec2(0), Config::getInst().getVpSize(), 1);
-	_blurRenderer.addFramebuffer(BLUR_BLOOM,  true);
-	_blurRenderer.addFramebuffer(BLUR_DOF,    true);
-	_blurRenderer.addFramebuffer(BLUR_MOTION, true);
+	_blurRenderer.addFramebuffer(static_cast<int>(BlurType::BLOOM),  true);
+	_blurRenderer.addFramebuffer(static_cast<int>(BlurType::DOF),    true);
+	_blurRenderer.addFramebuffer(static_cast<int>(BlurType::MOTION), true);
 
 	// Final screen texture
 	_finalSurface = new GuiEntity();

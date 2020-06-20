@@ -160,6 +160,11 @@ vec3 FabiEngine3D::camera_getFront()
 	return _core->_cameraManager.getFront();
 }
 
+bool FabiEngine3D::camera_isFirstPersonViewEnabled()
+{
+	return _core->_cameraManager.isFirstPersonViewEnabled();
+}
+
 /* --------------------------------------------- Sky interface --------------------------------------------- */
 
 void FabiEngine3D::skyEntity_add(const string& ID, const vector<string> texturePaths)
@@ -2206,11 +2211,6 @@ void FabiEngine3D::misc_setMainRenderingColor(vec3 color)
 void FabiEngine3D::misc_setWindowTitle(string title)
 {
 	_core->_windowManager.setTitle(title);
-}
-
-void FabiEngine3D::misc_centerMousePos()
-{
-	_core->_cameraManager.center();
 }
 
 string FabiEngine3D::misc_getWinExplorerFilename(string startingDir, string fileType)

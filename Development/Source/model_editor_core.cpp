@@ -104,6 +104,8 @@ void ModelEditor::loadModels()
 		_fe3d.logger_throwError("Tried to load as empty project!");
 	}
 
+	_modelNames.clear();
+
 	string modelsPath = _fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\models.fe3d";
 
 	// Load models file
@@ -144,7 +146,7 @@ void ModelEditor::loadModels()
 	}
 
 	// Logging
-	_fe3d.logger_throwInfo("Model editor data from project \"" + _currentProjectName + "\" loaded!");
+	_fe3d.logger_throwInfo("Models from project \"" + _currentProjectName + "\" loaded!");
 }
 
 void ModelEditor::save()

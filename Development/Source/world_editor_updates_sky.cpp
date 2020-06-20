@@ -182,19 +182,15 @@ void WorldEditor::_updateSkyOptions()
 
 void WorldEditor::_updateSkyCamera()
 {
-	if (_fe3d.misc_isMouseInsideViewport() && _fe3d.input_getMouseDown(Input::MOUSE_BUTTON_RIGHT) && !_gui->getGlobalScreen()->isFocused())
+	if (_fe3d.input_getMouseDown(Input::MOUSE_BUTTON_RIGHT) && !_gui->getGlobalScreen()->isFocused())
 	{
-		// Move mouse to middle when pressed first time
-		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_RIGHT))
+		if (_fe3d.misc_isMouseInsideViewport())
 		{
-			_fe3d.misc_centerMousePos();
+			_fe3d.gfx_enableMotionBlur();
+			_fe3d.camera_enableFirstPersonView(10.0f);
+			_fe3d.camera_disableLookat();
+			_fe3d.misc_hideCursor();
 		}
-
-		// Enable FPS camera
-		_fe3d.gfx_enableMotionBlur();
-		_fe3d.camera_enableFirstPersonView(10.0f);
-		_fe3d.camera_disableLookat();
-		_fe3d.misc_hideCursor();
 	}
 	else
 	{

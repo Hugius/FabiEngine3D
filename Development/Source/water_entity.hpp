@@ -11,7 +11,7 @@ public:
 	void setColor(vec3 val);
 	void setDudvMap(GLuint val);
 	void setNormalMap(GLuint val);
-	void setWaveValue(float val);
+	void setRipplePos(float val);
 	void setUvRepeat(float val);
 	void setWavingSpeed(float val);
 	void setTimeX(float val);
@@ -30,8 +30,8 @@ public:
 	const vec3   getColor()         const;
 	const GLuint getDudvMap()       const;
 	const GLuint getNormalMap()     const;
-	const float  getWaveValue()     const;
-	const float  getUvRepeat()    const;
+	const float  getRipplePos()     const;
+	const float  getUvRepeat()		const;
 	const float  getWavingSpeed()   const;
 	const float  getTimeX()         const;
 	const float  getTimeZ()         const;
@@ -52,11 +52,11 @@ private:
 	GLuint _normalMap = 0;
 
 	float _size			 = 0.0f;
-	float _waveValue     = 0.0f;
-	float _uvRepeat    = 1.0f;
+	float _ripplePos     = 0.0f;
+	float _uvRepeat		 = 1.0f;
 	float _wavingSpeed   = 0.0f;
-	float _timeX         = 0.1f;
-	float _timeZ         = 0.25f;
+	float _timeX         = 0.0f;
+	float _timeZ         = 0.0f;
 	float _shininess     = 0.0f;
 	float _surfaceHeight = 0.0f;
 	float _transparency  = 0.0f;

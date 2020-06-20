@@ -23,15 +23,18 @@ void BlurRenderer::unbind()
 	glDisable(GL_BLEND);
 }
 
-GLuint BlurRenderer::blurTexture(const GuiEntity* entity, GLuint texture, int index, int size, float intensity, int direction)
+GLuint BlurRenderer::blurTexture(const GuiEntity* entity, GLuint texture, int index, int size, float intensity, BlurDirection direction)
 {
 	// Variables
 	bool firstTime = true;
 	bool currentDirection = true;
-	bool overrideHorizontal = direction == BLUR_DIR_HORIZONTAL;
-	bool overrideVertical = direction == BLUR_DIR_VERTICAL;
+	bool overrideHorizontal = (direction == BlurDirection::HORIZONTAL);
+	bool overrideVertical = (direction == BlurDirection::VERTICAL);
+
+	// Uniforms
 	_shader.uploadUniform("u_intensity", intensity);
 
+	// Blur the texture
 	for (int i = 0; i < size; i++)
 	{
 		// Bind framebuffer

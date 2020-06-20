@@ -59,6 +59,7 @@ public:
 	float camera_getFOV();
 	vec3  camera_getPos();
 	vec3  camera_getFront();
+	bool  camera_isFirstPersonViewEnabled();
 
 	// Sky entity interface
 	void skyEntity_add
@@ -466,7 +467,6 @@ public:
 	void misc_hideAudioDebugging();
 	void misc_setMainRenderingColor(vec3 color);
 	void misc_setWindowTitle(string title);
-	void misc_centerMousePos();
 	string misc_getWinExplorerFilename(string startingDir, string fileType);
 	string misc_vec2str(vec2 vec);
 	string misc_vec2str(vec3 vec);

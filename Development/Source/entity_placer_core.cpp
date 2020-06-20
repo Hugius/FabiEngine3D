@@ -119,5 +119,6 @@ void EntityPlacer::unload()
 	_gui->getGlobalScreen()->deleteTextfield("selectedModelName");
 
 	// Other
+	_leftWindow->getScreen("modelPlaceManagement")->getScrollingList("modelList")->deleteButtons();
 	_isLoaded = false;
 }

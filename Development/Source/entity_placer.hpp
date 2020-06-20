@@ -45,5 +45,5 @@ private:
 
 	std::map<string, unsigned int> _counterMap;
 
-	float _cameraMovementSpeed = 10.0f;
+	float _cameraMovementSpeed = 25.0f;
 };

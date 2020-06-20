@@ -17,7 +17,7 @@ layout(location = 4) uniform sampler2D u_sampler_normalMap;
 uniform vec3  u_dirLightPos;
 uniform vec3  u_cameraPos;
 uniform vec3  u_color;
-uniform float u_wavePos;
+uniform float u_ripplePos;
 uniform float u_fogMinDistance;
 uniform float u_shininess;
 uniform float u_nearZ;
@@ -73,7 +73,7 @@ vec4 getMainColor()
 	if(u_isRippling)
 	{
 		// DUDV mapping
-		vec2 distortedTexCoords = f_uv + texture(u_sampler_dudvMap, vec2(f_uv.x + u_wavePos, f_uv.y + u_wavePos)).rg * 0.1;
+		vec2 distortedTexCoords = f_uv + texture(u_sampler_dudvMap, vec2(f_uv.x + u_ripplePos, f_uv.y + u_ripplePos)).rg * 0.1;
 		vec2 totalDistortion = (texture(u_sampler_dudvMap, distortedTexCoords).rg * 2.0 - 1.0) * 0.025f;
 		texCoords   += totalDistortion;
 		texCoords.x = clamp(texCoords.x, 0.001f, 0.999f);

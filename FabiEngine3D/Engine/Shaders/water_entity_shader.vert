@@ -29,7 +29,7 @@ void main()
 	// Water sine waves
 	if(u_waving)
 	{
-		newPos.y += (0.3f * (sin(newPos.x*u_timeX*3.141592654f) * cos(newPos.z*u_timeZ*3.141592654f)));
+		//newPos.y += (sin(newPos.x * u_timeX) * cos(newPos.z * u_timeZ));
 	}
 
 	// Camera spaces

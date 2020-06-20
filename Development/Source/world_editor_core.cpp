@@ -138,7 +138,7 @@ void WorldEditor::load()
 	// Camera
 	_fe3d.camera_load(90.0f, 0.1f, 1000.0f, vec3(0.0f), 0.0f, 0.0f);
 
-	// Graphics
+	// Enable graphics
 	_fe3d.gfx_enableAmbientLighting(0.75f);
 	_fe3d.gfx_enableDirectionalLighting(vec3(1000.0f), 0.75f);
 	_fe3d.gfx_enableMSAA();
@@ -168,11 +168,45 @@ void WorldEditor::unload()
 	_fe3d.gfx_disableMSAA();
 	_fe3d.gfx_disableWaterEffects();
 
-	// Clear variables
+	// Reset variables
 	_isLoaded = false;
 	_currentWorldPart = WorldPart::NONE;
 	_cameraRotationSpeed = 0.0f;
 	_totalCameraRotation = 0.0f;
+	_skyTexturePaths.clear();
+	_skyRotationSpeed = 0.0f;
+	_isTerrainBlendmapped = false;
+	_terrainHeightmapPath = "";
+	_terrainDiffusemapPath = "";
+	_terrainBlendmapPath = "";
+	_terrainRedPath = "";
+	_terrainGreenPath = "";
+	_terrainBluePath = "";
+	_terrainSize = 0.0f;
+	_maxTerrainHeight = 0.0f;
+	_terrainUvRepeat = 0.0f;
+	_terrainRedUvRepeat = 0.0f;
+	_terrainGreenUvRepeat = 0.0f;
+	_terrainBlueUvRepeat = 0.0f;
+	_terrainCameraHeight = 0.0f;
+	_terrainCameraDistance = 0.0f;
+	_waterDudvmapPath = "";
+	_waterNormalmapPath = "";
+	_waterWavingEnabled = false;
+	_waterRipplingEnabled = false;
+	_waterSpecularEnabled = false;
+	_waterReflectionEnabled = false;
+	_waterRefractionEnabled = false;
+	_waterColor = vec3(0.0f);
+	_waterSize = 0.0f;
+	_waterUvRepeat = 0.0f;
+	_waterHeight = 0.0f;
+	_waterSpeed = 0.0f;
+	_waterTransparency = 0.0f;
+	_waterShininess = 16.0f;
+	_waterCameraHeight = 0.0f;
+	_waterCameraDistance = 0.0f;
+	_waterHeightSpeed = 0.1f;
 
 	// Core
 	_unloadSkyData();

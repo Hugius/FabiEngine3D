@@ -218,19 +218,20 @@ void BillboardEditor::unload()
 	_fe3d.gameEntity_delete("@cube");
 	_fe3d.skyEntity_delete("@sky");
 
-	// Delete models
-	for (auto& billboardName : _billboardNames)
-	{
-		if (_fe3d.billboardEntity_isExisting(billboardName))
-		{
-			_fe3d.billboardEntity_delete(billboardName);
-		}
-	}
+	// Delete billboards
+	_fe3d.billboardEntity_deleteAll();
 	_billboardNames.clear();
 
-	// Delete model name textfield & scrolling list buttons
+	// Delete billboard name textfield
 	_gui->getGlobalScreen()->deleteTextfield("selectedBillboardName");
 
 	// Other
+	_billboardCreationEnabled = false;
+	_billboardChoosingEnabled = false;
+	_billboardEditingEnabled = false;
+	_billboardRemovalEnabled = false;
 	_isLoaded = false;
+	_cameraRotationSpeed = 0.0f;
+	_totalCameraRotation = 0.0f;
+	_currentBillboardName = "";
 }

@@ -41,7 +41,6 @@ private:
 	shared_ptr<EngineGuiWindow> _rightWindow;
 	
 	string _currentModelName = "";
-	string _currentBillboardName = "";
 	string _currentProjectName = "";
 
 	std::map<string, unsigned int> _counterMap;

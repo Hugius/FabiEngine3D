@@ -37,11 +37,15 @@ void EntityPlacer::initializeGUI()
 
 void EntityPlacer::load()
 {
-	// Graphics
+	// Enable graphics
 	_fe3d.gfx_enableAmbientLighting(0.75f);
 	_fe3d.gfx_enableDirectionalLighting(vec3(1000.0f), 0.75f);
+	_fe3d.gfx_enableLightMapping();
+	_fe3d.gfx_enableSkyReflections(0.25f);
 	_fe3d.gfx_enableMSAA();
 	_fe3d.gfx_enableWaterEffects();
+	//_fe3d.gfx_enableShadows(vec3(50.0f, 50.0f, 0.0f), vec3(0.0f), 100.0f, 150.0);
+	_fe3d.gfx_enableSpecularLighting(16.0f);
 
 	// Load world entities
 	_worldEditor.loadSkyEntity();
@@ -77,8 +81,10 @@ void EntityPlacer::load()
 		_counterMap.insert(std::make_pair(modelName, 0));
 	}
 
-	// Other
+	// Create name textfields
 	_gui->getGlobalScreen()->addTextfield("selectedModelName", vec2(0.0f, 0.85f), vec2(0.5f, 0.1f), "", vec3(1.0f));
+
+	// Other
 	_isLoaded = true;
 }
 
@@ -95,10 +101,22 @@ void EntityPlacer::unload()
 	_fe3d.gfx_disableMSAA();
 	_fe3d.gfx_disableWaterEffects();
 
-	// Entities
+	// Delete world entities
 	_fe3d.skyEntity_delete("@sky");
 	_fe3d.terrainEntity_delete("@terrain");
 	_fe3d.waterEntity_delete("@water");
+
+	// Delete placed entities
+	_fe3d.gameEntity_deleteAll();
+	_fe3d.billboardEntity_deleteAll();
+
+	// Reset variables
+	_counterMap.clear();
+	_currentModelName = "";
+	_cameraMovementSpeed = 10.0f;
+
+	// Delete name textfields
+	_gui->getGlobalScreen()->deleteTextfield("selectedModelName");
 
 	// Other
 	_isLoaded = false;

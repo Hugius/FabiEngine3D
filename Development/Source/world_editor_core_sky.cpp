@@ -106,4 +106,5 @@ void WorldEditor::_loadSkyEntity()
 	// Add new skybox
 	_fe3d.skyEntity_add("@sky", _skyTexturePaths);
 	_fe3d.skyEntity_select("@sky");
+	_fe3d.skyEntity_setRotationSpeed("@sky", _skyRotationSpeed);
 }

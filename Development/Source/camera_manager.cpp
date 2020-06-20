@@ -59,11 +59,12 @@ void CameraManager::update(WindowManager & windowManager)
 			else
 			{
 				mousePos = Config::getInst().getWindowSize() / 2;
+				_mustCenter = false;
 			}
 		}
 
 		// Reset mouse position in the middle of the screen
-		windowManager.setMousePos(ivec2(Config::getInst().getWindowWidth() / 2, Config::getInst().getWindowHeight() / 2));
+		windowManager.setMousePos(Config::getInst().getWindowSize() / 2);
 
 		// Offset between current and last mouse pos
 		float xOffset = float(mousePos.x)                              - float(Config::getInst().getWindowWidth() / 2);

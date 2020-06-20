@@ -229,16 +229,10 @@ void ModelEditor::unload()
 	_fe3d.skyEntity_delete("@sky");
 
 	// Delete models
-	for (auto& modelName : _modelNames)
-	{
-		if (_fe3d.gameEntity_isExisting(modelName))
-		{
-			_fe3d.gameEntity_delete(modelName);
-		}
-	}
+	_fe3d.gameEntity_deleteAll();
 	_modelNames.clear();
 
-	// Delete model name textfield & scrolling list buttons
+	// Delete model name textfield
 	_gui->getGlobalScreen()->deleteTextfield("selectedModelName");
 
 	// Other
@@ -246,9 +240,16 @@ void ModelEditor::unload()
 	_modelChoosingEnabled = false;
 	_modelEditingEnabled = false;
 	_modelResizingEnabled = false;
+	_modelColorPicking = false;
+	_meshResizingToggled = false;
+	_boxResizingToggled = false;
+	_settingModelUvRepeat = false;
 	_modelRemovalEnabled = false;
+	_aabbRenderingEnabled = false;
 	_isLoaded = false;
 	_cameraDistance = 5.0f;
+	_modelResizeDirection = Direction::X;
+	_currentModelName = "";
 }
 
 void ModelEditor::_addModel(string modelName, string objName, string diffuseMapName, string lightMapName, string reflectionMapName, vec3 size,

@@ -94,7 +94,6 @@ private:
 	string _choiceFormID = "";
 	string _answerFormID = "";
 
-	bool _newFocusValue = false;
 	bool _isFocused = false;
 	bool _exitValueFilling = false;
 };

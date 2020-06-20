@@ -40,7 +40,6 @@ private:
 
 	FabiEngine3D& _fe3d;
 	shared_ptr<EngineGuiManager> _gui;
-
 	shared_ptr<EngineGuiWindow> _window;
 	
 	string _currentBillboardName = "";

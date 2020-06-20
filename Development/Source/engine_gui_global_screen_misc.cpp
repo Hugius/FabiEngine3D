@@ -2,7 +2,7 @@
 
 void EngineGuiGlobalScreen::setFocus(bool focused)
 {
-	_newFocusValue = focused;
+	_isFocused = focused;
 }
 
 bool EngineGuiGlobalScreen::isFocused()

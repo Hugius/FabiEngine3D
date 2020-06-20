@@ -139,10 +139,12 @@ void WorldEditor::load()
 	_fe3d.camera_load(90.0f, 0.1f, 1000.0f, vec3(0.0f), 0.0f, 0.0f);
 
 	// Enable graphics
-	_fe3d.gfx_enableAmbientLighting(0.75f);
-	_fe3d.gfx_enableDirectionalLighting(vec3(1000.0f), 0.75f);
+	_fe3d.gfx_enableAmbientLighting(0.5f);
+	_fe3d.gfx_enableDirectionalLighting(vec3(1000.0f), 0.5f);
 	_fe3d.gfx_enableMSAA();
 	_fe3d.gfx_enableWaterEffects();
+	_fe3d.gfx_enableBloom(1.0f, 0.0f, 10);
+	_fe3d.gfx_setSkyBrightness(0.75f);
 
 	// Other
 	_isLoaded = true;
@@ -167,6 +169,8 @@ void WorldEditor::unload()
 	_fe3d.gfx_disableDirectionalLighting();
 	_fe3d.gfx_disableMSAA();
 	_fe3d.gfx_disableWaterEffects();
+	_fe3d.gfx_disableBloom();
+	_fe3d.gfx_setSkyBrightness(1.0f);
 
 	// Reset variables
 	_isLoaded = false;

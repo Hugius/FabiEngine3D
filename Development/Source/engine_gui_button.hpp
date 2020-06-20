@@ -43,4 +43,8 @@ protected:
 private:
 	const bool _sizeIncreaseEnabled = true;
 	const bool _colorChangeEnabled  = true;
+
+	const float _totalSizeIncrease = 1.1f;
+	const float _increaseFactor = 1.003f;
+	const float _decreaseFactor = 0.997f;
 };

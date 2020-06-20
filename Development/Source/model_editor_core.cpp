@@ -67,14 +67,16 @@ void ModelEditor::load()
 	_fe3d.camera_enableLookat(vec3(0.0f));
 
 	// Graphics
-	_fe3d.gfx_enableAmbientLighting(0.75f);
-	_fe3d.gfx_enableDirectionalLighting(vec3(1000.0f), 0.75f);
+	_fe3d.gfx_enableAmbientLighting(0.5f);
+	_fe3d.gfx_enableDirectionalLighting(vec3(1000.0f), 0.5f);
 	_fe3d.gfx_enableLightMapping();
 	_fe3d.gfx_enableSkyReflections(0.25f);
 	_fe3d.gfx_enableMSAA();
 	_fe3d.gfx_enableSceneReflections(0.0f, 0.25f);
 	_fe3d.gfx_enableShadows(vec3(50.0f, 50.0f, 0.0f), vec3(0.0f), 100.0f, 150.0);
 	_fe3d.gfx_enableSpecularLighting(16.0f);
+	_fe3d.gfx_enableBloom(1.0f, 0.0f, 10);
+	_fe3d.gfx_setSkyBrightness(0.75f);
 	
 	// 3D Environment
 	_fe3d.gameEntity_add("@grid", "Engine\\OBJs\\plane.obj", vec3(0.0f), vec3(0.0f), vec3(100.0f, 1.0f, 100.0f));
@@ -143,10 +145,10 @@ void ModelEditor::loadModels()
 
 		// Close file
 		file.close();
-	}
 
-	// Logging
-	_fe3d.logger_throwInfo("Models from project \"" + _currentProjectName + "\" loaded!");
+		// Logging
+		_fe3d.logger_throwInfo("Models from project \"" + _currentProjectName + "\" loaded!");
+	}
 }
 
 void ModelEditor::save()
@@ -224,6 +226,8 @@ void ModelEditor::unload()
 	_fe3d.gfx_disableSceneReflections();
 	_fe3d.gfx_disableShadows();
 	_fe3d.gfx_disableSpecularLighting();
+	_fe3d.gfx_disableBloom();
+	_fe3d.gfx_setSkyBrightness(1.0f);
 
 	// 3D environment
 	_fe3d.gameEntity_delete("@grid");

@@ -36,10 +36,10 @@ void WorldEditor::loadTerrainEntity()
 		// Load entity
 		_loadTerrainEntity();
 		_fe3d.terrainEntity_hide("@terrain");
-	}
 
-	// Logging
-	_fe3d.logger_throwInfo("Terrain data from project \"" + _currentProjectName + "\" loaded!");
+		// Logging
+		_fe3d.logger_throwInfo("Terrain data from project \"" + _currentProjectName + "\" loaded!");
+	}
 }
 
 void WorldEditor::_saveTerrainData()

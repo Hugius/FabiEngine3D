@@ -13,6 +13,7 @@ void WorldEditor::loadSkyEntity()
 
 	string skyPath = _fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\sky.fe3d";
 
+	// Reserve for either loading or creation later on
 	_skyTexturePaths.clear();
 	_skyTexturePaths.resize(6);
 
@@ -33,10 +34,10 @@ void WorldEditor::loadSkyEntity()
 		// Load entity
 		_loadSkyEntity();
 		_fe3d.skyEntity_hide("@sky");
-	}
 
-	// Logging
-	_fe3d.logger_throwInfo("Sky data from project \"" + _currentProjectName + "\" loaded!");
+		// Logging
+		_fe3d.logger_throwInfo("Sky data from project \"" + _currentProjectName + "\" loaded!");
+	}
 }
 
 void WorldEditor::_saveSkyData()

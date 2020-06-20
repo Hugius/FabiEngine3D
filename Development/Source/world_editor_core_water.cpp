@@ -36,10 +36,10 @@ void WorldEditor::loadWaterEntity()
 		// Load entity
 		_loadWaterEntity();
 		_fe3d.waterEntity_hide("@water");
-	}
 
-	// Logging
-	_fe3d.logger_throwInfo("Water data from project \"" + _currentProjectName + "\" loaded!");
+		// Logging
+		_fe3d.logger_throwInfo("Water data from project \"" + _currentProjectName + "\" loaded!");
+	}
 }
 
 void WorldEditor::_saveWaterData()

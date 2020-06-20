@@ -67,19 +67,17 @@ void BillboardEditor::load()
 	_fe3d.camera_enableLookat(_billboardPosition);
 
 	// Graphics
-	_fe3d.gfx_enableAmbientLighting(0.75f);
-	_fe3d.gfx_enableDirectionalLighting(vec3(1000.0f), 0.75f);
+	_fe3d.gfx_enableAmbientLighting(0.5f);
+	_fe3d.gfx_enableDirectionalLighting(vec3(1000.0f), 0.5f);
 	_fe3d.gfx_enableMSAA();
-	_fe3d.gfx_enableSceneReflections(0.0f, 0.25f);
-	_fe3d.gfx_enableSpecularLighting(16.0f);
 	_fe3d.gfx_enableShadows(vec3(25.0f), vec3(0.0f), 50.0f, 50.0f);
+	_fe3d.gfx_enableBloom(1.0f, 0.0f, 10);
+	_fe3d.gfx_setSkyBrightness(0.75f);
 	
 	// 3D Environment
 	_fe3d.gameEntity_add("@grid", "Engine\\OBJs\\plane.obj", vec3(0.0f), vec3(0.0f), vec3(100.0f, 1.0f, 100.0f));
-	_fe3d.gameEntity_setDiffuseMap("@grid", "Engine\\Textures\\metal.png");
+	_fe3d.gameEntity_setDiffuseMap("@grid", "Engine\\Textures\\grass.png");
 	_fe3d.gameEntity_setUvRepeat("@grid", 25.0f);
-	_fe3d.gameEntity_setSceneReflective("@grid", true);
-	_fe3d.gameEntity_setSpecularLighted("@grid", true);
 	_fe3d.gameEntity_add("@cube", "Engine\\OBJs\\cube.obj", vec3(5.0f, 0.0f, 0.0f), vec3(0.0f), vec3(1.0f, 1.0f, 1.0f));
 	_fe3d.gameEntity_setDiffuseMap("@cube", "Engine\\Textures\\cube.png");
 	_fe3d.gameEntity_setFaceCulled("@cube", true);
@@ -212,6 +210,8 @@ void BillboardEditor::unload()
 	_fe3d.gfx_disableMSAA();
 	_fe3d.gfx_disableSceneReflections();
 	_fe3d.gfx_disableSpecularLighting();
+	_fe3d.gfx_disableBloom();
+	_fe3d.gfx_setSkyBrightness(1.0f);
 
 	// 3D environment
 	_fe3d.gameEntity_delete("@grid");

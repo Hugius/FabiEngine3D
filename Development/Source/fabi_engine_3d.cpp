@@ -189,8 +189,13 @@ void FabiEngine3D::skyEntity_addNightCubemap(const string& ID, const string& tex
 
 void FabiEngine3D::skyEntity_delete(const string& ID)
 {
+	// Unselect sky if selected
+	if (ID == skyEntity_getSelectedID())
+	{
+		_core->_skyEntityManager.selectSky("");
+	}
+
 	_core->_skyEntityManager.deleteEntity(ID, EntityType::SKY);
-	_core->_skyEntityManager.selectSky("");
 }
 
 void FabiEngine3D::skyEntity_hide(const string& ID)
@@ -271,8 +276,13 @@ void FabiEngine3D::terrainEntity_add(const string& ID, const string& heightmapNa
 
 void FabiEngine3D::terrainEntity_delete(const string& ID)
 {
+	// Unselect terrain if selected
+	if (ID == terrainEntity_getSelectedID())
+	{
+		_core->_terrainEntityManager.selectTerrain("");
+	}
+
 	_core->_terrainEntityManager.deleteEntity(ID, EntityType::TERRAIN);
-	_core->_terrainEntityManager.selectTerrain("");
 }
 
 void FabiEngine3D::terrainEntity_hide(const string& ID)
@@ -349,8 +359,13 @@ void FabiEngine3D::waterEntity_add(const string& ID, vec3 pos, float size)
 
 void FabiEngine3D::waterEntity_delete(const string& ID)
 {
+	// Unselect water if selected
+	if (ID == waterEntity_getSelectedID())
+	{
+		_core->_waterEntityManager.selectWater("");
+	}
+
 	_core->_waterEntityManager.deleteEntity(ID, EntityType::WATER);
-	_core->_waterEntityManager.selectWater("");
 }
 
 void FabiEngine3D::waterEntity_hide(const string& ID)

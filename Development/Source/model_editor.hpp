@@ -61,6 +61,9 @@ private:
 	bool _isLoaded = false;
 
 	const vec3 _defaultCameraPosition = vec3(0.0f, 5.0f, 5.0f);
+	vec2 _totalCursorDifference = vec2(0.0f);
+	vec2 _cameraAcceleration = vec2(0.0f);
+	vec2 _lastCursorPos = vec2(0.0f);
 
 	Direction _modelResizeDirection = Direction::X;
 

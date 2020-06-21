@@ -139,18 +139,13 @@ void WorldEditor::load()
 	_fe3d.camera_setPosition(vec3(0.0f));
 	
 	// Enable graphics
-	_fe3d.gfx_enableAmbientLighting(0.5f);
-	_fe3d.gfx_enableDirectionalLighting(vec3(1000.0f), 0.5f);
+	_fe3d.gfx_enableAmbientLighting(1.0f);
+	_fe3d.gfx_enableDirectionalLighting(vec3(1000.0f), 1.0f);
 	_fe3d.gfx_enableMSAA();
 	_fe3d.gfx_enableWaterEffects();
-	_fe3d.gfx_enableBloom(1.0f, 0.0f, 10);
-	_fe3d.gfx_setSkyBrightness(0.75f);
 
 	// Other
 	_isLoaded = true;
-
-	// Disable default skybox
-	_fe3d.skyEntity_select("");
 
 	// Core
 	loadSkyEntity();
@@ -172,8 +167,20 @@ void WorldEditor::unload()
 	_fe3d.gfx_disableDirectionalLighting();
 	_fe3d.gfx_disableMSAA();
 	_fe3d.gfx_disableWaterEffects();
-	_fe3d.gfx_disableBloom();
-	_fe3d.gfx_setSkyBrightness(1.0f);
+
+	// Core
+	_unloadSkyData();
+	_unloadTerrainData();
+	_unloadWaterData();
+
+	// Enable default sky
+	_fe3d.skyEntity_select("@defaultSky");
+
+	// Camera
+	_fe3d.camera_setPosition(vec3(0.0f));
+	_fe3d.camera_setYaw(0.0f);
+	_fe3d.camera_setPitch(0.0f);
+	_fe3d.camera_disableLookat();
 
 	// Reset variables
 	_isLoaded = false;
@@ -215,11 +222,6 @@ void WorldEditor::unload()
 	_waterCameraDistance = 0.0f;
 	_waterHeightSpeed = 0.1f;
 
-	// Core
-	_unloadSkyData();
-	_unloadTerrainData();
-	_unloadWaterData();
-
-	// Enable default skybox
+	// Select the default sky
 	_fe3d.skyEntity_select("@defaultSky");
 }

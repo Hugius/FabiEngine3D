@@ -40,16 +40,14 @@ void EntityPlacer::initializeGUI()
 void EntityPlacer::load()
 {
 	// Enable graphics
-	_fe3d.gfx_enableAmbientLighting(0.5f);
-	_fe3d.gfx_enableDirectionalLighting(vec3(1000.0f), 0.5f);
+	_fe3d.gfx_enableAmbientLighting(1.0f);
+	_fe3d.gfx_enableDirectionalLighting(vec3(1000.0f), 1.0f);
 	_fe3d.gfx_enableLightMapping();
 	_fe3d.gfx_enableSkyReflections(0.25f);
 	_fe3d.gfx_enableMSAA();
 	_fe3d.gfx_enableWaterEffects();
 	//_fe3d.gfx_enableShadows(vec3(50.0f, 50.0f, 0.0f), vec3(0.0f), 100.0f, 150.0);
 	_fe3d.gfx_enableSpecularLighting(16.0f);
-	_fe3d.gfx_enableBloom(1.0f, 0.0f, 10);
-	_fe3d.gfx_setSkyBrightness(0.75f);
 
 	// Disable default skybox
 	_fe3d.skyEntity_select("");
@@ -127,8 +125,6 @@ void EntityPlacer::unload()
 	_fe3d.gfx_disableWaterEffects();
 	_fe3d.gfx_disableShadows();
 	_fe3d.gfx_disableSpecularLighting();
-	_fe3d.gfx_disableBloom();
-	_fe3d.gfx_setSkyBrightness(1.0f);
 
 	// Delete world entities
 	_fe3d.skyEntity_delete("@sky");
@@ -149,6 +145,12 @@ void EntityPlacer::unload()
 
 	// Enable default skybox
 	_fe3d.skyEntity_select("@defaultSky");
+
+	// Camera
+	_fe3d.camera_setPosition(vec3(0.0f));
+	_fe3d.camera_setYaw(0.0f);
+	_fe3d.camera_setPitch(0.0f);
+	_fe3d.camera_disableFirstPersonView();
 
 	// Other
 	_leftWindow->getScreen("modelPlaceManagement")->getScrollingList("modelList")->deleteButtons();

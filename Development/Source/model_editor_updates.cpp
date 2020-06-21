@@ -148,12 +148,9 @@ void ModelEditor::_updateModelEditingCamera()
 	if (_isLoaded)
 	{
 		// Update cursor difference
-		static vec2 totalCursorDifference = vec2(0.0f);
-		static vec2 cameraAcceleration = vec2(0.0f);
-		static vec2 lastCursorPos = _fe3d.misc_convertFromScreenCoords(_fe3d.misc_getMousePos());
 		vec2 cursorPosition = _fe3d.misc_convertFromScreenCoords(_fe3d.misc_getMousePos());
-		vec2 cursorDifference = cursorPosition - lastCursorPos;
-		lastCursorPos = _fe3d.misc_convertFromScreenCoords(_fe3d.misc_getMousePos());
+		vec2 cursorDifference = cursorPosition - _lastCursorPos;
+		_lastCursorPos = _fe3d.misc_convertFromScreenCoords(_fe3d.misc_getMousePos());
 
 		// Update scrolling
 		static float scollSpeed = 0.0f;
@@ -176,21 +173,21 @@ void ModelEditor::_updateModelEditingCamera()
 			{
 				if (_fe3d.misc_isMouseInsideViewport()) // Only if cursor inside 3d screen
 				{
-					cameraAcceleration.x += cursorDifference.x * _cameraSpeed;
-					cameraAcceleration.y += cursorDifference.y * _cameraSpeed;
+					_cameraAcceleration.x += cursorDifference.x * _cameraSpeed;
+					_cameraAcceleration.y += cursorDifference.y * _cameraSpeed;
 				}
 			}
 		}
 
 		// Calculate cursor moving speed
-		cameraAcceleration *= 0.975f;
-		totalCursorDifference += cameraAcceleration;
-		totalCursorDifference.y = std::clamp(totalCursorDifference.y, 0.0f, 1.0f);
+		_cameraAcceleration *= 0.975f;
+		_totalCursorDifference += _cameraAcceleration;
+		_totalCursorDifference.y = std::clamp(_totalCursorDifference.y, 0.0f, 1.0f);
 
 		// Calculate new camera position
-		float x = (_cameraDistance * sin(totalCursorDifference.x));
-		float y = _minCameraHeight + (_cameraDistance * totalCursorDifference.y);
-		float z = (_cameraDistance * cos(totalCursorDifference.x));
+		float x = (_cameraDistance * sin(_totalCursorDifference.x));
+		float y = _minCameraHeight + (_cameraDistance * _totalCursorDifference.y);
+		float z = (_cameraDistance * cos(_totalCursorDifference.x));
 
 		// Update camera position
 		_fe3d.camera_setPosition(vec3(x, y, z));

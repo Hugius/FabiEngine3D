@@ -8,6 +8,29 @@ void WorldEditor::_updateWaterMenu()
 	{
 		auto screen = _window->getScreen("waterMenu");
 
+		// Show sky
+		if (_fe3d.skyEntity_isExisting("@sky"))
+		{
+			_fe3d.skyEntity_select("@sky");
+			_fe3d.skyEntity_show("@sky");
+		}
+
+		// Show terrain
+		if (_fe3d.terrainEntity_isExisting("@terrain"))
+		{
+			_fe3d.terrainEntity_show("@terrain");
+		}
+
+		// If water existing, show water and enable bloom
+		if (_fe3d.waterEntity_isExisting("@water"))
+		{
+			_fe3d.waterEntity_show("@water");
+		}
+		else // Otherwise just show default sky
+		{
+			_fe3d.skyEntity_select("@defaultSky");
+		}
+
 		// Update water management if possible
 		_updateWaterManagement();
 
@@ -22,24 +45,6 @@ void WorldEditor::_updateWaterMenu()
 			if (screen->getButton("create")->isHovered() || screen->getButton("edit")->isHovered())
 			{
 				_window->setActiveScreen("waterManagement");
-
-				// Show sky
-				if (_fe3d.skyEntity_isExisting("@sky"))
-				{
-					_fe3d.skyEntity_show("@sky");
-				}
-
-				// Show terrain
-				if (_fe3d.terrainEntity_isExisting("@terrain"))
-				{
-					_fe3d.terrainEntity_show("@terrain");
-				}
-
-				// Show water
-				if (_fe3d.waterEntity_isExisting("@water"))
-				{
-					_fe3d.waterEntity_show("@water");
-				}
 			}
 			else if (screen->getButton("remove")->isHovered())
 			{
@@ -83,6 +88,7 @@ void WorldEditor::_updateWaterManagement()
 				if (_fe3d.skyEntity_isExisting("@sky"))
 				{
 					_fe3d.skyEntity_hide("@sky");
+					_fe3d.skyEntity_select("@defaultSky");
 				}
 
 				// Hide terrain

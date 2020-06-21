@@ -6,8 +6,32 @@ void WorldEditor::_updateSkyMenu()
 	{
 		auto screen = _window->getScreen("skyMenu");
 
+		// If sky existing, show sky
+		if (_fe3d.skyEntity_isExisting("@sky"))
+		{
+			_fe3d.skyEntity_show("@sky");
+			_fe3d.skyEntity_select("@sky");
+		}
+		else // Otherwise just show default sky
+		{
+			_fe3d.skyEntity_select("@defaultSky");
+		}
+
+		// Hide terrain
+		if (_fe3d.terrainEntity_isExisting("@terrain"))
+		{
+			_fe3d.terrainEntity_hide("@terrain");
+		}
+
+		// Hide water
+		if (_fe3d.waterEntity_isExisting("@water"))
+		{
+			_fe3d.waterEntity_hide("@water");
+		}
+
 		// Update sky management if possible
 		_updateSkyManagement();
+		_updateSkyCamera();
 
 		// Update buttons hoverability
 		screen->getButton("create")->setHoverable(!_fe3d.skyEntity_isExisting("@sky"));
@@ -20,24 +44,6 @@ void WorldEditor::_updateSkyMenu()
 			if (screen->getButton("create")->isHovered() || screen->getButton("edit")->isHovered())
 			{
 				_window->setActiveScreen("skyManagement");
-
-				// Show sky
-				if (_fe3d.skyEntity_isExisting("@sky"))
-				{
-					_fe3d.skyEntity_show("@sky");
-				}
-
-				// Hide terrain
-				if (_fe3d.terrainEntity_isExisting("@terrain"))
-				{
-					_fe3d.terrainEntity_hide("@terrain");
-				}
-
-				// Hide water
-				if (_fe3d.waterEntity_isExisting("@water"))
-				{
-					_fe3d.waterEntity_hide("@water");
-				}
 			}
 			else if (screen->getButton("remove")->isHovered())
 			{
@@ -54,7 +60,7 @@ void WorldEditor::_updateSkyMenu()
 
 void WorldEditor::_updateSkyManagement()
 {
-	if (_currentWorldPart == WorldPart::SKY)
+	if (_window->getActiveScreen()->getID() == "skyManagement")
 	{
 		auto screen = _window->getScreen("skyManagement");
 
@@ -72,12 +78,6 @@ void WorldEditor::_updateSkyManagement()
 			else if (screen->getButton("back")->isHovered())
 			{
 				_window->setActiveScreen("skyMenu");
-
-				// Hide sky
-				if (_fe3d.skyEntity_isExisting("@sky"))
-				{
-					_fe3d.skyEntity_hide("@sky");
-				}
 			}
 		}
 
@@ -85,10 +85,9 @@ void WorldEditor::_updateSkyManagement()
 		screen->getButton("options")->setHoverable(_fe3d.skyEntity_isExisting("@sky"));
 
 		// Update sub-menus
-		_updateSkyCamera();
 		_updateSkyMesh();
 		_updateSkyOptions();
-		
+
 		// Dynamic updates
 		if (_fe3d.skyEntity_isExisting("@sky"))
 		{

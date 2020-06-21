@@ -19,8 +19,11 @@ void EngineController::FE3D_CONTROLLER_INIT()
 	// Default cube map
 	string path = "Engine\\Textures\\";
 	skyEntity_add("@defaultSky", { path + "right.png", path + "left.png", path + "top.png", path + "bottom.png", path + "back.png", path + "front.png" });
-	skyEntity_setRotationSpeed("@defaultSky", 5.0f);
 	skyEntity_select("@defaultSky");
+
+	// Default bloom effect for all scenes
+	gfx_enableBloom(1.0f, 0.0f, 10);
+	gfx_setSkyBrightness(0.75f);
 
 	// Default camera
 	camera_load(90.0f, 0.1f, 10000.0f, vec3(0.0f), 0.0f, 0.0f);

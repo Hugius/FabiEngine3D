@@ -8,6 +8,9 @@ void WorldEditor::update()
 		{
 			auto screen = _window->getScreen("worldManagement");
 
+			// Select the default sky
+			_fe3d.skyEntity_select("@defaultSky");
+
 			// Hide sky
 			if (_fe3d.skyEntity_isExisting("@sky"))
 			{

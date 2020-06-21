@@ -63,7 +63,8 @@ void ModelEditor::initializeGUI()
 void ModelEditor::load()
 {
 	// Camera
-	_fe3d.camera_load(90.0f, 0.1f, 1000.0f, _defaultCameraPosition, -90.0f, 0.0f);
+	_fe3d.camera_setPosition(_defaultCameraPosition);
+	_fe3d.camera_setYaw(-90.0f);
 	_fe3d.camera_enableLookat(vec3(0.0f));
 
 	// Graphics
@@ -72,9 +73,9 @@ void ModelEditor::load()
 	_fe3d.gfx_enableLightMapping();
 	_fe3d.gfx_enableSkyReflections(0.25f);
 	_fe3d.gfx_enableMSAA();
-	_fe3d.gfx_enableSceneReflections(0.0f, 0.25f);
+	_fe3d.gfx_enableSceneReflections(0.0f, 0.3f);
 	_fe3d.gfx_enableShadows(vec3(50.0f, 50.0f, 0.0f), vec3(0.0f), 100.0f, 150.0);
-	_fe3d.gfx_enableSpecularLighting(16.0f);
+	_fe3d.gfx_enableSpecularLighting(32.0f);
 	_fe3d.gfx_enableBloom(1.0f, 0.0f, 10);
 	_fe3d.gfx_setSkyBrightness(0.75f);
 	
@@ -87,10 +88,6 @@ void ModelEditor::load()
 	_fe3d.gameEntity_add("@cube", "Engine\\OBJs\\cube.obj", vec3(5.0f, 0.0f, 0.0f), vec3(0.0f), vec3(1.0f, 1.0f, 1.0f));
 	_fe3d.gameEntity_setDiffuseMap("@cube", "Engine\\Textures\\cube.png");
 	_fe3d.gameEntity_setFaceCulled("@cube", true);
-	string path = "Engine\\Textures\\";
-	_fe3d.skyEntity_add("@sky", { path + "right.png", path + "left.png", path + "top.png", path + "bottom.png", path + "back.png", path + "front.png" });
-	_fe3d.skyEntity_setRotationSpeed("@sky", 0.1f);
-	_fe3d.skyEntity_select("@sky");
 
 	// Other
 	loadModels();
@@ -232,7 +229,6 @@ void ModelEditor::unload()
 	// 3D environment
 	_fe3d.gameEntity_delete("@grid");
 	_fe3d.gameEntity_delete("@cube");
-	_fe3d.skyEntity_delete("@sky");
 
 	// Delete models
 	_fe3d.gameEntity_deleteAll();

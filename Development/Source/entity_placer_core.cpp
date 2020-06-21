@@ -30,9 +30,11 @@ void EntityPlacer::initializeGUI()
 
 	// Left-viewport: mainWindow - billboardPlaceManagement
 	_leftWindow->addScreen("billboardPlaceManagement");
+	_leftWindow->getScreen("billboardPlaceManagement")->addButton("back", vec2(0.0f, -0.63f), vec2(1.0f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Go back", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 
 	// Left-viewport: mainWindow - lightPlaceManagement
 	_leftWindow->addScreen("lightPlaceManagement");
+	_leftWindow->getScreen("lightPlaceManagement")->addButton("back", vec2(0.0f, -0.63f), vec2(1.0f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Go back", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 }
 
 void EntityPlacer::load()
@@ -48,6 +50,9 @@ void EntityPlacer::load()
 	_fe3d.gfx_enableSpecularLighting(16.0f);
 	_fe3d.gfx_enableBloom(1.0f, 0.0f, 10);
 	_fe3d.gfx_setSkyBrightness(0.75f);
+
+	// Disable default skybox
+	_fe3d.skyEntity_select("");
 
 	// Load world entities
 	_worldEditor.loadSkyEntity();
@@ -73,20 +78,23 @@ void EntityPlacer::load()
 	}
 
 	// Camera properties
-	if (_fe3d.terrainEntity_isExisting("@terrain")) // Terrain over water
+	float height = 0.0f;
+
+	// Set camera height relative to water size
+	if (_fe3d.waterEntity_isExisting("@water"))
 	{
-		float height = _fe3d.terrainEntity_getMaxHeight("@terrain");
-		_fe3d.camera_load(90.0f, 0.1f, 1000.0f, vec3(0.0f, height, 0.0f), 0.0f, 0.0f);
+		float size = _fe3d.waterEntity_getSize("@water") / 2.0f;
+		height = _fe3d.waterEntity_getSurfaceHeight("@water") + (size / 10.0f);
 	}
-	else // No terrain
+
+	// Terrain can overwrite camera height
+	if (_fe3d.terrainEntity_isExisting("@terrain"))
 	{
-		if (_fe3d.waterEntity_isExisting("@water")) // If water loaded
-		{
-			float size =  _fe3d.waterEntity_getSize("@water") / 2.0f;
-			float height = _fe3d.waterEntity_getSurfaceHeight("@water") + (size / 10.0f);
-			_fe3d.camera_load(90.0f, 0.1f, 1000.0f, vec3(0.0f, height, 0.0f), 0.0f, 0.0f);
-		}
+		height = _fe3d.terrainEntity_getMaxHeight("@terrain");
 	}
+
+	// Load camera
+	_fe3d.camera_setPosition(vec3(0.0f, height, 0.0f));
 
 	// Model loading
 	_modelEditor.loadModels();
@@ -138,6 +146,9 @@ void EntityPlacer::unload()
 
 	// Delete name textfields
 	_gui->getGlobalScreen()->deleteTextfield("selectedModelName");
+
+	// Enable default skybox
+	_fe3d.skyEntity_select("@defaultSky");
 
 	// Other
 	_leftWindow->getScreen("modelPlaceManagement")->getScrollingList("modelList")->deleteButtons();

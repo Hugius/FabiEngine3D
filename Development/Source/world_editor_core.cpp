@@ -136,8 +136,8 @@ void WorldEditor::initializeGUI()
 void WorldEditor::load()
 {
 	// Camera
-	_fe3d.camera_load(90.0f, 0.1f, 1000.0f, vec3(0.0f), 0.0f, 0.0f);
-
+	_fe3d.camera_setPosition(vec3(0.0f));
+	
 	// Enable graphics
 	_fe3d.gfx_enableAmbientLighting(0.5f);
 	_fe3d.gfx_enableDirectionalLighting(vec3(1000.0f), 0.5f);
@@ -148,6 +148,9 @@ void WorldEditor::load()
 
 	// Other
 	_isLoaded = true;
+
+	// Disable default skybox
+	_fe3d.skyEntity_select("");
 
 	// Core
 	loadSkyEntity();
@@ -216,4 +219,7 @@ void WorldEditor::unload()
 	_unloadSkyData();
 	_unloadTerrainData();
 	_unloadWaterData();
+
+	// Enable default skybox
+	_fe3d.skyEntity_select("@defaultSky");
 }

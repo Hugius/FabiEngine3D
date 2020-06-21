@@ -13,7 +13,19 @@ EngineController::EngineController() :
 
 void EngineController::FE3D_CONTROLLER_INIT()
 {
+	// Main color
 	misc_setMainRenderingColor(vec3(0.5f, 0.5f, 1.0f));
+
+	// Default cube map
+	string path = "Engine\\Textures\\";
+	skyEntity_add("@defaultSky", { path + "right.png", path + "left.png", path + "top.png", path + "bottom.png", path + "back.png", path + "front.png" });
+	skyEntity_setRotationSpeed("@defaultSky", 5.0f);
+	skyEntity_select("@defaultSky");
+
+	// Default camera
+	camera_load(90.0f, 0.1f, 10000.0f, vec3(0.0f), 0.0f, 0.0f);
+
+	// GUI viewports
 	_topViewportController.initialize();
 	_leftViewportController.initialize();
 	_rightViewportController.initialize();

@@ -33,90 +33,64 @@ void WaterEntityManager::selectWater(const string & ID)
 
 void WaterEntityManager::addWaterEntity(const string & ID, vec3 pos, float size)
 {
-	// Saving the surface height
+	// Variables
 	float surfaceHeight = pos.y;
 	pos.y = 0.0f;
-
-	// Make (0,0) the center
-	size /= 2.0f;
-
-	// Variables
+	float halfSize = size / 2.0f;
 	vector<float> waterVertices;
 
-	// Creating flat tiled water surface
-	for (float x = -size; x < size; x++)
-	{
-		for (float z = -size; z < size; z++)
-		{
-			float firstVertexX = pos.x + x;
-			float firstVertexY = pos.y;
-			float firstVertexZ = pos.z + z + 1;
-			float firstUvX = (x / size);
-			float firstUvY = ((z / size) + (1.0f / size));
+	// Top-left vertex
+	waterVertices.push_back(pos.x - halfSize);
+	waterVertices.push_back(pos.y);
+	waterVertices.push_back(pos.z + halfSize);
+	waterVertices.push_back(0.0f);
+	waterVertices.push_back(1.0f);
 
-			float secondVertexX = pos.x + x + 1;
-			float secondVertexY = pos.y;
-			float secondVertexZ = pos.z + z + 1;
-			float secondUvX = ((x / size) + (1.0f / size));
-			float secondUvY = ((z / size) + (1.0f / size));
+	// Top-right vertex
+	waterVertices.push_back(pos.x + halfSize);
+	waterVertices.push_back(pos.y);
+	waterVertices.push_back(pos.z + halfSize);
+	waterVertices.push_back(1.0f);
+	waterVertices.push_back(1.0f);
 
-			float thirdVertexX = pos.x + x + 1;
-			float thirdVertexY = pos.y;
-			float thirdVertexZ = pos.z + z;
-			float thirdUvX = ((x / size) + (1.0f / size));
-			float thirdUvY = (z / size);
+	// Bottom-right vertex
+	waterVertices.push_back(pos.x + halfSize);
+	waterVertices.push_back(pos.y);
+	waterVertices.push_back(pos.z - halfSize);
+	waterVertices.push_back(1.0f);
+	waterVertices.push_back(0.0f);
 
-			float fourthVertexX = pos.x + x;
-			float fourthVertexY = pos.y;
-			float fourthVertexZ = pos.z + z;
-			float fourthUvX = (x / size);
-			float fourthUvY = (z / size);
+	// Bottom-right vertex
+	waterVertices.push_back(pos.x + halfSize);
+	waterVertices.push_back(pos.y);
+	waterVertices.push_back(pos.z - halfSize);
+	waterVertices.push_back(1.0f);
+	waterVertices.push_back(0.0f);
 
-			waterVertices.push_back(firstVertexX);
-			waterVertices.push_back(firstVertexY);
-			waterVertices.push_back(firstVertexZ);
-			waterVertices.push_back(firstUvX);
-			waterVertices.push_back(firstUvY);
+	// Bottom-left vertex
+	waterVertices.push_back(pos.x - halfSize);
+	waterVertices.push_back(pos.y);
+	waterVertices.push_back(pos.z - halfSize);
+	waterVertices.push_back(0.0f);
+	waterVertices.push_back(0.0f);
 
-			waterVertices.push_back(secondVertexX);
-			waterVertices.push_back(secondVertexY);
-			waterVertices.push_back(secondVertexZ);
-			waterVertices.push_back(secondUvX);
-			waterVertices.push_back(secondUvY);
-
-			waterVertices.push_back(thirdVertexX);
-			waterVertices.push_back(thirdVertexY);
-			waterVertices.push_back(thirdVertexZ);
-			waterVertices.push_back(thirdUvX);
-			waterVertices.push_back(thirdUvY);
-
-			waterVertices.push_back(thirdVertexX);
-			waterVertices.push_back(thirdVertexY);
-			waterVertices.push_back(thirdVertexZ);
-			waterVertices.push_back(thirdUvX);
-			waterVertices.push_back(thirdUvY);
-
-			waterVertices.push_back(fourthVertexX);
-			waterVertices.push_back(fourthVertexY);
-			waterVertices.push_back(fourthVertexZ);
-			waterVertices.push_back(fourthUvX);
-			waterVertices.push_back(fourthUvY);
-
-			waterVertices.push_back(firstVertexX);
-			waterVertices.push_back(firstVertexY);
-			waterVertices.push_back(firstVertexZ);
-			waterVertices.push_back(firstUvX);
-			waterVertices.push_back(firstUvY);
-		}
-	}
+	// Top-left vertex
+	waterVertices.push_back(pos.x - halfSize);
+	waterVertices.push_back(pos.y);
+	waterVertices.push_back(pos.z + halfSize);
+	waterVertices.push_back(0.0f);
+	waterVertices.push_back(1.0f);
 	
 	// Create entity
 	_createEntity(EntityType::WATER, ID)->load(ID);
 
-	// Filly entity
+	// Fill entity
 	getEntity(ID)->addOglBuffer(new OpenGLBuffer(SHAPE_SURFACE, &waterVertices[0], waterVertices.size()));
 	getEntity(ID)->setSurfaceHeight(surfaceHeight);
-	getEntity(ID)->setSize(size * 2.0f);
+	getEntity(ID)->setSize(size);
+
+	// Cleanup
+	waterVertices.clear();
 }
 
 void WaterEntityManager::update()

@@ -63,7 +63,8 @@ void BillboardEditor::initializeGUI()
 void BillboardEditor::load()
 {
 	// Camera
-	_fe3d.camera_load(90.0f, 0.1f, 1000.0f, _defaultCameraPosition, -90.0f, 0.0f);
+	_fe3d.camera_setPosition(_defaultCameraPosition);
+	_fe3d.camera_setYaw(-90.0f);
 	_fe3d.camera_enableLookat(_billboardPosition);
 
 	// Graphics
@@ -81,10 +82,6 @@ void BillboardEditor::load()
 	_fe3d.gameEntity_add("@cube", "Engine\\OBJs\\cube.obj", vec3(5.0f, 0.0f, 0.0f), vec3(0.0f), vec3(1.0f, 1.0f, 1.0f));
 	_fe3d.gameEntity_setDiffuseMap("@cube", "Engine\\Textures\\cube.png");
 	_fe3d.gameEntity_setFaceCulled("@cube", true);
-	string path = "Engine\\Textures\\";
-	_fe3d.skyEntity_add("@sky", { path + "right.png", path + "left.png", path + "top.png", path + "bottom.png", path + "back.png", path + "front.png" });
-	_fe3d.skyEntity_setRotationSpeed("@sky", 0.1f);
-	_fe3d.skyEntity_select("@sky");
 
 	// Other
 	_gui->getGlobalScreen()->addTextfield("selectedBillboardName", vec2(0.0f, 0.85f), vec2(0.5f, 0.1f), "", vec3(1.0f));
@@ -216,7 +213,6 @@ void BillboardEditor::unload()
 	// 3D environment
 	_fe3d.gameEntity_delete("@grid");
 	_fe3d.gameEntity_delete("@cube");
-	_fe3d.skyEntity_delete("@sky");
 
 	// Delete billboards
 	_fe3d.billboardEntity_deleteAll();

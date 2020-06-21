@@ -30,7 +30,7 @@ void LeftViewportController::initialize()
 }
 
 void LeftViewportController::update()
-{
+{	
 	auto window = _gui->getViewport("left")->getWindow("main");
 	auto screen = window->getScreen("main");
 

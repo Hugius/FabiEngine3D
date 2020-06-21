@@ -103,7 +103,7 @@ void WorldEditor::_loadSkyEntity()
 	{
 		_fe3d.skyEntity_delete("@sky");
 	}
-
+	
 	// Add new skybox
 	_fe3d.skyEntity_add("@sky", _skyTexturePaths);
 	_fe3d.skyEntity_select("@sky");

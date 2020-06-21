@@ -130,6 +130,16 @@ void FabiEngine3D::camera_setPitch(float val)
 	_core->_cameraManager.setPitch(val);
 }
 
+void FabiEngine3D::camera_setNearDistance(float val)
+{
+	_core->_cameraManager.setNearZ(val);
+}
+
+void FabiEngine3D::camera_setFarDistance(float val)
+{
+	_core->_cameraManager.setFarZ(val);
+}
+
 float FabiEngine3D::camera_getYaw()
 {
 	return _core->_cameraManager.getYaw();

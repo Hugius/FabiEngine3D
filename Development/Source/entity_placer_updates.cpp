@@ -85,10 +85,12 @@ void EntityPlacer::_updateModelScreen()
 					_fe3d.textEntity_setTextContent(textEntityID, "Model: " + _currentModelName.substr(1, _currentModelName.size()), 0.025f);
 					break;
 				}
-				else if (screen->getButton("back")->isHovered()) // Back button
-				{
-					_leftWindow->setActiveScreen("placeManagement");
-				}
+			}
+
+			// Back button
+			if (screen->getButton("back")->isHovered()) 
+			{
+				_leftWindow->setActiveScreen("placeManagement");
 			}
 		}
 
@@ -164,7 +166,17 @@ void EntityPlacer::_updateBillboardScreen()
 {
 	if (_isLoaded)
 	{
+		auto screen = _leftWindow->getScreen("billboardPlaceManagement");
 
+		// GUI management
+		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
+		{
+			// Back button
+			if (screen->getButton("back")->isHovered())
+			{
+				_leftWindow->setActiveScreen("placeManagement");
+			}
+		}
 	}
 }
 
@@ -172,7 +184,17 @@ void EntityPlacer::_updateLightScreen()
 {
 	if (_isLoaded)
 	{
+		auto screen = _leftWindow->getScreen("lightPlaceManagement");
 
+		// GUI management
+		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
+		{
+			// Back button
+			if (screen->getButton("back")->isHovered())
+			{
+				_leftWindow->setActiveScreen("placeManagement");
+			}
+		}
 	}
 }
 

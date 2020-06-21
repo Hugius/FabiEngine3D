@@ -53,6 +53,8 @@ public:
 	void  camera_setSensitivity(float speed);
 	void  camera_setYaw(float val);
 	void  camera_setPitch(float val);
+	void  camera_setNearDistance(float val);
+	void  camera_setFarDistance(float val);
 	float camera_getYaw();
 	float camera_getPitch();
 	float camera_getMouseOffset();

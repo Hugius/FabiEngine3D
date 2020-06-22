@@ -354,6 +354,12 @@
     <None Include="..\FabiEngine3D\Engine\Shaders\water_entity_shader.frag" />
     <None Include="..\FabiEngine3D\Engine\Shaders\water_entity_shader.vert" />
   </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\FabiEngine3D\Engine\AppIcon\AppIcon.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\FabiEngine3D\Engine\AppIcon\logo.ico" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

@@ -668,6 +668,9 @@
     <Filter Include="src\Editor System\Entity Placer">
       <UniqueIdentifier>{73f39bce-8d65-416c-abaa-6ed990784a08}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Icon">
+      <UniqueIdentifier>{e5229b65-bfaa-4046-8ffb-659e8a88166f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\FabiEngine3D\Engine\Shaders\aabb_entity_shader.frag">
@@ -748,5 +751,15 @@
     <None Include="..\FabiEngine3D\Engine\Shaders\shadow_shader.vert">
       <Filter>src\Rendering System\Shaders\Miscellaneous Shaders</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\FabiEngine3D\Engine\AppIcon\AppIcon.rc">
+      <Filter>src\Icon</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\FabiEngine3D\Engine\AppIcon\logo.ico">
+      <Filter>src\Icon</Filter>
+    </Image>
   </ItemGroup>
 </Project>

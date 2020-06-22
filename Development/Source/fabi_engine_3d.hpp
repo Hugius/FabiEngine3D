@@ -130,12 +130,6 @@ public:
 		const string& ID, const string& objPath,
 		vec3 position, vec3 rotation, vec3 size, bool visible = true
 	);
-	void gameEntity_addInstanced
-	(
-		const string& ID, const string& objPath,
-		const vector<vec3>& positions, vec3 rotation, vec3 size,
-		bool transparent, bool faceCulled, bool lightMapped, bool reflective, bool specular
-	);
 	void		   gameEntity_deleteAll();
 	void		   gameEntity_delete(const string& ID);
 	void		   gameEntity_deleteGroup(const string& ID);

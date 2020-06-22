@@ -4,41 +4,6 @@
 #include <ratio>
 #include <chrono>
 
-CoreEngine::CoreEngine(FabiEngine3D & fe3d) :
-	_fe3d(fe3d),
-	_windowManager(),
-	_objLoader(),
-	_texLoader(),
-	_audioLoader(),
-	_inputHandler(_timer),
-	_shaderBus(),
-	_cameraManager(_shaderBus),
-	_renderEngine(_shaderBus, _timer),
-	_skyEntityManager(_objLoader, _texLoader, _shaderBus),
-	_terrainEntityManager(_objLoader, _texLoader, _shaderBus),
-	_waterEntityManager(_objLoader, _texLoader, _shaderBus),
-	_gameEntityManager(_objLoader, _texLoader, _shaderBus),
-	_billboardEntityManager(_objLoader, _texLoader, _shaderBus, _cameraManager),
-	_aabbEntityManager(_objLoader, _texLoader, _shaderBus),
-	_lightEntityManager(_objLoader, _texLoader, _shaderBus),
-	_guiEntityManager(_objLoader, _texLoader, _shaderBus),
-	_textEntityManager(_objLoader, _texLoader, _shaderBus),
-	_shadowManager(),
-	_mousePicker(_shaderBus),
-	_collisionDetector(),
-	_collisionResolver(_collisionDetector),
-	_timer(),
-	_audioManager(_audioLoader),
-	_audioPlayer()
-{
-	
-}
-
-CoreEngine::~CoreEngine()
-{
-
-}
-
 void CoreEngine::_start()
 {
 	// Setup
@@ -71,10 +36,101 @@ void CoreEngine::_start()
 		_renderApplication();
 	}
 
+	// Finish engine controller
 	_fe3d.FE3D_CONTROLLER_DESTROY();
 }
 
 void CoreEngine::_stop()
 {
 	_isRunning = false;
+}
+
+void CoreEngine::_setupApplication()
+{
+	//// Display engine intro
+	//GuiEntity intro;
+	//intro.load("intro");
+	//intro.addOglBuffer(new OpenGLBuffer(0.0f, 0.0f, 2.0f, 2.0f, true));
+	//intro.setDiffuseMap(_texLoader.getTexture("Engine\\Textures\\intro.png", true, true));
+
+	//// Get intro resolution
+	//SDL_DisplayMode DM;
+	//SDL_GetDesktopDisplayMode(0, &DM);
+	//float width = float(DM.w);
+	//float height = float(DM.h);
+	//ivec2 introResolution = ivec2(int(width * 0.4f), int(height * 0.4f));
+	//_windowManager.setSize(introResolution);
+	//_windowManager.showWindow();
+	//_renderEngine.renderEngineIntro(&intro, introResolution);
+	//_windowManager.swapBackBuffer();
+
+	// Vignettte
+	vec2 pos = _fe3d.misc_convertToNDC(_fe3d.misc_convertFromScreenCoords(Config::getInst().getVpPos()));
+	vec2 size = 2.0f * (vec2(Config::getInst().getVpSize()) / vec2(Config::getInst().getWindowSize())) + vec2(0.0f, 0.005f);
+	_fe3d.guiEntity_add("@vignette", "Engine\\Textures\\vignette.png", pos, 0.0f, size, false);
+
+	// Initialize engine controller
+	_fe3d.FE3D_CONTROLLER_INIT();
+
+	// Set new window properties
+	_windowManager.setSize(Config::getInst().getWindowSize());
+	_windowManager.showWindow();
+	_windowManager.showBorder();
+}
+
+void CoreEngine::_updateApplication()
+{
+	// Exit application
+	if (_inputHandler.getKeyDown(Input::WINDOW_X_BUTTON))
+	{
+		_stop();
+	}
+
+	// User updates
+	_fe3d.FE3D_CONTROLLER_UPDATE();
+
+	// Camera updates
+	_cameraManager.update(_windowManager);
+
+	// Physics updates
+	vec2 offset = vec2(Config::getInst().getVpPos().x, Config::getInst().getWindowSize().y - (Config::getInst().getVpPos().y + Config::getInst().getVpSize().y));
+	vec2 mousePos = vec2(_windowManager.getMousePos()) - offset;
+	mousePos = (mousePos / vec2(Config::getInst().getVpSize())) * vec2(Config::getInst().getWindowSize()); // Convert fullscreen coords to viewport coords
+	_mousePicker.update(mousePos, _terrainEntityManager);
+	_collisionResolver.update(_aabbEntityManager.getEntities(), _terrainEntityManager, _cameraManager);
+
+	// 3D entity updates
+	_skyEntityManager.update();
+	_waterEntityManager.update();
+	_gameEntityManager.update();
+	_billboardEntityManager.update();
+	_aabbEntityManager.update(_gameEntityManager.getEntities());
+
+	// 2D entity updates
+	_guiEntityManager.update();
+	_textEntityManager.update();
+
+	// Miscellaneous updates
+	_shadowManager.update(_shaderBus);
+	_cameraManager.updateMatrices();
+	_audioPlayer.update(_cameraManager, _audioManager.getChunks(), _audioManager.getMusic());
+
+	// Performance profiling updates
+	_updatePerformanceProfiler();
+}
+
+void CoreEngine::_renderApplication()
+{
+	EntityBus entityBus
+	(
+		_skyEntityManager.getSelectedSky(), _terrainEntityManager.getSelectedTerrain(), _waterEntityManager.getSelectedWater(),
+		_gameEntityManager.getEntities(), _billboardEntityManager.getEntities(), _aabbEntityManager.getEntities(),
+		_lightEntityManager.getEntities(), _guiEntityManager.getEntities(), _textEntityManager.getEntities()
+	);
+
+	// Render entities
+	_renderEngine.renderScene(&entityBus, _cameraManager, _windowManager.getMousePos());
+
+	// Swap GPU buffer
+	_windowManager.swapBackBuffer();
 }

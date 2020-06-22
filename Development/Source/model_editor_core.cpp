@@ -73,13 +73,13 @@ void ModelEditor::load()
 	_fe3d.gfx_enableLightMapping();
 	_fe3d.gfx_enableSkyReflections(0.25f);
 	_fe3d.gfx_enableMSAA();
-	_fe3d.gfx_enableSceneReflections(0.0f, 0.3f);
+	_fe3d.gfx_enableSceneReflections(0.0f, 0.5f);
 	_fe3d.gfx_enableShadows(vec3(50.0f, 50.0f, 0.0f), vec3(0.0f), 100.0f, 150.0);
 	_fe3d.gfx_enableSpecularLighting(32.0f);
 	
 	// 3D Environment
 	_fe3d.gameEntity_add("@grid", "Engine\\OBJs\\plane.obj", vec3(0.0f), vec3(0.0f), vec3(100.0f, 1.0f, 100.0f));
-	_fe3d.gameEntity_setDiffuseMap("@grid", "Engine\\Textures\\metal.png");
+	_fe3d.gameEntity_setDiffuseMap("@grid", "Engine\\Textures\\marble.png");
 	_fe3d.gameEntity_setUvRepeat("@grid", 25.0f);
 	_fe3d.gameEntity_setSceneReflective("@grid", true);
 	_fe3d.gameEntity_setSpecularLighted("@grid", true);

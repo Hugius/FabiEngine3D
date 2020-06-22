@@ -33,11 +33,11 @@ vector<ObjPart> OBJLoader::_loadOBJ(const string& filePath)
 	// Get application root directory
 	char buffer[256]; size_t len = sizeof(buffer);
 	GetModuleFileName(NULL, buffer, len);
-	string fullDir = buffer;
-	fullDir = fullDir.substr(0, fullDir.size() - 25);
+	string rootDir = buffer;
+	rootDir = rootDir.substr(0, rootDir.size() - 25);
 
 	// Load .obj file
-	string path = fullDir + filePath;
+	string path = rootDir + filePath;
 	FILE * file = fopen(path.c_str(), "r");
 	if (!std::filesystem::exists(path))
 	{

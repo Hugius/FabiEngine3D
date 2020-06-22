@@ -63,11 +63,11 @@ GLuint TextureLoader::_loadTexture(const string& filePath, bool mipmap, bool ani
 	// Get application root directory
 	char buffer[256]; size_t len = sizeof(buffer);
 	GetModuleFileName(NULL, buffer, len);
-	string fullDir = buffer;
-	fullDir = fullDir.substr(0, fullDir.size() - 25);
+	string rootDir = buffer;
+	rootDir = rootDir.substr(0, rootDir.size() - 25);
 
 	// Load actual texture data
-	SDL_Surface * surface = IMG_Load((fullDir + filePath).c_str());
+	SDL_Surface * surface = IMG_Load((rootDir + filePath).c_str());
 	if (surface == nullptr)
 	{
 		Logger::getInst().throwError("Texture error: " + string(SDL_GetError()));
@@ -137,15 +137,15 @@ vector<float> TextureLoader::_loadHeightmap(const string &filePath)
 	// Get application root directory
 	char buffer[256]; size_t len = sizeof(buffer);
 	GetModuleFileName(NULL, buffer, len);
-	string fullDir = buffer;
-	fullDir = fullDir.substr(0, fullDir.size() - 25);
+	string rootDir = buffer;
+	rootDir = rootDir.substr(0, rootDir.size() - 25);
 
 	// Pixels
 	vector<float> pixelIntensities;
 
 	// Open file
 	FILE * streamIn;
-	fopen_s(&streamIn, (fullDir + filePath).c_str(), "rb");
+	fopen_s(&streamIn, (rootDir + filePath).c_str(), "rb");
 	if (streamIn == (FILE *)0) 
 	{
 		Logger::getInst().throwError("Could not open heightmap: " + filePath);
@@ -187,8 +187,8 @@ GLuint TextureLoader::_loadCubemap(const vector<string> fileNames)
 	// Get application root directory
 	char buffer[256]; size_t len = sizeof(buffer);
 	GetModuleFileName(NULL, buffer, len);
-	string fullDir = buffer;
-	fullDir = fullDir.substr(0, fullDir.size() - 25);
+	string rootDir = buffer;
+	rootDir = rootDir.substr(0, rootDir.size() - 25);
 
 	// Init
 	GLuint textureID;
@@ -200,7 +200,7 @@ GLuint TextureLoader::_loadCubemap(const vector<string> fileNames)
 	for (GLuint i = 0; i < fileNames.size(); i++)
 	{
 		// Load SDL surface
-		SDL_Surface * surface = IMG_Load((fullDir + fileNames[i]).c_str());
+		SDL_Surface * surface = IMG_Load((rootDir + fileNames[i]).c_str());
 		if (surface == nullptr) 
 		{
 			Logger::getInst().throwError("Skybox textures could not be loaded: " + string(SDL_GetError()));
@@ -230,15 +230,15 @@ TTF_Font * TextureLoader::_loadFont(const string& fontPath)
 	// Get application root directory
 	char buffer[256]; size_t len = sizeof(buffer);
 	GetModuleFileName(NULL, buffer, len);
-	string fullDir = buffer;
-	fullDir = fullDir.substr(0, fullDir.size() - 25);
+	string rootDir = buffer;
+	rootDir = rootDir.substr(0, rootDir.size() - 25);
 
 	// Load font
 	auto it = _fontMap.find(fontPath);
 	if (it == _fontMap.end()) //Not in map (yet)
 	{
 		// Font loading
-		TTF_Font * font = TTF_OpenFont((fullDir + fontPath).c_str(), 50);
+		TTF_Font * font = TTF_OpenFont((rootDir + fontPath).c_str(), 50);
 		if (font == nullptr)
 		{
 			Logger::getInst().throwError("Texture error: " + string(SDL_GetError()));

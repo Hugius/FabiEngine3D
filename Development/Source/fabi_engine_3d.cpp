@@ -501,16 +501,6 @@ void FabiEngine3D::gameEntity_add
 	_core->_gameEntityManager.getEntity(ID)->setEnabled(visible);
 }
 
-void FabiEngine3D::gameEntity_addInstanced
-(
-	const string& ID, const string& modelName,
-	const vector<vec3>& positions, vec3 rotation, vec3 size,
-	bool transparent, bool faceCulled, bool lightMapped, bool reflective, bool specular
-)
-{
-	_core->_gameEntityManager.addGameEntity(ID, modelName, positions, rotation, size, transparent, faceCulled, lightMapped, reflective, specular);
-}
-
 void FabiEngine3D::gameEntity_delete(const string& ID)
 {
 	// Check if AABB entity is bound
@@ -2287,9 +2277,9 @@ string FabiEngine3D::misc_getRootDirectory()
 {
 	char buffer[256]; size_t len = sizeof(buffer);
 	GetModuleFileName(NULL, buffer, len);
-	string fullDir = buffer;
-	fullDir = fullDir.substr(0, fullDir.size() - 25);
-	return fullDir;
+	string rootDir = buffer;
+	rootDir = rootDir.substr(0, rootDir.size() - 25);
+	return rootDir;
 }
 
 ivec2 FabiEngine3D::misc_getMousePos()

@@ -5,11 +5,15 @@
 
 Config::Config()
 {
-	std::ifstream file;
+	// Get application root directory
+	char buffer[256]; size_t len = sizeof(buffer);
+	GetModuleFileName(NULL, buffer, len);
+	string rootDir = buffer;
+	rootDir = rootDir.substr(0, rootDir.size() - 25);
 
 	// Open config file
-	string path = "../Config.fe3d";
-	file.open(path);
+	string path = rootDir + "Config.fe3d";
+	std::ifstream file(path);
 	if (!std::filesystem::exists(path))
 	{
 		Logger::getInst().throwError("Could not load engine configuration file!");

@@ -21,7 +21,7 @@ void AudioManager::deleteAllChunks()
 
 void AudioManager::addMusic(const string& fileName)
 {
-	_musicList.push_back(AudioMusic(_audioLoader.getMusic("../Game/Audio/" + fileName)));
+	_musicList.push_back(AudioMusic(_audioLoader.getMusic(fileName)));
 }
 
 void AudioManager::removeMusic()
@@ -32,13 +32,13 @@ void AudioManager::removeMusic()
 void AudioManager::addGlobalChunk(const std::string& ID, const std::string& fileName)
 {
 	_checkValidAdd(ID);
-	_chunks.push_back(AudioChunk(ID, _audioLoader.getChunk("../Game/Audio/" + fileName)));
+	_chunks.push_back(AudioChunk(ID, _audioLoader.getChunk(fileName)));
 }
 
 void AudioManager::addPointChunk(const std::string& ID, const std::string& fileName, vec3 position, float maxDistance)
 {
 	_checkValidAdd(ID);
-	_chunks.push_back(AudioChunk(ID, _audioLoader.getChunk("../Game/Audio/" + fileName), position, maxDistance));
+	_chunks.push_back(AudioChunk(ID, _audioLoader.getChunk(fileName), position, maxDistance));
 }
 
 void AudioManager::removeChunk(const std::string& ID)

@@ -20,14 +20,14 @@ OpenGLShader::OpenGLShader(const string & vertexFileName, const string & fragmen
 	// Get application root directory
 	char buffer[256]; size_t len = sizeof(buffer);
 	GetModuleFileName(NULL, buffer, len);
-	string fullDir = buffer;
-	fullDir = fullDir.substr(0, fullDir.size() - 25);
+	string rootDir = buffer;
+	rootDir = rootDir.substr(0, rootDir.size() - 25);
 
 	// Open the shader text files
 	try 
 	{
-		vShaderFile.open(fullDir + "Engine\\Shaders\\" + _vertexFileName);
-		fShaderFile.open(fullDir + "Engine\\Shaders\\" + _fragmentFileName);
+		vShaderFile.open(rootDir + "Engine\\Shaders\\" + _vertexFileName);
+		fShaderFile.open(rootDir + "Engine\\Shaders\\" + _fragmentFileName);
 		std::stringstream vShaderStream, fShaderStream;
 		vShaderStream << vShaderFile.rdbuf();
 		fShaderStream << fShaderFile.rdbuf();

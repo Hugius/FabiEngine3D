@@ -1,6 +1,6 @@
 #pragma warning(disable:4996) // Disabling annoying warning
 
-#include <GLEW/glew.h>
+#include <GLEW\\glew.h>
 #include <filesystem>
 
 #include "obj_loader.hpp"

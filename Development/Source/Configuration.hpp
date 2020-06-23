@@ -1,6 +1,6 @@
 #pragma once
 #include <fstream>
-#include <GLM/glm.hpp>
+#include <GLM\\glm.hpp>
 #include <sstream>
 
 using glm::ivec2;

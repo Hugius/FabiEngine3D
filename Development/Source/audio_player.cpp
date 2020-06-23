@@ -1,4 +1,4 @@
-#include <GLM/gtc/matrix_transform.hpp>
+#include <GLM\\gtc/matrix_transform.hpp>
 #include <algorithm>
 
 #include "audio_player.hpp"

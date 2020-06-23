@@ -1,6 +1,6 @@
 #include "configuration.hpp"
 
-#include <SDL/SDL.h>
+#include <SDL\\SDL.h>
 #include <filesystem>
 
 Config::Config()

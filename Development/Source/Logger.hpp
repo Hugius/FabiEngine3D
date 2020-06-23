@@ -7,7 +7,7 @@
 #include <iostream>
 #include <ctime>
 #include <string>
-#include <GLM/glm.hpp>
+#include <GLM\\glm.hpp>
 #include <type_traits>
 
 

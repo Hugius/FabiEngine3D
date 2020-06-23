@@ -1,4 +1,4 @@
-#include <SDL/SDL_image.h>
+#include <SDL\\SDL_image.h>
 
 #include "texture_loader.hpp"
 #include "Logger.hpp"

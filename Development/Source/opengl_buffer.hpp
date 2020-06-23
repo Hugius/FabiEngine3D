@@ -1,8 +1,8 @@
 #pragma once
 
 #include <vector>
-#include <GLM/glm.hpp>
-#include <GLEW/glew.h>
+#include <GLM\\glm.hpp>
+#include <GLEW\\glew.h>
 
 using std::vector;
 using glm::vec3;

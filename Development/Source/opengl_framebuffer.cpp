@@ -1,5 +1,5 @@
 #include <vector>
-#include <GLEW/glew.h>
+#include <GLEW\\glew.h>
 
 #include "opengl_framebuffer.hpp"
 #include "Logger.hpp"

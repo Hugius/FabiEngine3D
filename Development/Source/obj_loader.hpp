@@ -2,7 +2,7 @@
 #include <vector>
 #include <map>
 #include <string>
-#include <GLM/glm.hpp>
+#include <GLM\\glm.hpp>
 
 using std::vector;
 using std::string;

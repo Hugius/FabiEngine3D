@@ -1,14 +1,15 @@
-#include <GLEW/glew.h>
-#include <SDL/SDL_image.h>
-#include <SDL/SDL_mixer.h>
-#include <SDL/SDL_ttf.h>
+#include <GLEW\\glew.h>
+#include <SDL\\SDL_image.h>
+#include <SDL\\SDL_mixer.h>
+#include <SDL\\SDL_ttf.h>
+#include <SDL\\SDL_syswm.h>
 #include <Windows.h>
 #include <ShellScalingAPI.h>
 
 #include "window_manager.hpp"
 #include "Logger.hpp"
 #include "configuration.hpp"
-
+#include <dwmapi.h>
 WindowManager::WindowManager()
 {
 	// SDL stuff
@@ -21,7 +22,7 @@ WindowManager::WindowManager()
 
 	// Make sure scaled monitors still show the correct resolution
 	SetProcessDpiAwareness(PROCESS_SYSTEM_DPI_AWARE);
-
+	
 	// Window stuff
 	Logger::getInst().throwInfo("Initializing window...");
 	_window = SDL_CreateWindow(
@@ -93,6 +94,24 @@ void WindowManager::setSize(ivec2 size)
 {
 	SDL_SetWindowSize(_window, size.x, size.y);
 	SDL_SetWindowPosition(_window, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
+}
+
+void WindowManager::setOpacity(float value)
+{
+	SDL_SetWindowOpacity(_window, value);
+}
+
+void WindowManager::makeColorOpaque(vec3 color)
+{
+	// Get window handle
+	SDL_SysWMinfo wmInfo;
+	SDL_VERSION(&wmInfo.version);
+	SDL_GetWindowWMInfo(_window, &wmInfo);
+	HWND hwnd = wmInfo.info.win.window;
+
+	// Set transparency color
+	SetWindowLong(hwnd, GWL_EXSTYLE, GetWindowLong(hwnd, GWL_EXSTYLE) | WS_EX_LAYERED);
+	SetLayeredWindowAttributes(hwnd, RGB(static_cast<int>(color.r * 255.0f), static_cast<int>(color.g * 255), static_cast<int>(color.b * 255)), 0, LWA_COLORKEY);
 }
 
 void WindowManager::showBorder()

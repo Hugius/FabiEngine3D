@@ -1,6 +1,6 @@
 #pragma once
-#include <GLEW/glew.h>
-#include <GLM/glm.hpp>
+#include <GLEW\\glew.h>
+#include <GLM\\glm.hpp>
 
 using glm::vec3;
 using glm::mat4;

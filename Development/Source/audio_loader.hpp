@@ -2,7 +2,7 @@
 
 #include <map>
 #include <string>
-#include <SDL/SDL_mixer.h>
+#include <SDL\\SDL_mixer.h>
 
 using std::string;
 

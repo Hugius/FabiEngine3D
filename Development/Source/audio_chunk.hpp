@@ -1,8 +1,8 @@
 #pragma once
 
 #include <string>
-#include <SDL/SDL_mixer.h>
-#include <GLM/glm.hpp>
+#include <SDL\\SDL_mixer.h>
+#include <GLM\\glm.hpp>
 
 using glm::vec3;
 

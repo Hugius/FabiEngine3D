@@ -1,9 +1,9 @@
 #pragma once
 
-#include <GLEW/glew.h>
+#include <GLEW\\glew.h>
 #include <map>
-#include <GLM/glm.hpp>
-#include <GLM/gtc/type_ptr.hpp>
+#include <GLM\\glm.hpp>
+#include <GLM\\gtc/type_ptr.hpp>
 
 using glm::vec2;
 using glm::vec3;

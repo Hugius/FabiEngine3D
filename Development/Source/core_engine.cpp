@@ -47,22 +47,31 @@ void CoreEngine::_stop()
 
 void CoreEngine::_setupApplication()
 {
-	//// Display engine intro
-	//GuiEntity intro;
-	//intro.load("intro");
-	//intro.addOglBuffer(new OpenGLBuffer(0.0f, 0.0f, 2.0f, 2.0f, true));
-	//intro.setDiffuseMap(_texLoader.getTexture("Engine\\Textures\\intro.png", true, true));
+	// Display engine intro
+	GuiEntity logo;
+	logo.load("logo");
+	logo.addOglBuffer(new OpenGLBuffer(0.0f, 0.0f, 2.0f, 2.0f, true));
+	logo.setDiffuseMap(_texLoader.getTexture("Engine\\Textures\\logo.png", true, true));
+	
+	// Get intro resolution
+	SDL_DisplayMode DM;
+	SDL_GetDesktopDisplayMode(0, &DM);
+	float width = float(DM.w);
+	float height = float(DM.h);
+	ivec2 introResolution = ivec2(int(width * 0.4f), int(height * 0.3f));
 
-	//// Get intro resolution
-	//SDL_DisplayMode DM;
-	//SDL_GetDesktopDisplayMode(0, &DM);
-	//float width = float(DM.w);
-	//float height = float(DM.h);
-	//ivec2 introResolution = ivec2(int(width * 0.4f), int(height * 0.4f));
-	//_windowManager.setSize(introResolution);
-	//_windowManager.showWindow();
-	//_renderEngine.renderEngineIntro(&intro, introResolution);
-	//_windowManager.swapBackBuffer();
+	// Window properties & rendering
+	vec3 keyingColor = vec3(0.01f);
+	glClearColor(keyingColor.r, keyingColor.g, keyingColor.b, 0.0f);
+	_windowManager.makeColorOpaque(keyingColor);
+	_windowManager.setSize(introResolution);
+	_windowManager.showWindow();
+	_renderEngine.renderEngineIntro(&logo, introResolution);
+	_windowManager.swapBackBuffer();
+	
+	// Show logo for at least 1 second
+	auto start = std::chrono::high_resolution_clock::now();
+	while (std::chrono::duration_cast<std::chrono::duration<float>>(std::chrono::high_resolution_clock::now() - start).count() * 1000.0f < 2000.0f) {}
 
 	// Vignettte
 	vec2 pos = _fe3d.misc_convertToNDC(_fe3d.misc_convertFromScreenCoords(Config::getInst().getVpPos()));
@@ -76,6 +85,7 @@ void CoreEngine::_setupApplication()
 	_windowManager.setSize(Config::getInst().getWindowSize());
 	_windowManager.showWindow();
 	_windowManager.showBorder();
+	_windowManager.setOpacity(1.0f);
 }
 
 void CoreEngine::_updateApplication()

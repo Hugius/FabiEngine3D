@@ -1,19 +1,22 @@
 #pragma once
 
-#include <SDL/SDL.h>
-#include <GLM/glm.hpp>
+#include <SDL\\SDL.h>
+#include <GLM\\glm.hpp>
 #include <string>
 
 using glm::ivec2;
+using glm::vec3;
 
 class WindowManager final
 {
 public:
 	WindowManager();
 	~WindowManager();
-
+	
 	void setTitle(const std::string & title);
 	void setSize(ivec2 size);
+	void setOpacity(float value);
+	void makeColorOpaque(vec3 color);
 	void showBorder();
 	void hideBorder();
 	void enableFullscreen();

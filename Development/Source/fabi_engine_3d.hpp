@@ -1,6 +1,6 @@
 #pragma once
 
-#include <GLM/glm.hpp>
+#include <GLM\\glm.hpp>
 #include <string>
 #include <vector>
 #include <memory>

@@ -1,10 +1,10 @@
 #pragma once
-#include <GLEW/glew.h>
+#include <GLEW\\glew.h>
 #include <vector>
 #include <map>
 #include <string>
-#include <SDL/SDL_ttf.h>
-#include <GLM/glm.hpp>
+#include <SDL\\SDL_ttf.h>
+#include <GLM\\glm.hpp>
 
 using std::vector;
 using std::string;

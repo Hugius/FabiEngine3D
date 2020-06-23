@@ -1,7 +1,7 @@
 #pragma once
 
-#include <GLM/glm.hpp>
-#include <GLEW/glew.h>
+#include <GLM\\glm.hpp>
+#include <GLEW\\glew.h>
 #include <vector>
 
 using glm::ivec2;

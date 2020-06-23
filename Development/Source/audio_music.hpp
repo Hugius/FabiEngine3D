@@ -1,6 +1,6 @@
 #pragma once
 
-#include <SDL/SDL_mixer.h>
+#include <SDL\\SDL_mixer.h>
 
 class AudioMusic final
 {

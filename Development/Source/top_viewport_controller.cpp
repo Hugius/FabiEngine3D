@@ -105,19 +105,26 @@ void TopViewportController::_initializeProjectChoosing()
 {
 	// Get new path
 	string userDirectoryPath = _fe3d.misc_getRootDirectory() + "User\\Projects\\";
-	int endOfNameIndex = 0;
 
-	// Get all project names
-	vector<string> projectNames;
-	for (const auto& entry : std::filesystem::directory_iterator(userDirectoryPath))
+	// Check if projects directory exists
+	if (_fe3d.misc_isDirectory(userDirectoryPath))
 	{
-		string projectName = string(entry.path().u8string());
-		projectName.erase(0, userDirectoryPath.size());
-		projectNames.push_back(projectName);
-	}
+		// Get all project names
+		vector<string> projectNames;
+		for (const auto& entry : std::filesystem::directory_iterator(userDirectoryPath))
+		{
+			string projectName = string(entry.path().u8string());
+			projectName.erase(0, userDirectoryPath.size());
+			projectNames.push_back(projectName);
+		}
 
-	// Add buttons
-	_gui->getGlobalScreen()->addChoiceForm("projectList", "Select project", vec2(0.0f), projectNames);
+		// Add buttons
+		_gui->getGlobalScreen()->addChoiceForm("projectList", "Select project", vec2(0.0f), projectNames);
+	}
+	else
+	{
+		_fe3d.logger_throwError("\"User\\Projects\\\" folder does not exist anymore!");
+	}
 }
 
 void TopViewportController::_updateProjectCreation()
@@ -189,27 +196,14 @@ void TopViewportController::_updateProjectDeletion()
 {
 	if (_deletingProject)
 	{
+		static string chosenButtonID = "";
 		string clickedButtonID = _gui->getGlobalScreen()->getClickedChoiceFormButtonID("projectList");
 		
 		// Check if user clicked a project name
 		if (clickedButtonID != "")
 		{
-			// Check if deleting currently opened project
-			if (clickedButtonID == _currentProjectName)
-			{
-				// Unload current project
-				_currentProjectName = "";
-				_loadCurrentProject();
-			}
-
-			// Deleting project folder
-			std::filesystem::remove_all(_fe3d.misc_getRootDirectory() + "User\\Projects\\" + clickedButtonID);
-
-			// Logging
-			_fe3d.logger_throwInfo("Existing project \"" + clickedButtonID + "\" deleted!");
-
-			// Miscellaneous
-			_deletingProject = false;
+			_gui->getGlobalScreen()->addAnswerForm("deleteProject", "Are you sure?", vec2(0.0f, 0.25f));
+			chosenButtonID = clickedButtonID;
 		}
 		else
 		{
@@ -218,6 +212,33 @@ void TopViewportController::_updateProjectDeletion()
 				_deletingProject = false;
 				_gui->getGlobalScreen()->removeChoiceForm("projectList");
 			}
+		}
+
+		// Check if user is sure to delete
+		if (_gui->getGlobalScreen()->isAnswerFormConfirmed("deleteProject"))
+		{
+			// Check if deleting currently opened project
+			if (chosenButtonID == _currentProjectName)
+			{
+				// Unload current project
+				_currentProjectName = "";
+				_loadCurrentProject();
+			}
+
+			// Deleting project folder
+			std::filesystem::remove_all(_fe3d.misc_getRootDirectory() + "User\\Projects\\" + chosenButtonID);
+
+			// Logging
+			_fe3d.logger_throwInfo("Existing project \"" + chosenButtonID + "\" deleted!");
+
+			// Miscellaneous
+			_deletingProject = false;
+			chosenButtonID = "";
+		}
+		else if (_gui->getGlobalScreen()->isAnswerFormCancelled("deleteProject"))
+		{
+			_deletingProject = false;
+			chosenButtonID = "";
 		}
 	}
 }

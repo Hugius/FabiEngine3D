@@ -61,7 +61,7 @@ void CoreEngine::_setupApplication()
 	ivec2 logoResolution = ivec2(int(width * 0.4f), int(height * 0.3f));
 
 	// Window properties & rendering
-	vec3 keyingColor = vec3(1.0f, 0.84f, 0.0f);
+	vec3 keyingColor = vec3(0.2f);
 	glClearColor(keyingColor.r, keyingColor.g, keyingColor.b, 0.0f);
 	_windowManager.makeColorOpaque(keyingColor);
 	_windowManager.setSize(logoResolution);

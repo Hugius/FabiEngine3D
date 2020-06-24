@@ -13,6 +13,30 @@ EngineController::EngineController() :
 
 void EngineController::FE3D_CONTROLLER_INIT()
 {
+	_rightViewportController.initialize();
+	_bottomViewportController.initialize();
+	_topViewportController.initialize();
+	_leftViewportController.initialize();
+	_initializeMiscellaneous();
+}
+
+void EngineController::FE3D_CONTROLLER_UPDATE()
+{
+	_gui->update();
+	_topViewportController.update();
+	_leftViewportController.update();
+	_rightViewportController.update();
+	_bottomViewportController.update();
+	_updateMiscellaneous();
+}
+
+void EngineController::FE3D_CONTROLLER_DESTROY()
+{
+
+}
+
+void EngineController::_initializeMiscellaneous()
+{
 	// Main color
 	misc_setMainRenderingColor(vec3(0.5f, 0.5f, 1.0f));
 
@@ -27,24 +51,19 @@ void EngineController::FE3D_CONTROLLER_INIT()
 
 	// Default camera
 	camera_load(90.0f, 0.1f, 10000.0f, vec3(0.0f), 0.0f, 0.0f);
-
-	// GUI viewports
-	_topViewportController.initialize();
-	_leftViewportController.initialize();
-	_rightViewportController.initialize();
-	_bottomViewportController.initialize();
 }
 
-void EngineController::FE3D_CONTROLLER_UPDATE()
+void EngineController::_updateMiscellaneous()
 {
-	_gui->update();
-	_topViewportController.update();
-	_leftViewportController.update();
-	_rightViewportController.update();
-	_bottomViewportController.update();
-}
+	input_setKeyTogglingLocked(_gui->getGlobalScreen()->isFocused() || !misc_isMouseInsideViewport());
 
-void EngineController::FE3D_CONTROLLER_DESTROY()
-{
-
+	// Update wireframe visibility
+	if (input_getKeyToggled(Input::KEY_F))
+	{
+		misc_enableWireframeRendering();
+	}
+	else
+	{
+		misc_disableWireframeRendering();
+	}
 }

@@ -72,7 +72,6 @@ void WorldEditor::update()
 			_updateSkyMenu();
 			_updateTerrainMenu();
 			_updateWaterMenu();
-			_updateMiscellaneous();
 		}
 	}
 }

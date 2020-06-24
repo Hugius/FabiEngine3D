@@ -9,7 +9,7 @@
 #include "window_manager.hpp"
 #include "Logger.hpp"
 #include "configuration.hpp"
-#include <dwmapi.h>
+
 WindowManager::WindowManager()
 {
 	// SDL stuff

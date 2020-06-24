@@ -1936,6 +1936,21 @@ float FabiEngine3D::gfx_getSkyBrightness()
 
 /* --------------------------------------------- Input interface --------------------------------------------- */
 
+void FabiEngine3D::input_setLocked(bool locked)
+{
+	return _core->_inputHandler.setLocked(locked);
+}
+
+void FabiEngine3D::input_setKeyTogglingLocked(bool locked)
+{
+	return _core->_inputHandler.setKeyTogglingLocked(locked);
+}
+
+void FabiEngine3D::input_setMouseTogglingLocked(bool locked)
+{
+	return _core->_inputHandler.setMouseTogglingLocked(locked);
+}
+
 bool FabiEngine3D::input_getKeyDown(Input keyName)
 {
 	return _core->_inputHandler.getKeyDown(keyName);

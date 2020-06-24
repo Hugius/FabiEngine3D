@@ -5,11 +5,11 @@
 void ModelEditor::_updateModelEditingSize()
 {
 	auto screen = _window->getScreen("modelEditingSize");
-	auto scrollingList = screen->getScrollingList("buttonList");
+	
 	// GUI management 
 	if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
 	{
-		if (scrollingList->getButton("setSize")->isHovered())
+		if (screen->getButton("setSize")->isHovered())
 		{
 			_modelResizingEnabled = true;
 
@@ -31,46 +31,47 @@ void ModelEditor::_updateModelEditingSize()
 			// Set GUI focus
 			_gui->getGlobalScreen()->setFocus(true);
 		}
-		else if (scrollingList->getButton("toggleResizeMesh")->isHovered())
+		else if (screen->getButton("toggleResizeMesh")->isHovered())
 		{
 			_meshResizingToggled = !_meshResizingToggled;
 
 			// Toggle resize
 			string newContent = _meshResizingToggled ? "Mesh resize: ON" : "Mesh resize: OFF";
-			_fe3d.textEntity_setTextContent(scrollingList->getButton("toggleResizeMesh")->getTextfield()->getEntityID(), newContent);
+			_fe3d.textEntity_setTextContent(screen->getButton("toggleResizeMesh")->getTextfield()->getEntityID(), newContent);
 		}
-		else if (scrollingList->getButton("toggleBoxView")->isHovered())
+		else if (screen->getButton("toggleBoxView")->isHovered())
 		{
 			_aabbRenderingEnabled = !_aabbRenderingEnabled;
 
 			// Toggle view
 			_aabbRenderingEnabled ? _fe3d.collision_enableFrameRendering() : _fe3d.collision_disableFrameRendering();
 			string newContent = _aabbRenderingEnabled ? "Hitbox: ON" : "Hitbox: OFF";
-			_fe3d.textEntity_setTextContent(scrollingList->getButton("toggleBoxView")->getTextfield()->getEntityID(), newContent);
+			_fe3d.textEntity_setTextContent(screen->getButton("toggleBoxView")->getTextfield()->getEntityID(), newContent);
 		}
-		else if (scrollingList->getButton("toggleResizeBox")->isHovered())
+		else if (screen->getButton("toggleResizeBox")->isHovered())
 		{
 			_boxResizingToggled = !_boxResizingToggled;
 
 			// Toggle box resize
 			string newContent = _boxResizingToggled ? "Box resize: ON" : "Box resize: OFF";
-			_fe3d.textEntity_setTextContent(scrollingList->getButton("toggleResizeBox")->getTextfield()->getEntityID(), newContent);
+			_fe3d.textEntity_setTextContent(screen->getButton("toggleResizeBox")->getTextfield()->getEntityID(), newContent);
 		}
-		else if (scrollingList->getButton("resizeBoxDir")->isHovered())
+		else if (screen->getButton("resizeBoxDir")->isHovered())
 		{
 			// Change resize direction
 			string directions[3] = { "X", "Y", "Z" };
 			_modelResizeDirection = (_modelResizeDirection == Direction::X) ? Direction::Y : (_modelResizeDirection == Direction::Y) ? Direction::Z : Direction::X;
 			string newContent = "Direction: " + directions[int(_modelResizeDirection)];
-			_fe3d.textEntity_setTextContent(scrollingList->getButton("resizeBoxDir")->getTextfield()->getEntityID(), newContent);
+			_fe3d.textEntity_setTextContent(screen->getButton("resizeBoxDir")->getTextfield()->getEntityID(), newContent);
 		}
 		else if (screen->getButton("back")->isHovered())
 		{
 			_meshResizingToggled = false;
+			_aabbRenderingEnabled = false;
 			_boxResizingToggled = false;
-			_fe3d.textEntity_setTextContent(scrollingList->getButton("toggleResizeMesh")->getTextfield()->getEntityID(), "Mesh resize: OFF");
-			_fe3d.textEntity_setTextContent(scrollingList->getButton("toggleResizeBox")->getTextfield()->getEntityID(), "Box resize: OFF");
-			_fe3d.textEntity_setTextContent(scrollingList->getButton("toggleBoxView")->getTextfield()->getEntityID(), "Hitbox: OFF");
+			_fe3d.textEntity_setTextContent(screen->getButton("toggleResizeMesh")->getTextfield()->getEntityID(), "Mesh resize: OFF");
+			_fe3d.textEntity_setTextContent(screen->getButton("toggleResizeBox")->getTextfield()->getEntityID(), "Box resize: OFF");
+			_fe3d.textEntity_setTextContent(screen->getButton("toggleBoxView")->getTextfield()->getEntityID(), "Hitbox: OFF");
 			_fe3d.collision_disableFrameRendering();
 			_window->setActiveScreen("modelEditingMain");
 		}

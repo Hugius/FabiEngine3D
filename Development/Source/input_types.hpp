@@ -71,6 +71,8 @@ enum class Input
 	KEY_ESCAPE          = '\033',
 	KEY_BACKSPACE       = '\b',
 	KEY_TAB             = '\t',
+	KEY_LALT			= 1073742050,
+	KEY_RALT			= 1073742054,
 	KEY_LCTRL           = 1073742048,
 	KEY_RCTRL           = 1073742052,
 	KEY_LSHIFT          = 1073742049,

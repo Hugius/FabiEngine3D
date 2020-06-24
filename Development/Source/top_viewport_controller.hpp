@@ -17,10 +17,12 @@ public:
 	void update() override;
 
 private:
-	void _initializeProjectLoading();
-	void _saveCurrentProject();
+	void _initializeProjectChoosing();
 	void _updateProjectCreation();
 	void _updateProjectLoading();
+	void _updateProjectDeletion();
+	void _saveCurrentProject();
+	void _loadCurrentProject();
 
 	ModelEditor& _modelEditor;
 	WorldEditor& _worldEditor;
@@ -31,4 +33,5 @@ private:
 
 	bool _creatingProject = false;
 	bool _loadingProject = false;
+	bool _deletingProject = false;
 };

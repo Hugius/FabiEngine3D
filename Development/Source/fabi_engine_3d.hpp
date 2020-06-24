@@ -389,6 +389,9 @@ public:
 	float gfx_getSkyBrightness();
 
 	// Input interface
+	void input_setLocked(bool locked);
+	void input_setKeyTogglingLocked(bool locked);
+	void input_setMouseTogglingLocked(bool locked);
 	bool input_getKeyDown(Input keyName);
 	bool input_getKeyPressed(Input keyName);
 	bool input_getKeyToggled(Input keyName);

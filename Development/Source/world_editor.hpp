@@ -24,9 +24,6 @@ public:
 	bool isLoaded();
 
 private:
-	// General functions
-	void _updateMiscellaneous();
-
 	// General variables
 	bool _isLoaded = false;
 	WorldPart _currentWorldPart = WorldPart::NONE;

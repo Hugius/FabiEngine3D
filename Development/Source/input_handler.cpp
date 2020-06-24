@@ -1,6 +1,12 @@
 #include "input_handler.hpp"
 #include <iostream>
 
+InputHandler::InputHandler(Timer& timer) :
+	_timer(timer)
+{
+
+}
+
 void InputHandler::f_checkInput()
 {
 	_keysPressed.clear();
@@ -10,7 +16,7 @@ void InputHandler::f_checkInput()
 	
 	SDL_Event event;
 
-	if (_keysEnabled) 
+	if (!_everythingLocked) 
 	{
 		while (SDL_PollEvent(&event)) // Check for any input
 		{
@@ -40,18 +46,21 @@ void InputHandler::f_checkInput()
 					}
 
 					// Toggled mouse press
-					if (!_isInVector(_mouseToggled_mayNotPress, button)) // Mouse may be pressed
+					if (!_mouseTogglingLocked)
 					{
-						_mouseToggled_mayNotPress.push_back(button); // Mouse may not be pressed next frame
-
-						if (getMouseToggled(button)) // Make mouse toggle false
+						if (!_isInVector(_mouseToggled_mayNotPress, button)) // Mouse may be pressed
 						{
-							_mouseToggled.erase(_mouseToggled.begin() + _getVectorIndex(_mouseToggled, button));
+							_mouseToggled_mayNotPress.push_back(button); // Mouse may not be pressed next frame
 
-						}
-						else
-						{
-							_mouseToggled.push_back(button); // Make mouse toggle true
+							if (getMouseToggled(button)) // Make mouse toggle false
+							{
+								_mouseToggled.erase(_mouseToggled.begin() + _getVectorIndex(_mouseToggled, button));
+
+							}
+							else
+							{
+								_mouseToggled.push_back(button); // Make mouse toggle true
+							}
 						}
 					}
 
@@ -70,7 +79,12 @@ void InputHandler::f_checkInput()
 					auto button = static_cast<Input>(event.button.button);
 
 					_mouseDown.erase(_mouseDown.begin() + _getVectorIndex(_mouseDown, button));
-					_mouseToggled_mayNotPress.erase(_mouseToggled_mayNotPress.begin() + _getVectorIndex(_mouseToggled_mayNotPress, button));
+
+					if (!_mouseTogglingLocked)
+					{
+						_mouseToggled_mayNotPress.erase(_mouseToggled_mayNotPress.begin() + _getVectorIndex(_mouseToggled_mayNotPress, button));
+					}
+
 					_mousePressed_mayNotPress.clear();
 					break;
 				}
@@ -85,17 +99,20 @@ void InputHandler::f_checkInput()
 					}
 
 					// Toggled key press
-					if (!_isInVector(_keysToggled_mayNotPress, key)) // Key may be pressed
+					if (!_keyTogglingLocked)
 					{
-						_keysToggled_mayNotPress.push_back(key); // Key may not be pressed next frame
+						if (!_isInVector(_keysToggled_mayNotPress, key)) // Key may be pressed
+						{
+							_keysToggled_mayNotPress.push_back(key); // Key may not be pressed next frame
 
-						if (getKeyToggled(key)) // Make key toggle false
-						{
-							_keysToggled.erase(_keysToggled.begin() + _getVectorIndex(_keysToggled, key));
-						}
-						else
-						{
-							_keysToggled.push_back(key); // Make key toggle true
+							if (getKeyToggled(key)) // Make key toggle false
+							{
+								_keysToggled.erase(_keysToggled.begin() + _getVectorIndex(_keysToggled, key));
+							}
+							else
+							{
+								_keysToggled.push_back(key); // Make key toggle true
+							}
 						}
 					}
 
@@ -114,7 +131,12 @@ void InputHandler::f_checkInput()
 					auto key = static_cast<Input>(event.key.keysym.sym);
 
 					_keysDown.erase(_keysDown.begin() + _getVectorIndex(_keysDown, key));
-					_keysToggled_mayNotPress.erase(_keysToggled_mayNotPress.begin() + _getVectorIndex(_keysToggled_mayNotPress, key));
+
+					if (!_keyTogglingLocked)
+					{
+						_keysToggled_mayNotPress.erase(_keysToggled_mayNotPress.begin() + _getVectorIndex(_keysToggled_mayNotPress, key));
+					}
+
 					_keysPressed_mayNotPress.clear();
 					break;
 				}
@@ -123,10 +145,19 @@ void InputHandler::f_checkInput()
 	}
 }
 
-InputHandler::InputHandler(Timer& timer) :
-	_timer(timer)
+void InputHandler::setLocked(bool locked)
 {
+	_everythingLocked = locked;
+}
 
+void InputHandler::setKeyTogglingLocked(bool locked)
+{
+	_keyTogglingLocked = locked;
+}
+
+void InputHandler::setMouseTogglingLocked(bool locked)
+{
+	_mouseTogglingLocked = locked;
 }
 
 const bool InputHandler::getKeyDown(Input keyName)

@@ -20,14 +20,14 @@ void ModelEditor::initializeGUI()
 	_window->addScreen("modelManagement");
 	_window->getScreen("modelManagement")->addButton("addModel", vec2(0.0f, 0.63f), vec2(1.5f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Add model", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 	_window->getScreen("modelManagement")->addButton("editModel", vec2(0.0f, 0.21), vec2(1.5f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Edit model", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
-	_window->getScreen("modelManagement")->addButton("deleteModel", vec2(0.0f, -0.21), vec2(1.5f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Delete model", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_window->getScreen("modelManagement")->addButton("deleteModel", vec2(0.0f, -0.21), vec2(1.7f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Delete model", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 	_window->getScreen("modelManagement")->addButton("back", vec2(0.0f, -0.63f), vec2(1.0f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Go back", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 
 	// Left-viewport: mainWindow - modelEditingMain
 	_window->addScreen("modelEditingMain");
 	_window->getScreen("modelEditingMain")->addButton("mesh", vec2(0.0f, 0.63f), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "3D mesh", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 	_window->getScreen("modelEditingMain")->addButton("options", vec2(0.0f, 0.21), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Options", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
-	_window->getScreen("modelEditingMain")->addButton("size", vec2(0.0f, -0.21), vec2(1.0f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Size", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_window->getScreen("modelEditingMain")->addButton("size", vec2(0.0f, -0.21), vec2(0.8f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Size", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 	_window->getScreen("modelEditingMain")->addButton("back", vec2(0.0f, -0.63f), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Go back", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 
 	// Left-viewport: mainWindow - modelEditingMesh
@@ -40,31 +40,28 @@ void ModelEditor::initializeGUI()
 	
 	// Left-viewport: mainWindow - modelEditingOptions
 	_window->addScreen("modelEditingOptions");
-	_window->getScreen("modelEditingOptions")->addScrollingList("buttonList", vec2(0.0f, 0.1f), vec2(1.8, 1.75f), vec3(0.3f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, _gui->leftVpTextColor, _gui->leftVpTextHoverColor, vec2(0.15f, 0.1f));
-	_window->getScreen("modelEditingOptions")->getScrollingList("buttonList")->addButton("faceculled", "Culling: OFF");
-	_window->getScreen("modelEditingOptions")->getScrollingList("buttonList")->addButton("shadowed", "Shadowed : ON");
-	_window->getScreen("modelEditingOptions")->getScrollingList("buttonList")->addButton("transparent", "No-white: OFF");
-	_window->getScreen("modelEditingOptions")->getScrollingList("buttonList")->addButton("specular", "Specular: OFF");
-	_window->getScreen("modelEditingOptions")->getScrollingList("buttonList")->addButton("setColor", "Set color");
-	_window->getScreen("modelEditingOptions")->getScrollingList("buttonList")->addButton("uvRepeat", "Set UV-repeat");
-	_window->getScreen("modelEditingOptions")->addButton("back", vec2(0.0f, -0.9f), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Go back", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_window->getScreen("modelEditingOptions")->addButton("faceculled", vec2(0.0f, 0.7875f), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Culling: OFF", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_window->getScreen("modelEditingOptions")->addButton("shadowed", vec2(0.0f, 0.525f), vec2(1.6f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Shadowed : ON", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_window->getScreen("modelEditingOptions")->addButton("transparent", vec2(0.0f, 0.2625f), vec2(1.5f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "No-white: OFF", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_window->getScreen("modelEditingOptions")->addButton("specular", vec2(0.0f, 0.0f), vec2(1.6f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Specular: OFF", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_window->getScreen("modelEditingOptions")->addButton("setColor", vec2(0.0f, -0.2625f), vec2(1.6f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Set color", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_window->getScreen("modelEditingOptions")->addButton("uvRepeat", vec2(0.0f, -0.525f), vec2(1.6f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Set UV-repeat", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_window->getScreen("modelEditingOptions")->addButton("back", vec2(0.0f, -0.7875f), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Go back", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 
 	// Left-viewport: mainWindow - modelEditingSize
 	_window->addScreen("modelEditingSize");
-	_window->getScreen("modelEditingSize")->addScrollingList("buttonList", vec2(0.0f, 0.1f), vec2(1.9, 1.75f), vec3(0.3f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, _gui->leftVpTextColor, _gui->leftVpTextHoverColor, vec2(0.1f, 0.1f));
-	_window->getScreen("modelEditingSize")->getScrollingList("buttonList")->addButton("setSize", "Set mesh size");
-	_window->getScreen("modelEditingSize")->getScrollingList("buttonList")->addButton("toggleResizeMesh", "Mesh resize: OFF");
-	_window->getScreen("modelEditingSize")->getScrollingList("buttonList")->addButton("toggleBoxView", "Hitbox: OFF");
-	_window->getScreen("modelEditingSize")->getScrollingList("buttonList")->addButton("toggleResizeBox", "Box resize: OFF");
-	_window->getScreen("modelEditingSize")->getScrollingList("buttonList")->addButton("resizeBoxDir", "Direction: X");
-	_window->getScreen("modelEditingSize")->addButton("back", vec2(0.0f, -0.9f), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Go back", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_window->getScreen("modelEditingSize")->addButton("setSize", vec2(0.0f, 0.7875f), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Set mesh size", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_window->getScreen("modelEditingSize")->addButton("toggleResizeMesh", vec2(0.0f, 0.525f), vec2(1.6f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Mesh resize: OFF", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_window->getScreen("modelEditingSize")->addButton("toggleBoxView", vec2(0.0f, 0.2625f), vec2(1.5f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Hitbox: OFF", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_window->getScreen("modelEditingSize")->addButton("toggleResizeBox", vec2(0.0f, 0.0f), vec2(1.6f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Box resize: OFF", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_window->getScreen("modelEditingSize")->addButton("resizeBoxDir", vec2(0.0f, -0.2625f), vec2(1.6f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Direction: X", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_window->getScreen("modelEditingSize")->addButton("back", vec2(0.0f, -0.7875f), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Go back", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 }
 
 void ModelEditor::load()
 {
 	// Camera
 	_fe3d.camera_setPosition(_defaultCameraPosition);
-	//_fe3d.camera_setYaw(-90.0f);
 	_fe3d.camera_enableLookat(vec3(0.0f));
 
 	// Graphics
@@ -75,7 +72,7 @@ void ModelEditor::load()
 	_fe3d.gfx_enableMSAA();
 	_fe3d.gfx_enableSceneReflections(0.0f, 0.5f);
 	_fe3d.gfx_enableShadows(vec3(50.0f, 50.0f, 0.0f), vec3(0.0f), 100.0f, 150.0);
-	_fe3d.gfx_enableSpecularLighting(32.0f);
+	_fe3d.gfx_enableSpecularLighting(8.0f);
 	
 	// 3D Environment
 	_fe3d.gameEntity_add("@grid", "Engine\\OBJs\\plane.obj", vec3(0.0f), vec3(0.0f), vec3(100.0f, 1.0f, 100.0f));

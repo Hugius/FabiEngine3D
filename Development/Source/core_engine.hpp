@@ -70,6 +70,7 @@ private:
 
 	// Misc functions
 	void _updatePerformanceProfiler();
+	void _updateWindowFading();
 
 	// Engine interface instance
 	FabiEngine3D & _fe3d;

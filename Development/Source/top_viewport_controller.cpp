@@ -27,7 +27,7 @@ void TopViewportController::initialize()
 	_gui->getViewport("top")->getWindow("projectWindow")->getScreen("main")->addButton("newProject", vec2(-0.767f, 0.0f), vec2(0.3f, 1.25f), _gui->topVpButtonColor, _gui->topVpButtonHoverColor, "New project", _gui->topVpTextColor, _gui->topVpTextHoverColor);
 	_gui->getViewport("top")->getWindow("projectWindow")->getScreen("main")->addButton("loadProject", vec2(-0.384, 0.0f), vec2(0.3f, 1.25f), _gui->topVpButtonColor, _gui->topVpButtonHoverColor, "Load project", _gui->topVpTextColor, _gui->topVpTextHoverColor);
 	_gui->getViewport("top")->getWindow("projectWindow")->getScreen("main")->addButton("saveProject", vec2(0.0f, 0.0f), vec2(0.3f, 1.25f), _gui->topVpButtonColor, _gui->topVpButtonHoverColor, "Save project", _gui->topVpTextColor, _gui->topVpTextHoverColor);
-	_gui->getViewport("top")->getWindow("projectWindow")->getScreen("main")->addButton("openDocs", vec2(0.384, 0.0f), vec2(0.3f, 1.25f), _gui->topVpButtonColor, _gui->topVpButtonHoverColor, "Open docs", _gui->topVpTextColor, _gui->topVpTextHoverColor);
+	_gui->getViewport("top")->getWindow("projectWindow")->getScreen("main")->addButton("deleteProject", vec2(0.384, 0.0f), vec2(0.3f, 1.25f), _gui->topVpButtonColor, _gui->topVpButtonHoverColor, "Delete project", _gui->topVpTextColor, _gui->topVpTextHoverColor);
 	_gui->getViewport("top")->getWindow("projectWindow")->getScreen("main")->addButton("quitEngine", vec2(0.767f, 0.0f), vec2(0.3f, 1.25f), _gui->topVpButtonColor, _gui->topVpButtonHoverColor, "Quit engine", _gui->topVpTextColor, _gui->topVpTextHoverColor);
 
 	// Top-viewport: gameWindow
@@ -51,15 +51,17 @@ void TopViewportController::update()
 		}
 		else if (mainScreen->getButton("loadProject")->isHovered())
 		{
-			_initializeProjectLoading();
+			_initializeProjectChoosing();
+			_loadingProject = true;
 		}
 		else if (mainScreen->getButton("saveProject")->isHovered())
 		{
 			_saveCurrentProject();
 		}
-		else if (mainScreen->getButton("openDocs")->isHovered())
+		else if (mainScreen->getButton("deleteProject")->isHovered())
 		{
-			// TO-DO
+			_initializeProjectChoosing();
+			_deletingProject = true;
 		}
 		else if (mainScreen->getButton("quitEngine")->isHovered())
 		{
@@ -77,6 +79,7 @@ void TopViewportController::update()
 	// Update specific processes
 	_updateProjectCreation();
 	_updateProjectLoading();
+	_updateProjectDeletion();
 
 	// Update button hoverability
 	mainScreen->getButton("saveProject")->setHoverable(_currentProjectName != "");
@@ -98,10 +101,8 @@ void TopViewportController::update()
 	}
 }
 
-void TopViewportController::_initializeProjectLoading()
+void TopViewportController::_initializeProjectChoosing()
 {
-	_loadingProject = true;
-
 	// Get new path
 	string userDirectoryPath = _fe3d.misc_getRootDirectory() + "User\\Projects\\";
 	int endOfNameIndex = 0;
@@ -140,45 +141,14 @@ void TopViewportController::_updateProjectCreation()
 				// Create new directory
 				_mkdir(newDirectoryPath.c_str());
 
-				// Unload model editor
-				if (_modelEditor.isLoaded())
-				{
-					_modelEditor.unload();
-				}
-
-				// Unload world editor
-				if (_worldEditor.isLoaded())
-				{
-					_worldEditor.unload();
-				}
-
-				// Unload billboard editor
-				if (_billboardEditor.isLoaded())
-				{
-					_billboardEditor.unload();
-				}
-
-				// Unload entity placer
-				if (_entityPlacer.isLoaded())
-				{
-					_entityPlacer.unload();
-				}
-
-				// Apply to current project
+				// Load current project
 				_currentProjectName = projectName;
-
-				// Pass loaded project name
-				_modelEditor.setCurrentProjectName(_currentProjectName);
-				_worldEditor.setCurrentProjectName(_currentProjectName);
-				_billboardEditor.setCurrentProjectName(_currentProjectName);
-				_entityPlacer.setCurrentProjectName(_currentProjectName);
-
-				// Go back to main editor screen
-				_gui->getViewport("left")->getWindow("main")->setActiveScreen("main");
+				_loadCurrentProject();
 
 				// Logging
 				_fe3d.logger_throwInfo("New project \"" + _currentProjectName + "\" created!");
 
+				// Miscellaneous
 				_creatingProject = false;
 			}
 		}
@@ -191,53 +161,61 @@ void TopViewportController::_updateProjectLoading()
 	{
 		string clickedButtonID = _gui->getGlobalScreen()->getClickedChoiceFormButtonID("projectList");
 		
+		// Check if user clicked a project name
 		if(clickedButtonID != "")
 		{
-			// Change active project
+			// Load current project
 			_currentProjectName = clickedButtonID;
-			_fe3d.misc_setWindowTitle("FabiEngine3D - " + _currentProjectName);
-
-			// Go back to main editor screen
-			_gui->getViewport("left")->getWindow("main")->setActiveScreen("main");
-
-			// Unload model editor
-			if (_modelEditor.isLoaded())
-			{
-				_modelEditor.unload();
-			}
-
-			// Unload world editor
-			if (_worldEditor.isLoaded())
-			{
-				_worldEditor.unload();
-			}
-
-			// Unload billboard editor
-			if (_billboardEditor.isLoaded())
-			{
-				_billboardEditor.unload();
-			}
-
-			// Unload entity placer
-			if (_entityPlacer.isLoaded())
-			{
-				_entityPlacer.unload();
-			}
-
-			// Pass loaded project name
-			_modelEditor.setCurrentProjectName(_currentProjectName);
-			_worldEditor.setCurrentProjectName(_currentProjectName);
-			_billboardEditor.setCurrentProjectName(_currentProjectName);
-			_entityPlacer.setCurrentProjectName(_currentProjectName);
+			_loadCurrentProject();
 
 			// Logging
 			_fe3d.logger_throwInfo("Existing project \"" + _currentProjectName + "\" loaded!");
+
+			// Miscellaneous
+			_loadingProject = false;
 		}
 		else
 		{
 			if (_gui->getGlobalScreen()->isChoiceFormCancelled("projectList"))
 			{
 				_loadingProject = false;
+				_gui->getGlobalScreen()->removeChoiceForm("projectList");
+			}
+		}
+	}
+}
+
+void TopViewportController::_updateProjectDeletion()
+{
+	if (_deletingProject)
+	{
+		string clickedButtonID = _gui->getGlobalScreen()->getClickedChoiceFormButtonID("projectList");
+		
+		// Check if user clicked a project name
+		if (clickedButtonID != "")
+		{
+			// Check if deleting currently opened project
+			if (clickedButtonID == _currentProjectName)
+			{
+				// Unload current project
+				_currentProjectName = "";
+				_loadCurrentProject();
+			}
+
+			// Deleting project folder
+			std::filesystem::remove_all(_fe3d.misc_getRootDirectory() + "User\\Projects\\" + clickedButtonID);
+
+			// Logging
+			_fe3d.logger_throwInfo("Existing project \"" + clickedButtonID + "\" deleted!");
+
+			// Miscellaneous
+			_deletingProject = false;
+		}
+		else
+		{
+			if (_gui->getGlobalScreen()->isChoiceFormCancelled("projectList"))
+			{
+				_deletingProject = false;
 				_gui->getGlobalScreen()->removeChoiceForm("projectList");
 			}
 		}
@@ -259,4 +237,49 @@ void TopViewportController::_saveCurrentProject()
 
 	// Logging
 	_fe3d.logger_throwInfo("Project \"" + _currentProjectName + "\" saved!");
+}
+
+void TopViewportController::_loadCurrentProject()
+{
+	if (_currentProjectName == "")
+	{
+		_fe3d.misc_setWindowTitle("FabiEngine3D");
+	}
+	else
+	{
+		_fe3d.misc_setWindowTitle("FabiEngine3D - " + _currentProjectName);
+	}
+
+	// Go back to main editor screen
+	_gui->getViewport("left")->getWindow("main")->setActiveScreen("main");
+
+	// Unload model editor
+	if (_modelEditor.isLoaded())
+	{
+		_modelEditor.unload();
+	}
+
+	// Unload world editor
+	if (_worldEditor.isLoaded())
+	{
+		_worldEditor.unload();
+	}
+
+	// Unload billboard editor
+	if (_billboardEditor.isLoaded())
+	{
+		_billboardEditor.unload();
+	}
+
+	// Unload entity placer
+	if (_entityPlacer.isLoaded())
+	{
+		_entityPlacer.unload();
+	}
+
+	// Pass loaded project name
+	_modelEditor.setCurrentProjectName(_currentProjectName);
+	_worldEditor.setCurrentProjectName(_currentProjectName);
+	_billboardEditor.setCurrentProjectName(_currentProjectName);
+	_entityPlacer.setCurrentProjectName(_currentProjectName);
 }

@@ -79,7 +79,7 @@ void ModelEditor::_updateModelCreation()
 				_addModel("@" + newModelName, "", "", "", "", vec3(0.0f), 0, 1, 0, 0, vec3(1.0f), 1.0f, vec3(1.0f));
 
 				// Go to editor screen
-				_currentModelName = newModelName;
+				_currentModelName = "@" + newModelName;
 				_modelCreationEnabled = false;
 				_modelEditingEnabled = true;
 				_gui->getViewport("left")->getWindow("main")->setActiveScreen("modelEditingMain");

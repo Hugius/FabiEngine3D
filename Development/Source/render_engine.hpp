@@ -31,7 +31,7 @@ public:
 	RenderEngine(ShaderBus& shaderBus, Timer& timer);
 	~RenderEngine() = default;
 
-	void renderEngineIntro(GuiEntity* entity, ivec2 viewport);
+	void renderEngineLogo(GuiEntity* entity, ivec2 viewport);
 	void renderScene(EntityBus* entityBus, CameraManager& camera, ivec2 mousePos);
 
 private:

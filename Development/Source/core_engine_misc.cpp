@@ -81,3 +81,15 @@ void CoreEngine::_updatePerformanceProfiler()
 		}
 	}
 }
+
+void CoreEngine::_updateWindowFading()
+{
+	static float opacity = 0.0f;
+
+	// Stop if window is 100% visible
+	if (opacity < 1.0f)
+	{
+		_windowManager.setOpacity(opacity);
+		opacity += 0.005f;
+	}
+}

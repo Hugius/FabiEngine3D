@@ -17,6 +17,9 @@ public:
 	void FE3D_CONTROLLER_DESTROY();
 
 private:
+	void _initializeMiscellaneous();
+	void _updateMiscellaneous();
+
 	shared_ptr<EngineGuiManager> _gui;
 
 	string _currentProject = "";

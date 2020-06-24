@@ -16,6 +16,9 @@ public:
 	InputHandler(Timer& timer);
 	~InputHandler() = default;
 
+	void setLocked(bool locked);
+	void setKeyTogglingLocked(bool locked);
+	void setMouseTogglingLocked(bool locked);
 	const bool getKeyDown(Input keyName);
 	const bool getKeyPressed(Input keyName);
 	const bool getKeyToggled(Input keyName);
@@ -37,7 +40,9 @@ private:
 	vector<Input> _keysToggled;
 	vector<Input> _keysToggled_mayNotPress;
 	
-	bool _keysEnabled = true;
+	bool _everythingLocked = false;
+	bool _keyTogglingLocked = false;
+	bool _mouseTogglingLocked = false;
 
 	// Mouse buttons
 	vector<Input> _mouseDown;

@@ -40,7 +40,7 @@ RenderEngine::RenderEngine(ShaderBus& shaderBus, Timer& timer) :
 	_finalSurface->setMirroredVertically(true);
 }
 
-void RenderEngine::renderEngineIntro(GuiEntity * entity, ivec2 viewport)
+void RenderEngine::renderEngineLogo(GuiEntity * entity, ivec2 viewport)
 {
 	glViewport(0, 0, viewport.x, viewport.y);
 	glClear(GL_COLOR_BUFFER_BIT);

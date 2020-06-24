@@ -35,6 +35,10 @@ void EntityPlacer::initializeGUI()
 	// Left-viewport: mainWindow - lightPlaceManagement
 	_leftWindow->addScreen("lightPlaceManagement");
 	_leftWindow->getScreen("lightPlaceManagement")->addButton("back", vec2(0.0f, -0.63f), vec2(1.0f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Go back", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+
+	// Right-viewport: mainWindow - entityProperties
+	_rightWindow->addScreen("entityProperties");
+	//_rightWindow->getScreen("entityProperties")->add
 }
 
 void EntityPlacer::load()

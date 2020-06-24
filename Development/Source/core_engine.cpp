@@ -47,26 +47,26 @@ void CoreEngine::_stop()
 
 void CoreEngine::_setupApplication()
 {
-	// Display engine intro
+	// Create engine logo
 	GuiEntity logo;
 	logo.load("logo");
 	logo.addOglBuffer(new OpenGLBuffer(0.0f, 0.0f, 2.0f, 2.0f, true));
 	logo.setDiffuseMap(_texLoader.getTexture("Engine\\Textures\\logo.png", true, true));
 	
-	// Get intro resolution
+	// Get logo resolution
 	SDL_DisplayMode DM;
 	SDL_GetDesktopDisplayMode(0, &DM);
 	float width = float(DM.w);
 	float height = float(DM.h);
-	ivec2 introResolution = ivec2(int(width * 0.4f), int(height * 0.3f));
+	ivec2 logoResolution = ivec2(int(width * 0.4f), int(height * 0.3f));
 
 	// Window properties & rendering
-	vec3 keyingColor = vec3(0.01f);
+	vec3 keyingColor = vec3(1.0f, 0.84f, 0.0f);
 	glClearColor(keyingColor.r, keyingColor.g, keyingColor.b, 0.0f);
 	_windowManager.makeColorOpaque(keyingColor);
-	_windowManager.setSize(introResolution);
+	_windowManager.setSize(logoResolution);
 	_windowManager.showWindow();
-	_renderEngine.renderEngineIntro(&logo, introResolution);
+	_renderEngine.renderEngineLogo(&logo, logoResolution);
 	_windowManager.swapBackBuffer();
 	
 	// Show logo for at least 1 second
@@ -85,7 +85,7 @@ void CoreEngine::_setupApplication()
 	_windowManager.setSize(Config::getInst().getWindowSize());
 	_windowManager.showWindow();
 	_windowManager.showBorder();
-	_windowManager.setOpacity(1.0f);
+	_windowManager.setOpacity(0.0f);
 }
 
 void CoreEngine::_updateApplication()
@@ -127,6 +127,7 @@ void CoreEngine::_updateApplication()
 
 	// Performance profiling updates
 	_updatePerformanceProfiler();
+	_updateWindowFading();
 }
 
 void CoreEngine::_renderApplication()

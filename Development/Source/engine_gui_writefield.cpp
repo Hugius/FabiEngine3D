@@ -1,5 +1,7 @@
 #include "engine_gui_writefield.hpp"
 
+#include <map>
+
 EngineGuiWriteField::EngineGuiWriteField(
 	FabiEngine3D& fe3d, const string& parentID, const string& ID, vec2 position, vec2 size, 
 	vec3 color, vec3 hoverColor, vec3 textColor, vec3 textHoverColor, bool noNumbers, bool noCaps, bool noSpecials, bool noLetters) :
@@ -92,68 +94,103 @@ void EngineGuiWriteField::_updateTyping()
 		// Check if not writing out of border
 		if ((float(_currentTextContent.size() + 1) * _charWidth) < _textfield->getOriginalSize().x)
 		{
-			// Writable characters
-			string lowercaseCharacters = " abcdefghijklmnopqrstuvwxyz1234567890";
-			string specialCharacters   = ")!@#$%^&*(";
+			// Letter characters
+			string letterCharacters = " abcdefghijklmnopqrstuvwxyz";
 
-			// Add character
-			for (auto& c : lowercaseCharacters)
+			// Number characters
+			std::map<char, char> numberCharacterMap;
+			numberCharacterMap['0'] = ')';
+			numberCharacterMap['1'] = '!';
+			numberCharacterMap['2'] = '@';
+			numberCharacterMap['3'] = '#';
+			numberCharacterMap['4'] = '$';
+			numberCharacterMap['5'] = '%';
+			numberCharacterMap['6'] = '^';
+			numberCharacterMap['7'] = '&';
+			numberCharacterMap['8'] = '*';
+			numberCharacterMap['9'] = '(';
+
+			// Special characters
+			std::map<char, char> specialCharacterMap;
+			specialCharacterMap['.'] = '>';
+			specialCharacterMap[','] = '<';
+			specialCharacterMap['/'] = '?';
+			specialCharacterMap[';'] = ':';
+			specialCharacterMap['\''] = '\"';
+			specialCharacterMap['['] = '{';
+			specialCharacterMap[']'] = '}';
+			specialCharacterMap['\\'] = '|';
+			specialCharacterMap['-'] = '_';
+			specialCharacterMap['='] = '+';
+
+			// Letter characters
+			if (!_noLetters)
 			{
-				// Check if character is pressed on keyboard
-				if (_fe3d.input_getKeyPressed(Input(c)))
+				for (auto& c : letterCharacters)
 				{
-					if (_fe3d.input_getKeyDown(Input::KEY_LSHIFT) || _fe3d.input_getKeyDown(Input::KEY_RSHIFT)) // Uppercase or special character
+					// Check if character is pressed on keyboard
+					if (_fe3d.input_getKeyPressed(Input(c)))
 					{
-						// Only if number
-						if (isdigit(c))
+						if (_fe3d.input_getKeyDown(Input::KEY_LSHIFT) || _fe3d.input_getKeyDown(Input::KEY_RSHIFT)) // Uppercase or special character
 						{
-							if (!_noSpecials) // ! - )
-							{
-								_currentTextContent += specialCharacters[int(c - 48)];
-							}
-						}
-						else // Convert to uppercase
-						{
-							if (!_noLetters) // A - Z
+							// Convert to uppercase
 							{
 								_currentTextContent += (c - 32);
 							}
 						}
-					}
-					else if (_fe3d.input_getKeyToggled(Input::KEY_CAPSLOCK)) // Uppercase character
-					{
-						// Check if number
-						if (isdigit(c)) // 0 - 9
+						else if (_fe3d.input_getKeyToggled(Input::KEY_CAPSLOCK)) // Uppercase character
 						{
-							if (!_noNumbers)
+							if (!_noCaps) // A - Z
 							{
-								_currentTextContent += c;
-							}
-						}
-						else
-						{
-							if (!_noLetters && !_noCaps) // A - Z
-							{
+								// Convert to uppercase
 								_currentTextContent += (c - 32);
 							}
 						}
-					}
-					else // Lowercase character
-					{
-						// Check if number
-						if (isdigit(c)) // 0 - 9
+						else // Lowercase character
 						{
-							if (!_noNumbers)
-							{
-								_currentTextContent += c;
-							}
+							_currentTextContent += c;
+						}
+					}
+				}
+			}
+
+			// Number characters
+			if (!_noNumbers)
+			{
+				for (auto& element : numberCharacterMap)
+				{
+					// Check if character is pressed on keyboard
+					if (_fe3d.input_getKeyPressed(Input(element.first)))
+					{
+						// Check if shift was pressed
+						if (_fe3d.input_getKeyDown(Input::KEY_LSHIFT) || _fe3d.input_getKeyDown(Input::KEY_RSHIFT))
+						{
+							_currentTextContent += element.second;
 						}
 						else
 						{
-							if (!_noLetters) // a- z
-							{
-								_currentTextContent += c;
-							}
+							_currentTextContent += element.first;
+						}
+					}
+				}
+			}
+
+			// Special characters
+			if (!_noSpecials)
+			{
+				for (auto& element : specialCharacterMap)
+				{
+					// Check if character is pressed on keyboard
+					if (_fe3d.input_getKeyPressed(Input(element.first)))
+					{
+						// Check if shift was pressed
+						if (_fe3d.input_getKeyDown(Input::KEY_LSHIFT) || _fe3d.input_getKeyDown(Input::KEY_RSHIFT))
+						{
+							_currentTextContent += element.second;
+						}
+						else
+						{
+							_currentTextContent += element.first;
 						}
 					}
 				}

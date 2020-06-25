@@ -36,7 +36,6 @@ public:
 	// Floats
 	void setAmbLightStrength(float val);
 	void setDirLightStrength(float val);
-	void setSpecLightStrength(float val);
 	void setFogMinDistance(float val);
 	void setBloomIntensity(float val);
 	void setBloomTreshold(float val);
@@ -100,7 +99,6 @@ public:
 	// Floats
 	const float getAmbLightStrength()      const;
 	const float getDirLightStrength()      const;
-	const float getSpecLightStrength()     const;
 	const float getFogMinDistance()        const;
 	const float getBloomIntensity()        const;
 	const float getBloomTreshold()         const;
@@ -165,7 +163,6 @@ private:
 	// Floats
 	float _ambientLightingStrength     = 0.0f;
 	float _directionalLightingStrength = 0.0f;
-	float _specularLightingStrength    = 0.0f;
 	float _fogMinDistance              = 0.0f;
 	float _bloomIntensity              = 0.0f;
 	float _bloomTreshold               = 0.0f;

@@ -168,10 +168,12 @@ public:
 	void		   gameEntity_setSize(const string& ID, vec3 size);
 	void		   gameEntity_enable(const string& ID);
 	void		   gameEntity_disable(const string& ID);
+	void		   gameEntity_setSpecularStrength(const string& ID, float strength);
 	void		   gameEntity_setAlpha(const string& ID, float alpha);
 	void		   gameEntity_setColor(const string& ID, vec3 color);
 	void		   gameEntity_setMaxY(const string& ID, float y);
 	void		   gameEntity_setUvRepeat(const string& ID, float repeat);
+	float		   gameEntity_getSpecularStrength(const string& ID);
 	float		   gameEntity_getAlpha(const string& ID);
 	float		   gameEntity_getMaxY(const string& ID);
 	float		   gameEntity_getUvRepeat(const string& ID);
@@ -357,7 +359,7 @@ public:
 	// Graphics interface
 	void gfx_enableAmbientLighting(float strength = 0.0f);
 	void gfx_enableDirectionalLighting(vec3 position, float strength = 0.0f);
-	void gfx_enableSpecularLighting(float shininess);
+	void gfx_enableSpecularLighting();
 	void gfx_enablePointLighting();
 	void gfx_enableFog(float minDistance);
 	void gfx_enableSkyReflections(float factor);

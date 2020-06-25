@@ -22,7 +22,6 @@ void GameEntityRenderer::bind()
 	_shader.uploadUniform("u_dirLightPos",             _shaderBus.getDirLightPos());
 	_shader.uploadUniform("u_ambientStrength",         _shaderBus.getAmbLightStrength());
 	_shader.uploadUniform("u_dirLightStrength",        _shaderBus.getDirLightStrength());
-	_shader.uploadUniform("u_specLightStrength",       _shaderBus.getSpecLightStrength());
 	_shader.uploadUniform("u_fogMinDistance",          _shaderBus.getFogMinDistance());
 	_shader.uploadUniform("u_ambientLightingEnabled",  _shaderBus.isAmbLightingEnabled());
 	_shader.uploadUniform("u_dirLightingEnabled",      _shaderBus.isDirLightingEnabled());
@@ -104,6 +103,7 @@ void GameEntityRenderer::render(const GameEntity * entity)
 			// Shader uniforms
 			_shader.uploadUniform("u_modelMatrix",       entity->getModelMatrix());
 			_shader.uploadUniform("u_color",             entity->getColor());
+			_shader.uploadUniform("u_specLightStrength", entity->getSpecularStrength());
 			_shader.uploadUniform("u_isTransparent",     entity->isTransparent());
 			_shader.uploadUniform("u_isLightmapped",     entity->isLightMapped());
 			_shader.uploadUniform("u_isSkyReflective",   entity->isSkyReflective());

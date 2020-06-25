@@ -90,6 +90,6 @@ void CoreEngine::_updateWindowFading()
 	if (opacity < 1.0f)
 	{
 		_windowManager.setOpacity(opacity);
-		opacity += 0.005f;
+		opacity += 0.01f;
 	}
 }

@@ -761,6 +761,11 @@ void FabiEngine3D::gameEntity_disable(const string& ID)
 	_core->_gameEntityManager.getEntity(ID)->setEnabled(false);
 }
 
+void FabiEngine3D::gameEntity_setSpecularStrength(const string& ID, float strength)
+{
+	_core->_gameEntityManager.getEntity(ID)->setSpecularStrength(strength);
+}
+
 void FabiEngine3D::gameEntity_setMaxY(const string& ID, float y)
 {
 	_core->_gameEntityManager.getEntity(ID)->setMaxY(y);
@@ -769,6 +774,11 @@ void FabiEngine3D::gameEntity_setMaxY(const string& ID, float y)
 void FabiEngine3D::gameEntity_setUvRepeat(const string& ID, float repeat)
 {
 	_core->_gameEntityManager.getEntity(ID)->setUvRepeat(repeat);
+}
+
+float FabiEngine3D::gameEntity_getSpecularStrength(const string& ID)
+{
+	return _core->_gameEntityManager.getEntity(ID)->getSpecularStrength();
 }
 
 float FabiEngine3D::gameEntity_getAlpha(const string& ID)
@@ -1765,10 +1775,9 @@ void FabiEngine3D::gfx_enableDirectionalLighting(vec3 position, float strength)
 	}
 }
 
-void FabiEngine3D::gfx_enableSpecularLighting(float shininess)
+void FabiEngine3D::gfx_enableSpecularLighting()
 {
 	_core->_shaderBus.setSpecLightEnabled(true);
-	_core->_shaderBus.setSpecLightStrength(shininess);
 }
 
 void FabiEngine3D::gfx_enablePointLighting()

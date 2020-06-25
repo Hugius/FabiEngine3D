@@ -76,7 +76,7 @@ void ModelEditor::_updateModelCreation()
 			if (_gui->getGlobalScreen()->checkValueForm("newModelName", newModelName))
 			{
 				// Add model
-				_addModel("@" + newModelName, "", "", "", "", vec3(0.0f), 0, 1, 0, 0, vec3(1.0f), 1.0f, vec3(1.0f));
+				_addModel("@" + newModelName, "", "", "", "", vec3(0.0f), 0, 1, 0, 0, 1.0f, vec3(1.0f), 1.0f, vec3(1.0f));
 
 				// Go to editor screen
 				_currentModelName = "@" + newModelName;
@@ -136,7 +136,7 @@ void ModelEditor::_updateModelRemoval()
 			}
 			else if (_gui->getGlobalScreen()->isAnswerFormCancelled("removeModel"))
 			{
-				_modelChoosingEnabled = true;
+				_modelRemovalEnabled = false;
 				_currentModelName = "";
 			}
 		}

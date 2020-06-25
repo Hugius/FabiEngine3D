@@ -25,6 +25,11 @@ void ModelEditor::_updateModelEditingOptions()
 		{
 			_fe3d.gameEntity_setSpecularLighted(_currentModelName, !_fe3d.gameEntity_isSpecularLighted(_currentModelName));
 		}
+		else if (screen->getButton("strength")->isHovered())
+		{
+			_gui->getGlobalScreen()->addValueForm("strength", "Specular strength", 
+				_fe3d.gameEntity_getSpecularStrength(_currentModelName), vec2(0.0f, 0.1f), vec2(0.1f, 0.1f));
+		}
 		else if (screen->getButton("setColor")->isHovered())
 		{
 			_modelColorPicking = true;
@@ -82,6 +87,17 @@ void ModelEditor::_updateModelEditingOptions()
 	_fe3d.textEntity_setTextContent(transparentID, isTransparent ? "No-white: ON" : "No-white: OFF");
 	_fe3d.textEntity_setTextContent(specularID, isSpecular ? "Specular: ON" : "Specular: OFF");
 
+	// Update specular strength
+	if (_fe3d.gameEntity_isSpecularLighted(_currentModelName))
+	{
+		float strength = _fe3d.gameEntity_getSpecularStrength(_currentModelName);
+		_gui->getGlobalScreen()->checkValueForm("strength", strength);
+		_fe3d.gameEntity_setSpecularStrength(_currentModelName, strength);
+	}
+
+	// Update specular strength button hoverability
+	screen->getButton("strength")->setHoverable(_fe3d.gameEntity_isSpecularLighted(_currentModelName));
+
 	// Update model color changing through buttons
 	if (_modelColorPicking)
 	{
@@ -131,7 +147,7 @@ void ModelEditor::_updateModelEditingOptions()
 		}
 	}
 
-	// Update changing model uv repeat through buttons
+	// Update changing model UV repeat through buttons
 	if (_settingModelUvRepeat)
 	{
 		// Current UV repeat
@@ -143,7 +159,7 @@ void ModelEditor::_updateModelEditingOptions()
 			newUvRepeat = float(stoi(_gui->getGlobalScreen()->getWriteField("uvRepeat")->getTextContent()));
 		}
 
-		// Set new model color
+		// Set new model UV repeat
 		_fe3d.gameEntity_setUvRepeat(_currentModelName, newUvRepeat);
 
 		// Done button

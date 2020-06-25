@@ -40,22 +40,23 @@ void ModelEditor::initializeGUI()
 	
 	// Left-viewport: mainWindow - modelEditingOptions
 	_window->addScreen("modelEditingOptions");
-	_window->getScreen("modelEditingOptions")->addButton("faceculled", vec2(0.0f, 0.7875f), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Culling: OFF", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
-	_window->getScreen("modelEditingOptions")->addButton("shadowed", vec2(0.0f, 0.525f), vec2(1.6f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Shadowed : ON", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
-	_window->getScreen("modelEditingOptions")->addButton("transparent", vec2(0.0f, 0.2625f), vec2(1.5f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "No-white: OFF", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
-	_window->getScreen("modelEditingOptions")->addButton("specular", vec2(0.0f, 0.0f), vec2(1.6f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Specular: OFF", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
-	_window->getScreen("modelEditingOptions")->addButton("setColor", vec2(0.0f, -0.2625f), vec2(1.6f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Set color", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
-	_window->getScreen("modelEditingOptions")->addButton("uvRepeat", vec2(0.0f, -0.525f), vec2(1.6f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Set UV-repeat", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
-	_window->getScreen("modelEditingOptions")->addButton("back", vec2(0.0f, -0.7875f), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Go back", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_window->getScreen("modelEditingOptions")->addButton("faceculled", vec2(0.0f, 0.83f), vec2(1.4f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Culling: OFF", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_window->getScreen("modelEditingOptions")->addButton("shadowed", vec2(0.0f, 0.59f), vec2(1.6f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Shadowed : ON", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_window->getScreen("modelEditingOptions")->addButton("transparent", vec2(0.0f, 0.36f), vec2(1.5f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "No-white: OFF", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_window->getScreen("modelEditingOptions")->addButton("specular", vec2(0.0f, 0.13f), vec2(1.7f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Specular: OFF", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_window->getScreen("modelEditingOptions")->addButton("strength", vec2(0.0f, -0.1f), vec2(1.8f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Specular strength", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_window->getScreen("modelEditingOptions")->addButton("setColor", vec2(0.0f, -0.33f), vec2(1.6f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Set color", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_window->getScreen("modelEditingOptions")->addButton("uvRepeat", vec2(0.0f, -0.56f), vec2(1.6f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Set UV-repeat", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_window->getScreen("modelEditingOptions")->addButton("back", vec2(0.0f, -0.79f), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Go back", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 
 	// Left-viewport: mainWindow - modelEditingSize
 	_window->addScreen("modelEditingSize");
-	_window->getScreen("modelEditingSize")->addButton("setSize", vec2(0.0f, 0.7875f), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Set mesh size", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
-	_window->getScreen("modelEditingSize")->addButton("toggleResizeMesh", vec2(0.0f, 0.525f), vec2(1.6f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Mesh resize: OFF", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
-	_window->getScreen("modelEditingSize")->addButton("toggleBoxView", vec2(0.0f, 0.2625f), vec2(1.5f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Hitbox: OFF", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
-	_window->getScreen("modelEditingSize")->addButton("toggleResizeBox", vec2(0.0f, 0.0f), vec2(1.6f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Box resize: OFF", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
-	_window->getScreen("modelEditingSize")->addButton("resizeBoxDir", vec2(0.0f, -0.2625f), vec2(1.6f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Direction: X", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
-	_window->getScreen("modelEditingSize")->addButton("back", vec2(0.0f, -0.7875f), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Go back", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_window->getScreen("modelEditingSize")->addButton("setSize", vec2(0.0f, 0.75f), vec2(1.6f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Set mesh size", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_window->getScreen("modelEditingSize")->addButton("toggleResizeMesh", vec2(0.0f, 0.45f), vec2(1.75f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Mesh resize: OFF", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_window->getScreen("modelEditingSize")->addButton("toggleBoxView", vec2(0.0f, 0.15f), vec2(1.5f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Hitbox: OFF", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_window->getScreen("modelEditingSize")->addButton("toggleResizeBox", vec2(0.0f, -0.15f), vec2(1.7f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Box resize: OFF", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_window->getScreen("modelEditingSize")->addButton("resizeBoxDir", vec2(0.0f, -0.45f), vec2(1.6f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Direction: X", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_window->getScreen("modelEditingSize")->addButton("back", vec2(0.0f, -0.75f), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Go back", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 }
 
 void ModelEditor::load()
@@ -72,7 +73,7 @@ void ModelEditor::load()
 	_fe3d.gfx_enableMSAA();
 	_fe3d.gfx_enableSceneReflections(0.0f, 0.5f);
 	_fe3d.gfx_enableShadows(vec3(50.0f, 50.0f, 0.0f), vec3(0.0f), 100.0f, 150.0);
-	_fe3d.gfx_enableSpecularLighting(8.0f);
+	_fe3d.gfx_enableSpecularLighting();
 	
 	// 3D Environment
 	_fe3d.gameEntity_add("@grid", "Engine\\OBJs\\plane.obj", vec3(0.0f), vec3(0.0f), vec3(100.0f, 1.0f, 100.0f));
@@ -80,6 +81,7 @@ void ModelEditor::load()
 	_fe3d.gameEntity_setUvRepeat("@grid", 25.0f);
 	_fe3d.gameEntity_setSceneReflective("@grid", true);
 	_fe3d.gameEntity_setSpecularLighted("@grid", true);
+	_fe3d.gameEntity_setSpecularStrength("@grid", 32.0f);
 	_fe3d.gameEntity_add("@cube", "Engine\\OBJs\\cube.obj", vec3(5.0f, 0.0f, 0.0f), vec3(0.0f), vec3(1.0f, 1.0f, 1.0f));
 	_fe3d.gameEntity_setDiffuseMap("@cube", "Engine\\Textures\\cube.png");
 	_fe3d.gameEntity_setFaceCulled("@cube", true);
@@ -113,7 +115,7 @@ void ModelEditor::loadModels()
 		{
 			// Placeholder variables
 			string modelName, objName, diffuseName, lightName, reflectionName;
-			float width, height, depth, colorR, colorG, colorB, uvRepeat, boxSizeX, boxSizeY, boxSizeZ;
+			float width, height, depth, colorR, colorG, colorB, uvRepeat, boxSizeX, boxSizeY, boxSizeZ, specularStrength;
 			bool faceCulled, shadowed, transparent, specular;
 
 			// For item extraction
@@ -121,7 +123,7 @@ void ModelEditor::loadModels()
 
 			// Extract from file
 			iss >> modelName >> objName >> diffuseName >> lightName >> reflectionName
-				>> width >> height >> depth >> faceCulled >> shadowed >> transparent >> specular
+				>> width >> height >> depth >> faceCulled >> shadowed >> transparent >> specular >> specularStrength
 				>> colorR >> colorG >> colorB >> uvRepeat >> boxSizeX >> boxSizeY >> boxSizeZ;
 
 			// Run checks on string values
@@ -132,7 +134,7 @@ void ModelEditor::loadModels()
 
 			// Add new model
 			_addModel(modelName, objName, diffuseName, lightName, reflectionName, vec3(width, height, depth),
-				faceCulled, shadowed, transparent, specular, vec3(colorR, colorG, colorB), uvRepeat, vec3(boxSizeX, boxSizeY, boxSizeZ));
+				faceCulled, shadowed, transparent, specular, specularStrength, vec3(colorR, colorG, colorB), uvRepeat, vec3(boxSizeX, boxSizeY, boxSizeZ));
 		}
 
 		// Close file
@@ -177,6 +179,7 @@ void ModelEditor::save()
 				auto shadowed = std::to_string(_fe3d.gameEntity_isShadowed(modelName));
 				auto transparent = std::to_string(_fe3d.gameEntity_isTransparent(modelName));
 				auto specular = std::to_string(_fe3d.gameEntity_isSpecularLighted(modelName));
+				auto specularStrength = std::to_string(_fe3d.gameEntity_getSpecularStrength(modelName));
 				auto colorR = std::to_string(_fe3d.gameEntity_getColor(modelName).x);
 				auto colorG = std::to_string(_fe3d.gameEntity_getColor(modelName).y);
 				auto colorB = std::to_string(_fe3d.gameEntity_getColor(modelName).z);
@@ -189,13 +192,13 @@ void ModelEditor::save()
 				file << modelName << " " <<
 					objPath << " " << diffuseMapPath << " " << lightMapPath << " " << reflectionMapPath << " " <<
 					modelSizeX << " " << modelSizeY << " " << modelSizeZ << " " <<
-					faceCulled << " " << shadowed << " " << transparent << " " << specular << " " <<
+					faceCulled << " " << shadowed << " " << transparent << " " << specular << " " << specularStrength << " " <<
 					colorR << " " << colorG << " " << colorB << " " << uvRepeat << " " <<
 					boxSizeX << " " << boxSizeY << " " << boxSizeZ << "\n";
 			}
 			else
 			{
-				file << modelName << " -  -  -  -  0  0  0\n";
+				file << modelName << "- - - - 0.0 0.0 0.0 0 0 0 0 0.0 0.0 0.0 0.0 0 0.0 0.0 0.0\n";
 			}
 		}
 
@@ -260,7 +263,7 @@ void ModelEditor::unload()
 }
 
 void ModelEditor::_addModel(string modelName, string objName, string diffuseMapName, string lightMapName, string reflectionMapName, vec3 size,
-	bool faceCulled, bool shadowed, bool transparent, bool specular, vec3 color, float uvRepeat, vec3 aabbSize)
+	bool faceCulled, bool shadowed, bool transparent, bool specular, float specularStrength, vec3 color, float uvRepeat, vec3 aabbSize)
 {
 	// If model name not existing yet
 	if (std::find(_modelNames.begin(), _modelNames.end(), modelName) == _modelNames.end())
@@ -301,6 +304,7 @@ void ModelEditor::_addModel(string modelName, string objName, string diffuseMapN
 			_fe3d.gameEntity_setSpecularLighted(modelName, specular);
 
 			// Set other options
+			_fe3d.gameEntity_setSpecularStrength(modelName, specularStrength);
 			_fe3d.gameEntity_setColor(modelName, color);
 			_fe3d.gameEntity_setUvRepeat(modelName, uvRepeat);
 		}

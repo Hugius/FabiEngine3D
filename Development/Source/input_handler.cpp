@@ -35,7 +35,7 @@ void InputHandler::f_checkInput()
 					break;
 				}
 
-				case SDL_MOUSEBUTTONDOWN: // Continuing mouse press
+				case SDL_MOUSEBUTTONDOWN:
 				{
 					auto button = static_cast<Input>(event.button.button);
 
@@ -54,7 +54,10 @@ void InputHandler::f_checkInput()
 
 							if (getMouseToggled(button)) // Make mouse toggle false
 							{
-								_mouseToggled.erase(_mouseToggled.begin() + _getVectorIndex(_mouseToggled, button));
+								if (!_mouseToggled.empty())
+								{
+									_mouseToggled.erase(_mouseToggled.begin() + _getVectorIndex(_mouseToggled, button));
+								}
 
 							}
 							else
@@ -74,26 +77,37 @@ void InputHandler::f_checkInput()
 					break;
 				}
 			
-				case SDL_MOUSEBUTTONUP: // Mouse may be pressed again
+				case SDL_MOUSEBUTTONUP:
 				{
 					auto button = static_cast<Input>(event.button.button);
 
-					_mouseDown.erase(_mouseDown.begin() + _getVectorIndex(_mouseDown, button));
-
-					if (!_mouseTogglingLocked)
+					// Continuing mouse press
+					if (!_mouseDown.empty())
 					{
-						_mouseToggled_mayNotPress.erase(_mouseToggled_mayNotPress.begin() + _getVectorIndex(_mouseToggled_mayNotPress, button));
+						_mouseDown.erase(_mouseDown.begin() + _getVectorIndex(_mouseDown, button));
 					}
 
+					// Toggled mouse press
+					if (!_mouseTogglingLocked)
+					{
+						if (!_mouseToggled_mayNotPress.empty())
+						{
+							_mouseToggled_mayNotPress.erase(_mouseToggled_mayNotPress.begin() + _getVectorIndex(_mouseToggled_mayNotPress, button));
+						}
+					}
+
+					// Single short mouse press
 					_mousePressed_mayNotPress.clear();
+
 					break;
 				}
 
-				case SDL_KEYDOWN: // Continuing key press
+				case SDL_KEYDOWN:
 				{
 					auto key = static_cast<Input>(event.key.keysym.sym);
 
-					if (!_isInVector(_keysDown, key)) // If not in vector yet, add it
+					// Continuing key press
+					if (!_isInVector(_keysDown, key))
 					{
 						_keysDown.push_back(key);
 					}
@@ -107,7 +121,10 @@ void InputHandler::f_checkInput()
 
 							if (getKeyToggled(key)) // Make key toggle false
 							{
-								_keysToggled.erase(_keysToggled.begin() + _getVectorIndex(_keysToggled, key));
+								if (!_keysToggled.empty())
+								{
+									_keysToggled.erase(_keysToggled.begin() + _getVectorIndex(_keysToggled, key));
+								}
 							}
 							else
 							{
@@ -126,18 +143,28 @@ void InputHandler::f_checkInput()
 					break;
 				}
 
-				case SDL_KEYUP: // Keys may be pressed again
+				case SDL_KEYUP:
 				{
 					auto key = static_cast<Input>(event.key.keysym.sym);
 
-					_keysDown.erase(_keysDown.begin() + _getVectorIndex(_keysDown, key));
-
-					if (!_keyTogglingLocked)
+					// Continuing key press
+					if (!_keysDown.empty())
 					{
-						_keysToggled_mayNotPress.erase(_keysToggled_mayNotPress.begin() + _getVectorIndex(_keysToggled_mayNotPress, key));
+						_keysDown.erase(_keysDown.begin() + _getVectorIndex(_keysDown, key));
 					}
 
+					// Toggled key press
+					if (!_keyTogglingLocked)
+					{
+						if (!_keysToggled_mayNotPress.empty())
+						{
+							_keysToggled_mayNotPress.erase(_keysToggled_mayNotPress.begin() + _getVectorIndex(_keysToggled_mayNotPress, key));
+						}
+					}
+
+					// Single short key press
 					_keysPressed_mayNotPress.clear();
+
 					break;
 				}
 			}

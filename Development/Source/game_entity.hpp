@@ -39,6 +39,7 @@ public:
 	void setSceneReflective(bool val);
 	void setSpecularLighted(bool val);
 	void setShadowed(bool val);
+	void setSpecularStrength(float val);
 	void setMaxY(float val);
 	void setAlpha(float val);
 	void setUvRepeat(float val);
@@ -66,9 +67,10 @@ public:
 	const bool hasDiffuseMap() const;
 	const bool hasLightMap() const;
 	const bool hasReflectionMap() const;
-	const float getMaxY() const;
+	const float getSpecularStrength() const;
 	const float getAlpha() const;
 	const float getUvRepeat() const;
+	const float getMaxY() const;
 
 private:
 	mat4 _modelMatrix = mat4(1.0f);
@@ -87,14 +89,15 @@ private:
 	vector<GLuint> _lightMaps;
 	vector<GLuint> _reflectionMaps;
 
-	bool _isTransparent      = false;
-	bool _isFaceCulled       = false;
-	bool _isLightMapped      = false;
-	bool _isSkyReflective    = false;
+	bool _isTransparent     = false;
+	bool _isFaceCulled      = false;
+	bool _isLightMapped     = false;
+	bool _isSkyReflective   = false;
 	bool _isSceneReflective = false;
-	bool _isSpecular         = false;
-	bool _isShadowed         = true;
+	bool _isSpecular        = false;
+	bool _isShadowed        = true;
 
+	float _specularStrength = 1.0f;
 	float _alpha = 1.0f;
 	float _uvRepeat = 1.0f;
 	float _maxY = (std::numeric_limits<float>::max)();

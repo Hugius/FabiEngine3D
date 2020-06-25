@@ -105,11 +105,6 @@ void ShaderBus::setDirLightStrength(float val)
 	_directionalLightingStrength = val;
 }
 
-void ShaderBus::setSpecLightStrength(float val)
-{
-	_specularLightingStrength = val;
-}
-
 void ShaderBus::setFogMinDistance(float val)
 {
 	_fogMinDistance = val;
@@ -363,11 +358,6 @@ const float ShaderBus::getAmbLightStrength() const
 const float ShaderBus::getDirLightStrength() const
 {
 	return _directionalLightingStrength;
-}
-
-const float ShaderBus::getSpecLightStrength() const
-{
-	return _specularLightingStrength;
 }
 
 const float ShaderBus::getFogMinDistance() const

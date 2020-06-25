@@ -88,8 +88,8 @@ void EngineGuiGlobalScreen::_addValueForm(const string& ID, string title, string
 	if (ID != "" && std::find(_valueFormIDs.begin(), _valueFormIDs.end(), ID) == _valueFormIDs.end())
 	{
 		_valueFormIDs.push_back(ID);
-		addTextfield(ID, position + vec2(0.0f, 0.15f), vec2(title.size() * 0.025f, 0.1f), title, vec3(1.0f));
-		addWriteField(ID, position, size, vec3(0.25f), vec3(0.5f), vec3(1.0f), vec3(0.0f), !onlyNumbers, onlyNumbers, onlyNumbers, onlyNumbers);
+		addTextfield(ID, position + vec2(0.0f, 0.15f), vec2(title.size() * 0.025f, 0.1f), title, vec3(0.0f));
+		addWriteField(ID, position, size, vec3(0.25f), vec3(0.5f), vec3(1.0f), vec3(0.0f), false, onlyNumbers, onlyNumbers, onlyNumbers);
 		getWriteField(ID)->setTextContent(valueString);
 
 		// GUI focus & set first writefield active
@@ -173,7 +173,7 @@ void EngineGuiGlobalScreen::addChoiceForm(const string& ID, string title, vec2 p
 	if (_choiceFormID == "")
 	{
 		// Add GUI elements
-		addTextfield(ID, vec2(0.0f, 0.45f), vec2(0.3f, 0.1f), "Select project", vec3(1.0f));
+		addTextfield(ID, vec2(0.0f, 0.45f), vec2(0.3f, 0.1f), "Select project", vec3(0.0f));
 		addScrollingList(ID, vec2(0.0f, 0.0f), vec2(0.5, 0.75f), vec3(_scrollListColor), _buttonColor, _buttonHoverColor, _textColor, _textHoverColor, vec2(0.1f, 0.25f));
 		addButton("choice_form_cancel", vec2(0.0f, -0.45f), vec2(0.15f, 0.1f), vec3(0.5f, 0.0f, 0.0f), vec3(1.0f, 0.0f, 0.0f), "Cancel", vec3(1.0f), vec3(0.0f));
 
@@ -269,6 +269,7 @@ bool EngineGuiGlobalScreen::isAnswerFormCancelled(const string& ID)
 	{
 		if (getButton("answer_form_no")->isHovered() && _fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
 		{
+			std::cout << "test";
 			removeAnswerForm(ID);
 			return true;
 		}

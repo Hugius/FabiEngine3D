@@ -162,6 +162,11 @@ void GameEntity::setShadowed(bool val)
 	_isShadowed = val;
 }
 
+void GameEntity::setSpecularStrength(float val)
+{
+	_specularStrength = val;
+}
+
 void GameEntity::setMaxY(float val)
 {
 	_maxY = val;
@@ -285,6 +290,11 @@ const bool GameEntity::hasLightMap() const
 const bool GameEntity::hasReflectionMap() const
 {
 	return !_reflectionMaps.empty();
+}
+
+const float GameEntity::getSpecularStrength() const
+{
+	return _specularStrength;
 }
 
 const float GameEntity::getMaxY() const

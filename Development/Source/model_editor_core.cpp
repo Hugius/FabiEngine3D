@@ -66,12 +66,12 @@ void ModelEditor::load()
 	_fe3d.camera_enableLookat(vec3(0.0f));
 
 	// Graphics
-	_fe3d.gfx_enableAmbientLighting(1.0f);
-	_fe3d.gfx_enableDirectionalLighting(vec3(1000.0f), 1.0f);
+	_fe3d.gfx_enableAmbientLighting(0.75f);
+	_fe3d.gfx_enableDirectionalLighting(vec3(1000.0f), 0.5f);
 	_fe3d.gfx_enableLightMapping();
 	_fe3d.gfx_enableSkyReflections(0.25f);
 	_fe3d.gfx_enableMSAA();
-	_fe3d.gfx_enableSceneReflections(0.0f, 0.5f);
+	_fe3d.gfx_enableSceneReflections(0.0f, 0.25f);
 	_fe3d.gfx_enableShadows(vec3(50.0f, 50.0f, 0.0f), vec3(0.0f), 100.0f, 150.0);
 	_fe3d.gfx_enableSpecularLighting();
 	
@@ -80,8 +80,6 @@ void ModelEditor::load()
 	_fe3d.gameEntity_setDiffuseMap("@grid", "Engine\\Textures\\marble.png");
 	_fe3d.gameEntity_setUvRepeat("@grid", 25.0f);
 	_fe3d.gameEntity_setSceneReflective("@grid", true);
-	_fe3d.gameEntity_setSpecularLighted("@grid", true);
-	_fe3d.gameEntity_setSpecularStrength("@grid", 32.0f);
 	_fe3d.gameEntity_add("@cube", "Engine\\OBJs\\cube.obj", vec3(5.0f, 0.0f, 0.0f), vec3(0.0f), vec3(1.0f, 1.0f, 1.0f));
 	_fe3d.gameEntity_setDiffuseMap("@cube", "Engine\\Textures\\cube.png");
 	_fe3d.gameEntity_setFaceCulled("@cube", true);
@@ -276,6 +274,7 @@ void ModelEditor::_addModel(string modelName, string objName, string diffuseMapN
 		{
 			_fe3d.gameEntity_add(modelName, objName, vec3(0.0f), vec3(0.0f), size, false);
 			_fe3d.aabbEntity_bindToGameEntity(modelName, aabbSize, true);
+			_fe3d.aabbEntity_hide(modelName);
 			
 			// Diffuse map
 			if (diffuseMapName != "")

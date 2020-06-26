@@ -7,6 +7,7 @@ void EntityPlacer::update()
 	_updateModelScreen();
 	_updateBillboardScreen();
 	_updateLightScreen();
+	_updateMiscellaneous();
 }
 
 void EntityPlacer::_updateManagementScreen()

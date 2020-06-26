@@ -76,7 +76,7 @@ void ModelEditor::_updateModelCreation()
 			if (_gui->getGlobalScreen()->checkValueForm("newModelName", newModelName))
 			{
 				// Add model
-				_addModel("@" + newModelName, "", "", "", "", vec3(0.0f), 0, 1, 0, 0, 1.0f, vec3(1.0f), 1.0f, vec3(1.0f));
+				_addModel("@" + newModelName, "", "", "", "", vec3(0.0f), 0, 1, 0, 0, 1.0f, vec3(1.0f), 1.0f, vec3(2.5f));
 
 				// Go to editor screen
 				_currentModelName = "@" + newModelName;

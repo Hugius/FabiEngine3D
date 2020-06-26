@@ -29,6 +29,7 @@ private:
 	void _updateBillboardScreen();
 	void _updateLightScreen();
 	void _updateCamera();
+	void _updateMiscellaneous();
 
 	bool _isLoaded = false;
 

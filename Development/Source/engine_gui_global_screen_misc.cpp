@@ -269,7 +269,6 @@ bool EngineGuiGlobalScreen::isAnswerFormCancelled(const string& ID)
 	{
 		if (getButton("answer_form_no")->isHovered() && _fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
 		{
-			std::cout << "test";
 			removeAnswerForm(ID);
 			return true;
 		}

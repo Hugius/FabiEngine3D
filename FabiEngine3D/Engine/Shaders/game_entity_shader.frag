@@ -40,6 +40,7 @@ uniform float u_skyReflectionMixValue;
 uniform float u_customAlpha;
 uniform float u_skyReflectionFactor;
 uniform float u_sceneReflectionFactor;
+uniform float u_lightnessFactor;
 
 // Boolean uniforms
 uniform bool u_isTransparent;
@@ -95,9 +96,11 @@ void main()
 	color *= vec3((a + d + s) * h + p);
 	color  = applyLightmapping(color);
 	color  = applyFog(color);
+	color *= u_color;
+	color *= u_lightnessFactor;
 
 	// Set final color
-	o_finalColor = vec4(color * u_color, u_customAlpha);
+	o_finalColor = vec4(color, u_customAlpha);
 }
 
 // Calculate texture color
@@ -133,8 +136,10 @@ vec3 getAmbientLighting()
 	{
 		return vec3(u_ambientStrength);
 	}
-
-	return vec3(0.0f);
+	else
+	{
+		return vec3(0.0f);
+	}
 }
 
 // Calculate directional lighting
@@ -146,8 +151,10 @@ vec3 getDirectionalLighting()
 		float lightStrength = max(dot(f_normal, lightDir), 0.0);
 		return vec3(lightStrength * u_dirLightStrength);
 	}
-
-	return vec3(0.0f);
+	else
+	{
+		return vec3(0.0f);
+	}
 }
 
 vec3 getSpecularLighting()
@@ -160,8 +167,10 @@ vec3 getSpecularLighting()
 		float specular  = pow(max(dot(viewDir, reflectDir), 0.0f), u_specLightStrength);
 		return vec3(specular);
 	}
-
-	return vec3(0.0f);
+	else
+	{
+		return vec3(0.0f);
+	}
 }
 
 // Calculate point lighting
@@ -183,8 +192,10 @@ vec3 getPointLighting()
 
 		return pointStrength;
 	}
-	
-	return vec3(0.0f);
+	else
+	{
+		return vec3(0.0f);
+	}
 }
 
 vec3 getShadowLighting()
@@ -226,8 +237,10 @@ vec3 getShadowLighting()
 			return vec3(shadow);
 		}
 	}
-
-	return vec3(1.0f);
+	else
+	{
+		return vec3(1.0f);
+	}
 }
 
 vec3 applyLightmapping(vec3 color)
@@ -238,8 +251,10 @@ vec3 applyLightmapping(vec3 color)
 		vec3 lightmappedColor = color + lightmapColor;
 		return lightmappedColor;
 	}
-
-	return color;
+	else
+	{
+		return color;
+	}
 }
 
 // Calculate fog color
@@ -251,8 +266,10 @@ vec3 applyFog(vec3 color)
 		vec3   foggedColor = mix(vec3(0.75f, 0.75f, 0.75f), color, min(u_fogMinDistance / distance, 1.0f));
 		return foggedColor;
 	}
-	
-	return color;
+	else
+	{
+		return color;
+	}
 }
 
 vec3 applySkyReflections(vec3 color)
@@ -274,8 +291,10 @@ vec3 applySkyReflections(vec3 color)
 
 		return color;
 	}
-
-	return color;
+	else
+	{
+		return color;
+	}
 }
 
 vec3 applySceneReflections(vec3 color)
@@ -288,6 +307,8 @@ vec3 applySceneReflections(vec3 color)
 		vec3 mixedColor   = mix(color.rgb, reflectionColor.rgb, u_sceneReflectionFactor);
 		return mixedColor.rgb;
 	}
-
-	return color;
+	else
+	{
+		return color;
+	}
 }

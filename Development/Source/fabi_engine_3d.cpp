@@ -1754,12 +1754,7 @@ string FabiEngine3D::textEntity_getTextContent(const string& ID)
 void FabiEngine3D::gfx_enableAmbientLighting(float strength)
 {
 	_core->_shaderBus.setAmbLightEnabled(true);
-
-	// Sky overrides
-	if (_core->_skyEntityManager.getSelectedSky() == nullptr)
-	{
-		_core->_shaderBus.setAmbLightStrength(strength);
-	}
+	_core->_shaderBus.setAmbLightStrength(strength);
 }
 
 void FabiEngine3D::gfx_enableDirectionalLighting(vec3 position, float strength)
@@ -1767,12 +1762,6 @@ void FabiEngine3D::gfx_enableDirectionalLighting(vec3 position, float strength)
 	_core->_shaderBus.setDirLightEnabled(true);
 	_core->_shaderBus.setDirLightPos(position);
 	_core->_shaderBus.setDirLightStrength(strength);
-
-	// Sky overrides
-	if (_core->_skyEntityManager.getSelectedSky() == nullptr)
-	{
-		_core->_shaderBus.setAmbLightStrength(strength);
-	}
 }
 
 void FabiEngine3D::gfx_enableSpecularLighting()

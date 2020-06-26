@@ -44,8 +44,8 @@ void EntityPlacer::initializeGUI()
 void EntityPlacer::load()
 {
 	// Enable graphics
-	_fe3d.gfx_enableAmbientLighting(1.0f);
-	_fe3d.gfx_enableDirectionalLighting(vec3(1000.0f), 1.0f);
+	_fe3d.gfx_enableAmbientLighting(0.75f);
+	_fe3d.gfx_enableDirectionalLighting(vec3(1000.0f), 0.75f);
 	_fe3d.gfx_enableLightMapping();
 	_fe3d.gfx_enableSkyReflections(0.25f);
 	_fe3d.gfx_enableMSAA();
@@ -158,5 +158,6 @@ void EntityPlacer::unload()
 
 	// Other
 	_leftWindow->getScreen("modelPlaceManagement")->getScrollingList("modelList")->deleteButtons();
+	_fe3d.collision_disableFrameRendering();
 	_isLoaded = false;
 }

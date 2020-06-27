@@ -56,7 +56,10 @@ void InputHandler::f_checkInput()
 							{
 								if (!_mouseToggled.empty())
 								{
-									_mouseToggled.erase(_mouseToggled.begin() + _getVectorIndex(_mouseToggled, button));
+									if (std::find(_mouseToggled.begin(), _mouseToggled.end(), button) != _mouseToggled.end())
+									{
+										_mouseToggled.erase(_mouseToggled.begin() + _getVectorIndex(_mouseToggled, button));
+									}
 								}
 
 							}
@@ -92,7 +95,10 @@ void InputHandler::f_checkInput()
 					{
 						if (!_mouseToggled_mayNotPress.empty())
 						{
-							_mouseToggled_mayNotPress.erase(_mouseToggled_mayNotPress.begin() + _getVectorIndex(_mouseToggled_mayNotPress, button));
+							if (std::find(_mouseToggled_mayNotPress.begin(), _mouseToggled_mayNotPress.end(), button) != _mouseToggled_mayNotPress.end())
+							{
+								_mouseToggled_mayNotPress.erase(_mouseToggled_mayNotPress.begin() + _getVectorIndex(_mouseToggled_mayNotPress, button));
+							}
 						}
 					}
 
@@ -123,7 +129,10 @@ void InputHandler::f_checkInput()
 							{
 								if (!_keysToggled.empty())
 								{
-									_keysToggled.erase(_keysToggled.begin() + _getVectorIndex(_keysToggled, key));
+									if (std::find(_keysToggled.begin(), _keysToggled.end(), key) != _keysToggled.end())
+									{
+										_keysToggled.erase(_keysToggled.begin() + _getVectorIndex(_keysToggled, key));
+									}
 								}
 							}
 							else
@@ -158,7 +167,10 @@ void InputHandler::f_checkInput()
 					{
 						if (!_keysToggled_mayNotPress.empty())
 						{
-							_keysToggled_mayNotPress.erase(_keysToggled_mayNotPress.begin() + _getVectorIndex(_keysToggled_mayNotPress, key));
+							if (std::find(_keysToggled_mayNotPress.begin(), _keysToggled_mayNotPress.end(), key) != _keysToggled_mayNotPress.end())
+							{
+								_keysToggled_mayNotPress.erase(_keysToggled_mayNotPress.begin() + _getVectorIndex(_keysToggled_mayNotPress, key));
+							}
 						}
 					}
 

@@ -248,6 +248,8 @@
     <ClCompile Include="Source\entity_placer_core.cpp" />
     <ClCompile Include="Source\entity_placer_misc.cpp" />
     <ClCompile Include="Source\entity_placer_updates.cpp" />
+    <ClCompile Include="Source\entity_placer_updates_editing.cpp" />
+    <ClCompile Include="Source\entity_placer_updates_placing.cpp" />
     <ClCompile Include="Source\left_viewport_controller.cpp" />
     <ClCompile Include="Source\model_editor_updates.cpp" />
     <ClCompile Include="Source\model_editor_updates_mesh.cpp" />

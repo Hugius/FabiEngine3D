@@ -162,6 +162,11 @@ void GameEntity::setShadowed(bool val)
 	_isShadowed = val;
 }
 
+void GameEntity::setLightness(float val)
+{
+	_lightness = val;
+}
+
 void GameEntity::setSpecularStrength(float val)
 {
 	_specularStrength = val;
@@ -290,6 +295,11 @@ const bool GameEntity::hasLightMap() const
 const bool GameEntity::hasReflectionMap() const
 {
 	return !_reflectionMaps.empty();
+}
+
+const float GameEntity::getLightness() const
+{
+	return _lightness;
 }
 
 const float GameEntity::getSpecularStrength() const

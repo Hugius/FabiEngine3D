@@ -39,6 +39,7 @@ public:
 	void setSceneReflective(bool val);
 	void setSpecularLighted(bool val);
 	void setShadowed(bool val);
+	void setLightness(float val);
 	void setSpecularStrength(float val);
 	void setMaxY(float val);
 	void setAlpha(float val);
@@ -67,6 +68,7 @@ public:
 	const bool hasDiffuseMap() const;
 	const bool hasLightMap() const;
 	const bool hasReflectionMap() const;
+	const float getLightness() const;
 	const float getSpecularStrength() const;
 	const float getAlpha() const;
 	const float getUvRepeat() const;
@@ -97,6 +99,7 @@ private:
 	bool _isSpecular        = false;
 	bool _isShadowed        = true;
 
+	float _lightness = 1.0f;
 	float _specularStrength = 1.0f;
 	float _alpha = 1.0f;
 	float _uvRepeat = 1.0f;

@@ -40,7 +40,7 @@ uniform float u_skyReflectionMixValue;
 uniform float u_customAlpha;
 uniform float u_skyReflectionFactor;
 uniform float u_sceneReflectionFactor;
-uniform float u_lightnessFactor;
+uniform float u_lightness;
 
 // Boolean uniforms
 uniform bool u_isTransparent;
@@ -97,7 +97,7 @@ void main()
 	color  = applyLightmapping(color);
 	color  = applyFog(color);
 	color *= u_color;
-	color *= u_lightnessFactor;
+	color *= u_lightness;
 
 	// Set final color
 	o_finalColor = vec4(color, u_customAlpha);

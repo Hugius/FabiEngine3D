@@ -169,10 +169,12 @@ public:
 	void		   gameEntity_enable(const string& ID);
 	void		   gameEntity_disable(const string& ID);
 	void		   gameEntity_setSpecularStrength(const string& ID, float strength);
+	void		   gameEntity_setLightness(const string& ID, float lightness);
 	void		   gameEntity_setAlpha(const string& ID, float alpha);
 	void		   gameEntity_setColor(const string& ID, vec3 color);
 	void		   gameEntity_setMaxY(const string& ID, float y);
 	void		   gameEntity_setUvRepeat(const string& ID, float repeat);
+	float		   gameEntity_getLightness(const string& ID);
 	float		   gameEntity_getSpecularStrength(const string& ID);
 	float		   gameEntity_getAlpha(const string& ID);
 	float		   gameEntity_getMaxY(const string& ID);
@@ -185,6 +187,7 @@ public:
 	string		   gameEntity_getDiffuseMapPath(const string& ID);
 	string		   gameEntity_getLightMapPath(const string& ID);
 	string		   gameEntity_getReflectionMapPath(const string& ID);
+	vector<string> gameEntity_getAllIDs();
 	vector<string> gameEntity_getGroupIDs(const string& ID);
 
 	// Billboard entity interface (core)

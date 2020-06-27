@@ -37,15 +37,15 @@ private:
 	void _loadDiffuseMap();
 	void _loadLightMap();
 	void _loadReflectionMap();
-	void _updateModelManagement();
-	void _updateModelCreation();
+	void _updateManagementScreen();
+	void _updateCreationScreen();
 	void _updateModelChoosing();
-	void _updateModelEditing();
-	void _updateModelEditingCamera();
+	void _updateEditingScreen();
 	void _updateModelEditingMesh();
 	void _updateModelEditingOptions();
 	void _updateModelEditingSize();
 	void _updateModelRemoval();
+	void _updateCamera();
 	void _updateMiscellaneous();
 
 	bool _modelCreationEnabled = false;

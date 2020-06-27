@@ -4,16 +4,16 @@
 
 void ModelEditor::update()
 {
-	_updateModelManagement();
-	_updateModelCreation();
+	_updateManagementScreen();
+	_updateCreationScreen();
 	_updateModelChoosing();
-	_updateModelEditing();
+	_updateEditingScreen();
 	_updateModelRemoval();
+	_updateCamera();
 	_updateMiscellaneous();
-	_updateModelEditingCamera();
 }
 
-void ModelEditor::_updateModelManagement()
+void ModelEditor::_updateManagementScreen()
 {
 	if (_isLoaded)
 	{
@@ -64,7 +64,7 @@ void ModelEditor::_updateModelManagement()
 	}
 }
 
-void ModelEditor::_updateModelCreation()
+void ModelEditor::_updateCreationScreen()
 {
 	if (_isLoaded)
 	{
@@ -143,7 +143,7 @@ void ModelEditor::_updateModelRemoval()
 	}
 }
 
-void ModelEditor::_updateModelEditingCamera()
+void ModelEditor::_updateCamera()
 {
 	if (_isLoaded)
 	{

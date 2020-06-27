@@ -2,7 +2,7 @@
 
 #include "model_editor.hpp"
 
-void ModelEditor::_updateModelEditing()
+void ModelEditor::_updateEditingScreen()
 {
 	if (_modelEditingEnabled && _currentModelName != "")
 	{

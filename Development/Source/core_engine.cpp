@@ -102,10 +102,16 @@ void CoreEngine::_updateApplication()
 	// Camera updates
 	_cameraManager.update(_windowManager);
 
-	// Physics updates
+	// Calculate viewport position Y offset, because GUI borders are not all of the same size
 	vec2 offset = vec2(Config::getInst().getVpPos().x, Config::getInst().getWindowSize().y - (Config::getInst().getVpPos().y + Config::getInst().getVpSize().y));
+	
+	// Apply Y offset to mouse position
 	vec2 mousePos = vec2(_windowManager.getMousePos()) - offset;
-	mousePos = (mousePos / vec2(Config::getInst().getVpSize())) * vec2(Config::getInst().getWindowSize()); // Convert fullscreen coords to viewport coords
+
+	// Convert fullscreen coords to viewport coords
+	mousePos = (mousePos / vec2(Config::getInst().getVpSize())) * vec2(Config::getInst().getWindowSize());
+
+	// Update physics
 	_mousePicker.update(mousePos, _terrainEntityManager);
 	_collisionResolver.update(_aabbEntityManager.getEntities(), _terrainEntityManager, _cameraManager);
 

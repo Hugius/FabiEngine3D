@@ -28,6 +28,12 @@ private:
 	void _updateModelScreen();
 	void _updateBillboardScreen();
 	void _updateLightScreen();
+	void _updateModelPlacing();
+	void _updateBilboardPlacing();
+	void _updateLightPlacing();
+	void _updateModelEditing();
+	void _updateBillboardEditing();
+	void _updateLightEditing();
 	void _updateCamera();
 	void _updateMiscellaneous();
 
@@ -47,4 +53,5 @@ private:
 	std::map<string, unsigned int> _counterMap;
 
 	float _cameraMovementSpeed = 25.0f;
+	const float _blinkingSpeed = 0.025f;
 };

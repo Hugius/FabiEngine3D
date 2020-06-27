@@ -313,6 +313,12 @@
     <ClCompile Include="Source\core_engine_misc.cpp">
       <Filter>src\Core System</Filter>
     </ClCompile>
+    <ClCompile Include="Source\entity_placer_updates_placing.cpp">
+      <Filter>src\Editor System\Entity Placer</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\entity_placer_updates_editing.cpp">
+      <Filter>src\Editor System\Entity Placer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\obj_loader.hpp">

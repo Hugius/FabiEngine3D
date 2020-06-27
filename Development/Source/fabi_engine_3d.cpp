@@ -766,6 +766,11 @@ void FabiEngine3D::gameEntity_setSpecularStrength(const string& ID, float streng
 	_core->_gameEntityManager.getEntity(ID)->setSpecularStrength(strength);
 }
 
+void FabiEngine3D::gameEntity_setLightness(const string& ID, float lightness)
+{
+	_core->_gameEntityManager.getEntity(ID)->setLightness(lightness);
+}
+
 void FabiEngine3D::gameEntity_setMaxY(const string& ID, float y)
 {
 	_core->_gameEntityManager.getEntity(ID)->setMaxY(y);
@@ -774,6 +779,11 @@ void FabiEngine3D::gameEntity_setMaxY(const string& ID, float y)
 void FabiEngine3D::gameEntity_setUvRepeat(const string& ID, float repeat)
 {
 	_core->_gameEntityManager.getEntity(ID)->setUvRepeat(repeat);
+}
+
+float FabiEngine3D::gameEntity_getLightness(const string& ID)
+{
+	return _core->_gameEntityManager.getEntity(ID)->getLightness();
 }
 
 float FabiEngine3D::gameEntity_getSpecularStrength(const string& ID)
@@ -839,6 +849,18 @@ void FabiEngine3D::gameEntity_setColor(const string& ID, vec3 color)
 void FabiEngine3D::gameEntity_setSceneReflective(const string& ID, bool enabled)
 {
 	_core->_gameEntityManager.getEntity(ID)->setSceneReflective(enabled);
+}
+
+vector<string> FabiEngine3D::gameEntity_getAllIDs()
+{
+	vector<string> IDs;
+
+	for (auto entity : _core->_gameEntityManager.getEntities()) // Loop over game entities
+	{
+		IDs.push_back(entity->getID());
+	}
+
+	return IDs;
 }
 
 vector<string> FabiEngine3D::gameEntity_getGroupIDs(const string& ID)
@@ -1359,13 +1381,14 @@ string FabiEngine3D::collision_checkEntityGroupCamera(const string& ID)
 bool FabiEngine3D::collision_checkCursorInEntity(const string& ID)
 {
 	auto entity = _core->_aabbEntityManager.getEntity(ID);
+
 	vec3 lb, rt;
-	lb.x = (entity->getTranslation().x - entity->getScaling().x);
+	lb.x = (entity->getTranslation().x - entity->getScaling().x / 2.0f);
 	lb.y = (entity->getTranslation().y);
-	lb.z = (entity->getTranslation().z + entity->getScaling().z);
-	rt.x = (entity->getTranslation().x + entity->getScaling().x);
+	lb.z = (entity->getTranslation().z + entity->getScaling().z / 2.0f);
+	rt.x = (entity->getTranslation().x + entity->getScaling().x / 2.0f);
 	rt.y = (entity->getTranslation().y + entity->getScaling().y);
-	rt.z = (entity->getTranslation().z - entity->getScaling().z);
+	rt.z = (entity->getTranslation().z - entity->getScaling().z / 2.0f);
 
 	return _core->_mousePicker.checkCursorInBox(lb, rt, _core->_cameraManager.getPosition()) != -1.0f;
 }
@@ -1384,12 +1407,12 @@ string FabiEngine3D::collision_checkCursorInEntityGroup(const string& ID, const 
 			{
 				// Calculate box left bottom (LB) and right top (RT)
 				vec3 lb, rt;
-				lb.x = (entity->getTranslation().x - entity->getScaling().x);
+				lb.x = (entity->getTranslation().x - entity->getScaling().x / 2.0f);
 				lb.y = (entity->getTranslation().y);
-				lb.z = (entity->getTranslation().z + entity->getScaling().z);
-				rt.x = (entity->getTranslation().x + entity->getScaling().x);
+				lb.z = (entity->getTranslation().z + entity->getScaling().z / 2.0f);
+				rt.x = (entity->getTranslation().x + entity->getScaling().x / 2.0f);
 				rt.y = (entity->getTranslation().y + entity->getScaling().y);
-				rt.z = (entity->getTranslation().z - entity->getScaling().z);
+				rt.z = (entity->getTranslation().z - entity->getScaling().z / 2.0f);
 
 				// Check intersection
 				float distance = _core->_mousePicker.checkCursorInBox(lb, rt, _core->_cameraManager.getPosition());

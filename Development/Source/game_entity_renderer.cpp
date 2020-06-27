@@ -109,6 +109,7 @@ void GameEntityRenderer::render(const GameEntity * entity)
 			_shader.uploadUniform("u_isSkyReflective",   entity->isSkyReflective());
 			_shader.uploadUniform("u_isSceneReflective", entity->isSceneReflective());
 			_shader.uploadUniform("u_isSpecular",        entity->isSpecularLighted());
+			_shader.uploadUniform("u_lightness",		 entity->getLightness());
 			_shader.uploadUniform("u_maxY",              entity->getMaxY());
 			_shader.uploadUniform("u_customAlpha",       entity->getAlpha());
 			_shader.uploadUniform("u_isShadowed",        entity->isShadowed());

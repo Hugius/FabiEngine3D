@@ -7,6 +7,12 @@
 #include "model_editor.hpp"
 #include "world_editor.hpp"
 
+enum class Transformation
+{
+	TRANSLATION,
+	ROTATION,
+	SCALING,
+};
 
 class EntityPlacer final
 {
@@ -38,6 +44,8 @@ private:
 	void _updateMiscellaneous();
 
 	bool _isLoaded = false;
+
+	Transformation _transformation = Transformation::TRANSLATION;
 
 	FabiEngine3D& _fe3d;
 	shared_ptr<EngineGuiManager> _gui;

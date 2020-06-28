@@ -47,6 +47,11 @@ void EngineGuiGlobalScreen::addButton(const string& ID, vec2 position, vec2 size
 	_buttons.push_back(make_shared<EngineGuiButton>(_fe3d, "globalscreen", ID, position, size, color, hoverColor, textContent, textColor, textHoverColor));
 }
 
+void EngineGuiGlobalScreen::addButton(const string& ID, vec2 position, vec2 size, const string& textureName, vec3 hoverColor)
+{
+	_buttons.push_back(make_shared<EngineGuiButton>(_fe3d, "globalscreen", ID, position, size, textureName, hoverColor));
+}
+
 void EngineGuiGlobalScreen::addRectangle(const string& ID, vec2 position, vec2 size, vec3 color)
 {
 	_rectangles.push_back(make_shared<EngineGuiRectangle>(_fe3d, "globalscreen", ID, position, size, color));

@@ -11,7 +11,7 @@ public:
 
 	const vector<GuiEntity*> getEntities();
 
-	void addGuiEntity(const string & ID, const string & assetName, vec2 translation, float rotation, vec2 scaling, bool engine, bool centered);
+	void addGuiEntity(const string & ID, const string& texturePath, vec2 translation, float rotation, vec2 scaling, bool engine, bool centered);
 	void addGuiEntity(const string & ID, vec3 color, vec2 translation, float rotation, vec2 scaling, bool centered);
 	void update() override;
 };

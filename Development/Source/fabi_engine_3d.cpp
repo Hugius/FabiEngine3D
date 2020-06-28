@@ -1534,9 +1534,9 @@ void FabiEngine3D::guiEntity_showAll()
 	}
 }
 
-void FabiEngine3D::guiEntity_add(const string& ID, const string& assetName, vec2 translation, float rotation, vec2 scaling, bool centered, bool visible)
+void FabiEngine3D::guiEntity_add(const string& ID, const string& texturePath, vec2 translation, float rotation, vec2 scaling, bool centered, bool visible)
 {
-	_core->_guiEntityManager.addGuiEntity(ID, assetName, translation, rotation, scaling, false, centered);
+	_core->_guiEntityManager.addGuiEntity(ID, texturePath, translation, rotation, scaling, false, centered);
 	_core->_guiEntityManager.getEntity(ID)->setEnabled(visible);
 }
 
@@ -1561,9 +1561,9 @@ void FabiEngine3D::guiEntity_delete(const string& ID)
 	_core->_guiEntityManager.deleteEntity(ID, EntityType::GUI);
 }
 
-void FabiEngine3D::guiEntity_changeTexture(const string& ID, const string& assetName)
+void FabiEngine3D::guiEntity_changeTexture(const string& ID, const string& texturePath)
 {
-	_core->_guiEntityManager.getEntity(ID)->setDiffuseMap(_core->_texLoader.getTexture("User\\Assets\\Textures\\GuiMaps" + assetName, true, true));
+	_core->_guiEntityManager.getEntity(ID)->setDiffuseMap(_core->_texLoader.getTexture(texturePath, true, true));
 }
 
 bool FabiEngine3D::guiEntity_isExisting(const string& ID)

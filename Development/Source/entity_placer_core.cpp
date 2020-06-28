@@ -38,7 +38,16 @@ void EntityPlacer::initializeGUI()
 
 	// Right-viewport: mainWindow - entityProperties
 	_rightWindow->addScreen("entityProperties");
-	//_rightWindow->getScreen("entityProperties")->add
+	_rightWindow->getScreen("entityProperties")->addTextfield("transformation", vec2(0.0f, 0.85f), vec2(1.75f, 0.1f), "Transformation", vec3(1.0f));
+	_rightWindow->getScreen("entityProperties")->addButton("translation", vec2(0.0f, 0.7f), vec2(0.75f, 0.2f), "translation.png", vec3(0.0f));
+	_rightWindow->getScreen("entityProperties")->addButton("rotation", vec2(0.0f, 0.45f), vec2(0.75f, 0.2f), "rotation.png", vec3(0.0f));
+	_rightWindow->getScreen("entityProperties")->addButton("scaling", vec2(0.0f, 0.2f), vec2(0.75f, 0.2f), "scaling.png", vec3(0.0f));
+	_rightWindow->getScreen("entityProperties")->addTextfield("x", vec2(0.0f, -0.15f), vec2(0.25f, 0.1f), "X", vec3(1.0f));
+	_rightWindow->getScreen("entityProperties")->addTextfield("y", vec2(0.0f, -0.4f), vec2(0.25f, 0.1f), "Y", vec3(1.0f));
+	_rightWindow->getScreen("entityProperties")->addTextfield("z", vec2(0.0f, -0.65f), vec2(0.25f, 0.1f), "Z", vec3(1.0f));
+	_rightWindow->getScreen("entityProperties")->addWriteField("x", vec2(0.0f, -0.25f), vec2(1.5f, 0.1f), vec3(0.25f), vec3(0.75f), vec3(1.0f), vec3(0.0f), 0, 1, 1, 1);
+	_rightWindow->getScreen("entityProperties")->addWriteField("y", vec2(0.0f, -0.5f), vec2(1.5f, 0.1f), vec3(0.25f), vec3(0.75f), vec3(1.0f), vec3(0.0f), 0, 1, 1, 1);
+	_rightWindow->getScreen("entityProperties")->addWriteField("z", vec2(0.0f, -0.75f), vec2(1.5f, 0.1f), vec3(0.25f), vec3(0.75f), vec3(1.0f), vec3(0.0f), 0, 1, 1, 1);
 }
 
 void EntityPlacer::load()

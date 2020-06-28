@@ -137,6 +137,12 @@ void EngineGuiScreen::addButton(const string& ID, vec2 position, vec2 size, vec3
 	_buttons.push_back(make_shared<EngineGuiButton>(_fe3d, _parentID + "_" + _ID, ID, vec2(dimensions.x, dimensions.y), vec2(dimensions.z, dimensions.w), color, hoverColor, textContent, textColor, textHoverColor));
 }
 
+void EngineGuiScreen::addButton(const string& ID, vec2 position, vec2 size, const string& textureName, vec3 hoverColor)
+{
+	auto dimensions = _convertDimensions(position, size);
+	_buttons.push_back(make_shared<EngineGuiButton>(_fe3d, _parentID + "_" + _ID, ID, vec2(dimensions.x, dimensions.y), vec2(dimensions.z, dimensions.w), textureName, hoverColor));
+}
+
 void EngineGuiScreen::addRectangle(const string& ID, vec2 position, vec2 size, vec3 color)
 {
 	auto dimensions = _convertDimensions(position, size);

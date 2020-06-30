@@ -26,10 +26,12 @@ public:
 	void unload();
 	void update();
 	void setCurrentProjectName(string projectName);
+	void loadWorld();
 
 	bool isLoaded();
 
 private:
+	void _placeModel(string modelID, string modelName, vec3 position, vec3 rotation, vec3 size);
 	void _updateManagementScreen();
 	void _updateModelScreen();
 	void _updateBillboardScreen();

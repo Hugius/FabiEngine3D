@@ -1,6 +1,7 @@
 #include "entity_placer.hpp"
 
 #include <fstream>
+#include <sstream>
 
 EntityPlacer::EntityPlacer(FabiEngine3D& fe3d, shared_ptr<EngineGuiManager> gui, ModelEditor& modelEditor, WorldEditor& worldEditor) :
 	_fe3d(fe3d),
@@ -131,7 +132,79 @@ void EntityPlacer::load()
 	_gui->getGlobalScreen()->addTextfield("selectedModelName", vec2(0.0f, 0.85f), vec2(0.5f, 0.1f), "", vec3(1.0f));
 
 	// Other
+	loadWorld();
 	_isLoaded = true;
+}
+
+void EntityPlacer::loadWorld()
+{
+	// Error checking
+	if (_currentProjectName == "")
+	{
+		_fe3d.logger_throwError("Tried to load as empty project!");
+	}
+
+	string modelsPath = _fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\world.fe3d";
+
+	// Load models file
+	if (_fe3d.misc_isFileExisting(modelsPath)) // Check if models file exists
+	{
+		std::ifstream file(modelsPath);
+		string line;
+
+		// Read model data
+		while (std::getline(file, line))
+		{
+			// Placeholder variables
+			string entityType;
+
+			// For item extraction
+			std::istringstream iss(line);
+
+			// Extract type from file
+			iss >> entityType;
+
+			// Load entity according to type
+			if (entityType == "MODEL")
+			{
+				string modelID;
+				vec3 position, rotation, size;
+
+				// Load model data
+				iss >> modelID >> position.x >> position.y >> position.z >> rotation.x >> rotation.y >> rotation.z >> size.x >> size.y >> size.z;
+
+				// Extract the model name from the model ID
+				string modelName = "";
+				for (auto& name : _modelEditor.getModelNames())
+				{
+					if (modelID.substr(0, name.size() - 1) == name.substr(1, name.size()))
+					{
+						modelName = name;
+					}
+				}
+
+				// Add the model
+				_placeModel(modelID, modelName, position, rotation, size);
+
+				// Update the counter map
+				_counterMap[modelName]++;
+			}
+			else if (entityType == "BILLBOARD")
+			{
+
+			}
+			else if (entityType == "LIGHT")
+			{
+
+			}
+		}
+
+		// Close file
+		file.close();
+
+		// Logging
+		_fe3d.logger_throwInfo("Models from project \"" + _currentProjectName + "\" loaded!");
+	}
 }
 
 void EntityPlacer::save()
@@ -154,44 +227,14 @@ void EntityPlacer::save()
 			// Check if not preview model
 			if (entityID[0] != '@')
 			{
-				// Check if 3D entity exists
-				if (_fe3d.gameEntity_isExisting(entityID))
-				{
-					//auto objPath = _fe3d.gameEntity_getObjPath(modelName);
-					//auto diffuseMapPath = _fe3d.gameEntity_getDiffuseMapPath(modelName);
-					//diffuseMapPath = (diffuseMapPath == "") ? "-" : diffuseMapPath;
-					//auto lightMapPath = _fe3d.gameEntity_getLightMapPath(modelName);
-					//lightMapPath = (lightMapPath == "") ? "-" : lightMapPath;
-					//auto reflectionMapPath = _fe3d.gameEntity_getReflectionMapPath(modelName);
-					//reflectionMapPath = (reflectionMapPath == "") ? "-" : reflectionMapPath;
-					//auto modelSizeX = std::to_string(_fe3d.gameEntity_getSize(modelName).x);
-					//auto modelSizeY = std::to_string(_fe3d.gameEntity_getSize(modelName).y);
-					//auto modelSizeZ = std::to_string(_fe3d.gameEntity_getSize(modelName).z);
-					//auto faceCulled = std::to_string(_fe3d.gameEntity_isFaceCulled(modelName));
-					//auto shadowed = std::to_string(_fe3d.gameEntity_isShadowed(modelName));
-					//auto transparent = std::to_string(_fe3d.gameEntity_isTransparent(modelName));
-					//auto specular = std::to_string(_fe3d.gameEntity_isSpecularLighted(modelName));
-					//auto specularStrength = std::to_string(_fe3d.gameEntity_getSpecularStrength(modelName));
-					//auto colorR = std::to_string(_fe3d.gameEntity_getColor(modelName).x);
-					//auto colorG = std::to_string(_fe3d.gameEntity_getColor(modelName).y);
-					//auto colorB = std::to_string(_fe3d.gameEntity_getColor(modelName).z);
-					//auto uvRepeat = std::to_string(_fe3d.gameEntity_getUvRepeat(modelName));
-					//auto boxSizeX = std::to_string(_fe3d.aabbEntity_getSize(modelName).x);
-					//auto boxSizeY = std::to_string(_fe3d.aabbEntity_getSize(modelName).y);
-					//auto boxSizeZ = std::to_string(_fe3d.aabbEntity_getSize(modelName).z);
+				// Transformation data
+				vec3 pos = _fe3d.gameEntity_getPosition(entityID);
+				vec3 rot = _fe3d.gameEntity_getRotation(entityID);
+				vec3 size = _fe3d.gameEntity_getSize(entityID);
 
-					//// 1 model -> 1 line in file
-					//file << modelName << " " <<
-					//	objPath << " " << diffuseMapPath << " " << lightMapPath << " " << reflectionMapPath << " " <<
-					//	modelSizeX << " " << modelSizeY << " " << modelSizeZ << " " <<
-					//	faceCulled << " " << shadowed << " " << transparent << " " << specular << " " << specularStrength << " " <<
-					//	colorR << " " << colorG << " " << colorB << " " << uvRepeat << " " <<
-					//	boxSizeX << " " << boxSizeY << " " << boxSizeZ << "\n";
-				}
-				else
-				{
-					//file << modelName << " - - - - 0.0 0.0 0.0 0 0 0 0 0.0 0.0 0.0 0.0 0 0.0 0.0 0.0\n";
-				}
+				// 1 model -> 1 line in file
+				file << "MODEL " << entityID << " " << pos.x << " " << pos.y << " " << pos.z << " " << 
+					rot.x << " " << rot.y << " " << rot.z << " " << size.x << " " << size.y << " " << size.z << "\n";
 			}
 		}
 
@@ -199,7 +242,7 @@ void EntityPlacer::save()
 		file.close();
 
 		// Logging
-		_fe3d.logger_throwInfo("Model editor data from project \"" + _currentProjectName + "\" saved!");
+		_fe3d.logger_throwInfo("Entity placer data from project \"" + _currentProjectName + "\" saved!");
 	}
 }
 
@@ -258,4 +301,40 @@ void EntityPlacer::unload()
 	_leftWindow->getScreen("modelPlaceManagement")->getScrollingList("modelList")->deleteButtons();
 	_fe3d.collision_disableFrameRendering();
 	_isLoaded = false;
+}
+
+void EntityPlacer::_placeModel(string modelID, string modelName, vec3 position, vec3 rotation, vec3 size)
+{
+	// Add game entity
+	_fe3d.gameEntity_add(modelID, _fe3d.gameEntity_getObjPath(modelName), position, rotation, size);
+
+	// Model properties
+	_fe3d.gameEntity_setFaceCulled(modelID, _fe3d.gameEntity_isFaceCulled(modelName));
+	_fe3d.gameEntity_setShadowed(modelID, _fe3d.gameEntity_isShadowed(modelName));
+	_fe3d.gameEntity_setTransparent(modelID, _fe3d.gameEntity_isTransparent(modelName));
+	_fe3d.gameEntity_setSpecularLighted(modelID, _fe3d.gameEntity_isSpecularLighted(modelName));
+	_fe3d.gameEntity_setLightness(modelID, _fe3d.gameEntity_getLightness(modelName));
+	_fe3d.gameEntity_setUvRepeat(modelID, _fe3d.gameEntity_getUvRepeat(modelName));
+	_fe3d.gameEntity_setColor(modelID, _fe3d.gameEntity_getColor(modelName));
+	_fe3d.aabbEntity_bindToGameEntity(modelID, _fe3d.aabbEntity_getSize(modelName), true);
+
+	// Diffuse map
+	if (_fe3d.gameEntity_getDiffuseMapPath(modelName) != "")
+	{
+		_fe3d.gameEntity_setDiffuseMap(modelID, _fe3d.gameEntity_getDiffuseMapPath(modelName));
+	}
+
+	// Light map
+	if (_fe3d.gameEntity_getLightMapPath(modelName) != "")
+	{
+		_fe3d.gameEntity_setLightMap(modelID, _fe3d.gameEntity_getLightMapPath(modelName));
+		_fe3d.gameEntity_setLightmapped(modelID, true);
+	}
+
+	// Reflection map
+	if (_fe3d.gameEntity_getReflectionMapPath(modelName) != "")
+	{
+		_fe3d.gameEntity_setReflectionMap(modelID, _fe3d.gameEntity_getReflectionMapPath(modelName));
+		_fe3d.gameEntity_setSkyReflective(modelID, true);
+	}
 }

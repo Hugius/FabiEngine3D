@@ -87,9 +87,15 @@ void EntityPlacer::_updateModelEditing()
 					lightnessMultiplier *= -1;
 				}
 
-				// Change lightness
+				// Update selected model lightness
 				float speed = (_blinkingSpeed * static_cast<float>(lightnessMultiplier));
 				_fe3d.gameEntity_setLightness(selectedModelID, _fe3d.gameEntity_getLightness(selectedModelID) + speed);
+
+				// Update active model lightness
+				if (activeModelID != "")
+				{
+					_fe3d.gameEntity_setLightness(activeModelID, _fe3d.gameEntity_getLightness(activeModelID) + speed);
+				}
 			}
 
 			// Update options screen

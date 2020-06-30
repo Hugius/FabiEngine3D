@@ -42,13 +42,13 @@ void WaterEntityRenderer::render(const WaterEntity * entity)
 		{
 			// Shader uniforms
 			_shader.uploadUniform("u_ripplePos", entity->getRipplePos());
-			_shader.uploadUniform("u_timeX", entity->getTimeX());
-			_shader.uploadUniform("u_timeZ", entity->getTimeZ());
+			//_shader.uploadUniform("u_timeX", entity->getTimeX());
+			//_shader.uploadUniform("u_timeZ", entity->getTimeZ());
 			_shader.uploadUniform("u_customHeightOffset", entity->getSurfaceHeight());
 			_shader.uploadUniform("u_uvRepeat", entity->getUvRepeat());
 			_shader.uploadUniform("u_shininess", entity->getShininess());
 			_shader.uploadUniform("u_transparency", entity->getTransparency());
-			_shader.uploadUniform("u_waving", entity->isWaving());
+			//_shader.uploadUniform("u_waving", entity->isWaving());
 			_shader.uploadUniform("u_isRippling", entity->isRippling());
 			_shader.uploadUniform("u_isSpecular", entity->isSpecular());
 			_shader.uploadUniform("u_isReflective", entity->isReflective());

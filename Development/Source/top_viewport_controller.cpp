@@ -255,6 +255,7 @@ void TopViewportController::_saveCurrentProject()
 	_modelEditor.save();
 	_worldEditor.save();
 	_billboardEditor.save();
+	_entityPlacer.save();
 
 	// Logging
 	_fe3d.logger_throwInfo("Project \"" + _currentProjectName + "\" saved!");

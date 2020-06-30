@@ -75,14 +75,15 @@ void ModelEditor::_updateCreationScreen()
 			// Create new model
 			if (_gui->getGlobalScreen()->checkValueForm("newModelName", newModelName))
 			{
-				// Add model
-				_addModel("@" + newModelName, "", "", "", "", vec3(0.0f), 0, 1, 0, 0, 1.0f, vec3(1.0f), 1.0f, vec3(2.5f));
-
-				// Go to editor screen
-				_currentModelName = "@" + newModelName;
-				_modelCreationEnabled = false;
-				_modelEditingEnabled = true;
-				_gui->getViewport("left")->getWindow("main")->setActiveScreen("modelEditingMain");
+				// Add model and check if not already existing
+				if (_addModel("@" + newModelName, "", "", "", "", vec3(0.0f), 0, 1, 0, 0, 1.0f, vec3(1.0f), 1.0f, vec3(2.5f)))
+				{
+					// Go to editor screen
+					_currentModelName = "@" + newModelName;
+					_modelCreationEnabled = false;
+					_modelEditingEnabled = true;
+					_gui->getViewport("left")->getWindow("main")->setActiveScreen("modelEditingMain");
+				}
 			}
 		}
 	}

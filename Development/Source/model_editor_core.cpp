@@ -196,7 +196,7 @@ void ModelEditor::save()
 			}
 			else
 			{
-				file << modelName << "- - - - 0.0 0.0 0.0 0 0 0 0 0.0 0.0 0.0 0.0 0 0.0 0.0 0.0\n";
+				file << modelName << " - - - - 0.0 0.0 0.0 0 0 0 0 0.0 0.0 0.0 0.0 0 0.0 0.0 0.0\n";
 			}
 		}
 
@@ -260,7 +260,7 @@ void ModelEditor::unload()
 	_lastCursorPos = vec2(0.0f);
 }
 
-void ModelEditor::_addModel(string modelName, string objName, string diffuseMapName, string lightMapName, string reflectionMapName, vec3 size,
+bool ModelEditor::_addModel(string modelName, string objName, string diffuseMapName, string lightMapName, string reflectionMapName, vec3 size,
 	bool faceCulled, bool shadowed, bool transparent, bool specular, float specularStrength, vec3 color, float uvRepeat, vec3 aabbSize)
 {
 	// If model name not existing yet
@@ -307,9 +307,13 @@ void ModelEditor::_addModel(string modelName, string objName, string diffuseMapN
 			_fe3d.gameEntity_setColor(modelName, color);
 			_fe3d.gameEntity_setUvRepeat(modelName, uvRepeat);
 		}
+
+		return true;
 	}
 	else
 	{
-		_fe3d.logger_throwWarning("Modelname \"" + modelName + "\" is already in use!");
+		_fe3d.logger_throwWarning("Modelname \"" + modelName.substr(1, modelName.size()) + "\" is already in use!");
+
+		return false;
 	}
 }

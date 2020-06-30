@@ -8,6 +8,7 @@ void EntityPlacer::_updateModelEditing()
 
 	if (_isLoaded)
 	{
+		// User must not be in placement mode
 		if (_currentModelName == "")
 		{
 			// Check if user selected model
@@ -15,15 +16,16 @@ void EntityPlacer::_updateModelEditing()
 			{
 				if (_fe3d.collision_checkCursorInEntity(entityID))
 				{
-					// Select model if none active yet
-					if (activeModelID == "")
-					{
-						selectedModelID = entityID;
+					selectedModelID = entityID;
 
-						// Check if user clicked model
-						if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
+					// Check if user clicked model
+					if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT) && !_fe3d.input_getMouseDown(Input::MOUSE_BUTTON_RIGHT))
+					{
+						// Check if same model is clicked again
+						if (selectedModelID != activeModelID)
 						{
 							activeModelID = selectedModelID;
+							_transformation = Transformation::TRANSLATION;
 
 							// Activate properties screen
 							_rightWindow->setActiveScreen("entityProperties");
@@ -57,7 +59,8 @@ void EntityPlacer::_updateModelEditing()
 			// Check if user made the active model inactive
 			if (selectedModelID == "" && _fe3d.misc_isMouseInsideViewport() && !_gui->getGlobalScreen()->isFocused())
 			{
-				if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT)) // LMB pressed
+				// LMB pressed
+				if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT) && !_fe3d.input_getMouseDown(Input::MOUSE_BUTTON_RIGHT))
 				{
 					activeModelID = "";
 				}
@@ -92,18 +95,12 @@ void EntityPlacer::_updateModelEditing()
 			// Update options screen
 			if (activeModelID != "")
 			{
-				// GUI management
+				// GUI management (pressed)
 				if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
 				{
 					if (_rightWindow->getScreen("entityProperties")->getButton("translation")->isHovered()) // Translation button
 					{
 						_transformation = Transformation::TRANSLATION;
-
-						// Filling writefields
-						vec3 position = _fe3d.gameEntity_getPosition(activeModelID);
-						_rightWindow->getScreen("entityProperties")->getWriteField("x")->setTextContent(std::to_string(static_cast<int>(position.x)));
-						_rightWindow->getScreen("entityProperties")->getWriteField("y")->setTextContent(std::to_string(static_cast<int>(position.y)));
-						_rightWindow->getScreen("entityProperties")->getWriteField("z")->setTextContent(std::to_string(static_cast<int>(position.z)));
 
 						// Update buttons hoverability
 						_rightWindow->getScreen("entityProperties")->getButton("translation")->setHoverable(false);
@@ -114,12 +111,6 @@ void EntityPlacer::_updateModelEditing()
 					{
 						_transformation = Transformation::ROTATION;
 
-						// Filling writefields
-						vec3 rotation = _fe3d.gameEntity_getRotation(activeModelID);
-						_rightWindow->getScreen("entityProperties")->getWriteField("x")->setTextContent(std::to_string(static_cast<int>(rotation.x)));
-						_rightWindow->getScreen("entityProperties")->getWriteField("y")->setTextContent(std::to_string(static_cast<int>(rotation.y)));
-						_rightWindow->getScreen("entityProperties")->getWriteField("z")->setTextContent(std::to_string(static_cast<int>(rotation.z)));
-
 						// Update buttons hoverability
 						_rightWindow->getScreen("entityProperties")->getButton("translation")->setHoverable(true);
 						_rightWindow->getScreen("entityProperties")->getButton("rotation")->setHoverable(false);
@@ -129,12 +120,6 @@ void EntityPlacer::_updateModelEditing()
 					{
 						_transformation = Transformation::SCALING;
 
-						// Filling writefields
-						vec3 size = _fe3d.gameEntity_getSize(activeModelID);
-						_rightWindow->getScreen("entityProperties")->getWriteField("x")->setTextContent(std::to_string(static_cast<int>(size.x * 10.0f)));
-						_rightWindow->getScreen("entityProperties")->getWriteField("y")->setTextContent(std::to_string(static_cast<int>(size.y * 10.0f)));
-						_rightWindow->getScreen("entityProperties")->getWriteField("z")->setTextContent(std::to_string(static_cast<int>(size.z * 10.0f)));
-
 						// Update buttons hoverability
 						_rightWindow->getScreen("entityProperties")->getButton("translation")->setHoverable(true);
 						_rightWindow->getScreen("entityProperties")->getButton("rotation")->setHoverable(true);
@@ -143,21 +128,54 @@ void EntityPlacer::_updateModelEditing()
 				}
 
 				// Current model position / rotation / size
+				vec3 oldValue;
 				vec3 newValue;
 				if (_transformation == Transformation::TRANSLATION)
 				{
-					newValue = _fe3d.gameEntity_getPosition(activeModelID);
+					oldValue = _fe3d.gameEntity_getPosition(activeModelID);
+					newValue = oldValue;
 				}
 				else if (_transformation == Transformation::ROTATION)
 				{
-					newValue = _fe3d.gameEntity_getRotation(activeModelID);
+					oldValue = _fe3d.gameEntity_getRotation(activeModelID);
+					newValue = oldValue;
 				}
 				else if (_transformation == Transformation::SCALING)
 				{
-					newValue = _fe3d.gameEntity_getSize(activeModelID);
+					oldValue = _fe3d.gameEntity_getSize(activeModelID);
+					newValue = oldValue;
 				}
 
-				// X
+				// GUI management (held down)
+				if (_fe3d.input_getMouseDown(Input::MOUSE_BUTTON_LEFT))
+				{
+					if (_rightWindow->getScreen("entityProperties")->getButton("xPlus")->isHovered()) // Increasing X
+					{
+						newValue += vec3(_transformationSpeed, 0.0f, 0.0f);
+					}
+					else if (_rightWindow->getScreen("entityProperties")->getButton("xMinus")->isHovered()) // Decreasing X
+					{
+						newValue -= vec3(_transformationSpeed, 0.0f, 0.0f);
+					}
+					else if (_rightWindow->getScreen("entityProperties")->getButton("yPlus")->isHovered()) // Increasing Y
+					{
+						newValue += vec3(0.0f, _transformationSpeed, 0.0f);
+					}
+					else if (_rightWindow->getScreen("entityProperties")->getButton("yMinus")->isHovered()) // Decreasing Y
+					{
+						newValue -= vec3(0.0f, _transformationSpeed, 0.0f);
+					}
+					else if (_rightWindow->getScreen("entityProperties")->getButton("zPlus")->isHovered()) // Increasing Z
+					{
+						newValue += vec3(0.0f, 0.0f, _transformationSpeed);
+					}
+					else if (_rightWindow->getScreen("entityProperties")->getButton("zMinus")->isHovered()) // Decreasing Z
+					{
+						newValue -= vec3(0.0f, 0.0f, _transformationSpeed);
+					}
+				}
+
+				// Setting X
 				if (_rightWindow->getScreen("entityProperties")->getWriteField("x")->confirmedInput())
 				{
 					if (_rightWindow->getScreen("entityProperties")->getWriteField("x")->getTextContent() != "")
@@ -167,7 +185,7 @@ void EntityPlacer::_updateModelEditing()
 					}
 				}
 
-				// Y
+				// Setting Y
 				if (_rightWindow->getScreen("entityProperties")->getWriteField("y")->confirmedInput())
 				{
 					if (_rightWindow->getScreen("entityProperties")->getWriteField("y")->getTextContent() != "")
@@ -177,7 +195,7 @@ void EntityPlacer::_updateModelEditing()
 					}
 				}
 
-				// Z
+				// Setting Z
 				if (_rightWindow->getScreen("entityProperties")->getWriteField("z")->confirmedInput())
 				{
 					if (_rightWindow->getScreen("entityProperties")->getWriteField("z")->getTextContent() != "")
@@ -199,6 +217,37 @@ void EntityPlacer::_updateModelEditing()
 				else if (_transformation == Transformation::SCALING)
 				{
 					_fe3d.gameEntity_setSize(activeModelID, newValue);
+					float changeX = newValue.x / oldValue.x;
+					float changeY = newValue.y / oldValue.y; 
+					float changeZ = newValue.z / oldValue.z;
+					_fe3d.aabbEntity_setSize(activeModelID, _fe3d.aabbEntity_getSize(activeModelID) * vec3(changeX, changeY, changeZ));
+				}
+
+				// Filling writefields - position
+				if (_transformation == Transformation::TRANSLATION)
+				{
+					vec3 position = _fe3d.gameEntity_getPosition(activeModelID);
+					_rightWindow->getScreen("entityProperties")->getWriteField("x")->setTextContent(std::to_string(static_cast<int>(position.x)));
+					_rightWindow->getScreen("entityProperties")->getWriteField("y")->setTextContent(std::to_string(static_cast<int>(position.y)));
+					_rightWindow->getScreen("entityProperties")->getWriteField("z")->setTextContent(std::to_string(static_cast<int>(position.z)));
+				}
+
+				// Filling writefields - rotation
+				if (_transformation == Transformation::ROTATION)
+				{
+					vec3 rotation = _fe3d.gameEntity_getRotation(activeModelID);
+					_rightWindow->getScreen("entityProperties")->getWriteField("x")->setTextContent(std::to_string(static_cast<int>(rotation.x)));
+					_rightWindow->getScreen("entityProperties")->getWriteField("y")->setTextContent(std::to_string(static_cast<int>(rotation.y)));
+					_rightWindow->getScreen("entityProperties")->getWriteField("z")->setTextContent(std::to_string(static_cast<int>(rotation.z)));
+				}
+
+				// Filling writefields - scaling
+				if (_transformation == Transformation::SCALING)
+				{
+					vec3 size = _fe3d.gameEntity_getSize(activeModelID);
+					_rightWindow->getScreen("entityProperties")->getWriteField("x")->setTextContent(std::to_string(static_cast<int>(size.x * 10.0f)));
+					_rightWindow->getScreen("entityProperties")->getWriteField("y")->setTextContent(std::to_string(static_cast<int>(size.y * 10.0f)));
+					_rightWindow->getScreen("entityProperties")->getWriteField("z")->setTextContent(std::to_string(static_cast<int>(size.z * 10.0f)));
 				}
 			}
 			else

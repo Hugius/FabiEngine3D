@@ -4,24 +4,33 @@ void EntityPlacer::_updateModelPlacing()
 {
 	if (_isLoaded)
 	{
-		// Update model placing
+		// Only if user is in placement mode
 		if (_currentModelName != "")
 		{
+			// Check if mouse behavior isn't being invalid
 			if (_fe3d.misc_isMouseInsideViewport() && !_fe3d.input_getMouseDown(Input::MOUSE_BUTTON_RIGHT) && !_gui->getGlobalScreen()->isFocused())
 			{
-				// Show preview model
-				_fe3d.gameEntity_show(_currentModelName);
+				// Default placement position
+				vec3 newPosition = vec3(0.0f);
 
-				// Update preview model position
-				_fe3d.gameEntity_setPosition(_currentModelName, _fe3d.terrainEntity_getMousePoint());
+				// Check if a terrain is loaded
+				if(_fe3d.terrainEntity_getSelectedID() != "")
+				{
+					// Show preview model
+					_fe3d.gameEntity_show(_currentModelName);
+
+					// Update preview model position
+					newPosition = _fe3d.terrainEntity_getMousePoint();
+					_fe3d.gameEntity_setPosition(_currentModelName, newPosition);
+				}
 
 				// Placing model
-				if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
+				if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT) || _fe3d.terrainEntity_getSelectedID() == "")
 				{
 					// Create new ID: (no @) + modelName + count
 					string newID = _currentModelName.substr(1, _currentModelName.size()) + std::to_string(_counterMap[_currentModelName]);
 					_fe3d.gameEntity_add(newID, _fe3d.gameEntity_getObjPath(_currentModelName),
-						_fe3d.terrainEntity_getMousePoint(), vec3(0.0f), _fe3d.gameEntity_getSize(_currentModelName));
+						newPosition, vec3(0.0f), _fe3d.gameEntity_getSize(_currentModelName));
 
 					// Model properties
 					_fe3d.gameEntity_setFaceCulled(newID, _fe3d.gameEntity_isFaceCulled(_currentModelName));
@@ -55,6 +64,12 @@ void EntityPlacer::_updateModelPlacing()
 
 					// Increase 
 					_counterMap[_currentModelName]++;
+
+					// Disable placement mode
+					if (_fe3d.terrainEntity_getSelectedID() == "")
+					{
+						_currentModelName = "";
+					}
 				}
 				else if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_MIDDLE)) // Cancelling model placement
 				{

@@ -62,4 +62,5 @@ private:
 
 	float _cameraMovementSpeed = 25.0f;
 	const float _blinkingSpeed = 0.025f;
+	const float _transformationSpeed = 0.05f;
 };

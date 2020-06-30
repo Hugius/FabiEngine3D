@@ -74,23 +74,29 @@ void EntityPlacer::_updateModelScreen()
 		// GUI management
 		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
 		{
+			// Loop over every created model
 			for (auto& modelName : _modelEditor.getModelNames())
 			{
-				if (screen->getScrollingList("modelList")->getButton(modelName)->isHovered())
+				// Check if model has a game entity
+				if (_fe3d.gameEntity_isExisting(modelName))
 				{
-					// Hide old preview model
-					if (_currentModelName != "")
+					// Check if button is hovered
+					if (screen->getScrollingList("modelList")->getButton(modelName)->isHovered())
 					{
-						_fe3d.gameEntity_hide(_currentModelName);
-					}
+						// Hide old preview model
+						if (_currentModelName != "")
+						{
+							_fe3d.gameEntity_hide(_currentModelName);
+						}
 
-					// Set new preview model
-					_currentModelName = modelName;
-					_fe3d.gameEntity_show(_currentModelName);
-					string textEntityID = _gui->getGlobalScreen()->getTextfield("selectedModelName")->getEntityID();
-					_fe3d.textEntity_show(textEntityID);
-					_fe3d.textEntity_setTextContent(textEntityID, "Model: " + _currentModelName.substr(1, _currentModelName.size()), 0.025f);
-					break;
+						// Set new preview model
+						_currentModelName = modelName;
+						_fe3d.gameEntity_show(_currentModelName);
+						string textEntityID = _gui->getGlobalScreen()->getTextfield("selectedModelName")->getEntityID();
+						_fe3d.textEntity_show(textEntityID);
+						_fe3d.textEntity_setTextContent(textEntityID, "Model: " + _currentModelName.substr(1, _currentModelName.size()), 0.025f);
+						break;
+					}
 				}
 			}
 

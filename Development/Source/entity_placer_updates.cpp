@@ -136,8 +136,19 @@ void EntityPlacer::_updateLightScreen()
 		// GUI management
 		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
 		{
-			// Back button
-			if (screen->getButton("back")->isHovered())
+			if (screen->getButton("ambient")->isHovered())
+			{
+				
+			}
+			else if (screen->getButton("directional")->isHovered())
+			{
+				
+			}
+			else if (screen->getButton("point")->isHovered())
+			{
+				
+			}
+			else if (screen->getButton("back")->isHovered()) // Back button
 			{
 				_leftWindow->setActiveScreen("placeManagement");
 			}

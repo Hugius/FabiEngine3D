@@ -29,9 +29,11 @@ void WorldEditor::_updateSkyMenu()
 			_fe3d.waterEntity_hide("@water");
 		}
 
-		// Update sky management if possible
+		// Update sky functionality
 		_updateSkyManagement();
 		_updateSkyCamera();
+		_updateSkyMesh();
+		_updateSkyOptions();
 
 		// Update buttons hoverability
 		screen->getButton("create")->setHoverable(!_fe3d.skyEntity_isExisting("@sky"));
@@ -83,10 +85,6 @@ void WorldEditor::_updateSkyManagement()
 
 		// Options screen hoverability
 		screen->getButton("options")->setHoverable(_fe3d.skyEntity_isExisting("@sky"));
-
-		// Update sub-menus
-		_updateSkyMesh();
-		_updateSkyOptions();
 
 		// Dynamic updates
 		if (_fe3d.skyEntity_isExisting("@sky"))

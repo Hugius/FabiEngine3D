@@ -2,7 +2,8 @@
 
 void EntityPlacer::_updateModelEditing()
 {
-	static int lightnessMultiplier = 1;
+	static int selectedLightnessMultiplier = 1;
+	static int activeLightnessMultiplier = 1;
 	static string activeModelID = "";
 	string selectedModelID = "";
 
@@ -28,10 +29,10 @@ void EntityPlacer::_updateModelEditing()
 							_transformation = Transformation::TRANSLATION;
 
 							// Activate properties screen
-							_rightWindow->setActiveScreen("entityProperties");
-							_rightWindow->getScreen("entityProperties")->getButton("translation")->setHoverable(false);
-							_rightWindow->getScreen("entityProperties")->getButton("rotation")->setHoverable(true);
-							_rightWindow->getScreen("entityProperties")->getButton("scaling")->setHoverable(true);
+							_rightWindow->setActiveScreen("modelProperties");
+							_rightWindow->getScreen("modelProperties")->getButton("translation")->setHoverable(false);
+							_rightWindow->getScreen("modelProperties")->getButton("rotation")->setHoverable(true);
+							_rightWindow->getScreen("modelProperties")->getButton("scaling")->setHoverable(true);
 
 							// Update selected model text
 							string textEntityID = _gui->getGlobalScreen()->getTextfield("selectedModelName")->getEntityID();
@@ -40,9 +41,9 @@ void EntityPlacer::_updateModelEditing()
 
 							// Filling writefields
 							vec3 position = _fe3d.gameEntity_getPosition(activeModelID);
-							_rightWindow->getScreen("entityProperties")->getWriteField("x")->setTextContent(std::to_string(static_cast<int>(position.x)));
-							_rightWindow->getScreen("entityProperties")->getWriteField("y")->setTextContent(std::to_string(static_cast<int>(position.y)));
-							_rightWindow->getScreen("entityProperties")->getWriteField("z")->setTextContent(std::to_string(static_cast<int>(position.z)));
+							_rightWindow->getScreen("modelProperties")->getWriteField("x")->setTextContent(std::to_string(static_cast<int>(position.x)));
+							_rightWindow->getScreen("modelProperties")->getWriteField("y")->setTextContent(std::to_string(static_cast<int>(position.y)));
+							_rightWindow->getScreen("modelProperties")->getWriteField("z")->setTextContent(std::to_string(static_cast<int>(position.z)));
 						}
 					}
 				}
@@ -66,36 +67,44 @@ void EntityPlacer::_updateModelEditing()
 				}
 			}
 
-			// Always set active model as selected
-			if(activeModelID != "" && selectedModelID == "")
-			{
-				selectedModelID = activeModelID;
-			}
-
 			// Resetting lightness direciton if nothing selected
 			if (selectedModelID == "")
 			{
-				lightnessMultiplier = 1;
+				selectedLightnessMultiplier = 1;
 			}
 
-			// Update lightness direction
+			// Resetting lightness direciton if nothing active
+			if (activeModelID == "")
+			{
+				activeLightnessMultiplier = 1;
+			}
+
+			// Update selected model lightness
 			if (selectedModelID != "")
 			{
 				// Check if lightness reached bounds
 				if (_fe3d.gameEntity_getLightness(selectedModelID) >= 1.0f || _fe3d.gameEntity_getLightness(selectedModelID) <= 0.0f)
 				{
-					lightnessMultiplier *= -1;
+					selectedLightnessMultiplier *= -1;
 				}
-
-				// Update selected model lightness
-				float speed = (_blinkingSpeed * static_cast<float>(lightnessMultiplier));
+				
+				// Set lightness
+				float speed = (_blinkingSpeed * static_cast<float>(selectedLightnessMultiplier));
 				_fe3d.gameEntity_setLightness(selectedModelID, _fe3d.gameEntity_getLightness(selectedModelID) + speed);
+			}
 
-				// Update active model lightness
-				if (activeModelID != "")
+			// Update active model lightness
+			if (activeModelID != "")
+			{
+				// Check if lightness reached bounds
+				if (_fe3d.gameEntity_getLightness(activeModelID) >= 1.0f || _fe3d.gameEntity_getLightness(activeModelID) <= 0.0f)
 				{
-					_fe3d.gameEntity_setLightness(activeModelID, _fe3d.gameEntity_getLightness(activeModelID) + speed);
+					activeLightnessMultiplier *= -1;
 				}
+
+				// Set lightness
+				float speed = (_blinkingSpeed * static_cast<float>(activeLightnessMultiplier));
+				_fe3d.gameEntity_setLightness(activeModelID, _fe3d.gameEntity_getLightness(activeModelID) + speed);
 			}
 
 			// Update options screen
@@ -104,32 +113,32 @@ void EntityPlacer::_updateModelEditing()
 				// GUI management (pressed)
 				if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
 				{
-					if (_rightWindow->getScreen("entityProperties")->getButton("translation")->isHovered()) // Translation button
+					if (_rightWindow->getScreen("modelProperties")->getButton("translation")->isHovered()) // Translation button
 					{
 						_transformation = Transformation::TRANSLATION;
 
 						// Update buttons hoverability
-						_rightWindow->getScreen("entityProperties")->getButton("translation")->setHoverable(false);
-						_rightWindow->getScreen("entityProperties")->getButton("rotation")->setHoverable(true);
-						_rightWindow->getScreen("entityProperties")->getButton("scaling")->setHoverable(true);
+						_rightWindow->getScreen("modelProperties")->getButton("translation")->setHoverable(false);
+						_rightWindow->getScreen("modelProperties")->getButton("rotation")->setHoverable(true);
+						_rightWindow->getScreen("modelProperties")->getButton("scaling")->setHoverable(true);
 					}
-					else if (_rightWindow->getScreen("entityProperties")->getButton("rotation")->isHovered()) // Rotation button
+					else if (_rightWindow->getScreen("modelProperties")->getButton("rotation")->isHovered()) // Rotation button
 					{
 						_transformation = Transformation::ROTATION;
 
 						// Update buttons hoverability
-						_rightWindow->getScreen("entityProperties")->getButton("translation")->setHoverable(true);
-						_rightWindow->getScreen("entityProperties")->getButton("rotation")->setHoverable(false);
-						_rightWindow->getScreen("entityProperties")->getButton("scaling")->setHoverable(true);
+						_rightWindow->getScreen("modelProperties")->getButton("translation")->setHoverable(true);
+						_rightWindow->getScreen("modelProperties")->getButton("rotation")->setHoverable(false);
+						_rightWindow->getScreen("modelProperties")->getButton("scaling")->setHoverable(true);
 					}
-					else if (_rightWindow->getScreen("entityProperties")->getButton("scaling")->isHovered()) // Scaling button
+					else if (_rightWindow->getScreen("modelProperties")->getButton("scaling")->isHovered()) // Scaling button
 					{
 						_transformation = Transformation::SCALING;
 
 						// Update buttons hoverability
-						_rightWindow->getScreen("entityProperties")->getButton("translation")->setHoverable(true);
-						_rightWindow->getScreen("entityProperties")->getButton("rotation")->setHoverable(true);
-						_rightWindow->getScreen("entityProperties")->getButton("scaling")->setHoverable(false);
+						_rightWindow->getScreen("modelProperties")->getButton("translation")->setHoverable(true);
+						_rightWindow->getScreen("modelProperties")->getButton("rotation")->setHoverable(true);
+						_rightWindow->getScreen("modelProperties")->getButton("scaling")->setHoverable(false);
 					}
 				}
 
@@ -155,59 +164,59 @@ void EntityPlacer::_updateModelEditing()
 				// GUI management (held down)
 				if (_fe3d.input_getMouseDown(Input::MOUSE_BUTTON_LEFT))
 				{
-					if (_rightWindow->getScreen("entityProperties")->getButton("xPlus")->isHovered()) // Increasing X
+					if (_rightWindow->getScreen("modelProperties")->getButton("xPlus")->isHovered()) // Increasing X
 					{
 						newValue += vec3(_transformationSpeed, 0.0f, 0.0f);
 					}
-					else if (_rightWindow->getScreen("entityProperties")->getButton("xMinus")->isHovered()) // Decreasing X
+					else if (_rightWindow->getScreen("modelProperties")->getButton("xMinus")->isHovered()) // Decreasing X
 					{
 						newValue -= vec3(_transformationSpeed, 0.0f, 0.0f);
 					}
-					else if (_rightWindow->getScreen("entityProperties")->getButton("yPlus")->isHovered()) // Increasing Y
+					else if (_rightWindow->getScreen("modelProperties")->getButton("yPlus")->isHovered()) // Increasing Y
 					{
 						newValue += vec3(0.0f, _transformationSpeed, 0.0f);
 					}
-					else if (_rightWindow->getScreen("entityProperties")->getButton("yMinus")->isHovered()) // Decreasing Y
+					else if (_rightWindow->getScreen("modelProperties")->getButton("yMinus")->isHovered()) // Decreasing Y
 					{
 						newValue -= vec3(0.0f, _transformationSpeed, 0.0f);
 					}
-					else if (_rightWindow->getScreen("entityProperties")->getButton("zPlus")->isHovered()) // Increasing Z
+					else if (_rightWindow->getScreen("modelProperties")->getButton("zPlus")->isHovered()) // Increasing Z
 					{
 						newValue += vec3(0.0f, 0.0f, _transformationSpeed);
 					}
-					else if (_rightWindow->getScreen("entityProperties")->getButton("zMinus")->isHovered()) // Decreasing Z
+					else if (_rightWindow->getScreen("modelProperties")->getButton("zMinus")->isHovered()) // Decreasing Z
 					{
 						newValue -= vec3(0.0f, 0.0f, _transformationSpeed);
 					}
 				}
 
 				// Setting X
-				if (_rightWindow->getScreen("entityProperties")->getWriteField("x")->confirmedInput())
+				if (_rightWindow->getScreen("modelProperties")->getWriteField("x")->confirmedInput())
 				{
-					if (_rightWindow->getScreen("entityProperties")->getWriteField("x")->getTextContent() != "")
+					if (_rightWindow->getScreen("modelProperties")->getWriteField("x")->getTextContent() != "")
 					{
 						float divider = (_transformation == Transformation::SCALING) ? 10.0f : 1.0f;
-						newValue.x = float(stoi(_rightWindow->getScreen("entityProperties")->getWriteField("x")->getTextContent())) / divider;
+						newValue.x = float(stoi(_rightWindow->getScreen("modelProperties")->getWriteField("x")->getTextContent())) / divider;
 					}
 				}
 
 				// Setting Y
-				if (_rightWindow->getScreen("entityProperties")->getWriteField("y")->confirmedInput())
+				if (_rightWindow->getScreen("modelProperties")->getWriteField("y")->confirmedInput())
 				{
-					if (_rightWindow->getScreen("entityProperties")->getWriteField("y")->getTextContent() != "")
+					if (_rightWindow->getScreen("modelProperties")->getWriteField("y")->getTextContent() != "")
 					{
 						float divider = (_transformation == Transformation::SCALING) ? 10.0f : 1.0f;
-						newValue.y = float(stoi(_rightWindow->getScreen("entityProperties")->getWriteField("y")->getTextContent())) / divider;
+						newValue.y = float(stoi(_rightWindow->getScreen("modelProperties")->getWriteField("y")->getTextContent())) / divider;
 					}
 				}
 
 				// Setting Z
-				if (_rightWindow->getScreen("entityProperties")->getWriteField("z")->confirmedInput())
+				if (_rightWindow->getScreen("modelProperties")->getWriteField("z")->confirmedInput())
 				{
-					if (_rightWindow->getScreen("entityProperties")->getWriteField("z")->getTextContent() != "")
+					if (_rightWindow->getScreen("modelProperties")->getWriteField("z")->getTextContent() != "")
 					{
 						float divider = (_transformation == Transformation::SCALING) ? 10.0f : 1.0f;
-						newValue.z = float(stoi(_rightWindow->getScreen("entityProperties")->getWriteField("z")->getTextContent())) / divider;
+						newValue.z = float(stoi(_rightWindow->getScreen("modelProperties")->getWriteField("z")->getTextContent())) / divider;
 					}
 				}
 
@@ -218,6 +227,9 @@ void EntityPlacer::_updateModelEditing()
 				}
 				else if (_transformation == Transformation::ROTATION)
 				{
+					newValue.x = std::fmodf(newValue.x, 360.0f);
+					newValue.y = std::fmodf(newValue.y, 360.0f);
+					newValue.z = std::fmodf(newValue.z, 360.0f);
 					_fe3d.gameEntity_setRotation(activeModelID, newValue);
 				}
 				else if (_transformation == Transformation::SCALING)
@@ -233,27 +245,27 @@ void EntityPlacer::_updateModelEditing()
 				if (_transformation == Transformation::TRANSLATION)
 				{
 					vec3 position = _fe3d.gameEntity_getPosition(activeModelID);
-					_rightWindow->getScreen("entityProperties")->getWriteField("x")->setTextContent(std::to_string(static_cast<int>(position.x)));
-					_rightWindow->getScreen("entityProperties")->getWriteField("y")->setTextContent(std::to_string(static_cast<int>(position.y)));
-					_rightWindow->getScreen("entityProperties")->getWriteField("z")->setTextContent(std::to_string(static_cast<int>(position.z)));
+					_rightWindow->getScreen("modelProperties")->getWriteField("x")->setTextContent(std::to_string(static_cast<int>(position.x)));
+					_rightWindow->getScreen("modelProperties")->getWriteField("y")->setTextContent(std::to_string(static_cast<int>(position.y)));
+					_rightWindow->getScreen("modelProperties")->getWriteField("z")->setTextContent(std::to_string(static_cast<int>(position.z)));
 				}
 
 				// Filling writefields - rotation
 				if (_transformation == Transformation::ROTATION)
 				{
 					vec3 rotation = _fe3d.gameEntity_getRotation(activeModelID);
-					_rightWindow->getScreen("entityProperties")->getWriteField("x")->setTextContent(std::to_string(static_cast<int>(rotation.x)));
-					_rightWindow->getScreen("entityProperties")->getWriteField("y")->setTextContent(std::to_string(static_cast<int>(rotation.y)));
-					_rightWindow->getScreen("entityProperties")->getWriteField("z")->setTextContent(std::to_string(static_cast<int>(rotation.z)));
+					_rightWindow->getScreen("modelProperties")->getWriteField("x")->setTextContent(std::to_string(static_cast<int>(rotation.x)));
+					_rightWindow->getScreen("modelProperties")->getWriteField("y")->setTextContent(std::to_string(static_cast<int>(rotation.y)));
+					_rightWindow->getScreen("modelProperties")->getWriteField("z")->setTextContent(std::to_string(static_cast<int>(rotation.z)));
 				}
 
 				// Filling writefields - scaling
 				if (_transformation == Transformation::SCALING)
 				{
 					vec3 size = _fe3d.gameEntity_getSize(activeModelID);
-					_rightWindow->getScreen("entityProperties")->getWriteField("x")->setTextContent(std::to_string(static_cast<int>(size.x * 10.0f)));
-					_rightWindow->getScreen("entityProperties")->getWriteField("y")->setTextContent(std::to_string(static_cast<int>(size.y * 10.0f)));
-					_rightWindow->getScreen("entityProperties")->getWriteField("z")->setTextContent(std::to_string(static_cast<int>(size.z * 10.0f)));
+					_rightWindow->getScreen("modelProperties")->getWriteField("x")->setTextContent(std::to_string(static_cast<int>(size.x * 10.0f)));
+					_rightWindow->getScreen("modelProperties")->getWriteField("y")->setTextContent(std::to_string(static_cast<int>(size.y * 10.0f)));
+					_rightWindow->getScreen("modelProperties")->getWriteField("z")->setTextContent(std::to_string(static_cast<int>(size.z * 10.0f)));
 				}
 			}
 			else
@@ -269,7 +281,7 @@ void EntityPlacer::_updateModelEditing()
 			{
 				_rightWindow->setActiveScreen("main");
 				_fe3d.gameEntity_setLightness(entityID, 1.0f);
-				lightnessMultiplier = 1;
+				selectedLightnessMultiplier = 1;
 				activeModelID = "";
 				selectedModelID = "";
 			}

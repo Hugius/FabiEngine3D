@@ -46,7 +46,7 @@ void EngineController::_initializeMiscellaneous()
 	skyEntity_select("@defaultSky");
 
 	// Default bloom effect for all scenes
-	gfx_enableBloom(1.0f, 0.0f, 10);
+	gfx_enableBloom(0.98f, 0.0f, 10);
 	gfx_setSkyBrightness(0.75f);
 
 	// Default camera

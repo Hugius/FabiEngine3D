@@ -92,4 +92,8 @@ void CoreEngine::_updateWindowFading()
 		_windowManager.setOpacity(opacity);
 		opacity += 0.01f;
 	}
+	else
+	{
+		_windowManager.setOpacity(1.0f);
+	}
 }

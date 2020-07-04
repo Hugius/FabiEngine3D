@@ -233,6 +233,7 @@ void TopViewportController::_updateProjectDeletion()
 
 			// Miscellaneous
 			_deletingProject = false;
+			_fe3d.misc_setWindowTitle("FabiEngine3D");
 			chosenButtonID = "";
 		}
 		else if (_gui->getGlobalScreen()->isAnswerFormCancelled("deleteProject"))

@@ -41,7 +41,6 @@ public:
 	void setBloomTreshold(float val);
 	void setCameraYaw(float val);
 	void setCameraPitch(float val);
-	void setSkyBrightness(float val);
 	void setNearZ(float val);
 	void setFarZ(float val);
 	void setDofMinDistance(float val);
@@ -104,7 +103,6 @@ public:
 	const float getBloomTreshold()         const;
 	const float getCameraYaw()             const;
 	const float getCameraPitch()           const;
-	const float getSkyBrightness()         const;
 	const float getNearZ()                 const;
 	const float getFarZ()                  const;
 	const float getDofMinDistance()        const;
@@ -168,7 +166,6 @@ private:
 	float _bloomTreshold               = 0.0f;
 	float _cameraYaw                   = 0.0f;
 	float _cameraPitch                 = 0.0f;
-	float _skyBrightness               = 0.0f;
 	float _nearZ                       = 0.0f;
 	float _farZ                        = 0.0f;
 	float _dofMinDistance              = 0.0f;

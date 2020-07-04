@@ -8,6 +8,11 @@ void WorldEditor::update()
 		{
 			auto screen = _window->getScreen("worldManagement");
 
+			// Set default camera view
+			_fe3d.camera_setPosition(vec3(0.0f));
+			_fe3d.camera_setYaw(0.0f);
+			_fe3d.camera_setPitch(0.0f);
+
 			// Select the default sky
 			_fe3d.skyEntity_select("@defaultSky");
 

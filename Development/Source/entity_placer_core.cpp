@@ -37,8 +37,8 @@ void EntityPlacer::initializeGUI()
 
 	// Left-viewport: mainWindow - lightPlaceManagement
 	_leftWindow->addScreen("lightPlaceManagement");
-	_leftWindow->getScreen("lightPlaceManagement")->addButton("ambient", vec2(0.0f, 0.63f), vec2(1.0f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Ambient", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
-	_leftWindow->getScreen("lightPlaceManagement")->addButton("directional", vec2(0.0f, 0.21f), vec2(1.0f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Directional", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_leftWindow->getScreen("lightPlaceManagement")->addButton("ambient", vec2(0.0f, 0.63f), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Ambient", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_leftWindow->getScreen("lightPlaceManagement")->addButton("directional", vec2(0.0f, 0.21f), vec2(1.75f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Directional", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 	_leftWindow->getScreen("lightPlaceManagement")->addButton("point", vec2(0.0f, -0.21f), vec2(1.0f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Point", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 	_leftWindow->getScreen("lightPlaceManagement")->addButton("back", vec2(0.0f, -0.63f), vec2(1.0f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Go back", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 

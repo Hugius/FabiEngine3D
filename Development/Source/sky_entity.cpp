@@ -10,6 +10,11 @@ void SkyEntity::setRotationMatrix(const mat4 & val)
 	_rotationMatrix = val;
 }
 
+void SkyEntity::setColor(vec3 val)
+{
+	_color = val;
+}
+
 void SkyEntity::setDayCubeMap(GLuint val)
 {
 	_dayCubeMap = val;
@@ -18,6 +23,11 @@ void SkyEntity::setDayCubeMap(GLuint val)
 void SkyEntity::setNightCubeMap(GLuint val)
 {
 	_nightCubeMap = val;
+}
+
+void SkyEntity::setBrightness(float val)
+{
+	_brightness = val;
 }
 
 void SkyEntity::setMixValue(float val)
@@ -50,6 +60,11 @@ const mat4 & SkyEntity::getRotationMatrix() const
 	return _rotationMatrix;
 }
 
+const vec3 SkyEntity::getColor() const
+{
+	return _color;
+}
+
 const GLuint SkyEntity::getDayCubeMap() const
 {
 	return _dayCubeMap;
@@ -58,6 +73,11 @@ const GLuint SkyEntity::getDayCubeMap() const
 const GLuint SkyEntity::getNightCubeMap() const
 {
 	return _nightCubeMap;
+}
+
+const float SkyEntity::getBrightness() const
+{
+	return _brightness;
 }
 
 const float SkyEntity::getMixValue() const

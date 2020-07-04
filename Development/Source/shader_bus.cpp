@@ -130,11 +130,6 @@ void ShaderBus::setCameraPitch(float val)
 	_cameraPitch = val;
 }
 
-void ShaderBus::setSkyBrightness(float val)
-{
-	_skyBrightness = val;
-}
-
 void ShaderBus::setNearZ(float val)
 {
 	_nearZ = val;
@@ -383,11 +378,6 @@ const float ShaderBus::getCameraYaw() const
 const float ShaderBus::getCameraPitch() const
 {
 	return _cameraPitch;
-}
-
-const float ShaderBus::getSkyBrightness() const
-{
-	return _skyBrightness;
 }
 
 const float ShaderBus::getNearZ() const

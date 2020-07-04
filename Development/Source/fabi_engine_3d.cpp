@@ -213,9 +213,19 @@ void FabiEngine3D::skyEntity_select(const string& ID)
 	_core->_skyEntityManager.selectSky(ID);
 }
 
+void FabiEngine3D::skyEntity_setBrightness(const string& ID, float brightness)
+{
+	_core->_skyEntityManager.getEntity(ID)->setBrightness(brightness);
+}
+
 void FabiEngine3D::skyEntity_setRotationSpeed(const string& ID, float speed)
 {
 	_core->_skyEntityManager.getEntity(ID)->setRotationSpeed(speed);
+}
+
+void FabiEngine3D::skyEntity_setColor(const string& ID, vec3 color)
+{
+	_core->_skyEntityManager.getEntity(ID)->setColor(color);
 }
 
 void FabiEngine3D::skyEntity_setDayTime(const string& ID)
@@ -1943,16 +1953,6 @@ void FabiEngine3D::gfx_disableDOF()
 void FabiEngine3D::gfx_disableMotionBlur()
 {
 	_core->_shaderBus.setMotionBlurEnabled(false);
-}
-
-void FabiEngine3D::gfx_setSkyBrightness(float brightness)
-{
-	_core->_shaderBus.setSkyBrightness(brightness);
-}
-
-float FabiEngine3D::gfx_getSkyBrightness()
-{
-	return _core->_shaderBus.getSkyBrightness();
 }
 
 /* --------------------------------------------- Input interface --------------------------------------------- */

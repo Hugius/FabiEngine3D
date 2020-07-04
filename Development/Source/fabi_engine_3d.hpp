@@ -74,7 +74,9 @@ public:
 	void skyEntity_show(const string& ID);
 	bool skyEntity_isExisting(const string& ID);
 	void skyEntity_select(const string& ID);
+	void skyEntity_setBrightness(const string& ID, float brightness);
 	void skyEntity_setRotationSpeed(const string& ID, float speed);
+	void skyEntity_setColor(const string& ID, vec3 color);
 	void skyEntity_setDayTime(const string& ID);
 	void skyEntity_setNightTime(const string& ID);
 	void skyEntity_fadeDayTime(const string& ID);
@@ -390,8 +392,6 @@ public:
 	void gfx_disableSkyHDR();
 	void gfx_disableDOF();
 	void gfx_disableMotionBlur();
-	void gfx_setSkyBrightness(float brightness);
-	float gfx_getSkyBrightness();
 
 	// Input interface
 	void input_setLocked(bool locked);

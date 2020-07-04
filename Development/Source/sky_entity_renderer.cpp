@@ -9,7 +9,6 @@ void SkyEntityRenderer::bind()
 	_shader.uploadUniform("u_viewMatrix", mat4(mat3(_shaderBus.getViewMatrix())));
 	_shader.uploadUniform("u_projectionMatrix",     _shaderBus.getProjectionMatrix());
 	_shader.uploadUniform("u_rotationMatrix",       _shaderBus.getSkyRotationMatrix());
-	_shader.uploadUniform("u_brightness",           _shaderBus.getSkyBrightness());
 
 	// Depth testing
 	glEnable(GL_DEPTH_TEST);
@@ -29,7 +28,9 @@ void SkyEntityRenderer::render(const SkyEntity * entity)
 		if (entity->isEnabled())
 		{
 			// Uniforms
+			_shader.uploadUniform("u_brightness", entity->getBrightness());
 			_shader.uploadUniform("u_mixValue", entity->getMixValue());
+			_shader.uploadUniform("u_color", entity->getColor());
 
 			// Day texture
 			_shader.uploadUniform("u_sampler_day", 0);

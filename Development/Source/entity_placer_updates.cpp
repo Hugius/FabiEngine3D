@@ -2,16 +2,23 @@
 
 void EntityPlacer::update()
 {
+	// Menus
 	_updateManagementScreen();
 	_updateModelScreen();
 	_updateBillboardScreen();
 	_updateLightScreen();
+
+	// Placement
 	_updateModelPlacing();
 	_updateBilboardPlacing();
 	_updateLightPlacing();
+
+	// Editing
 	_updateModelEditing();
 	_updateBillboardEditing();
 	_updateLightEditing();
+
+	// Miscellaneous
 	_updateCamera();
 	_updateMiscellaneous();
 }
@@ -136,15 +143,15 @@ void EntityPlacer::_updateLightScreen()
 		// GUI management
 		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
 		{
-			if (screen->getButton("ambient")->isHovered())
+			if (screen->getButton("ambient")->isHovered()) // Ambient light button
 			{
 				
 			}
-			else if (screen->getButton("directional")->isHovered())
+			else if (screen->getButton("directional")->isHovered()) // Directional light button
 			{
 				
 			}
-			else if (screen->getButton("point")->isHovered())
+			else if (screen->getButton("point")->isHovered()) // Point light button
 			{
 				
 			}

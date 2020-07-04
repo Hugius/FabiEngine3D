@@ -54,6 +54,8 @@ private:
 	// Sky variables
 	vector<string> _skyTexturePaths;
 	float _skyRotationSpeed = 0.0f;
+	float _skyBrightness = 1.0f;
+	vec3 _skyColor = vec3(1.0f);
 
 	// Terrain function
 	void _saveTerrainData();

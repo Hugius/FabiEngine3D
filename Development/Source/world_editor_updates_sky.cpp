@@ -1,5 +1,7 @@
 #include "world_editor.hpp"
 
+#include <algorithm>
+
 void WorldEditor::_updateSkyMenu()
 {
 	if (_currentWorldPart == WorldPart::SKY)
@@ -85,12 +87,6 @@ void WorldEditor::_updateSkyManagement()
 
 		// Options screen hoverability
 		screen->getButton("options")->setHoverable(_fe3d.skyEntity_isExisting("@sky"));
-
-		// Dynamic updates
-		if (_fe3d.skyEntity_isExisting("@sky"))
-		{
-			_fe3d.skyEntity_setRotationSpeed("@sky", _skyRotationSpeed);
-		}
 	}
 }
 
@@ -124,12 +120,12 @@ void WorldEditor::_updateSkyMesh()
 				string fileName = _fe3d.misc_getWinExplorerFilename(cubemapPath, "PNG");
 				_skyTexturePaths[3] = (fileName == "") ? _skyTexturePaths[3] : (cubemapPath + fileName);
 			}
-			else if (screen->getScrollingList("buttonList")->getButton("backTexture")->isHovered())
+			else if (screen->getScrollingList("buttonList")->getButton("frontTexture")->isHovered())
 			{
 				string fileName = _fe3d.misc_getWinExplorerFilename(cubemapPath, "PNG");
 				_skyTexturePaths[4] = (fileName == "") ? _skyTexturePaths[4] : (cubemapPath + fileName);
 			}
-			else if (screen->getScrollingList("buttonList")->getButton("frontTexture")->isHovered())
+			else if (screen->getScrollingList("buttonList")->getButton("backTexture")->isHovered())
 			{
 				string fileName = _fe3d.misc_getWinExplorerFilename(cubemapPath, "PNG");
 				_skyTexturePaths[5] = (fileName == "") ? _skyTexturePaths[5] : (cubemapPath + fileName);
@@ -159,9 +155,19 @@ void WorldEditor::_updateSkyOptions()
 		// GUI management
 		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
 		{
-			if (screen->getScrollingList("buttonList")->getButton("rotationSpeed")->isHovered())
+			if (screen->getButton("rotationSpeed")->isHovered())
 			{
 				_gui->getGlobalScreen()->addValueForm("rotationSpeed", "Rotation speed", _skyRotationSpeed * 100.0f, vec2(0.0f), vec2(0.3f, 0.1f));
+			}
+			else if (screen->getButton("brightness")->isHovered())
+			{
+				_gui->getGlobalScreen()->addValueForm("brightness", "Brightness", _skyBrightness * 100.0f, vec2(0.0f), vec2(0.3f, 0.1f));
+			}
+			else if (screen->getButton("color")->isHovered())
+			{
+				_gui->getGlobalScreen()->addValueForm("colorR", "R(0-255)", _skyColor.r * 255.0f, vec2(-0.25f, 0.0f), vec2(0.15f, 0.1f));
+				_gui->getGlobalScreen()->addValueForm("colorG", "G(0-255)", _skyColor.g * 255.0f, vec2(0.0f, 0.0f), vec2(0.15f, 0.1f));
+				_gui->getGlobalScreen()->addValueForm("colorB", "B(0-255)", _skyColor.b * 255.0f, vec2(0.25f, 0.0f), vec2(0.15f, 0.1f));
 			}
 			else if (screen->getButton("back")->isHovered())
 			{
@@ -174,6 +180,35 @@ void WorldEditor::_updateSkyOptions()
 		{
 			_skyRotationSpeed /= 100.0f;
 		}
+
+		// Brightness value conversion
+		if (_gui->getGlobalScreen()->checkValueForm("brightness", _skyBrightness))
+		{
+			_skyBrightness = std::clamp(_skyBrightness / 100.0f, 0.0f, 1.0f);
+		}
+
+		// Color R values conversion
+		if (_gui->getGlobalScreen()->checkValueForm("colorR", _skyColor.r))
+		{
+			_skyColor.r = std::clamp(_skyColor.r / 255.0f, 0.0f, 1.0f);
+		}
+
+		// Color G values conversion
+		if (_gui->getGlobalScreen()->checkValueForm("colorG", _skyColor.g))
+		{
+			_skyColor.g = std::clamp(_skyColor.g / 255.0f, 0.0f, 1.0f);
+		}
+
+		// Color B values conversion
+		if (_gui->getGlobalScreen()->checkValueForm("colorB", _skyColor.b))
+		{
+			_skyColor.b = std::clamp(_skyColor.b / 255.0f, 0.0f, 1.0f);
+		}
+
+		// Dynamically update sky options
+		_fe3d.skyEntity_setRotationSpeed("@sky", _skyRotationSpeed);
+		_fe3d.skyEntity_setBrightness("@sky", _skyBrightness);
+		_fe3d.skyEntity_setColor("@sky", _skyColor);
 	}
 }
 

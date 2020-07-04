@@ -5,7 +5,7 @@
 SkyEntityManager::SkyEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, ShaderBus& shaderBus) :
 	BaseEntityManager(objLoader, texLoader, shaderBus)
 {
-	_shaderBus.setSkyBrightness(1.0f);
+	
 }
 
 SkyEntity * SkyEntityManager::getEntity(const string & ID)

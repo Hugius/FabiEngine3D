@@ -46,9 +46,10 @@ void WorldEditor::initializeGUI()
 
 	// Left-viewport: mainWindow - skyOptions
 	_window->addScreen("skyOptions");
-	_window->getScreen("skyOptions")->addScrollingList("buttonList", vec2(0.0f, 0.2f), vec2(1.9, 1.5f), vec3(0.3f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, _gui->leftVpTextColor, _gui->leftVpTextHoverColor, vec2(0.15f, 0.1f));
-	_window->getScreen("skyOptions")->getScrollingList("buttonList")->addButton("rotationSpeed", "Rotation speed");
-	_window->getScreen("skyOptions")->addButton("back", vec2(0.0f, -0.9f), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Go back", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_window->getScreen("skyOptions")->addButton("rotationSpeed", vec2(0.0f, 0.63f), vec2(1.8f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Rotation speed", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_window->getScreen("skyOptions")->addButton("brightness", vec2(0.0f, 0.21f), vec2(1.5f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Brightness", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_window->getScreen("skyOptions")->addButton("color", vec2(0.0f, -0.21f), vec2(1.0f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Color", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_window->getScreen("skyOptions")->addButton("back", vec2(0.0f, -0.63f), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Go back", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 
 	// Left-viewport: mainWindow - terrainMenu
 	_window->addScreen("terrainMenu");

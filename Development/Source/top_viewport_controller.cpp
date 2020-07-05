@@ -166,10 +166,10 @@ void TopViewportController::_updateProjectLoading()
 {
 	if (_loadingProject)
 	{
-		string clickedButtonID = _gui->getGlobalScreen()->getClickedChoiceFormButtonID("projectList");
-		
+		string clickedButtonID = _gui->getGlobalScreen()->getSelectedChoiceFormButtonID("projectList");
+
 		// Check if user clicked a project name
-		if(clickedButtonID != "")
+		if (clickedButtonID != "" && _fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
 		{
 			// Load current project
 			_currentProjectName = clickedButtonID;
@@ -180,14 +180,12 @@ void TopViewportController::_updateProjectLoading()
 
 			// Miscellaneous
 			_loadingProject = false;
+			_gui->getGlobalScreen()->removeChoiceForm("projectList");
 		}
-		else
+		else if (_gui->getGlobalScreen()->isChoiceFormCancelled("projectList"))
 		{
-			if (_gui->getGlobalScreen()->isChoiceFormCancelled("projectList"))
-			{
-				_loadingProject = false;
-				_gui->getGlobalScreen()->removeChoiceForm("projectList");
-			}
+			_loadingProject = false;
+			_gui->getGlobalScreen()->removeChoiceForm("projectList");
 		}
 	}
 }
@@ -197,21 +195,19 @@ void TopViewportController::_updateProjectDeletion()
 	if (_deletingProject)
 	{
 		static string chosenButtonID = "";
-		string clickedButtonID = _gui->getGlobalScreen()->getClickedChoiceFormButtonID("projectList");
+		string clickedButtonID = _gui->getGlobalScreen()->getSelectedChoiceFormButtonID("projectList");
 		
 		// Check if user clicked a project name
-		if (clickedButtonID != "")
+		if (clickedButtonID != "" && _fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
 		{
 			_gui->getGlobalScreen()->addAnswerForm("deleteProject", "Are you sure?", vec2(0.0f, 0.25f));
 			chosenButtonID = clickedButtonID;
+			_gui->getGlobalScreen()->removeChoiceForm("projectList");
 		}
-		else
+		else if (_gui->getGlobalScreen()->isChoiceFormCancelled("projectList"))
 		{
-			if (_gui->getGlobalScreen()->isChoiceFormCancelled("projectList"))
-			{
-				_deletingProject = false;
-				_gui->getGlobalScreen()->removeChoiceForm("projectList");
-			}
+			_deletingProject = false;
+			_gui->getGlobalScreen()->removeChoiceForm("projectList");
 		}
 
 		// Check if user is sure to delete

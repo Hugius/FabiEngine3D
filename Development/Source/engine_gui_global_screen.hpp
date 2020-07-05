@@ -61,7 +61,7 @@ public:
 
 	// Choice form
 	void addChoiceForm(const string& ID, string title, vec2 position, vector<string> buttonTitles);
-	string getClickedChoiceFormButtonID(const string& ID);
+	string getSelectedChoiceFormButtonID(const string& ID);
 	bool isChoiceFormCancelled(const string& ID);
 	void removeChoiceForm(const string& ID);
 

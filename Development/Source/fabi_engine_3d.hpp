@@ -86,7 +86,7 @@ public:
 	string skyEntity_getSelectedID();
 
 	// Terrain entity interface
-	void terrainEntity_add(const string& ID, const string& heightmapPath, const string& texturePath, vec3 pos, float size, float maxHeight, float uvRepeat);
+	void terrainEntity_add(const string& ID, const string& heightmapPath, const string& texturePath, vec3 pos, float size, float maxHeight, float uvRepeat, float brightness);
 	void terrainEntity_delete(const string& ID);
 	void terrainEntity_hide(const string& ID);
 	void terrainEntity_show(const string& ID);

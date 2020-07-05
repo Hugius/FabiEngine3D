@@ -319,6 +319,9 @@
     <ClCompile Include="Source\entity_placer_updates_editing.cpp">
       <Filter>src\Editor System\Entity Placer</Filter>
     </ClCompile>
+    <ClCompile Include="Source\billboard_editor_updates_editing.cpp">
+      <Filter>src\Editor System\Billboard Editor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\obj_loader.hpp">

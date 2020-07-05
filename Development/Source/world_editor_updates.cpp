@@ -12,6 +12,7 @@ void WorldEditor::update()
 			_fe3d.camera_setPosition(vec3(0.0f));
 			_fe3d.camera_setYaw(0.0f);
 			_fe3d.camera_setPitch(0.0f);
+			_fe3d.camera_disableLookat();
 
 			// Select the default sky
 			_fe3d.skyEntity_select("@defaultSky");

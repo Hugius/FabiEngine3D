@@ -25,6 +25,7 @@ uniform vec3  u_pointLightsPos[POINT_LIGHT_AMOUNT];
 uniform vec3  u_pointLightsColor[POINT_LIGHT_AMOUNT];
 
 uniform float u_pointLightsStrength[POINT_LIGHT_AMOUNT];
+uniform float u_brightness;
 uniform float u_ambientStrength;
 uniform float u_dirLightStrength;
 uniform float u_lightmapStrength;
@@ -53,6 +54,7 @@ vec3 getDirectionalLighting();
 vec3 getPointLighting();
 vec3 applyFog(vec3 color);
 vec3 getShadowLighting();
+
 // Calculate final fragment color
 void main()
 {
@@ -66,6 +68,7 @@ void main()
 	vec3 color;
 	color = getTextureColor() * vec3((a + d) * h + p);
 	color = applyFog(color);
+	color *= u_brightness;
 
 	// Set final color
 	o_finalColor = vec4(color, 1.0f);

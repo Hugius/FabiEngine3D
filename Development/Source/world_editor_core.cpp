@@ -72,6 +72,7 @@ void WorldEditor::initializeGUI()
 	_window->getScreen("terrainMesh")->getScrollingList("buttonList")->addButton("size", "Size");
 	_window->getScreen("terrainMesh")->getScrollingList("buttonList")->addButton("maxHeight", "Max height");
 	_window->getScreen("terrainMesh")->getScrollingList("buttonList")->addButton("uvRepeat", "UV repeat");
+	_window->getScreen("terrainMesh")->getScrollingList("buttonList")->addButton("brightness", "Brightness");
 	_window->getScreen("terrainMesh")->addButton("load", vec2(0.0f, -0.7f), vec2(1.0f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Load", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 	_window->getScreen("terrainMesh")->addButton("back", vec2(0.0f, -0.9f), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Go back", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 

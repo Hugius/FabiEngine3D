@@ -26,7 +26,7 @@ void WorldEditor::loadSkyEntity()
 		// Load base data
 		skyFile >>
 			_skyTexturePaths[0] >> _skyTexturePaths[1] >> _skyTexturePaths[2] >> _skyTexturePaths[3] >> _skyTexturePaths[4] >> _skyTexturePaths[5] >>
-			_skyRotationSpeed >> _skyBrightness;
+			_skyRotationSpeed >> _skyBrightness >> _skyColor.r >> _skyColor.g >> _skyColor.b;
 
 		// Close file
 		skyFile.close();
@@ -65,7 +65,7 @@ void WorldEditor::_saveSkyData()
 			}
 
 			// Add options to file
-			skyFile << _skyRotationSpeed << " " << _skyBrightness;
+			skyFile << _skyRotationSpeed << " " << _skyBrightness << " " << _skyColor.r << " " << _skyColor.g << " " << _skyColor.b;
 
 			// Close file
 			skyFile.close();

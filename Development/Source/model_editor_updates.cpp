@@ -32,7 +32,7 @@ void ModelEditor::_updateManagementScreen()
 				_modelChoosingEnabled = true;
 				_modelEditingEnabled = true;
 				for (auto& name : _modelNames) { name = name.substr(1, name.size()); }
-				_gui->getGlobalScreen()->addChoiceForm("modelList", "Select mode", vec2(0.0f), _modelNames);
+				_gui->getGlobalScreen()->addChoiceForm("modelList", "Select mode", vec2(-0.4f, 0.1f), _modelNames);
 				for (auto& name : _modelNames) { name = "@" + name; }
 			}
 			else if (screen->getButton("deleteModel")->isHovered()) // Delete model button
@@ -40,7 +40,7 @@ void ModelEditor::_updateManagementScreen()
 				_modelChoosingEnabled = true;
 				_modelRemovalEnabled = true;
 				for (auto& name : _modelNames) { name = name.substr(1, name.size()); }
-				_gui->getGlobalScreen()->addChoiceForm("modelList", "Select mode", vec2(0.0f), _modelNames);
+				_gui->getGlobalScreen()->addChoiceForm("modelList", "Select mode", vec2(-0.4f, 0.1f), _modelNames);
 				for (auto& name : _modelNames) { name = "@" + name; }
 			}
 			else if (screen->getButton("back")->isHovered()) // Back button
@@ -91,26 +91,53 @@ void ModelEditor::_updateCreationScreen()
 
 void ModelEditor::_updateModelChoosing()
 {
+	static string hoveredModelID = "";
+
 	if (_isLoaded)
 	{
 		if (_modelChoosingEnabled)
 		{
-			string clickedButtonID = _gui->getGlobalScreen()->getClickedChoiceFormButtonID("modelList");
+			// Get selected button ID
+			string selectedButtonID = _gui->getGlobalScreen()->getSelectedChoiceFormButtonID("modelList");
 
-			if (clickedButtonID != "")
+			// Hide last model
+			if (hoveredModelID != "")
 			{
-				_currentModelName = "@" + clickedButtonID;
-				_modelChoosingEnabled = false;
+				_fe3d.gameEntity_hide(hoveredModelID);
 			}
-			else
+
+			// Check if a model name is hovered
+			if (selectedButtonID != "")
 			{
-				if (_gui->getGlobalScreen()->isChoiceFormCancelled("modelList"))
+				if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT)) // LMB pressed
 				{
+					_currentModelName = "@" + selectedButtonID;
 					_modelChoosingEnabled = false;
-					_modelEditingEnabled = false;
-					_modelRemovalEnabled = false;
+					hoveredModelID = "";
 					_gui->getGlobalScreen()->removeChoiceForm("modelList");
 				}
+				else
+				{
+					// Set new hovered model
+					hoveredModelID = "@" + selectedButtonID;
+				}
+			}
+			else if (_gui->getGlobalScreen()->isChoiceFormCancelled("modelList")) // Cancelled choosing
+			{
+				_modelChoosingEnabled = false;
+				_modelEditingEnabled = false;
+				_modelRemovalEnabled = false;
+				_gui->getGlobalScreen()->removeChoiceForm("modelList");
+			}
+			else // Nothing hovered
+			{
+				hoveredModelID = "";
+			}
+
+			// Show hovered model
+			if (hoveredModelID != "")
+			{
+				_fe3d.gameEntity_show(hoveredModelID);
 			}
 		}
 	}

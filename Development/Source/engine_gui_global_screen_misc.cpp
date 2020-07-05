@@ -173,9 +173,9 @@ void EngineGuiGlobalScreen::addChoiceForm(const string& ID, string title, vec2 p
 	if (_choiceFormID == "")
 	{
 		// Add GUI elements
-		addTextfield(ID, vec2(0.0f, 0.45f), vec2(0.3f, 0.1f), "Select project", vec3(0.0f));
-		addScrollingList(ID, vec2(0.0f, 0.0f), vec2(0.5, 0.75f), vec3(_scrollListColor), _buttonColor, _buttonHoverColor, _textColor, _textHoverColor, vec2(0.1f, 0.25f));
-		addButton("choice_form_cancel", vec2(0.0f, -0.45f), vec2(0.15f, 0.1f), vec3(0.5f, 0.0f, 0.0f), vec3(1.0f, 0.0f, 0.0f), "Cancel", vec3(1.0f), vec3(0.0f));
+		addTextfield(ID, position + vec2(0.0f, 0.45f), vec2(0.3f, 0.1f), "Select project", vec3(0.0f));
+		addScrollingList(ID, position, vec2(0.5, 0.75f), vec3(_scrollListColor), _buttonColor, _buttonHoverColor, _textColor, _textHoverColor, vec2(0.1f, 0.25f));
+		addButton("choice_form_cancel", position + vec2(0.0f, -0.45f), vec2(0.15f, 0.1f), vec3(0.5f, 0.0f, 0.0f), vec3(1.0f, 0.0f, 0.0f), "Cancel", vec3(1.0f), vec3(0.0f));
 
 		// Add buttons to scrolling list
 		for (auto& title : buttonTitles)
@@ -189,20 +189,15 @@ void EngineGuiGlobalScreen::addChoiceForm(const string& ID, string title, vec2 p
 	}
 }
 
-string EngineGuiGlobalScreen::getClickedChoiceFormButtonID(const string& ID)
+string EngineGuiGlobalScreen::getSelectedChoiceFormButtonID(const string& ID)
 {
 	if (ID == _choiceFormID)
 	{
-		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT)) // LMB pressed
+		for (auto& button : getScrollingList(ID)->getButtons()) // For every button
 		{
-			for (auto& button : getScrollingList(ID)->getButtons()) // For every button
+			if (button->isHovered()) // If button is hovered
 			{
-				if (button->isHovered()) // If button is clicked
-				{
-					string buttonID = button->getID();
-					removeChoiceForm(ID);
-					return buttonID;
-				}
+				return button->getID();
 			}
 		}
 	}

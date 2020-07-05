@@ -279,9 +279,9 @@ bool FabiEngine3D::skyEntity_isExisting(const string& ID)
 
 /* --------------------------------------------- Terrain interface --------------------------------------------- */
 
-void FabiEngine3D::terrainEntity_add(const string& ID, const string& heightmapName, const string& textureName, vec3 pos, float size, float maxHeight, float uvRepeat)
+void FabiEngine3D::terrainEntity_add(const string& ID, const string& heightmapName, const string& textureName, vec3 pos, float size, float maxHeight, float uvRepeat, float brightness)
 {
-	_core->_terrainEntityManager.addTerrainEntity(ID, heightmapName, textureName, pos, size, maxHeight, uvRepeat);
+	_core->_terrainEntityManager.addTerrainEntity(ID, heightmapName, textureName, pos, size, maxHeight, uvRepeat, brightness);
 }
 
 void FabiEngine3D::terrainEntity_delete(const string& ID)

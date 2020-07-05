@@ -32,7 +32,7 @@ void TerrainEntityManager::selectTerrain(const string & ID)
 void TerrainEntityManager::addTerrainEntity
 (
 	const string& ID, const string& heightmapPath, const string& textureName,
-	vec3 pos, float size, float maxHeight, float uvRepeat
+	vec3 pos, float size, float maxHeight, float uvRepeat, float brightness
 )
 {
 	// Variables
@@ -161,6 +161,7 @@ void TerrainEntityManager::addTerrainEntity
 	getEntity(ID)->setMaxHeight(maxHeight);
 	getEntity(ID)->setBlendRepeat(uvRepeat);
 	getEntity(ID)->setSize(size);
+	getEntity(ID)->setBrightness(brightness);
 }
 
 void TerrainEntityManager::addBlendingToTerrain

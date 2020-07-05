@@ -42,7 +42,8 @@ private:
 	shared_ptr<EngineGuiManager> _gui;
 	shared_ptr<EngineGuiWindow> _window;
 	
-	string _currentBillboardName = "";
+	string _hoveredBillboardID = "";
+	string _currentBillboardID = "";
 	string _currentProjectName = "";
 	vector<string> _billboardNames;
 };

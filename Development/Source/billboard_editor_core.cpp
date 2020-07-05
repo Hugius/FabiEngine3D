@@ -231,5 +231,5 @@ void BillboardEditor::unload()
 	_isLoaded = false;
 	_cameraRotationSpeed = 0.0f;
 	_totalCameraRotation = 0.0f;
-	_currentBillboardName = "";
+	_currentBillboardID = "";
 }

@@ -1,5 +1,7 @@
 #include "entity_placer.hpp"
 
+#include <algorithm>
+
 void EntityPlacer::update()
 {
 	// Menus
@@ -145,7 +147,7 @@ void EntityPlacer::_updateLightScreen()
 		{
 			if (screen->getButton("ambient")->isHovered()) // Ambient light button
 			{
-				
+				_gui->getGlobalScreen()->addValueForm("ambient", "Ambient strength (0 - 100)", _ambientStrength * 100.0f, vec2(0.0f), vec2(0.3f, 0.1f));
 			}
 			else if (screen->getButton("directional")->isHovered()) // Directional light button
 			{
@@ -160,6 +162,16 @@ void EntityPlacer::_updateLightScreen()
 				_leftWindow->setActiveScreen("placeManagement");
 			}
 		}
+
+		// Ambient value conversion
+		if (_gui->getGlobalScreen()->checkValueForm("ambient", _ambientStrength))
+		{
+			_ambientStrength = std::clamp(_ambientStrength / 100.0f, 0.0f, 1.0f);
+		}
+
+		// Update lighting values
+		_fe3d.gfx_enableAmbientLighting(_ambientStrength);
+		_fe3d.gfx_enableDirectionalLighting(_directionalPos, _directionalStrength);
 	}
 }
 

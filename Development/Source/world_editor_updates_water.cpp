@@ -8,6 +8,16 @@ void WorldEditor::_updateWaterMenu()
 	{
 		auto screen = _window->getScreen("waterMenu");
 
+		// If water existing, show water and enable bloom
+		if (_fe3d.waterEntity_isExisting("@water"))
+		{
+			_fe3d.waterEntity_show("@water");
+		}
+		else // Otherwise just show default sky
+		{
+			_fe3d.skyEntity_select("@defaultSky");
+		}
+
 		// Show sky
 		if (_fe3d.skyEntity_isExisting("@sky"))
 		{
@@ -19,16 +29,6 @@ void WorldEditor::_updateWaterMenu()
 		if (_fe3d.terrainEntity_isExisting("@terrain"))
 		{
 			_fe3d.terrainEntity_show("@terrain");
-		}
-
-		// If water existing, show water and enable bloom
-		if (_fe3d.waterEntity_isExisting("@water"))
-		{
-			_fe3d.waterEntity_show("@water");
-		}
-		else // Otherwise just show default sky
-		{
-			_fe3d.skyEntity_select("@defaultSky");
 		}
 
 		// Update water management if possible

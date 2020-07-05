@@ -65,6 +65,11 @@ void TerrainEntity::setBlendMapped(bool val)
 	_blendMapped = val;
 }
 
+void TerrainEntity::setBrightness(float val)
+{
+	_brightness = val;
+}
+
 const GLuint TerrainEntity::getDiffuseMap() const
 {
 	return _diffuseMap;
@@ -118,6 +123,11 @@ const float TerrainEntity::getSize() const
 const float TerrainEntity::getMaxHeight() const
 {
 	return _maxHeight;
+}
+
+const float TerrainEntity::getBrightness() const
+{
+	return _brightness;
 }
 
 const vector<float>& TerrainEntity::getPixelColors() const

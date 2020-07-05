@@ -66,6 +66,7 @@ void TerrainEntityRenderer::render(const TerrainEntity * entity)
 			_shader.uploadUniform("u_blendmapRepeatR",     entity->getBlendRepeatR());
 			_shader.uploadUniform("u_blendmapRepeatG",     entity->getBlendRepeatG());
 			_shader.uploadUniform("u_blendmapRepeatB",     entity->getBlendRepeatB());
+			_shader.uploadUniform("u_brightness",		   entity->getBrightness());
 
 			// Texture uniforms
 			_shader.uploadUniform("u_sampler_diffuseMap", 0);

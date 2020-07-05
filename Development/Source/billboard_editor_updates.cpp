@@ -1,7 +1,5 @@
 #include "billboard_editor.hpp"
 
-#include <algorithm>
-
 void BillboardEditor::update()
 {
 	_updateBillboardManagement();
@@ -30,13 +28,17 @@ void BillboardEditor::_updateBillboardManagement()
 			{
 				_billboardChoosingEnabled = true;
 				_billboardEditingEnabled = true;
-				_gui->getGlobalScreen()->addChoiceForm("billboardList", "Select billboard", vec2(0.0f), _billboardNames);
+				for (auto& name : _billboardNames) { name = name.substr(1, name.size()); }
+				_gui->getGlobalScreen()->addChoiceForm("billboardList", "Select billboard", vec2(-0.4f, 0.1f), _billboardNames);
+				for (auto& name : _billboardNames) { name = "@" + name; }
 			}
 			else if (screen->getButton("deleteBillboard")->isHovered()) // Delete billboard button
 			{
 				_billboardChoosingEnabled = true;
 				_billboardRemovalEnabled = true;
-				_gui->getGlobalScreen()->addChoiceForm("billboardList", "Select billboard", vec2(0.0f), _billboardNames);
+				for (auto& name : _billboardNames) { name = name.substr(1, name.size()); }
+				_gui->getGlobalScreen()->addChoiceForm("billboardList", "Select billboard", vec2(-0.4f, 0.1f), _billboardNames);
+				for (auto& name : _billboardNames) { name = "@" + name; }
 			}
 			else if (screen->getButton("back")->isHovered()) // Back button
 			{
@@ -68,19 +70,23 @@ void BillboardEditor::_updateBillboardCreation()
 			string newBillboardName = "";
 
 			// Check if user filled in a new name
-			if (_gui->getGlobalScreen()->checkValueForm("newBillboardName", newBillboardName, { _currentBillboardName }))
+			if (_gui->getGlobalScreen()->checkValueForm("newBillboardName", newBillboardName, { _currentBillboardID }))
 			{
+				// Add @ sign to new name
+				newBillboardName = "@" + newBillboardName;
+
+				// Check if name already exists
 				if (std::find(_billboardNames.begin(), _billboardNames.end(), newBillboardName) == _billboardNames.end()) // If name not existing yet
 				{
 					_billboardCreationEnabled = false;
 					_billboardEditingEnabled = true;
-					_currentBillboardName = newBillboardName;
+					_currentBillboardID = newBillboardName;
 					_billboardNames.push_back(newBillboardName);
 					_fe3d.billBoardEntity_add(newBillboardName, vec3(1.0f), _billboardPosition, vec3(0.0f), vec2(1.0f), false, false);
 				}
 				else // Name already exists
 				{
-					_fe3d.logger_throwWarning("Billboard name \"" + newBillboardName + "\" already exists!");
+					_fe3d.logger_throwWarning("Billboard name \"" + newBillboardName.substr(1, newBillboardName.size()) + "\" already exists!");
 				}
 			}
 		}
@@ -93,274 +99,47 @@ void BillboardEditor::_updateBillboardChoosing()
 	{
 		if (_billboardChoosingEnabled)
 		{
-			string clickedButtonID = _gui->getGlobalScreen()->getClickedChoiceFormButtonID("billboardList");
+			// Get selected button ID
+			string selectedButtonID = _gui->getGlobalScreen()->getSelectedChoiceFormButtonID("billboardList");
 
-			if (clickedButtonID != "")
+			// Hide last billboard
+			if (_hoveredBillboardID != "")
 			{
-				_currentBillboardName = clickedButtonID;
-				_billboardChoosingEnabled = false;
+				_fe3d.billboardEntity_hide(_hoveredBillboardID);
 			}
-			else
+
+			// Check if a billboard name is hovered
+			if (selectedButtonID != "")
 			{
-				if (_gui->getGlobalScreen()->isChoiceFormCancelled("billboardList"))
+				if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT)) // LMB pressed
 				{
+					_currentBillboardID = "@" + selectedButtonID;
 					_billboardChoosingEnabled = false;
-					_billboardEditingEnabled = false;
-					_billboardRemovalEnabled = false;
+					_hoveredBillboardID = "";
 					_gui->getGlobalScreen()->removeChoiceForm("billboardList");
 				}
+				else
+				{
+					// Set new hovered billboard
+					_hoveredBillboardID = "@" + selectedButtonID;
+				}
 			}
-		}
-	}
-}
-
-void BillboardEditor::_updateBillboardEditing()
-{
-	if (_isLoaded)
-	{
-		if (_billboardEditingEnabled && _currentBillboardName != "")
-		{
-			static bool firstTime = true;
-
-			// First time initializations
-			if (firstTime)
+			else if (_gui->getGlobalScreen()->isChoiceFormCancelled("billboardList")) // Cancelled choosing
 			{
-				firstTime = false;
-				_fe3d.textEntity_setTextContent(_gui->getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID(), "Billboard: " + _currentBillboardName, 0.025f);
-				_fe3d.textEntity_show(_gui->getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID());
-				_fe3d.billboardEntity_show(_currentBillboardName);
-				_window->setActiveScreen("billboardEditingMain");
+				_billboardChoosingEnabled = false;
+				_billboardEditingEnabled = false;
+				_billboardRemovalEnabled = false;
+				_gui->getGlobalScreen()->removeChoiceForm("billboardList");
+			}
+			else // Nothing hovered
+			{
+				_hoveredBillboardID = "";
 			}
 
-			// Shortened screen instance
-			auto screen = _window->getActiveScreen();
-
-			// GUI management
-			if (_window->getActiveScreen()->getID() == "billboardEditingMain")
+			// Show hovered billboard
+			if (_hoveredBillboardID != "")
 			{
-				if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
-				{
-					if (screen->getButton("mesh")->isHovered())
-					{
-						_window->setActiveScreen("billboardEditingMesh");
-					}
-					else if (screen->getButton("appearance")->isHovered())
-					{
-						_window->setActiveScreen("billboardEditingAppearance");
-					}
-					else if (screen->getButton("animation")->isHovered())
-					{
-						_window->setActiveScreen("billboardEditingAnimation");
-					}
-					else if (screen->getButton("text")->isHovered())
-					{
-						_window->setActiveScreen("billboardEditingText");
-					}
-					else if (screen->getButton("back")->isHovered())
-					{
-						_fe3d.billboardEntity_hide(_currentBillboardName);
-						_fe3d.textEntity_hide(_gui->getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID());
-						_currentBillboardName = "";
-						_billboardEditingEnabled = false;
-						firstTime = true;
-						_window->setActiveScreen("billboardManagement");
-						return;
-					}
-				}
-
-				// Update buttons hoverability
-				screen->getButton("appearance")->setHoverable(_fe3d.billboardEntity_getFontPath(_currentBillboardName) == "");
-				screen->getButton("animation")->setHoverable(_fe3d.billboardEntity_getDiffuseMapPath(_currentBillboardName) != "");
-				screen->getButton("text")->setHoverable(_fe3d.billboardEntity_getDiffuseMapPath(_currentBillboardName) == "");
-			}
-			else if (_window->getActiveScreen()->getID() == "billboardEditingMesh")
-			{
-				if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
-				{
-					if (screen->getButton("size")->isHovered())
-					{
-						_gui->getGlobalScreen()->addValueForm("sizeX", "X", _fe3d.billboardEntity_getSize(_currentBillboardName).x * 10.0f, vec2(-0.25f, 0.0f), vec2(0.3f, 0.1f));
-						_gui->getGlobalScreen()->addValueForm("sizeY", "Y", _fe3d.billboardEntity_getSize(_currentBillboardName).y * 10.0f, vec2(0.25f, 0.0f), vec2(0.3f, 0.1f));
-					}
-					else if (screen->getButton("facingX")->isHovered())
-					{
-						bool isFacedX = !_fe3d.billboardEntity_isFacingCameraX(_currentBillboardName);
-						_fe3d.billboardEntity_setCameraFacingX(_currentBillboardName, isFacedX);
-					}
-					else if (screen->getButton("facingY")->isHovered())
-					{
-						bool isFacedY = !_fe3d.billboardEntity_isFacingCameraY(_currentBillboardName);
-						_fe3d.billboardEntity_setCameraFacingY(_currentBillboardName, isFacedY);
-					}
-					else if (screen->getButton("back")->isHovered())
-					{
-						_window->setActiveScreen("billboardEditingMain");
-					}
-				}
-
-				// Setting billboard size
-				vec2 newSize = _fe3d.billboardEntity_getSize(_currentBillboardName) * 10.0f;
-				_gui->getGlobalScreen()->checkValueForm("sizeX", newSize.x, { 0.0f });
-				_gui->getGlobalScreen()->checkValueForm("sizeY", newSize.y, { 0.0f });
-				_fe3d.billboardEntity_setSize(_currentBillboardName, newSize / 10.0f);
-
-				// Update facing buttons text
-				string textEntityIDx = screen->getButton("facingX")->getTextfield()->getEntityID();
-				string textEntityIDy = screen->getButton("facingY")->getTextfield()->getEntityID();
-				bool isFacedX = _fe3d.billboardEntity_isFacingCameraX(_currentBillboardName);
-				bool isFacedY = _fe3d.billboardEntity_isFacingCameraY(_currentBillboardName);
-				_fe3d.textEntity_setTextContent(textEntityIDx, isFacedX ? "Facing X: ON" : "Facing X: OFF");
-				_fe3d.textEntity_setTextContent(textEntityIDy, isFacedY ? "Facing Y: ON" : "Facing Y: OFF");
-			}
-			else if (_window->getActiveScreen()->getID() == "billboardEditingAppearance")
-			{
-				if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
-				{
-					if (screen->getButton("color")->isHovered())
-					{
-						_gui->getGlobalScreen()->addValueForm("colorR", "R(0-255)", _fe3d.billboardEntity_getColor(_currentBillboardName).r * 255.0f, vec2(-0.25f, 0.0f), vec2(0.2f, 0.1f));
-						_gui->getGlobalScreen()->addValueForm("colorG", "G(0-255)", _fe3d.billboardEntity_getColor(_currentBillboardName).g * 255.0f, vec2(0.0f, 0.0f), vec2(0.2f, 0.1f));
-						_gui->getGlobalScreen()->addValueForm("colorB", "B(0-255)", _fe3d.billboardEntity_getColor(_currentBillboardName).b * 255.0f, vec2(0.25f, 0.0f), vec2(0.2f, 0.1f));
-					}
-					else if (screen->getButton("texture")->isHovered())
-					{
-						string path = "User\\Assets\\Textures\\BillboardMaps\\";
-						string fileName = _fe3d.misc_getWinExplorerFilename(path, "PNG");
-
-						// Check if user did not cancel
-						if (fileName != "")
-						{
-							_fe3d.billboardEntity_setDiffuseMap(_currentBillboardName, path + fileName, false);
-						}
-					}
-					else if (screen->getButton("transparent")->isHovered())
-					{
-						bool isTransparent = _fe3d.billboardEntity_isTransparent(_currentBillboardName);
-						_fe3d.billboardEntity_setTransparent(_currentBillboardName, !isTransparent);
-					}
-					else if (screen->getButton("back")->isHovered())
-					{
-						_window->setActiveScreen("billboardEditingMain");
-					}
-				}
-
-				// Setting billboard color
-				vec3 newColor = _fe3d.billboardEntity_getColor(_currentBillboardName) * 255.0f;
-				_gui->getGlobalScreen()->checkValueForm("colorR", newColor.r, { });
-				_gui->getGlobalScreen()->checkValueForm("colorG", newColor.g, { });
-				_gui->getGlobalScreen()->checkValueForm("colorB", newColor.b, { });
-				newColor.r = std::clamp(newColor.r / 255.0f, 0.0f, 1.0f);
-				newColor.g = std::clamp(newColor.g / 255.0f, 0.0f, 1.0f);
-				newColor.b = std::clamp(newColor.b / 255.0f, 0.0f, 1.0f);
-				_fe3d.billboardEntity_setColor(_currentBillboardName, newColor);
-
-				// Updating transparency
-				string textEntityID = screen->getButton("transparent")->getTextfield()->getEntityID();
-				bool isTransparent = _fe3d.billboardEntity_isTransparent(_currentBillboardName);
-				_fe3d.billboardEntity_setTransparent(_currentBillboardName, isTransparent);
-				_fe3d.textEntity_setTextContent(textEntityID, isTransparent ? "No-white: ON" : "No-white: OFF");
-			}
-			else if (_window->getActiveScreen()->getID() == "billboardEditingAnimation")
-			{
-				int animationRowCount = _fe3d.billboardEntity_getAnimationRows(_currentBillboardName);
-				int animationColumnCount = _fe3d.billboardEntity_getAnimationColumns(_currentBillboardName);
-				int animationFramestep = _fe3d.billboardEntity_getAnimationFramestep(_currentBillboardName);
-
-				if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
-				{
-					if (screen->getButton("animate")->isHovered())
-					{
-						_fe3d.billBoardEntity_playSpriteAnimation(_currentBillboardName, -1);
-					}
-					else if (screen->getButton("rows")->isHovered())
-					{
-						_gui->getGlobalScreen()->addValueForm("rows", "Rows", animationRowCount, vec2(0.0f), vec2(0.3f, 0.1f));
-					}
-					else if (screen->getButton("columns")->isHovered())
-					{
-						_gui->getGlobalScreen()->addValueForm("columns", "Columns", animationColumnCount, vec2(0.0f), vec2(0.3f, 0.1f));
-					}
-					else if (screen->getButton("speed")->isHovered())
-					{
-						_gui->getGlobalScreen()->addValueForm("speed", "Frame steps", animationFramestep, vec2(0.0f), vec2(0.3f, 0.1f));
-					}
-					else if (screen->getButton("back")->isHovered())
-					{
-						_window->setActiveScreen("billboardEditingMain");
-					}
-				}
-
-				// Update button hoverability
-				bool playing = _fe3d.billboardEntity_isAnimationPlaying(_currentBillboardName);
-				screen->getButton("animate")->setHoverable(!playing && animationRowCount != 0 && animationColumnCount != 0);
-
-				// Update value filling
-				if (_gui->getGlobalScreen()->checkValueForm("rows", animationRowCount, { 0 }) ||
-					_gui->getGlobalScreen()->checkValueForm("columns", animationColumnCount, { 0 }) ||
-					_gui->getGlobalScreen()->checkValueForm("speed", animationFramestep, { }))
-				{
-					if (playing) // Only if animation is already playing
-					{
-						_fe3d.billBoardEntity_playSpriteAnimation(_currentBillboardName, -1);
-					}
-				}
-
-				// Update animation values
-				_fe3d.billboardEntity_setAnimationRows(_currentBillboardName, animationRowCount);
-				_fe3d.billboardEntity_setAnimationColumns(_currentBillboardName, animationColumnCount);
-				_fe3d.billboardEntity_setAnimationFramestep(_currentBillboardName, animationFramestep);
-			}
-			else if (_window->getActiveScreen()->getID() == "billboardEditingText")
-			{
-				if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
-				{
-					if (screen->getButton("font")->isHovered())
-					{
-						string path = "User\\Assets\\Fonts\\";
-						string fileName = _fe3d.misc_getWinExplorerFilename(path, "TTF");
-
-						// Check if user did not cancel
-						if (fileName != "")
-						{
-							_fe3d.billBoardEntity_setFont(_currentBillboardName, path + fileName);
-						}
-					}
-					else if (screen->getButton("color")->isHovered())
-					{
-						_gui->getGlobalScreen()->addValueForm("colorR", "R(0-255)", _fe3d.billboardEntity_getColor(_currentBillboardName).r * 255.0f, vec2(-0.25f, 0.0f), vec2(0.2f, 0.1f));
-						_gui->getGlobalScreen()->addValueForm("colorG", "G(0-255)", _fe3d.billboardEntity_getColor(_currentBillboardName).g * 255.0f, vec2(0.0f, 0.0f), vec2(0.2f, 0.1f));
-						_gui->getGlobalScreen()->addValueForm("colorB", "B(0-255)", _fe3d.billboardEntity_getColor(_currentBillboardName).b * 255.0f, vec2(0.25f, 0.0f), vec2(0.2f, 0.1f));
-					}
-					else if (screen->getButton("content")->isHovered())
-					{
-						_gui->getGlobalScreen()->addValueForm("content", "Text content", _fe3d.billboardEntity_getTextContent(_currentBillboardName), vec2(0.0f), vec2(0.3f, 0.1f));
-					}
-					else if (screen->getButton("back")->isHovered())
-					{
-						_window->setActiveScreen("billboardEditingMain");
-					}
-				}
-
-				// Updating buttons hoverability
-				screen->getButton("color")->setHoverable(_fe3d.billboardEntity_getFontPath(_currentBillboardName) != "");
-				screen->getButton("content")->setHoverable(_fe3d.billboardEntity_getFontPath(_currentBillboardName) != "");
-
-				// Setting text color
-				vec3 newColor = _fe3d.billboardEntity_getColor(_currentBillboardName) * 255.0f;
-				_gui->getGlobalScreen()->checkValueForm("colorR", newColor.r, { });
-				_gui->getGlobalScreen()->checkValueForm("colorG", newColor.g, { });
-				_gui->getGlobalScreen()->checkValueForm("colorB", newColor.b, { });
-				newColor.r = std::clamp(newColor.r / 255.0f, 0.0f, 1.0f);
-				newColor.g = std::clamp(newColor.g / 255.0f, 0.0f, 1.0f);
-				newColor.b = std::clamp(newColor.b / 255.0f, 0.0f, 1.0f);
-				_fe3d.billboardEntity_setColor(_currentBillboardName, newColor);
-
-				// Updating text content
-				string textContent = "";
-				if (_gui->getGlobalScreen()->checkValueForm("content", textContent, { }))
-				{
-					_fe3d.billBoardEntity_setTextContent(_currentBillboardName, textContent);
-				}
+				_fe3d.billboardEntity_show(_hoveredBillboardID);
 			}
 		}
 	}
@@ -370,22 +149,22 @@ void BillboardEditor::_updateBillboardRemoval()
 {
 	if (_isLoaded)
 	{
-		if (_billboardRemovalEnabled && _currentBillboardName != "")
+		if (_billboardRemovalEnabled && _currentBillboardID != "")
 		{
 			_gui->getGlobalScreen()->addAnswerForm("removeBillboard", "Are you sure?", vec2(0.0f));
 
 			if (_gui->getGlobalScreen()->isAnswerFormConfirmed("removeBillboard"))
 			{
 				_gui->getGlobalScreen()->removeAnswerForm("removeBillboard");
-				_fe3d.billboardEntity_delete(_currentBillboardName);
-				_billboardNames.erase(std::remove(_billboardNames.begin(), _billboardNames.end(), _currentBillboardName), _billboardNames.end());
+				_fe3d.billboardEntity_delete(_currentBillboardID);
+				_billboardNames.erase(std::remove(_billboardNames.begin(), _billboardNames.end(), _currentBillboardID), _billboardNames.end());
 				_billboardRemovalEnabled = false;
-				_currentBillboardName = "";
+				_currentBillboardID = "";
 			}
 			else if (_gui->getGlobalScreen()->isAnswerFormCancelled("removeBillboard"))
 			{
 				_billboardChoosingEnabled = true;
-				_currentBillboardName = "";
+				_currentBillboardID = "";
 			}
 		}
 	}
@@ -395,9 +174,9 @@ void BillboardEditor::_updateBillboardCamera()
 {
 	if (_isLoaded)
 	{
-		if (_currentBillboardName != "")
+		if (_currentBillboardID != "" || _hoveredBillboardID != "")
 		{
-			vec2 billboardSize = _fe3d.billboardEntity_getSize(_currentBillboardName);
+			vec2 billboardSize = _fe3d.billboardEntity_getSize((_currentBillboardID != "") ? _currentBillboardID : _hoveredBillboardID);
 			float cameraDistance = (max(billboardSize.x, billboardSize.y) * 2.0f);
 			float cameraHeight = _billboardPosition.y + (billboardSize.y / 2.0f);
 
@@ -421,8 +200,12 @@ void BillboardEditor::_updateBillboardCamera()
 		}
 		else
 		{
-			_fe3d.camera_setPosition(_defaultCameraPosition);
-			_fe3d.camera_enableLookat(_billboardPosition);
+			// Set to default camera position
+			if (!_billboardChoosingEnabled)
+			{
+				_fe3d.camera_setPosition(_defaultCameraPosition);
+				_fe3d.camera_enableLookat(_billboardPosition);
+			}
 		}
 	}
 }

@@ -81,6 +81,7 @@ private:
 	float _terrainRedUvRepeat = 0.0f;
 	float _terrainGreenUvRepeat = 0.0f;
 	float _terrainBlueUvRepeat = 0.0f;
+	float _terrainBrightness = 1.0f;
 	float _terrainCameraHeight = 0.0f;
 	float _terrainCameraDistance = 0.0f;
 

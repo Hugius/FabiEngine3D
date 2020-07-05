@@ -62,6 +62,10 @@ private:
 
 	std::map<string, unsigned int> _counterMap;
 
+	vec3 _directionalPos = vec3(0.0f);
+
+	float _ambientStrength = 1.0f;
+	float _directionalStrength = 0.0f;
 	float _cameraMovementSpeed = 25.0f;
 	const float _blinkingSpeed = 0.025f;
 	const float _transformationSpeed = 0.05f;

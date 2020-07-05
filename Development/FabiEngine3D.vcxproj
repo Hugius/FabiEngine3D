@@ -230,6 +230,7 @@
     <ClCompile Include="Source\billboard_editor_core.cpp" />
     <ClCompile Include="Source\billboard_editor_misc.cpp" />
     <ClCompile Include="Source\billboard_editor_updates.cpp" />
+    <ClCompile Include="Source\billboard_editor_updates_editing.cpp" />
     <ClCompile Include="Source\billboard_entity.cpp" />
     <ClCompile Include="Source\billboard_entity_manager.cpp" />
     <ClCompile Include="Source\billboard_entity_renderer.cpp" />

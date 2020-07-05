@@ -1,17 +1,12 @@
 #include "world_editor.hpp"
 
+#include <algorithm>
+
 void WorldEditor::_updateTerrainMenu()
 {
 	if (_currentWorldPart == WorldPart::TERRAIN)
 	{
 		auto screen = _window->getScreen("terrainMenu");
-
-		// Show sky
-		if (_fe3d.skyEntity_isExisting("@sky"))
-		{
-			_fe3d.skyEntity_select("@sky");
-			_fe3d.skyEntity_show("@sky");
-		}
 
 		// If terrain existing, show terrain
 		if (_fe3d.terrainEntity_isExisting("@terrain"))
@@ -21,6 +16,13 @@ void WorldEditor::_updateTerrainMenu()
 		else // Otherwise just show default sky
 		{
 			_fe3d.skyEntity_select("@defaultSky");
+		}
+
+		// Show sky
+		if (_fe3d.skyEntity_isExisting("@sky"))
+		{
+			_fe3d.skyEntity_select("@sky");
+			_fe3d.skyEntity_show("@sky");
 		}
 
 		// Hide water
@@ -120,6 +122,10 @@ void WorldEditor::_updateTerrainMesh()
 			{
 				_gui->getGlobalScreen()->addValueForm("uvRepeat", "UV repeat", _terrainUvRepeat, vec2(0.0f), vec2(0.3f, 0.1f));
 			}
+			else if (screen->getScrollingList("buttonList")->getButton("brightness")->isHovered())
+			{
+				_gui->getGlobalScreen()->addValueForm("brightness", "Brightness (0-100)", _terrainBrightness * 100.0f, vec2(0.0f), vec2(0.3f, 0.1f));
+			}
 			else if (screen->getButton("load")->isHovered())
 			{
 				_loadTerrainEntity();
@@ -134,6 +140,12 @@ void WorldEditor::_updateTerrainMesh()
 		_gui->getGlobalScreen()->checkValueForm("size", _terrainSize);
 		_gui->getGlobalScreen()->checkValueForm("maxHeight", _maxTerrainHeight);
 		_gui->getGlobalScreen()->checkValueForm("uvRepeat", _terrainUvRepeat);
+
+		// Brightness value conversion
+		if (_gui->getGlobalScreen()->checkValueForm("brightness", _terrainBrightness))
+		{
+			_terrainBrightness = std::clamp(_terrainBrightness / 100.0f, 0.0f, 1.0f);
+		}
 
 		// Filling statuses
 		bool heightmap = _terrainHeightmapPath != "";

@@ -6,7 +6,7 @@ void WorldEditor::update()
 	{
 		if (_currentWorldPart == WorldPart::NONE)
 		{
-			auto screen = _window->getScreen("worldManagement");
+			auto screen = _leftWindow->getScreen("worldManagement");
 
 			// Set default camera view
 			_fe3d.camera_setPosition(vec3(0.0f));
@@ -40,17 +40,17 @@ void WorldEditor::update()
 			{
 				if (screen->getButton("sky")->isHovered())
 				{
-					_window->setActiveScreen("skyMenu");
+					_leftWindow->setActiveScreen("skyMenu");
 					_currentWorldPart = WorldPart::SKY;
 				}
 				else if (screen->getButton("terrain")->isHovered())
 				{
-					_window->setActiveScreen("terrainMenu");
+					_leftWindow->setActiveScreen("terrainMenu");
 					_currentWorldPart = WorldPart::TERRAIN;
 				}
 				else if (screen->getButton("water")->isHovered())
 				{
-					_window->setActiveScreen("waterMenu");
+					_leftWindow->setActiveScreen("waterMenu");
 					_currentWorldPart = WorldPart::WATER;
 				}
 				else if (screen->getButton("back")->isHovered())
@@ -63,12 +63,12 @@ void WorldEditor::update()
 			if (_gui->getGlobalScreen()->isAnswerFormConfirmed("exitWorldEditor"))
 			{
 				save();
-				_window->setActiveScreen("main");
+				_leftWindow->setActiveScreen("main");
 				unload();
 			}
 			else if (_gui->getGlobalScreen()->isAnswerFormCancelled("exitWorldEditor"))
 			{
-				_window->setActiveScreen("main");
+				_leftWindow->setActiveScreen("main");
 				unload();
 			}
 		}

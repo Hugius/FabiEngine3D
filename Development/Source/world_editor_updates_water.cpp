@@ -6,7 +6,7 @@ void WorldEditor::_updateWaterMenu()
 {
 	if (_currentWorldPart == WorldPart::WATER)
 	{
-		auto screen = _window->getScreen("waterMenu");
+		auto screen = _leftWindow->getScreen("waterMenu");
 
 		// If water existing, show water and enable bloom
 		if (_fe3d.waterEntity_isExisting("@water"))
@@ -44,7 +44,7 @@ void WorldEditor::_updateWaterMenu()
 		{
 			if (screen->getButton("create")->isHovered() || screen->getButton("edit")->isHovered())
 			{
-				_window->setActiveScreen("waterManagement");
+				_leftWindow->setActiveScreen("waterManagement");
 			}
 			else if (screen->getButton("remove")->isHovered())
 			{
@@ -52,7 +52,7 @@ void WorldEditor::_updateWaterMenu()
 			}
 			else if (screen->getButton("back")->isHovered())
 			{
-				_window->setActiveScreen("worldManagement");
+				_leftWindow->setActiveScreen("worldManagement");
 				_currentWorldPart = WorldPart::NONE;
 			}
 		}
@@ -63,26 +63,26 @@ void WorldEditor::_updateWaterManagement()
 {
 	if (_currentWorldPart == WorldPart::WATER)
 	{
-		auto screen = _window->getScreen("waterManagement");
+		auto screen = _leftWindow->getScreen("waterManagement");
 
 		// GUI management
 		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
 		{
 			if (screen->getButton("mesh")->isHovered())
 			{
-				_window->setActiveScreen("waterMesh");
+				_leftWindow->setActiveScreen("waterMesh");
 			}
 			else if (screen->getButton("effects")->isHovered())
 			{
-				_window->setActiveScreen("waterEffects");
+				_leftWindow->setActiveScreen("waterEffects");
 			}
 			else if (screen->getButton("options")->isHovered())
 			{
-				_window->setActiveScreen("waterOptions");
+				_leftWindow->setActiveScreen("waterOptions");
 			}
 			else if (screen->getButton("back")->isHovered())
 			{
-				_window->setActiveScreen("waterMenu");
+				_leftWindow->setActiveScreen("waterMenu");
 
 				// Hide sky
 				if (_fe3d.skyEntity_isExisting("@sky"))
@@ -139,9 +139,9 @@ void WorldEditor::_updateWaterManagement()
 
 void WorldEditor::_updateWaterMesh()
 {
-	if (_window->getActiveScreen()->getID() == "waterMesh")
+	if (_leftWindow->getActiveScreen()->getID() == "waterMesh")
 	{
-		auto screen = _window->getScreen("waterMesh");
+		auto screen = _leftWindow->getScreen("waterMesh");
 
 		// Pressed LMB
 		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
@@ -156,7 +156,7 @@ void WorldEditor::_updateWaterMesh()
 			}
 			else if (screen->getButton("back")->isHovered())
 			{
-				_window->setActiveScreen("waterManagement");
+				_leftWindow->setActiveScreen("waterManagement");
 			}
 		}
 
@@ -193,9 +193,9 @@ void WorldEditor::_updateWaterMesh()
 
 void WorldEditor::_updateWaterEffects()
 {
-	if (_window->getActiveScreen()->getID() == "waterEffects")
+	if (_leftWindow->getActiveScreen()->getID() == "waterEffects")
 	{
-		auto screen = _window->getScreen("waterEffects");
+		auto screen = _leftWindow->getScreen("waterEffects");
 		string dudvmapPath = "User\\Assets\\Textures\\DudvMaps\\";
 		string normalmapPath = "User\\Assets\\Textures\\NormalMaps\\";
 
@@ -248,7 +248,7 @@ void WorldEditor::_updateWaterEffects()
 			}
 			else if (screen->getButton("back")->isHovered())
 			{
-				_window->setActiveScreen("waterManagement");
+				_leftWindow->setActiveScreen("waterManagement");
 			}
 		}
 
@@ -263,9 +263,9 @@ void WorldEditor::_updateWaterEffects()
 
 void WorldEditor::_updateWaterOptions()
 {
-	if (_window->getActiveScreen()->getID() == "waterOptions")
+	if (_leftWindow->getActiveScreen()->getID() == "waterOptions")
 	{
-		auto screen = _window->getScreen("waterOptions");
+		auto screen = _leftWindow->getScreen("waterOptions");
 
 		// GUI management
 		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
@@ -290,7 +290,7 @@ void WorldEditor::_updateWaterOptions()
 			}
 			else if (screen->getButton("back")->isHovered())
 			{
-				_window->setActiveScreen("waterManagement");
+				_leftWindow->setActiveScreen("waterManagement");
 			}
 		}
 

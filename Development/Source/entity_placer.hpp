@@ -31,17 +31,27 @@ public:
 	bool isLoaded();
 
 private:
-	void _placeModel(string modelID, string modelName, vec3 position, vec3 rotation, vec3 size);
+	// Menus
 	void _updateManagementScreen();
 	void _updateModelScreen();
 	void _updateBillboardScreen();
 	void _updateLightScreen();
+	void _updateAmbientLightScreen();
+	void _updateDirectionalLightScreen();
+	void _updatePointLightScreen();
+
+	// Placement
 	void _updateModelPlacing();
 	void _updateBilboardPlacing();
 	void _updateLightPlacing();
+
+	// Editing
 	void _updateModelEditing();
 	void _updateBillboardEditing();
 	void _updateLightEditing();
+
+	// Miscellaneous
+	void _placeModel(string modelID, string modelName, vec3 position, vec3 rotation, vec3 size);
 	void _updateCamera();
 	void _updateMiscellaneous();
 
@@ -64,7 +74,7 @@ private:
 
 	vec3 _directionalPos = vec3(0.0f);
 
-	float _ambientStrength = 1.0f;
+	float _ambientStrength = 0.5f;
 	float _directionalStrength = 0.0f;
 	float _cameraMovementSpeed = 25.0f;
 	const float _blinkingSpeed = 0.025f;

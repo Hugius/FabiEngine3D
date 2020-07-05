@@ -23,6 +23,7 @@ public:
 	void addButton(const string& ID, vec2 position, vec2 size, vec3 color, vec3 hoverColor, string textContent, vec3 textColor, vec3 textHoverColor);
 	void addButton(const string& ID, vec2 position, vec2 size, const string& textureName, vec3 hoverColor);
 	void addRectangle(const string& ID, vec2 position, vec2 size, vec3 color);
+	void addRectangle(const string& ID, vec2 position, vec2 size, const string& textureName);
 	void addTextfield(const string& ID, vec2 position, vec2 size, string textContent, vec3 textColor);
 
 	bool checkScrollingList(const string& ID);

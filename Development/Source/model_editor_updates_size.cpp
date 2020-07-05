@@ -4,7 +4,7 @@
 
 void ModelEditor::_updateModelEditingSize()
 {
-	auto screen = _window->getScreen("modelEditingSize");
+	auto screen = _leftWindow->getScreen("modelEditingSize");
 	
 	// GUI management 
 	if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
@@ -75,7 +75,7 @@ void ModelEditor::_updateModelEditingSize()
 			_fe3d.textEntity_setTextContent(screen->getButton("toggleResizeBox")->getTextfield()->getEntityID(), "Box resize: OFF");
 			_fe3d.textEntity_setTextContent(screen->getButton("toggleBoxView")->getTextfield()->getEntityID(), "Hitbox: OFF");
 			_fe3d.collision_disableFrameRendering();
-			_window->setActiveScreen("modelEditingMain");
+			_leftWindow->setActiveScreen("modelEditingMain");
 		}
 	}
 

@@ -6,7 +6,7 @@ void WorldEditor::_updateSkyMenu()
 {
 	if (_currentWorldPart == WorldPart::SKY)
 	{
-		auto screen = _window->getScreen("skyMenu");
+		auto screen = _leftWindow->getScreen("skyMenu");
 
 		// If sky existing, show sky
 		if (_fe3d.skyEntity_isExisting("@sky"))
@@ -47,7 +47,7 @@ void WorldEditor::_updateSkyMenu()
 		{
 			if (screen->getButton("create")->isHovered() || screen->getButton("edit")->isHovered())
 			{
-				_window->setActiveScreen("skyManagement");
+				_leftWindow->setActiveScreen("skyManagement");
 			}
 			else if (screen->getButton("remove")->isHovered())
 			{
@@ -55,7 +55,7 @@ void WorldEditor::_updateSkyMenu()
 			}
 			else if (screen->getButton("back")->isHovered())
 			{
-				_window->setActiveScreen("worldManagement");
+				_leftWindow->setActiveScreen("worldManagement");
 				_currentWorldPart = WorldPart::NONE;
 			}
 		}
@@ -64,24 +64,24 @@ void WorldEditor::_updateSkyMenu()
 
 void WorldEditor::_updateSkyManagement()
 {
-	if (_window->getActiveScreen()->getID() == "skyManagement")
+	if (_leftWindow->getActiveScreen()->getID() == "skyManagement")
 	{
-		auto screen = _window->getScreen("skyManagement");
+		auto screen = _leftWindow->getScreen("skyManagement");
 
 		// GUI management
 		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
 		{
 			if (screen->getButton("mesh")->isHovered())
 			{
-				_window->setActiveScreen("skyMesh");
+				_leftWindow->setActiveScreen("skyMesh");
 			}
 			else if (screen->getButton("options")->isHovered())
 			{
-				_window->setActiveScreen("skyOptions");
+				_leftWindow->setActiveScreen("skyOptions");
 			}
 			else if (screen->getButton("back")->isHovered())
 			{
-				_window->setActiveScreen("skyMenu");
+				_leftWindow->setActiveScreen("skyMenu");
 			}
 		}
 
@@ -92,9 +92,9 @@ void WorldEditor::_updateSkyManagement()
 
 void WorldEditor::_updateSkyMesh()
 {
-	if (_window->getActiveScreen()->getID() == "skyMesh")
+	if (_leftWindow->getActiveScreen()->getID() == "skyMesh")
 	{
-		auto screen = _window->getScreen("skyMesh");
+		auto screen = _leftWindow->getScreen("skyMesh");
 		string cubemapPath = "User\\Assets\\Textures\\CubeMaps\\";
 
 		// GUI management
@@ -136,7 +136,7 @@ void WorldEditor::_updateSkyMesh()
 			}
 			else if (screen->getButton("back")->isHovered())
 			{
-				_window->setActiveScreen("skyManagement");
+				_leftWindow->setActiveScreen("skyManagement");
 			}
 		}
 
@@ -148,9 +148,9 @@ void WorldEditor::_updateSkyMesh()
 
 void WorldEditor::_updateSkyOptions()
 {
-	if (_window->getActiveScreen()->getID() == "skyOptions")
+	if (_leftWindow->getActiveScreen()->getID() == "skyOptions")
 	{
-		auto screen = _window->getScreen("skyOptions");
+		auto screen = _leftWindow->getScreen("skyOptions");
 
 		// GUI management
 		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
@@ -171,7 +171,7 @@ void WorldEditor::_updateSkyOptions()
 			}
 			else if (screen->getButton("back")->isHovered())
 			{
-				_window->setActiveScreen("skyManagement");
+				_leftWindow->setActiveScreen("skyManagement");
 			}
 		}
 

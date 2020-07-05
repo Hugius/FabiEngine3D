@@ -29,7 +29,7 @@ void EntityPlacer::_updateManagementScreen()
 {
 	if (_isLoaded)
 	{
-		auto screen = _leftWindow->getScreen("placeManagement");
+		auto screen = _leftWindow->getScreen("placingManagement");
 
 		// GUI management
 		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
@@ -44,7 +44,7 @@ void EntityPlacer::_updateManagementScreen()
 			}
 			else if (screen->getButton("placeLight")->isHovered()) // Place light button
 			{
-				_leftWindow->setActiveScreen("lightPlaceManagement");
+				_leftWindow->setActiveScreen("lightManagement");
 			}
 			else if (screen->getButton("setSpeed")->isHovered()) // Set speed button
 			{
@@ -112,7 +112,7 @@ void EntityPlacer::_updateModelScreen()
 			// Back button
 			if (screen->getButton("back")->isHovered()) 
 			{
-				_leftWindow->setActiveScreen("placeManagement");
+				_leftWindow->setActiveScreen("placingManagement");
 			}
 		}
 	}
@@ -130,7 +130,7 @@ void EntityPlacer::_updateBillboardScreen()
 			// Back button
 			if (screen->getButton("back")->isHovered())
 			{
-				_leftWindow->setActiveScreen("placeManagement");
+				_leftWindow->setActiveScreen("placingManagement");
 			}
 		}
 	}
@@ -140,39 +140,105 @@ void EntityPlacer::_updateLightScreen()
 {
 	if (_isLoaded)
 	{
-		auto screen = _leftWindow->getScreen("lightPlaceManagement");
+		auto screen = _leftWindow->getScreen("lightManagement");
 
 		// GUI management
 		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
 		{
 			if (screen->getButton("ambient")->isHovered()) // Ambient light button
 			{
-				_gui->getGlobalScreen()->addValueForm("ambient", "Ambient strength (0 - 100)", _ambientStrength * 100.0f, vec2(0.0f), vec2(0.3f, 0.1f));
+				_leftWindow->setActiveScreen("ambientLightManagement");
 			}
 			else if (screen->getButton("directional")->isHovered()) // Directional light button
 			{
-				
+				_leftWindow->setActiveScreen("directionalLightManagement");
 			}
 			else if (screen->getButton("point")->isHovered()) // Point light button
 			{
-				
+				_leftWindow->setActiveScreen("pointLightManagement");
 			}
 			else if (screen->getButton("back")->isHovered()) // Back button
 			{
-				_leftWindow->setActiveScreen("placeManagement");
+				_leftWindow->setActiveScreen("placingManagement");
+			}
+		}
+
+		// Update all lighting screens
+		_updateAmbientLightScreen();
+		_updateDirectionalLightScreen();
+		_updatePointLightScreen();
+	}
+}
+
+void EntityPlacer::_updateAmbientLightScreen()
+{
+	if (_isLoaded)
+	{
+		auto screen = _leftWindow->getScreen("ambientLightManagement");
+
+		// GUI management
+		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
+		{
+			if (screen->getButton("color")->isHovered())
+			{
+
+			}
+			else if (screen->getButton("strength")->isHovered())
+			{
+				_gui->getGlobalScreen()->addValueForm("strength", "Ambient strength (0 - 100)", _ambientStrength * 100.0f, vec2(0.0f), vec2(0.3f, 0.1f));
+			}
+			else if (screen->getButton("back")->isHovered())
+			{
+				_leftWindow->setActiveScreen("lightManagement");
 			}
 		}
 
 		// Ambient value conversion
-		if (_gui->getGlobalScreen()->checkValueForm("ambient", _ambientStrength))
+		if (_gui->getGlobalScreen()->checkValueForm("strength", _ambientStrength))
 		{
-			_ambientStrength = std::clamp(_ambientStrength / 100.0f, 0.0f, 1.0f);
+			_ambientStrength = std::clamp((_ambientStrength / 100.0f), 0.0f, 1.0f);
 		}
 
-		// Update lighting values
-		_fe3d.gfx_enableAmbientLighting(_ambientStrength);
+		// Update ambient lighting
+		_fe3d.gfx_enableAmbientLighting(_ambientStrength * 2.0f);
+	}
+}
+
+void EntityPlacer::_updateDirectionalLightScreen()
+{
+	if (_isLoaded)
+	{
+		auto screen = _leftWindow->getScreen("directionalLightManagement");
+
+		// GUI management
+		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
+		{
+			if (screen->getButton("color")->isHovered())
+			{
+				_leftWindow->setActiveScreen("lightManagement");
+			}
+			else if (screen->getButton("position")->isHovered())
+			{
+
+			}
+			else if (screen->getButton("strength")->isHovered())
+			{
+
+			}
+			else if (screen->getButton("back")->isHovered())
+			{
+
+			}
+		}
+
+		// Update directional lighting
 		_fe3d.gfx_enableDirectionalLighting(_directionalPos, _directionalStrength);
 	}
+}
+
+void EntityPlacer::_updatePointLightScreen()
+{
+
 }
 
 void EntityPlacer::_updateCamera()

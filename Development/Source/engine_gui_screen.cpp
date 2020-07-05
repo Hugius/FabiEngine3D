@@ -149,6 +149,12 @@ void EngineGuiScreen::addRectangle(const string& ID, vec2 position, vec2 size, v
 	_rectangles.push_back(make_shared<EngineGuiRectangle>(_fe3d, _parentID + "_" + _ID, ID, vec2(dimensions.x, dimensions.y), vec2(dimensions.z, dimensions.w), color));
 }
 
+void EngineGuiScreen::addRectangle(const string& ID, vec2 position, vec2 size, const string& textureName)
+{
+	auto dimensions = _convertDimensions(position, size);
+	_rectangles.push_back(make_shared<EngineGuiRectangle>(_fe3d, _parentID + "_" + _ID, ID, vec2(dimensions.x, dimensions.y), vec2(dimensions.z, dimensions.w), textureName));
+}
+
 void EngineGuiScreen::addTextfield(const string& ID, vec2 position, vec2 size, string textContent, vec3 textColor)
 {
 	auto dimensions = _convertDimensions(position, size);

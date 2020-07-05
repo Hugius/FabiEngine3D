@@ -57,6 +57,11 @@ void EngineGuiGlobalScreen::addRectangle(const string& ID, vec2 position, vec2 s
 	_rectangles.push_back(make_shared<EngineGuiRectangle>(_fe3d, "globalscreen", ID, position, size, color));
 }
 
+void EngineGuiGlobalScreen::addRectangle(const string& ID, vec2 position, vec2 size, const string& textureName)
+{
+	_rectangles.push_back(make_shared<EngineGuiRectangle>(_fe3d, "globalscreen", ID, position, size, textureName));
+}
+
 void EngineGuiGlobalScreen::addTextfield(const string& ID, vec2 position, vec2 size, string textContent, vec3 textColor)
 {
 	_textfields.push_back(make_shared<EngineGuiTextfield>(_fe3d, "globalscreen", ID, position, size, textContent, textColor));

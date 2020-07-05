@@ -17,7 +17,7 @@ void ModelEditor::_updateManagementScreen()
 {
 	if (_isLoaded)
 	{
-		auto screen = _window->getScreen("modelManagement");
+		auto screen = _leftWindow->getScreen("modelManagement");
 
 		// GUI management
 		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
@@ -53,12 +53,12 @@ void ModelEditor::_updateManagementScreen()
 		if (_gui->getGlobalScreen()->isAnswerFormConfirmed("exitModelEditor"))
 		{
 			save();
-			_window->setActiveScreen("main");
+			_leftWindow->setActiveScreen("main");
 			unload();
 		}
 		else if (_gui->getGlobalScreen()->isAnswerFormCancelled("exitModelEditor"))
 		{
-			_window->setActiveScreen("main");
+			_leftWindow->setActiveScreen("main");
 			unload();
 		}
 	}

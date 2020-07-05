@@ -6,7 +6,7 @@ void WorldEditor::_updateTerrainMenu()
 {
 	if (_currentWorldPart == WorldPart::TERRAIN)
 	{
-		auto screen = _window->getScreen("terrainMenu");
+		auto screen = _leftWindow->getScreen("terrainMenu");
 
 		// If terrain existing, show terrain
 		if (_fe3d.terrainEntity_isExisting("@terrain"))
@@ -44,7 +44,7 @@ void WorldEditor::_updateTerrainMenu()
 		{
 			if (screen->getButton("create")->isHovered() || screen->getButton("edit")->isHovered())
 			{
-				_window->setActiveScreen("terrainManagement");
+				_leftWindow->setActiveScreen("terrainManagement");
 			}
 			else if (screen->getButton("remove")->isHovered())
 			{
@@ -52,7 +52,7 @@ void WorldEditor::_updateTerrainMenu()
 			}
 			else if (screen->getButton("back")->isHovered())
 			{
-				_window->setActiveScreen("worldManagement");
+				_leftWindow->setActiveScreen("worldManagement");
 				_currentWorldPart = WorldPart::NONE;
 			}
 		}
@@ -61,22 +61,22 @@ void WorldEditor::_updateTerrainMenu()
 
 void WorldEditor::_updateTerrainManagement()
 {
-	auto screen = _window->getScreen("terrainManagement");
+	auto screen = _leftWindow->getScreen("terrainManagement");
 
 	// GUI management
 	if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
 	{
 		if (screen->getButton("mesh")->isHovered())
 		{
-			_window->setActiveScreen("terrainMesh");
+			_leftWindow->setActiveScreen("terrainMesh");
 		}
 		else if (screen->getButton("blendmap")->isHovered())
 		{
-			_window->setActiveScreen("terrainBlendmap");
+			_leftWindow->setActiveScreen("terrainBlendmap");
 		}
 		else if (screen->getButton("back")->isHovered())
 		{
-			_window->setActiveScreen("terrainMenu");
+			_leftWindow->setActiveScreen("terrainMenu");
 		}
 	}
 
@@ -91,9 +91,9 @@ void WorldEditor::_updateTerrainManagement()
 
 void WorldEditor::_updateTerrainMesh()
 {
-	if (_window->getActiveScreen()->getID() == "terrainMesh")
+	if (_leftWindow->getActiveScreen()->getID() == "terrainMesh")
 	{
-		auto screen = _window->getScreen("terrainMesh");
+		auto screen = _leftWindow->getScreen("terrainMesh");
 		string heightmapPath = "User\\Assets\\Textures\\HeightMaps\\";
 		string diffusemapPath = "User\\Assets\\Textures\\DiffuseMaps\\";
 
@@ -132,7 +132,7 @@ void WorldEditor::_updateTerrainMesh()
 			}
 			else if (screen->getButton("back")->isHovered())
 			{
-				_window->setActiveScreen("terrainManagement");
+				_leftWindow->setActiveScreen("terrainManagement");
 			}
 		}
 
@@ -165,9 +165,9 @@ void WorldEditor::_updateTerrainMesh()
 
 void WorldEditor::_updateTerrainBlendmap()
 {
-	if (_window->getActiveScreen()->getID() == "terrainBlendmap")
+	if (_leftWindow->getActiveScreen()->getID() == "terrainBlendmap")
 	{
-		auto screen = _window->getScreen("terrainBlendmap");
+		auto screen = _leftWindow->getScreen("terrainBlendmap");
 		string blendmapPath = "User\\Assets\\Textures\\BlendMaps\\";
 		string diffusemapPath = "User\\Assets\\Textures\\DiffuseMaps\\";
 
@@ -213,7 +213,7 @@ void WorldEditor::_updateTerrainBlendmap()
 			}
 			else if (screen->getButton("back")->isHovered())
 			{
-				_window->setActiveScreen("terrainManagement");
+				_leftWindow->setActiveScreen("terrainManagement");
 			}
 		}
 

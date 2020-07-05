@@ -14,7 +14,7 @@ void BillboardEditor::_updateBillboardManagement()
 {
 	if (_isLoaded)
 	{
-		auto screen = _window->getScreen("billboardManagement");
+		auto screen = _leftWindow->getScreen("billboardManagement");
 
 		// GUI management
 		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
@@ -50,12 +50,12 @@ void BillboardEditor::_updateBillboardManagement()
 		if (_gui->getGlobalScreen()->isAnswerFormConfirmed("exitBillboardEditor"))
 		{
 			save();
-			_window->setActiveScreen("main");
+			_leftWindow->setActiveScreen("main");
 			unload();
 		}
 		else if (_gui->getGlobalScreen()->isAnswerFormCancelled("exitBillboardEditor"))
 		{
-			_window->setActiveScreen("main");
+			_leftWindow->setActiveScreen("main");
 			unload();
 		}
 	}

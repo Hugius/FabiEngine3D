@@ -30,12 +30,14 @@ public:
 	void setShadowMatrix(const mat4 & val);
 
 	// Vectors
-	void setCameraPos(vec3 val);
-	void setDirLightPos(vec3 val);
+	void setCameraPosition(vec3 val);
+	void setAmbientLightColor(vec3 val);
+	void setDirectionalLightPos(vec3 val);
+	void setDirectionalLightColor(vec3 val);
 
 	// Floats
-	void setAmbLightStrength(float val);
-	void setDirLightStrength(float val);
+	void setAmbientLightStrength(float val);
+	void setDirectionalLightStrength(float val);
 	void setFogMinDistance(float val);
 	void setBloomIntensity(float val);
 	void setBloomTreshold(float val);
@@ -54,10 +56,10 @@ public:
 
 	// Booleans
 	void setMSAAEnabled(bool val);
-	void setAmbLightEnabled(bool val);
-	void setDirLightEnabled(bool val);
-	void setSpecLightEnabled(bool val);
-	void setPointLightEnabled(bool val);
+	void setAmbientLightingEnabled(bool val);
+	void setDirectionalLightingEnabled(bool val);
+	void setSpecularLightingEnabled(bool val);
+	void setPointLightingEnabled(bool val);
 	void setFogEnabled(bool val);
 	void setLightMappingEnabled(bool val);
 	void setSkyReflectionsEnabled(bool val);
@@ -92,47 +94,49 @@ public:
 	const mat4 & getShadowMatrix()      const;
 
 	// Vectors
-	const vec3  getCameraPos()   const;
-	const vec3  getDirLightPos() const;
+	const vec3 getCameraPos()			  const;
+	const vec3 getAmbientLightColor()	  const;
+	const vec3 getDirectionalLightColor() const;
+	const vec3 getDirectionalLightPos()	  const;
 
 	// Floats
-	const float getAmbLightStrength()      const;
-	const float getDirLightStrength()      const;
-	const float getFogMinDistance()        const;
-	const float getBloomIntensity()        const;
-	const float getBloomTreshold()         const;
-	const float getCameraYaw()             const;
-	const float getCameraPitch()           const;
-	const float getNearZ()                 const;
-	const float getFarZ()                  const;
-	const float getDofMinDistance()        const;
-	const float getSkyReflectionMixValue() const;
-	const float getSkyReflectionFactor()   const;
-	const float getSceneReflectionHeight() const;
-	const float getSceneReflectionFactor() const;
+	const float getAmbLightStrength()		  const;
+	const float getDirectionalLightStrength() const;
+	const float getFogMinDistance()			  const;
+	const float getBloomIntensity()			  const;
+	const float getBloomTreshold()			  const;
+	const float getCameraYaw()				  const;
+	const float getCameraPitch()			  const;
+	const float getNearZ()					  const;
+	const float getFarZ()					  const;
+	const float getDofMinDistance()			  const;
+	const float getSkyReflectionMixValue()	  const;
+	const float getSkyReflectionFactor()	  const;
+	const float getSceneReflectionHeight()	  const;
+	const float getSceneReflectionFactor()	  const;
 
 	// Integers
 	const int getBloomBlurSize() const;
 
 	// Booleans
-	const bool isMSAAEnabled()             const;
-	const bool isAmbLightingEnabled()      const;
-	const bool isDirLightingEnabled()      const;
-	const bool isSpecLightingEnabled()     const;
-	const bool isPointLightingEnabled()    const;
-	const bool isFogEnabled()              const;
-	const bool isLightMappingEnabled()     const;
-	const bool isSkyReflectionsEnabled()   const;
-	const bool isSceneReflectionsEnabled() const;
-	const bool isBloomEnabled()            const;
-	const bool isWaterEffectsEnabled()     const;
-	const bool isSkyHdrEnabled()           const;
-	const bool isShadowsEnabled()          const;
-	const bool isDofEnabled()              const;
-	const bool isMotionBlurEnabled()       const;
-	const bool isWireframeEnabled()        const;
-	const bool isAabbFrameEnabled()        const;
-	const bool isDebugRenderEnabled()      const;
+	const bool isMSAAEnabled()                const;
+	const bool isAmbientLightingEnabled()     const;
+	const bool isDirectionalLightingEnabled() const;
+	const bool isSpecularLightingEnabled()    const;
+	const bool isPointLightingEnabled()       const;
+	const bool isFogEnabled()                 const;
+	const bool isLightMappingEnabled()        const;
+	const bool isSkyReflectionsEnabled()      const;
+	const bool isSceneReflectionsEnabled()    const;
+	const bool isBloomEnabled()               const;
+	const bool isWaterEffectsEnabled()        const;
+	const bool isSkyHdrEnabled()              const;
+	const bool isShadowsEnabled()             const;
+	const bool isDofEnabled()                 const;
+	const bool isMotionBlurEnabled()          const;
+	const bool isWireframeEnabled()           const;
+	const bool isAabbFrameEnabled()           const;
+	const bool isDebugRenderEnabled()         const;
 
 private:
 	// Textures
@@ -155,8 +159,10 @@ private:
 	mat4 _shadowMatrix      = mat4(1.0f);
 
 	// Vectors
-	vec3  _cameraPosition   = vec3(0.0f);
-	vec3  _dirLightPosition = vec3(0.0f);
+	vec3  _cameraPosition			= vec3(0.0f);
+	vec3  _ambientLightColor		= vec3(1.0f);
+	vec3  _directionalLightColor    = vec3(1.0f);
+	vec3  _directionalLightPosition = vec3(0.0f);
 
 	// Floats
 	float _ambientLightingStrength     = 0.0f;

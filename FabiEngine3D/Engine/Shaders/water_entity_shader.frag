@@ -14,8 +14,8 @@ layout(location = 3) uniform sampler2D u_sampler_dudvMap;
 layout(location = 4) uniform sampler2D u_sampler_normalMap;
 
 // Uniforms
-uniform vec3  u_dirLightPos;
-uniform vec3  u_cameraPos;
+uniform vec3  u_directionalLightPos;
+uniform vec3  u_cameraPosition;
 uniform vec3  u_color;
 uniform float u_ripplePos;
 uniform float u_fogMinDistance;
@@ -88,8 +88,8 @@ vec4 getMainColor()
 	// Specular lighting
 	if(u_isSpecular)
 	{
-		vec3 lightDir      = normalize(u_dirLightPos - f_pos);
-		vec3 viewDir       = normalize(f_pos - u_cameraPos);
+		vec3 lightDir      = normalize(u_directionalLightPos - f_pos);
+		vec3 viewDir       = normalize(f_pos - u_cameraPosition);
 		vec3 reflectDir    = reflect(normalize(lightDir), normal);
 		specStrength = pow(max(dot(reflectDir, viewDir), 0.0f), u_shininess);
 	}
@@ -132,7 +132,7 @@ vec3 applyFog(vec3 color)
 {
 	if(u_fogEnabled)
 	{
-		float  distance    = length(f_pos.xyz - u_cameraPos);
+		float  distance    = length(f_pos.xyz - u_cameraPosition);
 		vec3   foggedColor = mix(vec3(0.75f, 0.75f, 0.75f), color, min(u_fogMinDistance / distance, 1.0f));
 		return foggedColor;
 	}

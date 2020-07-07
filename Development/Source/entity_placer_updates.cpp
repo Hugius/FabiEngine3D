@@ -181,11 +181,13 @@ void EntityPlacer::_updateAmbientLightScreen()
 		{
 			if (screen->getButton("color")->isHovered())
 			{
-
+				_gui->getGlobalScreen()->addValueForm("ambientColorG", "G(0-255)", _ambientColor.g * 255.0f, vec2(0.0f, 0.0f), vec2(0.2f, 0.1f));
+				_gui->getGlobalScreen()->addValueForm("ambientColorR", "R(0-255)", _ambientColor.r * 255.0f, vec2(-0.25f, 0.0f), vec2(0.2f, 0.1f));
+				_gui->getGlobalScreen()->addValueForm("ambientColorB", "B(0-255)", _ambientColor.b * 255.0f, vec2(0.25f, 0.0f), vec2(0.2f, 0.1f));
 			}
 			else if (screen->getButton("strength")->isHovered())
 			{
-				_gui->getGlobalScreen()->addValueForm("strength", "Ambient strength (0 - 100)", _ambientStrength * 100.0f, vec2(0.0f), vec2(0.3f, 0.1f));
+				_gui->getGlobalScreen()->addValueForm("ambientStrength", "Ambient strength", _ambientStrength * 100.0f, vec2(0.0f), vec2(0.3f, 0.1f));
 			}
 			else if (screen->getButton("back")->isHovered())
 			{
@@ -194,13 +196,31 @@ void EntityPlacer::_updateAmbientLightScreen()
 		}
 
 		// Ambient value conversion
-		if (_gui->getGlobalScreen()->checkValueForm("strength", _ambientStrength))
+		if (_gui->getGlobalScreen()->checkValueForm("ambientStrength", _ambientStrength))
 		{
-			_ambientStrength = std::clamp((_ambientStrength / 100.0f), 0.0f, 1.0f);
+			_ambientStrength /= 100.0f;
+		}
+
+		// Color R values conversion
+		if (_gui->getGlobalScreen()->checkValueForm("ambientColorR", _ambientColor.r))
+		{
+			_ambientColor.r = std::clamp(_ambientColor.r / 255.0f, 0.0f, 1.0f);
+		}
+
+		// Color G values conversion
+		if (_gui->getGlobalScreen()->checkValueForm("ambientColorG", _ambientColor.g))
+		{
+			_ambientColor.g = std::clamp(_ambientColor.g / 255.0f, 0.0f, 1.0f);
+		}
+
+		// Color B values conversion
+		if (_gui->getGlobalScreen()->checkValueForm("ambientColorB", _ambientColor.b))
+		{
+			_ambientColor.b = std::clamp(_ambientColor.b / 255.0f, 0.0f, 1.0f);
 		}
 
 		// Update ambient lighting
-		_fe3d.gfx_enableAmbientLighting(_ambientStrength * 2.0f);
+		_fe3d.gfx_enableAmbientLighting(_ambientColor, _ambientStrength);
 	}
 }
 
@@ -215,24 +235,57 @@ void EntityPlacer::_updateDirectionalLightScreen()
 		{
 			if (screen->getButton("color")->isHovered())
 			{
-				_leftWindow->setActiveScreen("lightManagement");
+				_gui->getGlobalScreen()->addValueForm("directionalColorG", "G(0-255)", _directionalColor.g * 255.0f, vec2(0.0f, 0.0f), vec2(0.2f, 0.1f));
+				_gui->getGlobalScreen()->addValueForm("directionalColorR", "R(0-255)", _directionalColor.r * 255.0f, vec2(-0.25f, 0.0f), vec2(0.2f, 0.1f));
+				_gui->getGlobalScreen()->addValueForm("directionalColorB", "B(0-255)", _directionalColor.b * 255.0f, vec2(0.25f, 0.0f), vec2(0.2f, 0.1f));
 			}
 			else if (screen->getButton("position")->isHovered())
 			{
-
+				_gui->getGlobalScreen()->addValueForm("positionY", "Y", _directionalPosition.y, vec2(0.0f, 0.0f), vec2(0.2f, 0.1f));
+				_gui->getGlobalScreen()->addValueForm("positionX", "X", _directionalPosition.x, vec2(-0.25f, 0.0f), vec2(0.2f, 0.1f));
+				_gui->getGlobalScreen()->addValueForm("positionZ", "Z", _directionalPosition.z, vec2(0.25f, 0.0f), vec2(0.2f, 0.1f));
 			}
 			else if (screen->getButton("strength")->isHovered())
 			{
-
+				_gui->getGlobalScreen()->addValueForm("directionalStrength", "Directional strength", _directionalStrength * 100.0f, vec2(0.0f), vec2(0.3f, 0.1f));
 			}
 			else if (screen->getButton("back")->isHovered())
 			{
-
+				_leftWindow->setActiveScreen("lightManagement");
 			}
 		}
 
+		// Ambient value conversion
+		if (_gui->getGlobalScreen()->checkValueForm("directionalStrength", _directionalStrength))
+		{
+			_directionalStrength /= 100.0f;
+		}
+
+		// Color R values conversion
+		if (_gui->getGlobalScreen()->checkValueForm("directionalColorR", _directionalColor.r))
+		{
+			_directionalColor.r = std::clamp(_directionalColor.r / 255.0f, 0.0f, 1.0f);
+		}
+
+		// Color G values conversion
+		if (_gui->getGlobalScreen()->checkValueForm("directionalColorG", _directionalColor.g))
+		{
+			_directionalColor.g = std::clamp(_directionalColor.g / 255.0f, 0.0f, 1.0f);
+		}
+
+		// Color B values conversion
+		if (_gui->getGlobalScreen()->checkValueForm("directionalColorB", _directionalColor.b))
+		{
+			_directionalColor.b = std::clamp(_directionalColor.b / 255.0f, 0.0f, 1.0f);
+		}
+
+		// Get position values
+		_gui->getGlobalScreen()->checkValueForm("positionX", _directionalPosition.x);
+		_gui->getGlobalScreen()->checkValueForm("positionY", _directionalPosition.y);
+		_gui->getGlobalScreen()->checkValueForm("positionZ", _directionalPosition.z);
+
 		// Update directional lighting
-		_fe3d.gfx_enableDirectionalLighting(_directionalPos, _directionalStrength);
+		_fe3d.gfx_enableDirectionalLighting(_directionalPosition, _directionalColor, _directionalStrength);
 	}
 }
 

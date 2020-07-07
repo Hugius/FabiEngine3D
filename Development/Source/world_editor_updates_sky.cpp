@@ -165,8 +165,8 @@ void WorldEditor::_updateSkyOptions()
 			}
 			else if (screen->getButton("color")->isHovered())
 			{
-				_gui->getGlobalScreen()->addValueForm("colorR", "R(0-255)", _skyColor.r * 255.0f, vec2(-0.25f, 0.0f), vec2(0.15f, 0.1f));
 				_gui->getGlobalScreen()->addValueForm("colorG", "G(0-255)", _skyColor.g * 255.0f, vec2(0.0f, 0.0f), vec2(0.15f, 0.1f));
+				_gui->getGlobalScreen()->addValueForm("colorR", "R(0-255)", _skyColor.r * 255.0f, vec2(-0.25f, 0.0f), vec2(0.15f, 0.1f));
 				_gui->getGlobalScreen()->addValueForm("colorB", "B(0-255)", _skyColor.b * 255.0f, vec2(0.25f, 0.0f), vec2(0.15f, 0.1f));
 			}
 			else if (screen->getButton("back")->isHovered())

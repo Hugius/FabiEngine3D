@@ -362,8 +362,8 @@ public:
 	string textEntity_getTextContent(const string& ID);
 
 	// Graphics interface
-	void gfx_enableAmbientLighting(float strength = 0.0f);
-	void gfx_enableDirectionalLighting(vec3 position, float strength = 0.0f);
+	void gfx_enableAmbientLighting(vec3 color, float strength);
+	void gfx_enableDirectionalLighting(vec3 position, vec3 color, float strength);
 	void gfx_enableSpecularLighting();
 	void gfx_enablePointLighting();
 	void gfx_enableFog(float minDistance);

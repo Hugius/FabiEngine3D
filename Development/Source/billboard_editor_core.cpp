@@ -68,8 +68,8 @@ void BillboardEditor::load()
 	_fe3d.camera_enableLookat(_billboardPosition);
 
 	// Graphics
-	_fe3d.gfx_enableAmbientLighting(0.75f);
-	_fe3d.gfx_enableDirectionalLighting(vec3(1000.0f), 0.75f);
+	_fe3d.gfx_enableAmbientLighting(vec3(1.0f), 0.75f);
+	_fe3d.gfx_enableDirectionalLighting(vec3(1000.0f), vec3(1.0f), 0.75f);
 	_fe3d.gfx_enableMSAA();
 	_fe3d.gfx_enableShadows(vec3(25.0f), vec3(0.0f), 50.0f, 50.0f);
 	

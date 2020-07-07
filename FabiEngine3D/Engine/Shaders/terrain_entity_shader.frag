@@ -19,15 +19,17 @@ layout(location = 4) uniform sampler2D   u_sampler_blendMapB;
 layout(location = 5) uniform sampler2D   u_sampler_shadowMap;
 
 // Uniforms
-uniform vec3  u_cameraPos;
-uniform vec3  u_dirLightPos;
-uniform vec3  u_pointLightsPos[POINT_LIGHT_AMOUNT];
-uniform vec3  u_pointLightsColor[POINT_LIGHT_AMOUNT];
+uniform vec3 u_cameraPosition;
+uniform vec3 u_ambientLightColor;
+uniform vec3 u_directionalLightColor;
+uniform vec3 u_directionalLightPos;
+uniform vec3 u_pointLightPositions[POINT_LIGHT_AMOUNT];
+uniform vec3 u_pointLightColors[POINT_LIGHT_AMOUNT];
 
-uniform float u_pointLightsStrength[POINT_LIGHT_AMOUNT];
 uniform float u_brightness;
-uniform float u_ambientStrength;
-uniform float u_dirLightStrength;
+uniform float u_ambientLightStrength;
+uniform float u_directionalLightStrength;
+uniform float u_pointLightStrengths[POINT_LIGHT_AMOUNT];
 uniform float u_lightmapStrength;
 uniform float u_fogMinDistance;
 uniform float u_blendmapRepeat;
@@ -35,14 +37,14 @@ uniform float u_blendmapRepeatR;
 uniform float u_blendmapRepeatG;
 uniform float u_blendmapRepeatB;
 
-uniform bool  u_blendmappingEnabled;
-uniform bool  u_ambientLightingEnabled;
-uniform bool  u_dirLightingEnabled;
-uniform bool  u_pointLightingEnabled;
-uniform bool  u_fogEnabled;
-uniform bool  u_shadowsEnabled;
+uniform bool u_blendmappingEnabled;
+uniform bool u_ambientLightingEnabled;
+uniform bool u_directionalLightingEnabled;
+uniform bool u_pointLightingEnabled;
+uniform bool u_fogEnabled;
+uniform bool u_shadowsEnabled;
 
-uniform int   u_shadowMapSize;
+uniform int u_shadowMapSize;
 
 // Out variables
 layout (location = 0) out vec4 o_finalColor;
@@ -102,7 +104,7 @@ vec3 applyFog(vec3 color)
 {
 	if(u_fogEnabled)
 	{
-		float  distance    = length(f_pos.xyz - u_cameraPos);
+		float  distance    = length(f_pos.xyz - u_cameraPosition);
 		vec3   foggedColor = mix(vec3(0.75f, 0.75f, 0.75f), color, min(u_fogMinDistance / distance, 1.0f));
 		return foggedColor;
 	}
@@ -115,7 +117,7 @@ vec3 getAmbientLighting()
 {
 	if(u_ambientLightingEnabled)
 	{
-		return vec3(u_ambientStrength);
+		return u_ambientLightColor * u_ambientLightStrength;
 	}
 
 	return vec3(0.0f);
@@ -124,11 +126,11 @@ vec3 getAmbientLighting()
 // Calculate directional lighting
 vec3 getDirectionalLighting()
 {
-	if(u_dirLightingEnabled)
+	if(u_directionalLightingEnabled)
 	{
-		vec3 lightDir = normalize(u_dirLightPos - f_pos);
+		vec3 lightDir = normalize(u_directionalLightPos - f_pos);
 		float lightStrength = max(dot(f_normal, lightDir), 0.0);
-		return vec3(lightStrength * u_dirLightStrength);
+		return u_directionalLightColor * (lightStrength * u_directionalLightStrength);
 	}
 
 	return vec3(0.0f);
@@ -143,12 +145,12 @@ vec3 getPointLighting()
 		
 		for(int i = 0; i < POINT_LIGHT_AMOUNT; i++)
 		{
-			vec3  lightDir = normalize(u_pointLightsPos[i] - f_pos);
-			float diffuse = max(dot(f_normal, lightDir), 0.0);
-			float distance = length(u_pointLightsPos[i] - f_pos);
+			vec3  lightDir = normalize(u_pointLightPositions[i] - f_pos);
+			float strength = max(dot(f_normal, lightDir), 0.0);
+			float distance = length(u_pointLightPositions[i] - f_pos);
 			float attenuation = 1.0f / (1.0f + 0.07f * distance + 0.017f * (distance * distance * distance));
-			diffuse *= attenuation * (u_pointLightsStrength[i] * 10.0f);
-			pointStrength += (diffuse * u_pointLightsColor[i]);
+			strength *= attenuation * (u_pointLightStrengths[i] * 10.0f);
+			pointStrength += (u_pointLightColors[i] * strength);
 		}
 
 		return pointStrength;

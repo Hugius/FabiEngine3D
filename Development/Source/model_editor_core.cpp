@@ -66,8 +66,8 @@ void ModelEditor::load()
 	_fe3d.camera_enableLookat(vec3(0.0f));
 
 	// Graphics
-	_fe3d.gfx_enableAmbientLighting(0.75f);
-	_fe3d.gfx_enableDirectionalLighting(vec3(1000.0f), 0.5f);
+	_fe3d.gfx_enableAmbientLighting(vec3(1.0f), 0.75f);
+	_fe3d.gfx_enableDirectionalLighting(vec3(1000.0f), vec3(1.0f), 0.5f);
 	_fe3d.gfx_enableLightMapping();
 	_fe3d.gfx_enableSkyReflections(0.25f);
 	_fe3d.gfx_enableMSAA();

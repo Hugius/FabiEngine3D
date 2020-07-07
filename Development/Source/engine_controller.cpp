@@ -50,7 +50,7 @@ void EngineController::_initializeMiscellaneous()
 	gfx_enableBloom(0.98f, 0.0f, 10);
 
 	// Default camera
-	camera_load(90.0f, 0.1f, 10000.0f, vec3(0.0f), 0.0f, 0.0f);
+	camera_load(90.0f, 0.1f, 10000.0f, vec3(0.0f));
 }
 
 void EngineController::_updateMiscellaneous()

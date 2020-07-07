@@ -75,14 +75,24 @@ void ShaderBus::setShadowMatrix(const mat4 & val)
 	_shadowMatrix = val;
 }
 
-void ShaderBus::setCameraPos(vec3 val)
+void ShaderBus::setCameraPosition(vec3 val)
 {
 	_cameraPosition = val;
 }
 
-void ShaderBus::setDirLightPos(vec3 val)
+void ShaderBus::setAmbientLightColor(vec3 val)
 {
-	_dirLightPosition = val;
+	_ambientLightColor = val;
+}
+
+void ShaderBus::setDirectionalLightPos(vec3 val)
+{
+	_directionalLightPosition = val;
+}
+
+void ShaderBus::setDirectionalLightColor(vec3 val)
+{
+	_directionalLightColor = val;
 }
 
 void ShaderBus::setSceneReflectionHeight(float val)
@@ -95,12 +105,12 @@ void ShaderBus::setSceneReflectionFactor(float val)
 	_sceneReflectionFactor = val;
 }
 
-void ShaderBus::setAmbLightStrength(float val)
+void ShaderBus::setAmbientLightStrength(float val)
 {
 	_ambientLightingStrength = val;
 }
 
-void ShaderBus::setDirLightStrength(float val)
+void ShaderBus::setDirectionalLightStrength(float val)
 {
 	_directionalLightingStrength = val;
 }
@@ -170,22 +180,22 @@ void ShaderBus::setSceneReflectionsEnabled(bool val)
 	_sceneReflectionsEnabled = val;
 }
 
-void ShaderBus::setAmbLightEnabled(bool val)
+void ShaderBus::setAmbientLightingEnabled(bool val)
 {
 	_ambientLightingEnabled = val;
 }
 
-void ShaderBus::setDirLightEnabled(bool val)
+void ShaderBus::setDirectionalLightingEnabled(bool val)
 {
 	_directionalLightingEnabled = val;
 }
 
-void ShaderBus::setSpecLightEnabled(bool val)
+void ShaderBus::setSpecularLightingEnabled(bool val)
 {
 	_specularLightingEnabled = val;
 }
 
-void ShaderBus::setPointLightEnabled(bool val)
+void ShaderBus::setPointLightingEnabled(bool val)
 {
 	_pointLightingEnabled = val;
 }
@@ -330,9 +340,19 @@ const vec3 ShaderBus::getCameraPos() const
 	return _cameraPosition;
 }
 
-const vec3 ShaderBus::getDirLightPos() const
+const vec3 ShaderBus::getAmbientLightColor() const
 {
-	return _dirLightPosition;
+	return _ambientLightColor;
+}
+
+const vec3 ShaderBus::getDirectionalLightPos() const
+{
+	return _directionalLightPosition;
+}
+
+const vec3 ShaderBus::getDirectionalLightColor() const
+{
+	return _directionalLightColor;
 }
 
 const float ShaderBus::getSceneReflectionHeight() const
@@ -350,7 +370,7 @@ const float ShaderBus::getAmbLightStrength() const
 	return _ambientLightingStrength;
 }
 
-const float ShaderBus::getDirLightStrength() const
+const float ShaderBus::getDirectionalLightStrength() const
 {
 	return _directionalLightingStrength;
 }
@@ -420,17 +440,17 @@ const bool ShaderBus::isSceneReflectionsEnabled() const
 	return _sceneReflectionsEnabled;
 }
 
-const bool ShaderBus::isAmbLightingEnabled() const
+const bool ShaderBus::isAmbientLightingEnabled() const
 {
 	return _ambientLightingEnabled;
 }
 
-const bool ShaderBus::isDirLightingEnabled() const
+const bool ShaderBus::isDirectionalLightingEnabled() const
 {
 	return _directionalLightingEnabled;
 }
 
-const bool ShaderBus::isSpecLightingEnabled() const
+const bool ShaderBus::isSpecularLightingEnabled() const
 {
 	return _specularLightingEnabled;
 }

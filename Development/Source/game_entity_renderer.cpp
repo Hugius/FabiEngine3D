@@ -18,24 +18,26 @@ void GameEntityRenderer::bind()
 	_shader.uploadUniform("u_clippingPlane",     clippingPlane);
 	
 	// Fragment shader uniforms
-	_shader.uploadUniform("u_cameraPos",               _shaderBus.getCameraPos());
-	_shader.uploadUniform("u_dirLightPos",             _shaderBus.getDirLightPos());
-	_shader.uploadUniform("u_ambientStrength",         _shaderBus.getAmbLightStrength());
-	_shader.uploadUniform("u_dirLightStrength",        _shaderBus.getDirLightStrength());
-	_shader.uploadUniform("u_fogMinDistance",          _shaderBus.getFogMinDistance());
-	_shader.uploadUniform("u_ambientLightingEnabled",  _shaderBus.isAmbLightingEnabled());
-	_shader.uploadUniform("u_dirLightingEnabled",      _shaderBus.isDirLightingEnabled());
-	_shader.uploadUniform("u_specLightingEnabled",     _shaderBus.isSpecLightingEnabled());
-	_shader.uploadUniform("u_pointLightingEnabled",    _shaderBus.isPointLightingEnabled());
-	_shader.uploadUniform("u_lightMappingEnabled",     _shaderBus.isLightMappingEnabled());
-	_shader.uploadUniform("u_skyReflectionsEnabled",   _shaderBus.isSkyReflectionsEnabled());
-	_shader.uploadUniform("u_sceneReflectionsEnabled", _shaderBus.isSceneReflectionsEnabled());
-	_shader.uploadUniform("u_fogEnabled",              _shaderBus.isFogEnabled());
-	_shader.uploadUniform("u_shadowsEnabled",          _shaderBus.isShadowsEnabled());
-	_shader.uploadUniform("u_skyReflectionMixValue",   _shaderBus.getSkyReflectionMixValue());
-	_shader.uploadUniform("u_skyReflectionFactor",     _shaderBus.getSkyReflectionFactor());
-	_shader.uploadUniform("u_sceneReflectionFactor",   _shaderBus.getSceneReflectionFactor());
-	_shader.uploadUniform("u_shadowMapSize",           Config::getInst().getShadowQuality());
+	_shader.uploadUniform("u_cameraPosition",             _shaderBus.getCameraPos());
+	_shader.uploadUniform("u_ambientLightColor",		  _shaderBus.getAmbientLightColor());
+	_shader.uploadUniform("u_directionalLightColor",	  _shaderBus.getDirectionalLightColor());
+	_shader.uploadUniform("u_directionalLightPos",        _shaderBus.getDirectionalLightPos());
+	_shader.uploadUniform("u_ambientLightStrength",       _shaderBus.getAmbLightStrength());
+	_shader.uploadUniform("u_directionalLightStrength",   _shaderBus.getDirectionalLightStrength());
+	_shader.uploadUniform("u_fogMinDistance",             _shaderBus.getFogMinDistance());
+	_shader.uploadUniform("u_ambientLightingEnabled",	  _shaderBus.isAmbientLightingEnabled());
+	_shader.uploadUniform("u_directionalLightingEnabled", _shaderBus.isDirectionalLightingEnabled());
+	_shader.uploadUniform("u_specLightingEnabled",		  _shaderBus.isSpecularLightingEnabled());
+	_shader.uploadUniform("u_pointLightingEnabled",		  _shaderBus.isPointLightingEnabled());
+	_shader.uploadUniform("u_lightMappingEnabled",		  _shaderBus.isLightMappingEnabled());
+	_shader.uploadUniform("u_skyReflectionsEnabled",	  _shaderBus.isSkyReflectionsEnabled());
+	_shader.uploadUniform("u_sceneReflectionsEnabled",	  _shaderBus.isSceneReflectionsEnabled());
+	_shader.uploadUniform("u_fogEnabled",				  _shaderBus.isFogEnabled());
+	_shader.uploadUniform("u_shadowsEnabled",			  _shaderBus.isShadowsEnabled());
+	_shader.uploadUniform("u_skyReflectionMixValue",	  _shaderBus.getSkyReflectionMixValue());
+	_shader.uploadUniform("u_skyReflectionFactor",		  _shaderBus.getSkyReflectionFactor());
+	_shader.uploadUniform("u_sceneReflectionFactor",	  _shaderBus.getSceneReflectionFactor());
+	_shader.uploadUniform("u_shadowMapSize",			  Config::getInst().getShadowQuality());
 
 	// Texture uniforms
 	_shader.uploadUniform("u_sampler_diffuseMap", 0);
@@ -80,9 +82,9 @@ void GameEntityRenderer::placeLightEntity(const LightEntity * light)
 	{
 		if (light->isEnabled())
 		{
-			_shader.uploadUniform("u_pointLightsPos[" + std::to_string(_lightCounter) + "]", light->getPosition());
-			_shader.uploadUniform("u_pointLightsColor[" + std::to_string(_lightCounter) + "]", light->getColor());
-			_shader.uploadUniform("u_pointLightsStrength[" + std::to_string(_lightCounter) + "]", light->getStrength());
+			_shader.uploadUniform("u_pointLightPositions[" + std::to_string(_lightCounter) + "]", light->getPosition());
+			_shader.uploadUniform("u_pointLightColors[" + std::to_string(_lightCounter) + "]", light->getColor());
+			_shader.uploadUniform("u_pointLightStrengths[" + std::to_string(_lightCounter) + "]", light->getStrength());
 			_lightCounter++;
 		}
 	}

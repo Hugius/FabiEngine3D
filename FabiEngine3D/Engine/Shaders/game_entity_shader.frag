@@ -24,16 +24,18 @@ layout(location = 6) uniform samplerCube u_sampler_nightCubeMap;
 uniform mat4  u_skyRotationMatrix;
 
 // Vector3 uniforms
-uniform vec3  u_cameraPos;
-uniform vec3  u_dirLightPos;
-uniform vec3  u_pointLightsPos[POINT_LIGHT_AMOUNT];
-uniform vec3  u_pointLightsColor[POINT_LIGHT_AMOUNT];
-uniform vec3  u_color;
+uniform vec3 u_cameraPosition;
+uniform vec3 u_ambientLightColor;
+uniform vec3 u_directionalLightColor;
+uniform vec3 u_directionalLightPos;
+uniform vec3 u_pointLightPositions[POINT_LIGHT_AMOUNT];
+uniform vec3 u_pointLightColors[POINT_LIGHT_AMOUNT];
+uniform vec3 u_color;
 
 // Float uniforms
-uniform float u_pointLightsStrength[POINT_LIGHT_AMOUNT];
-uniform float u_ambientStrength;
-uniform float u_dirLightStrength;
+uniform float u_pointLightStrengths[POINT_LIGHT_AMOUNT];
+uniform float u_ambientLightStrength;
+uniform float u_directionalLightStrength;
 uniform float u_specLightStrength;
 uniform float u_fogMinDistance;
 uniform float u_skyReflectionMixValue;
@@ -50,7 +52,7 @@ uniform bool u_isSceneReflective;
 uniform bool u_isSpecular;
 uniform bool u_isShadowed;
 uniform bool u_ambientLightingEnabled;
-uniform bool u_dirLightingEnabled;
+uniform bool u_directionalLightingEnabled;
 uniform bool u_specLightingEnabled;
 uniform bool u_lightMappingEnabled;
 uniform bool u_pointLightingEnabled;
@@ -134,7 +136,7 @@ vec3 getAmbientLighting()
 {
 	if(u_ambientLightingEnabled)
 	{
-		return vec3(u_ambientStrength);
+		return u_ambientLightColor * u_ambientLightStrength;
 	}
 	else
 	{
@@ -145,11 +147,11 @@ vec3 getAmbientLighting()
 // Calculate directional lighting
 vec3 getDirectionalLighting()
 {
-	if(u_dirLightingEnabled)
+	if(u_directionalLightingEnabled)
 	{
-		vec3 lightDir = normalize(u_dirLightPos - f_pos);
+		vec3 lightDir = normalize(u_directionalLightPos - f_pos);
 		float lightStrength = max(dot(f_normal, lightDir), 0.0);
-		return vec3(lightStrength * u_dirLightStrength);
+		return u_directionalLightColor * (lightStrength * u_directionalLightStrength);
 	}
 	else
 	{
@@ -161,8 +163,8 @@ vec3 getSpecularLighting()
 {
 	if(u_specLightingEnabled && u_isSpecular)
 	{
-		vec3 lightDir   = normalize(f_pos - u_dirLightPos);
-		vec3 viewDir    = normalize(f_pos - u_cameraPos);
+		vec3 lightDir   = normalize(f_pos - u_directionalLightPos);
+		vec3 viewDir    = normalize(f_pos - u_cameraPosition);
 		vec3 reflectDir = reflect(-lightDir, f_normal);
 		float specular  = pow(max(dot(viewDir, reflectDir), 0.0f), u_specLightStrength);
 		return vec3(specular);
@@ -182,12 +184,12 @@ vec3 getPointLighting()
 		
 		for(int i = 0; i < POINT_LIGHT_AMOUNT; i++)
 		{
-			vec3  lightDir = normalize(u_pointLightsPos[i] - f_pos);
-			float diffuse = max(dot(f_normal, lightDir), 0.0);
-			float distance = length(u_pointLightsPos[i] - f_pos);
+			vec3  lightDir = normalize(u_pointLightPositions[i] - f_pos);
+			float strength = max(dot(f_normal, lightDir), 0.0);
+			float distance = length(u_pointLightPositions[i] - f_pos);
 			float attenuation = 1.0f / (1.0f + 0.07f * distance + 0.017f * (distance * distance * distance));
-			diffuse *= attenuation * (u_pointLightsStrength[i] * 10.0f);
-			pointStrength += (diffuse * u_pointLightsColor[i]);
+			strength *= attenuation * (u_pointLightStrengths[i] * 10.0f);
+			pointStrength += (u_pointLightColors[i] * strength);
 		}
 
 		return pointStrength;
@@ -262,7 +264,7 @@ vec3 applyFog(vec3 color)
 {
 	if(u_fogEnabled)
 	{
-		float  distance    = length(f_pos.xyz - u_cameraPos);
+		float  distance    = length(f_pos.xyz - u_cameraPosition);
 		vec3   foggedColor = mix(vec3(0.75f, 0.75f, 0.75f), color, min(u_fogMinDistance / distance, 1.0f));
 		return foggedColor;
 	}
@@ -280,7 +282,7 @@ vec3 applySkyReflections(vec3 color)
 		
 		if(reflMapColor.rgb != vec3(0.0f))
 		{
-			vec3 viewDir      = normalize(f_pos - u_cameraPos);
+			vec3 viewDir      = normalize(f_pos - u_cameraPosition);
 			vec3 reflectDir   = reflect(viewDir, f_normal);
 			vec4 dayColor     = vec4(texture(u_sampler_dayCubeMap, vec3(u_skyRotationMatrix * vec4(reflectDir, 1.0f))).rgb, 1.0);
 			vec4 nightColor   = vec4(texture(u_sampler_nightCubeMap, vec3(u_skyRotationMatrix * vec4(reflectDir, 1.0f))).rgb, 1.0);

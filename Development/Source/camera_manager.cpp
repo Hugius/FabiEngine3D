@@ -154,7 +154,7 @@ void CameraManager::updateMatrices()
 	// Update shaderbus
 	_shaderBus.setCameraYaw(_yaw);
 	_shaderBus.setCameraPitch(_pitch);
-	_shaderBus.setCameraPos(_pos);
+	_shaderBus.setCameraPosition(_pos);
 	_shaderBus.setViewMatrix(_viewMatrix);
 	_shaderBus.setProjectionMatrix(_projectionMatrix);
 	_shaderBus.setNearZ(_nearZ);

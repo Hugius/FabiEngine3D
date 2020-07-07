@@ -141,8 +141,8 @@ void WorldEditor::load()
 	_fe3d.camera_setPosition(vec3(0.0f));
 	
 	// Enable graphics
-	_fe3d.gfx_enableAmbientLighting(0.75f);
-	_fe3d.gfx_enableDirectionalLighting(vec3(1000.0f), 0.75f);
+	_fe3d.gfx_enableAmbientLighting(vec3(1.0f), 0.75f);
+	_fe3d.gfx_enableDirectionalLighting(vec3(1000.0f), vec3(1.0f), 0.75f);
 	_fe3d.gfx_enableMSAA();
 	_fe3d.gfx_enableWaterEffects();
 

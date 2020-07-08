@@ -3,11 +3,12 @@
 #include <fstream>
 #include <sstream>
 
-EntityPlacer::EntityPlacer(FabiEngine3D& fe3d, shared_ptr<EngineGuiManager> gui, ModelEditor& modelEditor, WorldEditor& worldEditor) :
+EntityPlacer::EntityPlacer(FabiEngine3D& fe3d, shared_ptr<EngineGuiManager> gui, WorldEditor& worldEditor, ModelEditor& modelEditor, BillboardEditor& billboardEditor) :
 	_fe3d(fe3d),
 	_gui(gui),
+	_worldEditor(worldEditor),
 	_modelEditor(modelEditor),
-	_worldEditor(worldEditor)
+	_billboardEditor(billboardEditor)
 {
 
 }
@@ -57,6 +58,8 @@ void EntityPlacer::initializeGUI()
 
 	// Left-viewport: mainWindow - pointLightManagement
 	_leftWindow->addScreen("pointLightManagement");
+	_leftWindow->getScreen("pointLightManagement")->addButton("add", vec2(0.0f, 0.45f), vec2(1.5f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Add light", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_leftWindow->getScreen("pointLightManagement")->addButton("back", vec2(0.0f, -0.45f), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Go back", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 
 	// Right-viewport: mainWindow - modelProperties
 	_rightWindow->addScreen("modelProperties");
@@ -82,6 +85,7 @@ void EntityPlacer::load()
 {
 	// Enable graphics
 	_fe3d.gfx_enableLightMapping();
+	_fe3d.gfx_enablePointLighting();
 	_fe3d.gfx_enableSkyReflections(0.25f);
 	_fe3d.gfx_enableMSAA();
 	_fe3d.gfx_enableWaterEffects();
@@ -133,7 +137,7 @@ void EntityPlacer::load()
 	// Load camera
 	_fe3d.camera_setPosition(vec3(0.0f, height, 0.0f));
 
-	// Model loading
+	// Preview model loading
 	_modelEditor.loadModels();
 	for (auto& modelName : _modelEditor.getModelNames())
 	{
@@ -141,12 +145,25 @@ void EntityPlacer::load()
 		if (_fe3d.gameEntity_isExisting(modelName))
 		{
 			_leftWindow->getScreen("modelPlaceManagement")->getScrollingList("modelList")->addButton(modelName, modelName.substr(1, modelName.size()));
-			_counterMap.insert(std::make_pair(modelName, 0));
+			_modelCounterMap.insert(std::make_pair(modelName, 0));
 		}
 	}
 
+	// Preview billboard loading
+	//_modelEditor.loadModels();
+	//for (auto& billboardName : _billboardEditor.)
+	//{
+	//	_leftWindow->getScreen("modelPlaceManagement")->getScrollingList("modelList")->addButton(billboardName, billboardName.substr(1, billboardName.size()));
+	//	_billboardCounterMap.insert(std::make_pair(billboardName, 0));
+	//}
+
+	// Preview pointlight loading
+	_fe3d.lightEntity_add(_previewPointlightID, vec3(0.0f), vec3(1.0f), 10.0f);
+
 	// Create name textfields
 	_gui->getGlobalScreen()->addTextfield("selectedModelName", vec2(0.0f, 0.85f), vec2(0.5f, 0.1f), "", vec3(1.0f));
+	_gui->getGlobalScreen()->addTextfield("selectedBillboardName", vec2(0.0f, 0.85f), vec2(0.5f, 0.1f), "", vec3(1.0f));
+	_gui->getGlobalScreen()->addTextfield("selectedPointlightName", vec2(0.0f, 0.85f), vec2(0.5f, 0.1f), "", vec3(1.0f));
 
 	// Other
 	loadWorld();
@@ -204,7 +221,7 @@ void EntityPlacer::loadWorld()
 				_placeModel(modelID, modelName, position, rotation, size);
 
 				// Update the counter map
-				_counterMap[modelName]++;
+				_modelCounterMap[modelName]++;
 			}
 			else if (entityType == "BILLBOARD")
 			{
@@ -274,6 +291,7 @@ void EntityPlacer::unload()
 	_fe3d.gfx_disableWaterEffects();
 	_fe3d.gfx_disableShadows();
 	_fe3d.gfx_disableSpecularLighting();
+	_fe3d.gfx_disablePointLighting();
 
 	// Delete world entities
 	if (_fe3d.skyEntity_isExisting("@sky"))
@@ -296,14 +314,19 @@ void EntityPlacer::unload()
 	// Delete placed entities
 	_fe3d.gameEntity_deleteAll();
 	_fe3d.billboardEntity_deleteAll();
+	_fe3d.lightEntity_deleteAll();
 
 	// Reset variables
-	_counterMap.clear();
+	_modelCounterMap.clear();
+	_billboardCounterMap.clear();
+	_pointlightCounter = 0;
 	_currentModelName = "";
 	_cameraMovementSpeed = 10.0f;
 
 	// Delete name textfields
 	_gui->getGlobalScreen()->deleteTextfield("selectedModelName");
+	_gui->getGlobalScreen()->deleteTextfield("selectedBillboardName");
+	_gui->getGlobalScreen()->deleteTextfield("selectedPointlightName");
 
 	// Enable default skybox
 	_fe3d.skyEntity_select("@defaultSky");

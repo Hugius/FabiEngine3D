@@ -4,8 +4,9 @@
 
 #include "fabi_engine_3d.hpp"
 #include "engine_gui_manager.hpp"
-#include "model_editor.hpp"
 #include "world_editor.hpp"
+#include "model_editor.hpp"
+#include "billboard_editor.hpp"
 
 enum class Transformation
 {
@@ -17,7 +18,7 @@ enum class Transformation
 class EntityPlacer final
 {
 public:
-	EntityPlacer(FabiEngine3D& fe3d, shared_ptr<EngineGuiManager> gui, ModelEditor& modelEditor, WorldEditor& worldEditor);
+	EntityPlacer(FabiEngine3D& fe3d, shared_ptr<EngineGuiManager> gui, WorldEditor& worldEditor, ModelEditor& modelEditor, BillboardEditor& billboardEditor);
 	~EntityPlacer() = default;
 
 	void initializeGUI();
@@ -55,29 +56,41 @@ private:
 	void _updateCamera();
 	void _updateMiscellaneous();
 
-	bool _isLoaded = false;
-
-	Transformation _transformation = Transformation::TRANSLATION;
-
+	// Instances
 	FabiEngine3D& _fe3d;
 	shared_ptr<EngineGuiManager> _gui;
-	ModelEditor& _modelEditor;
 	WorldEditor& _worldEditor;
-
+	ModelEditor& _modelEditor;
+	BillboardEditor& _billboardEditor;
 	shared_ptr<EngineGuiWindow> _leftWindow;
 	shared_ptr<EngineGuiWindow> _rightWindow;
-	
+
+	// Model placement
 	string _currentModelName = "";
+	std::map<string, unsigned int> _modelCounterMap;
+
+	// Billboard placement
+	string _currentBillboardName = "";
+	std::map<string, unsigned int> _billboardCounterMap;
+
+	// Ambient lighting
+	vec3 _ambientLightColor = vec3(1.0f);
+	float _ambientLightStrength = 1.0f;
+
+	// Directional lighting
+	vec3 _directionalLightColor = vec3(1.0f);
+	vec3 _directionalLightPosition = vec3(0.0f);
+	float _directionalLightStrength = 0.0f;
+
+	// Point lighting
+	bool _isPlacingPointlight = false;
+	const string _previewPointlightID = "@previewPointlight";
+	unsigned int _pointlightCounter = 0;
+
+	// Miscellaneous
+	bool _isLoaded = false;
+	Transformation _transformation = Transformation::TRANSLATION;
 	string _currentProjectName = "";
-
-	std::map<string, unsigned int> _counterMap;
-
-	vec3 _ambientColor = vec3(1.0f);
-	vec3 _directionalColor = vec3(1.0f);
-	vec3 _directionalPosition = vec3(0.0f);
-
-	float _ambientStrength = 1.0f;
-	float _directionalStrength = 0.0f;
 	float _cameraMovementSpeed = 25.0f;
 	const float _blinkingSpeed = 0.025f;
 	const float _transformationSpeed = 0.05f;

@@ -21,11 +21,11 @@ private:
 	void _updateMiscellaneous();
 
 	shared_ptr<EngineGuiManager> _gui;
-
-	string _currentProject = "";
 	
 	LeftViewportController _leftViewportController;
 	RightViewportController _rightViewportController;
 	TopViewportController _topViewportController;
 	BottomViewportController _bottomViewportController;
+
+	string _currentProject = "";
 };

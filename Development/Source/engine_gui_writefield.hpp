@@ -15,6 +15,7 @@ public:
 
 	bool cancelledInput();
 	bool confirmedInput();
+	bool isActive();
 
 	string getTextContent();
 

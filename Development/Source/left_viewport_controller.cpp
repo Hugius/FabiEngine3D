@@ -5,7 +5,7 @@ LeftViewportController::LeftViewportController(FabiEngine3D& fe3d, shared_ptr<En
 	_modelEditor(fe3d, gui),
 	_worldEditor(fe3d, gui),
 	_billboardEditor(fe3d, gui),
-	_entityPlacer(fe3d, gui, _modelEditor, _worldEditor)
+	_entityPlacer(fe3d, gui, _worldEditor, _modelEditor, _billboardEditor)
 {
 
 }

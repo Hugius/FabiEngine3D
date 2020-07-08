@@ -51,6 +51,16 @@ void TerrainEntityRenderer::placeLightEntity(const LightEntity * light)
 			_lightCounter++;
 		}
 	}
+	else
+	{
+		for (unsigned int i = 0; i < 10; i++) // temporarily 10 so it does not crash
+		{
+			_shader.uploadUniform("u_pointLightPositions[" + std::to_string(i) + "]", light->getPosition());
+			_shader.uploadUniform("u_pointLightColors[" + std::to_string(i) + "]", light->getColor());
+			_shader.uploadUniform("u_pointLightStrengths[" + std::to_string(i) + "]", light->getStrength());
+		}
+	}
+
 }
 
 void TerrainEntityRenderer::render(const TerrainEntity * entity)

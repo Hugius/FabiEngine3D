@@ -42,6 +42,11 @@ bool EngineGuiWriteField::confirmedInput()
 	return _confirmedInput;
 }
 
+bool EngineGuiWriteField::isActive()
+{
+	return _isActive;
+}
+
 string EngineGuiWriteField::getTextContent()
 {
 	return _currentTextContent;

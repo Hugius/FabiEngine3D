@@ -160,7 +160,7 @@ void ModelEditor::save()
 		// Write model data into file
 		for (auto& modelName : _modelNames)
 		{
-			// Check if 3D entity exists
+			// Check if a 3D entity for this model is existing
 			if (_fe3d.gameEntity_isExisting(modelName))
 			{
 				auto objPath = _fe3d.gameEntity_getObjPath(modelName);

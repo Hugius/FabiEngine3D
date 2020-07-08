@@ -26,7 +26,7 @@ uniform vec3 u_directionalLightPos;
 uniform vec3 u_pointLightPositions[POINT_LIGHT_AMOUNT];
 uniform vec3 u_pointLightColors[POINT_LIGHT_AMOUNT];
 
-uniform float u_brightness;
+uniform float u_lightness;
 uniform float u_ambientLightStrength;
 uniform float u_directionalLightStrength;
 uniform float u_pointLightStrengths[POINT_LIGHT_AMOUNT];
@@ -70,7 +70,7 @@ void main()
 	vec3 color;
 	color = getTextureColor() * vec3((a + d) * h + p);
 	color = applyFog(color);
-	color *= u_brightness;
+	color *= u_lightness;
 
 	// Set final color
 	o_finalColor = vec4(color, 1.0f);

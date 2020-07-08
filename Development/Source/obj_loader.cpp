@@ -39,7 +39,7 @@ vector<ObjPart> OBJLoader::_loadOBJ(const string& filePath)
 	// Load .obj file
 	string path = rootDir + filePath;
 	FILE * file = fopen(path.c_str(), "r");
-	if (!std::filesystem::exists(path))
+	if (!std::filesystem::exists(path) || filePath == "")
 	{
 		Logger::getInst().throwError("Could not load .obj file: " + filePath);
 	}

@@ -54,7 +54,7 @@ private:
 	// Sky variables
 	vector<string> _skyTexturePaths;
 	float _skyRotationSpeed = 0.0f;
-	float _skyBrightness = 1.0f;
+	float _skyLightness = 1.0f;
 	vec3 _skyColor = vec3(1.0f);
 
 	// Terrain function
@@ -81,7 +81,7 @@ private:
 	float _terrainRedUvRepeat = 0.0f;
 	float _terrainGreenUvRepeat = 0.0f;
 	float _terrainBlueUvRepeat = 0.0f;
-	float _terrainBrightness = 1.0f;
+	float _terrainLightness = 1.0f;
 	float _terrainCameraHeight = 0.0f;
 	float _terrainCameraDistance = 0.0f;
 

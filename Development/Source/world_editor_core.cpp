@@ -47,7 +47,7 @@ void WorldEditor::initializeGUI()
 	// Left-viewport: mainWindow - skyOptions
 	_leftWindow->addScreen("skyOptions");
 	_leftWindow->getScreen("skyOptions")->addButton("rotationSpeed", vec2(0.0f, 0.63f), vec2(1.8f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Rotation speed", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
-	_leftWindow->getScreen("skyOptions")->addButton("brightness", vec2(0.0f, 0.21f), vec2(1.5f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Brightness", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_leftWindow->getScreen("skyOptions")->addButton("lightness", vec2(0.0f, 0.21f), vec2(1.5f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "lightness", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 	_leftWindow->getScreen("skyOptions")->addButton("color", vec2(0.0f, -0.21f), vec2(1.0f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Color", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 	_leftWindow->getScreen("skyOptions")->addButton("back", vec2(0.0f, -0.63f), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Go back", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 
@@ -72,7 +72,7 @@ void WorldEditor::initializeGUI()
 	_leftWindow->getScreen("terrainMesh")->getScrollingList("buttonList")->addButton("size", "Size");
 	_leftWindow->getScreen("terrainMesh")->getScrollingList("buttonList")->addButton("maxHeight", "Max height");
 	_leftWindow->getScreen("terrainMesh")->getScrollingList("buttonList")->addButton("uvRepeat", "UV repeat");
-	_leftWindow->getScreen("terrainMesh")->getScrollingList("buttonList")->addButton("brightness", "Brightness");
+	_leftWindow->getScreen("terrainMesh")->getScrollingList("buttonList")->addButton("lightness", "lightness");
 	_leftWindow->getScreen("terrainMesh")->addButton("load", vec2(0.0f, -0.7f), vec2(1.0f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Load", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 	_leftWindow->getScreen("terrainMesh")->addButton("back", vec2(0.0f, -0.9f), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Go back", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 
@@ -191,6 +191,8 @@ void WorldEditor::unload()
 	_totalCameraRotation = 0.0f;
 	_skyTexturePaths.clear();
 	_skyRotationSpeed = 0.0f;
+	_skyLightness = 1.0f;
+	_skyColor = vec3(1.0f);
 	_isTerrainBlendmapped = false;
 	_terrainHeightmapPath = "";
 	_terrainDiffusemapPath = "";
@@ -204,6 +206,7 @@ void WorldEditor::unload()
 	_terrainRedUvRepeat = 0.0f;
 	_terrainGreenUvRepeat = 0.0f;
 	_terrainBlueUvRepeat = 0.0f;
+	_terrainLightness = 1.0f;
 	_terrainCameraHeight = 0.0f;
 	_terrainCameraDistance = 0.0f;
 	_waterDudvmapPath = "";

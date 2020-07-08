@@ -44,7 +44,7 @@ void EngineController::_initializeMiscellaneous()
 	string path = "Engine\\Textures\\";
 	skyEntity_add("@defaultSky", { path + "right.png", path + "left.png", path + "top.png", path + "bottom.png", path + "back.png", path + "front.png" });
 	skyEntity_select("@defaultSky");
-	skyEntity_setBrightness("@defaultSky", 0.75f);
+	skyEntity_setLightness("@defaultSky", 0.75f);
 
 	// Default bloom effect for all scenes
 	gfx_enableBloom(0.98f, 0.0f, 10);

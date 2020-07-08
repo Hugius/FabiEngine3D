@@ -28,7 +28,7 @@ void SkyEntityRenderer::render(const SkyEntity * entity)
 		if (entity->isEnabled())
 		{
 			// Uniforms
-			_shader.uploadUniform("u_brightness", entity->getBrightness());
+			_shader.uploadUniform("u_lightness", entity->getLightness());
 			_shader.uploadUniform("u_mixValue", entity->getMixValue());
 			_shader.uploadUniform("u_color", entity->getColor());
 

@@ -37,9 +37,9 @@ void FabiEngine3D::skyEntity_select(const string& ID)
 	_core->_skyEntityManager.selectSky(ID);
 }
 
-void FabiEngine3D::skyEntity_setBrightness(const string& ID, float brightness)
+void FabiEngine3D::skyEntity_setLightness(const string& ID, float lightness)
 {
-	_core->_skyEntityManager.getEntity(ID)->setBrightness(brightness);
+	_core->_skyEntityManager.getEntity(ID)->setLightness(lightness);
 }
 
 void FabiEngine3D::skyEntity_setRotationSpeed(const string& ID, float speed)

@@ -113,6 +113,7 @@ void EntityPlacer::_updateModelScreen()
 			if (screen->getButton("back")->isHovered()) 
 			{
 				_leftWindow->setActiveScreen("placingManagement");
+				_currentModelName = "";
 			}
 		}
 	}
@@ -305,6 +306,7 @@ void EntityPlacer::_updatePointLightScreen()
 			else if (screen->getButton("back")->isHovered())
 			{
 				_leftWindow->setActiveScreen("lightManagement");
+				_isPlacingPointlight = false;
 			}
 		}
 	}

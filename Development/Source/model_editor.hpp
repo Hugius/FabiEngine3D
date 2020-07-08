@@ -31,7 +31,7 @@ public:
 
 private:
 	bool _addModel(string modelName, string objName, string diffuseMapName, string lightMapName, string reflectionMapName, vec3 size,
-		bool faceCulled, bool shadowed, bool transparent, bool specular, float specularStrength, vec3 color, float uvRepeat, vec3 aabbSize);
+		bool isFaceCulled, bool isShadowed, bool isTransparent, bool isSpecular, float specularStrength, vec3 color, float uvRepeat, vec3 aabbSize);
 	void _loadObjFileNames();
 	void _loadOBJ();
 	void _loadDiffuseMap();

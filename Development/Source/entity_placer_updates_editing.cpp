@@ -12,42 +12,41 @@ void EntityPlacer::_updateModelEditing()
 		// User must not be in placement mode
 		if (_currentModelName == "")
 		{
-			// Check if user selected model
+			// Check if user selected a model
 			for (auto& entityID : _fe3d.gameEntity_getAllIDs())
 			{
-				if (_fe3d.collision_checkCursorInEntity(entityID))
+				// Cursor must be in 3D space, no GUI interruptions, no RMB holding down
+				if (_fe3d.collision_checkCursorInEntity(entityID) && _fe3d.misc_isMouseInsideViewport() &&
+					!_gui->getGlobalScreen()->isFocused() && !_fe3d.input_getMouseDown(Input::MOUSE_BUTTON_RIGHT))
 				{
 					// Set new selected model
-					if (_fe3d.misc_isMouseInsideViewport() && !_gui->getGlobalScreen()->isFocused())
+					selectedModelID = entityID;
+
+					// Check if user clicked model
+					if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
 					{
-						selectedModelID = entityID;
-
-						// Check if user clicked model
-						if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT) && !_fe3d.input_getMouseDown(Input::MOUSE_BUTTON_RIGHT))
+						// Check if same model is clicked again
+						if (selectedModelID != activeModelID)
 						{
-							// Check if same model is clicked again
-							if (selectedModelID != activeModelID)
-							{
-								activeModelID = selectedModelID;
-								_transformation = Transformation::TRANSLATION;
+							activeModelID = selectedModelID;
+							_transformation = Transformation::TRANSLATION;
 
-								// Activate properties screen
-								_rightWindow->setActiveScreen("modelProperties");
-								_rightWindow->getScreen("modelProperties")->getButton("translation")->setHoverable(false);
-								_rightWindow->getScreen("modelProperties")->getButton("rotation")->setHoverable(true);
-								_rightWindow->getScreen("modelProperties")->getButton("scaling")->setHoverable(true);
+							// Activate properties screen
+							_rightWindow->setActiveScreen("modelProperties");
+							_rightWindow->getScreen("modelProperties")->getButton("translation")->setHoverable(false);
+							_rightWindow->getScreen("modelProperties")->getButton("rotation")->setHoverable(true);
+							_rightWindow->getScreen("modelProperties")->getButton("scaling")->setHoverable(true);
 
-								// Update selected model text
-								string textEntityID = _gui->getGlobalScreen()->getTextfield("selectedModelName")->getEntityID();
-								_fe3d.textEntity_show(textEntityID);
-								_fe3d.textEntity_setTextContent(textEntityID, "Selected model: " + activeModelID, 0.025f);
+							// Update selected model text
+							string textEntityID = _gui->getGlobalScreen()->getTextfield("selectedModelName")->getEntityID();
+							_fe3d.textEntity_show(textEntityID);
+							_fe3d.textEntity_setTextContent(textEntityID, "Selected model: " + activeModelID, 0.025f);
 
-								// Filling writefields
-								vec3 position = _fe3d.gameEntity_getPosition(activeModelID);
-								_rightWindow->getScreen("modelProperties")->getWriteField("x")->setTextContent(std::to_string(static_cast<int>(position.x)));
-								_rightWindow->getScreen("modelProperties")->getWriteField("y")->setTextContent(std::to_string(static_cast<int>(position.y)));
-								_rightWindow->getScreen("modelProperties")->getWriteField("z")->setTextContent(std::to_string(static_cast<int>(position.z)));
-							}
+							// Filling writefields
+							vec3 position = _fe3d.gameEntity_getPosition(activeModelID);
+							_rightWindow->getScreen("modelProperties")->getWriteField("x")->setTextContent(std::to_string(static_cast<int>(position.x)));
+							_rightWindow->getScreen("modelProperties")->getWriteField("y")->setTextContent(std::to_string(static_cast<int>(position.y)));
+							_rightWindow->getScreen("modelProperties")->getWriteField("z")->setTextContent(std::to_string(static_cast<int>(position.z)));
 						}
 					}
 				}
@@ -143,6 +142,12 @@ void EntityPlacer::_updateModelEditing()
 						_rightWindow->getScreen("modelProperties")->getButton("translation")->setHoverable(true);
 						_rightWindow->getScreen("modelProperties")->getButton("rotation")->setHoverable(true);
 						_rightWindow->getScreen("modelProperties")->getButton("scaling")->setHoverable(false);
+					}
+					else if (_rightWindow->getScreen("modelProperties")->getButton("delete")->isHovered()) // Delete button
+					{
+						_fe3d.gameEntity_delete(activeModelID);
+						activeModelID = "";
+						return;
 					}
 				}
 

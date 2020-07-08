@@ -20,7 +20,7 @@ void WorldEditor::loadTerrainEntity()
 		std::ifstream terrainFile(terrainPath);
 
 		// Load base data
-		terrainFile >> _terrainHeightmapPath >> _terrainDiffusemapPath >> _terrainSize >> _maxTerrainHeight >> _terrainUvRepeat >> _isTerrainBlendmapped >> _terrainBrightness;
+		terrainFile >> _terrainHeightmapPath >> _terrainDiffusemapPath >> _terrainSize >> _maxTerrainHeight >> _terrainUvRepeat >> _isTerrainBlendmapped >> _terrainLightness;
 
 		// Load blendmapping data
 		if (_isTerrainBlendmapped)
@@ -61,7 +61,7 @@ void WorldEditor::_saveTerrainData()
 			std::ofstream terrainFile(terrainPath);
 
 			// Write base data to file
-			terrainFile << _terrainHeightmapPath << " " << _terrainDiffusemapPath << " " << _terrainSize << " " << _maxTerrainHeight << " " << _terrainUvRepeat << " " << _isTerrainBlendmapped << " " << _terrainBrightness;
+			terrainFile << _terrainHeightmapPath << " " << _terrainDiffusemapPath << " " << _terrainSize << " " << _maxTerrainHeight << " " << _terrainUvRepeat << " " << _isTerrainBlendmapped << " " << _terrainLightness;
 
 			// Write blendmapping data to file
 			if (_isTerrainBlendmapped)
@@ -122,7 +122,7 @@ void WorldEditor::_loadTerrainEntity()
 	}
 
 	// Add new terrain
-	_fe3d.terrainEntity_add("@terrain", _terrainHeightmapPath, _terrainDiffusemapPath, vec3(0.0f), _terrainSize, _maxTerrainHeight, _terrainUvRepeat, _terrainBrightness);
+	_fe3d.terrainEntity_add("@terrain", _terrainHeightmapPath, _terrainDiffusemapPath, vec3(0.0f), _terrainSize, _maxTerrainHeight, _terrainUvRepeat, _terrainLightness);
 	_fe3d.terrainEntity_select("@terrain");
 
 	// Get possibly corrected size

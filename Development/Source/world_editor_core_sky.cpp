@@ -26,7 +26,7 @@ void WorldEditor::loadSkyEntity()
 		// Load base data
 		skyFile >>
 			_skyTexturePaths[0] >> _skyTexturePaths[1] >> _skyTexturePaths[2] >> _skyTexturePaths[3] >> _skyTexturePaths[4] >> _skyTexturePaths[5] >>
-			_skyRotationSpeed >> _skyBrightness >> _skyColor.r >> _skyColor.g >> _skyColor.b;
+			_skyRotationSpeed >> _skyLightness >> _skyColor.r >> _skyColor.g >> _skyColor.b;
 
 		// Close file
 		skyFile.close();
@@ -65,7 +65,7 @@ void WorldEditor::_saveSkyData()
 			}
 
 			// Add options to file
-			skyFile << _skyRotationSpeed << " " << _skyBrightness << " " << _skyColor.r << " " << _skyColor.g << " " << _skyColor.b;
+			skyFile << _skyRotationSpeed << " " << _skyLightness << " " << _skyColor.r << " " << _skyColor.g << " " << _skyColor.b;
 
 			// Close file
 			skyFile.close();
@@ -109,5 +109,5 @@ void WorldEditor::_loadSkyEntity()
 	_fe3d.skyEntity_add("@sky", _skyTexturePaths);
 	_fe3d.skyEntity_select("@sky");
 	_fe3d.skyEntity_setRotationSpeed("@sky", _skyRotationSpeed);
-	_fe3d.skyEntity_setBrightness("@sky", _skyBrightness);
+	_fe3d.skyEntity_setLightness("@sky", _skyLightness);
 }

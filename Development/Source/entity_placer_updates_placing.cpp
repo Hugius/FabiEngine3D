@@ -28,11 +28,17 @@ void EntityPlacer::_updateModelPlacing()
 				if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT) || _fe3d.terrainEntity_getSelectedID() == "")  // Can be bypassed if terrain does not exist
 				{
 					// Add new model
-					string newID = _currentModelName.substr(1, _currentModelName.size()) + std::to_string(_modelCounterMap[_currentModelName]); // Remove the '@'
-					_placeModel(newID, _currentModelName, newPosition, vec3(0.0f), _fe3d.gameEntity_getSize(_currentModelName));
+					begin: int randomSerial = _fe3d.misc_getUniqueInt(0, INT_MAX);
+					string newID = _currentModelName.substr(1, _currentModelName.size()) + std::to_string(randomSerial); // Remove the '@'
 
-					// Increase total of this model
-					_modelCounterMap[_currentModelName]++;
+					// Check if ID not already exists
+					if (_fe3d.gameEntity_isExisting(newID))
+					{
+						goto begin;
+					}
+
+					// Add model
+					_placeModel(newID, _currentModelName, newPosition, vec3(0.0f), _fe3d.gameEntity_getSize(_currentModelName));
 
 					// Disable placement mode if no terrain availible to choose position from
 					if (_fe3d.terrainEntity_getSelectedID() == "")
@@ -95,11 +101,14 @@ void EntityPlacer::_updateLightPlacing()
 				if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT) || _fe3d.terrainEntity_getSelectedID() == "") // Can be bypassed if terrain does not exist
 				{
 					// Add new pointlight
-					string newID = "pointLight" + std::to_string(_pointlightCounter);
-					_fe3d.lightEntity_add(newID, newPosition, vec3(1.0f), 1.0f);
+					begin: int randomSerial = _fe3d.misc_getUniqueInt(0, INT_MAX);
+					string newID = "pointlight" + std::to_string(randomSerial); // Remove the '@'
 
-					// Increase total of pointlights
-					_pointlightCounter++;
+					// Check if ID not already exists
+					if (_fe3d.lightEntity_isExisting(newID))
+					{
+						goto begin;
+					}
 
 					// Disable placement mode if no terrain availible to choose position from
 					if (_fe3d.terrainEntity_getSelectedID() == "")

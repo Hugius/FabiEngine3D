@@ -32,7 +32,7 @@ void ModelEditor::_updateManagementScreen()
 				_modelChoosingEnabled = true;
 				_modelEditingEnabled = true;
 				for (auto& name : _modelNames) { name = name.substr(1, name.size()); }
-				_gui->getGlobalScreen()->addChoiceForm("modelList", "Select mode", vec2(-0.4f, 0.1f), _modelNames);
+				_gui->getGlobalScreen()->addChoiceForm("modelList", "Select model", vec2(-0.4f, 0.1f), _modelNames);
 				for (auto& name : _modelNames) { name = "@" + name; }
 			}
 			else if (screen->getButton("deleteModel")->isHovered()) // Delete model button
@@ -40,7 +40,7 @@ void ModelEditor::_updateManagementScreen()
 				_modelChoosingEnabled = true;
 				_modelRemovalEnabled = true;
 				for (auto& name : _modelNames) { name = name.substr(1, name.size()); }
-				_gui->getGlobalScreen()->addChoiceForm("modelList", "Select mode", vec2(-0.4f, 0.1f), _modelNames);
+				_gui->getGlobalScreen()->addChoiceForm("modelList", "Select model", vec2(-0.4f, 0.1f), _modelNames);
 				for (auto& name : _modelNames) { name = "@" + name; }
 			}
 			else if (screen->getButton("back")->isHovered()) // Back button

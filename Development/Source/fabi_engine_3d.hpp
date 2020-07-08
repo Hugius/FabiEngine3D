@@ -74,7 +74,7 @@ public:
 	void skyEntity_show(const string& ID);
 	bool skyEntity_isExisting(const string& ID);
 	void skyEntity_select(const string& ID);
-	void skyEntity_setBrightness(const string& ID, float brightness);
+	void skyEntity_setLightness(const string& ID, float lightness);
 	void skyEntity_setRotationSpeed(const string& ID, float speed);
 	void skyEntity_setColor(const string& ID, vec3 color);
 	void skyEntity_setDayTime(const string& ID);
@@ -86,7 +86,7 @@ public:
 	string skyEntity_getSelectedID();
 
 	// Terrain entity interface
-	void terrainEntity_add(const string& ID, const string& heightmapPath, const string& texturePath, vec3 pos, float size, float maxHeight, float uvRepeat, float brightness);
+	void terrainEntity_add(const string& ID, const string& heightmapPath, const string& texturePath, vec3 pos, float size, float maxHeight, float uvRepeat, float lightness);
 	void terrainEntity_delete(const string& ID);
 	void terrainEntity_hide(const string& ID);
 	void terrainEntity_show(const string& ID);
@@ -451,7 +451,7 @@ public:
 	}
 
 	// Miscellaneous interface
-	int misc_getUniqueInt();
+	int misc_getUniqueInt(int min, int max);
 	int misc_getWindowWidth();
 	int misc_getWindowHeight();
 	int misc_getRandomInt(int min, int max);

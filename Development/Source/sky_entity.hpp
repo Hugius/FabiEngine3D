@@ -17,7 +17,7 @@ public:
 	void setColor(vec3 val);
 	void setDayCubeMap(GLuint val);
 	void setNightCubeMap(GLuint val);
-	void setBrightness(float val);
+	void setLightness(float val);
 	void setMixValue(float val);
 	void setRotationSpeed(float val);
 	void setDayTime();
@@ -29,7 +29,7 @@ public:
 	const GLuint getCurrentCubeMap()		const;
 	const GLuint getDayCubeMap()			const;
 	const GLuint getNightCubeMap()			const;
-	const float getBrightness()				const;
+	const float getLightness()				const;
 	const float getMixValue()				const;
 	const float getRotationSpeed()			const;
 	const bool  isDayTime()					const;
@@ -45,7 +45,7 @@ private:
 	GLuint _dayCubeMap   = 0;
 	GLuint _nightCubeMap = 0;
 
-	float _brightness		= 1.0f;
+	float _lightness		= 1.0f;
 	float _mixValue         = 0.0f;
 	float _rotationSpeed    = 0.0f;
 

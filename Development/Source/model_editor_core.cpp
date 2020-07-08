@@ -113,8 +113,9 @@ void ModelEditor::loadModels()
 		{
 			// Placeholder variables
 			string modelName, objName, diffuseName, lightName, reflectionName;
-			float width, height, depth, colorR, colorG, colorB, uvRepeat, boxSizeX, boxSizeY, boxSizeZ, specularStrength;
+			float width, height, depth, uvRepeat, specularStrength;
 			bool faceCulled, shadowed, transparent, specular;
+			vec3 color, boxSize;
 
 			// For item extraction
 			std::istringstream iss(line);
@@ -122,7 +123,7 @@ void ModelEditor::loadModels()
 			// Extract from file
 			iss >> modelName >> objName >> diffuseName >> lightName >> reflectionName
 				>> width >> height >> depth >> faceCulled >> shadowed >> transparent >> specular >> specularStrength
-				>> colorR >> colorG >> colorB >> uvRepeat >> boxSizeX >> boxSizeY >> boxSizeZ;
+				>> color.r >> color.g >> color.b >> uvRepeat >> boxSize.x >> boxSize.y >> boxSize.z;
 
 			// Run checks on string values
 			objName = (objName == "-") ? "" : objName;
@@ -132,7 +133,7 @@ void ModelEditor::loadModels()
 
 			// Add new model
 			_addModel(modelName, objName, diffuseName, lightName, reflectionName, vec3(width, height, depth),
-				faceCulled, shadowed, transparent, specular, specularStrength, vec3(colorR, colorG, colorB), uvRepeat, vec3(boxSizeX, boxSizeY, boxSizeZ));
+				faceCulled, shadowed, transparent, specular, specularStrength, vec3(color.r, color.g, color.b), uvRepeat, vec3(boxSize.x, boxSize.y, boxSize.z));
 		}
 
 		// Close file
@@ -165,34 +166,30 @@ void ModelEditor::save()
 			{
 				auto objPath = _fe3d.gameEntity_getObjPath(modelName);
 				auto diffuseMapPath = _fe3d.gameEntity_getDiffuseMapPath(modelName);
-				diffuseMapPath = (diffuseMapPath == "") ? "-" : diffuseMapPath;
 				auto lightMapPath = _fe3d.gameEntity_getLightMapPath(modelName);
-				lightMapPath = (lightMapPath == "") ? "-" : lightMapPath;
 				auto reflectionMapPath = _fe3d.gameEntity_getReflectionMapPath(modelName);
+				auto modelSize = _fe3d.gameEntity_getSize(modelName);
+				auto faceCulled = _fe3d.gameEntity_isFaceCulled(modelName);
+				auto shadowed = _fe3d.gameEntity_isShadowed(modelName);
+				auto transparent = _fe3d.gameEntity_isTransparent(modelName);
+				auto specular = _fe3d.gameEntity_isSpecularLighted(modelName);
+				auto specularStrength = _fe3d.gameEntity_getSpecularStrength(modelName);
+				auto color = _fe3d.gameEntity_getColor(modelName);
+				auto uvRepeat = _fe3d.gameEntity_getUvRepeat(modelName);
+				auto boxSize = _fe3d.aabbEntity_getSize(modelName);
+
+				// String value corrections
+				diffuseMapPath = (diffuseMapPath == "") ? "-" : diffuseMapPath;
+				lightMapPath = (lightMapPath == "") ? "-" : lightMapPath;
 				reflectionMapPath = (reflectionMapPath == "") ? "-" : reflectionMapPath;
-				auto modelSizeX = std::to_string(_fe3d.gameEntity_getSize(modelName).x);
-				auto modelSizeY = std::to_string(_fe3d.gameEntity_getSize(modelName).y);
-				auto modelSizeZ = std::to_string(_fe3d.gameEntity_getSize(modelName).z);
-				auto faceCulled = std::to_string(_fe3d.gameEntity_isFaceCulled(modelName));
-				auto shadowed = std::to_string(_fe3d.gameEntity_isShadowed(modelName));
-				auto transparent = std::to_string(_fe3d.gameEntity_isTransparent(modelName));
-				auto specular = std::to_string(_fe3d.gameEntity_isSpecularLighted(modelName));
-				auto specularStrength = std::to_string(_fe3d.gameEntity_getSpecularStrength(modelName));
-				auto colorR = std::to_string(_fe3d.gameEntity_getColor(modelName).x);
-				auto colorG = std::to_string(_fe3d.gameEntity_getColor(modelName).y);
-				auto colorB = std::to_string(_fe3d.gameEntity_getColor(modelName).z);
-				auto uvRepeat = std::to_string(_fe3d.gameEntity_getUvRepeat(modelName));
-				auto boxSizeX = std::to_string(_fe3d.aabbEntity_getSize(modelName).x);
-				auto boxSizeY = std::to_string(_fe3d.aabbEntity_getSize(modelName).y);
-				auto boxSizeZ = std::to_string(_fe3d.aabbEntity_getSize(modelName).z);
 
 				// 1 model -> 1 line in file
 				file << modelName << " " <<
 					objPath << " " << diffuseMapPath << " " << lightMapPath << " " << reflectionMapPath << " " <<
-					modelSizeX << " " << modelSizeY << " " << modelSizeZ << " " <<
+					modelSize.x << " " << modelSize.y << " " << modelSize.z << " " <<
 					faceCulled << " " << shadowed << " " << transparent << " " << specular << " " << specularStrength << " " <<
-					colorR << " " << colorG << " " << colorB << " " << uvRepeat << " " <<
-					boxSizeX << " " << boxSizeY << " " << boxSizeZ << "\n";
+					color.r << " " << color.g << " " << color.b << " " << uvRepeat << " " <<
+					boxSize.x << " " << boxSize.y << " " << boxSize.z << "\n";
 			}
 			else
 			{
@@ -258,62 +255,4 @@ void ModelEditor::unload()
 	_totalCursorDifference = vec2(0.0f);
 	_cameraAcceleration = vec2(0.0f);
 	_lastCursorPos = vec2(0.0f);
-}
-
-bool ModelEditor::_addModel(string modelName, string objName, string diffuseMapName, string lightMapName, string reflectionMapName, vec3 size,
-	bool faceCulled, bool shadowed, bool transparent, bool specular, float specularStrength, vec3 color, float uvRepeat, vec3 aabbSize)
-{
-	// If model name not existing yet
-	if (std::find(_modelNames.begin(), _modelNames.end(), modelName) == _modelNames.end())
-	{
-		// Add model name
-		_modelNames.push_back(modelName);
-		
-		// Add 3D model
-		if (objName != "")
-		{
-			_fe3d.gameEntity_add(modelName, objName, vec3(0.0f), vec3(0.0f), size, false);
-			_fe3d.aabbEntity_bindToGameEntity(modelName, aabbSize, true);
-			_fe3d.aabbEntity_hide(modelName);
-			
-			// Diffuse map
-			if (diffuseMapName != "")
-			{
-				_fe3d.gameEntity_setDiffuseMap(modelName, diffuseMapName);
-			}
-
-			// Light map
-			if (lightMapName != "")
-			{
-				_fe3d.gameEntity_setLightMap(modelName, lightMapName);
-				_fe3d.gameEntity_setLightmapped(modelName, true);
-			}
-
-			// Reflection map
-			if (reflectionMapName != "")
-			{
-				_fe3d.gameEntity_setReflectionMap(modelName, reflectionMapName);
-				_fe3d.gameEntity_setSkyReflective(modelName, true);
-			}
-
-			// Set boolean options
-			_fe3d.gameEntity_setFaceCulled(modelName, faceCulled);
-			_fe3d.gameEntity_setShadowed(modelName, shadowed);
-			_fe3d.gameEntity_setTransparent(modelName, transparent);
-			_fe3d.gameEntity_setSpecularLighted(modelName, specular);
-
-			// Set other options
-			_fe3d.gameEntity_setSpecularStrength(modelName, specularStrength);
-			_fe3d.gameEntity_setColor(modelName, color);
-			_fe3d.gameEntity_setUvRepeat(modelName, uvRepeat);
-		}
-
-		return true;
-	}
-	else
-	{
-		_fe3d.logger_throwWarning("Modelname \"" + modelName.substr(1, modelName.size()) + "\" is already in use!");
-
-		return false;
-	}
 }

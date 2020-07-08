@@ -122,9 +122,9 @@ void WorldEditor::_updateTerrainMesh()
 			{
 				_gui->getGlobalScreen()->addValueForm("uvRepeat", "UV repeat", _terrainUvRepeat, vec2(0.0f), vec2(0.3f, 0.1f));
 			}
-			else if (screen->getScrollingList("buttonList")->getButton("brightness")->isHovered())
+			else if (screen->getScrollingList("buttonList")->getButton("lightness")->isHovered())
 			{
-				_gui->getGlobalScreen()->addValueForm("brightness", "Brightness (0-100)", _terrainBrightness * 100.0f, vec2(0.0f), vec2(0.3f, 0.1f));
+				_gui->getGlobalScreen()->addValueForm("lightness", "Lightness (0-100)", _terrainLightness * 100.0f, vec2(0.0f), vec2(0.3f, 0.1f));
 			}
 			else if (screen->getButton("load")->isHovered())
 			{
@@ -141,10 +141,10 @@ void WorldEditor::_updateTerrainMesh()
 		_gui->getGlobalScreen()->checkValueForm("maxHeight", _maxTerrainHeight);
 		_gui->getGlobalScreen()->checkValueForm("uvRepeat", _terrainUvRepeat);
 
-		// Brightness value conversion
-		if (_gui->getGlobalScreen()->checkValueForm("brightness", _terrainBrightness))
+		// Lightness value conversion
+		if (_gui->getGlobalScreen()->checkValueForm("lightness", _terrainLightness))
 		{
-			_terrainBrightness = std::clamp(_terrainBrightness / 100.0f, 0.0f, 1.0f);
+			_terrainLightness = std::clamp(_terrainLightness / 100.0f, 0.0f, 1.0f);
 		}
 
 		// Filling statuses

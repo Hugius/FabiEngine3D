@@ -41,7 +41,7 @@ void TerrainEntityRenderer::unbind()
 
 void TerrainEntityRenderer::placeLightEntity(const LightEntity * light)
 {
-	if (light != nullptr)
+	if (light != nullptr) // Light is loaded
 	{
 		if (light->isEnabled())
 		{
@@ -51,16 +51,15 @@ void TerrainEntityRenderer::placeLightEntity(const LightEntity * light)
 			_lightCounter++;
 		}
 	}
-	else
+	else // Light if empty
 	{
 		for (unsigned int i = 0; i < 10; i++) // temporarily 10 so it does not crash
 		{
-			_shader.uploadUniform("u_pointLightPositions[" + std::to_string(i) + "]", light->getPosition());
-			_shader.uploadUniform("u_pointLightColors[" + std::to_string(i) + "]", light->getColor());
-			_shader.uploadUniform("u_pointLightStrengths[" + std::to_string(i) + "]", light->getStrength());
+			_shader.uploadUniform("u_pointLightPositions[" + std::to_string(i) + "]", vec3(0.0f));
+			_shader.uploadUniform("u_pointLightColors[" + std::to_string(i) + "]", vec3(0.0f));
+			_shader.uploadUniform("u_pointLightStrengths[" + std::to_string(i) + "]", 0.0f);
 		}
 	}
-
 }
 
 void TerrainEntityRenderer::render(const TerrainEntity * entity)
@@ -78,7 +77,7 @@ void TerrainEntityRenderer::render(const TerrainEntity * entity)
 			_shader.uploadUniform("u_blendmapRepeatR",     entity->getBlendRepeatR());
 			_shader.uploadUniform("u_blendmapRepeatG",     entity->getBlendRepeatG());
 			_shader.uploadUniform("u_blendmapRepeatB",     entity->getBlendRepeatB());
-			_shader.uploadUniform("u_brightness",		   entity->getBrightness());
+			_shader.uploadUniform("u_lightness",		   entity->getLightness());
 
 			// Texture uniforms
 			_shader.uploadUniform("u_sampler_diffuseMap", 0);

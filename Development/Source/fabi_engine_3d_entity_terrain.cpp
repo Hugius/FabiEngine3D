@@ -1,9 +1,9 @@
 #include "fabi_engine_3d.hpp"
 #include "core_engine.hpp"
 
-void FabiEngine3D::terrainEntity_add(const string& ID, const string& heightmapName, const string& textureName, vec3 pos, float size, float maxHeight, float uvRepeat, float brightness)
+void FabiEngine3D::terrainEntity_add(const string& ID, const string& heightmapName, const string& textureName, vec3 pos, float size, float maxHeight, float uvRepeat, float lightness)
 {
-	_core->_terrainEntityManager.addTerrainEntity(ID, heightmapName, textureName, pos, size, maxHeight, uvRepeat, brightness);
+	_core->_terrainEntityManager.addTerrainEntity(ID, heightmapName, textureName, pos, size, maxHeight, uvRepeat, lightness);
 }
 
 void FabiEngine3D::terrainEntity_delete(const string& ID)

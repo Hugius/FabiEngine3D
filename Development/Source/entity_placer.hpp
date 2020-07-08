@@ -53,6 +53,8 @@ private:
 
 	// Miscellaneous
 	void _placeModel(string modelID, string modelName, vec3 position, vec3 rotation, vec3 size);
+	void _placeModel(string modelID, vec3 position, vec3 rotation, vec3 size, string objPath, string diffuseMapPath, string lightMapPath, string reflectionMapPath,
+		bool faceCulled, bool shadowed, bool transparent, bool specular, float specularStrength, vec3 color, float uvRepeat, vec3 aabbSize);
 	void _updateCamera();
 	void _updateMiscellaneous();
 
@@ -67,11 +69,9 @@ private:
 
 	// Model placement
 	string _currentModelName = "";
-	std::map<string, unsigned int> _modelCounterMap;
 
 	// Billboard placement
 	string _currentBillboardName = "";
-	std::map<string, unsigned int> _billboardCounterMap;
 
 	// Ambient lighting
 	vec3 _ambientLightColor = vec3(1.0f);
@@ -85,7 +85,6 @@ private:
 	// Point lighting
 	bool _isPlacingPointlight = false;
 	const string _previewPointlightID = "@previewPointlight";
-	unsigned int _pointlightCounter = 0;
 
 	// Miscellaneous
 	bool _isLoaded = false;

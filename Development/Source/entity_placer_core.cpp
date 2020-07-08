@@ -63,10 +63,11 @@ void EntityPlacer::initializeGUI()
 
 	// Right-viewport: mainWindow - modelProperties
 	_rightWindow->addScreen("modelProperties");
-	_rightWindow->getScreen("modelProperties")->addTextfield("transformation", vec2(0.0f, 0.85f), vec2(1.75f, 0.1f), "Transformation", vec3(1.0f));
-	_rightWindow->getScreen("modelProperties")->addButton("translation", vec2(0.0f, 0.7f), vec2(0.75f, 0.2f), "translation.png", vec3(0.0f));
-	_rightWindow->getScreen("modelProperties")->addButton("rotation", vec2(0.0f, 0.45f), vec2(0.75f, 0.2f), "rotation.png", vec3(0.0f));
-	_rightWindow->getScreen("modelProperties")->addButton("scaling", vec2(0.0f, 0.2f), vec2(0.75f, 0.2f), "scaling.png", vec3(0.0f));
+	_rightWindow->getScreen("modelProperties")->addTextfield("transformation", vec2(0.0f, 0.95f), vec2(1.75f, 0.1f), "Transformation", vec3(1.0f));
+	_rightWindow->getScreen("modelProperties")->addButton("translation", vec2(0.0f, 0.8f), vec2(0.75f, 0.2f), "translation.png", vec3(0.0f));
+	_rightWindow->getScreen("modelProperties")->addButton("rotation", vec2(0.0f, 0.55f), vec2(0.75f, 0.2f), "rotation.png", vec3(0.0f));
+	_rightWindow->getScreen("modelProperties")->addButton("scaling", vec2(0.0f, 0.3f), vec2(0.75f, 0.2f), "scaling.png", vec3(0.0f));
+	_rightWindow->getScreen("modelProperties")->addButton("delete", vec2(0.0f, 0.0f), vec2(1.5f, 0.1f), vec3(0.75f, 0.0f, 0.0f), vec3(1.0f, 0.25f, 0.25f), "Delete", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 	_rightWindow->getScreen("modelProperties")->addTextfield("x", vec2(0.0f, -0.15f), vec2(0.25f, 0.1f), "X", vec3(1.0f));
 	_rightWindow->getScreen("modelProperties")->addTextfield("y", vec2(0.0f, -0.4f), vec2(0.25f, 0.1f), "Y", vec3(1.0f));
 	_rightWindow->getScreen("modelProperties")->addTextfield("z", vec2(0.0f, -0.65f), vec2(0.25f, 0.1f), "Z", vec3(1.0f));
@@ -145,17 +146,8 @@ void EntityPlacer::load()
 		if (_fe3d.gameEntity_isExisting(modelName))
 		{
 			_leftWindow->getScreen("modelPlaceManagement")->getScrollingList("modelList")->addButton(modelName, modelName.substr(1, modelName.size()));
-			_modelCounterMap.insert(std::make_pair(modelName, 0));
 		}
 	}
-
-	// Preview billboard loading
-	//_modelEditor.loadModels();
-	//for (auto& billboardName : _billboardEditor.)
-	//{
-	//	_leftWindow->getScreen("modelPlaceManagement")->getScrollingList("modelList")->addButton(billboardName, billboardName.substr(1, billboardName.size()));
-	//	_billboardCounterMap.insert(std::make_pair(billboardName, 0));
-	//}
 
 	// Preview pointlight loading
 	_fe3d.lightEntity_add(_previewPointlightID, vec3(0.0f), vec3(1.0f), 10.0f);
@@ -201,11 +193,22 @@ void EntityPlacer::loadWorld()
 			// Load entity according to type
 			if (entityType == "MODEL")
 			{
-				string modelID;
-				vec3 position, rotation, size;
+				string modelID, objPath, diffuseMapPath, lightMapPath, reflectionMapPath;
+				vec3 position, rotation, size, color, aabbSize;
+				float uvRepeat, specularStrength;
+				bool isFaceculled, isShadowed, isTransparent, isSpecular;
 
 				// Load model data
-				iss >> modelID >> position.x >> position.y >> position.z >> rotation.x >> rotation.y >> rotation.z >> size.x >> size.y >> size.z;
+				iss >> modelID >> position.x >> position.y >> position.z >> rotation.x >> rotation.y >> rotation.z >> 
+					size.x >> size.y >> size.z >> objPath >> diffuseMapPath >> lightMapPath >> reflectionMapPath >>
+					isFaceculled >> isShadowed >> isTransparent >> isSpecular >> specularStrength
+					>> color.r >> color.g >> color.b >> uvRepeat >> aabbSize.x >> aabbSize.y >> aabbSize.z;
+
+				// Run checks on string values
+				objPath = (objPath == "-") ? "" : objPath;
+				diffuseMapPath = (diffuseMapPath == "-") ? "" : diffuseMapPath;
+				lightMapPath = (lightMapPath == "-") ? "" : lightMapPath;
+				reflectionMapPath = (reflectionMapPath == "-") ? "" : reflectionMapPath;
 
 				// Extract the model name from the model ID
 				string modelName = "";
@@ -218,10 +221,8 @@ void EntityPlacer::loadWorld()
 				}
 
 				// Add the model
-				_placeModel(modelID, modelName, position, rotation, size);
-
-				// Update the counter map
-				_modelCounterMap[modelName]++;
+				_placeModel(modelID, position, rotation, size, objPath, diffuseMapPath, lightMapPath, reflectionMapPath, isFaceculled, isShadowed, isTransparent, isSpecular,
+					specularStrength, color, uvRepeat, aabbSize);
 			}
 			else if (entityType == "BILLBOARD")
 			{
@@ -261,14 +262,35 @@ void EntityPlacer::save()
 			// Check if not preview model
 			if (entityID[0] != '@')
 			{
-				// Transformation data
-				vec3 pos = _fe3d.gameEntity_getPosition(entityID);
-				vec3 rot = _fe3d.gameEntity_getRotation(entityID);
-				vec3 size = _fe3d.gameEntity_getSize(entityID);
+				// Retrieve all values to be saved
+				auto position = _fe3d.gameEntity_getPosition(entityID);
+				auto rotation = _fe3d.gameEntity_getRotation(entityID);
+				auto size = _fe3d.gameEntity_getSize(entityID);
+				auto objPath = _fe3d.gameEntity_getObjPath(entityID);
+				auto diffuseMapPath = _fe3d.gameEntity_getDiffuseMapPath(entityID);
+				auto lightMapPath = _fe3d.gameEntity_getLightMapPath(entityID);
+				auto reflectionMapPath = _fe3d.gameEntity_getReflectionMapPath(entityID);
+				auto isFaceCulled = _fe3d.gameEntity_isFaceCulled(entityID);
+				auto isShadowed = _fe3d.gameEntity_isShadowed(entityID);
+				auto isTransparent = _fe3d.gameEntity_isTransparent(entityID);
+				auto isSpecular = _fe3d.gameEntity_isSpecularLighted(entityID);
+				auto specularStrength = _fe3d.gameEntity_getSpecularStrength(entityID);
+				auto color = _fe3d.gameEntity_getColor(entityID);
+				auto uvRepeat = _fe3d.gameEntity_getUvRepeat(entityID);
+				auto aabbSize = _fe3d.aabbEntity_getSize(entityID);
+
+				// String value corrections
+				diffuseMapPath = (diffuseMapPath == "") ? "-" : diffuseMapPath;
+				lightMapPath = (lightMapPath == "") ? "-" : lightMapPath;
+				reflectionMapPath = (reflectionMapPath == "") ? "-" : reflectionMapPath;
 
 				// 1 model -> 1 line in file
-				file << "MODEL " << entityID << " " << pos.x << " " << pos.y << " " << pos.z << " " << 
-					rot.x << " " << rot.y << " " << rot.z << " " << size.x << " " << size.y << " " << size.z << "\n";
+				file << "MODEL " << entityID << " " << position.x << " " << position.y << " " << position.z << " " <<
+					rotation.x << " " << rotation.y << " " << rotation.z << " " << size.x << " " << size.y << " " << size.z << " " <<
+					objPath << " " << diffuseMapPath << " " << lightMapPath << " " << reflectionMapPath << " " <<
+					isFaceCulled << " " << isShadowed << " " << isTransparent << " " << isSpecular << " " << specularStrength << " " <<
+					color.r << " " << color.g << " " << color.b << " " << uvRepeat << " " <<
+					aabbSize.x << " " << aabbSize.y << " " << aabbSize.z << "\n";
 			}
 		}
 
@@ -317,11 +339,19 @@ void EntityPlacer::unload()
 	_fe3d.lightEntity_deleteAll();
 
 	// Reset variables
-	_modelCounterMap.clear();
-	_billboardCounterMap.clear();
-	_pointlightCounter = 0;
 	_currentModelName = "";
 	_cameraMovementSpeed = 10.0f;
+	_currentModelName = "";
+	_currentBillboardName = "";
+	_ambientLightColor = vec3(1.0f);
+	_ambientLightStrength = 1.0f;
+	_directionalLightColor = vec3(1.0f);
+	_directionalLightPosition = vec3(0.0f);
+	_directionalLightStrength = 0.0f;
+	_isPlacingPointlight = false;
+	_isLoaded = false;
+	_transformation = Transformation::TRANSLATION;
+	_cameraMovementSpeed = 25.0f;
 
 	// Delete name textfields
 	_gui->getGlobalScreen()->deleteTextfield("selectedModelName");
@@ -341,40 +371,4 @@ void EntityPlacer::unload()
 	_leftWindow->getScreen("modelPlaceManagement")->getScrollingList("modelList")->deleteButtons();
 	_fe3d.collision_disableFrameRendering();
 	_isLoaded = false;
-}
-
-void EntityPlacer::_placeModel(string modelID, string modelName, vec3 position, vec3 rotation, vec3 size)
-{
-	// Add game entity
-	_fe3d.gameEntity_add(modelID, _fe3d.gameEntity_getObjPath(modelName), position, rotation, size);
-
-	// Model properties
-	_fe3d.gameEntity_setFaceCulled(modelID, _fe3d.gameEntity_isFaceCulled(modelName));
-	_fe3d.gameEntity_setShadowed(modelID, _fe3d.gameEntity_isShadowed(modelName));
-	_fe3d.gameEntity_setTransparent(modelID, _fe3d.gameEntity_isTransparent(modelName));
-	_fe3d.gameEntity_setSpecularLighted(modelID, _fe3d.gameEntity_isSpecularLighted(modelName));
-	_fe3d.gameEntity_setLightness(modelID, _fe3d.gameEntity_getLightness(modelName));
-	_fe3d.gameEntity_setUvRepeat(modelID, _fe3d.gameEntity_getUvRepeat(modelName));
-	_fe3d.gameEntity_setColor(modelID, _fe3d.gameEntity_getColor(modelName));
-	_fe3d.aabbEntity_bindToGameEntity(modelID, _fe3d.aabbEntity_getSize(modelName), true);
-
-	// Diffuse map
-	if (_fe3d.gameEntity_getDiffuseMapPath(modelName) != "")
-	{
-		_fe3d.gameEntity_setDiffuseMap(modelID, _fe3d.gameEntity_getDiffuseMapPath(modelName));
-	}
-
-	// Light map
-	if (_fe3d.gameEntity_getLightMapPath(modelName) != "")
-	{
-		_fe3d.gameEntity_setLightMap(modelID, _fe3d.gameEntity_getLightMapPath(modelName));
-		_fe3d.gameEntity_setLightmapped(modelID, true);
-	}
-
-	// Reflection map
-	if (_fe3d.gameEntity_getReflectionMapPath(modelName) != "")
-	{
-		_fe3d.gameEntity_setReflectionMap(modelID, _fe3d.gameEntity_getReflectionMapPath(modelName));
-		_fe3d.gameEntity_setSkyReflective(modelID, true);
-	}
 }

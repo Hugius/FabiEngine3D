@@ -19,7 +19,7 @@ public:
 	void addTerrainEntity
 	(
 		const string& ID, const string& heightmapPath, const string& textureName,
-		vec3 pos, float size, float maxHeight, float uvRepeat, float brightness
+		vec3 pos, float size, float maxHeight, float uvRepeat, float lightness
 	);
 
 	void addBlendingToTerrain

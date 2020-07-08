@@ -21,7 +21,7 @@ public:
 	void setSize(float val);
 	void setMaxHeight(float val);
 	void setBlendMapped(bool val);
-	void setBrightness(float val);
+	void setLightness(float val);
 
 	// Textures
 	const GLuint getDiffuseMap() const;
@@ -37,7 +37,7 @@ public:
 	const float getBlendRepeatB() const;
 	const float getSize()         const;
 	const float getMaxHeight()    const;
-	const float getBrightness()   const;
+	const float getLightness()   const;
 
 	// Other
 	const vector<float>& getPixelColors() const;
@@ -58,7 +58,7 @@ private:
 	float _blendRepeatB = 1.0f;
 	float _maxHeight    = 0.0f;
 	float _size         = 0.0f;
-	float _brightness   = 0.0f;
+	float _lightness   = 0.0f;
 
 	bool _blendMapped = false;
 };

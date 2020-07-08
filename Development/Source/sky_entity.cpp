@@ -25,9 +25,9 @@ void SkyEntity::setNightCubeMap(GLuint val)
 	_nightCubeMap = val;
 }
 
-void SkyEntity::setBrightness(float val)
+void SkyEntity::setLightness(float val)
 {
-	_brightness = val;
+	_lightness = val;
 }
 
 void SkyEntity::setMixValue(float val)
@@ -75,9 +75,9 @@ const GLuint SkyEntity::getNightCubeMap() const
 	return _nightCubeMap;
 }
 
-const float SkyEntity::getBrightness() const
+const float SkyEntity::getLightness() const
 {
-	return _brightness;
+	return _lightness;
 }
 
 const float SkyEntity::getMixValue() const

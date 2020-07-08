@@ -298,9 +298,6 @@
     <ClCompile Include="Source\fabi_engine_3d_audio.cpp">
       <Filter>src\Core System\Interface</Filter>
     </ClCompile>
-    <ClCompile Include="Source\fabi_engine_3d_miscellaneous.cpp">
-      <Filter>src\Core System\Interface</Filter>
-    </ClCompile>
     <ClCompile Include="Source\fabi_engine_3d_entity_billboard.cpp">
       <Filter>src\Core System\Interface</Filter>
     </ClCompile>
@@ -328,21 +325,6 @@
     <ClCompile Include="Source\fabi_engine_3d_entity_water.cpp">
       <Filter>src\Core System\Interface</Filter>
     </ClCompile>
-    <ClCompile Include="Source\core_engine_miscellaneous.cpp">
-      <Filter>src\Core System\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\model_editor_miscellaneous.cpp">
-      <Filter>src\Editor System\Model Editor</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\entity_placer_miscellaneous.cpp">
-      <Filter>src\Editor System\Entity Placer</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\billboard_editor_miscellaneous.cpp">
-      <Filter>src\Editor System\Billboard Editor</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\world_editor_miscellaneous.cpp">
-      <Filter>src\Editor System\World Editor</Filter>
-    </ClCompile>
     <ClCompile Include="Source\camera_manager.cpp">
       <Filter>src\Miscellaneous\Code</Filter>
     </ClCompile>
@@ -358,10 +340,28 @@
     <ClCompile Include="Source\tools.cpp">
       <Filter>src\Miscellaneous\Code</Filter>
     </ClCompile>
-    <ClCompile Include="Source\opengl_framebuffer_miscellaneous.cpp">
+    <ClCompile Include="Source\opengl_framebuffer_misc.cpp">
       <Filter>src\Rendering System\OpenGL</Filter>
     </ClCompile>
-    <ClCompile Include="Source\engine_gui_global_screen_miscellaneous.cpp">
+    <ClCompile Include="Source\core_engine_misc.cpp">
+      <Filter>src\Core System\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\fabi_engine_3d_misc.cpp">
+      <Filter>src\Core System\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\billboard_editor_misc.cpp">
+      <Filter>src\Editor System\Billboard Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\entity_placer_misc.cpp">
+      <Filter>src\Editor System\Entity Placer</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\model_editor_misc.cpp">
+      <Filter>src\Editor System\Model Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\world_editor_misc.cpp">
+      <Filter>src\Editor System\World Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\engine_gui_global_screen_misc.cpp">
       <Filter>src\GUI System</Filter>
     </ClCompile>
   </ItemGroup>

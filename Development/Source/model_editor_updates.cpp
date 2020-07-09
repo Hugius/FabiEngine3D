@@ -103,7 +103,11 @@ void ModelEditor::_updateModelChoosing()
 			// Hide last model
 			if (hoveredModelID != "")
 			{
-				_fe3d.gameEntity_hide(hoveredModelID);
+				// Check if model has game entity
+				if (_fe3d.gameEntity_isExisting(hoveredModelID))
+				{
+					_fe3d.gameEntity_hide(hoveredModelID);
+				}
 			}
 
 			// Check if a model name is hovered
@@ -137,7 +141,11 @@ void ModelEditor::_updateModelChoosing()
 			// Show hovered model
 			if (hoveredModelID != "")
 			{
-				_fe3d.gameEntity_show(hoveredModelID);
+				// Check if model has game entity
+				if (_fe3d.gameEntity_isExisting(hoveredModelID))
+				{
+					_fe3d.gameEntity_show(hoveredModelID);
+				}
 			}
 		}
 	}

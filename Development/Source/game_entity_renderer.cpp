@@ -73,24 +73,22 @@ void GameEntityRenderer::unbind()
 	glDisable(GL_DEPTH_TEST);
 
 	_shader.unbind();
-	_lightCounter = 0;
 }
 
-void GameEntityRenderer::placeLightEntity(const LightEntity * light)
+void GameEntityRenderer::renderLightEntities(const vector<LightEntity*>& entities)
 {
-	if (light != nullptr) // Light is loaded
+	_shader.uploadUniform("u_pointLightCount", static_cast<int>(entities.size()));
+
+	// Render all lights
+	for (size_t i = 0; i < entities.size(); i++)
 	{
-		if (light->isEnabled())
+		if (entities[i]->isEnabled())
 		{
-			_shader.uploadUniform("u_pointLightPositions[" + std::to_string(_lightCounter) + "]", light->getPosition());
-			_shader.uploadUniform("u_pointLightColors[" + std::to_string(_lightCounter) + "]", light->getColor());
-			_shader.uploadUniform("u_pointLightStrengths[" + std::to_string(_lightCounter) + "]", light->getStrength());
-			_lightCounter++;
+			_shader.uploadUniform("u_pointLightPositions[" + std::to_string(i) + "]", entities[i]->getPosition());
+			_shader.uploadUniform("u_pointLightColors[" + std::to_string(i) + "]", entities[i]->getColor());
+			_shader.uploadUniform("u_pointLightStrengths[" + std::to_string(i) + "]", entities[i]->getStrength());
 		}
-	}
-	else // Light if empty
-	{
-		for (unsigned int i = 0; i < 10; i++) // temporarily 10 so it does not crash
+		else
 		{
 			_shader.uploadUniform("u_pointLightPositions[" + std::to_string(i) + "]", vec3(0.0f));
 			_shader.uploadUniform("u_pointLightColors[" + std::to_string(i) + "]", vec3(0.0f));
@@ -99,87 +97,84 @@ void GameEntityRenderer::placeLightEntity(const LightEntity * light)
 	}
 }
 
-void GameEntityRenderer::render(const GameEntity * entity)
+void GameEntityRenderer::render(const GameEntity* entity)
 {
-	if (entity != nullptr)
+	if (entity->isEnabled())
 	{
-		if (entity->isEnabled())
+		// Faceculling
+		if (entity->isFaceCulled())
 		{
-			// Faceculling
-			if (entity->isFaceCulled())
+			glEnable(GL_CULL_FACE);
+		}
+
+		// Shader uniforms
+		_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix());
+		_shader.uploadUniform("u_color", entity->getColor());
+		_shader.uploadUniform("u_specLightStrength", entity->getSpecularStrength());
+		_shader.uploadUniform("u_isTransparent", entity->isTransparent());
+		_shader.uploadUniform("u_isLightmapped", entity->isLightMapped());
+		_shader.uploadUniform("u_isSkyReflective", entity->isSkyReflective());
+		_shader.uploadUniform("u_isSceneReflective", entity->isSceneReflective());
+		_shader.uploadUniform("u_isSpecular", entity->isSpecularLighted());
+		_shader.uploadUniform("u_lightness", entity->getLightness());
+		_shader.uploadUniform("u_maxY", entity->getMaxY());
+		_shader.uploadUniform("u_customAlpha", entity->getAlpha());
+		_shader.uploadUniform("u_isShadowed", entity->isShadowed());
+		_shader.uploadUniform("u_uvRepeat", entity->getUvRepeat());
+		_shader.uploadUniform("u_hasDiffuseMap", entity->hasDiffuseMap());
+
+		// Bind
+		int index = 0;
+		for (auto& buffer : entity->getOglBuffers())
+		{
+			// Diffuse map
+			if (entity->hasDiffuseMap())
 			{
-				glEnable(GL_CULL_FACE);
+				glActiveTexture(GL_TEXTURE0);
+				glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap(index));
 			}
 
-			// Shader uniforms
-			_shader.uploadUniform("u_modelMatrix",       entity->getModelMatrix());
-			_shader.uploadUniform("u_color",             entity->getColor());
-			_shader.uploadUniform("u_specLightStrength", entity->getSpecularStrength());
-			_shader.uploadUniform("u_isTransparent",     entity->isTransparent());
-			_shader.uploadUniform("u_isLightmapped",     entity->isLightMapped());
-			_shader.uploadUniform("u_isSkyReflective",   entity->isSkyReflective());
-			_shader.uploadUniform("u_isSceneReflective", entity->isSceneReflective());
-			_shader.uploadUniform("u_isSpecular",        entity->isSpecularLighted());
-			_shader.uploadUniform("u_lightness",		 entity->getLightness());
-			_shader.uploadUniform("u_maxY",              entity->getMaxY());
-			_shader.uploadUniform("u_customAlpha",       entity->getAlpha());
-			_shader.uploadUniform("u_isShadowed",        entity->isShadowed());
-			_shader.uploadUniform("u_uvRepeat",		     entity->getUvRepeat());
-			_shader.uploadUniform("u_hasDiffuseMap",	 entity->hasDiffuseMap());
+			// Light map
+			if (entity->isLightMapped())
+			{
+				glActiveTexture(GL_TEXTURE1);
+				glBindTexture(GL_TEXTURE_2D, entity->getLightMap(index));
+			}
+
+			// Reflection map for sky reflections
+			if (entity->hasReflectionMap())
+			{
+				glActiveTexture(GL_TEXTURE2);
+				glBindTexture(GL_TEXTURE_2D, entity->getReflectionMap(index));
+			}
 
 			// Bind
-			int index = 0;
-			for (auto & buffer : entity->getOglBuffers())
+			glBindVertexArray(buffer->getVAO());
+
+			// Render
+			if (buffer->isInstanced())
 			{
-				// Diffuse map
-				if (entity->hasDiffuseMap())
-				{
-					glActiveTexture(GL_TEXTURE0);
-					glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap(index));
-				}
-
-				// Light map
-				if (entity->isLightMapped())
-				{
-					glActiveTexture(GL_TEXTURE1);
-					glBindTexture(GL_TEXTURE_2D, entity->getLightMap(index));
-				}
-
-				// Reflection map for sky reflections
-				if (entity->hasReflectionMap())
-				{
-					glActiveTexture(GL_TEXTURE2);
-					glBindTexture(GL_TEXTURE_2D, entity->getReflectionMap(index));
-				}
-
-				// Bind
-				glBindVertexArray(buffer->getVAO());
-
-				// Render
-				if (buffer->isInstanced())
-				{
-					_shader.uploadUniform("u_isInstanced", true);
-					glDrawArraysInstanced(GL_TRIANGLES, 0, buffer->getVertexCount(), buffer->getOffsetCount());
-				}
-				else
-				{
-					_shader.uploadUniform("u_isInstanced", false);
-					glDrawArrays(GL_TRIANGLES, 0, buffer->getVertexCount());
-				}
-
-				index++;
+				_shader.uploadUniform("u_isInstanced", true);
+				glDrawArraysInstanced(GL_TRIANGLES, 0, buffer->getVertexCount(), buffer->getOffsetCount());
+			}
+			else
+			{
+				_shader.uploadUniform("u_isInstanced", false);
+				glDrawArrays(GL_TRIANGLES, 0, buffer->getVertexCount());
 			}
 
-			// Unbind
-			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(GL_TEXTURE_2D, 0);
-			glBindVertexArray(0);
+			index++;
+		}
 
-			// Face culling
-			if (entity->isFaceCulled())
-			{
-				glDisable(GL_CULL_FACE);
-			}
+		// Unbind
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, 0);
+		glBindVertexArray(0);
+
+		// Face culling
+		if (entity->isFaceCulled())
+		{
+			glDisable(GL_CULL_FACE);
 		}
 	}
 }

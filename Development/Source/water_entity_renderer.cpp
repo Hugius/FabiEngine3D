@@ -34,57 +34,54 @@ void WaterEntityRenderer::unbind()
 	_shader.unbind();
 }
 
-void WaterEntityRenderer::render(const WaterEntity * entity)
+void WaterEntityRenderer::render(const WaterEntity* entity)
 {
-	if (entity != nullptr)
+	if (entity->isEnabled())
 	{
-		if (entity->isEnabled())
-		{
-			// Shader uniforms
-			_shader.uploadUniform("u_ripplePos", entity->getRipplePos());
-			//_shader.uploadUniform("u_timeX", entity->getTimeX());
-			//_shader.uploadUniform("u_timeZ", entity->getTimeZ());
-			_shader.uploadUniform("u_customHeightOffset", entity->getSurfaceHeight());
-			_shader.uploadUniform("u_uvRepeat", entity->getUvRepeat());
-			_shader.uploadUniform("u_shininess", entity->getShininess());
-			_shader.uploadUniform("u_transparency", entity->getTransparency());
-			//_shader.uploadUniform("u_waving", entity->isWaving());
-			_shader.uploadUniform("u_isRippling", entity->isRippling());
-			_shader.uploadUniform("u_isSpecular", entity->isSpecular());
-			_shader.uploadUniform("u_isReflective", entity->isReflective());
-			_shader.uploadUniform("u_isRefractive", entity->isRefractive());
-			_shader.uploadUniform("u_color", entity->getColor());
+		// Shader uniforms
+		_shader.uploadUniform("u_ripplePos", entity->getRipplePos());
+		//_shader.uploadUniform("u_timeX", entity->getTimeX());
+		//_shader.uploadUniform("u_timeZ", entity->getTimeZ());
+		_shader.uploadUniform("u_customHeightOffset", entity->getSurfaceHeight());
+		_shader.uploadUniform("u_uvRepeat", entity->getUvRepeat());
+		_shader.uploadUniform("u_shininess", entity->getShininess());
+		_shader.uploadUniform("u_transparency", entity->getTransparency());
+		//_shader.uploadUniform("u_waving", entity->isWaving());
+		_shader.uploadUniform("u_isRippling", entity->isRippling());
+		_shader.uploadUniform("u_isSpecular", entity->isSpecular());
+		_shader.uploadUniform("u_isReflective", entity->isReflective());
+		_shader.uploadUniform("u_isRefractive", entity->isRefractive());
+		_shader.uploadUniform("u_color", entity->getColor());
 
-			// Texture uniforms
-			_shader.uploadUniform("u_sampler_reflectionMap", 0);
-			_shader.uploadUniform("u_sampler_refractionMap", 1);
-			_shader.uploadUniform("u_sampler_depthMap", 2);
-			_shader.uploadUniform("u_sampler_dudvMap", 3);
-			_shader.uploadUniform("u_sampler_normalMap", 4);
+		// Texture uniforms
+		_shader.uploadUniform("u_sampler_reflectionMap", 0);
+		_shader.uploadUniform("u_sampler_refractionMap", 1);
+		_shader.uploadUniform("u_sampler_depthMap", 2);
+		_shader.uploadUniform("u_sampler_dudvMap", 3);
+		_shader.uploadUniform("u_sampler_normalMap", 4);
 
-			// Textures
-			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(GL_TEXTURE_2D, _shaderBus.getSceneReflectionMap());
-			glActiveTexture(GL_TEXTURE1);
-			glBindTexture(GL_TEXTURE_2D, _shaderBus.getSceneRefractionMap());
-			glActiveTexture(GL_TEXTURE2);
-			glBindTexture(GL_TEXTURE_2D, _shaderBus.getDepthMap());
-			glActiveTexture(GL_TEXTURE3);
-			glBindTexture(GL_TEXTURE_2D, entity->getDudvMap());
-			glActiveTexture(GL_TEXTURE4);
-			glBindTexture(GL_TEXTURE_2D, entity->getNormalMap());
-			glActiveTexture(GL_TEXTURE0);
+		// Textures
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, _shaderBus.getSceneReflectionMap());
+		glActiveTexture(GL_TEXTURE1);
+		glBindTexture(GL_TEXTURE_2D, _shaderBus.getSceneRefractionMap());
+		glActiveTexture(GL_TEXTURE2);
+		glBindTexture(GL_TEXTURE_2D, _shaderBus.getDepthMap());
+		glActiveTexture(GL_TEXTURE3);
+		glBindTexture(GL_TEXTURE_2D, entity->getDudvMap());
+		glActiveTexture(GL_TEXTURE4);
+		glBindTexture(GL_TEXTURE_2D, entity->getNormalMap());
+		glActiveTexture(GL_TEXTURE0);
 
-			// Bind
-			glBindVertexArray(entity->getOglBuffer()->getVAO());
+		// Bind
+		glBindVertexArray(entity->getOglBuffer()->getVAO());
 
-			// Render
-			glDrawArrays(GL_TRIANGLES, 0, entity->getOglBuffer()->getVertexCount());
+		// Render
+		glDrawArrays(GL_TRIANGLES, 0, entity->getOglBuffer()->getVertexCount());
 
-			// Unbind
-			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(GL_TEXTURE_2D, 0);
-			glBindVertexArray(0);
-		}
+		// Unbind
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, 0);
+		glBindVertexArray(0);
 	}
 }

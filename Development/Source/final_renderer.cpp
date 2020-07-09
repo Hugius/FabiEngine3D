@@ -15,30 +15,27 @@ void FinalRenderer::unbind()
 	_shader.unbind();
 }
 
-void FinalRenderer::render(const GuiEntity * entity, GLuint sceneMap)
+void FinalRenderer::render(const GuiEntity* entity, GLuint sceneMap)
 {
-	if (entity != nullptr)
+	if (entity->isEnabled())
 	{
-		if (entity->isEnabled())
-		{
-			// Uniforms
-			_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix());
-			_shader.uploadUniform("u_mirrorHor", entity->isMirroredHorizonally());
-			_shader.uploadUniform("u_mirrorVer", entity->isMirroredVertically());
-			_shader.uploadUniform("u_sampler_scene", 0);
+		// Uniforms
+		_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix());
+		_shader.uploadUniform("u_mirrorHor", entity->isMirroredHorizonally());
+		_shader.uploadUniform("u_mirrorVer", entity->isMirroredVertically());
+		_shader.uploadUniform("u_sampler_scene", 0);
 
-			// Bind
-			glBindVertexArray(entity->getOglBuffer()->getVAO());
-			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(GL_TEXTURE_2D, sceneMap);
+		// Bind
+		glBindVertexArray(entity->getOglBuffer()->getVAO());
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, sceneMap);
 
-			// Render
-			glDrawArrays(GL_TRIANGLES, 0, 6);
+		// Render
+		glDrawArrays(GL_TRIANGLES, 0, 6);
 
-			// Unbind
-			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(GL_TEXTURE_2D, 0);
-			glBindVertexArray(0);
-		}
+		// Unbind
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, 0);
+		glBindVertexArray(0);
 	}
 }

@@ -11,9 +11,6 @@ public:
 	
 	void bind()   override;
 	void unbind() override;
-	void placeLightEntity(const LightEntity * light);
+	void renderLightEntities(const vector<LightEntity*>& entities);
 	void render(const GameEntity * entity);
-
-private:
-	unsigned int _lightCounter = 0;
 };

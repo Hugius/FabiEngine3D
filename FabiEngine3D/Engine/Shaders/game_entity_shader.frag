@@ -2,7 +2,7 @@
 #extension GL_ARB_explicit_uniform_location : enable
 
 // Const variables
-#define POINT_LIGHT_AMOUNT 10
+#define POINT_LIGHT_AMOUNT 100
 
 // In variables
 in vec3 f_pos;
@@ -64,6 +64,7 @@ uniform bool u_hasDiffuseMap;
 
 // Integer uniforms
 uniform int u_shadowMapSize;
+uniform int u_pointLightCount;
 
 // Out variables
 layout (location = 0) out vec4 o_finalColor;
@@ -182,7 +183,7 @@ vec3 getPointLighting()
 	{
 		vec3 pointStrength = vec3(0.0f);
 		
-		for(int i = 0; i < POINT_LIGHT_AMOUNT; i++)
+		for(int i = 0; i < u_pointLightCount; i++)
 		{
 			vec3  lightDir = normalize(u_pointLightPositions[i] - f_pos);
 			float strength = max(dot(f_normal, lightDir), 0.0);

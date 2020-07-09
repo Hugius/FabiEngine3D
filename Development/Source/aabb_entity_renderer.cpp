@@ -22,21 +22,18 @@ void AabbEntityRenderer::unbind()
 
 void AabbEntityRenderer::render(const AabbEntity* entity)
 {
-	if (entity != nullptr)
+	if (entity->isEnabled())
 	{
-		if (entity->isEnabled())
-		{
-			// Shader uniforms
-			_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix());
+		// Shader uniforms
+		_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix());
 
-			// VAO
-			glBindVertexArray(entity->getOglBuffer()->getVAO());
+		// VAO
+		glBindVertexArray(entity->getOglBuffer()->getVAO());
 
-			// Render
-			glDrawArrays(GL_LINE_STRIP, 0, entity->getOglBuffer()->getVertexCount());
+		// Render
+		glDrawArrays(GL_LINE_STRIP, 0, entity->getOglBuffer()->getVertexCount());
 
-			// Unbind
-			glBindVertexArray(0);
-		}
+		// Unbind
+		glBindVertexArray(0);
 	}
 }

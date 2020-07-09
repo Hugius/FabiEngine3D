@@ -21,37 +21,34 @@ void SkyEntityRenderer::unbind()
 	_shader.unbind();
 }
 
-void SkyEntityRenderer::render(const SkyEntity * entity)
+void SkyEntityRenderer::render(const SkyEntity* entity)
 {
-	if (entity != nullptr)
+	if (entity->isEnabled())
 	{
-		if (entity->isEnabled())
-		{
-			// Uniforms
-			_shader.uploadUniform("u_lightness", entity->getLightness());
-			_shader.uploadUniform("u_mixValue", entity->getMixValue());
-			_shader.uploadUniform("u_color", entity->getColor());
+		// Uniforms
+		_shader.uploadUniform("u_lightness", entity->getLightness());
+		_shader.uploadUniform("u_mixValue", entity->getMixValue());
+		_shader.uploadUniform("u_color", entity->getColor());
 
-			// Day texture
-			_shader.uploadUniform("u_sampler_day", 0);
-			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(GL_TEXTURE_CUBE_MAP, entity->getDayCubeMap());
+		// Day texture
+		_shader.uploadUniform("u_sampler_day", 0);
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_CUBE_MAP, entity->getDayCubeMap());
 
-			// Night texture
-			_shader.uploadUniform("u_sampler_night", 1);
-			glActiveTexture(GL_TEXTURE1);
-			glBindTexture(GL_TEXTURE_CUBE_MAP, entity->getNightCubeMap());
+		// Night texture
+		_shader.uploadUniform("u_sampler_night", 1);
+		glActiveTexture(GL_TEXTURE1);
+		glBindTexture(GL_TEXTURE_CUBE_MAP, entity->getNightCubeMap());
 
-			// Bind
-			glBindVertexArray(entity->getOglBuffer()->getVAO());
+		// Bind
+		glBindVertexArray(entity->getOglBuffer()->getVAO());
 
-			// Render
-			glDrawArrays(GL_TRIANGLES, 0, entity->getOglBuffer()->getVertexCount());
+		// Render
+		glDrawArrays(GL_TRIANGLES, 0, entity->getOglBuffer()->getVertexCount());
 
-			// Unbind
-			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
-			glBindVertexArray(0);
-		}
+		// Unbind
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
+		glBindVertexArray(0);
 	}
 }

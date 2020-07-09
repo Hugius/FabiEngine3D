@@ -133,7 +133,10 @@ void RenderEngine::_captureDepth()
 		_depthRenderer.bind();
 
 		// Render terrain entity
-		_depthRenderer.renderTerrainEntity(_entityBus->getTerrainEntity());
+		if (_entityBus->getTerrainEntity() != nullptr)
+		{
+			_depthRenderer.renderTerrainEntity(_entityBus->getTerrainEntity());
+		}
 
 		// Render game entities
 		for (auto& entity : _entityBus->getGameEntities())

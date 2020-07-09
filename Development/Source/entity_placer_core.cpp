@@ -150,7 +150,7 @@ void EntityPlacer::load()
 	}
 
 	// Preview pointlight loading
-	_fe3d.lightEntity_add(_previewPointlightID, vec3(0.0f), vec3(1.0f), 10.0f);
+	_fe3d.lightEntity_add(_previewPointlightID, vec3(0.0f), vec3(1.0f), 3.0f);
 
 	// Create name textfields
 	_gui->getGlobalScreen()->addTextfield("selectedModelName", vec2(0.0f, 0.85f), vec2(0.5f, 0.1f), "", vec3(1.0f));
@@ -340,7 +340,7 @@ void EntityPlacer::unload()
 
 	// Reset variables
 	_currentModelName = "";
-	_cameraMovementSpeed = 10.0f;
+	_customCameraSpeed = 10.0f;
 	_currentModelName = "";
 	_currentBillboardName = "";
 	_ambientLightColor = vec3(1.0f);
@@ -351,7 +351,7 @@ void EntityPlacer::unload()
 	_isPlacingPointlight = false;
 	_isLoaded = false;
 	_transformation = Transformation::TRANSLATION;
-	_cameraMovementSpeed = 25.0f;
+	_customCameraSpeed = 25.0f;
 
 	// Delete name textfields
 	_gui->getGlobalScreen()->deleteTextfield("selectedModelName");

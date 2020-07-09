@@ -1,1 +1,2 @@
-@rocket User\Assets\OBJs\rocket.obj User\Assets\Textures\DiffuseMaps\rocket.png - User\Assets\Textures\ReflectionMaps\rocket.png 0.700000 0.500000 0.700000 0 1 0 0 1.000000 0.500000 0.500000 0.500000 1.000000 3.369440 41.859158 3.805008
+@rocket User\Assets\OBJs\rocket.obj User\Assets\Textures\DiffuseMaps\rocket.png - User\Assets\Textures\ReflectionMaps\rocket.png 0.7 0.5 0.7 0 1 0 0 1 0.5 0.5 0.5 1 3.36944 41.8592 3.80501
+@earth User\Assets\OBJs\earth.obj User\Assets\Textures\DiffuseMaps\earth.png User\Assets\Textures\LightMaps\earth.png - 0.0298423 0.0298423 0.0298423 0 1 0 0 1 0.5 0.5 0.5 1 1 1 1

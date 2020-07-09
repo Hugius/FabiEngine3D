@@ -24,10 +24,7 @@ void RenderEngine::_renderTerrainEntity()
 		_terrainEntityRenderer.bind();
 
 		// Render lights
-		for (auto& light : _entityBus->getLightEntities())
-		{
-			_terrainEntityRenderer.placeLightEntity(light);
-		}
+		_terrainEntityRenderer.renderLightEntities(_entityBus->getLightEntities());
 
 		// Render TERRAIN entity
 		_terrainEntityRenderer.render(_entityBus->getTerrainEntity());
@@ -58,10 +55,7 @@ void RenderEngine::_renderGameEntities()
 	_gameEntityRenderer.bind();
 
 	// Render lights
-	for (auto & light : _entityBus->getLightEntities())
-	{
-		_gameEntityRenderer.placeLightEntity(light);
-	}
+	_gameEntityRenderer.renderLightEntities(_entityBus->getLightEntities());
 
 	// Render GAME entities
 	for (auto & entity : _entityBus->getGameEntities())

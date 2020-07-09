@@ -36,24 +36,23 @@ void TerrainEntityRenderer::unbind()
 {
 	glDisable(GL_DEPTH_TEST);
 	_shader.unbind();
-	_lightCounter = 0;
 }
 
-void TerrainEntityRenderer::placeLightEntity(const LightEntity * light)
+void TerrainEntityRenderer::renderLightEntities(const vector<LightEntity*>& entities)
 {
-	if (light != nullptr) // Light is loaded
+	// Upload
+	_shader.uploadUniform("u_pointLightCount", static_cast<int>(entities.size()));
+
+	// Render all lights
+	for (size_t i = 0; i < entities.size(); i++) 
 	{
-		if (light->isEnabled())
+		if (entities[i]->isEnabled())
 		{
-			_shader.uploadUniform("u_pointLightPositions[" + std::to_string(_lightCounter) + "]", light->getPosition());
-			_shader.uploadUniform("u_pointLightColors[" + std::to_string(_lightCounter) + "]", light->getColor());
-			_shader.uploadUniform("u_pointLightStrengths[" + std::to_string(_lightCounter) + "]", light->getStrength());
-			_lightCounter++;
+			_shader.uploadUniform("u_pointLightPositions[" + std::to_string(i) + "]", entities[i]->getPosition());
+			_shader.uploadUniform("u_pointLightColors[" + std::to_string(i) + "]", entities[i]->getColor());
+			_shader.uploadUniform("u_pointLightStrengths[" + std::to_string(i) + "]", entities[i]->getStrength());
 		}
-	}
-	else // Light if empty
-	{
-		for (unsigned int i = 0; i < 10; i++) // temporarily 10 so it does not crash
+		else
 		{
 			_shader.uploadUniform("u_pointLightPositions[" + std::to_string(i) + "]", vec3(0.0f));
 			_shader.uploadUniform("u_pointLightColors[" + std::to_string(i) + "]", vec3(0.0f));
@@ -62,58 +61,55 @@ void TerrainEntityRenderer::placeLightEntity(const LightEntity * light)
 	}
 }
 
-void TerrainEntityRenderer::render(const TerrainEntity * entity)
+void TerrainEntityRenderer::render(const TerrainEntity* entity)
 {
-	if (entity != nullptr)
+	if (entity->isEnabled())
 	{
-		if (entity->isEnabled())
-		{
-			// Faceculling
-			glEnable(GL_CULL_FACE);
+		// Faceculling
+		glEnable(GL_CULL_FACE);
 
-			// Shader uniforms
-			_shader.uploadUniform("u_blendmappingEnabled", entity->isBlendMapped());
-			_shader.uploadUniform("u_blendmapRepeat",      entity->getBlendRepeat());
-			_shader.uploadUniform("u_blendmapRepeatR",     entity->getBlendRepeatR());
-			_shader.uploadUniform("u_blendmapRepeatG",     entity->getBlendRepeatG());
-			_shader.uploadUniform("u_blendmapRepeatB",     entity->getBlendRepeatB());
-			_shader.uploadUniform("u_lightness",		   entity->getLightness());
+		// Shader uniforms
+		_shader.uploadUniform("u_blendmappingEnabled", entity->isBlendMapped());
+		_shader.uploadUniform("u_blendmapRepeat", entity->getBlendRepeat());
+		_shader.uploadUniform("u_blendmapRepeatR", entity->getBlendRepeatR());
+		_shader.uploadUniform("u_blendmapRepeatG", entity->getBlendRepeatG());
+		_shader.uploadUniform("u_blendmapRepeatB", entity->getBlendRepeatB());
+		_shader.uploadUniform("u_lightness", entity->getLightness());
 
-			// Texture uniforms
-			_shader.uploadUniform("u_sampler_diffuseMap", 0);
-			_shader.uploadUniform("u_sampler_blendMap",   1);
-			_shader.uploadUniform("u_sampler_blendMapR",  2);
-			_shader.uploadUniform("u_sampler_blendMapG",  3);
-			_shader.uploadUniform("u_sampler_blendMapB",  4);
-			_shader.uploadUniform("u_sampler_shadowMap",  5);
+		// Texture uniforms
+		_shader.uploadUniform("u_sampler_diffuseMap", 0);
+		_shader.uploadUniform("u_sampler_blendMap", 1);
+		_shader.uploadUniform("u_sampler_blendMapR", 2);
+		_shader.uploadUniform("u_sampler_blendMapG", 3);
+		_shader.uploadUniform("u_sampler_blendMapB", 4);
+		_shader.uploadUniform("u_sampler_shadowMap", 5);
 
-			// Texture binding
-			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap());
-			glActiveTexture(GL_TEXTURE1);
-			glBindTexture(GL_TEXTURE_2D, entity->getBlendMap());
-			glActiveTexture(GL_TEXTURE2);
-			glBindTexture(GL_TEXTURE_2D, entity->getBlendMapR());
-			glActiveTexture(GL_TEXTURE3);
-			glBindTexture(GL_TEXTURE_2D, entity->getBlendMapG());
-			glActiveTexture(GL_TEXTURE4);
-			glBindTexture(GL_TEXTURE_2D, entity->getBlendMapB());
-			glActiveTexture(GL_TEXTURE5);
-			glBindTexture(GL_TEXTURE_2D, _shaderBus.getShadowMap());
+		// Texture binding
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap());
+		glActiveTexture(GL_TEXTURE1);
+		glBindTexture(GL_TEXTURE_2D, entity->getBlendMap());
+		glActiveTexture(GL_TEXTURE2);
+		glBindTexture(GL_TEXTURE_2D, entity->getBlendMapR());
+		glActiveTexture(GL_TEXTURE3);
+		glBindTexture(GL_TEXTURE_2D, entity->getBlendMapG());
+		glActiveTexture(GL_TEXTURE4);
+		glBindTexture(GL_TEXTURE_2D, entity->getBlendMapB());
+		glActiveTexture(GL_TEXTURE5);
+		glBindTexture(GL_TEXTURE_2D, _shaderBus.getShadowMap());
 
-			// Bind
-			glBindVertexArray(entity->getOglBuffer()->getVAO());
+		// Bind
+		glBindVertexArray(entity->getOglBuffer()->getVAO());
 
-			// Render
-			glDrawArrays(GL_TRIANGLES, 0, entity->getOglBuffer()->getVertexCount());
+		// Render
+		glDrawArrays(GL_TRIANGLES, 0, entity->getOglBuffer()->getVertexCount());
 
-			// Unbind
-			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(GL_TEXTURE_2D, 0);
-			glBindVertexArray(0);
+		// Unbind
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, 0);
+		glBindVertexArray(0);
 
-			// Face culling
-			glDisable(GL_CULL_FACE);
-		}
+		// Face culling
+		glDisable(GL_CULL_FACE);
 	}
 }

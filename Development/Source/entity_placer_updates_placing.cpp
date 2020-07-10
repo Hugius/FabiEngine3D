@@ -93,7 +93,7 @@ void EntityPlacer::_updateLightPlacing()
 				if (_fe3d.terrainEntity_getSelectedID() != "")
 				{
 					// Update preview pointlight position
-					newPosition = _fe3d.terrainEntity_getMousePoint() + vec3(0.0f, 5.0f, 0.0f);
+					newPosition = _fe3d.terrainEntity_getMousePoint() + vec3(0.0f, 1.0f, 0.0f);
 
 					// Show preview pointlight
 					_fe3d.lightEntity_show(_previewPointlightID);
@@ -114,7 +114,9 @@ void EntityPlacer::_updateLightPlacing()
 					}
 
 					// Add light entity
-					_fe3d.lightEntity_add(newID, newPosition, vec3(1.0f), 3.0f);
+					_fe3d.gameEntity_add("@" + newID, "Engine\\OBJs\\lamp.obj", newPosition, vec3(0.0f), vec3(1.0f));
+					_fe3d.lightEntity_add(newID, newPosition, vec3(1.0f), 1.0f);
+					_fe3d.aabbEntity_add(newID, newPosition, vec3(1.0f), true);
 
 					// Disable placement mode if no terrain availible to choose position from
 					if (_fe3d.terrainEntity_getSelectedID() == "")

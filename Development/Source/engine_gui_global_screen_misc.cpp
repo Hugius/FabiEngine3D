@@ -90,7 +90,7 @@ void EngineGuiGlobalScreen::_addValueForm(const string& ID, string title, string
 		_valueFormIDs.push_back(ID);
 		addRectangle(ID, position + vec2(0.0f, 0.15f), vec2(title.size() * 0.0275f, 0.125f), vec3(0.75f));
 		addTextfield(ID, position + vec2(0.0f, 0.15f), vec2(title.size() * 0.025f, 0.1f), title, vec3(0.0f));
-		addWriteField(ID, position, size, vec3(0.25f), vec3(0.5f), vec3(1.0f), vec3(0.0f), false, onlyNumbers, onlyNumbers, onlyNumbers);
+		addWriteField(ID, position, size, vec3(0.25f), vec3(0.5f), vec3(1.0f), vec3(0.0f), false, onlyNumbers, onlyNumbers, onlyNumbers, !onlyNumbers);
 		getWriteField(ID)->setTextContent(valueString);
 
 		// GUI focus & set first writefield active

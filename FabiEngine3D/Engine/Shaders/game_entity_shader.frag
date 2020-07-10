@@ -188,8 +188,8 @@ vec3 getPointLighting()
 			vec3  lightDir = normalize(u_pointLightPositions[i] - f_pos);
 			float strength = max(dot(f_normal, lightDir), 0.0);
 			float distance = length(u_pointLightPositions[i] - f_pos);
-			float attenuation = 1.0f / (1.0f + 0.07f * distance + 0.017f * (distance * distance * distance));
-			strength *= attenuation * (u_pointLightStrengths[i] * 10.0f);
+			float attenuation = 1.0f / (1.0f + 0.07f * distance + 0.017f * (distance * distance));
+			strength *= attenuation * (u_pointLightStrengths[i]);
 			pointStrength += (u_pointLightColors[i] * strength);
 		}
 

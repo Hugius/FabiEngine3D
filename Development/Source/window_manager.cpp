@@ -12,6 +12,9 @@
 
 WindowManager::WindowManager()
 {
+	// Make sure scaled monitors still show the correct resolution
+	SetProcessDpiAwareness(PROCESS_SYSTEM_DPI_AWARE);
+
 	// SDL stuff
 	Logger::getInst().throwInfo("Initializing SDL 2...");
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
@@ -19,9 +22,6 @@ WindowManager::WindowManager()
 		string error = "SDL could not be initialized: " + string(SDL_GetError());
 		Logger::getInst().throwError(error.c_str());
 	}
-
-	// Make sure scaled monitors still show the correct resolution
-	SetProcessDpiAwareness(PROCESS_SYSTEM_DPI_AWARE);
 	
 	// Window stuff
 	Logger::getInst().throwInfo("Initializing window...");

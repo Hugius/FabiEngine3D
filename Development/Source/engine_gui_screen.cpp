@@ -125,10 +125,10 @@ void EngineGuiScreen::addScrollingList(const string& ID, vec2 position, vec2 siz
 }
 
 void EngineGuiScreen::addWriteField(const string& ID, vec2 position, vec2 size, vec3 color, vec3 hoverColor, vec3 textColor, vec3 textHoverColor, 
-	bool noNumbers, bool noCaps, bool noSpecials, bool noLetters)
+	bool noNumbers, bool noCaps, bool noSpecials, bool noLetters, bool minusAllowed)
 {
 	auto dimensions = _convertDimensions(position, size);
-	_writeFields.push_back(make_shared<EngineGuiWriteField>(_fe3d, _parentID + "_" + _ID, ID, vec2(dimensions.x, dimensions.y), vec2(dimensions.z, dimensions.w), color, hoverColor, textColor, textHoverColor, noNumbers, noCaps, noSpecials, noLetters));
+	_writeFields.push_back(make_shared<EngineGuiWriteField>(_fe3d, _parentID + "_" + _ID, ID, vec2(dimensions.x, dimensions.y), vec2(dimensions.z, dimensions.w), color, hoverColor, textColor, textHoverColor, noNumbers, noCaps, noSpecials, noLetters, minusAllowed));
 }
 
 void EngineGuiScreen::addButton(const string& ID, vec2 position, vec2 size, vec3 color, vec3 hoverColor, string textContent, vec3 textColor, vec3 textHoverColor)

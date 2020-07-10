@@ -4,14 +4,13 @@
 void GameEntityRenderer::bind()
 {
 	// Define clipping plane for scene reflections
-	const float zeroOffset = 0.0000001f;
-	vec4 clippingPlane = vec4(0.0f, 1.0f, 0.0f, -(_shaderBus.getSceneReflectionHeight() + zeroOffset));
+	const float smallOffset = 0.0000001f;
+	vec4 clippingPlane = vec4(0.0f, 1.0f, 0.0f, -(_shaderBus.getSceneReflectionHeight() + smallOffset));
 
 	// Bind shader
 	_shader.bind();
 
 	// Vertex shader uniforms
-	_shader.uploadUniform("u_viewMatrix",        _shaderBus.getViewMatrix());
 	_shader.uploadUniform("u_projMatrix",        _shaderBus.getProjectionMatrix());
 	_shader.uploadUniform("u_skyRotationMatrix", _shaderBus.getSkyRotationMatrix());
 	_shader.uploadUniform("u_shadowMatrix",      _shaderBus.getShadowMatrix());
@@ -122,6 +121,16 @@ void GameEntityRenderer::render(const GameEntity* entity)
 		_shader.uploadUniform("u_isShadowed", entity->isShadowed());
 		_shader.uploadUniform("u_uvRepeat", entity->getUvRepeat());
 		_shader.uploadUniform("u_hasDiffuseMap", entity->hasDiffuseMap());
+		
+		// Check if entity is static to the camera view
+		if (entity->isCameraStatic())
+		{
+			_shader.uploadUniform("u_viewMatrix", mat4(mat3(_shaderBus.getViewMatrix())));
+		}
+		else
+		{
+			_shader.uploadUniform("u_viewMatrix", _shaderBus.getViewMatrix());
+		}
 
 		// Bind
 		int index = 0;

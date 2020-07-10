@@ -39,6 +39,7 @@ public:
 	void setSceneReflective(bool val);
 	void setSpecularLighted(bool val);
 	void setShadowed(bool val);
+	void setCameraStatic(bool val);
 	void setLightness(float val);
 	void setSpecularStrength(float val);
 	void setMaxY(float val);
@@ -68,6 +69,7 @@ public:
 	const bool hasDiffuseMap() const;
 	const bool hasLightMap() const;
 	const bool hasReflectionMap() const;
+	const bool isCameraStatic() const;
 	const float getLightness() const;
 	const float getSpecularStrength() const;
 	const float getAlpha() const;
@@ -91,6 +93,7 @@ private:
 	vector<GLuint> _lightMaps;
 	vector<GLuint> _reflectionMaps;
 
+	bool _isCameraStatic	= false;
 	bool _isTransparent     = false;
 	bool _isFaceCulled      = false;
 	bool _isLightMapped     = false;

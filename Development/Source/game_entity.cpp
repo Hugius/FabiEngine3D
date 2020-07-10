@@ -1,6 +1,7 @@
-#include <GLM\\gtc/matrix_transform.hpp>
-
 #include "game_entity.hpp"
+
+#include <GLM\\gtc/matrix_transform.hpp>
+#include <iostream>
 
 void GameEntity::updateModelMatrix()
 {
@@ -162,6 +163,11 @@ void GameEntity::setShadowed(bool val)
 	_isShadowed = val;
 }
 
+void GameEntity::setCameraStatic(bool val)
+{
+	_isCameraStatic = val;
+}
+
 void GameEntity::setLightness(float val)
 {
 	_lightness = val;
@@ -295,6 +301,11 @@ const bool GameEntity::hasLightMap() const
 const bool GameEntity::hasReflectionMap() const
 {
 	return !_reflectionMaps.empty();
+}
+
+const bool GameEntity::isCameraStatic() const
+{
+	return _isCameraStatic;
 }
 
 const float GameEntity::getLightness() const

@@ -3,13 +3,14 @@
 #include <map>
 
 EngineGuiWriteField::EngineGuiWriteField(
-	FabiEngine3D& fe3d, const string& parentID, const string& ID, vec2 position, vec2 size, 
-	vec3 color, vec3 hoverColor, vec3 textColor, vec3 textHoverColor, bool noNumbers, bool noCaps, bool noSpecials, bool noLetters) :
+	FabiEngine3D& fe3d, const string& parentID, const string& ID, vec2 position, vec2 size, vec3 color, vec3 hoverColor,
+	vec3 textColor, vec3 textHoverColor, bool noNumbers, bool noCaps, bool noSpecials, bool noLetters, bool minusAllowed) :
 	EngineGuiButton(fe3d, parentID, ID, position, size, color, hoverColor, "|", textColor, textHoverColor, false, true),
 	_noNumbers(noNumbers),
 	_noCaps(noCaps),
 	_noSpecials(noSpecials),
-	_noLetters(noLetters)
+	_noLetters(noLetters),
+	_minusAllowed(minusAllowed)
 {
 
 }
@@ -196,6 +197,19 @@ void EngineGuiWriteField::_updateTyping()
 						else
 						{
 							_currentTextContent += element.first;
+						}
+					}
+				}
+			}
+			else if(_minusAllowed && !_noNumbers) // Minus character (for numbers)
+			{
+				if (_fe3d.input_getKeyPressed(Input('-')))
+				{
+					if (!_fe3d.input_getKeyDown(Input::KEY_LSHIFT) && !_fe3d.input_getKeyDown(Input::KEY_RSHIFT))
+					{
+						if (_currentTextContent.empty()) // Minus can only before any number
+						{
+							_currentTextContent += '-';
 						}
 					}
 				}

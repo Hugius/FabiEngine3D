@@ -19,7 +19,7 @@ public:
 
 	void addScrollingList(const string& ID, vec2 position, vec2 size, vec3 color, vec3 buttonColor, vec3 buttonHoverColor, vec3 textColor, vec3 textHoverColor, vec2 charSize);
 	void addWriteField(const string& ID, vec2 position, vec2 size, vec3 color, vec3 hoverColor, vec3 textColor, vec3 textHoverColor, 
-		bool noNumbers = false, bool noCaps = false, bool noSpecials = false, bool noLetters = false);
+		bool noNumbers, bool noCaps, bool noSpecials, bool noLetters, bool minusAllowed);
 	void addButton(const string& ID, vec2 position, vec2 size, vec3 color, vec3 hoverColor, string textContent, vec3 textColor, vec3 textHoverColor);
 	void addButton(const string& ID, vec2 position, vec2 size, const string& textureName, vec3 hoverColor);
 	void addRectangle(const string& ID, vec2 position, vec2 size, vec3 color);

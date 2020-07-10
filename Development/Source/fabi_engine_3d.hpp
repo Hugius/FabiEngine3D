@@ -176,6 +176,7 @@ public:
 	void		   gameEntity_setColor(const string& ID, vec3 color);
 	void		   gameEntity_setMaxY(const string& ID, float y);
 	void		   gameEntity_setUvRepeat(const string& ID, float repeat);
+	void		   gameEntity_setStaticToCamera(const string& ID, bool staticToCamera);
 	float		   gameEntity_getLightness(const string& ID);
 	float		   gameEntity_getSpecularStrength(const string& ID);
 	float		   gameEntity_getAlpha(const string& ID);

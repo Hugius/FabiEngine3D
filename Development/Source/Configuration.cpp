@@ -37,8 +37,8 @@ Config::Config()
 	}
 	else
 	{
-		_windowWidth = int(float(DM.w) * 0.8f);
-		_windowHeight = int(float(DM.h) * 0.8f);
+		_windowWidth = int(float(DM.w) * 0.9f);
+		_windowHeight = int(float(DM.h) * 0.9f);
 	}
 
 	// Set viewport dimensions

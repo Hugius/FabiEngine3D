@@ -45,3 +45,30 @@ void FabiEngine3D::lightEntity_setStrength(const string& ID, float strength)
 {
 	_core->_lightEntityManager.getEntity(ID)->setStrength(strength);
 }
+
+vec3 FabiEngine3D::lightEntity_getPosition(const string& ID)
+{
+	return _core->_lightEntityManager.getEntity(ID)->getPosition();
+}
+
+vec3 FabiEngine3D::lightEntity_getColor(const string& ID)
+{
+	return _core->_lightEntityManager.getEntity(ID)->getColor();
+}
+
+float FabiEngine3D::lightEntity_getStrength(const string& ID)
+{
+	return _core->_lightEntityManager.getEntity(ID)->getStrength();
+}
+
+vector<string> FabiEngine3D::lightEntity_getAllIDs()
+{
+	vector<string> IDs;
+
+	for (auto entity : _core->_lightEntityManager.getEntities()) // Loop over light entities
+	{
+		IDs.push_back(entity->getID());
+	}
+
+	return IDs;
+}

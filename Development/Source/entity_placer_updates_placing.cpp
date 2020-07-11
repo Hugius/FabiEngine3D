@@ -114,9 +114,9 @@ void EntityPlacer::_updateLightPlacing()
 					}
 
 					// Add light entity
-					_fe3d.gameEntity_add("@" + newID, "Engine\\OBJs\\lamp.obj", newPosition, vec3(0.0f), vec3(1.0f));
+					_fe3d.gameEntity_add("@" + newID, "Engine\\OBJs\\lamp.obj", newPosition, vec3(0.0f), vec3(0.5f));
 					_fe3d.lightEntity_add(newID, newPosition, vec3(1.0f), 1.0f);
-					_fe3d.aabbEntity_add(newID, newPosition, vec3(1.0f), true);
+					_fe3d.aabbEntity_add(newID, newPosition, vec3(1.0f, 1.5f, 1.0f), true);
 
 					// Disable placement mode if no terrain availible to choose position from
 					if (_fe3d.terrainEntity_getSelectedID() == "")

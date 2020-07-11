@@ -69,7 +69,7 @@ private:
 
 	float _cameraDistance = 5.0f;
 	const float _minCameraDistance = 1.0f;
-	const float _maxCameraDistance = 50.0f;
+	const float _maxCameraDistance = 100.0f;
 	const float _minCameraHeight = 1.0f;
 	const float _cameraSpeed = 0.15f;
 	const float _scrollWheelDivider = 15.0f;

@@ -43,7 +43,7 @@ void EntityPlacer::_updateModelEditing()
 								// Update selected model text
 								string textEntityID = _gui->getGlobalScreen()->getTextfield("selectedModelName")->getEntityID();
 								_fe3d.textEntity_show(textEntityID);
-								_fe3d.textEntity_setTextContent(textEntityID, "Selected model: " + activeModelID, 0.025f);
+								_fe3d.textEntity_setTextContent(textEntityID, "Selected: " + activeModelID, 0.025f);
 
 								// Filling writefields
 								vec3 position = _fe3d.gameEntity_getPosition(activeModelID);
@@ -65,12 +65,13 @@ void EntityPlacer::_updateModelEditing()
 			}
 
 			// Check if user made the active model inactive
-			if (selectedModelID == "" && _fe3d.misc_isMouseInsideViewport() && !_gui->getGlobalScreen()->isFocused())
+			if (selectedModelID == "" && activeModelID != "" && _fe3d.misc_isMouseInsideViewport() && !_gui->getGlobalScreen()->isFocused())
 			{
 				// LMB pressed
 				if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT) && !_fe3d.input_getMouseDown(Input::MOUSE_BUTTON_RIGHT))
 				{
 					activeModelID = "";
+					_rightWindow->setActiveScreen("main");
 				}
 			}
 
@@ -358,22 +359,20 @@ void EntityPlacer::_updateModelEditing()
 					}
 				}
 			}
-			else
-			{
-				// Dectivate properties screen
-				_rightWindow->setActiveScreen("main");
-			}
 		}
 		else
 		{
-			// Reset when user wants to place models again
-			for (auto& entityID : _fe3d.gameEntity_getAllIDs())
+			if (_rightWindow->getActiveScreen()->getID() != "main")
 			{
-				_rightWindow->setActiveScreen("main");
-				_fe3d.gameEntity_setLightness(entityID, 1.0f);
-				selectedLightnessMultiplier = 1;
-				activeModelID = "";
-				selectedModelID = "";
+				// Reset when user wants to place models again
+				for (auto& entityID : _fe3d.gameEntity_getAllIDs())
+				{
+					_rightWindow->setActiveScreen("main");
+					_fe3d.gameEntity_setLightness(entityID, 1.0f);
+					selectedLightnessMultiplier = 1;
+					activeModelID = "";
+					selectedModelID = "";
+				}
 			}
 		}
 	}
@@ -389,11 +388,73 @@ void EntityPlacer::_updateBillboardEditing()
 
 void EntityPlacer::_updateLightEditing()
 {
+	static string activeLightBulbID = "";
+	string selectedLightBulbID = "";
+
 	if (_isLoaded)
 	{
 		if (!_isPlacingPointlight)
 		{
+			// Check if user selected a lightbulb model
+			for (auto& entityID : _fe3d.gameEntity_getAllIDs())
+			{
+				// Must be light preview entity
+				if (entityID.substr(0, 11) == "@pointlight")
+				{
+					// Cursor must be in 3D space, no GUI interruptions, no RMB holding down
+					if (_fe3d.collision_checkCursorInEntity(entityID.substr(1, entityID.size())) && _fe3d.misc_isMouseInsideViewport() &&
+						!_gui->getGlobalScreen()->isFocused() && !_fe3d.input_getMouseDown(Input::MOUSE_BUTTON_RIGHT))
+					{
+						// Set new selected lightbulb
+						selectedLightBulbID = entityID;
 
+						// Check if user clicked lightbulb
+						if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
+						{
+							// Check if same lightbulb is clicked again
+							if (selectedLightBulbID != activeLightBulbID)
+							{
+								activeLightBulbID = selectedLightBulbID;
+								_transformation = Transformation::TRANSLATION;
+
+								// Activate properties screen
+								_rightWindow->setActiveScreen("lightProperties");
+
+								// Update selected lightbulb text
+								string textEntityID = _gui->getGlobalScreen()->getTextfield("selectedPointlightName")->getEntityID();
+								string lightID = activeLightBulbID.substr(1, 9999); // Removing the '@'
+								_fe3d.textEntity_show(textEntityID);
+								_fe3d.textEntity_setTextContent(textEntityID, "Selected: " + lightID, 0.025f);
+
+								// Filling writefields
+								vec3 position = _fe3d.gameEntity_getPosition(activeLightBulbID);
+								_rightWindow->getScreen("lightProperties")->getWriteField("x")->setTextContent(std::to_string(static_cast<int>(position.x)));
+								_rightWindow->getScreen("lightProperties")->getWriteField("y")->setTextContent(std::to_string(static_cast<int>(position.y)));
+								_rightWindow->getScreen("lightProperties")->getWriteField("z")->setTextContent(std::to_string(static_cast<int>(position.z)));
+							}
+						}
+					}
+					else
+					{
+						// Don't reset if lightbulb is active
+						if (entityID != activeLightBulbID)
+						{
+
+						}
+					}
+				}
+			}
+
+			// Check if user made the active lightbulb inactive
+			if (selectedLightBulbID == "" && activeLightBulbID != "" && _fe3d.misc_isMouseInsideViewport() && !_gui->getGlobalScreen()->isFocused())
+			{
+				// LMB pressed
+				if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT) && !_fe3d.input_getMouseDown(Input::MOUSE_BUTTON_RIGHT))
+				{
+					activeLightBulbID = "";
+					_rightWindow->setActiveScreen("main");
+				}
+			}
 		}
 	}
 }

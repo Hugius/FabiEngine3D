@@ -81,6 +81,30 @@ void EntityPlacer::initializeGUI()
 	_rightWindow->getScreen("modelProperties")->addWriteField("x", vec2(0.0f, -0.25f), vec2(1.0f, 0.1f), vec3(0.25f), vec3(0.75f), vec3(1.0f), vec3(0.0f), 0, 1, 1, 1, 1);
 	_rightWindow->getScreen("modelProperties")->addWriteField("y", vec2(0.0f, -0.5f), vec2(1.0f, 0.1f), vec3(0.25f), vec3(0.75f), vec3(1.0f), vec3(0.0f), 0, 1, 1, 1, 1);
 	_rightWindow->getScreen("modelProperties")->addWriteField("z", vec2(0.0f, -0.75f), vec2(1.0f, 0.1f), vec3(0.25f), vec3(0.75f), vec3(1.0f), vec3(0.0f), 0, 1, 1, 1, 1);
+
+	// Right-viewport: mainWindow - lightProperties
+	_rightWindow->addScreen("lightProperties");
+	_rightWindow->getScreen("lightProperties")->addTextfield("intensity", vec2(0.0f, 0.9f), vec2(1.5f, 0.1f), "Intensity", vec3(1.0f));
+	_rightWindow->getScreen("lightProperties")->addWriteField("intensity", vec2(0.0f, 0.75f), vec2(1.0f, 0.1f), vec3(0.25f), vec3(0.75f), vec3(1.0f), vec3(0.0f), 0, 1, 1, 1, 1);
+	_rightWindow->getScreen("lightProperties")->addButton("intensityPlus", vec2(0.75f, 0.75f), vec2(0.5f, 0.15f), "plus.png", vec3(1.0f));
+	_rightWindow->getScreen("lightProperties")->addButton("intensityMinus", vec2(-0.75f, 0.75f), vec2(0.5f, 0.15f), "minus.png", vec3(1.0f));
+	_rightWindow->getScreen("lightProperties")->addTextfield("distance", vec2(0.0f, 0.6f), vec2(1.5f, 0.1f), "Distance", vec3(1.0f));
+	_rightWindow->getScreen("lightProperties")->addWriteField("distance", vec2(0.0f, 0.5f), vec2(1.0f, 0.1f), vec3(0.25f), vec3(0.75f), vec3(1.0f), vec3(0.0f), 0, 1, 1, 1, 1);
+	_rightWindow->getScreen("lightProperties")->addButton("distancePlus", vec2(0.75f, 0.5f), vec2(0.5f, 0.15f), "plus.png", vec3(1.0f));
+	_rightWindow->getScreen("lightProperties")->addButton("distanceMinus", vec2(-0.75f, 0.5f), vec2(0.5f, 0.15f), "minus.png", vec3(1.0f));
+	_rightWindow->getScreen("lightProperties")->addTextfield("x", vec2(0.0f, 0.35f), vec2(0.25f, 0.1f), "X", vec3(1.0f));
+	_rightWindow->getScreen("lightProperties")->addTextfield("y", vec2(0.0f, 0.1f), vec2(0.25f, 0.1f), "Y", vec3(1.0f));
+	_rightWindow->getScreen("lightProperties")->addTextfield("z", vec2(0.0f, -0.15f), vec2(0.25f, 0.1f), "Z", vec3(1.0f));
+	_rightWindow->getScreen("lightProperties")->addButton("xPlus", vec2(0.75f, 0.25f), vec2(0.5f, 0.15f), "plus.png", vec3(1.0f));
+	_rightWindow->getScreen("lightProperties")->addButton("yPlus", vec2(0.75f, 0.0f), vec2(0.5f, 0.15f), "plus.png", vec3(1.0f));
+	_rightWindow->getScreen("lightProperties")->addButton("zPlus", vec2(0.75f, -0.25f), vec2(0.5f, 0.15f), "plus.png", vec3(1.0f));
+	_rightWindow->getScreen("lightProperties")->addButton("xMinus", vec2(-0.75f, 0.25f), vec2(0.5f, 0.15f), "minus.png", vec3(1.0f));
+	_rightWindow->getScreen("lightProperties")->addButton("yMinus", vec2(-0.75f, 0.0f), vec2(0.5f, 0.15f), "minus.png", vec3(1.0f));
+	_rightWindow->getScreen("lightProperties")->addButton("zMinus", vec2(-0.75f, -0.25f), vec2(0.5f, 0.15f), "minus.png", vec3(1.0f));
+	_rightWindow->getScreen("lightProperties")->addWriteField("x", vec2(0.0f, 0.25f), vec2(1.0f, 0.1f), vec3(0.25f), vec3(0.75f), vec3(1.0f), vec3(0.0f), 0, 1, 1, 1, 1);
+	_rightWindow->getScreen("lightProperties")->addWriteField("y", vec2(0.0f, 0.0f), vec2(1.0f, 0.1f), vec3(0.25f), vec3(0.75f), vec3(1.0f), vec3(0.0f), 0, 1, 1, 1, 1);
+	_rightWindow->getScreen("lightProperties")->addWriteField("z", vec2(0.0f, -0.25f), vec2(1.0f, 0.1f), vec3(0.25f), vec3(0.75f), vec3(1.0f), vec3(0.0f), 0, 1, 1, 1, 1);
+	_rightWindow->getScreen("lightProperties")->addButton("delete", vec2(0.0f, -0.5f), vec2(1.5f, 0.1f), vec3(0.75f, 0.0f, 0.0f), vec3(1.0f, 0.25f, 0.25f), "Delete", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 }
 
 void EntityPlacer::load()
@@ -197,13 +221,13 @@ void EntityPlacer::loadWorld()
 				string modelID, objPath, diffuseMapPath, lightMapPath, reflectionMapPath;
 				vec3 position, rotation, size, color, aabbSize;
 				float uvRepeat, specularStrength;
-				bool isFaceculled, isShadowed, isTransparent, isSpecular;
+				bool isFaceculled, isShadowed, isTransparent, isSpecular, isFrozen;
 
 				// Load model data
 				iss >> modelID >> position.x >> position.y >> position.z >> rotation.x >> rotation.y >> rotation.z >> 
 					size.x >> size.y >> size.z >> objPath >> diffuseMapPath >> lightMapPath >> reflectionMapPath >>
-					isFaceculled >> isShadowed >> isTransparent >> isSpecular >> specularStrength
-					>> color.r >> color.g >> color.b >> uvRepeat >> aabbSize.x >> aabbSize.y >> aabbSize.z;
+					isFaceculled >> isShadowed >> isTransparent >> isSpecular >> isFrozen >> specularStrength >> 
+					color.r >> color.g >> color.b >> uvRepeat >> aabbSize.x >> aabbSize.y >> aabbSize.z;
 
 				// Run checks on string values
 				objPath = (objPath == "-") ? "" : objPath;
@@ -275,6 +299,7 @@ void EntityPlacer::save()
 				auto isShadowed = _fe3d.gameEntity_isShadowed(entityID);
 				auto isTransparent = _fe3d.gameEntity_isTransparent(entityID);
 				auto isSpecular = _fe3d.gameEntity_isSpecularLighted(entityID);
+				auto isFrozen = _fe3d.gameEntity_isStaticToCamera(entityID);
 				auto specularStrength = _fe3d.gameEntity_getSpecularStrength(entityID);
 				auto color = _fe3d.gameEntity_getColor(entityID);
 				auto uvRepeat = _fe3d.gameEntity_getUvRepeat(entityID);
@@ -289,8 +314,8 @@ void EntityPlacer::save()
 				file << "MODEL " << entityID << " " << position.x << " " << position.y << " " << position.z << " " <<
 					rotation.x << " " << rotation.y << " " << rotation.z << " " << size.x << " " << size.y << " " << size.z << " " <<
 					objPath << " " << diffuseMapPath << " " << lightMapPath << " " << reflectionMapPath << " " <<
-					isFaceCulled << " " << isShadowed << " " << isTransparent << " " << isSpecular << " " << specularStrength << " " <<
-					color.r << " " << color.g << " " << color.b << " " << uvRepeat << " " <<
+					isFaceCulled << " " << isShadowed << " " << isTransparent << " " << isSpecular << " " << isFrozen << " " << 
+					specularStrength << " " << color.r << " " << color.g << " " << color.b << " " << uvRepeat << " " <<
 					aabbSize.x << " " << aabbSize.y << " " << aabbSize.z << "\n";
 			}
 		}

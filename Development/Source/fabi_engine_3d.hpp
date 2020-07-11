@@ -149,6 +149,7 @@ public:
 	void		   gameEntity_setSpecularLighted(const string& ID, bool enabled);
 	void		   gameEntity_setSceneReflective(const string& ID, bool enabled);
 	void		   gameEntity_setShadowed(const string& ID, bool enabled);
+	void		   gameEntity_setStaticToCamera(const string& ID, bool staticToCamera);
 	bool		   gameEntity_isExisting(const string& ID);
 	bool		   gameEntity_isVisible(const string& ID);
 	bool		   gameEntity_isMultiTextured(const string& ID);
@@ -159,6 +160,7 @@ public:
 	bool		   gameEntity_isSpecularLighted(const string& ID);
 	bool		   gameEntity_isSceneReflective(const string& ID);
 	bool		   gameEntity_isShadowed(const string& ID);
+	bool		   gameEntity_isStaticToCamera(const string& ID);
 	bool		   gameEntity_hasDiffuseMap(const string& ID);
 	bool		   gameEntity_hasLightMap(const string& ID);
 	bool		   gameEntity_hasReflectionMap(const string& ID);
@@ -176,7 +178,6 @@ public:
 	void		   gameEntity_setColor(const string& ID, vec3 color);
 	void		   gameEntity_setMaxY(const string& ID, float y);
 	void		   gameEntity_setUvRepeat(const string& ID, float repeat);
-	void		   gameEntity_setStaticToCamera(const string& ID, bool staticToCamera);
 	float		   gameEntity_getLightness(const string& ID);
 	float		   gameEntity_getSpecularStrength(const string& ID);
 	float		   gameEntity_getAlpha(const string& ID);
@@ -305,6 +306,10 @@ public:
 	void lightEntity_setPosition(const string& ID, vec3 position);
 	void lightEntity_setColor(const string& ID, vec3 color);
 	void lightEntity_setStrength(const string& ID, float strength);
+	vec3 lightEntity_getPosition(const string& ID);
+	vec3 lightEntity_getColor(const string& ID);
+	float lightEntity_getStrength(const string& ID);
+	vector<string> lightEntity_getAllIDs();
 
 	// Gui entity interface
 	void guiEntity_deleteAll();

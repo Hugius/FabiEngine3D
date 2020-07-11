@@ -206,6 +206,11 @@ bool FabiEngine3D::gameEntity_isShadowed(const string& ID)
 	return _core->_gameEntityManager.getEntity(ID)->isShadowed();
 }
 
+bool FabiEngine3D::gameEntity_isStaticToCamera(const string& ID)
+{
+	return _core->_gameEntityManager.getEntity(ID)->isCameraStatic();
+}
+
 bool FabiEngine3D::gameEntity_hasDiffuseMap(const string& ID)
 {
 	return _core->_gameEntityManager.getEntity(ID)->hasDiffuseMap();

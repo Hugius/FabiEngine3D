@@ -54,8 +54,10 @@ private:
 	// Miscellaneous
 	void _placeModel(string modelID, string modelName, vec3 position, vec3 rotation, vec3 size);
 	void _placeModel(string modelID, vec3 position, vec3 rotation, vec3 size, string objPath, string diffuseMapPath, string lightMapPath, string reflectionMapPath,
-		bool faceCulled, bool shadowed, bool transparent, bool specular, float specularStrength, vec3 color, float uvRepeat, vec3 aabbSize);
+		bool faceCulled, bool shadowed, bool transparent, bool specular, float specularIntensity, vec3 color, float uvRepeat, vec3 aabbSize);
 	void _updateCamera();
+	void _updateModelBlinking(string modelID, int& multiplier);
+	void _updateLightbulbAnimation(string modelID, int& multiplier);
 	void _updateMiscellaneous();
 
 	// Instances
@@ -75,22 +77,27 @@ private:
 
 	// Ambient lighting
 	vec3 _ambientLightColor = vec3(1.0f);
-	float _ambientLightStrength = 1.0f;
+	float _ambientLightIntensity = 1.0f;
 
 	// Directional lighting
 	vec3 _directionalLightColor = vec3(1.0f);
 	vec3 _directionalLightPosition = vec3(0.0f);
-	float _directionalLightStrength = 0.0f;
+	float _directionalLightIntensity = 0.0f;
 
 	// Point lighting
 	bool _isPlacingPointlight = false;
 	const string _previewPointlightID = "@previewPointlight";
+	const vec3 _defaultPointlightColor = vec3(1.0f);
+	const vec3 _defaultLightbulbSize = vec3(1.0f);
+	const vec3 _defaultLightbulbAabbSize = vec3(1.0f, 1.25f, 1.0f);
+	const float _defaultPointlightIntensity = 1.0f;
 
 	// Miscellaneous
 	bool _isLoaded = false;
 	Transformation _transformation = Transformation::TRANSLATION;
 	string _currentProjectName = "";
 	float _customCameraSpeed = 25.0f;
-	const float _blinkingSpeed = 0.025f;
+	const float _modelBlinkingSpeed = 0.025f;
+	const float _lightbulbAnimationSpeed = 0.015f;
 	const float _transformationSpeed = 0.05f;
 };

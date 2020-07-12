@@ -186,9 +186,9 @@ void EntityPlacer::_updateAmbientLightScreen()
 				_gui->getGlobalScreen()->addValueForm("ambientColorR", "R(0-255)", _ambientLightColor.r * 255.0f, vec2(-0.25f, 0.0f), vec2(0.2f, 0.1f));
 				_gui->getGlobalScreen()->addValueForm("ambientColorB", "B(0-255)", _ambientLightColor.b * 255.0f, vec2(0.25f, 0.0f), vec2(0.2f, 0.1f));
 			}
-			else if (screen->getButton("strength")->isHovered())
+			else if (screen->getButton("intensity")->isHovered())
 			{
-				_gui->getGlobalScreen()->addValueForm("ambientStrength", "Ambient strength", _ambientLightStrength * 100.0f, vec2(0.0f), vec2(0.3f, 0.1f));
+				_gui->getGlobalScreen()->addValueForm("ambientIntensity", "Ambient intensity", _ambientLightIntensity * 100.0f, vec2(0.0f), vec2(0.3f, 0.1f));
 			}
 			else if (screen->getButton("back")->isHovered())
 			{
@@ -197,9 +197,9 @@ void EntityPlacer::_updateAmbientLightScreen()
 		}
 
 		// Ambient value conversion
-		if (_gui->getGlobalScreen()->checkValueForm("ambientStrength", _ambientLightStrength))
+		if (_gui->getGlobalScreen()->checkValueForm("ambientIntensity", _ambientLightIntensity))
 		{
-			_ambientLightStrength /= 100.0f;
+			_ambientLightIntensity /= 100.0f;
 		}
 
 		// Color R values conversion
@@ -221,7 +221,7 @@ void EntityPlacer::_updateAmbientLightScreen()
 		}
 
 		// Update ambient lighting
-		_fe3d.gfx_enableAmbientLighting(_ambientLightColor, _ambientLightStrength);
+		_fe3d.gfx_enableAmbientLighting(_ambientLightColor, _ambientLightIntensity);
 	}
 }
 
@@ -246,9 +246,9 @@ void EntityPlacer::_updateDirectionalLightScreen()
 				_gui->getGlobalScreen()->addValueForm("positionX", "X", _directionalLightPosition.x, vec2(-0.25f, 0.0f), vec2(0.2f, 0.1f));
 				_gui->getGlobalScreen()->addValueForm("positionZ", "Z", _directionalLightPosition.z, vec2(0.25f, 0.0f), vec2(0.2f, 0.1f));
 			}
-			else if (screen->getButton("strength")->isHovered())
+			else if (screen->getButton("intensity")->isHovered())
 			{
-				_gui->getGlobalScreen()->addValueForm("directionalStrength", "Directional strength", _directionalLightStrength * 100.0f, vec2(0.0f), vec2(0.3f, 0.1f));
+				_gui->getGlobalScreen()->addValueForm("directionalIntensity", "Directional intensity", _directionalLightIntensity * 100.0f, vec2(0.0f), vec2(0.3f, 0.1f));
 			}
 			else if (screen->getButton("back")->isHovered())
 			{
@@ -257,9 +257,9 @@ void EntityPlacer::_updateDirectionalLightScreen()
 		}
 
 		// Ambient value conversion
-		if (_gui->getGlobalScreen()->checkValueForm("directionalStrength", _directionalLightStrength))
+		if (_gui->getGlobalScreen()->checkValueForm("directionalIntensity", _directionalLightIntensity))
 		{
-			_directionalLightStrength /= 100.0f;
+			_directionalLightIntensity /= 100.0f;
 		}
 
 		// Color R values conversion
@@ -286,7 +286,7 @@ void EntityPlacer::_updateDirectionalLightScreen()
 		_gui->getGlobalScreen()->checkValueForm("positionZ", _directionalLightPosition.z);
 
 		// Update directional lighting
-		_fe3d.gfx_enableDirectionalLighting(_directionalLightPosition, _directionalLightColor, _directionalLightStrength);
+		_fe3d.gfx_enableDirectionalLighting(_directionalLightPosition, _directionalLightColor, _directionalLightIntensity);
 	}
 }
 

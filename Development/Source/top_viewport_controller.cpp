@@ -24,11 +24,11 @@ void TopViewportController::initialize()
 	_gui->getViewport("top")->addWindow("projectWindow", vec2(-0.25f, 0.0f), vec2(0.9825f, 1.5f), vec3(0.25f));
 	_gui->getViewport("top")->getWindow("projectWindow")->addScreen("main");
 	_gui->getViewport("top")->getWindow("projectWindow")->setActiveScreen("main");
-	_gui->getViewport("top")->getWindow("projectWindow")->getScreen("main")->addButton("newProject", vec2(-0.767f, 0.0f), vec2(0.3f, 1.25f), _gui->topVpButtonColor, _gui->topVpButtonHoverColor, "New project", _gui->topVpTextColor, _gui->topVpTextHoverColor);
-	_gui->getViewport("top")->getWindow("projectWindow")->getScreen("main")->addButton("loadProject", vec2(-0.384, 0.0f), vec2(0.3f, 1.25f), _gui->topVpButtonColor, _gui->topVpButtonHoverColor, "Load project", _gui->topVpTextColor, _gui->topVpTextHoverColor);
-	_gui->getViewport("top")->getWindow("projectWindow")->getScreen("main")->addButton("saveProject", vec2(0.0f, 0.0f), vec2(0.3f, 1.25f), _gui->topVpButtonColor, _gui->topVpButtonHoverColor, "Save project", _gui->topVpTextColor, _gui->topVpTextHoverColor);
-	_gui->getViewport("top")->getWindow("projectWindow")->getScreen("main")->addButton("deleteProject", vec2(0.384, 0.0f), vec2(0.3f, 1.25f), _gui->topVpButtonColor, _gui->topVpButtonHoverColor, "Delete project", _gui->topVpTextColor, _gui->topVpTextHoverColor);
-	_gui->getViewport("top")->getWindow("projectWindow")->getScreen("main")->addButton("quitEngine", vec2(0.767f, 0.0f), vec2(0.3f, 1.25f), _gui->topVpButtonColor, _gui->topVpButtonHoverColor, "Quit engine", _gui->topVpTextColor, _gui->topVpTextHoverColor);
+	_gui->getViewport("top")->getWindow("projectWindow")->getScreen("main")->addButton("newProject", vec2(-0.767f, 0.0f), vec2(0.15f, 1.25f), _gui->topVpButtonColor, _gui->topVpButtonHoverColor, "NEW", _gui->topVpTextColor, _gui->topVpTextHoverColor);
+	_gui->getViewport("top")->getWindow("projectWindow")->getScreen("main")->addButton("loadProject", vec2(-0.384, 0.0f), vec2(0.2f, 1.25f), _gui->topVpButtonColor, _gui->topVpButtonHoverColor, "LOAD", _gui->topVpTextColor, _gui->topVpTextHoverColor);
+	_gui->getViewport("top")->getWindow("projectWindow")->getScreen("main")->addButton("saveProject", vec2(0.0f, 0.0f), vec2(0.2f, 1.25f), _gui->topVpButtonColor, _gui->topVpButtonHoverColor, "SAVE", _gui->topVpTextColor, _gui->topVpTextHoverColor);
+	_gui->getViewport("top")->getWindow("projectWindow")->getScreen("main")->addButton("deleteProject", vec2(0.384, 0.0f), vec2(0.3f, 1.25f), _gui->topVpButtonColor, _gui->topVpButtonHoverColor, "DELETE", _gui->topVpTextColor, _gui->topVpTextHoverColor);
+	_gui->getViewport("top")->getWindow("projectWindow")->getScreen("main")->addButton("quitEngine", vec2(0.767f, 0.0f), vec2(0.2f, 1.25f), _gui->topVpButtonColor, _gui->topVpButtonHoverColor, "QUIT", _gui->topVpTextColor, _gui->topVpTextHoverColor);
 
 	// Top-viewport: gameWindow
 	_gui->getViewport("top")->addWindow("gameWindow", vec2(0.25f, 0.0f), vec2(0.9825f, 1.5f), vec3(0.25f));

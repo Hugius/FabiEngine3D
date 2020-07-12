@@ -56,7 +56,7 @@ vec4 getMainColor()
 {
 	// Variables to be used
 	vec3 normal = vec3(0.0f, 1.0f, 0.0f);
-	float specStrength = 0.0f;
+	float specularIntensity = 0.0f;
 
 	// Projective texture mapping
 	vec2 ndc = (f_clip.xy / f_clip.w) / 2.0 + 0.5;
@@ -91,7 +91,7 @@ vec4 getMainColor()
 		vec3 lightDir      = normalize(u_directionalLightPos - f_pos);
 		vec3 viewDir       = normalize(f_pos - u_cameraPosition);
 		vec3 reflectDir    = reflect(normalize(lightDir), normal);
-		specStrength = pow(max(dot(reflectDir, viewDir), 0.0f), u_shininess);
+		specularIntensity = pow(max(dot(reflectDir, viewDir), 0.0f), u_shininess);
 	}
 
 	// Finalizing fragment color
@@ -120,7 +120,7 @@ vec4 getMainColor()
 	// Specular highlights
 	if(u_isSpecular)
 	{
-		finalColor += vec3(specStrength);
+		finalColor += vec3(specularIntensity);
 	}
 
 	// Return final color

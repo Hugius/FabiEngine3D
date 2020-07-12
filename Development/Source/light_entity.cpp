@@ -10,9 +10,9 @@ void LightEntity::setColor(vec3 color)
 	_color = color;
 }
 
-void LightEntity::setStrength(float strength)
+void LightEntity::setIntensity(float intensity)
 {
-	_strength = strength;
+	_intensity = intensity;
 }
 
 const vec3 LightEntity::getPosition() const
@@ -25,7 +25,7 @@ const vec3 LightEntity::getColor() const
 	return _color;
 }
 
-const float LightEntity::getStrength() const
+const float LightEntity::getIntensity() const
 {
-	return _strength;
+	return _intensity;
 }

@@ -25,10 +25,10 @@ void ModelEditor::_updateModelEditingOptions()
 		{
 			_fe3d.gameEntity_setSpecularLighted(_currentModelName, !_fe3d.gameEntity_isSpecularLighted(_currentModelName));
 		}
-		else if (screen->getButton("strength")->isHovered())
+		else if (screen->getButton("intensity")->isHovered())
 		{
-			_gui->getGlobalScreen()->addValueForm("strength", "Specular strength", 
-				_fe3d.gameEntity_getSpecularStrength(_currentModelName), vec2(0.0f, 0.1f), vec2(0.1f, 0.1f));
+			_gui->getGlobalScreen()->addValueForm("intensity", "Specular intensity", 
+				_fe3d.gameEntity_getSpecularIntensity(_currentModelName), vec2(0.0f, 0.1f), vec2(0.1f, 0.1f));
 		}
 		else if (screen->getButton("setColor")->isHovered())
 		{
@@ -87,16 +87,16 @@ void ModelEditor::_updateModelEditingOptions()
 	_fe3d.textEntity_setTextContent(transparentID, isTransparent ? "No-white: ON" : "No-white: OFF");
 	_fe3d.textEntity_setTextContent(specularID, isSpecular ? "Specular: ON" : "Specular: OFF");
 
-	// Update specular strength
+	// Update specular intensity
 	if (_fe3d.gameEntity_isSpecularLighted(_currentModelName))
 	{
-		float strength = _fe3d.gameEntity_getSpecularStrength(_currentModelName);
-		_gui->getGlobalScreen()->checkValueForm("strength", strength);
-		_fe3d.gameEntity_setSpecularStrength(_currentModelName, strength);
+		float intensity = _fe3d.gameEntity_getSpecularIntensity(_currentModelName);
+		_gui->getGlobalScreen()->checkValueForm("intensity", intensity);
+		_fe3d.gameEntity_setSpecularIntensity(_currentModelName, intensity);
 	}
 
-	// Update specular strength button hoverability
-	screen->getButton("strength")->setHoverable(_fe3d.gameEntity_isSpecularLighted(_currentModelName));
+	// Update specular intensity button hoverability
+	screen->getButton("intensity")->setHoverable(_fe3d.gameEntity_isSpecularLighted(_currentModelName));
 
 	// Update model color changing through buttons
 	if (_modelColorPicking)

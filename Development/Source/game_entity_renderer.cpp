@@ -21,8 +21,8 @@ void GameEntityRenderer::bind()
 	_shader.uploadUniform("u_ambientLightColor",		  _shaderBus.getAmbientLightColor());
 	_shader.uploadUniform("u_directionalLightColor",	  _shaderBus.getDirectionalLightColor());
 	_shader.uploadUniform("u_directionalLightPos",        _shaderBus.getDirectionalLightPos());
-	_shader.uploadUniform("u_ambientLightStrength",       _shaderBus.getAmbLightStrength());
-	_shader.uploadUniform("u_directionalLightStrength",   _shaderBus.getDirectionalLightStrength());
+	_shader.uploadUniform("u_ambientLightIntensity",       _shaderBus.getAmbientLightIntensity());
+	_shader.uploadUniform("u_directionalLightIntensity",   _shaderBus.getDirectionalLightIntensity());
 	_shader.uploadUniform("u_fogMinDistance",             _shaderBus.getFogMinDistance());
 	_shader.uploadUniform("u_ambientLightingEnabled",	  _shaderBus.isAmbientLightingEnabled());
 	_shader.uploadUniform("u_directionalLightingEnabled", _shaderBus.isDirectionalLightingEnabled());
@@ -85,13 +85,13 @@ void GameEntityRenderer::renderLightEntities(const vector<LightEntity*>& entitie
 		{
 			_shader.uploadUniform("u_pointLightPositions[" + std::to_string(i) + "]", entities[i]->getPosition());
 			_shader.uploadUniform("u_pointLightColors[" + std::to_string(i) + "]", entities[i]->getColor());
-			_shader.uploadUniform("u_pointLightStrengths[" + std::to_string(i) + "]", entities[i]->getStrength());
+			_shader.uploadUniform("u_pointLightIntensities[" + std::to_string(i) + "]", entities[i]->getIntensity());
 		}
 		else
 		{
 			_shader.uploadUniform("u_pointLightPositions[" + std::to_string(i) + "]", vec3(0.0f));
 			_shader.uploadUniform("u_pointLightColors[" + std::to_string(i) + "]", vec3(0.0f));
-			_shader.uploadUniform("u_pointLightStrengths[" + std::to_string(i) + "]", 0.0f);
+			_shader.uploadUniform("u_pointLightIntensities[" + std::to_string(i) + "]", 0.0f);
 		}
 	}
 }
@@ -109,7 +109,7 @@ void GameEntityRenderer::render(const GameEntity* entity)
 		// Shader uniforms
 		_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix());
 		_shader.uploadUniform("u_color", entity->getColor());
-		_shader.uploadUniform("u_specLightStrength", entity->getSpecularStrength());
+		_shader.uploadUniform("u_specularLightIntensity", entity->getSpecularIntensity());
 		_shader.uploadUniform("u_isTransparent", entity->isTransparent());
 		_shader.uploadUniform("u_isLightmapped", entity->isLightMapped());
 		_shader.uploadUniform("u_isSkyReflective", entity->isSkyReflective());

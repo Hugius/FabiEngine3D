@@ -46,14 +46,14 @@ void EntityPlacer::initializeGUI()
 	// Left-viewport: mainWindow - ambientLightManagement
 	_leftWindow->addScreen("ambientLightManagement");
 	_leftWindow->getScreen("ambientLightManagement")->addButton("color", vec2(0.0f, 0.475f), vec2(1.0f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Color", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
-	_leftWindow->getScreen("ambientLightManagement")->addButton("strength", vec2(0.0f, 0.0f), vec2(1.5f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Strength", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_leftWindow->getScreen("ambientLightManagement")->addButton("intensity", vec2(0.0f, 0.0f), vec2(1.5f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "intensity", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 	_leftWindow->getScreen("ambientLightManagement")->addButton("back", vec2(0.0f, -0.475f), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Go back", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 
 	// Left-viewport: mainWindow - directionalLightManagement
 	_leftWindow->addScreen("directionalLightManagement");
 	_leftWindow->getScreen("directionalLightManagement")->addButton("color", vec2(0.0f, 0.63f), vec2(1.0f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Color", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 	_leftWindow->getScreen("directionalLightManagement")->addButton("position", vec2(0.0f, 0.21f), vec2(1.5f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Position", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
-	_leftWindow->getScreen("directionalLightManagement")->addButton("strength", vec2(0.0f, -0.21f), vec2(1.5f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Strength", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_leftWindow->getScreen("directionalLightManagement")->addButton("intensity", vec2(0.0f, -0.21f), vec2(1.5f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "intensity", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 	_leftWindow->getScreen("directionalLightManagement")->addButton("back", vec2(0.0f, -0.63f), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Go back", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 
 	// Left-viewport: mainWindow - pointLightManagement
@@ -175,7 +175,9 @@ void EntityPlacer::load()
 	}
 
 	// Preview pointlight loading
-	_fe3d.lightEntity_add(_previewPointlightID, vec3(0.0f), vec3(1.0f), 3.0f);
+	_fe3d.lightEntity_add(_previewPointlightID, vec3(0.0f), _defaultPointlightColor, _defaultPointlightIntensity);
+	_fe3d.gameEntity_add(_previewPointlightID, "Engine\\OBJs\\lamp.obj", vec3(0.0f), vec3(0.0f), _defaultLightbulbSize);
+	_fe3d.aabbEntity_add(_previewPointlightID, vec3(0.0f), _defaultLightbulbAabbSize, true);
 
 	// Create name textfields
 	_gui->getGlobalScreen()->addTextfield("selectedModelName", vec2(0.0f, 0.85f), vec2(0.5f, 0.1f), "", vec3(1.0f));
@@ -220,13 +222,13 @@ void EntityPlacer::loadWorld()
 			{
 				string modelID, objPath, diffuseMapPath, lightMapPath, reflectionMapPath;
 				vec3 position, rotation, size, color, aabbSize;
-				float uvRepeat, specularStrength;
+				float uvRepeat, specularIntensity;
 				bool isFaceculled, isShadowed, isTransparent, isSpecular, isFrozen;
 
 				// Load model data
 				iss >> modelID >> position.x >> position.y >> position.z >> rotation.x >> rotation.y >> rotation.z >> 
 					size.x >> size.y >> size.z >> objPath >> diffuseMapPath >> lightMapPath >> reflectionMapPath >>
-					isFaceculled >> isShadowed >> isTransparent >> isSpecular >> isFrozen >> specularStrength >> 
+					isFaceculled >> isShadowed >> isTransparent >> isSpecular >> isFrozen >> specularIntensity >> 
 					color.r >> color.g >> color.b >> uvRepeat >> aabbSize.x >> aabbSize.y >> aabbSize.z;
 
 				// Run checks on string values
@@ -247,7 +249,7 @@ void EntityPlacer::loadWorld()
 
 				// Add the model
 				_placeModel(modelID, position, rotation, size, objPath, diffuseMapPath, lightMapPath, reflectionMapPath, isFaceculled, isShadowed, isTransparent, isSpecular,
-					specularStrength, color, uvRepeat, aabbSize);
+					specularIntensity, color, uvRepeat, aabbSize);
 			}
 			else if (entityType == "BILLBOARD")
 			{
@@ -300,7 +302,7 @@ void EntityPlacer::save()
 				auto isTransparent = _fe3d.gameEntity_isTransparent(entityID);
 				auto isSpecular = _fe3d.gameEntity_isSpecularLighted(entityID);
 				auto isFrozen = _fe3d.gameEntity_isStaticToCamera(entityID);
-				auto specularStrength = _fe3d.gameEntity_getSpecularStrength(entityID);
+				auto specularIntensity = _fe3d.gameEntity_getSpecularIntensity(entityID);
 				auto color = _fe3d.gameEntity_getColor(entityID);
 				auto uvRepeat = _fe3d.gameEntity_getUvRepeat(entityID);
 				auto aabbSize = _fe3d.aabbEntity_getSize(entityID);
@@ -315,7 +317,7 @@ void EntityPlacer::save()
 					rotation.x << " " << rotation.y << " " << rotation.z << " " << size.x << " " << size.y << " " << size.z << " " <<
 					objPath << " " << diffuseMapPath << " " << lightMapPath << " " << reflectionMapPath << " " <<
 					isFaceCulled << " " << isShadowed << " " << isTransparent << " " << isSpecular << " " << isFrozen << " " << 
-					specularStrength << " " << color.r << " " << color.g << " " << color.b << " " << uvRepeat << " " <<
+					specularIntensity << " " << color.r << " " << color.g << " " << color.b << " " << uvRepeat << " " <<
 					aabbSize.x << " " << aabbSize.y << " " << aabbSize.z << "\n";
 			}
 		}
@@ -370,10 +372,10 @@ void EntityPlacer::unload()
 	_currentModelName = "";
 	_currentBillboardName = "";
 	_ambientLightColor = vec3(1.0f);
-	_ambientLightStrength = 1.0f;
+	_ambientLightIntensity = 1.0f;
 	_directionalLightColor = vec3(1.0f);
 	_directionalLightPosition = vec3(0.0f);
-	_directionalLightStrength = 0.0f;
+	_directionalLightIntensity = 0.0f;
 	_isPlacingPointlight = false;
 	_isLoaded = false;
 	_transformation = Transformation::TRANSLATION;

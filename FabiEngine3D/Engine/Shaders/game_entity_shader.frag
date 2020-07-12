@@ -33,10 +33,10 @@ uniform vec3 u_pointLightColors[POINT_LIGHT_AMOUNT];
 uniform vec3 u_color;
 
 // Float uniforms
-uniform float u_pointLightStrengths[POINT_LIGHT_AMOUNT];
-uniform float u_ambientLightStrength;
-uniform float u_directionalLightStrength;
-uniform float u_specLightStrength;
+uniform float u_pointLightIntensities[POINT_LIGHT_AMOUNT];
+uniform float u_ambientLightIntensity;
+uniform float u_directionalLightIntensity;
+uniform float u_specularLightIntensity;
 uniform float u_fogMinDistance;
 uniform float u_skyReflectionMixValue;
 uniform float u_customAlpha;
@@ -137,7 +137,7 @@ vec3 getAmbientLighting()
 {
 	if(u_ambientLightingEnabled)
 	{
-		return u_ambientLightColor * u_ambientLightStrength;
+		return u_ambientLightColor * u_ambientLightIntensity;
 	}
 	else
 	{
@@ -151,8 +151,8 @@ vec3 getDirectionalLighting()
 	if(u_directionalLightingEnabled)
 	{
 		vec3 lightDir = normalize(u_directionalLightPos - f_pos);
-		float lightStrength = max(dot(f_normal, lightDir), 0.0);
-		return u_directionalLightColor * (lightStrength * u_directionalLightStrength);
+		float lightIntensity = max(dot(f_normal, lightDir), 0.0);
+		return u_directionalLightColor * (lightIntensity * u_directionalLightIntensity);
 	}
 	else
 	{
@@ -167,7 +167,7 @@ vec3 getSpecularLighting()
 		vec3 lightDir   = normalize(f_pos - u_directionalLightPos);
 		vec3 viewDir    = normalize(f_pos - u_cameraPosition);
 		vec3 reflectDir = reflect(-lightDir, f_normal);
-		float specular  = pow(max(dot(viewDir, reflectDir), 0.0f), u_specLightStrength);
+		float specular  = pow(max(dot(viewDir, reflectDir), 0.0f), u_specularLightIntensity);
 		return vec3(specular);
 	}
 	else
@@ -181,19 +181,19 @@ vec3 getPointLighting()
 {
 	if(u_pointLightingEnabled)
 	{
-		vec3 pointStrength = vec3(0.0f);
+		vec3 totalIntensity = vec3(0.0f);
 		
 		for(int i = 0; i < u_pointLightCount; i++)
 		{
 			vec3  lightDir = normalize(u_pointLightPositions[i] - f_pos);
-			float strength = max(dot(f_normal, lightDir), 0.0);
+			float intensity = max(dot(f_normal, lightDir), 0.0);
 			float distance = length(u_pointLightPositions[i] - f_pos);
 			float attenuation = 1.0f / (1.0f + 0.07f * distance + 0.017f * (distance * distance));
-			strength *= attenuation * (u_pointLightStrengths[i]);
-			pointStrength += (u_pointLightColors[i] * strength);
+			intensity *= attenuation * (u_pointLightIntensities[i]);
+			totalIntensity += (u_pointLightColors[i] * intensity);
 		}
 
-		return pointStrength;
+		return totalIntensity;
 	}
 	else
 	{

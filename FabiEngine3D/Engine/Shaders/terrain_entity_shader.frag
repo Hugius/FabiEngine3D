@@ -27,10 +27,9 @@ uniform vec3 u_pointLightPositions[POINT_LIGHT_AMOUNT];
 uniform vec3 u_pointLightColors[POINT_LIGHT_AMOUNT];
 
 uniform float u_lightness;
-uniform float u_ambientLightStrength;
-uniform float u_directionalLightStrength;
-uniform float u_pointLightStrengths[POINT_LIGHT_AMOUNT];
-uniform float u_lightmapStrength;
+uniform float u_ambientLightIntensity;
+uniform float u_directionalLightIntensity;
+uniform float u_pointLightIntensities[POINT_LIGHT_AMOUNT];
 uniform float u_fogMinDistance;
 uniform float u_blendmapRepeat;
 uniform float u_blendmapRepeatR;
@@ -118,7 +117,7 @@ vec3 getAmbientLighting()
 {
 	if(u_ambientLightingEnabled)
 	{
-		return u_ambientLightColor * u_ambientLightStrength;
+		return u_ambientLightColor * u_ambientLightIntensity;
 	}
 
 	return vec3(0.0f);
@@ -130,8 +129,8 @@ vec3 getDirectionalLighting()
 	if(u_directionalLightingEnabled)
 	{
 		vec3 lightDir = normalize(u_directionalLightPos - f_pos);
-		float lightStrength = max(dot(f_normal, lightDir), 0.0);
-		return u_directionalLightColor * (lightStrength * u_directionalLightStrength);
+		float lightIntensity = max(dot(f_normal, lightDir), 0.0);
+		return u_directionalLightColor * (lightIntensity * u_directionalLightIntensity);
 	}
 
 	return vec3(0.0f);
@@ -142,19 +141,19 @@ vec3 getPointLighting()
 {
 	if(u_pointLightingEnabled)
 	{
-		vec3 pointStrength = vec3(0.0f);
+		vec3 totalIntensity = vec3(0.0f);
 		
 		for(int i = 0; i < u_pointLightCount; i++)
 		{
 			vec3  lightDir = normalize(u_pointLightPositions[i] - f_pos);
-			float strength = max(dot(f_normal, lightDir), 0.0);
+			float intensity = max(dot(f_normal, lightDir), 0.0);
 			float distance = length(u_pointLightPositions[i] - f_pos);
 			float attenuation = 1.0f / (1.0f + 0.07f * distance + 0.017f * (distance * distance));
-			strength *= attenuation * (u_pointLightStrengths[i]);
-			pointStrength += (u_pointLightColors[i] * strength);
+			intensity *= attenuation * (u_pointLightIntensities[i]);
+			totalIntensity += (u_pointLightColors[i] * intensity);
 		}
 
-		return pointStrength;
+		return totalIntensity;
 	}
 	
 	return vec3(0.0f);

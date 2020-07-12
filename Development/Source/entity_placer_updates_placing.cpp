@@ -97,7 +97,9 @@ void EntityPlacer::_updateLightPlacing()
 
 					// Show preview pointlight
 					_fe3d.lightEntity_show(_previewPointlightID);
+					_fe3d.gameEntity_show(_previewPointlightID);
 					_fe3d.lightEntity_setPosition(_previewPointlightID, newPosition);
+					_fe3d.gameEntity_setPosition(_previewPointlightID, newPosition);
 				}
 
 				// Placing pointlight
@@ -105,7 +107,7 @@ void EntityPlacer::_updateLightPlacing()
 				{
 					// Add new pointlight
 					begin: int randomSerial = _fe3d.misc_getUniqueInt(0, INT_MAX);
-					string newID = "pointlight" + std::to_string(randomSerial); // Remove the '@'
+					string newID = "pointlight" + std::to_string(randomSerial);
 
 					// Check if ID not already exists
 					if (_fe3d.lightEntity_isExisting(newID))
@@ -114,9 +116,9 @@ void EntityPlacer::_updateLightPlacing()
 					}
 
 					// Add light entity
-					_fe3d.gameEntity_add("@" + newID, "Engine\\OBJs\\lamp.obj", newPosition, vec3(0.0f), vec3(0.5f));
-					_fe3d.lightEntity_add(newID, newPosition, vec3(1.0f), 1.0f);
-					_fe3d.aabbEntity_add(newID, newPosition, vec3(1.0f, 1.5f, 1.0f), true);
+					_fe3d.gameEntity_add("@" + newID, "Engine\\OBJs\\lamp.obj", newPosition, vec3(0.0f), _defaultLightbulbSize);
+					_fe3d.aabbEntity_bindToGameEntity("@" + newID, _defaultLightbulbAabbSize, true);
+					_fe3d.lightEntity_add(newID, newPosition, _defaultPointlightColor, _defaultPointlightIntensity);
 
 					// Disable placement mode if no terrain availible to choose position from
 					if (_fe3d.terrainEntity_getSelectedID() == "")
@@ -127,6 +129,7 @@ void EntityPlacer::_updateLightPlacing()
 				else if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_MIDDLE)) // Cancelling pointlight placement
 				{
 					// Hide preview pointlight
+					_fe3d.gameEntity_hide(_previewPointlightID);
 					_fe3d.lightEntity_hide(_previewPointlightID);
 					_isPlacingPointlight = false;
 				}
@@ -134,6 +137,7 @@ void EntityPlacer::_updateLightPlacing()
 			else
 			{
 				// Hide preview pointlight
+				_fe3d.gameEntity_hide(_previewPointlightID);
 				_fe3d.lightEntity_hide(_previewPointlightID);
 			}
 		}

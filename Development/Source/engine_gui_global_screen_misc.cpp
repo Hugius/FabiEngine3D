@@ -88,8 +88,8 @@ void EngineGuiGlobalScreen::_addValueForm(const string& ID, string title, string
 	if (ID != "" && std::find(_valueFormIDs.begin(), _valueFormIDs.end(), ID) == _valueFormIDs.end())
 	{
 		_valueFormIDs.push_back(ID);
-		addRectangle(ID, position + vec2(0.0f, 0.15f), vec2(title.size() * 0.0275f, 0.125f), vec3(0.75f));
-		addTextfield(ID, position + vec2(0.0f, 0.15f), vec2(title.size() * 0.025f, 0.1f), title, vec3(0.0f));
+		addRectangle(ID, position + vec2(0.0f, 0.15f), vec2(title.size() * 0.0275f, 0.125f), vec3(0.0f));
+		addTextfield(ID, position + vec2(0.0f, 0.15f), vec2(title.size() * 0.025f, 0.1f), title, vec3(1.0f));
 		addWriteField(ID, position, size, vec3(0.25f), vec3(0.5f), vec3(1.0f), vec3(0.0f), false, onlyNumbers, onlyNumbers, onlyNumbers, !onlyNumbers);
 		getWriteField(ID)->setTextContent(valueString);
 
@@ -174,8 +174,8 @@ void EngineGuiGlobalScreen::addChoiceForm(const string& ID, string title, vec2 p
 	if (_choiceFormID == "")
 	{
 		// Add GUI elements
-		addRectangle(ID, position + vec2(0.0f, 0.475f), vec2(title.size() * 0.0275f, 0.125f), vec3(0.75f));
-		addTextfield(ID, position + vec2(0.0f, 0.475f), vec2(title.size() * 0.025f, 0.1f), title, vec3(0.0f));
+		addRectangle(ID, position + vec2(0.0f, 0.475f), vec2(title.size() * 0.0275f, 0.125f), vec3(0.0f));
+		addTextfield(ID, position + vec2(0.0f, 0.475f), vec2(title.size() * 0.025f, 0.1f), title, vec3(1.0f));
 		addScrollingList(ID, position, vec2(0.5, 0.75f), vec3(_scrollListColor), _buttonColor, _buttonHoverColor, _textColor, _textHoverColor, vec2(0.1f, 0.25f));
 		addButton("choice_form_cancel", position + vec2(0.0f, -0.45f), vec2(0.15f, 0.1f), vec3(0.5f, 0.0f, 0.0f), vec3(1.0f, 0.0f, 0.0f), "Cancel", vec3(1.0f), vec3(0.0f));
 

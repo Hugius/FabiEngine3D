@@ -172,14 +172,14 @@ public:
 	void		   gameEntity_setSize(const string& ID, vec3 size);
 	void		   gameEntity_enable(const string& ID);
 	void		   gameEntity_disable(const string& ID);
-	void		   gameEntity_setSpecularStrength(const string& ID, float strength);
+	void		   gameEntity_setSpecularIntensity(const string& ID, float intensity);
 	void		   gameEntity_setLightness(const string& ID, float lightness);
 	void		   gameEntity_setAlpha(const string& ID, float alpha);
 	void		   gameEntity_setColor(const string& ID, vec3 color);
 	void		   gameEntity_setMaxY(const string& ID, float y);
 	void		   gameEntity_setUvRepeat(const string& ID, float repeat);
 	float		   gameEntity_getLightness(const string& ID);
-	float		   gameEntity_getSpecularStrength(const string& ID);
+	float		   gameEntity_getSpecularIntensity(const string& ID);
 	float		   gameEntity_getAlpha(const string& ID);
 	float		   gameEntity_getMaxY(const string& ID);
 	float		   gameEntity_getUvRepeat(const string& ID);
@@ -298,17 +298,17 @@ public:
 
 	// Light entity interface
 	void lightEntity_deleteAll();
-	void lightEntity_add(const string& ID, vec3 position, vec3 color, float strength);
+	void lightEntity_add(const string& ID, vec3 position, vec3 color, float intensity);
 	void lightEntity_delete(const string& ID);
 	void lightEntity_hide(const string& ID);
 	void lightEntity_show(const string& ID);
 	bool lightEntity_isExisting(const string& ID);
 	void lightEntity_setPosition(const string& ID, vec3 position);
 	void lightEntity_setColor(const string& ID, vec3 color);
-	void lightEntity_setStrength(const string& ID, float strength);
+	void lightEntity_setIntensity(const string& ID, float intensity);
 	vec3 lightEntity_getPosition(const string& ID);
 	vec3 lightEntity_getColor(const string& ID);
-	float lightEntity_getStrength(const string& ID);
+	float lightEntity_getIntensity(const string& ID);
 	vector<string> lightEntity_getAllIDs();
 
 	// Gui entity interface
@@ -368,8 +368,8 @@ public:
 	string textEntity_getTextContent(const string& ID);
 
 	// Graphics interface
-	void gfx_enableAmbientLighting(vec3 color, float strength);
-	void gfx_enableDirectionalLighting(vec3 position, vec3 color, float strength);
+	void gfx_enableAmbientLighting(vec3 color, float intensity);
+	void gfx_enableDirectionalLighting(vec3 position, vec3 color, float intensity);
 	void gfx_enableSpecularLighting();
 	void gfx_enablePointLighting();
 	void gfx_enableFog(float minDistance);

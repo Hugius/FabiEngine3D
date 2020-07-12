@@ -105,14 +105,14 @@ void ShaderBus::setSceneReflectionFactor(float val)
 	_sceneReflectionFactor = val;
 }
 
-void ShaderBus::setAmbientLightStrength(float val)
+void ShaderBus::setAmbientLightIntensity(float val)
 {
-	_ambientLightingStrength = val;
+	_ambientLightingIntensity = val;
 }
 
-void ShaderBus::setDirectionalLightStrength(float val)
+void ShaderBus::setDirectionalLightIntensity(float val)
 {
-	_directionalLightingStrength = val;
+	_directionalLightingIntensity = val;
 }
 
 void ShaderBus::setFogMinDistance(float val)
@@ -365,14 +365,14 @@ const float ShaderBus::getSceneReflectionFactor() const
 	return _sceneReflectionFactor;
 }
 
-const float ShaderBus::getAmbLightStrength() const
+const float ShaderBus::getAmbientLightIntensity() const
 {
-	return _ambientLightingStrength;
+	return _ambientLightingIntensity;
 }
 
-const float ShaderBus::getDirectionalLightStrength() const
+const float ShaderBus::getDirectionalLightIntensity() const
 {
-	return _directionalLightingStrength;
+	return _directionalLightingIntensity;
 }
 
 const float ShaderBus::getFogMinDistance() const

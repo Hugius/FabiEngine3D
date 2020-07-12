@@ -35,7 +35,6 @@ void EntityPlacer::_updateModelEditing()
 								_transformation = Transformation::TRANSLATION;
 
 								// Activate properties screen
-								_rightWindow->setActiveScreen("modelProperties");
 								_rightWindow->getScreen("modelProperties")->getButton("translation")->setHoverable(false);
 								_rightWindow->getScreen("modelProperties")->getButton("rotation")->setHoverable(true);
 								_rightWindow->getScreen("modelProperties")->getButton("scaling")->setHoverable(true);
@@ -64,6 +63,12 @@ void EntityPlacer::_updateModelEditing()
 				}
 			}
 
+			// Show properties screen when active
+			if (activeModelID != "")
+			{
+				_rightWindow->setActiveScreen("modelProperties");
+			}
+
 			// Check if user made the active model inactive
 			if (selectedModelID == "" && activeModelID != "" && _fe3d.misc_isMouseInsideViewport() && !_gui->getGlobalScreen()->isFocused())
 			{
@@ -72,48 +77,17 @@ void EntityPlacer::_updateModelEditing()
 				{
 					activeModelID = "";
 					_rightWindow->setActiveScreen("main");
+					string textEntityID = _gui->getGlobalScreen()->getTextfield("selectedModelName")->getEntityID();
+					_fe3d.textEntity_hide(textEntityID);
 				}
 			}
 
-			// Resetting lightness direction if nothing selected
-			if (selectedModelID == "")
+			// Update model lightness blinking
+			if (selectedModelID != activeModelID)
 			{
-				selectedLightnessMultiplier = 1;
+				_updateModelBlinking(selectedModelID, selectedLightnessMultiplier);
 			}
-
-			// Resetting lightness direciton if nothing active
-			if (activeModelID == "")
-			{
-				activeLightnessMultiplier = 1;
-			}
-
-			// Update selected model lightness (cannot select active model)
-			if (selectedModelID != "" && activeModelID != selectedModelID)
-			{
-				// Check if lightness reached bounds
-				if (_fe3d.gameEntity_getLightness(selectedModelID) >= 1.0f || _fe3d.gameEntity_getLightness(selectedModelID) <= 0.0f)
-				{
-					selectedLightnessMultiplier *= -1;
-				}
-				
-				// Set lightness
-				float speed = (_blinkingSpeed * static_cast<float>(selectedLightnessMultiplier));
-				_fe3d.gameEntity_setLightness(selectedModelID, _fe3d.gameEntity_getLightness(selectedModelID) + speed);
-			}
-
-			// Update active model lightness
-			if (activeModelID != "")
-			{
-				// Check if lightness reached bounds
-				if (_fe3d.gameEntity_getLightness(activeModelID) >= 1.0f || _fe3d.gameEntity_getLightness(activeModelID) <= 0.0f)
-				{
-					activeLightnessMultiplier *= -1;
-				}
-
-				// Set lightness
-				float speed = (_blinkingSpeed * static_cast<float>(activeLightnessMultiplier));
-				_fe3d.gameEntity_setLightness(activeModelID, _fe3d.gameEntity_getLightness(activeModelID) + speed);
-			}
+			_updateModelBlinking(activeModelID, activeLightnessMultiplier);
 
 			// Update options screen
 			if (activeModelID != "")
@@ -151,7 +125,7 @@ void EntityPlacer::_updateModelEditing()
 					else if (_rightWindow->getScreen("modelProperties")->getButton("freeze")->isHovered()) // Freeze button
 					{
 						_fe3d.gameEntity_setStaticToCamera(activeModelID, true);
-						_fe3d.aabbEntity_delete(activeModelID);
+						_fe3d.aabbEntity_setResponsiveness(activeModelID, false);
 					}
 					else if (_rightWindow->getScreen("modelProperties")->getButton("delete")->isHovered()) // Delete button
 					{
@@ -388,6 +362,8 @@ void EntityPlacer::_updateBillboardEditing()
 
 void EntityPlacer::_updateLightEditing()
 {
+	static int selectedSizeMultiplier = 1;
+	static int activeSizeMultiplier = 1;
 	static string activeLightBulbID = "";
 	string selectedLightBulbID = "";
 
@@ -402,7 +378,7 @@ void EntityPlacer::_updateLightEditing()
 				if (entityID.substr(0, 11) == "@pointlight")
 				{
 					// Cursor must be in 3D space, no GUI interruptions, no RMB holding down
-					if (_fe3d.collision_checkCursorInEntity(entityID.substr(1, entityID.size())) && _fe3d.misc_isMouseInsideViewport() &&
+					if (_fe3d.collision_checkCursorInEntity(entityID) && _fe3d.misc_isMouseInsideViewport() &&
 						!_gui->getGlobalScreen()->isFocused() && !_fe3d.input_getMouseDown(Input::MOUSE_BUTTON_RIGHT))
 					{
 						// Set new selected lightbulb
@@ -417,12 +393,9 @@ void EntityPlacer::_updateLightEditing()
 								activeLightBulbID = selectedLightBulbID;
 								_transformation = Transformation::TRANSLATION;
 
-								// Activate properties screen
-								_rightWindow->setActiveScreen("lightProperties");
-
 								// Update selected lightbulb text
 								string textEntityID = _gui->getGlobalScreen()->getTextfield("selectedPointlightName")->getEntityID();
-								string lightID = activeLightBulbID.substr(1, 9999); // Removing the '@'
+								string lightID = activeLightBulbID.substr(1, activeLightBulbID.size()); // Removing the '@'
 								_fe3d.textEntity_show(textEntityID);
 								_fe3d.textEntity_setTextContent(textEntityID, "Selected: " + lightID, 0.025f);
 
@@ -439,10 +412,17 @@ void EntityPlacer::_updateLightEditing()
 						// Don't reset if lightbulb is active
 						if (entityID != activeLightBulbID)
 						{
-
+							_fe3d.gameEntity_setSize(entityID, _defaultLightbulbSize);
+							_fe3d.aabbEntity_setSize(entityID, _defaultLightbulbAabbSize);
 						}
 					}
 				}
+			}
+
+			// Show properties screen when active
+			if (activeLightBulbID != "")
+			{
+				_rightWindow->setActiveScreen("lightProperties");
 			}
 
 			// Check if user made the active lightbulb inactive
@@ -453,8 +433,17 @@ void EntityPlacer::_updateLightEditing()
 				{
 					activeLightBulbID = "";
 					_rightWindow->setActiveScreen("main");
+					string textEntityID = _gui->getGlobalScreen()->getTextfield("selectedPointlightName")->getEntityID();
+					_fe3d.textEntity_hide(textEntityID);
 				}
 			}
+
+			// Update lightbulb animations
+			if (selectedLightBulbID != activeLightBulbID)
+			{
+				_updateLightbulbAnimation(selectedLightBulbID, selectedSizeMultiplier);
+			}
+			_updateLightbulbAnimation(activeLightBulbID, activeSizeMultiplier);
 		}
 	}
 }

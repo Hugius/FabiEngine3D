@@ -44,7 +44,7 @@ void ModelEditor::initializeGUI()
 	_leftWindow->getScreen("modelEditingOptions")->addButton("shadowed", vec2(0.0f, 0.59f), vec2(1.6f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Shadowed : ON", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 	_leftWindow->getScreen("modelEditingOptions")->addButton("transparent", vec2(0.0f, 0.36f), vec2(1.5f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "No-white: OFF", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 	_leftWindow->getScreen("modelEditingOptions")->addButton("specular", vec2(0.0f, 0.13f), vec2(1.7f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Specular: OFF", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
-	_leftWindow->getScreen("modelEditingOptions")->addButton("strength", vec2(0.0f, -0.1f), vec2(1.8f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Specular strength", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
+	_leftWindow->getScreen("modelEditingOptions")->addButton("intensity", vec2(0.0f, -0.1f), vec2(1.8f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Specular intensity", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 	_leftWindow->getScreen("modelEditingOptions")->addButton("setColor", vec2(0.0f, -0.33f), vec2(1.6f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Set color", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 	_leftWindow->getScreen("modelEditingOptions")->addButton("uvRepeat", vec2(0.0f, -0.56f), vec2(1.6f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Set UV-repeat", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
 	_leftWindow->getScreen("modelEditingOptions")->addButton("back", vec2(0.0f, -0.79f), vec2(1.25f, 0.1f), _gui->leftVpButtonColor, _gui->leftVpButtonHoverColor, "Go back", _gui->leftVpTextColor, _gui->leftVpTextHoverColor);
@@ -113,7 +113,7 @@ void ModelEditor::loadModels()
 		{
 			// Placeholder variables
 			string modelName, objName, diffuseName, lightName, reflectionName;
-			float width, height, depth, uvRepeat, specularStrength;
+			float width, height, depth, uvRepeat, specularIntensity;
 			bool faceCulled, shadowed, transparent, specular;
 			vec3 color, boxSize;
 
@@ -122,7 +122,7 @@ void ModelEditor::loadModels()
 
 			// Extract from file
 			iss >> modelName >> objName >> diffuseName >> lightName >> reflectionName
-				>> width >> height >> depth >> faceCulled >> shadowed >> transparent >> specular >> specularStrength
+				>> width >> height >> depth >> faceCulled >> shadowed >> transparent >> specular >> specularIntensity
 				>> color.r >> color.g >> color.b >> uvRepeat >> boxSize.x >> boxSize.y >> boxSize.z;
 
 			// Run checks on string values
@@ -133,7 +133,7 @@ void ModelEditor::loadModels()
 
 			// Add new model
 			_addModel(modelName, objName, diffuseName, lightName, reflectionName, vec3(width, height, depth),
-				faceCulled, shadowed, transparent, specular, specularStrength, vec3(color.r, color.g, color.b), uvRepeat, vec3(boxSize.x, boxSize.y, boxSize.z));
+				faceCulled, shadowed, transparent, specular, specularIntensity, vec3(color.r, color.g, color.b), uvRepeat, vec3(boxSize.x, boxSize.y, boxSize.z));
 		}
 
 		// Close file
@@ -173,7 +173,7 @@ void ModelEditor::save()
 				auto shadowed = _fe3d.gameEntity_isShadowed(modelName);
 				auto transparent = _fe3d.gameEntity_isTransparent(modelName);
 				auto specular = _fe3d.gameEntity_isSpecularLighted(modelName);
-				auto specularStrength = _fe3d.gameEntity_getSpecularStrength(modelName);
+				auto specularIntensity = _fe3d.gameEntity_getSpecularIntensity(modelName);
 				auto color = _fe3d.gameEntity_getColor(modelName);
 				auto uvRepeat = _fe3d.gameEntity_getUvRepeat(modelName);
 				auto boxSize = _fe3d.aabbEntity_getSize(modelName);
@@ -187,7 +187,7 @@ void ModelEditor::save()
 				file << modelName << " " <<
 					objPath << " " << diffuseMapPath << " " << lightMapPath << " " << reflectionMapPath << " " <<
 					modelSize.x << " " << modelSize.y << " " << modelSize.z << " " <<
-					faceCulled << " " << shadowed << " " << transparent << " " << specular << " " << specularStrength << " " <<
+					faceCulled << " " << shadowed << " " << transparent << " " << specular << " " << specularIntensity << " " <<
 					color.r << " " << color.g << " " << color.b << " " << uvRepeat << " " <<
 					boxSize.x << " " << boxSize.y << " " << boxSize.z << "\n";
 			}

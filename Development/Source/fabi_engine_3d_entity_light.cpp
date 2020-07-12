@@ -6,9 +6,9 @@ void FabiEngine3D::lightEntity_deleteAll()
 	_core->_lightEntityManager.deleteEntities();
 }
 
-void FabiEngine3D::lightEntity_add(const string& ID, vec3 position, vec3 color, float strength)
+void FabiEngine3D::lightEntity_add(const string& ID, vec3 position, vec3 color, float intensity)
 {
-	_core->_lightEntityManager.addLightEntity(ID, position, color, strength);
+	_core->_lightEntityManager.addLightEntity(ID, position, color, intensity);
 }
 
 void FabiEngine3D::lightEntity_delete(const string& ID)
@@ -41,9 +41,9 @@ void FabiEngine3D::lightEntity_setColor(const string& ID, vec3 color)
 	_core->_lightEntityManager.getEntity(ID)->setColor(color);
 }
 
-void FabiEngine3D::lightEntity_setStrength(const string& ID, float strength)
+void FabiEngine3D::lightEntity_setIntensity(const string& ID, float intensity)
 {
-	_core->_lightEntityManager.getEntity(ID)->setStrength(strength);
+	_core->_lightEntityManager.getEntity(ID)->setIntensity(intensity);
 }
 
 vec3 FabiEngine3D::lightEntity_getPosition(const string& ID)
@@ -56,9 +56,9 @@ vec3 FabiEngine3D::lightEntity_getColor(const string& ID)
 	return _core->_lightEntityManager.getEntity(ID)->getColor();
 }
 
-float FabiEngine3D::lightEntity_getStrength(const string& ID)
+float FabiEngine3D::lightEntity_getIntensity(const string& ID)
 {
-	return _core->_lightEntityManager.getEntity(ID)->getStrength();
+	return _core->_lightEntityManager.getEntity(ID)->getIntensity();
 }
 
 vector<string> FabiEngine3D::lightEntity_getAllIDs()

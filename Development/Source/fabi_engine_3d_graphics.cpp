@@ -1,19 +1,19 @@
 #include "fabi_engine_3d.hpp"
 #include "core_engine.hpp"
 
-void FabiEngine3D::gfx_enableAmbientLighting(vec3 color, float strength)
+void FabiEngine3D::gfx_enableAmbientLighting(vec3 color, float intensity)
 {
 	_core->_shaderBus.setAmbientLightingEnabled(true);
 	_core->_shaderBus.setAmbientLightColor(color);
-	_core->_shaderBus.setAmbientLightStrength(strength);
+	_core->_shaderBus.setAmbientLightIntensity(intensity);
 }
 
-void FabiEngine3D::gfx_enableDirectionalLighting(vec3 position, vec3 color, float strength)
+void FabiEngine3D::gfx_enableDirectionalLighting(vec3 position, vec3 color, float intensity)
 {
 	_core->_shaderBus.setDirectionalLightingEnabled(true);
 	_core->_shaderBus.setDirectionalLightPos(position);
 	_core->_shaderBus.setDirectionalLightColor(color);
-	_core->_shaderBus.setDirectionalLightStrength(strength);
+	_core->_shaderBus.setDirectionalLightIntensity(intensity);
 }
 
 void FabiEngine3D::gfx_enableSpecularLighting()

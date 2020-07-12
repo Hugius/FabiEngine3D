@@ -36,8 +36,8 @@ public:
 	void setDirectionalLightColor(vec3 val);
 
 	// Floats
-	void setAmbientLightStrength(float val);
-	void setDirectionalLightStrength(float val);
+	void setAmbientLightIntensity(float val);
+	void setDirectionalLightIntensity(float val);
 	void setFogMinDistance(float val);
 	void setBloomIntensity(float val);
 	void setBloomTreshold(float val);
@@ -100,8 +100,8 @@ public:
 	const vec3 getDirectionalLightPos()	  const;
 
 	// Floats
-	const float getAmbLightStrength()		  const;
-	const float getDirectionalLightStrength() const;
+	const float getAmbientLightIntensity()		  const;
+	const float getDirectionalLightIntensity() const;
 	const float getFogMinDistance()			  const;
 	const float getBloomIntensity()			  const;
 	const float getBloomTreshold()			  const;
@@ -165,8 +165,8 @@ private:
 	vec3  _directionalLightPosition = vec3(0.0f);
 
 	// Floats
-	float _ambientLightingStrength     = 0.0f;
-	float _directionalLightingStrength = 0.0f;
+	float _ambientLightingIntensity     = 0.0f;
+	float _directionalLightingIntensity = 0.0f;
 	float _fogMinDistance              = 0.0f;
 	float _bloomIntensity              = 0.0f;
 	float _bloomTreshold               = 0.0f;

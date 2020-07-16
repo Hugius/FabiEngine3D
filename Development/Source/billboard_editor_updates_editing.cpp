@@ -15,7 +15,7 @@ void BillboardEditor::_updateBillboardEditing()
 			{
 				firstTime = false;
 				_fe3d.textEntity_setTextContent(_gui->getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID(), "Billboard: " +
-					_currentBillboardID.substr(1, _currentBillboardID.size()), 0.025f);
+					_currentBillboardID.substr(1, _currentBillboardID.size() - 1), 0.025f);
 				_fe3d.textEntity_show(_gui->getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID());
 				_fe3d.billboardEntity_show(_currentBillboardID);
 				_leftWindow->setActiveScreen("billboardEditingMain");

@@ -1,7 +1,6 @@
 #include "fabi_engine_3d.hpp"
 #include "core_engine.hpp"
 
-
 FabiEngine3D::FabiEngine3D()
 {
 	_core = new CoreEngine(*this);

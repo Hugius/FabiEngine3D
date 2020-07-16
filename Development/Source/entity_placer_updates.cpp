@@ -93,17 +93,17 @@ void EntityPlacer::_updateModelScreen()
 					if (screen->getScrollingList("modelList")->getButton(modelName)->isHovered())
 					{
 						// Hide old preview model
-						if (_currentModelName != "")
+						if (_currentPreviewModelName != "")
 						{
-							_fe3d.gameEntity_hide(_currentModelName);
+							_fe3d.gameEntity_hide(_currentPreviewModelName);
 						}
 
 						// Set new preview model
-						_currentModelName = modelName;
-						_fe3d.gameEntity_show(_currentModelName);
+						_currentPreviewModelName = modelName;
+						_fe3d.gameEntity_show(_currentPreviewModelName);
 						string textEntityID = _gui->getGlobalScreen()->getTextfield("selectedModelName")->getEntityID();
 						_fe3d.textEntity_show(textEntityID);
-						_fe3d.textEntity_setTextContent(textEntityID, "Model: " + _currentModelName.substr(1, _currentModelName.size()), 0.025f);
+						_fe3d.textEntity_setTextContent(textEntityID, "Model: " + _currentPreviewModelName.substr(1, _currentPreviewModelName.size() - 1), 0.025f);
 						break;
 					}
 				}
@@ -113,7 +113,7 @@ void EntityPlacer::_updateModelScreen()
 			if (screen->getButton("back")->isHovered()) 
 			{
 				_leftWindow->setActiveScreen("placingManagement");
-				_currentModelName = "";
+				_currentPreviewModelName = "";
 			}
 		}
 	}

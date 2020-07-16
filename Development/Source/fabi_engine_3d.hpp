@@ -19,7 +19,7 @@ using std::make_unique;
 using std::make_shared;
 
 #include "input_types.hpp"
-#include "Logger.hpp"
+#include "logger.hpp"
 
 class CoreEngine;
 
@@ -370,7 +370,7 @@ public:
 	// Graphics interface
 	void gfx_enableAmbientLighting(vec3 color, float intensity);
 	void gfx_enableDirectionalLighting(vec3 position, vec3 color, float intensity);
-	void gfx_enableSpecularLighting();
+	void gfx_enableSpecularLighting(float strength);
 	void gfx_enablePointLighting();
 	void gfx_enableFog(float minDistance);
 	void gfx_enableSkyReflections(float factor);

@@ -1,9 +1,9 @@
+#include "collision_detector.hpp"
+
 #include <vector>
 #include <algorithm>
 
 using std::vector;
-
-#include "collision_detector.hpp"
 
 Collision CollisionDetector::check(const AabbEntity& box, vec3 point, vec3 pointDifference, CollisionDir& collisionDir)
 {

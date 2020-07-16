@@ -1,5 +1,5 @@
 #include "base_entity.hpp"
-#include "Logger.hpp"
+#include "logger.hpp"
 
 BaseEntity::~BaseEntity()
 {

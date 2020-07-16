@@ -38,6 +38,7 @@ public:
 	// Floats
 	void setAmbientLightIntensity(float val);
 	void setDirectionalLightIntensity(float val);
+	void setSpecularLightingStrength(float val);
 	void setFogMinDistance(float val);
 	void setBloomIntensity(float val);
 	void setBloomTreshold(float val);
@@ -100,20 +101,21 @@ public:
 	const vec3 getDirectionalLightPos()	  const;
 
 	// Floats
-	const float getAmbientLightIntensity()		  const;
+	const float getAmbientLightIntensity()	   const;
 	const float getDirectionalLightIntensity() const;
-	const float getFogMinDistance()			  const;
-	const float getBloomIntensity()			  const;
-	const float getBloomTreshold()			  const;
-	const float getCameraYaw()				  const;
-	const float getCameraPitch()			  const;
-	const float getNearZ()					  const;
-	const float getFarZ()					  const;
-	const float getDofMinDistance()			  const;
-	const float getSkyReflectionMixValue()	  const;
-	const float getSkyReflectionFactor()	  const;
-	const float getSceneReflectionHeight()	  const;
-	const float getSceneReflectionFactor()	  const;
+	const float getSpecularLightingStrength()  const;
+	const float getFogMinDistance()			   const;
+	const float getBloomIntensity()			   const;
+	const float getBloomTreshold()			   const;
+	const float getCameraYaw()				   const;
+	const float getCameraPitch()			   const;
+	const float getNearZ()					   const;
+	const float getFarZ()					   const;
+	const float getDofMinDistance()			   const;
+	const float getSkyReflectionMixValue()	   const;
+	const float getSkyReflectionFactor()	   const;
+	const float getSceneReflectionHeight()	   const;
+	const float getSceneReflectionFactor()	   const;
 
 	// Integers
 	const int getBloomBlurSize() const;
@@ -167,18 +169,19 @@ private:
 	// Floats
 	float _ambientLightingIntensity     = 0.0f;
 	float _directionalLightingIntensity = 0.0f;
-	float _fogMinDistance              = 0.0f;
-	float _bloomIntensity              = 0.0f;
-	float _bloomTreshold               = 0.0f;
-	float _cameraYaw                   = 0.0f;
-	float _cameraPitch                 = 0.0f;
-	float _nearZ                       = 0.0f;
-	float _farZ                        = 0.0f;
-	float _dofMinDistance              = 0.0f;
-	float _skyReflectionMixValue       = 0.0f;
-	float _skyReflectionFactor         = 0.0f;
-	float _sceneReflectionHeight       = 0.0f;
-	float _sceneReflectionFactor       = 0.0f;
+	float _specularLightingStrength		= 0.0f;
+	float _fogMinDistance               = 0.0f;
+	float _bloomIntensity               = 0.0f;
+	float _bloomTreshold                = 0.0f;
+	float _cameraYaw                    = 0.0f;
+	float _cameraPitch                  = 0.0f;
+	float _nearZ                        = 0.0f;
+	float _farZ                         = 0.0f;
+	float _dofMinDistance               = 0.0f;
+	float _skyReflectionMixValue        = 0.0f;
+	float _skyReflectionFactor          = 0.0f;
+	float _sceneReflectionHeight        = 0.0f;
+	float _sceneReflectionFactor        = 0.0f;
 	
 	// Integers
 	int _bloomBlurSize = 0;

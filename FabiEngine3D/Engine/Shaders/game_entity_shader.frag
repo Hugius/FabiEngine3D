@@ -2,7 +2,7 @@
 #extension GL_ARB_explicit_uniform_location : enable
 
 // Const variables
-#define POINT_LIGHT_AMOUNT 100
+#define POINT_LIGHT_AMOUNT 256
 
 // In variables
 in vec3 f_pos;
@@ -37,6 +37,7 @@ uniform float u_pointLightIntensities[POINT_LIGHT_AMOUNT];
 uniform float u_ambientLightIntensity;
 uniform float u_directionalLightIntensity;
 uniform float u_specularLightIntensity;
+uniform float u_specularLightStrength;
 uniform float u_fogMinDistance;
 uniform float u_skyReflectionMixValue;
 uniform float u_customAlpha;
@@ -53,7 +54,7 @@ uniform bool u_isSpecular;
 uniform bool u_isShadowed;
 uniform bool u_ambientLightingEnabled;
 uniform bool u_directionalLightingEnabled;
-uniform bool u_specLightingEnabled;
+uniform bool u_specularLightingEnabled;
 uniform bool u_lightMappingEnabled;
 uniform bool u_pointLightingEnabled;
 uniform bool u_skyReflectionsEnabled;
@@ -73,8 +74,8 @@ layout (location = 0) out vec4 o_finalColor;
 vec3 getTextureColor();
 vec3 getAmbientLighting();
 vec3 getDirectionalLighting();
-vec3 getSpecularLighting();
 vec3 getPointLighting();
+float getSpecularValue(vec3 position);
 vec3 getShadowLighting();
 vec3 applyLightmapping(vec3 color);
 vec3 applyFog(vec3 color);
@@ -85,20 +86,19 @@ vec3 applySceneReflections(vec3 color);
 void main()
 {
 	// Calculate lighting
-	vec3 a = getAmbientLighting();
-	vec3 d = getDirectionalLighting();
-	vec3 s = getSpecularLighting();
-	vec3 p = getPointLighting();
-	vec3 h = getShadowLighting();
+	vec3 ambient     = getAmbientLighting();
+	vec3 directional = getDirectionalLighting();
+	vec3 point       = getPointLighting();
+	vec3 shadow      = getShadowLighting();
 
 	// Apply lighting
 	vec3 color;
-	color  = getTextureColor();
-	color  = applySkyReflections(color);
-	color  = applySceneReflections(color);
-	color *= vec3((a + d + s) * h + p);
-	color  = applyLightmapping(color);
-	color  = applyFog(color);
+	color  = getTextureColor(); // Diffuse map
+	color  = applySkyReflections(color); // Sky reflection
+	color  = applySceneReflections(color); // Scene reflection
+	color *= vec3((ambient + directional) * shadow + point); // Lighting
+	color  = applyLightmapping(color); // Lightmapping
+	color  = applyFog(color); // 
 	color *= u_color;
 	color *= u_lightness;
 
@@ -150,25 +150,19 @@ vec3 getDirectionalLighting()
 {
 	if(u_directionalLightingEnabled)
 	{
-		vec3 lightDir = normalize(u_directionalLightPos - f_pos);
-		float lightIntensity = max(dot(f_normal, lightDir), 0.0);
-		return u_directionalLightColor * (lightIntensity * u_directionalLightIntensity);
-	}
-	else
-	{
-		return vec3(0.0f);
-	}
-}
+        // Calculate
+        vec3 result = vec3(0.0f);
+		vec3 lightDirection = normalize(u_directionalLightPos - f_pos);
+		float diffuse = max(dot(f_normal, lightDirection), 0.0);
 
-vec3 getSpecularLighting()
-{
-	if(u_specLightingEnabled && u_isSpecular)
-	{
-		vec3 lightDir   = normalize(f_pos - u_directionalLightPos);
-		vec3 viewDir    = normalize(f_pos - u_cameraPosition);
-		vec3 reflectDir = reflect(-lightDir, f_normal);
-		float specular  = pow(max(dot(viewDir, reflectDir), 0.0f), u_specularLightIntensity);
-		return vec3(specular);
+        // Apply
+        result += vec3(diffuse);
+        result += vec3(getSpecularValue(u_directionalLightPos));
+        result *= u_directionalLightColor;
+        result *= u_directionalLightIntensity;
+
+        // Return
+        return result;
 	}
 	else
 	{
@@ -181,24 +175,55 @@ vec3 getPointLighting()
 {
 	if(u_pointLightingEnabled)
 	{
-		vec3 totalIntensity = vec3(0.0f);
+		vec3 result = vec3(0.0f);
 		
+        // For every pointlight
 		for(int i = 0; i < u_pointLightCount; i++)
 		{
+            // Calculate
 			vec3  lightDir = normalize(u_pointLightPositions[i] - f_pos);
-			float intensity = max(dot(f_normal, lightDir), 0.0);
+			float diffuse = max(dot(f_normal, lightDir), 0.0);
 			float distance = length(u_pointLightPositions[i] - f_pos);
 			float attenuation = 1.0f / (1.0f + 0.07f * distance + 0.017f * (distance * distance));
-			intensity *= attenuation * (u_pointLightIntensities[i]);
-			totalIntensity += (u_pointLightColors[i] * intensity);
+
+            // Apply
+            vec3 current = vec3(0.0f);
+			current += vec3(diffuse);
+			current += vec3(getSpecularValue(u_pointLightPositions[i]));
+            current *= u_pointLightColors[i];
+            current *= attenuation;
+            current *= u_pointLightIntensities[i];
+
+            // Add to total lighting value
+            result += current;
 		}
 
-		return totalIntensity;
+        // Return
+		return result;
 	}
 	else
 	{
 		return vec3(0.0f);
 	}
+}
+
+float getSpecularValue(vec3 position)
+{
+    if(u_specularLightingEnabled && u_isSpecular)
+    {
+        // Calculate
+        vec3 lightDirection   = normalize(f_pos - position);
+        vec3 viewDirection    = normalize(f_pos - u_cameraPosition);
+        vec3 reflectDirection = reflect(-lightDirection, f_normal);
+        float result          = pow(max(dot(viewDirection, reflectDirection), 0.0f), u_specularLightIntensity);
+
+        // Return
+        return result * u_specularLightStrength;
+    }
+    else
+    {
+        return 0.0f;
+    }
 }
 
 vec3 getShadowLighting()
@@ -229,6 +254,7 @@ vec3 getShadowLighting()
 		
 		// Return shadow value
 		shadow /= 9.0f;
+        shadow += 0.1f;
 
 		// Check if truly shadowed or just a small PCF mistake
 		if(shadow > 0.6f)

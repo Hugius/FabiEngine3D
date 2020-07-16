@@ -16,17 +16,18 @@ void GameEntityRenderer::bind()
 	_shader.uploadUniform("u_shadowMatrix",      _shaderBus.getShadowMatrix());
 	_shader.uploadUniform("u_clippingPlane",     clippingPlane);
 	
-	// Fragment shader uniforms
+	// Fragment shader uniforms u_specularLightStrength
 	_shader.uploadUniform("u_cameraPosition",             _shaderBus.getCameraPos());
+	_shader.uploadUniform("u_ambientLightingEnabled",	  _shaderBus.isAmbientLightingEnabled());
 	_shader.uploadUniform("u_ambientLightColor",		  _shaderBus.getAmbientLightColor());
+	_shader.uploadUniform("u_ambientLightIntensity",	  _shaderBus.getAmbientLightIntensity());
+	_shader.uploadUniform("u_directionalLightingEnabled", _shaderBus.isDirectionalLightingEnabled());
 	_shader.uploadUniform("u_directionalLightColor",	  _shaderBus.getDirectionalLightColor());
 	_shader.uploadUniform("u_directionalLightPos",        _shaderBus.getDirectionalLightPos());
-	_shader.uploadUniform("u_ambientLightIntensity",       _shaderBus.getAmbientLightIntensity());
-	_shader.uploadUniform("u_directionalLightIntensity",   _shaderBus.getDirectionalLightIntensity());
+	_shader.uploadUniform("u_directionalLightIntensity",  _shaderBus.getDirectionalLightIntensity());
 	_shader.uploadUniform("u_fogMinDistance",             _shaderBus.getFogMinDistance());
-	_shader.uploadUniform("u_ambientLightingEnabled",	  _shaderBus.isAmbientLightingEnabled());
-	_shader.uploadUniform("u_directionalLightingEnabled", _shaderBus.isDirectionalLightingEnabled());
-	_shader.uploadUniform("u_specLightingEnabled",		  _shaderBus.isSpecularLightingEnabled());
+	_shader.uploadUniform("u_specularLightingEnabled",	  _shaderBus.isSpecularLightingEnabled());
+	_shader.uploadUniform("u_specularLightingStrength",   _shaderBus.getSpecularLightingStrength());
 	_shader.uploadUniform("u_pointLightingEnabled",		  _shaderBus.isPointLightingEnabled());
 	_shader.uploadUniform("u_lightMappingEnabled",		  _shaderBus.isLightMappingEnabled());
 	_shader.uploadUniform("u_skyReflectionsEnabled",	  _shaderBus.isSkyReflectionsEnabled());

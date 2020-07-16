@@ -5,7 +5,7 @@ void EntityPlacer::_updateModelPlacing()
 	if (_isLoaded)
 	{
 		// Only if user is in placement mode
-		if (_currentModelName != "")
+		if (_currentPreviewModelName != "")
 		{
 			// Check if mouse behavior isn't being invalid
 			if (_fe3d.misc_isMouseInsideViewport() && !_fe3d.input_getMouseDown(Input::MOUSE_BUTTON_RIGHT) && !_gui->getGlobalScreen()->isFocused())
@@ -17,11 +17,11 @@ void EntityPlacer::_updateModelPlacing()
 				if(_fe3d.terrainEntity_getSelectedID() != "")
 				{
 					// Show preview model
-					_fe3d.gameEntity_show(_currentModelName);
+					_fe3d.gameEntity_show(_currentPreviewModelName);
 
 					// Update preview model position
 					newPosition = _fe3d.terrainEntity_getMousePoint();
-					_fe3d.gameEntity_setPosition(_currentModelName, newPosition);
+					_fe3d.gameEntity_setPosition(_currentPreviewModelName, newPosition);
 				}
 
 				// Placing model
@@ -29,7 +29,7 @@ void EntityPlacer::_updateModelPlacing()
 				{
 					// Add new model
 					begin: int randomSerial = _fe3d.misc_getUniqueInt(0, INT_MAX);
-					string newID = _currentModelName.substr(1, _currentModelName.size()) + std::to_string(randomSerial); // Remove the '@'
+					string newID = _currentPreviewModelName.substr(1, _currentPreviewModelName.size() - 1) + std::to_string(randomSerial); // Remove the '@'
 
 					// Check if ID not already exists
 					if (_fe3d.gameEntity_isExisting(newID))
@@ -38,19 +38,19 @@ void EntityPlacer::_updateModelPlacing()
 					}
 
 					// Add model
-					_placeModel(newID, _currentModelName, newPosition, vec3(0.0f), _fe3d.gameEntity_getSize(_currentModelName));
+					_placeModel(newID, _currentPreviewModelName, newPosition, vec3(0.0f), _fe3d.gameEntity_getSize(_currentPreviewModelName));
 
 					// Disable placement mode if no terrain availible to choose position from
 					if (_fe3d.terrainEntity_getSelectedID() == "")
 					{
-						_currentModelName = "";
+						_currentPreviewModelName = "";
 					}
 				}
 				else if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_MIDDLE)) // Cancelling model placement
 				{
 					// Hide preview model
-					_fe3d.gameEntity_hide(_currentModelName);
-					_currentModelName = "";
+					_fe3d.gameEntity_hide(_currentPreviewModelName);
+					_currentPreviewModelName = "";
 					string textEntityID = _gui->getGlobalScreen()->getTextfield("selectedModelName")->getEntityID();
 					_fe3d.textEntity_hide(textEntityID);
 				}
@@ -58,7 +58,7 @@ void EntityPlacer::_updateModelPlacing()
 			else
 			{
 				// Hide preview model
-				_fe3d.gameEntity_hide(_currentModelName);
+				_fe3d.gameEntity_hide(_currentPreviewModelName);
 			}
 		}
 	}

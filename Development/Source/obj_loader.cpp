@@ -1,10 +1,10 @@
+#include "obj_loader.hpp"
+#include "logger.hpp"
+
 #pragma warning(disable:4996) // Disabling annoying warning
 
 #include <GLEW\\glew.h>
 #include <filesystem>
-
-#include "obj_loader.hpp"
-#include "Logger.hpp"
 
 vector<ObjPart> & OBJLoader::loadOBJ(const string & filePath)
 {

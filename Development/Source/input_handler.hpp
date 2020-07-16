@@ -6,7 +6,7 @@
 using std::vector;
 
 #include "input_types.hpp"
-#include "Logger.hpp"
+#include "logger.hpp"
 #include "Timer.hpp"
 
 class InputHandler final

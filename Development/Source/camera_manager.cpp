@@ -1,9 +1,9 @@
-#include <GLM\\gtc/matrix_transform.hpp>
-#include <algorithm>
-
 #include "camera_manager.hpp"
 #include "configuration.hpp"
 #include "shader_bus.hpp"
+
+#include <GLM\\gtc\\matrix_transform.hpp>
+#include <algorithm>
 
 CameraManager::CameraManager(ShaderBus& shaderBus) :
 	_shaderBus(shaderBus)

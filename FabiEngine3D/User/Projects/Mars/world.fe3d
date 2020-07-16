@@ -1,3 +1,9 @@
-MODEL rocket1847166013 108.971 1.56863 -32.2876 0 0 0 0.7 0.5 0.7 User\Assets\OBJs\rocket.obj User\Assets\Textures\DiffuseMaps\rocket.png - User\Assets\Textures\ReflectionMaps\rocket.png 0 1 0 0 0 1 0.5 0.5 0.5 1 3.36944 41.8592 3.80501
-MODEL rocket925504990 97.4644 1.56863 27.0734 0 0 0 0.7 0.5 0.7 User\Assets\OBJs\rocket.obj User\Assets\Textures\DiffuseMaps\rocket.png - User\Assets\Textures\ReflectionMaps\rocket.png 0 1 0 0 0 1 0.5 0.5 0.5 1 3.36944 41.8592 3.80501
-MODEL rocket2066977859 61.6572 1.56862 -13.9871 0 0 0 0.7 0.5 0.7 User\Assets\OBJs\rocket.obj User\Assets\Textures\DiffuseMaps\rocket.png - User\Assets\Textures\ReflectionMaps\rocket.png 0 1 0 0 0 1 0.5 0.5 0.5 1 3.36944 41.8592 3.80501
+MODEL rocket761161936 80.1113 1.56863 -14.572 0 0 0 0.7 0.5 0.7 User\Assets\OBJs\rocket.obj User\Assets\Textures\DiffuseMaps\rocket.png - User\Assets\Textures\ReflectionMaps\rocket.png 0 1 0 1 0 1 0.5 0.5 0.5 1 3.36944 41.8592 3.80501
+MODEL sheep258862043 27.8045 1.56863 -44.9156 0 0 0 1 1 1 User\Assets\OBJs\sheep.obj User\Assets\Textures\DiffuseMaps\sheep.png - - 0 1 0 1 0 1 0.5 0.5 0.5 1 1 1 1
+MODEL house1937326196 -4.91827 1.56863 -17.1108 0 0 0 1 1 1 User\Assets\OBJs\house1.obj User\Assets\Textures\DiffuseMaps\house1.png - - 0 1 0 1 0 1 0.5 0.5 0.5 1 1 1 1
+AMBIENT 1 1 1 1
+DIRECTIONAL 1000 1000 1000 1 0 0 0.5
+POINT pointlight1110942465 64.9822 2.56863 -44.5264 1 1 1 1
+POINT pointlight581158021 59.5909 2.56863 -16.6596 1 1 1 1
+POINT pointlight1077784613 45.0812 2.56863 -28.8783 1 1 1 1
+POINT pointlight1131264159 1.66675 2.56863 -14.6313 1 1 1 1

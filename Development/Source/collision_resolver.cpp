@@ -1,5 +1,5 @@
 #include "collision_resolver.hpp"
-#include "Logger.hpp"
+#include "logger.hpp"
 
 CollisionResolver::CollisionResolver(CollisionDetector& collisionDetector) :
 	_collisionDetector(collisionDetector)

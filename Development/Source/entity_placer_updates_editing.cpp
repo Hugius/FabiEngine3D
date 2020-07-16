@@ -10,7 +10,7 @@ void EntityPlacer::_updateModelEditing()
 	if (_isLoaded)
 	{
 		// User must not be in placement mode
-		if (_currentModelName == "")
+		if (_currentPreviewModelName == "" && !_isPlacingPointlight)
 		{
 			// Check if user selected a model
 			for (auto& entityID : _fe3d.gameEntity_getAllIDs())
@@ -63,12 +63,6 @@ void EntityPlacer::_updateModelEditing()
 				}
 			}
 
-			// Show properties screen when active
-			if (activeModelID != "")
-			{
-				_rightWindow->setActiveScreen("modelProperties");
-			}
-
 			// Check if user made the active model inactive
 			if (selectedModelID == "" && activeModelID != "" && _fe3d.misc_isMouseInsideViewport() && !_gui->getGlobalScreen()->isFocused())
 			{
@@ -89,9 +83,11 @@ void EntityPlacer::_updateModelEditing()
 			}
 			_updateModelBlinking(activeModelID, activeLightnessMultiplier);
 
-			// Update options screen
+			// Update properties screen
 			if (activeModelID != "")
 			{
+				_rightWindow->setActiveScreen("modelProperties");
+
 				// GUI management (pressed)
 				if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
 				{
@@ -130,7 +126,10 @@ void EntityPlacer::_updateModelEditing()
 					else if (_rightWindow->getScreen("modelProperties")->getButton("delete")->isHovered()) // Delete button
 					{
 						_fe3d.gameEntity_delete(activeModelID);
+						_rightWindow->setActiveScreen("main");
 						activeModelID = "";
+						string textEntityID = _gui->getGlobalScreen()->getTextfield("selectedModelName")->getEntityID();
+						_fe3d.textEntity_hide(textEntityID);
 						return;
 					}
 				}
@@ -360,6 +359,9 @@ void EntityPlacer::_updateBillboardEditing()
 	}
 }
 
+#define ACTIVE_BULB_ID activeLightBulbID
+#define ACTIVE_LIGHT_ID activeLightBulbID.substr(1, activeLightBulbID.size() - 1)
+
 void EntityPlacer::_updateLightEditing()
 {
 	static int selectedSizeMultiplier = 1;
@@ -369,7 +371,7 @@ void EntityPlacer::_updateLightEditing()
 
 	if (_isLoaded)
 	{
-		if (!_isPlacingPointlight)
+		if (_currentPreviewModelName == "" && !_isPlacingPointlight)
 		{
 			// Check if user selected a lightbulb model
 			for (auto& entityID : _fe3d.gameEntity_getAllIDs())
@@ -388,19 +390,19 @@ void EntityPlacer::_updateLightEditing()
 						if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
 						{
 							// Check if same lightbulb is clicked again
-							if (selectedLightBulbID != activeLightBulbID)
+							if (selectedLightBulbID != ACTIVE_BULB_ID)
 							{
-								activeLightBulbID = selectedLightBulbID;
+								ACTIVE_BULB_ID = selectedLightBulbID;
 								_transformation = Transformation::TRANSLATION;
 
 								// Update selected lightbulb text
 								string textEntityID = _gui->getGlobalScreen()->getTextfield("selectedPointlightName")->getEntityID();
-								string lightID = activeLightBulbID.substr(1, activeLightBulbID.size()); // Removing the '@'
+								string lightID = ACTIVE_LIGHT_ID;
 								_fe3d.textEntity_show(textEntityID);
 								_fe3d.textEntity_setTextContent(textEntityID, "Selected: " + lightID, 0.025f);
 
 								// Filling writefields
-								vec3 position = _fe3d.gameEntity_getPosition(activeLightBulbID);
+								vec3 position = _fe3d.gameEntity_getPosition(ACTIVE_BULB_ID);
 								_rightWindow->getScreen("lightProperties")->getWriteField("x")->setTextContent(std::to_string(static_cast<int>(position.x)));
 								_rightWindow->getScreen("lightProperties")->getWriteField("y")->setTextContent(std::to_string(static_cast<int>(position.y)));
 								_rightWindow->getScreen("lightProperties")->getWriteField("z")->setTextContent(std::to_string(static_cast<int>(position.z)));
@@ -410,7 +412,7 @@ void EntityPlacer::_updateLightEditing()
 					else
 					{
 						// Don't reset if lightbulb is active
-						if (entityID != activeLightBulbID)
+						if (entityID != ACTIVE_BULB_ID)
 						{
 							_fe3d.gameEntity_setSize(entityID, _defaultLightbulbSize);
 							_fe3d.aabbEntity_setSize(entityID, _defaultLightbulbAabbSize);
@@ -419,19 +421,13 @@ void EntityPlacer::_updateLightEditing()
 				}
 			}
 
-			// Show properties screen when active
-			if (activeLightBulbID != "")
-			{
-				_rightWindow->setActiveScreen("lightProperties");
-			}
-
 			// Check if user made the active lightbulb inactive
-			if (selectedLightBulbID == "" && activeLightBulbID != "" && _fe3d.misc_isMouseInsideViewport() && !_gui->getGlobalScreen()->isFocused())
+			if (selectedLightBulbID == "" && ACTIVE_BULB_ID != "" && _fe3d.misc_isMouseInsideViewport() && !_gui->getGlobalScreen()->isFocused())
 			{
 				// LMB pressed
 				if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT) && !_fe3d.input_getMouseDown(Input::MOUSE_BUTTON_RIGHT))
 				{
-					activeLightBulbID = "";
+					ACTIVE_BULB_ID = "";
 					_rightWindow->setActiveScreen("main");
 					string textEntityID = _gui->getGlobalScreen()->getTextfield("selectedPointlightName")->getEntityID();
 					_fe3d.textEntity_hide(textEntityID);
@@ -439,11 +435,106 @@ void EntityPlacer::_updateLightEditing()
 			}
 
 			// Update lightbulb animations
-			if (selectedLightBulbID != activeLightBulbID)
+			if (selectedLightBulbID != ACTIVE_BULB_ID)
 			{
 				_updateLightbulbAnimation(selectedLightBulbID, selectedSizeMultiplier);
 			}
-			_updateLightbulbAnimation(activeLightBulbID, activeSizeMultiplier);
+			_updateLightbulbAnimation(ACTIVE_BULB_ID, activeSizeMultiplier);
+
+			// Update properties screen
+			if (ACTIVE_BULB_ID != "")
+			{
+				_rightWindow->setActiveScreen("lightProperties");
+
+				// GUI management (pressed)
+				if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
+				{
+					if (_rightWindow->getScreen("lightProperties")->getButton("delete")->isHovered()) // Delete button
+					{
+						_fe3d.gameEntity_delete(ACTIVE_BULB_ID);
+						_fe3d.lightEntity_delete(ACTIVE_LIGHT_ID);
+						_rightWindow->setActiveScreen("main");
+						ACTIVE_BULB_ID = "";
+						string textEntityID = _gui->getGlobalScreen()->getTextfield("selectedPointlightName")->getEntityID();
+						_fe3d.textEntity_hide(textEntityID);
+						return;
+					}
+				}
+
+				// Current model position
+				vec3 newPosition = _fe3d.gameEntity_getPosition(ACTIVE_BULB_ID);
+				float newIntensity = _fe3d.lightEntity_getIntensity(ACTIVE_LIGHT_ID);
+
+				// GUI management (held down)
+				if (_fe3d.input_getMouseDown(Input::MOUSE_BUTTON_LEFT))
+				{
+					if (_rightWindow->getScreen("lightProperties")->getButton("intensityPlus")->isHovered()) // Increasing intensity
+					{
+						newIntensity += _transformationSpeed;
+					}
+					else if (_rightWindow->getScreen("lightProperties")->getButton("intensityMinus")->isHovered()) // Decreasing intensity
+					{
+						newIntensity -= _transformationSpeed;
+					}
+					else if (_rightWindow->getScreen("lightProperties")->getButton("xPlus")->isHovered()) // Increasing X
+					{
+						newPosition += vec3(_transformationSpeed, 0.0f, 0.0f);
+					}
+					else if (_rightWindow->getScreen("lightProperties")->getButton("xMinus")->isHovered()) // Decreasing X
+					{
+						newPosition -= vec3(_transformationSpeed, 0.0f, 0.0f);
+					}
+					else if (_rightWindow->getScreen("lightProperties")->getButton("yPlus")->isHovered()) // Increasing Y
+					{
+						newPosition += vec3(0.0f, _transformationSpeed, 0.0f);
+					}
+					else if (_rightWindow->getScreen("lightProperties")->getButton("yMinus")->isHovered()) // Decreasing Y
+					{
+						newPosition -= vec3(0.0f, _transformationSpeed, 0.0f);
+					}
+					else if (_rightWindow->getScreen("lightProperties")->getButton("zPlus")->isHovered()) // Increasing Z
+					{
+						newPosition += vec3(0.0f, 0.0f, _transformationSpeed);
+					}
+					else if (_rightWindow->getScreen("lightProperties")->getButton("zMinus")->isHovered()) // Decreasing Z
+					{
+						newPosition -= vec3(0.0f, 0.0f, _transformationSpeed);
+					}
+				}
+
+				// Filling writefields - intensity
+				if (!_rightWindow->getScreen("lightProperties")->getWriteField("intensity")->isActive())
+				{
+					float intensity = _fe3d.lightEntity_getIntensity(ACTIVE_LIGHT_ID);
+					_rightWindow->getScreen("lightProperties")->getWriteField("intensity")->setTextContent(std::to_string(static_cast<int>(intensity)));
+				}
+
+				// Filling writefields - X
+				if (!_rightWindow->getScreen("lightProperties")->getWriteField("x")->isActive())
+				{
+					vec3 position = _fe3d.gameEntity_getPosition(ACTIVE_BULB_ID);
+					_rightWindow->getScreen("lightProperties")->getWriteField("x")->setTextContent(std::to_string(static_cast<int>(position.x)));
+				}
+
+				// Filling writefields - Y
+				if (!_rightWindow->getScreen("lightProperties")->getWriteField("y")->isActive())
+				{
+					vec3 position = _fe3d.gameEntity_getPosition(ACTIVE_BULB_ID);
+					_rightWindow->getScreen("lightProperties")->getWriteField("y")->setTextContent(std::to_string(static_cast<int>(position.y)));
+				}
+
+				// Filling writefields - Z
+				if (!_rightWindow->getScreen("lightProperties")->getWriteField("z")->isActive())
+				{
+					vec3 position = _fe3d.gameEntity_getPosition(ACTIVE_BULB_ID);
+					_rightWindow->getScreen("lightProperties")->getWriteField("z")->setTextContent(std::to_string(static_cast<int>(position.z)));
+				}
+
+				// Applying new values
+				_fe3d.gameEntity_setPosition(ACTIVE_BULB_ID, newPosition);
+				_fe3d.lightEntity_setPosition(ACTIVE_LIGHT_ID, newPosition);
+				_fe3d.lightEntity_setIntensity(ACTIVE_LIGHT_ID, newIntensity);
+			}
 		}
 	}
 }

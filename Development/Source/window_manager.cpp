@@ -1,3 +1,7 @@
+#include "window_manager.hpp"
+#include "logger.hpp"
+#include "configuration.hpp"
+
 #include <GLEW\\glew.h>
 #include <SDL\\SDL_image.h>
 #include <SDL\\SDL_mixer.h>
@@ -5,10 +9,6 @@
 #include <SDL\\SDL_syswm.h>
 #include <Windows.h>
 #include <ShellScalingAPI.h>
-
-#include "window_manager.hpp"
-#include "Logger.hpp"
-#include "configuration.hpp"
 
 WindowManager::WindowManager()
 {

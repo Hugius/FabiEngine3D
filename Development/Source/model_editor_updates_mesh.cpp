@@ -13,7 +13,7 @@ void ModelEditor::_updateEditingScreen()
 		{
 			firstTime = false;
 			_fe3d.textEntity_setTextContent(_gui->getGlobalScreen()->getTextfield("selectedModelName")->getEntityID(), 
-				"Model: " + _currentModelName.substr(1, _currentModelName.size()), 0.025f);
+				"Model: " + _currentModelName.substr(1, _currentModelName.size() - 1), 0.025f);
 			_fe3d.textEntity_show(_gui->getGlobalScreen()->getTextfield("selectedModelName")->getEntityID());
 			_leftWindow->setActiveScreen("modelEditingMain");
 		}

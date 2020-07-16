@@ -1,7 +1,7 @@
-#include <algorithm>
-
 #include "audio_loader.hpp"
-#include "Logger.hpp"
+#include "logger.hpp"
+
+#include <algorithm>
 
 AudioLoader::~AudioLoader()
 {

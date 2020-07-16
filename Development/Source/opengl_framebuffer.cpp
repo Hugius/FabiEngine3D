@@ -1,10 +1,10 @@
-#include <vector>
-#include <GLEW\\glew.h>
-
 #include "opengl_framebuffer.hpp"
-#include "Logger.hpp"
+#include "logger.hpp"
 #include "configuration.hpp"
 #include "shader_bus.hpp"
+
+#include <vector>
+#include <GLEW\\glew.h>
 
 #define GL_TEXTURE_MAX_ANISOTROPY_EXT     0x84FE
 #define GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT 0x84FF

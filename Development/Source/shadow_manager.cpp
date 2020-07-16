@@ -1,7 +1,7 @@
-#include <GLM\\gtc/matrix_transform.hpp>
-
 #include "shadow_manager.hpp"
 #include "shader_bus.hpp"
+
+#include <GLM\\gtc\\matrix_transform.hpp>
 
 void ShadowManager::loadShadows(vec3 eye, vec3 center, float size, float reach)
 {

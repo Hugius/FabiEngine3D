@@ -19,6 +19,12 @@ public:
 	BillboardEditor& getBillboardEditor();
 	EntityPlacer& getEntityPlacer();
 
+	static inline const vec3 frameColor = vec3(0.4f);
+	static inline const vec3 buttonColor = vec3(0.25f, 0.25f, 1.0f);
+	static inline const vec3 buttonHoverColor = vec3(0.75f, 0.75f, 1.0f);
+	static inline const vec3 textColor = vec3(1.0f);
+	static inline const vec3 textHoverColor = vec3(0.0f);
+
 private:
 	ModelEditor _modelEditor;
 	WorldEditor _worldEditor;

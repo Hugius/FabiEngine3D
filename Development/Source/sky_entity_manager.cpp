@@ -1,5 +1,6 @@
 #include "sky_entity_manager.hpp"
 #include "shader_bus.hpp"
+
 #include <iostream>
 
 SkyEntityManager::SkyEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, ShaderBus& shaderBus) :

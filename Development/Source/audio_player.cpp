@@ -1,9 +1,9 @@
-#include <GLM\\gtc/matrix_transform.hpp>
-#include <algorithm>
-
 #include "audio_player.hpp"
-#include "Logger.hpp"
+#include "logger.hpp"
 #include "configuration.hpp"
+
+#include <GLM\\gtc\\matrix_transform.hpp>
+#include <algorithm>
 
 AudioPlayer::AudioPlayer()
 {

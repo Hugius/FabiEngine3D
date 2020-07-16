@@ -2,7 +2,7 @@
 #extension GL_ARB_explicit_uniform_location : enable
 
 // Const variables
-#define POINT_LIGHT_AMOUNT 100
+#define POINT_LIGHT_AMOUNT 256
 
 // In variables
 in vec3 f_pos;

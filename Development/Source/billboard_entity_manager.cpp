@@ -1,6 +1,6 @@
 #include "billboard_entity_manager.hpp"
 #include "shader_bus.hpp"
-#include "Logger.hpp"
+#include "logger.hpp"
 
 BillboardEntityManager::BillboardEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, ShaderBus& shaderBus, CameraManager& camera) :
 	BaseEntityManager(objLoader, texLoader, shaderBus),

@@ -6,7 +6,7 @@
 using glm::ivec2;
 using glm::ivec4;
 
-#include "Logger.hpp"
+#include "logger.hpp"
 
 class Config
 {

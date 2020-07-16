@@ -1,8 +1,8 @@
+#include "opengl_shader.hpp"
+#include "logger.hpp"
+
 #include <fstream>
 #include <sstream>
-
-#include "opengl_shader.hpp"
-#include "Logger.hpp"
 
 OpenGLShader::OpenGLShader(const string & vertexFileName, const string & fragmentFileName)
 {

@@ -1,6 +1,6 @@
-#include <GLM\\gtc/matrix_transform.hpp>
-
 #include "aabb_entity.hpp"
+
+#include <GLM\\gtc\\matrix_transform.hpp>
 
 void AabbEntity::updateModelMatrix()
 {

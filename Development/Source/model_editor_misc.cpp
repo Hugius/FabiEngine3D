@@ -11,11 +11,11 @@ void ModelEditor::_updateMiscellaneous()
 		// Update reference model visibility
 		if (_fe3d.input_getKeyToggled(Input::KEY_R))
 		{
-			_fe3d.gameEntity_hide("@cube");
+			_fe3d.gameEntity_hide("@@cube");
 		}
 		else
 		{
-			_fe3d.gameEntity_show("@cube");
+			_fe3d.gameEntity_show("@@cube");
 		}
 	}
 }
@@ -193,7 +193,7 @@ bool ModelEditor::_addModel(string modelName, string objName, string diffuseMapN
 	}
 	else
 	{
-		_fe3d.logger_throwWarning("Modelname \"" + modelName.substr(1, modelName.size()) + "\" is already in use!");
+		_fe3d.logger_throwWarning("Modelname \"" + modelName.substr(1, modelName.size() - 1) + "\" is already in use!");
 
 		return false;
 	}

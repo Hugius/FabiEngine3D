@@ -12,7 +12,7 @@ using glm::mat3;
 using glm::mat4;
 using std::map;
 
-#include "Logger.hpp"
+#include "logger.hpp"
 
 class OpenGLShader final
 {

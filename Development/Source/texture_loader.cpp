@@ -1,5 +1,5 @@
 #include "texture_loader.hpp"
-#include "Logger.hpp"
+#include "logger.hpp"
 
 GLuint TextureLoader::getText(const string & text, const string& filePath)
 {

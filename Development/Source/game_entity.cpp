@@ -1,6 +1,6 @@
 #include "game_entity.hpp"
 
-#include <GLM\\gtc/matrix_transform.hpp>
+#include <GLM\\gtc\\matrix_transform.hpp>
 #include <iostream>
 
 void GameEntity::updateModelMatrix()

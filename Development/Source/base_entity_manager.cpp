@@ -1,5 +1,5 @@
 #include "base_entity_manager.hpp"
-#include "Logger.hpp"
+#include "logger.hpp"
 
 BaseEntityManager::BaseEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, ShaderBus& shaderBus) :
 	_objLoader(objLoader),

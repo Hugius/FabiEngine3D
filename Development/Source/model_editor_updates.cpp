@@ -31,7 +31,7 @@ void ModelEditor::_updateManagementScreen()
 			{
 				_modelChoosingEnabled = true;
 				_modelEditingEnabled = true;
-				for (auto& name : _modelNames) { name = name.substr(1, name.size()); }
+				for (auto& name : _modelNames) { name = name.substr(1, name.size() - 1); }
 				_gui->getGlobalScreen()->addChoiceForm("modelList", "Select model", vec2(-0.4f, 0.1f), _modelNames);
 				for (auto& name : _modelNames) { name = "@" + name; }
 			}
@@ -39,7 +39,7 @@ void ModelEditor::_updateManagementScreen()
 			{
 				_modelChoosingEnabled = true;
 				_modelRemovalEnabled = true;
-				for (auto& name : _modelNames) { name = name.substr(1, name.size()); }
+				for (auto& name : _modelNames) { name = name.substr(1, name.size() - 1); }
 				_gui->getGlobalScreen()->addChoiceForm("modelList", "Select model", vec2(-0.4f, 0.1f), _modelNames);
 				for (auto& name : _modelNames) { name = "@" + name; }
 			}
@@ -76,19 +76,18 @@ void ModelEditor::_updateCreationScreen()
 			if (_gui->getGlobalScreen()->checkValueForm("newModelName", newModelName))
 			{
 				// Remove forbidden character
-				if (newModelName[0] == '@')
+				if (newModelName != "@@grid" && newModelName != "@@cube")
 				{
-					newModelName = newModelName.substr(1, newModelName.size());
-				}
 
-				// Add model and check if not already existing
-				if (_addModel("@" + newModelName, "", "", "", "", vec3(0.0f), 0, 1, 0, 0, 1.0f, vec3(1.0f), 1.0f, vec3(2.5f)))
-				{
-					// Go to editor screen
-					_currentModelName = "@" + newModelName;
-					_modelCreationEnabled = false;
-					_modelEditingEnabled = true;
-					_gui->getViewport("left")->getWindow("main")->setActiveScreen("modelEditingMain");
+					// Add model and check if not already existing
+					if (_addModel("@" + newModelName, "", "", "", "", vec3(0.0f), 0, 1, 0, 0, 1.0f, vec3(1.0f), 1.0f, vec3(2.5f)))
+					{
+						// Go to editor screen
+						_currentModelName = "@" + newModelName;
+						_modelCreationEnabled = false;
+						_modelEditingEnabled = true;
+						_gui->getViewport("left")->getWindow("main")->setActiveScreen("modelEditingMain");
+					}
 				}
 			}
 		}

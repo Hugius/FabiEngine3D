@@ -1,7 +1,7 @@
-#include <SDL\\SDL_image.h>
-
 #include "texture_loader.hpp"
-#include "Logger.hpp"
+#include "logger.hpp"
+
+#include <SDL\\SDL_image.h>
 
 GLuint TextureLoader::_loadText(const string& text, const string &fontPath)
 {

@@ -1,9 +1,9 @@
+#include "Tools.hpp"
+#include "logger.hpp"
+
 #include <ctime>
 #include <iostream>
 #include <sstream>
-
-#include "Tools.hpp"
-#include "Logger.hpp"
 
 #define PI      3.14159265359f
 #define DEG2RAD 0.01745329251994329576923690768489f

@@ -28,6 +28,11 @@ void EntityPlacer::_updateMiscellaneous()
 	}
 }
 
+void EntityPlacer::_selectModel(string modelID)
+{
+	_selectedModelID = modelID;
+}
+
 void EntityPlacer::_activateModel(string modelID)
 {
 	_activeModelID = modelID;
@@ -168,5 +173,39 @@ void EntityPlacer::_updateLightbulbAnimation(string modelID, int& multiplier)
 		float speed = (_lightbulbAnimationSpeed * static_cast<float>(multiplier));
 		_fe3d.gameEntity_setSize(modelID, _fe3d.gameEntity_getSize(modelID) + vec3(speed));
 		_fe3d.aabbEntity_setSize(modelID, _fe3d.aabbEntity_getSize(modelID) + vec3(speed));
+	}
+}
+
+void EntityPlacer::_handleValueChanging(string screenID, string buttonID, string wfID, float& value, float adder, float divider, float multiplier)
+{
+	// Plus & minus button handling
+	if (_fe3d.input_getMouseDown(Input::MOUSE_BUTTON_LEFT))
+	{
+		if (_rightWindow->getScreen(screenID)->getButton(buttonID)->isHovered())
+		{
+			value += adder;
+		}
+	}
+
+	// Writefield handling
+	auto writefield = _rightWindow->getScreen(screenID)->getWriteField(wfID);
+	if (writefield->confirmedInput())
+	{
+		if (writefield->getTextContent() != "")
+		{
+			// Cannot be empty
+			if (writefield->getTextContent() == "-")
+			{
+				writefield->setTextContent(std::to_string(value));
+			}
+
+			value = float(stoi(writefield->getTextContent())) / divider;
+		}
+	}
+
+	// Writefield filling
+	if (!_rightWindow->getScreen(screenID)->getWriteField(wfID)->isActive())
+	{
+		_rightWindow->getScreen(screenID)->getWriteField(wfID)->setTextContent(std::to_string(static_cast<int>(value * multiplier)));
 	}
 }

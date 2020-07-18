@@ -265,15 +265,6 @@
     <ClCompile Include="Source\entity_placer_core.cpp">
       <Filter>src\Editor System\Entity Placer</Filter>
     </ClCompile>
-    <ClCompile Include="Source\entity_placer_updates.cpp">
-      <Filter>src\Editor System\Entity Placer</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\entity_placer_updates_placing.cpp">
-      <Filter>src\Editor System\Entity Placer</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\entity_placer_updates_editing.cpp">
-      <Filter>src\Editor System\Entity Placer</Filter>
-    </ClCompile>
     <ClCompile Include="Source\billboard_editor_updates_editing.cpp">
       <Filter>src\Editor System\Billboard Editor</Filter>
     </ClCompile>
@@ -363,6 +354,36 @@
     </ClCompile>
     <ClCompile Include="Source\engine_gui_global_screen_misc.cpp">
       <Filter>src\GUI System</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\entity_placer_updates.cpp">
+      <Filter>src\Editor System\Entity Placer</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\entity_placer_light_placing.cpp">
+      <Filter>src\Editor System\Entity Placer</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\entity_placer_model_updates.cpp">
+      <Filter>src\Editor System\Entity Placer</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\entity_placer_billboard_updates.cpp">
+      <Filter>src\Editor System\Entity Placer</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\entity_placer_light_updates.cpp">
+      <Filter>src\Editor System\Entity Placer</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\entity_placer_model_placing.cpp">
+      <Filter>src\Editor System\Entity Placer</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\entity_placer_billboard_placing.cpp">
+      <Filter>src\Editor System\Entity Placer</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\entity_placer_light_editing.cpp">
+      <Filter>src\Editor System\Entity Placer</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\entity_placer_billboard_editing.cpp">
+      <Filter>src\Editor System\Entity Placer</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\entity_placer_model_editing.cpp">
+      <Filter>src\Editor System\Entity Placer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

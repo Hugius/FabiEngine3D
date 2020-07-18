@@ -195,7 +195,6 @@ void EntityPlacer::load()
 		if (_fe3d.gameEntity_isExisting(modelName))
 		{
 			_leftWindow->getScreen("placeModel")->getScrollingList("modelList")->addButton(modelName, modelName.substr(1, modelName.size() - 1));
-			_leftWindow->getScreen("chooseModel")->getScrollingList("modelList")->addButton(modelName, modelName.substr(1, modelName.size() - 1));
 		}
 	}
 
@@ -283,11 +282,13 @@ void EntityPlacer::loadWorld()
 			else if (entityType == "AMBIENT")
 			{
 				iss >> _ambientLightColor.r >> _ambientLightColor.g >> _ambientLightColor.b >> _ambientLightIntensity;
+				_fe3d.gfx_enableAmbientLighting(_ambientLightColor, _ambientLightIntensity);
 			}
 			else if (entityType == "DIRECTIONAL")
 			{
 				iss >> _directionalLightPosition.x >> _directionalLightPosition.y >> _directionalLightPosition.z >>
 					_directionalLightColor.r >> _directionalLightColor.g >> _directionalLightColor.b >> _directionalLightIntensity;
+				_fe3d.gfx_enableDirectionalLighting(_directionalLightPosition, _directionalLightColor, _directionalLightIntensity);
 			}
 			else if (entityType == "POINT")
 			{
@@ -466,7 +467,6 @@ void EntityPlacer::unload()
 
 	// Other
 	_leftWindow->getScreen("placeModel")->getScrollingList("modelList")->deleteButtons();
-	_leftWindow->getScreen("chooseModel")->getScrollingList("modelList")->deleteButtons();
 	_fe3d.collision_disableFrameRendering();
 	_isLoaded = false;
 }

@@ -32,35 +32,40 @@ public:
 	bool isLoaded();
 
 private:
-	// Menus
-	void _updateManagementScreen();
+	// Model updates
 	void _updateModelScreen();
+	void _updateModelPlacingScreen();
+	void _updateModelChoosingScreen();
+	void _updateModelPlacing();
+	void _updateModelEditing();
+
+	// Billboard updates
 	void _updateBillboardScreen();
+	void _updateBilboardPlacing();
+	void _updateBillboardEditing();
+
+	// Light updates
 	void _updateLightScreen();
 	void _updateAmbientLightScreen();
 	void _updateDirectionalLightScreen();
 	void _updatePointLightScreen();
-
-	// Placement
-	void _updateModelPlacing();
-	void _updateBilboardPlacing();
 	void _updateLightPlacing();
-
-	// Editing
-	void _updateModelEditing();
-	void _updateBillboardEditing();
 	void _updateLightEditing();
+
+	// Miscellaneous updates
+	void _updateManagementScreen();
+	void _updateCamera();
+	void _updateMiscellaneous();
 
 	// Miscellaneous
 	void _placeModel(string modelID, string modelName, vec3 position, vec3 rotation, vec3 size);
 	void _placeModel(string modelID, vec3 position, vec3 rotation, vec3 size, string objPath, string diffuseMapPath, string lightMapPath, string reflectionMapPath,
 		bool faceCulled, bool shadowed, bool transparent, bool specular, float specularIntensity, vec3 color, float uvRepeat, vec3 aabbSize);
-	void _updateCamera();
 	void _updateModelBlinking(string modelID, int& multiplier);
 	void _updateLightbulbAnimation(string modelID, int& multiplier);
 	void _handleValueChanging(string screenID, string buttonID, string wfID, float& value, float adder, float divider = 1.0f, float multiplier = 1.0f);
+	void _selectModel(string modelID);
 	void _activateModel(string modelID);
-	void _updateMiscellaneous();
 
 	// Instances
 	FabiEngine3D& _fe3d;
@@ -71,25 +76,22 @@ private:
 	shared_ptr<EngineGuiWindow> _leftWindow;
 	shared_ptr<EngineGuiWindow> _rightWindow;
 
-	// Model placement
+	// Model variables
 	string _currentPreviewModelName = "";
+	string _selectedModelID = "";
 	string _activeModelID = "";
 	int _selectedLightnessMultiplier = 1;
 	int _activeLightnessMultiplier = 1;
 
-	// Billboard placement
+	// Billboard variables
 	string _currentBillboardName = "";
 
-	// Ambient lighting
+	// Lighting variables
 	vec3 _ambientLightColor = vec3(1.0f);
 	float _ambientLightIntensity = 1.0f;
-
-	// Directional lighting
 	vec3 _directionalLightColor = vec3(1.0f);
 	vec3 _directionalLightPosition = vec3(0.0f);
 	float _directionalLightIntensity = 0.0f;
-
-	// Point lighting
 	bool _isPlacingPointlight = false;
 	const string _previewPointlightID = "@previewPointlight";
 	const vec3 _defaultPointlightColor = vec3(1.0f);

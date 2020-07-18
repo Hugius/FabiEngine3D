@@ -55,7 +55,7 @@ void LeftViewportController::update()
 		else if (screen->getButton("entityPlacer")->isHovered()) // Entity placer button
 		{
 			_entityPlacer.load();
-			window->setActiveScreen("placingManagement");
+			window->setActiveScreen("placeManagement");
 		}
 	}
 

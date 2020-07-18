@@ -25,19 +25,19 @@ uniform mat4  u_skyRotationMatrix;
 
 // Vector3 uniforms
 uniform vec3 u_cameraPosition;
-uniform vec3 u_ambientLightColor;
-uniform vec3 u_directionalLightColor;
-uniform vec3 u_directionalLightPos;
+uniform vec3 u_ambientLightingColor;
+uniform vec3 u_directionalLightingColor;
+uniform vec3 u_directionalLightingPosition;
 uniform vec3 u_pointLightPositions[POINT_LIGHT_AMOUNT];
 uniform vec3 u_pointLightColors[POINT_LIGHT_AMOUNT];
 uniform vec3 u_color;
 
 // Float uniforms
 uniform float u_pointLightIntensities[POINT_LIGHT_AMOUNT];
-uniform float u_ambientLightIntensity;
-uniform float u_directionalLightIntensity;
-uniform float u_specularLightIntensity;
-uniform float u_specularLightStrength;
+uniform float u_ambientLightingIntensity;
+uniform float u_directionalLightingIntensity;
+uniform float u_specularLightingIntensity;
+uniform float u_specularLightingStrength;
 uniform float u_fogMinDistance;
 uniform float u_skyReflectionMixValue;
 uniform float u_customAlpha;
@@ -137,7 +137,7 @@ vec3 getAmbientLighting()
 {
 	if(u_ambientLightingEnabled)
 	{
-		return u_ambientLightColor * u_ambientLightIntensity;
+		return u_ambientLightingColor * u_ambientLightingIntensity;
 	}
 	else
 	{
@@ -152,14 +152,14 @@ vec3 getDirectionalLighting()
 	{
         // Calculate
         vec3 result = vec3(0.0f);
-		vec3 lightDirection = normalize(u_directionalLightPos - f_pos);
+		vec3 lightDirection = normalize(u_directionalLightingPosition - f_pos);
 		float diffuse = max(dot(f_normal, lightDirection), 0.0);
 
         // Apply
         result += vec3(diffuse);
-        result += vec3(getSpecularValue(u_directionalLightPos));
-        result *= u_directionalLightColor;
-        result *= u_directionalLightIntensity;
+        result += vec3(getSpecularValue(u_directionalLightingPosition));
+        result *= u_directionalLightingColor;
+        result *= u_directionalLightingIntensity;
 
         // Return
         return result;
@@ -215,10 +215,10 @@ float getSpecularValue(vec3 position)
         vec3 lightDirection   = normalize(f_pos - position);
         vec3 viewDirection    = normalize(f_pos - u_cameraPosition);
         vec3 reflectDirection = reflect(-lightDirection, f_normal);
-        float result          = pow(max(dot(viewDirection, reflectDirection), 0.0f), u_specularLightIntensity);
+        float result          = pow(max(dot(viewDirection, reflectDirection), 0.0f), u_specularLightingIntensity);
 
         // Return
-        return result * u_specularLightStrength;
+        return result * u_specularLightingStrength;
     }
     else
     {

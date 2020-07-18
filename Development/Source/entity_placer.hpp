@@ -58,6 +58,8 @@ private:
 	void _updateCamera();
 	void _updateModelBlinking(string modelID, int& multiplier);
 	void _updateLightbulbAnimation(string modelID, int& multiplier);
+	void _handleValueChanging(string screenID, string buttonID, string wfID, float& value, float adder, float divider = 1.0f, float multiplier = 1.0f);
+	void _activateModel(string modelID);
 	void _updateMiscellaneous();
 
 	// Instances
@@ -71,6 +73,9 @@ private:
 
 	// Model placement
 	string _currentPreviewModelName = "";
+	string _activeModelID = "";
+	int _selectedLightnessMultiplier = 1;
+	int _activeLightnessMultiplier = 1;
 
 	// Billboard placement
 	string _currentBillboardName = "";
@@ -99,5 +104,5 @@ private:
 	float _customCameraSpeed = 10.0f;
 	const float _modelBlinkingSpeed = 0.025f;
 	const float _lightbulbAnimationSpeed = 0.01f;
-	const float _transformationSpeed = 0.05f;
+	const float _valueChangingSpeed = 0.05f;
 };

@@ -29,22 +29,22 @@ void EntityPlacer::_updateManagementScreen()
 {
 	if (_isLoaded)
 	{
-		auto screen = _leftWindow->getScreen("placingManagement");
+		auto screen = _leftWindow->getScreen("placeManagement");
 
 		// GUI management
 		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
 		{
-			if (screen->getButton("placeModel")->isHovered()) // Add model button
+			if (screen->getButton("modelPlaceManagement")->isHovered()) // Model button
 			{
 				_leftWindow->setActiveScreen("modelPlaceManagement");
 			}
-			else if (screen->getButton("placeBillboard")->isHovered()) // Place billboard button
+			else if (screen->getButton("billboardPlaceManagement")->isHovered()) // Billboard button
 			{
 				_leftWindow->setActiveScreen("billboardPlaceManagement");
 			}
-			else if (screen->getButton("placeLight")->isHovered()) // Place light button
+			else if (screen->getButton("lightingManagement")->isHovered()) // Light button
 			{
-				_leftWindow->setActiveScreen("lightManagement");
+				_leftWindow->setActiveScreen("lightingManagement");
 			}
 			else if (screen->getButton("setSpeed")->isHovered()) // Set speed button
 			{
@@ -78,9 +78,26 @@ void EntityPlacer::_updateModelScreen()
 {
 	if (_isLoaded)
 	{
+		// Menu screen
 		auto screen = _leftWindow->getScreen("modelPlaceManagement");
+		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
+		{			
+			if (screen->getButton("placeModel")->isHovered()) // Place model button
+			{
+				_leftWindow->setActiveScreen("placeModel");
+			}
+			else if (screen->getButton("chooseModel")->isHovered()) // Choose model button
+			{
+				_leftWindow->setActiveScreen("chooseModel");
+			}
+			else if (screen->getButton("back")->isHovered()) // Back button
+			{
+				_leftWindow->setActiveScreen("placeManagement");
+			}
+		}
 
-		// GUI management
+		// Placing screen
+		screen = _leftWindow->getScreen("placeModel");
 		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
 		{
 			// Loop over every created model
@@ -110,9 +127,35 @@ void EntityPlacer::_updateModelScreen()
 			}
 
 			// Back button
-			if (screen->getButton("back")->isHovered()) 
+			if (screen->getButton("back")->isHovered())
 			{
-				_leftWindow->setActiveScreen("placingManagement");
+				_leftWindow->setActiveScreen("modelPlaceManagement");
+			}
+		}
+
+		// Choosing screen
+		screen = _leftWindow->getScreen("chooseModel");
+		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
+		{
+			// Loop over every created model
+			for (auto& modelName : _modelEditor.getModelNames())
+			{
+				// Check if model has a game entity
+				if (_fe3d.gameEntity_isExisting(modelName))
+				{
+					// Check if button is hovered
+					if (screen->getScrollingList("modelList")->getButton(modelName)->isHovered())
+					{
+						_activateModel(modelName);
+						break;
+					}
+				}
+			}
+
+			// Back button
+			if (screen->getButton("back")->isHovered())
+			{
+				_leftWindow->setActiveScreen("modelPlaceManagement");
 				_currentPreviewModelName = "";
 			}
 		}
@@ -131,7 +174,7 @@ void EntityPlacer::_updateBillboardScreen()
 			// Back button
 			if (screen->getButton("back")->isHovered())
 			{
-				_leftWindow->setActiveScreen("placingManagement");
+				_leftWindow->setActiveScreen("placeManagement");
 			}
 		}
 	}
@@ -141,18 +184,18 @@ void EntityPlacer::_updateLightScreen()
 {
 	if (_isLoaded)
 	{
-		auto screen = _leftWindow->getScreen("lightManagement");
+		auto screen = _leftWindow->getScreen("lightingManagement");
 
 		// GUI management
 		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
 		{
 			if (screen->getButton("ambient")->isHovered()) // Ambient light button
 			{
-				_leftWindow->setActiveScreen("ambientLightManagement");
+				_leftWindow->setActiveScreen("ambientLightingManagement");
 			}
 			else if (screen->getButton("directional")->isHovered()) // Directional light button
 			{
-				_leftWindow->setActiveScreen("directionalLightManagement");
+				_leftWindow->setActiveScreen("directionalLightingManagement");
 			}
 			else if (screen->getButton("point")->isHovered()) // Point light button
 			{
@@ -160,7 +203,7 @@ void EntityPlacer::_updateLightScreen()
 			}
 			else if (screen->getButton("back")->isHovered()) // Back button
 			{
-				_leftWindow->setActiveScreen("placingManagement");
+				_leftWindow->setActiveScreen("placeManagement");
 			}
 		}
 
@@ -175,7 +218,7 @@ void EntityPlacer::_updateAmbientLightScreen()
 {
 	if (_isLoaded)
 	{
-		auto screen = _leftWindow->getScreen("ambientLightManagement");
+		auto screen = _leftWindow->getScreen("ambientLightingManagement");
 
 		// GUI management
 		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
@@ -192,7 +235,7 @@ void EntityPlacer::_updateAmbientLightScreen()
 			}
 			else if (screen->getButton("back")->isHovered())
 			{
-				_leftWindow->setActiveScreen("lightManagement");
+				_leftWindow->setActiveScreen("lightingManagement");
 			}
 		}
 
@@ -229,7 +272,7 @@ void EntityPlacer::_updateDirectionalLightScreen()
 {
 	if (_isLoaded)
 	{
-		auto screen = _leftWindow->getScreen("directionalLightManagement");
+		auto screen = _leftWindow->getScreen("directionalLightingManagement");
 
 		// GUI management
 		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
@@ -252,13 +295,14 @@ void EntityPlacer::_updateDirectionalLightScreen()
 			}
 			else if (screen->getButton("back")->isHovered())
 			{
-				_leftWindow->setActiveScreen("lightManagement");
+				_leftWindow->setActiveScreen("lightingManagement");
 			}
 		}
 
-		// Ambient value conversion
+		// Directional value conversion
 		if (_gui->getGlobalScreen()->checkValueForm("directionalIntensity", _directionalLightIntensity))
 		{
+			std::cout << "FGrefrfg";
 			_directionalLightIntensity /= 100.0f;
 		}
 
@@ -305,7 +349,7 @@ void EntityPlacer::_updatePointLightScreen()
 			}
 			else if (screen->getButton("back")->isHovered())
 			{
-				_leftWindow->setActiveScreen("lightManagement");
+				_leftWindow->setActiveScreen("lightingManagement");
 				_isPlacingPointlight = false;
 			}
 		}

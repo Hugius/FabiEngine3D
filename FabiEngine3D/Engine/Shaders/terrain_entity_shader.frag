@@ -20,15 +20,15 @@ layout(location = 5) uniform sampler2D   u_sampler_shadowMap;
 
 // Uniforms
 uniform vec3 u_cameraPosition;
-uniform vec3 u_ambientLightColor;
-uniform vec3 u_directionalLightColor;
-uniform vec3 u_directionalLightPos;
+uniform vec3 u_ambientLightingColor;
+uniform vec3 u_directionalLightingColor;
+uniform vec3 u_directionalLightingPosition;
 uniform vec3 u_pointLightPositions[POINT_LIGHT_AMOUNT];
 uniform vec3 u_pointLightColors[POINT_LIGHT_AMOUNT];
 
 uniform float u_lightness;
-uniform float u_ambientLightIntensity;
-uniform float u_directionalLightIntensity;
+uniform float u_ambientLightingIntensity;
+uniform float u_directionalLightingIntensity;
 uniform float u_pointLightIntensities[POINT_LIGHT_AMOUNT];
 uniform float u_fogMinDistance;
 uniform float u_blendmapRepeat;
@@ -117,7 +117,7 @@ vec3 getAmbientLighting()
 {
 	if(u_ambientLightingEnabled)
 	{
-		return u_ambientLightColor * u_ambientLightIntensity;
+		return u_ambientLightingColor * u_ambientLightingIntensity;
 	}
 
 	return vec3(0.0f);
@@ -128,9 +128,9 @@ vec3 getDirectionalLighting()
 {
 	if(u_directionalLightingEnabled)
 	{
-		vec3 lightDir = normalize(u_directionalLightPos - f_pos);
+		vec3 lightDir = normalize(u_directionalLightingPosition - f_pos);
 		float lightIntensity = max(dot(f_normal, lightDir), 0.0);
-		return u_directionalLightColor * (lightIntensity * u_directionalLightIntensity);
+		return u_directionalLightingColor * (lightIntensity * u_directionalLightingIntensity);
 	}
 
 	return vec3(0.0f);

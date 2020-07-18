@@ -17,28 +17,28 @@ void GameEntityRenderer::bind()
 	_shader.uploadUniform("u_clippingPlane",     clippingPlane);
 	
 	// Fragment shader uniforms u_specularLightStrength
-	_shader.uploadUniform("u_cameraPosition",             _shaderBus.getCameraPos());
-	_shader.uploadUniform("u_ambientLightingEnabled",	  _shaderBus.isAmbientLightingEnabled());
-	_shader.uploadUniform("u_ambientLightColor",		  _shaderBus.getAmbientLightColor());
-	_shader.uploadUniform("u_ambientLightIntensity",	  _shaderBus.getAmbientLightIntensity());
-	_shader.uploadUniform("u_directionalLightingEnabled", _shaderBus.isDirectionalLightingEnabled());
-	_shader.uploadUniform("u_directionalLightColor",	  _shaderBus.getDirectionalLightColor());
-	_shader.uploadUniform("u_directionalLightPos",        _shaderBus.getDirectionalLightPos());
-	_shader.uploadUniform("u_directionalLightIntensity",  _shaderBus.getDirectionalLightIntensity());
-	_shader.uploadUniform("u_fogMinDistance",             _shaderBus.getFogMinDistance());
-	_shader.uploadUniform("u_specularLightingEnabled",	  _shaderBus.isSpecularLightingEnabled());
-	_shader.uploadUniform("u_specularLightingStrength",   _shaderBus.getSpecularLightingStrength());
-	_shader.uploadUniform("u_pointLightingEnabled",		  _shaderBus.isPointLightingEnabled());
-	_shader.uploadUniform("u_lightMappingEnabled",		  _shaderBus.isLightMappingEnabled());
-	_shader.uploadUniform("u_skyReflectionsEnabled",	  _shaderBus.isSkyReflectionsEnabled());
-	_shader.uploadUniform("u_sceneReflectionsEnabled",	  _shaderBus.isSceneReflectionsEnabled());
-	_shader.uploadUniform("u_fogEnabled",				  _shaderBus.isFogEnabled());
-	_shader.uploadUniform("u_shadowsEnabled",			  _shaderBus.isShadowsEnabled());
-	_shader.uploadUniform("u_skyReflectionMixValue",	  _shaderBus.getSkyReflectionMixValue());
-	_shader.uploadUniform("u_skyReflectionFactor",		  _shaderBus.getSkyReflectionFactor());
-	_shader.uploadUniform("u_sceneReflectionFactor",	  _shaderBus.getSceneReflectionFactor());
-	_shader.uploadUniform("u_shadowMapSize",			  Config::getInst().getShadowQuality());
-
+	_shader.uploadUniform("u_cameraPosition",				_shaderBus.getCameraPos());
+	_shader.uploadUniform("u_ambientLightingEnabled",		_shaderBus.isAmbientLightingEnabled());
+	_shader.uploadUniform("u_ambientLightingColor",			_shaderBus.getAmbientLightColor());
+	_shader.uploadUniform("u_ambientLightingIntensity",		_shaderBus.getAmbientLightIntensity());
+	_shader.uploadUniform("u_directionalLightingEnabled",	_shaderBus.isDirectionalLightingEnabled());
+	_shader.uploadUniform("u_directionalLightingColor",		_shaderBus.getDirectionalLightColor());
+	_shader.uploadUniform("u_directionalLightingPosition",	_shaderBus.getDirectionalLightPos());
+	_shader.uploadUniform("u_directionalLightingIntensity", _shaderBus.getDirectionalLightIntensity());
+	_shader.uploadUniform("u_fogMinDistance",				_shaderBus.getFogMinDistance());
+	_shader.uploadUniform("u_specularLightingEnabled",		_shaderBus.isSpecularLightingEnabled());
+	_shader.uploadUniform("u_specularLightingStrength",		_shaderBus.getSpecularLightingStrength());
+	_shader.uploadUniform("u_pointLightingEnabled",			_shaderBus.isPointLightingEnabled());
+	_shader.uploadUniform("u_lightMappingEnabled",			_shaderBus.isLightMappingEnabled());
+	_shader.uploadUniform("u_skyReflectionsEnabled",		_shaderBus.isSkyReflectionsEnabled());
+	_shader.uploadUniform("u_sceneReflectionsEnabled",		_shaderBus.isSceneReflectionsEnabled());
+	_shader.uploadUniform("u_fogEnabled",					_shaderBus.isFogEnabled());
+	_shader.uploadUniform("u_shadowsEnabled",				_shaderBus.isShadowsEnabled());
+	_shader.uploadUniform("u_skyReflectionMixValue",		_shaderBus.getSkyReflectionMixValue());
+	_shader.uploadUniform("u_skyReflectionFactor",			_shaderBus.getSkyReflectionFactor());
+	_shader.uploadUniform("u_sceneReflectionFactor",		_shaderBus.getSceneReflectionFactor());
+	_shader.uploadUniform("u_shadowMapSize",				Config::getInst().getShadowQuality());
+	
 	// Texture uniforms
 	_shader.uploadUniform("u_sampler_diffuseMap", 0);
 	_shader.uploadUniform("u_sampler_lightMap", 1);
@@ -110,7 +110,7 @@ void GameEntityRenderer::render(const GameEntity* entity)
 		// Shader uniforms
 		_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix());
 		_shader.uploadUniform("u_color", entity->getColor());
-		_shader.uploadUniform("u_specularLightIntensity", entity->getSpecularIntensity());
+		_shader.uploadUniform("u_specularLightingIntensity", entity->getSpecularIntensity());
 		_shader.uploadUniform("u_isTransparent", entity->isTransparent());
 		_shader.uploadUniform("u_isLightmapped", entity->isLightMapped());
 		_shader.uploadUniform("u_isSkyReflective", entity->isSkyReflective());

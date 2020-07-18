@@ -28,6 +28,28 @@ void EntityPlacer::_updateMiscellaneous()
 	}
 }
 
+void EntityPlacer::_activateModel(string modelID)
+{
+	_activeModelID = modelID;
+	_transformation = Transformation::TRANSLATION;
+
+	// Activate properties screen
+	_rightWindow->getScreen("modelProperties")->getButton("translation")->setHoverable(false);
+	_rightWindow->getScreen("modelProperties")->getButton("rotation")->setHoverable(true);
+	_rightWindow->getScreen("modelProperties")->getButton("scaling")->setHoverable(true);
+
+	// Update selected model text
+	string textEntityID = _gui->getGlobalScreen()->getTextfield("selectedModelName")->getEntityID();
+	_fe3d.textEntity_show(textEntityID);
+	_fe3d.textEntity_setTextContent(textEntityID, "Selected: " + _activeModelID, 0.025f);
+
+	// Filling writefields
+	vec3 position = _fe3d.gameEntity_getPosition(_activeModelID);
+	_rightWindow->getScreen("modelProperties")->getWriteField("x")->setTextContent(std::to_string(static_cast<int>(position.x)));
+	_rightWindow->getScreen("modelProperties")->getWriteField("y")->setTextContent(std::to_string(static_cast<int>(position.y)));
+	_rightWindow->getScreen("modelProperties")->getWriteField("z")->setTextContent(std::to_string(static_cast<int>(position.z)));
+}
+
 void EntityPlacer::_placeModel(string modelID, string modelName, vec3 position, vec3 rotation, vec3 size)
 {
 	// Add game entity

@@ -14,7 +14,7 @@ layout(location = 3) uniform sampler2D u_sampler_dudvMap;
 layout(location = 4) uniform sampler2D u_sampler_normalMap;
 
 // Uniforms
-uniform vec3  u_directionalLightPos;
+uniform vec3  u_directionalLightingPosition;
 uniform vec3  u_cameraPosition;
 uniform vec3  u_color;
 uniform float u_ripplePos;
@@ -88,7 +88,7 @@ vec4 getMainColor()
 	// Specular lighting
 	if(u_isSpecular)
 	{
-		vec3 lightDir      = normalize(u_directionalLightPos - f_pos);
+		vec3 lightDir      = normalize(u_directionalLightingPosition - f_pos);
 		vec3 viewDir       = normalize(f_pos - u_cameraPosition);
 		vec3 reflectDir    = reflect(normalize(lightDir), normal);
 		specularIntensity = pow(max(dot(reflectDir, viewDir), 0.0f), u_shininess);

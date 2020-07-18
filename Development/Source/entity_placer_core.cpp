@@ -20,42 +20,53 @@ void EntityPlacer::initializeGUI()
 	_leftWindow = _gui->getViewport("left")->getWindow("main");
 	_rightWindow = _gui->getViewport("right")->getWindow("main");
 
-	// Left-viewport: mainWindow - placeManagement
-	_leftWindow->addScreen("placingManagement");
-	_leftWindow->getScreen("placingManagement")->addButton("placeModel", vec2(0.0f, 0.7f), vec2(1.5f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Place model", LeftViewportController::textColor, LeftViewportController::textHoverColor);
-	_leftWindow->getScreen("placingManagement")->addButton("placeBillboard", vec2(0.0f, 0.35f), vec2(1.7f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Place billboard", LeftViewportController::textColor, LeftViewportController::textHoverColor);
-	_leftWindow->getScreen("placingManagement")->addButton("placeLight", vec2(0.0f, 0.0f), vec2(1.5f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Place light", LeftViewportController::textColor, LeftViewportController::textHoverColor);
-	_leftWindow->getScreen("placingManagement")->addButton("setSpeed", vec2(0.0f, -0.35f), vec2(1.5f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Set speed", LeftViewportController::textColor, LeftViewportController::textHoverColor);
-	_leftWindow->getScreen("placingManagement")->addButton("back", vec2(0.0f, -0.7f), vec2(1.0f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	// Left-viewport: mainWindow - placeMenuManagement
+	_leftWindow->addScreen("placeManagement");
+	_leftWindow->getScreen("placeManagement")->addButton("modelPlaceManagement", vec2(0.0f, 0.7f), vec2(1.5f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Models", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	_leftWindow->getScreen("placeManagement")->addButton("billboardPlaceManagement", vec2(0.0f, 0.35f), vec2(1.7f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Billboards", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	_leftWindow->getScreen("placeManagement")->addButton("lightingManagement", vec2(0.0f, 0.0f), vec2(1.5f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Lighting", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	_leftWindow->getScreen("placeManagement")->addButton("setSpeed", vec2(0.0f, -0.35f), vec2(1.5f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Set speed", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	_leftWindow->getScreen("placeManagement")->addButton("back", vec2(0.0f, -0.7f), vec2(1.0f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
 	
 	// Left-viewport: mainWindow - modelPlaceManagement
 	_leftWindow->addScreen("modelPlaceManagement");
-	_leftWindow->getScreen("modelPlaceManagement")->addScrollingList("modelList", vec2(0.0f, 0.1f), vec2(1.8, 1.75f), vec3(0.3f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, LeftViewportController::textColor, LeftViewportController::textHoverColor, vec2(0.15f, 0.1f));
-	_leftWindow->getScreen("modelPlaceManagement")->addButton("back", vec2(0.0f, -0.63f), vec2(1.0f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	_leftWindow->getScreen("modelPlaceManagement")->addButton("placeModel", vec2(0.0f, 0.475f), vec2(1.5f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Place model", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	_leftWindow->getScreen("modelPlaceManagement")->addButton("chooseModel", vec2(0.0f, 0.0f), vec2(1.5f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Choose model", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	_leftWindow->getScreen("modelPlaceManagement")->addButton("back", vec2(0.0f, -0.475f), vec2(1.0f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+
+	// Left-viewport: mainWindow - placeModel
+	_leftWindow->addScreen("placeModel");
+	_leftWindow->getScreen("placeModel")->addScrollingList("modelList", vec2(0.0f, 0.1f), vec2(1.8, 1.75f), vec3(0.3f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, LeftViewportController::textColor, LeftViewportController::textHoverColor, vec2(0.15f, 0.1f));
+	_leftWindow->getScreen("placeModel")->addButton("back", vec2(0.0f, -0.63f), vec2(1.0f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	
+	// Left-viewport: mainWindow - chooseModel
+	_leftWindow->addScreen("chooseModel");
+	_leftWindow->getScreen("chooseModel")->addScrollingList("modelList", vec2(0.0f, 0.1f), vec2(1.8, 1.75f), vec3(0.3f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, LeftViewportController::textColor, LeftViewportController::textHoverColor, vec2(0.15f, 0.1f));
+	_leftWindow->getScreen("chooseModel")->addButton("back", vec2(0.0f, -0.63f), vec2(1.0f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
 
 	// Left-viewport: mainWindow - billboardPlaceManagement
 	_leftWindow->addScreen("billboardPlaceManagement");
 	_leftWindow->getScreen("billboardPlaceManagement")->addButton("back", vec2(0.0f, -0.63f), vec2(1.0f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
 
-	// Left-viewport: mainWindow - lightManagement
-	_leftWindow->addScreen("lightManagement");
-	_leftWindow->getScreen("lightManagement")->addButton("ambient", vec2(0.0f, 0.63f), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Ambient", LeftViewportController::textColor, LeftViewportController::textHoverColor);
-	_leftWindow->getScreen("lightManagement")->addButton("directional", vec2(0.0f, 0.21f), vec2(1.75f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Directional", LeftViewportController::textColor, LeftViewportController::textHoverColor);
-	_leftWindow->getScreen("lightManagement")->addButton("point", vec2(0.0f, -0.21f), vec2(1.0f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Point", LeftViewportController::textColor, LeftViewportController::textHoverColor);
-	_leftWindow->getScreen("lightManagement")->addButton("back", vec2(0.0f, -0.63f), vec2(1.0f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	// Left-viewport: mainWindow - lightingManagement
+	_leftWindow->addScreen("lightingManagement");
+	_leftWindow->getScreen("lightingManagement")->addButton("ambient", vec2(0.0f, 0.63f), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Ambient", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	_leftWindow->getScreen("lightingManagement")->addButton("directional", vec2(0.0f, 0.21f), vec2(1.75f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Directional", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	_leftWindow->getScreen("lightingManagement")->addButton("point", vec2(0.0f, -0.21f), vec2(1.0f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Point", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	_leftWindow->getScreen("lightingManagement")->addButton("back", vec2(0.0f, -0.63f), vec2(1.0f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
 
 	// Left-viewport: mainWindow - ambientLightManagement
-	_leftWindow->addScreen("ambientLightManagement");
-	_leftWindow->getScreen("ambientLightManagement")->addButton("color", vec2(0.0f, 0.475f), vec2(1.0f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Color", LeftViewportController::textColor, LeftViewportController::textHoverColor);
-	_leftWindow->getScreen("ambientLightManagement")->addButton("intensity", vec2(0.0f, 0.0f), vec2(1.5f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "intensity", LeftViewportController::textColor, LeftViewportController::textHoverColor);
-	_leftWindow->getScreen("ambientLightManagement")->addButton("back", vec2(0.0f, -0.475f), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	_leftWindow->addScreen("ambientLightingManagement");
+	_leftWindow->getScreen("ambientLightingManagement")->addButton("color", vec2(0.0f, 0.475f), vec2(1.0f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Color", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	_leftWindow->getScreen("ambientLightingManagement")->addButton("intensity", vec2(0.0f, 0.0f), vec2(1.5f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "intensity", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	_leftWindow->getScreen("ambientLightingManagement")->addButton("back", vec2(0.0f, -0.475f), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
 
 	// Left-viewport: mainWindow - directionalLightManagement
-	_leftWindow->addScreen("directionalLightManagement");
-	_leftWindow->getScreen("directionalLightManagement")->addButton("color", vec2(0.0f, 0.63f), vec2(1.0f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Color", LeftViewportController::textColor, LeftViewportController::textHoverColor);
-	_leftWindow->getScreen("directionalLightManagement")->addButton("position", vec2(0.0f, 0.21f), vec2(1.5f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Position", LeftViewportController::textColor, LeftViewportController::textHoverColor);
-	_leftWindow->getScreen("directionalLightManagement")->addButton("intensity", vec2(0.0f, -0.21f), vec2(1.5f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "intensity", LeftViewportController::textColor, LeftViewportController::textHoverColor);
-	_leftWindow->getScreen("directionalLightManagement")->addButton("back", vec2(0.0f, -0.63f), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	_leftWindow->addScreen("directionalLightingManagement");
+	_leftWindow->getScreen("directionalLightingManagement")->addButton("color", vec2(0.0f, 0.63f), vec2(1.0f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Color", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	_leftWindow->getScreen("directionalLightingManagement")->addButton("position", vec2(0.0f, 0.21f), vec2(1.5f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Position", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	_leftWindow->getScreen("directionalLightingManagement")->addButton("intensity", vec2(0.0f, -0.21f), vec2(1.5f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "intensity", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	_leftWindow->getScreen("directionalLightingManagement")->addButton("back", vec2(0.0f, -0.63f), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
 
 	// Left-viewport: mainWindow - pointLightManagement
 	_leftWindow->addScreen("pointLightManagement");
@@ -85,27 +96,39 @@ void EntityPlacer::initializeGUI()
 
 	// Right-viewport: mainWindow - lightProperties
 	_rightWindow->addScreen("lightProperties");
-	_rightWindow->getScreen("lightProperties")->addTextfield("intensity", vec2(0.0f, 0.85f), vec2(1.5f, 0.1f), "Intensity", vec3(1.0f));
-	_rightWindow->getScreen("lightProperties")->addWriteField("intensity", vec2(0.0f, 0.75f), vec2(1.0f, 0.1f), vec3(0.25f), vec3(0.75f), vec3(1.0f), vec3(0.0f), 0, 1, 1, 1, 1);
-	_rightWindow->getScreen("lightProperties")->addButton("intensityPlus", vec2(0.75f, 0.75f), vec2(0.5f, 0.15f), "plus.png", vec3(1.0f));
-	_rightWindow->getScreen("lightProperties")->addButton("intensityMinus", vec2(-0.75f, 0.75f), vec2(0.5f, 0.15f), "minus.png", vec3(1.0f));
-	_rightWindow->getScreen("lightProperties")->addTextfield("distance", vec2(0.0f, 0.6f), vec2(1.5f, 0.1f), "Distance", vec3(1.0f));
-	_rightWindow->getScreen("lightProperties")->addWriteField("distance", vec2(0.0f, 0.5f), vec2(1.0f, 0.1f), vec3(0.25f), vec3(0.75f), vec3(1.0f), vec3(0.0f), 0, 1, 1, 1, 1);
-	_rightWindow->getScreen("lightProperties")->addButton("distancePlus", vec2(0.75f, 0.5f), vec2(0.5f, 0.15f), "plus.png", vec3(1.0f));
-	_rightWindow->getScreen("lightProperties")->addButton("distanceMinus", vec2(-0.75f, 0.5f), vec2(0.5f, 0.15f), "minus.png", vec3(1.0f));
-	_rightWindow->getScreen("lightProperties")->addTextfield("x", vec2(0.0f, 0.35f), vec2(0.25f, 0.1f), "X", vec3(1.0f));
-	_rightWindow->getScreen("lightProperties")->addTextfield("y", vec2(0.0f, 0.1f), vec2(0.25f, 0.1f), "Y", vec3(1.0f));
-	_rightWindow->getScreen("lightProperties")->addTextfield("z", vec2(0.0f, -0.15f), vec2(0.25f, 0.1f), "Z", vec3(1.0f));
-	_rightWindow->getScreen("lightProperties")->addButton("xPlus", vec2(0.75f, 0.25f), vec2(0.5f, 0.15f), "plus.png", vec3(1.0f));
-	_rightWindow->getScreen("lightProperties")->addButton("yPlus", vec2(0.75f, 0.0f), vec2(0.5f, 0.15f), "plus.png", vec3(1.0f));
-	_rightWindow->getScreen("lightProperties")->addButton("zPlus", vec2(0.75f, -0.25f), vec2(0.5f, 0.15f), "plus.png", vec3(1.0f));
-	_rightWindow->getScreen("lightProperties")->addButton("xMinus", vec2(-0.75f, 0.25f), vec2(0.5f, 0.15f), "minus.png", vec3(1.0f));
-	_rightWindow->getScreen("lightProperties")->addButton("yMinus", vec2(-0.75f, 0.0f), vec2(0.5f, 0.15f), "minus.png", vec3(1.0f));
-	_rightWindow->getScreen("lightProperties")->addButton("zMinus", vec2(-0.75f, -0.25f), vec2(0.5f, 0.15f), "minus.png", vec3(1.0f));
-	_rightWindow->getScreen("lightProperties")->addWriteField("x", vec2(0.0f, 0.25f), vec2(1.0f, 0.1f), vec3(0.25f), vec3(0.75f), vec3(1.0f), vec3(0.0f), 0, 1, 1, 1, 1);
-	_rightWindow->getScreen("lightProperties")->addWriteField("y", vec2(0.0f, 0.0f), vec2(1.0f, 0.1f), vec3(0.25f), vec3(0.75f), vec3(1.0f), vec3(0.0f), 0, 1, 1, 1, 1);
-	_rightWindow->getScreen("lightProperties")->addWriteField("z", vec2(0.0f, -0.25f), vec2(1.0f, 0.1f), vec3(0.25f), vec3(0.75f), vec3(1.0f), vec3(0.0f), 0, 1, 1, 1, 1);
-	_rightWindow->getScreen("lightProperties")->addButton("delete", vec2(0.0f, -0.5f), vec2(1.5f, 0.1f), vec3(0.75f, 0.0f, 0.0f), vec3(1.0f, 0.25f, 0.25f), "Delete", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	_rightWindow->getScreen("lightProperties")->addTextfield("intensity", vec2(0.0f, 0.95f), vec2(1.5f, 0.1f), "Intensity", vec3(1.0f));
+	_rightWindow->getScreen("lightProperties")->addButton("intensityPlus", vec2(0.75f, 0.85f), vec2(0.5f, 0.15f), "plus.png", vec3(1.0f));
+	_rightWindow->getScreen("lightProperties")->addButton("intensityMinus", vec2(-0.75f, 0.85f), vec2(0.5f, 0.15f), "minus.png", vec3(1.0f));
+	_rightWindow->getScreen("lightProperties")->addWriteField("intensity", vec2(0.0f, 0.85f), vec2(1.0f, 0.1f), vec3(0.25f), vec3(0.75f), vec3(1.0f), vec3(0.0f), 0, 1, 1, 1, 1);
+	_rightWindow->getScreen("lightProperties")->addTextfield("distance", vec2(0.0f, 0.725f), vec2(1.5f, 0.1f), "Distance", vec3(1.0f));
+	_rightWindow->getScreen("lightProperties")->addButton("distancePlus", vec2(0.75f, 0.625f), vec2(0.5f, 0.15f), "plus.png", vec3(1.0f));
+	_rightWindow->getScreen("lightProperties")->addButton("distanceMinus", vec2(-0.75f, 0.625f), vec2(0.5f, 0.15f), "minus.png", vec3(1.0f));
+	_rightWindow->getScreen("lightProperties")->addWriteField("distance", vec2(0.0f, 0.625f), vec2(1.0f, 0.1f), vec3(0.25f), vec3(0.75f), vec3(1.0f), vec3(0.0f), 0, 1, 1, 1, 1);
+	_rightWindow->getScreen("lightProperties")->addTextfield("x", vec2(0.0f, 0.5f), vec2(0.25f, 0.1f), "X", vec3(1.0f));
+	_rightWindow->getScreen("lightProperties")->addButton("xPlus", vec2(0.75f, 0.4f), vec2(0.5f, 0.15f), "plus.png", vec3(1.0f));
+	_rightWindow->getScreen("lightProperties")->addButton("xMinus", vec2(-0.75f, 0.4f), vec2(0.5f, 0.15f), "minus.png", vec3(1.0f));
+	_rightWindow->getScreen("lightProperties")->addWriteField("x", vec2(0.0f, 0.4f), vec2(1.0f, 0.1f), vec3(0.25f), vec3(0.75f), vec3(1.0f), vec3(0.0f), 0, 1, 1, 1, 1);
+	_rightWindow->getScreen("lightProperties")->addTextfield("y", vec2(0.0f, 0.275f), vec2(0.25f, 0.1f), "Y", vec3(1.0f));
+	_rightWindow->getScreen("lightProperties")->addButton("yPlus", vec2(0.75f, 0.175f), vec2(0.5f, 0.15f), "plus.png", vec3(1.0f));
+	_rightWindow->getScreen("lightProperties")->addButton("yMinus", vec2(-0.75f, 0.175f), vec2(0.5f, 0.15f), "minus.png", vec3(1.0f));
+	_rightWindow->getScreen("lightProperties")->addWriteField("y", vec2(0.0f, 0.175f), vec2(1.0f, 0.1f), vec3(0.25f), vec3(0.75f), vec3(1.0f), vec3(0.0f), 0, 1, 1, 1, 1);
+	_rightWindow->getScreen("lightProperties")->addTextfield("z", vec2(0.0f, 0.05f), vec2(0.25f, 0.1f), "Z", vec3(1.0f));
+	_rightWindow->getScreen("lightProperties")->addButton("zPlus", vec2(0.75f, -0.05f), vec2(0.5f, 0.15f), "plus.png", vec3(1.0f));
+	_rightWindow->getScreen("lightProperties")->addButton("zMinus", vec2(-0.75f, -0.05f), vec2(0.5f, 0.15f), "minus.png", vec3(1.0f));
+	_rightWindow->getScreen("lightProperties")->addWriteField("z", vec2(0.0f, -0.05f), vec2(1.0f, 0.1f), vec3(0.25f), vec3(0.75f), vec3(1.0f), vec3(0.0f), 0, 1, 1, 1, 1);
+	_rightWindow->getScreen("lightProperties")->addTextfield("r", vec2(0.0f, -0.175f), vec2(0.25f, 0.1f), "R", vec3(1.0f));
+	_rightWindow->getScreen("lightProperties")->addButton("rPlus", vec2(0.75f, -0.185f), vec2(0.5f, 0.15f), "plus.png", vec3(1.0f));
+	_rightWindow->getScreen("lightProperties")->addButton("rMinus", vec2(-0.75f, -0.185f), vec2(0.5f, 0.15f), "minus.png", vec3(1.0f));
+	_rightWindow->getScreen("lightProperties")->addWriteField("r", vec2(0.0f, -0.185f), vec2(1.0f, 0.1f), vec3(0.25f), vec3(0.75f), vec3(1.0f), vec3(0.0f), 0, 1, 1, 1, 1);
+	_rightWindow->getScreen("lightProperties")->addTextfield("g", vec2(0.0f, -0.4f), vec2(0.25f, 0.1f), "G", vec3(1.0f));
+	_rightWindow->getScreen("lightProperties")->addButton("gPlus", vec2(0.75f, -0.5f), vec2(0.5f, 0.15f), "plus.png", vec3(1.0f));
+	_rightWindow->getScreen("lightProperties")->addButton("gMinus", vec2(-0.75f, -0.5f), vec2(0.5f, 0.15f), "minus.png", vec3(1.0f));
+	_rightWindow->getScreen("lightProperties")->addWriteField("g", vec2(0.0f, -0.5f), vec2(1.0f, 0.1f), vec3(0.25f), vec3(0.75f), vec3(1.0f), vec3(0.0f), 0, 1, 1, 1, 1);
+	_rightWindow->getScreen("lightProperties")->addTextfield("b", vec2(0.0f, -0.625f), vec2(0.25f, 0.1f), "B", vec3(1.0f));
+	_rightWindow->getScreen("lightProperties")->addButton("bPlus", vec2(0.75f, -0.725f), vec2(0.5f, 0.15f), "plus.png", vec3(1.0f));
+	_rightWindow->getScreen("lightProperties")->addButton("bMinus", vec2(-0.75f, -0.725f), vec2(0.5f, 0.15f), "minus.png", vec3(1.0f));
+	_rightWindow->getScreen("lightProperties")->addWriteField("b", vec2(0.0f, -0.725f), vec2(1.0f, 0.1f), vec3(0.25f), vec3(0.75f), vec3(1.0f), vec3(0.0f), 0, 1, 1, 1, 1);
+	_rightWindow->getScreen("lightProperties")->addButton("delete", vec2(0.0f, -0.9f), vec2(1.5f, 0.1f), vec3(0.75f, 0.0f, 0.0f), vec3(1.0f, 0.25f, 0.25f), "Delete", LeftViewportController::textColor, LeftViewportController::textHoverColor);
 }
 
 void EntityPlacer::load()
@@ -171,7 +194,8 @@ void EntityPlacer::load()
 		// Check if there is a game entity present
 		if (_fe3d.gameEntity_isExisting(modelName))
 		{
-			_leftWindow->getScreen("modelPlaceManagement")->getScrollingList("modelList")->addButton(modelName, modelName.substr(1, modelName.size() - 1));
+			_leftWindow->getScreen("placeModel")->getScrollingList("modelList")->addButton(modelName, modelName.substr(1, modelName.size() - 1));
+			_leftWindow->getScreen("chooseModel")->getScrollingList("modelList")->addButton(modelName, modelName.substr(1, modelName.size() - 1));
 		}
 	}
 
@@ -441,7 +465,8 @@ void EntityPlacer::unload()
 	_fe3d.camera_disableFirstPersonView();
 
 	// Other
-	_leftWindow->getScreen("modelPlaceManagement")->getScrollingList("modelList")->deleteButtons();
+	_leftWindow->getScreen("placeModel")->getScrollingList("modelList")->deleteButtons();
+	_leftWindow->getScreen("chooseModel")->getScrollingList("modelList")->deleteButtons();
 	_fe3d.collision_disableFrameRendering();
 	_isLoaded = false;
 }

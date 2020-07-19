@@ -105,7 +105,6 @@ void EntityPlacer::_updateModelChoosingScreen()
 						if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
 						{
 							_activateModel(modelName);
-							
 						}
 						else // Hovering (selection)
 						{

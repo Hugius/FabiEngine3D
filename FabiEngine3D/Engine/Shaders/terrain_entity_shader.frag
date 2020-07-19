@@ -2,7 +2,7 @@
 #extension GL_ARB_explicit_uniform_location : enable
 
 // Const variables
-#define POINT_LIGHT_AMOUNT 256
+#define POINT_LIGHT_AMOUNT 128
 
 // In variables
 in vec3 f_pos;
@@ -30,6 +30,7 @@ uniform float u_lightness;
 uniform float u_ambientLightingIntensity;
 uniform float u_directionalLightingIntensity;
 uniform float u_pointLightIntensities[POINT_LIGHT_AMOUNT];
+uniform float u_pointLightDistanceFactors[POINT_LIGHT_AMOUNT];
 uniform float u_fogMinDistance;
 uniform float u_blendmapRepeat;
 uniform float u_blendmapRepeatR;
@@ -108,8 +109,10 @@ vec3 applyFog(vec3 color)
 		vec3   foggedColor = mix(vec3(0.75f, 0.75f, 0.75f), color, min(u_fogMinDistance / distance, 1.0f));
 		return foggedColor;
 	}
-	
-	return color;
+	else
+	{
+		return color;
+	}
 }
 
 // Calculate ambient lighting
@@ -119,8 +122,10 @@ vec3 getAmbientLighting()
 	{
 		return u_ambientLightingColor * u_ambientLightingIntensity;
 	}
-
-	return vec3(0.0f);
+	else
+	{
+		return vec3(0.0f);
+	}
 }
 
 // Calculate directional lighting
@@ -132,8 +137,10 @@ vec3 getDirectionalLighting()
 		float lightIntensity = max(dot(f_normal, lightDir), 0.0);
 		return u_directionalLightingColor * (lightIntensity * u_directionalLightingIntensity);
 	}
-
-	return vec3(0.0f);
+	else
+	{
+		return vec3(0.0f);
+	}
 }
 
 // Calculate point lighting
@@ -141,22 +148,35 @@ vec3 getPointLighting()
 {
 	if(u_pointLightingEnabled)
 	{
-		vec3 totalIntensity = vec3(0.0f);
+		vec3 result = vec3(0.0f);
 		
+        // For every pointlight
 		for(int i = 0; i < u_pointLightCount; i++)
 		{
+            // Calculate
 			vec3  lightDir = normalize(u_pointLightPositions[i] - f_pos);
-			float intensity = max(dot(f_normal, lightDir), 0.0);
-			float distance = length(u_pointLightPositions[i] - f_pos);
+			float diffuse = max(dot(f_normal, lightDir), 0.0);
+			float distance = length(u_pointLightPositions[i] - f_pos) * u_pointLightDistanceFactors[i];
 			float attenuation = 1.0f / (1.0f + 0.07f * distance + 0.017f * (distance * distance));
-			intensity *= attenuation * (u_pointLightIntensities[i]);
-			totalIntensity += (u_pointLightColors[i] * intensity);
+
+            // Apply
+            vec3 current = vec3(0.0f);
+			current += vec3(diffuse);
+            current *= u_pointLightColors[i];
+            current *= attenuation;
+            current *= u_pointLightIntensities[i];
+
+            // Add to total lighting value
+            result += current;
 		}
 
-		return totalIntensity;
+        // Return
+		return result;
 	}
-	
-	return vec3(0.0f);
+	else
+	{
+		return vec3(0.0f);
+	}
 }
 
 vec3 getShadowLighting()
@@ -189,6 +209,8 @@ vec3 getShadowLighting()
 		shadow /= 9.0f;
 		return vec3(shadow);
 	}
-
-	return vec3(1.0f);
+	else
+	{
+		return vec3(1.0f);
+	}
 }

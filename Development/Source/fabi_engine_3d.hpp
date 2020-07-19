@@ -298,7 +298,7 @@ public:
 
 	// Light entity interface
 	void lightEntity_deleteAll();
-	void lightEntity_add(const string& ID, vec3 position, vec3 color, float intensity);
+	void lightEntity_add(const string& ID, vec3 position, vec3 color, float intensity, float distanceFactor);
 	void lightEntity_delete(const string& ID);
 	void lightEntity_hide(const string& ID);
 	void lightEntity_show(const string& ID);
@@ -306,9 +306,11 @@ public:
 	void lightEntity_setPosition(const string& ID, vec3 position);
 	void lightEntity_setColor(const string& ID, vec3 color);
 	void lightEntity_setIntensity(const string& ID, float intensity);
+	void lightEntity_setDistanceFactor(const string& ID, float factor);
 	vec3 lightEntity_getPosition(const string& ID);
 	vec3 lightEntity_getColor(const string& ID);
 	float lightEntity_getIntensity(const string& ID);
+	float lightEntity_getDistanceFactor(const string& ID);
 	vector<string> lightEntity_getAllIDs();
 
 	// Gui entity interface

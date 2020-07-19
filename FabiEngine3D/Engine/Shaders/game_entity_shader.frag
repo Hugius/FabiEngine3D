@@ -2,7 +2,7 @@
 #extension GL_ARB_explicit_uniform_location : enable
 
 // Const variables
-#define POINT_LIGHT_AMOUNT 256
+#define POINT_LIGHT_AMOUNT 128
 
 // In variables
 in vec3 f_pos;
@@ -34,6 +34,7 @@ uniform vec3 u_color;
 
 // Float uniforms
 uniform float u_pointLightIntensities[POINT_LIGHT_AMOUNT];
+uniform float u_pointLightDistanceFactors[POINT_LIGHT_AMOUNT];
 uniform float u_ambientLightingIntensity;
 uniform float u_directionalLightingIntensity;
 uniform float u_specularLightingIntensity;
@@ -183,7 +184,7 @@ vec3 getPointLighting()
             // Calculate
 			vec3  lightDir = normalize(u_pointLightPositions[i] - f_pos);
 			float diffuse = max(dot(f_normal, lightDir), 0.0);
-			float distance = length(u_pointLightPositions[i] - f_pos);
+			float distance = length(u_pointLightPositions[i] - f_pos) * u_pointLightDistanceFactors[i];
 			float attenuation = 1.0f / (1.0f + 0.07f * distance + 0.017f * (distance * distance));
 
             // Apply

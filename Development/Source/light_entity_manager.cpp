@@ -24,7 +24,7 @@ const vector<LightEntity*> LightEntityManager::getEntities()
 	return newVector;
 }
 
-void LightEntityManager::addLightEntity(const string & ID, vec3 position, vec3 color, float intensity)
+void LightEntityManager::addLightEntity(const string & ID, vec3 position, vec3 color, float intensity, float distanceFactor)
 {
 	// Create entity
 	_createEntity(EntityType::LIGHT, ID)->load(ID);
@@ -33,4 +33,5 @@ void LightEntityManager::addLightEntity(const string & ID, vec3 position, vec3 c
 	getEntity(ID)->setPosition(position);
 	getEntity(ID)->setColor(color);
 	getEntity(ID)->setIntensity(intensity);
+	getEntity(ID)->setDistanceFactor(distanceFactor);
 }

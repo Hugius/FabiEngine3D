@@ -11,7 +11,7 @@ public:
 
 	const vector<LightEntity*> getEntities();
 
-	void addLightEntity(const string & ID, vec3 position, vec3 color, float intensity);
+	void addLightEntity(const string & ID, vec3 position, vec3 color, float intensity, float distanceFactor);
 
 	void update() override {}
 };

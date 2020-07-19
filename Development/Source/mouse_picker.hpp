@@ -1,12 +1,12 @@
 #pragma once
 
+#include "terrain_entity_manager.hpp"
+
 #include <GLM\\glm.hpp>
 
 using glm::ivec2;
 using glm::vec3;
 using glm::vec4;
-
-#include "terrain_entity_manager.hpp"
 
 class MousePicker final
 {

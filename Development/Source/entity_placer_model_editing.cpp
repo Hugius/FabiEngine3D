@@ -119,22 +119,22 @@ void EntityPlacer::_updateModelEditing()
 				// Apply new model position / rotation / size
 				if (_transformation == Transformation::TRANSLATION)
 				{
-					_handleValueChanging("modelProperties", "xPlus", "x", position.x, _valueChangingSpeed);
-					_handleValueChanging("modelProperties", "xMinus", "x", position.x, -_valueChangingSpeed);
-					_handleValueChanging("modelProperties", "yPlus", "y", position.y, _valueChangingSpeed);
-					_handleValueChanging("modelProperties", "yMinus", "y", position.y, -_valueChangingSpeed);
-					_handleValueChanging("modelProperties", "zPlus", "z", position.z, _valueChangingSpeed);
-					_handleValueChanging("modelProperties", "zMinus", "z", position.z, -_valueChangingSpeed);
+					_handleValueChanging("modelProperties", "xPlus", "x", position.x, _movementChangingSpeed);
+					_handleValueChanging("modelProperties", "xMinus", "x", position.x, -_movementChangingSpeed);
+					_handleValueChanging("modelProperties", "yPlus", "y", position.y, _movementChangingSpeed);
+					_handleValueChanging("modelProperties", "yMinus", "y", position.y, -_movementChangingSpeed);
+					_handleValueChanging("modelProperties", "zPlus", "z", position.z, _movementChangingSpeed);
+					_handleValueChanging("modelProperties", "zMinus", "z", position.z, -_movementChangingSpeed);
 					_fe3d.gameEntity_setPosition(_activeModelID, position);
 				}
 				else if (_transformation == Transformation::ROTATION)
 				{
-					_handleValueChanging("modelProperties", "xPlus", "x", rotation.x, _valueChangingSpeed);
-					_handleValueChanging("modelProperties", "xMinus", "x", rotation.x, -_valueChangingSpeed);
-					_handleValueChanging("modelProperties", "yPlus", "y", rotation.y, _valueChangingSpeed);
-					_handleValueChanging("modelProperties", "yMinus", "y", rotation.y, -_valueChangingSpeed);
-					_handleValueChanging("modelProperties", "zPlus", "z", rotation.z, _valueChangingSpeed);
-					_handleValueChanging("modelProperties", "zMinus", "z", rotation.z, -_valueChangingSpeed);
+					_handleValueChanging("modelProperties", "xPlus", "x", rotation.x, _movementChangingSpeed);
+					_handleValueChanging("modelProperties", "xMinus", "x", rotation.x, -_movementChangingSpeed);
+					_handleValueChanging("modelProperties", "yPlus", "y", rotation.y, _movementChangingSpeed);
+					_handleValueChanging("modelProperties", "yMinus", "y", rotation.y, -_movementChangingSpeed);
+					_handleValueChanging("modelProperties", "zPlus", "z", rotation.z, _movementChangingSpeed);
+					_handleValueChanging("modelProperties", "zMinus", "z", rotation.z, -_movementChangingSpeed);
 					rotation.x = std::fmodf(rotation.x, 360.0f);
 					rotation.y = std::fmodf(rotation.y, 360.0f);
 					rotation.z = std::fmodf(rotation.z, 360.0f);
@@ -145,12 +145,12 @@ void EntityPlacer::_updateModelEditing()
 					// Model size
 					vec3 oldSize = size;
 					float factor = 25.0f;
-					_handleValueChanging("modelProperties", "xPlus", "x", size.x, _valueChangingSpeed, factor, factor);
-					_handleValueChanging("modelProperties", "xMinus", "x", size.x, -_valueChangingSpeed, factor, factor);
-					_handleValueChanging("modelProperties", "yPlus", "y", size.y, _valueChangingSpeed, factor, factor);
-					_handleValueChanging("modelProperties", "yMinus", "y", size.y, -_valueChangingSpeed, factor, factor);
-					_handleValueChanging("modelProperties", "zPlus", "z", size.z, _valueChangingSpeed, factor, factor);
-					_handleValueChanging("modelProperties", "zMinus", "z", size.z, -_valueChangingSpeed, factor, factor);
+					_handleValueChanging("modelProperties", "xPlus", "x", size.x, _movementChangingSpeed, factor, factor);
+					_handleValueChanging("modelProperties", "xMinus", "x", size.x, -_movementChangingSpeed, factor, factor);
+					_handleValueChanging("modelProperties", "yPlus", "y", size.y, _movementChangingSpeed, factor, factor);
+					_handleValueChanging("modelProperties", "yMinus", "y", size.y, -_movementChangingSpeed, factor, factor);
+					_handleValueChanging("modelProperties", "zPlus", "z", size.z, _movementChangingSpeed, factor, factor);
+					_handleValueChanging("modelProperties", "zMinus", "z", size.z, -_movementChangingSpeed, factor, factor);
 					_fe3d.gameEntity_setSize(_activeModelID, size);
 
 					// AABB size

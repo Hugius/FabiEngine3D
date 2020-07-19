@@ -1,6 +1,6 @@
-#include <filesystem>
-
 #include "model_editor.hpp"
+
+#include <filesystem>
 
 void ModelEditor::_updateMiscellaneous()
 {

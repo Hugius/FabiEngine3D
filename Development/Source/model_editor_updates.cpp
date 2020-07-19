@@ -1,6 +1,6 @@
-#include <algorithm>
-
 #include "model_editor.hpp"
+
+#include <algorithm>
 
 void ModelEditor::update()
 {

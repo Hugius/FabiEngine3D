@@ -1,12 +1,13 @@
 #pragma once
 
-#include <map>
-
 #include "fabi_engine_3d.hpp"
 #include "engine_gui_manager.hpp"
 #include "world_editor.hpp"
 #include "model_editor.hpp"
 #include "billboard_editor.hpp"
+
+#include <map>
+#include <limits>
 
 enum class Transformation
 {
@@ -63,7 +64,8 @@ private:
 		bool faceCulled, bool shadowed, bool transparent, bool specular, float specularIntensity, vec3 color, float uvRepeat, vec3 aabbSize);
 	void _updateModelBlinking(string modelID, int& multiplier);
 	void _updateLightbulbAnimation(string modelID, int& multiplier);
-	void _handleValueChanging(string screenID, string buttonID, string wfID, float& value, float adder, float divider = 1.0f, float multiplier = 1.0f);
+	void _handleValueChanging(string screenID, string buttonID, string wfID, float& value, float adder, float multiplier = 1.0f,
+		float minimum = (std::numeric_limits<float>::lowest)(), float maximum = (std::numeric_limits<float>::max)());
 	void _selectModel(string modelID);
 	void _activateModel(string modelID);
 
@@ -98,6 +100,7 @@ private:
 	const vec3 _defaultLightbulbSize = vec3(1.0f);
 	const vec3 _defaultLightbulbAabbSize = vec3(1.0f, 1.25f, 1.0f);
 	const float _defaultPointlightIntensity = 1.0f;
+	const float _defaultPointlightDistance = 1.0f;
 
 	// Miscellaneous
 	bool _isLoaded = false;
@@ -106,5 +109,6 @@ private:
 	float _customCameraSpeed = 10.0f;
 	const float _modelBlinkingSpeed = 0.025f;
 	const float _lightbulbAnimationSpeed = 0.01f;
-	const float _valueChangingSpeed = 0.05f;
+	const float _movementChangingSpeed = 0.05f;
+	const float _colorChangingSpeed = 0.005f;
 };

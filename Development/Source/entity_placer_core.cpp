@@ -117,9 +117,9 @@ void EntityPlacer::initializeGUI()
 	_rightWindow->getScreen("lightProperties")->addButton("zMinus", vec2(-0.75f, -0.05f), vec2(0.5f, 0.15f), "minus.png", vec3(1.0f));
 	_rightWindow->getScreen("lightProperties")->addWriteField("z", vec2(0.0f, -0.05f), vec2(1.0f, 0.1f), vec3(0.25f), vec3(0.75f), vec3(1.0f), vec3(0.0f), 0, 1, 1, 1, 1);
 	_rightWindow->getScreen("lightProperties")->addTextfield("r", vec2(0.0f, -0.175f), vec2(0.25f, 0.1f), "R", vec3(1.0f));
-	_rightWindow->getScreen("lightProperties")->addButton("rPlus", vec2(0.75f, -0.185f), vec2(0.5f, 0.15f), "plus.png", vec3(1.0f));
-	_rightWindow->getScreen("lightProperties")->addButton("rMinus", vec2(-0.75f, -0.185f), vec2(0.5f, 0.15f), "minus.png", vec3(1.0f));
-	_rightWindow->getScreen("lightProperties")->addWriteField("r", vec2(0.0f, -0.185f), vec2(1.0f, 0.1f), vec3(0.25f), vec3(0.75f), vec3(1.0f), vec3(0.0f), 0, 1, 1, 1, 1);
+	_rightWindow->getScreen("lightProperties")->addButton("rPlus", vec2(0.75f, -0.275f), vec2(0.5f, 0.15f), "plus.png", vec3(1.0f));
+	_rightWindow->getScreen("lightProperties")->addButton("rMinus", vec2(-0.75f, -0.275f), vec2(0.5f, 0.15f), "minus.png", vec3(1.0f));
+	_rightWindow->getScreen("lightProperties")->addWriteField("r", vec2(0.0f, -0.275f), vec2(1.0f, 0.1f), vec3(0.25f), vec3(0.75f), vec3(1.0f), vec3(0.0f), 0, 1, 1, 1, 1);
 	_rightWindow->getScreen("lightProperties")->addTextfield("g", vec2(0.0f, -0.4f), vec2(0.25f, 0.1f), "G", vec3(1.0f));
 	_rightWindow->getScreen("lightProperties")->addButton("gPlus", vec2(0.75f, -0.5f), vec2(0.5f, 0.15f), "plus.png", vec3(1.0f));
 	_rightWindow->getScreen("lightProperties")->addButton("gMinus", vec2(-0.75f, -0.5f), vec2(0.5f, 0.15f), "minus.png", vec3(1.0f));
@@ -199,7 +199,7 @@ void EntityPlacer::load()
 	}
 
 	// Preview pointlight loading
-	_fe3d.lightEntity_add(_previewPointlightID, vec3(0.0f), _defaultPointlightColor, _defaultPointlightIntensity);
+	_fe3d.lightEntity_add(_previewPointlightID, vec3(0.0f), _defaultPointlightColor, _defaultPointlightIntensity, _defaultPointlightDistance);
 	_fe3d.gameEntity_add(_previewPointlightID, "Engine\\OBJs\\lamp.obj", vec3(0.0f), vec3(0.0f), _defaultLightbulbSize);
 	_fe3d.aabbEntity_add(_previewPointlightID, vec3(0.0f), _defaultLightbulbAabbSize, true);
 
@@ -294,15 +294,15 @@ void EntityPlacer::loadWorld()
 			{
 				string ID;
 				vec3 position, color;
-				float intensity;
+				float intensity, distance;
 
 				// Extract line data
-				iss >> ID >> position.x >> position.y >> position.z >> color.r >> color.g >> color.b >> intensity;
+				iss >> ID >> position.x >> position.y >> position.z >> color.r >> color.g >> color.b >> intensity >> distance;
 
 				// Add entities
 				_fe3d.gameEntity_add("@" + ID, "Engine\\OBJs\\lamp.obj", position, vec3(0.0f), _defaultLightbulbSize);
 				_fe3d.aabbEntity_bindToGameEntity("@" + ID, _defaultLightbulbAabbSize, true);
-				_fe3d.lightEntity_add(ID, position, color, intensity);
+				_fe3d.lightEntity_add(ID, position, color, intensity, distance);
 			}
 		}
 
@@ -385,10 +385,11 @@ void EntityPlacer::save()
 				auto position = _fe3d.lightEntity_getPosition(entityID);
 				auto color = _fe3d.lightEntity_getColor(entityID);
 				auto intensity = _fe3d.lightEntity_getIntensity(entityID);
+				auto distance = _fe3d.lightEntity_getDistanceFactor(entityID);
 
 				// Write line to file
 				file << "POINT " << entityID << " " << position.x << " " << position.y << " " << position.z << " " <<
-					color.r << " " << color.g << " " << color.b << " " << intensity << "\n";
+					color.r << " " << color.g << " " << color.b << " " << intensity << " " << distance << "\n";
 			}
 		}
 

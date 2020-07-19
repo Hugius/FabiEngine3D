@@ -103,32 +103,36 @@ void EntityPlacer::_updateLightEditing()
 				}
 
 				// Get current values
-				vec3 position = _fe3d.gameEntity_getPosition(ACTIVE_BULB_ID);
-				vec3 color = _fe3d.gameEntity_getColor(ACTIVE_BULB_ID);
+				vec3 position = _fe3d.lightEntity_getPosition(ACTIVE_LIGHT_ID);
+				vec3 color = _fe3d.lightEntity_getColor(ACTIVE_LIGHT_ID);
 				float intensity = _fe3d.lightEntity_getIntensity(ACTIVE_LIGHT_ID);
+				float distance = _fe3d.lightEntity_getDistanceFactor(ACTIVE_LIGHT_ID);
 
 				// Update value filling and changing
-				_handleValueChanging("lightProperties", "intensityPlus", "intensity", intensity, _valueChangingSpeed);
-				_handleValueChanging("lightProperties", "intensityMinus", "intensity", intensity, -_valueChangingSpeed);
-				_handleValueChanging("lightProperties", "xPlus", "x", position.x, _valueChangingSpeed);
-				_handleValueChanging("lightProperties", "xMinus", "x", position.x, -_valueChangingSpeed);
-				_handleValueChanging("lightProperties", "yPlus", "y", position.y, _valueChangingSpeed);
-				_handleValueChanging("lightProperties", "yMinus", "y", position.y, -_valueChangingSpeed);
-				_handleValueChanging("lightProperties", "zPlus", "z", position.z, _valueChangingSpeed);
-				_handleValueChanging("lightProperties", "zMinus", "z", position.z, -_valueChangingSpeed);
-				_handleValueChanging("lightProperties", "rPlus", "r", color.r, _valueChangingSpeed);
-				_handleValueChanging("lightProperties", "rMinus", "r", color.r, -_valueChangingSpeed);
-				_handleValueChanging("lightProperties", "gPlus", "g", color.g, _valueChangingSpeed);
-				_handleValueChanging("lightProperties", "gMinus", "g", color.g, -_valueChangingSpeed);
-				_handleValueChanging("lightProperties", "bPlus", "b", color.b, _valueChangingSpeed);
-				_handleValueChanging("lightProperties", "bMinus", "b", color.b, -_valueChangingSpeed);
-
+				_handleValueChanging("lightProperties", "distancePlus", "distance", distance, _movementChangingSpeed, 10.0f);
+				_handleValueChanging("lightProperties", "distanceMinus", "distance", distance, -_movementChangingSpeed, 10.0f);
+				_handleValueChanging("lightProperties", "intensityPlus", "intensity", intensity, _movementChangingSpeed, 10.0f);
+				_handleValueChanging("lightProperties", "intensityMinus", "intensity", intensity, -_movementChangingSpeed, 10.0f);
+				_handleValueChanging("lightProperties", "xPlus", "x", position.x, _movementChangingSpeed);
+				_handleValueChanging("lightProperties", "xMinus", "x", position.x, -_movementChangingSpeed);
+				_handleValueChanging("lightProperties", "yPlus", "y", position.y, _movementChangingSpeed);
+				_handleValueChanging("lightProperties", "yMinus", "y", position.y, -_movementChangingSpeed);
+				_handleValueChanging("lightProperties", "zPlus", "z", position.z, _movementChangingSpeed);
+				_handleValueChanging("lightProperties", "zMinus", "z", position.z, -_movementChangingSpeed);
+				_handleValueChanging("lightProperties", "rPlus", "r", color.r, _colorChangingSpeed, 255.0f, 0.0f, 1.0f);
+				_handleValueChanging("lightProperties", "rMinus", "r", color.r, -_colorChangingSpeed, 255.0f, 0.0f, 1.0f);
+				_handleValueChanging("lightProperties", "gPlus", "g", color.g, _colorChangingSpeed, 255.0f, 0.0f, 1.0f);
+				_handleValueChanging("lightProperties", "gMinus", "g", color.g, -_colorChangingSpeed, 255.0f, 0.0f, 1.0f);
+				_handleValueChanging("lightProperties", "bPlus", "b", color.b, _colorChangingSpeed, 255.0f, 0.0f, 1.0f);
+				_handleValueChanging("lightProperties", "bMinus", "b", color.b, -_colorChangingSpeed, 255.0f, 0.0f, 1.0f);
+				
 				// Apply new values
-				_fe3d.lightEntity_setIntensity(ACTIVE_LIGHT_ID, intensity);
-				_fe3d.lightEntity_setPosition(ACTIVE_LIGHT_ID, position);
-				_fe3d.lightEntity_setColor(ACTIVE_LIGHT_ID, color);
-				_fe3d.gameEntity_setColor(ACTIVE_BULB_ID, color);
 				_fe3d.gameEntity_setPosition(ACTIVE_BULB_ID, position);
+				_fe3d.lightEntity_setPosition(ACTIVE_LIGHT_ID, position);
+				_fe3d.gameEntity_setColor(ACTIVE_BULB_ID, color);
+				_fe3d.lightEntity_setColor(ACTIVE_LIGHT_ID, color);
+				_fe3d.lightEntity_setIntensity(ACTIVE_LIGHT_ID, intensity);
+				_fe3d.lightEntity_setDistanceFactor(ACTIVE_LIGHT_ID, distance);
 			}
 		}
 	}

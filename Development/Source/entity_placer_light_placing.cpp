@@ -42,7 +42,7 @@ void EntityPlacer::_updateLightPlacing()
 					// Add light entity
 					_fe3d.gameEntity_add("@" + newID, "Engine\\OBJs\\lamp.obj", newPosition, vec3(0.0f), _defaultLightbulbSize);
 					_fe3d.aabbEntity_bindToGameEntity("@" + newID, _defaultLightbulbAabbSize, true);
-					_fe3d.lightEntity_add(newID, newPosition, _defaultPointlightColor, _defaultPointlightIntensity);
+					_fe3d.lightEntity_add(newID, newPosition, _defaultPointlightColor, _defaultPointlightIntensity, _defaultPointlightDistance);
 
 					// Disable placement mode if no terrain availible to choose position from
 					if (_fe3d.terrainEntity_getSelectedID() == "")

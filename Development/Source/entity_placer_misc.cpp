@@ -1,5 +1,7 @@
 #include "entity_placer.hpp"
 
+#include <algorithm>
+
 bool EntityPlacer::isLoaded()
 {
 	return _isLoaded;
@@ -176,7 +178,8 @@ void EntityPlacer::_updateLightbulbAnimation(string modelID, int& multiplier)
 	}
 }
 
-void EntityPlacer::_handleValueChanging(string screenID, string buttonID, string wfID, float& value, float adder, float divider, float multiplier)
+void EntityPlacer::_handleValueChanging(string screenID, string buttonID, string wfID, float& value, float adder, 
+	float multiplier, float minimum, float maximum)
 {
 	// Plus & minus button handling
 	if (_fe3d.input_getMouseDown(Input::MOUSE_BUTTON_LEFT))
@@ -199,9 +202,12 @@ void EntityPlacer::_handleValueChanging(string screenID, string buttonID, string
 				writefield->setTextContent(std::to_string(value));
 			}
 
-			value = float(stoi(writefield->getTextContent())) / divider;
+			value = float(stoi(writefield->getTextContent())) / multiplier;
 		}
 	}
+
+	// Clamp value range
+	value = std::clamp(value, minimum, maximum);
 
 	// Writefield filling
 	if (!_rightWindow->getScreen(screenID)->getWriteField(wfID)->isActive())

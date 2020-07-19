@@ -87,12 +87,14 @@ void GameEntityRenderer::renderLightEntities(const vector<LightEntity*>& entitie
 			_shader.uploadUniform("u_pointLightPositions[" + std::to_string(i) + "]", entities[i]->getPosition());
 			_shader.uploadUniform("u_pointLightColors[" + std::to_string(i) + "]", entities[i]->getColor());
 			_shader.uploadUniform("u_pointLightIntensities[" + std::to_string(i) + "]", entities[i]->getIntensity());
+			_shader.uploadUniform("u_pointLightDistanceFactors[" + std::to_string(i) + "]", entities[i]->getDistanceFactor());
 		}
 		else
 		{
 			_shader.uploadUniform("u_pointLightPositions[" + std::to_string(i) + "]", vec3(0.0f));
 			_shader.uploadUniform("u_pointLightColors[" + std::to_string(i) + "]", vec3(0.0f));
 			_shader.uploadUniform("u_pointLightIntensities[" + std::to_string(i) + "]", 0.0f);
+			_shader.uploadUniform("u_pointLightDistanceFactors[" + std::to_string(i) + "]", 0.0f);
 		}
 	}
 }

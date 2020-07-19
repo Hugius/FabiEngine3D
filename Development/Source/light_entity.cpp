@@ -15,6 +15,11 @@ void LightEntity::setIntensity(float intensity)
 	_intensity = intensity;
 }
 
+void LightEntity::setDistanceFactor(float distance)
+{
+	_distanceFactor = distance;
+}
+
 const vec3 LightEntity::getPosition() const
 {
 	return _position;
@@ -28,4 +33,9 @@ const vec3 LightEntity::getColor() const
 const float LightEntity::getIntensity() const
 {
 	return _intensity;
+}
+
+const float LightEntity::getDistanceFactor() const
+{
+	return _distanceFactor;
 }

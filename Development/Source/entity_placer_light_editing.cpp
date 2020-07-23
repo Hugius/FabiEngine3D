@@ -109,10 +109,10 @@ void EntityPlacer::_updateLightEditing()
 				float distance = _fe3d.lightEntity_getDistanceFactor(ACTIVE_LIGHT_ID);
 
 				// Update value filling and changing
-				_handleValueChanging("lightProperties", "distancePlus", "distance", distance, _movementChangingSpeed, 10.0f);
-				_handleValueChanging("lightProperties", "distanceMinus", "distance", distance, -_movementChangingSpeed, 10.0f);
-				_handleValueChanging("lightProperties", "intensityPlus", "intensity", intensity, _movementChangingSpeed, 10.0f);
-				_handleValueChanging("lightProperties", "intensityMinus", "intensity", intensity, -_movementChangingSpeed, 10.0f);
+				_handleValueChanging("lightProperties", "distancePlus", "distance", distance, _lightingChangingSpeed, 10.0f, 0.0f);
+				_handleValueChanging("lightProperties", "distanceMinus", "distance", distance, -_lightingChangingSpeed, 10.0f, 0.0f);
+				_handleValueChanging("lightProperties", "intensityPlus", "intensity", intensity, _lightingChangingSpeed, 10.0f, 0.0f);
+				_handleValueChanging("lightProperties", "intensityMinus", "intensity", intensity, -_lightingChangingSpeed, 10.0f, 0.0f);
 				_handleValueChanging("lightProperties", "xPlus", "x", position.x, _movementChangingSpeed);
 				_handleValueChanging("lightProperties", "xMinus", "x", position.x, -_movementChangingSpeed);
 				_handleValueChanging("lightProperties", "yPlus", "y", position.y, _movementChangingSpeed);

@@ -117,10 +117,13 @@ void EntityPlacer::_updateModelChoosingScreen()
 			}
 
 			// Back button
-			if (screen->getButton("back")->isHovered())
+			if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
 			{
-				_leftWindow->setActiveScreen("modelPlaceManagement");
-				_currentPreviewModelName = "";
+				if (screen->getButton("back")->isHovered())
+				{
+					_leftWindow->setActiveScreen("modelPlaceManagement");
+					_currentPreviewModelName = "";
+				}
 			}
 		}
 	}

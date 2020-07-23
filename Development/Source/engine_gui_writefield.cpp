@@ -144,7 +144,7 @@ void EngineGuiWriteField::_updateTyping()
 								_currentTextContent += (c - 32);
 							}
 						}
-						else if (_fe3d.input_getKeyToggled(Input::KEY_CAPSLOCK)) // Uppercase character
+						else if ((GetKeyState(VK_CAPITAL) & 0x0001) != 0) // Uppercase character
 						{
 							if (!_noCaps) // A - Z
 							{

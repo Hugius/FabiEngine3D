@@ -22,7 +22,7 @@ void EntityPlacer::initializeGUI()
 
 	// Left-viewport: mainWindow - placeMenuManagement
 	_leftWindow->addScreen("placeManagement");
-	_leftWindow->getScreen("placeManagement")->addButton("modelPlaceManagement", vec2(0.0f, 0.7f), vec2(1.5f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Models", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	_leftWindow->getScreen("placeManagement")->addButton("modelPlaceManagement", vec2(0.0f, 0.7f), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Models", LeftViewportController::textColor, LeftViewportController::textHoverColor);
 	_leftWindow->getScreen("placeManagement")->addButton("billboardPlaceManagement", vec2(0.0f, 0.35f), vec2(1.7f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Billboards", LeftViewportController::textColor, LeftViewportController::textHoverColor);
 	_leftWindow->getScreen("placeManagement")->addButton("lightingManagement", vec2(0.0f, 0.0f), vec2(1.5f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Lighting", LeftViewportController::textColor, LeftViewportController::textHoverColor);
 	_leftWindow->getScreen("placeManagement")->addButton("setSpeed", vec2(0.0f, -0.35f), vec2(1.5f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Set speed", LeftViewportController::textColor, LeftViewportController::textHoverColor);
@@ -37,12 +37,12 @@ void EntityPlacer::initializeGUI()
 	// Left-viewport: mainWindow - placeModel
 	_leftWindow->addScreen("placeModel");
 	_leftWindow->getScreen("placeModel")->addScrollingList("modelList", vec2(0.0f, 0.1f), vec2(1.8, 1.75f), vec3(0.3f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, LeftViewportController::textColor, LeftViewportController::textHoverColor, vec2(0.15f, 0.1f));
-	_leftWindow->getScreen("placeModel")->addButton("back", vec2(0.0f, -0.63f), vec2(1.0f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	_leftWindow->getScreen("placeModel")->addButton("back", vec2(0.0f, -0.9f), vec2(1.0f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
 	
 	// Left-viewport: mainWindow - chooseModel
 	_leftWindow->addScreen("chooseModel");
 	_leftWindow->getScreen("chooseModel")->addScrollingList("modelList", vec2(0.0f, 0.1f), vec2(1.8, 1.75f), vec3(0.3f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, LeftViewportController::textColor, LeftViewportController::textHoverColor, vec2(0.15f, 0.1f));
-	_leftWindow->getScreen("chooseModel")->addButton("back", vec2(0.0f, -0.63f), vec2(1.0f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	_leftWindow->getScreen("chooseModel")->addButton("back", vec2(0.0f, -0.9f), vec2(1.0f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
 
 	// Left-viewport: mainWindow - billboardPlaceManagement
 	_leftWindow->addScreen("billboardPlaceManagement");
@@ -133,7 +133,8 @@ void EntityPlacer::initializeGUI()
 
 void EntityPlacer::load()
 {
-	// Enable graphics
+	// Enable default graphics
+	_fe3d.gfx_enableAmbientLighting(_ambientLightColor, _ambientLightIntensity);
 	_fe3d.gfx_enableLightMapping();
 	_fe3d.gfx_enablePointLighting();
 	_fe3d.gfx_enableSkyReflections(0.25f);
@@ -208,8 +209,10 @@ void EntityPlacer::load()
 	_gui->getGlobalScreen()->addTextfield("selectedBillboardName", vec2(0.0f, 0.85f), vec2(0.5f, 0.1f), "", vec3(1.0f));
 	_gui->getGlobalScreen()->addTextfield("selectedPointlightName", vec2(0.0f, 0.85f), vec2(0.5f, 0.1f), "", vec3(1.0f));
 
-	// Other
+	// Load world file
 	loadWorld();
+
+	// Other
 	_isLoaded = true;
 }
 
@@ -223,7 +226,7 @@ void EntityPlacer::loadWorld()
 
 	string modelsPath = _fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\world.fe3d";
 
-	// Load models file
+	// Load world file
 	if (_fe3d.misc_isFileExisting(modelsPath)) // Check if models file exists
 	{
 		std::ifstream file(modelsPath);

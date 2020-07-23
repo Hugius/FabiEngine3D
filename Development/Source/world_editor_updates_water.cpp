@@ -218,39 +218,41 @@ void WorldEditor::_updateWaterEffects()
 			}
 			else if (screen->getScrollingList("buttonList")->getButton("reflective")->isHovered())
 			{
-				auto buttonID = screen->getScrollingList("buttonList")->getButton("reflective")->getTextfield()->getEntityID();
 				_waterReflectionEnabled = !_waterReflectionEnabled;
-				_fe3d.textEntity_setTextContent(buttonID, _waterReflectionEnabled ? "Reflective: ON" : "Reflective: OFF");
 			}
 			else if (screen->getScrollingList("buttonList")->getButton("refractive")->isHovered())
 			{
-				auto buttonID = screen->getScrollingList("buttonList")->getButton("refractive")->getTextfield()->getEntityID();
 				_waterRefractionEnabled = !_waterRefractionEnabled;
-				_fe3d.textEntity_setTextContent(buttonID, _waterRefractionEnabled ? "Refractive: ON" : "Refractive: OFF");
 			}
 			else if (screen->getScrollingList("buttonList")->getButton("waving")->isHovered())
 			{
-				auto buttonID = screen->getScrollingList("buttonList")->getButton("waving")->getTextfield()->getEntityID();
 				_waterWavingEnabled = !_waterWavingEnabled;
-				_fe3d.textEntity_setTextContent(buttonID, _waterWavingEnabled ? "Waving: ON" : "Waving: OFF");
 			}
 			else if (screen->getScrollingList("buttonList")->getButton("rippling")->isHovered())	
 			{
-				auto buttonID = screen->getScrollingList("buttonList")->getButton("rippling")->getTextfield()->getEntityID();
 				_waterRipplingEnabled = !_waterRipplingEnabled;
-				_fe3d.textEntity_setTextContent(buttonID, _waterRipplingEnabled ? "Rippling: ON" : "Rippling: OFF");
 			}
 			else if (screen->getScrollingList("buttonList")->getButton("specular")->isHovered())
 			{
-				auto buttonID = screen->getScrollingList("buttonList")->getButton("specular")->getTextfield()->getEntityID();
 				_waterSpecularEnabled = !_waterSpecularEnabled;
-				_fe3d.textEntity_setTextContent(buttonID, _waterSpecularEnabled ? "Specular: ON" : "Specular: OFF");
 			}
 			else if (screen->getButton("back")->isHovered())
 			{
 				_leftWindow->setActiveScreen("waterManagement");
 			}
 		}
+
+		// Update GUI button contents
+		auto reflectiveID = screen->getScrollingList("buttonList")->getButton("reflective")->getTextfield()->getEntityID();
+		auto refractiveID = screen->getScrollingList("buttonList")->getButton("refractive")->getTextfield()->getEntityID();
+		auto wavingID = screen->getScrollingList("buttonList")->getButton("waving")->getTextfield()->getEntityID();
+		auto ripplingID = screen->getScrollingList("buttonList")->getButton("rippling")->getTextfield()->getEntityID();
+		auto specularID = screen->getScrollingList("buttonList")->getButton("specular")->getTextfield()->getEntityID();
+		_fe3d.textEntity_setTextContent(reflectiveID, _waterReflectionEnabled ? "Reflective: ON" : "Reflective: OFF");
+		_fe3d.textEntity_setTextContent(refractiveID, _waterRefractionEnabled ? "Refractive: ON" : "Refractive: OFF");
+		_fe3d.textEntity_setTextContent(wavingID, _waterWavingEnabled ? "Waving: ON" : "Waving: OFF");
+		_fe3d.textEntity_setTextContent(ripplingID, _waterRipplingEnabled ? "Rippling: ON" : "Rippling: OFF");
+		_fe3d.textEntity_setTextContent(specularID, _waterSpecularEnabled ? "Specular: ON" : "Specular: OFF");
 
 		// Check if value confirmed
 		_gui->getGlobalScreen()->checkValueForm("uvRepeat", _waterUvRepeat);

@@ -107,70 +107,67 @@ void EngineGuiScrollingList::_updateScolling()
 {
 	if (!_buttons.empty())
 	{
-		if ((_buttons.back()->getRectangle()->getOriginalPosition().y - (_charSize.y / 2.0f)) < (_originalPosition.y - (_originalSize.y / 2.0f)))
+		// Variables
+		bool mustReset = false;
+
+		// Checking if cursor is inside scrolling list
+		vec2 mousePos = _fe3d.misc_convertToNDC(_fe3d.misc_convertFromScreenCoords(_fe3d.misc_getMousePos()));
+		if (mousePos.x > _originalPosition.x - (_originalSize.x / 2.0f) && mousePos.x < _originalPosition.x + (_originalSize.x / 2.0f))
 		{
-			// Variables
-			bool mustReset = false;
-
-			// Checking if cursor is inside scrolling list
-			vec2 mousePos = _fe3d.misc_convertToNDC(_fe3d.misc_convertFromScreenCoords(_fe3d.misc_getMousePos()));
-			if (mousePos.x > _originalPosition.x - (_originalSize.x / 2.0f) && mousePos.x < _originalPosition.x + (_originalSize.x / 2.0f))
+			if (mousePos.y > _originalPosition.y - (_originalSize.y / 2.0f) && mousePos.y < _originalPosition.y + (_originalSize.y / 2.0f))
 			{
-				if (mousePos.y > _originalPosition.y - (_originalSize.y / 2.0f) && mousePos.y < _originalPosition.y + (_originalSize.y / 2.0f))
-				{
-					float scrollingAcceleration = (float(-_fe3d.input_getMouseWheelY()) / _scrollWheelDivider);
-					_scrollingSpeed += scrollingAcceleration;
-				}
+				float scrollingAcceleration = (float(-_fe3d.input_getMouseWheelY()) / _scrollWheelDivider);
+				_scrollingSpeed += scrollingAcceleration;
 			}
+		}
 
-			// Slowing down the scrolling speed
-			_scrollingSpeed *= 0.95f;
+		// Slowing down the scrolling speed
+		_scrollingSpeed *= 0.95f;
 
-			// Update the total offset
-			_scrollingOffset += _scrollingSpeed;
+		// Update the total offset
+		_scrollingOffset += _scrollingSpeed;
 
-			// Reset if below zero
-			if (_scrollingOffset < 0.0f)
+		// Reset if below zero
+		if (_scrollingOffset < 0.0f)
+		{
+			_scrollingOffset = 0.0f;
+			_scrollingSpeed = 0.0f;
+			mustReset = true;
+		}
+
+		// Reset if maximum offset reached
+		float maximumOffset = (_buttons.size() * _charSize.y) - _fe3d.guiEntity_getSize(_entityID).y;
+		if (_scrollingOffset >= maximumOffset)
+		{
+			// Check if offset incorrect
+			if (maximumOffset < 0.0f)
 			{
 				_scrollingOffset = 0.0f;
 				_scrollingSpeed = 0.0f;
-				mustReset = true;
 			}
-
-			// Reset if maximum offset reached
-			float maximumOffset = fabsf(_buttons.back()->getRectangle()->getOriginalPosition().y) - (_charSize.y * 1.15f);
-			if (_scrollingOffset >= maximumOffset)
+			else
 			{
-				// Check if offset incorrect
-				if (maximumOffset < 0.0f)
-				{
-					_scrollingOffset = 0.0f;
-					_scrollingSpeed = 0.0f;
-				}
-				else
-				{
-					_scrollingOffset = maximumOffset;
-					_scrollingSpeed = 0.0f;
-				}
+				_scrollingOffset = maximumOffset;
+				_scrollingSpeed = 0.0f;
 			}
+		}
 
-			// Update
-			for (auto& button : _buttons)
+		// Update
+		for (auto& button : _buttons)
+		{
+			string rectangleID = button->getRectangle()->getEntityID();
+			string textID = button->getTextfield()->getEntityID();
+
+			// Determine whether moving or resetting the positions
+			if (mustReset)
 			{
-				string rectangleID = button->getRectangle()->getEntityID();
-				string textID = button->getTextfield()->getEntityID();
-
-				// Determine whether moving or resetting the positions
-				if (mustReset)
-				{
-					_fe3d.guiEntity_setPosition(rectangleID, button->getRectangle()->getOriginalPosition());
-					_fe3d.textEntity_setPosition(textID, button->getTextfield()->getOriginalPosition());
-				}
-				else
-				{
-					_fe3d.guiEntity_move(rectangleID, vec2(0.0f, _scrollingSpeed));
-					_fe3d.textEntity_move(textID, vec2(0.0f, _scrollingSpeed));
-				}
+				_fe3d.guiEntity_setPosition(rectangleID, button->getRectangle()->getOriginalPosition());
+				_fe3d.textEntity_setPosition(textID, button->getTextfield()->getOriginalPosition());
+			}
+			else
+			{
+				_fe3d.guiEntity_move(rectangleID, vec2(0.0f, _scrollingSpeed));
+				_fe3d.textEntity_move(textID, vec2(0.0f, _scrollingSpeed));
 			}
 		}
 	}

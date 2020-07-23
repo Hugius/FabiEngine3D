@@ -111,4 +111,5 @@ private:
 	const float _lightbulbAnimationSpeed = 0.01f;
 	const float _movementChangingSpeed = 0.05f;
 	const float _colorChangingSpeed = 0.005f;
+	const float _lightingChangingSpeed = 0.001f;
 };

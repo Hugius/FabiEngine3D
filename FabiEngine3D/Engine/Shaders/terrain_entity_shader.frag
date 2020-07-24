@@ -88,6 +88,7 @@ vec3 getTextureColor()
 		vec4 gTextureColor    = texture(u_sampler_blendMapG, (f_uv / u_blendmapRepeat) * u_blendmapRepeatG) * blendmapColor.g;
 		vec4 bTextureColor    = texture(u_sampler_blendMapB, (f_uv / u_blendmapRepeat) * u_blendmapRepeatB) * blendmapColor.b;
 		vec4 newColor         = mainTextureColor + rTextureColor + gTextureColor + bTextureColor;
+        
 		return newColor.rgb;
 	}
 	else

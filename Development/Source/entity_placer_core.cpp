@@ -200,8 +200,8 @@ void EntityPlacer::load()
 	}
 
 	// Preview pointlight loading
-	_fe3d.lightEntity_add(_previewPointlightID, vec3(0.0f), _defaultPointlightColor, _defaultPointlightIntensity, _defaultPointlightDistance);
-	_fe3d.gameEntity_add(_previewPointlightID, "Engine\\OBJs\\lamp.obj", vec3(0.0f), vec3(0.0f), _defaultLightbulbSize);
+	_fe3d.lightEntity_add(_previewPointlightID, vec3(0.0f), _defaultPointlightColor, _defaultPointlightIntensity, _defaultPointlightDistance, false);
+	_fe3d.gameEntity_add(_previewPointlightID, "Engine\\OBJs\\lamp.obj", vec3(0.0f), vec3(0.0f), _defaultLightbulbSize, false);
 	_fe3d.aabbEntity_add(_previewPointlightID, vec3(0.0f), _defaultLightbulbAabbSize, true);
 
 	// Create name textfields
@@ -307,6 +307,10 @@ void EntityPlacer::loadWorld()
 				_fe3d.aabbEntity_bindToGameEntity("@" + ID, _defaultLightbulbAabbSize, true);
 				_fe3d.lightEntity_add(ID, position, color, intensity, distance);
 			}
+			else if (entityType == "SPEED")
+			{
+				iss >> _customCameraSpeed;
+			}
 		}
 
 		// Close file
@@ -395,6 +399,9 @@ void EntityPlacer::save()
 					color.r << " " << color.g << " " << color.b << " " << intensity << " " << distance << "\n";
 			}
 		}
+
+		// Editor camera speed
+		file << "SPEED" << _customCameraSpeed << "\n";
 
 		// Close file
 		file.close();

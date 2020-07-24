@@ -298,7 +298,7 @@ public:
 
 	// Light entity interface
 	void lightEntity_deleteAll();
-	void lightEntity_add(const string& ID, vec3 position, vec3 color, float intensity, float distanceFactor);
+	void lightEntity_add(const string& ID, vec3 position, vec3 color, float intensity, float distanceFactor, bool visible = true);
 	void lightEntity_delete(const string& ID);
 	void lightEntity_hide(const string& ID);
 	void lightEntity_show(const string& ID);

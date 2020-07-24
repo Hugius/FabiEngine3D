@@ -22,6 +22,8 @@ public:
 	GLuint         getCubeMap(const vector<string> filePaths);
 	vector<float>& getHeightMap(const string &filePath);
 
+	void clearTextureCache(const string& filePath);
+
 private:
 	map<string, GLuint>         _textureMap;
 	map<string, GLuint>         _textMap;

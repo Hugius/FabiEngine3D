@@ -56,26 +56,26 @@ void TerrainEntityManager::addTerrainEntity
 			float firstVertexX = pos.x + x;
 			float firstVertexY = pos.y + _getPixelHeight(x + halfSize, z + halfSize + 1, size, maxHeight, pixelColors);
 			float firstVertexZ = pos.z + z + 1;
-			float firstUvX = (x / size) * uvRepeat;
-			float firstUvY = ((z / size) + (1.0f / size)) * uvRepeat;
+			float firstUvX = ((x + halfSize) / size) * uvRepeat;
+			float firstUvY = (((z + halfSize) / size) + (1.0f / size)) * uvRepeat;
 
 			float secondVertexX = pos.x + x + 1;
 			float secondVertexY = pos.y + _getPixelHeight(x + halfSize + 1, z + halfSize + 1, size, maxHeight, pixelColors);
 			float secondVertexZ = pos.z + z + 1;
-			float secondUvX = ((x / size) + (1.0f / size)) * uvRepeat;
-			float secondUvY = ((z / size) + (1.0f / size)) * uvRepeat;
+			float secondUvX = (((x + halfSize) / size) + (1.0f / size)) * uvRepeat;
+			float secondUvY = (((z + halfSize) / size) + (1.0f / size)) * uvRepeat;
 
 			float thirdVertexX = pos.x + x + 1;
 			float thirdVertexY = pos.y + _getPixelHeight(x + halfSize + 1, z + halfSize, size, maxHeight, pixelColors);
 			float thirdVertexZ = pos.z + z;
-			float thirdUvX = ((x / size) + (1.0f / size)) * uvRepeat;
-			float thirdUvY = (z / size) * uvRepeat;
+			float thirdUvX = (((x + halfSize) / size) + (1.0f / size)) * uvRepeat;
+			float thirdUvY = ((z + halfSize) / size) * uvRepeat;
 
 			float fourthVertexX = pos.x + x;
 			float fourthVertexY = pos.y + _getPixelHeight(x + halfSize, z + halfSize, size, maxHeight, pixelColors);
 			float fourthVertexZ = pos.z + z;
-			float fourthUvX = (x / size) * uvRepeat;
-			float fourthUvY = (z / size) * uvRepeat;
+			float fourthUvX = ((x + halfSize) / size) * uvRepeat;
+			float fourthUvY = ((z + halfSize) / size) * uvRepeat;
 
 			//// First triangle normals
 			//vec3 tempOne = vec3(secondVertexX, secondVertexY, secondVertexZ) - vec3(firstVertexX, firstVertexY, firstVertexZ);

@@ -112,6 +112,7 @@ void EntityPlacer::_updateModelEditing()
 					}
 				}
 
+				// Get entity transformation
 				vec3 position = _fe3d.gameEntity_getPosition(_activeModelID);
 				vec3 rotation = _fe3d.gameEntity_getRotation(_activeModelID);
 				vec3 size	  = _fe3d.gameEntity_getSize(_activeModelID);

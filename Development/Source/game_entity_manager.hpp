@@ -17,12 +17,5 @@ public:
 		vec3 T, vec3 R, vec3 S
 	);
 
-	void addGameEntity
-	(
-		const string & ID, const string & modelName,
-		const vector<vec3> & offsets, vec3 R, vec3 S,
-		bool transparent, bool faceCulled, bool lightMapped, bool reflective, bool specular
-	);
-
 	void update() override;
 };

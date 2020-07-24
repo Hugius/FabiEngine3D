@@ -52,7 +52,7 @@ void WorldEditor::_updateWaterMenu()
 			}
 			else if (screen->getButton("back")->isHovered())
 			{
-				_leftWindow->setActiveScreen("worldManagement");
+				_leftWindow->setActiveScreen("worldEditorMenu");
 				_currentWorldPart = WorldPart::NONE;
 			}
 		}

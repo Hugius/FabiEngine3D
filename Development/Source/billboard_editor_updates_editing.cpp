@@ -52,7 +52,7 @@ void BillboardEditor::_updateBillboardEditing()
 						_currentBillboardID = "";
 						_billboardEditingEnabled = false;
 						firstTime = true;
-						_leftWindow->setActiveScreen("billboardManagement");
+						_leftWindow->setActiveScreen("billboardEditorMenu");
 						return;
 					}
 				}

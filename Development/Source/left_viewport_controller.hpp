@@ -4,7 +4,7 @@
 #include "model_editor.hpp"
 #include "world_editor.hpp"
 #include "billboard_editor.hpp"
-#include "entity_placer.hpp"
+#include "scene_editor.hpp"
 
 class LeftViewportController final : public ViewportController
 {
@@ -17,7 +17,7 @@ public:
 	ModelEditor& getModelEditor();
 	WorldEditor& getWorldEditor();
 	BillboardEditor& getBillboardEditor();
-	EntityPlacer& getEntityPlacer();
+	SceneEditor& getSceneEditor();
 
 	static inline const vec3 frameColor = vec3(0.4f);
 	static inline const vec3 buttonColor = vec3(0.25f, 0.25f, 1.0f);
@@ -29,5 +29,5 @@ private:
 	ModelEditor _modelEditor;
 	WorldEditor _worldEditor;
 	BillboardEditor _billboardEditor;
-	EntityPlacer _entityPlacer;
+	SceneEditor _sceneEditor;
 };

@@ -14,11 +14,11 @@ void WorldEditor::initializeGUI()
 	_leftWindow = _gui->getViewport("left")->getWindow("main");
 
 	// Left-viewport: mainWindow - worldManagement
-	_leftWindow->addScreen("worldManagement");
-	_leftWindow->getScreen("worldManagement")->addButton("sky", vec2(0.0f, 0.63f), vec2(0.65f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Sky", LeftViewportController::textColor, LeftViewportController::textHoverColor);
-	_leftWindow->getScreen("worldManagement")->addButton("terrain", vec2(0.0f, 0.21), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Terrain", LeftViewportController::textColor, LeftViewportController::textHoverColor);
-	_leftWindow->getScreen("worldManagement")->addButton("water", vec2(0.0f, -0.21), vec2(1.0f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Water", LeftViewportController::textColor, LeftViewportController::textHoverColor);
-	_leftWindow->getScreen("worldManagement")->addButton("back", vec2(0.0f, -0.63f), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	_leftWindow->addScreen("worldEditorMenu");
+	_leftWindow->getScreen("worldEditorMenu")->addButton("sky", vec2(0.0f, 0.63f), vec2(0.65f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Sky", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	_leftWindow->getScreen("worldEditorMenu")->addButton("terrain", vec2(0.0f, 0.21), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Terrain", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	_leftWindow->getScreen("worldEditorMenu")->addButton("water", vec2(0.0f, -0.21), vec2(1.0f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Water", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	_leftWindow->getScreen("worldEditorMenu")->addButton("back", vec2(0.0f, -0.63f), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
 	
 	// Left-viewport: mainWindow - skyMenu
 	_leftWindow->addScreen("skyMenu");
@@ -56,7 +56,7 @@ void WorldEditor::initializeGUI()
 	_leftWindow->addScreen("terrainMenu");
 	_leftWindow->getScreen("terrainMenu")->addButton("create", vec2(0.0f, 0.63f), vec2(1.8f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Create terain", LeftViewportController::textColor, LeftViewportController::textHoverColor);
 	_leftWindow->getScreen("terrainMenu")->addButton("edit", vec2(0.0f, 0.21f), vec2(1.5f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Edit terrain", LeftViewportController::textColor, LeftViewportController::textHoverColor);
-	_leftWindow->getScreen("terrainMenu")->addButton("remove", vec2(0.0f, -0.21f), vec2(1.85f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Remove terrain", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	_leftWindow->getScreen("terrainMenu")->addButton("remove", vec2(0.0f, -0.21f), vec2(1.8f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Remove terrain", LeftViewportController::textColor, LeftViewportController::textHoverColor);
 	_leftWindow->getScreen("terrainMenu")->addButton("back", vec2(0.0f, -0.63f), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
 
 	// Left-viewport: mainWindow - terrainManagement

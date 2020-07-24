@@ -1,0 +1,6 @@
+MODEL ferfef1553769869 1.20732 4.70588 7.61689 0 0 0 1 1 1 User\Assets\OBJs\anvil2.obj User\Assets\Textures\DiffuseMaps\anvil2.png - - 0 1 0 0 0 1 0.5 0.5 0.5 1 1 1 1
+MODEL ferfef2071054556 1.6267 4.70588 -3.75901 0 0 0 1 1 1 User\Assets\OBJs\anvil2.obj User\Assets\Textures\DiffuseMaps\anvil2.png - - 0 1 0 0 0 1 0.5 0.5 0.5 1 1 1 1
+MODEL ferfef1330000458 -6.94394 4.70588 4.769 0 0 0 1 1 1 User\Assets\OBJs\anvil2.obj User\Assets\Textures\DiffuseMaps\anvil2.png - - 0 1 0 0 0 1 0.5 0.5 0.5 1 1 1 1
+AMBIENT 1 1 1 1
+DIRECTIONAL 1000 1000 1000 1 1 1 0.75
+SPEED 15

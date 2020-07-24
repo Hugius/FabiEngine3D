@@ -52,7 +52,7 @@ void ModelEditor::_updateEditingScreen()
 					firstTime = true;
 					_modelEditingEnabled = false;
 					_currentModelName = "";
-					_leftWindow->setActiveScreen("modelManagement");
+					_leftWindow->setActiveScreen("modelEditorMenu");
 					_fe3d.textEntity_hide(_gui->getGlobalScreen()->getTextfield("selectedModelName")->getEntityID());
 				}
 			}

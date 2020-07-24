@@ -8,12 +8,12 @@
 #include <sys/stat.h>
 
 TopViewportController::TopViewportController(FabiEngine3D& fe3d, shared_ptr<EngineGuiManager> gui, 
-	ModelEditor& modelEditor, WorldEditor& worldEditor, BillboardEditor& billboardEditor, EntityPlacer& entityPlacer) :
+	ModelEditor& modelEditor, WorldEditor& worldEditor, BillboardEditor& billboardEditor, SceneEditor& sceneEditor) :
 	ViewportController(fe3d, gui),
 	_modelEditor(modelEditor),
 	_worldEditor(worldEditor),
 	_billboardEditor(billboardEditor),
-	_entityPlacer(entityPlacer)
+	_sceneEditor(sceneEditor)
 {
 
 }
@@ -86,7 +86,7 @@ void TopViewportController::update()
 	_gui->getViewport("left")->getWindow("main")->getScreen("main")->getButton("modelEditor")->setHoverable(_currentProjectName != "");
 	_gui->getViewport("left")->getWindow("main")->getScreen("main")->getButton("worldEditor")->setHoverable(_currentProjectName != "");
 	_gui->getViewport("left")->getWindow("main")->getScreen("main")->getButton("billboardEditor")->setHoverable(_currentProjectName != "");
-	_gui->getViewport("left")->getWindow("main")->getScreen("main")->getButton("entityPlacer")->setHoverable(_currentProjectName != "");
+	_gui->getViewport("left")->getWindow("main")->getScreen("main")->getButton("sceneEditor")->setHoverable(_currentProjectName != "");
 	_gui->getViewport("left")->getWindow("main")->getScreen("main")->getButton("scriptEditor")->setHoverable(_currentProjectName != "");
 
 	// Check if user wants to save changes
@@ -252,7 +252,7 @@ void TopViewportController::_saveCurrentProject()
 	_modelEditor.save();
 	_worldEditor.save();
 	_billboardEditor.save();
-	_entityPlacer.save();
+	_sceneEditor.save();
 
 	// Logging
 	_fe3d.logger_throwInfo("Project \"" + _currentProjectName + "\" saved!");
@@ -290,15 +290,15 @@ void TopViewportController::_loadCurrentProject()
 		_billboardEditor.unload();
 	}
 
-	// Unload entity placer
-	if (_entityPlacer.isLoaded())
+	// Unload scene editor
+	if (_sceneEditor.isLoaded())
 	{
-		_entityPlacer.unload();
+		_sceneEditor.unload();
 	}
 
 	// Pass loaded project name
 	_modelEditor.setCurrentProjectName(_currentProjectName);
 	_worldEditor.setCurrentProjectName(_currentProjectName);
 	_billboardEditor.setCurrentProjectName(_currentProjectName);
-	_entityPlacer.setCurrentProjectName(_currentProjectName);
+	_sceneEditor.setCurrentProjectName(_currentProjectName);
 }

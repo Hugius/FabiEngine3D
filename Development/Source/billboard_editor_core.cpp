@@ -17,11 +17,11 @@ void BillboardEditor::initializeGUI()
 	_leftWindow = _gui->getViewport("left")->getWindow("main");
 
 	// Left-viewport: mainWindow - billboardManagement
-	_leftWindow->addScreen("billboardManagement");
-	_leftWindow->getScreen("billboardManagement")->addButton("addBillboard", vec2(0.0f, 0.63f), vec2(1.5f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Add model", LeftViewportController::textColor, LeftViewportController::textHoverColor);
-	_leftWindow->getScreen("billboardManagement")->addButton("editBillboard", vec2(0.0f, 0.21), vec2(1.5f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Edit model", LeftViewportController::textColor, LeftViewportController::textHoverColor);
-	_leftWindow->getScreen("billboardManagement")->addButton("deleteBillboard", vec2(0.0f, -0.21), vec2(1.5f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Delete model", LeftViewportController::textColor, LeftViewportController::textHoverColor);
-	_leftWindow->getScreen("billboardManagement")->addButton("back", vec2(0.0f, -0.63f), vec2(1.0f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	_leftWindow->addScreen("billboardEditorMenu");
+	_leftWindow->getScreen("billboardEditorMenu")->addButton("addBillboard", vec2(0.0f, 0.63f), vec2(1.5f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Add board", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	_leftWindow->getScreen("billboardEditorMenu")->addButton("editBillboard", vec2(0.0f, 0.21), vec2(1.5f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Edit board", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	_leftWindow->getScreen("billboardEditorMenu")->addButton("deleteBillboard", vec2(0.0f, -0.21), vec2(1.5f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Delete board", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	_leftWindow->getScreen("billboardEditorMenu")->addButton("back", vec2(0.0f, -0.63f), vec2(1.0f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
 	
 	// Left-viewport: mainWindow - billboardEditingMain
 	_leftWindow->addScreen("billboardEditingMain");

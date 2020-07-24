@@ -6,7 +6,7 @@ void WorldEditor::update()
 	{
 		if (_currentWorldPart == WorldPart::NONE)
 		{
-			auto screen = _leftWindow->getScreen("worldManagement");
+			auto screen = _leftWindow->getScreen("worldEditorMenu");
 
 			// Set default camera view
 			_fe3d.camera_setPosition(vec3(0.0f));

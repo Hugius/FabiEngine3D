@@ -14,7 +14,7 @@ void BillboardEditor::_updateBillboardManagement()
 {
 	if (_isLoaded)
 	{
-		auto screen = _leftWindow->getScreen("billboardManagement");
+		auto screen = _leftWindow->getScreen("billboardEditorMenu");
 
 		// GUI management
 		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))

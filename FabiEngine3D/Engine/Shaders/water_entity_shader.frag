@@ -13,16 +13,20 @@ layout(location = 2) uniform sampler2D u_sampler_depthMap;
 layout(location = 3) uniform sampler2D u_sampler_dudvMap;
 layout(location = 4) uniform sampler2D u_sampler_normalMap;
 
-// Uniforms
+// Vector3 uniforms
 uniform vec3  u_directionalLightingPosition;
 uniform vec3  u_cameraPosition;
 uniform vec3  u_color;
+
+// Float uniforms
 uniform float u_ripplePos;
 uniform float u_fogMinDistance;
-uniform float u_shininess;
+uniform float u_specularLightingFactor;
 uniform float u_nearZ;
 uniform float u_farZ;
 uniform float u_transparency;
+
+// Bool uniforms
 uniform bool  u_fogEnabled;
 uniform bool  u_effectsEnabled;
 uniform bool  u_isRippling;
@@ -56,7 +60,7 @@ vec4 getMainColor()
 {
 	// Variables to be used
 	vec3 normal = vec3(0.0f, 1.0f, 0.0f);
-	float specularIntensity = 0.0f;
+	float specular = 0.0f;
 
 	// Projective texture mapping
 	vec2 ndc = (f_clip.xy / f_clip.w) / 2.0 + 0.5;
@@ -88,10 +92,10 @@ vec4 getMainColor()
 	// Specular lighting
 	if(u_isSpecular)
 	{
-		vec3 lightDir      = normalize(u_directionalLightingPosition - f_pos);
-		vec3 viewDir       = normalize(f_pos - u_cameraPosition);
-		vec3 reflectDir    = reflect(normalize(lightDir), normal);
-		specularIntensity = pow(max(dot(reflectDir, viewDir), 0.0f), u_shininess);
+		vec3 lightDir     = normalize(u_directionalLightingPosition - f_pos);
+		vec3 viewDir      = normalize(f_pos - u_cameraPosition);
+		vec3 reflectDir   = reflect(normalize(lightDir), normal);
+		specular = pow(max(dot(reflectDir, viewDir), 0.0f), u_specularLightingFactor) * 0.5f;
 	}
 
 	// Finalizing fragment color
@@ -120,7 +124,7 @@ vec4 getMainColor()
 	// Specular highlights
 	if(u_isSpecular)
 	{
-		finalColor += vec3(specularIntensity);
+		finalColor += vec3(specular);
 	}
 
 	// Return final color

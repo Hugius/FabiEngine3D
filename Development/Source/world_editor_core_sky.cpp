@@ -105,9 +105,6 @@ void WorldEditor::_loadSkyEntity()
 	{
 		_fe3d.skyEntity_delete("@sky");
 	}
-	
-	// Clear textures cache
-	_fe3d.misc_clearCubeMapCache(_skyTexturePaths);
 
 	// Add new skybox
 	_fe3d.skyEntity_add("@sky", _skyTexturePaths);

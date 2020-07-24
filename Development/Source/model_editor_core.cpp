@@ -18,11 +18,11 @@ void ModelEditor::initializeGUI()
 	_leftWindow = _gui->getViewport("left")->getWindow("main");
 
 	// Left-viewport: mainWindow - modelManagement
-	_leftWindow->addScreen("modelManagement");
-	_leftWindow->getScreen("modelManagement")->addButton("addModel", vec2(0.0f, 0.63f), vec2(1.5f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Add model", LeftViewportController::textColor, LeftViewportController::textHoverColor);
-	_leftWindow->getScreen("modelManagement")->addButton("editModel", vec2(0.0f, 0.21), vec2(1.5f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Edit model", LeftViewportController::textColor, LeftViewportController::textHoverColor);
-	_leftWindow->getScreen("modelManagement")->addButton("deleteModel", vec2(0.0f, -0.21), vec2(1.7f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Delete model", LeftViewportController::textColor, LeftViewportController::textHoverColor);
-	_leftWindow->getScreen("modelManagement")->addButton("back", vec2(0.0f, -0.63f), vec2(1.0f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	_leftWindow->addScreen("modelEditorMenu");
+	_leftWindow->getScreen("modelEditorMenu")->addButton("addModel", vec2(0.0f, 0.63f), vec2(1.5f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Add model", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	_leftWindow->getScreen("modelEditorMenu")->addButton("editModel", vec2(0.0f, 0.21), vec2(1.5f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Edit model", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	_leftWindow->getScreen("modelEditorMenu")->addButton("deleteModel", vec2(0.0f, -0.21), vec2(1.7f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Delete model", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	_leftWindow->getScreen("modelEditorMenu")->addButton("back", vec2(0.0f, -0.63f), vec2(1.0f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
 
 	// Left-viewport: mainWindow - modelEditingMain
 	_leftWindow->addScreen("modelEditingMain");
@@ -98,9 +98,11 @@ void ModelEditor::loadModels()
 	{
 		_fe3d.logger_throwError("Tried to load as empty project!");
 	}
-
+	
+	// Clear modelnames list from previous loads
 	_modelNames.clear();
 
+	// Compose full models folder path
 	string modelsPath = _fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\models.fe3d";
 
 	// Load models file
@@ -141,7 +143,7 @@ void ModelEditor::loadModels()
 		file.close();
 
 		// Logging
-		_fe3d.logger_throwInfo("Models from project \"" + _currentProjectName + "\" loaded!");
+		_fe3d.logger_throwInfo("Model data from project \"" + _currentProjectName + "\" loaded!");
 	}
 }
 
@@ -202,7 +204,7 @@ void ModelEditor::save()
 		file.close();
 
 		// Logging
-		_fe3d.logger_throwInfo("Model editor data from project \"" + _currentProjectName + "\" saved!");
+		_fe3d.logger_throwInfo("Model data from project \"" + _currentProjectName + "\" saved!");
 	}
 }
 

@@ -55,7 +55,7 @@ void WorldEditor::_updateSkyMenu()
 			}
 			else if (screen->getButton("back")->isHovered())
 			{
-				_leftWindow->setActiveScreen("worldManagement");
+				_leftWindow->setActiveScreen("worldEditorMenu");
 				_currentWorldPart = WorldPart::NONE;
 			}
 		}
@@ -132,6 +132,10 @@ void WorldEditor::_updateSkyMesh()
 			}
 			else if (screen->getButton("load")->isHovered())
 			{
+				// Clear texture caches
+				_fe3d.misc_clearCubeMapCache(_skyTexturePaths);
+
+				// Load entity
 				_loadSkyEntity();
 			}
 			else if (screen->getButton("back")->isHovered())

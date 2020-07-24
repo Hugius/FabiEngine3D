@@ -28,27 +28,6 @@
     <ClCompile Include="Source\model_editor_core.cpp">
       <Filter>src\Editor System\Model Editor</Filter>
     </ClCompile>
-    <ClCompile Include="Source\mouse_picker.cpp">
-      <Filter>src\Editor System\World Editor</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\bottom_viewport_controller.cpp">
-      <Filter>src\Engine Controller System</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\engine_controller.cpp">
-      <Filter>src\Engine Controller System</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\left_viewport_controller.cpp">
-      <Filter>src\Engine Controller System</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\right_viewport_controller.cpp">
-      <Filter>src\Engine Controller System</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\top_viewport_controller.cpp">
-      <Filter>src\Engine Controller System</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\viewport_controller.cpp">
-      <Filter>src\Engine Controller System</Filter>
-    </ClCompile>
     <ClCompile Include="Source\aabb_entity.cpp">
       <Filter>src\Entity System\Data Structures</Filter>
     </ClCompile>
@@ -223,20 +202,8 @@
     <ClCompile Include="Source\shadow_renderer.cpp">
       <Filter>src\Rendering System\Renderers\Miscellaneous Renderers</Filter>
     </ClCompile>
-    <ClCompile Include="Source\world_editor_core.cpp">
-      <Filter>src\Editor System\World Editor</Filter>
-    </ClCompile>
     <ClCompile Include="Source\model_editor_updates.cpp">
       <Filter>src\Editor System\Model Editor</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\world_editor_updates_sky.cpp">
-      <Filter>src\Editor System\World Editor</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\world_editor_updates_terrain.cpp">
-      <Filter>src\Editor System\World Editor</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\world_editor_updates_water.cpp">
-      <Filter>src\Editor System\World Editor</Filter>
     </ClCompile>
     <ClCompile Include="Source\render_engine_core.cpp">
       <Filter>src\Rendering System\Core</Filter>
@@ -244,26 +211,11 @@
     <ClCompile Include="Source\engine_gui_global_screen_core.cpp">
       <Filter>src\GUI System</Filter>
     </ClCompile>
-    <ClCompile Include="Source\world_editor_updates.cpp">
-      <Filter>src\Editor System\World Editor</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\world_editor_core_sky.cpp">
-      <Filter>src\Editor System\World Editor</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\world_editor_core_terrain.cpp">
-      <Filter>src\Editor System\World Editor</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\world_editor_core_water.cpp">
-      <Filter>src\Editor System\World Editor</Filter>
-    </ClCompile>
     <ClCompile Include="Source\billboard_editor_core.cpp">
       <Filter>src\Editor System\Billboard Editor</Filter>
     </ClCompile>
     <ClCompile Include="Source\billboard_editor_updates.cpp">
       <Filter>src\Editor System\Billboard Editor</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\entity_placer_core.cpp">
-      <Filter>src\Editor System\Entity Placer</Filter>
     </ClCompile>
     <ClCompile Include="Source\billboard_editor_updates_editing.cpp">
       <Filter>src\Editor System\Billboard Editor</Filter>
@@ -271,50 +223,8 @@
     <ClCompile Include="Source\core_engine.cpp">
       <Filter>src\Core System\Core</Filter>
     </ClCompile>
-    <ClCompile Include="Source\fabi_engine_3d.cpp">
-      <Filter>src\Core System\Interface</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\fabi_engine_3d_camera.cpp">
-      <Filter>src\Core System\Interface</Filter>
-    </ClCompile>
     <ClCompile Include="Source\main.cpp">
       <Filter>src\Core System\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\fabi_engine_3d_collision.cpp">
-      <Filter>src\Core System\Interface</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\fabi_engine_3d_input.cpp">
-      <Filter>src\Core System\Interface</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\fabi_engine_3d_audio.cpp">
-      <Filter>src\Core System\Interface</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\fabi_engine_3d_entity_billboard.cpp">
-      <Filter>src\Core System\Interface</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\fabi_engine_3d_entity_game.cpp">
-      <Filter>src\Core System\Interface</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\fabi_engine_3d_graphics.cpp">
-      <Filter>src\Core System\Interface</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\fabi_engine_3d_entity_gui.cpp">
-      <Filter>src\Core System\Interface</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\fabi_engine_3d_entity_light.cpp">
-      <Filter>src\Core System\Interface</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\fabi_engine_3d_entity_sky.cpp">
-      <Filter>src\Core System\Interface</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\fabi_engine_3d_entity_terrain.cpp">
-      <Filter>src\Core System\Interface</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\fabi_engine_3d_entity_text.cpp">
-      <Filter>src\Core System\Interface</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\fabi_engine_3d_entity_water.cpp">
-      <Filter>src\Core System\Interface</Filter>
     </ClCompile>
     <ClCompile Include="Source\camera_manager.cpp">
       <Filter>src\Miscellaneous\Code</Filter>
@@ -337,53 +247,143 @@
     <ClCompile Include="Source\core_engine_misc.cpp">
       <Filter>src\Core System\Core</Filter>
     </ClCompile>
-    <ClCompile Include="Source\fabi_engine_3d_misc.cpp">
-      <Filter>src\Core System\Interface</Filter>
-    </ClCompile>
     <ClCompile Include="Source\billboard_editor_misc.cpp">
       <Filter>src\Editor System\Billboard Editor</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\entity_placer_misc.cpp">
-      <Filter>src\Editor System\Entity Placer</Filter>
     </ClCompile>
     <ClCompile Include="Source\model_editor_misc.cpp">
       <Filter>src\Editor System\Model Editor</Filter>
     </ClCompile>
-    <ClCompile Include="Source\world_editor_misc.cpp">
-      <Filter>src\Editor System\World Editor</Filter>
-    </ClCompile>
     <ClCompile Include="Source\engine_gui_global_screen_misc.cpp">
       <Filter>src\GUI System</Filter>
     </ClCompile>
-    <ClCompile Include="Source\entity_placer_updates.cpp">
-      <Filter>src\Editor System\Entity Placer</Filter>
+    <ClCompile Include="Source\engine_controller.cpp">
+      <Filter>src\Engine Controller System\Core Controller</Filter>
     </ClCompile>
-    <ClCompile Include="Source\entity_placer_light_placing.cpp">
-      <Filter>src\Editor System\Entity Placer</Filter>
+    <ClCompile Include="Source\bottom_viewport_controller.cpp">
+      <Filter>src\Engine Controller System\Viewport Controllers</Filter>
     </ClCompile>
-    <ClCompile Include="Source\entity_placer_model_updates.cpp">
-      <Filter>src\Editor System\Entity Placer</Filter>
+    <ClCompile Include="Source\left_viewport_controller.cpp">
+      <Filter>src\Engine Controller System\Viewport Controllers</Filter>
     </ClCompile>
-    <ClCompile Include="Source\entity_placer_billboard_updates.cpp">
-      <Filter>src\Editor System\Entity Placer</Filter>
+    <ClCompile Include="Source\right_viewport_controller.cpp">
+      <Filter>src\Engine Controller System\Viewport Controllers</Filter>
     </ClCompile>
-    <ClCompile Include="Source\entity_placer_light_updates.cpp">
-      <Filter>src\Editor System\Entity Placer</Filter>
+    <ClCompile Include="Source\top_viewport_controller.cpp">
+      <Filter>src\Engine Controller System\Viewport Controllers</Filter>
     </ClCompile>
-    <ClCompile Include="Source\entity_placer_model_placing.cpp">
-      <Filter>src\Editor System\Entity Placer</Filter>
+    <ClCompile Include="Source\viewport_controller.cpp">
+      <Filter>src\Engine Controller System\Viewport Controllers</Filter>
     </ClCompile>
-    <ClCompile Include="Source\entity_placer_billboard_placing.cpp">
-      <Filter>src\Editor System\Entity Placer</Filter>
+    <ClCompile Include="Source\mouse_picker.cpp">
+      <Filter>src\Editor System\World Editor\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="Source\entity_placer_light_editing.cpp">
-      <Filter>src\Editor System\Entity Placer</Filter>
+    <ClCompile Include="Source\world_editor_core.cpp">
+      <Filter>src\Editor System\World Editor\Core Editor</Filter>
     </ClCompile>
-    <ClCompile Include="Source\entity_placer_billboard_editing.cpp">
-      <Filter>src\Editor System\Entity Placer</Filter>
+    <ClCompile Include="Source\world_editor_core_sky.cpp">
+      <Filter>src\Editor System\World Editor\Core Editor</Filter>
     </ClCompile>
-    <ClCompile Include="Source\entity_placer_model_editing.cpp">
-      <Filter>src\Editor System\Entity Placer</Filter>
+    <ClCompile Include="Source\world_editor_core_terrain.cpp">
+      <Filter>src\Editor System\World Editor\Core Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\world_editor_core_water.cpp">
+      <Filter>src\Editor System\World Editor\Core Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\world_editor_misc.cpp">
+      <Filter>src\Editor System\World Editor\Core Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\world_editor_updates.cpp">
+      <Filter>src\Editor System\World Editor\Core Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\world_editor_updates_sky.cpp">
+      <Filter>src\Editor System\World Editor\Core Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\world_editor_updates_terrain.cpp">
+      <Filter>src\Editor System\World Editor\Core Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\world_editor_updates_water.cpp">
+      <Filter>src\Editor System\World Editor\Core Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\fabi_engine_3d_entity_billboard.cpp">
+      <Filter>src\Core System\Interface\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\fabi_engine_3d_entity_game.cpp">
+      <Filter>src\Core System\Interface\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\fabi_engine_3d_entity_gui.cpp">
+      <Filter>src\Core System\Interface\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\fabi_engine_3d_entity_light.cpp">
+      <Filter>src\Core System\Interface\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\fabi_engine_3d_entity_sky.cpp">
+      <Filter>src\Core System\Interface\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\fabi_engine_3d_entity_terrain.cpp">
+      <Filter>src\Core System\Interface\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\fabi_engine_3d_entity_text.cpp">
+      <Filter>src\Core System\Interface\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\fabi_engine_3d_entity_water.cpp">
+      <Filter>src\Core System\Interface\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\fabi_engine_3d.cpp">
+      <Filter>src\Core System\Interface\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\fabi_engine_3d_misc.cpp">
+      <Filter>src\Core System\Interface\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\fabi_engine_3d_audio.cpp">
+      <Filter>src\Core System\Interface\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\fabi_engine_3d_camera.cpp">
+      <Filter>src\Core System\Interface\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\fabi_engine_3d_collision.cpp">
+      <Filter>src\Core System\Interface\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\fabi_engine_3d_graphics.cpp">
+      <Filter>src\Core System\Interface\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\fabi_engine_3d_input.cpp">
+      <Filter>src\Core System\Interface\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\scene_editor_core.cpp">
+      <Filter>src\Editor System\Scene Editor\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\scene_editor_updates.cpp">
+      <Filter>src\Editor System\Scene Editor\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\scene_editor_misc.cpp">
+      <Filter>src\Editor System\Scene Editor\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\scene_editor_light_editing.cpp">
+      <Filter>src\Editor System\Scene Editor\Lighting</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\scene_editor_light_placing.cpp">
+      <Filter>src\Editor System\Scene Editor\Lighting</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\scene_editor_light_updates.cpp">
+      <Filter>src\Editor System\Scene Editor\Lighting</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\scene_editor_billboard_editing.cpp">
+      <Filter>src\Editor System\Scene Editor\Billboard Placing</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\scene_editor_billboard_placing.cpp">
+      <Filter>src\Editor System\Scene Editor\Billboard Placing</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\scene_editor_billboard_updates.cpp">
+      <Filter>src\Editor System\Scene Editor\Billboard Placing</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\scene_editor_model_editing.cpp">
+      <Filter>src\Editor System\Scene Editor\Model Placing</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\scene_editor_model_placing.cpp">
+      <Filter>src\Editor System\Scene Editor\Model Placing</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\scene_editor_model_updates.cpp">
+      <Filter>src\Editor System\Scene Editor\Model Placing</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -410,27 +410,6 @@
     </ClInclude>
     <ClInclude Include="Source\model_editor.hpp">
       <Filter>src\Editor System\Model Editor</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\mouse_picker.hpp">
-      <Filter>src\Editor System\World Editor</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\bottom_viewport_controller.hpp">
-      <Filter>src\Engine Controller System</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\engine_controller.hpp">
-      <Filter>src\Engine Controller System</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\left_viewport_controller.hpp">
-      <Filter>src\Engine Controller System</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\right_viewport_controller.hpp">
-      <Filter>src\Engine Controller System</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\top_viewport_controller.hpp">
-      <Filter>src\Engine Controller System</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\viewport_controller.hpp">
-      <Filter>src\Engine Controller System</Filter>
     </ClInclude>
     <ClInclude Include="Source\aabb_entity.hpp">
       <Filter>src\Entity System\Data Structures</Filter>
@@ -597,20 +576,11 @@
     <ClInclude Include="Source\shadow_renderer.hpp">
       <Filter>src\Rendering System\Renderers\Miscellaneous Renderers</Filter>
     </ClInclude>
-    <ClInclude Include="Source\world_editor.hpp">
-      <Filter>src\Editor System\World Editor</Filter>
-    </ClInclude>
     <ClInclude Include="Source\billboard_editor.hpp">
       <Filter>src\Editor System\Billboard Editor</Filter>
     </ClInclude>
-    <ClInclude Include="Source\entity_placer.hpp">
-      <Filter>src\Editor System\Entity Placer</Filter>
-    </ClInclude>
     <ClInclude Include="Source\core_engine.hpp">
       <Filter>src\Core System\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\fabi_engine_3d.hpp">
-      <Filter>src\Core System\Interface</Filter>
     </ClInclude>
     <ClInclude Include="Source\camera_manager.hpp">
       <Filter>src\Miscellaneous\Code</Filter>
@@ -632,6 +602,36 @@
     </ClInclude>
     <ClInclude Include="Source\tools.hpp">
       <Filter>src\Miscellaneous\Code</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\engine_controller.hpp">
+      <Filter>src\Engine Controller System\Core Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\bottom_viewport_controller.hpp">
+      <Filter>src\Engine Controller System\Viewport Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\left_viewport_controller.hpp">
+      <Filter>src\Engine Controller System\Viewport Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\right_viewport_controller.hpp">
+      <Filter>src\Engine Controller System\Viewport Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\top_viewport_controller.hpp">
+      <Filter>src\Engine Controller System\Viewport Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\viewport_controller.hpp">
+      <Filter>src\Engine Controller System\Viewport Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\mouse_picker.hpp">
+      <Filter>src\Editor System\World Editor\Miscellaneous</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\world_editor.hpp">
+      <Filter>src\Editor System\World Editor\Core Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\fabi_engine_3d.hpp">
+      <Filter>src\Core System\Interface\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\scene_editor.hpp">
+      <Filter>src\Editor System\Scene Editor\Core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -737,9 +737,6 @@
     <Filter Include="src\Editor System\Billboard Editor">
       <UniqueIdentifier>{4902a467-bd9d-455d-a931-8ac0469043e9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\Editor System\Entity Placer">
-      <UniqueIdentifier>{73f39bce-8d65-416c-abaa-6ed990784a08}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\Core System\Core">
       <UniqueIdentifier>{fdc2ed4c-c661-4713-a775-82d5678a038a}</UniqueIdentifier>
     </Filter>
@@ -751,6 +748,42 @@
     </Filter>
     <Filter Include="src\Miscellaneous\Code">
       <UniqueIdentifier>{2592ce74-7374-40fa-ba9c-554b581bdc7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Editor System\Scene Editor">
+      <UniqueIdentifier>{73f39bce-8d65-416c-abaa-6ed990784a08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Engine Controller System\Viewport Controllers">
+      <UniqueIdentifier>{e6006a3f-d7a8-4aac-96ff-43147e3b6520}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Engine Controller System\Core Controller">
+      <UniqueIdentifier>{316b82ce-ffae-4d2e-9166-6b85edc366b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Editor System\World Editor\Miscellaneous">
+      <UniqueIdentifier>{b12d5bf0-2b50-4e18-be37-22dc5cf1cd4d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Editor System\World Editor\Core Editor">
+      <UniqueIdentifier>{3e86e47e-1fba-4f5e-9a5b-96a6fd5fedee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Core System\Interface\Entities">
+      <UniqueIdentifier>{adeeb6df-d4ef-4802-82d0-536f350c87bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Core System\Interface\Core">
+      <UniqueIdentifier>{13a5bd3f-9687-4323-a19f-80e361774dce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Core System\Interface\Miscellaneous">
+      <UniqueIdentifier>{af7cc8e1-92df-457b-8740-8ecca99a5124}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Editor System\Scene Editor\Core">
+      <UniqueIdentifier>{bc22f483-4047-445a-8158-f75bde27abb8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Editor System\Scene Editor\Lighting">
+      <UniqueIdentifier>{87bbfba5-bfdf-4cc4-afd0-4f8fda8eee69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Editor System\Scene Editor\Model Placing">
+      <UniqueIdentifier>{592d1e78-d741-44cb-9234-93c3133c3041}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Editor System\Scene Editor\Billboard Placing">
+      <UniqueIdentifier>{5888ff61-c7f8-42b7-9050-7d8a4d4cc4ef}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

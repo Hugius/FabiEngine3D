@@ -52,7 +52,7 @@ void WorldEditor::_updateTerrainMenu()
 			}
 			else if (screen->getButton("back")->isHovered())
 			{
-				_leftWindow->setActiveScreen("worldManagement");
+				_leftWindow->setActiveScreen("worldEditorMenu");
 				_currentWorldPart = WorldPart::NONE;
 			}
 		}
@@ -128,6 +128,15 @@ void WorldEditor::_updateTerrainMesh()
 			}
 			else if (screen->getButton("load")->isHovered())
 			{
+				// Clear texture caches
+				_fe3d.misc_clearHeightMapCache(_terrainHeightmapPath);
+				_fe3d.misc_clearTextureCache(_terrainDiffusemapPath);
+				_fe3d.misc_clearTextureCache(_terrainBlendmapPath);
+				_fe3d.misc_clearTextureCache(_terrainRedPath);
+				_fe3d.misc_clearTextureCache(_terrainGreenPath);
+				_fe3d.misc_clearTextureCache(_terrainBluePath);
+
+				// Load entity
 				_loadTerrainEntity();
 			}
 			else if (screen->getButton("back")->isHovered())

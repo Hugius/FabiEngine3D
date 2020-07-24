@@ -122,14 +122,6 @@ void WorldEditor::_loadTerrainEntity()
 		_fe3d.terrainEntity_delete("@terrain");
 	}
 
-	// Clear texture caches
-	_fe3d.misc_clearHeightMapCache(_terrainHeightmapPath);
-	_fe3d.misc_clearTextureCache(_terrainDiffusemapPath);
-	_fe3d.misc_clearTextureCache(_terrainBlendmapPath);
-	_fe3d.misc_clearTextureCache(_terrainRedPath);
-	_fe3d.misc_clearTextureCache(_terrainGreenPath);
-	_fe3d.misc_clearTextureCache(_terrainBluePath);
-
 	// Add new terrain
 	_fe3d.terrainEntity_add("@terrain", _terrainHeightmapPath, _terrainDiffusemapPath, vec3(0.0f), _terrainSize, _maxTerrainHeight, _terrainUvRepeat, _terrainLightness);
 	_fe3d.terrainEntity_select("@terrain");

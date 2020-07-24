@@ -277,9 +277,9 @@ vec3 applyLightmapping(vec3 color)
 {
 	if(u_lightMappingEnabled && u_isLightmapped)
 	{
-		vec3 lightmapColor = texture(u_sampler_lightMap, f_uv).rgb;
-		vec3 lightmappedColor = color + lightmapColor;
-		return lightmappedColor;
+		vec3 lightMapColor = texture(u_sampler_lightMap, f_uv).rgb;
+		vec3 lightMappedColor = color + lightMapColor;
+		return lightMappedColor;
 	}
 	else
 	{

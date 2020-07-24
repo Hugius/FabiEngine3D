@@ -22,14 +22,18 @@ public:
 	GLuint         getCubeMap(const vector<string> filePaths);
 	vector<float>& getHeightMap(const string &filePath);
 
+	void clearTextCache(const string& filePath);
+	void clearFontCache(const string& filePath);
 	void clearTextureCache(const string& filePath);
+	void clearCubeMapCache(const vector<string> filePaths);
+	void clearHeightMapCache(const string& filePath);
 
 private:
-	map<string, GLuint>         _textureMap;
-	map<string, GLuint>         _textMap;
-	map<string, TTF_Font*>      _fontMap;
-	map<string, vector<float>>  _pixelMap;
-	map<vector<string>, GLuint> _cubemapMap;
+	map<string, GLuint>         _textures;
+	map<string, GLuint>         _texts;
+	map<string, TTF_Font*>      _fonts;
+	map<string, vector<float>>  _heightMaps;
+	map<vector<string>, GLuint> _cubeMaps;
 
 	TTF_Font *    _loadFont(const string &filePath);
 	GLuint        _loadText(const string &text, const string &filePath);

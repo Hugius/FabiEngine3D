@@ -210,11 +210,13 @@ void WorldEditor::_updateWaterEffects()
 			{
 				string fileName = _fe3d.misc_getWinExplorerFilename(dudvmapPath, "PNG");
 				_waterDudvmapPath = (fileName == "") ? _waterDudvmapPath : (dudvmapPath + fileName);
+				_fe3d.misc_clearTextureCache(_waterDudvmapPath);
 			}
 			else if (screen->getScrollingList("buttonList")->getButton("normalmap")->isHovered())
 			{
 				string fileName = _fe3d.misc_getWinExplorerFilename(normalmapPath, "PNG");
 				_waterNormalmapPath = (fileName == "") ? _waterNormalmapPath : (normalmapPath + fileName);
+				_fe3d.misc_clearTextureCache(_waterNormalmapPath);
 			}
 			else if (screen->getScrollingList("buttonList")->getButton("reflective")->isHovered())
 			{

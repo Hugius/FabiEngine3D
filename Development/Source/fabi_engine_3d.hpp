@@ -225,7 +225,7 @@ public:
 	bool billboardEntity_isFacingCameraX(const string& ID);
 	bool billboardEntity_isFacingCameraY(const string& ID);
 
-	// Billboard entity interface (diffusemap)
+	// Billboard entity interface (diffuseMap)
 	void billBoardEntity_add
 	(
 		const string& ID, const string& texturePath,
@@ -479,6 +479,12 @@ public:
 	void misc_hideAudioDebugging();
 	void misc_setMainRenderingColor(vec3 color);
 	void misc_setWindowTitle(string title);
+	void misc_clearOBJCache(const string& filePath);
+	void misc_clearTextCache(const string& filePath);
+	void misc_clearFontCache(const string& filePath);
+	void misc_clearTextureCache(const string& filePath);
+	void misc_clearCubeMapCache(const vector<string> filePaths);
+	void misc_clearHeightMapCache(const string& filePath);
 	string misc_getWinExplorerFilename(string startingDir, string fileType);
 	string misc_vec2str(vec2 vec);
 	string misc_vec2str(vec3 vec);

@@ -94,21 +94,21 @@ void WorldEditor::_updateTerrainMesh()
 	if (_leftWindow->getActiveScreen()->getID() == "terrainMesh")
 	{
 		auto screen = _leftWindow->getScreen("terrainMesh");
-		string heightmapPath = "User\\Assets\\Textures\\HeightMaps\\";
-		string diffusemapPath = "User\\Assets\\Textures\\DiffuseMaps\\";
+		string heightmapFolderPath = "User\\Assets\\Textures\\HeightMaps\\";
+		string diffuseMapFolderPath = "User\\Assets\\Textures\\DiffuseMaps\\";
 
 		// GUI management
 		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
 		{
 			if (screen->getScrollingList("buttonList")->getButton("heightmap")->isHovered())
 			{
-				string fileName = _fe3d.misc_getWinExplorerFilename(heightmapPath, "BMP");
-				_terrainHeightmapPath = (fileName == "") ? _terrainHeightmapPath : (heightmapPath + fileName);
+				string fileName = _fe3d.misc_getWinExplorerFilename(heightmapFolderPath, "BMP");
+				_terrainHeightmapPath = (fileName == "") ? _terrainHeightmapPath : (heightmapFolderPath + fileName);
 			}
-			else if (screen->getScrollingList("buttonList")->getButton("diffusemap")->isHovered())
+			else if (screen->getScrollingList("buttonList")->getButton("diffuseMap")->isHovered())
 			{
-				string fileName = _fe3d.misc_getWinExplorerFilename(diffusemapPath, "PNG");
-				_terrainDiffusemapPath = (fileName == "") ? _terrainDiffusemapPath : (diffusemapPath + fileName);
+				string fileName = _fe3d.misc_getWinExplorerFilename(diffuseMapFolderPath, "PNG");
+				_terrainDiffusemapPath = (fileName == "") ? _terrainDiffusemapPath : (diffuseMapFolderPath + fileName);
 			}
 			else if (screen->getScrollingList("buttonList")->getButton("size")->isHovered())
 			{
@@ -149,17 +149,17 @@ void WorldEditor::_updateTerrainMesh()
 
 		// Filling statuses
 		bool heightmap = _terrainHeightmapPath != "";
-		bool diffusemap = _terrainDiffusemapPath != "";
+		bool diffuseMap = _terrainDiffusemapPath != "";
 		bool size = _terrainSize != 0.0f;
 		bool maxHeight = _maxTerrainHeight != 0.0f;
 		bool uvRepeat = _terrainUvRepeat != 0.0f;
 
 		// Button hoverability
-		screen->getScrollingList("buttonList")->getButton("diffusemap")->setHoverable(heightmap);
-		screen->getScrollingList("buttonList")->getButton("size")->setHoverable(heightmap && diffusemap);
-		screen->getScrollingList("buttonList")->getButton("maxHeight")->setHoverable(heightmap && diffusemap && size);
-		screen->getScrollingList("buttonList")->getButton("uvRepeat")->setHoverable(heightmap && diffusemap && size && maxHeight);
-		screen->getButton("load")->setHoverable(heightmap && diffusemap && size && maxHeight && uvRepeat);
+		screen->getScrollingList("buttonList")->getButton("diffuseMap")->setHoverable(heightmap);
+		screen->getScrollingList("buttonList")->getButton("size")->setHoverable(heightmap && diffuseMap);
+		screen->getScrollingList("buttonList")->getButton("maxHeight")->setHoverable(heightmap && diffuseMap && size);
+		screen->getScrollingList("buttonList")->getButton("uvRepeat")->setHoverable(heightmap && diffuseMap && size && maxHeight);
+		screen->getButton("load")->setHoverable(heightmap && diffuseMap && size && maxHeight && uvRepeat);
 	}
 }
 
@@ -169,7 +169,7 @@ void WorldEditor::_updateTerrainBlendmap()
 	{
 		auto screen = _leftWindow->getScreen("terrainBlendmap");
 		string blendmapPath = "User\\Assets\\Textures\\BlendMaps\\";
-		string diffusemapPath = "User\\Assets\\Textures\\DiffuseMaps\\";
+		string diffuseMapPath = "User\\Assets\\Textures\\DiffuseMaps\\";
 
 		// GUI management
 		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
@@ -181,18 +181,18 @@ void WorldEditor::_updateTerrainBlendmap()
 			}
 			else if (screen->getScrollingList("buttonList")->getButton("red")->isHovered())
 			{
-				string fileName = _fe3d.misc_getWinExplorerFilename(diffusemapPath, "PNG");
-				_terrainRedPath = (fileName == "") ? _terrainRedPath : (diffusemapPath + fileName);
+				string fileName = _fe3d.misc_getWinExplorerFilename(diffuseMapPath, "PNG");
+				_terrainRedPath = (fileName == "") ? _terrainRedPath : (diffuseMapPath + fileName);
 			}
 			else if (screen->getScrollingList("buttonList")->getButton("green")->isHovered())
 			{
-				string fileName = _fe3d.misc_getWinExplorerFilename(diffusemapPath, "PNG");
-				_terrainGreenPath = (fileName == "") ? _terrainGreenPath : (diffusemapPath + fileName);
+				string fileName = _fe3d.misc_getWinExplorerFilename(diffuseMapPath, "PNG");
+				_terrainGreenPath = (fileName == "") ? _terrainGreenPath : (diffuseMapPath + fileName);
 			}
 			else if (screen->getScrollingList("buttonList")->getButton("blue")->isHovered())
 			{
-				string fileName = _fe3d.misc_getWinExplorerFilename(diffusemapPath, "PNG");
-				_terrainBluePath = (fileName == "") ? _terrainBluePath : (diffusemapPath + fileName);
+				string fileName = _fe3d.misc_getWinExplorerFilename(diffuseMapPath, "PNG");
+				_terrainBluePath = (fileName == "") ? _terrainBluePath : (diffuseMapPath + fileName);
 			}
 			else if (screen->getScrollingList("buttonList")->getButton("redRepeat")->isHovered())
 			{
@@ -209,7 +209,16 @@ void WorldEditor::_updateTerrainBlendmap()
 			else if (screen->getButton("load")->isHovered())
 			{
 				_isTerrainBlendmapped = true;
-				_fe3d.terrainEntity_addBlending("@terrain", _terrainBlendmapPath, _terrainRedPath, _terrainGreenPath, _terrainBluePath, _terrainRedUvRepeat, _terrainGreenUvRepeat, _terrainBlueUvRepeat);
+
+				// Clear texture caches
+				_fe3d.misc_clearTextureCache(_terrainBlendmapPath);
+				_fe3d.misc_clearTextureCache(_terrainRedPath);
+				_fe3d.misc_clearTextureCache(_terrainGreenPath);
+				_fe3d.misc_clearTextureCache(_terrainBluePath);
+
+				// Set blendmap
+				_fe3d.terrainEntity_addBlending("@terrain", _terrainBlendmapPath, _terrainRedPath, _terrainGreenPath, 
+					_terrainBluePath, _terrainRedUvRepeat, _terrainGreenUvRepeat, _terrainBlueUvRepeat);
 			}
 			else if (screen->getButton("back")->isHovered())
 			{

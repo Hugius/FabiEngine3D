@@ -21,6 +21,14 @@ vector<ObjPart> & OBJLoader::loadOBJ(const string & filePath)
 	}
 }
 
+void OBJLoader::clearOBJCache(const string& filePath)
+{
+	if (_objPartsMap.find(filePath) != _objPartsMap.end())
+	{
+		_objPartsMap.erase(filePath);
+	}
+}
+
 vector<ObjPart> OBJLoader::_loadOBJ(const string& filePath)
 {
 	// Declare variables

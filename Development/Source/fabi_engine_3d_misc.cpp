@@ -135,6 +135,36 @@ void FabiEngine3D::misc_setWindowTitle(string title)
 	_core->_windowManager.setTitle(title);
 }
 
+void FabiEngine3D::misc_clearOBJCache(const string& filePath)
+{
+	_core->_objLoader.clearOBJCache(filePath);
+}
+
+void FabiEngine3D::misc_clearTextCache(const string& filePath)
+{
+	_core->_texLoader.clearTextCache(filePath);
+}
+
+void FabiEngine3D::misc_clearFontCache(const string& filePath)
+{
+	_core->_texLoader.clearFontCache(filePath);
+}
+
+void FabiEngine3D::misc_clearTextureCache(const string& filePath)
+{
+	_core->_texLoader.clearTextureCache(filePath);
+}
+
+void FabiEngine3D::misc_clearCubeMapCache(const vector<string> filePaths)
+{
+	_core->_texLoader.clearCubeMapCache(filePaths);
+}
+
+void FabiEngine3D::misc_clearHeightMapCache(const string& filePath)
+{
+	_core->_texLoader.clearHeightMapCache(filePath);
+}
+
 string FabiEngine3D::misc_getWinExplorerFilename(string startingDir, string fileType)
 {
 	// Prepare filter C-string

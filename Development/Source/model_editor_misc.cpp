@@ -57,17 +57,23 @@ void ModelEditor::_loadOBJ()
 	if (!_modelResizingEnabled)
 	{
 		// Get the loaded filename
-		string objName = _fe3d.misc_getWinExplorerFilename("User\\Assets\\OBJs\\", "OBJ");
-		if (objName != "") // Not cancelled
+		string objPath = "User\\Assets\\OBJs\\";
+		string objName = _fe3d.misc_getWinExplorerFilename(objPath, "OBJ");
+
+		// Not cancelled
+		if (objName != "")
 		{
-			// Already exists
+			// Delete existing entity
 			if (_fe3d.gameEntity_isExisting(_currentModelName))
 			{
 				_fe3d.gameEntity_delete(_currentModelName);
 			}
 
+			// Clear OBJ cache
+			_fe3d.misc_clearOBJCache(objPath + _currentModelName);
+
 			// Add new game entity
-			_fe3d.gameEntity_add(_currentModelName, "User\\Assets\\OBJs\\" + objName, vec3(0.0f), vec3(0.0f), vec3(1.0f));
+			_fe3d.gameEntity_add(_currentModelName, objPath + objName, vec3(0.0f), vec3(0.0f), vec3(1.0f));
 			_fe3d.aabbEntity_bindToGameEntity(_currentModelName, vec3(1.0f), true);
 			_fe3d.gameEntity_setColor(_currentModelName, vec3(0.5f));
 		}
@@ -79,12 +85,14 @@ void ModelEditor::_loadDiffuseMap()
 	if (!_modelResizingEnabled)
 	{
 		// Get the loaded filename
-		string texName = _fe3d.misc_getWinExplorerFilename("User\\Assets\\Textures\\DiffuseMaps\\", "PNG");
+		string diffuseMapPath = "User\\Assets\\Textures\\DiffuseMaps\\";
+		string texName = _fe3d.misc_getWinExplorerFilename(diffuseMapPath, "PNG");
 
 		// Check if user chose a filename
 		if (texName != "")
 		{
-			_fe3d.gameEntity_setDiffuseMap(_currentModelName, "User\\Assets\\Textures\\DiffuseMaps\\" + texName);
+			_fe3d.misc_clearTextureCache(diffuseMapPath + texName);
+			_fe3d.gameEntity_setDiffuseMap(_currentModelName, diffuseMapPath + texName);
 		}
 	}
 }
@@ -94,12 +102,14 @@ void ModelEditor::_loadLightMap()
 	if (!_modelResizingEnabled)
 	{
 		// Get the loaded filename
-		string texName = _fe3d.misc_getWinExplorerFilename("User\\Assets\\Textures\\LightMaps\\", "PNG");
+		string lightMapPath = "User\\Assets\\Textures\\LightMaps\\";
+		string texName = _fe3d.misc_getWinExplorerFilename(lightMapPath, "PNG");
 
 		// Check if user chose a filename
 		if (texName != "")
 		{
-			_fe3d.gameEntity_setLightMap(_currentModelName, "User\\Assets\\Textures\\LightMaps\\" + texName);
+			_fe3d.misc_clearTextureCache(lightMapPath + texName);
+			_fe3d.gameEntity_setLightMap(_currentModelName, lightMapPath + texName);
 			_fe3d.gameEntity_setLightmapped(_currentModelName, true);
 		}
 	}
@@ -110,12 +120,14 @@ void ModelEditor::_loadReflectionMap()
 	if (!_modelResizingEnabled)
 	{
 		// Get the loaded filename
-		string texName = _fe3d.misc_getWinExplorerFilename("User\\Assets\\Textures\\ReflectionMaps\\", "PNG");
+		string reflectionMapPath = "User\\Assets\\Textures\\ReflectionMaps\\";
+		string texName = _fe3d.misc_getWinExplorerFilename(reflectionMapPath, "PNG");
 
 		// Check if user chose a filename
 		if (texName != "")
 		{
-			_fe3d.gameEntity_setReflectionMap(_currentModelName, "User\\Assets\\Textures\\ReflectionMaps\\" + texName);
+			_fe3d.misc_clearTextureCache(reflectionMapPath + texName);
+			_fe3d.gameEntity_setReflectionMap(_currentModelName, reflectionMapPath + texName);
 			_fe3d.gameEntity_setSkyReflective(_currentModelName, true);
 		}
 	}

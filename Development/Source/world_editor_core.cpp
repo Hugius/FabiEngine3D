@@ -69,7 +69,7 @@ void WorldEditor::initializeGUI()
 	_leftWindow->addScreen("terrainMesh");
 	_leftWindow->getScreen("terrainMesh")->addScrollingList("buttonList", vec2(0.0f, 0.2f), vec2(1.9, 1.5f), vec3(0.3f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, LeftViewportController::textColor, LeftViewportController::textHoverColor, vec2(0.15f, 0.1f));
 	_leftWindow->getScreen("terrainMesh")->getScrollingList("buttonList")->addButton("heightmap", "Height map");
-	_leftWindow->getScreen("terrainMesh")->getScrollingList("buttonList")->addButton("diffusemap", "Diffuse map");
+	_leftWindow->getScreen("terrainMesh")->getScrollingList("buttonList")->addButton("diffuseMap", "Diffuse map");
 	_leftWindow->getScreen("terrainMesh")->getScrollingList("buttonList")->addButton("size", "Size");
 	_leftWindow->getScreen("terrainMesh")->getScrollingList("buttonList")->addButton("maxHeight", "Max height");
 	_leftWindow->getScreen("terrainMesh")->getScrollingList("buttonList")->addButton("uvRepeat", "UV repeat");

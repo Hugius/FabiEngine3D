@@ -26,6 +26,8 @@ public:
 
 	vector<ObjPart> & loadOBJ(const string & filePath);
 
+	void clearOBJCache(const string& filePath);
+
 private:
 	vector<ObjPart> _loadOBJ(const string & filePath);
 

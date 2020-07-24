@@ -209,6 +209,9 @@ GLuint TextureLoader::_loadCubemap(const vector<string> fileNames)
 		// Convert to OpenGL texture
 		glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGB, surface->w, surface->h, 0, GL_RGB, GL_UNSIGNED_BYTE, surface->pixels);
 
+		// Memory management
+		SDL_FreeSurface(surface);
+
 		// Logging
 		Logger::getInst().throwInfo("Loaded cubemap texture: " + fileNames[i]);
 	}
@@ -234,8 +237,8 @@ TTF_Font * TextureLoader::_loadFont(const string& fontPath)
 	rootDir = rootDir.substr(0, rootDir.size() - 25);
 
 	// Load font
-	auto it = _fontMap.find(fontPath);
-	if (it == _fontMap.end()) //Not in map (yet)
+	auto it = _fonts.find(fontPath);
+	if (it == _fonts.end()) //Not in map (yet)
 	{
 		// Font loading
 		TTF_Font * font = TTF_OpenFont((rootDir + fontPath).c_str(), 50);
@@ -243,7 +246,7 @@ TTF_Font * TextureLoader::_loadFont(const string& fontPath)
 		{
 			Logger::getInst().throwError("Texture error: " + string(SDL_GetError()));
 		}
-		_fontMap.insert(std::make_pair(fontPath, font));
+		_fonts.insert(std::make_pair(fontPath, font));
 
 		Logger::getInst().throwInfo("Loaded font: " + fontPath);
 

@@ -97,17 +97,19 @@ private:
 	void _updateWaterCamera();
 	
 	// Water variables
-	string _waterDudvmapPath = "";
-	string _waterNormalmapPath = "";
+	string _waterDudvMapPath = "";
+	string _waterNormalMapPath = "";
+	string _waterDisplacementMapPath = "";
 	bool _waterWavingEnabled = false;
 	bool _waterRipplingEnabled = false;
 	bool _waterSpecularEnabled = false;
 	bool _waterReflectionEnabled = false;
 	bool _waterRefractionEnabled = false;
+	vec3 _waterPosition = vec3(0.0f);
 	vec3 _waterColor = vec3(0.0f);
 	float _waterSize = 0.0f;
 	float _waterUvRepeat = 0.0f;
-	float _waterHeight = 0.0f;
+	float _waterWaveHeightFactor = 1.0f;
 	float _waterSpeed = 0.0f;
 	float _waterTransparency = 0.0f;
 	float _waterSpecularFactor = 16.0f;

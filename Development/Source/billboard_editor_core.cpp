@@ -42,7 +42,7 @@ void BillboardEditor::initializeGUI()
 	_leftWindow->addScreen("billboardEditingAppearance");
 	_leftWindow->getScreen("billboardEditingAppearance")->addButton("color", vec2(0.0f, 0.63f), vec2(1.0f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Color", LeftViewportController::textColor, LeftViewportController::textHoverColor);
 	_leftWindow->getScreen("billboardEditingAppearance")->addButton("texture", vec2(0.0f, 0.21), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Texture", LeftViewportController::textColor, LeftViewportController::textHoverColor);
-	_leftWindow->getScreen("billboardEditingAppearance")->addButton("transparent", vec2(0.0f, -0.21), vec2(1.6f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "No-white: OFF", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	_leftWindow->getScreen("billboardEditingAppearance")->addButton("isTransparent", vec2(0.0f, -0.21), vec2(1.6f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "No-white: OFF", LeftViewportController::textColor, LeftViewportController::textHoverColor);
 	_leftWindow->getScreen("billboardEditingAppearance")->addButton("back", vec2(0.0f, -0.63f), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
 
 	// Left-viewport: mainWindow - billboardEditingAnimation
@@ -204,8 +204,7 @@ void BillboardEditor::unload()
 	_fe3d.gfx_disableAmbientLighting();
 	_fe3d.gfx_disableDirectionalLighting();
 	_fe3d.gfx_disableMSAA();
-	_fe3d.gfx_disableSceneReflections();
-	_fe3d.gfx_disableSpecularLighting();
+	_fe3d.gfx_disableShadows();
 
 	// 3D environment
 	_fe3d.gameEntity_delete("@@grid");

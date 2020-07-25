@@ -3,9 +3,9 @@
 
 #include <algorithm>
 
-void FabiEngine3D::waterEntity_add(const string& ID, vec3 pos, float size)
+void FabiEngine3D::waterEntity_add(const string& ID, float size)
 {
-	_core->_waterEntityManager.addWaterEntity(ID, pos, size);
+	_core->_waterEntityManager.addWaterEntity(ID, size);
 }
 
 void FabiEngine3D::waterEntity_delete(const string& ID)
@@ -39,6 +39,11 @@ void FabiEngine3D::waterEntity_select(const string& ID)
 	_core->_waterEntityManager.selectWater(ID);
 }
 
+void FabiEngine3D::waterEntity_setPosition(const string& ID, vec3 position)
+{
+	_core->_waterEntityManager.getEntity(ID)->setPosition(position);
+}
+
 void FabiEngine3D::waterEntity_setUvRepeat(const string& ID, float repeat)
 {
 	_core->_waterEntityManager.getEntity(ID)->setUvRepeat(repeat);
@@ -56,11 +61,17 @@ void FabiEngine3D::waterEntity_setRefractive(const string& ID, bool enabled)
 
 void FabiEngine3D::waterEntity_setSpeed(const string& ID, float speed)
 {
-	_core->_waterEntityManager.getEntity(ID)->setWavingSpeed(speed);
+	_core->_waterEntityManager.getEntity(ID)->setSpeed(speed);
 }
 
-void FabiEngine3D::waterEntity_setWaving(const string& ID, bool enabled)
+void FabiEngine3D::waterEntity_setWaving(const string& ID, const string& displacementMapPath, float heightFactor, bool enabled)
 {
+	if (enabled)
+	{
+		_core->_waterEntityManager.getEntity(ID)->setDisplacementMap(_core->_texLoader.getTexture(displacementMapPath, true, true));
+		_core->_waterEntityManager.getEntity(ID)->setWaveHeightFactor(heightFactor);
+	}
+
 	_core->_waterEntityManager.getEntity(ID)->setWaving(enabled);
 }
 
@@ -97,11 +108,6 @@ void FabiEngine3D::waterEntity_setTransparency(const string& ID, float transpare
 	_core->_waterEntityManager.getEntity(ID)->setTransparency(transparency * 10.0f);
 }
 
-void FabiEngine3D::waterEntity_setSurfaceHeight(const string& ID, float height)
-{
-	return _core->_waterEntityManager.getEntity(ID)->setSurfaceHeight(height);
-}
-
 string FabiEngine3D::waterEntity_getSelectedID()
 {
 	if (_core->_waterEntityManager.getSelectedWater() != nullptr)
@@ -119,7 +125,7 @@ float FabiEngine3D::waterEntity_getSize(const string& ID)
 	return _core->_waterEntityManager.getEntity(ID)->getSize();
 }
 
-float FabiEngine3D::waterEntity_getSurfaceHeight(const string& ID)
+vec3 FabiEngine3D::waterEntity_getPosition(const string& ID)
 {
-	return _core->_waterEntityManager.getEntity(ID)->getSurfaceHeight();
+	return _core->_waterEntityManager.getEntity(ID)->getPosition();
 }

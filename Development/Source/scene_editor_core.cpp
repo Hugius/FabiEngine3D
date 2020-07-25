@@ -176,7 +176,7 @@ void SceneEditor::load()
 	if (_fe3d.waterEntity_isExisting("@water"))
 	{
 		float size = _fe3d.waterEntity_getSize("@water") / 2.0f;
-		height = _fe3d.waterEntity_getSurfaceHeight("@water") + (size / 10.0f);
+		height = _fe3d.waterEntity_getPosition("@water").y + (size / 10.0f);
 	}
 
 	// Terrain can overwrite camera height
@@ -359,7 +359,7 @@ void SceneEditor::save()
 				auto uvRepeat = _fe3d.gameEntity_getUvRepeat(entityID);
 				auto aabbSize = _fe3d.aabbEntity_getSize(entityID);
 
-				// String value corrections
+				// String value conversions
 				diffuseMapPath = (diffuseMapPath == "") ? "-" : diffuseMapPath;
 				lightMapPath = (lightMapPath == "") ? "-" : lightMapPath;
 				reflectionMapPath = (reflectionMapPath == "") ? "-" : reflectionMapPath;

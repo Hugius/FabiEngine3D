@@ -12,7 +12,7 @@ public:
 	WaterEntity * getSelectedWater();
 
 	void selectWater(const string & ID);
-	void addWaterEntity(const string & ID, vec3 pos, float size);
+	void addWaterEntity(const string & ID, float size);
 	void update() override;
 
 private:

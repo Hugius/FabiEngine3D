@@ -107,8 +107,8 @@ void WorldEditor::initializeGUI()
 	// Left-viewport: mainWindow - waterMesh
 	_leftWindow->addScreen("waterMesh");
 	_leftWindow->getScreen("waterMesh")->addScrollingList("buttonList", vec2(0.0f, 0.2f), vec2(1.9, 1.5f), vec3(0.3f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, LeftViewportController::textColor, LeftViewportController::textHoverColor, vec2(0.15f, 0.1f));
+	_leftWindow->getScreen("waterMesh")->getScrollingList("buttonList")->addButton("position", "Position");
 	_leftWindow->getScreen("waterMesh")->getScrollingList("buttonList")->addButton("size", "Size");
-	_leftWindow->getScreen("waterMesh")->getScrollingList("buttonList")->addButton("height", "Height");
 	_leftWindow->getScreen("waterMesh")->getScrollingList("buttonList")->addButton("up", "Move up");
 	_leftWindow->getScreen("waterMesh")->getScrollingList("buttonList")->addButton("down", "Move down");
 	_leftWindow->getScreen("waterMesh")->addButton("back", vec2(0.0f, -0.9f), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
@@ -117,23 +117,25 @@ void WorldEditor::initializeGUI()
 	_leftWindow->addScreen("waterEffects");
 	_leftWindow->getScreen("waterEffects")->addScrollingList("buttonList", vec2(0.0f, 0.2f), vec2(1.9, 1.5f), vec3(0.3f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, LeftViewportController::textColor, LeftViewportController::textHoverColor, vec2(0.15f, 0.1f));
 	_leftWindow->getScreen("waterEffects")->getScrollingList("buttonList")->addButton("uvRepeat", "UV repeat");
-	_leftWindow->getScreen("waterEffects")->getScrollingList("buttonList")->addButton("dudvmap", "Dudv map");
-	_leftWindow->getScreen("waterEffects")->getScrollingList("buttonList")->addButton("normalmap", "Normal map");
-	_leftWindow->getScreen("waterEffects")->getScrollingList("buttonList")->addButton("reflective", "Reflective: OFF");
-	_leftWindow->getScreen("waterEffects")->getScrollingList("buttonList")->addButton("refractive", "Refractive: OFF");
-	_leftWindow->getScreen("waterEffects")->getScrollingList("buttonList")->addButton("waving", "Waving: OFF");
-	_leftWindow->getScreen("waterEffects")->getScrollingList("buttonList")->addButton("rippling", "Rippling: OFF");
-	_leftWindow->getScreen("waterEffects")->getScrollingList("buttonList")->addButton("specular", "Specular: OFF");
+	_leftWindow->getScreen("waterEffects")->getScrollingList("buttonList")->addButton("dudvMap", "Dudv map");
+	_leftWindow->getScreen("waterEffects")->getScrollingList("buttonList")->addButton("normalMap", "Normal map");
+	_leftWindow->getScreen("waterEffects")->getScrollingList("buttonList")->addButton("displaceMap", "Displace map");
+	_leftWindow->getScreen("waterEffects")->getScrollingList("buttonList")->addButton("isReflective", "Reflective: OFF");
+	_leftWindow->getScreen("waterEffects")->getScrollingList("buttonList")->addButton("isRefractive", "Refractive: OFF");
+	_leftWindow->getScreen("waterEffects")->getScrollingList("buttonList")->addButton("isWaving", "Waving: OFF");
+	_leftWindow->getScreen("waterEffects")->getScrollingList("buttonList")->addButton("isRippling", "Rippling: OFF");
+	_leftWindow->getScreen("waterEffects")->getScrollingList("buttonList")->addButton("isSpecular", "Specular: OFF");
 	_leftWindow->getScreen("waterEffects")->addButton("back", vec2(0.0f, -0.9f), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
 
 	// Left-viewport: mainWindow - waterOptions
 	_leftWindow->addScreen("waterOptions");
 	_leftWindow->getScreen("waterOptions")->addScrollingList("buttonList", vec2(0.0f, 0.2f), vec2(1.9, 1.5f), vec3(0.3f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, LeftViewportController::textColor, LeftViewportController::textHoverColor, vec2(0.15f, 0.1f));
-	_leftWindow->getScreen("waterOptions")->getScrollingList("buttonList")->addButton("speed", "Water speed");
+	_leftWindow->getScreen("waterOptions")->getScrollingList("buttonList")->addButton("speed", "Animation speed");
 	_leftWindow->getScreen("waterOptions")->getScrollingList("buttonList")->addButton("transparency", "Transparency");
 	_leftWindow->getScreen("waterOptions")->getScrollingList("buttonList")->addButton("color", "Color");
-	_leftWindow->getScreen("waterOptions")->getScrollingList("buttonList")->addButton("factor", "Specular factor");
-	_leftWindow->getScreen("waterOptions")->getScrollingList("buttonList")->addButton("intensity", "Specular intensity");
+	_leftWindow->getScreen("waterOptions")->getScrollingList("buttonList")->addButton("specularFactor", "Specular factor");
+	_leftWindow->getScreen("waterOptions")->getScrollingList("buttonList")->addButton("specularIntensity", "Specular intensity");
+	_leftWindow->getScreen("waterOptions")->getScrollingList("buttonList")->addButton("waveHeight", "Wave height");
 	_leftWindow->getScreen("waterOptions")->addButton("back", vec2(0.0f, -0.9f), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
 }
 
@@ -211,8 +213,8 @@ void WorldEditor::unload()
 	_terrainLightness = 1.0f;
 	_terrainCameraHeight = 0.0f;
 	_terrainCameraDistance = 0.0f;
-	_waterDudvmapPath = "";
-	_waterNormalmapPath = "";
+	_waterDudvMapPath = "";
+	_waterNormalMapPath = "";
 	_waterWavingEnabled = false;
 	_waterRipplingEnabled = false;
 	_waterSpecularEnabled = false;
@@ -221,7 +223,6 @@ void WorldEditor::unload()
 	_waterColor = vec3(0.0f);
 	_waterSize = 0.0f;
 	_waterUvRepeat = 0.0f;
-	_waterHeight = 0.0f;
 	_waterSpeed = 0.0f;
 	_waterTransparency = 0.0f;
 	_waterSpecularFactor = 16.0f;

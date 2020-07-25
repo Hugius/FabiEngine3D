@@ -2,6 +2,11 @@
 
 #include "water_entity.hpp"
 
+void WaterEntity::setPosition(vec3 val)
+{
+	_position = val;
+}
+
 void WaterEntity::setColor(vec3 val)
 {
 	_color = val;
@@ -17,9 +22,14 @@ void WaterEntity::setNormalMap(GLuint val)
 	_normalMap = val;
 }
 
-void WaterEntity::setRipplePos(float val)
+void WaterEntity::setDisplacementMap(GLuint val)
 {
-	_ripplePos = val;
+	_displacementMap = val;
+}
+
+void WaterEntity::setRippleOffset(float val)
+{
+	_rippleOffset = val;
 }
 
 void WaterEntity::setUvRepeat(float val)
@@ -27,19 +37,19 @@ void WaterEntity::setUvRepeat(float val)
 	_uvRepeat = val;
 }
 
-void WaterEntity::setWavingSpeed(float val)
+void WaterEntity::setSpeed(float val)
 {
-	_wavingSpeed = val;
+	_speed = val;
 }
 
-void WaterEntity::setTimeX(float val)
+void WaterEntity::setWaveOffset(float val)
 {
-	_timeX = val;
+	_waveOffset = val;
 }
 
-void WaterEntity::setTimeZ(float val)
+void WaterEntity::setWaveHeightFactor(float val)
 {
-	_timeZ = val;
+	_waveHeightFactor = val;
 }
 
 void WaterEntity::setSpecularLightingFactor(float val)
@@ -77,11 +87,6 @@ void WaterEntity::setRefractive(bool val)
 	_refractive = val;
 }
 
-void WaterEntity::setSurfaceHeight(float val)
-{
-	_surfaceHeight = val;
-}
-
 void WaterEntity::setSize(float val)
 {
 	_size = val;
@@ -90,6 +95,11 @@ void WaterEntity::setSize(float val)
 void WaterEntity::setTransparency(float val)
 {
 	_transparency = val;
+}
+
+const vec3 WaterEntity::getPosition() const
+{
+	return _position;
 }
 
 const vec3 WaterEntity::getColor() const
@@ -107,9 +117,14 @@ const GLuint WaterEntity::getNormalMap() const
 	return _normalMap;
 }
 
-const float WaterEntity::getRipplePos() const
+const GLuint WaterEntity::getDisplacementMap() const
 {
-	return _ripplePos;
+	return _displacementMap;
+}
+
+const float WaterEntity::getRippleOffset() const
+{
+	return _rippleOffset;
 }
 
 const float WaterEntity::getUvRepeat() const
@@ -117,19 +132,19 @@ const float WaterEntity::getUvRepeat() const
 	return _uvRepeat;
 }
 
-const float WaterEntity::getWavingSpeed() const
+const float WaterEntity::getSpeed() const
 {
-	return _wavingSpeed;
+	return _speed;
 }
 
-const float WaterEntity::getTimeX() const
+const float WaterEntity::getWaveOffset() const
 {
-	return _timeX;
+	return _waveOffset;
 }
 
-const float WaterEntity::getTimeZ() const
+const float WaterEntity::getWaveHeightFactor() const
 {
-	return _timeZ;
+	return _waveHeightFactor;
 }
 
 const float WaterEntity::getSpecularLightingFactor() const
@@ -140,11 +155,6 @@ const float WaterEntity::getSpecularLightingFactor() const
 const float WaterEntity::getSpecularLightingIntensity() const
 {
 	return _specularLightingIntensity;
-}
-
-const float WaterEntity::getSurfaceHeight() const
-{
-	return _surfaceHeight;
 }
 
 const float WaterEntity::getSize() const

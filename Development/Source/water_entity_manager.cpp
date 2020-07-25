@@ -31,62 +31,93 @@ void WaterEntityManager::selectWater(const string & ID)
 	_selectedID = ID;
 }
 
-void WaterEntityManager::addWaterEntity(const string & ID, vec3 pos, float size)
+void WaterEntityManager::addWaterEntity(const string & ID, float size)
 {
 	// Variables
-	float surfaceHeight = pos.y;
-	pos.y = 0.0f;
 	float halfSize = size / 2.0f;
 	vector<float> waterVertices;
+	waterVertices.reserve(size_t(size) * size_t(size) * 30);
 
-	// Top-left vertex
-	waterVertices.push_back(pos.x - halfSize);
-	waterVertices.push_back(pos.y);
-	waterVertices.push_back(pos.z + halfSize);
-	waterVertices.push_back(0.0f);
-	waterVertices.push_back(1.0f);
+	// Try to fill the vector
+	try
+	{
+		// Creating flat tiled water surface
+		for (float x = -size; x < size; x++)
+		{
+			for (float z = -size; z < size; z++)
+			{
+				float firstVertexX = x;
+				float firstVertexY = 0.0f;
+				float firstVertexZ = z + 1;
+				float firstUvX = (x / size);
+				float firstUvY = ((z / size) + (1.0f / size));
 
-	// Top-right vertex
-	waterVertices.push_back(pos.x + halfSize);
-	waterVertices.push_back(pos.y);
-	waterVertices.push_back(pos.z + halfSize);
-	waterVertices.push_back(1.0f);
-	waterVertices.push_back(1.0f);
+				float secondVertexX = x + 1;
+				float secondVertexY = 0.0f;
+				float secondVertexZ = z + 1;
+				float secondUvX = ((x / size) + (1.0f / size));
+				float secondUvY = ((z / size) + (1.0f / size));
 
-	// Bottom-right vertex
-	waterVertices.push_back(pos.x + halfSize);
-	waterVertices.push_back(pos.y);
-	waterVertices.push_back(pos.z - halfSize);
-	waterVertices.push_back(1.0f);
-	waterVertices.push_back(0.0f);
+				float thirdVertexX = x + 1;
+				float thirdVertexY = 0.0f;
+				float thirdVertexZ = z;
+				float thirdUvX = ((x / size) + (1.0f / size));
+				float thirdUvY = (z / size);
 
-	// Bottom-right vertex
-	waterVertices.push_back(pos.x + halfSize);
-	waterVertices.push_back(pos.y);
-	waterVertices.push_back(pos.z - halfSize);
-	waterVertices.push_back(1.0f);
-	waterVertices.push_back(0.0f);
+				float fourthVertexX = x;
+				float fourthVertexY = 0.0f;
+				float fourthVertexZ = z;
+				float fourthUvX = (x / size);
+				float fourthUvY = (z / size);
 
-	// Bottom-left vertex
-	waterVertices.push_back(pos.x - halfSize);
-	waterVertices.push_back(pos.y);
-	waterVertices.push_back(pos.z - halfSize);
-	waterVertices.push_back(0.0f);
-	waterVertices.push_back(0.0f);
+				waterVertices.push_back(firstVertexX);
+				waterVertices.push_back(firstVertexY);
+				waterVertices.push_back(firstVertexZ);
+				waterVertices.push_back(firstUvX);
+				waterVertices.push_back(firstUvY);
 
-	// Top-left vertex
-	waterVertices.push_back(pos.x - halfSize);
-	waterVertices.push_back(pos.y);
-	waterVertices.push_back(pos.z + halfSize);
-	waterVertices.push_back(0.0f);
-	waterVertices.push_back(1.0f);
+				waterVertices.push_back(secondVertexX);
+				waterVertices.push_back(secondVertexY);
+				waterVertices.push_back(secondVertexZ);
+				waterVertices.push_back(secondUvX);
+				waterVertices.push_back(secondUvY);
+
+				waterVertices.push_back(thirdVertexX);
+				waterVertices.push_back(thirdVertexY);
+				waterVertices.push_back(thirdVertexZ);
+				waterVertices.push_back(thirdUvX);
+				waterVertices.push_back(thirdUvY);
+
+				waterVertices.push_back(thirdVertexX);
+				waterVertices.push_back(thirdVertexY);
+				waterVertices.push_back(thirdVertexZ);
+				waterVertices.push_back(thirdUvX);
+				waterVertices.push_back(thirdUvY);
+
+				waterVertices.push_back(fourthVertexX);
+				waterVertices.push_back(fourthVertexY);
+				waterVertices.push_back(fourthVertexZ);
+				waterVertices.push_back(fourthUvX);
+				waterVertices.push_back(fourthUvY);
+
+				waterVertices.push_back(firstVertexX);
+				waterVertices.push_back(firstVertexY);
+				waterVertices.push_back(firstVertexZ);
+				waterVertices.push_back(firstUvX);
+				waterVertices.push_back(firstUvY);
+			}
+		}
+	}
+	catch (std::bad_alloc& ba)
+	{
+		std::cerr << "bad_alloc caught: " << ba.what();
+	}
 	
 	// Create entity
 	_createEntity(EntityType::WATER, ID)->load(ID);
 
 	// Fill entity
 	getEntity(ID)->addOglBuffer(new OpenGLBuffer(SHAPE_SURFACE, &waterVertices[0], waterVertices.size()));
-	getEntity(ID)->setSurfaceHeight(surfaceHeight);
 	getEntity(ID)->setSize(size);
 
 	// Cleanup
@@ -98,7 +129,7 @@ void WaterEntityManager::update()
 	// Update reflection height
 	if (getSelectedWater() != nullptr && _shaderBus.isWaterEffectsEnabled())
 	{
-		_shaderBus.setSceneReflectionHeight(getSelectedWater()->getSurfaceHeight());
+		_shaderBus.setSceneReflectionHeight(getSelectedWater()->getPosition().y);
 	}
 
 	// Update all water entities
@@ -107,20 +138,12 @@ void WaterEntityManager::update()
 		// Create temporary water entity object
 		auto * water = getEntity(baseEntity->getID());
 
+		// Update water animations (rippling & waving)
 		if (water->isEnabled() && _shaderBus.isWaterEffectsEnabled())
 		{
-			water->setRipplePos(water->getRipplePos() + water->getWavingSpeed() / 100.0f);
-			water->setRipplePos(fmod(water->getRipplePos(), 1.0f));
-
-			// X waves
-			//float timeX = water->getTimeX() + water->getWavingSpeed() / 300.0f;
-			//timeX = timeX > 0.235f ? 0.2f : timeX;
-			//water->setTimeX(timeX);
-
-			//// Z waves
-			//float timeZ = water->getTimeZ() + water->getWavingSpeed() / 300.0f;
-			//timeZ = timeX > 0.235f ? 0.2f : timeX;
-			//water->setTimeZ(timeZ);
+			water->setRippleOffset(water->getRippleOffset() + water->getSpeed());
+			water->setRippleOffset(fmod(water->getRippleOffset(), 1.0f));
+			water->setWaveOffset(water->getWaveOffset() + water->getSpeed());
 		}
 	}
 }

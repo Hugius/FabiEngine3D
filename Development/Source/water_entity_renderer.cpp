@@ -39,15 +39,15 @@ void WaterEntityRenderer::render(const WaterEntity* entity)
 	if (entity->isEnabled())
 	{
 		// Shader uniforms
-		_shader.uploadUniform("u_ripplePos", entity->getRipplePos());
-		//_shader.uploadUniform("u_timeX", entity->getTimeX());
-		//_shader.uploadUniform("u_timeZ", entity->getTimeZ());
-		_shader.uploadUniform("u_customHeightOffset", entity->getSurfaceHeight());
+		_shader.uploadUniform("u_rippleOffset", entity->getRippleOffset());
+		_shader.uploadUniform("u_waveOffset", entity->getWaveOffset());
+		_shader.uploadUniform("u_waveHeight", entity->getWaveHeightFactor());
+		_shader.uploadUniform("u_customPositionOffset", entity->getPosition());
 		_shader.uploadUniform("u_uvRepeat", entity->getUvRepeat());
 		_shader.uploadUniform("u_specularLightingFactor", entity->getSpecularLightingFactor());
 		_shader.uploadUniform("u_specularLightingIntensity", entity->getSpecularLightingIntensity());
 		_shader.uploadUniform("u_transparency", entity->getTransparency());
-		//_shader.uploadUniform("u_waving", entity->isWaving());
+		_shader.uploadUniform("u_isWaving", entity->isWaving());
 		_shader.uploadUniform("u_isRippling", entity->isRippling());
 		_shader.uploadUniform("u_isSpecular", entity->isSpecular());
 		_shader.uploadUniform("u_isReflective", entity->isReflective());
@@ -60,6 +60,7 @@ void WaterEntityRenderer::render(const WaterEntity* entity)
 		_shader.uploadUniform("u_sampler_depthMap", 2);
 		_shader.uploadUniform("u_sampler_dudvMap", 3);
 		_shader.uploadUniform("u_sampler_normalMap", 4);
+		_shader.uploadUniform("u_sampler_displacementMap", 5);
 
 		// Textures
 		glActiveTexture(GL_TEXTURE0);
@@ -72,6 +73,8 @@ void WaterEntityRenderer::render(const WaterEntity* entity)
 		glBindTexture(GL_TEXTURE_2D, entity->getDudvMap());
 		glActiveTexture(GL_TEXTURE4);
 		glBindTexture(GL_TEXTURE_2D, entity->getNormalMap());
+		glActiveTexture(GL_TEXTURE5);
+		glBindTexture(GL_TEXTURE_2D, entity->getDisplacementMap());
 		glActiveTexture(GL_TEXTURE0);
 
 		// Bind

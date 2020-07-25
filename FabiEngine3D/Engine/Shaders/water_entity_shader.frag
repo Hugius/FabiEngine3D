@@ -14,12 +14,12 @@ layout(location = 3) uniform sampler2D u_sampler_dudvMap;
 layout(location = 4) uniform sampler2D u_sampler_normalMap;
 
 // Vector3 uniforms
-uniform vec3  u_directionalLightingPosition;
-uniform vec3  u_cameraPosition;
-uniform vec3  u_color;
+uniform vec3 u_directionalLightingPosition;
+uniform vec3 u_cameraPosition;
+uniform vec3 u_color;
 
 // Float uniforms
-uniform float u_ripplePos;
+uniform float u_rippleOffset;
 uniform float u_fogMinDistance;
 uniform float u_specularLightingFactor;
 uniform float u_specularLightingIntensity;
@@ -78,15 +78,15 @@ vec4 getMainColor()
 	if(u_isRippling)
 	{
 		// DUDV mapping
-		vec2 distortedTexCoords = f_uv + texture(u_sampler_dudvMap, vec2(f_uv.x + u_ripplePos, f_uv.y + u_ripplePos)).rg * 0.1;
+		vec2 distortedTexCoords = f_uv + texture(u_sampler_dudvMap, vec2(f_uv.x + u_rippleOffset, f_uv.y + u_rippleOffset)).rg * 0.1;
 		vec2 totalDistortion = (texture(u_sampler_dudvMap, distortedTexCoords).rg * 2.0 - 1.0) * 0.025f;
 		texCoords   += totalDistortion;
 		texCoords.x = clamp(texCoords.x, 0.001f, 0.999f);
 		texCoords.y = clamp(texCoords.y, -0.999f, -0.001f);
 
 		// Normal mapping
-		vec3 normalmapColor = texture(u_sampler_normalMap, distortedTexCoords).rgb;
-		normal              = vec3(normalmapColor.r*2.0f-1.0f, normalmapColor.b * 3.0f, normalmapColor.g*2.0f-1.0f);
+		vec3 normalMapColor = texture(u_sampler_normalMap, distortedTexCoords).rgb;
+		normal              = vec3(normalMapColor.r*2.0f-1.0f, normalMapColor.b * 3.0f, normalMapColor.g*2.0f-1.0f);
 		normal              = normalize(normal);
 	}
 

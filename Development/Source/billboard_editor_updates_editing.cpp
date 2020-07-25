@@ -123,7 +123,7 @@ void BillboardEditor::_updateBillboardEditing()
 							_fe3d.billboardEntity_setDiffuseMap(_currentBillboardID, path + fileName, false);
 						}
 					}
-					else if (screen->getButton("transparent")->isHovered())
+					else if (screen->getButton("isTransparent")->isHovered())
 					{
 						bool isTransparent = _fe3d.billboardEntity_isTransparent(_currentBillboardID);
 						_fe3d.billboardEntity_setTransparent(_currentBillboardID, !isTransparent);
@@ -145,7 +145,7 @@ void BillboardEditor::_updateBillboardEditing()
 				_fe3d.billboardEntity_setColor(_currentBillboardID, newColor);
 
 				// Updating transparency
-				string textEntityID = screen->getButton("transparent")->getTextfield()->getEntityID();
+				string textEntityID = screen->getButton("isTransparent")->getTextfield()->getEntityID();
 				bool isTransparent = _fe3d.billboardEntity_isTransparent(_currentBillboardID);
 				_fe3d.billboardEntity_setTransparent(_currentBillboardID, isTransparent);
 				_fe3d.textEntity_setTextContent(textEntityID, isTransparent ? "No-white: ON" : "No-white: OFF");

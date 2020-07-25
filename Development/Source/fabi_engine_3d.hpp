@@ -106,25 +106,25 @@ public:
 	);
 
 	// Water entity interface
-	void waterEntity_add(const string& ID, vec3 pos, float size);
+	void waterEntity_add(const string& ID, float size);
 	void waterEntity_delete(const string& ID);
 	void waterEntity_hide(const string& ID);
 	void waterEntity_show(const string& ID);
 	bool waterEntity_isExisting(const string& ID);
 	void waterEntity_select(const string& ID);
+	void waterEntity_setPosition(const string& ID, vec3 position);
 	void waterEntity_setReflective(const string& ID, bool enabled);
 	void waterEntity_setRefractive(const string& ID, bool enabled);
-	void waterEntity_setWaving(const string& ID, bool enabled);
+	void waterEntity_setWaving(const string& ID, const string& displacementMapPath, float heightFactor, bool enabled);
 	void waterEntity_setRippling(const string& ID, const string& dudvMapPath, bool enabled);
 	void waterEntity_setSpecular(const string& ID, const string& normalMapPath, float factor, float intensity, bool enabled);
 	void waterEntity_setTransparency(const string& ID, float transparency);
 	void waterEntity_setColor(const string& ID, vec3 color);
-	void waterEntity_setSurfaceHeight(const string& ID, float height);
 	void waterEntity_setUvRepeat(const string& ID, float repeat);
 	void waterEntity_setSpeed(const string& ID, float speed);
 	string waterEntity_getSelectedID();
 	float waterEntity_getSize(const string& ID);
-	float waterEntity_getSurfaceHeight(const string& ID);
+	vec3 waterEntity_getPosition(const string& ID);
 
 	// Game entity interface
 	void gameEntity_add

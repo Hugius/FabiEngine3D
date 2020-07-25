@@ -21,14 +21,17 @@ void WorldEditor::loadWaterEntity()
 
 		// Load base data
 		waterFile >>
-			_waterDudvmapPath >> _waterNormalmapPath >>
-			_waterWavingEnabled >> _waterRipplingEnabled >> _waterSpecularEnabled >> _waterReflectionEnabled >>
-			_waterRefractionEnabled >> _waterColor.r >> _waterColor.g >> _waterColor.b >> _waterSize >>
-			_waterUvRepeat >> _waterHeight >> _waterSpeed >> _waterTransparency >> _waterSpecularFactor >> _waterSpecularIntensity;
+			_waterDudvMapPath >> _waterNormalMapPath >> _waterDisplacementMapPath >>
+			_waterWavingEnabled >> _waterRipplingEnabled >> _waterSpecularEnabled >> 
+			_waterReflectionEnabled >> _waterRefractionEnabled >>
+			_waterColor.r >> _waterColor.g >> _waterColor.b >> 
+			_waterSize >> _waterPosition.x >> _waterPosition.y >> _waterPosition.z >>
+			_waterUvRepeat >> _waterSpeed >> _waterTransparency >> _waterSpecularFactor >> _waterSpecularIntensity;
 
 		// Perform checks
-		_waterDudvmapPath = (_waterDudvmapPath == "-" ? "" : _waterDudvmapPath);
-		_waterNormalmapPath = (_waterNormalmapPath == "-" ? "" : _waterNormalmapPath);
+		_waterDudvMapPath = (_waterDudvMapPath == "-" ? "" : _waterDudvMapPath);
+		_waterNormalMapPath = (_waterNormalMapPath == "-" ? "" : _waterNormalMapPath);
+		_waterDisplacementMapPath = (_waterDisplacementMapPath == "-" ? "" : _waterDisplacementMapPath);
 
 		// Close file
 		waterFile.close();
@@ -60,12 +63,19 @@ void WorldEditor::_saveWaterData()
 			// Load file
 			std::ofstream waterFile(waterPath);
 
+			// String value conversions
+			_waterDudvMapPath = (_waterDudvMapPath == "" ? "-" : _waterDudvMapPath);
+			_waterNormalMapPath = (_waterNormalMapPath == "" ? "-" : _waterNormalMapPath);
+			_waterDisplacementMapPath = (_waterDisplacementMapPath == "" ? "-" : _waterDisplacementMapPath);
+
 			// Write data to file
 			waterFile <<
-				(_waterDudvmapPath == "" ? "-" : _waterDudvmapPath) << " " << (_waterNormalmapPath == "" ? "-" : _waterNormalmapPath) << " " <<
-				_waterWavingEnabled << " " << _waterRipplingEnabled << " " << _waterSpecularEnabled << " " << _waterReflectionEnabled << " " <<
-				_waterRefractionEnabled << " " << _waterColor.r << " " << _waterColor.g << " " << _waterColor.b << " " << _waterSize << " " <<
-				_waterUvRepeat << " " << _waterHeight << " " << _waterSpeed << " " << _waterTransparency << " " <<
+				_waterDudvMapPath << " " << _waterNormalMapPath << " " << _waterDisplacementMapPath << " " <<
+				_waterWavingEnabled << " " << _waterRipplingEnabled << " " << _waterSpecularEnabled << " " << 
+				_waterReflectionEnabled << " " << _waterRefractionEnabled << " " << 
+				_waterColor.r << " " << _waterColor.g << " " << _waterColor.b << " " << 
+				_waterSize << " " << _waterPosition.x << " " << _waterPosition.y << " " << _waterPosition.z <<
+				_waterUvRepeat << " " << _waterSpeed << " " << _waterTransparency << " " <<
 				_waterSpecularFactor << " " << _waterSpecularIntensity;
 
 			// Close file
@@ -94,8 +104,8 @@ void WorldEditor::_unloadWaterData()
 	}
 
 	// Clear variables
-	_waterDudvmapPath = "";
-	_waterNormalmapPath = "";
+	_waterDudvMapPath = "";
+	_waterNormalMapPath = "";
 	_waterWavingEnabled = false;
 	_waterRipplingEnabled = false;
 	_waterSpecularEnabled = false;
@@ -104,7 +114,6 @@ void WorldEditor::_unloadWaterData()
 	_waterColor = vec3(0.0f);
 	_waterSize = 0.0f;
 	_waterUvRepeat = 0.0f;
-	_waterHeight = 0.0f;
 	_waterSpeed = 0.0f;
 	_waterTransparency = 0.0f;
 	_waterSpecularFactor = 16.0f;
@@ -114,23 +123,23 @@ void WorldEditor::_unloadWaterData()
 
 void WorldEditor::_loadWaterEntity()
 {
-	// Remove existing terrain
+	// Remove existing waterplane
 	if (_fe3d.waterEntity_isExisting("@water"))
 	{
 		_fe3d.waterEntity_delete("@water");
 	}
 
-	// Add new terrain
-	_fe3d.waterEntity_add("@water", vec3(0.0f, _waterHeight, 0.0f), _waterSize);
+	// Add new waterplane
+	_fe3d.waterEntity_add("@water", _waterSize);
+	_fe3d.waterEntity_setPosition("@water", _waterPosition);
 	_fe3d.waterEntity_select("@water");
 	_fe3d.waterEntity_setReflective("@water", _waterReflectionEnabled);
 	_fe3d.waterEntity_setRefractive("@water", _waterRefractionEnabled);
-	_fe3d.waterEntity_setWaving("@water", _waterWavingEnabled);
-	_fe3d.waterEntity_setRippling("@water", _waterDudvmapPath, _waterRipplingEnabled);
-	_fe3d.waterEntity_setSpecular("@water", _waterNormalmapPath, _waterSpecularFactor, _waterSpecularIntensity, _waterSpecularEnabled);
+	_fe3d.waterEntity_setWaving("@water", _waterDisplacementMapPath, _waterWaveHeightFactor, _waterWavingEnabled);
+	_fe3d.waterEntity_setRippling("@water", _waterDudvMapPath, _waterRipplingEnabled);
+	_fe3d.waterEntity_setSpecular("@water", _waterNormalMapPath, _waterSpecularFactor, _waterSpecularIntensity, _waterSpecularEnabled);
 	_fe3d.waterEntity_setTransparency("@water", _waterTransparency);
 	_fe3d.waterEntity_setColor("@water", _waterColor);
-	_fe3d.waterEntity_setSurfaceHeight("@water", _waterHeight);
 	_fe3d.waterEntity_setUvRepeat("@water", _waterUvRepeat);
 	_fe3d.waterEntity_setSpeed("@water", _waterSpeed);
 }

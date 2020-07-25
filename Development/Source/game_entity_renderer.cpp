@@ -27,7 +27,7 @@ void GameEntityRenderer::bind()
 	_shader.uploadUniform("u_directionalLightingIntensity", _shaderBus.getDirectionalLightIntensity());
 	_shader.uploadUniform("u_fogMinDistance",				_shaderBus.getFogMinDistance());
 	_shader.uploadUniform("u_specularLightingEnabled",		_shaderBus.isSpecularLightingEnabled());
-	_shader.uploadUniform("u_specularLightingStrength",		_shaderBus.getSpecularLightingStrength());
+	_shader.uploadUniform("u_specularLightingIntensity",		_shaderBus.getSpecularLightingIntensity());
 	_shader.uploadUniform("u_pointLightingEnabled",			_shaderBus.isPointLightingEnabled());
 	_shader.uploadUniform("u_lightMappingEnabled",			_shaderBus.isLightMappingEnabled());
 	_shader.uploadUniform("u_skyReflectionsEnabled",		_shaderBus.isSkyReflectionsEnabled());
@@ -112,7 +112,7 @@ void GameEntityRenderer::render(const GameEntity* entity)
 		// Shader uniforms
 		_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix());
 		_shader.uploadUniform("u_color", entity->getColor());
-		_shader.uploadUniform("u_specularLightingIntensity", entity->getSpecularIntensity());
+		_shader.uploadUniform("u_specularLightingFactor", entity->getSpecularFactor());
 		_shader.uploadUniform("u_isTransparent", entity->isTransparent());
 		_shader.uploadUniform("u_isLightmapped", entity->isLightMapped());
 		_shader.uploadUniform("u_isSkyReflective", entity->isSkyReflective());

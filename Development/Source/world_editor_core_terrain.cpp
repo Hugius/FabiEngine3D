@@ -62,7 +62,8 @@ void WorldEditor::_saveTerrainData()
 			std::ofstream terrainFile(terrainPath);
 
 			// Write base data to file
-			terrainFile << _terrainHeightmapPath << " " << _terrainDiffusemapPath << " " << _terrainSize << " " << _maxTerrainHeight << " " << _terrainUvRepeat << " " << _isTerrainBlendmapped << " " << _terrainLightness;
+			terrainFile << _terrainHeightmapPath << " " << _terrainDiffusemapPath << " " << _terrainSize << " " << 
+				_maxTerrainHeight << " " << _terrainUvRepeat << " " << _isTerrainBlendmapped << " " << _terrainLightness;
 
 			// Write blendmapping data to file
 			if (_isTerrainBlendmapped)

@@ -73,12 +73,11 @@ void ModelEditor::_updateCreationScreen()
 			string newModelName;
 
 			// Create new model
-			if (_gui->getGlobalScreen()->checkValueForm("newModelName", newModelName))
+			if (_gui->getGlobalScreen()->checkValueForm("newModelName", newModelName, {}))
 			{
-				// Remove forbidden character
-				if (newModelName != "@@grid" && newModelName != "@@cube")
+				// Starting with at-sign not allowed
+				if (newModelName[0] != '@')
 				{
-
 					// Add model and check if not already existing
 					if (_addModel("@" + newModelName, "", "", "", "", vec3(0.0f), 0, 1, 0, 0, 1.0f, vec3(1.0f), 1.0f, vec3(2.5f)))
 					{

@@ -115,9 +115,9 @@ void ShaderBus::setDirectionalLightIntensity(float val)
 	_directionalLightingIntensity = val;
 }
 
-void ShaderBus::setSpecularLightingStrength(float val)
+void ShaderBus::setSpecularLightingIntensity(float val)
 {
-	_specularLightingStrength = val;
+	_specularLightingIntensity = val;
 }
 
 void ShaderBus::setFogMinDistance(float val)
@@ -380,9 +380,9 @@ const float ShaderBus::getDirectionalLightIntensity() const
 	return _directionalLightingIntensity;
 }
 
-const float ShaderBus::getSpecularLightingStrength() const
+const float ShaderBus::getSpecularLightingIntensity() const
 {
-	return _specularLightingStrength;
+	return _specularLightingIntensity;
 }
 
 const float ShaderBus::getFogMinDistance() const

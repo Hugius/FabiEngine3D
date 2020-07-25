@@ -62,7 +62,7 @@ void ModelEditor::_updateEditingScreen()
 			bool hoverable = false;
 			if (existing)
 			{
-				hoverable = existing && !_fe3d.gameEntity_isMultiTextured(_currentModelName);
+				hoverable = true;
 
 				// Show OBJ model
 				_fe3d.gameEntity_show(_currentModelName);

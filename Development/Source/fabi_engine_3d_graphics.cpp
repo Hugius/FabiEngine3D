@@ -16,10 +16,10 @@ void FabiEngine3D::gfx_enableDirectionalLighting(vec3 position, vec3 color, floa
 	_core->_shaderBus.setDirectionalLightIntensity(intensity);
 }
 
-void FabiEngine3D::gfx_enableSpecularLighting(float strength)
+void FabiEngine3D::gfx_enableSpecularLighting(float intensity)
 {
 	_core->_shaderBus.setSpecularLightingEnabled(true);
-	_core->_shaderBus.setSpecularLightingStrength(strength);
+	_core->_shaderBus.setSpecularLightingIntensity(intensity);
 }
 
 void FabiEngine3D::gfx_enablePointLighting()

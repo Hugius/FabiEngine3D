@@ -110,7 +110,8 @@ private:
 	float _waterHeight = 0.0f;
 	float _waterSpeed = 0.0f;
 	float _waterTransparency = 0.0f;
-	float _waterShininess = 16.0f;
+	float _waterSpecularFactor = 16.0f;
+	float _waterSpecularIntensity = 1.0f;
 	float _waterCameraHeight = 0.0f;
 	float _waterCameraDistance = 0.0f;
 	float _waterHeightSpeed = 0.1f;

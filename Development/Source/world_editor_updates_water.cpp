@@ -123,7 +123,7 @@ void WorldEditor::_updateWaterManagement()
 			_fe3d.waterEntity_setRefractive("@water", _waterRefractionEnabled);
 			_fe3d.waterEntity_setWaving("@water", _waterWavingEnabled);
 			_fe3d.waterEntity_setRippling("@water", _waterDudvmapPath, _waterRipplingEnabled);
-			_fe3d.waterEntity_setSpecular("@water", _waterNormalmapPath, _waterShininess, _waterSpecularEnabled);
+			_fe3d.waterEntity_setSpecular("@water", _waterNormalmapPath, _waterSpecularFactor, _waterSpecularIntensity, _waterSpecularEnabled);
 			_fe3d.waterEntity_setTransparency("@water", _waterTransparency);
 			_fe3d.waterEntity_setColor("@water", _waterColor);
 			_fe3d.waterEntity_setSurfaceHeight("@water", _waterHeight);
@@ -288,9 +288,13 @@ void WorldEditor::_updateWaterOptions()
 				_gui->getGlobalScreen()->addValueForm("colorR", "R(0-255)", _waterColor.r * 255.0f, vec2(-0.25f, 0.0f), vec2(0.15f, 0.1f));
 				_gui->getGlobalScreen()->addValueForm("colorB", "B(0-255)", _waterColor.b * 255.0f, vec2(0.25f, 0.0f), vec2(0.15f, 0.1f));
 			}
-			else if (screen->getScrollingList("buttonList")->getButton("shininess")->isHovered())
+			else if (screen->getScrollingList("buttonList")->getButton("factor")->isHovered())
 			{
-				_gui->getGlobalScreen()->addValueForm("shininess", "Shininess(0 - 256)", _waterShininess, vec2(0.0f), vec2(0.3f, 0.1f));
+				_gui->getGlobalScreen()->addValueForm("factor", "Specular factor(0 - 256)", _waterSpecularFactor, vec2(0.0f), vec2(0.3f, 0.1f));
+			}
+			else if (screen->getScrollingList("buttonList")->getButton("intensity")->isHovered())
+			{
+				_gui->getGlobalScreen()->addValueForm("intensity", "Specular intensity", _waterSpecularIntensity * 100.0f, vec2(0.0f), vec2(0.3f, 0.1f));
 			}
 			else if (screen->getButton("back")->isHovered())
 			{
@@ -328,10 +332,16 @@ void WorldEditor::_updateWaterOptions()
 			_waterColor.b = std::clamp(_waterColor.b / 255.0f, 0.0f, 1.0f);
 		}
 
-		// Check if shininess confirmed
-		if (_gui->getGlobalScreen()->checkValueForm("shininess", _waterShininess))
+		// Check if factor confirmed
+		if (_gui->getGlobalScreen()->checkValueForm("factor", _waterSpecularFactor))
 		{
-			_waterShininess = std::clamp(_waterShininess, 0.0f, 256.0f);
+			_waterSpecularFactor = std::clamp(_waterSpecularFactor, 0.0f, 256.0f);
+		}
+
+		// Check if intensity confirmed
+		if (_gui->getGlobalScreen()->checkValueForm("intensity", _waterSpecularIntensity))
+		{
+			_waterSpecularIntensity /= 100.0f;
 		}
 	}
 }

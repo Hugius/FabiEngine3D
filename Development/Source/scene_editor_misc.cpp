@@ -94,7 +94,7 @@ void SceneEditor::_placeModel(string modelID, string modelName, vec3 position, v
 
 void SceneEditor::_placeModel(string modelID, vec3 position, vec3 rotation, vec3 size,
 	string objPath, string diffuseMapPath, string lightMapPath, string reflectionMapPath,
-	bool faceCulled, bool shadowed, bool transparent, bool specular, float specularIntensity, vec3 color, float uvRepeat, vec3 aabbSize)
+	bool faceCulled, bool shadowed, bool transparent, bool specular, float specularFactor, vec3 color, float uvRepeat, vec3 aabbSize)
 {
 	// Add game entity
 	_fe3d.gameEntity_add(modelID, objPath, position, rotation, size);
@@ -105,7 +105,7 @@ void SceneEditor::_placeModel(string modelID, vec3 position, vec3 rotation, vec3
 	_fe3d.gameEntity_setShadowed(modelID, shadowed);
 	_fe3d.gameEntity_setTransparent(modelID, transparent);
 	_fe3d.gameEntity_setSpecularLighted(modelID, specular);
-	_fe3d.gameEntity_setSpecularIntensity(modelID, specularIntensity);
+	_fe3d.gameEntity_setSpecularFactor(modelID, specularFactor);
 	_fe3d.gameEntity_setColor(modelID, color);
 	_fe3d.gameEntity_setUvRepeat(modelID, uvRepeat);
 

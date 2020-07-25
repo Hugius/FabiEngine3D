@@ -41,9 +41,14 @@ void WaterEntity::setTimeZ(float val)
 	_timeZ = val;
 }
 
-void WaterEntity::setShininess(float val)
+void WaterEntity::setSpecularLightingFactor(float val)
 {
-	_shininess = val;
+	_specularLightingFactor = val;
+}
+
+void WaterEntity::setSpecularLightingIntensity(float val)
+{
+	_specularLightingIntensity = val;
 }
 
 void WaterEntity::setWaving(bool val)
@@ -126,9 +131,14 @@ const float WaterEntity::getTimeZ() const
 	return _timeZ;
 }
 
-const float WaterEntity::getShininess() const
+const float WaterEntity::getSpecularLightingFactor() const
 {
-	return _shininess;
+	return _specularLightingFactor;
+}
+
+const float WaterEntity::getSpecularLightingIntensity() const
+{
+	return _specularLightingIntensity;
 }
 
 const float WaterEntity::getSurfaceHeight() const

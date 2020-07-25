@@ -41,12 +41,16 @@ private:
 	GLint _getUniLoc(const string & uniformName) 
 	{
 		auto it = _uniformMap.find(uniformName);
-		if (it == _uniformMap.end()) { // Add location to the map
+		if (it == _uniformMap.end()) // Add location to the map
+		{
 			GLint loc = glGetUniformLocation(_program, uniformName.c_str());
-			if (loc == -1) {
+			if (loc == -1) 
+			{
 				Logger::getInst().throwWarning("Uniform " + uniformName + " not found in shader " + _name);
 			}
+
 			_uniformMap.insert(std::make_pair(uniformName, loc));
+
 			return loc;
 		}
 		else {

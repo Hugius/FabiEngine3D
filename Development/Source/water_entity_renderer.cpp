@@ -7,15 +7,15 @@ void WaterEntityRenderer::bind()
 	_shader.bind();
 
 	// Global shader uniforms
-	_shader.uploadUniform("u_viewMatrix",       _shaderBus.getViewMatrix());
-	_shader.uploadUniform("u_projectionMatrix", _shaderBus.getProjectionMatrix());
-	_shader.uploadUniform("u_directionalLightingPosition",      _shaderBus.getDirectionalLightPos());
-	_shader.uploadUniform("u_cameraPosition",        _shaderBus.getCameraPos());
-	_shader.uploadUniform("u_fogEnabled",       _shaderBus.isFogEnabled());
-	_shader.uploadUniform("u_fogMinDistance",   _shaderBus.getFogMinDistance());
-	_shader.uploadUniform("u_effectsEnabled",   _shaderBus.isWaterEffectsEnabled());
-	_shader.uploadUniform("u_nearZ",            _shaderBus.getNearZ());
-	_shader.uploadUniform("u_farZ",             _shaderBus.getFarZ());
+	_shader.uploadUniform("u_viewMatrix",				   _shaderBus.getViewMatrix());
+	_shader.uploadUniform("u_projectionMatrix",			   _shaderBus.getProjectionMatrix());
+	_shader.uploadUniform("u_directionalLightingPosition", _shaderBus.getDirectionalLightPos());
+	_shader.uploadUniform("u_cameraPosition",			   _shaderBus.getCameraPos());
+	_shader.uploadUniform("u_fogEnabled",				   _shaderBus.isFogEnabled());
+	_shader.uploadUniform("u_fogMinDistance",			   _shaderBus.getFogMinDistance());
+	_shader.uploadUniform("u_effectsEnabled",			   _shaderBus.isWaterEffectsEnabled());
+	_shader.uploadUniform("u_nearZ",					   _shaderBus.getNearZ());
+	_shader.uploadUniform("u_farZ",						   _shaderBus.getFarZ());
 
 	// Depth testing
 	glEnable(GL_DEPTH_TEST);
@@ -44,7 +44,8 @@ void WaterEntityRenderer::render(const WaterEntity* entity)
 		//_shader.uploadUniform("u_timeZ", entity->getTimeZ());
 		_shader.uploadUniform("u_customHeightOffset", entity->getSurfaceHeight());
 		_shader.uploadUniform("u_uvRepeat", entity->getUvRepeat());
-		_shader.uploadUniform("u_specularLightingFactor", entity->getShininess());
+		_shader.uploadUniform("u_specularLightingFactor", entity->getSpecularLightingFactor());
+		_shader.uploadUniform("u_specularLightingIntensity", entity->getSpecularLightingIntensity());
 		_shader.uploadUniform("u_transparency", entity->getTransparency());
 		//_shader.uploadUniform("u_waving", entity->isWaving());
 		_shader.uploadUniform("u_isRippling", entity->isRippling());

@@ -22,6 +22,7 @@ uniform vec3  u_color;
 uniform float u_ripplePos;
 uniform float u_fogMinDistance;
 uniform float u_specularLightingFactor;
+uniform float u_specularLightingIntensity;
 uniform float u_nearZ;
 uniform float u_farZ;
 uniform float u_transparency;
@@ -95,7 +96,7 @@ vec4 getMainColor()
 		vec3 lightDir     = normalize(u_directionalLightingPosition - f_pos);
 		vec3 viewDir      = normalize(f_pos - u_cameraPosition);
 		vec3 reflectDir   = reflect(normalize(lightDir), normal);
-		specular = pow(max(dot(reflectDir, viewDir), 0.0f), u_specularLightingFactor) * 0.5f;
+		specular = pow(max(dot(reflectDir, viewDir), 0.0f), u_specularLightingFactor) * u_specularLightingIntensity;
 	}
 
 	// Finalizing fragment color

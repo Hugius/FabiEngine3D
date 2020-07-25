@@ -24,7 +24,7 @@ void WorldEditor::loadWaterEntity()
 			_waterDudvmapPath >> _waterNormalmapPath >>
 			_waterWavingEnabled >> _waterRipplingEnabled >> _waterSpecularEnabled >> _waterReflectionEnabled >>
 			_waterRefractionEnabled >> _waterColor.r >> _waterColor.g >> _waterColor.b >> _waterSize >>
-			_waterUvRepeat >> _waterHeight >> _waterSpeed >> _waterTransparency >> _waterShininess;
+			_waterUvRepeat >> _waterHeight >> _waterSpeed >> _waterTransparency >> _waterSpecularFactor >> _waterSpecularIntensity;
 
 		// Perform checks
 		_waterDudvmapPath = (_waterDudvmapPath == "-" ? "" : _waterDudvmapPath);
@@ -65,7 +65,8 @@ void WorldEditor::_saveWaterData()
 				(_waterDudvmapPath == "" ? "-" : _waterDudvmapPath) << " " << (_waterNormalmapPath == "" ? "-" : _waterNormalmapPath) << " " <<
 				_waterWavingEnabled << " " << _waterRipplingEnabled << " " << _waterSpecularEnabled << " " << _waterReflectionEnabled << " " <<
 				_waterRefractionEnabled << " " << _waterColor.r << " " << _waterColor.g << " " << _waterColor.b << " " << _waterSize << " " <<
-				_waterUvRepeat << " " << _waterHeight << " " << _waterSpeed << " " << _waterTransparency << " " << _waterShininess;
+				_waterUvRepeat << " " << _waterHeight << " " << _waterSpeed << " " << _waterTransparency << " " <<
+				_waterSpecularFactor << " " << _waterSpecularIntensity;
 
 			// Close file
 			waterFile.close();
@@ -106,7 +107,7 @@ void WorldEditor::_unloadWaterData()
 	_waterHeight = 0.0f;
 	_waterSpeed = 0.0f;
 	_waterTransparency = 0.0f;
-	_waterShininess = 16.0f;
+	_waterSpecularFactor = 16.0f;
 	_waterCameraHeight = 0.0f;
 	_waterCameraDistance = 0.0f;
 }
@@ -126,7 +127,7 @@ void WorldEditor::_loadWaterEntity()
 	_fe3d.waterEntity_setRefractive("@water", _waterRefractionEnabled);
 	_fe3d.waterEntity_setWaving("@water", _waterWavingEnabled);
 	_fe3d.waterEntity_setRippling("@water", _waterDudvmapPath, _waterRipplingEnabled);
-	_fe3d.waterEntity_setSpecular("@water", _waterNormalmapPath, _waterShininess, _waterSpecularEnabled);
+	_fe3d.waterEntity_setSpecular("@water", _waterNormalmapPath, _waterSpecularFactor, _waterSpecularIntensity, _waterSpecularEnabled);
 	_fe3d.waterEntity_setTransparency("@water", _waterTransparency);
 	_fe3d.waterEntity_setColor("@water", _waterColor);
 	_fe3d.waterEntity_setSurfaceHeight("@water", _waterHeight);

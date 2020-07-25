@@ -61,7 +61,7 @@ private:
 	// Miscellaneous
 	void _placeModel(string modelID, string modelName, vec3 position, vec3 rotation, vec3 size);
 	void _placeModel(string modelID, vec3 position, vec3 rotation, vec3 size, string objPath, string diffuseMapPath, string lightMapPath, string reflectionMapPath,
-		bool faceCulled, bool shadowed, bool transparent, bool specular, float specularIntensity, vec3 color, float uvRepeat, vec3 aabbSize);
+		bool faceCulled, bool shadowed, bool transparent, bool specular, float specularFactor, vec3 color, float uvRepeat, vec3 aabbSize);
 	void _updateModelBlinking(string modelID, int& multiplier);
 	void _updateLightbulbAnimation(string modelID, int& multiplier);
 	void _handleValueChanging(string screenID, string buttonID, string wfID, float& value, float adder, float multiplier = 1.0f,

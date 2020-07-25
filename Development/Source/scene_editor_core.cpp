@@ -249,13 +249,13 @@ void SceneEditor::loadWorld()
 			{
 				string modelID, objPath, diffuseMapPath, lightMapPath, reflectionMapPath;
 				vec3 position, rotation, size, color, aabbSize;
-				float uvRepeat, specularIntensity;
+				float uvRepeat, specularFactor;
 				bool isFaceculled, isShadowed, isTransparent, isSpecular, isFrozen;
 
 				// Load model data
 				iss >> modelID >> position.x >> position.y >> position.z >> rotation.x >> rotation.y >> rotation.z >> 
 					size.x >> size.y >> size.z >> objPath >> diffuseMapPath >> lightMapPath >> reflectionMapPath >>
-					isFaceculled >> isShadowed >> isTransparent >> isSpecular >> isFrozen >> specularIntensity >> 
+					isFaceculled >> isShadowed >> isTransparent >> isSpecular >> isFrozen >> specularFactor >> 
 					color.r >> color.g >> color.b >> uvRepeat >> aabbSize.x >> aabbSize.y >> aabbSize.z;
 
 				// Run checks on string values
@@ -276,7 +276,7 @@ void SceneEditor::loadWorld()
 
 				// Add the model
 				_placeModel(modelID, position, rotation, size, objPath, diffuseMapPath, lightMapPath, reflectionMapPath, isFaceculled, isShadowed, isTransparent, isSpecular,
-					specularIntensity, color, uvRepeat, aabbSize);
+					specularFactor, color, uvRepeat, aabbSize);
 			}
 			else if (entityType == "BILLBOARD")
 			{
@@ -354,7 +354,7 @@ void SceneEditor::save()
 				auto isTransparent = _fe3d.gameEntity_isTransparent(entityID);
 				auto isSpecular = _fe3d.gameEntity_isSpecularLighted(entityID);
 				auto isFrozen = _fe3d.gameEntity_isStaticToCamera(entityID);
-				auto specularIntensity = _fe3d.gameEntity_getSpecularIntensity(entityID);
+				auto specularFactor = _fe3d.gameEntity_getSpecularFactor(entityID);
 				auto color = _fe3d.gameEntity_getColor(entityID);
 				auto uvRepeat = _fe3d.gameEntity_getUvRepeat(entityID);
 				auto aabbSize = _fe3d.aabbEntity_getSize(entityID);
@@ -369,7 +369,7 @@ void SceneEditor::save()
 					rotation.x << " " << rotation.y << " " << rotation.z << " " << size.x << " " << size.y << " " << size.z << " " <<
 					objPath << " " << diffuseMapPath << " " << lightMapPath << " " << reflectionMapPath << " " <<
 					isFaceCulled << " " << isShadowed << " " << isTransparent << " " << isSpecular << " " << isFrozen << " " << 
-					specularIntensity << " " << color.r << " " << color.g << " " << color.b << " " << uvRepeat << " " <<
+					specularFactor << " " << color.r << " " << color.g << " " << color.b << " " << uvRepeat << " " <<
 					aabbSize.x << " " << aabbSize.y << " " << aabbSize.z << "\n";
 			}
 		}

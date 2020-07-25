@@ -116,7 +116,7 @@ public:
 	void waterEntity_setRefractive(const string& ID, bool enabled);
 	void waterEntity_setWaving(const string& ID, bool enabled);
 	void waterEntity_setRippling(const string& ID, const string& dudvMapPath, bool enabled);
-	void waterEntity_setSpecular(const string& ID, const string& normalMapPath, float shininess, bool enabled);
+	void waterEntity_setSpecular(const string& ID, const string& normalMapPath, float factor, float intensity, bool enabled);
 	void waterEntity_setTransparency(const string& ID, float transparency);
 	void waterEntity_setColor(const string& ID, vec3 color);
 	void waterEntity_setSurfaceHeight(const string& ID, float height);
@@ -172,14 +172,14 @@ public:
 	void		   gameEntity_setSize(const string& ID, vec3 size);
 	void		   gameEntity_enable(const string& ID);
 	void		   gameEntity_disable(const string& ID);
-	void		   gameEntity_setSpecularIntensity(const string& ID, float intensity);
+	void		   gameEntity_setSpecularFactor(const string& ID, float intensity);
 	void		   gameEntity_setLightness(const string& ID, float lightness);
 	void		   gameEntity_setAlpha(const string& ID, float alpha);
 	void		   gameEntity_setColor(const string& ID, vec3 color);
 	void		   gameEntity_setMaxY(const string& ID, float y);
 	void		   gameEntity_setUvRepeat(const string& ID, float repeat);
 	float		   gameEntity_getLightness(const string& ID);
-	float		   gameEntity_getSpecularIntensity(const string& ID);
+	float		   gameEntity_getSpecularFactor(const string& ID);
 	float		   gameEntity_getAlpha(const string& ID);
 	float		   gameEntity_getMaxY(const string& ID);
 	float		   gameEntity_getUvRepeat(const string& ID);
@@ -372,7 +372,7 @@ public:
 	// Graphics interface
 	void gfx_enableAmbientLighting(vec3 color, float intensity);
 	void gfx_enableDirectionalLighting(vec3 position, vec3 color, float intensity);
-	void gfx_enableSpecularLighting(float strength);
+	void gfx_enableSpecularLighting(float intensity);
 	void gfx_enablePointLighting();
 	void gfx_enableFog(float minDistance);
 	void gfx_enableSkyReflections(float factor);

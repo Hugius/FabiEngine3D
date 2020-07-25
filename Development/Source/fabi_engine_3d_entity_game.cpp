@@ -293,9 +293,9 @@ void FabiEngine3D::gameEntity_disable(const string& ID)
 	_core->_gameEntityManager.getEntity(ID)->setEnabled(false);
 }
 
-void FabiEngine3D::gameEntity_setSpecularIntensity(const string& ID, float intensity)
+void FabiEngine3D::gameEntity_setSpecularFactor(const string& ID, float intensity)
 {
-	_core->_gameEntityManager.getEntity(ID)->setSpecularIntensity(intensity);
+	_core->_gameEntityManager.getEntity(ID)->setSpecularFactor(intensity);
 }
 
 void FabiEngine3D::gameEntity_setLightness(const string& ID, float lightness)
@@ -323,9 +323,9 @@ float FabiEngine3D::gameEntity_getLightness(const string& ID)
 	return _core->_gameEntityManager.getEntity(ID)->getLightness();
 }
 
-float FabiEngine3D::gameEntity_getSpecularIntensity(const string& ID)
+float FabiEngine3D::gameEntity_getSpecularFactor(const string& ID)
 {
-	return _core->_gameEntityManager.getEntity(ID)->getSpecularIntensity();
+	return _core->_gameEntityManager.getEntity(ID)->getSpecularFactor();
 }
 
 float FabiEngine3D::gameEntity_getAlpha(const string& ID)

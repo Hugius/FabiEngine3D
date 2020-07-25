@@ -38,7 +38,7 @@ public:
 	// Floats
 	void setAmbientLightIntensity(float val);
 	void setDirectionalLightIntensity(float val);
-	void setSpecularLightingStrength(float val);
+	void setSpecularLightingIntensity(float val);
 	void setFogMinDistance(float val);
 	void setBloomIntensity(float val);
 	void setBloomTreshold(float val);
@@ -103,7 +103,7 @@ public:
 	// Floats
 	const float getAmbientLightIntensity()	   const;
 	const float getDirectionalLightIntensity() const;
-	const float getSpecularLightingStrength()  const;
+	const float getSpecularLightingIntensity()  const;
 	const float getFogMinDistance()			   const;
 	const float getBloomIntensity()			   const;
 	const float getBloomTreshold()			   const;
@@ -169,7 +169,7 @@ private:
 	// Floats
 	float _ambientLightingIntensity     = 0.0f;
 	float _directionalLightingIntensity = 0.0f;
-	float _specularLightingStrength		= 0.0f;
+	float _specularLightingIntensity		= 0.0f;
 	float _fogMinDistance               = 0.0f;
 	float _bloomIntensity               = 0.0f;
 	float _bloomTreshold                = 0.0f;

@@ -25,47 +25,21 @@ void ModelEditor::_updateModelEditingOptions()
 		{
 			_fe3d.gameEntity_setSpecularLighted(_currentModelName, !_fe3d.gameEntity_isSpecularLighted(_currentModelName));
 		}
-		else if (screen->getButton("intensity")->isHovered())
+		else if (screen->getButton("factor")->isHovered())
 		{
-			_gui->getGlobalScreen()->addValueForm("intensity", "Specular intensity", 
-				_fe3d.gameEntity_getSpecularIntensity(_currentModelName), vec2(0.0f, 0.1f), vec2(0.1f, 0.1f));
+			_gui->getGlobalScreen()->addValueForm("factor", "Specular factor",
+				_fe3d.gameEntity_getSpecularFactor(_currentModelName), vec2(0.0f, 0.1f), vec2(0.1f, 0.1f));
 		}
 		else if (screen->getButton("setColor")->isHovered())
 		{
-			_modelColorPicking = true;
-
-			// Add textfields and writefields
-			_gui->getGlobalScreen()->addTextfield("modelColorR", vec2(-0.3f, 0.1f), vec2(0.025f, 0.1f), "R", vec3(1.0f));
-			_gui->getGlobalScreen()->addTextfield("modelColorG", vec2(0.0f, 0.1f), vec2(0.025f, 0.1f), "G", vec3(1.0f));
-			_gui->getGlobalScreen()->addTextfield("modelColorB", vec2(0.3f, 0.1f), vec2(0.025f, 0.1f), "B", vec3(1.0f));
-			_gui->getGlobalScreen()->addWriteField("modelColorR", vec2(-0.3f, 0.0f), vec2(0.2f, 0.1f), vec3(0.25f), vec3(0.5f), vec3(1.0f), vec3(0.0f), 0, 1, 1, 1, 0);
-			_gui->getGlobalScreen()->addWriteField("modelColorG", vec2(0.0f, 0.0f), vec2(0.2f, 0.1f), vec3(0.25f), vec3(0.5f), vec3(1.0f), vec3(0.0f), 0, 1, 1, 1, 0);
-			_gui->getGlobalScreen()->addWriteField("modelColorB", vec2(0.3f, 0.0f), vec2(0.2f, 0.1f), vec3(0.25f), vec3(0.5f), vec3(1.0f), vec3(0.0f), 0, 1, 1, 1, 0);
-			_gui->getGlobalScreen()->addButton("done", vec2(0.0f, -0.2f), vec2(0.15f, 0.1f), vec3(0.0f, 0.5f, 0.0f), vec3(0.0f, 1.0f, 0.0f), "Done", vec3(1.0f), vec3(0.0f));
-
-			// Set default model size
-			vec3 currentColor = _fe3d.gameEntity_getColor(_currentModelName);
-			_gui->getGlobalScreen()->getWriteField("modelColorR")->setTextContent(std::to_string(int(currentColor.x * 255.0f)));
-			_gui->getGlobalScreen()->getWriteField("modelColorG")->setTextContent(std::to_string(int(currentColor.y * 255.0f)));
-			_gui->getGlobalScreen()->getWriteField("modelColorB")->setTextContent(std::to_string(int(currentColor.z * 255.0f)));
-
-			// Set GUI focus
-			_gui->getGlobalScreen()->setFocus(true);
+			std::cout << _fe3d.gameEntity_getColor(_currentModelName).g << std::endl;
+			_gui->getGlobalScreen()->addValueForm("colorG", "G(0-255)", _fe3d.gameEntity_getColor(_currentModelName).g * 255.0f, vec2(0.0f, 0.0f), vec2(0.2f, 0.1f));
+			_gui->getGlobalScreen()->addValueForm("colorR", "R(0-255)", _fe3d.gameEntity_getColor(_currentModelName).r * 255.0f, vec2(-0.25f, 0.0f), vec2(0.2f, 0.1f));
+			_gui->getGlobalScreen()->addValueForm("colorB", "B(0-255)", _fe3d.gameEntity_getColor(_currentModelName).b * 255.0f, vec2(0.25f, 0.0f), vec2(0.2f, 0.1f));
 		}
 		else if (screen->getButton("uvRepeat")->isHovered())
 		{
-			_settingModelUvRepeat = true;
-
-			_gui->getGlobalScreen()->addTextfield("uvRepeat", vec2(0.0f, 0.1f), vec2(0.25f, 0.1f), "UV repeat", vec3(1.0f));
-			_gui->getGlobalScreen()->addWriteField("uvRepeat", vec2(-0.0f, 0.0f), vec2(0.2f, 0.1f), vec3(0.25f), vec3(0.5f), vec3(1.0f), vec3(0.0f), 0, 1, 1, 1, 0);
-			_gui->getGlobalScreen()->addButton("done", vec2(0.0f, -0.2f), vec2(0.15f, 0.1f), vec3(0.0f, 0.5f, 0.0f), vec3(0.0f, 1.0f, 0.0f), "Done", vec3(1.0f), vec3(0.0f));
-
-			// Set default model UV repeat
-			float currentRepeat = _fe3d.gameEntity_getUvRepeat(_currentModelName);
-			_gui->getGlobalScreen()->getWriteField("uvRepeat")->setTextContent(std::to_string(int(currentRepeat)));
-
-			// Set GUI focus
-			_gui->getGlobalScreen()->setFocus(true);
+			_gui->getGlobalScreen()->addValueForm("uvRepeat", "UV Repeat", _fe3d.gameEntity_getUvRepeat(_currentModelName), vec2(0.0f, 0.0f), vec2(0.2f, 0.1f));
 		}
 		else if (screen->getButton("back")->isHovered())
 		{
@@ -87,93 +61,29 @@ void ModelEditor::_updateModelEditingOptions()
 	_fe3d.textEntity_setTextContent(transparentID, isTransparent ? "No-white: ON" : "No-white: OFF");
 	_fe3d.textEntity_setTextContent(specularID, isSpecular ? "Specular: ON" : "Specular: OFF");
 
-	// Update specular intensity
+	// Update specular factor
 	if (_fe3d.gameEntity_isSpecularLighted(_currentModelName))
 	{
-		float intensity = _fe3d.gameEntity_getSpecularIntensity(_currentModelName);
-		_gui->getGlobalScreen()->checkValueForm("intensity", intensity);
-		_fe3d.gameEntity_setSpecularIntensity(_currentModelName, intensity);
+		float factor = _fe3d.gameEntity_getSpecularFactor(_currentModelName);
+		_gui->getGlobalScreen()->checkValueForm("factor", factor);
+		_fe3d.gameEntity_setSpecularFactor(_currentModelName, factor);
 	}
 
-	// Update specular intensity button hoverability
-	screen->getButton("intensity")->setHoverable(_fe3d.gameEntity_isSpecularLighted(_currentModelName));
+	// Update specular factor button hoverability
+	screen->getButton("factor")->setHoverable(_fe3d.gameEntity_isSpecularLighted(_currentModelName));
 
-	// Update model color changing through buttons
-	if (_modelColorPicking)
-	{
-		// Current model size
-		vec3 newColor = _fe3d.gameEntity_getColor(_currentModelName);
+	// Setting model color
+	vec3 newColor = _fe3d.gameEntity_getColor(_currentModelName) * 255.0f;
+	_gui->getGlobalScreen()->checkValueForm("colorR", newColor.r, { });
+	_gui->getGlobalScreen()->checkValueForm("colorG", newColor.g, { });
+	_gui->getGlobalScreen()->checkValueForm("colorB", newColor.b, { });
+	newColor.r = std::clamp(newColor.r / 255.0f, 0.0f, 1.0f);
+	newColor.g = std::clamp(newColor.g / 255.0f, 0.0f, 1.0f);
+	newColor.b = std::clamp(newColor.b / 255.0f, 0.0f, 1.0f);
+	_fe3d.gameEntity_setColor(_currentModelName, newColor);
 
-		// R
-		if (_gui->getGlobalScreen()->getWriteField("modelColorR")->getTextContent() != "")
-		{
-			newColor.x = float(stoi(_gui->getGlobalScreen()->getWriteField("modelColorR")->getTextContent())) / 255.0f;
-			newColor.x = std::clamp(newColor.x, 0.0f, 1.0f);
-		}
-
-		// G
-		if (_gui->getGlobalScreen()->getWriteField("modelColorG")->getTextContent() != "")
-		{
-			newColor.y = float(stoi(_gui->getGlobalScreen()->getWriteField("modelColorG")->getTextContent())) / 255.0f;
-			newColor.y = std::clamp(newColor.y, 0.0f, 1.0f);
-		}
-
-		// B
-		if (_gui->getGlobalScreen()->getWriteField("modelColorB")->getTextContent() != "")
-		{
-			newColor.z = float(stoi(_gui->getGlobalScreen()->getWriteField("modelColorB")->getTextContent())) / 255.0f;
-			newColor.z = std::clamp(newColor.z, 0.0f, 1.0f);
-		}
-
-		// Set new model color
-		_fe3d.gameEntity_setColor(_currentModelName, newColor);
-
-		// Done button
-		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
-		{
-			if (_gui->getGlobalScreen()->getButton("done")->isHovered())
-			{
-				_modelColorPicking = false;
-
-				_gui->getGlobalScreen()->deleteTextfield("modelColorR");
-				_gui->getGlobalScreen()->deleteWriteField("modelColorR");
-				_gui->getGlobalScreen()->deleteTextfield("modelColorG");
-				_gui->getGlobalScreen()->deleteWriteField("modelColorG");
-				_gui->getGlobalScreen()->deleteTextfield("modelColorB");
-				_gui->getGlobalScreen()->deleteWriteField("modelColorB");
-				_gui->getGlobalScreen()->deleteButton("done");
-				_gui->getGlobalScreen()->setFocus(false);
-			}
-		}
-	}
-
-	// Update changing model UV repeat through buttons
-	if (_settingModelUvRepeat)
-	{
-		// Current UV repeat
-		float newUvRepeat = _fe3d.gameEntity_getUvRepeat(_currentModelName);
-
-		// Reading writefield
-		if (_gui->getGlobalScreen()->getWriteField("uvRepeat")->getTextContent() != "")
-		{
-			newUvRepeat = float(stoi(_gui->getGlobalScreen()->getWriteField("uvRepeat")->getTextContent()));
-		}
-
-		// Set new model UV repeat
-		_fe3d.gameEntity_setUvRepeat(_currentModelName, newUvRepeat);
-
-		// Done button
-		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
-		{
-			if (_gui->getGlobalScreen()->getButton("done")->isHovered())
-			{
-				_settingModelUvRepeat = false;
-
-				_gui->getGlobalScreen()->deleteTextfield("uvRepeat");
-				_gui->getGlobalScreen()->deleteWriteField("uvRepeat");
-				_gui->getGlobalScreen()->deleteButton("done");
-				_gui->getGlobalScreen()->setFocus(false);
-			}
-		}
-	}
+	// Setting model UV repeat
+	float newUvRepeat = _fe3d.gameEntity_getUvRepeat(_currentModelName);
+	_gui->getGlobalScreen()->checkValueForm("uvRepeat", newUvRepeat, { });
+	_fe3d.gameEntity_setUvRepeat(_currentModelName, newUvRepeat);
 }

@@ -132,7 +132,8 @@ void WorldEditor::initializeGUI()
 	_leftWindow->getScreen("waterOptions")->getScrollingList("buttonList")->addButton("speed", "Water speed");
 	_leftWindow->getScreen("waterOptions")->getScrollingList("buttonList")->addButton("transparency", "Transparency");
 	_leftWindow->getScreen("waterOptions")->getScrollingList("buttonList")->addButton("color", "Color");
-	_leftWindow->getScreen("waterOptions")->getScrollingList("buttonList")->addButton("shininess", "Shininess");
+	_leftWindow->getScreen("waterOptions")->getScrollingList("buttonList")->addButton("factor", "Specular factor");
+	_leftWindow->getScreen("waterOptions")->getScrollingList("buttonList")->addButton("intensity", "Specular intensity");
 	_leftWindow->getScreen("waterOptions")->addButton("back", vec2(0.0f, -0.9f), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
 }
 
@@ -223,7 +224,7 @@ void WorldEditor::unload()
 	_waterHeight = 0.0f;
 	_waterSpeed = 0.0f;
 	_waterTransparency = 0.0f;
-	_waterShininess = 16.0f;
+	_waterSpecularFactor = 16.0f;
 	_waterCameraHeight = 0.0f;
 	_waterCameraDistance = 0.0f;
 	_waterHeightSpeed = 0.1f;

@@ -79,12 +79,13 @@ void FabiEngine3D::waterEntity_setColor(const string& ID, vec3 color)
 	_core->_waterEntityManager.getEntity(ID)->setColor(color);
 }
 
-void FabiEngine3D::waterEntity_setSpecular(const string& ID, const string& normalMapPath, float shininess, bool enabled)
+void FabiEngine3D::waterEntity_setSpecular(const string& ID, const string& normalMapPath, float factor, float intensity, bool enabled)
 {
 	if (enabled)
 	{
 		_core->_waterEntityManager.getEntity(ID)->setNormalMap(_core->_texLoader.getTexture(normalMapPath, true, true));
-		_core->_waterEntityManager.getEntity(ID)->setShininess(shininess);
+		_core->_waterEntityManager.getEntity(ID)->setSpecularLightingFactor(factor);
+		_core->_waterEntityManager.getEntity(ID)->setSpecularLightingIntensity(intensity);
 	}
 
 	_core->_waterEntityManager.getEntity(ID)->setSpecular(enabled);

@@ -37,8 +37,8 @@ uniform float u_pointLightIntensities[POINT_LIGHT_AMOUNT];
 uniform float u_pointLightDistanceFactors[POINT_LIGHT_AMOUNT];
 uniform float u_ambientLightingIntensity;
 uniform float u_directionalLightingIntensity;
+uniform float u_specularLightingFactor;
 uniform float u_specularLightingIntensity;
-uniform float u_specularLightingStrength;
 uniform float u_fogMinDistance;
 uniform float u_skyReflectionMixValue;
 uniform float u_customAlpha;
@@ -216,10 +216,10 @@ float getSpecularValue(vec3 position)
         vec3 lightDirection   = normalize(f_pos - position);
         vec3 viewDirection    = normalize(f_pos - u_cameraPosition);
         vec3 reflectDirection = reflect(-lightDirection, f_normal);
-        float result          = pow(max(dot(viewDirection, reflectDirection), 0.0f), u_specularLightingIntensity);
+        float result          = pow(max(dot(viewDirection, reflectDirection), 0.0f), u_specularLightingFactor);
 
         // Return
-        return result * u_specularLightingStrength;
+        return result * u_specularLightingIntensity;
     }
     else
     {

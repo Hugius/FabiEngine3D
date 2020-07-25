@@ -211,21 +211,6 @@ bool FabiEngine3D::gameEntity_isStaticToCamera(const string& ID)
 	return _core->_gameEntityManager.getEntity(ID)->isCameraStatic();
 }
 
-bool FabiEngine3D::gameEntity_hasDiffuseMap(const string& ID)
-{
-	return _core->_gameEntityManager.getEntity(ID)->hasDiffuseMap();
-}
-
-bool FabiEngine3D::gameEntity_hasLightMap(const string& ID)
-{
-	return _core->_gameEntityManager.getEntity(ID)->hasLightMap();
-}
-
-bool FabiEngine3D::gameEntity_hasReflectionMap(const string& ID)
-{
-	return _core->_gameEntityManager.getEntity(ID)->hasReflectionMap();
-}
-
 void FabiEngine3D::gameEntity_move(const string& ID, vec3 factor)
 {
 	_core->_gameEntityManager.getEntity(ID)->translate(factor);

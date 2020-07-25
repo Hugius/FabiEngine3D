@@ -1,4 +1,5 @@
 #pragma once
+
 #include "base_entity_renderer.hpp"
 #include "billboard_entity.hpp"
 

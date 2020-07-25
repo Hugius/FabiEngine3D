@@ -58,10 +58,36 @@ void GameEntityManager::addGameEntity
 		// OpenGL buffer
 		getEntity(ID)->addOglBuffer(new OpenGLBuffer(SHAPE_3D, &data[0], data.size()));
 
-		// Load model-specified texture
-		if (part.textureName != "")
+		// Load an OBJ part diffuse map
+		if (part.diffuseMapName != "")
 		{
-			getEntity(ID)->addDiffuseMap(_texLoader.getTexture("User\\Assets\\Textures\\DiffuseMaps\\" + part.textureName, true, true, true));
+			getEntity(ID)->addDiffuseMap(_texLoader.getTexture("User\\Assets\\Textures\\DiffuseMaps\\" + part.diffuseMapName, true, true, true));
+		}
+		else
+		{
+			getEntity(ID)->addDiffuseMap(0);
+		}
+
+		// Load an OBJ part light map
+		if (part.lightMapName != "")
+		{
+			getEntity(ID)->setLightMapped(true);
+			getEntity(ID)->addLightMap(_texLoader.getTexture("User\\Assets\\Textures\\LightMaps\\" + part.lightMapName, true, true, true));
+		}
+		else
+		{
+			getEntity(ID)->addLightMap(0);
+		}
+
+		// Load an OBJ part light map
+		if (part.reflectionMapName != "")
+		{
+			getEntity(ID)->setSkyReflective(true);
+			getEntity(ID)->addReflectionMap(_texLoader.getTexture("User\\Assets\\Textures\\ReflectionMaps\\" + part.reflectionMapName, true, true, true));
+		}
+		else
+		{
+			getEntity(ID)->addReflectionMap(0);
 		}
 	}
 

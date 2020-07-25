@@ -1,4 +1,5 @@
 #pragma once
+
 #include <vector>
 #include <map>
 #include <string>
@@ -11,7 +12,10 @@ using glm::vec3;
 
 struct ObjPart 
 {
-	string textureName;
+	string partName;
+	string diffuseMapName;
+	string lightMapName;
+	string reflectionMapName;
 	
 	vector<vec3> vertices;
 	vector<vec2> uvCoords;

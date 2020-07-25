@@ -1,12 +1,12 @@
 #pragma once
 
+#include "base_entity.hpp"
+
 #include <GLM\\glm.hpp>
-#include <GLM\\gtc/matrix_transform.hpp>
+#include <GLM\\gtc\\matrix_transform.hpp>
 
 using glm::ivec2;
 using glm::mat4;
-
-#include "base_entity.hpp"
 
 class BillboardEntity final: public BaseEntity
 {

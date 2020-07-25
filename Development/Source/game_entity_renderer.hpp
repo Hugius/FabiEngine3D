@@ -1,4 +1,5 @@
 #pragma once
+
 #include "base_entity_renderer.hpp"
 #include "game_entity.hpp"
 #include "light_entity.hpp"

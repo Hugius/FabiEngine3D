@@ -1,4 +1,5 @@
 #pragma once
+
 #include "base_entity_manager.hpp"
 
 class SkyEntityManager final : public BaseEntityManager

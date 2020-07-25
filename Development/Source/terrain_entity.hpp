@@ -1,4 +1,5 @@
 #pragma once
+
 #include "base_entity.hpp"
 
 class TerrainEntity final: public BaseEntity

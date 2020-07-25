@@ -17,8 +17,10 @@ void SceneEditor::_updateModelScreen()
 				{
 					_leftWindow->setActiveScreen("chooseModel");
 
-					// Prepare scrolling list
+					// Clear all buttons from scrolling list
 					_leftWindow->getScreen("chooseModel")->getScrollingList("modelList")->deleteButtons();
+
+					// Add every placed model name
 					for (auto& modelName : _fe3d.gameEntity_getAllIDs())
 					{
 						// Check if model is not a preview model
@@ -92,7 +94,26 @@ void SceneEditor::_updateModelChoosingScreen()
 		{
 			auto screen = _leftWindow->getScreen("chooseModel");
 
-			// Loop over every created model
+			// Update scrollinglist content every 1/10 second
+			static int lastMS = 0;
+			if (abs(_fe3d.misc_getMsTimeSinceEpoch() - lastMS) > 100)
+			{
+				// Remove deleted models from the scrolLinglist buttons
+				for (auto& button : _leftWindow->getScreen("chooseModel")->getScrollingList("modelList")->getButtons())
+				{
+					// Check if model is still existing
+					if (!_fe3d.gameEntity_isExisting(button->getID()))
+					{
+						// Delete button
+						_leftWindow->getScreen("chooseModel")->getScrollingList("modelList")->deleteButton(button->getID());
+					}
+				}
+
+				// Set last time
+				lastMS = _fe3d.misc_getMsTimeSinceEpoch();
+			}
+
+			// Loop over every placed model
 			for (auto& modelName : _fe3d.gameEntity_getAllIDs())
 			{
 				// Check if model is not a preview model

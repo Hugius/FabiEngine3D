@@ -1,13 +1,13 @@
 #pragma once
 
+#include "base_entity.hpp"
+
 #include <GLEW\\glew.h>
 #include <GLM\\glm.hpp>
 
 using glm::vec2;
 using glm::vec3;
 using glm::mat4;
-
-#include "base_entity.hpp"
 
 class GuiEntity : public BaseEntity
 {

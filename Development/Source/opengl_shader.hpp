@@ -1,5 +1,7 @@
 #pragma once
 
+#include "logger.hpp"
+
 #include <GLEW\\glew.h>
 #include <map>
 #include <GLM\\glm.hpp>
@@ -11,8 +13,6 @@ using glm::vec4;
 using glm::mat3;
 using glm::mat4;
 using std::map;
-
-#include "logger.hpp"
 
 class OpenGLShader final
 {

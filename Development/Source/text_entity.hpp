@@ -1,4 +1,5 @@
 #pragma once
+
 #include "gui_entity.hpp"
 
 class TextEntity final : public GuiEntity

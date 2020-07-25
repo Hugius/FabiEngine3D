@@ -1,10 +1,10 @@
 #pragma once
 
+#include "base_entity.hpp"
+
 #include <GLM\\glm.hpp>
 
 using glm::mat4;
-
-#include "base_entity.hpp"
 
 class SkyEntity final : public BaseEntity
 {

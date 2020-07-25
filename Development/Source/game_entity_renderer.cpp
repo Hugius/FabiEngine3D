@@ -147,7 +147,7 @@ void GameEntityRenderer::render(const GameEntity* entity)
 			}
 
 			// Light map
-			if (entity->isLightMapped())
+			if (entity->hasLightMap())
 			{
 				glActiveTexture(GL_TEXTURE1);
 				glBindTexture(GL_TEXTURE_2D, entity->getLightMap(index));

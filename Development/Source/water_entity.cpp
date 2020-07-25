@@ -1,4 +1,5 @@
 #pragma once
+
 #include "water_entity.hpp"
 
 void WaterEntity::setColor(vec3 val)

@@ -15,7 +15,7 @@ vector<ObjPart> & OBJLoader::loadOBJ(const string & filePath)
 		_objPartsMap.insert(std::make_pair(filePath, _loadOBJ(filePath))); // Insert new data
 		goto begin;
 	}
-	else 
+	else
 	{
 		return iterator->second; // Return the corresponding OBJ parts
 	}
@@ -33,10 +33,13 @@ vector<ObjPart> OBJLoader::_loadOBJ(const string& filePath)
 {
 	// Declare variables
 	vector<ObjPart> objParts;
-	vector<vec3> tem_positions;
-	vector<vec2> tem_uvs;
-	vector<vec3> tem_normals;
-	string selectedTextureName = "";
+	vector<vec3> temp_positions;
+	vector<vec2> temp_uvs;
+	vector<vec3> temp_normals;
+	string selectedPartName = "";
+	string tempDiffuseMapName = "";
+	string tempLightMapName = "";
+	string tempReflectionMapName = "";
 
 	// Get application root directory
 	char buffer[256]; size_t len = sizeof(buffer);
@@ -68,29 +71,70 @@ vector<ObjPart> OBJLoader::_loadOBJ(const string& filePath)
 		{
 			vec3 vertex;
 			fscanf(file, "%f %f %f\n", &vertex.x, &vertex.y, &vertex.z);
-			tem_positions.push_back(vertex);
+			temp_positions.push_back(vertex);
+
 			continue;
 		}
 		else if (strcmp(lineHeader, "vt") == 0) // Uv coords
 		{
 			vec2 uv;
 			fscanf(file, "%f %f\n", &uv.x, &uv.y);
-			tem_uvs.push_back(uv);
+			temp_uvs.push_back(uv);
+
 			continue;
 		}
 		else if (strcmp(lineHeader, "vn") == 0) // Normals
 		{
 			vec3 normal;
 			fscanf(file, "%f %f %f\n", &normal.x, &normal.y, &normal.z);
-			tem_normals.push_back(normal);
+			temp_normals.push_back(normal);
+
 			continue;
 		}
-		else if (strcmp(lineHeader, "FE3DTexture") == 0) // Material
+		else if (strcmp(lineHeader, "FE3D_PART") == 0) // New part
 		{
-			char temp[101];
-			fscanf(file, "%100s\n", temp);
-			string material = temp;
-			selectedTextureName = material;
+			char name[128];
+			fscanf(file, "%s\n", name);
+			selectedPartName = name;
+
+			// Reset material names
+			tempDiffuseMapName = "";
+			tempLightMapName = "";
+			tempReflectionMapName = "";
+
+			continue;
+		}
+		else if (strcmp(lineHeader, "FE3D_DIFFUSE_MAP") == 0) // Diffuse material
+		{
+			if (selectedPartName != "")
+			{
+				char name[128];
+				fscanf(file, "%s\n", name);
+				tempDiffuseMapName = name;
+			}
+
+			continue;
+		}
+		else if (strcmp(lineHeader, "FE3D_LIGHT_MAP") == 0) // Light material
+		{
+			if (selectedPartName != "")
+			{
+				char name[128];
+				fscanf(file, "%s\n", name);
+				tempLightMapName = name;
+			}
+
+			continue;
+		}
+		else if (strcmp(lineHeader, "FE3D_REFLECTION_MAP") == 0) // Light material
+		{
+			if (selectedPartName != "")
+			{
+				char name[128];
+				fscanf(file, "%s\n", name);
+				tempReflectionMapName = name;
+			}
+
 			continue;
 		}
 		else if (strcmp(lineHeader, "f") == 0) // Faces (triangle data)
@@ -102,7 +146,12 @@ vector<ObjPart> OBJLoader::_loadOBJ(const string& filePath)
 			int matches;
 
 			// Read face indices
-			matches = fscanf(file, "%d/%d/%d %d/%d/%d %d/%d/%d\n", &posIndex[0], &uvIndex[0], &normalIndex[0], &posIndex[1], &uvIndex[1], &normalIndex[1], &posIndex[2], &uvIndex[2], &normalIndex[2]);
+			matches = fscanf(file, "%d/%d/%d %d/%d/%d %d/%d/%d\n", 
+				&posIndex[0], &uvIndex[0], &normalIndex[0], 
+				&posIndex[1], &uvIndex[1], &normalIndex[1], 
+				&posIndex[2], &uvIndex[2], &normalIndex[2]);
+
+			// Check if face amount is correct (3x3)
 			if (matches != 9)
 			{
 				Logger::getInst().throwError("Too many or not enough faces at file: " + filePath);
@@ -110,20 +159,26 @@ vector<ObjPart> OBJLoader::_loadOBJ(const string& filePath)
 
 			bool alreadyExisting = false;
 
-			// Add to existing OBJ part
+			// Check if able to add to existing OBJ part
 			for (auto & objPart : objParts)
 			{
-				if (objPart.textureName == selectedTextureName)
+				// Find OBJ part
+				if (objPart.partName == selectedPartName)
 				{
 					alreadyExisting = true;
 
 					// Add vertices
 					for (int i = 0; i < 3; i++)
 					{
-						objPart.vertices.push_back(tem_positions[posIndex[i] - 1]);
-						objPart.uvCoords.push_back(tem_uvs[uvIndex[i] - 1]);
-						objPart.normals.push_back(tem_normals[normalIndex[i] - 1]);
+						objPart.vertices.push_back(temp_positions[posIndex[i] - 1]);
+						objPart.uvCoords.push_back(temp_uvs[uvIndex[i] - 1]);
+						objPart.normals.push_back(temp_normals[normalIndex[i] - 1]);
 					}
+
+					// Set material names
+					objPart.diffuseMapName = tempDiffuseMapName;
+					objPart.lightMapName = tempLightMapName;
+					objPart.reflectionMapName = tempReflectionMapName;
 
 					break;
 				}
@@ -137,13 +192,16 @@ vector<ObjPart> OBJLoader::_loadOBJ(const string& filePath)
 				// Add vertices
 				for (int i = 0; i < 3; i++)
 				{
-					newPart.vertices.push_back(tem_positions[posIndex[i] - 1]);
-					newPart.uvCoords.push_back(tem_uvs[uvIndex[i] - 1]);
-					newPart.normals.push_back(tem_normals[normalIndex[i] - 1]);
+					newPart.vertices.push_back(temp_positions[posIndex[i] - 1]);
+					newPart.uvCoords.push_back(temp_uvs[uvIndex[i] - 1]);
+					newPart.normals.push_back(temp_normals[normalIndex[i] - 1]);
 				}
 
-				// Set texture name
-				newPart.textureName = selectedTextureName;
+				// Set OBJ part names
+				newPart.partName = selectedPartName;
+				newPart.diffuseMapName = tempDiffuseMapName;
+				newPart.lightMapName = tempLightMapName;
+				newPart.reflectionMapName = tempReflectionMapName;
 
 				// Add new OBJ part
 				objParts.push_back(newPart);

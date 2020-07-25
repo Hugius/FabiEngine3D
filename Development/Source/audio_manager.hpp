@@ -1,10 +1,10 @@
 #pragma once
 
-#include <vector>
-
 #include "audio_chunk.hpp"
 #include "audio_music.hpp"
 #include "audio_loader.hpp"
+
+#include <vector>
 
 class AudioManager final
 {

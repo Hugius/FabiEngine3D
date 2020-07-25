@@ -10,7 +10,6 @@
 #include <GLM\\glm.hpp>
 #include <type_traits>
 
-
 using std::string;
 using glm::vec3;
 

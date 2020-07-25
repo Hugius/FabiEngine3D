@@ -1,11 +1,11 @@
 #pragma once
 
+#include "base_entity.hpp"
+
 #include <GLM\\glm.hpp>
 
 using glm::vec3;
 using glm::mat4;
-
-#include "base_entity.hpp"
 
 enum class CollisionDir 
 { 

@@ -1,5 +1,8 @@
 #pragma once
 
+#include "input_types.hpp"
+#include "logger.hpp"
+
 #include <GLM\\glm.hpp>
 #include <string>
 #include <vector>
@@ -17,9 +20,6 @@ using std::unique_ptr;
 using std::shared_ptr;
 using std::make_unique;
 using std::make_shared;
-
-#include "input_types.hpp"
-#include "logger.hpp"
 
 class CoreEngine;
 
@@ -161,9 +161,6 @@ public:
 	bool		   gameEntity_isSceneReflective(const string& ID);
 	bool		   gameEntity_isShadowed(const string& ID);
 	bool		   gameEntity_isStaticToCamera(const string& ID);
-	bool		   gameEntity_hasDiffuseMap(const string& ID);
-	bool		   gameEntity_hasLightMap(const string& ID);
-	bool		   gameEntity_hasReflectionMap(const string& ID);
 	void		   gameEntity_move(const string& ID, vec3 factor);
 	void		   gameEntity_rotate(const string& ID, vec3 factor);
 	void		   gameEntity_scale(const string& ID, vec3 factor);

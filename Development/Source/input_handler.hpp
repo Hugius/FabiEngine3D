@@ -1,13 +1,13 @@
 #pragma once
 
+#include "input_types.hpp"
+#include "logger.hpp"
+#include "Timer.hpp"
+
 #include <SDL\\SDL.h>
 #include <vector>
 
 using std::vector;
-
-#include "input_types.hpp"
-#include "logger.hpp"
-#include "Timer.hpp"
 
 class InputHandler final
 {

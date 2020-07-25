@@ -1,5 +1,7 @@
 #include "billboard_editor.hpp"
 
+#include <algorithm>
+
 void BillboardEditor::update()
 {
 	_updateBillboardManagement();
@@ -177,7 +179,7 @@ void BillboardEditor::_updateBillboardCamera()
 		if (_currentBillboardID != "" || _hoveredBillboardID != "")
 		{
 			vec2 billboardSize = _fe3d.billboardEntity_getSize((_currentBillboardID != "") ? _currentBillboardID : _hoveredBillboardID);
-			float cameraDistance = (max(billboardSize.x, billboardSize.y) * 2.0f);
+			float cameraDistance = (std::max(billboardSize.x, billboardSize.y) * 2.0f);
 			float cameraHeight = _billboardPosition.y + (billboardSize.y / 2.0f);
 
 			// Get scroll wheel input

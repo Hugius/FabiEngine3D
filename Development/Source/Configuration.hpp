@@ -1,12 +1,13 @@
 #pragma once
+
+#include "logger.hpp"
+
 #include <fstream>
 #include <GLM\\glm.hpp>
 #include <sstream>
 
 using glm::ivec2;
 using glm::ivec4;
-
-#include "logger.hpp"
 
 class Config
 {

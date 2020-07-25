@@ -1,5 +1,9 @@
 #pragma once
 
+#include "audio_chunk.hpp"
+#include "audio_music.hpp"
+#include "camera_manager.hpp"
+
 #include <map>
 #include <string>
 #include <vector>
@@ -8,10 +12,6 @@
 using glm::vec3;
 using glm::mat4;
 using std::string;
-
-#include "audio_chunk.hpp"
-#include "audio_music.hpp"
-#include "camera_manager.hpp"
 
 class AudioPlayer final
 {

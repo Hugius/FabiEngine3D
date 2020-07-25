@@ -1,4 +1,5 @@
 #pragma once
+
 #include "base_entity.hpp"
 #include "opengl_shader.hpp"
 #include "sky_entity.hpp"

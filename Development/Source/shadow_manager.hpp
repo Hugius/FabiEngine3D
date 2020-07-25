@@ -1,11 +1,11 @@
 #pragma once
 
+#include "shader_bus.hpp"
+
 #include <GLM\\glm.hpp>
 
 using glm::vec3;
 using glm::mat4;
-
-#include "shader_bus.hpp"
 
 class ShadowManager final
 {

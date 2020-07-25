@@ -1,10 +1,10 @@
 #pragma once
 
+#include "opengl_buffer.hpp"
+
 #include <string>
 
 using std::string;
-
-#include "opengl_buffer.hpp"
 
 class BaseEntity
 {

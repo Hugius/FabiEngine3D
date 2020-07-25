@@ -1,4 +1,5 @@
 #pragma once
+
 #include "base_entity.hpp"
 
 class LightEntity final : public BaseEntity

@@ -11,7 +11,7 @@ void WorldEditor::loadWaterEntity()
 		_fe3d.logger_throwError("Tried to load as empty project!");
 	}
 
-	string waterPath = _fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\water.fe3d";
+	string waterPath = _fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\Data\\water.fe3d";
 
 	// Load water file
 	if (_fe3d.misc_isFileExisting(waterPath))
@@ -21,14 +21,29 @@ void WorldEditor::loadWaterEntity()
 
 		// Load base data
 		waterFile >>
-			_waterDudvMapPath >> _waterNormalMapPath >> _waterDisplacementMapPath >>
-			_waterWavingEnabled >> _waterRipplingEnabled >> _waterSpecularEnabled >> 
-			_waterReflectionEnabled >> _waterRefractionEnabled >>
-			_waterColor.r >> _waterColor.g >> _waterColor.b >> 
-			_waterSize >> _waterPosition.x >> _waterPosition.y >> _waterPosition.z >>
-			_waterUvRepeat >> _waterSpeed >> _waterTransparency >> _waterSpecularFactor >> _waterSpecularIntensity;
-
-		// Perform checks
+			_waterDudvMapPath >>
+			_waterNormalMapPath >>
+			_waterDisplacementMapPath >>
+			_waterWavingEnabled >>
+			_waterRipplingEnabled >>
+			_waterSpecularEnabled >> 
+			_waterReflectionEnabled >>
+			_waterRefractionEnabled >>
+			_waterColor.r >> 
+			_waterColor.g >> 
+			_waterColor.b >> 
+			_waterSize >> 
+			_waterPosition.x >> 
+			_waterPosition.y >> 
+			_waterPosition.z >>
+			_waterUvRepeat >>
+			_waterWaveHeightFactor >>
+			_waterSpeed >> 
+			_waterTransparency >>
+			_waterSpecularFactor >> 
+			_waterSpecularIntensity;
+		
+		// Perform empty string conversions
 		_waterDudvMapPath = (_waterDudvMapPath == "-" ? "" : _waterDudvMapPath);
 		_waterNormalMapPath = (_waterNormalMapPath == "-" ? "" : _waterNormalMapPath);
 		_waterDisplacementMapPath = (_waterDisplacementMapPath == "-" ? "" : _waterDisplacementMapPath);
@@ -55,7 +70,7 @@ void WorldEditor::_saveWaterData()
 			_fe3d.logger_throwError("Tried to save as empty project!");
 		}
 
-		string waterPath = _fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\water.fe3d";
+		string waterPath = _fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\Data\\water.fe3d";
 
 		// Save water dat
 		if (_fe3d.waterEntity_isExisting("@water"))
@@ -70,13 +85,27 @@ void WorldEditor::_saveWaterData()
 
 			// Write data to file
 			waterFile <<
-				_waterDudvMapPath << " " << _waterNormalMapPath << " " << _waterDisplacementMapPath << " " <<
-				_waterWavingEnabled << " " << _waterRipplingEnabled << " " << _waterSpecularEnabled << " " << 
-				_waterReflectionEnabled << " " << _waterRefractionEnabled << " " << 
-				_waterColor.r << " " << _waterColor.g << " " << _waterColor.b << " " << 
-				_waterSize << " " << _waterPosition.x << " " << _waterPosition.y << " " << _waterPosition.z <<
-				_waterUvRepeat << " " << _waterSpeed << " " << _waterTransparency << " " <<
-				_waterSpecularFactor << " " << _waterSpecularIntensity;
+				_waterDudvMapPath << " " << 
+				_waterNormalMapPath << " " << 
+				_waterDisplacementMapPath << " " <<
+				_waterWavingEnabled << " " << 
+				_waterRipplingEnabled << " " << 
+				_waterSpecularEnabled << " " << 
+				_waterReflectionEnabled << " " << 
+				_waterRefractionEnabled << " " << 
+				_waterColor.r << " " << 
+				_waterColor.g << " " << 
+				_waterColor.b << " " << 
+				_waterSize << " " << 
+				_waterPosition.x << " " << 
+				_waterPosition.y << " " <<
+				_waterPosition.z << " " <<
+				_waterUvRepeat << " " << 
+				_waterWaveHeightFactor << " " <<
+				_waterSpeed << " " << 
+				_waterTransparency << " " <<
+				_waterSpecularFactor << " " <<
+				_waterSpecularIntensity << std::endl;
 
 			// Close file
 			waterFile.close();
@@ -116,7 +145,7 @@ void WorldEditor::_unloadWaterData()
 	_waterUvRepeat = 0.0f;
 	_waterSpeed = 0.0f;
 	_waterTransparency = 0.0f;
-	_waterSpecularFactor = 16.0f;
+	_waterSpecularFactor = 0.0f;
 	_waterCameraHeight = 0.0f;
 	_waterCameraDistance = 0.0f;
 }

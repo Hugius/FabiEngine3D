@@ -224,7 +224,7 @@ void SceneEditor::loadWorld()
 		_fe3d.logger_throwError("Tried to load as empty project!");
 	}
 
-	string modelsPath = _fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\scene.fe3d";
+	string modelsPath = _fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\Scenes\\scene.fe3d";
 
 	// Load world file
 	if (_fe3d.misc_isFileExisting(modelsPath)) // Check if models file exists
@@ -333,7 +333,7 @@ void SceneEditor::save()
 
 		// Create or overwrite models file
 		std::ofstream file;
-		file.open(_fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\scene.fe3d");
+		file.open(_fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\Scenes\\scene.fe3d");
 
 		// Write game entities data into file
 		for (auto& entityID : _fe3d.gameEntity_getAllIDs())
@@ -359,29 +359,62 @@ void SceneEditor::save()
 				auto uvRepeat = _fe3d.gameEntity_getUvRepeat(entityID);
 				auto aabbSize = _fe3d.aabbEntity_getSize(entityID);
 
-				// String value conversions
+				// Perform empty string conversions
 				diffuseMapPath = (diffuseMapPath == "") ? "-" : diffuseMapPath;
 				lightMapPath = (lightMapPath == "") ? "-" : lightMapPath;
 				reflectionMapPath = (reflectionMapPath == "") ? "-" : reflectionMapPath;
 
 				// 1 model -> 1 line in file
-				file << "MODEL " << entityID << " " << position.x << " " << position.y << " " << position.z << " " <<
-					rotation.x << " " << rotation.y << " " << rotation.z << " " << size.x << " " << size.y << " " << size.z << " " <<
-					objPath << " " << diffuseMapPath << " " << lightMapPath << " " << reflectionMapPath << " " <<
-					isFaceCulled << " " << isShadowed << " " << isTransparent << " " << isSpecular << " " << isFrozen << " " << 
-					specularFactor << " " << color.r << " " << color.g << " " << color.b << " " << uvRepeat << " " <<
-					aabbSize.x << " " << aabbSize.y << " " << aabbSize.z << "\n";
+				file << 
+					"MODEL " <<
+					entityID << " " <<
+					position.x << " " <<
+					position.y << " " <<
+					position.z << " " <<
+					rotation.x << " " <<
+					rotation.y << " " <<
+					rotation.z << " " <<
+					size.x << " " <<
+					size.y << " " <<
+					size.z << " " <<
+					objPath << " " <<
+					diffuseMapPath << " " <<
+					lightMapPath << " " <<
+					reflectionMapPath << " " <<
+					isFaceCulled << " " <<
+					isShadowed << " " <<
+					isTransparent << " " <<
+					isSpecular << " " <<
+					isFrozen << " " << 
+					specularFactor << " " <<
+					color.r << " " <<
+					color.g << " " <<
+					color.b << " " <<
+					uvRepeat << " " <<
+					aabbSize.x << " " <<
+					aabbSize.y << " " <<
+					aabbSize.z << std::endl;
 			}
 		}
 
 		// Ambient light
-		file << "AMBIENT " << _ambientLightColor.r << " " << _ambientLightColor.g << " " <<
-			_ambientLightColor.b << " " << _ambientLightIntensity << "\n";
+		file << 
+			"AMBIENT " <<
+			_ambientLightColor.r << " " <<
+			_ambientLightColor.g << " " <<
+			_ambientLightColor.b << " " <<
+			_ambientLightIntensity << std::endl;
 
 		// Directional light
-		file << "DIRECTIONAL " << _directionalLightPosition.x << " " << _directionalLightPosition.y << " " <<
-			_directionalLightPosition.z << " " << _directionalLightColor.r << " " << _directionalLightColor.g << " " <<
-			_directionalLightColor.b << " " << _directionalLightIntensity << "\n";
+		file << 
+			"DIRECTIONAL " <<
+			_directionalLightPosition.x << " " <<
+			_directionalLightPosition.y << " " <<
+			_directionalLightPosition.z << " " <<
+			_directionalLightColor.r << " " <<
+			_directionalLightColor.g << " " <<
+			_directionalLightColor.b << " " <<
+			_directionalLightIntensity << std::endl;
 
 		// Point lights
 		for (auto& entityID : _fe3d.lightEntity_getAllIDs())
@@ -395,13 +428,22 @@ void SceneEditor::save()
 				auto distance = _fe3d.lightEntity_getDistanceFactor(entityID);
 
 				// Write line to file
-				file << "POINT " << entityID << " " << position.x << " " << position.y << " " << position.z << " " <<
-					color.r << " " << color.g << " " << color.b << " " << intensity << " " << distance << "\n";
+				file << 
+					"POINT " <<
+					entityID << " " <<
+					position.x << " " <<
+					position.y << " " <<
+					position.z << " " <<
+					color.r << " " <<
+					color.g << " " <<
+					color.b << " " <<
+					intensity << " " <<
+					distance << std::endl;
 			}
 		}
 
 		// Editor camera speed
-		file << "SPEED " << _customCameraSpeed << "\n";
+		file << "SPEED " << _customCameraSpeed << std::endl;
 
 		// Close file
 		file.close();

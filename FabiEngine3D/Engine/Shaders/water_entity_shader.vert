@@ -18,7 +18,7 @@ uniform vec3 u_customPositionOffset;
 // Float uniforms
 uniform float u_uvRepeat;
 uniform float u_waveOffset;
-uniform float u_waveHeight;
+uniform float u_waveHeightFactor;
 
 // Boolean uniforms
 uniform bool u_isWaving;
@@ -46,7 +46,7 @@ void main()
 		// Get size of 1 texel of this texture
 		float texelSize = 1.0f / textureSize(u_sampler_displacementMap, 0).x;
 
-		// Floor and ceil to nearest texel
+		// Floor and ceil to nearest texels
 		float height1 = texture(u_sampler_displacementMap, f_uv + vec2(u_waveOffset - mod(u_waveOffset, 1.0f))).r;
 		float height2 = texture(u_sampler_displacementMap, f_uv + vec2(u_waveOffset + mod(u_waveOffset, 1.0f))).r;
 
@@ -54,11 +54,11 @@ void main()
 		float height = height1 + ((height2 - height1) / 2.0f);
 
 		// Add height to vertex Y
-		newPos.y += height * u_waveHeight;
+		newPos.y += height * u_waveHeightFactor;
 	}
 
 	// Camera spaces
-	vec4 worldSpace = vec4(v_pos, 1.0);
+	vec4 worldSpace = vec4(newPos, 1.0);
 	vec4 clipSpace  = u_projectionMatrix * u_viewMatrix * vec4(newPos, 1.0);
 
 	// GLSL variables

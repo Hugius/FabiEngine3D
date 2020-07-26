@@ -93,7 +93,7 @@ void BillboardEditor::load()
 	}
 
 	// Create or overwrite billboards file
-	std::ifstream file(_fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\billboards.fe3d");
+	std::ifstream file(_fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\Data\\billboards.fe3d");
 	string line;
 
 	// Read model data
@@ -110,10 +110,25 @@ void BillboardEditor::load()
 		std::istringstream iss(line);
 
 		// Extract from file
-		iss >> name >> size.x >> size.y >> color.r >> color.g >> color.b >> facingX >> facingY >> diffusePath >>
-			transparent >> fontPath >> content >> playing >> rows >> columns >> framestep;
+		iss >> 
+			name >>
+			size.x >>
+			size.y >> 
+			color.r >>
+			color.g >>
+			color.b >> 
+			facingX >>
+			facingY >> 
+			diffusePath >>
+			transparent >>
+			fontPath >>
+			content >> 
+			playing >>
+			rows >> 
+			columns >> 
+			framestep;
 		
-		// Run checks on string values
+		// Perform empty string conversions
 		diffusePath = (diffusePath == "-") ? "" : diffusePath;
 		fontPath = (fontPath == "-") ? "" : fontPath;
 		content = (content == "-") ? "" : content;
@@ -165,12 +180,12 @@ void BillboardEditor::save()
 
 		// Create or overwrite billboards file
 		std::ofstream file;
-		file.open(_fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\billboards.fe3d");
+		file.open(_fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\Data\\billboards.fe3d");
 
 		// Write billboard data into file
 		for (auto& billboardName : _billboardNames)
 		{
-			// Convert string values
+			// Perform empty string conversions
 			string diffusePath = _fe3d.billboardEntity_getDiffuseMapPath(billboardName);
 			string fontPath = _fe3d.billboardEntity_getFontPath(billboardName);
 			string textContent = _fe3d.billboardEntity_getTextContent(billboardName);
@@ -179,15 +194,22 @@ void BillboardEditor::save()
 			textContent = (textContent == "") ? "-" : textContent;
 
 			// Export data
-			file << billboardName
-				<< " " << _fe3d.billboardEntity_getSize(billboardName).x << " " << _fe3d.billboardEntity_getSize(billboardName).y
-				<< " " << _fe3d.billboardEntity_getColor(billboardName).r << " " << _fe3d.billboardEntity_getColor(billboardName).g
-				<< " " << _fe3d.billboardEntity_getColor(billboardName).b << " " << _fe3d.billboardEntity_isFacingCameraX(billboardName)
-				<< " " << _fe3d.billboardEntity_isFacingCameraY(billboardName) << " " << diffusePath
-				<< " " << _fe3d.billboardEntity_isTransparent(billboardName) << " " << fontPath << " " << textContent
-				<< " " << _fe3d.billboardEntity_isAnimationPlaying(billboardName) << " " << _fe3d.billboardEntity_getAnimationRows(billboardName)
-				<< " " << _fe3d.billboardEntity_getAnimationColumns(billboardName) << " " << _fe3d.billboardEntity_getAnimationFramestep(billboardName)
-				<< std::endl;
+			file << billboardName << " " <<
+				_fe3d.billboardEntity_getSize(billboardName).x << " " <<
+				_fe3d.billboardEntity_getSize(billboardName).y << " " <<
+				_fe3d.billboardEntity_getColor(billboardName).r << " " <<
+				_fe3d.billboardEntity_getColor(billboardName).g << " " <<
+				_fe3d.billboardEntity_getColor(billboardName).b << " " <<
+				_fe3d.billboardEntity_isFacingCameraX(billboardName) << " " <<
+				_fe3d.billboardEntity_isFacingCameraY(billboardName) << " " <<
+				diffusePath << " " <<
+				_fe3d.billboardEntity_isTransparent(billboardName) << " " <<
+				fontPath << " " <<
+				textContent << " " << 
+				_fe3d.billboardEntity_isAnimationPlaying(billboardName) << " " << 
+				_fe3d.billboardEntity_getAnimationRows(billboardName) << " " <<
+				_fe3d.billboardEntity_getAnimationColumns(billboardName) << " " << 
+				_fe3d.billboardEntity_getAnimationFramestep(billboardName) << std::endl;
 		}
 
 		// Close file

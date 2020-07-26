@@ -83,25 +83,6 @@ void WorldEditor::_updateWaterManagement()
 			else if (screen->getButton("back")->isHovered())
 			{
 				_leftWindow->setActiveScreen("waterMenu");
-
-				// Hide sky
-				if (_fe3d.skyEntity_isExisting("@sky"))
-				{
-					_fe3d.skyEntity_hide("@sky");
-					_fe3d.skyEntity_select("@defaultSky");
-				}
-
-				// Hide terrain
-				if (_fe3d.terrainEntity_isExisting("@terrain"))
-				{
-					_fe3d.terrainEntity_hide("@terrain");
-				}
-
-				// Hide water
-				if (_fe3d.waterEntity_isExisting("@water"))
-				{
-					_fe3d.waterEntity_hide("@water");
-				}
 			}
 		}
 
@@ -287,7 +268,7 @@ void WorldEditor::_updateWaterOptions()
 		{
 			if (screen->getScrollingList("buttonList")->getButton("speed")->isHovered())
 			{
-				_gui->getGlobalScreen()->addValueForm("speed", "Water speed", _waterSpeed * 1000.0f, vec2(0.0f), vec2(0.3f, 0.1f));
+				_gui->getGlobalScreen()->addValueForm("speed", "Water speed", _waterSpeed * 100000.0f, vec2(0.0f), vec2(0.3f, 0.1f));
 			}
 			else if (screen->getScrollingList("buttonList")->getButton("transparency")->isHovered())
 			{
@@ -320,7 +301,7 @@ void WorldEditor::_updateWaterOptions()
 		// Check if speed value confirmed
 		if (_gui->getGlobalScreen()->checkValueForm("speed", _waterSpeed))
 		{
-			_waterSpeed /= 1000.0f;
+			_waterSpeed /= 100000.0f;
 		}
 
 		// Check if transparency value confirmed

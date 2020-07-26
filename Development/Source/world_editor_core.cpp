@@ -130,7 +130,7 @@ void WorldEditor::initializeGUI()
 	// Left-viewport: mainWindow - waterOptions
 	_leftWindow->addScreen("waterOptions");
 	_leftWindow->getScreen("waterOptions")->addScrollingList("buttonList", vec2(0.0f, 0.2f), vec2(1.9, 1.5f), vec3(0.3f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, LeftViewportController::textColor, LeftViewportController::textHoverColor, vec2(0.15f, 0.1f));
-	_leftWindow->getScreen("waterOptions")->getScrollingList("buttonList")->addButton("speed", "Animation speed");
+	_leftWindow->getScreen("waterOptions")->getScrollingList("buttonList")->addButton("speed", "Water speed");
 	_leftWindow->getScreen("waterOptions")->getScrollingList("buttonList")->addButton("transparency", "Transparency");
 	_leftWindow->getScreen("waterOptions")->getScrollingList("buttonList")->addButton("color", "Color");
 	_leftWindow->getScreen("waterOptions")->getScrollingList("buttonList")->addButton("specularFactor", "Specular factor");

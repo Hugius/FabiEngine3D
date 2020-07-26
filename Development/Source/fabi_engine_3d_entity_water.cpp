@@ -68,7 +68,7 @@ void FabiEngine3D::waterEntity_setWaving(const string& ID, const string& displac
 {
 	if (enabled)
 	{
-		_core->_waterEntityManager.getEntity(ID)->setDisplacementMap(_core->_texLoader.getTexture(displacementMapPath, true, true));
+		_core->_waterEntityManager.getEntity(ID)->setDisplacementMap(_core->_texLoader.getTexture(displacementMapPath, false, false));
 		_core->_waterEntityManager.getEntity(ID)->setWaveHeightFactor(heightFactor);
 	}
 
@@ -79,7 +79,7 @@ void FabiEngine3D::waterEntity_setRippling(const string& ID, const string& dudvM
 {
 	if (enabled)
 	{
-		_core->_waterEntityManager.getEntity(ID)->setDudvMap(_core->_texLoader.getTexture(dudvMapPath, true, true));
+		_core->_waterEntityManager.getEntity(ID)->setDudvMap(_core->_texLoader.getTexture(dudvMapPath, false, false));
 	}
 
 	_core->_waterEntityManager.getEntity(ID)->setRippling(enabled);
@@ -94,7 +94,7 @@ void FabiEngine3D::waterEntity_setSpecular(const string& ID, const string& norma
 {
 	if (enabled)
 	{
-		_core->_waterEntityManager.getEntity(ID)->setNormalMap(_core->_texLoader.getTexture(normalMapPath, true, true));
+		_core->_waterEntityManager.getEntity(ID)->setNormalMap(_core->_texLoader.getTexture(normalMapPath, false, false));
 		_core->_waterEntityManager.getEntity(ID)->setSpecularLightingFactor(factor);
 		_core->_waterEntityManager.getEntity(ID)->setSpecularLightingIntensity(intensity);
 	}

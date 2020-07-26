@@ -86,7 +86,7 @@ vec4 getMainColor()
 
 		// Normal mapping
 		vec3 normalMapColor = texture(u_sampler_normalMap, distortedTexCoords).rgb;
-		normal              = vec3(normalMapColor.r*2.0f-1.0f, normalMapColor.b * 3.0f, normalMapColor.g*2.0f-1.0f);
+		normal              = vec3((normalMapColor.r * 2.0f) - 1.0f, normalMapColor.b * 3.0f, (normalMapColor.g * 2.0f) - 1.0f);
 		normal              = normalize(normal);
 	}
 

@@ -103,7 +103,7 @@ void ModelEditor::loadModels()
 	_modelNames.clear();
 
 	// Compose full models folder path
-	string modelsPath = _fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\models.fe3d";
+	string modelsPath = _fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\Data\\models.fe3d";
 
 	// Load models file
 	if (_fe3d.misc_isFileExisting(modelsPath)) // Check if models file exists
@@ -116,27 +116,45 @@ void ModelEditor::loadModels()
 		{
 			// Placeholder variables
 			string modelName, objName, diffuseName, lightName, reflectionName;
-			float width, height, depth, uvRepeat, specularFactor;
+			float uvRepeat, specularFactor;
 			bool faceCulled, shadowed, transparent, specular;
-			vec3 color, boxSize;
+			vec3 modelSize, color, boxSize;
 
 			// For item extraction
 			std::istringstream iss(line);
 
 			// Extract from file
-			iss >> modelName >> objName >> diffuseName >> lightName >> reflectionName
-				>> width >> height >> depth >> faceCulled >> shadowed >> transparent >> specular >> specularFactor
-				>> color.r >> color.g >> color.b >> uvRepeat >> boxSize.x >> boxSize.y >> boxSize.z;
+			iss >> 
+				modelName >>
+				objName >>
+				diffuseName >>
+				lightName >>
+				reflectionName >>
+				modelSize.x >>
+				modelSize.y >>
+				modelSize.z >>
+				faceCulled >>
+				shadowed >>
+				transparent >>
+				specular >>
+				specularFactor >>
+				color.r >> 
+				color.g >> 
+				color.b >>
+				uvRepeat >>
+				boxSize.x >> 
+				boxSize.y >> 
+				boxSize.z;
 
-			// Run checks on string values
+			// Perform empty string conversions
 			objName = (objName == "-") ? "" : objName;
 			diffuseName = (diffuseName == "-") ? "" : diffuseName;
 			lightName = (lightName == "-") ? "" : lightName;
 			reflectionName = (reflectionName == "-") ? "" : reflectionName;
 
 			// Add new model
-			_addModel(modelName, objName, diffuseName, lightName, reflectionName, vec3(width, height, depth),
-				faceCulled, shadowed, transparent, specular, specularFactor, vec3(color.r, color.g, color.b), uvRepeat, vec3(boxSize.x, boxSize.y, boxSize.z));
+			_addModel(modelName, objName, diffuseName, lightName, reflectionName, modelSize, faceCulled, shadowed, transparent,
+				specular, specularFactor, vec3(color.r, color.g, color.b), uvRepeat, vec3(boxSize.x, boxSize.y, boxSize.z));
 		}
 
 		// Close file
@@ -159,7 +177,7 @@ void ModelEditor::save()
 
 		// Create or overwrite models file
 		std::ofstream file;
-		file.open(_fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\models.fe3d");
+		file.open(_fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\Data\\models.fe3d");
 
 		// Write model data into file
 		for (auto& modelName : _modelNames)
@@ -181,18 +199,33 @@ void ModelEditor::save()
 				auto uvRepeat = _fe3d.gameEntity_getUvRepeat(modelName);
 				auto boxSize = _fe3d.aabbEntity_getSize(modelName);
 
-				// String value conversions
+				// Perform empty string conversions
 				diffuseMapPath = (diffuseMapPath == "") ? "-" : diffuseMapPath;
 				lightMapPath = (lightMapPath == "") ? "-" : lightMapPath;
 				reflectionMapPath = (reflectionMapPath == "") ? "-" : reflectionMapPath;
 
 				// 1 model -> 1 line in file
-				file << modelName << " " <<
-					objPath << " " << diffuseMapPath << " " << lightMapPath << " " << reflectionMapPath << " " <<
-					modelSize.x << " " << modelSize.y << " " << modelSize.z << " " <<
-					faceCulled << " " << shadowed << " " << transparent << " " << specular << " " << specularFactor << " " <<
-					color.r << " " << color.g << " " << color.b << " " << uvRepeat << " " <<
-					boxSize.x << " " << boxSize.y << " " << boxSize.z << "\n";
+				file << 
+					modelName << " " <<
+					objPath << " " <<
+					diffuseMapPath << " " <<
+					lightMapPath << " " <<
+					reflectionMapPath << " " <<
+					modelSize.x << " " <<
+					modelSize.y << " " <<
+					modelSize.z << " " <<
+					faceCulled << " " <<
+					shadowed << " " << 
+					transparent << " " <<
+					specular << " " <<
+					specularFactor << " " <<
+					color.r << " " <<
+					color.g << " " <<
+					color.b << " " <<
+					uvRepeat << " " <<
+					boxSize.x << " " <<
+					boxSize.y << " " <<
+					boxSize.z << std::endl;
 			}
 			else
 			{

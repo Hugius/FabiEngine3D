@@ -11,7 +11,7 @@ void WorldEditor::loadSkyEntity()
 		_fe3d.logger_throwError("Tried to load as empty project!");
 	}
 
-	string skyPath = _fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\sky.fe3d";
+	string skyPath = _fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\Data\\sky.fe3d";
 
 	// Reserve for either loading or creation later on
 	_skyTexturePaths.clear();
@@ -25,8 +25,17 @@ void WorldEditor::loadSkyEntity()
 
 		// Load base data
 		skyFile >>
-			_skyTexturePaths[0] >> _skyTexturePaths[1] >> _skyTexturePaths[2] >> _skyTexturePaths[3] >> _skyTexturePaths[4] >> _skyTexturePaths[5] >>
-			_skyRotationSpeed >> _skyLightness >> _skyColor.r >> _skyColor.g >> _skyColor.b;
+			_skyTexturePaths[0] >> 
+			_skyTexturePaths[1] >> 
+			_skyTexturePaths[2] >> 
+			_skyTexturePaths[3] >> 
+			_skyTexturePaths[4] >> 
+			_skyTexturePaths[5] >>
+			_skyRotationSpeed >> 
+			_skyLightness >> 
+			_skyColor.r >> 
+			_skyColor.g >> 
+			_skyColor.b;
 
 		// Close file
 		skyFile.close();
@@ -50,7 +59,7 @@ void WorldEditor::_saveSkyData()
 			_fe3d.logger_throwError("Tried to save as empty project!");
 		}
 
-		string skyPath = _fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\sky.fe3d";
+		string skyPath = _fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\Data\\sky.fe3d";
 
 		// Save sky data
 		if (_fe3d.skyEntity_isExisting("@sky"))
@@ -65,7 +74,12 @@ void WorldEditor::_saveSkyData()
 			}
 
 			// Add options to file
-			skyFile << _skyRotationSpeed << " " << _skyLightness << " " << _skyColor.r << " " << _skyColor.g << " " << _skyColor.b;
+			skyFile << 
+				_skyRotationSpeed << " " <<
+				_skyLightness << " " <<
+				_skyColor.r << " " <<
+				_skyColor.g << " " <<
+				_skyColor.b << "\n";
 
 			// Close file
 			skyFile.close();

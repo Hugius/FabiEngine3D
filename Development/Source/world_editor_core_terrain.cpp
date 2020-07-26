@@ -12,7 +12,7 @@ void WorldEditor::loadTerrainEntity()
 	}
 
 	// Compose full terrain file path
-	string terrainPath = _fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\terrain.fe3d";
+	string terrainPath = _fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\Data\\terrain.fe3d";
 
 	// Load terrain file
 	if (_fe3d.misc_isFileExisting(terrainPath))
@@ -21,7 +21,9 @@ void WorldEditor::loadTerrainEntity()
 		std::ifstream terrainFile(terrainPath);
 
 		// Load base data
-		terrainFile >> _terrainHeightmapPath >> _terrainDiffusemapPath >> _terrainSize >> _maxTerrainHeight >> _terrainUvRepeat >> _isTerrainBlendmapped >> _terrainLightness;
+		terrainFile >> 
+			_terrainHeightmapPath >> _terrainDiffusemapPath >> _terrainSize >> 
+			_maxTerrainHeight >> _terrainUvRepeat >> _isTerrainBlendmapped >> _terrainLightness;
 
 		// Load blendmapping data
 		if (_isTerrainBlendmapped)
@@ -53,7 +55,7 @@ void WorldEditor::_saveTerrainData()
 			_fe3d.logger_throwError("Tried to save as empty project!");
 		}
 
-		string terrainPath = _fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\terrain.fe3d";
+		string terrainPath = _fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\Data\\terrain.fe3d";
 
 		// Save terrain data
 		if (_fe3d.terrainEntity_isExisting("@terrain"))
@@ -62,15 +64,29 @@ void WorldEditor::_saveTerrainData()
 			std::ofstream terrainFile(terrainPath);
 
 			// Write base data to file
-			terrainFile << _terrainHeightmapPath << " " << _terrainDiffusemapPath << " " << _terrainSize << " " << 
-				_maxTerrainHeight << " " << _terrainUvRepeat << " " << _isTerrainBlendmapped << " " << _terrainLightness;
+			terrainFile << 
+				_terrainHeightmapPath << " " << 
+				_terrainDiffusemapPath << " " << 
+				_terrainSize << " " << 
+				_maxTerrainHeight << " " << 
+				_terrainUvRepeat << " " << 
+				_isTerrainBlendmapped << " " << 
+				_terrainLightness;
 
 			// Write blendmapping data to file
 			if (_isTerrainBlendmapped)
 			{
-				terrainFile << _terrainBlendmapPath << " " << _terrainRedPath << " " << _terrainGreenPath << " " << _terrainBluePath << " " <<
-					_terrainRedUvRepeat << " " << _terrainGreenUvRepeat << " " << _terrainBlueUvRepeat;
+				terrainFile << 
+					_terrainBlendmapPath << " " <<
+					_terrainRedPath << " " <<
+					_terrainGreenPath << " " <<
+					_terrainBluePath << " " <<
+					_terrainRedUvRepeat << " " <<
+					_terrainGreenUvRepeat << " " <<
+					_terrainBlueUvRepeat;
 			}
+
+			terrainFile << "\n";
 
 			// Close file
 			terrainFile.close();

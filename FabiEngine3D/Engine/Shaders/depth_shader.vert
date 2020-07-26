@@ -7,12 +7,16 @@ layout(location = 1) in vec3 v_uv;
 layout(location = 2) in vec3 v_normal;
 layout(location = 3) in vec3 v_offset;
 
-// Uniforms
+// Matrix 44 uniforms
 uniform mat4  u_modelMatrix;
 uniform mat4  u_viewMatrix;
 uniform mat4  u_projMatrix;
-uniform bool  u_isInstanced;
+
+// Float uniforms
 uniform float u_maxY;
+
+// Boolean uniforms
+uniform bool  u_isInstanced;
 
 // Out variables
 out vec2 f_uv;

@@ -3,13 +3,7 @@
 
 BaseEntity::~BaseEntity()
 {
-	for (auto & buffer : _oglBuffers)
-	{
-		if (buffer != nullptr)
-		{
-			delete buffer;
-		}
-	}
+	clearOglBuffers();
 }
 
 void BaseEntity::load(const string & ID)
@@ -29,9 +23,22 @@ void BaseEntity::addOglBuffer(OpenGLBuffer * buffer)
 	_oglBuffers.push_back(buffer);
 }
 
-void BaseEntity::setEnabled(bool val)
+void BaseEntity::clearOglBuffers()
 {
-	_enabled = val;
+	for (auto& buffer : _oglBuffers)
+	{
+		if (buffer != nullptr)
+		{
+			delete buffer;
+		}
+	}
+
+	_oglBuffers.clear();
+}
+
+void BaseEntity::setVisible(bool val)
+{
+	_visible = val;
 }
 
 const vector<OpenGLBuffer*> & BaseEntity::getOglBuffers() const
@@ -54,7 +61,7 @@ const string & BaseEntity::getID() const
 	return _ID;
 }
 
-const bool BaseEntity::isEnabled() const
+const bool BaseEntity::isVisible() const
 {
-	return _enabled;
+	return _visible;
 }

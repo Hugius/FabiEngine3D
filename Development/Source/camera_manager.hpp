@@ -32,7 +32,7 @@ public:
 	// Other
 	void enableLookat(vec3 position);
 	void disableLookat();
-	void enableFirstPersonView();
+	void enableFirstPersonView(float mouseSensitivity);
 	void disableFirstPersonView();
 	void enableFreeMovement();
 	void disableFreeMovement();
@@ -50,12 +50,17 @@ public:
 	const vec3   getPosition()              const;
 	const vec3   getFront()                 const;
 	const vec3   getLookat()                const;
+	const float  getFOV()					const;
+	const float  getAspectRatio()			const;
 	const float  getYaw()                   const;
 	const float  getPitch()                 const;
+	const float  getNearZ()                 const;
+	const float  getFarZ()                  const;
+	const float  getMouseSensitivity()      const;
 	const float  getMouseOffset()           const;
-	const float  getFOV()					const;
-	const bool   isFirstPersonViewEnabled() const;
 	const bool   isLookatEnabled()			const;
+	const bool   isFirstPersonViewEnabled() const;
+	const bool   isFreeMovementEnabled()	const;
 
 private:
 	ShaderBus& _shaderBus;
@@ -74,16 +79,16 @@ private:
 	// Floats
 	float _fov = 0.0f;
 	float _aspectRatio = 0.0f;
-	float _pitch = 0.0f;
 	float _yaw = 0.0f;
+	float _pitch = 0.0f;
 	float _nearZ = 0.0f;
 	float _farZ = 0.0f;
 	float _mouseSensitivity = 0.0f;
 	float _mouseOffset = 0.0f;
 
 	// Booleans
-	bool _lookatEabled			 = false;
-	bool _firstPersonViewEnabled = false;
-	bool _freeMovementEnabled    = true;
-	bool _mustCenter             = false;
+	bool _isLookatEabled		   = false;
+	bool _isFirstPersonViewEnabled = false;
+	bool _isFreeMovementEnabled    = true;
+	bool _mustCenter               = false;
 };

@@ -94,7 +94,7 @@ void AabbEntityManager::update(const vector<GameEntity*> & gameEntities)
 		}
 
 		// Calculate model matrix
-		if (entity->isEnabled())
+		if (entity->isVisible())
 		{
 			entity->updateModelMatrix();
 		}

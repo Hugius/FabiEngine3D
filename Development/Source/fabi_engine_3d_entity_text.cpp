@@ -10,7 +10,7 @@ void FabiEngine3D::textEntity_hideAll()
 {
 	for (auto& entity : _core->_textEntityManager.getEntities())
 	{
-		entity->setEnabled(false);
+		entity->setVisible(false);
 	}
 }
 
@@ -18,7 +18,7 @@ void FabiEngine3D::textEntity_showAll()
 {
 	for (auto& entity : _core->_textEntityManager.getEntities())
 	{
-		entity->setEnabled(true);
+		entity->setVisible(true);
 	}
 }
 
@@ -62,12 +62,12 @@ void FabiEngine3D::textEntity_setAlpha(const string& ID, float alpha)
 
 void FabiEngine3D::textEntity_hide(const string& ID)
 {
-	_core->_textEntityManager.getEntity(ID)->setEnabled(false);
+	_core->_textEntityManager.getEntity(ID)->setVisible(false);
 }
 
 void FabiEngine3D::textEntity_show(const string& ID)
 {
-	_core->_textEntityManager.getEntity(ID)->setEnabled(true);
+	_core->_textEntityManager.getEntity(ID)->setVisible(true);
 }
 
 void FabiEngine3D::textEntity_setPosition(const string& ID, vec2 position)

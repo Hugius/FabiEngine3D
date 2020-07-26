@@ -1,6 +1,7 @@
 #version 330 core
 #extension GL_ARB_explicit_uniform_location : enable
 
+// In variables
 in vec2 f_uv;
 
 // Textures
@@ -9,13 +10,16 @@ layout(location = 1) uniform sampler2D u_sampler_bloom;
 layout(location = 2) uniform sampler2D u_sampler_dof;
 layout(location = 3) uniform sampler2D u_sampler_blur;
 
-// Uniforms
+// Float uniforms
 uniform float u_nearZ;
 uniform float u_farZ;
 uniform float u_dofMinDistance;
+
+// Boolean uniforms
 uniform bool  u_bloomEnabled;
 uniform bool  u_dofEnabled;
 
+// Out variables
 layout (location = 0) out vec4 o_finalColor;
 
 float convertDepthToColor(float depth)

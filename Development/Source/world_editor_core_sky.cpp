@@ -23,6 +23,10 @@ void WorldEditor::loadSkyEntity()
 		// Open file
 		std::ifstream skyFile(skyPath);
 
+		// Get values
+		float skyRotationSpeed, skyLightness;
+		vec3 skyColor;
+
 		// Load base data
 		skyFile >>
 			_skyTexturePaths[0] >> 
@@ -31,11 +35,11 @@ void WorldEditor::loadSkyEntity()
 			_skyTexturePaths[3] >> 
 			_skyTexturePaths[4] >> 
 			_skyTexturePaths[5] >>
-			_skyRotationSpeed >> 
-			_skyLightness >> 
-			_skyColor.r >> 
-			_skyColor.g >> 
-			_skyColor.b;
+			skyRotationSpeed >> 
+			skyLightness >> 
+			skyColor.r >> 
+			skyColor.g >> 
+			skyColor.b;
 
 		// Close file
 		skyFile.close();
@@ -43,6 +47,9 @@ void WorldEditor::loadSkyEntity()
 		// Load entity
 		_loadSkyEntity();
 		_fe3d.skyEntity_hide("@sky");
+		_fe3d.skyEntity_setRotationSpeed("@sky", skyRotationSpeed);
+		_fe3d.skyEntity_setLightness("@sky", skyLightness);
+		_fe3d.skyEntity_setColor("@sky", skyColor);
 
 		// Logging
 		_fe3d.logger_throwInfo("Sky data from project \"" + _currentProjectName + "\" loaded!");
@@ -67,19 +74,23 @@ void WorldEditor::_saveSkyData()
 			// Load file
 			std::ofstream skyFile(skyPath);
 
-			// Add path to file
+			float skyRotationSpeed = _fe3d.skyEntity_getRotationSpeed("@sky");
+			float skyLightness = _fe3d.skyEntity_getLightness("@sky");
+			vec3 skyColor = _fe3d.skyEntity_getColor("@sky");
+
+			// Write paths to file
 			for (auto& path : _skyTexturePaths)
 			{
 				skyFile << path << " ";
 			}
 
-			// Add options to file
+			// Write options to file
 			skyFile << 
-				_skyRotationSpeed << " " <<
-				_skyLightness << " " <<
-				_skyColor.r << " " <<
-				_skyColor.g << " " <<
-				_skyColor.b << "\n";
+				skyRotationSpeed << " " <<
+				skyLightness << " " <<
+				skyColor.r << " " <<
+				skyColor.g << " " <<
+				skyColor.b << std::endl;
 
 			// Close file
 			skyFile.close();
@@ -109,7 +120,6 @@ void WorldEditor::_unloadSkyData()
 	// Clear variables
 	_skyTexturePaths.clear();
 	_skyTexturePaths.resize(6);
-	_skyRotationSpeed = 0.0f;
 }
 
 void WorldEditor::_loadSkyEntity()
@@ -123,6 +133,4 @@ void WorldEditor::_loadSkyEntity()
 	// Add new skybox
 	_fe3d.skyEntity_add("@sky", _skyTexturePaths);
 	_fe3d.skyEntity_select("@sky");
-	_fe3d.skyEntity_setRotationSpeed("@sky", _skyRotationSpeed);
-	_fe3d.skyEntity_setLightness("@sky", _skyLightness);
 }

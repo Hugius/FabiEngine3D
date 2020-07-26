@@ -34,9 +34,9 @@ void CameraManager::reset()
 	_mouseOffset = 0.0f;
 
 	// Booleans
-	_lookatEabled = false;
-	_firstPersonViewEnabled = false;
-	_freeMovementEnabled = true;
+	_isLookatEabled = false;
+	_isFirstPersonViewEnabled = false;
+	_isFreeMovementEnabled = true;
 	_mustCenter = false;
 }
 
@@ -46,7 +46,7 @@ void CameraManager::update(WindowManager & windowManager)
 	ivec2 currentMousePos = windowManager.getMousePos();
 	static ivec2 lastMousePos = currentMousePos;
 
-	if (_firstPersonViewEnabled)
+	if (_isFirstPersonViewEnabled)
 	{
 		// Variable
 		int left = Config::getInst().getVpPos().x;
@@ -124,7 +124,7 @@ void CameraManager::updateMatrices()
 	_front = glm::normalize(_front);
 
 	// Lookat front vector
-	if(_lookatEabled)
+	if(_isLookatEabled)
 	{
 		_front = _lookat;
 		_front = glm::normalize(_front - _pos);
@@ -163,7 +163,7 @@ void CameraManager::updateMatrices()
 
 void CameraManager::translateFollowX(float speed) // Side movement
 { 
-	if (_freeMovementEnabled)
+	if (_isFreeMovementEnabled)
 	{
 		_pos += _right * (speed / 100.0f);
 	}
@@ -171,7 +171,7 @@ void CameraManager::translateFollowX(float speed) // Side movement
 
 void CameraManager::translateFollowZ(float speed) // Forward movement
 {
-	if (_freeMovementEnabled)
+	if (_isFreeMovementEnabled)
 	{
 		vec3 tempFront = _front;
 		tempFront.x = cos(glm::radians(_yaw));
@@ -183,7 +183,7 @@ void CameraManager::translateFollowZ(float speed) // Forward movement
 
 void CameraManager::translateFollowZY(float speed) // Forward movement
 {
-	if (_freeMovementEnabled)
+	if (_isFreeMovementEnabled)
 	{
 		_pos.x += _front.x * (speed / 100.0f);
 		_pos.y += _front.y * (speed / 100.0f);
@@ -193,33 +193,34 @@ void CameraManager::translateFollowZY(float speed) // Forward movement
 
 void CameraManager::enableLookat(vec3 position)
 {
-	_lookatEabled = true;
+	_isLookatEabled = true;
 	_lookat = position;
 }
 
 void CameraManager::disableLookat()
 {
-	_lookatEabled = false;
+	_isLookatEabled = false;
 }
 
-void CameraManager::enableFirstPersonView()
+void CameraManager::enableFirstPersonView(float mouseSensitivity)
 {
-	_firstPersonViewEnabled = true;
+	_isFirstPersonViewEnabled = true;
+	_mouseSensitivity = mouseSensitivity;
 }
 
 void CameraManager::disableFirstPersonView()
 {
-	_firstPersonViewEnabled = false;
+	_isFirstPersonViewEnabled = false;
 }
 
 void CameraManager::enableFreeMovement()
 {
-	_freeMovementEnabled = true;
+	_isFreeMovementEnabled = true;
 }
 
 void CameraManager::disableFreeMovement()
 {
-	_freeMovementEnabled = false;
+	_isFreeMovementEnabled = false;
 }
 
 void CameraManager::setFOV(float val)
@@ -280,6 +281,21 @@ const float CameraManager::getPitch() const
 	return _pitch;
 }
 
+const float CameraManager::getNearZ() const
+{
+	return _nearZ;
+}
+
+const float CameraManager::getFarZ() const
+{
+	return _farZ;
+}
+
+const float CameraManager::getMouseSensitivity() const
+{
+	return _mouseSensitivity;
+}
+
 const float CameraManager::getMouseOffset() const
 {
 	return _mouseOffset;
@@ -290,19 +306,29 @@ const float CameraManager::getFOV() const
 	return _fov;
 }
 
+const float CameraManager::getAspectRatio() const
+{
+	return _aspectRatio;
+}
+
 const bool CameraManager::isFirstPersonViewEnabled() const
 {
-	return _firstPersonViewEnabled;
+	return _isFirstPersonViewEnabled;
+}
+
+const bool CameraManager::isFreeMovementEnabled() const
+{
+	return _isFreeMovementEnabled;
 }
 
 const bool CameraManager::isLookatEnabled() const
 {
-	return _lookatEabled;
+	return _isLookatEabled;
 }
 
 void CameraManager::translate(vec3 translation)
 {
-	if (_freeMovementEnabled)
+	if (_isFreeMovementEnabled)
 	{
 		_pos += translation;
 	}
@@ -310,7 +336,7 @@ void CameraManager::translate(vec3 translation)
 
 void CameraManager::setPosition(vec3 val)
 {
-	if (_freeMovementEnabled)
+	if (_isFreeMovementEnabled)
 	{
 		_pos = val;
 	}

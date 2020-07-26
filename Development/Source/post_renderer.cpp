@@ -17,7 +17,7 @@ void PostRenderer::unbind()
 
 void PostRenderer::render(const GuiEntity* entity, GLuint sceneMap, GLuint bloomMap, GLuint dofMap, GLuint blurMap)
 {
-	if (entity->isEnabled())
+	if (entity->isVisible())
 	{
 		// Shader uniforms
 		_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix());

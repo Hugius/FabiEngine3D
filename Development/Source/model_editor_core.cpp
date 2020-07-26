@@ -8,8 +8,7 @@ ModelEditor::ModelEditor(FabiEngine3D& fe3d, shared_ptr<EngineGuiManager> gui) :
 	_fe3d(fe3d),
 	_gui(gui)
 {
-	// Load all OBJ filenames from assets folder
-	_loadObjFileNames();
+
 }
 
 void ModelEditor::initializeGUI()
@@ -62,6 +61,9 @@ void ModelEditor::initializeGUI()
 
 void ModelEditor::load()
 {
+	// Load all OBJ filenames from assets folder
+	_loadObjFileNames();
+
 	// Camera
 	_fe3d.camera_setPosition(_defaultCameraPosition);
 	_fe3d.camera_enableLookat(vec3(0.0f));
@@ -259,7 +261,6 @@ void ModelEditor::unload()
 
 	// Delete models
 	_fe3d.gameEntity_deleteAll();
-	_modelNames.clear();
 
 	// Delete model name textfield
 	_gui->getGlobalScreen()->deleteTextfield("selectedModelName");
@@ -283,10 +284,13 @@ void ModelEditor::unload()
 	_modelRemovalEnabled = false;
 	_aabbRenderingEnabled = false;
 	_isLoaded = false;
-	_cameraDistance = 5.0f;
-	_modelResizeDirection = Direction::X;
-	_currentModelName = "";
 	_totalCursorDifference = vec2(0.0f);
 	_cameraAcceleration = vec2(0.0f);
 	_lastCursorPos = vec2(0.0f);
+	_modelResizeDirection = Direction::X;
+	_cameraDistance = 5.0f;
+	_currentModelName = "";
+	_currentProjectName = "";
+	_modelNames.clear();
+	_objFileNamesList.clear();
 }

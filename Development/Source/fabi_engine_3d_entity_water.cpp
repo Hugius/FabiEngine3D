@@ -21,12 +21,12 @@ void FabiEngine3D::waterEntity_delete(const string& ID)
 
 void FabiEngine3D::waterEntity_hide(const string& ID)
 {
-	_core->_waterEntityManager.getEntity(ID)->setEnabled(false);
+	_core->_waterEntityManager.getEntity(ID)->setVisible(false);
 }
 
 void FabiEngine3D::waterEntity_show(const string& ID)
 {
-	_core->_waterEntityManager.getEntity(ID)->setEnabled(true);
+	_core->_waterEntityManager.getEntity(ID)->setVisible(true);
 }
 
 bool FabiEngine3D::waterEntity_isExisting(const string& ID)

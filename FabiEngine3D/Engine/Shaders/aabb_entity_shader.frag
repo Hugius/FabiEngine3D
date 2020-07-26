@@ -1,6 +1,7 @@
 #version 330 core
 #extension GL_ARB_explicit_uniform_location : enable
 
+// Out variables
 layout (location = 0) out vec4 o_finalColor;
 
 // Calculate final fragment color

@@ -1,21 +1,24 @@
 #version 330 core
 #extension GL_ARB_explicit_uniform_location : enable
 
+// In variables
 in vec3 f_uv;
 
-layout (location = 0) out vec4 o_finalColor;
+// Textures
+uniform samplerCube u_sampler_cubeMap;
 
-uniform samplerCube u_sampler_day;
-uniform samplerCube u_sampler_night;
-uniform float       u_mixValue;
-uniform float       u_lightness;
-uniform vec3		u_color;
+// Float uniforms
+uniform float u_lightness;
+
+// Vec3 uniforms
+uniform vec3 u_color;
+
+// Out variables
+layout (location = 0) out vec4 o_finalColor;
 
 void main()
 {
-	vec4 day   = texture(u_sampler_day, f_uv);
-	vec4 night = texture(u_sampler_night, f_uv);
-	o_finalColor = mix(day, night, u_mixValue);
+	o_finalColor.rgb = texture(u_sampler_cubeMap, f_uv).rgb;
 	o_finalColor.rgb *= u_color;
 	o_finalColor.rgb *= u_lightness;
 	o_finalColor.a = 1.0f;

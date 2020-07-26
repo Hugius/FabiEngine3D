@@ -4,7 +4,10 @@
 layout(location = 0) in vec2 v_pos;
 layout(location = 1) in vec2 v_uv;
 
+// Matrix44 uniforms
 uniform mat4 u_modelMatrix;
+
+// Boolean uniforms
 uniform bool u_mirrorHor;
 uniform bool u_mirrorVer;
 

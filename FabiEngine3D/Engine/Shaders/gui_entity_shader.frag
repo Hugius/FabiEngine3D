@@ -1,16 +1,26 @@
 #version 330 core
 #extension GL_ARB_explicit_uniform_location : enable
 
+// In variables
 in vec2 f_uv;
 
+// Textures
 uniform sampler2D u_sampler_diffuse;
+
+// Vec3 uniforms
 uniform vec3      u_color;
+
+// Vec2 uniforms
 uniform vec2 	  u_windowSize;
 uniform vec2 	  u_minPosition;
 uniform vec2 	  u_maxPosition;
+
+// Float uniforms
 uniform float 	  u_alpha;
 uniform float     u_nearZ;
 uniform float     u_farZ;
+
+// Boolean uniforms
 uniform bool      u_isDepthEntity;
 uniform bool      u_noTexture;
 

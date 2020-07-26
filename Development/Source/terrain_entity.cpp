@@ -5,9 +5,19 @@ void TerrainEntity::setPixelColors(vector<float>& val)
 	_pixelColors = val;
 }
 
+void TerrainEntity::setHeightMapPath(string path)
+{
+	_heightMapPath = path;
+}
+
 void TerrainEntity::setDiffuseMap(GLuint val)
 {
 	_diffuseMap = val;
+}
+
+void TerrainEntity::setDiffuseMapPath(string path)
+{
+	_diffuseMapPath = path;
 }
 
 void TerrainEntity::setBlendMap(GLuint val)
@@ -15,9 +25,19 @@ void TerrainEntity::setBlendMap(GLuint val)
 	_blendMap = val;
 }
 
+void TerrainEntity::setBlendMapPath(string path)
+{
+	_blendMapPath = path;
+}
+
 void TerrainEntity::setBlendMapR(GLuint val)
 {
 	_blendMapR = val;
+}
+
+void TerrainEntity::setBlendMapPathR(string path)
+{
+	_blendMapPathR = path;
 }
 
 void TerrainEntity::setBlendMapG(GLuint val)
@@ -25,14 +45,24 @@ void TerrainEntity::setBlendMapG(GLuint val)
 	_blendMapG = val;
 }
 
+void TerrainEntity::setBlendMapPathG(string path)
+{
+	_blendMapPathG = path;
+}
+
 void TerrainEntity::setBlendMapB(GLuint val)
 {
 	_blendMapB = val;
 }
 
-void TerrainEntity::setBlendRepeat(float val)
+void TerrainEntity::setBlendMapPathB(string path)
 {
-	_blendRepeat = val;
+	_blendMapPathB = path;
+}
+
+void TerrainEntity::setUvRepeat(float val)
+{
+	_uvRepeat = val;
 }
 
 void TerrainEntity::setBlendRepeatR(float val)
@@ -62,7 +92,7 @@ void TerrainEntity::setMaxHeight(float val)
 
 void TerrainEntity::setBlendMapped(bool val)
 {
-	_blendMapped = val;
+	_isBlendMapped = val;
 }
 
 void TerrainEntity::setLightness(float val)
@@ -95,9 +125,39 @@ const GLuint TerrainEntity::getBlendMapB() const
 	return _blendMapB;
 }
 
-const float TerrainEntity::getBlendRepeat() const
+const string TerrainEntity::getHeightMapPath() const
 {
-	return _blendRepeat;
+	return _heightMapPath;
+}
+
+const string TerrainEntity::getDiffuseMapPath() const
+{
+	return _diffuseMapPath;
+}
+
+const string TerrainEntity::getBlendMapPath() const
+{
+	return _blendMapPath;
+}
+
+const string TerrainEntity::getBlendMapPathR() const
+{
+	return _blendMapPathR;
+}
+
+const string TerrainEntity::getBlendMapPathG() const
+{
+	return _blendMapPathG;
+}
+
+const string TerrainEntity::getBlendMapPathB() const
+{
+	return _blendMapPathB;
+}
+
+const float TerrainEntity::getUvRepeat() const
+{
+	return _uvRepeat;
 }
 
 const float TerrainEntity::getBlendRepeatR() const
@@ -137,5 +197,5 @@ const vector<float>& TerrainEntity::getPixelColors() const
 
 const bool TerrainEntity::isBlendMapped() const
 {
-	return _blendMapped;
+	return _isBlendMapped;
 }

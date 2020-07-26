@@ -20,25 +20,63 @@ void WorldEditor::loadTerrainEntity()
 		// Load file
 		std::ifstream terrainFile(terrainPath);
 
+		// Values
+		string heightMapPath, diffuseMapPath, blendMapPath, blendMapPathR, blendMapPathG, blendMapPathB;
+		float maxHeight, uvRepeat, lightness, blendRepeatR, blendRepeatG, blendRepeatB;
+		bool isBlendMapped;
+
 		// Load base data
-		terrainFile >> 
-			_terrainHeightmapPath >> _terrainDiffusemapPath >> _terrainSize >> 
-			_maxTerrainHeight >> _terrainUvRepeat >> _isTerrainBlendmapped >> _terrainLightness;
+		terrainFile >>
+			heightMapPath >>
+			diffuseMapPath >>
+			maxHeight >>
+			uvRepeat >>
+			lightness >>
+			isBlendMapped;
 
 		// Load blendmapping data
-		if (_isTerrainBlendmapped)
+		if (isBlendMapped)
 		{
 			terrainFile >>
-				_terrainBlendmapPath >> _terrainRedPath >> _terrainGreenPath >> _terrainBluePath >>
-				_terrainRedUvRepeat >> _terrainGreenUvRepeat >> _terrainBlueUvRepeat;
+				blendMapPath >>
+				blendMapPathR >>
+				blendMapPathG >> 
+				blendMapPathB >>
+				blendRepeatR >>
+				blendRepeatG >> 
+				blendRepeatB;
 		}
+
+		// Perform empty string conversions
+		heightMapPath = (heightMapPath == "-") ? "" : heightMapPath;
+		diffuseMapPath = (diffuseMapPath == "-") ? "" : diffuseMapPath;
+		blendMapPath = (blendMapPath == "-") ? "-" : blendMapPath;
+		blendMapPathR = (blendMapPathR == "-") ? "" : blendMapPathR;
+		blendMapPathG = (blendMapPathG == "-") ? "" : blendMapPathG;
+		blendMapPathB = (blendMapPathB == "-") ? "" : blendMapPathB;
 
 		// Close file
 		terrainFile.close();
 
-		// Load entity
-		_loadTerrainEntity();
-		_fe3d.terrainEntity_hide("@terrain");
+		// Add new terrain entity
+		_loadTerrainEntity(heightMapPath);
+		_fe3d.terrainEntity_setDiffuseMap("@terrain", diffuseMapPath);
+		_fe3d.terrainEntity_setMaxHeight("@terrain", maxHeight);
+		_fe3d.terrainEntity_setUvRepeat("@terrain", uvRepeat);
+		_fe3d.terrainEntity_setBlendMapped("@terrain", isBlendMapped);
+		_fe3d.terrainEntity_setLightness("@terrain", lightness);
+
+		// Add blendmapping
+		if (isBlendMapped)
+		{
+			_fe3d.terrainEntity_setBlendMap("@terrain", blendMapPath);
+			_fe3d.terrainEntity_setBlendMapR("@terrain", blendMapPathR);
+			_fe3d.terrainEntity_setBlendMapG("@terrain", blendMapPathG);
+			_fe3d.terrainEntity_setBlendMapB("@terrain", blendMapPathB);
+			_fe3d.terrainEntity_setBlendRepeatR("@terrain", blendRepeatR);
+			_fe3d.terrainEntity_setBlendRepeatG("@terrain", blendRepeatG);
+			_fe3d.terrainEntity_setBlendRepeatB("@terrain", blendRepeatB);
+		}
 
 		// Logging
 		_fe3d.logger_throwInfo("Terrain data from project \"" + _currentProjectName + "\" loaded!");
@@ -63,30 +101,53 @@ void WorldEditor::_saveTerrainData()
 			// Load file
 			std::ofstream terrainFile(terrainPath);
 
+			// Values
+			string heightMapPath = _fe3d.terrainEntity_getHeightMapPath("@terrain");
+			string diffuseMapPath = _fe3d.terrainEntity_getDiffuseMapPath("@terrain");
+			string blendMapPath = _fe3d.terrainEntity_getBlendMapPath("@terrain");
+			string blendMapPathR = _fe3d.terrainEntity_getBlendMapPathR("@terrain");
+			string blendMapPathG = _fe3d.terrainEntity_getBlendMapPathG("@terrain");
+			string blendMapPathB = _fe3d.terrainEntity_getBlendMapPathB("@terrain");
+			float maxHeight = _fe3d.terrainEntity_getMaxHeight("@terrain");
+			float uvRepeat = _fe3d.terrainEntity_getUvRepeat("@terrain");
+			float lightness = _fe3d.terrainEntity_getLightness("@terrain");
+			float blendRepeatR = _fe3d.terrainEntity_getBlendRepeatR("@terrain");
+			float blendRepeatG = _fe3d.terrainEntity_getBlendRepeatG("@terrain");
+			float blendRepeatB = _fe3d.terrainEntity_getBlendRepeatB("@terrain");
+			bool isBlendMapped = _fe3d.terrainEntity_isBlendMapped("@terrain");
+
+			// Perform empty string conversions
+			heightMapPath = (heightMapPath == "") ? "-" : heightMapPath;
+			diffuseMapPath = (diffuseMapPath == "") ? "-" : diffuseMapPath;
+			blendMapPath = (blendMapPath == "") ? "-" : blendMapPath;
+			blendMapPathR = (blendMapPathR == "") ? "-" : blendMapPathR;
+			blendMapPathG = (blendMapPathG == "") ? "-" : blendMapPathG;
+			blendMapPathB = (blendMapPathB == "") ? "-" : blendMapPathB;
+
 			// Write base data to file
-			terrainFile << 
-				_terrainHeightmapPath << " " << 
-				_terrainDiffusemapPath << " " << 
-				_terrainSize << " " << 
-				_maxTerrainHeight << " " << 
-				_terrainUvRepeat << " " << 
-				_isTerrainBlendmapped << " " << 
-				_terrainLightness;
+			terrainFile <<
+				heightMapPath << " " <<
+				diffuseMapPath << " " <<
+				maxHeight << " " <<
+				uvRepeat << " " <<
+				lightness << " " <<
+				isBlendMapped;
 
 			// Write blendmapping data to file
-			if (_isTerrainBlendmapped)
+			if (isBlendMapped)
 			{
 				terrainFile << 
-					_terrainBlendmapPath << " " <<
-					_terrainRedPath << " " <<
-					_terrainGreenPath << " " <<
-					_terrainBluePath << " " <<
-					_terrainRedUvRepeat << " " <<
-					_terrainGreenUvRepeat << " " <<
-					_terrainBlueUvRepeat;
+					blendMapPath << " " <<
+					blendMapPathR << " " <<
+					blendMapPathG << " " <<
+					blendMapPathB << " " <<
+					blendRepeatR << " " <<
+					blendRepeatG << " " <<
+					blendRepeatB;
 			}
 
-			terrainFile << "\n";
+			// New line
+			terrainFile << std::endl;
 
 			// Close file
 			terrainFile.close();
@@ -105,54 +166,16 @@ void WorldEditor::_saveTerrainData()
 	}
 }
 
-void WorldEditor::_unloadTerrainData()
+void WorldEditor::_loadTerrainEntity(const string& heightMapPath)
 {
-	// Delete terrain
+	// Remove existing terrain entity
 	if (_fe3d.terrainEntity_isExisting("@terrain"))
 	{
 		_fe3d.terrainEntity_delete("@terrain");
 	}
 
-	// Clear variables
-	_isTerrainBlendmapped = false;
-	_terrainHeightmapPath = "";
-	_terrainDiffusemapPath = "";
-	_terrainBlendmapPath = "";
-	_terrainRedPath = "";
-	_terrainGreenPath = "";
-	_terrainBluePath = "";
-	_terrainSize = 0.0f;
-	_maxTerrainHeight = 0.0f;
-	_terrainUvRepeat = 0.0f;
-	_terrainRedUvRepeat = 0.0f;
-	_terrainGreenUvRepeat = 0.0f;
-	_terrainBlueUvRepeat = 0.0f;
-	_terrainCameraHeight = 0.0f;
-	_terrainCameraDistance = 0.0f;
-}
-
-void WorldEditor::_loadTerrainEntity()
-{
-	// Remove existing terrain
-	if (_fe3d.terrainEntity_isExisting("@terrain"))
-	{
-		_fe3d.terrainEntity_delete("@terrain");
-	}
-
-	// Add new terrain
-	_fe3d.terrainEntity_add("@terrain", _terrainHeightmapPath, _terrainDiffusemapPath, vec3(0.0f), _terrainSize, _maxTerrainHeight, _terrainUvRepeat, _terrainLightness);
+	// Create new terrain entity
+	_fe3d.terrainEntity_add("@terrain", heightMapPath);
 	_fe3d.terrainEntity_select("@terrain");
-
-	// Get possibly corrected size
-	_terrainSize = _fe3d.terrainEntity_getSize("@terrain");
-
-	// Camera
-	_terrainCameraHeight = _maxTerrainHeight * 1.25f;
-	_terrainCameraDistance = _terrainSize / 2.0f;
-
-	// Blendmapping
-	if (_isTerrainBlendmapped)
-	{
-		_fe3d.terrainEntity_addBlending("@terrain", _terrainBlendmapPath, _terrainRedPath, _terrainGreenPath, _terrainBluePath, _terrainRedUvRepeat, _terrainGreenUvRepeat, _terrainBlueUvRepeat);
-	}
+	_fe3d.terrainEntity_hide("@terrain");
 }

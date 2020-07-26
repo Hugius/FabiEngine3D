@@ -1,18 +1,25 @@
 #version 330 core
 #extension GL_ARB_explicit_uniform_location : enable
 
+// In variables
 in vec2 f_pos;
 in vec2 f_uv;
 
+// Textures
 uniform sampler2D u_sampler_diffuse;
-uniform bool      u_horizontal;
-uniform float     u_radius;
-uniform float     u_intensity;
 
+// Float uniforms
+uniform float u_radius;
+uniform float u_intensity;
+
+// Boolean uniforms
+uniform bool u_horizontal;
+
+// Out variables
 layout (location = 0) out vec4 o_finalColor;
 
+// Miscellaneous
 #define WEIGHT_AMOUNT 5
-
 float kernel[WEIGHT_AMOUNT];
 
 void main()

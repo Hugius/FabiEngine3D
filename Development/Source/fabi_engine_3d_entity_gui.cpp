@@ -10,7 +10,7 @@ void FabiEngine3D::guiEntity_hideAll()
 {
 	for (auto& entity : _core->_guiEntityManager.getEntities())
 	{
-		entity->setEnabled(false);
+		entity->setVisible(false);
 	}
 }
 
@@ -18,30 +18,30 @@ void FabiEngine3D::guiEntity_showAll()
 {
 	for (auto& entity : _core->_guiEntityManager.getEntities())
 	{
-		entity->setEnabled(true);
+		entity->setVisible(true);
 	}
 }
 
 void FabiEngine3D::guiEntity_add(const string& ID, const string& texturePath, vec2 translation, float rotation, vec2 scaling, bool centered, bool visible)
 {
 	_core->_guiEntityManager.addGuiEntity(ID, texturePath, translation, rotation, scaling, false, centered);
-	_core->_guiEntityManager.getEntity(ID)->setEnabled(visible);
+	_core->_guiEntityManager.getEntity(ID)->setVisible(visible);
 }
 
 void FabiEngine3D::guiEntity_add(const string& ID, vec3 color, vec2 translation, float rotation, vec2 scaling, bool centered, bool visible)
 {
 	_core->_guiEntityManager.addGuiEntity(ID, color, translation, rotation, scaling, centered);
-	_core->_guiEntityManager.getEntity(ID)->setEnabled(visible);
+	_core->_guiEntityManager.getEntity(ID)->setVisible(visible);
 }
 
 void FabiEngine3D::guiEntity_hide(const string& ID)
 {
-	_core->_guiEntityManager.getEntity(ID)->setEnabled(false);
+	_core->_guiEntityManager.getEntity(ID)->setVisible(false);
 }
 
 void FabiEngine3D::guiEntity_show(const string& ID)
 {
-	_core->_guiEntityManager.getEntity(ID)->setEnabled(true);
+	_core->_guiEntityManager.getEntity(ID)->setVisible(true);
 }
 
 void FabiEngine3D::guiEntity_delete(const string& ID)
@@ -126,5 +126,5 @@ vec2 FabiEngine3D::guiEntity_getSize(const string& ID)
 
 bool FabiEngine3D::guiEntity_isVisible(const string& ID)
 {
-	return _core->_guiEntityManager.getEntity(ID)->isEnabled();
+	return _core->_guiEntityManager.getEntity(ID)->isVisible();
 }

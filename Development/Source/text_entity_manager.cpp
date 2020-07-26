@@ -64,7 +64,7 @@ void TextEntityManager::update()
 		auto * entity = getEntity(baseEntity->getID());
 
 		// Calculate model matrix
-		if (entity->isEnabled())
+		if (entity->isVisible())
 		{
 			entity->updateModelMatrix();
 		}

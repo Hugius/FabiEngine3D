@@ -151,27 +151,31 @@ void WorldEditor::_updateSkyMesh()
 }
 
 void WorldEditor::_updateSkyOptions()
-{
+{	
 	if (_leftWindow->getActiveScreen()->getID() == "skyOptions")
 	{
+		// Variables
 		auto screen = _leftWindow->getScreen("skyOptions");
+		float skyRotationSpeed = _fe3d.skyEntity_getRotationSpeed("@sky");
+		float skyLightness = _fe3d.skyEntity_getLightness("@sky");
+		vec3 skyColor = _fe3d.skyEntity_getColor("@sky");
 
 		// GUI management
 		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
 		{
 			if (screen->getButton("rotationSpeed")->isHovered())
 			{
-				_gui->getGlobalScreen()->addValueForm("rotationSpeed", "Rotation speed", _skyRotationSpeed * 100.0f, vec2(0.0f), vec2(0.3f, 0.1f));
+				_gui->getGlobalScreen()->addValueForm("rotationSpeed", "Rotation speed", skyRotationSpeed * 100.0f, vec2(0.0f), vec2(0.3f, 0.1f));
 			}
 			else if (screen->getButton("lightness")->isHovered())
 			{
-				_gui->getGlobalScreen()->addValueForm("lightness", "lightness", _skyLightness * 100.0f, vec2(0.0f), vec2(0.3f, 0.1f));
+				_gui->getGlobalScreen()->addValueForm("lightness", "lightness", skyLightness * 100.0f, vec2(0.0f), vec2(0.3f, 0.1f));
 			}
 			else if (screen->getButton("color")->isHovered())
 			{
-				_gui->getGlobalScreen()->addValueForm("colorG", "G(0-255)", _skyColor.g * 255.0f, vec2(0.0f, 0.0f), vec2(0.15f, 0.1f));
-				_gui->getGlobalScreen()->addValueForm("colorR", "R(0-255)", _skyColor.r * 255.0f, vec2(-0.25f, 0.0f), vec2(0.15f, 0.1f));
-				_gui->getGlobalScreen()->addValueForm("colorB", "B(0-255)", _skyColor.b * 255.0f, vec2(0.25f, 0.0f), vec2(0.15f, 0.1f));
+				_gui->getGlobalScreen()->addValueForm("colorG", "G(0-255)", skyColor.g * 255.0f, vec2(0.0f, 0.0f), vec2(0.15f, 0.1f));
+				_gui->getGlobalScreen()->addValueForm("colorR", "R(0-255)", skyColor.r * 255.0f, vec2(-0.25f, 0.0f), vec2(0.15f, 0.1f));
+				_gui->getGlobalScreen()->addValueForm("colorB", "B(0-255)", skyColor.b * 255.0f, vec2(0.25f, 0.0f), vec2(0.15f, 0.1f));
 			}
 			else if (screen->getButton("back")->isHovered())
 			{
@@ -180,39 +184,39 @@ void WorldEditor::_updateSkyOptions()
 		}
 
 		// Speed value conversion
-		if (_gui->getGlobalScreen()->checkValueForm("rotationSpeed", _skyRotationSpeed))
+		if (_gui->getGlobalScreen()->checkValueForm("rotationSpeed", skyRotationSpeed))
 		{
-			_skyRotationSpeed /= 100.0f;
+			skyRotationSpeed /= 100.0f;
 		}
 
 		// Lightness value conversion
-		if (_gui->getGlobalScreen()->checkValueForm("lightness", _skyLightness))
+		if (_gui->getGlobalScreen()->checkValueForm("lightness", skyLightness))
 		{
-			_skyLightness = std::clamp(_skyLightness / 100.0f, 0.0f, 1.0f);
+			skyLightness = std::clamp(skyLightness / 100.0f, 0.0f, 1.0f);
 		}
 
 		// Color R values conversion
-		if (_gui->getGlobalScreen()->checkValueForm("colorR", _skyColor.r))
+		if (_gui->getGlobalScreen()->checkValueForm("colorR", skyColor.r))
 		{
-			_skyColor.r = std::clamp(_skyColor.r / 255.0f, 0.0f, 1.0f);
+			skyColor.r = std::clamp(skyColor.r / 255.0f, 0.0f, 1.0f);
 		}
 
 		// Color G values conversion
-		if (_gui->getGlobalScreen()->checkValueForm("colorG", _skyColor.g))
+		if (_gui->getGlobalScreen()->checkValueForm("colorG", skyColor.g))
 		{
-			_skyColor.g = std::clamp(_skyColor.g / 255.0f, 0.0f, 1.0f);
+			skyColor.g = std::clamp(skyColor.g / 255.0f, 0.0f, 1.0f);
 		}
 
 		// Color B values conversion
-		if (_gui->getGlobalScreen()->checkValueForm("colorB", _skyColor.b))
+		if (_gui->getGlobalScreen()->checkValueForm("colorB", skyColor.b))
 		{
-			_skyColor.b = std::clamp(_skyColor.b / 255.0f, 0.0f, 1.0f);
+			skyColor.b = std::clamp(skyColor.b / 255.0f, 0.0f, 1.0f);
 		}
 
 		// Dynamically update sky options
-		_fe3d.skyEntity_setRotationSpeed("@sky", _skyRotationSpeed);
-		_fe3d.skyEntity_setLightness("@sky", _skyLightness);
-		_fe3d.skyEntity_setColor("@sky", _skyColor);
+		_fe3d.skyEntity_setRotationSpeed("@sky", skyRotationSpeed);
+		_fe3d.skyEntity_setLightness("@sky", skyLightness);
+		_fe3d.skyEntity_setColor("@sky", skyColor);
 	}
 }
 

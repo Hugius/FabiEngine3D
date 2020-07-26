@@ -46,7 +46,7 @@ void TerrainEntityRenderer::renderLightEntities(const vector<LightEntity*>& enti
 	// Render all lights
 	for (size_t i = 0; i < entities.size(); i++) 
 	{
-		if (entities[i]->isEnabled())
+		if (entities[i]->isVisible())
 		{
 			_shader.uploadUniform("u_pointLightPositions[" + std::to_string(i) + "]", entities[i]->getPosition());
 			_shader.uploadUniform("u_pointLightColors[" + std::to_string(i) + "]", entities[i]->getColor());
@@ -65,14 +65,14 @@ void TerrainEntityRenderer::renderLightEntities(const vector<LightEntity*>& enti
 
 void TerrainEntityRenderer::render(const TerrainEntity* entity)
 {
-	if (entity->isEnabled())
+	if (entity->isVisible())
 	{
 		// Faceculling
 		glEnable(GL_CULL_FACE);
 
 		// Shader uniforms
 		_shader.uploadUniform("u_blendmappingEnabled", entity->isBlendMapped());
-		_shader.uploadUniform("u_blendmapRepeat", entity->getBlendRepeat());
+		_shader.uploadUniform("u_blendmapRepeat", entity->getUvRepeat());
 		_shader.uploadUniform("u_blendmapRepeatR", entity->getBlendRepeatR());
 		_shader.uploadUniform("u_blendmapRepeatG", entity->getBlendRepeatG());
 		_shader.uploadUniform("u_blendmapRepeatB", entity->getBlendRepeatB());

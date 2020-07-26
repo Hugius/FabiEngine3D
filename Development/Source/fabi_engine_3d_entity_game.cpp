@@ -25,7 +25,7 @@ void FabiEngine3D::gameEntity_add
 )
 {
 	_core->_gameEntityManager.addGameEntity(ID, objName, position, rotation, size);
-	_core->_gameEntityManager.getEntity(ID)->setEnabled(visible);
+	_core->_gameEntityManager.getEntity(ID)->setVisible(visible);
 }
 
 void FabiEngine3D::gameEntity_delete(const string& ID)
@@ -67,7 +67,7 @@ void FabiEngine3D::gameEntity_hideAll()
 {
 	for (auto entity : _core->_gameEntityManager.getEntities())
 	{
-		entity->setEnabled(false);
+		entity->setVisible(false);
 
 		// Hide possible AABB
 		if (aabbEntity_isExisting(entity->getID()))
@@ -81,7 +81,7 @@ void FabiEngine3D::gameEntity_showAll()
 {
 	for (auto entity : _core->_gameEntityManager.getEntities())
 	{
-		entity->setEnabled(true);
+		entity->setVisible(true);
 
 		// Show possible AABB
 		if (aabbEntity_isExisting(entity->getID()))
@@ -93,7 +93,7 @@ void FabiEngine3D::gameEntity_showAll()
 
 void FabiEngine3D::gameEntity_hide(const string& ID)
 {
-	_core->_gameEntityManager.getEntity(ID)->setEnabled(false);
+	_core->_gameEntityManager.getEntity(ID)->setVisible(false);
 
 	// Hide possible AABB
 	if (aabbEntity_isExisting(ID))
@@ -104,7 +104,7 @@ void FabiEngine3D::gameEntity_hide(const string& ID)
 
 void FabiEngine3D::gameEntity_show(const string& ID)
 {
-	_core->_gameEntityManager.getEntity(ID)->setEnabled(true);
+	_core->_gameEntityManager.getEntity(ID)->setVisible(true);
 
 	// Show possible AABB
 	if (aabbEntity_isExisting(ID))
@@ -163,7 +163,7 @@ bool FabiEngine3D::gameEntity_isExisting(const string& ID)
 
 bool FabiEngine3D::gameEntity_isVisible(const string& ID)
 {
-	return _core->_gameEntityManager.getEntity(ID)->isEnabled();
+	return _core->_gameEntityManager.getEntity(ID)->isVisible();
 }
 
 bool FabiEngine3D::gameEntity_isMultiTextured(const string& ID)
@@ -270,12 +270,12 @@ vec3 FabiEngine3D::gameEntity_getSize(const string& ID)
 
 void FabiEngine3D::gameEntity_enable(const string& ID)
 {
-	_core->_gameEntityManager.getEntity(ID)->setEnabled(true);
+	_core->_gameEntityManager.getEntity(ID)->setVisible(true);
 }
 
 void FabiEngine3D::gameEntity_disable(const string& ID)
 {
-	_core->_gameEntityManager.getEntity(ID)->setEnabled(false);
+	_core->_gameEntityManager.getEntity(ID)->setVisible(false);
 }
 
 void FabiEngine3D::gameEntity_setSpecularFactor(const string& ID, float intensity)

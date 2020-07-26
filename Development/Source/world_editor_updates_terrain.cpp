@@ -48,7 +48,7 @@ void WorldEditor::_updateTerrainMenu()
 			}
 			else if (screen->getButton("remove")->isHovered())
 			{
-				_unloadTerrainData();
+				_fe3d.terrainEntity_delete("@terrain");
 			}
 			else if (screen->getButton("back")->isHovered())
 			{
@@ -62,6 +62,9 @@ void WorldEditor::_updateTerrainMenu()
 void WorldEditor::_updateTerrainManagement()
 {
 	auto screen = _leftWindow->getScreen("terrainManagement");
+
+	// Blendmap screen hoverability
+	screen->getButton("blendmap")->setHoverable(_fe3d.terrainEntity_isExisting("@terrain"));
 
 	// GUI management
 	if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
@@ -80,9 +83,6 @@ void WorldEditor::_updateTerrainManagement()
 		}
 	}
 
-	// Options screen hoverability
-	screen->getButton("blendmap")->setHoverable(_fe3d.terrainEntity_isExisting("@terrain"));
-
 	// Update sub-menus
 	_updateTerrainCamera();
 	_updateTerrainMesh();
@@ -93,9 +93,17 @@ void WorldEditor::_updateTerrainMesh()
 {
 	if (_leftWindow->getActiveScreen()->getID() == "terrainMesh")
 	{
+		// Variables
 		auto screen = _leftWindow->getScreen("terrainMesh");
 		string heightmapFolderPath = "User\\Assets\\Textures\\HeightMaps\\";
 		string diffuseMapFolderPath = "User\\Assets\\Textures\\DiffuseMaps\\";
+
+		// Buttons hoverability
+		bool existing = _fe3d.terrainEntity_isExisting("@terrain");
+		screen->getScrollingList("buttonList")->getButton("diffuseMap")->setHoverable(existing);
+		screen->getScrollingList("buttonList")->getButton("maxHeight")->setHoverable(existing);
+		screen->getScrollingList("buttonList")->getButton("uvRepeat")->setHoverable(existing);
+		screen->getScrollingList("buttonList")->getButton("lightness")->setHoverable(existing);
 
 		// GUI management
 		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
@@ -103,41 +111,39 @@ void WorldEditor::_updateTerrainMesh()
 			if (screen->getScrollingList("buttonList")->getButton("heightmap")->isHovered())
 			{
 				string fileName = _fe3d.misc_getWinExplorerFilename(heightmapFolderPath, "BMP");
-				_terrainHeightmapPath = (fileName == "") ? _terrainHeightmapPath : (heightmapFolderPath + fileName);
+
+				// Check if not cancelled
+				if (fileName != "")
+				{
+					_fe3d.misc_clearHeightMapCache(heightmapFolderPath + fileName);
+					_loadTerrainEntity(heightmapFolderPath + fileName);
+				}
 			}
 			else if (screen->getScrollingList("buttonList")->getButton("diffuseMap")->isHovered())
 			{
 				string fileName = _fe3d.misc_getWinExplorerFilename(diffuseMapFolderPath, "PNG");
-				_terrainDiffusemapPath = (fileName == "") ? _terrainDiffusemapPath : (diffuseMapFolderPath + fileName);
-			}
-			else if (screen->getScrollingList("buttonList")->getButton("size")->isHovered())
-			{
-				_gui->getGlobalScreen()->addValueForm("size", "Size", _terrainSize, vec2(0.0f), vec2(0.3f, 0.1f));
+
+				// Check if not cancelled
+				if (fileName != "")
+				{
+					_fe3d.misc_clearTextureCache(diffuseMapFolderPath + fileName);
+					_fe3d.terrainEntity_setDiffuseMap("@terrain", diffuseMapFolderPath + fileName);
+				}
 			}
 			else if (screen->getScrollingList("buttonList")->getButton("maxHeight")->isHovered())
 			{
-				_gui->getGlobalScreen()->addValueForm("maxHeight", "Max height", _maxTerrainHeight, vec2(0.0f), vec2(0.3f, 0.1f));
+				float maxHeight = _fe3d.terrainEntity_getMaxHeight("@terrain");
+				_gui->getGlobalScreen()->addValueForm("maxHeight", "Max height", maxHeight, vec2(0.0f), vec2(0.3f, 0.1f));
 			}
 			else if (screen->getScrollingList("buttonList")->getButton("uvRepeat")->isHovered())
 			{
-				_gui->getGlobalScreen()->addValueForm("uvRepeat", "UV repeat", _terrainUvRepeat, vec2(0.0f), vec2(0.3f, 0.1f));
+				float uvRepeat = _fe3d.terrainEntity_getUvRepeat("@terrain");
+				_gui->getGlobalScreen()->addValueForm("uvRepeat", "UV repeat", uvRepeat, vec2(0.0f), vec2(0.3f, 0.1f));
 			}
 			else if (screen->getScrollingList("buttonList")->getButton("lightness")->isHovered())
 			{
-				_gui->getGlobalScreen()->addValueForm("lightness", "Lightness (0-100)", _terrainLightness * 100.0f, vec2(0.0f), vec2(0.3f, 0.1f));
-			}
-			else if (screen->getButton("load")->isHovered())
-			{
-				// Clear texture caches
-				_fe3d.misc_clearHeightMapCache(_terrainHeightmapPath);
-				_fe3d.misc_clearTextureCache(_terrainDiffusemapPath);
-				_fe3d.misc_clearTextureCache(_terrainBlendmapPath);
-				_fe3d.misc_clearTextureCache(_terrainRedPath);
-				_fe3d.misc_clearTextureCache(_terrainGreenPath);
-				_fe3d.misc_clearTextureCache(_terrainBluePath);
-
-				// Load entity
-				_loadTerrainEntity();
+				float lightness = _fe3d.terrainEntity_getLightness("@terrain");
+				_gui->getGlobalScreen()->addValueForm("lightness", "Lightness (0-100)", lightness * 100.0f, vec2(0.0f), vec2(0.3f, 0.1f));
 			}
 			else if (screen->getButton("back")->isHovered())
 			{
@@ -145,30 +151,31 @@ void WorldEditor::_updateTerrainMesh()
 			}
 		}
 
-		// Check if value confirmed
-		_gui->getGlobalScreen()->checkValueForm("size", _terrainSize);
-		_gui->getGlobalScreen()->checkValueForm("maxHeight", _maxTerrainHeight);
-		_gui->getGlobalScreen()->checkValueForm("uvRepeat", _terrainUvRepeat);
-
-		// Lightness value conversion
-		if (_gui->getGlobalScreen()->checkValueForm("lightness", _terrainLightness))
+		// If terrain entity exists
+		if (existing)
 		{
-			_terrainLightness = std::clamp(_terrainLightness / 100.0f, 0.0f, 1.0f);
+			// Check if maxHeight confirmed
+			float maxHeight = _fe3d.terrainEntity_getMaxHeight("@terrain");
+			if (_gui->getGlobalScreen()->checkValueForm("maxHeight", maxHeight))
+			{
+				_fe3d.terrainEntity_setMaxHeight("@terrain", maxHeight);
+			}
+
+			// Check if uvRepeat confirmed
+			float uvRepeat = _fe3d.terrainEntity_getUvRepeat("@terrain");
+			if (_gui->getGlobalScreen()->checkValueForm("uvRepeat", uvRepeat))
+			{
+				_fe3d.terrainEntity_setUvRepeat("@terrain", uvRepeat);
+			}
+
+			// Check if lightness confirmed
+			float lightness = _fe3d.terrainEntity_getLightness("@terrain");
+			if (_gui->getGlobalScreen()->checkValueForm("lightness", lightness))
+			{
+				lightness = std::clamp(lightness / 100.0f, 0.0f, 1.0f);
+				_fe3d.terrainEntity_setLightness("@terrain", lightness);
+			}
 		}
-
-		// Filling statuses
-		bool heightmap = _terrainHeightmapPath != "";
-		bool diffuseMap = _terrainDiffusemapPath != "";
-		bool size = _terrainSize != 0.0f;
-		bool maxHeight = _maxTerrainHeight != 0.0f;
-		bool uvRepeat = _terrainUvRepeat != 0.0f;
-
-		// Button hoverability
-		screen->getScrollingList("buttonList")->getButton("diffuseMap")->setHoverable(heightmap);
-		screen->getScrollingList("buttonList")->getButton("size")->setHoverable(heightmap && diffuseMap);
-		screen->getScrollingList("buttonList")->getButton("maxHeight")->setHoverable(heightmap && diffuseMap && size);
-		screen->getScrollingList("buttonList")->getButton("uvRepeat")->setHoverable(heightmap && diffuseMap && size && maxHeight);
-		screen->getButton("load")->setHoverable(heightmap && diffuseMap && size && maxHeight && uvRepeat);
 	}
 }
 
@@ -176,6 +183,7 @@ void WorldEditor::_updateTerrainBlendmap()
 {
 	if (_leftWindow->getActiveScreen()->getID() == "terrainBlendmap")
 	{
+		// Variables
 		auto screen = _leftWindow->getScreen("terrainBlendmap");
 		string blendmapPath = "User\\Assets\\Textures\\BlendMaps\\";
 		string diffuseMapPath = "User\\Assets\\Textures\\DiffuseMaps\\";
@@ -186,48 +194,61 @@ void WorldEditor::_updateTerrainBlendmap()
 			if (screen->getScrollingList("buttonList")->getButton("blendmap")->isHovered())
 			{
 				string fileName = _fe3d.misc_getWinExplorerFilename(blendmapPath, "PNG");
-				_terrainBlendmapPath = (fileName == "") ? _terrainBlendmapPath : (blendmapPath + fileName);
+
+				// Check if not cancelled
+				if (fileName != "")
+				{
+					_fe3d.misc_clearTextureCache(blendmapPath + fileName);
+					_fe3d.terrainEntity_setBlendMap("@terrain", blendmapPath + fileName);
+				}
 			}
 			else if (screen->getScrollingList("buttonList")->getButton("red")->isHovered())
 			{
 				string fileName = _fe3d.misc_getWinExplorerFilename(diffuseMapPath, "PNG");
-				_terrainRedPath = (fileName == "") ? _terrainRedPath : (diffuseMapPath + fileName);
+
+				// Check if not cancelled
+				if (fileName != "")
+				{
+					_fe3d.misc_clearTextureCache(diffuseMapPath + fileName);
+					_fe3d.terrainEntity_setBlendMapR("@terrain", diffuseMapPath + fileName);
+				}
 			}
 			else if (screen->getScrollingList("buttonList")->getButton("green")->isHovered())
 			{
 				string fileName = _fe3d.misc_getWinExplorerFilename(diffuseMapPath, "PNG");
-				_terrainGreenPath = (fileName == "") ? _terrainGreenPath : (diffuseMapPath + fileName);
+				
+				// Check if not cancelled
+				if (fileName != "")
+				{
+					_fe3d.misc_clearTextureCache(diffuseMapPath + fileName);
+					_fe3d.terrainEntity_setBlendMapG("@terrain", diffuseMapPath + fileName);
+				}
 			}
 			else if (screen->getScrollingList("buttonList")->getButton("blue")->isHovered())
 			{
 				string fileName = _fe3d.misc_getWinExplorerFilename(diffuseMapPath, "PNG");
-				_terrainBluePath = (fileName == "") ? _terrainBluePath : (diffuseMapPath + fileName);
+				
+				// Check if not cancelled
+				if (fileName != "")
+				{
+					_fe3d.misc_clearTextureCache(diffuseMapPath + fileName);
+					_fe3d.terrainEntity_setBlendMapB("@terrain", diffuseMapPath + fileName);
+				}
 			}
 			else if (screen->getScrollingList("buttonList")->getButton("redRepeat")->isHovered())
 			{
-				_gui->getGlobalScreen()->addValueForm("redRepeat", "Red repeat", _terrainRedUvRepeat, vec2(0.0f), vec2(0.3f, 0.1f));
+				float blendRepeatR = _fe3d.terrainEntity_getBlendRepeatR("@terrain");
+				_gui->getGlobalScreen()->addValueForm("redRepeat", "Red repeat", blendRepeatR, vec2(0.0f), vec2(0.3f, 0.1f));
 			}
 			else if (screen->getScrollingList("buttonList")->getButton("greenRepeat")->isHovered())
 			{
-				_gui->getGlobalScreen()->addValueForm("greenRepeat", "Green repeat", _terrainGreenUvRepeat, vec2(0.0f), vec2(0.3f, 0.1f));
+				float blendRepeatG = _fe3d.terrainEntity_getBlendRepeatG("@terrain");
+				_gui->getGlobalScreen()->addValueForm("greenRepeat", "Green repeat", blendRepeatG, vec2(0.0f), vec2(0.3f, 0.1f));
 			}
 			else if (screen->getScrollingList("buttonList")->getButton("blueRepeat")->isHovered())
 			{
-				_gui->getGlobalScreen()->addValueForm("blueRepeat", "Blue repeat", _terrainBlueUvRepeat, vec2(0.0f), vec2(0.3f, 0.1f));
-			}
-			else if (screen->getButton("load")->isHovered())
-			{
-				_isTerrainBlendmapped = true;
-
-				// Clear texture caches
-				_fe3d.misc_clearTextureCache(_terrainBlendmapPath);
-				_fe3d.misc_clearTextureCache(_terrainRedPath);
-				_fe3d.misc_clearTextureCache(_terrainGreenPath);
-				_fe3d.misc_clearTextureCache(_terrainBluePath);
-
-				// Set blendmap
-				_fe3d.terrainEntity_addBlending("@terrain", _terrainBlendmapPath, _terrainRedPath, _terrainGreenPath, 
-					_terrainBluePath, _terrainRedUvRepeat, _terrainGreenUvRepeat, _terrainBlueUvRepeat);
+				float blendRepeatB = _fe3d.terrainEntity_getBlendRepeatB("@terrain");
+				_gui->getGlobalScreen()->addValueForm("blueRepeat", "Blue repeat", blendRepeatB, vec2(0.0f), vec2(0.3f, 0.1f));
 			}
 			else if (screen->getButton("back")->isHovered())
 			{
@@ -235,19 +256,38 @@ void WorldEditor::_updateTerrainBlendmap()
 			}
 		}
 
-		// Check if value confirmed
-		_gui->getGlobalScreen()->checkValueForm("redRepeat", _terrainRedUvRepeat);
-		_gui->getGlobalScreen()->checkValueForm("greenRepeat", _terrainGreenUvRepeat);
-		_gui->getGlobalScreen()->checkValueForm("blueRepeat", _terrainBlueUvRepeat);
+		// Check if redRepeat confirmed
+		float blendRepeatR = _fe3d.terrainEntity_getBlendRepeatR("@terrain");
+		if (_gui->getGlobalScreen()->checkValueForm("redRepeat", blendRepeatR))
+		{
+			_fe3d.terrainEntity_setBlendRepeatR("@terrain", blendRepeatR);
+		}
+
+		// Check if greenRepeat confirmed
+		float blendRepeatG = _fe3d.terrainEntity_getBlendRepeatG("@terrain");
+		if (_gui->getGlobalScreen()->checkValueForm("greenRepeat", blendRepeatG))
+		{
+			_fe3d.terrainEntity_setBlendRepeatG("@terrain", blendRepeatG);
+		}
+
+		// Check if blueRepeat confirmed
+		float blendRepeatB = _fe3d.terrainEntity_getBlendRepeatB("@terrain");
+		if (_gui->getGlobalScreen()->checkValueForm("blueRepeat", blendRepeatB))
+		{
+			_fe3d.terrainEntity_setBlendRepeatB("@terrain", blendRepeatB);
+		}
 
 		// Filling statuses
-		bool loadedBlendmap = _terrainBlendmapPath != "";
-		bool loadedRedTex = _terrainRedPath != "";
-		bool loadedGreenTex = _terrainGreenPath != "";
-		bool loadedBlueTex = _terrainBluePath != "";
-		bool loadedRedUV = _terrainRedUvRepeat != 0.0f;
-		bool loadedGreenUV = _terrainGreenUvRepeat != 0.0f;
-		bool loadedBlueUV = _terrainBlueUvRepeat != 0.0f;
+		bool loadedBlendmap = _fe3d.terrainEntity_getBlendMapPath("@terrain")  != "";
+		bool loadedRedTex   = _fe3d.terrainEntity_getBlendMapPathR("@terrain") != "";
+		bool loadedGreenTex = _fe3d.terrainEntity_getBlendMapPathG("@terrain") != "";
+		bool loadedBlueTex  = _fe3d.terrainEntity_getBlendMapPathB("@terrain") != "";
+
+		// Enabling blendmapping when every needed texture is chosen
+		if (loadedBlendmap && loadedRedTex && loadedGreenTex && loadedBlueTex)
+		{
+			_fe3d.terrainEntity_setBlendMapped("@terrain", true);
+		}
 
 		// Button hoverability
 		screen->getScrollingList("buttonList")->getButton("red")->setHoverable(loadedBlendmap);
@@ -256,7 +296,6 @@ void WorldEditor::_updateTerrainBlendmap()
 		screen->getScrollingList("buttonList")->getButton("redRepeat")->setHoverable(loadedBlendmap && loadedRedTex);
 		screen->getScrollingList("buttonList")->getButton("greenRepeat")->setHoverable(loadedBlendmap && loadedGreenTex);
 		screen->getScrollingList("buttonList")->getButton("blueRepeat")->setHoverable(loadedBlendmap && loadedBlueTex);
-		screen->getButton("load")->setHoverable(loadedBlendmap && loadedRedTex && loadedGreenTex && loadedBlueTex && loadedRedUV && loadedGreenUV && loadedBlueUV);
 	}
 }
 
@@ -274,9 +313,9 @@ void WorldEditor::_updateTerrainCamera()
 		_totalCameraRotation += _cameraRotationSpeed;
 
 		// Calculate new camera position
-		float x = _terrainCameraDistance * sin(_totalCameraRotation);
-		float y = _terrainCameraHeight;
-		float z = _terrainCameraDistance * cos(_totalCameraRotation);
+		float x = (_fe3d.terrainEntity_getSize("@terrain") / 2.0f) * sin(_totalCameraRotation);
+		float y = (_fe3d.terrainEntity_getMaxHeight("@terrain") * 1.25f);
+		float z = (_fe3d.terrainEntity_getSize("@terrain") / 2.0f) * cos(_totalCameraRotation);
 
 		// Update camera position
 		_fe3d.camera_setPosition(vec3(x, y, z));

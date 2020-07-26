@@ -18,7 +18,7 @@ layout(location = 3) uniform sampler2D   u_sampler_blendMapG;
 layout(location = 4) uniform sampler2D   u_sampler_blendMapB;
 layout(location = 5) uniform sampler2D   u_sampler_shadowMap;
 
-// Uniforms
+// Vec3 uniforms
 uniform vec3 u_cameraPosition;
 uniform vec3 u_ambientLightingColor;
 uniform vec3 u_directionalLightingColor;
@@ -26,6 +26,7 @@ uniform vec3 u_directionalLightingPosition;
 uniform vec3 u_pointLightPositions[POINT_LIGHT_AMOUNT];
 uniform vec3 u_pointLightColors[POINT_LIGHT_AMOUNT];
 
+// Float uniforms
 uniform float u_lightness;
 uniform float u_ambientLightingIntensity;
 uniform float u_directionalLightingIntensity;
@@ -37,6 +38,7 @@ uniform float u_blendmapRepeatR;
 uniform float u_blendmapRepeatG;
 uniform float u_blendmapRepeatB;
 
+// Boolean uniforms
 uniform bool u_blendmappingEnabled;
 uniform bool u_ambientLightingEnabled;
 uniform bool u_directionalLightingEnabled;
@@ -44,6 +46,7 @@ uniform bool u_pointLightingEnabled;
 uniform bool u_fogEnabled;
 uniform bool u_shadowsEnabled;
 
+// Integer uniforms
 uniform int u_shadowMapSize;
 uniform int u_pointLightCount;
 

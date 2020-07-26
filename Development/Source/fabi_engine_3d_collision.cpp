@@ -53,12 +53,12 @@ void FabiEngine3D::aabbEntity_delete(const string& ID)
 
 void FabiEngine3D::aabbEntity_hide(const string& ID)
 {
-	_core->_aabbEntityManager.getEntity(ID)->setEnabled(false);
+	_core->_aabbEntityManager.getEntity(ID)->setVisible(false);
 }
 
 void FabiEngine3D::aabbEntity_show(const string& ID)
 {
-	_core->_aabbEntityManager.getEntity(ID)->setEnabled(true);
+	_core->_aabbEntityManager.getEntity(ID)->setVisible(true);
 }
 
 void FabiEngine3D::aabbEntity_setResponsiveness(const string& ID, bool responsive)

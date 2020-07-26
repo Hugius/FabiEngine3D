@@ -34,7 +34,7 @@ public:
 	void engine_start();
 	void engine_stop();
 
-	// Camera interface
+	// Camera interface - setters
 	void  camera_load(float fov, float nearZ, float farZ, vec3 startPos, float yaw = 0.0f, float pitch = 0.0f);
 	void  camera_enableLookat(vec3 position);
 	void  camera_disableLookat();
@@ -50,60 +50,87 @@ public:
 	void  camera_invertYaw();
 	void  camera_invertPitch();
 	void  camera_setFOV(float fov);
-	void  camera_setSensitivity(float speed);
+	void  camera_setMouseSensitivity(float speed);
 	void  camera_setYaw(float val);
 	void  camera_setPitch(float val);
 	void  camera_setNearDistance(float val);
 	void  camera_setFarDistance(float val);
+
+	// Camera interface - getters
+	bool  camera_isLookatEnabled();
+	bool  camera_isFirstPersonViewEnabled();
+	bool  camera_isFreeMovementEnabled();
+	vec3  camera_getPos();
+	float camera_getFOV();
+	float getAspectRatio();
+	float camera_getMouseSensitivity();
 	float camera_getYaw();
 	float camera_getPitch();
+	float camera_getNearDistance();
+	float camera_getFarDistance();
 	float camera_getMouseOffset();
-	float camera_getFOV();
-	vec3  camera_getPos();
-	vec3  camera_getFront();
-	bool  camera_isFirstPersonViewEnabled();
 
-	// Sky entity interface
+	// Sky entity interface - setters
 	void skyEntity_add
 	(
 		const string& ID, const vector<string> texturePaths
 	);
-	void skyEntity_addNightCubemap(const string& ID, const string& textureDirectoryPath);
 	void skyEntity_delete(const string& ID);
 	void skyEntity_hide(const string& ID);
 	void skyEntity_show(const string& ID);
-	bool skyEntity_isExisting(const string& ID);
 	void skyEntity_select(const string& ID);
 	void skyEntity_setLightness(const string& ID, float lightness);
 	void skyEntity_setRotationSpeed(const string& ID, float speed);
 	void skyEntity_setColor(const string& ID, vec3 color);
-	void skyEntity_setDayTime(const string& ID);
-	void skyEntity_setNightTime(const string& ID);
-	void skyEntity_fadeDayTime(const string& ID);
-	void skyEntity_fadeNightTime(const string& ID);
-	bool skyEntity_isDayTime(const string& ID);
-	bool skyEntity_isNightTime(const string& ID);
-	string skyEntity_getSelectedID();
 
-	// Terrain entity interface
-	void terrainEntity_add(const string& ID, const string& heightmapPath, const string& texturePath, vec3 pos, float size, float maxHeight, float uvRepeat, float lightness);
+	// Sky entity interface - getters
+	bool skyEntity_isExisting(const string& ID);
+	bool skyEntity_isVisible(const string& ID);
+	string skyEntity_getSelectedID();
+	float skyEntity_getLightness(const string& ID);
+	float skyEntity_getRotationSpeed(const string& ID);
+	vec3 skyEntity_getColor(const string& ID);
+
+	// Terrain entity interface - setters
+	void terrainEntity_add(const string& ID, const string& heightMapPath);
 	void terrainEntity_delete(const string& ID);
 	void terrainEntity_hide(const string& ID);
 	void terrainEntity_show(const string& ID);
 	void terrainEntity_select(const string& ID);
-	bool terrainEntity_isExisting(const string& ID);
-	float terrainEntity_getSize(const string& ID);
-	float terrainEntity_getMaxHeight(const string& ID);
-	float terrainEntity_getPixelHeight(float x, float z);
-	bool terrainEntity_isInside(float x, float z);
-	vec3 terrainEntity_getMousePoint();
+	void terrainEntity_setMaxHeight(const string& ID, float height);
+	void terrainEntity_setUvRepeat(const string& ID, float repeat);
+	void terrainEntity_setDiffuseMap(const string& ID, const string& texturePath);
+	void terrainEntity_setLightness(const string& ID, float lightness);
+	void terrainEntity_setBlendMapped(const string& ID, bool enabled);
+	void terrainEntity_setBlendMap(const string& ID, const string& texturePath);
+	void terrainEntity_setBlendMapR(const string& ID, const string& texturePath);
+	void terrainEntity_setBlendMapG(const string& ID, const string& texturePath);
+	void terrainEntity_setBlendMapB(const string& ID, const string& texturePath);
+	void terrainEntity_setBlendRepeatR(const string& ID, float repeat);
+	void terrainEntity_setBlendRepeatG(const string& ID, float repeat);
+	void terrainEntity_setBlendRepeatB(const string& ID, float repeat);
+
+	// Terrain entity interface - getters
+	bool   terrainEntity_isExisting(const string& ID);
+	bool   terrainEntity_isVisible(const string& ID);
+	bool   terrainEntity_isBlendMapped(const string& ID);
+	bool   terrainEntity_isInside(const string& ID, float x, float z);
 	string terrainEntity_getSelectedID();
-	void terrainEntity_addBlending
-	(
-		const string& ID, const string blendmapPath, const string blendmapPathR,
-		const string blendmapPathG, const string blendmapPathB,
-		float blendRepeatR, float blendRepeatG, float blendRepeatB
-	);
+	string terrainEntity_getDiffuseMapPath(const string& ID);
+	string terrainEntity_getHeightMapPath(const string& ID);
+	string terrainEntity_getBlendMapPath(const string& ID);
+	string terrainEntity_getBlendMapPathR(const string& ID);
+	string terrainEntity_getBlendMapPathG(const string& ID);
+	string terrainEntity_getBlendMapPathB(const string& ID);
+	float  terrainEntity_getMaxHeight(const string& ID);
+	float  terrainEntity_getUvRepeat(const string& ID);
+	float  terrainEntity_getLightness(const string& ID);
+	float  terrainEntity_getBlendRepeatR(const string& ID);
+	float  terrainEntity_getBlendRepeatG(const string& ID);
+	float  terrainEntity_getBlendRepeatB(const string& ID);
+	float  terrainEntity_getSize(const string& ID);
+	float  terrainEntity_getPixelHeight(const string& ID, float x, float z);
+	vec3   terrainEntity_getMousePoint();
 
 	// Water entity interface
 	void waterEntity_add(const string& ID, float size);

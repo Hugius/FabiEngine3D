@@ -1,13 +1,8 @@
 #include "shader_bus.hpp"
 
-void ShaderBus::setSkyReflectionCubeMapDay(GLuint val)
+void ShaderBus::setSkyReflectionCubeMap(GLuint val)
 {
-	_skyReflectionCubeMapDay = val;
-}
-
-void ShaderBus::setSkyReflectionCubeMapNight(GLuint val)
-{
-	_skyReflectionCubeMapNight = val;
+	_skyReflectionCubeMap = val;
 }
 
 void ShaderBus::setSceneReflectionMap(GLuint val)
@@ -160,11 +155,6 @@ void ShaderBus::setDofMinDistance(float val)
 	_dofMinDistance = val;
 }
 
-void ShaderBus::setSkyReflectionMixValue(float val)
-{
-	_skyReflectionMixValue = val;
-}
-
 void ShaderBus::setSkyReflectionFactor(float val)
 {
 	_skyReflectionFactor = val;
@@ -265,14 +255,9 @@ void ShaderBus::setDebugRenderEnabled(bool val)
 	_debugRenderEnabled = val;
 }
 
-const GLuint ShaderBus::getSkyReflectionCubeMapDay() const
+const GLuint ShaderBus::getSkyReflectionCubeMap() const
 {
-	return _skyReflectionCubeMapDay;
-}
-
-const GLuint ShaderBus::getSceneReflectionCubeMapNight() const
-{
-	return _skyReflectionCubeMapNight;
+	return _skyReflectionCubeMap;
 }
 
 const GLuint ShaderBus::getSceneReflectionMap() const
@@ -423,11 +408,6 @@ const float ShaderBus::getFarZ() const
 const float ShaderBus::getDofMinDistance() const
 {
 	return _dofMinDistance;
-}
-
-const float ShaderBus::getSkyReflectionMixValue() const
-{
-	return _skyReflectionMixValue;
 }
 
 const float ShaderBus::getSkyReflectionFactor() const

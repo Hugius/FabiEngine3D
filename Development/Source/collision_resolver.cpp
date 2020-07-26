@@ -63,7 +63,7 @@ void CollisionResolver::update(const vector<AabbEntity*> & boxes, TerrainEntityM
 			float camX = camera.getPosition().x;
 			float camY = camera.getPosition().y;
 			float camZ = camera.getPosition().z;
-			float targetY = terrainManager.getPixelHeight(camX, camZ) + _cameraHeight;
+			float targetY = terrainManager.getPixelHeight(terrainManager.getSelectedTerrain()->getID(), camX, camZ) + _cameraHeight;
 
 			// If camera goes underground
 			if (camY < targetY)

@@ -23,22 +23,16 @@ void SkyEntityRenderer::unbind()
 
 void SkyEntityRenderer::render(const SkyEntity* entity)
 {
-	if (entity->isEnabled())
+	if (entity->isVisible())
 	{
 		// Uniforms
 		_shader.uploadUniform("u_lightness", entity->getLightness());
-		_shader.uploadUniform("u_mixValue", entity->getMixValue());
 		_shader.uploadUniform("u_color", entity->getColor());
 
 		// Day texture
-		_shader.uploadUniform("u_sampler_day", 0);
+		_shader.uploadUniform("u_sampler_cubeMap", 0);
 		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_CUBE_MAP, entity->getDayCubeMap());
-
-		// Night texture
-		_shader.uploadUniform("u_sampler_night", 1);
-		glActiveTexture(GL_TEXTURE1);
-		glBindTexture(GL_TEXTURE_CUBE_MAP, entity->getNightCubeMap());
+		glBindTexture(GL_TEXTURE_CUBE_MAP, entity->getCubeMap());
 
 		// Bind
 		glBindVertexArray(entity->getOglBuffer()->getVAO());

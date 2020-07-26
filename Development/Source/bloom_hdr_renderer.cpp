@@ -13,7 +13,7 @@ void BloomHdrRenderer::unbind()
 
 void BloomHdrRenderer::render(const GuiEntity * entity, GLuint sceneMap)
 {
-	if (entity->isEnabled())
+	if (entity->isVisible())
 	{
 		// Uniforms
 		_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix());

@@ -13,8 +13,7 @@ public:
 
 	// Textures
 	void setSceneMap(GLuint val);
-	void setSkyReflectionCubeMapDay(GLuint val);
-	void setSkyReflectionCubeMapNight(GLuint val);
+	void setSkyReflectionCubeMap(GLuint val);
 	void setSceneReflectionMap(GLuint val);
 	void setSceneRefractionMap(GLuint val);
 	void setShadowMap(GLuint val);
@@ -48,7 +47,6 @@ public:
 	void setNearZ(float val);
 	void setFarZ(float val);
 	void setDofMinDistance(float val);
-	void setSkyReflectionMixValue(float val);
 	void setSkyReflectionFactor(float val);
 	void setSceneReflectionHeight(float val);
 	void setSceneReflectionFactor(float val);
@@ -77,17 +75,16 @@ public:
 	void setDebugRenderEnabled(bool val);
 
 	// Textures
-	const GLuint getSceneMap()                    const;
-	const GLuint getSkyReflectionCubeMapDay()     const;
-	const GLuint getSceneReflectionCubeMapNight() const;
-	const GLuint getSceneReflectionMap()          const;
-	const GLuint getSceneRefractionMap()          const;
-	const GLuint getShadowMap()                   const;
-	const GLuint getBloomMap()                    const;
-	const GLuint getBloomedDofSceneMap()          const;
-	const GLuint getDepthMap()                    const;
-	const GLuint getBlurMap()                     const;
-	const GLuint getMotionBlurMap()               const;
+	const GLuint getSceneMap()             const;
+	const GLuint getSkyReflectionCubeMap() const;
+	const GLuint getSceneReflectionMap()   const;
+	const GLuint getSceneRefractionMap()   const;
+	const GLuint getShadowMap()            const;
+	const GLuint getBloomMap()             const;
+	const GLuint getBloomedDofSceneMap()   const;
+	const GLuint getDepthMap()             const;
+	const GLuint getBlurMap()              const;
+	const GLuint getMotionBlurMap()        const;
 
 	// Matrices
 	const mat4 & getViewMatrix()        const;
@@ -113,7 +110,6 @@ public:
 	const float getNearZ()					   const;
 	const float getFarZ()					   const;
 	const float getDofMinDistance()			   const;
-	const float getSkyReflectionMixValue()	   const;
 	const float getSkyReflectionFactor()	   const;
 	const float getSceneReflectionHeight()	   const;
 	const float getSceneReflectionFactor()	   const;
@@ -143,17 +139,16 @@ public:
 
 private:
 	// Textures
-	GLuint _sceneMap                  = 0;
-	GLuint _skyReflectionCubeMapDay   = 0;
-	GLuint _skyReflectionCubeMapNight = 0;
-	GLuint _sceneReflectionMap        = 0;
-	GLuint _sceneRefractionMap        = 0;
-	GLuint _shadowMap                 = 0;
-	GLuint _bloomMap                  = 0;
-	GLuint _bloomedDofSceneMap        = 0;
-	GLuint _depthMap                  = 0;
-	GLuint _blurMap                   = 0;
-	GLuint _motionBlurMap             = 0;
+	GLuint _sceneMap             = 0;
+	GLuint _skyReflectionCubeMap = 0;
+	GLuint _sceneReflectionMap   = 0;
+	GLuint _sceneRefractionMap   = 0;
+	GLuint _shadowMap            = 0;
+	GLuint _bloomMap             = 0;
+	GLuint _bloomedDofSceneMap   = 0;
+	GLuint _depthMap             = 0;
+	GLuint _blurMap              = 0;
+	GLuint _motionBlurMap        = 0;
 	
 	// Matrices
 	mat4 _viewMatrix        = mat4(1.0f);
@@ -179,7 +174,6 @@ private:
 	float _nearZ                        = 0.0f;
 	float _farZ                         = 0.0f;
 	float _dofMinDistance               = 0.0f;
-	float _skyReflectionMixValue        = 0.0f;
 	float _skyReflectionFactor          = 0.0f;
 	float _sceneReflectionHeight        = 0.0f;
 	float _sceneReflectionFactor        = 0.0f;

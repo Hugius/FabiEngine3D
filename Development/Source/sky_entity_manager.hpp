@@ -19,7 +19,6 @@ public:
 
 private:
 	void _updateRotation();
-	void _updateTextureMixing();
 	void _updateEyeAdaption();
 
 	string _selectedID = "";

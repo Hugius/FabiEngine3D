@@ -27,7 +27,7 @@ uniform float u_nearZ;
 uniform float u_farZ;
 uniform float u_transparency;
 
-// Bool uniforms
+// Boolean uniforms
 uniform bool  u_fogEnabled;
 uniform bool  u_effectsEnabled;
 uniform bool  u_isRippling;

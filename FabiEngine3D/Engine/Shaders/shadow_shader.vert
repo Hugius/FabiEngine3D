@@ -1,17 +1,24 @@
 #version 330 core
 #extension GL_ARB_explicit_uniform_location : enable
 
+// In variables
 layout (location = 0) in vec3 v_pos;
 layout (location = 1) in vec2 v_uv;
 layout (location = 3) in vec3 v_offset;
 
-out vec3 f_pos;
-out vec2 f_uv;
-
+// Matrix44 uniforms
 uniform mat4  u_lightSpaceMatrix;
 uniform mat4  u_modelMatrix;
-uniform bool  u_isInstanced;
+
+// Float uniforms
 uniform float u_maxY;
+
+// Boolean uniforms
+uniform bool  u_isInstanced;
+
+// Out variables
+out vec3 f_pos;
+out vec2 f_uv;
 
 void main()
 {

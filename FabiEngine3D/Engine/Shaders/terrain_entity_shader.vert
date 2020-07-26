@@ -6,10 +6,12 @@ layout(location = 0) in vec3 v_pos;
 layout(location = 1) in vec2 v_uv;
 layout(location = 2) in vec3 v_normal;
 
-// Uniforms
+// Matrix44 uniforms
 uniform mat4 u_viewMatrix;
 uniform mat4 u_projMatrix;
 uniform mat4 u_shadowMatrix;
+
+// Vec4 uniforms
 uniform vec4 u_clippingPlane;
 
 // Out variables

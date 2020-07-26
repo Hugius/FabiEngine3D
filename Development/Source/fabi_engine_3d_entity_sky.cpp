@@ -6,11 +6,6 @@ void FabiEngine3D::skyEntity_add(const string& ID, const vector<string> textureP
 	_core->_skyEntityManager.addSkyEntity(ID, _core->_texLoader, texturePaths);
 }
 
-void FabiEngine3D::skyEntity_addNightCubemap(const string& ID, const string& textureDirectoryPath)
-{
-	//_core->_skyEntityManager.getEntity(ID)->setNightCubeMap(_core->_texLoader.getCubeMap(textureDirectoryPath));
-}
-
 void FabiEngine3D::skyEntity_delete(const string& ID)
 {
 	// Unselect sky if selected
@@ -24,12 +19,12 @@ void FabiEngine3D::skyEntity_delete(const string& ID)
 
 void FabiEngine3D::skyEntity_hide(const string& ID)
 {
-	_core->_skyEntityManager.getEntity(ID)->setEnabled(false);
+	_core->_skyEntityManager.getEntity(ID)->setVisible(false);
 }
 
 void FabiEngine3D::skyEntity_show(const string& ID)
 {
-	_core->_skyEntityManager.getEntity(ID)->setEnabled(true);
+	_core->_skyEntityManager.getEntity(ID)->setVisible(true);
 }
 
 void FabiEngine3D::skyEntity_select(const string& ID)
@@ -52,38 +47,6 @@ void FabiEngine3D::skyEntity_setColor(const string& ID, vec3 color)
 	_core->_skyEntityManager.getEntity(ID)->setColor(color);
 }
 
-void FabiEngine3D::skyEntity_setDayTime(const string& ID)
-{
-	_core->_skyEntityManager.getEntity(ID)->setDayTime();
-	_core->_skyEntityManager.getEntity(ID)->setMixValue(0.0f);
-}
-
-void FabiEngine3D::skyEntity_setNightTime(const string& ID)
-{
-	_core->_skyEntityManager.getEntity(ID)->setNightTime();
-	_core->_skyEntityManager.getEntity(ID)->setMixValue(1.0f);
-}
-
-void FabiEngine3D::skyEntity_fadeDayTime(const string& ID)
-{
-	_core->_skyEntityManager.getEntity(ID)->setDayTime();
-}
-
-void FabiEngine3D::skyEntity_fadeNightTime(const string& ID)
-{
-	_core->_skyEntityManager.getEntity(ID)->setNightTime();
-}
-
-bool FabiEngine3D::skyEntity_isDayTime(const string& ID)
-{
-	return _core->_skyEntityManager.getEntity(ID)->isDayTime();
-}
-
-bool FabiEngine3D::skyEntity_isNightTime(const string& ID)
-{
-	return _core->_skyEntityManager.getEntity(ID)->isNightTime();
-}
-
 string FabiEngine3D::skyEntity_getSelectedID()
 {
 	if (_core->_skyEntityManager.getSelectedSky() != nullptr)
@@ -96,7 +59,27 @@ string FabiEngine3D::skyEntity_getSelectedID()
 	}
 }
 
+float FabiEngine3D::skyEntity_getLightness(const string& ID)
+{
+	return _core->_skyEntityManager.getEntity(ID)->getLightness();
+}
+
+float FabiEngine3D::skyEntity_getRotationSpeed(const string& ID)
+{
+	return _core->_skyEntityManager.getEntity(ID)->getRotationSpeed();
+}
+
+vec3 FabiEngine3D::skyEntity_getColor(const string& ID)
+{
+	return _core->_skyEntityManager.getEntity(ID)->getColor();
+}
+
 bool FabiEngine3D::skyEntity_isExisting(const string& ID)
 {
 	return _core->_skyEntityManager.isExisting(ID);
+}
+
+bool FabiEngine3D::skyEntity_isVisible(const string& ID)
+{
+	return _core->_skyEntityManager.getEntity(ID)->isVisible();
 }

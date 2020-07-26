@@ -21,7 +21,7 @@ void GuiEntityRenderer::unbind()
 
 void GuiEntityRenderer::render(const GuiEntity* entity)
 {
-	if (entity->isEnabled())
+	if (entity->isVisible())
 	{
 		// Uniforms
 		_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix());

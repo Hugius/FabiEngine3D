@@ -108,10 +108,12 @@ bool MousePicker::_notUnderTerrain(float start, float finish, vec3 ray, TerrainE
 	vec3 endPoint   = _getPointOnRay(ray, finish);
 
 	float startHeight = terrainManager.getPixelHeight(
+		terrainManager.getSelectedTerrain()->getID(),
 		startPoint.x + terrainManager.getSelectedTerrain()->getSize() / 2.0f, 
 		startPoint.z + terrainManager.getSelectedTerrain()->getSize() / 2.0f);
 
 	float endHeight = terrainManager.getPixelHeight(
+		terrainManager.getSelectedTerrain()->getID(),
 		endPoint.x + terrainManager.getSelectedTerrain()->getSize() / 2.0f, 
 		endPoint.z + terrainManager.getSelectedTerrain()->getSize() / 2.0f);
 	
@@ -138,6 +140,7 @@ vec3 MousePicker::_binarySearch(int count, float start, float finish, vec3 ray, 
 		
 		// Check if selected point is inside the terrain size
 		if (terrainManager.isInside(
+			terrainManager.getSelectedTerrain()->getID(),
 			endPoint.x + terrainManager.getSelectedTerrain()->getSize() / 2.0f, 
 			endPoint.z + terrainManager.getSelectedTerrain()->getSize() / 2.0f))
 		{

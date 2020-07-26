@@ -30,7 +30,7 @@ void DepthRenderer::unbind()
 
 void DepthRenderer::renderTerrainEntity(const TerrainEntity* entity)
 {
-	if (entity->isEnabled())
+	if (entity->isVisible())
 	{
 		// Faceculling
 		glEnable(GL_CULL_FACE);
@@ -59,7 +59,7 @@ void DepthRenderer::renderTerrainEntity(const TerrainEntity* entity)
 
 void DepthRenderer::renderGameEntity(const GameEntity* entity)
 {
-	if (entity->isEnabled())
+	if (entity->isVisible())
 	{
 		// Faceculling
 		if (entity->isFaceCulled())
@@ -116,7 +116,7 @@ void DepthRenderer::renderGameEntity(const GameEntity* entity)
 
 void DepthRenderer::renderBillboardEntity(const BillboardEntity* entity)
 {
-	if (entity->isEnabled())
+	if (entity->isVisible())
 	{
 		// Shader uniforms
 		_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix());
@@ -142,7 +142,7 @@ void DepthRenderer::renderBillboardEntity(const BillboardEntity* entity)
 
 void DepthRenderer::renderAabbEntity(const AabbEntity* entity)
 {
-	if (entity->isEnabled())
+	if (entity->isVisible())
 	{
 		// Shader uniforms
 		_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix());
@@ -162,7 +162,7 @@ void DepthRenderer::renderAabbEntity(const AabbEntity* entity)
 
 void DepthRenderer::renderWaterEntity(const WaterEntity* entity)
 {
-	if (entity->isEnabled())
+	if (entity->isVisible())
 	{
 		// Shader uniforms
 		_shader.uploadUniform("u_modelMatrix", mat4(1.0f));

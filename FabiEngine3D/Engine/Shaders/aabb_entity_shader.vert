@@ -4,7 +4,7 @@
 // In variables
 layout(location = 0) in vec3 v_pos;
 
-// Uniforms
+// Matrix44 uniforms
 uniform mat4 u_modelMatrix;
 uniform mat4 u_viewMatrix;
 uniform mat4 u_projMatrix;

@@ -253,5 +253,7 @@ void BillboardEditor::unload()
 	_isLoaded = false;
 	_cameraRotationSpeed = 0.0f;
 	_totalCameraRotation = 0.0f;
+	_hoveredBillboardID = "";
 	_currentBillboardID = "";
+	_currentProjectName = "";
 }

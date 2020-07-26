@@ -5,12 +5,16 @@
 layout(location = 0) in vec3 v_pos;
 layout(location = 1) in vec2 v_uv;
 
-// Uniforms
+// Matrix44 uniforms
 uniform mat4 u_modelMatrix;
 uniform mat4 u_viewMatrix;
 uniform mat4 u_projMatrix;
+
+// Vec2 uniforms
 uniform vec2 u_uvAdder;
 uniform vec2 u_uvMultiplier;
+
+// Float uniforms
 uniform float u_uvRepeat;
 
 // Out variables

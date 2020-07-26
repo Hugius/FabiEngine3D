@@ -7,6 +7,7 @@ in vec2 f_uv;
 // Textures
 layout(location = 0) uniform sampler2D u_sampler_diffuseMap;
 
+// Boolean uniforms
 uniform bool u_isAlphaObject;
 
 // Calculate final fragment color

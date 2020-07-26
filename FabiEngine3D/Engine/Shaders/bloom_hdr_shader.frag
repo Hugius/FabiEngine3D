@@ -3,8 +3,11 @@
 
 in vec2 f_uv;
 
+// Texture uniforms
 uniform sampler2D u_sampler_diffuse;
-uniform float     u_bloomBrightnessTreshold;
+
+// Float uniforms
+uniform float u_bloomBrightnessTreshold;
 
 layout (location = 0) out vec4 o_finalColor;
 

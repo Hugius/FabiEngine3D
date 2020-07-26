@@ -24,8 +24,7 @@ void FabiEngine3D::camera_disableLookat()
 
 void FabiEngine3D::camera_enableFirstPersonView(float mouseSensitivity)
 {
-	_core->_cameraManager.enableFirstPersonView();
-	_core->_cameraManager.setMouseSensitivity(mouseSensitivity);
+	_core->_cameraManager.enableFirstPersonView(mouseSensitivity);
 }
 
 void FabiEngine3D::camera_disableFirstPersonView()
@@ -83,7 +82,7 @@ void FabiEngine3D::camera_setFOV(float fov)
 	_core->_cameraManager.setFOV(fov);
 }
 
-void FabiEngine3D::camera_setSensitivity(float speed)
+void FabiEngine3D::camera_setMouseSensitivity(float speed)
 {
 	_core->_cameraManager.setMouseSensitivity(speed);
 }
@@ -118,6 +117,16 @@ float FabiEngine3D::camera_getPitch()
 	return _core->_cameraManager.getPitch();
 }
 
+float FabiEngine3D::camera_getNearDistance()
+{
+	return _core->_cameraManager.getNearZ();
+}
+
+float FabiEngine3D::camera_getFarDistance()
+{
+	return _core->_cameraManager.getFarZ();
+}
+
 float FabiEngine3D::camera_getMouseOffset()
 {
 	return _core->_cameraManager.getMouseOffset();
@@ -128,17 +137,32 @@ float FabiEngine3D::camera_getFOV()
 	return _core->_cameraManager.getFOV();
 }
 
+float FabiEngine3D::getAspectRatio()
+{
+	return _core->_cameraManager.getAspectRatio();
+}
+
+float FabiEngine3D::camera_getMouseSensitivity()
+{
+	return _core->_cameraManager.getMouseSensitivity();
+}
+
 vec3 FabiEngine3D::camera_getPos()
 {
 	return _core->_cameraManager.getPosition();
 }
 
-vec3 FabiEngine3D::camera_getFront()
+bool FabiEngine3D::camera_isLookatEnabled()
 {
-	return _core->_cameraManager.getFront();
+	return _core->_cameraManager.isLookatEnabled();
 }
 
 bool FabiEngine3D::camera_isFirstPersonViewEnabled()
 {
 	return _core->_cameraManager.isFirstPersonViewEnabled();
+}
+
+bool FabiEngine3D::camera_isFreeMovementEnabled()
+{
+	return _core->_cameraManager.isFreeMovementEnabled();
 }

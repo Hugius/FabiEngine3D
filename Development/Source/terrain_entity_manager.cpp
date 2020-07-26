@@ -29,51 +29,47 @@ void TerrainEntityManager::selectTerrain(const string & ID)
 	_selectedID = ID;
 }
 
-void TerrainEntityManager::addTerrainEntity
-(
-	const string& ID, const string& heightmapPath, const string& textureName,
-	vec3 pos, float size, float maxHeight, float uvRepeat, float lightness
-)
+void TerrainEntityManager::addTerrain(const string& ID)
+{
+	_createEntity(EntityType::TERRAIN, ID)->load(ID);
+}
+
+void TerrainEntityManager::generateModel(const string& ID)
 {
 	// Variables
 	vector<float> terrainVertices;
-	auto& pixelColors = _texLoader.getHeightMap(heightmapPath);
-
-	// Size correction if needed
-	if ((size * size) > pixelColors.size())
-	{
-		size = float(sqrt(pixelColors.size()));
-	}
-
-	// Define half size
+	auto& pixelColors = getEntity(ID)->getPixelColors();
+	float size = getEntity(ID)->getSize();
 	float halfSize = size / 2.0f;
-
+	float maxHeight = getEntity(ID)->getMaxHeight();
+	float uvRepeat = getEntity(ID)->getUvRepeat();
+	
 	// Generate terrain vertices
 	for (float x = -halfSize; x < halfSize; x++)
 	{
 		for (float z = -halfSize; z < halfSize; z++)
 		{
-			float firstVertexX = pos.x + x;
-			float firstVertexY = pos.y + _getPixelHeight(x + halfSize, z + halfSize + 1, size, maxHeight, pixelColors);
-			float firstVertexZ = pos.z + z + 1;
+			float firstVertexX = x;
+			float firstVertexY = _getPixelHeight(x + halfSize, z + halfSize + 1, size, maxHeight, pixelColors);
+			float firstVertexZ = z + 1;
 			float firstUvX = ((x + halfSize) / size) * uvRepeat;
 			float firstUvY = (((z + halfSize) / size) + (1.0f / size)) * uvRepeat;
 
-			float secondVertexX = pos.x + x + 1;
-			float secondVertexY = pos.y + _getPixelHeight(x + halfSize + 1, z + halfSize + 1, size, maxHeight, pixelColors);
-			float secondVertexZ = pos.z + z + 1;
+			float secondVertexX = x + 1;
+			float secondVertexY = _getPixelHeight(x + halfSize + 1, z + halfSize + 1, size, maxHeight, pixelColors);
+			float secondVertexZ = z + 1;
 			float secondUvX = (((x + halfSize) / size) + (1.0f / size)) * uvRepeat;
 			float secondUvY = (((z + halfSize) / size) + (1.0f / size)) * uvRepeat;
 
-			float thirdVertexX = pos.x + x + 1;
-			float thirdVertexY = pos.y + _getPixelHeight(x + halfSize + 1, z + halfSize, size, maxHeight, pixelColors);
-			float thirdVertexZ = pos.z + z;
+			float thirdVertexX = x + 1;
+			float thirdVertexY = _getPixelHeight(x + halfSize + 1, z + halfSize, size, maxHeight, pixelColors);
+			float thirdVertexZ = z;
 			float thirdUvX = (((x + halfSize) / size) + (1.0f / size)) * uvRepeat;
 			float thirdUvY = ((z + halfSize) / size) * uvRepeat;
 
-			float fourthVertexX = pos.x + x;
-			float fourthVertexY = pos.y + _getPixelHeight(x + halfSize, z + halfSize, size, maxHeight, pixelColors);
-			float fourthVertexZ = pos.z + z;
+			float fourthVertexX = x;
+			float fourthVertexY = _getPixelHeight(x + halfSize, z + halfSize, size, maxHeight, pixelColors);
+			float fourthVertexZ = z;
 			float fourthUvX = ((x + halfSize) / size) * uvRepeat;
 			float fourthUvY = ((z + halfSize) / size) * uvRepeat;
 
@@ -152,39 +148,14 @@ void TerrainEntityManager::addTerrainEntity
 			terrainVertices.push_back(normal.z);
 		}
 	}
-
-	// Create entity
-	_createEntity(EntityType::TERRAIN, ID)->load(ID);
+	
+	getEntity(ID)->clearOglBuffers();
 	getEntity(ID)->addOglBuffer(new OpenGLBuffer(SHAPE_3D, &terrainVertices[0], terrainVertices.size()));
-	getEntity(ID)->setDiffuseMap(_texLoader.getTexture(textureName, true, true));
-	getEntity(ID)->setPixelColors(pixelColors);
-	getEntity(ID)->setMaxHeight(maxHeight);
-	getEntity(ID)->setBlendRepeat(uvRepeat);
-	getEntity(ID)->setSize(size);
-	getEntity(ID)->setLightness(lightness);
 }
 
-void TerrainEntityManager::addBlendingToTerrain
-(
-	const string& ID, const string& blendMap, const string& blendMapR,
-	const string& blendMapG, const string& blendMapB,
-	float blendRepeatR, float blendRepeatG, float blendRepeatB
-)
+float TerrainEntityManager::getPixelHeight(const string& ID, float x, float z)
 {
-	getEntity(ID)->setBlendMapped(true);
-	getEntity(ID)->setBlendMap(_texLoader.getTexture(blendMap,  true, true));
-	getEntity(ID)->setBlendMapR(_texLoader.getTexture(blendMapR, true, true));
-	getEntity(ID)->setBlendMapG(_texLoader.getTexture(blendMapG, true, true));
-	getEntity(ID)->setBlendMapB(_texLoader.getTexture(blendMapB, true, true));
-	getEntity(ID)->setBlendRepeatR(blendRepeatR);
-	getEntity(ID)->setBlendRepeatG(blendRepeatG);
-	getEntity(ID)->setBlendRepeatB(blendRepeatB);
-}
-
-float TerrainEntityManager::getPixelHeight(float x, float z)
-{
-	auto entity = getSelectedTerrain();
-	return _getPixelHeight(x, z, entity->getSize(), entity->getMaxHeight(), entity->getPixelColors());
+	return _getPixelHeight(x, z, getEntity(ID)->getSize(), getEntity(ID)->getMaxHeight(), getEntity(ID)->getPixelColors());
 }
 
 float TerrainEntityManager::_getPixelHeight(float x, float z, float size, float maxHeight, const vector<float>& pixelColors)
@@ -212,10 +183,10 @@ float TerrainEntityManager::_getPixelHeight(float x, float z, float size, float 
 	return ((pixelColors[index]) / 255.0f) * maxHeight;
 }
 
-bool TerrainEntityManager::isInside(float x, float z)
+bool TerrainEntityManager::isInside(const string& ID, float x, float z)
 {
 	// Return true if point within terrain bounds
-	if (x > 0 || x < getSelectedTerrain()->getSize() || z > 0 || z < getSelectedTerrain()->getSize())
+	if (x > 0 || x < getEntity(ID)->getSize() || z > 0 || z < getEntity(ID)->getSize())
 	{
 		return true;
 	}

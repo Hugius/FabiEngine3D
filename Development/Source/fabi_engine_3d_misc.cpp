@@ -110,7 +110,7 @@ void FabiEngine3D::misc_hidePerformanceProfiling()
 	{
 		if (_core->_textEntityManager.isExisting(e))
 		{
-			_core->_textEntityManager.getEntity(e)->setEnabled(false);
+			_core->_textEntityManager.getEntity(e)->setVisible(false);
 		}
 	}
 }

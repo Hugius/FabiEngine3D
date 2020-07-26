@@ -10,10 +10,12 @@ layout(location = 0) uniform sampler2D   u_sampler_diffuseMap;
 // Out variables
 layout (location = 0) out vec4 o_finalColor;
 
-// Uniforms
+// Vec3 uniforms
+uniform vec3 u_color;
+
+// Boolean uniforms
 uniform bool u_isAlphaObject;
 uniform bool u_noTexture;
-uniform vec3 u_color;
 
 // Calculate final fragment color
 void main()

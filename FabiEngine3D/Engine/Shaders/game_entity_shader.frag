@@ -17,10 +17,9 @@ layout(location = 1) uniform sampler2D   u_sampler_lightMap;
 layout(location = 2) uniform sampler2D   u_sampler_skyReflectionMap;
 layout(location = 3) uniform sampler2D   u_sampler_sceneReflectionMap;
 layout(location = 4) uniform sampler2D   u_sampler_shadowMap;
-layout(location = 5) uniform samplerCube u_sampler_dayCubeMap;
-layout(location = 6) uniform samplerCube u_sampler_nightCubeMap;
+layout(location = 5) uniform samplerCube u_sampler_cubeMap;
 
-// Matrix uniforms
+// Matrix44 uniforms
 uniform mat4  u_skyRotationMatrix;
 
 // Vector3 uniforms
@@ -40,7 +39,6 @@ uniform float u_directionalLightingIntensity;
 uniform float u_specularLightingFactor;
 uniform float u_specularLightingIntensity;
 uniform float u_fogMinDistance;
-uniform float u_skyReflectionMixValue;
 uniform float u_customAlpha;
 uniform float u_skyReflectionFactor;
 uniform float u_sceneReflectionFactor;
@@ -312,9 +310,7 @@ vec3 applySkyReflections(vec3 color)
 		{
 			vec3 viewDir      = normalize(f_pos - u_cameraPosition);
 			vec3 reflectDir   = reflect(viewDir, f_normal);
-			vec4 dayColor     = vec4(texture(u_sampler_dayCubeMap, vec3(u_skyRotationMatrix * vec4(reflectDir, 1.0f))).rgb, 1.0);
-			vec4 nightColor   = vec4(texture(u_sampler_nightCubeMap, vec3(u_skyRotationMatrix * vec4(reflectDir, 1.0f))).rgb, 1.0);
-			vec4 reflectColor = mix(dayColor, nightColor, u_skyReflectionMixValue);
+			vec4 reflectColor = vec4(texture(u_sampler_cubeMap, vec3(u_skyRotationMatrix * vec4(reflectDir, 1.0f))).rgb, 1.0);
 			vec3 mixedColor   = mix(color.rgb, reflectColor.rgb, u_skyReflectionFactor);
 			return mixedColor.rgb;
 		}

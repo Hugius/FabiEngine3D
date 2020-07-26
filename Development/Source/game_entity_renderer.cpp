@@ -27,14 +27,13 @@ void GameEntityRenderer::bind()
 	_shader.uploadUniform("u_directionalLightingIntensity", _shaderBus.getDirectionalLightIntensity());
 	_shader.uploadUniform("u_fogMinDistance",				_shaderBus.getFogMinDistance());
 	_shader.uploadUniform("u_specularLightingEnabled",		_shaderBus.isSpecularLightingEnabled());
-	_shader.uploadUniform("u_specularLightingIntensity",		_shaderBus.getSpecularLightingIntensity());
+	_shader.uploadUniform("u_specularLightingIntensity",	_shaderBus.getSpecularLightingIntensity());
 	_shader.uploadUniform("u_pointLightingEnabled",			_shaderBus.isPointLightingEnabled());
 	_shader.uploadUniform("u_lightMappingEnabled",			_shaderBus.isLightMappingEnabled());
 	_shader.uploadUniform("u_skyReflectionsEnabled",		_shaderBus.isSkyReflectionsEnabled());
 	_shader.uploadUniform("u_sceneReflectionsEnabled",		_shaderBus.isSceneReflectionsEnabled());
 	_shader.uploadUniform("u_fogEnabled",					_shaderBus.isFogEnabled());
 	_shader.uploadUniform("u_shadowsEnabled",				_shaderBus.isShadowsEnabled());
-	_shader.uploadUniform("u_skyReflectionMixValue",		_shaderBus.getSkyReflectionMixValue());
 	_shader.uploadUniform("u_skyReflectionFactor",			_shaderBus.getSkyReflectionFactor());
 	_shader.uploadUniform("u_sceneReflectionFactor",		_shaderBus.getSceneReflectionFactor());
 	_shader.uploadUniform("u_shadowMapSize",				Config::getInst().getShadowQuality());
@@ -61,9 +60,7 @@ void GameEntityRenderer::bind()
 	glActiveTexture(GL_TEXTURE4);
 	glBindTexture(GL_TEXTURE_2D, _shaderBus.getShadowMap());
 	glActiveTexture(GL_TEXTURE5);
-	glBindTexture(GL_TEXTURE_CUBE_MAP, _shaderBus.getSkyReflectionCubeMapDay());
-	glActiveTexture(GL_TEXTURE6);
-	glBindTexture(GL_TEXTURE_CUBE_MAP, _shaderBus.getSceneReflectionCubeMapNight());
+	glBindTexture(GL_TEXTURE_CUBE_MAP, _shaderBus.getSkyReflectionCubeMap());
 }
 
 void GameEntityRenderer::unbind()
@@ -82,7 +79,7 @@ void GameEntityRenderer::renderLightEntities(const vector<LightEntity*>& entitie
 	// Render all lights
 	for (size_t i = 0; i < entities.size(); i++)
 	{
-		if (entities[i]->isEnabled())
+		if (entities[i]->isVisible())
 		{
 			_shader.uploadUniform("u_pointLightPositions[" + std::to_string(i) + "]", entities[i]->getPosition());
 			_shader.uploadUniform("u_pointLightColors[" + std::to_string(i) + "]", entities[i]->getColor());
@@ -101,7 +98,7 @@ void GameEntityRenderer::renderLightEntities(const vector<LightEntity*>& entitie
 
 void GameEntityRenderer::render(const GameEntity* entity)
 {
-	if (entity->isEnabled())
+	if (entity->isVisible())
 	{
 		// Faceculling
 		if (entity->isFaceCulled())

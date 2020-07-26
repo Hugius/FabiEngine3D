@@ -139,7 +139,7 @@ void WaterEntityManager::update()
 		auto * water = getEntity(baseEntity->getID());
 
 		// Update water animations (rippling & waving)
-		if (water->isEnabled() && _shaderBus.isWaterEffectsEnabled())
+		if (water->isVisible() && _shaderBus.isWaterEffectsEnabled())
 		{
 			water->setRippleOffset(water->getRippleOffset() + water->getSpeed());
 			water->setRippleOffset(fmod(water->getRippleOffset(), 1.0f));

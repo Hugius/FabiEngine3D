@@ -53,37 +53,15 @@ private:
 
 	// Sky variables
 	vector<string> _skyTexturePaths;
-	float _skyRotationSpeed = 0.0f;
-	float _skyLightness = 1.0f;
-	vec3 _skyColor = vec3(1.0f);
 
 	// Terrain function
 	void _saveTerrainData();
-	void _unloadTerrainData();
-	void _loadTerrainEntity();
+	void _loadTerrainEntity(const string& heightMapPath);
 	void _updateTerrainMenu();
 	void _updateTerrainManagement();
 	void _updateTerrainMesh();
 	void _updateTerrainBlendmap();
 	void _updateTerrainCamera();
-
-	// Terrain variables
-	bool _isTerrainBlendmapped = false;
-	string _terrainHeightmapPath = "";
-	string _terrainDiffusemapPath = "";
-	string _terrainBlendmapPath = "";
-	string _terrainRedPath = "";
-	string _terrainGreenPath = "";
-	string _terrainBluePath = "";
-	float _terrainSize = 0.0f;
-	float _maxTerrainHeight = 0.0f;
-	float _terrainUvRepeat = 0.0f;
-	float _terrainRedUvRepeat = 0.0f;
-	float _terrainGreenUvRepeat = 0.0f;
-	float _terrainBlueUvRepeat = 0.0f;
-	float _terrainLightness = 1.0f;
-	float _terrainCameraHeight = 0.0f;
-	float _terrainCameraDistance = 0.0f;
 
 	// Water functions
 	void _saveWaterData();

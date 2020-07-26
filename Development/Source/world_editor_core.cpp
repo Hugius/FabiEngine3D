@@ -70,11 +70,9 @@ void WorldEditor::initializeGUI()
 	_leftWindow->getScreen("terrainMesh")->addScrollingList("buttonList", vec2(0.0f, 0.2f), vec2(1.9, 1.5f), vec3(0.3f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, LeftViewportController::textColor, LeftViewportController::textHoverColor, vec2(0.15f, 0.1f));
 	_leftWindow->getScreen("terrainMesh")->getScrollingList("buttonList")->addButton("heightmap", "Height map");
 	_leftWindow->getScreen("terrainMesh")->getScrollingList("buttonList")->addButton("diffuseMap", "Diffuse map");
-	_leftWindow->getScreen("terrainMesh")->getScrollingList("buttonList")->addButton("size", "Size");
 	_leftWindow->getScreen("terrainMesh")->getScrollingList("buttonList")->addButton("maxHeight", "Max height");
 	_leftWindow->getScreen("terrainMesh")->getScrollingList("buttonList")->addButton("uvRepeat", "UV repeat");
 	_leftWindow->getScreen("terrainMesh")->getScrollingList("buttonList")->addButton("lightness", "lightness");
-	_leftWindow->getScreen("terrainMesh")->addButton("load", vec2(0.0f, -0.7f), vec2(1.0f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Load", LeftViewportController::textColor, LeftViewportController::textHoverColor);
 	_leftWindow->getScreen("terrainMesh")->addButton("back", vec2(0.0f, -0.9f), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
 
 	// Left-viewport: mainWindow - terrainBlendmap
@@ -87,7 +85,6 @@ void WorldEditor::initializeGUI()
 	_leftWindow->getScreen("terrainBlendmap")->getScrollingList("buttonList")->addButton("redRepeat", "Red UV");
 	_leftWindow->getScreen("terrainBlendmap")->getScrollingList("buttonList")->addButton("greenRepeat", "Green UV");
 	_leftWindow->getScreen("terrainBlendmap")->getScrollingList("buttonList")->addButton("blueRepeat", "Blue UV");
-	_leftWindow->getScreen("terrainBlendmap")->addButton("load", vec2(0.0f, -0.7f), vec2(0.8f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Load", LeftViewportController::textColor, LeftViewportController::textHoverColor);
 	_leftWindow->getScreen("terrainBlendmap")->addButton("back", vec2(0.0f, -0.9f), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
 
 	// Left-viewport: mainWindow - waterMenu
@@ -174,9 +171,14 @@ void WorldEditor::unload()
 	_fe3d.gfx_disableMSAA();
 	_fe3d.gfx_disableWaterEffects();
 
-	// Core
 	_unloadSkyData();
-	_unloadTerrainData();
+
+	// Delete terrain entity
+	if (_fe3d.terrainEntity_isExisting("@terrain"))
+	{
+		_fe3d.terrainEntity_delete("@terrain");
+	}
+
 	_unloadWaterData();
 
 	// Enable default sky
@@ -194,25 +196,6 @@ void WorldEditor::unload()
 	_cameraRotationSpeed = 0.0f;
 	_totalCameraRotation = 0.0f;
 	_skyTexturePaths.clear();
-	_skyRotationSpeed = 0.0f;
-	_skyLightness = 1.0f;
-	_skyColor = vec3(1.0f);
-	_isTerrainBlendmapped = false;
-	_terrainHeightmapPath = "";
-	_terrainDiffusemapPath = "";
-	_terrainBlendmapPath = "";
-	_terrainRedPath = "";
-	_terrainGreenPath = "";
-	_terrainBluePath = "";
-	_terrainSize = 0.0f;
-	_maxTerrainHeight = 0.0f;
-	_terrainUvRepeat = 0.0f;
-	_terrainRedUvRepeat = 0.0f;
-	_terrainGreenUvRepeat = 0.0f;
-	_terrainBlueUvRepeat = 0.0f;
-	_terrainLightness = 1.0f;
-	_terrainCameraHeight = 0.0f;
-	_terrainCameraDistance = 0.0f;
 	_waterDudvMapPath = "";
 	_waterNormalMapPath = "";
 	_waterWavingEnabled = false;

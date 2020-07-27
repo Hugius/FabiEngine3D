@@ -131,44 +131,11 @@ void WorldEditor::_unloadWaterData()
 	{
 		_fe3d.waterEntity_delete("@water");
 	}
-
-	// Clear variables
-	_waterDudvMapPath = "";
-	_waterNormalMapPath = "";
-	_waterWavingEnabled = false;
-	_waterRipplingEnabled = false;
-	_waterSpecularEnabled = false;
-	_waterReflectionEnabled = false;
-	_waterRefractionEnabled = false;
-	_waterColor = vec3(0.0f);
-	_waterSize = 0.0f;
-	_waterUvRepeat = 0.0f;
-	_waterSpeed = 0.0f;
-	_waterTransparency = 0.0f;
-	_waterSpecularFactor = 0.0f;
-	_waterCameraHeight = 0.0f;
-	_waterCameraDistance = 0.0f;
 }
 
 void WorldEditor::_loadWaterEntity()
 {
-	// Remove existing waterplane
-	if (_fe3d.waterEntity_isExisting("@water"))
-	{
-		_fe3d.waterEntity_delete("@water");
-	}
-
-	// Add new waterplane
-	_fe3d.waterEntity_add("@water", _waterSize);
-	_fe3d.waterEntity_setPosition("@water", _waterPosition);
+	_fe3d.waterEntity_add("@water");
 	_fe3d.waterEntity_select("@water");
-	_fe3d.waterEntity_setReflective("@water", _waterReflectionEnabled);
-	_fe3d.waterEntity_setRefractive("@water", _waterRefractionEnabled);
-	_fe3d.waterEntity_setWaving("@water", _waterDisplacementMapPath, _waterWaveHeightFactor, _waterWavingEnabled);
-	_fe3d.waterEntity_setRippling("@water", _waterDudvMapPath, _waterRipplingEnabled);
-	_fe3d.waterEntity_setSpecular("@water", _waterNormalMapPath, _waterSpecularFactor, _waterSpecularIntensity, _waterSpecularEnabled);
-	_fe3d.waterEntity_setTransparency("@water", _waterTransparency);
-	_fe3d.waterEntity_setColor("@water", _waterColor);
-	_fe3d.waterEntity_setUvRepeat("@water", _waterUvRepeat);
-	_fe3d.waterEntity_setSpeed("@water", _waterSpeed);
+	_fe3d.waterEntity_hide("@water");
 }

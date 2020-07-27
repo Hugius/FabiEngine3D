@@ -87,24 +87,24 @@ void FabiEngine3D::camera_setMouseSensitivity(float speed)
 	_core->_cameraManager.setMouseSensitivity(speed);
 }
 
-void FabiEngine3D::camera_setYaw(float val)
+void FabiEngine3D::camera_setYaw(float yaw)
 {
-	_core->_cameraManager.setYaw(val);
+	_core->_cameraManager.setYaw(yaw);
 }
 
-void FabiEngine3D::camera_setPitch(float val)
+void FabiEngine3D::camera_setPitch(float pitch)
 {
-	_core->_cameraManager.setPitch(val);
+	_core->_cameraManager.setPitch(pitch);
 }
 
-void FabiEngine3D::camera_setNearDistance(float val)
+void FabiEngine3D::camera_setNearDistance(float nearZ)
 {
-	_core->_cameraManager.setNearZ(val);
+	_core->_cameraManager.setNearZ(nearZ);
 }
 
-void FabiEngine3D::camera_setFarDistance(float val)
+void FabiEngine3D::camera_setFarDistance(float farZ)
 {
-	_core->_cameraManager.setFarZ(val);
+	_core->_cameraManager.setFarZ(farZ);
 }
 
 float FabiEngine3D::camera_getYaw()

@@ -7,7 +7,7 @@ bool SceneEditor::isLoaded()
 	return _isLoaded;
 }
 
-void SceneEditor::setCurrentProjectName(string projectName)
+void SceneEditor::setCurrentProjectName(const string& projectName)
 {
 	_currentProjectName = projectName;
 }
@@ -30,12 +30,12 @@ void SceneEditor::_updateMiscellaneous()
 	}
 }
 
-void SceneEditor::_selectModel(string modelID)
+void SceneEditor::_selectModel(const string& modelID)
 {
 	_selectedModelID = modelID;
 }
 
-void SceneEditor::_activateModel(string modelID)
+void SceneEditor::_activateModel(const string& modelID)
 {
 	_activeModelID = modelID;
 	_transformation = Transformation::TRANSLATION;
@@ -57,7 +57,7 @@ void SceneEditor::_activateModel(string modelID)
 	_rightWindow->getScreen("modelProperties")->getWriteField("z")->setTextContent(std::to_string(static_cast<int>(position.z)));
 }
 
-void SceneEditor::_placeModel(string modelID, string modelName, vec3 position, vec3 rotation, vec3 size)
+void SceneEditor::_placeModel(const string& modelID, string modelName, vec3 position, vec3 rotation, vec3 size)
 {
 	// Add game entity
 	_fe3d.gameEntity_add(modelID, _fe3d.gameEntity_getObjPath(modelName), position, rotation, size);
@@ -92,7 +92,7 @@ void SceneEditor::_placeModel(string modelID, string modelName, vec3 position, v
 	}
 }
 
-void SceneEditor::_placeModel(string modelID, vec3 position, vec3 rotation, vec3 size,
+void SceneEditor::_placeModel(const string& modelID, vec3 position, vec3 rotation, vec3 size,
 	string objPath, string diffuseMapPath, string lightMapPath, string reflectionMapPath,
 	bool faceCulled, bool shadowed, bool transparent, bool specular, float specularFactor, vec3 color, float uvRepeat, vec3 aabbSize)
 {
@@ -130,7 +130,7 @@ void SceneEditor::_placeModel(string modelID, vec3 position, vec3 rotation, vec3
 	}
 }
 
-void SceneEditor::_updateModelBlinking(string modelID, int& multiplier)
+void SceneEditor::_updateModelBlinking(const string& modelID, int& multiplier)
 {
 	// Reset multiplier if nothing active / selected
 	if (modelID == "")
@@ -153,7 +153,7 @@ void SceneEditor::_updateModelBlinking(string modelID, int& multiplier)
 	}
 }
 
-void SceneEditor::_updateLightbulbAnimation(string modelID, int& multiplier)
+void SceneEditor::_updateLightbulbAnimation(const string& modelID, int& multiplier)
 {
 	// Reset multiplier if nothing active / selected
 	if (modelID == "")
@@ -178,7 +178,7 @@ void SceneEditor::_updateLightbulbAnimation(string modelID, int& multiplier)
 	}
 }
 
-void SceneEditor::_handleValueChanging(string screenID, string buttonID, string wfID, float& value, float adder, 
+void SceneEditor::_handleValueChanging(const string& screenID, string buttonID, string wfID, float& value, float adder, 
 	float multiplier, float minimum, float maximum)
 {
 	// Plus & minus button handling

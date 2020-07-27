@@ -133,7 +133,7 @@ void ModelEditor::_loadReflectionMap()
 	}
 }
 
-void ModelEditor::setCurrentProjectName(string projectName)
+void ModelEditor::setCurrentProjectName(const string& projectName)
 {
 	_currentProjectName = projectName;
 }
@@ -153,7 +153,7 @@ vector<string>& ModelEditor::getModelNames()
 	return _modelNames;
 }
 
-bool ModelEditor::_addModel(string modelName, string objName, string diffuseMapName, string lightMapName, string reflectionMapName, vec3 size,
+bool ModelEditor::_addModel(const string& modelName, string objName, string diffuseMapName, string lightMapName, string reflectionMapName, vec3 size,
 	bool isFaceCulled, bool isShadowed, bool isTransparent, bool isSpecular, float specularFactor, vec3 color, float uvRepeat, vec3 aabbSize)
 {
 	// If model name not existing yet

@@ -27,6 +27,21 @@ void WaterEntity::setDisplacementMap(GLuint val)
 	_displacementMap = val;
 }
 
+void WaterEntity::setDudvMapPath(const string& val)
+{
+	_dudvMapPath = val;
+}
+
+void WaterEntity::setNormalMapPath(const string& val)
+{
+	_normalMapPath = val;
+}
+
+void WaterEntity::setDisplacementMapPath(const string& val)
+{
+	_displacementMapPath = val;
+}
+
 void WaterEntity::setRippleOffset(float val)
 {
 	_rippleOffset = val;
@@ -64,27 +79,27 @@ void WaterEntity::setSpecularLightingIntensity(float val)
 
 void WaterEntity::setWaving(bool val)
 {
-	_waving = val;
+	_isWaving = val;
 }
 
 void WaterEntity::setRippling(bool val)
 {
-	_rippling = val;
+	_isRippling = val;
 }
 
-void WaterEntity::setSpecular(bool val)
+void WaterEntity::setSpecularLighted(bool val)
 {
-	_specular = val;
+	_isSpecularLighted = val;
 }
 
 void WaterEntity::setReflective(bool val)
 {
-	_reflective = val;
+	_isReflective = val;
 }
 
 void WaterEntity::setRefractive(bool val)
 {
-	_refractive = val;
+	_isRefractive = val;
 }
 
 void WaterEntity::setSize(float val)
@@ -120,6 +135,21 @@ const GLuint WaterEntity::getNormalMap() const
 const GLuint WaterEntity::getDisplacementMap() const
 {
 	return _displacementMap;
+}
+
+const string& WaterEntity::getDudvMapPath() const
+{
+	return _dudvMapPath;
+}
+
+const string& WaterEntity::getNormalMapPath() const
+{
+	return _normalMapPath;
+}
+
+const string& WaterEntity::getDisplacementMapPath() const
+{
+	return _displacementMapPath;
 }
 
 const float WaterEntity::getRippleOffset() const
@@ -169,25 +199,25 @@ const float WaterEntity::getTransparency() const
 
 const bool WaterEntity::isWaving() const
 {
-	return _waving;
+	return _isWaving;
 }
 
 const bool WaterEntity::isRippling() const
 {
-	return _rippling;
+	return _isRippling;
 }
 
-const bool WaterEntity::isSpecular() const
+const bool WaterEntity::isSpecularLighted() const
 {
-	return _specular;;
+	return _isSpecularLighted;;
 }
 
 const bool WaterEntity::isReflective() const
 {
-	return _reflective;
+	return _isReflective;
 }
 
 const bool WaterEntity::isRefractive() const
 {
-	return _refractive;
+	return _isRefractive;
 }

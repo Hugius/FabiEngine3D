@@ -2,7 +2,7 @@
 
 #include <algorithm>
 
-void WorldEditor::setCurrentProjectName(string projectName)
+void WorldEditor::setCurrentProjectName(const string& projectName)
 {
 	_currentProjectName = projectName;
 }

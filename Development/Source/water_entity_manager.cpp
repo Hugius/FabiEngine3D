@@ -31,16 +31,23 @@ void WaterEntityManager::selectWater(const string & ID)
 	_selectedID = ID;
 }
 
-void WaterEntityManager::addWaterEntity(const string & ID, float size)
+void WaterEntityManager::addWaterEntity(const string& ID)
+{
+	_createEntity(EntityType::WATER, ID)->load(ID);
+}
+
+void WaterEntityManager::generateModel(const string & ID)
 {
 	// Variables
-	float halfSize = size / 2.0f;
+	float size = getEntity(ID)->getSize();
 	vector<float> waterVertices;
-	waterVertices.reserve(size_t(size) * size_t(size) * 30);
 
 	// Try to fill the vector
 	try
 	{
+		// Reserving memory for the vertices
+		waterVertices.reserve(size_t(size) * size_t(size) * 30);
+
 		// Creating flat tiled water surface
 		for (float x = -size; x < size; x++)
 		{
@@ -110,18 +117,12 @@ void WaterEntityManager::addWaterEntity(const string & ID, float size)
 	}
 	catch (std::bad_alloc& ba)
 	{
-		std::cerr << "bad_alloc caught: " << ba.what();
+		std::cerr << "Bad allocation: " << ba.what();
 	}
 	
-	// Create entity
-	_createEntity(EntityType::WATER, ID)->load(ID);
-
 	// Fill entity
+	getEntity(ID)->clearOglBuffers();
 	getEntity(ID)->addOglBuffer(new OpenGLBuffer(SHAPE_SURFACE, &waterVertices[0], waterVertices.size()));
-	getEntity(ID)->setSize(size);
-
-	// Cleanup
-	waterVertices.clear();
 }
 
 void WaterEntityManager::update()

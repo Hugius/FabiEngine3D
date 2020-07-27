@@ -74,7 +74,7 @@ public:
 
 private:
 	void _updateValueFilling();
-	void _removeValueForm(string ID);
+	void _removeValueForm(const string& ID);
 	void _addValueForm(const string& ID, string title, string valueString, vec2 position, vec2 size, bool onlyNumbers);
 	bool _checkValueForm(const string& ID, string& valueString, vector<string> forbiddenValueStrings);
 

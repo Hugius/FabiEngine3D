@@ -312,7 +312,7 @@ void EngineGuiGlobalScreen::_updateValueFilling()
 	}
 }
 
-void EngineGuiGlobalScreen::_removeValueForm(string ID)
+void EngineGuiGlobalScreen::_removeValueForm(const string& ID)
 {
 	if (std::find(_valueFormIDs.begin(), _valueFormIDs.end(), ID) != _valueFormIDs.end())
 	{

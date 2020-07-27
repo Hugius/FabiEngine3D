@@ -3,14 +3,14 @@
 
 #include <algorithm>
 
-void FabiEngine3D::audioEntity_setSoundEnabled(bool val)
+void FabiEngine3D::audioEntity_setSoundEnabled(bool enabled)
 {
-	_core->_audioPlayer.setSoundEnabled(val);
+	_core->_audioPlayer.setSoundEnabled(enabled);
 }
 
-void FabiEngine3D::audioEntity_setMusicEnabled(bool val)
+void FabiEngine3D::audioEntity_setMusicEnabled(bool enabled)
 {
-	_core->_audioPlayer.setMusicEnabled(val);
+	_core->_audioPlayer.setMusicEnabled(enabled);
 }
 
 void FabiEngine3D::audioEntity_deleteAllSounds()

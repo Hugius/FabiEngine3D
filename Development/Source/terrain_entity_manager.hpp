@@ -14,12 +14,11 @@ public:
 	void selectTerrain(const string & ID);
 	void addTerrain(const string& ID);
 	void generateModel(const string& ID);
+	void update() override {}
 
 	float getPixelHeight(const string& ID, float x, float z);
 
 	bool isInside(const string& ID, float x, float z);
-
-	void update() override {}
 
 private:
 	float _getPixelHeight(float x, float z, float size, float maxHeight, const vector<float>& pixelColors);

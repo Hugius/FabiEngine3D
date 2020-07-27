@@ -19,7 +19,7 @@ public:
 
 	string getTextContent();
 
-	void setTextContent(string content);
+	void setTextContent(const string& content);
 
 private:
 	void _updateActivation();

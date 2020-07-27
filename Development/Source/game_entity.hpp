@@ -99,7 +99,7 @@ private:
 	bool _isLightMapped     = false;
 	bool _isSkyReflective   = false;
 	bool _isSceneReflective = false;
-	bool _isSpecular        = false;
+	bool _isSpecularLighted = false;
 	bool _isShadowed        = true;
 
 	float _lightness = 1.0f;

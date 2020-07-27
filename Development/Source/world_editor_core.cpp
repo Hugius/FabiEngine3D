@@ -198,22 +198,6 @@ void WorldEditor::unload()
 	_currentWorldPart = WorldPart::NONE;
 	_cameraRotationSpeed = 0.0f;
 	_totalCameraRotation = 0.0f;
-	_waterDudvMapPath = "";
-	_waterNormalMapPath = "";
-	_waterWavingEnabled = false;
-	_waterRipplingEnabled = false;
-	_waterSpecularEnabled = false;
-	_waterReflectionEnabled = false;
-	_waterRefractionEnabled = false;
-	_waterColor = vec3(0.0f);
-	_waterSize = 0.0f;
-	_waterUvRepeat = 0.0f;
-	_waterSpeed = 0.0f;
-	_waterTransparency = 0.0f;
-	_waterSpecularFactor = 16.0f;
-	_waterCameraHeight = 0.0f;
-	_waterCameraDistance = 0.0f;
-	_waterHeightSpeed = 0.1f;
 
 	// Select the default sky
 	_fe3d.skyEntity_select("@@sky");

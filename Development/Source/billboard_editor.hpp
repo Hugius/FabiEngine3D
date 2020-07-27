@@ -14,7 +14,7 @@ public:
 	void save();
 	void unload();
 	void update();
-	void setCurrentProjectName(string projectName);
+	void setCurrentProjectName(const string& projectName);
 
 	bool isLoaded();
 

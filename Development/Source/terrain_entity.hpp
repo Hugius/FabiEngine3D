@@ -10,17 +10,17 @@ public:
 
 	// Setters
 	void setPixelColors(vector<float>& val);
-	void setHeightMapPath(string path);
+	void setHeightMapPath(const string& path);
 	void setDiffuseMap(GLuint val);
-	void setDiffuseMapPath(string path);
+	void setDiffuseMapPath(const string& path);
 	void setBlendMap(GLuint val);
-	void setBlendMapPath(string path);
+	void setBlendMapPath(const string& path);
 	void setBlendMapR(GLuint val);
-	void setBlendMapPathR(string path);
+	void setBlendMapPathR(const string& path);
 	void setBlendMapG(GLuint val);
-	void setBlendMapPathG(string path);
+	void setBlendMapPathG(const string& path);
 	void setBlendMapB(GLuint val);
-	void setBlendMapPathB(string path);
+	void setBlendMapPathB(const string& path);
 	void setBlendRepeatR(float val);
 	void setBlendRepeatG(float val);
 	void setBlendRepeatB(float val);

@@ -27,7 +27,7 @@ public:
 	void save();
 	void unload();
 	void update();
-	void setCurrentProjectName(string projectName);
+	void setCurrentProjectName(const string&projectName);
 	void loadWorld();
 
 	bool isLoaded();
@@ -59,15 +59,15 @@ private:
 	void _updateMiscellaneous();
 
 	// Miscellaneous
-	void _placeModel(string modelID, string modelName, vec3 position, vec3 rotation, vec3 size);
-	void _placeModel(string modelID, vec3 position, vec3 rotation, vec3 size, string objPath, string diffuseMapPath, string lightMapPath, string reflectionMapPath,
+	void _placeModel(const string& modelID, string modelName, vec3 position, vec3 rotation, vec3 size);
+	void _placeModel(const string& modelID, vec3 position, vec3 rotation, vec3 size, string objPath, string diffuseMapPath, string lightMapPath, string reflectionMapPath,
 		bool faceCulled, bool shadowed, bool transparent, bool specular, float specularFactor, vec3 color, float uvRepeat, vec3 aabbSize);
-	void _updateModelBlinking(string modelID, int& multiplier);
-	void _updateLightbulbAnimation(string modelID, int& multiplier);
-	void _handleValueChanging(string screenID, string buttonID, string wfID, float& value, float adder, float multiplier = 1.0f,
+	void _updateModelBlinking(const string& modelID, int& multiplier);
+	void _updateLightbulbAnimation(const string& modelID, int& multiplier);
+	void _handleValueChanging(const string& screenID, string buttonID, string wfID, float& value, float adder, float multiplier = 1.0f,
 		float minimum = (std::numeric_limits<float>::lowest)(), float maximum = (std::numeric_limits<float>::max)());
-	void _selectModel(string modelID);
-	void _activateModel(string modelID);
+	void _selectModel(const string& modelID);
+	void _activateModel(const string& modelID);
 
 	// Instances
 	FabiEngine3D& _fe3d;

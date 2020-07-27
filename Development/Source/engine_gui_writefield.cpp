@@ -53,7 +53,7 @@ string EngineGuiWriteField::getTextContent()
 	return _currentTextContent;
 }
 
-void EngineGuiWriteField::setTextContent(string content)
+void EngineGuiWriteField::setTextContent(const string& content)
 {
 	_currentTextContent = content;
 }

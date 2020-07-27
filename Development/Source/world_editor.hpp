@@ -22,7 +22,7 @@ public:
 	void save();
 	void unload();
 	void update();
-	void setCurrentProjectName(string projectName);
+	void setCurrentProjectName(const string& projectName);
 	void loadSkyEntity();
 	void loadTerrainEntity();
 	void loadWaterEntity();
@@ -69,26 +69,4 @@ private:
 	void _updateWaterMenuEffects();
 	void _updateWaterMenuOptions();
 	void _updateWaterCamera();
-	
-	// Water variables
-	string _waterDudvMapPath = "";
-	string _waterNormalMapPath = "";
-	string _waterDisplacementMapPath = "";
-	bool _waterWavingEnabled = false;
-	bool _waterRipplingEnabled = false;
-	bool _waterSpecularEnabled = false;
-	bool _waterReflectionEnabled = false;
-	bool _waterRefractionEnabled = false;
-	vec3 _waterPosition = vec3(0.0f);
-	vec3 _waterColor = vec3(0.0f);
-	float _waterSize = 0.0f;
-	float _waterUvRepeat = 0.0f;
-	float _waterWaveHeightFactor = 1.0f;
-	float _waterSpeed = 0.0f;
-	float _waterTransparency = 0.0f;
-	float _waterSpecularFactor = 16.0f;
-	float _waterSpecularIntensity = 1.0f;
-	float _waterCameraHeight = 0.0f;
-	float _waterCameraDistance = 0.0f;
-	float _waterHeightSpeed = 0.1f;
 };

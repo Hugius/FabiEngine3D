@@ -53,10 +53,10 @@ public:
 	void  camera_invertPitch();
 	void  camera_setFOV(float fov);
 	void  camera_setMouseSensitivity(float speed);
-	void  camera_setYaw(float val);
-	void  camera_setPitch(float val);
-	void  camera_setNearDistance(float val);
-	void  camera_setFarDistance(float val);
+	void  camera_setYaw(float yaw);
+	void  camera_setPitch(float pitch);
+	void  camera_setNearDistance(float nearZ);
+	void  camera_setFarDistance(float farZ);
 
 	// Camera interface - getters
 	bool  camera_isLookatEnabled();
@@ -138,26 +138,51 @@ public:
 	float terrainEntity_getPixelHeight(const string& ID, float x, float z);
 	vec3 terrainEntity_getMousePoint();
 
-	// Water entity interface
-	void waterEntity_add(const string& ID, float size);
+	// Water entity interface - setters
+	void waterEntity_add(const string& ID);
 	void waterEntity_delete(const string& ID);
 	void waterEntity_hide(const string& ID);
 	void waterEntity_show(const string& ID);
-	bool waterEntity_isExisting(const string& ID);
 	void waterEntity_select(const string& ID);
 	void waterEntity_setPosition(const string& ID, vec3 position);
+	void waterEntity_setSize(const string& ID, float size);
+	void waterEntity_setWaving(const string& ID, bool enabled);
+	void waterEntity_setRippling(const string& ID, bool enabled);
+	void waterEntity_setSpecularLighted(const string& ID, bool enabled);
 	void waterEntity_setReflective(const string& ID, bool enabled);
 	void waterEntity_setRefractive(const string& ID, bool enabled);
-	void waterEntity_setWaving(const string& ID, const string& displacementMapPath, float heightFactor, bool enabled);
-	void waterEntity_setRippling(const string& ID, const string& dudvMapPath, bool enabled);
-	void waterEntity_setSpecular(const string& ID, const string& normalMapPath, float factor, float intensity, bool enabled);
+	void waterEntity_setDudvMap(const string& ID, const string& path);
+	void waterEntity_setNormalMap(const string& ID, const string& path);
+	void waterEntity_setDisplacementMap(const string& ID, const string& path);
+	void waterEntity_setWaveHeightFactor(const string& ID, float factor);
+	void waterEntity_setSpecularLightingFactor(const string& ID, float factor);
+	void waterEntity_setSpecularLightingIntensity(const string& ID, float intensity);
 	void waterEntity_setTransparency(const string& ID, float transparency);
 	void waterEntity_setColor(const string& ID, vec3 color);
 	void waterEntity_setUvRepeat(const string& ID, float repeat);
 	void waterEntity_setSpeed(const string& ID, float speed);
+
+	// Water entity interface - getters
+	bool   waterEntity_isExisting(const string& ID);
+	bool   waterEntity_isVisible(const string& ID);
+	bool   waterEntity_isWaving(const string& ID);
+	bool   waterEntity_isRippling(const string& ID);
+	bool   waterEntity_isSpecularLighted(const string& ID);
+	bool   waterEntity_isReflective(const string& ID);
+	bool   waterEntity_isRefractive(const string& ID);
+	vec3   waterEntity_getPosition(const string& ID);
+	vec3   waterEntity_getColor(const string& ID);
+	float  waterEntity_getSize(const string& ID);
+	float  waterEntity_getUvRepeat(const string& ID);
+	float  waterEntity_getSpeed(const string& ID);
+	float  waterEntity_getWaveHeightFactor(const string& ID);
+	float  waterEntity_getSpecularLightingFactor(const string& ID);
+	float  waterEntity_getSpecularLightingIntensity(const string& ID);
+	float  waterEntity_getTransparency(const string& ID);
+	const string& waterEntity_getDudvMapPath(const string& ID);
+	const string& waterEntity_getNormalMapPath(const string& ID);
+	const string& waterEntity_getDisplacementMapPath(const string& ID);
 	const string& waterEntity_getSelectedID();
-	float waterEntity_getSize(const string& ID);
-	vec3 waterEntity_getPosition(const string& ID);
 
 	// Game entity interface
 	void gameEntity_add
@@ -445,8 +470,8 @@ public:
 	int  input_getMouseWheelY();
 
 	// Audio interface
-	void audioEntity_setSoundEnabled(bool val);
-	void audioEntity_setMusicEnabled(bool val);
+	void audioEntity_setSoundEnabled(bool enabled);
+	void audioEntity_setMusicEnabled(bool enabled);
 	void audioEntity_deleteAllSounds();
 	void audioEntity_deleteAllMusic();
 	void audioEntity_stopAllSounds();

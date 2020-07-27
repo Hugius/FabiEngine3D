@@ -12,7 +12,8 @@ public:
 	WaterEntity * getSelectedWater();
 
 	void selectWater(const string & ID);
-	void addWaterEntity(const string & ID, float size);
+	void addWaterEntity(const string & ID);
+	void generateModel(const string& ID);
 	void update() override;
 
 private:

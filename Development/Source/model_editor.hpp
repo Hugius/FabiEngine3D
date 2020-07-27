@@ -24,13 +24,13 @@ public:
 	void save();
 	void unload();
 	void update();
-	void setCurrentProjectName(string projectName);
+	void setCurrentProjectName(const string& projectName);
 	void loadModels();
 
 	bool isLoaded();
 
 private:
-	bool _addModel(string modelName, string objName, string diffuseMapName, string lightMapName, string reflectionMapName, vec3 size,
+	bool _addModel(const string& modelName, string objName, string diffuseMapName, string lightMapName, string reflectionMapName, vec3 size,
 		bool isFaceCulled, bool isShadowed, bool isTransparent, bool isSpecular, float specularFactor, vec3 color, float uvRepeat, vec3 aabbSize);
 	void _loadObjFileNames();
 	void _loadOBJ();

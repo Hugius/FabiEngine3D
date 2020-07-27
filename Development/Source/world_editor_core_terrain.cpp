@@ -34,7 +34,7 @@ void WorldEditor::loadTerrainEntity()
 			lightness >>
 			isBlendMapped;
 
-		// Load blendmapping data
+		// Load blendMapping data
 		if (isBlendMapped)
 		{
 			terrainFile >>
@@ -66,7 +66,7 @@ void WorldEditor::loadTerrainEntity()
 		_fe3d.terrainEntity_setBlendMapped("@terrain", isBlendMapped);
 		_fe3d.terrainEntity_setLightness("@terrain", lightness);
 
-		// Add blendmapping
+		// Add blendMapping
 		if (isBlendMapped)
 		{
 			_fe3d.terrainEntity_setBlendMap("@terrain", blendMapPath);
@@ -133,7 +133,7 @@ void WorldEditor::_saveTerrainData()
 				lightness << " " <<
 				isBlendMapped;
 
-			// Write blendmapping data to file
+			// Write blendMapping data to file
 			if (isBlendMapped)
 			{
 				terrainFile << 

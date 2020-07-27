@@ -57,7 +57,7 @@ void OpenGLBuffer::_create3D(int type, float data[], int dataCount)
 		glEnableVertexAttribArray(0);
 		break;
 
-	case SHAPE_CUBEMAP: // Fill cubemap buffers
+	case SHAPE_CUBEMAP: // Fill cubeMap buffers
 		_vertexCount = dataCount / 3;
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (GLvoid*)(0 * sizeof(float)));
 		glEnableVertexAttribArray(0);

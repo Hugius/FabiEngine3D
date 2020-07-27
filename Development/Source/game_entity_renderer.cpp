@@ -44,8 +44,6 @@ void GameEntityRenderer::bind()
 	_shader.uploadUniform("u_sampler_skyReflectionMap", 2);
 	_shader.uploadUniform("u_sampler_sceneReflectionMap", 3);
 	_shader.uploadUniform("u_sampler_shadowMap", 4);
-	_shader.uploadUniform("u_sampler_dayCubeMap", 5);
-	_shader.uploadUniform("u_sampler_nightCubeMap", 6);
 
 	// Depth testing
 	glEnable(GL_DEPTH_TEST);
@@ -111,7 +109,7 @@ void GameEntityRenderer::render(const GameEntity* entity)
 		_shader.uploadUniform("u_color", entity->getColor());
 		_shader.uploadUniform("u_specularLightingFactor", entity->getSpecularFactor());
 		_shader.uploadUniform("u_isTransparent", entity->isTransparent());
-		_shader.uploadUniform("u_isLightmapped", entity->isLightMapped());
+		_shader.uploadUniform("u_isLightMapped", entity->isLightMapped());
 		_shader.uploadUniform("u_isSkyReflective", entity->isSkyReflective());
 		_shader.uploadUniform("u_isSceneReflective", entity->isSceneReflective());
 		_shader.uploadUniform("u_isSpecular", entity->isSpecularLighted());

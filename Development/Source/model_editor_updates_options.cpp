@@ -4,7 +4,7 @@
 
 void ModelEditor::_updateModelEditingOptions()
 {
-	auto screen = _leftWindow->getScreen("modelEditingOptions");
+	auto screen = _leftWindow->getScreen("modelEditorMenuOptions");
 
 	// GUI management
 	if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
@@ -43,7 +43,7 @@ void ModelEditor::_updateModelEditingOptions()
 		}
 		else if (screen->getButton("back")->isHovered())
 		{
-			_leftWindow->setActiveScreen("modelEditingMain");
+			_leftWindow->setActiveScreen("modelEditorMenuChoice");
 		}
 	}
 

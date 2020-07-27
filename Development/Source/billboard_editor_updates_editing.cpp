@@ -18,32 +18,32 @@ void BillboardEditor::_updateBillboardEditing()
 					_currentBillboardID.substr(1, _currentBillboardID.size() - 1), 0.025f);
 				_fe3d.textEntity_show(_gui->getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID());
 				_fe3d.billboardEntity_show(_currentBillboardID);
-				_leftWindow->setActiveScreen("billboardEditingMain");
+				_leftWindow->setActiveScreen("billboardEditorMenuChoice");
 			}
 
 			// Shortened screen instance
 			auto screen = _leftWindow->getActiveScreen();
 
 			// GUI management
-			if (_leftWindow->getActiveScreen()->getID() == "billboardEditingMain")
+			if (_leftWindow->getActiveScreen()->getID() == "billboardEditorMenuChoice")
 			{
 				if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
 				{
 					if (screen->getButton("mesh")->isHovered())
 					{
-						_leftWindow->setActiveScreen("billboardEditingMesh");
+						_leftWindow->setActiveScreen("billboardEditorMenuMesh");
 					}
 					else if (screen->getButton("appearance")->isHovered())
 					{
-						_leftWindow->setActiveScreen("billboardEditingAppearance");
+						_leftWindow->setActiveScreen("billboardEditorMenuAppearance");
 					}
 					else if (screen->getButton("animation")->isHovered())
 					{
-						_leftWindow->setActiveScreen("billboardEditingAnimation");
+						_leftWindow->setActiveScreen("billboardEditorMenuAnimation");
 					}
 					else if (screen->getButton("text")->isHovered())
 					{
-						_leftWindow->setActiveScreen("billboardEditingText");
+						_leftWindow->setActiveScreen("billboardEditorMenuText");
 					}
 					else if (screen->getButton("back")->isHovered())
 					{
@@ -52,7 +52,7 @@ void BillboardEditor::_updateBillboardEditing()
 						_currentBillboardID = "";
 						_billboardEditingEnabled = false;
 						firstTime = true;
-						_leftWindow->setActiveScreen("billboardEditorMenu");
+						_leftWindow->setActiveScreen("billboardEditorMenuMain");
 						return;
 					}
 				}
@@ -62,7 +62,7 @@ void BillboardEditor::_updateBillboardEditing()
 				screen->getButton("animation")->setHoverable(_fe3d.billboardEntity_getDiffuseMapPath(_currentBillboardID) != "");
 				screen->getButton("text")->setHoverable(_fe3d.billboardEntity_getDiffuseMapPath(_currentBillboardID) == "");
 			}
-			else if (_leftWindow->getActiveScreen()->getID() == "billboardEditingMesh")
+			else if (_leftWindow->getActiveScreen()->getID() == "billboardEditorMenuMesh")
 			{
 				if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
 				{
@@ -83,7 +83,7 @@ void BillboardEditor::_updateBillboardEditing()
 					}
 					else if (screen->getButton("back")->isHovered())
 					{
-						_leftWindow->setActiveScreen("billboardEditingMain");
+						_leftWindow->setActiveScreen("billboardEditorMenuChoice");
 					}
 				}
 
@@ -101,7 +101,7 @@ void BillboardEditor::_updateBillboardEditing()
 				_fe3d.textEntity_setTextContent(textEntityIDx, isFacedX ? "Facing X: ON" : "Facing X: OFF");
 				_fe3d.textEntity_setTextContent(textEntityIDy, isFacedY ? "Facing Y: ON" : "Facing Y: OFF");
 			}
-			else if (_leftWindow->getActiveScreen()->getID() == "billboardEditingAppearance")
+			else if (_leftWindow->getActiveScreen()->getID() == "billboardEditorMenuAppearance")
 			{
 				if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
 				{
@@ -130,7 +130,7 @@ void BillboardEditor::_updateBillboardEditing()
 					}
 					else if (screen->getButton("back")->isHovered())
 					{
-						_leftWindow->setActiveScreen("billboardEditingMain");
+						_leftWindow->setActiveScreen("billboardEditorMenuChoice");
 					}
 				}
 
@@ -150,7 +150,7 @@ void BillboardEditor::_updateBillboardEditing()
 				_fe3d.billboardEntity_setTransparent(_currentBillboardID, isTransparent);
 				_fe3d.textEntity_setTextContent(textEntityID, isTransparent ? "No-white: ON" : "No-white: OFF");
 			}
-			else if (_leftWindow->getActiveScreen()->getID() == "billboardEditingAnimation")
+			else if (_leftWindow->getActiveScreen()->getID() == "billboardEditorMenuAnimation")
 			{
 				int animationRowCount = _fe3d.billboardEntity_getAnimationRows(_currentBillboardID);
 				int animationColumnCount = _fe3d.billboardEntity_getAnimationColumns(_currentBillboardID);
@@ -176,7 +176,7 @@ void BillboardEditor::_updateBillboardEditing()
 					}
 					else if (screen->getButton("back")->isHovered())
 					{
-						_leftWindow->setActiveScreen("billboardEditingMain");
+						_leftWindow->setActiveScreen("billboardEditorMenuChoice");
 					}
 				}
 
@@ -200,7 +200,7 @@ void BillboardEditor::_updateBillboardEditing()
 				_fe3d.billboardEntity_setAnimationColumns(_currentBillboardID, animationColumnCount);
 				_fe3d.billboardEntity_setAnimationFramestep(_currentBillboardID, animationFramestep);
 			}
-			else if (_leftWindow->getActiveScreen()->getID() == "billboardEditingText")
+			else if (_leftWindow->getActiveScreen()->getID() == "billboardEditorMenuText")
 			{
 				if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
 				{
@@ -229,7 +229,7 @@ void BillboardEditor::_updateBillboardEditing()
 					}
 					else if (screen->getButton("back")->isHovered())
 					{
-						_leftWindow->setActiveScreen("billboardEditingMain");
+						_leftWindow->setActiveScreen("billboardEditorMenuChoice");
 					}
 				}
 

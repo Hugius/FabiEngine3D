@@ -13,7 +13,7 @@ public:
 
 	void selectSky(const string & ID);
 
-	void addSkyEntity(const string & ID, TextureLoader& texLoader, const vector<string> texturePaths);
+	void addSkyEntity(const string & ID);
 
 	void update() override;
 

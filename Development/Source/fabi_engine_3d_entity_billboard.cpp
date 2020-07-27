@@ -7,9 +7,9 @@ void FabiEngine3D::billBoardEntity_add(const string& ID, vec3 color, vec3 T, vec
 	_core->_billboardEntityManager.getEntity(ID)->setVisible(visible);
 }
 
-void FabiEngine3D::billBoardEntity_add(const string& ID, const string& textureName, vec3 T, vec3 R, vec2 S, bool transparent, bool facingCameraX, bool facingCameraY, bool textureFiltering, bool visible)
+void FabiEngine3D::billBoardEntity_add(const string& ID, const string& diffuseMapPath, vec3 T, vec3 R, vec2 S, bool transparent, bool facingCameraX, bool facingCameraY, bool textureFiltering, bool visible)
 {
-	_core->_billboardEntityManager.addBillboardEntity(ID, textureName, T, R, vec3(S.x, S.y, 1.0f), transparent, facingCameraX, facingCameraY, textureFiltering);
+	_core->_billboardEntityManager.addBillboardEntity(ID, diffuseMapPath, T, R, vec3(S.x, S.y, 1.0f), transparent, facingCameraX, facingCameraY, textureFiltering);
 	_core->_billboardEntityManager.getEntity(ID)->setVisible(visible);
 }
 
@@ -182,12 +182,12 @@ void FabiEngine3D::billBoardEntity_setTextContent(const string& ID, const string
 	}
 }
 
-string FabiEngine3D::billboardEntity_getFontPath(const string& ID)
+const string& FabiEngine3D::billboardEntity_getFontPath(const string& ID)
 {
 	return _core->_billboardEntityManager.getEntity(ID)->getFontPath();
 }
 
-string FabiEngine3D::billboardEntity_getTextContent(const string& ID)
+const string& FabiEngine3D::billboardEntity_getTextContent(const string& ID)
 {
 	return _core->_billboardEntityManager.getEntity(ID)->getTextContent();
 }
@@ -222,7 +222,7 @@ void FabiEngine3D::billboardEntity_setUvRepeat(const string& ID, float repeat)
 	_core->_billboardEntityManager.getEntity(ID)->setUvRepeat(repeat);
 }
 
-string FabiEngine3D::billboardEntity_getDiffuseMapPath(const string& ID)
+const string& FabiEngine3D::billboardEntity_getDiffuseMapPath(const string& ID)
 {
 	return _core->_billboardEntityManager.getEntity(ID)->getDiffuseMapPath();
 }

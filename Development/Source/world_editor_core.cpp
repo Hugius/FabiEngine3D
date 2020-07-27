@@ -13,127 +13,126 @@ void WorldEditor::initializeGUI()
 	// Private window instance of left viewport
 	_leftWindow = _gui->getViewport("left")->getWindow("main");
 
-	// Left-viewport: mainWindow - worldManagement
+	// Left-viewport: mainWindow - worldEditorMenu
 	_leftWindow->addScreen("worldEditorMenu");
 	_leftWindow->getScreen("worldEditorMenu")->addButton("sky", vec2(0.0f, 0.63f), vec2(0.65f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Sky", LeftViewportController::textColor, LeftViewportController::textHoverColor);
 	_leftWindow->getScreen("worldEditorMenu")->addButton("terrain", vec2(0.0f, 0.21), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Terrain", LeftViewportController::textColor, LeftViewportController::textHoverColor);
 	_leftWindow->getScreen("worldEditorMenu")->addButton("water", vec2(0.0f, -0.21), vec2(1.0f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Water", LeftViewportController::textColor, LeftViewportController::textHoverColor);
 	_leftWindow->getScreen("worldEditorMenu")->addButton("back", vec2(0.0f, -0.63f), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
 	
-	// Left-viewport: mainWindow - skyMenu
-	_leftWindow->addScreen("skyMenu");
-	_leftWindow->getScreen("skyMenu")->addButton("create", vec2(0.0f, 0.63f), vec2(1.5f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Create sky", LeftViewportController::textColor, LeftViewportController::textHoverColor);
-	_leftWindow->getScreen("skyMenu")->addButton("edit", vec2(0.0f, 0.21f), vec2(1.5f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Edit sky", LeftViewportController::textColor, LeftViewportController::textHoverColor);
-	_leftWindow->getScreen("skyMenu")->addButton("remove", vec2(0.0f, -0.21f), vec2(1.5f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Remove sky", LeftViewportController::textColor, LeftViewportController::textHoverColor);
-	_leftWindow->getScreen("skyMenu")->addButton("back", vec2(0.0f, -0.63f), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	// Left-viewport: mainWindow - skyMenuMain
+	_leftWindow->addScreen("skyMenuMain");
+	_leftWindow->getScreen("skyMenuMain")->addButton("create", vec2(0.0f, 0.63f), vec2(1.5f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Create sky", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	_leftWindow->getScreen("skyMenuMain")->addButton("edit", vec2(0.0f, 0.21f), vec2(1.5f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Edit sky", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	_leftWindow->getScreen("skyMenuMain")->addButton("remove", vec2(0.0f, -0.21f), vec2(1.5f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Remove sky", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	_leftWindow->getScreen("skyMenuMain")->addButton("back", vec2(0.0f, -0.63f), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
 
-	// Left-viewport: mainWindow - skyManagement
-	_leftWindow->addScreen("skyManagement");
-	_leftWindow->getScreen("skyManagement")->addButton("mesh", vec2(0.0f, 0.475f), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "3D mesh", LeftViewportController::textColor, LeftViewportController::textHoverColor);
-	_leftWindow->getScreen("skyManagement")->addButton("options", vec2(0.0f, 0.0f), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Options", LeftViewportController::textColor, LeftViewportController::textHoverColor);
-	_leftWindow->getScreen("skyManagement")->addButton("back", vec2(0.0f, -0.475f), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	// Left-viewport: mainWindow - skyMenuChoice
+	_leftWindow->addScreen("skyMenuChoice");
+	_leftWindow->getScreen("skyMenuChoice")->addButton("mesh", vec2(0.0f, 0.475f), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "3D mesh", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	_leftWindow->getScreen("skyMenuChoice")->addButton("options", vec2(0.0f, 0.0f), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Options", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	_leftWindow->getScreen("skyMenuChoice")->addButton("back", vec2(0.0f, -0.475f), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
 
-	// Left-viewport: mainWindow - skyMesh
-	_leftWindow->addScreen("skyMesh");
-	_leftWindow->getScreen("skyMesh")->addScrollingList("buttonList", vec2(0.0f, 0.2f), vec2(1.9, 1.5f), vec3(0.3f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, LeftViewportController::textColor, LeftViewportController::textHoverColor, vec2(0.15f, 0.1f));
-	_leftWindow->getScreen("skyMesh")->getScrollingList("buttonList")->addButton("leftTexture", "Left texture");
-	_leftWindow->getScreen("skyMesh")->getScrollingList("buttonList")->addButton("rightTexture", "Right texture");
-	_leftWindow->getScreen("skyMesh")->getScrollingList("buttonList")->addButton("frontTexture", "Front texture");
-	_leftWindow->getScreen("skyMesh")->getScrollingList("buttonList")->addButton("backTexture", "Back texture");
-	_leftWindow->getScreen("skyMesh")->getScrollingList("buttonList")->addButton("topTexture", "Top texture");
-	_leftWindow->getScreen("skyMesh")->getScrollingList("buttonList")->addButton("bottomTexture", "Bottom texture");
-	_leftWindow->getScreen("skyMesh")->addButton("load", vec2(0.0f, -0.7f), vec2(0.8f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Load", LeftViewportController::textColor, LeftViewportController::textHoverColor);
-	_leftWindow->getScreen("skyMesh")->addButton("back", vec2(0.0f, -0.9f), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	// Left-viewport: mainWindow - skyMenuMesh
+	_leftWindow->addScreen("skyMenuMesh");
+	_leftWindow->getScreen("skyMenuMesh")->addScrollingList("buttonList", vec2(0.0f, 0.2f), vec2(1.9, 1.5f), vec3(0.3f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, LeftViewportController::textColor, LeftViewportController::textHoverColor, vec2(0.15f, 0.1f));
+	_leftWindow->getScreen("skyMenuMesh")->getScrollingList("buttonList")->addButton("leftTexture", "Left texture");
+	_leftWindow->getScreen("skyMenuMesh")->getScrollingList("buttonList")->addButton("rightTexture", "Right texture");
+	_leftWindow->getScreen("skyMenuMesh")->getScrollingList("buttonList")->addButton("frontTexture", "Front texture");
+	_leftWindow->getScreen("skyMenuMesh")->getScrollingList("buttonList")->addButton("backTexture", "Back texture");
+	_leftWindow->getScreen("skyMenuMesh")->getScrollingList("buttonList")->addButton("topTexture", "Top texture");
+	_leftWindow->getScreen("skyMenuMesh")->getScrollingList("buttonList")->addButton("bottomTexture", "Bottom texture");
+	_leftWindow->getScreen("skyMenuMesh")->addButton("back", vec2(0.0f, -0.9f), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
 
-	// Left-viewport: mainWindow - skyOptions
-	_leftWindow->addScreen("skyOptions");
-	_leftWindow->getScreen("skyOptions")->addButton("rotationSpeed", vec2(0.0f, 0.63f), vec2(1.8f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Rotation speed", LeftViewportController::textColor, LeftViewportController::textHoverColor);
-	_leftWindow->getScreen("skyOptions")->addButton("lightness", vec2(0.0f, 0.21f), vec2(1.5f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "lightness", LeftViewportController::textColor, LeftViewportController::textHoverColor);
-	_leftWindow->getScreen("skyOptions")->addButton("color", vec2(0.0f, -0.21f), vec2(1.0f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Color", LeftViewportController::textColor, LeftViewportController::textHoverColor);
-	_leftWindow->getScreen("skyOptions")->addButton("back", vec2(0.0f, -0.63f), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	// Left-viewport: mainWindow - skyMenuOptions
+	_leftWindow->addScreen("skyMenuOptions");
+	_leftWindow->getScreen("skyMenuOptions")->addButton("rotationSpeed", vec2(0.0f, 0.63f), vec2(1.8f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Rotation speed", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	_leftWindow->getScreen("skyMenuOptions")->addButton("lightness", vec2(0.0f, 0.21f), vec2(1.5f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "lightness", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	_leftWindow->getScreen("skyMenuOptions")->addButton("color", vec2(0.0f, -0.21f), vec2(1.0f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Color", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	_leftWindow->getScreen("skyMenuOptions")->addButton("back", vec2(0.0f, -0.63f), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
 
-	// Left-viewport: mainWindow - terrainMenu
-	_leftWindow->addScreen("terrainMenu");
-	_leftWindow->getScreen("terrainMenu")->addButton("create", vec2(0.0f, 0.63f), vec2(1.8f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Create terain", LeftViewportController::textColor, LeftViewportController::textHoverColor);
-	_leftWindow->getScreen("terrainMenu")->addButton("edit", vec2(0.0f, 0.21f), vec2(1.5f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Edit terrain", LeftViewportController::textColor, LeftViewportController::textHoverColor);
-	_leftWindow->getScreen("terrainMenu")->addButton("remove", vec2(0.0f, -0.21f), vec2(1.8f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Remove terrain", LeftViewportController::textColor, LeftViewportController::textHoverColor);
-	_leftWindow->getScreen("terrainMenu")->addButton("back", vec2(0.0f, -0.63f), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	// Left-viewport: mainWindow - terrainMenuMain
+	_leftWindow->addScreen("terrainMenuMain");
+	_leftWindow->getScreen("terrainMenuMain")->addButton("create", vec2(0.0f, 0.63f), vec2(1.8f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Create terain", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	_leftWindow->getScreen("terrainMenuMain")->addButton("edit", vec2(0.0f, 0.21f), vec2(1.5f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Edit terrain", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	_leftWindow->getScreen("terrainMenuMain")->addButton("remove", vec2(0.0f, -0.21f), vec2(1.8f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Remove terrain", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	_leftWindow->getScreen("terrainMenuMain")->addButton("back", vec2(0.0f, -0.63f), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
 
-	// Left-viewport: mainWindow - terrainManagement
-	_leftWindow->addScreen("terrainManagement");
-	_leftWindow->getScreen("terrainManagement")->addButton("mesh", vec2(0.0f, 0.475f), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "3D mesh", LeftViewportController::textColor, LeftViewportController::textHoverColor);
-	_leftWindow->getScreen("terrainManagement")->addButton("blendmap", vec2(0.0f, 0.0f), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Blendmap", LeftViewportController::textColor, LeftViewportController::textHoverColor);
-	_leftWindow->getScreen("terrainManagement")->addButton("back", vec2(0.0f, -0.475f), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	// Left-viewport: mainWindow - terrainMenuChoice
+	_leftWindow->addScreen("terrainMenuChoice");
+	_leftWindow->getScreen("terrainMenuChoice")->addButton("mesh", vec2(0.0f, 0.475f), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "3D mesh", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	_leftWindow->getScreen("terrainMenuChoice")->addButton("blendMap", vec2(0.0f, 0.0f), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "BlendMap", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	_leftWindow->getScreen("terrainMenuChoice")->addButton("back", vec2(0.0f, -0.475f), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
 
-	// Left-viewport: mainWindow - terrainMesh
-	_leftWindow->addScreen("terrainMesh");
-	_leftWindow->getScreen("terrainMesh")->addScrollingList("buttonList", vec2(0.0f, 0.2f), vec2(1.9, 1.5f), vec3(0.3f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, LeftViewportController::textColor, LeftViewportController::textHoverColor, vec2(0.15f, 0.1f));
-	_leftWindow->getScreen("terrainMesh")->getScrollingList("buttonList")->addButton("heightmap", "Height map");
-	_leftWindow->getScreen("terrainMesh")->getScrollingList("buttonList")->addButton("diffuseMap", "Diffuse map");
-	_leftWindow->getScreen("terrainMesh")->getScrollingList("buttonList")->addButton("maxHeight", "Max height");
-	_leftWindow->getScreen("terrainMesh")->getScrollingList("buttonList")->addButton("uvRepeat", "UV repeat");
-	_leftWindow->getScreen("terrainMesh")->getScrollingList("buttonList")->addButton("lightness", "lightness");
-	_leftWindow->getScreen("terrainMesh")->addButton("back", vec2(0.0f, -0.9f), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	// Left-viewport: mainWindow - terrainMenuMesh
+	_leftWindow->addScreen("terrainMenuMesh");
+	_leftWindow->getScreen("terrainMenuMesh")->addScrollingList("buttonList", vec2(0.0f, 0.2f), vec2(1.9, 1.5f), vec3(0.3f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, LeftViewportController::textColor, LeftViewportController::textHoverColor, vec2(0.15f, 0.1f));
+	_leftWindow->getScreen("terrainMenuMesh")->getScrollingList("buttonList")->addButton("heightMap", "Height map");
+	_leftWindow->getScreen("terrainMenuMesh")->getScrollingList("buttonList")->addButton("diffuseMap", "Diffuse map");
+	_leftWindow->getScreen("terrainMenuMesh")->getScrollingList("buttonList")->addButton("maxHeight", "Max height");
+	_leftWindow->getScreen("terrainMenuMesh")->getScrollingList("buttonList")->addButton("uvRepeat", "UV repeat");
+	_leftWindow->getScreen("terrainMenuMesh")->getScrollingList("buttonList")->addButton("lightness", "lightness");
+	_leftWindow->getScreen("terrainMenuMesh")->addButton("back", vec2(0.0f, -0.9f), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
 
-	// Left-viewport: mainWindow - terrainBlendmap
-	_leftWindow->addScreen("terrainBlendmap");
-	_leftWindow->getScreen("terrainBlendmap")->addScrollingList("buttonList", vec2(0.0f, 0.2f), vec2(1.9, 1.5f), vec3(0.3f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, LeftViewportController::textColor, LeftViewportController::textHoverColor, vec2(0.15f, 0.1f));
-	_leftWindow->getScreen("terrainBlendmap")->getScrollingList("buttonList")->addButton("blendmap", "Blend map");
-	_leftWindow->getScreen("terrainBlendmap")->getScrollingList("buttonList")->addButton("red", "Red texture");
-	_leftWindow->getScreen("terrainBlendmap")->getScrollingList("buttonList")->addButton("green", "Green texture");
-	_leftWindow->getScreen("terrainBlendmap")->getScrollingList("buttonList")->addButton("blue", "Blue texture");
-	_leftWindow->getScreen("terrainBlendmap")->getScrollingList("buttonList")->addButton("redRepeat", "Red UV");
-	_leftWindow->getScreen("terrainBlendmap")->getScrollingList("buttonList")->addButton("greenRepeat", "Green UV");
-	_leftWindow->getScreen("terrainBlendmap")->getScrollingList("buttonList")->addButton("blueRepeat", "Blue UV");
-	_leftWindow->getScreen("terrainBlendmap")->addButton("back", vec2(0.0f, -0.9f), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	// Left-viewport: mainWindow - terrainMenuBlendMap
+	_leftWindow->addScreen("terrainMenuBlendMap");
+	_leftWindow->getScreen("terrainMenuBlendMap")->addScrollingList("buttonList", vec2(0.0f, 0.2f), vec2(1.9, 1.5f), vec3(0.3f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, LeftViewportController::textColor, LeftViewportController::textHoverColor, vec2(0.15f, 0.1f));
+	_leftWindow->getScreen("terrainMenuBlendMap")->getScrollingList("buttonList")->addButton("blendMap", "Blend map");
+	_leftWindow->getScreen("terrainMenuBlendMap")->getScrollingList("buttonList")->addButton("red", "Red texture");
+	_leftWindow->getScreen("terrainMenuBlendMap")->getScrollingList("buttonList")->addButton("green", "Green texture");
+	_leftWindow->getScreen("terrainMenuBlendMap")->getScrollingList("buttonList")->addButton("blue", "Blue texture");
+	_leftWindow->getScreen("terrainMenuBlendMap")->getScrollingList("buttonList")->addButton("redRepeat", "Red UV");
+	_leftWindow->getScreen("terrainMenuBlendMap")->getScrollingList("buttonList")->addButton("greenRepeat", "Green UV");
+	_leftWindow->getScreen("terrainMenuBlendMap")->getScrollingList("buttonList")->addButton("blueRepeat", "Blue UV");
+	_leftWindow->getScreen("terrainMenuBlendMap")->addButton("back", vec2(0.0f, -0.9f), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
 
-	// Left-viewport: mainWindow - waterMenu
-	_leftWindow->addScreen("waterMenu");
-	_leftWindow->getScreen("waterMenu")->addButton("create", vec2(0.0f, 0.63f), vec2(1.5f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Create water", LeftViewportController::textColor, LeftViewportController::textHoverColor);
-	_leftWindow->getScreen("waterMenu")->addButton("edit", vec2(0.0f, 0.21f), vec2(1.5f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Edit water", LeftViewportController::textColor, LeftViewportController::textHoverColor);
-	_leftWindow->getScreen("waterMenu")->addButton("remove", vec2(0.0f, -0.21f), vec2(1.5f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Remove water", LeftViewportController::textColor, LeftViewportController::textHoverColor);
-	_leftWindow->getScreen("waterMenu")->addButton("back", vec2(0.0f, -0.63f), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	// Left-viewport: mainWindow - waterMenuMain
+	_leftWindow->addScreen("waterMenuMain");
+	_leftWindow->getScreen("waterMenuMain")->addButton("create", vec2(0.0f, 0.63f), vec2(1.5f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Create water", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	_leftWindow->getScreen("waterMenuMain")->addButton("edit", vec2(0.0f, 0.21f), vec2(1.5f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Edit water", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	_leftWindow->getScreen("waterMenuMain")->addButton("remove", vec2(0.0f, -0.21f), vec2(1.5f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Remove water", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	_leftWindow->getScreen("waterMenuMain")->addButton("back", vec2(0.0f, -0.63f), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
 
 	// Left-viewport: mainWindow - waterManagement
-	_leftWindow->addScreen("waterManagement");
-	_leftWindow->getScreen("waterManagement")->addButton("mesh", vec2(0.0f, 0.63f), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "3D mesh", LeftViewportController::textColor, LeftViewportController::textHoverColor);
-	_leftWindow->getScreen("waterManagement")->addButton("effects", vec2(0.0f, 0.21f), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Effects", LeftViewportController::textColor, LeftViewportController::textHoverColor);
-	_leftWindow->getScreen("waterManagement")->addButton("options", vec2(0.0f, -0.21f), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Options", LeftViewportController::textColor, LeftViewportController::textHoverColor);
-	_leftWindow->getScreen("waterManagement")->addButton("back", vec2(0.0f, -0.63f), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	_leftWindow->addScreen("waterMenuChoice");
+	_leftWindow->getScreen("waterMenuChoice")->addButton("mesh", vec2(0.0f, 0.63f), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "3D mesh", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	_leftWindow->getScreen("waterMenuChoice")->addButton("effects", vec2(0.0f, 0.21f), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Effects", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	_leftWindow->getScreen("waterMenuChoice")->addButton("options", vec2(0.0f, -0.21f), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Options", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	_leftWindow->getScreen("waterMenuChoice")->addButton("back", vec2(0.0f, -0.63f), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
 
-	// Left-viewport: mainWindow - waterMesh
-	_leftWindow->addScreen("waterMesh");
-	_leftWindow->getScreen("waterMesh")->addScrollingList("buttonList", vec2(0.0f, 0.2f), vec2(1.9, 1.5f), vec3(0.3f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, LeftViewportController::textColor, LeftViewportController::textHoverColor, vec2(0.15f, 0.1f));
-	_leftWindow->getScreen("waterMesh")->getScrollingList("buttonList")->addButton("position", "Position");
-	_leftWindow->getScreen("waterMesh")->getScrollingList("buttonList")->addButton("size", "Size");
-	_leftWindow->getScreen("waterMesh")->getScrollingList("buttonList")->addButton("up", "Move up");
-	_leftWindow->getScreen("waterMesh")->getScrollingList("buttonList")->addButton("down", "Move down");
-	_leftWindow->getScreen("waterMesh")->addButton("back", vec2(0.0f, -0.9f), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	// Left-viewport: mainWindow - waterMenuMesh
+	_leftWindow->addScreen("waterMenuMesh");
+	_leftWindow->getScreen("waterMenuMesh")->addScrollingList("buttonList", vec2(0.0f, 0.2f), vec2(1.9, 1.5f), vec3(0.3f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, LeftViewportController::textColor, LeftViewportController::textHoverColor, vec2(0.15f, 0.1f));
+	_leftWindow->getScreen("waterMenuMesh")->getScrollingList("buttonList")->addButton("position", "Position");
+	_leftWindow->getScreen("waterMenuMesh")->getScrollingList("buttonList")->addButton("size", "Size");
+	_leftWindow->getScreen("waterMenuMesh")->getScrollingList("buttonList")->addButton("up", "Move up");
+	_leftWindow->getScreen("waterMenuMesh")->getScrollingList("buttonList")->addButton("down", "Move down");
+	_leftWindow->getScreen("waterMenuMesh")->addButton("back", vec2(0.0f, -0.9f), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
 
-	// Left-viewport: mainWindow - waterEffects
-	_leftWindow->addScreen("waterEffects");
-	_leftWindow->getScreen("waterEffects")->addScrollingList("buttonList", vec2(0.0f, 0.2f), vec2(1.9, 1.5f), vec3(0.3f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, LeftViewportController::textColor, LeftViewportController::textHoverColor, vec2(0.15f, 0.1f));
-	_leftWindow->getScreen("waterEffects")->getScrollingList("buttonList")->addButton("uvRepeat", "UV repeat");
-	_leftWindow->getScreen("waterEffects")->getScrollingList("buttonList")->addButton("dudvMap", "Dudv map");
-	_leftWindow->getScreen("waterEffects")->getScrollingList("buttonList")->addButton("normalMap", "Normal map");
-	_leftWindow->getScreen("waterEffects")->getScrollingList("buttonList")->addButton("displaceMap", "Displace map");
-	_leftWindow->getScreen("waterEffects")->getScrollingList("buttonList")->addButton("isReflective", "Reflective: OFF");
-	_leftWindow->getScreen("waterEffects")->getScrollingList("buttonList")->addButton("isRefractive", "Refractive: OFF");
-	_leftWindow->getScreen("waterEffects")->getScrollingList("buttonList")->addButton("isWaving", "Waving: OFF");
-	_leftWindow->getScreen("waterEffects")->getScrollingList("buttonList")->addButton("isRippling", "Rippling: OFF");
-	_leftWindow->getScreen("waterEffects")->getScrollingList("buttonList")->addButton("isSpecular", "Specular: OFF");
-	_leftWindow->getScreen("waterEffects")->addButton("back", vec2(0.0f, -0.9f), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	// Left-viewport: mainWindow - waterMenuEffects
+	_leftWindow->addScreen("waterMenuEffects");
+	_leftWindow->getScreen("waterMenuEffects")->addScrollingList("buttonList", vec2(0.0f, 0.2f), vec2(1.9, 1.5f), vec3(0.3f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, LeftViewportController::textColor, LeftViewportController::textHoverColor, vec2(0.15f, 0.1f));
+	_leftWindow->getScreen("waterMenuEffects")->getScrollingList("buttonList")->addButton("uvRepeat", "UV repeat");
+	_leftWindow->getScreen("waterMenuEffects")->getScrollingList("buttonList")->addButton("dudvMap", "Dudv map");
+	_leftWindow->getScreen("waterMenuEffects")->getScrollingList("buttonList")->addButton("normalMap", "Normal map");
+	_leftWindow->getScreen("waterMenuEffects")->getScrollingList("buttonList")->addButton("displaceMap", "Displace map");
+	_leftWindow->getScreen("waterMenuEffects")->getScrollingList("buttonList")->addButton("isReflective", "Reflective: OFF");
+	_leftWindow->getScreen("waterMenuEffects")->getScrollingList("buttonList")->addButton("isRefractive", "Refractive: OFF");
+	_leftWindow->getScreen("waterMenuEffects")->getScrollingList("buttonList")->addButton("isWaving", "Waving: OFF");
+	_leftWindow->getScreen("waterMenuEffects")->getScrollingList("buttonList")->addButton("isRippling", "Rippling: OFF");
+	_leftWindow->getScreen("waterMenuEffects")->getScrollingList("buttonList")->addButton("isSpecular", "Specular: OFF");
+	_leftWindow->getScreen("waterMenuEffects")->addButton("back", vec2(0.0f, -0.9f), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
 
-	// Left-viewport: mainWindow - waterOptions
-	_leftWindow->addScreen("waterOptions");
-	_leftWindow->getScreen("waterOptions")->addScrollingList("buttonList", vec2(0.0f, 0.2f), vec2(1.9, 1.5f), vec3(0.3f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, LeftViewportController::textColor, LeftViewportController::textHoverColor, vec2(0.15f, 0.1f));
-	_leftWindow->getScreen("waterOptions")->getScrollingList("buttonList")->addButton("speed", "Water speed");
-	_leftWindow->getScreen("waterOptions")->getScrollingList("buttonList")->addButton("transparency", "Transparency");
-	_leftWindow->getScreen("waterOptions")->getScrollingList("buttonList")->addButton("color", "Color");
-	_leftWindow->getScreen("waterOptions")->getScrollingList("buttonList")->addButton("specularFactor", "Specular factor");
-	_leftWindow->getScreen("waterOptions")->getScrollingList("buttonList")->addButton("specularIntensity", "Specular intensity");
-	_leftWindow->getScreen("waterOptions")->getScrollingList("buttonList")->addButton("waveHeight", "Wave height");
-	_leftWindow->getScreen("waterOptions")->addButton("back", vec2(0.0f, -0.9f), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	// Left-viewport: mainWindow - waterMenuOptions
+	_leftWindow->addScreen("waterMenuOptions");
+	_leftWindow->getScreen("waterMenuOptions")->addScrollingList("buttonList", vec2(0.0f, 0.2f), vec2(1.9, 1.5f), vec3(0.3f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, LeftViewportController::textColor, LeftViewportController::textHoverColor, vec2(0.15f, 0.1f));
+	_leftWindow->getScreen("waterMenuOptions")->getScrollingList("buttonList")->addButton("speed", "Water speed");
+	_leftWindow->getScreen("waterMenuOptions")->getScrollingList("buttonList")->addButton("transparency", "Transparency");
+	_leftWindow->getScreen("waterMenuOptions")->getScrollingList("buttonList")->addButton("color", "Color");
+	_leftWindow->getScreen("waterMenuOptions")->getScrollingList("buttonList")->addButton("specularFactor", "Specular factor");
+	_leftWindow->getScreen("waterMenuOptions")->getScrollingList("buttonList")->addButton("specularIntensity", "Specular intensity");
+	_leftWindow->getScreen("waterMenuOptions")->getScrollingList("buttonList")->addButton("waveHeight", "Wave height");
+	_leftWindow->getScreen("waterMenuOptions")->addButton("back", vec2(0.0f, -0.9f), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
 }
 
 void WorldEditor::load()
@@ -171,7 +170,11 @@ void WorldEditor::unload()
 	_fe3d.gfx_disableMSAA();
 	_fe3d.gfx_disableWaterEffects();
 
-	_unloadSkyData();
+	// Delete sky entity
+	if (_fe3d.skyEntity_isExisting("@sky"))
+	{
+		_fe3d.skyEntity_delete("@sky");
+	}
 
 	// Delete terrain entity
 	if (_fe3d.terrainEntity_isExisting("@terrain"))
@@ -182,7 +185,7 @@ void WorldEditor::unload()
 	_unloadWaterData();
 
 	// Enable default sky
-	_fe3d.skyEntity_select("@defaultSky");
+	_fe3d.skyEntity_select("@@sky");
 
 	// Camera
 	_fe3d.camera_setPosition(vec3(0.0f));
@@ -195,7 +198,6 @@ void WorldEditor::unload()
 	_currentWorldPart = WorldPart::NONE;
 	_cameraRotationSpeed = 0.0f;
 	_totalCameraRotation = 0.0f;
-	_skyTexturePaths.clear();
 	_waterDudvMapPath = "";
 	_waterNormalMapPath = "";
 	_waterWavingEnabled = false;
@@ -214,5 +216,5 @@ void WorldEditor::unload()
 	_waterHeightSpeed = 0.1f;
 
 	// Select the default sky
-	_fe3d.skyEntity_select("@defaultSky");
+	_fe3d.skyEntity_select("@@sky");
 }

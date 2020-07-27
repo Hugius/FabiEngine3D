@@ -46,7 +46,7 @@ uniform float u_lightness;
 
 // Boolean uniforms
 uniform bool u_isTransparent;
-uniform bool u_isLightmapped;
+uniform bool u_isLightMapped;
 uniform bool u_isSkyReflective;
 uniform bool u_isSceneReflective;
 uniform bool u_isSpecular;
@@ -76,7 +76,7 @@ vec3 getDirectionalLighting();
 vec3 getPointLighting();
 float getSpecularValue(vec3 position);
 vec3 getShadowLighting();
-vec3 applyLightmapping(vec3 color);
+vec3 applyLightMapping(vec3 color);
 vec3 applyFog(vec3 color);
 vec3 applySkyReflections(vec3 color);
 vec3 applySceneReflections(vec3 color);
@@ -96,7 +96,7 @@ void main()
 	color  = applySkyReflections(color); // Sky reflection
 	color  = applySceneReflections(color); // Scene reflection
 	color *= vec3((ambient + directional) * shadow + point); // Lighting
-	color  = applyLightmapping(color); // Lightmapping
+	color  = applyLightMapping(color); // LightMapping
 	color  = applyFog(color); // 
 	color *= u_color;
 	color *= u_lightness;
@@ -271,9 +271,9 @@ vec3 getShadowLighting()
 	}
 }
 
-vec3 applyLightmapping(vec3 color)
+vec3 applyLightMapping(vec3 color)
 {
-	if(u_lightMappingEnabled && u_isLightmapped)
+	if(u_lightMappingEnabled && u_isLightMapped)
 	{
 		vec3 lightMapColor = texture(u_sampler_lightMap, f_uv).rgb;
 		vec3 lightMappedColor = color + lightMapColor;

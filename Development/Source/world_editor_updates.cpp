@@ -15,7 +15,7 @@ void WorldEditor::update()
 			_fe3d.camera_disableLookat();
 
 			// Select the default sky
-			_fe3d.skyEntity_select("@defaultSky");
+			_fe3d.skyEntity_select("@@sky");
 
 			// Hide sky
 			if (_fe3d.skyEntity_isExisting("@sky"))
@@ -40,17 +40,17 @@ void WorldEditor::update()
 			{
 				if (screen->getButton("sky")->isHovered())
 				{
-					_leftWindow->setActiveScreen("skyMenu");
+					_leftWindow->setActiveScreen("skyMenuMain");
 					_currentWorldPart = WorldPart::SKY;
 				}
 				else if (screen->getButton("terrain")->isHovered())
 				{
-					_leftWindow->setActiveScreen("terrainMenu");
+					_leftWindow->setActiveScreen("terrainMenuMain");
 					_currentWorldPart = WorldPart::TERRAIN;
 				}
 				else if (screen->getButton("water")->isHovered())
 				{
-					_leftWindow->setActiveScreen("waterMenu");
+					_leftWindow->setActiveScreen("waterMenuMain");
 					_currentWorldPart = WorldPart::WATER;
 				}
 				else if (screen->getButton("back")->isHovered())
@@ -75,9 +75,9 @@ void WorldEditor::update()
 		else
 		{
 			// Update sub-menus
-			_updateSkyMenu();
-			_updateTerrainMenu();
-			_updateWaterMenu();
+			_updateSkyMenuMain();
+			_updateTerrainMenuMain();
+			_updateWaterMenuMain();
 		}
 	}
 }

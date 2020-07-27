@@ -1,8 +1,8 @@
 #include "sky_entity.hpp"
 
-void SkyEntity::setTexturePaths(const vector<string>& val)
+void SkyEntity::setDiffuseMapPaths(const array<string, 6>& val)
 {
-	_texturesPaths = val;
+	_diffuseMapPaths = val;
 }
 
 void SkyEntity::setRotationMatrix(const mat4 & val)
@@ -30,9 +30,9 @@ void SkyEntity::setRotationSpeed(float val)
 	_rotationSpeed = val;
 }
 
-const vector<string>& SkyEntity::getTexturePaths() const
+const array<string, 6>& SkyEntity::getDiffuseMapPaths() const
 {
-	return _texturesPaths;
+	return _diffuseMapPaths;
 }
 
 const mat4 & SkyEntity::getRotationMatrix() const

@@ -141,7 +141,7 @@ void FabiEngine3D::gameEntity_setFaceCulled(const string& ID, bool enabled)
 	_core->_gameEntityManager.getEntity(ID)->setFaceCulled(enabled);
 }
 
-void FabiEngine3D::gameEntity_setLightmapped(const string& ID, bool enabled)
+void FabiEngine3D::gameEntity_setLightMapped(const string& ID, bool enabled)
 {
 	_core->_gameEntityManager.getEntity(ID)->setLightMapped(enabled);
 }
@@ -181,7 +181,7 @@ bool FabiEngine3D::gameEntity_isFaceCulled(const string& ID)
 	return _core->_gameEntityManager.getEntity(ID)->isFaceCulled();
 }
 
-bool FabiEngine3D::gameEntity_isLightmapped(const string& ID)
+bool FabiEngine3D::gameEntity_isLightMapped(const string& ID)
 {
 	return _core->_gameEntityManager.getEntity(ID)->isLightMapped();
 }

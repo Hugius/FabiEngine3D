@@ -7,7 +7,7 @@ void ModelEditor::_updateEditingScreen()
 	if (_modelEditingEnabled && _currentModelName != "")
 	{
 		static bool firstTime = true;
-		auto screen = _leftWindow->getScreen("modelEditingMain");
+		auto screen = _leftWindow->getScreen("modelEditorMenuChoice");
 
 		if (firstTime)
 		{
@@ -15,30 +15,30 @@ void ModelEditor::_updateEditingScreen()
 			_fe3d.textEntity_setTextContent(_gui->getGlobalScreen()->getTextfield("selectedModelName")->getEntityID(), 
 				"Model: " + _currentModelName.substr(1, _currentModelName.size() - 1), 0.025f);
 			_fe3d.textEntity_show(_gui->getGlobalScreen()->getTextfield("selectedModelName")->getEntityID());
-			_leftWindow->setActiveScreen("modelEditingMain");
+			_leftWindow->setActiveScreen("modelEditorMenuChoice");
 		}
 		
 		// GUI management
-		if (_leftWindow->getActiveScreen()->getID() == "modelEditingMain")
+		if (_leftWindow->getActiveScreen()->getID() == "modelEditorMenuChoice")
 		{
 			if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
 			{
 				if (screen->getButton("mesh")->isHovered())
 				{
-					_leftWindow->setActiveScreen("modelEditingMesh");
+					_leftWindow->setActiveScreen("modelEditorMenuMesh");
 				}
 				else if (screen->getButton("options")->isHovered())
 				{
 					if (_fe3d.gameEntity_isExisting(_currentModelName))
 					{
-						_leftWindow->setActiveScreen("modelEditingOptions");
+						_leftWindow->setActiveScreen("modelEditorMenuOptions");
 					}
 				}
 				else if (screen->getButton("size")->isHovered())
 				{
 					if (_fe3d.gameEntity_isExisting(_currentModelName))
 					{
-						_leftWindow->setActiveScreen("modelEditingSize");
+						_leftWindow->setActiveScreen("modelEditorMenuSize");
 					}
 				}
 				else if (screen->getButton("back")->isHovered())
@@ -52,7 +52,7 @@ void ModelEditor::_updateEditingScreen()
 					firstTime = true;
 					_modelEditingEnabled = false;
 					_currentModelName = "";
-					_leftWindow->setActiveScreen("modelEditorMenu");
+					_leftWindow->setActiveScreen("modelEditorMenuMain");
 					_fe3d.textEntity_hide(_gui->getGlobalScreen()->getTextfield("selectedModelName")->getEntityID());
 				}
 			}
@@ -72,15 +72,15 @@ void ModelEditor::_updateEditingScreen()
 			screen->getButton("options")->setHoverable(hoverable);
 			screen->getButton("size")->setHoverable(hoverable);
 		}
-		else if (_leftWindow->getActiveScreen()->getID() == "modelEditingMesh")
+		else if (_leftWindow->getActiveScreen()->getID() == "modelEditorMenuMesh")
 		{
 			_updateModelEditingMesh();
 		}
-		else if (_leftWindow->getActiveScreen()->getID() == "modelEditingOptions")
+		else if (_leftWindow->getActiveScreen()->getID() == "modelEditorMenuOptions")
 		{
 			_updateModelEditingOptions();
 		}
-		else if (_leftWindow->getActiveScreen()->getID() == "modelEditingSize")
+		else if (_leftWindow->getActiveScreen()->getID() == "modelEditorMenuSize")
 		{
 			_updateModelEditingSize();
 		}
@@ -89,7 +89,7 @@ void ModelEditor::_updateEditingScreen()
 
 void ModelEditor::_updateModelEditingMesh()
 {
-	auto screen = _leftWindow->getScreen("modelEditingMesh");
+	auto screen = _leftWindow->getScreen("modelEditorMenuMesh");
 
 	// GUI management
 	if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
@@ -112,7 +112,7 @@ void ModelEditor::_updateModelEditingMesh()
 		}
 		else if (screen->getButton("back")->isHovered())
 		{
-			_leftWindow->setActiveScreen("modelEditingMain");
+			_leftWindow->setActiveScreen("modelEditorMenuChoice");
 		}
 	}
 

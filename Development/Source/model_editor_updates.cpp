@@ -17,7 +17,7 @@ void ModelEditor::_updateManagementScreen()
 {
 	if (_isLoaded)
 	{
-		auto screen = _leftWindow->getScreen("modelEditorMenu");
+		auto screen = _leftWindow->getScreen("modelEditorMenuMain");
 
 		// GUI management
 		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
@@ -85,7 +85,7 @@ void ModelEditor::_updateCreationScreen()
 						_currentModelName = "@" + newModelName;
 						_modelCreationEnabled = false;
 						_modelEditingEnabled = true;
-						_gui->getViewport("left")->getWindow("main")->setActiveScreen("modelEditingMain");
+						_gui->getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
 					}
 				}
 			}

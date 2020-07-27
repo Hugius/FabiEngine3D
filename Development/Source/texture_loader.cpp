@@ -14,7 +14,7 @@ GLuint TextureLoader::getText(const string & text, const string& filePath)
 	return it->second; // Cache texture
 }
 
-GLuint TextureLoader::getTexture(const string &filePath, bool mipmap, bool aniso, bool repeat)
+GLuint TextureLoader::getTexture(const string& filePath, bool mipmap, bool aniso, bool repeat)
 {
 	begin: auto it = _textures.find(filePath);
 	if (it == _textures.end()) // Not in map (yet)
@@ -27,12 +27,12 @@ GLuint TextureLoader::getTexture(const string &filePath, bool mipmap, bool aniso
 	return it->second; // Cache texture
 }
 
-GLuint TextureLoader::getCubeMap(const vector<string> filePaths)
+GLuint TextureLoader::getCubeMap(const array<string, 6>& filePaths)
 {
 	begin: auto it = _cubeMaps.find(filePaths);
 	if (it == _cubeMaps.end()) // Not in map (yet)
 	{
-		GLuint tempTxt = _loadCubemap(filePaths);
+		GLuint tempTxt = _loadCubeMap(filePaths);
 		_cubeMaps.insert(std::make_pair(filePaths, tempTxt));
 		goto begin;
 	}
@@ -40,12 +40,12 @@ GLuint TextureLoader::getCubeMap(const vector<string> filePaths)
 	return it->second; // Cache texture
 }
 
-vector<float>& TextureLoader::getHeightMap(const string &filePath)
+vector<float>& TextureLoader::getHeightMap(const string& filePath)
 {
 	begin: auto it = _heightMaps.find(filePath);
 	if (it == _heightMaps.end()) // Not in map (yet)
 	{
-		auto tempPixels = _loadHeightmap(filePath);
+		auto tempPixels = _loadHeightMap(filePath);
 		_heightMaps.insert(std::make_pair(filePath, tempPixels));
 		goto begin;
 	}
@@ -80,7 +80,7 @@ void TextureLoader::clearTextureCache(const string& filePath)
 	}
 }
 
-void TextureLoader::clearCubeMapCache(const vector<string> filePaths)
+void TextureLoader::clearCubeMapCache(const array<string, 6>& filePaths)
 {
 	if (_cubeMaps.find(filePaths) != _cubeMaps.end())
 	{

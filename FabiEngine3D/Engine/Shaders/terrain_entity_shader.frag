@@ -33,13 +33,13 @@ uniform float u_directionalLightingIntensity;
 uniform float u_pointLightIntensities[POINT_LIGHT_AMOUNT];
 uniform float u_pointLightDistanceFactors[POINT_LIGHT_AMOUNT];
 uniform float u_fogMinDistance;
-uniform float u_blendmapRepeat;
-uniform float u_blendmapRepeatR;
-uniform float u_blendmapRepeatG;
-uniform float u_blendmapRepeatB;
+uniform float u_blendMapRepeat;
+uniform float u_blendMapRepeatR;
+uniform float u_blendMapRepeatG;
+uniform float u_blendMapRepeatB;
 
 // Boolean uniforms
-uniform bool u_blendmappingEnabled;
+uniform bool u_blendMappingEnabled;
 uniform bool u_ambientLightingEnabled;
 uniform bool u_directionalLightingEnabled;
 uniform bool u_pointLightingEnabled;
@@ -83,13 +83,13 @@ void main()
 // Calculate texture color
 vec3 getTextureColor()
 {
-	if(u_blendmappingEnabled)
+	if(u_blendMappingEnabled)
 	{
-		vec4 blendmapColor    = texture(u_sampler_blendMap,   f_uv / u_blendmapRepeat);
-		vec4 mainTextureColor = texture(u_sampler_diffuseMap, f_uv) * (1.0f - blendmapColor.r - blendmapColor.g - blendmapColor.b);
-		vec4 rTextureColor    = texture(u_sampler_blendMapR, (f_uv / u_blendmapRepeat) * u_blendmapRepeatR) * blendmapColor.r;
-		vec4 gTextureColor    = texture(u_sampler_blendMapG, (f_uv / u_blendmapRepeat) * u_blendmapRepeatG) * blendmapColor.g;
-		vec4 bTextureColor    = texture(u_sampler_blendMapB, (f_uv / u_blendmapRepeat) * u_blendmapRepeatB) * blendmapColor.b;
+		vec4 blendMapColor    = texture(u_sampler_blendMap,   f_uv / u_blendMapRepeat);
+		vec4 mainTextureColor = texture(u_sampler_diffuseMap, f_uv) * (1.0f - blendMapColor.r - blendMapColor.g - blendMapColor.b);
+		vec4 rTextureColor    = texture(u_sampler_blendMapR, (f_uv / u_blendMapRepeat) * u_blendMapRepeatR) * blendMapColor.r;
+		vec4 gTextureColor    = texture(u_sampler_blendMapG, (f_uv / u_blendMapRepeat) * u_blendMapRepeatG) * blendMapColor.g;
+		vec4 bTextureColor    = texture(u_sampler_blendMapB, (f_uv / u_blendMapRepeat) * u_blendMapRepeatB) * blendMapColor.b;
 		vec4 newColor         = mainTextureColor + rTextureColor + gTextureColor + bTextureColor;
         
 		return newColor.rgb;

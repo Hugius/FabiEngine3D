@@ -110,7 +110,7 @@ void ModelEditor::_loadLightMap()
 		{
 			_fe3d.misc_clearTextureCache(lightMapPath + texName);
 			_fe3d.gameEntity_setLightMap(_currentModelName, lightMapPath + texName);
-			_fe3d.gameEntity_setLightmapped(_currentModelName, true);
+			_fe3d.gameEntity_setLightMapped(_currentModelName, true);
 		}
 	}
 }
@@ -179,7 +179,7 @@ bool ModelEditor::_addModel(string modelName, string objName, string diffuseMapN
 			if (lightMapName != "")
 			{
 				_fe3d.gameEntity_setLightMap(modelName, lightMapName);
-				_fe3d.gameEntity_setLightmapped(modelName, true);
+				_fe3d.gameEntity_setLightMapped(modelName, true);
 			}
 
 			// Reflection map

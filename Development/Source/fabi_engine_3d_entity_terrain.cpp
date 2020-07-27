@@ -80,7 +80,7 @@ float FabiEngine3D::terrainEntity_getPixelHeight(const string& ID, float x, floa
 	return _core->_terrainEntityManager.getPixelHeight(ID, x, z);
 }
 
-string FabiEngine3D::terrainEntity_getSelectedID()
+const string& FabiEngine3D::terrainEntity_getSelectedID()
 {
 	if (_core->_terrainEntityManager.getSelectedTerrain() != nullptr)
 	{
@@ -92,27 +92,27 @@ string FabiEngine3D::terrainEntity_getSelectedID()
 	}
 }
 
-string FabiEngine3D::terrainEntity_getDiffuseMapPath(const string& ID)
+const string& FabiEngine3D::terrainEntity_getDiffuseMapPath(const string& ID)
 {
 	return _core->_terrainEntityManager.getEntity(ID)->getDiffuseMapPath();
 }
 
-string FabiEngine3D::terrainEntity_getBlendMapPath(const string& ID)
+const string& FabiEngine3D::terrainEntity_getBlendMapPath(const string& ID)
 {
 	return _core->_terrainEntityManager.getEntity(ID)->getBlendMapPath();
 }
 
-string FabiEngine3D::terrainEntity_getBlendMapPathR(const string& ID)
+const string& FabiEngine3D::terrainEntity_getBlendMapPathR(const string& ID)
 {
 	return _core->_terrainEntityManager.getEntity(ID)->getBlendMapPathR();
 }
 
-string FabiEngine3D::terrainEntity_getBlendMapPathG(const string& ID)
+const string& FabiEngine3D::terrainEntity_getBlendMapPathG(const string& ID)
 {
 	return _core->_terrainEntityManager.getEntity(ID)->getBlendMapPathG();
 }
 
-string FabiEngine3D::terrainEntity_getBlendMapPathB(const string& ID)
+const string& FabiEngine3D::terrainEntity_getBlendMapPathB(const string& ID)
 {
 	return _core->_terrainEntityManager.getEntity(ID)->getBlendMapPathB();
 }
@@ -137,7 +137,7 @@ float FabiEngine3D::terrainEntity_getLightness(const string& ID)
 	return _core->_terrainEntityManager.getEntity(ID)->getLightness();
 }
 
-string FabiEngine3D::terrainEntity_getHeightMapPath(const string& ID)
+const string& FabiEngine3D::terrainEntity_getHeightMapPath(const string& ID)
 {
 	return _core->_terrainEntityManager.getEntity(ID)->getHeightMapPath();
 }

@@ -43,35 +43,31 @@ private:
 
 	// Sky functions
 	void _saveSkyData();
-	void _unloadSkyData();
 	void _loadSkyEntity();
-	void _updateSkyMenu();
-	void _updateSkyManagement();
-	void _updateSkyMesh();
-	void _updateSkyOptions();
+	void _updateSkyMenuMain();
+	void _updateSkyMenuChoice();
+	void _updateSkyMenuMesh();
+	void _updateSkyMenuOptions();
 	void _updateSkyCamera();
-
-	// Sky variables
-	vector<string> _skyTexturePaths;
 
 	// Terrain function
 	void _saveTerrainData();
 	void _loadTerrainEntity(const string& heightMapPath);
-	void _updateTerrainMenu();
-	void _updateTerrainManagement();
-	void _updateTerrainMesh();
-	void _updateTerrainBlendmap();
+	void _updateTerrainMenuMain();
+	void _updateTerrainMenuChoice();
+	void _updateTerrainMenuMesh();
+	void _updateTerrainMenuBlendMap();
 	void _updateTerrainCamera();
 
 	// Water functions
 	void _saveWaterData();
 	void _unloadWaterData();
 	void _loadWaterEntity();
-	void _updateWaterMenu();
-	void _updateWaterManagement();
-	void _updateWaterMesh();
-	void _updateWaterEffects();
-	void _updateWaterOptions();
+	void _updateWaterMenuMain();
+	void _updateWaterMenuChoice();
+	void _updateWaterMenuMesh();
+	void _updateWaterMenuEffects();
+	void _updateWaterMenuOptions();
 	void _updateWaterCamera();
 	
 	// Water variables

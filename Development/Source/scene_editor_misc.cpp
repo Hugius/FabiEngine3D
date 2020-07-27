@@ -81,7 +81,7 @@ void SceneEditor::_placeModel(string modelID, string modelName, vec3 position, v
 	if (_fe3d.gameEntity_getLightMapPath(modelName) != "")
 	{
 		_fe3d.gameEntity_setLightMap(modelID, _fe3d.gameEntity_getLightMapPath(modelName));
-		_fe3d.gameEntity_setLightmapped(modelID, true);
+		_fe3d.gameEntity_setLightMapped(modelID, true);
 	}
 
 	// Reflection map
@@ -119,7 +119,7 @@ void SceneEditor::_placeModel(string modelID, vec3 position, vec3 rotation, vec3
 	if (lightMapPath != "")
 	{
 		_fe3d.gameEntity_setLightMap(modelID, lightMapPath);
-		_fe3d.gameEntity_setLightmapped(modelID, true);
+		_fe3d.gameEntity_setLightMapped(modelID, true);
 	}
 
 	// Reflection map

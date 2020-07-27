@@ -510,7 +510,7 @@ void SceneEditor::unload()
 	_gui->getGlobalScreen()->deleteTextfield("selectedPointlightName");
 
 	// Enable default skybox
-	_fe3d.skyEntity_select("@defaultSky");
+	_fe3d.skyEntity_select("@@sky");
 
 	// Camera
 	_fe3d.camera_setPosition(vec3(0.0f));

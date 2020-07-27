@@ -130,7 +130,7 @@ void FabiEngine3D::misc_setMainRenderingColor(vec3 color)
 	glClearColor(color.r, color.g, color.b, 1.0f);
 }
 
-void FabiEngine3D::misc_setWindowTitle(string title)
+void FabiEngine3D::misc_setWindowTitle(const string& title)
 {
 	_core->_windowManager.setTitle(title);
 }
@@ -155,7 +155,7 @@ void FabiEngine3D::misc_clearTextureCache(const string& filePath)
 	_core->_texLoader.clearTextureCache(filePath);
 }
 
-void FabiEngine3D::misc_clearCubeMapCache(const vector<string> filePaths)
+void FabiEngine3D::misc_clearCubeMapCache(const array<string, 6>& filePaths)
 {
 	_core->_texLoader.clearCubeMapCache(filePaths);
 }
@@ -165,7 +165,7 @@ void FabiEngine3D::misc_clearHeightMapCache(const string& filePath)
 	_core->_texLoader.clearHeightMapCache(filePath);
 }
 
-string FabiEngine3D::misc_getWinExplorerFilename(string startingDir, string fileType)
+const string& FabiEngine3D::misc_getWinExplorerFilename(const string& startingDir, const string& fileType)
 {
 	// Prepare filter C-string
 	string filter = fileType;
@@ -187,7 +187,7 @@ string FabiEngine3D::misc_getWinExplorerFilename(string startingDir, string file
 	ofn.lpstrFileTitle = titleBuffer;
 	ofn.lpstrFileTitle[0] = '\0';
 	ofn.nMaxFileTitle = sizeof(titleBuffer);
-	ofn.lpstrInitialDir = string(misc_getRootDirectory() + startingDir).c_str(); // Projects folder
+	ofn.lpstrInitialDir = string(misc_getRootDirectory() + startingDir).c_str(); // Starting directory
 	ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
 	GetOpenFileName(&ofn);
 
@@ -195,22 +195,22 @@ string FabiEngine3D::misc_getWinExplorerFilename(string startingDir, string file
 	return ofn.lpstrFileTitle;
 }
 
-string FabiEngine3D::misc_vec2str(vec2 vec)
+const string& FabiEngine3D::misc_vec2str(vec2 vec)
 {
 	return std::to_string(vec.x) + " " + std::to_string(vec.y);
 }
 
-string FabiEngine3D::misc_vec2str(vec3 vec)
+const string& FabiEngine3D::misc_vec2str(vec3 vec)
 {
 	return std::to_string(vec.x) + " " + std::to_string(vec.y) + " " + std::to_string(vec.z);
 }
 
-string FabiEngine3D::misc_vec2str(vec4 vec)
+const string& FabiEngine3D::misc_vec2str(vec4 vec)
 {
 	return std::to_string(vec.x) + " " + std::to_string(vec.y) + " " + std::to_string(vec.z) + " " + std::to_string(vec.w);
 }
 
-string FabiEngine3D::misc_getRootDirectory()
+const string& FabiEngine3D::misc_getRootDirectory()
 {
 	char buffer[256]; size_t len = sizeof(buffer);
 	GetModuleFileName(NULL, buffer, len);

@@ -71,11 +71,11 @@ void TerrainEntityRenderer::render(const TerrainEntity* entity)
 		glEnable(GL_CULL_FACE);
 
 		// Shader uniforms
-		_shader.uploadUniform("u_blendmappingEnabled", entity->isBlendMapped());
-		_shader.uploadUniform("u_blendmapRepeat", entity->getUvRepeat());
-		_shader.uploadUniform("u_blendmapRepeatR", entity->getBlendRepeatR());
-		_shader.uploadUniform("u_blendmapRepeatG", entity->getBlendRepeatG());
-		_shader.uploadUniform("u_blendmapRepeatB", entity->getBlendRepeatB());
+		_shader.uploadUniform("u_blendMappingEnabled", entity->isBlendMapped());
+		_shader.uploadUniform("u_blendMapRepeat", entity->getUvRepeat());
+		_shader.uploadUniform("u_blendMapRepeatR", entity->getBlendRepeatR());
+		_shader.uploadUniform("u_blendMapRepeatG", entity->getBlendRepeatG());
+		_shader.uploadUniform("u_blendMapRepeatB", entity->getBlendRepeatB());
 		_shader.uploadUniform("u_lightness", entity->getLightness());
 
 		// Texture uniforms

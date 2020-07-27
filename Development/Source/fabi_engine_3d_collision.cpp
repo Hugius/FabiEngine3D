@@ -164,7 +164,7 @@ bool FabiEngine3D::collision_isCameraAboveGround()
 	return _core->_collisionResolver.isCameraAboveGround();
 }
 
-string FabiEngine3D::collision_checkEntityOthers(const string ID)
+const string& FabiEngine3D::collision_checkEntityOthers(const string& ID)
 {
 	for (auto other : _core->_aabbEntityManager.getEntities()) // Loop over aabb entities
 	{
@@ -210,7 +210,7 @@ string FabiEngine3D::collision_checkEntityOthers(const string ID)
 	return "";
 }
 
-string FabiEngine3D::collision_checkEntityGroupCamera(const string& ID)
+const string& FabiEngine3D::collision_checkEntityGroupCamera(const string& ID)
 {
 	for (auto entity : _core->_aabbEntityManager.getEntities()) // Loop over aabb entities
 	{
@@ -249,7 +249,7 @@ bool FabiEngine3D::collision_checkCursorInEntity(const string& ID)
 	return _core->_mousePicker.checkCursorInBox(lb, rt, _core->_cameraManager.getPosition()) != -1.0f;
 }
 
-string FabiEngine3D::collision_checkCursorInEntityGroup(const string& ID, const string exception)
+const string& FabiEngine3D::collision_checkCursorInEntityGroup(const string& ID, const string& exception)
 {
 	float closestDistance = (std::numeric_limits<float>::max)();
 	string closestBox = "";

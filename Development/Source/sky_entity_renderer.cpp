@@ -29,7 +29,7 @@ void SkyEntityRenderer::render(const SkyEntity* entity)
 		_shader.uploadUniform("u_lightness", entity->getLightness());
 		_shader.uploadUniform("u_color", entity->getColor());
 
-		// Day texture
+		// Texture
 		_shader.uploadUniform("u_sampler_cubeMap", 0);
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_CUBE_MAP, entity->getCubeMap());

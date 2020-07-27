@@ -40,7 +40,7 @@ void LeftViewportController::update()
 		if (screen->getButton("modelEditor")->isHovered()) // Model editor button
 		{
 			_modelEditor.load();
-			window->setActiveScreen("modelEditorMenu");
+			window->setActiveScreen("modelEditorMenuMain");
 		}
 		else if (screen->getButton("worldEditor")->isHovered()) // World editor button
 		{
@@ -50,7 +50,7 @@ void LeftViewportController::update()
 		else if (screen->getButton("billboardEditor")->isHovered()) // Billboard editor button
 		{
 			_billboardEditor.load();
-			window->setActiveScreen("billboardEditorMenu");
+			window->setActiveScreen("billboardEditorMenuMain");
 		}
 		else if (screen->getButton("sceneEditor")->isHovered()) // Scene editor button
 		{

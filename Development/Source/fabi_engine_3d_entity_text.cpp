@@ -125,7 +125,7 @@ vec2 FabiEngine3D::textEntity_getSize(const string& ID)
 	return _core->_textEntityManager.getEntity(ID)->getScaling();
 }
 
-string FabiEngine3D::textEntity_getTextContent(const string& ID)
+const string& FabiEngine3D::textEntity_getTextContent(const string& ID)
 {
 	return _core->_textEntityManager.getEntity(ID)->getTextContent();
 }

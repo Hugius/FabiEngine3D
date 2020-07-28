@@ -9,7 +9,7 @@ WaterEntityManager::WaterEntityManager(OBJLoader& objLoader, TextureLoader& texL
 
 }
 
-WaterEntity * WaterEntityManager::getEntity(const string & ID)
+WaterEntity * WaterEntityManager::getEntity(const string& ID)
 {
 	return dynamic_cast<WaterEntity*>(_getBaseEntity(ID, EntityType::WATER));
 }
@@ -26,7 +26,7 @@ WaterEntity * WaterEntityManager::getSelectedWater()
 	}
 }
 
-void WaterEntityManager::selectWater(const string & ID)
+void WaterEntityManager::selectWater(const string& ID)
 {
 	_selectedID = ID;
 }
@@ -36,7 +36,7 @@ void WaterEntityManager::addWaterEntity(const string& ID)
 	_createEntity(EntityType::WATER, ID)->load(ID);
 }
 
-void WaterEntityManager::generateModel(const string & ID)
+void WaterEntityManager::generateModel(const string& ID)
 {
 	// Variables
 	float size = getEntity(ID)->getSize();

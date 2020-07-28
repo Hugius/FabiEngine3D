@@ -7,7 +7,7 @@ TerrainEntityManager::TerrainEntityManager(OBJLoader& objLoader, TextureLoader& 
 
 }
 
-TerrainEntity * TerrainEntityManager::getEntity(const string & ID)
+TerrainEntity * TerrainEntityManager::getEntity(const string& ID)
 {
 	return dynamic_cast<TerrainEntity*>(_getBaseEntity(ID, EntityType::TERRAIN));
 }
@@ -24,7 +24,7 @@ TerrainEntity * TerrainEntityManager::getSelectedTerrain()
 	}
 }
 
-void TerrainEntityManager::selectTerrain(const string & ID)
+void TerrainEntityManager::selectTerrain(const string& ID)
 {
 	_selectedID = ID;
 }

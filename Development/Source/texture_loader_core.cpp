@@ -31,7 +31,7 @@ TTF_Font* TextureLoader::_loadFont(const string& fontPath)
 	return it->second; //Cache texture
 }
 
-GLuint TextureLoader::_loadText(const string& text, const string &fontPath)
+GLuint TextureLoader::_loadText(const string& text, const string&fontPath)
 {
 	std::string newText;
 
@@ -173,11 +173,43 @@ GLuint TextureLoader::_loadCubeMap(const array<string, 6>& filePaths)
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_CUBE_MAP, textureID);
 
+	// Retrieve the image size (for unfilled images)
+	int textureSize = -1;
+	for (GLuint i = 0; i < filePaths.size(); i++)
+	{
+		if (filePaths[i] != "")
+		{
+			// Load SDL surface
+			SDL_Surface* surface = IMG_Load((rootDir + filePaths[i]).c_str());
+			if (surface == nullptr)
+			{
+				Logger::getInst().throwError("Skybox texture could not be loaded: " + string(SDL_GetError()));
+			}
+
+			// Check if resolution dimensions are the same
+			if (surface->w != surface->h)
+			{
+				Logger::getInst().throwError("Skybox texture width must be same as height: " + filePaths[i]);
+			}
+
+			// Set image size
+			textureSize = surface->w;
+
+			// Memory management
+			SDL_FreeSurface(surface);
+			break;
+		}
+	}
+
 	// Add the faces images to the texture buffer(textureID)
 	for (GLuint i = 0; i < filePaths.size(); i++)
 	{
 		// Check if texture path is not empty
-		if (filePaths[i] != "")
+		if (filePaths[i] == "")
+		{
+			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGB, textureSize, textureSize, 0, GL_RGB, GL_UNSIGNED_BYTE, nullptr);
+		}
+		else
 		{
 			// Load SDL surface
 			SDL_Surface* surface = IMG_Load((rootDir + filePaths[i]).c_str());

@@ -9,7 +9,7 @@ public:
 	BillboardEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, ShaderBus& shaderBus, CameraManager& camera);
 	~BillboardEntityManager() = default;
 
-	BillboardEntity * getEntity(const string & ID) override;
+	BillboardEntity * getEntity(const string& ID) override;
 
 	const vector<BillboardEntity*> getEntities();
 
@@ -28,8 +28,8 @@ public:
 
 	void addBillboardEntity
 	(
-		const string & ID, const string & text, 
-		const string & fontPath, vec3 color,
+		const string& ID, const string& text, 
+		const string& fontPath, vec3 color,
 		vec3 T, vec3 R, vec3 S, bool facingCameraX, bool facingCameraY
 	);
 

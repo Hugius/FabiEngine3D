@@ -53,7 +53,7 @@ void WorldEditor::_updateWaterMenuMain()
 			}
 			else if (screen->getButton("remove")->isHovered())
 			{
-				_unloadWaterData();
+				_fe3d.waterEntity_delete("@water");
 			}
 			else if (screen->getButton("back")->isHovered())
 			{
@@ -154,10 +154,15 @@ void WorldEditor::_updateWaterMenuMesh()
 		}
 
 		// Update position changes
-		_gui->getGlobalScreen()->checkValueForm("positionX", waterPosition.x, { });
-		_gui->getGlobalScreen()->checkValueForm("positionY", waterPosition.y, { });
-		_gui->getGlobalScreen()->checkValueForm("positionZ", waterPosition.z, { });
-		_fe3d.waterEntity_setPosition("@water", waterPosition);
+		if 
+		(
+			_gui->getGlobalScreen()->checkValueForm("positionX", waterPosition.x, { }) ||
+			_gui->getGlobalScreen()->checkValueForm("positionY", waterPosition.y, { }) ||
+			_gui->getGlobalScreen()->checkValueForm("positionZ", waterPosition.z, { })
+		)
+		{
+			_fe3d.waterEntity_setPosition("@water", waterPosition);
+		}
 	}
 }
 
@@ -167,9 +172,9 @@ void WorldEditor::_updateWaterMenuEffects()
 	{
 		// Variables
 		auto screen = _leftWindow->getScreen("waterMenuEffects");
-		string dudvMapPath = "User\\Assets\\Textures\\DudvMaps\\";
-		string normalMapPath = "User\\Assets\\Textures\\NormalMaps\\";
-		string displacementMapPath = "User\\Assets\\Textures\\DisplacementMaps\\";
+		string dudvMapFolderPath = "User\\Assets\\Textures\\DudvMaps\\";
+		string normalMapFolderPath = "User\\Assets\\Textures\\NormalMaps\\";
+		string displacementMapFolderPath = "User\\Assets\\Textures\\DisplacementMaps\\";
 		float uvRepeat = _fe3d.waterEntity_getUvRepeat("@water");
 		bool isReflective = _fe3d.waterEntity_isReflective("@water");
 		bool isRefractive = _fe3d.waterEntity_isRefractive("@water");
@@ -194,35 +199,35 @@ void WorldEditor::_updateWaterMenuEffects()
 			}
 			else if (screen->getScrollingList("buttonList")->getButton("dudvMap")->isHovered())
 			{
-				string fileName = _fe3d.misc_getWinExplorerFilename(dudvMapPath, "PNG");
+				string fileName = _fe3d.misc_getWinExplorerFilename(dudvMapFolderPath, "PNG");
 
 				// Check if not cancelled
 				if (fileName != "")
 				{
-					_fe3d.misc_clearTextureCache(dudvMapPath + fileName);
-					_fe3d.waterEntity_setDudvMap("@water", dudvMapPath + fileName);
+					_fe3d.misc_clearTextureCache(dudvMapFolderPath + fileName);
+					_fe3d.waterEntity_setDudvMap("@water", dudvMapFolderPath + fileName);
 				}
 			}
 			else if (screen->getScrollingList("buttonList")->getButton("normalMap")->isHovered())
 			{
-				string fileName = _fe3d.misc_getWinExplorerFilename(normalMapPath, "PNG");
+				string fileName = _fe3d.misc_getWinExplorerFilename(normalMapFolderPath, "PNG");
 
 				// Check if not cancelled
 				if (fileName != "")
 				{
-					_fe3d.misc_clearTextureCache(normalMapPath + fileName);
-					_fe3d.waterEntity_setDudvMap("@water", normalMapPath + fileName);
+					_fe3d.misc_clearTextureCache(normalMapFolderPath + fileName);
+					_fe3d.waterEntity_setNormalMap("@water", normalMapFolderPath + fileName);
 				}
 			}
 			else if (screen->getScrollingList("buttonList")->getButton("displaceMap")->isHovered())
 			{
-				string fileName = _fe3d.misc_getWinExplorerFilename(displacementMapPath, "PNG");
+				string fileName = _fe3d.misc_getWinExplorerFilename(displacementMapFolderPath, "PNG");
 
 				// Check if not cancelled
 				if (fileName != "")
 				{
-					_fe3d.misc_clearTextureCache(displacementMapPath + fileName);
-					_fe3d.waterEntity_setDudvMap("water", displacementMapPath + fileName);
+					_fe3d.misc_clearTextureCache(displacementMapFolderPath + fileName);
+					_fe3d.waterEntity_setDisplacementMap("@water", displacementMapFolderPath + fileName);
 				}
 			}
 			else if (screen->getScrollingList("buttonList")->getButton("isReflective")->isHovered())
@@ -270,6 +275,7 @@ void WorldEditor::_updateWaterMenuEffects()
 
 		// Update uvRepeat changes
 		_gui->getGlobalScreen()->checkValueForm("uvRepeat", uvRepeat);
+		_fe3d.waterEntity_setUvRepeat("@water", uvRepeat);
 	}
 }
 
@@ -278,35 +284,41 @@ void WorldEditor::_updateWaterMenuOptions()
 	if (_leftWindow->getActiveScreen()->getID() == "waterMenuOptions")
 	{
 		auto screen = _leftWindow->getScreen("waterMenuOptions");
+		float speed = _fe3d.waterEntity_getSpeed("@water");
+		float transparency = _fe3d.waterEntity_getTransparency("@water");
+		vec3 color = _fe3d.waterEntity_getColor("@water");
+		float specularFactor = _fe3d.waterEntity_getSpecularLightingFactor("@water");
+		float specularIntensity = _fe3d.waterEntity_getSpecularLightingIntensity("@water");
+		float waveHeightFactor = _fe3d.waterEntity_getWaveHeightFactor("@water");
 
 		// GUI management
 		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
 		{
 			if (screen->getScrollingList("buttonList")->getButton("speed")->isHovered())
 			{
-				_gui->getGlobalScreen()->addValueForm("speed", "Water speed", waterSpeed * 100000.0f, vec2(0.0f), vec2(0.3f, 0.1f));
+				_gui->getGlobalScreen()->addValueForm("speed", "Water speed", speed * 100000.0f, vec2(0.0f), vec2(0.3f, 0.1f));
 			}
 			else if (screen->getScrollingList("buttonList")->getButton("transparency")->isHovered())
 			{
-				_gui->getGlobalScreen()->addValueForm("transparency", "Transparency(0 - 10)", waterTransparency * 10.0f, vec2(0.0f), vec2(0.3f, 0.1f));
+				_gui->getGlobalScreen()->addValueForm("transparency", "Transparency(0 - 10)", transparency * 10.0f, vec2(0.0f), vec2(0.3f, 0.1f));
 			}
 			else if (screen->getScrollingList("buttonList")->getButton("color")->isHovered())
 			{
-				_gui->getGlobalScreen()->addValueForm("colorG", "G(0-255)", waterColor.g * 255.0f, vec2(0.0f, 0.0f), vec2(0.15f, 0.1f));
-				_gui->getGlobalScreen()->addValueForm("colorR", "R(0-255)", waterColor.r * 255.0f, vec2(-0.25f, 0.0f), vec2(0.15f, 0.1f));
-				_gui->getGlobalScreen()->addValueForm("colorB", "B(0-255)", waterColor.b * 255.0f, vec2(0.25f, 0.0f), vec2(0.15f, 0.1f));
+				_gui->getGlobalScreen()->addValueForm("colorG", "G(0-255)", color.g * 255.0f, vec2(0.0f, 0.0f), vec2(0.15f, 0.1f));
+				_gui->getGlobalScreen()->addValueForm("colorR", "R(0-255)", color.r * 255.0f, vec2(-0.25f, 0.0f), vec2(0.15f, 0.1f));
+				_gui->getGlobalScreen()->addValueForm("colorB", "B(0-255)", color.b * 255.0f, vec2(0.25f, 0.0f), vec2(0.15f, 0.1f));
 			}
 			else if (screen->getScrollingList("buttonList")->getButton("specularFactor")->isHovered())
 			{
-				_gui->getGlobalScreen()->addValueForm("specularFactor", "Specular factor(0 - 256)", waterSpecularFactor, vec2(0.0f), vec2(0.3f, 0.1f));
+				_gui->getGlobalScreen()->addValueForm("specularFactor", "Specular factor(0 - 256)", specularFactor, vec2(0.0f), vec2(0.3f, 0.1f));
 			}
 			else if (screen->getScrollingList("buttonList")->getButton("specularIntensity")->isHovered())
 			{
-				_gui->getGlobalScreen()->addValueForm("specularIntensity", "Specular intensity", waterSpecularIntensity * 100.0f, vec2(0.0f), vec2(0.3f, 0.1f));
+				_gui->getGlobalScreen()->addValueForm("specularIntensity", "Specular intensity", specularIntensity * 100.0f, vec2(0.0f), vec2(0.3f, 0.1f));
 			}
 			else if (screen->getScrollingList("buttonList")->getButton("waveHeight")->isHovered())
 			{
-				_gui->getGlobalScreen()->addValueForm("waveHeight", "Wave height factor", waterWaveHeightFactor * 100.0f, vec2(0.0f), vec2(0.3f, 0.1f));
+				_gui->getGlobalScreen()->addValueForm("waveHeight", "Wave height factor", waveHeightFactor * 100.0f, vec2(0.0f), vec2(0.3f, 0.1f));
 			}
 			else if (screen->getButton("back")->isHovered())
 			{
@@ -315,51 +327,60 @@ void WorldEditor::_updateWaterMenuOptions()
 		}
 
 		// Check if speed value confirmed
-		if (_gui->getGlobalScreen()->checkValueForm("speed", waterSpeed))
+		if (_gui->getGlobalScreen()->checkValueForm("speed", speed))
 		{
-			waterSpeed /= 100000.0f;
+			speed /= 100000.0f;
+			_fe3d.waterEntity_setSpeed("@water", speed);
 		}
 
 		// Check if transparency value confirmed
-		if (_gui->getGlobalScreen()->checkValueForm("transparency", waterTransparency))
+		if (_gui->getGlobalScreen()->checkValueForm("transparency", transparency))
 		{
-			waterTransparency = std::clamp(waterTransparency / 10.0f, 0.0f, 1.0f);
+			transparency = std::clamp(transparency / 10.0f, 0.0f, 1.0f);
+			_fe3d.waterEntity_setTransparency("@water", transparency);
 		}
 
 		// Check if color R value confirmed
-		if (_gui->getGlobalScreen()->checkValueForm("colorR", waterColor.r))
+		if (_gui->getGlobalScreen()->checkValueForm("colorR", color.r))
 		{
-			waterColor.r = std::clamp(waterColor.r / 255.0f, 0.0f, 1.0f);
+			color.r = std::clamp(color.r / 255.0f, 0.0f, 1.0f);
+			std::cout << color.r << std::endl;
+			_fe3d.waterEntity_setColor("@water", color);
 		}
 
 		// Check if color G value confirmed
-		if (_gui->getGlobalScreen()->checkValueForm("colorG", waterColor.g))
+		if (_gui->getGlobalScreen()->checkValueForm("colorG", color.g))
 		{
-			waterColor.g = std::clamp(waterColor.g / 255.0f, 0.0f, 1.0f);
+			color.g = std::clamp(color.g / 255.0f, 0.0f, 1.0f);
+			_fe3d.waterEntity_setColor("@water", color);
 		}
 
 		// Check if color B value confirmed
-		if (_gui->getGlobalScreen()->checkValueForm("colorB", waterColor.b))
+		if (_gui->getGlobalScreen()->checkValueForm("colorB", color.b))
 		{
-			waterColor.b = std::clamp(waterColor.b / 255.0f, 0.0f, 1.0f);
+			color.b = std::clamp(color.b / 255.0f, 0.0f, 1.0f);
+			_fe3d.waterEntity_setColor("@water", color);
 		}
 
 		// Check if specular factor value confirmed
-		if (_gui->getGlobalScreen()->checkValueForm("specularFactor", waterSpecularFactor))
+		if (_gui->getGlobalScreen()->checkValueForm("specularFactor", specularFactor))
 		{
-			waterSpecularFactor = std::clamp(waterSpecularFactor, 0.0f, 256.0f);
+			specularFactor = std::clamp(specularFactor, 0.0f, 256.0f);
+			_fe3d.waterEntity_setSpecularLightingFactor("@water", specularFactor);
 		}
 
 		// Check if specular intensity value confirmed
-		if (_gui->getGlobalScreen()->checkValueForm("specularIntensity", waterSpecularIntensity))
+		if (_gui->getGlobalScreen()->checkValueForm("specularIntensity", specularIntensity))
 		{
-			_waterSpecularIntensity /= 100.0f;
+			specularIntensity /= 100.0f;
+			_fe3d.waterEntity_setSpecularLightingIntensity("@water", specularIntensity);
 		}
 
 		// Check if wave height value confirmed
-		if (_gui->getGlobalScreen()->checkValueForm("waveHeight", waterWaveHeightFactor))
+		if (_gui->getGlobalScreen()->checkValueForm("waveHeight", waveHeightFactor))
 		{
-			_waterWaveHeightFactor /= 100.0f;
+			waveHeightFactor /= 100.0f;
+			_fe3d.waterEntity_setWaveHeightFactor("@water", waveHeightFactor);
 		}
 	}
 }

@@ -731,9 +731,6 @@
     <Filter Include="src\Engine Controller System">
       <UniqueIdentifier>{a49d2036-9114-4ebe-9349-1f64805d444c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\Editor System\Script Editor">
-      <UniqueIdentifier>{da14d31f-6d01-4e12-a50c-99a603867d27}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\Editor System\Billboard Editor">
       <UniqueIdentifier>{4902a467-bd9d-455d-a931-8ac0469043e9}</UniqueIdentifier>
     </Filter>
@@ -784,6 +781,9 @@
     </Filter>
     <Filter Include="src\Editor System\Scene Editor\Billboard Placing">
       <UniqueIdentifier>{5888ff61-c7f8-42b7-9050-7d8a4d4cc4ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Editor System\Script Editor">
+      <UniqueIdentifier>{da14d31f-6d01-4e12-a50c-99a603867d27}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -8,12 +8,12 @@ public:
 	SkyEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, ShaderBus& shaderBus);
 	~SkyEntityManager() = default;
 
-	SkyEntity * getEntity(const string & ID) override;
+	SkyEntity * getEntity(const string& ID) override;
 	SkyEntity * getSelectedSky();
 
-	void selectSky(const string & ID);
+	void selectSky(const string& ID);
 
-	void addSkyEntity(const string & ID);
+	void addSkyEntity(const string& ID);
 
 	void update() override;
 

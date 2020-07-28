@@ -38,12 +38,12 @@ public:
 	const GLuint getBlendMapB()  const;
 
 	// Texture paths
-	const string getHeightMapPath()  const;
-	const string getDiffuseMapPath() const;
-	const string getBlendMapPath()   const;
-	const string getBlendMapPathR()  const;
-	const string getBlendMapPathG()  const;
-	const string getBlendMapPathB()  const;
+	const string& getHeightMapPath()  const;
+	const string& getDiffuseMapPath() const;
+	const string& getBlendMapPath()   const;
+	const string& getBlendMapPathR()  const;
+	const string& getBlendMapPathG()  const;
+	const string& getBlendMapPathB()  const;
 
 	// Repeats
 	const float getBlendRepeatR() const;

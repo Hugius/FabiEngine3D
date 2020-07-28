@@ -108,7 +108,7 @@ void GameEntity::setColor(vec3 val)
 	_color = val;
 }
 
-void GameEntity::setObjPath(const string & val)
+void GameEntity::setObjPath(const string& val)
 {
 	_objPath = val;
 }
@@ -233,7 +233,7 @@ const vec3 GameEntity::getColor() const
 	return _color;
 }
 
-const string & GameEntity::getObjPath() const
+const string& GameEntity::getObjPath() const
 {
 	return _objPath;
 }

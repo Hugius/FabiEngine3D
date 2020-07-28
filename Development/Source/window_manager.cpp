@@ -85,7 +85,7 @@ WindowManager::~WindowManager()
 	SDL_Quit();
 }
 
-void WindowManager::setTitle(const string & title)
+void WindowManager::setTitle(const string& title)
 {
 	SDL_SetWindowTitle(_window, title.c_str());
 }

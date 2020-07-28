@@ -12,7 +12,7 @@ public:
 	BaseEntity() = default;
 	virtual ~BaseEntity();
 
-	void load(const string & ID);
+	void load(const string& ID);
 	void addOglBuffer(OpenGLBuffer * buffer);
 	void clearOglBuffers();
 	void setVisible(bool val);
@@ -21,7 +21,7 @@ public:
 	const OpenGLBuffer * getOglBuffer(int index) const;
 	const OpenGLBuffer * getOglBuffer() const;
 
-	const string & getID() const;
+	const string& getID() const;
 	const bool isVisible() const;
 
 private:

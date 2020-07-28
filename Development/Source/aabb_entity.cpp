@@ -27,7 +27,7 @@ void AabbEntity::setScaling(vec3 val)
 	_scaling = val;
 }
 
-void AabbEntity::setParentID(const string & ID)
+void AabbEntity::setParentID(const string& ID)
 {
 	_parentID = ID;
 }

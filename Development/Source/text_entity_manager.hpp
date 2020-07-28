@@ -8,7 +8,7 @@ public:
 	TextEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, ShaderBus& shaderBus);
 	~TextEntityManager() = default;
 
-	TextEntity * getEntity(const string & ID) override;
+	TextEntity * getEntity(const string& ID) override;
 
 	const vector<TextEntity*> getEntities();
 

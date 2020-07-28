@@ -65,7 +65,7 @@ void BillboardEntity::scale(vec3 val)
 	_scaling += val;
 }
 
-void BillboardEntity::setTextContent(const string & text)
+void BillboardEntity::setTextContent(const string& text)
 {
 	_textContent = text;
 }
@@ -178,7 +178,7 @@ const vec3 BillboardEntity::getColor() const
 	return _color;
 }
 
-const string & BillboardEntity::getTextContent() const
+const string& BillboardEntity::getTextContent() const
 {
 	return _textContent;
 }

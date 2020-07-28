@@ -6,7 +6,7 @@ BaseEntity::~BaseEntity()
 	clearOglBuffers();
 }
 
-void BaseEntity::load(const string & ID)
+void BaseEntity::load(const string& ID)
 {
 	if (ID == "")
 	{
@@ -56,7 +56,7 @@ const OpenGLBuffer * BaseEntity::getOglBuffer() const
 	return _oglBuffers[0];
 }
 
-const string & BaseEntity::getID() const
+const string& BaseEntity::getID() const
 {
 	return _ID;
 }

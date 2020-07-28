@@ -20,7 +20,7 @@ BaseEntityManager::~BaseEntityManager()
 }
 
 // Deleting entity
-void BaseEntityManager::deleteEntity(const string & ID, EntityType type)
+void BaseEntityManager::deleteEntity(const string& ID, EntityType type)
 {
 	for (size_t i = 0; i < _entities.size(); i++)
 	{
@@ -48,7 +48,7 @@ void BaseEntityManager::deleteEntities()
 }
 
 // Checking if entity exists
-bool BaseEntityManager::isExisting(const string & ID)
+bool BaseEntityManager::isExisting(const string& ID)
 {
 	for (size_t i = 0; i < _entities.size(); i++)
 	{
@@ -62,7 +62,7 @@ bool BaseEntityManager::isExisting(const string & ID)
 }
 
 // Finding and returning entity
-BaseEntity * BaseEntityManager::_getBaseEntity(const string & ID, EntityType type)
+BaseEntity * BaseEntityManager::_getBaseEntity(const string& ID, EntityType type)
 {
 	for (auto & entity : _entities)
 	{
@@ -87,7 +87,7 @@ vector<BaseEntity*> & BaseEntityManager::_getBaseEntities()
 	return _entities;
 }
 
-BaseEntity * BaseEntityManager::_createEntity(EntityType type, const string & ID)
+BaseEntity * BaseEntityManager::_createEntity(EntityType type, const string& ID)
 {
 	for (auto & entity : _entities)
 	{

@@ -20,7 +20,7 @@ public:
 	TextureLoader()  = default;
 	~TextureLoader() = default;
 
-	GLuint		   getText(const string &text, const string& filePath);
+	GLuint		   getText(const string&text, const string& filePath);
 	GLuint         getTexture(const string& filePath, bool mipmap, bool aniso, bool repeat = true);
 	GLuint         getCubeMap(const array<string, 6>& filePaths);
 	vector<float>& getHeightMap(const string& filePath);

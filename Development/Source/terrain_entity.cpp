@@ -125,32 +125,32 @@ const GLuint TerrainEntity::getBlendMapB() const
 	return _blendMapB;
 }
 
-const string TerrainEntity::getHeightMapPath() const
+const string& TerrainEntity::getHeightMapPath() const
 {
 	return _heightMapPath;
 }
 
-const string TerrainEntity::getDiffuseMapPath() const
+const string& TerrainEntity::getDiffuseMapPath() const
 {
 	return _diffuseMapPath;
 }
 
-const string TerrainEntity::getBlendMapPath() const
+const string& TerrainEntity::getBlendMapPath() const
 {
 	return _blendMapPath;
 }
 
-const string TerrainEntity::getBlendMapPathR() const
+const string& TerrainEntity::getBlendMapPathR() const
 {
 	return _blendMapPathR;
 }
 
-const string TerrainEntity::getBlendMapPathG() const
+const string& TerrainEntity::getBlendMapPathG() const
 {
 	return _blendMapPathG;
 }
 
-const string TerrainEntity::getBlendMapPathB() const
+const string& TerrainEntity::getBlendMapPathB() const
 {
 	return _blendMapPathB;
 }

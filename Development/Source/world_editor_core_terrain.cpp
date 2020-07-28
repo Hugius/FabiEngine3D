@@ -12,13 +12,13 @@ void WorldEditor::loadTerrainEntity()
 	}
 
 	// Compose full terrain file path
-	string terrainPath = _fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\Data\\terrain.fe3d";
+	string fileFolderPath = _fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\Data\\terrain.fe3d";
 
 	// Load terrain file
-	if (_fe3d.misc_isFileExisting(terrainPath))
+	if (_fe3d.misc_isFileExisting(fileFolderPath))
 	{
 		// Load file
-		std::ifstream terrainFile(terrainPath);
+		std::ifstream terrainFile(fileFolderPath);
 
 		// Values
 		string heightMapPath, diffuseMapPath, blendMapPath, blendMapPathR, blendMapPathG, blendMapPathB;
@@ -32,20 +32,14 @@ void WorldEditor::loadTerrainEntity()
 			maxHeight >>
 			uvRepeat >>
 			lightness >>
-			isBlendMapped;
-
-		// Load blendMapping data
-		if (isBlendMapped)
-		{
-			terrainFile >>
-				blendMapPath >>
-				blendMapPathR >>
-				blendMapPathG >> 
-				blendMapPathB >>
-				blendRepeatR >>
-				blendRepeatG >> 
-				blendRepeatB;
-		}
+			isBlendMapped >>
+			blendMapPath >>
+			blendMapPathR >>
+			blendMapPathG >>
+			blendMapPathB >>
+			blendRepeatR >>
+			blendRepeatG >>
+			blendRepeatB;
 
 		// Perform empty string conversions
 		heightMapPath = (heightMapPath == "-") ? "" : heightMapPath;
@@ -60,23 +54,18 @@ void WorldEditor::loadTerrainEntity()
 
 		// Add new terrain entity
 		_loadTerrainEntity(heightMapPath);
-		_fe3d.terrainEntity_setDiffuseMap("@terrain", diffuseMapPath);
 		_fe3d.terrainEntity_setMaxHeight("@terrain", maxHeight);
 		_fe3d.terrainEntity_setUvRepeat("@terrain", uvRepeat);
 		_fe3d.terrainEntity_setBlendMapped("@terrain", isBlendMapped);
 		_fe3d.terrainEntity_setLightness("@terrain", lightness);
-
-		// Add blendMapping
-		if (isBlendMapped)
-		{
-			_fe3d.terrainEntity_setBlendMap("@terrain", blendMapPath);
-			_fe3d.terrainEntity_setBlendMapR("@terrain", blendMapPathR);
-			_fe3d.terrainEntity_setBlendMapG("@terrain", blendMapPathG);
-			_fe3d.terrainEntity_setBlendMapB("@terrain", blendMapPathB);
-			_fe3d.terrainEntity_setBlendRepeatR("@terrain", blendRepeatR);
-			_fe3d.terrainEntity_setBlendRepeatG("@terrain", blendRepeatG);
-			_fe3d.terrainEntity_setBlendRepeatB("@terrain", blendRepeatB);
-		}
+		_fe3d.terrainEntity_setBlendRepeatR("@terrain", blendRepeatR);
+		_fe3d.terrainEntity_setBlendRepeatG("@terrain", blendRepeatG);
+		_fe3d.terrainEntity_setBlendRepeatB("@terrain", blendRepeatB);
+		if (diffuseMapPath != "") _fe3d.terrainEntity_setDiffuseMap("@terrain", diffuseMapPath);
+		if (blendMapPath != "")   _fe3d.terrainEntity_setBlendMap("@terrain", blendMapPath);
+		if (blendMapPathR != "")  _fe3d.terrainEntity_setBlendMapR("@terrain", blendMapPathR);
+		if (blendMapPathG != "")  _fe3d.terrainEntity_setBlendMapG("@terrain", blendMapPathG);
+		if (blendMapPathB != "")  _fe3d.terrainEntity_setBlendMapB("@terrain", blendMapPathB);
 
 		// Logging
 		_fe3d.logger_throwInfo("Terrain data from project \"" + _currentProjectName + "\" loaded!");
@@ -93,14 +82,14 @@ void WorldEditor::_saveTerrainData()
 			_fe3d.logger_throwError("Tried to save as empty project!");
 		}
 
-		string terrainPath = _fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\Data\\terrain.fe3d";
+		string fileFolderPath = _fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\Data\\terrain.fe3d";
 
 		// Save terrain data
 		if (_fe3d.terrainEntity_isExisting("@terrain"))
 		{
 			// Load file
-			std::ofstream terrainFile(terrainPath);
-
+			std::ofstream terrainFile(fileFolderPath);
+			
 			// Values
 			string heightMapPath = _fe3d.terrainEntity_getHeightMapPath("@terrain");
 			string diffuseMapPath = _fe3d.terrainEntity_getDiffuseMapPath("@terrain");
@@ -124,30 +113,21 @@ void WorldEditor::_saveTerrainData()
 			blendMapPathG = (blendMapPathG == "") ? "-" : blendMapPathG;
 			blendMapPathB = (blendMapPathB == "") ? "-" : blendMapPathB;
 
-			// Write base data to file
+			// Write terrain data to file
 			terrainFile <<
 				heightMapPath << " " <<
 				diffuseMapPath << " " <<
 				maxHeight << " " <<
 				uvRepeat << " " <<
 				lightness << " " <<
-				isBlendMapped;
-
-			// Write blendMapping data to file
-			if (isBlendMapped)
-			{
-				terrainFile << 
-					blendMapPath << " " <<
-					blendMapPathR << " " <<
-					blendMapPathG << " " <<
-					blendMapPathB << " " <<
-					blendRepeatR << " " <<
-					blendRepeatG << " " <<
-					blendRepeatB;
-			}
-
-			// New line
-			terrainFile << std::endl;
+				isBlendMapped << " " <<
+				blendMapPath << " " <<
+				blendMapPathR << " " <<
+				blendMapPathG << " " <<
+				blendMapPathB << " " <<
+				blendRepeatR << " " <<
+				blendRepeatG << " " <<
+				blendRepeatB << std::endl;
 
 			// Close file
 			terrainFile.close();
@@ -155,9 +135,9 @@ void WorldEditor::_saveTerrainData()
 		else
 		{
 			// Remove file if non-existent
-			if (_fe3d.misc_isFileExisting(terrainPath))
+			if (_fe3d.misc_isFileExisting(fileFolderPath))
 			{
-				std::remove(terrainPath.c_str());
+				std::remove(fileFolderPath.c_str());
 			}
 		}
 

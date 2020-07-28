@@ -72,7 +72,7 @@ vec4 getMainColor()
 	float floorDistance = convertDepthToLinear(depth);
 	float waterDistance = convertDepthToLinear(gl_FragCoord.z);
 	float waterDepth = floorDistance - waterDistance;
-	waterDepth = clamp(waterDepth / u_transparency, 0.0f, 1.0f);
+	waterDepth = clamp(waterDepth / (u_transparency * 10.0f), 0.0f, 1.0f);
 
 	// Rippling effect
 	if(u_isRippling)

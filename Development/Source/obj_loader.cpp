@@ -6,7 +6,7 @@
 #include <GLEW\\glew.h>
 #include <filesystem>
 
-vector<ObjPart> & OBJLoader::loadOBJ(const string & filePath)
+vector<ObjPart> & OBJLoader::loadOBJ(const string& filePath)
 {
 	// Check if mesh data was loaded already, if not, load data and store in std::map
 	begin : auto iterator = _objPartsMap.find(filePath); // Search for existing OBJ parts

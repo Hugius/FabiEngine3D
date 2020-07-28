@@ -6,7 +6,7 @@ GuiEntityManager::GuiEntityManager(OBJLoader& objLoader, TextureLoader& texLoade
 
 }
 
-GuiEntity* GuiEntityManager::getEntity(const string & ID)
+GuiEntity* GuiEntityManager::getEntity(const string& ID)
 {
 	return dynamic_cast<GuiEntity*>(_getBaseEntity(ID, EntityType::GUI));
 }
@@ -23,7 +23,7 @@ const vector<GuiEntity*> GuiEntityManager::getEntities()
 	return newVector;
 }
 
-void GuiEntityManager::addGuiEntity(const string & ID, const string& texturePath, vec2 translation, float rotation, vec2 scaling, bool engine, bool centered)
+void GuiEntityManager::addGuiEntity(const string& ID, const string& texturePath, vec2 translation, float rotation, vec2 scaling, bool engine, bool centered)
 {
 	// Create entity
 	_createEntity(EntityType::GUI, ID)->load(ID);
@@ -38,7 +38,7 @@ void GuiEntityManager::addGuiEntity(const string & ID, const string& texturePath
 	getEntity(ID)->setDiffuseMap(_texLoader.getTexture(texturePath, true, true, false));
 }
 
-void GuiEntityManager::addGuiEntity(const string & ID, vec3 color, vec2 translation, float rotation, vec2 scaling, bool centered)
+void GuiEntityManager::addGuiEntity(const string& ID, vec3 color, vec2 translation, float rotation, vec2 scaling, bool centered)
 {
 	// Create entity
 	_createEntity(EntityType::GUI, ID)->load(ID);

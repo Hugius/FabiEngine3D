@@ -4,7 +4,7 @@
 #include <fstream>
 #include <sstream>
 
-OpenGLShader::OpenGLShader(const string & vertexFileName, const string & fragmentFileName)
+OpenGLShader::OpenGLShader(const string& vertexFileName, const string& fragmentFileName)
 {
 	// Variables
 	_name = vertexFileName.substr(0, vertexFileName.size() - 5);

@@ -13,7 +13,7 @@
 class BaseEntityRenderer
 {
 public:
-	BaseEntityRenderer(const string & vertexFile, const string & fragmentFile, ShaderBus& shaderBus);
+	BaseEntityRenderer(const string& vertexFile, const string& fragmentFile, ShaderBus& shaderBus);
 	virtual ~BaseEntityRenderer() = default;
 
 	virtual void bind()   = 0;

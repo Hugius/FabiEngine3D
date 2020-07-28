@@ -9,7 +9,7 @@ SkyEntityManager::SkyEntityManager(OBJLoader& objLoader, TextureLoader& texLoade
 	
 }
 
-SkyEntity * SkyEntityManager::getEntity(const string & ID)
+SkyEntity * SkyEntityManager::getEntity(const string& ID)
 {
 	return dynamic_cast<SkyEntity*>(_getBaseEntity(ID, EntityType::SKY));
 }
@@ -26,12 +26,12 @@ SkyEntity * SkyEntityManager::getSelectedSky()
 	}
 }
 
-void SkyEntityManager::selectSky(const string & ID)
+void SkyEntityManager::selectSky(const string& ID)
 {
 	_selectedID = ID;
 }
 
-void SkyEntityManager::addSkyEntity(const string & ID)
+void SkyEntityManager::addSkyEntity(const string& ID)
 {
 	// Skybox vertices
 	float skybox_data[] =

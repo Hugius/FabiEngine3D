@@ -129,8 +129,8 @@ void WorldEditor::initializeGUI()
 	_leftWindow->getScreen("waterMenuOptions")->getScrollingList("buttonList")->addButton("speed", "Water speed");
 	_leftWindow->getScreen("waterMenuOptions")->getScrollingList("buttonList")->addButton("transparency", "Transparency");
 	_leftWindow->getScreen("waterMenuOptions")->getScrollingList("buttonList")->addButton("color", "Color");
-	_leftWindow->getScreen("waterMenuOptions")->getScrollingList("buttonList")->addButton("specularFactor", "Specular factor");
-	_leftWindow->getScreen("waterMenuOptions")->getScrollingList("buttonList")->addButton("specularIntensity", "Specular intensity");
+	_leftWindow->getScreen("waterMenuOptions")->getScrollingList("buttonList")->addButton("specularFactor", "Spec factor");
+	_leftWindow->getScreen("waterMenuOptions")->getScrollingList("buttonList")->addButton("specularIntensity", "Spec intensity");
 	_leftWindow->getScreen("waterMenuOptions")->getScrollingList("buttonList")->addButton("waveHeight", "Wave height");
 	_leftWindow->getScreen("waterMenuOptions")->addButton("back", vec2(0.0f, -0.9f), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
 }
@@ -182,7 +182,11 @@ void WorldEditor::unload()
 		_fe3d.terrainEntity_delete("@terrain");
 	}
 
-	_unloadWaterData();
+	// Delete water entity
+	if (_fe3d.waterEntity_isExisting("@water"))
+	{
+		_fe3d.waterEntity_delete("@water");
+	}
 
 	// Enable default sky
 	_fe3d.skyEntity_select("@@sky");

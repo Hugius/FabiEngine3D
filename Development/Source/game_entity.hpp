@@ -28,7 +28,7 @@ public:
 	void rotate(vec3 val);
 	void scale(vec3 val);
 	void setColor(vec3 val);
-	void setObjPath(const string & val);
+	void setObjPath(const string& val);
 	void setDiffuseMapPath(const string& val);
 	void setLightMapPath(const string& val);
 	void setReflectionMapPath(const string& val);

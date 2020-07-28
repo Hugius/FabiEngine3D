@@ -43,12 +43,13 @@ void EngineController::_initializeMiscellaneous()
 	// Default cube map
 	string path = "Engine\\Textures\\";
 	skyEntity_add("@@sky");
-	skyEntity_setDiffuseMapRight("@@sky", path + "right.png");
-	skyEntity_setDiffuseMapLeft("@@sky", path + "left.png");
-	skyEntity_setDiffuseMapTop("@@sky", path + "top.png");
-	skyEntity_setDiffuseMapBottom("@@sky", path + "bottom.png");
-	skyEntity_setDiffuseMapFront("@@sky", path + "front.png");
-	skyEntity_setDiffuseMapBack("@@sky", path + "back.png");
+	skyEntity_setDiffuseMaps("@@sky", { 
+		path + "right.png", 
+		path + "left.png", 
+		path + "top.png", 
+		path + "bottom.png", 
+		path + "front.png", 
+		path + "back.png" });
 	skyEntity_select("@@sky");
 	skyEntity_setLightness("@@sky", 0.75f);
 

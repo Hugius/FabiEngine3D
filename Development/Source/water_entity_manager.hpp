@@ -8,11 +8,11 @@ public:
 	WaterEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, ShaderBus& shaderBus);
 	~WaterEntityManager() = default;
 
-	WaterEntity * getEntity(const string & ID) override;
+	WaterEntity * getEntity(const string& ID) override;
 	WaterEntity * getSelectedWater();
 
-	void selectWater(const string & ID);
-	void addWaterEntity(const string & ID);
+	void selectWater(const string& ID);
+	void addWaterEntity(const string& ID);
 	void generateModel(const string& ID);
 	void update() override;
 

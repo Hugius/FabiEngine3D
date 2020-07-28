@@ -11,15 +11,15 @@ void WorldEditor::loadSkyEntity()
 		_fe3d.logger_throwError("Tried to load as empty project!");
 	}
 
-	string skyPath = _fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\Data\\sky.fe3d";
+	string fileFolderPath = _fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\Data\\sky.fe3d";
 
 	// Load sky file
-	if (_fe3d.misc_isFileExisting(skyPath))
+	if (_fe3d.misc_isFileExisting(fileFolderPath))
 	{
 		// Open file
-		std::ifstream skyFile(skyPath);
+		std::ifstream skyFile(fileFolderPath);
 
-		// Get values
+		// Values
 		std::array<string, 6> diffuseMapPaths{};
 		float rotationSpeed, lightness;
 		vec3 color;
@@ -49,12 +49,7 @@ void WorldEditor::loadSkyEntity()
 
 		// Load entity
 		_loadSkyEntity();
-		_fe3d.skyEntity_setDiffuseMapRight("@sky", diffuseMapPaths[0]);
-		_fe3d.skyEntity_setDiffuseMapLeft("@sky", diffuseMapPaths[1]);
-		_fe3d.skyEntity_setDiffuseMapTop("@sky", diffuseMapPaths[2]);
-		_fe3d.skyEntity_setDiffuseMapBottom("@sky", diffuseMapPaths[3]);
-		_fe3d.skyEntity_setDiffuseMapFront("@sky", diffuseMapPaths[4]);
-		_fe3d.skyEntity_setDiffuseMapBack("@sky", diffuseMapPaths[5]);
+		_fe3d.skyEntity_setDiffuseMaps("@sky", diffuseMapPaths);
 		_fe3d.skyEntity_setLightness("@sky", lightness);
 		_fe3d.skyEntity_setRotationSpeed("@sky", rotationSpeed);
 		_fe3d.skyEntity_setColor("@sky", color);
@@ -74,13 +69,13 @@ void WorldEditor::_saveSkyData()
 			_fe3d.logger_throwError("Tried to save as empty project!");
 		}
 
-		string skyPath = _fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\Data\\sky.fe3d";
+		string fileFolderPath = _fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\Data\\sky.fe3d";
 
 		// Save sky data
 		if (_fe3d.skyEntity_isExisting("@sky"))
 		{
 			// Load file
-			std::ofstream skyFile(skyPath);
+			std::ofstream skyFile(fileFolderPath);
 
 			// Values
 			auto diffuseMapPaths = _fe3d.skyEntity_getDiffuseMapPaths("@sky");
@@ -114,9 +109,9 @@ void WorldEditor::_saveSkyData()
 		else
 		{
 			// Remove file if non-existent
-			if (_fe3d.misc_isFileExisting(skyPath))
+			if (_fe3d.misc_isFileExisting(fileFolderPath))
 			{
-				std::remove(skyPath.c_str());
+				std::remove(fileFolderPath.c_str());
 			}
 		}
 

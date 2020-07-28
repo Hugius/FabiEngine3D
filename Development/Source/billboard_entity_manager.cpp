@@ -9,7 +9,7 @@ BillboardEntityManager::BillboardEntityManager(OBJLoader& objLoader, TextureLoad
 
 }
 
-BillboardEntity * BillboardEntityManager::getEntity(const string & ID)
+BillboardEntity * BillboardEntityManager::getEntity(const string& ID)
 {
 	return dynamic_cast<BillboardEntity*>(_getBaseEntity(ID, EntityType::BILLBOARD));
 }
@@ -55,7 +55,7 @@ void BillboardEntityManager::addBillboardEntity(const string& ID, vec3 color, ve
 
 void BillboardEntityManager::addBillboardEntity
 (
-	const string & ID, const string & texturePath,
+	const string& ID, const string& texturePath,
 	vec3 T, vec3 R, vec3 S,
 	bool transparent, bool facingCameraX, bool facingCameraY, bool textureFiltering
 )
@@ -68,8 +68,8 @@ void BillboardEntityManager::addBillboardEntity
 
 void BillboardEntityManager::addBillboardEntity
 (
-	const string & ID, const string & text,
-	const string & fontPath, vec3 color,
+	const string& ID, const string& text,
+	const string& fontPath, vec3 color,
 	vec3 T, vec3 R, vec3 S, bool facingCameraX, bool facingCameraY
 )
 {

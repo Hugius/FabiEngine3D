@@ -1,7 +1,7 @@
 #include "texture_loader.hpp"
 #include "logger.hpp"
 
-GLuint TextureLoader::getText(const string & text, const string& filePath)
+GLuint TextureLoader::getText(const string& text, const string& filePath)
 {
 	begin: auto it = _texts.find(text);
 	if (it == _texts.end()) // Not in map (yet)

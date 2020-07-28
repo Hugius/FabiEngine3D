@@ -156,8 +156,7 @@ void FabiEngine3D::waterEntity_setColor(const string& ID, vec3 color)
 
 void FabiEngine3D::waterEntity_setTransparency(const string& ID, float transparency)
 {
-	transparency = std::clamp(transparency, 0.0f, 1.0f);
-	_core->_waterEntityManager.getEntity(ID)->setTransparency(transparency * 10.0f);
+	_core->_waterEntityManager.getEntity(ID)->setTransparency(transparency);
 }
 
 const string& FabiEngine3D::waterEntity_getSelectedID()
@@ -229,5 +228,5 @@ vec3 FabiEngine3D::waterEntity_getPosition(const string& ID)
 
 vec3 FabiEngine3D::waterEntity_getColor(const string& ID)
 {
-	return vec3();
+	return _core->_waterEntityManager.getEntity(ID)->getColor();
 }

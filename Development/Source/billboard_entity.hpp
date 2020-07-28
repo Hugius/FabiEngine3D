@@ -53,7 +53,7 @@ public:
 	const vec3 getRotation() const;
 	const vec3 getScaling() const;
 	const vec3 getColor() const;
-	const string & getTextContent() const;
+	const string& getTextContent() const;
 	const string& getFontPath() const;
 	const string& getDiffuseMapPath() const;
 	const float getUvRepeat() const;

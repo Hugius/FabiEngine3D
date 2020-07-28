@@ -7,7 +7,7 @@ LightEntityManager::LightEntityManager(OBJLoader& objLoader, TextureLoader& texL
 
 }
 
-LightEntity * LightEntityManager::getEntity(const string & ID)
+LightEntity * LightEntityManager::getEntity(const string& ID)
 {
 	return dynamic_cast<LightEntity*>(_getBaseEntity(ID, EntityType::LIGHT));
 }
@@ -24,7 +24,7 @@ const vector<LightEntity*> LightEntityManager::getEntities()
 	return newVector;
 }
 
-void LightEntityManager::addLightEntity(const string & ID, vec3 position, vec3 color, float intensity, float distanceFactor)
+void LightEntityManager::addLightEntity(const string& ID, vec3 position, vec3 color, float intensity, float distanceFactor)
 {
 	// Create entity
 	_createEntity(EntityType::LIGHT, ID)->load(ID);

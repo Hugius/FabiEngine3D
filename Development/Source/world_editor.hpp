@@ -61,7 +61,6 @@ private:
 
 	// Water functions
 	void _saveWaterData();
-	void _unloadWaterData();
 	void _loadWaterEntity();
 	void _updateWaterMenuMain();
 	void _updateWaterMenuChoice();

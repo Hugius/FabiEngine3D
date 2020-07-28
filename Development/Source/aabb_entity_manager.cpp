@@ -8,7 +8,7 @@ AabbEntityManager::AabbEntityManager(OBJLoader& objLoader, TextureLoader& texLoa
 	
 }
 
-AabbEntity * AabbEntityManager::getEntity(const string & ID)
+AabbEntity * AabbEntityManager::getEntity(const string& ID)
 {
 	return dynamic_cast<AabbEntity*>(_getBaseEntity(ID, EntityType::AABB));
 }
@@ -25,7 +25,7 @@ const vector<AabbEntity*> AabbEntityManager::getEntities()
 	return newVector;
 }
 
-void AabbEntityManager::addAabbEntity(const string & ID, vec3 T, vec3 R, vec3 S, bool responsive)
+void AabbEntityManager::addAabbEntity(const string& ID, vec3 T, vec3 R, vec3 S, bool responsive)
 {
 	// Load OBJ model
 	float box_data[] =
@@ -59,7 +59,7 @@ void AabbEntityManager::addAabbEntity(const string & ID, vec3 T, vec3 R, vec3 S,
 	getEntity(ID)->setResponsiveness(responsive);
 }
 
-void AabbEntityManager::bindAabbEntity(const string & ID, const string & parentID, vec3 R, vec3 S, bool responsive)
+void AabbEntityManager::bindAabbEntity(const string& ID, const string& parentID, vec3 R, vec3 S, bool responsive)
 {
 	addAabbEntity(ID, vec3(0.0f), R, S, responsive);
 	getEntity(ID)->setParentID(parentID);

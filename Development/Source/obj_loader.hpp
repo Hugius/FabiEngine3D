@@ -28,12 +28,12 @@ public:
 	OBJLoader() = default;
 	~OBJLoader() = default;
 
-	vector<ObjPart> & loadOBJ(const string & filePath);
+	vector<ObjPart> & loadOBJ(const string& filePath);
 
 	void clearOBJCache(const string& filePath);
 
 private:
-	vector<ObjPart> _loadOBJ(const string & filePath);
+	vector<ObjPart> _loadOBJ(const string& filePath);
 
 	std::map<string, vector<ObjPart>> _objPartsMap;
 };

@@ -6,7 +6,7 @@ TextEntityManager::TextEntityManager(OBJLoader& objLoader, TextureLoader& texLoa
 
 }
 
-TextEntity * TextEntityManager::getEntity(const string & ID)
+TextEntity * TextEntityManager::getEntity(const string& ID)
 {
 	return dynamic_cast<TextEntity*>(_getBaseEntity(ID, EntityType::TEXT));
 }
@@ -24,8 +24,8 @@ const vector<TextEntity*> TextEntityManager::getEntities()
 
 void TextEntityManager::addTextEntity
 (
-	const string & ID, const string & text,
-	const string & fontPath, vec3 color,
+	const string& ID, const string& text,
+	const string& fontPath, vec3 color,
 	vec2 translation, float rotation, vec2 scaling,
 	bool overwrite, bool centered
 )

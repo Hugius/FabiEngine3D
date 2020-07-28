@@ -17,13 +17,13 @@ using std::map;
 class OpenGLShader final
 {
 public:
-	OpenGLShader(const string & vertexFileName, const string & fragmentFileName);
+	OpenGLShader(const string& vertexFileName, const string& fragmentFileName);
 	~OpenGLShader();
 
 	void bind();
 	void unbind();
 	
-	template<class T> void uploadUniform(const string & name, const T & data) 
+	template<class T> void uploadUniform(const string& name, const T & data) 
 	{
 		GLint loc = _getUniLoc(name);
 		_uploadUniform(loc, data);
@@ -38,7 +38,7 @@ private:
 	string _name;
 
 	// Get uniform location
-	GLint _getUniLoc(const string & uniformName) 
+	GLint _getUniLoc(const string& uniformName) 
 	{
 		auto it = _uniformMap.find(uniformName);
 		if (it == _uniformMap.end()) // Add location to the map

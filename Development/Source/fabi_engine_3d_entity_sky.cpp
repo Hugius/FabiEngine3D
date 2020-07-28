@@ -6,6 +6,12 @@ void FabiEngine3D::skyEntity_add(const string& ID)
 	_core->_skyEntityManager.addSkyEntity(ID);
 }
 
+void FabiEngine3D::skyEntity_setDiffuseMaps(const string& ID, const array<string, 6>& texturePaths)
+{
+	_core->_skyEntityManager.getEntity(ID)->setCubeMap(_core->_texLoader.getCubeMap(texturePaths));
+	_core->_skyEntityManager.getEntity(ID)->setDiffuseMapPaths(texturePaths);
+}
+
 void FabiEngine3D::skyEntity_setDiffuseMapRight(const string& ID, const string& texturePath)
 {
 	auto texturePaths = _core->_skyEntityManager.getEntity(ID)->getDiffuseMapPaths();

@@ -33,12 +33,12 @@ public:
 	BaseEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, ShaderBus& shaderBus);
 	virtual ~BaseEntityManager();
 
-	void deleteEntity(const string & ID, EntityType type);
+	void deleteEntity(const string& ID, EntityType type);
 	void deleteEntities();
 
-	bool isExisting(const string & ID);
+	bool isExisting(const string& ID);
 
-	virtual BaseEntity * getEntity(const string & ID) = 0;
+	virtual BaseEntity * getEntity(const string& ID) = 0;
 
 	virtual void update() = 0;
 
@@ -47,11 +47,11 @@ protected:
 	TextureLoader& _texLoader;
 	ShaderBus&     _shaderBus;
 
-	BaseEntity * _createEntity(EntityType type, const string & ID);
+	BaseEntity * _createEntity(EntityType type, const string& ID);
 
 	vector<BaseEntity*> & _getBaseEntities();
 	
-	BaseEntity * _getBaseEntity(const string & ID, EntityType type);
+	BaseEntity * _getBaseEntity(const string& ID, EntityType type);
 
 private:
 	vector<BaseEntity*> _entities;

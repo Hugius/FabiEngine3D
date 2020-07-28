@@ -78,6 +78,7 @@ public:
 	void skyEntity_hide(const string& ID);
 	void skyEntity_show(const string& ID);
 	void skyEntity_select(const string& ID);
+	void skyEntity_setDiffuseMaps(const string& ID, const array<string, 6>& texturePaths);
 	void skyEntity_setDiffuseMapRight(const string& ID, const string& texturePath);
 	void skyEntity_setDiffuseMapLeft(const string& ID, const string& texturePath);
 	void skyEntity_setDiffuseMapTop(const string& ID, const string& texturePath);

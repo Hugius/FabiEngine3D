@@ -6,7 +6,7 @@ GameEntityManager::GameEntityManager(OBJLoader& objLoader, TextureLoader& texLoa
 
 }
 
-GameEntity* GameEntityManager::getEntity(const string & ID)
+GameEntity* GameEntityManager::getEntity(const string& ID)
 {
 	return dynamic_cast<GameEntity*>(_getBaseEntity(ID, EntityType::GAME));
 }
@@ -25,7 +25,7 @@ const vector<GameEntity*> GameEntityManager::getEntities()
 
 void GameEntityManager::addGameEntity
 (
-	const string & ID, const string & objName,
+	const string& ID, const string& objName,
 	vec3 T, vec3 R, vec3 S
 )
 {

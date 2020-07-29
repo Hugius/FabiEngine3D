@@ -172,9 +172,6 @@ void WorldEditor::_updateWaterMenuEffects()
 	{
 		// Variables
 		auto screen = _leftWindow->getScreen("waterEditorMenuEffects");
-		string dudvMapFolderPath = "User\\Assets\\Textures\\DudvMaps\\";
-		string normalMapFolderPath = "User\\Assets\\Textures\\NormalMaps\\";
-		string displacementMapFolderPath = "User\\Assets\\Textures\\DisplacementMaps\\";
 		float uvRepeat = _fe3d.waterEntity_getUvRepeat("@water");
 		bool isReflective = _fe3d.waterEntity_isReflective("@water");
 		bool isRefractive = _fe3d.waterEntity_isRefractive("@water");
@@ -199,35 +196,35 @@ void WorldEditor::_updateWaterMenuEffects()
 			}
 			else if (screen->getButton("dudvMap")->isHovered())
 			{
-				string fileName = _fe3d.misc_getWinExplorerFilename(dudvMapFolderPath, "PNG");
+				string filePath = _fe3d.misc_getWinExplorerFilename("User\\Assets\\Textures\\DudvMaps\\", "PNG");
 
 				// Check if not cancelled
-				if (fileName != "")
+				if (filePath != "")
 				{
-					_fe3d.misc_clearTextureCache(dudvMapFolderPath + fileName);
-					_fe3d.waterEntity_setDudvMap("@water", dudvMapFolderPath + fileName);
+					_fe3d.misc_clearTextureCache(filePath);
+					_fe3d.waterEntity_setDudvMap("@water", filePath);
 				}
 			}
 			else if (screen->getButton("normalMap")->isHovered())
 			{
-				string fileName = _fe3d.misc_getWinExplorerFilename(normalMapFolderPath, "PNG");
+				string filePath = _fe3d.misc_getWinExplorerFilename("User\\Assets\\Textures\\NormalMaps\\", "PNG");
 
 				// Check if not cancelled
-				if (fileName != "")
+				if (filePath != "")
 				{
-					_fe3d.misc_clearTextureCache(normalMapFolderPath + fileName);
-					_fe3d.waterEntity_setNormalMap("@water", normalMapFolderPath + fileName);
+					_fe3d.misc_clearTextureCache(filePath);
+					_fe3d.waterEntity_setNormalMap("@water", filePath);
 				}
 			}
 			else if (screen->getButton("displaceMap")->isHovered())
 			{
-				string fileName = _fe3d.misc_getWinExplorerFilename(displacementMapFolderPath, "PNG");
+				string filePath = _fe3d.misc_getWinExplorerFilename("User\\Assets\\Textures\\DisplacementMaps\\", "PNG");
 
 				// Check if not cancelled
-				if (fileName != "")
+				if (filePath != "")
 				{
-					_fe3d.misc_clearTextureCache(displacementMapFolderPath + fileName);
-					_fe3d.waterEntity_setDisplacementMap("@water", displacementMapFolderPath + fileName);
+					_fe3d.misc_clearTextureCache(filePath);
+					_fe3d.waterEntity_setDisplacementMap("@water", filePath);
 				}
 			}
 			else if (screen->getButton("isReflective")->isHovered())

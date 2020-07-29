@@ -95,8 +95,6 @@ void WorldEditor::_updateTerrainMenuMesh()
 	{
 		// Variables
 		auto screen = _leftWindow->getScreen("terrainEditorMenuMesh");
-		string heightMapFolderPath = "User\\Assets\\Textures\\HeightMaps\\";
-		string diffuseMapFolderPath = "User\\Assets\\Textures\\DiffuseMaps\\";
 
 		// Buttons hoverability
 		bool existing = _fe3d.terrainEntity_isExisting("@terrain");
@@ -110,24 +108,24 @@ void WorldEditor::_updateTerrainMenuMesh()
 		{
 			if (screen->getButton("heightMap")->isHovered())
 			{
-				string fileName = _fe3d.misc_getWinExplorerFilename(heightMapFolderPath, "BMP");
+				string filePath = _fe3d.misc_getWinExplorerFilename("User\\Assets\\Textures\\HeightMaps\\", "BMP");
 
 				// Check if not cancelled
-				if (fileName != "")
+				if (filePath != "")
 				{
-					_fe3d.misc_clearHeightMapCache(heightMapFolderPath + fileName);
-					_loadTerrainEntity(heightMapFolderPath + fileName);
+					_fe3d.misc_clearHeightMapCache(filePath);
+					_loadTerrainEntity(filePath);
 				}
 			}
 			else if (screen->getButton("diffuseMap")->isHovered())
 			{
-				string fileName = _fe3d.misc_getWinExplorerFilename(diffuseMapFolderPath, "PNG");
+				string filePath = _fe3d.misc_getWinExplorerFilename("User\\Assets\\Textures\\DiffuseMaps\\", "PNG");
 
 				// Check if not cancelled
-				if (fileName != "")
+				if (filePath != "")
 				{
-					_fe3d.misc_clearTextureCache(diffuseMapFolderPath + fileName);
-					_fe3d.terrainEntity_setDiffuseMap("@terrain", diffuseMapFolderPath + fileName);
+					_fe3d.misc_clearTextureCache(filePath);
+					_fe3d.terrainEntity_setDiffuseMap("@terrain", filePath);
 				}
 			}
 			else if (screen->getButton("maxHeight")->isHovered())
@@ -185,54 +183,52 @@ void WorldEditor::_updateTerrainMenuBlendMap()
 	{
 		// Variables
 		auto screen = _leftWindow->getScreen("terrainEditorMenuBlendMap");
-		string blendMapFolderPath = "User\\Assets\\Textures\\BlendMaps\\";
-		string diffuseMaFolderPath = "User\\Assets\\Textures\\DiffuseMaps\\";
 
 		// GUI management
 		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
 		{
 			if (screen->getButton("blendMap")->isHovered())
 			{
-				string fileName = _fe3d.misc_getWinExplorerFilename(blendMapFolderPath, "PNG");
+				string filePath = _fe3d.misc_getWinExplorerFilename("User\\Assets\\Textures\\BlendMaps\\", "PNG");
 
 				// Check if not cancelled
-				if (fileName != "")
+				if (filePath != "")
 				{
-					_fe3d.misc_clearTextureCache(blendMapFolderPath + fileName);
-					_fe3d.terrainEntity_setBlendMap("@terrain", blendMapFolderPath + fileName);
+					_fe3d.misc_clearTextureCache(filePath);
+					_fe3d.terrainEntity_setBlendMap("@terrain", filePath);
 				}
 			}
 			else if (screen->getButton("red")->isHovered())
 			{
-				string fileName = _fe3d.misc_getWinExplorerFilename(diffuseMaFolderPath, "PNG");
+				string filePath = _fe3d.misc_getWinExplorerFilename("User\\Assets\\Textures\\DiffuseMaps\\", "PNG");
 
 				// Check if not cancelled
-				if (fileName != "")
+				if (filePath != "")
 				{
-					_fe3d.misc_clearTextureCache(diffuseMaFolderPath + fileName);
-					_fe3d.terrainEntity_setBlendMapR("@terrain", diffuseMaFolderPath + fileName);
+					_fe3d.misc_clearTextureCache(filePath);
+					_fe3d.terrainEntity_setBlendMapR("@terrain", filePath);
 				}
 			}
 			else if (screen->getButton("green")->isHovered())
 			{
-				string fileName = _fe3d.misc_getWinExplorerFilename(diffuseMaFolderPath, "PNG");
+				string filePath = _fe3d.misc_getWinExplorerFilename("User\\Assets\\Textures\\DiffuseMaps\\", "PNG");
 				
 				// Check if not cancelled
-				if (fileName != "")
+				if (filePath != "")
 				{
-					_fe3d.misc_clearTextureCache(diffuseMaFolderPath + fileName);
-					_fe3d.terrainEntity_setBlendMapG("@terrain", diffuseMaFolderPath + fileName);
+					_fe3d.misc_clearTextureCache(filePath);
+					_fe3d.terrainEntity_setBlendMapG("@terrain", filePath);
 				}
 			}
 			else if (screen->getButton("blue")->isHovered())
 			{
-				string fileName = _fe3d.misc_getWinExplorerFilename(diffuseMaFolderPath, "PNG");
+				string filePath = _fe3d.misc_getWinExplorerFilename("User\\Assets\\Textures\\DiffuseMaps\\", "PNG");
 				
 				// Check if not cancelled
-				if (fileName != "")
+				if (filePath != "")
 				{
-					_fe3d.misc_clearTextureCache(diffuseMaFolderPath + fileName);
-					_fe3d.terrainEntity_setBlendMapB("@terrain", diffuseMaFolderPath + fileName);
+					_fe3d.misc_clearTextureCache(filePath);
+					_fe3d.terrainEntity_setBlendMapB("@terrain", filePath);
 				}
 			}
 			else if (screen->getButton("redRepeat")->isHovered())

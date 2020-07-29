@@ -174,7 +174,7 @@ const string& FabiEngine3D::misc_getWinExplorerFilename(const string& startingDi
 
 	// Open file explorer
 	OPENFILENAME ofn;
-	char pathBuffer[100];
+	char pathBuffer[256];
 	char titleBuffer[100];
 	ZeroMemory(&ofn, sizeof(ofn));
 	ofn.lStructSize = sizeof(ofn);
@@ -192,7 +192,13 @@ const string& FabiEngine3D::misc_getWinExplorerFilename(const string& startingDi
 	GetOpenFileName(&ofn);
 
 	// Return chosen filename
-	return ofn.lpstrFileTitle;
+	string filePath = ofn.lpstrFile;
+	if (filePath != "")
+	{
+		filePath = filePath.substr(misc_getRootDirectory().size(), filePath.size());
+	}
+	
+	return filePath;
 }
 
 const string& FabiEngine3D::misc_vec2str(vec2 vec)

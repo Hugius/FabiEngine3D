@@ -113,14 +113,13 @@ void BillboardEditor::_updateBillboardEditing()
 					}
 					else if (screen->getButton("texture")->isHovered())
 					{
-						string path = "User\\Assets\\Textures\\BillboardMaps\\";
-						string fileName = _fe3d.misc_getWinExplorerFilename(path, "PNG");
+						string filePath = _fe3d.misc_getWinExplorerFilename("User\\Assets\\Textures\\BillboardMaps\\", "PNG");
 
 						// Check if user did not cancel
-						if (fileName != "")
+						if (filePath != "")
 						{
-							_fe3d.misc_clearTextureCache(path + fileName);
-							_fe3d.billboardEntity_setDiffuseMap(_currentBillboardID, path + fileName, false);
+							_fe3d.misc_clearTextureCache(filePath);
+							_fe3d.billboardEntity_setDiffuseMap(_currentBillboardID, filePath, false);
 						}
 					}
 					else if (screen->getButton("isTransparent")->isHovered())
@@ -206,15 +205,14 @@ void BillboardEditor::_updateBillboardEditing()
 				{
 					if (screen->getButton("font")->isHovered())
 					{
-						string fontPath = "User\\Assets\\Fonts\\";
-						string fileName = _fe3d.misc_getWinExplorerFilename(fontPath, "TTF");
+						string filePath = _fe3d.misc_getWinExplorerFilename("User\\Assets\\Fonts\\", "TTF");
 
 						// Check if user did not cancel
-						if (fileName != "")
+						if (filePath != "")
 						{
-							_fe3d.misc_clearFontCache(fontPath + fileName);
+							_fe3d.misc_clearFontCache(filePath);
 							_fe3d.misc_clearTextCache(_fe3d.billboardEntity_getTextContent(_currentBillboardID));
-							_fe3d.billBoardEntity_setFont(_currentBillboardID, fontPath + fileName);
+							_fe3d.billBoardEntity_setFont(_currentBillboardID, filePath);
 						}
 					}
 					else if (screen->getButton("color")->isHovered())

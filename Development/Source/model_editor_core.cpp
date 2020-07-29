@@ -290,7 +290,6 @@ void ModelEditor::unload()
 	_modelResizeDirection = Direction::X;
 	_cameraDistance = 5.0f;
 	_currentModelName = "";
-	_currentProjectName = "";
 	_modelNames.clear();
 	_objFileNamesList.clear();
 }

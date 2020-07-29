@@ -6,24 +6,24 @@ void SceneEditor::_updateLightScreen()
 {
 	if (_isLoaded)
 	{
-		if (_leftWindow->getActiveScreen()->getID() == "lightingManagement")
+		if (_leftWindow->getActiveScreen()->getID() == "sceneEditorMenuLighting")
 		{
-			auto screen = _leftWindow->getScreen("lightingManagement");
+			auto screen = _leftWindow->getScreen("sceneEditorMenuLighting");
 
 			// GUI management
 			if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
 			{
 				if (screen->getButton("ambient")->isHovered()) // Ambient light button
 				{
-					_leftWindow->setActiveScreen("ambientLightingManagement");
+					_leftWindow->setActiveScreen("sceneEditorMenuLightingAmbient");
 				}
 				else if (screen->getButton("directional")->isHovered()) // Directional light button
 				{
-					_leftWindow->setActiveScreen("directionalLightingManagement");
+					_leftWindow->setActiveScreen("sceneEditorMenuLightingDirectional");
 				}
 				else if (screen->getButton("point")->isHovered()) // Point light button
 				{
-					_leftWindow->setActiveScreen("pointLightManagement");
+					_leftWindow->setActiveScreen("sceneEditorMenuLightingPoint");
 				}
 				else if (screen->getButton("back")->isHovered()) // Back button
 				{
@@ -38,9 +38,9 @@ void SceneEditor::_updateAmbientLightScreen()
 {
 	if (_isLoaded)
 	{
-		if (_leftWindow->getActiveScreen()->getID() == "ambientLightingManagement")
+		if (_leftWindow->getActiveScreen()->getID() == "sceneEditorMenuLightingAmbient")
 		{
-			auto screen = _leftWindow->getScreen("ambientLightingManagement");
+			auto screen = _leftWindow->getScreen("sceneEditorMenuLightingAmbient");
 
 			// GUI management
 			if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
@@ -57,7 +57,7 @@ void SceneEditor::_updateAmbientLightScreen()
 				}
 				else if (screen->getButton("back")->isHovered())
 				{
-					_leftWindow->setActiveScreen("lightingManagement");
+					_leftWindow->setActiveScreen("sceneEditorMenuLighting");
 				}
 			}
 
@@ -95,9 +95,9 @@ void SceneEditor::_updateDirectionalLightScreen()
 {
 	if (_isLoaded)
 	{
-		if (_leftWindow->getActiveScreen()->getID() == "directionalLightingManagement")
+		if (_leftWindow->getActiveScreen()->getID() == "sceneEditorMenuLightingDirectional")
 		{
-			auto screen = _leftWindow->getScreen("directionalLightingManagement");
+			auto screen = _leftWindow->getScreen("sceneEditorMenuLightingDirectional");
 
 			// GUI management
 			if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
@@ -120,7 +120,7 @@ void SceneEditor::_updateDirectionalLightScreen()
 				}
 				else if (screen->getButton("back")->isHovered())
 				{
-					_leftWindow->setActiveScreen("lightingManagement");
+					_leftWindow->setActiveScreen("sceneEditorMenuLighting");
 				}
 			}
 
@@ -163,9 +163,9 @@ void SceneEditor::_updatePointLightScreen()
 {
 	if (_isLoaded)
 	{
-		if (_leftWindow->getActiveScreen()->getID() == "pointLightManagement")
+		if (_leftWindow->getActiveScreen()->getID() == "sceneEditorMenuLightingPoint")
 		{
-			auto screen = _leftWindow->getScreen("pointLightManagement");
+			auto screen = _leftWindow->getScreen("sceneEditorMenuLightingPoint");
 
 			// GUI management
 			if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
@@ -176,7 +176,7 @@ void SceneEditor::_updatePointLightScreen()
 				}
 				else if (screen->getButton("back")->isHovered())
 				{
-					_leftWindow->setActiveScreen("lightingManagement");
+					_leftWindow->setActiveScreen("sceneEditorMenuLighting");
 					_isPlacingPointlight = false;
 				}
 			}

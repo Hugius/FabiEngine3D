@@ -35,6 +35,11 @@ void GuiEntity::setAlpha(float val)
 	_alpha = val;
 }
 
+void GuiEntity::setCentered(bool val)
+{
+	_isCentered = val;
+}
+
 void GuiEntity::setTranslation(vec2 val)
 {
 	_translation = val;
@@ -98,6 +103,11 @@ const bool GuiEntity::isMirroredHorizonally() const
 const bool GuiEntity::isMirroredVertically() const
 {
 	return _mirroredVertically;
+}
+
+const bool GuiEntity::isCentered() const
+{
+	return _isCentered;
 }
 
 const mat4 GuiEntity::getModelMatrix() const

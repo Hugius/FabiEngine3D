@@ -4,21 +4,21 @@ void SceneEditor::_updateModelScreen()
 {
 	if (_isLoaded)
 	{
-		if (_leftWindow->getActiveScreen()->getID() == "modelPlaceManagement")
+		if (_leftWindow->getActiveScreen()->getID() == "sceneEditorMenuModel")
 		{
-			auto screen = _leftWindow->getScreen("modelPlaceManagement");
+			auto screen = _leftWindow->getScreen("sceneEditorMenuModel");
 			if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
 			{
-				if (screen->getButton("placeModel")->isHovered()) // Place model button
+				if (screen->getButton("sceneEditorMenuModelPlace")->isHovered()) // Place model button
 				{
-					_leftWindow->setActiveScreen("placeModel");
+					_leftWindow->setActiveScreen("sceneEditorMenuModelPlace");
 				}
-				else if (screen->getButton("chooseModel")->isHovered()) // Choose model button
+				else if (screen->getButton("sceneEditorMenuModelChoice")->isHovered()) // Choose model button
 				{
-					_leftWindow->setActiveScreen("chooseModel");
+					_leftWindow->setActiveScreen("sceneEditorMenuModelChoice");
 
 					// Clear all buttons from scrolling list
-					_leftWindow->getScreen("chooseModel")->getScrollingList("modelList")->deleteButtons();
+					_leftWindow->getScreen("sceneEditorMenuModelChoice")->getScrollingList("modelList")->deleteButtons();
 
 					// Add every placed model name
 					for (auto& modelName : _fe3d.gameEntity_getAllIDs())
@@ -26,7 +26,7 @@ void SceneEditor::_updateModelScreen()
 						// Check if model is not a preview model
 						if (modelName[0] != '@')
 						{
-							_leftWindow->getScreen("chooseModel")->getScrollingList("modelList")->addButton(modelName, modelName);
+							_leftWindow->getScreen("sceneEditorMenuModelChoice")->getScrollingList("modelList")->addButton(modelName, modelName);
 						}
 					}
 				}
@@ -44,9 +44,9 @@ void SceneEditor::_updateModelPlacingScreen()
 	if (_isLoaded)
 	{
 		// Placing screen
-		if (_leftWindow->getActiveScreen()->getID() == "placeModel")
+		if (_leftWindow->getActiveScreen()->getID() == "sceneEditorMenuModelPlace")
 		{
-			auto screen = _leftWindow->getScreen("placeModel");
+			auto screen = _leftWindow->getScreen("sceneEditorMenuModelPlace");
 			if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
 			{
 				// Loop over every created model
@@ -78,7 +78,7 @@ void SceneEditor::_updateModelPlacingScreen()
 				// Back button
 				if (screen->getButton("back")->isHovered())
 				{
-					_leftWindow->setActiveScreen("modelPlaceManagement");
+					_leftWindow->setActiveScreen("sceneEditorMenuModel");
 				}
 			}
 		}
@@ -90,22 +90,22 @@ void SceneEditor::_updateModelChoosingScreen()
 	if (_isLoaded)
 	{
 		// Choosing screen
-		if (_leftWindow->getActiveScreen()->getID() == "chooseModel")
+		if (_leftWindow->getActiveScreen()->getID() == "sceneEditorMenuModelChoice")
 		{
-			auto screen = _leftWindow->getScreen("chooseModel");
+			auto screen = _leftWindow->getScreen("sceneEditorMenuModelChoice");
 
 			// Update scrollinglist content every 1/10 second
 			static int lastMS = 0;
 			if (abs(_fe3d.misc_getMsTimeSinceEpoch() - lastMS) > 100)
 			{
 				// Remove deleted models from the scrolLinglist buttons
-				for (auto& button : _leftWindow->getScreen("chooseModel")->getScrollingList("modelList")->getButtons())
+				for (auto& button : _leftWindow->getScreen("sceneEditorMenuModelChoice")->getScrollingList("modelList")->getButtons())
 				{
 					// Check if model is still existing
 					if (!_fe3d.gameEntity_isExisting(button->getID()))
 					{
 						// Delete button
-						_leftWindow->getScreen("chooseModel")->getScrollingList("modelList")->deleteButton(button->getID());
+						_leftWindow->getScreen("sceneEditorMenuModelChoice")->getScrollingList("modelList")->deleteButton(button->getID());
 					}
 				}
 
@@ -142,7 +142,7 @@ void SceneEditor::_updateModelChoosingScreen()
 			{
 				if (screen->getButton("back")->isHovered())
 				{
-					_leftWindow->setActiveScreen("modelPlaceManagement");
+					_leftWindow->setActiveScreen("sceneEditorMenuModel");
 					_currentPreviewModelName = "";
 				}
 			}

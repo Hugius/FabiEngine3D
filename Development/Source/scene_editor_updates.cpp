@@ -39,17 +39,17 @@ void SceneEditor::_updateManagementScreen()
 			// GUI management
 			if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
 			{
-				if (screen->getButton("modelPlaceManagement")->isHovered()) // Model button
+				if (screen->getButton("sceneEditorMenuModel")->isHovered()) // Model button
 				{
-					_leftWindow->setActiveScreen("modelPlaceManagement");
+					_leftWindow->setActiveScreen("sceneEditorMenuModel");
 				}
 				else if (screen->getButton("billboardPlaceManagement")->isHovered()) // Billboard button
 				{
 					_leftWindow->setActiveScreen("billboardPlaceManagement");
 				}
-				else if (screen->getButton("lightingManagement")->isHovered()) // Light button
+				else if (screen->getButton("sceneEditorMenuLighting")->isHovered()) // Light button
 				{
-					_leftWindow->setActiveScreen("lightingManagement");
+					_leftWindow->setActiveScreen("sceneEditorMenuLighting");
 				}
 				else if (screen->getButton("setSpeed")->isHovered()) // Set speed button
 				{

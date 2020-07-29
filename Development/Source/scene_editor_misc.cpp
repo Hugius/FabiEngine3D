@@ -41,9 +41,9 @@ void SceneEditor::_activateModel(const string& modelID)
 	_transformation = Transformation::TRANSLATION;
 
 	// Activate properties screen
-	_rightWindow->getScreen("modelProperties")->getButton("translation")->setHoverable(false);
-	_rightWindow->getScreen("modelProperties")->getButton("rotation")->setHoverable(true);
-	_rightWindow->getScreen("modelProperties")->getButton("scaling")->setHoverable(true);
+	_rightWindow->getScreen("modelPropertiesMenu")->getButton("translation")->setHoverable(false);
+	_rightWindow->getScreen("modelPropertiesMenu")->getButton("rotation")->setHoverable(true);
+	_rightWindow->getScreen("modelPropertiesMenu")->getButton("scaling")->setHoverable(true);
 
 	// Update selected model text
 	string textEntityID = _gui->getGlobalScreen()->getTextfield("selectedModelName")->getEntityID();
@@ -52,9 +52,9 @@ void SceneEditor::_activateModel(const string& modelID)
 
 	// Filling writefields
 	vec3 position = _fe3d.gameEntity_getPosition(_activeModelID);
-	_rightWindow->getScreen("modelProperties")->getWriteField("x")->setTextContent(std::to_string(static_cast<int>(position.x)));
-	_rightWindow->getScreen("modelProperties")->getWriteField("y")->setTextContent(std::to_string(static_cast<int>(position.y)));
-	_rightWindow->getScreen("modelProperties")->getWriteField("z")->setTextContent(std::to_string(static_cast<int>(position.z)));
+	_rightWindow->getScreen("modelPropertiesMenu")->getWriteField("x")->setTextContent(std::to_string(static_cast<int>(position.x)));
+	_rightWindow->getScreen("modelPropertiesMenu")->getWriteField("y")->setTextContent(std::to_string(static_cast<int>(position.y)));
+	_rightWindow->getScreen("modelPropertiesMenu")->getWriteField("z")->setTextContent(std::to_string(static_cast<int>(position.z)));
 }
 
 void SceneEditor::_placeModel(const string& modelID, string modelName, vec3 position, vec3 rotation, vec3 size)

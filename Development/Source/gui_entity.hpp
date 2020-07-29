@@ -26,6 +26,7 @@ public:
 	void setAlpha(float val);
 
 	// Transformation
+	void setCentered(bool val);
 	void setTranslation(vec2 val);
 	void setRotation(float val);
 	void setScaling(vec2 val);
@@ -43,6 +44,7 @@ public:
 	const bool isMirroredVertically() const;
 
 	// Transformation
+	const bool isCentered() const;
 	const mat4 getModelMatrix() const;
 	const vec2 getTranslation() const;
 	const float getRotation() const;
@@ -73,4 +75,5 @@ private:
 	bool _mirroredHorizontally = false;
 	bool _mirroredVertically   = false;
 	bool _isDepthEntity        = false;
+	bool _isCentered		   = false;
 };

@@ -101,6 +101,11 @@ vec3 FabiEngine3D::aabbEntity_getSize(const string& ID)
 	return _core->_aabbEntityManager.getEntity(ID)->getScaling();
 }
 
+bool FabiEngine3D::aabbEntity_isResponsive(const string& ID)
+{
+	return _core->_aabbEntityManager.getEntity(ID)->isResponsive();
+}
+
 bool FabiEngine3D::aabbEntity_isExisting(const string& ID)
 {
 	return _core->_aabbEntityManager.isExisting(ID);

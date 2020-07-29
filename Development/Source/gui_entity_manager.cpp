@@ -33,6 +33,7 @@ void GuiEntityManager::addGuiEntity(const string& ID, const string& texturePath,
 	getEntity(ID)->setTranslation(translation);
 	getEntity(ID)->setRotation(rotation);
 	getEntity(ID)->setScaling(scaling);
+	getEntity(ID)->setCentered(centered);
 
 	// Load diffuse map
 	getEntity(ID)->setDiffuseMap(_texLoader.getTexture(texturePath, true, true, false));
@@ -48,6 +49,7 @@ void GuiEntityManager::addGuiEntity(const string& ID, vec3 color, vec2 translati
 	getEntity(ID)->setTranslation(translation);
 	getEntity(ID)->setRotation(rotation);
 	getEntity(ID)->setScaling(scaling);
+	getEntity(ID)->setCentered(centered);
 
 	// Set color
 	getEntity(ID)->setColor(color);

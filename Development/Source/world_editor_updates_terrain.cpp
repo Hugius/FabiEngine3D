@@ -6,7 +6,7 @@ void WorldEditor::_updateTerrainMenuMain()
 {
 	if (_currentWorldPart == WorldPart::TERRAIN)
 	{
-		auto screen = _leftWindow->getScreen("terrainMenuMain");
+		auto screen = _leftWindow->getScreen("terrainEditorMenuMain");
 
 		// If terrain existing, show terrain
 		if (_fe3d.terrainEntity_isExisting("@terrain"))
@@ -44,7 +44,7 @@ void WorldEditor::_updateTerrainMenuMain()
 		{
 			if (screen->getButton("create")->isHovered() || screen->getButton("edit")->isHovered())
 			{
-				_leftWindow->setActiveScreen("terrainMenuChoice");
+				_leftWindow->setActiveScreen("terrainEditorMenuChoice");
 			}
 			else if (screen->getButton("remove")->isHovered())
 			{
@@ -61,7 +61,7 @@ void WorldEditor::_updateTerrainMenuMain()
 
 void WorldEditor::_updateTerrainMenuChoice()
 {
-	auto screen = _leftWindow->getScreen("terrainMenuChoice");
+	auto screen = _leftWindow->getScreen("terrainEditorMenuChoice");
 
 	// BlendMap screen hoverability
 	screen->getButton("blendMap")->setHoverable(_fe3d.terrainEntity_isExisting("@terrain"));
@@ -71,15 +71,15 @@ void WorldEditor::_updateTerrainMenuChoice()
 	{
 		if (screen->getButton("mesh")->isHovered())
 		{
-			_leftWindow->setActiveScreen("terrainMenuMesh");
+			_leftWindow->setActiveScreen("terrainEditorMenuMesh");
 		}
 		else if (screen->getButton("blendMap")->isHovered())
 		{
-			_leftWindow->setActiveScreen("terrainMenuBlendMap");
+			_leftWindow->setActiveScreen("terrainEditorMenuBlendMap");
 		}
 		else if (screen->getButton("back")->isHovered())
 		{
-			_leftWindow->setActiveScreen("terrainMenuMain");
+			_leftWindow->setActiveScreen("terrainEditorMenuMain");
 		}
 	}
 
@@ -91,24 +91,24 @@ void WorldEditor::_updateTerrainMenuChoice()
 
 void WorldEditor::_updateTerrainMenuMesh()
 {
-	if (_leftWindow->getActiveScreen()->getID() == "terrainMenuMesh")
+	if (_leftWindow->getActiveScreen()->getID() == "terrainEditorMenuMesh")
 	{
 		// Variables
-		auto screen = _leftWindow->getScreen("terrainMenuMesh");
+		auto screen = _leftWindow->getScreen("terrainEditorMenuMesh");
 		string heightMapFolderPath = "User\\Assets\\Textures\\HeightMaps\\";
 		string diffuseMapFolderPath = "User\\Assets\\Textures\\DiffuseMaps\\";
 
 		// Buttons hoverability
 		bool existing = _fe3d.terrainEntity_isExisting("@terrain");
-		screen->getScrollingList("buttonList")->getButton("diffuseMap")->setHoverable(existing);
-		screen->getScrollingList("buttonList")->getButton("maxHeight")->setHoverable(existing);
-		screen->getScrollingList("buttonList")->getButton("uvRepeat")->setHoverable(existing);
-		screen->getScrollingList("buttonList")->getButton("lightness")->setHoverable(existing);
+		screen->getButton("diffuseMap")->setHoverable(existing);
+		screen->getButton("maxHeight")->setHoverable(existing);
+		screen->getButton("uvRepeat")->setHoverable(existing);
+		screen->getButton("lightness")->setHoverable(existing);
 
 		// GUI management
 		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
 		{
-			if (screen->getScrollingList("buttonList")->getButton("heightMap")->isHovered())
+			if (screen->getButton("heightMap")->isHovered())
 			{
 				string fileName = _fe3d.misc_getWinExplorerFilename(heightMapFolderPath, "BMP");
 
@@ -119,7 +119,7 @@ void WorldEditor::_updateTerrainMenuMesh()
 					_loadTerrainEntity(heightMapFolderPath + fileName);
 				}
 			}
-			else if (screen->getScrollingList("buttonList")->getButton("diffuseMap")->isHovered())
+			else if (screen->getButton("diffuseMap")->isHovered())
 			{
 				string fileName = _fe3d.misc_getWinExplorerFilename(diffuseMapFolderPath, "PNG");
 
@@ -130,24 +130,24 @@ void WorldEditor::_updateTerrainMenuMesh()
 					_fe3d.terrainEntity_setDiffuseMap("@terrain", diffuseMapFolderPath + fileName);
 				}
 			}
-			else if (screen->getScrollingList("buttonList")->getButton("maxHeight")->isHovered())
+			else if (screen->getButton("maxHeight")->isHovered())
 			{
 				float maxHeight = _fe3d.terrainEntity_getMaxHeight("@terrain");
 				_gui->getGlobalScreen()->addValueForm("maxHeight", "Max height", maxHeight, vec2(0.0f), vec2(0.3f, 0.1f));
 			}
-			else if (screen->getScrollingList("buttonList")->getButton("uvRepeat")->isHovered())
+			else if (screen->getButton("uvRepeat")->isHovered())
 			{
 				float uvRepeat = _fe3d.terrainEntity_getUvRepeat("@terrain");
 				_gui->getGlobalScreen()->addValueForm("uvRepeat", "UV repeat", uvRepeat, vec2(0.0f), vec2(0.3f, 0.1f));
 			}
-			else if (screen->getScrollingList("buttonList")->getButton("lightness")->isHovered())
+			else if (screen->getButton("lightness")->isHovered())
 			{
 				float lightness = _fe3d.terrainEntity_getLightness("@terrain");
 				_gui->getGlobalScreen()->addValueForm("lightness", "Lightness (0-100)", lightness * 100.0f, vec2(0.0f), vec2(0.3f, 0.1f));
 			}
 			else if (screen->getButton("back")->isHovered())
 			{
-				_leftWindow->setActiveScreen("terrainMenuChoice");
+				_leftWindow->setActiveScreen("terrainEditorMenuChoice");
 			}
 		}
 
@@ -181,17 +181,17 @@ void WorldEditor::_updateTerrainMenuMesh()
 
 void WorldEditor::_updateTerrainMenuBlendMap()
 {
-	if (_leftWindow->getActiveScreen()->getID() == "terrainMenuBlendMap")
+	if (_leftWindow->getActiveScreen()->getID() == "terrainEditorMenuBlendMap")
 	{
 		// Variables
-		auto screen = _leftWindow->getScreen("terrainMenuBlendMap");
+		auto screen = _leftWindow->getScreen("terrainEditorMenuBlendMap");
 		string blendMapFolderPath = "User\\Assets\\Textures\\BlendMaps\\";
 		string diffuseMaFolderPath = "User\\Assets\\Textures\\DiffuseMaps\\";
 
 		// GUI management
 		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
 		{
-			if (screen->getScrollingList("buttonList")->getButton("blendMap")->isHovered())
+			if (screen->getButton("blendMap")->isHovered())
 			{
 				string fileName = _fe3d.misc_getWinExplorerFilename(blendMapFolderPath, "PNG");
 
@@ -202,7 +202,7 @@ void WorldEditor::_updateTerrainMenuBlendMap()
 					_fe3d.terrainEntity_setBlendMap("@terrain", blendMapFolderPath + fileName);
 				}
 			}
-			else if (screen->getScrollingList("buttonList")->getButton("red")->isHovered())
+			else if (screen->getButton("red")->isHovered())
 			{
 				string fileName = _fe3d.misc_getWinExplorerFilename(diffuseMaFolderPath, "PNG");
 
@@ -213,7 +213,7 @@ void WorldEditor::_updateTerrainMenuBlendMap()
 					_fe3d.terrainEntity_setBlendMapR("@terrain", diffuseMaFolderPath + fileName);
 				}
 			}
-			else if (screen->getScrollingList("buttonList")->getButton("green")->isHovered())
+			else if (screen->getButton("green")->isHovered())
 			{
 				string fileName = _fe3d.misc_getWinExplorerFilename(diffuseMaFolderPath, "PNG");
 				
@@ -224,7 +224,7 @@ void WorldEditor::_updateTerrainMenuBlendMap()
 					_fe3d.terrainEntity_setBlendMapG("@terrain", diffuseMaFolderPath + fileName);
 				}
 			}
-			else if (screen->getScrollingList("buttonList")->getButton("blue")->isHovered())
+			else if (screen->getButton("blue")->isHovered())
 			{
 				string fileName = _fe3d.misc_getWinExplorerFilename(diffuseMaFolderPath, "PNG");
 				
@@ -235,24 +235,24 @@ void WorldEditor::_updateTerrainMenuBlendMap()
 					_fe3d.terrainEntity_setBlendMapB("@terrain", diffuseMaFolderPath + fileName);
 				}
 			}
-			else if (screen->getScrollingList("buttonList")->getButton("redRepeat")->isHovered())
+			else if (screen->getButton("redRepeat")->isHovered())
 			{
 				float blendRepeatR = _fe3d.terrainEntity_getBlendRepeatR("@terrain");
 				_gui->getGlobalScreen()->addValueForm("redRepeat", "Red repeat", blendRepeatR, vec2(0.0f), vec2(0.3f, 0.1f));
 			}
-			else if (screen->getScrollingList("buttonList")->getButton("greenRepeat")->isHovered())
+			else if (screen->getButton("greenRepeat")->isHovered())
 			{
 				float blendRepeatG = _fe3d.terrainEntity_getBlendRepeatG("@terrain");
 				_gui->getGlobalScreen()->addValueForm("greenRepeat", "Green repeat", blendRepeatG, vec2(0.0f), vec2(0.3f, 0.1f));
 			}
-			else if (screen->getScrollingList("buttonList")->getButton("blueRepeat")->isHovered())
+			else if (screen->getButton("blueRepeat")->isHovered())
 			{
 				float blendRepeatB = _fe3d.terrainEntity_getBlendRepeatB("@terrain");
 				_gui->getGlobalScreen()->addValueForm("blueRepeat", "Blue repeat", blendRepeatB, vec2(0.0f), vec2(0.3f, 0.1f));
 			}
 			else if (screen->getButton("back")->isHovered())
 			{
-				_leftWindow->setActiveScreen("terrainMenuChoice");
+				_leftWindow->setActiveScreen("terrainEditorMenuChoice");
 			}
 		}
 
@@ -290,12 +290,12 @@ void WorldEditor::_updateTerrainMenuBlendMap()
 		}
 
 		// Button hoverability
-		screen->getScrollingList("buttonList")->getButton("red")->setHoverable(loadedBlendMap);
-		screen->getScrollingList("buttonList")->getButton("green")->setHoverable(loadedBlendMap);
-		screen->getScrollingList("buttonList")->getButton("blue")->setHoverable(loadedBlendMap);
-		screen->getScrollingList("buttonList")->getButton("redRepeat")->setHoverable(loadedBlendMap && loadedRedTex);
-		screen->getScrollingList("buttonList")->getButton("greenRepeat")->setHoverable(loadedBlendMap && loadedGreenTex);
-		screen->getScrollingList("buttonList")->getButton("blueRepeat")->setHoverable(loadedBlendMap && loadedBlueTex);
+		screen->getButton("red")->setHoverable(loadedBlendMap);
+		screen->getButton("green")->setHoverable(loadedBlendMap);
+		screen->getButton("blue")->setHoverable(loadedBlendMap);
+		screen->getButton("redRepeat")->setHoverable(loadedBlendMap && loadedRedTex);
+		screen->getButton("greenRepeat")->setHoverable(loadedBlendMap && loadedGreenTex);
+		screen->getButton("blueRepeat")->setHoverable(loadedBlendMap && loadedBlueTex);
 	}
 }
 

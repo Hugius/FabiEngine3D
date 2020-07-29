@@ -69,9 +69,9 @@ void CoreEngine::_setupApplication()
 	_renderEngine.renderEngineLogo(&logo, logoResolution);
 	_windowManager.swapBackBuffer();
 	
-	// Show logo for at least 2 seconds
+	// Show logo for at least 1 second
 	auto start = std::chrono::high_resolution_clock::now();
-	while (std::chrono::duration_cast<std::chrono::duration<float>>(std::chrono::high_resolution_clock::now() - start).count() * 1000.0f < 2000.0f) {}
+	while (std::chrono::duration_cast<std::chrono::duration<float>>(std::chrono::high_resolution_clock::now() - start).count() * 1000.0f < 1000.0f) {}
 
 	// Vignettte
 	vec2 pos = _fe3d.misc_convertToNDC(_fe3d.misc_convertFromScreenCoords(Config::getInst().getVpPos()));

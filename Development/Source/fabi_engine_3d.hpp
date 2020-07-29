@@ -185,7 +185,7 @@ public:
 	const string& waterEntity_getDisplacementMapPath(const string& ID);
 	const string& waterEntity_getSelectedID();
 
-	// Game entity interface
+	// Game entity interface - setters
 	void gameEntity_add
 	(
 		const string& ID, const string& objPath,
@@ -209,17 +209,6 @@ public:
 	void		   gameEntity_setSceneReflective(const string& ID, bool enabled);
 	void		   gameEntity_setShadowed(const string& ID, bool enabled);
 	void		   gameEntity_setStaticToCamera(const string& ID, bool staticToCamera);
-	bool		   gameEntity_isExisting(const string& ID);
-	bool		   gameEntity_isVisible(const string& ID);
-	bool		   gameEntity_isMultiTextured(const string& ID);
-	bool		   gameEntity_isTransparent(const string& ID);
-	bool		   gameEntity_isFaceCulled(const string& ID);
-	bool		   gameEntity_isLightMapped(const string& ID);
-	bool		   gameEntity_isSkyReflective(const string& ID);
-	bool		   gameEntity_isSpecularLighted(const string& ID);
-	bool		   gameEntity_isSceneReflective(const string& ID);
-	bool		   gameEntity_isShadowed(const string& ID);
-	bool		   gameEntity_isStaticToCamera(const string& ID);
 	void		   gameEntity_move(const string& ID, vec3 factor);
 	void		   gameEntity_rotate(const string& ID, vec3 factor);
 	void		   gameEntity_scale(const string& ID, vec3 factor);
@@ -234,6 +223,19 @@ public:
 	void		   gameEntity_setColor(const string& ID, vec3 color);
 	void		   gameEntity_setMaxY(const string& ID, float y);
 	void		   gameEntity_setUvRepeat(const string& ID, float repeat);
+
+	// Game entity interface - getters
+	bool		   gameEntity_isExisting(const string& ID);
+	bool		   gameEntity_isVisible(const string& ID);
+	bool		   gameEntity_isMultiTextured(const string& ID);
+	bool		   gameEntity_isTransparent(const string& ID);
+	bool		   gameEntity_isFaceCulled(const string& ID);
+	bool		   gameEntity_isLightMapped(const string& ID);
+	bool		   gameEntity_isSkyReflective(const string& ID);
+	bool		   gameEntity_isSpecularLighted(const string& ID);
+	bool		   gameEntity_isSceneReflective(const string& ID);
+	bool		   gameEntity_isShadowed(const string& ID);
+	bool		   gameEntity_isStaticToCamera(const string& ID);
 	float		   gameEntity_getLightness(const string& ID);
 	float		   gameEntity_getSpecularFactor(const string& ID);
 	float		   gameEntity_getAlpha(const string& ID);
@@ -318,7 +320,7 @@ public:
 	int billboardEntity_getAnimationColumns(const string& ID);
 	int billboardEntity_getAnimationFramestep(const string& ID);
 
-	// AABB entity interface
+	// AABB entity interface - setters
 	void aabbEntity_add(const string& ID, vec3 T, vec3 S, bool responsive);
 	void aabbEntity_bindToGameEntity(const string& parentID, vec3 S, bool responsive);
 	void aabbEntity_bindToGameEntityGroup(const string& parentID, vec3 S, bool responsive);
@@ -330,17 +332,22 @@ public:
 	void aabbEntity_setGroupResponsiveness(const string& ID, bool responsive);
 	void aabbEntity_setPosition(const string& ID, vec3 position);
 	void aabbEntity_setSize(const string& ID, vec3 size);
+
+	// AABB entity interface - getters
 	vec3 aabbEntity_getPosition(const string& ID);
 	vec3 aabbEntity_getSize(const string& ID);
+	bool aabbEntity_isResponsive(const string& ID);
 	bool aabbEntity_isExisting(const string& ID);
 
-	// Global collision interface
+	// Global collision interface - setters
 	void collision_enableCameraResponse();
 	void collision_disableCameraResponse();
 	void collision_enableCameraTerrainResponse(float cameraHeight, float cameraSpeed);
 	void collision_disableCameraTerrainResponse();
 	void collision_enableFrameRendering();
 	void collision_disableFrameRendering();
+
+	// Global collision interface - getters
 	bool collision_checkCursorInEntity(const string& ID);
 	bool collision_checkAnyWithCamera();
 	bool collision_checkEntityCamera(const string& ID);
@@ -352,9 +359,9 @@ public:
 	ivec3 collision_checkEntityCameraDir(const string& ID);
 	ivec3 collision_checkEntityGroupCameraDir(const string& ID);
 
-	// Light entity interface
-	void lightEntity_deleteAll();
+	// Light entity interface - setters
 	void lightEntity_add(const string& ID, vec3 position, vec3 color, float intensity, float distanceFactor, bool visible = true);
+	void lightEntity_deleteAll();
 	void lightEntity_delete(const string& ID);
 	void lightEntity_hide(const string& ID);
 	void lightEntity_show(const string& ID);
@@ -363,23 +370,24 @@ public:
 	void lightEntity_setColor(const string& ID, vec3 color);
 	void lightEntity_setIntensity(const string& ID, float intensity);
 	void lightEntity_setDistanceFactor(const string& ID, float factor);
+
+	// Light entity interface - getters
 	vec3 lightEntity_getPosition(const string& ID);
 	vec3 lightEntity_getColor(const string& ID);
 	float lightEntity_getIntensity(const string& ID);
 	float lightEntity_getDistanceFactor(const string& ID);
 	vector<string> lightEntity_getAllIDs();
 
-	// Gui entity interface
-	void guiEntity_deleteAll();
-	void guiEntity_hideAll();
-	void guiEntity_showAll();
+	// Gui entity interface - setters
 	void guiEntity_add(const string& ID, const string& texturePath, vec2 translation, float rotation, vec2 scaling, bool centered, bool visible = true);
 	void guiEntity_add(const string& ID, vec3 color, vec2 translation, float rotation, vec2 scaling, bool centered, bool visible = true);
-	void guiEntity_hide(const string& ID);
-	void guiEntity_show(const string& ID);
+	void guiEntity_deleteAll();
 	void guiEntity_delete(const string& ID);
+	void guiEntity_hideAll();
+	void guiEntity_hide(const string& ID);
+	void guiEntity_showAll();
+	void guiEntity_show(const string& ID);
 	void guiEntity_changeTexture(const string& ID, const string& texturePath);
-	bool guiEntity_isExisting(const string& ID);
 	void guiEntity_setPosition(const string& ID, vec2 position);
 	void guiEntity_setRotation(const string& ID, float rotation);
 	void guiEntity_setSize(const string& ID, vec2 size);
@@ -390,28 +398,34 @@ public:
 	void guiEntity_setAlpha(const string& ID, float alpha);
 	void guiEntity_setMinPosition(const string& ID, vec2 minPos);
 	void guiEntity_setMaxPosition(const string& ID, vec2 maxPos);
-	vec2 guiEntity_getPosition(const string& ID);
-	float guiEntity_getRotation(const string& ID);
-	vec2 guiEntity_getSize(const string& ID);
-	bool guiEntity_isVisible(const string& ID);
 
-	// Text interface
-	void textEntity_deleteAll();
-	void textEntity_hideAll();
-	void textEntity_showAll();
+	// Gui entity interface - getters
+	bool guiEntity_isExisting(const string& ID);
+	bool guiEntity_isVisible(const string& ID);
+	bool guiEntity_isCentered(const string& ID);
+	vec2 guiEntity_getPosition(const string& ID);
+	vec2 guiEntity_getSize(const string& ID);
+	vec2 guiEntity_getMinPosition(const string& ID);
+	vec2 guiEntity_getMaxPosition(const string& ID);
+	float guiEntity_getRotation(const string& ID);
+	float guiEntity_getAlpha(const string& ID);
+
+	// Text interface - setters
 	void textEntity_add
 	(
 		const string& ID, const string& text,
 		const string& fontPath, vec3 color,
 		vec2 position, float rotation, vec2 size, bool centered
 	);
+	void textEntity_deleteAll();
 	void textEntity_delete(const string& ID);
-	bool textEntity_isExisting(const string& ID);
+	void textEntity_hideAll();
+	void textEntity_hide(const string& ID);
+	void textEntity_showAll();
+	void textEntity_show(const string& ID);
 	void textEntity_setTextContent(const string& ID, const string& textContent, float charWidth = -1.0f);
 	void textEntity_setColor(const string& ID, vec3 color);
 	void textEntity_setAlpha(const string& ID, float alpha);
-	void textEntity_hide(const string& ID);
-	void textEntity_show(const string& ID);
 	void textEntity_setPosition(const string& ID, vec2 position);
 	void textEntity_setRotation(const string& ID, float rotation);
 	void textEntity_setSize(const string& ID, vec2 size);
@@ -420,9 +434,15 @@ public:
 	void textEntity_scale(const string& ID, vec2 size);
 	void textEntity_setMinPosition(const string& ID, vec2 minPos);
 	void textEntity_setMaxPosition(const string& ID, vec2 maxPos);
+
+	// Text interface - getters
+	bool textEntity_isExisting(const string& ID);
 	vec2 textEntity_getPosition(const string& ID);
-	float textEntity_getRotation(const string& ID);
 	vec2 textEntity_getSize(const string& ID);
+	vec2 textEntity_getMinPosition(const string& ID);
+	vec2 textEntity_getMaxPosition(const string& ID);
+	float textEntity_getRotation(const string& ID);
+	float textEntity_getAlpha(const string& ID);
 	const string& textEntity_getTextContent(const string& ID);
 
 	// Graphics interface
@@ -470,7 +490,7 @@ public:
 	int  input_getMouseWheelX();
 	int  input_getMouseWheelY();
 
-	// Audio interface
+	// Audio interface - setters
 	void audioEntity_setSoundEnabled(bool enabled);
 	void audioEntity_setMusicEnabled(bool enabled);
 	void audioEntity_deleteAllSounds();
@@ -489,6 +509,8 @@ public:
 	void audioEntity_stop(const std::string& ID, int fadeMillis = 0);
 	void audioEntity_setVolume(const std::string& ID, int volume);
 	void audioEntity_changePoint(const std::string& ID, vec3 position);
+
+	// Audio interface - getters
 	bool audioEntity_isPlaying(const std::string& ID);
 	int  audioEntity_getVolume(const std::string& ID);
 	int  audioEntity_getUsedChannelCount();
@@ -514,14 +536,7 @@ public:
 		Logger::getInst().throwWarning(first, rest...);
 	}
 
-	// Miscellaneous interface
-	int misc_getUniqueInt(int min, int max);
-	int misc_getWindowWidth();
-	int misc_getWindowHeight();
-	int misc_getRandomInt(int min, int max);
-	int misc_getMsTimeSinceEpoch();
-	float misc_getRandomFloat(float min, float max);
-	float misc_getAspectRatio();
+	// Miscellaneous interface - setters
 	void misc_showCursor();
 	void misc_hideCursor();
 	void misc_enableWireframeRendering();
@@ -541,6 +556,15 @@ public:
 	void misc_clearTextureCache(const string& filePath);
 	void misc_clearCubeMapCache(const array<string, 6>& filePaths);
 	void misc_clearHeightMapCache(const string& filePath);
+
+	// Miscellaneous interface - getters
+	int misc_getUniqueInt(int min, int max);
+	int misc_getWindowWidth();
+	int misc_getWindowHeight();
+	int misc_getRandomInt(int min, int max);
+	int misc_getMsTimeSinceEpoch();
+	float misc_getRandomFloat(float min, float max);
+	float misc_getAspectRatio();
 	const string& misc_getWinExplorerFilename(const string& startingDir, const string& fileType);
 	const string& misc_vec2str(vec2 vec);
 	const string& misc_vec2str(vec3 vec);

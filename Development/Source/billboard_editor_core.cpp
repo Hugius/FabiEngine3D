@@ -255,5 +255,4 @@ void BillboardEditor::unload()
 	_totalCameraRotation = 0.0f;
 	_hoveredBillboardID = "";
 	_currentBillboardID = "";
-	_currentProjectName = "";
 }

@@ -44,9 +44,9 @@ void SceneEditor::_updateLightEditing()
 
 								// Filling writefields
 								vec3 position = _fe3d.gameEntity_getPosition(ACTIVE_BULB_ID);
-								_rightWindow->getScreen("lightProperties")->getWriteField("x")->setTextContent(std::to_string(static_cast<int>(position.x)));
-								_rightWindow->getScreen("lightProperties")->getWriteField("y")->setTextContent(std::to_string(static_cast<int>(position.y)));
-								_rightWindow->getScreen("lightProperties")->getWriteField("z")->setTextContent(std::to_string(static_cast<int>(position.z)));
+								_rightWindow->getScreen("pointLightPropertiesMenu")->getWriteField("x")->setTextContent(std::to_string(static_cast<int>(position.x)));
+								_rightWindow->getScreen("pointLightPropertiesMenu")->getWriteField("y")->setTextContent(std::to_string(static_cast<int>(position.y)));
+								_rightWindow->getScreen("pointLightPropertiesMenu")->getWriteField("z")->setTextContent(std::to_string(static_cast<int>(position.z)));
 							}
 						}
 					}
@@ -85,12 +85,12 @@ void SceneEditor::_updateLightEditing()
 			// Update properties screen
 			if (ACTIVE_BULB_ID != "")
 			{
-				_rightWindow->setActiveScreen("lightProperties");
+				_rightWindow->setActiveScreen("pointLightPropertiesMenu");
 
 				// GUI management (pressed)
 				if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
 				{
-					if (_rightWindow->getScreen("lightProperties")->getButton("delete")->isHovered()) // Delete button
+					if (_rightWindow->getScreen("pointLightPropertiesMenu")->getButton("delete")->isHovered()) // Delete button
 					{
 						_fe3d.gameEntity_delete(ACTIVE_BULB_ID);
 						_fe3d.lightEntity_delete(ACTIVE_LIGHT_ID);
@@ -109,22 +109,22 @@ void SceneEditor::_updateLightEditing()
 				float distance = _fe3d.lightEntity_getDistanceFactor(ACTIVE_LIGHT_ID);
 
 				// Update value filling and changing
-				_handleValueChanging("lightProperties", "distancePlus", "distance", distance, _lightingChangingSpeed, 10.0f, 0.0f);
-				_handleValueChanging("lightProperties", "distanceMinus", "distance", distance, -_lightingChangingSpeed, 10.0f, 0.0f);
-				_handleValueChanging("lightProperties", "intensityPlus", "intensity", intensity, _lightingChangingSpeed, 10.0f, 0.0f);
-				_handleValueChanging("lightProperties", "intensityMinus", "intensity", intensity, -_lightingChangingSpeed, 10.0f, 0.0f);
-				_handleValueChanging("lightProperties", "xPlus", "x", position.x, _movementChangingSpeed);
-				_handleValueChanging("lightProperties", "xMinus", "x", position.x, -_movementChangingSpeed);
-				_handleValueChanging("lightProperties", "yPlus", "y", position.y, _movementChangingSpeed);
-				_handleValueChanging("lightProperties", "yMinus", "y", position.y, -_movementChangingSpeed);
-				_handleValueChanging("lightProperties", "zPlus", "z", position.z, _movementChangingSpeed);
-				_handleValueChanging("lightProperties", "zMinus", "z", position.z, -_movementChangingSpeed);
-				_handleValueChanging("lightProperties", "rPlus", "r", color.r, _colorChangingSpeed, 255.0f, 0.0f, 1.0f);
-				_handleValueChanging("lightProperties", "rMinus", "r", color.r, -_colorChangingSpeed, 255.0f, 0.0f, 1.0f);
-				_handleValueChanging("lightProperties", "gPlus", "g", color.g, _colorChangingSpeed, 255.0f, 0.0f, 1.0f);
-				_handleValueChanging("lightProperties", "gMinus", "g", color.g, -_colorChangingSpeed, 255.0f, 0.0f, 1.0f);
-				_handleValueChanging("lightProperties", "bPlus", "b", color.b, _colorChangingSpeed, 255.0f, 0.0f, 1.0f);
-				_handleValueChanging("lightProperties", "bMinus", "b", color.b, -_colorChangingSpeed, 255.0f, 0.0f, 1.0f);
+				_handleValueChanging("pointLightPropertiesMenu", "distancePlus", "distance", distance, _lightingChangingSpeed, 10.0f, 0.0f);
+				_handleValueChanging("pointLightPropertiesMenu", "distanceMinus", "distance", distance, -_lightingChangingSpeed, 10.0f, 0.0f);
+				_handleValueChanging("pointLightPropertiesMenu", "intensityPlus", "intensity", intensity, _lightingChangingSpeed, 10.0f, 0.0f);
+				_handleValueChanging("pointLightPropertiesMenu", "intensityMinus", "intensity", intensity, -_lightingChangingSpeed, 10.0f, 0.0f);
+				_handleValueChanging("pointLightPropertiesMenu", "xPlus", "x", position.x, _movementChangingSpeed);
+				_handleValueChanging("pointLightPropertiesMenu", "xMinus", "x", position.x, -_movementChangingSpeed);
+				_handleValueChanging("pointLightPropertiesMenu", "yPlus", "y", position.y, _movementChangingSpeed);
+				_handleValueChanging("pointLightPropertiesMenu", "yMinus", "y", position.y, -_movementChangingSpeed);
+				_handleValueChanging("pointLightPropertiesMenu", "zPlus", "z", position.z, _movementChangingSpeed);
+				_handleValueChanging("pointLightPropertiesMenu", "zMinus", "z", position.z, -_movementChangingSpeed);
+				_handleValueChanging("pointLightPropertiesMenu", "rPlus", "r", color.r, _colorChangingSpeed, 255.0f, 0.0f, 1.0f);
+				_handleValueChanging("pointLightPropertiesMenu", "rMinus", "r", color.r, -_colorChangingSpeed, 255.0f, 0.0f, 1.0f);
+				_handleValueChanging("pointLightPropertiesMenu", "gPlus", "g", color.g, _colorChangingSpeed, 255.0f, 0.0f, 1.0f);
+				_handleValueChanging("pointLightPropertiesMenu", "gMinus", "g", color.g, -_colorChangingSpeed, 255.0f, 0.0f, 1.0f);
+				_handleValueChanging("pointLightPropertiesMenu", "bPlus", "b", color.b, _colorChangingSpeed, 255.0f, 0.0f, 1.0f);
+				_handleValueChanging("pointLightPropertiesMenu", "bMinus", "b", color.b, -_colorChangingSpeed, 255.0f, 0.0f, 1.0f);
 				
 				// Apply new values
 				_fe3d.gameEntity_setPosition(ACTIVE_BULB_ID, position);

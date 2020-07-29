@@ -119,12 +119,32 @@ float FabiEngine3D::guiEntity_getRotation(const string& ID)
 	return _core->_guiEntityManager.getEntity(ID)->getRotation();
 }
 
+float FabiEngine3D::guiEntity_getAlpha(const string& ID)
+{
+	return _core->_guiEntityManager.getEntity(ID)->getAlpha();
+}
+
 vec2 FabiEngine3D::guiEntity_getSize(const string& ID)
 {
 	return _core->_guiEntityManager.getEntity(ID)->getScaling();
 }
 
+vec2 FabiEngine3D::guiEntity_getMinPosition(const string& ID)
+{
+	return _core->_guiEntityManager.getEntity(ID)->getMinPosition();
+}
+
+vec2 FabiEngine3D::guiEntity_getMaxPosition(const string& ID)
+{
+	return _core->_guiEntityManager.getEntity(ID)->getMaxPosition();
+}
+
 bool FabiEngine3D::guiEntity_isVisible(const string& ID)
 {
 	return _core->_guiEntityManager.getEntity(ID)->isVisible();
+}
+
+bool FabiEngine3D::guiEntity_isCentered(const string& ID)
+{
+	return _core->_guiEntityManager.getEntity(ID)->isCentered();
 }

@@ -40,17 +40,17 @@ void WorldEditor::update()
 			{
 				if (screen->getButton("sky")->isHovered())
 				{
-					_leftWindow->setActiveScreen("skyMenuMain");
+					_leftWindow->setActiveScreen("skyEditorMenuMain");
 					_currentWorldPart = WorldPart::SKY;
 				}
 				else if (screen->getButton("terrain")->isHovered())
 				{
-					_leftWindow->setActiveScreen("terrainMenuMain");
+					_leftWindow->setActiveScreen("terrainEditorMenuMain");
 					_currentWorldPart = WorldPart::TERRAIN;
 				}
 				else if (screen->getButton("water")->isHovered())
 				{
-					_leftWindow->setActiveScreen("waterMenuMain");
+					_leftWindow->setActiveScreen("waterEditorMenuMain");
 					_currentWorldPart = WorldPart::WATER;
 				}
 				else if (screen->getButton("back")->isHovered())

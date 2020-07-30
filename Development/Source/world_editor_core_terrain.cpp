@@ -41,13 +41,19 @@ void WorldEditor::loadTerrainEntity()
 			blendRepeatG >>
 			blendRepeatB;
 
-		// Perform empty string conversions
-		heightMapPath = (heightMapPath == "-") ? "" : heightMapPath;
-		diffuseMapPath = (diffuseMapPath == "-") ? "" : diffuseMapPath;
-		blendMapPath = (blendMapPath == "-") ? "-" : blendMapPath;
-		blendMapPathR = (blendMapPathR == "-") ? "" : blendMapPathR;
-		blendMapPathG = (blendMapPathG == "-") ? "" : blendMapPathG;
-		blendMapPathB = (blendMapPathB == "-") ? "" : blendMapPathB;
+		// Perform empty string & space conversions
+		heightMapPath = (heightMapPath == "?") ? "" : heightMapPath;
+		diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
+		blendMapPath = (blendMapPath == "?") ? "?" : blendMapPath;
+		blendMapPathR = (blendMapPathR == "?") ? "" : blendMapPathR;
+		blendMapPathG = (blendMapPathG == "?") ? "" : blendMapPathG;
+		blendMapPathB = (blendMapPathB == "?") ? "" : blendMapPathB;
+		std::replace(heightMapPath.begin(), heightMapPath.end(), '?', ' ');
+		std::replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
+		std::replace(blendMapPath.begin(), blendMapPath.end(), '?', ' ');
+		std::replace(blendMapPathR.begin(), blendMapPathR.end(), '?', ' ');
+		std::replace(blendMapPathG.begin(), blendMapPathG.end(), '?', ' ');
+		std::replace(blendMapPathB.begin(), blendMapPathB.end(), '?', ' ');
 
 		// Close file
 		terrainFile.close();
@@ -105,13 +111,19 @@ void WorldEditor::_saveTerrainData()
 			float blendRepeatB = _fe3d.terrainEntity_getBlendRepeatB("@terrain");
 			bool isBlendMapped = _fe3d.terrainEntity_isBlendMapped("@terrain");
 
-			// Perform empty string conversions
-			heightMapPath = (heightMapPath == "") ? "-" : heightMapPath;
-			diffuseMapPath = (diffuseMapPath == "") ? "-" : diffuseMapPath;
-			blendMapPath = (blendMapPath == "") ? "-" : blendMapPath;
-			blendMapPathR = (blendMapPathR == "") ? "-" : blendMapPathR;
-			blendMapPathG = (blendMapPathG == "") ? "-" : blendMapPathG;
-			blendMapPathB = (blendMapPathB == "") ? "-" : blendMapPathB;
+			// Perform empty string & space conversions
+			heightMapPath = (heightMapPath == "") ? "?" : heightMapPath;
+			diffuseMapPath = (diffuseMapPath == "") ? "?" : diffuseMapPath;
+			blendMapPath = (blendMapPath == "") ? "?" : blendMapPath;
+			blendMapPathR = (blendMapPathR == "") ? "?" : blendMapPathR;
+			blendMapPathG = (blendMapPathG == "") ? "?" : blendMapPathG;
+			blendMapPathB = (blendMapPathB == "") ? "?" : blendMapPathB;
+			std::replace(heightMapPath.begin(), heightMapPath.end(), ' ', '?');
+			std::replace(diffuseMapPath.begin(), diffuseMapPath.end(), ' ', '?');
+			std::replace(blendMapPath.begin(), blendMapPath.end(), ' ', '?');
+			std::replace(blendMapPathR.begin(), blendMapPathR.end(), ' ', '?');
+			std::replace(blendMapPathG.begin(), blendMapPathG.end(), ' ', '?');
+			std::replace(blendMapPathB.begin(), blendMapPathB.end(), ' ', '?');
 
 			// Write terrain data to file
 			terrainFile <<

@@ -15,7 +15,7 @@ enum class Input
 	KEY_ASTERISK        = '*',
 	KEY_PLUS            = '+',
 	KEY_COMMA           = ',',
-	KEY_MINUS           = '-',
+	KEY_MINUS           = '?',
 	KEY_PERIOD          = '.',
 	KEY_SLASH           = '/',
 	KEY_0               = '0',

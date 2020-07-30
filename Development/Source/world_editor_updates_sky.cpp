@@ -107,11 +107,10 @@ void WorldEditor::_updateSkyMenuMesh()
 			if (screen->getButton("rightTexture")->isHovered())
 			{
 				string filePath = _fe3d.misc_getWinExplorerFilename("User\\Assets\\Textures\\CubeMaps\\", "PNG");
-				std::cout << "1";
+				
 				// Check if not cancelled
 				if (filePath != "")
 				{
-					std::cout << filePath;
 					_fe3d.misc_clearCubeMapCache(_fe3d.skyEntity_getDiffuseMapPaths("@sky"));
 					_fe3d.skyEntity_setDiffuseMapRight("@sky", filePath);
 				}

@@ -49,10 +49,13 @@ void WorldEditor::loadWaterEntity()
 			specularFactor >>
 			specularIntensity;
 		
-		// Perform empty string conversions
-		dudvMapPath = (dudvMapPath == "-" ? "" : dudvMapPath);
-		normalMapPath = (normalMapPath == "-" ? "" : normalMapPath);
-		displacementMapPath = (displacementMapPath == "-" ? "" : displacementMapPath);
+		// Perform empty string & space conversions
+		dudvMapPath = (dudvMapPath == "?" ? "" : dudvMapPath);
+		normalMapPath = (normalMapPath == "?" ? "" : normalMapPath);
+		displacementMapPath = (displacementMapPath == "?" ? "" : displacementMapPath);
+		std::replace(dudvMapPath.begin(), dudvMapPath.end(), '?', ' ');
+		std::replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
+		std::replace(displacementMapPath.begin(), displacementMapPath.end(), '?', ' ');
 
 		// Close file
 		waterFile.close();
@@ -119,10 +122,13 @@ void WorldEditor::_saveWaterData()
 			float specularFactor = _fe3d.waterEntity_getSpecularLightingFactor("@water");
 			float specularIntensity = _fe3d.waterEntity_getSpecularLightingIntensity("@water");
 
-			// Perform empty string conversions
-			dudvMapPath = (dudvMapPath == "" ? "-" : dudvMapPath);
-			normalMapPath = (normalMapPath == "" ? "-" : normalMapPath);
-			displacementMapPath = (displacementMapPath == "" ? "-" : displacementMapPath);
+			// Perform empty string & space conversions
+			dudvMapPath = (dudvMapPath == "" ? "?" : dudvMapPath);
+			normalMapPath = (normalMapPath == "" ? "?" : normalMapPath);
+			displacementMapPath = (displacementMapPath == "" ? "?" : displacementMapPath);
+			std::replace(dudvMapPath.begin(), dudvMapPath.end(), ' ', '?');
+			std::replace(normalMapPath.begin(), normalMapPath.end(), ' ', '?');
+			std::replace(displacementMapPath.begin(), displacementMapPath.end(), ' ', '?');
 
 			// Write data to file
 			waterFile <<

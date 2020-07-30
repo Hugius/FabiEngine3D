@@ -32,9 +32,9 @@ void SceneEditor::_updateManagementScreen()
 {
 	if (_isLoaded)
 	{
-		if (_leftWindow->getActiveScreen()->getID() == "sceneEditorMenu")
+		if (_leftWindow->getActiveScreen()->getID() == "sceneEditorMenuMain")
 		{
-			auto screen = _leftWindow->getScreen("sceneEditorMenu");
+			auto screen = _leftWindow->getScreen("sceneEditorMenuMain");
 
 			// GUI management
 			if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
@@ -43,9 +43,9 @@ void SceneEditor::_updateManagementScreen()
 				{
 					_leftWindow->setActiveScreen("sceneEditorMenuModel");
 				}
-				else if (screen->getButton("billboardPlaceManagement")->isHovered()) // Billboard button
+				else if (screen->getButton("sceneEditorMenuBillboard")->isHovered()) // Billboard button
 				{
-					_leftWindow->setActiveScreen("billboardPlaceManagement");
+					_leftWindow->setActiveScreen("sceneEditorMenuBillboard");
 				}
 				else if (screen->getButton("sceneEditorMenuLighting")->isHovered()) // Light button
 				{

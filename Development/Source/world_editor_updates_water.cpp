@@ -341,7 +341,6 @@ void WorldEditor::_updateWaterMenuOptions()
 		if (_gui->getGlobalScreen()->checkValueForm("colorR", color.r))
 		{
 			color.r = std::clamp(color.r / 255.0f, 0.0f, 1.0f);
-			std::cout << color.r << std::endl;
 			_fe3d.waterEntity_setColor("@water", color);
 		}
 

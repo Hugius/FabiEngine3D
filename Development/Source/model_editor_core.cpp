@@ -117,7 +117,7 @@ void ModelEditor::loadModels()
 		while (std::getline(file, line))
 		{
 			// Placeholder variables
-			string modelName, objName, diffuseName, lightName, reflectionName;
+			string modelName, objPath, diffuseMapPath, lightMapPath, reflectionMapPath;
 			float uvRepeat, specularFactor;
 			bool faceCulled, shadowed, transparent, specular;
 			vec3 modelSize, color, boxSize;
@@ -128,10 +128,10 @@ void ModelEditor::loadModels()
 			// Extract from file
 			iss >> 
 				modelName >>
-				objName >>
-				diffuseName >>
-				lightName >>
-				reflectionName >>
+				objPath >>
+				diffuseMapPath >>
+				lightMapPath >>
+				reflectionMapPath >>
 				modelSize.x >>
 				modelSize.y >>
 				modelSize.z >>
@@ -148,14 +148,18 @@ void ModelEditor::loadModels()
 				boxSize.y >> 
 				boxSize.z;
 
-			// Perform empty string conversions
-			objName = (objName == "-") ? "" : objName;
-			diffuseName = (diffuseName == "-") ? "" : diffuseName;
-			lightName = (lightName == "-") ? "" : lightName;
-			reflectionName = (reflectionName == "-") ? "" : reflectionName;
+			// Perform empty string & space conversions
+			objPath = (objPath == "?") ? "" : objPath;
+			diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
+			lightMapPath = (lightMapPath == "?") ? "" : lightMapPath;
+			reflectionMapPath = (reflectionMapPath == "?") ? "" : reflectionMapPath;
+			std::replace(objPath.begin(), objPath.end(), '?', ' ');
+			std::replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
+			std::replace(lightMapPath.begin(), lightMapPath.end(), '?', ' ');
+			std::replace(reflectionMapPath.begin(), reflectionMapPath.end(), '?', ' ');
 
 			// Add new model
-			_addModel(modelName, objName, diffuseName, lightName, reflectionName, modelSize, faceCulled, shadowed, transparent,
+			_addModel(modelName, objPath, diffuseMapPath, lightMapPath, reflectionMapPath, modelSize, faceCulled, shadowed, transparent,
 				specular, specularFactor, vec3(color.r, color.g, color.b), uvRepeat, vec3(boxSize.x, boxSize.y, boxSize.z));
 		}
 
@@ -201,10 +205,15 @@ void ModelEditor::save()
 				auto uvRepeat = _fe3d.gameEntity_getUvRepeat(modelName);
 				auto boxSize = _fe3d.aabbEntity_getSize(modelName);
 
-				// Perform empty string conversions
-				diffuseMapPath = (diffuseMapPath == "") ? "-" : diffuseMapPath;
-				lightMapPath = (lightMapPath == "") ? "-" : lightMapPath;
-				reflectionMapPath = (reflectionMapPath == "") ? "-" : reflectionMapPath;
+				// Perform empty string & space conversions
+				objPath = (objPath == "") ? "?" : objPath;
+				diffuseMapPath = (diffuseMapPath == "") ? "?" : diffuseMapPath;
+				lightMapPath = (lightMapPath == "") ? "?" : lightMapPath;
+				reflectionMapPath = (reflectionMapPath == "") ? "?" : reflectionMapPath;
+				std::replace(objPath.begin(), objPath.end(), ' ', '?');
+				std::replace(diffuseMapPath.begin(), diffuseMapPath.end(), ' ', '?');
+				std::replace(lightMapPath.begin(), lightMapPath.end(), ' ', '?');
+				std::replace(reflectionMapPath.begin(), reflectionMapPath.end(), ' ', '?');
 
 				// 1 model -> 1 line in file
 				file << 
@@ -231,7 +240,7 @@ void ModelEditor::save()
 			}
 			else
 			{
-				file << modelName << " - - - - 0.0 0.0 0.0 0 0 0 0 0.0 0.0 0.0 0.0 0 0.0 0.0 0.0\n";
+				file << modelName << " ? ? ? ? 0.0 0.0 0.0 0 0 0 0 0.0 0.0 0.0 0.0 0 0.0 0.0 0.0\n";
 			}
 		}
 

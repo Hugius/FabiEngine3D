@@ -1,6 +1,7 @@
 #include "billboard_editor.hpp"
 #include "left_viewport_controller.hpp"
 
+#include <algorithm>
 #include <fstream>
 #include <sstream>
 
@@ -100,7 +101,7 @@ void BillboardEditor::load()
 	while (std::getline(file, line))
 	{
 		// Placeholder variables
-		string name, diffusePath, fontPath, content;
+		string name, diffusePath, fontPath, textContent;
 		vec2 size;
 		vec3 color;
 		bool facingX, facingY, transparent, playing;
@@ -122,16 +123,19 @@ void BillboardEditor::load()
 			diffusePath >>
 			transparent >>
 			fontPath >>
-			content >> 
+			textContent >> 
 			playing >>
 			rows >> 
 			columns >> 
 			framestep;
 		
-		// Perform empty string conversions
-		diffusePath = (diffusePath == "-") ? "" : diffusePath;
-		fontPath = (fontPath == "-") ? "" : fontPath;
-		content = (content == "-") ? "" : content;
+		// Perform empty string & space conversions
+		diffusePath = (diffusePath == "?") ? "" : diffusePath;
+		fontPath = (fontPath == "?") ? "" : fontPath;
+		textContent = (textContent == "?") ? "" : textContent;
+		std::replace(diffusePath.begin(), diffusePath.end(), '?', ' ');
+		std::replace(fontPath.begin(), fontPath.end(), '?', ' ');
+		std::replace(textContent.begin(), textContent.end(), '?', ' ');
 
 		// Add billboard name
 		_billboardNames.push_back(name);
@@ -151,9 +155,9 @@ void BillboardEditor::load()
 				_fe3d.billBoardEntity_playSpriteAnimation(name, -1);
 			}
 		}
-		else if (content != "")
+		else if (textContent != "")
 		{
-			_fe3d.billBoardEntity_add(name, content, fontPath, color, _billboardPosition, vec3(0.0f), size, facingX, facingY, false);
+			_fe3d.billBoardEntity_add(name, textContent, fontPath, color, _billboardPosition, vec3(0.0f), size, facingX, facingY, false);
 		}
 		else
 		{
@@ -185,13 +189,16 @@ void BillboardEditor::save()
 		// Write billboard data into file
 		for (auto& billboardName : _billboardNames)
 		{
-			// Perform empty string conversions
+			// Perform empty string & space conversions
 			string diffusePath = _fe3d.billboardEntity_getDiffuseMapPath(billboardName);
 			string fontPath = _fe3d.billboardEntity_getFontPath(billboardName);
 			string textContent = _fe3d.billboardEntity_getTextContent(billboardName);
-			diffusePath = (diffusePath == "") ? "-" : diffusePath;
-			fontPath = (fontPath == "") ? "-" : fontPath;
-			textContent = (textContent == "") ? "-" : textContent;
+			diffusePath = (diffusePath == "") ? "?" : diffusePath;
+			fontPath = (fontPath == "") ? "?" : fontPath;
+			textContent = (textContent == "") ? "?" : textContent;
+			std::replace(diffusePath.begin(), diffusePath.end(), '?', ' ');
+			std::replace(fontPath.begin(), fontPath.end(), '?', ' ');
+			std::replace(textContent.begin(), textContent.end(), '?', ' ');
 
 			// Export data
 			file << billboardName << " " <<

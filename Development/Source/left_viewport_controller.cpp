@@ -55,7 +55,7 @@ void LeftViewportController::update()
 		else if (screen->getButton("sceneEditor")->isHovered()) // Scene editor button
 		{
 			_sceneEditor.load();
-			window->setActiveScreen("sceneEditorMenu");
+			window->setActiveScreen("sceneEditorMenuMain");
 		}
 	}
 

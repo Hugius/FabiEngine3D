@@ -38,10 +38,11 @@ void WorldEditor::loadSkyEntity()
 			color.g >> 
 			color.b;
 
-		// Perform empty string conversions
+		// Perform empty string & space conversions
 		for (auto& diffuseMapPath : diffuseMapPaths)
 		{
-			diffuseMapPath = (diffuseMapPath == "-") ? "" : diffuseMapPath;
+			diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
+			std::replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
 		}
 
 		// Close file
@@ -83,10 +84,11 @@ void WorldEditor::_saveSkyData()
 			float lightness = _fe3d.skyEntity_getLightness("@sky");
 			vec3 color = _fe3d.skyEntity_getColor("@sky");
 
-			// Perform empty string conversions
+			// Perform empty string & space conversions
 			for (auto& diffuseMapPath : diffuseMapPaths)
 			{
-				diffuseMapPath = (diffuseMapPath == "") ? "-" : diffuseMapPath;
+				diffuseMapPath = (diffuseMapPath == "") ? "?" : diffuseMapPath;
+				std::replace(diffuseMapPath.begin(), diffuseMapPath.end(), ' ', '?');
 			}
 
 			// Write paths to file

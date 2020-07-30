@@ -21,12 +21,13 @@ void SceneEditor::initializeGUI()
 	_rightWindow = _gui->getViewport("right")->getWindow("main");
 
 	// Left-viewport: mainWindow - placeMenuManagement
-	_leftWindow->addScreen("sceneEditorMenu");
-	_leftWindow->getScreen("sceneEditorMenu")->addButton("sceneEditorMenuModel", vec2(0.0f, 0.7f), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Models", LeftViewportController::textColor, LeftViewportController::textHoverColor);
-	_leftWindow->getScreen("sceneEditorMenu")->addButton("billboardPlaceManagement", vec2(0.0f, 0.35f), vec2(1.7f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Billboards", LeftViewportController::textColor, LeftViewportController::textHoverColor);
-	_leftWindow->getScreen("sceneEditorMenu")->addButton("sceneEditorMenuLighting", vec2(0.0f, 0.0f), vec2(1.5f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Lighting", LeftViewportController::textColor, LeftViewportController::textHoverColor);
-	_leftWindow->getScreen("sceneEditorMenu")->addButton("setSpeed", vec2(0.0f, -0.35f), vec2(1.5f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Set speed", LeftViewportController::textColor, LeftViewportController::textHoverColor);
-	_leftWindow->getScreen("sceneEditorMenu")->addButton("back", vec2(0.0f, -0.7f), vec2(1.0f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	_leftWindow->addScreen("sceneEditorMenuMain");
+	_leftWindow->getScreen("sceneEditorMenuMain")->addButton("sceneEditorMenuModel", vec2(0.0f, 0.75f), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Models", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	_leftWindow->getScreen("sceneEditorMenuMain")->addButton("sceneEditorMenuBillboard", vec2(0.0f, 0.45f), vec2(1.7f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Billboards", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	_leftWindow->getScreen("sceneEditorMenuMain")->addButton("sceneEditorMenuLighting", vec2(0.0f, 0.15f), vec2(1.5f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Lighting", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	_leftWindow->getScreen("sceneEditorMenuMain")->addButton("sceneEditorAudio", vec2(0.0f, -0.15f), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Audio", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	_leftWindow->getScreen("sceneEditorMenuMain")->addButton("sceneEditorSettings", vec2(0.0f, -0.45f), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Settings", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	_leftWindow->getScreen("sceneEditorMenuMain")->addButton("back", vec2(0.0f, -0.75f), vec2(1.0f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
 	
 	// Left-viewport: mainWindow - modelPlaceManagement
 	_leftWindow->addScreen("sceneEditorMenuModel");
@@ -45,8 +46,8 @@ void SceneEditor::initializeGUI()
 	_leftWindow->getScreen("sceneEditorMenuModelChoice")->addButton("back", vec2(0.0f, -0.9f), vec2(1.0f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
 
 	// Left-viewport: mainWindow - billboardPlaceManagement
-	_leftWindow->addScreen("billboardPlaceManagement");
-	_leftWindow->getScreen("billboardPlaceManagement")->addButton("back", vec2(0.0f, -0.63f), vec2(1.0f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	_leftWindow->addScreen("sceneEditorMenuBillboard");
+	_leftWindow->getScreen("sceneEditorMenuBillboard")->addButton("back", vec2(0.0f, -0.63f), vec2(1.0f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
 
 	// Left-viewport: mainWindow - lightingManagement
 	_leftWindow->addScreen("sceneEditorMenuLighting");
@@ -258,11 +259,15 @@ void SceneEditor::loadWorld()
 					isFaceculled >> isShadowed >> isTransparent >> isSpecular >> isFrozen >> specularFactor >> 
 					color.r >> color.g >> color.b >> uvRepeat >> aabbSize.x >> aabbSize.y >> aabbSize.z;
 
-				// Run checks on string values
-				objPath = (objPath == "-") ? "" : objPath;
-				diffuseMapPath = (diffuseMapPath == "-") ? "" : diffuseMapPath;
-				lightMapPath = (lightMapPath == "-") ? "" : lightMapPath;
-				reflectionMapPath = (reflectionMapPath == "-") ? "" : reflectionMapPath;
+				// Perform empty string & space conversions
+				objPath = (objPath == "?") ? "" : objPath;
+				diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
+				lightMapPath = (lightMapPath == "?") ? "" : lightMapPath;
+				reflectionMapPath = (reflectionMapPath == "?") ? "" : reflectionMapPath;
+				std::replace(objPath.begin(), objPath.end(), '?', ' ');
+				std::replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
+				std::replace(lightMapPath.begin(), lightMapPath.end(), '?', ' ');
+				std::replace(reflectionMapPath.begin(), reflectionMapPath.end(), '?', ' ');
 
 				// Extract the model name from the model ID
 				string modelName = "";
@@ -359,10 +364,14 @@ void SceneEditor::save()
 				auto uvRepeat = _fe3d.gameEntity_getUvRepeat(entityID);
 				auto aabbSize = _fe3d.aabbEntity_getSize(entityID);
 
-				// Perform empty string conversions
-				diffuseMapPath = (diffuseMapPath == "") ? "-" : diffuseMapPath;
-				lightMapPath = (lightMapPath == "") ? "-" : lightMapPath;
-				reflectionMapPath = (reflectionMapPath == "") ? "-" : reflectionMapPath;
+				// Perform empty string & space conversions
+				diffuseMapPath = (diffuseMapPath == "") ? "?" : diffuseMapPath;
+				lightMapPath = (lightMapPath == "") ? "?" : lightMapPath;
+				reflectionMapPath = (reflectionMapPath == "") ? "?" : reflectionMapPath;
+				std::replace(objPath.begin(), objPath.end(), ' ', '?');
+				std::replace(diffuseMapPath.begin(), diffuseMapPath.end(), ' ', '?');
+				std::replace(lightMapPath.begin(), lightMapPath.end(), ' ', '?');
+				std::replace(reflectionMapPath.begin(), reflectionMapPath.end(), ' ', '?');
 
 				// 1 model -> 1 line in file
 				file << 

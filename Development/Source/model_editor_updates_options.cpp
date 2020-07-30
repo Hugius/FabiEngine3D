@@ -32,7 +32,6 @@ void ModelEditor::_updateModelEditingOptions()
 		}
 		else if (screen->getButton("setColor")->isHovered())
 		{
-			std::cout << _fe3d.gameEntity_getColor(_currentModelName).g << std::endl;
 			_gui->getGlobalScreen()->addValueForm("colorG", "G(0-255)", _fe3d.gameEntity_getColor(_currentModelName).g * 255.0f, vec2(0.0f, 0.0f), vec2(0.2f, 0.1f));
 			_gui->getGlobalScreen()->addValueForm("colorR", "R(0-255)", _fe3d.gameEntity_getColor(_currentModelName).r * 255.0f, vec2(-0.25f, 0.0f), vec2(0.2f, 0.1f));
 			_gui->getGlobalScreen()->addValueForm("colorB", "B(0-255)", _fe3d.gameEntity_getColor(_currentModelName).b * 255.0f, vec2(0.25f, 0.0f), vec2(0.2f, 0.1f));

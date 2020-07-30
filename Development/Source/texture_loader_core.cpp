@@ -192,12 +192,20 @@ GLuint TextureLoader::_loadCubeMap(const array<string, 6>& filePaths)
 				Logger::getInst().throwError("Skybox texture width must be same as height: " + filePaths[i]);
 			}
 
+			// Check if resolution dimensions are the same as all others
+			if (textureSize != -1)
+			{
+				if (textureSize != surface->w)
+				{
+					Logger::getInst().throwError("All skybox textures must have the same resolution: " + filePaths[i]);
+				}
+			}
+
 			// Set image size
 			textureSize = surface->w;
 
 			// Memory management
 			SDL_FreeSurface(surface);
-			break;
 		}
 	}
 

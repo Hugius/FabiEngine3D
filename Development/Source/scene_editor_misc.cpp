@@ -197,7 +197,7 @@ void SceneEditor::_handleValueChanging(const string& screenID, string buttonID, 
 		if (writefield->getTextContent() != "")
 		{
 			// Cannot be empty
-			if (writefield->getTextContent() == "-")
+			if (writefield->getTextContent() == "?")
 			{
 				writefield->setTextContent(std::to_string(value));
 			}

@@ -137,8 +137,6 @@ void WorldEditor::load()
 	// Enable graphics
 	_fe3d.gfx_enableAmbientLighting(vec3(1.0f), 0.75f);
 	_fe3d.gfx_enableDirectionalLighting(vec3(1000.0f), vec3(1.0f), 0.75f);
-	_fe3d.gfx_enableMSAA();
-	_fe3d.gfx_enableWaterEffects();
 
 	// Other
 	_isLoaded = true;
@@ -161,8 +159,6 @@ void WorldEditor::unload()
 	// Disable graphics
 	_fe3d.gfx_disableAmbientLighting();
 	_fe3d.gfx_disableDirectionalLighting();
-	_fe3d.gfx_disableMSAA();
-	_fe3d.gfx_disableWaterEffects();
 
 	// Delete sky entity
 	if (_fe3d.skyEntity_isExisting("@sky"))

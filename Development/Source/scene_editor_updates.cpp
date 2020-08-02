@@ -3,32 +3,35 @@
 void SceneEditor::update()
 {
 	// Model updates
-	_updateModelScreen();
-	_updateModelPlacingScreen();
-	_updateModelChoosingScreen();
+	_updateMainModelMenu();
+	_updateModelPlacingMenu();
+	_updateModelChoosingMenu();
 	_updateModelPlacing();
 	_updateModelEditing();
 
 	// Billboard updates
-	_updateBillboardScreen();
-	_updateBilboardPlacing();
-	_updateBillboardEditing();
+	_updateMainBillboardMenu();
+	_updateBilboardPlacingMenu();
+	_updateBillboardEditingMenu();
 
-	// Light updates
-	_updateLightScreen();
-	_updateAmbientLightScreen();
-	_updateDirectionalLightScreen();
-	_updatePointLightScreen();
+	// Lighting updates
+	_updateMainLightingMenu();
+	_updateAmbientLightingMenu();
+	_updateDirectionalLightingMenu();
+	_updatePointLightingMenu();
 	_updateLightPlacing();
 	_updateLightEditing();
 
+	// Settings updates
+	_updateMainSettingsMenu();
+
 	// Miscellaneous
-	_updateManagementScreen();
+	_updateMainMenu();
 	_updateCamera();
 	_updateMiscellaneous();
 }
 
-void SceneEditor::_updateManagementScreen()
+void SceneEditor::_updateMainMenu()
 {
 	if (_isLoaded)
 	{
@@ -47,22 +50,19 @@ void SceneEditor::_updateManagementScreen()
 				{
 					_leftWindow->setActiveScreen("sceneEditorMenuBillboard");
 				}
-				else if (screen->getButton("sceneEditorMenuLighting")->isHovered()) // Light button
+				else if (screen->getButton("sceneEditorMenuLighting")->isHovered()) // Lighting button
 				{
 					_leftWindow->setActiveScreen("sceneEditorMenuLighting");
 				}
-				else if (screen->getButton("setSpeed")->isHovered()) // Set speed button
+				else if (screen->getButton("sceneEditorMenuSettings")->isHovered()) // Settings button
 				{
-					_gui->getGlobalScreen()->addValueForm("setSpeed", "Camera speed", _customCameraSpeed, vec2(0.0f), vec2(0.3f, 0.1f));
+					_leftWindow->setActiveScreen("sceneEditorMenuSettings");
 				}
 				else if (screen->getButton("back")->isHovered()) // Back button
 				{
 					_gui->getGlobalScreen()->addAnswerForm("exitSceneEditor", "Save changes?", vec2(0.0f, 0.25f));
 				}
 			}
-
-			// Setting camera speed
-			_gui->getGlobalScreen()->checkValueForm("setSpeed", _customCameraSpeed, {});
 
 			// Check if user wants to save changes
 			if (_gui->getGlobalScreen()->isAnswerFormConfirmed("exitSceneEditor"))

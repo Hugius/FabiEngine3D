@@ -42,7 +42,7 @@ void FabiEngine3D::gfx_enableSkyReflections(float factor)
 void FabiEngine3D::gfx_enableSceneReflections(float height, float factor)
 {
 	// Check if water is already using reflection graphics
-	if (_core->_shaderBus.isWaterEffectsEnabled())
+	if (_core->_shaderBus.isWaterEffectsEnabled() && _core->_waterEntityManager.getSelectedWater() != nullptr)
 	{
 		Logger::getInst().throwWarning("Cannot enable screen reflection graphics; \"water effects\" is currently using it!");
 	}
@@ -84,9 +84,13 @@ void FabiEngine3D::gfx_enableWaterEffects()
 	_core->_shaderBus.setWaterEffectsEnabled(true);
 }
 
-void FabiEngine3D::gfx_enableSkyHDR()
+void FabiEngine3D::gfx_enableSkyHDR(float brightnessFactor)
 {
-	_core->_shaderBus.setSkyHdrEnabled(true);
+	if (_core->_shaderBus.isBloomEnabled())
+	{
+		_core->_shaderBus.setSkyHdrEnabled(true);
+		_core->_skyEntityManager.saveHDRState(brightnessFactor);
+	}
 }
 
 void FabiEngine3D::gfx_enableDOF(float minDistance)
@@ -173,4 +177,29 @@ void FabiEngine3D::gfx_disableDOF()
 void FabiEngine3D::gfx_disableMotionBlur()
 {
 	_core->_shaderBus.setMotionBlurEnabled(false);
+}
+
+vec3 FabiEngine3D::gfx_getAmbientLightingColor()
+{
+	return _core->_shaderBus.getAmbientLightingColor();
+}
+
+float FabiEngine3D::gfx_getAmbientLightingIntensity()
+{
+	return _core->_shaderBus.getAmbientLightingIntensity();
+}
+
+vec3 FabiEngine3D::gfx_getDirectionalLightingPosition()
+{
+	return _core->_shaderBus.getDirectionalLightingPosition();
+}
+
+vec3 FabiEngine3D::gfx_getDirectionalLightingColor()
+{
+	return _core->_shaderBus.getDirectionalLightingColor();
+}
+
+float FabiEngine3D::gfx_geDirectionalLightingIntensity()
+{
+	return _core->_shaderBus.getDirectionalLightingIntensity();
 }

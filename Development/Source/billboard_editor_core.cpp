@@ -69,10 +69,9 @@ void BillboardEditor::load()
 	_fe3d.camera_setYaw(-90.0f);
 	_fe3d.camera_enableLookat(_billboardPosition);
 
-	// Graphics
+	// Enable graphics
 	_fe3d.gfx_enableAmbientLighting(vec3(1.0f), 0.75f);
 	_fe3d.gfx_enableDirectionalLighting(vec3(1000.0f), vec3(1.0f), 0.75f);
-	_fe3d.gfx_enableMSAA();
 	_fe3d.gfx_enableShadows(vec3(25.0f), vec3(0.0f), 50.0f, 50.0f);
 	
 	// 3D Environment
@@ -229,10 +228,9 @@ void BillboardEditor::save()
 
 void BillboardEditor::unload()
 {
-	// Graphics
+	// Disable graphics
 	_fe3d.gfx_disableAmbientLighting();
 	_fe3d.gfx_disableDirectionalLighting();
-	_fe3d.gfx_disableMSAA();
 	_fe3d.gfx_disableShadows();
 
 	// 3D environment
@@ -241,7 +239,6 @@ void BillboardEditor::unload()
 
 	// Delete billboards
 	_fe3d.billboardEntity_deleteAll();
-	_billboardNames.clear();
 
 	// Delete billboard name textfield
 	_gui->getGlobalScreen()->deleteTextfield("selectedBillboardName");
@@ -262,4 +259,5 @@ void BillboardEditor::unload()
 	_totalCameraRotation = 0.0f;
 	_hoveredBillboardID = "";
 	_currentBillboardID = "";
+	_billboardNames.clear();
 }

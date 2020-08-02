@@ -1,6 +1,6 @@
 #include "scene_editor.hpp"
 
-void SceneEditor::_updateModelScreen()
+void SceneEditor::_updateMainModelMenu()
 {
 	if (_isLoaded)
 	{
@@ -39,7 +39,7 @@ void SceneEditor::_updateModelScreen()
 	}
 }
 
-void SceneEditor::_updateModelPlacingScreen()
+void SceneEditor::_updateModelPlacingMenu()
 {
 	if (_isLoaded)
 	{
@@ -85,7 +85,7 @@ void SceneEditor::_updateModelPlacingScreen()
 	}
 }
 
-void SceneEditor::_updateModelChoosingScreen()
+void SceneEditor::_updateModelChoosingMenu()
 {
 	if (_isLoaded)
 	{

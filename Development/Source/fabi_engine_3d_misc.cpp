@@ -225,13 +225,6 @@ const string& FabiEngine3D::misc_getRootDirectory()
 	return rootDir;
 }
 
-ivec2 FabiEngine3D::misc_getMousePos()
-{
-	ivec2 mousePos = _core->_windowManager.getMousePos();
-
-	return ivec2(mousePos.x, misc_getWindowHeight() - mousePos.y);
-}
-
 vec2 FabiEngine3D::misc_convertToNDC(vec2 pos)
 {
 	pos.x = (pos.x * 2.0f) - 1.0f;
@@ -264,6 +257,18 @@ vec2 FabiEngine3D::misc_convertFromScreenCoords(ivec2 pos)
 	float y = float(pos.y) / float(misc_getWindowHeight());
 
 	return vec2(x, y);
+}
+
+ivec2 FabiEngine3D::misc_getMousePos()
+{
+	ivec2 mousePos = _core->_windowManager.getMousePos();
+
+	return ivec2(mousePos.x, misc_getWindowHeight() - mousePos.y);
+}
+
+ivec2 FabiEngine3D::misc_getWindowSize()
+{
+	return Config::getInst().getWindowSize();
 }
 
 ivec2 FabiEngine3D::misc_getViewportPosition()

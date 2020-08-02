@@ -252,7 +252,7 @@ public:
 	vector<string> gameEntity_getAllIDs();
 	vector<string> gameEntity_getGroupIDs(const string& ID);
 
-	// Billboard entity interface (core)
+	// Billboard entity interface (core) - setters
 	void billBoardEntity_add
 	(
 		const string& ID, vec3 color,
@@ -264,7 +264,6 @@ public:
 	void billboardEntity_showAll();
 	void billboardEntity_hide(const string& ID);
 	void billboardEntity_show(const string& ID);
-	bool billboardEntity_isExisting(const string& ID);
 	void billboardEntity_move(const string& ID, vec3 factor);
 	void billboardEntity_rotate(const string& ID, vec3 factor);
 	void billboardEntity_scale(const string& ID, vec3 factor);
@@ -272,18 +271,21 @@ public:
 	void billboardEntity_setRotation(const string& ID, vec3 rotation);
 	void billboardEntity_setSize(const string& ID, vec2 size);
 	void billboardEntity_setColor(const string& ID, vec3 color);
+	void billboardEntity_setCameraFacingX(const string& ID, bool enabled);
+	void billboardEntity_setCameraFacingY(const string& ID, bool enabled);
+
+	// Billboard entity interface (core) - getters
+	bool billboardEntity_isExisting(const string& ID);
+	bool billboardEntity_isVisible(const string& ID);
+	bool billboardEntity_isFacingCameraX(const string& ID);
+	bool billboardEntity_isFacingCameraY(const string& ID);
 	vec3 billboardEntity_getPosition(const string& ID);
 	vec3 billboardEntity_getRotation(const string& ID);
 	vec2 billboardEntity_getSize(const string& ID);
 	vec3 billboardEntity_getColor(const string& ID);
-	void billboardEntity_enable(const string& ID);
-	void billboardEntity_disable(const string& ID);
-	void billboardEntity_setCameraFacingX(const string& ID, bool enabled);
-	void billboardEntity_setCameraFacingY(const string& ID, bool enabled);
-	bool billboardEntity_isFacingCameraX(const string& ID);
-	bool billboardEntity_isFacingCameraY(const string& ID);
+	vector<string> billboardEntity_getAllIDs();
 
-	// Billboard entity interface (diffuseMap)
+	// Billboard entity interface (diffuseMap) - setters
 	void billBoardEntity_add
 	(
 		const string& ID, const string& diffuseMapPath,
@@ -293,10 +295,13 @@ public:
 	void billboardEntity_setDiffuseMap(const string& ID, const string& texturePath, bool textureFiltering);
 	void billboardEntity_setTransparent(const string& ID, bool enabled);
 	void billboardEntity_setUvRepeat(const string& ID, float repeat);
+
+	// Billboard entity interface (diffuseMap) - getters
 	const string& billboardEntity_getDiffuseMapPath(const string& ID);
 	bool billboardEntity_isTransparent(const string& ID);
+	float billboardEntity_getUvRepeat(const string& ID);
 
-	// Billboard entity interface (text)
+	// Billboard entity interface (text) - setters
 	void billBoardEntity_add
 	(
 		const string& ID, const string& text,
@@ -305,15 +310,19 @@ public:
 	);
 	void billBoardEntity_setFont(const string& ID, const string& fontPath);
 	void billBoardEntity_setTextContent(const string& ID, const string& textContent);
+
+	// Billboard entity interface (text) - getters
 	const string& billboardEntity_getFontPath(const string& ID);
 	const string& billboardEntity_getTextContent(const string& ID);
 	
-	// Billboard entity interface (animation)
+	// Billboard entity interface (animation) - setters
 	void billBoardEntity_playSpriteAnimation(const string& ID, int maxAnimationRepeats);
 	void billboardEntity_stopSpriteAnimation(const string& ID);
 	void billboardEntity_setAnimationRows(const string& ID, int rows);
 	void billboardEntity_setAnimationColumns(const string& ID, int columns);
 	void billboardEntity_setAnimationFramestep(const string& ID, int framestep);
+
+	// Billboard entity interface (animation) - getters
 	bool billboardEntity_isAnimationFinished(const string& ID);
 	bool billboardEntity_isAnimationPlaying(const string& ID);
 	int billboardEntity_getAnimationRows(const string& ID);
@@ -338,6 +347,7 @@ public:
 	vec3 aabbEntity_getSize(const string& ID);
 	bool aabbEntity_isResponsive(const string& ID);
 	bool aabbEntity_isExisting(const string& ID);
+	vector<string> aabbEntity_getAllIDs();
 
 	// Global collision interface - setters
 	void collision_enableCameraResponse();
@@ -360,18 +370,19 @@ public:
 	ivec3 collision_checkEntityGroupCameraDir(const string& ID);
 
 	// Light entity interface - setters
-	void lightEntity_add(const string& ID, vec3 position, vec3 color, float intensity, float distanceFactor, bool visible = true);
+	void lightEntity_add(const string& ID, vec3 position = vec3(0.0f), vec3 color = vec3(1.0f), float intensity = 1.0f, float distanceFactor = 1.0f, bool visible = true);
 	void lightEntity_deleteAll();
 	void lightEntity_delete(const string& ID);
 	void lightEntity_hide(const string& ID);
 	void lightEntity_show(const string& ID);
-	bool lightEntity_isExisting(const string& ID);
 	void lightEntity_setPosition(const string& ID, vec3 position);
 	void lightEntity_setColor(const string& ID, vec3 color);
 	void lightEntity_setIntensity(const string& ID, float intensity);
 	void lightEntity_setDistanceFactor(const string& ID, float factor);
 
 	// Light entity interface - getters
+	bool lightEntity_isExisting(const string& ID);
+	bool lightEntity_isVisible(const string& ID);
 	vec3 lightEntity_getPosition(const string& ID);
 	vec3 lightEntity_getColor(const string& ID);
 	float lightEntity_getIntensity(const string& ID);
@@ -409,6 +420,7 @@ public:
 	vec2 guiEntity_getMaxPosition(const string& ID);
 	float guiEntity_getRotation(const string& ID);
 	float guiEntity_getAlpha(const string& ID);
+	vector<string> guiEntity_getAllIDs();
 
 	// Text interface - setters
 	void textEntity_add
@@ -444,8 +456,9 @@ public:
 	float textEntity_getRotation(const string& ID);
 	float textEntity_getAlpha(const string& ID);
 	const string& textEntity_getTextContent(const string& ID);
+	vector<string> textEntity_getAllIDs();
 
-	// Graphics interface
+	// Graphics interface - setters
 	void gfx_enableAmbientLighting(vec3 color, float intensity);
 	void gfx_enableDirectionalLighting(vec3 position, vec3 color, float intensity);
 	void gfx_enableSpecularLighting(float intensity);
@@ -458,7 +471,7 @@ public:
 	void gfx_enableShadows(vec3 eye, vec3 center, float size, float reach);
 	void gfx_enableBloom(float intensity, float brightnessTreshold, int blurSize);
 	void gfx_enableWaterEffects();
-	void gfx_enableSkyHDR();
+	void gfx_enableSkyHDR(float brightnessFactor);
 	void gfx_enableDOF(float minDistance);
 	void gfx_enableMotionBlur();
 	void gfx_disableAmbientLighting();
@@ -476,6 +489,13 @@ public:
 	void gfx_disableSkyHDR();
 	void gfx_disableDOF();
 	void gfx_disableMotionBlur();
+
+	// Graphics interface - getters
+	float gfx_getAmbientLightingIntensity();
+	float gfx_geDirectionalLightingIntensity();
+	vec3 gfx_getDirectionalLightingPosition();
+	vec3 gfx_getAmbientLightingColor();
+	vec3 gfx_getDirectionalLightingColor();
 
 	// Input interface
 	void input_setLocked(bool locked);
@@ -570,11 +590,12 @@ public:
 	const string& misc_vec2str(vec3 vec);
 	const string& misc_vec2str(vec4 vec);
 	const string& misc_getRootDirectory();
-	ivec2 misc_getMousePos();
 	vec2 misc_convertToNDC(vec2 pos);
 	vec2 misc_convertFromNDC(vec2 pos);
 	ivec2 misc_convertToScreenCoords(vec2 pos);
 	vec2 misc_convertFromScreenCoords(ivec2 pos);
+	ivec2 misc_getMousePos();
+	ivec2 misc_getWindowSize();
 	ivec2 misc_getViewportPosition();
 	ivec2 misc_getViewportSize();
 	bool misc_isMouseInsideViewport();

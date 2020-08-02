@@ -68,15 +68,10 @@ void ModelEditor::load()
 	_fe3d.camera_setPosition(_defaultCameraPosition);
 	_fe3d.camera_enableLookat(vec3(0.0f));
 
-	// Graphics
+	// Enable graphics
 	_fe3d.gfx_enableAmbientLighting(vec3(1.0f), 0.75f);
 	_fe3d.gfx_enableDirectionalLighting(vec3(1000.0f), vec3(1.0f), 0.5f);
-	_fe3d.gfx_enableLightMapping();
-	_fe3d.gfx_enableSkyReflections(0.25f);
-	_fe3d.gfx_enableMSAA();
-	_fe3d.gfx_enableSceneReflections(0.0f, 0.25f);
 	_fe3d.gfx_enableShadows(vec3(50.0f, 50.0f, 0.0f), vec3(0.0f), 100.0f, 150.0);
-	_fe3d.gfx_enableSpecularLighting(3.0f);
 	
 	// 3D Environment
 	_fe3d.gameEntity_add("@@grid", "Engine\\OBJs\\plane.obj", vec3(0.0f), vec3(0.0f), vec3(100.0f, 1.0f, 100.0f));
@@ -254,15 +249,10 @@ void ModelEditor::save()
 
 void ModelEditor::unload()
 {
-	// Graphics
+	// Disable graphics
 	_fe3d.gfx_disableAmbientLighting();
 	_fe3d.gfx_disableDirectionalLighting();
-	_fe3d.gfx_disableLightMapping();
-	_fe3d.gfx_disableSkyReflections();
-	_fe3d.gfx_disableMSAA();
-	_fe3d.gfx_disableSceneReflections();
 	_fe3d.gfx_disableShadows();
-	_fe3d.gfx_disableSpecularLighting();
 
 	// 3D environment
 	_fe3d.gameEntity_delete("@@grid");

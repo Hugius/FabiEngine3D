@@ -20,59 +20,65 @@ void SceneEditor::initializeGUI()
 	_leftWindow = _gui->getViewport("left")->getWindow("main");
 	_rightWindow = _gui->getViewport("right")->getWindow("main");
 
-	// Left-viewport: mainWindow - placeMenuManagement
+	// Left-viewport: mainWindow - sceneEditorMenuMain
 	_leftWindow->addScreen("sceneEditorMenuMain");
 	_leftWindow->getScreen("sceneEditorMenuMain")->addButton("sceneEditorMenuModel", vec2(0.0f, 0.75f), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Models", LeftViewportController::textColor, LeftViewportController::textHoverColor);
 	_leftWindow->getScreen("sceneEditorMenuMain")->addButton("sceneEditorMenuBillboard", vec2(0.0f, 0.45f), vec2(1.7f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Billboards", LeftViewportController::textColor, LeftViewportController::textHoverColor);
 	_leftWindow->getScreen("sceneEditorMenuMain")->addButton("sceneEditorMenuLighting", vec2(0.0f, 0.15f), vec2(1.5f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Lighting", LeftViewportController::textColor, LeftViewportController::textHoverColor);
-	_leftWindow->getScreen("sceneEditorMenuMain")->addButton("sceneEditorAudio", vec2(0.0f, -0.15f), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Audio", LeftViewportController::textColor, LeftViewportController::textHoverColor);
-	_leftWindow->getScreen("sceneEditorMenuMain")->addButton("sceneEditorSettings", vec2(0.0f, -0.45f), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Settings", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	_leftWindow->getScreen("sceneEditorMenuMain")->addButton("sceneEditorMenuAudio", vec2(0.0f, -0.15f), vec2(1.0f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Audio", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	_leftWindow->getScreen("sceneEditorMenuMain")->addButton("sceneEditorMenuSettings", vec2(0.0f, -0.45f), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Settings", LeftViewportController::textColor, LeftViewportController::textHoverColor);
 	_leftWindow->getScreen("sceneEditorMenuMain")->addButton("back", vec2(0.0f, -0.75f), vec2(1.0f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
 	
-	// Left-viewport: mainWindow - modelPlaceManagement
+	// Left-viewport: mainWindow - sceneEditorMenuModel
 	_leftWindow->addScreen("sceneEditorMenuModel");
 	_leftWindow->getScreen("sceneEditorMenuModel")->addButton("sceneEditorMenuModelPlace", vec2(0.0f, 0.475f), vec2(1.5f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Place model", LeftViewportController::textColor, LeftViewportController::textHoverColor);
 	_leftWindow->getScreen("sceneEditorMenuModel")->addButton("sceneEditorMenuModelChoice", vec2(0.0f, 0.0f), vec2(1.5f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Choose model", LeftViewportController::textColor, LeftViewportController::textHoverColor);
 	_leftWindow->getScreen("sceneEditorMenuModel")->addButton("back", vec2(0.0f, -0.475f), vec2(1.0f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
 
-	// Left-viewport: mainWindow - placeModel
+	// Left-viewport: mainWindow - sceneEditorMenuModelPlace
 	_leftWindow->addScreen("sceneEditorMenuModelPlace");
 	_leftWindow->getScreen("sceneEditorMenuModelPlace")->addScrollingList("modelList", vec2(0.0f, 0.1f), vec2(1.8, 1.75f), vec3(0.3f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, LeftViewportController::textColor, LeftViewportController::textHoverColor, vec2(0.15f, 0.1f));
 	_leftWindow->getScreen("sceneEditorMenuModelPlace")->addButton("back", vec2(0.0f, -0.9f), vec2(1.0f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
 	
-	// Left-viewport: mainWindow - chooseModel
+	// Left-viewport: mainWindow - sceneEditorMenuModelChoice
 	_leftWindow->addScreen("sceneEditorMenuModelChoice");
 	_leftWindow->getScreen("sceneEditorMenuModelChoice")->addScrollingList("modelList", vec2(0.0f, 0.1f), vec2(1.8, 1.75f), vec3(0.3f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, LeftViewportController::textColor, LeftViewportController::textHoverColor, vec2(0.15f, 0.1f));
 	_leftWindow->getScreen("sceneEditorMenuModelChoice")->addButton("back", vec2(0.0f, -0.9f), vec2(1.0f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
 
-	// Left-viewport: mainWindow - billboardPlaceManagement
+	// Left-viewport: mainWindow - sceneEditorMenuBillboard
 	_leftWindow->addScreen("sceneEditorMenuBillboard");
 	_leftWindow->getScreen("sceneEditorMenuBillboard")->addButton("back", vec2(0.0f, -0.63f), vec2(1.0f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
 
-	// Left-viewport: mainWindow - lightingManagement
+	// Left-viewport: mainWindow - sceneEditorMenuLighting
 	_leftWindow->addScreen("sceneEditorMenuLighting");
 	_leftWindow->getScreen("sceneEditorMenuLighting")->addButton("ambient", vec2(0.0f, 0.63f), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Ambient", LeftViewportController::textColor, LeftViewportController::textHoverColor);
 	_leftWindow->getScreen("sceneEditorMenuLighting")->addButton("directional", vec2(0.0f, 0.21f), vec2(1.75f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Directional", LeftViewportController::textColor, LeftViewportController::textHoverColor);
 	_leftWindow->getScreen("sceneEditorMenuLighting")->addButton("point", vec2(0.0f, -0.21f), vec2(1.0f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Point", LeftViewportController::textColor, LeftViewportController::textHoverColor);
 	_leftWindow->getScreen("sceneEditorMenuLighting")->addButton("back", vec2(0.0f, -0.63f), vec2(1.0f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
 
-	// Left-viewport: mainWindow - ambientLightManagement
+	// Left-viewport: mainWindow - sceneEditorMenuLightingAmbient
 	_leftWindow->addScreen("sceneEditorMenuLightingAmbient");
 	_leftWindow->getScreen("sceneEditorMenuLightingAmbient")->addButton("color", vec2(0.0f, 0.475f), vec2(1.0f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Color", LeftViewportController::textColor, LeftViewportController::textHoverColor);
 	_leftWindow->getScreen("sceneEditorMenuLightingAmbient")->addButton("intensity", vec2(0.0f, 0.0f), vec2(1.5f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "intensity", LeftViewportController::textColor, LeftViewportController::textHoverColor);
 	_leftWindow->getScreen("sceneEditorMenuLightingAmbient")->addButton("back", vec2(0.0f, -0.475f), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
 
-	// Left-viewport: mainWindow - directionalLightManagement
+	// Left-viewport: mainWindow - sceneEditorMenuLightingDirectional
 	_leftWindow->addScreen("sceneEditorMenuLightingDirectional");
 	_leftWindow->getScreen("sceneEditorMenuLightingDirectional")->addButton("color", vec2(0.0f, 0.63f), vec2(1.0f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Color", LeftViewportController::textColor, LeftViewportController::textHoverColor);
 	_leftWindow->getScreen("sceneEditorMenuLightingDirectional")->addButton("position", vec2(0.0f, 0.21f), vec2(1.5f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Position", LeftViewportController::textColor, LeftViewportController::textHoverColor);
 	_leftWindow->getScreen("sceneEditorMenuLightingDirectional")->addButton("intensity", vec2(0.0f, -0.21f), vec2(1.5f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "intensity", LeftViewportController::textColor, LeftViewportController::textHoverColor);
 	_leftWindow->getScreen("sceneEditorMenuLightingDirectional")->addButton("back", vec2(0.0f, -0.63f), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
-
-	// Left-viewport: mainWindow - pointLightManagement
+	
+	// Left-viewport: mainWindow - sceneEditorMenuLightingPoint
 	_leftWindow->addScreen("sceneEditorMenuLightingPoint");
 	_leftWindow->getScreen("sceneEditorMenuLightingPoint")->addButton("add", vec2(0.0f, 0.45f), vec2(1.5f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Add light", LeftViewportController::textColor, LeftViewportController::textHoverColor);
 	_leftWindow->getScreen("sceneEditorMenuLightingPoint")->addButton("back", vec2(0.0f, -0.45f), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+
+	// Left-viewport: mainWindow - sceneEditorMenuSettings
+	_leftWindow->addScreen("sceneEditorMenuSettings");
+	_leftWindow->getScreen("sceneEditorMenuSettings")->addButton("graphics", vec2(0.0f, 0.475f), vec2(1.5f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Graphics", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	_leftWindow->getScreen("sceneEditorMenuSettings")->addButton("setSpeed", vec2(0.0f, 0.0f), vec2(1.75f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Editor speed", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	_leftWindow->getScreen("sceneEditorMenuSettings")->addButton("back", vec2(0.0f, -0.475f), vec2(1.0f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
 
 	// Right-viewport: mainWindow - modelProperties
 	_rightWindow->addScreen("modelPropertiesMenu");
@@ -135,14 +141,8 @@ void SceneEditor::initializeGUI()
 void SceneEditor::load()
 {
 	// Enable default graphics
-	_fe3d.gfx_enableAmbientLighting(_ambientLightColor, _ambientLightIntensity);
-	_fe3d.gfx_enableLightMapping();
-	_fe3d.gfx_enablePointLighting();
-	_fe3d.gfx_enableSkyReflections(0.25f);
-	_fe3d.gfx_enableMSAA();
-	_fe3d.gfx_enableWaterEffects();
+	_fe3d.gfx_enableAmbientLighting(vec3(1.0f), 1.0f);
 	//_fe3d.gfx_enableShadows(vec3(50.0f, 50.0f, 0.0f), vec3(0.0f), 100.0f, 150.0);
-	_fe3d.gfx_enableSpecularLighting(3.0f);
 
 	// Disable default skybox
 	_fe3d.skyEntity_select("");
@@ -151,6 +151,7 @@ void SceneEditor::load()
 	_worldEditor.loadSkyEntity();
 	_worldEditor.loadTerrainEntity();
 	_worldEditor.loadWaterEntity();
+	_fe3d.gfx_enableSkyHDR(0.35f);
 
 	// Show sky entity
 	if (_fe3d.skyEntity_isExisting("@sky"))
@@ -201,7 +202,8 @@ void SceneEditor::load()
 	}
 
 	// Preview pointlight loading
-	_fe3d.lightEntity_add(_previewPointlightID, vec3(0.0f), _defaultPointlightColor, _defaultPointlightIntensity, _defaultPointlightDistance, false);
+	_fe3d.lightEntity_add(_previewPointlightID);
+	_fe3d.lightEntity_hide(_previewPointlightID);
 	_fe3d.gameEntity_add(_previewPointlightID, "Engine\\OBJs\\lamp.obj", vec3(0.0f), vec3(0.0f), _defaultLightbulbSize, false);
 	_fe3d.aabbEntity_add(_previewPointlightID, vec3(0.0f), _defaultLightbulbAabbSize, true);
 
@@ -248,6 +250,7 @@ void SceneEditor::loadWorld()
 			// Load entity according to type
 			if (entityType == "MODEL")
 			{
+				// Values
 				string modelID, objPath, diffuseMapPath, lightMapPath, reflectionMapPath;
 				vec3 position, rotation, size, color, aabbSize;
 				float uvRepeat, specularFactor;
@@ -289,17 +292,32 @@ void SceneEditor::loadWorld()
 			}
 			else if (entityType == "AMBIENT")
 			{
-				iss >> _ambientLightColor.r >> _ambientLightColor.g >> _ambientLightColor.b >> _ambientLightIntensity;
-				_fe3d.gfx_enableAmbientLighting(_ambientLightColor, _ambientLightIntensity);
+				// Values
+				vec3 ambientLightingColor;
+				float ambientLightingIntensity;
+
+				// Extract
+				iss >> ambientLightingColor.r >> ambientLightingColor.g >> ambientLightingColor.b >> ambientLightingIntensity;
+
+				// Apply
+				_fe3d.gfx_enableAmbientLighting(ambientLightingColor, ambientLightingIntensity);
 			}
 			else if (entityType == "DIRECTIONAL")
 			{
-				iss >> _directionalLightPosition.x >> _directionalLightPosition.y >> _directionalLightPosition.z >>
-					_directionalLightColor.r >> _directionalLightColor.g >> _directionalLightColor.b >> _directionalLightIntensity;
-				_fe3d.gfx_enableDirectionalLighting(_directionalLightPosition, _directionalLightColor, _directionalLightIntensity);
+				// Values
+				vec3 directionalLightingPosition, directionalLightingColor;
+				float directionalLightingIntensity;
+
+				// Extract
+				iss >> directionalLightingPosition.x >> directionalLightingPosition.y >> directionalLightingPosition.z >>
+					directionalLightingColor.r >> directionalLightingColor.g >> directionalLightingColor.b >> directionalLightingIntensity;
+
+				// Apply
+				_fe3d.gfx_enableDirectionalLighting(directionalLightingPosition, directionalLightingColor, directionalLightingIntensity);
 			}
 			else if (entityType == "POINT")
 			{
+				// Values
 				string ID;
 				vec3 position, color;
 				float intensity, distance;
@@ -406,24 +424,31 @@ void SceneEditor::save()
 			}
 		}
 
-		// Ambient light
+		// Ambient lighting
+		vec3 ambientLightingColor = _fe3d.gfx_getAmbientLightingColor();
+		float ambientLightingIntensity = _fe3d.gfx_getAmbientLightingIntensity();
+
 		file << 
 			"AMBIENT " <<
-			_ambientLightColor.r << " " <<
-			_ambientLightColor.g << " " <<
-			_ambientLightColor.b << " " <<
-			_ambientLightIntensity << std::endl;
+			ambientLightingColor.r << " " <<
+			ambientLightingColor.g << " " <<
+			ambientLightingColor.b << " " <<
+			ambientLightingIntensity << std::endl;
 
-		// Directional light
+		// Directional lighting
+		vec3 directionalLightingColor = _fe3d.gfx_getDirectionalLightingColor();
+		vec3 directionalLightingPosition = _fe3d.gfx_getDirectionalLightingPosition();
+		float directionalLightingIntensity = _fe3d.gfx_geDirectionalLightingIntensity();
+
 		file << 
 			"DIRECTIONAL " <<
-			_directionalLightPosition.x << " " <<
-			_directionalLightPosition.y << " " <<
-			_directionalLightPosition.z << " " <<
-			_directionalLightColor.r << " " <<
-			_directionalLightColor.g << " " <<
-			_directionalLightColor.b << " " <<
-			_directionalLightIntensity << std::endl;
+			directionalLightingPosition.x << " " <<
+			directionalLightingPosition.y << " " <<
+			directionalLightingPosition.z << " " <<
+			directionalLightingColor.r << " " <<
+			directionalLightingColor.g << " " <<
+			directionalLightingColor.b << " " <<
+			directionalLightingIntensity << std::endl;
 
 		// Point lights
 		for (auto& entityID : _fe3d.lightEntity_getAllIDs())
@@ -467,27 +492,21 @@ void SceneEditor::unload()
 	// Disable graphics
 	_fe3d.gfx_disableAmbientLighting();
 	_fe3d.gfx_disableDirectionalLighting();
-	_fe3d.gfx_disableLightMapping();
-	_fe3d.gfx_disableSkyReflections();
-	_fe3d.gfx_disableMSAA();
-	_fe3d.gfx_disableWaterEffects();
 	_fe3d.gfx_disableShadows();
-	_fe3d.gfx_disableSpecularLighting();
-	_fe3d.gfx_disablePointLighting();
 
-	// Delete world entities
+	// Delete sky entity
 	if (_fe3d.skyEntity_isExisting("@sky"))
 	{
 		_fe3d.skyEntity_delete("@sky");
 	}
 
-	// Show terrain entity
+	// Delete terrain entity
 	if (_fe3d.terrainEntity_isExisting("@terrain"))
 	{
 		_fe3d.terrainEntity_delete("@terrain");
 	}
 
-	// Show water entity
+	// Delete water entity
 	if (_fe3d.waterEntity_isExisting("@water"))
 	{
 		_fe3d.waterEntity_delete("@water");
@@ -500,18 +519,16 @@ void SceneEditor::unload()
 
 	// Reset variables
 	_currentPreviewModelName = "";
-	_customCameraSpeed = 10.0f;
-	_currentPreviewModelName = "";
+	_selectedModelID = "";
+	_activeModelID = "";
+	_selectedLightnessMultiplier = 1;
+	_activeLightnessMultiplier = 1;
 	_currentBillboardName = "";
-	_ambientLightColor = vec3(1.0f);
-	_ambientLightIntensity = 1.0f;
-	_directionalLightColor = vec3(1.0f);
-	_directionalLightPosition = vec3(0.0f);
-	_directionalLightIntensity = 0.0f;
 	_isPlacingPointlight = false;
 	_isLoaded = false;
 	_transformation = Transformation::TRANSLATION;
-	_customCameraSpeed = 25.0f;
+	_currentProjectName = "";
+	_customCameraSpeed = 10.0f;
 
 	// Delete name textfields
 	_gui->getGlobalScreen()->deleteTextfield("selectedModelName");
@@ -530,5 +547,4 @@ void SceneEditor::unload()
 	// Other
 	_leftWindow->getScreen("sceneEditorMenuModelPlace")->getScrollingList("modelList")->deleteButtons();
 	_fe3d.collision_disableFrameRendering();
-	_isLoaded = false;
 }

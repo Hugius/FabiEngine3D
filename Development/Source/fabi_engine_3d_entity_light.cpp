@@ -32,6 +32,11 @@ bool FabiEngine3D::lightEntity_isExisting(const string& ID)
 	return _core->_lightEntityManager.isExisting(ID);
 }
 
+bool FabiEngine3D::lightEntity_isVisible(const string& ID)
+{
+	return _core->_lightEntityManager.getEntity(ID)->isVisible();
+}
+
 void FabiEngine3D::lightEntity_setPosition(const string& ID, vec3 position)
 {
 	_core->_lightEntityManager.getEntity(ID)->setPosition(position);
@@ -76,7 +81,7 @@ vector<string> FabiEngine3D::lightEntity_getAllIDs()
 {
 	vector<string> IDs;
 
-	for (auto entity : _core->_lightEntityManager.getEntities()) // Loop over light entities
+	for (auto entity : _core->_lightEntityManager.getEntities())
 	{
 		IDs.push_back(entity->getID());
 	}

@@ -253,6 +253,7 @@
     <ClCompile Include="Source\scene_editor_misc.cpp" />
     <ClCompile Include="Source\scene_editor_model_editing.cpp" />
     <ClCompile Include="Source\scene_editor_model_placing.cpp" />
+    <ClCompile Include="Source\scene_editor_settings_updates.cpp" />
     <ClCompile Include="Source\scene_editor_updates.cpp" />
     <ClCompile Include="Source\scene_editor_model_updates.cpp" />
     <ClCompile Include="Source\scene_editor_billboard_updates.cpp" />

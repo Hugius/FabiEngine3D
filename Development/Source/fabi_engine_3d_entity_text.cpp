@@ -144,3 +144,15 @@ const string& FabiEngine3D::textEntity_getTextContent(const string& ID)
 {
 	return _core->_textEntityManager.getEntity(ID)->getTextContent();
 }
+
+vector<string> FabiEngine3D::textEntity_getAllIDs()
+{
+	vector<string> IDs;
+
+	for (auto entity : _core->_textEntityManager.getEntities())
+	{
+		IDs.push_back(entity->getID());
+	}
+
+	return IDs;
+}

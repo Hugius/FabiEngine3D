@@ -385,6 +385,9 @@
     <ClCompile Include="Source\scene_editor_model_updates.cpp">
       <Filter>src\Editor System\Scene Editor\Model Placing</Filter>
     </ClCompile>
+    <ClCompile Include="Source\scene_editor_settings_updates.cpp">
+      <Filter>src\Editor System\Scene Editor\Settings</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\obj_loader.hpp">
@@ -784,6 +787,12 @@
     </Filter>
     <Filter Include="src\Editor System\Script Editor">
       <UniqueIdentifier>{da14d31f-6d01-4e12-a50c-99a603867d27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Editor System\Scene Editor\Audio">
+      <UniqueIdentifier>{5030e4d2-6075-445e-9d47-799bd42c1a88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Editor System\Scene Editor\Settings">
+      <UniqueIdentifier>{fa42d895-1245-4873-b84e-91ea0a4cc1b7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

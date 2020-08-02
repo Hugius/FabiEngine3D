@@ -1,6 +1,6 @@
 #include "scene_editor.hpp"
 
-void SceneEditor::_updateBillboardEditing()
+void SceneEditor::_updateBillboardEditingMenu()
 {
 	if (_isLoaded)
 	{

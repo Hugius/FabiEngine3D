@@ -34,27 +34,28 @@ public:
 
 private:
 	// Model updates
-	void _updateModelScreen();
-	void _updateModelPlacingScreen();
-	void _updateModelChoosingScreen();
+	void _updateMainModelMenu();
+	void _updateModelPlacingMenu();
+	void _updateModelChoosingMenu();
 	void _updateModelPlacing();
 	void _updateModelEditing();
 
 	// Billboard updates
-	void _updateBillboardScreen();
-	void _updateBilboardPlacing();
-	void _updateBillboardEditing();
+	void _updateMainBillboardMenu();
+	void _updateBilboardPlacingMenu();
+	void _updateBillboardEditingMenu();
 
 	// Light updates
-	void _updateLightScreen();
-	void _updateAmbientLightScreen();
-	void _updateDirectionalLightScreen();
-	void _updatePointLightScreen();
+	void _updateMainLightingMenu();
+	void _updateAmbientLightingMenu();
+	void _updateDirectionalLightingMenu();
+	void _updatePointLightingMenu();
 	void _updateLightPlacing();
 	void _updateLightEditing();
 
 	// Miscellaneous updates
-	void _updateManagementScreen();
+	void _updateMainMenu();
+	void _updateMainSettingsMenu();
 	void _updateCamera();
 	void _updateMiscellaneous();
 
@@ -89,18 +90,10 @@ private:
 	string _currentBillboardName = "";
 
 	// Lighting variables
-	vec3 _ambientLightColor = vec3(1.0f);
-	float _ambientLightIntensity = 1.0f;
-	vec3 _directionalLightColor = vec3(1.0f);
-	vec3 _directionalLightPosition = vec3(0.0f);
-	float _directionalLightIntensity = 0.0f;
 	bool _isPlacingPointlight = false;
 	const string _previewPointlightID = "@previewPointlight";
-	const vec3 _defaultPointlightColor = vec3(1.0f);
 	const vec3 _defaultLightbulbSize = vec3(1.0f);
 	const vec3 _defaultLightbulbAabbSize = vec3(1.0f, 1.25f, 1.0f);
-	const float _defaultPointlightIntensity = 1.0f;
-	const float _defaultPointlightDistance = 1.0f;
 
 	// Miscellaneous
 	bool _isLoaded = false;

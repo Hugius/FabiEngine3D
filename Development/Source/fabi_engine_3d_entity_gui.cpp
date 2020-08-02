@@ -124,6 +124,18 @@ float FabiEngine3D::guiEntity_getAlpha(const string& ID)
 	return _core->_guiEntityManager.getEntity(ID)->getAlpha();
 }
 
+vector<string> FabiEngine3D::guiEntity_getAllIDs()
+{
+	vector<string> IDs;
+
+	for (auto entity : _core->_guiEntityManager.getEntities())
+	{
+		IDs.push_back(entity->getID());
+	}
+
+	return IDs;
+}
+
 vec2 FabiEngine3D::guiEntity_getSize(const string& ID)
 {
 	return _core->_guiEntityManager.getEntity(ID)->getScaling();

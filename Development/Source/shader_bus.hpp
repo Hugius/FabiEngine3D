@@ -94,13 +94,13 @@ public:
 
 	// Vectors
 	const vec3 getCameraPos()			  const;
-	const vec3 getAmbientLightColor()	  const;
-	const vec3 getDirectionalLightColor() const;
-	const vec3 getDirectionalLightPos()	  const;
+	const vec3 getAmbientLightingColor()	  const;
+	const vec3 getDirectionalLightingColor() const;
+	const vec3 getDirectionalLightingPosition()	  const;
 
 	// Floats
-	const float getAmbientLightIntensity()	   const;
-	const float getDirectionalLightIntensity() const;
+	const float getAmbientLightingIntensity()	   const;
+	const float getDirectionalLightingIntensity() const;
 	const float getSpecularLightingIntensity()  const;
 	const float getFogMinDistance()			   const;
 	const float getBloomIntensity()			   const;
@@ -158,14 +158,14 @@ private:
 
 	// Vectors
 	vec3  _cameraPosition			= vec3(0.0f);
-	vec3  _ambientLightColor		= vec3(1.0f);
-	vec3  _directionalLightColor    = vec3(1.0f);
-	vec3  _directionalLightPosition = vec3(0.0f);
+	vec3  _ambientLightingColor		= vec3(1.0f);
+	vec3  _directionalLightingColor    = vec3(1.0f);
+	vec3  _directionalLightingPosition = vec3(0.0f);
 
 	// Floats
-	float _ambientLightingIntensity     = 0.0f;
+	float _ambientLightingIntensity     = 1.0f;
 	float _directionalLightingIntensity = 0.0f;
-	float _specularLightingIntensity		= 0.0f;
+	float _specularLightingIntensity	= 0.0f;
 	float _fogMinDistance               = 0.0f;
 	float _bloomIntensity               = 0.0f;
 	float _bloomTreshold                = 0.0f;

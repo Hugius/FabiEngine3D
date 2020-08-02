@@ -37,8 +37,16 @@ void EngineController::FE3D_CONTROLLER_DESTROY()
 
 void EngineController::_initializeMiscellaneous()
 {
-	// Main color
+	// Permanent graphical effects
 	misc_setMainRenderingColor(vec3(1.0f));
+	gfx_enableMSAA();
+	gfx_enableBloom(0.98f, 0.0f, 8);
+	gfx_enableLightMapping();
+	gfx_enableSceneReflections(0.0f, 0.25f);
+	gfx_enableSkyReflections(0.25f);
+	gfx_enableSpecularLighting(3.0f);
+	gfx_enablePointLighting();
+	gfx_enableWaterEffects();
 
 	// Default cube map
 	string path = "Engine\\Textures\\";
@@ -52,9 +60,6 @@ void EngineController::_initializeMiscellaneous()
 		path + "back.png" });
 	skyEntity_select("@@sky");
 	skyEntity_setLightness("@@sky", 0.75f);
-
-	// Default bloom effect for all scenes
-	gfx_enableBloom(0.98f, 0.0f, 8);
 
 	// Default camera
 	camera_load(90.0f, 0.1f, 10000.0f, vec3(0.0f));

@@ -14,11 +14,11 @@ void TerrainEntityRenderer::bind()
 													   
 	// Fragment shader uniforms						   
 	_shader.uploadUniform("u_cameraPosition",             _shaderBus.getCameraPos());
-	_shader.uploadUniform("u_ambientLightingColor",		  _shaderBus.getAmbientLightColor());
-	_shader.uploadUniform("u_directionalLightingColor",	  _shaderBus.getDirectionalLightColor());
-	_shader.uploadUniform("u_directionalLightingPosition",		  _shaderBus.getDirectionalLightPos());
-	_shader.uploadUniform("u_ambientLightingIntensity",       _shaderBus.getAmbientLightIntensity());
-	_shader.uploadUniform("u_directionalLightingIntensity",   _shaderBus.getDirectionalLightIntensity());
+	_shader.uploadUniform("u_ambientLightingColor",		  _shaderBus.getAmbientLightingColor());
+	_shader.uploadUniform("u_directionalLightingColor",	  _shaderBus.getDirectionalLightingColor());
+	_shader.uploadUniform("u_directionalLightingPosition",		  _shaderBus.getDirectionalLightingPosition());
+	_shader.uploadUniform("u_ambientLightingIntensity",       _shaderBus.getAmbientLightingIntensity());
+	_shader.uploadUniform("u_directionalLightingIntensity",   _shaderBus.getDirectionalLightingIntensity());
 	_shader.uploadUniform("u_fogMinDistance",			  _shaderBus.getFogMinDistance());
 	_shader.uploadUniform("u_ambientLightingEnabled",	  _shaderBus.isAmbientLightingEnabled());
 	_shader.uploadUniform("u_directionalLightingEnabled", _shaderBus.isDirectionalLightingEnabled());

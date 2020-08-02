@@ -125,34 +125,43 @@ void SkyEntityManager::_updateRotation()
 
 void SkyEntityManager::_updateEyeAdaption()
 {
-	// Sky brightness changer
-	static float oldIntensity = _shaderBus.getBloomIntensity();
-
+	// Keep track of HDR being enabled or not
+	bool hdrWasEnabled = false;
 	if (_shaderBus.isSkyHdrEnabled())
 	{
-		if (_shaderBus.getCameraPitch() > 10.0f) // Looking at sky
-		{
-			float targetIntensity = oldIntensity - ((_shaderBus.getCameraPitch() - 10.0f) / 90.0f); // Based on verticle angle
+		hdrWasEnabled = true;
+	}
 
-			if (_shaderBus.getBloomIntensity() > targetIntensity) // Decrease bloom intensity
-			{
-				_shaderBus.setBloomIntensity(_shaderBus.getBloomIntensity() - 0.005f);
-			}
-			else if (_shaderBus.getBloomIntensity() < targetIntensity) // Increase bloom intensity
-			{
-				_shaderBus.setBloomIntensity(_shaderBus.getBloomIntensity() + 0.0015f);
-			}
-		}
-		else
-		{
-			if (_shaderBus.getBloomIntensity() < oldIntensity) // Not looking at sky
-			{
-				_shaderBus.setBloomIntensity(_shaderBus.getBloomIntensity() + 0.0035f);
-			}
-		}
-	}
-	else
+	// Update sky HDR
+	if (_shaderBus.isSkyHdrEnabled())
 	{
-		_shaderBus.setBloomIntensity(oldIntensity); // Revert bloom intensity
+		// Values
+		const float speed = 0.001f;
+		float lightness = getSelectedSky()->getLightness();
+		float pitch = std::min(_shaderBus.getCameraPitch() + 10.0f, 90.0f);
+		float targetLightness = _originalHdrSkyLightness + (((90.0f - pitch) / 90.0f) * _hdrBrightnessFactor);
+
+		// Based on verticle angle
+		if (lightness > targetLightness) // Decrease lightness
+		{
+			getSelectedSky()->setLightness(lightness - (speed * 5.0f));
+		}
+		else if (getSelectedSky()->getLightness() < targetLightness) // Increase lightness
+		{
+			getSelectedSky()->setLightness(lightness + speed);
+		}
 	}
+	else // HDR not enabled
+	{
+		if (hdrWasEnabled)
+		{
+			getSelectedSky()->setLightness(_originalHdrSkyLightness); // Revert lightness
+		}
+	}
+}
+
+void SkyEntityManager::saveHDRState(float brightnessFactor)
+{
+	_originalHdrSkyLightness = getSelectedSky()->getLightness();
+	_hdrBrightnessFactor = brightnessFactor;
 }

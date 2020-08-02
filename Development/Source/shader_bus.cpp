@@ -77,17 +77,17 @@ void ShaderBus::setCameraPosition(vec3 val)
 
 void ShaderBus::setAmbientLightColor(vec3 val)
 {
-	_ambientLightColor = val;
+	_ambientLightingColor = val;
 }
 
 void ShaderBus::setDirectionalLightPos(vec3 val)
 {
-	_directionalLightPosition = val;
+	_directionalLightingPosition = val;
 }
 
 void ShaderBus::setDirectionalLightColor(vec3 val)
 {
-	_directionalLightColor = val;
+	_directionalLightingColor = val;
 }
 
 void ShaderBus::setSceneReflectionHeight(float val)
@@ -330,19 +330,19 @@ const vec3 ShaderBus::getCameraPos() const
 	return _cameraPosition;
 }
 
-const vec3 ShaderBus::getAmbientLightColor() const
+const vec3 ShaderBus::getAmbientLightingColor() const
 {
-	return _ambientLightColor;
+	return _ambientLightingColor;
 }
 
-const vec3 ShaderBus::getDirectionalLightPos() const
+const vec3 ShaderBus::getDirectionalLightingPosition() const
 {
-	return _directionalLightPosition;
+	return _directionalLightingPosition;
 }
 
-const vec3 ShaderBus::getDirectionalLightColor() const
+const vec3 ShaderBus::getDirectionalLightingColor() const
 {
-	return _directionalLightColor;
+	return _directionalLightingColor;
 }
 
 const float ShaderBus::getSceneReflectionHeight() const
@@ -355,12 +355,12 @@ const float ShaderBus::getSceneReflectionFactor() const
 	return _sceneReflectionFactor;
 }
 
-const float ShaderBus::getAmbientLightIntensity() const
+const float ShaderBus::getAmbientLightingIntensity() const
 {
 	return _ambientLightingIntensity;
 }
 
-const float ShaderBus::getDirectionalLightIntensity() const
+const float ShaderBus::getDirectionalLightingIntensity() const
 {
 	return _directionalLightingIntensity;
 }

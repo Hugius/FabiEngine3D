@@ -111,6 +111,18 @@ bool FabiEngine3D::aabbEntity_isExisting(const string& ID)
 	return _core->_aabbEntityManager.isExisting(ID);
 }
 
+vector<string> FabiEngine3D::aabbEntity_getAllIDs()
+{
+	vector<string> IDs;
+
+	for (auto entity : _core->_aabbEntityManager.getEntities())
+	{
+		IDs.push_back(entity->getID());
+	}
+
+	return IDs;
+}
+
 void FabiEngine3D::collision_enableCameraResponse()
 {
 	_core->_collisionResolver.enableAabbResponse();

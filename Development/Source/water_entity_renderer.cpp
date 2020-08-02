@@ -9,7 +9,7 @@ void WaterEntityRenderer::bind()
 	// Global shader uniforms
 	_shader.uploadUniform("u_viewMatrix",				   _shaderBus.getViewMatrix());
 	_shader.uploadUniform("u_projectionMatrix",			   _shaderBus.getProjectionMatrix());
-	_shader.uploadUniform("u_directionalLightingPosition", _shaderBus.getDirectionalLightPos());
+	_shader.uploadUniform("u_directionalLightingPosition", _shaderBus.getDirectionalLightingPosition());
 	_shader.uploadUniform("u_cameraPosition",			   _shaderBus.getCameraPos());
 	_shader.uploadUniform("u_fogEnabled",				   _shaderBus.isFogEnabled());
 	_shader.uploadUniform("u_fogMinDistance",			   _shaderBus.getFogMinDistance());

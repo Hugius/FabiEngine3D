@@ -20,8 +20,8 @@ public:
 
 private:
 	vec3 _position = vec3(0.0f);
-	vec3 _color    = vec3(0.0f);
+	vec3 _color    = vec3(1.0f);
 
-	float _intensity = 0.0f;
-	float _distanceFactor = 0.0f;
+	float _intensity = 1.0f;
+	float _distanceFactor = 1.0f;
 };

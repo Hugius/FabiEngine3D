@@ -60,6 +60,11 @@ bool FabiEngine3D::billboardEntity_isExisting(const string& ID)
 	return _core->_billboardEntityManager.isExisting(ID);
 }
 
+bool FabiEngine3D::billboardEntity_isVisible(const string& ID)
+{
+	return _core->_billboardEntityManager.getEntity(ID)->isVisible();
+}
+
 void FabiEngine3D::billboardEntity_move(const string& ID, vec3 factor)
 {
 	_core->_billboardEntityManager.getEntity(ID)->translate(factor);
@@ -126,14 +131,16 @@ vec3 FabiEngine3D::billboardEntity_getColor(const string& ID)
 	return _core->_billboardEntityManager.getEntity(ID)->getColor();
 }
 
-void FabiEngine3D::billboardEntity_enable(const string& ID)
+vector<string> FabiEngine3D::billboardEntity_getAllIDs()
 {
-	_core->_billboardEntityManager.getEntity(ID)->setVisible(true);
-}
+	vector<string> IDs;
 
-void FabiEngine3D::billboardEntity_disable(const string& ID)
-{
-	_core->_billboardEntityManager.getEntity(ID)->setVisible(false);
+	for (auto entity : _core->_billboardEntityManager.getEntities())
+	{
+		IDs.push_back(entity->getID());
+	}
+
+	return IDs;
 }
 
 void FabiEngine3D::billboardEntity_setCameraFacingX(const string& ID, bool enabled)
@@ -242,6 +249,11 @@ bool FabiEngine3D::billboardEntity_isAnimationPlaying(const string& ID)
 bool FabiEngine3D::billboardEntity_isTransparent(const string& ID)
 {
 	return _core->_billboardEntityManager.getEntity(ID)->isTransparent();
+}
+
+float FabiEngine3D::billboardEntity_getUvRepeat(const string& ID)
+{
+	return _core->_billboardEntityManager.getEntity(ID)->getUvRepeat();
 }
 
 int FabiEngine3D::billboardEntity_getAnimationRows(const string& ID)

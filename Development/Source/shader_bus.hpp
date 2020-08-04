@@ -34,6 +34,7 @@ public:
 	void setAmbientLightColor(vec3 val);
 	void setDirectionalLightPos(vec3 val);
 	void setDirectionalLightColor(vec3 val);
+	void setShadowCasterPosition(vec3 val);
 
 	// Floats
 	void setAmbientLightIntensity(float val);
@@ -50,6 +51,7 @@ public:
 	void setSkyReflectionFactor(float val);
 	void setSceneReflectionHeight(float val);
 	void setSceneReflectionFactor(float val);
+	void setShadowAreaSize(float val);
 
 	// Integers
 	void setBloomBlurSize(int val);
@@ -93,26 +95,28 @@ public:
 	const mat4 & getShadowMatrix()      const;
 
 	// Vectors
-	const vec3 getCameraPos()			  const;
-	const vec3 getAmbientLightingColor()	  const;
-	const vec3 getDirectionalLightingColor() const;
-	const vec3 getDirectionalLightingPosition()	  const;
+	const vec3 getCameraPos()					const;
+	const vec3 getAmbientLightingColor()		const;
+	const vec3 getDirectionalLightingColor()    const;
+	const vec3 getDirectionalLightingPosition()	const;
+	const vec3 getShadowCasterPosition()		const;
 
 	// Floats
-	const float getAmbientLightingIntensity()	   const;
+	const float getAmbientLightingIntensity()	  const;
 	const float getDirectionalLightingIntensity() const;
-	const float getSpecularLightingIntensity()  const;
-	const float getFogMinDistance()			   const;
-	const float getBloomIntensity()			   const;
-	const float getBloomTreshold()			   const;
-	const float getCameraYaw()				   const;
-	const float getCameraPitch()			   const;
-	const float getNearZ()					   const;
-	const float getFarZ()					   const;
-	const float getDofMinDistance()			   const;
-	const float getSkyReflectionFactor()	   const;
-	const float getSceneReflectionHeight()	   const;
-	const float getSceneReflectionFactor()	   const;
+	const float getSpecularLightingIntensity()	  const;
+	const float getFogMinDistance()				  const;
+	const float getBloomIntensity()				  const;
+	const float getBloomTreshold()				  const;
+	const float getCameraYaw()					  const;
+	const float getCameraPitch()				  const;
+	const float getNearZ()						  const;
+	const float getFarZ()						  const;
+	const float getDofMinDistance()				  const;
+	const float getSkyReflectionFactor()		  const;
+	const float getSceneReflectionHeight()		  const;
+	const float getSceneReflectionFactor()		  const;
+	const float getShadowAreaSize()				  const;
 
 	// Integers
 	const int getBloomBlurSize() const;
@@ -157,10 +161,11 @@ private:
 	mat4 _shadowMatrix      = mat4(1.0f);
 
 	// Vectors
-	vec3  _cameraPosition			= vec3(0.0f);
-	vec3  _ambientLightingColor		= vec3(1.0f);
-	vec3  _directionalLightingColor    = vec3(1.0f);
-	vec3  _directionalLightingPosition = vec3(0.0f);
+	vec3 _cameraPosition			  = vec3(0.0f);
+	vec3 _ambientLightingColor		  = vec3(1.0f);
+	vec3 _directionalLightingColor    = vec3(1.0f);
+	vec3 _directionalLightingPosition = vec3(0.0f);
+	vec3 _shadowCasterPosition		  = vec3(0.0f);
 
 	// Floats
 	float _ambientLightingIntensity     = 1.0f;
@@ -177,6 +182,7 @@ private:
 	float _skyReflectionFactor          = 0.0f;
 	float _sceneReflectionHeight        = 0.0f;
 	float _sceneReflectionFactor        = 0.0f;
+	float _shadowAreaSize				= 0.0f;
 	
 	// Integers
 	int _bloomBlurSize = 0;

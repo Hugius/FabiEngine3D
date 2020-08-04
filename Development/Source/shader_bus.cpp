@@ -90,6 +90,11 @@ void ShaderBus::setDirectionalLightColor(vec3 val)
 	_directionalLightingColor = val;
 }
 
+void ShaderBus::setShadowCasterPosition(vec3 val)
+{
+	_shadowCasterPosition = val;
+}
+
 void ShaderBus::setSceneReflectionHeight(float val)
 {
 	_sceneReflectionHeight = val;
@@ -98,6 +103,11 @@ void ShaderBus::setSceneReflectionHeight(float val)
 void ShaderBus::setSceneReflectionFactor(float val)
 {
 	_sceneReflectionFactor = val;
+}
+
+void ShaderBus::setShadowAreaSize(float val)
+{
+	_shadowAreaSize = val;
 }
 
 void ShaderBus::setAmbientLightIntensity(float val)
@@ -340,6 +350,11 @@ const vec3 ShaderBus::getDirectionalLightingPosition() const
 	return _directionalLightingPosition;
 }
 
+const vec3 ShaderBus::getShadowCasterPosition() const
+{
+	return _shadowCasterPosition;
+}
+
 const vec3 ShaderBus::getDirectionalLightingColor() const
 {
 	return _directionalLightingColor;
@@ -353,6 +368,11 @@ const float ShaderBus::getSceneReflectionHeight() const
 const float ShaderBus::getSceneReflectionFactor() const
 {
 	return _sceneReflectionFactor;
+}
+
+const float ShaderBus::getShadowAreaSize() const
+{
+	return _shadowAreaSize;
 }
 
 const float ShaderBus::getAmbientLightingIntensity() const

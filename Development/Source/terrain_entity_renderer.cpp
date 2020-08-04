@@ -11,21 +11,23 @@ void TerrainEntityRenderer::bind()
 	_shader.uploadUniform("u_projMatrix",    _shaderBus.getProjectionMatrix());
 	_shader.uploadUniform("u_shadowMatrix",  _shaderBus.getShadowMatrix());
 	_shader.uploadUniform("u_clippingPlane", vec4(0.0f, 1.0f, 0.0f, -(_shaderBus.getSceneReflectionHeight()) + 1.0f));
-													   
+	
 	// Fragment shader uniforms						   
-	_shader.uploadUniform("u_cameraPosition",             _shaderBus.getCameraPos());
-	_shader.uploadUniform("u_ambientLightingColor",		  _shaderBus.getAmbientLightingColor());
-	_shader.uploadUniform("u_directionalLightingColor",	  _shaderBus.getDirectionalLightingColor());
-	_shader.uploadUniform("u_directionalLightingPosition",		  _shaderBus.getDirectionalLightingPosition());
-	_shader.uploadUniform("u_ambientLightingIntensity",       _shaderBus.getAmbientLightingIntensity());
-	_shader.uploadUniform("u_directionalLightingIntensity",   _shaderBus.getDirectionalLightingIntensity());
-	_shader.uploadUniform("u_fogMinDistance",			  _shaderBus.getFogMinDistance());
-	_shader.uploadUniform("u_ambientLightingEnabled",	  _shaderBus.isAmbientLightingEnabled());
-	_shader.uploadUniform("u_directionalLightingEnabled", _shaderBus.isDirectionalLightingEnabled());
-	_shader.uploadUniform("u_pointLightingEnabled",		  _shaderBus.isPointLightingEnabled());
-	_shader.uploadUniform("u_fogEnabled",				  _shaderBus.isFogEnabled());
-	_shader.uploadUniform("u_shadowsEnabled",			  _shaderBus.isShadowsEnabled());
-	_shader.uploadUniform("u_shadowMapSize",			  Config::getInst().getShadowQuality());
+	_shader.uploadUniform("u_cameraPosition",               _shaderBus.getCameraPos());
+	_shader.uploadUniform("u_ambientLightingColor",		    _shaderBus.getAmbientLightingColor());
+	_shader.uploadUniform("u_directionalLightingColor",	    _shaderBus.getDirectionalLightingColor());
+	_shader.uploadUniform("u_directionalLightingPosition",  _shaderBus.getDirectionalLightingPosition());
+	_shader.uploadUniform("u_ambientLightingIntensity",     _shaderBus.getAmbientLightingIntensity());
+	_shader.uploadUniform("u_directionalLightingIntensity", _shaderBus.getDirectionalLightingIntensity());
+	_shader.uploadUniform("u_fogMinDistance",				_shaderBus.getFogMinDistance());
+	_shader.uploadUniform("u_ambientLightingEnabled",		_shaderBus.isAmbientLightingEnabled());
+	_shader.uploadUniform("u_directionalLightingEnabled",	_shaderBus.isDirectionalLightingEnabled());
+	_shader.uploadUniform("u_pointLightingEnabled",			_shaderBus.isPointLightingEnabled());
+	_shader.uploadUniform("u_fogEnabled",					_shaderBus.isFogEnabled());
+	_shader.uploadUniform("u_shadowAreaSize",				_shaderBus.getShadowAreaSize());
+	_shader.uploadUniform("u_shadowCasterPosition",		    _shaderBus.getShadowCasterPosition());
+	_shader.uploadUniform("u_shadowsEnabled",				_shaderBus.isShadowsEnabled());
+	_shader.uploadUniform("u_shadowMapSize",				Config::getInst().getShadowQuality());
 
 	// Depth testing
 	glEnable(GL_DEPTH_TEST);

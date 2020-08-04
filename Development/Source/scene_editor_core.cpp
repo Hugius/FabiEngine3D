@@ -142,7 +142,7 @@ void SceneEditor::load()
 {
 	// Enable default graphics
 	_fe3d.gfx_enableAmbientLighting(vec3(1.0f), 1.0f);
-	//_fe3d.gfx_enableShadows(vec3(50.0f, 50.0f, 0.0f), vec3(0.0f), 100.0f, 150.0);
+	_fe3d.gfx_enableShadows(vec3(50.0f, 150.0f, 0.0f), vec3(200.0f, 0.0f, 0.0f), 100.0f, 30050.0);
 
 	// Disable default skybox
 	_fe3d.skyEntity_select("");
@@ -492,6 +492,7 @@ void SceneEditor::unload()
 	// Disable graphics
 	_fe3d.gfx_disableAmbientLighting();
 	_fe3d.gfx_disableDirectionalLighting();
+	_fe3d.gfx_disableSkyHDR();
 	_fe3d.gfx_disableShadows();
 
 	// Delete sky entity
@@ -519,15 +520,14 @@ void SceneEditor::unload()
 
 	// Reset variables
 	_currentPreviewModelName = "";
+	_currentBillboardName = "";
 	_selectedModelID = "";
 	_activeModelID = "";
 	_selectedLightnessMultiplier = 1;
 	_activeLightnessMultiplier = 1;
-	_currentBillboardName = "";
 	_isPlacingPointlight = false;
 	_isLoaded = false;
 	_transformation = Transformation::TRANSLATION;
-	_currentProjectName = "";
 	_customCameraSpeed = 10.0f;
 
 	// Delete name textfields

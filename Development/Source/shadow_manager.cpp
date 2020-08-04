@@ -14,6 +14,8 @@ void ShadowManager::loadShadows(vec3 eye, vec3 center, float size, float reach)
 void ShadowManager::update(ShaderBus& shaderBus)
 {
 	shaderBus.setShadowMatrix(_createLightSpaceMatrix());
+	shaderBus.setShadowAreaSize(_size);
+	shaderBus.setShadowCasterPosition(_eye);
 }
 
 mat4 ShadowManager::_createLightSpaceMatrix()

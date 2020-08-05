@@ -187,7 +187,7 @@ vec3 getPointLighting()
 	}
 }
 
-float getRandom(vec3 seed, int i)
+float getRandomFloat(vec3 seed, int i)
 {
 	vec4 seed4 = vec4(seed,i);
 	float dot_product = dot(seed4, vec4(12.9898,78.233,45.164,94.673));
@@ -229,7 +229,7 @@ vec3 getShadowLighting()
 			for(int i = 0; i < 4; i++)
 			{
 				// Get random index
-				int index = int(4*getRandom(floor(f_pos.xyz*1000.0f), i))%4;
+				int index = int(4*getRandomFloat(floor(f_pos.xyz*1000.0f), i))%4;
 
 				// Calculate depth from shadow map
 				float shadowMapDepth = texture(u_sampler_shadowMap, projCoords.xy + (poissonDisk[index] / 700.0f)).r;

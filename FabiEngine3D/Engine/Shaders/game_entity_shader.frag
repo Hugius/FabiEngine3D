@@ -31,6 +31,7 @@ uniform vec3 u_pointLightPositions[POINT_LIGHT_AMOUNT];
 uniform vec3 u_pointLightColors[POINT_LIGHT_AMOUNT];
 uniform vec3 u_color;
 uniform vec3 u_fogColor;
+uniform vec3 u_shadowAreaCenter;
 
 // Float uniforms
 uniform float u_pointLightIntensities[POINT_LIGHT_AMOUNT];
@@ -44,6 +45,7 @@ uniform float u_customAlpha;
 uniform float u_skyReflectionFactor;
 uniform float u_sceneReflectionFactor;
 uniform float u_lightness;
+uniform float u_shadowAreaSize;
 
 // Boolean uniforms
 uniform bool u_isTransparent;
@@ -62,6 +64,7 @@ uniform bool u_sceneReflectionsEnabled;
 uniform bool u_fogEnabled;
 uniform bool u_shadowsEnabled;
 uniform bool u_hasDiffuseMap;
+uniform bool u_shadowFrameRenderingEnabled;
 
 // Integer uniforms
 uniform int u_shadowMapSize;
@@ -226,48 +229,89 @@ float getSpecularValue(vec3 position)
     }
 }
 
+float getRandomFloat(vec3 seed, int i)
+{
+	vec4 seed4 = vec4(seed,i);
+	float dot_product = dot(seed4, vec4(12.9898,78.233,45.164,94.673));
+	return fract(sin(dot_product) * 43758.5453);
+}
+
 vec3 getShadowLighting()
 {
 	if(u_shadowsEnabled && u_isShadowed)
 	{
-		// Variables
-		float shadow       = 0.0f;
-		vec3 projCoords    = (f_shadowPos.xyz / f_shadowPos.w) * 0.5 + 0.5;
-		float currentDepth = projCoords.z;
-		float texelSize    = 1.0f / float(u_shadowMapSize);
-
-		// Skip fragments outside of the depth map
-		if (projCoords.z > 1.0f)
-		{	
-			return vec3(1.0f);
-		}
-
-		// Calculate PCF shadows
-		for(int x = -1; x <= 1; ++x)
+		if
+		(
+			abs(f_pos.x - u_shadowAreaCenter.x) <= (u_shadowAreaSize) && 
+			abs(f_pos.z - u_shadowAreaCenter.z) <= (u_shadowAreaSize)
+		)
 		{
-			for(int y = -1; y <= 1; ++y)
+			// Variables
+			float shadow       = 1.0f;
+			vec3 projCoords    = (f_shadowPos.xyz / f_shadowPos.w) * 0.5f + 0.5f;
+			float currentDepth = projCoords.z;
+			float texelSize    = 1.0f / float(u_shadowMapSize);
+
+			// Skip fragments outside of the depth map
+			if (projCoords.z > 1.0f)
+			{	
+				return vec3(1.0f);
+			}
+
+			// Poisson values
+			const vec2 poissonDisk[4] = vec2[]
+			(
+			  vec2(-0.94201624f, -0.39906216f),
+			  vec2(0.94558609f, -0.76890725f),
+			  vec2(-0.094184101f, -0.92938870f),
+			  vec2(0.34495938f, 0.29387760)
+			);
+
+			// Calculate poisson sampled shadows
+			for(int i = 0; i < 4; i++)
 			{
-				float pcfDepth = texture(u_sampler_shadowMap, projCoords.xy + vec2(x, y) * vec2(texelSize)).r; 
-				shadow += currentDepth - texelSize > pcfDepth ? 0.2f : 1.0f;        
-			}    
-		}
-		
-		// Return shadow value
-		shadow /= 9.0f;
-        shadow += 0.1f;
+				// Get random index
+				int index = int(4*getRandomFloat(floor(f_pos.xyz*1000.0f), i))%4;
 
-		// Check if truly shadowed or just a small PCF mistake
-		if(shadow > 0.6f)
-		{
-			return vec3(1.0f);
+				// Calculate depth from shadow map
+				float shadowMapDepth = texture(u_sampler_shadowMap, projCoords.xy + (poissonDisk[index] / 700.0f)).r;
+
+				// Apply result value
+				if((currentDepth - texelSize) > shadowMapDepth)
+				{
+					shadow -= 0.2f; // Shadow
+				}
+				else
+				{
+					shadow -= 0.0f; // No shadow
+				}
+			}
+			
+			// Long-distance shadows fading
+			float maxDistance = max(abs(f_pos.x - u_shadowAreaCenter.x), abs(f_pos.z - u_shadowAreaCenter.z)); // Max distance to center
+			float alpha = maxDistance - (u_shadowAreaSize * 0.9f); // Only for the outer 10% of the shadowed area
+			alpha = clamp(alpha, 0.0f, u_shadowAreaSize * 0.1f); // Cannot be negative
+			alpha /= (u_shadowAreaSize * 0.1f); // Convert value to 0.0 - 1.0 range
+
+			// Debug area frame rendering
+			if(u_shadowFrameRenderingEnabled)
+			{
+				if((maxDistance - (u_shadowAreaSize * 0.99f)) > 0.0f)
+				{
+					return vec3(0.0f);
+				}
+			}
+
+			// Return shadow value
+			return vec3(mix(shadow, 1.0f, alpha));
 		}
-		else
-		{
-			return vec3(shadow);
-		}
+
+		// No shadow
+		return vec3(1.0f);
 	}
 	else
 	{
+		// No shadow
 		return vec3(1.0f);
 	}
 }

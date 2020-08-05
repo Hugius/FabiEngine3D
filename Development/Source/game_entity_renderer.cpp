@@ -34,7 +34,10 @@ void GameEntityRenderer::bind()
 	_shader.uploadUniform("u_skyReflectionsEnabled",		_shaderBus.isSkyReflectionsEnabled());
 	_shader.uploadUniform("u_sceneReflectionsEnabled",		_shaderBus.isSceneReflectionsEnabled());
 	_shader.uploadUniform("u_fogEnabled",					_shaderBus.isFogEnabled());
+	_shader.uploadUniform("u_shadowAreaSize",				_shaderBus.getShadowAreaSize());
+	_shader.uploadUniform("u_shadowAreaCenter",				_shaderBus.getShadowAreaCenter());
 	_shader.uploadUniform("u_shadowsEnabled",				_shaderBus.isShadowsEnabled());
+	_shader.uploadUniform("u_shadowFrameRenderingEnabled",  _shaderBus.isShadowFrameRenderingEnabled());
 	_shader.uploadUniform("u_skyReflectionFactor",			_shaderBus.getSkyReflectionFactor());
 	_shader.uploadUniform("u_sceneReflectionFactor",		_shaderBus.getSceneReflectionFactor());
 	_shader.uploadUniform("u_shadowMapSize",				Config::getInst().getShadowQuality());

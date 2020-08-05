@@ -27,10 +27,11 @@ void FabiEngine3D::gfx_enablePointLighting()
 	_core->_shaderBus.setPointLightingEnabled(true);
 }
 
-void FabiEngine3D::gfx_enableFog(float minDistance)
+void FabiEngine3D::gfx_enableFog(float minDistance, vec3 color)
 {
 	_core->_shaderBus.setFogEnabled(true);
 	_core->_shaderBus.setFogMinDistance(minDistance);
+	_core->_shaderBus.setFogColor(color);
 }
 
 void FabiEngine3D::gfx_enableSkyReflections(float factor)
@@ -62,7 +63,7 @@ void FabiEngine3D::gfx_enableLightMapping()
 
 void FabiEngine3D::gfx_enableMSAA()
 {
-	_core->_shaderBus.setMSAAEnabled(true);
+	_core->_shaderBus.setMsaaEnabled(true);
 }
 
 void FabiEngine3D::gfx_enableShadows(vec3 eye, vec3 center, float size, float reach)
@@ -89,7 +90,7 @@ void FabiEngine3D::gfx_enableSkyHDR(float brightnessFactor)
 	if (_core->_shaderBus.isBloomEnabled())
 	{
 		_core->_shaderBus.setSkyHdrEnabled(true);
-		_core->_skyEntityManager.saveHDRState(brightnessFactor);
+		_core->_skyEntityManager.setBrightnessFactor(brightnessFactor);
 	}
 }
 
@@ -146,7 +147,7 @@ void FabiEngine3D::gfx_disableLightMapping()
 
 void FabiEngine3D::gfx_disableMSAA()
 {
-	_core->_shaderBus.setMSAAEnabled(false);
+	_core->_shaderBus.setMsaaEnabled(false);
 }
 
 void FabiEngine3D::gfx_disableShadows()

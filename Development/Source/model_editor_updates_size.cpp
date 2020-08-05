@@ -44,7 +44,7 @@ void ModelEditor::_updateModelEditingSize()
 			_aabbRenderingEnabled = !_aabbRenderingEnabled;
 
 			// Toggle view
-			_aabbRenderingEnabled ? _fe3d.collision_enableFrameRendering() : _fe3d.collision_disableFrameRendering();
+			_aabbRenderingEnabled ? _fe3d.misc_enableAabbFrameRendering() : _fe3d.misc_disableAabbFrameRendering();
 			_aabbRenderingEnabled ? _fe3d.aabbEntity_show(_currentModelName) : _fe3d.aabbEntity_hide(_currentModelName);
 			string newContent = _aabbRenderingEnabled ? "Hitbox: ON" : "Hitbox: OFF";
 			_fe3d.textEntity_setTextContent(screen->getButton("toggleBoxView")->getTextfield()->getEntityID(), newContent);
@@ -74,7 +74,7 @@ void ModelEditor::_updateModelEditingSize()
 			_fe3d.textEntity_setTextContent(screen->getButton("toggleResizeMesh")->getTextfield()->getEntityID(), "Mesh resize: OFF");
 			_fe3d.textEntity_setTextContent(screen->getButton("toggleResizeBox")->getTextfield()->getEntityID(), "Box resize: OFF");
 			_fe3d.textEntity_setTextContent(screen->getButton("toggleBoxView")->getTextfield()->getEntityID(), "Hitbox: OFF");
-			_fe3d.collision_disableFrameRendering();
+			_fe3d.misc_disableAabbFrameRendering();
 			_leftWindow->setActiveScreen("modelEditorMenuChoice");
 		}
 	}

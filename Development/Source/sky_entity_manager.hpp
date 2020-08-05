@@ -14,14 +14,13 @@ public:
 	void selectSky(const string& ID);
 	void addSkyEntity(const string& ID);
 	void update() override;
-	void saveHDRState(float brightnessFactor);
+	void setBrightnessFactor(float brightnessFactor);
 
 private:
 	void _updateRotation();
 	void _updateEyeAdaption();
 
 	float _hdrBrightnessFactor = 0.0f;
-	float _originalHdrSkyLightness = 0.0f;
 
 	string _selectedID = "";
 };

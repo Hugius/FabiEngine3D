@@ -139,7 +139,7 @@ void SkyEntityManager::_updateEyeAdaption()
 		const float speed = 0.0005f;
 		float lightness = getSelectedSky()->getLightness();
 		float pitch = std::min(_shaderBus.getCameraPitch() + 15.0f, 90.0f);
-		float targetLightness = _originalHdrSkyLightness + (((90.0f - pitch) / 90.0f) * _hdrBrightnessFactor);
+		float targetLightness = getSelectedSky()->getOriginalLightness() + (((90.0f - pitch) / 90.0f) * _hdrBrightnessFactor);
 
 		// Based on verticle angle
 		if (lightness > targetLightness) // Decrease lightness
@@ -155,13 +155,12 @@ void SkyEntityManager::_updateEyeAdaption()
 	{
 		if (hdrWasEnabled)
 		{
-			getSelectedSky()->setLightness(_originalHdrSkyLightness); // Revert lightness
+			getSelectedSky()->setLightness(getSelectedSky()->getOriginalLightness()); // Revert lightness
 		}
 	}
 }
 
-void SkyEntityManager::saveHDRState(float brightnessFactor)
+void SkyEntityManager::setBrightnessFactor(float brightnessFactor)
 {
-	_originalHdrSkyLightness = getSelectedSky()->getLightness();
 	_hdrBrightnessFactor = brightnessFactor;
 }

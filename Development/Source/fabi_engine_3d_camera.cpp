@@ -147,7 +147,7 @@ float FabiEngine3D::camera_getMouseSensitivity()
 	return _core->_cameraManager.getMouseSensitivity();
 }
 
-vec3 FabiEngine3D::camera_getPos()
+vec3 FabiEngine3D::camera_getPosition()
 {
 	return _core->_cameraManager.getPosition();
 }

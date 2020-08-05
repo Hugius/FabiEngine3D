@@ -65,22 +65,42 @@ void FabiEngine3D::misc_hideCursor()
 
 void FabiEngine3D::misc_enableWireframeRendering()
 {
-	_core->_shaderBus.setWireframeEnabled(true);
+	_core->_shaderBus.setWireframeRenderingEnabled(true);
 }
 
 void FabiEngine3D::misc_disableWireframeRendering()
 {
-	_core->_shaderBus.setWireframeEnabled(false);
+	_core->_shaderBus.setWireframeRenderingEnabled(false);
+}
+
+void FabiEngine3D::misc_enableShadowFrameRendering()
+{
+	_core->_shaderBus.setShadowFrameRenderingEnabled(true);
+}
+
+void FabiEngine3D::misc_disableShadowFrameRendering()
+{
+	_core->_shaderBus.setShadowFrameRenderingEnabled(false);
+}
+
+void FabiEngine3D::misc_enableAabbFrameRendering()
+{
+	_core->_shaderBus.setAabbFrameRenderingEnabled(true);
+}
+
+void FabiEngine3D::misc_disableAabbFrameRendering()
+{
+	_core->_shaderBus.setAabbFrameRenderingEnabled(false);
 }
 
 void FabiEngine3D::misc_enableDebugRendering()
 {
-	_core->_shaderBus.setDebugRenderEnabled(true);
+	_core->_shaderBus.setDebugRenderingEnabled(true);
 }
 
 void FabiEngine3D::misc_disableDebugRendering()
 {
-	_core->_shaderBus.setDebugRenderEnabled(false);
+	_core->_shaderBus.setDebugRenderingEnabled(false);
 }
 
 void FabiEngine3D::misc_setMousePos(ivec2 pos)

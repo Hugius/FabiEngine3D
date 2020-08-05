@@ -16,6 +16,7 @@ public:
 	bool cancelledInput();
 	bool confirmedInput();
 	bool isActive();
+	bool hasTextContentChanged();
 
 	string getTextContent();
 
@@ -39,6 +40,7 @@ private:
 	const int _maxPassedBarFrames = 50;
 	const int _maxPassedBackspaceFrames = 20;
 
+	string _lastTextContent = "";
 	string _currentTextContent = "";
 
 	const float _charWidth = 0.02f;

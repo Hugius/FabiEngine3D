@@ -55,7 +55,7 @@ void RenderEngine::renderScene(EntityBus * entityBus, CameraManager & camera, iv
 	_entityBus = entityBus;
 
 	// Wireframe or non-wireframe rendering
-	if (_shaderBus.isWireframeEnabled())
+	if (_shaderBus.isWireframeRenderingEnabled())
 	{
 		glViewport(Config::getInst().getVpPos().x, Config::getInst().getVpPos().y, Config::getInst().getVpSize().x, Config::getInst().getVpSize().y);
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -86,7 +86,7 @@ void RenderEngine::renderScene(EntityBus * entityBus, CameraManager & camera, iv
 		_timer.stop();
 
 		// Bind screen framebuffer
-		if (_shaderBus.isMSAAEnabled())
+		if (_shaderBus.isMsaaEnabled())
 		{
 			_msaaFramebuffer.bind();
 		}
@@ -118,7 +118,7 @@ void RenderEngine::renderScene(EntityBus * entityBus, CameraManager & camera, iv
 
 		// Unbind screen framebuffer
 		_timer.start("antiAliasing");
-		if (_shaderBus.isMSAAEnabled())
+		if (_shaderBus.isMsaaEnabled())
 		{
 			_msaaFramebuffer.processAAData(&_aaProcessorFramebuffer);
 			_msaaFramebuffer.unbind();
@@ -144,7 +144,7 @@ void RenderEngine::renderScene(EntityBus * entityBus, CameraManager & camera, iv
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		// Render debug or normal
-		if (_shaderBus.isDebugRenderEnabled())
+		if (_shaderBus.isDebugRenderingEnabled())
 		{
 			_renderDebugScreens();
 			_timer.stop();

@@ -22,8 +22,9 @@ void WorldEditor::loadWaterEntity()
 		// Values
 		string dudvMapPath, normalMapPath, displacementMapPath;
 		bool isWaving, isRippling, isSpecularLighted, isReflective, isRefractive;
+		vec2 speed;
 		vec3 color, position;
-		float size, uvRepeat, waveHeightFactor, speed, transparency, specularFactor, specularIntensity;
+		float size, uvRepeat, waveHeightFactor, transparency, specularFactor, specularIntensity;
 
 		// Load base data
 		waterFile >>
@@ -44,7 +45,8 @@ void WorldEditor::loadWaterEntity()
 			position.z >>
 			uvRepeat >>
 			waveHeightFactor >>
-			speed >>
+			speed.x >>
+			speed.y >>
 			transparency >>
 			specularFactor >>
 			specularIntensity;
@@ -117,7 +119,7 @@ void WorldEditor::_saveWaterData()
 			vec3 position = _fe3d.waterEntity_getPosition("@water");
 			float uvRepeat = _fe3d.waterEntity_getUvRepeat("@water");
 			float waveHeightFactor = _fe3d.waterEntity_getWaveHeightFactor("@water");
-			float speed = _fe3d.waterEntity_getSpeed("@water");
+			vec2 speed = _fe3d.waterEntity_getSpeed("@water");
 			float transparency = _fe3d.waterEntity_getTransparency("@water");
 			float specularFactor = _fe3d.waterEntity_getSpecularLightingFactor("@water");
 			float specularIntensity = _fe3d.waterEntity_getSpecularLightingIntensity("@water");
@@ -149,7 +151,8 @@ void WorldEditor::_saveWaterData()
 				position.z << " " <<
 				uvRepeat << " " << 
 				waveHeightFactor << " " <<
-				speed << " " << 
+				speed.x << " " << 
+				speed.y << " " <<
 				transparency << " " <<
 				specularFactor << " " <<
 				specularIntensity << std::endl;

@@ -14,7 +14,7 @@ void GameEntityRenderer::bind()
 	_shader.uploadUniform("u_projMatrix",        _shaderBus.getProjectionMatrix());
 	_shader.uploadUniform("u_skyRotationMatrix", _shaderBus.getSkyRotationMatrix());
 	_shader.uploadUniform("u_shadowMatrix",      _shaderBus.getShadowMatrix());
-	_shader.uploadUniform("u_clippingPlane",     clippingPlane);
+	_shader.uploadUniform("u_clippingPlane",	 clippingPlane);
 	
 	// Fragment shader uniforms u_specularLightStrength
 	_shader.uploadUniform("u_cameraPosition",				_shaderBus.getCameraPos());
@@ -26,6 +26,7 @@ void GameEntityRenderer::bind()
 	_shader.uploadUniform("u_directionalLightingPosition",	_shaderBus.getDirectionalLightingPosition());
 	_shader.uploadUniform("u_directionalLightingIntensity", _shaderBus.getDirectionalLightingIntensity());
 	_shader.uploadUniform("u_fogMinDistance",				_shaderBus.getFogMinDistance());
+	_shader.uploadUniform("u_fogColor",						_shaderBus.getFogColor());
 	_shader.uploadUniform("u_specularLightingEnabled",		_shaderBus.isSpecularLightingEnabled());
 	_shader.uploadUniform("u_specularLightingIntensity",	_shaderBus.getSpecularLightingIntensity());
 	_shader.uploadUniform("u_pointLightingEnabled",			_shaderBus.isPointLightingEnabled());

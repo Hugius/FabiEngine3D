@@ -51,6 +51,7 @@ public:
 	vector<shared_ptr<EngineGuiTextfield>>& getTextfields();
 
 	// Value form
+	void setValueFormButtonsPosition(vec2 position);
 	void addValueForm(const string& ID, string title, int value, vec2 position, vec2 size);
 	void addValueForm(const string& ID, string title, float value, vec2 position, vec2 size);
 	void addValueForm(const string& ID, string title, double value, vec2 position, vec2 size);
@@ -95,6 +96,8 @@ private:
 	vector<string> _valueFormIDs;
 	string _choiceFormID = "";
 	string _answerFormID = "";
+
+	vec2 _valueFormButtonsPosition = vec2(0.0f);
 
 	bool _isFocused = false;
 	bool _exitValueFilling = false;

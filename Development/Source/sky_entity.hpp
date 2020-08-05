@@ -18,6 +18,7 @@ public:
 	void setRotationMatrix(const mat4& val);
 	void setColor(vec3 val);
 	void setCubeMap(GLuint val);
+	void setOriginalLightness(float val);
 	void setLightness(float val);
 	void setRotationSpeed(float val);
 
@@ -25,6 +26,7 @@ public:
 	const mat4& getRotationMatrix()				 const;
 	const vec3 getColor()						 const;
 	const GLuint getCubeMap()					 const;
+	const float getOriginalLightness()			 const;
 	const float getLightness()					 const;
 	const float getRotationSpeed()				 const;
 
@@ -37,6 +39,7 @@ private:
 
 	GLuint _cubeMap   = 0;
 
-	float _lightness		= 1.0f;
-	float _rotationSpeed    = 0.0f;
+	float _originalLightness = 1.0f;
+	float _lightness		 = 1.0f;
+	float _rotationSpeed     = 0.0f;
 };

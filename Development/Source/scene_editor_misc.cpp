@@ -21,11 +21,11 @@ void SceneEditor::_updateMiscellaneous()
 		// Update bounding box visibility
 		if (_fe3d.input_getKeyToggled(Input::KEY_B))
 		{
-			_fe3d.collision_enableFrameRendering();
+			_fe3d.misc_enableAabbFrameRendering();
 		}
 		else
 		{
-			_fe3d.collision_disableFrameRendering();
+			_fe3d.misc_disableAabbFrameRendering();
 		}
 	}
 }

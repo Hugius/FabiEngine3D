@@ -37,14 +37,21 @@ void RenderEngine::_captureSceneReflections(CameraManager& camera)
 		camera.setPosition(newCameraPos);
 		camera.invertPitch();
 		camera.updateMatrices();
+		
+		// Save reflection exceptions
+		bool shadowsEnabled = _shaderBus.isShadowsEnabled();
+		float oldLightness = _entityBus->getSkyEntity()->getLightness();
+		_shaderBus.setShadowsEnabled(false);
+		const_cast<SkyEntity*>(_entityBus->getSkyEntity())->setLightness(_entityBus->getSkyEntity()->getOriginalLightness());
 
 		// Render scene
-		bool shadows = _shaderBus.isShadowsEnabled();
-		_shaderBus.setShadowsEnabled(false);
 		_renderSkyEntity();
 		_renderTerrainEntity();
 		_renderGameEntities();
-		_shaderBus.setShadowsEnabled(shadows);
+
+		// Revert reflection exceptions
+		_shaderBus.setShadowsEnabled(shadowsEnabled);
+		const_cast<SkyEntity*>(_entityBus->getSkyEntity())->setLightness(oldLightness);
 
 		// Revert camera angle
 		cameraPos = camera.getPosition();

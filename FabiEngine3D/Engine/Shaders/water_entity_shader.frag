@@ -18,8 +18,10 @@ uniform vec3 u_directionalLightingPosition;
 uniform vec3 u_cameraPosition;
 uniform vec3 u_color;
 
+// Vector2 uniforms
+uniform vec2 u_rippleOffset;
+
 // Float uniforms
-uniform float u_rippleOffset;
 uniform float u_fogMinDistance;
 uniform float u_specularLightingFactor;
 uniform float u_specularLightingIntensity;
@@ -78,7 +80,7 @@ vec4 getMainColor()
 	if(u_isRippling)
 	{
 		// DUDV mapping
-		vec2 distortedTexCoords = f_uv + texture(u_sampler_dudvMap, vec2(f_uv.x + u_rippleOffset, f_uv.y + u_rippleOffset)).rg * 0.1;
+		vec2 distortedTexCoords = f_uv + texture(u_sampler_dudvMap, vec2(f_uv.x + u_rippleOffset.x, f_uv.y + u_rippleOffset.y)).rg * 0.1;
 		vec2 totalDistortion = (texture(u_sampler_dudvMap, distortedTexCoords).rg * 2.0 - 1.0) * 0.025f;
 		texCoords   += totalDistortion;
 		texCoords.x = clamp(texCoords.x, 0.001f, 0.999f);
@@ -86,7 +88,7 @@ vec4 getMainColor()
 
 		// Normal mapping
 		vec3 normalMapColor = texture(u_sampler_normalMap, distortedTexCoords).rgb;
-		normal              = vec3((normalMapColor.r * 2.0f) - 1.0f, normalMapColor.b * 3.0f, (normalMapColor.g * 2.0f) - 1.0f);
+		normal              = vec3((normalMapColor.r * 2.0f) - 1.0f, normalMapColor.b * 2.0f, (normalMapColor.g * 2.0f) - 1.0f);
 		normal              = normalize(normal);
 	}
 
@@ -99,23 +101,30 @@ vec4 getMainColor()
 		specular = pow(max(dot(reflectDir, viewDir), 0.0f), u_specularLightingFactor) * u_specularLightingIntensity;
 	}
 
+	// Fresnel effect
+	vec3 viewDir = normalize(u_cameraPosition - f_pos);
+	float mixFactor = dot(viewDir, normal);
+
 	// Finalizing fragment color
 	vec3 finalColor;
 	vec3 reflectionColor = texture(u_sampler_reflectionMap, vec2(texCoords.x,  texCoords.y)).rgb; // Reflection color
 	vec3 refractionColor = texture(u_sampler_refractionMap, vec2(texCoords.x, -texCoords.y)).rgb; // Refraction color
 
+	// Determine which textures to mix
 	if(u_isReflective && u_isRefractive) // Both
 	{
-		finalColor = mix(reflectionColor, refractionColor, 0.5f); // Combining reflection & refraction
+		finalColor = mix(reflectionColor, refractionColor, mixFactor); // Combining reflection & refraction
 		finalColor = mix(finalColor, u_color, 0.1f); // Water color tint
 	}
 	else if(u_isReflective) // Only reflection
 	{
 		finalColor = reflectionColor;
+		finalColor = mix(finalColor, u_color, 0.1f); // Water color tint
 	}
 	else if(u_isRefractive) // Only refraction
 	{
 		finalColor = refractionColor;
+		finalColor = mix(finalColor, u_color, 0.1f); // Water color tint
 	}
 	else // None
 	{

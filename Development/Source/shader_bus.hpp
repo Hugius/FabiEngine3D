@@ -34,7 +34,8 @@ public:
 	void setAmbientLightColor(vec3 val);
 	void setDirectionalLightPos(vec3 val);
 	void setDirectionalLightColor(vec3 val);
-	void setShadowCasterPosition(vec3 val);
+	void setShadowAreaCenter(vec3 val);
+	void setFogColor(vec3 val);
 
 	// Floats
 	void setAmbientLightIntensity(float val);
@@ -57,7 +58,7 @@ public:
 	void setBloomBlurSize(int val);
 
 	// Booleans
-	void setMSAAEnabled(bool val);
+	void setMsaaEnabled(bool val);
 	void setAmbientLightingEnabled(bool val);
 	void setDirectionalLightingEnabled(bool val);
 	void setSpecularLightingEnabled(bool val);
@@ -72,9 +73,10 @@ public:
 	void setShadowsEnabled(bool val);
 	void setDofEnabled(bool val);
 	void setMotionBlurEnabled(bool val);
-	void setWireframeEnabled(bool val);
-	void setAabbFrameEnabled(bool val);
-	void setDebugRenderEnabled(bool val);
+	void setWireframeRenderingEnabled(bool val);
+	void setAabbFrameRenderingEnabled(bool val);
+	void setDebugRenderingEnabled(bool val);
+	void setShadowFrameRenderingEnabled(bool val);
 
 	// Textures
 	const GLuint getSceneMap()             const;
@@ -99,7 +101,8 @@ public:
 	const vec3 getAmbientLightingColor()		const;
 	const vec3 getDirectionalLightingColor()    const;
 	const vec3 getDirectionalLightingPosition()	const;
-	const vec3 getShadowCasterPosition()		const;
+	const vec3 getShadowAreaCenter()			const;
+	const vec3 getFogColor()					const;
 
 	// Floats
 	const float getAmbientLightingIntensity()	  const;
@@ -122,24 +125,25 @@ public:
 	const int getBloomBlurSize() const;
 
 	// Booleans
-	const bool isMSAAEnabled()                const;
-	const bool isAmbientLightingEnabled()     const;
-	const bool isDirectionalLightingEnabled() const;
-	const bool isSpecularLightingEnabled()    const;
-	const bool isPointLightingEnabled()       const;
-	const bool isFogEnabled()                 const;
-	const bool isLightMappingEnabled()        const;
-	const bool isSkyReflectionsEnabled()      const;
-	const bool isSceneReflectionsEnabled()    const;
-	const bool isBloomEnabled()               const;
-	const bool isWaterEffectsEnabled()        const;
-	const bool isSkyHdrEnabled()              const;
-	const bool isShadowsEnabled()             const;
-	const bool isDofEnabled()                 const;
-	const bool isMotionBlurEnabled()          const;
-	const bool isWireframeEnabled()           const;
-	const bool isAabbFrameEnabled()           const;
-	const bool isDebugRenderEnabled()         const;
+	const bool isMsaaEnabled()                 const;
+	const bool isAmbientLightingEnabled()      const;
+	const bool isDirectionalLightingEnabled()  const;
+	const bool isSpecularLightingEnabled()     const;
+	const bool isPointLightingEnabled()        const;
+	const bool isFogEnabled()                  const;
+	const bool isLightMappingEnabled()         const;
+	const bool isSkyReflectionsEnabled()       const;
+	const bool isSceneReflectionsEnabled()     const;
+	const bool isBloomEnabled()                const;
+	const bool isWaterEffectsEnabled()         const;
+	const bool isSkyHdrEnabled()               const;
+	const bool isShadowsEnabled()              const;
+	const bool isDofEnabled()                  const;
+	const bool isMotionBlurEnabled()           const;
+	const bool isWireframeRenderingEnabled()   const;
+	const bool isAabbFrameRenderingEnabled()   const;
+	const bool isShadowFrameRenderingEnabled() const;
+	const bool isDebugRenderingEnabled()       const;
 
 private:
 	// Textures
@@ -165,7 +169,8 @@ private:
 	vec3 _ambientLightingColor		  = vec3(1.0f);
 	vec3 _directionalLightingColor    = vec3(1.0f);
 	vec3 _directionalLightingPosition = vec3(0.0f);
-	vec3 _shadowCasterPosition		  = vec3(0.0f);
+	vec3 _shadowAreaCenter			  = vec3(0.0f);
+	vec3 _fogColor					  = vec3(1.0f);
 
 	// Floats
 	float _ambientLightingIntensity     = 1.0f;
@@ -188,22 +193,23 @@ private:
 	int _bloomBlurSize = 0;
 
 	// Booleans
-	bool _msaaEnabled                = false;
-	bool _ambientLightingEnabled     = false;
-	bool _directionalLightingEnabled = false;
-	bool _specularLightingEnabled    = false;
-	bool _pointLightingEnabled       = false;
-	bool _fogEnabled                 = false;
-	bool _lightMappingEnabled        = false;
-	bool _skyReflectionsEnabled      = false;
-	bool _sceneReflectionsEnabled    = false;
-	bool _bloomEnabled               = false;
-	bool _waterEffectsEnabled        = false;
-	bool _skyHdrEnabled              = false;
-	bool _shadowsEnabled             = false;
-	bool _dofEnabled                 = false;
-	bool _motionBlurEnabled          = false;
-	bool _wireframeEnabled           = false;
-	bool _aabbFrameEnabled           = false;
-	bool _debugRenderEnabled         = false;
+	bool _isMsaaEnabled                 = false;
+	bool _isAmbientLightingEnabled      = false;
+	bool _isDirectionalLightingEnabled  = false;
+	bool _isSpecularLightingEnabled     = false;
+	bool _isPointLightingEnabled        = false;
+	bool _isFogEnabled                  = false;
+	bool _isLightMappingEnabled         = false;
+	bool _isSkyReflectionsEnabled       = false;
+	bool _isSceneReflectionsEnabled     = false;
+	bool _isBloomEnabled                = false;
+	bool _isWaterEffectsEnabled         = false;
+	bool _isSkyHdrEnabled               = false;
+	bool _isShadowsEnabled              = false;
+	bool _isDofEnabled                  = false;
+	bool _isMotionBlurEnabled           = false;
+	bool _isWireframeRenderingEnabled   = false;
+	bool _isAabbFrameRenderingEnabled   = false;
+	bool _isShadowFrameRenderingEnabled	= false;
+	bool _isDebugRenderingEnabled		= false;
 };

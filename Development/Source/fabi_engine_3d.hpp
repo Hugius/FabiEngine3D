@@ -62,7 +62,7 @@ public:
 	bool  camera_isLookatEnabled();
 	bool  camera_isFirstPersonViewEnabled();
 	bool  camera_isFreeMovementEnabled();
-	vec3  camera_getPos();
+	vec3  camera_getPosition();
 	float camera_getFOV();
 	float getAspectRatio();
 	float camera_getMouseSensitivity();
@@ -145,6 +145,7 @@ public:
 	void waterEntity_hide(const string& ID);
 	void waterEntity_show(const string& ID);
 	void waterEntity_select(const string& ID);
+	void waterEntity_setSpeed(const string& ID, vec2 speed);
 	void waterEntity_setPosition(const string& ID, vec3 position);
 	void waterEntity_setSize(const string& ID, float size);
 	void waterEntity_setWaving(const string& ID, bool enabled);
@@ -161,7 +162,6 @@ public:
 	void waterEntity_setTransparency(const string& ID, float transparency);
 	void waterEntity_setColor(const string& ID, vec3 color);
 	void waterEntity_setUvRepeat(const string& ID, float repeat);
-	void waterEntity_setSpeed(const string& ID, float speed);
 
 	// Water entity interface - getters
 	bool   waterEntity_isExisting(const string& ID);
@@ -171,11 +171,11 @@ public:
 	bool   waterEntity_isSpecularLighted(const string& ID);
 	bool   waterEntity_isReflective(const string& ID);
 	bool   waterEntity_isRefractive(const string& ID);
+	vec2  waterEntity_getSpeed(const string& ID);
 	vec3   waterEntity_getPosition(const string& ID);
 	vec3   waterEntity_getColor(const string& ID);
 	float  waterEntity_getSize(const string& ID);
 	float  waterEntity_getUvRepeat(const string& ID);
-	float  waterEntity_getSpeed(const string& ID);
 	float  waterEntity_getWaveHeightFactor(const string& ID);
 	float  waterEntity_getSpecularLightingFactor(const string& ID);
 	float  waterEntity_getSpecularLightingIntensity(const string& ID);
@@ -354,8 +354,6 @@ public:
 	void collision_disableCameraResponse();
 	void collision_enableCameraTerrainResponse(float cameraHeight, float cameraSpeed);
 	void collision_disableCameraTerrainResponse();
-	void collision_enableFrameRendering();
-	void collision_disableFrameRendering();
 
 	// Global collision interface - getters
 	bool collision_checkCursorInEntity(const string& ID);
@@ -463,7 +461,7 @@ public:
 	void gfx_enableDirectionalLighting(vec3 position, vec3 color, float intensity);
 	void gfx_enableSpecularLighting(float intensity);
 	void gfx_enablePointLighting();
-	void gfx_enableFog(float minDistance);
+	void gfx_enableFog(float minDistance, vec3 color);
 	void gfx_enableSkyReflections(float factor);
 	void gfx_enableSceneReflections(float height, float factor);
 	void gfx_enableLightMapping();
@@ -557,17 +555,21 @@ public:
 	}
 
 	// Miscellaneous interface - setters
-	void misc_showCursor();
-	void misc_hideCursor();
 	void misc_enableWireframeRendering();
 	void misc_disableWireframeRendering();
+	void misc_enableShadowFrameRendering();
+	void misc_disableShadowFrameRendering();
+	void misc_enableAabbFrameRendering();
+	void misc_disableAabbFrameRendering();
 	void misc_enableDebugRendering();
 	void misc_disableDebugRendering();
-	void misc_setMousePos(ivec2 pos);
 	void misc_showPerformanceProfiling();
 	void misc_hidePerformanceProfiling();
 	void misc_showAudioDebugging();
 	void misc_hideAudioDebugging();
+	void misc_showCursor();
+	void misc_hideCursor();
+	void misc_setMousePos(ivec2 pos);
 	void misc_setMainRenderingColor(vec3 color);
 	void misc_setWindowTitle(const string& title);
 	void misc_clearOBJCache(const string& filePath);

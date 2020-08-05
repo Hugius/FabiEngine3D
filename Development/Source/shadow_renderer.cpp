@@ -22,62 +22,58 @@ void ShadowRenderer::unbind()
 	_shader.unbind();
 }
 
-void ShadowRenderer::renderGameEntity(const GameEntity * entity)
+void ShadowRenderer::renderGameEntity(const GameEntity* entity)
 {
 	if (entity->isVisible() && entity->isShadowed())
 	{
-		if (fabsf(entity->getTranslation().x - _shaderBus.getShadowCasterPosition().x) < _shaderBus.getShadowAreaSize() &&
-			fabsf(entity->getTranslation().z - _shaderBus.getShadowCasterPosition().z) < _shaderBus.getShadowAreaSize())
+		// Face culling
+		if (entity->isFaceCulled())
 		{
-			// Face culling
-			if (entity->isFaceCulled())
+			glEnable(GL_CULL_FACE);
+		}
+
+		// Uniforms
+		_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix());
+		_shader.uploadUniform("u_alphaObject", entity->isTransparent());
+		_shader.uploadUniform("u_maxY", entity->getMaxY());
+		_shader.uploadUniform("u_sampler_diffuseMap", 0);
+
+		// Bind
+		int index = 0;
+		for (auto& buffer : entity->getOglBuffers())
+		{
+			if (entity->isTransparent() && entity->hasDiffuseMap())
 			{
-				glEnable(GL_CULL_FACE);
+				glActiveTexture(GL_TEXTURE0);
+				glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap(index));
 			}
 
-			// Uniforms
-			_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix());
-			_shader.uploadUniform("u_alphaObject", entity->isTransparent());
-			_shader.uploadUniform("u_maxY", entity->getMaxY());
-			_shader.uploadUniform("u_sampler_diffuseMap", 0);
+			glBindVertexArray(buffer->getVAO());
 
-			// Bind
-			int index = 0;
-			for (auto& buffer : entity->getOglBuffers())
+			// Render
+			if (buffer->isInstanced())
 			{
-				if (entity->isTransparent() && entity->hasDiffuseMap())
-				{
-					glActiveTexture(GL_TEXTURE0);
-					glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap(index));
-				}
-
-				glBindVertexArray(buffer->getVAO());
-
-				// Render
-				if (buffer->isInstanced())
-				{
-					_shader.uploadUniform("u_isInstanced", true);
-					glDrawArraysInstanced(GL_TRIANGLES, 0, buffer->getVertexCount(), buffer->getOffsetCount());
-				}
-				else
-				{
-					_shader.uploadUniform("u_isInstanced", false);
-					glDrawArrays(GL_TRIANGLES, 0, buffer->getVertexCount());
-				}
-
-				index++;
+				_shader.uploadUniform("u_isInstanced", true);
+				glDrawArraysInstanced(GL_TRIANGLES, 0, buffer->getVertexCount(), buffer->getOffsetCount());
+			}
+			else
+			{
+				_shader.uploadUniform("u_isInstanced", false);
+				glDrawArrays(GL_TRIANGLES, 0, buffer->getVertexCount());
 			}
 
-			// Unbind
-			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(GL_TEXTURE_2D, 0);
-			glBindVertexArray(0);
+			index++;
+		}
 
-			// Face culling
-			if (entity->isFaceCulled())
-			{
-				glDisable(GL_CULL_FACE);
-			}
+		// Unbind
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, 0);
+		glBindVertexArray(0);
+
+		// Face culling
+		if (entity->isFaceCulled())
+		{
+			glDisable(GL_CULL_FACE);
 		}
 	}
 }

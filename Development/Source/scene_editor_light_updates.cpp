@@ -49,8 +49,8 @@ void SceneEditor::_updateAmbientLightingMenu()
 			{
 				if (screen->getButton("color")->isHovered())
 				{
-					_gui->getGlobalScreen()->addValueForm("ambientColorG", "G(0-255)", ambientLightingColor.g * 255.0f, vec2(0.0f, 0.0f), vec2(0.2f, 0.1f));
 					_gui->getGlobalScreen()->addValueForm("ambientColorR", "R(0-255)", ambientLightingColor.r * 255.0f, vec2(-0.25f, 0.0f), vec2(0.2f, 0.1f));
+					_gui->getGlobalScreen()->addValueForm("ambientColorG", "G(0-255)", ambientLightingColor.g * 255.0f, vec2(0.0f, 0.0f), vec2(0.2f, 0.1f));
 					_gui->getGlobalScreen()->addValueForm("ambientColorB", "B(0-255)", ambientLightingColor.b * 255.0f, vec2(0.25f, 0.0f), vec2(0.2f, 0.1f));
 				}
 				else if (screen->getButton("intensity")->isHovered())
@@ -109,14 +109,14 @@ void SceneEditor::_updateDirectionalLightingMenu()
 			{
 				if (screen->getButton("color")->isHovered())
 				{
-					_gui->getGlobalScreen()->addValueForm("directionalColorG", "G(0-255)", directionalLightingColor.g * 255.0f, vec2(0.0f, 0.0f), vec2(0.2f, 0.1f));
 					_gui->getGlobalScreen()->addValueForm("directionalColorR", "R(0-255)", directionalLightingColor.r * 255.0f, vec2(-0.25f, 0.0f), vec2(0.2f, 0.1f));
+					_gui->getGlobalScreen()->addValueForm("directionalColorG", "G(0-255)", directionalLightingColor.g * 255.0f, vec2(0.0f, 0.0f), vec2(0.2f, 0.1f));
 					_gui->getGlobalScreen()->addValueForm("directionalColorB", "B(0-255)", directionalLightingColor.b * 255.0f, vec2(0.25f, 0.0f), vec2(0.2f, 0.1f));
 				}
 				else if (screen->getButton("position")->isHovered())
 				{
-					_gui->getGlobalScreen()->addValueForm("positionY", "Y", directionalLightingPosition.y, vec2(0.0f, 0.0f), vec2(0.2f, 0.1f));
 					_gui->getGlobalScreen()->addValueForm("positionX", "X", directionalLightingPosition.x, vec2(-0.25f, 0.0f), vec2(0.2f, 0.1f));
+					_gui->getGlobalScreen()->addValueForm("positionY", "Y", directionalLightingPosition.y, vec2(0.0f, 0.0f), vec2(0.2f, 0.1f));
 					_gui->getGlobalScreen()->addValueForm("positionZ", "Z", directionalLightingPosition.z, vec2(0.25f, 0.0f), vec2(0.2f, 0.1f));
 				}
 				else if (screen->getButton("intensity")->isHovered())

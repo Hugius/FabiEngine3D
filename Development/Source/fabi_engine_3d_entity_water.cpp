@@ -144,7 +144,7 @@ void FabiEngine3D::waterEntity_setSpecularLightingIntensity(const string& ID, fl
 	_core->_waterEntityManager.getEntity(ID)->setSpecularLightingIntensity(intensity);
 }
 
-void FabiEngine3D::waterEntity_setSpeed(const string& ID, float speed)
+void FabiEngine3D::waterEntity_setSpeed(const string& ID, vec2 speed)
 {
 	_core->_waterEntityManager.getEntity(ID)->setSpeed(speed);
 }
@@ -181,7 +181,7 @@ float FabiEngine3D::waterEntity_getUvRepeat(const string& ID)
 	return _core->_waterEntityManager.getEntity(ID)->getUvRepeat();
 }
 
-float FabiEngine3D::waterEntity_getSpeed(const string& ID)
+vec2 FabiEngine3D::waterEntity_getSpeed(const string& ID)
 {
 	return _core->_waterEntityManager.getEntity(ID)->getSpeed();
 }

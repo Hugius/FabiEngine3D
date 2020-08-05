@@ -84,7 +84,7 @@ void RenderEngine::_renderBillboardEntities()
 
 void RenderEngine::_renderAabbEntities()
 {
-	if (_shaderBus.isAabbFrameEnabled())
+	if (_shaderBus.isAabbFrameRenderingEnabled())
 	{
 		// Bind
 		_aabbEntityRenderer.bind();

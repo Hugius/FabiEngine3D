@@ -142,7 +142,9 @@ void SceneEditor::load()
 {
 	// Enable default graphics
 	_fe3d.gfx_enableAmbientLighting(vec3(1.0f), 1.0f);
-	_fe3d.gfx_enableShadows(vec3(50.0f, 150.0f, 0.0f), vec3(200.0f, 0.0f, 0.0f), 100.0f, 30050.0);
+	_fe3d.gfx_enableFog(150.0f, vec3(0.75f));
+	_fe3d.gfx_enableSkyHDR(0.35f);
+	_fe3d.misc_enableShadowFrameRendering();
 
 	// Disable default skybox
 	_fe3d.skyEntity_select("");
@@ -151,7 +153,6 @@ void SceneEditor::load()
 	_worldEditor.loadSkyEntity();
 	_worldEditor.loadTerrainEntity();
 	_worldEditor.loadWaterEntity();
-	_fe3d.gfx_enableSkyHDR(0.35f);
 
 	// Show sky entity
 	if (_fe3d.skyEntity_isExisting("@sky"))
@@ -546,5 +547,5 @@ void SceneEditor::unload()
 
 	// Other
 	_leftWindow->getScreen("sceneEditorMenuModelPlace")->getScrollingList("modelList")->deleteButtons();
-	_fe3d.collision_disableFrameRendering();
+	_fe3d.misc_disableAabbFrameRendering();
 }

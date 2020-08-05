@@ -94,23 +94,16 @@ void SceneEditor::_updateModelChoosingMenu()
 		{
 			auto screen = _leftWindow->getScreen("sceneEditorMenuModelChoice");
 
-			// Update scrollinglist content every 1/10 second
-			static int lastMS = 0;
-			if (abs(_fe3d.misc_getMsTimeSinceEpoch() - lastMS) > 100)
+			// Remove deleted models from the scrollingList buttons
+			for (auto& button : _leftWindow->getScreen("sceneEditorMenuModelChoice")->getScrollingList("modelList")->getButtons())
 			{
-				// Remove deleted models from the scrolLinglist buttons
-				for (auto& button : _leftWindow->getScreen("sceneEditorMenuModelChoice")->getScrollingList("modelList")->getButtons())
+				// Check if model is still existing
+				if (!_fe3d.gameEntity_isExisting(button->getID()))
 				{
-					// Check if model is still existing
-					if (!_fe3d.gameEntity_isExisting(button->getID()))
-					{
-						// Delete button
-						_leftWindow->getScreen("sceneEditorMenuModelChoice")->getScrollingList("modelList")->deleteButton(button->getID());
-					}
+					// Delete button
+					_leftWindow->getScreen("sceneEditorMenuModelChoice")->getScrollingList("modelList")->deleteButton(button->getID());
+					break;
 				}
-
-				// Set last time
-				lastMS = _fe3d.misc_getMsTimeSinceEpoch();
 			}
 
 			// Loop over every placed model

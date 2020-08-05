@@ -142,9 +142,13 @@ void WaterEntityManager::update()
 		// Update water animations (rippling & waving)
 		if (water->isVisible() && _shaderBus.isWaterEffectsEnabled())
 		{
-			water->setRippleOffset(water->getRippleOffset() + water->getSpeed());
-			water->setRippleOffset(fmod(water->getRippleOffset(), 1.0f));
-			water->setWaveOffset(water->getWaveOffset() + water->getSpeed());
+			// Update ripple speed
+			vec2 newOffset = water->getRippleOffset() + water->getSpeed();
+			newOffset = vec2(fmod(newOffset.x, 1.0f), fmod(newOffset.y, 1.0f));
+			water->setRippleOffset(newOffset);
+
+			// Update waving speed (must be 25% slower)
+			water->setWaveOffset(water->getWaveOffset() + (water->getSpeed() / 4.0f));
 		}
 	}
 }

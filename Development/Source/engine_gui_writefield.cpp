@@ -22,42 +22,6 @@ void EngineGuiWriteField::update(bool hoverable)
 	_updateTyping();
 }
 
-void EngineGuiWriteField::setActive(bool active)
-{
-	_isActive = active;
-}
-
-void EngineGuiWriteField::setPermActive(bool active)
-{
-	_isActive = active;
-	_mustBeActive = active;
-}
-
-bool EngineGuiWriteField::cancelledInput()
-{
-	return _cancelledInput;
-}
-
-bool EngineGuiWriteField::confirmedInput()
-{
-	return _confirmedInput;
-}
-
-bool EngineGuiWriteField::isActive()
-{
-	return _isActive;
-}
-
-string EngineGuiWriteField::getTextContent()
-{
-	return _currentTextContent;
-}
-
-void EngineGuiWriteField::setTextContent(const string& content)
-{
-	_currentTextContent = content;
-}
-
 void EngineGuiWriteField::_updateActivation()
 {
 	if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
@@ -270,4 +234,47 @@ void EngineGuiWriteField::_updateTyping()
 		_confirmedInput = false;
 		_cancelledInput = false;
 	}
+}
+
+void EngineGuiWriteField::setActive(bool active)
+{
+	_isActive = active;
+}
+
+void EngineGuiWriteField::setPermActive(bool active)
+{
+	_isActive = active;
+	_mustBeActive = active;
+}
+
+bool EngineGuiWriteField::cancelledInput()
+{
+	return _cancelledInput;
+}
+
+bool EngineGuiWriteField::confirmedInput()
+{
+	return _confirmedInput;
+}
+
+bool EngineGuiWriteField::isActive()
+{
+	return _isActive;
+}
+
+bool EngineGuiWriteField::hasTextContentChanged()
+{
+	bool result = (_lastTextContent != _currentTextContent);
+	_lastTextContent = _currentTextContent;
+	return result;
+}
+
+string EngineGuiWriteField::getTextContent()
+{
+	return _currentTextContent;
+}
+
+void EngineGuiWriteField::setTextContent(const string& content)
+{
+	_currentTextContent = content;
 }

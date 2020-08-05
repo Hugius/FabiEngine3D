@@ -15,7 +15,7 @@ void ShadowManager::update(ShaderBus& shaderBus)
 {
 	shaderBus.setShadowMatrix(_createLightSpaceMatrix());
 	shaderBus.setShadowAreaSize(_size);
-	shaderBus.setShadowCasterPosition(_eye);
+	shaderBus.setShadowAreaCenter(_center);
 }
 
 mat4 ShadowManager::_createLightSpaceMatrix()
@@ -24,6 +24,6 @@ mat4 ShadowManager::_createLightSpaceMatrix()
 
 	// Matrix generation
 	mat4 lightView = glm::lookAt(_eye, _center, vec3(0.0f, 1.0f, 0.0f));
-	mat4 lightProj = glm::ortho(-_size, _size, -_size, _size, 1.0f, _reach);
+	mat4 lightProj = glm::ortho(-_size, _size, -_size, _size, 0.1f, _reach);
 	return lightProj * lightView;
 }

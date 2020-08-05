@@ -30,6 +30,7 @@ uniform vec3 u_directionalLightingPosition;
 uniform vec3 u_pointLightPositions[POINT_LIGHT_AMOUNT];
 uniform vec3 u_pointLightColors[POINT_LIGHT_AMOUNT];
 uniform vec3 u_color;
+uniform vec3 u_fogColor;
 
 // Float uniforms
 uniform float u_pointLightIntensities[POINT_LIGHT_AMOUNT];
@@ -291,7 +292,7 @@ vec3 applyFog(vec3 color)
 	if(u_fogEnabled)
 	{
 		float  distance    = length(f_pos.xyz - u_cameraPosition);
-		vec3   foggedColor = mix(vec3(0.75f, 0.75f, 0.75f), color, min(u_fogMinDistance / distance, 1.0f));
+		vec3   foggedColor = mix(u_fogColor, color, min(u_fogMinDistance / distance, 1.0f));
 		return foggedColor;
 	}
 	else

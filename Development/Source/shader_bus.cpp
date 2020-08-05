@@ -90,9 +90,14 @@ void ShaderBus::setDirectionalLightColor(vec3 val)
 	_directionalLightingColor = val;
 }
 
-void ShaderBus::setShadowCasterPosition(vec3 val)
+void ShaderBus::setShadowAreaCenter(vec3 val)
 {
-	_shadowCasterPosition = val;
+	_shadowAreaCenter = val;
+}
+
+void ShaderBus::setFogColor(vec3 val)
+{
+	_fogColor = val;
 }
 
 void ShaderBus::setSceneReflectionHeight(float val)
@@ -175,94 +180,99 @@ void ShaderBus::setBloomBlurSize(int val)
 	_bloomBlurSize = val;
 }
 
-void ShaderBus::setMSAAEnabled(bool val)
+void ShaderBus::setMsaaEnabled(bool val)
 {
-	_msaaEnabled = val;
+	_isMsaaEnabled = val;
 }
 
 void ShaderBus::setSceneReflectionsEnabled(bool val)
 {
-	_sceneReflectionsEnabled = val;
+	_isSceneReflectionsEnabled = val;
 }
 
 void ShaderBus::setAmbientLightingEnabled(bool val)
 {
-	_ambientLightingEnabled = val;
+	_isAmbientLightingEnabled = val;
 }
 
 void ShaderBus::setDirectionalLightingEnabled(bool val)
 {
-	_directionalLightingEnabled = val;
+	_isDirectionalLightingEnabled = val;
 }
 
 void ShaderBus::setSpecularLightingEnabled(bool val)
 {
-	_specularLightingEnabled = val;
+	_isSpecularLightingEnabled = val;
 }
 
 void ShaderBus::setPointLightingEnabled(bool val)
 {
-	_pointLightingEnabled = val;
+	_isPointLightingEnabled = val;
 }
 
 void ShaderBus::setFogEnabled(bool val)
 {
-	_fogEnabled = val;
+	_isFogEnabled = val;
 }
 
 void ShaderBus::setLightMappingEnabled(bool val)
 {
-	_lightMappingEnabled = val;
+	_isLightMappingEnabled = val;
 }
 
 void ShaderBus::setSkyReflectionsEnabled(bool val)
 {
-	_skyReflectionsEnabled = val;
+	_isSkyReflectionsEnabled = val;
 }
 
 void ShaderBus::setBloomEnabled(bool val)
 {
-	_bloomEnabled = val;
+	_isBloomEnabled = val;
 }
 
 void ShaderBus::setWaterEffectsEnabled(bool val)
 {
-	_waterEffectsEnabled = val;
+	_isWaterEffectsEnabled = val;
 }
 
 void ShaderBus::setSkyHdrEnabled(bool val)
 {
-	_skyHdrEnabled = val;
+	_isSkyHdrEnabled = val;
 }
 
 void ShaderBus::setShadowsEnabled(bool val)
 {
-	_shadowsEnabled = val;
+	_isShadowsEnabled = val;
 }
 
 void ShaderBus::setDofEnabled(bool val)
 {
-	_dofEnabled = val;
+	_isDofEnabled = val;
 }
 
 void ShaderBus::setMotionBlurEnabled(bool val)
 {
-	_motionBlurEnabled = val;
+	_isMotionBlurEnabled = val;
 }
 
-void ShaderBus::setWireframeEnabled(bool val)
+void ShaderBus::setWireframeRenderingEnabled(bool val)
 {
-	_wireframeEnabled = val;
+	_isWireframeRenderingEnabled = val;
 }
 
-void ShaderBus::setAabbFrameEnabled(bool val)
+void ShaderBus::setAabbFrameRenderingEnabled(bool val)
 {
-	_aabbFrameEnabled = val;
+	_isAabbFrameRenderingEnabled = val;
 }
 
-void ShaderBus::setDebugRenderEnabled(bool val)
+void ShaderBus::setDebugRenderingEnabled(bool val)
 {
-	_debugRenderEnabled = val;
+	_isDebugRenderingEnabled = val;
+}
+
+void ShaderBus::setShadowFrameRenderingEnabled(bool val)
+{
+	_isShadowFrameRenderingEnabled = val;
 }
 
 const GLuint ShaderBus::getSkyReflectionCubeMap() const
@@ -350,9 +360,14 @@ const vec3 ShaderBus::getDirectionalLightingPosition() const
 	return _directionalLightingPosition;
 }
 
-const vec3 ShaderBus::getShadowCasterPosition() const
+const vec3 ShaderBus::getShadowAreaCenter() const
 {
-	return _shadowCasterPosition;
+	return _shadowAreaCenter;
+}
+
+const vec3 ShaderBus::getFogColor() const
+{
+	return _fogColor;
 }
 
 const vec3 ShaderBus::getDirectionalLightingColor() const
@@ -440,92 +455,97 @@ const int ShaderBus::getBloomBlurSize() const
 	return _bloomBlurSize;
 }
 
-const bool ShaderBus::isMSAAEnabled() const
+const bool ShaderBus::isMsaaEnabled() const
 {
-	return _msaaEnabled;
+	return _isMsaaEnabled;
 }
 
 const bool ShaderBus::isSceneReflectionsEnabled() const
 {
-	return _sceneReflectionsEnabled;
+	return _isSceneReflectionsEnabled;
 }
 
 const bool ShaderBus::isAmbientLightingEnabled() const
 {
-	return _ambientLightingEnabled;
+	return _isAmbientLightingEnabled;
 }
 
 const bool ShaderBus::isDirectionalLightingEnabled() const
 {
-	return _directionalLightingEnabled;
+	return _isDirectionalLightingEnabled;
 }
 
 const bool ShaderBus::isSpecularLightingEnabled() const
 {
-	return _specularLightingEnabled;
+	return _isSpecularLightingEnabled;
 }
 
 const bool ShaderBus::isPointLightingEnabled() const
 {
-	return _pointLightingEnabled;
+	return _isPointLightingEnabled;
 }
 
 const bool ShaderBus::isFogEnabled() const
 {
-	return _fogEnabled;
+	return _isFogEnabled;
 }
 
 const bool ShaderBus::isLightMappingEnabled() const
 {
-	return _lightMappingEnabled;
+	return _isLightMappingEnabled;
 }
 
 const bool ShaderBus::isSkyReflectionsEnabled() const
 {
-	return _skyReflectionsEnabled;
+	return _isSkyReflectionsEnabled;
 }
 
 const bool ShaderBus::isBloomEnabled() const
 {
-	return _bloomEnabled;
+	return _isBloomEnabled;
 }
 
 const bool ShaderBus::isWaterEffectsEnabled() const
 {
-	return _waterEffectsEnabled;
+	return _isWaterEffectsEnabled;
 }
 
 const bool ShaderBus::isSkyHdrEnabled() const
 {
-	return _skyHdrEnabled;
+	return _isSkyHdrEnabled;
 }
 
 const bool ShaderBus::isShadowsEnabled() const
 {
-	return _shadowsEnabled;
+	return _isShadowsEnabled;
 }
 
 const bool ShaderBus::isDofEnabled() const
 {
-	return _dofEnabled;
+	return _isDofEnabled;
 }
 
 const bool ShaderBus::isMotionBlurEnabled() const
 {
-	return _motionBlurEnabled;
+	return _isMotionBlurEnabled;
 }
 
-const bool ShaderBus::isWireframeEnabled() const
+const bool ShaderBus::isWireframeRenderingEnabled() const
 {
-	return _wireframeEnabled;
+	return _isWireframeRenderingEnabled;
 }
 
-const bool ShaderBus::isAabbFrameEnabled() const
+const bool ShaderBus::isAabbFrameRenderingEnabled() const
 {
-	return _aabbFrameEnabled;
+	return _isAabbFrameRenderingEnabled;
 }
 
-const bool ShaderBus::isDebugRenderEnabled() const
+const bool ShaderBus::isShadowFrameRenderingEnabled() const
 {
-	return _debugRenderEnabled;
+	return _isShadowFrameRenderingEnabled;
+}
+
+const bool ShaderBus::isDebugRenderingEnabled() const
+{
+	return _isDebugRenderingEnabled;
 }

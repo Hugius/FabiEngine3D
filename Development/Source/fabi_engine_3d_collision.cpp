@@ -143,16 +143,6 @@ void FabiEngine3D::collision_disableCameraTerrainResponse()
 	_core->_collisionResolver.disableTerrainResponse();
 }
 
-void FabiEngine3D::collision_enableFrameRendering()
-{
-	_core->_shaderBus.setAabbFrameEnabled(true);
-}
-
-void FabiEngine3D::collision_disableFrameRendering()
-{
-	_core->_shaderBus.setAabbFrameEnabled(false);
-}
-
 bool FabiEngine3D::collision_checkAnyWithCamera()
 {
 	for (auto entity : _core->_aabbEntityManager.getEntities()) // Loop over aabb entities

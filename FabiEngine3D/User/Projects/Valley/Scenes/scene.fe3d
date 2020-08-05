@@ -1,21 +1,4 @@
 MODEL tree60813293 2.29804 4.70588 -4.44162 0 0 0 2.17742 2.17742 2.17742 User\Assets\OBJs\tree8.obj ? ? ? 0 1 1 0 0 1 1 1 1 1 1.15762 15.8555 1.15762
-MODEL tower1700512966 97.2415 4.70589 90.4647 0 0 0 3.67866 3.67866 3.67866 User\Assets\OBJs\tower1.obj User\Assets\Textures\DiffuseMaps\tower1.png ? ? 0 1 0 0 0 1 1 1 1 1 1 1 1
-MODEL tower1224563860 -0.170809 4.70589 97.814 0 0 0 3.67866 3.67866 3.67866 User\Assets\OBJs\tower1.obj User\Assets\Textures\DiffuseMaps\tower1.png ? ? 0 1 0 0 0 1 1 1 1 1 1 1 1
-MODEL tower986432263 8.67291 4.70588 35.1955 0 0 0 3.67866 3.67866 3.67866 User\Assets\OBJs\tower1.obj User\Assets\Textures\DiffuseMaps\tower1.png ? ? 0 1 0 0 0 1 1 1 1 1 1 1 1
-MODEL tower1748859264 -47.6316 4.70589 64.2942 0 0 0 3.67866 3.67866 3.67866 User\Assets\OBJs\tower1.obj User\Assets\Textures\DiffuseMaps\tower1.png ? ? 0 1 0 0 0 1 1 1 1 1 1 1 1
-MODEL tower1039440286 -40.9468 4.70589 14.546 0 0 0 3.67866 3.67866 3.67866 User\Assets\OBJs\tower1.obj User\Assets\Textures\DiffuseMaps\tower1.png ? ? 0 1 0 0 0 1 1 1 1 1 1 1 1
-MODEL tower637679965 111.364 4.70588 37.5719 0 0 0 3.67866 3.67866 3.67866 User\Assets\OBJs\tower1.obj User\Assets\Textures\DiffuseMaps\tower1.png ? ? 0 1 0 0 0 1 1 1 1 1 1 1 1
-MODEL tower496585351 104.007 4.70589 -16.7782 0 0 0 3.67866 3.67866 3.67866 User\Assets\OBJs\tower1.obj User\Assets\Textures\DiffuseMaps\tower1.png ? ? 0 1 0 0 0 1 1 1 1 1 1 1 1
-MODEL tower880675469 55.4644 4.70588 -37.2951 0 0 0 3.67866 3.67866 3.67866 User\Assets\OBJs\tower1.obj User\Assets\Textures\DiffuseMaps\tower1.png ? ? 0 1 0 0 0 1 1 1 1 1 1 1 1
-MODEL tower98944171 98.8228 4.70589 -53.0563 0 0 0 3.67866 3.67866 3.67866 User\Assets\OBJs\tower1.obj User\Assets\Textures\DiffuseMaps\tower1.png ? ? 0 1 0 0 0 1 1 1 1 1 1 1 1
-MODEL tower1454357158 44.7529 4.70589 -76.5661 0 0 0 3.67866 3.67866 3.67866 User\Assets\OBJs\tower1.obj User\Assets\Textures\DiffuseMaps\tower1.png ? ? 0 1 0 0 0 1 1 1 1 1 1 1 1
-MODEL tower2047571588 -14.0402 4.70587 -73.2964 0 0 0 3.67866 3.67866 3.67866 User\Assets\OBJs\tower1.obj User\Assets\Textures\DiffuseMaps\tower1.png ? ? 0 1 0 0 0 1 1 1 1 1 1 1 1
-MODEL tower1270025360 3.27251 4.70587 -48.86 0 0 0 3.67866 3.67866 3.67866 User\Assets\OBJs\tower1.obj User\Assets\Textures\DiffuseMaps\tower1.png ? ? 0 1 0 0 0 1 1 1 1 1 1 1 1
-MODEL tower200581313 -33.3414 4.70589 -24.1339 0 0 0 3.67866 3.67866 3.67866 User\Assets\OBJs\tower1.obj User\Assets\Textures\DiffuseMaps\tower1.png ? ? 0 1 0 0 0 1 1 1 1 1 1 1 1
-MODEL tower1785398197 -36.7621 4.70589 -52.1283 0 0 0 3.67866 3.67866 3.67866 User\Assets\OBJs\tower1.obj User\Assets\Textures\DiffuseMaps\tower1.png ? ? 0 1 0 0 0 1 1 1 1 1 1 1 1
-MODEL tower1806108368 87.2862 4.70589 5.90825 0 0 0 3.67866 3.67866 3.67866 User\Assets\OBJs\tower1.obj User\Assets\Textures\DiffuseMaps\tower1.png ? ? 0 1 0 0 0 1 1 1 1 1 1 1 1
-MODEL tower737145614 60.3412 4.70589 63.3621 0 0 0 3.67866 3.67866 3.67866 User\Assets\OBJs\tower1.obj User\Assets\Textures\DiffuseMaps\tower1.png ? ? 0 1 0 0 0 1 1 1 1 1 1 1 1
-MODEL tower406334080 36.7217 4.70589 -56.3483 0 0 0 3.67866 3.67866 3.67866 User\Assets\OBJs\tower1.obj User\Assets\Textures\DiffuseMaps\tower1.png ? ? 0 1 0 0 0 1 1 1 1 1 1 1 1
 AMBIENT 1 1 1 1
 DIRECTIONAL 1000 1000 1000 1 1 1 0.75
-SPEED 15
+SPEED 20

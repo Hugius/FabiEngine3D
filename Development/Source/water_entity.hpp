@@ -9,6 +9,9 @@ public:
 	~WaterEntity() = default;
 	
 	// Setters
+	void setSpeed(vec2 val);
+	void setRippleOffset(vec2 val);
+	void setWaveOffset(vec2 val);
 	void setPosition(vec3 val);
 	void setColor(vec3 val);
 	void setDudvMap(GLuint val);
@@ -18,9 +21,6 @@ public:
 	void setNormalMapPath(const string& val);
 	void setDisplacementMapPath(const string& val);
 	void setUvRepeat(float val);
-	void setRippleOffset(float val);
-	void setSpeed(float val);
-	void setWaveOffset(float val);
 	void setWaveHeightFactor(float val);
 	void setSpecularLightingFactor(float val);
 	void setSpecularLightingIntensity(float val);
@@ -33,6 +33,9 @@ public:
 	void setRefractive(bool val);
 
 	// Getters
+	const vec2    getSpeed()					 const;
+	const vec2    getRippleOffset()				 const;
+	const vec2    getWaveOffset()				 const;
 	const vec3	  getPosition()					 const;
 	const vec3    getColor()					 const;
 	const GLuint  getDudvMap()					 const;
@@ -42,9 +45,6 @@ public:
 	const string& getNormalMapPath()			 const;
 	const string& getDisplacementMapPath()		 const;
 	const float   getUvRepeat()					 const;
-	const float   getRippleOffset()				 const;
-	const float   getSpeed()					 const;
-	const float   getWaveOffset()				 const;
 	const float   getWaveHeightFactor()			 const;
 	const float   getSpecularLightingFactor()    const;
 	const float   getSpecularLightingIntensity() const;
@@ -57,6 +57,10 @@ public:
 	const bool    isRefractive()				 const;
 
 private:
+	vec2 _speed		   = vec2(0.0f);
+	vec2 _rippleOffset = vec2(0.0f);
+	vec2 _waveOffset   = vec2(0.0f);
+
 	vec3 _position = vec3(0.0f);
 	vec3 _color = vec3(0.0f);
 
@@ -69,10 +73,7 @@ private:
 	string _displacementMapPath = "";
 
 	float _size						 = 1.0f;
-	float _rippleOffset				 = 0.0f;
-	float _waveOffset				 = 0.0f;
 	float _uvRepeat					 = 1.0f;
-	float _speed					 = 0.0f;
 	float _waveHeightFactor			 = 1.0f;
 	float _specularLightingFactor    = 1.0f;
 	float _specularLightingIntensity = 1.0f;

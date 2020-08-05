@@ -10,6 +10,11 @@ bool EngineGuiGlobalScreen::isFocused()
 	return _isFocused;
 }
 
+void EngineGuiGlobalScreen::setValueFormButtonsPosition(vec2 position)
+{
+	_valueFormButtonsPosition = position;
+}
+
 void EngineGuiGlobalScreen::addValueForm(const string& ID, string title, int value, vec2 position, vec2 size)
 {
 	_addValueForm(ID, title, std::to_string(value), position, size, true);
@@ -103,8 +108,8 @@ void EngineGuiGlobalScreen::_addValueForm(const string& ID, string title, string
 		// Add done & cancel buttons
 		if (!checkButton("value_form_done"))
 		{
-			addButton("value_form_done", position + vec2(-0.15f, -0.2f), vec2(0.15f, 0.1f), vec3(0.0f, 0.5f, 0.0f), vec3(0.0f, 1.0f, 0.0f), "Done", vec3(1.0f), vec3(0.0f));
-			addButton("value_form_cancel", position + vec2(0.15f, -0.2f), vec2(0.15f, 0.1f), vec3(0.5f, 0.0f, 0.0f), vec3(1.0f, 0.0f, 0.0f), "Cancel", vec3(1.0f), vec3(0.0f));
+			addButton("value_form_done", _valueFormButtonsPosition + vec2(-0.15f, -0.2f), vec2(0.15f, 0.1f), vec3(0.0f, 0.5f, 0.0f), vec3(0.0f, 1.0f, 0.0f), "Done", vec3(1.0f), vec3(0.0f));
+			addButton("value_form_cancel", _valueFormButtonsPosition + vec2(0.15f, -0.2f), vec2(0.15f, 0.1f), vec3(0.5f, 0.0f, 0.0f), vec3(1.0f, 0.0f, 0.0f), "Cancel", vec3(1.0f), vec3(0.0f));
 		}
 	}
 }
@@ -126,7 +131,7 @@ bool EngineGuiGlobalScreen::_checkValueForm(const string& ID, string& valueStrin
 			if (done || entered) // Pressed done or ENTER
 			{
 				string content = getWriteField(ID)->getTextContent();
-
+				
 				// Check if writefield is not empty
 				if (content == "")
 				{
@@ -143,9 +148,8 @@ bool EngineGuiGlobalScreen::_checkValueForm(const string& ID, string& valueStrin
 				}
 
 				// Apply to value
-				string oldValueString = valueString;
 				valueString = content;
-				changed = (valueString != oldValueString);
+				changed = getWriteField(ID)->hasTextContentChanged();
 			}
 
 			// Remove valueform(s)

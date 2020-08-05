@@ -20,6 +20,11 @@ void SkyEntity::setCubeMap(GLuint val)
 	_cubeMap = val;
 }
 
+void SkyEntity::setOriginalLightness(float val)
+{
+	_originalLightness = val;
+}
+
 void SkyEntity::setLightness(float val)
 {
 	_lightness = val;
@@ -48,6 +53,11 @@ const vec3 SkyEntity::getColor() const
 const GLuint SkyEntity::getCubeMap() const
 {
 	return _cubeMap;
+}
+
+const float SkyEntity::getOriginalLightness() const
+{
+	return _originalLightness;
 }
 
 const float SkyEntity::getLightness() const

@@ -15,9 +15,11 @@ uniform mat4 u_projectionMatrix;
 // Vec3 uniforms
 uniform vec3 u_customPositionOffset;
 
+// Vec2 uniforms
+uniform vec2 u_waveOffset;
+
 // Float uniforms
 uniform float u_uvRepeat;
-uniform float u_waveOffset;
 uniform float u_waveHeightFactor;
 
 // Boolean uniforms
@@ -47,8 +49,12 @@ void main()
 		float texelSize = 1.0f / textureSize(u_sampler_displacementMap, 0).x;
 
 		// Floor and ceil to nearest texels
-		float height1 = texture(u_sampler_displacementMap, f_uv + vec2(u_waveOffset - mod(u_waveOffset, 1.0f))).r;
-		float height2 = texture(u_sampler_displacementMap, f_uv + vec2(u_waveOffset + mod(u_waveOffset, 1.0f))).r;
+		float minX = u_waveOffset.x - mod(u_waveOffset.x, 1.0f);
+		float maxX = u_waveOffset.x + mod(u_waveOffset.x, 1.0f);
+		float minZ = u_waveOffset.y - mod(u_waveOffset.y, 1.0f);
+		float maxZ = u_waveOffset.y + mod(u_waveOffset.y, 1.0f);
+		float height1 = texture(u_sampler_displacementMap, f_uv + vec2(minX, minZ)).r;
+		float height2 = texture(u_sampler_displacementMap, f_uv + vec2(maxX, maxZ)).r;
 
 		// Calculate height in between texels
 		float height = height1 + ((height2 - height1) / 2.0f);

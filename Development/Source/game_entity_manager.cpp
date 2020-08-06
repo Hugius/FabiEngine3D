@@ -65,7 +65,10 @@ void GameEntityManager::addGameEntity
 		}
 		else
 		{
-			getEntity(ID)->addDiffuseMap(0);
+			if (parts.size() > 1)
+			{
+				getEntity(ID)->addDiffuseMap(0);
+			}
 		}
 
 		// Load an OBJ part light map
@@ -76,7 +79,10 @@ void GameEntityManager::addGameEntity
 		}
 		else
 		{
-			getEntity(ID)->addLightMap(0);
+			if (parts.size() > 1)
+			{
+				getEntity(ID)->addLightMap(0);
+			}
 		}
 
 		// Load an OBJ part light map
@@ -87,7 +93,10 @@ void GameEntityManager::addGameEntity
 		}
 		else
 		{
-			getEntity(ID)->addReflectionMap(0);
+			if (parts.size() > 1)
+			{
+				getEntity(ID)->addReflectionMap(0);
+			}
 		}
 	}
 

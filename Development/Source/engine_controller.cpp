@@ -38,11 +38,10 @@ void EngineController::FE3D_CONTROLLER_DESTROY()
 void EngineController::_initializeMiscellaneous()
 {
 	// Permanent graphical effects
-	misc_setMainRenderingColor(vec3(1.0f));
+	misc_setMainRenderingColor(vec3(0.0f));
 	gfx_enableMSAA();
-	gfx_enableBloom(0.98f, 0.0f, 8);
+	gfx_enableBloom(1.0f, 0.0f, 10);
 	gfx_enableLightMapping();
-	gfx_enableSceneReflections(0.0f, 0.25f);
 	gfx_enableSkyReflections(0.25f);
 	gfx_enableSpecularLighting(3.0f);
 	gfx_enablePointLighting();
@@ -59,7 +58,7 @@ void EngineController::_initializeMiscellaneous()
 		path + "front.png", 
 		path + "back.png" });
 	skyEntity_select("@@sky");
-	skyEntity_setLightness("@@sky", 0.75f);
+	skyEntity_setLightness("@@sky", 0.65f);
 
 	// Default camera
 	camera_load(90.0f, 0.1f, 10000.0f, vec3(0.0f));

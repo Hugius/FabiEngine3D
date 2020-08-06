@@ -20,7 +20,7 @@ layout(location = 4) uniform sampler2D   u_sampler_shadowMap;
 layout(location = 5) uniform samplerCube u_sampler_cubeMap;
 
 // Matrix44 uniforms
-uniform mat4  u_skyRotationMatrix;
+uniform mat4 u_skyRotationMatrix;
 
 // Vector3 uniforms
 uniform vec3 u_cameraPosition;
@@ -97,12 +97,12 @@ void main()
 	// Apply lighting
 	vec3 color;
 	color  = getTextureColor(); // Diffuse map
+    color *= u_color;
 	color  = applySkyReflections(color); // Sky reflection
 	color  = applySceneReflections(color); // Scene reflection
 	color *= vec3((ambient + directional) * shadow + point); // Lighting
 	color  = applyLightMapping(color); // LightMapping
-	color  = applyFog(color); // 
-	color *= u_color;
+	color  = applyFog(color); // Fog
 	color *= u_lightness;
 
 	// Set final color
@@ -240,10 +240,13 @@ vec3 getShadowLighting()
 {
 	if(u_shadowsEnabled && u_isShadowed)
 	{
+        float halfSize = u_shadowAreaSize / 2.0f;
+
+        // Check if fragment is within shadow area
 		if
 		(
-			abs(f_pos.x - u_shadowAreaCenter.x) <= (u_shadowAreaSize) && 
-			abs(f_pos.z - u_shadowAreaCenter.z) <= (u_shadowAreaSize)
+			abs(f_pos.x - u_shadowAreaCenter.x) <= (halfSize) && 
+			abs(f_pos.z - u_shadowAreaCenter.z) <= (halfSize)
 		)
 		{
 			// Variables
@@ -258,45 +261,29 @@ vec3 getShadowLighting()
 				return vec3(1.0f);
 			}
 
-			// Poisson values
-			const vec2 poissonDisk[4] = vec2[]
-			(
-			  vec2(-0.94201624f, -0.39906216f),
-			  vec2(0.94558609f, -0.76890725f),
-			  vec2(-0.094184101f, -0.92938870f),
-			  vec2(0.34495938f, 0.29387760)
-			);
+			// Calculate depth from shadow map
+			float shadowMapDepth = texture(u_sampler_shadowMap, projCoords.xy).r;
 
-			// Calculate poisson sampled shadows
-			for(int i = 0; i < 4; i++)
+			// Apply result value
+			if((currentDepth - texelSize) > shadowMapDepth)
 			{
-				// Get random index
-				int index = int(4*getRandomFloat(floor(f_pos.xyz*1000.0f), i))%4;
-
-				// Calculate depth from shadow map
-				float shadowMapDepth = texture(u_sampler_shadowMap, projCoords.xy + (poissonDisk[index] / 700.0f)).r;
-
-				// Apply result value
-				if((currentDepth - texelSize) > shadowMapDepth)
-				{
-					shadow -= 0.2f; // Shadow
-				}
-				else
-				{
-					shadow -= 0.0f; // No shadow
-				}
+				shadow = 0.2f; // Shadow
+			}
+			else
+			{
+				shadow = 1.0f; // No shadow
 			}
 			
 			// Long-distance shadows fading
 			float maxDistance = max(abs(f_pos.x - u_shadowAreaCenter.x), abs(f_pos.z - u_shadowAreaCenter.z)); // Max distance to center
-			float alpha = maxDistance - (u_shadowAreaSize * 0.9f); // Only for the outer 10% of the shadowed area
-			alpha = clamp(alpha, 0.0f, u_shadowAreaSize * 0.1f); // Cannot be negative
-			alpha /= (u_shadowAreaSize * 0.1f); // Convert value to 0.0 - 1.0 range
+			float alpha = maxDistance - (halfSize * 0.9f); // Only for the outer 10% of the shadowed area
+			alpha = clamp(alpha, 0.0f, halfSize * 0.1f); // Cannot be negative
+			alpha /= (halfSize * 0.1f); // Convert value to 0.0 - 1.0 range
 
 			// Debug area frame rendering
 			if(u_shadowFrameRenderingEnabled)
 			{
-				if((maxDistance - (u_shadowAreaSize * 0.99f)) > 0.0f)
+				if((maxDistance - (halfSize * 0.99f)) > 0.0f)
 				{
 					return vec3(0.0f);
 				}
@@ -357,6 +344,7 @@ vec3 applySkyReflections(vec3 color)
 			vec3 reflectDir   = reflect(viewDir, f_normal);
 			vec4 reflectColor = vec4(texture(u_sampler_cubeMap, vec3(u_skyRotationMatrix * vec4(reflectDir, 1.0f))).rgb, 1.0);
 			vec3 mixedColor   = mix(color.rgb, reflectColor.rgb, u_skyReflectionFactor);
+
 			return mixedColor.rgb;
 		}
 
@@ -372,10 +360,11 @@ vec3 applySceneReflections(vec3 color)
 {
 	if(u_sceneReflectionsEnabled && u_isSceneReflective)
 	{
-		vec2 ndc = (f_clip.xy / f_clip.w) / 2.0 + 0.5;
-		vec2 texCoords = vec2(ndc.x, -ndc.y);
+		vec2 ndc             = (f_clip.xy / f_clip.w) / 2.0 + 0.5;
+		vec2 texCoords       = vec2(ndc.x, -ndc.y);
 		vec4 reflectionColor = texture(u_sampler_sceneReflectionMap, vec2(texCoords.x,  texCoords.y));
-		vec3 mixedColor   = mix(color.rgb, reflectionColor.rgb, u_sceneReflectionFactor);
+		vec3 mixedColor      = mix(color.rgb, reflectionColor.rgb, u_sceneReflectionFactor);
+        
 		return mixedColor.rgb;
 	}
 	else

@@ -1,17 +1,14 @@
 #include "scene_editor.hpp"
 
-#define ACTIVE_BULB_ID activeLightBulbID
-#define ACTIVE_LIGHT_ID activeLightBulbID.substr(1, activeLightBulbID.size() - 1)
+#define ACTIVE_BULB_ID _activeLightBulbID
+#define ACTIVE_LIGHT_ID _activeLightBulbID.substr(1, _activeLightBulbID.size() - 1)
 
 void SceneEditor::_updateLightEditing()
 {
-	static int selectedSizeMultiplier = 1;
-	static int activeSizeMultiplier = 1;
-	static string activeLightBulbID = "";
-	string selectedLightBulbID = "";
-
 	if (_isLoaded)
 	{
+		_selectedLightBulbID = "";
+
 		if (_currentPreviewModelName == "" && !_isPlacingPointlight)
 		{
 			// Check if user selected a lightbulb model
@@ -21,19 +18,19 @@ void SceneEditor::_updateLightEditing()
 				if (entityID.substr(0, 11) == "@pointlight")
 				{
 					// Cursor must be in 3D space, no GUI interruptions, no RMB holding down
-					if (_fe3d.collision_checkCursorInEntity(entityID) && _fe3d.misc_isMouseInsideViewport() &&
+					if (_fe3d.collision_checkCursorInAny() == entityID && _fe3d.misc_isMouseInsideViewport() &&
 						!_gui->getGlobalScreen()->isFocused() && !_fe3d.input_getMouseDown(Input::MOUSE_BUTTON_RIGHT))
 					{
 						// Set new selected lightbulb
-						selectedLightBulbID = entityID;
+						_selectedLightBulbID = entityID;
 
 						// Check if user clicked lightbulb
 						if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
 						{
 							// Check if same lightbulb is clicked again
-							if (selectedLightBulbID != ACTIVE_BULB_ID)
+							if (_selectedLightBulbID != ACTIVE_BULB_ID)
 							{
-								ACTIVE_BULB_ID = selectedLightBulbID;
+								ACTIVE_BULB_ID = _selectedLightBulbID;
 								_transformation = Transformation::TRANSLATION;
 
 								// Update selected lightbulb text
@@ -63,7 +60,7 @@ void SceneEditor::_updateLightEditing()
 			}
 
 			// Check if user made the active lightbulb inactive
-			if (selectedLightBulbID == "" && ACTIVE_BULB_ID != "" && _fe3d.misc_isMouseInsideViewport() && !_gui->getGlobalScreen()->isFocused())
+			if (_selectedLightBulbID == "" && ACTIVE_BULB_ID != "" && _fe3d.misc_isMouseInsideViewport() && !_gui->getGlobalScreen()->isFocused())
 			{
 				// LMB pressed
 				if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT) && !_fe3d.input_getMouseDown(Input::MOUSE_BUTTON_RIGHT))
@@ -76,11 +73,11 @@ void SceneEditor::_updateLightEditing()
 			}
 
 			// Update lightbulb animations
-			if (selectedLightBulbID != ACTIVE_BULB_ID)
+			if (_selectedLightBulbID != ACTIVE_BULB_ID)
 			{
-				_updateLightbulbAnimation(selectedLightBulbID, selectedSizeMultiplier);
+				_updateLightbulbAnimation(_selectedLightBulbID, _selectedLightSizeMultiplier);
 			}
-			_updateLightbulbAnimation(ACTIVE_BULB_ID, activeSizeMultiplier);
+			_updateLightbulbAnimation(ACTIVE_BULB_ID, _activeLightSizeMultiplier);
 
 			// Update properties screen
 			if (ACTIVE_BULB_ID != "")

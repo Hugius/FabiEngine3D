@@ -198,10 +198,13 @@ vec3 getShadowLighting()
 {
 	if(u_shadowsEnabled)
 	{
+		float halfSize = u_shadowAreaSize / 2.0f;
+
+		// Check if fragment is within shadow area
 		if
 		(
-			abs(f_pos.x - u_shadowAreaCenter.x) <= (u_shadowAreaSize) && 
-			abs(f_pos.z - u_shadowAreaCenter.z) <= (u_shadowAreaSize)
+			abs(f_pos.x - u_shadowAreaCenter.x) <= (halfSize) && 
+			abs(f_pos.z - u_shadowAreaCenter.z) <= (halfSize)
 		)
 		{
 			// Variables
@@ -229,7 +232,7 @@ vec3 getShadowLighting()
 			for(int i = 0; i < 4; i++)
 			{
 				// Get random index
-				int index = int(4*getRandomFloat(floor(f_pos.xyz*1000.0f), i))%4;
+				int index = int(16.0*getRandomFloat(floor(f_pos.xyz*1000.0f), i))%16;
 
 				// Calculate depth from shadow map
 				float shadowMapDepth = texture(u_sampler_shadowMap, projCoords.xy + (poissonDisk[index] / 700.0f)).r;
@@ -247,14 +250,14 @@ vec3 getShadowLighting()
 			
 			// Long-distance shadows fading
 			float maxDistance = max(abs(f_pos.x - u_shadowAreaCenter.x), abs(f_pos.z - u_shadowAreaCenter.z)); // Max distance to center
-			float alpha = maxDistance - (u_shadowAreaSize * 0.9f); // Only for the outer 10% of the shadowed area
-			alpha = clamp(alpha, 0.0f, u_shadowAreaSize * 0.1f); // Cannot be negative
-			alpha /= (u_shadowAreaSize * 0.1f); // Convert value to 0.0 - 1.0 range
+			float alpha = maxDistance - (halfSize * 0.9f); // Only for the outer 10% of the shadowed area
+			alpha = clamp(alpha, 0.0f, halfSize * 0.1f); // Cannot be negative
+			alpha /= (halfSize * 0.1f); // Convert value to 0.0 - 1.0 range
 
 			// Debug area frame rendering
 			if(u_shadowFrameRenderingEnabled)
 			{
-				if((maxDistance - (u_shadowAreaSize * 0.99f)) > 0.0f)
+				if((maxDistance - (halfSize * 0.99f)) > 0.0f)
 				{
 					return vec3(0.0f);
 				}

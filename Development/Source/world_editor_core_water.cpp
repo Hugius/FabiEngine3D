@@ -11,13 +11,13 @@ void WorldEditor::loadWaterEntity()
 		_fe3d.logger_throwError("Tried to load as empty project!");
 	}
 
-	string fileFolderPath = _fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\Data\\water.fe3d";
+	string filePath = _fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\Data\\water.fe3d";
 
 	// Load water file
-	if (_fe3d.misc_isFileExisting(fileFolderPath))
+	if (_fe3d.misc_isFileExisting(filePath))
 	{
 		// Open file
-		std::ifstream waterFile(fileFolderPath);
+		std::ifstream waterFile(filePath);
 
 		// Values
 		string dudvMapPath, normalMapPath, displacementMapPath;
@@ -97,13 +97,13 @@ void WorldEditor::_saveWaterData()
 			_fe3d.logger_throwError("Tried to save as empty project!");
 		}
 
-		string fileFolderPath = _fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\Data\\water.fe3d";
+		string filePath = _fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\Data\\water.fe3d";
 
 		// Save water dat
 		if (_fe3d.waterEntity_isExisting("@water"))
 		{
 			// Load file
-			std::ofstream waterFile(fileFolderPath);
+			std::ofstream waterFile(filePath);
 
 			// Values
 			string dudvMapPath = _fe3d.waterEntity_getDudvMapPath("@water");
@@ -163,9 +163,9 @@ void WorldEditor::_saveWaterData()
 		else
 		{
 			// Remove file if non-existent
-			if (_fe3d.misc_isFileExisting(fileFolderPath))
+			if (_fe3d.misc_isFileExisting(filePath))
 			{
-				std::remove(fileFolderPath.c_str());
+				std::remove(filePath.c_str());
 			}
 		}
 

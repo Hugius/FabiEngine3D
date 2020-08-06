@@ -143,8 +143,8 @@ void SceneEditor::load()
 	// Enable default graphics
 	_fe3d.gfx_enableAmbientLighting(vec3(1.0f), 1.0f);
 	_fe3d.gfx_enableFog(150.0f, vec3(0.75f));
+	_fe3d.gfx_enableDOF(5.0f);
 	_fe3d.gfx_enableSkyHDR(0.35f);
-	_fe3d.misc_enableShadowFrameRendering();
 
 	// Disable default skybox
 	_fe3d.skyEntity_select("");
@@ -206,7 +206,7 @@ void SceneEditor::load()
 	_fe3d.lightEntity_add(_previewPointlightID);
 	_fe3d.lightEntity_hide(_previewPointlightID);
 	_fe3d.gameEntity_add(_previewPointlightID, "Engine\\OBJs\\lamp.obj", vec3(0.0f), vec3(0.0f), _defaultLightbulbSize, false);
-	_fe3d.aabbEntity_add(_previewPointlightID, vec3(0.0f), _defaultLightbulbAabbSize, true);
+	_fe3d.gameEntity_setShadowed(_previewPointlightID, false);
 
 	// Create name textfields
 	_gui->getGlobalScreen()->addTextfield("selectedModelName", vec2(0.0f, 0.85f), vec2(0.5f, 0.1f), "", vec3(1.0f));
@@ -228,12 +228,12 @@ void SceneEditor::loadWorld()
 		_fe3d.logger_throwError("Tried to load as empty project!");
 	}
 
-	string modelsPath = _fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\Scenes\\scene.fe3d";
+	string filePath = _fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\Scenes\\scene.fe3d";
 
 	// Load world file
-	if (_fe3d.misc_isFileExisting(modelsPath)) // Check if models file exists
+	if (_fe3d.misc_isFileExisting(filePath)) // Check if models file exists
 	{
-		std::ifstream file(modelsPath);
+		std::ifstream file(filePath);
 		string line;
 
 		// Read model data
@@ -258,9 +258,9 @@ void SceneEditor::loadWorld()
 				bool isFaceculled, isShadowed, isTransparent, isSpecular, isFrozen;
 
 				// Load model data
-				iss >> modelID >> position.x >> position.y >> position.z >> rotation.x >> rotation.y >> rotation.z >> 
+				iss >> modelID >> position.x >> position.y >> position.z >> rotation.x >> rotation.y >> rotation.z >>
 					size.x >> size.y >> size.z >> objPath >> diffuseMapPath >> lightMapPath >> reflectionMapPath >>
-					isFaceculled >> isShadowed >> isTransparent >> isSpecular >> isFrozen >> specularFactor >> 
+					isFaceculled >> isShadowed >> isTransparent >> isSpecular >> isFrozen >> specularFactor >>
 					color.r >> color.g >> color.b >> uvRepeat >> aabbSize.x >> aabbSize.y >> aabbSize.z;
 
 				// Perform empty string & space conversions
@@ -328,12 +328,31 @@ void SceneEditor::loadWorld()
 
 				// Add entities
 				_fe3d.gameEntity_add("@" + ID, "Engine\\OBJs\\lamp.obj", position, vec3(0.0f), _defaultLightbulbSize);
+				_fe3d.gameEntity_setShadowed("@" + ID, false);
 				_fe3d.aabbEntity_bindToGameEntity("@" + ID, _defaultLightbulbAabbSize, true);
 				_fe3d.lightEntity_add(ID, position, color, intensity, distance);
 			}
 			else if (entityType == "SPEED")
 			{
 				iss >> _customCameraSpeed;
+			}
+			else if (entityType == "POSITION")
+			{
+				vec3 position;
+				iss >> position.x >> position.y >> position.z;
+				_fe3d.camera_setPosition(position);
+			}
+			else if (entityType == "YAW")
+			{
+				float yaw;
+				iss >> yaw;
+				_fe3d.camera_setYaw(yaw);
+			}
+			else if (entityType == "PITCH")
+			{
+				float pitch;
+				iss >> pitch;
+				_fe3d.camera_setPitch(pitch);
 			}
 		}
 
@@ -480,6 +499,16 @@ void SceneEditor::save()
 		// Editor camera speed
 		file << "SPEED " << _customCameraSpeed << std::endl;
 
+		// Editor camera position
+		vec3 position = _fe3d.camera_getPosition();
+		file << "POSITION " << position.x << " " << position.y << " " << position.z << std::endl;
+
+		// Editor camera yaw
+		file << "YAW " << _fe3d.camera_getYaw() << std::endl;
+
+		// Editor camera pitch
+		file << "PITCH " << _fe3d.camera_getPitch() << std::endl;
+
 		// Close file
 		file.close();
 
@@ -495,6 +524,8 @@ void SceneEditor::unload()
 	_fe3d.gfx_disableDirectionalLighting();
 	_fe3d.gfx_disableSkyHDR();
 	_fe3d.gfx_disableShadows();
+	_fe3d.gfx_disableFog();
+	_fe3d.gfx_disableDOF();
 
 	// Delete sky entity
 	if (_fe3d.skyEntity_isExisting("@sky"))
@@ -530,6 +561,9 @@ void SceneEditor::unload()
 	_isLoaded = false;
 	_transformation = Transformation::TRANSLATION;
 	_customCameraSpeed = 10.0f;
+	_selectedLightSizeMultiplier = 1;
+	_activeLightSizeMultiplier = 1;
+	_activeLightBulbID = "";
 
 	// Delete name textfields
 	_gui->getGlobalScreen()->deleteTextfield("selectedModelName");

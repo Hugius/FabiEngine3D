@@ -7,14 +7,14 @@ layout (location = 1) in vec2 v_uv;
 layout (location = 3) in vec3 v_offset;
 
 // Matrix44 uniforms
-uniform mat4  u_lightSpaceMatrix;
-uniform mat4  u_modelMatrix;
+uniform mat4 u_lightSpaceMatrix;
+uniform mat4 u_modelMatrix;
 
 // Float uniforms
 uniform float u_maxY;
 
 // Boolean uniforms
-uniform bool  u_isInstanced;
+uniform bool u_isInstanced;
 
 // Out variables
 out vec3 f_pos;

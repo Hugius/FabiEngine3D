@@ -8,15 +8,15 @@ layout(location = 2) in vec3 v_normal;
 layout(location = 3) in vec3 v_offset;
 
 // Matrix 44 uniforms
-uniform mat4  u_modelMatrix;
-uniform mat4  u_viewMatrix;
-uniform mat4  u_projMatrix;
+uniform mat4 u_modelMatrix;
+uniform mat4 u_viewMatrix;
+uniform mat4 u_projMatrix;
 
 // Float uniforms
 uniform float u_maxY;
 
 // Boolean uniforms
-uniform bool  u_isInstanced;
+uniform bool u_isInstanced;
 
 // Out variables
 out vec2 f_uv;

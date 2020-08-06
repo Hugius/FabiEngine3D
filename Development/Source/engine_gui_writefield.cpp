@@ -90,7 +90,7 @@ void EngineGuiWriteField::_updateTyping()
 			specialCharacterMap['['] = '{';
 			specialCharacterMap[']'] = '}';
 			specialCharacterMap['\\'] = '|';
-			specialCharacterMap['?'] = '_';
+			specialCharacterMap['-'] = '_';
 			specialCharacterMap['='] = '+';
 
 			// Letter characters
@@ -167,13 +167,13 @@ void EngineGuiWriteField::_updateTyping()
 			}
 			else if(_minusAllowed && !_noNumbers) // Minus character (for numbers)
 			{
-				if (_fe3d.input_getKeyPressed(Input('?')))
+				if (_fe3d.input_getKeyPressed(Input('-')))
 				{
 					if (!_fe3d.input_getKeyDown(Input::KEY_LSHIFT) && !_fe3d.input_getKeyDown(Input::KEY_RSHIFT))
 					{
 						if (_currentTextContent.empty()) // Minus can only before any number
 						{
-							_currentTextContent += '?';
+							_currentTextContent += '-';
 						}
 					}
 				}

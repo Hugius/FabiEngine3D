@@ -29,8 +29,6 @@ void SceneEditor::update()
 	_updateMainMenu();
 	_updateCamera();
 	_updateMiscellaneous();
-	vec3 camPos = _fe3d.camera_getPosition();
-	_fe3d.gfx_enableShadows(vec3(camPos.x + 50.0f, 60.0f, camPos.z), vec3(camPos.x, 0.0f, camPos.z), 100.0f, 400.0f);
 }
 
 void SceneEditor::_updateMainMenu()

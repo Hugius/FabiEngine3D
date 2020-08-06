@@ -71,12 +71,14 @@ void ModelEditor::load()
 	// Enable graphics
 	_fe3d.gfx_enableAmbientLighting(vec3(1.0f), 0.75f);
 	_fe3d.gfx_enableDirectionalLighting(vec3(1000.0f), vec3(1.0f), 0.5f);
-	_fe3d.gfx_enableShadows(vec3(50.0f, 50.0f, 0.0f), vec3(0.0f), 100.0f, 150.0);
+	_fe3d.gfx_enableShadows(vec3(100.0f, 75.0f, 0.0f), vec3(0.0f), 200.0f, 200.0f);
+	_fe3d.gfx_enableSceneReflections(0.0f, 0.25f);
 	
 	// 3D Environment
 	_fe3d.gameEntity_add("@@grid", "Engine\\OBJs\\plane.obj", vec3(0.0f), vec3(0.0f), vec3(100.0f, 1.0f, 100.0f));
 	_fe3d.gameEntity_setDiffuseMap("@@grid", "Engine\\Textures\\marble.png");
 	_fe3d.gameEntity_setUvRepeat("@@grid", 25.0f);
+	_fe3d.gameEntity_setLightness("@@grid", 0.95f);
 	_fe3d.gameEntity_setSceneReflective("@@grid", true);
 	_fe3d.gameEntity_add("@@cube", "Engine\\OBJs\\cube.obj", vec3(5.0f, 0.0f, 0.0f), vec3(0.0f), vec3(1.0f, 1.0f, 1.0f));
 	_fe3d.gameEntity_setDiffuseMap("@@cube", "Engine\\Textures\\cube.png");
@@ -100,12 +102,12 @@ void ModelEditor::loadModels()
 	_modelNames.clear();
 
 	// Compose full models folder path
-	string modelsPath = _fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\Data\\models.fe3d";
+	string filePath = _fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\Data\\models.fe3d";
 
 	// Load models file
-	if (_fe3d.misc_isFileExisting(modelsPath)) // Check if models file exists
+	if (_fe3d.misc_isFileExisting(filePath)) // Check if models file exists
 	{
-		std::ifstream file(modelsPath);
+		std::ifstream file(filePath);
 		string line;
 
 		// Read model data
@@ -253,6 +255,7 @@ void ModelEditor::unload()
 	_fe3d.gfx_disableAmbientLighting();
 	_fe3d.gfx_disableDirectionalLighting();
 	_fe3d.gfx_disableShadows();
+	_fe3d.gfx_disableSceneReflections();
 
 	// 3D environment
 	_fe3d.gameEntity_delete("@@grid");

@@ -16,8 +16,8 @@ uniform float u_farZ;
 uniform float u_dofMinDistance;
 
 // Boolean uniforms
-uniform bool  u_bloomEnabled;
-uniform bool  u_dofEnabled;
+uniform bool u_bloomEnabled;
+uniform bool u_dofEnabled;
 
 // Out variables
 layout (location = 0) out vec4 o_finalColor;

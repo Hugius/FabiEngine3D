@@ -94,6 +94,10 @@ private:
 	const string _previewPointlightID = "@previewPointlight";
 	const vec3 _defaultLightbulbSize = vec3(1.0f);
 	const vec3 _defaultLightbulbAabbSize = vec3(1.0f, 1.25f, 1.0f);
+	int _selectedLightSizeMultiplier = 1;
+	int _activeLightSizeMultiplier = 1;
+	string _selectedLightBulbID = "";
+	string _activeLightBulbID = "";
 
 	// Miscellaneous
 	bool _isLoaded = false;

@@ -231,14 +231,5 @@ void ModelEditor::_updateCamera()
 
 		// Update camera position
 		_fe3d.camera_setPosition(vec3(x, y, z));
-
-		// Update shadow caster position
-		static int frameCounter = 0;
-		frameCounter++;
-		if ((frameCounter % 250) == 0)
-		{
-			float distance = std::max(std::min(_cameraDistance * 2.0f, 50.0f), 10.0f);
-			_fe3d.gfx_enableShadows(vec3(distance), vec3(0.0f), distance * 2.0f, distance * 3.0f);
-		}
 	}
 }

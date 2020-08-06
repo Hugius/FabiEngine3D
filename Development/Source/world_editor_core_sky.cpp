@@ -11,13 +11,13 @@ void WorldEditor::loadSkyEntity()
 		_fe3d.logger_throwError("Tried to load as empty project!");
 	}
 
-	string fileFolderPath = _fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\Data\\sky.fe3d";
+	string filePath = _fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\Data\\sky.fe3d";
 
 	// Load sky file
-	if (_fe3d.misc_isFileExisting(fileFolderPath))
+	if (_fe3d.misc_isFileExisting(filePath))
 	{
 		// Open file
-		std::ifstream skyFile(fileFolderPath);
+		std::ifstream skyFile(filePath);
 
 		// Values
 		std::array<string, 6> diffuseMapPaths{};
@@ -70,13 +70,13 @@ void WorldEditor::_saveSkyData()
 			_fe3d.logger_throwError("Tried to save as empty project!");
 		}
 
-		string fileFolderPath = _fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\Data\\sky.fe3d";
+		string filePath = _fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\Data\\sky.fe3d";
 
 		// Save sky data
 		if (_fe3d.skyEntity_isExisting("@sky"))
 		{
 			// Load file
-			std::ofstream skyFile(fileFolderPath);
+			std::ofstream skyFile(filePath);
 
 			// Values
 			auto diffuseMapPaths = _fe3d.skyEntity_getDiffuseMapPaths("@sky");
@@ -111,9 +111,9 @@ void WorldEditor::_saveSkyData()
 		else
 		{
 			// Remove file if non-existent
-			if (_fe3d.misc_isFileExisting(fileFolderPath))
+			if (_fe3d.misc_isFileExisting(filePath))
 			{
-				std::remove(fileFolderPath.c_str());
+				std::remove(filePath.c_str());
 			}
 		}
 

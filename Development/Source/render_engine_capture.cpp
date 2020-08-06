@@ -170,7 +170,7 @@ void RenderEngine::_captureDofBlur()
 	{
 		_blurRenderer.bind();
 		_shaderBus.setBlurMap(_blurRenderer.blurTexture(_finalSurface, _shaderBus.getSceneMap(), 
-			static_cast<int>(BlurType::DOF), 4, 1.0f, BlurDirection::BOTH));
+			static_cast<int>(BlurType::DOF), 6, 1.0f, BlurDirection::BOTH));
 		_blurRenderer.unbind();
 	}
 }

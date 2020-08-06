@@ -4,6 +4,8 @@ void SceneEditor::_updateModelEditing()
 {
 	if (_isLoaded)
 	{
+		_selectedModelID = "";
+
 		// User must not be in placement mode
 		if (_currentPreviewModelName == "" && !_isPlacingPointlight)
 		{
@@ -14,7 +16,7 @@ void SceneEditor::_updateModelEditing()
 				if (entityID[0] != '@')
 				{
 					// Cursor must be in 3D space, no GUI interruptions, no RMB holding down
-					if (_fe3d.collision_checkCursorInEntity(entityID) && _fe3d.misc_isMouseInsideViewport() &&
+					if (_fe3d.collision_checkCursorInAny() == entityID && _fe3d.misc_isMouseInsideViewport() &&
 						!_gui->getGlobalScreen()->isFocused() && !_fe3d.input_getMouseDown(Input::MOUSE_BUTTON_RIGHT))
 					{
 						// Set new selected model
@@ -26,6 +28,7 @@ void SceneEditor::_updateModelEditing()
 							// Check if same model is clicked again
 							if (_selectedModelID != _activeModelID)
 							{
+								
 								_activateModel(_selectedModelID);
 							}
 						}
@@ -177,7 +180,5 @@ void SceneEditor::_updateModelEditing()
 				}
 			}
 		}
-
-		_selectedModelID = "";
 	}
 }

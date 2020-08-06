@@ -68,7 +68,7 @@ void FabiEngine3D::aabbEntity_setResponsiveness(const string& ID, bool responsiv
 
 void FabiEngine3D::aabbEntity_setGroupResponsiveness(const string& ID, bool responsive)
 {
-	for (auto entity : _core->_aabbEntityManager.getEntities()) // Loop over aabb entities
+	for (auto entity : _core->_aabbEntityManager.getEntities()) // Loop over AABB entities
 	{
 		if (entity->getID().size() >= ID.size()) // Check if entity ID is at least the size of group ID
 		{
@@ -145,7 +145,7 @@ void FabiEngine3D::collision_disableCameraTerrainResponse()
 
 bool FabiEngine3D::collision_checkAnyWithCamera()
 {
-	for (auto entity : _core->_aabbEntityManager.getEntities()) // Loop over aabb entities
+	for (auto entity : _core->_aabbEntityManager.getEntities()) // Loop over AABB entities
 	{
 		if (entity->getCollisionDirection() != CollisionDir::NONE)
 		{
@@ -156,22 +156,12 @@ bool FabiEngine3D::collision_checkAnyWithCamera()
 	return false;
 }
 
-bool FabiEngine3D::collision_checkEntityCamera(const string& ID)
+bool FabiEngine3D::collision_checkEntityWithCamera(const string& ID)
 {
 	return _core->_aabbEntityManager.getEntity(ID)->getCollisionDirection() != CollisionDir::NONE;
 }
 
-bool FabiEngine3D::collision_isCameraUnderGround()
-{
-	return _core->_collisionResolver.isCameraUnderGround();
-}
-
-bool FabiEngine3D::collision_isCameraAboveGround()
-{
-	return _core->_collisionResolver.isCameraAboveGround();
-}
-
-const string& FabiEngine3D::collision_checkEntityOthers(const string& ID)
+const string& FabiEngine3D::collision_checkEntityWithOthers(const string& ID)
 {
 	for (auto other : _core->_aabbEntityManager.getEntities()) // Loop over aabb entities
 	{
@@ -217,9 +207,9 @@ const string& FabiEngine3D::collision_checkEntityOthers(const string& ID)
 	return "";
 }
 
-const string& FabiEngine3D::collision_checkEntityGroupCamera(const string& ID)
+const string& FabiEngine3D::collision_checkEntityGroupWithCamera(const string& ID)
 {
-	for (auto entity : _core->_aabbEntityManager.getEntities()) // Loop over aabb entities
+	for (auto entity : _core->_aabbEntityManager.getEntities()) // Loop over AABB entities
 	{
 		if (entity->getID().size() >= ID.size()) // Check if entity ID is at least the size of group ID
 		{
@@ -241,60 +231,102 @@ const string& FabiEngine3D::collision_checkEntityGroupCamera(const string& ID)
 	return "";
 }
 
+const string& FabiEngine3D::collision_checkCursorInAny()
+{
+	float closestDistance = (std::numeric_limits<float>::max)();
+	string closestBoxID = "";
+
+	for (auto entity : _core->_aabbEntityManager.getEntities()) // Loop over AABB entities
+	{
+		if (entity->isVisible())
+		{
+			// Calculate box left bottom (LB) and right top (RT)
+			vec3 lb, rt;
+			lb.x = (entity->getTranslation().x - entity->getScaling().x / 2.0f);
+			lb.y = (entity->getTranslation().y);
+			lb.z = (entity->getTranslation().z + entity->getScaling().z / 2.0f);
+			rt.x = (entity->getTranslation().x + entity->getScaling().x / 2.0f);
+			rt.y = (entity->getTranslation().y + entity->getScaling().y);
+			rt.z = (entity->getTranslation().z - entity->getScaling().z / 2.0f);
+
+			// Check intersection
+			float distance = _core->_mousePicker.checkCursorInBox(lb, rt, _core->_cameraManager.getPosition());
+
+			// Check if closest to camera
+			if (distance != -1.0f && distance < closestDistance)
+			{
+				closestDistance = distance;
+				closestBoxID = entity->getID();
+			}
+		}
+	}
+
+	// No intersection
+	return closestBoxID;
+}
+
 bool FabiEngine3D::collision_checkCursorInEntity(const string& ID)
 {
 	auto entity = _core->_aabbEntityManager.getEntity(ID);
 
-	vec3 lb, rt;
-	lb.x = (entity->getTranslation().x - entity->getScaling().x / 2.0f);
-	lb.y = (entity->getTranslation().y);
-	lb.z = (entity->getTranslation().z + entity->getScaling().z / 2.0f);
-	rt.x = (entity->getTranslation().x + entity->getScaling().x / 2.0f);
-	rt.y = (entity->getTranslation().y + entity->getScaling().y);
-	rt.z = (entity->getTranslation().z - entity->getScaling().z / 2.0f);
+	if (entity->isVisible())
+	{
+		vec3 lb, rt;
+		lb.x = (entity->getTranslation().x - entity->getScaling().x / 2.0f);
+		lb.y = (entity->getTranslation().y);
+		lb.z = (entity->getTranslation().z + entity->getScaling().z / 2.0f);
+		rt.x = (entity->getTranslation().x + entity->getScaling().x / 2.0f);
+		rt.y = (entity->getTranslation().y + entity->getScaling().y);
+		rt.z = (entity->getTranslation().z - entity->getScaling().z / 2.0f);
+		
+		return _core->_mousePicker.checkCursorInBox(lb, rt, _core->_cameraManager.getPosition()) != -1.0f;
+	}
 
-	return _core->_mousePicker.checkCursorInBox(lb, rt, _core->_cameraManager.getPosition()) != -1.0f;
+	return false;
 }
 
 const string& FabiEngine3D::collision_checkCursorInEntityGroup(const string& ID, const string& exception)
 {
 	float closestDistance = (std::numeric_limits<float>::max)();
-	string closestBox = "";
+	string closestBoxID = "";
 
-	for (auto entity : _core->_aabbEntityManager.getEntities()) // Loop over aabb entities
+	for (auto entity : _core->_aabbEntityManager.getEntities()) // Loop over AABB entities
 	{
-		if (entity->getID().size() >= ID.size()) // Check if entity ID is at least the size of group ID
+		if (entity->isVisible())
 		{
-			auto subString = entity->getID().substr(0, ID.size());
-			if (subString == ID && entity->getID() != exception) // If entity matches ID
+			if (entity->getID().size() >= ID.size()) // Check if entity ID is at least the size of group ID
 			{
-				// Calculate box left bottom (LB) and right top (RT)
-				vec3 lb, rt;
-				lb.x = (entity->getTranslation().x - entity->getScaling().x / 2.0f);
-				lb.y = (entity->getTranslation().y);
-				lb.z = (entity->getTranslation().z + entity->getScaling().z / 2.0f);
-				rt.x = (entity->getTranslation().x + entity->getScaling().x / 2.0f);
-				rt.y = (entity->getTranslation().y + entity->getScaling().y);
-				rt.z = (entity->getTranslation().z - entity->getScaling().z / 2.0f);
-
-				// Check intersection
-				float distance = _core->_mousePicker.checkCursorInBox(lb, rt, _core->_cameraManager.getPosition());
-
-				// Check if closest to camera
-				if (distance != -1.0f && distance < closestDistance)
+				auto subString = entity->getID().substr(0, ID.size());
+				if (subString == ID && entity->getID() != exception) // If entity matches ID
 				{
-					closestDistance = distance;
-					closestBox = entity->getID();
+					// Calculate box left bottom (LB) and right top (RT)
+					vec3 lb, rt;
+					lb.x = (entity->getTranslation().x - entity->getScaling().x / 2.0f);
+					lb.y = (entity->getTranslation().y);
+					lb.z = (entity->getTranslation().z + entity->getScaling().z / 2.0f);
+					rt.x = (entity->getTranslation().x + entity->getScaling().x / 2.0f);
+					rt.y = (entity->getTranslation().y + entity->getScaling().y);
+					rt.z = (entity->getTranslation().z - entity->getScaling().z / 2.0f);
+
+					// Check intersection
+					float distance = _core->_mousePicker.checkCursorInBox(lb, rt, _core->_cameraManager.getPosition());
+
+					// Check if closest to camera
+					if (distance != -1.0f && distance < closestDistance)
+					{
+						closestDistance = distance;
+						closestBoxID = entity->getID();
+					}
 				}
 			}
 		}
 	}
 
 	// No intersection
-	return closestBox;
+	return closestBoxID;
 }
 
-ivec3 FabiEngine3D::collision_checkEntityCameraDir(const string& ID)
+ivec3 FabiEngine3D::collision_checkEntityWithCameraDirection(const string& ID)
 {
 	// Calculate direction
 	auto state = _core->_aabbEntityManager.getEntity(ID)->getCollisionDirection();
@@ -303,9 +335,9 @@ ivec3 FabiEngine3D::collision_checkEntityCameraDir(const string& ID)
 	return ivec3(state == CollisionDir::X, state == CollisionDir::Y, state == CollisionDir::Z);
 }
 
-ivec3 FabiEngine3D::collision_checkEntityGroupCameraDir(const string& ID)
+ivec3 FabiEngine3D::collision_checkEntityGroupWithCameraDirection(const string& ID)
 {
-	for (auto entity : _core->_aabbEntityManager.getEntities()) // Loop over aabb entities
+	for (auto entity : _core->_aabbEntityManager.getEntities()) // Loop over AABB entities
 	{
 		if (entity->getID().size() >= ID.size()) // Check if entity ID is at least the size of group ID
 		{

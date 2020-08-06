@@ -8,16 +8,19 @@ layout(location = 2) in vec3 v_normal;
 layout(location = 3) in vec3 v_offset;
 
 // Matrix44 uniforms
-uniform mat4  u_modelMatrix;
-uniform mat4  u_viewMatrix;
-uniform mat4  u_projMatrix;
-uniform mat4  u_shadowMatrix;
+uniform mat4 u_modelMatrix;
+uniform mat4 u_viewMatrix;
+uniform mat4 u_projMatrix;
+uniform mat4 u_shadowMatrix;
+
+// Matrix33 uniforms
+uniform mat3 u_normalModelMatrix;
 
 // Vec4 uniforms
-uniform vec4  u_clippingPlane;
+uniform vec4 u_clippingPlane;
 
 // Boolean uniforms
-uniform bool  u_isInstanced;
+uniform bool u_isInstanced;
 
 // Float uniforms
 uniform float u_maxY;
@@ -45,7 +48,7 @@ void main()
 	// Out variables
 	f_pos       = worldSpacePos.xyz;
 	f_uv        = vec2(v_uv.x, -v_uv.y) * u_uvRepeat;
-	f_normal    = normalize(mat3(inverse(transpose(u_modelMatrix))) * v_normal);
+	f_normal    = normalize(u_normalModelMatrix * v_normal);
 	f_shadowPos = u_shadowMatrix * worldSpacePos;
 	f_clip      = clipSpacePos;
 }

@@ -109,6 +109,7 @@ void GameEntityRenderer::render(const GameEntity* entity)
 		}
 
 		// Shader uniforms
+		_shader.uploadUniform("u_normalModelMatrix", mat3(glm::inverse(glm::transpose(entity->getModelMatrix()))));
 		_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix());
 		_shader.uploadUniform("u_color", entity->getColor());
 		_shader.uploadUniform("u_specularLightingFactor", entity->getSpecularFactor());

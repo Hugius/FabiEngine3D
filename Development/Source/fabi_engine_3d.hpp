@@ -356,16 +356,15 @@ public:
 	void collision_disableCameraTerrainResponse();
 
 	// Global collision interface - getters
-	bool collision_checkCursorInEntity(const string& ID);
-	bool collision_checkAnyWithCamera();
-	bool collision_checkEntityCamera(const string& ID);
-	bool collision_isCameraUnderGround();
-	bool collision_isCameraAboveGround();
-	const string& collision_checkEntityOthers(const string& ID);
-	const string& collision_checkEntityGroupCamera(const string& ID);
+	const string& collision_checkCursorInAny();
+	bool		  collision_checkCursorInEntity(const string& ID);
 	const string& collision_checkCursorInEntityGroup(const string& ID, const string& exception = "");
-	ivec3 collision_checkEntityCameraDir(const string& ID);
-	ivec3 collision_checkEntityGroupCameraDir(const string& ID);
+	bool		  collision_checkAnyWithCamera();
+	bool		  collision_checkEntityWithCamera(const string& ID);
+	const string& collision_checkEntityGroupWithCamera(const string& ID);
+	const string& collision_checkEntityWithOthers(const string& ID);
+	ivec3		  collision_checkEntityWithCameraDirection(const string& ID);
+	ivec3		  collision_checkEntityGroupWithCameraDirection(const string& ID);
 
 	// Light entity interface - setters
 	void lightEntity_add(const string& ID, vec3 position = vec3(0.0f), vec3 color = vec3(1.0f), float intensity = 1.0f, float distanceFactor = 1.0f, bool visible = true);

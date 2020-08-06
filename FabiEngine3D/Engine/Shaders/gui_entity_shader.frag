@@ -8,21 +8,21 @@ in vec2 f_uv;
 uniform sampler2D u_sampler_diffuse;
 
 // Vec3 uniforms
-uniform vec3      u_color;
+uniform vec3 u_color;
 
 // Vec2 uniforms
-uniform vec2 	  u_windowSize;
-uniform vec2 	  u_minPosition;
-uniform vec2 	  u_maxPosition;
+uniform vec2 u_windowSize;
+uniform vec2 u_minPosition;
+uniform vec2 u_maxPosition;
 
 // Float uniforms
-uniform float 	  u_alpha;
-uniform float     u_nearZ;
-uniform float     u_farZ;
+uniform float u_alpha;
+uniform float u_nearZ;
+uniform float u_farZ;
 
 // Boolean uniforms
-uniform bool      u_isDepthEntity;
-uniform bool      u_noTexture;
+uniform bool u_isDepthEntity;
+uniform bool u_noTexture;
 
 // Out variables
 layout (location = 0) out vec4 o_finalColor;

@@ -18,7 +18,7 @@ uniform bool u_horizontal;
 // Out variables
 layout (location = 0) out vec4 o_finalColor;
 
-// Miscellaneous
+// Blur kernel
 #define WEIGHT_AMOUNT 5
 float kernel[WEIGHT_AMOUNT];
 

@@ -145,8 +145,10 @@ void TopViewportController::_updateProjectCreation()
 			}
 			else // Project is non-existent
 			{
-				// Create new directory
+				// Create new project directory & subfolders
 				_mkdir(newDirectoryPath.c_str());
+				_mkdir((newDirectoryPath + "\\Data").c_str());
+				_mkdir((newDirectoryPath + "\\Scenes").c_str());
 
 				// Load current project
 				_currentProjectName = projectName;

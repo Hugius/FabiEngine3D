@@ -30,12 +30,12 @@ uniform float u_farZ;
 uniform float u_transparency;
 
 // Boolean uniforms
-uniform bool  u_fogEnabled;
-uniform bool  u_effectsEnabled;
-uniform bool  u_isRippling;
-uniform bool  u_isSpecular;
-uniform bool  u_isReflective;
-uniform bool  u_isRefractive;
+uniform bool u_fogEnabled;
+uniform bool u_effectsEnabled;
+uniform bool u_isRippling;
+uniform bool u_isSpecular;
+uniform bool u_isReflective;
+uniform bool u_isRefractive;
 
 // Out variables
 layout(location = 0) out vec4 o_finalColor;
@@ -82,7 +82,7 @@ vec4 getMainColor()
 		// DUDV mapping
 		vec2 distortedTexCoords = f_uv + texture(u_sampler_dudvMap, vec2(f_uv.x + u_rippleOffset.x, f_uv.y + u_rippleOffset.y)).rg * 0.1;
 		vec2 totalDistortion = (texture(u_sampler_dudvMap, distortedTexCoords).rg * 2.0 - 1.0) * 0.025f;
-		texCoords   += totalDistortion;
+		texCoords  += totalDistortion;
 		texCoords.x = clamp(texCoords.x, 0.001f, 0.999f);
 		texCoords.y = clamp(texCoords.y, -0.999f, -0.001f);
 

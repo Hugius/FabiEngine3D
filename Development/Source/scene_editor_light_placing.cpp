@@ -8,7 +8,9 @@ void SceneEditor::_updateLightPlacing()
 		if (_isPlacingPointlight)
 		{
 			// Check if mouse behavior isn't being invalid
-			if (_fe3d.misc_isMouseInsideViewport() && !_fe3d.input_getMouseDown(Input::MOUSE_BUTTON_RIGHT) && !_gui->getGlobalScreen()->isFocused())
+			if (_fe3d.misc_isMouseInsideViewport() && 
+				!_fe3d.input_getMouseDown(Input::MOUSE_BUTTON_RIGHT) && 
+				!_gui->getGlobalScreen()->isFocused())
 			{
 				// Default placement position
 				vec3 newPosition = vec3(0.0f);
@@ -41,6 +43,8 @@ void SceneEditor::_updateLightPlacing()
 
 					// Add light entity
 					_fe3d.gameEntity_add("@" + newID, "Engine\\OBJs\\lamp.obj", newPosition, vec3(0.0f), _defaultLightbulbSize);
+					_fe3d.gameEntity_setColor("@" + newID, vec3(1.0f));
+					_fe3d.gameEntity_setShadowed("@" + newID, false);
 					_fe3d.aabbEntity_bindToGameEntity("@" + newID, _defaultLightbulbAabbSize, true);
 					_fe3d.lightEntity_add(newID, newPosition);
 

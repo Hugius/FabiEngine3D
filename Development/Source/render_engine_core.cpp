@@ -12,12 +12,12 @@ RenderEngine::RenderEngine(ShaderBus& shaderBus, Timer& timer) :
 	_billboardEntityRenderer  ("billboard_entity_shader.vert", "billboard_entity_shader.frag", shaderBus),
 	_aabbEntityRenderer       ("aabb_entity_shader.vert",      "aabb_entity_shader.frag",      shaderBus),
 	_guiEntityRenderer        ("gui_entity_shader.vert",       "gui_entity_shader.frag",       shaderBus),
-	_blurRenderer             ("blur_shader.vert",            "blur_shader.frag",            shaderBus),
+	_blurRenderer             ("blur_shader.vert",             "blur_shader.frag",             shaderBus),
 	_bloomHdrRenderer         ("bloom_hdr_shader.vert",        "bloom_hdr_shader.frag",        shaderBus),
-	_shadowRenderer           ("shadow_shader.vert",          "shadow_shader.frag",          shaderBus),
-	_depthRenderer            ("depth_shader.vert",           "depth_shader.frag",           shaderBus),
-	_postRenderer             ("post_shader.vert",            "post_shader.frag",            shaderBus),
-	_finalRenderer            ("final_shader.vert",           "final_shader.frag",           shaderBus)
+	_shadowRenderer           ("shadow_shader.vert",           "shadow_shader.frag",		   shaderBus),
+	_depthRenderer            ("depth_shader.vert",            "depth_shader.frag",			   shaderBus),
+	_postRenderer             ("post_shader.vert",             "post_shader.frag",			   shaderBus),
+	_finalRenderer            ("final_shader.vert",            "final_shader.frag",			   shaderBus)
 {
 	// Framebuffers
 	_screenFramebuffer.createColorTexture(ivec2(0), Config::getInst().getVpSize(), 1, false);

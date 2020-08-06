@@ -12,13 +12,13 @@ void WorldEditor::loadTerrainEntity()
 	}
 
 	// Compose full terrain file path
-	string fileFolderPath = _fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\Data\\terrain.fe3d";
+	string filePath = _fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\Data\\terrain.fe3d";
 
 	// Load terrain file
-	if (_fe3d.misc_isFileExisting(fileFolderPath))
+	if (_fe3d.misc_isFileExisting(filePath))
 	{
 		// Load file
-		std::ifstream terrainFile(fileFolderPath);
+		std::ifstream terrainFile(filePath);
 
 		// Values
 		string heightMapPath, diffuseMapPath, blendMapPath, blendMapPathR, blendMapPathG, blendMapPathB;
@@ -88,13 +88,13 @@ void WorldEditor::_saveTerrainData()
 			_fe3d.logger_throwError("Tried to save as empty project!");
 		}
 
-		string fileFolderPath = _fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\Data\\terrain.fe3d";
+		string filePath = _fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\Data\\terrain.fe3d";
 
 		// Save terrain data
 		if (_fe3d.terrainEntity_isExisting("@terrain"))
 		{
 			// Load file
-			std::ofstream terrainFile(fileFolderPath);
+			std::ofstream terrainFile(filePath);
 			
 			// Values
 			string heightMapPath = _fe3d.terrainEntity_getHeightMapPath("@terrain");
@@ -147,9 +147,9 @@ void WorldEditor::_saveTerrainData()
 		else
 		{
 			// Remove file if non-existent
-			if (_fe3d.misc_isFileExisting(fileFolderPath))
+			if (_fe3d.misc_isFileExisting(filePath))
 			{
-				std::remove(fileFolderPath.c_str());
+				std::remove(filePath.c_str());
 			}
 		}
 

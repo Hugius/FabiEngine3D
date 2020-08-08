@@ -137,6 +137,7 @@ void RenderEngine::renderScene(EntityBus * entityBus, CameraManager & camera, iv
 		_timer.start("postProcessing");
 		_captureBloom();
 		_captureDofBlur();
+		_captureLensFlare();
 		_capturePostProcessing();
 		_captureMotionBlur(camera, mousePos);
 

@@ -3,6 +3,7 @@
 
 #include <fstream>
 #include <sstream>
+#include <algorithm>
 
 ModelEditor::ModelEditor(FabiEngine3D& fe3d, shared_ptr<EngineGuiManager> gui) :
 	_fe3d(fe3d),

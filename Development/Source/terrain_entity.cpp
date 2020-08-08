@@ -5,9 +5,9 @@ void TerrainEntity::setPixelColors(vector<float>& val)
 	_pixelColors = val;
 }
 
-void TerrainEntity::setHeightMapPath(const string& path)
+void TerrainEntity::setHeightMapPath(const string& filePath)
 {
-	_heightMapPath = path;
+	_heightMapPath = filePath;
 }
 
 void TerrainEntity::setDiffuseMap(GLuint val)
@@ -15,9 +15,9 @@ void TerrainEntity::setDiffuseMap(GLuint val)
 	_diffuseMap = val;
 }
 
-void TerrainEntity::setDiffuseMapPath(const string& path)
+void TerrainEntity::setDiffuseMapPath(const string& filePath)
 {
-	_diffuseMapPath = path;
+	_diffuseMapPath = filePath;
 }
 
 void TerrainEntity::setBlendMap(GLuint val)
@@ -25,9 +25,9 @@ void TerrainEntity::setBlendMap(GLuint val)
 	_blendMap = val;
 }
 
-void TerrainEntity::setBlendMapPath(const string& path)
+void TerrainEntity::setBlendMapPath(const string& filePath)
 {
-	_blendMapPath = path;
+	_blendMapPath = filePath;
 }
 
 void TerrainEntity::setBlendMapR(GLuint val)
@@ -35,9 +35,9 @@ void TerrainEntity::setBlendMapR(GLuint val)
 	_blendMapR = val;
 }
 
-void TerrainEntity::setBlendMapPathR(const string& path)
+void TerrainEntity::setBlendMapPathR(const string& filePath)
 {
-	_blendMapPathR = path;
+	_blendMapPathR = filePath;
 }
 
 void TerrainEntity::setBlendMapG(GLuint val)
@@ -45,9 +45,9 @@ void TerrainEntity::setBlendMapG(GLuint val)
 	_blendMapG = val;
 }
 
-void TerrainEntity::setBlendMapPathG(const string& path)
+void TerrainEntity::setBlendMapPathG(const string& filePath)
 {
-	_blendMapPathG = path;
+	_blendMapPathG = filePath;
 }
 
 void TerrainEntity::setBlendMapB(GLuint val)
@@ -55,9 +55,9 @@ void TerrainEntity::setBlendMapB(GLuint val)
 	_blendMapB = val;
 }
 
-void TerrainEntity::setBlendMapPathB(const string& path)
+void TerrainEntity::setBlendMapPathB(const string& filePath)
 {
-	_blendMapPathB = path;
+	_blendMapPathB = filePath;
 }
 
 void TerrainEntity::setUvRepeat(float val)

@@ -180,10 +180,10 @@ void RenderEngine::_capturePostProcessing()
 	// Apply bloom and DOF on scene texture
 	_bloomDofAdditionFramebuffer.bind();
 	_postRenderer.bind();
-	_postRenderer.render(_finalSurface, _shaderBus.getSceneMap(), _shaderBus.getBloomMap(), _shaderBus.getDepthMap(), _shaderBus.getBlurMap());
+	_postRenderer.render(_finalSurface);
 	_postRenderer.unbind();
 	_bloomDofAdditionFramebuffer.unbind();
-	_shaderBus.setBloomedDofSceneMap(_bloomDofAdditionFramebuffer.getTexture(0));
+	_shaderBus.setPostProcessedSceneMap(_bloomDofAdditionFramebuffer.getTexture(0));
 }
 
 void RenderEngine::_captureMotionBlur(CameraManager& camera, ivec2 mousePos)
@@ -248,7 +248,7 @@ void RenderEngine::_captureMotionBlur(CameraManager& camera, ivec2 mousePos)
 
 			// Apply motion blur
 			_blurRenderer.bind();
-			_shaderBus.setMotionBlurMap(_blurRenderer.blurTexture(_finalSurface, _shaderBus.getBloomedDofSceneMap(), 
+			_shaderBus.setMotionBlurMap(_blurRenderer.blurTexture(_finalSurface, _shaderBus.getPostProcessedSceneMap(), 
 				static_cast<int>(BlurType::MOTION), blurStrength, 1.0f, direction));
 			_blurRenderer.unbind();
 
@@ -257,10 +257,36 @@ void RenderEngine::_captureMotionBlur(CameraManager& camera, ivec2 mousePos)
 		}
 		else
 		{
-			_shaderBus.setMotionBlurMap(_shaderBus.getBloomedDofSceneMap());
+			_shaderBus.setMotionBlurMap(_shaderBus.getPostProcessedSceneMap());
 		}
 
 		// Set last mouse position
 		lastMousePos = mousePos;
 	}
+}
+
+void RenderEngine::_captureLensFlare()
+{
+	// Calculate screen position
+	vec3 lightingPosition = _shaderBus.getDirectionalLightingPosition();
+	mat4 viewMatrix = _shaderBus.getViewMatrix();
+	mat4 projectionMatrix = _shaderBus.getProjectionMatrix();
+	vec4 clipSpacePosition = projectionMatrix * viewMatrix * vec4(lightingPosition, 1.0f);
+	float alpha;
+
+	// Calculate transparency value
+	if (clipSpacePosition.w <= 0.0f)
+	{
+		alpha = 0.0f;
+	}
+	else
+	{
+		float x = clipSpacePosition.x / clipSpacePosition.w;
+		float y = clipSpacePosition.y / clipSpacePosition.w;
+		alpha = 1.0f - max(fabsf(x), fabsf(y));
+		alpha = std::clamp(alpha, 0.0f, 1.0f);
+	}
+
+	// Apply lens flare transparency
+	_shaderBus.setLensFlareAlpha(alpha);
 }

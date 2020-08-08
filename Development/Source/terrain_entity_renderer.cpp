@@ -4,7 +4,7 @@
 void TerrainEntityRenderer::bind()
 {
 	// Define clipping plane for scene reflections
-	const float smallOffset = 0.0000001f;
+	const float smallOffset = 1.0f;
 	vec4 clippingPlane = vec4(0.0f, 1.0f, 0.0f, -(_shaderBus.getSceneReflectionHeight()) + smallOffset);
 
 	// Bind shader

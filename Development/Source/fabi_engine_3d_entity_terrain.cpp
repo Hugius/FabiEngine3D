@@ -80,7 +80,7 @@ float FabiEngine3D::terrainEntity_getPixelHeight(const string& ID, float x, floa
 	return _core->_terrainEntityManager.getPixelHeight(ID, x, z);
 }
 
-const string& FabiEngine3D::terrainEntity_getSelectedID()
+string FabiEngine3D::terrainEntity_getSelectedID()
 {
 	if (_core->_terrainEntityManager.getSelectedTerrain() != nullptr)
 	{

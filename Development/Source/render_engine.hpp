@@ -82,6 +82,7 @@ private:
 	void _capturePostProcessing();
 	void _captureDofBlur();
 	void _captureMotionBlur(CameraManager& camera, ivec2 mousePos);
+	void _captureLensFlare();
 
 	// Scene rendering functions
 	void _renderSkyEntity();

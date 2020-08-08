@@ -18,10 +18,11 @@ public:
 	void setSceneRefractionMap(GLuint val);
 	void setShadowMap(GLuint val);
 	void setBloomMap(GLuint val);
-	void setBloomedDofSceneMap(GLuint val);
+	void setPostProcessedSceneMap(GLuint val);
 	void setDepthMap(GLuint val);
 	void setBlurMap(GLuint val);
 	void setMotionBlurMap(GLuint val);
+	void setLensFlareMap(GLuint val);
 
 	// Matrices
 	void setViewMatrix(const mat4 & val);
@@ -53,6 +54,7 @@ public:
 	void setSceneReflectionHeight(float val);
 	void setSceneReflectionFactor(float val);
 	void setShadowAreaSize(float val);
+	void setLensFlareAlpha(float val);
 
 	// Integers
 	void setBloomBlurSize(int val);
@@ -73,6 +75,7 @@ public:
 	void setShadowsEnabled(bool val);
 	void setDofEnabled(bool val);
 	void setMotionBlurEnabled(bool val);
+	void setLensFlareEnabled(bool val);
 	void setWireframeRenderingEnabled(bool val);
 	void setAabbFrameRenderingEnabled(bool val);
 	void setDebugRenderingEnabled(bool val);
@@ -85,11 +88,12 @@ public:
 	const GLuint getSceneRefractionMap()   const;
 	const GLuint getShadowMap()            const;
 	const GLuint getBloomMap()             const;
-	const GLuint getBloomedDofSceneMap()   const;
+	const GLuint getPostProcessedSceneMap()   const;
 	const GLuint getDepthMap()             const;
 	const GLuint getBlurMap()              const;
 	const GLuint getMotionBlurMap()        const;
-
+	const GLuint getLensFlareMap()	   const;
+	
 	// Matrices
 	const mat4 & getViewMatrix()        const;
 	const mat4 & getProjectionMatrix()  const;
@@ -120,6 +124,7 @@ public:
 	const float getSceneReflectionHeight()		  const;
 	const float getSceneReflectionFactor()		  const;
 	const float getShadowAreaSize()				  const;
+	const float getLensFlareAlpha()				  const;
 
 	// Integers
 	const int getBloomBlurSize() const;
@@ -140,6 +145,7 @@ public:
 	const bool isShadowsEnabled()              const;
 	const bool isDofEnabled()                  const;
 	const bool isMotionBlurEnabled()           const;
+	const bool isLensFlareEnabled()			   const;
 	const bool isWireframeRenderingEnabled()   const;
 	const bool isAabbFrameRenderingEnabled()   const;
 	const bool isShadowFrameRenderingEnabled() const;
@@ -147,16 +153,17 @@ public:
 
 private:
 	// Textures
-	GLuint _sceneMap             = 0;
-	GLuint _skyReflectionCubeMap = 0;
-	GLuint _sceneReflectionMap   = 0;
-	GLuint _sceneRefractionMap   = 0;
-	GLuint _shadowMap            = 0;
-	GLuint _bloomMap             = 0;
-	GLuint _bloomedDofSceneMap   = 0;
-	GLuint _depthMap             = 0;
-	GLuint _blurMap              = 0;
-	GLuint _motionBlurMap        = 0;
+	GLuint _sceneMap              = 0;
+	GLuint _skyReflectionCubeMap  = 0;
+	GLuint _sceneReflectionMap    = 0;
+	GLuint _sceneRefractionMap    = 0;
+	GLuint _shadowMap             = 0;
+	GLuint _bloomMap              = 0;
+	GLuint _postProcessedSceneMap = 0;
+	GLuint _depthMap              = 0;
+	GLuint _blurMap               = 0;
+	GLuint _motionBlurMap         = 0;
+	GLuint _lensFlareMap		  = 0;
 	
 	// Matrices
 	mat4 _viewMatrix        = mat4(1.0f);
@@ -188,6 +195,7 @@ private:
 	float _sceneReflectionHeight        = 0.0f;
 	float _sceneReflectionFactor        = 0.0f;
 	float _shadowAreaSize				= 0.0f;
+	float _lensFlareAlpha				= 0.0f;
 	
 	// Integers
 	int _bloomBlurSize = 0;
@@ -208,6 +216,7 @@ private:
 	bool _isShadowsEnabled              = false;
 	bool _isDofEnabled                  = false;
 	bool _isMotionBlurEnabled           = false;
+	bool _isLensFlareEnabled			= false;
 	bool _isWireframeRenderingEnabled   = false;
 	bool _isAabbFrameRenderingEnabled   = false;
 	bool _isShadowFrameRenderingEnabled	= false;

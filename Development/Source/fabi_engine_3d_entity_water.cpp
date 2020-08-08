@@ -111,22 +111,22 @@ void FabiEngine3D::waterEntity_setRefractive(const string& ID, bool enabled)
 	_core->_waterEntityManager.getEntity(ID)->setRefractive(enabled);
 }
 
-void FabiEngine3D::waterEntity_setDudvMap(const string& ID, const string& path)
+void FabiEngine3D::waterEntity_setDudvMap(const string& ID, const string& texturePath)
 {
-	_core->_waterEntityManager.getEntity(ID)->setDudvMap(_core->_texLoader.getTexture(path, false, false));
-	_core->_waterEntityManager.getEntity(ID)->setDudvMapPath(path);
+	_core->_waterEntityManager.getEntity(ID)->setDudvMap(_core->_texLoader.getTexture(texturePath, false, false));
+	_core->_waterEntityManager.getEntity(ID)->setDudvMapPath(texturePath);
 }
 
-void FabiEngine3D::waterEntity_setNormalMap(const string& ID, const string& path)
+void FabiEngine3D::waterEntity_setNormalMap(const string& ID, const string& texturePath)
 {
-	_core->_waterEntityManager.getEntity(ID)->setNormalMap(_core->_texLoader.getTexture(path, false, false));
-	_core->_waterEntityManager.getEntity(ID)->setNormalMapPath(path);
+	_core->_waterEntityManager.getEntity(ID)->setNormalMap(_core->_texLoader.getTexture(texturePath, false, false));
+	_core->_waterEntityManager.getEntity(ID)->setNormalMapPath(texturePath);
 }
 
-void FabiEngine3D::waterEntity_setDisplacementMap(const string& ID, const string& path)
+void FabiEngine3D::waterEntity_setDisplacementMap(const string& ID, const string& texturePath)
 {
-	_core->_waterEntityManager.getEntity(ID)->setDisplacementMap(_core->_texLoader.getTexture(path, false, false));
-	_core->_waterEntityManager.getEntity(ID)->setDisplacementMapPath(path);
+	_core->_waterEntityManager.getEntity(ID)->setDisplacementMap(_core->_texLoader.getTexture(texturePath, false, false));
+	_core->_waterEntityManager.getEntity(ID)->setDisplacementMapPath(texturePath);
 }
 
 void FabiEngine3D::waterEntity_setWaveHeightFactor(const string& ID, float factor)
@@ -159,7 +159,7 @@ void FabiEngine3D::waterEntity_setTransparency(const string& ID, float transpare
 	_core->_waterEntityManager.getEntity(ID)->setTransparency(transparency);
 }
 
-const string& FabiEngine3D::waterEntity_getSelectedID()
+string FabiEngine3D::waterEntity_getSelectedID()
 {
 	if (_core->_waterEntityManager.getSelectedWater() != nullptr)
 	{

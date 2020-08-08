@@ -102,7 +102,7 @@ void FabiEngine3D::skyEntity_setColor(const string& ID, vec3 color)
 	_core->_skyEntityManager.getEntity(ID)->setColor(color);
 }
 
-const string& FabiEngine3D::skyEntity_getSelectedID()
+string FabiEngine3D::skyEntity_getSelectedID()
 {
 	if (_core->_skyEntityManager.getSelectedSky() != nullptr)
 	{

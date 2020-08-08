@@ -35,6 +35,11 @@ void ShaderBus::setMotionBlurMap(GLuint val)
 	_motionBlurMap = val;
 }
 
+void ShaderBus::setLensFlareMap(GLuint val)
+{
+	_lensFlareMap = val;
+}
+
 void ShaderBus::setDepthMap(GLuint val)
 {
 	_depthMap = val;
@@ -45,9 +50,9 @@ void ShaderBus::setBlurMap(GLuint val)
 	_blurMap = val;
 }
 
-void ShaderBus::setBloomedDofSceneMap(GLuint val)
+void ShaderBus::setPostProcessedSceneMap(GLuint val)
 {
-	_bloomedDofSceneMap = val;
+	_postProcessedSceneMap = val;
 }
 
 void ShaderBus::setViewMatrix(const mat4 & val)
@@ -113,6 +118,11 @@ void ShaderBus::setSceneReflectionFactor(float val)
 void ShaderBus::setShadowAreaSize(float val)
 {
 	_shadowAreaSize = val;
+}
+
+void ShaderBus::setLensFlareAlpha(float val)
+{
+	_lensFlareAlpha = val;
 }
 
 void ShaderBus::setAmbientLightIntensity(float val)
@@ -255,6 +265,11 @@ void ShaderBus::setMotionBlurEnabled(bool val)
 	_isMotionBlurEnabled = val;
 }
 
+void ShaderBus::setLensFlareEnabled(bool val)
+{
+	_isLensFlareEnabled = val;
+}
+
 void ShaderBus::setWireframeRenderingEnabled(bool val)
 {
 	_isWireframeRenderingEnabled = val;
@@ -310,6 +325,11 @@ const GLuint ShaderBus::getMotionBlurMap() const
 	return _motionBlurMap;
 }
 
+const GLuint ShaderBus::getLensFlareMap() const
+{
+	return _lensFlareMap;
+}
+
 const GLuint ShaderBus::getDepthMap() const
 {
 	return _depthMap;
@@ -320,9 +340,9 @@ const GLuint ShaderBus::getBlurMap() const
 	return _blurMap;
 }
 
-const GLuint ShaderBus::getBloomedDofSceneMap() const
+const GLuint ShaderBus::getPostProcessedSceneMap() const
 {
-	return _bloomedDofSceneMap;
+	return _postProcessedSceneMap;
 }
 
 const mat4 & ShaderBus::getViewMatrix() const
@@ -388,6 +408,11 @@ const float ShaderBus::getSceneReflectionFactor() const
 const float ShaderBus::getShadowAreaSize() const
 {
 	return _shadowAreaSize;
+}
+
+const float ShaderBus::getLensFlareAlpha() const
+{
+	return _lensFlareAlpha;
 }
 
 const float ShaderBus::getAmbientLightingIntensity() const
@@ -528,6 +553,11 @@ const bool ShaderBus::isDofEnabled() const
 const bool ShaderBus::isMotionBlurEnabled() const
 {
 	return _isMotionBlurEnabled;
+}
+
+const bool ShaderBus::isLensFlareEnabled() const
+{
+	return _isLensFlareEnabled;
 }
 
 const bool ShaderBus::isWireframeRenderingEnabled() const

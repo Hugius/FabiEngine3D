@@ -11,5 +11,5 @@ public:
 
 	void bind()   override;
 	void unbind() override;
-	void render(const GuiEntity * entity, GLuint sceneMap, GLuint bloomMap, GLuint dofMap, GLuint blurMap);
+	void render(const GuiEntity * entity);
 };

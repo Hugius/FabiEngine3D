@@ -92,7 +92,7 @@ public:
 	// Sky entity interface - getters
 	bool skyEntity_isExisting(const string& ID);
 	bool skyEntity_isVisible(const string& ID);
-	const string& skyEntity_getSelectedID();
+	string skyEntity_getSelectedID();
 	const array<string, 6>& skyEntity_getDiffuseMapPaths(const string& ID);
 	float skyEntity_getLightness(const string& ID);
 	float skyEntity_getRotationSpeed(const string& ID);
@@ -122,7 +122,7 @@ public:
 	bool terrainEntity_isVisible(const string& ID);
 	bool terrainEntity_isBlendMapped(const string& ID);
 	bool terrainEntity_isInside(const string& ID, float x, float z);
-	const string& terrainEntity_getSelectedID();
+	string terrainEntity_getSelectedID();
 	const string& terrainEntity_getDiffuseMapPath(const string& ID);
 	const string& terrainEntity_getHeightMapPath(const string& ID);
 	const string& terrainEntity_getBlendMapPath(const string& ID);
@@ -153,9 +153,9 @@ public:
 	void waterEntity_setSpecularLighted(const string& ID, bool enabled);
 	void waterEntity_setReflective(const string& ID, bool enabled);
 	void waterEntity_setRefractive(const string& ID, bool enabled);
-	void waterEntity_setDudvMap(const string& ID, const string& path);
-	void waterEntity_setNormalMap(const string& ID, const string& path);
-	void waterEntity_setDisplacementMap(const string& ID, const string& path);
+	void waterEntity_setDudvMap(const string& ID, const string& texturePath);
+	void waterEntity_setNormalMap(const string& ID, const string& texturePath);
+	void waterEntity_setDisplacementMap(const string& ID, const string& texturePath);
 	void waterEntity_setWaveHeightFactor(const string& ID, float factor);
 	void waterEntity_setSpecularLightingFactor(const string& ID, float factor);
 	void waterEntity_setSpecularLightingIntensity(const string& ID, float intensity);
@@ -183,7 +183,7 @@ public:
 	const string& waterEntity_getDudvMapPath(const string& ID);
 	const string& waterEntity_getNormalMapPath(const string& ID);
 	const string& waterEntity_getDisplacementMapPath(const string& ID);
-	const string& waterEntity_getSelectedID();
+	string waterEntity_getSelectedID();
 
 	// Game entity interface - setters
 	void gameEntity_add
@@ -356,9 +356,9 @@ public:
 	void collision_disableCameraTerrainResponse();
 
 	// Global collision interface - getters
-	const string& collision_checkCursorInAny();
+	string collision_checkCursorInAny();
 	bool		  collision_checkCursorInEntity(const string& ID);
-	const string& collision_checkCursorInEntityGroup(const string& ID, const string& exception = "");
+	string collision_checkCursorInEntityGroup(const string& ID, const string& exception = "");
 	bool		  collision_checkAnyWithCamera();
 	bool		  collision_checkEntityWithCamera(const string& ID);
 	const string& collision_checkEntityGroupWithCamera(const string& ID);
@@ -471,6 +471,7 @@ public:
 	void gfx_enableSkyHDR(float brightnessFactor);
 	void gfx_enableDOF(float minDistance);
 	void gfx_enableMotionBlur();
+	void gfx_enableLensFlare(const string& texturePath);
 	void gfx_disableAmbientLighting();
 	void gfx_disableDirectionalLighting();
 	void gfx_disableSpecularLighting();
@@ -486,6 +487,7 @@ public:
 	void gfx_disableSkyHDR();
 	void gfx_disableDOF();
 	void gfx_disableMotionBlur();
+	void gfx_disableLensFlare();
 
 	// Graphics interface - getters
 	float gfx_getAmbientLightingIntensity();
@@ -586,11 +588,11 @@ public:
 	int misc_getMsTimeSinceEpoch();
 	float misc_getRandomFloat(float min, float max);
 	float misc_getAspectRatio();
-	const string& misc_getWinExplorerFilename(const string& startingDir, const string& fileType);
+	string misc_getWinExplorerFilename(const string& startingDir, const string& fileType);
 	const string& misc_vec2str(vec2 vec);
 	const string& misc_vec2str(vec3 vec);
 	const string& misc_vec2str(vec4 vec);
-	const string& misc_getRootDirectory();
+	string misc_getRootDirectory();
 	vec2 misc_convertToNDC(vec2 pos);
 	vec2 misc_convertFromNDC(vec2 pos);
 	ivec2 misc_convertToScreenCoords(vec2 pos);
@@ -600,8 +602,8 @@ public:
 	ivec2 misc_getViewportPosition();
 	ivec2 misc_getViewportSize();
 	bool misc_isMouseInsideViewport();
-	bool misc_isDirectory(const string& path);
-	bool misc_isFileExisting(const string& path);
+	bool misc_isDirectory(const string& filePath);
+	bool misc_isFileExisting(const string& filePath);
 
 protected:
 	// Virtual interface

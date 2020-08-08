@@ -185,7 +185,7 @@ void FabiEngine3D::misc_clearHeightMapCache(const string& filePath)
 	_core->_texLoader.clearHeightMapCache(filePath);
 }
 
-const string& FabiEngine3D::misc_getWinExplorerFilename(const string& startingDir, const string& fileType)
+string FabiEngine3D::misc_getWinExplorerFilename(const string& startingDir, const string& fileType)
 {
 	// Prepare filter C-string
 	string filter = fileType;
@@ -236,7 +236,7 @@ const string& FabiEngine3D::misc_vec2str(vec4 vec)
 	return std::to_string(vec.x) + " " + std::to_string(vec.y) + " " + std::to_string(vec.z) + " " + std::to_string(vec.w);
 }
 
-const string& FabiEngine3D::misc_getRootDirectory()
+string FabiEngine3D::misc_getRootDirectory()
 {
 	char buffer[256]; size_t len = sizeof(buffer);
 	GetModuleFileName(NULL, buffer, len);
@@ -320,15 +320,15 @@ bool FabiEngine3D::misc_isMouseInsideViewport()
 	return false;
 }
 
-bool FabiEngine3D::misc_isDirectory(const string& path)
+bool FabiEngine3D::misc_isDirectory(const string& filePath)
 {
 	struct stat fileInfo;
-	stat(path.c_str(), &fileInfo);
+	stat(filePath.c_str(), &fileInfo);
 	return (fileInfo.st_mode & S_IFDIR);
 }
 
-bool FabiEngine3D::misc_isFileExisting(const string& path)
+bool FabiEngine3D::misc_isFileExisting(const string& filePath)
 {
 	struct stat fileInfo;
-	return stat(path.c_str(), &fileInfo) == 0;
+	return stat(filePath.c_str(), &fileInfo) == 0;
 }

@@ -231,7 +231,7 @@ const string& FabiEngine3D::collision_checkEntityGroupWithCamera(const string& I
 	return "";
 }
 
-const string& FabiEngine3D::collision_checkCursorInAny()
+string FabiEngine3D::collision_checkCursorInAny()
 {
 	float closestDistance = (std::numeric_limits<float>::max)();
 	string closestBoxID = "";
@@ -285,7 +285,7 @@ bool FabiEngine3D::collision_checkCursorInEntity(const string& ID)
 	return false;
 }
 
-const string& FabiEngine3D::collision_checkCursorInEntityGroup(const string& ID, const string& exception)
+string FabiEngine3D::collision_checkCursorInEntityGroup(const string& ID, const string& exception)
 {
 	float closestDistance = (std::numeric_limits<float>::max)();
 	string closestBoxID = "";

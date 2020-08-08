@@ -255,7 +255,7 @@ void WorldEditor::_updateSkyCamera()
 		if (_fe3d.misc_isMouseInsideViewport())
 		{
 			_fe3d.gfx_enableMotionBlur();
-			_fe3d.camera_enableFirstPersonView(10.0f);
+			_fe3d.camera_enableFirstPersonView(20.0f);
 			_fe3d.camera_disableLookat();
 			_fe3d.misc_hideCursor();
 		}

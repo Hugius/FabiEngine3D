@@ -105,6 +105,12 @@ void FabiEngine3D::gfx_enableMotionBlur()
 	_core->_shaderBus.setMotionBlurEnabled(true);
 }
 
+void FabiEngine3D::gfx_enableLensFlare(const string& texturePath)
+{
+	_core->_shaderBus.setLensFlareMap(_core->_texLoader.getTexture(texturePath, false, false));
+	_core->_shaderBus.setLensFlareEnabled(true);
+}
+
 void FabiEngine3D::gfx_disableAmbientLighting()
 {
 	_core->_shaderBus.setAmbientLightingEnabled(false);
@@ -178,6 +184,11 @@ void FabiEngine3D::gfx_disableDOF()
 void FabiEngine3D::gfx_disableMotionBlur()
 {
 	_core->_shaderBus.setMotionBlurEnabled(false);
+}
+
+void FabiEngine3D::gfx_disableLensFlare()
+{
+	_core->_shaderBus.setLensFlareEnabled(false);
 }
 
 vec3 FabiEngine3D::gfx_getAmbientLightingColor()

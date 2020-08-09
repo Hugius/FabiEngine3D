@@ -471,7 +471,7 @@ public:
 	void gfx_enableSkyHDR(float brightnessFactor);
 	void gfx_enableDOF(float minDistance);
 	void gfx_enableMotionBlur();
-	void gfx_enableLensFlare(const string& texturePath);
+	void gfx_enableLensFlare(const string& texturePath, float intensity);
 	void gfx_disableAmbientLighting();
 	void gfx_disableDirectionalLighting();
 	void gfx_disableSpecularLighting();

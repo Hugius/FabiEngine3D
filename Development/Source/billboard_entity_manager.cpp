@@ -90,23 +90,14 @@ void BillboardEntityManager::update()
 		// 3D camera facing
 		auto facingX = entity->isCameraFacingX();
 		auto facingY = entity->isCameraFacingY();
-		vec3 rotation = entity->getInitialRotation();
+		vec3 rotation = entity->getRotation();
 		if (facingX || facingY)
 		{
-			if (_camera.isFirstPersonViewEnabled())
-			{
-				rotation.x = (((_shaderBus.getCameraPitch())) + entity->getInitialRotation().x) * facingX;
-				rotation.y = (((-_shaderBus.getCameraYaw() - 90.0f)) + entity->getInitialRotation().y) * facingY;
-				rotation.z = entity->getInitialRotation().z;
-			}
-			else
-			{
-				vec3 direction = entity->getTranslation() - _shaderBus.getCameraPos();
-				float radiansX = atan2f(direction.y, (fabsf(direction.x) + fabsf(direction.z)) / 2.0f);
-				float radiansY = atan2f(direction.z, direction.x);
-				rotation.x = (radiansX * (180.0f / 3.141592653589793238463f)) * facingX;
-				rotation.y = (-(radiansY * (180.0f / 3.141592653589793238463f)) - 90.0f) * facingY;
-			}
+			vec3 direction = entity->getTranslation() - _shaderBus.getCameraPos();
+			float radiansX = atan2f(direction.y, (fabsf(direction.x) + fabsf(direction.z)) / 2.0f);
+			float radiansY = atan2f(direction.z, direction.x);
+			rotation.x = (radiansX * (180.0f / 3.141592653589793238463f)) * facingX;
+			rotation.y = (-(radiansY * (180.0f / 3.141592653589793238463f)) - 90.0f) * facingY;
 		}
 
 		// Update rotation

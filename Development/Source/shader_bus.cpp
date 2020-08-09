@@ -125,6 +125,11 @@ void ShaderBus::setLensFlareAlpha(float val)
 	_lensFlareAlpha = val;
 }
 
+void ShaderBus::setLensFlareIntensity(float val)
+{
+	_lensFlareIntensity = val;
+}
+
 void ShaderBus::setAmbientLightIntensity(float val)
 {
 	_ambientLightingIntensity = val;
@@ -413,6 +418,11 @@ const float ShaderBus::getShadowAreaSize() const
 const float ShaderBus::getLensFlareAlpha() const
 {
 	return _lensFlareAlpha;
+}
+
+const float ShaderBus::getLensFlareIntensity() const
+{
+	return _lensFlareIntensity;
 }
 
 const float ShaderBus::getAmbientLightingIntensity() const

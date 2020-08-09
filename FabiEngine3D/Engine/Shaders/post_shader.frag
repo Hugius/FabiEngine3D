@@ -16,6 +16,7 @@ uniform float u_nearZ;
 uniform float u_farZ;
 uniform float u_dofMinDistance;
 uniform float u_lensFlareAlpha;
+uniform float u_lensFlareIntensity;
 
 // Boolean uniforms
 uniform bool u_bloomEnabled;
@@ -57,7 +58,7 @@ void main()
 	}
 
     // Lens flare
-    o_finalColor.rgb += (flareColor * u_lensFlareAlpha * float(u_lensFlareEnabled));
+    o_finalColor.rgb += (flareColor * u_lensFlareAlpha * u_lensFlareIntensity * float(u_lensFlareEnabled));
 
 	// Alpha value
 	o_finalColor.a = 1.0f;

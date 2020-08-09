@@ -283,7 +283,7 @@ void RenderEngine::_captureLensFlare()
 	{
 		float x = clipSpacePosition.x / clipSpacePosition.w;
 		float y = clipSpacePosition.y / clipSpacePosition.w;
-		alpha = 1.0f - max(fabsf(x), fabsf(y));
+		alpha = 1.0f - (max(fabsf(x), fabsf(y)) * 2.0f);
 		alpha = std::clamp(alpha, 0.0f, 1.0f);
 	}
 

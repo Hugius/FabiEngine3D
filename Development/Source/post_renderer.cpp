@@ -30,6 +30,7 @@ void PostRenderer::render(const GuiEntity* entity)
 		_shader.uploadUniform("u_lensFlareEnabled", _shaderBus.isLensFlareEnabled());
 		_shader.uploadUniform("u_dofMinDistance", _shaderBus.getDofMinDistance());
 		_shader.uploadUniform("u_lensFlareAlpha", _shaderBus.getLensFlareAlpha());
+		_shader.uploadUniform("u_lensFlareIntensity", _shaderBus.getLensFlareIntensity());
 
 		// Texture uniforms
 		_shader.uploadUniform("u_sampler_scene", 0);

@@ -55,6 +55,7 @@ public:
 	void setSceneReflectionFactor(float val);
 	void setShadowAreaSize(float val);
 	void setLensFlareAlpha(float val);
+	void setLensFlareIntensity(float val);
 
 	// Integers
 	void setBloomBlurSize(int val);
@@ -125,6 +126,7 @@ public:
 	const float getSceneReflectionFactor()		  const;
 	const float getShadowAreaSize()				  const;
 	const float getLensFlareAlpha()				  const;
+	const float getLensFlareIntensity()			  const;
 
 	// Integers
 	const int getBloomBlurSize() const;
@@ -196,6 +198,7 @@ private:
 	float _sceneReflectionFactor        = 0.0f;
 	float _shadowAreaSize				= 0.0f;
 	float _lensFlareAlpha				= 0.0f;
+	float _lensFlareIntensity			= 0.0f;
 	
 	// Integers
 	int _bloomBlurSize = 0;

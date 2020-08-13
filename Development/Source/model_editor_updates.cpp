@@ -64,6 +64,98 @@ void ModelEditor::_updateManagementScreen()
 	}
 }
 
+void ModelEditor::_updateEditingScreen()
+{
+	if (_modelEditingEnabled && _currentModelName != "")
+	{
+		static bool firstTime = true;
+		auto screen = _leftWindow->getScreen("modelEditorMenuChoice");
+
+		// Show model (name)
+		if (firstTime)
+		{
+			firstTime = false;
+			_fe3d.textEntity_setTextContent(_gui->getGlobalScreen()->getTextfield("selectedModelName")->getEntityID(),
+				"Model: " + _currentModelName.substr(1, _currentModelName.size() - 1), 0.025f);
+			_fe3d.textEntity_show(_gui->getGlobalScreen()->getTextfield("selectedModelName")->getEntityID());
+			_leftWindow->setActiveScreen("modelEditorMenuChoice");
+		}
+
+		// GUI management
+		if (_leftWindow->getActiveScreen()->getID() == "modelEditorMenuChoice")
+		{
+			if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
+			{
+				if (screen->getButton("mesh")->isHovered())
+				{
+					_leftWindow->setActiveScreen("modelEditorMenuMesh");
+				}
+				else if (screen->getButton("options")->isHovered())
+				{
+					_leftWindow->setActiveScreen("modelEditorMenuOptions");
+				}
+				else if (screen->getButton("lighting")->isHovered())
+				{
+					_leftWindow->setActiveScreen("modelEditorMenuLighting");
+				}
+				else if (screen->getButton("size")->isHovered())
+				{
+					if (_fe3d.gameEntity_isExisting(_currentModelName))
+					{
+						_leftWindow->setActiveScreen("modelEditorMenuSize");
+					}
+				}
+				else if (screen->getButton("back")->isHovered())
+				{
+					// Hide game entity
+					if (_fe3d.gameEntity_isExisting(_currentModelName))
+					{
+						_fe3d.gameEntity_hide(_currentModelName);
+					}
+
+					firstTime = true;
+					_modelEditingEnabled = false;
+					_currentModelName = "";
+					_leftWindow->setActiveScreen("modelEditorMenuMain");
+					_fe3d.textEntity_hide(_gui->getGlobalScreen()->getTextfield("selectedModelName")->getEntityID());
+				}
+			}
+
+			// Check if OBJ exists
+			bool existing = _fe3d.gameEntity_isExisting(_currentModelName);
+			bool hoverable = false;
+			if (existing)
+			{
+				hoverable = true;
+
+				// Show OBJ model
+				_fe3d.gameEntity_show(_currentModelName);
+			}
+
+			// Editing buttons hoverability
+			screen->getButton("options")->setHoverable(hoverable);
+			screen->getButton("lighting")->setHoverable(hoverable);
+			screen->getButton("size")->setHoverable(hoverable);
+		}
+		else if (_leftWindow->getActiveScreen()->getID() == "modelEditorMenuMesh")
+		{
+			_updateModelEditingMesh();
+		}
+		else if (_leftWindow->getActiveScreen()->getID() == "modelEditorMenuOptions")
+		{
+			_updateModelEditingOptions();
+		}
+		else if (_leftWindow->getActiveScreen()->getID() == "modelEditorMenuLighting")
+		{
+			_updateModelEditingLighting();
+		}
+		else if (_leftWindow->getActiveScreen()->getID() == "modelEditorMenuSize")
+		{
+			_updateModelEditingSize();
+		}
+	}
+}
+
 void ModelEditor::_updateCreationScreen()
 {
 	if (_isLoaded)
@@ -79,7 +171,7 @@ void ModelEditor::_updateCreationScreen()
 				if (newModelName[0] != '@')
 				{
 					// Add model and check if not already existing
-					if (_addModel("@" + newModelName, "", "", "", "", vec3(0.0f), 0, 1, 0, 0, 1.0f, vec3(1.0f), 1.0f, vec3(2.5f)))
+					if (_addModel("@" + newModelName, "", "", "", "", vec3(0.0f), 0, 1, 0, 0, 0, 1.0f, 1.0f, 1.0f, vec3(1.0f), 1.0f, vec3(2.5f)))
 					{
 						// Go to editor screen
 						_currentModelName = "@" + newModelName;

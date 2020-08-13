@@ -388,6 +388,9 @@
     <ClCompile Include="Source\scene_editor_settings_updates.cpp">
       <Filter>src\Editor System\Scene Editor\Settings</Filter>
     </ClCompile>
+    <ClCompile Include="Source\model_editor_updates_lighting.cpp">
+      <Filter>src\Editor System\Model Editor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\obj_loader.hpp">

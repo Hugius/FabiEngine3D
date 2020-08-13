@@ -178,6 +178,11 @@ void GameEntity::setSpecularFactor(float val)
 	_specularFactor = val;
 }
 
+void GameEntity::setSpecularIntensity(float val)
+{
+	_specularIntensity = val;
+}
+
 void GameEntity::setMaxY(float val)
 {
 	_maxY = val;
@@ -316,6 +321,11 @@ const float GameEntity::getLightness() const
 const float GameEntity::getSpecularFactor() const
 {
 	return _specularFactor;
+}
+
+const float GameEntity::getSpecularIntensity() const
+{
+	return _specularIntensity;
 }
 
 const float GameEntity::getMaxY() const

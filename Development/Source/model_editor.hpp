@@ -30,8 +30,9 @@ public:
 	bool isLoaded();
 
 private:
-	bool _addModel(const string& modelName, string objName, string diffuseMapName, string lightMapName, string reflectionMapName, vec3 size,
-		bool isFaceCulled, bool isShadowed, bool isTransparent, bool isSpecular, float specularFactor, vec3 color, float uvRepeat, vec3 aabbSize);
+	bool _addModel(const string& modelName, string objName, string diffuseMapName, string lightMapName, string reflectionMapName, 
+		vec3 size, bool isFaceCulled, bool isShadowed, bool isTransparent, bool isReflective, bool isSpecular,
+		float specularFactor, float specularIntensity, float lightness, vec3 color, float uvRepeat, vec3 aabbSize);
 	void _loadObjFileNames();
 	void _loadOBJ();
 	void _loadDiffuseMap();
@@ -43,6 +44,7 @@ private:
 	void _updateEditingScreen();
 	void _updateModelEditingMesh();
 	void _updateModelEditingOptions();
+	void _updateModelEditingLighting();
 	void _updateModelEditingSize();
 	void _updateModelRemoval();
 	void _updateCamera();

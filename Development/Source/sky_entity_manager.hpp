@@ -16,6 +16,8 @@ public:
 	void update() override;
 	void setBrightnessFactor(float brightnessFactor);
 
+	float getBrightnessFactor();
+
 private:
 	void _updateRotation();
 	void _updateEyeAdaption();

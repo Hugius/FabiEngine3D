@@ -19,45 +19,53 @@ void ModelEditor::initializeGUI()
 
 	// Left-viewport: mainWindow - modelManagement
 	_leftWindow->addScreen("modelEditorMenuMain");
-	_leftWindow->getScreen("modelEditorMenuMain")->addButton("addModel", vec2(0.0f, 0.63f), vec2(1.5f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Add model", LeftViewportController::textColor, LeftViewportController::textHoverColor);
-	_leftWindow->getScreen("modelEditorMenuMain")->addButton("editModel", vec2(0.0f, 0.21), vec2(1.5f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Edit model", LeftViewportController::textColor, LeftViewportController::textHoverColor);
-	_leftWindow->getScreen("modelEditorMenuMain")->addButton("deleteModel", vec2(0.0f, -0.21), vec2(1.7f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Delete model", LeftViewportController::textColor, LeftViewportController::textHoverColor);
-	_leftWindow->getScreen("modelEditorMenuMain")->addButton("back", vec2(0.0f, -0.63f), vec2(1.0f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	_leftWindow->getScreen("modelEditorMenuMain")->addButton("addModel", vec2(0.0f, 0.63f), vec2(1.5f, 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Add model", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen("modelEditorMenuMain")->addButton("editModel", vec2(0.0f, 0.21), vec2(1.5f, 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Edit model", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen("modelEditorMenuMain")->addButton("deleteModel", vec2(0.0f, -0.21), vec2(1.7f, 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Delete model", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen("modelEditorMenuMain")->addButton("back", vec2(0.0f, -0.63f), vec2(1.0f, 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Go back", LVC::textColor, LVC::textHoverColor);
 
 	// Left-viewport: mainWindow - modelEditingMain
 	_leftWindow->addScreen("modelEditorMenuChoice");
-	_leftWindow->getScreen("modelEditorMenuChoice")->addButton("mesh", vec2(0.0f, 0.63f), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "3D mesh", LeftViewportController::textColor, LeftViewportController::textHoverColor);
-	_leftWindow->getScreen("modelEditorMenuChoice")->addButton("options", vec2(0.0f, 0.21), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Options", LeftViewportController::textColor, LeftViewportController::textHoverColor);
-	_leftWindow->getScreen("modelEditorMenuChoice")->addButton("size", vec2(0.0f, -0.21), vec2(0.8f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Size", LeftViewportController::textColor, LeftViewportController::textHoverColor);
-	_leftWindow->getScreen("modelEditorMenuChoice")->addButton("back", vec2(0.0f, -0.63f), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	_leftWindow->getScreen("modelEditorMenuChoice")->addButton("mesh", vec2(0.0f, 0.7f), vec2(1.25f, 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "3D mesh", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen("modelEditorMenuChoice")->addButton("options", vec2(0.0f, 0.35f), vec2(1.25f, 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Options", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen("modelEditorMenuChoice")->addButton("lighting", vec2(0.0f, 0.0f), vec2(1.4f, 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Lighting", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen("modelEditorMenuChoice")->addButton("size", vec2(0.0f, -0.35f), vec2(0.8f, 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Size", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen("modelEditorMenuChoice")->addButton("back", vec2(0.0f, -0.7f), vec2(1.25f, 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Go back", LVC::textColor, LVC::textHoverColor);
 
-	// Left-viewport: mainWindow - modelEditingMesh
+	// Left-viewport: mainWindow - modelEditorMenuMesh
 	_leftWindow->addScreen("modelEditorMenuMesh");
-	_leftWindow->getScreen("modelEditorMenuMesh")->addButton("loadOBJ", vec2(0.0f, 0.7f), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Load OBJ", LeftViewportController::textColor, LeftViewportController::textHoverColor);
-	_leftWindow->getScreen("modelEditorMenuMesh")->addButton("loadDiffuseMap", vec2(0.0f, 0.35f), vec2(1.6f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "DiffuseMap", LeftViewportController::textColor, LeftViewportController::textHoverColor);
-	_leftWindow->getScreen("modelEditorMenuMesh")->addButton("loadLightMap", vec2(0.0f, 0.0f), vec2(1.5f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "LightMap", LeftViewportController::textColor, LeftViewportController::textHoverColor);
-	_leftWindow->getScreen("modelEditorMenuMesh")->addButton("loadReflectionMap", vec2(0.0f, -0.35f), vec2(1.6f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Reflectmap", LeftViewportController::textColor, LeftViewportController::textHoverColor);
-	_leftWindow->getScreen("modelEditorMenuMesh")->addButton("back", vec2(0.0f, -0.7f), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	_leftWindow->getScreen("modelEditorMenuMesh")->addButton("loadOBJ", vec2(0.0f, 0.7f), vec2(1.25f, 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Load OBJ", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen("modelEditorMenuMesh")->addButton("loadDiffuseMap", vec2(0.0f, 0.35f), vec2(1.6f, 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "DiffuseMap", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen("modelEditorMenuMesh")->addButton("loadLightMap", vec2(0.0f, 0.0f), vec2(1.5f, 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "LightMap", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen("modelEditorMenuMesh")->addButton("loadReflectionMap", vec2(0.0f, -0.35f), vec2(1.6f, 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Reflectmap", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen("modelEditorMenuMesh")->addButton("back", vec2(0.0f, -0.7f), vec2(1.25f, 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Go back", LVC::textColor, LVC::textHoverColor);
 	
-	// Left-viewport: mainWindow - modelEditingOptions
+	// Left-viewport: mainWindow - modelEditorMenuOptions
 	_leftWindow->addScreen("modelEditorMenuOptions");
-	_leftWindow->getScreen("modelEditorMenuOptions")->addButton("isFaceculled", vec2(0.0f, 0.83f), vec2(1.4f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Culling: OFF", LeftViewportController::textColor, LeftViewportController::textHoverColor);
-	_leftWindow->getScreen("modelEditorMenuOptions")->addButton("isShadowed", vec2(0.0f, 0.59f), vec2(1.6f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Shadowed : ON", LeftViewportController::textColor, LeftViewportController::textHoverColor);
-	_leftWindow->getScreen("modelEditorMenuOptions")->addButton("isTransparent", vec2(0.0f, 0.36f), vec2(1.5f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "No-white: OFF", LeftViewportController::textColor, LeftViewportController::textHoverColor);
-	_leftWindow->getScreen("modelEditorMenuOptions")->addButton("isSpecular", vec2(0.0f, 0.13f), vec2(1.7f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Specular: OFF", LeftViewportController::textColor, LeftViewportController::textHoverColor);
-	_leftWindow->getScreen("modelEditorMenuOptions")->addButton("specularFactor", vec2(0.0f, -0.1f), vec2(1.8f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Specular factor", LeftViewportController::textColor, LeftViewportController::textHoverColor);
-	_leftWindow->getScreen("modelEditorMenuOptions")->addButton("setColor", vec2(0.0f, -0.33f), vec2(1.6f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Set color", LeftViewportController::textColor, LeftViewportController::textHoverColor);
-	_leftWindow->getScreen("modelEditorMenuOptions")->addButton("uvRepeat", vec2(0.0f, -0.56f), vec2(1.6f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Set UV-repeat", LeftViewportController::textColor, LeftViewportController::textHoverColor);
-	_leftWindow->getScreen("modelEditorMenuOptions")->addButton("back", vec2(0.0f, -0.79f), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	_leftWindow->getScreen("modelEditorMenuOptions")->addButton("isFaceculled", vec2(0.0f, 0.7f), vec2(1.4f, 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Culling: OFF", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen("modelEditorMenuOptions")->addButton("isTransparent", vec2(0.0f, 0.35f), vec2(1.5f, 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "No-white: OFF", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen("modelEditorMenuOptions")->addButton("setColor", vec2(0.0f, 0.0f), vec2(1.6f, 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Set color", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen("modelEditorMenuOptions")->addButton("uvRepeat", vec2(0.0f, -0.35f), vec2(1.6f, 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Set UV-repeat", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen("modelEditorMenuOptions")->addButton("back", vec2(0.0f, -0.7f), vec2(1.25f, 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Go back", LVC::textColor, LVC::textHoverColor);
 
-	// Left-viewport: mainWindow - modelEditingSize
+	// Left-viewport: mainWindow - modelEditorMenuLighting
+	_leftWindow->addScreen("modelEditorMenuLighting");
+	_leftWindow->getScreen("modelEditorMenuLighting")->addButton("isSpecular", vec2(0.0f, 0.7875f), vec2(1.7f, 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Specular: OFF", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen("modelEditorMenuLighting")->addButton("specularFactor", vec2(0.0f, 0.525f), vec2(1.8f, 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Specular factor", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen("modelEditorMenuLighting")->addButton("specularIntensity", vec2(0.0f, 0.2625f), vec2(1.8f, 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Specular intensity", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen("modelEditorMenuLighting")->addButton("modelLightness", vec2(0.0f, 0.0f), vec2(1.8f, 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Lightness", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen("modelEditorMenuLighting")->addButton("isShadowed", vec2(0.0f, -0.2625f), vec2(1.6f, 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Shadowed : ON", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen("modelEditorMenuLighting")->addButton("isReflectiveSurface", vec2(0.0f, -0.525f), vec2(1.6f, 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Reflective : ON", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen("modelEditorMenuLighting")->addButton("back", vec2(0.0f, -0.7875f), vec2(1.25f, 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Go back", LVC::textColor, LVC::textHoverColor);
+
+	// Left-viewport: mainWindow - modelEditorMenuSize
 	_leftWindow->addScreen("modelEditorMenuSize");
-	_leftWindow->getScreen("modelEditorMenuSize")->addButton("setSize", vec2(0.0f, 0.75f), vec2(1.6f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Set mesh size", LeftViewportController::textColor, LeftViewportController::textHoverColor);
-	_leftWindow->getScreen("modelEditorMenuSize")->addButton("toggleResizeMesh", vec2(0.0f, 0.45f), vec2(1.75f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Mesh resize: OFF", LeftViewportController::textColor, LeftViewportController::textHoverColor);
-	_leftWindow->getScreen("modelEditorMenuSize")->addButton("toggleBoxView", vec2(0.0f, 0.15f), vec2(1.5f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Hitbox: OFF", LeftViewportController::textColor, LeftViewportController::textHoverColor);
-	_leftWindow->getScreen("modelEditorMenuSize")->addButton("toggleResizeBox", vec2(0.0f, -0.15f), vec2(1.7f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Box resize: OFF", LeftViewportController::textColor, LeftViewportController::textHoverColor);
-	_leftWindow->getScreen("modelEditorMenuSize")->addButton("resizeBoxDir", vec2(0.0f, -0.45f), vec2(1.6f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Direction: X", LeftViewportController::textColor, LeftViewportController::textHoverColor);
-	_leftWindow->getScreen("modelEditorMenuSize")->addButton("back", vec2(0.0f, -0.75f), vec2(1.25f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Go back", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	_leftWindow->getScreen("modelEditorMenuSize")->addButton("setSize", vec2(0.0f, 0.75f), vec2(1.6f, 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Set mesh size", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen("modelEditorMenuSize")->addButton("toggleResizeMesh", vec2(0.0f, 0.45f), vec2(1.75f, 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Mesh resize: OFF", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen("modelEditorMenuSize")->addButton("toggleBoxView", vec2(0.0f, 0.15f), vec2(1.5f, 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Hitbox: OFF", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen("modelEditorMenuSize")->addButton("toggleResizeBox", vec2(0.0f, -0.15f), vec2(1.7f, 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Box resize: OFF", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen("modelEditorMenuSize")->addButton("resizeBoxDir", vec2(0.0f, -0.45f), vec2(1.6f, 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Direction: X", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen("modelEditorMenuSize")->addButton("back", vec2(0.0f, -0.75f), vec2(1.25f, 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Go back", LVC::textColor, LVC::textHoverColor);
 }
 
 void ModelEditor::load()
@@ -116,8 +124,8 @@ void ModelEditor::loadModels()
 		{
 			// Placeholder variables
 			string modelName, objPath, diffuseMapPath, lightMapPath, reflectionMapPath;
-			float uvRepeat, specularFactor;
-			bool faceCulled, shadowed, transparent, specular;
+			float uvRepeat, specularFactor, specularIntensity, lightness;
+			bool isFaceCulled, isShadowed, isTransparent, isSpecular, isReflective;
 			vec3 modelSize, color, boxSize;
 
 			// For item extraction
@@ -133,11 +141,14 @@ void ModelEditor::loadModels()
 				modelSize.x >>
 				modelSize.y >>
 				modelSize.z >>
-				faceCulled >>
-				shadowed >>
-				transparent >>
-				specular >>
+				isFaceCulled >>
+				isShadowed >>
+				isTransparent >>
+				isReflective >>
+				isSpecular >>
 				specularFactor >>
+				specularIntensity >>
+				lightness >>
 				color.r >> 
 				color.g >> 
 				color.b >>
@@ -157,8 +168,9 @@ void ModelEditor::loadModels()
 			std::replace(reflectionMapPath.begin(), reflectionMapPath.end(), '?', ' ');
 
 			// Add new model
-			_addModel(modelName, objPath, diffuseMapPath, lightMapPath, reflectionMapPath, modelSize, faceCulled, shadowed, transparent,
-				specular, specularFactor, vec3(color.r, color.g, color.b), uvRepeat, vec3(boxSize.x, boxSize.y, boxSize.z));
+			_addModel(modelName, objPath, diffuseMapPath, lightMapPath, reflectionMapPath, modelSize, isFaceCulled, isShadowed, 
+				isTransparent, isReflective, isSpecular, specularFactor, specularIntensity, lightness, 
+				vec3(color.r, color.g, color.b), uvRepeat, vec3(boxSize.x, boxSize.y, boxSize.z));
 		}
 
 		// Close file
@@ -194,11 +206,14 @@ void ModelEditor::save()
 				auto lightMapPath = _fe3d.gameEntity_getLightMapPath(modelName);
 				auto reflectionMapPath = _fe3d.gameEntity_getReflectionMapPath(modelName);
 				auto modelSize = _fe3d.gameEntity_getSize(modelName);
-				auto faceCulled = _fe3d.gameEntity_isFaceCulled(modelName);
-				auto shadowed = _fe3d.gameEntity_isShadowed(modelName);
-				auto transparent = _fe3d.gameEntity_isTransparent(modelName);
-				auto specular = _fe3d.gameEntity_isSpecularLighted(modelName);
+				auto isFaceCulled = _fe3d.gameEntity_isFaceCulled(modelName);
+				auto isShadowed = _fe3d.gameEntity_isShadowed(modelName);
+				auto isTransparent = _fe3d.gameEntity_isTransparent(modelName);
+				auto isReflective = _fe3d.gameEntity_isSceneReflective(modelName);
+				auto isSpecular = _fe3d.gameEntity_isSpecularLighted(modelName);
 				auto specularFactor = _fe3d.gameEntity_getSpecularFactor(modelName);
+				auto specularStrength = _fe3d.gameEntity_getSpecularIntensity(modelName);
+				auto lightness = _fe3d.gameEntity_getLightness(modelName);
 				auto color = _fe3d.gameEntity_getColor(modelName);
 				auto uvRepeat = _fe3d.gameEntity_getUvRepeat(modelName);
 				auto boxSize = _fe3d.aabbEntity_getSize(modelName);
@@ -223,11 +238,14 @@ void ModelEditor::save()
 					modelSize.x << " " <<
 					modelSize.y << " " <<
 					modelSize.z << " " <<
-					faceCulled << " " <<
-					shadowed << " " << 
-					transparent << " " <<
-					specular << " " <<
+					isFaceCulled << " " <<
+					isShadowed << " " << 
+					isTransparent << " " <<
+					isReflective << " " << 
+					isSpecular << " " <<
 					specularFactor << " " <<
+					specularStrength << " " <<
+					lightness << " " <<
 					color.r << " " <<
 					color.g << " " <<
 					color.b << " " <<

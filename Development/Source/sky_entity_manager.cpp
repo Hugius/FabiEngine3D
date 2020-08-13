@@ -164,3 +164,8 @@ void SkyEntityManager::setBrightnessFactor(float brightnessFactor)
 {
 	_hdrBrightnessFactor = brightnessFactor;
 }
+
+float SkyEntityManager::getBrightnessFactor()
+{
+	return _hdrBrightnessFactor;
+}

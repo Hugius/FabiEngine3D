@@ -246,6 +246,7 @@
     <ClCompile Include="Source\bottom_viewport_controller.cpp" />
     <ClCompile Include="Source\engine_gui_global_screen_misc.cpp" />
     <ClCompile Include="Source\engine_gui_scrollinglist.cpp" />
+    <ClCompile Include="Source\model_editor_updates_lighting.cpp" />
     <ClCompile Include="Source\scene_editor_billboard_editing.cpp" />
     <ClCompile Include="Source\scene_editor_core.cpp" />
     <ClCompile Include="Source\scene_editor_light_editing.cpp" />

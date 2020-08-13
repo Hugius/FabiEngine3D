@@ -19,7 +19,7 @@ void BloomHdrRenderer::render(const GuiEntity * entity, GLuint sceneMap)
 		_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix());
 		_shader.uploadUniform("u_mirrorHor",   entity->isMirroredHorizonally());
 		_shader.uploadUniform("u_mirrorVer",   entity->isMirroredVertically());
-		_shader.uploadUniform("u_bloomBrightnessTreshold", _shaderBus.getBloomTreshold());
+		_shader.uploadUniform("u_bloomBrightnessTreshold", _shaderBus.getBloomBrightnessTreshold());
 		_shader.uploadUniform("u_sampler_diffuse", 0);
 
 		// Bind

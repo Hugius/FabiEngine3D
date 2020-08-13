@@ -42,6 +42,7 @@ public:
 	void setCameraStatic(bool val);
 	void setLightness(float val);
 	void setSpecularFactor(float val);
+	void setSpecularIntensity(float val);
 	void setMaxY(float val);
 	void setAlpha(float val);
 	void setUvRepeat(float val);
@@ -72,6 +73,7 @@ public:
 	const bool isCameraStatic() const;
 	const float getLightness() const;
 	const float getSpecularFactor() const;
+	const float getSpecularIntensity() const;
 	const float getAlpha() const;
 	const float getUvRepeat() const;
 	const float getMaxY() const;
@@ -104,6 +106,7 @@ private:
 
 	float _lightness = 1.0f;
 	float _specularFactor = 1.0f;
+	float _specularIntensity = 1.0f;
 	float _alpha = 1.0f;
 	float _uvRepeat = 1.0f;
 	float _maxY = (std::numeric_limits<float>::max)();

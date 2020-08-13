@@ -6,6 +6,8 @@
 #include "billboard_editor.hpp"
 #include "scene_editor.hpp"
 
+#define LVC LeftViewportController
+
 class LeftViewportController final : public ViewportController
 {
 public:

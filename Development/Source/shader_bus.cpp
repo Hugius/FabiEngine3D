@@ -95,6 +95,11 @@ void ShaderBus::setDirectionalLightColor(vec3 val)
 	_directionalLightingColor = val;
 }
 
+void ShaderBus::setShadowEyePosition(vec3 val)
+{
+	_shadowEyePosition = val;
+}
+
 void ShaderBus::setShadowAreaCenter(vec3 val)
 {
 	_shadowAreaCenter = val;
@@ -110,6 +115,11 @@ void ShaderBus::setSceneReflectionHeight(float val)
 	_sceneReflectionHeight = val;
 }
 
+void ShaderBus::setSceneReflectionOffset(float val)
+{
+	_sceneReflectionOffset = val;
+}
+
 void ShaderBus::setSceneReflectionFactor(float val)
 {
 	_sceneReflectionFactor = val;
@@ -118,6 +128,11 @@ void ShaderBus::setSceneReflectionFactor(float val)
 void ShaderBus::setShadowAreaSize(float val)
 {
 	_shadowAreaSize = val;
+}
+
+void ShaderBus::setShadowAreaReach(float val)
+{
+	_shadowAreaReach = val;
 }
 
 void ShaderBus::setLensFlareAlpha(float val)
@@ -140,11 +155,6 @@ void ShaderBus::setDirectionalLightIntensity(float val)
 	_directionalLightingIntensity = val;
 }
 
-void ShaderBus::setSpecularLightingIntensity(float val)
-{
-	_specularLightingIntensity = val;
-}
-
 void ShaderBus::setFogMinDistance(float val)
 {
 	_fogMinDistance = val;
@@ -155,9 +165,9 @@ void ShaderBus::setBloomIntensity(float val)
 	_bloomIntensity = val;
 }
 
-void ShaderBus::setBloomTreshold(float val)
+void ShaderBus::setBloomBrightnessTreshold(float val)
 {
-	_bloomTreshold = val;
+	_bloomBrightnessTreshold = val;
 }
 
 void ShaderBus::setCameraYaw(float val)
@@ -385,6 +395,11 @@ const vec3 ShaderBus::getDirectionalLightingPosition() const
 	return _directionalLightingPosition;
 }
 
+const vec3 ShaderBus::getShadowEyePosition() const
+{
+	return _shadowEyePosition;
+}
+
 const vec3 ShaderBus::getShadowAreaCenter() const
 {
 	return _shadowAreaCenter;
@@ -405,6 +420,11 @@ const float ShaderBus::getSceneReflectionHeight() const
 	return _sceneReflectionHeight;
 }
 
+const float ShaderBus::getSceneReflectionOffset() const
+{
+	return _sceneReflectionOffset;
+}
+
 const float ShaderBus::getSceneReflectionFactor() const
 {
 	return _sceneReflectionFactor;
@@ -413,6 +433,11 @@ const float ShaderBus::getSceneReflectionFactor() const
 const float ShaderBus::getShadowAreaSize() const
 {
 	return _shadowAreaSize;
+}
+
+const float ShaderBus::getShadowAreaReach() const
+{
+	return _shadowAreaReach;
 }
 
 const float ShaderBus::getLensFlareAlpha() const
@@ -435,11 +460,6 @@ const float ShaderBus::getDirectionalLightingIntensity() const
 	return _directionalLightingIntensity;
 }
 
-const float ShaderBus::getSpecularLightingIntensity() const
-{
-	return _specularLightingIntensity;
-}
-
 const float ShaderBus::getFogMinDistance() const
 {
 	return _fogMinDistance;
@@ -450,9 +470,9 @@ const float ShaderBus::getBloomIntensity() const
 	return _bloomIntensity;
 }
 
-const float ShaderBus::getBloomTreshold() const
+const float ShaderBus::getBloomBrightnessTreshold() const
 {
-	return _bloomTreshold;
+	return _bloomBrightnessTreshold;
 }
 
 const float ShaderBus::getCameraYaw() const

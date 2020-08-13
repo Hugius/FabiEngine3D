@@ -64,12 +64,16 @@ void SceneEditor::_placeModel(const string& modelID, string modelName, vec3 posi
 	_fe3d.aabbEntity_bindToGameEntity(modelID, _fe3d.aabbEntity_getSize(modelName), true);
 
 	// Model properties
+	_fe3d.gameEntity_setStaticToCamera(modelID, _fe3d.gameEntity_isStaticToCamera(modelName));
 	_fe3d.gameEntity_setFaceCulled(modelID, _fe3d.gameEntity_isFaceCulled(modelName));
 	_fe3d.gameEntity_setShadowed(modelID, _fe3d.gameEntity_isShadowed(modelName));
 	_fe3d.gameEntity_setTransparent(modelID, _fe3d.gameEntity_isTransparent(modelName));
 	_fe3d.gameEntity_setSpecularLighted(modelID, _fe3d.gameEntity_isSpecularLighted(modelName));
-	_fe3d.gameEntity_setUvRepeat(modelID, _fe3d.gameEntity_getUvRepeat(modelName));
+	_fe3d.gameEntity_setSpecularFactor(modelID, _fe3d.gameEntity_getSpecularFactor(modelName));
+	_fe3d.gameEntity_setSpecularIntensity(modelID, _fe3d.gameEntity_getSpecularIntensity(modelName));
+	_fe3d.gameEntity_setLightness(modelID, _fe3d.gameEntity_getLightness(modelName));
 	_fe3d.gameEntity_setColor(modelID, _fe3d.gameEntity_getColor(modelName));
+	_fe3d.gameEntity_setUvRepeat(modelID, _fe3d.gameEntity_getUvRepeat(modelName));
 
 	// Diffuse map
 	if (_fe3d.gameEntity_getDiffuseMapPath(modelName) != "")
@@ -92,20 +96,24 @@ void SceneEditor::_placeModel(const string& modelID, string modelName, vec3 posi
 	}
 }
 
-void SceneEditor::_placeModel(const string& modelID, vec3 position, vec3 rotation, vec3 size,
-	string objPath, string diffuseMapPath, string lightMapPath, string reflectionMapPath,
-	bool faceCulled, bool shadowed, bool transparent, bool specular, float specularFactor, vec3 color, float uvRepeat, vec3 aabbSize)
+void SceneEditor::_placeModel(const string& modelID, vec3 position, vec3 rotation, vec3 size, string objPath, string diffuseMapPath,
+	string lightMapPath, string reflectionMapPath, bool isFrozen, bool isFaceCulled, bool isShadowed, bool isTransparent, bool isReflective,
+	bool isSpecular, float specularFactor, float specularIntensity, float lightness, vec3 color, float uvRepeat, vec3 aabbSize)
 {
 	// Add game entity
 	_fe3d.gameEntity_add(modelID, objPath, position, rotation, size);
 	_fe3d.aabbEntity_bindToGameEntity(modelID, aabbSize, true);
 
 	// Model properties
-	_fe3d.gameEntity_setFaceCulled(modelID, faceCulled);
-	_fe3d.gameEntity_setShadowed(modelID, shadowed);
-	_fe3d.gameEntity_setTransparent(modelID, transparent);
-	_fe3d.gameEntity_setSpecularLighted(modelID, specular);
+	_fe3d.gameEntity_setStaticToCamera(modelID, isFrozen);
+	_fe3d.gameEntity_setFaceCulled(modelID, isFaceCulled);
+	_fe3d.gameEntity_setShadowed(modelID, isShadowed);
+	_fe3d.gameEntity_setTransparent(modelID, isTransparent);
+	_fe3d.gameEntity_setSceneReflective(modelID, isReflective);
+	_fe3d.gameEntity_setSpecularLighted(modelID, isSpecular);
 	_fe3d.gameEntity_setSpecularFactor(modelID, specularFactor);
+	_fe3d.gameEntity_setSpecularIntensity(modelID, specularIntensity);
+	_fe3d.gameEntity_setLightness(modelID, lightness);
 	_fe3d.gameEntity_setColor(modelID, color);
 	_fe3d.gameEntity_setUvRepeat(modelID, uvRepeat);
 

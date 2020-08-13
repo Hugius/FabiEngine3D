@@ -35,16 +35,16 @@ public:
 	void setAmbientLightColor(vec3 val);
 	void setDirectionalLightPos(vec3 val);
 	void setDirectionalLightColor(vec3 val);
+	void setShadowEyePosition(vec3 val);
 	void setShadowAreaCenter(vec3 val);
 	void setFogColor(vec3 val);
 
 	// Floats
 	void setAmbientLightIntensity(float val);
 	void setDirectionalLightIntensity(float val);
-	void setSpecularLightingIntensity(float val);
 	void setFogMinDistance(float val);
 	void setBloomIntensity(float val);
-	void setBloomTreshold(float val);
+	void setBloomBrightnessTreshold(float val);
 	void setCameraYaw(float val);
 	void setCameraPitch(float val);
 	void setNearZ(float val);
@@ -52,8 +52,10 @@ public:
 	void setDofMinDistance(float val);
 	void setSkyReflectionFactor(float val);
 	void setSceneReflectionHeight(float val);
+	void setSceneReflectionOffset(float val);
 	void setSceneReflectionFactor(float val);
 	void setShadowAreaSize(float val);
+	void setShadowAreaReach(float val);
 	void setLensFlareAlpha(float val);
 	void setLensFlareIntensity(float val);
 
@@ -83,17 +85,17 @@ public:
 	void setShadowFrameRenderingEnabled(bool val);
 
 	// Textures
-	const GLuint getSceneMap()             const;
-	const GLuint getSkyReflectionCubeMap() const;
-	const GLuint getSceneReflectionMap()   const;
-	const GLuint getSceneRefractionMap()   const;
-	const GLuint getShadowMap()            const;
-	const GLuint getBloomMap()             const;
-	const GLuint getPostProcessedSceneMap()   const;
-	const GLuint getDepthMap()             const;
-	const GLuint getBlurMap()              const;
-	const GLuint getMotionBlurMap()        const;
-	const GLuint getLensFlareMap()	   const;
+	const GLuint getSceneMap()              const;
+	const GLuint getSkyReflectionCubeMap()  const;
+	const GLuint getSceneReflectionMap()    const;
+	const GLuint getSceneRefractionMap()    const;
+	const GLuint getShadowMap()             const;
+	const GLuint getBloomMap()				const;
+	const GLuint getPostProcessedSceneMap() const;
+	const GLuint getDepthMap()              const;
+	const GLuint getBlurMap()               const;
+	const GLuint getMotionBlurMap()         const;
+	const GLuint getLensFlareMap()			const;
 	
 	// Matrices
 	const mat4 & getViewMatrix()        const;
@@ -106,16 +108,16 @@ public:
 	const vec3 getAmbientLightingColor()		const;
 	const vec3 getDirectionalLightingColor()    const;
 	const vec3 getDirectionalLightingPosition()	const;
+	const vec3 getShadowEyePosition()			const;
 	const vec3 getShadowAreaCenter()			const;
 	const vec3 getFogColor()					const;
 
 	// Floats
 	const float getAmbientLightingIntensity()	  const;
 	const float getDirectionalLightingIntensity() const;
-	const float getSpecularLightingIntensity()	  const;
 	const float getFogMinDistance()				  const;
 	const float getBloomIntensity()				  const;
-	const float getBloomTreshold()				  const;
+	const float getBloomBrightnessTreshold()	  const;
 	const float getCameraYaw()					  const;
 	const float getCameraPitch()				  const;
 	const float getNearZ()						  const;
@@ -123,8 +125,10 @@ public:
 	const float getDofMinDistance()				  const;
 	const float getSkyReflectionFactor()		  const;
 	const float getSceneReflectionHeight()		  const;
+	const float getSceneReflectionOffset()		  const;
 	const float getSceneReflectionFactor()		  const;
 	const float getShadowAreaSize()				  const;
+	const float getShadowAreaReach()			  const;
 	const float getLensFlareAlpha()				  const;
 	const float getLensFlareIntensity()			  const;
 
@@ -178,16 +182,16 @@ private:
 	vec3 _ambientLightingColor		  = vec3(1.0f);
 	vec3 _directionalLightingColor    = vec3(1.0f);
 	vec3 _directionalLightingPosition = vec3(0.0f);
+	vec3 _shadowEyePosition			  = vec3(0.0f);
 	vec3 _shadowAreaCenter			  = vec3(0.0f);
 	vec3 _fogColor					  = vec3(1.0f);
 
 	// Floats
 	float _ambientLightingIntensity     = 1.0f;
 	float _directionalLightingIntensity = 0.0f;
-	float _specularLightingIntensity	= 0.0f;
 	float _fogMinDistance               = 0.0f;
 	float _bloomIntensity               = 0.0f;
-	float _bloomTreshold                = 0.0f;
+	float _bloomBrightnessTreshold                = 0.0f;
 	float _cameraYaw                    = 0.0f;
 	float _cameraPitch                  = 0.0f;
 	float _nearZ                        = 0.0f;
@@ -195,8 +199,10 @@ private:
 	float _dofMinDistance               = 0.0f;
 	float _skyReflectionFactor          = 0.0f;
 	float _sceneReflectionHeight        = 0.0f;
+	float _sceneReflectionOffset	    = 0.0f;
 	float _sceneReflectionFactor        = 0.0f;
 	float _shadowAreaSize				= 0.0f;
+	float _shadowAreaReach				= 0.0f;
 	float _lensFlareAlpha				= 0.0f;
 	float _lensFlareIntensity			= 0.0f;
 	

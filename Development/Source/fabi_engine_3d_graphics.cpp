@@ -16,10 +16,9 @@ void FabiEngine3D::gfx_enableDirectionalLighting(vec3 position, vec3 color, floa
 	_core->_shaderBus.setDirectionalLightIntensity(intensity);
 }
 
-void FabiEngine3D::gfx_enableSpecularLighting(float intensity)
+void FabiEngine3D::gfx_enableSpecularLighting()
 {
 	_core->_shaderBus.setSpecularLightingEnabled(true);
-	_core->_shaderBus.setSpecularLightingIntensity(intensity);
 }
 
 void FabiEngine3D::gfx_enablePointLighting()
@@ -43,7 +42,8 @@ void FabiEngine3D::gfx_enableSkyReflections(float factor)
 void FabiEngine3D::gfx_enableSceneReflections(float height, float factor)
 {
 	// Check if water is already using reflection graphics
-	if (_core->_shaderBus.isWaterEffectsEnabled() && _core->_waterEntityManager.getSelectedWater() != nullptr)
+	if ((_core->_shaderBus.isWaterEffectsEnabled() && _core->_waterEntityManager.getSelectedWater() != nullptr)
+		&& _core->_waterEntityManager.getSelectedWater()->isReflective())
 	{
 		Logger::getInst().throwWarning("Cannot enable screen reflection graphics; \"water effects\" is currently using it!");
 	}
@@ -52,8 +52,8 @@ void FabiEngine3D::gfx_enableSceneReflections(float height, float factor)
 		_core->_shaderBus.setSceneReflectionsEnabled(true);
 		_core->_shaderBus.setSceneReflectionHeight(height);
 		_core->_shaderBus.setSceneReflectionFactor(factor);
+		_core->_shaderBus.setSceneReflectionOffset(0.0000001f);
 	}
-
 }
 
 void FabiEngine3D::gfx_enableLightMapping()
@@ -76,7 +76,7 @@ void FabiEngine3D::gfx_enableBloom(float intensity, float brightnessTreshold, in
 {
 	_core->_shaderBus.setBloomEnabled(true);
 	_core->_shaderBus.setBloomIntensity(intensity);
-	_core->_shaderBus.setBloomTreshold(brightnessTreshold);
+	_core->_shaderBus.setBloomBrightnessTreshold(brightnessTreshold);
 	_core->_shaderBus.setBloomBlurSize(blurSize);
 }
 
@@ -202,6 +202,11 @@ float FabiEngine3D::gfx_getAmbientLightingIntensity()
 	return _core->_shaderBus.getAmbientLightingIntensity();
 }
 
+float FabiEngine3D::gfx_geDirectionalLightingIntensity()
+{
+	return _core->_shaderBus.getDirectionalLightingIntensity();
+}
+
 vec3 FabiEngine3D::gfx_getDirectionalLightingPosition()
 {
 	return _core->_shaderBus.getDirectionalLightingPosition();
@@ -212,7 +217,77 @@ vec3 FabiEngine3D::gfx_getDirectionalLightingColor()
 	return _core->_shaderBus.getDirectionalLightingColor();
 }
 
-float FabiEngine3D::gfx_geDirectionalLightingIntensity()
+float FabiEngine3D::gfx_getFogMinDistance()
 {
-	return _core->_shaderBus.getDirectionalLightingIntensity();
+	return _core->_shaderBus.getFogMinDistance();
+}
+
+vec3 FabiEngine3D::gfx_getFogColor()
+{
+	return _core->_shaderBus.getFogColor();
+}
+
+float FabiEngine3D::gfx_getSkyReflectionFactor()
+{
+	return _core->_shaderBus.getSkyReflectionFactor();
+}
+
+float FabiEngine3D::gfx_getSceneReflectionHeight()
+{
+	return _core->_shaderBus.getSceneReflectionHeight();
+}
+
+float FabiEngine3D::gfx_getSceneReflectionFactor()
+{
+	return _core->_shaderBus.getSceneReflectionFactor();
+}
+
+vec3 FabiEngine3D::gfx_getShadowEyePosition()
+{
+	return _core->_shaderBus.getShadowEyePosition();
+}
+
+vec3 FabiEngine3D::gfx_getShadowCenter()
+{
+	return _core->_shaderBus.getShadowAreaCenter();
+}
+
+float FabiEngine3D::gfx_getShadowSize()
+{
+	return _core->_shaderBus.getShadowAreaSize();
+}
+
+float FabiEngine3D::gfx_getShadowReach()
+{
+	return _core->_shaderBus.getShadowAreaReach();
+}
+
+float FabiEngine3D::gfx_getBloomIntensity()
+{
+	return _core->_shaderBus.getBloomIntensity();
+}
+
+float FabiEngine3D::gfx_getBloomBrightnessTreshold()
+{
+	return _core->_shaderBus.getBloomBrightnessTreshold();
+}
+
+int FabiEngine3D::gfx_getBloomBlurSize()
+{
+	return _core->_shaderBus.getBloomBlurSize();
+}
+
+float FabiEngine3D::gfx_getSkyHdrBrightnessFactor()
+{
+	return _core->_skyEntityManager.getBrightnessFactor();
+}
+
+float FabiEngine3D::gfx_getDofMinDistance()
+{
+	return _core->_shaderBus.getDofMinDistance();
+}
+
+float FabiEngine3D::gfx_getLensFlareIntensity()
+{
+	return _core->_shaderBus.getLensFlareIntensity();
 }

@@ -43,7 +43,7 @@ void EngineController::_initializeMiscellaneous()
 	gfx_enableBloom(1.0f, 0.0f, 10);
 	gfx_enableLightMapping();
 	gfx_enableSkyReflections(0.25f);
-	gfx_enableSpecularLighting(3.0f);
+	gfx_enableSpecularLighting();
 	gfx_enablePointLighting();
 	gfx_enableWaterEffects();
 

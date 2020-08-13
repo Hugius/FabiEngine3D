@@ -4,8 +4,7 @@
 void GameEntityRenderer::bind()
 {
 	// Define clipping plane for scene reflections
-	const float smallOffset = 0.0000001f;
-	vec4 clippingPlane = vec4(0.0f, 1.0f, 0.0f, -(_shaderBus.getSceneReflectionHeight() + smallOffset));
+	vec4 clippingPlane = vec4(0.0f, 1.0f, 0.0f, -(_shaderBus.getSceneReflectionHeight() + _shaderBus.getSceneReflectionOffset()));
 
 	// Bind shader
 	_shader.bind();
@@ -28,7 +27,6 @@ void GameEntityRenderer::bind()
 	_shader.uploadUniform("u_fogMinDistance",				_shaderBus.getFogMinDistance());
 	_shader.uploadUniform("u_fogColor",						_shaderBus.getFogColor());
 	_shader.uploadUniform("u_specularLightingEnabled",		_shaderBus.isSpecularLightingEnabled());
-	_shader.uploadUniform("u_specularLightingIntensity",	_shaderBus.getSpecularLightingIntensity());
 	_shader.uploadUniform("u_pointLightingEnabled",			_shaderBus.isPointLightingEnabled());
 	_shader.uploadUniform("u_lightMappingEnabled",			_shaderBus.isLightMappingEnabled());
 	_shader.uploadUniform("u_skyReflectionsEnabled",		_shaderBus.isSkyReflectionsEnabled());
@@ -113,6 +111,7 @@ void GameEntityRenderer::render(const GameEntity* entity)
 		_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix());
 		_shader.uploadUniform("u_color", entity->getColor());
 		_shader.uploadUniform("u_specularLightingFactor", entity->getSpecularFactor());
+		_shader.uploadUniform("u_specularLightingIntensity", entity->getSpecularIntensity());
 		_shader.uploadUniform("u_isTransparent", entity->isTransparent());
 		_shader.uploadUniform("u_isLightMapped", entity->isLightMapped());
 		_shader.uploadUniform("u_isSkyReflective", entity->isSkyReflective());

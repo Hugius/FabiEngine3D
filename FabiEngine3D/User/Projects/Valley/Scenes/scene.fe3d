@@ -1,8 +1,9 @@
-MODEL tree60813293 0 4.6 0 0 0 0 2.17742 2.17742 2.17742 User\Assets\OBJs\tree8.obj ? ? ? 0 1 1 0 0 1 1 1 1 1 1.15762 15.8555 1.15762
-MODEL house1300579841 -12.0509 4.70588 -24.7577 0 0 0 1 1 1 User\Assets\OBJs\house10.obj User\Assets\Textures\DiffuseMaps\house10.png ? ? 0 1 0 0 0 1 1 1 1 1 1 1 1
+MODEL tree69582740 -5.05561 4.70588 -6.90944 0 0 0 1 1 1 User\Assets\OBJs\tree1.obj User\Assets\Textures\DiffuseMaps\tree1.png ? ? 0 0 1 1 0 1 1 1 1 1 1 1 1 1 1 1
+MODEL tree66613206 -20.1353 4.70588 5.71369 0 0 0 1 1 1 User\Assets\OBJs\tree1.obj User\Assets\Textures\DiffuseMaps\tree1.png ? ? 0 0 1 1 0 1 1 1 1 1 1 1 1 1 1 1
+MODEL tree432801672 -18.2531 4.70588 -14.4845 0 0 0 1 1 1 User\Assets\OBJs\tree1.obj User\Assets\Textures\DiffuseMaps\tree1.png ? ? 0 0 1 1 0 1 1 1 1 1 1 1 1 1 1 1
 AMBIENT 1 1 1 1
 DIRECTIONAL 1000 2500 1000 1 1 1 0.75
 SPEED 20
-POSITION 16.0871 11.6 -28.6113
-YAW 57.7999
-PITCH 27
+POSITION -9.77562 8.8 -48.5687
+YAW 52.5997
+PITCH 64.6001

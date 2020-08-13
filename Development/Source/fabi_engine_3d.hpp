@@ -218,6 +218,7 @@ public:
 	void		   gameEntity_enable(const string& ID);
 	void		   gameEntity_disable(const string& ID);
 	void		   gameEntity_setSpecularFactor(const string& ID, float intensity);
+	void		   gameEntity_setSpecularIntensity(const string& ID, float intensity);
 	void		   gameEntity_setLightness(const string& ID, float lightness);
 	void		   gameEntity_setAlpha(const string& ID, float alpha);
 	void		   gameEntity_setColor(const string& ID, vec3 color);
@@ -238,6 +239,7 @@ public:
 	bool		   gameEntity_isStaticToCamera(const string& ID);
 	float		   gameEntity_getLightness(const string& ID);
 	float		   gameEntity_getSpecularFactor(const string& ID);
+	float		   gameEntity_getSpecularIntensity(const string& ID);
 	float		   gameEntity_getAlpha(const string& ID);
 	float		   gameEntity_getMaxY(const string& ID);
 	float		   gameEntity_getUvRepeat(const string& ID);
@@ -458,7 +460,7 @@ public:
 	// Graphics interface - setters
 	void gfx_enableAmbientLighting(vec3 color, float intensity);
 	void gfx_enableDirectionalLighting(vec3 position, vec3 color, float intensity);
-	void gfx_enableSpecularLighting(float intensity);
+	void gfx_enableSpecularLighting();
 	void gfx_enablePointLighting();
 	void gfx_enableFog(float minDistance, vec3 color);
 	void gfx_enableSkyReflections(float factor);
@@ -495,6 +497,21 @@ public:
 	vec3 gfx_getDirectionalLightingPosition();
 	vec3 gfx_getAmbientLightingColor();
 	vec3 gfx_getDirectionalLightingColor();
+	float gfx_getFogMinDistance();
+	vec3 gfx_getFogColor();
+	float gfx_getSkyReflectionFactor();
+	float gfx_getSceneReflectionHeight();
+	float gfx_getSceneReflectionFactor();
+	vec3 gfx_getShadowEyePosition();
+	vec3 gfx_getShadowCenter();
+	float gfx_getShadowSize();
+	float gfx_getShadowReach();
+	float gfx_getBloomIntensity();
+	float gfx_getBloomBrightnessTreshold();
+	int gfx_getBloomBlurSize();
+	float gfx_getSkyHdrBrightnessFactor();
+	float gfx_getDofMinDistance();
+	float gfx_getLensFlareIntensity();
 
 	// Input interface
 	void input_setLocked(bool locked);

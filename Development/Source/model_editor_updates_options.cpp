@@ -13,22 +13,9 @@ void ModelEditor::_updateModelEditingOptions()
 		{
 			_fe3d.gameEntity_setFaceCulled(_currentModelName, !_fe3d.gameEntity_isFaceCulled(_currentModelName));
 		}
-		else if (screen->getButton("isShadowed")->isHovered())
-		{
-			_fe3d.gameEntity_setShadowed(_currentModelName, !_fe3d.gameEntity_isShadowed(_currentModelName));
-		}
 		else if (screen->getButton("isTransparent")->isHovered())
 		{
 			_fe3d.gameEntity_setTransparent(_currentModelName, !_fe3d.gameEntity_isTransparent(_currentModelName));
-		}
-		else if (screen->getButton("isSpecular")->isHovered())
-		{
-			_fe3d.gameEntity_setSpecularLighted(_currentModelName, !_fe3d.gameEntity_isSpecularLighted(_currentModelName));
-		}
-		else if (screen->getButton("specularFactor")->isHovered())
-		{
-			_gui->getGlobalScreen()->addValueForm("specularFactor", "Specular factor",
-				_fe3d.gameEntity_getSpecularFactor(_currentModelName), vec2(0.0f, 0.1f), vec2(0.1f, 0.1f));
 		}
 		else if (screen->getButton("setColor")->isHovered())
 		{
@@ -49,27 +36,10 @@ void ModelEditor::_updateModelEditingOptions()
 	// Update GUI button contents
 	auto faceculledID = screen->getButton("isFaceculled")->getTextfield()->getEntityID();
 	auto isCulled = _fe3d.gameEntity_isFaceCulled(_currentModelName);
-	auto shadowedID = screen->getButton("isShadowed")->getTextfield()->getEntityID();
-	auto isShadowed = _fe3d.gameEntity_isShadowed(_currentModelName);
 	auto transparentID = screen->getButton("isTransparent")->getTextfield()->getEntityID();
 	auto isTransparent = _fe3d.gameEntity_isTransparent(_currentModelName);
-	auto specularID = screen->getButton("isSpecular")->getTextfield()->getEntityID();
-	auto isSpecular = _fe3d.gameEntity_isSpecularLighted(_currentModelName);
 	_fe3d.textEntity_setTextContent(faceculledID, isCulled ? "Culling: ON" : "Culling: OFF");
-	_fe3d.textEntity_setTextContent(shadowedID, isShadowed ? "Shadowed: ON" : "Shadowed: OFF");
 	_fe3d.textEntity_setTextContent(transparentID, isTransparent ? "No-white: ON" : "No-white: OFF");
-	_fe3d.textEntity_setTextContent(specularID, isSpecular ? "Specular: ON" : "Specular: OFF");
-
-	// Update specular factor
-	if (_fe3d.gameEntity_isSpecularLighted(_currentModelName))
-	{
-		float factor = _fe3d.gameEntity_getSpecularFactor(_currentModelName);
-		_gui->getGlobalScreen()->checkValueForm("specularFactor", factor);
-		_fe3d.gameEntity_setSpecularFactor(_currentModelName, factor);
-	}
-
-	// Update specular factor button hoverability
-	screen->getButton("specularFactor")->setHoverable(_fe3d.gameEntity_isSpecularLighted(_currentModelName));
 
 	// Setting model color
 	vec3 newColor = _fe3d.gameEntity_getColor(_currentModelName) * 255.0f;

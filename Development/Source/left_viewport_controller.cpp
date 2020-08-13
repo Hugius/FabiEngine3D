@@ -13,14 +13,14 @@ LeftViewportController::LeftViewportController(FabiEngine3D& fe3d, shared_ptr<En
 void LeftViewportController::initialize()
 {
 	// Left-viewport: mainWindow - mainScreen
-	_gui->getViewport("left")->addWindow("main", vec2(0.0f), vec2(1.9f, 2.0f), LeftViewportController::frameColor);
+	_gui->getViewport("left")->addWindow("main", vec2(0.0f), vec2(1.9f, 2.0f), LVC::frameColor);
 	_gui->getViewport("left")->getWindow("main")->addScreen("main");
 	_gui->getViewport("left")->getWindow("main")->setActiveScreen("main");
-	_gui->getViewport("left")->getWindow("main")->getScreen("main")->addButton("modelEditor", vec2(0.0f, 0.7f), vec2(1.5f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Model editor", LeftViewportController::textColor, LeftViewportController::textHoverColor);
-	_gui->getViewport("left")->getWindow("main")->getScreen("main")->addButton("worldEditor", vec2(0.0f, 0.35f), vec2(1.5f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "World editor", LeftViewportController::textColor, LeftViewportController::textHoverColor);
-	_gui->getViewport("left")->getWindow("main")->getScreen("main")->addButton("billboardEditor", vec2(0.0f, 0.0f), vec2(1.8f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Billboard editor", LeftViewportController::textColor, LeftViewportController::textHoverColor);
-	_gui->getViewport("left")->getWindow("main")->getScreen("main")->addButton("sceneEditor", vec2(0.0f, -0.35f), vec2(1.5f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Scene editor", LeftViewportController::textColor, LeftViewportController::textHoverColor);
-	_gui->getViewport("left")->getWindow("main")->getScreen("main")->addButton("scriptEditor", vec2(0.0f, -0.7f), vec2(1.5f, 0.1f), LeftViewportController::buttonColor, LeftViewportController::buttonHoverColor, "Script editor", LeftViewportController::textColor, LeftViewportController::textHoverColor);
+	_gui->getViewport("left")->getWindow("main")->getScreen("main")->addButton("modelEditor", vec2(0.0f, 0.7f), vec2(1.5f, 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Model editor", LVC::textColor, LVC::textHoverColor);
+	_gui->getViewport("left")->getWindow("main")->getScreen("main")->addButton("worldEditor", vec2(0.0f, 0.35f), vec2(1.5f, 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "World editor", LVC::textColor, LVC::textHoverColor);
+	_gui->getViewport("left")->getWindow("main")->getScreen("main")->addButton("billboardEditor", vec2(0.0f, 0.0f), vec2(1.8f, 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Billboard editor", LVC::textColor, LVC::textHoverColor);
+	_gui->getViewport("left")->getWindow("main")->getScreen("main")->addButton("sceneEditor", vec2(0.0f, -0.35f), vec2(1.5f, 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Scene editor", LVC::textColor, LVC::textHoverColor);
+	_gui->getViewport("left")->getWindow("main")->getScreen("main")->addButton("scriptEditor", vec2(0.0f, -0.7f), vec2(1.5f, 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Script editor", LVC::textColor, LVC::textHoverColor);
 	
 	// Initialize model editor GUI
 	_modelEditor.initializeGUI();

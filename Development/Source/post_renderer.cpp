@@ -46,7 +46,7 @@ void PostRenderer::render(const GuiEntity* entity)
 		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D, _shaderBus.getBloomMap());
 		glActiveTexture(GL_TEXTURE2);
-		glBindTexture(GL_TEXTURE_2D, _shaderBus.getDepthMap());
+		glBindTexture(GL_TEXTURE_2D, _shaderBus.getDofDepthMap());
 		glActiveTexture(GL_TEXTURE3);
 		glBindTexture(GL_TEXTURE_2D, _shaderBus.getBlurMap());
 		glActiveTexture(GL_TEXTURE4);

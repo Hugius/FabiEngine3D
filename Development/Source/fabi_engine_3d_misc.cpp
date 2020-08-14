@@ -121,7 +121,7 @@ void FabiEngine3D::misc_hidePerformanceProfiling()
 	// List of element IDs
 	vector<string> elements =
 	{
-		"reflectionPreRender", "refractionPreRender", "shadowPreRender", "depthPreRender", "skyEntityRender", "terrainEntityRender", "waterEntityRender",
+		"reflectionPreRender", "refractionPreRender", "shadowPreRender", "dofDepthPreRender", "waterDepthPreRender", "skyEntityRender", "terrainEntityRender", "waterEntityRender",
 		"gameEntityRender", "billboardEntityRender", "aabbEntityRender", "antiAliasing", "postProcessing", "guiEntityRender", "textEntityRender"
 	};
 

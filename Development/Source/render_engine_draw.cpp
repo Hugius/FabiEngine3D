@@ -161,7 +161,7 @@ void RenderEngine::_renderDebugScreens()
 	// Depth scene
 	GuiEntity depthSurface;
 	depthSurface.setDepthEntity(true);
-	depthSurface.setDiffuseMap(_shaderBus.getDepthMap());
+	depthSurface.setDiffuseMap(_shaderBus.getDofDepthMap());
 	depthSurface.load("depthSurface");
 	depthSurface.addOglBuffer(new OpenGLBuffer(-0.75f, 0.25f, 0.5f, 0.5f, true));
 	depthSurface.setMirroredVertically(true);

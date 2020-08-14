@@ -123,7 +123,7 @@ void GameEntityManager::update()
 			entity->updateModelMatrix();
 
 			// Update reflection height
-			if (entity->isSceneReflective())
+			if (entity->isSceneReflective() && _shaderBus.isSceneReflectionsEnabled())
 			{
 				_shaderBus.setSceneReflectionHeight(entity->getTranslation().y);
 				_shaderBus.setSceneReflectionOffset(0.0000001f);

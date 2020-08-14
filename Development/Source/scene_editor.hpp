@@ -86,6 +86,7 @@ private:
 	string _activeModelID = "";
 	int _selectedLightnessMultiplier = 1;
 	int _activeLightnessMultiplier = 1;
+	bool _dontResetSelectedModel = false;
 
 	// Billboard variables
 	string _currentBillboardName = "";

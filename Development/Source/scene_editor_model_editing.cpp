@@ -4,7 +4,15 @@ void SceneEditor::_updateModelEditing()
 {
 	if (_isLoaded)
 	{
-		_selectedModelID = "";
+		// Reset selected model from last frame
+		if (!_dontResetSelectedModel)
+		{
+			_selectedModelID = "";
+		}
+		else
+		{
+			_dontResetSelectedModel = false;
+		}
 
 		// User must not be in placement mode
 		if (_currentPreviewModelName == "" && !_isPlacingPointlight)
@@ -148,12 +156,12 @@ void SceneEditor::_updateModelEditing()
 					// Model size
 					vec3 oldSize = size;
 					float factor = 25.0f;
-					_handleValueChanging("modelPropertiesMenu", "xPlus", "x", size.x, _movementChangingSpeed, factor, factor);
-					_handleValueChanging("modelPropertiesMenu", "xMinus", "x", size.x, -_movementChangingSpeed, factor, factor);
-					_handleValueChanging("modelPropertiesMenu", "yPlus", "y", size.y, _movementChangingSpeed, factor, factor);
-					_handleValueChanging("modelPropertiesMenu", "yMinus", "y", size.y, -_movementChangingSpeed, factor, factor);
-					_handleValueChanging("modelPropertiesMenu", "zPlus", "z", size.z, _movementChangingSpeed, factor, factor);
-					_handleValueChanging("modelPropertiesMenu", "zMinus", "z", size.z, -_movementChangingSpeed, factor, factor);
+					_handleValueChanging("modelPropertiesMenu", "xPlus", "x", size.x, _movementChangingSpeed, factor);
+					_handleValueChanging("modelPropertiesMenu", "xMinus", "x", size.x, -_movementChangingSpeed, factor);
+					_handleValueChanging("modelPropertiesMenu", "yPlus", "y", size.y, _movementChangingSpeed, factor);
+					_handleValueChanging("modelPropertiesMenu", "yMinus", "y", size.y, -_movementChangingSpeed, factor);
+					_handleValueChanging("modelPropertiesMenu", "zPlus", "z", size.z, _movementChangingSpeed, factor);
+					_handleValueChanging("modelPropertiesMenu", "zMinus", "z", size.z, -_movementChangingSpeed, factor);
 					_fe3d.gameEntity_setSize(_activeModelID, size);
 
 					// AABB size

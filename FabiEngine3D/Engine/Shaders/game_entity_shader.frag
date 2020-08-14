@@ -362,8 +362,8 @@ vec3 applySceneReflections(vec3 color)
 	{
 		vec2 ndc             = (f_clip.xy / f_clip.w) / 2.0 + 0.5;
 		vec2 texCoords       = vec2(ndc.x, -ndc.y);
-		vec4 reflectionColor = texture(u_sampler_sceneReflectionMap, vec2(texCoords.x,  texCoords.y));
-		vec3 mixedColor      = mix(color.rgb, reflectionColor.rgb, u_sceneReflectionFactor);
+		vec3 reflectionColor = texture(u_sampler_sceneReflectionMap, vec2(texCoords.x,  texCoords.y)).rgb;
+		vec3 mixedColor      = mix(color.rgb, reflectionColor, u_sceneReflectionFactor);
         
 		return mixedColor.rgb;
 	}

@@ -29,7 +29,7 @@ public:
 	const int   getWindowHeight()      const;
 	const int   getMsaaQuality()       const;
 	const int   getShadowQuality()     const;
-	const int   getWaterQuality()      const;
+	const int   getRefractionQuality() const;
 	const int   getReflectionQuality() const;
 	const int   getMaxAudioChannels()  const;
 	const ivec2 getVpPos()			   const;
@@ -50,7 +50,7 @@ private:
 	int   _windowHeight = 0;
 	int   _msaaQuality = 0;
 	int   _shadowQuality = 0;
-	int   _waterQuality = 0;
+	int   _refractionQuality = 0;
 	int   _reflectionQuality = 0;
 	int   _maxAudioChannels = 0;
 	ivec2 _viewportPosition = ivec2(0);

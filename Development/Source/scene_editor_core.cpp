@@ -152,8 +152,8 @@ void SceneEditor::load()
 	_fe3d.gfx_enableSkyReflections(0.5f);
 	_fe3d.gfx_enableLightMapping();
 	_fe3d.gfx_enableSpecularLighting();
-	_fe3d.gfx_enableSceneReflections(0.5f);
-	//_fe3d.gfx_enableWaterEffects();
+	_fe3d.gfx_enableWaterEffects();
+	_fe3d.gfx_enableSceneReflections(0.25f);
 	
 	// Disable default skybox
 	_fe3d.skyEntity_select("");
@@ -608,6 +608,7 @@ void SceneEditor::unload()
 	_activeModelID = "";
 	_selectedLightnessMultiplier = 1;
 	_activeLightnessMultiplier = 1;
+	_dontResetSelectedModel = false;
 	_isPlacingPointlight = false;
 	_isLoaded = false;
 	_transformation = Transformation::TRANSLATION;

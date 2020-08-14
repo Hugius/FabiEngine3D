@@ -42,6 +42,8 @@ void RenderEngine::_captureSceneReflections(CameraManager& camera)
 		bool shadowsEnabled = _shaderBus.isShadowsEnabled();
 		float oldLightness = _entityBus->getSkyEntity()->getLightness();
 		_shaderBus.setShadowsEnabled(false);
+
+		// I know this is considered REALLY bad practice, but this is the only exception in the entire code-base
 		const_cast<SkyEntity*>(_entityBus->getSkyEntity())->setLightness(_entityBus->getSkyEntity()->getOriginalLightness());
 
 		// Render scene
@@ -78,8 +80,33 @@ void RenderEngine::_captureSceneRefractions()
 		_sceneRefractionFramebuffer.bind();
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+		// Save and disable reflective entities
+		vector<string> reflectiveEntityIDs;
+		for (auto& gameEntity : _entityBus->getGameEntities())
+		{
+			if (gameEntity->isSceneReflective() && gameEntity->isVisible())
+			{
+				gameEntity->setVisible(false);
+				reflectiveEntityIDs.push_back(gameEntity->getID());
+			}
+		}
+
 		// Render scene
+		_renderSkyEntity();
 		_renderTerrainEntity();
+		_renderGameEntities();
+
+		// Restore reflective entities
+		for (auto& reflectiveEntityID : reflectiveEntityIDs)
+		{
+			for (auto& gameEntity : _entityBus->getGameEntities())
+			{
+				if (gameEntity->getID() == reflectiveEntityID)
+				{
+					gameEntity->setVisible(true);
+				}
+			}
+		}
 
 		// Unbind
 		_sceneRefractionFramebuffer.unbind();
@@ -130,12 +157,12 @@ void RenderEngine::_captureBloom()
 	}
 }
 
-void RenderEngine::_captureDepth()
+void RenderEngine::_captureDofDepth()
 {
-	if (_shaderBus.isDofEnabled() || _shaderBus.isWaterEffectsEnabled())
+	if (_shaderBus.isDofEnabled())
 	{
 		// Bind
-		_depthFramebuffer.bind();
+		_dofDepthFramebuffer.bind();
 		glClear(GL_DEPTH_BUFFER_BIT);
 		_depthRenderer.bind();
 
@@ -159,8 +186,34 @@ void RenderEngine::_captureDepth()
 
 		// Unbind
 		_depthRenderer.unbind();
-		_depthFramebuffer.unbind();
-		_shaderBus.setDepthMap(_depthFramebuffer.getTexture(0));
+		_dofDepthFramebuffer.unbind();
+		_shaderBus.setDofDepthMap(_dofDepthFramebuffer.getTexture(0));
+	}
+}
+
+void RenderEngine::_captureWaterDepth()
+{
+	// Depth is only needed for edge transparency
+	bool waterDepthNeeded = (_shaderBus.isWaterEffectsEnabled() && _entityBus->getWaterEntity() != nullptr) &&
+		_entityBus->getWaterEntity()->getTransparency() > 0.0f;
+
+	if (waterDepthNeeded)
+	{
+		// Bind
+		_waterDepthFramebuffer.bind();
+		glClear(GL_DEPTH_BUFFER_BIT);
+		_depthRenderer.bind();
+
+		// Render terrain entity
+		if (_entityBus->getTerrainEntity() != nullptr)
+		{
+			_depthRenderer.renderTerrainEntity(_entityBus->getTerrainEntity());
+		}
+
+		// Unbind
+		_depthRenderer.unbind();
+		_waterDepthFramebuffer.unbind();
+		_shaderBus.setWaterDepthMap(_waterDepthFramebuffer.getTexture(0));
 	}
 }
 

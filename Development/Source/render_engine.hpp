@@ -68,17 +68,19 @@ private:
 	OpenGLFramebuffer _aaProcessorFramebuffer;
 	OpenGLFramebuffer _sceneReflectionFramebuffer;
 	OpenGLFramebuffer _sceneRefractionFramebuffer;
-	OpenGLFramebuffer _shadowFramebuffer;
 	OpenGLFramebuffer _bloomHdrFramebuffer;
 	OpenGLFramebuffer _bloomDofAdditionFramebuffer;
-	OpenGLFramebuffer _depthFramebuffer;
+	OpenGLFramebuffer _shadowFramebuffer;
+	OpenGLFramebuffer _dofDepthFramebuffer;
+	OpenGLFramebuffer _waterDepthFramebuffer;
 
 	// Capturing functions
 	void _captureSceneReflections(CameraManager& camera);
 	void _captureSceneRefractions();
 	void _captureShadows();
 	void _captureBloom();
-	void _captureDepth();
+	void _captureDofDepth();
+	void _captureWaterDepth();
 	void _capturePostProcessing();
 	void _captureDofBlur();
 	void _captureMotionBlur(CameraManager& camera, ivec2 mousePos);

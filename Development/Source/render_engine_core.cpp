@@ -23,12 +23,13 @@ RenderEngine::RenderEngine(ShaderBus& shaderBus, Timer& timer) :
 	_screenFramebuffer.createColorTexture(ivec2(0), Config::getInst().getVpSize(), 1, false);
 	_msaaFramebuffer.createMsaaTexture(ivec2(0), Config::getInst().getVpSize(), 1, Config::getInst().getMsaaQuality() < 1 ? 1 : Config::getInst().getMsaaQuality() > 16 ? 16 : Config::getInst().getMsaaQuality());
 	_aaProcessorFramebuffer.createColorTexture(ivec2(0), Config::getInst().getVpSize(), 1, false);
-	_bloomDofAdditionFramebuffer.createColorTexture(ivec2(0), Config::getInst().getVpSize(), 1, false);
-	_sceneRefractionFramebuffer.createColorTexture(ivec2(0), ivec2(Config::getInst().getWaterQuality()), 1, false);
+	_sceneRefractionFramebuffer.createColorTexture(ivec2(0), ivec2(Config::getInst().getRefractionQuality()), 1, false);
 	_sceneReflectionFramebuffer.createColorTexture(ivec2(0), ivec2(Config::getInst().getReflectionQuality()), 1, false);
 	_bloomHdrFramebuffer.createColorTexture(ivec2(0), Config::getInst().getVpSize(), 1, false);
+	_bloomDofAdditionFramebuffer.createColorTexture(ivec2(0), Config::getInst().getVpSize(), 1, false);
 	_shadowFramebuffer.createDepthTexture(ivec2(0), ivec2(Config::getInst().getShadowQuality()), 1);
-	_depthFramebuffer.createDepthTexture(ivec2(0), Config::getInst().getVpSize(), 1);
+	_dofDepthFramebuffer.createDepthTexture(ivec2(0), Config::getInst().getVpSize(), 1);
+	_waterDepthFramebuffer.createDepthTexture(ivec2(0), Config::getInst().getVpSize(), 1);
 	_blurRenderer.addFramebuffer(static_cast<int>(BlurType::BLOOM),  true);
 	_blurRenderer.addFramebuffer(static_cast<int>(BlurType::DOF),    true);
 	_blurRenderer.addFramebuffer(static_cast<int>(BlurType::MOTION), true);
@@ -81,8 +82,11 @@ void RenderEngine::renderScene(EntityBus * entityBus, CameraManager & camera, iv
 		_timer.start("shadowPreRender");
 		_captureShadows();
 		_timer.stop();
-		_timer.start("depthPreRender");
-		_captureDepth();
+		_timer.start("dofDepthPreRender");
+		_captureDofDepth();
+		_timer.stop();
+		_timer.start("waterDepthPreRender");
+		_captureWaterDepth();
 		_timer.stop();
 
 		// Bind screen framebuffer

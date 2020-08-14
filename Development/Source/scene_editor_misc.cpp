@@ -32,6 +32,7 @@ void SceneEditor::_updateMiscellaneous()
 
 void SceneEditor::_selectModel(const string& modelID)
 {
+	_dontResetSelectedModel = true;
 	_selectedModelID = modelID;
 }
 

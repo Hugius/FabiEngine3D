@@ -1,2 +1,2 @@
 @tree User\Assets\OBJs\tree1.obj User\Assets\Textures\DiffuseMaps\tree1.png ? ? 1 1 1 0 1 1 0 1 1 1 1 1 1 1 1 1 1 1
-@plane User\Assets\OBJs\plane.obj User\Assets\Textures\DiffuseMaps\anvil2.png ? ? 4.48159 4.48159 4.48159 0 1 0 1 0 1 1 0.5 1 1 1 1 1 1 1
+@plane User\Assets\OBJs\plane.obj User\Assets\Textures\DiffuseMaps\cc_stone.png ? ? 4.48159 4.48159 4.48159 0 1 0 1 0 1 1 0.5 1 1 1 1 1 1 1

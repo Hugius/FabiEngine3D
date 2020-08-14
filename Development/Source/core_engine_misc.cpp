@@ -63,7 +63,7 @@ void CoreEngine::_updatePerformanceProfiler()
 			// Performance profiling
 			vector<string> elementNames =
 			{
-				"reflectionPreRender", "refractionPreRender", "shadowPreRender", "depthPreRender", "skyEntityRender", "terrainEntityRender", "waterEntityRender",
+				"reflectionPreRender", "refractionPreRender", "shadowPreRender", "dofDepthPreRender", "waterDepthPreRender", "skyEntityRender", "terrainEntityRender", "waterEntityRender",
 				"gameEntityRender", "billboardEntityRender", "aabbEntityRender", "antiAliasing", "postProcessing", "guiEntityRender", "textEntityRender"
 			};
 

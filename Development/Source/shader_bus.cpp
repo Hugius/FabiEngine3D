@@ -40,9 +40,14 @@ void ShaderBus::setLensFlareMap(GLuint val)
 	_lensFlareMap = val;
 }
 
-void ShaderBus::setDepthMap(GLuint val)
+void ShaderBus::setDofDepthMap(GLuint val)
 {
-	_depthMap = val;
+	_dofDepthMap = val;
+}
+
+void ShaderBus::setWaterDepthMap(GLuint val)
+{
+	_waterDepthMap = val;
 }
 
 void ShaderBus::setBlurMap(GLuint val)
@@ -345,9 +350,14 @@ const GLuint ShaderBus::getLensFlareMap() const
 	return _lensFlareMap;
 }
 
-const GLuint ShaderBus::getDepthMap() const
+const GLuint ShaderBus::getDofDepthMap() const
 {
-	return _depthMap;
+	return _dofDepthMap;
+}
+
+const GLuint ShaderBus::getWaterDepthMap() const
+{
+	return _waterDepthMap;
 }
 
 const GLuint ShaderBus::getBlurMap() const

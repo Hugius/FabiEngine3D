@@ -56,7 +56,7 @@ void GameEntityRenderer::bind()
 
 	// Texture binding
 	glActiveTexture(GL_TEXTURE3);
-	glBindTexture(GL_TEXTURE_2D, _shaderBus.getSceneReflectionMap());
+	glBindTexture(GL_TEXTURE_2D, _shaderBus.getSceneRefractionMap());
 	glActiveTexture(GL_TEXTURE4);
 	glBindTexture(GL_TEXTURE_2D, _shaderBus.getShadowMap());
 	glActiveTexture(GL_TEXTURE5);
@@ -134,7 +134,7 @@ void GameEntityRenderer::render(const GameEntity* entity)
 			_shader.uploadUniform("u_viewMatrix", _shaderBus.getViewMatrix());
 		}
 
-		// Bind
+		// Bind & render
 		int index = 0;
 		for (auto& buffer : entity->getOglBuffers())
 		{

@@ -23,7 +23,7 @@ Config::Config()
 	_processOption(file, _windowFullscreen);
 	_processOption(file, _msaaQuality);
 	_processOption(file, _shadowQuality);
-	_processOption(file, _waterQuality);
+	_processOption(file, _refractionQuality);
 	_processOption(file, _reflectionQuality);
 	_processOption(file, _maxAudioChannels);
 	
@@ -121,9 +121,9 @@ const int Config::getShadowQuality() const
 	return _shadowQuality; 
 }
 
-const int Config::getWaterQuality() const
+const int Config::getRefractionQuality() const
 {
-	return _waterQuality;
+	return _refractionQuality;
 }
 
 const int Config::getMaxAudioChannels() const

@@ -8,7 +8,6 @@ void DepthRenderer::bind()
 	_shader.bind();
 
 	// Vertex shader uniforms
-	_shader.uploadUniform("u_viewMatrix", _shaderBus.getViewMatrix());
 	_shader.uploadUniform("u_projMatrix", _shaderBus.getProjectionMatrix());
 
 	// Texture uniforms
@@ -36,6 +35,7 @@ void DepthRenderer::renderTerrainEntity(const TerrainEntity* entity)
 		glEnable(GL_CULL_FACE);
 
 		// Shader uniforms
+		_shader.uploadUniform("u_viewMatrix", _shaderBus.getViewMatrix());
 		_shader.uploadUniform("u_modelMatrix", mat4(1.0f));
 		_shader.uploadUniform("u_isAlphaObject", false);
 		_shader.uploadUniform("u_isInstanced", false);
@@ -72,13 +72,23 @@ void DepthRenderer::renderGameEntity(const GameEntity* entity)
 		_shader.uploadUniform("u_isAlphaObject", entity->isTransparent());
 		_shader.uploadUniform("u_maxY", entity->getMaxY());
 
-		// OpenGL parts
+		// Check if entity is static to the camera view
+		if (entity->isCameraStatic())
+		{
+			_shader.uploadUniform("u_viewMatrix", mat4(mat3(_shaderBus.getViewMatrix())));
+		}
+		else
+		{
+			_shader.uploadUniform("u_viewMatrix", _shaderBus.getViewMatrix());
+		}
+
+		// Bind & render
 		int index = 0;
 		for (auto& buffer : entity->getOglBuffers())
 		{
+			// Diffuse map
 			if (entity->hasDiffuseMap())
 			{
-				// Texture
 				glActiveTexture(GL_TEXTURE0);
 				glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap(index));
 			}

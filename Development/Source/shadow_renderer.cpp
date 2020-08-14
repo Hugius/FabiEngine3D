@@ -38,16 +38,28 @@ void ShadowRenderer::renderGameEntity(const GameEntity* entity)
 		_shader.uploadUniform("u_maxY", entity->getMaxY());
 		_shader.uploadUniform("u_sampler_diffuseMap", 0);
 
-		// Bind
+		// Check if entity is static to the camera view
+		if (entity->isCameraStatic())
+		{
+			_shader.uploadUniform("u_viewMatrix", mat4(mat3(_shaderBus.getViewMatrix())));
+		}
+		else
+		{
+			_shader.uploadUniform("u_viewMatrix", _shaderBus.getViewMatrix());
+		}
+
+		// Bind & render
 		int index = 0;
 		for (auto& buffer : entity->getOglBuffers())
 		{
+			// Diffuse map transparency
 			if (entity->isTransparent() && entity->hasDiffuseMap())
 			{
 				glActiveTexture(GL_TEXTURE0);
 				glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap(index));
 			}
 
+			// Bind
 			glBindVertexArray(buffer->getVAO());
 
 			// Render

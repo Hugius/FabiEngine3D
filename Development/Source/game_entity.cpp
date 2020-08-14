@@ -168,6 +168,11 @@ void GameEntity::setCameraStatic(bool val)
 	_isCameraStatic = val;
 }
 
+void GameEntity::setOriginalLightness(float val)
+{
+	_originalLightness = val;
+}
+
 void GameEntity::setLightness(float val)
 {
 	_lightness = val;
@@ -311,6 +316,11 @@ const bool GameEntity::hasReflectionMap() const
 const bool GameEntity::isCameraStatic() const
 {
 	return _isCameraStatic;
+}
+
+const float GameEntity::getOriginalLightness() const
+{
+	return _originalLightness;
 }
 
 const float GameEntity::getLightness() const

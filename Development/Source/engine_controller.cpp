@@ -41,11 +41,6 @@ void EngineController::_initializeMiscellaneous()
 	misc_setMainRenderingColor(vec3(0.0f));
 	gfx_enableMSAA();
 	gfx_enableBloom(1.0f, 0.0f, 10);
-	gfx_enableLightMapping();
-	gfx_enableSkyReflections(0.25f);
-	gfx_enableSpecularLighting();
-	gfx_enablePointLighting();
-	gfx_enableWaterEffects();
 
 	// Default cube map
 	string path = "Engine\\Textures\\";
@@ -66,6 +61,7 @@ void EngineController::_initializeMiscellaneous()
 
 void EngineController::_updateMiscellaneous()
 {
+	// Only allowed if in-game
 	input_setKeyTogglingLocked(_gui->getGlobalScreen()->isFocused() || !misc_isMouseInsideViewport());
 
 	// Update wireframe visibility

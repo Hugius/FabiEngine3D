@@ -72,7 +72,7 @@ void BillboardEditor::load()
 	// Enable graphics
 	_fe3d.gfx_enableAmbientLighting(vec3(1.0f), 0.75f);
 	_fe3d.gfx_enableDirectionalLighting(vec3(1000.0f), vec3(1.0f), 0.75f);
-	_fe3d.gfx_enableShadows(vec3(25.0f), vec3(0.0f), 50.0f, 50.0f);
+	_fe3d.gfx_enableShadows(vec3(100.0f, 75.0f, 0.0f), vec3(0.0f), 200.0f, 200.0f);
 	
 	// 3D Environment
 	_fe3d.gameEntity_add("@@grid", "Engine\\OBJs\\plane.obj", vec3(0.0f), vec3(0.0f), vec3(100.0f, 1.0f, 100.0f));

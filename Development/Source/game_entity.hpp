@@ -40,6 +40,7 @@ public:
 	void setSpecularLighted(bool val);
 	void setShadowed(bool val);
 	void setCameraStatic(bool val);
+	void setOriginalLightness(float val);
 	void setLightness(float val);
 	void setSpecularFactor(float val);
 	void setSpecularIntensity(float val);
@@ -71,6 +72,7 @@ public:
 	const bool hasLightMap() const;
 	const bool hasReflectionMap() const;
 	const bool isCameraStatic() const;
+	const float getOriginalLightness() const;
 	const float getLightness() const;
 	const float getSpecularFactor() const;
 	const float getSpecularIntensity() const;
@@ -104,6 +106,7 @@ private:
 	bool _isSpecularLighted = false;
 	bool _isShadowed        = true;
 
+	float _originalLightness = 1.0f;
 	float _lightness = 1.0f;
 	float _specularFactor = 1.0f;
 	float _specularIntensity = 1.0f;

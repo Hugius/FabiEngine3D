@@ -62,16 +62,18 @@ void SceneEditor::_placeModel(const string& modelID, string modelName, vec3 posi
 	// Add game entity
 	_fe3d.gameEntity_add(modelID, _fe3d.gameEntity_getObjPath(modelName), position, rotation, size);
 	_fe3d.aabbEntity_bindToGameEntity(modelID, _fe3d.aabbEntity_getSize(modelName), true);
-
+	
 	// Model properties
 	_fe3d.gameEntity_setStaticToCamera(modelID, _fe3d.gameEntity_isStaticToCamera(modelName));
 	_fe3d.gameEntity_setFaceCulled(modelID, _fe3d.gameEntity_isFaceCulled(modelName));
 	_fe3d.gameEntity_setShadowed(modelID, _fe3d.gameEntity_isShadowed(modelName));
 	_fe3d.gameEntity_setTransparent(modelID, _fe3d.gameEntity_isTransparent(modelName));
+	_fe3d.gameEntity_setSceneReflective(modelID, _fe3d.gameEntity_isSceneReflective(modelName));
 	_fe3d.gameEntity_setSpecularLighted(modelID, _fe3d.gameEntity_isSpecularLighted(modelName));
 	_fe3d.gameEntity_setSpecularFactor(modelID, _fe3d.gameEntity_getSpecularFactor(modelName));
 	_fe3d.gameEntity_setSpecularIntensity(modelID, _fe3d.gameEntity_getSpecularIntensity(modelName));
 	_fe3d.gameEntity_setLightness(modelID, _fe3d.gameEntity_getLightness(modelName));
+	_fe3d.gameEntity_setOriginalLightness(modelID, _fe3d.gameEntity_getOriginalLightness(modelName));
 	_fe3d.gameEntity_setColor(modelID, _fe3d.gameEntity_getColor(modelName));
 	_fe3d.gameEntity_setUvRepeat(modelID, _fe3d.gameEntity_getUvRepeat(modelName));
 
@@ -113,6 +115,7 @@ void SceneEditor::_placeModel(const string& modelID, vec3 position, vec3 rotatio
 	_fe3d.gameEntity_setSpecularLighted(modelID, isSpecular);
 	_fe3d.gameEntity_setSpecularFactor(modelID, specularFactor);
 	_fe3d.gameEntity_setSpecularIntensity(modelID, specularIntensity);
+	_fe3d.gameEntity_setOriginalLightness(modelID, lightness);
 	_fe3d.gameEntity_setLightness(modelID, lightness);
 	_fe3d.gameEntity_setColor(modelID, color);
 	_fe3d.gameEntity_setUvRepeat(modelID, uvRepeat);
@@ -150,13 +153,15 @@ void SceneEditor::_updateModelBlinking(const string& modelID, int& multiplier)
 	if (modelID != "")
 	{
 		// Check if lightness reached bounds
-		if (_fe3d.gameEntity_getLightness(modelID) > 1.0f || _fe3d.gameEntity_getLightness(modelID) < 0.0f)
+		if (_fe3d.gameEntity_getLightness(modelID) > _fe3d.gameEntity_getOriginalLightness(modelID) || 
+			_fe3d.gameEntity_getLightness(modelID) < 0.0f)
 		{
 			multiplier *= -1;
 		}
 
 		// Set model lightness
-		float speed = (_modelBlinkingSpeed * static_cast<float>(multiplier));
+		float range = _fe3d.gameEntity_getOriginalLightness(modelID);
+		float speed = (_modelBlinkingSpeed * static_cast<float>(multiplier) * range);
 		_fe3d.gameEntity_setLightness(modelID, _fe3d.gameEntity_getLightness(modelID) + speed);
 	}
 }

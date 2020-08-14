@@ -149,6 +149,11 @@ void SceneEditor::load()
 	vec3 camPos = _fe3d.camera_getPosition();
 	_fe3d.gfx_enableShadows(vec3(camPos.x + 100.0f, 75.0f, camPos.z), vec3(camPos.x, 0.0f, camPos.z), 200.0f, 200.0f);
 	_fe3d.gfx_enableLensFlare("User\\Assets\\Textures\\FlareMaps\\flare.png", 0.75f);
+	_fe3d.gfx_enableSkyReflections(0.5f);
+	_fe3d.gfx_enableLightMapping();
+	_fe3d.gfx_enableSpecularLighting();
+	_fe3d.gfx_enableSceneReflections(0.5f);
+	//_fe3d.gfx_enableWaterEffects();
 	
 	// Disable default skybox
 	_fe3d.skyEntity_select("");
@@ -157,7 +162,7 @@ void SceneEditor::load()
 	_worldEditor.loadSkyEntity();
 	_worldEditor.loadTerrainEntity();
 	_worldEditor.loadWaterEntity();
-
+	
 	// Show sky entity
 	if (_fe3d.skyEntity_isExisting("@sky"))
 	{
@@ -219,7 +224,6 @@ void SceneEditor::load()
 
 	// Load world file
 	loadWorld();
-	
 
 	_fe3d.billBoardEntity_add("sun", "Engine\\Textures\\lightsource.png", _fe3d.gfx_getDirectionalLightingPosition(), vec3(0.0f), vec2(400.0f), true, true, true, true);
 
@@ -563,10 +567,16 @@ void SceneEditor::unload()
 	// Disable graphics
 	_fe3d.gfx_disableAmbientLighting();
 	_fe3d.gfx_disableDirectionalLighting();
-	_fe3d.gfx_disableSkyHDR();
-	_fe3d.gfx_disableShadows();
 	_fe3d.gfx_disableFog();
 	_fe3d.gfx_disableDOF();
+	_fe3d.gfx_disableSkyHDR();
+	_fe3d.gfx_disableShadows();
+	_fe3d.gfx_disableLensFlare();
+	_fe3d.gfx_disableSkyReflections();
+	_fe3d.gfx_disableLightMapping();
+	_fe3d.gfx_disableSpecularLighting();
+	_fe3d.gfx_disableSceneReflections();
+	_fe3d.gfx_disableWaterEffects();
 
 	// Delete sky entity
 	if (_fe3d.skyEntity_isExisting("@sky"))

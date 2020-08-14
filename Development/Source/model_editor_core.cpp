@@ -81,7 +81,10 @@ void ModelEditor::load()
 	_fe3d.gfx_enableAmbientLighting(vec3(1.0f), 0.75f);
 	_fe3d.gfx_enableDirectionalLighting(vec3(1000.0f), vec3(1.0f), 0.5f);
 	_fe3d.gfx_enableShadows(vec3(100.0f, 75.0f, 0.0f), vec3(0.0f), 200.0f, 200.0f);
-	_fe3d.gfx_enableSceneReflections(0.0f, 0.25f);
+	_fe3d.gfx_enableSceneReflections(0.25f);
+	_fe3d.gfx_enableSkyReflections(0.5f);
+	_fe3d.gfx_enableLightMapping();
+	_fe3d.gfx_enableSpecularLighting();
 	
 	// 3D Environment
 	_fe3d.gameEntity_add("@@grid", "Engine\\OBJs\\plane.obj", vec3(0.0f), vec3(0.0f), vec3(100.0f, 1.0f, 100.0f));
@@ -166,7 +169,7 @@ void ModelEditor::loadModels()
 			std::replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
 			std::replace(lightMapPath.begin(), lightMapPath.end(), '?', ' ');
 			std::replace(reflectionMapPath.begin(), reflectionMapPath.end(), '?', ' ');
-
+			
 			// Add new model
 			_addModel(modelName, objPath, diffuseMapPath, lightMapPath, reflectionMapPath, modelSize, isFaceCulled, isShadowed, 
 				isTransparent, isReflective, isSpecular, specularFactor, specularIntensity, lightness, 
@@ -275,6 +278,9 @@ void ModelEditor::unload()
 	_fe3d.gfx_disableDirectionalLighting();
 	_fe3d.gfx_disableShadows();
 	_fe3d.gfx_disableSceneReflections();
+	_fe3d.gfx_disableSkyReflections();
+	_fe3d.gfx_disableLightMapping();
+	_fe3d.gfx_disableSpecularLighting();
 
 	// 3D environment
 	_fe3d.gameEntity_delete("@@grid");

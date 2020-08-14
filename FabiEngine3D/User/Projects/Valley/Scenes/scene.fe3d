@@ -1,9 +1,8 @@
-MODEL tree69582740 -5.05561 4.70588 -6.90944 0 0 0 1 1 1 User\Assets\OBJs\tree1.obj User\Assets\Textures\DiffuseMaps\tree1.png ? ? 0 0 1 1 0 1 1 1 1 1 1 1 1 1 1 1
 MODEL tree66613206 -20.1353 4.70588 5.71369 0 0 0 1 1 1 User\Assets\OBJs\tree1.obj User\Assets\Textures\DiffuseMaps\tree1.png ? ? 0 0 1 1 0 1 1 1 1 1 1 1 1 1 1 1
-MODEL tree432801672 -18.2531 4.70588 -14.4845 0 0 0 1 1 1 User\Assets\OBJs\tree1.obj User\Assets\Textures\DiffuseMaps\tree1.png ? ? 0 0 1 1 0 1 1 1 1 1 1 1 1 1 1 1
+MODEL plane1593224617 7.59044 11.6059 5.35472 0 0 0 4.48159 4.48159 4.48159 User\Assets\OBJs\plane.obj User\Assets\Textures\DiffuseMaps\anvil2.png ? ? 0 0 1 0 1 0 1 1 0.5 1 1 1 1 1 1 1
 AMBIENT 1 1 1 1
 DIRECTIONAL 1000 2500 1000 1 1 1 0.75
-SPEED 20
-POSITION -9.77562 8.8 -48.5687
-YAW 52.5997
-PITCH 64.6001
+SPEED 5
+POSITION 5.78665 13.5 6.19862
+YAW 1.39906
+PITCH 12.5999

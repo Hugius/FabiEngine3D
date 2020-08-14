@@ -288,6 +288,11 @@ void FabiEngine3D::gameEntity_setSpecularIntensity(const string& ID, float inten
 	_core->_gameEntityManager.getEntity(ID)->setSpecularIntensity(intensity);
 }
 
+void FabiEngine3D::gameEntity_setOriginalLightness(const string& ID, float lightness)
+{
+	_core->_gameEntityManager.getEntity(ID)->setOriginalLightness(lightness);
+}
+
 void FabiEngine3D::gameEntity_setLightness(const string& ID, float lightness)
 {
 	_core->_gameEntityManager.getEntity(ID)->setLightness(lightness);
@@ -306,6 +311,11 @@ void FabiEngine3D::gameEntity_setUvRepeat(const string& ID, float repeat)
 void FabiEngine3D::gameEntity_setStaticToCamera(const string& ID, bool staticToCamera)
 {
 	_core->_gameEntityManager.getEntity(ID)->setCameraStatic(staticToCamera);
+}
+
+float FabiEngine3D::gameEntity_getOriginalLightness(const string& ID)
+{
+	return _core->_gameEntityManager.getEntity(ID)->getOriginalLightness();
 }
 
 float FabiEngine3D::gameEntity_getLightness(const string& ID)

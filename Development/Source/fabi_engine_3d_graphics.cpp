@@ -39,7 +39,7 @@ void FabiEngine3D::gfx_enableSkyReflections(float factor)
 	_core->_shaderBus.setSkyReflectionFactor(factor);
 }
 
-void FabiEngine3D::gfx_enableSceneReflections(float height, float factor)
+void FabiEngine3D::gfx_enableSceneReflections(float factor)
 {
 	// Check if water is already using reflection graphics
 	if ((_core->_shaderBus.isWaterEffectsEnabled() && _core->_waterEntityManager.getSelectedWater() != nullptr)
@@ -50,9 +50,7 @@ void FabiEngine3D::gfx_enableSceneReflections(float height, float factor)
 	else
 	{
 		_core->_shaderBus.setSceneReflectionsEnabled(true);
-		_core->_shaderBus.setSceneReflectionHeight(height);
 		_core->_shaderBus.setSceneReflectionFactor(factor);
-		_core->_shaderBus.setSceneReflectionOffset(0.0000001f);
 	}
 }
 

@@ -162,7 +162,7 @@ bool ModelEditor::_addModel(const string& modelName, string objName, string diff
 		// Add 3D model
 		if (objName != "")
 		{
-			_fe3d.gameEntity_add(modelName, objName, vec3(0.0f), vec3(0.0f), size, false);
+			_fe3d.gameEntity_add(modelName, objName, vec3(0.0f, 0.01f, 0.0f), vec3(0.0f), size, false);
 			_fe3d.aabbEntity_bindToGameEntity(modelName, aabbSize, true);
 			_fe3d.aabbEntity_hide(modelName);
 
@@ -196,6 +196,7 @@ bool ModelEditor::_addModel(const string& modelName, string objName, string diff
 			// Set other options
 			_fe3d.gameEntity_setSpecularFactor(modelName, specularFactor);
 			_fe3d.gameEntity_setSpecularIntensity(modelName, specularIntensity);
+			_fe3d.gameEntity_setOriginalLightness(modelName, lightness);
 			_fe3d.gameEntity_setLightness(modelName, lightness);
 			_fe3d.gameEntity_setColor(modelName, color); 
 			_fe3d.gameEntity_setUvRepeat(modelName, uvRepeat);

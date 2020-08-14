@@ -1,5 +1,7 @@
 #include "game_entity_manager.hpp"
 
+#include <iostream>
+
 GameEntityManager::GameEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, ShaderBus& shaderBus) :
 	BaseEntityManager(objLoader, texLoader, shaderBus)
 {
@@ -65,6 +67,7 @@ void GameEntityManager::addGameEntity
 		}
 		else
 		{
+			// Only add empty diffusemaps if multiparted model
 			if (parts.size() > 1)
 			{
 				getEntity(ID)->addDiffuseMap(0);
@@ -113,10 +116,18 @@ void GameEntityManager::update()
 		// Create temporary game entity object
 		auto * entity = getEntity(baseEntity->getID());
 
-		// Calculate model matrix
+		// Only update if visible
 		if (entity->isVisible())
 		{
+			// Calculate model matrix
 			entity->updateModelMatrix();
+
+			// Update reflection height
+			if (entity->isSceneReflective())
+			{
+				_shaderBus.setSceneReflectionHeight(entity->getTranslation().y);
+				_shaderBus.setSceneReflectionOffset(0.0000001f);
+			}
 		}
 	}
 }

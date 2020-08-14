@@ -8,10 +8,10 @@
 // Capturing reflection texture
 void RenderEngine::_captureSceneReflections(CameraManager& camera)
 {
-	bool waterReflectionEnabled = _entityBus->getWaterEntity() != nullptr && _shaderBus.isWaterEffectsEnabled();
-	waterReflectionEnabled = waterReflectionEnabled && _entityBus->getWaterEntity()->isReflective();
+	bool waterReflectionEnabled = (_shaderBus.isWaterEffectsEnabled() && _entityBus->getWaterEntity() != nullptr) &&
+		_entityBus->getWaterEntity()->isReflective();
 	bool sceneReflectionEnabled = _shaderBus.isSceneReflectionsEnabled();
-
+	
 	// Check if needed to capture scene
 	if (waterReflectionEnabled || sceneReflectionEnabled)
 	{

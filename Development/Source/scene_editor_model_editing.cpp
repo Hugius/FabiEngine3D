@@ -28,7 +28,6 @@ void SceneEditor::_updateModelEditing()
 							// Check if same model is clicked again
 							if (_selectedModelID != _activeModelID)
 							{
-								
 								_activateModel(_selectedModelID);
 							}
 						}
@@ -38,7 +37,7 @@ void SceneEditor::_updateModelEditing()
 						// Don't reset if model is active
 						if (entityID != _activeModelID && _selectedModelID == "")
 						{
-							_fe3d.gameEntity_setLightness(entityID, 1.0f);
+							_fe3d.gameEntity_setLightness(entityID, _fe3d.gameEntity_getOriginalLightness(entityID));
 						}
 					}
 				}
@@ -173,7 +172,7 @@ void SceneEditor::_updateModelEditing()
 				for (auto& entityID : _fe3d.gameEntity_getAllIDs())
 				{
 					_rightWindow->setActiveScreen("main");
-					_fe3d.gameEntity_setLightness(entityID, 1.0f);
+					_fe3d.gameEntity_setLightness(entityID, _fe3d.gameEntity_getOriginalLightness(entityID));
 					_selectedLightnessMultiplier = 1;
 					_activeModelID = "";
 					_selectedModelID = "";

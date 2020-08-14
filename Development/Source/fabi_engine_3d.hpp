@@ -219,6 +219,7 @@ public:
 	void		   gameEntity_disable(const string& ID);
 	void		   gameEntity_setSpecularFactor(const string& ID, float intensity);
 	void		   gameEntity_setSpecularIntensity(const string& ID, float intensity);
+	void		   gameEntity_setOriginalLightness(const string& ID, float lightness);
 	void		   gameEntity_setLightness(const string& ID, float lightness);
 	void		   gameEntity_setAlpha(const string& ID, float alpha);
 	void		   gameEntity_setColor(const string& ID, vec3 color);
@@ -237,6 +238,7 @@ public:
 	bool		   gameEntity_isSceneReflective(const string& ID);
 	bool		   gameEntity_isShadowed(const string& ID);
 	bool		   gameEntity_isStaticToCamera(const string& ID);
+	float		   gameEntity_getOriginalLightness(const string& ID);
 	float		   gameEntity_getLightness(const string& ID);
 	float		   gameEntity_getSpecularFactor(const string& ID);
 	float		   gameEntity_getSpecularIntensity(const string& ID);
@@ -464,7 +466,7 @@ public:
 	void gfx_enablePointLighting();
 	void gfx_enableFog(float minDistance, vec3 color);
 	void gfx_enableSkyReflections(float factor);
-	void gfx_enableSceneReflections(float height, float factor);
+	void gfx_enableSceneReflections(float factor);
 	void gfx_enableLightMapping();
 	void gfx_enableMSAA();
 	void gfx_enableShadows(vec3 eye, vec3 center, float size, float reach);

@@ -94,14 +94,4 @@ void EngineController::_updateMiscellaneous()
 	{
 		misc_disableDebugRendering();
 	}
-
-	// Update bounding box visibility
-	if (input_getKeyToggled(Input::KEY_B))
-	{
-		misc_enableAabbFrameRendering();
-	}
-	else
-	{
-		misc_disableAabbFrameRendering();
-	}
 }

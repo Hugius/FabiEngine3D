@@ -53,7 +53,6 @@ private:
 	bool _modelCreationEnabled = false;
 	bool _modelChoosingEnabled = false;
 	bool _modelEditingEnabled = false;
-	bool _modelResizingEnabled = false;
 	bool _meshResizingToggled = false;
 	bool _boxResizingToggled = false;  
 	bool _modelRemovalEnabled = false;

@@ -309,7 +309,6 @@ void ModelEditor::unload()
 	_modelCreationEnabled = false;
 	_modelChoosingEnabled = false;
 	_modelEditingEnabled = false;
-	_modelResizingEnabled = false;
 	_meshResizingToggled = false;
 	_boxResizingToggled = false;
 	_modelRemovalEnabled = false;

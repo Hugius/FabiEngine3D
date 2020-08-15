@@ -55,7 +55,7 @@ void SceneEditor::_updateAmbientLightingMenu()
 				}
 				else if (screen->getButton("intensity")->isHovered())
 				{
-					_gui->getGlobalScreen()->addValueForm("ambientIntensity", "Ambient intensity", ambientLightingIntensity * 100.0f, vec2(0.0f), vec2(0.3f, 0.1f));
+					_gui->getGlobalScreen()->addValueForm("ambientIntensity", "Ambient intensity (%)", ambientLightingIntensity * 100.0f, vec2(0.0f), vec2(0.3f, 0.1f));
 				}
 				else if (screen->getButton("back")->isHovered())
 				{
@@ -103,6 +103,7 @@ void SceneEditor::_updateDirectionalLightingMenu()
 			vec3 directionalLightingColor = _fe3d.gfx_getDirectionalLightingColor();
 			vec3 directionalLightingPosition = _fe3d.gfx_getDirectionalLightingPosition();
 			float directionalLightingIntensity = _fe3d.gfx_geDirectionalLightingIntensity();
+			float billboardSize = _fe3d.billboardEntity_getSize("@@lightSource").x;
 
 			// GUI management
 			if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
@@ -121,18 +122,16 @@ void SceneEditor::_updateDirectionalLightingMenu()
 				}
 				else if (screen->getButton("intensity")->isHovered())
 				{
-					_gui->getGlobalScreen()->addValueForm("directionalIntensity", "Directional intensity", directionalLightingIntensity * 100.0f, vec2(0.0f), vec2(0.3f, 0.1f));
+					_gui->getGlobalScreen()->addValueForm("directionalIntensity", "Directional intensity(%)", directionalLightingIntensity * 100.0f, vec2(0.0f), vec2(0.3f, 0.1f));
+				}
+				else if (screen->getButton("billboardSize")->isHovered())
+				{
+					_gui->getGlobalScreen()->addValueForm("billboardSize", "Billboard size", billboardSize, vec2(0.0f), vec2(0.3f, 0.1f));
 				}
 				else if (screen->getButton("back")->isHovered())
 				{
 					_leftWindow->setActiveScreen("sceneEditorMenuLighting");
 				}
-			}
-
-			// Directional value conversion
-			if (_gui->getGlobalScreen()->checkValueForm("directionalIntensity", directionalLightingIntensity))
-			{
-				directionalLightingIntensity /= 100.0f;
 			}
 
 			// Color R values conversion
@@ -153,13 +152,26 @@ void SceneEditor::_updateDirectionalLightingMenu()
 				directionalLightingColor.b = std::clamp(directionalLightingColor.b / 255.0f, 0.0f, 1.0f);
 			}
 
-			// Get position values
+			// Update position values
 			_gui->getGlobalScreen()->checkValueForm("positionX", directionalLightingPosition.x);
 			_gui->getGlobalScreen()->checkValueForm("positionY", directionalLightingPosition.y);
 			_gui->getGlobalScreen()->checkValueForm("positionZ", directionalLightingPosition.z);
 
+			// Directional intensity value conversion
+			if (_gui->getGlobalScreen()->checkValueForm("directionalIntensity", directionalLightingIntensity))
+			{
+				directionalLightingIntensity /= 100.0f;
+			}
+
+			// Update billboard size value
+			_gui->getGlobalScreen()->checkValueForm("billboardSize", billboardSize);
+
 			// Update directional lighting
 			_fe3d.gfx_enableDirectionalLighting(directionalLightingPosition, directionalLightingColor, directionalLightingIntensity);
+
+			// Update lightsource billboard
+			_fe3d.billboardEntity_setPosition("@@lightSource", directionalLightingPosition);
+			_fe3d.billboardEntity_setSize("@@lightSource",  vec2(billboardSize));
 		}
 	}
 }

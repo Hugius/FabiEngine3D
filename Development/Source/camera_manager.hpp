@@ -32,7 +32,7 @@ public:
 	// Other
 	void enableLookat(vec3 position);
 	void disableLookat();
-	void enableFirstPersonView(float mouseSensitivity);
+	void enableFirstPersonView();
 	void disableFirstPersonView();
 	void enableFreeMovement();
 	void disableFreeMovement();
@@ -79,6 +79,8 @@ private:
 	// Floats
 	float _fov = 0.0f;
 	float _aspectRatio = 0.0f;
+	float _yawAcceleration = 0.0f;
+	float _pitchAcceleration = 0.0f;
 	float _yaw = 0.0f;
 	float _pitch = 0.0f;
 	float _nearZ = 0.0f;

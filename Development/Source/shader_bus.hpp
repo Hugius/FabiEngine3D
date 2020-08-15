@@ -59,6 +59,7 @@ public:
 	void setShadowAreaReach(float val);
 	void setLensFlareAlpha(float val);
 	void setLensFlareIntensity(float val);
+	void setLensFlareMultiplier(float val);
 
 	// Integers
 	void setBloomBlurSize(int val);
@@ -133,6 +134,7 @@ public:
 	const float getShadowAreaReach()			  const;
 	const float getLensFlareAlpha()				  const;
 	const float getLensFlareIntensity()			  const;
+	const float getLensFlareMultiplier()		  const;
 
 	// Integers
 	const int getBloomBlurSize() const;
@@ -208,6 +210,7 @@ private:
 	float _shadowAreaReach				= 0.0f;
 	float _lensFlareAlpha				= 0.0f;
 	float _lensFlareIntensity			= 0.0f;
+	float _lensFlareMultiplier			= 0.0f;
 	
 	// Integers
 	int _bloomBlurSize = 0;

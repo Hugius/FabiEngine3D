@@ -67,10 +67,11 @@ void SceneEditor::initializeGUI()
 
 	// Left-viewport: mainWindow - sceneEditorMenuLightingDirectional
 	_leftWindow->addScreen("sceneEditorMenuLightingDirectional");
-	_leftWindow->getScreen("sceneEditorMenuLightingDirectional")->addButton("color", vec2(0.0f, 0.63f), vec2(GET_WIDTH("Color"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Color", LVC::textColor, LVC::textHoverColor);
-	_leftWindow->getScreen("sceneEditorMenuLightingDirectional")->addButton("position", vec2(0.0f, 0.21f), vec2(GET_WIDTH("Position"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Position", LVC::textColor, LVC::textHoverColor);
-	_leftWindow->getScreen("sceneEditorMenuLightingDirectional")->addButton("intensity", vec2(0.0f, -0.21f), vec2(GET_WIDTH("Intensity"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Intensity", LVC::textColor, LVC::textHoverColor);
-	_leftWindow->getScreen("sceneEditorMenuLightingDirectional")->addButton("back", vec2(0.0f, -0.63f), vec2(GET_WIDTH("Go back"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Go back", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen("sceneEditorMenuLightingDirectional")->addButton("color", vec2(0.0f, 0.7f), vec2(GET_WIDTH("Color"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Color", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen("sceneEditorMenuLightingDirectional")->addButton("position", vec2(0.0f, 0.35f), vec2(GET_WIDTH("Position"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Position", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen("sceneEditorMenuLightingDirectional")->addButton("intensity", vec2(0.0f, 0.0f), vec2(GET_WIDTH("Intensity"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Intensity", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen("sceneEditorMenuLightingDirectional")->addButton("billboardSize", vec2(0.0f, -0.35f), vec2(GET_WIDTH("Billboard size"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Billboard size", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen("sceneEditorMenuLightingDirectional")->addButton("back", vec2(0.0f, -0.7f), vec2(GET_WIDTH("Go back"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Go back", LVC::textColor, LVC::textHoverColor);
 	
 	// Left-viewport: mainWindow - sceneEditorMenuLightingPoint
 	_leftWindow->addScreen("sceneEditorMenuLightingPoint");
@@ -150,7 +151,7 @@ void SceneEditor::load()
 	_fe3d.gfx_enableSkyHDR(0.35f);
 	vec3 camPos = _fe3d.camera_getPosition();
 	_fe3d.gfx_enableShadows(vec3(camPos.x + 100.0f, 75.0f, camPos.z), vec3(camPos.x, 0.0f, camPos.z), 200.0f, 200.0f);
-	_fe3d.gfx_enableLensFlare("User\\Assets\\Textures\\FlareMaps\\flare.png", 0.75f);
+	_fe3d.gfx_enableLensFlare("User\\Assets\\Textures\\FlareMaps\\flare.png", 0.75f, 1.5f);
 	_fe3d.gfx_enableSkyReflections(0.5f);
 	_fe3d.gfx_enableLightMapping();
 	_fe3d.gfx_enableSpecularLighting();
@@ -164,6 +165,16 @@ void SceneEditor::load()
 	_worldEditor.loadSkyEntity();
 	_worldEditor.loadTerrainEntity();
 	_worldEditor.loadWaterEntity();
+
+	// Load scene
+	bool loadedFile = _loadScene();
+
+	// Load lightsource billboard
+	if (!_fe3d.billboardEntity_isExisting("@@lightSource"))
+	{
+		_fe3d.billBoardEntity_add("@@lightSource", "Engine\\Textures\\lightsource.png", _fe3d.gfx_getDirectionalLightingPosition(),
+			vec3(0.0f), vec2(0.0f), true, true, true, true);
+	}
 	
 	// Show sky entity
 	if (_fe3d.skyEntity_isExisting("@sky"))
@@ -183,24 +194,27 @@ void SceneEditor::load()
 		_fe3d.waterEntity_show("@water");
 	}
 
-	// Camera properties
-	float height = 0.0f;
-
-	// Set camera height relative to water size
-	if (_fe3d.waterEntity_isExisting("@water"))
+	// Default camera height
+	if (!loadedFile)
 	{
-		float size = _fe3d.waterEntity_getSize("@water") / 2.0f;
-		height = _fe3d.waterEntity_getPosition("@water").y + (size / 10.0f);
-	}
+		float height = 0.0f;
 
-	// Terrain can overwrite camera height
-	if (_fe3d.terrainEntity_isExisting("@terrain"))
-	{
-		height = _fe3d.terrainEntity_getMaxHeight("@terrain");
-	}
+		// Set camera height relative to water size
+		if (_fe3d.waterEntity_isExisting("@water"))
+		{
+			float size = _fe3d.waterEntity_getSize("@water") / 2.0f;
+			height = _fe3d.waterEntity_getPosition("@water").y + (size / 10.0f);
+		}
 
-	// Load camera
-	_fe3d.camera_setPosition(vec3(0.0f, height, 0.0f));
+		// Terrain can overwrite camera height
+		if (_fe3d.terrainEntity_isExisting("@terrain"))
+		{
+			height = _fe3d.terrainEntity_getMaxHeight("@terrain");
+		}
+
+		// Load camera
+		_fe3d.camera_setPosition(vec3(0.0f, height, 0.0f));
+	}
 
 	// Preview model loading
 	_modelEditor.loadModels();
@@ -224,16 +238,11 @@ void SceneEditor::load()
 	_gui->getGlobalScreen()->addTextfield("selectedBillboardName", vec2(0.0f, 0.85f), vec2(0.5f, 0.1f), "", vec3(1.0f));
 	_gui->getGlobalScreen()->addTextfield("selectedPointlightName", vec2(0.0f, 0.85f), vec2(0.5f, 0.1f), "", vec3(1.0f));
 
-	// Load world file
-	loadWorld();
-
-	_fe3d.billBoardEntity_add("sun", "Engine\\Textures\\lightsource.png", _fe3d.gfx_getDirectionalLightingPosition(), vec3(0.0f), vec2(400.0f), true, true, true, true);
-
 	// Other
 	_isLoaded = true;
 }
 
-void SceneEditor::loadWorld()
+bool SceneEditor::_loadScene()
 {
 	// Error checking
 	if (_currentProjectName == "")
@@ -271,36 +280,36 @@ void SceneEditor::loadWorld()
 				bool isFaceculled, isShadowed, isTransparent, isSpecular, isReflective, isFrozen;
 
 				// Load model data
-				iss >> 
-					modelID >> 
+				iss >>
+					modelID >>
 					position.x >>
 					position.y >>
-					position.z >> 
-					rotation.x >> 
-					rotation.y >> 
+					position.z >>
+					rotation.x >>
+					rotation.y >>
 					rotation.z >>
-					size.x >> 
+					size.x >>
 					size.y >>
-					size.z >> 
+					size.z >>
 					objPath >>
 					diffuseMapPath >>
 					lightMapPath >>
 					reflectionMapPath >>
 					isFrozen >>
-					isFaceculled >> 
-					isShadowed >> 
+					isFaceculled >>
+					isShadowed >>
 					isTransparent >>
 					isReflective >>
 					isSpecular >>
 					specularFactor >>
 					specularIntensity >>
 					lightness >>
-					color.r >> 
+					color.r >>
 					color.g >>
 					color.b >>
-					uvRepeat >> 
+					uvRepeat >>
 					aabbSize.x >>
-					aabbSize.y >> 
+					aabbSize.y >>
 					aabbSize.z;
 
 				// Perform empty string & space conversions
@@ -325,7 +334,7 @@ void SceneEditor::loadWorld()
 
 				// Add the model
 				_placeModel(modelID, position, rotation, size, objPath, diffuseMapPath, lightMapPath, reflectionMapPath, isFrozen,
-					isFaceculled, isShadowed, isTransparent, isReflective, isSpecular, specularFactor, specularIntensity, lightness, 
+					isFaceculled, isShadowed, isTransparent, isReflective, isSpecular, specularFactor, specularIntensity, lightness,
 					color, uvRepeat, aabbSize);
 			}
 			else if (entityType == "BILLBOARD")
@@ -348,14 +357,16 @@ void SceneEditor::loadWorld()
 			{
 				// Values
 				vec3 directionalLightingPosition, directionalLightingColor;
-				float directionalLightingIntensity;
+				float directionalLightingIntensity, billboardSize;
 
 				// Extract
 				iss >> directionalLightingPosition.x >> directionalLightingPosition.y >> directionalLightingPosition.z >>
-					directionalLightingColor.r >> directionalLightingColor.g >> directionalLightingColor.b >> directionalLightingIntensity;
+					directionalLightingColor.r >> directionalLightingColor.g >> directionalLightingColor.b >>
+					directionalLightingIntensity >> billboardSize;
 
 				// Apply
 				_fe3d.gfx_enableDirectionalLighting(directionalLightingPosition, directionalLightingColor, directionalLightingIntensity);
+				_fe3d.billBoardEntity_add("@@lightSource", "Engine\\Textures\\lightsource.png", directionalLightingPosition, vec3(0.0f), vec2(billboardSize), true, true, true, true);
 			}
 			else if (entityType == "POINT")
 			{
@@ -402,6 +413,12 @@ void SceneEditor::loadWorld()
 
 		// Logging
 		_fe3d.logger_throwInfo("Scene data from project \"" + _currentProjectName + "\" loaded!");
+
+		return true;
+	}
+	else
+	{
+		return false;
 	}
 }
 
@@ -506,6 +523,7 @@ void SceneEditor::save()
 		vec3 directionalLightingColor = _fe3d.gfx_getDirectionalLightingColor();
 		vec3 directionalLightingPosition = _fe3d.gfx_getDirectionalLightingPosition();
 		float directionalLightingIntensity = _fe3d.gfx_geDirectionalLightingIntensity();
+		float billboardSize = _fe3d.billboardEntity_getSize("@@lightSource").x;
 
 		file << 
 			"DIRECTIONAL " <<
@@ -515,7 +533,8 @@ void SceneEditor::save()
 			directionalLightingColor.r << " " <<
 			directionalLightingColor.g << " " <<
 			directionalLightingColor.b << " " <<
-			directionalLightingIntensity << std::endl;
+			directionalLightingIntensity << " " <<
+			billboardSize << std::endl;
 
 		// Point lights
 		for (auto& entityID : _fe3d.lightEntity_getAllIDs())

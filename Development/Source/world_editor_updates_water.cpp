@@ -299,7 +299,7 @@ void WorldEditor::_updateWaterMenuOptions()
 			}
 			else if (screen->getButton("transparency")->isHovered())
 			{
-				_gui->getGlobalScreen()->addValueForm("transparency", "Transparency(0 - 10)", transparency * 10.0f, vec2(0.0f), vec2(0.3f, 0.1f));
+				_gui->getGlobalScreen()->addValueForm("transparency", "Transparency (0-100%)", transparency * 100.0f, vec2(0.0f), vec2(0.3f, 0.1f));
 			}
 			else if (screen->getButton("color")->isHovered())
 			{
@@ -309,15 +309,15 @@ void WorldEditor::_updateWaterMenuOptions()
 			}
 			else if (screen->getButton("specularFactor")->isHovered())
 			{
-				_gui->getGlobalScreen()->addValueForm("specularFactor", "Specular factor(0 - 256)", specularFactor, vec2(0.0f), vec2(0.3f, 0.1f));
+				_gui->getGlobalScreen()->addValueForm("specularFactor", "Specular factor (0 - 256)", specularFactor, vec2(0.0f), vec2(0.3f, 0.1f));
 			}
 			else if (screen->getButton("specularIntensity")->isHovered())
 			{
-				_gui->getGlobalScreen()->addValueForm("specularIntensity", "Specular intensity", specularIntensity * 100.0f, vec2(0.0f), vec2(0.3f, 0.1f));
+				_gui->getGlobalScreen()->addValueForm("specularIntensity", "Specular intensity (%)", specularIntensity * 100.0f, vec2(0.0f), vec2(0.3f, 0.1f));
 			}
 			else if (screen->getButton("waveHeight")->isHovered())
 			{
-				_gui->getGlobalScreen()->addValueForm("waveHeight", "Wave height factor", waveHeightFactor * 100.0f, vec2(0.0f), vec2(0.3f, 0.1f));
+				_gui->getGlobalScreen()->addValueForm("waveHeight", "Wave height factor (%)", waveHeightFactor * 100.0f, vec2(0.0f), vec2(0.3f, 0.1f));
 			}
 			else if (screen->getButton("back")->isHovered())
 			{
@@ -342,7 +342,7 @@ void WorldEditor::_updateWaterMenuOptions()
 		// Check if transparency value confirmed
 		if (_gui->getGlobalScreen()->checkValueForm("transparency", transparency))
 		{
-			transparency = std::clamp(transparency / 10.0f, 0.0f, 1.0f);
+			transparency = std::clamp(transparency / 100.0f, 0.0f, 1.0f);
 			_fe3d.waterEntity_setTransparency("@water", transparency);
 		}
 

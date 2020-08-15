@@ -38,16 +38,6 @@ void ShadowRenderer::renderGameEntity(const GameEntity* entity)
 		_shader.uploadUniform("u_maxY", entity->getMaxY());
 		_shader.uploadUniform("u_sampler_diffuseMap", 0);
 
-		// Check if entity is static to the camera view
-		if (entity->isCameraStatic())
-		{
-			_shader.uploadUniform("u_viewMatrix", mat4(mat3(_shaderBus.getViewMatrix())));
-		}
-		else
-		{
-			_shader.uploadUniform("u_viewMatrix", _shaderBus.getViewMatrix());
-		}
-
 		// Bind & render
 		int index = 0;
 		for (auto& buffer : entity->getOglBuffers())

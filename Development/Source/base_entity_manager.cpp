@@ -89,7 +89,7 @@ vector<BaseEntity*> & BaseEntityManager::_getBaseEntities()
 
 BaseEntity * BaseEntityManager::_createEntity(EntityType type, const string& ID)
 {
-	for (auto & entity : _entities)
+	for (auto& entity : _entities)
 	{
 		if (entity->getID() == ID)
 		{

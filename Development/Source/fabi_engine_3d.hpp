@@ -40,7 +40,7 @@ public:
 	void  camera_load(float fov, float nearZ, float farZ, vec3 startPos, float yaw = 0.0f, float pitch = 0.0f);
 	void  camera_enableLookat(vec3 position);
 	void  camera_disableLookat();
-	void  camera_enableFirstPersonView(float mouseSensitivity);
+	void  camera_enableFirstPersonView();
 	void  camera_disableFirstPersonView();
 	void  camera_enableFreeMovement();
 	void  camera_disableFreeMovement();
@@ -475,7 +475,7 @@ public:
 	void gfx_enableSkyHDR(float brightnessFactor);
 	void gfx_enableDOF(float minDistance);
 	void gfx_enableMotionBlur();
-	void gfx_enableLensFlare(const string& texturePath, float intensity);
+	void gfx_enableLensFlare(const string& texturePath, float intensity, float multiplier);
 	void gfx_disableAmbientLighting();
 	void gfx_disableDirectionalLighting();
 	void gfx_disableSpecularLighting();

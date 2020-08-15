@@ -9,6 +9,7 @@ CameraManager::CameraManager(ShaderBus& shaderBus) :
 	_shaderBus(shaderBus)
 {
 	_aspectRatio = float(Config::getInst().getWindowWidth()) / float(Config::getInst().getWindowHeight());
+	_mouseSensitivity = Config::getInst().getMouseSensitivity();
 }
 
 void CameraManager::reset()
@@ -30,7 +31,7 @@ void CameraManager::reset()
 	_yaw = 0.0f;
 	_nearZ = 0.0f;
 	_farZ = 0.0f;
-	_mouseSensitivity = 0.0f;
+	_mouseSensitivity = Config::getInst().getMouseSensitivity();;
 	_mouseOffset = 0.0f;
 
 	// Booleans
@@ -93,13 +94,22 @@ void CameraManager::update(WindowManager & windowManager)
 		// Calculate overall mouse offset
 		_mouseOffset = (xOffset + yOffset) / 2.0f;
 
-		// Calculate pitch & yaw
-		_pitch += yOffset;
-		_yaw = std::fmod((_yaw + xOffset), 360.0f); // Can't be higher than 360 degrees
+		// Calculate yaw & pitch
+		_yawAcceleration += xOffset;
+		_pitchAcceleration += yOffset;
 
-		// So the player cannot unnaturally vertically turn its head 
+		// Yaw can't be higher than 360 degrees
+		_yaw = std::fmod((_yaw), 360.0f);
+
+		// So the player can't unnaturally vertically turn its head 
 		_pitch = std::clamp(_pitch, -89.0f, 89.0f);
 	}
+
+	// Update yaw & pitch movements
+	_yaw += _yawAcceleration;
+	_pitch += _pitchAcceleration;
+	_yawAcceleration *= 0.75f;
+	_pitchAcceleration *= 0.75f;
 
 	// Limit yaw
 	if (_yaw < 0.0f)
@@ -202,10 +212,9 @@ void CameraManager::disableLookat()
 	_isLookatEabled = false;
 }
 
-void CameraManager::enableFirstPersonView(float mouseSensitivity)
+void CameraManager::enableFirstPersonView()
 {
 	_isFirstPersonViewEnabled = true;
-	_mouseSensitivity = mouseSensitivity;
 }
 
 void CameraManager::disableFirstPersonView()

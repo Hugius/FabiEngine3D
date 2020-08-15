@@ -28,6 +28,7 @@ void SceneEditor::update()
 	// Miscellaneous
 	_updateMainMenu();
 	_updateCamera();
+	_updateMiscellaneous();
 }
 
 void SceneEditor::_updateMainMenu()
@@ -89,7 +90,7 @@ void SceneEditor::_updateCamera()
 			if (_fe3d.misc_isMouseInsideViewport())
 			{
 				_fe3d.gfx_enableMotionBlur();
-				_fe3d.camera_enableFirstPersonView(20.0f);
+				_fe3d.camera_enableFirstPersonView();
 				_fe3d.camera_disableLookat();
 				_fe3d.misc_hideCursor();
 			}

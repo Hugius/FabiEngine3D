@@ -141,7 +141,7 @@ void WorldEditor::_updateTerrainMenuMesh()
 			else if (screen->getButton("lightness")->isHovered())
 			{
 				float lightness = _fe3d.terrainEntity_getLightness("@terrain");
-				_gui->getGlobalScreen()->addValueForm("lightness", "Lightness (0-100)", lightness * 100.0f, vec2(0.0f), vec2(0.3f, 0.1f));
+				_gui->getGlobalScreen()->addValueForm("lightness", "Lightness (%)", lightness * 100.0f, vec2(0.0f), vec2(0.3f, 0.1f));
 			}
 			else if (screen->getButton("back")->isHovered())
 			{
@@ -170,7 +170,7 @@ void WorldEditor::_updateTerrainMenuMesh()
 			float lightness = _fe3d.terrainEntity_getLightness("@terrain");
 			if (_gui->getGlobalScreen()->checkValueForm("lightness", lightness))
 			{
-				lightness = std::clamp(lightness / 100.0f, 0.0f, 1.0f);
+				lightness /= 100.0f;
 				_fe3d.terrainEntity_setLightness("@terrain", lightness);
 			}
 		}

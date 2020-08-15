@@ -1,9 +1,11 @@
 #include "gui_entity_manager.hpp"
 
+#include <iostream>
+
 GuiEntityManager::GuiEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, ShaderBus& shaderBus) :
 	BaseEntityManager(objLoader, texLoader, shaderBus)
 {
-
+	
 }
 
 GuiEntity* GuiEntityManager::getEntity(const string& ID)

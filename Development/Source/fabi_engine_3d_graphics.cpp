@@ -98,11 +98,12 @@ void FabiEngine3D::gfx_enableMotionBlur()
 	_core->_shaderBus.setMotionBlurEnabled(true);
 }
 
-void FabiEngine3D::gfx_enableLensFlare(const string& texturePath, float intensity)
+void FabiEngine3D::gfx_enableLensFlare(const string& texturePath, float intensity, float multiplier)
 {
 	_core->_shaderBus.setLensFlareMap(_core->_texLoader.getTexture(texturePath, false, false));
 	_core->_shaderBus.setLensFlareEnabled(true);
 	_core->_shaderBus.setLensFlareIntensity(intensity);
+	_core->_shaderBus.setLensFlareMultiplier(multiplier);
 }
 
 void FabiEngine3D::gfx_disableAmbientLighting()

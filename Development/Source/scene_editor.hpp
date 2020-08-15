@@ -28,7 +28,6 @@ public:
 	void unload();
 	void update();
 	void setCurrentProjectName(const string&projectName);
-	void loadWorld();
 
 	bool isLoaded();
 
@@ -57,8 +56,10 @@ private:
 	void _updateMainMenu();
 	void _updateMainSettingsMenu();
 	void _updateCamera();
+	void _updateMiscellaneous();
 
 	// Miscellaneous
+	bool _loadScene();
 	void _placeModel(const string& modelID, string modelName, vec3 position, vec3 rotation, vec3 size);
 	void _placeModel(const string& modelID, vec3 position, vec3 rotation, vec3 size, string objPath, string diffuseMapPath, 
 		string lightMapPath, string reflectionMapPath, bool isFrozen, bool isFaceCulled, bool isShadowed, bool isTransparent, bool isReflective,

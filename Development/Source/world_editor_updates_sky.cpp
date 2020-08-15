@@ -197,7 +197,7 @@ void WorldEditor::_updateSkyMenuOptions()
 			}
 			else if (screen->getButton("lightness")->isHovered())
 			{
-				_gui->getGlobalScreen()->addValueForm("lightness", "lightness", skyLightness * 100.0f, vec2(0.0f), vec2(0.3f, 0.1f));
+				_gui->getGlobalScreen()->addValueForm("lightness", "Lightness (%)", skyLightness * 100.0f, vec2(0.0f), vec2(0.3f, 0.1f));
 			}
 			else if (screen->getButton("color")->isHovered())
 			{
@@ -255,7 +255,7 @@ void WorldEditor::_updateSkyCamera()
 		if (_fe3d.misc_isMouseInsideViewport())
 		{
 			_fe3d.gfx_enableMotionBlur();
-			_fe3d.camera_enableFirstPersonView(20.0f);
+			_fe3d.camera_enableFirstPersonView();
 			_fe3d.camera_disableLookat();
 			_fe3d.misc_hideCursor();
 		}

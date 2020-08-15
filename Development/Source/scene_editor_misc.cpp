@@ -211,3 +211,16 @@ void SceneEditor::_handleValueChanging(const string& screenID, string buttonID, 
 		_rightWindow->getScreen(screenID)->getWriteField(wfID)->setTextContent(std::to_string(static_cast<int>(value * multiplier)));
 	}
 }
+
+void SceneEditor::_updateMiscellaneous()
+{
+	// Update bounding box visibility
+	if (_fe3d.input_getKeyToggled(Input::KEY_B))
+	{
+		_fe3d.misc_enableAabbFrameRendering();
+	}
+	else
+	{
+		_fe3d.misc_disableAabbFrameRendering();
+	}
+}

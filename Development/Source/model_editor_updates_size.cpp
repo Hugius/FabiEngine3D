@@ -5,31 +5,16 @@
 void ModelEditor::_updateModelEditingSize()
 {
 	auto screen = _leftWindow->getScreen("modelEditorMenuSize");
+	vec3 currentSize = _fe3d.gameEntity_getSize(_currentModelName);
 	
 	// GUI management 
 	if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
 	{
 		if (screen->getButton("setSize")->isHovered())
 		{
-			_modelResizingEnabled = true;
-
-			// Add textfields and writefields
-			_gui->getGlobalScreen()->addTextfield("modelSizeX", vec2(-0.3f, 0.1f), vec2(0.025f, 0.1f), "X", vec3(1.0f));
-			_gui->getGlobalScreen()->addTextfield("modelSizeY", vec2(0.0f, 0.1f), vec2(0.025f, 0.1f), "Y", vec3(1.0f));
-			_gui->getGlobalScreen()->addTextfield("modelSizeZ", vec2(0.3f, 0.1f), vec2(0.025f, 0.1f), "Z", vec3(1.0f));
-			_gui->getGlobalScreen()->addWriteField("modelSizeX", vec2(-0.3f, 0.0f), vec2(0.2f, 0.1f), vec3(0.25f), vec3(0.5f), vec3(1.0f), vec3(0.0f), 0, 1, 1, 1, 0);
-			_gui->getGlobalScreen()->addWriteField("modelSizeY", vec2(0.0f, 0.0f), vec2(0.2f, 0.1f), vec3(0.25f), vec3(0.5f), vec3(1.0f), vec3(0.0f), 0, 1, 1, 1, 0);
-			_gui->getGlobalScreen()->addWriteField("modelSizeZ", vec2(0.3f, 0.0f), vec2(0.2f, 0.1f), vec3(0.25f), vec3(0.5f), vec3(1.0f), vec3(0.0f), 0, 1, 1, 1, 0);
-			_gui->getGlobalScreen()->addButton("done", vec2(0.0f, -0.2f), vec2(0.15f, 0.1f), vec3(0.0f, 0.5f, 0.0f), vec3(0.0f, 1.0f, 0.0f), "Done", vec3(1.0f), vec3(0.0f));
-
-			// Set default model size
-			vec3 currentSize = _fe3d.gameEntity_getSize(_currentModelName);
-			_gui->getGlobalScreen()->getWriteField("modelSizeX")->setTextContent(std::to_string(int(currentSize.x * 10.0f)));
-			_gui->getGlobalScreen()->getWriteField("modelSizeY")->setTextContent(std::to_string(int(currentSize.y * 10.0f)));
-			_gui->getGlobalScreen()->getWriteField("modelSizeZ")->setTextContent(std::to_string(int(currentSize.z * 10.0f)));
-
-			// Set GUI focus
-			_gui->getGlobalScreen()->setFocus(true);
+			_gui->getGlobalScreen()->addValueForm("sizeX", "X", currentSize.x * 100.0f, vec2(-0.25f, 0.0f), vec2(0.2f, 0.1f));
+			_gui->getGlobalScreen()->addValueForm("sizeY", "Y", currentSize.y * 100.0f, vec2(0.0f, 0.0f), vec2(0.2f, 0.1f));
+			_gui->getGlobalScreen()->addValueForm("sizeZ", "Z", currentSize.z * 100.0f, vec2(0.25f, 0.0f), vec2(0.2f, 0.1f));
 		}
 		else if (screen->getButton("toggleResizeMesh")->isHovered())
 		{
@@ -88,15 +73,15 @@ void ModelEditor::_updateModelEditingSize()
 		switch (_modelResizeDirection)
 		{
 		case Direction::X:
-			newSize.x *= (1.0f + (scrollSpeed));
+			newSize.x += scrollSpeed;
 			break;
 
 		case Direction::Y:
-			newSize.y *= (1.0f + (scrollSpeed));
+			newSize.y += scrollSpeed;
 			break;
 
 		case Direction::Z:
-			newSize.z *= (1.0f + (scrollSpeed));
+			newSize.z += scrollSpeed;
 			break;
 		}
 
@@ -108,51 +93,27 @@ void ModelEditor::_updateModelEditingSize()
 	if (_meshResizingToggled)
 	{
 		float scrollSpeed = float(_fe3d.input_getMouseWheelY()) * 0.05f;
-		_fe3d.gameEntity_setSize(_currentModelName, _fe3d.gameEntity_getSize(_currentModelName) * (1.0f + (scrollSpeed)));
+		_fe3d.gameEntity_setSize(_currentModelName, _fe3d.gameEntity_getSize(_currentModelName) + vec3(scrollSpeed));
 	}
 
-	// Update model resizing through buttons
-	if (_modelResizingEnabled)
+	// Update model size X
+	if (_gui->getGlobalScreen()->checkValueForm("sizeX", currentSize.x))
 	{
-		// Current model size
-		vec3 newSize = _fe3d.gameEntity_getSize(_currentModelName);
+		currentSize.x /= 100.0f;
+		_fe3d.gameEntity_setSize(_currentModelName, currentSize);
+	}
 
-		// X
-		if (_gui->getGlobalScreen()->getWriteField("modelSizeX")->getTextContent() != "")
-		{
-			newSize.x = float(stoi(_gui->getGlobalScreen()->getWriteField("modelSizeX")->getTextContent())) / 10.0f;
-		}
+	// Update model size Y
+	if (_gui->getGlobalScreen()->checkValueForm("sizeY", currentSize.y))
+	{
+		currentSize.y /= 100.0f;
+		_fe3d.gameEntity_setSize(_currentModelName, currentSize);
+	}
 
-		// Y
-		if (_gui->getGlobalScreen()->getWriteField("modelSizeY")->getTextContent() != "")
-		{
-			newSize.y = float(stoi(_gui->getGlobalScreen()->getWriteField("modelSizeY")->getTextContent())) / 10.0f;
-		}
-
-		// Z
-		if (_gui->getGlobalScreen()->getWriteField("modelSizeZ")->getTextContent() != "")
-		{
-			newSize.z = float(stoi(_gui->getGlobalScreen()->getWriteField("modelSizeZ")->getTextContent())) / 10.0f;
-		}
-
-		// Set new model size
-		_fe3d.gameEntity_setSize(_currentModelName, newSize);
-
-		// Done button
-		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
-		{
-			if (_gui->getGlobalScreen()->getButton("done")->isHovered())
-			{
-				_modelResizingEnabled = false;
-				_gui->getGlobalScreen()->deleteTextfield("modelSizeX");
-				_gui->getGlobalScreen()->deleteWriteField("modelSizeX");
-				_gui->getGlobalScreen()->deleteTextfield("modelSizeY");
-				_gui->getGlobalScreen()->deleteWriteField("modelSizeY");
-				_gui->getGlobalScreen()->deleteTextfield("modelSizeZ");
-				_gui->getGlobalScreen()->deleteWriteField("modelSizeZ");
-				_gui->getGlobalScreen()->deleteButton("done");
-				_gui->getGlobalScreen()->setFocus(false);
-			}
-		}
+	// Update model size Z
+	if (_gui->getGlobalScreen()->checkValueForm("sizeZ", currentSize.z))
+	{
+		currentSize.z /= 100.0f;
+		_fe3d.gameEntity_setSize(_currentModelName, currentSize);
 	}
 }

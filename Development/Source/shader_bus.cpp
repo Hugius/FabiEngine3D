@@ -150,6 +150,11 @@ void ShaderBus::setLensFlareIntensity(float val)
 	_lensFlareIntensity = val;
 }
 
+void ShaderBus::setLensFlareMultiplier(float val)
+{
+	_lensFlareMultiplier = val;
+}
+
 void ShaderBus::setAmbientLightIntensity(float val)
 {
 	_ambientLightingIntensity = val;
@@ -458,6 +463,11 @@ const float ShaderBus::getLensFlareAlpha() const
 const float ShaderBus::getLensFlareIntensity() const
 {
 	return _lensFlareIntensity;
+}
+
+const float ShaderBus::getLensFlareMultiplier() const
+{
+	return _lensFlareMultiplier;
 }
 
 const float ShaderBus::getAmbientLightingIntensity() const

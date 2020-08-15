@@ -26,6 +26,7 @@ Config::Config()
 	_processOption(file, _refractionQuality);
 	_processOption(file, _reflectionQuality);
 	_processOption(file, _maxAudioChannels);
+	_processOption(file, _mouseSensitivity);
 	
 	// Set window dimensions
 	SDL_DisplayMode DM;
@@ -129,6 +130,11 @@ const int Config::getRefractionQuality() const
 const int Config::getMaxAudioChannels() const
 {
 	return _maxAudioChannels;
+}
+
+const float Config::getMouseSensitivity() const
+{
+	return _mouseSensitivity;
 }
 
 const ivec2 Config::getVpPos() const

@@ -32,6 +32,7 @@ public:
 	const int   getRefractionQuality() const;
 	const int   getReflectionQuality() const;
 	const int   getMaxAudioChannels()  const;
+	const float getMouseSensitivity()  const;
 	const ivec2 getVpPos()			   const;
 	const ivec2 getVpSize()			   const;
 	const float getUpdateMsPerFrame()  const;
@@ -53,6 +54,7 @@ private:
 	int   _refractionQuality = 0;
 	int   _reflectionQuality = 0;
 	int   _maxAudioChannels = 0;
+	float _mouseSensitivity = 0.0f;
 	ivec2 _viewportPosition = ivec2(0);
 	ivec2 _viewportSize = ivec2(0);
 	float _updateMsPerFrame = 0.0f;

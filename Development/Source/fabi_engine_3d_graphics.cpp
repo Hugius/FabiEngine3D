@@ -42,12 +42,7 @@ void FabiEngine3D::gfx_enableSkyReflections(float factor)
 void FabiEngine3D::gfx_enableSceneReflections(float factor)
 {
 	// Check if water is already using reflection graphics
-	if ((_core->_shaderBus.isWaterEffectsEnabled() && _core->_waterEntityManager.getSelectedWater() != nullptr)
-		&& _core->_waterEntityManager.getSelectedWater()->isReflective())
-	{
-		Logger::getInst().throwWarning("Cannot enable screen reflection graphics; \"water effects\" is currently using it!");
-	}
-	else
+	if (!_core->_shaderBus.isWaterEffectsEnabled())
 	{
 		_core->_shaderBus.setSceneReflectionsEnabled(true);
 		_core->_shaderBus.setSceneReflectionFactor(factor);

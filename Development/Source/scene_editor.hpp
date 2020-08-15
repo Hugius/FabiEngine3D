@@ -57,7 +57,6 @@ private:
 	void _updateMainMenu();
 	void _updateMainSettingsMenu();
 	void _updateCamera();
-	void _updateMiscellaneous();
 
 	// Miscellaneous
 	void _placeModel(const string& modelID, string modelName, vec3 position, vec3 rotation, vec3 size);

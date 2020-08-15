@@ -77,6 +77,23 @@ void ModelEditor::_updateModelEditingLighting()
 		_fe3d.gameEntity_setLightness(_currentModelName, lightness);
 	}
 
+	// Update reflective button hoverability
+	screen->getButton("isReflectiveSurface")->setHoverable(false);
+	bool hoverable = true;
+	for (auto& entityID : _fe3d.gameEntity_getAllIDs())
+	{
+		// If model is reflective
+		if (_fe3d.gameEntity_isSceneReflective(entityID))
+		{
+			// If current model is reflective, it's allowed to change
+			if (entityID != _currentModelName)
+			{
+				hoverable = false;
+			}
+		}
+	}
+	screen->getButton("isReflectiveSurface")->setHoverable(hoverable);
+	
 	// Update specular buttons hoverability
 	screen->getButton("specularFactor")->setHoverable(_fe3d.gameEntity_isSpecularLighted(_currentModelName));
 	screen->getButton("specularIntensity")->setHoverable(_fe3d.gameEntity_isSpecularLighted(_currentModelName));

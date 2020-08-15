@@ -1,6 +1,6 @@
 window_fullscreen  = false
 msaa_quality       = 16
 shadow_quality     = 4096
-refraction_quality = 1024
-reflection_quality = 1024
+refraction_quality = 512
+reflection_quality = 512
 max_audio_channels = 64

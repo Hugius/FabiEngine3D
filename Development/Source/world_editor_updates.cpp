@@ -15,7 +15,7 @@ void WorldEditor::update()
 			_fe3d.camera_disableLookat();
 
 			// Select the default sky
-			_fe3d.skyEntity_select("@@sky");
+			_fe3d.skyEntity_select("@@defaultSky");
 
 			// Hide sky
 			if (_fe3d.skyEntity_isExisting("@sky"))

@@ -16,7 +16,7 @@ void WorldEditor::_updateSkyMenuMain()
 		}
 		else // Otherwise just show default sky
 		{
-			_fe3d.skyEntity_select("@@sky");
+			_fe3d.skyEntity_select("@@defaultSky");
 		}
 
 		// Hide terrain

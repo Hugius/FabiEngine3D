@@ -15,7 +15,7 @@ void WorldEditor::_updateWaterMenuMain()
 		}
 		else // Otherwise just show default sky
 		{
-			_fe3d.skyEntity_select("@@sky");
+			_fe3d.skyEntity_select("@@defaultSky");
 		}
 
 		// Show sky

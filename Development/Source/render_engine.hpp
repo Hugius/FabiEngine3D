@@ -69,7 +69,7 @@ private:
 	OpenGLFramebuffer _sceneReflectionFramebuffer;
 	OpenGLFramebuffer _sceneRefractionFramebuffer;
 	OpenGLFramebuffer _bloomHdrFramebuffer;
-	OpenGLFramebuffer _bloomDofAdditionFramebuffer;
+	OpenGLFramebuffer _postProcessingFramebuffer;
 	OpenGLFramebuffer _shadowFramebuffer;
 	OpenGLFramebuffer _dofDepthFramebuffer;
 	OpenGLFramebuffer _waterDepthFramebuffer;

@@ -12,24 +12,6 @@ void SceneEditor::setCurrentProjectName(const string& projectName)
 	_currentProjectName = projectName;
 }
 
-void SceneEditor::_updateMiscellaneous()
-{
-	if (_isLoaded)
-	{
-		_fe3d.input_setKeyTogglingLocked(_gui->getGlobalScreen()->isFocused() || !_fe3d.misc_isMouseInsideViewport());
-
-		// Update bounding box visibility
-		if (_fe3d.input_getKeyToggled(Input::KEY_B))
-		{
-			_fe3d.misc_enableAabbFrameRendering();
-		}
-		else
-		{
-			_fe3d.misc_disableAabbFrameRendering();
-		}
-	}
-}
-
 void SceneEditor::_selectModel(const string& modelID)
 {
 	_dontResetSelectedModel = true;

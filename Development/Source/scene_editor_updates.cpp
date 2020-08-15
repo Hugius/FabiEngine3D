@@ -28,7 +28,6 @@ void SceneEditor::update()
 	// Miscellaneous
 	_updateMainMenu();
 	_updateCamera();
-	_updateMiscellaneous();
 }
 
 void SceneEditor::_updateMainMenu()

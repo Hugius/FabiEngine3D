@@ -113,11 +113,13 @@ void ModelEditor::_updateEditingScreen()
 						_fe3d.gameEntity_hide(_currentModelName);
 					}
 
+					// Reset variables and go back to last screen
 					firstTime = true;
 					_modelEditingEnabled = false;
 					_currentModelName = "";
 					_leftWindow->setActiveScreen("modelEditorMenuMain");
 					_fe3d.textEntity_hide(_gui->getGlobalScreen()->getTextfield("selectedModelName")->getEntityID());
+					_fe3d.gameEntity_setSceneReflective("@@grid", true);
 				}
 			}
 
@@ -211,15 +213,22 @@ void ModelEditor::_updateModelChoosing()
 			{
 				if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT)) // LMB pressed
 				{
+					// Select selected model
 					_currentModelName = "@" + selectedButtonID;
 					_modelChoosingEnabled = false;
 					hoveredModelID = "";
 					_gui->getGlobalScreen()->removeChoiceForm("modelList");
+
+					// Only 1 game entity can be reflective
+					_fe3d.gameEntity_setSceneReflective("@@grid", !_fe3d.gameEntity_isSceneReflective(_currentModelName));
 				}
 				else
 				{
 					// Set new hovered model
 					hoveredModelID = "@" + selectedButtonID;
+
+					// Only 1 game entity can be reflective
+					_fe3d.gameEntity_setSceneReflective("@@grid", !_fe3d.gameEntity_isSceneReflective(hoveredModelID));
 				}
 			}
 			else if (_gui->getGlobalScreen()->isChoiceFormCancelled("modelList")) // Cancelled choosing
@@ -232,6 +241,7 @@ void ModelEditor::_updateModelChoosing()
 			else // Nothing hovered
 			{
 				hoveredModelID = "";
+				_fe3d.gameEntity_setSceneReflective("@@grid", true);
 			}
 
 			// Show hovered model

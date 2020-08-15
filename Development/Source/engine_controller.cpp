@@ -43,17 +43,28 @@ void EngineController::_initializeMiscellaneous()
 	gfx_enableBloom(1.0f, 0.0f, 10);
 
 	// Default cube map
-	string path = "Engine\\Textures\\";
-	skyEntity_add("@@sky");
-	skyEntity_setDiffuseMaps("@@sky", { 
-		path + "right.png", 
-		path + "left.png", 
-		path + "top.png", 
-		path + "bottom.png", 
-		path + "front.png", 
-		path + "back.png" });
-	skyEntity_select("@@sky");
-	skyEntity_setLightness("@@sky", 0.65f);
+	string textureFolderPath = "Engine\\Textures\\";
+	skyEntity_add("@@defaultSky");
+	skyEntity_setDiffuseMaps("@@defaultSky", { 
+		textureFolderPath + "default_right.png", 
+		textureFolderPath + "default_left.png", 
+		textureFolderPath + "default_top.png", 
+		textureFolderPath + "default_bottom.png", 
+		textureFolderPath + "default_front.png", 
+		textureFolderPath + "default_back.png" });
+	skyEntity_select("@@defaultSky");
+	skyEntity_setLightness("@@defaultSky", 0.65f);
+
+	// Editor cube map
+	skyEntity_add("@@editorSky");
+	skyEntity_setDiffuseMaps("@@editorSky", {
+		textureFolderPath + "editor_right.png",
+		textureFolderPath + "editor_left.png",
+		textureFolderPath + "editor_top.png",
+		textureFolderPath + "editor_bottom.png",
+		textureFolderPath + "editor_front.png",
+		textureFolderPath + "editor_back.png" });
+	skyEntity_setLightness("@@editorSky", 0.65f);
 
 	// Default camera
 	camera_load(90.0f, 0.1f, 10000.0f, vec3(0.0f));
@@ -72,5 +83,25 @@ void EngineController::_updateMiscellaneous()
 	else
 	{
 		misc_disableWireframeRendering();
+	}
+
+	// Update debug rendering
+	if (input_getKeyToggled(Input::KEY_H))
+	{
+		misc_enableDebugRendering();
+	}
+	else
+	{
+		misc_disableDebugRendering();
+	}
+
+	// Update bounding box visibility
+	if (input_getKeyToggled(Input::KEY_B))
+	{
+		misc_enableAabbFrameRendering();
+	}
+	else
+	{
+		misc_disableAabbFrameRendering();
 	}
 }

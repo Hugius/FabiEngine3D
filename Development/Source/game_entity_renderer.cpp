@@ -56,7 +56,7 @@ void GameEntityRenderer::bind()
 
 	// Texture binding
 	glActiveTexture(GL_TEXTURE3);
-	glBindTexture(GL_TEXTURE_2D, _shaderBus.getSceneRefractionMap());
+	glBindTexture(GL_TEXTURE_2D, _shaderBus.getSceneReflectionMap());
 	glActiveTexture(GL_TEXTURE4);
 	glBindTexture(GL_TEXTURE_2D, _shaderBus.getShadowMap());
 	glActiveTexture(GL_TEXTURE5);

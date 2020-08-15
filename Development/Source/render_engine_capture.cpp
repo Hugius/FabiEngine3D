@@ -31,19 +31,33 @@ void RenderEngine::_captureSceneReflections(CameraManager& camera)
 		_sceneReflectionFramebuffer.bind();
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+		// Save and disable reflective entity
+		string reflectiveEntityID;
+		if (!waterReflectionEnabled)
+		{
+			for (auto& gameEntity : _entityBus->getGameEntities())
+			{
+				if (gameEntity->isSceneReflective() && gameEntity->isVisible())
+				{
+					gameEntity->setVisible(false);
+					reflectiveEntityID = gameEntity->getID();
+				}
+			}
+		}
+
 		// Change camera angle
 		vec3 cameraPos = camera.getPosition();
 		vec3 newCameraPos = vec3(cameraPos.x, cameraPos.y - (cameraDistance * 2.0f), cameraPos.z);
 		camera.setPosition(newCameraPos);
 		camera.invertPitch();
 		camera.updateMatrices();
-		
+
 		// Save reflection exceptions
-		bool shadowsEnabled = _shaderBus.isShadowsEnabled();
-		float oldLightness = _entityBus->getSkyEntity()->getLightness();
+		bool shadowsEnabled = _shaderBus.isShadowsEnabled(); // Shadows are performance-heavy with little visual impact on a reflection
+		float oldLightness = _entityBus->getSkyEntity()->getLightness(); // SkyHDR must not be in reflections
 		_shaderBus.setShadowsEnabled(false);
 
-		// I know this is considered REALLY bad practice, but this is the only exception in the entire code-base
+		// I know this is considered bad practice, but this is the only exception in the entire code-base
 		const_cast<SkyEntity*>(_entityBus->getSkyEntity())->setLightness(_entityBus->getSkyEntity()->getOriginalLightness());
 
 		// Render scene
@@ -62,6 +76,18 @@ void RenderEngine::_captureSceneReflections(CameraManager& camera)
 		camera.invertPitch();
 		camera.updateMatrices();
 
+		// Restore reflective entity
+		if (!waterReflectionEnabled)
+		{
+			for (auto& gameEntity : _entityBus->getGameEntities())
+			{
+				if (gameEntity->getID() == reflectiveEntityID)
+				{
+					gameEntity->setVisible(true);
+				}
+			}
+		}
+
 		// Stop capturing reflection
 		_sceneReflectionFramebuffer.unbind();
 		glDisable(GL_CLIP_DISTANCE0);
@@ -74,39 +100,18 @@ void RenderEngine::_captureSceneReflections(CameraManager& camera)
 // Capturing water refraction texture
 void RenderEngine::_captureSceneRefractions()
 {
-	if (_entityBus->getWaterEntity() != nullptr && _shaderBus.isWaterEffectsEnabled() && _entityBus->getWaterEntity()->isRefractive())
+	bool waterRefractionEnabled = (_shaderBus.isWaterEffectsEnabled() &&_entityBus->getWaterEntity() != nullptr) && 
+		_entityBus->getWaterEntity()->isRefractive();
+
+	if (waterRefractionEnabled)
 	{
 		// Bind
 		_sceneRefractionFramebuffer.bind();
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		// Save and disable reflective entities
-		vector<string> reflectiveEntityIDs;
-		for (auto& gameEntity : _entityBus->getGameEntities())
-		{
-			if (gameEntity->isSceneReflective() && gameEntity->isVisible())
-			{
-				gameEntity->setVisible(false);
-				reflectiveEntityIDs.push_back(gameEntity->getID());
-			}
-		}
-
 		// Render scene
-		_renderSkyEntity();
 		_renderTerrainEntity();
 		_renderGameEntities();
-
-		// Restore reflective entities
-		for (auto& reflectiveEntityID : reflectiveEntityIDs)
-		{
-			for (auto& gameEntity : _entityBus->getGameEntities())
-			{
-				if (gameEntity->getID() == reflectiveEntityID)
-				{
-					gameEntity->setVisible(true);
-				}
-			}
-		}
 
 		// Unbind
 		_sceneRefractionFramebuffer.unbind();
@@ -230,13 +235,13 @@ void RenderEngine::_captureDofBlur()
 
 void RenderEngine::_capturePostProcessing()
 {
-	// Apply bloom and DOF on scene texture
-	_bloomDofAdditionFramebuffer.bind();
+	// Apply bloom, DOF & lens-flare on scene texture
+	_postProcessingFramebuffer.bind();
 	_postRenderer.bind();
 	_postRenderer.render(_finalSurface);
 	_postRenderer.unbind();
-	_bloomDofAdditionFramebuffer.unbind();
-	_shaderBus.setPostProcessedSceneMap(_bloomDofAdditionFramebuffer.getTexture(0));
+	_postProcessingFramebuffer.unbind();
+	_shaderBus.setPostProcessedSceneMap(_postProcessingFramebuffer.getTexture(0));
 }
 
 void RenderEngine::_captureMotionBlur(CameraManager& camera, ivec2 mousePos)

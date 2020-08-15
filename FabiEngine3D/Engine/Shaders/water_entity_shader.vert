@@ -65,13 +65,13 @@ void main()
 	}
 
 	// Camera spaces
-	vec4 worldSpace = vec4(newPos, 1.0);
-	vec4 clipSpace  = u_projectionMatrix * u_viewMatrix * vec4(newPos, 1.0);
+	vec4 worldSpacePos = vec4(newPos, 1.0);
+	vec4 clipSpacePos  = u_projectionMatrix * u_viewMatrix * vec4(newPos, 1.0);
 
 	// GLSL variables
-	gl_Position = clipSpace;
+	gl_Position = clipSpacePos;
 
 	// Out variables
-	f_pos  = worldSpace.xyz;
-	f_clip = clipSpace;
+	f_pos  = worldSpacePos.xyz;
+	f_clip = clipSpacePos;
 }

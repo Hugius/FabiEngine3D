@@ -5,7 +5,7 @@
 #include "texture_loader.hpp"
 #include "audio_loader.hpp"
 #include "input_handler.hpp"
-#include "shader_bus.hpp"
+#include "render_bus.hpp"
 #include "window_manager.hpp"
 #include "camera_manager.hpp"
 #include "render_engine.hpp"
@@ -41,7 +41,7 @@ private:
 	TextureLoader          _texLoader;
 	AudioLoader			   _audioLoader;
 	InputHandler           _inputHandler;
-	ShaderBus			   _shaderBus;
+	RenderBus			   _renderBus;
 	CameraManager          _cameraManager;
 	RenderEngine           _renderEngine;
 	SkyEntityManager       _skyEntityManager;

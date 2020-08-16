@@ -1,7 +1,7 @@
 #pragma once
 
 #include "window_manager.hpp"
-#include "shader_bus.hpp"
+#include "render_bus.hpp"
 
 #include <GLM\\glm.hpp>
 
@@ -11,7 +11,7 @@ using glm::mat4;
 class CameraManager final
 {
 public:
-	CameraManager(ShaderBus& shaderBus);
+	CameraManager(RenderBus& renderBus);
 	~CameraManager() = default;
 
 	void reset();
@@ -63,7 +63,7 @@ public:
 	const bool   isFreeMovementEnabled()	const;
 
 private:
-	ShaderBus& _shaderBus;
+	RenderBus& _renderBus;
 
 	// Matrices
 	mat4 _viewMatrix = mat4(1.0f);

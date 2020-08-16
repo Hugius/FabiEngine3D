@@ -2,8 +2,8 @@
 
 #include <iostream>
 
-GameEntityManager::GameEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, ShaderBus& shaderBus) :
-	BaseEntityManager(objLoader, texLoader, shaderBus)
+GameEntityManager::GameEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, RenderBus& renderBus) :
+	BaseEntityManager(objLoader, texLoader, renderBus)
 {
 
 }
@@ -123,10 +123,10 @@ void GameEntityManager::update()
 			entity->updateModelMatrix();
 
 			// Update reflection height
-			if (entity->isSceneReflective() && _shaderBus.isSceneReflectionsEnabled())
+			if (entity->isSceneReflective() && _renderBus.isSceneReflectionsEnabled())
 			{
-				_shaderBus.setSceneReflectionHeight(entity->getTranslation().y);
-				_shaderBus.setSceneReflectionOffset(0.0000001f);
+				_renderBus.setSceneReflectionHeight(entity->getTranslation().y);
+				_renderBus.setSceneReflectionOffset(0.0000001f);
 			}
 		}
 	}

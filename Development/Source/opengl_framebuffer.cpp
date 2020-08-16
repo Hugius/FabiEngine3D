@@ -1,7 +1,7 @@
 #include "opengl_framebuffer.hpp"
 #include "logger.hpp"
 #include "configuration.hpp"
-#include "shader_bus.hpp"
+#include "render_bus.hpp"
 
 #include <vector>
 #include <GLEW\\glew.h>

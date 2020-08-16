@@ -1,9 +1,9 @@
 #include "aabb_entity_manager.hpp"
-#include "shader_bus.hpp"
+#include "render_bus.hpp"
 #include "logger.hpp"
 
-AabbEntityManager::AabbEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, ShaderBus& shaderBus) :
-	BaseEntityManager(objLoader, texLoader, shaderBus)
+AabbEntityManager::AabbEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, RenderBus& renderBus) :
+	BaseEntityManager(objLoader, texLoader, renderBus)
 {
 	
 }

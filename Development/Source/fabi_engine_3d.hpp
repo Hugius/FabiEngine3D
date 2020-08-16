@@ -575,6 +575,7 @@ public:
 	}
 
 	// Miscellaneous interface - setters
+	void misc_setCustomCursor(const string& guiEntityID);
 	void misc_enableWireframeRendering();
 	void misc_disableWireframeRendering();
 	void misc_enableShadowFrameRendering();

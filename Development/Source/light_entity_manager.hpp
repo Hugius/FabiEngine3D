@@ -5,7 +5,7 @@
 class LightEntityManager final : public BaseEntityManager
 {
 public:
-	LightEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, ShaderBus& shaderBus);
+	LightEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, RenderBus& renderBus);
 	~LightEntityManager() = default;
 
 	LightEntity * getEntity(const string& ID) override;

@@ -9,8 +9,8 @@ void GuiEntityRenderer::bind()
 
 	_shader.bind();
 
-	_shader.uploadUniform("u_nearZ", _shaderBus.getNearZ());
-	_shader.uploadUniform("u_farZ", _shaderBus.getFarZ());
+	_shader.uploadUniform("u_nearZ", _renderBus.getNearZ());
+	_shader.uploadUniform("u_farZ", _renderBus.getFarZ());
 }
 
 void GuiEntityRenderer::unbind()

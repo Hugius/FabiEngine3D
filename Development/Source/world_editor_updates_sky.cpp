@@ -257,13 +257,13 @@ void WorldEditor::_updateSkyCamera()
 			_fe3d.gfx_enableMotionBlur();
 			_fe3d.camera_enableFirstPersonView();
 			_fe3d.camera_disableLookat();
-			_fe3d.misc_hideCursor();
+			_fe3d.guiEntity_hide("@@cursor");
 		}
 	}
 	else
 	{
 		_fe3d.gfx_disableMotionBlur();
 		_fe3d.camera_disableFirstPersonView();
-		_fe3d.misc_showCursor();
+		_fe3d.guiEntity_show("@@cursor");
 	}
 }

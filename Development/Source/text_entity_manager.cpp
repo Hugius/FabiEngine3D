@@ -1,7 +1,7 @@
 #include "text_entity_manager.hpp"
 
-TextEntityManager::TextEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, ShaderBus& shaderBus) :
-	BaseEntityManager(objLoader, texLoader, shaderBus)
+TextEntityManager::TextEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, RenderBus& renderBus) :
+	BaseEntityManager(objLoader, texLoader, renderBus)
 {
 
 }

@@ -11,7 +11,7 @@ using glm::vec4;
 class MousePicker final
 {
 public:
-	MousePicker(ShaderBus& shaderBus);
+	MousePicker(RenderBus& renderBus);
 	~MousePicker() = default;
 
 	void update(ivec2 mousePos, TerrainEntityManager& terrainManager);
@@ -22,7 +22,7 @@ public:
 	vec3 getTerrainPoint();
 
 private:
-	ShaderBus& _shaderBus;
+	RenderBus& _renderBus;
 
 	vec3 _getMouseRay(ivec2 mousePos);
 	vec2 _converToNDC(ivec2 val);

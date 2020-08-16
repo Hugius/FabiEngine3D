@@ -130,9 +130,6 @@
     <ClCompile Include="Source\render_engine_draw.cpp">
       <Filter>src\Rendering System\Core</Filter>
     </ClCompile>
-    <ClCompile Include="Source\shader_bus.cpp">
-      <Filter>src\Rendering System\Miscellaneous</Filter>
-    </ClCompile>
     <ClCompile Include="Source\shadow_manager.cpp">
       <Filter>src\Rendering System\Miscellaneous</Filter>
     </ClCompile>
@@ -391,6 +388,9 @@
     <ClCompile Include="Source\model_editor_updates_lighting.cpp">
       <Filter>src\Editor System\Model Editor</Filter>
     </ClCompile>
+    <ClCompile Include="Source\render_bus.cpp">
+      <Filter>src\Rendering System\Miscellaneous</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\obj_loader.hpp">
@@ -519,9 +519,6 @@
     <ClInclude Include="Source\render_engine.hpp">
       <Filter>src\Rendering System\Core</Filter>
     </ClInclude>
-    <ClInclude Include="Source\shader_bus.hpp">
-      <Filter>src\Rendering System\Miscellaneous</Filter>
-    </ClInclude>
     <ClInclude Include="Source\shadow_manager.hpp">
       <Filter>src\Rendering System\Miscellaneous</Filter>
     </ClInclude>
@@ -638,6 +635,9 @@
     </ClInclude>
     <ClInclude Include="Source\scene_editor.hpp">
       <Filter>src\Editor System\Scene Editor\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\render_bus.hpp">
+      <Filter>src\Rendering System\Miscellaneous</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "shader_bus.hpp"
+#include "render_bus.hpp"
 
 #include <GLM\\glm.hpp>
 
@@ -14,7 +14,7 @@ public:
 	~ShadowManager() = default;
 	
 	void loadShadows(vec3 eye, vec3 center, float size, float reach);
-	void update(ShaderBus& shaderBus);
+	void update(RenderBus& renderBus);
 
 private:
 	mat4 _createLightSpaceMatrix();

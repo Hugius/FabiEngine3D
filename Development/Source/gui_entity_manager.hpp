@@ -5,7 +5,7 @@
 class GuiEntityManager final : public BaseEntityManager
 {
 public:
-	GuiEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, ShaderBus& shaderBus);
+	GuiEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, RenderBus& renderBus);
 	~GuiEntityManager() = default;
 
 	GuiEntity * getEntity(const string& ID) override;

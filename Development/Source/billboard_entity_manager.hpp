@@ -6,7 +6,7 @@
 class BillboardEntityManager final : public BaseEntityManager
 {
 public:
-	BillboardEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, ShaderBus& shaderBus, CameraManager& camera);
+	BillboardEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, RenderBus& renderBus, CameraManager& camera);
 	~BillboardEntityManager() = default;
 
 	BillboardEntity * getEntity(const string& ID) override;

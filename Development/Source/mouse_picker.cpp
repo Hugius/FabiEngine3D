@@ -1,12 +1,12 @@
 #include "mouse_picker.hpp"
-#include "shader_bus.hpp"
+#include "render_bus.hpp"
 #include "configuration.hpp"
 
 const int   RECURSION_COUNT = 256;
 const float RAY_RANGE       = 512;
 
-MousePicker::MousePicker(ShaderBus& shaderBus) :
-	_shaderBus(shaderBus)
+MousePicker::MousePicker(RenderBus& renderBus) :
+	_renderBus(renderBus)
 {
 
 }
@@ -82,14 +82,14 @@ vec2 MousePicker::_converToNDC(ivec2 val)
 
 vec4 MousePicker::_convertToViewSpace(vec4 val)
 {
-	mat4 inversedProjection = glm::inverse(_shaderBus.getProjectionMatrix());
+	mat4 inversedProjection = glm::inverse(_renderBus.getProjectionMatrix());
 	vec4 viewCoords = inversedProjection * val;
 	return vec4(viewCoords.x, viewCoords.y, -1.0f, 0.0f);
 }
 
 vec3 MousePicker::_convertToWorldSpace(vec4 val)
 {
-	mat4 inversedView = glm::inverse(_shaderBus.getViewMatrix());
+	mat4 inversedView = glm::inverse(_renderBus.getViewMatrix());
 	vec4 worldCoords = inversedView * val;
 	worldCoords = glm::normalize(worldCoords);
 	return vec3(worldCoords.x, worldCoords.y, worldCoords.z);
@@ -97,7 +97,7 @@ vec3 MousePicker::_convertToWorldSpace(vec4 val)
 
 vec3 MousePicker::_getPointOnRay(vec3 ray, float distance)
 {
-	vec3 cameraPos = _shaderBus.getCameraPos();
+	vec3 cameraPos = _renderBus.getCameraPos();
 	vec3 scaledRay = vec3(ray.x * distance, ray.y * distance, ray.z * distance);
 	return cameraPos + scaledRay;
 }

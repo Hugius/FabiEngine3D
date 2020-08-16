@@ -1,10 +1,10 @@
 #include "sky_entity_manager.hpp"
-#include "shader_bus.hpp"
+#include "render_bus.hpp"
 
 #include <iostream>
 
-SkyEntityManager::SkyEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, ShaderBus& shaderBus) :
-	BaseEntityManager(objLoader, texLoader, shaderBus)
+SkyEntityManager::SkyEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, RenderBus& renderBus) :
+	BaseEntityManager(objLoader, texLoader, renderBus)
 {
 	
 }
@@ -91,9 +91,9 @@ void SkyEntityManager::update()
 	// Check if any sky exists and if one selected
 	if (!_getBaseEntities().empty() && getSelectedSky() != nullptr)
 	{
-		// Shaderbus updates
-		_shaderBus.setSkyRotationMatrix(getSelectedSky()->getRotationMatrix());
-		_shaderBus.setSkyReflectionCubeMap(getSelectedSky()->getCubeMap());
+		// Renderbus updates
+		_renderBus.setSkyRotationMatrix(getSelectedSky()->getRotationMatrix());
+		_renderBus.setSkyReflectionCubeMap(getSelectedSky()->getCubeMap());
 
 		// Core updates
 		_updateRotation();
@@ -127,18 +127,18 @@ void SkyEntityManager::_updateEyeAdaption()
 {
 	// Keep track of HDR being enabled or not
 	bool hdrWasEnabled = false;
-	if (_shaderBus.isSkyHdrEnabled())
+	if (_renderBus.isSkyHdrEnabled())
 	{
 		hdrWasEnabled = true;
 	}
 
 	// Update sky HDR
-	if (_shaderBus.isSkyHdrEnabled())
+	if (_renderBus.isSkyHdrEnabled())
 	{
 		// Values
 		const float speed = 0.001f; // Lightness changing speed
 		float lightness = getSelectedSky()->getLightness(); // Current lightness
-		float pitch = std::min(_shaderBus.getCameraPitch() + 30.0f, 90.0f); // Full conversion at 60 degrees pitch
+		float pitch = std::min(_renderBus.getCameraPitch() + 30.0f, 90.0f); // Full conversion at 60 degrees pitch
 		float targetLightness = getSelectedSky()->getOriginalLightness() + (((90.0f - pitch) / 90.0f) * _hdrBrightnessFactor);
 
 		// Based on verticle angle

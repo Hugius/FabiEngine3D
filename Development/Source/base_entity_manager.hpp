@@ -2,7 +2,7 @@
 
 #include "obj_loader.hpp"
 #include "texture_loader.hpp"
-#include "shader_bus.hpp"
+#include "render_bus.hpp"
 #include "base_entity.hpp"
 #include "sky_entity.hpp"
 #include "terrain_entity.hpp"
@@ -30,7 +30,7 @@ enum class EntityType
 class BaseEntityManager
 {
 public:
-	BaseEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, ShaderBus& shaderBus);
+	BaseEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, RenderBus& renderBus);
 	virtual ~BaseEntityManager();
 
 	void deleteEntity(const string& ID, EntityType type);
@@ -45,7 +45,7 @@ public:
 protected:
 	OBJLoader&     _objLoader;
 	TextureLoader& _texLoader;
-	ShaderBus&     _shaderBus;
+	RenderBus&     _renderBus;
 
 	BaseEntity * _createEntity(EntityType type, const string& ID);
 

@@ -8,12 +8,12 @@
 #include "light_entity.hpp"
 #include "game_entity.hpp"
 #include "gui_entity.hpp"
-#include "shader_bus.hpp"
+#include "render_bus.hpp"
 
 class BaseEntityRenderer
 {
 public:
-	BaseEntityRenderer(const string& vertexFile, const string& fragmentFile, ShaderBus& shaderBus);
+	BaseEntityRenderer(const string& vertexFile, const string& fragmentFile, RenderBus& renderBus);
 	virtual ~BaseEntityRenderer() = default;
 
 	virtual void bind()   = 0;
@@ -22,5 +22,5 @@ public:
 protected:
 	OpenGLShader _shader;
 
-	ShaderBus& _shaderBus;
+	RenderBus& _renderBus;
 };

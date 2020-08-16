@@ -63,44 +63,49 @@ void FabiEngine3D::misc_hideCursor()
 	_core->_windowManager.hideMouseCursor();
 }
 
+void FabiEngine3D::misc_setCustomCursor(const string& guiEntityID)
+{
+	_core->_renderBus.setCursorEntityID(guiEntityID);
+}
+
 void FabiEngine3D::misc_enableWireframeRendering()
 {
-	_core->_shaderBus.setWireframeRenderingEnabled(true);
+	_core->_renderBus.setWireframeRenderingEnabled(true);
 }
 
 void FabiEngine3D::misc_disableWireframeRendering()
 {
-	_core->_shaderBus.setWireframeRenderingEnabled(false);
+	_core->_renderBus.setWireframeRenderingEnabled(false);
 }
 
 void FabiEngine3D::misc_enableShadowFrameRendering()
 {
-	_core->_shaderBus.setShadowFrameRenderingEnabled(true);
+	_core->_renderBus.setShadowFrameRenderingEnabled(true);
 }
 
 void FabiEngine3D::misc_disableShadowFrameRendering()
 {
-	_core->_shaderBus.setShadowFrameRenderingEnabled(false);
+	_core->_renderBus.setShadowFrameRenderingEnabled(false);
 }
 
 void FabiEngine3D::misc_enableAabbFrameRendering()
 {
-	_core->_shaderBus.setAabbFrameRenderingEnabled(true);
+	_core->_renderBus.setAabbFrameRenderingEnabled(true);
 }
 
 void FabiEngine3D::misc_disableAabbFrameRendering()
 {
-	_core->_shaderBus.setAabbFrameRenderingEnabled(false);
+	_core->_renderBus.setAabbFrameRenderingEnabled(false);
 }
 
 void FabiEngine3D::misc_enableDebugRendering()
 {
-	_core->_shaderBus.setDebugRenderingEnabled(true);
+	_core->_renderBus.setDebugRenderingEnabled(true);
 }
 
 void FabiEngine3D::misc_disableDebugRendering()
 {
-	_core->_shaderBus.setDebugRenderingEnabled(false);
+	_core->_renderBus.setDebugRenderingEnabled(false);
 }
 
 void FabiEngine3D::misc_setMousePos(ivec2 pos)

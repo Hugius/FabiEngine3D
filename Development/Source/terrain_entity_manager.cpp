@@ -1,8 +1,8 @@
 #include "terrain_entity_manager.hpp"
 #include "logger.hpp"
 
-TerrainEntityManager::TerrainEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, ShaderBus& shaderBus) :
-	BaseEntityManager(objLoader, texLoader, shaderBus)
+TerrainEntityManager::TerrainEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, RenderBus& renderBus) :
+	BaseEntityManager(objLoader, texLoader, renderBus)
 {
 
 }

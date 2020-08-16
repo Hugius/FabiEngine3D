@@ -1,12 +1,12 @@
 #include "camera_manager.hpp"
 #include "configuration.hpp"
-#include "shader_bus.hpp"
+#include "render_bus.hpp"
 
 #include <GLM\\gtc\\matrix_transform.hpp>
 #include <algorithm>
 
-CameraManager::CameraManager(ShaderBus& shaderBus) :
-	_shaderBus(shaderBus)
+CameraManager::CameraManager(RenderBus& renderBus) :
+	_renderBus(renderBus)
 {
 	_aspectRatio = float(Config::getInst().getWindowWidth()) / float(Config::getInst().getWindowHeight());
 	_mouseSensitivity = Config::getInst().getMouseSensitivity();
@@ -161,14 +161,14 @@ void CameraManager::updateMatrices()
 	_viewMatrix[3][1] = -glm::dot(_up, _pos);
 	_viewMatrix[3][2] =  glm::dot(_front, _pos);
 	
-	// Update shaderbus
-	_shaderBus.setCameraYaw(_yaw);
-	_shaderBus.setCameraPitch(_pitch);
-	_shaderBus.setCameraPosition(_pos);
-	_shaderBus.setViewMatrix(_viewMatrix);
-	_shaderBus.setProjectionMatrix(_projectionMatrix);
-	_shaderBus.setNearZ(_nearZ);
-	_shaderBus.setFarZ(_farZ);
+	// Update renderbus
+	_renderBus.setCameraYaw(_yaw);
+	_renderBus.setCameraPitch(_pitch);
+	_renderBus.setCameraPosition(_pos);
+	_renderBus.setViewMatrix(_viewMatrix);
+	_renderBus.setProjectionMatrix(_projectionMatrix);
+	_renderBus.setNearZ(_nearZ);
+	_renderBus.setFarZ(_farZ);
 }
 
 void CameraManager::translateFollowX(float speed) // Side movement

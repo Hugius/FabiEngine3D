@@ -1,6 +1,6 @@
 #include "core_engine.hpp"
 #include "configuration.hpp"
-#include "shader_bus.hpp"
+#include "render_bus.hpp"
 
 #include <fstream>
 
@@ -11,20 +11,20 @@ CoreEngine::CoreEngine(FabiEngine3D& fe3d) :
 	_texLoader(),
 	_audioLoader(),
 	_inputHandler(_timer),
-	_shaderBus(),
-	_cameraManager(_shaderBus),
-	_renderEngine(_shaderBus, _timer),
-	_skyEntityManager(_objLoader, _texLoader, _shaderBus),
-	_terrainEntityManager(_objLoader, _texLoader, _shaderBus),
-	_waterEntityManager(_objLoader, _texLoader, _shaderBus),
-	_gameEntityManager(_objLoader, _texLoader, _shaderBus),
-	_billboardEntityManager(_objLoader, _texLoader, _shaderBus, _cameraManager),
-	_aabbEntityManager(_objLoader, _texLoader, _shaderBus),
-	_lightEntityManager(_objLoader, _texLoader, _shaderBus),
-	_guiEntityManager(_objLoader, _texLoader, _shaderBus),
-	_textEntityManager(_objLoader, _texLoader, _shaderBus),
+	_renderBus(),
+	_cameraManager(_renderBus),
+	_renderEngine(_renderBus, _timer),
+	_skyEntityManager(_objLoader, _texLoader, _renderBus),
+	_terrainEntityManager(_objLoader, _texLoader, _renderBus),
+	_waterEntityManager(_objLoader, _texLoader, _renderBus),
+	_gameEntityManager(_objLoader, _texLoader, _renderBus),
+	_billboardEntityManager(_objLoader, _texLoader, _renderBus, _cameraManager),
+	_aabbEntityManager(_objLoader, _texLoader, _renderBus),
+	_lightEntityManager(_objLoader, _texLoader, _renderBus),
+	_guiEntityManager(_objLoader, _texLoader, _renderBus),
+	_textEntityManager(_objLoader, _texLoader, _renderBus),
 	_shadowManager(),
-	_mousePicker(_shaderBus),
+	_mousePicker(_renderBus),
 	_collisionDetector(),
 	_collisionResolver(_collisionDetector),
 	_timer(),

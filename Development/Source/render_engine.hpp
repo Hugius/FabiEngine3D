@@ -28,7 +28,7 @@ enum class BlurType
 class RenderEngine final
 {
 public:
-	RenderEngine(ShaderBus& shaderBus, Timer& timer);
+	RenderEngine(RenderBus& renderBus, Timer& timer);
 	~RenderEngine() = default;
 
 	void renderEngineLogo(GuiEntity* entity, ivec2 viewport);
@@ -38,8 +38,8 @@ private:
 	// Timer for performance profiling
 	Timer& _timer;
 
-	// Shaderbus
-	ShaderBus& _shaderBus;
+	// Renderbus
+	RenderBus& _renderBus;
 
 	// Temp entitybus
 	EntityBus* _entityBus = nullptr;
@@ -93,9 +93,10 @@ private:
 	void _renderGameEntities();
 	void _renderBillboardEntities();
 	void _renderAabbEntities();
-	void _renderFinalTexture();
+	void _renderFinalSceneTexture();
 	void _renderGuiEntities();
 	void _renderTextEntities();
+	void _renderCustomCursor();
 
 	// Other
 	void _renderDebugScreens();

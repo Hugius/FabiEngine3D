@@ -1,5 +1,5 @@
 #include "depth_renderer.hpp"
-#include "shader_bus.hpp"
+#include "render_bus.hpp"
 #include "configuration.hpp"
 
 void DepthRenderer::bind()
@@ -8,7 +8,7 @@ void DepthRenderer::bind()
 	_shader.bind();
 
 	// Vertex shader uniforms
-	_shader.uploadUniform("u_projMatrix", _shaderBus.getProjectionMatrix());
+	_shader.uploadUniform("u_projMatrix", _renderBus.getProjectionMatrix());
 
 	// Texture uniforms
 	_shader.uploadUniform("u_sampler_diffuseMap", 0);
@@ -35,7 +35,7 @@ void DepthRenderer::renderTerrainEntity(const TerrainEntity* entity)
 		glEnable(GL_CULL_FACE);
 
 		// Shader uniforms
-		_shader.uploadUniform("u_viewMatrix", _shaderBus.getViewMatrix());
+		_shader.uploadUniform("u_viewMatrix", _renderBus.getViewMatrix());
 		_shader.uploadUniform("u_modelMatrix", mat4(1.0f));
 		_shader.uploadUniform("u_isAlphaObject", false);
 		_shader.uploadUniform("u_isInstanced", false);
@@ -75,11 +75,11 @@ void DepthRenderer::renderGameEntity(const GameEntity* entity)
 		// Check if entity is static to the camera view
 		if (entity->isCameraStatic())
 		{
-			_shader.uploadUniform("u_viewMatrix", mat4(mat3(_shaderBus.getViewMatrix())));
+			_shader.uploadUniform("u_viewMatrix", mat4(mat3(_renderBus.getViewMatrix())));
 		}
 		else
 		{
-			_shader.uploadUniform("u_viewMatrix", _shaderBus.getViewMatrix());
+			_shader.uploadUniform("u_viewMatrix", _renderBus.getViewMatrix());
 		}
 
 		// Bind & render

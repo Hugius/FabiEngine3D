@@ -1,5 +1,5 @@
 #include "blur_renderer.hpp"
-#include "shader_bus.hpp"
+#include "render_bus.hpp"
 #include "configuration.hpp"
 
 void BlurRenderer::addFramebuffer(int index, bool textureClamp)

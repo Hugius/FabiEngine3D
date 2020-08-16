@@ -5,7 +5,7 @@
 class GameEntityManager final :  public BaseEntityManager
 {
 public:
-	GameEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, ShaderBus& shaderBus);
+	GameEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, RenderBus& renderBus);
 	~GameEntityManager() = default;
 
 	GameEntity * getEntity(const string& ID) override;

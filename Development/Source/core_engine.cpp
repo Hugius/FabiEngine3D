@@ -127,7 +127,7 @@ void CoreEngine::_updateApplication()
 	_textEntityManager.update();
 
 	// Miscellaneous updates
-	_shadowManager.update(_shaderBus);
+	_shadowManager.update(_renderBus);
 	_cameraManager.updateMatrices();
 	_audioPlayer.update(_cameraManager, _audioManager.getChunks(), _audioManager.getMusic());
 

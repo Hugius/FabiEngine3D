@@ -5,7 +5,7 @@
 class AabbEntityManager final :  public BaseEntityManager
 {
 public:
-	AabbEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, ShaderBus& shaderBus);
+	AabbEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, RenderBus& renderBus);
 	~AabbEntityManager() = default;
 
 	AabbEntity * getEntity(const string& ID) override;

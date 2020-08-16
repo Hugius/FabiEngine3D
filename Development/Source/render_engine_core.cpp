@@ -1,23 +1,23 @@
 #include "render_engine.hpp"
 #include "configuration.hpp"
-#include "shader_bus.hpp"
+#include "render_bus.hpp"
 
-RenderEngine::RenderEngine(ShaderBus& shaderBus, Timer& timer) :
-	_shaderBus(shaderBus),
+RenderEngine::RenderEngine(RenderBus& renderBus, Timer& timer) :
+	_renderBus(renderBus),
 	_timer(timer),
-	_skyEntityRenderer        ("sky_entity_shader.vert",       "sky_entity_shader.frag",       shaderBus),
-	_terrainEntityRenderer    ("terrain_entity_shader.vert",   "terrain_entity_shader.frag",   shaderBus),
-	_waterEntityRenderer      ("water_entity_shader.vert",     "water_entity_shader.frag",     shaderBus),
-	_gameEntityRenderer       ("game_entity_shader.vert",      "game_entity_shader.frag",      shaderBus),
-	_billboardEntityRenderer  ("billboard_entity_shader.vert", "billboard_entity_shader.frag", shaderBus),
-	_aabbEntityRenderer       ("aabb_entity_shader.vert",      "aabb_entity_shader.frag",      shaderBus),
-	_guiEntityRenderer        ("gui_entity_shader.vert",       "gui_entity_shader.frag",       shaderBus),
-	_blurRenderer             ("blur_shader.vert",             "blur_shader.frag",             shaderBus),
-	_bloomHdrRenderer         ("bloom_hdr_shader.vert",        "bloom_hdr_shader.frag",        shaderBus),
-	_shadowRenderer           ("shadow_shader.vert",           "shadow_shader.frag",		   shaderBus),
-	_depthRenderer            ("depth_shader.vert",            "depth_shader.frag",			   shaderBus),
-	_postRenderer             ("post_shader.vert",             "post_shader.frag",			   shaderBus),
-	_finalRenderer            ("final_shader.vert",            "final_shader.frag",			   shaderBus)
+	_skyEntityRenderer        ("sky_entity_shader.vert",       "sky_entity_shader.frag",       renderBus),
+	_terrainEntityRenderer    ("terrain_entity_shader.vert",   "terrain_entity_shader.frag",   renderBus),
+	_waterEntityRenderer      ("water_entity_shader.vert",     "water_entity_shader.frag",     renderBus),
+	_gameEntityRenderer       ("game_entity_shader.vert",      "game_entity_shader.frag",      renderBus),
+	_billboardEntityRenderer  ("billboard_entity_shader.vert", "billboard_entity_shader.frag", renderBus),
+	_aabbEntityRenderer       ("aabb_entity_shader.vert",      "aabb_entity_shader.frag",      renderBus),
+	_guiEntityRenderer        ("gui_entity_shader.vert",       "gui_entity_shader.frag",       renderBus),
+	_blurRenderer             ("blur_shader.vert",             "blur_shader.frag",             renderBus),
+	_bloomHdrRenderer         ("bloom_hdr_shader.vert",        "bloom_hdr_shader.frag",        renderBus),
+	_shadowRenderer           ("shadow_shader.vert",           "shadow_shader.frag",		   renderBus),
+	_depthRenderer            ("depth_shader.vert",            "depth_shader.frag",			   renderBus),
+	_postRenderer             ("post_shader.vert",             "post_shader.frag",			   renderBus),
+	_finalRenderer            ("final_shader.vert",            "final_shader.frag",			   renderBus)
 {
 	// Framebuffers
 	_screenFramebuffer.createColorTexture(ivec2(0), Config::getInst().getVpSize(), 1, false);
@@ -56,7 +56,7 @@ void RenderEngine::renderScene(EntityBus * entityBus, CameraManager & camera, iv
 	_entityBus = entityBus;
 
 	// Wireframe or non-wireframe rendering
-	if (_shaderBus.isWireframeRenderingEnabled())
+	if (_renderBus.isWireframeRenderingEnabled())
 	{
 		glViewport(Config::getInst().getVpPos().x, Config::getInst().getVpPos().y, Config::getInst().getVpSize().x, Config::getInst().getVpSize().y);
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -90,7 +90,7 @@ void RenderEngine::renderScene(EntityBus * entityBus, CameraManager & camera, iv
 		_timer.stop();
 
 		// Bind screen framebuffer
-		if (_shaderBus.isMsaaEnabled())
+		if (_renderBus.isMsaaEnabled())
 		{
 			_msaaFramebuffer.bind();
 		}
@@ -122,18 +122,18 @@ void RenderEngine::renderScene(EntityBus * entityBus, CameraManager & camera, iv
 
 		// Unbind screen framebuffer
 		_timer.start("antiAliasing");
-		if (_shaderBus.isMsaaEnabled())
+		if (_renderBus.isMsaaEnabled())
 		{
 			_msaaFramebuffer.processAAData(&_aaProcessorFramebuffer);
 			_msaaFramebuffer.unbind();
 			_finalSurface->setDiffuseMap(_aaProcessorFramebuffer.getTexture(0));
-			_shaderBus.setSceneMap(_aaProcessorFramebuffer.getTexture(0));
+			_renderBus.setSceneMap(_aaProcessorFramebuffer.getTexture(0));
 		}
 		else
 		{
 			_screenFramebuffer.unbind();
 			_finalSurface->setDiffuseMap(_screenFramebuffer.getTexture(0));
-			_shaderBus.setSceneMap(_screenFramebuffer.getTexture(0));
+			_renderBus.setSceneMap(_screenFramebuffer.getTexture(0));
 		}
 		_timer.stop();
 
@@ -149,7 +149,7 @@ void RenderEngine::renderScene(EntityBus * entityBus, CameraManager & camera, iv
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		// Render debug or normal
-		if (_shaderBus.isDebugRenderingEnabled())
+		if (_renderBus.isDebugRenderingEnabled())
 		{
 			_renderDebugScreens();
 			_timer.stop();
@@ -158,19 +158,22 @@ void RenderEngine::renderScene(EntityBus * entityBus, CameraManager & camera, iv
 		{
 			// Render final postprocessed texture
 			glViewport(Config::getInst().getVpPos().x, Config::getInst().getVpPos().y, Config::getInst().getVpSize().x, Config::getInst().getVpSize().y+1);
-			_renderFinalTexture();
+			_renderFinalSceneTexture();
 			glViewport(0, 0, Config::getInst().getWindowWidth(), Config::getInst().getWindowHeight());
 			_timer.stop();
 
-			// Render GUI
+			// Render GUI entities
 			_timer.start("guiEntityRender");
 			_renderGuiEntities();
 			_timer.stop();
 
-			// MSAA text
+			// Render text entities
 			_timer.start("textEntityRender");
 			_renderTextEntities();
 			_timer.stop();
+
+			// Render custom cursor entity
+			_renderCustomCursor();
 		}
 	}
 }

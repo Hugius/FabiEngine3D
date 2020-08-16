@@ -1,5 +1,5 @@
 #include "final_renderer.hpp"
-#include "shader_bus.hpp"
+#include "render_bus.hpp"
 
 void FinalRenderer::bind()
 {

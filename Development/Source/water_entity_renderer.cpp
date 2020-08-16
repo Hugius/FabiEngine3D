@@ -7,15 +7,15 @@ void WaterEntityRenderer::bind()
 	_shader.bind();
 
 	// Global shader uniforms
-	_shader.uploadUniform("u_viewMatrix",				   _shaderBus.getViewMatrix());
-	_shader.uploadUniform("u_projectionMatrix",			   _shaderBus.getProjectionMatrix());
-	_shader.uploadUniform("u_directionalLightingPosition", _shaderBus.getDirectionalLightingPosition());
-	_shader.uploadUniform("u_cameraPosition",			   _shaderBus.getCameraPos());
-	_shader.uploadUniform("u_fogEnabled",				   _shaderBus.isFogEnabled());
-	_shader.uploadUniform("u_fogMinDistance",			   _shaderBus.getFogMinDistance());
-	_shader.uploadUniform("u_effectsEnabled",			   _shaderBus.isWaterEffectsEnabled());
-	_shader.uploadUniform("u_nearZ",					   _shaderBus.getNearZ());
-	_shader.uploadUniform("u_farZ",						   _shaderBus.getFarZ());
+	_shader.uploadUniform("u_viewMatrix",				   _renderBus.getViewMatrix());
+	_shader.uploadUniform("u_projectionMatrix",			   _renderBus.getProjectionMatrix());
+	_shader.uploadUniform("u_directionalLightingPosition", _renderBus.getDirectionalLightingPosition());
+	_shader.uploadUniform("u_cameraPosition",			   _renderBus.getCameraPos());
+	_shader.uploadUniform("u_fogEnabled",				   _renderBus.isFogEnabled());
+	_shader.uploadUniform("u_fogMinDistance",			   _renderBus.getFogMinDistance());
+	_shader.uploadUniform("u_effectsEnabled",			   _renderBus.isWaterEffectsEnabled());
+	_shader.uploadUniform("u_nearZ",					   _renderBus.getNearZ());
+	_shader.uploadUniform("u_farZ",						   _renderBus.getFarZ());
 
 	// Depth testing
 	glEnable(GL_DEPTH_TEST);
@@ -64,11 +64,11 @@ void WaterEntityRenderer::render(const WaterEntity* entity)
 		
 		// Textures
 		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, _shaderBus.getSceneReflectionMap());
+		glBindTexture(GL_TEXTURE_2D, _renderBus.getSceneReflectionMap());
 		glActiveTexture(GL_TEXTURE1);
-		glBindTexture(GL_TEXTURE_2D, _shaderBus.getSceneRefractionMap());
+		glBindTexture(GL_TEXTURE_2D, _renderBus.getSceneRefractionMap());
 		glActiveTexture(GL_TEXTURE2);
-		glBindTexture(GL_TEXTURE_2D, _shaderBus.getWaterDepthMap());
+		glBindTexture(GL_TEXTURE_2D, _renderBus.getWaterDepthMap());
 		glActiveTexture(GL_TEXTURE3);
 		glBindTexture(GL_TEXTURE_2D, entity->getDudvMap());
 		glActiveTexture(GL_TEXTURE4);

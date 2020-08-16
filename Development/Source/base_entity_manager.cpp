@@ -1,10 +1,10 @@
 #include "base_entity_manager.hpp"
 #include "logger.hpp"
 
-BaseEntityManager::BaseEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, ShaderBus& shaderBus) :
+BaseEntityManager::BaseEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, RenderBus& renderBus) :
 	_objLoader(objLoader),
 	_texLoader(texLoader),
-	_shaderBus(shaderBus)
+	_renderBus(renderBus)
 {
 	
 }
@@ -89,6 +89,7 @@ vector<BaseEntity*> & BaseEntityManager::_getBaseEntities()
 
 BaseEntity * BaseEntityManager::_createEntity(EntityType type, const string& ID)
 {
+	// Check for uniqueness of ID
 	for (auto& entity : _entities)
 	{
 		if (entity->getID() == ID)
@@ -126,6 +127,7 @@ BaseEntity * BaseEntityManager::_createEntity(EntityType type, const string& ID)
 		}
 	}
 
+	// Create child instance based on entity type
 	switch (type)
 	{
 		case(EntityType::SKY):
@@ -192,5 +194,6 @@ BaseEntity * BaseEntityManager::_createEntity(EntityType type, const string& ID)
 		}
 	}
 
+	// If nullptr returns, something is very wrong
 	return nullptr;
 }

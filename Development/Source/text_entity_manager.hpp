@@ -5,7 +5,7 @@
 class TextEntityManager final : public BaseEntityManager
 {
 public:
-	TextEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, ShaderBus& shaderBus);
+	TextEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, RenderBus& renderBus);
 	~TextEntityManager() = default;
 
 	TextEntity * getEntity(const string& ID) override;

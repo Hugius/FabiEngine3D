@@ -198,7 +198,7 @@
     <ClInclude Include="Source\post_renderer.hpp" />
     <ClInclude Include="Source\render_engine.hpp" />
     <ClInclude Include="Source\opengl_shader.hpp" />
-    <ClInclude Include="Source\shader_bus.hpp" />
+    <ClInclude Include="Source\render_bus.hpp" />
     <ClInclude Include="Source\shadow_manager.hpp" />
     <ClInclude Include="Source\shadow_renderer.hpp" />
     <ClInclude Include="Source\sky_entity.hpp" />
@@ -310,7 +310,7 @@
     <ClCompile Include="Source\render_engine_capture.cpp" />
     <ClCompile Include="Source\render_engine_draw.cpp" />
     <ClCompile Include="Source\mouse_picker.cpp" />
-    <ClCompile Include="Source\shader_bus.cpp" />
+    <ClCompile Include="Source\render_bus.cpp" />
     <ClCompile Include="Source\sky_entity.cpp" />
     <ClCompile Include="Source\sky_entity_manager.cpp" />
     <ClCompile Include="Source\terrain_entity.cpp" />

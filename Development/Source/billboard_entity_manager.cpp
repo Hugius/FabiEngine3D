@@ -1,9 +1,9 @@
 #include "billboard_entity_manager.hpp"
-#include "shader_bus.hpp"
+#include "render_bus.hpp"
 #include "logger.hpp"
 
-BillboardEntityManager::BillboardEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, ShaderBus& shaderBus, CameraManager& camera) :
-	BaseEntityManager(objLoader, texLoader, shaderBus),
+BillboardEntityManager::BillboardEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, RenderBus& renderBus, CameraManager& camera) :
+	BaseEntityManager(objLoader, texLoader, renderBus),
 	_camera(camera)
 {
 
@@ -93,7 +93,7 @@ void BillboardEntityManager::update()
 		vec3 rotation = entity->getRotation();
 		if (facingX || facingY)
 		{
-			vec3 direction = entity->getTranslation() - _shaderBus.getCameraPos();
+			vec3 direction = entity->getTranslation() - _renderBus.getCameraPos();
 			float radiansX = atan2f(direction.y, (fabsf(direction.x) + fabsf(direction.z)) / 2.0f);
 			float radiansY = atan2f(direction.z, direction.x);
 			rotation.x = (radiansX * (180.0f / 3.141592653589793238463f)) * facingX;

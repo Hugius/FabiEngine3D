@@ -4,34 +4,34 @@
 void TerrainEntityRenderer::bind()
 {
 	// Define clipping plane for scene reflections
-	vec4 clippingPlane = vec4(0.0f, 1.0f, 0.0f, -(_shaderBus.getSceneReflectionHeight()) + _shaderBus.getSceneReflectionOffset());
+	vec4 clippingPlane = vec4(0.0f, 1.0f, 0.0f, -(_renderBus.getSceneReflectionHeight()) + _renderBus.getSceneReflectionOffset());
 
 	// Bind shader
 	_shader.bind();
 	
 	// Vertex shader uniforms
-	_shader.uploadUniform("u_viewMatrix",    _shaderBus.getViewMatrix());
-	_shader.uploadUniform("u_projMatrix",    _shaderBus.getProjectionMatrix());
-	_shader.uploadUniform("u_shadowMatrix",  _shaderBus.getShadowMatrix());
+	_shader.uploadUniform("u_viewMatrix",    _renderBus.getViewMatrix());
+	_shader.uploadUniform("u_projMatrix",    _renderBus.getProjectionMatrix());
+	_shader.uploadUniform("u_shadowMatrix",  _renderBus.getShadowMatrix());
 	_shader.uploadUniform("u_clippingPlane", clippingPlane);
 	
 	// Fragment shader uniforms
-	_shader.uploadUniform("u_cameraPosition",               _shaderBus.getCameraPos());
-	_shader.uploadUniform("u_ambientLightingColor",		    _shaderBus.getAmbientLightingColor());
-	_shader.uploadUniform("u_directionalLightingColor",	    _shaderBus.getDirectionalLightingColor());
-	_shader.uploadUniform("u_directionalLightingPosition",  _shaderBus.getDirectionalLightingPosition());
-	_shader.uploadUniform("u_ambientLightingIntensity",     _shaderBus.getAmbientLightingIntensity());
-	_shader.uploadUniform("u_directionalLightingIntensity", _shaderBus.getDirectionalLightingIntensity());
-	_shader.uploadUniform("u_fogMinDistance",				_shaderBus.getFogMinDistance());
-	_shader.uploadUniform("u_fogColor",						_shaderBus.getFogColor());
-	_shader.uploadUniform("u_ambientLightingEnabled",		_shaderBus.isAmbientLightingEnabled());
-	_shader.uploadUniform("u_directionalLightingEnabled",	_shaderBus.isDirectionalLightingEnabled());
-	_shader.uploadUniform("u_pointLightingEnabled",			_shaderBus.isPointLightingEnabled());
-	_shader.uploadUniform("u_fogEnabled",					_shaderBus.isFogEnabled());
-	_shader.uploadUniform("u_shadowAreaSize",				_shaderBus.getShadowAreaSize());
-	_shader.uploadUniform("u_shadowAreaCenter",				_shaderBus.getShadowAreaCenter());
-	_shader.uploadUniform("u_shadowsEnabled",				_shaderBus.isShadowsEnabled());
-	_shader.uploadUniform("u_shadowFrameRenderingEnabled",  _shaderBus.isShadowFrameRenderingEnabled());
+	_shader.uploadUniform("u_cameraPosition",               _renderBus.getCameraPos());
+	_shader.uploadUniform("u_ambientLightingColor",		    _renderBus.getAmbientLightingColor());
+	_shader.uploadUniform("u_directionalLightingColor",	    _renderBus.getDirectionalLightingColor());
+	_shader.uploadUniform("u_directionalLightingPosition",  _renderBus.getDirectionalLightingPosition());
+	_shader.uploadUniform("u_ambientLightingIntensity",     _renderBus.getAmbientLightingIntensity());
+	_shader.uploadUniform("u_directionalLightingIntensity", _renderBus.getDirectionalLightingIntensity());
+	_shader.uploadUniform("u_fogMinDistance",				_renderBus.getFogMinDistance());
+	_shader.uploadUniform("u_fogColor",						_renderBus.getFogColor());
+	_shader.uploadUniform("u_ambientLightingEnabled",		_renderBus.isAmbientLightingEnabled());
+	_shader.uploadUniform("u_directionalLightingEnabled",	_renderBus.isDirectionalLightingEnabled());
+	_shader.uploadUniform("u_pointLightingEnabled",			_renderBus.isPointLightingEnabled());
+	_shader.uploadUniform("u_fogEnabled",					_renderBus.isFogEnabled());
+	_shader.uploadUniform("u_shadowAreaSize",				_renderBus.getShadowAreaSize());
+	_shader.uploadUniform("u_shadowAreaCenter",				_renderBus.getShadowAreaCenter());
+	_shader.uploadUniform("u_shadowsEnabled",				_renderBus.isShadowsEnabled());
+	_shader.uploadUniform("u_shadowFrameRenderingEnabled",  _renderBus.isShadowFrameRenderingEnabled());
 	_shader.uploadUniform("u_shadowMapSize",				Config::getInst().getShadowQuality());
 
 	// Depth testing
@@ -105,7 +105,7 @@ void TerrainEntityRenderer::render(const TerrainEntity* entity)
 		glActiveTexture(GL_TEXTURE4);
 		glBindTexture(GL_TEXTURE_2D, entity->getBlendMapB());
 		glActiveTexture(GL_TEXTURE5);
-		glBindTexture(GL_TEXTURE_2D, _shaderBus.getShadowMap());
+		glBindTexture(GL_TEXTURE_2D, _renderBus.getShadowMap());
 
 		// Bind
 		glBindVertexArray(entity->getOglBuffer()->getVAO());

@@ -1,5 +1,5 @@
 #include "render_engine.hpp"
-#include "shader_bus.hpp"
+#include "render_bus.hpp"
 #include "configuration.hpp"
 
 #include <chrono>
@@ -8,9 +8,9 @@
 // Capturing reflection texture
 void RenderEngine::_captureSceneReflections(CameraManager& camera)
 {
-	bool waterReflectionEnabled = (_shaderBus.isWaterEffectsEnabled() && _entityBus->getWaterEntity() != nullptr) &&
+	bool waterReflectionEnabled = (_renderBus.isWaterEffectsEnabled() && _entityBus->getWaterEntity() != nullptr) &&
 		_entityBus->getWaterEntity()->isReflective();
-	bool sceneReflectionEnabled = _shaderBus.isSceneReflectionsEnabled();
+	bool sceneReflectionEnabled = _renderBus.isSceneReflectionsEnabled();
 	
 	// Check if needed to capture scene
 	if (waterReflectionEnabled || sceneReflectionEnabled)
@@ -23,7 +23,7 @@ void RenderEngine::_captureSceneReflections(CameraManager& camera)
 		}
 		else
 		{
-			cameraDistance = (camera.getPosition().y - _shaderBus.getSceneReflectionHeight());
+			cameraDistance = (camera.getPosition().y - _renderBus.getSceneReflectionHeight());
 		}
 
 		// Start capturing reflection
@@ -53,9 +53,9 @@ void RenderEngine::_captureSceneReflections(CameraManager& camera)
 		camera.updateMatrices();
 
 		// Save reflection exceptions
-		bool shadowsEnabled = _shaderBus.isShadowsEnabled(); // Shadows are performance-heavy with little visual impact on a reflection
+		bool shadowsEnabled = _renderBus.isShadowsEnabled(); // Shadows are performance-heavy with little visual impact on a reflection
 		float oldLightness = _entityBus->getSkyEntity()->getLightness(); // SkyHDR must not be in reflections
-		_shaderBus.setShadowsEnabled(false);
+		_renderBus.setShadowsEnabled(false);
 
 		// I know this is considered bad practice, but this is the only exception in the entire code-base
 		const_cast<SkyEntity*>(_entityBus->getSkyEntity())->setLightness(_entityBus->getSkyEntity()->getOriginalLightness());
@@ -66,7 +66,7 @@ void RenderEngine::_captureSceneReflections(CameraManager& camera)
 		_renderGameEntities();
 
 		// Revert reflection exceptions
-		_shaderBus.setShadowsEnabled(shadowsEnabled);
+		_renderBus.setShadowsEnabled(shadowsEnabled);
 		const_cast<SkyEntity*>(_entityBus->getSkyEntity())->setLightness(oldLightness);
 
 		// Revert camera angle
@@ -93,14 +93,14 @@ void RenderEngine::_captureSceneReflections(CameraManager& camera)
 		glDisable(GL_CLIP_DISTANCE0);
 
 		// Assign texture
-		_shaderBus.setSceneReflectionMap(_sceneReflectionFramebuffer.getTexture(0));
+		_renderBus.setSceneReflectionMap(_sceneReflectionFramebuffer.getTexture(0));
 	}
 }
 
 // Capturing water refraction texture
 void RenderEngine::_captureSceneRefractions()
 {
-	bool waterRefractionEnabled = (_shaderBus.isWaterEffectsEnabled() &&_entityBus->getWaterEntity() != nullptr) && 
+	bool waterRefractionEnabled = (_renderBus.isWaterEffectsEnabled() &&_entityBus->getWaterEntity() != nullptr) && 
 		_entityBus->getWaterEntity()->isRefractive();
 
 	if (waterRefractionEnabled)
@@ -117,14 +117,14 @@ void RenderEngine::_captureSceneRefractions()
 		_sceneRefractionFramebuffer.unbind();
 
 		// Assign texture
-		_shaderBus.setSceneRefractionMap(_sceneRefractionFramebuffer.getTexture(0));
+		_renderBus.setSceneRefractionMap(_sceneRefractionFramebuffer.getTexture(0));
 	}
 }
 
 // Capturing shadows
 void RenderEngine::_captureShadows()
 {
-	if (_shaderBus.isShadowsEnabled())
+	if (_renderBus.isShadowsEnabled())
 	{
 		// Bind
 		_shadowFramebuffer.bind();
@@ -137,34 +137,34 @@ void RenderEngine::_captureShadows()
 		// Unbind
 		_shadowRenderer.unbind();
 		_shadowFramebuffer.unbind();
-		_shaderBus.setShadowMap(_shadowFramebuffer.getTexture(0));
+		_renderBus.setShadowMap(_shadowFramebuffer.getTexture(0));
 	}
 }
 
 // Capturing bloom parts
 void RenderEngine::_captureBloom()
 {
-	if (_shaderBus.isBloomEnabled())
+	if (_renderBus.isBloomEnabled())
 	{
 		// Process scene texture
 		_bloomHdrFramebuffer.bind();
 		glClear(GL_COLOR_BUFFER_BIT);
 		_bloomHdrRenderer.bind();
-		_bloomHdrRenderer.render(_finalSurface, _shaderBus.getSceneMap());
+		_bloomHdrRenderer.render(_finalSurface, _renderBus.getSceneMap());
 		_bloomHdrRenderer.unbind();
 		_bloomHdrFramebuffer.unbind();
 
 		// Blur scene texture
 		_blurRenderer.bind();
-		_shaderBus.setBloomMap(_blurRenderer.blurTexture(_finalSurface, _bloomHdrFramebuffer.getTexture(0), 
-			static_cast<int>(BlurType::BLOOM), _shaderBus.getBloomBlurSize(), _shaderBus.getBloomIntensity(), BlurDirection::BOTH));
+		_renderBus.setBloomMap(_blurRenderer.blurTexture(_finalSurface, _bloomHdrFramebuffer.getTexture(0), 
+			static_cast<int>(BlurType::BLOOM), _renderBus.getBloomBlurSize(), _renderBus.getBloomIntensity(), BlurDirection::BOTH));
 		_blurRenderer.unbind();
 	}
 }
 
 void RenderEngine::_captureDofDepth()
 {
-	if (_shaderBus.isDofEnabled())
+	if (_renderBus.isDofEnabled())
 	{
 		// Bind
 		_dofDepthFramebuffer.bind();
@@ -192,14 +192,14 @@ void RenderEngine::_captureDofDepth()
 		// Unbind
 		_depthRenderer.unbind();
 		_dofDepthFramebuffer.unbind();
-		_shaderBus.setDofDepthMap(_dofDepthFramebuffer.getTexture(0));
+		_renderBus.setDofDepthMap(_dofDepthFramebuffer.getTexture(0));
 	}
 }
 
 void RenderEngine::_captureWaterDepth()
 {
 	// Depth is only needed for edge transparency
-	bool waterDepthNeeded = (_shaderBus.isWaterEffectsEnabled() && _entityBus->getWaterEntity() != nullptr) &&
+	bool waterDepthNeeded = (_renderBus.isWaterEffectsEnabled() && _entityBus->getWaterEntity() != nullptr) &&
 		_entityBus->getWaterEntity()->getTransparency() > 0.0f;
 
 	if (waterDepthNeeded)
@@ -218,16 +218,16 @@ void RenderEngine::_captureWaterDepth()
 		// Unbind
 		_depthRenderer.unbind();
 		_waterDepthFramebuffer.unbind();
-		_shaderBus.setWaterDepthMap(_waterDepthFramebuffer.getTexture(0));
+		_renderBus.setWaterDepthMap(_waterDepthFramebuffer.getTexture(0));
 	}
 }
 
 void RenderEngine::_captureDofBlur()
 {
-	if (_shaderBus.isDofEnabled())
+	if (_renderBus.isDofEnabled())
 	{
 		_blurRenderer.bind();
-		_shaderBus.setBlurMap(_blurRenderer.blurTexture(_finalSurface, _shaderBus.getSceneMap(), 
+		_renderBus.setBlurMap(_blurRenderer.blurTexture(_finalSurface, _renderBus.getSceneMap(), 
 			static_cast<int>(BlurType::DOF), 6, 1.0f, BlurDirection::BOTH));
 		_blurRenderer.unbind();
 	}
@@ -241,7 +241,7 @@ void RenderEngine::_capturePostProcessing()
 	_postRenderer.render(_finalSurface);
 	_postRenderer.unbind();
 	_postProcessingFramebuffer.unbind();
-	_shaderBus.setPostProcessedSceneMap(_postProcessingFramebuffer.getTexture(0));
+	_renderBus.setPostProcessedSceneMap(_postProcessingFramebuffer.getTexture(0));
 }
 
 void RenderEngine::_captureMotionBlur(CameraManager& camera, ivec2 mousePos)
@@ -261,7 +261,7 @@ void RenderEngine::_captureMotionBlur(CameraManager& camera, ivec2 mousePos)
 	// If 1 frame passed
 	if (elapsedMS >= Config::getInst().getUpdateMsPerFrame() || firstTime)
 	{
-		if (_shaderBus.isMotionBlurEnabled())
+		if (_renderBus.isMotionBlurEnabled())
 		{
 			// Set for next frame
 			previous = current;
@@ -306,7 +306,7 @@ void RenderEngine::_captureMotionBlur(CameraManager& camera, ivec2 mousePos)
 
 			// Apply motion blur
 			_blurRenderer.bind();
-			_shaderBus.setMotionBlurMap(_blurRenderer.blurTexture(_finalSurface, _shaderBus.getPostProcessedSceneMap(), 
+			_renderBus.setMotionBlurMap(_blurRenderer.blurTexture(_finalSurface, _renderBus.getPostProcessedSceneMap(), 
 				static_cast<int>(BlurType::MOTION), blurStrength, 1.0f, direction));
 			_blurRenderer.unbind();
 
@@ -315,7 +315,7 @@ void RenderEngine::_captureMotionBlur(CameraManager& camera, ivec2 mousePos)
 		}
 		else
 		{
-			_shaderBus.setMotionBlurMap(_shaderBus.getPostProcessedSceneMap());
+			_renderBus.setMotionBlurMap(_renderBus.getPostProcessedSceneMap());
 		}
 
 		// Set last mouse position
@@ -326,9 +326,9 @@ void RenderEngine::_captureMotionBlur(CameraManager& camera, ivec2 mousePos)
 void RenderEngine::_captureLensFlare()
 {
 	// Calculate screen position
-	vec3 lightingPosition = _shaderBus.getDirectionalLightingPosition();
-	mat4 viewMatrix = _shaderBus.getViewMatrix();
-	mat4 projectionMatrix = _shaderBus.getProjectionMatrix();
+	vec3 lightingPosition = _renderBus.getDirectionalLightingPosition();
+	mat4 viewMatrix = _renderBus.getViewMatrix();
+	mat4 projectionMatrix = _renderBus.getProjectionMatrix();
 	vec4 clipSpacePosition = projectionMatrix * viewMatrix * vec4(lightingPosition, 1.0f);
 	float alpha;
 
@@ -341,10 +341,10 @@ void RenderEngine::_captureLensFlare()
 	{
 		float x = clipSpacePosition.x / clipSpacePosition.w;
 		float y = clipSpacePosition.y / clipSpacePosition.w;
-		alpha = 1.0f - (max(fabsf(x), fabsf(y)) * _shaderBus.getLensFlareMultiplier());
+		alpha = 1.0f - (max(fabsf(x), fabsf(y)) * _renderBus.getLensFlareMultiplier());
 		alpha = std::clamp(alpha, 0.0f, 1.0f);
 	}
 
 	// Apply lens flare transparency
-	_shaderBus.setLensFlareAlpha(alpha);
+	_renderBus.setLensFlareAlpha(alpha);
 }

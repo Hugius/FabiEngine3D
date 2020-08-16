@@ -5,7 +5,7 @@
 class TerrainEntityManager final : public BaseEntityManager
 {
 public:
-	TerrainEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, ShaderBus& shaderBus);
+	TerrainEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, RenderBus& renderBus);
 	~TerrainEntityManager() = default;
 
 	TerrainEntity * getEntity(const string& ID) override;

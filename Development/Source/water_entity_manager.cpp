@@ -1,10 +1,10 @@
 #include "water_entity_manager.hpp"
-#include "shader_bus.hpp"
+#include "render_bus.hpp"
 
 #include <iostream>
 
-WaterEntityManager::WaterEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, ShaderBus& shaderBus) :
-	BaseEntityManager(objLoader, texLoader, shaderBus)
+WaterEntityManager::WaterEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, RenderBus& renderBus) :
+	BaseEntityManager(objLoader, texLoader, renderBus)
 {
 
 }
@@ -128,10 +128,10 @@ void WaterEntityManager::generateModel(const string& ID)
 void WaterEntityManager::update()
 {
 	// Update reflection height
-	if ((_shaderBus.isWaterEffectsEnabled() && getSelectedWater() != nullptr) && getSelectedWater()->isReflective())
+	if ((_renderBus.isWaterEffectsEnabled() && getSelectedWater() != nullptr) && getSelectedWater()->isReflective())
 	{
-		_shaderBus.setSceneReflectionHeight(getSelectedWater()->getPosition().y);
-		_shaderBus.setSceneReflectionOffset(1.0f);
+		_renderBus.setSceneReflectionHeight(getSelectedWater()->getPosition().y);
+		_renderBus.setSceneReflectionOffset(1.0f);
 	}
 
 	// Update all water entities
@@ -141,7 +141,7 @@ void WaterEntityManager::update()
 		auto * water = getEntity(baseEntity->getID());
 
 		// Update water animations (rippling & waving)
-		if (water->isVisible() && _shaderBus.isWaterEffectsEnabled())
+		if (water->isVisible() && _renderBus.isWaterEffectsEnabled())
 		{
 			// Update ripple speed
 			vec2 newOffset = water->getRippleOffset() + water->getSpeed();

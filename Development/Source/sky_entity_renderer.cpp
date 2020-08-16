@@ -6,9 +6,9 @@ void SkyEntityRenderer::bind()
 	_shader.bind();
 
 	// Global shader uniforms
-	_shader.uploadUniform("u_viewMatrix", mat4(mat3(_shaderBus.getViewMatrix())));
-	_shader.uploadUniform("u_projectionMatrix",     _shaderBus.getProjectionMatrix());
-	_shader.uploadUniform("u_rotationMatrix",       _shaderBus.getSkyRotationMatrix());
+	_shader.uploadUniform("u_viewMatrix", mat4(mat3(_renderBus.getViewMatrix())));
+	_shader.uploadUniform("u_projectionMatrix",     _renderBus.getProjectionMatrix());
+	_shader.uploadUniform("u_rotationMatrix",       _renderBus.getSkyRotationMatrix());
 
 	// Depth testing
 	glEnable(GL_DEPTH_TEST);

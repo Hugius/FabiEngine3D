@@ -5,7 +5,7 @@
 class SkyEntityManager final : public BaseEntityManager
 {
 public:
-	SkyEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, ShaderBus& shaderBus);
+	SkyEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, RenderBus& renderBus);
 	~SkyEntityManager() = default;
 
 	SkyEntity * getEntity(const string& ID) override;

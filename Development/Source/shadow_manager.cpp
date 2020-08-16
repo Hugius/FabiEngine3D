@@ -1,5 +1,5 @@
 #include "shadow_manager.hpp"
-#include "shader_bus.hpp"
+#include "render_bus.hpp"
 
 #include <GLM\\gtc\\matrix_transform.hpp>
 
@@ -11,13 +11,13 @@ void ShadowManager::loadShadows(vec3 eye, vec3 center, float size, float reach)
 	_reach  = reach;
 }
 
-void ShadowManager::update(ShaderBus& shaderBus)
+void ShadowManager::update(RenderBus& renderBus)
 {
-	shaderBus.setShadowMatrix(_createLightSpaceMatrix());
-	shaderBus.setShadowEyePosition(_eye);
-	shaderBus.setShadowAreaCenter(_center);
-	shaderBus.setShadowAreaSize(_size);
-	shaderBus.setShadowAreaReach(_reach);
+	renderBus.setShadowMatrix(_createLightSpaceMatrix());
+	renderBus.setShadowEyePosition(_eye);
+	renderBus.setShadowAreaCenter(_center);
+	renderBus.setShadowAreaSize(_size);
+	renderBus.setShadowAreaReach(_reach);
 }
 
 mat4 ShadowManager::_createLightSpaceMatrix()

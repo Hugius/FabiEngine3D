@@ -1,8 +1,8 @@
 #include "light_entity_manager.hpp"
 #include "configuration.hpp"
 
-LightEntityManager::LightEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, ShaderBus& shaderBus) :
-	BaseEntityManager(objLoader, texLoader, shaderBus)
+LightEntityManager::LightEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, RenderBus& renderBus) :
+	BaseEntityManager(objLoader, texLoader, renderBus)
 {
 
 }

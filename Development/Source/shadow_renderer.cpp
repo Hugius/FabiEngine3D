@@ -1,12 +1,12 @@
 #include "shadow_renderer.hpp"
-#include "shader_bus.hpp"
+#include "render_bus.hpp"
 #include "configuration.hpp"
 
 void ShadowRenderer::bind()
 {	
 	// Shader
 	_shader.bind();
-	_shader.uploadUniform("u_lightSpaceMatrix", _shaderBus.getShadowMatrix());
+	_shader.uploadUniform("u_lightSpaceMatrix", _renderBus.getShadowMatrix());
 
 	// OpenGL
 	glEnable(GL_DEPTH_TEST);

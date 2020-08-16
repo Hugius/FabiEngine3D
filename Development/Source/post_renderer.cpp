@@ -1,5 +1,5 @@
 #include "post_renderer.hpp"
-#include "shader_bus.hpp"
+#include "render_bus.hpp"
 
 void PostRenderer::bind()
 {
@@ -23,14 +23,14 @@ void PostRenderer::render(const GuiEntity* entity)
 		_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix());
 		_shader.uploadUniform("u_mirrorHor", entity->isMirroredHorizonally());
 		_shader.uploadUniform("u_mirrorVer", entity->isMirroredVertically());
-		_shader.uploadUniform("u_nearZ", _shaderBus.getNearZ());
-		_shader.uploadUniform("u_farZ", _shaderBus.getFarZ());
-		_shader.uploadUniform("u_bloomEnabled", _shaderBus.isBloomEnabled());
-		_shader.uploadUniform("u_dofEnabled", _shaderBus.isDofEnabled());
-		_shader.uploadUniform("u_lensFlareEnabled", _shaderBus.isLensFlareEnabled());
-		_shader.uploadUniform("u_dofMinDistance", _shaderBus.getDofMinDistance());
-		_shader.uploadUniform("u_lensFlareAlpha", _shaderBus.getLensFlareAlpha());
-		_shader.uploadUniform("u_lensFlareIntensity", _shaderBus.getLensFlareIntensity());
+		_shader.uploadUniform("u_nearZ", _renderBus.getNearZ());
+		_shader.uploadUniform("u_farZ", _renderBus.getFarZ());
+		_shader.uploadUniform("u_bloomEnabled", _renderBus.isBloomEnabled());
+		_shader.uploadUniform("u_dofEnabled", _renderBus.isDofEnabled());
+		_shader.uploadUniform("u_lensFlareEnabled", _renderBus.isLensFlareEnabled());
+		_shader.uploadUniform("u_dofMinDistance", _renderBus.getDofMinDistance());
+		_shader.uploadUniform("u_lensFlareAlpha", _renderBus.getLensFlareAlpha());
+		_shader.uploadUniform("u_lensFlareIntensity", _renderBus.getLensFlareIntensity());
 
 		// Texture uniforms
 		_shader.uploadUniform("u_sampler_scene", 0);
@@ -42,15 +42,15 @@ void PostRenderer::render(const GuiEntity* entity)
 		// Bind
 		glBindVertexArray(entity->getOglBuffer()->getVAO());
 		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, _shaderBus.getSceneMap());
+		glBindTexture(GL_TEXTURE_2D, _renderBus.getSceneMap());
 		glActiveTexture(GL_TEXTURE1);
-		glBindTexture(GL_TEXTURE_2D, _shaderBus.getBloomMap());
+		glBindTexture(GL_TEXTURE_2D, _renderBus.getBloomMap());
 		glActiveTexture(GL_TEXTURE2);
-		glBindTexture(GL_TEXTURE_2D, _shaderBus.getDofDepthMap());
+		glBindTexture(GL_TEXTURE_2D, _renderBus.getDofDepthMap());
 		glActiveTexture(GL_TEXTURE3);
-		glBindTexture(GL_TEXTURE_2D, _shaderBus.getBlurMap());
+		glBindTexture(GL_TEXTURE_2D, _renderBus.getBlurMap());
 		glActiveTexture(GL_TEXTURE4);
-		glBindTexture(GL_TEXTURE_2D, _shaderBus.getLensFlareMap());
+		glBindTexture(GL_TEXTURE_2D, _renderBus.getLensFlareMap());
 
 		// Render
 		glDrawArrays(GL_TRIANGLES, 0, 6);

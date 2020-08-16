@@ -4,40 +4,40 @@
 void GameEntityRenderer::bind()
 {
 	// Define clipping plane for scene reflections
-	vec4 clippingPlane = vec4(0.0f, 1.0f, 0.0f, -(_shaderBus.getSceneReflectionHeight() + _shaderBus.getSceneReflectionOffset()));
+	vec4 clippingPlane = vec4(0.0f, 1.0f, 0.0f, -(_renderBus.getSceneReflectionHeight() + _renderBus.getSceneReflectionOffset()));
 
 	// Bind shader
 	_shader.bind();
 
 	// Vertex shader uniforms
-	_shader.uploadUniform("u_projMatrix",        _shaderBus.getProjectionMatrix());
-	_shader.uploadUniform("u_skyRotationMatrix", _shaderBus.getSkyRotationMatrix());
-	_shader.uploadUniform("u_shadowMatrix",      _shaderBus.getShadowMatrix());
+	_shader.uploadUniform("u_projMatrix",        _renderBus.getProjectionMatrix());
+	_shader.uploadUniform("u_skyRotationMatrix", _renderBus.getSkyRotationMatrix());
+	_shader.uploadUniform("u_shadowMatrix",      _renderBus.getShadowMatrix());
 	_shader.uploadUniform("u_clippingPlane",	 clippingPlane);
 	
 	// Fragment shader uniforms u_specularLightStrength
-	_shader.uploadUniform("u_cameraPosition",				_shaderBus.getCameraPos());
-	_shader.uploadUniform("u_ambientLightingEnabled",		_shaderBus.isAmbientLightingEnabled());
-	_shader.uploadUniform("u_ambientLightingColor",			_shaderBus.getAmbientLightingColor());
-	_shader.uploadUniform("u_ambientLightingIntensity",		_shaderBus.getAmbientLightingIntensity());
-	_shader.uploadUniform("u_directionalLightingEnabled",	_shaderBus.isDirectionalLightingEnabled());
-	_shader.uploadUniform("u_directionalLightingColor",		_shaderBus.getDirectionalLightingColor());
-	_shader.uploadUniform("u_directionalLightingPosition",	_shaderBus.getDirectionalLightingPosition());
-	_shader.uploadUniform("u_directionalLightingIntensity", _shaderBus.getDirectionalLightingIntensity());
-	_shader.uploadUniform("u_fogMinDistance",				_shaderBus.getFogMinDistance());
-	_shader.uploadUniform("u_fogColor",						_shaderBus.getFogColor());
-	_shader.uploadUniform("u_specularLightingEnabled",		_shaderBus.isSpecularLightingEnabled());
-	_shader.uploadUniform("u_pointLightingEnabled",			_shaderBus.isPointLightingEnabled());
-	_shader.uploadUniform("u_lightMappingEnabled",			_shaderBus.isLightMappingEnabled());
-	_shader.uploadUniform("u_skyReflectionsEnabled",		_shaderBus.isSkyReflectionsEnabled());
-	_shader.uploadUniform("u_sceneReflectionsEnabled",		_shaderBus.isSceneReflectionsEnabled());
-	_shader.uploadUniform("u_fogEnabled",					_shaderBus.isFogEnabled());
-	_shader.uploadUniform("u_shadowAreaSize",				_shaderBus.getShadowAreaSize());
-	_shader.uploadUniform("u_shadowAreaCenter",				_shaderBus.getShadowAreaCenter());
-	_shader.uploadUniform("u_shadowsEnabled",				_shaderBus.isShadowsEnabled());
-	_shader.uploadUniform("u_shadowFrameRenderingEnabled",  _shaderBus.isShadowFrameRenderingEnabled());
-	_shader.uploadUniform("u_skyReflectionFactor",			_shaderBus.getSkyReflectionFactor());
-	_shader.uploadUniform("u_sceneReflectionFactor",		_shaderBus.getSceneReflectionFactor());
+	_shader.uploadUniform("u_cameraPosition",				_renderBus.getCameraPos());
+	_shader.uploadUniform("u_ambientLightingEnabled",		_renderBus.isAmbientLightingEnabled());
+	_shader.uploadUniform("u_ambientLightingColor",			_renderBus.getAmbientLightingColor());
+	_shader.uploadUniform("u_ambientLightingIntensity",		_renderBus.getAmbientLightingIntensity());
+	_shader.uploadUniform("u_directionalLightingEnabled",	_renderBus.isDirectionalLightingEnabled());
+	_shader.uploadUniform("u_directionalLightingColor",		_renderBus.getDirectionalLightingColor());
+	_shader.uploadUniform("u_directionalLightingPosition",	_renderBus.getDirectionalLightingPosition());
+	_shader.uploadUniform("u_directionalLightingIntensity", _renderBus.getDirectionalLightingIntensity());
+	_shader.uploadUniform("u_fogMinDistance",				_renderBus.getFogMinDistance());
+	_shader.uploadUniform("u_fogColor",						_renderBus.getFogColor());
+	_shader.uploadUniform("u_specularLightingEnabled",		_renderBus.isSpecularLightingEnabled());
+	_shader.uploadUniform("u_pointLightingEnabled",			_renderBus.isPointLightingEnabled());
+	_shader.uploadUniform("u_lightMappingEnabled",			_renderBus.isLightMappingEnabled());
+	_shader.uploadUniform("u_skyReflectionsEnabled",		_renderBus.isSkyReflectionsEnabled());
+	_shader.uploadUniform("u_sceneReflectionsEnabled",		_renderBus.isSceneReflectionsEnabled());
+	_shader.uploadUniform("u_fogEnabled",					_renderBus.isFogEnabled());
+	_shader.uploadUniform("u_shadowAreaSize",				_renderBus.getShadowAreaSize());
+	_shader.uploadUniform("u_shadowAreaCenter",				_renderBus.getShadowAreaCenter());
+	_shader.uploadUniform("u_shadowsEnabled",				_renderBus.isShadowsEnabled());
+	_shader.uploadUniform("u_shadowFrameRenderingEnabled",  _renderBus.isShadowFrameRenderingEnabled());
+	_shader.uploadUniform("u_skyReflectionFactor",			_renderBus.getSkyReflectionFactor());
+	_shader.uploadUniform("u_sceneReflectionFactor",		_renderBus.getSceneReflectionFactor());
 	_shader.uploadUniform("u_shadowMapSize",				Config::getInst().getShadowQuality());
 	
 	// Texture uniforms
@@ -56,11 +56,11 @@ void GameEntityRenderer::bind()
 
 	// Texture binding
 	glActiveTexture(GL_TEXTURE3);
-	glBindTexture(GL_TEXTURE_2D, _shaderBus.getSceneReflectionMap());
+	glBindTexture(GL_TEXTURE_2D, _renderBus.getSceneReflectionMap());
 	glActiveTexture(GL_TEXTURE4);
-	glBindTexture(GL_TEXTURE_2D, _shaderBus.getShadowMap());
+	glBindTexture(GL_TEXTURE_2D, _renderBus.getShadowMap());
 	glActiveTexture(GL_TEXTURE5);
-	glBindTexture(GL_TEXTURE_CUBE_MAP, _shaderBus.getSkyReflectionCubeMap());
+	glBindTexture(GL_TEXTURE_CUBE_MAP, _renderBus.getSkyReflectionCubeMap());
 }
 
 void GameEntityRenderer::unbind()
@@ -127,11 +127,11 @@ void GameEntityRenderer::render(const GameEntity* entity)
 		// Check if entity is static to the camera view
 		if (entity->isCameraStatic())
 		{
-			_shader.uploadUniform("u_viewMatrix", mat4(mat3(_shaderBus.getViewMatrix())));
+			_shader.uploadUniform("u_viewMatrix", mat4(mat3(_renderBus.getViewMatrix())));
 		}
 		else
 		{
-			_shader.uploadUniform("u_viewMatrix", _shaderBus.getViewMatrix());
+			_shader.uploadUniform("u_viewMatrix", _renderBus.getViewMatrix());
 		}
 
 		// Bind & render

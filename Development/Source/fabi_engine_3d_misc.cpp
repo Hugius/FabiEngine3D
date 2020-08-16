@@ -308,15 +308,33 @@ ivec2 FabiEngine3D::misc_getViewportSize()
 
 bool FabiEngine3D::misc_isMouseInsideViewport()
 {
-	// Variables for calculating the scrolling speed
-	vec2 mousePos = misc_getMousePos();
-	vec2 viewportPos = misc_getViewportPosition();
-	vec2 viewportSize = misc_getViewportSize();
+	// Variables
+	ivec2 mousePos = misc_getMousePos();
+	ivec2 viewportPos = misc_getViewportPosition();
+	ivec2 viewportSize = misc_getViewportSize();
 
-	// Checking if cursor is inside scrolling list
+	// Checking if cursor is inside viewport
 	if (mousePos.x > viewportPos.x && mousePos.x < viewportPos.x + viewportSize.x)
 	{
 		if (mousePos.y > viewportPos.y && mousePos.y < viewportPos.y + viewportSize.y)
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
+bool FabiEngine3D::misc_isMouseInsideWindow()
+{
+	// Variables
+	ivec2 mousePos = misc_getMousePos();
+	ivec2 windowSize = misc_getWindowSize();
+	
+	// Checking if cursor is inside viewport
+	if (mousePos.x > 1 && mousePos.x < windowSize.x - 1)
+	{
+		if (mousePos.y > 1 && mousePos.y < windowSize.y - 1)
 		{
 			return true;
 		}

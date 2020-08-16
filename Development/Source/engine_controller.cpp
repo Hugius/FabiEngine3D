@@ -13,21 +13,21 @@ EngineController::EngineController() :
 
 void EngineController::FE3D_CONTROLLER_INIT()
 {
+	_initializeMiscellaneous();
 	_rightViewportController.initialize();
 	_bottomViewportController.initialize();
 	_topViewportController.initialize();
 	_leftViewportController.initialize();
-	_initializeMiscellaneous();
 }
 
 void EngineController::FE3D_CONTROLLER_UPDATE()
 {
+	_updateMiscellaneous();
 	_gui->update();
 	_topViewportController.update();
 	_leftViewportController.update();
 	_rightViewportController.update();
 	_bottomViewportController.update();
-	_updateMiscellaneous();
 }
 
 void EngineController::FE3D_CONTROLLER_DESTROY()
@@ -102,4 +102,6 @@ void EngineController::_updateMiscellaneous()
 
 	// Update custom cursor
 	guiEntity_setPosition("@@cursor", misc_convertToNDC(misc_convertFromScreenCoords(misc_getMousePos())));
+	guiEntity_changeTexture("@@cursor", "Engine\\Textures\\cursor_default.png");
+	misc_isMouseInsideWindow() ? guiEntity_show("@@cursor") : guiEntity_hide("@@cursor");
 }

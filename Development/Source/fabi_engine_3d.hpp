@@ -622,6 +622,7 @@ public:
 	ivec2 misc_getViewportPosition();
 	ivec2 misc_getViewportSize();
 	bool misc_isMouseInsideViewport();
+	bool misc_isMouseInsideWindow();
 	bool misc_isDirectory(const string& filePath);
 	bool misc_isFileExisting(const string& filePath);
 

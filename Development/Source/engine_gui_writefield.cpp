@@ -271,7 +271,15 @@ bool EngineGuiWriteField::hasTextContentChanged()
 
 string EngineGuiWriteField::getTextContent()
 {
-	return _currentTextContent;
+	// Check if user filled in a minus without a number
+	if (_currentTextContent == "-" && _noSpecials && _minusAllowed)
+	{
+		return "";
+	}
+	else
+	{
+		return _currentTextContent;
+	}
 }
 
 void EngineGuiWriteField::setTextContent(const string& content)

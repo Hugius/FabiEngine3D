@@ -155,10 +155,10 @@ void EngineGuiScreen::addRectangle(const string& ID, vec2 position, vec2 size, c
 	_rectangles.push_back(make_shared<EngineGuiRectangle>(_fe3d, _parentID + "_" + _ID, ID, vec2(dimensions.x, dimensions.y), vec2(dimensions.z, dimensions.w), textureName));
 }
 
-void EngineGuiScreen::addTextfield(const string& ID, vec2 position, vec2 size, string textContent, vec3 textColor)
+void EngineGuiScreen::addTextfield(const string& ID, vec2 position, vec2 size, string textContent, vec3 textColor, bool centered)
 {
 	auto dimensions = _convertDimensions(position, size);
-	_textfields.push_back(make_shared<EngineGuiTextfield>(_fe3d, _parentID + "_" + _ID, ID, vec2(dimensions.x, dimensions.y), vec2(dimensions.z, dimensions.w), textContent, textColor));
+	_textfields.push_back(make_shared<EngineGuiTextfield>(_fe3d, _parentID + "_" + _ID, ID, vec2(dimensions.x, dimensions.y), vec2(dimensions.z, dimensions.w), textContent, textColor, centered));
 }
 
 bool EngineGuiScreen::checkScrollingList(const string& ID)

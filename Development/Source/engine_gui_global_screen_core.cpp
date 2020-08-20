@@ -62,9 +62,9 @@ void EngineGuiGlobalScreen::addRectangle(const string& ID, vec2 position, vec2 s
 	_rectangles.push_back(make_shared<EngineGuiRectangle>(_fe3d, "globalscreen", ID, position, size, textureName));
 }
 
-void EngineGuiGlobalScreen::addTextfield(const string& ID, vec2 position, vec2 size, string textContent, vec3 textColor)
+void EngineGuiGlobalScreen::addTextfield(const string& ID, vec2 position, vec2 size, string textContent, vec3 textColor, bool centered)
 {
-	_textfields.push_back(make_shared<EngineGuiTextfield>(_fe3d, "globalscreen", ID, position, size, textContent, textColor));
+	_textfields.push_back(make_shared<EngineGuiTextfield>(_fe3d, "globalscreen", ID, position, size, textContent, textColor, centered));
 }
 
 bool EngineGuiGlobalScreen::checkScrollingList(const string& ID)

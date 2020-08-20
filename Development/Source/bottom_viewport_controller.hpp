@@ -17,5 +17,5 @@ public:
 	static inline const vec3 textHoverColor = vec3(0.0f);
 
 private:
-
+	shared_ptr<EngineGuiScreen> _statsScreen;
 };

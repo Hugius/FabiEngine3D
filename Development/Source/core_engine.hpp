@@ -68,13 +68,15 @@ private:
 	void _updateApplication();
 	void _renderApplication();
 
-	// Misc functions
+	// Miscellaneous functions
 	void _updatePerformanceProfiler();
 	void _updateWindowFading();
 
 	// Engine interface instance
 	FabiEngine3D & _fe3d;
 
+	// Miscellaneous variable
+	float _deltaTime = 0.0f;
 	bool _isRunning = false;
 	bool _showStats = false;
 };

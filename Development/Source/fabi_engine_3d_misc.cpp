@@ -4,6 +4,7 @@
 #include "configuration.hpp"
 
 #include <chrono>
+#include <map>
 
 int FabiEngine3D::misc_getUniqueInt(int min, int max)
 {
@@ -51,6 +52,11 @@ float FabiEngine3D::misc_getRandomFloat(float min, float max)
 float FabiEngine3D::misc_getAspectRatio()
 {
 	return float(misc_getWindowWidth()) / float(misc_getWindowHeight());
+}
+
+float FabiEngine3D::misc_getFPS()
+{
+	return 1000.0f / _core->_deltaTime;
 }
 
 void FabiEngine3D::misc_showCursor()
@@ -250,6 +256,16 @@ string FabiEngine3D::misc_getRootDirectory()
 	return rootDir;
 }
 
+string FabiEngine3D::misc_getGpuName()
+{
+	return string(reinterpret_cast<char*>(const_cast<GLubyte*>(glGetString(GL_RENDERER))));
+}
+
+string FabiEngine3D::misc_getOpenglVersion()
+{
+	return string(reinterpret_cast<char*>(const_cast<GLubyte*>(glGetString(GL_VERSION)))).substr(0, 3);
+}
+
 vec2 FabiEngine3D::misc_convertToNDC(vec2 pos)
 {
 	pos.x = (pos.x * 2.0f) - 1.0f;
@@ -354,4 +370,29 @@ bool FabiEngine3D::misc_isFileExisting(const string& filePath)
 {
 	struct stat fileInfo;
 	return stat(filePath.c_str(), &fileInfo) == 0;
+}
+
+bool FabiEngine3D::misc_checkInterval(const string& key, int frameCount)
+{
+	static std::map<string, int> intervalMap;
+
+	// Check if key exists
+	if (intervalMap.find(key) != intervalMap.end())
+	{
+		// Check if passed frames is more than interval minimum
+		if ((_core->_timer.getPassedFrameCount() % intervalMap[key]) == 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	else
+	{
+		// Create new interval
+		intervalMap.insert(std::make_pair(key, frameCount));
+		return true;
+	}
 }

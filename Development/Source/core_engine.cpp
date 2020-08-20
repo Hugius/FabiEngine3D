@@ -21,6 +21,8 @@ void CoreEngine::_start()
 		std::chrono::high_resolution_clock::time_point current = std::chrono::high_resolution_clock::now();
 		std::chrono::duration<double> timeDifference = std::chrono::duration_cast<std::chrono::duration<double>>(current - previous);
 		float elapsedMS = static_cast<float>(timeDifference.count()) * 1000.0f;
+		_deltaTime = elapsedMS;
+		
 		previous = current;
 		lag += elapsedMS;
 
@@ -30,6 +32,7 @@ void CoreEngine::_start()
 			_inputHandler.f_checkInput();
 			_updateApplication();
 			lag -= Config::getInst().getUpdateMsPerFrame();
+			_timer.increasePassedFrameCount();
 		}
 
 		// Render at full speed

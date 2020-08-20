@@ -608,15 +608,18 @@ public:
 	int misc_getMsTimeSinceEpoch();
 	float misc_getRandomFloat(float min, float max);
 	float misc_getAspectRatio();
+	float misc_getFPS();
 	string misc_getWinExplorerFilename(const string& startingDir, const string& fileType);
 	const string& misc_vec2str(vec2 vec);
 	const string& misc_vec2str(vec3 vec);
 	const string& misc_vec2str(vec4 vec);
 	string misc_getRootDirectory();
+	string misc_getGpuName();
+	string misc_getOpenglVersion();
 	vec2 misc_convertToNDC(vec2 pos);
 	vec2 misc_convertFromNDC(vec2 pos);
-	ivec2 misc_convertToScreenCoords(vec2 pos);
 	vec2 misc_convertFromScreenCoords(ivec2 pos);
+	ivec2 misc_convertToScreenCoords(vec2 pos);
 	ivec2 misc_getMousePos();
 	ivec2 misc_getWindowSize();
 	ivec2 misc_getViewportPosition();
@@ -625,6 +628,7 @@ public:
 	bool misc_isMouseInsideWindow();
 	bool misc_isDirectory(const string& filePath);
 	bool misc_isFileExisting(const string& filePath);
+	bool misc_checkInterval(const string& key, int frameCount);
 
 protected:
 	// Virtual interface

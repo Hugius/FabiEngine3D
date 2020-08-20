@@ -19,6 +19,9 @@ public:
 	float getDeltaPartSum();
 
 	void sleep(int microseconds);
+	void increasePassedFrameCount();
+
+	int getPassedFrameCount();
 
 private:
 	LARGE_INTEGER _frequency;
@@ -29,4 +32,6 @@ private:
 	string _currentID = "";
 
 	float _deltaTime = 0.0f;
+
+	int _passedFrameCount = 0;
 };

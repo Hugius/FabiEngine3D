@@ -45,3 +45,13 @@ void Timer::sleep(int microseconds)
 	} 
 	while ((time2 - time1) < microseconds);
 }
+
+void Timer::increasePassedFrameCount()
+{
+	_passedFrameCount++;
+}
+
+int Timer::getPassedFrameCount()
+{
+	return _passedFrameCount;
+}

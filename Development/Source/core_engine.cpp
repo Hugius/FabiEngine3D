@@ -134,13 +134,16 @@ void CoreEngine::_updateApplication()
 	_cameraManager.updateMatrices();
 	_audioPlayer.update(_cameraManager, _audioManager.getChunks(), _audioManager.getMusic());
 
-	// Performance profiling updates
-	_updatePerformanceProfiler();
+	// Miscellaneous updates
 	_updateWindowFading();
 }
 
 void CoreEngine::_renderApplication()
 {
+	// Reset triangle count
+	_renderBus.resetTriangleCount();
+
+	// Create bus with all entities
 	EntityBus entityBus
 	(
 		_skyEntityManager.getSelectedSky(), _terrainEntityManager.getSelectedTerrain(), _waterEntityManager.getSelectedWater(),
@@ -152,5 +155,7 @@ void CoreEngine::_renderApplication()
 	_renderEngine.renderScene(&entityBus, _cameraManager, _windowManager.getMousePos());
 
 	// Swap GPU buffer
+	_timer.start("bufferSwap");
 	_windowManager.swapBackBuffer();
+	_timer.stop();
 }

@@ -50,6 +50,7 @@ void GuiEntityRenderer::render(const GuiEntity* entity)
 
 		// Render
 		glDrawArrays(GL_TRIANGLES, 0, 6);
+		_renderBus.increaseTriangleCount(2);
 
 		// Unbind
 		glActiveTexture(GL_TEXTURE0);

@@ -32,6 +32,7 @@ void AabbEntityRenderer::render(const AabbEntity* entity)
 
 		// Render
 		glDrawArrays(GL_LINE_STRIP, 0, entity->getOglBuffer()->getVertexCount());
+		_renderBus.increaseTriangleCount(entity->getOglBuffer()->getVertexCount() / 3);
 
 		// Unbind
 		glBindVertexArray(0);

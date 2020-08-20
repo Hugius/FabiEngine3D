@@ -69,7 +69,6 @@ private:
 	void _renderApplication();
 
 	// Miscellaneous functions
-	void _updatePerformanceProfiler();
 	void _updateWindowFading();
 
 	// Engine interface instance

@@ -24,11 +24,17 @@ void MousePicker::update(ivec2 mousePos, TerrainEntityManager& terrainManager)
 		if (_notUnderTerrain(0, RAY_RANGE, mouseRay, terrainManager))
 		{
 			_terrainPoint = _binarySearch(0, 0, RAY_RANGE, mouseRay, terrainManager);
+			_isValidTerrainPoint = true;
 		}
 		else // Looking at sky
 		{
 			_terrainPoint = vec3(0.0f);
+			_isValidTerrainPoint = false;
 		}
+	}
+	else
+	{
+		_isValidTerrainPoint = false;
 	}
 }
 
@@ -128,6 +134,11 @@ vec3 MousePicker::getRay()
 vec3 MousePicker::getTerrainPoint()
 {
 	return _terrainPoint;
+}
+
+bool MousePicker::isValidTerrainPoint()
+{
+	return _isValidTerrainPoint;
 }
 
 vec3 MousePicker::_binarySearch(int count, float start, float finish, vec3 ray, TerrainEntityManager& terrainManager)

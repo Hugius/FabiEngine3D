@@ -215,6 +215,19 @@ void RenderBus::setBloomBlurSize(int val)
 	_bloomBlurSize = val;
 }
 
+void RenderBus::resetTriangleCount()
+{
+	_triangleCount = 0;
+}
+
+void RenderBus::increaseTriangleCount(int val)
+{
+	if (_isTriangleCountingEnabled)
+	{
+		_triangleCount += val;
+	}
+}
+
 void RenderBus::setMsaaEnabled(bool val)
 {
 	_isMsaaEnabled = val;
@@ -313,6 +326,11 @@ void RenderBus::setDebugRenderingEnabled(bool val)
 void RenderBus::setShadowFrameRenderingEnabled(bool val)
 {
 	_isShadowFrameRenderingEnabled = val;
+}
+
+void RenderBus::setTriangleCountingEnabled(bool val)
+{
+	_isTriangleCountingEnabled = val;
 }
 
 void RenderBus::setCursorEntityID(const string& val)
@@ -535,6 +553,11 @@ const int RenderBus::getBloomBlurSize() const
 	return _bloomBlurSize;
 }
 
+const int RenderBus::getTriangleCount() const
+{
+	return _triangleCount;
+}
+
 const bool RenderBus::isMsaaEnabled() const
 {
 	return _isMsaaEnabled;
@@ -633,6 +656,11 @@ const bool RenderBus::isShadowFrameRenderingEnabled() const
 const bool RenderBus::isDebugRenderingEnabled() const
 {
 	return _isDebugRenderingEnabled;
+}
+
+const bool RenderBus::isTriangleCountingEnabled() const
+{
+	return _isTriangleCountingEnabled;
 }
 
 const string& RenderBus::getCursorEntityID() const

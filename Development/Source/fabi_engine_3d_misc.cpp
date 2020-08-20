@@ -44,6 +44,11 @@ int FabiEngine3D::misc_getMsTimeSinceEpoch()
 	return int(duration_cast<milliseconds>(system_clock::now().time_since_epoch()).count());
 }
 
+int FabiEngine3D::misc_getTriangleCount()
+{
+	return _core->_renderBus.getTriangleCount();
+}
+
 float FabiEngine3D::misc_getRandomFloat(float min, float max)
 {
 	return Tools::getInst().getRandomFloat(min, max);
@@ -118,32 +123,6 @@ void FabiEngine3D::misc_setMousePos(ivec2 pos)
 {
 	_core->_mousePicker.update(pos, _core->_terrainEntityManager);
 	_core->_windowManager.setMousePos(pos);
-}
-
-void FabiEngine3D::misc_showPerformanceProfiling()
-{
-	_core->_showStats = true;
-}
-
-void FabiEngine3D::misc_hidePerformanceProfiling()
-{
-	_core->_showStats = false;
-
-	// List of element IDs
-	vector<string> elements =
-	{
-		"reflectionPreRender", "refractionPreRender", "shadowPreRender", "dofDepthPreRender", "waterDepthPreRender", "skyEntityRender", "terrainEntityRender", "waterEntityRender",
-		"gameEntityRender", "billboardEntityRender", "aabbEntityRender", "antiAliasing", "postProcessing", "guiEntityRender", "textEntityRender"
-	};
-
-	// Hide all text entities
-	for (auto& e : elements)
-	{
-		if (_core->_textEntityManager.isExisting(e))
-		{
-			_core->_textEntityManager.getEntity(e)->setVisible(false);
-		}
-	}
 }
 
 void FabiEngine3D::misc_showAudioDebugging()
@@ -232,17 +211,32 @@ string FabiEngine3D::misc_getWinExplorerFilename(const string& startingDir, cons
 	return filePath;
 }
 
-const string& FabiEngine3D::misc_vec2str(vec2 vec)
+string FabiEngine3D::misc_vec2str(ivec2 vec)
 {
 	return std::to_string(vec.x) + " " + std::to_string(vec.y);
 }
 
-const string& FabiEngine3D::misc_vec2str(vec3 vec)
+string FabiEngine3D::misc_vec2str(ivec3 vec)
 {
 	return std::to_string(vec.x) + " " + std::to_string(vec.y) + " " + std::to_string(vec.z);
 }
 
-const string& FabiEngine3D::misc_vec2str(vec4 vec)
+string FabiEngine3D::misc_vec2str(ivec4 vec)
+{
+	return std::to_string(vec.x) + " " + std::to_string(vec.y) + " " + std::to_string(vec.z) + " " + std::to_string(vec.w);
+}
+
+string FabiEngine3D::misc_vec2str(vec2 vec)
+{
+	return std::to_string(vec.x) + " " + std::to_string(vec.y);
+}
+
+string FabiEngine3D::misc_vec2str(vec3 vec)
+{
+	return std::to_string(vec.x) + " " + std::to_string(vec.y) + " " + std::to_string(vec.z);
+}
+
+string FabiEngine3D::misc_vec2str(vec4 vec)
 {
 	return std::to_string(vec.x) + " " + std::to_string(vec.y) + " " + std::to_string(vec.z) + " " + std::to_string(vec.w);
 }
@@ -395,4 +389,69 @@ bool FabiEngine3D::misc_checkInterval(const string& key, int frameCount)
 		intervalMap.insert(std::make_pair(key, frameCount));
 		return true;
 	}
+}
+
+map<string, int> FabiEngine3D::misc_getPerformanceProfilingStatistics()
+{
+	map<string, int> result = 
+	{ 
+		std::pair<string, int>("waterPreRender", 0),
+		std::pair<string, int>("shadowPreRender", 0),
+		std::pair<string, int>("postProcessing", 0),
+		std::pair<string, int>("skyEntityRender", 0),
+		std::pair<string, int>("terrainEntityRender", 0),
+		std::pair<string, int>("waterEntityRender", 0),
+		std::pair<string, int>("gameEntityRender", 0),
+		std::pair<string, int>("billboardEntityRender", 0),
+		std::pair<string, int>("guiEntityRender", 0),
+		std::pair<string, int>("textEntityRender", 0)
+	};
+
+	vector<string> IDs =
+	{
+		"reflectionPreRender", "refractionPreRender", "shadowPreRender", "dofDepthPreRender", "waterDepthPreRender", 
+		"skyEntityRender", "terrainEntityRender", "waterEntityRender", "gameEntityRender", "billboardEntityRender", "aabbEntityRender", 
+		"antiAliasing", "postProcessing", "guiEntityRender", "textEntityRender", "bufferSwap"
+	};
+	
+	// Calculate percentages
+	for (auto& ID : IDs)
+	{
+		int percentage = static_cast<int>((_core->_timer.getDeltaPart(ID) / _core->_timer.getDeltaPartSum()) * 100.0f);
+
+		if (ID == "reflectionPreRender")
+		{
+			result["waterPreRender"] += percentage;
+		}
+		else if (ID == "refractionPreRender")
+		{
+			result["waterPreRender"] += percentage;
+		}
+		else if (ID == "waterDepthPreRender")
+		{
+			result["waterPreRender"] += percentage;
+		}
+		else if (ID == "dofDepthPreRender")
+		{
+			result["postProcessing"] += percentage;
+		}
+		else if (ID == "antiAliasing")
+		{
+			result["postProcessing"] += percentage;
+		}
+		else if (ID == "postProcessing")
+		{
+			result["postProcessing"] += percentage;
+		}
+		else if (ID == "aabbEntityRender")
+		{
+			result["gameEntityRender"] += percentage;
+		}
+		else
+		{
+			result[ID] += percentage;
+		}
+	}
+
+	return result;
 }

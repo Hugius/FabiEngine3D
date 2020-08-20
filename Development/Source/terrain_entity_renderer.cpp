@@ -112,6 +112,7 @@ void TerrainEntityRenderer::render(const TerrainEntity* entity)
 
 		// Render
 		glDrawArrays(GL_TRIANGLES, 0, entity->getOglBuffer()->getVertexCount());
+		_renderBus.increaseTriangleCount(entity->getOglBuffer()->getVertexCount() / 3);
 
 		// Unbind
 		glActiveTexture(GL_TEXTURE0);

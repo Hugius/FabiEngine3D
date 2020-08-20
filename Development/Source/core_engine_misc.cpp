@@ -39,49 +39,6 @@ CoreEngine::~CoreEngine()
 
 }
 
-
-
-void CoreEngine::_updatePerformanceProfiler()
-{
-	// Update statistics GUI
-	if (_showStats)
-	{
-		static int steps = 0;
-		const float x = 0.6f;
-		const float y = 0.95f;
-		const float width = 0.015f;
-		const float height = 0.05f;
-
-		if (steps == 50) // Update interval
-		{
-			// FPS
-			auto fps = 1000.0f;
-			auto fpsText = "FPS: " + std::to_string(fps);
-			_textEntityManager.addTextEntity("fps", fpsText, "font", vec3(1.0f), vec2(x, y), 0.0f, vec2(width * fpsText.size(), height), true, true);
-			steps = 0;
-
-			// Performance profiling
-			vector<string> elementNames =
-			{
-				"reflectionPreRender", "refractionPreRender", "shadowPreRender", "dofDepthPreRender", "waterDepthPreRender", "skyEntityRender", "terrainEntityRender", "waterEntityRender",
-				"gameEntityRender", "billboardEntityRender", "aabbEntityRender", "antiAliasing", "postProcessing", "guiEntityRender", "textEntityRender"
-			};
-
-			// Add new text entities
-			for (size_t i = 0; i < elementNames.size(); i++)
-			{
-				auto percentage = std::to_string((_timer.getDeltaPart(elementNames[i]) / _timer.getDeltaPartSum()) * 100.0f);
-				auto text = elementNames[i] + ": " + percentage + "%";
-				_textEntityManager.addTextEntity(elementNames[i], text, "font", vec3(1.0f), vec2(x, y - height - (height * float(int(i)))), 0.0f, vec2(width * text.size(), height), true, true);
-			}
-		}
-		else
-		{
-			steps++;
-		}
-	}
-}
-
 void CoreEngine::_updateWindowFading()
 {
 	static float opacity = 0.0f;

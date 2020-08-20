@@ -97,12 +97,6 @@ void CameraManager::update(WindowManager & windowManager)
 		// Calculate yaw & pitch
 		_yawAcceleration += xOffset;
 		_pitchAcceleration += yOffset;
-
-		// Yaw can't be higher than 360 degrees
-		_yaw = std::fmod((_yaw), 360.0f);
-
-		// So the player can't unnaturally vertically turn its head 
-		_pitch = std::clamp(_pitch, -89.0f, 89.0f);
 	}
 
 	// Update yaw & pitch movements
@@ -117,6 +111,9 @@ void CameraManager::update(WindowManager & windowManager)
 		_yaw = 360.0f - fabsf(_yaw);
 	}
 	_yaw = std::fmod(_yaw, 360.0f);
+
+	// Limit pitch
+	_pitch = std::clamp(_pitch, -89.0f, 89.0f);
 
 	// Update matrices
 	updateMatrices();

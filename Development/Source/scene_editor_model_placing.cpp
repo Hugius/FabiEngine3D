@@ -20,12 +20,16 @@ void SceneEditor::_updateModelPlacing()
 					_fe3d.gameEntity_show(_currentPreviewModelName);
 
 					// Update preview model position
-					newPosition = _fe3d.terrainEntity_getMousePoint();
-					_fe3d.gameEntity_setPosition(_currentPreviewModelName, newPosition);
+					if (_fe3d.terrainEntity_isValidMousePoint())
+					{
+						newPosition = _fe3d.terrainEntity_getMousePoint();
+						_fe3d.gameEntity_setPosition(_currentPreviewModelName, newPosition);
+					}
 				}
 
 				// Placing model
-				if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT) || _fe3d.terrainEntity_getSelectedID() == "")  // Can be bypassed if terrain does not exist
+				if ((_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT) && _fe3d.terrainEntity_isValidMousePoint()) // If user pressed LMB
+					|| _fe3d.terrainEntity_getSelectedID() == "")  // Can be bypassed if terrain does not exist
 				{
 					// Add new model
 				begin: int randomSerial = _fe3d.misc_getUniqueInt(0, INT_MAX);

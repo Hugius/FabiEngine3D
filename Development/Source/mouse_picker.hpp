@@ -21,6 +21,8 @@ public:
 	vec3 getRay();
 	vec3 getTerrainPoint();
 
+	bool isValidTerrainPoint();
+
 private:
 	RenderBus& _renderBus;
 
@@ -32,6 +34,8 @@ private:
 	vec3 _binarySearch(int count, float start, float finish, vec3 ray, TerrainEntityManager& terrainManager);
 	bool _notUnderTerrain(float start, float finish, vec3 ray, TerrainEntityManager& terrainManager);
 
-	vec3 _ray;
-	vec3 _terrainPoint;
+	vec3 _ray = vec3(0.0f);
+	vec3 _terrainPoint = vec3(0.0f);
+
+	bool _isValidTerrainPoint = false;
 };

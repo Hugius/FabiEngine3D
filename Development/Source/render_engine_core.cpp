@@ -101,6 +101,7 @@ void RenderEngine::renderScene(EntityBus * entityBus, CameraManager & camera, iv
 
 		// 3D rendering
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		_renderBus.setTriangleCountingEnabled(true);
 		_timer.start("skyEntityRender");
 		_renderSkyEntity();
 		_timer.stop();
@@ -119,6 +120,7 @@ void RenderEngine::renderScene(EntityBus * entityBus, CameraManager & camera, iv
 		_timer.start("aabbEntityRender");
 		_renderAabbEntities();
 		_timer.stop();
+		_renderBus.setTriangleCountingEnabled(false);
 
 		// Unbind screen framebuffer
 		_timer.start("antiAliasing");

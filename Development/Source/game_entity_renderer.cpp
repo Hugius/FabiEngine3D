@@ -167,11 +167,13 @@ void GameEntityRenderer::render(const GameEntity* entity)
 			{
 				_shader.uploadUniform("u_isInstanced", true);
 				glDrawArraysInstanced(GL_TRIANGLES, 0, buffer->getVertexCount(), buffer->getOffsetCount());
+				_renderBus.increaseTriangleCount((buffer->getOffsetCount() * buffer->getVertexCount()) / 3);
 			}
 			else
 			{
 				_shader.uploadUniform("u_isInstanced", false);
 				glDrawArrays(GL_TRIANGLES, 0, buffer->getVertexCount());
+				_renderBus.increaseTriangleCount(buffer->getVertexCount() / 3);
 			}
 
 			index++;

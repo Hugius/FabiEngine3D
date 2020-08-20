@@ -5,12 +5,14 @@
 
 #include <array>
 #include <vector>
+#include <map>
 #include <string>
 #include <GLM\\glm.hpp>
 #include <memory>
 
 using std::array;
 using std::vector;
+using std::map;
 using std::string;
 using glm::vec2;
 using glm::vec3;
@@ -138,6 +140,7 @@ public:
 	float terrainEntity_getSize(const string& ID);
 	float terrainEntity_getPixelHeight(const string& ID, float x, float z);
 	vec3 terrainEntity_getMousePoint();
+	bool terrainEntity_isValidMousePoint();
 
 	// Water entity interface - setters
 	void waterEntity_add(const string& ID);
@@ -584,8 +587,6 @@ public:
 	void misc_disableAabbFrameRendering();
 	void misc_enableDebugRendering();
 	void misc_disableDebugRendering();
-	void misc_showPerformanceProfiling();
-	void misc_hidePerformanceProfiling();
 	void misc_showAudioDebugging();
 	void misc_hideAudioDebugging();
 	void misc_showCursor();
@@ -606,13 +607,17 @@ public:
 	int misc_getWindowHeight();
 	int misc_getRandomInt(int min, int max);
 	int misc_getMsTimeSinceEpoch();
+	int misc_getTriangleCount();
 	float misc_getRandomFloat(float min, float max);
 	float misc_getAspectRatio();
 	float misc_getFPS();
 	string misc_getWinExplorerFilename(const string& startingDir, const string& fileType);
-	const string& misc_vec2str(vec2 vec);
-	const string& misc_vec2str(vec3 vec);
-	const string& misc_vec2str(vec4 vec);
+	string misc_vec2str(ivec2 vec);
+	string misc_vec2str(ivec3 vec);
+	string misc_vec2str(ivec4 vec);
+	string misc_vec2str(vec2 vec);
+	string misc_vec2str(vec3 vec);
+	string misc_vec2str(vec4 vec);
 	string misc_getRootDirectory();
 	string misc_getGpuName();
 	string misc_getOpenglVersion();
@@ -629,6 +634,7 @@ public:
 	bool misc_isDirectory(const string& filePath);
 	bool misc_isFileExisting(const string& filePath);
 	bool misc_checkInterval(const string& key, int frameCount);
+	map<string, int> misc_getPerformanceProfilingStatistics();
 
 protected:
 	// Virtual interface

@@ -65,6 +65,8 @@ public:
 
 	// Integers
 	void setBloomBlurSize(int val);
+	void resetTriangleCount();
+	void increaseTriangleCount(int val);
 
 	// Booleans
 	void setMsaaEnabled(bool val);
@@ -87,6 +89,7 @@ public:
 	void setAabbFrameRenderingEnabled(bool val);
 	void setDebugRenderingEnabled(bool val);
 	void setShadowFrameRenderingEnabled(bool val);
+	void setTriangleCountingEnabled(bool val);
 
 	// Strings
 	void setCursorEntityID(const string& val);
@@ -143,6 +146,7 @@ public:
 
 	// Integers
 	const int getBloomBlurSize() const;
+	const int getTriangleCount() const;
 
 	// Booleans
 	const bool isMsaaEnabled()                 const;
@@ -165,6 +169,7 @@ public:
 	const bool isAabbFrameRenderingEnabled()   const;
 	const bool isShadowFrameRenderingEnabled() const;
 	const bool isDebugRenderingEnabled()       const;
+	const bool isTriangleCountingEnabled()	   const;
 
 	// Strings
 	const string& getCursorEntityID() const;
@@ -222,6 +227,7 @@ private:
 	
 	// Integers
 	int _bloomBlurSize = 0;
+	int _triangleCount = 0;
 
 	// Booleans
 	bool _isMsaaEnabled                 = false;
@@ -244,6 +250,7 @@ private:
 	bool _isAabbFrameRenderingEnabled   = false;
 	bool _isShadowFrameRenderingEnabled	= false;
 	bool _isDebugRenderingEnabled		= false;
+	bool _isTriangleCountingEnabled		= false;
 
 	// Strings
 	string _cursorEntityID = "";

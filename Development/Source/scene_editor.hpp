@@ -109,7 +109,7 @@ private:
 	bool _isLoaded = false;
 	Transformation _transformation = Transformation::TRANSLATION;
 	string _currentProjectName = "";
-	float _customCameraSpeed = 10.0f;
+	float _customCameraSpeed = 1.0f;
 	const float _modelBlinkingSpeed = 0.025f;
 	const float _lightbulbAnimationSpeed = 0.01f;
 	const float _movementChangingSpeed = 0.05f;

@@ -7,11 +7,17 @@
 
 AudioPlayer::AudioPlayer()
 {
+	Mix_AllocateChannels(0);
+}
+
+void AudioPlayer::allocateChannels(int count)
+{
 	// Allocate audio channels
-	Mix_AllocateChannels(Config::getInst().getMaxAudioChannels());
+	Mix_AllocateChannels(count);
 
 	// Initialize audio channels to none
-	for (int i = 0; i < Config::getInst().getMaxAudioChannels(); i++)
+	_channelMap.clear();
+	for (int i = 0; i < count; i++)
 	{
 		_channelMap.insert(std::make_pair(i, ""));
 	}

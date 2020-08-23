@@ -38,7 +38,7 @@ void GameEntityRenderer::bind()
 	_shader.uploadUniform("u_shadowFrameRenderingEnabled",  _renderBus.isShadowFrameRenderingEnabled());
 	_shader.uploadUniform("u_skyReflectionFactor",			_renderBus.getSkyReflectionFactor());
 	_shader.uploadUniform("u_sceneReflectionFactor",		_renderBus.getSceneReflectionFactor());
-	_shader.uploadUniform("u_shadowMapSize",				Config::getInst().getShadowQuality());
+	_shader.uploadUniform("u_shadowMapSize",				_renderBus.getShadowMapSize());
 	
 	// Texture uniforms
 	_shader.uploadUniform("u_sampler_diffuseMap", 0);

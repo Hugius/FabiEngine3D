@@ -42,7 +42,7 @@ public:
 	void  camera_load(float fov, float nearZ, float farZ, vec3 startPos, float yaw = 0.0f, float pitch = 0.0f);
 	void  camera_enableLookat(vec3 position);
 	void  camera_disableLookat();
-	void  camera_enableFirstPersonView();
+	void  camera_enableFirstPersonView(float mouseSensitivity);
 	void  camera_disableFirstPersonView();
 	void  camera_enableFreeMovement();
 	void  camera_disableFreeMovement();
@@ -463,6 +463,10 @@ public:
 	vector<string> textEntity_getAllIDs();
 
 	// Graphics interface - setters
+	void gfx_setMsaaQuality(int quality);
+	void gfx_setShadowQuality(int quality);
+	void gfx_setReflectionQuality(int quality);
+	void gfx_setRefractionQuality(int quality);
 	void gfx_enableAmbientLighting(vec3 color, float intensity);
 	void gfx_enableDirectionalLighting(vec3 position, vec3 color, float intensity);
 	void gfx_enableSpecularLighting();
@@ -532,6 +536,7 @@ public:
 	int  input_getMouseWheelY();
 
 	// Audio interface - setters
+	void audio_setMaxChannels(int count);
 	void audioEntity_setSoundEnabled(bool enabled);
 	void audioEntity_setMusicEnabled(bool enabled);
 	void audioEntity_deleteAllSounds();

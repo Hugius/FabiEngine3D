@@ -5,6 +5,7 @@
 #include "world_editor.hpp"
 #include "billboard_editor.hpp"
 #include "scene_editor.hpp"
+#include "settings_editor.hpp"
 
 #define LVC LeftViewportController
 
@@ -20,6 +21,7 @@ public:
 	WorldEditor& getWorldEditor();
 	BillboardEditor& getBillboardEditor();
 	SceneEditor& getSceneEditor();
+	SettingsEditor& getSettingsEditor();
 
 	// Static stuff for easier GUI function calls
 	static inline const float calcTextWidth(const string& text, float charWidth, float maxWidth)
@@ -37,4 +39,5 @@ private:
 	WorldEditor _worldEditor;
 	BillboardEditor _billboardEditor;
 	SceneEditor _sceneEditor;
+	SettingsEditor _settingsEditor;
 };

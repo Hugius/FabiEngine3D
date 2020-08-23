@@ -391,6 +391,9 @@
     <ClCompile Include="Source\render_bus.cpp">
       <Filter>src\Rendering System\Miscellaneous</Filter>
     </ClCompile>
+    <ClCompile Include="Source\settings_editor.cpp">
+      <Filter>src\Editor System\Settings Editor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\obj_loader.hpp">
@@ -639,6 +642,9 @@
     <ClInclude Include="Source\render_bus.hpp">
       <Filter>src\Rendering System\Miscellaneous</Filter>
     </ClInclude>
+    <ClInclude Include="Source\settings_editor.hpp">
+      <Filter>src\Editor System\Settings Editor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -796,6 +802,9 @@
     </Filter>
     <Filter Include="src\Editor System\Scene Editor\Settings">
       <UniqueIdentifier>{fa42d895-1245-4873-b84e-91ea0a4cc1b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Editor System\Settings Editor">
+      <UniqueIdentifier>{2f3bcc71-2a82-4cab-b118-59f0bb80357a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

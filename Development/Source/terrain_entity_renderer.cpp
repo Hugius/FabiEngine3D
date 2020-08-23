@@ -32,7 +32,7 @@ void TerrainEntityRenderer::bind()
 	_shader.uploadUniform("u_shadowAreaCenter",				_renderBus.getShadowAreaCenter());
 	_shader.uploadUniform("u_shadowsEnabled",				_renderBus.isShadowsEnabled());
 	_shader.uploadUniform("u_shadowFrameRenderingEnabled",  _renderBus.isShadowFrameRenderingEnabled());
-	_shader.uploadUniform("u_shadowMapSize",				Config::getInst().getShadowQuality());
+	_shader.uploadUniform("u_shadowMapSize",				_renderBus.getShadowMapSize());
 
 	// Depth testing
 	glEnable(GL_DEPTH_TEST);

@@ -22,9 +22,9 @@ void FabiEngine3D::camera_disableLookat()
 	_core->_cameraManager.disableLookat();
 }
 
-void FabiEngine3D::camera_enableFirstPersonView()
+void FabiEngine3D::camera_enableFirstPersonView(float mouseSensitivity)
 {
-	_core->_cameraManager.enableFirstPersonView();
+	_core->_cameraManager.enableFirstPersonView(mouseSensitivity);
 }
 
 void FabiEngine3D::camera_disableFirstPersonView()

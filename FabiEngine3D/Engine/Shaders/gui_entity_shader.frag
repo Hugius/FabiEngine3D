@@ -27,7 +27,7 @@ uniform bool u_noTexture;
 // Out variables
 layout (location = 0) out vec4 o_finalColor;
 
-float convertDepthToColor(float depth)
+float convertDepthToPerspective(float depth)
 {
     float z = depth * 2.0 - 1.0; // Back to NDC 
     return (2.0 * u_nearZ * u_farZ) / (u_farZ + u_nearZ - z * (u_farZ - u_nearZ));
@@ -45,7 +45,7 @@ void main()
 	if(u_isDepthEntity)
 	{
 		float depth = texture(u_sampler_diffuse, f_uv).r;
-		o_finalColor  = vec4(vec3((convertDepthToColor(depth) / u_farZ)), 1.0f);
+		o_finalColor  = vec4(vec3((convertDepthToPerspective(depth) / u_farZ)), 1.0f);
 		//o_finalColor  = vec4(vec3(depth), 1.0f);
 	}
 	else

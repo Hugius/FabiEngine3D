@@ -165,6 +165,7 @@
     <ClInclude Include="Source\left_viewport_controller.hpp" />
     <ClInclude Include="Source\model_editor.hpp" />
     <ClInclude Include="Source\right_viewport_controller.hpp" />
+    <ClInclude Include="Source\settings_editor.hpp" />
     <ClInclude Include="Source\top_viewport_controller.hpp" />
     <ClInclude Include="Source\engine_gui_global_screen.hpp" />
     <ClInclude Include="Source\engine_gui_rectangle.hpp" />
@@ -282,6 +283,7 @@
     <ClCompile Include="Source\model_editor_updates_options.cpp" />
     <ClCompile Include="Source\model_editor_updates_size.cpp" />
     <ClCompile Include="Source\right_viewport_controller.cpp" />
+    <ClCompile Include="Source\settings_editor.cpp" />
     <ClCompile Include="Source\top_viewport_controller.cpp" />
     <ClCompile Include="Source\engine_gui_button.cpp" />
     <ClCompile Include="Source\engine_gui_global_screen_core.cpp" />

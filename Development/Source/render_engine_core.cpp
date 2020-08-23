@@ -2,6 +2,8 @@
 #include "configuration.hpp"
 #include "render_bus.hpp"
 
+#include <algorithm>
+
 RenderEngine::RenderEngine(RenderBus& renderBus, Timer& timer) :
 	_renderBus(renderBus),
 	_timer(timer),
@@ -21,13 +23,13 @@ RenderEngine::RenderEngine(RenderBus& renderBus, Timer& timer) :
 {
 	// Framebuffers
 	_screenFramebuffer.createColorTexture(ivec2(0), Config::getInst().getVpSize(), 1, false);
-	_msaaFramebuffer.createMsaaTexture(ivec2(0), Config::getInst().getVpSize(), 1, Config::getInst().getMsaaQuality() < 1 ? 1 : Config::getInst().getMsaaQuality() > 16 ? 16 : Config::getInst().getMsaaQuality());
+	_msaaFramebuffer.createMsaaTexture(ivec2(0), Config::getInst().getVpSize(), 0, 1);
 	_aaProcessorFramebuffer.createColorTexture(ivec2(0), Config::getInst().getVpSize(), 1, false);
-	_sceneRefractionFramebuffer.createColorTexture(ivec2(0), ivec2(Config::getInst().getRefractionQuality()), 1, false);
-	_sceneReflectionFramebuffer.createColorTexture(ivec2(0), ivec2(Config::getInst().getReflectionQuality()), 1, false);
+	_shadowFramebuffer.createDepthTexture(ivec2(0), ivec2(0), 1);
+	_sceneRefractionFramebuffer.createColorTexture(ivec2(0), ivec2(0), 1, false);
+	_sceneReflectionFramebuffer.createColorTexture(ivec2(0), ivec2(0), 1, false);
 	_bloomHdrFramebuffer.createColorTexture(ivec2(0), Config::getInst().getVpSize(), 1, false);
 	_postProcessingFramebuffer.createColorTexture(ivec2(0), Config::getInst().getVpSize(), 1, false);
-	_shadowFramebuffer.createDepthTexture(ivec2(0), ivec2(Config::getInst().getShadowQuality()), 1);
 	_sceneDepthFramebuffer.createDepthTexture(ivec2(0), Config::getInst().getVpSize(), 1);
 	_waterDepthFramebuffer.createDepthTexture(ivec2(0), Config::getInst().getVpSize(), 1);
 	_blurRenderer.addFramebuffer(static_cast<int>(BlurType::BLOOM),  true);
@@ -178,4 +180,30 @@ void RenderEngine::renderScene(EntityBus * entityBus, CameraManager & camera, iv
 			_renderCustomCursor();
 		}
 	}
+}
+
+void RenderEngine::loadMsaaFramebuffer(int quality)
+{
+	quality = std::clamp(quality, 1, 16);
+	_msaaFramebuffer.reset();
+	_msaaFramebuffer.createMsaaTexture(ivec2(0), Config::getInst().getVpSize(), 1, quality);
+}
+
+void RenderEngine::loadShadowFramebuffer(int quality)
+{
+	_shadowFramebuffer.reset();
+	_shadowFramebuffer.createDepthTexture(ivec2(0), ivec2(quality), 1);
+	_renderBus.setShadowMapSize(quality);
+}
+
+void RenderEngine::loadReflectionFramebuffer(int quality)
+{
+	_sceneReflectionFramebuffer.reset();
+	_sceneReflectionFramebuffer.createColorTexture(ivec2(0), ivec2(quality), 1, false);
+}
+
+void RenderEngine::loadRefractionFramebuffer(int quality)
+{
+	_sceneRefractionFramebuffer.reset();
+	_sceneRefractionFramebuffer.createColorTexture(ivec2(0), ivec2(quality), 1, false);
 }

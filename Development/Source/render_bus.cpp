@@ -233,6 +233,11 @@ void RenderBus::increaseTriangleCount(int val)
 	}
 }
 
+void RenderBus::setShadowMapSize(int val)
+{
+	_shadowMapSize = val;
+}
+
 void RenderBus::setMsaaEnabled(bool val)
 {
 	_isMsaaEnabled = val;
@@ -566,6 +571,11 @@ const int RenderBus::getBloomBlurSize() const
 const int RenderBus::getTriangleCount() const
 {
 	return _triangleCount;
+}
+
+const int RenderBus::getShadowMapSize() const
+{
+	return _shadowMapSize;
 }
 
 const bool RenderBus::isMsaaEnabled() const

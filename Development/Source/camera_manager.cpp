@@ -9,7 +9,6 @@ CameraManager::CameraManager(RenderBus& renderBus) :
 	_renderBus(renderBus)
 {
 	_aspectRatio = float(Config::getInst().getWindowWidth()) / float(Config::getInst().getWindowHeight());
-	_mouseSensitivity = Config::getInst().getMouseSensitivity();
 }
 
 void CameraManager::reset()
@@ -31,7 +30,7 @@ void CameraManager::reset()
 	_yaw = 0.0f;
 	_nearZ = 0.0f;
 	_farZ = 0.0f;
-	_mouseSensitivity = Config::getInst().getMouseSensitivity();;
+	_mouseSensitivity = 0.0f;
 	_mouseOffset = 0.0f;
 
 	// Booleans
@@ -209,9 +208,10 @@ void CameraManager::disableLookat()
 	_isLookatEabled = false;
 }
 
-void CameraManager::enableFirstPersonView()
+void CameraManager::enableFirstPersonView(float mouseSensitivity)
 {
 	_isFirstPersonViewEnabled = true;
+	_mouseSensitivity = mouseSensitivity;
 }
 
 void CameraManager::disableFirstPersonView()

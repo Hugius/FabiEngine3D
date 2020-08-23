@@ -32,7 +32,7 @@ public:
 	// Other
 	void enableLookat(vec3 position);
 	void disableLookat();
-	void enableFirstPersonView();
+	void enableFirstPersonView(float mouseSensitivity);
 	void disableFirstPersonView();
 	void enableFreeMovement();
 	void disableFreeMovement();

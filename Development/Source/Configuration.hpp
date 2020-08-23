@@ -27,12 +27,6 @@ public:
 	const ivec2 getWindowSize()        const;
 	const int   getWindowWidth()       const;
 	const int   getWindowHeight()      const;
-	const int   getMsaaQuality()       const;
-	const int   getShadowQuality()     const;
-	const int   getRefractionQuality() const;
-	const int   getReflectionQuality() const;
-	const int   getMaxAudioChannels()  const;
-	const float getMouseSensitivity()  const;
 	const ivec2 getVpPos()			   const;
 	const ivec2 getVpSize()			   const;
 	const float getUpdateMsPerFrame()  const;
@@ -49,12 +43,6 @@ private:
 	bool  _windowFullscreen = false;
 	int   _windowWidth = 0;
 	int   _windowHeight = 0;
-	int   _msaaQuality = 0;
-	int   _shadowQuality = 0;
-	int   _refractionQuality = 0;
-	int   _reflectionQuality = 0;
-	int   _maxAudioChannels = 0;
-	float _mouseSensitivity = 0.0f;
 	ivec2 _viewportPosition = ivec2(0);
 	ivec2 _viewportSize = ivec2(0);
 	float _updateMsPerFrame = 0.0f;

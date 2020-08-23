@@ -21,12 +21,6 @@ Config::Config()
 
 	// Store config file content
 	_processOption(file, _windowFullscreen);
-	_processOption(file, _msaaQuality);
-	_processOption(file, _shadowQuality);
-	_processOption(file, _refractionQuality);
-	_processOption(file, _reflectionQuality);
-	_processOption(file, _maxAudioChannels);
-	_processOption(file, _mouseSensitivity);
 	
 	// Set window dimensions
 	SDL_DisplayMode DM;
@@ -112,31 +106,6 @@ const int Config::getWindowHeight() const
 	return _windowHeight; 
 }
 
-const int Config::getMsaaQuality() const 
-{ 
-	return _msaaQuality; 
-}
-
-const int Config::getShadowQuality() const 
-{ 
-	return _shadowQuality; 
-}
-
-const int Config::getRefractionQuality() const
-{
-	return _refractionQuality;
-}
-
-const int Config::getMaxAudioChannels() const
-{
-	return _maxAudioChannels;
-}
-
-const float Config::getMouseSensitivity() const
-{
-	return _mouseSensitivity;
-}
-
 const ivec2 Config::getVpPos() const
 {
 	return _viewportPosition;
@@ -150,9 +119,4 @@ const ivec2 Config::getVpSize() const
 const float Config::getUpdateMsPerFrame() const
 {
 	return _updateMsPerFrame;
-}
-
-const int Config::getReflectionQuality() const
-{
-	return _reflectionQuality;
 }

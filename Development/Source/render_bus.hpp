@@ -71,6 +71,7 @@ public:
 	void setBloomBlurSize(int val);
 	void resetTriangleCount();
 	void increaseTriangleCount(int val);
+	void setShadowMapSize(int val);
 
 	// Booleans
 	void setMsaaEnabled(bool val);
@@ -106,7 +107,7 @@ public:
 	const GLuint getShadowMap()             const;
 	const GLuint getBloomMap()				const;
 	const GLuint getPostProcessedSceneMap() const;
-	const GLuint getSceneDepthMap()           const;
+	const GLuint getSceneDepthMap()         const;
 	const GLuint getWaterDepthMap()			const;
 	const GLuint getBlurMap()               const;
 	const GLuint getMotionBlurMap()         const;
@@ -154,6 +155,7 @@ public:
 	// Integers
 	const int getBloomBlurSize() const;
 	const int getTriangleCount() const;
+	const int getShadowMapSize() const;
 
 	// Booleans
 	const bool isMsaaEnabled()                 const;
@@ -238,6 +240,7 @@ private:
 	// Integers
 	int _bloomBlurSize = 0;
 	int _triangleCount = 0;
+	int _shadowMapSize = 0;
 
 	// Booleans
 	bool _isMsaaEnabled                 = false;

@@ -33,6 +33,10 @@ public:
 
 	void renderEngineLogo(GuiEntity* entity, ivec2 viewport);
 	void renderScene(EntityBus* entityBus, CameraManager& camera, ivec2 mousePos);
+	void loadMsaaFramebuffer(int quality);
+	void loadShadowFramebuffer(int quality);
+	void loadReflectionFramebuffer(int quality);
+	void loadRefractionFramebuffer(int quality);
 
 private:
 	// Timer for performance profiling

@@ -19,6 +19,7 @@ public:
 	AudioPlayer();
 	~AudioPlayer() = default;
 
+	void allocateChannels(int count);
 	void update(CameraManager& camera, std::vector<AudioChunk>& chunks, std::vector<AudioMusic>& music);	
 	void setSoundEnabled(bool val);
 	void setMusicEnabled(bool val);

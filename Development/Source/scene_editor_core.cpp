@@ -109,8 +109,11 @@ void SceneEditor::initializeGUI()
 	// Left-viewport: mainWindow - sceneEditorMenuSettingsGraphicsShadows
 	screenID = "sceneEditorMenuSettingsGraphicsShadows";
 	_leftWindow->addScreen(screenID);
-	_leftWindow->getScreen(screenID)->addButton("shadows", vec2(0.0f, 0.7875f), vec2(GET_WIDTH("Shadows"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Shadows", LVC::textColor, LVC::textHoverColor);
-
+	_leftWindow->getScreen(screenID)->addButton("size", vec2(0.0f, 0.7f), vec2(GET_WIDTH("Size"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Size", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("position", vec2(0.0f, 0.35f), vec2(GET_WIDTH("Position"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Position", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("center", vec2(0.0f, 0.0f), vec2(GET_WIDTH("Center"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Center", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("follow", vec2(0.0f, -0.35f), vec2(GET_WIDTH("Follow cam: OFF"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Follow cam: OFF", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("back", vec2(0.0f, -0.7f), vec2(GET_WIDTH("Go back"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Go back", LVC::textColor, LVC::textHoverColor);
 
 	// Right-viewport: mainWindow - modelPropertiesMenu
 	screenID = "modelPropertiesMenu";
@@ -663,10 +666,10 @@ void SceneEditor::unload()
 	_isPlacingPointlight = false;
 	_isLoaded = false;
 	_transformation = Transformation::TRANSLATION;
-	_customCameraSpeed = 10.0f;
 	_selectedLightSizeMultiplier = 1;
 	_activeLightSizeMultiplier = 1;
 	_activeLightBulbID = "";
+	_customCameraSpeed = 1.0f;
 
 	// Delete name textfields
 	_gui->getGlobalScreen()->deleteTextfield("selectedModelName");

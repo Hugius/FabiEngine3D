@@ -156,3 +156,23 @@ vector<string> FabiEngine3D::textEntity_getAllIDs()
 
 	return IDs;
 }
+
+void FabiEngine3D::gfx_setMsaaQuality(int quality)
+{
+	_core->_renderEngine.loadMsaaFramebuffer(quality);
+}
+
+void FabiEngine3D::gfx_setShadowQuality(int quality)
+{
+	_core->_renderEngine.loadShadowFramebuffer(quality);
+}
+
+void FabiEngine3D::gfx_setReflectionQuality(int quality)
+{
+	_core->_renderEngine.loadRefractionFramebuffer(quality);
+}
+
+void FabiEngine3D::gfx_setRefractionQuality(int quality)
+{
+	_core->_renderEngine.loadReflectionFramebuffer(quality);
+}

@@ -7,6 +7,7 @@ LeftViewportController::LeftViewportController(FabiEngine3D& fe3d, shared_ptr<En
 	_modelEditor(fe3d, gui),
 	_worldEditor(fe3d, gui),
 	_billboardEditor(fe3d, gui),
+	_settingsEditor(fe3d, gui),
 	_sceneEditor(fe3d, gui, _worldEditor, _modelEditor, _billboardEditor)
 {
 
@@ -18,17 +19,22 @@ void LeftViewportController::initialize()
 	_gui->getViewport("left")->addWindow("main", vec2(0.0f), vec2(1.9f, 2.0f), LVC::frameColor);
 	_gui->getViewport("left")->getWindow("main")->addScreen("main");
 	_gui->getViewport("left")->getWindow("main")->setActiveScreen("main");
-	_gui->getViewport("left")->getWindow("main")->getScreen("main")->addButton("modelEditor", vec2(0.0f, 0.7f), vec2(GET_WIDTH("Model editor"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Model editor", LVC::textColor, LVC::textHoverColor);
-	_gui->getViewport("left")->getWindow("main")->getScreen("main")->addButton("worldEditor", vec2(0.0f, 0.35f), vec2(GET_WIDTH("World editor"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "World editor", LVC::textColor, LVC::textHoverColor);
-	_gui->getViewport("left")->getWindow("main")->getScreen("main")->addButton("billboardEditor", vec2(0.0f, 0.0f), vec2(GET_WIDTH("Billboard editor"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Billboard editor", LVC::textColor, LVC::textHoverColor);
-	_gui->getViewport("left")->getWindow("main")->getScreen("main")->addButton("sceneEditor", vec2(0.0f, -0.35f), vec2(GET_WIDTH("Scene editor"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Scene editor", LVC::textColor, LVC::textHoverColor);
-	_gui->getViewport("left")->getWindow("main")->getScreen("main")->addButton("scriptEditor", vec2(0.0f, -0.7f), vec2(GET_WIDTH("Script editor"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Script editor", LVC::textColor, LVC::textHoverColor);
+	_gui->getViewport("left")->getWindow("main")->getScreen("main")->addButton("modelEditor", vec2(0.0f, 0.75f), vec2(GET_WIDTH("Model editor"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Model editor", LVC::textColor, LVC::textHoverColor);
+	_gui->getViewport("left")->getWindow("main")->getScreen("main")->addButton("worldEditor", vec2(0.0f, 0.45f), vec2(GET_WIDTH("World editor"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "World editor", LVC::textColor, LVC::textHoverColor);
+	_gui->getViewport("left")->getWindow("main")->getScreen("main")->addButton("billboardEditor", vec2(0.0f, 0.15f), vec2(GET_WIDTH("Billboard editor"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Billboard editor", LVC::textColor, LVC::textHoverColor);
+	_gui->getViewport("left")->getWindow("main")->getScreen("main")->addButton("sceneEditor", vec2(0.0f, -0.15f), vec2(GET_WIDTH("Scene editor"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Scene editor", LVC::textColor, LVC::textHoverColor);
+	_gui->getViewport("left")->getWindow("main")->getScreen("main")->addButton("scriptEditor", vec2(0.0f, -0.45f), vec2(GET_WIDTH("Script editor"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Script editor", LVC::textColor, LVC::textHoverColor);
+	_gui->getViewport("left")->getWindow("main")->getScreen("main")->addButton("settingsEditor", vec2(0.0f, -0.75f), vec2(GET_WIDTH("Settings"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Settings", LVC::textColor, LVC::textHoverColor);
 	
-	// Initialize model editor GUI
+	// Initialize editors GUI
 	_modelEditor.initializeGUI();
 	_worldEditor.initializeGUI();
 	_billboardEditor.initializeGUI();
 	_sceneEditor.initializeGUI();
+	_settingsEditor.initializeGUI();
+
+	// Load settings editor (project independent)
+	_settingsEditor.load();
 }
 
 void LeftViewportController::update()
@@ -59,6 +65,11 @@ void LeftViewportController::update()
 			_sceneEditor.load();
 			window->setActiveScreen("sceneEditorMenuMain");
 		}
+		else if (screen->getButton("settingsEditor")->isHovered()) // Settings editor button
+		{
+			_settingsEditor.load();
+			window->setActiveScreen("settingsEditorMenuMain");
+		}
 	}
 
 	// Update all editors
@@ -66,6 +77,7 @@ void LeftViewportController::update()
 	_worldEditor.update();
 	_billboardEditor.update();
 	_sceneEditor.update();
+	_settingsEditor.update();
 }
 
 ModelEditor& LeftViewportController::getModelEditor()
@@ -86,4 +98,9 @@ BillboardEditor& LeftViewportController::getBillboardEditor()
 SceneEditor& LeftViewportController::getSceneEditor()
 {
 	return _sceneEditor;
+}
+
+SettingsEditor& LeftViewportController::getSettingsEditor()
+{
+	return _settingsEditor;
 }

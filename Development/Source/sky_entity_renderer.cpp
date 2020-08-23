@@ -5,7 +5,7 @@ void SkyEntityRenderer::bind()
 	// Bind shader
 	_shader.bind();
 
-	// Global shader uniforms
+	// Vertex shader uniforms
 	_shader.uploadUniform("u_viewMatrix", mat4(mat3(_renderBus.getViewMatrix())));
 	_shader.uploadUniform("u_projectionMatrix",     _renderBus.getProjectionMatrix());
 	_shader.uploadUniform("u_rotationMatrix",       _renderBus.getSkyRotationMatrix());

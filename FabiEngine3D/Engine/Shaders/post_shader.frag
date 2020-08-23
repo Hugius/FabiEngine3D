@@ -11,6 +11,13 @@ layout(location = 2) uniform sampler2D u_sampler_depth;
 layout(location = 3) uniform sampler2D u_sampler_blur;
 layout(location = 4) uniform sampler2D u_sampler_flare;
 
+// Vector4 uniforms
+uniform vec4 u_directionalLightingPositionClipspace;
+
+// Vector3 uniforms
+uniform vec3 u_directionalLightingPosition;
+uniform vec3 u_cameraPosition;
+
 // Float uniforms
 uniform float u_nearZ;
 uniform float u_farZ;
@@ -51,14 +58,34 @@ void main()
 	// DOF
 	if(u_dofEnabled)
 	{
-		if((fragmentDepth * u_farZ) > u_dofMinDistance)
-		{
-			o_finalColor.rgb = blurColor + bloomColor;
-		}
+        float smoothingDistance = u_dofMinDistance / 10.0f;
+        float mixValue = ((fragmentDepth * u_farZ) - (u_dofMinDistance - smoothingDistance)) / smoothingDistance;
+        mixValue = clamp(mixValue, 0.0f, 1.0f);
+		vec3 dofColor = blurColor + bloomColor;
+        o_finalColor.rgb = mix(o_finalColor.rgb, dofColor, mixValue);
 	}
 
     // Lens flare
-    o_finalColor.rgb += (flareColor * u_lensFlareAlpha * u_lensFlareIntensity * float(u_lensFlareEnabled));
+    if(u_directionalLightingPositionClipspace.w > 0.0f)
+    {
+        // Convert to UV space
+        vec2 lightSourceClipPos = u_directionalLightingPositionClipspace.xy / u_directionalLightingPositionClipspace.w;
+        vec2 lightSourceUV = vec2((lightSourceClipPos.x + 1.0f) / 2.0f, (lightSourceClipPos.y + 1.0f) / 2.0f);
+
+        // Calculate scene depth
+        float flareDepth         = texture(u_sampler_depth, lightSourceUV).r;
+        float flareFragmentDepth = convertDepthToColor(flareDepth) / u_farZ;
+
+        // Calculate distance to light source
+        vec3 viewDirection       = (u_cameraPosition - u_directionalLightingPosition);
+        float flareDistance      = length(viewDirection);
+
+        // Check if lightsource is occluded by an object
+        if(flareFragmentDepth * u_farZ >= flareDistance)
+        {
+            o_finalColor.rgb += (flareColor * u_lensFlareAlpha * u_lensFlareIntensity * float(u_lensFlareEnabled));
+        }
+    }
 
 	// Alpha value
 	o_finalColor.a = 1.0f;

@@ -119,7 +119,6 @@ void ModelEditor::_updateEditingScreen()
 					_currentModelName = "";
 					_leftWindow->setActiveScreen("modelEditorMenuMain");
 					_fe3d.textEntity_hide(_gui->getGlobalScreen()->getTextfield("selectedModelName")->getEntityID());
-					_fe3d.gameEntity_setSceneReflective("@@grid", true);
 				}
 			}
 
@@ -218,17 +217,11 @@ void ModelEditor::_updateModelChoosing()
 					_modelChoosingEnabled = false;
 					hoveredModelID = "";
 					_gui->getGlobalScreen()->removeChoiceForm("modelList");
-
-					// Only 1 game entity can be reflective
-					_fe3d.gameEntity_setSceneReflective("@@grid", !_fe3d.gameEntity_isSceneReflective(_currentModelName));
 				}
 				else
 				{
 					// Set new hovered model
 					hoveredModelID = "@" + selectedButtonID;
-
-					// Only 1 game entity can be reflective
-					_fe3d.gameEntity_setSceneReflective("@@grid", !_fe3d.gameEntity_isSceneReflective(hoveredModelID));
 				}
 			}
 			else if (_gui->getGlobalScreen()->isChoiceFormCancelled("modelList")) // Cancelled choosing
@@ -241,7 +234,6 @@ void ModelEditor::_updateModelChoosing()
 			else // Nothing hovered
 			{
 				hoveredModelID = "";
-				_fe3d.gameEntity_setSceneReflective("@@grid", true);
 			}
 
 			// Show hovered model
@@ -306,7 +298,6 @@ void ModelEditor::_updateCamera()
 		scollSpeed *= 0.975f; // Slowing down
 		scollSpeed = std::clamp(scollSpeed, -1.0f, 1.0f);
 		_cameraDistance += scollSpeed;
-		_cameraDistance = std::clamp(_cameraDistance, _minCameraDistance, _maxCameraDistance);
 
 		// Check if MMB pressed
 		if (!_gui->getGlobalScreen()->isFocused() && _fe3d.misc_isMouseInsideViewport())

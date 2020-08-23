@@ -102,6 +102,11 @@ void WaterEntity::setRefractive(bool val)
 	_isRefractive = val;
 }
 
+void WaterEntity::setSimplifiedOglBuffer(OpenGLBuffer* buffer)
+{
+	_simplifiedOglBuffer = buffer;
+}
+
 void WaterEntity::setSize(float val)
 {
 	_size = val;
@@ -220,4 +225,9 @@ const bool WaterEntity::isReflective() const
 const bool WaterEntity::isRefractive() const
 {
 	return _isRefractive;
+}
+
+const OpenGLBuffer* WaterEntity::getSimplifiedOglBuffer() const
+{
+	return _simplifiedOglBuffer;
 }

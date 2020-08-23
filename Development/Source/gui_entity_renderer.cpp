@@ -4,13 +4,16 @@
 
 void GuiEntityRenderer::bind()
 {
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
+	// Bind shader
 	_shader.bind();
 
+	// Vertex shader uniforms
 	_shader.uploadUniform("u_nearZ", _renderBus.getNearZ());
 	_shader.uploadUniform("u_farZ", _renderBus.getFarZ());
+
+	// Blending
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
 void GuiEntityRenderer::unbind()

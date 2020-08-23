@@ -52,9 +52,13 @@ private:
 	void _updateLightPlacing();
 	void _updateLightEditing();
 
+	// Settings updates
+	void _updateMainSettingsMenu();
+	void _updateGraphicsSettingsMenu();
+	void _updateShadowGraphicsSettingsMenu();
+
 	// Miscellaneous updates
 	void _updateMainMenu();
-	void _updateMainSettingsMenu();
 	void _updateCamera();
 	void _updateMiscellaneous();
 

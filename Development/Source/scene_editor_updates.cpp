@@ -24,6 +24,8 @@ void SceneEditor::update()
 
 	// Settings updates
 	_updateMainSettingsMenu();
+	_updateGraphicsSettingsMenu();
+	_updateShadowGraphicsSettingsMenu();
 
 	// Miscellaneous
 	_updateMainMenu();

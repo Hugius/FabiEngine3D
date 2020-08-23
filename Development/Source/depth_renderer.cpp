@@ -150,40 +150,22 @@ void DepthRenderer::renderBillboardEntity(const BillboardEntity* entity)
 	}
 }
 
-void DepthRenderer::renderAabbEntity(const AabbEntity* entity)
-{
-	if (entity->isVisible())
-	{
-		// Shader uniforms
-		_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix());
-		_shader.uploadUniform("u_isAlphaObject", false);
-		_shader.uploadUniform("u_isInstanced", false);
-
-		// VAO
-		glBindVertexArray(entity->getOglBuffer()->getVAO());
-
-		// Render
-		glDrawArrays(GL_LINE_STRIP, 0, entity->getOglBuffer()->getVertexCount());
-
-		// Unbind
-		glBindVertexArray(0);
-	}
-}
-
 void DepthRenderer::renderWaterEntity(const WaterEntity* entity)
 {
 	if (entity->isVisible())
 	{
 		// Shader uniforms
-		_shader.uploadUniform("u_modelMatrix", mat4(1.0f));
+		mat4 modelMatrix = mat4(1.0f);
+		modelMatrix = glm::translate(modelMatrix, entity->getPosition());
+		_shader.uploadUniform("u_modelMatrix", modelMatrix);
 		_shader.uploadUniform("u_isAlphaObject", false);
 		_shader.uploadUniform("u_isInstanced", false);
 
 		// Bind
-		glBindVertexArray(entity->getOglBuffer()->getVAO());
+		glBindVertexArray(entity->getSimplifiedOglBuffer()->getVAO());
 
 		// Render
-		glDrawArrays(GL_TRIANGLES, 0, entity->getOglBuffer()->getVertexCount());
+		glDrawArrays(GL_TRIANGLES, 0, entity->getSimplifiedOglBuffer()->getVertexCount());
 
 		// Unbind
 		glBindVertexArray(0);

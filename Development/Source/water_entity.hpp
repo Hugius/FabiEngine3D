@@ -31,6 +31,7 @@ public:
 	void setSpecularLighted(bool val);
 	void setReflective(bool val);
 	void setRefractive(bool val);
+	void setSimplifiedOglBuffer(OpenGLBuffer* buffer);
 
 	// Getters
 	const vec2    getSpeed()					 const;
@@ -55,6 +56,7 @@ public:
 	const bool    isSpecularLighted()			 const;
 	const bool    isReflective()				 const;
 	const bool    isRefractive()				 const;
+	const OpenGLBuffer* getSimplifiedOglBuffer() const;
 
 private:
 	vec2 _speed		   = vec2(0.0f);
@@ -84,4 +86,6 @@ private:
 	bool _isSpecularLighted	= false;
 	bool _isReflective		= false;
 	bool _isRefractive		= false;
+
+	OpenGLBuffer* _simplifiedOglBuffer = nullptr;
 };

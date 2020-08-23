@@ -103,7 +103,7 @@ vec3 MousePicker::_convertToWorldSpace(vec4 val)
 
 vec3 MousePicker::_getPointOnRay(vec3 ray, float distance)
 {
-	vec3 cameraPos = _renderBus.getCameraPos();
+	vec3 cameraPos = _renderBus.getCameraPosition();
 	vec3 scaledRay = vec3(ray.x * distance, ray.y * distance, ray.z * distance);
 	return cameraPos + scaledRay;
 }

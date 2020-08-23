@@ -16,7 +16,7 @@ void TerrainEntityRenderer::bind()
 	_shader.uploadUniform("u_clippingPlane", clippingPlane);
 	
 	// Fragment shader uniforms
-	_shader.uploadUniform("u_cameraPosition",               _renderBus.getCameraPos());
+	_shader.uploadUniform("u_cameraPosition",               _renderBus.getCameraPosition());
 	_shader.uploadUniform("u_ambientLightingColor",		    _renderBus.getAmbientLightingColor());
 	_shader.uploadUniform("u_directionalLightingColor",	    _renderBus.getDirectionalLightingColor());
 	_shader.uploadUniform("u_directionalLightingPosition",  _renderBus.getDirectionalLightingPosition());

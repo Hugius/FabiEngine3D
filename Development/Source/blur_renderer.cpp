@@ -12,15 +12,15 @@ void BlurRenderer::addFramebuffer(int index, bool textureClamp)
 
 void BlurRenderer::bind()
 {
+	_shader.bind();
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	_shader.bind();
 }
 
 void BlurRenderer::unbind()
 {
-	_shader.unbind();
 	glDisable(GL_BLEND);
+	_shader.unbind();
 }
 
 GLuint BlurRenderer::blurTexture(const GuiEntity* entity, GLuint texture, int index, int size, float intensity, BlurDirection direction)

@@ -71,7 +71,7 @@ private:
 	OpenGLFramebuffer _bloomHdrFramebuffer;
 	OpenGLFramebuffer _postProcessingFramebuffer;
 	OpenGLFramebuffer _shadowFramebuffer;
-	OpenGLFramebuffer _dofDepthFramebuffer;
+	OpenGLFramebuffer _sceneDepthFramebuffer;
 	OpenGLFramebuffer _waterDepthFramebuffer;
 
 	// Capturing functions
@@ -79,7 +79,7 @@ private:
 	void _captureSceneRefractions();
 	void _captureShadows();
 	void _captureBloom();
-	void _captureDofDepth();
+	void _captureSceneDepth();
 	void _captureWaterDepth();
 	void _capturePostProcessing();
 	void _captureDofBlur();

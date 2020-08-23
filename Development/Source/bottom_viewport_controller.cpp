@@ -17,7 +17,8 @@ void BottomViewportController::initialize()
 	_statsScreen->addTextfield("cursorPosition", vec2(-1.0f, 0.1f), vec2(0.0f, 0.15f), "", vec3(1.0f), false);
 	_statsScreen->addTextfield("triangleCount", vec2(-1.0f, -0.05f), vec2(0.0f, 0.15f), "", vec3(1.0f), false);
 	_statsScreen->addTextfield("gameEntityCount", vec2(-1.0f, -0.2f), vec2(0.0f, 0.15f), "", vec3(1.0f), false);
-	_statsScreen->addTextfield("lightEntityCount", vec2(-1.0f, -0.35f), vec2(0.0f, 0.15f), "", vec3(1.0f), false);
+	_statsScreen->addTextfield("billboardEntityCount", vec2(-1.0f, -0.35f), vec2(0.0f, 0.15f), "", vec3(1.0f), false);
+	_statsScreen->addTextfield("lightEntityCount", vec2(-1.0f, -0.5f), vec2(0.0f, 0.15f), "", vec3(1.0f), false);
 
 	// Performance profiling
 	auto performanceStats = _fe3d.misc_getPerformanceProfilingStatistics();
@@ -108,6 +109,24 @@ void BottomViewportController::update()
 		}
 
 		string text = "Game entities: " + std::to_string(total);
+		_fe3d.textEntity_setTextContent(textID, text, 0.0125f);
+	}
+
+	// Update billboard entity count
+	if (_fe3d.misc_checkInterval("billboardEntityCount", 10))
+	{
+		string textID = _statsScreen->getTextfield("billboardEntityCount")->getEntityID();
+
+		int total = 0;
+		for (auto& ID : _fe3d.billboardEntity_getAllIDs())
+		{
+			if (_fe3d.billboardEntity_isVisible(ID))
+			{
+				total++;
+			}
+		}
+
+		string text = "Billboard entities: " + std::to_string(total);
 		_fe3d.textEntity_setTextContent(textID, text, 0.0125f);
 	}
 

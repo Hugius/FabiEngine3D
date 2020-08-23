@@ -93,7 +93,7 @@ void BillboardEntityManager::update()
 		vec3 rotation = entity->getRotation();
 		if (facingX || facingY)
 		{
-			vec3 direction = entity->getTranslation() - _renderBus.getCameraPos();
+			vec3 direction = entity->getTranslation() - _renderBus.getCameraPosition();
 			float radiansX = atan2f(direction.y, (fabsf(direction.x) + fabsf(direction.z)) / 2.0f);
 			float radiansY = atan2f(direction.z, direction.x);
 			rotation.x = (radiansX * (180.0f / 3.141592653589793238463f)) * facingX;

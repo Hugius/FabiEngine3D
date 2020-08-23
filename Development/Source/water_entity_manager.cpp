@@ -40,6 +40,7 @@ void WaterEntityManager::generateModel(const string& ID)
 {
 	// Variables
 	float size = getEntity(ID)->getSize();
+	float halfSize = size / 2.0f;
 	vector<float> waterVertices;
 
 	// Try to fill the vector
@@ -49,33 +50,33 @@ void WaterEntityManager::generateModel(const string& ID)
 		waterVertices.reserve(size_t(size) * size_t(size) * 30);
 
 		// Creating flat tiled water surface
-		for (float x = -size; x < size; x++)
+		for (float x = -halfSize; x < halfSize; x++)
 		{
-			for (float z = -size; z < size; z++)
+			for (float z = -halfSize; z < halfSize; z++)
 			{
 				float firstVertexX = x;
 				float firstVertexY = 0.0f;
 				float firstVertexZ = z + 1;
-				float firstUvX = (x / size);
-				float firstUvY = ((z / size) + (1.0f / size));
+				float firstUvX = ((x + halfSize) / size);
+				float firstUvY = (((z + halfSize) / size) + (1.0f / size));
 
 				float secondVertexX = x + 1;
 				float secondVertexY = 0.0f;
 				float secondVertexZ = z + 1;
-				float secondUvX = ((x / size) + (1.0f / size));
-				float secondUvY = ((z / size) + (1.0f / size));
+				float secondUvX = (((x + halfSize) / size) + (1.0f / size));
+				float secondUvY = (((z + halfSize) / size) + (1.0f / size));
 
 				float thirdVertexX = x + 1;
 				float thirdVertexY = 0.0f;
 				float thirdVertexZ = z;
-				float thirdUvX = ((x / size) + (1.0f / size));
-				float thirdUvY = (z / size);
+				float thirdUvX = (((x + halfSize) / size) + (1.0f / size));
+				float thirdUvY = ((z + halfSize) / size);
 
 				float fourthVertexX = x;
 				float fourthVertexY = 0.0f;
 				float fourthVertexZ = z;
-				float fourthUvX = (x / size);
-				float fourthUvY = (z / size);
+				float fourthUvX = ((x + halfSize) / size);
+				float fourthUvY = ((z + halfSize) / size);
 
 				waterVertices.push_back(firstVertexX);
 				waterVertices.push_back(firstVertexY);
@@ -88,25 +89,25 @@ void WaterEntityManager::generateModel(const string& ID)
 				waterVertices.push_back(secondVertexZ);
 				waterVertices.push_back(secondUvX);
 				waterVertices.push_back(secondUvY);
-
+				
 				waterVertices.push_back(thirdVertexX);
 				waterVertices.push_back(thirdVertexY);
 				waterVertices.push_back(thirdVertexZ);
 				waterVertices.push_back(thirdUvX);
 				waterVertices.push_back(thirdUvY);
-
+				
 				waterVertices.push_back(thirdVertexX);
 				waterVertices.push_back(thirdVertexY);
 				waterVertices.push_back(thirdVertexZ);
 				waterVertices.push_back(thirdUvX);
 				waterVertices.push_back(thirdUvY);
-
+				
 				waterVertices.push_back(fourthVertexX);
 				waterVertices.push_back(fourthVertexY);
 				waterVertices.push_back(fourthVertexZ);
 				waterVertices.push_back(fourthUvX);
 				waterVertices.push_back(fourthUvY);
-
+				
 				waterVertices.push_back(firstVertexX);
 				waterVertices.push_back(firstVertexY);
 				waterVertices.push_back(firstVertexZ);
@@ -123,6 +124,20 @@ void WaterEntityManager::generateModel(const string& ID)
 	// Fill entity
 	getEntity(ID)->clearOglBuffers();
 	getEntity(ID)->addOglBuffer(new OpenGLBuffer(SHAPE_SURFACE, &waterVertices[0], waterVertices.size()));
+
+	// Load OBJ model
+	float simplified_data[] =
+	{
+		-halfSize,  0.0f,  halfSize, 0.0f, 1.0f,
+		-halfSize,  0.0f, -halfSize, 0.0f, 0.0f,
+		 halfSize,  0.0f, -halfSize, 1.0f, 0.0f,
+		 halfSize,  0.0f, -halfSize, 1.0f, 0.0f,
+		 halfSize,  0.0f,  halfSize, 1.0f, 1.0f,
+		-halfSize,  0.0f,  halfSize, 0.0f, 1.0f
+	};
+
+	// Add simplified water plane
+	getEntity(ID)->setSimplifiedOglBuffer(new OpenGLBuffer(SHAPE_SURFACE, simplified_data, sizeof(simplified_data) / sizeof(float)));
 }
 
 void WaterEntityManager::update()

@@ -5,6 +5,7 @@
 #include <string>
 
 using glm::vec3;
+using glm::vec4;
 using glm::mat4;
 using std::string;
 
@@ -12,7 +13,7 @@ class RenderBus final
 {
 public:
 	RenderBus() = default;
-
+	
 	// Textures
 	void setSceneMap(GLuint val);
 	void setSkyReflectionCubeMap(GLuint val);
@@ -21,7 +22,7 @@ public:
 	void setShadowMap(GLuint val);
 	void setBloomMap(GLuint val);
 	void setPostProcessedSceneMap(GLuint val);
-	void setDofDepthMap(GLuint val);
+	void setSceneDepthMap(GLuint val);
 	void setWaterDepthMap(GLuint val);
 	void setBlurMap(GLuint val);
 	void setMotionBlurMap(GLuint val);
@@ -33,7 +34,10 @@ public:
 	void setSkyRotationMatrix(const mat4 & val);
 	void setShadowMatrix(const mat4 & val);
 
-	// Vectors
+	// Vector4
+	void setDirectionalLightingPositionClipspace(vec4 val);
+
+	// Vector3
 	void setCameraPosition(vec3 val);
 	void setAmbientLightColor(vec3 val);
 	void setDirectionalLightPos(vec3 val);
@@ -102,7 +106,7 @@ public:
 	const GLuint getShadowMap()             const;
 	const GLuint getBloomMap()				const;
 	const GLuint getPostProcessedSceneMap() const;
-	const GLuint getDofDepthMap()           const;
+	const GLuint getSceneDepthMap()           const;
 	const GLuint getWaterDepthMap()			const;
 	const GLuint getBlurMap()               const;
 	const GLuint getMotionBlurMap()         const;
@@ -114,8 +118,11 @@ public:
 	const mat4 & getSkyRotationMatrix() const;
 	const mat4 & getShadowMatrix()      const;
 
-	// Vectors
-	const vec3 getCameraPos()					const;
+	// Vector4
+	const vec4 getDirectionalLightingPositionClipspace() const;
+	
+	// Vector3
+	const vec3 getCameraPosition()				const;
 	const vec3 getAmbientLightingColor()		const;
 	const vec3 getDirectionalLightingColor()    const;
 	const vec3 getDirectionalLightingPosition()	const;
@@ -183,7 +190,7 @@ private:
 	GLuint _shadowMap             = 0;
 	GLuint _bloomMap              = 0;
 	GLuint _postProcessedSceneMap = 0;
-	GLuint _dofDepthMap           = 0;
+	GLuint _sceneDepthMap           = 0;
 	GLuint _waterDepthMap		  = 0;
 	GLuint _blurMap               = 0;
 	GLuint _motionBlurMap         = 0;
@@ -195,7 +202,10 @@ private:
 	mat4 _skyRotationMatrix = mat4(1.0f);
 	mat4 _shadowMatrix      = mat4(1.0f);
 
-	// Vectors
+	// Vector4
+	vec4 _directionalLightingPositionClipspace = vec4(0.0f);
+
+	// Vector3
 	vec3 _cameraPosition			  = vec3(0.0f);
 	vec3 _ambientLightingColor		  = vec3(1.0f);
 	vec3 _directionalLightingColor    = vec3(1.0f);

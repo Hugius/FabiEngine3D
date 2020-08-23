@@ -4,11 +4,13 @@
 
 void ShadowRenderer::bind()
 {	
-	// Shader
+	// Bind shader
 	_shader.bind();
+
+	// Vertex shader uniforms
 	_shader.uploadUniform("u_lightSpaceMatrix", _renderBus.getShadowMatrix());
 
-	// OpenGL
+	// Depth & clipping
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);
 	glEnable(GL_CLIP_DISTANCE1);
@@ -18,7 +20,6 @@ void ShadowRenderer::unbind()
 {
 	glDisable(GL_CLIP_DISTANCE1);
 	glDisable(GL_DEPTH_TEST);
-
 	_shader.unbind();
 }
 

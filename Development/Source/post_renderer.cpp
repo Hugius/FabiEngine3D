@@ -3,10 +3,25 @@
 
 void PostRenderer::bind()
 {
+	// Bind shader
+	_shader.bind();
+
+	// Fragment shader uniforms
+	_shader.uploadUniform("u_nearZ", _renderBus.getNearZ());
+	_shader.uploadUniform("u_farZ", _renderBus.getFarZ());
+	_shader.uploadUniform("u_bloomEnabled", _renderBus.isBloomEnabled());
+	_shader.uploadUniform("u_dofEnabled", _renderBus.isDofEnabled());
+	_shader.uploadUniform("u_lensFlareEnabled", _renderBus.isLensFlareEnabled());
+	_shader.uploadUniform("u_dofMinDistance", _renderBus.getDofMinDistance());
+	_shader.uploadUniform("u_lensFlareAlpha", _renderBus.getLensFlareAlpha());
+	_shader.uploadUniform("u_lensFlareIntensity", _renderBus.getLensFlareIntensity());
+	_shader.uploadUniform("u_directionalLightingPositionClipspace", _renderBus.getDirectionalLightingPositionClipspace());
+	_shader.uploadUniform("u_directionalLightingPosition", _renderBus.getDirectionalLightingPosition());
+	_shader.uploadUniform("u_cameraPosition", _renderBus.getCameraPosition());
+
+	// Blending
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-	_shader.bind();
 }
 
 void PostRenderer::unbind()
@@ -23,14 +38,6 @@ void PostRenderer::render(const GuiEntity* entity)
 		_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix());
 		_shader.uploadUniform("u_mirrorHor", entity->isMirroredHorizonally());
 		_shader.uploadUniform("u_mirrorVer", entity->isMirroredVertically());
-		_shader.uploadUniform("u_nearZ", _renderBus.getNearZ());
-		_shader.uploadUniform("u_farZ", _renderBus.getFarZ());
-		_shader.uploadUniform("u_bloomEnabled", _renderBus.isBloomEnabled());
-		_shader.uploadUniform("u_dofEnabled", _renderBus.isDofEnabled());
-		_shader.uploadUniform("u_lensFlareEnabled", _renderBus.isLensFlareEnabled());
-		_shader.uploadUniform("u_dofMinDistance", _renderBus.getDofMinDistance());
-		_shader.uploadUniform("u_lensFlareAlpha", _renderBus.getLensFlareAlpha());
-		_shader.uploadUniform("u_lensFlareIntensity", _renderBus.getLensFlareIntensity());
 
 		// Texture uniforms
 		_shader.uploadUniform("u_sampler_scene", 0);
@@ -46,7 +53,7 @@ void PostRenderer::render(const GuiEntity* entity)
 		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D, _renderBus.getBloomMap());
 		glActiveTexture(GL_TEXTURE2);
-		glBindTexture(GL_TEXTURE_2D, _renderBus.getDofDepthMap());
+		glBindTexture(GL_TEXTURE_2D, _renderBus.getSceneDepthMap());
 		glActiveTexture(GL_TEXTURE3);
 		glBindTexture(GL_TEXTURE_2D, _renderBus.getBlurMap());
 		glActiveTexture(GL_TEXTURE4);

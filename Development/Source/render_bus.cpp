@@ -40,9 +40,9 @@ void RenderBus::setLensFlareMap(GLuint val)
 	_lensFlareMap = val;
 }
 
-void RenderBus::setDofDepthMap(GLuint val)
+void RenderBus::setSceneDepthMap(GLuint val)
 {
-	_dofDepthMap = val;
+	_sceneDepthMap = val;
 }
 
 void RenderBus::setWaterDepthMap(GLuint val)
@@ -78,6 +78,11 @@ void RenderBus::setSkyRotationMatrix(const mat4 & val)
 void RenderBus::setShadowMatrix(const mat4 & val)
 {
 	_shadowMatrix = val;
+}
+
+void RenderBus::setDirectionalLightingPositionClipspace(vec4 val)
+{
+	_directionalLightingPositionClipspace = val;
 }
 
 void RenderBus::setCameraPosition(vec3 val)
@@ -378,9 +383,9 @@ const GLuint RenderBus::getLensFlareMap() const
 	return _lensFlareMap;
 }
 
-const GLuint RenderBus::getDofDepthMap() const
+const GLuint RenderBus::getSceneDepthMap() const
 {
-	return _dofDepthMap;
+	return _sceneDepthMap;
 }
 
 const GLuint RenderBus::getWaterDepthMap() const
@@ -418,7 +423,12 @@ const mat4 & RenderBus::getShadowMatrix() const
 	return _shadowMatrix;
 }
 
-const vec3 RenderBus::getCameraPos() const
+const vec4 RenderBus::getDirectionalLightingPositionClipspace() const
+{
+	return _directionalLightingPositionClipspace;
+}
+
+const vec3 RenderBus::getCameraPosition() const
 {
 	return _cameraPosition;
 }

@@ -162,12 +162,12 @@ void RenderEngine::_captureBloom()
 	}
 }
 
-void RenderEngine::_captureDofDepth()
+void RenderEngine::_captureSceneDepth()
 {
-	if (_renderBus.isDofEnabled())
+	if (_renderBus.isDofEnabled() && _renderBus.isLensFlareEnabled())
 	{
 		// Bind
-		_dofDepthFramebuffer.bind();
+		_sceneDepthFramebuffer.bind();
 		glClear(GL_DEPTH_BUFFER_BIT);
 		_depthRenderer.bind();
 
@@ -175,6 +175,12 @@ void RenderEngine::_captureDofDepth()
 		if (_entityBus->getTerrainEntity() != nullptr)
 		{
 			_depthRenderer.renderTerrainEntity(_entityBus->getTerrainEntity());
+		}
+
+		// Render water entity
+		if (_entityBus->getWaterEntity() != nullptr)
+		{
+			_depthRenderer.renderWaterEntity(_entityBus->getWaterEntity());
 		}
 
 		// Render game entities
@@ -191,8 +197,8 @@ void RenderEngine::_captureDofDepth()
 
 		// Unbind
 		_depthRenderer.unbind();
-		_dofDepthFramebuffer.unbind();
-		_renderBus.setDofDepthMap(_dofDepthFramebuffer.getTexture(0));
+		_sceneDepthFramebuffer.unbind();
+		_renderBus.setSceneDepthMap(_sceneDepthFramebuffer.getTexture(0));
 	}
 }
 
@@ -330,8 +336,8 @@ void RenderEngine::_captureLensFlare()
 	mat4 viewMatrix = _renderBus.getViewMatrix();
 	mat4 projectionMatrix = _renderBus.getProjectionMatrix();
 	vec4 clipSpacePosition = projectionMatrix * viewMatrix * vec4(lightingPosition, 1.0f);
-	float alpha;
-
+	float alpha = 0.0f;
+	
 	// Calculate transparency value
 	if (clipSpacePosition.w <= 0.0f)
 	{
@@ -344,6 +350,9 @@ void RenderEngine::_captureLensFlare()
 		alpha = 1.0f - (max(fabsf(x), fabsf(y)) * _renderBus.getLensFlareMultiplier());
 		alpha = std::clamp(alpha, 0.0f, 1.0f);
 	}
+
+	// Update clipspace position for post-processing shader
+	_renderBus.setDirectionalLightingPositionClipspace(clipSpacePosition);
 
 	// Apply lens flare transparency
 	_renderBus.setLensFlareAlpha(alpha);

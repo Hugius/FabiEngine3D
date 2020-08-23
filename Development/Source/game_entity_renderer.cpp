@@ -15,8 +15,8 @@ void GameEntityRenderer::bind()
 	_shader.uploadUniform("u_shadowMatrix",      _renderBus.getShadowMatrix());
 	_shader.uploadUniform("u_clippingPlane",	 clippingPlane);
 	
-	// Fragment shader uniforms u_specularLightStrength
-	_shader.uploadUniform("u_cameraPosition",				_renderBus.getCameraPos());
+	// Fragment shader uniforms
+	_shader.uploadUniform("u_cameraPosition",				_renderBus.getCameraPosition());
 	_shader.uploadUniform("u_ambientLightingEnabled",		_renderBus.isAmbientLightingEnabled());
 	_shader.uploadUniform("u_ambientLightingColor",			_renderBus.getAmbientLightingColor());
 	_shader.uploadUniform("u_ambientLightingIntensity",		_renderBus.getAmbientLightingIntensity());
@@ -68,7 +68,6 @@ void GameEntityRenderer::unbind()
 	glDisable(GL_BLEND);
 	glDisable(GL_CLIP_DISTANCE1);
 	glDisable(GL_DEPTH_TEST);
-
 	_shader.unbind();
 }
 

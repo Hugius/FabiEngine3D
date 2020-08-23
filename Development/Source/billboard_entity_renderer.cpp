@@ -7,8 +7,8 @@ void BillboardEntityRenderer::bind()
 	_shader.bind();
 
 	// Vertex shader uniforms
-	_shader.uploadUniform("u_viewMatrix",              _renderBus.getViewMatrix());
-	_shader.uploadUniform("u_projMatrix",              _renderBus.getProjectionMatrix());
+	_shader.uploadUniform("u_viewMatrix", _renderBus.getViewMatrix());
+	_shader.uploadUniform("u_projMatrix", _renderBus.getProjectionMatrix());
 
 	// Texture uniforms
 	_shader.uploadUniform("u_sampler_diffuseMap", 0);
@@ -20,8 +20,8 @@ void BillboardEntityRenderer::bind()
 
 void BillboardEntityRenderer::unbind()
 {
-	_shader.unbind();
 	glDisable(GL_DEPTH_TEST);
+	_shader.unbind();
 }
 
 void BillboardEntityRenderer::render(const BillboardEntity* entity)

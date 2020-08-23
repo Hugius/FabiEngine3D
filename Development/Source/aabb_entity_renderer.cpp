@@ -16,8 +16,8 @@ void AabbEntityRenderer::bind()
 
 void AabbEntityRenderer::unbind()
 {
-	_shader.unbind();
 	glDisable(GL_DEPTH_TEST);
+	_shader.unbind();
 }
 
 void AabbEntityRenderer::render(const AabbEntity* entity)

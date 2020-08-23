@@ -28,7 +28,7 @@ RenderEngine::RenderEngine(RenderBus& renderBus, Timer& timer) :
 	_bloomHdrFramebuffer.createColorTexture(ivec2(0), Config::getInst().getVpSize(), 1, false);
 	_postProcessingFramebuffer.createColorTexture(ivec2(0), Config::getInst().getVpSize(), 1, false);
 	_shadowFramebuffer.createDepthTexture(ivec2(0), ivec2(Config::getInst().getShadowQuality()), 1);
-	_dofDepthFramebuffer.createDepthTexture(ivec2(0), Config::getInst().getVpSize(), 1);
+	_sceneDepthFramebuffer.createDepthTexture(ivec2(0), Config::getInst().getVpSize(), 1);
 	_waterDepthFramebuffer.createDepthTexture(ivec2(0), Config::getInst().getVpSize(), 1);
 	_blurRenderer.addFramebuffer(static_cast<int>(BlurType::BLOOM),  true);
 	_blurRenderer.addFramebuffer(static_cast<int>(BlurType::DOF),    true);
@@ -83,7 +83,7 @@ void RenderEngine::renderScene(EntityBus * entityBus, CameraManager & camera, iv
 		_captureShadows();
 		_timer.stop();
 		_timer.start("dofDepthPreRender");
-		_captureDofDepth();
+		_captureSceneDepth();
 		_timer.stop();
 		_timer.start("waterDepthPreRender");
 		_captureWaterDepth();

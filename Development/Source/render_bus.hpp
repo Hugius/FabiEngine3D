@@ -71,7 +71,10 @@ public:
 	void setBloomBlurSize(int val);
 	void resetTriangleCount();
 	void increaseTriangleCount(int val);
+	void setMsaaSampleCount(int val);
 	void setShadowMapSize(int val);
+	void setSceneReflectionMapSize(int val);
+	void setSceneRefractionMapSize(int val);
 
 	// Booleans
 	void setMsaaEnabled(bool val);
@@ -153,9 +156,12 @@ public:
 	const float getLensFlareMultiplier()		  const;
 
 	// Integers
-	const int getBloomBlurSize() const;
-	const int getTriangleCount() const;
-	const int getShadowMapSize() const;
+	const int getBloomBlurSize()		  const;
+	const int getTriangleCount()		  const;
+	const int getMsaaSampleCount()		  const;
+	const int getShadowMapSize()		  const;
+	const int getSceneReflectionMapSize() const;
+	const int getSceneRefractionMapSize() const;
 
 	// Booleans
 	const bool isMsaaEnabled()                 const;
@@ -192,7 +198,7 @@ private:
 	GLuint _shadowMap             = 0;
 	GLuint _bloomMap              = 0;
 	GLuint _postProcessedSceneMap = 0;
-	GLuint _sceneDepthMap           = 0;
+	GLuint _sceneDepthMap         = 0;
 	GLuint _waterDepthMap		  = 0;
 	GLuint _blurMap               = 0;
 	GLuint _motionBlurMap         = 0;
@@ -238,9 +244,12 @@ private:
 	float _lensFlareMultiplier			= 0.0f;
 	
 	// Integers
-	int _bloomBlurSize = 0;
-	int _triangleCount = 0;
-	int _shadowMapSize = 0;
+	int _bloomBlurSize	   = 0;
+	int _triangleCount	   = 0;
+	int _msaaSampleCount   = 0;
+	int _shadowMapSize	   = 0;
+	int _sceneReflectionMapSize = 0;
+	int _sceneRefractionMapSize = 0;
 
 	// Booleans
 	bool _isMsaaEnabled                 = false;

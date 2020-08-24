@@ -3,11 +3,6 @@
 
 #include <algorithm>
 
-void FabiEngine3D::audio_setMaxChannels(int count)
-{
-	_core->_audioPlayer.allocateChannels(count);
-}
-
 void FabiEngine3D::audioEntity_setSoundEnabled(bool enabled)
 {
 	_core->_audioPlayer.setSoundEnabled(enabled);
@@ -124,4 +119,14 @@ int FabiEngine3D::audioEntity_getVolume(const std::string& ID)
 int FabiEngine3D::audioEntity_getUsedChannelCount()
 {
 	return _core->_audioPlayer.getUsedChannelCount();
+}
+
+void FabiEngine3D::audio_setMaxChannels(int count)
+{
+	_core->_audioPlayer.allocateChannels(count);
+}
+
+int FabiEngine3D::audio_getMaxChannels()
+{
+	return _core->_audioPlayer.getAllocatedChannelCount();
 }

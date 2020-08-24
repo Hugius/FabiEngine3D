@@ -233,9 +233,24 @@ void RenderBus::increaseTriangleCount(int val)
 	}
 }
 
+void RenderBus::setMsaaSampleCount(int val)
+{
+	_msaaSampleCount = val;
+}
+
 void RenderBus::setShadowMapSize(int val)
 {
 	_shadowMapSize = val;
+}
+
+void RenderBus::setSceneReflectionMapSize(int val)
+{
+	_sceneReflectionMapSize = val;
+}
+
+void RenderBus::setSceneRefractionMapSize(int val)
+{
+	_sceneRefractionMapSize = val;
 }
 
 void RenderBus::setMsaaEnabled(bool val)
@@ -573,9 +588,24 @@ const int RenderBus::getTriangleCount() const
 	return _triangleCount;
 }
 
+const int RenderBus::getMsaaSampleCount() const
+{
+	return _msaaSampleCount;
+}
+
 const int RenderBus::getShadowMapSize() const
 {
 	return _shadowMapSize;
+}
+
+const int RenderBus::getSceneReflectionMapSize() const
+{
+	return _sceneReflectionMapSize;
+}
+
+const int RenderBus::getSceneRefractionMapSize() const
+{
+	return _sceneRefractionMapSize;
 }
 
 const bool RenderBus::isMsaaEnabled() const

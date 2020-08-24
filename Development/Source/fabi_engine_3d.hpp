@@ -426,7 +426,7 @@ public:
 	float guiEntity_getAlpha(const string& ID);
 	vector<string> guiEntity_getAllIDs();
 
-	// Text interface - setters
+	// Text entity interface - setters
 	void textEntity_add
 	(
 		const string& ID, const string& text,
@@ -501,6 +501,10 @@ public:
 	void gfx_disableLensFlare();
 
 	// Graphics interface - getters
+	int gfx_getMsaaQuality();
+	int gfx_getShadowQuality();
+	int gfx_getReflectionQuality();
+	int gfx_getRefractionQuality();
 	float gfx_getAmbientLightingIntensity();
 	float gfx_geDirectionalLightingIntensity();
 	vec3 gfx_getDirectionalLightingPosition();
@@ -535,8 +539,7 @@ public:
 	int  input_getMouseWheelX();
 	int  input_getMouseWheelY();
 
-	// Audio interface - setters
-	void audio_setMaxChannels(int count);
+	// Audio entity interface - setters
 	void audioEntity_setSoundEnabled(bool enabled);
 	void audioEntity_setMusicEnabled(bool enabled);
 	void audioEntity_deleteAllSounds();
@@ -556,10 +559,16 @@ public:
 	void audioEntity_setVolume(const std::string& ID, int volume);
 	void audioEntity_changePoint(const std::string& ID, vec3 position);
 
-	// Audio interface - getters
+	// Audio entity interface - getters
 	bool audioEntity_isPlaying(const std::string& ID);
 	int  audioEntity_getVolume(const std::string& ID);
 	int  audioEntity_getUsedChannelCount();
+
+	// Audio interface - setters
+	void audio_setMaxChannels(int count);
+
+	// Audio interface - getters
+	int audio_getMaxChannels();
 
 	// Logger interface
 	template<typename T, typename...Rest> inline void logger_throwInfo(T first, Rest...rest)

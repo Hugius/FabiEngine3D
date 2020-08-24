@@ -184,9 +184,9 @@ void RenderEngine::renderScene(EntityBus * entityBus, CameraManager & camera, iv
 
 void RenderEngine::loadMsaaFramebuffer(int quality)
 {
-	quality = std::clamp(quality, 1, 16);
 	_msaaFramebuffer.reset();
 	_msaaFramebuffer.createMsaaTexture(ivec2(0), Config::getInst().getVpSize(), 1, quality);
+	_renderBus.setMsaaSampleCount(quality);
 }
 
 void RenderEngine::loadShadowFramebuffer(int quality)
@@ -200,10 +200,12 @@ void RenderEngine::loadReflectionFramebuffer(int quality)
 {
 	_sceneReflectionFramebuffer.reset();
 	_sceneReflectionFramebuffer.createColorTexture(ivec2(0), ivec2(quality), 1, false);
+	_renderBus.setSceneReflectionMapSize(quality);
 }
 
 void RenderEngine::loadRefractionFramebuffer(int quality)
 {
 	_sceneRefractionFramebuffer.reset();
 	_sceneRefractionFramebuffer.createColorTexture(ivec2(0), ivec2(quality), 1, false);
+	_renderBus.setSceneRefractionMapSize(quality);
 }

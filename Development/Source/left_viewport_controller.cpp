@@ -67,7 +67,6 @@ void LeftViewportController::update()
 		}
 		else if (screen->getButton("settingsEditor")->isHovered()) // Settings editor button
 		{
-			_settingsEditor.load();
 			window->setActiveScreen("settingsEditorMenuMain");
 		}
 	}

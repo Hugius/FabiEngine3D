@@ -282,6 +282,11 @@ int AudioPlayer::getUsedChannelCount()
 	return count;
 }
 
+int AudioPlayer::getAllocatedChannelCount()
+{
+	return _channelMap.size();
+}
+
 std::pair<const int, string>& AudioPlayer::_getPair(AudioChunk& chunk)
 {
 	for (auto& pair : _channelMap)

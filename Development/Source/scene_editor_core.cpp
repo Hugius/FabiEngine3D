@@ -285,9 +285,10 @@ bool SceneEditor::_loadScene()
 
 	string filePath = _fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\Scenes\\scene.fe3d";
 
-	// Load world file
-	if (_fe3d.misc_isFileExisting(filePath)) // Check if models file exists
+	// Check if scene file existing
+	if (_fe3d.misc_isFileExisting(filePath))
 	{
+		// Load scene file
 		std::ifstream file(filePath);
 		string line;
 

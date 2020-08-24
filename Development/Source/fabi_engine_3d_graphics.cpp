@@ -186,6 +186,26 @@ void FabiEngine3D::gfx_disableLensFlare()
 	_core->_renderBus.setLensFlareEnabled(false);
 }
 
+int FabiEngine3D::gfx_getMsaaQuality()
+{
+	return _core->_renderBus.getMsaaSampleCount();
+}
+
+int FabiEngine3D::gfx_getShadowQuality()
+{
+	return _core->_renderBus.getShadowMapSize();
+}
+
+int FabiEngine3D::gfx_getReflectionQuality()
+{
+	return _core->_renderBus.getSceneReflectionMapSize();
+}
+
+int FabiEngine3D::gfx_getRefractionQuality()
+{
+	return _core->_renderBus.getSceneRefractionMapSize();
+}
+
 vec3 FabiEngine3D::gfx_getAmbientLightingColor()
 {
 	return _core->_renderBus.getAmbientLightingColor();

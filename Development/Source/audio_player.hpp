@@ -37,6 +37,7 @@ public:
 
 	int getVolume(AudioChunk& chunk);
 	int getUsedChannelCount();
+	int getAllocatedChannelCount();
 
 private:
 	std::pair<const int, string>& _getPair(AudioChunk& chunk);

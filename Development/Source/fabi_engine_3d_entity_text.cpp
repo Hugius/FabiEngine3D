@@ -169,10 +169,10 @@ void FabiEngine3D::gfx_setShadowQuality(int quality)
 
 void FabiEngine3D::gfx_setReflectionQuality(int quality)
 {
-	_core->_renderEngine.loadRefractionFramebuffer(quality);
+	_core->_renderEngine.loadReflectionFramebuffer(quality);
 }
 
 void FabiEngine3D::gfx_setRefractionQuality(int quality)
 {
-	_core->_renderEngine.loadReflectionFramebuffer(quality);
+	_core->_renderEngine.loadRefractionFramebuffer(quality);
 }

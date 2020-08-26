@@ -19,6 +19,7 @@ public:
 	bool isLoaded();
 
 private:
+	void _loadBillboards();
 	void _updateBillboardManagement();
 	void _updateBillboardCreation();
 	void _updateBillboardChoosing();

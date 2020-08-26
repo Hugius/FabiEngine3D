@@ -9,16 +9,9 @@ void ModelEditor::_updateMiscellaneous()
 		_fe3d.input_setKeyTogglingLocked(_gui->getGlobalScreen()->isFocused() || !_fe3d.misc_isMouseInsideViewport());
 
 		// Update reference model visibility
-		if (_currentModelName != "")
+		if (_fe3d.input_getKeyToggled(Input::KEY_R))
 		{
-			if (_fe3d.input_getKeyToggled(Input::KEY_R))
-			{
-				_fe3d.gameEntity_hide("@@cube");
-			}
-			else
-			{
-				_fe3d.gameEntity_show("@@cube");
-			}
+			_fe3d.gameEntity_hide("@@cube");
 		}
 		else
 		{

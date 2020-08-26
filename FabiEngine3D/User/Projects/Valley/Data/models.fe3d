@@ -1,3 +1,4 @@
 @tree User\Assets\OBJs\tree1.obj User\Assets\Textures\DiffuseMaps\tree1.png ? ? 1 1 1 0 1 1 0 1 1 1 1 1 1 1 1 1 1 1
 @plane User\Assets\OBJs\plane.obj User\Assets\Textures\DiffuseMaps\stone2.png ? ? 4.48159 4.48159 4.48159 0 1 0 1 0 1 1 0.5 1 1 1 1 1 1 1
 @hills User\Assets\OBJs\hills.obj User\Assets\Textures\DiffuseMaps\hills.png ? ? 30 30 30 0 1 0 0 0 1 1 1 1 1 1 10 1 1 1
+@lantern User\Assets\OBJs\lantern1.obj User\Assets\Textures\DiffuseMaps\lantern1.png User\Assets\Textures\LightMaps\lantern1.png ? 1 1 1 0 1 0 0 0 1 1 1 1 1 1 1 1 1 1

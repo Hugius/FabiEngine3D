@@ -331,29 +331,49 @@ void RenderEngine::_captureMotionBlur(CameraManager& camera, ivec2 mousePos)
 
 void RenderEngine::_captureLensFlare()
 {
-	// Calculate screen position
-	vec3 lightingPosition = _renderBus.getDirectionalLightingPosition();
-	mat4 viewMatrix = _renderBus.getViewMatrix();
-	mat4 projectionMatrix = _renderBus.getProjectionMatrix();
-	vec4 clipSpacePosition = projectionMatrix * viewMatrix * vec4(lightingPosition, 1.0f);
-	float alpha = 0.0f;
+	// Get light positions
+	vector<vec3> lightSourcePositions;
+	for (auto& entity : _entityBus->getLightEntities())
+	{
+		lightSourcePositions.push_back(entity->getPosition());
+	}
+	lightSourcePositions.push_back(_renderBus.getDirectionalLightingPosition());
+	std::pair<float, vec4> highestAlpha;
 	
-	// Calculate transparency value
-	if (clipSpacePosition.w <= 0.0f)
+	// Calculate
+	for (auto& lightingPosition : lightSourcePositions)
 	{
-		alpha = 0.0f;
-	}
-	else
-	{
-		float x = clipSpacePosition.x / clipSpacePosition.w;
-		float y = clipSpacePosition.y / clipSpacePosition.w;
-		alpha = 1.0f - (max(fabsf(x), fabsf(y)) * _renderBus.getLensFlareMultiplier());
-		alpha = std::clamp(alpha, 0.0f, 1.0f);
-	}
+		// Calculate screen position
+		mat4 viewMatrix = _renderBus.getViewMatrix();
+		mat4 projectionMatrix = _renderBus.getProjectionMatrix();
+		vec4 clipSpacePosition = projectionMatrix * viewMatrix * vec4(lightingPosition, 1.0f);
+		float alpha = 0.0f;
 
-	// Update clipspace position for post-processing shader
-	_renderBus.setDirectionalLightingPositionClipspace(clipSpacePosition);
+		// Calculate transparency value
+		if (clipSpacePosition.w <= 0.0f)
+		{
+			alpha = 0.0f;
+		}
+		else
+		{
+			float x = clipSpacePosition.x / clipSpacePosition.w;
+			float y = clipSpacePosition.y / clipSpacePosition.w;
+			alpha = 1.0f - (max(fabsf(x), fabsf(y)) * _renderBus.getLensFlareMultiplier());
+			alpha = std::clamp(alpha, 0.0f, 1.0f);
+		}
+
+		// Check if camera looking more towards this light source
+		if (alpha > highestAlpha.first)
+		{
+			highestAlpha.first = alpha;
+			highestAlpha.second = clipSpacePosition;
+		}
+	}
 
 	// Apply lens flare transparency
-	_renderBus.setLensFlareAlpha(alpha);
+	_renderBus.setLensFlareAlpha(highestAlpha.first);
+
+	// Update clipspace position for post-processing shader
+	_renderBus.setDirectionalLightingPositionClipspace(highestAlpha.second);
+
 }

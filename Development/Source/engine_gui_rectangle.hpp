@@ -5,8 +5,8 @@
 class EngineGuiRectangle
 {
 public:
-	EngineGuiRectangle(FabiEngine3D& fe3d, const string& parentID, const string& ID, vec2 position, vec2 size, vec3 color);
-	EngineGuiRectangle(FabiEngine3D& fe3d, const string& parentID, const string& ID, vec2 position, vec2 size, const string& textureName);
+	EngineGuiRectangle(FabiEngine3D& fe3d, const string& parentID, const string& ID, vec2 position, vec2 size, vec3 color, bool centered = true);
+	EngineGuiRectangle(FabiEngine3D& fe3d, const string& parentID, const string& ID, vec2 position, vec2 size, const string& textureName, bool centered = true);
 	~EngineGuiRectangle();
 
 	virtual void show();

@@ -211,6 +211,11 @@ bool FabiEngine3D::gameEntity_isStaticToCamera(const string& ID)
 	return _core->_gameEntityManager.getEntity(ID)->isCameraStatic();
 }
 
+bool FabiEngine3D::gameEntity_isDepthMapIncluded(const string& ID)
+{
+	return _core->_gameEntityManager.getEntity(ID)->isDepthMapIncluded();
+}
+
 void FabiEngine3D::gameEntity_move(const string& ID, vec3 factor)
 {
 	_core->_gameEntityManager.getEntity(ID)->translate(factor);
@@ -381,6 +386,11 @@ void FabiEngine3D::gameEntity_setAlpha(const string& ID, float alpha)
 void FabiEngine3D::gameEntity_setShadowed(const string& ID, bool enabled)
 {
 	_core->_gameEntityManager.getEntity(ID)->setShadowed(enabled);
+}
+
+void FabiEngine3D::gameEntity_setDepthMapIncluded(const string& ID, bool enabled)
+{
+	_core->_gameEntityManager.getEntity(ID)->setDepthMapIncluded(enabled);
 }
 
 void FabiEngine3D::gameEntity_setColor(const string& ID, vec3 color)

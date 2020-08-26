@@ -56,7 +56,6 @@ void SettingsEditor::load()
 		_fe3d.gfx_setReflectionQuality(reflection);
 		_fe3d.gfx_setRefractionQuality(refraction);
 		_fe3d.audio_setMaxChannels(audio);
-		std::cout << _fe3d.gfx_getShadowQuality();
 
 		// Close file
 		file.close();

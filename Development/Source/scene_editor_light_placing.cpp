@@ -45,6 +45,7 @@ void SceneEditor::_updateLightPlacing()
 					_fe3d.gameEntity_add("@" + newID, "Engine\\OBJs\\lamp.obj", newPosition, vec3(0.0f), _defaultLightbulbSize);
 					_fe3d.gameEntity_setColor("@" + newID, vec3(1.0f));
 					_fe3d.gameEntity_setShadowed("@" + newID, false);
+					_fe3d.gameEntity_setDepthMapIncluded("@" + newID, false);
 					_fe3d.aabbEntity_bindToGameEntity("@" + newID, _defaultLightbulbAabbSize, true);
 					_fe3d.lightEntity_add(newID, newPosition);
 

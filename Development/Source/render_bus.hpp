@@ -35,7 +35,7 @@ public:
 	void setShadowMatrix(const mat4 & val);
 
 	// Vector4
-	void setDirectionalLightingPositionClipspace(vec4 val);
+	void setFlareSourcePositionClipspace(vec4 val);
 
 	// Vector3
 	void setCameraPosition(vec3 val);
@@ -45,6 +45,7 @@ public:
 	void setShadowEyePosition(vec3 val);
 	void setShadowAreaCenter(vec3 val);
 	void setFogColor(vec3 val);
+	void setFlareSourcePosition(vec3 val);
 
 	// Floats
 	void setAmbientLightIntensity(float val);
@@ -123,7 +124,7 @@ public:
 	const mat4 & getShadowMatrix()      const;
 
 	// Vector4
-	const vec4 getDirectionalLightingPositionClipspace() const;
+	const vec4 getFlareSourcePositionClipspace() const;
 	
 	// Vector3
 	const vec3 getCameraPosition()				const;
@@ -133,6 +134,7 @@ public:
 	const vec3 getShadowEyePosition()			const;
 	const vec3 getShadowAreaCenter()			const;
 	const vec3 getFogColor()					const;
+	const vec3 getFlareSourcePosition()			const;
 
 	// Floats
 	const float getAmbientLightingIntensity()	  const;
@@ -211,7 +213,7 @@ private:
 	mat4 _shadowMatrix      = mat4(1.0f);
 
 	// Vector4
-	vec4 _directionalLightingPositionClipspace = vec4(0.0f);
+	vec4 _flareSourcePositionClipspace = vec4(0.0f);
 
 	// Vector3
 	vec3 _cameraPosition			  = vec3(0.0f);
@@ -221,6 +223,7 @@ private:
 	vec3 _shadowEyePosition			  = vec3(0.0f);
 	vec3 _shadowAreaCenter			  = vec3(0.0f);
 	vec3 _fogColor					  = vec3(1.0f);
+	vec3 _flareSourcePosition		  = vec3(0.0f);
 
 	// Floats
 	float _ambientLightingIntensity     = 1.0f;

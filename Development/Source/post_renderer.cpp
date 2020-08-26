@@ -15,8 +15,8 @@ void PostRenderer::bind()
 	_shader.uploadUniform("u_dofMinDistance", _renderBus.getDofMinDistance());
 	_shader.uploadUniform("u_lensFlareAlpha", _renderBus.getLensFlareAlpha());
 	_shader.uploadUniform("u_lensFlareIntensity", _renderBus.getLensFlareIntensity());
-	_shader.uploadUniform("u_directionalLightingPositionClipspace", _renderBus.getDirectionalLightingPositionClipspace());
-	_shader.uploadUniform("u_directionalLightingPosition", _renderBus.getDirectionalLightingPosition());
+	_shader.uploadUniform("u_flareSourcePositionClipspace", _renderBus.getFlareSourcePositionClipspace());
+	_shader.uploadUniform("u_flareSourcePosition", _renderBus.getFlareSourcePosition());
 	_shader.uploadUniform("u_cameraPosition", _renderBus.getCameraPosition());
 
 	// Blending

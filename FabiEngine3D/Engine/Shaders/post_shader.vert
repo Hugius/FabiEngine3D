@@ -10,18 +10,21 @@ layout(location = 2) uniform sampler2D u_sampler_depth;
 // Matrix44 uniforms
 uniform mat4 u_modelMatrix;
 
-// Boolean uniforms
-uniform bool u_mirrorHor;
-uniform bool u_mirrorVer;
+// Vector4 uniforms
+uniform vec4 u_flareSourcePositionClipspace;
+
+// Vector3 uniforms
+uniform vec3 u_flareSourcePosition;
+uniform vec3 u_cameraPosition;
+
+// Float uniforms
 uniform float u_farZ;
 uniform float u_nearZ;
 
-// Vector4 uniforms
-uniform vec4 u_directionalLightingPositionClipspace;
-
-// Vector3 uniforms
-uniform vec3 u_directionalLightingPosition;
-uniform vec3 u_cameraPosition;
+// Boolean uniforms
+uniform bool u_mirrorHor;
+uniform bool u_mirrorVer;
+uniform bool u_lensFlareEnabled;
 
 // Out variables
 out vec2 f_uv;
@@ -41,10 +44,10 @@ void main()
 
 float calculateFlareOcclusion()
 {
-    if(u_directionalLightingPositionClipspace.w > 0.0f)
+    if(u_lensFlareEnabled && u_flareSourcePositionClipspace.w > 0.0f)
     {
         // Convert to UV space
-        vec2 lightSourceClipPos = u_directionalLightingPositionClipspace.xy / u_directionalLightingPositionClipspace.w;
+        vec2 lightSourceClipPos = u_flareSourcePositionClipspace.xy / u_flareSourcePositionClipspace.w;
         vec2 lightSourceUV = vec2((lightSourceClipPos.x + 1.0f) / 2.0f, (lightSourceClipPos.y + 1.0f) / 2.0f);
 
         // Calculate scene depth
@@ -52,10 +55,10 @@ float calculateFlareOcclusion()
         float flareFragmentDepth = convertDepthToPerspective(flareDepth) / u_farZ;
 
         // Calculate distance to light source
-        vec3 viewDirection       = (u_cameraPosition - u_directionalLightingPosition);
+        vec3 viewDirection       = (u_cameraPosition - u_flareSourcePosition);
         float flareDistance      = length(viewDirection);
-
-        // Check if lightsource is occluded by an object
+        return 1.0f;
+        // Check if lightsource is not occluded by an object
         if(flareFragmentDepth * u_farZ >= flareDistance)
         {
             return 1.0f;

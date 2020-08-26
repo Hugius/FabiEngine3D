@@ -32,6 +32,13 @@ public:
 	void setDiffuseMapPath(const string& val);
 	void setLightMapPath(const string& val);
 	void setReflectionMapPath(const string& val);
+	void setOriginalLightness(float val);
+	void setLightness(float val);
+	void setSpecularFactor(float val);
+	void setSpecularIntensity(float val);
+	void setMaxY(float val);
+	void setAlpha(float val);
+	void setUvRepeat(float val);
 	void setTransparent(bool val);
 	void setFaceCulled(bool val);
 	void setLightMapped(bool val);
@@ -40,13 +47,7 @@ public:
 	void setSpecularLighted(bool val);
 	void setShadowed(bool val);
 	void setCameraStatic(bool val);
-	void setOriginalLightness(float val);
-	void setLightness(float val);
-	void setSpecularFactor(float val);
-	void setSpecularIntensity(float val);
-	void setMaxY(float val);
-	void setAlpha(float val);
-	void setUvRepeat(float val);
+	void setDepthMapIncluded(bool val);
 	
 	// Getters
 	const mat4 & getModelMatrix() const;
@@ -61,6 +62,13 @@ public:
 	const string& getDiffuseMapPath() const;
 	const string& getLightMapPath() const;
 	const string& getReflectionMapPath() const;
+	const float getOriginalLightness() const;
+	const float getLightness() const;
+	const float getSpecularFactor() const;
+	const float getSpecularIntensity() const;
+	const float getAlpha() const;
+	const float getUvRepeat() const;
+	const float getMaxY() const;
 	const bool isTransparent() const;
 	const bool isFaceCulled() const;
 	const bool isLightMapped() const;
@@ -72,13 +80,7 @@ public:
 	const bool hasLightMap() const;
 	const bool hasReflectionMap() const;
 	const bool isCameraStatic() const;
-	const float getOriginalLightness() const;
-	const float getLightness() const;
-	const float getSpecularFactor() const;
-	const float getSpecularIntensity() const;
-	const float getAlpha() const;
-	const float getUvRepeat() const;
-	const float getMaxY() const;
+	const bool isDepthMapIncluded() const;
 
 private:
 	mat4 _modelMatrix = mat4(1.0f);
@@ -97,15 +99,6 @@ private:
 	vector<GLuint> _lightMaps;
 	vector<GLuint> _reflectionMaps;
 
-	bool _isCameraStatic	= false;
-	bool _isTransparent     = false;
-	bool _isFaceCulled      = false;
-	bool _isLightMapped     = false;
-	bool _isSkyReflective   = false;
-	bool _isSceneReflective = false;
-	bool _isSpecularLighted = false;
-	bool _isShadowed        = true;
-
 	float _originalLightness = 1.0f;
 	float _lightness = 1.0f;
 	float _specularFactor = 1.0f;
@@ -113,4 +106,14 @@ private:
 	float _alpha = 1.0f;
 	float _uvRepeat = 1.0f;
 	float _maxY = (std::numeric_limits<float>::max)();
+
+	bool _isCameraStatic	 = false;
+	bool _isTransparent      = false;
+	bool _isFaceCulled       = false;
+	bool _isLightMapped      = false;
+	bool _isSkyReflective    = false;
+	bool _isSceneReflective  = false;
+	bool _isSpecularLighted  = false;
+	bool _isShadowed         = true;
+	bool _isDepthMapIncluded = true;
 };

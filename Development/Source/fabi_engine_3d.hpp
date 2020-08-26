@@ -211,6 +211,7 @@ public:
 	void		   gameEntity_setSpecularLighted(const string& ID, bool enabled);
 	void		   gameEntity_setSceneReflective(const string& ID, bool enabled);
 	void		   gameEntity_setShadowed(const string& ID, bool enabled);
+	void		   gameEntity_setDepthMapIncluded(const string& ID, bool enabled);
 	void		   gameEntity_setStaticToCamera(const string& ID, bool staticToCamera);
 	void		   gameEntity_move(const string& ID, vec3 factor);
 	void		   gameEntity_rotate(const string& ID, vec3 factor);
@@ -241,6 +242,7 @@ public:
 	bool		   gameEntity_isSceneReflective(const string& ID);
 	bool		   gameEntity_isShadowed(const string& ID);
 	bool		   gameEntity_isStaticToCamera(const string& ID);
+	bool		   gameEntity_isDepthMapIncluded(const string& ID);
 	float		   gameEntity_getOriginalLightness(const string& ID);
 	float		   gameEntity_getLightness(const string& ID);
 	float		   gameEntity_getSpecularFactor(const string& ID);

@@ -80,9 +80,9 @@ void RenderBus::setShadowMatrix(const mat4 & val)
 	_shadowMatrix = val;
 }
 
-void RenderBus::setDirectionalLightingPositionClipspace(vec4 val)
+void RenderBus::setFlareSourcePositionClipspace(vec4 val)
 {
-	_directionalLightingPositionClipspace = val;
+	_flareSourcePositionClipspace = val;
 }
 
 void RenderBus::setCameraPosition(vec3 val)
@@ -118,6 +118,11 @@ void RenderBus::setShadowAreaCenter(vec3 val)
 void RenderBus::setFogColor(vec3 val)
 {
 	_fogColor = val;
+}
+
+void RenderBus::setFlareSourcePosition(vec3 val)
+{
+	_flareSourcePosition = val;
 }
 
 void RenderBus::setSceneReflectionHeight(float val)
@@ -443,9 +448,9 @@ const mat4 & RenderBus::getShadowMatrix() const
 	return _shadowMatrix;
 }
 
-const vec4 RenderBus::getDirectionalLightingPositionClipspace() const
+const vec4 RenderBus::getFlareSourcePositionClipspace() const
 {
-	return _directionalLightingPositionClipspace;
+	return _flareSourcePositionClipspace;
 }
 
 const vec3 RenderBus::getCameraPosition() const
@@ -476,6 +481,11 @@ const vec3 RenderBus::getShadowAreaCenter() const
 const vec3 RenderBus::getFogColor() const
 {
 	return _fogColor;
+}
+
+const vec3 RenderBus::getFlareSourcePosition() const
+{
+	return _flareSourcePosition;
 }
 
 const vec3 RenderBus::getDirectionalLightingColor() const

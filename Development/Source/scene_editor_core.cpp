@@ -179,17 +179,19 @@ void SceneEditor::load()
 {
 	// Enable default graphics
 	_fe3d.gfx_enableAmbientLighting(vec3(1.0f), 1.0f);
+	_fe3d.gfx_enableSpecularLighting();
+	_fe3d.gfx_enablePointLighting();
 	_fe3d.gfx_enableFog(150.0f, vec3(0.75f));
-	_fe3d.gfx_enableDOF(50.0f);
-	_fe3d.gfx_enableSkyHDR(0.35f);
+	_fe3d.gfx_enableSkyReflections(0.5f);
+	_fe3d.gfx_enableSceneReflections(0.25f);
+	_fe3d.gfx_enableLightMapping();
 	vec3 camPos = _fe3d.camera_getPosition();
 	_fe3d.gfx_enableShadows(vec3(camPos.x + 100.0f, 75.0f, camPos.z), vec3(camPos.x, 0.0f, camPos.z), 200.0f, 200.0f);
-	_fe3d.gfx_enableLensFlare("User\\Assets\\Textures\\FlareMaps\\flare.png", 1.0f, 1.0f);
-	_fe3d.gfx_enableSkyReflections(0.5f);
-	_fe3d.gfx_enableLightMapping();
-	_fe3d.gfx_enableSpecularLighting();
 	_fe3d.gfx_enableWaterEffects();
-	_fe3d.gfx_enableSceneReflections(0.25f);
+	_fe3d.gfx_enableSkyHDR(0.35f);
+	_fe3d.gfx_enableDOF(50.0f);
+	_fe3d.gfx_enableMotionBlur();
+	_fe3d.gfx_enableLensFlare("User\\Assets\\Textures\\FlareMaps\\flare.png", 1.0f, 1.0f);
 	
 	// Disable default skybox
 	_fe3d.skyEntity_select("");
@@ -265,6 +267,7 @@ void SceneEditor::load()
 	_fe3d.lightEntity_hide(_previewPointlightID);
 	_fe3d.gameEntity_add(_previewPointlightID, "Engine\\OBJs\\lamp.obj", vec3(0.0f), vec3(0.0f), _defaultLightbulbSize, false);
 	_fe3d.gameEntity_setShadowed(_previewPointlightID, false);
+	_fe3d.gameEntity_setDepthMapIncluded(_previewPointlightID, false);
 
 	// Create name textfields
 	_gui->getGlobalScreen()->addTextfield("selectedModelName", vec2(0.0f, 0.85f), vec2(0.5f, 0.1f), "", vec3(1.0f));
@@ -416,6 +419,7 @@ bool SceneEditor::_loadScene()
 				// Add entities
 				_fe3d.gameEntity_add("@" + ID, "Engine\\OBJs\\lamp.obj", position, vec3(0.0f), _defaultLightbulbSize);
 				_fe3d.gameEntity_setShadowed("@" + ID, false);
+				_fe3d.gameEntity_setDepthMapIncluded("@" + ID, false);
 				_fe3d.aabbEntity_bindToGameEntity("@" + ID, _defaultLightbulbAabbSize, true);
 				_fe3d.lightEntity_add(ID, position, color, intensity, distance);
 			}

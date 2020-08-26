@@ -186,7 +186,10 @@ void RenderEngine::_captureSceneDepth()
 		// Render game entities
 		for (auto& entity : _entityBus->getGameEntities())
 		{
-			_depthRenderer.renderGameEntity(entity);
+			if (entity->isDepthMapIncluded())
+			{
+				_depthRenderer.renderGameEntity(entity);
+			}
 		}
 
 		// Render billboard entities
@@ -331,49 +334,82 @@ void RenderEngine::_captureMotionBlur(CameraManager& camera, ivec2 mousePos)
 
 void RenderEngine::_captureLensFlare()
 {
-	// Get light positions
-	vector<vec3> lightSourcePositions;
-	for (auto& entity : _entityBus->getLightEntities())
+	if (_renderBus.isLensFlareEnabled())
 	{
-		lightSourcePositions.push_back(entity->getPosition());
-	}
-	lightSourcePositions.push_back(_renderBus.getDirectionalLightingPosition());
-	std::pair<float, vec4> highestAlpha;
-	
-	// Calculate
-	for (auto& lightingPosition : lightSourcePositions)
-	{
-		// Calculate screen position
-		mat4 viewMatrix = _renderBus.getViewMatrix();
-		mat4 projectionMatrix = _renderBus.getProjectionMatrix();
-		vec4 clipSpacePosition = projectionMatrix * viewMatrix * vec4(lightingPosition, 1.0f);
-		float alpha = 0.0f;
-
-		// Calculate transparency value
-		if (clipSpacePosition.w <= 0.0f)
+		// Temporary struct
+		struct Light
 		{
-			alpha = 0.0f;
+			vec3 position = vec3(0.0f);
+			vec4 clipPosition = vec4(0.0f, 0.0f, 0.0f, -1.0f);
+			bool isPointlight = false;
+			float alpha = 0.0f;
+		};
+
+		// Add pointlight lightsources
+		vector<Light> lightSourcePositions;
+		for (auto& entity : _entityBus->getLightEntities())
+		{
+			if (entity->isVisible())
+			{
+				lightSourcePositions.push_back(Light());
+				lightSourcePositions.back().position = entity->getPosition();
+				lightSourcePositions.back().isPointlight = true;
+			}
+		}
+
+		// Add directional lightsource
+		lightSourcePositions.push_back(Light());
+		lightSourcePositions.back().position = _renderBus.getDirectionalLightingPosition();
+		Light* resultLight = nullptr;
+
+		// Calculate which light the camera is looking at
+		for (auto& light : lightSourcePositions)
+		{
+			// Calculate screen position
+			mat4 viewMatrix = _renderBus.getViewMatrix();
+			mat4 projectionMatrix = _renderBus.getProjectionMatrix();
+			light.clipPosition = projectionMatrix * viewMatrix * vec4(light.position, 1.0f);
+
+			// Calculate transparency value
+			if (light.clipPosition.w > 0.0f)
+			{
+				float isPointlight = static_cast<float>(light.isPointlight);
+				float x = light.clipPosition.x / light.clipPosition.w;
+				float y = light.clipPosition.y / light.clipPosition.w;
+				float multiplier = _renderBus.getLensFlareMultiplier() * (isPointlight ? 2.0f : 1.0f);
+				light.alpha = 1.0f - (max(fabsf(x), fabsf(y)) * multiplier);
+				light.alpha = std::clamp(light.alpha, 0.0f, 1.0f);
+			}
+
+			// Check if camera looking more towards this light source
+			if (resultLight == nullptr)
+			{
+				if (light.alpha > 0.0f)
+				{
+					resultLight = &light;
+				}
+			}
+			else
+			{
+				if (light.alpha > resultLight->alpha)
+				{
+					resultLight = &light;
+				}
+			}
+		}
+
+		// Update post-processing shader values
+		if (resultLight == nullptr)
+		{
+			_renderBus.setLensFlareAlpha(0.0f);
+			_renderBus.setFlareSourcePositionClipspace(vec4(0.0f, 0.0f, 0.0f, -1.0f));
+			_renderBus.setFlareSourcePosition(vec3(0.0f));
 		}
 		else
 		{
-			float x = clipSpacePosition.x / clipSpacePosition.w;
-			float y = clipSpacePosition.y / clipSpacePosition.w;
-			alpha = 1.0f - (max(fabsf(x), fabsf(y)) * _renderBus.getLensFlareMultiplier());
-			alpha = std::clamp(alpha, 0.0f, 1.0f);
-		}
-
-		// Check if camera looking more towards this light source
-		if (alpha > highestAlpha.first)
-		{
-			highestAlpha.first = alpha;
-			highestAlpha.second = clipSpacePosition;
+			_renderBus.setLensFlareAlpha(resultLight->alpha);
+			_renderBus.setFlareSourcePositionClipspace(resultLight->clipPosition);
+			_renderBus.setFlareSourcePosition(resultLight->position);
 		}
 	}
-
-	// Apply lens flare transparency
-	_renderBus.setLensFlareAlpha(highestAlpha.first);
-
-	// Update clipspace position for post-processing shader
-	_renderBus.setDirectionalLightingPositionClipspace(highestAlpha.second);
-
 }

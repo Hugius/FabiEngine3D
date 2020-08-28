@@ -295,9 +295,15 @@ void ModelEditor::_updateCamera()
 				scollSpeed += float(-_fe3d.input_getMouseWheelY() / _scrollWheelDivider); // Add scroll speed
 			}
 		}
-		scollSpeed *= 0.975f; // Slowing down
+		scollSpeed *= 0.975f; // Slowing down (smoothing)
 		scollSpeed = std::clamp(scollSpeed, -1.0f, 1.0f);
+
+		// Adding movement to the 3rd person view & making sure you cannot zoom inverted
 		_cameraDistance += scollSpeed;
+		if (_cameraDistance < 0.0f)
+		{
+			_cameraDistance = 0.0f;
+		}
 
 		// Check if MMB pressed
 		if (!_gui->getGlobalScreen()->isFocused() && _fe3d.misc_isMouseInsideViewport())

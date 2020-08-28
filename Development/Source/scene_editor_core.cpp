@@ -207,7 +207,7 @@ void SceneEditor::load()
 	// Load lightsource billboard
 	if (!_fe3d.billboardEntity_isExisting("@@lightSource"))
 	{
-		_fe3d.billBoardEntity_add("@@lightSource", "Engine\\Textures\\lightsource.png", _fe3d.gfx_getDirectionalLightingPosition(),
+		_fe3d.billBoardEntity_add("@@lightSource", "Engine\\Textures\\light_source.png", _fe3d.gfx_getDirectionalLightingPosition(),
 			vec3(0.0f), vec2(0.0f), true, true, true, true);
 	}
 	
@@ -404,7 +404,7 @@ bool SceneEditor::_loadScene()
 
 				// Apply
 				_fe3d.gfx_enableDirectionalLighting(directionalLightingPosition, directionalLightingColor, directionalLightingIntensity);
-				_fe3d.billBoardEntity_add("@@lightSource", "Engine\\Textures\\lightsource.png", directionalLightingPosition, vec3(0.0f), vec2(billboardSize), true, true, true, true);
+				_fe3d.billBoardEntity_add("@@lightSource", "Engine\\Textures\\light_source.png", directionalLightingPosition, vec3(0.0f), vec2(billboardSize), true, true, true, true);
 			}
 			else if (entityType == "POINT")
 			{

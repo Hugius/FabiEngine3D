@@ -52,11 +52,12 @@ void main()
 	// DOF
 	if(u_dofEnabled)
 	{
-        float smoothingDistance = u_dofMinDistance / 10.0f;
-        float mixValue = ((fragmentDepth * u_farZ) - (u_dofMinDistance - smoothingDistance)) / smoothingDistance;
-        mixValue = clamp(mixValue, 0.0f, 1.0f);
-		vec3 dofColor = blurColor + bloomColor;
-        o_finalColor.rgb = mix(o_finalColor.rgb, dofColor, mixValue);
+        float smoothingDistance = u_dofMinDistance * 0.2f; // Smooth overlap distance in world space
+        float fragmentDistance = (fragmentDepth * u_farZ); // Distance from camera to fragment in world space
+        float mixValue = (fragmentDistance - (u_dofMinDistance - smoothingDistance)) / smoothingDistance; // Calculate DOF strength
+        mixValue = clamp(mixValue, 0.0f, 1.0f); // Clamp
+		vec3 dofColor = blurColor + bloomColor; // Add bloom
+        o_finalColor.rgb = mix(o_finalColor.rgb, dofColor, mixValue); // Mix accordingly
 	}
 
     // Lens flare

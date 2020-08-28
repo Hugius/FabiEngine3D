@@ -253,9 +253,10 @@ void RenderEngine::_capturePostProcessing()
 	_renderBus.setPostProcessedSceneMap(_postProcessingFramebuffer.getTexture(0));
 }
 
-void RenderEngine::_captureMotionBlur(CameraManager& camera, ivec2 mousePos)
+void RenderEngine::_captureMotionBlur(CameraManager& camera)
 {
-	static ivec2 lastMousePos;
+	static float lastYaw;
+	static float lastPitch;
 
 	// Timing variables
 	static std::chrono::high_resolution_clock::time_point previous = std::chrono::high_resolution_clock::now();
@@ -276,8 +277,8 @@ void RenderEngine::_captureMotionBlur(CameraManager& camera, ivec2 mousePos)
 			previous = current;
 
 			// Miscellaneous variables
-			int xDifference = int(fabsf(float(mousePos.x) - float(lastMousePos.x)) / 3.0f);
-			int yDifference = int(fabsf(float(mousePos.y) - float(lastMousePos.y)) / 3.0f);
+			int xDifference = static_cast<int>(fabsf(camera.getYaw() - lastYaw) * 2.0f);
+			int yDifference = static_cast<int>(fabsf(camera.getPitch() - lastPitch) * 2.0f);
 			static BlurDirection lastDirection = BlurDirection::NONE;
 			BlurDirection direction = BlurDirection::NONE;
 			firstTime = false;
@@ -296,7 +297,7 @@ void RenderEngine::_captureMotionBlur(CameraManager& camera, ivec2 mousePos)
 					direction = BlurDirection::VERTICAL;
 				}
 			}
-			else // No mouse movement
+			else // No FPS camera movement
 			{
 				// Slowly fade out
 				if (blurStrength > 0)
@@ -307,11 +308,11 @@ void RenderEngine::_captureMotionBlur(CameraManager& camera, ivec2 mousePos)
 			}
 			
 			// Blur strength must be between 0 and 10
-			blurStrength = std::clamp(blurStrength, 0, 8);
+			blurStrength = std::clamp(blurStrength, 0, 10);
 
 			// Set for next iteration
-			lastMousePos.x = mousePos.x;
-			lastMousePos.y = mousePos.y;
+			lastYaw = camera.getYaw();
+			lastPitch = camera.getPitch();
 
 			// Apply motion blur
 			_blurRenderer.bind();
@@ -322,13 +323,10 @@ void RenderEngine::_captureMotionBlur(CameraManager& camera, ivec2 mousePos)
 			// Set last direction
 			lastDirection = direction;
 		}
-		else
+		else // No motion blur
 		{
 			_renderBus.setMotionBlurMap(_renderBus.getPostProcessedSceneMap());
 		}
-
-		// Set last mouse position
-		lastMousePos = mousePos;
 	}
 }
 
@@ -336,80 +334,29 @@ void RenderEngine::_captureLensFlare()
 {
 	if (_renderBus.isLensFlareEnabled())
 	{
-		// Temporary struct
-		struct Light
+		// Calculate screen position
+		vec3 lightingPosition = _renderBus.getDirectionalLightingPosition();
+		mat4 viewMatrix = _renderBus.getViewMatrix();
+		mat4 projectionMatrix = _renderBus.getProjectionMatrix();
+		vec4 clipSpacePosition = projectionMatrix * viewMatrix * vec4(lightingPosition, 1.0f);
+		float alpha = 0.0f;
+
+		// Calculate transparency value
+		if (clipSpacePosition.w <= 0.0f)
 		{
-			vec3 position = vec3(0.0f);
-			vec4 clipPosition = vec4(0.0f, 0.0f, 0.0f, -1.0f);
-			bool isPointlight = false;
-			float alpha = 0.0f;
-		};
-
-		// Add pointlight lightsources
-		vector<Light> lightSourcePositions;
-		for (auto& entity : _entityBus->getLightEntities())
-		{
-			if (entity->isVisible())
-			{
-				lightSourcePositions.push_back(Light());
-				lightSourcePositions.back().position = entity->getPosition();
-				lightSourcePositions.back().isPointlight = true;
-			}
-		}
-
-		// Add directional lightsource
-		lightSourcePositions.push_back(Light());
-		lightSourcePositions.back().position = _renderBus.getDirectionalLightingPosition();
-		Light* resultLight = nullptr;
-
-		// Calculate which light the camera is looking at
-		for (auto& light : lightSourcePositions)
-		{
-			// Calculate screen position
-			mat4 viewMatrix = _renderBus.getViewMatrix();
-			mat4 projectionMatrix = _renderBus.getProjectionMatrix();
-			light.clipPosition = projectionMatrix * viewMatrix * vec4(light.position, 1.0f);
-
-			// Calculate transparency value
-			if (light.clipPosition.w > 0.0f)
-			{
-				float isPointlight = static_cast<float>(light.isPointlight);
-				float x = light.clipPosition.x / light.clipPosition.w;
-				float y = light.clipPosition.y / light.clipPosition.w;
-				float multiplier = _renderBus.getLensFlareMultiplier() * (isPointlight ? 2.0f : 1.0f);
-				light.alpha = 1.0f - (max(fabsf(x), fabsf(y)) * multiplier);
-				light.alpha = std::clamp(light.alpha, 0.0f, 1.0f);
-			}
-
-			// Check if camera looking more towards this light source
-			if (resultLight == nullptr)
-			{
-				if (light.alpha > 0.0f)
-				{
-					resultLight = &light;
-				}
-			}
-			else
-			{
-				if (light.alpha > resultLight->alpha)
-				{
-					resultLight = &light;
-				}
-			}
-		}
-
-		// Update post-processing shader values
-		if (resultLight == nullptr)
-		{
-			_renderBus.setLensFlareAlpha(0.0f);
-			_renderBus.setFlareSourcePositionClipspace(vec4(0.0f, 0.0f, 0.0f, -1.0f));
-			_renderBus.setFlareSourcePosition(vec3(0.0f));
+			alpha = 0.0f;
 		}
 		else
 		{
-			_renderBus.setLensFlareAlpha(resultLight->alpha);
-			_renderBus.setFlareSourcePositionClipspace(resultLight->clipPosition);
-			_renderBus.setFlareSourcePosition(resultLight->position);
+			float x = clipSpacePosition.x / clipSpacePosition.w;
+			float y = clipSpacePosition.y / clipSpacePosition.w;
+			alpha = 1.0f - (max(fabsf(x), fabsf(y)) * _renderBus.getLensFlareMultiplier());
+			alpha = std::clamp(alpha, 0.0f, 1.0f);
 		}
+
+		// Update post-processing shader values
+		_renderBus.setLensFlareAlpha(alpha);
+		_renderBus.setFlareSourcePositionClipspace(clipSpacePosition);
+		_renderBus.setFlareSourcePosition(lightingPosition);
 	}
 }

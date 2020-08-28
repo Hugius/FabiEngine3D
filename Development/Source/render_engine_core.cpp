@@ -52,7 +52,7 @@ void RenderEngine::renderEngineLogo(GuiEntity * entity, ivec2 viewport)
 	_guiEntityRenderer.unbind();
 }
 
-void RenderEngine::renderScene(EntityBus * entityBus, CameraManager & camera, ivec2 mousePos)
+void RenderEngine::renderScene(EntityBus * entityBus, CameraManager& camera)
 {
 	// General stuff
 	_entityBus = entityBus;
@@ -147,7 +147,7 @@ void RenderEngine::renderScene(EntityBus * entityBus, CameraManager & camera, iv
 		_captureDofBlur();
 		_captureLensFlare();
 		_capturePostProcessing();
-		_captureMotionBlur(camera, mousePos);
+		_captureMotionBlur(camera);
 
 		// 2D rendering
 		glClear(GL_COLOR_BUFFER_BIT);

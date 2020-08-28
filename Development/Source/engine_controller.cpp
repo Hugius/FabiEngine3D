@@ -70,7 +70,7 @@ void EngineController::_initializeMiscellaneous()
 	camera_load(90.0f, 0.1f, 10000.0f, vec3(0.0f));
 
 	// Custom cursor texture
-	guiEntity_add("@@cursor", "Engine\\Textures\\cursor_default.png", vec2(0.0f), 0.0f, vec2(0.05f, 0.05f * misc_getAspectRatio()), true);
+	guiEntity_add("@@cursor", "Engine\\Textures\\cursor_default.png", vec2(0.0f), 0.0f, vec2(0.075f, 0.075f * misc_getAspectRatio()), true);
 	misc_setCustomCursor("@@cursor");
 	misc_hideCursor();
 }

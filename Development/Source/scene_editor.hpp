@@ -112,7 +112,7 @@ private:
 	float _customCameraSpeed = 1.0f;
 	const float _modelBlinkingSpeed = 0.025f;
 	const float _lightbulbAnimationSpeed = 0.01f;
-	const float _movementChangingSpeed = 0.05f;
+	const float _movementChangingSpeed = 0.1f;
 	const float _colorChangingSpeed = 0.005f;
 	const float _lightingChangingSpeed = 0.001f;
 };

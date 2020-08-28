@@ -77,6 +77,9 @@ void SceneEditor::_updateShadowGraphicsSettingsMenu()
 	if (_leftWindow->getActiveScreen()->getID() == "sceneEditorMenuSettingsGraphicsShadows")
 	{
 		auto screen = _leftWindow->getScreen("sceneEditorMenuSettingsGraphicsShadows");
+		vec3 position = _fe3d.gfx_getShadowEyePosition();
+		vec3 center = _fe3d.gfx_getShadowCenter();
+		//bool followCam = 
 
 		// GUI management
 		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))

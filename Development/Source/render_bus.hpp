@@ -118,10 +118,10 @@ public:
 	const GLuint getLensFlareMap()			const;
 	
 	// Matrices
-	const mat4 & getViewMatrix()        const;
-	const mat4 & getProjectionMatrix()  const;
-	const mat4 & getSkyRotationMatrix() const;
-	const mat4 & getShadowMatrix()      const;
+	const mat4& getViewMatrix()        const;
+	const mat4& getProjectionMatrix()  const;
+	const mat4& getSkyRotationMatrix() const;
+	const mat4& getShadowMatrix()      const;
 
 	// Vector4
 	const vec4 getFlareSourcePositionClipspace() const;

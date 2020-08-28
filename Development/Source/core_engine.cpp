@@ -152,7 +152,7 @@ void CoreEngine::_renderApplication()
 	);
 
 	// Render entities
-	_renderEngine.renderScene(&entityBus, _cameraManager, _windowManager.getMousePos());
+	_renderEngine.renderScene(&entityBus, _cameraManager);
 
 	// Swap GPU buffer
 	_timer.start("bufferSwap");

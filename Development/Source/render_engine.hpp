@@ -32,7 +32,7 @@ public:
 	~RenderEngine() = default;
 
 	void renderEngineLogo(GuiEntity* entity, ivec2 viewport);
-	void renderScene(EntityBus* entityBus, CameraManager& camera, ivec2 mousePos);
+	void renderScene(EntityBus* entityBus, CameraManager& camera);
 	void loadMsaaFramebuffer(int quality);
 	void loadShadowFramebuffer(int quality);
 	void loadReflectionFramebuffer(int quality);
@@ -87,7 +87,7 @@ private:
 	void _captureWaterDepth();
 	void _capturePostProcessing();
 	void _captureDofBlur();
-	void _captureMotionBlur(CameraManager& camera, ivec2 mousePos);
+	void _captureMotionBlur(CameraManager& camera);
 	void _captureLensFlare();
 
 	// Scene rendering functions

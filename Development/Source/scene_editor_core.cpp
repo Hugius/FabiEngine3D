@@ -181,15 +181,13 @@ void SceneEditor::load()
 	_fe3d.gfx_enableAmbientLighting(vec3(1.0f), 1.0f);
 	_fe3d.gfx_enableSpecularLighting();
 	_fe3d.gfx_enablePointLighting();
-	_fe3d.gfx_enableFog(150.0f, vec3(0.75f));
+	//_fe3d.gfx_enableFog(150.0f, vec3(0.75f));
 	_fe3d.gfx_enableSkyReflections(0.5f);
 	_fe3d.gfx_enableSceneReflections(0.25f);
 	_fe3d.gfx_enableLightMapping();
-	vec3 camPos = _fe3d.camera_getPosition();
-	_fe3d.gfx_enableShadows(vec3(camPos.x + 100.0f, 75.0f, camPos.z), vec3(camPos.x, 0.0f, camPos.z), 200.0f, 200.0f);
 	_fe3d.gfx_enableWaterEffects();
-	_fe3d.gfx_enableSkyHDR(0.35f);
-	_fe3d.gfx_enableDOF(50.0f);
+	_fe3d.gfx_enableSkyHDR(0.4f);
+	_fe3d.gfx_enableDOF(75.0f);
 	_fe3d.gfx_enableMotionBlur();
 	_fe3d.gfx_enableLensFlare("User\\Assets\\Textures\\FlareMaps\\flare.png", 1.0f, 1.0f);
 	

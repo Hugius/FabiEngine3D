@@ -39,7 +39,7 @@ void ModelEditor::_updateModelEditingOptions()
 	auto transparentID = screen->getButton("isTransparent")->getTextfield()->getEntityID();
 	auto isTransparent = _fe3d.gameEntity_isTransparent(_currentModelName);
 	_fe3d.textEntity_setTextContent(faceculledID, isCulled ? "Culling: ON" : "Culling: OFF");
-	_fe3d.textEntity_setTextContent(transparentID, isTransparent ? "No-white: ON" : "No-white: OFF");
+	_fe3d.textEntity_setTextContent(transparentID, isTransparent ? "Alpha: ON" : "Alpha: OFF");
 
 	// Setting model color
 	vec3 newColor = _fe3d.gameEntity_getColor(_currentModelName) * 255.0f;

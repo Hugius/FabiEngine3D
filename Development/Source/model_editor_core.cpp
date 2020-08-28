@@ -45,7 +45,7 @@ void ModelEditor::initializeGUI()
 	// Left-viewport: mainWindow - modelEditorMenuOptions
 	_leftWindow->addScreen("modelEditorMenuOptions");
 	_leftWindow->getScreen("modelEditorMenuOptions")->addButton("isFaceculled", vec2(0.0f, 0.7f), vec2(GW("Culling: OFF"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Culling: OFF", LVC::textColor, LVC::textHoverColor);
-	_leftWindow->getScreen("modelEditorMenuOptions")->addButton("isTransparent", vec2(0.0f, 0.35f), vec2(GW("No-white: OFF"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "No-white: OFF", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen("modelEditorMenuOptions")->addButton("isTransparent", vec2(0.0f, 0.35f), vec2(GW("Alpha: OFF"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Alpha: OFF", LVC::textColor, LVC::textHoverColor);
 	_leftWindow->getScreen("modelEditorMenuOptions")->addButton("setColor", vec2(0.0f, 0.0f), vec2(GW("Set color"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Set color", LVC::textColor, LVC::textHoverColor);
 	_leftWindow->getScreen("modelEditorMenuOptions")->addButton("uvRepeat", vec2(0.0f, -0.35f), vec2(GW("Set UV-repeat"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Set UV-repeat", LVC::textColor, LVC::textHoverColor);
 	_leftWindow->getScreen("modelEditorMenuOptions")->addButton("back", vec2(0.0f, -0.7f), vec2(GW("Go back"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Go back", LVC::textColor, LVC::textHoverColor);

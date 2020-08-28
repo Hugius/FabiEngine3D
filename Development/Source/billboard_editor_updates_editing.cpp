@@ -147,7 +147,7 @@ void BillboardEditor::_updateBillboardEditing()
 				string textEntityID = screen->getButton("isTransparent")->getTextfield()->getEntityID();
 				bool isTransparent = _fe3d.billboardEntity_isTransparent(_currentBillboardID);
 				_fe3d.billboardEntity_setTransparent(_currentBillboardID, isTransparent);
-				_fe3d.textEntity_setTextContent(textEntityID, isTransparent ? "No-white: ON" : "No-white: OFF");
+				_fe3d.textEntity_setTextContent(textEntityID, isTransparent ? "Alpha: ON" : "Alpha: OFF");
 			}
 			else if (_leftWindow->getActiveScreen()->getID() == "billboardEditorMenuAnimation")
 			{

@@ -214,13 +214,19 @@ void SceneEditor::_handleValueChanging(const string& screenID, string buttonID, 
 
 void SceneEditor::_updateMiscellaneous()
 {
-	// Update bounding box visibility
-	if (_fe3d.input_getKeyToggled(Input::KEY_B))
+	if (_isLoaded)
 	{
-		_fe3d.misc_enableAabbFrameRendering();
-	}
-	else
-	{
-		_fe3d.misc_disableAabbFrameRendering();
+		vec3 camPos = _fe3d.camera_getPosition();
+		_fe3d.gfx_enableShadows(vec3(camPos.x - 100.0f, 100.0f, camPos.z), vec3(camPos.x, 0.0f, camPos.z), 200.0f, 250.0f);
+
+		// Update bounding box visibility
+		if (_fe3d.input_getKeyToggled(Input::KEY_B))
+		{
+			_fe3d.misc_enableAabbFrameRendering();
+		}
+		else
+		{
+			_fe3d.misc_disableAabbFrameRendering();
+		}
 	}
 }

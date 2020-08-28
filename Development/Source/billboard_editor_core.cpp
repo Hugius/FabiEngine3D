@@ -45,7 +45,7 @@ void BillboardEditor::initializeGUI()
 	_leftWindow->addScreen("billboardEditorMenuAppearance");
 	_leftWindow->getScreen("billboardEditorMenuAppearance")->addButton("color", vec2(0.0f, 0.63f), vec2(GW("Color"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Color", LVC::textColor, LVC::textHoverColor);
 	_leftWindow->getScreen("billboardEditorMenuAppearance")->addButton("texture", vec2(0.0f, 0.21), vec2(GW("Texture"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Texture", LVC::textColor, LVC::textHoverColor);
-	_leftWindow->getScreen("billboardEditorMenuAppearance")->addButton("isTransparent", vec2(0.0f, -0.21), vec2(GW("No-white: OFF"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "No-white: OFF", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen("billboardEditorMenuAppearance")->addButton("isTransparent", vec2(0.0f, -0.21), vec2(GW("Alpha: OFF"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Alpha: OFF", LVC::textColor, LVC::textHoverColor);
 	_leftWindow->getScreen("billboardEditorMenuAppearance")->addButton("back", vec2(0.0f, -0.63f), vec2(GW("Go back"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Go back", LVC::textColor, LVC::textHoverColor);
 
 	// Left-viewport: mainWindow - billboardEditingAnimation

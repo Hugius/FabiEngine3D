@@ -1,3 +1,3 @@
-@fire 2.5 2.5 1 1 1 0 1 User\Assets\Textures\BillboardMaps\fire.png 1 ? ? 1 4 8 3
-@text 1 1 1 0 1 0 0 ? 1 User\Assets\Fonts\berlin.ttf hoi 0 0 0 0
-@kip 1 1 1 1 1 0 0 ? 0 ? ? 0 0 0 0
+@fire 2.5 2.5 1 1 1 0 0 User\Assets\Textures\BillboardMaps\fire.png 1     1 4 8 3
+@text 1.5 1 1 0 1 0 0   1 User\Assets\Fonts\berlin.ttf fab = lief 0 0 0 0
+@kip 1 1 1 1 1 0 0   0     0 0 0 0

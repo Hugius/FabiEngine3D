@@ -181,7 +181,7 @@ void SceneEditor::load()
 	_fe3d.gfx_enableAmbientLighting(vec3(1.0f), 1.0f);
 	_fe3d.gfx_enableSpecularLighting();
 	_fe3d.gfx_enablePointLighting();
-	//_fe3d.gfx_enableFog(150.0f, vec3(0.75f));
+	_fe3d.gfx_enableFog(150.0f, vec3(0.75f));
 	_fe3d.gfx_enableSkyReflections(0.5f);
 	_fe3d.gfx_enableSceneReflections(0.25f);
 	_fe3d.gfx_enableLightMapping();

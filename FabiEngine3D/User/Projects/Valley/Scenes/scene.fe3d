@@ -1,43 +1,8 @@
-MODEL tree3642 -91.1853 5.29412 -30.0664 0 0 0 1.8 1.8 1.8 User\Assets\OBJs\tree7.obj User\Assets\Textures\DiffuseMaps\tree7.png ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 1 1 1
-MODEL tree3262 -72.278 5.29412 2.50369 0 0 0 1.8 1.8 1.8 User\Assets\OBJs\tree7.obj User\Assets\Textures\DiffuseMaps\tree7.png ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 1 1 1
-MODEL tree3431 -58.4699 6.47059 -44.1055 0 0 0 1.8 1.8 1.8 User\Assets\OBJs\tree7.obj User\Assets\Textures\DiffuseMaps\tree7.png ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 1 1 1
-MODEL tree3284 -52.8287 5.29412 -6.24455 0 0 0 1.8 1.8 1.8 User\Assets\OBJs\tree7.obj User\Assets\Textures\DiffuseMaps\tree7.png ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 1 1 1
-MODEL tree3630 -3.99099 7.64706 -18.3483 0 0 0 1.8 1.8 1.8 User\Assets\OBJs\tree7.obj User\Assets\Textures\DiffuseMaps\tree7.png ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 1 1 1
-MODEL tree3446 -46.0077 7.64706 -26.7423 0 0 0 1.8 1.8 1.8 User\Assets\OBJs\tree7.obj User\Assets\Textures\DiffuseMaps\tree7.png ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 1 1 1
-MODEL tree3265 -13 7.47701 4.67434 0 0 0 1.8 1.8 1.8 User\Assets\OBJs\tree7.obj User\Assets\Textures\DiffuseMaps\tree7.png ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 1 1 1
-MODEL tree35 9.92284 6.47059 -51.9761 0 0 0 1.8 1.8 1.8 User\Assets\OBJs\tree7.obj User\Assets\Textures\DiffuseMaps\tree7.png ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 1 1 1
-MODEL tree3216 -109.134 5.29411 5.43073 0 0 0 1.8 1.8 1.8 User\Assets\OBJs\tree7.obj User\Assets\Textures\DiffuseMaps\tree7.png ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 1 1 1
-MODEL tree3977 -120.564 14.1176 39.2043 0 0 0 1.8 1.8 1.8 User\Assets\OBJs\tree7.obj User\Assets\Textures\DiffuseMaps\tree7.png ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 1 1 1
-MODEL tree3560 -148.836 8.82353 37.701 0 0 0 1.8 1.8 1.8 User\Assets\OBJs\tree7.obj User\Assets\Textures\DiffuseMaps\tree7.png ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 1 1 1
-MODEL tree322 -175.329 11.1765 11.6553 0 0 0 1.8 1.8 1.8 User\Assets\OBJs\tree7.obj User\Assets\Textures\DiffuseMaps\tree7.png ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 1 1 1
-MODEL tree3665 -174.564 20.5882 -29.5099 0 0 0 1.8 1.8 1.8 User\Assets\OBJs\tree7.obj User\Assets\Textures\DiffuseMaps\tree7.png ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 1 1 1
-MODEL tree3408 -147.597 23.201 -44 0 0 0 1.8 1.8 1.8 User\Assets\OBJs\tree7.obj User\Assets\Textures\DiffuseMaps\tree7.png ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 1 1 1
-MODEL tree3521 -113.334 12.3529 -61.7055 0 0 0 1.8 1.8 1.8 User\Assets\OBJs\tree7.obj User\Assets\Textures\DiffuseMaps\tree7.png ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 1 1 1
-MODEL tree3851 -78.7366 10.5882 -86.8084 0 0 0 1.8 1.8 1.8 User\Assets\OBJs\tree7.obj User\Assets\Textures\DiffuseMaps\tree7.png ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 1 1 1
-MODEL tree3281 -48 8.38498 -87.3871 0 0 0 1.8 1.8 1.8 User\Assets\OBJs\tree7.obj User\Assets\Textures\DiffuseMaps\tree7.png ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 1 1 1
-MODEL tree3878 -32.8263 10.5882 -63.5758 0 0 0 1.8 1.8 1.8 User\Assets\OBJs\tree7.obj User\Assets\Textures\DiffuseMaps\tree7.png ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 1 1 1
-MODEL highPolyTree905 -81 4.83664 -15.9466 0 0 0 2.15 2.15 2.15 User\Assets\OBJs\tree6.obj User\Assets\Textures\DiffuseMaps\tree6.png ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 1 3.95 6.65001
-MODEL highPolyTree563 -54.8836 5.88235 -66.5015 0 0 0 2.15 2.15 2.15 User\Assets\OBJs\tree6.obj User\Assets\Textures\DiffuseMaps\tree6.png ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 1 3.95 6.65001
-MODEL highPolyTree236 -26.5499 9.41176 -41.5877 0 0 0 2.15 2.15 2.15 User\Assets\OBJs\tree6.obj User\Assets\Textures\DiffuseMaps\tree6.png ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 1 3.95 6.65001
-MODEL highPolyTree7 -31.115 7.64706 -17.7249 0 0 0 2.15 2.15 2.15 User\Assets\OBJs\tree6.obj User\Assets\Textures\DiffuseMaps\tree6.png ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 1 3.95 6.65001
-MODEL highPolyTree358 22.6612 6.47058 5.08829 0 0 0 2.15 2.15 2.15 User\Assets\OBJs\tree6.obj User\Assets\Textures\DiffuseMaps\tree6.png ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 1 3.95 6.65001
-MODEL highPolyTree452 23 6.7649 -33.3581 0 0 0 2.15 2.15 2.15 User\Assets\OBJs\tree6.obj User\Assets\Textures\DiffuseMaps\tree6.png ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 1 3.95 6.65001
-MODEL highPolyTree592 -5.3588 10 -68.5598 0 0 0 2.15 2.15 2.15 User\Assets\OBJs\tree6.obj User\Assets\Textures\DiffuseMaps\tree6.png ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 1 3.95 6.65001
-MODEL highPolyTree689 -2.60542 8.23423 18.8888 0 0 0 2.15 2.15 2.15 User\Assets\OBJs\tree6.obj User\Assets\Textures\DiffuseMaps\tree6.png ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 1 3.95 6.65001
-MODEL highPolyTree29 -34.9501 7.05883 16.5785 0 0 0 2.15 2.15 2.15 User\Assets\OBJs\tree6.obj User\Assets\Textures\DiffuseMaps\tree6.png ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 1 3.95 6.65001
-MODEL highPolyTree306 -60.296 7.05882 23.4664 0 0 0 2.15 2.15 2.15 User\Assets\OBJs\tree6.obj User\Assets\Textures\DiffuseMaps\tree6.png ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 1 3.95 6.65001
-MODEL highPolyTree145 -91.0201 11.1765 24.9501 0 0 0 2.15 2.15 2.15 User\Assets\OBJs\tree6.obj User\Assets\Textures\DiffuseMaps\tree6.png ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 1 3.95 6.65001
-MODEL highPolyTree418 -114.813 10 24.6948 0 0 0 2.15 2.15 2.15 User\Assets\OBJs\tree6.obj User\Assets\Textures\DiffuseMaps\tree6.png ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 1 3.95 6.65001
-MODEL highPolyTree700 -159.195 10.5882 20.441 0 0 0 2.15 2.15 2.15 User\Assets\OBJs\tree6.obj User\Assets\Textures\DiffuseMaps\tree6.png ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 1 3.95 6.65001
-MODEL highPolyTree258 -184.369 25.2941 -9.48897 0 0 0 2.15 2.15 2.15 User\Assets\OBJs\tree6.obj User\Assets\Textures\DiffuseMaps\tree6.png ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 1 3.95 6.65001
-MODEL highPolyTree401 -77.3244 4.70588 -44.3288 0 0 0 2.15 2.15 2.15 User\Assets\OBJs\tree6.obj User\Assets\Textures\DiffuseMaps\tree6.png ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 1 3.95 6.65001
-MODEL highPolyTree751 -100.808 11.7647 -71.6427 0 0 0 2.15 2.15 2.15 User\Assets\OBJs\tree6.obj User\Assets\Textures\DiffuseMaps\tree6.png ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 1 3.95 6.65001
-MODEL highPolyTree715 -127 15.6827 -59.4534 0 0 0 2.15 2.15 2.15 User\Assets\OBJs\tree6.obj User\Assets\Textures\DiffuseMaps\tree6.png ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 1 3.95 6.65001
-MODEL hills661 0 0 0 0 180 0 20 40 20 User\Assets\OBJs\hills.obj User\Assets\Textures\DiffuseMaps\hills.png ? ? 0 0 1 0 0 0 1 1 0.75 1 1 1 10 2 4 -nan(ind)
+MODEL hills725 0 -10 0 0 0 0 10 20 10 User\Assets\OBJs\hills.obj User\Assets\Textures\DiffuseMaps\hills.png ? ? 0 0 1 0 0 0 1 1 0.6 1 1 1 10 1 1 1
+MODEL highPolyTree670 61.5787 6.37255 7.88717 0 0 0 2.15 2.15 2.15 User\Assets\OBJs\tree6.obj User\Assets\Textures\DiffuseMaps\tree6.png ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 1 3.95 6.65001
 AMBIENT 1 1 1 0.5
 DIRECTIONAL 1000 2500 1000 1 1 1 1 400
-POINT pointlight1249549073 121.262 9.79998 -27.3237 1 1 1 5 1
 SPEED 25
-POSITION -136.955 16.2 -12.5254
-YAW 0.398038
-PITCH -16.5998
+POSITION 43.6717 16.7 -3.12409
+YAW 20.5637
+PITCH -8.99989

@@ -101,8 +101,8 @@ void CameraManager::update(WindowManager & windowManager)
 	// Update yaw & pitch movements
 	_yaw += _yawAcceleration;
 	_pitch += _pitchAcceleration;
-	_yawAcceleration *= 0.75f;
-	_pitchAcceleration *= 0.75f;
+	_yawAcceleration *= 0.7f;
+	_pitchAcceleration *= 0.7f;
 
 	// Limit yaw
 	if (_yaw < 0.0f)

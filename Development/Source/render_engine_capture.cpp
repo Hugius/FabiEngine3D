@@ -277,8 +277,8 @@ void RenderEngine::_captureMotionBlur(CameraManager& camera)
 			previous = current;
 
 			// Miscellaneous variables
-			int xDifference = static_cast<int>(fabsf(camera.getYaw() - lastYaw) * 2.0f);
-			int yDifference = static_cast<int>(fabsf(camera.getPitch() - lastPitch) * 2.0f);
+			int xDifference = static_cast<int>(fabsf(camera.getYaw() - lastYaw) * 3.0f);
+			int yDifference = static_cast<int>(fabsf(camera.getPitch() - lastPitch) * 3.0f);
 			static BlurDirection lastDirection = BlurDirection::NONE;
 			BlurDirection direction = BlurDirection::NONE;
 			firstTime = false;

@@ -323,7 +323,7 @@ vec3 applyFog(vec3 color)
 	if(u_fogEnabled)
 	{
 		float  distance    = length(f_pos.xyz - u_cameraPosition);
-		vec3   foggedColor = mix(u_fogColor, color, min(u_fogMinDistance / distance, 1.0f));
+		vec3   foggedColor = mix(u_fogColor, color, max(min(u_fogMinDistance / distance, 1.0f), 0.75f));
 		return foggedColor;
 	}
 	else

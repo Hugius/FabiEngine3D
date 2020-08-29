@@ -73,15 +73,15 @@ void ModelEditor::_updateModelEditingSize()
 		switch (_modelResizeDirection)
 		{
 		case Direction::X:
-			newSize.x += scrollSpeed;
+			newSize.x *= (1.0f + scrollSpeed);
 			break;
 
 		case Direction::Y:
-			newSize.y += scrollSpeed;
+			newSize.y *= (1.0f + scrollSpeed);
 			break;
 
 		case Direction::Z:
-			newSize.z += scrollSpeed;
+			newSize.z *= (1.0f + scrollSpeed);
 			break;
 		}
 
@@ -93,7 +93,7 @@ void ModelEditor::_updateModelEditingSize()
 	if (_meshResizingToggled)
 	{
 		float scrollSpeed = float(_fe3d.input_getMouseWheelY()) * 0.05f;
-		_fe3d.gameEntity_setSize(_currentModelName, _fe3d.gameEntity_getSize(_currentModelName) + vec3(scrollSpeed));
+		_fe3d.gameEntity_setSize(_currentModelName, _fe3d.gameEntity_getSize(_currentModelName) * vec3(1.0f + scrollSpeed));
 	}
 
 	// Update model size X

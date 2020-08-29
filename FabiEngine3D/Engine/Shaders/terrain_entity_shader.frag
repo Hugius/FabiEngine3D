@@ -11,12 +11,12 @@ in vec3 f_normal;
 in vec4 f_shadowPos;
 
 // Textures
-layout(location = 0) uniform sampler2D   u_sampler_diffuseMap;
-layout(location = 1) uniform sampler2D   u_sampler_blendMap;
-layout(location = 2) uniform sampler2D   u_sampler_blendMapR;
-layout(location = 3) uniform sampler2D   u_sampler_blendMapG;
-layout(location = 4) uniform sampler2D   u_sampler_blendMapB;
-layout(location = 5) uniform sampler2D   u_sampler_shadowMap;
+layout(location = 0) uniform sampler2D u_sampler_diffuseMap;
+layout(location = 1) uniform sampler2D u_sampler_blendMap;
+layout(location = 2) uniform sampler2D u_sampler_blendMapR;
+layout(location = 3) uniform sampler2D u_sampler_blendMapG;
+layout(location = 4) uniform sampler2D u_sampler_blendMapB;
+layout(location = 5) uniform sampler2D u_sampler_shadowMap;
 
 // Vec3 uniforms
 uniform vec3 u_cameraPosition;
@@ -114,7 +114,7 @@ vec3 applyFog(vec3 color)
 	if(u_fogEnabled)
 	{
 		float  distance    = length(f_pos.xyz - u_cameraPosition);
-		vec3   foggedColor = mix(u_fogColor, color, min(u_fogMinDistance / distance, 1.0f));
+		vec3   foggedColor = mix(u_fogColor, color, max(min(u_fogMinDistance / distance, 1.0f), 0.75f));
 		return foggedColor;
 	}
 	else

@@ -90,7 +90,7 @@ void TerrainEntityManager::generateModel(const string& ID)
 			float RH = _getPixelHeight(x + halfSize + 1, z + halfSize, size, maxHeight, pixelColors);
 			float UH = _getPixelHeight(x + halfSize, z + halfSize + 1, size, maxHeight, pixelColors);
 			float DH = _getPixelHeight(x + halfSize, z + halfSize - 1, size, maxHeight, pixelColors);
-			vec3 normal = vec3(LH - RH, 2.0f, DH - UH);
+			vec3 normal = vec3(LH - RH, 3.0f, DH - UH);
 			normal = glm::normalize(normal);
 
 			terrainVertices.push_back(firstVertexX);

@@ -132,7 +132,10 @@ void RenderEngine::_captureShadows()
 		_shadowRenderer.bind();
 
 		// Render game entities
-		for (auto& entity : _entityBus->getGameEntities()) { _shadowRenderer.renderGameEntity(entity); }
+		for (auto& entity : _entityBus->getGameEntities()) 
+		{ 
+			_shadowRenderer.renderGameEntity(entity); 
+		}
 
 		// Unbind
 		_shadowRenderer.unbind();

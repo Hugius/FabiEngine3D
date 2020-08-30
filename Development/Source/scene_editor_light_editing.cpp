@@ -24,10 +24,13 @@ void SceneEditor::_updateLightEditing()
 						// Set new selected lightbulb
 						_selectedLightBulbID = entityID;
 
-						// Update selected lightbulb text
-						string textEntityID = _gui->getGlobalScreen()->getTextfield("selectedPointlightName")->getEntityID();
-						_fe3d.textEntity_show(textEntityID);
-						_fe3d.textEntity_setTextContent(textEntityID, "Selected: " + _selectedLightBulbID.substr(1), 0.025f);
+						// Check if nothing is active
+						if (_activeLightBulbID == "" && _activeModelID == "")
+						{
+							string textEntityID = _gui->getGlobalScreen()->getTextfield("selectedPointlightName")->getEntityID();
+							_fe3d.textEntity_show(textEntityID);
+							_fe3d.textEntity_setTextContent(textEntityID, "Selected: " + _selectedLightBulbID.substr(1), 0.025f);
+						}
 
 						// Change cursor
 						_fe3d.guiEntity_changeTexture("@@cursor", "Engine\\Textures\\cursor_pointing.png");
@@ -38,6 +41,7 @@ void SceneEditor::_updateLightEditing()
 							// Check if same lightbulb is clicked again
 							if (_selectedLightBulbID != ACTIVE_BULB_ID)
 							{
+								// Set new active light
 								ACTIVE_BULB_ID = _selectedLightBulbID;
 								_transformation = Transformation::TRANSLATION;
 
@@ -46,6 +50,11 @@ void SceneEditor::_updateLightEditing()
 								_rightWindow->getScreen("pointLightPropertiesMenu")->getWriteField("x")->setTextContent(std::to_string(static_cast<int>(position.x)));
 								_rightWindow->getScreen("pointLightPropertiesMenu")->getWriteField("y")->setTextContent(std::to_string(static_cast<int>(position.y)));
 								_rightWindow->getScreen("pointLightPropertiesMenu")->getWriteField("z")->setTextContent(std::to_string(static_cast<int>(position.z)));
+							
+								// Update selected text
+								string textEntityID = _gui->getGlobalScreen()->getTextfield("selectedPointlightName")->getEntityID();
+								_fe3d.textEntity_show(textEntityID);
+								_fe3d.textEntity_setTextContent(textEntityID, "Active: " + _selectedLightBulbID.substr(1), 0.025f);
 							}
 						}
 					}
@@ -60,7 +69,7 @@ void SceneEditor::_updateLightEditing()
 					}
 				}
 			}
-
+			
 			// Check if user made the active lightbulb inactive
 			if (_selectedLightBulbID == "" && ACTIVE_BULB_ID != "" && _fe3d.misc_isMouseInsideViewport() && !_gui->getGlobalScreen()->isFocused())
 			{
@@ -138,7 +147,10 @@ void SceneEditor::_updateLightEditing()
 			}
 			else
 			{
-				_fe3d.textEntity_show(textEntityID);
+				if (_selectedModelID == "" && _activeModelID == "")
+				{
+					_fe3d.textEntity_show(textEntityID);
+				}
 			}
 		}
 	}

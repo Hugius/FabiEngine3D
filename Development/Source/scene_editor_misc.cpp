@@ -16,16 +16,18 @@ void SceneEditor::_selectModel(const string& modelID)
 {
 	_selectedModelID = modelID;
 
-	// Removing the unique number from the modelID
-	string modelName = modelID.substr(modelID.find('@') + 1);
-
-	// Update selected model text
-	string textEntityID = _gui->getGlobalScreen()->getTextfield("selectedModelName")->getEntityID();
-	_fe3d.textEntity_show(textEntityID);
-	_fe3d.textEntity_setTextContent(textEntityID, "Selected: " + modelName, 0.025f);
-
 	// Change cursor
 	_fe3d.guiEntity_changeTexture("@@cursor", "Engine\\Textures\\cursor_pointing.png");
+
+	// Check if nothing is active
+	if (_activeModelID == "" && _activeLightBulbID == "")
+	{
+		// Removing the unique number from the modelID and updating the text content
+		string modelName = modelID.substr(modelID.find('@') + 1);
+		string textEntityID = _gui->getGlobalScreen()->getTextfield("selectedModelName")->getEntityID();
+		_fe3d.textEntity_show(textEntityID);
+		_fe3d.textEntity_setTextContent(textEntityID, "Selected: " + modelName, 0.025f);
+	}
 }
 
 void SceneEditor::_activateModel(const string& modelID)
@@ -43,6 +45,12 @@ void SceneEditor::_activateModel(const string& modelID)
 	_rightWindow->getScreen("modelPropertiesMenu")->getWriteField("x")->setTextContent(std::to_string(static_cast<int>(position.x)));
 	_rightWindow->getScreen("modelPropertiesMenu")->getWriteField("y")->setTextContent(std::to_string(static_cast<int>(position.y)));
 	_rightWindow->getScreen("modelPropertiesMenu")->getWriteField("z")->setTextContent(std::to_string(static_cast<int>(position.z)));
+
+	// Removing the unique number from the modelID and updating the text content
+	string modelName = modelID.substr(modelID.find('@') + 1);
+	string textEntityID = _gui->getGlobalScreen()->getTextfield("selectedModelName")->getEntityID();
+	_fe3d.textEntity_show(textEntityID);
+	_fe3d.textEntity_setTextContent(textEntityID, "Active: " + modelName, 0.025f);
 }
 
 void SceneEditor::_placeModel(const string& modelID, string modelName, vec3 position, vec3 rotation, vec3 size)

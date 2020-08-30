@@ -1,10 +1,10 @@
 #include "fabi_engine_3d.hpp"
 #include "core_engine.hpp"
 
-void FabiEngine3D::camera_load(float fov, float nearZ, float farZ, vec3 startPos, float yaw, float pitch)
+void FabiEngine3D::camera_load(float fov, float nearZ, float farZ, vec3 startPosition, float yaw, float pitch)
 {
 	_core->_cameraManager.reset();
-	_core->_cameraManager.setPosition(startPos);
+	_core->_cameraManager.setPosition(startPosition);
 	_core->_cameraManager.setFOV(fov);
 	_core->_cameraManager.setYaw(yaw);
 	_core->_cameraManager.setPitch(pitch);

@@ -31,7 +31,7 @@ void ModelEditor::_updateManagementScreen()
 			{
 				_modelChoosingEnabled = true;
 				_modelEditingEnabled = true;
-				for (auto& name : _modelNames) { name = name.substr(1, name.size() - 1); }
+				for (auto& name : _modelNames) { name = name.substr(1); }
 				_gui->getGlobalScreen()->addChoiceForm("modelList", "Select model", vec2(-0.4f, 0.1f), _modelNames);
 				for (auto& name : _modelNames) { name = "@" + name; }
 			}
@@ -39,7 +39,7 @@ void ModelEditor::_updateManagementScreen()
 			{
 				_modelChoosingEnabled = true;
 				_modelRemovalEnabled = true;
-				for (auto& name : _modelNames) { name = name.substr(1, name.size() - 1); }
+				for (auto& name : _modelNames) { name = name.substr(1); }
 				_gui->getGlobalScreen()->addChoiceForm("modelList", "Select model", vec2(-0.4f, 0.1f), _modelNames);
 				for (auto& name : _modelNames) { name = "@" + name; }
 			}
@@ -76,7 +76,7 @@ void ModelEditor::_updateEditingScreen()
 		{
 			firstTime = false;
 			_fe3d.textEntity_setTextContent(_gui->getGlobalScreen()->getTextfield("selectedModelName")->getEntityID(),
-				"Model: " + _currentModelName.substr(1, _currentModelName.size() - 1), 0.025f);
+				"Model: " + _currentModelName.substr(1), 0.025f);
 			_fe3d.textEntity_show(_gui->getGlobalScreen()->getTextfield("selectedModelName")->getEntityID());
 			_leftWindow->setActiveScreen("modelEditorMenuChoice");
 		}

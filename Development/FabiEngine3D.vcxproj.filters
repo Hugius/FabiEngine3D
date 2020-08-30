@@ -394,6 +394,9 @@
     <ClCompile Include="Source\settings_editor.cpp">
       <Filter>src\Editor System\Settings Editor</Filter>
     </ClCompile>
+    <ClCompile Include="Source\scene_editor_persistency.cpp">
+      <Filter>src\Editor System\Scene Editor\Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\obj_loader.hpp">

@@ -67,14 +67,15 @@ void BillboardEditor::initializeGUI()
 void BillboardEditor::load()
 {
 	// Camera
-	_fe3d.camera_setPosition(_defaultCameraPosition);
-	_fe3d.camera_setYaw(-90.0f);
+	float mouseSpeed = _fe3d.camera_getMouseSensitivity();
+	_fe3d.camera_load(_fe3d.camera_getFOV(), 0.1f, 10000.0f, _defaultCameraPosition, -90.0f);
+	_fe3d.camera_setMouseSensitivity(mouseSpeed);
 	_fe3d.camera_enableLookat(_billboardPosition);
 
 	// Enable graphics
 	_fe3d.gfx_enableAmbientLighting(vec3(1.0f), 0.75f);
 	_fe3d.gfx_enableDirectionalLighting(vec3(1000.0f), vec3(1.0f), 0.75f);
-	_fe3d.gfx_enableShadows(vec3(10.0f, 10.0f, 10.0f), vec3(0.0f), 25.0f, 50.0f);
+	_fe3d.gfx_enableShadows(vec3(10.0f, 10.0f, 10.0f), vec3(0.0f), 25.0f, 50.0f, false);
 	
 	// 3D Environment
 	_fe3d.skyEntity_select("@@editorSky");
@@ -253,12 +254,6 @@ void BillboardEditor::unload()
 
 	// Delete billboard name textfield
 	_gui->getGlobalScreen()->deleteTextfield("selectedBillboardName");
-
-	// Camera
-	_fe3d.camera_setPosition(vec3(0.0f));
-	_fe3d.camera_setYaw(0.0f);
-	_fe3d.camera_setPitch(0.0f);
-	_fe3d.camera_disableLookat();
 
 	// Reset variables
 	_billboardCreationEnabled = false;

@@ -194,7 +194,7 @@ void EngineGuiWriteField::_updateTyping()
 				}
 				else
 				{
-					_currentTextContent = _currentTextContent.substr(0, _currentTextContent.size() - 1); // Remove last characters
+					_currentTextContent = _currentTextContent.substr(0, _currentTextContent.size() - 1); // Remove last character
 				}
 			}
 			else

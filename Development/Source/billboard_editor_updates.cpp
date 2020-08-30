@@ -30,7 +30,7 @@ void BillboardEditor::_updateBillboardManagement()
 			{
 				_billboardChoosingEnabled = true;
 				_billboardEditingEnabled = true;
-				for (auto& name : _billboardNames) { name = name.substr(1, name.size() - 1); }
+				for (auto& name : _billboardNames) { name = name.substr(1); }
 				_gui->getGlobalScreen()->addChoiceForm("billboardList", "Select billboard", vec2(-0.4f, 0.1f), _billboardNames);
 				for (auto& name : _billboardNames) { name = "@" + name; }
 			}
@@ -38,7 +38,7 @@ void BillboardEditor::_updateBillboardManagement()
 			{
 				_billboardChoosingEnabled = true;
 				_billboardRemovalEnabled = true;
-				for (auto& name : _billboardNames) { name = name.substr(1, name.size() - 1); }
+				for (auto& name : _billboardNames) { name = name.substr(1); }
 				_gui->getGlobalScreen()->addChoiceForm("billboardList", "Select billboard", vec2(-0.4f, 0.1f), _billboardNames);
 				for (auto& name : _billboardNames) { name = "@" + name; }
 			}
@@ -88,7 +88,7 @@ void BillboardEditor::_updateBillboardCreation()
 				}
 				else // Name already exists
 				{
-					_fe3d.logger_throwWarning("Billboard name \"" + newBillboardName.substr(1, newBillboardName.size() - 1) + "\" already exists!");
+					_fe3d.logger_throwWarning("Billboard name \"" + newBillboardName.substr(1) + "\" already exists!");
 				}
 			}
 		}

@@ -1,7 +1,7 @@
 #include "scene_editor.hpp"
 
 #define ACTIVE_BULB_ID _activeLightBulbID
-#define ACTIVE_LIGHT_ID _activeLightBulbID.substr(1, _activeLightBulbID.size() - 1)
+#define ACTIVE_LIGHT_ID _activeLightBulbID.substr(1)
 
 void SceneEditor::_updateLightEditing()
 {
@@ -24,6 +24,14 @@ void SceneEditor::_updateLightEditing()
 						// Set new selected lightbulb
 						_selectedLightBulbID = entityID;
 
+						// Update selected lightbulb text
+						string textEntityID = _gui->getGlobalScreen()->getTextfield("selectedPointlightName")->getEntityID();
+						_fe3d.textEntity_show(textEntityID);
+						_fe3d.textEntity_setTextContent(textEntityID, "Selected: " + _selectedLightBulbID.substr(1), 0.025f);
+
+						// Change cursor
+						_fe3d.guiEntity_changeTexture("@@cursor", "Engine\\Textures\\cursor_pointing.png");
+
 						// Check if user clicked lightbulb
 						if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
 						{
@@ -32,12 +40,6 @@ void SceneEditor::_updateLightEditing()
 							{
 								ACTIVE_BULB_ID = _selectedLightBulbID;
 								_transformation = Transformation::TRANSLATION;
-
-								// Update selected lightbulb text
-								string textEntityID = _gui->getGlobalScreen()->getTextfield("selectedPointlightName")->getEntityID();
-								string lightID = ACTIVE_LIGHT_ID;
-								_fe3d.textEntity_show(textEntityID);
-								_fe3d.textEntity_setTextContent(textEntityID, "Selected: " + lightID, 0.025f);
 
 								// Filling writefields
 								vec3 position = _fe3d.gameEntity_getPosition(ACTIVE_BULB_ID);
@@ -67,8 +69,6 @@ void SceneEditor::_updateLightEditing()
 				{
 					ACTIVE_BULB_ID = "";
 					_rightWindow->setActiveScreen("main");
-					string textEntityID = _gui->getGlobalScreen()->getTextfield("selectedPointlightName")->getEntityID();
-					_fe3d.textEntity_hide(textEntityID);
 				}
 			}
 
@@ -93,8 +93,6 @@ void SceneEditor::_updateLightEditing()
 						_fe3d.lightEntity_delete(ACTIVE_LIGHT_ID);
 						_rightWindow->setActiveScreen("main");
 						ACTIVE_BULB_ID = "";
-						string textEntityID = _gui->getGlobalScreen()->getTextfield("selectedPointlightName")->getEntityID();
-						_fe3d.textEntity_hide(textEntityID);
 						return;
 					}
 				}
@@ -130,6 +128,17 @@ void SceneEditor::_updateLightEditing()
 				_fe3d.lightEntity_setColor(ACTIVE_LIGHT_ID, color);
 				_fe3d.lightEntity_setIntensity(ACTIVE_LIGHT_ID, intensity);
 				_fe3d.lightEntity_setDistanceFactor(ACTIVE_LIGHT_ID, distance);
+			}
+
+			// Check if light is still selected or active
+			string textEntityID = _gui->getGlobalScreen()->getTextfield("selectedPointlightName")->getEntityID();
+			if (_selectedLightBulbID == "" && _activeLightBulbID == "")
+			{
+				_fe3d.textEntity_hide(textEntityID);
+			}
+			else
+			{
+				_fe3d.textEntity_show(textEntityID);
 			}
 		}
 	}

@@ -30,7 +30,6 @@ void CameraManager::reset()
 	_yaw = 0.0f;
 	_nearZ = 0.0f;
 	_farZ = 0.0f;
-	_mouseSensitivity = 0.0f;
 	_mouseOffset = 0.0f;
 
 	// Booleans

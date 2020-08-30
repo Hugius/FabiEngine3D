@@ -76,13 +76,15 @@ void ModelEditor::load()
 	_loadObjFileNames();
 
 	// Camera
-	_fe3d.camera_setPosition(_defaultCameraPosition);
+	float mouseSpeed = _fe3d.camera_getMouseSensitivity();
+	_fe3d.camera_load(_fe3d.camera_getFOV(), 0.1f, 10000.0f, _defaultCameraPosition);
+	_fe3d.camera_setMouseSensitivity(mouseSpeed);
 	_fe3d.camera_enableLookat(vec3(0.0f));
 
 	// Enable graphics
 	_fe3d.gfx_enableAmbientLighting(vec3(1.0f), 0.75f);
 	_fe3d.gfx_enableDirectionalLighting(vec3(1000.0f), vec3(1.0f), 0.5f);
-	_fe3d.gfx_enableShadows(vec3(100.0f, 75.0f, 0.0f), vec3(0.0f), 200.0f, 200.0f);
+	_fe3d.gfx_enableShadows(vec3(100.0f, 75.0f, 0.0f), vec3(0.0f), 200.0f, 200.0f, false);
 	_fe3d.gfx_enableSceneReflections(0.25f);
 	_fe3d.gfx_enableSkyReflections(0.5f);
 	_fe3d.gfx_enableLightMapping();
@@ -290,12 +292,6 @@ void ModelEditor::unload()
 
 	// Delete model name textfield
 	_gui->getGlobalScreen()->deleteTextfield("selectedModelName");
-
-	// Camera
-	_fe3d.camera_setPosition(vec3(0.0f));
-	_fe3d.camera_setYaw(0.0f);
-	_fe3d.camera_setPitch(0.0f);
-	_fe3d.camera_disableLookat();
 
 	// Enable default sky
 	_fe3d.skyEntity_select("@@defaultSky");

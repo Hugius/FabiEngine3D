@@ -22,13 +22,14 @@ void SettingsEditor::initializeGUI()
 	// Left-viewport: mainWindow - settingsEditorMenuMain
 	screenID = "settingsEditorMenuMain";
 	_leftWindow->addScreen(screenID);
-	_leftWindow->getScreen(screenID)->addButton("mouseSensitivity", vec2(0.0f, 0.7875f), vec2(GW("Mouse speed"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Mouse speed", LVC::textColor, LVC::textHoverColor);
-	_leftWindow->getScreen(screenID)->addButton("msaaQuality", vec2(0.0f, 0.525f), vec2(GW("MSAA"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "MSAA", LVC::textColor, LVC::textHoverColor);
-	_leftWindow->getScreen(screenID)->addButton("shadowQuality", vec2(0.0f, 0.2625f), vec2(GW("Shadows"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Shadows", LVC::textColor, LVC::textHoverColor);
-	_leftWindow->getScreen(screenID)->addButton("reflectionQuality", vec2(0.0f, 0.0f), vec2(GW("Reflections"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Reflections", LVC::textColor, LVC::textHoverColor);
-	_leftWindow->getScreen(screenID)->addButton("refractionQuality", vec2(0.0f, -0.2625f), vec2(GW("Refractions"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Refractions", LVC::textColor, LVC::textHoverColor);
-	_leftWindow->getScreen(screenID)->addButton("maxAudioChannels", vec2(0.0f, -0.525f), vec2(GW("Audio"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Audio", LVC::textColor, LVC::textHoverColor);
-	_leftWindow->getScreen(screenID)->addButton("back", vec2(0.0f, -0.7875f), vec2(GW("Go back"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Go back", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("mouseSensitivity", vec2(0.0f, 0.83f), vec2(GW("Mouse speed"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Mouse speed", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("cameraFov", vec2(0.0f, 0.59f), vec2(GW("Camera FOV"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Camera FOV", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("msaaQuality", vec2(0.0f, 0.36f), vec2(GW("MSAA"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "MSAA", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("shadowQuality", vec2(0.0f, 0.13f), vec2(GW("Shadows"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Shadows", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("reflectionQuality", vec2(0.0f, -0.1f), vec2(GW("Reflections"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Reflections", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("refractionQuality", vec2(0.0f, -0.33f), vec2(GW("Refractions"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Refractions", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("maxAudioChannels", vec2(0.0f, -0.56f), vec2(GW("Audio"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Audio", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("back", vec2(0.0f, -0.79f), vec2(GW("Go back"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Go back", LVC::textColor, LVC::textHoverColor);
 }
 
 void SettingsEditor::load()
@@ -45,17 +46,18 @@ void SettingsEditor::load()
 		std::istringstream iss(line);
 
 		// Extract values from file
-		float mouse;
-		int msaa, shadow, reflection, refraction, audio;
-		iss >> mouse >> msaa >> shadow >> reflection >> refraction >> audio;
+		float mouseSpeed, cameraFov;
+		int msaaQuality, shadowQuality, reflectionQuality, refractionQuality, audioChannels;
+		iss >> mouseSpeed >> cameraFov >> msaaQuality >> shadowQuality >> reflectionQuality >> refractionQuality >> audioChannels;
 
 		// Set values
-		_fe3d.camera_setMouseSensitivity(mouse);
-		_fe3d.gfx_setMsaaQuality(msaa);
-		_fe3d.gfx_setShadowQuality(shadow);
-		_fe3d.gfx_setReflectionQuality(reflection);
-		_fe3d.gfx_setRefractionQuality(refraction);
-		_fe3d.audio_setMaxChannels(audio);
+		_fe3d.camera_setMouseSensitivity(mouseSpeed);
+		_fe3d.camera_setFOV(cameraFov);
+		_fe3d.gfx_setMsaaQuality(msaaQuality);
+		_fe3d.gfx_setShadowQuality(shadowQuality);
+		_fe3d.gfx_setReflectionQuality(reflectionQuality);
+		_fe3d.gfx_setRefractionQuality(refractionQuality);
+		_fe3d.audio_setMaxChannels(audioChannels);
 
 		// Close file
 		file.close();
@@ -71,15 +73,23 @@ void SettingsEditor::save()
 	file.open(_fe3d.misc_getRootDirectory() + "User\\Settings.fe3d");
 
 	// Get values
-	float mouse = _fe3d.camera_getMouseSensitivity();
-	int msaa = _fe3d.gfx_getMsaaQuality();
-	int shadow = _fe3d.gfx_getShadowQuality();
-	int reflection = _fe3d.gfx_getReflectionQuality();
-	int refraction = _fe3d.gfx_getRefractionQuality();
-	int audio = _fe3d.audio_getMaxChannels();
+	float mouseSpeed = _fe3d.camera_getMouseSensitivity();
+	float cameraFov = _fe3d.camera_getFOV();
+	int msaaQuality = _fe3d.gfx_getMsaaQuality();
+	int shadowQuality = _fe3d.gfx_getShadowQuality();
+	int reflectionQuality = _fe3d.gfx_getReflectionQuality();
+	int refractionQuality = _fe3d.gfx_getRefractionQuality();
+	int audioChannels = _fe3d.audio_getMaxChannels();
 
 	// Write to file
-	file << mouse << " " << msaa << " " << shadow << " " << reflection << " " << refraction << " " << audio;
+	file << 
+		mouseSpeed << " " << 
+		cameraFov << " " << 
+		msaaQuality << " " << 
+		shadowQuality << " " << 
+		reflectionQuality << " " <<
+		refractionQuality << " " << 
+		audioChannels;
 
 	// Close file
 	file.close();
@@ -92,39 +102,44 @@ void SettingsEditor::update()
 		if (_leftWindow->getActiveScreen()->getID() == "settingsEditorMenuMain")
 		{
 			auto screen = _leftWindow->getScreen("settingsEditorMenuMain");
-			float mouse = _fe3d.camera_getMouseSensitivity();
-			int msaa = _fe3d.gfx_getMsaaQuality();
-			int shadow = _fe3d.gfx_getShadowQuality();
-			int reflection = _fe3d.gfx_getReflectionQuality();
-			int refraction = _fe3d.gfx_getRefractionQuality();
-			int audio = _fe3d.audio_getMaxChannels();
+			float mouseSpeed = _fe3d.camera_getMouseSensitivity();
+			float cameraFov = _fe3d.camera_getFOV();
+			int msaaQuality = _fe3d.gfx_getMsaaQuality();
+			int shadowQuality = _fe3d.gfx_getShadowQuality();
+			int reflectionQuality = _fe3d.gfx_getReflectionQuality();
+			int refractionQuality = _fe3d.gfx_getRefractionQuality();
+			int audioChannels = _fe3d.audio_getMaxChannels();
 
 			// GUI management
 			if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
 			{
 				if (screen->getButton("mouseSensitivity")->isHovered())
 				{
-					_gui->getGlobalScreen()->addValueForm("mouseSensitivity", "Mouse sensitivity", mouse, vec2(0.0f, 0.0f), vec2(0.2f, 0.1f));
+					_gui->getGlobalScreen()->addValueForm("mouseSensitivity", "Mouse sensitivity", mouseSpeed, vec2(0.0f, 0.0f), vec2(0.2f, 0.1f));
+				}
+				else if (screen->getButton("cameraFov")->isHovered())
+				{
+					_gui->getGlobalScreen()->addValueForm("cameraFov", "FOV", cameraFov, vec2(0.0f), vec2(0.3f, 0.1f));
 				}
 				else if (screen->getButton("msaaQuality")->isHovered())
 				{
-					_gui->getGlobalScreen()->addValueForm("msaaQuality", "MSAA quality", msaa, vec2(0.0f, 0.0f), vec2(0.2f, 0.1f));
+					_gui->getGlobalScreen()->addValueForm("msaaQuality", "MSAA quality", msaaQuality, vec2(0.0f, 0.0f), vec2(0.2f, 0.1f));
 				}
 				else if (screen->getButton("shadowQuality")->isHovered())
 				{
-					_gui->getGlobalScreen()->addValueForm("shadowQuality", "Shadow quality", shadow, vec2(0.0f, 0.0f), vec2(0.2f, 0.1f));
+					_gui->getGlobalScreen()->addValueForm("shadowQuality", "Shadow quality", shadowQuality, vec2(0.0f, 0.0f), vec2(0.2f, 0.1f));
 				}
 				else if (screen->getButton("reflectionQuality")->isHovered())
 				{
-					_gui->getGlobalScreen()->addValueForm("reflectionQuality", "Reflection quality", reflection, vec2(0.0f, 0.0f), vec2(0.2f, 0.1f));
+					_gui->getGlobalScreen()->addValueForm("reflectionQuality", "Reflection quality", reflectionQuality, vec2(0.0f, 0.0f), vec2(0.2f, 0.1f));
 				}
 				else if (screen->getButton("refractionQuality")->isHovered())
 				{
-					_gui->getGlobalScreen()->addValueForm("refractionQuality", "Refraction quality", refraction, vec2(0.0f, 0.0f), vec2(0.2f, 0.1f));
+					_gui->getGlobalScreen()->addValueForm("refractionQuality", "Refraction quality", refractionQuality, vec2(0.0f, 0.0f), vec2(0.2f, 0.1f));
 				}
 				else if (screen->getButton("maxAudioChannels")->isHovered())
 				{
-					_gui->getGlobalScreen()->addValueForm("maxAudioChannels", "Max audio channels", audio, vec2(0.0f, 0.0f), vec2(0.2f, 0.1f));
+					_gui->getGlobalScreen()->addValueForm("maxAudioChannels", "Max audio channels", audioChannels, vec2(0.0f, 0.0f), vec2(0.2f, 0.1f));
 				}
 				else if (screen->getButton("back")->isHovered())
 				{
@@ -133,34 +148,39 @@ void SettingsEditor::update()
 			}
 
 			// Update forms
-			if (_gui->getGlobalScreen()->checkValueForm("mouseSensitivity", mouse, {}))
+			if (_gui->getGlobalScreen()->checkValueForm("mouseSensitivity", mouseSpeed, {}))
 			{
-				_fe3d.camera_setMouseSensitivity(mouse);
+				_fe3d.camera_setMouseSensitivity(mouseSpeed);
 				save();
 			}
-			else if (_gui->getGlobalScreen()->checkValueForm("msaaQuality", msaa, {}))
+			else if (_gui->getGlobalScreen()->checkValueForm("cameraFov", cameraFov, {}))
 			{
-				_fe3d.gfx_setMsaaQuality(msaa);
+				_fe3d.camera_setFOV(cameraFov);
 				save();
 			}
-			else if (_gui->getGlobalScreen()->checkValueForm("shadowQuality", shadow, {}))
+			else if (_gui->getGlobalScreen()->checkValueForm("msaaQuality", msaaQuality, {}))
 			{
-				_fe3d.gfx_setShadowQuality(shadow);
+				_fe3d.gfx_setMsaaQuality(msaaQuality);
 				save();
 			}
-			else if (_gui->getGlobalScreen()->checkValueForm("reflectionQuality", reflection, {}))
+			else if (_gui->getGlobalScreen()->checkValueForm("shadowQuality", shadowQuality, {}))
 			{
-				_fe3d.gfx_setReflectionQuality(reflection);
+				_fe3d.gfx_setShadowQuality(shadowQuality);
 				save();
 			}
-			else if (_gui->getGlobalScreen()->checkValueForm("refractionQuality", refraction, {}))
+			else if (_gui->getGlobalScreen()->checkValueForm("reflectionQuality", reflectionQuality, {}))
 			{
-				_fe3d.gfx_setRefractionQuality(refraction);
+				_fe3d.gfx_setReflectionQuality(reflectionQuality);
 				save();
 			}
-			else if (_gui->getGlobalScreen()->checkValueForm("maxAudioChannels", audio, {}))
+			else if (_gui->getGlobalScreen()->checkValueForm("refractionQuality", refractionQuality, {}))
 			{
-				_fe3d.audio_setMaxChannels(audio);
+				_fe3d.gfx_setRefractionQuality(refractionQuality);
+				save();
+			}
+			else if (_gui->getGlobalScreen()->checkValueForm("maxAudioChannels", audioChannels, {}))
+			{
+				_fe3d.audio_setMaxChannels(audioChannels);
 				save();
 			}
 		}

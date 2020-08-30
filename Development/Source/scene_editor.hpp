@@ -56,6 +56,11 @@ private:
 	void _updateMainSettingsMenu();
 	void _updateGraphicsSettingsMenu();
 	void _updateShadowGraphicsSettingsMenu();
+	void _updateMotionblurGraphicsSettingsMenu();
+	void _updateDofGraphicsSettingsMenu();
+	void _updateFogGraphicsSettingsMenu();
+	void _updateLensflareGraphicsSettingsMenu();
+	void _updateskyHdrGraphicsSettingsMenu();
 
 	// Miscellaneous updates
 	void _updateMainMenu();
@@ -91,6 +96,7 @@ private:
 	int _selectedLightnessMultiplier = 1;
 	int _activeLightnessMultiplier = 1;
 	bool _dontResetSelectedModel = false;
+	const float _modelBlinkingSpeed = 0.025f;
 
 	// Billboard variables
 	string _currentBillboardName = "";
@@ -100,6 +106,9 @@ private:
 	const string _previewPointlightID = "@previewPointlight";
 	const vec3 _defaultLightbulbSize = vec3(1.0f);
 	const vec3 _defaultLightbulbAabbSize = vec3(1.0f, 1.25f, 1.0f);
+	const float _lightbulbAnimationSpeed = 0.01f;
+	const float _lightingChangingSpeed = 0.01f;
+	const float _colorChangingSpeed = 0.005f;
 	int _selectedLightSizeMultiplier = 1;
 	int _activeLightSizeMultiplier = 1;
 	string _selectedLightBulbID = "";
@@ -110,9 +119,5 @@ private:
 	Transformation _transformation = Transformation::TRANSLATION;
 	string _currentProjectName = "";
 	float _customCameraSpeed = 1.0f;
-	const float _modelBlinkingSpeed = 0.025f;
-	const float _lightbulbAnimationSpeed = 0.01f;
 	const float _movementChangingSpeed = 0.1f;
-	const float _colorChangingSpeed = 0.005f;
-	const float _lightingChangingSpeed = 0.001f;
 };

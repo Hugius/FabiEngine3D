@@ -59,9 +59,9 @@ void FabiEngine3D::gfx_enableMSAA()
 	_core->_renderBus.setMsaaEnabled(true);
 }
 
-void FabiEngine3D::gfx_enableShadows(vec3 eye, vec3 center, float size, float reach)
+void FabiEngine3D::gfx_enableShadows(vec3 eye, vec3 center, float size, float reach, bool followingCamera)
 {
-	_core->_shadowManager.loadShadows(eye, center, size, reach);
+	_core->_shadowManager.loadShadows(eye, center, size, reach, followingCamera);
 	_core->_renderBus.setShadowsEnabled(true);
 }
 
@@ -258,22 +258,27 @@ float FabiEngine3D::gfx_getSceneReflectionFactor()
 
 vec3 FabiEngine3D::gfx_getShadowEyePosition()
 {
-	return _core->_renderBus.getShadowEyePosition();
+	return _core->_shadowManager.getEye();
 }
 
 vec3 FabiEngine3D::gfx_getShadowCenter()
 {
-	return _core->_renderBus.getShadowAreaCenter();
+	return _core->_shadowManager.getCenter();
 }
 
 float FabiEngine3D::gfx_getShadowSize()
 {
-	return _core->_renderBus.getShadowAreaSize();
+	return _core->_shadowManager.getSize();
 }
 
 float FabiEngine3D::gfx_getShadowReach()
 {
-	return _core->_renderBus.getShadowAreaReach();
+	return _core->_shadowManager.getReach();
+}
+
+bool FabiEngine3D::gfx_isShadowFollowingCamera()
+{
+	return _core->_shadowManager.isFollowingCamera();
 }
 
 float FabiEngine3D::gfx_getBloomIntensity()

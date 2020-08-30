@@ -32,8 +32,9 @@ void SceneEditor::_updateModelPlacing()
 					|| _fe3d.terrainEntity_getSelectedID() == "")  // Can be bypassed if terrain does not exist
 				{
 					// Add new model
-				begin: int randomSerial = _fe3d.misc_getUniqueInt(0, 1000);
-					string newID = _currentPreviewModelName.substr(1, _currentPreviewModelName.size() - 1) + std::to_string(randomSerial); // Remove the '@'
+				begin: int randomSerial = _fe3d.misc_getUniqueInt(0, INT_MAX);
+					string newID = _currentPreviewModelName.substr(1); // Remove the '@'
+					newID = std::to_string(randomSerial) + "@" + newID; // Adding a number to make it unique
 
 					// Check if ID not already exists
 					if (_fe3d.gameEntity_isExisting(newID))

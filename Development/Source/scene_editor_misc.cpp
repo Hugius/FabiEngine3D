@@ -14,8 +14,18 @@ void SceneEditor::setCurrentProjectName(const string& projectName)
 
 void SceneEditor::_selectModel(const string& modelID)
 {
-	_dontResetSelectedModel = true;
 	_selectedModelID = modelID;
+
+	// Removing the unique number from the modelID
+	string modelName = modelID.substr(modelID.find('@') + 1);
+
+	// Update selected model text
+	string textEntityID = _gui->getGlobalScreen()->getTextfield("selectedModelName")->getEntityID();
+	_fe3d.textEntity_show(textEntityID);
+	_fe3d.textEntity_setTextContent(textEntityID, "Selected: " + modelName, 0.025f);
+
+	// Change cursor
+	_fe3d.guiEntity_changeTexture("@@cursor", "Engine\\Textures\\cursor_pointing.png");
 }
 
 void SceneEditor::_activateModel(const string& modelID)
@@ -27,11 +37,6 @@ void SceneEditor::_activateModel(const string& modelID)
 	_rightWindow->getScreen("modelPropertiesMenu")->getButton("translation")->setHoverable(false);
 	_rightWindow->getScreen("modelPropertiesMenu")->getButton("rotation")->setHoverable(true);
 	_rightWindow->getScreen("modelPropertiesMenu")->getButton("scaling")->setHoverable(true);
-
-	// Update selected model text
-	string textEntityID = _gui->getGlobalScreen()->getTextfield("selectedModelName")->getEntityID();
-	_fe3d.textEntity_show(textEntityID);
-	_fe3d.textEntity_setTextContent(textEntityID, "Selected: " + _activeModelID, 0.025f);
 
 	// Filling writefields
 	vec3 position = _fe3d.gameEntity_getPosition(_activeModelID);
@@ -216,9 +221,6 @@ void SceneEditor::_updateMiscellaneous()
 {
 	if (_isLoaded)
 	{
-		vec3 camPos = _fe3d.camera_getPosition();
-		_fe3d.gfx_enableShadows(vec3(camPos.x - 100.0f, 100.0f, camPos.z), vec3(camPos.x, 0.0f, camPos.z), 200.0f, 250.0f);
-
 		// Update bounding box visibility
 		if (_fe3d.input_getKeyToggled(Input::KEY_B))
 		{

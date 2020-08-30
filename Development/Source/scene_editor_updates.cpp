@@ -94,6 +94,11 @@ void SceneEditor::_updateCamera()
 				_fe3d.gfx_enableMotionBlur();
 				_fe3d.camera_enableFirstPersonView(_fe3d.camera_getMouseSensitivity());
 				_fe3d.camera_disableLookat();
+			}
+
+			// Disable cursor while in FPS mode
+			if (_fe3d.camera_isFirstPersonViewEnabled())
+			{
 				_fe3d.guiEntity_hide("@@cursor");
 			}
 		}
@@ -101,7 +106,12 @@ void SceneEditor::_updateCamera()
 		{
 			_fe3d.gfx_disableMotionBlur();
 			_fe3d.camera_disableFirstPersonView();
-			_fe3d.guiEntity_show("@@cursor");
+
+			// Cannot show cursor if outside of engine window
+			if (_fe3d.misc_isMouseInsideWindow())
+			{
+				_fe3d.guiEntity_show("@@cursor");
+			}
 		}
 
 		// Camera movement

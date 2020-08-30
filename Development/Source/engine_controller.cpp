@@ -67,7 +67,9 @@ void EngineController::_initializeMiscellaneous()
 	skyEntity_setLightness("@@editorSky", 0.65f);
 
 	// Default camera
-	camera_load(90.0f, 0.1f, 10000.0f, vec3(0.0f));
+	float mouseSpeed = camera_getMouseSensitivity();
+	camera_load(camera_getFOV(), 0.1f, 10000.0f, vec3(0.0f));
+	camera_setMouseSensitivity(mouseSpeed);
 
 	// Custom cursor texture
 	guiEntity_add("@@cursor", "Engine\\Textures\\cursor_default.png", vec2(0.0f), 0.0f, vec2(0.075f, 0.075f * misc_getAspectRatio()), true);

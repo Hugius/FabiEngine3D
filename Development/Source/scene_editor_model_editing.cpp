@@ -27,8 +27,8 @@ void SceneEditor::_updateModelEditing()
 					if (_fe3d.collision_checkCursorInAny() == entityID && _fe3d.misc_isMouseInsideViewport() &&
 						!_gui->getGlobalScreen()->isFocused() && !_fe3d.input_getMouseDown(Input::MOUSE_BUTTON_RIGHT))
 					{
-						// Set new selected model
-						_selectedModelID = entityID;
+						// Select hovered model
+						_selectModel(entityID);
 
 						// Check if user clicked model
 						if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
@@ -59,8 +59,6 @@ void SceneEditor::_updateModelEditing()
 				{
 					_activeModelID = "";
 					_rightWindow->setActiveScreen("main");
-					string textEntityID = _gui->getGlobalScreen()->getTextfield("selectedModelName")->getEntityID();
-					_fe3d.textEntity_hide(textEntityID);
 				}
 			}
 
@@ -116,8 +114,6 @@ void SceneEditor::_updateModelEditing()
 						_fe3d.gameEntity_delete(_activeModelID);
 						_rightWindow->setActiveScreen("main");
 						_activeModelID = "";
-						string textEntityID = _gui->getGlobalScreen()->getTextfield("selectedModelName")->getEntityID();
-						_fe3d.textEntity_hide(textEntityID);
 						return;
 					}
 				}
@@ -170,6 +166,17 @@ void SceneEditor::_updateModelEditing()
 					float changeZ = size.z / oldSize.z;
 					_fe3d.aabbEntity_setSize(_activeModelID, _fe3d.aabbEntity_getSize(_activeModelID) * vec3(changeX, changeY, changeZ));
 				}
+			}
+
+			// Check if model is still selected or active
+			string textEntityID = _gui->getGlobalScreen()->getTextfield("selectedModelName")->getEntityID();
+			if (_selectedModelID == "" && _activeModelID == "")
+			{
+				_fe3d.textEntity_hide(textEntityID);
+			}
+			else
+			{
+				_fe3d.textEntity_show(textEntityID);
 			}
 		}
 		else

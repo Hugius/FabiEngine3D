@@ -1,5 +1,7 @@
 #include "scene_editor.hpp"
 
+#include <algorithm>
+
 void SceneEditor::_updateMainSettingsMenu()
 {
 	if (_isLoaded)
@@ -43,6 +45,7 @@ void SceneEditor::_updateGraphicsSettingsMenu()
 			if (screen->getButton("shadows")->isHovered())
 			{
 				_leftWindow->setActiveScreen("sceneEditorMenuSettingsGraphicsShadows");
+				_fe3d.misc_enableShadowFrameRendering();
 			}
 			else if (screen->getButton("motionblur")->isHovered())
 			{
@@ -76,10 +79,12 @@ void SceneEditor::_updateShadowGraphicsSettingsMenu()
 {
 	if (_leftWindow->getActiveScreen()->getID() == "sceneEditorMenuSettingsGraphicsShadows")
 	{
+		// Current values
 		auto screen = _leftWindow->getScreen("sceneEditorMenuSettingsGraphicsShadows");
+		float size = _fe3d.gfx_getShadowSize();
 		vec3 position = _fe3d.gfx_getShadowEyePosition();
 		vec3 center = _fe3d.gfx_getShadowCenter();
-		//bool followCam = 
+		bool isFollowingCamera = _fe3d.gfx_isShadowFollowingCamera();
 
 		// GUI management
 		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
@@ -93,7 +98,6 @@ void SceneEditor::_updateShadowGraphicsSettingsMenu()
 				_gui->getGlobalScreen()->addValueForm("positionX", "X", _fe3d.gfx_getShadowEyePosition().x, vec2(-0.25f, 0.0f), vec2(0.2f, 0.1f));
 				_gui->getGlobalScreen()->addValueForm("positionY", "Y", _fe3d.gfx_getShadowEyePosition().y, vec2(0.0f, 0.0f), vec2(0.2f, 0.1f));
 				_gui->getGlobalScreen()->addValueForm("positionZ", "Z", _fe3d.gfx_getShadowEyePosition().z, vec2(0.25f, 0.0f), vec2(0.2f, 0.1f));
-				
 			}
 			else if (screen->getButton("center")->isHovered())
 			{
@@ -103,12 +107,57 @@ void SceneEditor::_updateShadowGraphicsSettingsMenu()
 			}
 			else if (screen->getButton("follow")->isHovered())
 			{
-				
+				isFollowingCamera = !isFollowingCamera;
 			}
 			else if (screen->getButton("back")->isHovered()) // Back button
 			{
 				_leftWindow->setActiveScreen("sceneEditorMenuSettingsGraphics");
+				_fe3d.misc_disableShadowFrameRendering();
 			}
 		}
+
+		// Size value
+		_gui->getGlobalScreen()->checkValueForm("size", size);
+
+		// Position values
+		_gui->getGlobalScreen()->checkValueForm("positionX", position.x);
+		_gui->getGlobalScreen()->checkValueForm("positionY", position.y);
+		_gui->getGlobalScreen()->checkValueForm("positionZ", position.z);
+
+		// Center values
+		_gui->getGlobalScreen()->checkValueForm("centerX", position.x);
+		_gui->getGlobalScreen()->checkValueForm("centerY", position.y);
+		_gui->getGlobalScreen()->checkValueForm("centerZ", position.z);
+
+		// Following button content
+		string newContent = isFollowingCamera ? "Follow cam: ON" : "Follow cam: OFF";
+		_fe3d.textEntity_setTextContent(screen->getButton("follow")->getTextfield()->getEntityID(), newContent);
+
+		// Update shadow values
+		_fe3d.gfx_enableShadows(position, center, size, size * 1.5f, isFollowingCamera);
 	}
+}
+
+void SceneEditor::_updateMotionblurGraphicsSettingsMenu()
+{
+}
+
+void SceneEditor::_updateDofGraphicsSettingsMenu()
+{
+
+}
+
+void SceneEditor::_updateFogGraphicsSettingsMenu()
+{
+
+}
+
+void SceneEditor::_updateLensflareGraphicsSettingsMenu()
+{
+
+}
+
+void SceneEditor::_updateskyHdrGraphicsSettingsMenu()
+{
+
 }

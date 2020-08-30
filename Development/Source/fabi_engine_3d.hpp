@@ -39,7 +39,7 @@ public:
 	void engine_stop();
 
 	// Camera interface - setters
-	void  camera_load(float fov, float nearZ, float farZ, vec3 startPos, float yaw = 0.0f, float pitch = 0.0f);
+	void  camera_load(float fov, float nearZ, float farZ, vec3 startPosition, float yaw = 0.0f, float pitch = 0.0f);
 	void  camera_enableLookat(vec3 position);
 	void  camera_disableLookat();
 	void  camera_enableFirstPersonView(float mouseSensitivity);
@@ -478,7 +478,7 @@ public:
 	void gfx_enableSceneReflections(float factor);
 	void gfx_enableLightMapping();
 	void gfx_enableMSAA();
-	void gfx_enableShadows(vec3 eye, vec3 center, float size, float reach);
+	void gfx_enableShadows(vec3 eye, vec3 center, float size, float reach, bool followingCamera);
 	void gfx_enableBloom(float intensity, float brightnessTreshold, int blurSize);
 	void gfx_enableWaterEffects();
 	void gfx_enableSkyHDR(float brightnessFactor);
@@ -521,6 +521,7 @@ public:
 	vec3 gfx_getShadowCenter();
 	float gfx_getShadowSize();
 	float gfx_getShadowReach();
+	bool gfx_isShadowFollowingCamera();
 	float gfx_getBloomIntensity();
 	float gfx_getBloomBrightnessTreshold();
 	int gfx_getBloomBlurSize();

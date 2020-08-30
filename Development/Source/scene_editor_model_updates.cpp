@@ -21,12 +21,16 @@ void SceneEditor::_updateMainModelMenu()
 					_leftWindow->getScreen("sceneEditorMenuModelChoice")->getScrollingList("modelList")->deleteButtons();
 
 					// Add every placed model name
-					for (auto& modelName : _fe3d.gameEntity_getAllIDs())
+					for (auto& modelID : _fe3d.gameEntity_getAllIDs())
 					{
 						// Check if model is not a preview model
-						if (modelName[0] != '@')
+						if (modelID[0] != '@')
 						{
-							_leftWindow->getScreen("sceneEditorMenuModelChoice")->getScrollingList("modelList")->addButton(modelName, modelName);
+							// Removing the unique number from the modelID
+							string modelName = modelID.substr(modelID.find('@') + 1);
+
+							// Add new button
+							_leftWindow->getScreen("sceneEditorMenuModelChoice")->getScrollingList("modelList")->addButton(modelID, modelName);
 						}
 					}
 				}
@@ -69,7 +73,7 @@ void SceneEditor::_updateModelPlacingMenu()
 							_fe3d.gameEntity_show(_currentPreviewModelName);
 							string textEntityID = _gui->getGlobalScreen()->getTextfield("selectedModelName")->getEntityID();
 							_fe3d.textEntity_show(textEntityID);
-							_fe3d.textEntity_setTextContent(textEntityID, "Model: " + _currentPreviewModelName.substr(1, _currentPreviewModelName.size() - 1), 0.025f);
+							_fe3d.textEntity_setTextContent(textEntityID, "Model: " + _currentPreviewModelName.substr(1), 0.025f);
 							break;
 						}
 					}
@@ -122,6 +126,7 @@ void SceneEditor::_updateModelChoosingMenu()
 						}
 						else // Hovering (selection)
 						{
+							_dontResetSelectedModel = true;
 							_selectModel(modelName);
 						}
 

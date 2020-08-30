@@ -133,8 +133,10 @@ void WorldEditor::initializeGUI()
 
 void WorldEditor::load()
 {
-	// Camera
-	_fe3d.camera_setPosition(vec3(0.0f));
+	// Default camera
+	float mouseSpeed = _fe3d.camera_getMouseSensitivity();
+	_fe3d.camera_load(_fe3d.camera_getFOV(), 0.1f, 10000.0f, vec3(0.0f));
+	_fe3d.camera_setMouseSensitivity(mouseSpeed);
 	
 	// Enable graphics
 	_fe3d.gfx_enableAmbientLighting(vec3(1.0f), 0.75f);
@@ -185,12 +187,6 @@ void WorldEditor::unload()
 
 	// Enable default sky
 	_fe3d.skyEntity_select("@@defaultSky");
-
-	// Camera
-	_fe3d.camera_setPosition(vec3(0.0f));
-	_fe3d.camera_setYaw(0.0f);
-	_fe3d.camera_setPitch(0.0f);
-	_fe3d.camera_disableLookat();
 
 	// Reset variables
 	_currentWorldPart = WorldPart::NONE;

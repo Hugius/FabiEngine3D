@@ -202,8 +202,9 @@ void SceneEditor::_updateDofGraphicsSettingsMenu()
 	{
 		// Current values
 		auto screen = _leftWindow->getScreen("sceneEditorMenuSettingsGraphicsDof");
-		bool enabled = _fe3d.gfx_isMotionBlurEnabled();
-		float strength = _fe3d.gfx_getMotionBlurStrength();
+		bool enabled = _fe3d.gfx_isDofEnabled();
+		float blurDistance = _fe3d.gfx_getDofBlurDistance();
+		float maxDistance = _fe3d.gfx_getDofMaxDistance();
 
 		// GUI management
 		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
@@ -212,9 +213,13 @@ void SceneEditor::_updateDofGraphicsSettingsMenu()
 			{
 				enabled = !enabled;
 			}
-			else if (screen->getButton("strength")->isHovered())
+			else if (screen->getButton("blurDistance")->isHovered())
 			{
-				_gui->getGlobalScreen()->addValueForm("strength", "Strength", strength, vec2(0.0f), vec2(0.2f, 0.1f));
+				_gui->getGlobalScreen()->addValueForm("blurDistance", "Blur distance", blurDistance, vec2(0.0f), vec2(0.2f, 0.1f));
+			}
+			else if (screen->getButton("maxDistance")->isHovered())
+			{
+				_gui->getGlobalScreen()->addValueForm("maxDistance", "DOF distance", maxDistance, vec2(0.0f), vec2(0.2f, 0.1f));
 			}
 			else if (screen->getButton("back")->isHovered())
 			{
@@ -225,17 +230,20 @@ void SceneEditor::_updateDofGraphicsSettingsMenu()
 		// Enabled button content
 		_fe3d.textEntity_setTextContent(screen->getButton("enabled")->getTextfield()->getEntityID(), enabled ? "Enabled: YES" : "Enabled: NO");
 
-		// Strength value
-		_gui->getGlobalScreen()->checkValueForm("strength", strength);
+		// Blur distance value
+		_gui->getGlobalScreen()->checkValueForm("blurDistance", blurDistance);
 
-		// Enable or disable motionblur
+		// Max distance value
+		_gui->getGlobalScreen()->checkValueForm("maxDistance", maxDistance);
+
+		// Enable or disable DOF
 		if (enabled)
 		{
-			_fe3d.gfx_enableMotionBlur(strength);
+			_fe3d.gfx_enableDOF(maxDistance, blurDistance);
 		}
 		else
 		{
-			_fe3d.gfx_disableMotionBlur();
+			_fe3d.gfx_disableDOF();
 		}
 	}
 }

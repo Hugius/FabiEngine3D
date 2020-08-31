@@ -55,15 +55,37 @@ void main()
 	// DOF
 	if(u_dofEnabled)
 	{
+        // Distance from camera to direct object
+        float middleFragmentDistance = (middleFragmentDepth * u_farZ);
+        float middleSmoothingDistance = (u_dofMaxDistance * 0.2f);
+
         // Check if camera is looking at a close object
-        if((middleFragmentDepth * u_farZ) < u_dofMaxDistance)
+        if(middleFragmentDistance < (u_dofMaxDistance + middleSmoothingDistance))
         {
-            float smoothingDistance = u_dofBlurDistance * 0.2f; // Smooth overlap distance in world space
-            float fragmentDistance = (currentFragmentDepth * u_farZ); // Distance from camera to fragment in world space
-            float mixValue = (fragmentDistance - (u_dofBlurDistance - smoothingDistance)) / smoothingDistance; // Calculate DOF strength
-            mixValue = clamp(mixValue, 0.0f, 1.0f); // Clamp
-            vec3 dofColor = blurColor + bloomColor; // Add bloom
-            o_finalColor.rgb = mix(o_finalColor.rgb, dofColor, mixValue); // Mix accordingly
+            // Distance from camera to fragment in world space
+            float fragmentDistance = (currentFragmentDepth * u_farZ);
+
+            // Smooth blur overlap distance in world space
+            float blurSmoothingDistance = u_dofBlurDistance * 0.5f;
+
+            // Calculate DOF blur strength based fragment distance
+            float blurMixValue = (fragmentDistance - (u_dofBlurDistance - blurSmoothingDistance)) / blurSmoothingDistance;
+
+            // Calculate DOF blur strength based on middle distance
+            float distanceMixValue = ((u_dofMaxDistance + middleSmoothingDistance) - middleFragmentDistance) / middleSmoothingDistance;
+            
+            // Values must not go over 1
+            blurMixValue = clamp(blurMixValue, 0.0f, 1.0f); 
+            distanceMixValue = clamp(distanceMixValue, 0.0f, 1.0f);
+
+            // Apply camera distance factor
+            blurMixValue = mix(0.0f, blurMixValue, distanceMixValue);
+
+            // Add bloom
+            vec3 dofColor = blurColor + bloomColor;
+
+            // Mix with blur color accordingly
+            o_finalColor.rgb = mix(o_finalColor.rgb, dofColor, blurMixValue);
         }
 	}
 

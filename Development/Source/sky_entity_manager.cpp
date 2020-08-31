@@ -144,7 +144,7 @@ void SkyEntityManager::_updateEyeAdaption()
 		// Based on verticle angle
 		if (lightness > targetLightness) // Decrease lightness
 		{
-			getSelectedSky()->setLightness(lightness - (speed * 5.0f));
+			getSelectedSky()->setLightness(lightness - (speed * 3.5f));
 		}
 		else if (getSelectedSky()->getLightness() < targetLightness) // Increase lightness
 		{

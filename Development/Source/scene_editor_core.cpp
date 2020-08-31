@@ -122,11 +122,10 @@ void SceneEditor::initializeGUI()
 	// Left-viewport: mainWindow - sceneEditorMenuSettingsGraphicsDof
 	screenID = "sceneEditorMenuSettingsGraphicsDof";
 	_leftWindow->addScreen(screenID);
-	_leftWindow->getScreen(screenID)->addButton("enabled", vec2(0.0f, 0.475f), vec2(GW("Enabled: NO"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Enabled: NO", LVC::textColor, LVC::textHoverColor);
-	_leftWindow->getScreen(screenID)->addButton("strength", vec2(0.0f, 0.0f), vec2(GW("Strength"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Strength", LVC::textColor, LVC::textHoverColor);
-	_leftWindow->getScreen(screenID)->addButton("blurDistance", vec2(0.0f, 0.0f), vec2(GW("Strength"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Strength", LVC::textColor, LVC::textHoverColor);
-	_leftWindow->getScreen(screenID)->addButton("minDistance", vec2(0.0f, 0.0f), vec2(GW("Strength"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Strength", LVC::textColor, LVC::textHoverColor);
-	_leftWindow->getScreen(screenID)->addButton("back", vec2(0.0f, -0.475f), vec2(GW("Go back"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Go back", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("enabled", vec2(0.0f, 0.63f), vec2(GW("Enabled: NO"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Enabled: NO", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("blurDistance", vec2(0.0f, 0.21f), vec2(GW("Blur distance"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Blur distance", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("maxDistance", vec2(0.0f, -0.21f), vec2(GW("DOF distance"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "DOF distance", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("back", vec2(0.0f, -0.63f), vec2(GW("Go back"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Go back", LVC::textColor, LVC::textHoverColor);
 
 	// Right-viewport: mainWindow - modelPropertiesMenu
 	screenID = "modelPropertiesMenu";
@@ -199,14 +198,14 @@ void SceneEditor::load()
 	_fe3d.gfx_enableAmbientLighting(vec3(1.0f), 1.0f);
 	_fe3d.gfx_enableSpecularLighting();
 	_fe3d.gfx_enablePointLighting();
-	_fe3d.gfx_enableFog(150.0f, vec3(0.75f));
 	_fe3d.gfx_enableSkyReflections(0.5f);
-	_fe3d.gfx_enableSceneReflections(0.25f);
+	_fe3d.gfx_enableSceneReflections(0.5f);
 	_fe3d.gfx_enableLightMapping();
 	_fe3d.gfx_enableWaterEffects();
+
+	_fe3d.gfx_enableFog(150.0f, vec3(0.75f));
 	_fe3d.gfx_enableSkyHDR(0.4f);
 	_fe3d.gfx_enableDOF(10.0f, 20.0f);
-	_fe3d.gfx_enableMotionBlur(3.0f);
 	_fe3d.gfx_enableLensFlare("User\\Assets\\Textures\\FlareMaps\\flare.png", 1.0f, 1.0f);
 	
 	// Disable default skybox

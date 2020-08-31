@@ -105,11 +105,28 @@ void SceneEditor::initializeGUI()
 	// Left-viewport: mainWindow - sceneEditorMenuSettingsGraphicsShadows
 	screenID = "sceneEditorMenuSettingsGraphicsShadows";
 	_leftWindow->addScreen(screenID);
-	_leftWindow->getScreen(screenID)->addButton("size", vec2(0.0f, 0.7f), vec2(GW("Size"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Size", LVC::textColor, LVC::textHoverColor);
-	_leftWindow->getScreen(screenID)->addButton("position", vec2(0.0f, 0.35f), vec2(GW("Position"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Position", LVC::textColor, LVC::textHoverColor);
-	_leftWindow->getScreen(screenID)->addButton("center", vec2(0.0f, 0.0f), vec2(GW("Center"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Center", LVC::textColor, LVC::textHoverColor);
-	_leftWindow->getScreen(screenID)->addButton("follow", vec2(0.0f, -0.35f), vec2(GW("Follow cam: OFF"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Follow cam: OFF", LVC::textColor, LVC::textHoverColor);
-	_leftWindow->getScreen(screenID)->addButton("back", vec2(0.0f, -0.7f), vec2(GW("Go back"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Go back", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("enabled", vec2(0.0f, 0.75f), vec2(GW("Enabled: NO"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Enabled: NO", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("size", vec2(0.0f, 0.45f), vec2(GW("Size"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Size", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("position", vec2(0.0f, 0.15f), vec2(GW("Position"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Position", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("center", vec2(0.0f, -0.15f), vec2(GW("Center"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Center", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("follow", vec2(0.0f, -0.45f), vec2(GW("Follow cam: OFF"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Follow cam: OFF", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("back", vec2(0.0f, -0.75f), vec2(GW("Go back"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Go back", LVC::textColor, LVC::textHoverColor);
+
+	// Left-viewport: mainWindow - sceneEditorMenuSettingsGraphicsMotionblur
+	screenID = "sceneEditorMenuSettingsGraphicsMotionblur";
+	_leftWindow->addScreen(screenID); 
+	_leftWindow->getScreen(screenID)->addButton("enabled", vec2(0.0f, 0.475f), vec2(GW("Enabled: NO"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Enabled: NO", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("strength", vec2(0.0f, 0.0f), vec2(GW("Strength"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Strength", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("back", vec2(0.0f, -0.475f), vec2(GW("Go back"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Go back", LVC::textColor, LVC::textHoverColor);
+
+	// Left-viewport: mainWindow - sceneEditorMenuSettingsGraphicsDof
+	screenID = "sceneEditorMenuSettingsGraphicsDof";
+	_leftWindow->addScreen(screenID);
+	_leftWindow->getScreen(screenID)->addButton("enabled", vec2(0.0f, 0.475f), vec2(GW("Enabled: NO"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Enabled: NO", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("strength", vec2(0.0f, 0.0f), vec2(GW("Strength"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Strength", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("blurDistance", vec2(0.0f, 0.0f), vec2(GW("Strength"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Strength", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("minDistance", vec2(0.0f, 0.0f), vec2(GW("Strength"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Strength", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("back", vec2(0.0f, -0.475f), vec2(GW("Go back"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Go back", LVC::textColor, LVC::textHoverColor);
 
 	// Right-viewport: mainWindow - modelPropertiesMenu
 	screenID = "modelPropertiesMenu";
@@ -188,8 +205,8 @@ void SceneEditor::load()
 	_fe3d.gfx_enableLightMapping();
 	_fe3d.gfx_enableWaterEffects();
 	_fe3d.gfx_enableSkyHDR(0.4f);
-	_fe3d.gfx_enableDOF(75.0f);
-	_fe3d.gfx_enableMotionBlur();
+	_fe3d.gfx_enableDOF(10.0f, 20.0f);
+	_fe3d.gfx_enableMotionBlur(3.0f);
 	_fe3d.gfx_enableLensFlare("User\\Assets\\Textures\\FlareMaps\\flare.png", 1.0f, 1.0f);
 	
 	// Disable default skybox

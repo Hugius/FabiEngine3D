@@ -12,13 +12,14 @@ void PostRenderer::bind()
 	_shader.uploadUniform("u_bloomEnabled", _renderBus.isBloomEnabled());
 	_shader.uploadUniform("u_dofEnabled", _renderBus.isDofEnabled());
 	_shader.uploadUniform("u_lensFlareEnabled", _renderBus.isLensFlareEnabled());
-	_shader.uploadUniform("u_dofMinDistance", _renderBus.getDofMinDistance());
+	_shader.uploadUniform("u_dofMaxDistance", _renderBus.getDofMaxDistance());
+	_shader.uploadUniform("u_dofBlurDistance", _renderBus.getDofBlurDistance());
 	_shader.uploadUniform("u_lensFlareAlpha", _renderBus.getLensFlareAlpha());
 	_shader.uploadUniform("u_lensFlareIntensity", _renderBus.getLensFlareIntensity());
 	_shader.uploadUniform("u_flareSourcePositionClipspace", _renderBus.getFlareSourcePositionClipspace());
 	_shader.uploadUniform("u_flareSourcePosition", _renderBus.getFlareSourcePosition());
 	_shader.uploadUniform("u_cameraPosition", _renderBus.getCameraPosition());
-
+	
 	// Blending
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);

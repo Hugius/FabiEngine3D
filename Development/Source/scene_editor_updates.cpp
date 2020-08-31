@@ -26,6 +26,11 @@ void SceneEditor::update()
 	_updateMainSettingsMenu();
 	_updateGraphicsSettingsMenu();
 	_updateShadowGraphicsSettingsMenu();
+	_updateMotionblurGraphicsSettingsMenu();
+	_updateDofGraphicsSettingsMenu();
+	_updateFogGraphicsSettingsMenu();
+	_updateLensflareGraphicsSettingsMenu();
+	_updateskyHdrGraphicsSettingsMenu();
 
 	// Miscellaneous
 	_updateMainMenu();
@@ -91,7 +96,6 @@ void SceneEditor::_updateCamera()
 		{
 			if (_fe3d.misc_isMouseInsideViewport())
 			{
-				_fe3d.gfx_enableMotionBlur();
 				_fe3d.camera_enableFirstPersonView(_fe3d.camera_getMouseSensitivity());
 				_fe3d.camera_disableLookat();
 			}
@@ -104,7 +108,6 @@ void SceneEditor::_updateCamera()
 		}
 		else
 		{
-			_fe3d.gfx_disableMotionBlur();
 			_fe3d.camera_disableFirstPersonView();
 
 			// Cannot show cursor if outside of engine window

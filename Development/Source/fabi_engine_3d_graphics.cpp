@@ -87,15 +87,17 @@ void FabiEngine3D::gfx_enableSkyHDR(float brightnessFactor)
 	}
 }
 
-void FabiEngine3D::gfx_enableDOF(float minDistance)
+void FabiEngine3D::gfx_enableDOF(float maxDistance, float blurDistance)
 {
 	_core->_renderBus.setDofEnabled(true);
-	_core->_renderBus.setDofMinDistance(minDistance);
+	_core->_renderBus.setDofMaxDistance(maxDistance);
+	_core->_renderBus.setDofBlurDistance(blurDistance);
 }
 
-void FabiEngine3D::gfx_enableMotionBlur()
+void FabiEngine3D::gfx_enableMotionBlur(float strength)
 {
 	_core->_renderBus.setMotionBlurEnabled(true);
+	_core->_renderBus.setMotionBlurStrength(strength);
 }
 
 void FabiEngine3D::gfx_enableLensFlare(const string& texturePath, float intensity, float multiplier)
@@ -184,6 +186,86 @@ void FabiEngine3D::gfx_disableMotionBlur()
 void FabiEngine3D::gfx_disableLensFlare()
 {
 	_core->_renderBus.setLensFlareEnabled(false);
+}
+
+bool FabiEngine3D::gfx_isMsaaEnabled()
+{
+	return _core->_renderBus.isMsaaEnabled();
+}
+
+bool FabiEngine3D::gfx_isAmbientLightingEnabled()
+{
+	return _core->_renderBus.isAmbientLightingEnabled();
+}
+
+bool FabiEngine3D::gfx_isDirectionalLightingEnabled()
+{
+	return _core->_renderBus.isDirectionalLightingEnabled();
+}
+
+bool FabiEngine3D::gfx_isSpecularLightingEnabled()
+{
+	return _core->_renderBus.isSpecularLightingEnabled();
+}
+
+bool FabiEngine3D::gfx_isPointLightingEnabled()
+{
+	return _core->_renderBus.isPointLightingEnabled();
+}
+
+bool FabiEngine3D::gfx_isFogEnabled()
+{
+	return _core->_renderBus.isFogEnabled();
+}
+
+bool FabiEngine3D::gfx_isLightMappingEnabled()
+{
+	return _core->_renderBus.isLightMappingEnabled();
+}
+
+bool FabiEngine3D::gfx_isSkyReflectionsEnabled()
+{
+	return _core->_renderBus.isSkyReflectionsEnabled();
+}
+
+bool FabiEngine3D::gfx_isSceneReflectionsEnabled()
+{
+	return _core->_renderBus.isSceneReflectionsEnabled();
+}
+
+bool FabiEngine3D::gfx_isBloomEnabled()
+{
+	return _core->_renderBus.isBloomEnabled();
+}
+
+bool FabiEngine3D::gfx_isWaterEffectsEnabled()
+{
+	return _core->_renderBus.isWaterEffectsEnabled();
+}
+
+bool FabiEngine3D::gfx_isSkyHdrEnabled()
+{
+	return _core->_renderBus.isSkyHdrEnabled();
+}
+
+bool FabiEngine3D::gfx_isShadowsEnabled()
+{
+	return _core->_renderBus.isShadowsEnabled();
+}
+
+bool FabiEngine3D::gfx_isDofEnabled()
+{
+	return _core->_renderBus.isDofEnabled();
+}
+
+bool FabiEngine3D::gfx_isMotionBlurEnabled()
+{
+	return _core->_renderBus.isMotionBlurEnabled();
+}
+
+bool FabiEngine3D::gfx_isLensFlareEnabled()
+{
+	return _core->_renderBus.isLensFlareEnabled();
 }
 
 int FabiEngine3D::gfx_getMsaaQuality()
@@ -301,12 +383,22 @@ float FabiEngine3D::gfx_getSkyHdrBrightnessFactor()
 	return _core->_skyEntityManager.getBrightnessFactor();
 }
 
-float FabiEngine3D::gfx_getDofMinDistance()
+float FabiEngine3D::gfx_getDofMaxDistance()
 {
-	return _core->_renderBus.getDofMinDistance();
+	return _core->_renderBus.getDofMaxDistance();
+}
+
+float FabiEngine3D::gfx_getDofBlurDistance()
+{
+	return _core->_renderBus.getDofBlurDistance();
 }
 
 float FabiEngine3D::gfx_getLensFlareIntensity()
 {
 	return _core->_renderBus.getLensFlareIntensity();
+}
+
+float FabiEngine3D::gfx_getMotionBlurStrength()
+{
+	return _core->_renderBus.getMotionBlurStrength();
 }

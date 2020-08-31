@@ -165,6 +165,11 @@ void RenderBus::setLensFlareMultiplier(float val)
 	_lensFlareMultiplier = val;
 }
 
+void RenderBus::setMotionBlurStrength(float val)
+{
+	_motionBlurStrength = val;
+}
+
 void RenderBus::setAmbientLightIntensity(float val)
 {
 	_ambientLightingIntensity = val;
@@ -210,9 +215,14 @@ void RenderBus::setFarZ(float val)
 	_farZ = val;
 }
 
-void RenderBus::setDofMinDistance(float val)
+void RenderBus::setDofMaxDistance(float val)
 {
-	_dofMinDistance = val;
+	_dofMaxDistance = val;
+}
+
+void RenderBus::setDofBlurDistance(float val)
+{
+	_dofBlurDistance = val;
 }
 
 void RenderBus::setSkyReflectionFactor(float val)
@@ -533,6 +543,11 @@ const float RenderBus::getLensFlareMultiplier() const
 	return _lensFlareMultiplier;
 }
 
+const float RenderBus::getMotionBlurStrength() const
+{
+	return _motionBlurStrength;
+}
+
 const float RenderBus::getAmbientLightingIntensity() const
 {
 	return _ambientLightingIntensity;
@@ -578,9 +593,14 @@ const float RenderBus::getFarZ() const
 	return _farZ;
 }
 
-const float RenderBus::getDofMinDistance() const
+const float RenderBus::getDofMaxDistance() const
 {
-	return _dofMinDistance;
+	return _dofMaxDistance;
+}
+
+const float RenderBus::getDofBlurDistance() const
+{
+	return _dofBlurDistance;
 }
 
 const float RenderBus::getSkyReflectionFactor() const

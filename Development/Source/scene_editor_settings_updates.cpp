@@ -49,11 +49,11 @@ void SceneEditor::_updateGraphicsSettingsMenu()
 			}
 			else if (screen->getButton("motionblur")->isHovered())
 			{
-
+				_leftWindow->setActiveScreen("sceneEditorMenuSettingsGraphicsMotionblur");
 			}
 			else if (screen->getButton("dof")->isHovered())
 			{
-
+				_leftWindow->setActiveScreen("sceneEditorMenuSettingsGraphicsDof");
 			}
 			else if (screen->getButton("fog")->isHovered())
 			{
@@ -81,6 +81,7 @@ void SceneEditor::_updateShadowGraphicsSettingsMenu()
 	{
 		// Current values
 		auto screen = _leftWindow->getScreen("sceneEditorMenuSettingsGraphicsShadows");
+		bool enabled = _fe3d.gfx_isShadowsEnabled();
 		float size = _fe3d.gfx_getShadowSize();
 		vec3 position = _fe3d.gfx_getShadowEyePosition();
 		vec3 center = _fe3d.gfx_getShadowCenter();
@@ -89,7 +90,11 @@ void SceneEditor::_updateShadowGraphicsSettingsMenu()
 		// GUI management
 		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
 		{
-			if (screen->getButton("size")->isHovered())
+			if (screen->getButton("enabled")->isHovered())
+			{
+				enabled = !enabled;
+			}
+			else if (screen->getButton("size")->isHovered())
 			{
 				_gui->getGlobalScreen()->addValueForm("size", "Size", _fe3d.gfx_getShadowSize(), vec2(0.0f, 0.0f), vec2(0.2f, 0.1f));
 			}
@@ -116,6 +121,9 @@ void SceneEditor::_updateShadowGraphicsSettingsMenu()
 			}
 		}
 
+		// Enabled button content
+		_fe3d.textEntity_setTextContent(screen->getButton("enabled")->getTextfield()->getEntityID(), enabled ? "Enabled: YES" : "Enabled: NO");
+
 		// Size value
 		_gui->getGlobalScreen()->checkValueForm("size", size);
 
@@ -130,21 +138,106 @@ void SceneEditor::_updateShadowGraphicsSettingsMenu()
 		_gui->getGlobalScreen()->checkValueForm("centerZ", position.z);
 
 		// Following button content
-		string newContent = isFollowingCamera ? "Follow cam: ON" : "Follow cam: OFF";
-		_fe3d.textEntity_setTextContent(screen->getButton("follow")->getTextfield()->getEntityID(), newContent);
+		_fe3d.textEntity_setTextContent(screen->getButton("follow")->getTextfield()->getEntityID(), isFollowingCamera ? "Follow cam: ON" : "Follow cam: OFF");
 
-		// Update shadow values
-		_fe3d.gfx_enableShadows(position, center, size, size * 1.5f, isFollowingCamera);
+		// Enable or disable shadows
+		if (enabled)
+		{
+			_fe3d.gfx_enableShadows(position, center, size, size * 1.5f, isFollowingCamera);
+		}
+		else
+		{
+			_fe3d.gfx_disableShadows();
+		}
 	}
 }
 
 void SceneEditor::_updateMotionblurGraphicsSettingsMenu()
 {
+	if (_leftWindow->getActiveScreen()->getID() == "sceneEditorMenuSettingsGraphicsMotionblur")
+	{
+		// Current values
+		auto screen = _leftWindow->getScreen("sceneEditorMenuSettingsGraphicsMotionblur");
+		bool enabled = _fe3d.gfx_isMotionBlurEnabled();
+		float strength = _fe3d.gfx_getMotionBlurStrength();
+
+		// GUI management
+		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
+		{
+			if (screen->getButton("enabled")->isHovered())
+			{
+				enabled = !enabled;
+			}
+			else if (screen->getButton("strength")->isHovered())
+			{
+				_gui->getGlobalScreen()->addValueForm("strength", "Strength", strength, vec2(0.0f), vec2(0.2f, 0.1f));
+			}
+			else if (screen->getButton("back")->isHovered())
+			{
+				_leftWindow->setActiveScreen("sceneEditorMenuSettingsGraphics");
+			}
+		}
+		
+		// Enabled button content
+		_fe3d.textEntity_setTextContent(screen->getButton("enabled")->getTextfield()->getEntityID(), enabled ? "Enabled: YES" : "Enabled: NO");
+
+		// Strength value
+		_gui->getGlobalScreen()->checkValueForm("strength", strength);
+
+		// Enable or disable motionblur
+		if (enabled)
+		{
+			_fe3d.gfx_enableMotionBlur(strength);
+		}
+		else
+		{
+			_fe3d.gfx_disableMotionBlur();
+		}
+	}
 }
 
 void SceneEditor::_updateDofGraphicsSettingsMenu()
 {
+	if (_leftWindow->getActiveScreen()->getID() == "sceneEditorMenuSettingsGraphicsDof")
+	{
+		// Current values
+		auto screen = _leftWindow->getScreen("sceneEditorMenuSettingsGraphicsDof");
+		bool enabled = _fe3d.gfx_isMotionBlurEnabled();
+		float strength = _fe3d.gfx_getMotionBlurStrength();
 
+		// GUI management
+		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
+		{
+			if (screen->getButton("enabled")->isHovered())
+			{
+				enabled = !enabled;
+			}
+			else if (screen->getButton("strength")->isHovered())
+			{
+				_gui->getGlobalScreen()->addValueForm("strength", "Strength", strength, vec2(0.0f), vec2(0.2f, 0.1f));
+			}
+			else if (screen->getButton("back")->isHovered())
+			{
+				_leftWindow->setActiveScreen("sceneEditorMenuSettingsGraphics");
+			}
+		}
+
+		// Enabled button content
+		_fe3d.textEntity_setTextContent(screen->getButton("enabled")->getTextfield()->getEntityID(), enabled ? "Enabled: YES" : "Enabled: NO");
+
+		// Strength value
+		_gui->getGlobalScreen()->checkValueForm("strength", strength);
+
+		// Enable or disable motionblur
+		if (enabled)
+		{
+			_fe3d.gfx_enableMotionBlur(strength);
+		}
+		else
+		{
+			_fe3d.gfx_disableMotionBlur();
+		}
+	}
 }
 
 void SceneEditor::_updateFogGraphicsSettingsMenu()

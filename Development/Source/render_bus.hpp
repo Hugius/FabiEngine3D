@@ -57,7 +57,8 @@ public:
 	void setCameraPitch(float val);
 	void setNearZ(float val);
 	void setFarZ(float val);
-	void setDofMinDistance(float val);
+	void setDofMaxDistance(float val);
+	void setDofBlurDistance(float val);
 	void setSkyReflectionFactor(float val);
 	void setSceneReflectionHeight(float val);
 	void setSceneReflectionOffset(float val);
@@ -67,6 +68,7 @@ public:
 	void setLensFlareAlpha(float val);
 	void setLensFlareIntensity(float val);
 	void setLensFlareMultiplier(float val);
+	void setMotionBlurStrength(float val);
 
 	// Integers
 	void setBloomBlurSize(int val);
@@ -146,7 +148,8 @@ public:
 	const float getCameraPitch()				  const;
 	const float getNearZ()						  const;
 	const float getFarZ()						  const;
-	const float getDofMinDistance()				  const;
+	const float getDofMaxDistance()				  const;
+	const float getDofBlurDistance()			  const;
 	const float getSkyReflectionFactor()		  const;
 	const float getSceneReflectionHeight()		  const;
 	const float getSceneReflectionOffset()		  const;
@@ -156,6 +159,7 @@ public:
 	const float getLensFlareAlpha()				  const;
 	const float getLensFlareIntensity()			  const;
 	const float getLensFlareMultiplier()		  const;
+	const float getMotionBlurStrength()			  const;
 
 	// Integers
 	const int getBloomBlurSize()		  const;
@@ -235,7 +239,8 @@ private:
 	float _cameraPitch                  = 0.0f;
 	float _nearZ                        = 0.0f;
 	float _farZ                         = 0.0f;
-	float _dofMinDistance               = 0.0f;
+	float _dofMaxDistance               = 0.0f;
+	float _dofBlurDistance				= 0.0f;
 	float _skyReflectionFactor          = 0.0f;
 	float _sceneReflectionHeight        = 0.0f;
 	float _sceneReflectionOffset	    = 0.0f;
@@ -245,6 +250,7 @@ private:
 	float _lensFlareAlpha				= 0.0f;
 	float _lensFlareIntensity			= 0.0f;
 	float _lensFlareMultiplier			= 0.0f;
+	float _motionBlurStrength			= 0.0f;
 	
 	// Integers
 	int _bloomBlurSize	   = 0;

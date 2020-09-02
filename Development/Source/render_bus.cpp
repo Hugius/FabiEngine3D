@@ -185,6 +185,16 @@ void RenderBus::setFogMinDistance(float val)
 	_fogMinDistance = val;
 }
 
+void RenderBus::setFogMaxDistance(float val)
+{
+	_fogMaxDistance = val;
+}
+
+void RenderBus::setFogDefaultFactor(float val)
+{
+	_fogDefaultFactor = val;
+}
+
 void RenderBus::setBloomIntensity(float val)
 {
 	_bloomIntensity = val;
@@ -561,6 +571,16 @@ const float RenderBus::getDirectionalLightingIntensity() const
 const float RenderBus::getFogMinDistance() const
 {
 	return _fogMinDistance;
+}
+
+const float RenderBus::getFogMaxDistance() const
+{
+	return _fogMaxDistance;
+}
+
+const float RenderBus::getFogDefaultFactor() const
+{
+	return _fogDefaultFactor;
 }
 
 const float RenderBus::getBloomIntensity() const

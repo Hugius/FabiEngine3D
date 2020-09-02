@@ -7,14 +7,17 @@ void WaterEntityRenderer::bind()
 	_shader.bind();
 
 	// Vertex shader uniforms
-	_shader.uploadUniform("u_viewMatrix",				   _renderBus.getViewMatrix());
-	_shader.uploadUniform("u_projectionMatrix",			   _renderBus.getProjectionMatrix());
+	_shader.uploadUniform("u_viewMatrix",		_renderBus.getViewMatrix());
+	_shader.uploadUniform("u_projectionMatrix",	_renderBus.getProjectionMatrix());
 
 	// Fragment shader uniforms
 	_shader.uploadUniform("u_directionalLightingPosition", _renderBus.getDirectionalLightingPosition());
 	_shader.uploadUniform("u_cameraPosition",			   _renderBus.getCameraPosition());
-	_shader.uploadUniform("u_fogEnabled",				   _renderBus.isFogEnabled());
 	_shader.uploadUniform("u_fogMinDistance",			   _renderBus.getFogMinDistance());
+	_shader.uploadUniform("u_fogMaxDistance",			   _renderBus.getFogMaxDistance());
+	_shader.uploadUniform("u_fogDefaultFactor",			   _renderBus.getFogDefaultFactor());
+	_shader.uploadUniform("u_fogColor",					   _renderBus.getFogColor());
+	_shader.uploadUniform("u_fogEnabled",				   _renderBus.isFogEnabled());
 	_shader.uploadUniform("u_effectsEnabled",			   _renderBus.isWaterEffectsEnabled());
 	_shader.uploadUniform("u_nearZ",					   _renderBus.getNearZ());
 	_shader.uploadUniform("u_farZ",						   _renderBus.getFarZ());

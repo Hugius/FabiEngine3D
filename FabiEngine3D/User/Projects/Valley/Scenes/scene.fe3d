@@ -1,9 +1,9 @@
-MODEL 725@hills 0 -10 0 0 0 0 10 20 10 User\Assets\OBJs\hills.obj User\Assets\Textures\DiffuseMaps\hills.png ? ? 0 0 1 0 0 0 1 1 0.6 1 1 1 10 1 1 1
+MODEL 725@hills 0 -10 0 0 0 0 10 26 10 User\Assets\OBJs\hills.obj User\Assets\Textures\DiffuseMaps\hills.png ? ? 0 0 1 0 0 0 1 1 0.6 1 1 1 10 1 1.3 1
 MODEL 2009949046@highPolyTree 68.9156 6.37255 -10.6964 0 0 0 2.15 2.15 2.15 User\Assets\OBJs\tree6.obj User\Assets\Textures\DiffuseMaps\tree6.png ? ? 0 0 1 1 0 0 1 1 0.8 1 1 1 1 1 3.95 6.65001
 AMBIENT 1 1 1 0.5
 DIRECTIONAL 1000 2500 1000 1 1 1 1 400
 CAMERA_FOV 70
 EDITOR_SPEED 10
-EDITOR_POSITION 85.7565 10.62 -21.3964
-EDITOR_YAW 105.167
-EDITOR_PITCH -2.66665
+EDITOR_POSITION 118.325 11.22 -13.4856
+EDITOR_YAW 126.667
+EDITOR_PITCH -6.00001

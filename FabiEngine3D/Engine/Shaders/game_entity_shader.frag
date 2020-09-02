@@ -40,12 +40,14 @@ uniform float u_ambientLightingIntensity;
 uniform float u_directionalLightingIntensity;
 uniform float u_specularLightingFactor;
 uniform float u_specularLightingIntensity;
-uniform float u_fogMinDistance;
 uniform float u_customAlpha;
 uniform float u_skyReflectionFactor;
 uniform float u_sceneReflectionFactor;
 uniform float u_lightness;
 uniform float u_shadowAreaSize;
+uniform float u_fogMinDistance;
+uniform float u_fogMaxDistance;
+uniform float u_fogDefaultFactor;
 
 // Boolean uniforms
 uniform bool u_isTransparent;
@@ -102,8 +104,8 @@ void main()
 	color  = applySceneReflections(color); // Scene reflection
 	color *= vec3((ambient + directional) * shadow + point); // Lighting
 	color  = applyLightMapping(color); // LightMapping
-	color  = applyFog(color); // Fog
-	color *= u_lightness;
+	color *= u_lightness; // Lightness
+    color  = applyFog(color); // Fog
 
 	// Set final color
 	o_finalColor = vec4(color, u_customAlpha);
@@ -322,9 +324,18 @@ vec3 applyFog(vec3 color)
 {
 	if(u_fogEnabled)
 	{
-		float  distance    = length(f_pos.xyz - u_cameraPosition);
-		vec3   foggedColor = mix(u_fogColor, color, max(min(u_fogMinDistance / distance, 1.0f), 0.75f));
-		return foggedColor;
+        // Calculate distance in world space
+        float distance = length(f_pos.xyz - u_cameraPosition);
+
+        // Determine if in fog range
+        if(distance > u_fogMaxDistance)
+        {
+            return mix(color, u_fogColor, u_fogDefaultFactor);
+        }
+        else
+        {
+            return mix(u_fogColor, color, min(u_fogMinDistance / distance, 1.0f));
+        }
 	}
 	else
 	{

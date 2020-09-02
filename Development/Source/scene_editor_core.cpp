@@ -127,6 +127,16 @@ void SceneEditor::initializeGUI()
 	_leftWindow->getScreen(screenID)->addButton("maxDistance", vec2(0.0f, -0.21f), vec2(GW("DOF distance"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "DOF distance", LVC::textColor, LVC::textHoverColor);
 	_leftWindow->getScreen(screenID)->addButton("back", vec2(0.0f, -0.63f), vec2(GW("Go back"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Go back", LVC::textColor, LVC::textHoverColor);
 
+	// Left-viewport: mainWindow - sceneEditorMenuSettingsGraphicsFog
+	screenID = "sceneEditorMenuSettingsGraphicsFog";
+	_leftWindow->addScreen(screenID);
+	_leftWindow->getScreen(screenID)->addButton("enabled", vec2(0.0f, 0.75f), vec2(GW("Enabled: NO"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Enabled: NO", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("minDistance", vec2(0.0f, 0.45f), vec2(GW("Min distance"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Min distance", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("maxDistance", vec2(0.0f, 0.15f), vec2(GW("Max distance"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Max distance", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("defaultFactor", vec2(0.0f, -0.15f), vec2(GW("Default factor"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Default factor", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("color", vec2(0.0f, -0.45f), vec2(GW("Color"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Color", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("back", vec2(0.0f, -0.75f), vec2(GW("Go back"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Go back", LVC::textColor, LVC::textHoverColor);
+
 	// Right-viewport: mainWindow - modelPropertiesMenu
 	screenID = "modelPropertiesMenu";
 	_rightWindow->addScreen(screenID);
@@ -203,9 +213,7 @@ void SceneEditor::load()
 	_fe3d.gfx_enableLightMapping();
 	_fe3d.gfx_enableWaterEffects();
 
-	_fe3d.gfx_enableFog(150.0f, vec3(0.75f));
 	_fe3d.gfx_enableSkyHDR(0.4f);
-	_fe3d.gfx_enableDOF(10.0f, 20.0f);
 	_fe3d.gfx_enableLensFlare("User\\Assets\\Textures\\FlareMaps\\flare.png", 1.0f, 1.0f);
 	
 	// Disable default skybox

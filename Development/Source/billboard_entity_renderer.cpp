@@ -7,8 +7,14 @@ void BillboardEntityRenderer::bind()
 	_shader.bind();
 
 	// Vertex shader uniforms
-	_shader.uploadUniform("u_viewMatrix", _renderBus.getViewMatrix());
-	_shader.uploadUniform("u_projMatrix", _renderBus.getProjectionMatrix());
+	_shader.uploadUniform("u_cameraPosition",	_renderBus.getCameraPosition());
+	_shader.uploadUniform("u_viewMatrix",		_renderBus.getViewMatrix());
+	_shader.uploadUniform("u_projMatrix",		_renderBus.getProjectionMatrix());
+	_shader.uploadUniform("u_fogMinDistance",	_renderBus.getFogMinDistance());
+	_shader.uploadUniform("u_fogMaxDistance",	_renderBus.getFogMaxDistance());
+	_shader.uploadUniform("u_fogDefaultFactor",	_renderBus.getFogDefaultFactor());
+	_shader.uploadUniform("u_fogColor",			_renderBus.getFogColor());
+	_shader.uploadUniform("u_fogEnabled",		_renderBus.isFogEnabled());
 
 	// Texture uniforms
 	_shader.uploadUniform("u_sampler_diffuseMap", 0);

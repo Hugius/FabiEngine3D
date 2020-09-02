@@ -17,17 +17,20 @@ layout(location = 4) uniform sampler2D u_sampler_normalMap;
 uniform vec3 u_directionalLightingPosition;
 uniform vec3 u_cameraPosition;
 uniform vec3 u_color;
+uniform vec3 u_fogColor;
 
 // Vector2 uniforms
 uniform vec2 u_rippleOffset;
 
 // Float uniforms
-uniform float u_fogMinDistance;
 uniform float u_specularLightingFactor;
 uniform float u_specularLightingIntensity;
 uniform float u_nearZ;
 uniform float u_farZ;
 uniform float u_transparency;
+uniform float u_fogMinDistance;
+uniform float u_fogMaxDistance;
+uniform float u_fogDefaultFactor;
 
 // Boolean uniforms
 uniform bool u_fogEnabled;
@@ -146,9 +149,18 @@ vec3 applyFog(vec3 color)
 {
 	if(u_fogEnabled)
 	{
-		float  distance    = length(f_pos.xyz - u_cameraPosition);
-		vec3   foggedColor = mix(vec3(0.75f, 0.75f, 0.75f), color, min(u_fogMinDistance / distance, 1.0f));
-		return foggedColor;
+		// Calculate distance in world space
+		float distance = length(f_pos.xyz - u_cameraPosition);
+
+		// Determine if in fog range
+		if(distance > u_fogMaxDistance)
+		{
+			return mix(color, u_fogColor, u_fogDefaultFactor);
+		}
+		else
+		{
+			return mix(u_fogColor, color, min(u_fogMinDistance / distance, 1.0f));
+		}
 	}
 	
 	return color;

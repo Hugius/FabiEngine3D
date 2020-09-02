@@ -57,7 +57,7 @@ void SceneEditor::_updateGraphicsSettingsMenu()
 			}
 			else if (screen->getButton("fog")->isHovered())
 			{
-
+				_leftWindow->setActiveScreen("sceneEditorMenuSettingsGraphicsFog");
 			}
 			else if (screen->getButton("lensflare")->isHovered())
 			{
@@ -250,7 +250,80 @@ void SceneEditor::_updateDofGraphicsSettingsMenu()
 
 void SceneEditor::_updateFogGraphicsSettingsMenu()
 {
+	if (_leftWindow->getActiveScreen()->getID() == "sceneEditorMenuSettingsGraphicsFog")
+	{
+		// Current values
+		auto screen = _leftWindow->getScreen("sceneEditorMenuSettingsGraphicsFog");
+		bool enabled = _fe3d.gfx_isFogEnabled();
+		float minDistance = _fe3d.gfx_getFogMinDistance();
+		float maxDistance = _fe3d.gfx_getFogMaxDistance();
+		float defaultFactor = _fe3d.gfx_getFogDefaultFactor();
+		vec3 color = _fe3d.gfx_getFogColor();
 
+		// GUI management
+		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
+		{
+			if (screen->getButton("enabled")->isHovered())
+			{
+				enabled = !enabled;
+			}
+			else if (screen->getButton("minDistance")->isHovered())
+			{
+				_gui->getGlobalScreen()->addValueForm("minDistance", "Min distance", minDistance, vec2(0.0f), vec2(0.2f, 0.1f));
+			}
+			else if (screen->getButton("maxDistance")->isHovered())
+			{
+				_gui->getGlobalScreen()->addValueForm("maxDistance", "Max distance", maxDistance, vec2(0.0f), vec2(0.2f, 0.1f));
+			}
+			else if (screen->getButton("defaultFactor")->isHovered())
+			{
+				_gui->getGlobalScreen()->addValueForm("defaultFactor", "Default factor (0-100%)", defaultFactor * 100.0f, vec2(0.0f), vec2(0.2f, 0.1f));
+			}
+			else if (screen->getButton("color")->isHovered())
+			{
+				_gui->getGlobalScreen()->addValueForm("colorR", "R(0-255)", color.r * 255.0f, vec2(-0.25f, 0.0f), vec2(0.2f, 0.1f));
+				_gui->getGlobalScreen()->addValueForm("colorG", "G(0-255)", color.g * 255.0f, vec2(0.0f, 0.0f), vec2(0.2f, 0.1f));
+				_gui->getGlobalScreen()->addValueForm("colorB", "B(0-255)", color.b * 255.0f, vec2(0.25f, 0.0f), vec2(0.2f, 0.1f));
+			}
+			else if (screen->getButton("back")->isHovered())
+			{
+				_leftWindow->setActiveScreen("sceneEditorMenuSettingsGraphics");
+			}
+		}
+
+		// Enabled button content
+		_fe3d.textEntity_setTextContent(screen->getButton("enabled")->getTextfield()->getEntityID(), enabled ? "Enabled: YES" : "Enabled: NO");
+
+		// Min distance value
+		_gui->getGlobalScreen()->checkValueForm("minDistance", minDistance);
+
+		// Max distance value
+		_gui->getGlobalScreen()->checkValueForm("maxDistance", maxDistance);
+
+		// Default factor distance value
+		defaultFactor *= 100.0f;
+		_gui->getGlobalScreen()->checkValueForm("defaultFactor", defaultFactor);
+		defaultFactor = std::clamp(defaultFactor / 100.0f, 0.0f, 1.0f);
+
+		// Color values
+		color *= 255.0f;
+		_gui->getGlobalScreen()->checkValueForm("colorR", color.r, { });
+		_gui->getGlobalScreen()->checkValueForm("colorG", color.g, { });
+		_gui->getGlobalScreen()->checkValueForm("colorB", color.b, { });
+		color.r = std::clamp(color.r / 255.0f, 0.0f, 1.0f);
+		color.g = std::clamp(color.g / 255.0f, 0.0f, 1.0f);
+		color.b = std::clamp(color.b / 255.0f, 0.0f, 1.0f);
+
+		// Enable or disable DOF
+		if (enabled)
+		{
+			_fe3d.gfx_enableFog(minDistance, maxDistance, defaultFactor, color);
+		}
+		else
+		{
+			_fe3d.gfx_disableFog();
+		}
+	}
 }
 
 void SceneEditor::_updateLensflareGraphicsSettingsMenu()

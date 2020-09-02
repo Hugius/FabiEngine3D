@@ -34,12 +34,14 @@ uniform float u_ambientLightingIntensity;
 uniform float u_directionalLightingIntensity;
 uniform float u_pointLightIntensities[POINT_LIGHT_AMOUNT];
 uniform float u_pointLightDistanceFactors[POINT_LIGHT_AMOUNT];
-uniform float u_fogMinDistance;
 uniform float u_blendMapRepeat;
 uniform float u_blendMapRepeatR;
 uniform float u_blendMapRepeatG;
 uniform float u_blendMapRepeatB;
 uniform float u_shadowAreaSize;
+uniform float u_fogMinDistance;
+uniform float u_fogMaxDistance;
+uniform float u_fogDefaultFactor;
 
 // Boolean uniforms
 uniform bool u_blendMappingEnabled;
@@ -62,23 +64,23 @@ vec3 getTextureColor();
 vec3 getAmbientLighting();
 vec3 getDirectionalLighting();
 vec3 getPointLighting();
-vec3 applyFog(vec3 color);
 vec3 getShadowLighting();
+vec3 applyFog(vec3 color);
 
 // Calculate final fragment color
 void main()
 {
 	// Calculate lighting
-	vec3 a = getAmbientLighting();
-	vec3 d = getDirectionalLighting();
-	vec3 p = getPointLighting();
-	vec3 h = getShadowLighting();
+	vec3 ambient = getAmbientLighting();
+	vec3 directional = getDirectionalLighting();
+	vec3 point = getPointLighting();
+	vec3 shadow = getShadowLighting();
 
 	// Apply lighting
 	vec3 color;
-	color = getTextureColor() * vec3((a + d) * h + p);
+	color = getTextureColor() * vec3((ambient + directional) * shadow + point); // Lighting
+	color *= u_lightness; // Lightness
 	color = applyFog(color);
-	color *= u_lightness;
 
 	// Set final color
 	o_finalColor = vec4(color, 1.0f);
@@ -105,21 +107,6 @@ vec3 getTextureColor()
 
 		// Returning the texture color
 		return texColor.rgb;
-	}
-}
-
-// Calculate fog color
-vec3 applyFog(vec3 color)
-{
-	if(u_fogEnabled)
-	{
-		float  distance    = length(f_pos.xyz - u_cameraPosition);
-		vec3   foggedColor = mix(u_fogColor, color, max(min(u_fogMinDistance / distance, 1.0f), 0.75f));
-		return foggedColor;
-	}
-	else
-	{
-		return color;
 	}
 }
 
@@ -274,5 +261,29 @@ vec3 getShadowLighting()
 	{
 		// No shadow
 		return vec3(1.0f);
+	}
+}
+
+// Calculate fog color
+vec3 applyFog(vec3 color)
+{
+	if(u_fogEnabled)
+	{
+		// Calculate distance in world space
+		float distance = length(f_pos.xyz - u_cameraPosition);
+
+		// Determine if in fog range
+		if(distance > u_fogMaxDistance)
+		{
+			return mix(color, u_fogColor, u_fogDefaultFactor);
+		}
+		else
+		{
+			return mix(u_fogColor, color, min(u_fogMinDistance / distance, 1.0f));
+		}
+	}
+	else
+	{
+		return color;
 	}
 }

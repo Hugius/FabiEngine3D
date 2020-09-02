@@ -25,13 +25,15 @@ void GameEntityRenderer::bind()
 	_shader.uploadUniform("u_directionalLightingPosition",	_renderBus.getDirectionalLightingPosition());
 	_shader.uploadUniform("u_directionalLightingIntensity", _renderBus.getDirectionalLightingIntensity());
 	_shader.uploadUniform("u_fogMinDistance",				_renderBus.getFogMinDistance());
+	_shader.uploadUniform("u_fogMaxDistance",				_renderBus.getFogMaxDistance());
+	_shader.uploadUniform("u_fogDefaultFactor",				_renderBus.getFogDefaultFactor());
 	_shader.uploadUniform("u_fogColor",						_renderBus.getFogColor());
+	_shader.uploadUniform("u_fogEnabled",					_renderBus.isFogEnabled());
 	_shader.uploadUniform("u_specularLightingEnabled",		_renderBus.isSpecularLightingEnabled());
 	_shader.uploadUniform("u_pointLightingEnabled",			_renderBus.isPointLightingEnabled());
 	_shader.uploadUniform("u_lightMappingEnabled",			_renderBus.isLightMappingEnabled());
 	_shader.uploadUniform("u_skyReflectionsEnabled",		_renderBus.isSkyReflectionsEnabled());
 	_shader.uploadUniform("u_sceneReflectionsEnabled",		_renderBus.isSceneReflectionsEnabled());
-	_shader.uploadUniform("u_fogEnabled",					_renderBus.isFogEnabled());
 	_shader.uploadUniform("u_shadowAreaSize",				_renderBus.getShadowAreaSize());
 	_shader.uploadUniform("u_shadowAreaCenter",				_renderBus.getShadowAreaCenter());
 	_shader.uploadUniform("u_shadowsEnabled",				_renderBus.isShadowsEnabled());

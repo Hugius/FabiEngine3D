@@ -51,6 +51,8 @@ public:
 	void setAmbientLightIntensity(float val);
 	void setDirectionalLightIntensity(float val);
 	void setFogMinDistance(float val);
+	void setFogMaxDistance(float val);
+	void setFogDefaultFactor(float val);
 	void setBloomIntensity(float val);
 	void setBloomBrightnessTreshold(float val);
 	void setCameraYaw(float val);
@@ -142,6 +144,8 @@ public:
 	const float getAmbientLightingIntensity()	  const;
 	const float getDirectionalLightingIntensity() const;
 	const float getFogMinDistance()				  const;
+	const float getFogMaxDistance()				  const;
+	const float getFogDefaultFactor()			  const;
 	const float getBloomIntensity()				  const;
 	const float getBloomBrightnessTreshold()	  const;
 	const float getCameraYaw()					  const;
@@ -230,9 +234,11 @@ private:
 	vec3 _flareSourcePosition		  = vec3(0.0f);
 
 	// Floats
-	float _ambientLightingIntensity     = 1.0f;
+	float _ambientLightingIntensity     = 0.0f;
 	float _directionalLightingIntensity = 0.0f;
 	float _fogMinDistance               = 0.0f;
+	float _fogMaxDistance				= 0.0f;
+	float _fogDefaultFactor				= 0.0f;
 	float _bloomIntensity               = 0.0f;
 	float _bloomBrightnessTreshold      = 0.0f;
 	float _cameraYaw                    = 0.0f;
@@ -253,10 +259,10 @@ private:
 	float _motionBlurStrength			= 0.0f;
 	
 	// Integers
-	int _bloomBlurSize	   = 0;
-	int _triangleCount	   = 0;
-	int _msaaSampleCount   = 0;
-	int _shadowMapSize	   = 0;
+	int _bloomBlurSize			= 0;
+	int _triangleCount			= 0;
+	int _msaaSampleCount		= 0;
+	int _shadowMapSize			= 0;
 	int _sceneReflectionMapSize = 0;
 	int _sceneRefractionMapSize = 0;
 

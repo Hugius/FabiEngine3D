@@ -18,6 +18,7 @@ uniform vec2 u_uvMultiplier;
 uniform float u_uvRepeat;
 
 // Out variables
+out vec3 f_pos;
 out vec2 f_uv;
 
 void main()
@@ -31,5 +32,6 @@ void main()
 	gl_Position = clipSpacePos;
 	
 	// Out variables
-	f_uv = vec2(u_uvAdder.x + (v_uv.x*u_uvMultiplier.x), u_uvAdder.y + (-v_uv.y*u_uvMultiplier.y)) *u_uvRepeat;
+	f_uv = vec2(u_uvAdder.x + (v_uv.x*u_uvMultiplier.x), u_uvAdder.y + (-v_uv.y*u_uvMultiplier.y)) * u_uvRepeat;
+    f_pos = worldSpacePos.xyz;
 }

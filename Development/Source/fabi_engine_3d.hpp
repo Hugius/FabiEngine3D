@@ -473,7 +473,7 @@ public:
 	void gfx_enableDirectionalLighting(vec3 position, vec3 color, float intensity);
 	void gfx_enableSpecularLighting();
 	void gfx_enablePointLighting();
-	void gfx_enableFog(float minDistance, vec3 color);
+	void gfx_enableFog(float minDistance, float maxDistance, float defaultFactor, vec3 color);
 	void gfx_enableSkyReflections(float factor);
 	void gfx_enableSceneReflections(float factor);
 	void gfx_enableLightMapping();
@@ -528,6 +528,8 @@ public:
 	float gfx_getAmbientLightingIntensity();
 	float gfx_geDirectionalLightingIntensity();
 	float gfx_getFogMinDistance();
+	float gfx_getFogMaxDistance();
+	float gfx_getFogDefaultFactor();
 	float gfx_getSkyReflectionFactor();
 	float gfx_getSceneReflectionHeight();
 	float gfx_getSceneReflectionFactor();

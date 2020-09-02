@@ -26,10 +26,12 @@ void FabiEngine3D::gfx_enablePointLighting()
 	_core->_renderBus.setPointLightingEnabled(true);
 }
 
-void FabiEngine3D::gfx_enableFog(float minDistance, vec3 color)
+void FabiEngine3D::gfx_enableFog(float minDistance, float maxDistance, float defaultFactor, vec3 color)
 {
 	_core->_renderBus.setFogEnabled(true);
 	_core->_renderBus.setFogMinDistance(minDistance);
+	_core->_renderBus.setFogMaxDistance(maxDistance);
+	_core->_renderBus.setFogDefaultFactor(defaultFactor);
 	_core->_renderBus.setFogColor(color);
 }
 
@@ -316,6 +318,16 @@ vec3 FabiEngine3D::gfx_getDirectionalLightingColor()
 float FabiEngine3D::gfx_getFogMinDistance()
 {
 	return _core->_renderBus.getFogMinDistance();
+}
+
+float FabiEngine3D::gfx_getFogMaxDistance()
+{
+	return _core->_renderBus.getFogMaxDistance();
+}
+
+float FabiEngine3D::gfx_getFogDefaultFactor()
+{
+	return _core->_renderBus.getFogDefaultFactor();
 }
 
 vec3 FabiEngine3D::gfx_getFogColor()

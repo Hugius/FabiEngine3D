@@ -29,7 +29,7 @@ void SceneEditor::update()
 	_updateMotionblurGraphicsSettingsMenu();
 	_updateDofGraphicsSettingsMenu();
 	_updateFogGraphicsSettingsMenu();
-	_updateLensflareGraphicsSettingsMenu();
+	_updateLensFlareGraphicsSettingsMenu();
 	_updateskyHdrGraphicsSettingsMenu();
 
 	// Miscellaneous

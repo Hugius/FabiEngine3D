@@ -388,6 +388,11 @@ void RenderBus::setCursorEntityID(const string& val)
 	_cursorEntityID = val;
 }
 
+void RenderBus::setLensFlareMapPath(const string& val)
+{
+	_lensFlareMapPath = val;
+}
+
 const GLuint RenderBus::getSkyReflectionCubeMap() const
 {
 	return _skyReflectionCubeMap;
@@ -766,4 +771,9 @@ const bool RenderBus::isTriangleCountingEnabled() const
 const string& RenderBus::getCursorEntityID() const
 {
 	return _cursorEntityID;
+}
+
+const string& RenderBus::getLensFlareMapPath() const
+{
+	return _lensFlareMapPath;
 }

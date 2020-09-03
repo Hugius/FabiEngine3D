@@ -105,6 +105,7 @@ void FabiEngine3D::gfx_enableMotionBlur(float strength)
 void FabiEngine3D::gfx_enableLensFlare(const string& texturePath, float intensity, float multiplier)
 {
 	_core->_renderBus.setLensFlareMap(_core->_texLoader.getTexture(texturePath, false, false));
+	_core->_renderBus.setLensFlareMapPath(texturePath);
 	_core->_renderBus.setLensFlareEnabled(true);
 	_core->_renderBus.setLensFlareIntensity(intensity);
 	_core->_renderBus.setLensFlareMultiplier(multiplier);
@@ -360,6 +361,11 @@ vec3 FabiEngine3D::gfx_getShadowCenter()
 	return _core->_shadowManager.getCenter();
 }
 
+string FabiEngine3D::gfx_getLensFlareMapPath()
+{
+	return _core->_renderBus.getLensFlareMapPath();
+}
+
 float FabiEngine3D::gfx_getShadowSize()
 {
 	return _core->_shadowManager.getSize();
@@ -408,6 +414,11 @@ float FabiEngine3D::gfx_getDofBlurDistance()
 float FabiEngine3D::gfx_getLensFlareIntensity()
 {
 	return _core->_renderBus.getLensFlareIntensity();
+}
+
+float FabiEngine3D::gfx_getLensFlareMultiplier()
+{
+	return _core->_renderBus.getLensFlareMultiplier();
 }
 
 float FabiEngine3D::gfx_getMotionBlurStrength()

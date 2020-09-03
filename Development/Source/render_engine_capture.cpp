@@ -167,7 +167,7 @@ void RenderEngine::_captureBloom()
 
 void RenderEngine::_captureSceneDepth()
 {
-	if (_renderBus.isDofEnabled() && _renderBus.isLensFlareEnabled())
+	if (_renderBus.isDofEnabled() || _renderBus.isLensFlareEnabled())
 	{
 		// Bind
 		_sceneDepthFramebuffer.bind();

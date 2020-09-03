@@ -59,7 +59,7 @@ private:
 	void _updateMotionblurGraphicsSettingsMenu();
 	void _updateDofGraphicsSettingsMenu();
 	void _updateFogGraphicsSettingsMenu();
-	void _updateLensflareGraphicsSettingsMenu();
+	void _updateLensFlareGraphicsSettingsMenu();
 	void _updateskyHdrGraphicsSettingsMenu();
 
 	// Miscellaneous updates

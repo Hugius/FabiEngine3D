@@ -137,6 +137,22 @@ void SceneEditor::initializeGUI()
 	_leftWindow->getScreen(screenID)->addButton("color", vec2(0.0f, -0.45f), vec2(GW("Color"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Color", LVC::textColor, LVC::textHoverColor);
 	_leftWindow->getScreen(screenID)->addButton("back", vec2(0.0f, -0.75f), vec2(GW("Go back"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Go back", LVC::textColor, LVC::textHoverColor);
 
+	// Left-viewport: mainWindow - sceneEditorMenuSettingsGraphicsLensFlare
+	screenID = "sceneEditorMenuSettingsGraphicsLensFlare";
+	_leftWindow->addScreen(screenID);
+	_leftWindow->getScreen(screenID)->addButton("enabled", vec2(0.0f, 0.7f), vec2(GW("Enabled: NO"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Enabled: NO", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("loadFlareMap", vec2(0.0f, 0.35f), vec2(GW("FlareMap"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "FlareMap", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("intensity", vec2(0.0f, 0.0f), vec2(GW("Intensity"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Intensity", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("multiplier", vec2(0.0f, -0.35f), vec2(GW("Multiplier"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Multiplier", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("back", vec2(0.0f, -0.7f), vec2(GW("Go back"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Go back", LVC::textColor, LVC::textHoverColor);
+
+	// Left-viewport: mainWindow - sceneEditorMenuSettingsGraphicsSkyHDR
+	screenID = "sceneEditorMenuSettingsGraphicsSkyHDR";
+	_leftWindow->addScreen(screenID);
+	_leftWindow->getScreen(screenID)->addButton("enabled", vec2(0.0f, 0.475f), vec2(GW("Enabled: NO"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Enabled: NO", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("intensity", vec2(0.0f, 0.0f), vec2(GW("Intensity"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Intensity", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("back", vec2(0.0f, -0.475f), vec2(GW("Go back"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Go back", LVC::textColor, LVC::textHoverColor);
+
 	// Right-viewport: mainWindow - modelPropertiesMenu
 	screenID = "modelPropertiesMenu";
 	_rightWindow->addScreen(screenID);
@@ -212,9 +228,6 @@ void SceneEditor::load()
 	_fe3d.gfx_enableSceneReflections(0.5f);
 	_fe3d.gfx_enableLightMapping();
 	_fe3d.gfx_enableWaterEffects();
-
-	_fe3d.gfx_enableSkyHDR(0.4f);
-	_fe3d.gfx_enableLensFlare("User\\Assets\\Textures\\FlareMaps\\flare.png", 1.0f, 1.0f);
 	
 	// Disable default skybox
 	_fe3d.skyEntity_select("");

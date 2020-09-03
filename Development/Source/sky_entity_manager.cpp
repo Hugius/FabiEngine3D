@@ -125,13 +125,6 @@ void SkyEntityManager::_updateRotation()
 
 void SkyEntityManager::_updateEyeAdaption()
 {
-	// Keep track of HDR being enabled or not
-	bool hdrWasEnabled = false;
-	if (_renderBus.isSkyHdrEnabled())
-	{
-		hdrWasEnabled = true;
-	}
-
 	// Update sky HDR
 	if (_renderBus.isSkyHdrEnabled())
 	{
@@ -153,10 +146,7 @@ void SkyEntityManager::_updateEyeAdaption()
 	}
 	else // HDR not enabled
 	{
-		if (hdrWasEnabled)
-		{
-			getSelectedSky()->setLightness(getSelectedSky()->getOriginalLightness()); // Revert lightness
-		}
+		getSelectedSky()->setLightness(getSelectedSky()->getOriginalLightness()); // Revert lightness
 	}
 }
 

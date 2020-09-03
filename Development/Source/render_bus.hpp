@@ -106,6 +106,7 @@ public:
 
 	// Strings
 	void setCursorEntityID(const string& val);
+	void setLensFlareMapPath(const string& val);
 
 	// Textures
 	const GLuint getSceneMap()              const;
@@ -198,6 +199,7 @@ public:
 
 	// Strings
 	const string& getCursorEntityID() const;
+	const string& getLensFlareMapPath() const;
 
 private:
 	// Textures
@@ -291,4 +293,5 @@ private:
 
 	// Strings
 	string _cursorEntityID = "";
+	string _lensFlareMapPath = "";
 };

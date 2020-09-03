@@ -541,6 +541,7 @@ public:
 	float gfx_getDofMaxDistance();
 	float gfx_getDofBlurDistance();
 	float gfx_getLensFlareIntensity();
+	float gfx_getLensFlareMultiplier();
 	float gfx_getMotionBlurStrength();
 	vec3 gfx_getDirectionalLightingPosition();
 	vec3 gfx_getAmbientLightingColor();
@@ -548,6 +549,7 @@ public:
 	vec3 gfx_getFogColor();
 	vec3 gfx_getShadowEyePosition();
 	vec3 gfx_getShadowCenter();
+	string gfx_getLensFlareMapPath();
 
 	// Input interface
 	void input_setLocked(bool locked);

@@ -330,6 +330,7 @@ void SceneEditor::unload()
 	_fe3d.gfx_disableSpecularLighting();
 	_fe3d.gfx_disableSceneReflections();
 	_fe3d.gfx_disableWaterEffects();
+	_fe3d.gfx_disableMotionBlur();
 
 	// Delete sky entity
 	if (_fe3d.skyEntity_isExisting("@sky"))

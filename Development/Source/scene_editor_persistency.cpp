@@ -160,6 +160,52 @@ bool SceneEditor::_loadScene()
 				iss >> pitch;
 				_fe3d.camera_setPitch(pitch);
 			}
+			else if (entityType == "GRAPHICS_SHADOWS")
+			{
+				bool enabled;
+				float size;
+				vec3 position, center;
+				bool isFollowingCamera;
+				iss >> enabled >> size >> position.x >> position.y >> position.z >> center.x >> center.y >> center.z >> isFollowingCamera;
+				_fe3d.gfx_enableShadows(position, center, size, size * 1.5f, isFollowingCamera);
+			}
+			else if (entityType == "GRAPHICS_MOTIONBLUR")
+			{
+				bool enabled;
+				float strength;
+				iss >> enabled >> strength;
+				_fe3d.gfx_enableMotionBlur(strength);
+			}
+			else if (entityType == "GRAPHICS_DOF")
+			{
+				bool enabled;
+				float blurDistance, maxDistance;
+				iss >> enabled >> blurDistance >> maxDistance;
+				_fe3d.gfx_enableDOF(maxDistance, blurDistance);
+			}
+			else if (entityType == "GRAPHICS_FOG")
+			{
+				bool enabled;
+				float minDistance, maxDistance, defaultFactor;
+				vec3 color;
+				iss >> enabled >> minDistance >> maxDistance >> defaultFactor >> color.r >> color.g >> color.b;
+				_fe3d.gfx_enableFog(minDistance, maxDistance, defaultFactor, color);
+			}
+			else if (entityType == "GRAPHICS_LENSFLARE")
+			{
+				bool enabled;
+				string flareMapPath;
+				float intensity, multiplier;
+				iss >> enabled >> flareMapPath >> intensity >> multiplier;
+				_fe3d.gfx_enableLensFlare(flareMapPath, intensity, multiplier);
+			}
+			else if (entityType == "GRAPHICS_SKYHDR")
+			{
+				bool enabled;
+				float intensity;
+				iss >> enabled >> intensity;
+				_fe3d.gfx_enableSkyHDR(intensity);
+			}
 		}
 
 		// Close file
@@ -331,6 +377,64 @@ void SceneEditor::save()
 
 		// Editor camera pitch
 		file << "EDITOR_PITCH " << _fe3d.camera_getPitch() << std::endl;
+
+		// Shadow settings
+		bool enabled = _fe3d.gfx_isShadowsEnabled();
+		if (enabled)
+		{
+			float size = _fe3d.gfx_getShadowSize();
+			position = _fe3d.gfx_getShadowEyePosition();
+			vec3 center = _fe3d.gfx_getShadowCenter();
+			bool isFollowingCamera = _fe3d.gfx_isShadowFollowingCamera();
+			file << "GRAPHICS_SHADOWS " << enabled << " " << size << " " << _fe3d.misc_vec2str(position) << " " <<
+				_fe3d.misc_vec2str(center) << " " << isFollowingCamera << std::endl;
+		}
+
+		// Motion blur settings
+		enabled = _fe3d.gfx_isMotionBlurEnabled();
+		if (enabled)
+		{
+			float strength = _fe3d.gfx_getMotionBlurStrength();
+			file << "GRAPHICS_MOTIONBLUR " << enabled << " " << strength << std::endl;
+		}
+
+		// DOF settings
+		enabled = _fe3d.gfx_isDofEnabled();
+		if (enabled)
+		{
+			float blurDistance = _fe3d.gfx_getDofBlurDistance();
+			float maxDistance = _fe3d.gfx_getDofMaxDistance();
+			file << " GRAPHICS_DOF " << enabled << " " << blurDistance << " " << maxDistance << std::endl;
+		}
+
+		// Fog settings
+		enabled = _fe3d.gfx_isFogEnabled();
+		if (enabled)
+		{
+			float minDistance = _fe3d.gfx_getFogMinDistance();
+			float maxDistance = _fe3d.gfx_getFogMaxDistance();
+			float defaultFactor = _fe3d.gfx_getFogDefaultFactor();
+			vec3 color = _fe3d.gfx_getFogColor();
+			file << "GRAPHICS_FOG " << enabled << " " << minDistance << " " << maxDistance << " " << defaultFactor << " " << _fe3d.misc_vec2str(color) << std::endl;
+		}
+
+		// Lens flare settings
+		enabled = _fe3d.gfx_isLensFlareEnabled();
+		if (enabled)
+		{
+			string flareMapPath = _fe3d.gfx_getLensFlareMapPath();
+			float intensity = _fe3d.gfx_getLensFlareIntensity();
+			float multiplier = _fe3d.gfx_getLensFlareMultiplier();
+			file << "GRAPHICS_LENSFLARE " << enabled << " " << flareMapPath << " " << intensity << " " << multiplier << std::endl;
+		}
+
+		// Sky HDR settings
+		enabled = _fe3d.gfx_isSkyHdrEnabled();
+		if (enabled)
+		{
+			float intensity = _fe3d.gfx_getSkyHdrBrightnessFactor();
+			file << "GRAPHICS_SKYHDR " << enabled << " " << intensity << std::endl;
+		}
 
 		// Close file
 		file.close();

@@ -45,9 +45,11 @@ void GameEntityRenderer::bind()
 	// Texture uniforms
 	_shader.uploadUniform("u_sampler_diffuseMap", 0);
 	_shader.uploadUniform("u_sampler_lightMap", 1);
-	_shader.uploadUniform("u_sampler_skyReflectionMap", 2);
-	_shader.uploadUniform("u_sampler_sceneReflectionMap", 3);
-	_shader.uploadUniform("u_sampler_shadowMap", 4);
+	_shader.uploadUniform("u_sampler_normalMap", 2);
+	_shader.uploadUniform("u_sampler_skyReflectionMap", 3);
+	_shader.uploadUniform("u_sampler_sceneReflectionMap", 4);
+	_shader.uploadUniform("u_sampler_shadowMap", 5);
+	_shader.uploadUniform("u_sampler_skyMap", 6);
 
 	// Depth testing
 	glEnable(GL_DEPTH_TEST);
@@ -57,11 +59,11 @@ void GameEntityRenderer::bind()
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	// Texture binding
-	glActiveTexture(GL_TEXTURE3);
-	glBindTexture(GL_TEXTURE_2D, _renderBus.getSceneReflectionMap());
 	glActiveTexture(GL_TEXTURE4);
-	glBindTexture(GL_TEXTURE_2D, _renderBus.getShadowMap());
+	glBindTexture(GL_TEXTURE_2D, _renderBus.getSceneReflectionMap());
 	glActiveTexture(GL_TEXTURE5);
+	glBindTexture(GL_TEXTURE_2D, _renderBus.getShadowMap());
+	glActiveTexture(GL_TEXTURE6);
 	glBindTexture(GL_TEXTURE_CUBE_MAP, _renderBus.getSkyReflectionCubeMap());
 }
 
@@ -115,6 +117,7 @@ void GameEntityRenderer::render(const GameEntity* entity)
 		_shader.uploadUniform("u_specularLightingIntensity", entity->getSpecularIntensity());
 		_shader.uploadUniform("u_isTransparent", entity->isTransparent());
 		_shader.uploadUniform("u_isLightMapped", entity->isLightMapped());
+		_shader.uploadUniform("u_isNormalMapped", entity->isNormalMapped());
 		_shader.uploadUniform("u_isSkyReflective", entity->isSkyReflective());
 		_shader.uploadUniform("u_isSceneReflective", entity->isSceneReflective());
 		_shader.uploadUniform("u_isSpecular", entity->isSpecularLighted());
@@ -153,10 +156,17 @@ void GameEntityRenderer::render(const GameEntity* entity)
 				glBindTexture(GL_TEXTURE_2D, entity->getLightMap(index));
 			}
 
+			// Normal map
+			if (entity->hasNormalMap())
+			{
+				glActiveTexture(GL_TEXTURE2);
+				glBindTexture(GL_TEXTURE_2D, entity->getNormalMap(index));
+			}
+
 			// Reflection map for sky reflections
 			if (entity->hasReflectionMap())
 			{
-				glActiveTexture(GL_TEXTURE2);
+				glActiveTexture(GL_TEXTURE3);
 				glBindTexture(GL_TEXTURE_2D, entity->getReflectionMap(index));
 			}
 

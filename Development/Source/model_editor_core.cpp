@@ -98,6 +98,8 @@ void ModelEditor::load()
 
 	// Other
 	loadModels();
+	_fe3d.gameEntity_setNormalMapped("@brick", true);
+	_fe3d.gameEntity_setNormalMap("@brick", "User\\Assets\\Textures\\NormalMaps\\brick.png");
 	_gui->getGlobalScreen()->addTextfield("selectedModelName", vec2(0.0f, 0.85f), vec2(0.5f, 0.1f), "", vec3(1.0f));
 	_gui->getViewport("bottom")->getWindow("controls")->setActiveScreen("modelEditor");
 	_isLoaded = true;

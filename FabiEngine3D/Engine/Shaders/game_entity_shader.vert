@@ -5,7 +5,8 @@
 layout(location = 0) in vec3 v_pos;
 layout(location = 1) in vec2 v_uv;
 layout(location = 2) in vec3 v_normal;
-layout(location = 3) in vec3 v_offset;
+layout(location = 3) in vec3 v_tangent;
+layout(location = 4) in vec3 v_offset;
 
 // Matrix44 uniforms
 uniform mat4 u_modelMatrix;
@@ -32,6 +33,7 @@ out vec2 f_uv;
 out vec3 f_normal;
 out vec4 f_shadowPos;
 out vec4 f_clip;
+out mat3 f_tbn;
 
 void main()
 {
@@ -46,9 +48,12 @@ void main()
 	gl_ClipDistance[1] = dot(worldSpacePos, vec4(0.0f, -1.0f, 0.0f, u_maxY));
 	
 	// Out variables
-	f_pos       = worldSpacePos.xyz;
-	f_uv        = vec2(v_uv.x, -v_uv.y) * u_uvRepeat;
-	f_normal    = normalize(u_normalModelMatrix * v_normal);
-	f_shadowPos = u_shadowMatrix * worldSpacePos;
-	f_clip      = clipSpacePos;
+	f_pos          = worldSpacePos.xyz;
+	f_uv           = vec2(v_uv.x, -v_uv.y) * u_uvRepeat;
+	f_normal       = normalize(mat3(u_modelMatrix) * v_normal);
+	f_shadowPos    = u_shadowMatrix * worldSpacePos;
+	f_clip         = clipSpacePos;
+    vec3 tangent   = normalize(mat3(u_modelMatrix) * v_tangent);
+    vec3 bitangent = cross(f_normal, tangent);
+    f_tbn          = mat3(tangent, bitangent, f_normal);
 }

@@ -160,7 +160,7 @@ vector<ObjPart> OBJLoader::_loadOBJ(const string& filePath)
 			bool alreadyExisting = false;
 
 			// Check if able to add to existing OBJ part
-			for (auto & objPart : objParts)
+			for (auto& objPart : objParts)
 			{
 				// Find OBJ part
 				if (objPart.partName == selectedPartName)
@@ -206,6 +206,40 @@ vector<ObjPart> OBJLoader::_loadOBJ(const string& filePath)
 				// Add new OBJ part
 				objParts.push_back(newPart);
 			}
+		}
+	}
+
+	// Calculate tangents for normal mapping
+	for (auto& objPart : objParts)
+	{
+		for (size_t i = 0; i < objPart.vertices.size(); i += 3)
+		{
+			// Vertices of 1 triangle
+			vec3 v0 = objPart.vertices[i + 0];
+			vec3 v1 = objPart.vertices[i + 1];
+			vec3 v2 = objPart.vertices[i + 2];
+
+			// Shortcuts for UVs
+			vec2 uv0 = objPart.uvCoords[i + 0];
+			vec2 uv1 = objPart.uvCoords[i + 1];
+			vec2 uv2 = objPart.uvCoords[i + 2];
+
+			// Vertex delta
+			vec3 deltaPos1 = v1 - v0;
+			vec3 deltaPos2 = v2 - v0;
+
+			// UV delta
+			vec2 deltaUV1 = uv1 - uv0;
+			vec2 deltaUV2 = uv2 - uv0;
+
+			// Calculate tangent vector
+			float r = 1.0f / (deltaUV1.x * deltaUV2.y - deltaUV1.y * deltaUV2.x);
+			glm::vec3 tangent = (deltaPos1 * deltaUV2.y - deltaPos2 * deltaUV1.y) * r;
+
+			// Add to current OBJ part
+			objPart.tangents.push_back(tangent);
+			objPart.tangents.push_back(tangent);
+			objPart.tangents.push_back(tangent);
 		}
 	}
 

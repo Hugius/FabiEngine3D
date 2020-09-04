@@ -20,6 +20,7 @@ struct ObjPart
 	vector<vec3> vertices;
 	vector<vec2> uvCoords;
 	vector<vec3> normals;
+	vector<vec3> tangents;
 };
 
 class OBJLoader final
@@ -28,7 +29,7 @@ public:
 	OBJLoader() = default;
 	~OBJLoader() = default;
 
-	vector<ObjPart> & loadOBJ(const string& filePath);
+	vector<ObjPart>& loadOBJ(const string& filePath);
 
 	void clearOBJCache(const string& filePath);
 

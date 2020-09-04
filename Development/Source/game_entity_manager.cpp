@@ -43,18 +43,27 @@ void GameEntityManager::addGameEntity
 	{
 		vector<float> data;
 
+		// For every triangle vertex point
 		for (unsigned int i = 0; i < part.vertices.size(); i++)
 		{
+			// Vertex coordinate
 			data.push_back(part.vertices[i].x);
 			data.push_back(part.vertices[i].y);
 			data.push_back(part.vertices[i].z);
 
+			// UV coordinate
 			data.push_back(part.uvCoords[i].x);
 			data.push_back(part.uvCoords[i].y);
 
+			// Normal vector
 			data.push_back(part.normals[i].x);
 			data.push_back(part.normals[i].y);
 			data.push_back(part.normals[i].z);
+
+			// Tangent vector
+			data.push_back(part.tangents[i].x);
+			data.push_back(part.tangents[i].y);
+			data.push_back(part.tangents[i].z);
 		}
 
 		// OpenGL buffer

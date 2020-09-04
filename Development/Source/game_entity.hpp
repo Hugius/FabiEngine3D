@@ -12,15 +12,17 @@ class GameEntity final : public BaseEntity
 public:
 	GameEntity()  = default;
 	~GameEntity() = default;
-
+	
 	// Setters
 	void updateModelMatrix();
 	void setDiffuseMap(GLuint val);
 	void setLightMap(GLuint val);
 	void setReflectionMap(GLuint val);
+	void setNormalMap(GLuint val);
 	void addDiffuseMap(GLuint val);
 	void addLightMap(GLuint val);
 	void addReflectionMap(GLuint val);
+	void addNormalMap(GLuint val);
 	void setTranslation(vec3 val);
 	void setRotation(vec3 val);
 	void setScaling(vec3 val);
@@ -32,6 +34,7 @@ public:
 	void setDiffuseMapPath(const string& val);
 	void setLightMapPath(const string& val);
 	void setReflectionMapPath(const string& val);
+	void setNormalMapPath(const string& val);
 	void setOriginalLightness(float val);
 	void setLightness(float val);
 	void setSpecularFactor(float val);
@@ -42,6 +45,7 @@ public:
 	void setTransparent(bool val);
 	void setFaceCulled(bool val);
 	void setLightMapped(bool val);
+	void setNormalMapped(bool val);
 	void setSkyReflective(bool val);
 	void setSceneReflective(bool val);
 	void setSpecularLighted(bool val);
@@ -50,10 +54,11 @@ public:
 	void setDepthMapIncluded(bool val);
 	
 	// Getters
-	const mat4 & getModelMatrix() const;
+	const mat4& getModelMatrix() const;
 	const GLuint getDiffuseMap(int index) const;
 	const GLuint getLightMap(int index) const;
 	const GLuint getReflectionMap(int index) const;
+	const GLuint getNormalMap(int index) const;
 	const vec3 getTranslation() const;
 	const vec3 getRotation() const;
 	const vec3 getScaling() const;
@@ -62,6 +67,7 @@ public:
 	const string& getDiffuseMapPath() const;
 	const string& getLightMapPath() const;
 	const string& getReflectionMapPath() const;
+	const string& getNormalMapPath() const;
 	const float getOriginalLightness() const;
 	const float getLightness() const;
 	const float getSpecularFactor() const;
@@ -72,6 +78,7 @@ public:
 	const bool isTransparent() const;
 	const bool isFaceCulled() const;
 	const bool isLightMapped() const;
+	const bool isNormalMapped() const;
 	const bool isSkyReflective() const;
 	const bool isSceneReflective() const;
 	const bool isSpecularLighted() const;
@@ -79,6 +86,7 @@ public:
 	const bool hasDiffuseMap() const;
 	const bool hasLightMap() const;
 	const bool hasReflectionMap() const;
+	const bool hasNormalMap() const;
 	const bool isCameraStatic() const;
 	const bool isDepthMapIncluded() const;
 
@@ -89,6 +97,7 @@ private:
 	string _diffuseMapPath = "";
 	string _lightMapPath = "";
 	string _reflectionMapPath = "";
+	string _normalMapPath = "";
 
 	vec3 _translation = vec3(0.0f);
 	vec3 _rotation    = vec3(0.0f);
@@ -98,6 +107,7 @@ private:
 	vector<GLuint> _diffuseMaps;
 	vector<GLuint> _lightMaps;
 	vector<GLuint> _reflectionMaps;
+	vector<GLuint> _normalMaps;
 
 	float _originalLightness = 1.0f;
 	float _lightness = 1.0f;
@@ -111,6 +121,7 @@ private:
 	bool _isTransparent      = false;
 	bool _isFaceCulled       = false;
 	bool _isLightMapped      = false;
+	bool _isNormalMapped	 = false;
 	bool _isSkyReflective    = false;
 	bool _isSceneReflective  = false;
 	bool _isSpecularLighted  = false;

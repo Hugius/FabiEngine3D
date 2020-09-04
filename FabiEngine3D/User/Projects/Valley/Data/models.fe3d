@@ -5,3 +5,4 @@
 @house User\Assets\OBJs\house12.obj User\Assets\Textures\DiffuseMaps\house12.png ? ? 5.79181 5.79181 5.79181 0 1 0 0 0 1 1 1 1 1 1 1 1 1 1
 @treeee User\Assets\OBJs\tree10.obj User\Assets\Textures\DiffuseMaps\tree10.png ? ? 1 1 1 0 1 0 0 0 1 1 1 1 1 1 1 1 1 1
 @gttrgrtgrt User\Assets\OBJs\tree3.obj User\Assets\Textures\DiffuseMaps\tree3.png ? ? 1 1 1 0 1 0 0 0 1 1 1 1 1 1 1 1 1 1
+@brick User\Assets\OBJs\plane.obj User\Assets\Textures\DiffuseMaps\brick.png ? ? 1 1 1 0 1 0 0 1 32 1 1 1 1 1 1 1 1 1

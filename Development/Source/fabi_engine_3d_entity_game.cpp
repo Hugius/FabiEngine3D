@@ -113,22 +113,28 @@ void FabiEngine3D::gameEntity_show(const string& ID)
 	}
 }
 
-void FabiEngine3D::gameEntity_setDiffuseMap(const string& ID, const string& fileName)
+void FabiEngine3D::gameEntity_setDiffuseMap(const string& ID, const string& texturePath)
 {
-	_core->_gameEntityManager.getEntity(ID)->setDiffuseMap(_core->_texLoader.getTexture(fileName, true, true));
-	_core->_gameEntityManager.getEntity(ID)->setDiffuseMapPath(fileName);
+	_core->_gameEntityManager.getEntity(ID)->setDiffuseMap(_core->_texLoader.getTexture(texturePath, true, true));
+	_core->_gameEntityManager.getEntity(ID)->setDiffuseMapPath(texturePath);
 }
 
-void FabiEngine3D::gameEntity_setLightMap(const string& ID, const string& fileName)
+void FabiEngine3D::gameEntity_setLightMap(const string& ID, const string& texturePath)
 {
-	_core->_gameEntityManager.getEntity(ID)->setLightMap(_core->_texLoader.getTexture(fileName, true, true));
-	_core->_gameEntityManager.getEntity(ID)->setLightMapPath(fileName);
+	_core->_gameEntityManager.getEntity(ID)->setLightMap(_core->_texLoader.getTexture(texturePath, true, true));
+	_core->_gameEntityManager.getEntity(ID)->setLightMapPath(texturePath);
 }
 
-void FabiEngine3D::gameEntity_setReflectionMap(const string& ID, const string& fileName)
+void FabiEngine3D::gameEntity_setNormalMap(const string& ID, const string& texturePath)
 {
-	_core->_gameEntityManager.getEntity(ID)->setReflectionMap(_core->_texLoader.getTexture(fileName, true, true));
-	_core->_gameEntityManager.getEntity(ID)->setReflectionMapPath(fileName);
+	_core->_gameEntityManager.getEntity(ID)->setNormalMap(_core->_texLoader.getTexture(texturePath, true, true));
+	_core->_gameEntityManager.getEntity(ID)->setNormalMapPath(texturePath);
+}
+
+void FabiEngine3D::gameEntity_setReflectionMap(const string& ID, const string& texturePath)
+{
+	_core->_gameEntityManager.getEntity(ID)->setReflectionMap(_core->_texLoader.getTexture(texturePath, true, true));
+	_core->_gameEntityManager.getEntity(ID)->setReflectionMapPath(texturePath);
 }
 
 void FabiEngine3D::gameEntity_setTransparent(const string& ID, bool enabled)
@@ -144,6 +150,11 @@ void FabiEngine3D::gameEntity_setFaceCulled(const string& ID, bool enabled)
 void FabiEngine3D::gameEntity_setLightMapped(const string& ID, bool enabled)
 {
 	_core->_gameEntityManager.getEntity(ID)->setLightMapped(enabled);
+}
+
+void FabiEngine3D::gameEntity_setNormalMapped(const string& ID, bool enabled)
+{
+	_core->_gameEntityManager.getEntity(ID)->setNormalMapped(enabled);
 }
 
 void FabiEngine3D::gameEntity_setSkyReflective(const string& ID, bool enabled)
@@ -184,6 +195,11 @@ bool FabiEngine3D::gameEntity_isFaceCulled(const string& ID)
 bool FabiEngine3D::gameEntity_isLightMapped(const string& ID)
 {
 	return _core->_gameEntityManager.getEntity(ID)->isLightMapped();
+}
+
+bool FabiEngine3D::gameEntity_isNormalMapped(const string& ID)
+{
+	return _core->_gameEntityManager.getEntity(ID)->isNormalMapped();
 }
 
 bool FabiEngine3D::gameEntity_isSkyReflective(const string& ID)
@@ -371,6 +387,11 @@ string FabiEngine3D::gameEntity_getDiffuseMapPath(const string& ID)
 string FabiEngine3D::gameEntity_getLightMapPath(const string& ID)
 {
 	return _core->_gameEntityManager.getEntity(ID)->getLightMapPath();
+}
+
+string FabiEngine3D::gameEntity_getNormalMapPath(const string& ID)
+{
+	return _core->_gameEntityManager.getEntity(ID)->getNormalMapPath();
 }
 
 string FabiEngine3D::gameEntity_getReflectionMapPath(const string& ID)

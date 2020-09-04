@@ -203,10 +203,12 @@ public:
 	void		   gameEntity_show(const string& ID);
 	void		   gameEntity_setDiffuseMap(const string& ID, const string& texturePath);
 	void		   gameEntity_setLightMap(const string& ID, const string& texturePath);
+	void		   gameEntity_setNormalMap(const string& ID, const string& texturePath);
 	void		   gameEntity_setReflectionMap(const string& ID, const string& texturePath);
 	void		   gameEntity_setTransparent(const string& ID, bool enabled);
 	void		   gameEntity_setFaceCulled(const string& ID, bool enabled);
 	void		   gameEntity_setLightMapped(const string& ID, bool enabled);
+	void		   gameEntity_setNormalMapped(const string& ID, bool enabled);
 	void		   gameEntity_setSkyReflective(const string& ID, bool enabled);
 	void		   gameEntity_setSpecularLighted(const string& ID, bool enabled);
 	void		   gameEntity_setSceneReflective(const string& ID, bool enabled);
@@ -237,6 +239,7 @@ public:
 	bool		   gameEntity_isTransparent(const string& ID);
 	bool		   gameEntity_isFaceCulled(const string& ID);
 	bool		   gameEntity_isLightMapped(const string& ID);
+	bool		   gameEntity_isNormalMapped(const string& ID);
 	bool		   gameEntity_isSkyReflective(const string& ID);
 	bool		   gameEntity_isSpecularLighted(const string& ID);
 	bool		   gameEntity_isSceneReflective(const string& ID);
@@ -257,6 +260,7 @@ public:
 	string		   gameEntity_getObjPath(const string& ID);
 	string		   gameEntity_getDiffuseMapPath(const string& ID);
 	string		   gameEntity_getLightMapPath(const string& ID);
+	string		   gameEntity_getNormalMapPath(const string& ID);
 	string		   gameEntity_getReflectionMapPath(const string& ID);
 	vector<string> gameEntity_getAllIDs();
 	vector<string> gameEntity_getGroupIDs(const string& ID);

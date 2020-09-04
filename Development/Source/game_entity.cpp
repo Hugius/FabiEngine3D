@@ -49,6 +49,18 @@ void GameEntity::setReflectionMap(GLuint val)
 	}
 }
 
+void GameEntity::setNormalMap(GLuint val)
+{
+	if (_normalMaps.empty())
+	{
+		_normalMaps.push_back(val);
+	}
+	else
+	{
+		_normalMaps[0] = val;
+	}
+}
+
 void GameEntity::addDiffuseMap(GLuint val)
 {
 	if (std::find(_diffuseMaps.begin(), _diffuseMaps.end(), val) == _diffuseMaps.end())
@@ -70,6 +82,14 @@ void GameEntity::addReflectionMap(GLuint val)
 	if (std::find(_reflectionMaps.begin(), _reflectionMaps.end(), val) == _reflectionMaps.end())
 	{
 		_reflectionMaps.push_back(val);
+	}
+}
+
+void GameEntity::addNormalMap(GLuint val)
+{
+	if (std::find(_normalMaps.begin(), _normalMaps.end(), val) == _normalMaps.end())
+	{
+		_normalMaps.push_back(val);
 	}
 }
 
@@ -128,6 +148,11 @@ void GameEntity::setReflectionMapPath(const string& val)
 	_reflectionMapPath = val;
 }
 
+void GameEntity::setNormalMapPath(const string& val)
+{
+	_normalMapPath = val;
+}
+
 void GameEntity::setTransparent(bool val)
 {
 	_isTransparent = val;
@@ -141,6 +166,11 @@ void GameEntity::setFaceCulled(bool val)
 void GameEntity::setLightMapped(bool val)
 {
 	_isLightMapped = val;
+}
+
+void GameEntity::setNormalMapped(bool val)
+{
+	_isNormalMapped = val;
 }
 
 void GameEntity::setSkyReflective(bool val)
@@ -208,7 +238,7 @@ void GameEntity::setUvRepeat(float val)
 	_uvRepeat = val;
 }
 
-const mat4 & GameEntity::getModelMatrix() const
+const mat4& GameEntity::getModelMatrix() const
 {
 	return _modelMatrix;
 }
@@ -226,6 +256,11 @@ const GLuint GameEntity::getLightMap(int index) const
 const GLuint GameEntity::getReflectionMap(int index) const
 {
 	return _reflectionMaps[index];
+}
+
+const GLuint GameEntity::getNormalMap(int index) const
+{
+	return _normalMaps[index];
 }
 
 const vec3 GameEntity::getTranslation() const
@@ -268,6 +303,11 @@ const string& GameEntity::getReflectionMapPath() const
 	return _reflectionMapPath;
 }
 
+const string& GameEntity::getNormalMapPath() const
+{
+	return _normalMapPath;
+}
+
 const bool GameEntity::isTransparent() const
 {
 	return _isTransparent;
@@ -281,6 +321,11 @@ const bool GameEntity::isFaceCulled() const
 const bool GameEntity::isLightMapped() const
 {
 	return _isLightMapped;
+}
+
+const bool GameEntity::isNormalMapped() const
+{
+	return _isNormalMapped;
 }
 
 const bool GameEntity::isSkyReflective() const
@@ -316,6 +361,11 @@ const bool GameEntity::hasLightMap() const
 const bool GameEntity::hasReflectionMap() const
 {
 	return !_reflectionMaps.empty();
+}
+
+const bool GameEntity::hasNormalMap() const
+{
+	return !_normalMaps.empty();
 }
 
 const bool GameEntity::isCameraStatic() const

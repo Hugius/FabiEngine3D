@@ -34,13 +34,15 @@ void OpenGLBuffer::_create3D(int type, float data[], int dataCount)
 	switch (type)
 	{
 	case SHAPE_3D: // Fill 3D buffers
-		_vertexCount = dataCount / 8;
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (GLvoid*)(0 * sizeof(float)));
+		_vertexCount = dataCount / 11;
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 11 * sizeof(float), (GLvoid*)(0 * sizeof(float)));
 		glEnableVertexAttribArray(0);
-		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (GLvoid*)(3 * sizeof(float)));
+		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 11 * sizeof(float), (GLvoid*)(3 * sizeof(float)));
 		glEnableVertexAttribArray(1);
-		glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (GLvoid*)(5 * sizeof(float)));
+		glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 11 * sizeof(float), (GLvoid*)(5 * sizeof(float)));
 		glEnableVertexAttribArray(2);
+		glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 11 * sizeof(float), (GLvoid*)(8 * sizeof(float)));
+		glEnableVertexAttribArray(3);
 		break;
 
 	case SHAPE_SURFACE: // Fill surface buffers
@@ -85,7 +87,7 @@ void OpenGLBuffer::_create3D_instanced(float data[], int dataCount, const vector
 	glBufferData(GL_ARRAY_BUFFER, offsets.size() * sizeof(vec3), &offsets[0], GL_STATIC_DRAW);
 
 	// Fill instanced VBO
-	glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*)0);
+	glVertexAttribPointer(5, 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*)0);
 	glEnableVertexAttribArray(3);
 	glVertexAttribDivisor(3, 1);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);

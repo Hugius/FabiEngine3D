@@ -282,10 +282,18 @@ void RenderEngine::_captureMotionBlur(CameraManager& camera)
 			// Camera speed and blur direction variables
 			int xDifference = static_cast<int>(fabsf(camera.getYaw() - lastYaw) * _renderBus.getMotionBlurStrength());
 			int yDifference = static_cast<int>(fabsf(camera.getPitch() - lastPitch) * _renderBus.getMotionBlurStrength());
+
+			// Filter slow mouse movements
 			if (fabsf(camera.getYaw() - lastYaw) < 0.5f)
 			{
 				xDifference = 0;
 			}
+			if (fabsf(camera.getPitch() - lastPitch) < 0.5f)
+			{
+				yDifference = 0;
+			}
+			
+			// Variables
 			static BlurDirection lastDirection = BlurDirection::NONE;
 			BlurDirection direction = BlurDirection::NONE;
 			firstTime = false;

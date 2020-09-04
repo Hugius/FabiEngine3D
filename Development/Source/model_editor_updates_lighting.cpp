@@ -65,7 +65,7 @@ void ModelEditor::_updateModelEditingLighting()
 	float intensity = _fe3d.gameEntity_getSpecularIntensity(_currentModelName);
 	if (_gui->getGlobalScreen()->checkValueForm("specularIntensity", intensity))
 	{
-		intensity = std::clamp(intensity / 100.0f, 0.0f, 1.0f);
+		intensity /= 100.0f;
 		_fe3d.gameEntity_setSpecularIntensity(_currentModelName, intensity);
 	}
 
@@ -73,7 +73,7 @@ void ModelEditor::_updateModelEditingLighting()
 	float lightness = _fe3d.gameEntity_getLightness(_currentModelName);
 	if (_gui->getGlobalScreen()->checkValueForm("modelLightness", lightness))
 	{
-		lightness = std::clamp(lightness / 100.0f, 0.0f, 1.0f);
+		lightness /= 100.0f;
 		_fe3d.gameEntity_setLightness(_currentModelName, lightness);
 	}
 

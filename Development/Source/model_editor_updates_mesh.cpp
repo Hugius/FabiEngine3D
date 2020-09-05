@@ -25,6 +25,10 @@ void ModelEditor::_updateModelEditingMesh()
 		{
 			_loadReflectionMap();
 		}
+		else if (screen->getButton("loadNormalMap")->isHovered())
+		{
+			_loadNormalMap();
+		}
 		else if (screen->getButton("back")->isHovered())
 		{
 			_leftWindow->setActiveScreen("modelEditorMenuChoice");

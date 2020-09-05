@@ -227,6 +227,7 @@ void SceneEditor::load()
 	_fe3d.gfx_enableSkyReflections(0.5f);
 	_fe3d.gfx_enableSceneReflections(0.5f);
 	_fe3d.gfx_enableLightMapping();
+	_fe3d.gfx_enableNormalMapping();
 	_fe3d.gfx_enableWaterEffects();
 	
 	// Disable default skybox
@@ -320,17 +321,20 @@ void SceneEditor::unload()
 	// Disable graphics
 	_fe3d.gfx_disableAmbientLighting();
 	_fe3d.gfx_disableDirectionalLighting();
-	_fe3d.gfx_disableFog();
-	_fe3d.gfx_disableDOF();
-	_fe3d.gfx_disableSkyHDR();
-	_fe3d.gfx_disableShadows();
-	_fe3d.gfx_disableLensFlare();
-	_fe3d.gfx_disableSkyReflections();
-	_fe3d.gfx_disableLightMapping();
 	_fe3d.gfx_disableSpecularLighting();
+	_fe3d.gfx_disablePointLighting();
+	_fe3d.gfx_disableFog();
+	_fe3d.gfx_disableSkyReflections();
 	_fe3d.gfx_disableSceneReflections();
+	_fe3d.gfx_disableLightMapping();
+	_fe3d.gfx_disableNormalMapping();
+	_fe3d.gfx_disableShadows();
+	_fe3d.gfx_disableBloom();
 	_fe3d.gfx_disableWaterEffects();
+	_fe3d.gfx_disableSkyHDR();
+	_fe3d.gfx_disableDOF();
 	_fe3d.gfx_disableMotionBlur();
+	_fe3d.gfx_disableLensFlare();
 
 	// Delete sky entity
 	if (_fe3d.skyEntity_isExisting("@sky"))

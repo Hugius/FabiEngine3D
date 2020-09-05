@@ -155,6 +155,7 @@ void FabiEngine3D::gameEntity_setLightMapped(const string& ID, bool enabled)
 void FabiEngine3D::gameEntity_setNormalMapped(const string& ID, bool enabled)
 {
 	_core->_gameEntityManager.getEntity(ID)->setNormalMapped(enabled);
+	_core->_gameEntityManager.loadNormalMapping(ID);
 }
 
 void FabiEngine3D::gameEntity_setSkyReflective(const string& ID, bool enabled)

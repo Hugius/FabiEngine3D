@@ -172,7 +172,7 @@ void ModelEditor::_updateCreationScreen()
 				if (newModelName[0] != '@')
 				{
 					// Add model and check if not already existing
-					if (_addModel("@" + newModelName, "", "", "", "", vec3(0.0f), 0, 1, 0, 0, 0, 1.0f, 1.0f, 1.0f, vec3(1.0f), 1.0f, vec3(2.5f)))
+					if (_addModel("@" + newModelName, "", "", "", "", "", vec3(0.0f), 0, 1, 0, 0, 0, 1.0f, 1.0f, 1.0f, vec3(1.0f), 1.0f, vec3(2.5f)))
 					{
 						// Go to editor screen
 						_currentModelName = "@" + newModelName;

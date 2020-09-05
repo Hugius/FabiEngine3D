@@ -41,7 +41,7 @@ void BillboardEntityManager::addBillboardEntity(const string& ID, vec3 color, ve
 
 	// Create entity
 	_createEntity(EntityType::BILLBOARD, ID)->load(ID);
-	getEntity(ID)->addOglBuffer(new OpenGLBuffer(SHAPE_SURFACE, plane_data, sizeof(plane_data) / sizeof(float)));
+	getEntity(ID)->addOglBuffer(new OpenGLBuffer(BufferType::SURFACE, plane_data, sizeof(plane_data) / sizeof(float)));
 
 	// Other
 	getEntity(ID)->setTranslation(T);

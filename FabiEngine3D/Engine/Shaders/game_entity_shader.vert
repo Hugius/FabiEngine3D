@@ -22,6 +22,8 @@ uniform vec4 u_clippingPlane;
 
 // Boolean uniforms
 uniform bool u_isInstanced;
+uniform bool u_isNormalMapped;
+uniform bool u_normalMappingEnabled;
 
 // Float uniforms
 uniform float u_maxY;
@@ -33,7 +35,9 @@ out vec2 f_uv;
 out vec3 f_normal;
 out vec4 f_shadowPos;
 out vec4 f_clip;
-out mat3 f_tbn;
+out mat3 f_tbnMatrix;
+
+mat3 calculateTbnMatrix();
 
 void main()
 {
@@ -48,12 +52,25 @@ void main()
 	gl_ClipDistance[1] = dot(worldSpacePos, vec4(0.0f, -1.0f, 0.0f, u_maxY));
 	
 	// Out variables
-	f_pos          = worldSpacePos.xyz;
-	f_uv           = vec2(v_uv.x, -v_uv.y) * u_uvRepeat;
-	f_normal       = normalize(mat3(u_modelMatrix) * v_normal);
-	f_shadowPos    = u_shadowMatrix * worldSpacePos;
-	f_clip         = clipSpacePos;
-    vec3 tangent   = normalize(mat3(u_modelMatrix) * v_tangent);
-    vec3 bitangent = cross(f_normal, tangent);
-    f_tbn          = mat3(tangent, bitangent, f_normal);
+	f_pos       = worldSpacePos.xyz;
+	f_uv        = vec2(v_uv.x, -v_uv.y) * u_uvRepeat;
+	f_normal    = normalize(mat3(u_normalModelMatrix) * v_normal);
+	f_shadowPos = u_shadowMatrix * worldSpacePos;
+	f_clip      = clipSpacePos;
+    f_tbnMatrix = calculateTbnMatrix();
+}
+
+mat3 calculateTbnMatrix()
+{
+    // Normal mapping matrix
+    if(u_normalMappingEnabled && u_isNormalMapped)
+    {
+        vec3 tangent   = normalize(mat3(u_normalModelMatrix) * v_tangent);
+        vec3 bitangent = cross(f_normal, tangent);
+        return mat3(tangent, bitangent, f_normal);
+    }
+    else
+    {
+        return mat3(1.0f);
+    }
 }

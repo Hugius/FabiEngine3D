@@ -92,11 +92,18 @@ void SceneEditor::_placeModel(const string& modelID, string modelName, vec3 posi
 		_fe3d.gameEntity_setReflectionMap(modelID, _fe3d.gameEntity_getReflectionMapPath(modelName));
 		_fe3d.gameEntity_setSkyReflective(modelID, true);
 	}
+
+	// Normal map
+	if (_fe3d.gameEntity_getNormalMapPath(modelName) != "")
+	{
+		_fe3d.gameEntity_setNormalMap(modelID, _fe3d.gameEntity_getNormalMapPath(modelName));
+		_fe3d.gameEntity_setNormalMapped(modelID, true);
+	}
 }
 
 void SceneEditor::_placeModel(const string& modelID, vec3 position, vec3 rotation, vec3 size, string objPath, string diffuseMapPath,
-	string lightMapPath, string reflectionMapPath, bool isFrozen, bool isFaceCulled, bool isShadowed, bool isTransparent, bool isReflective,
-	bool isSpecular, float specularFactor, float specularIntensity, float lightness, vec3 color, float uvRepeat, vec3 aabbSize)
+	string lightMapPath, string reflectionMapPath, string normalMapPath, bool isFrozen, bool isFaceCulled, bool isShadowed, bool isTransparent, 
+	bool isReflective, bool isSpecular, float specularFactor, float specularIntensity, float lightness, vec3 color, float uvRepeat, vec3 aabbSize)
 {
 	// Add game entity
 	_fe3d.gameEntity_add(modelID, objPath, position, rotation, size);
@@ -134,6 +141,13 @@ void SceneEditor::_placeModel(const string& modelID, vec3 position, vec3 rotatio
 	{
 		_fe3d.gameEntity_setReflectionMap(modelID, reflectionMapPath);
 		_fe3d.gameEntity_setSkyReflective(modelID, true);
+	}
+
+	// Normal map
+	if (normalMapPath != "")
+	{
+		_fe3d.gameEntity_setNormalMap(modelID, normalMapPath);
+		_fe3d.gameEntity_setNormalMapped(modelID, true);
 	}
 }
 

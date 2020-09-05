@@ -50,7 +50,7 @@ void AabbEntityManager::addAabbEntity(const string& ID, vec3 T, vec3 R, vec3 S, 
 
 	// Create entity
 	_createEntity(EntityType::AABB, ID)->load(ID);
-	getEntity(ID)->addOglBuffer(new OpenGLBuffer(SHAPE_AABB, box_data, sizeof(box_data) / sizeof(float)));
+	getEntity(ID)->addOglBuffer(new OpenGLBuffer(BufferType::AABB, box_data, sizeof(box_data) / sizeof(float)));
 
 	// Other
 	getEntity(ID)->setTranslation(T);

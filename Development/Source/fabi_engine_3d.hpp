@@ -481,6 +481,7 @@ public:
 	void gfx_enableSkyReflections(float factor);
 	void gfx_enableSceneReflections(float factor);
 	void gfx_enableLightMapping();
+	void gfx_enableNormalMapping();
 	void gfx_enableMSAA();
 	void gfx_enableShadows(vec3 eye, vec3 center, float size, float reach, bool followingCamera);
 	void gfx_enableBloom(float intensity, float brightnessTreshold, int blurSize);
@@ -497,6 +498,7 @@ public:
 	void gfx_disableSkyReflections();
 	void gfx_disableSceneReflections();
 	void gfx_disableLightMapping();
+	void gfx_disableNormalMapping();
 	void gfx_disableMSAA();
 	void gfx_disableShadows();
 	void gfx_disableBloom();
@@ -514,6 +516,7 @@ public:
 	bool gfx_isPointLightingEnabled();
 	bool gfx_isFogEnabled();
 	bool gfx_isLightMappingEnabled();
+	bool gfx_isNormalMappingEnabled();
 	bool gfx_isSkyReflectionsEnabled();
 	bool gfx_isSceneReflectionsEnabled();
 	bool gfx_isBloomEnabled();

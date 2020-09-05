@@ -117,6 +117,20 @@ void ModelEditor::_loadReflectionMap()
 	}
 }
 
+void ModelEditor::_loadNormalMap()
+{
+	// Get the loaded filename
+	string filePath = _fe3d.misc_getWinExplorerFilename("User\\Assets\\Textures\\NormalMaps\\", "PNG");
+
+	// Check if user chose a filename
+	if (filePath != "")
+	{
+		_fe3d.misc_clearTextureCache(filePath);
+		_fe3d.gameEntity_setNormalMap(_currentModelName, filePath);
+		_fe3d.gameEntity_setNormalMapped(_currentModelName, true);
+	}
+}
+
 void ModelEditor::setCurrentProjectName(const string& projectName)
 {
 	_currentProjectName = projectName;
@@ -137,7 +151,7 @@ vector<string>& ModelEditor::getModelNames()
 	return _modelNames;
 }
 
-bool ModelEditor::_addModel(const string& modelName, string objName, string diffuseMapName, string lightMapName, string reflectionMapName,
+bool ModelEditor::_addModel(const string& modelName, string objName, string diffuseMapName, string lightMapName, string reflectionMapName, string normalMapName,
 	vec3 size, bool isFaceCulled, bool isShadowed, bool isTransparent, bool isReflective, bool isSpecular,
 	float specularFactor, float specularIntensity, float lightness, vec3 color, float uvRepeat, vec3 aabbSize)
 {
@@ -172,6 +186,13 @@ bool ModelEditor::_addModel(const string& modelName, string objName, string diff
 			{
 				_fe3d.gameEntity_setReflectionMap(modelName, reflectionMapName);
 				_fe3d.gameEntity_setSkyReflective(modelName, true);
+			}
+
+			// Normal map
+			if (normalMapName != "")
+			{
+				_fe3d.gameEntity_setNormalMap(modelName, normalMapName);
+				_fe3d.gameEntity_setNormalMapped(modelName, true);
 			}
 
 			// Set boolean options

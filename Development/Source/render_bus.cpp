@@ -318,6 +318,11 @@ void RenderBus::setLightMappingEnabled(bool val)
 	_isLightMappingEnabled = val;
 }
 
+void RenderBus::setNormalMappingEnabled(bool val)
+{
+	_isNormalMappingEnabled = val;
+}
+
 void RenderBus::setSkyReflectionsEnabled(bool val)
 {
 	_isSkyReflectionsEnabled = val;
@@ -701,6 +706,11 @@ const bool RenderBus::isFogEnabled() const
 const bool RenderBus::isLightMappingEnabled() const
 {
 	return _isLightMappingEnabled;
+}
+
+const bool RenderBus::isNormalMappingEnabled() const
+{
+	return _isNormalMappingEnabled;
 }
 
 const bool RenderBus::isSkyReflectionsEnabled() const

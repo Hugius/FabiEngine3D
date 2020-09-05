@@ -150,7 +150,7 @@ void TerrainEntityManager::generateModel(const string& ID)
 	}
 	
 	getEntity(ID)->clearOglBuffers();
-	getEntity(ID)->addOglBuffer(new OpenGLBuffer(SHAPE_3D, &terrainVertices[0], terrainVertices.size()));
+	getEntity(ID)->addOglBuffer(new OpenGLBuffer(BufferType::MODEL, &terrainVertices[0], terrainVertices.size()));
 }
 
 float TerrainEntityManager::getPixelHeight(const string& ID, float x, float z)

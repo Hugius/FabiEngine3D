@@ -36,11 +36,12 @@ void ModelEditor::initializeGUI()
 
 	// Left-viewport: mainWindow - modelEditorMenuMesh
 	_leftWindow->addScreen("modelEditorMenuMesh");
-	_leftWindow->getScreen("modelEditorMenuMesh")->addButton("loadOBJ", vec2(0.0f, 0.7f), vec2(GW("Load OBJ"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Load OBJ", LVC::textColor, LVC::textHoverColor);
-	_leftWindow->getScreen("modelEditorMenuMesh")->addButton("loadDiffuseMap", vec2(0.0f, 0.35f), vec2(GW("DiffuseMap"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "DiffuseMap", LVC::textColor, LVC::textHoverColor);
-	_leftWindow->getScreen("modelEditorMenuMesh")->addButton("loadLightMap", vec2(0.0f, 0.0f), vec2(GW("LightMap"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "LightMap", LVC::textColor, LVC::textHoverColor);
-	_leftWindow->getScreen("modelEditorMenuMesh")->addButton("loadReflectionMap", vec2(0.0f, -0.35f), vec2(GW("Reflectmap"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Reflectmap", LVC::textColor, LVC::textHoverColor);
-	_leftWindow->getScreen("modelEditorMenuMesh")->addButton("back", vec2(0.0f, -0.7f), vec2(GW("Go back"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Go back", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen("modelEditorMenuMesh")->addButton("loadOBJ", vec2(0.0f, 0.75f), vec2(GW("Load OBJ"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Load OBJ", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen("modelEditorMenuMesh")->addButton("loadDiffuseMap", vec2(0.0f, 0.45f), vec2(GW("DiffuseMap"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "DiffuseMap", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen("modelEditorMenuMesh")->addButton("loadLightMap", vec2(0.0f, 0.15f), vec2(GW("LightMap"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "LightMap", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen("modelEditorMenuMesh")->addButton("loadReflectionMap", vec2(0.0f, -0.15f), vec2(GW("ReflectMap"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "ReflectMap", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen("modelEditorMenuMesh")->addButton("loadNormalMap", vec2(0.0f, -0.45f), vec2(GW("NormalMap"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "NormalMap", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen("modelEditorMenuMesh")->addButton("back", vec2(0.0f, -0.75f), vec2(GW("Go back"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Go back", LVC::textColor, LVC::textHoverColor);
 	
 	// Left-viewport: mainWindow - modelEditorMenuOptions
 	_leftWindow->addScreen("modelEditorMenuOptions");
@@ -88,6 +89,7 @@ void ModelEditor::load()
 	_fe3d.gfx_enableSceneReflections(0.25f);
 	_fe3d.gfx_enableSkyReflections(0.5f);
 	_fe3d.gfx_enableLightMapping();
+	_fe3d.gfx_enableNormalMapping();
 	_fe3d.gfx_enableSpecularLighting();
 	
 	// 3D Environment
@@ -98,8 +100,6 @@ void ModelEditor::load()
 
 	// Other
 	loadModels();
-	_fe3d.gameEntity_setNormalMapped("@brick", true);
-	_fe3d.gameEntity_setNormalMap("@brick", "User\\Assets\\Textures\\NormalMaps\\brick.png");
 	_gui->getGlobalScreen()->addTextfield("selectedModelName", vec2(0.0f, 0.85f), vec2(0.5f, 0.1f), "", vec3(1.0f));
 	_gui->getViewport("bottom")->getWindow("controls")->setActiveScreen("modelEditor");
 	_isLoaded = true;
@@ -129,7 +129,7 @@ void ModelEditor::loadModels()
 		while (std::getline(file, line))
 		{
 			// Placeholder variables
-			string modelName, objPath, diffuseMapPath, lightMapPath, reflectionMapPath;
+			string modelName, objPath, diffuseMapPath, lightMapPath, reflectionMapPath, normalMapPath;
 			float uvRepeat, specularFactor, specularIntensity, lightness;
 			bool isFaceCulled, isShadowed, isTransparent, isSpecular, isReflective;
 			vec3 modelSize, color, boxSize;
@@ -144,6 +144,7 @@ void ModelEditor::loadModels()
 				diffuseMapPath >>
 				lightMapPath >>
 				reflectionMapPath >>
+				normalMapPath >>
 				modelSize.x >>
 				modelSize.y >>
 				modelSize.z >>
@@ -168,13 +169,15 @@ void ModelEditor::loadModels()
 			diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
 			lightMapPath = (lightMapPath == "?") ? "" : lightMapPath;
 			reflectionMapPath = (reflectionMapPath == "?") ? "" : reflectionMapPath;
+			normalMapPath = (normalMapPath == "?") ? "" : normalMapPath;
 			std::replace(objPath.begin(), objPath.end(), '?', ' ');
 			std::replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
 			std::replace(lightMapPath.begin(), lightMapPath.end(), '?', ' ');
 			std::replace(reflectionMapPath.begin(), reflectionMapPath.end(), '?', ' ');
+			std::replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
 			
 			// Add new model
-			_addModel(modelName, objPath, diffuseMapPath, lightMapPath, reflectionMapPath, modelSize, isFaceCulled, isShadowed, 
+			_addModel(modelName, objPath, diffuseMapPath, lightMapPath, reflectionMapPath, normalMapPath, modelSize, isFaceCulled, isShadowed,
 				isTransparent, isReflective, isSpecular, specularFactor, specularIntensity, lightness, 
 				vec3(color.r, color.g, color.b), uvRepeat, vec3(boxSize.x, boxSize.y, boxSize.z));
 		}
@@ -211,6 +214,7 @@ void ModelEditor::save()
 				auto diffuseMapPath = _fe3d.gameEntity_getDiffuseMapPath(modelName);
 				auto lightMapPath = _fe3d.gameEntity_getLightMapPath(modelName);
 				auto reflectionMapPath = _fe3d.gameEntity_getReflectionMapPath(modelName);
+				auto normalMapPath = _fe3d.gameEntity_getNormalMapPath(modelName);
 				auto modelSize = _fe3d.gameEntity_getSize(modelName);
 				auto isFaceCulled = _fe3d.gameEntity_isFaceCulled(modelName);
 				auto isShadowed = _fe3d.gameEntity_isShadowed(modelName);
@@ -229,10 +233,12 @@ void ModelEditor::save()
 				diffuseMapPath = (diffuseMapPath == "") ? "?" : diffuseMapPath;
 				lightMapPath = (lightMapPath == "") ? "?" : lightMapPath;
 				reflectionMapPath = (reflectionMapPath == "") ? "?" : reflectionMapPath;
+				normalMapPath = (normalMapPath == "") ? "?" : normalMapPath;
 				std::replace(objPath.begin(), objPath.end(), ' ', '?');
 				std::replace(diffuseMapPath.begin(), diffuseMapPath.end(), ' ', '?');
 				std::replace(lightMapPath.begin(), lightMapPath.end(), ' ', '?');
 				std::replace(reflectionMapPath.begin(), reflectionMapPath.end(), ' ', '?');
+				std::replace(normalMapPath.begin(), normalMapPath.end(), ' ', '?');
 
 				// 1 model -> 1 line in file
 				file << 
@@ -241,6 +247,7 @@ void ModelEditor::save()
 					diffuseMapPath << " " <<
 					lightMapPath << " " <<
 					reflectionMapPath << " " <<
+					normalMapPath << " " <<
 					modelSize.x << " " <<
 					modelSize.y << " " <<
 					modelSize.z << " " <<
@@ -262,7 +269,7 @@ void ModelEditor::save()
 			}
 			else
 			{
-				file << modelName << " ? ? ? ? 0.0 0.0 0.0 0 0 0 0 0.0 0.0 0.0 0.0 0 0.0 0.0 0.0\n";
+				file << modelName << " ? ? ? ? ? 0.0 0.0 0.0 0 0 0 0 0.0 0.0 0.0 0.0 0 0.0 0.0 0.0\n";
 			}
 		}
 
@@ -283,6 +290,7 @@ void ModelEditor::unload()
 	_fe3d.gfx_disableSceneReflections();
 	_fe3d.gfx_disableSkyReflections();
 	_fe3d.gfx_disableLightMapping();
+	_fe3d.gfx_disableNormalMapping();
 	_fe3d.gfx_disableSpecularLighting();
 
 	// 3D environment

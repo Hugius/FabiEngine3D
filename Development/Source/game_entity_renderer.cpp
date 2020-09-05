@@ -32,6 +32,7 @@ void GameEntityRenderer::bind()
 	_shader.uploadUniform("u_specularLightingEnabled",		_renderBus.isSpecularLightingEnabled());
 	_shader.uploadUniform("u_pointLightingEnabled",			_renderBus.isPointLightingEnabled());
 	_shader.uploadUniform("u_lightMappingEnabled",			_renderBus.isLightMappingEnabled());
+	_shader.uploadUniform("u_normalMappingEnabled",			_renderBus.isNormalMappingEnabled());
 	_shader.uploadUniform("u_skyReflectionsEnabled",		_renderBus.isSkyReflectionsEnabled());
 	_shader.uploadUniform("u_sceneReflectionsEnabled",		_renderBus.isSceneReflectionsEnabled());
 	_shader.uploadUniform("u_shadowAreaSize",				_renderBus.getShadowAreaSize());

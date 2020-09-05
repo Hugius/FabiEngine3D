@@ -1,8 +1,9 @@
 #include "opengl_buffer.hpp"
 
 // 3D
-OpenGLBuffer::OpenGLBuffer(int type, float data[], int dataCount)
+OpenGLBuffer::OpenGLBuffer(BufferType type, float data[], int dataCount)
 {
+	_bufferType = type;
 	_create3D(type, data, dataCount);
 }
 
@@ -17,7 +18,7 @@ OpenGLBuffer::OpenGLBuffer(float x, float y, float w, float h, bool centered)
 	_create2D(x, y, w, h, centered);
 }
 
-void OpenGLBuffer::_create3D(int type, float data[], int dataCount)
+void OpenGLBuffer::_create3D(BufferType type, float data[], int dataCount)
 {
 	// Create buffers
 	glGenVertexArrays(1, &_vao);
@@ -33,19 +34,29 @@ void OpenGLBuffer::_create3D(int type, float data[], int dataCount)
 	// Store buffer data
 	switch (type)
 	{
-	case SHAPE_3D: // Fill 3D buffers
-		_vertexCount = dataCount / 11;
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 11 * sizeof(float), (GLvoid*)(0 * sizeof(float)));
+	case BufferType::MODEL:
+		_vertexCount = dataCount / 8;
 		glEnableVertexAttribArray(0);
-		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 11 * sizeof(float), (GLvoid*)(3 * sizeof(float)));
 		glEnableVertexAttribArray(1);
-		glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 11 * sizeof(float), (GLvoid*)(5 * sizeof(float)));
 		glEnableVertexAttribArray(2);
-		glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 11 * sizeof(float), (GLvoid*)(8 * sizeof(float)));
-		glEnableVertexAttribArray(3);
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (GLvoid*)(0 * sizeof(float)));
+		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (GLvoid*)(3 * sizeof(float)));
+		glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (GLvoid*)(5 * sizeof(float)));
 		break;
 
-	case SHAPE_SURFACE: // Fill surface buffers
+	case BufferType::MODEL_TANGENT:
+		_vertexCount = dataCount / 11;
+		glEnableVertexAttribArray(0);
+		glEnableVertexAttribArray(1);
+		glEnableVertexAttribArray(2);
+		glEnableVertexAttribArray(3);
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 11 * sizeof(float), (GLvoid*)(0 * sizeof(float)));
+		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 11 * sizeof(float), (GLvoid*)(3 * sizeof(float)));
+		glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 11 * sizeof(float), (GLvoid*)(5 * sizeof(float)));
+		glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 11 * sizeof(float), (GLvoid*)(8 * sizeof(float)));
+		break;
+
+	case BufferType::SURFACE:
 		_vertexCount = dataCount / 5;
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (GLvoid*)(0 * sizeof(float)));
 		glEnableVertexAttribArray(0);
@@ -53,13 +64,13 @@ void OpenGLBuffer::_create3D(int type, float data[], int dataCount)
 		glEnableVertexAttribArray(1);
 		break;
 
-	case SHAPE_AABB: // Fill AABB buffers
+	case BufferType::AABB:
 		_vertexCount = dataCount / 3;
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (GLvoid*)(0 * sizeof(float)));
 		glEnableVertexAttribArray(0);
 		break;
 
-	case SHAPE_CUBEMAP: // Fill cubeMap buffers
+	case BufferType::CUBEMAP:
 		_vertexCount = dataCount / 3;
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (GLvoid*)(0 * sizeof(float)));
 		glEnableVertexAttribArray(0);
@@ -74,7 +85,7 @@ void OpenGLBuffer::_create3D(int type, float data[], int dataCount)
 void OpenGLBuffer::_create3D_instanced(float data[], int dataCount, const vector<vec3> & offsets)
 {
 	// Create 3D
-	_create3D(SHAPE_3D, data, dataCount);
+	_create3D(BufferType::MODEL, data, dataCount);
 
 	// Create instanced VBO
 	glGenBuffers(1, &_vbo_instanced);
@@ -182,4 +193,9 @@ const int OpenGLBuffer::getOffsetCount() const
 const bool OpenGLBuffer::isInstanced() const
 {
 	return _isInstanced;
+}
+
+const BufferType OpenGLBuffer::getBufferType() const
+{
+	return _bufferType;
 }

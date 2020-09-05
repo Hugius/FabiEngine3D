@@ -32,7 +32,7 @@ void GameEntityManager::addGameEntity
 )
 {
 	// Load OBJ model
-	auto parts = _objLoader.loadOBJ(objName);
+	auto parts = _objLoader.loadOBJ(objName, false);
 
 	// Create entity
 	_createEntity(EntityType::GAME, ID)->load(ID);
@@ -59,15 +59,10 @@ void GameEntityManager::addGameEntity
 			data.push_back(part.normals[i].x);
 			data.push_back(part.normals[i].y);
 			data.push_back(part.normals[i].z);
-
-			// Tangent vector
-			data.push_back(part.tangents[i].x);
-			data.push_back(part.tangents[i].y);
-			data.push_back(part.tangents[i].z);
 		}
 
 		// OpenGL buffer
-		getEntity(ID)->addOglBuffer(new OpenGLBuffer(SHAPE_3D, &data[0], data.size()));
+		getEntity(ID)->addOglBuffer(new OpenGLBuffer(BufferType::MODEL, &data[0], data.size()));
 
 		// Load an OBJ part diffuse map
 		if (part.diffuseMapName != "")
@@ -116,6 +111,50 @@ void GameEntityManager::addGameEntity
 	getEntity(ID)->setTranslation(T);
 	getEntity(ID)->setRotation(R);
 	getEntity(ID)->setScaling(S);
+}
+
+void GameEntityManager::loadNormalMapping(const string& ID)
+{
+	// Check if not already a tangent loaded model
+	if (getEntity(ID)->getOglBuffer()->getBufferType() != BufferType::MODEL_TANGENT)
+	{
+		// Load OBJ model
+		_objLoader.clearOBJCache(getEntity(ID)->getObjPath());
+		auto parts = _objLoader.loadOBJ(getEntity(ID)->getObjPath(), true);
+
+		// Create OpenGL buffers
+		for (auto& part : parts)
+		{
+			vector<float> data;
+
+			// For every triangle vertex point
+			for (unsigned int i = 0; i < part.vertices.size(); i++)
+			{
+				// Vertex coordinate
+				data.push_back(part.vertices[i].x);
+				data.push_back(part.vertices[i].y);
+				data.push_back(part.vertices[i].z);
+
+				// UV coordinate
+				data.push_back(part.uvCoords[i].x);
+				data.push_back(part.uvCoords[i].y);
+
+				// Normal vector
+				data.push_back(part.normals[i].x);
+				data.push_back(part.normals[i].y);
+				data.push_back(part.normals[i].z);
+
+				// Tangent vector
+				data.push_back(part.tangents[i].x);
+				data.push_back(part.tangents[i].y);
+				data.push_back(part.tangents[i].z);
+			}
+
+			// OpenGL buffer
+			getEntity(ID)->clearOglBuffers();
+			getEntity(ID)->addOglBuffer(new OpenGLBuffer(BufferType::MODEL_TANGENT, &data[0], data.size()));
+		}
+	}
 }
 
 void GameEntityManager::update()

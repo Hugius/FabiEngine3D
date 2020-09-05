@@ -17,6 +17,7 @@ public:
 		const string& ID, const string& objName,
 		vec3 T, vec3 R, vec3 S
 	);
+	void loadNormalMapping(const string& ID);
 
 	void update() override;
 };

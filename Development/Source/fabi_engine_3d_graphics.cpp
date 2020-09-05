@@ -56,6 +56,11 @@ void FabiEngine3D::gfx_enableLightMapping()
 	_core->_renderBus.setLightMappingEnabled(true);
 }
 
+void FabiEngine3D::gfx_enableNormalMapping()
+{
+	_core->_renderBus.setNormalMappingEnabled(true);
+}
+
 void FabiEngine3D::gfx_enableMSAA()
 {
 	_core->_renderBus.setMsaaEnabled(true);
@@ -151,6 +156,11 @@ void FabiEngine3D::gfx_disableLightMapping()
 	_core->_renderBus.setLightMappingEnabled(false);
 }
 
+void FabiEngine3D::gfx_disableNormalMapping()
+{
+	_core->_renderBus.setNormalMappingEnabled(false);
+}
+
 void FabiEngine3D::gfx_disableMSAA()
 {
 	_core->_renderBus.setMsaaEnabled(false);
@@ -224,6 +234,11 @@ bool FabiEngine3D::gfx_isFogEnabled()
 bool FabiEngine3D::gfx_isLightMappingEnabled()
 {
 	return _core->_renderBus.isLightMappingEnabled();
+}
+
+bool FabiEngine3D::gfx_isNormalMappingEnabled()
+{
+	return _core->_renderBus.isNormalMappingEnabled();
 }
 
 bool FabiEngine3D::gfx_isSkyReflectionsEnabled()

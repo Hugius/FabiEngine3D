@@ -89,6 +89,7 @@ public:
 	void setPointLightingEnabled(bool val);
 	void setFogEnabled(bool val);
 	void setLightMappingEnabled(bool val);
+	void setNormalMappingEnabled(bool val);
 	void setSkyReflectionsEnabled(bool val);
 	void setSceneReflectionsEnabled(bool val);
 	void setBloomEnabled(bool val);
@@ -182,6 +183,7 @@ public:
 	const bool isPointLightingEnabled()        const;
 	const bool isFogEnabled()                  const;
 	const bool isLightMappingEnabled()         const;
+	const bool isNormalMappingEnabled()		   const;
 	const bool isSkyReflectionsEnabled()       const;
 	const bool isSceneReflectionsEnabled()     const;
 	const bool isBloomEnabled()                const;
@@ -276,6 +278,7 @@ private:
 	bool _isPointLightingEnabled        = false;
 	bool _isFogEnabled                  = false;
 	bool _isLightMappingEnabled         = false;
+	bool _isNormalMappingEnabled		= false;
 	bool _isSkyReflectionsEnabled       = false;
 	bool _isSceneReflectionsEnabled     = false;
 	bool _isBloomEnabled                = false;

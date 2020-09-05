@@ -10,7 +10,7 @@ in vec2 f_uv;
 in vec3 f_normal;
 in vec4 f_shadowPos;
 in vec4 f_clip;
-in mat3 f_tbn;
+in mat3 f_tbnMatrix;
 
 // Textures
 layout(location = 0) uniform sampler2D   u_sampler_diffuseMap;
@@ -63,6 +63,7 @@ uniform bool u_ambientLightingEnabled;
 uniform bool u_directionalLightingEnabled;
 uniform bool u_specularLightingEnabled;
 uniform bool u_lightMappingEnabled;
+uniform bool u_normalMappingEnabled;
 uniform bool u_pointLightingEnabled;
 uniform bool u_skyReflectionsEnabled;
 uniform bool u_sceneReflectionsEnabled;
@@ -120,12 +121,12 @@ void main()
 
 vec3 getNormalMappedVector()
 {
-    if(u_isNormalMapped)
+    if(u_normalMappingEnabled && u_isNormalMapped)
     {
         // Calculate new normal vector
         vec3 normal = texture(u_sampler_normalMap, f_uv).rgb;
         normal = normal * 2.0f - 1.0f;
-        normal = normalize(f_tbn * normal);
+        normal = normalize(f_tbnMatrix * normal);
 
         // Return result
         return normal;

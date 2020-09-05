@@ -37,7 +37,7 @@ bool SceneEditor::_loadScene()
 			if (entityType == "MODEL")
 			{
 				// Values
-				string modelID, objPath, diffuseMapPath, lightMapPath, reflectionMapPath;
+				string modelID, objPath, diffuseMapPath, lightMapPath, reflectionMapPath, normalMapPath;
 				vec3 position, rotation, size, color, aabbSize;
 				float uvRepeat, specularFactor, specularIntensity, lightness;
 				bool isFaceculled, isShadowed, isTransparent, isSpecular, isReflective, isFrozen;
@@ -58,6 +58,7 @@ bool SceneEditor::_loadScene()
 					diffuseMapPath >>
 					lightMapPath >>
 					reflectionMapPath >>
+					normalMapPath >>
 					isFrozen >>
 					isFaceculled >>
 					isShadowed >>
@@ -80,13 +81,15 @@ bool SceneEditor::_loadScene()
 				diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
 				lightMapPath = (lightMapPath == "?") ? "" : lightMapPath;
 				reflectionMapPath = (reflectionMapPath == "?") ? "" : reflectionMapPath;
+				normalMapPath = (normalMapPath == "?") ? "" : normalMapPath;
 				std::replace(objPath.begin(), objPath.end(), '?', ' ');
 				std::replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
 				std::replace(lightMapPath.begin(), lightMapPath.end(), '?', ' ');
 				std::replace(reflectionMapPath.begin(), reflectionMapPath.end(), '?', ' ');
+				std::replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
 
 				// Add the model
-				_placeModel(modelID, position, rotation, size, objPath, diffuseMapPath, lightMapPath, reflectionMapPath, isFrozen,
+				_placeModel(modelID, position, rotation, size, objPath, diffuseMapPath, lightMapPath, reflectionMapPath, normalMapPath, isFrozen,
 					isFaceculled, isShadowed, isTransparent, isReflective, isSpecular, specularFactor, specularIntensity, lightness,
 					color, uvRepeat, aabbSize);
 			}
@@ -250,6 +253,7 @@ void SceneEditor::save()
 				auto diffuseMapPath = _fe3d.gameEntity_getDiffuseMapPath(entityID);
 				auto lightMapPath = _fe3d.gameEntity_getLightMapPath(entityID);
 				auto reflectionMapPath = _fe3d.gameEntity_getReflectionMapPath(entityID);
+				auto normalMapPath = _fe3d.gameEntity_getNormalMapPath(entityID);
 				auto isFrozen = _fe3d.gameEntity_isStaticToCamera(entityID);
 				auto isFaceCulled = _fe3d.gameEntity_isFaceCulled(entityID);
 				auto isShadowed = _fe3d.gameEntity_isShadowed(entityID);
@@ -267,10 +271,12 @@ void SceneEditor::save()
 				diffuseMapPath = (diffuseMapPath == "") ? "?" : diffuseMapPath;
 				lightMapPath = (lightMapPath == "") ? "?" : lightMapPath;
 				reflectionMapPath = (reflectionMapPath == "") ? "?" : reflectionMapPath;
+				normalMapPath = (normalMapPath == "") ? "?" : normalMapPath;
 				std::replace(objPath.begin(), objPath.end(), ' ', '?');
 				std::replace(diffuseMapPath.begin(), diffuseMapPath.end(), ' ', '?');
 				std::replace(lightMapPath.begin(), lightMapPath.end(), ' ', '?');
 				std::replace(reflectionMapPath.begin(), reflectionMapPath.end(), ' ', '?');
+				std::replace(normalMapPath.begin(), normalMapPath.end(), ' ', '?');
 
 				// 1 model -> 1 line in file
 				file <<
@@ -289,6 +295,7 @@ void SceneEditor::save()
 					diffuseMapPath << " " <<
 					lightMapPath << " " <<
 					reflectionMapPath << " " <<
+					normalMapPath << " " <<
 					isFrozen << " " <<
 					isFaceCulled << " " <<
 					isShadowed << " " <<

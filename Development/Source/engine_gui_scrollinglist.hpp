@@ -27,7 +27,8 @@ private:
 	void _updateButtons(bool hoverable);
 	void _updateScolling();
 
-	vec4 _convertDimensions(vec2 position, vec2 size);
+	vec2 _convertPosition(vec2 position);
+	vec2 _convertSize(vec2 size);
 	
 	float _scrollingOffset = 0.0f;
 	float _scrollingSpeed = 0.0f;

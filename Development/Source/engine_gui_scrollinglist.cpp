@@ -31,8 +31,9 @@ void EngineGuiScrollingList::addButton(const string& ID, string textContent)
 	float h = _charSize.y;
 
 	// Add button
-	vec4 dimensions = _convertDimensions(vec2(x, y), vec2(w, h));
-	_buttons.push_back(make_shared<EngineGuiButton>(_fe3d, _parentID, ID, vec2(dimensions.x, dimensions.y), vec2(dimensions.z, dimensions.w), _buttonColor, _buttonHoverColor, textContent, _textColor, _textHoverColor));
+	vec2 position = _convertPosition(vec2(x, y));
+	vec2 size = _convertSize(vec2(w, h));
+	_buttons.push_back(make_shared<EngineGuiButton>(_fe3d, _parentID, ID, vec2(position.x, position.y), vec2(size.x, size.y), _buttonColor, _buttonHoverColor, textContent, _textColor, _textHoverColor));
 	
 	// Define list boundaries
 	string rectangleID = _buttons.back()->getRectangle()->getEntityID();
@@ -138,18 +139,13 @@ void EngineGuiScrollingList::_updateScolling()
 		}
 
 		// Reset if maximum offset reached
-		float maximumOffset = (_buttons.size() * _charSize.y) - _fe3d.guiEntity_getSize(_entityID).y;
-		if (_scrollingOffset >= maximumOffset)
+		float lastButtonHeight = _fe3d.guiEntity_getPosition(_buttons[_buttons.size() - 1]->getRectangle()->getEntityID()).y;
+		float listHeight = _fe3d.guiEntity_getPosition(_entityID).y;
+		float edgeOffset = (_fe3d.guiEntity_getSize(_entityID).y / 2.0f);
+		if (lastButtonHeight >= listHeight - edgeOffset + (_charSize.y / 3.0f))
 		{
-			// Check if offset incorrect
-			if (maximumOffset < 0.0f)
+			if (_scrollingSpeed > 0.0f) // Only if trying to scroll down
 			{
-				_scrollingOffset = 0.0f;
-				_scrollingSpeed = 0.0f;
-			}
-			else
-			{
-				_scrollingOffset = maximumOffset;
 				_scrollingSpeed = 0.0f;
 			}
 		}
@@ -184,14 +180,20 @@ void EngineGuiScrollingList::_updateButtons(bool hoverable)
 	}
 }
 
-vec4 EngineGuiScrollingList::_convertDimensions(vec2 position, vec2 size)
+vec2 EngineGuiScrollingList::_convertPosition(vec2 position)
 {
 	vec2 listPosition = _fe3d.guiEntity_getPosition(_entityID);
 	vec2 listSize = _fe3d.guiEntity_getSize(_entityID);
 	vec2 buttonPosition = listPosition + (position * (listSize / 2.0f));
-	vec2 buttonSize = (size / 2.0f) * listSize;
+	return buttonPosition;
+}
 
-	return vec4(buttonPosition, buttonSize);
+vec2 EngineGuiScrollingList::_convertSize(vec2 size)
+{
+	vec2 listPosition = _fe3d.guiEntity_getPosition(_entityID);
+	vec2 listSize = _fe3d.guiEntity_getSize(_entityID);
+	vec2 buttonSize = (size / 2.0f) * listSize;
+	return buttonSize;
 }
 
 void EngineGuiScrollingList::show()

@@ -397,6 +397,15 @@
     <ClCompile Include="Source\scene_editor_persistency.cpp">
       <Filter>src\Editor System\Scene Editor\Core</Filter>
     </ClCompile>
+    <ClCompile Include="Source\script_editor_misc.cpp">
+      <Filter>src\Editor System\Script Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_editor_core.cpp">
+      <Filter>src\Editor System\Script Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_editor_updates.cpp">
+      <Filter>src\Editor System\Script Editor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\obj_loader.hpp">
@@ -648,13 +657,13 @@
     <ClInclude Include="Source\settings_editor.hpp">
       <Filter>src\Editor System\Settings Editor</Filter>
     </ClInclude>
+    <ClInclude Include="Source\script_editor.hpp">
+      <Filter>src\Editor System\Script Editor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
       <UniqueIdentifier>{bc06f263-fac4-43ce-9538-74713bac6026}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\Scripting System">
-      <UniqueIdentifier>{66b5b776-14b5-4e28-b097-e30c8ce0cb37}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\Physics System">
       <UniqueIdentifier>{75557977-53ff-4cfc-806f-eed57831ba34}</UniqueIdentifier>
@@ -800,14 +809,14 @@
     <Filter Include="src\Editor System\Script Editor">
       <UniqueIdentifier>{da14d31f-6d01-4e12-a50c-99a603867d27}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\Editor System\Scene Editor\Audio">
-      <UniqueIdentifier>{5030e4d2-6075-445e-9d47-799bd42c1a88}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\Editor System\Scene Editor\Settings">
       <UniqueIdentifier>{fa42d895-1245-4873-b84e-91ea0a4cc1b7}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\Editor System\Settings Editor">
       <UniqueIdentifier>{2f3bcc71-2a82-4cab-b118-59f0bb80357a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Editor System\Scene Editor\Audio Placing">
+      <UniqueIdentifier>{5030e4d2-6075-445e-9d47-799bd42c1a88}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

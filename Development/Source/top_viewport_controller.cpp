@@ -87,6 +87,7 @@ void TopViewportController::update()
 	_gui->getViewport("left")->getWindow("main")->getScreen("main")->getButton("worldEditor")->setHoverable(_currentProjectName != "");
 	_gui->getViewport("left")->getWindow("main")->getScreen("main")->getButton("billboardEditor")->setHoverable(_currentProjectName != "");
 	_gui->getViewport("left")->getWindow("main")->getScreen("main")->getButton("sceneEditor")->setHoverable(_currentProjectName != "");
+	_gui->getViewport("left")->getWindow("main")->getScreen("main")->getButton("animationEditor")->setHoverable(_currentProjectName != "");
 	_gui->getViewport("left")->getWindow("main")->getScreen("main")->getButton("scriptEditor")->setHoverable(_currentProjectName != "");
 
 	// Check if user wants to save changes

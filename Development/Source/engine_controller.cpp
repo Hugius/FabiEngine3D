@@ -54,6 +54,7 @@ void EngineController::_initializeMiscellaneous()
 		textureFolderPath + "default_back.png" });
 	skyEntity_select("@@defaultSky");
 	skyEntity_setLightness("@@defaultSky", 0.65f);
+	skyEntity_setRotationSpeed("@@defaultSky", 1.0f);
 
 	// Editor cube map
 	skyEntity_add("@@editorSky");
@@ -65,6 +66,7 @@ void EngineController::_initializeMiscellaneous()
 		textureFolderPath + "editor_front.png",
 		textureFolderPath + "editor_back.png" });
 	skyEntity_setLightness("@@editorSky", 0.65f);
+	skyEntity_setRotationSpeed("@@editorSky", 1.0f);
 
 	// Default camera
 	float mouseSpeed = camera_getMouseSensitivity();

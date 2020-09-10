@@ -5,6 +5,7 @@
 #include "world_editor.hpp"
 #include "billboard_editor.hpp"
 #include "scene_editor.hpp"
+#include "script_editor.hpp"
 #include "settings_editor.hpp"
 
 #define LVC LeftViewportController
@@ -21,6 +22,7 @@ public:
 	WorldEditor& getWorldEditor();
 	BillboardEditor& getBillboardEditor();
 	SceneEditor& getSceneEditor();
+	ScriptEditor& getScriptEditor();
 	SettingsEditor& getSettingsEditor();
 
 	// Static stuff for easier GUI function calls
@@ -39,5 +41,6 @@ private:
 	WorldEditor _worldEditor;
 	BillboardEditor _billboardEditor;
 	SceneEditor _sceneEditor;
+	ScriptEditor _scriptEditor;
 	SettingsEditor _settingsEditor;
 };

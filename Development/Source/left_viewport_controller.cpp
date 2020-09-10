@@ -7,8 +7,9 @@ LeftViewportController::LeftViewportController(FabiEngine3D& fe3d, shared_ptr<En
 	_modelEditor(fe3d, gui),
 	_worldEditor(fe3d, gui),
 	_billboardEditor(fe3d, gui),
-	_settingsEditor(fe3d, gui),
-	_sceneEditor(fe3d, gui, _worldEditor, _modelEditor, _billboardEditor)
+	_sceneEditor(fe3d, gui, _worldEditor, _modelEditor, _billboardEditor),
+	_scriptEditor(fe3d, gui),
+	_settingsEditor(fe3d, gui)
 {
 
 }
@@ -19,18 +20,20 @@ void LeftViewportController::initialize()
 	_gui->getViewport("left")->addWindow("main", vec2(0.0f), vec2(1.9f, 2.0f), LVC::frameColor);
 	_gui->getViewport("left")->getWindow("main")->addScreen("main");
 	_gui->getViewport("left")->getWindow("main")->setActiveScreen("main");
-	_gui->getViewport("left")->getWindow("main")->getScreen("main")->addButton("worldEditor", vec2(0.0f, 0.75f), vec2(GW("World editor"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "World editor", LVC::textColor, LVC::textHoverColor);
-	_gui->getViewport("left")->getWindow("main")->getScreen("main")->addButton("modelEditor", vec2(0.0f, 0.45f), vec2(GW("Model editor"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Model editor", LVC::textColor, LVC::textHoverColor);
-	_gui->getViewport("left")->getWindow("main")->getScreen("main")->addButton("billboardEditor", vec2(0.0f, 0.15f), vec2(GW("Billboard editor"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Billboard editor", LVC::textColor, LVC::textHoverColor);
-	_gui->getViewport("left")->getWindow("main")->getScreen("main")->addButton("sceneEditor", vec2(0.0f, -0.15f), vec2(GW("Scene editor"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Scene editor", LVC::textColor, LVC::textHoverColor);
-	_gui->getViewport("left")->getWindow("main")->getScreen("main")->addButton("scriptEditor", vec2(0.0f, -0.45f), vec2(GW("Script editor"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Script editor", LVC::textColor, LVC::textHoverColor);
-	_gui->getViewport("left")->getWindow("main")->getScreen("main")->addButton("settingsEditor", vec2(0.0f, -0.75f), vec2(GW("Settings"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Settings", LVC::textColor, LVC::textHoverColor);
+	_gui->getViewport("left")->getWindow("main")->getScreen("main")->addButton("worldEditor", vec2(0.0f, 0.7875f), vec2(GW("Environment"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Environment", LVC::textColor, LVC::textHoverColor);
+	_gui->getViewport("left")->getWindow("main")->getScreen("main")->addButton("modelEditor", vec2(0.0f, 0.525f), vec2(GW("Models"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Models", LVC::textColor, LVC::textHoverColor);
+	_gui->getViewport("left")->getWindow("main")->getScreen("main")->addButton("billboardEditor", vec2(0.0f, 0.2625f), vec2(GW("Billboards"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Billboards", LVC::textColor, LVC::textHoverColor);
+	_gui->getViewport("left")->getWindow("main")->getScreen("main")->addButton("sceneEditor", vec2(0.0f, 0.0f), vec2(GW("Scenes"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Scenes", LVC::textColor, LVC::textHoverColor);
+	_gui->getViewport("left")->getWindow("main")->getScreen("main")->addButton("animationEditor", vec2(0.0f, -0.2625f), vec2(GW("Animations"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Animations", LVC::textColor, LVC::textHoverColor);
+	_gui->getViewport("left")->getWindow("main")->getScreen("main")->addButton("scriptEditor", vec2(0.0f, -0.525f), vec2(GW("Visual scripting"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Visual scripting", LVC::textColor, LVC::textHoverColor);
+	_gui->getViewport("left")->getWindow("main")->getScreen("main")->addButton("settingsEditor", vec2(0.0f, -0.7875f), vec2(GW("Settings"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Settings", LVC::textColor, LVC::textHoverColor);
 	
 	// Initialize editors GUI
 	_modelEditor.initializeGUI();
 	_worldEditor.initializeGUI();
 	_billboardEditor.initializeGUI();
 	_sceneEditor.initializeGUI();
+	_scriptEditor.initializeGUI();
 	_settingsEditor.initializeGUI();
 
 	// Load settings editor (project independent)
@@ -65,6 +68,15 @@ void LeftViewportController::update()
 			_sceneEditor.load();
 			window->setActiveScreen("sceneEditorMenuMain");
 		}
+		else if (screen->getButton("animationEditor")->isHovered()) // Animation editor button
+		{
+
+		}
+		else if (screen->getButton("scriptEditor")->isHovered()) // Script editor button
+		{
+			_scriptEditor.load();
+			window->setActiveScreen("scriptEditorMenuMain");
+		}
 		else if (screen->getButton("settingsEditor")->isHovered()) // Settings editor button
 		{
 			window->setActiveScreen("settingsEditorMenuMain");
@@ -76,6 +88,7 @@ void LeftViewportController::update()
 	_worldEditor.update();
 	_billboardEditor.update();
 	_sceneEditor.update();
+	_scriptEditor.update();
 	_settingsEditor.update();
 }
 
@@ -97,6 +110,11 @@ BillboardEditor& LeftViewportController::getBillboardEditor()
 SceneEditor& LeftViewportController::getSceneEditor()
 {
 	return _sceneEditor;
+}
+
+ScriptEditor& LeftViewportController::getScriptEditor()
+{
+	return _scriptEditor;
 }
 
 SettingsEditor& LeftViewportController::getSettingsEditor()

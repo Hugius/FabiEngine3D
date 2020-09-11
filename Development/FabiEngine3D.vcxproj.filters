@@ -406,6 +406,9 @@
     <ClCompile Include="Source\script_editor_updates.cpp">
       <Filter>src\Editor System\Script Editor</Filter>
     </ClCompile>
+    <ClCompile Include="Source\script_interpreter.cpp">
+      <Filter>src\Scripting System</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\obj_loader.hpp">
@@ -660,6 +663,30 @@
     <ClInclude Include="Source\script_editor.hpp">
       <Filter>src\Editor System\Script Editor</Filter>
     </ClInclude>
+    <ClInclude Include="Source\script_interpreter.hpp">
+      <Filter>src\Scripting System</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\script_event.hpp">
+      <Filter>src\Scripting System</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\script_event_init.hpp">
+      <Filter>src\Scripting System</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\script_event_time.hpp">
+      <Filter>src\Scripting System</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\script_event_keyboard.hpp">
+      <Filter>src\Scripting System</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\script_event_mouse.hpp">
+      <Filter>src\Scripting System</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\script_event_collision.hpp">
+      <Filter>src\Scripting System</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\script.hpp">
+      <Filter>src\Scripting System</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -817,6 +844,9 @@
     </Filter>
     <Filter Include="src\Editor System\Scene Editor\Audio Placing">
       <UniqueIdentifier>{5030e4d2-6075-445e-9d47-799bd42c1a88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Scripting System">
+      <UniqueIdentifier>{60047f24-1eb4-4081-95b0-950f9a3cdeda}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

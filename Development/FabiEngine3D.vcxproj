@@ -162,11 +162,19 @@
     <ClInclude Include="Source\engine_controller.hpp" />
     <ClInclude Include="Source\bottom_viewport_controller.hpp" />
     <ClInclude Include="Source\engine_gui_scrollinglist.hpp" />
+    <ClInclude Include="Source\script.hpp" />
+    <ClInclude Include="Source\script_event_init.hpp" />
     <ClInclude Include="Source\scene_editor.hpp" />
     <ClInclude Include="Source\left_viewport_controller.hpp" />
     <ClInclude Include="Source\model_editor.hpp" />
     <ClInclude Include="Source\right_viewport_controller.hpp" />
     <ClInclude Include="Source\script_editor.hpp" />
+    <ClInclude Include="Source\script_event_keyboard.hpp" />
+    <ClInclude Include="Source\script_event_mouse.hpp" />
+    <ClInclude Include="Source\script_event_time.hpp" />
+    <ClInclude Include="Source\script_event_collision.hpp" />
+    <ClInclude Include="Source\script_event.hpp" />
+    <ClInclude Include="Source\script_interpreter.hpp" />
     <ClInclude Include="Source\settings_editor.hpp" />
     <ClInclude Include="Source\top_viewport_controller.hpp" />
     <ClInclude Include="Source\engine_gui_global_screen.hpp" />
@@ -289,6 +297,7 @@
     <ClCompile Include="Source\script_editor_core.cpp" />
     <ClCompile Include="Source\script_editor_misc.cpp" />
     <ClCompile Include="Source\script_editor_updates.cpp" />
+    <ClCompile Include="Source\script_interpreter.cpp" />
     <ClCompile Include="Source\settings_editor.cpp" />
     <ClCompile Include="Source\top_viewport_controller.cpp" />
     <ClCompile Include="Source\engine_gui_button.cpp" />

@@ -2,16 +2,42 @@
 
 void ScriptEditor::update()
 {
-	// Update header visibility
-	for (int i = 0; i < static_cast<int>(Header::TOTAL); i++)
+	if (_isLoaded)
 	{
-		if (i <= static_cast<int>(_currentHeader))
+		// Update choice lists hoverability
+
+
+		// Reset last hovered option color
+		static string lastHoveredEntityID = "";
+		if (lastHoveredEntityID != "")
 		{
-			_fe3d.gameEntity_show(std::to_string(i));
+			if (_fe3d.billboardEntity_isExisting(lastHoveredEntityID))
+			{
+				_fe3d.billboardEntity_setColor(lastHoveredEntityID, vec3(1.0f));
+			}
+			lastHoveredEntityID = "";
 		}
-		else
+
+		// Hovering over options
+		string hoveredEntityID = _fe3d.collision_checkCursorInAny();
+		if (hoveredEntityID != "")
 		{
-			_fe3d.gameEntity_hide(std::to_string(i));
+			_fe3d.billboardEntity_setColor(hoveredEntityID, vec3(0.0f));
+			lastHoveredEntityID = hoveredEntityID;
+		}
+
+		// Clicking an option
+		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
+		{
+			if (hoveredEntityID != "")
+			{
+				lastHoveredEntityID = "";
+				addChoiceList(ChoiceListType::INPUT_KEY_NAMES);
+			}
+		}
+		else if (_fe3d.input_getKeyPressed(Input::KEY_BACKSPACE))
+		{
+			removeChoiceList();
 		}
 	}
 }

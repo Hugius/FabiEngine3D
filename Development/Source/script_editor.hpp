@@ -5,15 +5,15 @@
 
 class ScriptEditor final
 {
-	enum class Header
+	enum class ChoiceListType
 	{
-		EVENT_CLASS,
-		EVENT_TYPE,
-		EVENT_NAME,
-		ACTION_CLASS,
-		ACTION_TYPE,
-		ACTION_NAME,
-		TOTAL
+		EVENT_TYPES,
+
+		INPUT_TYPES,
+		INPUT_KEY_NAMES,
+		INPUT_MOUSE_NAMES,
+
+
 	};
 
 public:
@@ -30,13 +30,20 @@ public:
 	bool isLoaded();
 
 private:
+	void addChoiceList(ChoiceListType list);
+	void removeChoiceList();
+
 	FabiEngine3D& _fe3d;
 	shared_ptr<EngineGuiManager> _gui;
 	shared_ptr<EngineGuiWindow> _leftWindow;
 
 	string _currentProjectName = "";
 
-	bool _isLoaded = false;
+	vector<std::pair<ChoiceListType, int>> _choiceListStack;
+	vector<string> _eventTypeNames;
+	vector<string> _inputTypeNames;
+	vector<string> _inputKeyNames;
+	vector<string> _inputMouseNames;
 
-	Header _currentHeader = Header::EVENT_CLASS;
+	bool _isLoaded = false;
 };

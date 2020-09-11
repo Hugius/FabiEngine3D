@@ -1,7 +1,7 @@
 #include "script_editor.hpp"
 #include "left_viewport_controller.hpp"
 
-#define GW(text) LVC::calcTextWidth(text, 0.15f, 1.8f)
+#define GW(text) LVC::calcTextWidth(text, 0.25f, 1.8f)
 
 ScriptEditor::ScriptEditor(FabiEngine3D& fe3d, shared_ptr<EngineGuiManager> gui) :
 	_fe3d(fe3d),
@@ -44,20 +44,26 @@ void ScriptEditor::load()
 	_fe3d.gameEntity_setUvRepeat("background", 5.0f);
 	_fe3d.gameEntity_setNormalMapped("background", true);
 
-	// Generation values
-	const string fontPath = "Engine\\Fonts\\futura.ttf";
-	const vec3 color = vec3(1.0f);
-	const vector<string> names = { "Event class", "Event type", "Event name", "Action class", "Action type", "Action name" };
-	const float minX = -9.0f;
-	const float offset = 6.0f;
+	// Event types
+	_eventTypeNames = { "Initialization event", "Input event", "Collision event", "Time event", "Condition event" };
 
-	// Header generation
-	for (size_t i = 0; i < names.size(); i++)
-	{
-		_fe3d.gameEntity_add(std::to_string(i), "Engine\\OBJs\\crate.obj", vec3(minX + (offset * i), 5.0f, 0.5f), vec3(0.0f), vec3(1.7f, 0.5f, 0.5f));
-		_fe3d.gameEntity_setDiffuseMap(std::to_string(i), "Engine\\Textures\\crate.png");
-		_fe3d.billBoardEntity_add(std::to_string(i), names[i], fontPath, color, vec3(minX + (offset * i), 5.25f, 0.55f), vec3(0.0f), vec2(2.5f, 0.5f), 0, 0);
-	}
+	// Init event
+
+	// Input event
+	_inputTypeNames = { "Keyboard", "Mouse" };
+	_inputKeyNames = { "KEY_A", "KEY_B", "KEY_C", "KEY_D", "KEY_E", "KEY_F", "KEY_G", "KEY_H", "KEY_I", "KEY_J", "KEY_K", "KEY_L", "KEY_M",
+		"KEY_N", "KEY_O", "KEY_P", "KEY_Q", "KEY_R", "KEY_S", "KEY_T", "KEY_U", "KEY_V", "KEY_W", "KEY_X", "KEY_Y", "KEY_Z" };
+	_inputMouseNames = { "LMB", "MMB", "RMB", "Scroll UP", "Scroll DOWN" };
+
+	// Collision event
+
+	// Time event
+	
+	// Condition event
+
+	// Add first choice list
+	addChoiceList(ChoiceListType::EVENT_TYPES);
+	_isLoaded = true;
 }
 
 void ScriptEditor::save()

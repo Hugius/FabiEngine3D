@@ -88,7 +88,57 @@ void ScriptEditor::update()
 		{
 			if (hoveredEntityID != "")
 			{
-				addChoiceList(ChoiceListType::INPUT_KEY_NAMES);
+				auto listType = _choiceListStack.back().first;
+
+				// Calculate character index of underscore before option-index
+				int underscoreIndex = 0;
+				for (size_t i = 0; i < hoveredEntityID.size(); i++)
+				{
+					if (hoveredEntityID[i] == '_')
+					{
+						underscoreIndex = i;
+					}
+				}
+
+				// Index of option in name vector
+				int optionIndex = stoi(hoveredEntityID.substr(underscoreIndex + 1, hoveredEntityID.size() - (underscoreIndex + 1)));
+
+				// Determine type of choice list
+				switch (listType)
+				{
+					case ChoiceListType::EVENT_TYPES:
+					{
+						string option = _eventTypeNames[optionIndex];
+
+						if (option == "INIT_EVENT")
+						{
+
+						}
+						else if (option == "INPUT_EVENT")
+						{
+							addChoiceList(ChoiceListType::INPUT_KEY_NAMES);
+						}
+						else if (option == "COLLISION_EVENT")
+						{
+
+						}
+						else if (option == "TIME_EVENT")
+						{
+
+						}
+						else if (option == "CONDITION_EVENT")
+						{
+
+						}
+						break;
+					}
+
+					case ChoiceListType::INPUT_KEY_NAMES:
+					{
+						string option = _eventTypeNames[optionIndex];
+						break;
+					}
+				}
 			}
 		}
 		else if (_fe3d.input_getKeyPressed(Input::KEY_BACKSPACE))

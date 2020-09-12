@@ -45,15 +45,15 @@ void ScriptEditor::load()
 	_fe3d.gameEntity_setNormalMapped("background", true);
 
 	// Event types
-	_eventTypeNames = { "Initialization event", "Input event", "Collision event", "Time event", "Condition event" };
+	_eventTypeNames = { "INIT_EVENT", "INPUT_EVENT", "COLLISION_EVENT", "TIME_EVENT", "CONDITION_EVENT" };
 
 	// Init event
-
+	
 	// Input event
-	_inputTypeNames = { "Keyboard", "Mouse" };
+	_inputTypeNames = { "KEYBOARD", "MOUSE" };
 	_inputKeyNames = { "KEY_A", "KEY_B", "KEY_C", "KEY_D", "KEY_E", "KEY_F", "KEY_G", "KEY_H", "KEY_i", "KEY_J", "KEY_K", "KEY_L", "KEY_M",
 		"KEY_N", "KEY_O", "KEY_P", "KEY_Q", "KEY_R", "KEY_S", "KEY_T", "KEY_U", "KEY_V", "KEY_W", "KEY_X", "KEY_Y", "KEY_Z" };
-	_inputMouseNames = { "LMB", "MMB", "RMB", "Scroll UP", "Scroll DOWN" };
+	_inputMouseNames = { "BUTTON_LEFT", "BUTTON_MIDDLE", "BUTTON_RIGHT", "SCROLL_UP", "SCROLL_DOWN" };
 
 	// Collision event
 

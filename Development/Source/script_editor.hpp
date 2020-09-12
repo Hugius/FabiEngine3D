@@ -2,6 +2,7 @@
 
 #include "fabi_engine_3d.hpp"
 #include "engine_gui_manager.hpp"
+#include "script.hpp"
 
 class ScriptEditor final
 {
@@ -11,9 +12,7 @@ class ScriptEditor final
 
 		INPUT_TYPES,
 		INPUT_KEY_NAMES,
-		INPUT_MOUSE_NAMES,
-
-
+		INPUT_MOUSE_NAMES
 	};
 
 public:
@@ -29,6 +28,8 @@ public:
 
 	bool isLoaded();
 
+	const Script& getScript();
+
 private:
 	void addChoiceList(ChoiceListType list);
 	void removeChoiceList();
@@ -36,6 +37,7 @@ private:
 	FabiEngine3D& _fe3d;
 	shared_ptr<EngineGuiManager> _gui;
 	shared_ptr<EngineGuiWindow> _leftWindow;
+	Script _script;
 
 	string _currentProjectName = "";
 

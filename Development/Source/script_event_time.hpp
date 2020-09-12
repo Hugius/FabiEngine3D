@@ -7,7 +7,7 @@ class ScriptEventTime : public ScriptEvent
 public:
 	using ScriptEvent::ScriptEvent;
 
-
+	bool isTriggered() override;
 
 private:
 

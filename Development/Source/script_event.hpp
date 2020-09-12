@@ -1,32 +1,27 @@
 #pragma once
 
-#include <string>
-
-using std::string;
+#include "fabi_engine_3d.hpp"
 
 enum class ScriptEventType
 {
 	INIT_EVENT,
-	KEYBOARD_EVENT,
-	MOUSE_EVENT,
-	TIME_EVENT,
-	COLLISION_EVENT
+	INPUT_EVENT,
+	COLLISION_EVENT,
+	TIME_EVENT
 };
 
 class ScriptEvent
 {
 public:
-	ScriptEvent(ScriptEventType eventType) :
-		_eventType(eventType)
-	{
+	ScriptEvent(FabiEngine3D& fe3d, ScriptEventType eventType);
 
-	}
+	virtual bool isTriggered() = 0;
 
-	ScriptEventType getType()
-	{
-		return _eventType;
-	}
+	const ScriptEventType getType();
+
+protected:
+	FabiEngine3D& _fe3d;
 
 private:
-	ScriptEventType _eventType;
+	const ScriptEventType _eventType;
 };

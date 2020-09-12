@@ -10,6 +10,11 @@ bool ScriptEditor::isLoaded()
 	return _isLoaded;
 }
 
+const Script& ScriptEditor::getScript()
+{
+	return _script;
+}
+
 void ScriptEditor::addChoiceList(ChoiceListType listType)
 {
 	// General variables

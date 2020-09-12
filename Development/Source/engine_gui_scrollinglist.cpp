@@ -33,7 +33,8 @@ void EngineGuiScrollingList::addButton(const string& ID, string textContent)
 	// Add button
 	vec2 position = _convertPosition(vec2(x, y));
 	vec2 size = _convertSize(vec2(w, h));
-	_buttons.push_back(make_shared<EngineGuiButton>(_fe3d, _parentID, ID, vec2(position.x, position.y), vec2(size.x, size.y), _buttonColor, _buttonHoverColor, textContent, _textColor, _textHoverColor));
+	_buttons.push_back(make_shared<EngineGuiButton>(_fe3d, _parentID, ID, vec2(position.x, position.y), vec2(size.x, size.y), 
+		_buttonColor, _buttonHoverColor, textContent, _textColor, _textHoverColor));
 	
 	// Define list boundaries
 	string rectangleID = _buttons.back()->getRectangle()->getEntityID();

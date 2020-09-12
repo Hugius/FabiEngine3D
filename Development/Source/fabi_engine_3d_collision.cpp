@@ -15,8 +15,7 @@ void FabiEngine3D::aabbEntity_bindToGameEntity(const string& parentID, vec3 S, b
 {
 	if (_core->_gameEntityManager.isExisting(parentID))
 	{
-		_core->_aabbEntityManager.bindAabbEntity(parentID, parentID, vec3(0.0f), S, responsive);
-		_core->_aabbEntityManager.getEntity(parentID)->setTranslation(_core->_gameEntityManager.getEntity(parentID)->getTranslation());
+		_core->_aabbEntityManager.bindAabbEntity(parentID, parentID, "gameEntity", vec3(0.0f), S, responsive);
 	}
 	else
 	{
@@ -28,18 +27,54 @@ void FabiEngine3D::aabbEntity_bindToGameEntityGroup(const string& parentID, vec3
 {
 	bool found = false;
 
-	for (auto entity : _core->_gameEntityManager.getEntities()) // Loop over game entities
+	for (auto& entity : _core->_gameEntityManager.getEntities()) // Loop over game entities
 	{
 		if (entity->getID().size() >= parentID.size()) // Check if entity ID is at least the size of group ID
 		{
 			if (entity->getID().substr(0, parentID.size()) == parentID) // If entity matches ID
 			{
 				found = true;
-				_core->_aabbEntityManager.bindAabbEntity(entity->getID(), entity->getID(), vec3(0.0f), S, responsive); // Add new box
+				_core->_aabbEntityManager.bindAabbEntity(entity->getID(), entity->getID(), "gameEntity", vec3(0.0f), S, responsive); // Add new box
 			}
 		}
 	}
 
+	// Logging
+	if (!found)
+	{
+		logger_throwError("Tried to bind AABB entities to non-existing GAME entity group \"" + parentID + "\"!");
+	}
+}
+
+void FabiEngine3D::aabbEntity_bindToBillboardEntity(const string& parentID, vec3 S, bool responsive)
+{
+	if (_core->_billboardEntityManager.isExisting(parentID))
+	{
+		_core->_aabbEntityManager.bindAabbEntity(parentID, parentID, "billboardEntity", vec3(0.0f), S, responsive);
+	}
+	else
+	{
+		logger_throwError("Tried to bind AABB entity to non-existing BILLBOARD entity \"" + parentID + "\"!");
+	}
+}
+
+void FabiEngine3D::aabbEntity_bindToBillboardEntityGroup(const string& parentID, vec3 S, bool responsive)
+{
+	bool found = false;
+
+	for (auto& entity : _core->_billboardEntityManager.getEntities()) // Loop over game entities
+	{
+		if (entity->getID().size() >= parentID.size()) // Check if entity ID is at least the size of group ID
+		{
+			if (entity->getID().substr(0, parentID.size()) == parentID) // If entity matches ID
+			{
+				found = true;
+				_core->_aabbEntityManager.bindAabbEntity(entity->getID(), entity->getID(), "billboardEntity", vec3(0.0f), S, responsive); // Add new box
+			}
+		}
+	}
+
+	// Logging
 	if (!found)
 	{
 		logger_throwError("Tried to bind AABB entities to non-existing GAME entity group \"" + parentID + "\"!");
@@ -163,43 +198,48 @@ bool FabiEngine3D::collision_checkEntityWithCamera(const string& ID)
 
 const string& FabiEngine3D::collision_checkEntityWithOthers(const string& ID)
 {
-	for (auto other : _core->_aabbEntityManager.getEntities()) // Loop over aabb entities
+	// Self entity
+	auto self = _core->_aabbEntityManager.getEntity(ID);
+	vec3 selfPos = self->getTranslation();
+	vec3 selfSize = self->getScaling();
+
+	if (self->isResponsive())
 	{
-		if (other->getID() != ID && other->isResponsive()) // Don't check own entity & must be responsive
+		for (auto other : _core->_aabbEntityManager.getEntities()) // Loop over all AABB entities
 		{
-			auto self = _core->_aabbEntityManager.getEntity(ID);
-			vec3 selfPos = self->getTranslation();
-			vec3 selfSize = self->getScaling();
-			vec3 otherPos = other->getTranslation();
-			vec3 otherSize = other->getScaling();
-
-			// Check XYZ collision between 2 entities
-			if
-				(
-					// Check both all X collision situations
-					((selfPos.z > otherPos.z - otherSize.z && selfPos.z < otherPos.z + otherSize.z) || // Middle coordinate within
-						(selfPos.z - selfSize.z > otherPos.z - otherSize.z && selfPos.z - selfSize.z < otherPos.z + otherSize.z) || // Lower corner within
-						(selfPos.z + selfSize.z > otherPos.z - otherSize.z && selfPos.z + selfSize.z < otherPos.z + otherSize.z) || // Upper corner within 
-						(selfPos.z - selfSize.z < otherPos.z - otherSize.z && selfPos.z + selfSize.z > otherPos.z + otherSize.z))   // AABB too big but overlapping 
-
-					&&
-
-					// Check both all Y collision situations
-					((selfPos.y > otherPos.y - otherSize.y && selfPos.y < otherPos.y + otherSize.y) || // Middle coordinate within
-						(selfPos.y - selfSize.y > otherPos.y - otherSize.y && selfPos.y - selfSize.y < otherPos.y + otherSize.y) || // Lower corner within
-						(selfPos.y + selfSize.y > otherPos.y - otherSize.y && selfPos.y + selfSize.y < otherPos.y + otherSize.y) || // Upper corner within 
-						(selfPos.y - selfSize.y < otherPos.y - otherSize.y && selfPos.y + selfSize.y > otherPos.y + otherSize.y))   // AABB too big but overlapping 
-
-					&&
-
-					// Check both all Z collision situations
-					((selfPos.x > otherPos.x - otherSize.x && selfPos.x < otherPos.x + otherSize.x) || // Middle coordinate within
-						(selfPos.x - selfSize.x > otherPos.x - otherSize.x && selfPos.x - selfSize.x < otherPos.x + otherSize.x) || // Lower corner within
-						(selfPos.x + selfSize.x > otherPos.x - otherSize.x && selfPos.x + selfSize.x < otherPos.x + otherSize.x) || // Upper corner within 
-						(selfPos.x - selfSize.x < otherPos.x - otherSize.x && selfPos.x + selfSize.x > otherPos.x + otherSize.x))   // AABB too big but overlapping 
-					)
+			if (other->getID() != ID && other->isResponsive()) // Don't check own entity & other entity must be responsive
 			{
-				return other->getID();
+				vec3 otherPos = other->getTranslation();
+				vec3 otherSize = other->getScaling();
+
+				// Check XYZ collision between 2 entities
+				if
+					(
+						// Check both all X collision situations
+						((selfPos.z > otherPos.z - otherSize.z && selfPos.z < otherPos.z + otherSize.z) || // Middle coordinate within
+							(selfPos.z - selfSize.z > otherPos.z - otherSize.z && selfPos.z - selfSize.z < otherPos.z + otherSize.z) || // Lower corner within
+							(selfPos.z + selfSize.z > otherPos.z - otherSize.z && selfPos.z + selfSize.z < otherPos.z + otherSize.z) || // Upper corner within 
+							(selfPos.z - selfSize.z < otherPos.z - otherSize.z && selfPos.z + selfSize.z > otherPos.z + otherSize.z))   // AABB too big but overlapping 
+
+						&&
+
+						// Check both all Y collision situations
+						((selfPos.y > otherPos.y - otherSize.y && selfPos.y < otherPos.y + otherSize.y) || // Middle coordinate within
+							(selfPos.y - selfSize.y > otherPos.y - otherSize.y && selfPos.y - selfSize.y < otherPos.y + otherSize.y) || // Lower corner within
+							(selfPos.y + selfSize.y > otherPos.y - otherSize.y && selfPos.y + selfSize.y < otherPos.y + otherSize.y) || // Upper corner within 
+							(selfPos.y - selfSize.y < otherPos.y - otherSize.y && selfPos.y + selfSize.y > otherPos.y + otherSize.y))   // AABB too big but overlapping 
+
+						&&
+
+						// Check both all Z collision situations
+						((selfPos.x > otherPos.x - otherSize.x && selfPos.x < otherPos.x + otherSize.x) || // Middle coordinate within
+							(selfPos.x - selfSize.x > otherPos.x - otherSize.x && selfPos.x - selfSize.x < otherPos.x + otherSize.x) || // Lower corner within
+							(selfPos.x + selfSize.x > otherPos.x - otherSize.x && selfPos.x + selfSize.x < otherPos.x + otherSize.x) || // Upper corner within 
+							(selfPos.x - selfSize.x < otherPos.x - otherSize.x && selfPos.x + selfSize.x > otherPos.x + otherSize.x))   // AABB too big but overlapping 
+						)
+				{
+					return other->getID();
+				}
 			}
 		}
 	}
@@ -238,7 +278,7 @@ string FabiEngine3D::collision_checkCursorInAny()
 
 	for (auto entity : _core->_aabbEntityManager.getEntities()) // Loop over AABB entities
 	{
-		if (entity->isVisible())
+		if (entity->isVisible() && entity->isResponsive())
 		{
 			// Calculate box left bottom (LB) and right top (RT)
 			vec3 lb, rt;
@@ -269,7 +309,7 @@ bool FabiEngine3D::collision_checkCursorInEntity(const string& ID)
 {
 	auto entity = _core->_aabbEntityManager.getEntity(ID);
 
-	if (entity->isVisible())
+	if (entity->isVisible() && entity->isResponsive())
 	{
 		vec3 lb, rt;
 		lb.x = (entity->getTranslation().x - entity->getScaling().x / 2.0f);
@@ -292,7 +332,7 @@ string FabiEngine3D::collision_checkCursorInEntityGroup(const string& ID, const 
 
 	for (auto entity : _core->_aabbEntityManager.getEntities()) // Loop over AABB entities
 	{
-		if (entity->isVisible())
+		if (entity->isVisible() && entity->isResponsive())
 		{
 			if (entity->getID().size() >= ID.size()) // Check if entity ID is at least the size of group ID
 			{

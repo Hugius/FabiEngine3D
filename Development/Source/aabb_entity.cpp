@@ -27,9 +27,10 @@ void AabbEntity::setScaling(vec3 val)
 	_scaling = val;
 }
 
-void AabbEntity::setParentID(const string& ID)
+void AabbEntity::setParent(const string& ID, string type)
 {
 	_parentID = ID;
+	_parentType = type;
 }
 
 void AabbEntity::setCollisionDirection(const CollisionDir& direction)
@@ -80,6 +81,11 @@ const vec3 AabbEntity::getScaling() const
 const string& AabbEntity::getParentID() const
 {
 	return _parentID;
+}
+
+const string AabbEntity::getParentType() const
+{
+	return _parentType;
 }
 
 const CollisionDir& AabbEntity::getCollisionDirection() const

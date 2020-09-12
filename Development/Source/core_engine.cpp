@@ -123,7 +123,7 @@ void CoreEngine::_updateApplication()
 	_waterEntityManager.update();
 	_gameEntityManager.update();
 	_billboardEntityManager.update();
-	_aabbEntityManager.update(_gameEntityManager.getEntities());
+	_aabbEntityManager.update(_gameEntityManager.getEntities(), _billboardEntityManager.getEntities());
 
 	// 2D entity updates
 	_guiEntityManager.update();

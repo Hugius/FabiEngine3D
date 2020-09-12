@@ -21,12 +21,42 @@ void FabiEngine3D::billBoardEntity_add(const string& ID, const string& text, con
 
 void FabiEngine3D::billboardEntity_deleteAll()
 {
-	_core->_billboardEntityManager.deleteEntities();
+	for (auto& entity : _core->_billboardEntityManager.getEntities())
+	{
+		billboardEntity_delete(entity->getID());
+	}
 }
 
 void FabiEngine3D::billboardEntity_delete(const string& ID)
 {
+	// Delete AABB child entity if existing
+	for (auto& entity : _core->_aabbEntityManager.getEntities())
+	{
+		if (entity->getParentType() == "billboardEntity" && entity->getParentID() == ID)
+		{
+			_core->_aabbEntityManager.deleteEntity(ID, EntityType::AABB);
+		}
+	}
+
+	// Delete BILLBOARD entity
 	_core->_billboardEntityManager.deleteEntity(ID, EntityType::BILLBOARD);
+}
+
+void FabiEngine3D::billboardEntity_deleteGroup(const string& ID)
+{
+	for (auto& entity : _core->_billboardEntityManager.getEntities()) // Loop over BILLBOARD entities
+	{
+		if (entity->getID().size() >= ID.size()) // Check if entity ID is at least the size of group ID
+		{
+			auto subString = entity->getID().substr(0, ID.size());
+
+			// If entity matches ID
+			if (subString == ID)
+			{
+				billboardEntity_delete(entity->getID());
+			}
+		}
+	}
 }
 
 void FabiEngine3D::billboardEntity_hideAll()
@@ -151,6 +181,11 @@ void FabiEngine3D::billboardEntity_setCameraFacingX(const string& ID, bool enabl
 void FabiEngine3D::billboardEntity_setCameraFacingY(const string& ID, bool enabled)
 {
 	_core->_billboardEntityManager.getEntity(ID)->setCameraFacingY(enabled);
+}
+
+void FabiEngine3D::billboardEntity_setMaxY(const string& ID, float y)
+{
+	_core->_billboardEntityManager.getEntity(ID)->setMaxY(y);
 }
 
 bool FabiEngine3D::billboardEntity_isFacingCameraX(const string& ID)

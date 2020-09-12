@@ -1,23 +1,6 @@
 #include "fabi_engine_3d.hpp"
 #include "core_engine.hpp"
 
-void FabiEngine3D::gameEntity_deleteAll()
-{
-	// For every GAME entity
-	for (auto& entity : _core->_gameEntityManager.getEntities())
-	{
-		// Check if AABB entity is bound
-		if (_core->_aabbEntityManager.isExisting(entity->getID()))
-		{
-			// If the case, delete it too
-			_core->_aabbEntityManager.deleteEntity(entity->getID(), EntityType::AABB);
-		}
-
-		// Delete GAME entity
-		gameEntity_delete(entity->getID());
-	}
-}
-
 void FabiEngine3D::gameEntity_add
 (
 	const string& ID, const string& objName,
@@ -28,13 +11,24 @@ void FabiEngine3D::gameEntity_add
 	_core->_gameEntityManager.getEntity(ID)->setVisible(visible);
 }
 
+void FabiEngine3D::gameEntity_deleteAll()
+{
+	// For every GAME entity
+	for (auto& entity : _core->_gameEntityManager.getEntities())
+	{
+		gameEntity_delete(entity->getID());
+	}
+}
+
 void FabiEngine3D::gameEntity_delete(const string& ID)
 {
-	// Check if AABB entity is bound
-	if (_core->_aabbEntityManager.isExisting(ID))
+	// Delete AABB child entity is existing
+	for (auto& aabbEntity : _core->_aabbEntityManager.getEntities())
 	{
-		// If the case, delete it too
-		_core->_aabbEntityManager.deleteEntity(ID, EntityType::AABB);
+		if (aabbEntity->getParentType() == "gameEntity" && aabbEntity->getParentID() == ID)
+		{
+			_core->_aabbEntityManager.deleteEntity(ID, EntityType::AABB);
+		}
 	}
 
 	// Delete GAME entity
@@ -43,21 +37,16 @@ void FabiEngine3D::gameEntity_delete(const string& ID)
 
 void FabiEngine3D::gameEntity_deleteGroup(const string& ID)
 {
-	for (auto entity : _core->_gameEntityManager.getEntities()) // Loop over game entities
+	for (auto& entity : _core->_gameEntityManager.getEntities()) // Loop over GAME entities
 	{
 		if (entity->getID().size() >= ID.size()) // Check if entity ID is at least the size of group ID
 		{
 			auto subString = entity->getID().substr(0, ID.size());
-			if (subString == ID) // If entity matches ID
-			{
-				// Delete possible AABB
-				if (aabbEntity_isExisting(entity->getID()))
-				{
-					aabbEntity_delete(entity->getID());
-				}
 
-				// Delete game entity
-				_core->_gameEntityManager.deleteEntity(entity->getID(), EntityType::GAME);
+			// If entity matches ID
+			if (subString == ID) 
+			{
+				gameEntity_delete(entity->getID());
 			}
 		}
 	}
@@ -236,12 +225,6 @@ bool FabiEngine3D::gameEntity_isDepthMapIncluded(const string& ID)
 void FabiEngine3D::gameEntity_move(const string& ID, vec3 factor)
 {
 	_core->_gameEntityManager.getEntity(ID)->translate(factor);
-
-	// Also update potential bound AABB entities
-	if (_core->_aabbEntityManager.isExisting(ID))
-	{
-		_core->_aabbEntityManager.getEntity(ID)->translate(factor);
-	}
 }
 
 void FabiEngine3D::gameEntity_rotate(const string& ID, vec3 factor)
@@ -257,12 +240,6 @@ void FabiEngine3D::gameEntity_scale(const string& ID, vec3 factor)
 void FabiEngine3D::gameEntity_setPosition(const string& ID, vec3 position)
 {
 	_core->_gameEntityManager.getEntity(ID)->setTranslation(position);
-
-	// Also update potential bound AABB entities
-	if (_core->_aabbEntityManager.isExisting(ID))
-	{
-		_core->_aabbEntityManager.getEntity(ID)->setTranslation(position);
-	}
 }
 
 void FabiEngine3D::gameEntity_setRotation(const string& ID, vec3 rotation)

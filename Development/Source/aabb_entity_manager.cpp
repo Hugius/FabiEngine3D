@@ -59,13 +59,13 @@ void AabbEntityManager::addAabbEntity(const string& ID, vec3 T, vec3 R, vec3 S, 
 	getEntity(ID)->setResponsiveness(responsive);
 }
 
-void AabbEntityManager::bindAabbEntity(const string& ID, const string& parentID, vec3 R, vec3 S, bool responsive)
+void AabbEntityManager::bindAabbEntity(const string& ID, const string& parentID, string parentType, vec3 R, vec3 S, bool responsive)
 {
 	addAabbEntity(ID, vec3(0.0f), R, S, responsive);
-	getEntity(ID)->setParentID(parentID);
+	getEntity(ID)->setParent(parentID, parentType);
 }
 
-void AabbEntityManager::update(const vector<GameEntity*> & gameEntities)
+void AabbEntityManager::update(const vector<GameEntity*>& gameEntities, const vector<BillboardEntity*>& billboardEntities)
 {
 	for (auto & baseEntity : _getBaseEntities())
 	{
@@ -77,12 +77,27 @@ void AabbEntityManager::update(const vector<GameEntity*> & gameEntities)
 		{
 			bool found = false;
 
-			for (auto & gameEntity : gameEntities) // Loop over game entities
+			// Determine parent type
+			if (entity->getParentType() == "gameEntity")
 			{
-				if (entity->getParentID() == gameEntity->getID()) // Check for match
+				for (auto& gameEntity : gameEntities) // Loop over GAME entities
 				{
-					entity->setTranslation(gameEntity->getTranslation()); // Update translation
-					found = true;
+					if (entity->getParentID() == gameEntity->getID()) // Check for match
+					{
+						entity->setTranslation(gameEntity->getTranslation()); // Update translation
+						found = true;
+					}
+				}
+			}
+			else
+			{
+				for (auto& billboardEntity : billboardEntities) // Loop over BILLBOARD entities
+				{
+					if (entity->getParentID() == billboardEntity->getID()) // Check for match
+					{
+						entity->setTranslation(billboardEntity->getTranslation()); // Update translation
+						found = true;
+					}
 				}
 			}
 

@@ -143,6 +143,11 @@ void BillboardEntity::setUvRepeat(float val)
 	_uvRepeat = val;
 }
 
+void BillboardEntity::setMaxY(float val)
+{
+	_maxY = val;
+}
+
 const mat4 & BillboardEntity::getModelMatrix() const
 {
 	return _modelMatrix;
@@ -196,6 +201,11 @@ const string& BillboardEntity::getDiffuseMapPath() const
 const float BillboardEntity::getUvRepeat() const
 {
 	return _uvRepeat;
+}
+
+const float BillboardEntity::getMaxY() const
+{
+	return _maxY;
 }
 
 const int BillboardEntity::getPassedFrames() const

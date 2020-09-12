@@ -64,6 +64,7 @@ void RenderEngine::_captureSceneReflections(CameraManager& camera)
 		_renderSkyEntity();
 		_renderTerrainEntity();
 		_renderGameEntities();
+		_renderBillboardEntities();
 
 		// Revert reflection exceptions
 		_renderBus.setShadowsEnabled(shadowsEnabled);

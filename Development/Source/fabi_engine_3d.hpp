@@ -273,6 +273,7 @@ public:
 	);
 	void billboardEntity_deleteAll();
 	void billboardEntity_delete(const string& ID);
+	void billboardEntity_deleteGroup(const string& ID);
 	void billboardEntity_hideAll();
 	void billboardEntity_showAll();
 	void billboardEntity_hide(const string& ID);
@@ -286,6 +287,7 @@ public:
 	void billboardEntity_setColor(const string& ID, vec3 color);
 	void billboardEntity_setCameraFacingX(const string& ID, bool enabled);
 	void billboardEntity_setCameraFacingY(const string& ID, bool enabled);
+	void billboardEntity_setMaxY(const string& ID, float y);
 
 	// Billboard entity interface (core) - getters
 	bool billboardEntity_isExisting(const string& ID);
@@ -346,6 +348,8 @@ public:
 	void aabbEntity_add(const string& ID, vec3 T, vec3 S, bool responsive);
 	void aabbEntity_bindToGameEntity(const string& parentID, vec3 S, bool responsive);
 	void aabbEntity_bindToGameEntityGroup(const string& parentID, vec3 S, bool responsive);
+	void aabbEntity_bindToBillboardEntity(const string& parentID, vec3 S, bool responsive);
+	void aabbEntity_bindToBillboardEntityGroup(const string& parentID, vec3 S, bool responsive);
 	void aabbEntity_deleteAll();
 	void aabbEntity_delete(const string& ID);
 	void aabbEntity_hide(const string& ID);

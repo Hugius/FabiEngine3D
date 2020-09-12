@@ -44,6 +44,7 @@ public:
 	void resetPassedFrames();
 	void increaseAnimationRepeats();
 	void setUvRepeat(float val);
+	void setMaxY(float val);
 
 	// Getters
 	const mat4 & getModelMatrix() const;
@@ -57,6 +58,7 @@ public:
 	const string& getFontPath() const;
 	const string& getDiffuseMapPath() const;
 	const float getUvRepeat() const;
+	const float getMaxY() const;
 	const int getPassedFrames() const;
 	const int getMaxFramestep() const;
 	const int getTotalSpriteRows() const;
@@ -79,7 +81,8 @@ private:
 	vec3 _scaling         = vec3(1.0f, 1.0f, 1.0f);
 	vec3 _color           = vec3(1.0f);
 
-	float _uvRepeat	  = 1.0f;
+	float _uvRepeat = 1.0f;
+	float _maxY = (std::numeric_limits<float>::max)();
 	
 	int _maxFramestep     = 0;
 	int _passedFrames	 = 0;

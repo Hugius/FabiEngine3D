@@ -31,7 +31,7 @@ public:
 	void setTranslation(vec3 val);
 	void setRotation(vec3 val);
 	void setScaling(vec3 val);
-	void setParentID(const string& ID);
+	void setParent(const string& ID, string type);
 	void setCollisionDirection(const CollisionDir& direction);
 	void setResponsiveness(bool val);
 
@@ -41,6 +41,7 @@ public:
 	const vec3 getRotation() const;
 	const vec3 getScaling() const;
 	const string& getParentID() const;
+	const string getParentType() const;
 	const CollisionDir& getCollisionDirection() const;
 	const bool isResponsive() const;
 
@@ -52,6 +53,7 @@ private:
 	vec3 _scaling     = vec3(1.0f, 1.0f, 1.0f);
 	
 	string _parentID = "";
+	string _parentType = "";
 
 	CollisionDir _collisionDirection = CollisionDir::NONE;
 

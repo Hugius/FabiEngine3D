@@ -10,12 +10,16 @@ uniform mat4 u_modelMatrix;
 uniform mat4 u_viewMatrix;
 uniform mat4 u_projMatrix;
 
+// Vec4 uniforms
+uniform vec4 u_clippingPlane;
+
 // Vec2 uniforms
 uniform vec2 u_uvAdder;
 uniform vec2 u_uvMultiplier;
 
 // Float uniforms
 uniform float u_uvRepeat;
+uniform float u_maxY;
 
 // Out variables
 out vec3 f_pos;
@@ -30,6 +34,8 @@ void main()
 
 	// GLSL variables
 	gl_Position = clipSpacePos;
+	gl_ClipDistance[0] = dot(worldSpacePos, u_clippingPlane);
+	gl_ClipDistance[1] = dot(worldSpacePos, vec4(0.0f, -1.0f, 0.0f, u_maxY));
 	
 	// Out variables
 	f_uv = vec2(u_uvAdder.x + (v_uv.x*u_uvMultiplier.x), u_uvAdder.y + (-v_uv.y*u_uvMultiplier.y)) * u_uvRepeat;

@@ -46,6 +46,7 @@ private:
 	vector<string> _inputMouseNames;
 
 	float _scrollingAcceleration = 0.0f;
+	const float _maxScrollingAcceleration = 0.3f;
 	const float _optionBillboardHeight = 0.75f;
 
 	bool _isLoaded = false;

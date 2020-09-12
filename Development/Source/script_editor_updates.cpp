@@ -23,21 +23,35 @@ void ScriptEditor::update()
 				vec3 lastPosition = _fe3d.billboardEntity_getPosition(baseID + std::to_string(list.second-1));
 				float optionOffsetY = _fe3d.billboardEntity_getPosition(baseID + "0").y - _fe3d.billboardEntity_getPosition(baseID + "1").y;
 				float maxY = _fe3d.gameEntity_getPosition(std::to_string(listIndex) + "_header").y - optionOffsetY;
-				float minY = (_fe3d.gameEntity_getPosition("background").y - (_fe3d.gameEntity_getSize("background") / 2.0f)).y;
+				float minY = (_fe3d.gameEntity_getPosition("background").y - (_fe3d.gameEntity_getSize("background") / 3.0f)).y;
+				float halfHeight = (_optionBillboardHeight / 2.0f);
+				static bool hasCollided = false;
 
 				// Check if list is long enough to be scrollable
 				if ((firstPosition.y - lastPosition.y) > (maxY - minY))
 				{
 					// Update scrolling movement
-					_scrollingAcceleration += -(static_cast<float>(scrollingSpeed) * 0.1f);
-
-					// Movement constraints
-					if (firstPosition.y < maxY || lastPosition.y > minY)
+					_scrollingAcceleration += -(static_cast<float>(scrollingSpeed) * 0.05f);
+					if (hasCollided)
 					{
 						_scrollingAcceleration = 0.0f;
+						hasCollided = false;
 					}
 
-					_scrollingAcceleration = std::clamp(_scrollingAcceleration, -0.25f, 0.25f);
+					// Movement constraints
+					if ((firstPosition.y + halfHeight) < maxY) // Top movement constraint
+					{
+						_scrollingAcceleration = maxY - (firstPosition.y + halfHeight);
+						hasCollided = true;
+					}
+					else if ((lastPosition.y - halfHeight) > minY) // Bottom movement constraint
+					{
+						_scrollingAcceleration = -((lastPosition.y - halfHeight) - minY);
+						hasCollided = true;
+					}
+
+					// Limit acceleration
+					_scrollingAcceleration = std::clamp(_scrollingAcceleration, -_maxScrollingAcceleration, _maxScrollingAcceleration);
 				}
 			}
 			

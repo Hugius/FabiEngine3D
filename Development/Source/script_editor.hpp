@@ -3,6 +3,11 @@
 #include "fabi_engine_3d.hpp"
 #include "engine_gui_manager.hpp"
 #include "script.hpp"
+#include "script_event_init.hpp"
+#include "script_event_input.hpp"
+#include "script_event_time.hpp"
+#include "script_event_collision.hpp"
+#include "script_event_condition.hpp"
 
 class ScriptEditor final
 {
@@ -18,7 +23,7 @@ class ScriptEditor final
 
 	struct ChoiceList final
 	{
-		ChoiceList(ChoiceListType typ, int tot) : type(typ), total(tot)
+		ChoiceList(ChoiceListType listType, int optionTotal) : type(listType), total(optionTotal)
 		{
 
 		}
@@ -27,7 +32,7 @@ class ScriptEditor final
 
 		const int total;
 
-		int selected = -1;
+		int selectedOptionIndex = -1;
 	};
 
 public:

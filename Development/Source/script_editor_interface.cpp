@@ -14,21 +14,15 @@ void ScriptEditor::_generateScriptLineInterface(ScriptLine& scriptLine)
 	// Check if script line has event
 	if (scriptLine.event != nullptr)
 	{
-		if (scriptLine.event->getType() == ScriptEventType::INIT_EVENT)
-		{
+		//if (scriptLine.event->getType() == ScriptEventType::INIT_EVENT)
+		if (scriptLine.event->getType() == ScriptEventType::INPUT_EVENT) _addChoiceList(ChoiceListType::INPUT_TYPES);
+		//if (scriptLine.event->getType() == ScriptEventType::COLLISION_EVENT)
+		//if (scriptLine.event->getType() == ScriptEventType::TIME_EVENT)
+		//if (scriptLine.event->getType() == ScriptEventType::CONDITION_EVENT)
 
-		}
-		else if (scriptLine.event->getType() == ScriptEventType::INPUT_EVENT)
+		if (dynamic_pointer_cast<ScriptEventInput>(scriptLine.event)->getInputType() == InputType::KEYBOARD)
 		{
-			_addChoiceList(ChoiceListType::INPUT_TYPES);
-		}
-		else if (scriptLine.event->getType() == ScriptEventType::COLLISION_EVENT)
-		{
-
-		}
-		else if (scriptLine.event->getType() == ScriptEventType::TIME_EVENT)
-		{
-
+			_addChoiceList(ChoiceListType::INPUT_KEY_NAMES);
 		}
 
 		// Check if script line has action

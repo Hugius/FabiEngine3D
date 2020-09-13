@@ -102,5 +102,53 @@ void ScriptEditor::unload()
 
 void ScriptEditor::_addNewScriptLine(const string& newID)
 {
-	_script.addLine(newID, nullptr, nullptr);
+	// Placeholders
+	shared_ptr<ScriptEvent> event = nullptr;
+	shared_ptr<ScriptAction> action = nullptr;
+
+	// Fill the placeholders
+	for (auto& choiceList : _choiceListStack)
+	{
+		int optionIndex = choiceList.selectedOptionIndex;
+
+		// Determine choicelist type
+		switch (choiceList.type)
+		{
+			// Event types
+			case ChoiceListType::EVENT_TYPES:
+			{
+				if (choiceList.selectedOptionIndex == 0) event = make_shared<ScriptEventInit>(_fe3d, ScriptEventType::INIT_EVENT);
+				if (choiceList.selectedOptionIndex == 1) event = make_shared<ScriptEventInput>(_fe3d, ScriptEventType::INPUT_EVENT);
+				if (choiceList.selectedOptionIndex == 2) event = make_shared<ScriptEventCollision>(_fe3d, ScriptEventType::COLLISION_EVENT);
+				if (choiceList.selectedOptionIndex == 3) event = make_shared<ScriptEventTime>(_fe3d, ScriptEventType::TIME_EVENT);
+				if (choiceList.selectedOptionIndex == 4) event = make_shared<ScriptEventCondition>(_fe3d, ScriptEventType::CONDITION_EVENT);
+				break;
+			}
+
+			// Input event
+			case ChoiceListType::INPUT_TYPES:
+			{
+				dynamic_pointer_cast<ScriptEventInput>(event)->setInputType(static_cast<InputType>(choiceList.selectedOptionIndex + 1));
+				break;
+			}
+			case ChoiceListType::INPUT_KEY_NAMES:
+			{
+				dynamic_pointer_cast<ScriptEventInput>(event)->setInputElement(_inputKeyNames[optionIndex]);
+				break;
+			}
+			case ChoiceListType::INPUT_MOUSE_NAMES:
+			{
+				dynamic_pointer_cast<ScriptEventInput>(event)->setInputElement(_inputMouseNames[optionIndex]);
+				break;
+			}
+			case ChoiceListType::INPUT_METHODS:
+			{
+				dynamic_pointer_cast<ScriptEventInput>(event)->setInputMethod(static_cast<InputMethod>(choiceList.selectedOptionIndex + 1));
+				break;
+			}
+		}
+	}
+
+	// Create new script line
+	_script.addLine(newID, event, action);
 }

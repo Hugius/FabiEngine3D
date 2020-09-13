@@ -1,9 +1,4 @@
 #include "script_editor.hpp"
-#include "script_event_init.hpp"
-#include "script_event_input.hpp"
-#include "script_event_time.hpp"
-#include "script_event_collision.hpp"
-#include "script_event_condition.hpp"
 
 #include <algorithm>
 
@@ -172,6 +167,7 @@ void ScriptEditor::_updateNavigation()
 
 				// Index of option in name vector
 				int optionIndex = stoi(hoveredEntityID.substr(underscoreIndex + 1, hoveredEntityID.size() - (underscoreIndex + 1)));
+				_choiceListStack.back().selectedOptionIndex = optionIndex;
 
 				// Determine type of choice list
 				switch (listType)

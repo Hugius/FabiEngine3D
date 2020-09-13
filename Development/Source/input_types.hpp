@@ -2,6 +2,7 @@
 
 enum class Input
 {
+	NONE				= 0,
 	KEY_SPACE           = ' ',
 	KEY_EXCLAIM         = '!',
 	KEY_QUOTEDBL        = '"',

@@ -99,3 +99,8 @@ void ScriptEditor::unload()
 	_currentScriptLineID = "";
 	_isLoaded = false;
 }
+
+void ScriptEditor::_addNewScriptLine(const string& newID)
+{
+	_script.addLine(newID, nullptr, nullptr);
+}

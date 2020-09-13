@@ -30,6 +30,13 @@ void ScriptEditor::_updateGUI()
 			}
 			else if (screen->getButton("deleteLine")->isHovered())
 			{
+				// Clear all previous choice lists
+				while (!_choiceListStack.empty())
+				{
+					_removeChoiceList();
+				}
+
+				// Remove line from script
 				_script.removeLine(_currentScriptLineID);
 				_currentScriptLineID = "";
 			}
@@ -137,7 +144,7 @@ void ScriptEditor::_updateChoiceLists()
 
 void ScriptEditor::_updateNavigation()
 {
-	if (_isLoaded)
+	if (_isLoaded && _isCreatingScript)
 	{
 		// Hovering over options
 		string hoveredEntityID = _fe3d.collision_checkCursorInAny();
@@ -193,13 +200,12 @@ void ScriptEditor::_updateNavigation()
 						{
 
 						}
-
 						break;
 					}
 
 					case ChoiceListType::INPUT_TYPES:
 					{
-						string option = _eventTypeNames[optionIndex];
+						string option = _inputTypeNames[optionIndex];
 						if (option == "KEYBOARD")
 						{
 							_addChoiceList(ChoiceListType::INPUT_KEY_NAMES);
@@ -208,40 +214,19 @@ void ScriptEditor::_updateNavigation()
 						{
 							_addChoiceList(ChoiceListType::INPUT_MOUSE_NAMES);
 						}
-
 						break;
 					}
 
 					case ChoiceListType::INPUT_KEY_NAMES:
-					{
-						string option = _eventTypeNames[optionIndex];
-						_currentEventToAdd = make_shared<ScriptEventInput>(_fe3d, InputType::KEYBOARD, InputTypeMethod::);
-						break;
-					}
-
 					case ChoiceListType::INPUT_MOUSE_NAMES:
 					{
-						string option = _eventTypeNames[optionIndex];
-						_currentEventToAdd = make_shared<ScriptEventInput>(_fe3d, InputType::KEYBOARD, InputTypeMethod::);
+						_addChoiceList(ChoiceListType::INPUT_METHODS);
 						break;
 					}
 
 					case ChoiceListType::INPUT_METHODS:
 					{
-						string option = _eventTypeNames[optionIndex];
-						if (option == "DOWN")
-						{
-							_addChoiceList(ChoiceListType::INPUT_KEY_NAMES);
-						}
-						else if (option == "PRESSED")
-						{
-							_addChoiceList(ChoiceListType::INPUT_MOUSE_NAMES);
-						}
-						else if (option == "TOGGLED")
-						{
-
-						}
-
+						_allowedToAddScript = true;
 						break;
 					}
 				}
@@ -266,7 +251,7 @@ void ScriptEditor::_updateMiscellaneous()
 		_scrollingAcceleration *= 0.95f;
 
 		// Add & delete buttons hoverability
-		_leftWindow->getScreen("scriptEditorMenuMain")->getButton("addLine")->setHoverable(_currentEventToAdd != nullptr);
+		_leftWindow->getScreen("scriptEditorMenuMain")->getButton("addLine")->setHoverable(_allowedToAddScript);
 		_leftWindow->getScreen("scriptEditorMenuMain")->getButton("deleteLine")->setHoverable(_currentScriptLineID != "");
 
 		// Check if new script line name filled in
@@ -274,9 +259,13 @@ void ScriptEditor::_updateMiscellaneous()
 		if (_gui->getGlobalScreen()->checkValueForm("newScriptLineName", newScriptLineName))
 		{
 			// Check if name not existing yet
-			if (!_script.isExisting(newScriptLineName))
+			if (_script.isExisting(newScriptLineName))
 			{
-				_script.addLine(newScriptLineName, nullptr, nullptr);
+				Logger::getInst().throwWarning("Script \"" + newScriptLineName + "\"" + " already exists!");
+			}
+			else
+			{
+				_addNewScriptLine(newScriptLineName);
 			}
 		}
 
@@ -288,7 +277,9 @@ void ScriptEditor::_updateMiscellaneous()
 			{
 				_generateScriptLineInterface(_script.getScriptLine(selectedButtonID));
 				_gui->getGlobalScreen()->removeChoiceForm("scriptLinesList");
+				_currentScriptLineID = selectedButtonID;
 				_isCreatingScript = false;
+				_allowedToAddScript = false;
 			}
 		}
 		else if (_gui->getGlobalScreen()->isChoiceFormCancelled("scriptLinesList"))

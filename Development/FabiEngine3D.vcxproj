@@ -299,6 +299,7 @@
     <ClCompile Include="Source\script_action.cpp" />
     <ClCompile Include="Source\script_action_camera.cpp" />
     <ClCompile Include="Source\script_editor_core.cpp" />
+    <ClCompile Include="Source\script_editor_interface.cpp" />
     <ClCompile Include="Source\script_editor_misc.cpp" />
     <ClCompile Include="Source\script_editor_updates.cpp" />
     <ClCompile Include="Source\script_event.cpp" />

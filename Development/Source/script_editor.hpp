@@ -53,6 +53,7 @@ private:
 	void _generateScriptLineInterface(ScriptLine& scriptLine);
 	void _addChoiceList(ChoiceListType list);
 	void _removeChoiceList();
+	void _addNewScriptLine(const string& newID);
 
 	FabiEngine3D& _fe3d;
 	shared_ptr<EngineGuiManager> _gui;
@@ -75,6 +76,7 @@ private:
 	const float _optionBillboardHeight = 0.75f;
 
 	shared_ptr<ScriptEvent> _currentEventToAdd;
+	bool _allowedToAddScript = false;
 	bool _isCreatingScript = false;
 	bool _isLoaded = false;
 };

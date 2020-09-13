@@ -53,13 +53,13 @@ void ModelEditor::_updateManagementScreen()
 		if (_gui->getGlobalScreen()->isAnswerFormConfirmed("exitModelEditor"))
 		{
 			save();
-			_leftWindow->setActiveScreen("main");
 			unload();
+			_leftWindow->setActiveScreen("main");
 		}
 		else if (_gui->getGlobalScreen()->isAnswerFormCancelled("exitModelEditor"))
 		{
-			_leftWindow->setActiveScreen("main");
 			unload();
+			_leftWindow->setActiveScreen("main");
 		}
 	}
 }

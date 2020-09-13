@@ -427,6 +427,12 @@
     <ClCompile Include="Source\script_action.cpp">
       <Filter>src\Scripting System\Actions</Filter>
     </ClCompile>
+    <ClCompile Include="Source\script_action_camera.cpp">
+      <Filter>src\Scripting System\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_event_condition.cpp">
+      <Filter>src\Scripting System\Events</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\obj_loader.hpp">
@@ -701,6 +707,12 @@
     </ClInclude>
     <ClInclude Include="Source\script_action.hpp">
       <Filter>src\Scripting System\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\script_action_camera.hpp">
+      <Filter>src\Scripting System\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\script_event_condition.hpp">
+      <Filter>src\Scripting System\Events</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1,21 +1,45 @@
 #include "script_editor.hpp"
 
-void ScriptEditor::setCurrentProjectName(const string& projectName)
+void ScriptEditor::_generateScriptLineInterface(ScriptLine& scriptLine)
 {
-	_currentProjectName = projectName;
+	// Clear all previous choice lists
+	while (!_choiceListStack.empty())
+	{
+		_removeChoiceList();
+	}
+	
+	// Add default choicelist
+	_addChoiceList(ChoiceListType::EVENT_TYPES);
+
+	// Check if script line has event
+	if (scriptLine.event != nullptr)
+	{
+		if (scriptLine.event->getType() == ScriptEventType::INIT_EVENT)
+		{
+			
+		}
+		else if (scriptLine.event->getType() == ScriptEventType::INPUT_EVENT)
+		{
+			_addChoiceList(ChoiceListType::INPUT_TYPES);
+		}
+		else if (scriptLine.event->getType() == ScriptEventType::COLLISION_EVENT)
+		{
+			
+		}
+		else if (scriptLine.event->getType() == ScriptEventType::TIME_EVENT)
+		{
+			
+		}
+
+		// Check if script line has action
+		if (scriptLine.action != nullptr)
+		{
+
+		}
+	}
 }
 
-bool ScriptEditor::isLoaded()
-{
-	return _isLoaded;
-}
-
-const Script& ScriptEditor::getScript()
-{
-	return _script;
-}
-
-void ScriptEditor::addChoiceList(ChoiceListType listType)
+void ScriptEditor::_addChoiceList(ChoiceListType listType)
 {
 	// General variables
 	int listIndex = static_cast<int>(listType);
@@ -25,22 +49,36 @@ void ScriptEditor::addChoiceList(ChoiceListType listType)
 	// Determine list to be generated
 	switch (listType)
 	{
-	case ChoiceListType::EVENT_TYPES:
-		headerName = "Event type";
-		optionNames = _eventTypeNames;
-		break;
-	case ChoiceListType::INPUT_TYPES:
-		headerName = "Input type";
-		optionNames = _inputTypeNames;
-		break;
-	case ChoiceListType::INPUT_KEY_NAMES:
-		headerName = "Keyboard key";
-		optionNames = _inputKeyNames;
-		break;
-	case ChoiceListType::INPUT_MOUSE_NAMES:
-		headerName = "Mouse button";
-		optionNames = _inputMouseNames;
-		break;
+		case ChoiceListType::EVENT_TYPES:
+		{
+			headerName = "Event type";
+			optionNames = _eventTypeNames;
+			break;
+		}
+		case ChoiceListType::INPUT_TYPES:
+		{
+			headerName = "Input type";
+			optionNames = _inputTypeNames;
+			break;
+		}
+		case ChoiceListType::INPUT_METHODS:
+		{
+			headerName = "Input method";
+			optionNames = _inputMethodNames;
+			break;
+		}
+		case ChoiceListType::INPUT_KEY_NAMES:
+		{
+			headerName = "Keyboard key";
+			optionNames = _inputKeyNames;
+			break;
+		}
+		case ChoiceListType::INPUT_MOUSE_NAMES:
+		{
+			headerName = "Mouse button";
+			optionNames = _inputMouseNames;
+			break;
+		}
 	}
 
 	// Generation values
@@ -74,28 +112,39 @@ void ScriptEditor::addChoiceList(ChoiceListType listType)
 	}
 
 	// Add to stack
-	_choiceListStack.push_back(std::make_pair(listType, optionNames.size()));
+	_choiceListStack.push_back(ChoiceList(listType, optionNames.size()));
 }
 
-void ScriptEditor::removeChoiceList()
+void ScriptEditor::_removeChoiceList()
 {
-	// Cannot remove default choice list
-	if (_choiceListStack.size() > 1)
+	int currentListIndex = static_cast<int>(_choiceListStack.back().type);
+
+	// Remove header
+	_fe3d.gameEntity_delete(std::to_string(currentListIndex) + "_header");
+	_fe3d.billboardEntity_delete(std::to_string(currentListIndex) + "_header");
+
+	// Remove all options
+	for (int i = 0; i < _choiceListStack.back().total; i++)
 	{
-		int currentListID = static_cast<int>(_choiceListStack.back().first);
-
-		// Remove header
-		_fe3d.gameEntity_delete(std::to_string(currentListID) + "_header");
-		_fe3d.billboardEntity_delete(std::to_string(currentListID) + "_header");
-
-		// Remove all options
-		for (int i = 0; i < _choiceListStack.back().second; i++)
-		{
-			string ID = std::to_string(currentListID) + "_option_" + std::to_string(i);
-			_fe3d.billboardEntity_delete(ID);
-		}
-
-		// Remove last list
-		_choiceListStack.pop_back();
+		string ID = std::to_string(currentListIndex) + "_option_" + std::to_string(i);
+		_fe3d.billboardEntity_delete(ID);
 	}
+
+	// Remove last list
+	_choiceListStack.pop_back();
+}
+
+void ScriptEditor::setCurrentProjectName(const string& projectName)
+{
+	_currentProjectName = projectName;
+}
+
+bool ScriptEditor::isLoaded()
+{
+	return _isLoaded;
+}
+
+const Script& ScriptEditor::getScript()
+{
+	return _script;
 }

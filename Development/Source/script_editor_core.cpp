@@ -1,7 +1,7 @@
 #include "script_editor.hpp"
 #include "left_viewport_controller.hpp"
 
-#define GW(text) LVC::calcTextWidth(text, 0.25f, 1.8f)
+#define GW(text) LVC::calcTextWidth(text, 0.2f, 1.8f)
 
 ScriptEditor::ScriptEditor(FabiEngine3D& fe3d, shared_ptr<EngineGuiManager> gui) :
 	_fe3d(fe3d),
@@ -12,15 +12,18 @@ ScriptEditor::ScriptEditor(FabiEngine3D& fe3d, shared_ptr<EngineGuiManager> gui)
 
 void ScriptEditor::initializeGUI()
 {
-	// Private window instance of left viewport
+	// Private window instances of left & right viewport
 	_leftWindow = _gui->getViewport("left")->getWindow("main");
+	_rightWindow = _gui->getViewport("right")->getWindow("main");
 
-	// Left-viewport: mainWindow - billboardManagement
-	_leftWindow->addScreen("scriptEditorMenuMain");
-	_leftWindow->getScreen("scriptEditorMenuMain")->addButton("inputEvents", vec2(0.0f, 0.63f), vec2(GW("Input events"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Input events", LVC::textColor, LVC::textHoverColor);
-	_leftWindow->getScreen("scriptEditorMenuMain")->addButton("collisionEvents", vec2(0.0f, 0.21), vec2(GW("Edit board"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Edit board", LVC::textColor, LVC::textHoverColor);
-	_leftWindow->getScreen("scriptEditorMenuMain")->addButton("timeEvents", vec2(0.0f, -0.21), vec2(GW("Delete board"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Delete board", LVC::textColor, LVC::textHoverColor);
-	_leftWindow->getScreen("scriptEditorMenuMain")->addButton("back", vec2(0.0f, -0.63f), vec2(GW("Go back"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Go back", LVC::textColor, LVC::textHoverColor);
+	// Left-viewport screen
+	string screenID = "scriptEditorMenuMain";
+	_leftWindow->addScreen(screenID);
+	_leftWindow->getScreen(screenID)->addButton("addLine", vec2(0.0f, 0.7f), vec2(GW("Add script"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Add script", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("deleteLine", vec2(0.0f, 0.35f), vec2(GW("Delete script"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Delete script", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("createLine", vec2(0.0f, 0.0f), vec2(GW("Create script"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Create script", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("viewLine", vec2(0.0f, -0.35f), vec2(GW("View script"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "View script", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("back", vec2(0.0f, -0.7f), vec2(GW("Go back"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Go back", LVC::textColor, LVC::textHoverColor);
 }
 
 void ScriptEditor::load()
@@ -54,6 +57,7 @@ void ScriptEditor::load()
 	_inputKeyNames = { "KEY_A", "KEY_B", "KEY_C", "KEY_D", "KEY_E", "KEY_F", "KEY_G", "KEY_H", "KEY_i", "KEY_J", "KEY_K", "KEY_L", "KEY_M",
 		"KEY_N", "KEY_O", "KEY_P", "KEY_Q", "KEY_R", "KEY_S", "KEY_T", "KEY_U", "KEY_V", "KEY_W", "KEY_X", "KEY_Y", "KEY_Z" };
 	_inputMouseNames = { "BUTTON_LEFT", "BUTTON_MIDDLE", "BUTTON_RIGHT", "SCROLL_UP", "SCROLL_DOWN" };
+	_inputMethodNames = { "DOWN", "PRESSED", "TOGGLED" };
 
 	// Collision event
 
@@ -61,8 +65,9 @@ void ScriptEditor::load()
 	
 	// Condition event
 
-	// Add first choice list
-	addChoiceList(ChoiceListType::EVENT_TYPES);
+	// Load script
+
+	// Miscellaneous
 	_isLoaded = true;
 }
 
@@ -73,5 +78,24 @@ void ScriptEditor::save()
 
 void ScriptEditor::unload()
 {
+	// Graphics
+	_fe3d.gfx_disableAmbientLighting();
+	_fe3d.gfx_disableDirectionalLighting();
+	_fe3d.gfx_disableSpecularLighting();
+	_fe3d.gfx_disableNormalMapping();
 
+	// Delete added entities
+	_fe3d.gameEntity_deleteAll();
+	_fe3d.billboardEntity_deleteAll();
+
+	// Reset editor properties
+	_script.reset();
+	_choiceListStack.clear();
+	_eventTypeNames.clear();
+	_inputTypeNames.clear();
+	_inputKeyNames.clear();
+	_inputMouseNames.clear();
+	_scrollingAcceleration = 0.0f;
+	_currentScriptLineID = "";
+	_isLoaded = false;
 }

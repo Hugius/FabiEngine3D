@@ -4,7 +4,7 @@
 
 enum class ScriptActionType
 {
-
+	CAMERA
 };
 
 class ScriptAction

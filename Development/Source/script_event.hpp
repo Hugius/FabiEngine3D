@@ -7,7 +7,8 @@ enum class ScriptEventType
 	INIT_EVENT,
 	INPUT_EVENT,
 	COLLISION_EVENT,
-	TIME_EVENT
+	TIME_EVENT,
+	CONDITION_EVENT
 };
 
 class ScriptEvent

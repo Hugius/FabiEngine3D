@@ -12,7 +12,22 @@ class ScriptEditor final
 
 		INPUT_TYPES,
 		INPUT_KEY_NAMES,
-		INPUT_MOUSE_NAMES
+		INPUT_MOUSE_NAMES,
+		INPUT_METHODS
+	};
+
+	struct ChoiceList final
+	{
+		ChoiceList(ChoiceListType typ, int tot) : type(typ), total(tot)
+		{
+
+		}
+
+		const ChoiceListType type;
+
+		const int total;
+
+		int selected = -1;
 	};
 
 public:
@@ -31,25 +46,35 @@ public:
 	const Script& getScript();
 
 private:
-	void addChoiceList(ChoiceListType list);
-	void removeChoiceList();
+	void _updateGUI();
+	void _updateChoiceLists();
+	void _updateNavigation();
+	void _updateMiscellaneous();
+	void _generateScriptLineInterface(ScriptLine& scriptLine);
+	void _addChoiceList(ChoiceListType list);
+	void _removeChoiceList();
 
 	FabiEngine3D& _fe3d;
 	shared_ptr<EngineGuiManager> _gui;
 	shared_ptr<EngineGuiWindow> _leftWindow;
+	shared_ptr<EngineGuiWindow> _rightWindow;
 	Script _script;
 
 	string _currentProjectName = "";
+	string _currentScriptLineID = "";
 
-	vector<std::pair<ChoiceListType, int>> _choiceListStack;
+	vector<ChoiceList> _choiceListStack;
 	vector<string> _eventTypeNames;
 	vector<string> _inputTypeNames;
 	vector<string> _inputKeyNames;
 	vector<string> _inputMouseNames;
+	vector<string> _inputMethodNames;
 
 	float _scrollingAcceleration = 0.0f;
 	const float _maxScrollingAcceleration = 0.3f;
 	const float _optionBillboardHeight = 0.75f;
 
+	shared_ptr<ScriptEvent> _currentEventToAdd;
+	bool _isCreatingScript = false;
 	bool _isLoaded = false;
 };

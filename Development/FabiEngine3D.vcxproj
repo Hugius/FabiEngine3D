@@ -164,6 +164,8 @@
     <ClInclude Include="Source\engine_gui_scrollinglist.hpp" />
     <ClInclude Include="Source\script.hpp" />
     <ClInclude Include="Source\script_action.hpp" />
+    <ClInclude Include="Source\script_action_camera.hpp" />
+    <ClInclude Include="Source\script_event_condition.hpp" />
     <ClInclude Include="Source\script_event_init.hpp" />
     <ClInclude Include="Source\scene_editor.hpp" />
     <ClInclude Include="Source\left_viewport_controller.hpp" />
@@ -295,11 +297,13 @@
     <ClCompile Include="Source\right_viewport_controller.cpp" />
     <ClCompile Include="Source\script.cpp" />
     <ClCompile Include="Source\script_action.cpp" />
+    <ClCompile Include="Source\script_action_camera.cpp" />
     <ClCompile Include="Source\script_editor_core.cpp" />
     <ClCompile Include="Source\script_editor_misc.cpp" />
     <ClCompile Include="Source\script_editor_updates.cpp" />
     <ClCompile Include="Source\script_event.cpp" />
     <ClCompile Include="Source\script_event_collision.cpp" />
+    <ClCompile Include="Source\script_event_condition.cpp" />
     <ClCompile Include="Source\script_event_init.cpp" />
     <ClCompile Include="Source\script_event_input.cpp" />
     <ClCompile Include="Source\script_event_time.cpp" />

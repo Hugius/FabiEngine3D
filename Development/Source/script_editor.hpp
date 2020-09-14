@@ -55,9 +55,10 @@ private:
 	void _updateChoiceLists();
 	void _updateNavigation();
 	void _updateMiscellaneous();
-	void _generateScriptLineInterface(ScriptLine& scriptLine);
-	void _addChoiceList(ChoiceListType list);
+	void _generateScriptLineOverview(ScriptLine& scriptLine);
+	void _addChoiceList(ChoiceListType list, int activeIndex = -1);
 	void _removeChoiceList();
+	void _clearChoiceLists();
 	void _addNewScriptLine(const string& newID);
 
 	FabiEngine3D& _fe3d;
@@ -76,9 +77,14 @@ private:
 	vector<string> _inputMouseNames;
 	vector<string> _inputMethodNames;
 
+	vec3 _cameraStartingPosition = vec3(0.0f, 0.0f, 10.0f);
+
 	float _scrollingAcceleration = 0.0f;
+	float _cameraAcceleration = 0.0f;
 	const float _maxScrollingAcceleration = 0.3f;
 	const float _optionBillboardHeight = 0.75f;
+
+	unsigned int _pointLightCounter = 0;
 
 	shared_ptr<ScriptEvent> _currentEventToAdd;
 	bool _allowedToAddScript = false;

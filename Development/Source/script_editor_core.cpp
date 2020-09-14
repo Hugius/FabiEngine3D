@@ -29,23 +29,26 @@ void ScriptEditor::initializeGUI()
 void ScriptEditor::load()
 {
 	// Camera
-	_fe3d.camera_load(70.0f, 0.1f, 100.0f, vec3(0.0f, 0.0f, 10.0f), -90.0f);
+	_fe3d.camera_load(70.0f, 0.1f, 100.0f, _cameraStartingPosition, -90.0f);
 
 	// Graphics
-	_fe3d.gfx_enableAmbientLighting(vec3(1.0f), 0.25f);
-	_fe3d.gfx_enableDirectionalLighting(vec3(100.0f), vec3(1.0f), 1.0f);
+	_fe3d.gfx_enableDirectionalLighting(vec3(100.0f), vec3(1.0f), 0.75f);
 	_fe3d.gfx_enableSpecularLighting();
 	_fe3d.gfx_enableNormalMapping();
+	_fe3d.gfx_enablePointLighting();
 
 	// Background
-	_fe3d.gameEntity_add("background", "Engine\\OBJs\\plane.obj", vec3(0.0f), vec3(90.0f, 0.0f, 0.0f), vec3(20.0f));
+	_fe3d.gameEntity_add("background", "Engine\\OBJs\\plane.obj", vec3(0.0f), vec3(90.0f, 0.0f, 0.0f), vec3(100.0f));
 	_fe3d.gameEntity_setDiffuseMap("background", "Engine\\Textures\\brick.png");
 	_fe3d.gameEntity_setNormalMap("background", "Engine\\Textures\\brick_normal.png");
 	_fe3d.gameEntity_setSpecularLighted("background", true);
 	_fe3d.gameEntity_setSpecularFactor("background", 32.0f);
 	_fe3d.gameEntity_setSpecularIntensity("background", 1.0f);
-	_fe3d.gameEntity_setUvRepeat("background", 5.0f);
+	_fe3d.gameEntity_setUvRepeat("background", 25.0f);
 	_fe3d.gameEntity_setNormalMapped("background", true);
+
+	// Selection light
+	_fe3d.lightEntity_add("selectionLight", vec3(0.0f), vec3(0.0f, 1.0f, 0.0f), 2.5f, 10.0f);
 
 	// Event types
 	_eventTypeNames = { "INIT_EVENT", "INPUT_EVENT", "COLLISION_EVENT", "TIME_EVENT", "CONDITION_EVENT" };
@@ -79,14 +82,15 @@ void ScriptEditor::save()
 void ScriptEditor::unload()
 {
 	// Graphics
-	_fe3d.gfx_disableAmbientLighting();
 	_fe3d.gfx_disableDirectionalLighting();
 	_fe3d.gfx_disableSpecularLighting();
 	_fe3d.gfx_disableNormalMapping();
+	_fe3d.gfx_disablePointLighting();
 
 	// Delete added entities
 	_fe3d.gameEntity_deleteAll();
 	_fe3d.billboardEntity_deleteAll();
+	_fe3d.lightEntity_deleteAll();
 
 	// Reset editor properties
 	_script.reset();

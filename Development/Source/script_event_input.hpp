@@ -30,13 +30,15 @@ public:
 
 	InputType getInputType();
 	InputMethod getInputMethod();
+	Input getInputElement();
+	int getInputElementIndex();
 
 private:
 	InputType _inputType = InputType::NONE;
 	InputMethod _inputMethod = InputMethod::NONE;
 	Input _inputElement = Input::NONE;
 
-	static inline const map<string, Input> _inputStringMap = 
+	static inline const map<string, Input> _keyInputStringMap = 
 	{
 		{"KEY_A", Input::KEY_A},
 		{"KEY_B", Input::KEY_B},
@@ -64,5 +66,14 @@ private:
 		{"KEY_X", Input::KEY_X},
 		{"KEY_Y", Input::KEY_Y},
 		{"KEY_Z", Input::KEY_Z}
+	};
+
+	static inline const map<string, Input> _mouseInputStringMap =
+	{
+		{"BUTTON_LEFT", Input::MOUSE_BUTTON_LEFT},
+		{"BUTTON_MIDDLE", Input::MOUSE_BUTTON_MIDDLE},
+		{"BUTTON_RIGHT", Input::MOUSE_BUTTON_RIGHT},
+		{"SCROLL_UP", Input::KEY_D},
+		{"SCROLL_DOWN", Input::KEY_E}
 	};
 };

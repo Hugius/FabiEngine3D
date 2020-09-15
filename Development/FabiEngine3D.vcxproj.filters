@@ -436,6 +436,9 @@
     <ClCompile Include="Source\script_editor_interface.cpp">
       <Filter>src\Editor System\Script Editor</Filter>
     </ClCompile>
+    <ClCompile Include="Source\script_executor.cpp">
+      <Filter>src\Scripting System\Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\obj_loader.hpp">
@@ -716,6 +719,12 @@
     </ClInclude>
     <ClInclude Include="Source\script_event_condition.hpp">
       <Filter>src\Scripting System\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\script_executor.hpp">
+      <Filter>src\Scripting System\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\script_line.hpp">
+      <Filter>src\Scripting System\Core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -10,3 +10,8 @@ void ScriptActionCamera::execute()
 {
 	_fe3d.logger_throwInfo("JEMOEDER");
 }
+
+void ScriptActionCamera::reset()
+{
+
+}

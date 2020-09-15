@@ -38,8 +38,8 @@ private:
 	float _totalCameraRotation = 0.0f;
 	string _currentProjectName = "";
 	FabiEngine3D& _fe3d;
-	shared_ptr<EngineGuiManager> _gui;
-	shared_ptr<EngineGuiWindow> _leftWindow;
+	shared_ptr<EngineGuiManager> _gui = nullptr;
+	shared_ptr<EngineGuiWindow> _leftWindow = nullptr;
 
 	// Sky functions
 	void _saveSkyData();

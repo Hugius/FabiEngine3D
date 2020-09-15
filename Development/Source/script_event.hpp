@@ -17,6 +17,10 @@ public:
 	ScriptEvent(FabiEngine3D& fe3d, ScriptEventType eventType);
 
 	virtual bool isTriggered() = 0;
+	virtual void reset()
+	{
+
+	}
 
 	const ScriptEventType getType();
 

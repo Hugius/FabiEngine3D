@@ -4,7 +4,7 @@
 #include <fstream>
 #include <sstream>
 
-#define GW(text) LVC::calcTextWidth(text, 0.15f, 1.8f)
+#define GW(text) LVPC::calcTextWidth(text, 0.15f, 1.8f)
 
 SettingsEditor::SettingsEditor(FabiEngine3D& fe3d, shared_ptr<EngineGuiManager> gui) :
 	_fe3d(fe3d),
@@ -22,14 +22,14 @@ void SettingsEditor::initializeGUI()
 	// Left-viewport: mainWindow - settingsEditorMenuMain
 	screenID = "settingsEditorMenuMain";
 	_leftWindow->addScreen(screenID);
-	_leftWindow->getScreen(screenID)->addButton("mouseSensitivity", vec2(0.0f, 0.83f), vec2(GW("Mouse speed"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Mouse speed", LVC::textColor, LVC::textHoverColor);
-	_leftWindow->getScreen(screenID)->addButton("cameraFov", vec2(0.0f, 0.59f), vec2(GW("Camera FOV"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Camera FOV", LVC::textColor, LVC::textHoverColor);
-	_leftWindow->getScreen(screenID)->addButton("msaaQuality", vec2(0.0f, 0.36f), vec2(GW("MSAA"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "MSAA", LVC::textColor, LVC::textHoverColor);
-	_leftWindow->getScreen(screenID)->addButton("shadowQuality", vec2(0.0f, 0.13f), vec2(GW("Shadows"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Shadows", LVC::textColor, LVC::textHoverColor);
-	_leftWindow->getScreen(screenID)->addButton("reflectionQuality", vec2(0.0f, -0.1f), vec2(GW("Reflections"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Reflections", LVC::textColor, LVC::textHoverColor);
-	_leftWindow->getScreen(screenID)->addButton("refractionQuality", vec2(0.0f, -0.33f), vec2(GW("Refractions"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Refractions", LVC::textColor, LVC::textHoverColor);
-	_leftWindow->getScreen(screenID)->addButton("maxAudioChannels", vec2(0.0f, -0.56f), vec2(GW("Audio"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Audio", LVC::textColor, LVC::textHoverColor);
-	_leftWindow->getScreen(screenID)->addButton("back", vec2(0.0f, -0.79f), vec2(GW("Go back"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Go back", LVC::textColor, LVC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("mouseSensitivity", vec2(0.0f, 0.83f), vec2(GW("Mouse speed"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Mouse speed", LVPC::textColor, LVPC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("cameraFov", vec2(0.0f, 0.59f), vec2(GW("Camera FOV"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Camera FOV", LVPC::textColor, LVPC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("msaaQuality", vec2(0.0f, 0.36f), vec2(GW("MSAA"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "MSAA", LVPC::textColor, LVPC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("shadowQuality", vec2(0.0f, 0.13f), vec2(GW("Shadows"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Shadows", LVPC::textColor, LVPC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("reflectionQuality", vec2(0.0f, -0.1f), vec2(GW("Reflections"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Reflections", LVPC::textColor, LVPC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("refractionQuality", vec2(0.0f, -0.33f), vec2(GW("Refractions"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Refractions", LVPC::textColor, LVPC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("maxAudioChannels", vec2(0.0f, -0.56f), vec2(GW("Audio"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Audio", LVPC::textColor, LVPC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("back", vec2(0.0f, -0.79f), vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
 }
 
 void SettingsEditor::load()

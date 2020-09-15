@@ -8,7 +8,8 @@ public:
 	using ScriptEvent::ScriptEvent;
 
 	bool isTriggered() override;
+	void reset() override;
 
 private:
-
+	bool _isAlreadyTriggered = false;
 };

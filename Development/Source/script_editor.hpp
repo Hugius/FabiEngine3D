@@ -3,6 +3,7 @@
 #include "fabi_engine_3d.hpp"
 #include "engine_gui_manager.hpp"
 #include "script.hpp"
+#include "script_executor.hpp"
 #include "script_event_init.hpp"
 #include "script_event_input.hpp"
 #include "script_event_time.hpp"
@@ -45,10 +46,9 @@ public:
 	void unload();
 	void update();
 	void setCurrentProjectName(const string & projectName);
+	shared_ptr<ScriptExecutor> getScriptExecutor();
 
 	bool isLoaded();
-
-	const Script& getScript();
 
 private:
 	void _updateGUI();
@@ -60,16 +60,19 @@ private:
 	void _removeChoiceList();
 	void _clearChoiceLists();
 	void _addNewScriptLine(const string& newID);
+	void _loadScript();
+	void _unloadScript();
 
+	// General stuff
 	FabiEngine3D& _fe3d;
-	shared_ptr<EngineGuiManager> _gui;
-	shared_ptr<EngineGuiWindow> _leftWindow;
-	shared_ptr<EngineGuiWindow> _rightWindow;
-	Script _script;
+	shared_ptr<EngineGuiManager> _gui = nullptr;
+	shared_ptr<EngineGuiWindow> _leftWindow = nullptr;
+	shared_ptr<EngineGuiWindow> _rightWindow = nullptr;
+	shared_ptr<ScriptEvent> _currentEventToAdd = nullptr;
+	shared_ptr<Script> _script = nullptr;
+	shared_ptr<ScriptExecutor> _scriptExecutor = nullptr;
 
-	string _currentProjectName = "";
-	string _currentScriptLineID = "";
-
+	// Option names for front-end
 	vector<ChoiceList> _choiceListStack;
 	vector<string> _eventTypeNames;
 	vector<string> _inputTypeNames;
@@ -77,16 +80,15 @@ private:
 	vector<string> _inputMouseNames;
 	vector<string> _inputMethodNames;
 
-	vec3 _cameraStartingPosition = vec3(0.0f, 0.0f, 10.0f);
-
+	// Editor variables
+	string _currentProjectName = "";
+	string _currentScriptLineID = "";
+	const vec3 _cameraStartingPosition = vec3(0.0f, 0.0f, 10.0f);
 	float _scrollingAcceleration = 0.0f;
 	float _cameraAcceleration = 0.0f;
 	const float _maxScrollingAcceleration = 0.3f;
 	const float _optionBillboardHeight = 0.75f;
-
 	unsigned int _pointLightCounter = 0;
-
-	shared_ptr<ScriptEvent> _currentEventToAdd;
 	bool _allowedToAddScript = false;
 	bool _isCreatingScript = false;
 	bool _isLoaded = false;

@@ -74,8 +74,8 @@ private:
 	const float _scrollWheelDivider = 15.0f;
 
 	FabiEngine3D& _fe3d;
-	shared_ptr<EngineGuiManager> _gui;
-	shared_ptr<EngineGuiWindow> _leftWindow;
+	shared_ptr<EngineGuiManager> _gui = nullptr;
+	shared_ptr<EngineGuiWindow> _leftWindow = nullptr;
 	
 	string _currentModelName = "";
 	string _currentProjectName = "";

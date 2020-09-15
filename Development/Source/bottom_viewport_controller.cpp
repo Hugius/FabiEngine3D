@@ -1,7 +1,7 @@
 #include "bottom_viewport_controller.hpp"
 #include "left_viewport_controller.hpp"
 
-#define GW(text) LVC::calcTextWidth(text, 0.04f, 2.0f)
+#define GW(text) LVPC::calcTextWidth(text, 0.04f, 2.0f)
 
 void BottomViewportController::initialize()
 {
@@ -39,6 +39,7 @@ void BottomViewportController::initialize()
 	_gui->getViewport("bottom")->getWindow("controls")->addScreen("modelEditor");
 	_gui->getViewport("bottom")->getWindow("controls")->addScreen("billboardEditor");
 	_gui->getViewport("bottom")->getWindow("controls")->addScreen("sceneEditor");
+	_gui->getViewport("bottom")->getWindow("controls")->addScreen("scriptEditor");
 	_gui->getViewport("bottom")->getWindow("controls")->setActiveScreen("mainMenu");
 
 	// Positioning values
@@ -102,6 +103,15 @@ void BottomViewportController::initialize()
 	sceneScreen->addTextfield("shift", vec2(textX + xOffset * 2.0f, yTwo - textOffset), vec2(GW("Down"), charHeight), "Down", vec3(1.0f), false);
 	sceneScreen->addRectangle("space", vec2(keyX + xOffset * 2.0f, yThree), keySize, "space.png");
 	sceneScreen->addTextfield("space", vec2(textX + xOffset * 2.0f, yThree - textOffset), vec2(GW("Up"), charHeight), "Up", vec3(1.0f), false);
+
+	// Scripting editor screen
+	auto scriptingScreen = _gui->getViewport("bottom")->getWindow("controls")->getScreen("scriptEditor");
+	scriptingScreen->addRectangle("mouse", vec2(keyX, yOne), keySize, "mouse.png");
+	scriptingScreen->addTextfield("mouse", vec2(textX, yOne - textOffset), vec2(GW("Scrolling"), charHeight), "Scrolling", vec3(1.0f), false);
+	scriptingScreen->addRectangle("a", vec2(keyX, yTwo), keySize, "a.png");
+	scriptingScreen->addTextfield("a", vec2(textX, yTwo - textOffset), vec2(GW("Left"), charHeight), "Left", vec3(1.0f), false);
+	scriptingScreen->addRectangle("d", vec2(keyX, yThree), keySize, "d.png");
+	scriptingScreen->addTextfield("d", vec2(textX, yThree - textOffset), vec2(GW("Right"), charHeight), "Right", vec3(1.0f), false);
 }
 
 void BottomViewportController::update()

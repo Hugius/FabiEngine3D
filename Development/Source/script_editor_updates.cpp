@@ -27,7 +27,7 @@ void ScriptEditor::_updateGUI()
 			{
 				// Remove line from script
 				_clearChoiceLists();
-				_script.removeLine(_currentScriptLineID);
+				_script->removeLine(_currentScriptLineID);
 				_currentScriptLineID = "";
 			}
 			else if (screen->getButton("createLine")->isHovered())
@@ -39,14 +39,25 @@ void ScriptEditor::_updateGUI()
 			}
 			else if (screen->getButton("viewLine")->isHovered())
 			{
-				_gui->getGlobalScreen()->addChoiceForm("scriptLinesList", "View script", vec2(0.0f, 0.0f), _script.getAllScriptIDs());
+				_gui->getGlobalScreen()->addChoiceForm("scriptLinesList", "View script", vec2(0.0f, 0.0f), _script->getAllScriptIDs());
 			}
 			else if (screen->getButton("back")->isHovered())
 			{
-				save();
-				unload();
-				_leftWindow->setActiveScreen("main");
+				_gui->getGlobalScreen()->addAnswerForm("exitScriptEditor", "Save changes?", vec2(0.0f, 0.25f));
 			}
+		}
+
+		// Check if user wants to save changes
+		if (_gui->getGlobalScreen()->isAnswerFormConfirmed("exitScriptEditor"))
+		{
+			save();
+			unload();
+			_leftWindow->setActiveScreen("main");
+		}
+		else if (_gui->getGlobalScreen()->isAnswerFormCancelled("exitScriptEditor"))
+		{
+			unload();
+			_leftWindow->setActiveScreen("main");
 		}
 	}
 }
@@ -292,7 +303,7 @@ void ScriptEditor::_updateMiscellaneous()
 		if (_gui->getGlobalScreen()->checkValueForm("newScriptLineName", newScriptLineName))
 		{
 			// Check if name not existing yet
-			if (_script.isExisting(newScriptLineName))
+			if (_script->isExisting(newScriptLineName))
 			{
 				Logger::getInst().throwWarning("Script \"" + newScriptLineName + "\"" + " already exists!");
 			}
@@ -308,7 +319,7 @@ void ScriptEditor::_updateMiscellaneous()
 		{
 			if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
 			{
-				_generateScriptLineOverview(_script.getScriptLine(selectedButtonID));
+				_generateScriptLineOverview(_script->getScriptLine(selectedButtonID));
 				_gui->getGlobalScreen()->removeChoiceForm("scriptLinesList");
 				_currentScriptLineID = selectedButtonID;
 				_isCreatingScript = false;

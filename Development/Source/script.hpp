@@ -1,27 +1,18 @@
 #pragma once
 
-#include "script_event.hpp"
-#include "script_action.hpp"
-
-struct ScriptLine
-{
-	string ID;
-
-	shared_ptr<ScriptEvent> event;
-	shared_ptr<ScriptAction> action;
-};
+#include "script_line.hpp"
 
 class Script
 {
 public:
-	Script();
+	Script() = default;
 
 	void addLine(const string& ID, shared_ptr<ScriptEvent> event, shared_ptr<ScriptAction> action);
 	void removeLine(const string& ID);
-	void reset();
 	void execute();
+	void reset();
 
-	int getLineCount();
+	unsigned int getLineCount();
 
 	bool isExisting(const string& ID);
 

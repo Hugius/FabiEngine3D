@@ -8,6 +8,7 @@ public:
 	ScriptActionCamera(FabiEngine3D& fe3d);
 
 	void execute() override;
+	void reset() override;
 
 private:
 	

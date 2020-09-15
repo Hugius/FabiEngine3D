@@ -82,12 +82,12 @@ private:
 
 	// Instances
 	FabiEngine3D& _fe3d;
-	shared_ptr<EngineGuiManager> _gui;
+	shared_ptr<EngineGuiManager> _gui = nullptr;
 	WorldEditor& _worldEditor;
 	ModelEditor& _modelEditor;
 	BillboardEditor& _billboardEditor;
-	shared_ptr<EngineGuiWindow> _leftWindow;
-	shared_ptr<EngineGuiWindow> _rightWindow;
+	shared_ptr<EngineGuiWindow> _leftWindow = nullptr;
+	shared_ptr<EngineGuiWindow> _rightWindow = nullptr;
 
 	// Model variables
 	string _currentPreviewModelName = "";

@@ -1,6 +1,6 @@
 #include "left_viewport_controller.hpp"
 
-#define GW(text) LVC::calcTextWidth(text, 0.125f, 1.8f)
+#define GW(text) LVPC::calcTextWidth(text, 0.125f, 1.8f)
 
 LeftViewportController::LeftViewportController(FabiEngine3D& fe3d, shared_ptr<EngineGuiManager> gui) :
 	ViewportController(fe3d, gui),
@@ -17,16 +17,16 @@ LeftViewportController::LeftViewportController(FabiEngine3D& fe3d, shared_ptr<En
 void LeftViewportController::initialize()
 {
 	// Left-viewport: mainWindow - mainScreen
-	_gui->getViewport("left")->addWindow("main", vec2(0.0f), vec2(1.9f, 2.0f), LVC::frameColor);
+	_gui->getViewport("left")->addWindow("main", vec2(0.0f), vec2(1.9f, 2.0f), LVPC::frameColor);
 	_gui->getViewport("left")->getWindow("main")->addScreen("main");
 	_gui->getViewport("left")->getWindow("main")->setActiveScreen("main");
-	_gui->getViewport("left")->getWindow("main")->getScreen("main")->addButton("worldEditor", vec2(0.0f, 0.7875f), vec2(GW("Environment"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Environment", LVC::textColor, LVC::textHoverColor);
-	_gui->getViewport("left")->getWindow("main")->getScreen("main")->addButton("modelEditor", vec2(0.0f, 0.525f), vec2(GW("Models"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Models", LVC::textColor, LVC::textHoverColor);
-	_gui->getViewport("left")->getWindow("main")->getScreen("main")->addButton("billboardEditor", vec2(0.0f, 0.2625f), vec2(GW("Billboards"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Billboards", LVC::textColor, LVC::textHoverColor);
-	_gui->getViewport("left")->getWindow("main")->getScreen("main")->addButton("sceneEditor", vec2(0.0f, 0.0f), vec2(GW("Scenes"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Scenes", LVC::textColor, LVC::textHoverColor);
-	_gui->getViewport("left")->getWindow("main")->getScreen("main")->addButton("animationEditor", vec2(0.0f, -0.2625f), vec2(GW("Animations"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Animations", LVC::textColor, LVC::textHoverColor);
-	_gui->getViewport("left")->getWindow("main")->getScreen("main")->addButton("scriptEditor", vec2(0.0f, -0.525f), vec2(GW("Visual scripting"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Visual scripting", LVC::textColor, LVC::textHoverColor);
-	_gui->getViewport("left")->getWindow("main")->getScreen("main")->addButton("settingsEditor", vec2(0.0f, -0.7875f), vec2(GW("Settings"), 0.1f), LVC::buttonColor, LVC::buttonHoverColor, "Settings", LVC::textColor, LVC::textHoverColor);
+	_gui->getViewport("left")->getWindow("main")->getScreen("main")->addButton("worldEditor", vec2(0.0f, 0.7875f), vec2(GW("Environment"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Environment", LVPC::textColor, LVPC::textHoverColor);
+	_gui->getViewport("left")->getWindow("main")->getScreen("main")->addButton("modelEditor", vec2(0.0f, 0.525f), vec2(GW("Models"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Models", LVPC::textColor, LVPC::textHoverColor);
+	_gui->getViewport("left")->getWindow("main")->getScreen("main")->addButton("billboardEditor", vec2(0.0f, 0.2625f), vec2(GW("Billboards"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Billboards", LVPC::textColor, LVPC::textHoverColor);
+	_gui->getViewport("left")->getWindow("main")->getScreen("main")->addButton("sceneEditor", vec2(0.0f, 0.0f), vec2(GW("Scenes"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Scenes", LVPC::textColor, LVPC::textHoverColor);
+	_gui->getViewport("left")->getWindow("main")->getScreen("main")->addButton("animationEditor", vec2(0.0f, -0.2625f), vec2(GW("Animations"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Animations", LVPC::textColor, LVPC::textHoverColor);
+	_gui->getViewport("left")->getWindow("main")->getScreen("main")->addButton("scriptEditor", vec2(0.0f, -0.525f), vec2(GW("Visual scripting"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Visual scripting", LVPC::textColor, LVPC::textHoverColor);
+	_gui->getViewport("left")->getWindow("main")->getScreen("main")->addButton("settingsEditor", vec2(0.0f, -0.7875f), vec2(GW("Settings"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Settings", LVPC::textColor, LVPC::textHoverColor);
 	
 	// Initialize editors GUI
 	_modelEditor.initializeGUI();

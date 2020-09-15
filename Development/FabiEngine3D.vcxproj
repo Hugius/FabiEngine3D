@@ -176,6 +176,8 @@
     <ClInclude Include="Source\script_event_time.hpp" />
     <ClInclude Include="Source\script_event_collision.hpp" />
     <ClInclude Include="Source\script_event.hpp" />
+    <ClInclude Include="Source\script_executor.hpp" />
+    <ClInclude Include="Source\script_line.hpp" />
     <ClInclude Include="Source\settings_editor.hpp" />
     <ClInclude Include="Source\top_viewport_controller.hpp" />
     <ClInclude Include="Source\engine_gui_global_screen.hpp" />
@@ -308,6 +310,7 @@
     <ClCompile Include="Source\script_event_init.cpp" />
     <ClCompile Include="Source\script_event_input.cpp" />
     <ClCompile Include="Source\script_event_time.cpp" />
+    <ClCompile Include="Source\script_executor.cpp" />
     <ClCompile Include="Source\settings_editor.cpp" />
     <ClCompile Include="Source\top_viewport_controller.cpp" />
     <ClCompile Include="Source\engine_gui_button.cpp" />

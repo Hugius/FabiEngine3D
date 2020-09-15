@@ -1,11 +1,6 @@
 #include "script.hpp"
 #include "logger.hpp"
 
-Script::Script()
-{
-
-}
-
 void Script::addLine(const string& ID, shared_ptr<ScriptEvent> event, shared_ptr<ScriptAction> action)
 {
 	ScriptLine scriptLine;
@@ -33,11 +28,6 @@ void Script::removeLine(const string& ID)
 	Logger::getInst().throwError("Could not erase script line with ID: " + ID);
 }
 
-void Script::reset()
-{
-	_scriptLines.clear();
-}
-
 void Script::execute()
 {
 	for (auto& scriptLine : _scriptLines)
@@ -52,7 +42,25 @@ void Script::execute()
 	}
 }
 
-int Script::getLineCount()
+void Script::reset()
+{
+	// Reset all initialization events
+	for (auto& scriptLine : _scriptLines)
+	{
+		if (scriptLine.event->getType() == ScriptEventType::INIT_EVENT)
+		{
+			scriptLine.event->reset();
+		}
+	}
+
+	// Reset all actions
+	for (auto& scriptLine : _scriptLines)
+	{
+		scriptLine.action.reset();
+	}
+}
+
+unsigned int Script::getLineCount()
 {
 	return _scriptLines.size();
 }

@@ -8,7 +8,7 @@
 #include "script_editor.hpp"
 #include "settings_editor.hpp"
 
-#define LVC LeftViewportController
+#define LVPC LeftViewportController
 
 class LeftViewportController final : public ViewportController
 {

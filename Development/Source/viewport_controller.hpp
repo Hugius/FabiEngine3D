@@ -14,5 +14,5 @@ public:
 protected:
 	FabiEngine3D& _fe3d;
 
-	shared_ptr<EngineGuiManager> _gui;
+	shared_ptr<EngineGuiManager> _gui = nullptr;
 };

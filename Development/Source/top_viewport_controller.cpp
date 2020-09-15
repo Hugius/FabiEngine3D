@@ -7,13 +7,16 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 
+#define SCRIPT_EXECUTOR _scriptEditor.getScriptExecutor()
+
 TopViewportController::TopViewportController(FabiEngine3D& fe3d, shared_ptr<EngineGuiManager> gui, 
-	ModelEditor& modelEditor, WorldEditor& worldEditor, BillboardEditor& billboardEditor, SceneEditor& sceneEditor) :
+	ModelEditor& modelEditor, WorldEditor& worldEditor, BillboardEditor& billboardEditor, SceneEditor& sceneEditor, ScriptEditor& scriptEditor) :
 	ViewportController(fe3d, gui),
 	_modelEditor(modelEditor),
 	_worldEditor(worldEditor),
 	_billboardEditor(billboardEditor),
-	_sceneEditor(sceneEditor)
+	_sceneEditor(sceneEditor),
+	_scriptEditor(scriptEditor)
 {
 
 }
@@ -21,49 +24,61 @@ TopViewportController::TopViewportController(FabiEngine3D& fe3d, shared_ptr<Engi
 void TopViewportController::initialize()
 {
 	// Top-viewport: projectWindow
-	_gui->getViewport("top")->addWindow("projectWindow", vec2(-0.25f, 0.0f), vec2(0.9825f, 1.5f), TopViewportController::frameColor);
+	_gui->getViewport("top")->addWindow("projectWindow", vec2(-0.25f, 0.0f), vec2(0.9825f, 1.5f), TVPC::frameColor);
 	_gui->getViewport("top")->getWindow("projectWindow")->addScreen("main");
 	_gui->getViewport("top")->getWindow("projectWindow")->setActiveScreen("main");
-	_gui->getViewport("top")->getWindow("projectWindow")->getScreen("main")->addButton("newProject", vec2(-0.767f, 0.0f), vec2(0.15f, 1.25f), TopViewportController::buttonColor, TopViewportController::buttonHoverColor, "NEW", TopViewportController::textColor, TopViewportController::textHoverColor);
-	_gui->getViewport("top")->getWindow("projectWindow")->getScreen("main")->addButton("loadProject", vec2(-0.384, 0.0f), vec2(0.2f, 1.25f), TopViewportController::buttonColor, TopViewportController::buttonHoverColor, "LOAD", TopViewportController::textColor, TopViewportController::textHoverColor);
-	_gui->getViewport("top")->getWindow("projectWindow")->getScreen("main")->addButton("saveProject", vec2(0.0f, 0.0f), vec2(0.2f, 1.25f), TopViewportController::buttonColor, TopViewportController::buttonHoverColor, "SAVE", TopViewportController::textColor, TopViewportController::textHoverColor);
-	_gui->getViewport("top")->getWindow("projectWindow")->getScreen("main")->addButton("deleteProject", vec2(0.384, 0.0f), vec2(0.3f, 1.25f), TopViewportController::buttonColor, TopViewportController::buttonHoverColor, "DELETE", TopViewportController::textColor, TopViewportController::textHoverColor);
-	_gui->getViewport("top")->getWindow("projectWindow")->getScreen("main")->addButton("quitEngine", vec2(0.767f, 0.0f), vec2(0.2f, 1.25f), TopViewportController::buttonColor, TopViewportController::buttonHoverColor, "QUIT", TopViewportController::textColor, TopViewportController::textHoverColor);
+	auto screen = _gui->getViewport("top")->getWindow("projectWindow")->getScreen("main");
+	screen->addButton("newProject", vec2(-0.767f, 0.0f), vec2(0.15f, 1.25f), TVPC::buttonColor, TVPC::buttonHoverColor, "NEW", TVPC::textColor, TVPC::textHoverColor);
+	screen->addButton("loadProject", vec2(-0.384, 0.0f), vec2(0.2f, 1.25f), TVPC::buttonColor, TVPC::buttonHoverColor, "LOAD", TVPC::textColor, TVPC::textHoverColor);
+	screen->addButton("saveProject", vec2(0.0f, 0.0f), vec2(0.2f, 1.25f), TVPC::buttonColor, TVPC::buttonHoverColor, "SAVE", TVPC::textColor, TVPC::textHoverColor);
+	screen->addButton("deleteProject", vec2(0.384, 0.0f), vec2(0.3f, 1.25f), TVPC::buttonColor, TVPC::buttonHoverColor, "DELETE", TVPC::textColor, TVPC::textHoverColor);
+	screen->addButton("quitEngine", vec2(0.767f, 0.0f), vec2(0.2f, 1.25f), TVPC::buttonColor, TVPC::buttonHoverColor, "QUIT", TVPC::textColor, TVPC::textHoverColor);
 
 	// Top-viewport: gameWindow
 	_gui->getViewport("top")->addWindow("gameWindow", vec2(0.25f, 0.0f), vec2(0.9825f, 1.5f), vec3(0.25f));
 	_gui->getViewport("top")->getWindow("gameWindow")->addScreen("main");
 	_gui->getViewport("top")->getWindow("gameWindow")->setActiveScreen("main");
+	screen = _gui->getViewport("top")->getWindow("gameWindow")->getScreen("main");
+	screen->addButton("play", vec2(-0.85f, 0.0f), vec2(0.1f, 1.75f), "play.png", vec3(2.0f));
+	screen->addButton("pause", vec2(-0.65f, 0.0f), vec2(0.1f, 1.75f), "pause.png", vec3(2.0f));
+	screen->addButton("restart", vec2(-0.45f, 0.0f), vec2(0.1f, 1.75f), "restart.png", vec3(2.0f));
+	screen->addButton("stop", vec2(-0.25f, 0.0f), vec2(0.1f, 1.75f), "stop.png", vec3(2.0f));
 }
 
 void TopViewportController::update()
 {
+	_updateProjectManagement();
+	_updateGameManagement();
+}
+
+void TopViewportController::_updateProjectManagement()
+{
 	auto projectWindow = _gui->getViewport("top")->getWindow("projectWindow");
-	auto mainScreen = projectWindow->getScreen("main");
+	auto projectScreen = projectWindow->getScreen("main");
 
 	// Check if LMB pressed
 	if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
 	{
-		if (mainScreen->getButton("newProject")->isHovered())
+		if (projectScreen->getButton("newProject")->isHovered())
 		{
 			_gui->getGlobalScreen()->addValueForm("newProjectName", "Enter project name", "", vec2(0.0f), vec2(0.5f, 0.1f));
 			_creatingProject = true;
 		}
-		else if (mainScreen->getButton("loadProject")->isHovered())
+		else if (projectScreen->getButton("loadProject")->isHovered())
 		{
-			_initializeProjectChoosing();
+			_prepareProjectChoosing();
 			_loadingProject = true;
 		}
-		else if (mainScreen->getButton("saveProject")->isHovered())
+		else if (projectScreen->getButton("saveProject")->isHovered())
 		{
 			_saveCurrentProject();
 		}
-		else if (mainScreen->getButton("deleteProject")->isHovered())
+		else if (projectScreen->getButton("deleteProject")->isHovered())
 		{
-			_initializeProjectChoosing();
+			_prepareProjectChoosing();
 			_deletingProject = true;
 		}
-		else if (mainScreen->getButton("quitEngine")->isHovered())
+		else if (projectScreen->getButton("quitEngine")->isHovered())
 		{
 			if (_currentProjectName != "") // A project must be loaded
 			{
@@ -82,7 +97,7 @@ void TopViewportController::update()
 	_updateProjectDeletion();
 
 	// Update button hoverability
-	mainScreen->getButton("saveProject")->setHoverable(_currentProjectName != "");
+	projectScreen->getButton("saveProject")->setHoverable(_currentProjectName != "");
 	_gui->getViewport("left")->getWindow("main")->getScreen("main")->getButton("modelEditor")->setHoverable(_currentProjectName != "");
 	_gui->getViewport("left")->getWindow("main")->getScreen("main")->getButton("worldEditor")->setHoverable(_currentProjectName != "");
 	_gui->getViewport("left")->getWindow("main")->getScreen("main")->getButton("billboardEditor")->setHoverable(_currentProjectName != "");
@@ -102,30 +117,61 @@ void TopViewportController::update()
 	}
 }
 
-void TopViewportController::_initializeProjectChoosing()
+void TopViewportController::_updateGameManagement()
 {
-	// Get new path
-	string userDirectoryPath = _fe3d.misc_getRootDirectory() + "User\\Projects\\";
+	auto gameWindow = _gui->getViewport("top")->getWindow("gameWindow");
+	auto gameScreen = gameWindow->getScreen("main");
 
-	// Check if projects directory exists
-	if (_fe3d.misc_isDirectory(userDirectoryPath))
+	// Check if LMB pressed
+	if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
 	{
-		// Get all project names
-		vector<string> projectNames;
-		for (const auto& entry : std::filesystem::directory_iterator(userDirectoryPath))
+		if (gameScreen->getButton("play")->isHovered())
 		{
-			string projectName = string(entry.path().u8string());
-			projectName.erase(0, userDirectoryPath.size());
-			projectNames.push_back(projectName);
+			// Unpause game
+			if (SCRIPT_EXECUTOR->isInitialized())
+			{
+				SCRIPT_EXECUTOR->unpause();
+			}
+			else // Load all assets before executing game script
+			{
+				SCRIPT_EXECUTOR->initialize();
+				// load assets <---
+			}
 		}
+		else if (gameScreen->getButton("pause")->isHovered())
+		{
+			SCRIPT_EXECUTOR->pause();
+		}
+		else if (gameScreen->getButton("restart")->isHovered())
+		{
+			SCRIPT_EXECUTOR->reset();
+			// load assets <---
+		}
+		else if (gameScreen->getButton("stop")->isHovered())
+		{
+			SCRIPT_EXECUTOR->reset();
+		}
+	}
 
-		// Add buttons
-		_gui->getGlobalScreen()->addChoiceForm("projectList", "Select project", vec2(0.0f), projectNames);
-	}
-	else
+	// Buttons hoverability
+	bool isInMainMenu = (_gui->getViewport("left")->getWindow("main")->getActiveScreen()->getID() == "main");
+	gameScreen->getButton("play")->setHoverable(isInMainMenu && !SCRIPT_EXECUTOR->isScriptEmpty() && !SCRIPT_EXECUTOR->isRunning());
+	gameScreen->getButton("pause")->setHoverable(isInMainMenu && SCRIPT_EXECUTOR->isRunning());
+	gameScreen->getButton("restart")->setHoverable(isInMainMenu && SCRIPT_EXECUTOR->isInitialized());
+	gameScreen->getButton("stop")->setHoverable(isInMainMenu && SCRIPT_EXECUTOR->isInitialized());
+
+	// Check if player wants to pause the running game
+	if (SCRIPT_EXECUTOR->isRunning())
 	{
-		_fe3d.logger_throwError("\"User\\Projects\\\" folder does not exist anymore!");
+		if (_fe3d.input_getKeyPressed(Input::KEY_ESCAPE))
+		{
+			SCRIPT_EXECUTOR->pause();
+		}
 	}
+
+	// Executing game script (if possible)
+	SCRIPT_EXECUTOR->execute();
+
 }
 
 void TopViewportController::_updateProjectCreation()
@@ -243,6 +289,32 @@ void TopViewportController::_updateProjectDeletion()
 	}
 }
 
+void TopViewportController::_prepareProjectChoosing()
+{
+	// Get new path
+	string userDirectoryPath = _fe3d.misc_getRootDirectory() + "User\\Projects\\";
+
+	// Check if projects directory exists
+	if (_fe3d.misc_isDirectory(userDirectoryPath))
+	{
+		// Get all project names
+		vector<string> projectNames;
+		for (const auto& entry : std::filesystem::directory_iterator(userDirectoryPath))
+		{
+			string projectName = string(entry.path().u8string());
+			projectName.erase(0, userDirectoryPath.size());
+			projectNames.push_back(projectName);
+		}
+
+		// Add buttons
+		_gui->getGlobalScreen()->addChoiceForm("projectList", "Select project", vec2(0.0f), projectNames);
+	}
+	else
+	{
+		_fe3d.logger_throwError("\"User\\Projects\\\" folder does not exist anymore!");
+	}
+}
+
 void TopViewportController::_saveCurrentProject()
 {
 	// Error checking
@@ -256,6 +328,7 @@ void TopViewportController::_saveCurrentProject()
 	_worldEditor.save();
 	_billboardEditor.save();
 	_sceneEditor.save();
+	_scriptEditor.save();
 
 	// Logging
 	_fe3d.logger_throwInfo("Project \"" + _currentProjectName + "\" saved!");

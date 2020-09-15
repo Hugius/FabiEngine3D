@@ -5,12 +5,15 @@
 #include "world_editor.hpp"
 #include "billboard_editor.hpp"
 #include "scene_editor.hpp"
+#include "script_editor.hpp"
+
+#define TVPC TopViewportController
 
 class TopViewportController final : public ViewportController
 {
 public:
 	TopViewportController(FabiEngine3D& fe3d, shared_ptr<EngineGuiManager> gui, 
-		ModelEditor& modelEditor, WorldEditor& worldEditor, BillboardEditor& billboardEditor, SceneEditor& sceneEditor);
+		ModelEditor& modelEditor, WorldEditor& worldEditor, BillboardEditor& billboardEditor, SceneEditor& sceneEditor, ScriptEditor& scriptEditor);
 	~TopViewportController() = default;
 
 	void initialize() override;
@@ -23,10 +26,12 @@ public:
 	static inline const vec3 textHoverColor = vec3(0.0f);
 
 private:
-	void _initializeProjectChoosing();
+	void _updateProjectManagement();
+	void _updateGameManagement();
 	void _updateProjectCreation();
 	void _updateProjectLoading();
 	void _updateProjectDeletion();
+	void _prepareProjectChoosing();
 	void _saveCurrentProject();
 	void _loadCurrentProject();
 
@@ -34,6 +39,7 @@ private:
 	WorldEditor& _worldEditor;
 	BillboardEditor& _billboardEditor;
 	SceneEditor& _sceneEditor;
+	ScriptEditor& _scriptEditor;
 
 	string _currentProjectName = "";
 

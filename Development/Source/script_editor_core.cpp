@@ -48,7 +48,7 @@ void ScriptEditor::load()
 	_fe3d.gameEntity_setNormalMapped("background", true);
 
 	// Selection light
-	_fe3d.lightEntity_add("selectionLight", vec3(0.0f), vec3(0.0f, 1.0f, 0.0f), 2.5f, 10.0f);
+	_fe3d.lightEntity_add("selectionLight", vec3(0.0f), vec3(0.0f, 1.0f, 0.0f), 2.5f, 10.0f, false);
 
 	// Event types
 	_eventTypeNames = { "INIT_EVENT", "INPUT_EVENT", "COLLISION_EVENT", "TIME_EVENT", "CONDITION_EVENT" };

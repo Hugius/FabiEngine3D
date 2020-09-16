@@ -25,6 +25,7 @@ public:
 	void setInputType(InputType type);
 	void setInputMethod(InputMethod method);
 	void setInputElement(string name);
+	void setInputElement(Input element);
 
 	bool isTriggered() override;
 

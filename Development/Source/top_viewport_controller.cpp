@@ -122,56 +122,72 @@ void TopViewportController::_updateGameManagement()
 	auto gameWindow = _gui->getViewport("top")->getWindow("gameWindow");
 	auto gameScreen = gameWindow->getScreen("main");
 
-	// Check if LMB pressed
-	if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
+	// Check if currently a project is loaded
+	if (_currentProjectName == "")
 	{
-		if (gameScreen->getButton("play")->isHovered())
+		gameScreen->getButton("play")->setHoverable(false);
+		gameScreen->getButton("pause")->setHoverable(false);
+		gameScreen->getButton("restart")->setHoverable(false);
+		gameScreen->getButton("stop")->setHoverable(false);
+	}
+	else
+	{
+		// Check if LMB pressed
+		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
 		{
-			// Unpause game
-			if (SCRIPT_EXECUTOR->isInitialized())
+			if (gameScreen->getButton("play")->isHovered())
 			{
-				SCRIPT_EXECUTOR->unpause();
+				// Unpause game or load game
+				if (SCRIPT_EXECUTOR->isInitialized())
+				{
+					SCRIPT_EXECUTOR->unpause();
+				}
+				else
+				{
+					SCRIPT_EXECUTOR->initialize();
+					_sceneEditor.loadScene();
+				}
 			}
-			else // Load all assets before executing game script
+			else if (gameScreen->getButton("pause")->isHovered())
 			{
+				SCRIPT_EXECUTOR->pause();
+			}
+			else if (gameScreen->getButton("restart")->isHovered())
+			{
+				// Unload
+				SCRIPT_EXECUTOR->reset();
+				_sceneEditor.unloadScene();
+
+				// Load again
 				SCRIPT_EXECUTOR->initialize();
 				_sceneEditor.loadScene();
 			}
+			else if (gameScreen->getButton("stop")->isHovered())
+			{
+				SCRIPT_EXECUTOR->reset();
+				_sceneEditor.unloadScene();
+			}
 		}
-		else if (gameScreen->getButton("pause")->isHovered())
+
+		// Buttons hoverability
+		bool isInMainMenu = (_gui->getViewport("left")->getWindow("main")->getActiveScreen()->getID() == "main");
+		gameScreen->getButton("play")->setHoverable(isInMainMenu && !SCRIPT_EXECUTOR->isScriptEmpty() && !SCRIPT_EXECUTOR->isRunning());
+		gameScreen->getButton("pause")->setHoverable(isInMainMenu && SCRIPT_EXECUTOR->isRunning());
+		gameScreen->getButton("restart")->setHoverable(isInMainMenu && SCRIPT_EXECUTOR->isInitialized());
+		gameScreen->getButton("stop")->setHoverable(isInMainMenu && SCRIPT_EXECUTOR->isInitialized());
+
+		// Check if player wants to pause the running game
+		if (SCRIPT_EXECUTOR->isRunning())
 		{
-			SCRIPT_EXECUTOR->pause();
+			if (_fe3d.input_getKeyPressed(Input::KEY_ESCAPE))
+			{
+				SCRIPT_EXECUTOR->pause();
+			}
 		}
-		else if (gameScreen->getButton("restart")->isHovered())
-		{
-			SCRIPT_EXECUTOR->reset();
-			SCRIPT_EXECUTOR->initialize();
-			_sceneEditor.loadScene();
-		}
-		else if (gameScreen->getButton("stop")->isHovered())
-		{
-			SCRIPT_EXECUTOR->reset();
-		}
+
+		// Executing game script (if possible)
+		SCRIPT_EXECUTOR->execute();
 	}
-
-	// Buttons hoverability
-	bool isInMainMenu = (_gui->getViewport("left")->getWindow("main")->getActiveScreen()->getID() == "main");
-	gameScreen->getButton("play")->setHoverable(isInMainMenu && !SCRIPT_EXECUTOR->isScriptEmpty() && !SCRIPT_EXECUTOR->isRunning());
-	gameScreen->getButton("pause")->setHoverable(isInMainMenu && SCRIPT_EXECUTOR->isRunning());
-	gameScreen->getButton("restart")->setHoverable(isInMainMenu && SCRIPT_EXECUTOR->isInitialized());
-	gameScreen->getButton("stop")->setHoverable(isInMainMenu && SCRIPT_EXECUTOR->isInitialized());
-
-	// Check if player wants to pause the running game
-	if (SCRIPT_EXECUTOR->isRunning())
-	{
-		if (_fe3d.input_getKeyPressed(Input::KEY_ESCAPE))
-		{
-			SCRIPT_EXECUTOR->pause();
-		}
-	}
-
-	// Executing game script (if possible)
-	SCRIPT_EXECUTOR->execute();
 
 }
 
@@ -194,9 +210,9 @@ void TopViewportController::_updateProjectCreation()
 			else // Project is non-existent
 			{
 				// Create new project directory & subfolders
-				_mkdir(newDirectoryPath.c_str());
-				_mkdir((newDirectoryPath + "\\Data").c_str());
-				_mkdir((newDirectoryPath + "\\Scenes").c_str());
+				auto temp1 = _mkdir(newDirectoryPath.c_str());
+				auto temp2 = _mkdir((newDirectoryPath + "\\Data").c_str());
+				auto temp3 = _mkdir((newDirectoryPath + "\\Scenes").c_str());
 
 				// Load current project
 				_currentProjectName = projectName;
@@ -337,6 +353,7 @@ void TopViewportController::_saveCurrentProject()
 
 void TopViewportController::_loadCurrentProject()
 {
+	// Change window title
 	if (_currentProjectName == "")
 	{
 		_fe3d.misc_setWindowTitle("FabiEngine3D");

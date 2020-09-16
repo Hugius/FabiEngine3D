@@ -27,7 +27,7 @@ bool SceneEditor::_loadSceneFile()
 			// Placeholder variables
 			string entityType;
 
-			// For item extraction
+			// For file extraction
 			std::istringstream iss(line);
 
 			// Extract type from file

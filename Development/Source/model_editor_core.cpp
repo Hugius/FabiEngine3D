@@ -134,7 +134,7 @@ void ModelEditor::loadModels()
 			bool isFaceCulled, isShadowed, isTransparent, isSpecular, isReflective;
 			vec3 modelSize, color, boxSize;
 
-			// For item extraction
+			// For file extraction
 			std::istringstream iss(line);
 
 			// Extract from file

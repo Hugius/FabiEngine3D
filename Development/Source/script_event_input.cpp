@@ -62,6 +62,11 @@ void ScriptEventInput::setInputElement(string name)
 	}
 }
 
+void ScriptEventInput::setInputElement(Input element)
+{
+	_inputElement = element;
+}
+
 InputType ScriptEventInput::getInputType()
 {
 	return _inputType;

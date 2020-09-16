@@ -117,7 +117,7 @@ void BillboardEditor::_loadBillboards()
 		bool facingX, facingY, transparent, playing;
 		int rows, columns, framestep;
 
-		// For item extraction
+		// For file extraction
 		std::istringstream iss(line);
 
 		// Extract from file

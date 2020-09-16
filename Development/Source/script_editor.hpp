@@ -83,8 +83,8 @@ private:
 	shared_ptr<EngineGuiWindow> _leftWindow = nullptr;
 	shared_ptr<EngineGuiWindow> _rightWindow = nullptr;
 	shared_ptr<ScriptEvent> _currentEventToAdd = nullptr;
-	shared_ptr<Script> _script = nullptr;
 	shared_ptr<ScriptExecutor> _scriptExecutor = nullptr;
+	shared_ptr<Script> _script = nullptr;
 
 	// Option names for front-end
 	vector<ChoiceList> _choiceListStack;

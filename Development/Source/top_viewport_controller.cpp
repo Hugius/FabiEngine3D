@@ -135,7 +135,7 @@ void TopViewportController::_updateGameManagement()
 			else // Load all assets before executing game script
 			{
 				SCRIPT_EXECUTOR->initialize();
-				// load assets <---
+				_sceneEditor.loadScene();
 			}
 		}
 		else if (gameScreen->getButton("pause")->isHovered())
@@ -145,7 +145,8 @@ void TopViewportController::_updateGameManagement()
 		else if (gameScreen->getButton("restart")->isHovered())
 		{
 			SCRIPT_EXECUTOR->reset();
-			// load assets <---
+			SCRIPT_EXECUTOR->initialize();
+			_sceneEditor.loadScene();
 		}
 		else if (gameScreen->getButton("stop")->isHovered())
 		{
@@ -372,9 +373,16 @@ void TopViewportController::_loadCurrentProject()
 		_sceneEditor.unload();
 	}
 
+	// Unload script editor
+	if (_scriptEditor.isLoaded())
+	{
+		_scriptEditor.unload();
+	}
+
 	// Pass loaded project name
 	_modelEditor.setCurrentProjectName(_currentProjectName);
 	_worldEditor.setCurrentProjectName(_currentProjectName);
 	_billboardEditor.setCurrentProjectName(_currentProjectName);
 	_sceneEditor.setCurrentProjectName(_currentProjectName);
+	_scriptEditor.setCurrentProjectName(_currentProjectName);
 }

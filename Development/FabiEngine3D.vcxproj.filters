@@ -25,9 +25,6 @@
     <ClCompile Include="Source\audio_music.cpp">
       <Filter>src\Audio System\Data Structures</Filter>
     </ClCompile>
-    <ClCompile Include="Source\model_editor_core.cpp">
-      <Filter>src\Editor System\Model Editor</Filter>
-    </ClCompile>
     <ClCompile Include="Source\aabb_entity.cpp">
       <Filter>src\Entity System\Data Structures</Filter>
     </ClCompile>
@@ -148,15 +145,6 @@
     <ClCompile Include="Source\engine_gui_scrollinglist.cpp">
       <Filter>src\GUI System</Filter>
     </ClCompile>
-    <ClCompile Include="Source\model_editor_updates_size.cpp">
-      <Filter>src\Editor System\Model Editor</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\model_editor_updates_options.cpp">
-      <Filter>src\Editor System\Model Editor</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\model_editor_updates_mesh.cpp">
-      <Filter>src\Editor System\Model Editor</Filter>
-    </ClCompile>
     <ClCompile Include="Source\aabb_entity_renderer.cpp">
       <Filter>src\Rendering System\Renderers\Entity Renderers</Filter>
     </ClCompile>
@@ -199,23 +187,11 @@
     <ClCompile Include="Source\shadow_renderer.cpp">
       <Filter>src\Rendering System\Renderers\Miscellaneous Renderers</Filter>
     </ClCompile>
-    <ClCompile Include="Source\model_editor_updates.cpp">
-      <Filter>src\Editor System\Model Editor</Filter>
-    </ClCompile>
     <ClCompile Include="Source\render_engine_core.cpp">
       <Filter>src\Rendering System\Core</Filter>
     </ClCompile>
     <ClCompile Include="Source\engine_gui_global_screen_core.cpp">
       <Filter>src\GUI System</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\billboard_editor_core.cpp">
-      <Filter>src\Editor System\Billboard Editor</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\billboard_editor_updates.cpp">
-      <Filter>src\Editor System\Billboard Editor</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\billboard_editor_updates_editing.cpp">
-      <Filter>src\Editor System\Billboard Editor</Filter>
     </ClCompile>
     <ClCompile Include="Source\core_engine.cpp">
       <Filter>src\Core System\Core</Filter>
@@ -244,12 +220,6 @@
     <ClCompile Include="Source\core_engine_misc.cpp">
       <Filter>src\Core System\Core</Filter>
     </ClCompile>
-    <ClCompile Include="Source\billboard_editor_misc.cpp">
-      <Filter>src\Editor System\Billboard Editor</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\model_editor_misc.cpp">
-      <Filter>src\Editor System\Model Editor</Filter>
-    </ClCompile>
     <ClCompile Include="Source\engine_gui_global_screen_misc.cpp">
       <Filter>src\GUI System</Filter>
     </ClCompile>
@@ -275,31 +245,31 @@
       <Filter>src\Editor System\World Editor\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="Source\world_editor_core.cpp">
-      <Filter>src\Editor System\World Editor\Core Editor</Filter>
+      <Filter>src\Editor System\World Editor\Core</Filter>
     </ClCompile>
     <ClCompile Include="Source\world_editor_core_sky.cpp">
-      <Filter>src\Editor System\World Editor\Core Editor</Filter>
+      <Filter>src\Editor System\World Editor\Core</Filter>
     </ClCompile>
     <ClCompile Include="Source\world_editor_core_terrain.cpp">
-      <Filter>src\Editor System\World Editor\Core Editor</Filter>
+      <Filter>src\Editor System\World Editor\Core</Filter>
     </ClCompile>
     <ClCompile Include="Source\world_editor_core_water.cpp">
-      <Filter>src\Editor System\World Editor\Core Editor</Filter>
+      <Filter>src\Editor System\World Editor\Core</Filter>
     </ClCompile>
     <ClCompile Include="Source\world_editor_misc.cpp">
-      <Filter>src\Editor System\World Editor\Core Editor</Filter>
+      <Filter>src\Editor System\World Editor\Core</Filter>
     </ClCompile>
     <ClCompile Include="Source\world_editor_updates.cpp">
-      <Filter>src\Editor System\World Editor\Core Editor</Filter>
+      <Filter>src\Editor System\World Editor\Core</Filter>
     </ClCompile>
     <ClCompile Include="Source\world_editor_updates_sky.cpp">
-      <Filter>src\Editor System\World Editor\Core Editor</Filter>
+      <Filter>src\Editor System\World Editor\Core</Filter>
     </ClCompile>
     <ClCompile Include="Source\world_editor_updates_terrain.cpp">
-      <Filter>src\Editor System\World Editor\Core Editor</Filter>
+      <Filter>src\Editor System\World Editor\Core</Filter>
     </ClCompile>
     <ClCompile Include="Source\world_editor_updates_water.cpp">
-      <Filter>src\Editor System\World Editor\Core Editor</Filter>
+      <Filter>src\Editor System\World Editor\Core</Filter>
     </ClCompile>
     <ClCompile Include="Source\fabi_engine_3d_entity_billboard.cpp">
       <Filter>src\Core System\Interface\Entities</Filter>
@@ -385,9 +355,6 @@
     <ClCompile Include="Source\scene_editor_settings_updates.cpp">
       <Filter>src\Editor System\Scene Editor\Settings</Filter>
     </ClCompile>
-    <ClCompile Include="Source\model_editor_updates_lighting.cpp">
-      <Filter>src\Editor System\Model Editor</Filter>
-    </ClCompile>
     <ClCompile Include="Source\render_bus.cpp">
       <Filter>src\Rendering System\Miscellaneous</Filter>
     </ClCompile>
@@ -397,19 +364,7 @@
     <ClCompile Include="Source\scene_editor_persistency.cpp">
       <Filter>src\Editor System\Scene Editor\Core</Filter>
     </ClCompile>
-    <ClCompile Include="Source\script_editor_misc.cpp">
-      <Filter>src\Editor System\Script Editor</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\script_editor_core.cpp">
-      <Filter>src\Editor System\Script Editor</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\script_editor_updates.cpp">
-      <Filter>src\Editor System\Script Editor</Filter>
-    </ClCompile>
     <ClCompile Include="Source\script_event_collision.cpp">
-      <Filter>src\Scripting System\Events</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\script_event_init.cpp">
       <Filter>src\Scripting System\Events</Filter>
     </ClCompile>
     <ClCompile Include="Source\script_event_input.cpp">
@@ -433,11 +388,59 @@
     <ClCompile Include="Source\script_event_condition.cpp">
       <Filter>src\Scripting System\Events</Filter>
     </ClCompile>
-    <ClCompile Include="Source\script_editor_interface.cpp">
-      <Filter>src\Editor System\Script Editor</Filter>
-    </ClCompile>
     <ClCompile Include="Source\script_executor.cpp">
       <Filter>src\Scripting System\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\model_editor_core.cpp">
+      <Filter>src\Editor System\Model Editor\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\model_editor_misc.cpp">
+      <Filter>src\Editor System\Model Editor\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\model_editor_updates.cpp">
+      <Filter>src\Editor System\Model Editor\Updates</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\model_editor_updates_lighting.cpp">
+      <Filter>src\Editor System\Model Editor\Updates</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\model_editor_updates_mesh.cpp">
+      <Filter>src\Editor System\Model Editor\Updates</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\model_editor_updates_options.cpp">
+      <Filter>src\Editor System\Model Editor\Updates</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\model_editor_updates_size.cpp">
+      <Filter>src\Editor System\Model Editor\Updates</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\billboard_editor_updates_editing.cpp">
+      <Filter>src\Editor System\Billboard Editor\Updates</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\billboard_editor_updates.cpp">
+      <Filter>src\Editor System\Billboard Editor\Updates</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\billboard_editor_core.cpp">
+      <Filter>src\Editor System\Billboard Editor\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\billboard_editor_misc.cpp">
+      <Filter>src\Editor System\Billboard Editor\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_editor_core.cpp">
+      <Filter>src\Editor System\Script Editor\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_editor_interface.cpp">
+      <Filter>src\Editor System\Script Editor\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_editor_persistency.cpp">
+      <Filter>src\Editor System\Script Editor\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_editor_updates.cpp">
+      <Filter>src\Editor System\Script Editor\Updates</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_editor_misc.cpp">
+      <Filter>src\Editor System\Script Editor\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_event_initialization.cpp">
+      <Filter>src\Scripting System\Events</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -461,9 +464,6 @@
     </ClInclude>
     <ClInclude Include="Source\audio_music.hpp">
       <Filter>src\Audio System\Data Structures</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\model_editor.hpp">
-      <Filter>src\Editor System\Model Editor</Filter>
     </ClInclude>
     <ClInclude Include="Source\aabb_entity.hpp">
       <Filter>src\Entity System\Data Structures</Filter>
@@ -627,9 +627,6 @@
     <ClInclude Include="Source\shadow_renderer.hpp">
       <Filter>src\Rendering System\Renderers\Miscellaneous Renderers</Filter>
     </ClInclude>
-    <ClInclude Include="Source\billboard_editor.hpp">
-      <Filter>src\Editor System\Billboard Editor</Filter>
-    </ClInclude>
     <ClInclude Include="Source\core_engine.hpp">
       <Filter>src\Core System\Core</Filter>
     </ClInclude>
@@ -676,7 +673,7 @@
       <Filter>src\Editor System\World Editor\Miscellaneous</Filter>
     </ClInclude>
     <ClInclude Include="Source\world_editor.hpp">
-      <Filter>src\Editor System\World Editor\Core Editor</Filter>
+      <Filter>src\Editor System\World Editor\Core</Filter>
     </ClInclude>
     <ClInclude Include="Source\fabi_engine_3d.hpp">
       <Filter>src\Core System\Interface\Core</Filter>
@@ -690,9 +687,6 @@
     <ClInclude Include="Source\settings_editor.hpp">
       <Filter>src\Editor System\Settings Editor</Filter>
     </ClInclude>
-    <ClInclude Include="Source\script_editor.hpp">
-      <Filter>src\Editor System\Script Editor</Filter>
-    </ClInclude>
     <ClInclude Include="Source\script.hpp">
       <Filter>src\Scripting System\Core</Filter>
     </ClInclude>
@@ -700,9 +694,6 @@
       <Filter>src\Scripting System\Events</Filter>
     </ClInclude>
     <ClInclude Include="Source\script_event_collision.hpp">
-      <Filter>src\Scripting System\Events</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\script_event_init.hpp">
       <Filter>src\Scripting System\Events</Filter>
     </ClInclude>
     <ClInclude Include="Source\script_event_time.hpp">
@@ -725,6 +716,18 @@
     </ClInclude>
     <ClInclude Include="Source\script_line.hpp">
       <Filter>src\Scripting System\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\model_editor.hpp">
+      <Filter>src\Editor System\Model Editor\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\billboard_editor.hpp">
+      <Filter>src\Editor System\Billboard Editor\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\script_editor.hpp">
+      <Filter>src\Editor System\Script Editor\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\script_event_initialization.hpp">
+      <Filter>src\Scripting System\Events</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -848,9 +851,6 @@
     <Filter Include="src\Editor System\World Editor\Miscellaneous">
       <UniqueIdentifier>{b12d5bf0-2b50-4e18-be37-22dc5cf1cd4d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\Editor System\World Editor\Core Editor">
-      <UniqueIdentifier>{3e86e47e-1fba-4f5e-9a5b-96a6fd5fedee}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\Core System\Interface\Entities">
       <UniqueIdentifier>{adeeb6df-d4ef-4802-82d0-536f350c87bd}</UniqueIdentifier>
     </Filter>
@@ -895,6 +895,36 @@
     </Filter>
     <Filter Include="src\Scripting System\Core">
       <UniqueIdentifier>{c7f19bd9-4b08-4f0a-9542-92e4de2a6e01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Editor System\World Editor\Core">
+      <UniqueIdentifier>{3e86e47e-1fba-4f5e-9a5b-96a6fd5fedee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Editor System\Model Editor\Core">
+      <UniqueIdentifier>{3b098bd6-25d7-4439-aea4-cd81b21d4031}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Editor System\Model Editor\Miscellaneous">
+      <UniqueIdentifier>{5d403f1a-76cf-4888-8b62-c16ab0f4a98e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Editor System\Model Editor\Updates">
+      <UniqueIdentifier>{7e9ed34b-80fd-416f-abe0-4bc32dc0fb87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Editor System\Billboard Editor\Core">
+      <UniqueIdentifier>{75400577-89e0-4bd3-b7d4-8f1d54430312}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Editor System\Billboard Editor\Miscellaneous">
+      <UniqueIdentifier>{351bb95b-7fee-4a94-9902-bf867b20abfb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Editor System\Billboard Editor\Updates">
+      <UniqueIdentifier>{6d00bb37-19dd-4e07-bf63-cdc118f377a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Editor System\Script Editor\Core">
+      <UniqueIdentifier>{3703e16e-8e51-48c4-9cda-a6c3fbad68e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Editor System\Script Editor\Updates">
+      <UniqueIdentifier>{02400dd1-6465-48b6-ab59-1e11c642da24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Editor System\Script Editor\Miscellaneous">
+      <UniqueIdentifier>{55a74c53-dfba-4f42-9319-3c5077f16019}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

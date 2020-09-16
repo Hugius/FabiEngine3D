@@ -4,17 +4,17 @@
 
 enum class InputType
 {
-	NONE,
 	KEYBOARD,
-	MOUSE
+	MOUSE,
+	NONE
 };
 
 enum class InputMethod
 {
-	NONE,
 	DOWN,
 	PRESSED,
-	TOGGLED
+	TOGGLED,
+	NONE
 };
 
 class ScriptEventInput final : public ScriptEvent

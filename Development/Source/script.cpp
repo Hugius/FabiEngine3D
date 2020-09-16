@@ -47,7 +47,7 @@ void Script::reset()
 	// Reset all initialization events
 	for (auto& scriptLine : _scriptLines)
 	{
-		if (scriptLine.event->getType() == ScriptEventType::INIT_EVENT)
+		if (scriptLine.event->getType() == ScriptEventType::INITIALIZATION)
 		{
 			scriptLine.event->reset();
 		}
@@ -91,7 +91,7 @@ ScriptLine& Script::getScriptLine(const string& ID)
 	Logger::getInst().throwError("Could not find script line with ID: " + ID);
 }
 
-vector<string> Script::getAllScriptIDs()
+vector<string> Script::getAllScriptLineIDs()
 {
 	vector<string> result;
 

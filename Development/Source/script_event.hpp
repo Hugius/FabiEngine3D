@@ -4,11 +4,12 @@
 
 enum class ScriptEventType
 {
-	INIT_EVENT,
-	INPUT_EVENT,
-	COLLISION_EVENT,
-	TIME_EVENT,
-	CONDITION_EVENT
+	INITIALIZATION,
+	INPUT,
+	COLLISION,
+	TIME,
+	CONDITION,
+	NONE
 };
 
 class ScriptEvent

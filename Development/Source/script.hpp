@@ -18,7 +18,7 @@ public:
 
 	ScriptLine& getScriptLine(const string& ID);
 
-	vector<string> getAllScriptIDs();
+	vector<string> getAllScriptLineIDs();
 
 private:
 	vector<ScriptLine> _scriptLines;

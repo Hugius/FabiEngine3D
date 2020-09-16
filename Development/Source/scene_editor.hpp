@@ -28,6 +28,8 @@ public:
 	void unload();
 	void update();
 	void setCurrentProjectName(const string&projectName);
+	void loadScene();
+	void unloadScene();
 
 	bool isLoaded();
 
@@ -68,7 +70,7 @@ private:
 	void _updateMiscellaneous();
 
 	// Miscellaneous
-	bool _loadScene();
+	bool _loadSceneFile();
 	void _placeModel(const string& modelID, string modelName, vec3 position, vec3 rotation, vec3 size);
 	void _placeModel(const string& modelID, vec3 position, vec3 rotation, vec3 size, string objPath, string diffuseMapPath, 
 		string lightMapPath, string reflectionMapPath, string normalMapPath, bool isFrozen, bool isFaceCulled, bool isShadowed, bool isTransparent, 

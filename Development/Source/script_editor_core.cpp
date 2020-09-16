@@ -53,7 +53,7 @@ void ScriptEditor::load()
 	// Event types
 	_eventTypeNames = { "INIT_EVENT", "INPUT_EVENT", "COLLISION_EVENT", "TIME_EVENT", "CONDITION_EVENT" };
 
-	// Init event
+	// Initialization event
 	
 	// Input event
 	_inputTypeNames = { "KEYBOARD", "MOUSE" };
@@ -69,7 +69,7 @@ void ScriptEditor::load()
 	// Condition event
 
 	// Load script
-	_loadScript();
+	_loadScriptFromFile();
 
 	// Miscellaneous
 	_gui->getViewport("bottom")->getWindow("controls")->setActiveScreen("scriptEditor");
@@ -78,7 +78,7 @@ void ScriptEditor::load()
 
 void ScriptEditor::save()
 {
-
+	_saveScriptToFile();
 }
 
 void ScriptEditor::unload()
@@ -121,47 +121,65 @@ void ScriptEditor::_addNewScriptLine(const string& newID)
 {
 	// Placeholders
 	shared_ptr<ScriptEvent> event = nullptr;
-	shared_ptr<ScriptAction> action = nullptr;
+	shared_ptr<ScriptAction> action = make_shared<ScriptActionCamera>(_fe3d, ScriptActionType::CAMERA);
 
 	// Fill the placeholders
 	for (auto& choiceList : _choiceListStack)
 	{
+		// Chosen option index
 		int optionIndex = choiceList.selectedOptionIndex;
 
-		// Determine choicelist type
-		switch (choiceList.type)
+		// Determine choicelist sort
+		if (choiceList.sort == ChoiceListSort::EVENT)
 		{
-			// Event types
-			case ChoiceListType::EVENT_TYPES:
+			// Determine choicelist type
+			switch (choiceList.type)
 			{
-				if (choiceList.selectedOptionIndex == 0) event = make_shared<ScriptEventInit>(_fe3d, ScriptEventType::INIT_EVENT);
-				if (choiceList.selectedOptionIndex == 1) event = make_shared<ScriptEventInput>(_fe3d, ScriptEventType::INPUT_EVENT);
-				if (choiceList.selectedOptionIndex == 2) event = make_shared<ScriptEventCollision>(_fe3d, ScriptEventType::COLLISION_EVENT);
-				if (choiceList.selectedOptionIndex == 3) event = make_shared<ScriptEventTime>(_fe3d, ScriptEventType::TIME_EVENT);
-				if (choiceList.selectedOptionIndex == 4) event = make_shared<ScriptEventCondition>(_fe3d, ScriptEventType::CONDITION_EVENT);
-				break;
-			}
+				// Event types
+				case ChoiceListType::EVENT_TYPES:
+				{
+					if (choiceList.selectedOptionIndex == 0) event = make_shared<ScriptEventInitialization>(_fe3d, ScriptEventType::INITIALIZATION);
+					if (choiceList.selectedOptionIndex == 1) event = make_shared<ScriptEventInput>(_fe3d, ScriptEventType::INPUT);
+					if (choiceList.selectedOptionIndex == 2) event = make_shared<ScriptEventCollision>(_fe3d, ScriptEventType::COLLISION);
+					if (choiceList.selectedOptionIndex == 3) event = make_shared<ScriptEventTime>(_fe3d, ScriptEventType::TIME);
+					if (choiceList.selectedOptionIndex == 4) event = make_shared<ScriptEventCondition>(_fe3d, ScriptEventType::CONDITION);
+					break;
+				}
 
-			// Input event
-			case ChoiceListType::INPUT_TYPES:
-			{
-				dynamic_pointer_cast<ScriptEventInput>(event)->setInputType(static_cast<InputType>(choiceList.selectedOptionIndex + 1));
-				break;
+				// Input event
+				case ChoiceListType::INPUT_TYPES:
+				{
+					dynamic_pointer_cast<ScriptEventInput>(event)->setInputType(static_cast<InputType>(choiceList.selectedOptionIndex));
+					break;
+				}
+				case ChoiceListType::INPUT_KEY_NAMES:
+				{
+					dynamic_pointer_cast<ScriptEventInput>(event)->setInputElement(_inputKeyNames[optionIndex]);
+					break;
+				}
+				case ChoiceListType::INPUT_MOUSE_NAMES:
+				{
+					dynamic_pointer_cast<ScriptEventInput>(event)->setInputElement(_inputMouseNames[optionIndex]);
+					break;
+				}
+				case ChoiceListType::INPUT_METHODS:
+				{
+					dynamic_pointer_cast<ScriptEventInput>(event)->setInputMethod(static_cast<InputMethod>(choiceList.selectedOptionIndex));
+					break;
+				}
 			}
-			case ChoiceListType::INPUT_KEY_NAMES:
+		}
+		else if (choiceList.sort == ChoiceListSort::ACTION)
+		{
+			// Determine choicelist type
+			switch (choiceList.type)
 			{
-				dynamic_pointer_cast<ScriptEventInput>(event)->setInputElement(_inputKeyNames[optionIndex]);
-				break;
-			}
-			case ChoiceListType::INPUT_MOUSE_NAMES:
-			{
-				dynamic_pointer_cast<ScriptEventInput>(event)->setInputElement(_inputMouseNames[optionIndex]);
-				break;
-			}
-			case ChoiceListType::INPUT_METHODS:
-			{
-				dynamic_pointer_cast<ScriptEventInput>(event)->setInputMethod(static_cast<InputMethod>(choiceList.selectedOptionIndex + 1));
-				break;
+				// Action types
+				case ChoiceListType::ACTION_TYPES:
+				{
+
+					break;
+				}
 			}
 		}
 	}

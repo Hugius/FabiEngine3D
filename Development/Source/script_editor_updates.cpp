@@ -34,12 +34,12 @@ void ScriptEditor::_updateGUI()
 			{
 				// Add default choicelist
 				_clearChoiceLists();
-				_addChoiceList(ChoiceListType::EVENT_TYPES);
+				_addChoiceList(ChoiceListSort::EVENT, ChoiceListType::EVENT_TYPES);
 				_isCreatingScript = true;
 			}
 			else if (screen->getButton("viewLine")->isHovered())
 			{
-				_gui->getGlobalScreen()->addChoiceForm("scriptLinesList", "View script", vec2(0.0f, 0.0f), _script->getAllScriptIDs());
+				_gui->getGlobalScreen()->addChoiceForm("scriptLinesList", "View script", vec2(0.0f, 0.0f), _script->getAllScriptLineIDs());
 			}
 			else if (screen->getButton("back")->isHovered())
 			{
@@ -196,7 +196,7 @@ void ScriptEditor::_updateNavigation()
 							}
 							else if (option == "INPUT_EVENT")
 							{
-								_addChoiceList(ChoiceListType::INPUT_TYPES);
+								_addChoiceList(ChoiceListSort::EVENT, ChoiceListType::INPUT_TYPES);
 							}
 							else if (option == "COLLISION_EVENT")
 							{
@@ -219,18 +219,18 @@ void ScriptEditor::_updateNavigation()
 							string option = _inputTypeNames[optionIndex];
 							if (option == "KEYBOARD")
 							{
-								_addChoiceList(ChoiceListType::INPUT_KEY_NAMES);
+								_addChoiceList(ChoiceListSort::EVENT, ChoiceListType::INPUT_KEY_NAMES);
 							}
 							else if (option == "MOUSE")
 							{
-								_addChoiceList(ChoiceListType::INPUT_MOUSE_NAMES);
+								_addChoiceList(ChoiceListSort::EVENT, ChoiceListType::INPUT_MOUSE_NAMES);
 							}
 							break;
 						}
 						case ChoiceListType::INPUT_KEY_NAMES:
 						case ChoiceListType::INPUT_MOUSE_NAMES:
 						{
-							_addChoiceList(ChoiceListType::INPUT_METHODS);
+							_addChoiceList(ChoiceListSort::EVENT, ChoiceListType::INPUT_METHODS);
 							break;
 						}
 						case ChoiceListType::INPUT_METHODS:

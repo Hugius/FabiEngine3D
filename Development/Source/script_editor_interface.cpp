@@ -8,38 +8,38 @@ void ScriptEditor::_generateScriptLineOverview(ScriptLine& scriptLine)
 	// Check if script line has event
 	if (scriptLine.event != nullptr)
 	{
-		_addChoiceList(ChoiceListType::EVENT_TYPES, static_cast<int>(scriptLine.event->getType()));
+		_addChoiceList(ChoiceListSort::EVENT, ChoiceListType::EVENT_TYPES, static_cast<int>(scriptLine.event->getType()));
 
-		if (scriptLine.event->getType() == ScriptEventType::INIT_EVENT)
+		if (scriptLine.event->getType() == ScriptEventType::INITIALIZATION)
 		{
 
 		}
-		else if (scriptLine.event->getType() == ScriptEventType::INPUT_EVENT)
+		else if (scriptLine.event->getType() == ScriptEventType::INPUT)
 		{
 			auto inputEvent = dynamic_pointer_cast<ScriptEventInput>(scriptLine.event);
 			
-			_addChoiceList(ChoiceListType::INPUT_TYPES, static_cast<int>(inputEvent->getInputType()) - 1);
+			_addChoiceList(ChoiceListSort::EVENT, ChoiceListType::INPUT_TYPES, static_cast<int>(inputEvent->getInputType()));
 			
 			// Determine input type
 			if (inputEvent->getInputType() == InputType::KEYBOARD)
 			{
-				_addChoiceList(ChoiceListType::INPUT_KEY_NAMES, inputEvent->getInputElementIndex());
+				_addChoiceList(ChoiceListSort::EVENT, ChoiceListType::INPUT_KEY_NAMES, inputEvent->getInputElementIndex());
 			}
 			else if (inputEvent->getInputType() == InputType::MOUSE)
 			{
-				_addChoiceList(ChoiceListType::INPUT_KEY_NAMES, inputEvent->getInputElementIndex());
+				_addChoiceList(ChoiceListSort::EVENT, ChoiceListType::INPUT_KEY_NAMES, inputEvent->getInputElementIndex());
 			}
-			_addChoiceList(ChoiceListType::INPUT_METHODS, static_cast<int>(inputEvent->getInputMethod()) - 1);
+			_addChoiceList(ChoiceListSort::EVENT, ChoiceListType::INPUT_METHODS, static_cast<int>(inputEvent->getInputMethod()));
 		}
-		else if (scriptLine.event->getType() == ScriptEventType::COLLISION_EVENT)
+		else if (scriptLine.event->getType() == ScriptEventType::COLLISION)
 		{
 
 		}
-		else if (scriptLine.event->getType() == ScriptEventType::TIME_EVENT)
+		else if (scriptLine.event->getType() == ScriptEventType::TIME)
 		{
 
 		}
-		else if (scriptLine.event->getType() == ScriptEventType::CONDITION_EVENT)
+		else if (scriptLine.event->getType() == ScriptEventType::CONDITION)
 		{
 
 		}
@@ -52,7 +52,7 @@ void ScriptEditor::_generateScriptLineOverview(ScriptLine& scriptLine)
 	}
 }
 
-void ScriptEditor::_addChoiceList(ChoiceListType listType, int activeIndex)
+void ScriptEditor::_addChoiceList(ChoiceListSort listSort, ChoiceListType listType, int activeIndex)
 {
 	// General variables
 	int listIndex = static_cast<int>(listType);
@@ -143,11 +143,11 @@ void ScriptEditor::_addChoiceList(ChoiceListType listType, int activeIndex)
 	// Add to stack
 	if (activeIndex == -1)
 	{
-		_choiceListStack.push_back(ChoiceList(listType, optionNames.size()));
+		_choiceListStack.push_back(ChoiceList(listSort, listType, optionNames.size()));
 	}
 	else
 	{
-		_choiceListStack.push_back(ChoiceList(listType, optionNames[activeIndex].size()));
+		_choiceListStack.push_back(ChoiceList(listSort, listType, optionNames[activeIndex].size()));
 	}
 }
 

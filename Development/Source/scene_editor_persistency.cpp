@@ -4,7 +4,7 @@
 #include <sstream>
 #include <algorithm>
 
-bool SceneEditor::_loadScene()
+bool SceneEditor::_loadSceneFile()
 {
 	// Error checking
 	if (_currentProjectName == "")

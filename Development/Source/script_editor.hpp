@@ -4,31 +4,44 @@
 #include "engine_gui_manager.hpp"
 #include "script.hpp"
 #include "script_executor.hpp"
-#include "script_event_init.hpp"
+#include "script_event_initialization.hpp"
 #include "script_event_input.hpp"
 #include "script_event_time.hpp"
 #include "script_event_collision.hpp"
 #include "script_event_condition.hpp"
+#include "script_action_camera.hpp"
 
 class ScriptEditor final
 {
+	enum class ChoiceListSort
+	{
+		EVENT,
+		ACTION,
+		NONE
+	};
+
 	enum class ChoiceListType
 	{
 		EVENT_TYPES,
+		ACTION_TYPES,
 
+		// Input event
 		INPUT_TYPES,
 		INPUT_KEY_NAMES,
 		INPUT_MOUSE_NAMES,
-		INPUT_METHODS
+		INPUT_METHODS,
+
+		NONE
 	};
 
 	struct ChoiceList final
 	{
-		ChoiceList(ChoiceListType listType, int optionTotal) : type(listType), total(optionTotal)
+		ChoiceList(ChoiceListSort listSort, ChoiceListType listType, int optionTotal) : sort(listSort), type(listType), total(optionTotal)
 		{
 
 		}
 
+		const ChoiceListSort sort;
 		const ChoiceListType type;
 
 		const int total;
@@ -56,11 +69,12 @@ private:
 	void _updateNavigation();
 	void _updateMiscellaneous();
 	void _generateScriptLineOverview(ScriptLine& scriptLine);
-	void _addChoiceList(ChoiceListType list, int activeIndex = -1);
+	void _addChoiceList(ChoiceListSort listSort, ChoiceListType list, int activeIndex = -1);
 	void _removeChoiceList();
 	void _clearChoiceLists();
 	void _addNewScriptLine(const string& newID);
-	void _loadScript();
+	void _loadScriptFromFile();
+	void _saveScriptToFile();
 	void _unloadScript();
 
 	// General stuff

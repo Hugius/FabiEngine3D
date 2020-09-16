@@ -215,31 +215,7 @@ void SceneEditor::initializeGUI()
 
 void SceneEditor::load()
 {
-	// Default camera
-	float mouseSpeed = _fe3d.camera_getMouseSensitivity();
-	_fe3d.camera_load(_fe3d.camera_getFOV(), 0.1f, 10000.0f, vec3(0.0f));
-	_fe3d.camera_setMouseSensitivity(mouseSpeed);
-
-	// Default graphics
-	_fe3d.gfx_enableAmbientLighting(vec3(1.0f), 1.0f);
-	_fe3d.gfx_enableSpecularLighting();
-	_fe3d.gfx_enablePointLighting();
-	_fe3d.gfx_enableSkyReflections(0.5f);
-	_fe3d.gfx_enableSceneReflections(0.5f);
-	_fe3d.gfx_enableLightMapping();
-	_fe3d.gfx_enableNormalMapping();
-	_fe3d.gfx_enableWaterEffects();
-	
-	// Disable default skybox
-	_fe3d.skyEntity_select("");
-
-	// Load world entities
-	_worldEditor.loadSkyEntity();
-	_worldEditor.loadTerrainEntity();
-	_worldEditor.loadWaterEntity();
-
-	// Load scene
-	bool loadedFile = _loadScene();
+	loadScene();
 
 	// Load lightsource billboard
 	if (!_fe3d.billboardEntity_isExisting("@@lightSource"))
@@ -267,7 +243,7 @@ void SceneEditor::load()
 	}
 
 	// Default camera height
-	if (!loadedFile)
+	if (!_fe3d.waterEntity_isExisting("@water") && !_fe3d.terrainEntity_isExisting("@terrain"))
 	{
 		float height = 0.0f;
 
@@ -316,7 +292,36 @@ void SceneEditor::load()
 	_isLoaded = true;
 }
 
-void SceneEditor::unload()
+void SceneEditor::loadScene()
+{
+	// Default camera
+	float mouseSpeed = _fe3d.camera_getMouseSensitivity();
+	_fe3d.camera_load(_fe3d.camera_getFOV(), 0.1f, 10000.0f, vec3(0.0f));
+	_fe3d.camera_setMouseSensitivity(mouseSpeed);
+
+	// Default graphics
+	_fe3d.gfx_enableAmbientLighting(vec3(1.0f), 1.0f);
+	_fe3d.gfx_enableSpecularLighting();
+	_fe3d.gfx_enablePointLighting();
+	_fe3d.gfx_enableSkyReflections(0.5f);
+	_fe3d.gfx_enableSceneReflections(0.5f);
+	_fe3d.gfx_enableLightMapping();
+	_fe3d.gfx_enableNormalMapping();
+	_fe3d.gfx_enableWaterEffects();
+
+	// Disable default skybox
+	_fe3d.skyEntity_select("");
+
+	// Load world entities
+	_worldEditor.loadSkyEntity();
+	_worldEditor.loadTerrainEntity();
+	_worldEditor.loadWaterEntity();
+
+	// Load scene
+	_loadSceneFile();
+}
+
+void SceneEditor::unloadScene()
 {
 	// Disable graphics
 	_fe3d.gfx_disableAmbientLighting();
@@ -358,6 +363,11 @@ void SceneEditor::unload()
 	_fe3d.gameEntity_deleteAll();
 	_fe3d.billboardEntity_deleteAll();
 	_fe3d.lightEntity_deleteAll();
+}
+
+void SceneEditor::unload()
+{
+	unloadScene();
 
 	// Reset variables
 	_currentPreviewModelName = "";

@@ -5,7 +5,7 @@
 class ScriptActionCamera final : public ScriptAction
 {
 public:
-	ScriptActionCamera(FabiEngine3D& fe3d);
+	using ScriptAction::ScriptAction;
 
 	void execute() override;
 	void reset() override;

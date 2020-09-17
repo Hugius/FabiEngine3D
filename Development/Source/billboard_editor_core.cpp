@@ -67,9 +67,7 @@ void BillboardEditor::initializeGUI()
 void BillboardEditor::load()
 {
 	// Camera
-	float mouseSpeed = _fe3d.camera_getMouseSensitivity();
 	_fe3d.camera_load(_fe3d.camera_getFOV(), 0.1f, 10000.0f, _defaultCameraPosition, -90.0f);
-	_fe3d.camera_setMouseSensitivity(mouseSpeed);
 	_fe3d.camera_enableLookat(_billboardPosition);
 
 	// Enable graphics
@@ -245,7 +243,6 @@ void BillboardEditor::unload()
 	_fe3d.gfx_disableShadows();
 
 	// 3D environment
-	_fe3d.skyEntity_select("@@defaultSky");
 	_fe3d.gameEntity_delete("@@grid");
 	_fe3d.gameEntity_delete("@@cube");
 

@@ -223,24 +223,6 @@ void SceneEditor::load()
 		_fe3d.billBoardEntity_add("@@lightSource", "Engine\\Textures\\light_source.png", _fe3d.gfx_getDirectionalLightingPosition(),
 			vec3(0.0f), vec2(0.0f), true, true, true, true);
 	}
-	
-	// Show sky entity
-	if (_fe3d.skyEntity_isExisting("@sky"))
-	{
-		_fe3d.skyEntity_show("@sky");
-	}
-
-	// Show terrain entity
-	if (_fe3d.terrainEntity_isExisting("@terrain"))
-	{
-		_fe3d.terrainEntity_show("@terrain");
-	}
-
-	// Show water entity
-	if (_fe3d.waterEntity_isExisting("@water"))
-	{
-		_fe3d.waterEntity_show("@water");
-	}
 
 	// Default camera height
 	if (!_fe3d.waterEntity_isExisting("@water") && !_fe3d.terrainEntity_isExisting("@terrain"))
@@ -295,9 +277,7 @@ void SceneEditor::load()
 void SceneEditor::loadScene()
 {
 	// Default camera
-	float mouseSpeed = _fe3d.camera_getMouseSensitivity();
 	_fe3d.camera_load(_fe3d.camera_getFOV(), 0.1f, 10000.0f, vec3(0.0f));
-	_fe3d.camera_setMouseSensitivity(mouseSpeed);
 
 	// Default graphics
 	_fe3d.gfx_enableAmbientLighting(vec3(1.0f), 1.0f);
@@ -317,6 +297,24 @@ void SceneEditor::loadScene()
 	_worldEditor.loadTerrainEntity();
 	_worldEditor.loadWaterEntity();
 
+	// Show sky entity
+	if (_fe3d.skyEntity_isExisting("@sky"))
+	{
+		_fe3d.skyEntity_show("@sky");
+	}
+
+	// Show terrain entity
+	if (_fe3d.terrainEntity_isExisting("@terrain"))
+	{
+		_fe3d.terrainEntity_show("@terrain");
+	}
+
+	// Show water entity
+	if (_fe3d.waterEntity_isExisting("@water"))
+	{
+		_fe3d.waterEntity_show("@water");
+	}
+
 	// Load scene
 	_loadSceneFile();
 }
@@ -334,7 +332,6 @@ void SceneEditor::unloadScene()
 	_fe3d.gfx_disableLightMapping();
 	_fe3d.gfx_disableNormalMapping();
 	_fe3d.gfx_disableShadows();
-	_fe3d.gfx_disableBloom();
 	_fe3d.gfx_disableWaterEffects();
 	_fe3d.gfx_disableSkyHDR();
 	_fe3d.gfx_disableDOF();
@@ -389,9 +386,6 @@ void SceneEditor::unload()
 	_gui->getGlobalScreen()->deleteTextfield("selectedModelName");
 	_gui->getGlobalScreen()->deleteTextfield("selectedBillboardName");
 	_gui->getGlobalScreen()->deleteTextfield("selectedPointlightName");
-
-	// Enable default skybox
-	_fe3d.skyEntity_select("@@defaultSky");
 
 	// Other
 	_leftWindow->getScreen("sceneEditorMenuModelPlace")->getScrollingList("modelList")->deleteButtons();

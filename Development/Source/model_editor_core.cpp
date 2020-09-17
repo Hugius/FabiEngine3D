@@ -77,9 +77,7 @@ void ModelEditor::load()
 	_loadObjFileNames();
 
 	// Camera
-	float mouseSpeed = _fe3d.camera_getMouseSensitivity();
 	_fe3d.camera_load(_fe3d.camera_getFOV(), 0.1f, 10000.0f, _defaultCameraPosition);
-	_fe3d.camera_setMouseSensitivity(mouseSpeed);
 	_fe3d.camera_enableLookat(vec3(0.0f));
 
 	// Enable graphics
@@ -294,7 +292,6 @@ void ModelEditor::unload()
 	_fe3d.gfx_disableSpecularLighting();
 
 	// 3D environment
-	_fe3d.skyEntity_select("@@defaultSky");
 	_fe3d.gameEntity_delete("@@cube");
 
 	// Delete models
@@ -302,9 +299,6 @@ void ModelEditor::unload()
 
 	// Delete model name textfield
 	_gui->getGlobalScreen()->deleteTextfield("selectedModelName");
-
-	// Enable default sky
-	_fe3d.skyEntity_select("@@defaultSky");
 
 	// Other
 	_modelCreationEnabled = false;

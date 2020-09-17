@@ -23,11 +23,16 @@ TopViewportController::TopViewportController(FabiEngine3D& fe3d, shared_ptr<Engi
 
 void TopViewportController::initialize()
 {
-	// Top-viewport: projectWindow
+	// Top-viewport windows
 	_gui->getViewport("top")->addWindow("projectWindow", vec2(-0.25f, 0.0f), vec2(0.9825f, 1.5f), TVPC::frameColor);
-	_gui->getViewport("top")->getWindow("projectWindow")->addScreen("main");
-	_gui->getViewport("top")->getWindow("projectWindow")->setActiveScreen("main");
-	auto screen = _gui->getViewport("top")->getWindow("projectWindow")->getScreen("main");
+	_gui->getViewport("top")->addWindow("gameWindow", vec2(0.25f, 0.0f), vec2(0.9825f, 1.5f), vec3(0.25f));
+	_projectWindow = _gui->getViewport("top")->getWindow("projectWindow");
+	_gameWindow = _gui->getViewport("top")->getWindow("gameWindow");
+	
+	// Top-viewport: projectWindow
+	_projectWindow->addScreen("main");
+	_projectWindow->setActiveScreen("main");
+	auto screen = _projectWindow->getScreen("main");
 	screen->addButton("newProject", vec2(-0.767f, 0.0f), vec2(0.15f, 1.25f), TVPC::buttonColor, TVPC::buttonHoverColor, "NEW", TVPC::textColor, TVPC::textHoverColor);
 	screen->addButton("loadProject", vec2(-0.384, 0.0f), vec2(0.2f, 1.25f), TVPC::buttonColor, TVPC::buttonHoverColor, "LOAD", TVPC::textColor, TVPC::textHoverColor);
 	screen->addButton("saveProject", vec2(0.0f, 0.0f), vec2(0.2f, 1.25f), TVPC::buttonColor, TVPC::buttonHoverColor, "SAVE", TVPC::textColor, TVPC::textHoverColor);
@@ -35,10 +40,9 @@ void TopViewportController::initialize()
 	screen->addButton("quitEngine", vec2(0.767f, 0.0f), vec2(0.2f, 1.25f), TVPC::buttonColor, TVPC::buttonHoverColor, "QUIT", TVPC::textColor, TVPC::textHoverColor);
 
 	// Top-viewport: gameWindow
-	_gui->getViewport("top")->addWindow("gameWindow", vec2(0.25f, 0.0f), vec2(0.9825f, 1.5f), vec3(0.25f));
-	_gui->getViewport("top")->getWindow("gameWindow")->addScreen("main");
-	_gui->getViewport("top")->getWindow("gameWindow")->setActiveScreen("main");
-	screen = _gui->getViewport("top")->getWindow("gameWindow")->getScreen("main");
+	_gameWindow->addScreen("main");
+	_gameWindow->setActiveScreen("main");
+	screen = _gameWindow->getScreen("main");
 	screen->addButton("play", vec2(-0.85f, 0.0f), vec2(0.1f, 1.75f), "play.png", vec3(2.0f));
 	screen->addButton("pause", vec2(-0.65f, 0.0f), vec2(0.1f, 1.75f), "pause.png", vec3(2.0f));
 	screen->addButton("restart", vec2(-0.45f, 0.0f), vec2(0.1f, 1.75f), "restart.png", vec3(2.0f));
@@ -49,12 +53,12 @@ void TopViewportController::update()
 {
 	_updateProjectManagement();
 	_updateGameManagement();
+	_updateMiscellaneous();
 }
 
 void TopViewportController::_updateProjectManagement()
 {
-	auto projectWindow = _gui->getViewport("top")->getWindow("projectWindow");
-	auto projectScreen = projectWindow->getScreen("main");
+	auto projectScreen = _projectWindow->getScreen("main");
 
 	// Check if LMB pressed
 	if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
@@ -96,14 +100,13 @@ void TopViewportController::_updateProjectManagement()
 	_updateProjectLoading();
 	_updateProjectDeletion();
 
-	// Update button hoverability
-	projectScreen->getButton("saveProject")->setHoverable(_currentProjectName != "");
-	_gui->getViewport("left")->getWindow("main")->getScreen("main")->getButton("modelEditor")->setHoverable(_currentProjectName != "");
-	_gui->getViewport("left")->getWindow("main")->getScreen("main")->getButton("worldEditor")->setHoverable(_currentProjectName != "");
-	_gui->getViewport("left")->getWindow("main")->getScreen("main")->getButton("billboardEditor")->setHoverable(_currentProjectName != "");
-	_gui->getViewport("left")->getWindow("main")->getScreen("main")->getButton("sceneEditor")->setHoverable(_currentProjectName != "");
-	_gui->getViewport("left")->getWindow("main")->getScreen("main")->getButton("animationEditor")->setHoverable(_currentProjectName != "");
-	_gui->getViewport("left")->getWindow("main")->getScreen("main")->getButton("scriptEditor")->setHoverable(_currentProjectName != "");
+	// Update save button hoverability
+	bool scriptRunning = (_currentProjectName == "") ? false : _scriptEditor.getScriptExecutor()->isInitialized();
+	projectScreen->getButton("newProject")->setHoverable(!scriptRunning);
+	projectScreen->getButton("loadProject")->setHoverable(!scriptRunning);
+	projectScreen->getButton("saveProject")->setHoverable(!scriptRunning && _currentProjectName != "");
+	projectScreen->getButton("deleteProject")->setHoverable(!scriptRunning);
+	projectScreen->getButton("quitEngine")->setHoverable(!scriptRunning);
 
 	// Check if user wants to save changes
 	if (_gui->getGlobalScreen()->isAnswerFormConfirmed("exitEngine"))
@@ -119,8 +122,7 @@ void TopViewportController::_updateProjectManagement()
 
 void TopViewportController::_updateGameManagement()
 {
-	auto gameWindow = _gui->getViewport("top")->getWindow("gameWindow");
-	auto gameScreen = gameWindow->getScreen("main");
+	auto gameScreen = _gameWindow->getScreen("main");
 
 	// Check if currently a project is loaded
 	if (_currentProjectName == "")
@@ -166,15 +168,17 @@ void TopViewportController::_updateGameManagement()
 			{
 				SCRIPT_EXECUTOR->reset();
 				_sceneEditor.unloadScene();
+				_fe3d.camera_load(_fe3d.camera_getFOV(), 0.1f, 100.0f, vec3(0.0f));
+				_fe3d.skyEntity_select("@@defaultSky");
 			}
 		}
 
-		// Buttons hoverability
+		// Game buttons hoverability
 		bool isInMainMenu = (_gui->getViewport("left")->getWindow("main")->getActiveScreen()->getID() == "main");
-		gameScreen->getButton("play")->setHoverable(isInMainMenu && !SCRIPT_EXECUTOR->isScriptEmpty() && !SCRIPT_EXECUTOR->isRunning());
-		gameScreen->getButton("pause")->setHoverable(isInMainMenu && SCRIPT_EXECUTOR->isRunning());
-		gameScreen->getButton("restart")->setHoverable(isInMainMenu && SCRIPT_EXECUTOR->isInitialized());
-		gameScreen->getButton("stop")->setHoverable(isInMainMenu && SCRIPT_EXECUTOR->isInitialized());
+		gameScreen->getButton("play")->setHoverable(!SCRIPT_EXECUTOR->isScriptEmpty() && !SCRIPT_EXECUTOR->isRunning());
+		gameScreen->getButton("pause")->setHoverable(SCRIPT_EXECUTOR->isRunning());
+		gameScreen->getButton("restart")->setHoverable(SCRIPT_EXECUTOR->isInitialized());
+		gameScreen->getButton("stop")->setHoverable(SCRIPT_EXECUTOR->isInitialized());
 
 		// Check if player wants to pause the running game
 		if (SCRIPT_EXECUTOR->isRunning())
@@ -189,6 +193,19 @@ void TopViewportController::_updateGameManagement()
 		SCRIPT_EXECUTOR->execute();
 	}
 
+}
+
+void TopViewportController::_updateMiscellaneous()
+{
+	bool hoverable = (_currentProjectName == "") ? false : !_scriptEditor.getScriptExecutor()->isInitialized();
+
+	_gui->getViewport("left")->getWindow("main")->getScreen("main")->getButton("modelEditor")->setHoverable(hoverable);
+	_gui->getViewport("left")->getWindow("main")->getScreen("main")->getButton("worldEditor")->setHoverable(hoverable);
+	_gui->getViewport("left")->getWindow("main")->getScreen("main")->getButton("billboardEditor")->setHoverable(hoverable);
+	_gui->getViewport("left")->getWindow("main")->getScreen("main")->getButton("sceneEditor")->setHoverable(hoverable);
+	_gui->getViewport("left")->getWindow("main")->getScreen("main")->getButton("animationEditor")->setHoverable(hoverable);
+	_gui->getViewport("left")->getWindow("main")->getScreen("main")->getButton("scriptEditor")->setHoverable(hoverable);
+	_gui->getViewport("left")->getWindow("main")->getScreen("main")->getButton("settingsEditor")->setHoverable(hoverable);
 }
 
 void TopViewportController::_updateProjectCreation()

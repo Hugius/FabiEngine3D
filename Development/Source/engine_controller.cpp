@@ -81,6 +81,16 @@ void EngineController::_initializeMiscellaneous()
 
 void EngineController::_updateMiscellaneous()
 {
+	// Initialize main menu again if came from different screen
+	static string lastScreen = "";
+	string activeScreen = _gui->getViewport("left")->getWindow("main")->getActiveScreen()->getID();
+	if (activeScreen == "main" && lastScreen != "main")
+	{
+		camera_load(camera_getFOV(), 0.1f, 100.0f, vec3(0.0f));
+		skyEntity_select("@@defaultSky");
+	}
+	lastScreen = activeScreen;
+
 	// Only allowed if in-game
 	input_setKeyTogglingLocked(_gui->getGlobalScreen()->isFocused() || !misc_isMouseInsideViewport());
 

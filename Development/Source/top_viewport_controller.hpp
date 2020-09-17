@@ -28,6 +28,7 @@ public:
 private:
 	void _updateProjectManagement();
 	void _updateGameManagement();
+	void _updateMiscellaneous();
 	void _updateProjectCreation();
 	void _updateProjectLoading();
 	void _updateProjectDeletion();
@@ -40,6 +41,9 @@ private:
 	BillboardEditor& _billboardEditor;
 	SceneEditor& _sceneEditor;
 	ScriptEditor& _scriptEditor;
+
+	shared_ptr<EngineGuiWindow> _projectWindow = nullptr;
+	shared_ptr<EngineGuiWindow> _gameWindow = nullptr;
 
 	string _currentProjectName = "";
 

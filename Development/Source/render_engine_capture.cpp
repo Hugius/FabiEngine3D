@@ -168,7 +168,11 @@ void RenderEngine::_captureBloom()
 
 void RenderEngine::_captureSceneDepth()
 {
-	if (_renderBus.isDofEnabled() || _renderBus.isLensFlareEnabled())
+	bool waterDepthNeeded = (_renderBus.isWaterEffectsEnabled() && _entityBus->getWaterEntity() != nullptr) &&
+		_entityBus->getWaterEntity()->getTransparency() > 0.0f;
+
+	// Determine if scene depth rendering is needed or not
+	if (_renderBus.isDofEnabled() || _renderBus.isLensFlareEnabled() || waterDepthNeeded)
 	{
 		// Bind
 		_sceneDepthFramebuffer.bind();
@@ -182,9 +186,12 @@ void RenderEngine::_captureSceneDepth()
 		}
 
 		// Render water entity
-		if (_entityBus->getWaterEntity() != nullptr)
+		if (!waterDepthNeeded)
 		{
-			_depthRenderer.renderWaterEntity(_entityBus->getWaterEntity());
+			if (_entityBus->getWaterEntity() != nullptr)
+			{
+				_depthRenderer.renderWaterEntity(_entityBus->getWaterEntity());
+			}
 		}
 
 		// Render game entities
@@ -206,32 +213,6 @@ void RenderEngine::_captureSceneDepth()
 		_depthRenderer.unbind();
 		_sceneDepthFramebuffer.unbind();
 		_renderBus.setSceneDepthMap(_sceneDepthFramebuffer.getTexture(0));
-	}
-}
-
-void RenderEngine::_captureWaterDepth()
-{
-	// Depth is only needed for edge transparency
-	bool waterDepthNeeded = (_renderBus.isWaterEffectsEnabled() && _entityBus->getWaterEntity() != nullptr) &&
-		_entityBus->getWaterEntity()->getTransparency() > 0.0f;
-
-	if (waterDepthNeeded)
-	{
-		// Bind
-		_waterDepthFramebuffer.bind();
-		glClear(GL_DEPTH_BUFFER_BIT);
-		_depthRenderer.bind();
-
-		// Render terrain entity
-		if (_entityBus->getTerrainEntity() != nullptr)
-		{
-			_depthRenderer.renderTerrainEntity(_entityBus->getTerrainEntity());
-		}
-
-		// Unbind
-		_depthRenderer.unbind();
-		_waterDepthFramebuffer.unbind();
-		_renderBus.setWaterDepthMap(_waterDepthFramebuffer.getTexture(0));
 	}
 }
 
@@ -283,16 +264,6 @@ void RenderEngine::_captureMotionBlur(CameraManager& camera)
 			// Camera speed and blur direction variables
 			int xDifference = static_cast<int>(fabsf(camera.getYaw() - lastYaw) * _renderBus.getMotionBlurStrength());
 			int yDifference = static_cast<int>(fabsf(camera.getPitch() - lastPitch) * _renderBus.getMotionBlurStrength());
-
-			// Filter slow mouse movements
-			if (fabsf(camera.getYaw() - lastYaw) < 0.5f)
-			{
-				xDifference = 0;
-			}
-			if (fabsf(camera.getPitch() - lastPitch) < 0.5f)
-			{
-				yDifference = 0;
-			}
 			
 			// Variables
 			static BlurDirection lastDirection = BlurDirection::NONE;

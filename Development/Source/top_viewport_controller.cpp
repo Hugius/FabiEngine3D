@@ -146,12 +146,14 @@ void TopViewportController::_updateGameManagement()
 				}
 				else
 				{
+					// Load all assets before executing script
 					SCRIPT_EXECUTOR->initialize();
 					_sceneEditor.loadScene();
 				}
 			}
 			else if (gameScreen->getButton("pause")->isHovered())
 			{
+				// Pause script execution
 				SCRIPT_EXECUTOR->pause();
 			}
 			else if (gameScreen->getButton("restart")->isHovered())
@@ -166,6 +168,7 @@ void TopViewportController::_updateGameManagement()
 			}
 			else if (gameScreen->getButton("stop")->isHovered())
 			{
+				// Reset everything and load main menu again
 				SCRIPT_EXECUTOR->reset();
 				_sceneEditor.unloadScene();
 				_fe3d.camera_load(_fe3d.camera_getFOV(), 0.1f, 100.0f, vec3(0.0f));

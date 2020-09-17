@@ -23,7 +23,6 @@ public:
 	void setBloomMap(GLuint val);
 	void setPostProcessedSceneMap(GLuint val);
 	void setSceneDepthMap(GLuint val);
-	void setWaterDepthMap(GLuint val);
 	void setBlurMap(GLuint val);
 	void setMotionBlurMap(GLuint val);
 	void setLensFlareMap(GLuint val);
@@ -118,7 +117,6 @@ public:
 	const GLuint getBloomMap()				const;
 	const GLuint getPostProcessedSceneMap() const;
 	const GLuint getSceneDepthMap()         const;
-	const GLuint getWaterDepthMap()			const;
 	const GLuint getBlurMap()               const;
 	const GLuint getMotionBlurMap()         const;
 	const GLuint getLensFlareMap()			const;
@@ -213,7 +211,6 @@ private:
 	GLuint _bloomMap              = 0;
 	GLuint _postProcessedSceneMap = 0;
 	GLuint _sceneDepthMap         = 0;
-	GLuint _waterDepthMap		  = 0;
 	GLuint _blurMap               = 0;
 	GLuint _motionBlurMap         = 0;
 	GLuint _lensFlareMap		  = 0;

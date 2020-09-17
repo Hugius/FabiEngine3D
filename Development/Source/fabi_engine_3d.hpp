@@ -6,6 +6,7 @@
 #include <array>
 #include <vector>
 #include <map>
+#include <unordered_map>
 #include <string>
 #include <GLM\\glm.hpp>
 #include <memory>
@@ -13,6 +14,7 @@
 using std::array;
 using std::vector;
 using std::map;
+using std::unordered_map;
 using std::string;
 using glm::vec2;
 using glm::vec3;
@@ -685,7 +687,7 @@ public:
 	bool misc_isDirectory(const string& filePath);
 	bool misc_isFileExisting(const string& filePath);
 	bool misc_checkInterval(const string& key, int frameCount);
-	map<string, int> misc_getPerformanceProfilingStatistics();
+	unordered_map<string, int> misc_getPerformanceProfilingStatistics();
 
 protected:
 	// Virtual interface

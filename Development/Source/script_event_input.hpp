@@ -2,14 +2,14 @@
 
 #include "script_event.hpp"
 
-enum class InputType
+enum class InputEventType
 {
 	KEYBOARD,
 	MOUSE,
 	NONE
 };
 
-enum class InputMethod
+enum class InputEventMethod
 {
 	DOWN,
 	PRESSED,
@@ -22,21 +22,21 @@ class ScriptEventInput final : public ScriptEvent
 public:
 	using ScriptEvent::ScriptEvent;
 
-	void setInputType(InputType type);
-	void setInputMethod(InputMethod method);
+	void setInputType(InputEventType type);
+	void setInputMethod(InputEventMethod method);
 	void setInputElement(string name);
 	void setInputElement(Input element);
 
 	bool isTriggered() override;
 
-	InputType getInputType();
-	InputMethod getInputMethod();
+	InputEventType getInputType();
+	InputEventMethod getInputMethod();
 	Input getInputElement();
 	int getInputElementIndex();
 
 private:
-	InputType _inputType = InputType::NONE;
-	InputMethod _inputMethod = InputMethod::NONE;
+	InputEventType _inputType = InputEventType::NONE;
+	InputEventMethod _inputMethod = InputEventMethod::NONE;
 	Input _inputElement = Input::NONE;
 
 	static inline const map<string, Input> _keyInputStringMap = 

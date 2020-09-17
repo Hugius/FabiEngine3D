@@ -45,11 +45,6 @@ void RenderBus::setSceneDepthMap(GLuint val)
 	_sceneDepthMap = val;
 }
 
-void RenderBus::setWaterDepthMap(GLuint val)
-{
-	_waterDepthMap = val;
-}
-
 void RenderBus::setBlurMap(GLuint val)
 {
 	_blurMap = val;
@@ -441,11 +436,6 @@ const GLuint RenderBus::getLensFlareMap() const
 const GLuint RenderBus::getSceneDepthMap() const
 {
 	return _sceneDepthMap;
-}
-
-const GLuint RenderBus::getWaterDepthMap() const
-{
-	return _waterDepthMap;
 }
 
 const GLuint RenderBus::getBlurMap() const

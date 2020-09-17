@@ -18,18 +18,18 @@ void ScriptEditor::_generateScriptLineOverview(ScriptLine& scriptLine)
 		{
 			auto inputEvent = dynamic_pointer_cast<ScriptEventInput>(scriptLine.event);
 			
-			_addChoiceList(ChoiceListSort::EVENT, ChoiceListType::INPUT_TYPES, static_cast<int>(inputEvent->getInputType()));
+			_addChoiceList(ChoiceListSort::EVENT, ChoiceListType::EVENT_INPUT_TYPES, static_cast<int>(inputEvent->getInputType()));
 			
 			// Determine input type
-			if (inputEvent->getInputType() == InputType::KEYBOARD)
+			if (inputEvent->getInputType() == InputEventType::KEYBOARD)
 			{
-				_addChoiceList(ChoiceListSort::EVENT, ChoiceListType::INPUT_KEY_NAMES, inputEvent->getInputElementIndex());
+				_addChoiceList(ChoiceListSort::EVENT, ChoiceListType::EVENT_INPUT_KEY_NAMES, inputEvent->getInputElementIndex());
 			}
-			else if (inputEvent->getInputType() == InputType::MOUSE)
+			else if (inputEvent->getInputType() == InputEventType::MOUSE)
 			{
-				_addChoiceList(ChoiceListSort::EVENT, ChoiceListType::INPUT_KEY_NAMES, inputEvent->getInputElementIndex());
+				_addChoiceList(ChoiceListSort::EVENT, ChoiceListType::EVENT_INPUT_KEY_NAMES, inputEvent->getInputElementIndex());
 			}
-			_addChoiceList(ChoiceListSort::EVENT, ChoiceListType::INPUT_METHODS, static_cast<int>(inputEvent->getInputMethod()));
+			_addChoiceList(ChoiceListSort::EVENT, ChoiceListType::EVENT_INPUT_METHODS, static_cast<int>(inputEvent->getInputMethod()));
 		}
 		else if (scriptLine.event->getType() == ScriptEventType::COLLISION)
 		{
@@ -69,25 +69,25 @@ void ScriptEditor::_addChoiceList(ChoiceListSort listSort, ChoiceListType listTy
 			optionNames = _eventTypeNames;
 			break;
 		}
-		case ChoiceListType::INPUT_TYPES:
+		case ChoiceListType::EVENT_INPUT_TYPES:
 		{
 			headerName = "Input type";
 			optionNames = _inputTypeNames;
 			break;
 		}
-		case ChoiceListType::INPUT_KEY_NAMES:
+		case ChoiceListType::EVENT_INPUT_KEY_NAMES:
 		{
 			headerName = "Keyboard key";
 			optionNames = _inputKeyNames;
 			break;
 		}
-		case ChoiceListType::INPUT_MOUSE_NAMES:
+		case ChoiceListType::EVENT_INPUT_MOUSE_NAMES:
 		{
 			headerName = "Mouse button";
 			optionNames = _inputMouseNames;
 			break;
 		}
-		case ChoiceListType::INPUT_METHODS:
+		case ChoiceListType::EVENT_INPUT_METHODS:
 		{
 			headerName = "Input method";
 			optionNames = _inputMethodNames;

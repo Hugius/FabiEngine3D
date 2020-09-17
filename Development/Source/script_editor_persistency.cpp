@@ -59,9 +59,9 @@ void ScriptEditor::_loadScriptFromFile()
 					event = make_shared<ScriptEventInput>(_fe3d, ScriptEventType::INPUT);
 					int inputType, inputElement, inputMethod;
 					iss >> inputType >> inputElement >> inputMethod;
-					dynamic_pointer_cast<ScriptEventInput>(event)->setInputType(static_cast<InputType>(inputType));
+					dynamic_pointer_cast<ScriptEventInput>(event)->setInputType(static_cast<InputEventType>(inputType));
 					dynamic_pointer_cast<ScriptEventInput>(event)->setInputElement(static_cast<Input>(inputElement));
-					dynamic_pointer_cast<ScriptEventInput>(event)->setInputMethod(static_cast<InputMethod>(inputMethod));
+					dynamic_pointer_cast<ScriptEventInput>(event)->setInputMethod(static_cast<InputEventMethod>(inputMethod));
 					break;
 				}
 

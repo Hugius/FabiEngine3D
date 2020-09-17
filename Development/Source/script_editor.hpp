@@ -22,14 +22,30 @@ class ScriptEditor final
 
 	enum class ChoiceListType
 	{
+		// Types
 		EVENT_TYPES,
 		ACTION_TYPES,
 
+		// Initialization eventt
+		EVENT_INITIALIZATION,
+
 		// Input event
-		INPUT_TYPES,
-		INPUT_KEY_NAMES,
-		INPUT_MOUSE_NAMES,
-		INPUT_METHODS,
+		EVENT_INPUT_TYPES,
+		EVENT_INPUT_KEY_NAMES,
+		EVENT_INPUT_MOUSE_NAMES,
+		EVENT_INPUT_METHODS,
+
+		// Collision event
+
+		// Time event
+		
+
+		// Condition event
+
+		// Camera actions
+		ACTION_CAMERA_TYPES,
+		ACTION_CAMERA_DIRECTIONS,
+		ACTION_CAMERA_METHODS,
 
 		NONE
 	};

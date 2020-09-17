@@ -147,24 +147,24 @@ void ScriptEditor::_addNewScriptLine(const string& newID)
 				}
 
 				// Input event
-				case ChoiceListType::INPUT_TYPES:
+				case ChoiceListType::EVENT_INPUT_TYPES:
 				{
-					dynamic_pointer_cast<ScriptEventInput>(event)->setInputType(static_cast<InputType>(choiceList.selectedOptionIndex));
+					dynamic_pointer_cast<ScriptEventInput>(event)->setInputType(static_cast<InputEventType>(choiceList.selectedOptionIndex));
 					break;
 				}
-				case ChoiceListType::INPUT_KEY_NAMES:
+				case ChoiceListType::EVENT_INPUT_KEY_NAMES:
 				{
 					dynamic_pointer_cast<ScriptEventInput>(event)->setInputElement(_inputKeyNames[optionIndex]);
 					break;
 				}
-				case ChoiceListType::INPUT_MOUSE_NAMES:
+				case ChoiceListType::EVENT_INPUT_MOUSE_NAMES:
 				{
 					dynamic_pointer_cast<ScriptEventInput>(event)->setInputElement(_inputMouseNames[optionIndex]);
 					break;
 				}
-				case ChoiceListType::INPUT_METHODS:
+				case ChoiceListType::EVENT_INPUT_METHODS:
 				{
-					dynamic_pointer_cast<ScriptEventInput>(event)->setInputMethod(static_cast<InputMethod>(choiceList.selectedOptionIndex));
+					dynamic_pointer_cast<ScriptEventInput>(event)->setInputMethod(static_cast<InputEventMethod>(choiceList.selectedOptionIndex));
 					break;
 				}
 			}

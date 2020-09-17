@@ -73,7 +73,7 @@ void WaterEntityRenderer::render(const WaterEntity* entity)
 		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D, _renderBus.getSceneRefractionMap());
 		glActiveTexture(GL_TEXTURE2);
-		glBindTexture(GL_TEXTURE_2D, _renderBus.getWaterDepthMap());
+		glBindTexture(GL_TEXTURE_2D, _renderBus.getSceneDepthMap());
 		glActiveTexture(GL_TEXTURE3);
 		glBindTexture(GL_TEXTURE_2D, entity->getDudvMap());
 		glActiveTexture(GL_TEXTURE4);

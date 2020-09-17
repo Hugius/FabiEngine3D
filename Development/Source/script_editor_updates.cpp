@@ -196,7 +196,7 @@ void ScriptEditor::_updateNavigation()
 							}
 							else if (option == "INPUT_EVENT")
 							{
-								_addChoiceList(ChoiceListSort::EVENT, ChoiceListType::INPUT_TYPES);
+								_addChoiceList(ChoiceListSort::EVENT, ChoiceListType::EVENT_INPUT_TYPES);
 							}
 							else if (option == "COLLISION_EVENT")
 							{
@@ -214,26 +214,26 @@ void ScriptEditor::_updateNavigation()
 						}
 
 						// Input event
-						case ChoiceListType::INPUT_TYPES:
+						case ChoiceListType::EVENT_INPUT_TYPES:
 						{
 							string option = _inputTypeNames[optionIndex];
 							if (option == "KEYBOARD")
 							{
-								_addChoiceList(ChoiceListSort::EVENT, ChoiceListType::INPUT_KEY_NAMES);
+								_addChoiceList(ChoiceListSort::EVENT, ChoiceListType::EVENT_INPUT_KEY_NAMES);
 							}
 							else if (option == "MOUSE")
 							{
-								_addChoiceList(ChoiceListSort::EVENT, ChoiceListType::INPUT_MOUSE_NAMES);
+								_addChoiceList(ChoiceListSort::EVENT, ChoiceListType::EVENT_INPUT_MOUSE_NAMES);
 							}
 							break;
 						}
-						case ChoiceListType::INPUT_KEY_NAMES:
-						case ChoiceListType::INPUT_MOUSE_NAMES:
+						case ChoiceListType::EVENT_INPUT_KEY_NAMES:
+						case ChoiceListType::EVENT_INPUT_MOUSE_NAMES:
 						{
-							_addChoiceList(ChoiceListSort::EVENT, ChoiceListType::INPUT_METHODS);
+							_addChoiceList(ChoiceListSort::EVENT, ChoiceListType::EVENT_INPUT_METHODS);
 							break;
 						}
-						case ChoiceListType::INPUT_METHODS:
+						case ChoiceListType::EVENT_INPUT_METHODS:
 						{
 							_allowedToAddScript = true;
 							break;

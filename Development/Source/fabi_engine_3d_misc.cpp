@@ -4,7 +4,6 @@
 #include "configuration.hpp"
 
 #include <chrono>
-#include <map>
 
 int FabiEngine3D::misc_getUniqueInt(int min, int max)
 {
@@ -391,10 +390,11 @@ bool FabiEngine3D::misc_checkInterval(const string& key, int frameCount)
 	}
 }
 
-map<string, int> FabiEngine3D::misc_getPerformanceProfilingStatistics()
+unordered_map<string, int> FabiEngine3D::misc_getPerformanceProfilingStatistics()
 {
-	map<string, int> result = 
+	std::unordered_map<string, int> result = 
 	{ 
+		std::pair<string, int>("bufferSwap", 0),
 		std::pair<string, int>("waterPreRender", 0),
 		std::pair<string, int>("shadowPreRender", 0),
 		std::pair<string, int>("postProcessing", 0),
@@ -403,13 +403,12 @@ map<string, int> FabiEngine3D::misc_getPerformanceProfilingStatistics()
 		std::pair<string, int>("waterEntityRender", 0),
 		std::pair<string, int>("gameEntityRender", 0),
 		std::pair<string, int>("billboardEntityRender", 0),
-		std::pair<string, int>("guiEntityRender", 0),
-		std::pair<string, int>("textEntityRender", 0)
+		std::pair<string, int>("guiEntityRender", 0)
 	};
 
 	vector<string> IDs =
 	{
-		"reflectionPreRender", "refractionPreRender", "shadowPreRender", "dofDepthPreRender", "waterDepthPreRender", 
+		"reflectionPreRender", "refractionPreRender", "shadowPreRender", "sceneDepthPreRender", 
 		"skyEntityRender", "terrainEntityRender", "waterEntityRender", "gameEntityRender", "billboardEntityRender", "aabbEntityRender", 
 		"antiAliasing", "postProcessing", "guiEntityRender", "textEntityRender", "bufferSwap"
 	};
@@ -427,21 +426,25 @@ map<string, int> FabiEngine3D::misc_getPerformanceProfilingStatistics()
 		{
 			result["waterPreRender"] += percentage;
 		}
-		else if (ID == "waterDepthPreRender")
+		else if (ID == "sceneDepthPreRender")
 		{
-			result["waterPreRender"] += percentage;
-		}
-		else if (ID == "dofDepthPreRender")
-		{
-			result["postProcessing"] += percentage;
+			// Determine if depth rendering being used by water or post-processing
+			if (_core->_renderBus.isDofEnabled() || _core->_renderBus.isLensFlareEnabled())
+			{
+				result["postProcessing"] += percentage;
+			}
+			else
+			{
+				result["waterPreRender"] += percentage;
+			}
 		}
 		else if (ID == "antiAliasing")
 		{
 			result["postProcessing"] += percentage;
 		}
-		else if (ID == "postProcessing")
+		else if (ID == "textEntityRender")
 		{
-			result["postProcessing"] += percentage;
+			result["guiEntityRender"] += percentage;
 		}
 		else if (ID == "aabbEntityRender")
 		{

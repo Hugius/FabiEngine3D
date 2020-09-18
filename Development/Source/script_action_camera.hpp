@@ -30,6 +30,13 @@ enum class CameraActionMethod
 	NONE
 };
 
+enum class CameraActionToggle
+{
+	ON,
+	OFF,
+	NONE
+};
+
 class ScriptActionCamera final : public ScriptAction
 {
 public:
@@ -38,13 +45,27 @@ public:
 	void execute() override;
 	void reset() override;
 
-private:
-	vec3 _cameraPosition;
-	vec3 _lookatPosition;
-	float _pitch;
-	float _yaw;
+	void setCameraType(CameraActionType type);
+	void setCameraDirection(CameraActionDirection direction);
+	void setCameraMethod(CameraActionMethod method);
+	void setCameraToggle(CameraActionToggle toggle);
+	void setVectorArgument(vec3 position);
+	void setFloatArgument(float yaw);
 
-	CameraActionType _type = CameraActionType::NONE;
-	CameraActionDirection _direction = CameraActionDirection::NONE;
-	CameraActionMethod _method = CameraActionMethod::NONE;
+	CameraActionType getCameraType();
+	CameraActionDirection getCameraDirection();
+	CameraActionMethod getCameraMethod();
+	CameraActionToggle getCameraToggle();
+
+	vec3 getVectorArgument();
+	float getFloatArgument();
+
+private:
+	vec3 _vectorArgument = vec3(0.0f);
+	float _floatArgument = 0.0;
+
+	CameraActionType _cameraType = CameraActionType::NONE;
+	CameraActionDirection _cameraDirection = CameraActionDirection::NONE;
+	CameraActionMethod _cameraMethod = CameraActionMethod::NONE;
+	CameraActionToggle _cameraToggle = CameraActionToggle::NONE;
 };

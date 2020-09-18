@@ -178,10 +178,10 @@ void TopViewportController::_updateGameManagement()
 
 		// Game buttons hoverability
 		bool isInMainMenu = (_gui->getViewport("left")->getWindow("main")->getActiveScreen()->getID() == "main");
-		gameScreen->getButton("play")->setHoverable(!SCRIPT_EXECUTOR->isScriptEmpty() && !SCRIPT_EXECUTOR->isRunning());
-		gameScreen->getButton("pause")->setHoverable(SCRIPT_EXECUTOR->isRunning());
-		gameScreen->getButton("restart")->setHoverable(SCRIPT_EXECUTOR->isInitialized());
-		gameScreen->getButton("stop")->setHoverable(SCRIPT_EXECUTOR->isInitialized());
+		gameScreen->getButton("play")->setHoverable(isInMainMenu && !SCRIPT_EXECUTOR->isScriptEmpty() && !SCRIPT_EXECUTOR->isRunning());
+		gameScreen->getButton("pause")->setHoverable(isInMainMenu && SCRIPT_EXECUTOR->isRunning());
+		gameScreen->getButton("restart")->setHoverable(isInMainMenu && SCRIPT_EXECUTOR->isInitialized());
+		gameScreen->getButton("stop")->setHoverable(isInMainMenu && SCRIPT_EXECUTOR->isInitialized());
 
 		// Check if player wants to pause the running game
 		if (SCRIPT_EXECUTOR->isRunning())

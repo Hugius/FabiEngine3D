@@ -96,7 +96,7 @@ void SceneEditor::_updateCamera()
 		{
 			if (_fe3d.misc_isMouseInsideViewport())
 			{
-				_fe3d.camera_enableFirstPersonView(_fe3d.camera_getMouseSensitivity());
+				_fe3d.camera_enableFirstPersonView();
 				_fe3d.camera_disableLookat();
 			}
 

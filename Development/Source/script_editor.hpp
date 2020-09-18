@@ -46,7 +46,9 @@ class ScriptEditor final
 		ACTION_CAMERA_TYPES,
 		ACTION_CAMERA_DIRECTIONS,
 		ACTION_CAMERA_METHODS,
+		ACTION_CAMERA_TOGGLE,
 
+		// Miscellaneous
 		NONE
 	};
 
@@ -105,10 +107,16 @@ private:
 	// Option names for front-end
 	vector<ChoiceList> _choiceListStack;
 	vector<string> _eventTypeNames;
+	vector<string> _actionTypeNames;
+
 	vector<string> _inputTypeNames;
 	vector<string> _inputKeyNames;
 	vector<string> _inputMouseNames;
 	vector<string> _inputMethodNames;
+	vector<string> _cameraTypeNames;
+	vector<string> _cameraDirectionNames;
+	vector<string> _cameraMethodNames;
+	vector<string> _toggleNames;
 
 	// Editor variables
 	string _currentProjectName = "";

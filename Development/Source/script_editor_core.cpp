@@ -53,25 +53,36 @@ void ScriptEditor::load()
 	// Event types
 	_eventTypeNames = { "INIT_EVENT", "INPUT_EVENT", "COLLISION_EVENT", "TIME_EVENT", "CONDITION_EVENT" };
 
-	// Initialization event
+	// Initialization events
 	
-	// Input event
+	// Input events
 	_inputTypeNames = { "KEYBOARD", "MOUSE" };
 	_inputKeyNames = { "KEY_A", "KEY_B", "KEY_C", "KEY_D", "KEY_E", "KEY_F", "KEY_G", "KEY_H", "KEY_i", "KEY_J", "KEY_K", "KEY_L", "KEY_M",
 		"KEY_N", "KEY_O", "KEY_P", "KEY_Q", "KEY_R", "KEY_S", "KEY_T", "KEY_U", "KEY_V", "KEY_W", "KEY_X", "KEY_Y", "KEY_Z" };
 	_inputMouseNames = { "BUTTON_LEFT", "BUTTON_MIDDLE", "BUTTON_RIGHT", "SCROLL_UP", "SCROLL_DOWN" };
 	_inputMethodNames = { "DOWN", "PRESSED", "TOGGLED" };
 
-	// Collision event
+	// Collision events
 
-	// Time event
+	// Time events
 	
-	// Condition event
+	// Condition events
+
+	// Action types
+	_actionTypeNames = { "CAMERA_ACTION" };
+
+	// Camera actions
+	_cameraTypeNames = { "POSITION", "YAW", "PITCH", "LOOK_AT", "FIRST_PERSON" };
+	_cameraDirectionNames = { "X", "Y", "Z", "FOLLOW_X", "FOLLOW_Z", "FOLLOW_ZY" };
+	_cameraMethodNames = { "MOVE", "SET" };
+
+	// Miscellaneous
+	_toggleNames = { "ON", "OFF" };
 
 	// Load script
 	_loadScriptFromFile();
 
-	// Miscellaneous
+	// Other
 	_gui->getViewport("bottom")->getWindow("controls")->setActiveScreen("scriptEditor");
 	_isLoaded = true;
 }
@@ -121,7 +132,7 @@ void ScriptEditor::_addNewScriptLine(const string& newID)
 {
 	// Placeholders
 	shared_ptr<ScriptEvent> event = nullptr;
-	shared_ptr<ScriptAction> action = make_shared<ScriptActionCamera>(_fe3d, ScriptActionType::CAMERA);
+	shared_ptr<ScriptAction> action = nullptr;
 
 	// Fill the placeholders
 	for (auto& choiceList : _choiceListStack)
@@ -177,7 +188,29 @@ void ScriptEditor::_addNewScriptLine(const string& newID)
 				// Action types
 				case ChoiceListType::ACTION_TYPES:
 				{
-
+					if (choiceList.selectedOptionIndex == 0) action = make_shared<ScriptActionCamera>(_fe3d, ScriptActionType::CAMERA);
+					break;
+				}
+				
+				// Camera action
+				case ChoiceListType::ACTION_CAMERA_TYPES:
+				{
+					dynamic_pointer_cast<ScriptActionCamera>(action)->setCameraType(static_cast<CameraActionType>(choiceList.selectedOptionIndex));
+					break;
+				}
+				case ChoiceListType::ACTION_CAMERA_DIRECTIONS:
+				{
+					dynamic_pointer_cast<ScriptActionCamera>(action)->setCameraDirection(static_cast<CameraActionDirection>(choiceList.selectedOptionIndex));
+					break;
+				}
+				case ChoiceListType::ACTION_CAMERA_METHODS:
+				{
+					dynamic_pointer_cast<ScriptActionCamera>(action)->setCameraMethod(static_cast<CameraActionMethod>(choiceList.selectedOptionIndex));
+					break;
+				}
+				case ChoiceListType::ACTION_CAMERA_TOGGLE:
+				{
+					dynamic_pointer_cast<ScriptActionCamera>(action)->setCameraToggle(static_cast<CameraActionToggle>(choiceList.selectedOptionIndex));
 					break;
 				}
 			}

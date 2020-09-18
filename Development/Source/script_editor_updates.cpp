@@ -79,9 +79,21 @@ void ScriptEditor::_updateChoiceLists()
 			{
 				// Scrolling values
 				string baseID = std::to_string(listIndex) + "_option_";
-				vec3 firstPosition = _fe3d.billboardEntity_getPosition(baseID + "0");
-				vec3 lastPosition = _fe3d.billboardEntity_getPosition(baseID + std::to_string(list.total - 1));
-				float optionOffsetY = _fe3d.billboardEntity_getPosition(baseID + "0").y - _fe3d.billboardEntity_getPosition(baseID + "1").y;
+				vec3 firstPosition = _fe3d.billboardEntity_getPosition(baseID + "0"); // Position of top option
+				vec3 lastPosition = _fe3d.billboardEntity_getPosition(baseID + std::to_string(list.total - 1)); // Position of bottom option
+
+				// Calculate distance between 2 options
+				float optionOffsetY;
+				if (_fe3d.billboardEntity_isExisting(baseID + "1"))
+				{
+					optionOffsetY = _fe3d.billboardEntity_getPosition(baseID + "0").y - _fe3d.billboardEntity_getPosition(baseID + "1").y;
+				}
+				else
+				{
+					optionOffsetY = 0.0f;
+				}
+
+				// Calculate scrolling list bounds
 				float maxY = _fe3d.gameEntity_getPosition(std::to_string(listIndex) + "_header").y - optionOffsetY;
 				float minY = _fe3d.gameEntity_getPosition("background").y - (_fe3d.gameEntity_getSize("background").y / 15.0f);
 				float halfHeight = (_optionBillboardHeight / 2.0f);
@@ -185,6 +197,7 @@ void ScriptEditor::_updateNavigation()
 					// Determine type of choice list
 					switch (listType)
 					{
+						// Event types
 						case ChoiceListType::EVENT_TYPES:
 						{
 							string option = _eventTypeNames[optionIndex];
@@ -219,10 +232,12 @@ void ScriptEditor::_updateNavigation()
 							string option = _inputTypeNames[optionIndex];
 							if (option == "KEYBOARD")
 							{
+								// Display all keyboard keys
 								_addChoiceList(ChoiceListSort::EVENT, ChoiceListType::EVENT_INPUT_KEY_NAMES);
 							}
 							else if (option == "MOUSE")
 							{
+								// Display all mouse buttons
 								_addChoiceList(ChoiceListSort::EVENT, ChoiceListType::EVENT_INPUT_MOUSE_NAMES);
 							}
 							break;
@@ -230,10 +245,59 @@ void ScriptEditor::_updateNavigation()
 						case ChoiceListType::EVENT_INPUT_KEY_NAMES:
 						case ChoiceListType::EVENT_INPUT_MOUSE_NAMES:
 						{
+							// Display input methods
 							_addChoiceList(ChoiceListSort::EVENT, ChoiceListType::EVENT_INPUT_METHODS);
 							break;
 						}
 						case ChoiceListType::EVENT_INPUT_METHODS:
+						{
+							// Event chosen, go to action choosing
+							_addChoiceList(ChoiceListSort::ACTION, ChoiceListType::ACTION_TYPES);
+							break;
+						}
+
+						// Action types
+						case ChoiceListType::ACTION_TYPES:
+						{
+							string option = _actionTypeNames[optionIndex];
+
+							// Determine action type
+							if (option == "CAMERA_ACTION")
+							{
+								_addChoiceList(ChoiceListSort::ACTION, ChoiceListType::ACTION_CAMERA_TYPES);
+							}
+							break;
+						}
+
+						// Camera action
+						case ChoiceListType::ACTION_CAMERA_TYPES:
+						{
+							string option = _cameraTypeNames[optionIndex];
+							if (option == "POSITION")
+							{
+								_addChoiceList(ChoiceListSort::ACTION, ChoiceListType::ACTION_CAMERA_DIRECTIONS);
+							}
+							else if (option == "YAW" || option == "PITCH")
+							{
+								_addChoiceList(ChoiceListSort::ACTION, ChoiceListType::ACTION_CAMERA_METHODS);
+							}
+							else if (option == "LOOK_AT" || option == "FIRST_PERSON")
+							{
+								_addChoiceList(ChoiceListSort::ACTION, ChoiceListType::ACTION_CAMERA_TOGGLE);
+							}
+							break;
+						}
+						case ChoiceListType::ACTION_CAMERA_DIRECTIONS:
+						{
+							_addChoiceList(ChoiceListSort::ACTION, ChoiceListType::ACTION_CAMERA_METHODS);
+							break;
+						}
+						case ChoiceListType::ACTION_CAMERA_METHODS:
+						{
+							_allowedToAddScript = true;
+							break;
+						}
+						case ChoiceListType::ACTION_CAMERA_TOGGLE:
 						{
 							_allowedToAddScript = true;
 							break;

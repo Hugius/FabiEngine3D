@@ -120,88 +120,90 @@ void ScriptEditor::_saveScriptToFile()
 	// Check if project is loaded properly
 	if (_isLoaded)
 	{
-		// Check if script is not empty
-		if (_script->getLineCount() != 0)
+		// Error checking
+		if (_currentProjectName == "")
 		{
-			// Error checking
-			if (_currentProjectName == "")
-			{
-				_fe3d.logger_throwError("Tried to save as empty project!");
-			}
-
-			// Create or overwrite models file
-			std::ofstream file;
-			file.open(_fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\Data\\script.fe3d");
-
-			// Write model data into file
-			for (auto& ID : _script->getAllScriptLineIDs())
-			{
-				auto scriptLine = _script->getScriptLine(ID);
-
-				// Write scriptline name
-				file << scriptLine.ID << " ";
-
-				// Write event type
-				file << std::to_string(static_cast<int>(scriptLine.event->getType())) << " ";
-
-				// Write event data based on type
-				switch (scriptLine.event->getType())
-				{
-					case ScriptEventType::INITIALIZATION:
-					{
-						break;
-					}
-
-					case ScriptEventType::INPUT:
-					{
-						auto inputEvent = dynamic_pointer_cast<ScriptEventInput>(scriptLine.event);
-						file <<
-							static_cast<int>(inputEvent->getInputType()) << " " <<
-							static_cast<int>(inputEvent->getInputElement()) << " " <<
-							static_cast<int>(inputEvent->getInputMethod());
-						break;
-					}
-
-					case ScriptEventType::COLLISION:
-					{
-						break;
-					}
-
-					case ScriptEventType::TIME:
-					{
-						break;
-					}
-
-					case ScriptEventType::CONDITION:
-					{
-						break;
-					}
-				}
-
-				// Add a space between event and action
-				file << " ";
-
-				// Write action type
-				file << std::to_string(static_cast<int>(scriptLine.action->getType())) << " ";
-
-				// Write action data based on type
-				switch (scriptLine.action->getType())
-				{
-					case ScriptActionType::CAMERA:
-					{
-						break;
-					}
-				}
-
-				// Next scriptline
-				file << std::endl;
-			}
-
-			// Close file
-			file.close();
-
-			// Logging
-			_fe3d.logger_throwInfo("Script data from project \"" + _currentProjectName + "\" saved!");
+			_fe3d.logger_throwError("Tried to save as empty project!");
 		}
+
+		// Create or overwrite models file
+		std::ofstream file;
+		file.open(_fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\Data\\script.fe3d");
+
+		// Write model data into file
+		for (auto& ID : _script->getAllScriptLineIDs())
+		{
+			auto scriptLine = _script->getScriptLine(ID);
+
+			// Write scriptline name
+			file << scriptLine.ID << " ";
+
+			// Write event type
+			file << std::to_string(static_cast<int>(scriptLine.event->getType())) << " ";
+
+			// Write event data based on type
+			switch (scriptLine.event->getType())
+			{
+				case ScriptEventType::INITIALIZATION:
+				{
+					break;
+				}
+
+				case ScriptEventType::INPUT:
+				{
+					auto inputEvent = dynamic_pointer_cast<ScriptEventInput>(scriptLine.event);
+					file <<
+						static_cast<int>(inputEvent->getInputType()) << " " <<
+						static_cast<int>(inputEvent->getInputElement()) << " " <<
+						static_cast<int>(inputEvent->getInputMethod());
+					break;
+				}
+
+				case ScriptEventType::COLLISION:
+				{
+					break;
+				}
+
+				case ScriptEventType::TIME:
+				{
+					break;
+				}
+
+				case ScriptEventType::CONDITION:
+				{
+					break;
+				}
+			}
+
+			// Add a space between event and action
+			file << " ";
+
+			// Write action type
+			file << std::to_string(static_cast<int>(scriptLine.action->getType())) << " ";
+
+			// Write action data based on type
+			switch (scriptLine.action->getType())
+			{
+				case ScriptActionType::CAMERA:
+				{
+					auto cameraAction = dynamic_pointer_cast<ScriptActionCamera>(scriptLine.action);
+					file <<
+						static_cast<int>(cameraAction->getCameraType()) << " " <<
+						static_cast<int>(cameraAction->getCameraDirection()) << " " <<
+						static_cast<int>(cameraAction->getCameraMethod()) << " " <<
+						static_cast<int>(cameraAction->getCameraToggle());
+					break;
+				}
+			}
+
+			// Next scriptline
+			file << std::endl;
+		}
+
+		// Close file
+		file.close();
+
+		// Logging
+		_fe3d.logger_throwInfo("Script data from project \"" + _currentProjectName + "\" saved!");
 	}
 }

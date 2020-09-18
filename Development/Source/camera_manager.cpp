@@ -207,10 +207,9 @@ void CameraManager::disableLookat()
 	_isLookatEabled = false;
 }
 
-void CameraManager::enableFirstPersonView(float mouseSensitivity)
+void CameraManager::enableFirstPersonView()
 {
 	_isFirstPersonViewEnabled = true;
-	_mouseSensitivity = mouseSensitivity;
 }
 
 void CameraManager::disableFirstPersonView()

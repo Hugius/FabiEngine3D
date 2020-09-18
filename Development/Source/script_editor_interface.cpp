@@ -8,8 +8,10 @@ void ScriptEditor::_generateScriptLineOverview(ScriptLine& scriptLine)
 	// Check if script line has event
 	if (scriptLine.event != nullptr)
 	{
+		// Add event type
 		_addChoiceList(ChoiceListSort::EVENT, ChoiceListType::EVENT_TYPES, static_cast<int>(scriptLine.event->getType()));
 
+		// Determine event type and add resulting choices
 		if (scriptLine.event->getType() == ScriptEventType::INITIALIZATION)
 		{
 
@@ -18,6 +20,7 @@ void ScriptEditor::_generateScriptLineOverview(ScriptLine& scriptLine)
 		{
 			auto inputEvent = dynamic_pointer_cast<ScriptEventInput>(scriptLine.event);
 			
+			// Add input type
 			_addChoiceList(ChoiceListSort::EVENT, ChoiceListType::EVENT_INPUT_TYPES, static_cast<int>(inputEvent->getInputType()));
 			
 			// Determine input type
@@ -27,7 +30,7 @@ void ScriptEditor::_generateScriptLineOverview(ScriptLine& scriptLine)
 			}
 			else if (inputEvent->getInputType() == InputEventType::MOUSE)
 			{
-				_addChoiceList(ChoiceListSort::EVENT, ChoiceListType::EVENT_INPUT_KEY_NAMES, inputEvent->getInputElementIndex());
+				_addChoiceList(ChoiceListSort::EVENT, ChoiceListType::EVENT_INPUT_MOUSE_NAMES, inputEvent->getInputElementIndex());
 			}
 			_addChoiceList(ChoiceListSort::EVENT, ChoiceListType::EVENT_INPUT_METHODS, static_cast<int>(inputEvent->getInputMethod()));
 		}
@@ -47,7 +50,32 @@ void ScriptEditor::_generateScriptLineOverview(ScriptLine& scriptLine)
 		// Check if script line has action
 		if (scriptLine.action != nullptr)
 		{
+			// Add action type
+			_addChoiceList(ChoiceListSort::ACTION, ChoiceListType::ACTION_TYPES, static_cast<int>(scriptLine.action->getType()));
 
+			// Determine event type and add resulting choices
+			if (scriptLine.action->getType() == ScriptActionType::CAMERA)
+			{
+				auto cameraAction = dynamic_pointer_cast<ScriptActionCamera>(scriptLine.action);
+
+				// Add camera type
+				_addChoiceList(ChoiceListSort::ACTION, ChoiceListType::ACTION_CAMERA_TYPES, static_cast<int>(cameraAction->getCameraType()));
+
+				// Determine camera type
+				if (cameraAction->getCameraType() == CameraActionType::POSITION)
+				{
+					_addChoiceList(ChoiceListSort::ACTION, ChoiceListType::ACTION_CAMERA_DIRECTIONS, static_cast<int>(cameraAction->getCameraDirection()));
+					_addChoiceList(ChoiceListSort::ACTION, ChoiceListType::ACTION_CAMERA_METHODS, static_cast<int>(cameraAction->getCameraMethod()));
+				}
+				else if (cameraAction->getCameraType() == CameraActionType::YAW || cameraAction->getCameraType() == CameraActionType::PITCH)
+				{
+					_addChoiceList(ChoiceListSort::ACTION, ChoiceListType::ACTION_CAMERA_METHODS, static_cast<int>(cameraAction->getCameraMethod()));
+				}
+				else if (cameraAction->getCameraType() == CameraActionType::LOOKAT || cameraAction->getCameraType() == CameraActionType::FIRST_PERSON)
+				{
+					_addChoiceList(ChoiceListSort::ACTION, ChoiceListType::ACTION_CAMERA_TOGGLE, static_cast<int>(cameraAction->getCameraToggle()));
+				}
+			}
 		}
 	}
 }
@@ -56,17 +84,38 @@ void ScriptEditor::_addChoiceList(ChoiceListSort listSort, ChoiceListType listTy
 {
 	// General variables
 	int listIndex = static_cast<int>(listType);
-	
 	string headerName;
 	vector<string> optionNames;
 
 	// Determine list to be generated
 	switch (listType)
 	{
+		// Event or action
 		case ChoiceListType::EVENT_TYPES:
 		{
 			headerName = "Event type";
 			optionNames = _eventTypeNames;
+			break;
+		}
+		case ChoiceListType::ACTION_TYPES:
+		{
+			headerName = "Action type";
+			optionNames = _actionTypeNames;
+			break;
+		}
+
+		// Initialization
+		case ChoiceListType::EVENT_INITIALIZATION:
+		{
+			// TODO <---
+			break;
+		}
+
+		// Input event
+		case ChoiceListType::EVENT_INPUT_METHODS:
+		{
+			headerName = "Input method";
+			optionNames = _inputMethodNames;
 			break;
 		}
 		case ChoiceListType::EVENT_INPUT_TYPES:
@@ -87,10 +136,30 @@ void ScriptEditor::_addChoiceList(ChoiceListSort listSort, ChoiceListType listTy
 			optionNames = _inputMouseNames;
 			break;
 		}
-		case ChoiceListType::EVENT_INPUT_METHODS:
+
+		// Camera action
+		case ChoiceListType::ACTION_CAMERA_TYPES:
 		{
-			headerName = "Input method";
-			optionNames = _inputMethodNames;
+			headerName = "Camera type";
+			optionNames = _cameraTypeNames;
+			break;
+		}
+		case ChoiceListType::ACTION_CAMERA_DIRECTIONS:
+		{
+			headerName = "Camera direction";
+			optionNames = _cameraDirectionNames;
+			break;
+		}
+		case ChoiceListType::ACTION_CAMERA_METHODS:
+		{
+			headerName = "Camera method";
+			optionNames = _cameraMethodNames;
+			break;
+		}
+		case ChoiceListType::ACTION_CAMERA_TOGGLE:
+		{
+			headerName = "Camera toggle";
+			optionNames = _toggleNames;
 			break;
 		}
 	}
@@ -99,7 +168,7 @@ void ScriptEditor::_addChoiceList(ChoiceListSort listSort, ChoiceListType listTy
 	const string fontPath = "Engine\\Fonts\\lucida.ttf";
 	const float maxY = 4.5f;
 	const float minX = -8.0f;
-	const float xOffset = 7.5f;
+	const float xOffset = 8.5f;
 	const float yOffset = 0.7f;
 	vec3 headerPosition = vec3(minX + (xOffset * _choiceListStack.size()), 5.0f, 0.5f);
 	

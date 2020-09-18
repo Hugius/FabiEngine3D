@@ -45,7 +45,7 @@ public:
 	void  camera_load(float fov, float nearZ, float farZ, vec3 startPosition, float yaw = 0.0f, float pitch = 0.0f);
 	void  camera_enableLookat(vec3 position);
 	void  camera_disableLookat();
-	void  camera_enableFirstPersonView(float mouseSensitivity);
+	void  camera_enableFirstPersonView();
 	void  camera_disableFirstPersonView();
 	void  camera_enableFreeMovement();
 	void  camera_disableFreeMovement();

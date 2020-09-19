@@ -442,6 +442,9 @@
     <ClCompile Include="Source\script_event_initialization.cpp">
       <Filter>src\Scripting System\Events</Filter>
     </ClCompile>
+    <ClCompile Include="Source\script_editor_creation.cpp">
+      <Filter>src\Editor System\Script Editor\Updates</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\obj_loader.hpp">

@@ -83,9 +83,28 @@ void ScriptEditor::_generateScriptLineOverview(ScriptLine& scriptLine)
 void ScriptEditor::_addChoiceList(ChoiceListSort listSort, ChoiceListType listType, int activeIndex)
 {
 	// General variables
-	int listIndex = static_cast<int>(listType);
 	string headerName;
 	vector<string> optionNames;
+
+	// Type options
+	vector<string> eventTypeNames = { "INIT_EVENT", "INPUT_EVENT", "COLLISION_EVENT", "TIME_EVENT", "CONDITION_EVENT" };
+	vector<string> actionTypeNames = { "CAMERA_ACTION" };
+
+	// Input options
+	vector<string> inputTypeNames = { "KEYBOARD", "MOUSE" };
+	vector<string> inputKeyNames = { "KEY_A", "KEY_B", "KEY_C", "KEY_D", "KEY_E", "KEY_F", "KEY_G", "KEY_H", "KEY_i", "KEY_J", "KEY_K", "KEY_L", 
+		"KEY_M", "KEY_N", "KEY_O", "KEY_P", "KEY_Q", "KEY_R", "KEY_S", "KEY_T", "KEY_U", "KEY_V", "KEY_W", "KEY_X", "KEY_Y", "KEY_Z" };
+	vector<string> inputMouseNames = { "BUTTON_LEFT", "BUTTON_MIDDLE", "BUTTON_RIGHT", "SCROLL_UP", "SCROLL_DOWN" };
+	vector<string> inputMethodNames = { "DOWN", "PRESSED", "TOGGLED" };
+
+	// Camera options
+	vector<string> cameraTypeNames = { "POSITION", "FOLLOW", "YAW", "PITCH", "LOOK_AT", "FIRST_PERSON" };
+	vector<string> cameraDirectionNames = { "X", "Y", "Z", "XYZ" };
+	vector<string> cameraFollowNames = { "FOLLOW_X", "FOLLOW_Z", "FOLLOW_ZY" };
+	vector<string> cameraMethodNames = { "UPDATE", "SET" };
+
+	// Miscellaneous options
+	vector<string> toggleNames = { "ON", "OFF" };
 
 	// Determine list to be generated
 	switch (listType)
@@ -94,13 +113,13 @@ void ScriptEditor::_addChoiceList(ChoiceListSort listSort, ChoiceListType listTy
 		case ChoiceListType::EVENT_TYPES:
 		{
 			headerName = "Event type";
-			optionNames = _eventTypeNames;
+			optionNames = eventTypeNames;
 			break;
 		}
 		case ChoiceListType::ACTION_TYPES:
 		{
 			headerName = "Action type";
-			optionNames = _actionTypeNames;
+			optionNames = actionTypeNames;
 			break;
 		}
 
@@ -115,25 +134,25 @@ void ScriptEditor::_addChoiceList(ChoiceListSort listSort, ChoiceListType listTy
 		case ChoiceListType::EVENT_INPUT_METHODS:
 		{
 			headerName = "Input method";
-			optionNames = _inputMethodNames;
+			optionNames = inputMethodNames;
 			break;
 		}
 		case ChoiceListType::EVENT_INPUT_TYPES:
 		{
 			headerName = "Input type";
-			optionNames = _inputTypeNames;
+			optionNames = inputTypeNames;
 			break;
 		}
 		case ChoiceListType::EVENT_INPUT_KEY_NAMES:
 		{
 			headerName = "Keyboard key";
-			optionNames = _inputKeyNames;
+			optionNames = inputKeyNames;
 			break;
 		}
 		case ChoiceListType::EVENT_INPUT_MOUSE_NAMES:
 		{
 			headerName = "Mouse button";
-			optionNames = _inputMouseNames;
+			optionNames = inputMouseNames;
 			break;
 		}
 
@@ -141,66 +160,79 @@ void ScriptEditor::_addChoiceList(ChoiceListSort listSort, ChoiceListType listTy
 		case ChoiceListType::ACTION_CAMERA_TYPES:
 		{
 			headerName = "Camera type";
-			optionNames = _cameraTypeNames;
+			optionNames = cameraTypeNames;
 			break;
 		}
 		case ChoiceListType::ACTION_CAMERA_DIRECTIONS:
 		{
 			headerName = "Camera direction";
-			optionNames = _cameraDirectionNames;
+			optionNames = cameraDirectionNames;
+			break;
+		}
+		case ChoiceListType::ACTION_CAMERA_FOLLOWS:
+		{
+			headerName = "Camera follow";
+			optionNames = cameraFollowNames;
 			break;
 		}
 		case ChoiceListType::ACTION_CAMERA_METHODS:
 		{
 			headerName = "Camera method";
-			optionNames = _cameraMethodNames;
+			optionNames = cameraMethodNames;
 			break;
 		}
 		case ChoiceListType::ACTION_CAMERA_TOGGLE:
 		{
 			headerName = "Camera toggle";
-			optionNames = _toggleNames;
+			optionNames = toggleNames;
 			break;
 		}
 	}
 
+	// Add new choicelist
+	_addChoiceList(listSort, listType, headerName, optionNames, activeIndex);
+}
+
+void ScriptEditor::_addChoiceList(ChoiceListSort listSort, ChoiceListType listType, string headerName, vector<string> optionNames, int activeIndex)
+{
 	// Generation values
+	int listIndex = static_cast<int>(listType);
 	const string fontPath = "Engine\\Fonts\\lucida.ttf";
 	const float maxY = 4.5f;
 	const float minX = -8.0f;
 	const float xOffset = 8.5f;
 	const float yOffset = 0.7f;
 	vec3 headerPosition = vec3(minX + (xOffset * _choiceListStack.size()), 5.0f, 0.5f);
-	
+
 	// Header generation
 	_fe3d.gameEntity_add(std::to_string(listIndex) + "_header", "Engine\\OBJs\\crate.obj", headerPosition,
 		vec3(0.0f), vec3(headerName.size() * 0.275f, 0.75f, 0.5f));
 	_fe3d.gameEntity_setDiffuseMap(std::to_string(listIndex) + "_header", "Engine\\Textures\\crate.png");
 	_fe3d.billBoardEntity_add(std::to_string(listIndex) + "_header", headerName, fontPath, vec3(0.0f, 0.5f, 0.0f), headerPosition + vec3(0.0f, 0.25f, 0.05f),
 		vec3(0.0f), vec2(headerName.size() * 0.4f, 1.0f), 0, 0);
-	
+
 	// Choice list generation
 	for (size_t i = 0; i < optionNames.size(); i++)
 	{
 		string optionName = optionNames[i];
-		
+
 		// Check if only single option needed
 		if (activeIndex != -1)
 		{
 			optionName = optionNames[activeIndex];
 		}
-		
+
 		// Entity values
 		vec3 optionPosition = vec3(headerPosition.x, maxY - (yOffset * (i + 1)), 0.55f);
 		vec2 optionSize = vec2(optionName.size() * 0.25f, _optionBillboardHeight);
 		string ID = std::to_string(listIndex) + "_option_" + std::to_string(i);
-		
+
 		// Create new option entity
 		_fe3d.billBoardEntity_add(ID, optionName, fontPath, vec3(1.0f),
 			optionPosition, vec3(0.0f), optionSize, 0, 0);
 		_fe3d.billboardEntity_setMaxY(ID, maxY);
 		_fe3d.aabbEntity_bindToBillboardEntity(ID, vec3(optionSize.x, optionSize.y, 0.1f), true);
-		
+
 
 		// Only 1 option
 		if (activeIndex != -1)
@@ -212,11 +244,11 @@ void ScriptEditor::_addChoiceList(ChoiceListSort listSort, ChoiceListType listTy
 	// Add to stack
 	if (activeIndex == -1)
 	{
-		_choiceListStack.push_back(ChoiceList(listSort, listType, optionNames.size()));
+		_choiceListStack.push_back(ChoiceList(listSort, listType, optionNames.size(), optionNames));
 	}
 	else
 	{
-		_choiceListStack.push_back(ChoiceList(listSort, listType, optionNames[activeIndex].size()));
+		_choiceListStack.push_back(ChoiceList(listSort, listType, optionNames[activeIndex].size(), optionNames));
 	}
 }
 

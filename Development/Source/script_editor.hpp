@@ -45,6 +45,7 @@ class ScriptEditor final
 		// Camera actions
 		ACTION_CAMERA_TYPES,
 		ACTION_CAMERA_DIRECTIONS,
+		ACTION_CAMERA_FOLLOWS,
 		ACTION_CAMERA_METHODS,
 		ACTION_CAMERA_TOGGLE,
 
@@ -54,7 +55,8 @@ class ScriptEditor final
 
 	struct ChoiceList final
 	{
-		ChoiceList(ChoiceListSort listSort, ChoiceListType listType, int optionTotal) : sort(listSort), type(listType), total(optionTotal)
+		ChoiceList(ChoiceListSort listSort, ChoiceListType listType, int optionTotal, const vector<string> optionNamesList) : 
+			sort(listSort), type(listType), total(optionTotal), optionNames(optionNamesList)
 		{
 
 		}
@@ -63,6 +65,8 @@ class ScriptEditor final
 		const ChoiceListType type;
 
 		const int total;
+
+		const vector<string> optionNames;
 
 		int selectedOptionIndex = -1;
 	};
@@ -85,12 +89,13 @@ private:
 	void _updateGUI();
 	void _updateChoiceLists();
 	void _updateNavigation();
+	void _updateScriptlineCreation();
 	void _updateMiscellaneous();
 	void _generateScriptLineOverview(ScriptLine& scriptLine);
-	void _addChoiceList(ChoiceListSort listSort, ChoiceListType list, int activeIndex = -1);
+	void _addChoiceList(ChoiceListSort listSort, ChoiceListType listType, int activeIndex = -1);
+	void _addChoiceList(ChoiceListSort listSort, ChoiceListType listType, string headerName, vector<string> optionNames, int activeIndex = -1);
 	void _removeChoiceList();
 	void _clearChoiceLists();
-	void _addNewScriptLine(const string& newID);
 	void _loadScriptFromFile();
 	void _saveScriptToFile();
 	void _unloadScript();
@@ -106,17 +111,6 @@ private:
 
 	// Option names for front-end
 	vector<ChoiceList> _choiceListStack;
-	vector<string> _eventTypeNames;
-	vector<string> _actionTypeNames;
-
-	vector<string> _inputTypeNames;
-	vector<string> _inputKeyNames;
-	vector<string> _inputMouseNames;
-	vector<string> _inputMethodNames;
-	vector<string> _cameraTypeNames;
-	vector<string> _cameraDirectionNames;
-	vector<string> _cameraMethodNames;
-	vector<string> _toggleNames;
 
 	// Editor variables
 	string _currentProjectName = "";
@@ -127,7 +121,8 @@ private:
 	const float _maxScrollingAcceleration = 0.3f;
 	const float _optionBillboardHeight = 0.75f;
 	unsigned int _pointLightCounter = 0;
-	bool _allowedToAddScript = false;
+	bool _allowedToAddScriptLine = false;
 	bool _isCreatingScript = false;
+	bool _isCreatingScriptline = false;
 	bool _isLoaded = false;
 };

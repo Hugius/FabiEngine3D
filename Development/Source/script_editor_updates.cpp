@@ -7,6 +7,7 @@ void ScriptEditor::update()
 	_updateGUI();
 	_updateChoiceLists();
 	_updateNavigation();
+	_updateScriptlineCreation();
 	_updateMiscellaneous();
 }
 
@@ -21,7 +22,7 @@ void ScriptEditor::_updateGUI()
 		{
 			if (screen->getButton("addLine")->isHovered())
 			{
-				_gui->getGlobalScreen()->addValueForm("newScriptLineName", "New script name", "", vec2(0.0f), vec2(0.5f, 0.1f));
+				_isCreatingScriptline = true;
 			}
 			else if (screen->getButton("deleteLine")->isHovered())
 			{
@@ -64,7 +65,7 @@ void ScriptEditor::_updateGUI()
 
 void ScriptEditor::_updateChoiceLists()
 {
-	if (_isLoaded && _isCreatingScript && !_allowedToAddScript)
+	if (_isLoaded && _isCreatingScript && !_allowedToAddScriptLine)
 	{
 		// Update hoverability & color & scrolling
 		for (auto& list : _choiceListStack)
@@ -156,7 +157,7 @@ void ScriptEditor::_updateNavigation()
 	{
 		// Hovering over options
 		string hoveredEntityID = _fe3d.collision_checkCursorInAny();
-		if (hoveredEntityID != "" && !_allowedToAddScript)
+		if (hoveredEntityID != "" && !_allowedToAddScriptLine)
 		{
 			_fe3d.billboardEntity_setColor(hoveredEntityID, vec3(0.0f, 1.0f, 0.0f));
 			_fe3d.lightEntity_setPosition("selectionLight", _fe3d.billboardEntity_getPosition(hoveredEntityID) + vec3(0.0f, 0.0f, 1.0f));
@@ -168,7 +169,7 @@ void ScriptEditor::_updateNavigation()
 		}
 
 		// Clicking a hovered option
-		if (!_allowedToAddScript)
+		if (!_allowedToAddScriptLine)
 		{
 			if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
 			{
@@ -190,36 +191,35 @@ void ScriptEditor::_updateNavigation()
 						}
 					}
 
-					// Index of option in name vector
+					// Needed values
 					int optionIndex = stoi(hoveredEntityID.substr(underscoreIndex + 1, hoveredEntityID.size() - (underscoreIndex + 1)));
 					_choiceListStack.back().selectedOptionIndex = optionIndex;
+					string optionName = _choiceListStack.back().optionNames[optionIndex];
 
-					// Determine type of choice list
+					// Determine type of choicelist
 					switch (listType)
 					{
 						// Event types
 						case ChoiceListType::EVENT_TYPES:
 						{
-							string option = _eventTypeNames[optionIndex];
-
 							// Determine event type
-							if (option == "INIT_EVENT")
+							if (optionName == "INIT_EVENT")
 							{
 
 							}
-							else if (option == "INPUT_EVENT")
+							else if (optionName == "INPUT_EVENT")
 							{
 								_addChoiceList(ChoiceListSort::EVENT, ChoiceListType::EVENT_INPUT_TYPES);
 							}
-							else if (option == "COLLISION_EVENT")
+							else if (optionName == "COLLISION_EVENT")
 							{
 
 							}
-							else if (option == "TIME_EVENT")
+							else if (optionName == "TIME_EVENT")
 							{
 
 							}
-							else if (option == "CONDITION_EVENT")
+							else if (optionName == "CONDITION_EVENT")
 							{
 
 							}
@@ -229,13 +229,13 @@ void ScriptEditor::_updateNavigation()
 						// Input event
 						case ChoiceListType::EVENT_INPUT_TYPES:
 						{
-							string option = _inputTypeNames[optionIndex];
-							if (option == "KEYBOARD")
+							// Determine input type
+							if (optionName == "KEYBOARD")
 							{
 								// Display all keyboard keys
 								_addChoiceList(ChoiceListSort::EVENT, ChoiceListType::EVENT_INPUT_KEY_NAMES);
 							}
-							else if (option == "MOUSE")
+							else if (optionName == "MOUSE")
 							{
 								// Display all mouse buttons
 								_addChoiceList(ChoiceListSort::EVENT, ChoiceListType::EVENT_INPUT_MOUSE_NAMES);
@@ -259,10 +259,8 @@ void ScriptEditor::_updateNavigation()
 						// Action types
 						case ChoiceListType::ACTION_TYPES:
 						{
-							string option = _actionTypeNames[optionIndex];
-
 							// Determine action type
-							if (option == "CAMERA_ACTION")
+							if (optionName == "CAMERA_ACTION")
 							{
 								_addChoiceList(ChoiceListSort::ACTION, ChoiceListType::ACTION_CAMERA_TYPES);
 							}
@@ -272,16 +270,20 @@ void ScriptEditor::_updateNavigation()
 						// Camera action
 						case ChoiceListType::ACTION_CAMERA_TYPES:
 						{
-							string option = _cameraTypeNames[optionIndex];
-							if (option == "POSITION")
+							// Determine camera type
+							if (optionName == "POSITION")
 							{
 								_addChoiceList(ChoiceListSort::ACTION, ChoiceListType::ACTION_CAMERA_DIRECTIONS);
 							}
-							else if (option == "YAW" || option == "PITCH")
+							else if (optionName == "FOLLOW")
+							{
+								_addChoiceList(ChoiceListSort::ACTION, ChoiceListType::ACTION_CAMERA_FOLLOWS);
+							}
+							else if (optionName == "YAW" || optionName == "PITCH")
 							{
 								_addChoiceList(ChoiceListSort::ACTION, ChoiceListType::ACTION_CAMERA_METHODS);
 							}
-							else if (option == "LOOK_AT" || option == "FIRST_PERSON")
+							else if (optionName == "LOOK_AT" || optionName == "FIRST_PERSON")
 							{
 								_addChoiceList(ChoiceListSort::ACTION, ChoiceListType::ACTION_CAMERA_TOGGLE);
 							}
@@ -289,23 +291,29 @@ void ScriptEditor::_updateNavigation()
 						}
 						case ChoiceListType::ACTION_CAMERA_DIRECTIONS:
 						{
-							_addChoiceList(ChoiceListSort::ACTION, ChoiceListType::ACTION_CAMERA_METHODS);
+							if (optionName == "XYZ")
+							{
+								_allowedToAddScriptLine = true;
+							}
+							else
+							{
+								_addChoiceList(ChoiceListSort::ACTION, ChoiceListType::ACTION_CAMERA_METHODS);
+							}
 							break;
 						}
+						case ChoiceListType::ACTION_CAMERA_FOLLOWS:
 						case ChoiceListType::ACTION_CAMERA_METHODS:
-						{
-							_allowedToAddScript = true;
-							break;
-						}
 						case ChoiceListType::ACTION_CAMERA_TOGGLE:
 						{
-							_allowedToAddScript = true;
+							_allowedToAddScriptLine = true;
 							break;
 						}
 					}
 				}
 			}
 		}
+
+		// Update value filling
 
 		// Remove last chosen option
 		if (_fe3d.input_getKeyPressed(Input::KEY_BACKSPACE))
@@ -318,9 +326,9 @@ void ScriptEditor::_updateNavigation()
 				_pointLightCounter--;
 
 				// Script cannot be added if last option is removed
-				if (_allowedToAddScript)
+				if (_allowedToAddScriptLine)
 				{
-					_allowedToAddScript = false;
+					_allowedToAddScriptLine = false;
 				}
 			}
 		}
@@ -359,23 +367,8 @@ void ScriptEditor::_updateMiscellaneous()
 		_fe3d.camera_translate(vec3(_cameraAcceleration, 0.0f, 0.0f));
 
 		// Add & delete buttons hoverability
-		_leftWindow->getScreen("scriptEditorMenuMain")->getButton("addLine")->setHoverable(_allowedToAddScript);
+		_leftWindow->getScreen("scriptEditorMenuMain")->getButton("addLine")->setHoverable(_allowedToAddScriptLine);
 		_leftWindow->getScreen("scriptEditorMenuMain")->getButton("deleteLine")->setHoverable(_currentScriptLineID != "");
-
-		// Check if new script line name filled in
-		string newScriptLineName = "";
-		if (_gui->getGlobalScreen()->checkValueForm("newScriptLineName", newScriptLineName))
-		{
-			// Check if name not existing yet
-			if (_script->isExisting(newScriptLineName))
-			{
-				Logger::getInst().throwWarning("Script \"" + newScriptLineName + "\"" + " already exists!");
-			}
-			else
-			{
-				_addNewScriptLine(newScriptLineName);
-			}
-		}
 
 		// Check if existing script line chosen for viewing
 		string selectedButtonID = _gui->getGlobalScreen()->getSelectedChoiceFormButtonID("scriptLinesList");
@@ -387,7 +380,7 @@ void ScriptEditor::_updateMiscellaneous()
 				_gui->getGlobalScreen()->removeChoiceForm("scriptLinesList");
 				_currentScriptLineID = selectedButtonID;
 				_isCreatingScript = false;
-				_allowedToAddScript = false;
+				_allowedToAddScriptLine = false;
 			}
 		}
 		else if (_gui->getGlobalScreen()->isChoiceFormCancelled("scriptLinesList"))

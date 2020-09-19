@@ -215,7 +215,7 @@ void SceneEditor::initializeGUI()
 
 void SceneEditor::load()
 {
-	loadScene();
+	loadScene(true);
 
 	// Load lightsource billboard
 	if (!_fe3d.billboardEntity_isExisting("@@lightSource"))
@@ -274,7 +274,7 @@ void SceneEditor::load()
 	_isLoaded = true;
 }
 
-void SceneEditor::loadScene()
+void SceneEditor::loadScene(bool overwriteCamera)
 {
 	// Default camera
 	_fe3d.camera_load(_fe3d.camera_getFOV(), 0.1f, 10000.0f, vec3(0.0f));
@@ -316,7 +316,7 @@ void SceneEditor::loadScene()
 	}
 
 	// Load scene
-	_loadSceneFile();
+	_loadSceneFile(overwriteCamera);
 }
 
 void SceneEditor::unloadScene()

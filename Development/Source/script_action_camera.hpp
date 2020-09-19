@@ -5,8 +5,9 @@
 enum class CameraActionType
 {
 	POSITION,
-	PITCH,
+	FOLLOW,
 	YAW,
+	PITCH,
 	LOOKAT,
 	FIRST_PERSON,
 	NONE
@@ -17,6 +18,12 @@ enum class CameraActionDirection
 	X,
 	Y,
 	Z,
+	XYZ,
+	NONE
+};
+
+enum class CameraActionFollow
+{
 	FOLLOW_X,
 	FOLLOW_Z,
 	FOLLOW_ZY,
@@ -26,7 +33,7 @@ enum class CameraActionDirection
 enum class CameraActionMethod
 {
 	SET,
-	MOVE,
+	UPDATE,
 	NONE
 };
 
@@ -47,6 +54,7 @@ public:
 
 	void setCameraType(CameraActionType type);
 	void setCameraDirection(CameraActionDirection direction);
+	void setCameraFollow(CameraActionFollow follow);
 	void setCameraMethod(CameraActionMethod method);
 	void setCameraToggle(CameraActionToggle toggle);
 	void setVectorArgument(vec3 position);
@@ -54,6 +62,7 @@ public:
 
 	CameraActionType getCameraType();
 	CameraActionDirection getCameraDirection();
+	CameraActionFollow getCameraFollow();
 	CameraActionMethod getCameraMethod();
 	CameraActionToggle getCameraToggle();
 
@@ -66,6 +75,7 @@ private:
 
 	CameraActionType _cameraType = CameraActionType::NONE;
 	CameraActionDirection _cameraDirection = CameraActionDirection::NONE;
+	CameraActionFollow _cameraFollow = CameraActionFollow::NONE;
 	CameraActionMethod _cameraMethod = CameraActionMethod::NONE;
 	CameraActionToggle _cameraToggle = CameraActionToggle::NONE;
 };

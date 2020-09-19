@@ -41,7 +41,7 @@ void ScriptEditor::_loadScriptFromFile()
 			// For file extraction
 			std::istringstream iss(line);
 
-			// Extract scriptline ID
+			// Extract scriptLine ID
 			iss >> scriptLineID;
 
 			// Extract event data
@@ -91,6 +91,12 @@ void ScriptEditor::_loadScriptFromFile()
 				case ScriptActionType::CAMERA:
 				{
 					action = make_shared<ScriptActionCamera>(_fe3d, ScriptActionType::CAMERA);
+					int cameraType, cameraDirection, cameraMethod, cameraToggle;
+					iss >> cameraType >> cameraDirection >> cameraMethod >> cameraToggle;
+					dynamic_pointer_cast<ScriptActionCamera>(action)->setCameraType(static_cast<CameraActionType>(cameraType));
+					dynamic_pointer_cast<ScriptActionCamera>(action)->setCameraDirection(static_cast<CameraActionDirection>(cameraDirection));
+					dynamic_pointer_cast<ScriptActionCamera>(action)->setCameraMethod(static_cast<CameraActionMethod>(cameraMethod));
+					dynamic_pointer_cast<ScriptActionCamera>(action)->setCameraToggle(static_cast<CameraActionToggle>(cameraToggle));
 					break;
 				}
 			}
@@ -135,7 +141,7 @@ void ScriptEditor::_saveScriptToFile()
 		{
 			auto scriptLine = _script->getScriptLine(ID);
 
-			// Write scriptline name
+			// Write scriptLine name
 			file << scriptLine.ID << " ";
 
 			// Write event type
@@ -196,7 +202,7 @@ void ScriptEditor::_saveScriptToFile()
 				}
 			}
 
-			// Next scriptline
+			// Next scriptLine
 			file << std::endl;
 		}
 

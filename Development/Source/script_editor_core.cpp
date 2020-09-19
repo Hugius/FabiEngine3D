@@ -50,35 +50,6 @@ void ScriptEditor::load()
 	// Selection light
 	_fe3d.lightEntity_add("selectionLight", vec3(0.0f), vec3(0.0f, 1.0f, 0.0f), 2.5f, 10.0f, false);
 
-	// Event types
-	_eventTypeNames = { "INIT_EVENT", "INPUT_EVENT", "COLLISION_EVENT", "TIME_EVENT", "CONDITION_EVENT" };
-
-	// Initialization events
-	
-	// Input events
-	_inputTypeNames = { "KEYBOARD", "MOUSE" };
-	_inputKeyNames = { "KEY_A", "KEY_B", "KEY_C", "KEY_D", "KEY_E", "KEY_F", "KEY_G", "KEY_H", "KEY_i", "KEY_J", "KEY_K", "KEY_L", "KEY_M",
-		"KEY_N", "KEY_O", "KEY_P", "KEY_Q", "KEY_R", "KEY_S", "KEY_T", "KEY_U", "KEY_V", "KEY_W", "KEY_X", "KEY_Y", "KEY_Z" };
-	_inputMouseNames = { "BUTTON_LEFT", "BUTTON_MIDDLE", "BUTTON_RIGHT", "SCROLL_UP", "SCROLL_DOWN" };
-	_inputMethodNames = { "DOWN", "PRESSED", "TOGGLED" };
-
-	// Collision events
-
-	// Time events
-	
-	// Condition events
-
-	// Action types
-	_actionTypeNames = { "CAMERA_ACTION" };
-
-	// Camera actions
-	_cameraTypeNames = { "POSITION", "YAW", "PITCH", "LOOK_AT", "FIRST_PERSON" };
-	_cameraDirectionNames = { "X", "Y", "Z", "FOLLOW_X", "FOLLOW_Z", "FOLLOW_ZY" };
-	_cameraMethodNames = { "MOVE", "SET" };
-
-	// Miscellaneous
-	_toggleNames = { "ON", "OFF" };
-
 	// Load script
 	_loadScriptFromFile();
 
@@ -111,112 +82,14 @@ void ScriptEditor::unload()
 	// Reset editor properties
 	_currentScriptLineID = "";
 	_choiceListStack.clear();
-	_eventTypeNames.clear();
-	_inputTypeNames.clear();
-	_inputKeyNames.clear();
-	_inputMouseNames.clear();
-	_inputMethodNames.clear();
 	_scrollingAcceleration = 0.0f;
 	_cameraAcceleration = 0.0f;
 	_pointLightCounter = 0;
 	_currentEventToAdd = nullptr;
-	_allowedToAddScript = false;
+	_allowedToAddScriptLine = false;
 	_isCreatingScript = false;
 
 	// Miscellaneous
 	_gui->getViewport("bottom")->getWindow("controls")->setActiveScreen("mainMenu");
 	_isLoaded = false;
-}
-
-void ScriptEditor::_addNewScriptLine(const string& newID)
-{
-	// Placeholders
-	shared_ptr<ScriptEvent> event = nullptr;
-	shared_ptr<ScriptAction> action = nullptr;
-
-	// Fill the placeholders
-	for (auto& choiceList : _choiceListStack)
-	{
-		// Chosen option index
-		int optionIndex = choiceList.selectedOptionIndex;
-
-		// Determine choicelist sort
-		if (choiceList.sort == ChoiceListSort::EVENT)
-		{
-			// Determine choicelist type
-			switch (choiceList.type)
-			{
-				// Event types
-				case ChoiceListType::EVENT_TYPES:
-				{
-					if (choiceList.selectedOptionIndex == 0) event = make_shared<ScriptEventInitialization>(_fe3d, ScriptEventType::INITIALIZATION);
-					if (choiceList.selectedOptionIndex == 1) event = make_shared<ScriptEventInput>(_fe3d, ScriptEventType::INPUT);
-					if (choiceList.selectedOptionIndex == 2) event = make_shared<ScriptEventCollision>(_fe3d, ScriptEventType::COLLISION);
-					if (choiceList.selectedOptionIndex == 3) event = make_shared<ScriptEventTime>(_fe3d, ScriptEventType::TIME);
-					if (choiceList.selectedOptionIndex == 4) event = make_shared<ScriptEventCondition>(_fe3d, ScriptEventType::CONDITION);
-					break;
-				}
-
-				// Input event
-				case ChoiceListType::EVENT_INPUT_TYPES:
-				{
-					dynamic_pointer_cast<ScriptEventInput>(event)->setInputType(static_cast<InputEventType>(choiceList.selectedOptionIndex));
-					break;
-				}
-				case ChoiceListType::EVENT_INPUT_KEY_NAMES:
-				{
-					dynamic_pointer_cast<ScriptEventInput>(event)->setInputElement(_inputKeyNames[optionIndex]);
-					break;
-				}
-				case ChoiceListType::EVENT_INPUT_MOUSE_NAMES:
-				{
-					dynamic_pointer_cast<ScriptEventInput>(event)->setInputElement(_inputMouseNames[optionIndex]);
-					break;
-				}
-				case ChoiceListType::EVENT_INPUT_METHODS:
-				{
-					dynamic_pointer_cast<ScriptEventInput>(event)->setInputMethod(static_cast<InputEventMethod>(choiceList.selectedOptionIndex));
-					break;
-				}
-			}
-		}
-		else if (choiceList.sort == ChoiceListSort::ACTION)
-		{
-			// Determine choicelist type
-			switch (choiceList.type)
-			{
-				// Action types
-				case ChoiceListType::ACTION_TYPES:
-				{
-					if (choiceList.selectedOptionIndex == 0) action = make_shared<ScriptActionCamera>(_fe3d, ScriptActionType::CAMERA);
-					break;
-				}
-				
-				// Camera action
-				case ChoiceListType::ACTION_CAMERA_TYPES:
-				{
-					dynamic_pointer_cast<ScriptActionCamera>(action)->setCameraType(static_cast<CameraActionType>(choiceList.selectedOptionIndex));
-					break;
-				}
-				case ChoiceListType::ACTION_CAMERA_DIRECTIONS:
-				{
-					dynamic_pointer_cast<ScriptActionCamera>(action)->setCameraDirection(static_cast<CameraActionDirection>(choiceList.selectedOptionIndex));
-					break;
-				}
-				case ChoiceListType::ACTION_CAMERA_METHODS:
-				{
-					dynamic_pointer_cast<ScriptActionCamera>(action)->setCameraMethod(static_cast<CameraActionMethod>(choiceList.selectedOptionIndex));
-					break;
-				}
-				case ChoiceListType::ACTION_CAMERA_TOGGLE:
-				{
-					dynamic_pointer_cast<ScriptActionCamera>(action)->setCameraToggle(static_cast<CameraActionToggle>(choiceList.selectedOptionIndex));
-					break;
-				}
-			}
-		}
-	}
-
-	// Create new script line
-	_script->addLine(newID, event, action);
 }

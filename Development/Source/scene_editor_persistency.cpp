@@ -4,7 +4,7 @@
 #include <sstream>
 #include <algorithm>
 
-bool SceneEditor::_loadSceneFile()
+bool SceneEditor::_loadSceneFile(bool overwriteCamera)
 {
 	// Error checking
 	if (_currentProjectName == "")
@@ -147,21 +147,30 @@ bool SceneEditor::_loadSceneFile()
 			}
 			else if (entityType == "EDITOR_POSITION")
 			{
-				vec3 position;
-				iss >> position.x >> position.y >> position.z;
-				_fe3d.camera_setPosition(position);
+				if (overwriteCamera)
+				{
+					vec3 position;
+					iss >> position.x >> position.y >> position.z;
+					_fe3d.camera_setPosition(position);
+				}
 			}
 			else if (entityType == "EDITOR_YAW")
 			{
-				float yaw;
-				iss >> yaw;
-				_fe3d.camera_setYaw(yaw);
+				if (overwriteCamera)
+				{
+					float yaw;
+					iss >> yaw;
+					_fe3d.camera_setYaw(yaw);
+				}
 			}
 			else if (entityType == "EDITOR_PITCH")
 			{
-				float pitch;
-				iss >> pitch;
-				_fe3d.camera_setPitch(pitch);
+				if (overwriteCamera)
+				{
+					float pitch;
+					iss >> pitch;
+					_fe3d.camera_setPitch(pitch);
+				}
 			}
 			else if (entityType == "GRAPHICS_SHADOWS")
 			{

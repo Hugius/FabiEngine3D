@@ -148,7 +148,7 @@ void TopViewportController::_updateGameManagement()
 				{
 					// Load all assets before executing script
 					SCRIPT_EXECUTOR->initialize();
-					_sceneEditor.loadScene();
+					_sceneEditor.loadScene(false);
 				}
 			}
 			else if (gameScreen->getButton("pause")->isHovered())
@@ -164,7 +164,7 @@ void TopViewportController::_updateGameManagement()
 
 				// Load again
 				SCRIPT_EXECUTOR->initialize();
-				_sceneEditor.loadScene();
+				_sceneEditor.loadScene(false);
 			}
 			else if (gameScreen->getButton("stop")->isHovered())
 			{

@@ -106,12 +106,15 @@ void BottomViewportController::initialize()
 
 	// Scripting editor screen
 	auto scriptingScreen = _gui->getViewport("bottom")->getWindow("controls")->getScreen("scriptEditor");
-	scriptingScreen->addRectangle("mouse", vec2(keyX, yOne), keySize, "mouse.png");
-	scriptingScreen->addTextfield("mouse", vec2(textX, yOne - textOffset), vec2(GW("Scrolling"), charHeight), "Scrolling", vec3(1.0f), false);
-	scriptingScreen->addRectangle("a", vec2(keyX, yTwo), keySize, "a.png");
-	scriptingScreen->addTextfield("a", vec2(textX, yTwo - textOffset), vec2(GW("Left"), charHeight), "Left", vec3(1.0f), false);
-	scriptingScreen->addRectangle("d", vec2(keyX, yThree), keySize, "d.png");
-	scriptingScreen->addTextfield("d", vec2(textX, yThree - textOffset), vec2(GW("Right"), charHeight), "Right", vec3(1.0f), false);
+	addBasicKeys(scriptingScreen);
+	scriptingScreen->addRectangle("mouse", vec2(keyX, yThree), keySize, "mouse.png");
+	scriptingScreen->addTextfield("mouse", vec2(textX, yThree - textOffset), vec2(GW("Scrolling"), charHeight), "Scrolling", vec3(1.0f), false);
+	scriptingScreen->addRectangle("a", vec2(keyX + xOffset, yOne), keySize, "a.png");
+	scriptingScreen->addTextfield("a", vec2(textX + xOffset, yOne - textOffset), vec2(GW("Left"), charHeight), "Left", vec3(1.0f), false);
+	scriptingScreen->addRectangle("d", vec2(keyX + xOffset, yTwo), keySize, "d.png");
+	scriptingScreen->addTextfield("d", vec2(textX + xOffset, yTwo - textOffset), vec2(GW("Right"), charHeight), "Right", vec3(1.0f), false);
+	scriptingScreen->addRectangle("backspace", vec2(keyX + xOffset, yThree), keySize, "backspace.png");
+	scriptingScreen->addTextfield("backspace", vec2(textX + xOffset, yThree - textOffset), vec2(GW("Remove"), charHeight), "Remove", vec3(1.0f), false);
 }
 
 void BottomViewportController::update()

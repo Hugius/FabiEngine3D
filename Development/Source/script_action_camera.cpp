@@ -11,7 +11,7 @@ void ScriptActionCamera::execute()
 	// Determine type of camera action
 	if (_cameraType == CameraActionType::POSITION)
 	{
-		if (_cameraMethod == CameraActionMethod::MOVE) // Translate
+		if (_cameraMethod == CameraActionMethod::UPDATE) // Translate
 		{
 			_fe3d.camera_translate(vec3(
 				_cameraDirection == CameraActionDirection::X ? _vectorArgument.x : 0.0f, 
@@ -20,15 +20,37 @@ void ScriptActionCamera::execute()
 		}
 		else if (_cameraMethod == CameraActionMethod::SET) // Set position
 		{
-			_fe3d.camera_setPosition(vec3(
-				_cameraDirection == CameraActionDirection::X ? _vectorArgument.x : position.x,
-				_cameraDirection == CameraActionDirection::Y ? _vectorArgument.y : position.y,
-				_cameraDirection == CameraActionDirection::Z ? _vectorArgument.z : position.z));
+			if (_cameraDirection == CameraActionDirection::XYZ)
+			{
+				_fe3d.camera_setPosition(_vectorArgument);
+			}
+			else
+			{
+				_fe3d.camera_setPosition(vec3(
+					_cameraDirection == CameraActionDirection::X ? _vectorArgument.x : position.x,
+					_cameraDirection == CameraActionDirection::Y ? _vectorArgument.y : position.y,
+					_cameraDirection == CameraActionDirection::Z ? _vectorArgument.z : position.z));
+			}
+		}
+	}
+	if (_cameraType == CameraActionType::FOLLOW)
+	{
+		if (_cameraFollow == CameraActionFollow::FOLLOW_X)
+		{
+			_fe3d.camera_translateFollowX(_floatArgument);
+		}
+		else if (_cameraFollow == CameraActionFollow::FOLLOW_Z)
+		{
+			_fe3d.camera_translateFollowZ(_floatArgument);
+		}
+		else if (_cameraFollow == CameraActionFollow::FOLLOW_ZY)
+		{
+			_fe3d.camera_translateFollowZY(_floatArgument);
 		}
 	}
 	else if (_cameraType == CameraActionType::YAW) // Yaw
 	{
-		if (_cameraMethod == CameraActionMethod::MOVE)
+		if (_cameraMethod == CameraActionMethod::UPDATE)
 		{
 			_fe3d.camera_setYaw(yaw + _floatArgument);
 		}
@@ -39,7 +61,7 @@ void ScriptActionCamera::execute()
 	}
 	else if (_cameraType == CameraActionType::PITCH) // Pitch
 	{
-		if (_cameraMethod == CameraActionMethod::MOVE)
+		if (_cameraMethod == CameraActionMethod::UPDATE)
 		{
 			_fe3d.camera_setPitch(pitch + _floatArgument);
 		}
@@ -87,6 +109,11 @@ void ScriptActionCamera::setCameraDirection(CameraActionDirection direction)
 	_cameraDirection = direction;
 }
 
+void ScriptActionCamera::setCameraFollow(CameraActionFollow follow)
+{
+	_cameraFollow = follow;
+}
+
 void ScriptActionCamera::setCameraMethod(CameraActionMethod method)
 {
 	_cameraMethod = method;
@@ -115,6 +142,11 @@ CameraActionType ScriptActionCamera::getCameraType()
 CameraActionDirection ScriptActionCamera::getCameraDirection()
 {
 	return _cameraDirection;
+}
+
+CameraActionFollow ScriptActionCamera::getCameraFollow()
+{
+	return _cameraFollow;
 }
 
 CameraActionMethod ScriptActionCamera::getCameraMethod()

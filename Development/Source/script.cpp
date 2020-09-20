@@ -56,7 +56,7 @@ void Script::reset()
 	// Reset all actions
 	for (auto& scriptLine : _scriptLines)
 	{
-		scriptLine.action.reset();
+		scriptLine.action->reset();
 	}
 }
 

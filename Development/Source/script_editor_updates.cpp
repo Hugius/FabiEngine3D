@@ -39,6 +39,7 @@ void ScriptEditor::_updateGUI()
 					_clearChoiceLists();
 					_addChoiceList(ChoiceListSort::EVENT, ChoiceListType::EVENT_TYPES);
 					_isCreatingScript = true;
+					_allowedToAddScriptLine = false;
 				}
 				else if (screen->getButton("viewLine")->isHovered())
 				{

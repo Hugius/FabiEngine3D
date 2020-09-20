@@ -81,6 +81,11 @@ void ScriptEditor::_updateScriptlineCreation()
 							dynamic_pointer_cast<ScriptActionCamera>(action)->setCameraDirection(static_cast<CameraActionDirection>(choiceList.selectedOptionIndex));
 							break;
 						}
+						case ChoiceListType::ACTION_CAMERA_FOLLOWS:
+						{
+							dynamic_pointer_cast<ScriptActionCamera>(action)->setCameraFollow(static_cast<CameraActionFollow>(choiceList.selectedOptionIndex));
+							break;
+						}
 						case ChoiceListType::ACTION_CAMERA_METHODS:
 						{
 							dynamic_pointer_cast<ScriptActionCamera>(action)->setCameraMethod(static_cast<CameraActionMethod>(choiceList.selectedOptionIndex));
@@ -187,11 +192,13 @@ void ScriptEditor::_updateScriptlineCreation()
 			}
 		}
 
-		// Add scriptline
+		// Create new scriptline
 		if (finishedValueFilling || !needsValueFilling)
 		{
+			// Clear everything after creating
 			_script->addLine(to_string(_script->getLineCount() + 1), event, action);
 			_clearChoiceLists();
+			_allowedToAddScriptLine = false;
 
 			// Reset the creation process
 			_isCreatingScriptline = false;

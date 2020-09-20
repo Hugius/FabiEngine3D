@@ -33,7 +33,7 @@ void ScriptActionCamera::execute()
 			}
 		}
 	}
-	if (_cameraType == CameraActionType::FOLLOW)
+	else if (_cameraType == CameraActionType::FOLLOW)
 	{
 		if (_cameraFollow == CameraActionFollow::FOLLOW_X)
 		{
@@ -97,6 +97,11 @@ void ScriptActionCamera::execute()
 void ScriptActionCamera::reset()
 {
 	_fe3d.logger_throwInfo("resetted");
+	_fe3d.camera_disableFirstPersonView();
+	_fe3d.camera_disableLookat();
+	_fe3d.camera_setPosition(vec3(0.0f));
+	_fe3d.camera_setYaw(0.0f);
+	_fe3d.camera_setPitch(0.0f);
 }
 
 void ScriptActionCamera::setCameraType(CameraActionType type)

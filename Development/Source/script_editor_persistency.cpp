@@ -56,9 +56,16 @@ void ScriptEditor::_loadScriptFromFile()
 
 				case ScriptEventType::INPUT:
 				{
+					// New event
 					event = make_shared<ScriptEventInput>(_fe3d, ScriptEventType::INPUT);
+
+					// Placeholders
 					int inputType, inputElement, inputMethod;
+
+					// Load from file
 					iss >> inputType >> inputElement >> inputMethod;
+
+					// Fill the script event
 					dynamic_pointer_cast<ScriptEventInput>(event)->setInputType(static_cast<InputEventType>(inputType));
 					dynamic_pointer_cast<ScriptEventInput>(event)->setInputElement(static_cast<Input>(inputElement));
 					dynamic_pointer_cast<ScriptEventInput>(event)->setInputMethod(static_cast<InputEventMethod>(inputMethod));
@@ -94,18 +101,19 @@ void ScriptEditor::_loadScriptFromFile()
 					action = make_shared<ScriptActionCamera>(_fe3d, ScriptActionType::CAMERA);
 
 					// Placeholders
-					int cameraType, cameraDirection, cameraMethod, cameraToggle;
+					int cameraType, cameraDirection, cameraFollow, cameraMethod, cameraToggle;
 					bool hasVectorArgument, hasfloatArgument;
 					vec3 vectorArgument;
 					float floatArgument;
 
 					// Load from file
-					iss >> cameraType >> cameraDirection >> cameraMethod >> cameraToggle >> hasVectorArgument >>
+					iss >> cameraType >> cameraDirection >> cameraFollow >> cameraMethod >> cameraToggle >> hasVectorArgument >>
 						vectorArgument.x >> vectorArgument.y >> vectorArgument.z >> hasfloatArgument >> floatArgument;
 
 					// Fill the script action
 					dynamic_pointer_cast<ScriptActionCamera>(action)->setCameraType(static_cast<CameraActionType>(cameraType));
 					dynamic_pointer_cast<ScriptActionCamera>(action)->setCameraDirection(static_cast<CameraActionDirection>(cameraDirection));
+					dynamic_pointer_cast<ScriptActionCamera>(action)->setCameraFollow(static_cast<CameraActionFollow>(cameraFollow));
 					dynamic_pointer_cast<ScriptActionCamera>(action)->setCameraMethod(static_cast<CameraActionMethod>(cameraMethod));
 					dynamic_pointer_cast<ScriptActionCamera>(action)->setCameraToggle(static_cast<CameraActionToggle>(cameraToggle));
 					if(hasVectorArgument)dynamic_pointer_cast<ScriptActionCamera>(action)->setVectorArgument(vectorArgument);
@@ -209,6 +217,7 @@ void ScriptEditor::_saveScriptToFile()
 					file <<
 						static_cast<int>(cameraAction->getCameraType()) << " " <<
 						static_cast<int>(cameraAction->getCameraDirection()) << " " <<
+						static_cast<int>(cameraAction->getCameraFollow()) << " " <<
 						static_cast<int>(cameraAction->getCameraMethod()) << " " <<
 						static_cast<int>(cameraAction->getCameraToggle()) << " " <<
 						cameraAction->hasVectorArgument() << " " <<

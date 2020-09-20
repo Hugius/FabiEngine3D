@@ -14,11 +14,11 @@ void ScriptActionCamera::execute()
 		if (_cameraMethod == CameraActionMethod::UPDATE) // Translate
 		{
 			_fe3d.camera_translate(vec3(
-				_cameraDirection == CameraActionDirection::X ? _vectorArgument.x : 0.0f, 
-				_cameraDirection == CameraActionDirection::Y ? _vectorArgument.y : 0.0f,
-				_cameraDirection == CameraActionDirection::Z ? _vectorArgument.z : 0.0f));
+				_cameraDirection == CameraActionDirection::X ? _floatArgument : 0.0f, 
+				_cameraDirection == CameraActionDirection::Y ? _floatArgument : 0.0f,
+				_cameraDirection == CameraActionDirection::Z ? _floatArgument : 0.0f));
 		}
-		else if (_cameraMethod == CameraActionMethod::SET) // Set position
+		else if (_cameraMethod == CameraActionMethod::SET || _cameraDirection == CameraActionDirection::XYZ) // Set position
 		{
 			if (_cameraDirection == CameraActionDirection::XYZ)
 			{
@@ -127,11 +127,13 @@ void ScriptActionCamera::setCameraToggle(CameraActionToggle toggle)
 void ScriptActionCamera::setVectorArgument(vec3 argument)
 {
 	_vectorArgument = argument;
+	_hasVectorArgument = true;
 }
 
 void ScriptActionCamera::setFloatArgument(float argument)
 {
 	_floatArgument = argument;
+	_hasFloatArgument = true;
 }
 
 CameraActionType ScriptActionCamera::getCameraType()
@@ -167,4 +169,14 @@ vec3 ScriptActionCamera::getVectorArgument()
 float ScriptActionCamera::getFloatArgument()
 {
 	return _floatArgument;
+}
+
+bool ScriptActionCamera::hasVectorArgument()
+{
+	return _hasVectorArgument;
+}
+
+bool ScriptActionCamera::hasFloatArgument()
+{
+	return _hasFloatArgument;
 }

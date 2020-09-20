@@ -42,9 +42,9 @@ void SceneEditor::_activateModel(const string& modelID)
 
 	// Filling writefields
 	vec3 position = _fe3d.gameEntity_getPosition(_activeModelID);
-	_rightWindow->getScreen("modelPropertiesMenu")->getWriteField("x")->setTextContent(std::to_string(static_cast<int>(position.x)));
-	_rightWindow->getScreen("modelPropertiesMenu")->getWriteField("y")->setTextContent(std::to_string(static_cast<int>(position.y)));
-	_rightWindow->getScreen("modelPropertiesMenu")->getWriteField("z")->setTextContent(std::to_string(static_cast<int>(position.z)));
+	_rightWindow->getScreen("modelPropertiesMenu")->getWriteField("x")->setTextContent(to_string(static_cast<int>(position.x)));
+	_rightWindow->getScreen("modelPropertiesMenu")->getWriteField("y")->setTextContent(to_string(static_cast<int>(position.y)));
+	_rightWindow->getScreen("modelPropertiesMenu")->getWriteField("z")->setTextContent(to_string(static_cast<int>(position.z)));
 
 	// Removing the unique number from the modelID and updating the text content
 	string modelName = modelID.substr(modelID.find('@') + 1);
@@ -222,7 +222,7 @@ void SceneEditor::_handleValueChanging(const string& screenID, string buttonID, 
 			// Cannot be empty
 			if (writefield->getTextContent() == "?")
 			{
-				writefield->setTextContent(std::to_string(value));
+				writefield->setTextContent(to_string(value));
 			}
 
 			value = float(stoi(writefield->getTextContent())) / multiplier;
@@ -235,7 +235,7 @@ void SceneEditor::_handleValueChanging(const string& screenID, string buttonID, 
 	// Writefield filling
 	if (!_rightWindow->getScreen(screenID)->getWriteField(wfID)->isActive())
 	{
-		_rightWindow->getScreen(screenID)->getWriteField(wfID)->setTextContent(std::to_string(static_cast<int>(value * multiplier)));
+		_rightWindow->getScreen(screenID)->getWriteField(wfID)->setTextContent(to_string(static_cast<int>(value * multiplier)));
 	}
 }
 

@@ -58,7 +58,7 @@ void ScriptEventInput::setInputElement(string name)
 	}
 	else if(_inputType == InputEventType::MOUSE)
 	{
-		_inputElement = ScriptEventInput::_keyInputStringMap.at(name);
+		_inputElement = ScriptEventInput::_mouseInputStringMap.at(name);
 	}
 }
 

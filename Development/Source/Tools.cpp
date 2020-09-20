@@ -8,6 +8,8 @@
 #define PI      3.14159265359f
 #define DEG2RAD 0.01745329251994329576923690768489f
 
+using std::to_string;
+
 Tools::Tools() :
 	_generator(std::random_device{}())
 {
@@ -16,17 +18,17 @@ Tools::Tools() :
 
 void Tools::printInteger(int val)
 {
-	std::cout << std::to_string(val) << std::endl;
+	std::cout << to_string(val) << std::endl;
 }
 
 void Tools::printFloat(float val)
 {
-	std::cout << std::to_string(val) << std::endl;
+	std::cout << to_string(val) << std::endl;
 }
 
 void Tools::printDouble(double val)
 {
-	std::cout << std::to_string(val) << std::endl;
+	std::cout << to_string(val) << std::endl;
 }
 
 int Tools::getRandomInt(int min, int max) 

@@ -32,8 +32,8 @@ enum class CameraActionFollow
 
 enum class CameraActionMethod
 {
-	SET,
 	UPDATE,
+	SET,
 	NONE
 };
 
@@ -69,6 +69,9 @@ public:
 	vec3 getVectorArgument();
 	float getFloatArgument();
 
+	bool hasVectorArgument();
+	bool hasFloatArgument();
+
 private:
 	vec3 _vectorArgument = vec3(0.0f);
 	float _floatArgument = 0.0;
@@ -78,4 +81,7 @@ private:
 	CameraActionFollow _cameraFollow = CameraActionFollow::NONE;
 	CameraActionMethod _cameraMethod = CameraActionMethod::NONE;
 	CameraActionToggle _cameraToggle = CameraActionToggle::NONE;
+
+	bool _hasVectorArgument = false;
+	bool _hasFloatArgument = false;
 };

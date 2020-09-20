@@ -47,9 +47,9 @@ void SceneEditor::_updateLightEditing()
 
 								// Filling writefields
 								vec3 position = _fe3d.gameEntity_getPosition(ACTIVE_BULB_ID);
-								_rightWindow->getScreen("pointLightPropertiesMenu")->getWriteField("x")->setTextContent(std::to_string(static_cast<int>(position.x)));
-								_rightWindow->getScreen("pointLightPropertiesMenu")->getWriteField("y")->setTextContent(std::to_string(static_cast<int>(position.y)));
-								_rightWindow->getScreen("pointLightPropertiesMenu")->getWriteField("z")->setTextContent(std::to_string(static_cast<int>(position.z)));
+								_rightWindow->getScreen("pointLightPropertiesMenu")->getWriteField("x")->setTextContent(to_string(static_cast<int>(position.x)));
+								_rightWindow->getScreen("pointLightPropertiesMenu")->getWriteField("y")->setTextContent(to_string(static_cast<int>(position.y)));
+								_rightWindow->getScreen("pointLightPropertiesMenu")->getWriteField("z")->setTextContent(to_string(static_cast<int>(position.z)));
 							
 								// Update selected text
 								string textEntityID = _gui->getGlobalScreen()->getTextfield("selectedPointlightName")->getEntityID();

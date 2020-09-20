@@ -61,7 +61,7 @@ void ScriptEditor::_generateScriptLineOverview(ScriptLine& scriptLine)
 				// Add camera type
 				_addChoiceList(ChoiceListSort::ACTION, ChoiceListType::ACTION_CAMERA_TYPES, static_cast<int>(cameraAction->getCameraType()));
 
-				// Determine camera type
+				// Determine camera type and add resulting screens
 				if (cameraAction->getCameraType() == CameraActionType::POSITION)
 				{
 					_addChoiceList(ChoiceListSort::ACTION, ChoiceListType::ACTION_CAMERA_DIRECTIONS, static_cast<int>(cameraAction->getCameraDirection()));
@@ -74,6 +74,19 @@ void ScriptEditor::_generateScriptLineOverview(ScriptLine& scriptLine)
 				else if (cameraAction->getCameraType() == CameraActionType::LOOKAT || cameraAction->getCameraType() == CameraActionType::FIRST_PERSON)
 				{
 					_addChoiceList(ChoiceListSort::ACTION, ChoiceListType::ACTION_CAMERA_TOGGLE, static_cast<int>(cameraAction->getCameraToggle()));
+				}
+
+				// Add argument screens if existing
+				if (cameraAction->hasVectorArgument())
+				{
+					_addChoiceList(ChoiceListSort::ACTION, ChoiceListType::ACTION_CAMERA_VALUES, "Values", {
+						"X: " + to_string(cameraAction->getVectorArgument().x),
+						"Y: " + to_string(cameraAction->getVectorArgument().z),
+						"Z: " + to_string(cameraAction->getVectorArgument().z)});
+				}
+				else if (cameraAction->hasFloatArgument())
+				{
+					_addChoiceList(ChoiceListSort::ACTION, ChoiceListType::ACTION_CAMERA_VALUES, "Value", { to_string(cameraAction->getFloatArgument()) });
 				}
 			}
 		}
@@ -205,10 +218,10 @@ void ScriptEditor::_addChoiceList(ChoiceListSort listSort, ChoiceListType listTy
 	vec3 headerPosition = vec3(minX + (xOffset * _choiceListStack.size()), 5.0f, 0.5f);
 
 	// Header generation
-	_fe3d.gameEntity_add(std::to_string(listIndex) + "_header", "Engine\\OBJs\\crate.obj", headerPosition,
+	_fe3d.gameEntity_add(to_string(listIndex) + "_header", "Engine\\OBJs\\crate.obj", headerPosition,
 		vec3(0.0f), vec3(headerName.size() * 0.275f, 0.75f, 0.5f));
-	_fe3d.gameEntity_setDiffuseMap(std::to_string(listIndex) + "_header", "Engine\\Textures\\crate.png");
-	_fe3d.billBoardEntity_add(std::to_string(listIndex) + "_header", headerName, fontPath, vec3(0.0f, 0.5f, 0.0f), headerPosition + vec3(0.0f, 0.25f, 0.05f),
+	_fe3d.gameEntity_setDiffuseMap(to_string(listIndex) + "_header", "Engine\\Textures\\crate.png");
+	_fe3d.billBoardEntity_add(to_string(listIndex) + "_header", headerName, fontPath, vec3(0.0f, 0.5f, 0.0f), headerPosition + vec3(0.0f, 0.25f, 0.05f),
 		vec3(0.0f), vec2(headerName.size() * 0.4f, 1.0f), 0, 0);
 
 	// Choice list generation
@@ -225,7 +238,7 @@ void ScriptEditor::_addChoiceList(ChoiceListSort listSort, ChoiceListType listTy
 		// Entity values
 		vec3 optionPosition = vec3(headerPosition.x, maxY - (yOffset * (i + 1)), 0.55f);
 		vec2 optionSize = vec2(optionName.size() * 0.25f, _optionBillboardHeight);
-		string ID = std::to_string(listIndex) + "_option_" + std::to_string(i);
+		string ID = to_string(listIndex) + "_option_" + to_string(i);
 
 		// Create new option entity
 		_fe3d.billBoardEntity_add(ID, optionName, fontPath, vec3(1.0f),
@@ -257,13 +270,13 @@ void ScriptEditor::_removeChoiceList()
 	int currentListIndex = static_cast<int>(_choiceListStack.back().type);
 
 	// Remove header
-	_fe3d.gameEntity_delete(std::to_string(currentListIndex) + "_header");
-	_fe3d.billboardEntity_delete(std::to_string(currentListIndex) + "_header");
+	_fe3d.gameEntity_delete(to_string(currentListIndex) + "_header");
+	_fe3d.billboardEntity_delete(to_string(currentListIndex) + "_header");
 
 	// Remove all options
 	for (int i = 0; i < _choiceListStack.back().total; i++)
 	{
-		string ID = std::to_string(currentListIndex) + "_option_" + std::to_string(i);
+		string ID = to_string(currentListIndex) + "_option_" + to_string(i);
 		if (_fe3d.billboardEntity_isExisting(ID))
 		{
 			_fe3d.billboardEntity_delete(ID);
@@ -283,13 +296,16 @@ void ScriptEditor::_clearChoiceLists()
 	}
 
 	// Clear placed pointlights
-	for (unsigned int i = 0; i < _pointLightCounter; i++)
+	for (unsigned int i = 0; i <= _pointLightCounter; i++)
 	{
-		if (_fe3d.lightEntity_isExisting(std::to_string(i)))
+		if (_fe3d.lightEntity_isExisting(to_string(i)))
 		{
-			_fe3d.lightEntity_delete(std::to_string(i));
+			_fe3d.lightEntity_delete(to_string(i));
 		}
 	}
+
+	// Hide selection light
+	_fe3d.lightEntity_hide("@@selectionLight");
 
 	// Default camera position
 	_fe3d.camera_setPosition(_cameraStartingPosition);

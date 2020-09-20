@@ -17,17 +17,17 @@ void EngineGuiGlobalScreen::setValueFormButtonsPosition(vec2 position)
 
 void EngineGuiGlobalScreen::addValueForm(const string& ID, string title, int value, vec2 position, vec2 size)
 {
-	_addValueForm(ID, title, std::to_string(value), position, size, true);
+	_addValueForm(ID, title, to_string(value), position, size, true);
 }
 
 void EngineGuiGlobalScreen::addValueForm(const string& ID, string title, float value, vec2 position, vec2 size)
 {
-	_addValueForm(ID, title, std::to_string(static_cast<int>(value)), position, size, true);
+	_addValueForm(ID, title, to_string(static_cast<int>(value)), position, size, true);
 }
 
 void EngineGuiGlobalScreen::addValueForm(const string& ID, string title, double value, vec2 position, vec2 size)
 {
-	_addValueForm(ID, title, std::to_string(static_cast<int>(value)), position, size, true);
+	_addValueForm(ID, title, to_string(static_cast<int>(value)), position, size, true);
 }
 
 void EngineGuiGlobalScreen::addValueForm(const string& ID, string title, string value, vec2 position, vec2 size)
@@ -41,11 +41,11 @@ bool EngineGuiGlobalScreen::checkValueForm(const string& ID, int& value, vector<
 	vector<string> forbiddenValueStrings;
 	for (auto forbiddenValue : forbiddenValues)
 	{
-		forbiddenValueStrings.push_back(std::to_string(forbiddenValue));
+		forbiddenValueStrings.push_back(to_string(forbiddenValue));
 	}
 
 	int tempValue = value; // Dereference
-	string valueString = std::to_string(tempValue); // Convert to string
+	string valueString = to_string(tempValue); // Convert to string
 	bool result = _checkValueForm(ID, valueString, forbiddenValueStrings); // Execute function
 	value = result ? std::stoi(valueString) : value; // Apply to value
 	return result; // Return
@@ -57,11 +57,11 @@ bool EngineGuiGlobalScreen::checkValueForm(const string& ID, float& value, vecto
 	vector<string> forbiddenValueStrings;
 	for (auto forbiddenValue : forbiddenValues)
 	{
-		forbiddenValueStrings.push_back(std::to_string(static_cast<int>(forbiddenValue)));
+		forbiddenValueStrings.push_back(to_string(static_cast<int>(forbiddenValue)));
 	}
 
 	int tempValue = static_cast<int>(value); // Dereference
-	string valueString = std::to_string(tempValue); // Convert to string
+	string valueString = to_string(tempValue); // Convert to string
 	bool result = _checkValueForm(ID, valueString, forbiddenValueStrings); // Execute function
 	value = result ? static_cast<float>(std::stoi(valueString)) : value; // Apply to value
 	return result; // Return
@@ -73,11 +73,11 @@ bool EngineGuiGlobalScreen::checkValueForm(const string& ID, double& value, vect
 	vector<string> forbiddenValueStrings;
 	for (auto forbiddenValue : forbiddenValues)
 	{
-		forbiddenValueStrings.push_back(std::to_string(static_cast<int>(forbiddenValue)));
+		forbiddenValueStrings.push_back(to_string(static_cast<int>(forbiddenValue)));
 	}
 
 	int tempValue = static_cast<int>(value); // Dereference
-	string valueString = std::to_string(tempValue); // Convert to string
+	string valueString = to_string(tempValue); // Convert to string
 	bool result = _checkValueForm(ID, valueString, forbiddenValueStrings); // Execute function
 	value = result ? static_cast<double>(std::stoi(valueString)) : value; // Apply to value
 	return result; // Return

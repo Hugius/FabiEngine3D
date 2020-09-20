@@ -13,7 +13,7 @@ void ScriptEditor::update()
 
 void ScriptEditor::_updateGUI()
 {
-	if (_isLoaded)
+	if (_isLoaded && !_gui->getGlobalScreen()->isFocused())
 	{
 		auto screen = _leftWindow->getScreen("scriptEditorMenuMain");
 		
@@ -65,7 +65,7 @@ void ScriptEditor::_updateGUI()
 
 void ScriptEditor::_updateChoiceLists()
 {
-	if (_isLoaded && _isCreatingScript && !_allowedToAddScriptLine)
+	if (_isLoaded && _isCreatingScript && !_allowedToAddScriptLine && !_gui->getGlobalScreen()->isFocused())
 	{
 		// Update hoverability & color & scrolling
 		for (auto& list : _choiceListStack)
@@ -79,9 +79,9 @@ void ScriptEditor::_updateChoiceLists()
 			if (isResponsive)
 			{
 				// Scrolling values
-				string baseID = std::to_string(listIndex) + "_option_";
+				string baseID = to_string(listIndex) + "_option_";
 				vec3 firstPosition = _fe3d.billboardEntity_getPosition(baseID + "0"); // Position of top option
-				vec3 lastPosition = _fe3d.billboardEntity_getPosition(baseID + std::to_string(list.total - 1)); // Position of bottom option
+				vec3 lastPosition = _fe3d.billboardEntity_getPosition(baseID + to_string(list.total - 1)); // Position of bottom option
 
 				// Calculate distance between 2 options
 				float optionOffsetY;
@@ -95,7 +95,7 @@ void ScriptEditor::_updateChoiceLists()
 				}
 
 				// Calculate scrolling list bounds
-				float maxY = _fe3d.gameEntity_getPosition(std::to_string(listIndex) + "_header").y - optionOffsetY;
+				float maxY = _fe3d.gameEntity_getPosition(to_string(listIndex) + "_header").y - optionOffsetY;
 				float minY = _fe3d.gameEntity_getPosition("background").y - (_fe3d.gameEntity_getSize("background").y / 15.0f);
 				float halfHeight = (_optionBillboardHeight / 2.0f);
 				static bool hasCollided = false;
@@ -132,7 +132,7 @@ void ScriptEditor::_updateChoiceLists()
 			for (int i = 0; i < list.total; i++)
 			{
 				// Determine entity ID
-				string ID = std::to_string(listIndex) + "_option_" + std::to_string(i);
+				string ID = to_string(listIndex) + "_option_" + to_string(i);
 
 				// AABB responsiveness
 				_fe3d.aabbEntity_setResponsiveness(ID, isResponsive);
@@ -153,19 +153,19 @@ void ScriptEditor::_updateChoiceLists()
 
 void ScriptEditor::_updateNavigation()
 {
-	if (_isLoaded && _isCreatingScript)
+	if (_isLoaded && _isCreatingScript && !_gui->getGlobalScreen()->isFocused())
 	{
 		// Hovering over options
 		string hoveredEntityID = _fe3d.collision_checkCursorInAny();
 		if (hoveredEntityID != "" && !_allowedToAddScriptLine)
 		{
 			_fe3d.billboardEntity_setColor(hoveredEntityID, vec3(0.0f, 1.0f, 0.0f));
-			_fe3d.lightEntity_setPosition("selectionLight", _fe3d.billboardEntity_getPosition(hoveredEntityID) + vec3(0.0f, 0.0f, 1.0f));
-			_fe3d.lightEntity_show("selectionLight");
+			_fe3d.lightEntity_setPosition("@@selectionLight", _fe3d.billboardEntity_getPosition(hoveredEntityID) + vec3(0.0f, 0.0f, 1.0f));
+			_fe3d.lightEntity_show("@@selectionLight");
 		}
 		else
 		{
-			_fe3d.lightEntity_hide("selectionLight");
+			_fe3d.lightEntity_hide("@@selectionLight");
 		}
 
 		// Clicking a hovered option
@@ -178,7 +178,7 @@ void ScriptEditor::_updateNavigation()
 					auto listType = _choiceListStack.back().type;
 
 					// Point light
-					_fe3d.lightEntity_add(std::to_string(++_pointLightCounter), _fe3d.billboardEntity_getPosition(hoveredEntityID) + vec3(0.0f, 0.0f, 1.0f),
+					_fe3d.lightEntity_add(to_string(++_pointLightCounter), _fe3d.billboardEntity_getPosition(hoveredEntityID) + vec3(0.0f, 0.0f, 1.0f),
 						vec3(0.0f, 1.0f, 0.0f), 2.5f, 10.0f);
 
 					// Calculate character index of underscore before option-index
@@ -322,7 +322,7 @@ void ScriptEditor::_updateNavigation()
 			if (_choiceListStack.size() > 1)
 			{
 				_removeChoiceList();
-				_fe3d.lightEntity_delete(std::to_string(_pointLightCounter));
+				_fe3d.lightEntity_delete(to_string(_pointLightCounter));
 				_pointLightCounter--;
 
 				// Script cannot be added if last option is removed
@@ -342,14 +342,17 @@ void ScriptEditor::_updateMiscellaneous()
 		//  Smooth scrolling movement
 		_scrollingAcceleration *= 0.95f;
 
-		// Camear movement input
-		if (_fe3d.input_getKeyDown(Input::KEY_A))
+		if (!_gui->getGlobalScreen()->isFocused())
 		{
-			_cameraAcceleration -= 0.005f;
-		}
-		else if (_fe3d.input_getKeyDown(Input::KEY_D))
-		{
-			_cameraAcceleration += 0.005f;
+			// Camear movement input
+			if (_fe3d.input_getKeyDown(Input::KEY_A))
+			{
+				_cameraAcceleration -= 0.005f;
+			}
+			else if (_fe3d.input_getKeyDown(Input::KEY_D))
+			{
+				_cameraAcceleration += 0.005f;
+			}
 		}
 
 		// Smooth camera movement

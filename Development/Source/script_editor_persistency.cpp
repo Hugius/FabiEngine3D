@@ -90,13 +90,26 @@ void ScriptEditor::_loadScriptFromFile()
 			{
 				case ScriptActionType::CAMERA:
 				{
+					// New action
 					action = make_shared<ScriptActionCamera>(_fe3d, ScriptActionType::CAMERA);
+
+					// Placeholders
 					int cameraType, cameraDirection, cameraMethod, cameraToggle;
-					iss >> cameraType >> cameraDirection >> cameraMethod >> cameraToggle;
+					bool hasVectorArgument, hasfloatArgument;
+					vec3 vectorArgument;
+					float floatArgument;
+
+					// Load from file
+					iss >> cameraType >> cameraDirection >> cameraMethod >> cameraToggle >> hasVectorArgument >>
+						vectorArgument.x >> vectorArgument.y >> vectorArgument.z >> hasfloatArgument >> floatArgument;
+
+					// Fill the script action
 					dynamic_pointer_cast<ScriptActionCamera>(action)->setCameraType(static_cast<CameraActionType>(cameraType));
 					dynamic_pointer_cast<ScriptActionCamera>(action)->setCameraDirection(static_cast<CameraActionDirection>(cameraDirection));
 					dynamic_pointer_cast<ScriptActionCamera>(action)->setCameraMethod(static_cast<CameraActionMethod>(cameraMethod));
 					dynamic_pointer_cast<ScriptActionCamera>(action)->setCameraToggle(static_cast<CameraActionToggle>(cameraToggle));
+					if(hasVectorArgument)dynamic_pointer_cast<ScriptActionCamera>(action)->setVectorArgument(vectorArgument);
+					if(hasfloatArgument) dynamic_pointer_cast<ScriptActionCamera>(action)->setFloatArgument(floatArgument);
 					break;
 				}
 			}
@@ -145,7 +158,7 @@ void ScriptEditor::_saveScriptToFile()
 			file << scriptLine.ID << " ";
 
 			// Write event type
-			file << std::to_string(static_cast<int>(scriptLine.event->getType())) << " ";
+			file << to_string(static_cast<int>(scriptLine.event->getType())) << " ";
 
 			// Write event data based on type
 			switch (scriptLine.event->getType())
@@ -185,7 +198,7 @@ void ScriptEditor::_saveScriptToFile()
 			file << " ";
 
 			// Write action type
-			file << std::to_string(static_cast<int>(scriptLine.action->getType())) << " ";
+			file << to_string(static_cast<int>(scriptLine.action->getType())) << " ";
 
 			// Write action data based on type
 			switch (scriptLine.action->getType())
@@ -197,7 +210,13 @@ void ScriptEditor::_saveScriptToFile()
 						static_cast<int>(cameraAction->getCameraType()) << " " <<
 						static_cast<int>(cameraAction->getCameraDirection()) << " " <<
 						static_cast<int>(cameraAction->getCameraMethod()) << " " <<
-						static_cast<int>(cameraAction->getCameraToggle());
+						static_cast<int>(cameraAction->getCameraToggle()) << " " <<
+						cameraAction->hasVectorArgument() << " " <<
+						cameraAction->getVectorArgument().x << " " <<
+						cameraAction->getVectorArgument().x << " " <<
+						cameraAction->getVectorArgument().x << " " <<
+						cameraAction->hasFloatArgument() << " " <<
+						cameraAction->getFloatArgument();
 					break;
 				}
 			}

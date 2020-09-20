@@ -123,7 +123,7 @@ void BottomViewportController::update()
 	if (_fe3d.misc_checkInterval("fps", 50))
 	{
 		string fpsTextID = _statsScreen->getTextfield("fps")->getEntityID();
-		string text = "FPS: " + std::to_string(static_cast<int>(_fe3d.misc_getFPS()));
+		string text = "FPS: " + to_string(static_cast<int>(_fe3d.misc_getFPS()));
 		_fe3d.textEntity_setTextContent(fpsTextID, text, 0.0125f);
 	}
 
@@ -156,7 +156,7 @@ void BottomViewportController::update()
 	{
 		string textID = _statsScreen->getTextfield("cameraYawPitch")->getEntityID();
 		string text = "Camera yaw & pitch: " + 
-			std::to_string(static_cast<int>(_fe3d.camera_getYaw())) + " " + std::to_string(static_cast<int>(_fe3d.camera_getPitch()));
+			to_string(static_cast<int>(_fe3d.camera_getYaw())) + " " + to_string(static_cast<int>(_fe3d.camera_getPitch()));
 		_fe3d.textEntity_setTextContent(textID, text, 0.0125f);
 	}
 
@@ -172,7 +172,7 @@ void BottomViewportController::update()
 	if (_fe3d.misc_checkInterval("triangleCount", 10))
 	{
 		string textID = _statsScreen->getTextfield("triangleCount")->getEntityID();
-		string text = "Triangles: " + std::to_string(static_cast<int>(_fe3d.misc_getTriangleCount()));
+		string text = "Triangles: " + to_string(static_cast<int>(_fe3d.misc_getTriangleCount()));
 		_fe3d.textEntity_setTextContent(textID, text, 0.0125f);
 	}
 
@@ -190,7 +190,7 @@ void BottomViewportController::update()
 			}
 		}
 
-		string text = "Game entities: " + std::to_string(total);
+		string text = "Game entities: " + to_string(total);
 		_fe3d.textEntity_setTextContent(textID, text, 0.0125f);
 	}
 
@@ -208,7 +208,7 @@ void BottomViewportController::update()
 			}
 		}
 
-		string text = "Billboard entities: " + std::to_string(total);
+		string text = "Billboard entities: " + to_string(total);
 		_fe3d.textEntity_setTextContent(textID, text, 0.0125f);
 	}
 
@@ -226,7 +226,7 @@ void BottomViewportController::update()
 			}
 		}
 
-		string text = "Light entities: " + std::to_string(total);
+		string text = "Light entities: " + to_string(total);
 		_fe3d.textEntity_setTextContent(textID, text, 0.0125f);
 	}
 
@@ -237,7 +237,7 @@ void BottomViewportController::update()
 		for (auto& [key, value] : performanceStats)
 		{
 			string textID = _statsScreen->getTextfield(key)->getEntityID();
-			_fe3d.textEntity_setTextContent(textID, key + ": " + std::to_string(value) + "%", 0.0125f);
+			_fe3d.textEntity_setTextContent(textID, key + ": " + to_string(value) + "%", 0.0125f);
 		}
 	}
 }

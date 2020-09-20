@@ -212,32 +212,32 @@ string FabiEngine3D::misc_getWinExplorerFilename(const string& startingDir, cons
 
 string FabiEngine3D::misc_vec2str(ivec2 vec)
 {
-	return std::to_string(vec.x) + " " + std::to_string(vec.y);
+	return to_string(vec.x) + " " + to_string(vec.y);
 }
 
 string FabiEngine3D::misc_vec2str(ivec3 vec)
 {
-	return std::to_string(vec.x) + " " + std::to_string(vec.y) + " " + std::to_string(vec.z);
+	return to_string(vec.x) + " " + to_string(vec.y) + " " + to_string(vec.z);
 }
 
 string FabiEngine3D::misc_vec2str(ivec4 vec)
 {
-	return std::to_string(vec.x) + " " + std::to_string(vec.y) + " " + std::to_string(vec.z) + " " + std::to_string(vec.w);
+	return to_string(vec.x) + " " + to_string(vec.y) + " " + to_string(vec.z) + " " + to_string(vec.w);
 }
 
 string FabiEngine3D::misc_vec2str(vec2 vec)
 {
-	return std::to_string(vec.x) + " " + std::to_string(vec.y);
+	return to_string(vec.x) + " " + to_string(vec.y);
 }
 
 string FabiEngine3D::misc_vec2str(vec3 vec)
 {
-	return std::to_string(vec.x) + " " + std::to_string(vec.y) + " " + std::to_string(vec.z);
+	return to_string(vec.x) + " " + to_string(vec.y) + " " + to_string(vec.z);
 }
 
 string FabiEngine3D::misc_vec2str(vec4 vec)
 {
-	return std::to_string(vec.x) + " " + std::to_string(vec.y) + " " + std::to_string(vec.z) + " " + std::to_string(vec.w);
+	return to_string(vec.x) + " " + to_string(vec.y) + " " + to_string(vec.z) + " " + to_string(vec.w);
 }
 
 string FabiEngine3D::misc_getRootDirectory()

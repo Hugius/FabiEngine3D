@@ -3,6 +3,8 @@
 
 #include <SDL\\SDL_image.h>
 
+using std::to_string;
+
 TTF_Font* TextureLoader::_loadFont(const string& fontPath)
 {
 	// Get application root directory
@@ -52,7 +54,7 @@ GLuint TextureLoader::_loadText(const string& text, const string&fontPath)
 	SDL_Color * sdlColor = new SDL_Color{ 255, 255, 255 };
 	if (sdlColor == nullptr)
 	{
-		Logger::getInst().throwError("Color could not be created at rgb: " + std::to_string(sdlColor->r) + std::to_string(sdlColor->g) + std::to_string(sdlColor->b));
+		Logger::getInst().throwError("Color could not be created at rgb: " + to_string(sdlColor->r) + to_string(sdlColor->g) + to_string(sdlColor->b));
 	}
 
 	// Texture data of text

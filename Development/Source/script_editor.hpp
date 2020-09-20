@@ -48,6 +48,7 @@ class ScriptEditor final
 		ACTION_CAMERA_FOLLOWS,
 		ACTION_CAMERA_METHODS,
 		ACTION_CAMERA_TOGGLE,
+		ACTION_CAMERA_VALUES,
 
 		// Miscellaneous
 		NONE

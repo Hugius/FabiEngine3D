@@ -34,7 +34,7 @@ void SceneEditor::_updateModelPlacing()
 					// Add new model
 				begin: int randomSerial = _fe3d.misc_getUniqueInt(0, INT_MAX);
 					string newID = _currentPreviewModelName.substr(1); // Remove the '@'
-					newID = std::to_string(randomSerial) + "@" + newID; // Adding a number to make it unique
+					newID = to_string(randomSerial) + "@" + newID; // Adding a number to make it unique
 
 					// Check if ID not already exists
 					if (_fe3d.gameEntity_isExisting(newID))

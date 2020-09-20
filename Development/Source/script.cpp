@@ -19,7 +19,7 @@ void Script::removeLine(const string& ID)
 	{
 		if (scriptLine.ID == ID)
 		{
-			_scriptLines.erase(_scriptLines.begin() + index, _scriptLines.end());
+			_scriptLines.erase(_scriptLines.begin() + index);
 			return;
 		}
 		index++;

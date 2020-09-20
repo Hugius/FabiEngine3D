@@ -1,6 +1,8 @@
 #include "game_entity_renderer.hpp"
 #include "configuration.hpp"
 
+using std::to_string;
+
 void GameEntityRenderer::bind()
 {
 	// Define clipping plane for scene reflections
@@ -85,17 +87,17 @@ void GameEntityRenderer::renderLightEntities(const vector<LightEntity*>& entitie
 	{
 		if (entities[i]->isVisible())
 		{
-			_shader.uploadUniform("u_pointLightPositions[" + std::to_string(i) + "]", entities[i]->getPosition());
-			_shader.uploadUniform("u_pointLightColors[" + std::to_string(i) + "]", entities[i]->getColor());
-			_shader.uploadUniform("u_pointLightIntensities[" + std::to_string(i) + "]", entities[i]->getIntensity());
-			_shader.uploadUniform("u_pointLightDistanceFactors[" + std::to_string(i) + "]", entities[i]->getDistanceFactor());
+			_shader.uploadUniform("u_pointLightPositions[" + to_string(i) + "]", entities[i]->getPosition());
+			_shader.uploadUniform("u_pointLightColors[" + to_string(i) + "]", entities[i]->getColor());
+			_shader.uploadUniform("u_pointLightIntensities[" + to_string(i) + "]", entities[i]->getIntensity());
+			_shader.uploadUniform("u_pointLightDistanceFactors[" + to_string(i) + "]", entities[i]->getDistanceFactor());
 		}
 		else
 		{
-			_shader.uploadUniform("u_pointLightPositions[" + std::to_string(i) + "]", vec3(0.0f));
-			_shader.uploadUniform("u_pointLightColors[" + std::to_string(i) + "]", vec3(0.0f));
-			_shader.uploadUniform("u_pointLightIntensities[" + std::to_string(i) + "]", 0.0f);
-			_shader.uploadUniform("u_pointLightDistanceFactors[" + std::to_string(i) + "]", 0.0f);
+			_shader.uploadUniform("u_pointLightPositions[" + to_string(i) + "]", vec3(0.0f));
+			_shader.uploadUniform("u_pointLightColors[" + to_string(i) + "]", vec3(0.0f));
+			_shader.uploadUniform("u_pointLightIntensities[" + to_string(i) + "]", 0.0f);
+			_shader.uploadUniform("u_pointLightDistanceFactors[" + to_string(i) + "]", 0.0f);
 		}
 	}
 }

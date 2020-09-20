@@ -8,7 +8,6 @@ void ScriptEditor::_updateScriptlineCreation()
 		static bool firstTime = true;
 		static bool needsValueFilling = false;
 		static bool finishedValueFilling = false;
-		static bool createdNameForm = false;
 		static shared_ptr<ScriptEvent> event = nullptr;
 		static shared_ptr<ScriptAction> action = nullptr;
 		
@@ -110,16 +109,16 @@ void ScriptEditor::_updateScriptlineCreation()
 					// Determine type of value filling
 					if (type == CameraActionType::LOOKAT && toggle == CameraActionToggle::ON) // Lookat position
 					{
-						_gui->getGlobalScreen()->addValueForm("camX", "Lookat X", 0.0f, vec2(-0.25f, 0.0f), vec2(0.2f, 0.1f));
+						_gui->getGlobalScreen()->addValueForm("camX", "Lookat X", 0.0f, vec2(-0.4f, 0.0f), vec2(0.2f, 0.1f));
 						_gui->getGlobalScreen()->addValueForm("camY", "Lookat Y", 0.0f, vec2(0.0f, 0.0f), vec2(0.2f, 0.1f));
-						_gui->getGlobalScreen()->addValueForm("camZ", "Lookat Z", 0.0f, vec2(0.25f, 0.0f), vec2(0.2f, 0.1f));
+						_gui->getGlobalScreen()->addValueForm("camZ", "Lookat Z", 0.0f, vec2(0.4f, 0.0f), vec2(0.2f, 0.1f));
 						needsValueFilling = true;
 					}
 					else if (type == CameraActionType::POSITION && direction == CameraActionDirection::XYZ) // Set XYZ position
 					{
-						_gui->getGlobalScreen()->addValueForm("camX", "Position X", 0.0f, vec2(-0.25f, 0.0f), vec2(0.2f, 0.1f));
+						_gui->getGlobalScreen()->addValueForm("camX", "Position X", 0.0f, vec2(-0.4f, 0.0f), vec2(0.2f, 0.1f));
 						_gui->getGlobalScreen()->addValueForm("camY", "Position Y", 0.0f, vec2(0.0f, 0.0f), vec2(0.2f, 0.1f));
-						_gui->getGlobalScreen()->addValueForm("camZ", "Position Z", 0.0f, vec2(0.25f, 0.0f), vec2(0.2f, 0.1f));
+						_gui->getGlobalScreen()->addValueForm("camZ", "Position Z", 0.0f, vec2(0.4f, 0.0f), vec2(0.2f, 0.1f));
 						needsValueFilling = true;
 					}
 					else if (method == CameraActionMethod::SET)
@@ -152,60 +151,55 @@ void ScriptEditor::_updateScriptlineCreation()
 		}
 
 		// Update value filling
-		if (needsValueFilling)
+		if (needsValueFilling && !finishedValueFilling)
 		{
-			std::cout << "doei";
 			// Camera action
-			vec3 camPos;
-			float camValue;
-			//_gui->getGlobalScreen()->checkValueForm("camX", camPos.x);
-			//_gui->getGlobalScreen()->checkValueForm("camY", camPos.y);
-			//_gui->getGlobalScreen()->checkValueForm("camZ", camPos.z);
-		
-			//dynamic_pointer_cast<ScriptActionCamera>(action)->setVectorArgument(camPos);
-			//std::cout << camPos.x << " " << camPos.y << " " << camPos.z << std::endl;
-			//finishedValueFilling = true;
-			
-
-			if (_gui->getGlobalScreen()->checkValueForm("camValue", camValue))
+			if (_gui->getGlobalScreen()->isValueFormExisting("camX"))
 			{
-				dynamic_pointer_cast<ScriptActionCamera>(action)->setFloatArgument(camValue);
-				finishedValueFilling = true;
+				vec3 camPos;
+				if (_gui->getGlobalScreen()->checkValueForm("camX", camPos.x) && 
+					_gui->getGlobalScreen()->checkValueForm("camY", camPos.y) && 
+					_gui->getGlobalScreen()->checkValueForm("camZ", camPos.z))
+				{
+					dynamic_pointer_cast<ScriptActionCamera>(action)->setVectorArgument(camPos);
+					finishedValueFilling = true;
+				}
 			}
-		}
-
-		// Add scriptline name filling field
-		if ((finishedValueFilling || !needsValueFilling) && !createdNameForm)
-		{
-			
-			_gui->getGlobalScreen()->addValueForm("newScriptLineName", "New script name", "", vec2(0.0f), vec2(0.5f, 0.1f));
-			needsValueFilling = false;
-			finishedValueFilling = false;
-			createdNameForm = true;
-		}
-		
-		// Check if new script line name filled in
-		string newScriptLineName = "";
-		if (_gui->getGlobalScreen()->checkValueForm("newScriptLineName", newScriptLineName))
-		{
-			std::cout << "kip";
-			// Check if name not existing yet
-			if (_script->isExisting(newScriptLineName))
+			else if (_gui->getGlobalScreen()->isValueFormExisting("camValue"))
 			{
-				Logger::getInst().throwWarning("Script \"" + newScriptLineName + "\"" + " already exists!");
+				float camValue;
+				if (_gui->getGlobalScreen()->checkValueForm("camValue", camValue))
+				{
+					dynamic_pointer_cast<ScriptActionCamera>(action)->setFloatArgument(camValue);
+					finishedValueFilling = true;
+				}
 			}
 			else
 			{
-				// Add new scriptline and reset the process
-				_script->addLine(newScriptLineName, event, action);
+				// Reset the creation process
 				_isCreatingScriptline = false;
 				firstTime = true;
 				needsValueFilling = false;
 				finishedValueFilling = false;
-				createdNameForm = false;
 				event = nullptr;
 				action = nullptr;
+				return;
 			}
+		}
+
+		// Add scriptline
+		if (finishedValueFilling || !needsValueFilling)
+		{
+			_script->addLine(to_string(_script->getLineCount() + 1), event, action);
+			_clearChoiceLists();
+
+			// Reset the creation process
+			_isCreatingScriptline = false;
+			firstTime = true;
+			needsValueFilling = false;
+			finishedValueFilling = false;
+			event = nullptr;
+			action = nullptr;
 		}
 	}
 }

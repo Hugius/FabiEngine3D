@@ -32,7 +32,7 @@ void ScriptEditor::load()
 	_fe3d.camera_load(70.0f, 0.1f, 100.0f, _cameraStartingPosition, -90.0f);
 
 	// Graphics
-	_fe3d.gfx_enableDirectionalLighting(vec3(100.0f), vec3(1.0f), 0.75f);
+	_fe3d.gfx_enableDirectionalLighting(vec3(100.0f), vec3(1.0f), 0.5f);
 	_fe3d.gfx_enableSpecularLighting();
 	_fe3d.gfx_enableNormalMapping();
 	_fe3d.gfx_enablePointLighting();

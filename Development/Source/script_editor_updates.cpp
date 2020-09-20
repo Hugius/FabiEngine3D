@@ -13,38 +13,41 @@ void ScriptEditor::update()
 
 void ScriptEditor::_updateGUI()
 {
-	if (_isLoaded && !_gui->getGlobalScreen()->isFocused())
+	if (_isLoaded)
 	{
 		auto screen = _leftWindow->getScreen("scriptEditorMenuMain");
 		
 		// Check if LMB is pressed
-		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
+		if (!_gui->getGlobalScreen()->isFocused())
 		{
-			if (screen->getButton("addLine")->isHovered())
+			if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
 			{
-				_isCreatingScriptline = true;
-			}
-			else if (screen->getButton("deleteLine")->isHovered())
-			{
-				// Remove line from script
-				_clearChoiceLists();
-				_script->removeLine(_currentScriptLineID);
-				_currentScriptLineID = "";
-			}
-			else if (screen->getButton("createLine")->isHovered())
-			{
-				// Add default choicelist
-				_clearChoiceLists();
-				_addChoiceList(ChoiceListSort::EVENT, ChoiceListType::EVENT_TYPES);
-				_isCreatingScript = true;
-			}
-			else if (screen->getButton("viewLine")->isHovered())
-			{
-				_gui->getGlobalScreen()->addChoiceForm("scriptLinesList", "View script", vec2(0.0f, 0.0f), _script->getAllScriptLineIDs());
-			}
-			else if (screen->getButton("back")->isHovered())
-			{
-				_gui->getGlobalScreen()->addAnswerForm("exitScriptEditor", "Save changes?", vec2(0.0f, 0.25f));
+				if (screen->getButton("addLine")->isHovered())
+				{
+					_isCreatingScriptline = true;
+				}
+				else if (screen->getButton("deleteLine")->isHovered())
+				{
+					// Remove line from script
+					_clearChoiceLists();
+					_script->removeLine(_currentScriptLineID);
+					_currentScriptLineID = "";
+				}
+				else if (screen->getButton("createLine")->isHovered())
+				{
+					// Add default choicelist
+					_clearChoiceLists();
+					_addChoiceList(ChoiceListSort::EVENT, ChoiceListType::EVENT_TYPES);
+					_isCreatingScript = true;
+				}
+				else if (screen->getButton("viewLine")->isHovered())
+				{
+					_gui->getGlobalScreen()->addChoiceForm("scriptLinesList", "View script", vec2(0.0f, 0.0f), _script->getAllScriptLineIDs());
+				}
+				else if (screen->getButton("back")->isHovered())
+				{
+					_gui->getGlobalScreen()->addAnswerForm("exitScriptEditor", "Save changes?", vec2(0.0f, 0.25f));
+				}
 			}
 		}
 

@@ -60,6 +60,7 @@ public:
 	bool checkValueForm(const string& ID, float& value, vector<float> forbiddenValues = {});
 	bool checkValueForm(const string& ID, double& value, vector<double> forbiddenValues = {});
 	bool checkValueForm(const string& ID, string& value, vector<string> forbiddenValues = {});
+	bool isValueFormExisting(const string& ID);
 
 	// Choice form
 	void addChoiceForm(const string& ID, string title, vec2 position, vector<string> buttonTitles);

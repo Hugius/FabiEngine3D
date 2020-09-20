@@ -65,7 +65,12 @@ void ScriptEditor::_generateScriptLineOverview(ScriptLine& scriptLine)
 				if (cameraAction->getCameraType() == CameraActionType::POSITION)
 				{
 					_addChoiceList(ChoiceListSort::ACTION, ChoiceListType::ACTION_CAMERA_DIRECTIONS, static_cast<int>(cameraAction->getCameraDirection()));
-					_addChoiceList(ChoiceListSort::ACTION, ChoiceListType::ACTION_CAMERA_METHODS, static_cast<int>(cameraAction->getCameraMethod()));
+
+					// XYZ change is only setting
+					if (cameraAction->getCameraDirection() != CameraActionDirection::XYZ)
+					{
+						_addChoiceList(ChoiceListSort::ACTION, ChoiceListType::ACTION_CAMERA_METHODS, static_cast<int>(cameraAction->getCameraMethod()));
+					}
 				}
 				else if (cameraAction->getCameraType() == CameraActionType::YAW || cameraAction->getCameraType() == CameraActionType::PITCH)
 				{
@@ -80,13 +85,14 @@ void ScriptEditor::_generateScriptLineOverview(ScriptLine& scriptLine)
 				if (cameraAction->hasVectorArgument())
 				{
 					_addChoiceList(ChoiceListSort::ACTION, ChoiceListType::ACTION_CAMERA_VALUES, "Values", {
-						"X: " + to_string(cameraAction->getVectorArgument().x),
-						"Y: " + to_string(cameraAction->getVectorArgument().z),
-						"Z: " + to_string(cameraAction->getVectorArgument().z)});
+						"X: " + to_string(static_cast<int>(cameraAction->getVectorArgument().x)),
+						"Y: " + to_string(static_cast<int>(cameraAction->getVectorArgument().y)),
+						"Z: " + to_string(static_cast<int>(cameraAction->getVectorArgument().z))});
 				}
 				else if (cameraAction->hasFloatArgument())
 				{
-					_addChoiceList(ChoiceListSort::ACTION, ChoiceListType::ACTION_CAMERA_VALUES, "Value", { to_string(cameraAction->getFloatArgument()) });
+					_addChoiceList(ChoiceListSort::ACTION, ChoiceListType::ACTION_CAMERA_VALUES, "Value", 
+						{ to_string(static_cast<int>(cameraAction->getFloatArgument())) });
 				}
 			}
 		}
@@ -234,7 +240,7 @@ void ScriptEditor::_addChoiceList(ChoiceListSort listSort, ChoiceListType listTy
 		{
 			optionName = optionNames[activeIndex];
 		}
-
+		
 		// Entity values
 		vec3 optionPosition = vec3(headerPosition.x, maxY - (yOffset * (i + 1)), 0.55f);
 		vec2 optionSize = vec2(optionName.size() * 0.25f, _optionBillboardHeight);

@@ -88,6 +88,11 @@ bool EngineGuiGlobalScreen::checkValueForm(const string& ID, string& value, vect
 	return _checkValueForm(ID, value, forbiddenValues);
 }
 
+bool EngineGuiGlobalScreen::isValueFormExisting(const string& ID)
+{
+	return std::find(_valueFormIDs.begin(), _valueFormIDs.end(), ID) != _valueFormIDs.end();
+}
+
 void EngineGuiGlobalScreen::_addValueForm(const string& ID, string title, string valueString, vec2 position, vec2 size, bool onlyNumbers)
 {
 	if (ID != "" && std::find(_valueFormIDs.begin(), _valueFormIDs.end(), ID) == _valueFormIDs.end())

@@ -314,7 +314,7 @@
     <ClCompile Include="Source\script_event_time.cpp" />
     <ClCompile Include="Source\script_executor.cpp" />
     <ClCompile Include="Source\settings_editor.cpp" />
-    <ClCompile Include="Source\top_viewport_controller.cpp" />
+    <ClCompile Include="Source\top_viewport_controller_core.cpp" />
     <ClCompile Include="Source\engine_gui_button.cpp" />
     <ClCompile Include="Source\engine_gui_global_screen_core.cpp" />
     <ClCompile Include="Source\engine_gui_rectangle.cpp" />
@@ -351,6 +351,7 @@
     <ClCompile Include="Source\text_entity.cpp" />
     <ClCompile Include="Source\text_entity_manager.cpp" />
     <ClCompile Include="Source\timer.cpp" />
+    <ClCompile Include="Source\top_viewport_controller_misc.cpp" />
     <ClCompile Include="Source\viewport_controller.cpp" />
     <ClCompile Include="Source\water_entity.cpp" />
     <ClCompile Include="Source\water_entity_manager.cpp" />

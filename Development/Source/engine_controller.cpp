@@ -91,27 +91,31 @@ void EngineController::_updateMiscellaneous()
 	}
 	lastScreen = activeScreen;
 
-	// Only allowed if in-game
+	// Only allowed if cursor in 3D window
 	input_setKeyTogglingLocked(_gui->getGlobalScreen()->isFocused() || !misc_isMouseInsideViewport());
 
-	// Update wireframe visibility
-	if (input_getKeyToggled(Input::KEY_F))
+	// 3D tools only allowed when not running game preview
+	if (!_topViewportController.isScriptRunning())
 	{
-		misc_enableWireframeRendering();
-	}
-	else
-	{
-		misc_disableWireframeRendering();
-	}
+		// Update wireframe visibility
+		if (input_getKeyToggled(Input::KEY_F))
+		{
+			misc_enableWireframeRendering();
+		}
+		else
+		{
+			misc_disableWireframeRendering();
+		}
 
-	// Update debug rendering
-	if (input_getKeyToggled(Input::KEY_H))
-	{
-		misc_enableDebugRendering();
-	}
-	else
-	{
-		misc_disableDebugRendering();
+		// Update debug rendering
+		if (input_getKeyToggled(Input::KEY_H))
+		{
+			misc_enableDebugRendering();
+		}
+		else
+		{
+			misc_disableDebugRendering();
+		}
 	}
 
 	// Update custom cursor

@@ -202,9 +202,6 @@
     <ClCompile Include="Source\right_viewport_controller.cpp">
       <Filter>src\Engine Controller System\Viewport Controllers</Filter>
     </ClCompile>
-    <ClCompile Include="Source\top_viewport_controller.cpp">
-      <Filter>src\Engine Controller System\Viewport Controllers</Filter>
-    </ClCompile>
     <ClCompile Include="Source\viewport_controller.cpp">
       <Filter>src\Engine Controller System\Viewport Controllers</Filter>
     </ClCompile>
@@ -444,6 +441,12 @@
     </ClCompile>
     <ClCompile Include="Source\engine_gui_writefield.cpp">
       <Filter>src\GUI System\Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\top_viewport_controller_core.cpp">
+      <Filter>src\Engine Controller System\Viewport Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\top_viewport_controller_misc.cpp">
+      <Filter>src\Engine Controller System\Viewport Controllers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

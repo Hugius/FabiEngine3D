@@ -19,6 +19,8 @@ public:
 	void initialize() override;
 	void update() override;
 
+	bool isScriptRunning();
+
 	static inline const vec3 frameColor = vec3(0.25f);
 	static inline const vec3 buttonColor = vec3(0.0f, 0.25f, 0.0f);
 	static inline const vec3 buttonHoverColor = vec3(0.0f, 0.5f, 0.0f);

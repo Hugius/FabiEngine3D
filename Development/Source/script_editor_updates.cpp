@@ -209,7 +209,8 @@ void ScriptEditor::_updateNavigation()
 							// Determine event type
 							if (optionName == "INIT_EVENT")
 							{
-
+								// Event chosen, go to action choosing
+								_addChoiceList(ChoiceListSort::ACTION, ChoiceListType::ACTION_TYPES);
 							}
 							else if (optionName == "INPUT_EVENT")
 							{

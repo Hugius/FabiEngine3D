@@ -222,8 +222,8 @@ void ScriptEditor::_saveScriptToFile()
 						static_cast<int>(cameraAction->getCameraToggle()) << " " <<
 						cameraAction->hasVectorArgument() << " " <<
 						cameraAction->getVectorArgument().x << " " <<
-						cameraAction->getVectorArgument().x << " " <<
-						cameraAction->getVectorArgument().x << " " <<
+						cameraAction->getVectorArgument().y << " " <<
+						cameraAction->getVectorArgument().z << " " <<
 						cameraAction->hasFloatArgument() << " " <<
 						cameraAction->getFloatArgument();
 					break;

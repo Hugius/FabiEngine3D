@@ -88,30 +88,6 @@
     <ClCompile Include="Source\entity_bus.cpp">
       <Filter>src\Entity System\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="Source\engine_gui_button.cpp">
-      <Filter>src\GUI System</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\engine_gui_manager.cpp">
-      <Filter>src\GUI System</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\engine_gui_rectangle.cpp">
-      <Filter>src\GUI System</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\engine_gui_screen.cpp">
-      <Filter>src\GUI System</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\engine_gui_textfield.cpp">
-      <Filter>src\GUI System</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\engine_gui_viewport.cpp">
-      <Filter>src\GUI System</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\engine_gui_window.cpp">
-      <Filter>src\GUI System</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\engine_gui_writefield.cpp">
-      <Filter>src\GUI System</Filter>
-    </ClCompile>
     <ClCompile Include="Source\collision_detector.cpp">
       <Filter>src\Physics System\Core</Filter>
     </ClCompile>
@@ -141,9 +117,6 @@
     </ClCompile>
     <ClCompile Include="Source\opengl_shader.cpp">
       <Filter>src\Rendering System\OpenGL</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\engine_gui_scrollinglist.cpp">
-      <Filter>src\GUI System</Filter>
     </ClCompile>
     <ClCompile Include="Source\aabb_entity_renderer.cpp">
       <Filter>src\Rendering System\Renderers\Entity Renderers</Filter>
@@ -190,9 +163,6 @@
     <ClCompile Include="Source\render_engine_core.cpp">
       <Filter>src\Rendering System\Core</Filter>
     </ClCompile>
-    <ClCompile Include="Source\engine_gui_global_screen_core.cpp">
-      <Filter>src\GUI System</Filter>
-    </ClCompile>
     <ClCompile Include="Source\core_engine.cpp">
       <Filter>src\Core System\Core</Filter>
     </ClCompile>
@@ -219,9 +189,6 @@
     </ClCompile>
     <ClCompile Include="Source\core_engine_misc.cpp">
       <Filter>src\Core System\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\engine_gui_global_screen_misc.cpp">
-      <Filter>src\GUI System</Filter>
     </ClCompile>
     <ClCompile Include="Source\engine_controller.cpp">
       <Filter>src\Engine Controller System\Core Controller</Filter>
@@ -445,6 +412,39 @@
     <ClCompile Include="Source\script_editor_creation.cpp">
       <Filter>src\Editor System\Script Editor\Updates</Filter>
     </ClCompile>
+    <ClCompile Include="Source\engine_gui_global_screen_misc.cpp">
+      <Filter>src\GUI System\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\engine_gui_global_screen_core.cpp">
+      <Filter>src\GUI System\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\engine_gui_manager.cpp">
+      <Filter>src\GUI System\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\engine_gui_button.cpp">
+      <Filter>src\GUI System\Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\engine_gui_rectangle.cpp">
+      <Filter>src\GUI System\Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\engine_gui_screen.cpp">
+      <Filter>src\GUI System\Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\engine_gui_scrollinglist.cpp">
+      <Filter>src\GUI System\Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\engine_gui_textfield.cpp">
+      <Filter>src\GUI System\Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\engine_gui_viewport.cpp">
+      <Filter>src\GUI System\Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\engine_gui_window.cpp">
+      <Filter>src\GUI System\Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\engine_gui_writefield.cpp">
+      <Filter>src\GUI System\Elements</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\obj_loader.hpp">
@@ -531,33 +531,6 @@
     <ClInclude Include="Source\entity_bus.hpp">
       <Filter>src\Entity System\Miscellaneous</Filter>
     </ClInclude>
-    <ClInclude Include="Source\engine_gui_button.hpp">
-      <Filter>src\GUI System</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\engine_gui_global_screen.hpp">
-      <Filter>src\GUI System</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\engine_gui_manager.hpp">
-      <Filter>src\GUI System</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\engine_gui_rectangle.hpp">
-      <Filter>src\GUI System</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\engine_gui_screen.hpp">
-      <Filter>src\GUI System</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\engine_gui_textfield.hpp">
-      <Filter>src\GUI System</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\engine_gui_viewport.hpp">
-      <Filter>src\GUI System</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\engine_gui_window.hpp">
-      <Filter>src\GUI System</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\engine_gui_writefield.hpp">
-      <Filter>src\GUI System</Filter>
-    </ClInclude>
     <ClInclude Include="Source\collision_detector.hpp">
       <Filter>src\Physics System\Core</Filter>
     </ClInclude>
@@ -584,9 +557,6 @@
     </ClInclude>
     <ClInclude Include="Source\opengl_shader.hpp">
       <Filter>src\Rendering System\OpenGL</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\engine_gui_scrollinglist.hpp">
-      <Filter>src\GUI System</Filter>
     </ClInclude>
     <ClInclude Include="Source\aabb_entity_renderer.hpp">
       <Filter>src\Rendering System\Renderers\Entity Renderers</Filter>
@@ -731,6 +701,36 @@
     </ClInclude>
     <ClInclude Include="Source\script_event_initialization.hpp">
       <Filter>src\Scripting System\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\engine_gui_global_screen.hpp">
+      <Filter>src\GUI System\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\engine_gui_manager.hpp">
+      <Filter>src\GUI System\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\engine_gui_button.hpp">
+      <Filter>src\GUI System\Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\engine_gui_rectangle.hpp">
+      <Filter>src\GUI System\Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\engine_gui_screen.hpp">
+      <Filter>src\GUI System\Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\engine_gui_scrollinglist.hpp">
+      <Filter>src\GUI System\Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\engine_gui_textfield.hpp">
+      <Filter>src\GUI System\Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\engine_gui_viewport.hpp">
+      <Filter>src\GUI System\Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\engine_gui_window.hpp">
+      <Filter>src\GUI System\Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\engine_gui_writefield.hpp">
+      <Filter>src\GUI System\Elements</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -928,6 +928,12 @@
     </Filter>
     <Filter Include="src\Editor System\Script Editor\Miscellaneous">
       <UniqueIdentifier>{55a74c53-dfba-4f42-9319-3c5077f16019}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\GUI System\Core">
+      <UniqueIdentifier>{35c945f4-bcea-4733-880c-44f04977e5ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\GUI System\Elements">
+      <UniqueIdentifier>{21adc94a-d3c8-45c0-9dca-7651507f0e80}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -57,7 +57,7 @@ private:
 		{"KEY_N", Input::KEY_N},
 		{"KEY_O", Input::KEY_O},
 		{"KEY_P", Input::KEY_P},
-		{"KEY_A", Input::KEY_Q},
+		{"KEY_Q", Input::KEY_Q},
 		{"KEY_R", Input::KEY_R},
 		{"KEY_S", Input::KEY_S},
 		{"KEY_T", Input::KEY_T},

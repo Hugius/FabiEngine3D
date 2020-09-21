@@ -36,6 +36,17 @@ bool ScriptEventInput::isTriggered()
 			return _fe3d.input_getMouseToggled(_inputElement);
 		}
 	}
+	else if (_inputType == InputEventType::MOUSE)
+	{
+		if (_inputMouseType == InputEventMouseType::SCROLL_UP)
+		{
+			return _fe3d.input_getMouseWheelY() > 0;
+		}
+		else if (_inputMouseType == InputEventMouseType::SCROLL_DOWN)
+		{
+			return _fe3d.input_getMouseWheelY() < 0;
+		}
+	}
 
 	return false;
 }
@@ -43,6 +54,11 @@ bool ScriptEventInput::isTriggered()
 void ScriptEventInput::setInputType(InputEventType type)
 {
 	_inputType = type;
+}
+
+void ScriptEventInput::setMouseType(InputEventMouseType type)
+{
+	_inputMouseType = type;
 }
 
 void ScriptEventInput::setInputMethod(InputEventMethod method)
@@ -70,6 +86,11 @@ void ScriptEventInput::setInputElement(Input element)
 InputEventType ScriptEventInput::getInputType()
 {
 	return _inputType;
+}
+
+InputEventMouseType ScriptEventInput::getMouseType()
+{
+	return _inputMouseType;
 }
 
 InputEventMethod ScriptEventInput::getInputMethod()

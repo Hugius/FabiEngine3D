@@ -91,12 +91,12 @@ void EngineController::_updateMiscellaneous()
 	}
 	lastScreen = activeScreen;
 
-	// Only allowed if cursor in 3D window
-	input_setKeyTogglingLocked(_gui->getGlobalScreen()->isFocused() || !misc_isMouseInsideViewport());
-
 	// 3D tools only allowed when not running game preview
 	if (!_topViewportController.isScriptRunning())
 	{
+		// Only allowed if cursor in 3D window
+		input_setKeyTogglingLocked(_gui->getGlobalScreen()->isFocused() || !misc_isMouseInsideViewport());
+
 		// Update wireframe visibility
 		if (input_getKeyToggled(Input::KEY_F))
 		{

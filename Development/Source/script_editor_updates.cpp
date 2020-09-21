@@ -31,6 +31,7 @@ void ScriptEditor::_updateGUI()
 					// Remove line from script
 					_clearChoiceLists();
 					_script->removeLine(_currentScriptLineID);
+					_calibrateScriptLines();
 					_currentScriptLineID = "";
 				}
 				else if (screen->getButton("createLine")->isHovered())
@@ -242,13 +243,27 @@ void ScriptEditor::_updateNavigation()
 							}
 							else if (optionName == "MOUSE")
 							{
-								// Display all mouse buttons
-								_addChoiceList(ChoiceListSort::EVENT, ChoiceListType::EVENT_INPUT_MOUSE_NAMES);
+								// Display all mouse types
+								_addChoiceList(ChoiceListSort::EVENT, ChoiceListType::EVENT_INPUT_MOUSE_TYPES);
+							}
+							break;
+						}
+						case ChoiceListType::EVENT_INPUT_MOUSE_TYPES:
+						{
+							// Determine input type
+							if (optionName == "BUTTON")
+							{
+								_addChoiceList(ChoiceListSort::EVENT, ChoiceListType::EVENT_INPUT_MOUSE_BUTTONS);
+							}
+							else if (optionName == "SCROLL_UP" || optionName == "SCROLL_DOWN")
+							{
+								// Event chosen, go to action choosing
+								_addChoiceList(ChoiceListSort::ACTION, ChoiceListType::ACTION_TYPES);
 							}
 							break;
 						}
 						case ChoiceListType::EVENT_INPUT_KEY_NAMES:
-						case ChoiceListType::EVENT_INPUT_MOUSE_NAMES:
+						case ChoiceListType::EVENT_INPUT_MOUSE_BUTTONS:
 						{
 							// Display input methods
 							_addChoiceList(ChoiceListSort::EVENT, ChoiceListType::EVENT_INPUT_METHODS);

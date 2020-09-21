@@ -26,3 +26,16 @@ bool ScriptEditor::isLoaded()
 {
 	return _isLoaded;
 }
+
+void ScriptEditor::_calibrateScriptLines()
+{
+	auto scriptLineIDs = _script->getAllScriptLineIDs();
+	int counter = 1;
+
+	// Change all IDs (line numbers) accordingly
+	for (auto& ID : scriptLineIDs)
+	{
+		_script->getScriptLine(ID).ID = to_string(counter);
+		counter++;
+	}
+}

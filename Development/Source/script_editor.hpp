@@ -31,8 +31,9 @@ class ScriptEditor final
 
 		// Input event
 		EVENT_INPUT_TYPES,
+		EVENT_INPUT_MOUSE_TYPES,
 		EVENT_INPUT_KEY_NAMES,
-		EVENT_INPUT_MOUSE_NAMES,
+		EVENT_INPUT_MOUSE_BUTTONS,
 		EVENT_INPUT_METHODS,
 
 		// Collision event
@@ -97,6 +98,7 @@ private:
 	void _addChoiceList(ChoiceListSort listSort, ChoiceListType listType, string headerName, vector<string> optionNames, int activeIndex = -1);
 	void _removeChoiceList();
 	void _clearChoiceLists();
+	void _calibrateScriptLines();
 	void _loadScriptFromFile();
 	void _saveScriptToFile();
 	void _unloadScript();

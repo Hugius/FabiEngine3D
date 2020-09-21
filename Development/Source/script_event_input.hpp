@@ -9,6 +9,14 @@ enum class InputEventType
 	NONE
 };
 
+enum class InputEventMouseType
+{
+	BUTTON,
+	SCROLL_UP,
+	SCROLL_DOWN,
+	NONE
+};
+
 enum class InputEventMethod
 {
 	DOWN,
@@ -23,6 +31,7 @@ public:
 	using ScriptEvent::ScriptEvent;
 
 	void setInputType(InputEventType type);
+	void setMouseType(InputEventMouseType type);
 	void setInputMethod(InputEventMethod method);
 	void setInputElement(string name);
 	void setInputElement(Input element);
@@ -30,12 +39,14 @@ public:
 	bool isTriggered() override;
 
 	InputEventType getInputType();
+	InputEventMouseType getMouseType();
 	InputEventMethod getInputMethod();
 	Input getInputElement();
 	int getInputElementIndex();
 
 private:
 	InputEventType _inputType = InputEventType::NONE;
+	InputEventMouseType _inputMouseType = InputEventMouseType::NONE;
 	InputEventMethod _inputMethod = InputEventMethod::NONE;
 	Input _inputElement = Input::NONE;
 
@@ -74,7 +85,5 @@ private:
 		{"BUTTON_LEFT", Input::MOUSE_BUTTON_LEFT},
 		{"BUTTON_MIDDLE", Input::MOUSE_BUTTON_MIDDLE},
 		{"BUTTON_RIGHT", Input::MOUSE_BUTTON_RIGHT},
-		{"SCROLL_UP", Input::KEY_D},
-		{"SCROLL_DOWN", Input::KEY_E}
 	};
 };

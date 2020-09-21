@@ -60,13 +60,14 @@ void ScriptEditor::_loadScriptFromFile()
 					event = make_shared<ScriptEventInput>(_fe3d, ScriptEventType::INPUT);
 
 					// Placeholders
-					int inputType, inputElement, inputMethod;
+					int inputType, mouseType, inputElement, inputMethod;
 
 					// Load from file
-					iss >> inputType >> inputElement >> inputMethod;
+					iss >> inputType >> mouseType >> inputElement >> inputMethod;
 
 					// Fill the script event
 					dynamic_pointer_cast<ScriptEventInput>(event)->setInputType(static_cast<InputEventType>(inputType));
+					dynamic_pointer_cast<ScriptEventInput>(event)->setMouseType(static_cast<InputEventMouseType>(mouseType));
 					dynamic_pointer_cast<ScriptEventInput>(event)->setInputElement(static_cast<Input>(inputElement));
 					dynamic_pointer_cast<ScriptEventInput>(event)->setInputMethod(static_cast<InputEventMethod>(inputMethod));
 					break;
@@ -169,10 +170,13 @@ void ScriptEditor::_saveScriptToFile()
 			file << to_string(static_cast<int>(scriptLine.event->getType())) << " ";
 
 			// Write event data based on type
+			bool noSpace = false;
 			switch (scriptLine.event->getType())
 			{
 				case ScriptEventType::INITIALIZATION:
 				{
+					// Empty, because init event has no condition
+					noSpace = true;
 					break;
 				}
 
@@ -181,6 +185,7 @@ void ScriptEditor::_saveScriptToFile()
 					auto inputEvent = dynamic_pointer_cast<ScriptEventInput>(scriptLine.event);
 					file <<
 						static_cast<int>(inputEvent->getInputType()) << " " <<
+						static_cast<int>(inputEvent->getMouseType()) << " " <<
 						static_cast<int>(inputEvent->getInputElement()) << " " <<
 						static_cast<int>(inputEvent->getInputMethod());
 					break;
@@ -203,7 +208,10 @@ void ScriptEditor::_saveScriptToFile()
 			}
 
 			// Add a space between event and action
-			file << " ";
+			if (!noSpace)
+			{
+				file << " ";
+			}
 
 			// Write action type
 			file << to_string(static_cast<int>(scriptLine.action->getType())) << " ";

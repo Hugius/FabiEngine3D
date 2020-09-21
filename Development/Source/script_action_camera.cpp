@@ -2,7 +2,6 @@
 
 void ScriptActionCamera::execute()
 {
-	_fe3d.logger_throwInfo("executed");
 	// Short-hand values
 	vec3 position = _fe3d.camera_getPosition();
 	float yaw = _fe3d.camera_getYaw();
@@ -96,7 +95,6 @@ void ScriptActionCamera::execute()
 
 void ScriptActionCamera::reset()
 {
-	_fe3d.logger_throwInfo("resetted");
 	_fe3d.camera_disableFirstPersonView();
 	_fe3d.camera_disableLookat();
 	_fe3d.camera_setPosition(vec3(0.0f));

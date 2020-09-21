@@ -45,8 +45,13 @@ void ScriptEditor::_updateScriptlineCreation()
 							dynamic_pointer_cast<ScriptEventInput>(event)->setInputType(static_cast<InputEventType>(choiceList.selectedOptionIndex));
 							break;
 						}
+						case ChoiceListType::EVENT_INPUT_MOUSE_TYPES:
+						{
+							dynamic_pointer_cast<ScriptEventInput>(event)->setMouseType(static_cast<InputEventMouseType>(choiceList.selectedOptionIndex));
+							break;
+						}
 						case ChoiceListType::EVENT_INPUT_KEY_NAMES:
-						case ChoiceListType::EVENT_INPUT_MOUSE_NAMES:
+						case ChoiceListType::EVENT_INPUT_MOUSE_BUTTONS:
 						{
 							dynamic_pointer_cast<ScriptEventInput>(event)->setInputElement(choiceList.optionNames[optionIndex]);
 							break;
@@ -192,7 +197,7 @@ void ScriptEditor::_updateScriptlineCreation()
 			}
 		}
 
-		// Create new scriptline
+		// Create new scriptLine
 		if (finishedValueFilling || !needsValueFilling)
 		{
 			// Clear everything after creating

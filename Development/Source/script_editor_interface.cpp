@@ -27,12 +27,20 @@ void ScriptEditor::_generateScriptLineOverview(ScriptLine& scriptLine)
 			if (inputEvent->getInputType() == InputEventType::KEYBOARD)
 			{
 				_addChoiceList(ChoiceListSort::EVENT, ChoiceListType::EVENT_INPUT_KEY_NAMES, inputEvent->getInputElementIndex());
+				_addChoiceList(ChoiceListSort::EVENT, ChoiceListType::EVENT_INPUT_METHODS, static_cast<int>(inputEvent->getInputMethod()));
 			}
 			else if (inputEvent->getInputType() == InputEventType::MOUSE)
 			{
-				_addChoiceList(ChoiceListSort::EVENT, ChoiceListType::EVENT_INPUT_MOUSE_NAMES, inputEvent->getInputElementIndex());
+				if (inputEvent->getMouseType() == InputEventMouseType::BUTTON)
+				{
+					_addChoiceList(ChoiceListSort::EVENT, ChoiceListType::EVENT_INPUT_MOUSE_BUTTONS, inputEvent->getInputElementIndex());
+					_addChoiceList(ChoiceListSort::EVENT, ChoiceListType::EVENT_INPUT_METHODS, static_cast<int>(inputEvent->getInputMethod()));
+				}
+				else
+				{
+					_addChoiceList(ChoiceListSort::EVENT, ChoiceListType::EVENT_INPUT_MOUSE_TYPES, inputEvent->getInputElementIndex());
+				}
 			}
-			_addChoiceList(ChoiceListSort::EVENT, ChoiceListType::EVENT_INPUT_METHODS, static_cast<int>(inputEvent->getInputMethod()));
 		}
 		else if (scriptLine.event->getType() == ScriptEventType::COLLISION)
 		{
@@ -115,9 +123,10 @@ void ScriptEditor::_addChoiceList(ChoiceListSort listSort, ChoiceListType listTy
 
 	// Input options
 	vector<string> inputTypeNames = { "KEYBOARD", "MOUSE" };
+	vector<string> inputMouseTypeNames = { "BUTTON", "SCROLL_UP", "SCROLL_DOWN" };
 	vector<string> inputKeyNames = { "KEY_A", "KEY_B", "KEY_C", "KEY_D", "KEY_E", "KEY_F", "KEY_G", "KEY_H", "KEY_I", "KEY_J", "KEY_K", "KEY_L", 
 		"KEY_M", "KEY_N", "KEY_O", "KEY_P", "KEY_Q", "KEY_R", "KEY_S", "KEY_T", "KEY_U", "KEY_V", "KEY_W", "KEY_X", "KEY_Y", "KEY_Z" };
-	vector<string> inputMouseNames = { "BUTTON_LEFT", "BUTTON_MIDDLE", "BUTTON_RIGHT", "SCROLL_UP", "SCROLL_DOWN" };
+	vector<string> inputMouseNames = { "BUTTON_LEFT", "BUTTON_MIDDLE", "BUTTON_RIGHT" };
 	vector<string> inputMethodNames = { "DOWN", "PRESSED", "TOGGLED" };
 
 	// Camera options
@@ -149,21 +158,21 @@ void ScriptEditor::_addChoiceList(ChoiceListSort listSort, ChoiceListType listTy
 		// Initialization
 		case ChoiceListType::EVENT_INITIALIZATION:
 		{
-			// TODO <---
+			// Empty, because init event has no condition
 			break;
 		}
 
 		// Input event
-		case ChoiceListType::EVENT_INPUT_METHODS:
-		{
-			headerName = "Input method";
-			optionNames = inputMethodNames;
-			break;
-		}
 		case ChoiceListType::EVENT_INPUT_TYPES:
 		{
 			headerName = "Input type";
 			optionNames = inputTypeNames;
+			break;
+		}
+		case ChoiceListType::EVENT_INPUT_MOUSE_TYPES:
+		{
+			headerName = "Mouse type";
+			optionNames = inputMouseTypeNames;
 			break;
 		}
 		case ChoiceListType::EVENT_INPUT_KEY_NAMES:
@@ -172,10 +181,16 @@ void ScriptEditor::_addChoiceList(ChoiceListSort listSort, ChoiceListType listTy
 			optionNames = inputKeyNames;
 			break;
 		}
-		case ChoiceListType::EVENT_INPUT_MOUSE_NAMES:
+		case ChoiceListType::EVENT_INPUT_MOUSE_BUTTONS:
 		{
 			headerName = "Mouse button";
 			optionNames = inputMouseNames;
+			break;
+		}
+		case ChoiceListType::EVENT_INPUT_METHODS:
+		{
+			headerName = "Input method";
+			optionNames = inputMethodNames;
 			break;
 		}
 

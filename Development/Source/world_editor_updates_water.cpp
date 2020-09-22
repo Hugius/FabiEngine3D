@@ -196,7 +196,7 @@ void WorldEditor::_updateWaterMenuEffects()
 			}
 			else if (screen->getButton("dudvMap")->isHovered())
 			{
-				string filePath = _fe3d.misc_getWinExplorerFilename("User\\Assets\\Textures\\DudvMaps\\", "PNG");
+				string filePath = _fe3d.misc_getWinExplorerFilename("User\\assets\\textures\\dudv_maps\\", "PNG");
 
 				// Check if not cancelled
 				if (filePath != "")
@@ -207,7 +207,7 @@ void WorldEditor::_updateWaterMenuEffects()
 			}
 			else if (screen->getButton("normalMap")->isHovered())
 			{
-				string filePath = _fe3d.misc_getWinExplorerFilename("User\\Assets\\Textures\\NormalMaps\\", "PNG");
+				string filePath = _fe3d.misc_getWinExplorerFilename("User\\assets\\textures\\normal_maps\\", "PNG");
 
 				// Check if not cancelled
 				if (filePath != "")
@@ -218,7 +218,7 @@ void WorldEditor::_updateWaterMenuEffects()
 			}
 			else if (screen->getButton("displaceMap")->isHovered())
 			{
-				string filePath = _fe3d.misc_getWinExplorerFilename("User\\Assets\\Textures\\DisplacementMaps\\", "PNG");
+				string filePath = _fe3d.misc_getWinExplorerFilename("User\\assets\\textures\\displacement_maps\\", "PNG");
 
 				// Check if not cancelled
 				if (filePath != "")

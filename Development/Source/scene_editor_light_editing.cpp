@@ -33,7 +33,7 @@ void SceneEditor::_updateLightEditing()
 						}
 
 						// Change cursor
-						_fe3d.guiEntity_changeTexture("@@cursor", "Engine\\Textures\\cursor_pointing.png");
+						_fe3d.guiEntity_changeTexture("@@cursor", "engine\\textures\\cursor_pointing.png");
 
 						// Check if user clicked lightbulb
 						if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))

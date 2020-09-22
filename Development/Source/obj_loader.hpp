@@ -15,6 +15,7 @@ struct ObjPart
 	string partName;
 	string diffuseMapName;
 	string lightMapName;
+	string normalMapName;
 	string reflectionMapName;
 	
 	vector<vec3> vertices;

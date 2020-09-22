@@ -29,7 +29,7 @@ void ModelEditor::_loadObjFileNames()
 	}
 
 	// Determine full OBJ directory
-	string objDirectoryPath = _fe3d.misc_getRootDirectory() + "User\\Assets\\OBJs\\";
+	string objDirectoryPath = _fe3d.misc_getRootDirectory() + "User\\assets\\models\\";
 	int endOfNameIndex = 0;
 
 	// Get all filenames
@@ -55,7 +55,7 @@ void ModelEditor::_loadObjFileNames()
 void ModelEditor::_loadOBJ()
 {
 	// Get the loaded filename
-	string filePath = _fe3d.misc_getWinExplorerFilename("User\\Assets\\OBJs\\", "OBJ");
+	string filePath = _fe3d.misc_getWinExplorerFilename("User\\assets\\models\\", "OBJ");
 
 	// Not cancelled
 	if (filePath != "")
@@ -79,7 +79,7 @@ void ModelEditor::_loadOBJ()
 void ModelEditor::_loadDiffuseMap()
 {
 	// Get the loaded filename
-	string filePath = _fe3d.misc_getWinExplorerFilename("User\\Assets\\Textures\\DiffuseMaps\\", "PNG");
+	string filePath = _fe3d.misc_getWinExplorerFilename("User\\assets\\textures\\diffuse_maps\\", "PNG");
 
 	// Check if user chose a filename
 	if (filePath != "")
@@ -92,7 +92,7 @@ void ModelEditor::_loadDiffuseMap()
 void ModelEditor::_loadLightMap()
 {
 	// Get the loaded filename
-	string filePath = _fe3d.misc_getWinExplorerFilename("User\\Assets\\Textures\\LightMaps\\", "PNG");
+	string filePath = _fe3d.misc_getWinExplorerFilename("User\\assets\\textures\\light_maps\\", "PNG");
 
 	// Check if user chose a filename
 	if (filePath != "")
@@ -106,7 +106,7 @@ void ModelEditor::_loadLightMap()
 void ModelEditor::_loadReflectionMap()
 {
 	// Get the loaded filename
-	string filePath = _fe3d.misc_getWinExplorerFilename("User\\Assets\\Textures\\ReflectionMaps\\", "PNG");
+	string filePath = _fe3d.misc_getWinExplorerFilename("User\\assets\\textures\\reflection_maps\\", "PNG");
 
 	// Check if user chose a filename
 	if (filePath != "")
@@ -120,7 +120,7 @@ void ModelEditor::_loadReflectionMap()
 void ModelEditor::_loadNormalMap()
 {
 	// Get the loaded filename
-	string filePath = _fe3d.misc_getWinExplorerFilename("User\\Assets\\Textures\\NormalMaps\\", "PNG");
+	string filePath = _fe3d.misc_getWinExplorerFilename("User\\assets\\textures\\normal_maps\\", "PNG");
 
 	// Check if user chose a filename
 	if (filePath != "")

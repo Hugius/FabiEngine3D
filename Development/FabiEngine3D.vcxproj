@@ -71,16 +71,16 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>$(SolutionDir)FabiEngine3D\Binaries\</OutDir>
-    <IncludePath>$(SolutionDir)FabiEngine3D\Engine\Libraries\includes\;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)FabiEngine3D\Engine\Libraries\lib\;$(LibraryPath)</LibraryPath>
+    <OutDir>$(SolutionDir)FabiEngine3D\bin\</OutDir>
+    <IncludePath>$(SolutionDir)FabiEngine3D\Engine\libraries\includes\;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)FabiEngine3D\Engine\libraries\lib\;$(LibraryPath)</LibraryPath>
     <TargetName>FabiEngine3D</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>$(SolutionDir)FabiEngine3D\Binaries\</OutDir>
+    <OutDir>$(SolutionDir)FabiEngine3D\bin\</OutDir>
     <TargetName>FabiEngine3D</TargetName>
-    <IncludePath>$(SolutionDir)FabiEngine3D\Engine\Libraries\includes\;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)FabiEngine3D\Engine\Libraries\lib\;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)FabiEngine3D\Engine\libraries\includes\;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)FabiEngine3D\Engine\libraries\lib\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -386,7 +386,7 @@
     <ClCompile Include="Source\world_editor_updates_water.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\FabiEngine3D\Engine\Shaders\aabb_entity_shader.frag" />
+    <None Include="..\FabiEngine3D\engine\shaders\aabb_entity_shader.frag" />
     <None Include="..\FabiEngine3D\Engine\Shaders\aabb_entity_shader.vert" />
     <None Include="..\FabiEngine3D\Engine\Shaders\billboard_entity_shader.frag" />
     <None Include="..\FabiEngine3D\Engine\Shaders\billboard_entity_shader.vert" />
@@ -414,10 +414,10 @@
     <None Include="..\FabiEngine3D\Engine\Shaders\water_entity_shader.vert" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="..\FabiEngine3D\Engine\AppIcon\AppIcon.rc" />
+    <ResourceCompile Include="..\FabiEngine3D\engine\icon\AppIcon.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\FabiEngine3D\Engine\AppIcon\logo.ico" />
+    <Image Include="..\FabiEngine3D\engine\icon\logo.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

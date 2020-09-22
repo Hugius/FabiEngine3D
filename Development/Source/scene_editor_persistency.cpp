@@ -12,7 +12,7 @@ bool SceneEditor::_loadSceneFile(bool overwriteCamera)
 		_fe3d.logger_throwError("Tried to load as empty project!");
 	}
 
-	string filePath = _fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\Scenes\\scene.fe3d";
+	string filePath = _fe3d.misc_getRootDirectory() + "User\\projects\\" + _currentProjectName + "\\scenes\\scene.fe3d";
 
 	// Check if scene file existing
 	if (_fe3d.misc_isFileExisting(filePath))
@@ -122,7 +122,7 @@ bool SceneEditor::_loadSceneFile(bool overwriteCamera)
 
 				// Apply
 				_fe3d.gfx_enableDirectionalLighting(directionalLightingPosition, directionalLightingColor, directionalLightingIntensity);
-				_fe3d.billBoardEntity_add("@@lightSource", "Engine\\Textures\\light_source.png", directionalLightingPosition, vec3(0.0f), vec2(billboardSize), true, true, true, true);
+				_fe3d.billBoardEntity_add("@@lightSource", "engine\\textures\\light_source.png", directionalLightingPosition, vec3(0.0f), vec2(billboardSize), true, true, true, true);
 			}
 			else if (entityType == "POINT")
 			{
@@ -135,7 +135,7 @@ bool SceneEditor::_loadSceneFile(bool overwriteCamera)
 				iss >> ID >> position.x >> position.y >> position.z >> color.r >> color.g >> color.b >> intensity >> distance;
 
 				// Add entities
-				_fe3d.gameEntity_add("@" + ID, "Engine\\OBJs\\lamp.obj", position, vec3(0.0f), _defaultLightbulbSize);
+				_fe3d.gameEntity_add("@" + ID, "engine\\models\\lamp.obj", position, vec3(0.0f), _defaultLightbulbSize);
 				_fe3d.gameEntity_setShadowed("@" + ID, false);
 				_fe3d.gameEntity_setDepthMapIncluded("@" + ID, false);
 				_fe3d.aabbEntity_bindToGameEntity("@" + ID, _defaultLightbulbAabbSize, true);
@@ -246,7 +246,7 @@ void SceneEditor::save()
 
 		// Create or overwrite models file
 		std::ofstream file;
-		file.open(_fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\Scenes\\scene.fe3d");
+		file.open(_fe3d.misc_getRootDirectory() + "User\\projects\\" + _currentProjectName + "\\scenes\\scene.fe3d");
 
 		// Write game entities data into file
 		for (auto& entityID : _fe3d.gameEntity_getAllIDs())

@@ -7,7 +7,7 @@ bool TopViewportController::isScriptRunning()
 {
 	if (_currentProjectName == "")
 	{
-		false;
+		return false;
 	}
 	else
 	{
@@ -19,13 +19,16 @@ void TopViewportController::_updateMiscellaneous()
 {
 	bool hoverable = (_currentProjectName == "") ? false : !_scriptEditor.getScriptExecutor()->isInitialized();
 
+	// Project menus
 	_gui->getViewport("left")->getWindow("main")->getScreen("main")->getButton("modelEditor")->setHoverable(hoverable);
 	_gui->getViewport("left")->getWindow("main")->getScreen("main")->getButton("worldEditor")->setHoverable(hoverable);
 	_gui->getViewport("left")->getWindow("main")->getScreen("main")->getButton("billboardEditor")->setHoverable(hoverable);
 	_gui->getViewport("left")->getWindow("main")->getScreen("main")->getButton("sceneEditor")->setHoverable(hoverable);
 	_gui->getViewport("left")->getWindow("main")->getScreen("main")->getButton("animationEditor")->setHoverable(hoverable);
 	_gui->getViewport("left")->getWindow("main")->getScreen("main")->getButton("scriptEditor")->setHoverable(hoverable);
-	_gui->getViewport("left")->getWindow("main")->getScreen("main")->getButton("settingsEditor")->setHoverable(hoverable);
+
+	// Settings menu can be loaded without project
+	_gui->getViewport("left")->getWindow("main")->getScreen("main")->getButton("settingsEditor")->setHoverable(hoverable || (_currentProjectName == ""));
 }
 
 void TopViewportController::_updateProjectCreation()
@@ -37,7 +40,7 @@ void TopViewportController::_updateProjectCreation()
 		if (_gui->getGlobalScreen()->checkValueForm("newProjectName", projectName))
 		{
 			// Get directory path for the new project
-			string newDirectoryPath = _fe3d.misc_getRootDirectory() + "User\\Projects\\" + projectName;
+			string newDirectoryPath = _fe3d.misc_getRootDirectory() + "User\\projects\\" + projectName;
 
 			// Check if project already exists
 			if (_fe3d.misc_isFileExisting(newDirectoryPath) && _fe3d.misc_isDirectory(newDirectoryPath)) // Project is existent
@@ -125,7 +128,7 @@ void TopViewportController::_updateProjectDeletion()
 			}
 
 			// Deleting project folder
-			std::filesystem::remove_all(_fe3d.misc_getRootDirectory() + "User\\Projects\\" + chosenButtonID);
+			std::filesystem::remove_all(_fe3d.misc_getRootDirectory() + "User\\projects\\" + chosenButtonID);
 
 			// Logging
 			_fe3d.logger_throwInfo("Existing project \"" + chosenButtonID + "\" deleted!");
@@ -146,7 +149,7 @@ void TopViewportController::_updateProjectDeletion()
 void TopViewportController::_prepareProjectChoosing()
 {
 	// Get new path
-	string userDirectoryPath = _fe3d.misc_getRootDirectory() + "User\\Projects\\";
+	string userDirectoryPath = _fe3d.misc_getRootDirectory() + "User\\projects\\";
 
 	// Check if projects directory exists
 	if (_fe3d.misc_isDirectory(userDirectoryPath))
@@ -165,6 +168,6 @@ void TopViewportController::_prepareProjectChoosing()
 	}
 	else
 	{
-		_fe3d.logger_throwError("\"User\\Projects\\\" folder does not exist anymore!");
+		_fe3d.logger_throwError("\"User\\projects\\\" folder does not exist anymore!");
 	}
 }

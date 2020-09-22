@@ -235,7 +235,7 @@ void ScriptEditor::_addChoiceList(ChoiceListSort listSort, ChoiceListType listTy
 {
 	// Generation values
 	int listIndex = static_cast<int>(listType);
-	const string fontPath = "Engine\\Fonts\\lucida.ttf";
+	const string fontPath = "engine\\fonts\\lucida.ttf";
 	const float maxY = 4.5f;
 	const float minX = -8.0f;
 	const float xOffset = 8.5f;
@@ -243,9 +243,9 @@ void ScriptEditor::_addChoiceList(ChoiceListSort listSort, ChoiceListType listTy
 	vec3 headerPosition = vec3(minX + (xOffset * _choiceListStack.size()), 5.0f, 0.5f);
 
 	// Header generation
-	_fe3d.gameEntity_add(to_string(listIndex) + "_header", "Engine\\OBJs\\crate.obj", headerPosition,
+	_fe3d.gameEntity_add(to_string(listIndex) + "_header", "engine\\models\\crate.obj", headerPosition,
 		vec3(0.0f), vec3(headerName.size() * 0.275f, 0.75f, 0.5f));
-	_fe3d.gameEntity_setDiffuseMap(to_string(listIndex) + "_header", "Engine\\Textures\\crate.png");
+	_fe3d.gameEntity_setDiffuseMap(to_string(listIndex) + "_header", "engine\\textures\\crate.png");
 	_fe3d.billBoardEntity_add(to_string(listIndex) + "_header", headerName, fontPath, vec3(0.0f, 0.5f, 0.0f), headerPosition + vec3(0.0f, 0.25f, 0.05f),
 		vec3(0.0f), vec2(headerName.size() * 0.4f, 1.0f), 0, 0);
 

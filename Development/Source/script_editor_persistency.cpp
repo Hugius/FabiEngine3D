@@ -15,7 +15,7 @@ void ScriptEditor::_loadScriptFromFile()
 	_unloadScript();
 
 	// Compose full script folder path
-	string filePath = _fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\Data\\script.fe3d";
+	string filePath = _fe3d.misc_getRootDirectory() + "User\\projects\\" + _currentProjectName + "\\data\\script.fe3d";
 
 	// Check if script file exists
 	if (_fe3d.misc_isFileExisting(filePath))
@@ -156,7 +156,7 @@ void ScriptEditor::_saveScriptToFile()
 
 		// Create or overwrite models file
 		std::ofstream file;
-		file.open(_fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\Data\\script.fe3d");
+		file.open(_fe3d.misc_getRootDirectory() + "User\\projects\\" + _currentProjectName + "\\data\\script.fe3d");
 
 		// Write model data into file
 		for (auto& ID : _script->getAllScriptLineIDs())

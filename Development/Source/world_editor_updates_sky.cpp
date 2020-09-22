@@ -106,7 +106,7 @@ void WorldEditor::_updateSkyMenuMesh()
 		{
 			if (screen->getButton("rightTexture")->isHovered())
 			{
-				string filePath = _fe3d.misc_getWinExplorerFilename("User\\Assets\\Textures\\CubeMaps\\", "PNG");
+				string filePath = _fe3d.misc_getWinExplorerFilename("User\\assets\\textures\\cube_maps\\", "PNG");
 				
 				// Check if not cancelled
 				if (filePath != "")
@@ -117,7 +117,7 @@ void WorldEditor::_updateSkyMenuMesh()
 			}
 			else if (screen->getButton("leftTexture")->isHovered())
 			{
-				string filePath = _fe3d.misc_getWinExplorerFilename("User\\Assets\\Textures\\CubeMaps\\", "PNG");
+				string filePath = _fe3d.misc_getWinExplorerFilename("User\\assets\\textures\\cube_maps\\", "PNG");
 
 				// Check if not cancelled
 				if (filePath != "")
@@ -128,7 +128,7 @@ void WorldEditor::_updateSkyMenuMesh()
 			}
 			else if (screen->getButton("topTexture")->isHovered())
 			{
-				string filePath = _fe3d.misc_getWinExplorerFilename("User\\Assets\\Textures\\CubeMaps\\", "PNG");
+				string filePath = _fe3d.misc_getWinExplorerFilename("User\\assets\\textures\\cube_maps\\", "PNG");
 
 				// Check if not cancelled
 				if (filePath != "")
@@ -139,7 +139,7 @@ void WorldEditor::_updateSkyMenuMesh()
 			}
 			else if (screen->getButton("bottomTexture")->isHovered())
 			{
-				string filePath = _fe3d.misc_getWinExplorerFilename("User\\Assets\\Textures\\CubeMaps\\", "PNG");
+				string filePath = _fe3d.misc_getWinExplorerFilename("User\\assets\\textures\\cube_maps\\", "PNG");
 
 				// Check if not cancelled
 				if (filePath != "")
@@ -150,7 +150,7 @@ void WorldEditor::_updateSkyMenuMesh()
 			}
 			else if (screen->getButton("frontTexture")->isHovered())
 			{
-				string filePath = _fe3d.misc_getWinExplorerFilename("User\\Assets\\Textures\\CubeMaps\\", "PNG");
+				string filePath = _fe3d.misc_getWinExplorerFilename("User\\assets\\textures\\cube_maps\\", "PNG");
 
 				// Check if not cancelled
 				if (filePath != "")
@@ -161,7 +161,7 @@ void WorldEditor::_updateSkyMenuMesh()
 			}
 			else if (screen->getButton("backTexture")->isHovered())
 			{
-				string filePath = _fe3d.misc_getWinExplorerFilename("User\\Assets\\Textures\\CubeMaps\\", "PNG");
+				string filePath = _fe3d.misc_getWinExplorerFilename("User\\assets\\textures\\cube_maps\\", "PNG");
 
 				// Check if not cancelled
 				if (filePath != "")

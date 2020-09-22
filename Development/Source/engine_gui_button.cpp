@@ -131,7 +131,7 @@ void EngineGuiButton::_updateHovering(bool hoverable)
 	if(_isHovered)
 	{
 		// Set cursor texture to pointing
-		_fe3d.guiEntity_changeTexture("@@cursor", "Engine\\Textures\\cursor_pointing.png");
+		_fe3d.guiEntity_changeTexture("@@cursor", "engine\\textures\\cursor_pointing.png");
 	}
 }
 

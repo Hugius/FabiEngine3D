@@ -67,11 +67,11 @@ void GameEntityManager::addGameEntity
 		// Load an OBJ part diffuse map
 		if (part.diffuseMapName != "")
 		{
-			getEntity(ID)->addDiffuseMap(_texLoader.getTexture("User\\Assets\\Textures\\DiffuseMaps\\" + part.diffuseMapName, true, true, true));
+			getEntity(ID)->addDiffuseMap(_texLoader.getTexture("User\\assets\\textures\\diffuse_maps\\" + part.diffuseMapName, true, true, true));
 		}
 		else
 		{
-			// Only add empty diffusemaps if multiparted model
+			// Only add empty diffuse maps if multiparted model
 			if (parts.size() > 1)
 			{
 				getEntity(ID)->addDiffuseMap(0);
@@ -82,24 +82,40 @@ void GameEntityManager::addGameEntity
 		if (part.lightMapName != "")
 		{
 			getEntity(ID)->setLightMapped(true);
-			getEntity(ID)->addLightMap(_texLoader.getTexture("User\\Assets\\Textures\\LightMaps\\" + part.lightMapName, true, true, true));
+			getEntity(ID)->addLightMap(_texLoader.getTexture("User\\assets\\textures\\light_maps\\" + part.lightMapName, true, true, true));
 		}
 		else
 		{
+			// Only add empty light maps if multiparted model
 			if (parts.size() > 1)
 			{
 				getEntity(ID)->addLightMap(0);
 			}
 		}
 
-		// Load an OBJ part light map
-		if (part.reflectionMapName != "")
+		// Load an OBJ part normal map
+		if (part.normalMapName != "")
 		{
-			getEntity(ID)->setSkyReflective(true);
-			getEntity(ID)->addReflectionMap(_texLoader.getTexture("User\\Assets\\Textures\\ReflectionMaps\\" + part.reflectionMapName, true, true, true));
+			getEntity(ID)->addNormalMap(_texLoader.getTexture("User\\assets\\textures\\normal_maps\\" + part.normalMapName, true, true, true));
 		}
 		else
 		{
+			// Only add empty normal maps if multiparted model
+			if (parts.size() > 1)
+			{
+				getEntity(ID)->addNormalMap(0);
+			}
+		}
+
+		// Load an OBJ part reflection map
+		if (part.reflectionMapName != "")
+		{
+			getEntity(ID)->setSkyReflective(true);
+			getEntity(ID)->addReflectionMap(_texLoader.getTexture("User\\assets\\textures\\reflection_maps\\" + part.reflectionMapName, true, true, true));
+		}
+		else
+		{
+			// Only add empty reflection maps if multiparted model
 			if (parts.size() > 1)
 			{
 				getEntity(ID)->addReflectionMap(0);

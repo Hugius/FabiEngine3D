@@ -9,10 +9,10 @@ Config::Config()
 	char buffer[256]; size_t len = sizeof(buffer);
 	GetModuleFileName(NULL, buffer, len);
 	string rootDir = buffer;
-	rootDir = rootDir.substr(0, rootDir.size() - 25);
+	rootDir = rootDir.substr(0, rootDir.size() - 20);
 
 	// Open config file
-	string path = rootDir + "Config.fe3d";
+	string path = rootDir + "config.fe3d";
 	std::ifstream file(path);
 	if (!std::filesystem::exists(path))
 	{

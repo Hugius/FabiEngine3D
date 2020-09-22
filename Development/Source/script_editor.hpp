@@ -126,6 +126,7 @@ private:
 	unsigned int _pointLightCounter = 0;
 	bool _allowedToAddScriptLine = false;
 	bool _isCreatingScript = false;
+	bool _isUpdatingScriptline = false;
 	bool _isCreatingScriptline = false;
 	bool _isLoaded = false;
 };

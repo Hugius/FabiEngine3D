@@ -220,7 +220,7 @@ void SceneEditor::load()
 	// Load lightsource billboard
 	if (!_fe3d.billboardEntity_isExisting("@@lightSource"))
 	{
-		_fe3d.billBoardEntity_add("@@lightSource", "Engine\\Textures\\light_source.png", _fe3d.gfx_getDirectionalLightingPosition(),
+		_fe3d.billBoardEntity_add("@@lightSource", "engine\\textures\\light_source.png", _fe3d.gfx_getDirectionalLightingPosition(),
 			vec3(0.0f), vec2(0.0f), true, true, true, true);
 	}
 
@@ -260,7 +260,7 @@ void SceneEditor::load()
 	// Preview pointlight loading
 	_fe3d.lightEntity_add(_previewPointlightID);
 	_fe3d.lightEntity_hide(_previewPointlightID);
-	_fe3d.gameEntity_add(_previewPointlightID, "Engine\\OBJs\\lamp.obj", vec3(0.0f), vec3(0.0f), _defaultLightbulbSize, false);
+	_fe3d.gameEntity_add(_previewPointlightID, "engine\\models\\lamp.obj", vec3(0.0f), vec3(0.0f), _defaultLightbulbSize, false);
 	_fe3d.gameEntity_setShadowed(_previewPointlightID, false);
 	_fe3d.gameEntity_setDepthMapIncluded(_previewPointlightID, false);
 

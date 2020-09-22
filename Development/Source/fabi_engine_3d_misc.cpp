@@ -245,7 +245,7 @@ string FabiEngine3D::misc_getRootDirectory()
 	char buffer[256]; size_t len = sizeof(buffer);
 	GetModuleFileName(NULL, buffer, len);
 	string rootDir = buffer;
-	rootDir = rootDir.substr(0, rootDir.size() - 25);
+	rootDir = rootDir.substr(0, rootDir.size() - 20);
 	return rootDir;
 }
 

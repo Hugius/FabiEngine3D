@@ -11,7 +11,7 @@ TTF_Font* TextureLoader::_loadFont(const string& fontPath)
 	char buffer[256]; size_t len = sizeof(buffer);
 	GetModuleFileName(NULL, buffer, len);
 	string rootDir = buffer;
-	rootDir = rootDir.substr(0, rootDir.size() - 25);
+	rootDir = rootDir.substr(0, rootDir.size() - 20);
 
 	// Load font
 	auto it = _fonts.find(fontPath);
@@ -94,7 +94,7 @@ GLuint TextureLoader::_loadTexture(const string& filePath, bool mipmap, bool ani
 	char buffer[256]; size_t len = sizeof(buffer);
 	GetModuleFileName(NULL, buffer, len);
 	string rootDir = buffer;
-	rootDir = rootDir.substr(0, rootDir.size() - 25);
+	rootDir = rootDir.substr(0, rootDir.size() - 20);
 
 	// Load actual texture data
 	SDL_Surface * surface = IMG_Load((rootDir + filePath).c_str());
@@ -167,7 +167,7 @@ GLuint TextureLoader::_loadCubeMap(const array<string, 6>& filePaths)
 	char buffer[256]; size_t len = sizeof(buffer);
 	GetModuleFileName(NULL, buffer, len);
 	string rootDir = buffer;
-	rootDir = rootDir.substr(0, rootDir.size() - 25);
+	rootDir = rootDir.substr(0, rootDir.size() - 20);
 
 	// Init
 	GLuint textureID;
@@ -258,7 +258,7 @@ vector<float> TextureLoader::_loadHeightMap(const string& filePath)
 	char buffer[256]; size_t len = sizeof(buffer);
 	GetModuleFileName(NULL, buffer, len);
 	string rootDir = buffer;
-	rootDir = rootDir.substr(0, rootDir.size() - 25);
+	rootDir = rootDir.substr(0, rootDir.size() - 20);
 
 	// Pixels
 	vector<float> pixelIntensities;

@@ -92,8 +92,8 @@ void ModelEditor::load()
 	
 	// 3D Environment
 	_fe3d.skyEntity_select("@@editorSky");
-	_fe3d.gameEntity_add("@@cube", "Engine\\OBJs\\cube.obj", vec3(0.0f), vec3(0.0f), vec3(1.0f, 1.0f, 1.0f));
-	_fe3d.gameEntity_setDiffuseMap("@@cube", "Engine\\Textures\\cube.png");
+	_fe3d.gameEntity_add("@@cube", "engine\\models\\cube.obj", vec3(0.0f), vec3(0.0f), vec3(1.0f, 1.0f, 1.0f));
+	_fe3d.gameEntity_setDiffuseMap("@@cube", "engine\\textures\\cube.png");
 	_fe3d.gameEntity_setFaceCulled("@@cube", true);
 
 	// Other
@@ -115,7 +115,7 @@ void ModelEditor::loadModels()
 	_modelNames.clear();
 
 	// Compose full models folder path
-	string filePath = _fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\Data\\models.fe3d";
+	string filePath = _fe3d.misc_getRootDirectory() + "User\\projects\\" + _currentProjectName + "\\data\\models.fe3d";
 
 	// Load models file
 	if (_fe3d.misc_isFileExisting(filePath)) // Check if models file exists
@@ -200,7 +200,7 @@ void ModelEditor::save()
 
 		// Create or overwrite models file
 		std::ofstream file;
-		file.open(_fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\Data\\models.fe3d");
+		file.open(_fe3d.misc_getRootDirectory() + "User\\projects\\" + _currentProjectName + "\\data\\models.fe3d");
 
 		// Write model data into file
 		for (auto& modelName : _modelNames)

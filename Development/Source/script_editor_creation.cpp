@@ -2,7 +2,7 @@
 
 void ScriptEditor::_updateScriptlineCreation()
 {
-	if (_isCreatingScriptline && _allowedToAddScriptLine)
+	if ((_isCreatingScriptline && _allowedToAddScriptLine) || _isUpdatingScriptline)
 	{
 		// Placeholders
 		static bool firstTime = true;
@@ -12,10 +12,8 @@ void ScriptEditor::_updateScriptlineCreation()
 		static shared_ptr<ScriptAction> action = nullptr;
 		
 		// Fill the event & action placeholders
-		if (firstTime)
+		if (firstTime && !_isUpdatingScriptline)
 		{
-			firstTime = false;
-
 			// For every choicelist that has been added
 			for (auto& choiceList : _choiceListStack)
 			{
@@ -104,8 +102,21 @@ void ScriptEditor::_updateScriptlineCreation()
 					}
 				}
 			}
+		}
 
-			// Add valuefields for action
+		// Add valuefields for action
+		if (firstTime)
+		{
+			firstTime = false;
+
+			// Set scriptline to be updated
+			if (_isUpdatingScriptline)
+			{
+				event = _script->getScriptLine(_currentScriptLineID).event;
+				action = _script->getScriptLine(_currentScriptLineID).action;
+			}
+
+			// Determine script type
 			switch (action->getType())
 			{
 				case ScriptActionType::CAMERA:
@@ -188,6 +199,7 @@ void ScriptEditor::_updateScriptlineCreation()
 			{
 				// Reset the creation process
 				_isCreatingScriptline = false;
+				_isUpdatingScriptline = false;
 				firstTime = true;
 				needsValueFilling = false;
 				finishedValueFilling = false;
@@ -197,16 +209,24 @@ void ScriptEditor::_updateScriptlineCreation()
 			}
 		}
 
-		// Create new scriptLine
+		// Create or update scriptLine
 		if (finishedValueFilling || !needsValueFilling)
 		{
-			// Clear everything after creating
-			_script->addLine(to_string(_script->getLineCount() + 1), event, action);
-			_clearChoiceLists();
-			_allowedToAddScriptLine = false;
+			if (_isUpdatingScriptline) // Update current scriptline
+			{
+				_clearChoiceLists();
+				_generateScriptLineOverview(_script->getScriptLine(_currentScriptLineID));
+				_isUpdatingScriptline = false;
+			}
+			else if(_isCreatingScriptline) // Create new scriptline
+			{
+				_script->addLine(to_string(_script->getLineCount() + 1), event, action);
+				_clearChoiceLists();
+				_isCreatingScriptline = false;
+				_allowedToAddScriptLine = false;
+			}
 
-			// Reset the creation process
-			_isCreatingScriptline = false;
+			// Reset the creation or updating process
 			firstTime = true;
 			needsValueFilling = false;
 			finishedValueFilling = false;

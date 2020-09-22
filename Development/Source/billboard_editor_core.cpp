@@ -77,11 +77,11 @@ void BillboardEditor::load()
 	
 	// 3D Environment
 	_fe3d.skyEntity_select("@@editorSky");
-	_fe3d.gameEntity_add("@@grid", "Engine\\OBJs\\plane.obj", vec3(0.0f), vec3(0.0f), vec3(100.0f, 1.0f, 100.0f));
-	_fe3d.gameEntity_setDiffuseMap("@@grid", "Engine\\Textures\\grass.png");
+	_fe3d.gameEntity_add("@@grid", "engine\\models\\plane.obj", vec3(0.0f), vec3(0.0f), vec3(100.0f, 1.0f, 100.0f));
+	_fe3d.gameEntity_setDiffuseMap("@@grid", "engine\\textures\\grass.png");
 	_fe3d.gameEntity_setUvRepeat("@@grid", 25.0f);
-	_fe3d.gameEntity_add("@@cube", "Engine\\OBJs\\cube.obj", vec3(5.0f, 0.0f, 0.0f), vec3(0.0f), vec3(1.0f, 1.0f, 1.0f));
-	_fe3d.gameEntity_setDiffuseMap("@@cube", "Engine\\Textures\\cube.png");
+	_fe3d.gameEntity_add("@@cube", "engine\\models\\cube.obj", vec3(5.0f, 0.0f, 0.0f), vec3(0.0f), vec3(1.0f, 1.0f, 1.0f));
+	_fe3d.gameEntity_setDiffuseMap("@@cube", "engine\\textures\\cube.png");
 	_fe3d.gameEntity_setFaceCulled("@@cube", true);
 
 	// Load billboards from file
@@ -102,7 +102,7 @@ void BillboardEditor::_loadBillboards()
 	}
 
 	// Create or overwrite billboards file
-	std::ifstream file(_fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\Data\\billboards.fe3d");
+	std::ifstream file(_fe3d.misc_getRootDirectory() + "User\\projects\\" + _currentProjectName + "\\data\\billboards.fe3d");
 	string line;
 
 	// Read model data
@@ -192,7 +192,7 @@ void BillboardEditor::save()
 
 		// Create or overwrite billboards file
 		std::ofstream file;
-		file.open(_fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\Data\\billboards.fe3d");
+		file.open(_fe3d.misc_getRootDirectory() + "User\\projects\\" + _currentProjectName + "\\data\\billboards.fe3d");
 
 		// Write billboard data into file
 		for (auto& billboardName : _billboardNames)

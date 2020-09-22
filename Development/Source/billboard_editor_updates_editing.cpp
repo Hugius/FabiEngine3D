@@ -113,7 +113,7 @@ void BillboardEditor::_updateBillboardEditing()
 					}
 					else if (screen->getButton("texture")->isHovered())
 					{
-						string filePath = _fe3d.misc_getWinExplorerFilename("User\\Assets\\Textures\\BillboardMaps\\", "PNG");
+						string filePath = _fe3d.misc_getWinExplorerFilename("User\\assets\\textures\\billboard_maps\\", "PNG");
 
 						// Check if user did not cancel
 						if (filePath != "")
@@ -205,7 +205,7 @@ void BillboardEditor::_updateBillboardEditing()
 				{
 					if (screen->getButton("font")->isHovered())
 					{
-						string filePath = _fe3d.misc_getWinExplorerFilename("User\\Assets\\Fonts\\", "TTF");
+						string filePath = _fe3d.misc_getWinExplorerFilename("User\\assets\\fonts\\", "TTF");
 
 						// Check if user did not cancel
 						if (filePath != "")

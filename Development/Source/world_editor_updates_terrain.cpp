@@ -108,7 +108,7 @@ void WorldEditor::_updateTerrainMenuMesh()
 		{
 			if (screen->getButton("heightMap")->isHovered())
 			{
-				string filePath = _fe3d.misc_getWinExplorerFilename("User\\Assets\\Textures\\HeightMaps\\", "BMP");
+				string filePath = _fe3d.misc_getWinExplorerFilename("User\\assets\\textures\\height_maps\\", "BMP");
 
 				// Check if not cancelled
 				if (filePath != "")
@@ -119,7 +119,7 @@ void WorldEditor::_updateTerrainMenuMesh()
 			}
 			else if (screen->getButton("diffuseMap")->isHovered())
 			{
-				string filePath = _fe3d.misc_getWinExplorerFilename("User\\Assets\\Textures\\DiffuseMaps\\", "PNG");
+				string filePath = _fe3d.misc_getWinExplorerFilename("User\\assets\\textures\\diffuse_maps\\", "PNG");
 
 				// Check if not cancelled
 				if (filePath != "")
@@ -189,7 +189,7 @@ void WorldEditor::_updateTerrainMenuBlendMap()
 		{
 			if (screen->getButton("blendMap")->isHovered())
 			{
-				string filePath = _fe3d.misc_getWinExplorerFilename("User\\Assets\\Textures\\BlendMaps\\", "PNG");
+				string filePath = _fe3d.misc_getWinExplorerFilename("User\\assets\\textures\\blend_maps\\", "PNG");
 
 				// Check if not cancelled
 				if (filePath != "")
@@ -200,7 +200,7 @@ void WorldEditor::_updateTerrainMenuBlendMap()
 			}
 			else if (screen->getButton("red")->isHovered())
 			{
-				string filePath = _fe3d.misc_getWinExplorerFilename("User\\Assets\\Textures\\DiffuseMaps\\", "PNG");
+				string filePath = _fe3d.misc_getWinExplorerFilename("User\\assets\\textures\\diffuse_maps\\", "PNG");
 
 				// Check if not cancelled
 				if (filePath != "")
@@ -211,7 +211,7 @@ void WorldEditor::_updateTerrainMenuBlendMap()
 			}
 			else if (screen->getButton("green")->isHovered())
 			{
-				string filePath = _fe3d.misc_getWinExplorerFilename("User\\Assets\\Textures\\DiffuseMaps\\", "PNG");
+				string filePath = _fe3d.misc_getWinExplorerFilename("User\\assets\\textures\\diffuse_maps\\", "PNG");
 				
 				// Check if not cancelled
 				if (filePath != "")
@@ -222,7 +222,7 @@ void WorldEditor::_updateTerrainMenuBlendMap()
 			}
 			else if (screen->getButton("blue")->isHovered())
 			{
-				string filePath = _fe3d.misc_getWinExplorerFilename("User\\Assets\\Textures\\DiffuseMaps\\", "PNG");
+				string filePath = _fe3d.misc_getWinExplorerFilename("User\\assets\\textures\\diffuse_maps\\", "PNG");
 				
 				// Check if not cancelled
 				if (filePath != "")

@@ -43,7 +43,7 @@ void EngineController::_initializeMiscellaneous()
 	gfx_enableBloom(1.0f, 0.0f, 10);
 
 	// Default cube map
-	string textureFolderPath = "Engine\\Textures\\";
+	string textureFolderPath = "engine\\textures\\";
 	skyEntity_add("@@defaultSky");
 	skyEntity_setDiffuseMaps("@@defaultSky", { 
 		textureFolderPath + "default_right.png", 
@@ -54,7 +54,7 @@ void EngineController::_initializeMiscellaneous()
 		textureFolderPath + "default_back.png" });
 	skyEntity_select("@@defaultSky");
 	skyEntity_setLightness("@@defaultSky", 0.65f);
-	skyEntity_setRotationSpeed("@@defaultSky", 1.0f);
+	skyEntity_setRotationSpeed("@@defaultSky", 0.25f);
 
 	// Editor cube map
 	skyEntity_add("@@editorSky");
@@ -66,7 +66,7 @@ void EngineController::_initializeMiscellaneous()
 		textureFolderPath + "editor_front.png",
 		textureFolderPath + "editor_back.png" });
 	skyEntity_setLightness("@@editorSky", 0.65f);
-	skyEntity_setRotationSpeed("@@editorSky", 1.0f);
+	skyEntity_setRotationSpeed("@@editorSky", 0.25f);
 
 	// Default camera
 	float mouseSpeed = camera_getMouseSensitivity();
@@ -74,7 +74,7 @@ void EngineController::_initializeMiscellaneous()
 	camera_setMouseSensitivity(mouseSpeed);
 
 	// Custom cursor texture
-	guiEntity_add("@@cursor", "Engine\\Textures\\cursor_default.png", vec2(0.0f), 0.0f, vec2(0.075f, 0.075f * misc_getAspectRatio()), true);
+	guiEntity_add("@@cursor", "engine\\textures\\cursor_default.png", vec2(0.0f), 0.0f, vec2(0.075f, 0.075f * misc_getAspectRatio()), true);
 	misc_setCustomCursor("@@cursor");
 	misc_hideCursor();
 }
@@ -120,6 +120,6 @@ void EngineController::_updateMiscellaneous()
 
 	// Update custom cursor
 	guiEntity_setPosition("@@cursor", misc_convertToNDC(misc_convertFromScreenCoords(misc_getMousePos())));
-	guiEntity_changeTexture("@@cursor", "Engine\\Textures\\cursor_default.png");
+	guiEntity_changeTexture("@@cursor", "engine\\textures\\cursor_default.png");
 	misc_isMouseInsideWindow() ? guiEntity_show("@@cursor") : guiEntity_hide("@@cursor");
 }

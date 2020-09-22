@@ -17,7 +17,7 @@ void SceneEditor::_selectModel(const string& modelID)
 	_selectedModelID = modelID;
 
 	// Change cursor
-	_fe3d.guiEntity_changeTexture("@@cursor", "Engine\\Textures\\cursor_pointing.png");
+	_fe3d.guiEntity_changeTexture("@@cursor", "engine\\textures\\cursor_pointing.png");
 
 	// Check if nothing is active
 	if (_activeModelID == "" && _activeLightBulbID == "")

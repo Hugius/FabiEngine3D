@@ -26,6 +26,10 @@ void ScriptEditor::_updateGUI()
 				{
 					_isCreatingScriptline = true;
 				}
+				else if (screen->getButton("updateLine")->isHovered())
+				{
+					_isUpdatingScriptline = true;
+				}
 				else if (screen->getButton("deleteLine")->isHovered())
 				{
 					// Remove line from script
@@ -391,6 +395,7 @@ void ScriptEditor::_updateMiscellaneous()
 
 		// Add & delete buttons hoverability
 		_leftWindow->getScreen("scriptEditorMenuMain")->getButton("addLine")->setHoverable(_allowedToAddScriptLine);
+		_leftWindow->getScreen("scriptEditorMenuMain")->getButton("updateLine")->setHoverable(_currentScriptLineID != "");
 		_leftWindow->getScreen("scriptEditorMenuMain")->getButton("deleteLine")->setHoverable(_currentScriptLineID != "");
 
 		// Check if existing script line chosen for viewing

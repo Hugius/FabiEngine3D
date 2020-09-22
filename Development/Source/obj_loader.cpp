@@ -39,13 +39,14 @@ vector<ObjPart> OBJLoader::_loadOBJ(const string& filePath, bool calculateTangen
 	string selectedPartName = "";
 	string tempDiffuseMapName = "";
 	string tempLightMapName = "";
+	string tempNormalMapName = "";
 	string tempReflectionMapName = "";
 
 	// Get application root directory
 	char buffer[256]; size_t len = sizeof(buffer);
 	GetModuleFileName(NULL, buffer, len);
 	string rootDir = buffer;
-	rootDir = rootDir.substr(0, rootDir.size() - 25);
+	rootDir = rootDir.substr(0, rootDir.size() - 20);
 
 	// Load .obj file
 	string path = rootDir + filePath;
@@ -126,6 +127,17 @@ vector<ObjPart> OBJLoader::_loadOBJ(const string& filePath, bool calculateTangen
 
 			continue;
 		}
+		else if (strcmp(lineHeader, "FE3D_NORMAL_MAP") == 0) // Normal material
+		{
+			if (selectedPartName != "")
+			{
+				char name[128];
+				fscanf(file, "%s\n", name);
+				tempNormalMapName = name;
+			}
+
+			continue;
+		}
 		else if (strcmp(lineHeader, "FE3D_REFLECTION_MAP") == 0) // Light material
 		{
 			if (selectedPartName != "")
@@ -178,6 +190,7 @@ vector<ObjPart> OBJLoader::_loadOBJ(const string& filePath, bool calculateTangen
 					// Set material names
 					objPart.diffuseMapName = tempDiffuseMapName;
 					objPart.lightMapName = tempLightMapName;
+					objPart.normalMapName = tempNormalMapName;
 					objPart.reflectionMapName = tempReflectionMapName;
 
 					break;
@@ -201,6 +214,7 @@ vector<ObjPart> OBJLoader::_loadOBJ(const string& filePath, bool calculateTangen
 				newPart.partName = selectedPartName;
 				newPart.diffuseMapName = tempDiffuseMapName;
 				newPart.lightMapName = tempLightMapName;
+				newPart.normalMapName = tempNormalMapName;
 				newPart.reflectionMapName = tempReflectionMapName;
 
 				// Add new OBJ part

@@ -19,11 +19,12 @@ void ScriptEditor::initializeGUI()
 	// Left-viewport screen
 	string screenID = "scriptEditorMenuMain";
 	_leftWindow->addScreen(screenID);
-	_leftWindow->getScreen(screenID)->addButton("addLine", vec2(0.0f, 0.7f), vec2(GW("Add script"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Add script", LVPC::textColor, LVPC::textHoverColor);
-	_leftWindow->getScreen(screenID)->addButton("deleteLine", vec2(0.0f, 0.35f), vec2(GW("Delete script"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Delete script", LVPC::textColor, LVPC::textHoverColor);
-	_leftWindow->getScreen(screenID)->addButton("createLine", vec2(0.0f, 0.0f), vec2(GW("Create script"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Create script", LVPC::textColor, LVPC::textHoverColor);
-	_leftWindow->getScreen(screenID)->addButton("viewLine", vec2(0.0f, -0.35f), vec2(GW("View script"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "View script", LVPC::textColor, LVPC::textHoverColor);
-	_leftWindow->getScreen(screenID)->addButton("back", vec2(0.0f, -0.7f), vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("addLine", vec2(0.0f, 0.75f), vec2(GW("Add script"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Add script", LVPC::textColor, LVPC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("updateLine", vec2(0.0f, 0.45f), vec2(GW("Update script"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Update script", LVPC::textColor, LVPC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("deleteLine", vec2(0.0f, 0.15f), vec2(GW("Delete script"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Delete script", LVPC::textColor, LVPC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("createLine", vec2(0.0f, -0.15f), vec2(GW("Create script"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Create script", LVPC::textColor, LVPC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("viewLine", vec2(0.0f, -0.45f), vec2(GW("View script"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "View script", LVPC::textColor, LVPC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("back", vec2(0.0f, -0.75f), vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
 }
 
 void ScriptEditor::load()
@@ -38,9 +39,9 @@ void ScriptEditor::load()
 	_fe3d.gfx_enablePointLighting();
 
 	// Background
-	_fe3d.gameEntity_add("background", "Engine\\OBJs\\plane.obj", vec3(0.0f), vec3(90.0f, 0.0f, 0.0f), vec3(100.0f));
-	_fe3d.gameEntity_setDiffuseMap("background", "Engine\\Textures\\brick.png");
-	_fe3d.gameEntity_setNormalMap("background", "Engine\\Textures\\brick_normal.png");
+	_fe3d.gameEntity_add("background", "engine\\models\\plane.obj", vec3(0.0f), vec3(90.0f, 0.0f, 0.0f), vec3(100.0f));
+	_fe3d.gameEntity_setDiffuseMap("background", "engine\\textures\\brick.png");
+	_fe3d.gameEntity_setNormalMap("background", "engine\\textures\\brick_normal.png");
 	_fe3d.gameEntity_setSpecularLighted("background", true);
 	_fe3d.gameEntity_setSpecularFactor("background", 32.0f);
 	_fe3d.gameEntity_setSpecularIntensity("background", 1.0f);

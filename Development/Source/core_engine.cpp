@@ -54,7 +54,7 @@ void CoreEngine::_setupApplication()
 	GuiEntity logo;
 	logo.load("logo");
 	logo.addOglBuffer(new OpenGLBuffer(0.0f, 0.0f, 2.0f, 2.0f, true));
-	logo.setDiffuseMap(_texLoader.getTexture("Engine\\Textures\\logo.png", true, true));
+	logo.setDiffuseMap(_texLoader.getTexture("engine\\textures\\logo.png", true, true));
 	
 	// Get logo resolution
 	SDL_DisplayMode DM;
@@ -79,7 +79,7 @@ void CoreEngine::_setupApplication()
 	// Vignettte
 	vec2 pos = _fe3d.misc_convertToNDC(_fe3d.misc_convertFromScreenCoords(Config::getInst().getVpPos()));
 	vec2 size = 2.0f * (vec2(Config::getInst().getVpSize()) / vec2(Config::getInst().getWindowSize())) + vec2(0.0f, 0.005f);
-	_fe3d.guiEntity_add("@vignette", "Engine\\Textures\\vignette.png", pos, 0.0f, size, false);
+	_fe3d.guiEntity_add("@vignette", "engine\\textures\\vignette.png", pos, 0.0f, size, false);
 
 	// Initialize engine controller
 	_fe3d.FE3D_CONTROLLER_INIT();

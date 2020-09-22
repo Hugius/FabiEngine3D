@@ -12,7 +12,7 @@ void WorldEditor::loadSkyEntity()
 		_fe3d.logger_throwError("Tried to load as empty project!");
 	}
 
-	string filePath = _fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\Data\\sky.fe3d";
+	string filePath = _fe3d.misc_getRootDirectory() + "User\\projects\\" + _currentProjectName + "\\data\\sky.fe3d";
 
 	// Load sky file
 	if (_fe3d.misc_isFileExisting(filePath))
@@ -71,7 +71,7 @@ void WorldEditor::_saveSkyData()
 			_fe3d.logger_throwError("Tried to save as empty project!");
 		}
 
-		string filePath = _fe3d.misc_getRootDirectory() + "User\\Projects\\" + _currentProjectName + "\\Data\\sky.fe3d";
+		string filePath = _fe3d.misc_getRootDirectory() + "User\\projects\\" + _currentProjectName + "\\data\\sky.fe3d";
 
 		// Save sky data
 		if (_fe3d.skyEntity_isExisting("@sky"))

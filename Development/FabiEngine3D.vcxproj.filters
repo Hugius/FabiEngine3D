@@ -940,9 +940,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\FabiEngine3D\Engine\Shaders\aabb_entity_shader.frag">
-      <Filter>src\Rendering System\Shaders\Entity Shaders</Filter>
-    </None>
     <None Include="..\FabiEngine3D\Engine\Shaders\aabb_entity_shader.vert">
       <Filter>src\Rendering System\Shaders\Entity Shaders</Filter>
     </None>
@@ -1018,14 +1015,17 @@
     <None Include="..\FabiEngine3D\Engine\Shaders\shadow_shader.vert">
       <Filter>src\Rendering System\Shaders\Miscellaneous Shaders</Filter>
     </None>
+    <None Include="..\FabiEngine3D\engine\shaders\aabb_entity_shader.frag">
+      <Filter>src\Rendering System\Shaders\Entity Shaders</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="..\FabiEngine3D\Engine\AppIcon\AppIcon.rc">
+    <ResourceCompile Include="..\FabiEngine3D\engine\icon\AppIcon.rc">
       <Filter>src\Miscellaneous\Icon</Filter>
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\FabiEngine3D\Engine\AppIcon\logo.ico">
+    <Image Include="..\FabiEngine3D\engine\icon\logo.ico">
       <Filter>src\Miscellaneous\Icon</Filter>
     </Image>
   </ItemGroup>

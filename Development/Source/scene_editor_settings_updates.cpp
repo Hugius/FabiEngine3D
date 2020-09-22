@@ -369,7 +369,7 @@ void SceneEditor::_updateLensFlareGraphicsSettingsMenu()
 			else if (screen->getButton("loadFlareMap")->isHovered())
 			{
 				// Get the loaded filename
-				string filePath = _fe3d.misc_getWinExplorerFilename("User\\Assets\\Textures\\FlareMaps\\", "PNG");
+				string filePath = _fe3d.misc_getWinExplorerFilename("User\\assets\\textures\\flare_maps\\", "PNG");
 
 				// Check if user chose a filename
 				if (filePath != "")

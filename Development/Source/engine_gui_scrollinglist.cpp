@@ -139,13 +139,22 @@ void EngineGuiScrollingList::_updateScolling()
 			mustReset = true;
 		}
 
-		// Reset if maximum offset reached
+		// Reset if maximum scrolling offset reached
+		float firstButtonHeight = _fe3d.guiEntity_getPosition(_buttons[0]->getRectangle()->getEntityID()).y;
 		float lastButtonHeight = _fe3d.guiEntity_getPosition(_buttons[_buttons.size() - 1]->getRectangle()->getEntityID()).y;
 		float listHeight = _fe3d.guiEntity_getPosition(_entityID).y;
 		float edgeOffset = (_fe3d.guiEntity_getSize(_entityID).y / 2.0f);
 		if (lastButtonHeight >= listHeight - edgeOffset + (_charSize.y / 3.0f))
 		{
-			if (_scrollingSpeed > 0.0f) // Only if trying to scroll down
+			if (_scrollingSpeed > 0.0f) // Only if trying to scroll DOWN
+			{
+				_scrollingSpeed = 0.0f;
+			}
+		}
+
+		if (firstButtonHeight <= listHeight + edgeOffset - (_charSize.y / 3.0f))
+		{
+			if (_scrollingSpeed < 0.0f) // Only if trying to scroll UP
 			{
 				_scrollingSpeed = 0.0f;
 			}

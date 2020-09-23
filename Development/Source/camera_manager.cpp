@@ -21,7 +21,7 @@ void CameraManager::reset()
 	_up = vec3(0.0f);
 	_right = vec3(0.0f);
 	_front = vec3(0.0f);
-	_pos = vec3(0.0f);
+	_position = vec3(0.0f);
 	_lookat = vec3(0.0f);
 
 	// Floats
@@ -132,7 +132,7 @@ void CameraManager::updateMatrices()
 	if(_isLookatEabled)
 	{
 		_front = _lookat;
-		_front = glm::normalize(_front - _pos);
+		_front = glm::normalize(_front - _position);
 	}
 
 	// Calculate the view matrix input
@@ -152,14 +152,14 @@ void CameraManager::updateMatrices()
 	_viewMatrix[0][2] = -_front.x;
 	_viewMatrix[1][2] = -_front.y;
 	_viewMatrix[2][2] = -_front.z;
-	_viewMatrix[3][0] = -glm::dot(_right, _pos);
-	_viewMatrix[3][1] = -glm::dot(_up, _pos);
-	_viewMatrix[3][2] =  glm::dot(_front, _pos);
+	_viewMatrix[3][0] = -glm::dot(_right, _position);
+	_viewMatrix[3][1] = -glm::dot(_up, _position);
+	_viewMatrix[3][2] =  glm::dot(_front, _position);
 	
 	// Update renderbus
 	_renderBus.setCameraYaw(_yaw);
 	_renderBus.setCameraPitch(_pitch);
-	_renderBus.setCameraPosition(_pos);
+	_renderBus.setCameraPosition(_position);
 	_renderBus.setViewMatrix(_viewMatrix);
 	_renderBus.setProjectionMatrix(_projectionMatrix);
 	_renderBus.setNearZ(_nearZ);
@@ -170,7 +170,7 @@ void CameraManager::translateFollowX(float speed) // Side movement
 { 
 	if (_isFreeMovementEnabled)
 	{
-		_pos += _right * (speed / 100.0f);
+		_position += _right * (speed / 100.0f);
 	}
 }
 
@@ -181,8 +181,8 @@ void CameraManager::translateFollowZ(float speed) // Forward movement
 		vec3 tempFront = _front;
 		tempFront.x = cos(glm::radians(_yaw));
 		tempFront.z = sin(glm::radians(_yaw));
-		_pos.x += tempFront.x * (speed / 100.0f);
-		_pos.z += tempFront.z * (speed / 100.0f);
+		_position.x += tempFront.x * (speed / 100.0f);
+		_position.z += tempFront.z * (speed / 100.0f);
 	}
 }
 
@@ -190,9 +190,9 @@ void CameraManager::translateFollowZY(float speed) // Forward movement
 {
 	if (_isFreeMovementEnabled)
 	{
-		_pos.x += _front.x * (speed / 100.0f);
-		_pos.y += _front.y * (speed / 100.0f);
-		_pos.z += _front.z * (speed / 100.0f);
+		_position.x += _front.x * (speed / 100.0f);
+		_position.y += _front.y * (speed / 100.0f);
+		_position.z += _front.z * (speed / 100.0f);
 	}
 }
 
@@ -229,7 +229,7 @@ void CameraManager::disableFreeMovement()
 
 void CameraManager::setFOV(float val)
 {
-	_viewMatrix[3][2] = glm::dot(_front, _pos);
+	_viewMatrix[3][2] = glm::dot(_front, _position);
 	_fov = val;
 }
 
@@ -262,7 +262,7 @@ void CameraManager::setFarZ(float val)
 
 const vec3 CameraManager::getPosition() const
 {
-	return _pos;
+	return _position;
 }
 
 const vec3 CameraManager::getFront() const
@@ -334,7 +334,7 @@ void CameraManager::translate(vec3 translation)
 {
 	if (_isFreeMovementEnabled)
 	{
-		_pos += translation;
+		_position += translation;
 	}
 }
 
@@ -342,7 +342,7 @@ void CameraManager::setPosition(vec3 val)
 {
 	if (_isFreeMovementEnabled)
 	{
-		_pos = val;
+		_position = val;
 	}
 }
 

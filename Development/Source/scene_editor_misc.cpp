@@ -72,6 +72,7 @@ void SceneEditor::_placeModel(const string& modelID, string modelName, vec3 posi
 	_fe3d.gameEntity_setOriginalLightness(modelID, _fe3d.gameEntity_getOriginalLightness(modelName));
 	_fe3d.gameEntity_setColor(modelID, _fe3d.gameEntity_getColor(modelName));
 	_fe3d.gameEntity_setUvRepeat(modelID, _fe3d.gameEntity_getUvRepeat(modelName));
+	_fe3d.gameEntity_setLevelOfDetailEntity(modelID, _fe3d.gameEntity_getLevelOfDetailEntityID(modelName));
 
 	// Diffuse map
 	if (_fe3d.gameEntity_getDiffuseMapPath(modelName) != "")
@@ -102,8 +103,9 @@ void SceneEditor::_placeModel(const string& modelID, string modelName, vec3 posi
 }
 
 void SceneEditor::_placeModel(const string& modelID, vec3 position, vec3 rotation, vec3 size, string objPath, string diffuseMapPath,
-	string lightMapPath, string reflectionMapPath, string normalMapPath, bool isFrozen, bool isFaceCulled, bool isShadowed, bool isTransparent, 
-	bool isReflective, bool isSpecular, float specularFactor, float specularIntensity, float lightness, vec3 color, float uvRepeat, vec3 aabbSize)
+	string lightMapPath, string reflectionMapPath, string normalMapPath, bool isFrozen, bool isFaceCulled, 
+	bool isShadowed, bool isTransparent, bool isReflective, bool isSpecular, float specularFactor, 
+	float specularIntensity, float lightness, vec3 color, float uvRepeat, vec3 aabbSize, string lodEntityID)
 {
 	// Add game entity
 	_fe3d.gameEntity_add(modelID, objPath, position, rotation, size);
@@ -122,6 +124,7 @@ void SceneEditor::_placeModel(const string& modelID, vec3 position, vec3 rotatio
 	_fe3d.gameEntity_setLightness(modelID, lightness);
 	_fe3d.gameEntity_setColor(modelID, color);
 	_fe3d.gameEntity_setUvRepeat(modelID, uvRepeat);
+	_fe3d.gameEntity_setLevelOfDetailEntity(modelID, lodEntityID);
 
 	// Diffuse map
 	if (diffuseMapPath != "")

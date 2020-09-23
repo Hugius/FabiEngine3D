@@ -35,6 +35,7 @@ public:
 	void setLightMapPath(const string& val);
 	void setReflectionMapPath(const string& val);
 	void setNormalMapPath(const string& val);
+	void setLodEntityID(const string& val);
 	void setOriginalLightness(float val);
 	void setLightness(float val);
 	void setSpecularFactor(float val);
@@ -52,6 +53,7 @@ public:
 	void setShadowed(bool val);
 	void setCameraStatic(bool val);
 	void setDepthMapIncluded(bool val);
+	void setLevelOfDetailed(bool val);
 	
 	// Getters
 	const mat4& getModelMatrix() const;
@@ -68,6 +70,7 @@ public:
 	const string& getLightMapPath() const;
 	const string& getReflectionMapPath() const;
 	const string& getNormalMapPath() const;
+	const string& getLodEntityID() const;
 	const float getOriginalLightness() const;
 	const float getLightness() const;
 	const float getSpecularFactor() const;
@@ -89,6 +92,7 @@ public:
 	const bool hasNormalMap() const;
 	const bool isCameraStatic() const;
 	const bool isDepthMapIncluded() const;
+	const bool isLevelOfDetailed() const;
 
 private:
 	mat4 _modelMatrix = mat4(1.0f);
@@ -98,6 +102,7 @@ private:
 	string _lightMapPath = "";
 	string _reflectionMapPath = "";
 	string _normalMapPath = "";
+	string _lodEntityID = "";
 
 	vec3 _translation = vec3(0.0f);
 	vec3 _rotation    = vec3(0.0f);
@@ -127,4 +132,5 @@ private:
 	bool _isSpecularLighted  = false;
 	bool _isShadowed         = true;
 	bool _isDepthMapIncluded = true;
+	bool _isLevelOfDetailed  = false;
 };

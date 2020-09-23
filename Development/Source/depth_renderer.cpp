@@ -27,7 +27,7 @@ void DepthRenderer::unbind()
 	_shader.unbind();
 }
 
-void DepthRenderer::renderTerrainEntity(const TerrainEntity* entity)
+void DepthRenderer::render(const TerrainEntity* entity)
 {
 	if (entity->isVisible())
 	{
@@ -57,7 +57,7 @@ void DepthRenderer::renderTerrainEntity(const TerrainEntity* entity)
 	}
 }
 
-void DepthRenderer::renderGameEntity(const GameEntity* entity)
+void DepthRenderer::render(const GameEntity* entity)
 {
 	if (entity->isVisible())
 	{
@@ -124,7 +124,7 @@ void DepthRenderer::renderGameEntity(const GameEntity* entity)
 	}
 }
 
-void DepthRenderer::renderBillboardEntity(const BillboardEntity* entity)
+void DepthRenderer::render(const BillboardEntity* entity)
 {
 	if (entity->isVisible())
 	{
@@ -150,7 +150,7 @@ void DepthRenderer::renderBillboardEntity(const BillboardEntity* entity)
 	}
 }
 
-void DepthRenderer::renderWaterEntity(const WaterEntity* entity)
+void DepthRenderer::render(const WaterEntity* entity)
 {
 	if (entity->isVisible())
 	{

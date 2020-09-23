@@ -37,7 +37,7 @@ bool SceneEditor::_loadSceneFile(bool overwriteCamera)
 			if (entityType == "MODEL")
 			{
 				// Values
-				string modelID, objPath, diffuseMapPath, lightMapPath, reflectionMapPath, normalMapPath;
+				string modelID, objPath, diffuseMapPath, lightMapPath, reflectionMapPath, normalMapPath, lodEntityID;
 				vec3 position, rotation, size, color, aabbSize;
 				float uvRepeat, specularFactor, specularIntensity, lightness;
 				bool isFaceculled, isShadowed, isTransparent, isSpecular, isReflective, isFrozen;
@@ -74,7 +74,8 @@ bool SceneEditor::_loadSceneFile(bool overwriteCamera)
 					uvRepeat >>
 					aabbSize.x >>
 					aabbSize.y >>
-					aabbSize.z;
+					aabbSize.z >>
+					lodEntityID;
 
 				// Perform empty string & space conversions
 				objPath = (objPath == "?") ? "" : objPath;
@@ -82,16 +83,18 @@ bool SceneEditor::_loadSceneFile(bool overwriteCamera)
 				lightMapPath = (lightMapPath == "?") ? "" : lightMapPath;
 				reflectionMapPath = (reflectionMapPath == "?") ? "" : reflectionMapPath;
 				normalMapPath = (normalMapPath == "?") ? "" : normalMapPath;
+				lodEntityID = (lodEntityID == "?") ? "" : lodEntityID;
 				std::replace(objPath.begin(), objPath.end(), '?', ' ');
 				std::replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
 				std::replace(lightMapPath.begin(), lightMapPath.end(), '?', ' ');
 				std::replace(reflectionMapPath.begin(), reflectionMapPath.end(), '?', ' ');
 				std::replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
+				std::replace(lodEntityID.begin(), lodEntityID.end(), '?', ' ');
 
 				// Add the model
 				_placeModel(modelID, position, rotation, size, objPath, diffuseMapPath, lightMapPath, reflectionMapPath, normalMapPath, isFrozen,
 					isFaceculled, isShadowed, isTransparent, isReflective, isSpecular, specularFactor, specularIntensity, lightness,
-					color, uvRepeat, aabbSize);
+					color, uvRepeat, aabbSize, lodEntityID);
 			}
 			else if (entityType == "BILLBOARD")
 			{
@@ -275,17 +278,20 @@ void SceneEditor::save()
 				auto color = _fe3d.gameEntity_getColor(entityID);
 				auto uvRepeat = _fe3d.gameEntity_getUvRepeat(entityID);
 				auto aabbSize = _fe3d.aabbEntity_getSize(entityID);
+				auto lodEntityID = _fe3d.gameEntity_getLevelOfDetailEntityID(entityID);
 
 				// Perform empty string & space conversions
 				diffuseMapPath = (diffuseMapPath == "") ? "?" : diffuseMapPath;
 				lightMapPath = (lightMapPath == "") ? "?" : lightMapPath;
 				reflectionMapPath = (reflectionMapPath == "") ? "?" : reflectionMapPath;
 				normalMapPath = (normalMapPath == "") ? "?" : normalMapPath;
+				lodEntityID = (lodEntityID == "") ? "?" : lodEntityID;
 				std::replace(objPath.begin(), objPath.end(), ' ', '?');
 				std::replace(diffuseMapPath.begin(), diffuseMapPath.end(), ' ', '?');
 				std::replace(lightMapPath.begin(), lightMapPath.end(), ' ', '?');
 				std::replace(reflectionMapPath.begin(), reflectionMapPath.end(), ' ', '?');
 				std::replace(normalMapPath.begin(), normalMapPath.end(), ' ', '?');
+				std::replace(lodEntityID.begin(), lodEntityID.end(), ' ', '?');
 
 				// 1 model -> 1 line in file
 				file <<
@@ -320,7 +326,8 @@ void SceneEditor::save()
 					uvRepeat << " " <<
 					aabbSize.x << " " <<
 					aabbSize.y << " " <<
-					aabbSize.z << std::endl;
+					aabbSize.z << " " <<
+					lodEntityID << std::endl;
 			}
 		}
 

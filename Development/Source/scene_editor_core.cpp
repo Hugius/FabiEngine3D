@@ -105,12 +105,13 @@ void SceneEditor::initializeGUI()
 	// Left-viewport: mainWindow - sceneEditorMenuSettingsGraphicsShadows
 	screenID = "sceneEditorMenuSettingsGraphicsShadows";
 	_leftWindow->addScreen(screenID);
-	_leftWindow->getScreen(screenID)->addButton("enabled", vec2(0.0f, 0.75f), vec2(GW("Enabled: NO"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Enabled: NO", LVPC::textColor, LVPC::textHoverColor);
-	_leftWindow->getScreen(screenID)->addButton("size", vec2(0.0f, 0.45f), vec2(GW("Size"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Size", LVPC::textColor, LVPC::textHoverColor);
-	_leftWindow->getScreen(screenID)->addButton("position", vec2(0.0f, 0.15f), vec2(GW("Position"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Position", LVPC::textColor, LVPC::textHoverColor);
-	_leftWindow->getScreen(screenID)->addButton("center", vec2(0.0f, -0.15f), vec2(GW("Center"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Center", LVPC::textColor, LVPC::textHoverColor);
-	_leftWindow->getScreen(screenID)->addButton("follow", vec2(0.0f, -0.45f), vec2(GW("Follow cam: OFF"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Follow cam: OFF", LVPC::textColor, LVPC::textHoverColor);
-	_leftWindow->getScreen(screenID)->addButton("back", vec2(0.0f, -0.75f), vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("enabled", vec2(0.0f, 0.7875f), vec2(GW("Enabled: NO"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Enabled: NO", LVPC::textColor, LVPC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("size", vec2(0.0f, 0.525f), vec2(GW("Size"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Size", LVPC::textColor, LVPC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("position", vec2(0.0f, 0.2625f), vec2(GW("Position"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Position", LVPC::textColor, LVPC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("center", vec2(0.0f, 0.0f), vec2(GW("Center"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Center", LVPC::textColor, LVPC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("follow", vec2(0.0f, -0.2625f), vec2(GW("Follow cam: OFF"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Follow cam: OFF", LVPC::textColor, LVPC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("interval", vec2(0.0f, -0.525f), vec2(GW("Interval"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Interval", LVPC::textColor, LVPC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("back", vec2(0.0f, -0.7875f), vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
 
 	// Left-viewport: mainWindow - sceneEditorMenuSettingsGraphicsMotionblur
 	screenID = "sceneEditorMenuSettingsGraphicsMotionblur";

@@ -153,7 +153,7 @@ vector<string>& ModelEditor::getModelNames()
 
 bool ModelEditor::_addModel(const string& modelName, string objName, string diffuseMapName, string lightMapName, string reflectionMapName, string normalMapName,
 	vec3 size, bool isFaceCulled, bool isShadowed, bool isTransparent, bool isReflective, bool isSpecular,
-	float specularFactor, float specularIntensity, float lightness, vec3 color, float uvRepeat, vec3 aabbSize)
+	float specularFactor, float specularIntensity, float lightness, vec3 color, float uvRepeat, vec3 aabbSize, string lodEntityID)
 {
 	// If model name not existing yet
 	if (std::find(_modelNames.begin(), _modelNames.end(), modelName) == _modelNames.end())
@@ -209,6 +209,7 @@ bool ModelEditor::_addModel(const string& modelName, string objName, string diff
 			_fe3d.gameEntity_setLightness(modelName, lightness);
 			_fe3d.gameEntity_setColor(modelName, color); 
 			_fe3d.gameEntity_setUvRepeat(modelName, uvRepeat);
+			_fe3d.gameEntity_setLevelOfDetailEntity(modelName, lodEntityID);
 		}
 
 		return true;

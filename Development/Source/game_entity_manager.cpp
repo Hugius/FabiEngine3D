@@ -192,6 +192,17 @@ void GameEntityManager::update()
 				_renderBus.setSceneReflectionHeight(entity->getTranslation().y);
 				_renderBus.setSceneReflectionOffset(0.0000001f);
 			}
+
+			// Calculate absolute distance between camera and entity
+			vec3 camPos = _renderBus.getCameraPosition();
+			vec3 entityPos = entity->getTranslation();
+			float xDistance = fabsf(camPos.x - entityPos.x);
+			float yDistance = fabsf(camPos.y - entityPos.y);
+			float zDistance = fabsf(camPos.z - entityPos.z);
+			float absolsuteDistance = sqrtf((xDistance * xDistance) + (yDistance * yDistance) + (zDistance * zDistance));
+
+			// Check if farther than LOD distance
+			entity->setLevelOfDetailed(absolsuteDistance > 100.0f && entity->getLodEntityID() != "");
 		}
 	}
 }

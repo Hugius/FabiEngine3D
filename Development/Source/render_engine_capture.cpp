@@ -132,10 +132,46 @@ void RenderEngine::_captureShadows()
 		glClear(GL_DEPTH_BUFFER_BIT);
 		_shadowRenderer.bind();
 
-		// Render game entities
-		for (auto& entity : _entityBus->getGameEntities()) 
-		{ 
-			_shadowRenderer.renderGameEntity(entity); 
+		// Render GAME entities
+		for (auto& entity : _entityBus->getGameEntities())
+		{
+			// Check if LOD entity needs to be rendered
+			if (entity->isLevelOfDetailed())
+			{
+				// Try to find LOD entity
+				for (auto& lodEntity : _entityBus->getGameEntities())
+				{
+					if (entity->getLodEntityID() == lodEntity->getID())
+					{
+						// Save original transformation
+						vec3 originalPosition = lodEntity->getTranslation();
+						vec3 originalRotation = lodEntity->getRotation();
+						vec3 originalSize = lodEntity->getScaling();
+						bool originalVisibility = lodEntity->isVisible();
+
+						// Change transformation
+						lodEntity->setTranslation(entity->getTranslation());
+						lodEntity->setRotation(entity->getRotation());
+						lodEntity->setScaling(entity->getScaling());
+						lodEntity->setVisible(true);
+						lodEntity->updateModelMatrix();
+
+						// Render LOD entity
+						_shadowRenderer.render(lodEntity);
+
+						// Revert to original transformation
+						lodEntity->setTranslation(originalPosition);
+						lodEntity->setRotation(originalRotation);
+						lodEntity->setScaling(originalSize);
+						lodEntity->setVisible(originalVisibility);
+						lodEntity->updateModelMatrix();
+					}
+				}
+			}
+			else // Render high-quality entity
+			{
+				_shadowRenderer.render(entity);
+			}
 		}
 
 		// Unbind
@@ -179,34 +215,71 @@ void RenderEngine::_captureSceneDepth()
 		glClear(GL_DEPTH_BUFFER_BIT);
 		_depthRenderer.bind();
 
-		// Render terrain entity
+		// Render TERRAIN entity
 		if (_entityBus->getTerrainEntity() != nullptr)
 		{
-			_depthRenderer.renderTerrainEntity(_entityBus->getTerrainEntity());
+			_depthRenderer.render(_entityBus->getTerrainEntity());
 		}
 
-		// Render water entity
+		// Render WATER entity
 		if (!waterDepthNeeded)
 		{
 			if (_entityBus->getWaterEntity() != nullptr)
 			{
-				_depthRenderer.renderWaterEntity(_entityBus->getWaterEntity());
+				_depthRenderer.render(_entityBus->getWaterEntity());
 			}
 		}
 
-		// Render game entities
+		// Render GAME entities
 		for (auto& entity : _entityBus->getGameEntities())
 		{
+			// Check if must be included in depth map
 			if (entity->isDepthMapIncluded())
 			{
-				_depthRenderer.renderGameEntity(entity);
+				// Check if LOD entity needs to be rendered
+				if (entity->isLevelOfDetailed())
+				{
+					// Try to find LOD entity
+					for (auto& lodEntity : _entityBus->getGameEntities())
+					{
+						if (entity->getLodEntityID() == lodEntity->getID())
+						{
+							// Save original transformation
+							vec3 originalPosition = lodEntity->getTranslation();
+							vec3 originalRotation = lodEntity->getRotation();
+							vec3 originalSize = lodEntity->getScaling();
+							bool originalVisibility = lodEntity->isVisible();
+
+							// Change transformation
+							lodEntity->setTranslation(entity->getTranslation());
+							lodEntity->setRotation(entity->getRotation());
+							lodEntity->setScaling(entity->getScaling());
+							lodEntity->setVisible(true);
+							lodEntity->updateModelMatrix();
+
+							// Render LOD entity
+							_depthRenderer.render(lodEntity);
+
+							// Revert to original transformation
+							lodEntity->setTranslation(originalPosition);
+							lodEntity->setRotation(originalRotation);
+							lodEntity->setScaling(originalSize);
+							lodEntity->setVisible(originalVisibility);
+							lodEntity->updateModelMatrix();
+						}
+					}
+				}
+				else // Render high-quality entity
+				{
+					_depthRenderer.render(entity);
+				}
 			}
 		}
 
-		// Render billboard entities
+		// Render BILLBOARD entities
 		for (auto& entity : _entityBus->getBillboardEntities())
 		{
-			_depthRenderer.renderBillboardEntity(entity);
+			_depthRenderer.render(entity);
 		}
 
 		// Unbind

@@ -58,9 +58,45 @@ void RenderEngine::_renderGameEntities()
 	_gameEntityRenderer.renderLightEntities(_entityBus->getLightEntities());
 
 	// Render GAME entities
-	for (auto & entity : _entityBus->getGameEntities())
+	for (auto& entity : _entityBus->getGameEntities())
 	{
-		_gameEntityRenderer.render(entity);
+		// Check if LOD entity needs to be rendered
+		if (entity->isLevelOfDetailed())
+		{
+			// Try to find LOD entity
+			for (auto& lodEntity : _entityBus->getGameEntities())
+			{
+				if (entity->getLodEntityID() == lodEntity->getID())
+				{
+					// Save original transformation
+					vec3 originalPosition = lodEntity->getTranslation();
+					vec3 originalRotation = lodEntity->getRotation();
+					vec3 originalSize = lodEntity->getScaling();
+					bool originalVisibility = lodEntity->isVisible();
+
+					// Change transformation
+					lodEntity->setTranslation(entity->getTranslation());
+					lodEntity->setRotation(entity->getRotation());
+					lodEntity->setScaling(entity->getScaling());
+					lodEntity->setVisible(true);
+					lodEntity->updateModelMatrix();
+
+					// Render LOD entity
+					_gameEntityRenderer.render(lodEntity);
+
+					// Revert to original transformation
+					lodEntity->setTranslation(originalPosition);
+					lodEntity->setRotation(originalRotation);
+					lodEntity->setScaling(originalSize);
+					lodEntity->setVisible(originalVisibility);
+					lodEntity->updateModelMatrix();
+				}
+			}
+		}
+		else // Render high-quality entity
+		{
+			_gameEntityRenderer.render(entity);
+		}
 	}
 
 	// Unbind

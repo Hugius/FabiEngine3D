@@ -66,9 +66,9 @@ void FabiEngine3D::gfx_enableMSAA()
 	_core->_renderBus.setMsaaEnabled(true);
 }
 
-void FabiEngine3D::gfx_enableShadows(vec3 eye, vec3 center, float size, float reach, bool followingCamera)
+void FabiEngine3D::gfx_enableShadows(vec3 eye, vec3 center, float size, float reach, bool followingCamera, int interval)
 {
-	_core->_shadowManager.loadShadows(eye, center, size, reach, followingCamera);
+	_core->_shadowManager.loadShadows(eye, center, size, reach, followingCamera, interval);
 	_core->_renderBus.setShadowsEnabled(true);
 }
 
@@ -409,6 +409,11 @@ float FabiEngine3D::gfx_getBloomBrightnessTreshold()
 int FabiEngine3D::gfx_getBloomBlurSize()
 {
 	return _core->_renderBus.getBloomBlurSize();
+}
+
+int FabiEngine3D::gfx_getShadowInterval()
+{
+	return _core->_shadowManager.getInterval();
 }
 
 float FabiEngine3D::gfx_getSkyHdrBrightnessFactor()

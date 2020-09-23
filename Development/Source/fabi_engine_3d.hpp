@@ -209,6 +209,7 @@ public:
 	void		   gameEntity_setLightMap(const string& ID, const string& texturePath);
 	void		   gameEntity_setNormalMap(const string& ID, const string& texturePath);
 	void		   gameEntity_setReflectionMap(const string& ID, const string& texturePath);
+	void		   gameEntity_setLevelOfDetailEntity(const string& ID, const string& lodID);
 	void		   gameEntity_setTransparent(const string& ID, bool enabled);
 	void		   gameEntity_setFaceCulled(const string& ID, bool enabled);
 	void		   gameEntity_setLightMapped(const string& ID, bool enabled);
@@ -266,6 +267,7 @@ public:
 	string		   gameEntity_getLightMapPath(const string& ID);
 	string		   gameEntity_getNormalMapPath(const string& ID);
 	string		   gameEntity_getReflectionMapPath(const string& ID);
+	string		   gameEntity_getLevelOfDetailEntityID(const string& ID);
 	vector<string> gameEntity_getAllIDs();
 	vector<string> gameEntity_getGroupIDs(const string& ID);
 
@@ -491,7 +493,7 @@ public:
 	void gfx_enableLightMapping();
 	void gfx_enableNormalMapping();
 	void gfx_enableMSAA();
-	void gfx_enableShadows(vec3 eye, vec3 center, float size, float reach, bool followingCamera);
+	void gfx_enableShadows(vec3 eye, vec3 center, float size, float reach, bool followingCamera, int interval = 0);
 	void gfx_enableBloom(float intensity, float brightnessTreshold, int blurSize);
 	void gfx_enableWaterEffects();
 	void gfx_enableSkyHDR(float brightnessFactor);
@@ -540,6 +542,7 @@ public:
 	int gfx_getReflectionQuality();
 	int gfx_getRefractionQuality();
 	int gfx_getBloomBlurSize();
+	int gfx_getShadowInterval();
 	float gfx_getAmbientLightingIntensity();
 	float gfx_geDirectionalLightingIntensity();
 	float gfx_getFogMinDistance();

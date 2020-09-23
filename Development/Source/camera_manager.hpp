@@ -73,7 +73,7 @@ private:
 	vec3 _up = vec3(0.0f);
 	vec3 _right = vec3(0.0f);
 	vec3 _front = vec3(0.0f);
-	vec3 _pos = vec3(0.0f);
+	vec3 _position = vec3(0.0f);
 	vec3 _lookat = vec3(0.0f);
 
 	// Floats

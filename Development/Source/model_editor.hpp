@@ -32,7 +32,7 @@ public:
 private:
 	bool _addModel(const string& modelName, string objName, string diffuseMapName, string lightMapName, string reflectionMapName, string normalMapName,
 		vec3 size, bool isFaceCulled, bool isShadowed, bool isTransparent, bool isReflective, bool isSpecular,
-		float specularFactor, float specularIntensity, float lightness, vec3 color, float uvRepeat, vec3 aabbSize);
+		float specularFactor, float specularIntensity, float lightness, vec3 color, float uvRepeat, vec3 aabbSize, string lodEntityID);
 	void _loadObjFileNames();
 	void _loadOBJ();
 	void _loadDiffuseMap();

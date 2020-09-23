@@ -153,6 +153,11 @@ void GameEntity::setNormalMapPath(const string& val)
 	_normalMapPath = val;
 }
 
+void GameEntity::setLodEntityID(const string& val)
+{
+	_lodEntityID = val;
+}
+
 void GameEntity::setTransparent(bool val)
 {
 	_isTransparent = val;
@@ -201,6 +206,11 @@ void GameEntity::setCameraStatic(bool val)
 void GameEntity::setDepthMapIncluded(bool val)
 {
 	_isDepthMapIncluded = val;
+}
+
+void GameEntity::setLevelOfDetailed(bool val)
+{
+	_isLevelOfDetailed = val;
 }
 
 void GameEntity::setOriginalLightness(float val)
@@ -308,6 +318,11 @@ const string& GameEntity::getNormalMapPath() const
 	return _normalMapPath;
 }
 
+const string& GameEntity::getLodEntityID() const
+{
+	return _lodEntityID;
+}
+
 const bool GameEntity::isTransparent() const
 {
 	return _isTransparent;
@@ -376,6 +391,11 @@ const bool GameEntity::isCameraStatic() const
 const bool GameEntity::isDepthMapIncluded() const
 {
 	return _isDepthMapIncluded;
+}
+
+const bool GameEntity::isLevelOfDetailed() const
+{
+	return _isLevelOfDetailed;
 }
 
 const float GameEntity::getOriginalLightness() const

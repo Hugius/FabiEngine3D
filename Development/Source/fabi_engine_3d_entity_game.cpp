@@ -126,6 +126,11 @@ void FabiEngine3D::gameEntity_setReflectionMap(const string& ID, const string& t
 	_core->_gameEntityManager.getEntity(ID)->setReflectionMapPath(texturePath);
 }
 
+void FabiEngine3D::gameEntity_setLevelOfDetailEntity(const string& ID, const string& lodID)
+{
+	_core->_gameEntityManager.getEntity(ID)->setLodEntityID(lodID);
+}
+
 void FabiEngine3D::gameEntity_setTransparent(const string& ID, bool enabled)
 {
 	_core->_gameEntityManager.getEntity(ID)->setTransparent(enabled);
@@ -375,6 +380,11 @@ string FabiEngine3D::gameEntity_getNormalMapPath(const string& ID)
 string FabiEngine3D::gameEntity_getReflectionMapPath(const string& ID)
 {
 	return _core->_gameEntityManager.getEntity(ID)->getReflectionMapPath();
+}
+
+string FabiEngine3D::gameEntity_getLevelOfDetailEntityID(const string& ID)
+{
+	return _core->_gameEntityManager.getEntity(ID)->getLodEntityID();
 }
 
 void FabiEngine3D::gameEntity_setAlpha(const string& ID, float alpha)

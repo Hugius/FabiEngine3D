@@ -23,7 +23,7 @@ void ShadowRenderer::unbind()
 	_shader.unbind();
 }
 
-void ShadowRenderer::renderGameEntity(const GameEntity* entity)
+void ShadowRenderer::render(const GameEntity* entity)
 {
 	if (entity->isVisible() && entity->isShadowed())
 	{

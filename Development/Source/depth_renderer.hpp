@@ -15,8 +15,8 @@ public:
 	
 	void bind()   override;
 	void unbind() override;
-	void renderTerrainEntity(const TerrainEntity * entity);
-	void renderWaterEntity(const WaterEntity* entity);
-	void renderGameEntity(const GameEntity * entity);
-	void renderBillboardEntity(const BillboardEntity * entity);
+	void render(const TerrainEntity * entity);
+	void render(const WaterEntity* entity);
+	void render(const GameEntity* entity);
+	void render(const BillboardEntity* entity);
 };

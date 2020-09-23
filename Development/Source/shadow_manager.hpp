@@ -13,7 +13,7 @@ public:
 	ShadowManager() = default;
 	~ShadowManager() = default;
 	
-	void loadShadows(vec3 eye, vec3 center, float size, float reach, bool followingCamera);
+	void loadShadows(vec3 eye, vec3 center, float size, float reach, bool followingCamera, int interval);
 	void update(RenderBus& renderBus);
 
 	vec3 getEye();
@@ -21,6 +21,7 @@ public:
 	float getSize();
 	float getReach();
 	bool isFollowingCamera();
+	int getInterval();
 
 private:
 	mat4 _createLightSpaceMatrix(vec3 eye, vec3 center, float size, float reach);
@@ -30,6 +31,8 @@ private:
 
 	float _size = 0.0f;
 	float _reach = 0.0f;
+
+	int _interval = 0;
 
 	bool _isFollowingCamera = false;
 };

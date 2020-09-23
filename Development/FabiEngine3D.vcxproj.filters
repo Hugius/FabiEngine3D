@@ -448,6 +448,12 @@
     <ClCompile Include="Source\top_viewport_controller_misc.cpp">
       <Filter>src\Engine Controller System\Viewport Controllers</Filter>
     </ClCompile>
+    <ClCompile Include="Source\model_editor_persistency.cpp">
+      <Filter>src\Editor System\Model Editor\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\billboard_editor_persistency.cpp">
+      <Filter>src\Editor System\Billboard Editor\Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\obj_loader.hpp">

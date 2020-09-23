@@ -4,30 +4,41 @@
 #include <GLM\\gtc\\matrix_transform.hpp>
 #include <iostream>
 
-void ShadowManager::loadShadows(vec3 eye, vec3 center, float size, float reach, bool isFollowingCamera)
+void ShadowManager::loadShadows(vec3 eye, vec3 center, float size, float reach, bool isFollowingCamera, int interval)
 {
 	_eye    = eye;
 	_center = center;
 	_size   = size;
 	_reach  = reach;
 	_isFollowingCamera = isFollowingCamera;
+	_interval = interval;
 }
 
 void ShadowManager::update(RenderBus& renderBus)
 {
 	if (_isFollowingCamera)
 	{
-		// Updated values
-		vec3 cameraPos = renderBus.getCameraPosition();
-		vec3 newEye	   = vec3(cameraPos.x, 0.0f, cameraPos.z) + _eye;
-		vec3 newCenter = vec3(cameraPos.x, 0.0f, cameraPos.z) + _center;
+		static int passedFrames = 0;
+		if (passedFrames >= _interval)
+		{
+			passedFrames = 0;
 
-		// Apply
-		renderBus.setShadowEyePosition(newEye);
-		renderBus.setShadowAreaCenter(newCenter);
-		renderBus.setShadowAreaSize(_size);
-		renderBus.setShadowAreaReach(_reach);
-		renderBus.setShadowMatrix(_createLightSpaceMatrix(newEye, newCenter, _size, _reach));
+			// Updated values
+			vec3 cameraPos = renderBus.getCameraPosition();
+			vec3 newEye = vec3(cameraPos.x, 0.0f, cameraPos.z) + _eye;
+			vec3 newCenter = vec3(cameraPos.x, 0.0f, cameraPos.z) + _center;
+
+			// Apply
+			renderBus.setShadowEyePosition(newEye);
+			renderBus.setShadowAreaCenter(newCenter);
+			renderBus.setShadowAreaSize(_size);
+			renderBus.setShadowAreaReach(_reach);
+			renderBus.setShadowMatrix(_createLightSpaceMatrix(newEye, newCenter, _size, _reach));
+		}
+		else
+		{
+			passedFrames++;
+		}
 	}
 	else
 	{
@@ -73,4 +84,9 @@ float ShadowManager::getReach()
 bool ShadowManager::isFollowingCamera()
 {
 	return _isFollowingCamera;
+}
+
+int ShadowManager::getInterval()
+{
+	return _interval;
 }

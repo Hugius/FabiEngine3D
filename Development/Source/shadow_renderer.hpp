@@ -12,5 +12,5 @@ public:
 
 	void bind()   override;
 	void unbind() override;
-	void renderGameEntity(const GameEntity * entity);
+	void render(const GameEntity* entity);
 };

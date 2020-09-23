@@ -86,6 +86,7 @@ void SceneEditor::_updateShadowGraphicsSettingsMenu()
 		vec3 position = _fe3d.gfx_getShadowEyePosition();
 		vec3 center = _fe3d.gfx_getShadowCenter();
 		bool isFollowingCamera = _fe3d.gfx_isShadowFollowingCamera();
+		int interval = _fe3d.gfx_getShadowInterval();
 
 		// GUI management
 		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
@@ -114,6 +115,10 @@ void SceneEditor::_updateShadowGraphicsSettingsMenu()
 			{
 				isFollowingCamera = !isFollowingCamera;
 			}
+			else if (screen->getButton("interval")->isHovered())
+			{
+				_gui->getGlobalScreen()->addValueForm("interval", "Frame interval", _fe3d.gfx_getShadowInterval(), vec2(0.0f, 0.0f), vec2(0.2f, 0.1f));
+			}
 			else if (screen->getButton("back")->isHovered()) // Back button
 			{
 				_leftWindow->setActiveScreen("sceneEditorMenuSettingsGraphics");
@@ -133,17 +138,20 @@ void SceneEditor::_updateShadowGraphicsSettingsMenu()
 		_gui->getGlobalScreen()->checkValueForm("positionZ", position.z);
 
 		// Center values
-		_gui->getGlobalScreen()->checkValueForm("centerX", position.x);
-		_gui->getGlobalScreen()->checkValueForm("centerY", position.y);
-		_gui->getGlobalScreen()->checkValueForm("centerZ", position.z);
+		_gui->getGlobalScreen()->checkValueForm("centerX", center.x);
+		_gui->getGlobalScreen()->checkValueForm("centerY", center.y);
+		_gui->getGlobalScreen()->checkValueForm("centerZ", center.z);
 
 		// Following button content
 		_fe3d.textEntity_setTextContent(screen->getButton("follow")->getTextfield()->getEntityID(), isFollowingCamera ? "Follow cam: ON" : "Follow cam: OFF");
 
+		// Interval value
+		_gui->getGlobalScreen()->checkValueForm("interval", interval);
+
 		// Enable or disable shadows
 		if (enabled)
 		{
-			_fe3d.gfx_enableShadows(position, center, size, size * 1.5f, isFollowingCamera);
+			_fe3d.gfx_enableShadows(position, center, size, size * 1.5f, isFollowingCamera, interval);
 		}
 		else
 		{
@@ -155,6 +163,7 @@ void SceneEditor::_updateShadowGraphicsSettingsMenu()
 		screen->getButton("position")->setHoverable(enabled);
 		screen->getButton("center")->setHoverable(enabled);
 		screen->getButton("follow")->setHoverable(enabled);
+		screen->getButton("interval")->setHoverable(enabled && isFollowingCamera);
 	}
 }
 

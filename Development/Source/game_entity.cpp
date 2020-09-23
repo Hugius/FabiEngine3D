@@ -93,14 +93,29 @@ void GameEntity::addNormalMap(GLuint val)
 	}
 }
 
+void GameEntity::setOriginalTranslation(vec3 val)
+{
+	_originalTranslation = val;
+}
+
 void GameEntity::setTranslation(vec3 val)
 {
 	_translation = val;
 }
 
+void GameEntity::setOriginalRotation(vec3 val)
+{
+	_originalRotation = val;
+}
+
 void GameEntity::setRotation(vec3 val)
 {
 	_rotation = val;
+}
+
+void GameEntity::setOriginalScaling(vec3 val)
+{
+	_originalScaling = val;
 }
 
 void GameEntity::setScaling(vec3 val)
@@ -273,14 +288,29 @@ const GLuint GameEntity::getNormalMap(int index) const
 	return _normalMaps[index];
 }
 
+const vec3 GameEntity::getOriginalTranslation() const
+{
+	return _originalTranslation;
+}
+
 const vec3 GameEntity::getTranslation() const
 {
 	return _translation;
 }
 
+const vec3 GameEntity::getOriginalRotation() const
+{
+	return _originalRotation;
+}
+
 const vec3 GameEntity::getRotation() const
 {
 	return _rotation;
+}
+
+const vec3 GameEntity::getOriginalScaling() const
+{
+	return _originalScaling;
 }
 
 const vec3 GameEntity::getScaling() const

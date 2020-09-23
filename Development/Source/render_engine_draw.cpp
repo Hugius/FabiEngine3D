@@ -77,7 +77,7 @@ void RenderEngine::_renderGameEntities()
 					// Change transformation
 					lodEntity->setTranslation(entity->getTranslation());
 					lodEntity->setRotation(entity->getRotation());
-					lodEntity->setScaling(entity->getScaling());
+					lodEntity->setScaling((entity->getScaling() / entity->getOriginalScaling()) * originalSize);
 					lodEntity->setVisible(true);
 					lodEntity->updateModelMatrix();
 

@@ -23,8 +23,11 @@ public:
 	void addLightMap(GLuint val);
 	void addReflectionMap(GLuint val);
 	void addNormalMap(GLuint val);
+	void setOriginalTranslation(vec3 val);
 	void setTranslation(vec3 val);
+	void setOriginalRotation(vec3 val);
 	void setRotation(vec3 val);
+	void setOriginalScaling(vec3 val);
 	void setScaling(vec3 val);
 	void translate(vec3 val);
 	void rotate(vec3 val);
@@ -61,8 +64,11 @@ public:
 	const GLuint getLightMap(int index) const;
 	const GLuint getReflectionMap(int index) const;
 	const GLuint getNormalMap(int index) const;
+	const vec3 getOriginalTranslation() const;
 	const vec3 getTranslation() const;
+	const vec3 getOriginalRotation() const;
 	const vec3 getRotation() const;
+	const vec3 getOriginalScaling() const;
 	const vec3 getScaling() const;
 	const vec3 getColor() const;
 	const string& getObjPath() const;
@@ -104,10 +110,13 @@ private:
 	string _normalMapPath = "";
 	string _lodEntityID = "";
 
+	vec3 _originalTranslation = vec3(0.0f);
+	vec3 _originalRotation = vec3(0.0f);
+	vec3 _originalScaling = vec3(0.0f);
 	vec3 _translation = vec3(0.0f);
-	vec3 _rotation    = vec3(0.0f);
-	vec3 _scaling     = vec3(1.0f);
-	vec3 _color       = vec3(1.0f);
+	vec3 _rotation = vec3(0.0f);
+	vec3 _scaling = vec3(1.0f);
+	vec3 _color = vec3(1.0f);
 
 	vector<GLuint> _diffuseMaps;
 	vector<GLuint> _lightMaps;

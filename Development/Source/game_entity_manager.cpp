@@ -124,6 +124,9 @@ void GameEntityManager::addGameEntity
 	}
 
 	// Load transformation
+	getEntity(ID)->setOriginalTranslation(T);
+	getEntity(ID)->setOriginalRotation(R);
+	getEntity(ID)->setOriginalScaling(S);
 	getEntity(ID)->setTranslation(T);
 	getEntity(ID)->setRotation(R);
 	getEntity(ID)->setScaling(S);

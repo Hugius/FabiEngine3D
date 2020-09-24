@@ -18,6 +18,11 @@ public:
 		vec3 T, vec3 R, vec3 S
 	);
 	void loadNormalMapping(const string& ID);
-
+	void setLodDistance(float distance);
 	void update() override;
+
+	float getLodDistance();
+
+private:
+	float _lodDistance = 0.0f;
 };

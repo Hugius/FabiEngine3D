@@ -36,15 +36,33 @@ bool SceneEditor::_loadSceneFile(bool overwriteCamera)
 			// Load entity according to type
 			if (entityType == "MODEL")
 			{
+				// Model ID
+				string modelID;
+				iss >> modelID;
+
+				// If LOD entity, only load if executing game
+				bool makeInvisible = false;
+				if (modelID[0] == '@')
+				{
+					// Check if loading for scene editor
+					if (_isLoadingSceneEditor)
+					{
+						continue;
+					}
+					else // Loading for script execution
+					{
+						makeInvisible = true;
+					}
+				}
+
 				// Values
-				string modelID, objPath, diffuseMapPath, lightMapPath, reflectionMapPath, normalMapPath, lodEntityID;
+				string objPath, diffuseMapPath, lightMapPath, reflectionMapPath, normalMapPath, lodEntityID;
 				vec3 position, rotation, size, color, aabbSize;
 				float uvRepeat, specularFactor, specularIntensity, lightness;
 				bool isFaceculled, isShadowed, isTransparent, isSpecular, isReflective, isFrozen;
 
 				// Load model data
 				iss >>
-					modelID >>
 					position.x >>
 					position.y >>
 					position.z >>
@@ -95,6 +113,13 @@ bool SceneEditor::_loadSceneFile(bool overwriteCamera)
 				_placeModel(modelID, position, rotation, size, objPath, diffuseMapPath, lightMapPath, reflectionMapPath, normalMapPath, isFrozen,
 					isFaceculled, isShadowed, isTransparent, isReflective, isSpecular, specularFactor, specularIntensity, lightness,
 					color, uvRepeat, aabbSize, lodEntityID);
+
+				// Hide LOD entity
+				if (makeInvisible)
+				{
+					_fe3d.gameEntity_hide(modelID);
+
+				}
 			}
 			else if (entityType == "BILLBOARD")
 			{
@@ -143,6 +168,12 @@ bool SceneEditor::_loadSceneFile(bool overwriteCamera)
 				_fe3d.gameEntity_setDepthMapIncluded("@" + ID, false);
 				_fe3d.aabbEntity_bindToGameEntity("@" + ID, _defaultLightbulbAabbSize, true);
 				_fe3d.lightEntity_add(ID, position, color, intensity, distance);
+			}
+			else if (entityType == "LOD_DISTANCE")
+			{
+				float lodDistance;
+				iss >> lodDistance;
+				_fe3d.gameEntity_setLevelOfDetailDistance(lodDistance);
 			}
 			else if (entityType == "EDITOR_SPEED")
 			{
@@ -251,11 +282,26 @@ void SceneEditor::save()
 		std::ofstream file;
 		file.open(_fe3d.misc_getRootDirectory() + "User\\projects\\" + _currentProjectName + "\\scenes\\scene.fe3d");
 
-		// Write game entities data into file
+		// Save LOD IDs
+		vector<string> lodIDs;
 		for (auto& entityID : _fe3d.gameEntity_getAllIDs())
 		{
 			// Check if not preview model
 			if (entityID[0] != '@')
+			{
+				// Check if entity has LOD ID
+				if (_fe3d.gameEntity_getLevelOfDetailEntityID(entityID) != "")
+				{
+					lodIDs.push_back(_fe3d.gameEntity_getLevelOfDetailEntityID(entityID));
+				}
+			}
+		}
+
+		// Write game entities data into file
+		for (auto& entityID : _fe3d.gameEntity_getAllIDs())
+		{
+			// Check if not a preview model or an LOD entity
+			if (entityID[0] != '@' || std::find(lodIDs.begin(), lodIDs.end(), entityID) != lodIDs.end())
 			{
 				// Retrieve all values to be saved
 				auto position = _fe3d.gameEntity_getPosition(entityID);
@@ -388,6 +434,9 @@ void SceneEditor::save()
 		// Camera FOV
 		file << "CAMERA_FOV " << _fe3d.camera_getFOV() << std::endl;
 
+		// LOD distance
+		file << "LOD_DISTANCE " << _fe3d.gameEntity_getLevelOfDetailDistance() << std::endl;
+
 		// Editor camera speed
 		file << "EDITOR_SPEED " << _customCameraSpeed << std::endl;
 
@@ -427,7 +476,7 @@ void SceneEditor::save()
 		{
 			float blurDistance = _fe3d.gfx_getDofBlurDistance();
 			float maxDistance = _fe3d.gfx_getDofMaxDistance();
-			file << " GRAPHICS_DOF " << enabled << " " << blurDistance << " " << maxDistance << std::endl;
+			file << "GRAPHICS_DOF " << enabled << " " << blurDistance << " " << maxDistance << std::endl;
 		}
 
 		// Fog settings

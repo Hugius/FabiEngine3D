@@ -119,6 +119,7 @@ private:
 
 	// Miscellaneous
 	bool _isLoaded = false;
+	bool _isLoadingSceneEditor = false;
 	Transformation _transformation = Transformation::TRANSLATION;
 	string _currentProjectName = "";
 	float _customCameraSpeed = 1.0f;

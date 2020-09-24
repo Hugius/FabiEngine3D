@@ -176,6 +176,11 @@ void GameEntityManager::loadNormalMapping(const string& ID)
 	}
 }
 
+void GameEntityManager::setLodDistance(float distance)
+{
+	_lodDistance = distance;
+}
+
 void GameEntityManager::update()
 {
 	for (auto & baseEntity : _getBaseEntities())
@@ -205,7 +210,12 @@ void GameEntityManager::update()
 			float absolsuteDistance = sqrtf((xDistance * xDistance) + (yDistance * yDistance) + (zDistance * zDistance));
 
 			// Check if farther than LOD distance
-			entity->setLevelOfDetailed(absolsuteDistance > 100.0f && entity->getLodEntityID() != "");
+			entity->setLevelOfDetailed(absolsuteDistance > _lodDistance && entity->getLodEntityID() != "");
 		}
 	}
+}
+
+float GameEntityManager::getLodDistance()
+{
+	return _lodDistance;
 }

@@ -9,26 +9,37 @@ void SceneEditor::_updateMainSettingsMenu()
 		if (_leftWindow->getActiveScreen()->getID() == "sceneEditorMenuSettings")
 		{
 			auto screen = _leftWindow->getScreen("sceneEditorMenuSettings");
+			float lodDistance = _fe3d.gameEntity_getLevelOfDetailDistance();
 
 			// GUI management
 			if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
 			{
-				if (screen->getButton("graphics")->isHovered()) // Set speed button
+				if (screen->getButton("graphics")->isHovered())
 				{
 					_leftWindow->setActiveScreen("sceneEditorMenuSettingsGraphics");
 				}
-				else if (screen->getButton("setSpeed")->isHovered()) // Set speed button
+				else if (screen->getButton("setSpeed")->isHovered())
 				{
 					_gui->getGlobalScreen()->addValueForm("setSpeed", "Camera speed", _customCameraSpeed, vec2(0.0f), vec2(0.3f, 0.1f));
 				}
-				else if (screen->getButton("back")->isHovered()) // Back button
+				else if (screen->getButton("lodDistance")->isHovered())
+				{
+					_gui->getGlobalScreen()->addValueForm("lodDistance", "LOD Distance", lodDistance, vec2(0.0f), vec2(0.3f, 0.1f));
+				}
+				else if (screen->getButton("back")->isHovered())
 				{
 					_leftWindow->setActiveScreen("sceneEditorMenuMain");
 				}
 			}
 
-			// Setting camera speed
+			// Setting custom camera speed
 			_gui->getGlobalScreen()->checkValueForm("setSpeed", _customCameraSpeed, {});
+
+			// Setting LOD distance
+			if (_gui->getGlobalScreen()->checkValueForm("lodDistance", lodDistance, {}))
+			{
+				_fe3d.gameEntity_setLevelOfDetailDistance(lodDistance);
+			}
 		}
 	}
 }

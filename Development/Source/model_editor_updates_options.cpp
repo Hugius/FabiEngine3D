@@ -31,7 +31,7 @@ void ModelEditor::_updateModelEditingOptions()
 		{
 			string lodID = _fe3d.gameEntity_getLevelOfDetailEntityID(_currentModelName);
 			lodID = (lodID == "") ? lodID : lodID.substr(1, lodID.size() - 1);
-			_gui->getGlobalScreen()->addValueForm("lodID", "LOD entity ID", lodID, vec2(0.0f, 0.0f), vec2(0.2f, 0.1f));
+			_gui->getGlobalScreen()->addValueForm("lodID", "LOD entity ID", lodID, vec2(0.0f, 0.0f), vec2(0.4f, 0.1f));
 		}
 		else if (screen->getButton("back")->isHovered())
 		{

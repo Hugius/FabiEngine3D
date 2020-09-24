@@ -78,7 +78,7 @@ void RenderEngine::_renderGameEntities()
 					lodEntity->setTranslation(entity->getTranslation());
 					lodEntity->setRotation(entity->getRotation());
 					lodEntity->setScaling((entity->getScaling() / entity->getOriginalScaling()) * originalSize);
-					lodEntity->setVisible(true);
+					lodEntity->setVisible(entity->isVisible());
 					lodEntity->updateModelMatrix();
 
 					// Render LOD entity

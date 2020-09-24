@@ -87,9 +87,10 @@ void SceneEditor::initializeGUI()
 	// Left-viewport: mainWindow - sceneEditorMenuSettings
 	screenID = "sceneEditorMenuSettings";
 	_leftWindow->addScreen(screenID);
-	_leftWindow->getScreen(screenID)->addButton("graphics", vec2(0.0f, 0.475f), vec2(GW("Graphics"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Graphics", LVPC::textColor, LVPC::textHoverColor);
-	_leftWindow->getScreen(screenID)->addButton("setSpeed", vec2(0.0f, 0.0f), vec2(GW("Editor speed"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Editor speed", LVPC::textColor, LVPC::textHoverColor);
-	_leftWindow->getScreen(screenID)->addButton("back", vec2(0.0f, -0.475f), vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("graphics", vec2(0.0f, 0.63f), vec2(GW("Graphics"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Graphics", LVPC::textColor, LVPC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("setSpeed", vec2(0.0f, 0.21f), vec2(GW("Editor speed"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Editor speed", LVPC::textColor, LVPC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("lodDistance", vec2(0.0f, -0.21f), vec2(GW("LOD distance"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "LOD distance", LVPC::textColor, LVPC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("back", vec2(0.0f, -0.63f), vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
 	
 	// Left-viewport: mainWindow - sceneEditorMenuSettingsGraphics
 	screenID = "sceneEditorMenuSettingsGraphics";
@@ -216,7 +217,9 @@ void SceneEditor::initializeGUI()
 
 void SceneEditor::load()
 {
+	_isLoadingSceneEditor = true;
 	loadScene(true);
+	_isLoadingSceneEditor = false;
 
 	// Load lightsource billboard
 	if (!_fe3d.billboardEntity_isExisting("@@lightSource"))

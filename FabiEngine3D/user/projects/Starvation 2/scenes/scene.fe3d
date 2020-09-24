@@ -1,59 +1,122 @@
 MODEL 725@hills 0 -10 0 0 0 0 10 26 10 user\assets\models\natural\hills.obj user\assets\textures\diffuse_maps\natural\grass3.png ? ? ? 0 0 1 0 0 0 1 1 0.6 1 1 1 10 1 1.3 1 ?
-MODEL 1946584510@tree4 86.9293 6.37255 -13.4618 0 0 0 1.88565 1.88565 1.88565 user\assets\models\trees\tree4.obj user\assets\textures\diffuse_maps\trees\tree4.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 8.04828 17.7452 7.39198 ?
-MODEL 159979308@tree4 121.373 6.37255 -15.742 0 0 0 1.88565 1.88565 1.88565 user\assets\models\trees\tree4.obj user\assets\textures\diffuse_maps\trees\tree4.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 8.04828 17.7452 7.39198 ?
-MODEL 428584965@tree4 69.166 6.37255 -74.9901 0 0 0 1.88565 1.88565 1.88565 user\assets\models\trees\tree4.obj user\assets\textures\diffuse_maps\trees\tree4.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 8.04828 17.7452 7.39198 ?
-MODEL 1792849757@tree4 148.49 6.37253 -52.5657 0 0 0 1.88565 1.88565 1.88565 user\assets\models\trees\tree4.obj user\assets\textures\diffuse_maps\trees\tree4.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 8.04828 17.7452 7.39198 ?
-MODEL 1057630654@tree4 109.051 6.37255 -34.901 0 0 0 1.88565 1.88565 1.88565 user\assets\models\trees\tree4.obj user\assets\textures\diffuse_maps\trees\tree4.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 8.04828 17.7452 7.39198 ?
-MODEL 1059673504@tree4 64.6403 6.37242 -2.14577 0 0 0 1.88565 1.88565 1.88565 user\assets\models\trees\tree4.obj user\assets\textures\diffuse_maps\trees\tree4.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 8.04828 17.7452 7.39198 ?
-MODEL 1415582845@tree4 42.3056 6.37255 -40.8034 0 0 0 1.88565 1.88565 1.88565 user\assets\models\trees\tree4.obj user\assets\textures\diffuse_maps\trees\tree4.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 8.04828 17.7452 7.39198 ?
-MODEL 1092191882@tree8 94.6786 6.37255 -58.3729 0 0 0 5.188 5.188 5.188 user\assets\models\trees\tree8.obj ? ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 5.22711 36.5319 4.99067 ?
-MODEL 1101272976@tree8 135.401 6.37255 -3.91485 0 0 0 5.188 5.188 5.188 user\assets\models\trees\tree8.obj ? ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 5.22711 36.5319 4.99067 ?
-MODEL 2099731189@tree8 143.035 6.37255 -74.5549 0 0 0 5.188 5.188 5.188 user\assets\models\trees\tree8.obj ? ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 5.22711 36.5319 4.99067 ?
-MODEL 1247728102@tree8 38.9487 6.37254 -20.7882 0 0 0 5.188 5.188 5.188 user\assets\models\trees\tree8.obj ? ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 5.22711 36.5319 4.99067 ?
-MODEL 494295123@tree8 45.5983 6.37255 -71.448 0 0 0 5.188 5.188 5.188 user\assets\models\trees\tree8.obj ? ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 5.22711 36.5319 4.99067 ?
-MODEL 1398732949@tree12 125.2 6.37254 -96.2732 0 0 0 6.0359 6.0359 6.0359 user\assets\models\trees\tree12.obj user\assets\textures\diffuse_maps\trees\tree12.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 2.01741 15.3289 2.05307 ?
-MODEL 1230233144@tree12 70.4199 10.7843 -33.6461 0 0 0 6.0359 6.0359 6.0359 user\assets\models\trees\tree12.obj user\assets\textures\diffuse_maps\trees\tree12.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 2.01741 15.3289 2.05307 ?
-MODEL 1892233710@tree12 82.1639 6.37254 0.458382 0 0 0 6.0359 6.0359 6.0359 user\assets\models\trees\tree12.obj user\assets\textures\diffuse_maps\trees\tree12.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 2.01741 15.3289 2.05307 ?
-MODEL 233253504@tree12 105.252 6.37255 -20.1225 0 0 0 6.0359 6.0359 6.0359 user\assets\models\trees\tree12.obj user\assets\textures\diffuse_maps\trees\tree12.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 2.01741 15.3289 2.05307 ?
-MODEL 623764822@tree12 129.522 6.37255 -41.9252 0 0 0 6.0359 6.0359 6.0359 user\assets\models\trees\tree12.obj user\assets\textures\diffuse_maps\trees\tree12.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 2.01741 15.3289 2.05307 ?
-MODEL 911738134@tree12 44.2447 6.37255 -90.846 0 0 0 6.0359 6.0359 6.0359 user\assets\models\trees\tree12.obj user\assets\textures\diffuse_maps\trees\tree12.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 2.01741 15.3289 2.05307 ?
-MODEL 113451796@tree13 91.4826 6.37255 -28.3526 0 0 0 3.07152 3.07152 3.07152 user\assets\models\trees\tree13.obj ? ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 7.39197 16.9425 8.14965 ?
-MODEL 1040047160@tree13 67.4889 6.37255 -60.1105 0 0 0 3.07152 3.07152 3.07152 user\assets\models\trees\tree13.obj ? ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 7.39197 16.9425 8.14965 ?
-MODEL 1878247265@tree13 123.145 6.37254 -68.448 0 0 0 3.07152 3.07152 3.07152 user\assets\models\trees\tree13.obj ? ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 7.39197 16.9425 8.14965 ?
-MODEL 1284294462@tree13 137 6.73282 -24.7249 0 0 0 3.07152 3.07152 3.07152 user\assets\models\trees\tree13.obj ? ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 7.39197 16.9425 8.14965 ?
-MODEL 1075244688@tree13 102.009 6.37255 -3.32328 0 0 0 3.07152 3.07152 3.07152 user\assets\models\trees\tree13.obj ? ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 7.39197 16.9425 8.14965 ?
-MODEL 1901382260@tree13 46.3176 6.37255 -5.97281 0 0 0 3.07152 3.07152 3.07152 user\assets\models\trees\tree13.obj ? ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 7.39197 16.9425 8.14965 ?
-MODEL 1559538493@tree13 28.3299 6.37255 -59.1601 0 0 0 3.07152 3.07152 3.07152 user\assets\models\trees\tree13.obj ? ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 7.39197 16.9425 8.14965 ?
-MODEL 2054043137@tree1 117.822 6.37254 77.2134 0 0 0 2.47989 2.47989 2.47989 user\assets\models\trees\tree1.obj user\assets\textures\diffuse_maps\trees\tree1.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 6.49008 23.3672 6.62136 @tree_lod
-MODEL 1904934314@tree1 77.61 6.37255 95.8816 0 0 0 2.47989 2.47989 2.47989 user\assets\models\trees\tree1.obj user\assets\textures\diffuse_maps\trees\tree1.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 6.49008 23.3672 6.62136 @tree_lod
-MODEL 391461228@tree1 109.492 6.37255 48.6574 0 0 0 2.47989 2.47989 2.47989 user\assets\models\trees\tree1.obj user\assets\textures\diffuse_maps\trees\tree1.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 6.49008 23.3672 6.62136 @tree_lod
-MODEL 747732732@tree1 68.4904 6.37255 55.7401 0 0 0 2.47989 2.47989 2.47989 user\assets\models\trees\tree1.obj user\assets\textures\diffuse_maps\trees\tree1.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 6.49008 23.3672 6.62136 @tree_lod
-MODEL 269526780@tree1 87.0327 6.37254 63.5953 0 0 0 2.47989 2.47989 2.47989 user\assets\models\trees\tree1.obj user\assets\textures\diffuse_maps\trees\tree1.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 6.49008 23.3672 6.62136 @tree_lod
-MODEL 403335064@tree1 133.521 6.37254 45.0187 0 0 0 2.47989 2.47989 2.47989 user\assets\models\trees\tree1.obj user\assets\textures\diffuse_maps\trees\tree1.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 6.49008 23.3672 6.62136 @tree_lod
-MODEL 658199981@tree1 153.262 6.37255 92.7023 0 0 0 2.47989 2.47989 2.47989 user\assets\models\trees\tree1.obj user\assets\textures\diffuse_maps\trees\tree1.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 6.49008 23.3672 6.62136 @tree_lod
-MODEL 839703646@tree1 114.271 6.37255 102.731 0 0 0 2.47989 2.47989 2.47989 user\assets\models\trees\tree1.obj user\assets\textures\diffuse_maps\trees\tree1.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 6.49008 23.3672 6.62136 @tree_lod
-MODEL 1394794895@tree1 57.9089 6.37255 106.21 0 0 0 2.47989 2.47989 2.47989 user\assets\models\trees\tree1.obj user\assets\textures\diffuse_maps\trees\tree1.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 6.49008 23.3672 6.62136 @tree_lod
-MODEL 205381154@tree1 41.2924 6.37255 62.0824 0 0 0 2.47989 2.47989 2.47989 user\assets\models\trees\tree1.obj user\assets\textures\diffuse_maps\trees\tree1.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 6.49008 23.3672 6.62136 @tree_lod
-MODEL 1017082695@tree1 26.6767 6.37255 101.691 0 0 0 2.47989 2.47989 2.47989 user\assets\models\trees\tree1.obj user\assets\textures\diffuse_maps\trees\tree1.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 6.49008 23.3672 6.62136 @tree_lod
-MODEL 739309142@tree1 -14.5117 7.35294 113.419 0 0 0 2.47989 2.47989 2.47989 user\assets\models\trees\tree1.obj user\assets\textures\diffuse_maps\trees\tree1.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 6.49008 23.3672 6.62136 @tree_lod
-MODEL 555618387@tree1 11.0809 6.37255 68.8197 0 0 0 2.47989 2.47989 2.47989 user\assets\models\trees\tree1.obj user\assets\textures\diffuse_maps\trees\tree1.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 6.49008 23.3672 6.62136 @tree_lod
-MODEL 40124564@tree1 -23.0045 6.37255 54.0884 0 0 0 2.47989 2.47989 2.47989 user\assets\models\trees\tree1.obj user\assets\textures\diffuse_maps\trees\tree1.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 6.49008 23.3672 6.62136 @tree_lod
-MODEL 1032769529@tree1 -5.2378 6.37255 33.1278 0 0 0 2.47989 2.47989 2.47989 user\assets\models\trees\tree1.obj user\assets\textures\diffuse_maps\trees\tree1.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 6.49008 23.3672 6.62136 @tree_lod
-MODEL 187586843@tree1 24.1862 6.37254 42.1646 0 0 0 2.47989 2.47989 2.47989 user\assets\models\trees\tree1.obj user\assets\textures\diffuse_maps\trees\tree1.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 6.49008 23.3672 6.62136 @tree_lod
-MODEL 715758163@tree1 45.6076 6.37255 41.3998 0 0 0 2.47989 2.47989 2.47989 user\assets\models\trees\tree1.obj user\assets\textures\diffuse_maps\trees\tree1.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 6.49008 23.3672 6.62136 @tree_lod
-MODEL 490279244@tree1 -13.9403 6.37255 19.1904 0 0 0 2.47989 2.47989 2.47989 user\assets\models\trees\tree1.obj user\assets\textures\diffuse_maps\trees\tree1.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 6.49008 23.3672 6.62136 @tree_lod
-MODEL 1696448271@tree1 -40.6039 6.86275 32.7609 0 0 0 2.47989 2.47989 2.47989 user\assets\models\trees\tree1.obj user\assets\textures\diffuse_maps\trees\tree1.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 6.49008 23.3672 6.62136 @tree_lod
-MODEL 2134904222@tree1 -43.5442 7.27584 8.99998 0 0 0 2.47989 2.47989 2.47989 user\assets\models\trees\tree1.obj user\assets\textures\diffuse_maps\trees\tree1.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 6.49008 23.3672 6.62136 @tree_lod
+MODEL 563009744@tree1 91.6451 6.37254 -73.4819 0 0 0 1.82295 1.82295 1.82295 user\assets\models\trees\tree1.obj user\assets\textures\diffuse_maps\trees\tree1.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 6.49008 23.3672 6.62136 @tree_lod
+MODEL 1511651816@tree1 122.614 6.37255 -92.079 0 0 0 1.82295 1.82295 1.82295 user\assets\models\trees\tree1.obj user\assets\textures\diffuse_maps\trees\tree1.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 6.49008 23.3672 6.62136 @tree_lod
+MODEL 969552646@tree1 150.021 6.37255 -52.5276 0 0 0 1.82295 1.82295 1.82295 user\assets\models\trees\tree1.obj user\assets\textures\diffuse_maps\trees\tree1.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 6.49008 23.3672 6.62136 @tree_lod
+MODEL 1816853796@tree1 120.21 6.37255 -47.6356 0 0 0 1.82295 1.82295 1.82295 user\assets\models\trees\tree1.obj user\assets\textures\diffuse_maps\trees\tree1.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 6.49008 23.3672 6.62136 @tree_lod
+MODEL 778408783@tree1 96.9793 6.37254 -30.3034 0 0 0 1.82295 1.82295 1.82295 user\assets\models\trees\tree1.obj user\assets\textures\diffuse_maps\trees\tree1.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 6.49008 23.3672 6.62136 @tree_lod
+MODEL 2045420140@tree1 98.3939 6.37255 0.335684 0 0 0 1.82295 1.82295 1.82295 user\assets\models\trees\tree1.obj user\assets\textures\diffuse_maps\trees\tree1.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 6.49008 23.3672 6.62136 @tree_lod
+MODEL 4301924@tree1 61.1298 6.37255 -12.6695 0 0 0 1.82295 1.82295 1.82295 user\assets\models\trees\tree1.obj user\assets\textures\diffuse_maps\trees\tree1.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 6.49008 23.3672 6.62136 @tree_lod
+MODEL 374821221@tree1 61.2267 6.37255 -41.4881 0 0 0 1.82295 1.82295 1.82295 user\assets\models\trees\tree1.obj user\assets\textures\diffuse_maps\trees\tree1.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 6.49008 23.3672 6.62136 @tree_lod
+MODEL 727554526@tree1 67.8749 6.37255 -67.8974 0 0 0 1.82295 1.82295 1.82295 user\assets\models\trees\tree1.obj user\assets\textures\diffuse_maps\trees\tree1.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 6.49008 23.3672 6.62136 @tree_lod
+MODEL 149969682@tree1 141.931 6.37255 -6.22167 0 0 0 1.82295 1.82295 1.82295 user\assets\models\trees\tree1.obj user\assets\textures\diffuse_maps\trees\tree1.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 6.49008 23.3672 6.62136 @tree_lod
+MODEL 188268934@tree1 162.886 17.1569 -19.3701 0 0 0 1.82295 1.82295 1.82295 user\assets\models\trees\tree1.obj user\assets\textures\diffuse_maps\trees\tree1.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 6.49008 23.3672 6.62136 @tree_lod
+MODEL 563438560@tree1 183.758 11.2745 -45.9696 0 0 0 1.82295 1.82295 1.82295 user\assets\models\trees\tree1.obj user\assets\textures\diffuse_maps\trees\tree1.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 6.49008 23.3672 6.62136 @tree_lod
+MODEL 1281714191@tree1 165.023 12.2549 -97.869 0 0 0 1.82295 1.82295 1.82295 user\assets\models\trees\tree1.obj user\assets\textures\diffuse_maps\trees\tree1.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 6.49008 23.3672 6.62136 @tree_lod
+MODEL 1548551651@tree1 123.352 12.2549 -122.724 0 0 0 1.82295 1.82295 1.82295 user\assets\models\trees\tree1.obj user\assets\textures\diffuse_maps\trees\tree1.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 6.49008 23.3672 6.62136 @tree_lod
+MODEL 357849081@tree1 89.0156 14.2157 -100.146 0 0 0 1.82295 1.82295 1.82295 user\assets\models\trees\tree1.obj user\assets\textures\diffuse_maps\trees\tree1.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 6.49008 23.3672 6.62136 @tree_lod
+MODEL 51666373@tree1 90.6466 19.1176 -128.349 0 0 0 1.82295 1.82295 1.82295 user\assets\models\trees\tree1.obj user\assets\textures\diffuse_maps\trees\tree1.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 6.49008 23.3672 6.62136 @tree_lod
+MODEL 1499788257@tree3 119.428 6.37254 -20.3323 0 0 0 2.03771 2.03771 2.03771 user\assets\models\trees\tree3.obj user\assets\textures\diffuse_maps\trees\tree3.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 1.4664 26.1583 1.3401 ?
+MODEL 1340007446@tree3 87.4361 6.37255 -14.574 0 0 0 2.03771 2.03771 2.03771 user\assets\models\trees\tree3.obj user\assets\textures\diffuse_maps\trees\tree3.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 1.4664 26.1583 1.3401 ?
+MODEL 1497292485@tree3 88.9293 6.37255 -50.1619 0 0 0 2.03771 2.03771 2.03771 user\assets\models\trees\tree3.obj user\assets\textures\diffuse_maps\trees\tree3.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 1.4664 26.1583 1.3401 ?
+MODEL 674645411@tree3 129.522 6.37255 -72.9097 0 0 0 2.03771 2.03771 2.03771 user\assets\models\trees\tree3.obj user\assets\textures\diffuse_maps\trees\tree3.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 1.4664 26.1583 1.3401 ?
+MODEL 1753095199@tree3 159.287 6.37255 -68.4529 0 0 0 2.03771 2.03771 2.03771 user\assets\models\trees\tree3.obj user\assets\textures\diffuse_maps\trees\tree3.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 1.4664 26.1583 1.3401 ?
+MODEL 1449613986@tree3 144.731 9.80392 -31.2401 0 0 0 2.03771 2.03771 2.03771 user\assets\models\trees\tree3.obj user\assets\textures\diffuse_maps\trees\tree3.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 1.4664 26.1583 1.3401 ?
+MODEL 1234032869@tree3 66.5601 6.37254 -86.2516 0 0 0 2.03771 2.03771 2.03771 user\assets\models\trees\tree3.obj user\assets\textures\diffuse_maps\trees\tree3.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 1.4664 26.1583 1.3401 ?
+MODEL 1319686024@tree3 47.2141 6.37254 -28.6528 0 0 0 2.03771 2.03771 2.03771 user\assets\models\trees\tree3.obj user\assets\textures\diffuse_maps\trees\tree3.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 1.4664 26.1583 1.3401 ?
+MODEL 127663211@tree3 161.786 20.0977 -123 0 0 0 2.03771 2.03771 2.03771 user\assets\models\trees\tree3.obj user\assets\textures\diffuse_maps\trees\tree3.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 1.4664 26.1583 1.3401 ?
+MODEL 1752661112@tree3 104.099 13.2353 -110.516 0 0 0 2.03771 2.03771 2.03771 user\assets\models\trees\tree3.obj user\assets\textures\diffuse_maps\trees\tree3.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 1.4664 26.1583 1.3401 ?
+MODEL 1449412568@tree3 180.824 24.5098 -23.8481 0 0 0 2.03771 2.03771 2.03771 user\assets\models\trees\tree3.obj user\assets\textures\diffuse_maps\trees\tree3.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 1.4664 26.1583 1.3401 ?
+MODEL 1601407475@tree13 111.992 6.37255 -9.03431 0 0 0 3.03332 3.03332 3.03332 user\assets\models\trees\tree13.obj ? ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 7.39197 20.5937 8.14965 @tree_lod
+MODEL 21054082@tree13 76.1315 6.37255 -0.199534 0 0 0 3.03332 3.03332 3.03332 user\assets\models\trees\tree13.obj ? ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 7.39197 20.5937 8.14965 @tree_lod
+MODEL 654605045@tree13 45.4092 6.37255 -10.8395 0 0 0 3.03332 3.03332 3.03332 user\assets\models\trees\tree13.obj ? ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 7.39197 20.5937 8.14965 @tree_lod
+MODEL 1616263427@tree13 56.3027 6.37255 -59.5031 0 0 0 3.03332 3.03332 3.03332 user\assets\models\trees\tree13.obj ? ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 7.39197 20.5937 8.14965 @tree_lod
+MODEL 558251293@tree13 77.5868 6.37255 -33.4146 0 0 0 3.03332 3.03332 3.03332 user\assets\models\trees\tree13.obj ? ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 7.39197 20.5937 8.14965 @tree_lod
+MODEL 1952807656@tree13 105.615 6.37255 -42.5555 0 0 0 3.03332 3.03332 3.03332 user\assets\models\trees\tree13.obj ? ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 7.39197 20.5937 8.14965 @tree_lod
+MODEL 596993780@tree13 133.858 6.37255 -56.6782 0 0 0 3.03332 3.03332 3.03332 user\assets\models\trees\tree13.obj ? ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 7.39197 20.5937 8.14965 @tree_lod
+MODEL 2010461644@tree13 107.787 6.37255 -58.8411 0 0 0 3.03332 3.03332 3.03332 user\assets\models\trees\tree13.obj ? ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 7.39197 20.5937 8.14965 @tree_lod
+MODEL 637883253@tree13 85.8051 8.82353 -85.2799 0 0 0 3.03332 3.03332 3.03332 user\assets\models\trees\tree13.obj ? ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 7.39197 20.5937 8.14965 @tree_lod
+MODEL 1104752766@tree13 140.086 6.37255 -105.378 0 0 0 3.03332 3.03332 3.03332 user\assets\models\trees\tree13.obj ? ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 7.39197 20.5937 8.14965 @tree_lod
+MODEL 286203988@tree13 150.373 6.37255 -80.1762 0 0 0 3.03332 3.03332 3.03332 user\assets\models\trees\tree13.obj ? ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 7.39197 20.5937 8.14965 @tree_lod
+MODEL 184284925@tree13 167.441 6.86274 -43.2633 0 0 0 3.03332 3.03332 3.03332 user\assets\models\trees\tree13.obj ? ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 7.39197 20.5937 8.14965 @tree_lod
+MODEL 423010740@tree13 180.979 19.6078 -69.9018 0 0 0 3.03332 3.03332 3.03332 user\assets\models\trees\tree13.obj ? ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 7.39197 20.5937 8.14965 @tree_lod
+MODEL 600772088@tree13 137.206 23.7636 -124 0 0 0 3.03332 3.03332 3.03332 user\assets\models\trees\tree13.obj ? ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 7.39197 20.5937 8.14965 @tree_lod
+MODEL 864205082@tree13 157.356 10.7843 -6.09837 0 0 0 3.03332 3.03332 3.03332 user\assets\models\trees\tree13.obj ? ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 7.39197 20.5937 8.14965 @tree_lod
+MODEL 1324152870@tree13 127.038 6.37255 -33.9557 0 0 0 3.03332 3.03332 3.03332 user\assets\models\trees\tree13.obj ? ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 7.39197 20.5937 8.14965 @tree_lod
+MODEL 719082375@tree13 114.271 6.37255 -73.7178 0 0 0 3.03332 3.03332 3.03332 user\assets\models\trees\tree13.obj ? ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 7.39197 20.5937 8.14965 @tree_lod
+MODEL @tree_lod 0 0.01 0 0 0 0 7.0657 8.91388 7.0657 user\assets\models\trees\tree_lod.obj user\assets\textures\diffuse_maps\trees\tree_lod.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 12.6112 22.7046 15.256 ?
+MODEL 2032917446@tree8 155.988 6.37255 90.0939 0 0 0 4.43694 4.43694 4.43694 user\assets\models\trees\tree8.obj ? ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 5.22711 36.5319 4.99067 ?
+MODEL 1296557563@tree8 113.791 6.37255 104.543 0 0 0 4.43694 4.43694 4.43694 user\assets\models\trees\tree8.obj ? ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 5.22711 36.5319 4.99067 ?
+MODEL 452142807@tree8 123.097 6.37255 80.0969 0 0 0 4.43694 4.43694 4.43694 user\assets\models\trees\tree8.obj ? ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 5.22711 36.5319 4.99067 ?
+MODEL 1209252883@tree8 85.4144 6.37255 76.1177 0 0 0 4.43694 4.43694 4.43694 user\assets\models\trees\tree8.obj ? ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 5.22711 36.5319 4.99067 ?
+MODEL 582874665@tree8 118.233 6.37255 53.4885 0 0 0 4.43694 4.43694 4.43694 user\assets\models\trees\tree8.obj ? ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 5.22711 36.5319 4.99067 ?
+MODEL 588792032@tree8 62.3981 6.37255 57.0882 0 0 0 4.43694 4.43694 4.43694 user\assets\models\trees\tree8.obj ? ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 5.22711 36.5319 4.99067 ?
+MODEL 35380122@tree8 88.3476 6.37255 44.3322 0 0 0 4.43694 4.43694 4.43694 user\assets\models\trees\tree8.obj ? ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 5.22711 36.5319 4.99067 ?
+MODEL 1303521021@tree8 51.6881 7.84313 84.6288 0 0 0 4.43694 4.43694 4.43694 user\assets\models\trees\tree8.obj ? ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 5.22711 36.5319 4.99067 ?
+MODEL 2102469551@tree8 72.8149 6.37254 106.937 0 0 0 4.43694 4.43694 4.43694 user\assets\models\trees\tree8.obj ? ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 5.22711 36.5319 4.99067 ?
+MODEL 322858447@tree8 36.3925 6.37254 106.891 0 0 0 4.43694 4.43694 4.43694 user\assets\models\trees\tree8.obj ? ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 5.22711 36.5319 4.99067 ?
+MODEL 2074710774@tree8 -0.978437 6.37255 104.835 0 0 0 4.43694 4.43694 4.43694 user\assets\models\trees\tree8.obj ? ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 5.22711 36.5319 4.99067 ?
+MODEL 904555786@tree8 19.8939 9.80392 79.8526 0 0 0 4.43694 4.43694 4.43694 user\assets\models\trees\tree8.obj ? ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 5.22711 36.5319 4.99067 ?
+MODEL 433668018@tree8 2.42234 6.37254 58.9636 0 0 0 4.43694 4.43694 4.43694 user\assets\models\trees\tree8.obj ? ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 5.22711 36.5319 4.99067 ?
+MODEL 946008713@tree8 30.9669 6.37255 41.5857 0 0 0 4.43694 4.43694 4.43694 user\assets\models\trees\tree8.obj ? ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 5.22711 36.5319 4.99067 ?
+MODEL 1593441896@tree8 -4.84977 6.37255 27.9382 0 0 0 4.43694 4.43694 4.43694 user\assets\models\trees\tree8.obj ? ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 5.22711 36.5319 4.99067 ?
+MODEL 1799725807@tree8 -39.3265 8.82352 17.5713 0 0 0 4.43694 4.43694 4.43694 user\assets\models\trees\tree8.obj ? ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 5.22711 36.5319 4.99067 ?
+MODEL 91750403@tree8 -34.6655 6.37254 54.5725 0 0 0 4.43694 4.43694 4.43694 user\assets\models\trees\tree8.obj ? ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 5.22711 36.5319 4.99067 ?
+MODEL 1622814545@tree8 -61.3938 6.37255 -4.00506 0 0 0 4.43694 4.43694 4.43694 user\assets\models\trees\tree8.obj ? ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 5.22711 36.5319 4.99067 ?
+MODEL 58904995@tree8 139.635 6.37254 109.533 0 0 0 4.43694 4.43694 4.43694 user\assets\models\trees\tree8.obj ? ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 5.22711 36.5319 4.99067 ?
+MODEL 1919393190@tree8 36.1462 6.37251 148.124 0 0 0 4.43694 4.43694 4.43694 user\assets\models\trees\tree8.obj ? ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 5.22711 36.5319 4.99067 ?
+MODEL 1617300723@tree8 9.96084 6.37255 133.797 0 0 0 4.43694 4.43694 4.43694 user\assets\models\trees\tree8.obj ? ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 5.22711 36.5319 4.99067 ?
+MODEL 990118598@tree8 -27.99 6.86274 158.34 0 0 0 4.43694 4.43694 4.43694 user\assets\models\trees\tree8.obj ? ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 5.22711 36.5319 4.99067 ?
+MODEL 1267743009@tree8 -30.0256 13.2353 122.925 0 0 0 4.43694 4.43694 4.43694 user\assets\models\trees\tree8.obj ? ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 5.22711 36.5319 4.99067 ?
+MODEL 361517754@tree8 -32.7885 16.1765 93.6164 0 0 0 4.43694 4.43694 4.43694 user\assets\models\trees\tree8.obj ? ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 5.22711 36.5319 4.99067 ?
+MODEL 454703550@tree8 67 18.5116 144.637 0 0 0 4.43694 4.43694 4.43694 user\assets\models\trees\tree8.obj ? ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 5.22711 36.5319 4.99067 ?
+MODEL 772425398@tree8 114 23.6925 145.6 0 0 0 4.43694 4.43694 4.43694 user\assets\models\trees\tree8.obj ? ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 5.22711 36.5319 4.99067 ?
+MODEL 483832364@tree8 -75 19.666 38.9074 0 0 0 4.43694 4.43694 4.43694 user\assets\models\trees\tree8.obj ? ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 5.22711 36.5319 4.99067 ?
+MODEL 1389529850@tree8 -98.2788 16.1166 1.99998 0 0 0 4.43694 4.43694 4.43694 user\assets\models\trees\tree8.obj ? ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 5.22711 36.5319 4.99067 ?
+MODEL 1778532142@tree2 28.929 6.37255 -107.399 0 0 0 3.04092 3.04092 3.04092 user\assets\models\trees\tree2.obj user\assets\textures\diffuse_maps\trees\tree2.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 1 16.7357 1.15762 ?
+MODEL 1364890796@tree2 17.3585 6.37255 -92.9565 0 0 0 3.04092 3.04092 3.04092 user\assets\models\trees\tree2.obj user\assets\textures\diffuse_maps\trees\tree2.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 1 16.7357 1.15762 ?
+MODEL 1006328476@tree2 2.29229 6.37255 -101.328 0 0 0 3.04092 3.04092 3.04092 user\assets\models\trees\tree2.obj user\assets\textures\diffuse_maps\trees\tree2.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 1 16.7357 1.15762 ?
+MODEL 327513809@tree2 -11.1062 6.37255 -72.8043 0 0 0 3.04092 3.04092 3.04092 user\assets\models\trees\tree2.obj user\assets\textures\diffuse_maps\trees\tree2.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 1 16.7357 1.15762 ?
+MODEL 1926842359@tree2 -28.6944 6.37255 -79.4626 0 0 0 3.04092 3.04092 3.04092 user\assets\models\trees\tree2.obj user\assets\textures\diffuse_maps\trees\tree2.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 1 16.7357 1.15762 ?
+MODEL 1163949806@tree2 -30.2338 6.37255 -46.4081 0 0 0 3.04092 3.04092 3.04092 user\assets\models\trees\tree2.obj user\assets\textures\diffuse_maps\trees\tree2.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 1 16.7357 1.15762 ?
+MODEL 1098914331@tree2 -11.3106 6.37255 -33.3185 0 0 0 3.04092 3.04092 3.04092 user\assets\models\trees\tree2.obj user\assets\textures\diffuse_maps\trees\tree2.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 1 16.7357 1.15762 ?
+MODEL 838696034@tree2 5.67881 6.37255 -46.8113 0 0 0 3.04092 3.04092 3.04092 user\assets\models\trees\tree2.obj user\assets\textures\diffuse_maps\trees\tree2.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 1 16.7357 1.15762 ?
+MODEL 1377014984@tree2 15.6452 6.37255 -25.0192 0 0 0 3.04092 3.04092 3.04092 user\assets\models\trees\tree2.obj user\assets\textures\diffuse_maps\trees\tree2.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 1 16.7357 1.15762 ?
+MODEL 241784896@tree2 33.3521 6.37255 -41.1919 0 0 0 3.04092 3.04092 3.04092 user\assets\models\trees\tree2.obj user\assets\textures\diffuse_maps\trees\tree2.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 1 16.7357 1.15762 ?
+MODEL 1712191243@tree2 30.7091 6.37255 -69.3557 0 0 0 3.04092 3.04092 3.04092 user\assets\models\trees\tree2.obj user\assets\textures\diffuse_maps\trees\tree2.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 1 16.7357 1.15762 ?
+MODEL 1504008844@tree2 45.0596 6.37255 -91.332 0 0 0 3.04092 3.04092 3.04092 user\assets\models\trees\tree2.obj user\assets\textures\diffuse_maps\trees\tree2.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 1 16.7357 1.15762 ?
+MODEL 1427741184@tree2 34.5497 6.37255 -9.84114 0 0 0 3.04092 3.04092 3.04092 user\assets\models\trees\tree2.obj user\assets\textures\diffuse_maps\trees\tree2.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 1 16.7357 1.15762 ?
+MODEL 253918905@tree9 -12.8292 6.37255 -56.1177 0 0 0 4.74568 4.74568 4.74568 user\assets\models\trees\tree9.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.75 1 1 1 1 3.91032 27.2671 3.70552 ?
+MODEL 1086759934@tree9 -51.1843 6.37255 -51.6976 0 0 0 4.74568 4.74568 4.74568 user\assets\models\trees\tree9.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.75 1 1 1 1 3.91032 27.2671 3.70552 ?
+MODEL 534695673@tree9 -1.72029 6.37255 -18.8033 0 0 0 4.74568 4.74568 4.74568 user\assets\models\trees\tree9.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.75 1 1 1 1 3.91032 27.2671 3.70552 ?
+MODEL 1548005371@tree9 21.9447 6.37255 -54.5921 0 0 0 4.74568 4.74568 4.74568 user\assets\models\trees\tree9.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.75 1 1 1 1 3.91032 27.2671 3.70552 ?
+MODEL 985322326@tree9 51.3619 6.37254 -73.5064 0 0 0 4.74568 4.74568 4.74568 user\assets\models\trees\tree9.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.75 1 1 1 1 3.91032 27.2671 3.70552 ?
+MODEL 1538333875@tree9 51.4123 6.37255 -106.247 0 0 0 4.74568 4.74568 4.74568 user\assets\models\trees\tree9.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.75 1 1 1 1 3.91032 27.2671 3.70552 ?
+MODEL 1658447709@tree9 10.4165 6.86274 -121.712 0 0 0 4.74568 4.74568 4.74568 user\assets\models\trees\tree9.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.75 1 1 1 1 3.91032 27.2671 3.70552 ?
+MODEL 408449443@tree9 -19.9611 8.82353 -95.5458 0 0 0 4.74568 4.74568 4.74568 user\assets\models\trees\tree9.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.75 1 1 1 1 3.91032 27.2671 3.70552 ?
+MODEL 473086396@tree12 0.231216 6.37255 -37.1533 0 0 0 4.91628 4.91628 4.91628 user\assets\models\trees\tree12.obj user\assets\textures\diffuse_maps\trees\tree12.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 2.01741 15.3289 2.05307 ?
+MODEL 71038481@tree12 -37.4901 6.37255 -67.8783 0 0 0 4.91628 4.91628 4.91628 user\assets\models\trees\tree12.obj user\assets\textures\diffuse_maps\trees\tree12.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 2.01741 15.3289 2.05307 ?
+MODEL 2022936437@tree12 6.20221 10.2941 -71.7035 0 0 0 4.91628 4.91628 4.91628 user\assets\models\trees\tree12.obj user\assets\textures\diffuse_maps\trees\tree12.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 2.01741 15.3289 2.05307 ?
+MODEL 421458628@tree12 42.8467 6.37255 -54.7887 0 0 0 4.91628 4.91628 4.91628 user\assets\models\trees\tree12.obj user\assets\textures\diffuse_maps\trees\tree12.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 2.01741 15.3289 2.05307 ?
+MODEL 1506814776@tree12 34.8053 6.37255 -27.1159 0 0 0 4.91628 4.91628 4.91628 user\assets\models\trees\tree12.obj user\assets\textures\diffuse_maps\trees\tree12.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 2.01741 15.3289 2.05307 ?
+MODEL 1407547509@tree12 -35.9415 6.37255 -31.2601 0 0 0 4.91628 4.91628 4.91628 user\assets\models\trees\tree12.obj user\assets\textures\diffuse_maps\trees\tree12.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 2.01741 15.3289 2.05307 ?
+MODEL 1017805776@tree12 -62.4119 6.37255 -62.6527 0 0 0 4.91628 4.91628 4.91628 user\assets\models\trees\tree12.obj user\assets\textures\diffuse_maps\trees\tree12.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 2.01741 15.3289 2.05307 ?
+MODEL 755930529@tree12 -5.11587 6.37255 -87.7667 0 0 0 4.91628 4.91628 4.91628 user\assets\models\trees\tree12.obj user\assets\textures\diffuse_maps\trees\tree12.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 2.01741 15.3289 2.05307 ?
+MODEL 60285284@tree12 29.8506 6.37255 -87.2071 0 0 0 4.91628 4.91628 4.91628 user\assets\models\trees\tree12.obj user\assets\textures\diffuse_maps\trees\tree12.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 2.01741 15.3289 2.05307 ?
+MODEL 1825329255@tree12 38.4946 6.37255 -122.152 0 0 0 4.91628 4.91628 4.91628 user\assets\models\trees\tree12.obj user\assets\textures\diffuse_maps\trees\tree12.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 2.01741 15.3289 2.05307 ?
+MODEL 40940525@tree12 63.5369 12.7451 -122.586 0 0 0 4.91628 4.91628 4.91628 user\assets\models\trees\tree12.obj user\assets\textures\diffuse_maps\trees\tree12.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 2.01741 15.3289 2.05307 ?
+MODEL 1771036380@tree12 73.8949 10.7843 -102.628 0 0 0 4.91628 4.91628 4.91628 user\assets\models\trees\tree12.obj user\assets\textures\diffuse_maps\trees\tree12.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 2.01741 15.3289 2.05307 ?
+MODEL 606292384@tree12 13.0023 8.82353 -141.128 0 0 0 4.91628 4.91628 4.91628 user\assets\models\trees\tree12.obj user\assets\textures\diffuse_maps\trees\tree12.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 2.01741 15.3289 2.05307 ?
 AMBIENT 1 1 1 0.5
 DIRECTIONAL 1000 2500 1000 1 1 1 1 400
 CAMERA_FOV 70
+LOD_DISTANCE 100
 EDITOR_SPEED 20
-EDITOR_POSITION 77.8099 32.7804 13.7583
-EDITOR_YAW 103.665
-EDITOR_PITCH -19.7981
+EDITOR_POSITION -32.9328 21.1804 -20.2936
+EDITOR_YAW 356.995
+EDITOR_PITCH -24.4647
 GRAPHICS_SHADOWS 1 100 50.000000 50.000000 0.000000 0.000000 0.000000 0.000000 1
 GRAPHICS_MOTIONBLUR 1 8
- GRAPHICS_DOF 1 25 10
+GRAPHICS_DOF 1 25 10
 GRAPHICS_FOG 1 150 512 0.75 0.498039 0.498039 0.498039
 GRAPHICS_LENSFLARE 1 user\assets\textures\flare_maps\flare.png 1 1
 GRAPHICS_SKYHDR 1 0.5

@@ -312,6 +312,11 @@ void FabiEngine3D::gameEntity_setUvRepeat(const string& ID, float repeat)
 	_core->_gameEntityManager.getEntity(ID)->setUvRepeat(repeat);
 }
 
+void FabiEngine3D::gameEntity_setLevelOfDetailDistance(float distance)
+{
+	_core->_gameEntityManager.setLodDistance(distance);
+}
+
 void FabiEngine3D::gameEntity_setStaticToCamera(const string& ID, bool staticToCamera)
 {
 	_core->_gameEntityManager.getEntity(ID)->setCameraStatic(staticToCamera);
@@ -350,6 +355,11 @@ float FabiEngine3D::gameEntity_getMaxY(const string& ID)
 float FabiEngine3D::gameEntity_getUvRepeat(const string& ID)
 {
 	return _core->_gameEntityManager.getEntity(ID)->getUvRepeat();
+}
+
+float FabiEngine3D::gameEntity_getLevelOfDetailDistance()
+{
+	return _core->_gameEntityManager.getLodDistance();
 }
 
 vec3 FabiEngine3D::gameEntity_getColor(const string& ID)

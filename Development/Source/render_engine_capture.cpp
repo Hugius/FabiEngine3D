@@ -153,7 +153,7 @@ void RenderEngine::_captureShadows()
 						lodEntity->setTranslation(entity->getTranslation());
 						lodEntity->setRotation(entity->getRotation());
 						lodEntity->setScaling((entity->getScaling() / entity->getOriginalScaling()) * originalSize);
-						lodEntity->setVisible(true);
+						lodEntity->setVisible(entity->isVisible());
 						lodEntity->updateModelMatrix();
 						
 						// Render LOD entity
@@ -254,7 +254,7 @@ void RenderEngine::_captureSceneDepth()
 							lodEntity->setTranslation(entity->getTranslation());
 							lodEntity->setRotation(entity->getRotation());
 							lodEntity->setScaling((entity->getScaling() / entity->getOriginalScaling()) * originalSize);
-							lodEntity->setVisible(true);
+							lodEntity->setVisible(entity->isVisible());
 							lodEntity->updateModelMatrix();
 
 							// Render LOD entity

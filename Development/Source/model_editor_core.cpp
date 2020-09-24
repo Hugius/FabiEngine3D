@@ -101,6 +101,7 @@ void ModelEditor::load()
 	loadModels();
 	_gui->getGlobalScreen()->addTextfield("selectedModelName", vec2(0.0f, 0.85f), vec2(0.5f, 0.1f), "", vec3(1.0f));
 	_gui->getViewport("bottom")->getWindow("controls")->setActiveScreen("modelEditor");
+	_fe3d.gameEntity_setLevelOfDetailDistance(10000.0f);
 	_isLoaded = true;
 }
 

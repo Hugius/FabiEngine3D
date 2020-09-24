@@ -212,8 +212,9 @@ bool SceneEditor::_loadSceneFile(bool overwriteCamera)
 				float size;
 				vec3 position, center;
 				bool isFollowingCamera;
-				iss >> enabled >> size >> position.x >> position.y >> position.z >> center.x >> center.y >> center.z >> isFollowingCamera;
-				_fe3d.gfx_enableShadows(position, center, size, size * 1.5f, isFollowingCamera);
+				int interval;
+				iss >> enabled >> size >> position.x >> position.y >> position.z >> center.x >> center.y >> center.z >> isFollowingCamera >> interval;
+				_fe3d.gfx_enableShadows(position, center, size, size * 1.5f, isFollowingCamera, interval);
 			}
 			else if (entityType == "GRAPHICS_MOTIONBLUR")
 			{
@@ -458,8 +459,9 @@ void SceneEditor::save()
 			position = _fe3d.gfx_getShadowEyePosition();
 			vec3 center = _fe3d.gfx_getShadowCenter();
 			bool isFollowingCamera = _fe3d.gfx_isShadowFollowingCamera();
+			int interval = _fe3d.gfx_getShadowInterval();
 			file << "GRAPHICS_SHADOWS " << enabled << " " << size << " " << _fe3d.misc_vec2str(position) << " " <<
-				_fe3d.misc_vec2str(center) << " " << isFollowingCamera << std::endl;
+				_fe3d.misc_vec2str(center) << " " << isFollowingCamera << " " << interval << std::endl;
 		}
 
 		// Motion blur settings

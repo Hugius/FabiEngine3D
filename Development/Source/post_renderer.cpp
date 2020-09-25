@@ -9,9 +9,10 @@ void PostRenderer::bind()
 	// Fragment shader uniforms
 	_shader.uploadUniform("u_nearZ", _renderBus.getNearZ());
 	_shader.uploadUniform("u_farZ", _renderBus.getFarZ());
-	_shader.uploadUniform("u_bloomEnabled", _renderBus.isBloomEnabled());
-	_shader.uploadUniform("u_dofEnabled", _renderBus.isDofEnabled());
-	_shader.uploadUniform("u_lensFlareEnabled", _renderBus.isLensFlareEnabled());
+	_shader.uploadUniform("u_isBloomEnabled", _renderBus.isBloomEnabled());
+	_shader.uploadUniform("u_isDofEnabled", _renderBus.isDofEnabled());
+	_shader.uploadUniform("u_isDofDynamic", _renderBus.isDofDynamic());
+	_shader.uploadUniform("u_isLensFlareEnabled", _renderBus.isLensFlareEnabled());
 	_shader.uploadUniform("u_dofMaxDistance", _renderBus.getDofMaxDistance());
 	_shader.uploadUniform("u_dofBlurDistance", _renderBus.getDofBlurDistance());
 	_shader.uploadUniform("u_lensFlareAlpha", _renderBus.getLensFlareAlpha());

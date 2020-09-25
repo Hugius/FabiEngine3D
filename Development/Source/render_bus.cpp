@@ -383,6 +383,11 @@ void RenderBus::setTriangleCountingEnabled(bool val)
 	_isTriangleCountingEnabled = val;
 }
 
+void RenderBus::setDofDynamic(bool val)
+{
+	_isDofDynamic = val;
+}
+
 void RenderBus::setCursorEntityID(const string& val)
 {
 	_cursorEntityID = val;
@@ -766,6 +771,11 @@ const bool RenderBus::isDebugRenderingEnabled() const
 const bool RenderBus::isTriangleCountingEnabled() const
 {
 	return _isTriangleCountingEnabled;
+}
+
+const bool RenderBus::isDofDynamic() const
+{
+	return _isDofDynamic;
 }
 
 const string& RenderBus::getCursorEntityID() const

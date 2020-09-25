@@ -103,6 +103,7 @@ public:
 	void setDebugRenderingEnabled(bool val);
 	void setShadowFrameRenderingEnabled(bool val);
 	void setTriangleCountingEnabled(bool val);
+	void setDofDynamic(bool val);
 
 	// Strings
 	void setCursorEntityID(const string& val);
@@ -196,6 +197,7 @@ public:
 	const bool isShadowFrameRenderingEnabled() const;
 	const bool isDebugRenderingEnabled()       const;
 	const bool isTriangleCountingEnabled()	   const;
+	const bool isDofDynamic()				   const;
 
 	// Strings
 	const string& getCursorEntityID() const;
@@ -290,6 +292,7 @@ private:
 	bool _isShadowFrameRenderingEnabled	= false;
 	bool _isDebugRenderingEnabled		= false;
 	bool _isTriangleCountingEnabled		= false;
+	bool _isDofDynamic					= false;
 
 	// Strings
 	string _cursorEntityID = "";

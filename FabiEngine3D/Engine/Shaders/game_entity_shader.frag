@@ -289,18 +289,19 @@ vec3 getShadowLighting()
 				return vec3(1.0f);
 			}
 
-			// Calculate depth from shadow map
-			float shadowMapDepth = texture(u_sampler_shadowMap, projCoords.xy).r;
-
-			// Apply result value
-			if((currentDepth - texelSize) > shadowMapDepth)
-			{
-				shadow = 0.2f; // Shadow
-			}
-			else
-			{
-				shadow = 1.0f; // No shadow
-			}
+            // Calculate PCF shadows
+            for(int x = -1; x <= 1; ++x)
+            {
+                for(int y = -1; y <= 1; ++y)
+                {
+                    float pcfDepth = texture(u_sampler_shadowMap, projCoords.xy + vec2(x, y) * vec2(texelSize)).r; 
+                    shadow += currentDepth - texelSize > pcfDepth ? 0.2f : 1.0f;        
+                }    
+            }
+            
+            // Return shadow value
+            shadow /= 9.0f;
+            shadow += 0.1f;
 			
 			// Long-distance shadows fading
 			float maxDistance = max(abs(f_pos.x - u_shadowAreaCenter.x), abs(f_pos.z - u_shadowAreaCenter.z)); // Max distance to center

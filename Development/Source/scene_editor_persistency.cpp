@@ -225,10 +225,10 @@ bool SceneEditor::_loadSceneFile(bool overwriteCamera)
 			}
 			else if (entityType == "GRAPHICS_DOF")
 			{
-				bool enabled;
+				bool enabled, dynamic;
 				float blurDistance, maxDistance;
-				iss >> enabled >> blurDistance >> maxDistance;
-				_fe3d.gfx_enableDOF(maxDistance, blurDistance);
+				iss >> enabled >> dynamic >> blurDistance >> maxDistance;
+				_fe3d.gfx_enableDOF(dynamic, maxDistance, blurDistance);
 			}
 			else if (entityType == "GRAPHICS_FOG")
 			{
@@ -476,9 +476,10 @@ void SceneEditor::save()
 		enabled = _fe3d.gfx_isDofEnabled();
 		if (enabled)
 		{
+			bool dynamic = _fe3d.gfx_isDofDynamic();
 			float blurDistance = _fe3d.gfx_getDofBlurDistance();
 			float maxDistance = _fe3d.gfx_getDofMaxDistance();
-			file << "GRAPHICS_DOF " << enabled << " " << blurDistance << " " << maxDistance << std::endl;
+			file << "GRAPHICS_DOF " << enabled << " " << dynamic << " " << blurDistance << " " << maxDistance << std::endl;
 		}
 
 		// Fog settings

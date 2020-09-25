@@ -124,10 +124,11 @@ void SceneEditor::initializeGUI()
 	// Left-viewport: mainWindow - sceneEditorMenuSettingsGraphicsDof
 	screenID = "sceneEditorMenuSettingsGraphicsDof";
 	_leftWindow->addScreen(screenID);
-	_leftWindow->getScreen(screenID)->addButton("enabled", vec2(0.0f, 0.63f), vec2(GW("Enabled: NO"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Enabled: NO", LVPC::textColor, LVPC::textHoverColor);
-	_leftWindow->getScreen(screenID)->addButton("blurDistance", vec2(0.0f, 0.21f), vec2(GW("Blur distance"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Blur distance", LVPC::textColor, LVPC::textHoverColor);
-	_leftWindow->getScreen(screenID)->addButton("maxDistance", vec2(0.0f, -0.21f), vec2(GW("DOF distance"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "DOF distance", LVPC::textColor, LVPC::textHoverColor);
-	_leftWindow->getScreen(screenID)->addButton("back", vec2(0.0f, -0.63f), vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("enabled", vec2(0.0f, 0.7f), vec2(GW("Enabled: NO"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Enabled: NO", LVPC::textColor, LVPC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("dynamic", vec2(0.0f, 0.35f), vec2(GW("Dynamic: NO"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Dynamic: NO", LVPC::textColor, LVPC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("blurDistance", vec2(0.0f, 0.0f), vec2(GW("Blur distance"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Blur distance", LVPC::textColor, LVPC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("maxDistance", vec2(0.0f, -0.35f), vec2(GW("DOF distance"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "DOF distance", LVPC::textColor, LVPC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("back", vec2(0.0f, -0.7f), vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
 
 	// Left-viewport: mainWindow - sceneEditorMenuSettingsGraphicsFog
 	screenID = "sceneEditorMenuSettingsGraphicsFog";

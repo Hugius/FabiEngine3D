@@ -94,9 +94,10 @@ void FabiEngine3D::gfx_enableSkyHDR(float brightnessFactor)
 	}
 }
 
-void FabiEngine3D::gfx_enableDOF(float maxDistance, float blurDistance)
+void FabiEngine3D::gfx_enableDOF(bool dynamic, float maxDistance, float blurDistance)
 {
 	_core->_renderBus.setDofEnabled(true);
+	_core->_renderBus.setDofDynamic(dynamic);
 	_core->_renderBus.setDofMaxDistance(maxDistance);
 	_core->_renderBus.setDofBlurDistance(blurDistance);
 }
@@ -274,6 +275,11 @@ bool FabiEngine3D::gfx_isShadowsEnabled()
 bool FabiEngine3D::gfx_isDofEnabled()
 {
 	return _core->_renderBus.isDofEnabled();
+}
+
+bool FabiEngine3D::gfx_isDofDynamic()
+{
+	return _core->_renderBus.isDofDynamic();
 }
 
 bool FabiEngine3D::gfx_isMotionBlurEnabled()

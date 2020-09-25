@@ -21,9 +21,10 @@ uniform float u_lensFlareAlpha;
 uniform float u_lensFlareIntensity;
 
 // Boolean uniforms
-uniform bool u_bloomEnabled;
-uniform bool u_dofEnabled;
-uniform bool u_lensFlareEnabled;
+uniform bool u_isBloomEnabled;
+uniform bool u_isDofEnabled;
+uniform bool u_isDofDynamic;
+uniform bool u_isLensFlareEnabled;
 
 // Out variables
 layout (location = 0) out vec4 o_finalColor;
@@ -50,17 +51,17 @@ void main()
     o_finalColor.rgb = sceneColor;
 
 	// Bloom
-	o_finalColor.rgb += (bloomColor * float(u_bloomEnabled));
+	o_finalColor.rgb += (bloomColor * float(u_isBloomEnabled));
 	
 	// DOF
-	if(u_dofEnabled)
+	if(u_isDofEnabled)
 	{
         // Distance from camera to direct object
         float middleFragmentDistance = (middleFragmentDepth * u_farZ);
         float middleSmoothingDistance = (u_dofMaxDistance * 0.2f);
 
         // Check if camera is looking at a close object
-        if(middleFragmentDistance < (u_dofMaxDistance + middleSmoothingDistance))
+        if(middleFragmentDistance < (u_dofMaxDistance + middleSmoothingDistance) || !u_isDofDynamic)
         {
             // Distance from camera to fragment in world space
             float fragmentDistance = (currentFragmentDepth * u_farZ);
@@ -68,7 +69,7 @@ void main()
             // Smooth blur overlap distance in world space
             float blurSmoothingDistance = u_dofBlurDistance * 0.5f;
 
-            // Calculate DOF blur strength based fragment distance
+            // Calculate DOF blur strength based on fragment distance
             float blurMixValue = (fragmentDistance - (u_dofBlurDistance - blurSmoothingDistance)) / blurSmoothingDistance;
 
             // Calculate DOF blur strength based on middle distance
@@ -79,7 +80,7 @@ void main()
             distanceMixValue = clamp(distanceMixValue, 0.0f, 1.0f);
 
             // Apply camera distance factor
-            blurMixValue = mix(0.0f, blurMixValue, distanceMixValue);
+            blurMixValue = mix(0.0f, blurMixValue, u_isDofDynamic ? distanceMixValue : 1.0f);
 
             // Add bloom
             vec3 dofColor = blurColor + bloomColor;
@@ -90,7 +91,7 @@ void main()
 	}
 
     // Lens flare
-    o_finalColor.rgb += (flareColor * u_lensFlareAlpha * u_lensFlareIntensity * float(u_lensFlareEnabled) * f_flareOcclusion);
+    o_finalColor.rgb += (flareColor * u_lensFlareAlpha * u_lensFlareIntensity * float(u_isLensFlareEnabled) * f_flareOcclusion);
 
 	// Alpha value
 	o_finalColor.a = 1.0f;

@@ -120,11 +120,20 @@ void BottomViewportController::initialize()
 void BottomViewportController::update()
 {
 	// Update FPS
+	static float totalFPS = 0.0f;
+	static int fpsCount = 0;
 	if (_fe3d.misc_checkInterval("fps", 50))
 	{
 		string fpsTextID = _statsScreen->getTextfield("fps")->getEntityID();
-		string text = "FPS: " + to_string(static_cast<int>(_fe3d.misc_getFPS()));
+		string text = "FPS: " + to_string(static_cast<int>(totalFPS / fpsCount));
 		_fe3d.textEntity_setTextContent(fpsTextID, text, 0.0125f);
+		totalFPS = 0.0f;
+		fpsCount = 0;
+	}
+	else
+	{
+		totalFPS += _fe3d.misc_getFPS();
+		fpsCount++;
 	}
 
 	// Update GPU stats
@@ -231,7 +240,7 @@ void BottomViewportController::update()
 	}
 
 	// Update performance profiling
-	if (_fe3d.misc_checkInterval("lightEntityCount", 50))
+	if (_fe3d.misc_checkInterval("performanceProfiling", 50))
 	{
 		auto performanceStats = _fe3d.misc_getPerformanceProfilingStatistics();
 		for (auto& [key, value] : performanceStats)

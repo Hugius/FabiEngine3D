@@ -499,7 +499,7 @@ public:
 	void gfx_enableBloom(float intensity, float brightnessTreshold, int blurSize);
 	void gfx_enableWaterEffects();
 	void gfx_enableSkyHDR(float brightnessFactor);
-	void gfx_enableDOF(float maxDistance, float blurDistance);
+	void gfx_enableDOF(bool dynamic, float maxDistance, float blurDistance);
 	void gfx_enableMotionBlur(float strength);
 	void gfx_enableLensFlare(const string& texturePath, float intensity, float multiplier);
 	void gfx_disableAmbientLighting();
@@ -536,6 +536,7 @@ public:
 	bool gfx_isSkyHdrEnabled();
 	bool gfx_isShadowsEnabled();
 	bool gfx_isDofEnabled();
+	bool gfx_isDofDynamic();
 	bool gfx_isMotionBlurEnabled();
 	bool gfx_isLensFlareEnabled();
 	bool gfx_isShadowFollowingCamera();

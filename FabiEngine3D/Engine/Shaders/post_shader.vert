@@ -24,7 +24,7 @@ uniform float u_nearZ;
 // Boolean uniforms
 uniform bool u_mirrorHor;
 uniform bool u_mirrorVer;
-uniform bool u_lensFlareEnabled;
+uniform bool u_isLensFlareEnabled;
 
 // Out variables
 out vec2 f_uv;
@@ -44,7 +44,7 @@ void main()
 
 float calculateFlareOcclusion()
 {
-    if(u_lensFlareEnabled && u_flareSourcePositionClipspace.w > 0.0f)
+    if(u_isLensFlareEnabled && u_flareSourcePositionClipspace.w > 0.0f)
     {
         // Convert to UV space
         vec2 lightSourceClipPos = u_flareSourcePositionClipspace.xy / u_flareSourcePositionClipspace.w;

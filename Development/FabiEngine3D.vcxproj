@@ -178,6 +178,7 @@
     <ClInclude Include="Source\script_event.hpp" />
     <ClInclude Include="Source\script_executor.hpp" />
     <ClInclude Include="Source\script_line.hpp" />
+    <ClInclude Include="Source\script_variable.hpp" />
     <ClInclude Include="Source\settings_editor.hpp" />
     <ClInclude Include="Source\top_viewport_controller.hpp" />
     <ClInclude Include="Source\engine_gui_global_screen.hpp" />
@@ -315,6 +316,7 @@
     <ClCompile Include="Source\script_event_input.cpp" />
     <ClCompile Include="Source\script_event_time.cpp" />
     <ClCompile Include="Source\script_executor.cpp" />
+    <ClCompile Include="Source\script_value.cpp" />
     <ClCompile Include="Source\settings_editor.cpp" />
     <ClCompile Include="Source\top_viewport_controller_core.cpp" />
     <ClCompile Include="Source\engine_gui_button.cpp" />
@@ -414,6 +416,7 @@
     <None Include="..\FabiEngine3D\Engine\Shaders\terrain_entity_shader.vert" />
     <None Include="..\FabiEngine3D\Engine\Shaders\water_entity_shader.frag" />
     <None Include="..\FabiEngine3D\Engine\Shaders\water_entity_shader.vert" />
+    <None Include="Source\script_value.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\FabiEngine3D\engine\icon\AppIcon.rc" />

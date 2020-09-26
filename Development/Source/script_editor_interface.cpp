@@ -111,6 +111,11 @@ void ScriptEditor::_generateScriptLineOverview(ScriptLine& scriptLine)
 	}
 }
 
+void ScriptEditor::_generateScriptVariableOverview(ScriptVariable& scriptVariable)
+{
+
+}
+
 void ScriptEditor::_addChoiceList(ChoiceListSort listSort, ChoiceListType listType, int activeIndex)
 {
 	// General variables
@@ -124,8 +129,11 @@ void ScriptEditor::_addChoiceList(ChoiceListSort listSort, ChoiceListType listTy
 	// Input options
 	vector<string> inputTypeNames = { "KEYBOARD", "MOUSE" };
 	vector<string> inputMouseTypeNames = { "BUTTON", "SCROLL_UP", "SCROLL_DOWN" };
-	vector<string> inputKeyNames = { "KEY_A", "KEY_B", "KEY_C", "KEY_D", "KEY_E", "KEY_F", "KEY_G", "KEY_H", "KEY_I", "KEY_J", "KEY_K", "KEY_L", 
-		"KEY_M", "KEY_N", "KEY_O", "KEY_P", "KEY_Q", "KEY_R", "KEY_S", "KEY_T", "KEY_U", "KEY_V", "KEY_W", "KEY_X", "KEY_Y", "KEY_Z" };
+	vector<string> inputKeyNames = { 
+		"KEY_A", "KEY_B", "KEY_C", "KEY_D", "KEY_E", "KEY_F", "KEY_G", "KEY_H", "KEY_I", "KEY_J", "KEY_K", "KEY_L",
+		"KEY_M", "KEY_N", "KEY_O", "KEY_P", "KEY_Q", "KEY_R", "KEY_S", "KEY_T", "KEY_U", "KEY_V", "KEY_W", "KEY_X", "KEY_Y", "KEY_Z",
+		"KEY_LSHIFT", "KEY_RSHIFT", "KEY_LCTRL", "KEY_RCTRL", "KEY_SPACE", "KEY_ENTER", "KEY_BACKSPACE", "KEY_CAPSLOCK", "KEY_TAB", 
+		"KEY_LEFT", "KEY_RIGHT", "KEY_UP", "KEY_DOWN", "KEY_0", "KEY_1", "KEY_2", "KEY_3", "KEY_4", "KEY_5", "KEY_6", "KEY_7", "KEY_8", "KEY_9" };
 	vector<string> inputMouseNames = { "BUTTON_LEFT", "BUTTON_MIDDLE", "BUTTON_RIGHT" };
 	vector<string> inputMethodNames = { "DOWN", "PRESSED", "TOGGLED" };
 
@@ -137,6 +145,8 @@ void ScriptEditor::_addChoiceList(ChoiceListSort listSort, ChoiceListType listTy
 
 	// Miscellaneous options
 	vector<string> toggleNames = { "ON", "OFF" };
+	vector<string> decisionNames = { "YES", "NO" };
+	vector<string> varTypeNames = {"STRING", "BOOLEAN", "NUMBER"};
 
 	// Determine list to be generated
 	switch (listType)
@@ -225,6 +235,20 @@ void ScriptEditor::_addChoiceList(ChoiceListSort listSort, ChoiceListType listTy
 			optionNames = toggleNames;
 			break;
 		}
+
+		// Miscellaneous
+		case ChoiceListType::VARIABLE_CONSTANT:
+		{
+			headerName = "Changeable";
+			optionNames = decisionNames;
+			break;
+		}
+		case ChoiceListType::VARIABLE_TYPE:
+		{
+			headerName = "Data type";
+			optionNames = varTypeNames;
+			break;
+		}
 	}
 
 	// Add new choicelist
@@ -270,7 +294,6 @@ void ScriptEditor::_addChoiceList(ChoiceListSort listSort, ChoiceListType listTy
 			optionPosition, vec3(0.0f), optionSize, 0, 0);
 		_fe3d.billboardEntity_setMaxY(ID, maxY);
 		_fe3d.aabbEntity_bindToBillboardEntity(ID, vec3(optionSize.x, optionSize.y, 0.1f), true);
-
 
 		// Only 1 option
 		if (activeIndex != -1)

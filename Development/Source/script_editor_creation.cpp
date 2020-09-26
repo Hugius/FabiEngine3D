@@ -1,8 +1,8 @@
 #include "script_editor.hpp"
 
-void ScriptEditor::_updateScriptlineCreation()
+void ScriptEditor::_updateScriptLineAdding()
 {
-	if ((_isCreatingScriptline && _allowedToAddScriptLine) || _isUpdatingScriptline)
+	if ((_isAddingScriptLine && _allowedToAddScriptLine) || _isUpdatingScriptLine)
 	{
 		// Placeholders
 		static bool firstTime = true;
@@ -12,7 +12,7 @@ void ScriptEditor::_updateScriptlineCreation()
 		static shared_ptr<ScriptAction> action = nullptr;
 		
 		// Fill the event & action placeholders
-		if (firstTime && !_isUpdatingScriptline)
+		if (firstTime && !_isUpdatingScriptLine)
 		{
 			// For every choicelist that has been added
 			for (auto& choiceList : _choiceListStack)
@@ -109,14 +109,14 @@ void ScriptEditor::_updateScriptlineCreation()
 		{
 			firstTime = false;
 
-			// Set scriptline to be updated
-			if (_isUpdatingScriptline)
+			// Set variable to be updated
+			if (_isUpdatingScriptLine)
 			{
 				event = _script->getScriptLine(_currentScriptLineID).event;
 				action = _script->getScriptLine(_currentScriptLineID).action;
 			}
 
-			// Determine script type
+			// Determine variable type
 			switch (action->getType())
 			{
 				case ScriptActionType::CAMERA:
@@ -198,8 +198,8 @@ void ScriptEditor::_updateScriptlineCreation()
 			else
 			{
 				// Reset the creation process
-				_isCreatingScriptline = false;
-				_isUpdatingScriptline = false;
+				_isAddingScriptLine = false;
+				_isUpdatingScriptLine = false;
 				firstTime = true;
 				needsValueFilling = false;
 				finishedValueFilling = false;
@@ -212,17 +212,17 @@ void ScriptEditor::_updateScriptlineCreation()
 		// Create or update scriptLine
 		if (finishedValueFilling || !needsValueFilling)
 		{
-			if (_isUpdatingScriptline) // Update current scriptline
+			if (_isUpdatingScriptLine) // Update current scriptLine
 			{
 				_clearChoiceLists();
 				_generateScriptLineOverview(_script->getScriptLine(_currentScriptLineID));
-				_isUpdatingScriptline = false;
+				_isUpdatingScriptLine = false;
 			}
-			else if(_isCreatingScriptline) // Create new scriptline
+			else if(_isAddingScriptLine) // Create new scriptLine
 			{
 				_script->addLine(to_string(_script->getLineCount() + 1), event, action);
 				_clearChoiceLists();
-				_isCreatingScriptline = false;
+				_isAddingScriptLine = false;
 				_allowedToAddScriptLine = false;
 			}
 
@@ -232,6 +232,159 @@ void ScriptEditor::_updateScriptlineCreation()
 			finishedValueFilling = false;
 			event = nullptr;
 			action = nullptr;
+		}
+	}
+}
+
+void ScriptEditor::_updateScriptVariableAdding()
+{
+	if ((_isAddingScriptVariable && _allowedToAddScriptVariable) || _isUpdatingScriptVariable)
+	{
+		// Placeholders
+		static bool firstTime = true;
+		static bool needsValueFilling = false;
+		static bool finishedValueFilling = false;
+		shared_ptr<ScriptValue> value = nullptr;
+		ScriptValueType type = ScriptValueType::NONE;
+		bool constant = false;
+
+		// Fill the variable placeholder
+		if (firstTime && !_isUpdatingScriptVariable)
+		{
+			// For every choicelist that has been added
+			for (auto& choiceList : _choiceListStack)
+			{
+				// Chosen option index
+				int optionIndex = choiceList.selectedOptionIndex;
+
+				// Determine choicelist sort
+				if (choiceList.sort == ChoiceListSort::VARIABLE)
+				{
+					// Determine choicelist type
+					switch (choiceList.type)
+					{
+						case ChoiceListType::VARIABLE_CONSTANT:
+						{
+							constant = (choiceList.selectedOptionIndex == 0);
+							break;
+						}
+						case ChoiceListType::VARIABLE_TYPE:
+						{
+							if (choiceList.selectedOptionIndex == 0) type = ScriptValueType::STRING;
+							if (choiceList.selectedOptionIndex == 1) type = ScriptValueType::BOOLEAN;
+							if (choiceList.selectedOptionIndex == 2) type = ScriptValueType::NUMBER;
+							break;
+						}
+					}
+				}
+			}
+
+			// Create new value
+			value = make_shared<ScriptValue>(type, constant);
+		}
+
+		// Add valuefield for the value
+		if (firstTime)
+		{
+			firstTime = false;
+
+			// Set variable to be updated
+			if (_isUpdatingScriptVariable)
+			{
+				value = _script->getScriptVariable(_currentScriptVariableID).value;
+			}
+
+			// Determine variable type
+			switch (value->getType())
+			{
+				case ScriptValueType::STRING:
+				{
+					_gui->getGlobalScreen()->addValueForm("string", "String value", 0.0f, vec2(0.0f), vec2(0.2f, 0.1f));
+					break;
+				}
+				case ScriptValueType::BOOLEAN:
+				{
+					_gui->getGlobalScreen()->addAnswerForm("boolean", "Boolean value", vec2(0.2f, 0.1f));
+					break;
+				}
+				case ScriptValueType::NUMBER:
+				{
+					_gui->getGlobalScreen()->addValueForm("number", "Number value", 0.0f, vec2(0.0f), vec2(0.2f, 0.1f));
+					break;
+				}
+			}
+		}
+
+		// Update value filling
+		if (needsValueFilling && !finishedValueFilling)
+		{
+			// Determine value type
+			if (_gui->getGlobalScreen()->isValueFormExisting("string")) // String
+			{
+				string stringValue;
+				if (_gui->getGlobalScreen()->checkValueForm("string", stringValue))
+				{
+					dynamic_pointer_cast<ScriptValue>(value)->setString(stringValue);
+					finishedValueFilling = true;
+				}
+			}
+			else if (_gui->getGlobalScreen()->isAnswerFormExisting("boolean")) // Boolean
+			{
+				if (_gui->getGlobalScreen()->isAnswerFormConfirmed("boolean"))
+				{
+					dynamic_pointer_cast<ScriptValue>(value)->setBoolean(true);
+					finishedValueFilling = true;
+				}
+				else if (_gui->getGlobalScreen()->isAnswerFormCancelled("boolean"))
+				{
+					dynamic_pointer_cast<ScriptValue>(value)->setBoolean(false);
+					finishedValueFilling = true;
+				}
+			}
+			else if (_gui->getGlobalScreen()->isValueFormExisting("number")) // Number
+			{
+				float floatValue;
+				if (_gui->getGlobalScreen()->checkValueForm("float", floatValue))
+				{
+					dynamic_pointer_cast<ScriptValue>(value)->setNumber(floatValue);
+					finishedValueFilling = true;
+				}
+			}
+			else
+			{
+				// Reset the creation process
+				_isAddingScriptVariable = false;
+				_isUpdatingScriptVariable = false;
+				firstTime = true;
+				needsValueFilling = false;
+				finishedValueFilling = false;
+				value = nullptr;
+				return;
+			}
+		}
+
+		// Create or update variable
+		if (finishedValueFilling || !needsValueFilling)
+		{
+			if (_isUpdatingScriptVariable) // Update current variable
+			{
+				_clearChoiceLists();
+				_generateScriptVariableOverview(_script->getScriptVariable(_currentScriptVariableID));
+				_isUpdatingScriptVariable = false;
+			}
+			else if (_isAddingScriptVariable) // Create new variable
+			{
+				_script->addVariable(_newScriptVariableID, value);
+				_clearChoiceLists();
+				_isAddingScriptVariable = false;
+				_allowedToAddScriptVariable = false;
+			}
+
+			// Reset the creation or updating process
+			firstTime = true;
+			needsValueFilling = false;
+			finishedValueFilling = false;
+			value = nullptr;
 		}
 	}
 }

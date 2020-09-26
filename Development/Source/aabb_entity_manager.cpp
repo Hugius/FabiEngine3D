@@ -89,7 +89,7 @@ void AabbEntityManager::update(const vector<GameEntity*>& gameEntities, const ve
 					}
 				}
 			}
-			else
+			else if(entity->getParentType() == "billboardEntity")
 			{
 				for (auto& billboardEntity : billboardEntities) // Loop over BILLBOARD entities
 				{

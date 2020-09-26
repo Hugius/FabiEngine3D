@@ -67,12 +67,14 @@ public:
 	string getSelectedChoiceFormButtonID(const string& ID);
 	bool isChoiceFormCancelled(const string& ID);
 	void removeChoiceForm(const string& ID);
+	bool isChoiceFormExisting(const string& ID);
 
 	// Answer form
 	void addAnswerForm(const string& ID, string title, vec2 position);
 	bool isAnswerFormConfirmed(const string& ID);
 	bool isAnswerFormCancelled(const string& ID);
 	void removeAnswerForm(const string& ID);
+	bool isAnswerFormExisting(const string& ID);
 
 private:
 	void _updateValueFilling();

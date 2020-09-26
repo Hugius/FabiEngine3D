@@ -218,7 +218,7 @@ void EngineGuiWriteField::_updateTyping()
 		}
 
 		// Input confirmation
-		if (_fe3d.input_getKeyPressed(Input::KEY_RETURN))
+		if (_fe3d.input_getKeyPressed(Input::KEY_ENTER))
 		{
 			if (_currentTextContent != "")
 			{

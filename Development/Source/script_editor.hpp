@@ -17,6 +17,7 @@ class ScriptEditor final
 	{
 		EVENT,
 		ACTION,
+		VARIABLE,
 		NONE
 	};
 
@@ -52,6 +53,8 @@ class ScriptEditor final
 		ACTION_CAMERA_VALUES,
 
 		// Miscellaneous
+		VARIABLE_CONSTANT,
+		VARIABLE_TYPE,
 		NONE
 	};
 
@@ -91,9 +94,11 @@ private:
 	void _updateGUI();
 	void _updateChoiceLists();
 	void _updateNavigation();
-	void _updateScriptlineCreation();
+	void _updateScriptLineAdding();
+	void _updateScriptVariableAdding();
 	void _updateMiscellaneous();
 	void _generateScriptLineOverview(ScriptLine& scriptLine);
+	void _generateScriptVariableOverview(ScriptVariable& scriptVariable);
 	void _addChoiceList(ChoiceListSort listSort, ChoiceListType listType, int activeIndex = -1);
 	void _addChoiceList(ChoiceListSort listSort, ChoiceListType listType, string headerName, vector<string> optionNames, int activeIndex = -1);
 	void _removeChoiceList();
@@ -118,6 +123,8 @@ private:
 	// Editor variables
 	string _currentProjectName = "";
 	string _currentScriptLineID = "";
+	string _currentScriptVariableID = "";
+	string _newScriptVariableID = "";
 	const vec3 _cameraStartingPosition = vec3(0.0f, 0.0f, 10.0f);
 	float _scrollingAcceleration = 0.0f;
 	float _cameraAcceleration = 0.0f;
@@ -125,8 +132,12 @@ private:
 	const float _optionBillboardHeight = 0.75f;
 	unsigned int _pointLightCounter = 0;
 	bool _allowedToAddScriptLine = false;
-	bool _isCreatingScript = false;
-	bool _isUpdatingScriptline = false;
-	bool _isCreatingScriptline = false;
+	bool _isCreatingScriptLine = false;
+	bool _isUpdatingScriptLine = false;
+	bool _isAddingScriptLine = false;
+	bool _allowedToAddScriptVariable = false;
+	bool _isCreatingScriptVariable = false;
+	bool _isUpdatingScriptVariable = false;
+	bool _isAddingScriptVariable = false;
 	bool _isLoaded = false;
 };

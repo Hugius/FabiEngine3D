@@ -7,7 +7,8 @@ void ScriptEditor::update()
 	_updateGUI();
 	_updateChoiceLists();
 	_updateNavigation();
-	_updateScriptlineCreation();
+	_updateScriptLineAdding();
+	_updateScriptVariableAdding();
 	_updateMiscellaneous();
 }
 
@@ -15,22 +16,27 @@ void ScriptEditor::_updateGUI()
 {
 	if (_isLoaded)
 	{
-		auto screen = _leftWindow->getScreen("scriptEditorMenuMain");
+		// Main screen
+		auto mainScreen = _leftWindow->getScreen("scriptEditorMenuMain");
 		
 		// Check if LMB is pressed
 		if (!_gui->getGlobalScreen()->isFocused())
 		{
 			if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
 			{
-				if (screen->getButton("addLine")->isHovered())
+				if (mainScreen->getButton("variables")->isHovered())
 				{
-					_isCreatingScriptline = true;
+					_leftWindow->setActiveScreen("scriptEditorMenuVariables");
 				}
-				else if (screen->getButton("updateLine")->isHovered())
+				else if (mainScreen->getButton("addLine")->isHovered())
 				{
-					_isUpdatingScriptline = true;
+					_isAddingScriptLine = true;
 				}
-				else if (screen->getButton("deleteLine")->isHovered())
+				else if (mainScreen->getButton("updateLine")->isHovered())
+				{
+					_isUpdatingScriptLine = true;
+				}
+				else if (mainScreen->getButton("deleteLine")->isHovered())
 				{
 					// Remove line from script
 					_clearChoiceLists();
@@ -38,19 +44,19 @@ void ScriptEditor::_updateGUI()
 					_calibrateScriptLines();
 					_currentScriptLineID = "";
 				}
-				else if (screen->getButton("createLine")->isHovered())
+				else if (mainScreen->getButton("createLine")->isHovered())
 				{
 					// Add default choicelist
 					_clearChoiceLists();
 					_addChoiceList(ChoiceListSort::EVENT, ChoiceListType::EVENT_TYPES);
-					_isCreatingScript = true;
+					_isCreatingScriptLine = true;
 					_allowedToAddScriptLine = false;
 				}
-				else if (screen->getButton("viewLine")->isHovered())
+				else if (mainScreen->getButton("viewLine")->isHovered())
 				{
 					_gui->getGlobalScreen()->addChoiceForm("scriptLinesList", "View script", vec2(0.0f, 0.0f), _script->getAllScriptLineIDs());
 				}
-				else if (screen->getButton("back")->isHovered())
+				else if (mainScreen->getButton("back")->isHovered())
 				{
 					_gui->getGlobalScreen()->addAnswerForm("exitScriptEditor", "Save changes?", vec2(0.0f, 0.25f));
 				}
@@ -69,12 +75,50 @@ void ScriptEditor::_updateGUI()
 			unload();
 			_leftWindow->setActiveScreen("main");
 		}
+
+		// Variables screen
+		auto variableScreen = _leftWindow->getScreen("scriptEditorMenuVariables");
+
+		// Check if LMB is pressed
+		if (!_gui->getGlobalScreen()->isFocused())
+		{
+			if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
+			{
+				if (variableScreen->getButton("addVariable")->isHovered())
+				{
+					_isAddingScriptVariable = true;
+				}
+				else if (variableScreen->getButton("updateVariable")->isHovered())
+				{
+					_isUpdatingScriptVariable = true;
+				}
+				else if (variableScreen->getButton("deleteVariable")->isHovered())
+				{
+					// Remove variable from script
+					_clearChoiceLists();
+					_script->removeVariable(_currentScriptVariableID);
+					_currentScriptVariableID = "";
+				}
+				else if (variableScreen->getButton("createVariable")->isHovered())
+				{
+					_gui->getGlobalScreen()->addValueForm("variableName", "New variable name", "", vec2(0.0f, 0.0f), vec2(0.2f, 0.1f));
+				}
+				else if (variableScreen->getButton("viewVariable")->isHovered())
+				{
+					_gui->getGlobalScreen()->addChoiceForm("scriptVariablesList", "View variable", vec2(0.0f, 0.0f), _script->getAllScriptVariableIDs());
+				}
+				else if (variableScreen->getButton("back")->isHovered())
+				{
+					_leftWindow->setActiveScreen("scriptEditorMenuMain");
+				}
+			}
+		}
 	}
 }
 
 void ScriptEditor::_updateChoiceLists()
 {
-	if (_isLoaded && _isCreatingScript && !_allowedToAddScriptLine && !_gui->getGlobalScreen()->isFocused())
+	if (_isLoaded && _isCreatingScriptLine && !_allowedToAddScriptLine && !_gui->getGlobalScreen()->isFocused())
 	{
 		// Update hoverability & color & scrolling
 		for (auto& list : _choiceListStack)
@@ -84,8 +128,8 @@ void ScriptEditor::_updateChoiceLists()
 			bool isResponsive = (listIndex == static_cast<int>(_choiceListStack.back().type));
 			int scrollingSpeed = _fe3d.input_getMouseWheelY();
 
-			// Check if allowed to scroll
-			if (isResponsive)
+			// Option scrolling for script line creation
+			if (_isCreatingScriptLine && isResponsive)
 			{
 				// Scrolling values
 				string baseID = to_string(listIndex) + "_option_";
@@ -162,11 +206,11 @@ void ScriptEditor::_updateChoiceLists()
 
 void ScriptEditor::_updateNavigation()
 {
-	if (_isLoaded && _isCreatingScript && !_gui->getGlobalScreen()->isFocused())
+	if (_isLoaded && (_isCreatingScriptLine || _isCreatingScriptVariable) && !_gui->getGlobalScreen()->isFocused())
 	{
 		// Hovering over options
 		string hoveredEntityID = _fe3d.collision_checkCursorInAny();
-		if (hoveredEntityID != "" && !_allowedToAddScriptLine)
+		if (hoveredEntityID != "" && !_allowedToAddScriptLine && !_allowedToAddScriptVariable)
 		{
 			_fe3d.billboardEntity_setColor(hoveredEntityID, vec3(0.0f, 1.0f, 0.0f));
 			_fe3d.lightEntity_setPosition("@@selectionLight", _fe3d.billboardEntity_getPosition(hoveredEntityID) + vec3(0.0f, 0.0f, 1.0f));
@@ -178,7 +222,7 @@ void ScriptEditor::_updateNavigation()
 		}
 
 		// Clicking a hovered option
-		if (!_allowedToAddScriptLine)
+		if (!_allowedToAddScriptLine && !_allowedToAddScriptVariable)
 		{
 			if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
 			{
@@ -332,88 +376,43 @@ void ScriptEditor::_updateNavigation()
 							_allowedToAddScriptLine = true;
 							break;
 						}
+
+						// Variable
+						case ChoiceListType::VARIABLE_CONSTANT:
+						{
+							_addChoiceList(ChoiceListSort::VARIABLE, ChoiceListType::VARIABLE_TYPE);
+							break;
+						}
+						case ChoiceListType::VARIABLE_TYPE:
+						{
+							_allowedToAddScriptVariable = true;
+							break;
+						}
 					}
 				}
 			}
 		}
 
-		// Update value filling
-
-		// Remove last chosen option
-		if (_fe3d.input_getKeyPressed(Input::KEY_BACKSPACE))
+		// Only for scriptLines
+		if (_isCreatingScriptLine)
 		{
-			// Cannot remove default choice list
-			if (_choiceListStack.size() > 1)
+			// Remove last chosen option
+			if (_fe3d.input_getKeyPressed(Input::KEY_BACKSPACE))
 			{
-				_removeChoiceList();
-				_fe3d.lightEntity_delete(to_string(_pointLightCounter));
-				_pointLightCounter--;
-
-				// Script cannot be added if last option is removed
-				if (_allowedToAddScriptLine)
+				// Cannot remove default choice list
+				if (_choiceListStack.size() > 1)
 				{
-					_allowedToAddScriptLine = false;
+					_removeChoiceList();
+					_fe3d.lightEntity_delete(to_string(_pointLightCounter));
+					_pointLightCounter--;
+
+					// Script cannot be added if last option is removed
+					if (_allowedToAddScriptLine)
+					{
+						_allowedToAddScriptLine = false;
+					}
 				}
 			}
-		}
-	}
-}
-
-void ScriptEditor::_updateMiscellaneous()
-{
-	if (_isLoaded)
-	{
-		//  Smooth scrolling movement
-		_scrollingAcceleration *= 0.95f;
-
-		if (!_gui->getGlobalScreen()->isFocused())
-		{
-			// Camear movement input
-			if (_fe3d.input_getKeyDown(Input::KEY_A))
-			{
-				_cameraAcceleration -= 0.005f;
-			}
-			else if (_fe3d.input_getKeyDown(Input::KEY_D))
-			{
-				_cameraAcceleration += 0.005f;
-			}
-		}
-
-		// Smooth camera movement
-		_cameraAcceleration = std::clamp(_cameraAcceleration, -0.3f, 0.3f);
-		_cameraAcceleration *= 0.965f;
-
-		// Cannot go out of screen
-		if (_fe3d.camera_getPosition().x < _cameraStartingPosition.x)
-		{
-			_cameraAcceleration = 0.0f;
-			_fe3d.camera_setPosition(_cameraStartingPosition);
-		}
-
-		// Move camera
-		_fe3d.camera_translate(vec3(_cameraAcceleration, 0.0f, 0.0f));
-
-		// Add & delete buttons hoverability
-		_leftWindow->getScreen("scriptEditorMenuMain")->getButton("addLine")->setHoverable(_allowedToAddScriptLine);
-		_leftWindow->getScreen("scriptEditorMenuMain")->getButton("updateLine")->setHoverable(_currentScriptLineID != "");
-		_leftWindow->getScreen("scriptEditorMenuMain")->getButton("deleteLine")->setHoverable(_currentScriptLineID != "");
-
-		// Check if existing script line chosen for viewing
-		string selectedButtonID = _gui->getGlobalScreen()->getSelectedChoiceFormButtonID("scriptLinesList");
-		if (selectedButtonID != "")
-		{
-			if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
-			{
-				_generateScriptLineOverview(_script->getScriptLine(selectedButtonID));
-				_gui->getGlobalScreen()->removeChoiceForm("scriptLinesList");
-				_currentScriptLineID = selectedButtonID;
-				_isCreatingScript = false;
-				_allowedToAddScriptLine = false;
-			}
-		}
-		else if (_gui->getGlobalScreen()->isChoiceFormCancelled("scriptLinesList"))
-		{
-			_gui->getGlobalScreen()->removeChoiceForm("scriptLinesList");
 		}
 	}
 }

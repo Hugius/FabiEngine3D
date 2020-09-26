@@ -68,7 +68,7 @@ enum class Input
 	KEY_X               = 'x',
 	KEY_Y               = 'y',
 	KEY_Z               = 'z',
-	KEY_RETURN          = '\r',
+	KEY_ENTER          = '\r',
 	KEY_ESCAPE          = '\033',
 	KEY_BACKSPACE       = '\b',
 	KEY_TAB             = '\t',

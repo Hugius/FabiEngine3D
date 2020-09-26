@@ -241,6 +241,11 @@ void EngineGuiGlobalScreen::removeChoiceForm(const string& ID)
 	}
 }
 
+bool EngineGuiGlobalScreen::isChoiceFormExisting(const string& ID)
+{
+	return (ID == _choiceFormID);
+}
+
 void EngineGuiGlobalScreen::addAnswerForm(const string& ID, string title, vec2 position)
 {
 	if (_answerFormID == "")
@@ -297,6 +302,11 @@ void EngineGuiGlobalScreen::removeAnswerForm(const string& ID)
 		_isFocused = false;
 		_answerFormID = "";
 	}
+}
+
+bool EngineGuiGlobalScreen::isAnswerFormExisting(const string& ID)
+{
+	return (ID == _answerFormID);
 }
 
 void EngineGuiGlobalScreen::_updateValueFilling()

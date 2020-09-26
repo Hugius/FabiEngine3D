@@ -454,6 +454,9 @@
     <ClCompile Include="Source\billboard_editor_persistency.cpp">
       <Filter>src\Editor System\Billboard Editor\Core</Filter>
     </ClCompile>
+    <ClCompile Include="Source\script_value.cpp">
+      <Filter>src\Scripting System\Values</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\obj_loader.hpp">
@@ -741,6 +744,9 @@
     <ClInclude Include="Source\engine_gui_writefield.hpp">
       <Filter>src\GUI System\Elements</Filter>
     </ClInclude>
+    <ClInclude Include="Source\script_variable.hpp">
+      <Filter>src\Scripting System\Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -944,6 +950,9 @@
     <Filter Include="src\GUI System\Elements">
       <UniqueIdentifier>{21adc94a-d3c8-45c0-9dca-7651507f0e80}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Scripting System\Values">
+      <UniqueIdentifier>{59d6a649-6476-46f1-ad35-28278273b1ca}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\FabiEngine3D\Engine\Shaders\aabb_entity_shader.vert">
@@ -1023,6 +1032,9 @@
     </None>
     <None Include="..\FabiEngine3D\engine\shaders\aabb_entity_shader.frag">
       <Filter>src\Rendering System\Shaders\Entity Shaders</Filter>
+    </None>
+    <None Include="Source\script_value.hpp">
+      <Filter>src\Scripting System\Values</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

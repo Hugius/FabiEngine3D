@@ -30,7 +30,7 @@ void ScriptEditor::_loadScriptFromFile()
 		// Read script data
 		while (std::getline(file, line))
 		{
-			// Scriptline contents
+			// ScriptLine contents
 			shared_ptr<ScriptEvent> event = nullptr;
 			shared_ptr<ScriptAction> action = nullptr;
 

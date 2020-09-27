@@ -24,18 +24,18 @@ class ScriptEditor final
 	enum class ChoiceListType
 	{
 		// Types
-		EVENT_TYPES,
-		ACTION_TYPES,
+		EVENT_TYPE,
+		ACTION_TYPE,
 
 		// Initialization eventt
 		EVENT_INITIALIZATION,
 
 		// Input event
-		EVENT_INPUT_TYPES,
-		EVENT_INPUT_MOUSE_TYPES,
-		EVENT_INPUT_KEY_NAMES,
-		EVENT_INPUT_MOUSE_BUTTONS,
-		EVENT_INPUT_METHODS,
+		EVENT_INPUT_TYPE,
+		EVENT_INPUT_MOUSE_TYPE,
+		EVENT_INPUT_KEY_NAME,
+		EVENT_INPUT_MOUSE_BUTTON,
+		EVENT_INPUT_METHOD,
 
 		// Collision event
 
@@ -45,16 +45,18 @@ class ScriptEditor final
 		// Condition event
 
 		// Camera actions
-		ACTION_CAMERA_TYPES,
-		ACTION_CAMERA_DIRECTIONS,
-		ACTION_CAMERA_FOLLOWS,
-		ACTION_CAMERA_METHODS,
+		ACTION_CAMERA_TYPE,
+		ACTION_CAMERA_DIRECTION,
+		ACTION_CAMERA_FOLLOW,
+		ACTION_CAMERA_METHOD,
 		ACTION_CAMERA_TOGGLE,
-		ACTION_CAMERA_VALUES,
+		ACTION_CAMERA_VALUE,
 
 		// Miscellaneous
+		VARIABLE_NAME,
 		VARIABLE_CONSTANT,
 		VARIABLE_TYPE,
+		VARIABLE_VALUE,
 		NONE
 	};
 
@@ -135,7 +137,7 @@ private:
 	bool _isCreatingScriptLine = false;
 	bool _isUpdatingScriptLine = false;
 	bool _isAddingScriptLine = false;
-	bool _allowedToAddScriptVariable = false;
+	bool _isAllowedToAddScriptVariable = false;
 	bool _isCreatingScriptVariable = false;
 	bool _isUpdatingScriptVariable = false;
 	bool _isAddingScriptVariable = false;

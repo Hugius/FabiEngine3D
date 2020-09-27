@@ -9,7 +9,7 @@ ScriptValue::ScriptValue(ScriptValueType type, bool isConstant) :
 
 void ScriptValue::setString(string str)
 {
-	if (_type == ScriptValueType::STRING && !_isConstant)
+	if (_type == ScriptValueType::STRING)
 	{
 		_string = str;
 	}
@@ -17,7 +17,7 @@ void ScriptValue::setString(string str)
 
 void ScriptValue::setBoolean(bool boolean)
 {
-	if (_type == ScriptValueType::BOOLEAN && !_isConstant)
+	if (_type == ScriptValueType::BOOLEAN)
 	{
 		_boolean = boolean;
 	}
@@ -25,7 +25,7 @@ void ScriptValue::setBoolean(bool boolean)
 
 void ScriptValue::setNumber(float number)
 {
-	if (_type == ScriptValueType::NUMBER && !_isConstant)
+	if (_type == ScriptValueType::NUMBER)
 	{
 		_number = number;
 	}
@@ -34,6 +34,11 @@ void ScriptValue::setNumber(float number)
 ScriptValueType ScriptValue::getType()
 {
 	return _type;
+}
+
+bool ScriptValue::isConstant()
+{
+	return _isConstant;
 }
 
 string ScriptValue::getString()

@@ -80,7 +80,8 @@ void ScriptEditor::_updateMiscellaneous()
 		_leftWindow->getScreen("scriptEditorMenuMain")->getButton("addLine")->setHoverable(_allowedToAddScriptLine);
 		_leftWindow->getScreen("scriptEditorMenuMain")->getButton("updateLine")->setHoverable(_currentScriptLineID != "");
 		_leftWindow->getScreen("scriptEditorMenuMain")->getButton("deleteLine")->setHoverable(_currentScriptLineID != "");
-		_leftWindow->getScreen("scriptEditorMenuVariables")->getButton("addVariable")->setHoverable(_allowedToAddScriptVariable);
+		_leftWindow->getScreen("scriptEditorMenuMain")->getButton("variables")->setHoverable(!_isCreatingScriptLine);
+		_leftWindow->getScreen("scriptEditorMenuVariables")->getButton("addVariable")->setHoverable(_isAllowedToAddScriptVariable);
 		_leftWindow->getScreen("scriptEditorMenuVariables")->getButton("updateVariable")->setHoverable(_currentScriptVariableID != "");
 		_leftWindow->getScreen("scriptEditorMenuVariables")->getButton("deleteVariable")->setHoverable(_currentScriptVariableID != "");
 
@@ -104,8 +105,9 @@ void ScriptEditor::_updateMiscellaneous()
 				_clearChoiceLists();
 				_addChoiceList(ChoiceListSort::VARIABLE, ChoiceListType::VARIABLE_CONSTANT);
 				_isCreatingScriptVariable = true;
-				_allowedToAddScriptVariable = false;
+				_isAllowedToAddScriptVariable = false;
 				_newScriptVariableID = newName;
+				_currentScriptVariableID = "";
 			}
 		}
 
@@ -137,7 +139,7 @@ void ScriptEditor::_updateMiscellaneous()
 				_gui->getGlobalScreen()->removeChoiceForm("scriptVariablesList");
 				_currentScriptVariableID = selectedButtonID;
 				_isCreatingScriptVariable = false;
-				_allowedToAddScriptVariable = false;
+				_isAllowedToAddScriptVariable = false;
 			}
 		}
 		else if (_gui->getGlobalScreen()->isChoiceFormCancelled("scriptVariablesList"))

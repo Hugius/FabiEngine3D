@@ -20,6 +20,7 @@ public:
 	void setNumber(float number);
 
 	ScriptValueType getType();
+	bool isConstant();
 	string getString();
 	bool getBoolean();
 	float getNumber();

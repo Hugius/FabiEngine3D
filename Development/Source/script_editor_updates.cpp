@@ -26,6 +26,11 @@ void ScriptEditor::_updateGUI()
 			{
 				if (mainScreen->getButton("variables")->isHovered())
 				{
+					_clearChoiceLists();
+					_allowedToAddScriptLine = false;
+					_isCreatingScriptLine = false;
+					_isUpdatingScriptLine = false;
+					_isAddingScriptLine = false;
 					_leftWindow->setActiveScreen("scriptEditorMenuVariables");
 				}
 				else if (mainScreen->getButton("addLine")->isHovered())
@@ -48,9 +53,10 @@ void ScriptEditor::_updateGUI()
 				{
 					// Add default choicelist
 					_clearChoiceLists();
-					_addChoiceList(ChoiceListSort::EVENT, ChoiceListType::EVENT_TYPES);
+					_addChoiceList(ChoiceListSort::EVENT, ChoiceListType::EVENT_TYPE);
 					_isCreatingScriptLine = true;
 					_allowedToAddScriptLine = false;
+					_currentScriptLineID = "";
 				}
 				else if (mainScreen->getButton("viewLine")->isHovered())
 				{
@@ -118,7 +124,8 @@ void ScriptEditor::_updateGUI()
 
 void ScriptEditor::_updateChoiceLists()
 {
-	if (_isLoaded && _isCreatingScriptLine && !_allowedToAddScriptLine && !_gui->getGlobalScreen()->isFocused())
+	if (((_isCreatingScriptLine && !_allowedToAddScriptLine) || (_isCreatingScriptVariable && !_isAllowedToAddScriptVariable))
+		&& !_gui->getGlobalScreen()->isFocused() && _isLoaded)
 	{
 		// Update hoverability & color & scrolling
 		for (auto& list : _choiceListStack)
@@ -128,8 +135,8 @@ void ScriptEditor::_updateChoiceLists()
 			bool isResponsive = (listIndex == static_cast<int>(_choiceListStack.back().type));
 			int scrollingSpeed = _fe3d.input_getMouseWheelY();
 
-			// Option scrolling for script line creation
-			if (_isCreatingScriptLine && isResponsive)
+			// Option scrolling
+			if (isResponsive)
 			{
 				// Scrolling values
 				string baseID = to_string(listIndex) + "_option_";
@@ -210,7 +217,7 @@ void ScriptEditor::_updateNavigation()
 	{
 		// Hovering over options
 		string hoveredEntityID = _fe3d.collision_checkCursorInAny();
-		if (hoveredEntityID != "" && !_allowedToAddScriptLine && !_allowedToAddScriptVariable)
+		if (hoveredEntityID != "" && !_allowedToAddScriptLine && !_isAllowedToAddScriptVariable)
 		{
 			_fe3d.billboardEntity_setColor(hoveredEntityID, vec3(0.0f, 1.0f, 0.0f));
 			_fe3d.lightEntity_setPosition("@@selectionLight", _fe3d.billboardEntity_getPosition(hoveredEntityID) + vec3(0.0f, 0.0f, 1.0f));
@@ -222,15 +229,15 @@ void ScriptEditor::_updateNavigation()
 		}
 
 		// Clicking a hovered option
-		if (!_allowedToAddScriptLine && !_allowedToAddScriptVariable)
+		if (!_allowedToAddScriptLine && !_isAllowedToAddScriptVariable)
 		{
 			if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
 			{
 				if (hoveredEntityID != "")
 				{
 					auto listType = _choiceListStack.back().type;
-
-					// Point light
+					
+					// Add point light
 					_fe3d.lightEntity_add(to_string(++_pointLightCounter), _fe3d.billboardEntity_getPosition(hoveredEntityID) + vec3(0.0f, 0.0f, 1.0f),
 						vec3(0.0f, 1.0f, 0.0f), 2.5f, 10.0f);
 
@@ -253,17 +260,17 @@ void ScriptEditor::_updateNavigation()
 					switch (listType)
 					{
 						// Event types
-						case ChoiceListType::EVENT_TYPES:
+						case ChoiceListType::EVENT_TYPE:
 						{
 							// Determine event type
 							if (optionName == "INIT_EVENT")
 							{
 								// Event chosen, go to action choosing
-								_addChoiceList(ChoiceListSort::ACTION, ChoiceListType::ACTION_TYPES);
+								_addChoiceList(ChoiceListSort::ACTION, ChoiceListType::ACTION_TYPE);
 							}
 							else if (optionName == "INPUT_EVENT")
 							{
-								_addChoiceList(ChoiceListSort::EVENT, ChoiceListType::EVENT_INPUT_TYPES);
+								_addChoiceList(ChoiceListSort::EVENT, ChoiceListType::EVENT_INPUT_TYPE);
 							}
 							else if (optionName == "COLLISION_EVENT")
 							{
@@ -281,75 +288,75 @@ void ScriptEditor::_updateNavigation()
 						}
 
 						// Input event
-						case ChoiceListType::EVENT_INPUT_TYPES:
+						case ChoiceListType::EVENT_INPUT_TYPE:
 						{
 							// Determine input type
 							if (optionName == "KEYBOARD")
 							{
 								// Display all keyboard keys
-								_addChoiceList(ChoiceListSort::EVENT, ChoiceListType::EVENT_INPUT_KEY_NAMES);
+								_addChoiceList(ChoiceListSort::EVENT, ChoiceListType::EVENT_INPUT_KEY_NAME);
 							}
 							else if (optionName == "MOUSE")
 							{
 								// Display all mouse types
-								_addChoiceList(ChoiceListSort::EVENT, ChoiceListType::EVENT_INPUT_MOUSE_TYPES);
+								_addChoiceList(ChoiceListSort::EVENT, ChoiceListType::EVENT_INPUT_MOUSE_TYPE);
 							}
 							break;
 						}
-						case ChoiceListType::EVENT_INPUT_MOUSE_TYPES:
+						case ChoiceListType::EVENT_INPUT_MOUSE_TYPE:
 						{
 							// Determine input type
 							if (optionName == "BUTTON")
 							{
-								_addChoiceList(ChoiceListSort::EVENT, ChoiceListType::EVENT_INPUT_MOUSE_BUTTONS);
+								_addChoiceList(ChoiceListSort::EVENT, ChoiceListType::EVENT_INPUT_MOUSE_BUTTON);
 							}
 							else if (optionName == "SCROLL_UP" || optionName == "SCROLL_DOWN")
 							{
 								// Event chosen, go to action choosing
-								_addChoiceList(ChoiceListSort::ACTION, ChoiceListType::ACTION_TYPES);
+								_addChoiceList(ChoiceListSort::ACTION, ChoiceListType::ACTION_TYPE);
 							}
 							break;
 						}
-						case ChoiceListType::EVENT_INPUT_KEY_NAMES:
-						case ChoiceListType::EVENT_INPUT_MOUSE_BUTTONS:
+						case ChoiceListType::EVENT_INPUT_KEY_NAME:
+						case ChoiceListType::EVENT_INPUT_MOUSE_BUTTON:
 						{
 							// Display input methods
-							_addChoiceList(ChoiceListSort::EVENT, ChoiceListType::EVENT_INPUT_METHODS);
+							_addChoiceList(ChoiceListSort::EVENT, ChoiceListType::EVENT_INPUT_METHOD);
 							break;
 						}
-						case ChoiceListType::EVENT_INPUT_METHODS:
+						case ChoiceListType::EVENT_INPUT_METHOD:
 						{
 							// Event chosen, go to action choosing
-							_addChoiceList(ChoiceListSort::ACTION, ChoiceListType::ACTION_TYPES);
+							_addChoiceList(ChoiceListSort::ACTION, ChoiceListType::ACTION_TYPE);
 							break;
 						}
 
 						// Action types
-						case ChoiceListType::ACTION_TYPES:
+						case ChoiceListType::ACTION_TYPE:
 						{
 							// Determine action type
 							if (optionName == "CAMERA_ACTION")
 							{
-								_addChoiceList(ChoiceListSort::ACTION, ChoiceListType::ACTION_CAMERA_TYPES);
+								_addChoiceList(ChoiceListSort::ACTION, ChoiceListType::ACTION_CAMERA_TYPE);
 							}
 							break;
 						}
 
 						// Camera action
-						case ChoiceListType::ACTION_CAMERA_TYPES:
+						case ChoiceListType::ACTION_CAMERA_TYPE:
 						{
 							// Determine camera type
 							if (optionName == "POSITION")
 							{
-								_addChoiceList(ChoiceListSort::ACTION, ChoiceListType::ACTION_CAMERA_DIRECTIONS);
+								_addChoiceList(ChoiceListSort::ACTION, ChoiceListType::ACTION_CAMERA_DIRECTION);
 							}
 							else if (optionName == "FOLLOW")
 							{
-								_addChoiceList(ChoiceListSort::ACTION, ChoiceListType::ACTION_CAMERA_FOLLOWS);
+								_addChoiceList(ChoiceListSort::ACTION, ChoiceListType::ACTION_CAMERA_FOLLOW);
 							}
 							else if (optionName == "YAW" || optionName == "PITCH")
 							{
-								_addChoiceList(ChoiceListSort::ACTION, ChoiceListType::ACTION_CAMERA_METHODS);
+								_addChoiceList(ChoiceListSort::ACTION, ChoiceListType::ACTION_CAMERA_METHOD);
 							}
 							else if (optionName == "LOOK_AT" || optionName == "FIRST_PERSON")
 							{
@@ -357,7 +364,7 @@ void ScriptEditor::_updateNavigation()
 							}
 							break;
 						}
-						case ChoiceListType::ACTION_CAMERA_DIRECTIONS:
+						case ChoiceListType::ACTION_CAMERA_DIRECTION:
 						{
 							if (optionName == "XYZ")
 							{
@@ -365,12 +372,12 @@ void ScriptEditor::_updateNavigation()
 							}
 							else
 							{
-								_addChoiceList(ChoiceListSort::ACTION, ChoiceListType::ACTION_CAMERA_METHODS);
+								_addChoiceList(ChoiceListSort::ACTION, ChoiceListType::ACTION_CAMERA_METHOD);
 							}
 							break;
 						}
-						case ChoiceListType::ACTION_CAMERA_FOLLOWS:
-						case ChoiceListType::ACTION_CAMERA_METHODS:
+						case ChoiceListType::ACTION_CAMERA_FOLLOW:
+						case ChoiceListType::ACTION_CAMERA_METHOD:
 						case ChoiceListType::ACTION_CAMERA_TOGGLE:
 						{
 							_allowedToAddScriptLine = true;
@@ -385,7 +392,7 @@ void ScriptEditor::_updateNavigation()
 						}
 						case ChoiceListType::VARIABLE_TYPE:
 						{
-							_allowedToAddScriptVariable = true;
+							_isAllowedToAddScriptVariable = true;
 							break;
 						}
 					}
@@ -393,10 +400,9 @@ void ScriptEditor::_updateNavigation()
 			}
 		}
 
-		// Only for scriptLines
-		if (_isCreatingScriptLine)
+		// Remove last chosen option
+		if (_isCreatingScriptLine || _isCreatingScriptVariable)
 		{
-			// Remove last chosen option
 			if (_fe3d.input_getKeyPressed(Input::KEY_BACKSPACE))
 			{
 				// Cannot remove default choice list
@@ -406,10 +412,16 @@ void ScriptEditor::_updateNavigation()
 					_fe3d.lightEntity_delete(to_string(_pointLightCounter));
 					_pointLightCounter--;
 
-					// Script cannot be added if last option is removed
+					// Script line cannot be added if last option is removed
 					if (_allowedToAddScriptLine)
 					{
 						_allowedToAddScriptLine = false;
+					}
+
+					// Script variable cannot be added if last option is removed
+					if (_isAllowedToAddScriptVariable)
+					{
+						_isAllowedToAddScriptVariable = false;
 					}
 				}
 			}

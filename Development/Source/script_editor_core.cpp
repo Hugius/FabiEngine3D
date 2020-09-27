@@ -106,7 +106,7 @@ void ScriptEditor::unload()
 	_isCreatingScriptLine = false;
 	_isUpdatingScriptLine = false;
 	_isAddingScriptLine = false;
-	_allowedToAddScriptVariable = false;
+	_isAllowedToAddScriptVariable = false;
 	_isCreatingScriptVariable = false;
 	_isUpdatingScriptVariable = false;
 	_isAddingScriptVariable = false;

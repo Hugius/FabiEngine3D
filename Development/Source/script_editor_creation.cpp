@@ -27,7 +27,7 @@ void ScriptEditor::_updateScriptLineAdding()
 					switch (choiceList.type)
 					{
 						// Event types
-						case ChoiceListType::EVENT_TYPES:
+						case ChoiceListType::EVENT_TYPE:
 						{
 							if (choiceList.selectedOptionIndex == 0) event = make_shared<ScriptEventInitialization>(_fe3d, ScriptEventType::INITIALIZATION);
 							if (choiceList.selectedOptionIndex == 1) event = make_shared<ScriptEventInput>(_fe3d, ScriptEventType::INPUT);
@@ -38,23 +38,23 @@ void ScriptEditor::_updateScriptLineAdding()
 						}
 
 						// Input event
-						case ChoiceListType::EVENT_INPUT_TYPES:
+						case ChoiceListType::EVENT_INPUT_TYPE:
 						{
 							dynamic_pointer_cast<ScriptEventInput>(event)->setInputType(static_cast<InputEventType>(choiceList.selectedOptionIndex));
 							break;
 						}
-						case ChoiceListType::EVENT_INPUT_MOUSE_TYPES:
+						case ChoiceListType::EVENT_INPUT_MOUSE_TYPE:
 						{
 							dynamic_pointer_cast<ScriptEventInput>(event)->setMouseType(static_cast<InputEventMouseType>(choiceList.selectedOptionIndex));
 							break;
 						}
-						case ChoiceListType::EVENT_INPUT_KEY_NAMES:
-						case ChoiceListType::EVENT_INPUT_MOUSE_BUTTONS:
+						case ChoiceListType::EVENT_INPUT_KEY_NAME:
+						case ChoiceListType::EVENT_INPUT_MOUSE_BUTTON:
 						{
 							dynamic_pointer_cast<ScriptEventInput>(event)->setInputElement(choiceList.optionNames[optionIndex]);
 							break;
 						}
-						case ChoiceListType::EVENT_INPUT_METHODS:
+						case ChoiceListType::EVENT_INPUT_METHOD:
 						{
 							dynamic_pointer_cast<ScriptEventInput>(event)->setInputMethod(static_cast<InputEventMethod>(choiceList.selectedOptionIndex));
 							break;
@@ -67,29 +67,29 @@ void ScriptEditor::_updateScriptLineAdding()
 					switch (choiceList.type)
 					{
 						// Action types
-						case ChoiceListType::ACTION_TYPES:
+						case ChoiceListType::ACTION_TYPE:
 						{
 							if (choiceList.selectedOptionIndex == 0) action = make_shared<ScriptActionCamera>(_fe3d, ScriptActionType::CAMERA);
 							break;
 						}
 
 						// Camera action
-						case ChoiceListType::ACTION_CAMERA_TYPES:
+						case ChoiceListType::ACTION_CAMERA_TYPE:
 						{
 							dynamic_pointer_cast<ScriptActionCamera>(action)->setCameraType(static_cast<CameraActionType>(choiceList.selectedOptionIndex));
 							break;
 						}
-						case ChoiceListType::ACTION_CAMERA_DIRECTIONS:
+						case ChoiceListType::ACTION_CAMERA_DIRECTION:
 						{
 							dynamic_pointer_cast<ScriptActionCamera>(action)->setCameraDirection(static_cast<CameraActionDirection>(choiceList.selectedOptionIndex));
 							break;
 						}
-						case ChoiceListType::ACTION_CAMERA_FOLLOWS:
+						case ChoiceListType::ACTION_CAMERA_FOLLOW:
 						{
 							dynamic_pointer_cast<ScriptActionCamera>(action)->setCameraFollow(static_cast<CameraActionFollow>(choiceList.selectedOptionIndex));
 							break;
 						}
-						case ChoiceListType::ACTION_CAMERA_METHODS:
+						case ChoiceListType::ACTION_CAMERA_METHOD:
 						{
 							dynamic_pointer_cast<ScriptActionCamera>(action)->setCameraMethod(static_cast<CameraActionMethod>(choiceList.selectedOptionIndex));
 							break;
@@ -238,13 +238,12 @@ void ScriptEditor::_updateScriptLineAdding()
 
 void ScriptEditor::_updateScriptVariableAdding()
 {
-	if ((_isAddingScriptVariable && _allowedToAddScriptVariable) || _isUpdatingScriptVariable)
+	if ((_isAddingScriptVariable && _isAllowedToAddScriptVariable) || _isUpdatingScriptVariable)
 	{
 		// Placeholders
 		static bool firstTime = true;
-		static bool needsValueFilling = false;
 		static bool finishedValueFilling = false;
-		shared_ptr<ScriptValue> value = nullptr;
+		static shared_ptr<ScriptValue> value = nullptr;
 		ScriptValueType type = ScriptValueType::NONE;
 		bool constant = false;
 
@@ -299,12 +298,12 @@ void ScriptEditor::_updateScriptVariableAdding()
 			{
 				case ScriptValueType::STRING:
 				{
-					_gui->getGlobalScreen()->addValueForm("string", "String value", 0.0f, vec2(0.0f), vec2(0.2f, 0.1f));
+					_gui->getGlobalScreen()->addValueForm("string", "String value", "", vec2(0.0f), vec2(0.2f, 0.1f));
 					break;
 				}
 				case ScriptValueType::BOOLEAN:
 				{
-					_gui->getGlobalScreen()->addAnswerForm("boolean", "Boolean value", vec2(0.2f, 0.1f));
+					_gui->getGlobalScreen()->addAnswerForm("boolean", "Boolean value", vec2(0.0f));
 					break;
 				}
 				case ScriptValueType::NUMBER:
@@ -316,7 +315,7 @@ void ScriptEditor::_updateScriptVariableAdding()
 		}
 
 		// Update value filling
-		if (needsValueFilling && !finishedValueFilling)
+		if (!finishedValueFilling)
 		{
 			// Determine value type
 			if (_gui->getGlobalScreen()->isValueFormExisting("string")) // String
@@ -324,7 +323,7 @@ void ScriptEditor::_updateScriptVariableAdding()
 				string stringValue;
 				if (_gui->getGlobalScreen()->checkValueForm("string", stringValue))
 				{
-					dynamic_pointer_cast<ScriptValue>(value)->setString(stringValue);
+					value->setString(stringValue);
 					finishedValueFilling = true;
 				}
 			}
@@ -332,21 +331,21 @@ void ScriptEditor::_updateScriptVariableAdding()
 			{
 				if (_gui->getGlobalScreen()->isAnswerFormConfirmed("boolean"))
 				{
-					dynamic_pointer_cast<ScriptValue>(value)->setBoolean(true);
+					value->setBoolean(true);
 					finishedValueFilling = true;
 				}
 				else if (_gui->getGlobalScreen()->isAnswerFormCancelled("boolean"))
 				{
-					dynamic_pointer_cast<ScriptValue>(value)->setBoolean(false);
+					value->setBoolean(false);
 					finishedValueFilling = true;
 				}
 			}
 			else if (_gui->getGlobalScreen()->isValueFormExisting("number")) // Number
 			{
 				float floatValue;
-				if (_gui->getGlobalScreen()->checkValueForm("float", floatValue))
+				if (_gui->getGlobalScreen()->checkValueForm("number", floatValue))
 				{
-					dynamic_pointer_cast<ScriptValue>(value)->setNumber(floatValue);
+					value->setNumber(floatValue);
 					finishedValueFilling = true;
 				}
 			}
@@ -356,7 +355,6 @@ void ScriptEditor::_updateScriptVariableAdding()
 				_isAddingScriptVariable = false;
 				_isUpdatingScriptVariable = false;
 				firstTime = true;
-				needsValueFilling = false;
 				finishedValueFilling = false;
 				value = nullptr;
 				return;
@@ -364,7 +362,7 @@ void ScriptEditor::_updateScriptVariableAdding()
 		}
 
 		// Create or update variable
-		if (finishedValueFilling || !needsValueFilling)
+		if (finishedValueFilling)
 		{
 			if (_isUpdatingScriptVariable) // Update current variable
 			{
@@ -377,12 +375,11 @@ void ScriptEditor::_updateScriptVariableAdding()
 				_script->addVariable(_newScriptVariableID, value);
 				_clearChoiceLists();
 				_isAddingScriptVariable = false;
-				_allowedToAddScriptVariable = false;
+				_isAllowedToAddScriptVariable = false;
 			}
 
 			// Reset the creation or updating process
 			firstTime = true;
-			needsValueFilling = false;
 			finishedValueFilling = false;
 			value = nullptr;
 		}

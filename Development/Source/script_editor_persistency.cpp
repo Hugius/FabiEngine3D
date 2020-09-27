@@ -42,7 +42,7 @@ void ScriptEditor::_loadScriptFromFile()
 	else
 	{
 		// Create new empty script
-		//_script = make_shared<Script>();
+		_script = make_shared<Script>(_fe3d);
 	}
 
 	// Inject into script executor

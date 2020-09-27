@@ -28,7 +28,6 @@ private:
 	void _loadScriptFromFile();
 	void _saveScriptToFile();
 	void _unloadScript();
-	void _reloadLineNumbersDisplay();
 	void _reloadScriptTextDisplay();
 
 	// General stuff
@@ -42,8 +41,16 @@ private:
 	// Editor constants
 	const string _fontPath = "engine\\fonts\\lucida.ttf";
 	const vec3 _cameraStartingPosition = vec3(0.0f, 0.0f, 10.0f);
+	const vec3 _scriptTextStartingPosition = vec3(-11.0f, 5.5f, 0.5f);
+	const vec3 _lineNumberColor = vec3(0.0f, 1.0f, 0.0f);
+	const vec3 _characterColor = vec3(1.0f);
 	const float _scrollingSpeed = 0.1f;
 	const float _maxScrollingAcceleration = 10.0f;
+	const float _characterWidth = 0.25f;
+	const float _characterHeight = 0.75f;
+	const float _horizontalCharacterOffset = 0.25f;
+	const float _verticalLineOffset = 1.0f;
+	const float _horizontalLineOffset = 0.5f;
 	
 	// Editor variables
 	string _currentProjectName = "";
@@ -51,6 +58,7 @@ private:
 	float _scrollingAcceleration = 0.0f;
 	unsigned int _cursorLineIndex = 0;
 	unsigned int _cursorPlaceIndex = 0;
+	unsigned int _maxPassedBarFrames = 50;
 	bool _isLoaded = false;
 	bool _isWritingScript = false;
 };

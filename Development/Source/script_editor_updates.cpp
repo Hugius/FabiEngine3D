@@ -31,7 +31,7 @@ void ScriptEditor::_updateGUI()
 						_currentScriptFileID = "test";
 						_script->addScriptFile(_currentScriptFileID);
 						_script->getScriptFile(_currentScriptFileID)->addNewLine("");
-						_reloadLineNumbersDisplay();
+						_reloadScriptTextDisplay();
 					}
 				}
 				else if (mainScreen->getButton("editScript")->isHovered())
@@ -89,20 +89,30 @@ void ScriptEditor::_updateMiscellaneous()
 		_scrollingAcceleration = std::clamp(_scrollingAcceleration, -_maxScrollingAcceleration, _maxScrollingAcceleration);
 		_scrollingAcceleration *= 0.95f;
 		
-		// Cannot go out of screen
+		// Can not go out of screen
 		if (_fe3d.camera_getPosition().y > _cameraStartingPosition.y)
 		{
 			_scrollingAcceleration = 0.0f;
 			_fe3d.camera_setPosition(_cameraStartingPosition);
 		}
-		else if (_fe3d.billboardEntity_isExisting(to_string(_cursorLineIndex)) && _cursorLineIndex > 12)
+		else if (_fe3d.camera_getPosition().y == _cameraStartingPosition.y && _scrollingAcceleration > 0.0f) // Trying to scroll up
 		{
+			_scrollingAcceleration = 0.0f;
+		}
+		else if (_fe3d.billboardEntity_isExisting(to_string(_cursorLineIndex)) && _cursorLineIndex > 12) // Trying to scroll down
+		{
+			float limitY = _fe3d.billboardEntity_getPosition(to_string(_cursorLineIndex)).y + 6.5f;
+
 			// Check if camera is not seeing the space under the last line of the script
-			if (_fe3d.camera_getPosition().y < _fe3d.billboardEntity_getPosition(to_string(_cursorLineIndex)).y + 6.5f)
+			if (_fe3d.camera_getPosition().y < limitY)
 			{
 				_scrollingAcceleration = 0.0f;
-				float newY = _fe3d.billboardEntity_getPosition(to_string(_cursorLineIndex)).y + 6.5f;
+				float newY = limitY;
 				_fe3d.camera_setPosition(vec3(_cameraStartingPosition.x, newY, _cameraStartingPosition.z));
+			}
+			else if (_fe3d.camera_getPosition().y == limitY && _scrollingAcceleration < 0.0f) // Forbid scrolling down
+			{
+				_scrollingAcceleration = 0.0f;
 			}
 		}
 

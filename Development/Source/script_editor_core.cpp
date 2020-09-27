@@ -19,23 +19,11 @@ void ScriptEditor::initializeGUI()
 	// Left-viewport script line screen
 	string screenID = "scriptEditorMenuMain";
 	_leftWindow->addScreen(screenID);
-	_leftWindow->getScreen(screenID)->addButton("variables", vec2(0.0f, 0.7875f), vec2(GW("Variables"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Variables", LVPC::textColor, LVPC::textHoverColor);
-	_leftWindow->getScreen(screenID)->addButton("addLine", vec2(0.0f, 0.525f), vec2(GW("Add script"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Add script", LVPC::textColor, LVPC::textHoverColor);
-	_leftWindow->getScreen(screenID)->addButton("updateLine", vec2(0.0f, 0.2625f), vec2(GW("Update script"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Update script", LVPC::textColor, LVPC::textHoverColor);
-	_leftWindow->getScreen(screenID)->addButton("deleteLine", vec2(0.0f, 0.0f), vec2(GW("Delete script"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Delete script", LVPC::textColor, LVPC::textHoverColor);
-	_leftWindow->getScreen(screenID)->addButton("createLine", vec2(0.0f, -0.2625f), vec2(GW("New script"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "New script", LVPC::textColor, LVPC::textHoverColor);
-	_leftWindow->getScreen(screenID)->addButton("viewLine", vec2(0.0f, -0.525f), vec2(GW("View script"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "View script", LVPC::textColor, LVPC::textHoverColor);
-	_leftWindow->getScreen(screenID)->addButton("back", vec2(0.0f, -0.7875f), vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
-
-	// Left-viewport script variable screen
-	screenID = "scriptEditorMenuVariables";
-	_leftWindow->addScreen(screenID);
-	_leftWindow->getScreen(screenID)->addButton("addVariable", vec2(0.0f, 0.75f), vec2(GW("Add variable"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Add variable", LVPC::textColor, LVPC::textHoverColor);
-	_leftWindow->getScreen(screenID)->addButton("updateVariable", vec2(0.0f, 0.45f), vec2(GW("Update variable"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Update variable", LVPC::textColor, LVPC::textHoverColor);
-	_leftWindow->getScreen(screenID)->addButton("deleteVariable", vec2(0.0f, 0.15f), vec2(GW("Delete variable"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Delete variable", LVPC::textColor, LVPC::textHoverColor);
-	_leftWindow->getScreen(screenID)->addButton("createVariable", vec2(0.0f, -0.15f), vec2(GW("New variable"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "New variable", LVPC::textColor, LVPC::textHoverColor);
-	_leftWindow->getScreen(screenID)->addButton("viewVariable", vec2(0.0f, -0.45f), vec2(GW("View variable"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "View variable", LVPC::textColor, LVPC::textHoverColor);
-	_leftWindow->getScreen(screenID)->addButton("back", vec2(0.0f, -0.75f), vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("createScript", vec2(0.0f, 0.7f), vec2(GW("New script"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "New script", LVPC::textColor, LVPC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("editScript", vec2(0.0f, 0.35f), vec2(GW("Edit script"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Edit script", LVPC::textColor, LVPC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("deleteScript", vec2(0.0f, 0.0f), vec2(GW("Delete script"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Delete script", LVPC::textColor, LVPC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("variables", vec2(0.0f, -0.35f), vec2(GW("Variables"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Variables", LVPC::textColor, LVPC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("back", vec2(0.0f, -0.7f), vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
 }
 
 void ScriptEditor::load()
@@ -92,24 +80,9 @@ void ScriptEditor::unload()
 	_unloadScript();
 
 	// Reset editor properties
-	_choiceListStack.clear();
-	_currentEventToAdd = nullptr;
 	_scriptExecutor = nullptr;
 	_script = nullptr;
-	_currentScriptLineID = "";
-	_currentScriptVariableID = "";
-	_newScriptVariableID = "";
 	_scrollingAcceleration = 0.0f;
-	_cameraAcceleration = 0.0f;
-	_pointLightCounter = 0;
-	_allowedToAddScriptLine = false;
-	_isCreatingScriptLine = false;
-	_isUpdatingScriptLine = false;
-	_isAddingScriptLine = false;
-	_isAllowedToAddScriptVariable = false;
-	_isCreatingScriptVariable = false;
-	_isUpdatingScriptVariable = false;
-	_isAddingScriptVariable = false;
 
 	// Miscellaneous
 	_gui->getViewport("bottom")->getWindow("controls")->setActiveScreen("mainMenu");

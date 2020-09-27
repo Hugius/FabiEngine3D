@@ -328,31 +328,7 @@
     <ClCompile Include="Source\scene_editor_persistency.cpp">
       <Filter>src\Editor System\Scene Editor\Core</Filter>
     </ClCompile>
-    <ClCompile Include="Source\script_event_collision.cpp">
-      <Filter>src\Scripting System\Events</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\script_event_input.cpp">
-      <Filter>src\Scripting System\Events</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\script_event_time.cpp">
-      <Filter>src\Scripting System\Events</Filter>
-    </ClCompile>
     <ClCompile Include="Source\script.cpp">
-      <Filter>src\Scripting System\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\script_event.cpp">
-      <Filter>src\Scripting System\Events</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\script_action.cpp">
-      <Filter>src\Scripting System\Actions</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\script_action_camera.cpp">
-      <Filter>src\Scripting System\Actions</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\script_event_condition.cpp">
-      <Filter>src\Scripting System\Events</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\script_executor.cpp">
       <Filter>src\Scripting System\Core</Filter>
     </ClCompile>
     <ClCompile Include="Source\model_editor_core.cpp">
@@ -391,9 +367,6 @@
     <ClCompile Include="Source\script_editor_core.cpp">
       <Filter>src\Editor System\Script Editor\Core</Filter>
     </ClCompile>
-    <ClCompile Include="Source\script_editor_interface.cpp">
-      <Filter>src\Editor System\Script Editor\Core</Filter>
-    </ClCompile>
     <ClCompile Include="Source\script_editor_persistency.cpp">
       <Filter>src\Editor System\Script Editor\Core</Filter>
     </ClCompile>
@@ -402,12 +375,6 @@
     </ClCompile>
     <ClCompile Include="Source\script_editor_misc.cpp">
       <Filter>src\Editor System\Script Editor\Miscellaneous</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\script_event_initialization.cpp">
-      <Filter>src\Scripting System\Events</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\script_editor_creation.cpp">
-      <Filter>src\Editor System\Script Editor\Updates</Filter>
     </ClCompile>
     <ClCompile Include="Source\engine_gui_global_screen_misc.cpp">
       <Filter>src\GUI System\Core</Filter>
@@ -454,8 +421,17 @@
     <ClCompile Include="Source\billboard_editor_persistency.cpp">
       <Filter>src\Editor System\Billboard Editor\Core</Filter>
     </ClCompile>
+    <ClCompile Include="Source\script_executor.cpp">
+      <Filter>src\Scripting System\Execution</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_file.cpp">
+      <Filter>src\Scripting System\Core</Filter>
+    </ClCompile>
     <ClCompile Include="Source\script_value.cpp">
       <Filter>src\Scripting System\Values</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_editor_writer.cpp">
+      <Filter>src\Editor System\Script Editor\Updates</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -675,33 +651,6 @@
     <ClInclude Include="Source\script.hpp">
       <Filter>src\Scripting System\Core</Filter>
     </ClInclude>
-    <ClInclude Include="Source\script_event.hpp">
-      <Filter>src\Scripting System\Events</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\script_event_collision.hpp">
-      <Filter>src\Scripting System\Events</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\script_event_time.hpp">
-      <Filter>src\Scripting System\Events</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\script_event_input.hpp">
-      <Filter>src\Scripting System\Events</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\script_action.hpp">
-      <Filter>src\Scripting System\Actions</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\script_action_camera.hpp">
-      <Filter>src\Scripting System\Actions</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\script_event_condition.hpp">
-      <Filter>src\Scripting System\Events</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\script_executor.hpp">
-      <Filter>src\Scripting System\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\script_line.hpp">
-      <Filter>src\Scripting System\Core</Filter>
-    </ClInclude>
     <ClInclude Include="Source\model_editor.hpp">
       <Filter>src\Editor System\Model Editor\Core</Filter>
     </ClInclude>
@@ -710,9 +659,6 @@
     </ClInclude>
     <ClInclude Include="Source\script_editor.hpp">
       <Filter>src\Editor System\Script Editor\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\script_event_initialization.hpp">
-      <Filter>src\Scripting System\Events</Filter>
     </ClInclude>
     <ClInclude Include="Source\engine_gui_global_screen.hpp">
       <Filter>src\GUI System\Core</Filter>
@@ -744,8 +690,14 @@
     <ClInclude Include="Source\engine_gui_writefield.hpp">
       <Filter>src\GUI System\Elements</Filter>
     </ClInclude>
-    <ClInclude Include="Source\script_variable.hpp">
+    <ClInclude Include="Source\script_executor.hpp">
+      <Filter>src\Scripting System\Execution</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\script_file.hpp">
       <Filter>src\Scripting System\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\script_variable.hpp">
+      <Filter>src\Scripting System\Elements</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -905,12 +857,6 @@
     <Filter Include="src\Scripting System">
       <UniqueIdentifier>{60047f24-1eb4-4081-95b0-950f9a3cdeda}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\Scripting System\Events">
-      <UniqueIdentifier>{0a81f325-9d5c-4f05-94cb-2ecf3eba8790}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\Scripting System\Actions">
-      <UniqueIdentifier>{777c0a5b-5e3e-41d8-bbbc-dbcd603a8e59}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\Scripting System\Core">
       <UniqueIdentifier>{c7f19bd9-4b08-4f0a-9542-92e4de2a6e01}</UniqueIdentifier>
     </Filter>
@@ -952,6 +898,12 @@
     </Filter>
     <Filter Include="src\Scripting System\Values">
       <UniqueIdentifier>{59d6a649-6476-46f1-ad35-28278273b1ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Scripting System\Execution">
+      <UniqueIdentifier>{584f8315-779f-4805-ad43-c607476a8f16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Scripting System\Elements">
+      <UniqueIdentifier>{777c0a5b-5e3e-41d8-bbbc-dbcd603a8e59}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

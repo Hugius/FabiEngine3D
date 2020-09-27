@@ -1,11 +1,75 @@
 #include "script_editor.hpp"
 
-#include <algorithm>
-
 void ScriptEditor::_unloadScript()
 {
 	_script = nullptr;
 	_scriptExecutor = nullptr;
+}
+
+void ScriptEditor::_reloadLineNumbersDisplay()
+{
+	// Generation values
+	const vec3 startingPos = vec3(-11.0f, 5.5f, 0.5f);
+	const vec3 color = vec3(0.0f, 1.0f, 0.0f);
+	const float charWidth = 0.25f;
+	const float charHeight = 0.75f;
+	const float yOffset = 1.0f;
+
+	// Create a billboard for every line number
+	for (unsigned int lineIndex = 0; lineIndex < _script->getScriptFile(_currentScriptFileID)->getLineCount(); lineIndex++)
+	{
+		// Generation values
+		string ID = to_string(lineIndex);
+		string textContent = to_string(lineIndex + 1);
+		vec3 position = startingPos - vec3((textContent.size() - 1) * (charWidth / 2.0f), yOffset * static_cast<float>(lineIndex), 0.0f);
+		vec2 size = vec2(textContent.size() * charWidth, charHeight);
+
+		// Delete old billboard
+		if (_fe3d.billboardEntity_isExisting(ID))
+		{
+			_fe3d.billboardEntity_delete(ID);
+		}
+
+		// Create new billboard
+		_fe3d.billBoardEntity_add(ID, textContent, _fontPath, color, position, vec3(0.0f), size, 0, 0);
+	}
+}
+
+void ScriptEditor::_reloadScriptTextDisplay()
+{
+	// Loop over every scriptline
+	for (unsigned int lineIndex = 0; lineIndex < _script->getScriptFile(_currentScriptFileID)->getLineCount(); lineIndex++)
+	{
+		// Retrieve line text
+		string textContent = _script->getScriptFile(_currentScriptFileID)->getLineText(lineIndex);
+	
+		// Generation values
+		vec3 color = vec3(1.0f);
+		vec3 linePosition = _fe3d.billboardEntity_getPosition(to_string(lineIndex));
+		const float charWidth = 0.25f;
+		const float charHeight = 0.75f;
+		float xOffset = 0.25f;
+		float lineOffset = 0.5f;
+
+		// Loop over every character
+		for (unsigned int charIndex = 0; charIndex < textContent.size(); charIndex++)
+		{
+			// Generation values
+			string ID = to_string(lineIndex) + "_" + to_string(charIndex);
+			string charContent = string(1, textContent[charIndex]);
+			vec3 position = linePosition + vec3(lineOffset + (xOffset * static_cast<float>(charIndex)), 0.0f, 0.0f);
+			vec2 size = vec2(charWidth, charHeight);
+
+			// Delete old billboard
+			if (_fe3d.billboardEntity_isExisting(ID))
+			{
+				_fe3d.billboardEntity_delete(ID);
+			}
+
+			// Create new billboard
+			_fe3d.billBoardEntity_add(ID, charContent, _fontPath, color, position, vec3(0.0f), size, 0, 0);
+		}
+	}
 }
 
 shared_ptr<ScriptExecutor> ScriptEditor::getScriptExecutor()
@@ -27,124 +91,4 @@ void ScriptEditor::setCurrentProjectName(const string& projectName)
 bool ScriptEditor::isLoaded()
 {
 	return _isLoaded;
-}
-
-void ScriptEditor::_calibrateScriptLines()
-{
-	auto scriptLineIDs = _script->getAllScriptLineIDs();
-	int counter = 1;
-
-	// Change all IDs (line numbers) accordingly
-	for (auto& ID : scriptLineIDs)
-	{
-		_script->getScriptLine(ID).ID = to_string(counter);
-		counter++;
-	}
-}
-
-void ScriptEditor::_updateMiscellaneous()
-{
-	if (_isLoaded)
-	{
-		//  Smooth scrolling movement
-		_scrollingAcceleration *= 0.95f;
-
-		if (!_gui->getGlobalScreen()->isFocused())
-		{
-			// Camear movement input
-			if (_fe3d.input_getKeyDown(Input::KEY_A))
-			{
-				_cameraAcceleration -= 0.005f;
-			}
-			else if (_fe3d.input_getKeyDown(Input::KEY_D))
-			{
-				_cameraAcceleration += 0.005f;
-			}
-		}
-
-		// Smooth camera movement
-		_cameraAcceleration = std::clamp(_cameraAcceleration, -0.3f, 0.3f);
-		_cameraAcceleration *= 0.965f;
-
-		// Cannot go out of screen
-		if (_fe3d.camera_getPosition().x < _cameraStartingPosition.x)
-		{
-			_cameraAcceleration = 0.0f;
-			_fe3d.camera_setPosition(_cameraStartingPosition);
-		}
-
-		// Move camera
-		_fe3d.camera_translate(vec3(_cameraAcceleration, 0.0f, 0.0f));
-
-		// Add & delete buttons hoverability
-		_leftWindow->getScreen("scriptEditorMenuMain")->getButton("addLine")->setHoverable(_allowedToAddScriptLine);
-		_leftWindow->getScreen("scriptEditorMenuMain")->getButton("updateLine")->setHoverable(_currentScriptLineID != "");
-		_leftWindow->getScreen("scriptEditorMenuMain")->getButton("deleteLine")->setHoverable(_currentScriptLineID != "");
-		_leftWindow->getScreen("scriptEditorMenuMain")->getButton("variables")->setHoverable(!_isCreatingScriptLine);
-		_leftWindow->getScreen("scriptEditorMenuVariables")->getButton("addVariable")->setHoverable(_isAllowedToAddScriptVariable);
-		_leftWindow->getScreen("scriptEditorMenuVariables")->getButton("updateVariable")->setHoverable(_currentScriptVariableID != "");
-		_leftWindow->getScreen("scriptEditorMenuVariables")->getButton("deleteVariable")->setHoverable(_currentScriptVariableID != "");
-
-		// Check if user filled in a name for new variable
-		string newName;
-		if (_gui->getGlobalScreen()->checkValueForm("variableName", newName, {}))
-		{
-			// Check if variable name not existing yet
-			bool unique = true;
-			for (auto& existingName : _script->getAllScriptVariableIDs())
-			{
-				if (newName == existingName)
-				{
-					unique = false;
-				}
-			}
-
-			// Add default choicelist
-			if (unique)
-			{
-				_clearChoiceLists();
-				_addChoiceList(ChoiceListSort::VARIABLE, ChoiceListType::VARIABLE_CONSTANT);
-				_isCreatingScriptVariable = true;
-				_isAllowedToAddScriptVariable = false;
-				_newScriptVariableID = newName;
-				_currentScriptVariableID = "";
-			}
-		}
-
-		// Check if existing script line chosen for viewing
-		string selectedButtonID = _gui->getGlobalScreen()->getSelectedChoiceFormButtonID("scriptLinesList");
-		if (selectedButtonID != "")
-		{
-			if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
-			{
-				_generateScriptLineOverview(_script->getScriptLine(selectedButtonID));
-				_gui->getGlobalScreen()->removeChoiceForm("scriptLinesList");
-				_currentScriptLineID = selectedButtonID;
-				_isCreatingScriptLine = false;
-				_allowedToAddScriptLine = false;
-			}
-		}
-		else if (_gui->getGlobalScreen()->isChoiceFormCancelled("scriptLinesList"))
-		{
-			_gui->getGlobalScreen()->removeChoiceForm("scriptLinesList");
-		}
-
-		// Check if existing script variable chosen for viewing
-		selectedButtonID = _gui->getGlobalScreen()->getSelectedChoiceFormButtonID("scriptVariablesList");
-		if (selectedButtonID != "")
-		{
-			if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
-			{
-				_generateScriptVariableOverview(_script->getScriptVariable(selectedButtonID));
-				_gui->getGlobalScreen()->removeChoiceForm("scriptVariablesList");
-				_currentScriptVariableID = selectedButtonID;
-				_isCreatingScriptVariable = false;
-				_isAllowedToAddScriptVariable = false;
-			}
-		}
-		else if (_gui->getGlobalScreen()->isChoiceFormCancelled("scriptVariablesList"))
-		{
-			_gui->getGlobalScreen()->removeChoiceForm("scriptVariablesList");
-		}
-	}
 }

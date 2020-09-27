@@ -1,32 +1,27 @@
 #pragma once
 
-#include "script_line.hpp"
-#include "script_variable.hpp"
+#include "script_file.hpp"
 
-class Script
+class Script final
 {
 public:
-	Script() = default;
+	Script(FabiEngine3D& fe3d);
 
-	void addVariable(const string& ID, shared_ptr<ScriptValue> value);
-	void removeVariable(const string& ID);
-	void addLine(const string& ID, shared_ptr<ScriptEvent> event, shared_ptr<ScriptAction> action);
-	void removeLine(const string& ID);
+	void addScriptFile(const string& ID);
+	void removeScriptFile(const string& ID);
 	void execute();
 	void reset();
 
-	unsigned int getLineCount();
-	unsigned int getVariableCount();
+	int getScriptFileCount();
 
-	bool isExisting(const string& ID);
+	bool isScriptFileExisting(const string& ID);
 
-	ScriptLine& getScriptLine(const string& ID);
-	ScriptVariable& getScriptVariable(const string& ID);
+	shared_ptr<ScriptFile> getScriptFile(const string& ID);
 
-	vector<string> getAllScriptLineIDs();
-	vector<string> getAllScriptVariableIDs();
+	vector<string> getAllScriptFileIDs();
 
 private:
-	vector<ScriptVariable> _scriptVariables;
-	vector<ScriptLine> _scriptLines;
+	FabiEngine3D& _fe3d;
+
+	vector<shared_ptr<ScriptFile>> _scriptFiles;
 };

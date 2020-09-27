@@ -91,8 +91,8 @@ void EngineController::_updateMiscellaneous()
 	}
 	lastScreen = activeScreen;
 
-	// 3D tools only allowed when not running game preview
-	if (!_topViewportController.isScriptRunning())
+	// 3D tools only allowed when not running game preview or editing game scripts
+	if (!_topViewportController.isScriptRunning() && _gui->getViewport("left")->getWindow("main")->getActiveScreen()->getID() != "scriptEditorMenuMain")
 	{
 		// Only allowed if cursor in 3D window
 		input_setKeyTogglingLocked(_gui->getGlobalScreen()->isFocused() || !misc_isMouseInsideViewport());

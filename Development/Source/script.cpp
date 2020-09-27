@@ -1,124 +1,64 @@
 #include "script.hpp"
 #include "logger.hpp"
 
-void Script::addVariable(const string& ID, shared_ptr<ScriptValue> value)
+Script::Script(FabiEngine3D& fe3d) :
+	_fe3d(fe3d)
+{
+
+}
+
+void Script::addScriptFile(const string& ID)
 {
 	// Check if non-existent
-	for (auto& variable : _scriptVariables)
+	for (auto& file : _scriptFiles)
 	{
-		if (variable.ID == ID)
+		if(file->getID() == ID)
 		{
-			Logger::getInst().throwError("Cannot add script variable, already exists: " + variable.ID);
+			Logger::getInst().throwError("Could not add script file, already exists: " + ID);
 		}
 	}
 
-	// Add new script variable
-	ScriptVariable variable;
-	variable.ID = ID;
-	variable.value = value;
-	_scriptVariables.push_back(variable);
+	// Add new script file
+	_scriptFiles.push_back(make_shared<ScriptFile>(_fe3d, ID));
 }
 
-void Script::removeVariable(const string& ID)
+void Script::removeScriptFile(const string& ID)
 {
 	int index = 0;
 
-	for (auto& variable : _scriptVariables)
+	for (auto& file : _scriptFiles)
 	{
-		if (variable.ID == ID)
+		if (file->getID() == ID)
 		{
-			_scriptVariables.erase(_scriptVariables.begin() + index);
+			_scriptFiles.erase(_scriptFiles.begin() + index);
 			return;
 		}
 		index++;
 	}
 
-	Logger::getInst().throwError("Cannot erase script variable with ID: " + ID);
-}
-
-void Script::addLine(const string& ID, shared_ptr<ScriptEvent> event, shared_ptr<ScriptAction> action)
-{
-	// Check if non-existent
-	for (auto& line : _scriptLines)
-	{
-		if (line.ID == ID)
-		{
-			Logger::getInst().throwError("Cannot add script line, already exists: " + ID);
-		}
-	}
-
-	// Add new script line
-	ScriptLine scriptLine;
-	scriptLine.ID = ID;
-	scriptLine.event = event;
-	scriptLine.action = action;
-	_scriptLines.push_back(scriptLine);
-}
-
-void Script::removeLine(const string& ID)
-{
-	int index = 0;
-
-	for (auto& line : _scriptLines)
-	{
-		if (line.ID == ID)
-		{
-			_scriptLines.erase(_scriptLines.begin() + index);
-			return;
-		}
-		index++;
-	}
-
-	Logger::getInst().throwError("Cannot erase script line with ID: " + ID);
+	Logger::getInst().throwError("Could not remove script file with ID: " + ID);
 }
 
 void Script::execute()
 {
-	for (auto& line : _scriptLines)
-	{
-		if (line.event != nullptr && line.action != nullptr)
-		{
-			if (line.event->isTriggered())
-			{
-				line.action->execute();
-			}
-		}
-	}
+
 }
 
 void Script::reset()
 {
-	// Reset all initialization events
-	for (auto& line : _scriptLines)
-	{
-		if (line.event->getType() == ScriptEventType::INITIALIZATION)
-		{
-			line.event->reset();
-		}
-	}
 
-	// Reset all actions
-	for (auto& line : _scriptLines)
-	{
-		line.action->reset();
-	}
 }
 
-unsigned int Script::getLineCount()
+int Script::getScriptFileCount()
 {
-	return _scriptLines.size();
+	return _scriptFiles.size();
 }
 
-unsigned int Script::getVariableCount()
+bool Script::isScriptFileExisting(const string& ID)
 {
-	return _scriptVariables.size();
-}
-
-bool Script::isExisting(const string& ID)
-{
-	for (auto& line : _scriptLines)
+	for (auto& file : _scriptFiles)
 	{
-		if (line.ID == ID)
+		if (file->getID() == ID)
 		{
 			return true;
 		}
@@ -127,51 +67,26 @@ bool Script::isExisting(const string& ID)
 	return false;
 }
 
-ScriptLine& Script::getScriptLine(const string& ID)
+shared_ptr<ScriptFile> Script::getScriptFile(const string& ID)
 {
-	for (auto& line : _scriptLines)
+	for (auto& file : _scriptFiles)
 	{
-		if (line.ID == ID)
+		if (file->getID() == ID)
 		{
-			return line;
+			return file;
 		}
 	}
 
-	Logger::getInst().throwError("Could not find script line with ID: " + ID);
+	Logger::getInst().throwError("Could not find script file with ID: " + ID);
 }
 
-ScriptVariable& Script::getScriptVariable(const string& ID)
-{
-	for (auto& variable : _scriptVariables)
-	{
-		if (variable.ID == ID)
-		{
-			return variable;
-		}
-	}
-
-	Logger::getInst().throwError("Could not find script variable with ID: " + ID);
-}
-
-vector<string> Script::getAllScriptLineIDs()
+vector<string> Script::getAllScriptFileIDs()
 {
 	vector<string> result;
 
-	for (auto& line : _scriptLines)
+	for (auto& file : _scriptFiles)
 	{
-		result.push_back(line.ID);
-	}
-
-	return result;
-}
-
-vector<string> Script::getAllScriptVariableIDs()
-{
-	vector<string> result;
-
-	for (auto& variable : _scriptVariables)
-	{
-		result.push_back(variable.ID);
+		result.push_back(file->getID());
 	}
 
 	return result;

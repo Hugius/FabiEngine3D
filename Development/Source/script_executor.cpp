@@ -39,7 +39,7 @@ void ScriptExecutor::reset()
 
 bool ScriptExecutor::isScriptEmpty()
 {
-	return (_script->getLineCount() == 0);
+	return (_script->getScriptFileCount() == 0);
 }
 
 bool ScriptExecutor::isInitialized()

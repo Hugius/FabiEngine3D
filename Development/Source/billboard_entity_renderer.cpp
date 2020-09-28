@@ -51,6 +51,12 @@ void BillboardEntityRenderer::render(const BillboardEntity* entity)
 			uvAdder = vec2(float(entity->getSpriteColumnIndex()) * uvMultiplier.x, float(entity->getSpriteRowIndex()) * uvMultiplier.y);
 		}
 
+		// Text UV repeat fix
+		if (entity->getTextContent() != "")
+		{
+			uvMultiplier = vec2(1.0f, 0.9f);
+		}
+
 		// Shader uniforms
 		_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix());
 		_shader.uploadUniform("u_isAlphaObject", entity->isTransparent());

@@ -30,7 +30,7 @@ void ScriptEditor::_updateGUI()
 						_cursorPlaceIndex = 0;
 						_currentScriptFileID = "test";
 						_script->addScriptFile(_currentScriptFileID);
-						_script->getScriptFile(_currentScriptFileID)->addNewLine("");
+						_script->getScriptFile(_currentScriptFileID)->insertNewLine(0, "");
 						_reloadScriptTextDisplay();
 					}
 				}
@@ -72,7 +72,7 @@ void ScriptEditor::_updateMiscellaneous()
 {
 	if (_isLoaded)
 	{
-		if (!_gui->getGlobalScreen()->isFocused())
+		if (!_gui->getGlobalScreen()->isFocused() && _isWritingScript)
 		{
 			// Camear movement input
 			if (_fe3d.input_getMouseWheelY() == -1 && _cursorLineIndex > 12)
@@ -89,7 +89,7 @@ void ScriptEditor::_updateMiscellaneous()
 		_scrollingAcceleration = std::clamp(_scrollingAcceleration, -_maxScrollingAcceleration, _maxScrollingAcceleration);
 		_scrollingAcceleration *= 0.95f;
 		
-		// Can not go out of screen
+		// Camera must not go out of screen
 		if (_fe3d.camera_getPosition().y > _cameraStartingPosition.y)
 		{
 			_scrollingAcceleration = 0.0f;
@@ -114,6 +114,12 @@ void ScriptEditor::_updateMiscellaneous()
 			{
 				_scrollingAcceleration = 0.0f;
 			}
+		}
+
+		// Fixed camera position if lines are not out of screen
+		if (_cursorLineIndex < 12)
+		{
+			_fe3d.camera_setPosition(_cameraStartingPosition);
 		}
 
 		// Move camera

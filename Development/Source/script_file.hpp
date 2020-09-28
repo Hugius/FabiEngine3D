@@ -7,7 +7,7 @@ class ScriptFile
 public:
 	ScriptFile(FabiEngine3D& fe3d, const string& ID);
 
-	void addNewLine(const string& textContent);
+	void insertNewLine(unsigned int index, const string& textContent);
 	void setLineText(unsigned int index, const string& textContent);
 	void removeLine(unsigned int index);
 	void removeLastLine();

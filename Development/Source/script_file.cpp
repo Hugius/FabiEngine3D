@@ -7,9 +7,9 @@ ScriptFile::ScriptFile(FabiEngine3D& fe3d, const string& ID) :
 
 }
 
-void ScriptFile::addNewLine(const string& textContent)
+void ScriptFile::insertNewLine(unsigned int index, const string& textContent)
 {
-	_lines.push_back(textContent);
+	_lines.insert(_lines.begin() + index, textContent);
 }
 
 void ScriptFile::setLineText(unsigned int index, const string& textContent)

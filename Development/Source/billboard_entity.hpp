@@ -84,8 +84,8 @@ private:
 	float _uvRepeat = 1.0f;
 	float _maxY = (std::numeric_limits<float>::max)();
 	
-	int _maxFramestep     = 0;
-	int _passedFrames	 = 0;
+	int _maxFramestep		 = 0;
+	int _passedFrames		 = 0;
 	int _totalSpriteRows     = 0;
 	int _totalSpriteColumns  = 0;
 	int _spriteRowIndex      = 0;
@@ -101,6 +101,6 @@ private:
 
 	bool _isTransparent      = false;
 	bool _hasSpriteAnimation = false;
-	bool _isCameraFacingX		 = false;
-	bool _isCameraFacingY		 = false;
+	bool _isCameraFacingX	 = false;
+	bool _isCameraFacingY	 = false;
 };

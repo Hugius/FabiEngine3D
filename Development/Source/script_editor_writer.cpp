@@ -51,7 +51,7 @@ void ScriptEditor::_updateTextWriter()
 		}
 
 		// Determine text action type
-		if (_fe3d.input_getKeyDown(Input::KEY_ENTER)) // New line
+		if (_fe3d.input_getKeyDown(Input::KEY_ENTER)) // Add new line
 		{
 			// Check if single or fast new line action
 			if (singleActionAllowed || continuousActionAllowed)
@@ -60,10 +60,20 @@ void ScriptEditor::_updateTextWriter()
 				{
 					singleActionAllowed = false;
 
+					// Extract remaining text in current line from cursor position
+					string currentLineText = _script->getScriptFile(_currentScriptFileID)->getLineText(_cursorLineIndex);
+					string textToExtract = currentLineText;
+					textToExtract = textToExtract.substr(_cursorPlaceIndex, textToExtract.size() - _cursorPlaceIndex);
+					
+					// Remove extracted text from current line
+					_script->getScriptFile(_currentScriptFileID)->setLineText(_cursorLineIndex, currentLineText.substr(0, _cursorPlaceIndex));
+
 					// Set cursor to beginning of new line
 					_cursorPlaceIndex = 0;
 					_cursorLineIndex++;
-					_script->getScriptFile(_currentScriptFileID)->addNewLine("");
+
+					// Add text on new line
+					_script->getScriptFile(_currentScriptFileID)->insertNewLine(_cursorLineIndex, textToExtract);
 					textHasChanged = true;
 				}
 			}
@@ -279,10 +289,10 @@ void ScriptEditor::_updateTextWriter()
 								_script->getScriptFile(_currentScriptFileID)->removeLine(_cursorLineIndex);
 								_cursorLineIndex--;
 
-								// Set cursor to last character of line above
+								// Set cursor to last character of line above & merge text from current line
 								_cursorPlaceIndex = _script->getScriptFile(_currentScriptFileID)->getLineText(_cursorLineIndex).size();
-								currentLineText += textToMerge;
-								_script->getScriptFile(_currentScriptFileID)->setLineText(_cursorLineIndex, currentLineText);
+								_script->getScriptFile(_currentScriptFileID)->setLineText(_cursorLineIndex, 
+									_script->getScriptFile(_currentScriptFileID)->getLineText(_cursorLineIndex) + textToMerge);
 								textHasChanged = true;
 							}
 						}

@@ -5,7 +5,9 @@
 
 ScriptEditor::ScriptEditor(FabiEngine3D& fe3d, shared_ptr<EngineGuiManager> gui) :
 	_fe3d(fe3d),
-	_gui(gui)
+	_gui(gui),
+	_script(fe3d),
+	_scriptExecutor(_script)
 {
 
 }
@@ -22,7 +24,7 @@ void ScriptEditor::initializeGUI()
 	_leftWindow->getScreen(screenID)->addButton("createScript", vec2(0.0f, 0.7f), vec2(GW("New script"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "New script", LVPC::textColor, LVPC::textHoverColor);
 	_leftWindow->getScreen(screenID)->addButton("editScript", vec2(0.0f, 0.35f), vec2(GW("Edit script"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Edit script", LVPC::textColor, LVPC::textHoverColor);
 	_leftWindow->getScreen(screenID)->addButton("deleteScript", vec2(0.0f, 0.0f), vec2(GW("Delete script"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Delete script", LVPC::textColor, LVPC::textHoverColor);
-	_leftWindow->getScreen(screenID)->addButton("variables", vec2(0.0f, -0.35f), vec2(GW("Variables"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Variables", LVPC::textColor, LVPC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("globals", vec2(0.0f, -0.35f), vec2(GW("Globals"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Globals", LVPC::textColor, LVPC::textHoverColor);
 	_leftWindow->getScreen(screenID)->addButton("back", vec2(0.0f, -0.7f), vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
 }
 
@@ -77,11 +79,10 @@ void ScriptEditor::unload()
 	_fe3d.lightEntity_deleteAll();
 
 	// Unload script
-	_unloadScript();
+	_script.reset();
+	_isScriptLoadedFromFile = false;
 
 	// Reset editor properties
-	_scriptExecutor = nullptr;
-	_script = nullptr;
 	_scrollingAcceleration = 0.0f;
 
 	// Miscellaneous

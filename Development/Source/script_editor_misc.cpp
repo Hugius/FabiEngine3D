@@ -1,11 +1,5 @@
 #include "script_editor.hpp"
 
-void ScriptEditor::_unloadScript()
-{
-	_script = nullptr;
-	_scriptExecutor = nullptr;
-}
-
 void ScriptEditor::_reloadScriptTextDisplay()
 {
 	if (_isLoaded)
@@ -14,7 +8,7 @@ void ScriptEditor::_reloadScriptTextDisplay()
 		_fe3d.billboardEntity_deleteAll();
 
 		// Create a billboard for every line number
-		for (unsigned int lineIndex = 0; lineIndex < _script->getScriptFile(_currentScriptFileID)->getLineCount(); lineIndex++)
+		for (unsigned int lineIndex = 0; lineIndex < _script.getScriptFile(_currentScriptFileID)->getLineCount(); lineIndex++)
 		{
 			// Generation values
 			string ID = to_string(lineIndex);
@@ -27,10 +21,10 @@ void ScriptEditor::_reloadScriptTextDisplay()
 		}
 
 		// Create a billboard for every character in every scriptline
-		for (unsigned int lineIndex = 0; lineIndex < _script->getScriptFile(_currentScriptFileID)->getLineCount(); lineIndex++)
+		for (unsigned int lineIndex = 0; lineIndex < _script.getScriptFile(_currentScriptFileID)->getLineCount(); lineIndex++)
 		{
 			// Retrieve line text
-			string textContent = _script->getScriptFile(_currentScriptFileID)->getLineText(lineIndex);
+			string textContent = _script.getScriptFile(_currentScriptFileID)->getLineText(lineIndex);
 
 			// Generation values
 			const vec3 linePosition = _fe3d.billboardEntity_getPosition(to_string(lineIndex));
@@ -51,10 +45,10 @@ void ScriptEditor::_reloadScriptTextDisplay()
 	}
 }
 
-shared_ptr<ScriptExecutor> ScriptEditor::getScriptExecutor()
+ScriptExecutor& ScriptEditor::getScriptExecutor()
 {
 	// Check if script is loaded yet
-	if (_scriptExecutor == nullptr)
+	if (!_isScriptLoadedFromFile)
 	{
 		_loadScriptFromFile();
 	}

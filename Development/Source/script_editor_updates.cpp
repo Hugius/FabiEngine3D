@@ -29,20 +29,23 @@ void ScriptEditor::_updateGUI()
 						_cursorLineIndex = 0;
 						_cursorPlaceIndex = 0;
 						_currentScriptFileID = "test";
-						_script->addScriptFile(_currentScriptFileID);
-						_script->getScriptFile(_currentScriptFileID)->insertNewLine(0, "");
+						_script.addScriptFile(_currentScriptFileID);
+						_script.getScriptFile(_currentScriptFileID)->insertNewLine(0, "");
 						_reloadScriptTextDisplay();
 					}
 				}
 				else if (mainScreen->getButton("editScript")->isHovered())
 				{
-					_gui->getGlobalScreen()->addChoiceForm("scriptFileList", "Choose file", vec2(0.0f, 0.0f), _script->getAllScriptFileIDs());
+					_gui->getGlobalScreen()->addChoiceForm("scriptFileList", "Choose file", vec2(0.0f, 0.0f), _script.getAllScriptFileIDs());
 				}
 				else if (mainScreen->getButton("deleteScript")->isHovered())
 				{
-					
+					_fe3d.billboardEntity_deleteAll();
+					_script.removeScriptFile(_currentScriptFileID);
+					_isWritingScript = false;
+					_currentScriptFileID = "";
 				}
-				else if (mainScreen->getButton("variables")->isHovered())
+				else if (mainScreen->getButton("globals")->isHovered())
 				{
 
 				}
@@ -72,6 +75,9 @@ void ScriptEditor::_updateMiscellaneous()
 {
 	if (_isLoaded)
 	{
+		// Update buttons hoverability
+		_leftWindow->getScreen("scriptEditorMenuMain")->getButton("deleteScript")->setHoverable(_currentScriptFileID != "");		
+
 		if (!_gui->getGlobalScreen()->isFocused() && _isWritingScript)
 		{
 			// Camear movement input

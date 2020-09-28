@@ -170,6 +170,7 @@
     <ClInclude Include="Source\script_editor.hpp" />
     <ClInclude Include="Source\script_executor.hpp" />
     <ClInclude Include="Source\script_file.hpp" />
+    <ClInclude Include="Source\script_interpreter.hpp" />
     <ClInclude Include="Source\script_variable.hpp" />
     <ClInclude Include="Source\settings_editor.hpp" />
     <ClInclude Include="Source\top_viewport_controller.hpp" />
@@ -300,6 +301,7 @@
     <ClCompile Include="Source\script_editor_updates.cpp" />
     <ClCompile Include="Source\script_executor.cpp" />
     <ClCompile Include="Source\script_file.cpp" />
+    <ClCompile Include="Source\script_interpreter.cpp" />
     <ClCompile Include="Source\script_value.cpp" />
     <ClCompile Include="Source\settings_editor.cpp" />
     <ClCompile Include="Source\top_viewport_controller_core.cpp" />

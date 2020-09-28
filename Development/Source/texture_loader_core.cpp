@@ -58,7 +58,7 @@ GLuint TextureLoader::_loadText(const string& text, const string&fontPath)
 	}
 
 	// Texture data of text
-	SDL_Surface * surface = TTF_RenderText_Blended(font, newText.c_str(), *sdlColor);
+	SDL_Surface* surface = TTF_RenderText_Blended(font, newText.c_str(), *sdlColor);
 
 	// OpenGL Texture
 	GLuint tex;

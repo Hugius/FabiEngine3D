@@ -9,7 +9,6 @@ public:
 
 	void addScriptFile(const string& ID);
 	void removeScriptFile(const string& ID);
-	void execute();
 	void reset();
 
 	int getScriptFileCount();

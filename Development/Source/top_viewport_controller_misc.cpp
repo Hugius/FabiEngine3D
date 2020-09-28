@@ -3,6 +3,8 @@
 #include <filesystem>
 #include <direct.h>
 
+#define SCRIPT_EXECUTOR _scriptEditor.getScriptExecutor()
+
 bool TopViewportController::isScriptRunning()
 {
 	if (_currentProjectName == "")
@@ -11,13 +13,13 @@ bool TopViewportController::isScriptRunning()
 	}
 	else
 	{
-		return _scriptEditor.getScriptExecutor()->isRunning();
+		return SCRIPT_EXECUTOR.isRunning();
 	}
 }
 
 void TopViewportController::_updateMiscellaneous()
 {
-	bool hoverable = (_currentProjectName == "") ? false : !_scriptEditor.getScriptExecutor()->isInitialized();
+	bool hoverable = (_currentProjectName == "") ? false : !SCRIPT_EXECUTOR.isInitialized();
 
 	// Project menus
 	_gui->getViewport("left")->getWindow("main")->getScreen("main")->getButton("modelEditor")->setHoverable(hoverable);

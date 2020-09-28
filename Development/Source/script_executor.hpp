@@ -1,14 +1,14 @@
 #pragma once
 
-#include "script.hpp"
+#include "script_interpreter.hpp"
 
 class ScriptExecutor
 {
 public:
-	ScriptExecutor(shared_ptr<Script> script);
+	ScriptExecutor(Script& script);
 
 	void initialize();
-	void execute();
+	void update();
 	void pause();
 	void unpause();
 	void reset();
@@ -18,7 +18,8 @@ public:
 	bool isRunning();
 
 private:
-	shared_ptr<Script> _script = nullptr;
+	Script& _script;
+	ScriptInterpreter _scriptInterpreter;
 
 	bool _isInitialized = false;
 	bool _isRunning = false;

@@ -12,7 +12,7 @@ void ScriptEditor::_loadScriptFromFile()
 	}
 
 	// Clear last script
-	_unloadScript();
+	_script.reset();
 
 	// Compose full script folder path
 	string filePath = _fe3d.misc_getRootDirectory() + "User\\projects\\" + _currentProjectName + "\\data\\script.fe3d";
@@ -20,9 +20,6 @@ void ScriptEditor::_loadScriptFromFile()
 	// Check if script file exists
 	if (_fe3d.misc_isFileExisting(filePath))
 	{
-		// Create new script to be filled from savefile
-		_script = make_shared<Script>(_fe3d);
-
 		// Load script file
 		std::ifstream file(filePath);
 		string line;
@@ -39,14 +36,8 @@ void ScriptEditor::_loadScriptFromFile()
 		// Logging
 		_fe3d.logger_throwInfo("Script data from project \"" + _currentProjectName + "\" loaded!");
 	}
-	else
-	{
-		// Create new empty script
-		_script = make_shared<Script>(_fe3d);
-	}
 
-	// Inject into script executor
-	_scriptExecutor = make_shared<ScriptExecutor>(_script);
+	_isScriptLoadedFromFile = true;
 }
 
 void ScriptEditor::_saveScriptToFile()

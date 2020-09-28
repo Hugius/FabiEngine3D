@@ -17,7 +17,8 @@ public:
 	void unload();
 	void update();
 	void setCurrentProjectName(const string & projectName);
-	shared_ptr<ScriptExecutor> getScriptExecutor();
+
+	ScriptExecutor& getScriptExecutor();
 
 	bool isLoaded();
 
@@ -27,7 +28,6 @@ private:
 	void _updateMiscellaneous();
 	void _loadScriptFromFile();
 	void _saveScriptToFile();
-	void _unloadScript();
 	void _reloadScriptTextDisplay();
 
 	// General stuff
@@ -35,8 +35,8 @@ private:
 	shared_ptr<EngineGuiManager> _gui = nullptr;
 	shared_ptr<EngineGuiWindow> _leftWindow = nullptr;
 	shared_ptr<EngineGuiWindow> _rightWindow = nullptr;
-	shared_ptr<ScriptExecutor> _scriptExecutor = nullptr;
-	shared_ptr<Script> _script = nullptr;
+	Script _script;
+	ScriptExecutor _scriptExecutor;
 
 	// Editor constants
 	const string _fontPath = "engine\\fonts\\lucida.ttf";
@@ -62,5 +62,6 @@ private:
 	unsigned int _cursorPlaceIndex = 0;
 	unsigned int _maxPassedBarFrames = 50;
 	bool _isLoaded = false;
+	bool _isScriptLoadedFromFile = false;
 	bool _isWritingScript = false;
 };

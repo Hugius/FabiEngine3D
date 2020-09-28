@@ -101,24 +101,32 @@ void EngineGuiWriteField::_updateTyping()
 					// Check if character is pressed on keyboard
 					if (_fe3d.input_getKeyPressed(Input(c)))
 					{
-						if (_fe3d.input_getKeyDown(Input::KEY_LSHIFT) || _fe3d.input_getKeyDown(Input::KEY_RSHIFT)) // Uppercase or special character
-						{
-							// Convert to uppercase
-							{
-								_currentTextContent += (c - 32);
-							}
-						}
-						else if ((GetKeyState(VK_CAPITAL) & 0x0001) != 0) // Uppercase character
-						{
-							if (!_noCaps) // A - Z
-							{
-								// Convert to uppercase
-								_currentTextContent += (c - 32);
-							}
-						}
-						else // Lowercase character
+						// Spacebar
+						if (c == ' ')
 						{
 							_currentTextContent += c;
+						}
+						else // Non-spacebar
+						{
+							if (_fe3d.input_getKeyDown(Input::KEY_LSHIFT) || _fe3d.input_getKeyDown(Input::KEY_RSHIFT)) // Uppercase or special character
+							{
+								// Convert to uppercase
+								{
+									_currentTextContent += (c - 32);
+								}
+							}
+							else if ((GetKeyState(VK_CAPITAL) & 0x0001) != 0) // Uppercase character
+							{
+								if (!_noCaps) // A - Z
+								{
+									// Convert to uppercase
+									_currentTextContent += (c - 32);
+								}
+							}
+							else // Lowercase character
+							{
+								_currentTextContent += c;
+							}
 						}
 					}
 				}

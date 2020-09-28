@@ -39,14 +39,9 @@ void Script::removeScriptFile(const string& ID)
 	Logger::getInst().throwError("Could not remove script file with ID: " + ID);
 }
 
-void Script::execute()
-{
-
-}
-
 void Script::reset()
 {
-
+	_scriptFiles.clear();
 }
 
 int Script::getScriptFileCount()

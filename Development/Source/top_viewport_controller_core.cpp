@@ -97,7 +97,7 @@ void TopViewportController::_updateProjectManagement()
 	_updateProjectDeletion();
 
 	// Update save button hoverability
-	bool scriptRunning = (_currentProjectName == "") ? false : _scriptEditor.getScriptExecutor()->isInitialized();
+	bool scriptRunning = (_currentProjectName == "") ? false : SCRIPT_EXECUTOR.isInitialized();
 	projectScreen->getButton("newProject")->setHoverable(!scriptRunning);
 	projectScreen->getButton("loadProject")->setHoverable(!scriptRunning);
 	projectScreen->getButton("saveProject")->setHoverable(!scriptRunning && _currentProjectName != "");
@@ -136,36 +136,36 @@ void TopViewportController::_updateGameManagement()
 			if (gameScreen->getButton("play")->isHovered())
 			{
 				// Unpause game or load game
-				if (SCRIPT_EXECUTOR->isInitialized())
+				if (SCRIPT_EXECUTOR.isInitialized())
 				{
-					SCRIPT_EXECUTOR->unpause();
+					SCRIPT_EXECUTOR.unpause();
 				}
 				else
 				{
 					// Load all assets before executing script
-					SCRIPT_EXECUTOR->initialize();
+					SCRIPT_EXECUTOR.initialize();
 					_sceneEditor.loadScene(false);
 				}
 			}
 			else if (gameScreen->getButton("pause")->isHovered())
 			{
 				// Pause script execution
-				SCRIPT_EXECUTOR->pause();
+				SCRIPT_EXECUTOR.pause();
 			}
 			else if (gameScreen->getButton("restart")->isHovered())
 			{
 				// Unload
-				SCRIPT_EXECUTOR->reset();
+				SCRIPT_EXECUTOR.reset();
 				_sceneEditor.unloadScene();
 
 				// Load again
-				SCRIPT_EXECUTOR->initialize();
+				SCRIPT_EXECUTOR.initialize();
 				_sceneEditor.loadScene(false);
 			}
 			else if (gameScreen->getButton("stop")->isHovered())
 			{
 				// Reset everything and load main menu again
-				SCRIPT_EXECUTOR->reset();
+				SCRIPT_EXECUTOR.reset();
 				_sceneEditor.unloadScene();
 				_fe3d.skyEntity_select("@@defaultSky");
 			}
@@ -173,22 +173,22 @@ void TopViewportController::_updateGameManagement()
 
 		// Game buttons hoverability
 		bool isInMainMenu = (_gui->getViewport("left")->getWindow("main")->getActiveScreen()->getID() == "main");
-		gameScreen->getButton("play")->setHoverable(isInMainMenu && !SCRIPT_EXECUTOR->isScriptEmpty() && !SCRIPT_EXECUTOR->isRunning());
-		gameScreen->getButton("pause")->setHoverable(isInMainMenu && SCRIPT_EXECUTOR->isRunning());
-		gameScreen->getButton("restart")->setHoverable(isInMainMenu && SCRIPT_EXECUTOR->isInitialized());
-		gameScreen->getButton("stop")->setHoverable(isInMainMenu && SCRIPT_EXECUTOR->isInitialized());
+		gameScreen->getButton("play")->setHoverable(isInMainMenu && !SCRIPT_EXECUTOR.isScriptEmpty() && !SCRIPT_EXECUTOR.isRunning());
+		gameScreen->getButton("pause")->setHoverable(isInMainMenu && SCRIPT_EXECUTOR.isRunning());
+		gameScreen->getButton("restart")->setHoverable(isInMainMenu && SCRIPT_EXECUTOR.isInitialized());
+		gameScreen->getButton("stop")->setHoverable(isInMainMenu && SCRIPT_EXECUTOR.isInitialized());
 
 		// Check if player wants to pause the running game
-		if (SCRIPT_EXECUTOR->isRunning())
+		if (SCRIPT_EXECUTOR.isRunning())
 		{
 			if (_fe3d.input_getKeyPressed(Input::KEY_ESCAPE))
 			{
-				SCRIPT_EXECUTOR->pause();
+				SCRIPT_EXECUTOR.pause();
 			}
 		}
 
 		// Executing game script (if possible)
-		SCRIPT_EXECUTOR->execute();
+		SCRIPT_EXECUTOR.update();
 	}
 
 }

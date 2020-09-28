@@ -433,6 +433,9 @@
     <ClCompile Include="Source\script_editor_writer.cpp">
       <Filter>src\Editor System\Script Editor\Updates</Filter>
     </ClCompile>
+    <ClCompile Include="Source\script_interpreter.cpp">
+      <Filter>src\Scripting System\Execution</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\obj_loader.hpp">
@@ -698,6 +701,9 @@
     </ClInclude>
     <ClInclude Include="Source\script_variable.hpp">
       <Filter>src\Scripting System\Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\script_interpreter.hpp">
+      <Filter>src\Scripting System\Execution</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

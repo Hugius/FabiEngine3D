@@ -53,7 +53,7 @@ void ScriptEditor::_updateTextWriter()
 				if (_cursorLineIndex < _script->getScriptFile(_currentScriptFileID)->getLineCount())
 				{
 					_cursorLineIndex++;
-					_cursorPlaceIndex = _script->getScriptFile(_currentScriptFileID)->getLineText(_cursorLineIndex).size();
+					_cursorPlaceIndex = 0;
 				}
 			}
 		}
@@ -71,7 +71,7 @@ void ScriptEditor::_updateTextWriter()
 		}
 		else if (_fe3d.input_getKeyPressed(Input::KEY_DOWN)) // Down
 		{
-			if (_cursorLineIndex < _script->getScriptFile(_currentScriptFileID)->getLineCount())
+			if (_cursorLineIndex < _script->getScriptFile(_currentScriptFileID)->getLineCount() - 1)
 			{
 				_cursorLineIndex++;
 
@@ -239,7 +239,7 @@ void ScriptEditor::_updateTextWriter()
 
 		// Update cursor billboard text
 		vec3 position;
-		if (_script->getScriptFile(_currentScriptFileID)->getLineText(_cursorLineIndex).empty())
+		if (_cursorPlaceIndex == 0)
 		{
 			position = _fe3d.billboardEntity_getPosition(to_string(_cursorLineIndex)) + vec3(_horizontalLineOffset / 2.0f, 0.0f, 0.0f);
 		}

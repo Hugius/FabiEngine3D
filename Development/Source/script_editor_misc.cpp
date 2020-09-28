@@ -34,7 +34,7 @@ void ScriptEditor::_reloadScriptTextDisplay()
 
 			// Generation values
 			const vec3 linePosition = _fe3d.billboardEntity_getPosition(to_string(lineIndex));
-
+			
 			// Loop over every character
 			for (unsigned int charIndex = 0; charIndex < textContent.size(); charIndex++)
 			{

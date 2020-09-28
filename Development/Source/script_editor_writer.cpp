@@ -5,69 +5,164 @@ void ScriptEditor::_updateTextWriter()
 	if (_isLoaded && _isWritingScript)
 	{
 		bool textHasChanged = false;
-		
-		if (_fe3d.input_getKeyPressed(Input::KEY_ENTER)) // New line
+
+		// Timing functionality for continuous actions
+		const vector<Input> actionKeys = 
+		{ Input::KEY_ENTER, Input::KEY_BACKSPACE, Input::KEY_DELETE, Input::KEY_LEFT, Input::KEY_RIGHT, Input::KEY_UP, Input::KEY_DOWN };
+		static Input activeActionKey = Input::NONE;
+		static unsigned int passedFrames = 0;
+		static bool singleActionAllowed = true;
+		static bool continuousActionAllowed = false;
+
+		// Timer for continuous actions
+		if (activeActionKey == Input::NONE)
 		{
-			_cursorPlaceIndex = 0; // Set cursor to beginning of new line
-			_cursorLineIndex++;
-			_script->getScriptFile(_currentScriptFileID)->addNewLine("");
-			textHasChanged = true;
+			for (Input actionKey : actionKeys) // Check all possible action keys
+			{
+				if (_fe3d.input_getKeyDown(actionKey)) // Check if action key is down
+				{
+					// Remember currently pressed action key
+					activeActionKey = actionKey;
+					break;
+				}
+			}
+		}
+		else
+		{
+			// Check if waited long enough for continuous action
+			if (passedFrames == _continuousTextActionFrameMinimum)
+			{
+				continuousActionAllowed = true;
+				passedFrames = 0;
+			}
+			else // Keep waiting
+			{
+				passedFrames++;
+			}
+		}
+
+		// Reset timing state if action key released
+		if (!_fe3d.input_getKeyDown(activeActionKey))
+		{
+			activeActionKey = Input::NONE;
+			passedFrames = 0;
+			singleActionAllowed = true;
+			continuousActionAllowed = false;
+		}
+
+		// Determine text action type
+		if (_fe3d.input_getKeyDown(Input::KEY_ENTER)) // New line
+		{
+			// Check if single or fast new line action
+			if (singleActionAllowed || continuousActionAllowed)
+			{
+				if (_fe3d.misc_checkInterval("textAction", _continuousTextActionInterval) || singleActionAllowed)
+				{
+					singleActionAllowed = false;
+
+					// Set cursor to beginning of new line
+					_cursorPlaceIndex = 0;
+					_cursorLineIndex++;
+					_script->getScriptFile(_currentScriptFileID)->addNewLine("");
+					textHasChanged = true;
+				}
+			}
 		}
 		else if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
 		{
 
 		}
-		else if (_fe3d.input_getKeyPressed(Input::KEY_LEFT)) // Left
+		else if (activeActionKey == Input::KEY_LEFT) // Left arrow key
 		{
-			if (_cursorPlaceIndex > 0)
+			// Check if single or fast cursor move
+			if (singleActionAllowed || continuousActionAllowed)
 			{
-				_cursorPlaceIndex--;
-			}
-			else
-			{
-				if (_cursorLineIndex > 0)
+				if (_fe3d.misc_checkInterval("textAction", _continuousTextActionInterval) || singleActionAllowed)
 				{
-					_cursorLineIndex--;
-					_cursorPlaceIndex = _script->getScriptFile(_currentScriptFileID)->getLineText(_cursorLineIndex).size();
-				}
-			}
-		}
-		else if (_fe3d.input_getKeyPressed(Input::KEY_RIGHT)) // Right
-		{
-			if (_cursorPlaceIndex < _script->getScriptFile(_currentScriptFileID)->getLineText(_cursorLineIndex).size())
-			{
-				_cursorPlaceIndex++;
-			}
-			else
-			{
-				if (_cursorLineIndex < _script->getScriptFile(_currentScriptFileID)->getLineCount() - 1)
-				{
-					_cursorLineIndex++;
-					_cursorPlaceIndex = 0;
-				}
-			}
-		}
-		else if (_fe3d.input_getKeyPressed(Input::KEY_UP)) // Up
-		{
-			if (_cursorLineIndex > 0)
-			{
-				_cursorLineIndex--;
+					singleActionAllowed = false;
 
-				if (_cursorPlaceIndex > _script->getScriptFile(_currentScriptFileID)->getLineText(_cursorLineIndex).size())
-				{
-					_cursorPlaceIndex = _script->getScriptFile(_currentScriptFileID)->getLineText(_cursorLineIndex).size();
+					if (_cursorPlaceIndex > 0) // If cursor somewhere on the line
+					{
+						_cursorPlaceIndex--;
+					}
+					else // If cursor is at the beginning of the line
+					{
+						if (_cursorLineIndex > 0) // Check if trying to move cursor out of screen
+						{
+							_cursorLineIndex--;
+							_cursorPlaceIndex = _script->getScriptFile(_currentScriptFileID)->getLineText(_cursorLineIndex).size();
+						}
+					}
 				}
 			}
 		}
-		else if (_fe3d.input_getKeyPressed(Input::KEY_DOWN)) // Down
+		else if (_fe3d.input_getKeyDown(Input::KEY_RIGHT)) // Right arrow key
 		{
-			if (_cursorLineIndex < _script->getScriptFile(_currentScriptFileID)->getLineCount() - 1)
+			// Check if single or fast cursor move
+			if (singleActionAllowed || continuousActionAllowed)
 			{
-				_cursorLineIndex++;
-
-				if (_cursorPlaceIndex > _script->getScriptFile(_currentScriptFileID)->getLineText(_cursorLineIndex).size())
+				if (_fe3d.misc_checkInterval("textAction", _continuousTextActionInterval) || singleActionAllowed)
 				{
-					_cursorPlaceIndex = _script->getScriptFile(_currentScriptFileID)->getLineText(_cursorLineIndex).size();
+					singleActionAllowed = false;
+
+					if (_cursorPlaceIndex < _script->getScriptFile(_currentScriptFileID)->getLineText(_cursorLineIndex).size()) // If cursor somewhere on the line
+					{
+						_cursorPlaceIndex++;
+					}
+					else // If cursor is at the end of the line
+					{
+						// Check if trying to move cursor out of screen
+						if (_cursorLineIndex < _script->getScriptFile(_currentScriptFileID)->getLineCount() - 1)
+						{
+							_cursorLineIndex++;
+							_cursorPlaceIndex = 0;
+						}
+					}
+				}
+			}
+		}
+		else if (_fe3d.input_getKeyDown(Input::KEY_UP)) // Up arrow key
+		{
+			// Check if single or fast cursor move
+			if (singleActionAllowed || continuousActionAllowed)
+			{
+				if (_fe3d.misc_checkInterval("textAction", _continuousTextActionInterval) || singleActionAllowed)
+				{
+					singleActionAllowed = false;
+
+					if (_cursorLineIndex > 0) // Check if trying to move cursor out of screen
+					{
+						_cursorLineIndex--;
+
+						// Change place index accordingly
+						if (_cursorPlaceIndex > _script->getScriptFile(_currentScriptFileID)->getLineText(_cursorLineIndex).size())
+						{
+							_cursorPlaceIndex = _script->getScriptFile(_currentScriptFileID)->getLineText(_cursorLineIndex).size();
+						}
+					}
+				}
+			}
+		}
+		else if (_fe3d.input_getKeyDown(Input::KEY_DOWN)) // Down arrow key
+		{
+			// Check if single or fast cursor move
+			if (singleActionAllowed || continuousActionAllowed)
+			{
+				if (_fe3d.misc_checkInterval("textAction", _continuousTextActionInterval) || singleActionAllowed)
+				{
+					singleActionAllowed = false;
+
+					// Check if trying to move cursor out of screen
+					if (_cursorLineIndex < _script->getScriptFile(_currentScriptFileID)->getLineCount() - 1)
+					{
+						_cursorLineIndex++;
+
+						// Change place index accordingly
+						if (_cursorPlaceIndex > _script->getScriptFile(_currentScriptFileID)->getLineText(_cursorLineIndex).size())
+						{
+							_cursorPlaceIndex = _script->getScriptFile(_currentScriptFileID)->getLineText(_cursorLineIndex).size();
+						}
+					}
 				}
 			}
 		}
@@ -103,8 +198,8 @@ void ScriptEditor::_updateTextWriter()
 			specialCharacterMap['='] = '+';
 
 			// All characters of current line
-			string lineText = _script->getScriptFile(_currentScriptFileID)->getLineText(_cursorLineIndex);
-			string newCharacter = "";
+			string currentLineText = _script->getScriptFile(_currentScriptFileID)->getLineText(_cursorLineIndex);
+			string newCharacters = "";
 
 			// Letter characters
 			for (auto& c : letterCharacters)
@@ -114,15 +209,15 @@ void ScriptEditor::_updateTextWriter()
 				{
 					if (_fe3d.input_getKeyDown(Input::KEY_LSHIFT) || _fe3d.input_getKeyDown(Input::KEY_RSHIFT)) // Uppercase or special character
 					{
-						newCharacter = (c - 32);
+						newCharacters += (c - 32);
 					}
 					else if ((GetKeyState(VK_CAPITAL) & 0x0001) != 0) // CAPSLOCK
 					{
-						newCharacter = (c - 32);
+						newCharacters += (c - 32);
 					}
 					else // Lowercase character
 					{
-						newCharacter = c;
+						newCharacters += c;
 					}
 				}
 			}
@@ -136,11 +231,11 @@ void ScriptEditor::_updateTextWriter()
 					// Check if shift was pressed
 					if (_fe3d.input_getKeyDown(Input::KEY_LSHIFT) || _fe3d.input_getKeyDown(Input::KEY_RSHIFT))
 					{
-						newCharacter = element.second;
+						newCharacters = element.second;
 					}
 					else
 					{
-						newCharacter = element.first;
+						newCharacters = element.first;
 					}
 				}
 			}
@@ -154,90 +249,100 @@ void ScriptEditor::_updateTextWriter()
 					// Check if shift was pressed
 					if (_fe3d.input_getKeyDown(Input::KEY_LSHIFT) || _fe3d.input_getKeyDown(Input::KEY_RSHIFT))
 					{
-						newCharacter = element.second;
+						newCharacters += element.second;
 					}
 					else
 					{
-						newCharacter = element.first;
+						newCharacters += element.first;
 					}
 				}
 			}
 
 			// Remove characters from line
-			static unsigned int passedBackspaceFrames = 0;
-			static bool allowedToRemoveSingle = true;
-			static bool allowedToRemoveFast = false;
-			if (_fe3d.input_getKeyDown(Input::KEY_BACKSPACE))
+			if (activeActionKey == Input::KEY_BACKSPACE || activeActionKey == Input::KEY_DELETE)
 			{
-				// Timer for fast remove
-				if (passedBackspaceFrames == 75)
-				{
-					allowedToRemoveFast = true;
-					passedBackspaceFrames = 0;
-				}
-				else
-				{
-					passedBackspaceFrames++;
-				}
-
 				// Check if single or fast remove
-				if (allowedToRemoveSingle || allowedToRemoveFast)
+				if (singleActionAllowed || continuousActionAllowed)
 				{
-					allowedToRemoveSingle = false;
-
-					// Jump to line above if cursor at beginning of line
-					if (_cursorPlaceIndex == 0)
+					if (_fe3d.misc_checkInterval("textAction", _continuousTextActionInterval) || singleActionAllowed)
 					{
-						// Check if not trying to remove default line
-						if (_cursorLineIndex > 0)
-						{
-							// Remove line
-							_script->getScriptFile(_currentScriptFileID)->removeLine(_cursorLineIndex);
-							_cursorLineIndex--;
+						singleActionAllowed = false;
 
-							// Set cursor to last character of line above
-							_cursorPlaceIndex = _script->getScriptFile(_currentScriptFileID)->getLineText(_cursorLineIndex).size();
+						// Jump to line above if cursor at beginning of line
+						if (_cursorPlaceIndex == 0 && _fe3d.input_getKeyDown(Input::KEY_BACKSPACE))
+						{
+							// Check if not trying to remove default line
+							if (_cursorLineIndex > 0)
+							{
+								// Remove line
+								string textToMerge = _script->getScriptFile(_currentScriptFileID)->getLineText(_cursorLineIndex);
+								_script->getScriptFile(_currentScriptFileID)->removeLine(_cursorLineIndex);
+								_cursorLineIndex--;
+
+								// Set cursor to last character of line above
+								_cursorPlaceIndex = _script->getScriptFile(_currentScriptFileID)->getLineText(_cursorLineIndex).size();
+								currentLineText += textToMerge;
+								_script->getScriptFile(_currentScriptFileID)->setLineText(_cursorLineIndex, currentLineText);
+								textHasChanged = true;
+							}
+						}
+						else if (_cursorPlaceIndex == currentLineText.size() && _fe3d.input_getKeyDown(Input::KEY_DELETE))
+						{
+							// Check if not trying to remove default line
+							if (_cursorLineIndex < _script->getScriptFile(_currentScriptFileID)->getLineCount() - 1)
+							{
+								// Remove line
+								string textToMerge = _script->getScriptFile(_currentScriptFileID)->getLineText(_cursorLineIndex + 1);
+								_script->getScriptFile(_currentScriptFileID)->removeLine(_cursorLineIndex + 1);
+
+								// Merge text on current line & save merged line
+								currentLineText += textToMerge;
+								_script->getScriptFile(_currentScriptFileID)->setLineText(_cursorLineIndex, currentLineText);
+								textHasChanged = true;
+							}
+						}
+						else if (_cursorPlaceIndex > 0 && _fe3d.input_getKeyDown(Input::KEY_BACKSPACE)) // Remove previous character from current line
+						{
+							_cursorPlaceIndex--;
+							currentLineText.erase(currentLineText.begin() + _cursorPlaceIndex);
 							textHasChanged = true;
+							_script->getScriptFile(_currentScriptFileID)->setLineText(_cursorLineIndex, currentLineText); // Save new line text
+						}
+						else if (_fe3d.input_getKeyDown(Input::KEY_DELETE)) // Remove next character from current line
+						{
+							currentLineText.erase(currentLineText.begin() + _cursorPlaceIndex);
+							textHasChanged = true;
+							_script->getScriptFile(_currentScriptFileID)->setLineText(_cursorLineIndex, currentLineText); // Save new line text
 						}
 					}
-					else if (_cursorPlaceIndex > 0) // Remove character from current line
-					{
-						_cursorPlaceIndex--;
-						lineText.erase(lineText.begin() + _cursorPlaceIndex);
-						textHasChanged = true;
-					}
 				}
-			}
-			else // Reset timing
-			{
-				passedBackspaceFrames = 0;
-				allowedToRemoveSingle = true;
-				allowedToRemoveFast = false;
 			}
 
 			// Add new typed character to line
-			if (newCharacter != "")
+			if (newCharacters != "")
 			{
-				if (lineText == "") // First character in line
+				if (currentLineText == "" || _cursorPlaceIndex == currentLineText.size()) // First or last character in line
 				{
-					lineText = newCharacter;
-					_cursorPlaceIndex++;
-				}
-				else if (_cursorPlaceIndex == lineText.size()) // Last character in line
-				{
-					lineText += newCharacter;
-					_cursorPlaceIndex++;
+					for (auto& character : newCharacters)
+					{
+						currentLineText += character;
+						_cursorPlaceIndex++;
+					}
 				}
 				else // Inbetween character in line
 				{
-					_cursorPlaceIndex++;
+					for (auto& character : newCharacters)
+					{
+						currentLineText.insert(currentLineText.begin() + _cursorPlaceIndex, character);
+						_cursorPlaceIndex++;
+					}
 				}
 
 				textHasChanged = true;
-			}
 
-			// Save new line
-			_script->getScriptFile(_currentScriptFileID)->setLineText(_cursorLineIndex, lineText);
+				// Save new line
+				_script->getScriptFile(_currentScriptFileID)->setLineText(_cursorLineIndex, currentLineText);
+			}
 		}
 
 		// Reload text display when altered

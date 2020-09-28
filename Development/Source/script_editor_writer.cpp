@@ -13,19 +13,9 @@ void ScriptEditor::_updateTextWriter()
 			_script->getScriptFile(_currentScriptFileID)->addNewLine("");
 			textHasChanged = true;
 		}
-		else if (_fe3d.input_getKeyPressed(Input::KEY_BACKSPACE) && _cursorPlaceIndex == 0) // Remove line
+		else if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
 		{
-			// Check if not trying to remove default line
-			if (_cursorLineIndex > 0)
-			{
-				// Remove line
-				_script->getScriptFile(_currentScriptFileID)->removeLine(_cursorLineIndex);
-				_cursorLineIndex--;
 
-				// Set cursor to last character of line above
-				_cursorPlaceIndex = _script->getScriptFile(_currentScriptFileID)->getLineText(_cursorLineIndex).size();
-				textHasChanged = true;
-			}
 		}
 		else if (_fe3d.input_getKeyPressed(Input::KEY_LEFT)) // Left
 		{
@@ -50,7 +40,7 @@ void ScriptEditor::_updateTextWriter()
 			}
 			else
 			{
-				if (_cursorLineIndex < _script->getScriptFile(_currentScriptFileID)->getLineCount())
+				if (_cursorLineIndex < _script->getScriptFile(_currentScriptFileID)->getLineCount() - 1)
 				{
 					_cursorLineIndex++;
 					_cursorPlaceIndex = 0;
@@ -173,15 +163,56 @@ void ScriptEditor::_updateTextWriter()
 				}
 			}
 
-			// Remove character from line
-			if (_fe3d.input_getKeyPressed(Input::KEY_BACKSPACE))
+			// Remove characters from line
+			static unsigned int passedBackspaceFrames = 0;
+			static bool allowedToRemoveSingle = true;
+			static bool allowedToRemoveFast = false;
+			if (_fe3d.input_getKeyDown(Input::KEY_BACKSPACE))
 			{
-				if (_cursorPlaceIndex > 0)
+				// Timer for fast remove
+				if (passedBackspaceFrames == 75)
 				{
-					_cursorPlaceIndex--;
-					lineText.erase(lineText.begin() + _cursorPlaceIndex);
-					textHasChanged = true;
+					allowedToRemoveFast = true;
+					passedBackspaceFrames = 0;
 				}
+				else
+				{
+					passedBackspaceFrames++;
+				}
+
+				// Check if single or fast remove
+				if (allowedToRemoveSingle || allowedToRemoveFast)
+				{
+					allowedToRemoveSingle = false;
+
+					// Jump to line above if cursor at beginning of line
+					if (_cursorPlaceIndex == 0)
+					{
+						// Check if not trying to remove default line
+						if (_cursorLineIndex > 0)
+						{
+							// Remove line
+							_script->getScriptFile(_currentScriptFileID)->removeLine(_cursorLineIndex);
+							_cursorLineIndex--;
+
+							// Set cursor to last character of line above
+							_cursorPlaceIndex = _script->getScriptFile(_currentScriptFileID)->getLineText(_cursorLineIndex).size();
+							textHasChanged = true;
+						}
+					}
+					else if (_cursorPlaceIndex > 0) // Remove character from current line
+					{
+						_cursorPlaceIndex--;
+						lineText.erase(lineText.begin() + _cursorPlaceIndex);
+						textHasChanged = true;
+					}
+				}
+			}
+			else // Reset timing
+			{
+				passedBackspaceFrames = 0;
+				allowedToRemoveSingle = true;
+				allowedToRemoveFast = false;
 			}
 
 			// Add new typed character to line

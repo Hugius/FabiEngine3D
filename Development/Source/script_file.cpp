@@ -32,9 +32,7 @@ void ScriptFile::removeLine(unsigned int index)
 	}
 	else
 	{
-		std::cout << _lines.size();
 		_lines.erase(_lines.begin() + index);
-		std::cout << _lines.size() << std::endl;
 	}
 }
 

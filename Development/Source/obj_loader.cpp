@@ -53,7 +53,8 @@ vector<ObjPart> OBJLoader::_loadOBJ(const string& filePath, bool calculateTangen
 	FILE * file = fopen(path.c_str(), "r");
 	if (!std::filesystem::exists(path) || filePath == "")
 	{
-		Logger::getInst().throwError("Could not load .obj file: " + filePath);
+		Logger::getInst().throwWarning("Model(OBJ) file loading problem: \"" + filePath + "\"");
+		return {};
 	}
 
 	// Fill the vector with the data from the file
@@ -166,7 +167,8 @@ vector<ObjPart> OBJLoader::_loadOBJ(const string& filePath, bool calculateTangen
 			// Check if face amount is correct (3x3)
 			if (matches != 9)
 			{
-				Logger::getInst().throwError("Too many or not enough faces at file: " + filePath);
+				Logger::getInst().throwWarning("Too many or not enough faces at OBJ file: \"" + filePath + "\"");
+				return {};
 			}
 
 			bool alreadyExisting = false;
@@ -263,7 +265,8 @@ vector<ObjPart> OBJLoader::_loadOBJ(const string& filePath, bool calculateTangen
 	// Error checking
 	if (objParts.empty())
 	{
-		Logger::getInst().throwError("Incorrect or too little content at file: " + filePath);
+		Logger::getInst().throwWarning("Incorrect or too little content at OBJ file: \"" + filePath + "\"");
+		return {};
 	}
 
 	// Logging

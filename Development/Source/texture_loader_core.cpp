@@ -21,7 +21,7 @@ TTF_Font* TextureLoader::_loadFont(const string& fontPath)
 		TTF_Font* font = TTF_OpenFont((rootDir + fontPath).c_str(), 50);
 		if (font == nullptr)
 		{
-			Logger::getInst().throwError("Texture error: " + string(SDL_GetError()));
+			Logger::getInst().throwError("Font loading error: " + string(SDL_GetError()));
 		}
 		_fonts.insert(std::make_pair(fontPath, font));
 
@@ -52,10 +52,6 @@ GLuint TextureLoader::_loadText(const string& text, const string&fontPath)
 
 	// Load color
 	SDL_Color * sdlColor = new SDL_Color{ 255, 255, 255 };
-	if (sdlColor == nullptr)
-	{
-		Logger::getInst().throwError("Color could not be created at rgb: " + to_string(sdlColor->r) + to_string(sdlColor->g) + to_string(sdlColor->b));
-	}
 
 	// Texture data of text
 	SDL_Surface* surface = TTF_RenderText_Blended(font, newText.c_str(), *sdlColor);
@@ -79,7 +75,8 @@ GLuint TextureLoader::_loadText(const string& text, const string&fontPath)
 	}
 	else
 	{
-		Logger::getInst().throwError("Pixel format not recognized at text texture: " + text);
+		Logger::getInst().throwWarning("Pixel format not recognized while generating TEXT texture: \"" + text + "\"");
+		return 0;
 	}
 
 	// Memory management
@@ -100,7 +97,8 @@ GLuint TextureLoader::_loadTexture(const string& filePath, bool mipmap, bool ani
 	SDL_Surface * surface = IMG_Load((rootDir + filePath).c_str());
 	if (surface == nullptr)
 	{
-		Logger::getInst().throwError("Texture error: " + string(SDL_GetError()));
+		Logger::getInst().throwWarning("Texture loading problem: " + string(SDL_GetError()));
+		return 0;
 	}
 
 	// Generate OpenGL texture
@@ -119,7 +117,8 @@ GLuint TextureLoader::_loadTexture(const string& filePath, bool mipmap, bool ani
 	}
 	else
 	{
-		Logger::getInst().throwError("Pixel format not recognized at image: " + filePath);
+		Logger::getInst().throwWarning("Pixel format not recognized at texture: \"" + filePath + "\"");
+		return 0;
 	}
 
 	// Memory management
@@ -185,13 +184,15 @@ GLuint TextureLoader::_loadCubeMap(const array<string, 6>& filePaths)
 			SDL_Surface* surface = IMG_Load((rootDir + filePaths[i]).c_str());
 			if (surface == nullptr)
 			{
-				Logger::getInst().throwError("Skybox texture could not be loaded: " + string(SDL_GetError()));
+				Logger::getInst().throwWarning("Skybox texture loading problem: " + string(SDL_GetError()));
+				return 0;
 			}
 
 			// Check if resolution dimensions are the same
 			if (surface->w != surface->h)
 			{
-				Logger::getInst().throwError("Skybox texture width must be same as height: " + filePaths[i]);
+				Logger::getInst().throwWarning("Skybox texture width must be same as height: \"" + filePaths[i] + "\"");
+				return 0;
 			}
 
 			// Check if resolution dimensions are the same as all others
@@ -199,7 +200,8 @@ GLuint TextureLoader::_loadCubeMap(const array<string, 6>& filePaths)
 			{
 				if (textureSize != surface->w)
 				{
-					Logger::getInst().throwError("All skybox textures must have the same resolution: " + filePaths[i]);
+					Logger::getInst().throwWarning("All skybox textures must have the same resolution: \"" + filePaths[i] + "\"");
+					return 0;
 				}
 			}
 
@@ -225,7 +227,8 @@ GLuint TextureLoader::_loadCubeMap(const array<string, 6>& filePaths)
 			SDL_Surface* surface = IMG_Load((rootDir + filePaths[i]).c_str());
 			if (surface == nullptr)
 			{
-				Logger::getInst().throwError("Skybox texture could not be loaded: " + string(SDL_GetError()));
+				Logger::getInst().throwWarning("Skybox texture loading problem: " + string(SDL_GetError()));
+				return 0;
 			}
 
 			// Convert to OpenGL texture
@@ -268,7 +271,8 @@ vector<float> TextureLoader::_loadHeightMap(const string& filePath)
 	fopen_s(&streamIn, (rootDir + filePath).c_str(), "rb");
 	if (streamIn == (FILE*)0)
 	{
-		Logger::getInst().throwError("Could not open heightMap: " + filePath);
+		Logger::getInst().throwWarning("Heightmap texture loading problem: \"" + filePath + "\"");
+		return {};
 	}
 
 	// File header

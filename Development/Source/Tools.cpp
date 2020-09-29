@@ -64,7 +64,7 @@ float Tools::squared(float val)
 bool Tools::compareData_string(const string& firstString, string targetString, string errorMsg)
 {
 	if (firstString != targetString) {
-		Logger::getInst().throwError(errorMsg);
+		Logger::throwError(errorMsg);
 		return false;
 	}
 	else {

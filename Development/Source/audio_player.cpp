@@ -32,7 +32,7 @@ void AudioPlayer::update(CameraManager& camera, std::vector<AudioChunk>& chunks,
 
 		for (auto& element : _channelMap)
 		{
-			Logger::getInst().throwDebug("Channel", std::to_string(element.first + 1), " : ", element.second);
+			Logger::throwDebug("Channel", std::to_string(element.first + 1), " : ", element.second);
 		}
 	}
 
@@ -186,7 +186,7 @@ void AudioPlayer::pauseChunk(AudioChunk& chunk)
 	}
 	else
 	{
-		Logger::getInst().throwWarning("Trying to pause audio chunk with ID \'", chunk.getID(), " \', but was not playing!"); // Warning
+		Logger::throwWarning("Trying to pause audio chunk with ID \'", chunk.getID(), " \', but was not playing!"); // Warning
 	}
 }
 
@@ -198,7 +198,7 @@ void AudioPlayer::resumeChunk(AudioChunk& chunk)
 	}
 	else
 	{
-		Logger::getInst().throwWarning("Trying to resume audio chunk with ID \'", chunk.getID(), " \', but was not paused!"); // Warning
+		Logger::throwWarning("Trying to resume audio chunk with ID \'", chunk.getID(), " \', but was not paused!"); // Warning
 	}
 }
 
@@ -210,7 +210,7 @@ void AudioPlayer::stopChunk(AudioChunk& chunk, int fadeMillis)
 	}
 	else
 	{
-		Logger::getInst().throwWarning("Trying to stop audio chunk with ID \'", chunk.getID(), " \', but was not playing!"); // Warning
+		Logger::throwWarning("Trying to stop audio chunk with ID \'", chunk.getID(), " \', but was not playing!"); // Warning
 	}
 }
 
@@ -222,7 +222,7 @@ void AudioPlayer::setChunkVolume(AudioChunk& chunk, int volume)
 	}
 	else
 	{
-		Logger::getInst().throwWarning("Trying to set volume of audio chunk with ID \'", chunk.getID(), " \', but was not playing!"); // Warning
+		Logger::throwWarning("Trying to set volume of audio chunk with ID \'", chunk.getID(), " \', but was not playing!"); // Warning
 	}
 }
 
@@ -263,7 +263,7 @@ int AudioPlayer::getVolume(AudioChunk& chunk)
 	}
 	else
 	{
-		Logger::getInst().throwWarning("Trying to get volume of audio chunk with ID \'", chunk.getID(), " \', but was not playing!"); // Warning
+		Logger::throwWarning("Trying to get volume of audio chunk with ID \'", chunk.getID(), " \', but was not playing!"); // Warning
 	}
 }
 
@@ -297,7 +297,7 @@ std::pair<const int, string>& AudioPlayer::_getPair(AudioChunk& chunk)
 		}
 	}
 
-	Logger::getInst().throwError("Trying to get audio chunk pair with ID \'", chunk.getID(), " \', but does not exist!"); // Error
+	Logger::throwError("Trying to get audio chunk pair with ID \'", chunk.getID(), " \', but does not exist!"); // Error
 }
 
 bool AudioPlayer::_isInMap(AudioChunk& chunk)
@@ -323,5 +323,5 @@ int AudioPlayer::_getFreeChannel()
 		}
 	}
 
-	Logger::getInst().throwError("Not enough audio channels availible!"); // Error
+	Logger::throwError("Not enough audio channels availible!"); // Error
 }

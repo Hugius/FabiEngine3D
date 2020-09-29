@@ -1,16 +1,18 @@
 #include "script_executor.hpp"
 
-ScriptExecutor::ScriptExecutor(Script& script) :
+ScriptExecutor::ScriptExecutor(FabiEngine3D& fe3d, Script& script) :
+	_fe3d(fe3d),
 	_script(script),
-	_scriptInterpreter(script)
+	_scriptInterpreter(fe3d, script)
 {
 
 }
 
-void ScriptExecutor::initialize()
+void ScriptExecutor::load()
 {
 	_isRunning = true;
 	_isInitialized = true;
+	_scriptInterpreter.load();
 	_scriptInterpreter.executeInitialization();
 }
 
@@ -32,9 +34,10 @@ void ScriptExecutor::unpause()
 	_isRunning = true;
 }
 
-void ScriptExecutor::reset()
+void ScriptExecutor::unload()
 {
 	_scriptInterpreter.executeDestruction();
+	_scriptInterpreter.unload();
 	_isInitialized = false;
 	_isRunning = false;
 }

@@ -38,7 +38,7 @@ OpenGLShader::OpenGLShader(const string& vertexFileName, const string& fragmentF
 	}
 	catch (std::ifstream::failure e) 
 	{
-		Logger::getInst().throwError("Shader text files could not be opened!");
+		Logger::throwError("Shader text files could not be opened!");
 	}
 
 	const GLchar* vShaderCode = vertexCode.c_str();
@@ -69,7 +69,7 @@ void OpenGLShader::_createProgram(const GLchar * vShaderCode, const GLchar * fSh
 	if (!success) 
 	{
 		glGetShaderInfoLog(vertex, 512, NULL, infoLog);
-		Logger::getInst().throwError("Shader error at " + _vertexFileName + ": " + infoLog);
+		Logger::throwError("Shader error at " + _vertexFileName + ": " + infoLog);
 	}
 
 	// Fragment shader
@@ -82,7 +82,7 @@ void OpenGLShader::_createProgram(const GLchar * vShaderCode, const GLchar * fSh
 	if (!success) 
 	{
 		glGetShaderInfoLog(fragment, 512, NULL, infoLog);
-		Logger::getInst().throwError("Shader error at " + _fragmentFileName + ": " + infoLog);
+		Logger::throwError("Shader error at " + _fragmentFileName + ": " + infoLog);
 	}
 
 	// Shader program
@@ -96,7 +96,7 @@ void OpenGLShader::_createProgram(const GLchar * vShaderCode, const GLchar * fSh
 	if (!success) 
 	{
 		glGetProgramInfoLog(_program, 512, NULL, infoLog);
-		Logger::getInst().throwError("Shader error at " + _fragmentFileName.substr(0, _fragmentFileName.size()-5) + ": " + infoLog);
+		Logger::throwError("Shader error at " + _fragmentFileName.substr(0, _fragmentFileName.size()-5) + ": " + infoLog);
 	}
 
 	// Delete the no longer needed shaders
@@ -104,8 +104,8 @@ void OpenGLShader::_createProgram(const GLchar * vShaderCode, const GLchar * fSh
 	glDeleteShader(fragment);
 
 	// Logging
-	Logger::getInst().throwInfo("Loaded vertex shader: engine\\shaders\\" + _vertexFileName);
-	Logger::getInst().throwInfo("Loaded fragment shader: engine\\shaders\\" + _fragmentFileName);
+	Logger::throwInfo("Loaded vertex shader: engine\\shaders\\" + _vertexFileName);
+	Logger::throwInfo("Loaded fragment shader: engine\\shaders\\" + _fragmentFileName);
 }
 
 void OpenGLShader::bind()

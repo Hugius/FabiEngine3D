@@ -178,35 +178,6 @@ void ScriptEditor::_updateTextWriter()
 		}
 		else // Other keypresses
 		{
-			// Letter characters
-			string letterCharacters = " abcdefghijklmnopqrstuvwxyz";
-
-			// Number characters
-			map<char, char> numberCharacterMap;
-			numberCharacterMap['0'] = ')';
-			numberCharacterMap['1'] = '!';
-			numberCharacterMap['2'] = '@';
-			numberCharacterMap['3'] = '#';
-			numberCharacterMap['4'] = '$';
-			numberCharacterMap['5'] = '%';
-			numberCharacterMap['6'] = '^';
-			numberCharacterMap['7'] = '&';
-			numberCharacterMap['8'] = '*';
-			numberCharacterMap['9'] = '(';
-
-			// Special characters
-			map<char, char> specialCharacterMap;
-			specialCharacterMap['.'] = '>';
-			specialCharacterMap[','] = '<';
-			specialCharacterMap['/'] = '?';
-			specialCharacterMap[';'] = ':';
-			specialCharacterMap['\''] = '\"';
-			specialCharacterMap['['] = '{';
-			specialCharacterMap[']'] = '}';
-			specialCharacterMap['\\'] = '|';
-			specialCharacterMap['-'] = '_';
-			specialCharacterMap['='] = '+';
-
 			// All characters of current line
 			string currentLineText = _script.getScriptFile(_currentScriptFileID)->getLineText(_cursorLineIndex);
 			string newCharacters = "";
@@ -339,7 +310,6 @@ void ScriptEditor::_updateTextWriter()
 			// Add new typed character to line
 			if (newCharacters != "")
 			{
-				std::cout << newCharacters << std::endl;
 				if (currentLineText == "" || _cursorPlaceIndex == currentLineText.size()) // First or last character in line
 				{
 					for (auto& character : newCharacters)

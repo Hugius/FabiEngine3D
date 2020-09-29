@@ -1,47 +1,86 @@
 #include "script_interpreter.hpp"
 
-ScriptInterpreter::ScriptInterpreter(Script& script) :
+#include <sstream>
+
+ScriptInterpreter::ScriptInterpreter(FabiEngine3D& fe3d, Script& script) :
+	_fe3d(fe3d),
 	_script(script)
 {
 
 }
 
-void ScriptInterpreter::executeInitialization()
+void ScriptInterpreter::load()
 {
+	// For every scriptfile
 	for (auto& ID : _script.getAllScriptFileIDs())
 	{
+		// Extract first line
 		auto scriptFile = _script.getScriptFile(ID);
+		std::istringstream iss(scriptFile->getLineText(0));
+		string type, name;
+		iss >> type >> name;
 
-		// Loop over all scriptlines
-		for (unsigned int i = 0; i < scriptFile->getLineCount(); i++)
+		// Determine script type
+		if (type == "META" && name == "script_type_init")
 		{
-			auto scriptLine = scriptFile->getLineText(i);
-			if (scriptLine.substr(0, 4) == "META")
-			{
-
-			}
+			_initScriptIDs.push_back(ID);
 		}
+		else if (type == "META" && name == "script_type_update")
+		{
+			_updateScriptIDs.push_back(ID);
+		}
+		else if (type == "META" && name == "script_type_destroy")
+		{
+			_destroyScriptIDs.push_back(ID);
+		}
+		else
+		{
+			
+		}
+	}
+}
+
+void ScriptInterpreter::executeInitialization()
+{
+	for (auto& ID : _initScriptIDs)
+	{
+		_executeScript(ID);
 	}
 }
 
 void ScriptInterpreter::executeUpdate()
 {
-
+	for (auto& ID : _updateScriptIDs)
+	{
+		_executeScript(ID);
+	}
 }
 
 void ScriptInterpreter::executeDestruction()
 {
-
+	for (auto& ID : _destroyScriptIDs)
+	{
+		_executeScript(ID);
+	}
 }
 
-void ScriptInterpreter::_executeInitialization()
+void ScriptInterpreter::unload()
 {
+	_initScriptIDs.clear();
+	_updateScriptIDs.clear();
+	_destroyScriptIDs.clear();
 }
 
-void ScriptInterpreter::_executeUpdate()
+void ScriptInterpreter::_executeScript(const string& ID)
 {
-}
+	auto scriptFile = _script.getScriptFile(ID);
 
-void ScriptInterpreter::_executeDestruction()
-{
+	// Interpret every line from top to bottom in script
+	for (unsigned int i = 0; i < scriptFile->getLineCount(); i++)
+	{
+		string scriptLine = scriptFile->getLineText(i);
+		std::istringstream iss(scriptLine);
+
+
+	}
 }

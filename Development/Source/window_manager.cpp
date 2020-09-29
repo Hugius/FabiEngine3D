@@ -16,15 +16,15 @@ WindowManager::WindowManager()
 	SetProcessDpiAwareness(PROCESS_SYSTEM_DPI_AWARE);
 
 	// SDL stuff
-	Logger::getInst().throwInfo("Initializing SDL 2...");
+	Logger::throwInfo("Initializing SDL 2...");
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
 	{
 		string error = "SDL could not be initialized: " + string(SDL_GetError());
-		Logger::getInst().throwError(error.c_str());
+		Logger::throwError(error.c_str());
 	}
 	
 	// Window stuff
-	Logger::getInst().throwInfo("Initializing window...");
+	Logger::throwInfo("Initializing window...");
 	_window = SDL_CreateWindow(
 		"FabiEngine3D", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 0, 0,
 		SDL_WINDOW_HIDDEN | SDL_WINDOW_OPENGL);
@@ -32,43 +32,43 @@ WindowManager::WindowManager()
 	hideBorder();
 
 	// GLEW (GL Extension Wrangler)
-	Logger::getInst().throwInfo("Initializing glew...");
+	Logger::throwInfo("Initializing glew...");
 	glewExperimental = GL_TRUE;
 	GLenum initGlew = glewInit();
 	if (initGlew != GLEW_OK) // Error
 	{
-		Logger::getInst().throwError(reinterpret_cast<char const *>(glewGetErrorString(initGlew)));
+		Logger::throwError(reinterpret_cast<char const *>(glewGetErrorString(initGlew)));
 	}
-	//Logger::getInst().throwInfo("Using GLEW version " + string(reinterpret_cast<char const *>(glewGetString(GLEW_VERSION))));
+	//Logger::throwInfo("Using GLEW version " + string(reinterpret_cast<char const *>(glewGetString(GLEW_VERSION))));
 
 	// Image stuff
-	Logger::getInst().throwInfo("Initializing SDL_Image...");
+	Logger::throwInfo("Initializing SDL_Image...");
 	int imgFlags = IMG_INIT_PNG;
 	if (!(IMG_Init(imgFlags) & imgFlags))
 	{
 		string error = "SDL_IMG could not be initialized:: " + string(IMG_GetError());
-		Logger::getInst().throwError(error.c_str());
+		Logger::throwError(error.c_str());
 	}
 
 	// Text stuff
-	Logger::getInst().throwInfo("Initializing SDL_TTF...");
+	Logger::throwInfo("Initializing SDL_TTF...");
 	TTF_Init();
 	if (TTF_Init() == -1)
 	{
 		string error = "SDL_TTF could not be initialized: " + string(TTF_GetError());
-		Logger::getInst().throwError(error.c_str());
+		Logger::throwError(error.c_str());
 	}
 
 	// Audio stuff
-	Logger::getInst().throwInfo("Initializing SDL_Mixer...");
+	Logger::throwInfo("Initializing SDL_Mixer...");
 	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) == -1)
 	{
 		string error = "SDL_Mixer could not be initialized: " + string(Mix_GetError());
-		Logger::getInst().throwError(error.c_str());
+		Logger::throwError(error.c_str());
 	}
 
 	// SDL stuff
-	Logger::getInst().throwInfo("Initializing SDL settings...");
+	Logger::throwInfo("Initializing SDL settings...");
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);

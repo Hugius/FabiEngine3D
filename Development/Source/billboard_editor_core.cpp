@@ -85,7 +85,6 @@ void BillboardEditor::load()
 
 	// Other
 	_gui->getGlobalScreen()->addTextfield("selectedBillboardName", vec2(0.0f, 0.85f), vec2(0.5f, 0.1f), "", vec3(1.0f));
-	_gui->getViewport("bottom")->getWindow("controls")->setActiveScreen("billboardEditor");
 	_isLoaded = true;
 }
 
@@ -118,6 +117,5 @@ void BillboardEditor::unload()
 	_billboardNames.clear();
 
 	// Miscellaneous
-	_gui->getViewport("bottom")->getWindow("controls")->setActiveScreen("mainMenu");
 	_isLoaded = false;
 }

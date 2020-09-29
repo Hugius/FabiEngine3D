@@ -5,19 +5,20 @@
 class ScriptExecutor
 {
 public:
-	ScriptExecutor(Script& script);
+	ScriptExecutor(FabiEngine3D& fe3d, Script& script);
 
-	void initialize();
+	void load();
 	void update();
 	void pause();
 	void unpause();
-	void reset();
+	void unload();
 
 	bool isScriptEmpty();
 	bool isInitialized();
 	bool isRunning();
 
 private:
+	FabiEngine3D& _fe3d;
 	Script& _script;
 	ScriptInterpreter _scriptInterpreter;
 

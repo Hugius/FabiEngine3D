@@ -15,6 +15,7 @@ using std::array;
 using std::vector;
 using std::map;
 using std::unordered_map;
+using std::pair;
 using std::string;
 using std::to_string;
 using glm::vec2;
@@ -619,22 +620,23 @@ public:
 	// Logger interface
 	template<typename T, typename...Rest> inline void logger_throwInfo(T first, Rest...rest)
 	{
-		Logger::getInst().throwInfo(first, rest...);
+		Logger::throwInfo(first, rest...);
 	}
-
 	template<typename T, typename...Rest> inline void logger_throwError(T first, Rest...rest)
 	{
-		Logger::getInst().throwError(first, rest...);
+		Logger::throwError(first, rest...);
 	}
-
 	template<typename T, typename...Rest> inline void logger_throwDebug(T first, Rest...rest)
 	{
-		Logger::getInst().throwDebug(first, rest...);
+		Logger::throwDebug(first, rest...);
 	}
-
 	template<typename T, typename...Rest> inline void logger_throwWarning(T first, Rest...rest)
 	{
-		Logger::getInst().throwWarning(first, rest...);
+		Logger::throwWarning(first, rest...);
+	}
+	inline const vector<string>& logger_getMessageStack()
+	{
+		return Logger::getMessageStack();
 	}
 
 	// Miscellaneous interface - setters

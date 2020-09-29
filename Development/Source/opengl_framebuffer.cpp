@@ -63,14 +63,14 @@ void OpenGLFramebuffer::createMsaaTexture(ivec2 position, ivec2 size, int amount
 		// Error checking
 		if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
 		{
-			Logger::getInst().throwError("Framebuffer not initialized properly!");
+			Logger::throwError("Framebuffer not initialized properly!");
 		}
 
 		_isLoaded = true;
 	}
 	else
 	{
-		Logger::getInst().throwError("Framebuffer already initialized!");
+		Logger::throwError("Framebuffer already initialized!");
 	}
 }
 
@@ -142,12 +142,12 @@ void OpenGLFramebuffer::createColorTexture(ivec2 position, ivec2 size, int amoun
 		// Error checking
 		if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
 		{
-			Logger::getInst().throwError("Framebuffer not initialized properly!");
+			Logger::throwError("Framebuffer not initialized properly!");
 		}
 	}
 	else
 	{
-		Logger::getInst().throwError("Framebuffer already initialized!");
+		Logger::throwError("Framebuffer already initialized!");
 	}
 }
 
@@ -197,12 +197,12 @@ void OpenGLFramebuffer::createDepthTexture(ivec2 position, ivec2 size, int amoun
 		// Error checking
 		if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
 		{
-			Logger::getInst().throwError("Framebuffer not initialized properly!");
+			Logger::throwError("Framebuffer not initialized properly!");
 		}
 	}
 	else
 	{
-		Logger::getInst().throwError("Framebuffer already initialized!");
+		Logger::throwError("Framebuffer already initialized!");
 	}
 }
 

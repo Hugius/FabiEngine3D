@@ -104,7 +104,7 @@ void AabbEntityManager::update(const vector<GameEntity*>& gameEntities, const ve
 			// Error checking
 			if (!found)
 			{
-				Logger::getInst().throwError("Collision entity \"" + entity->getID() + "\" bound to nonexisting game entity \"" + entity->getParentID() + "\"!");
+				Logger::throwError("Collision entity \"" + entity->getID() + "\" bound to nonexisting game entity \"" + entity->getParentID() + "\"!");
 			}
 		}
 

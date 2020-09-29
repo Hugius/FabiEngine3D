@@ -16,7 +16,7 @@ Config::Config()
 	std::ifstream file(path);
 	if (!std::filesystem::exists(path))
 	{
-		Logger::getInst().throwError("Could not load engine configuration file!");
+		Logger::throwError("Could not load engine configuration file!");
 	}
 
 	// Store config file content
@@ -67,7 +67,7 @@ void Config::_processOption(std::ifstream& file, bool& option)
 	}
 	else
 	{
-		Logger::getInst().throwError("Configuration file: wrong boolean value");
+		Logger::throwError("Configuration file: wrong boolean value");
 	}
 }
 

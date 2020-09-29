@@ -10,7 +10,7 @@ void BaseEntity::load(const string& ID)
 {
 	if (ID == "")
 	{
-		Logger::getInst().throwError("Tried to create an Entity with empty ID!");
+		Logger::throwError("Tried to create an Entity with empty ID!");
 	}
 	else
 	{

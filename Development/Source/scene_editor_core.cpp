@@ -275,7 +275,6 @@ void SceneEditor::load()
 	_gui->getGlobalScreen()->addTextfield("selectedPointlightName", vec2(0.0f, 0.85f), vec2(0.5f, 0.1f), "", vec3(1.0f));
 
 	// Miscellaneous
-	_gui->getViewport("bottom")->getWindow("controls")->setActiveScreen("sceneEditor");
 	_isLoaded = true;
 }
 
@@ -394,6 +393,5 @@ void SceneEditor::unload()
 
 	// Other
 	_leftWindow->getScreen("sceneEditorMenuModelPlace")->getScrollingList("modelList")->deleteButtons();
-	_gui->getViewport("bottom")->getWindow("controls")->setActiveScreen("mainMenu");
 	_fe3d.misc_disableAabbFrameRendering();
 }

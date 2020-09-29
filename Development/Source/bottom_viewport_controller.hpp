@@ -18,4 +18,8 @@ public:
 
 private:
 	shared_ptr<EngineGuiScreen> _statsScreen;
+
+	vector<pair<string, string>> _consoleMessageStack;
+
+	void _printConsoleMessage(const string& newMessage);
 };

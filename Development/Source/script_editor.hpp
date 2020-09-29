@@ -30,14 +30,22 @@ private:
 	void _saveScriptToFile();
 	void _reloadScriptTextDisplay();
 
-	// General stuff
+	// Core variables
 	FabiEngine3D& _fe3d;
 	shared_ptr<EngineGuiManager> _gui = nullptr;
-	shared_ptr<EngineGuiWindow> _leftWindow = nullptr;
-	shared_ptr<EngineGuiWindow> _rightWindow = nullptr;
 	Script _script;
 	ScriptExecutor _scriptExecutor;
 
+	// Editor variables
+	string _currentProjectName = "";
+	string _currentScriptFileID = "";
+	float _scrollingAcceleration = 0.0f;
+	unsigned int _cursorLineIndex = 0;
+	unsigned int _cursorPlaceIndex = 0;
+	bool _isLoaded = false;
+	bool _isScriptLoadedFromFile = false;
+	bool _isWritingScript = false;
+	
 	// Editor constants
 	const string _fontPath = "engine\\fonts\\lucida.ttf";
 	const vec3 _cameraStartingPosition = vec3(0.0f, 0.0f, 10.0f);
@@ -53,15 +61,32 @@ private:
 	const float _horizontalLineOffset = 0.5f;
 	const int _continuousTextActionFrameMinimum = 75;
 	const int _continuousTextActionInterval = 5;
-	
-	// Editor variables
-	string _currentProjectName = "";
-	string _currentScriptFileID = "";
-	float _scrollingAcceleration = 0.0f;
-	unsigned int _cursorLineIndex = 0;
-	unsigned int _cursorPlaceIndex = 0;
-	unsigned int _maxPassedBarFrames = 50;
-	bool _isLoaded = false;
-	bool _isScriptLoadedFromFile = false;
-	bool _isWritingScript = false;
+	const unsigned int _maxPassedBarFrames = 50;
+	const string letterCharacters = " abcdefghijklmnopqrstuvwxyz";
+	const map<char, char> numberCharacterMap =
+	{
+		{'0', ')'},
+		{'1', '!'},
+		{'2', '@'},
+		{'3', '#'},
+		{'4', '$'},
+		{'5', '%'},
+		{'6', '^'},
+		{'7', '&'},
+		{'8', '*'},
+		{'9', '('}
+	};
+	const map<char, char> specialCharacterMap =
+	{
+		{'.', '>'},
+		{',', '<'},
+		{'/', '?'},
+		{';', ':'},
+		{'\'', '\"'},
+		{'[', '{'},
+		{']', '}'},
+		{'\\', '|'},
+		{'-', '_'},
+		{'=', '+'}
+	};
 };

@@ -47,7 +47,7 @@ void TopViewportController::_updateProjectCreation()
 			// Check if project already exists
 			if (_fe3d.misc_isFileExisting(newDirectoryPath) && _fe3d.misc_isDirectory(newDirectoryPath)) // Project is existent
 			{
-				Logger::getInst().throwWarning("Project \"" + projectName + "\"" + " already exists!");
+				Logger::throwWarning("Project \"" + projectName + "\"" + " already exists!");
 			}
 			else // Project is non-existent
 			{

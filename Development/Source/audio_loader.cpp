@@ -22,7 +22,7 @@ Mix_Chunk* AudioLoader::getChunk(const string& filePath)
 
 		if (chunk == nullptr) // Could not load file
 		{
-			Logger::getInst().throwError("Could not load audio file \'", filePath, "\': " + string(SDL_GetError()));
+			Logger::throwError("Could not load audio file \'", filePath, "\': " + string(SDL_GetError()));
 		}
 		else // Successfully loaded file
 		{
@@ -30,7 +30,7 @@ Mix_Chunk* AudioLoader::getChunk(const string& filePath)
 			std::reverse(reversed.begin(), reversed.end()); // Reverse, cuz . must be last in path
 			auto extension = filePath.substr(filePath.size() - reversed.find("."), reversed.find(".")); // Substring file extension
 			std::transform(extension.begin(), extension.end(), extension.begin(), ::toupper); // Convert to uppercase
-			Logger::getInst().throwInfo("Loaded ", extension, " audio file: " + filePath); // Log loaded
+			Logger::throwInfo("Loaded ", extension, " audio file: " + filePath); // Log loaded
 			_chunkMap.insert(std::make_pair(filePath, chunk)); // Insert new data
 			return chunk;
 		}
@@ -52,7 +52,7 @@ Mix_Music* AudioLoader::getMusic(const string& filePath)
 
 		if (music == nullptr) // Could not load file
 		{
-			Logger::getInst().throwError("Could not load audio file \'", filePath, "\': " + string(SDL_GetError()));
+			Logger::throwError("Could not load audio file \'", filePath, "\': " + string(SDL_GetError()));
 		}
 		else // Successfully loaded file
 		{
@@ -60,7 +60,7 @@ Mix_Music* AudioLoader::getMusic(const string& filePath)
 			std::reverse(reversed.begin(), reversed.end()); // Reverse, cuz . must be last in path
 			auto extension = filePath.substr(filePath.size() - reversed.find("."), reversed.find(".")); // Substring file extension
 			std::transform(extension.begin(), extension.end(), extension.begin(), ::toupper); // Convert to uppercase
-			Logger::getInst().throwInfo("Loaded ", extension, " audio file: " + filePath); // Log loaded
+			Logger::throwInfo("Loaded ", extension, " audio file: " + filePath); // Log loaded
 			_musicMap.insert(std::make_pair(filePath, music)); // Insert new data
 			return music;
 		}

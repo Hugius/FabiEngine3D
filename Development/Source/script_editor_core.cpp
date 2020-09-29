@@ -7,25 +7,22 @@ ScriptEditor::ScriptEditor(FabiEngine3D& fe3d, shared_ptr<EngineGuiManager> gui)
 	_fe3d(fe3d),
 	_gui(gui),
 	_script(fe3d),
-	_scriptExecutor(_script)
+	_scriptExecutor(fe3d, _script)
 {
 
 }
 
 void ScriptEditor::initializeGUI()
-{
-	// Private window instances of left & right viewport
-	_leftWindow = _gui->getViewport("left")->getWindow("main");
-	_rightWindow = _gui->getViewport("right")->getWindow("main");
+{	auto leftWindow = _gui->getViewport("left")->getWindow("main");
 
-	// Left-viewport script line screen
+	// Main menu
 	string screenID = "scriptEditorMenuMain";
-	_leftWindow->addScreen(screenID);
-	_leftWindow->getScreen(screenID)->addButton("createScript", vec2(0.0f, 0.7f), vec2(GW("New script"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "New script", LVPC::textColor, LVPC::textHoverColor);
-	_leftWindow->getScreen(screenID)->addButton("editScript", vec2(0.0f, 0.35f), vec2(GW("Edit script"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Edit script", LVPC::textColor, LVPC::textHoverColor);
-	_leftWindow->getScreen(screenID)->addButton("deleteScript", vec2(0.0f, 0.0f), vec2(GW("Delete script"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Delete script", LVPC::textColor, LVPC::textHoverColor);
-	_leftWindow->getScreen(screenID)->addButton("globals", vec2(0.0f, -0.35f), vec2(GW("Globals"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Globals", LVPC::textColor, LVPC::textHoverColor);
-	_leftWindow->getScreen(screenID)->addButton("back", vec2(0.0f, -0.7f), vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->addScreen(screenID);
+	leftWindow->getScreen(screenID)->addButton("createScript", vec2(0.0f, 0.7f), vec2(GW("New script"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "New script", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen(screenID)->addButton("editScript", vec2(0.0f, 0.35f), vec2(GW("Edit script"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Edit script", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen(screenID)->addButton("deleteScript", vec2(0.0f, 0.0f), vec2(GW("Delete script"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Delete script", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen(screenID)->addButton("globals", vec2(0.0f, -0.35f), vec2(GW("Globals"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Globals", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen(screenID)->addButton("back", vec2(0.0f, -0.7f), vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
 }
 
 void ScriptEditor::load()
@@ -55,8 +52,7 @@ void ScriptEditor::load()
 	// Load script
 	_loadScriptFromFile();
 
-	// Other
-	_gui->getViewport("bottom")->getWindow("controls")->setActiveScreen("scriptEditor");
+	// Miscellaneous
 	_isLoaded = true;
 }
 
@@ -86,6 +82,5 @@ void ScriptEditor::unload()
 	_scrollingAcceleration = 0.0f;
 
 	// Miscellaneous
-	_gui->getViewport("bottom")->getWindow("controls")->setActiveScreen("mainMenu");
 	_isLoaded = false;
 }

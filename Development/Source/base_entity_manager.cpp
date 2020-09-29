@@ -39,7 +39,7 @@ void BaseEntityManager::deleteEntity(const string& ID, EntityType type)
 	temp[EntityType::LIGHT] = "LIGHT"; temp[EntityType::GUI] = "GUI"; temp[EntityType::TEXT] = "TEXT";
 
 	// Error logging
-	Logger::getInst().throwError("Nonexisting " + temp[type] + " entity with ID " + ID + " requested for removal");
+	Logger::throwError("Nonexisting " + temp[type] + " entity with ID " + ID + " requested for removal");
 }
 
 void BaseEntityManager::deleteEntities()
@@ -79,7 +79,7 @@ BaseEntity * BaseEntityManager::_getBaseEntity(const string& ID, EntityType type
 	temp[EntityType::LIGHT] = "LIGHT"; temp[EntityType::GUI] = "GUI"; temp[EntityType::TEXT] = "TEXT";
 
 	// Error logging
-	Logger::getInst().throwError("Nonexisting " + temp[type] + " entity with ID " + ID + " requested");
+	Logger::throwError("Nonexisting " + temp[type] + " entity with ID " + ID + " requested");
 }
 
 vector<BaseEntity*> & BaseEntityManager::_getBaseEntities()
@@ -97,31 +97,31 @@ BaseEntity * BaseEntityManager::_createEntity(EntityType type, const string& ID)
 			switch (type)
 			{
 			case(EntityType::SKY):
-				Logger::getInst().throwError("Could not create SKY entity: \"" + ID + "\" already exists!");
+				Logger::throwError("Could not create SKY entity: \"" + ID + "\" already exists!");
 				break;
 			case(EntityType::TERRAIN):
-				Logger::getInst().throwError("Could not create TERRAIN entity: \"" + ID + "\" already exists!");
+				Logger::throwError("Could not create TERRAIN entity: \"" + ID + "\" already exists!");
 				break;
 			case(EntityType::WATER):
-				Logger::getInst().throwError("Could not create WATER entity: \"" + ID + "\" already exists!");
+				Logger::throwError("Could not create WATER entity: \"" + ID + "\" already exists!");
 				break;
 			case(EntityType::GAME):
-				Logger::getInst().throwError("Could not create GAME entity: \"" + ID + "\" already exists!");
+				Logger::throwError("Could not create GAME entity: \"" + ID + "\" already exists!");
 				break;
 			case(EntityType::BILLBOARD):
-				Logger::getInst().throwError("Could not create BILLBOARD entity: \"" + ID + "\" already exists!");
+				Logger::throwError("Could not create BILLBOARD entity: \"" + ID + "\" already exists!");
 				break;
 			case(EntityType::AABB):
-				Logger::getInst().throwError("Could not create AABB entity: \"" + ID + "\" already exists!");
+				Logger::throwError("Could not create AABB entity: \"" + ID + "\" already exists!");
 				break;
 			case(EntityType::LIGHT):
-				Logger::getInst().throwError("Could not create LIGHT entity: \"" + ID + "\" already exists!");
+				Logger::throwError("Could not create LIGHT entity: \"" + ID + "\" already exists!");
 				break;
 			case(EntityType::GUI):
-				Logger::getInst().throwError("Could not create GUI entity: \"" + ID + "\" already exists!");
+				Logger::throwError("Could not create GUI entity: \"" + ID + "\" already exists!");
 				break;
 			case(EntityType::TEXT):
-				Logger::getInst().throwError("Could not create TEXT entity: \"" + ID + "\" already exists!");
+				Logger::throwError("Could not create TEXT entity: \"" + ID + "\" already exists!");
 				break;
 			}
 		}

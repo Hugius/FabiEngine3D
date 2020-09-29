@@ -147,7 +147,6 @@ void WorldEditor::load()
 	loadWaterEntity();
 
 	// Miscellaneous
-	_gui->getViewport("bottom")->getWindow("controls")->setActiveScreen("worldEditor");
 	_isLoaded = true;
 }
 
@@ -189,6 +188,5 @@ void WorldEditor::unload()
 	_totalCameraRotation = 0.0f;
 
 	// Miscellaneous
-	_gui->getViewport("bottom")->getWindow("controls")->setActiveScreen("mainMenu");
 	_isLoaded = false;
 }

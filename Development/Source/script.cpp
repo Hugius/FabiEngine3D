@@ -14,7 +14,7 @@ void Script::addScriptFile(const string& ID)
 	{
 		if(file->getID() == ID)
 		{
-			Logger::getInst().throwError("Could not add script file, already exists: " + ID);
+			_fe3d.logger_throwError("Could not add script file, already exists: " + ID);
 		}
 	}
 
@@ -36,7 +36,7 @@ void Script::removeScriptFile(const string& ID)
 		index++;
 	}
 
-	Logger::getInst().throwError("Could not remove script file with ID: " + ID);
+	_fe3d.logger_throwError("Could not remove script file with ID: " + ID);
 }
 
 void Script::reset()
@@ -72,7 +72,7 @@ shared_ptr<ScriptFile> Script::getScriptFile(const string& ID)
 		}
 	}
 
-	Logger::getInst().throwError("Could not find script file with ID: " + ID);
+	_fe3d.logger_throwError("Could not find script file with ID: " + ID);
 }
 
 vector<string> Script::getAllScriptFileIDs()

@@ -14,8 +14,12 @@ void ScriptEditor::_updateGUI()
 	if (_isLoaded)
 	{
 		// Main screen
-		auto mainScreen = _leftWindow->getScreen("scriptEditorMenuMain");
+		auto leftWindow = _gui->getViewport("left")->getWindow("main");
+		auto mainScreen = leftWindow->getScreen("scriptEditorMenuMain");
 		
+		// Buttons hoverability
+		leftWindow->getScreen("scriptEditorMenuMain")->getButton("deleteScript")->setHoverable(_currentScriptFileID != "");
+
 		// Check if LMB is pressed
 		if (!_gui->getGlobalScreen()->isFocused())
 		{
@@ -61,12 +65,12 @@ void ScriptEditor::_updateGUI()
 		{
 			save();
 			unload();
-			_leftWindow->setActiveScreen("main");
+			leftWindow->setActiveScreen("main");
 		}
 		else if (_gui->getGlobalScreen()->isAnswerFormCancelled("exitScriptEditor"))
 		{
 			unload();
-			_leftWindow->setActiveScreen("main");
+			leftWindow->setActiveScreen("main");
 		}
 	}
 }
@@ -75,9 +79,6 @@ void ScriptEditor::_updateMiscellaneous()
 {
 	if (_isLoaded)
 	{
-		// Update buttons hoverability
-		_leftWindow->getScreen("scriptEditorMenuMain")->getButton("deleteScript")->setHoverable(_currentScriptFileID != "");		
-
 		if (!_gui->getGlobalScreen()->isFocused() && _isWritingScript)
 		{
 			// Camear movement input

@@ -54,8 +54,7 @@ private:
 	const vec3 _characterColor = vec3(1.0f);
 	const float _scrollingSpeed = 0.1f;
 	const float _maxScrollingAcceleration = 10.0f;
-	const float _characterWidth = 0.25f;
-	const float _characterHeight = 0.75f;
+	const vec2 _textCharacterSize = vec2(0.25f, 0.75f);
 	const float _horizontalCharacterOffset = 0.25f;
 	const float _verticalLineOffset = 1.0f;
 	const float _horizontalLineOffset = 0.5f;

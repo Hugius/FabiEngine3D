@@ -17,7 +17,6 @@ using std::map;
 using std::unordered_map;
 using std::pair;
 using std::string;
-using std::to_string;
 using glm::vec2;
 using glm::vec3;
 using glm::vec4;
@@ -26,6 +25,8 @@ using glm::ivec3;
 using glm::ivec4;
 using std::unique_ptr;
 using std::shared_ptr;
+using std::reverse;
+using std::to_string;
 using std::make_unique;
 using std::make_shared;
 using std::dynamic_pointer_cast;
@@ -458,7 +459,7 @@ public:
 	void textEntity_hide(const string& ID);
 	void textEntity_showAll();
 	void textEntity_show(const string& ID);
-	void textEntity_setTextContent(const string& ID, const string& textContent, float charWidth = -1.0f);
+	void textEntity_setTextContent(const string& ID, const string& textContent, float charWidth = -1.0f, float charHeight = -1.0f);
 	void textEntity_setColor(const string& ID, vec3 color);
 	void textEntity_setAlpha(const string& ID, float alpha);
 	void textEntity_setPosition(const string& ID, vec2 position);
@@ -480,6 +481,37 @@ public:
 	float textEntity_getAlpha(const string& ID);
 	const string& textEntity_getTextContent(const string& ID);
 	vector<string> textEntity_getAllIDs();
+
+	// Audio entity interface - setters
+	void audioEntity_setSoundEnabled(bool enabled);
+	void audioEntity_setMusicEnabled(bool enabled);
+	void audioEntity_deleteAllSounds();
+	void audioEntity_deleteAllMusic();
+	void audioEntity_stopAllSounds();
+	void audioEntity_stopAllMusic();
+	void audioEntity_addMusic(const std::string& audioPath);
+	void audioEntity_deleteMusic();
+	void audioEntity_setMusicVolume(int volume);
+	void audioEntity_addGlobal(const std::string& ID, const std::string& audioPath);
+	void audioEntity_addPoint(const std::string& ID, const std::string& audioPath, vec3 position, float maxDistance);
+	void audioEntity_delete(const std::string& ID);
+	void audioEntity_play(const std::string& ID, int loops, int initialVolume, bool noRestart = false, int fadeMillis = 0);
+	void audioEntity_pause(const std::string& ID);
+	void audioEntity_resume(const std::string& ID);
+	void audioEntity_stop(const std::string& ID, int fadeMillis = 0);
+	void audioEntity_setVolume(const std::string& ID, int volume);
+	void audioEntity_changePoint(const std::string& ID, vec3 position);
+
+	// Audio entity interface - getters
+	bool audioEntity_isPlaying(const std::string& ID);
+	int  audioEntity_getVolume(const std::string& ID);
+	int  audioEntity_getUsedChannelCount();
+
+	// Audio interface - setters
+	void audio_setMaxChannels(int count);
+
+	// Audio interface - getters
+	int audio_getMaxChannels();
 
 	// Graphics interface - setters
 	void gfx_setMsaaQuality(int quality);
@@ -585,37 +617,6 @@ public:
 	bool input_getMouseToggled(Input mouseButton);
 	int  input_getMouseWheelX();
 	int  input_getMouseWheelY();
-
-	// Audio entity interface - setters
-	void audioEntity_setSoundEnabled(bool enabled);
-	void audioEntity_setMusicEnabled(bool enabled);
-	void audioEntity_deleteAllSounds();
-	void audioEntity_deleteAllMusic();
-	void audioEntity_stopAllSounds();
-	void audioEntity_stopAllMusic();
-	void audioEntity_addMusic(const std::string& audioPath);
-	void audioEntity_deleteMusic();
-	void audioEntity_setMusicVolume(int volume);
-	void audioEntity_addGlobal(const std::string& ID, const std::string& audioPath);
-	void audioEntity_addPoint(const std::string& ID, const std::string& audioPath, vec3 position, float maxDistance);
-	void audioEntity_delete(const std::string& ID);
-	void audioEntity_play(const std::string& ID, int loops, int initialVolume, bool noRestart = false, int fadeMillis = 0);
-	void audioEntity_pause(const std::string& ID);
-	void audioEntity_resume(const std::string& ID);
-	void audioEntity_stop(const std::string& ID, int fadeMillis = 0);
-	void audioEntity_setVolume(const std::string& ID, int volume);
-	void audioEntity_changePoint(const std::string& ID, vec3 position);
-
-	// Audio entity interface - getters
-	bool audioEntity_isPlaying(const std::string& ID);
-	int  audioEntity_getVolume(const std::string& ID);
-	int  audioEntity_getUsedChannelCount();
-
-	// Audio interface - setters
-	void audio_setMaxChannels(int count);
-
-	// Audio interface - getters
-	int audio_getMaxChannels();
 
 	// Logger interface
 	template<typename T, typename...Rest> inline void logger_throwInfo(T first, Rest...rest)

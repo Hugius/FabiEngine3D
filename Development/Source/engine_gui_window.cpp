@@ -4,7 +4,9 @@ EngineGuiWindow::EngineGuiWindow(FabiEngine3D& fe3d, const string& parentID, con
 	_fe3d(fe3d),
 	_ID(ID),
 	_entityID(parentID + "_" + ID),
-	_parentID(parentID)
+	_parentID(parentID),
+	_originalPosition(position),
+	_originalSize(size)
 {
 	fe3d.guiEntity_add(_entityID, color, position, 0.0f, size, true);
 }
@@ -53,6 +55,16 @@ const string& EngineGuiWindow::getEntityID()
 const string& EngineGuiWindow::getParentID()
 {
 	return _parentID;
+}
+
+const vec2 EngineGuiWindow::getOriginalPosition()
+{
+	return _originalPosition;
+}
+
+const vec2 EngineGuiWindow::getOriginalSize()
+{
+	return _originalSize;
 }
 
 void EngineGuiWindow::addScreen(const string& ID)

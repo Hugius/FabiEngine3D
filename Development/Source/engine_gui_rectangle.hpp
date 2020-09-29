@@ -12,9 +12,9 @@ public:
 	virtual void show();
 	virtual void hide();
 
-	vec2 getOriginalPosition();
-	vec2 getOriginalSize();
-	vec3 getOriginalColor();
+	const vec2 getOriginalPosition();
+	const vec2 getOriginalSize();
+	const vec3 getOriginalColor();
 
 	const string& getID();
 	const string& getEntityID();

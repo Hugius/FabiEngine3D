@@ -39,17 +39,17 @@ void EngineGuiRectangle::hide()
 	_fe3d.guiEntity_hide(_entityID);
 }
 
-vec2 EngineGuiRectangle::getOriginalPosition()
+const vec2 EngineGuiRectangle::getOriginalPosition()
 {
 	return _originalPosition;
 }
 
-vec2 EngineGuiRectangle::getOriginalSize()
+const vec2 EngineGuiRectangle::getOriginalSize()
 {
 	return _originalSize;
 }
 
-vec3 EngineGuiRectangle::getOriginalColor()
+const vec3 EngineGuiRectangle::getOriginalColor()
 {
 	return _originalColor;
 }

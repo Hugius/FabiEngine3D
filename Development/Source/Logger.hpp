@@ -78,22 +78,23 @@ private:
 		ss << "[" << timeBuffer << "]";
 		SetConsoleTextAttribute(console, 12); //Red
 		std::cout << "[" + _level_string[static_cast<int>(type)] + "]";
-		ss << "[" + _level_string[static_cast<int>(type)] + "]";
 		SetConsoleTextAttribute(console, 7); //Yellow
 
 		//Proper indentation
-		if (type == MessageType::DEBUG || type == MessageType::ERR) //5 chars
+		if (type == MessageType::DEBUG || type == MessageType::ERR) // 5 chars
 		{
 			std::cout << "> ";
-			ss << "> ";
 		}
-		else //4 chars
+		else // 4 chars
 		{
 			std::cout << " > ";
-			ss << " > ";
 		}
 
+		// Add to stack
+		ss << " > ";
 		_messageStack.push_back(ss.str());
+
+		// Print message body
 		_printMessage(first, rest...);
 	}
 

@@ -356,23 +356,22 @@ void ScriptEditor::_updateTextWriter()
 		}
 
 		// If cursor billboard not existing, create new one
-		vec2 charSize = _fe3d.billboardEntity_getSize("0");
 		if (!_fe3d.billboardEntity_isExisting("cursor"))
 		{
-			_fe3d.billBoardEntity_add("cursor", "", _fontPath, vec3(1.0f), vec3(0.0f), vec3(0.0f), charSize, 0, 0);
+			_fe3d.billBoardEntity_add("cursor", "", _fontPath, vec3(1.0f), vec3(0.0f), vec3(0.0f), _textCharacterSize, 0, 0);
 		}
 
-		// Update cursor billboard text
+		// Update cursor billboard text & position
 		vec3 position;
-		if (_cursorPlaceIndex == 0)
+		if (_cursorPlaceIndex == 0) // Default line position
 		{
 			position = _fe3d.billboardEntity_getPosition(to_string(_cursorLineIndex)) + vec3(_horizontalLineOffset / 2.0f, 0.0f, 0.0f);
 		}
-		else
+		else // Mid-text position
 		{
 			position = _fe3d.billboardEntity_getPosition(to_string(_cursorLineIndex) + "_" + to_string(_cursorPlaceIndex - 1));
 		}
-		position += vec3(charSize.x / 2.0f, 0.0f, 0.0f);
+		position += vec3(_textCharacterSize.x / 2.0f, 0.0f, 0.0f);
 		_fe3d.billboardEntity_setPosition("cursor", position);
 		_fe3d.billBoardEntity_setTextContent("cursor", (barEnabled ? "|" : " "));
 	}

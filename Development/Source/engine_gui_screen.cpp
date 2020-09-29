@@ -289,7 +289,7 @@ void EngineGuiScreen::deleteScrollingList(const string& ID)
 	}
 
 	// Error
-	_fe3d.logger_throwError("ScrollingList \"" + ID + "\" not deleted!");
+	_fe3d.logger_throwError("Could not delete scrollingList: \"" + ID + "\"");
 }
 
 void EngineGuiScreen::deleteWriteField(const string& ID)
@@ -305,7 +305,7 @@ void EngineGuiScreen::deleteWriteField(const string& ID)
 	}
 
 	// Error
-	_fe3d.logger_throwError("WriteField \"" + ID + "\" not deleted!");
+	_fe3d.logger_throwError("Could not delete writeField: \"" + ID + "\"");
 }
 
 void EngineGuiScreen::deleteButton(const string& ID)
@@ -321,7 +321,7 @@ void EngineGuiScreen::deleteButton(const string& ID)
 	}
 
 	// Error
-	_fe3d.logger_throwError("Button \"" + ID + "\" not deleted!");
+	_fe3d.logger_throwError("Could not delete button: \"" + ID + "\"");
 }
 
 void EngineGuiScreen::deleteRectangle(const string& ID)
@@ -337,7 +337,7 @@ void EngineGuiScreen::deleteRectangle(const string& ID)
 	}
 
 	// Error
-	_fe3d.logger_throwError("Rectangle \"" + ID + "\" not deleted!");
+	_fe3d.logger_throwError("Could not delete rectangle: \"" + ID + "\"");
 }
 
 void EngineGuiScreen::deleteTextfield(const string& ID)
@@ -353,7 +353,7 @@ void EngineGuiScreen::deleteTextfield(const string& ID)
 	}
 
 	// Error
-	_fe3d.logger_throwError("Textfield \"" + ID + "\" not deleted!");
+	_fe3d.logger_throwError("Could not delete textfield: \"" + ID + "\"");
 }
 
 vec4 EngineGuiScreen::_convertDimensions(vec2 position, vec2 size)

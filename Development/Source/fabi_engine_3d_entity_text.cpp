@@ -37,17 +37,24 @@ bool FabiEngine3D::textEntity_isExisting(const string& ID)
 	return _core->_textEntityManager.isExisting(ID);
 }
 
-void FabiEngine3D::textEntity_setTextContent(const string& ID, const string& textContent, float charWidth)
+void FabiEngine3D::textEntity_setTextContent(const string& ID, const string& textContent, float charWidth, float charHeight)
 {
 	auto entity = _core->_textEntityManager.getEntity(ID);
 
 	entity->setTextContent(textContent);
 	entity->setDiffuseMap(_core->_texLoader.getText(textContent, entity->getFontPath()));
 
-	if (charWidth != -1.0f)
+	// Calculate new size
+	vec2 newSize = entity->getScaling();
+	if (charWidth >= 0.0f)
 	{
-		entity->setScaling(vec2(charWidth * float(textContent.size()), entity->getScaling().y));
+		newSize.x = charWidth * float(textContent.size());
 	}
+	if (charHeight >= 0.0f)
+	{
+		newSize.y = charHeight;
+	}
+	entity->setScaling(newSize);
 }
 
 void FabiEngine3D::textEntity_setColor(const string& ID, vec3 color)

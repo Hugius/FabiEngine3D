@@ -8,6 +8,8 @@ class EngineGuiWindow final
 public:
 	EngineGuiWindow(FabiEngine3D& fe3d, const string& parentID, const string& ID, vec2 position, vec2 size, vec3 color);
 
+	void addScreen(const string& ID);
+	void setActiveScreen(const string& ID);
 	void update(bool hoverable);
 
 	bool isHovered();
@@ -16,8 +18,8 @@ public:
 	const string& getEntityID();
 	const string& getParentID();
 
-	void addScreen(const string& ID);
-	void setActiveScreen(const string& ID);
+	const vec2 getOriginalPosition();
+	const vec2 getOriginalSize();
 
 	vector<shared_ptr<EngineGuiScreen>>& getScreens();
 
@@ -30,6 +32,9 @@ private:
 	const string _ID;
 	const string _entityID;
 	const string _parentID;
+
+	const vec2 _originalPosition;
+	const vec2 _originalSize;
 
 	string _activeScreenID = "";
 

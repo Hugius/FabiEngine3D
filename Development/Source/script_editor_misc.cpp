@@ -13,8 +13,8 @@ void ScriptEditor::_reloadScriptTextDisplay()
 			// Generation values
 			string ID = to_string(lineIndex);
 			string textContent = to_string(lineIndex + 1);
-			vec3 position = _scriptTextStartingPosition - vec3((textContent.size() - 1) * (_characterWidth / 2.0f), _verticalLineOffset * static_cast<float>(lineIndex), 0.0f);
-			vec2 size = vec2(textContent.size() * _characterWidth, _characterHeight);
+			vec3 position = _scriptTextStartingPosition - vec3((textContent.size() - 1) * (_textCharacterSize.x / 2.0f), _verticalLineOffset * static_cast<float>(lineIndex), 0.0f);
+			vec2 size = vec2(textContent.size() * _textCharacterSize.x, _textCharacterSize.y);
 
 			// Create new billboard
 			_fe3d.billBoardEntity_add(ID, textContent, _fontPath, _lineNumberColor, position, vec3(0.0f), size, 0, 0);
@@ -36,10 +36,9 @@ void ScriptEditor::_reloadScriptTextDisplay()
 				string ID = to_string(lineIndex) + "_" + to_string(charIndex);
 				string charContent = string(1, textContent[charIndex]);
 				vec3 position = linePosition + vec3(_horizontalLineOffset + (_horizontalCharacterOffset * static_cast<float>(charIndex)), 0.0f, 0.0f);
-				vec2 size = vec2(_characterWidth, _characterHeight);
 
 				// Create new billboard
-				_fe3d.billBoardEntity_add(ID, charContent, _fontPath, _characterColor, position, vec3(0.0f), size, 0, 0);
+				_fe3d.billBoardEntity_add(ID, charContent, _fontPath, _characterColor, position, vec3(0.0f), _textCharacterSize, 0, 0);
 			}
 		}
 	}

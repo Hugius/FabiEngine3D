@@ -53,7 +53,7 @@ vector<ObjPart> OBJLoader::_loadOBJ(const string& filePath, bool calculateTangen
 	FILE * file = fopen(path.c_str(), "r");
 	if (!std::filesystem::exists(path) || filePath == "")
 	{
-		Logger::throwWarning("Model(OBJ) file loading problem: \"" + filePath + "\"");
+		Logger::throwWarning("Could not open OBJ file: \"" + filePath + "\"");
 		return {};
 	}
 

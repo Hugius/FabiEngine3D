@@ -66,14 +66,58 @@ MODEL 713738545@pine 167 12.4833 -88.9286 0 0 0 1.5 1.65 1.5 user\assets\models\
 MODEL 1935995270@pine 157.624 18.1373 -121.209 0 0 0 1.5 1.65 1.5 user\assets\models\tree3.obj user\assets\textures\diffuse_maps\tree3.png ? ? user\assets\textures\normal_maps\tree34.png 0 0 1 1 0 1 1 0.75 0.7 1 1 1 1 0.95 17.6124 1.00749 ?
 MODEL 309695740@pine 82.1443 26.4706 -127.206 0 0 0 1.5 1.65 1.5 user\assets\models\tree3.obj user\assets\textures\diffuse_maps\tree3.png ? ? user\assets\textures\normal_maps\tree34.png 0 0 1 1 0 1 1 0.75 0.7 1 1 1 1 0.95 17.6124 1.00749 ?
 MODEL 1711174744@pine2 91.9222 6.37255 -51.2794 0 0 0 1.5 1.25 1.5 user\assets\models\tree14.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 1 1 1 ?
+MODEL 44533864@pine2 122.186 6.37255 -40.3203 0 0 0 1.5 1.25 1.5 user\assets\models\tree14.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 1 1 1 ?
+MODEL 838732072@pine2 102.992 6.37255 -44.7564 0 0 0 1.5 1.25 1.5 user\assets\models\tree14.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 1 1 1 ?
+MODEL 1419611594@pine2 111.585 6.37255 -48.3049 0 0 0 1.5 1.25 1.5 user\assets\models\tree14.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 1 1 1 ?
+MODEL 1624035333@pine2 98.6279 6.37255 -19.6528 0 0 0 1.5 1.25 1.5 user\assets\models\tree14.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 1 1 1 ?
+MODEL 1810073161@pine2 117.509 6.37255 -17.5836 0 0 0 1.5 1.25 1.5 user\assets\models\tree14.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 1 1 1 ?
+MODEL 1758291479@pine2 124.886 6.37255 -7.23759 0 0 0 1.5 1.25 1.5 user\assets\models\tree14.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 1 1 1 ?
+MODEL 1576928090@pine2 126.839 6.37255 -15.4998 0 0 0 1.5 1.25 1.5 user\assets\models\tree14.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 1 1 1 ?
+MODEL 848817581@pine2 101.698 6.37255 2.76844 0 0 0 1.5 1.25 1.5 user\assets\models\tree14.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 1 1 1 ?
+MODEL 1710486991@pine2 95.6377 6.37255 -12.6786 0 0 0 1.5 1.25 1.5 user\assets\models\tree14.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 1 1 1 ?
+MODEL 1312184016@pine2 80.0262 6.37255 -13.7203 0 0 0 1.5 1.25 1.5 user\assets\models\tree14.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 1 1 1 ?
+MODEL 325999128@pine2 78.5774 6.37255 -1.43296 0 0 0 1.5 1.25 1.5 user\assets\models\tree14.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 1 1 1 ?
+MODEL 1113231952@pine2 64.1329 6.37255 -11.3802 0 0 0 1.5 1.25 1.5 user\assets\models\tree14.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 1 1 1 ?
+MODEL 1999365994@pine2 58.5131 6.37255 -33.1133 0 0 0 1.5 1.25 1.5 user\assets\models\tree14.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 1 1 1 ?
+MODEL 694650619@pine2 80.3091 6.37255 -32.198 0 0 0 1.5 1.25 1.5 user\assets\models\tree14.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 1 1 1 ?
+MODEL 188827696@pine2 64.2312 6.37255 -47.2419 0 0 0 1.5 1.25 1.5 user\assets\models\tree14.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 1 1 1 ?
+MODEL 830241669@pine2 59.8941 6.37255 -64.872 0 0 0 1.5 1.25 1.5 user\assets\models\tree14.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 1 1 1 ?
+MODEL 775214461@pine2 80.1442 6.37255 -63.738 0 0 0 1.5 1.25 1.5 user\assets\models\tree14.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 1 1 1 ?
+MODEL 859890315@pine2 64.1782 6.37255 -85.3743 0 0 0 1.5 1.25 1.5 user\assets\models\tree14.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 1 1 1 ?
+MODEL 765586342@pine2 87.7064 6.37255 -72.1065 0 0 0 1.5 1.25 1.5 user\assets\models\tree14.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 1 1 1 ?
+MODEL 1294091694@pine2 90.8495 12.1807 -96 0 0 0 1.5 1.25 1.5 user\assets\models\tree14.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 1 1 1 ?
+MODEL 63187171@pine2 89.9727 13.7255 -109.56 0 0 0 1.5 1.25 1.5 user\assets\models\tree14.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 1 1 1 ?
+MODEL 2097128660@pine2 74.7608 12.2549 -103.694 0 0 0 1.5 1.25 1.5 user\assets\models\tree14.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 1 1 1 ?
+MODEL 849255858@pine2 102.372 10.2941 -84.514 0 0 0 1.5 1.25 1.5 user\assets\models\tree14.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 1 1 1 ?
+MODEL 185716316@pine2 119.054 6.37255 -77.31 0 0 0 1.5 1.25 1.5 user\assets\models\tree14.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 1 1 1 ?
+MODEL 1279739887@pine2 140.187 6.37255 -68.897 0 0 0 1.5 1.25 1.5 user\assets\models\tree14.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 1 1 1 ?
+MODEL 205671471@pine2 129.379 6.37255 -87.7419 0 0 0 1.5 1.25 1.5 user\assets\models\tree14.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 1 1 1 ?
+MODEL 468184621@pine2 144.854 6.37255 -89.567 0 0 0 1.5 1.25 1.5 user\assets\models\tree14.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 1 1 1 ?
+MODEL 1371303635@pine2 139.709 6.37255 -100.333 0 0 0 1.5 1.25 1.5 user\assets\models\tree14.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 1 1 1 ?
+MODEL 557569774@pine2 127.629 6.37255 -100.766 0 0 0 1.5 1.25 1.5 user\assets\models\tree14.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 1 1 1 ?
+MODEL 1632271059@pine2 154.299 6.37255 -73.7811 0 0 0 1.5 1.25 1.5 user\assets\models\tree14.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 1 1 1 ?
+MODEL 222552108@pine2 161.545 6.37255 -63.2987 0 0 0 1.5 1.25 1.5 user\assets\models\tree14.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 1 1 1 ?
+MODEL 1019176854@pine2 169.937 6.37255 -52.1756 0 0 0 1.5 1.25 1.5 user\assets\models\tree14.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 1 1 1 ?
+MODEL 389889975@pine2 167.33 11.7647 -30.9974 0 0 0 1.5 1.25 1.5 user\assets\models\tree14.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 1 1 1 ?
+MODEL 2013976975@pine2 154.658 7.80952 -41 0 0 0 1.5 1.25 1.5 user\assets\models\tree14.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 1 1 1 ?
+MODEL 2058168487@pine2 143.021 6.37255 -58.131 0 0 0 1.5 1.25 1.5 user\assets\models\tree14.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 1 1 1 ?
+MODEL 994913301@pine2 154.513 6.37255 -56.5326 0 0 0 1.5 1.25 1.5 user\assets\models\tree14.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 1 1 1 ?
+MODEL 1189681252@pine2 143.856 6.37255 -39.152 0 0 0 1.5 1.25 1.5 user\assets\models\tree14.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 1 1 1 ?
+MODEL 1960401467@pine2 142.346 8.82353 -26.3546 0 0 0 1.5 1.25 1.5 user\assets\models\tree14.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 1 1 1 ?
+MODEL 987168690@pine2 116.143 6.37255 -61.2023 0 0 0 1.5 1.25 1.5 user\assets\models\tree14.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 1 1 1 ?
+MODEL 1811809715@pine2 124.995 6.37255 -50.205 0 0 0 1.5 1.25 1.5 user\assets\models\tree14.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 1 1 1 ?
+MODEL 1131775117@pine2 100.748 6.37255 -65.2517 0 0 0 1.5 1.25 1.5 user\assets\models\tree14.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 1 1 1 ?
+MODEL 1871398098@pine2 105.394 12.2547 -104.416 0 0 0 1.5 1.25 1.5 user\assets\models\tree14.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 1 1 1 ?
+MODEL 1921842215@pine2 117.951 6.37255 -111.784 0 0 0 1.5 1.25 1.5 user\assets\models\tree14.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 1 1 1 ?
+MODEL 2035542202@pine2 157.667 10.7843 -102.156 0 0 0 1.5 1.25 1.5 user\assets\models\tree14.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 1 1 1 ?
 AMBIENT 1 1 1 0.5
 DIRECTIONAL 1000 1000 1000 1 1 1 1 200
 CAMERA_FOV 70
 LOD_DISTANCE 100
 EDITOR_SPEED 20
-EDITOR_POSITION 118.864 10.3804 -64.8887
-EDITOR_YAW 117.826
-EDITOR_PITCH -6.63167
+EDITOR_POSITION 115.487 9.9804 -48.7985
+EDITOR_YAW 160.326
+EDITOR_PITCH 9.5349
 GRAPHICS_SHADOWS 1 100 50.000000 50.000000 0.000000 0.000000 0.000000 0.000000 1 50
 GRAPHICS_MOTIONBLUR 1 8
 GRAPHICS_DOF 1 0 100 10

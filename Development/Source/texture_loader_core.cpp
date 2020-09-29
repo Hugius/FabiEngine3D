@@ -97,7 +97,7 @@ GLuint TextureLoader::_loadTexture(const string& filePath, bool mipmap, bool ani
 	SDL_Surface * surface = IMG_Load((rootDir + filePath).c_str());
 	if (surface == nullptr)
 	{
-		Logger::throwWarning("Texture loading problem: " + string(SDL_GetError()));
+		Logger::throwWarning(string(SDL_GetError()));
 		return 0;
 	}
 
@@ -184,7 +184,7 @@ GLuint TextureLoader::_loadCubeMap(const array<string, 6>& filePaths)
 			SDL_Surface* surface = IMG_Load((rootDir + filePaths[i]).c_str());
 			if (surface == nullptr)
 			{
-				Logger::throwWarning("Skybox texture loading problem: " + string(SDL_GetError()));
+				Logger::throwWarning(string(SDL_GetError()));
 				return 0;
 			}
 
@@ -271,7 +271,7 @@ vector<float> TextureLoader::_loadHeightMap(const string& filePath)
 	fopen_s(&streamIn, (rootDir + filePath).c_str(), "rb");
 	if (streamIn == (FILE*)0)
 	{
-		Logger::throwWarning("Heightmap texture loading problem: \"" + filePath + "\"");
+		Logger::throwWarning("Could not open heightmap texture: \"" + filePath + "\"");
 		return {};
 	}
 

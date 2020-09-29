@@ -6,9 +6,9 @@ EngineGuiTextfield::EngineGuiTextfield(FabiEngine3D& fe3d, const string& parentI
 	_ID(ID),
 	_entityID(parentID + "_" + ID),
 	_parentID(parentID),
-	_originalColor(textColor),
 	_originalPosition(position),
-	_originalSize(size)
+	_originalSize(size),
+	_originalColor(textColor)
 {
 	_fe3d.textEntity_add(_entityID, textContent, "engine\\fonts\\lucida.ttf", textColor, position, 0.0f, size, centered);
 }
@@ -28,19 +28,19 @@ void EngineGuiTextfield::hide()
 	_fe3d.textEntity_hide(_entityID);
 }
 
-vec3 EngineGuiTextfield::getOriginalColor()
-{
-	return _originalColor;
-}
-
-vec2 EngineGuiTextfield::getOriginalPosition()
+const vec2 EngineGuiTextfield::getOriginalPosition()
 {
 	return _originalPosition;
 }
 
-vec2 EngineGuiTextfield::getOriginalSize()
+const vec2 EngineGuiTextfield::getOriginalSize()
 {
 	return _originalSize;
+}
+
+const vec3 EngineGuiTextfield::getOriginalColor()
+{
+	return _originalColor;
 }
 
 const string& EngineGuiTextfield::getID()

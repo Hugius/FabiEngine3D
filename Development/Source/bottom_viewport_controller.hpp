@@ -21,7 +21,7 @@ private:
 
 	vector<pair<string, string>> _consoleMessageStack;
 
-	const vec2 _charSize = vec2(0.01f, 0.05f);
+	const vec2 _charSize = vec2(0.01f, 0.03f);
 
 	void _printConsoleMessage(const string& newMessage);
 };

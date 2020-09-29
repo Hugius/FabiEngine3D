@@ -209,6 +209,7 @@ void BottomViewportController::_printConsoleMessage(const string& newMessage)
 			while (screen->getTextfield(ID + "_msg_" + to_string(index)) != nullptr)
 			{
 				screen->deleteTextfield(ID + "_msg_" + to_string(index));
+				index++;
 			}
 		}
 	}
@@ -219,25 +220,22 @@ void BottomViewportController::_printConsoleMessage(const string& newMessage)
 	for (auto& [ID, message] : _consoleMessageStack)
 	{
 		// Different parts
-		const int firstPartLength = 10;
-		const string timePartText = message.substr(0, firstPartLength);
-		string messageContentText = message.substr(firstPartLength, message.size() - firstPartLength);
-
-		// Add time textfield & add boundaries
-		screen->addTextfield(ID + "_time", vec2(-1.0f, -0.85f + static_cast<float>(index) * 0.175f), vec2(0.0f), "", vec3(1.0f, 0.0f, 1.0f), false);
-		_fe3d.textEntity_setTextContent(screen->getTextfield(ID + "_time")->getEntityID(), timePartText, _charSize.x, _charSize.y);
-		_fe3d.textEntity_setMaxPosition(screen->getTextfield(ID + "_time")->getEntityID(),
-			vec2(0.99f, window->getOriginalPosition().y + (window->getOriginalSize().y / 2.0f)));
+		const int timePartLength = 13;
+		const float yOffset = 0.2f; // Vertical offset between messages
+		const float timePartOffset = _charSize.x * static_cast<float>(timePartLength) * 2.0f; // Offset from time part
+		const string timePartText = message.substr(0, timePartLength); // Time text" [HH:MM::SS]
+		string messageContentText = message.substr(timePartLength, message.size() - timePartLength); // Message part
 
 		// Check if message part takes multiple lines
 		vector<string> messageParts;
 		begin:for (unsigned int i = 0; i < messageContentText.size(); i++)
 		{
 			// Check if message length is bigger than window size
-			if ((i * _charSize.x) > window->getOriginalSize().x)
+			float offset = _charSize.x * static_cast<float>(timePartLength + 1);
+			if (offset + (i * _charSize.x) > window->getOriginalSize().x)
 			{
 				// Cut a part of the full message
-				messageParts.push_back(messageContentText.substr(0, i + 1));
+				messageParts.push_back(messageContentText.substr(0, i));
 
 				// Set the remaining message
 				messageContentText = messageContentText.substr(i, messageContentText.size() - i);
@@ -245,14 +243,22 @@ void BottomViewportController::_printConsoleMessage(const string& newMessage)
 			}
 		}
 
-		// Add full message
-		if (messageParts.empty())
-		{
-			messageParts.push_back(messageContentText);
-		}
+		// Add remaining message part
+		messageParts.push_back(messageContentText);
 
-		// Console prints reversed
-		reverse(messageParts.begin(), messageParts.end());
+		// If printing full message, time should be printed first
+		if (messageParts.size() == 1)
+		{
+			// Add time textfield & add boundaries
+			screen->addTextfield(ID + "_time", vec2(-1.0f, -0.85f + static_cast<float>(index) * yOffset), vec2(0.0f), "", vec3(1.0f, 0.0f, 1.0f), false);
+			_fe3d.textEntity_setTextContent(screen->getTextfield(ID + "_time")->getEntityID(), timePartText, _charSize.x, _charSize.y);
+			_fe3d.textEntity_setMaxPosition(screen->getTextfield(ID + "_time")->getEntityID(),
+				vec2(0.99f, window->getOriginalPosition().y + (window->getOriginalSize().y / 2.0f)));
+		}
+		else // Console prints multiple lines reversed
+		{
+			reverse(messageParts.begin(), messageParts.end());
+		}
 
 		// Add textfield for every message part
 		for (unsigned int i = 0; i < messageParts.size(); i++)
@@ -260,16 +266,23 @@ void BottomViewportController::_printConsoleMessage(const string& newMessage)
 			// ID for this message part
 			string textfieldID = ID + "_msg_" + to_string(i);
 
-			// Offset from time part
-			float firstPartOffset = _charSize.x * static_cast<float>(firstPartLength) * 2.0f;
-
 			// Add textfield
-			screen->addTextfield(textfieldID, vec2(-1.0f + firstPartOffset, -0.85f + static_cast<float>(index) * 0.175f), vec2(0.0f), "", vec3(1.0f), false);
+			screen->addTextfield(textfieldID, vec2(-1.0f + timePartOffset, -0.85f + static_cast<float>(index) * yOffset), vec2(0.0f), "", vec3(1.0f), false);
 			_fe3d.textEntity_setTextContent(screen->getTextfield(textfieldID)->getEntityID(), messageParts[i], _charSize.x, _charSize.y);
 
 			// Add boundaries
 			_fe3d.textEntity_setMaxPosition(screen->getTextfield(textfieldID)->getEntityID(),
 				vec2(0.99f, window->getOriginalPosition().y + (window->getOriginalSize().y / 2.0f)));
+
+			// If printing the message in multiple parts, time should be printed last
+			if ((messageParts.size() > 1) && i == (messageParts.size() - 1))
+			{
+				// Add time textfield & add boundaries
+				screen->addTextfield(ID + "_time", vec2(-1.0f, -0.85f + static_cast<float>(index) * yOffset), vec2(0.0f), "", vec3(1.0f, 0.0f, 1.0f), false);
+				_fe3d.textEntity_setTextContent(screen->getTextfield(ID + "_time")->getEntityID(), timePartText, _charSize.x, _charSize.y);
+				_fe3d.textEntity_setMaxPosition(screen->getTextfield(ID + "_time")->getEntityID(),
+					vec2(0.99f, window->getOriginalPosition().y + (window->getOriginalSize().y / 2.0f)));
+			}
 
 			// Update index for Y positioning of next messages
 			index++;

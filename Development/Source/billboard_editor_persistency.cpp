@@ -13,7 +13,7 @@ void BillboardEditor::_loadBillboards()
 	}
 
 	// Create or overwrite billboards file
-	std::ifstream file(_fe3d.misc_getRootDirectory() + "User\\projects\\" + _currentProjectName + "\\data\\billboard.fe3d");
+	std::ifstream file(_fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectName + "\\data\\billboard.fe3d");
 	string line;
 
 	// Read model data
@@ -103,7 +103,7 @@ void BillboardEditor::save()
 
 		// Create or overwrite billboards file
 		std::ofstream file;
-		file.open(_fe3d.misc_getRootDirectory() + "User\\projects\\" + _currentProjectName + "\\data\\billboard.fe3d");
+		file.open(_fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectName + "\\data\\billboard.fe3d");
 
 		// Write billboard data into file
 		for (auto& billboardName : _billboardNames)

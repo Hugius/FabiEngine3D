@@ -104,8 +104,8 @@ void OpenGLShader::_createProgram(const GLchar * vShaderCode, const GLchar * fSh
 	glDeleteShader(fragment);
 
 	// Logging
-	Logger::throwInfo("Loaded vertex shader: engine\\shaders\\" + _vertexFileName);
-	Logger::throwInfo("Loaded fragment shader: engine\\shaders\\" + _fragmentFileName);
+	Logger::throwInfo("Loaded vertex shader: \"engine\\shaders\\" + _vertexFileName + "\"");
+	Logger::throwInfo("Loaded fragment shader: \"engine\\shaders\\" + _fragmentFileName + "\"");
 }
 
 void OpenGLShader::bind()

@@ -34,7 +34,7 @@ void SettingsEditor::initializeGUI()
 
 void SettingsEditor::load()
 {
-	string filePath = _fe3d.misc_getRootDirectory() + "User\\settings.fe3d";
+	string filePath = _fe3d.misc_getRootDirectory() + "user\\settings.fe3d";
 
 	// Check if settings file exists
 	if (_fe3d.misc_isFileExisting(filePath))
@@ -70,7 +70,7 @@ void SettingsEditor::save()
 {
 	// Overwrite (or create) settings file
 	std::ofstream file;
-	file.open(_fe3d.misc_getRootDirectory() + "User\\settings.fe3d");
+	file.open(_fe3d.misc_getRootDirectory() + "user\\settings.fe3d");
 
 	// Get values
 	float mouseSpeed = _fe3d.camera_getMouseSensitivity();

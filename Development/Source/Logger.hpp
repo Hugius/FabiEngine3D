@@ -74,10 +74,11 @@ private:
 		std::strftime(timeBuffer, 64, "%H:%M:%S", &foo);
 
 		SetConsoleTextAttribute(console, 6); //White
+		std::cout << "[" + _level_string[static_cast<int>(type)] + "]";
+		ss << "[" + _level_string[static_cast<int>(type)] + "]";
+		SetConsoleTextAttribute(console, 12); //Red
 		std::cout << "[" << timeBuffer << "]";
 		ss << "[" << timeBuffer << "]";
-		SetConsoleTextAttribute(console, 12); //Red
-		std::cout << "[" + _level_string[static_cast<int>(type)] + "]";
 		SetConsoleTextAttribute(console, 7); //Yellow
 
 		//Proper indentation

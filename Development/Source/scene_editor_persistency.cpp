@@ -12,7 +12,7 @@ bool SceneEditor::_loadSceneFile(bool overwriteCamera)
 		_fe3d.logger_throwError("Tried to load as empty project!");
 	}
 
-	string filePath = _fe3d.misc_getRootDirectory() + "User\\projects\\" + _currentProjectName + "\\scenes\\scene.fe3d";
+	string filePath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectName + "\\scenes\\scene.fe3d";
 
 	// Check if scene file existing
 	if (_fe3d.misc_isFileExisting(filePath))
@@ -281,7 +281,7 @@ void SceneEditor::save()
 
 		// Create or overwrite models file
 		std::ofstream file;
-		file.open(_fe3d.misc_getRootDirectory() + "User\\projects\\" + _currentProjectName + "\\scenes\\scene.fe3d");
+		file.open(_fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectName + "\\scenes\\scene.fe3d");
 
 		// Save LOD IDs
 		vector<string> lodIDs;

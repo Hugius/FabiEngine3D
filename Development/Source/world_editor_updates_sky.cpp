@@ -106,68 +106,146 @@ void WorldEditor::_updateSkyMenuMesh()
 		{
 			if (screen->getButton("rightTexture")->isHovered())
 			{
-				string filePath = _fe3d.misc_getWinExplorerFilename("User\\assets\\textures\\cube_maps\\", "PNG");
-				
-				// Check if not cancelled
+				// Get the loaded filename
+				const string rootDirectory = _fe3d.misc_getRootDirectory();
+				const string targetDirectory = string("user\\assets\\textures\\cube_maps\\");
+				const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "PNG");
+
+				// Check if user chose a filename
 				if (filePath != "")
 				{
-					_fe3d.misc_clearCubeMapCache(_fe3d.skyEntity_getDiffuseMapPaths("@sky"));
-					_fe3d.skyEntity_setDiffuseMapRight("@sky", filePath);
+					// Check if user did not switch directory
+					if (filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
+						filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
+					{
+						const string newFilePath = filePath.substr(rootDirectory.size());
+						_fe3d.misc_clearCubeMapCache(_fe3d.skyEntity_getDiffuseMapPaths("@sky"));
+						_fe3d.skyEntity_setDiffuseMapRight("@sky", newFilePath);
+					}
+					else
+					{
+						_fe3d.logger_throwWarning("Invalid filepath, directory switching not allowed!");
+					}
 				}
 			}
 			else if (screen->getButton("leftTexture")->isHovered())
 			{
-				string filePath = _fe3d.misc_getWinExplorerFilename("User\\assets\\textures\\cube_maps\\", "PNG");
+				// Get the loaded filename
+				const string rootDirectory = _fe3d.misc_getRootDirectory();
+				const string targetDirectory = string("user\\assets\\textures\\cube_maps\\");
+				const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "PNG");
 
-				// Check if not cancelled
+				// Check if user chose a filename
 				if (filePath != "")
 				{
-					_fe3d.misc_clearCubeMapCache(_fe3d.skyEntity_getDiffuseMapPaths("@sky"));
-					_fe3d.skyEntity_setDiffuseMapLeft("@sky", filePath);
+					// Check if user did not switch directory
+					if (filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
+						filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
+					{
+						const string newFilePath = filePath.substr(rootDirectory.size());
+						_fe3d.misc_clearCubeMapCache(_fe3d.skyEntity_getDiffuseMapPaths("@sky"));
+						_fe3d.skyEntity_setDiffuseMapLeft("@sky", newFilePath);
+					}
+					else
+					{
+						_fe3d.logger_throwWarning("Invalid filepath, directory switching not allowed!");
+					}
 				}
 			}
 			else if (screen->getButton("topTexture")->isHovered())
 			{
-				string filePath = _fe3d.misc_getWinExplorerFilename("User\\assets\\textures\\cube_maps\\", "PNG");
+				// Get the loaded filename
+				const string rootDirectory = _fe3d.misc_getRootDirectory();
+				const string targetDirectory = string("user\\assets\\textures\\cube_maps\\");
+				const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "PNG");
 
-				// Check if not cancelled
+				// Check if user chose a filename
 				if (filePath != "")
 				{
-					_fe3d.misc_clearCubeMapCache(_fe3d.skyEntity_getDiffuseMapPaths("@sky"));
-					_fe3d.skyEntity_setDiffuseMapTop("@sky", filePath);
+					// Check if user did not switch directory
+					if (filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
+						filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
+					{
+						const string newFilePath = filePath.substr(rootDirectory.size());
+						_fe3d.misc_clearCubeMapCache(_fe3d.skyEntity_getDiffuseMapPaths("@sky"));
+						_fe3d.skyEntity_setDiffuseMapTop("@sky", newFilePath);
+					}
+					else
+					{
+						_fe3d.logger_throwWarning("Invalid filepath, directory switching not allowed!");
+					}
 				}
 			}
 			else if (screen->getButton("bottomTexture")->isHovered())
 			{
-				string filePath = _fe3d.misc_getWinExplorerFilename("User\\assets\\textures\\cube_maps\\", "PNG");
+				// Get the loaded filename
+				const string rootDirectory = _fe3d.misc_getRootDirectory();
+				const string targetDirectory = string("user\\assets\\textures\\cube_maps\\");
+				const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "PNG");
 
-				// Check if not cancelled
+				// Check if user chose a filename
 				if (filePath != "")
 				{
-					_fe3d.misc_clearCubeMapCache(_fe3d.skyEntity_getDiffuseMapPaths("@sky"));
-					_fe3d.skyEntity_setDiffuseMapBottom("@sky", filePath);
+					// Check if user did not switch directory
+					if (filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
+						filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
+					{
+						const string newFilePath = filePath.substr(rootDirectory.size());
+						_fe3d.misc_clearCubeMapCache(_fe3d.skyEntity_getDiffuseMapPaths("@sky"));
+						_fe3d.skyEntity_setDiffuseMapBottom("@sky", newFilePath);
+					}
+					else
+					{
+						_fe3d.logger_throwWarning("Invalid filepath, directory switching not allowed!");
+					}
 				}
 			}
 			else if (screen->getButton("frontTexture")->isHovered())
 			{
-				string filePath = _fe3d.misc_getWinExplorerFilename("User\\assets\\textures\\cube_maps\\", "PNG");
+				// Get the loaded filename
+				const string rootDirectory = _fe3d.misc_getRootDirectory();
+				const string targetDirectory = string("user\\assets\\textures\\cube_maps\\");
+				const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "PNG");
 
-				// Check if not cancelled
+				// Check if user chose a filename
 				if (filePath != "")
 				{
-					_fe3d.misc_clearCubeMapCache(_fe3d.skyEntity_getDiffuseMapPaths("@sky"));
-					_fe3d.skyEntity_setDiffuseMapFront("@sky", filePath);
+					// Check if user did not switch directory
+					if (filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
+						filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
+					{
+						const string newFilePath = filePath.substr(rootDirectory.size());
+						_fe3d.misc_clearCubeMapCache(_fe3d.skyEntity_getDiffuseMapPaths("@sky"));
+						_fe3d.skyEntity_setDiffuseMapFront("@sky", newFilePath);
+					}
+					else
+					{
+						_fe3d.logger_throwWarning("Invalid filepath, directory switching not allowed!");
+					}
 				}
 			}
 			else if (screen->getButton("backTexture")->isHovered())
 			{
-				string filePath = _fe3d.misc_getWinExplorerFilename("User\\assets\\textures\\cube_maps\\", "PNG");
+				// Get the loaded filename
+				const string rootDirectory = _fe3d.misc_getRootDirectory();
+				const string targetDirectory = string("user\\assets\\textures\\cube_maps\\");
+				const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "PNG");
 
-				// Check if not cancelled
+				// Check if user chose a filename
 				if (filePath != "")
 				{
-					_fe3d.misc_clearCubeMapCache(_fe3d.skyEntity_getDiffuseMapPaths("@sky"));
-					_fe3d.skyEntity_setDiffuseMapBack("@sky", filePath);
+					// Check if user did not switch directory
+					if (filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
+						filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
+					{
+						const string newFilePath = filePath.substr(rootDirectory.size());
+						_fe3d.misc_clearCubeMapCache(_fe3d.skyEntity_getDiffuseMapPaths("@sky"));
+						_fe3d.skyEntity_setDiffuseMapBack("@sky", newFilePath);
+					}
+					else
+					{
+						_fe3d.logger_throwWarning("Invalid filepath, directory switching not allowed!");
+					}
 				}
 			}
 			else if (screen->getButton("back")->isHovered())

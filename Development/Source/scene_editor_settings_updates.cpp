@@ -395,14 +395,26 @@ void SceneEditor::_updateLensFlareGraphicsSettingsMenu()
 			else if (screen->getButton("loadFlareMap")->isHovered())
 			{
 				// Get the loaded filename
-				string filePath = _fe3d.misc_getWinExplorerFilename("User\\assets\\textures\\flare_maps\\", "PNG");
+				const string rootDirectory = _fe3d.misc_getRootDirectory();
+				const string targetDirectory = string("user\\assets\\textures\\flare_maps\\");
+				const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "PNG");
 
 				// Check if user chose a filename
 				if (filePath != "")
 				{
-					_fe3d.misc_clearTextureCache(filePath);
-					_fe3d.gfx_enableLensFlare(filePath, intensity, multiplier);
-					_fe3d.gfx_disableLensFlare();
+					// Check if user did not switch directory
+					if (filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
+						filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
+					{
+						const string newFilePath = filePath.substr(rootDirectory.size());
+						_fe3d.misc_clearTextureCache(newFilePath);
+						_fe3d.gfx_enableLensFlare(filePath, intensity, multiplier);
+						_fe3d.gfx_disableLensFlare();
+					}
+					else
+					{
+						_fe3d.logger_throwWarning("Invalid filepath, directory switching not allowed!");
+					}
 				}
 			}
 			else if (screen->getButton("intensity")->isHovered())

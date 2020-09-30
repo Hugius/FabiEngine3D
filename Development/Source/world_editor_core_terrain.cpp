@@ -13,7 +13,7 @@ void WorldEditor::loadTerrainEntity()
 	}
 
 	// Compose full terrain file path
-	string filePath = _fe3d.misc_getRootDirectory() + "User\\projects\\" + _currentProjectName + "\\data\\terrain.fe3d";
+	string filePath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectName + "\\data\\terrain.fe3d";
 
 	// Load terrain file
 	if (_fe3d.misc_isFileExisting(filePath))
@@ -89,7 +89,7 @@ void WorldEditor::_saveTerrainData()
 			_fe3d.logger_throwError("Tried to save as empty project!");
 		}
 
-		string filePath = _fe3d.misc_getRootDirectory() + "User\\projects\\" + _currentProjectName + "\\data\\terrain.fe3d";
+		string filePath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectName + "\\data\\terrain.fe3d";
 
 		// Save terrain data
 		if (_fe3d.terrainEntity_isExisting("@terrain"))

@@ -200,13 +200,9 @@ string FabiEngine3D::misc_getWinExplorerFilename(const string& startingDir, cons
 	ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
 	GetOpenFileName(&ofn);
 
-	// Return chosen filename
+	// Return chosen filename or nothing
 	string filePath = ofn.lpstrFile;
-	if (filePath != "")
-	{
-		filePath = filePath.substr(misc_getRootDirectory().size(), filePath.size());
-	}
-	
+
 	return filePath;
 }
 

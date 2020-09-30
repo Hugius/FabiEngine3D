@@ -186,7 +186,7 @@ void AudioPlayer::pauseChunk(AudioChunk& chunk)
 	}
 	else
 	{
-		Logger::throwWarning("Trying to pause audio chunk with ID \'", chunk.getID(), " \', but was not playing!"); // Warning
+		Logger::throwWarning("Trying to pause audio chunk with ID \"", chunk.getID(), " \", but was not playing!"); // Warning
 	}
 }
 

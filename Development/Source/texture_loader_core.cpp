@@ -21,11 +21,11 @@ TTF_Font* TextureLoader::_loadFont(const string& fontPath)
 		TTF_Font* font = TTF_OpenFont((rootDir + fontPath).c_str(), 50);
 		if (font == nullptr)
 		{
-			Logger::throwError("Font loading error: " + string(SDL_GetError()));
+			Logger::throwError("Cannot load font: \"" + fontPath + "\"");
 		}
 		_fonts.insert(std::make_pair(fontPath, font));
 
-		Logger::throwInfo("Loaded font: " + fontPath);
+		Logger::throwInfo("Loaded font: \"" + fontPath + "\"");
 
 		return font; //Use new texture
 	}
@@ -97,7 +97,7 @@ GLuint TextureLoader::_loadTexture(const string& filePath, bool mipmap, bool ani
 	SDL_Surface * surface = IMG_Load((rootDir + filePath).c_str());
 	if (surface == nullptr)
 	{
-		Logger::throwWarning(string(SDL_GetError()));
+		Logger::throwWarning("Cannot open texture: \"" + filePath + "\"");
 		return 0;
 	}
 
@@ -154,7 +154,7 @@ GLuint TextureLoader::_loadTexture(const string& filePath, bool mipmap, bool ani
 	}
 
 	// Logging
-	Logger::throwInfo("Loaded texture: " + filePath);
+	Logger::throwInfo("Loaded texture: \"" + filePath + "\"");
 
 	// Return new texture
 	return tex;
@@ -184,14 +184,14 @@ GLuint TextureLoader::_loadCubeMap(const array<string, 6>& filePaths)
 			SDL_Surface* surface = IMG_Load((rootDir + filePaths[i]).c_str());
 			if (surface == nullptr)
 			{
-				Logger::throwWarning(string(SDL_GetError()));
+				Logger::throwWarning("Cannot open cubemap texture: \"" + filePaths[i] + "\"");
 				return 0;
 			}
 
 			// Check if resolution dimensions are the same
 			if (surface->w != surface->h)
 			{
-				Logger::throwWarning("Skybox texture width must be same as height: \"" + filePaths[i] + "\"");
+				Logger::throwWarning("Cubemap texture width must be same as height: \"" + filePaths[i] + "\"");
 				return 0;
 			}
 
@@ -200,7 +200,7 @@ GLuint TextureLoader::_loadCubeMap(const array<string, 6>& filePaths)
 			{
 				if (textureSize != surface->w)
 				{
-					Logger::throwWarning("All skybox textures must have the same resolution: \"" + filePaths[i] + "\"");
+					Logger::throwWarning("All cubemap textures must have the same resolution: \"" + filePaths[i] + "\"");
 					return 0;
 				}
 			}
@@ -227,7 +227,7 @@ GLuint TextureLoader::_loadCubeMap(const array<string, 6>& filePaths)
 			SDL_Surface* surface = IMG_Load((rootDir + filePaths[i]).c_str());
 			if (surface == nullptr)
 			{
-				Logger::throwWarning("Skybox texture loading problem: " + string(SDL_GetError()));
+				Logger::throwWarning("Cannot open cubeMap texture: \"" + filePaths[i] + "\"");
 				return 0;
 			}
 
@@ -238,7 +238,7 @@ GLuint TextureLoader::_loadCubeMap(const array<string, 6>& filePaths)
 			SDL_FreeSurface(surface);
 
 			// Logging
-			Logger::throwInfo("Loaded cubeMap texture: " + filePaths[i]);
+			Logger::throwInfo("Loaded cubeMap texture: \"" + filePaths[i] + "\"");
 		}
 	}
 
@@ -271,7 +271,7 @@ vector<float> TextureLoader::_loadHeightMap(const string& filePath)
 	fopen_s(&streamIn, (rootDir + filePath).c_str(), "rb");
 	if (streamIn == (FILE*)0)
 	{
-		Logger::throwWarning("Could not open heightmap texture: \"" + filePath + "\"");
+		Logger::throwWarning("Cannot open heightmap texture: \"" + filePath + "\"");
 		return {};
 	}
 
@@ -300,7 +300,7 @@ vector<float> TextureLoader::_loadHeightMap(const string& filePath)
 	fclose(streamIn);
 
 	// Logging
-	Logger::throwInfo("Loaded BMP heightMap: " + filePath);
+	Logger::throwInfo("Loaded BMP heightMap: \"" + filePath + "\"");
 
 	// Return new texture
 	return pixelIntensities;

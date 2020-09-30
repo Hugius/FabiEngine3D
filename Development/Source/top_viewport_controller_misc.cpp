@@ -42,7 +42,7 @@ void TopViewportController::_updateProjectCreation()
 		if (_gui->getGlobalScreen()->checkValueForm("newProjectName", projectName))
 		{
 			// Get directory path for the new project
-			string newDirectoryPath = _fe3d.misc_getRootDirectory() + "User\\projects\\" + projectName;
+			string newDirectoryPath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + projectName;
 
 			// Check if project already exists
 			if (_fe3d.misc_isFileExisting(newDirectoryPath) && _fe3d.misc_isDirectory(newDirectoryPath)) // Project is existent
@@ -130,7 +130,7 @@ void TopViewportController::_updateProjectDeletion()
 			}
 
 			// Deleting project folder
-			std::filesystem::remove_all(_fe3d.misc_getRootDirectory() + "User\\projects\\" + chosenButtonID);
+			std::filesystem::remove_all(_fe3d.misc_getRootDirectory() + "user\\projects\\" + chosenButtonID);
 
 			// Logging
 			_fe3d.logger_throwInfo("Existing project \"" + chosenButtonID + "\" deleted!");
@@ -151,7 +151,7 @@ void TopViewportController::_updateProjectDeletion()
 void TopViewportController::_prepareProjectChoosing()
 {
 	// Get new path
-	string userDirectoryPath = _fe3d.misc_getRootDirectory() + "User\\projects\\";
+	string userDirectoryPath = _fe3d.misc_getRootDirectory() + "user\\projects\\";
 
 	// Check if projects directory exists
 	if (_fe3d.misc_isDirectory(userDirectoryPath))
@@ -170,6 +170,6 @@ void TopViewportController::_prepareProjectChoosing()
 	}
 	else
 	{
-		_fe3d.logger_throwError("\"User\\projects\\\" folder does not exist anymore!");
+		_fe3d.logger_throwError("\"user\\projects\\\" folder does not exist anymore!");
 	}
 }

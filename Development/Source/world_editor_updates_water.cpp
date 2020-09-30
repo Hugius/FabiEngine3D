@@ -196,35 +196,74 @@ void WorldEditor::_updateWaterMenuEffects()
 			}
 			else if (screen->getButton("dudvMap")->isHovered())
 			{
-				string filePath = _fe3d.misc_getWinExplorerFilename("User\\assets\\textures\\dudv_maps\\", "PNG");
+				// Get the loaded filename
+				const string rootDirectory = _fe3d.misc_getRootDirectory();
+				const string targetDirectory = string("user\\assets\\textures\\dudv_maps\\");
+				const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "PNG");
 
-				// Check if not cancelled
+				// Check if user chose a filename
 				if (filePath != "")
 				{
-					_fe3d.misc_clearTextureCache(filePath);
-					_fe3d.waterEntity_setDudvMap("@water", filePath);
+					// Check if user did not switch directory
+					if (filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
+						filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
+					{
+						const string newFilePath = filePath.substr(rootDirectory.size());
+						_fe3d.misc_clearTextureCache(newFilePath);
+						_fe3d.waterEntity_setDudvMap("@water", newFilePath);
+					}
+					else
+					{
+						_fe3d.logger_throwWarning("Invalid filepath, directory switching not allowed!");
+					}
 				}
 			}
 			else if (screen->getButton("normalMap")->isHovered())
 			{
-				string filePath = _fe3d.misc_getWinExplorerFilename("User\\assets\\textures\\normal_maps\\", "PNG");
+				// Get the loaded filename
+				const string rootDirectory = _fe3d.misc_getRootDirectory();
+				const string targetDirectory = string("user\\assets\\textures\\normal_maps\\");
+				const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "PNG");
 
-				// Check if not cancelled
+				// Check if user chose a filename
 				if (filePath != "")
 				{
-					_fe3d.misc_clearTextureCache(filePath);
-					_fe3d.waterEntity_setNormalMap("@water", filePath);
+					// Check if user did not switch directory
+					if (filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
+						filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
+					{
+						const string newFilePath = filePath.substr(rootDirectory.size());
+						_fe3d.misc_clearTextureCache(newFilePath);
+						_fe3d.waterEntity_setNormalMap("@water", newFilePath);
+					}
+					else
+					{
+						_fe3d.logger_throwWarning("Invalid filepath, directory switching not allowed!");
+					}
 				}
 			}
 			else if (screen->getButton("displaceMap")->isHovered())
 			{
-				string filePath = _fe3d.misc_getWinExplorerFilename("User\\assets\\textures\\displacement_maps\\", "PNG");
+				// Get the loaded filename
+				const string rootDirectory = _fe3d.misc_getRootDirectory();
+				const string targetDirectory = string("user\\assets\\textures\\displacement_maps\\");
+				const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "PNG");
 
-				// Check if not cancelled
+				// Check if user chose a filename
 				if (filePath != "")
 				{
-					_fe3d.misc_clearTextureCache(filePath);
-					_fe3d.waterEntity_setDisplacementMap("@water", filePath);
+					// Check if user did not switch directory
+					if (filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
+						filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
+					{
+						const string newFilePath = filePath.substr(rootDirectory.size());
+						_fe3d.misc_clearTextureCache(newFilePath);
+						_fe3d.waterEntity_setDisplacementMap("@water", newFilePath);
+					}
+					else
+					{
+						_fe3d.logger_throwWarning("Invalid filepath, directory switching not allowed!");
+					}
 				}
 			}
 			else if (screen->getButton("isReflective")->isHovered())

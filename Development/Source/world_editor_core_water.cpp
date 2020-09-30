@@ -12,7 +12,7 @@ void WorldEditor::loadWaterEntity()
 		_fe3d.logger_throwError("Tried to load as empty project!");
 	}
 
-	string filePath = _fe3d.misc_getRootDirectory() + "User\\projects\\" + _currentProjectName + "\\data\\water.fe3d";
+	string filePath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectName + "\\data\\water.fe3d";
 
 	// Load water file
 	if (_fe3d.misc_isFileExisting(filePath))
@@ -98,7 +98,7 @@ void WorldEditor::_saveWaterData()
 			_fe3d.logger_throwError("Tried to save as empty project!");
 		}
 
-		string filePath = _fe3d.misc_getRootDirectory() + "User\\projects\\" + _currentProjectName + "\\data\\water.fe3d";
+		string filePath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectName + "\\data\\water.fe3d";
 
 		// Save water dat
 		if (_fe3d.waterEntity_isExisting("@water"))

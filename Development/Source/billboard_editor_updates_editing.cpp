@@ -113,13 +113,25 @@ void BillboardEditor::_updateBillboardEditing()
 					}
 					else if (screen->getButton("texture")->isHovered())
 					{
-						string filePath = _fe3d.misc_getWinExplorerFilename("User\\assets\\textures\\billboard_maps\\", "PNG");
+						const string rootDirectory = _fe3d.misc_getRootDirectory();
+						const string targetDirectory = string("user\\assets\\textures\\billboard_maps\\");
+						const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "PNG");
 
 						// Check if user did not cancel
 						if (filePath != "")
 						{
-							_fe3d.misc_clearTextureCache(filePath);
-							_fe3d.billboardEntity_setDiffuseMap(_currentBillboardID, filePath, false);
+							// Check if user did not switch directory
+							if (filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
+								filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
+							{
+								const string newFilePath = filePath.substr(rootDirectory.size());
+								_fe3d.misc_clearTextureCache(newFilePath);
+								_fe3d.billboardEntity_setDiffuseMap(_currentBillboardID, newFilePath, false);
+							}
+							else
+							{
+								_fe3d.logger_throwWarning("Invalid filepath, directory switching not allowed!");
+							}
 						}
 					}
 					else if (screen->getButton("isTransparent")->isHovered())
@@ -205,14 +217,26 @@ void BillboardEditor::_updateBillboardEditing()
 				{
 					if (screen->getButton("font")->isHovered())
 					{
-						string filePath = _fe3d.misc_getWinExplorerFilename("User\\assets\\fonts\\", "TTF");
+						const string rootDirectory = _fe3d.misc_getRootDirectory();
+						const string targetDirectory = string("user\\assets\\fonts\\");
+						const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "TTF");
 
 						// Check if user did not cancel
 						if (filePath != "")
 						{
-							_fe3d.misc_clearFontCache(filePath);
-							_fe3d.misc_clearTextCache(_fe3d.billboardEntity_getTextContent(_currentBillboardID));
-							_fe3d.billBoardEntity_setFont(_currentBillboardID, filePath);
+							// Check if user did not switch directory
+							if (filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
+								filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
+							{
+								const string newFilePath = filePath.substr(rootDirectory.size());
+								_fe3d.misc_clearFontCache(newFilePath);
+								_fe3d.misc_clearTextCache(_fe3d.billboardEntity_getTextContent(_currentBillboardID));
+								_fe3d.billBoardEntity_setFont(_currentBillboardID, newFilePath);
+							}
+							else
+							{
+								_fe3d.logger_throwWarning("Invalid filepath, directory switching not allowed!");
+							}
 						}
 					}
 					else if (screen->getButton("color")->isHovered())

@@ -19,7 +19,7 @@ void FabiEngine3D::aabbEntity_bindToGameEntity(const string& parentID, vec3 S, b
 	}
 	else
 	{
-		logger_throwError("Tried to bind AABB entity to non-existing GAME entity \"" + parentID + "\"!");
+		logger_throwError("Tried to bind AABB entity to non-existing GAME entity \"" + parentID + "\"");
 	}
 }
 
@@ -42,7 +42,7 @@ void FabiEngine3D::aabbEntity_bindToGameEntityGroup(const string& parentID, vec3
 	// Logging
 	if (!found)
 	{
-		logger_throwError("Tried to bind AABB entities to non-existing GAME entity group \"" + parentID + "\"!");
+		logger_throwError("Tried to bind AABB entities to non-existing GAME entity group \"" + parentID + "\"");
 	}
 }
 
@@ -54,7 +54,7 @@ void FabiEngine3D::aabbEntity_bindToBillboardEntity(const string& parentID, vec3
 	}
 	else
 	{
-		logger_throwError("Tried to bind AABB entity to non-existing BILLBOARD entity \"" + parentID + "\"!");
+		logger_throwError("Tried to bind AABB entity to non-existing BILLBOARD entity \"" + parentID + "\"");
 	}
 }
 
@@ -77,7 +77,7 @@ void FabiEngine3D::aabbEntity_bindToBillboardEntityGroup(const string& parentID,
 	// Logging
 	if (!found)
 	{
-		logger_throwError("Tried to bind AABB entities to non-existing GAME entity group \"" + parentID + "\"!");
+		logger_throwError("Tried to bind AABB entities to non-existing GAME entity group \"" + parentID + "\"");
 	}
 }
 

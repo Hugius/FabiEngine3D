@@ -16,7 +16,7 @@ WindowManager::WindowManager()
 	SetProcessDpiAwareness(PROCESS_SYSTEM_DPI_AWARE);
 
 	// SDL stuff
-	Logger::throwInfo("Initializing SDL 2...");
+	Logger::throwInfo("Initializing SDL...");
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
 	{
 		string error = "SDL could not be initialized: " + string(SDL_GetError());
@@ -32,7 +32,7 @@ WindowManager::WindowManager()
 	hideBorder();
 
 	// GLEW (GL Extension Wrangler)
-	Logger::throwInfo("Initializing glew...");
+	Logger::throwInfo("Initializing OpenGL...");
 	glewExperimental = GL_TRUE;
 	GLenum initGlew = glewInit();
 	if (initGlew != GLEW_OK) // Error

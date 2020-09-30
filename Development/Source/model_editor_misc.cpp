@@ -29,7 +29,7 @@ void ModelEditor::_loadObjFileNames()
 	}
 
 	// Determine full OBJ directory
-	string objDirectoryPath = _fe3d.misc_getRootDirectory() + "User\\assets\\models\\";
+	string objDirectoryPath = _fe3d.misc_getRootDirectory() + "user\\assets\\models\\";
 	int endOfNameIndex = 0;
 
 	// Get all filenames
@@ -55,79 +55,140 @@ void ModelEditor::_loadObjFileNames()
 void ModelEditor::_loadOBJ()
 {
 	// Get the loaded filename
-	string filePath = _fe3d.misc_getWinExplorerFilename("User\\assets\\models\\", "OBJ");
+	const string rootDirectory = _fe3d.misc_getRootDirectory();
+	const string targetDirectory = string("user\\assets\\models\\");
+	const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "OBJ");
 
-	// Not cancelled
+	// Check if not cancelled
 	if (filePath != "")
-	{
-		// Delete existing entity
-		if (_fe3d.gameEntity_isExisting(_currentModelName))
+	{		
+		// Check if user did not switch directory
+		if (filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
+			filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
 		{
-			_fe3d.gameEntity_delete(_currentModelName);
+			const string newFilePath = filePath.substr(rootDirectory.size());
+
+			// Delete existing entity
+			if (_fe3d.gameEntity_isExisting(_currentModelName))
+			{
+				_fe3d.gameEntity_delete(_currentModelName);
+			}
+
+			// Clear OBJ cache
+			_fe3d.misc_clearOBJCache(newFilePath);
+
+			// Add new game entity
+			_fe3d.gameEntity_add(_currentModelName, newFilePath, vec3(0.0f), vec3(0.0f), vec3(1.0f));
+			_fe3d.aabbEntity_bindToGameEntity(_currentModelName, vec3(1.0f), true);
+			_fe3d.gameEntity_setColor(_currentModelName, vec3(1.0f));
 		}
-
-		// Clear OBJ cache
-		_fe3d.misc_clearOBJCache(filePath);
-
-		// Add new game entity
-		_fe3d.gameEntity_add(_currentModelName, filePath, vec3(0.0f), vec3(0.0f), vec3(1.0f));
-		_fe3d.aabbEntity_bindToGameEntity(_currentModelName, vec3(1.0f), true);
-		_fe3d.gameEntity_setColor(_currentModelName, vec3(1.0f));
+		else
+		{
+			_fe3d.logger_throwWarning("Invalid filepath, directory switching not allowed!");
+		}
 	}
 }
 
 void ModelEditor::_loadDiffuseMap()
 {
 	// Get the loaded filename
-	string filePath = _fe3d.misc_getWinExplorerFilename("User\\assets\\textures\\diffuse_maps\\", "PNG");
+	const string rootDirectory = _fe3d.misc_getRootDirectory();
+	const string targetDirectory = string("user\\assets\\textures\\diffuse_maps\\");
+	const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "PNG");
 
 	// Check if user chose a filename
 	if (filePath != "")
 	{
-		_fe3d.misc_clearTextureCache(filePath);
-		_fe3d.gameEntity_setDiffuseMap(_currentModelName, filePath);
+		// Check if user did not switch directory
+		if (filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
+			filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
+		{
+			const string newFilePath = filePath.substr(rootDirectory.size());
+			_fe3d.misc_clearTextureCache(newFilePath);
+			_fe3d.gameEntity_setDiffuseMap(_currentModelName, newFilePath);
+		}
+		else
+		{
+			_fe3d.logger_throwWarning("Invalid filepath, directory switching not allowed!");
+		}
 	}
 }
 
 void ModelEditor::_loadLightMap()
 {
 	// Get the loaded filename
-	string filePath = _fe3d.misc_getWinExplorerFilename("User\\assets\\textures\\light_maps\\", "PNG");
+	const string rootDirectory = _fe3d.misc_getRootDirectory();
+	const string targetDirectory = string("user\\assets\\textures\\light_maps\\");
+	const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "PNG");
 
 	// Check if user chose a filename
 	if (filePath != "")
 	{
-		_fe3d.misc_clearTextureCache(filePath);
-		_fe3d.gameEntity_setLightMap(_currentModelName, filePath);
-		_fe3d.gameEntity_setLightMapped(_currentModelName, true);
+		// Check if user did not switch directory
+		if (filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
+			filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
+		{
+			const string newFilePath = filePath.substr(rootDirectory.size());
+			_fe3d.misc_clearTextureCache(newFilePath);
+			_fe3d.gameEntity_setLightMap(_currentModelName, newFilePath);
+			_fe3d.gameEntity_setLightMapped(_currentModelName, true);
+		}
+		else
+		{
+			_fe3d.logger_throwWarning("Invalid filepath, directory switching not allowed!");
+		}
 	}
 }
 
 void ModelEditor::_loadReflectionMap()
 {
 	// Get the loaded filename
-	string filePath = _fe3d.misc_getWinExplorerFilename("User\\assets\\textures\\reflection_maps\\", "PNG");
+	const string rootDirectory = _fe3d.misc_getRootDirectory();
+	const string targetDirectory = string("user\\assets\\textures\\reflection_maps\\");
+	const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "PNG");
 
 	// Check if user chose a filename
 	if (filePath != "")
 	{
-		_fe3d.misc_clearTextureCache(filePath);
-		_fe3d.gameEntity_setReflectionMap(_currentModelName, filePath);
-		_fe3d.gameEntity_setSkyReflective(_currentModelName, true);
+		// Check if user did not switch directory
+		if (filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
+			filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
+		{
+			const string newFilePath = filePath.substr(rootDirectory.size());
+			_fe3d.misc_clearTextureCache(newFilePath);
+			_fe3d.gameEntity_setReflectionMap(_currentModelName, newFilePath);
+			_fe3d.gameEntity_setSkyReflective(_currentModelName, true);
+		}
+		else
+		{
+			_fe3d.logger_throwWarning("Invalid filepath, directory switching not allowed!");
+		}
 	}
 }
 
 void ModelEditor::_loadNormalMap()
 {
 	// Get the loaded filename
-	string filePath = _fe3d.misc_getWinExplorerFilename("User\\assets\\textures\\normal_maps\\", "PNG");
+		const string rootDirectory = _fe3d.misc_getRootDirectory();
+	const string targetDirectory = string("user\\assets\\textures\\normal_maps\\");
+	const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "PNG");
 
 	// Check if user chose a filename
 	if (filePath != "")
 	{
-		_fe3d.misc_clearTextureCache(filePath);
-		_fe3d.gameEntity_setNormalMap(_currentModelName, filePath);
-		_fe3d.gameEntity_setNormalMapped(_currentModelName, true);
+		// Check if user did not switch directory
+		if (filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
+			filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
+		{
+			const string newFilePath = filePath.substr(rootDirectory.size());
+			_fe3d.misc_clearTextureCache(newFilePath);
+			_fe3d.gameEntity_setNormalMap(_currentModelName, newFilePath);
+			_fe3d.gameEntity_setNormalMapped(_currentModelName, true);
+		}
+		else
+		{
+			_fe3d.logger_throwWarning("Invalid filepath, directory switching not allowed!");
+		}
 	}
 }
 

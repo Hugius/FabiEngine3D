@@ -108,24 +108,50 @@ void WorldEditor::_updateTerrainMenuMesh()
 		{
 			if (screen->getButton("heightMap")->isHovered())
 			{
-				string filePath = _fe3d.misc_getWinExplorerFilename("User\\assets\\textures\\height_maps\\", "BMP");
+				// Get the loaded filename
+				const string rootDirectory = _fe3d.misc_getRootDirectory();
+				const string targetDirectory = string("user\\assets\\textures\\height_maps\\");
+				const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "BMP");
 
-				// Check if not cancelled
+				// Check if user chose a filename
 				if (filePath != "")
 				{
-					_fe3d.misc_clearHeightMapCache(filePath);
-					_loadTerrainEntity(filePath);
+					// Check if user did not switch directory
+					if (filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
+						filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
+					{
+						const string newFilePath = filePath.substr(rootDirectory.size());
+						_fe3d.misc_clearHeightMapCache(newFilePath);
+						_loadTerrainEntity(newFilePath);
+					}
+					else
+					{
+						_fe3d.logger_throwWarning("Invalid filepath, directory switching not allowed!");
+					}
 				}
 			}
 			else if (screen->getButton("diffuseMap")->isHovered())
 			{
-				string filePath = _fe3d.misc_getWinExplorerFilename("User\\assets\\textures\\diffuse_maps\\", "PNG");
+				// Get the loaded filename
+				const string rootDirectory = _fe3d.misc_getRootDirectory();
+				const string targetDirectory = string("user\\assets\\textures\\diffuse_maps\\");
+				const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "PNG");
 
-				// Check if not cancelled
+				// Check if user chose a filename
 				if (filePath != "")
 				{
-					_fe3d.misc_clearTextureCache(filePath);
-					_fe3d.terrainEntity_setDiffuseMap("@terrain", filePath);
+					// Check if user did not switch directory
+					if (filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
+						filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
+					{
+						const string newFilePath = filePath.substr(rootDirectory.size());
+						_fe3d.misc_clearTextureCache(newFilePath);
+						_fe3d.terrainEntity_setDiffuseMap("@terrain", newFilePath);
+					}
+					else
+					{
+						_fe3d.logger_throwWarning("Invalid filepath, directory switching not allowed!");
+					}
 				}
 			}
 			else if (screen->getButton("maxHeight")->isHovered())
@@ -189,46 +215,98 @@ void WorldEditor::_updateTerrainMenuBlendMap()
 		{
 			if (screen->getButton("blendMap")->isHovered())
 			{
-				string filePath = _fe3d.misc_getWinExplorerFilename("User\\assets\\textures\\blend_maps\\", "PNG");
+				// Get the loaded filename
+				const string rootDirectory = _fe3d.misc_getRootDirectory();
+				const string targetDirectory = string("user\\assets\\textures\\blend_maps\\");
+				const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "PNG");
 
-				// Check if not cancelled
+				// Check if user chose a filename
 				if (filePath != "")
 				{
-					_fe3d.misc_clearTextureCache(filePath);
-					_fe3d.terrainEntity_setBlendMap("@terrain", filePath);
+					// Check if user did not switch directory
+					if (filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
+						filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
+					{
+						const string newFilePath = filePath.substr(rootDirectory.size());
+						_fe3d.misc_clearTextureCache(newFilePath);
+						_fe3d.terrainEntity_setBlendMap("@terrain", newFilePath);
+					}
+					else
+					{
+						_fe3d.logger_throwWarning("Invalid filepath, directory switching not allowed!");
+					}
 				}
 			}
 			else if (screen->getButton("red")->isHovered())
 			{
-				string filePath = _fe3d.misc_getWinExplorerFilename("User\\assets\\textures\\diffuse_maps\\", "PNG");
+				// Get the loaded filename
+				const string rootDirectory = _fe3d.misc_getRootDirectory();
+				const string targetDirectory = string("user\\assets\\textures\\diffuse_maps\\");
+				const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "PNG");
 
-				// Check if not cancelled
+				// Check if user chose a filename
 				if (filePath != "")
 				{
-					_fe3d.misc_clearTextureCache(filePath);
-					_fe3d.terrainEntity_setBlendMapR("@terrain", filePath);
+					// Check if user did not switch directory
+					if (filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
+						filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
+					{
+						const string newFilePath = filePath.substr(rootDirectory.size());
+						_fe3d.misc_clearTextureCache(newFilePath);
+						_fe3d.terrainEntity_setBlendMapR("@terrain", newFilePath);
+					}
+					else
+					{
+						_fe3d.logger_throwWarning("Invalid filepath, directory switching not allowed!");
+					}
 				}
 			}
 			else if (screen->getButton("green")->isHovered())
 			{
-				string filePath = _fe3d.misc_getWinExplorerFilename("User\\assets\\textures\\diffuse_maps\\", "PNG");
-				
-				// Check if not cancelled
+				// Get the loaded filename
+				const string rootDirectory = _fe3d.misc_getRootDirectory();
+				const string targetDirectory = string("user\\assets\\textures\\diffuse_maps\\");
+				const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "PNG");
+
+				// Check if user chose a filename
 				if (filePath != "")
 				{
-					_fe3d.misc_clearTextureCache(filePath);
-					_fe3d.terrainEntity_setBlendMapG("@terrain", filePath);
+					// Check if user did not switch directory
+					if (filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
+						filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
+					{
+						const string newFilePath = filePath.substr(rootDirectory.size());
+						_fe3d.misc_clearTextureCache(newFilePath);
+						_fe3d.terrainEntity_setBlendMapG("@terrain", newFilePath);
+					}
+					else
+					{
+						_fe3d.logger_throwWarning("Invalid filepath, directory switching not allowed!");
+					}
 				}
 			}
 			else if (screen->getButton("blue")->isHovered())
 			{
-				string filePath = _fe3d.misc_getWinExplorerFilename("User\\assets\\textures\\diffuse_maps\\", "PNG");
-				
-				// Check if not cancelled
+				// Get the loaded filename
+				const string rootDirectory = _fe3d.misc_getRootDirectory();
+				const string targetDirectory = string("user\\assets\\textures\\diffuse_maps\\");
+				const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "PNG");
+
+				// Check if user chose a filename
 				if (filePath != "")
 				{
-					_fe3d.misc_clearTextureCache(filePath);
-					_fe3d.terrainEntity_setBlendMapB("@terrain", filePath);
+					// Check if user did not switch directory
+					if (filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
+						filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
+					{
+						const string newFilePath = filePath.substr(rootDirectory.size());
+						_fe3d.misc_clearTextureCache(newFilePath);
+						_fe3d.terrainEntity_setBlendMapB("@terrain", newFilePath);
+					}
+					else
+					{
+						_fe3d.logger_throwWarning("Invalid filepath, directory switching not allowed!");
+					}
 				}
 			}
 			else if (screen->getButton("redRepeat")->isHovered())

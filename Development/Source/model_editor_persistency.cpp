@@ -17,7 +17,7 @@ void ModelEditor::loadModels()
 	_modelNames.clear();
 
 	// Compose full models folder path
-	string filePath = _fe3d.misc_getRootDirectory() + "User\\projects\\" + _currentProjectName + "\\data\\model.fe3d";
+	string filePath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectName + "\\data\\model.fe3d";
 
 	// Load models file
 	if (_fe3d.misc_isFileExisting(filePath)) // Check if models file exists
@@ -105,7 +105,7 @@ void ModelEditor::save()
 
 		// Create or overwrite models file
 		std::ofstream file;
-		file.open(_fe3d.misc_getRootDirectory() + "User\\projects\\" + _currentProjectName + "\\data\\model.fe3d");
+		file.open(_fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectName + "\\data\\model.fe3d");
 
 		// Write model data into file
 		for (auto& modelName : _modelNames)
@@ -131,7 +131,7 @@ void ModelEditor::save()
 				auto uvRepeat = _fe3d.gameEntity_getUvRepeat(modelName);
 				auto boxSize = _fe3d.aabbEntity_getSize(modelName);
 				auto lodEntityID = _fe3d.gameEntity_getLevelOfDetailEntityID(modelName);
-
+				
 				// Perform empty string & space conversions
 				objPath = (objPath == "") ? "?" : objPath;
 				diffuseMapPath = (diffuseMapPath == "") ? "?" : diffuseMapPath;

@@ -67,7 +67,7 @@ void GameEntityManager::addGameEntity
 		// Load an OBJ part diffuse map
 		if (part.diffuseMapName != "")
 		{
-			getEntity(ID)->addDiffuseMap(_texLoader.getTexture("User\\assets\\textures\\diffuse_maps\\" + part.diffuseMapName, true, true, true));
+			getEntity(ID)->addDiffuseMap(_texLoader.getTexture("user\\assets\\textures\\diffuse_maps\\" + part.diffuseMapName, true, true, true));
 		}
 		else
 		{
@@ -82,7 +82,7 @@ void GameEntityManager::addGameEntity
 		if (part.lightMapName != "")
 		{
 			getEntity(ID)->setLightMapped(true);
-			getEntity(ID)->addLightMap(_texLoader.getTexture("User\\assets\\textures\\light_maps\\" + part.lightMapName, true, true, true));
+			getEntity(ID)->addLightMap(_texLoader.getTexture("user\\assets\\textures\\light_maps\\" + part.lightMapName, true, true, true));
 		}
 		else
 		{
@@ -96,7 +96,7 @@ void GameEntityManager::addGameEntity
 		// Load an OBJ part normal map
 		if (part.normalMapName != "")
 		{
-			getEntity(ID)->addNormalMap(_texLoader.getTexture("User\\assets\\textures\\normal_maps\\" + part.normalMapName, true, true, true));
+			getEntity(ID)->addNormalMap(_texLoader.getTexture("user\\assets\\textures\\normal_maps\\" + part.normalMapName, true, true, true));
 		}
 		else
 		{
@@ -111,7 +111,7 @@ void GameEntityManager::addGameEntity
 		if (part.reflectionMapName != "")
 		{
 			getEntity(ID)->setSkyReflective(true);
-			getEntity(ID)->addReflectionMap(_texLoader.getTexture("User\\assets\\textures\\reflection_maps\\" + part.reflectionMapName, true, true, true));
+			getEntity(ID)->addReflectionMap(_texLoader.getTexture("user\\assets\\textures\\reflection_maps\\" + part.reflectionMapName, true, true, true));
 		}
 		else
 		{

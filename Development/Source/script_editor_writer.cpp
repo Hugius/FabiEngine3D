@@ -2,9 +2,15 @@
 
 void ScriptEditor::_updateTextWriter()
 {
-	if (_isLoaded && _isWritingScript)
+	static bool wasGuiFocused = false;
+	
+	// User must be editing script file & no active GUI overlays
+	if (_isLoaded && _isWritingScript && !_gui->getGlobalScreen()->isFocused() && !wasGuiFocused)
 	{
+		// Handy values
 		bool textHasChanged = false;
+		unsigned int cursorLineIndex = _script.getScriptFile(_currentScriptFileID)->getCursorLineIndex();
+		unsigned int cursorCharIndex = _script.getScriptFile(_currentScriptFileID)->getCursorCharIndex();
 
 		// Timing functionality for continuous actions
 		const vector<Input> actionKeys = 
@@ -61,19 +67,19 @@ void ScriptEditor::_updateTextWriter()
 					singleActionAllowed = false;
 
 					// Extract remaining text in current line from cursor position
-					string currentLineText = _script.getScriptFile(_currentScriptFileID)->getLineText(_cursorLineIndex);
+					string currentLineText = _script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex);
 					string textToExtract = currentLineText;
-					textToExtract = textToExtract.substr(_cursorPlaceIndex, textToExtract.size() - _cursorPlaceIndex);
+					textToExtract = textToExtract.substr(cursorCharIndex, textToExtract.size() - cursorCharIndex);
 					
 					// Remove extracted text from current line
-					_script.getScriptFile(_currentScriptFileID)->setLineText(_cursorLineIndex, currentLineText.substr(0, _cursorPlaceIndex));
+					_script.getScriptFile(_currentScriptFileID)->setLineText(cursorLineIndex, currentLineText.substr(0, cursorCharIndex));
 
 					// Set cursor to beginning of new line
-					_cursorPlaceIndex = 0;
-					_cursorLineIndex++;
+					cursorCharIndex = 0;
+					cursorLineIndex++;
 
 					// Add text on new line
-					_script.getScriptFile(_currentScriptFileID)->insertNewLine(_cursorLineIndex, textToExtract);
+					_script.getScriptFile(_currentScriptFileID)->insertNewLine(cursorLineIndex, textToExtract);
 					textHasChanged = true;
 				}
 			}
@@ -91,16 +97,16 @@ void ScriptEditor::_updateTextWriter()
 				{
 					singleActionAllowed = false;
 
-					if (_cursorPlaceIndex > 0) // If cursor somewhere on the line
+					if (cursorCharIndex > 0) // If cursor somewhere on the line
 					{
-						_cursorPlaceIndex--;
+						cursorCharIndex--;
 					}
 					else // If cursor is at the beginning of the line
 					{
-						if (_cursorLineIndex > 0) // Check if trying to move cursor out of screen
+						if (cursorLineIndex > 0) // Check if trying to move cursor out of screen
 						{
-							_cursorLineIndex--;
-							_cursorPlaceIndex = _script.getScriptFile(_currentScriptFileID)->getLineText(_cursorLineIndex).size();
+							cursorLineIndex--;
+							cursorCharIndex = _script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex).size();
 						}
 					}
 				}
@@ -115,17 +121,17 @@ void ScriptEditor::_updateTextWriter()
 				{
 					singleActionAllowed = false;
 
-					if (_cursorPlaceIndex < _script.getScriptFile(_currentScriptFileID)->getLineText(_cursorLineIndex).size()) // If cursor somewhere on the line
+					if (cursorCharIndex < _script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex).size()) // If cursor somewhere on the line
 					{
-						_cursorPlaceIndex++;
+						cursorCharIndex++;
 					}
 					else // If cursor is at the end of the line
 					{
 						// Check if trying to move cursor out of screen
-						if (_cursorLineIndex < _script.getScriptFile(_currentScriptFileID)->getLineCount() - 1)
+						if (cursorLineIndex < _script.getScriptFile(_currentScriptFileID)->getLineCount() - 1)
 						{
-							_cursorLineIndex++;
-							_cursorPlaceIndex = 0;
+							cursorLineIndex++;
+							cursorCharIndex = 0;
 						}
 					}
 				}
@@ -140,14 +146,14 @@ void ScriptEditor::_updateTextWriter()
 				{
 					singleActionAllowed = false;
 
-					if (_cursorLineIndex > 0) // Check if trying to move cursor out of screen
+					if (cursorLineIndex > 0) // Check if trying to move cursor out of screen
 					{
-						_cursorLineIndex--;
+						cursorLineIndex--;
 
-						// Change place index accordingly
-						if (_cursorPlaceIndex > _script.getScriptFile(_currentScriptFileID)->getLineText(_cursorLineIndex).size())
+						// Change character index accordingly
+						if (cursorCharIndex > _script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex).size())
 						{
-							_cursorPlaceIndex = _script.getScriptFile(_currentScriptFileID)->getLineText(_cursorLineIndex).size();
+							cursorCharIndex = _script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex).size();
 						}
 					}
 				}
@@ -163,14 +169,14 @@ void ScriptEditor::_updateTextWriter()
 					singleActionAllowed = false;
 
 					// Check if trying to move cursor out of screen
-					if (_cursorLineIndex < _script.getScriptFile(_currentScriptFileID)->getLineCount() - 1)
+					if (cursorLineIndex < _script.getScriptFile(_currentScriptFileID)->getLineCount() - 1)
 					{
-						_cursorLineIndex++;
+						cursorLineIndex++;
 
-						// Change place index accordingly
-						if (_cursorPlaceIndex > _script.getScriptFile(_currentScriptFileID)->getLineText(_cursorLineIndex).size())
+						// Change character index accordingly
+						if (cursorCharIndex > _script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex).size())
 						{
-							_cursorPlaceIndex = _script.getScriptFile(_currentScriptFileID)->getLineText(_cursorLineIndex).size();
+							cursorCharIndex = _script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex).size();
 						}
 					}
 				}
@@ -179,7 +185,7 @@ void ScriptEditor::_updateTextWriter()
 		else // Other keypresses
 		{
 			// All characters of current line
-			string currentLineText = _script.getScriptFile(_currentScriptFileID)->getLineText(_cursorLineIndex);
+			string currentLineText = _script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex);
 			string newCharacters = "";
 
 			// Letter characters
@@ -258,50 +264,50 @@ void ScriptEditor::_updateTextWriter()
 						singleActionAllowed = false;
 
 						// Jump to line above if cursor at beginning of line
-						if (_cursorPlaceIndex == 0 && _fe3d.input_getKeyDown(Input::KEY_BACKSPACE))
+						if (cursorCharIndex == 0 && _fe3d.input_getKeyDown(Input::KEY_BACKSPACE))
 						{
 							// Check if not trying to remove default line
-							if (_cursorLineIndex > 0)
+							if (cursorLineIndex > 0)
 							{
 								// Remove line
-								string textToMerge = _script.getScriptFile(_currentScriptFileID)->getLineText(_cursorLineIndex);
-								_script.getScriptFile(_currentScriptFileID)->removeLine(_cursorLineIndex);
-								_cursorLineIndex--;
+								string textToMerge = _script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex);
+								_script.getScriptFile(_currentScriptFileID)->removeLine(cursorLineIndex);
+								cursorLineIndex--;
 
 								// Set cursor to last character of line above & merge text from current line
-								_cursorPlaceIndex = _script.getScriptFile(_currentScriptFileID)->getLineText(_cursorLineIndex).size();
-								_script.getScriptFile(_currentScriptFileID)->setLineText(_cursorLineIndex, 
-									_script.getScriptFile(_currentScriptFileID)->getLineText(_cursorLineIndex) + textToMerge);
+								cursorCharIndex = _script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex).size();
+								_script.getScriptFile(_currentScriptFileID)->setLineText(cursorLineIndex, 
+									_script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex) + textToMerge);
 								textHasChanged = true;
 							}
 						}
-						else if (_cursorPlaceIndex == currentLineText.size() && _fe3d.input_getKeyDown(Input::KEY_DELETE))
+						else if (cursorCharIndex == currentLineText.size() && _fe3d.input_getKeyDown(Input::KEY_DELETE))
 						{
 							// Check if not trying to remove default line
-							if (_cursorLineIndex < _script.getScriptFile(_currentScriptFileID)->getLineCount() - 1)
+							if (cursorLineIndex < _script.getScriptFile(_currentScriptFileID)->getLineCount() - 1)
 							{
 								// Remove line
-								string textToMerge = _script.getScriptFile(_currentScriptFileID)->getLineText(_cursorLineIndex + 1);
-								_script.getScriptFile(_currentScriptFileID)->removeLine(_cursorLineIndex + 1);
+								string textToMerge = _script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex + 1);
+								_script.getScriptFile(_currentScriptFileID)->removeLine(cursorLineIndex + 1);
 
 								// Merge text on current line & save merged line
 								currentLineText += textToMerge;
-								_script.getScriptFile(_currentScriptFileID)->setLineText(_cursorLineIndex, currentLineText);
+								_script.getScriptFile(_currentScriptFileID)->setLineText(cursorLineIndex, currentLineText);
 								textHasChanged = true;
 							}
 						}
-						else if (_cursorPlaceIndex > 0 && _fe3d.input_getKeyDown(Input::KEY_BACKSPACE)) // Remove previous character from current line
+						else if (cursorCharIndex > 0 && _fe3d.input_getKeyDown(Input::KEY_BACKSPACE)) // Remove previous character from current line
 						{
-							_cursorPlaceIndex--;
-							currentLineText.erase(currentLineText.begin() + _cursorPlaceIndex);
+							cursorCharIndex--;
+							currentLineText.erase(currentLineText.begin() + cursorCharIndex);
 							textHasChanged = true;
-							_script.getScriptFile(_currentScriptFileID)->setLineText(_cursorLineIndex, currentLineText); // Save new line text
+							_script.getScriptFile(_currentScriptFileID)->setLineText(cursorLineIndex, currentLineText); // Save new line text
 						}
 						else if (_fe3d.input_getKeyDown(Input::KEY_DELETE)) // Remove next character from current line
 						{
-							currentLineText.erase(currentLineText.begin() + _cursorPlaceIndex);
+							currentLineText.erase(currentLineText.begin() + cursorCharIndex);
 							textHasChanged = true;
-							_script.getScriptFile(_currentScriptFileID)->setLineText(_cursorLineIndex, currentLineText); // Save new line text
+							_script.getScriptFile(_currentScriptFileID)->setLineText(cursorLineIndex, currentLineText); // Save new line text
 						}
 					}
 				}
@@ -310,27 +316,27 @@ void ScriptEditor::_updateTextWriter()
 			// Add new typed character to line
 			if (newCharacters != "")
 			{
-				if (currentLineText == "" || _cursorPlaceIndex == currentLineText.size()) // First or last character in line
+				if (currentLineText == "" || cursorCharIndex == currentLineText.size()) // First or last character in line
 				{
 					for (auto& character : newCharacters)
 					{
 						currentLineText += character;
-						_cursorPlaceIndex++;
+						cursorCharIndex++;
 					}
 				}
 				else // Inbetween character in line
 				{
 					for (auto& character : newCharacters)
 					{
-						currentLineText.insert(currentLineText.begin() + _cursorPlaceIndex, character);
-						_cursorPlaceIndex++;
+						currentLineText.insert(currentLineText.begin() + cursorCharIndex, character);
+						cursorCharIndex++;
 					}
 				}
 
 				textHasChanged = true;
 
 				// Save new line
-				_script.getScriptFile(_currentScriptFileID)->setLineText(_cursorLineIndex, currentLineText);
+				_script.getScriptFile(_currentScriptFileID)->setLineText(cursorLineIndex, currentLineText);
 			}
 		}
 
@@ -363,16 +369,22 @@ void ScriptEditor::_updateTextWriter()
 
 		// Update cursor billboard text & position
 		vec3 position;
-		if (_cursorPlaceIndex == 0) // Default line position
+		if (cursorCharIndex == 0) // Default line position
 		{
-			position = _fe3d.billboardEntity_getPosition(to_string(_cursorLineIndex)) + vec3(_horizontalLineOffset / 2.0f, 0.0f, 0.0f);
+			position = _fe3d.billboardEntity_getPosition(to_string(cursorLineIndex)) + vec3(_horizontalLineOffset / 2.0f, 0.0f, 0.0f);
 		}
 		else // Mid-text position
 		{
-			position = _fe3d.billboardEntity_getPosition(to_string(_cursorLineIndex) + "_" + to_string(_cursorPlaceIndex - 1));
+			position = _fe3d.billboardEntity_getPosition(to_string(cursorLineIndex) + "_" + to_string(cursorCharIndex - 1));
 		}
 		position += vec3(_textCharacterSize.x / 2.0f, 0.0f, 0.0f);
 		_fe3d.billboardEntity_setPosition("cursor", position);
 		_fe3d.billBoardEntity_setTextContent("cursor", (barEnabled ? "|" : " "));
+
+		// Set new cursor indices
+		_script.getScriptFile(_currentScriptFileID)->setCursorLineIndex(cursorLineIndex);
+		_script.getScriptFile(_currentScriptFileID)->setCursorCharIndex(cursorCharIndex);
 	}
+
+	wasGuiFocused = _gui->getGlobalScreen()->isFocused();
 }

@@ -138,7 +138,6 @@ void GameEntityManager::loadNormalMapping(const string& ID)
 	if (getEntity(ID)->getOglBuffer()->getBufferType() != BufferType::MODEL_TANGENT)
 	{
 		// Load OBJ model
-		_objLoader.clearOBJCache(getEntity(ID)->getObjPath());
 		auto parts = _objLoader.loadOBJ(getEntity(ID)->getObjPath(), true);
 
 		// Create OpenGL buffers

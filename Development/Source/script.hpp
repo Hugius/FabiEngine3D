@@ -17,7 +17,7 @@ public:
 
 	shared_ptr<ScriptFile> getScriptFile(const string& ID);
 
-	vector<string> getAllScriptFileIDs();
+	const vector<string> getAllScriptFileIDs();
 
 private:
 	FabiEngine3D& _fe3d;

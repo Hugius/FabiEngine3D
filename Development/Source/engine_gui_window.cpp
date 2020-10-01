@@ -22,12 +22,12 @@ void EngineGuiWindow::update(bool hoverable)
 bool EngineGuiWindow::isHovered()
 {
 	// Check if entity is visible anyway
-	if (_fe3d.guiEntity_isVisible(_ID))
+	if (_fe3d.guiEntity_isVisible(_entityID))
 	{
 		// Convert dimensions to same space
 		vec2 mousePos = _fe3d.misc_convertToNDC(_fe3d.misc_convertFromScreenCoords(_fe3d.misc_getMousePos()));
-		vec2 buttonPos = _fe3d.guiEntity_getPosition(_ID);
-		vec2 buttonSize = _fe3d.guiEntity_getSize(_ID);
+		vec2 buttonPos = _fe3d.guiEntity_getPosition(_entityID);
+		vec2 buttonSize = _fe3d.guiEntity_getSize(_entityID);
 
 		// Check if cursor inside entity
 		if (mousePos.x > buttonPos.x - (buttonSize.x / 2.0f) && mousePos.x < buttonPos.x + (buttonSize.x / 2.0f)) // X axis

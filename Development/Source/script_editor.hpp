@@ -40,8 +40,6 @@ private:
 	string _currentProjectName = "";
 	string _currentScriptFileID = "";
 	float _scrollingAcceleration = 0.0f;
-	unsigned int _cursorLineIndex = 0;
-	unsigned int _cursorPlaceIndex = 0;
 	bool _isLoaded = false;
 	bool _isScriptLoadedFromFile = false;
 	bool _isWritingScript = false;

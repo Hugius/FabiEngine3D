@@ -36,6 +36,7 @@ public:
 
 private:
 	vector<ObjPart> _loadOBJ(const string& filePath, bool calculateTangents);
+	void _calculateTangents(vector<ObjPart>& objParts);
 
 	std::map<string, vector<ObjPart>> _objPartsMap;
 };

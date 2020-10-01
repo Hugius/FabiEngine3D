@@ -199,7 +199,7 @@ void BottomViewportController::_updateConsoleScrolling()
 		float minY = window->getOriginalPosition().y - (window->getOriginalSize().y / 2.0f);
 		float maxY = window->getOriginalPosition().y + (window->getOriginalSize().y / 2.0f);
 		float oldestMessage = _fe3d.textEntity_getPosition(screen->getTextfield(_consoleMessageStack[0].first + "_time")->getEntityID()).y + _charSize.y;
-		float scrollValue = static_cast<float>(_fe3d.input_getMouseWheelY());
+		float scrollValue = static_cast<float>(_fe3d.input_getMouseWheelY()) * static_cast<float>(window->isHovered());
 
 		// Calculate message part count for latest message Y
 		int messagePartCount = 0;
@@ -217,7 +217,7 @@ void BottomViewportController::_updateConsoleScrolling()
 		{
 			// If a message is too long for 1 line, count all the text lines
 			int count = 0;
-			while (screen->getTextfield(ID + "_msg_" + to_string(count++)) != nullptr) { }
+			while (screen->getTextfield(ID + "_msg_" + to_string(count++)) != nullptr) {}
 			if (count > 1)
 			{
 				messageLineCount += count;
@@ -230,7 +230,7 @@ void BottomViewportController::_updateConsoleScrolling()
 			// Update acceleration
 			_scrollingAcceleration += (scrollValue * 0.01f);
 			_scrollingAcceleration *= 0.95f;
-			
+
 			// Only allow scrolling when not trying to scroll too far
 			if ((latestMessageY == minY && _scrollingAcceleration < 0.0f) || (oldestMessage == maxY && scrollValue > 0.0f))
 			{

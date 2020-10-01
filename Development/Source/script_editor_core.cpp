@@ -76,10 +76,13 @@ void ScriptEditor::unload()
 
 	// Unload script
 	_script.reset();
-	_isScriptLoadedFromFile = false;
 
 	// Reset editor properties
+	_currentScriptFileID = "";
 	_scrollingAcceleration = 0.0f;
+	_isLoaded = false;
+	_isScriptLoadedFromFile = false;
+	_isWritingScript = false;
 
 	// Miscellaneous
 	_isLoaded = false;

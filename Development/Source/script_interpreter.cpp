@@ -12,10 +12,10 @@ ScriptInterpreter::ScriptInterpreter(FabiEngine3D& fe3d, Script& script) :
 void ScriptInterpreter::load()
 {
 	// For every scriptfile
-	for (auto& ID : _script.getAllScriptFileIDs())
+	for (auto& scriptID : _script.getAllScriptFileIDs())
 	{
 		// Extract first line
-		auto scriptFile = _script.getScriptFile(ID);
+		auto scriptFile = _script.getScriptFile(scriptID);
 		std::istringstream iss(scriptFile->getLineText(0));
 		string type, name;
 		iss >> type >> name;
@@ -23,19 +23,19 @@ void ScriptInterpreter::load()
 		// Determine script type
 		if (type == "META" && name == "script_type_init")
 		{
-			_initScriptIDs.push_back(ID);
+			_initScriptIDs.push_back(scriptID);
 		}
 		else if (type == "META" && name == "script_type_update")
 		{
-			_updateScriptIDs.push_back(ID);
+			_updateScriptIDs.push_back(scriptID);
 		}
 		else if (type == "META" && name == "script_type_destroy")
 		{
-			_destroyScriptIDs.push_back(ID);
+			_destroyScriptIDs.push_back(scriptID);
 		}
 		else
 		{
-			
+			_fe3d.logger_throwWarning("No META variable found in script \"" + scriptID + "\"");
 		}
 	}
 }

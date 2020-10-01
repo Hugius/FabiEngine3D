@@ -18,7 +18,7 @@ void ScriptEditor::_updateGUI()
 		auto mainScreen = leftWindow->getScreen("scriptEditorMenuMain");
 		
 		// Buttons hoverability
-		leftWindow->getScreen("scriptEditorMenuMain")->getButton("deleteScript")->setHoverable(_currentScriptFileID != "");
+		mainScreen->getButton("deleteScript")->setHoverable(_currentScriptFileID != "");
 
 		// Check if LMB is pressed
 		if (!_gui->getGlobalScreen()->isFocused())
@@ -27,20 +27,11 @@ void ScriptEditor::_updateGUI()
 			{
 				if (mainScreen->getButton("createScript")->isHovered())
 				{
-					if (!_isWritingScript)
-					{
-						_isWritingScript = true;
-						_cursorLineIndex = 0;
-						_cursorPlaceIndex = 0;
-						_currentScriptFileID = "test";
-						_script.addScriptFile(_currentScriptFileID);
-						_script.getScriptFile(_currentScriptFileID)->insertNewLine(0, "");
-						_reloadScriptTextDisplay();
-					}
+					_gui->getGlobalScreen()->addValueForm("newScriptName", "New script name", "", vec2(0.0f), vec2(0.5f, 0.1f));
 				}
 				else if (mainScreen->getButton("editScript")->isHovered())
 				{
-					_gui->getGlobalScreen()->addChoiceForm("scriptFileList", "Choose file", vec2(0.0f, 0.0f), _script.getAllScriptFileIDs());
+					_gui->getGlobalScreen()->addChoiceForm("scriptFileList", "Choose script", vec2(0.0f), _script.getAllScriptFileIDs());
 				}
 				else if (mainScreen->getButton("deleteScript")->isHovered())
 				{
@@ -79,58 +70,82 @@ void ScriptEditor::_updateMiscellaneous()
 {
 	if (_isLoaded)
 	{
-		if (!_gui->getGlobalScreen()->isFocused() && _isWritingScript)
+		if (_isWritingScript)
 		{
-			// Camear movement input
-			if (_fe3d.input_getMouseWheelY() == -1 && _cursorLineIndex > 12)
-			{
-				_scrollingAcceleration -= _scrollingSpeed;
-			}
-			else if (_fe3d.input_getMouseWheelY() == 1)
-			{
-				_scrollingAcceleration += _scrollingSpeed;
-			}
-		}
+			unsigned int cursorLineIndex = _script.getScriptFile(_currentScriptFileID)->getCursorLineIndex();
 
-		// Smooth camera movement
-		_scrollingAcceleration = std::clamp(_scrollingAcceleration, -_maxScrollingAcceleration, _maxScrollingAcceleration);
-		_scrollingAcceleration *= 0.95f;
-		
-		// Camera must not go out of screen
-		if (_fe3d.camera_getPosition().y > _cameraStartingPosition.y)
-		{
-			_scrollingAcceleration = 0.0f;
-			_fe3d.camera_setPosition(_cameraStartingPosition);
-		}
-		else if (_fe3d.camera_getPosition().y == _cameraStartingPosition.y && _scrollingAcceleration > 0.0f) // Trying to scroll up
-		{
-			_scrollingAcceleration = 0.0f;
-		}
-		else if (_fe3d.billboardEntity_isExisting(to_string(_cursorLineIndex)) && _cursorLineIndex > 12) // Trying to scroll down
-		{
-			float limitY = _fe3d.billboardEntity_getPosition(to_string(_cursorLineIndex)).y + 6.5f;
+			if (!_gui->getGlobalScreen()->isFocused() && _fe3d.misc_isMouseInsideViewport())
+			{
+				// Camera movement input
+				if (_fe3d.input_getMouseWheelY() == -1 && cursorLineIndex > 12)
+				{
+					_scrollingAcceleration -= _scrollingSpeed;
+				}
+				else if (_fe3d.input_getMouseWheelY() == 1)
+				{
+					_scrollingAcceleration += _scrollingSpeed;
+				}
+			}
 
-			// Check if camera is not seeing the space under the last line of the script
-			if (_fe3d.camera_getPosition().y < limitY)
+			// Smooth camera movement
+			_scrollingAcceleration = std::clamp(_scrollingAcceleration, -_maxScrollingAcceleration, _maxScrollingAcceleration);
+			_scrollingAcceleration *= 0.95f;
+
+			// Camera must not go out of screen
+			if (_fe3d.camera_getPosition().y > _cameraStartingPosition.y)
 			{
 				_scrollingAcceleration = 0.0f;
-				float newY = limitY;
-				_fe3d.camera_setPosition(vec3(_cameraStartingPosition.x, newY, _cameraStartingPosition.z));
+				_fe3d.camera_setPosition(_cameraStartingPosition);
 			}
-			else if (_fe3d.camera_getPosition().y == limitY && _scrollingAcceleration < 0.0f) // Forbid scrolling down
+			else if (_fe3d.camera_getPosition().y == _cameraStartingPosition.y && _scrollingAcceleration > 0.0f) // Trying to scroll up
 			{
 				_scrollingAcceleration = 0.0f;
 			}
-		}
+			else if (_fe3d.billboardEntity_isExisting(to_string(cursorLineIndex)) && cursorLineIndex > 12) // Trying to scroll down
+			{
+				float limitY = _fe3d.billboardEntity_getPosition(to_string(cursorLineIndex)).y + 6.5f;
 
-		// Fixed camera position if lines are not out of screen
-		if (_cursorLineIndex < 12)
-		{
-			_fe3d.camera_setPosition(_cameraStartingPosition);
+				// Check if camera is not seeing the space under the last line of the script
+				if (_fe3d.camera_getPosition().y < limitY)
+				{
+					_scrollingAcceleration = 0.0f;
+					float newY = limitY;
+					_fe3d.camera_setPosition(vec3(_cameraStartingPosition.x, newY, _cameraStartingPosition.z));
+				}
+				else if (_fe3d.camera_getPosition().y == limitY && _scrollingAcceleration < 0.0f) // Forbid scrolling down
+				{
+					_scrollingAcceleration = 0.0f;
+				}
+			}
+
+			// Fixed camera position if lines are not out of screen
+			if (cursorLineIndex < 12)
+			{
+				_fe3d.camera_setPosition(_cameraStartingPosition);
+			}
 		}
 
 		// Move camera
 		_fe3d.camera_translate(vec3(0.0f, _scrollingAcceleration, 0.0f));
+
+		// Check if user filled in a new script name
+		string newName;
+		if (_gui->getGlobalScreen()->checkValueForm("newScriptName", newName))
+		{
+			auto existingNames = _script.getAllScriptFileIDs();
+			if (find(existingNames.begin(), existingNames.end(), newName) == existingNames.end())
+			{
+				_isWritingScript = true;
+				_currentScriptFileID = newName;
+				_script.addScriptFile(_currentScriptFileID);
+				_script.getScriptFile(_currentScriptFileID)->insertNewLine(0, "");
+				_reloadScriptTextDisplay();
+			}
+			else
+			{
+				_fe3d.logger_throwWarning("Script name already exists!");
+			}
+		}
 
 		// Check if existing script file chosen for viewing
 		string selectedButtonID = _gui->getGlobalScreen()->getSelectedChoiceFormButtonID("scriptFileList");
@@ -141,8 +156,7 @@ void ScriptEditor::_updateMiscellaneous()
 				_gui->getGlobalScreen()->removeChoiceForm("scriptFileList");
 				_currentScriptFileID = selectedButtonID;
 				_isWritingScript = true;
-				_cursorLineIndex = 0;
-				_cursorPlaceIndex = 0;
+				_reloadScriptTextDisplay();
 			}
 		}
 		else if (_gui->getGlobalScreen()->isChoiceFormCancelled("scriptFileList"))

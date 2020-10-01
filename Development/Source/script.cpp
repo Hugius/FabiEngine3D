@@ -75,7 +75,7 @@ shared_ptr<ScriptFile> Script::getScriptFile(const string& ID)
 	_fe3d.logger_throwError("Could not find script file with ID: " + ID);
 }
 
-vector<string> Script::getAllScriptFileIDs()
+const vector<string> Script::getAllScriptFileIDs()
 {
 	vector<string> result;
 

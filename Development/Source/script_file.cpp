@@ -41,6 +41,16 @@ void ScriptFile::removeLastLine()
 	_lines.pop_back();
 }
 
+void ScriptFile::setCursorLineIndex(unsigned int index)
+{
+	_cursorLineIndex = index;
+}
+
+void ScriptFile::setCursorCharIndex(unsigned int index)
+{
+	_cursorCharIndex = index;
+}
+
 const string& ScriptFile::getID()
 {
 	return _ID;
@@ -61,4 +71,14 @@ const string& ScriptFile::getLineText(unsigned int index)
 unsigned int ScriptFile::getLineCount()
 {
 	return _lines.size();
+}
+
+unsigned int ScriptFile::getCursorLineIndex()
+{
+	return _cursorLineIndex;
+}
+
+unsigned int ScriptFile::getCursorCharIndex()
+{
+	return _cursorCharIndex;
 }

@@ -23,5 +23,8 @@ private:
 
 	const vec2 _charSize = vec2(0.01f, 0.03f);
 
-	void _printConsoleMessage(const string& newMessage);
+	void _updateConsoleScrolling();
+	void _addConsoleMessage(const string& newMessage);
+
+	float _scrollingAcceleration = 0.0f;
 };

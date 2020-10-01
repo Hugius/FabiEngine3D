@@ -180,12 +180,104 @@ void BottomViewportController::update()
 		// Synchronize messages
 		for (size_t i = loggerMessages.size() - synchronizationCount; i < loggerMessages.size(); i++)
 		{
-			_printConsoleMessage(loggerMessages[i]);
+			_addConsoleMessage(loggerMessages[i]);
+		}
+	}
+
+	// Update console window
+	_updateConsoleScrolling();
+}
+
+void BottomViewportController::_updateConsoleScrolling()
+{
+	// No scrolling for empty console
+	if (!_consoleMessageStack.empty())
+	{
+		// Handy values
+		auto window = _gui->getViewport("bottom")->getWindow("console");
+		auto screen = window->getScreen("main");
+		float minY = window->getOriginalPosition().y - (window->getOriginalSize().y / 2.0f);
+		float maxY = window->getOriginalPosition().y + (window->getOriginalSize().y / 2.0f);
+		float oldestMessage = _fe3d.textEntity_getPosition(screen->getTextfield(_consoleMessageStack[0].first + "_time")->getEntityID()).y + _charSize.y;
+		float scrollValue = static_cast<float>(_fe3d.input_getMouseWheelY());
+
+		// Calculate message part count for latest message Y
+		int messagePartCount = 0;
+		const string latestMessageID = _consoleMessageStack.back().first;
+		while (screen->getTextfield(latestMessageID + "_msg_" + to_string(messagePartCount)) != nullptr)
+		{
+			messagePartCount++;
+		}
+		const string entityID = screen->getTextfield(latestMessageID + "_msg_" + to_string(messagePartCount - 1))->getEntityID();
+		float latestMessageY = _fe3d.textEntity_getPosition(entityID).y - _charSize.y;
+
+		// Count all message text lines
+		int messageLineCount = _consoleMessageStack.size();
+		for (auto& [ID, message] : _consoleMessageStack)
+		{
+			// If a message is too long for 1 line, count all the text lines
+			int count = 0;
+			while (screen->getTextfield(ID + "_msg_" + to_string(count++)) != nullptr) { }
+			if (count > 1)
+			{
+				messageLineCount += count;
+			}
+		}
+
+		// Check if there are enough messages to scroll through
+		if ((static_cast<float>(messageLineCount) * _charSize.y) > window->getOriginalSize().y)
+		{
+			// Update acceleration
+			_scrollingAcceleration += (scrollValue * 0.01f);
+			_scrollingAcceleration *= 0.95f;
+			
+			// Only allow scrolling when not trying to scroll too far
+			if ((latestMessageY == minY && _scrollingAcceleration < 0.0f) || (oldestMessage == maxY && scrollValue > 0.0f))
+			{
+				_scrollingAcceleration = 0.0f;
+			}
+
+			// Reset scrolling Y when scrolled too far
+			bool resetY = false;
+			if (latestMessageY > minY)
+			{
+				_scrollingAcceleration = latestMessageY - minY;
+				resetY = true;
+			}
+			else if (oldestMessage < maxY)
+			{
+				_scrollingAcceleration = oldestMessage - maxY;
+				resetY = true;
+			}
+
+			// Move all messages
+			for (auto& [ID, message] : _consoleMessageStack)
+			{
+				// Move time part
+				_fe3d.textEntity_move(screen->getTextfield(ID + "_time")->getEntityID(), vec2(0.0f, -_scrollingAcceleration));
+
+				// Move separator part
+				_fe3d.textEntity_move(screen->getTextfield(ID + "_separator")->getEntityID(), vec2(0.0f, -_scrollingAcceleration));
+
+				// Move all message parts
+				int index = 0;
+				while (screen->getTextfield(ID + "_msg_" + to_string(index)) != nullptr)
+				{
+					_fe3d.textEntity_move(screen->getTextfield(ID + "_msg_" + to_string(index))->getEntityID(), vec2(0.0f, -_scrollingAcceleration));
+					index++;
+				}
+			}
+
+			// Console not scrolling
+			if (resetY)
+			{
+				_scrollingAcceleration = 0.0f;
+			}
 		}
 	}
 }
 
-void BottomViewportController::_printConsoleMessage(const string& newMessage)
+void BottomViewportController::_addConsoleMessage(const string& newMessage)
 {
 	// Handy values
 	auto window = _gui->getViewport("bottom")->getWindow("console");

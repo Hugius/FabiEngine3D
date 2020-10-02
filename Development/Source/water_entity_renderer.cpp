@@ -54,7 +54,7 @@ void WaterEntityRenderer::render(const WaterEntity* entity)
 		_shader.uploadUniform("u_transparency", entity->getTransparency());
 		_shader.uploadUniform("u_isWaving", entity->isWaving());
 		_shader.uploadUniform("u_isRippling", entity->isRippling());
-		_shader.uploadUniform("u_isSpecular", entity->isSpecularLighted());
+		_shader.uploadUniform("u_isSpecularLighted", entity->isSpecularLighted());
 		_shader.uploadUniform("u_isReflective", entity->isReflective());
 		_shader.uploadUniform("u_isRefractive", entity->isRefractive());
 		_shader.uploadUniform("u_color", entity->getColor());

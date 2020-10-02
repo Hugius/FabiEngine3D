@@ -57,7 +57,7 @@ uniform bool u_isLightMapped;
 uniform bool u_isNormalMapped;
 uniform bool u_isSkyReflective;
 uniform bool u_isSceneReflective;
-uniform bool u_isSpecular;
+uniform bool u_isSpecularLighted;
 uniform bool u_isShadowed;
 uniform bool u_ambientLightingEnabled;
 uniform bool u_directionalLightingEnabled;
@@ -85,12 +85,12 @@ vec3 getTextureColor();
 vec3 getAmbientLighting();
 vec3 getDirectionalLighting(vec3 normal);
 vec3 getPointLighting(vec3 normal);
-float getSpecularValue(vec3 position, vec3 normal);
 vec3 getShadowLighting();
 vec3 applyLightMapping(vec3 color);
 vec3 applyFog(vec3 color);
 vec3 applySkyReflections(vec3 color, vec3 normal);
 vec3 applySceneReflections(vec3 color);
+float getSpecularValue(vec3 position, vec3 normal);
 
 // Calculate final fragment color
 void main()
@@ -240,7 +240,7 @@ vec3 getPointLighting(vec3 normal)
 
 float getSpecularValue(vec3 position, vec3 normal)
 {
-    if(u_specularLightingEnabled && u_isSpecular)
+    if(u_specularLightingEnabled && u_isSpecularLighted)
     {
         // Calculate
         vec3 lightDirection   = normalize(f_pos - position);

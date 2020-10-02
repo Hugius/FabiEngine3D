@@ -45,7 +45,7 @@ void DepthRenderer::render(const TerrainEntity* entity)
 		glBindVertexArray(entity->getOglBuffer()->getVAO());
 
 		// Render
-		glDrawArrays(GL_TRIANGLES, 0, entity->getOglBuffer()->getVertexCount());
+		glDrawArrays(GL_TRIANGLE_STRIP, 0, entity->getOglBuffer()->getVertexCount());
 
 		// Unbind
 		glActiveTexture(GL_TEXTURE0);

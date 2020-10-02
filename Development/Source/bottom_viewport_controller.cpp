@@ -322,7 +322,7 @@ void BottomViewportController::_addConsoleMessage(const string& newMessage)
 		// Extract message type
 		unsigned int typePartLength = 0;
 		string typeString = "";
-		for (unsigned int i = 0; i < message.size(); i++)
+		for (size_t i = 0; i < message.size(); i++)
 		{
 			// Add current character
 			typeString.push_back(message[i]);
@@ -353,7 +353,7 @@ void BottomViewportController::_addConsoleMessage(const string& newMessage)
 
 		// Check if message part takes multiple lines
 		vector<string> messageParts;
-		begin:for (unsigned int i = 0; i < messagePartText.size(); i++)
+		begin:for (size_t i = 0; i < messagePartText.size(); i++)
 		{
 			// Check if message length is bigger than window size
 			float offset = _charSize.x * static_cast<float>(timePartLength + 1);
@@ -392,7 +392,7 @@ void BottomViewportController::_addConsoleMessage(const string& newMessage)
 		}
 
 		// Add textfield for every message part
-		for (unsigned int i = 0; i < messageParts.size(); i++)
+		for (size_t i = 0; i < messageParts.size(); i++)
 		{
 			// ID for this message part
 			string textfieldID = ID + "_msg_" + to_string(i);

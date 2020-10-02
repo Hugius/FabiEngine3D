@@ -20,6 +20,16 @@ void TerrainEntity::setDiffuseMapPath(const string& filePath)
 	_diffuseMapPath = filePath;
 }
 
+void TerrainEntity::setNormalMap(GLuint val)
+{
+	_normalMap = val;
+}
+
+void TerrainEntity::setNormalMapPath(const string& filePath)
+{
+	_normalMapPath = filePath;
+}
+
 void TerrainEntity::setBlendMap(GLuint val)
 {
 	_blendMap = val;
@@ -90,6 +100,16 @@ void TerrainEntity::setMaxHeight(float val)
 	_maxHeight = val;
 }
 
+void TerrainEntity::setSpecularLighted(bool val)
+{
+	_isSpecularLighted = val;
+}
+
+void TerrainEntity::setNormalMapped(bool val)
+{
+	_isNormalMapped = val;
+}
+
 void TerrainEntity::setBlendMapped(bool val)
 {
 	_isBlendMapped = val;
@@ -103,6 +123,11 @@ void TerrainEntity::setLightness(float val)
 const GLuint TerrainEntity::getDiffuseMap() const
 {
 	return _diffuseMap;
+}
+
+const GLuint TerrainEntity::getNormalMap() const
+{
+	return _normalMap;
 }
 
 const GLuint TerrainEntity::getBlendMap() const
@@ -133,6 +158,11 @@ const string& TerrainEntity::getHeightMapPath() const
 const string& TerrainEntity::getDiffuseMapPath() const
 {
 	return _diffuseMapPath;
+}
+
+const string& TerrainEntity::getNormalMapPath() const
+{
+	return _normalMapPath;
 }
 
 const string& TerrainEntity::getBlendMapPath() const
@@ -193,6 +223,31 @@ const float TerrainEntity::getLightness() const
 const vector<float>& TerrainEntity::getPixelColors() const
 {
 	return _pixelColors;
+}
+
+const bool TerrainEntity::isSpecularLighted() const
+{
+	return _isSpecularLighted;
+}
+
+const bool TerrainEntity::isNormalMapped() const
+{
+	return _isNormalMapped;
+}
+
+vector<vec3>& TerrainEntity::getVertices()
+{
+	return _vertices;
+}
+
+vector<vec2>& TerrainEntity::getUvCoords()
+{
+	return _uvCoords;
+}
+
+vector<vec3>& TerrainEntity::getNormals()
+{
+	return _normals;
 }
 
 const bool TerrainEntity::isBlendMapped() const

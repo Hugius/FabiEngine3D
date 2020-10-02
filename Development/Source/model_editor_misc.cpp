@@ -39,7 +39,7 @@ void ModelEditor::_loadObjFileNames()
 		objPath.erase(0, objDirectoryPath.size());
 
 		// Loop over file path
-		for (unsigned int i = 0; i < objPath.size(); i++)
+		for (size_t i = 0; i < objPath.size(); i++)
 		{
 			// End of file name
 			if (objPath[i] == '.')

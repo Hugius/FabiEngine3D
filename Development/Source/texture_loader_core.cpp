@@ -288,7 +288,7 @@ vector<float> TextureLoader::_loadHeightMap(const string& filePath)
 	height = (header[25] << 24) | (header[24] << 16) | (header[23] << 8) | header[22];
 
 	// Read pixels
-	for (unsigned int i = 0; i < (width * height); i++)
+	for (size_t i = 0; i < (width * height); i++)
 	{
 		auto r = getc(streamIn);
 		auto g = getc(streamIn);

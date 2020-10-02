@@ -36,7 +36,7 @@ uniform float u_fogDefaultFactor;
 uniform bool u_fogEnabled;
 uniform bool u_effectsEnabled;
 uniform bool u_isRippling;
-uniform bool u_isSpecular;
+uniform bool u_isSpecularLighted;
 uniform bool u_isReflective;
 uniform bool u_isRefractive;
 
@@ -96,7 +96,7 @@ vec4 getMainColor()
 	}
 
 	// Specular lighting
-	if(u_isSpecular)
+	if(u_isSpecularLighted)
 	{
 		vec3 lightDir     = normalize(u_directionalLightingPosition - f_pos);
 		vec3 viewDir      = normalize(f_pos - u_cameraPosition);
@@ -135,7 +135,7 @@ vec4 getMainColor()
 	}
 
 	// Specular highlights
-	if(u_isSpecular)
+	if(u_isSpecularLighted)
 	{
 		finalColor += vec3(specular);
 	}

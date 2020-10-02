@@ -44,7 +44,7 @@ void GameEntityManager::addGameEntity
 		vector<float> data;
 
 		// For every triangle vertex point
-		for (unsigned int i = 0; i < part.vertices.size(); i++)
+		for (size_t i = 0; i < part.vertices.size(); i++)
 		{
 			// Vertex coordinate
 			data.push_back(part.vertices[i].x);
@@ -146,7 +146,7 @@ void GameEntityManager::loadNormalMapping(const string& ID)
 			vector<float> data;
 
 			// For every triangle vertex point
-			for (unsigned int i = 0; i < part.vertices.size(); i++)
+			for (size_t i = 0; i < part.vertices.size(); i++)
 			{
 				// Vertex coordinate
 				data.push_back(part.vertices[i].x);

@@ -76,7 +76,7 @@ void ScriptInterpreter::_executeScript(const string& ID)
 	auto scriptFile = _script.getScriptFile(ID);
 
 	// Interpret every line from top to bottom in script
-	for (unsigned int i = 0; i < scriptFile->getLineCount(); i++)
+	for (size_t i = 0; i < scriptFile->getLineCount(); i++)
 	{
 		string scriptLine = scriptFile->getLineText(i);
 		std::istringstream iss(scriptLine);

@@ -20,14 +20,14 @@ uniform mat3 u_normalModelMatrix;
 // Vec4 uniforms
 uniform vec4 u_clippingPlane;
 
+// Float uniforms
+uniform float u_maxY;
+uniform float u_uvRepeat;
+
 // Boolean uniforms
 uniform bool u_isInstanced;
 uniform bool u_isNormalMapped;
 uniform bool u_normalMappingEnabled;
-
-// Float uniforms
-uniform float u_maxY;
-uniform float u_uvRepeat;
 
 // Out variables
 out vec3 f_pos;
@@ -37,6 +37,7 @@ out vec4 f_shadowPos;
 out vec4 f_clip;
 out mat3 f_tbnMatrix;
 
+// Declarations
 mat3 calculateTbnMatrix();
 
 void main()

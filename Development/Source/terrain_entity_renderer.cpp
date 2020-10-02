@@ -121,7 +121,7 @@ void TerrainEntityRenderer::render(const TerrainEntity* entity)
 		glBindVertexArray(entity->getOglBuffer()->getVAO());
 
 		// Render
-		glDrawArrays(GL_TRIANGLE_STRIP, 0, entity->getOglBuffer()->getVertexCount() / 4 * 6);
+		glDrawArrays(GL_TRIANGLES, 0, entity->getOglBuffer()->getVertexCount());
 		_renderBus.increaseTriangleCount(entity->getOglBuffer()->getVertexCount() / 3);
 
 		// Unbind

@@ -116,6 +116,7 @@ public:
 	void terrainEntity_setUvRepeat(const string& ID, float repeat);
 	void terrainEntity_setDiffuseMap(const string& ID, const string& texturePath);
 	void terrainEntity_setLightness(const string& ID, float lightness);
+	void terrainEntity_setSpecularLighted(const string& ID, bool enabled);
 	void terrainEntity_setBlendMapped(const string& ID, bool enabled);
 	void terrainEntity_setBlendMap(const string& ID, const string& texturePath);
 	void terrainEntity_setBlendMapR(const string& ID, const string& texturePath);
@@ -124,10 +125,12 @@ public:
 	void terrainEntity_setBlendRepeatR(const string& ID, float repeat);
 	void terrainEntity_setBlendRepeatG(const string& ID, float repeat);
 	void terrainEntity_setBlendRepeatB(const string& ID, float repeat);
+	void terrainEntity_setSpecularLightingIntensity(const string& ID, float intensity);
 
 	// Terrain entity interface - getters
 	bool terrainEntity_isExisting(const string& ID);
 	bool terrainEntity_isVisible(const string& ID);
+	bool terrainEntity_isSpecularLighted(const string& ID);
 	bool terrainEntity_isBlendMapped(const string& ID);
 	bool terrainEntity_isInside(const string& ID, float x, float z);
 	string terrainEntity_getSelectedID();
@@ -145,6 +148,7 @@ public:
 	float terrainEntity_getBlendRepeatB(const string& ID);
 	float terrainEntity_getSize(const string& ID);
 	float terrainEntity_getPixelHeight(const string& ID, float x, float z);
+	float terrainEntity_getSpecularLightingIntensity(const string& ID);
 	vec3 terrainEntity_getMousePoint();
 	bool terrainEntity_isValidMousePoint();
 

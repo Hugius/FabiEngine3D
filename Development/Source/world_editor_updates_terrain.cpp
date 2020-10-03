@@ -101,6 +101,7 @@ void WorldEditor::_updateTerrainMenuMesh()
 		screen->getButton("diffuseMap")->setHoverable(existing);
 		screen->getButton("maxHeight")->setHoverable(existing);
 		screen->getButton("uvRepeat")->setHoverable(existing);
+		screen->getButton("specularIntensity")->setHoverable(existing);
 		screen->getButton("lightness")->setHoverable(existing);
 
 		// GUI management
@@ -164,6 +165,15 @@ void WorldEditor::_updateTerrainMenuMesh()
 				float uvRepeat = _fe3d.terrainEntity_getUvRepeat("@terrain");
 				_gui->getGlobalScreen()->addValueForm("uvRepeat", "UV repeat", uvRepeat, vec2(0.0f), vec2(0.3f, 0.1f));
 			}
+			else if (screen->getButton("isSpecular")->isHovered())
+			{
+				_fe3d.terrainEntity_setSpecularLighted("@terrain", !_fe3d.terrainEntity_isSpecularLighted("@terrain"));
+			}
+			else if (screen->getButton("specularIntensity")->isHovered())
+			{
+				float intensity = _fe3d.terrainEntity_getSpecularLightingIntensity("@terrain");
+				_gui->getGlobalScreen()->addValueForm("intensity", "Intensity (%)", intensity * 100.0f, vec2(0.0f), vec2(0.3f, 0.1f));
+			}
 			else if (screen->getButton("lightness")->isHovered())
 			{
 				float lightness = _fe3d.terrainEntity_getLightness("@terrain");
@@ -190,6 +200,20 @@ void WorldEditor::_updateTerrainMenuMesh()
 			if (_gui->getGlobalScreen()->checkValueForm("uvRepeat", uvRepeat))
 			{
 				_fe3d.terrainEntity_setUvRepeat("@terrain", uvRepeat);
+			
+			}
+
+			// Update specular button content
+			auto specularID = screen->getButton("isSpecular")->getTextfield()->getEntityID();
+			auto isSpecular = _fe3d.terrainEntity_isSpecularLighted("@terrain");
+			_fe3d.textEntity_setTextContent(specularID, isSpecular ? "Specular: ON" : "Specular: OFF");
+
+			// Check if intensity confirmed
+			float intensity = _fe3d.terrainEntity_getSpecularLightingIntensity("@terrain");
+			if (_gui->getGlobalScreen()->checkValueForm("intensity", intensity))
+			{
+				intensity /= 100.0f;
+				_fe3d.terrainEntity_setSpecularLightingIntensity("@terrain", intensity);
 			}
 
 			// Check if lightness confirmed

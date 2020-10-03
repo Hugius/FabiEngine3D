@@ -200,9 +200,8 @@ string FabiEngine3D::misc_getWinExplorerFilename(const string& startingDir, cons
 	ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
 	GetOpenFileName(&ofn);
 
-	// Return chosen filename or nothing
+	// Return chosen filename or nothing if cancelled
 	string filePath = ofn.lpstrFile;
-
 	return filePath;
 }
 
@@ -241,7 +240,7 @@ string FabiEngine3D::misc_getRootDirectory()
 	char buffer[256]; size_t len = sizeof(buffer);
 	GetModuleFileName(NULL, buffer, len);
 	string rootDir = buffer;
-	rootDir = rootDir.substr(0, rootDir.size() - 20);
+	rootDir = rootDir.substr(0, rootDir.size() - string("bin\\FabiEngine3D.exe").size());
 	return rootDir;
 }
 

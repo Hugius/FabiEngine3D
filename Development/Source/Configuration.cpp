@@ -9,7 +9,7 @@ Config::Config()
 	char buffer[256]; size_t len = sizeof(buffer);
 	GetModuleFileName(NULL, buffer, len);
 	string rootDir = buffer;
-	rootDir = rootDir.substr(0, rootDir.size() - 20);
+	rootDir = rootDir.substr(0, rootDir.size() - string("bin\\FabiEngine3D.exe").size());
 
 	// Open config file
 	string path = rootDir + "config.fe3d";

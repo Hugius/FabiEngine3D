@@ -51,7 +51,7 @@ MODEL 837303362@pine 124.499 12.4547 -122 0 0 0 1.5 1.65 1.5 user\assets\models\
 MODEL 1320458668@pine 141.402 16.1765 -119.141 0 0 0 1.5 1.65 1.5 user\assets\models\tree3.obj user\assets\textures\diffuse_maps\tree3.png ? ? user\assets\textures\normal_maps\pine.png 0 0 1 1 0 1 1 0.75 0.7 1 1 1 1 0.95 17.6124 1.00749 ?
 MODEL 592104339@pine 165.571 16.1765 -106.922 0 0 0 1.5 1.65 1.5 user\assets\models\tree3.obj user\assets\textures\diffuse_maps\tree3.png ? ? user\assets\textures\normal_maps\pine.png 0 0 1 1 0 1 1 0.75 0.7 1 1 1 1 0.95 17.6124 1.00749 ?
 MODEL 1735473037@pine 100.538 6.37255 -7.0368 0 0 0 1.5 1.65 1.5 user\assets\models\tree3.obj user\assets\textures\diffuse_maps\tree3.png ? ? user\assets\textures\normal_maps\pine.png 0 0 1 1 0 1 1 0.75 0.7 1 1 1 1 0.95 17.6124 1.00749 ?
-MODEL 336116774@pine 71.9785 7.84314 -26.9458 0 0 0 1.5 1.65 1.5 user\assets\models\tree3.obj user\assets\textures\diffuse_maps\tree3.png ? ? user\assets\textures\normal_maps\pine.png 0 0 1 1 0 1 1 0.75 0.7 1 1 1 1 0.95 17.6124 1.00749 ?
+MODEL 336116774@pine 71.9785 6.74314 -26.9458 0 0 0 1.5 1.65 1.5 user\assets\models\tree3.obj user\assets\textures\diffuse_maps\tree3.png ? ? user\assets\textures\normal_maps\pine.png 0 0 1 1 0 1 1 0.75 0.7 1 1 1 1 0.95 17.6124 1.00749 ?
 MODEL 570370597@pine 77.904 8.82353 -48.169 0 0 0 1.5 1.65 1.5 user\assets\models\tree3.obj user\assets\textures\diffuse_maps\tree3.png ? ? user\assets\textures\normal_maps\pine.png 0 0 1 1 0 1 1 0.75 0.7 1 1 1 1 0.95 17.6124 1.00749 ?
 MODEL 968762580@pine 55.8251 6.37255 -57.0608 0 0 0 1.5 1.65 1.5 user\assets\models\tree3.obj user\assets\textures\diffuse_maps\tree3.png ? ? user\assets\textures\normal_maps\pine.png 0 0 1 1 0 1 1 0.75 0.7 1 1 1 1 0.95 17.6124 1.00749 ?
 MODEL 216375776@pine 62.0701 6.37255 -76.4018 0 0 0 1.5 1.65 1.5 user\assets\models\tree3.obj user\assets\textures\diffuse_maps\tree3.png ? ? user\assets\textures\normal_maps\pine.png 0 0 1 1 0 1 1 0.75 0.7 1 1 1 1 0.95 17.6124 1.00749 ?
@@ -114,10 +114,10 @@ AMBIENT 1 1 1 0.5
 DIRECTIONAL 1000 1000 1000 1 1 1 1 200
 CAMERA_FOV 70
 LOD_DISTANCE 100
-EDITOR_SPEED 20
-EDITOR_POSITION 115.487 9.9804 -48.7985
-EDITOR_YAW 160.326
-EDITOR_PITCH 9.5349
+EDITOR_SPEED 5
+EDITOR_POSITION 105.135 9.9202 -30.7001
+EDITOR_YAW 36.3278
+EDITOR_PITCH 3.03489
 GRAPHICS_SHADOWS 1 100 50.000000 50.000000 0.000000 0.000000 0.000000 0.000000 1 50
 GRAPHICS_MOTIONBLUR 1 8
 GRAPHICS_DOF 1 0 100 10

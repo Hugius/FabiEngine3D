@@ -223,18 +223,6 @@
     <ClCompile Include="Source\world_editor_misc.cpp">
       <Filter>src\Editor System\World Editor\Core</Filter>
     </ClCompile>
-    <ClCompile Include="Source\world_editor_updates.cpp">
-      <Filter>src\Editor System\World Editor\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\world_editor_updates_sky.cpp">
-      <Filter>src\Editor System\World Editor\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\world_editor_updates_terrain.cpp">
-      <Filter>src\Editor System\World Editor\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\world_editor_updates_water.cpp">
-      <Filter>src\Editor System\World Editor\Core</Filter>
-    </ClCompile>
     <ClCompile Include="Source\fabi_engine_3d_entity_billboard.cpp">
       <Filter>src\Core System\Interface\Entities</Filter>
     </ClCompile>
@@ -435,6 +423,18 @@
     </ClCompile>
     <ClCompile Include="Source\script_interpreter.cpp">
       <Filter>src\Scripting System\Execution</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\world_editor_updates_water.cpp">
+      <Filter>src\Editor System\World Editor\Updates</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\world_editor_updates.cpp">
+      <Filter>src\Editor System\World Editor\Updates</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\world_editor_updates_sky.cpp">
+      <Filter>src\Editor System\World Editor\Updates</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\world_editor_updates_terrain.cpp">
+      <Filter>src\Editor System\World Editor\Updates</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -910,6 +910,9 @@
     </Filter>
     <Filter Include="src\Scripting System\Elements">
       <UniqueIdentifier>{777c0a5b-5e3e-41d8-bbbc-dbcd603a8e59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Editor System\World Editor\Updates">
+      <UniqueIdentifier>{c658aa7d-506b-4818-a69f-ce8a2da31340}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

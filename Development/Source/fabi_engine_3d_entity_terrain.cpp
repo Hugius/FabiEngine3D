@@ -45,6 +45,11 @@ bool FabiEngine3D::terrainEntity_isVisible(const string& ID)
 	return _core->_terrainEntityManager.getEntity(ID)->isVisible();
 }
 
+bool FabiEngine3D::terrainEntity_isSpecularLighted(const string& ID)
+{
+	return _core->_terrainEntityManager.getEntity(ID)->isSpecularLighted();
+}
+
 bool FabiEngine3D::terrainEntity_isBlendMapped(const string& ID)
 {
 	return _core->_terrainEntityManager.getEntity(ID)->isBlendMapped();
@@ -83,6 +88,11 @@ bool FabiEngine3D::terrainEntity_isValidMousePoint()
 float FabiEngine3D::terrainEntity_getPixelHeight(const string& ID, float x, float z)
 {
 	return _core->_terrainEntityManager.getPixelHeight(ID, x, z);
+}
+
+float FabiEngine3D::terrainEntity_getSpecularLightingIntensity(const string& ID)
+{
+	return _core->_terrainEntityManager.getEntity(ID)->getSpecularLightingIntensity();
 }
 
 string FabiEngine3D::terrainEntity_getSelectedID()
@@ -170,16 +180,6 @@ void FabiEngine3D::terrainEntity_setDiffuseMap(const string& ID, const string& t
 	_core->_terrainEntityManager.getEntity(ID)->setDiffuseMapPath(texturePath);
 }
 
-void FabiEngine3D::terrainEntity_setLightness(const string& ID, float lightness)
-{
-	_core->_terrainEntityManager.getEntity(ID)->setLightness(lightness);
-}
-
-void FabiEngine3D::terrainEntity_setBlendMapped(const string& ID, bool enabled)
-{
-	_core->_terrainEntityManager.getEntity(ID)->setBlendMapped(enabled);
-}
-
 void FabiEngine3D::terrainEntity_setBlendMap(const string& ID, const string& texturePath)
 {
 	_core->_terrainEntityManager.getEntity(ID)->setBlendMap(_core->_texLoader.getTexture(texturePath, true, true));
@@ -217,4 +217,24 @@ void FabiEngine3D::terrainEntity_setBlendRepeatG(const string& ID, float repeat)
 void FabiEngine3D::terrainEntity_setBlendRepeatB(const string& ID, float repeat)
 {
 	_core->_terrainEntityManager.getEntity(ID)->setBlendRepeatB(repeat);
+}
+
+void FabiEngine3D::terrainEntity_setSpecularLightingIntensity(const string& ID, float intensity)
+{
+	_core->_terrainEntityManager.getEntity(ID)->setSpecularLightingIntensity(intensity);
+}
+
+void FabiEngine3D::terrainEntity_setLightness(const string& ID, float lightness)
+{
+	_core->_terrainEntityManager.getEntity(ID)->setLightness(lightness);
+}
+
+void FabiEngine3D::terrainEntity_setSpecularLighted(const string& ID, bool enabled)
+{
+	_core->_terrainEntityManager.getEntity(ID)->setSpecularLighted(enabled);
+}
+
+void FabiEngine3D::terrainEntity_setBlendMapped(const string& ID, bool enabled)
+{
+	_core->_terrainEntityManager.getEntity(ID)->setBlendMapped(enabled);
 }

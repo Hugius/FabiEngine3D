@@ -13,12 +13,11 @@ in mat3 f_tbnMatrix;
 
 // Textures
 layout(location = 0) uniform sampler2D u_sampler_diffuseMap;
-layout(location = 1) uniform sampler2D u_sampler_normalMap;
-layout(location = 2) uniform sampler2D u_sampler_blendMap;
-layout(location = 3) uniform sampler2D u_sampler_blendMapR;
-layout(location = 4) uniform sampler2D u_sampler_blendMapG;
-layout(location = 5) uniform sampler2D u_sampler_blendMapB;
-layout(location = 6) uniform sampler2D u_sampler_shadowMap;
+layout(location = 1) uniform sampler2D u_sampler_blendMap;
+layout(location = 2) uniform sampler2D u_sampler_blendMapR;
+layout(location = 3) uniform sampler2D u_sampler_blendMapG;
+layout(location = 4) uniform sampler2D u_sampler_blendMapB;
+layout(location = 5) uniform sampler2D u_sampler_shadowMap;
 
 // Vec3 uniforms
 uniform vec3 u_cameraPosition;
@@ -48,9 +47,7 @@ uniform float u_specularLightingIntensity;
 
 // Boolean uniforms
 uniform bool u_isSpecularLighted;
-uniform bool u_isNormalMapped;
 uniform bool u_isBlendMapped;
-uniform bool u_normalMappingEnabled;
 uniform bool u_ambientLightingEnabled;
 uniform bool u_directionalLightingEnabled;
 uniform bool u_pointLightingEnabled;
@@ -69,24 +66,20 @@ layout (location = 0) out vec4 o_finalColor;
 // Functions
 vec3 getTextureColor();
 vec3 getAmbientLighting();
-vec3 getDirectionalLighting(vec3 normal);
-vec3 getPointLighting(vec3 normal);
+vec3 getDirectionalLighting(bool noShadowOcclusion);
+vec3 getPointLighting(bool noShadowOcclusion);
 vec3 getShadowLighting();
 vec3 applyFog(vec3 color);
-vec3 getNormalMappedVector();
-float getSpecularValue(vec3 position, vec3 normal);
+float getSpecularValue(vec3 position);
 
 // Calculate final fragment color
 void main()
 {
-    // Calculate new normal vector
-    vec3 normal = getNormalMappedVector();
-
 	// Calculate lighting
+    vec3 shadow = getShadowLighting();
 	vec3 ambient = getAmbientLighting();
-	vec3 directional = getDirectionalLighting(normal);
-	vec3 point = getPointLighting(normal);
-	vec3 shadow = getShadowLighting();
+	vec3 directional = getDirectionalLighting(shadow == vec3(1.0f));
+	vec3 point = getPointLighting(shadow == vec3(1.0f));
 
 	// Apply lighting
 	vec3 color;
@@ -97,25 +90,6 @@ void main()
 	// Set final color
 	o_finalColor = vec4(color, 1.0f);
 }
-
-vec3 getNormalMappedVector()
-{
-    if(u_normalMappingEnabled && u_isNormalMapped)
-    {
-        // Calculate new normal vector
-        vec3 normal = texture(u_sampler_normalMap, f_uv).rgb;
-        normal = normal * 2.0f - 1.0f;
-        normal = normalize(f_tbnMatrix * normal);
-
-        // Return result
-        return normal;
-    }
-    else
-    {
-        return f_normal;
-    }
-}
-
 
 // Calculate texture color
 vec3 getTextureColor()
@@ -155,20 +129,20 @@ vec3 getAmbientLighting()
 }
 
 // Calculate directional lighting
-vec3 getDirectionalLighting(vec3 normal)
+vec3 getDirectionalLighting(bool noShadowOcclusion)
 {
 	if(u_directionalLightingEnabled)
 	{
-        // Calculate
+        // Calculate lighting strength
         vec3 result = vec3(0.0f);
         vec3 lightDirection = normalize(u_directionalLightingPosition - f_pos);
         float diffuse = max(dot(f_normal, lightDirection), 0.0);
 
         // Apply
-        result += vec3(diffuse);
-        result += vec3(getSpecularValue(u_directionalLightingPosition, normal));
-        result *= u_directionalLightingColor;
-        result *= u_directionalLightingIntensity;
+        result += vec3(diffuse); // Diffuse
+        result += vec3(getSpecularValue(u_directionalLightingPosition)) * float(noShadowOcclusion); // Specular
+        result *= u_directionalLightingColor; // Color
+        result *= u_directionalLightingIntensity; // Intensity
 
         // Return
         return result;
@@ -180,7 +154,7 @@ vec3 getDirectionalLighting(vec3 normal)
 }
 
 // Calculate point lighting
-vec3 getPointLighting(vec3 normal)
+vec3 getPointLighting(bool noShadowOcclusion)
 {
 	if(u_pointLightingEnabled)
 	{
@@ -189,18 +163,19 @@ vec3 getPointLighting(vec3 normal)
         // For every pointlight
 		for(int i = 0; i < u_pointLightCount; i++)
 		{
-            // Calculate
+            // Calculate lighting strength
 			vec3  lightDir = normalize(u_pointLightPositions[i] - f_pos);
-			float diffuse = max(dot(normal, lightDir), 0.0);
+			float diffuse = max(dot(f_normal, lightDir), 0.0);
 			float distance = length(u_pointLightPositions[i] - f_pos) * u_pointLightDistanceFactors[i];
 			float attenuation = 1.0f / (1.0f + 0.07f * distance + 0.017f * (distance * distance));
 
             // Apply
             vec3 current = vec3(0.0f);
-			current += vec3(diffuse);
-            current *= u_pointLightColors[i];
-            current *= attenuation;
-            current *= u_pointLightIntensities[i];
+			current += vec3(diffuse); // Diffuse
+            current += vec3(getSpecularValue(u_pointLightPositions[i])) * float(noShadowOcclusion); // Specular
+            current *= u_pointLightColors[i]; // Color
+            current *= attenuation; // Distance
+            current *= u_pointLightIntensities[i]; // Intensity
 
             // Add to total lighting value
             result += current;
@@ -329,14 +304,14 @@ vec3 applyFog(vec3 color)
 	}
 }
 
-float getSpecularValue(vec3 position, vec3 normal)
+float getSpecularValue(vec3 position)
 {
     if(u_specularLightingEnabled && u_isSpecularLighted)
     {
         // Calculate
         vec3 lightDirection   = normalize(f_pos - position);
         vec3 viewDirection    = normalize(f_pos - u_cameraPosition);
-        vec3 reflectDirection = reflect(-lightDirection, normal);
+        vec3 reflectDirection = reflect(-lightDirection, f_normal);
         float result          = pow(max(dot(viewDirection, reflectDirection), 0.0f), 1.0f);
 
         // Return

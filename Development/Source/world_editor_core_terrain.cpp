@@ -23,8 +23,8 @@ void WorldEditor::loadTerrainEntity()
 
 		// Values
 		string heightMapPath, diffuseMapPath, blendMapPath, blendMapPathR, blendMapPathG, blendMapPathB;
-		float maxHeight, uvRepeat, lightness, blendRepeatR, blendRepeatG, blendRepeatB;
-		bool isBlendMapped;
+		float maxHeight, uvRepeat, lightness, blendRepeatR, blendRepeatG, blendRepeatB, specularIntensity;
+		bool isBlendMapped, isSpecular;
 
 		// Load base data
 		terrainFile >>
@@ -40,7 +40,9 @@ void WorldEditor::loadTerrainEntity()
 			blendMapPathB >>
 			blendRepeatR >>
 			blendRepeatG >>
-			blendRepeatB;
+			blendRepeatB >>
+			isSpecular >>
+			specularIntensity;
 
 		// Perform empty string & space conversions
 		heightMapPath = (heightMapPath == "?") ? "" : heightMapPath;
@@ -68,6 +70,8 @@ void WorldEditor::loadTerrainEntity()
 		_fe3d.terrainEntity_setBlendRepeatR("@terrain", blendRepeatR);
 		_fe3d.terrainEntity_setBlendRepeatG("@terrain", blendRepeatG);
 		_fe3d.terrainEntity_setBlendRepeatB("@terrain", blendRepeatB);
+		_fe3d.terrainEntity_setSpecularLighted("@terrain", isSpecular);
+		_fe3d.terrainEntity_setSpecularLightingIntensity("@terrain", specularIntensity);
 		if (diffuseMapPath != "") _fe3d.terrainEntity_setDiffuseMap("@terrain", diffuseMapPath);
 		if (blendMapPath != "")   _fe3d.terrainEntity_setBlendMap("@terrain", blendMapPath);
 		if (blendMapPathR != "")  _fe3d.terrainEntity_setBlendMapR("@terrain", blendMapPathR);
@@ -107,10 +111,12 @@ void WorldEditor::_saveTerrainData()
 			float maxHeight = _fe3d.terrainEntity_getMaxHeight("@terrain");
 			float uvRepeat = _fe3d.terrainEntity_getUvRepeat("@terrain");
 			float lightness = _fe3d.terrainEntity_getLightness("@terrain");
+			float specularIntensity = _fe3d.terrainEntity_getSpecularLightingIntensity("@terrain");
 			float blendRepeatR = _fe3d.terrainEntity_getBlendRepeatR("@terrain");
 			float blendRepeatG = _fe3d.terrainEntity_getBlendRepeatG("@terrain");
 			float blendRepeatB = _fe3d.terrainEntity_getBlendRepeatB("@terrain");
 			bool isBlendMapped = _fe3d.terrainEntity_isBlendMapped("@terrain");
+			bool isSpecular = _fe3d.terrainEntity_isSpecularLighted("@terrain");
 
 			// Perform empty string & space conversions
 			heightMapPath = (heightMapPath == "") ? "?" : heightMapPath;
@@ -140,7 +146,9 @@ void WorldEditor::_saveTerrainData()
 				blendMapPathB << " " <<
 				blendRepeatR << " " <<
 				blendRepeatG << " " <<
-				blendRepeatB << std::endl;
+				blendRepeatB << " " <<
+				isSpecular << " " << 
+				specularIntensity << std::endl;
 
 			// Close file
 			terrainFile.close();

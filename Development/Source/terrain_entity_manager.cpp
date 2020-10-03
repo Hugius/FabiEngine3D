@@ -37,12 +37,9 @@ void TerrainEntityManager::addTerrain(const string& ID)
 void TerrainEntityManager::generateModel(const string& ID)
 {
 	// Data collections
-	auto& vertices = getEntity(ID)->getVertices();
-	auto& uvCoords = getEntity(ID)->getUvCoords();
-	auto& normals = getEntity(ID)->getNormals();
-	vertices.clear();
-	uvCoords.clear();
-	normals.clear();
+	vector<vec3> vertices;
+	vector<vec2> uvCoords;
+	vector<vec3> normals;
 
 	// Handy values
 	const auto& pixelColors = getEntity(ID)->getPixelColors();
@@ -51,7 +48,7 @@ void TerrainEntityManager::generateModel(const string& ID)
 	const float halfSize = size / 2.0f;
 	const float maxHeight = getEntity(ID)->getMaxHeight();
 	const float uvRepeat = getEntity(ID)->getUvRepeat();
-	
+
 	// Generate terrain vertices
 	for (float x = -halfSize; x < halfSize; x++)
 	{
@@ -80,7 +77,7 @@ void TerrainEntityManager::generateModel(const string& ID)
 			normals.push_back(normal);
 		}
 	}
-	
+
 	// Compose single data collection
 	vector<float> finalDataCollection;
 	for (unsigned int x = 0; x < uSize - 1; x++)
@@ -154,148 +151,10 @@ void TerrainEntityManager::generateModel(const string& ID)
 			finalDataCollection.push_back(normals[topLeftIndex].z);
 		}
 	}
-	
+
 	// Create OpenGL buffer
 	getEntity(ID)->clearOglBuffers();
 	getEntity(ID)->addOglBuffer(new OpenGLBuffer(BufferType::MODEL, &finalDataCollection[0], finalDataCollection.size()));
-}
-
-void TerrainEntityManager::loadNormalMapping(const string& ID)
-{
-	// Data collections
-	auto& vertices = getEntity(ID)->getVertices();
-	auto& uvCoords = getEntity(ID)->getUvCoords();
-	auto& normals = getEntity(ID)->getNormals();
-	vector<vec3> tangents;
-
-	// Handy values
-	const unsigned int uSize = static_cast<unsigned int>(getEntity(ID)->getSize());
-
-	// Calculate tangents
-	for (size_t i = 0; i < vertices.size(); i += 3)
-	{
-		// Vertices of 1 triangle
-		vec3 v0 = vertices[i + 0];
-		vec3 v1 = vertices[i + 1];
-		vec3 v2 = vertices[i + 2];
-
-		// Shortcuts for UVs
-		vec2 uv0 = uvCoords[i + 0];
-		vec2 uv1 = uvCoords[i + 1];
-		vec2 uv2 = uvCoords[i + 2];
-
-		// Vertex delta
-		vec3 deltaPos1 = v1 - v0;
-		vec3 deltaPos2 = v2 - v0;
-
-		// UV delta
-		vec2 deltaUV1 = uv1 - uv0;
-		vec2 deltaUV2 = uv2 - uv0;
-
-		// Calculate tangent vector
-		float r = 1.0f / (deltaUV1.x * deltaUV2.y - deltaUV1.y * deltaUV2.x);
-		vec3 tangent = (deltaPos1 * deltaUV2.y - deltaPos2 * deltaUV1.y) * r;
-
-		// Add to current OBJ part
-		tangents.push_back(tangent);
-		tangents.push_back(tangent);
-		tangents.push_back(tangent);
-	}
-
-	// Compose single data collection
-	vector<float> finalDataCollection;
-	for (unsigned int x = 0; x < uSize - 1; x++)
-	{
-		for (unsigned int z = 0; z < uSize - 1; z++)
-		{
-			// Indices for vertices collection
-			unsigned int topLeftIndex = (z * uSize) + x;
-			unsigned int topRightIndex = topLeftIndex + 1;
-			unsigned int bottomLeftIndex = ((z + 1) * uSize) + x;
-			unsigned int bottomRightIndex = bottomLeftIndex + 1;
-
-			// Top-left
-			finalDataCollection.push_back(vertices[topLeftIndex].x);
-			finalDataCollection.push_back(vertices[topLeftIndex].y);
-			finalDataCollection.push_back(vertices[topLeftIndex].z);
-			finalDataCollection.push_back(uvCoords[topLeftIndex].x);
-			finalDataCollection.push_back(uvCoords[topLeftIndex].y);
-			finalDataCollection.push_back(normals[topLeftIndex].x);
-			finalDataCollection.push_back(normals[topLeftIndex].y);
-			finalDataCollection.push_back(normals[topLeftIndex].z);
-			finalDataCollection.push_back(tangents[topLeftIndex].x);
-			finalDataCollection.push_back(tangents[topLeftIndex].y);
-			finalDataCollection.push_back(tangents[topLeftIndex].z);
-
-			// Top-right
-			finalDataCollection.push_back(vertices[topRightIndex].x);
-			finalDataCollection.push_back(vertices[topRightIndex].y);
-			finalDataCollection.push_back(vertices[topRightIndex].z);
-			finalDataCollection.push_back(uvCoords[topRightIndex].x);
-			finalDataCollection.push_back(uvCoords[topRightIndex].y);
-			finalDataCollection.push_back(normals[topRightIndex].x);
-			finalDataCollection.push_back(normals[topRightIndex].y);
-			finalDataCollection.push_back(normals[topRightIndex].z);
-			finalDataCollection.push_back(tangents[topRightIndex].x);
-			finalDataCollection.push_back(tangents[topRightIndex].y);
-			finalDataCollection.push_back(tangents[topRightIndex].z);
-
-			// Bottom-right
-			finalDataCollection.push_back(vertices[bottomRightIndex].x);
-			finalDataCollection.push_back(vertices[bottomRightIndex].y);
-			finalDataCollection.push_back(vertices[bottomRightIndex].z);
-			finalDataCollection.push_back(uvCoords[bottomRightIndex].x);
-			finalDataCollection.push_back(uvCoords[bottomRightIndex].y);
-			finalDataCollection.push_back(normals[bottomRightIndex].x);
-			finalDataCollection.push_back(normals[bottomRightIndex].y);
-			finalDataCollection.push_back(normals[bottomRightIndex].z);
-			finalDataCollection.push_back(tangents[bottomRightIndex].x);
-			finalDataCollection.push_back(tangents[bottomRightIndex].y);
-			finalDataCollection.push_back(tangents[bottomRightIndex].z);
-
-			// Bottom-right
-			finalDataCollection.push_back(vertices[bottomRightIndex].x);
-			finalDataCollection.push_back(vertices[bottomRightIndex].y);
-			finalDataCollection.push_back(vertices[bottomRightIndex].z);
-			finalDataCollection.push_back(uvCoords[bottomRightIndex].x);
-			finalDataCollection.push_back(uvCoords[bottomRightIndex].y);
-			finalDataCollection.push_back(normals[bottomRightIndex].x);
-			finalDataCollection.push_back(normals[bottomRightIndex].y);
-			finalDataCollection.push_back(normals[bottomRightIndex].z);
-			finalDataCollection.push_back(tangents[bottomRightIndex].x);
-			finalDataCollection.push_back(tangents[bottomRightIndex].y);
-			finalDataCollection.push_back(tangents[bottomRightIndex].z);
-
-			// Bottom-left
-			finalDataCollection.push_back(vertices[bottomLeftIndex].x);
-			finalDataCollection.push_back(vertices[bottomLeftIndex].y);
-			finalDataCollection.push_back(vertices[bottomLeftIndex].z);
-			finalDataCollection.push_back(uvCoords[bottomLeftIndex].x);
-			finalDataCollection.push_back(uvCoords[bottomLeftIndex].y);
-			finalDataCollection.push_back(normals[bottomLeftIndex].x);
-			finalDataCollection.push_back(normals[bottomLeftIndex].y);
-			finalDataCollection.push_back(normals[bottomLeftIndex].z);
-			finalDataCollection.push_back(tangents[bottomLeftIndex].x);
-			finalDataCollection.push_back(tangents[bottomLeftIndex].y);
-			finalDataCollection.push_back(tangents[bottomLeftIndex].z);
-
-			// Top-left
-			finalDataCollection.push_back(vertices[topLeftIndex].x);
-			finalDataCollection.push_back(vertices[topLeftIndex].y);
-			finalDataCollection.push_back(vertices[topLeftIndex].z);
-			finalDataCollection.push_back(uvCoords[topLeftIndex].x);
-			finalDataCollection.push_back(uvCoords[topLeftIndex].y);
-			finalDataCollection.push_back(normals[topLeftIndex].x);
-			finalDataCollection.push_back(normals[topLeftIndex].y);
-			finalDataCollection.push_back(normals[topLeftIndex].z);
-			finalDataCollection.push_back(tangents[topLeftIndex].x);
-			finalDataCollection.push_back(tangents[topLeftIndex].y);
-			finalDataCollection.push_back(tangents[topLeftIndex].z);
-		}
-	}
-
-	getEntity(ID)->clearOglBuffers();
-	getEntity(ID)->addOglBuffer(new OpenGLBuffer(BufferType::MODEL_TANGENT, &finalDataCollection[0], finalDataCollection.size()));
 }
 
 float TerrainEntityManager::getPixelHeight(const string& ID, float x, float z)

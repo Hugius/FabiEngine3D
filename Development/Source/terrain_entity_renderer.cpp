@@ -31,6 +31,7 @@ void TerrainEntityRenderer::bind()
 	_shader.uploadUniform("u_fogEnabled",					_renderBus.isFogEnabled());
 	_shader.uploadUniform("u_ambientLightingEnabled",		_renderBus.isAmbientLightingEnabled());
 	_shader.uploadUniform("u_directionalLightingEnabled",	_renderBus.isDirectionalLightingEnabled());
+	_shader.uploadUniform("u_specularLightingEnabled",		_renderBus.isSpecularLightingEnabled());
 	_shader.uploadUniform("u_pointLightingEnabled",			_renderBus.isPointLightingEnabled());
 	_shader.uploadUniform("u_shadowAreaSize",				_renderBus.getShadowAreaSize());
 	_shader.uploadUniform("u_shadowAreaCenter",				_renderBus.getShadowAreaCenter());
@@ -83,38 +84,35 @@ void TerrainEntityRenderer::render(const TerrainEntity* entity)
 
 		// Shader uniforms
 		_shader.uploadUniform("u_isSpecularLighted", entity->isSpecularLighted());
-		_shader.uploadUniform("u_isNormalMapped", entity->isNormalMapped());
 		_shader.uploadUniform("u_isBlendMapped", entity->isBlendMapped());
 		_shader.uploadUniform("u_blendMapRepeat", entity->getUvRepeat());
 		_shader.uploadUniform("u_blendMapRepeatR", entity->getBlendRepeatR());
 		_shader.uploadUniform("u_blendMapRepeatG", entity->getBlendRepeatG());
 		_shader.uploadUniform("u_blendMapRepeatB", entity->getBlendRepeatB());
 		_shader.uploadUniform("u_lightness", entity->getLightness());
-		_shader.uploadUniform("u_specularLightingIntensity", 1.0f);
+		_shader.uploadUniform("u_specularLightingIntensity", entity->getSpecularLightingIntensity());
+		std::cout << entity->getSpecularLightingIntensity() << std::endl;
 
 		// Texture uniforms
 		_shader.uploadUniform("u_sampler_diffuseMap", 0);
-		_shader.uploadUniform("u_sampler_normalMap", 1);
-		_shader.uploadUniform("u_sampler_blendMap", 2);
-		_shader.uploadUniform("u_sampler_blendMapR", 3);
-		_shader.uploadUniform("u_sampler_blendMapG", 4);
-		_shader.uploadUniform("u_sampler_blendMapB", 5);
-		_shader.uploadUniform("u_sampler_shadowMap", 6);
+		_shader.uploadUniform("u_sampler_blendMap",	  1);
+		_shader.uploadUniform("u_sampler_blendMapR",  2);
+		_shader.uploadUniform("u_sampler_blendMapG",  3);
+		_shader.uploadUniform("u_sampler_blendMapB",  4);
+		_shader.uploadUniform("u_sampler_shadowMap",  5);
 
 		// Texture binding
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap());
 		glActiveTexture(GL_TEXTURE1);
-		glBindTexture(GL_TEXTURE_2D, entity->getNormalMap());
-		glActiveTexture(GL_TEXTURE2);
 		glBindTexture(GL_TEXTURE_2D, entity->getBlendMap());
-		glActiveTexture(GL_TEXTURE3);
+		glActiveTexture(GL_TEXTURE2);
 		glBindTexture(GL_TEXTURE_2D, entity->getBlendMapR());
-		glActiveTexture(GL_TEXTURE4);
+		glActiveTexture(GL_TEXTURE3);
 		glBindTexture(GL_TEXTURE_2D, entity->getBlendMapG());
-		glActiveTexture(GL_TEXTURE5);
+		glActiveTexture(GL_TEXTURE4);
 		glBindTexture(GL_TEXTURE_2D, entity->getBlendMapB());
-		glActiveTexture(GL_TEXTURE6);
+		glActiveTexture(GL_TEXTURE5);
 		glBindTexture(GL_TEXTURE_2D, _renderBus.getShadowMap());
 
 		// Bind

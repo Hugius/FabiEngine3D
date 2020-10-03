@@ -53,7 +53,7 @@ vector<ObjPart> OBJLoader::_loadOBJ(const string& filePath, bool calculateTangen
 	char buffer[256]; size_t len = sizeof(buffer);
 	GetModuleFileName(NULL, buffer, len);
 	string rootDir = buffer;
-	rootDir = rootDir.substr(0, rootDir.size() - 20);
+	rootDir = rootDir.substr(0, rootDir.size() - string("bin\\FabiEngine3D.exe").size());
 
 	// Load .obj file
 	string path = rootDir + filePath;

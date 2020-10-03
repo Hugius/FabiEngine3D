@@ -116,7 +116,7 @@ void FabiEngine3D::gameEntity_setLightMap(const string& ID, const string& textur
 
 void FabiEngine3D::gameEntity_setNormalMap(const string& ID, const string& texturePath)
 {
-	_core->_gameEntityManager.getEntity(ID)->setNormalMap(_core->_texLoader.getTexture(texturePath, true, true));
+	_core->_gameEntityManager.getEntity(ID)->setNormalMap(_core->_texLoader.getTexture(texturePath, false, false));
 	_core->_gameEntityManager.getEntity(ID)->setNormalMapPath(texturePath);
 }
 
@@ -149,7 +149,11 @@ void FabiEngine3D::gameEntity_setLightMapped(const string& ID, bool enabled)
 void FabiEngine3D::gameEntity_setNormalMapped(const string& ID, bool enabled)
 {
 	_core->_gameEntityManager.getEntity(ID)->setNormalMapped(enabled);
-	_core->_gameEntityManager.loadNormalMapping(ID);
+
+	if (enabled)
+	{
+		_core->_gameEntityManager.loadNormalMapping(ID);
+	}
 }
 
 void FabiEngine3D::gameEntity_setSkyReflective(const string& ID, bool enabled)

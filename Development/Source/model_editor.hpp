@@ -32,7 +32,8 @@ public:
 private:
 	bool _addModel(const string& modelName, string objName, string diffuseMapName, string lightMapName, string reflectionMapName, string normalMapName,
 		vec3 size, bool isFaceCulled, bool isShadowed, bool isTransparent, bool isReflective, bool isSpecular,
-		float specularFactor, float specularIntensity, float lightness, vec3 color, float uvRepeat, vec3 aabbSize, string lodEntityID);
+		float specularFactor, float specularIntensity, float lightness, vec3 color, float uvRepeat, string lodEntityID,
+		vector<string> aabbNames, vector<vec3> aabbPositions, vector<vec3> aabbSizes);
 	void _loadObjFileNames();
 	void _loadOBJ();
 	void _loadDiffuseMap();
@@ -62,7 +63,6 @@ private:
 	string _currentProjectName = "";
 	string _hoveredModelID = "";
 	vector<string> _modelNames;
-	vector<string> _aabbNames;
 	vector<string> _objFileNamesList;
 
 	// Vectors
@@ -73,7 +73,7 @@ private:
 
 	// Floats
 	float _cameraDistance = 5.0f;
-	float _scrollingAcceleration = 0.0f;
+	float _cameraScrollingAcceleration = 0.0f;
 	const float _minCameraDistance = 1.0f;
 	const float _minCameraHeight = 1.0f;
 	const float _cameraSpeed = 0.15f;

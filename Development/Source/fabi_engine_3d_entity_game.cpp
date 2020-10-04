@@ -25,7 +25,7 @@ void FabiEngine3D::gameEntity_delete(const string& ID)
 	// Delete all bound AABB entities if existing
 	for (auto& aabbID : aabbEntity_getBoundIDs(ID, true, false))
 	{
-		_core->_aabbEntityManager.deleteEntity(ID, EntityType::AABB);
+		_core->_aabbEntityManager.deleteEntity(aabbID, EntityType::AABB);
 	}
 
 	// Delete GAME entity

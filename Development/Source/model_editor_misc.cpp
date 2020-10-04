@@ -213,7 +213,8 @@ vector<string>& ModelEditor::getModelNames()
 
 bool ModelEditor::_addModel(const string& modelName, string objName, string diffuseMapName, string lightMapName, string reflectionMapName, string normalMapName,
 	vec3 size, bool isFaceCulled, bool isShadowed, bool isTransparent, bool isReflective, bool isSpecular,
-	float specularFactor, float specularIntensity, float lightness, vec3 color, float uvRepeat, vec3 aabbSize, string lodEntityID)
+	float specularFactor, float specularIntensity, float lightness, vec3 color, float uvRepeat, string lodEntityID,
+	vector<string> aabbNames, vector<vec3> aabbPositions, vector<vec3> aabbSizes)
 {
 	// If model name not existing yet
 	if (std::find(_modelNames.begin(), _modelNames.end(), modelName) == _modelNames.end())
@@ -225,8 +226,13 @@ bool ModelEditor::_addModel(const string& modelName, string objName, string diff
 		if (objName != "")
 		{
 			_fe3d.gameEntity_add(modelName, objName, vec3(0.0f, 0.01f, 0.0f), vec3(0.0f), size, false);
-			_fe3d.aabbEntity_bindToGameEntity(modelName, vec3(0.0f), aabbSize, true);
-			_fe3d.aabbEntity_hide(modelName);
+
+			// Add AABBs
+			for (unsigned int i = 0; i < aabbNames.size(); i++)
+			{
+				_fe3d.aabbEntity_bindToGameEntity(modelName, aabbPositions[i], aabbSizes[i], true, modelName + "_" + aabbNames[i]);
+				_fe3d.aabbEntity_hide(modelName + "_" + aabbNames[i]);
+			}
 
 			// Diffuse map
 			if (diffuseMapName != "")

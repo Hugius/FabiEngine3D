@@ -85,19 +85,31 @@ void FabiEngine3D::aabbEntity_setResponsiveness(const string& ID, bool responsiv
 
 void FabiEngine3D::aabbEntity_setPosition(const string& ID, vec3 position)
 {
-	_core->_aabbEntityManager.getEntity(ID)->setOriginalTranslation(position);
-	_core->_aabbEntityManager.getEntity(ID)->setTranslation(position);
+	if (_core->_aabbEntityManager.getEntity(ID)->getParentID() == "") // Standalone entity
+	{
+		_core->_aabbEntityManager.getEntity(ID)->setTranslation(position);
+	}
+	else // Bound entity
+	{
+		_core->_aabbEntityManager.getEntity(ID)->setLocalTranslation(position);
+	}
 }
 
 void FabiEngine3D::aabbEntity_setSize(const string& ID, vec3 size)
 {
-	_core->_aabbEntityManager.getEntity(ID)->setOriginalScaling(size);
 	_core->_aabbEntityManager.getEntity(ID)->setScaling(size);
 }
 
 vec3 FabiEngine3D::aabbEntity_getPosition(const string& ID)
 {
-	return _core->_aabbEntityManager.getEntity(ID)->getTranslation();
+	if (_core->_aabbEntityManager.getEntity(ID)->getParentID() == "") // Standalone entity
+	{
+		return _core->_aabbEntityManager.getEntity(ID)->getTranslation();
+	}
+	else // Bound entity
+	{
+		return _core->_aabbEntityManager.getEntity(ID)->getLocalTranslation();
+	}
 }
 
 vec3 FabiEngine3D::aabbEntity_getSize(const string& ID)

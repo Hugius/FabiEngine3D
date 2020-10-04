@@ -45,14 +45,9 @@ void AabbEntity::scale(vec3 val)
 	_scaling += val;
 }
 
-void AabbEntity::setOriginalTranslation(vec3 val)
+void AabbEntity::setLocalTranslation(vec3 val)
 {
-	_originalTranslation = val;
-}
-
-void AabbEntity::setOriginalScaling(vec3 val)
-{
-	_originalScaling = val;
+	_localTranslation = val;
 }
 
 const mat4 & AabbEntity::getModelMatrix() const
@@ -60,14 +55,9 @@ const mat4 & AabbEntity::getModelMatrix() const
 	return _modelMatrix;
 }
 
-const vec3 AabbEntity::getOriginalTranslation() const
+const vec3 AabbEntity::getLocalTranslation() const
 {
-	return _originalTranslation;
-}
-
-const vec3 AabbEntity::getOriginalScaling() const
-{
-	return _originalScaling;
+	return _localTranslation;
 }
 
 const vec3 AabbEntity::getTranslation() const

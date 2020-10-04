@@ -139,16 +139,14 @@ void ModelEditor::unload()
 	// Properties
 	_currentModelID = "";
 	_currentAabbID = "";
-	_currentProjectName = "";
 	_hoveredModelID = "";
 	_modelNames.clear();
-	_aabbNames.clear();
 	_objFileNamesList.clear();
 	_totalCursorDifference = vec2(0.0f);
 	_cameraAcceleration = vec2(0.0f);
 	_lastCursorPos = vec2(0.0f);
 	_cameraDistance = 5.0f;
-	_scrollingAcceleration = 0.0f;
+	_cameraScrollingAcceleration = 0.0f;
 	_modelCreationEnabled = false;
 	_modelChoosingEnabled = false;
 	_modelEditingEnabled = false;

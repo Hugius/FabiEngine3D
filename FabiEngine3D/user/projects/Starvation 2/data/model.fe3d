@@ -1,3 +1,1 @@
-@pine user\assets\models\tree3.obj user\assets\textures\diffuse_maps\tree3.png ? ? user\assets\textures\normal_maps\pine.png 1.5 1.65 1.5 0 1 1 0 1 1 0.75 0.7 1 1 1 1 0.95 17.6124 1.00749 ?
-@pine2 user\assets\models\tree14.obj ? ? ? ? 1.5 1.25 1.5 0 1 1 0 0 1 1 0.5 1 1 1 1 1 1 1 ?
-@cube user\assets\models\house6.obj user\assets\textures\diffuse_maps\house6.png ? ? ? 4.75413 4.75413 4.75413 0 1 0 0 0 1 1 1 1 1 1 1 16.6482 8.53574 14.599 ?
+@pine user\assets\models\tree3.obj user\assets\textures\diffuse_maps\tree3.png ? ? user\assets\textures\normal_maps\pine.png 1 1 1 0 1 1 0 1 1 2.5 1 1 1 1 1 ? trunk 0 0 0 0.5688 3.15713 0.5688 leaves 0 3.22034 0 4.53803 9.43424 4.08534

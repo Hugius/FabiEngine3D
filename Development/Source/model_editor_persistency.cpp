@@ -32,12 +32,15 @@ void ModelEditor::loadModels()
 			string modelName, objPath, diffuseMapPath, lightMapPath, reflectionMapPath, normalMapPath, lodEntityID;
 			float uvRepeat, specularFactor, specularIntensity, lightness;
 			bool isFaceCulled, isShadowed, isTransparent, isSpecular, isReflective;
-			vec3 modelSize, color, boxSize;
+			vec3 modelSize, color;
+			vector<string> aabbNames;
+			vector<vec3> aabbPositions;
+			vector<vec3> aabbSizes;
 
 			// For file extraction
 			std::istringstream iss(line);
 
-			// Extract from file
+			// Extract all data from file
 			iss >>
 				modelName >>
 				objPath >>
@@ -60,10 +63,27 @@ void ModelEditor::loadModels()
 				color.g >>
 				color.b >>
 				uvRepeat >>
-				boxSize.x >>
-				boxSize.y >>
-				boxSize.z >> 
 				lodEntityID;
+
+			// Extract AABB data from file
+			while (true)
+			{
+				// Check if file has AABB data left
+				string name;
+				vec3 position, size;
+				iss >> name;
+				if (name == "")
+				{
+					break;
+				}
+				else
+				{
+					iss >> position.x >> position.y >> position.z >> size.x >> size.y >> size.z;
+					aabbNames.push_back(name);
+					aabbPositions.push_back(position);
+					aabbSizes.push_back(size);
+				}
+			}
 
 			// Perform empty string & space conversions
 			objPath = (objPath == "?") ? "" : objPath;
@@ -82,7 +102,7 @@ void ModelEditor::loadModels()
 			// Add new model
 			_addModel(modelName, objPath, diffuseMapPath, lightMapPath, reflectionMapPath, normalMapPath, modelSize, isFaceCulled, isShadowed,
 				isTransparent, isReflective, isSpecular, specularFactor, specularIntensity, lightness,
-				vec3(color.r, color.g, color.b), uvRepeat, vec3(boxSize.x, boxSize.y, boxSize.z), lodEntityID);
+				vec3(color.r, color.g, color.b), uvRepeat, lodEntityID, aabbNames, aabbPositions, aabbSizes);
 		}
 
 		// Close file
@@ -113,6 +133,7 @@ void ModelEditor::save()
 			// Check if a 3D entity for this model is existing
 			if (_fe3d.gameEntity_isExisting(modelName))
 			{
+				// General
 				auto objPath = _fe3d.gameEntity_getObjPath(modelName);
 				auto diffuseMapPath = _fe3d.gameEntity_getDiffuseMapPath(modelName);
 				auto lightMapPath = _fe3d.gameEntity_getLightMapPath(modelName);
@@ -129,8 +150,18 @@ void ModelEditor::save()
 				auto lightness = _fe3d.gameEntity_getLightness(modelName);
 				auto color = _fe3d.gameEntity_getColor(modelName);
 				auto uvRepeat = _fe3d.gameEntity_getUvRepeat(modelName);
-				auto boxSize = _fe3d.aabbEntity_getSize(modelName);
 				auto lodEntityID = _fe3d.gameEntity_getLevelOfDetailEntityID(modelName);
+
+				// AABB data
+				vector<string> aabbNames;
+				vector<vec3> aabbPositions;
+				vector<vec3> aabbSizes;
+				for (auto& aabbID : _fe3d.aabbEntity_getBoundIDs(modelName, true, false))
+				{
+					aabbNames.push_back(aabbID.substr(string(modelName + "_").size()));
+					aabbPositions.push_back(_fe3d.aabbEntity_getPosition(aabbID));
+					aabbSizes.push_back(_fe3d.aabbEntity_getSize(aabbID));
+				}
 				
 				// Perform empty string & space conversions
 				objPath = (objPath == "") ? "?" : objPath;
@@ -146,7 +177,9 @@ void ModelEditor::save()
 				std::replace(normalMapPath.begin(), normalMapPath.end(), ' ', '?');
 				std::replace(lodEntityID.begin(), lodEntityID.end(), ' ', '?');
 
-				// 1 model -> 1 line in file
+				// NOTE: 1 model -> 1 line in file
+
+				// Write general data
 				file <<
 					modelName << " " <<
 					objPath << " " <<
@@ -169,14 +202,32 @@ void ModelEditor::save()
 					color.g << " " <<
 					color.b << " " <<
 					uvRepeat << " " <<
-					boxSize.x << " " <<
-					boxSize.y << " " <<
-					boxSize.z << " " <<
-					lodEntityID << std::endl;
+					lodEntityID << " ";
+
+				// Write AABB data
+				for (unsigned int i = 0; i < aabbNames.size(); i++)
+				{
+					file << 
+						aabbNames[i] << " " << 
+						aabbPositions[i].x << " " << 
+						aabbPositions[i].y << " " <<
+						aabbPositions[i].z << " " << 
+						aabbSizes[i].x << " " <<
+						aabbSizes[i].y << " " <<
+						aabbSizes[i].z;
+					
+					// Add space
+					if (i != (aabbNames.size() - 1))
+					{
+						file << " ";
+					}
+				}
+					
+				file << std::endl;
 			}
 			else
 			{
-				file << modelName << " ? ? ? ? ? 0.0 0.0 0.0 0 0 0 0 0.0 0.0 0.0 0.0 0 0.0 0.0 0.0 ?\n";
+				file << modelName << " ? ? ? ? ? 0.0 0.0 0.0 0 0 0 0 0.0 0.0 0.0 0.0 0 ?\n";
 			}
 		}
 

@@ -53,8 +53,7 @@ void AabbEntityManager::addAabbEntity(const string& ID, vec3 position, vec3 size
 	getEntity(ID)->addOglBuffer(new OpenGLBuffer(BufferType::AABB, box_data, sizeof(box_data) / sizeof(float)));
 
 	// Other
-	getEntity(ID)->setOriginalTranslation(position);
-	getEntity(ID)->setOriginalScaling(size);
+	getEntity(ID)->setLocalTranslation(position);
 	getEntity(ID)->setTranslation(position);
 	getEntity(ID)->setScaling(size);
 	getEntity(ID)->setResponsiveness(responsive);
@@ -85,7 +84,7 @@ void AabbEntityManager::update(const vector<GameEntity*>& gameEntities, const ve
 				{
 					if (entity->getParentID() == gameEntity->getID()) // Check for match
 					{
-						entity->setTranslation(gameEntity->getTranslation() + entity->getOriginalTranslation()); // Update translation
+						entity->setTranslation(gameEntity->getTranslation() + entity->getLocalTranslation()); // Update translation
 						found = true;
 					}
 				}
@@ -102,7 +101,7 @@ void AabbEntityManager::update(const vector<GameEntity*>& gameEntities, const ve
 				{
 					if (entity->getParentID() == billboardEntity->getID()) // Check for match
 					{
-						entity->setTranslation(billboardEntity->getTranslation() + entity->getOriginalTranslation()); // Update translation
+						entity->setTranslation(billboardEntity->getTranslation() + entity->getLocalTranslation()); // Update translation
 						found = true;
 					}
 				}

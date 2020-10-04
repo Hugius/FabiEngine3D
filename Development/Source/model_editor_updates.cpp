@@ -173,7 +173,7 @@ void ModelEditor::_updateCreationScreen()
 				if (newModelName[0] != '@')
 				{
 					// Add model and check if not already existing
-					if (_addModel("@" + newModelName, "", "", "", "", "", vec3(0.0f), 0, 1, 0, 0, 0, 1.0f, 1.0f, 1.0f, vec3(1.0f), 1.0f, vec3(2.5f), ""))
+					if (_addModel("@" + newModelName, "", "", "", "", "", vec3(0.0f), 0, 1, 0, 0, 0, 1.0f, 1.0f, 1.0f, vec3(1.0f), 1.0f, "", {}, {}, {}))
 					{
 						// Go to editor screen
 						_gui->getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
@@ -305,14 +305,14 @@ void ModelEditor::_updateCamera()
 		{
 			if (!_movingToggled && !_resizingToggled) // No active moving or resizing
 			{
-				_scrollingAcceleration += float(-_fe3d.input_getMouseWheelY() / _scrollWheelDivider); // Add to acceleration
+				_cameraScrollingAcceleration += float(-_fe3d.input_getMouseWheelY() / _scrollWheelDivider); // Add to acceleration
 			}
 		}
-		_scrollingAcceleration *= 0.975f; // Slowing down (smoothing)
-		_scrollingAcceleration = std::clamp(_scrollingAcceleration, -1.0f, 1.0f);
+		_cameraScrollingAcceleration *= 0.975f; // Slowing down (smoothing)
+		_cameraScrollingAcceleration = std::clamp(_cameraScrollingAcceleration, -1.0f, 1.0f);
 
 		// Adding movement to the 3rd person view & making sure you cannot zoom inverted
-		_cameraDistance += _scrollingAcceleration;
+		_cameraDistance += _cameraScrollingAcceleration;
 		if (_cameraDistance < 0.0f)
 		{
 			_cameraDistance = 0.0f;

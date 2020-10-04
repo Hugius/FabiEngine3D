@@ -9,7 +9,7 @@ void SceneEditor::_updateLightPlacing()
 		{
 			// Check if mouse behavior isn't being invalid
 			if (_fe3d.misc_isMouseInsideViewport() && 
-				!_fe3d.input_getMouseDown(Input::MOUSE_BUTTON_RIGHT) && 
+				!_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_RIGHT) && 
 				!_gui->getGlobalScreen()->isFocused())
 			{
 				// Default placement position
@@ -29,7 +29,7 @@ void SceneEditor::_updateLightPlacing()
 				}
 
 				// Placing pointlight
-				if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT) || _fe3d.terrainEntity_getSelectedID() == "") // Can be bypassed if terrain does not exist
+				if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.terrainEntity_getSelectedID() == "") // Can be bypassed if terrain does not exist
 				{
 					// Add new pointlight
 				begin: int randomSerial = _fe3d.misc_getUniqueInt(0, INT_MAX);
@@ -46,7 +46,7 @@ void SceneEditor::_updateLightPlacing()
 					_fe3d.gameEntity_setColor("@" + newID, vec3(1.0f));
 					_fe3d.gameEntity_setShadowed("@" + newID, false);
 					_fe3d.gameEntity_setDepthMapIncluded("@" + newID, false);
-					_fe3d.aabbEntity_bindToGameEntity("@" + newID, _defaultLightbulbAabbSize, true);
+					_fe3d.aabbEntity_bindToGameEntity("@" + newID, vec3(0.0f), _defaultLightbulbAabbSize, true);
 					_fe3d.lightEntity_add(newID, newPosition);
 
 					// Disable placement mode if no terrain availible to choose position from
@@ -55,7 +55,7 @@ void SceneEditor::_updateLightPlacing()
 						_isPlacingPointlight = false;
 					}
 				}
-				else if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_MIDDLE)) // Cancelling pointlight placement
+				else if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_MIDDLE)) // Cancelling pointlight placement
 				{
 					// Hide preview pointlight
 					_fe3d.gameEntity_hide(_previewPointlightID);

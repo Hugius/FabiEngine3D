@@ -19,12 +19,12 @@ public:
 	void setLocked(bool locked);
 	void setKeyTogglingLocked(bool locked);
 	void setMouseTogglingLocked(bool locked);
-	const bool getKeyDown(Input keyName);
-	const bool getKeyPressed(Input keyName);
-	const bool getKeyToggled(Input keyName);
-	const bool getMouseDown(Input mouseButton);
-	const bool getMousePressed(Input mouseButton);
-	const bool getMouseToggled(Input mouseButton);
+	const bool getKeyDown(InputType keyName);
+	const bool getKeyPressed(InputType keyName);
+	const bool getKeyToggled(InputType keyName);
+	const bool getMouseDown(InputType mouseButton);
+	const bool getMousePressed(InputType mouseButton);
+	const bool getMouseToggled(InputType mouseButton);
 	const int  getMouseWheelX();
 	const int  getMouseWheelY();
 
@@ -34,29 +34,29 @@ private:
 	Timer& _timer;
 
 	// Keys
-	vector<Input> _keysDown;
-	vector<Input> _keysPressed;
-	vector<Input> _keysPressed_mayNotPress;
-	vector<Input> _keysToggled;
-	vector<Input> _keysToggled_mayNotPress;
+	vector<InputType> _keysDown;
+	vector<InputType> _keysPressed;
+	vector<InputType> _keysPressed_mayNotPress;
+	vector<InputType> _keysToggled;
+	vector<InputType> _keysToggled_mayNotPress;
 	
 	bool _everythingLocked = false;
 	bool _keyTogglingLocked = false;
 	bool _mouseTogglingLocked = false;
 
 	// Mouse buttons
-	vector<Input> _mouseDown;
-	vector<Input> _mousePressed;
-	vector<Input> _mousePressed_mayNotPress;
-	vector<Input> _mouseToggled;
-	vector<Input> _mouseToggled_mayNotPress;
+	vector<InputType> _mouseDown;
+	vector<InputType> _mousePressed;
+	vector<InputType> _mousePressed_mayNotPress;
+	vector<InputType> _mouseToggled;
+	vector<InputType> _mouseToggled_mayNotPress;
 
 	// Mouse scrolling wheel
 	int _mouseWheelX = 0;
 	int _mouseWheelY = 0;
 
 	// Extra functions
-	inline int _getVectorIndex(vector<Input>& list, Input element)
+	inline int _getVectorIndex(vector<InputType>& list, InputType element)
 	{
 		auto it = std::find(list.begin(), list.end(), element);
 
@@ -70,7 +70,7 @@ private:
 		}
 	}
 
-	inline bool _isInVector(vector<Input>& list, Input element)
+	inline bool _isInVector(vector<InputType>& list, InputType element)
 	{
 		return std::find(list.begin(), list.end(), element) != list.end();
 	}

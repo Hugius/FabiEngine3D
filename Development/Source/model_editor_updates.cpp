@@ -17,10 +17,10 @@ void ModelEditor::_updateManagementScreen()
 {
 	if (_isLoaded)
 	{
-		auto screen = _leftWindow->getScreen("modelEditorMenuMain");
+		auto screen = _gui->getViewport("left")->getWindow("main")->getScreen("modelEditorMenuMain");
 
 		// GUI management
-		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
+		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
 			if (screen->getButton("addModel")->isHovered()) // Add model button
 			{
@@ -54,83 +54,80 @@ void ModelEditor::_updateManagementScreen()
 		{
 			save();
 			unload();
-			_leftWindow->setActiveScreen("main");
+			_gui->getViewport("left")->getWindow("main")->setActiveScreen("main");
 		}
 		else if (_gui->getGlobalScreen()->isAnswerFormCancelled("exitModelEditor"))
 		{
 			unload();
-			_leftWindow->setActiveScreen("main");
+			_gui->getViewport("left")->getWindow("main")->setActiveScreen("main");
 		}
 	}
 }
 
 void ModelEditor::_updateEditingScreen()
 {
-	if (_modelEditingEnabled && _currentModelName != "")
+	if (_modelEditingEnabled && _currentModelID != "")
 	{
-		static bool firstTime = true;
-		auto screen = _leftWindow->getScreen("modelEditorMenuChoice");
-
-		// Show model (name)
-		if (firstTime)
-		{
-			firstTime = false;
-			_fe3d.textEntity_setTextContent(_gui->getGlobalScreen()->getTextfield("selectedModelName")->getEntityID(),
-				"Model: " + _currentModelName.substr(1), 0.025f);
-			_fe3d.textEntity_show(_gui->getGlobalScreen()->getTextfield("selectedModelName")->getEntityID());
-			_leftWindow->setActiveScreen("modelEditorMenuChoice");
-		}
-
+		auto screen = _gui->getViewport("left")->getWindow("main")->getScreen("modelEditorMenuChoice");
+		
 		// GUI management
-		if (_leftWindow->getActiveScreen()->getID() == "modelEditorMenuChoice")
+		if (_gui->getViewport("left")->getWindow("main")->getActiveScreen()->getID() == "modelEditorMenuChoice")
 		{
-			if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
+			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
 				if (screen->getButton("mesh")->isHovered())
 				{
-					_leftWindow->setActiveScreen("modelEditorMenuMesh");
+					_gui->getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuMesh");
 				}
 				else if (screen->getButton("options")->isHovered())
 				{
-					_leftWindow->setActiveScreen("modelEditorMenuOptions");
+					_gui->getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuOptions");
 				}
 				else if (screen->getButton("lighting")->isHovered())
 				{
-					_leftWindow->setActiveScreen("modelEditorMenuLighting");
+					_gui->getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuLighting");
 				}
 				else if (screen->getButton("size")->isHovered())
 				{
-					if (_fe3d.gameEntity_isExisting(_currentModelName))
+					if (_fe3d.gameEntity_isExisting(_currentModelID))
 					{
-						_leftWindow->setActiveScreen("modelEditorMenuSize");
+						_gui->getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuSize");
+					}
+				}
+				else if (screen->getButton("aabb")->isHovered())
+				{
+					if (_fe3d.gameEntity_isExisting(_currentModelID))
+					{
+						_gui->getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuAabb");
+						_fe3d.misc_enableAabbFrameRendering();
+						_fe3d.textEntity_show(_gui->getGlobalScreen()->getTextfield("selectedAabbName")->getEntityID());
 					}
 				}
 				else if (screen->getButton("back")->isHovered())
 				{
 					// Hide game entity
-					if (_fe3d.gameEntity_isExisting(_currentModelName))
+					if (_fe3d.gameEntity_isExisting(_currentModelID))
 					{
-						_fe3d.gameEntity_hide(_currentModelName);
+						_fe3d.gameEntity_hide(_currentModelID);
 					}
 
 					// Reset variables and go back to last screen
-					firstTime = true;
 					_modelEditingEnabled = false;
-					_currentModelName = "";
-					_leftWindow->setActiveScreen("modelEditorMenuMain");
+					_currentModelID = "";
+					_gui->getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuMain");
 					_fe3d.textEntity_hide(_gui->getGlobalScreen()->getTextfield("selectedModelName")->getEntityID());
 				}
 			}
 
 			// Check if OBJ exists
-			bool existing = _fe3d.gameEntity_isExisting(_currentModelName);
+			bool existing = _fe3d.gameEntity_isExisting(_currentModelID);
 			bool hoverable = false;
 			if (existing)
 			{
 				hoverable = true;
 
 				// Show OBJ model
-				_fe3d.gameEntity_show(_currentModelName);
+				_fe3d.gameEntity_show(_currentModelID);
 			}
 
 			// Editing buttons hoverability
@@ -138,21 +135,25 @@ void ModelEditor::_updateEditingScreen()
 			screen->getButton("lighting")->setHoverable(hoverable);
 			screen->getButton("size")->setHoverable(hoverable);
 		}
-		else if (_leftWindow->getActiveScreen()->getID() == "modelEditorMenuMesh")
+		else if (_gui->getViewport("left")->getWindow("main")->getActiveScreen()->getID() == "modelEditorMenuMesh")
 		{
 			_updateModelEditingMesh();
 		}
-		else if (_leftWindow->getActiveScreen()->getID() == "modelEditorMenuOptions")
+		else if (_gui->getViewport("left")->getWindow("main")->getActiveScreen()->getID() == "modelEditorMenuOptions")
 		{
 			_updateModelEditingOptions();
 		}
-		else if (_leftWindow->getActiveScreen()->getID() == "modelEditorMenuLighting")
+		else if (_gui->getViewport("left")->getWindow("main")->getActiveScreen()->getID() == "modelEditorMenuLighting")
 		{
 			_updateModelEditingLighting();
 		}
-		else if (_leftWindow->getActiveScreen()->getID() == "modelEditorMenuSize")
+		else if (_gui->getViewport("left")->getWindow("main")->getActiveScreen()->getID() == "modelEditorMenuSize")
 		{
 			_updateModelEditingSize();
+		}
+		else if (_gui->getViewport("left")->getWindow("main")->getActiveScreen()->getID() == "modelEditorMenuAabb")
+		{
+			_updateModelEditingAabb();
 		}
 	}
 }
@@ -175,10 +176,17 @@ void ModelEditor::_updateCreationScreen()
 					if (_addModel("@" + newModelName, "", "", "", "", "", vec3(0.0f), 0, 1, 0, 0, 0, 1.0f, 1.0f, 1.0f, vec3(1.0f), 1.0f, vec3(2.5f), ""))
 					{
 						// Go to editor screen
-						_currentModelName = "@" + newModelName;
+						_gui->getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
+						
+						// Select model
+						_currentModelID = "@" + newModelName;
+
+						// Miscellaneous
+						_fe3d.textEntity_setTextContent(_gui->getGlobalScreen()->getTextfield("selectedModelName")->getEntityID(),
+							"Model: " + _currentModelID.substr(1), 0.025f);
+						_fe3d.textEntity_show(_gui->getGlobalScreen()->getTextfield("selectedModelName")->getEntityID());
 						_modelCreationEnabled = false;
 						_modelEditingEnabled = true;
-						_gui->getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
 					}
 				}
 			}
@@ -188,8 +196,6 @@ void ModelEditor::_updateCreationScreen()
 
 void ModelEditor::_updateModelChoosing()
 {
-	static string hoveredModelID = "";
-
 	if (_isLoaded)
 	{
 		if (_modelChoosingEnabled)
@@ -198,30 +204,38 @@ void ModelEditor::_updateModelChoosing()
 			string selectedButtonID = _gui->getGlobalScreen()->getSelectedChoiceFormButtonID("modelList");
 
 			// Hide last model
-			if (hoveredModelID != "")
+			if (_hoveredModelID != "")
 			{
 				// Check if model has game entity
-				if (_fe3d.gameEntity_isExisting(hoveredModelID))
+				if (_fe3d.gameEntity_isExisting(_hoveredModelID))
 				{
-					_fe3d.gameEntity_hide(hoveredModelID);
+					_fe3d.gameEntity_hide(_hoveredModelID);
 				}
 			}
 
 			// Check if a model name is hovered
 			if (selectedButtonID != "")
 			{
-				if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT)) // LMB pressed
+				if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT)) // LMB pressed
 				{
-					// Select selected model
-					_currentModelName = "@" + selectedButtonID;
-					_modelChoosingEnabled = false;
-					hoveredModelID = "";
+					// Go to editor screen
+					_gui->getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
+
+					// Select model
+					_currentModelID = "@" + selectedButtonID;
+					_hoveredModelID = "";
+
+					// Miscellaneous
+					_fe3d.textEntity_setTextContent(_gui->getGlobalScreen()->getTextfield("selectedModelName")->getEntityID(),
+						"Model: " + _currentModelID.substr(1), 0.025f);
+					_fe3d.textEntity_show(_gui->getGlobalScreen()->getTextfield("selectedModelName")->getEntityID());
 					_gui->getGlobalScreen()->removeChoiceForm("modelList");
+					_modelChoosingEnabled = false;
 				}
 				else
 				{
 					// Set new hovered model
-					hoveredModelID = "@" + selectedButtonID;
+					_hoveredModelID = "@" + selectedButtonID;
 				}
 			}
 			else if (_gui->getGlobalScreen()->isChoiceFormCancelled("modelList")) // Cancelled choosing
@@ -233,16 +247,16 @@ void ModelEditor::_updateModelChoosing()
 			}
 			else // Nothing hovered
 			{
-				hoveredModelID = "";
+				_hoveredModelID = "";
 			}
 
 			// Show hovered model
-			if (hoveredModelID != "")
+			if (_hoveredModelID != "")
 			{
 				// Check if model has game entity
-				if (_fe3d.gameEntity_isExisting(hoveredModelID))
+				if (_fe3d.gameEntity_isExisting(_hoveredModelID))
 				{
-					_fe3d.gameEntity_show(hoveredModelID);
+					_fe3d.gameEntity_show(_hoveredModelID);
 				}
 			}
 		}
@@ -253,25 +267,25 @@ void ModelEditor::_updateModelRemoval()
 {
 	if (_isLoaded)
 	{
-		if (_modelRemovalEnabled && _currentModelName != "")
+		if (_modelRemovalEnabled && _currentModelID != "")
 		{
 			_gui->getGlobalScreen()->addAnswerForm("removeModel", "Are you sure?", vec2(0.0f));
 
 			if (_gui->getGlobalScreen()->isAnswerFormConfirmed("removeModel"))
 			{
-				if (_fe3d.gameEntity_isExisting(_currentModelName))
+				if (_fe3d.gameEntity_isExisting(_currentModelID))
 				{
-					_fe3d.gameEntity_delete(_currentModelName);
+					_fe3d.gameEntity_delete(_currentModelID);
 				}
 
-				_modelNames.erase(std::remove(_modelNames.begin(), _modelNames.end(), _currentModelName), _modelNames.end());
+				_modelNames.erase(std::remove(_modelNames.begin(), _modelNames.end(), _currentModelID), _modelNames.end());
 				_modelRemovalEnabled = false;
-				_currentModelName = "";
+				_currentModelID = "";
 			}
 			else if (_gui->getGlobalScreen()->isAnswerFormCancelled("removeModel"))
 			{
 				_modelRemovalEnabled = false;
-				_currentModelName = "";
+				_currentModelID = "";
 			}
 		}
 	}
@@ -287,19 +301,18 @@ void ModelEditor::_updateCamera()
 		_lastCursorPos = _fe3d.misc_convertFromScreenCoords(_fe3d.misc_getMousePos());
 
 		// Update scrolling
-		static float scollSpeed = 0.0f;
 		if (!_gui->getGlobalScreen()->isFocused() && _fe3d.misc_isMouseInsideViewport()) // No GUI focus and cursor must be within viewport
 		{
-			if (!_meshResizingToggled && !_boxResizingToggled) // No active resizing
+			if (!_movingToggled && !_resizingToggled) // No active moving or resizing
 			{
-				scollSpeed += float(-_fe3d.input_getMouseWheelY() / _scrollWheelDivider); // Add scroll speed
+				_scrollingAcceleration += float(-_fe3d.input_getMouseWheelY() / _scrollWheelDivider); // Add to acceleration
 			}
 		}
-		scollSpeed *= 0.975f; // Slowing down (smoothing)
-		scollSpeed = std::clamp(scollSpeed, -1.0f, 1.0f);
+		_scrollingAcceleration *= 0.975f; // Slowing down (smoothing)
+		_scrollingAcceleration = std::clamp(_scrollingAcceleration, -1.0f, 1.0f);
 
 		// Adding movement to the 3rd person view & making sure you cannot zoom inverted
-		_cameraDistance += scollSpeed;
+		_cameraDistance += _scrollingAcceleration;
 		if (_cameraDistance < 0.0f)
 		{
 			_cameraDistance = 0.0f;
@@ -308,7 +321,7 @@ void ModelEditor::_updateCamera()
 		// Check if MMB pressed
 		if (!_gui->getGlobalScreen()->isFocused() && _fe3d.misc_isMouseInsideViewport())
 		{
-			if (_fe3d.input_getMouseDown(Input::MOUSE_BUTTON_MIDDLE))
+			if (_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_MIDDLE))
 			{
 				if (_fe3d.misc_isMouseInsideViewport()) // Only if cursor inside 3d screen
 				{

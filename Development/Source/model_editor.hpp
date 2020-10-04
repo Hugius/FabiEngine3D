@@ -3,7 +3,7 @@
 #include "fabi_engine_3d.hpp"
 #include "engine_gui_manager.hpp"
 
-enum class Direction
+enum class TransformationDirection
 {
 	X,
 	Y,
@@ -47,38 +47,47 @@ private:
 	void _updateModelEditingOptions();
 	void _updateModelEditingLighting();
 	void _updateModelEditingSize();
+	void _updateModelEditingAabb();
 	void _updateModelRemoval();
 	void _updateCamera();
 	void _updateMiscellaneous();
 
-	bool _modelCreationEnabled = false;
-	bool _modelChoosingEnabled = false;
-	bool _modelEditingEnabled = false;
-	bool _meshResizingToggled = false;
-	bool _boxResizingToggled = false;  
-	bool _modelRemovalEnabled = false;
-	bool _aabbRenderingEnabled = false;
-	bool _isLoaded = false;
+	// Core
+	FabiEngine3D& _fe3d;
+	shared_ptr<EngineGuiManager> _gui = nullptr;
 
+	// Strings
+	string _currentModelID = "";
+	string _currentAabbID = "";
+	string _currentProjectName = "";
+	string _hoveredModelID = "";
+	vector<string> _modelNames;
+	vector<string> _aabbNames;
+	vector<string> _objFileNamesList;
+
+	// Vectors
 	const vec3 _defaultCameraPosition = vec3(0.0f, 5.0f, 5.0f);
 	vec2 _totalCursorDifference = vec2(0.0f);
 	vec2 _cameraAcceleration = vec2(0.0f);
 	vec2 _lastCursorPos = vec2(0.0f);
 
-	Direction _modelResizeDirection = Direction::X;
-
+	// Floats
 	float _cameraDistance = 5.0f;
+	float _scrollingAcceleration = 0.0f;
 	const float _minCameraDistance = 1.0f;
 	const float _minCameraHeight = 1.0f;
 	const float _cameraSpeed = 0.15f;
 	const float _scrollWheelDivider = 15.0f;
 
-	FabiEngine3D& _fe3d;
-	shared_ptr<EngineGuiManager> _gui = nullptr;
-	shared_ptr<EngineGuiWindow> _leftWindow = nullptr;
-	
-	string _currentModelName = "";
-	string _currentProjectName = "";
-	vector<string> _modelNames;
-	vector<string> _objFileNamesList;
+	// Booleans
+	bool _modelCreationEnabled = false;
+	bool _modelChoosingEnabled = false;
+	bool _modelEditingEnabled = false;
+	bool _movingToggled = false;
+	bool _resizingToggled = false;
+	bool _modelRemovalEnabled = false;
+	bool _isLoaded = false;
+
+	// Miscellaneous
+	TransformationDirection _direction = TransformationDirection::X;
 };

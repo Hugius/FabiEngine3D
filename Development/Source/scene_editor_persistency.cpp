@@ -166,7 +166,7 @@ bool SceneEditor::_loadSceneFile(bool overwriteCamera)
 				_fe3d.gameEntity_add("@" + ID, "engine\\models\\lamp.obj", position, vec3(0.0f), _defaultLightbulbSize);
 				_fe3d.gameEntity_setShadowed("@" + ID, false);
 				_fe3d.gameEntity_setDepthMapIncluded("@" + ID, false);
-				_fe3d.aabbEntity_bindToGameEntity("@" + ID, _defaultLightbulbAabbSize, true);
+				_fe3d.aabbEntity_bindToGameEntity("@" + ID, vec3(0.0f), _defaultLightbulbAabbSize, true);
 				_fe3d.lightEntity_add(ID, position, color, intensity, distance);
 			}
 			else if (entityType == "LOD_DISTANCE")

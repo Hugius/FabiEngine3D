@@ -94,7 +94,7 @@ void CoreEngine::_setupApplication()
 void CoreEngine::_updateApplication()
 {
 	// Exit application
-	if (_inputHandler.getKeyDown(Input::WINDOW_X_BUTTON))
+	if (_inputHandler.getKeyDown(InputType::WINDOW_X_BUTTON))
 	{
 		_stop();
 	}

@@ -12,7 +12,7 @@ void SceneEditor::_updateMainSettingsMenu()
 			float lodDistance = _fe3d.gameEntity_getLevelOfDetailDistance();
 
 			// GUI management
-			if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
+			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
 				if (screen->getButton("graphics")->isHovered())
 				{
@@ -51,7 +51,7 @@ void SceneEditor::_updateGraphicsSettingsMenu()
 		auto screen = _leftWindow->getScreen("sceneEditorMenuSettingsGraphics");
 
 		// GUI management
-		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
+		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
 			if (screen->getButton("shadows")->isHovered())
 			{
@@ -100,7 +100,7 @@ void SceneEditor::_updateShadowGraphicsSettingsMenu()
 		int interval = _fe3d.gfx_getShadowInterval();
 
 		// GUI management
-		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
+		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
 			if (screen->getButton("enabled")->isHovered())
 			{
@@ -188,7 +188,7 @@ void SceneEditor::_updateMotionblurGraphicsSettingsMenu()
 		float strength = _fe3d.gfx_getMotionBlurStrength();
 
 		// GUI management
-		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
+		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
 			if (screen->getButton("enabled")->isHovered())
 			{
@@ -240,7 +240,7 @@ void SceneEditor::_updateDofGraphicsSettingsMenu()
 		float maxDistance = _fe3d.gfx_getDofMaxDistance();
 
 		// GUI management
-		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
+		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
 			if (screen->getButton("enabled")->isHovered())
 			{
@@ -303,7 +303,7 @@ void SceneEditor::_updateFogGraphicsSettingsMenu()
 		vec3 color = _fe3d.gfx_getFogColor();
 
 		// GUI management
-		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
+		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
 			if (screen->getButton("enabled")->isHovered())
 			{
@@ -386,7 +386,7 @@ void SceneEditor::_updateLensFlareGraphicsSettingsMenu()
 		float multiplier = _fe3d.gfx_getLensFlareMultiplier();
 
 		// GUI management
-		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
+		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
 			if (screen->getButton("enabled")->isHovered())
 			{
@@ -473,7 +473,7 @@ void SceneEditor::_updateskyHdrGraphicsSettingsMenu()
 		float intensity = _fe3d.gfx_getSkyHdrBrightnessFactor();
 
 		// GUI management
-		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
+		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
 			if (screen->getButton("enabled")->isHovered())
 			{

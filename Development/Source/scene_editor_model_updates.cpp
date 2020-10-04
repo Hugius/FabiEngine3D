@@ -7,7 +7,7 @@ void SceneEditor::_updateMainModelMenu()
 		if (_leftWindow->getActiveScreen()->getID() == "sceneEditorMenuModel")
 		{
 			auto screen = _leftWindow->getScreen("sceneEditorMenuModel");
-			if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
+			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
 				if (screen->getButton("sceneEditorMenuModelPlace")->isHovered()) // Place model button
 				{
@@ -51,7 +51,7 @@ void SceneEditor::_updateModelPlacingMenu()
 		if (_leftWindow->getActiveScreen()->getID() == "sceneEditorMenuModelPlace")
 		{
 			auto screen = _leftWindow->getScreen("sceneEditorMenuModelPlace");
-			if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
+			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
 				// Loop over every created model
 				for (auto& modelName : _modelEditor.getModelNames())
@@ -120,7 +120,7 @@ void SceneEditor::_updateModelChoosingMenu()
 					if (screen->getScrollingList("modelList")->getButton(modelName)->isHovered())
 					{
 						// Check if LMB pressed (activation)
-						if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
+						if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 						{
 							_activateModel(modelName);
 						}
@@ -136,7 +136,7 @@ void SceneEditor::_updateModelChoosingMenu()
 			}
 
 			// Back button
-			if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
+			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
 				if (screen->getButton("back")->isHovered())
 				{

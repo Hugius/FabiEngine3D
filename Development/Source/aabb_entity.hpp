@@ -7,8 +7,15 @@
 using glm::vec3;
 using glm::mat4;
 
-enum class CollisionDir 
-{ 
+enum class AabbParentType
+{
+	NONE,
+	GAME_ENTITY,
+	BILLBOARD_ENTITY
+};
+
+enum class CollisionDirection 
+{
 	NONE, 
 	X, 
 	Y, 
@@ -24,38 +31,40 @@ public:
 	// Updates
 	void updateModelMatrix();
 	void translate(vec3 val);
-	void rotate(vec3 val);
 	void scale(vec3 val);
 
 	// Setters
+	void setOriginalTranslation(vec3 val);
+	void setOriginalScaling(vec3 val);
 	void setTranslation(vec3 val);
-	void setRotation(vec3 val);
 	void setScaling(vec3 val);
-	void setParent(const string& ID, string type);
-	void setCollisionDirection(const CollisionDir& direction);
+	void setParent(const string& ID, AabbParentType type);
+	void setCollisionDirection(const CollisionDirection& direction);
 	void setResponsiveness(bool val);
 
 	// Getters
 	const mat4 & getModelMatrix() const;
+	const vec3 getOriginalTranslation() const;
+	const vec3 getOriginalScaling() const;
 	const vec3 getTranslation() const;
-	const vec3 getRotation() const;
 	const vec3 getScaling() const;
 	const string& getParentID() const;
-	const string getParentType() const;
-	const CollisionDir& getCollisionDirection() const;
+	const AabbParentType& getParentType() const;
+	const CollisionDirection& getCollisionDirection() const;
 	const bool isResponsive() const;
 
 private:
 	mat4 _modelMatrix = mat4(1.0f);
 
+	vec3 _originalTranslation = vec3(0.0f);
+	vec3 _originalScaling	  = vec3(0.0f);
 	vec3 _translation = vec3(0.0f, 0.0f, 0.0f);
-	vec3 _rotation    = vec3(0.0f, 0.0f, 0.0f);
 	vec3 _scaling     = vec3(1.0f, 1.0f, 1.0f);
 	
 	string _parentID = "";
-	string _parentType = "";
 
-	CollisionDir _collisionDirection = CollisionDir::NONE;
+	AabbParentType _parentType = AabbParentType::NONE;
+	CollisionDirection _collisionDirection = CollisionDirection::NONE;
 
 	bool _responsive = false;
 };

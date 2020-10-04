@@ -13,17 +13,17 @@ void ScriptEditor::_updateTextWriter()
 		unsigned int cursorCharIndex = _script.getScriptFile(_currentScriptFileID)->getCursorCharIndex();
 
 		// Timing functionality for continuous actions
-		const vector<Input> actionKeys = 
-		{ Input::KEY_ENTER, Input::KEY_BACKSPACE, Input::KEY_DELETE, Input::KEY_LEFT, Input::KEY_RIGHT, Input::KEY_UP, Input::KEY_DOWN };
-		static Input activeActionKey = Input::NONE;
+		const vector<InputType> actionKeys = 
+		{ InputType::KEY_ENTER, InputType::KEY_BACKSPACE, InputType::KEY_DELETE, InputType::KEY_LEFT, InputType::KEY_RIGHT, InputType::KEY_UP, InputType::KEY_DOWN };
+		static InputType activeActionKey = InputType::NONE;
 		static unsigned int passedFrames = 0;
 		static bool singleActionAllowed = true;
 		static bool continuousActionAllowed = false;
 
 		// Timer for continuous actions
-		if (activeActionKey == Input::NONE)
+		if (activeActionKey == InputType::NONE)
 		{
-			for (Input actionKey : actionKeys) // Check all possible action keys
+			for (InputType actionKey : actionKeys) // Check all possible action keys
 			{
 				if (_fe3d.input_getKeyDown(actionKey)) // Check if action key is down
 				{
@@ -50,14 +50,14 @@ void ScriptEditor::_updateTextWriter()
 		// Reset timing state if action key released
 		if (!_fe3d.input_getKeyDown(activeActionKey))
 		{
-			activeActionKey = Input::NONE;
+			activeActionKey = InputType::NONE;
 			passedFrames = 0;
 			singleActionAllowed = true;
 			continuousActionAllowed = false;
 		}
 
 		// Determine text action type
-		if (_fe3d.input_getKeyDown(Input::KEY_ENTER)) // Add new line
+		if (_fe3d.input_getKeyDown(InputType::KEY_ENTER)) // Add new line
 		{
 			// Check if single or fast new line action
 			if (singleActionAllowed || continuousActionAllowed)
@@ -84,11 +84,11 @@ void ScriptEditor::_updateTextWriter()
 				}
 			}
 		}
-		else if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
+		else if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
 
 		}
-		else if (activeActionKey == Input::KEY_LEFT) // Left arrow key
+		else if (activeActionKey == InputType::KEY_LEFT) // Left arrow key
 		{
 			// Check if single or fast cursor move
 			if (singleActionAllowed || continuousActionAllowed)
@@ -112,7 +112,7 @@ void ScriptEditor::_updateTextWriter()
 				}
 			}
 		}
-		else if (_fe3d.input_getKeyDown(Input::KEY_RIGHT)) // Right arrow key
+		else if (_fe3d.input_getKeyDown(InputType::KEY_RIGHT)) // Right arrow key
 		{
 			// Check if single or fast cursor move
 			if (singleActionAllowed || continuousActionAllowed)
@@ -137,7 +137,7 @@ void ScriptEditor::_updateTextWriter()
 				}
 			}
 		}
-		else if (_fe3d.input_getKeyDown(Input::KEY_UP)) // Up arrow key
+		else if (_fe3d.input_getKeyDown(InputType::KEY_UP)) // Up arrow key
 		{
 			// Check if single or fast cursor move
 			if (singleActionAllowed || continuousActionAllowed)
@@ -159,7 +159,7 @@ void ScriptEditor::_updateTextWriter()
 				}
 			}
 		}
-		else if (_fe3d.input_getKeyDown(Input::KEY_DOWN)) // Down arrow key
+		else if (_fe3d.input_getKeyDown(InputType::KEY_DOWN)) // Down arrow key
 		{
 			// Check if single or fast cursor move
 			if (singleActionAllowed || continuousActionAllowed)
@@ -192,7 +192,7 @@ void ScriptEditor::_updateTextWriter()
 			for (auto& c : letterCharacters)
 			{
 				// Check if character is pressed on keyboard
-				if (_fe3d.input_getKeyPressed(Input(c)))
+				if (_fe3d.input_getKeyPressed(InputType(c)))
 				{
 					// Spacebar
 					if (c == ' ')
@@ -201,7 +201,7 @@ void ScriptEditor::_updateTextWriter()
 					}
 					else // Non-spacebar
 					{
-						if (_fe3d.input_getKeyDown(Input::KEY_LSHIFT) || _fe3d.input_getKeyDown(Input::KEY_RSHIFT)) // Uppercase or special character
+						if (_fe3d.input_getKeyDown(InputType::KEY_LSHIFT) || _fe3d.input_getKeyDown(InputType::KEY_RSHIFT)) // Uppercase or special character
 						{
 							newCharacters += (c - 32);
 						}
@@ -221,10 +221,10 @@ void ScriptEditor::_updateTextWriter()
 			for (auto& element : numberCharacterMap)
 			{
 				// Check if character is pressed on keyboard
-				if (_fe3d.input_getKeyPressed(Input(element.first)))
+				if (_fe3d.input_getKeyPressed(InputType(element.first)))
 				{
 					// Check if shift was pressed
-					if (_fe3d.input_getKeyDown(Input::KEY_LSHIFT) || _fe3d.input_getKeyDown(Input::KEY_RSHIFT))
+					if (_fe3d.input_getKeyDown(InputType::KEY_LSHIFT) || _fe3d.input_getKeyDown(InputType::KEY_RSHIFT))
 					{
 						newCharacters = element.second;
 					}
@@ -239,10 +239,10 @@ void ScriptEditor::_updateTextWriter()
 			for (auto& element : specialCharacterMap)
 			{
 				// Check if character is pressed on keyboard
-				if (_fe3d.input_getKeyPressed(Input(element.first)))
+				if (_fe3d.input_getKeyPressed(InputType(element.first)))
 				{
 					// Check if shift was pressed
-					if (_fe3d.input_getKeyDown(Input::KEY_LSHIFT) || _fe3d.input_getKeyDown(Input::KEY_RSHIFT))
+					if (_fe3d.input_getKeyDown(InputType::KEY_LSHIFT) || _fe3d.input_getKeyDown(InputType::KEY_RSHIFT))
 					{
 						newCharacters += element.second;
 					}
@@ -254,7 +254,7 @@ void ScriptEditor::_updateTextWriter()
 			}
 
 			// Remove characters from line
-			if (activeActionKey == Input::KEY_BACKSPACE || activeActionKey == Input::KEY_DELETE)
+			if (activeActionKey == InputType::KEY_BACKSPACE || activeActionKey == InputType::KEY_DELETE)
 			{
 				// Check if single or fast remove
 				if (singleActionAllowed || continuousActionAllowed)
@@ -264,7 +264,7 @@ void ScriptEditor::_updateTextWriter()
 						singleActionAllowed = false;
 
 						// Jump to line above if cursor at beginning of line
-						if (cursorCharIndex == 0 && _fe3d.input_getKeyDown(Input::KEY_BACKSPACE))
+						if (cursorCharIndex == 0 && _fe3d.input_getKeyDown(InputType::KEY_BACKSPACE))
 						{
 							// Check if not trying to remove default line
 							if (cursorLineIndex > 0)
@@ -281,7 +281,7 @@ void ScriptEditor::_updateTextWriter()
 								textHasChanged = true;
 							}
 						}
-						else if (cursorCharIndex == currentLineText.size() && _fe3d.input_getKeyDown(Input::KEY_DELETE))
+						else if (cursorCharIndex == currentLineText.size() && _fe3d.input_getKeyDown(InputType::KEY_DELETE))
 						{
 							// Check if not trying to remove default line
 							if (cursorLineIndex < _script.getScriptFile(_currentScriptFileID)->getLineCount() - 1)
@@ -296,14 +296,14 @@ void ScriptEditor::_updateTextWriter()
 								textHasChanged = true;
 							}
 						}
-						else if (cursorCharIndex > 0 && _fe3d.input_getKeyDown(Input::KEY_BACKSPACE)) // Remove previous character from current line
+						else if (cursorCharIndex > 0 && _fe3d.input_getKeyDown(InputType::KEY_BACKSPACE)) // Remove previous character from current line
 						{
 							cursorCharIndex--;
 							currentLineText.erase(currentLineText.begin() + cursorCharIndex);
 							textHasChanged = true;
 							_script.getScriptFile(_currentScriptFileID)->setLineText(cursorLineIndex, currentLineText); // Save new line text
 						}
-						else if (_fe3d.input_getKeyDown(Input::KEY_DELETE)) // Remove next character from current line
+						else if (_fe3d.input_getKeyDown(InputType::KEY_DELETE)) // Remove next character from current line
 						{
 							currentLineText.erase(currentLineText.begin() + cursorCharIndex);
 							textHasChanged = true;

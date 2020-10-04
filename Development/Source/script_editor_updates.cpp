@@ -23,7 +23,7 @@ void ScriptEditor::_updateGUI()
 		// Check if LMB is pressed
 		if (!_gui->getGlobalScreen()->isFocused())
 		{
-			if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
+			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
 				if (mainScreen->getButton("createScript")->isHovered())
 				{
@@ -151,7 +151,7 @@ void ScriptEditor::_updateMiscellaneous()
 		string selectedButtonID = _gui->getGlobalScreen()->getSelectedChoiceFormButtonID("scriptFileList");
 		if (selectedButtonID != "")
 		{
-			if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
+			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
 				_gui->getGlobalScreen()->removeChoiceForm("scriptFileList");
 				_currentScriptFileID = selectedButtonID;

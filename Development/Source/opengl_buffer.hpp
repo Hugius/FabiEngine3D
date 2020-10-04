@@ -21,7 +21,7 @@ enum class BufferType
 class OpenGLBuffer final
 {
 public:
-	OpenGLBuffer() = default;
+	OpenGLBuffer() = delete;
 	OpenGLBuffer(BufferType type, float data[], int dataCount);   // 3D
 	OpenGLBuffer(float data[], int dataCount, const vector<vec3> & offsets); // 3D instanced
 	OpenGLBuffer(float x, float y, float w, float h, bool centered); // 2D

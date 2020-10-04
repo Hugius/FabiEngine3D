@@ -20,9 +20,9 @@
 
 enum class BlurType
 {
-	DOF    = 0,
-	BLOOM  = 1,
-	MOTION = 2
+	DOF,
+	BLOOM,
+	MOTION
 };
 
 class RenderEngine final

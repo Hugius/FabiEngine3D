@@ -16,32 +16,32 @@ void FabiEngine3D::input_setMouseTogglingLocked(bool locked)
 	return _core->_inputHandler.setMouseTogglingLocked(locked);
 }
 
-bool FabiEngine3D::input_getKeyDown(Input keyName)
+bool FabiEngine3D::input_getKeyDown(InputType keyName)
 {
 	return _core->_inputHandler.getKeyDown(keyName);
 }
 
-bool FabiEngine3D::input_getKeyPressed(Input keyName)
+bool FabiEngine3D::input_getKeyPressed(InputType keyName)
 {
 	return _core->_inputHandler.getKeyPressed(keyName);
 }
 
-bool FabiEngine3D::input_getKeyToggled(Input keyName)
+bool FabiEngine3D::input_getKeyToggled(InputType keyName)
 {
 	return _core->_inputHandler.getKeyToggled(keyName);
 }
 
-bool FabiEngine3D::input_getMouseDown(Input mouseButton)
+bool FabiEngine3D::input_getMouseDown(InputType mouseButton)
 {
 	return _core->_inputHandler.getMouseDown(mouseButton);
 }
 
-bool FabiEngine3D::input_getMousePressed(Input mouseButton)
+bool FabiEngine3D::input_getMousePressed(InputType mouseButton)
 {
 	return _core->_inputHandler.getMousePressed(mouseButton);
 }
 
-bool FabiEngine3D::input_getMouseToggled(Input mouseButton)
+bool FabiEngine3D::input_getMouseToggled(InputType mouseButton)
 {
 	return _core->_inputHandler.getMouseToggled(mouseButton);
 }

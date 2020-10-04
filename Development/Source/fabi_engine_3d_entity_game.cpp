@@ -22,13 +22,10 @@ void FabiEngine3D::gameEntity_deleteAll()
 
 void FabiEngine3D::gameEntity_delete(const string& ID)
 {
-	// Delete AABB child entity is existing
-	for (auto& aabbEntity : _core->_aabbEntityManager.getEntities())
+	// Delete all bound AABB entities if existing
+	for (auto& aabbID : aabbEntity_getBoundIDs(ID, true, false))
 	{
-		if (aabbEntity->getParentType() == "gameEntity" && aabbEntity->getParentID() == ID)
-		{
-			_core->_aabbEntityManager.deleteEntity(ID, EntityType::AABB);
-		}
+		_core->_aabbEntityManager.deleteEntity(ID, EntityType::AABB);
 	}
 
 	// Delete GAME entity
@@ -56,13 +53,13 @@ void FabiEngine3D::gameEntity_hideAll()
 {
 	for (auto entity : _core->_gameEntityManager.getEntities())
 	{
-		entity->setVisible(false);
-
-		// Hide possible AABB
-		if (aabbEntity_isExisting(entity->getID()))
+		// Hide every bound AABB
+		for (auto& aabbID : aabbEntity_getBoundIDs(entity->getID(), true, false))
 		{
-			aabbEntity_hide(entity->getID());
+			aabbEntity_hide(aabbID);
 		}
+
+		entity->setVisible(false);
 	}
 }
 
@@ -70,36 +67,36 @@ void FabiEngine3D::gameEntity_showAll()
 {
 	for (auto entity : _core->_gameEntityManager.getEntities())
 	{
-		entity->setVisible(true);
-
-		// Show possible AABB
-		if (aabbEntity_isExisting(entity->getID()))
+		// Show every bound AABB
+		for (auto& aabbID : aabbEntity_getBoundIDs(entity->getID(), true, false))
 		{
-			aabbEntity_show(entity->getID());
+			aabbEntity_show(aabbID);
 		}
+
+		entity->setVisible(true);
 	}
 }
 
 void FabiEngine3D::gameEntity_hide(const string& ID)
 {
-	_core->_gameEntityManager.getEntity(ID)->setVisible(false);
-
-	// Hide possible AABB
-	if (aabbEntity_isExisting(ID))
+	// Hide every bound AABB
+	for (auto& aabbID : aabbEntity_getBoundIDs(ID, true, false))
 	{
-		aabbEntity_hide(ID);
+		aabbEntity_hide(aabbID);
 	}
+
+	_core->_gameEntityManager.getEntity(ID)->setVisible(false);
 }
 
 void FabiEngine3D::gameEntity_show(const string& ID)
 {
-	_core->_gameEntityManager.getEntity(ID)->setVisible(true);
-
-	// Show possible AABB
-	if (aabbEntity_isExisting(ID))
+	// Show every bound AABB
+	for (auto& aabbID : aabbEntity_getBoundIDs(ID, true, false))
 	{
-		aabbEntity_show(ID);
+		aabbEntity_show(aabbID);
 	}
+
+	_core->_gameEntityManager.getEntity(ID)->setVisible(true);
 }
 
 void FabiEngine3D::gameEntity_setDiffuseMap(const string& ID, const string& texturePath)

@@ -380,7 +380,7 @@ void SceneEditor::unload()
 	_dontResetSelectedModel = false;
 	_isPlacingPointlight = false;
 	_isLoaded = false;
-	_transformation = Transformation::TRANSLATION;
+	_transformation = TransformationType::TRANSLATION;
 	_selectedLightSizeMultiplier = 1;
 	_activeLightSizeMultiplier = 1;
 	_activeLightBulbID = "";

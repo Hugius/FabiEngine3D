@@ -11,7 +11,7 @@ void SceneEditor::_updateMainLightingMenu()
 			auto screen = _leftWindow->getScreen("sceneEditorMenuLighting");
 
 			// GUI management
-			if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
+			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
 				if (screen->getButton("ambient")->isHovered()) // Ambient light button
 				{
@@ -45,7 +45,7 @@ void SceneEditor::_updateAmbientLightingMenu()
 			float ambientLightingIntensity = _fe3d.gfx_getAmbientLightingIntensity();
 	
 			// GUI management
-			if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
+			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
 				if (screen->getButton("color")->isHovered())
 				{
@@ -106,7 +106,7 @@ void SceneEditor::_updateDirectionalLightingMenu()
 			float billboardSize = _fe3d.billboardEntity_getSize("@@lightSource").x;
 
 			// GUI management
-			if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
+			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
 				if (screen->getButton("color")->isHovered())
 				{
@@ -185,7 +185,7 @@ void SceneEditor::_updatePointLightingMenu()
 			auto screen = _leftWindow->getScreen("sceneEditorMenuLightingPoint");
 
 			// GUI management
-			if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
+			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
 				if (screen->getButton("add")->isHovered())
 				{

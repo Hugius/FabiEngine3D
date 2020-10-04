@@ -6,9 +6,6 @@ void AabbEntity::updateModelMatrix()
 {
 	_modelMatrix = mat4(1.0f);
 	_modelMatrix = glm::translate(_modelMatrix, _translation);
-	_modelMatrix = glm::rotate(_modelMatrix, glm::radians(_rotation.z), vec3(0.0f, 0.0f, 1.0f));
-	_modelMatrix = glm::rotate(_modelMatrix, glm::radians(_rotation.y), vec3(0.0f, 1.0f, 0.0f));
-	_modelMatrix = glm::rotate(_modelMatrix, glm::radians(_rotation.x), vec3(1.0f, 0.0f, 0.0f));
 	_modelMatrix = glm::scale(_modelMatrix, _scaling);
 }
 
@@ -17,23 +14,18 @@ void AabbEntity::setTranslation(vec3 val)
 	_translation = val;
 }
 
-void AabbEntity::setRotation(vec3 val)
-{
-	_rotation = val;
-}
-
 void AabbEntity::setScaling(vec3 val)
 {
 	_scaling = val;
 }
 
-void AabbEntity::setParent(const string& ID, string type)
+void AabbEntity::setParent(const string& ID, AabbParentType type)
 {
 	_parentID = ID;
 	_parentType = type;
 }
 
-void AabbEntity::setCollisionDirection(const CollisionDir& direction)
+void AabbEntity::setCollisionDirection(const CollisionDirection& direction)
 {
 	_collisionDirection = direction;
 }
@@ -48,14 +40,19 @@ void AabbEntity::translate(vec3 val)
 	_translation += val;
 }
 
-void AabbEntity::rotate(vec3 val)
-{
-	_rotation += val;
-}
-
 void AabbEntity::scale(vec3 val)
 {
 	_scaling += val;
+}
+
+void AabbEntity::setOriginalTranslation(vec3 val)
+{
+	_originalTranslation = val;
+}
+
+void AabbEntity::setOriginalScaling(vec3 val)
+{
+	_originalScaling = val;
 }
 
 const mat4 & AabbEntity::getModelMatrix() const
@@ -63,14 +60,19 @@ const mat4 & AabbEntity::getModelMatrix() const
 	return _modelMatrix;
 }
 
+const vec3 AabbEntity::getOriginalTranslation() const
+{
+	return _originalTranslation;
+}
+
+const vec3 AabbEntity::getOriginalScaling() const
+{
+	return _originalScaling;
+}
+
 const vec3 AabbEntity::getTranslation() const
 {
 	return _translation;
-}
-
-const vec3 AabbEntity::getRotation() const
-{
-	return _rotation;
 }
 
 const vec3 AabbEntity::getScaling() const
@@ -83,12 +85,12 @@ const string& AabbEntity::getParentID() const
 	return _parentID;
 }
 
-const string AabbEntity::getParentType() const
+const AabbParentType& AabbEntity::getParentType() const
 {
 	return _parentType;
 }
 
-const CollisionDir& AabbEntity::getCollisionDirection() const
+const CollisionDirection& AabbEntity::getCollisionDirection() const
 {
 	return _collisionDirection;
 }

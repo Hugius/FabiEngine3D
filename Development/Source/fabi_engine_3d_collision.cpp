@@ -6,78 +6,60 @@ void FabiEngine3D::aabbEntity_deleteAll()
 	_core->_aabbEntityManager.deleteEntities();
 }
 
-void FabiEngine3D::aabbEntity_add(const string& ID, vec3 T, vec3 S, bool responsive)
+void FabiEngine3D::aabbEntity_add(const string& ID, vec3 position, vec3 size, bool responsive)
 {
-	_core->_aabbEntityManager.addAabbEntity(ID, T, vec3(0.0f), S, responsive);
+	_core->_aabbEntityManager.addAabbEntity(ID, position, size, responsive);
 }
 
-void FabiEngine3D::aabbEntity_bindToGameEntity(const string& parentID, vec3 S, bool responsive)
+void FabiEngine3D::aabbEntity_bindToGameEntity(const string& parentID, vec3 position, vec3 size, bool responsive, const string& customAabbID)
 {
-	if (_core->_gameEntityManager.isExisting(parentID))
+	if (customAabbID == "") // Use parent ID
 	{
-		_core->_aabbEntityManager.bindAabbEntity(parentID, parentID, "gameEntity", vec3(0.0f), S, responsive);
-	}
-	else
-	{
-		logger_throwError("Tried to bind AABB entity to non-existing GAME entity \"" + parentID + "\"");
-	}
-}
-
-void FabiEngine3D::aabbEntity_bindToGameEntityGroup(const string& parentID, vec3 S, bool responsive)
-{
-	bool found = false;
-
-	for (auto& entity : _core->_gameEntityManager.getEntities()) // Loop over game entities
-	{
-		if (entity->getID().size() >= parentID.size()) // Check if entity ID is at least the size of group ID
+		if (_core->_gameEntityManager.isExisting(parentID))
 		{
-			if (entity->getID().substr(0, parentID.size()) == parentID) // If entity matches ID
-			{
-				found = true;
-				_core->_aabbEntityManager.bindAabbEntity(entity->getID(), entity->getID(), "gameEntity", vec3(0.0f), S, responsive); // Add new box
-			}
+			_core->_aabbEntityManager.bindAabbEntity(parentID, parentID, AabbParentType::GAME_ENTITY, position, size, responsive);
+		}
+		else
+		{
+			logger_throwError("Tried to bind AABB entity to non-existing GAME entity \"" + parentID + "\"");
 		}
 	}
-
-	// Logging
-	if (!found)
+	else // Use custom ID
 	{
-		logger_throwError("Tried to bind AABB entities to non-existing GAME entity group \"" + parentID + "\"");
-	}
-}
-
-void FabiEngine3D::aabbEntity_bindToBillboardEntity(const string& parentID, vec3 S, bool responsive)
-{
-	if (_core->_billboardEntityManager.isExisting(parentID))
-	{
-		_core->_aabbEntityManager.bindAabbEntity(parentID, parentID, "billboardEntity", vec3(0.0f), S, responsive);
-	}
-	else
-	{
-		logger_throwError("Tried to bind AABB entity to non-existing BILLBOARD entity \"" + parentID + "\"");
-	}
-}
-
-void FabiEngine3D::aabbEntity_bindToBillboardEntityGroup(const string& parentID, vec3 S, bool responsive)
-{
-	bool found = false;
-
-	for (auto& entity : _core->_billboardEntityManager.getEntities()) // Loop over game entities
-	{
-		if (entity->getID().size() >= parentID.size()) // Check if entity ID is at least the size of group ID
+		if (_core->_gameEntityManager.isExisting(parentID))
 		{
-			if (entity->getID().substr(0, parentID.size()) == parentID) // If entity matches ID
-			{
-				found = true;
-				_core->_aabbEntityManager.bindAabbEntity(entity->getID(), entity->getID(), "billboardEntity", vec3(0.0f), S, responsive); // Add new box
-			}
+			_core->_aabbEntityManager.bindAabbEntity(customAabbID, parentID, AabbParentType::GAME_ENTITY, position, size, responsive);
+		}
+		else
+		{
+			logger_throwError("Tried to bind AABB entity \"" + customAabbID + "\" to non-existing GAME entity \"" + parentID + "\"");
 		}
 	}
+}
 
-	// Logging
-	if (!found)
+void FabiEngine3D::aabbEntity_bindToBillboardEntity(const string& parentID, vec3 S, bool responsive, const string& customAabbID)
+{
+	if (customAabbID == "") // Use parent ID
 	{
-		logger_throwError("Tried to bind AABB entities to non-existing GAME entity group \"" + parentID + "\"");
+		if (_core->_billboardEntityManager.isExisting(parentID))
+		{
+			_core->_aabbEntityManager.bindAabbEntity(parentID, parentID, AabbParentType::BILLBOARD_ENTITY, vec3(0.0f), S, responsive);
+		}
+		else
+		{
+			logger_throwError("Tried to bind AABB entity to non-existing BILLBOARD entity \"" + parentID + "\"");
+		}
+	}
+	else // Use custom ID
+	{
+		if (_core->_billboardEntityManager.isExisting(parentID))
+		{
+			_core->_aabbEntityManager.bindAabbEntity(customAabbID, parentID, AabbParentType::BILLBOARD_ENTITY, vec3(0.0f), S, responsive);
+		}
+		else
+		{
+			logger_throwError("Tried to bind AABB entity \"" + customAabbID + "\" to non-existing BILLBOARD entity \"" + parentID + "\"");
+		}
 	}
 }
 
@@ -101,28 +83,15 @@ void FabiEngine3D::aabbEntity_setResponsiveness(const string& ID, bool responsiv
 	_core->_aabbEntityManager.getEntity(ID)->setResponsiveness(responsive);
 }
 
-void FabiEngine3D::aabbEntity_setGroupResponsiveness(const string& ID, bool responsive)
-{
-	for (auto entity : _core->_aabbEntityManager.getEntities()) // Loop over AABB entities
-	{
-		if (entity->getID().size() >= ID.size()) // Check if entity ID is at least the size of group ID
-		{
-			auto subString = entity->getID().substr(0, ID.size());
-			if (subString == ID) // If entity matches ID
-			{
-				_core->_aabbEntityManager.getEntity(entity->getID())->setResponsiveness(responsive);
-			}
-		}
-	}
-}
-
 void FabiEngine3D::aabbEntity_setPosition(const string& ID, vec3 position)
 {
+	_core->_aabbEntityManager.getEntity(ID)->setOriginalTranslation(position);
 	_core->_aabbEntityManager.getEntity(ID)->setTranslation(position);
 }
 
 void FabiEngine3D::aabbEntity_setSize(const string& ID, vec3 size)
 {
+	_core->_aabbEntityManager.getEntity(ID)->setOriginalScaling(size);
 	_core->_aabbEntityManager.getEntity(ID)->setScaling(size);
 }
 
@@ -144,6 +113,23 @@ bool FabiEngine3D::aabbEntity_isResponsive(const string& ID)
 bool FabiEngine3D::aabbEntity_isExisting(const string& ID)
 {
 	return _core->_aabbEntityManager.isExisting(ID);
+}
+
+vector<string> FabiEngine3D::aabbEntity_getBoundIDs(const string& parentID, bool gameEntity, bool billboardEntity)
+{
+	vector<string> IDs;
+
+	for (auto entity : _core->_aabbEntityManager.getEntities())
+	{
+		if (parentID == entity->getParentID() && 
+			((entity->getParentType() == AabbParentType::GAME_ENTITY && gameEntity) ||
+			(entity->getParentType() == AabbParentType::BILLBOARD_ENTITY && billboardEntity)))
+		{
+			IDs.push_back(entity->getID());
+		}
+	}
+
+	return IDs;
 }
 
 vector<string> FabiEngine3D::aabbEntity_getAllIDs()
@@ -182,7 +168,7 @@ bool FabiEngine3D::collision_checkAnyWithCamera()
 {
 	for (auto entity : _core->_aabbEntityManager.getEntities()) // Loop over AABB entities
 	{
-		if (entity->getCollisionDirection() != CollisionDir::NONE)
+		if (entity->getCollisionDirection() != CollisionDirection::NONE)
 		{
 			return true;
 		}
@@ -193,7 +179,7 @@ bool FabiEngine3D::collision_checkAnyWithCamera()
 
 bool FabiEngine3D::collision_checkEntityWithCamera(const string& ID)
 {
-	return _core->_aabbEntityManager.getEntity(ID)->getCollisionDirection() != CollisionDir::NONE;
+	return _core->_aabbEntityManager.getEntity(ID)->getCollisionDirection() != CollisionDirection::NONE;
 }
 
 const string& FabiEngine3D::collision_checkEntityWithOthers(const string& ID)
@@ -247,7 +233,7 @@ const string& FabiEngine3D::collision_checkEntityWithOthers(const string& ID)
 	return "";
 }
 
-const string& FabiEngine3D::collision_checkEntityGroupWithCamera(const string& ID)
+const string& FabiEngine3D::collision_checkEntitiesWithCamera(const string& ID)
 {
 	for (auto entity : _core->_aabbEntityManager.getEntities()) // Loop over AABB entities
 	{
@@ -259,7 +245,7 @@ const string& FabiEngine3D::collision_checkEntityGroupWithCamera(const string& I
 				auto direction = entity->getCollisionDirection(); // Calculate direction
 
 				// True if collides
-				if (direction != CollisionDir::NONE)
+				if (direction != CollisionDirection::NONE)
 				{
 					return entity->getID();
 				}
@@ -325,7 +311,7 @@ bool FabiEngine3D::collision_checkCursorInEntity(const string& ID)
 	return false;
 }
 
-string FabiEngine3D::collision_checkCursorInEntityGroup(const string& ID, const string& exception)
+string FabiEngine3D::collision_checkCursorInEntities(const string& ID, const string& exception)
 {
 	float closestDistance = (std::numeric_limits<float>::max)();
 	string closestBoxID = "";
@@ -372,10 +358,10 @@ ivec3 FabiEngine3D::collision_checkEntityWithCameraDirection(const string& ID)
 	auto state = _core->_aabbEntityManager.getEntity(ID)->getCollisionDirection();
 
 	// Return collision
-	return ivec3(state == CollisionDir::X, state == CollisionDir::Y, state == CollisionDir::Z);
+	return ivec3(state == CollisionDirection::X, state == CollisionDirection::Y, state == CollisionDirection::Z);
 }
 
-ivec3 FabiEngine3D::collision_checkEntityGroupWithCameraDirection(const string& ID)
+ivec3 FabiEngine3D::collision_checkEntitiesWithCameraDirection(const string& ID)
 {
 	for (auto entity : _core->_aabbEntityManager.getEntities()) // Loop over AABB entities
 	{
@@ -387,9 +373,9 @@ ivec3 FabiEngine3D::collision_checkEntityGroupWithCameraDirection(const string& 
 				auto direction = entity->getCollisionDirection(); // Calculate direction
 
 				// Return direction if collides
-				if (direction != CollisionDir::NONE)
+				if (direction != CollisionDirection::NONE)
 				{
-					return ivec3(direction == CollisionDir::X, direction == CollisionDir::Y, direction == CollisionDir::Z);
+					return ivec3(direction == CollisionDirection::X, direction == CollisionDirection::Y, direction == CollisionDirection::Z);
 				}
 			}
 		}

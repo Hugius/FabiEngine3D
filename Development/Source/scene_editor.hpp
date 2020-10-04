@@ -9,7 +9,7 @@
 #include <map>
 #include <limits>
 
-enum class Transformation
+enum class TransformationType
 {
 	TRANSLATION,
 	ROTATION,
@@ -120,7 +120,7 @@ private:
 	// Miscellaneous
 	bool _isLoaded = false;
 	bool _isLoadingSceneEditor = false;
-	Transformation _transformation = Transformation::TRANSLATION;
+	TransformationType _transformation = TransformationType::TRANSLATION;
 	string _currentProjectName = "";
 	float _customCameraSpeed = 1.0f;
 	const float _movementChangingSpeed = 0.1f;

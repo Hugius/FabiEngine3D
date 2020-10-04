@@ -359,17 +359,14 @@ public:
 	int billboardEntity_getAnimationFramestep(const string& ID);
 
 	// AABB entity interface - setters
-	void aabbEntity_add(const string& ID, vec3 T, vec3 S, bool responsive);
-	void aabbEntity_bindToGameEntity(const string& parentID, vec3 S, bool responsive);
-	void aabbEntity_bindToGameEntityGroup(const string& parentID, vec3 S, bool responsive);
-	void aabbEntity_bindToBillboardEntity(const string& parentID, vec3 S, bool responsive);
-	void aabbEntity_bindToBillboardEntityGroup(const string& parentID, vec3 S, bool responsive);
+	void aabbEntity_add(const string& ID, vec3 position, vec3 size, bool responsive);
+	void aabbEntity_bindToGameEntity(const string& parentID, vec3 position, vec3 size, bool responsive, const string& customAabbID = "");
+	void aabbEntity_bindToBillboardEntity(const string& parentID, vec3 S, bool responsive, const string& customAabbID = "");
 	void aabbEntity_deleteAll();
 	void aabbEntity_delete(const string& ID);
 	void aabbEntity_hide(const string& ID);
 	void aabbEntity_show(const string& ID);
 	void aabbEntity_setResponsiveness(const string& ID, bool responsive);
-	void aabbEntity_setGroupResponsiveness(const string& ID, bool responsive);
 	void aabbEntity_setPosition(const string& ID, vec3 position);
 	void aabbEntity_setSize(const string& ID, vec3 size);
 
@@ -378,6 +375,7 @@ public:
 	vec3 aabbEntity_getSize(const string& ID);
 	bool aabbEntity_isResponsive(const string& ID);
 	bool aabbEntity_isExisting(const string& ID);
+	vector<string> aabbEntity_getBoundIDs(const string& parentID, bool gameEntity, bool billboardEntity);
 	vector<string> aabbEntity_getAllIDs();
 
 	// Global collision interface - setters
@@ -387,15 +385,15 @@ public:
 	void collision_disableCameraTerrainResponse();
 
 	// Global collision interface - getters
-	string collision_checkCursorInAny();
+	string        collision_checkCursorInAny();
 	bool		  collision_checkCursorInEntity(const string& ID);
-	string collision_checkCursorInEntityGroup(const string& ID, const string& exception = "");
+	string        collision_checkCursorInEntities(const string& ID, const string& exception = "");
 	bool		  collision_checkAnyWithCamera();
 	bool		  collision_checkEntityWithCamera(const string& ID);
-	const string& collision_checkEntityGroupWithCamera(const string& ID);
+	const string& collision_checkEntitiesWithCamera(const string& ID);
 	const string& collision_checkEntityWithOthers(const string& ID);
 	ivec3		  collision_checkEntityWithCameraDirection(const string& ID);
-	ivec3		  collision_checkEntityGroupWithCameraDirection(const string& ID);
+	ivec3		  collision_checkEntitiesWithCameraDirection(const string& ID);
 
 	// Light entity interface - setters
 	void lightEntity_add(const string& ID, vec3 position = vec3(0.0f), vec3 color = vec3(1.0f), float intensity = 1.0f, float distanceFactor = 1.0f, bool visible = true);
@@ -613,12 +611,12 @@ public:
 	void input_setLocked(bool locked);
 	void input_setKeyTogglingLocked(bool locked);
 	void input_setMouseTogglingLocked(bool locked);
-	bool input_getKeyDown(Input keyName);
-	bool input_getKeyPressed(Input keyName);
-	bool input_getKeyToggled(Input keyName);
-	bool input_getMouseDown(Input mouseButton);
-	bool input_getMousePressed(Input mouseButton);
-	bool input_getMouseToggled(Input mouseButton);
+	bool input_getKeyDown(InputType keyName);
+	bool input_getKeyPressed(InputType keyName);
+	bool input_getKeyToggled(InputType keyName);
+	bool input_getMouseDown(InputType mouseButton);
+	bool input_getMousePressed(InputType mouseButton);
+	bool input_getMouseToggled(InputType mouseButton);
 	int  input_getMouseWheelX();
 	int  input_getMouseWheelY();
 

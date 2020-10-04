@@ -111,7 +111,7 @@ void SettingsEditor::update()
 			int audioChannels = _fe3d.audio_getMaxChannels();
 
 			// GUI management
-			if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
+			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
 				if (screen->getButton("mouseSensitivity")->isHovered())
 				{

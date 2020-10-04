@@ -57,7 +57,7 @@ void TopViewportController::_updateProjectManagement()
 	auto projectScreen = _projectWindow->getScreen("main");
 
 	// Check if LMB pressed
-	if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
+	if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 	{
 		if (projectScreen->getButton("newProject")->isHovered())
 		{
@@ -131,7 +131,7 @@ void TopViewportController::_updateGameManagement()
 	else
 	{
 		// Check if LMB pressed
-		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
+		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
 			if (gameScreen->getButton("play")->isHovered())
 			{
@@ -181,7 +181,7 @@ void TopViewportController::_updateGameManagement()
 		// Check if player wants to pause the running game
 		if (SCRIPT_EXECUTOR.isRunning())
 		{
-			if (_fe3d.input_getKeyPressed(Input::KEY_ESCAPE))
+			if (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
 			{
 				SCRIPT_EXECUTOR.pause();
 			}

@@ -25,7 +25,7 @@ void InputHandler::f_checkInput()
 			{	
 				case SDL_QUIT: // X symbol in SDL window
 				{
-					_keysDown.push_back(static_cast<Input>(SDL_QUIT));
+					_keysDown.push_back(static_cast<InputType>(SDL_QUIT));
 					break;
 				}
 
@@ -38,7 +38,7 @@ void InputHandler::f_checkInput()
 
 				case SDL_MOUSEBUTTONDOWN:
 				{
-					auto button = static_cast<Input>(event.button.button);
+					auto button = static_cast<InputType>(event.button.button);
 
 					// Continuing mouse press
 					if (!_isInVector(_mouseDown, button)) // If not in vector yet, add it
@@ -83,7 +83,7 @@ void InputHandler::f_checkInput()
 			
 				case SDL_MOUSEBUTTONUP:
 				{
-					auto button = static_cast<Input>(event.button.button);
+					auto button = static_cast<InputType>(event.button.button);
 
 					// Continuing mouse press
 					if (!_mouseDown.empty())
@@ -111,7 +111,7 @@ void InputHandler::f_checkInput()
 
 				case SDL_KEYDOWN:
 				{
-					auto key = static_cast<Input>(event.key.keysym.sym);
+					auto key = static_cast<InputType>(event.key.keysym.sym);
 
 					// Continuing key press
 					if (!_isInVector(_keysDown, key))
@@ -155,7 +155,7 @@ void InputHandler::f_checkInput()
 
 				case SDL_KEYUP:
 				{
-					auto key = static_cast<Input>(event.key.keysym.sym);
+					auto key = static_cast<InputType>(event.key.keysym.sym);
 
 					// Continuing key press
 					if (!_keysDown.empty())
@@ -200,32 +200,32 @@ void InputHandler::setMouseTogglingLocked(bool locked)
 	_mouseTogglingLocked = locked;
 }
 
-const bool InputHandler::getKeyDown(Input keyName)
+const bool InputHandler::getKeyDown(InputType keyName)
 {
 	return _isInVector(_keysDown, keyName);
 }
 
-const bool InputHandler::getKeyToggled(Input keyName)
+const bool InputHandler::getKeyToggled(InputType keyName)
 {
 	return _isInVector(_keysToggled, keyName);
 }
 
-const bool InputHandler::getKeyPressed(Input keyName)
+const bool InputHandler::getKeyPressed(InputType keyName)
 {
 	return _isInVector(_keysPressed, keyName);
 }
 
-const bool InputHandler::getMouseDown(Input mouseButton)
+const bool InputHandler::getMouseDown(InputType mouseButton)
 {
 	return _isInVector(_mouseDown, mouseButton);
 }
 
-const bool InputHandler::getMousePressed(Input mouseButton)
+const bool InputHandler::getMousePressed(InputType mouseButton)
 {
 	return _isInVector(_mousePressed, mouseButton);
 }
 
-const bool InputHandler::getMouseToggled(Input mouseButton)
+const bool InputHandler::getMouseToggled(InputType mouseButton)
 {
 	return _isInVector(_mouseToggled, mouseButton);
 }

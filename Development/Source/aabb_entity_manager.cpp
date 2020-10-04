@@ -25,7 +25,7 @@ const vector<AabbEntity*> AabbEntityManager::getEntities()
 	return newVector;
 }
 
-void AabbEntityManager::addAabbEntity(const string& ID, vec3 T, vec3 R, vec3 S, bool responsive)
+void AabbEntityManager::addAabbEntity(const string& ID, vec3 position, vec3 size, bool responsive)
 {
 	// Load OBJ model
 	float box_data[] =
@@ -53,15 +53,16 @@ void AabbEntityManager::addAabbEntity(const string& ID, vec3 T, vec3 R, vec3 S, 
 	getEntity(ID)->addOglBuffer(new OpenGLBuffer(BufferType::AABB, box_data, sizeof(box_data) / sizeof(float)));
 
 	// Other
-	getEntity(ID)->setTranslation(T);
-	getEntity(ID)->setRotation(R);
-	getEntity(ID)->setScaling(S);
+	getEntity(ID)->setOriginalTranslation(position);
+	getEntity(ID)->setOriginalScaling(size);
+	getEntity(ID)->setTranslation(position);
+	getEntity(ID)->setScaling(size);
 	getEntity(ID)->setResponsiveness(responsive);
 }
 
-void AabbEntityManager::bindAabbEntity(const string& ID, const string& parentID, string parentType, vec3 R, vec3 S, bool responsive)
+void AabbEntityManager::bindAabbEntity(const string& ID, const string& parentID, AabbParentType parentType, vec3 position, vec3 size, bool responsive)
 {
-	addAabbEntity(ID, vec3(0.0f), R, S, responsive);
+	addAabbEntity(ID, position, size, responsive);
 	getEntity(ID)->setParent(parentID, parentType);
 }
 
@@ -78,33 +79,39 @@ void AabbEntityManager::update(const vector<GameEntity*>& gameEntities, const ve
 			bool found = false;
 
 			// Determine parent type
-			if (entity->getParentType() == "gameEntity")
+			if (entity->getParentType() == AabbParentType::GAME_ENTITY)
 			{
 				for (auto& gameEntity : gameEntities) // Loop over GAME entities
 				{
 					if (entity->getParentID() == gameEntity->getID()) // Check for match
 					{
-						entity->setTranslation(gameEntity->getTranslation()); // Update translation
+						entity->setTranslation(gameEntity->getTranslation() + entity->getOriginalTranslation()); // Update translation
 						found = true;
 					}
 				}
+
+				// Error logging
+				if (!found)
+				{
+					Logger::throwError("Collision entity \"" + entity->getID() + "\" bound to nonexisting GAME entity \"" + entity->getParentID() + "\"");
+				}
 			}
-			else if(entity->getParentType() == "billboardEntity")
+			else if(entity->getParentType() == AabbParentType::BILLBOARD_ENTITY)
 			{
 				for (auto& billboardEntity : billboardEntities) // Loop over BILLBOARD entities
 				{
 					if (entity->getParentID() == billboardEntity->getID()) // Check for match
 					{
-						entity->setTranslation(billboardEntity->getTranslation()); // Update translation
+						entity->setTranslation(billboardEntity->getTranslation() + entity->getOriginalTranslation()); // Update translation
 						found = true;
 					}
 				}
-			}
 
-			// Error checking
-			if (!found)
-			{
-				Logger::throwError("Collision entity \"" + entity->getID() + "\" bound to nonexisting game entity \"" + entity->getParentID() + "\"");
+				// Error logging
+				if (!found)
+				{
+					Logger::throwError("Collision entity \"" + entity->getID() + "\" bound to nonexisting BILLBOARD entity \"" + entity->getParentID() + "\"");
+				}
 			}
 		}
 

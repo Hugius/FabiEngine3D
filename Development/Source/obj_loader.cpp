@@ -29,7 +29,6 @@ vector<ObjPart> & OBJLoader::loadOBJ(const string& filePath, bool calculateTange
 
 void OBJLoader::clearOBJCache(const string& filePath)
 {
-	std::cout << "jemoeder";
 	if (_objPartsMap.find(filePath) != _objPartsMap.end())
 	{
 		_objPartsMap.erase(filePath);

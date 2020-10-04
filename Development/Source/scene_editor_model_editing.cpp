@@ -25,13 +25,13 @@ void SceneEditor::_updateModelEditing()
 				{
 					// Cursor must be in 3D space, no GUI interruptions, no RMB holding down
 					if (_fe3d.collision_checkCursorInAny() == entityID && _fe3d.misc_isMouseInsideViewport() &&
-						!_gui->getGlobalScreen()->isFocused() && !_fe3d.input_getMouseDown(Input::MOUSE_BUTTON_RIGHT))
+						!_gui->getGlobalScreen()->isFocused() && !_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 					{
 						// Select hovered model
 						_selectModel(entityID);
 
 						// Check if user clicked model
-						if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
+						if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 						{
 							// Check if same model is clicked again
 							if (_selectedModelID != _activeModelID)
@@ -55,7 +55,7 @@ void SceneEditor::_updateModelEditing()
 			if (_selectedModelID == "" && _activeModelID != "" && _fe3d.misc_isMouseInsideViewport() && !_gui->getGlobalScreen()->isFocused())
 			{
 				// LMB pressed
-				if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT) && !_fe3d.input_getMouseDown(Input::MOUSE_BUTTON_RIGHT))
+				if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) && !_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{
 					_activeModelID = "";
 					_rightWindow->setActiveScreen("main");
@@ -75,11 +75,11 @@ void SceneEditor::_updateModelEditing()
 				_rightWindow->setActiveScreen("modelPropertiesMenu");
 
 				// GUI management (pressed)
-				if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
+				if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 				{
 					if (_rightWindow->getScreen("modelPropertiesMenu")->getButton("translation")->isHovered()) // Translation button
 					{
-						_transformation = Transformation::TRANSLATION;
+						_transformation = TransformationType::TRANSLATION;
 
 						// Update buttons hoverability
 						_rightWindow->getScreen("modelPropertiesMenu")->getButton("translation")->setHoverable(false);
@@ -88,7 +88,7 @@ void SceneEditor::_updateModelEditing()
 					}
 					else if (_rightWindow->getScreen("modelPropertiesMenu")->getButton("rotation")->isHovered()) // Rotation button
 					{
-						_transformation = Transformation::ROTATION;
+						_transformation = TransformationType::ROTATION;
 
 						// Update buttons hoverability
 						_rightWindow->getScreen("modelPropertiesMenu")->getButton("translation")->setHoverable(true);
@@ -97,7 +97,7 @@ void SceneEditor::_updateModelEditing()
 					}
 					else if (_rightWindow->getScreen("modelPropertiesMenu")->getButton("scaling")->isHovered()) // Scaling button
 					{
-						_transformation = Transformation::SCALING;
+						_transformation = TransformationType::SCALING;
 
 						// Update buttons hoverability
 						_rightWindow->getScreen("modelPropertiesMenu")->getButton("translation")->setHoverable(true);
@@ -124,7 +124,7 @@ void SceneEditor::_updateModelEditing()
 				vec3 size	  = _fe3d.gameEntity_getSize(_activeModelID);
 
 				// Apply new model position / rotation / size
-				if (_transformation == Transformation::TRANSLATION)
+				if (_transformation == TransformationType::TRANSLATION)
 				{
 					_handleValueChanging("modelPropertiesMenu", "xPlus", "x", position.x, _movementChangingSpeed);
 					_handleValueChanging("modelPropertiesMenu", "xMinus", "x", position.x, -_movementChangingSpeed);
@@ -134,7 +134,7 @@ void SceneEditor::_updateModelEditing()
 					_handleValueChanging("modelPropertiesMenu", "zMinus", "z", position.z, -_movementChangingSpeed);
 					_fe3d.gameEntity_setPosition(_activeModelID, position);
 				}
-				else if (_transformation == Transformation::ROTATION)
+				else if (_transformation == TransformationType::ROTATION)
 				{
 					_handleValueChanging("modelPropertiesMenu", "xPlus", "x", rotation.x, _movementChangingSpeed);
 					_handleValueChanging("modelPropertiesMenu", "xMinus", "x", rotation.x, -_movementChangingSpeed);
@@ -147,7 +147,7 @@ void SceneEditor::_updateModelEditing()
 					rotation.z = std::fmodf(rotation.z, 360.0f);
 					_fe3d.gameEntity_setRotation(_activeModelID, rotation);
 				}
-				else if (_transformation == Transformation::SCALING)
+				else if (_transformation == TransformationType::SCALING)
 				{
 					// Model size
 					vec3 oldSize = size;

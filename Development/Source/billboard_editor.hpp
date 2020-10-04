@@ -27,22 +27,27 @@ private:
 	void _updateBillboardRemoval();
 	void _updateBillboardCamera();
 
+	// Booleans
 	bool _billboardCreationEnabled = false;
 	bool _billboardChoosingEnabled = false;
 	bool _billboardEditingEnabled = false;
 	bool _billboardRemovalEnabled = false;
 	bool _isLoaded = false;
 
+	// Vectors
 	const vec3 _defaultCameraPosition = vec3(0.0f, 1.5f, 5.0f);
 	const vec3 _billboardPosition = vec3(0.0f, 1.5f, 0.0f);
+
+	// Floats
 	const float _scrollWheelDivider = 250.0f;
 	float _cameraRotationSpeed = 0.0f;
 	float _totalCameraRotation = 0.0f;
 
+	// Core
 	FabiEngine3D& _fe3d;
 	shared_ptr<EngineGuiManager> _gui = nullptr;
-	shared_ptr<EngineGuiWindow> _leftWindow = nullptr;
 	
+	// Strings
 	string _hoveredBillboardID = "";
 	string _currentBillboardID = "";
 	string _currentProjectName = "";

@@ -1,6 +1,6 @@
 #pragma once
 
-enum class Input
+enum class InputType
 {
 	NONE				= 0,
 	KEY_SPACE           = ' ',

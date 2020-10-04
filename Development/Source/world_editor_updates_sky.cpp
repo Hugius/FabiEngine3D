@@ -43,7 +43,7 @@ void WorldEditor::_updateSkyMenuMain()
 		screen->getButton("remove")->setHoverable(_fe3d.skyEntity_isExisting("@sky"));
 
 		// GUI management
-		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
+		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
 			if (screen->getButton("create")->isHovered())
 			{
@@ -74,7 +74,7 @@ void WorldEditor::_updateSkyMenuChoice()
 		auto screen = _leftWindow->getScreen("skyEditorMenuChoice");
 
 		// GUI management
-		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
+		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
 			if (screen->getButton("mesh")->isHovered())
 			{
@@ -102,7 +102,7 @@ void WorldEditor::_updateSkyMenuMesh()
 		auto screen = _leftWindow->getScreen("skyEditorMenuMesh");
 
 		// GUI management
-		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
+		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
 			if (screen->getButton("rightTexture")->isHovered())
 			{
@@ -267,7 +267,7 @@ void WorldEditor::_updateSkyMenuOptions()
 		vec3 skyColor = _fe3d.skyEntity_getColor("@sky");
 
 		// GUI management
-		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
+		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
 			if (screen->getButton("rotationSpeed")->isHovered())
 			{
@@ -328,7 +328,7 @@ void WorldEditor::_updateSkyMenuOptions()
 
 void WorldEditor::_updateSkyCamera()
 {
-	if (_fe3d.input_getMouseDown(Input::MOUSE_BUTTON_RIGHT) && !_gui->getGlobalScreen()->isFocused())
+	if (_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_RIGHT) && !_gui->getGlobalScreen()->isFocused())
 	{
 		if (_fe3d.misc_isMouseInsideViewport())
 		{

@@ -40,7 +40,7 @@ void WorldEditor::_updateTerrainMenuMain()
 		screen->getButton("remove")->setHoverable(_fe3d.terrainEntity_isExisting("@terrain"));
 
 		// GUI management
-		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
+		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
 			if (screen->getButton("create")->isHovered() || screen->getButton("edit")->isHovered())
 			{
@@ -67,7 +67,7 @@ void WorldEditor::_updateTerrainMenuChoice()
 	screen->getButton("blendMap")->setHoverable(_fe3d.terrainEntity_isExisting("@terrain"));
 
 	// GUI management
-	if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
+	if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 	{
 		if (screen->getButton("mesh")->isHovered())
 		{
@@ -105,7 +105,7 @@ void WorldEditor::_updateTerrainMenuMesh()
 		screen->getButton("lightness")->setHoverable(existing);
 
 		// GUI management
-		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
+		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
 			if (screen->getButton("heightMap")->isHovered())
 			{
@@ -235,7 +235,7 @@ void WorldEditor::_updateTerrainMenuBlendMap()
 		auto screen = _leftWindow->getScreen("terrainEditorMenuBlendMap");
 
 		// GUI management
-		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
+		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
 			if (screen->getButton("blendMap")->isHovered())
 			{

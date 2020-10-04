@@ -100,7 +100,7 @@ void EngineController::_updateMiscellaneous()
 		input_setKeyTogglingLocked(_gui->getGlobalScreen()->isFocused() || !misc_isMouseInsideViewport());
 
 		// Update wireframe visibility
-		if (input_getKeyToggled(Input::KEY_F))
+		if (input_getKeyToggled(InputType::KEY_F))
 		{
 			misc_enableWireframeRendering();
 		}
@@ -110,7 +110,7 @@ void EngineController::_updateMiscellaneous()
 		}
 
 		// Update debug rendering
-		if (input_getKeyToggled(Input::KEY_H))
+		if (input_getKeyToggled(InputType::KEY_H))
 		{
 			misc_enableDebugRendering();
 		}

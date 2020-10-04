@@ -78,7 +78,7 @@ void TopViewportController::_updateProjectLoading()
 		string clickedButtonID = _gui->getGlobalScreen()->getSelectedChoiceFormButtonID("projectList");
 
 		// Check if user clicked a project name
-		if (clickedButtonID != "" && _fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
+		if (clickedButtonID != "" && _fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
 			// Load current project
 			_currentProjectName = clickedButtonID;
@@ -107,7 +107,7 @@ void TopViewportController::_updateProjectDeletion()
 		string clickedButtonID = _gui->getGlobalScreen()->getSelectedChoiceFormButtonID("projectList");
 
 		// Check if user clicked a project name
-		if (clickedButtonID != "" && _fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
+		if (clickedButtonID != "" && _fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
 			_gui->getGlobalScreen()->addAnswerForm("deleteProject", "Are you sure?", vec2(0.0f, 0.25f));
 			chosenButtonID = clickedButtonID;

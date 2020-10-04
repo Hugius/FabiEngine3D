@@ -3,7 +3,7 @@
 #include "fabi_engine_3d.hpp"
 #include "engine_gui_manager.hpp"
 
-enum class WorldPart 
+enum class WorldPart
 {
 	NONE, 
 	SKY, 

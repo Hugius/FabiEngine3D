@@ -91,7 +91,6 @@ void TerrainEntityRenderer::render(const TerrainEntity* entity)
 		_shader.uploadUniform("u_blendMapRepeatB", entity->getBlendRepeatB());
 		_shader.uploadUniform("u_lightness", entity->getLightness());
 		_shader.uploadUniform("u_specularLightingIntensity", entity->getSpecularLightingIntensity());
-		std::cout << entity->getSpecularLightingIntensity() << std::endl;
 
 		// Texture uniforms
 		_shader.uploadUniform("u_sampler_diffuseMap", 0);

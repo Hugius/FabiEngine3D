@@ -5,7 +5,7 @@
 
 using std::vector;
 
-Collision CollisionDetector::check(const AabbEntity& box, vec3 point, vec3 pointDifference, CollisionDir& collisionDir)
+Collision CollisionDetector::check(const AabbEntity& box, vec3 point, vec3 pointDifference, CollisionDirection& collisionDir)
 {
 	Collision collision(false, false, false);
 
@@ -47,30 +47,30 @@ Collision CollisionDetector::check(const AabbEntity& box, vec3 point, vec3 point
 		bool zCollision = (zDiffFirst <= pointDifference.z || zDiffSecnd <= pointDifference.z);
 		
 		// Perhaps collision
-		if (collisionDir == CollisionDir::NONE)
+		if (collisionDir == CollisionDirection::NONE)
 		{
-			if (xCollision) { collisionDir = CollisionDir::X; }
-			if (yCollision) { collisionDir = CollisionDir::Y; }
-			if (zCollision) { collisionDir = CollisionDir::Z; }
+			if (xCollision) { collisionDir = CollisionDirection::X; }
+			if (yCollision) { collisionDir = CollisionDirection::Y; }
+			if (zCollision) { collisionDir = CollisionDirection::Z; }
 		}
 
 		// Determine side
-		if (collisionDir == CollisionDir::X)
+		if (collisionDir == CollisionDirection::X)
 		{
 			collision.setX(true);
 		}
-		if (collisionDir == CollisionDir::Y)
+		if (collisionDir == CollisionDirection::Y)
 		{
 			collision.setY(true);
 		}
-		if (collisionDir == CollisionDir::Z)
+		if (collisionDir == CollisionDirection::Z)
 		{
 			collision.setZ(true);
 		}
 	}
 	else
 	{
-		collisionDir = CollisionDir::NONE;
+		collisionDir = CollisionDirection::NONE;
 	}
 
 	// Return total collision

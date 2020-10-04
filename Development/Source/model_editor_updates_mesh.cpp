@@ -4,10 +4,10 @@
 
 void ModelEditor::_updateModelEditingMesh()
 {
-	auto screen = _leftWindow->getScreen("modelEditorMenuMesh");
+	auto screen = _gui->getViewport("left")->getWindow("main")->getScreen("modelEditorMenuMesh");
 
 	// GUI management
-	if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
+	if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 	{
 		if (screen->getButton("loadOBJ")->isHovered())
 		{
@@ -31,16 +31,16 @@ void ModelEditor::_updateModelEditingMesh()
 		}
 		else if (screen->getButton("back")->isHovered())
 		{
-			_leftWindow->setActiveScreen("modelEditorMenuChoice");
+			_gui->getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
 		}
 	}
 
 	// Check if OBJ exists
-	bool existing = _fe3d.gameEntity_isExisting(_currentModelName);
+	bool existing = _fe3d.gameEntity_isExisting(_currentModelID);
 	bool hoverable = false;
 	if (existing)
 	{
-		hoverable = existing && !_fe3d.gameEntity_isMultiTextured(_currentModelName);
+		hoverable = existing && !_fe3d.gameEntity_isMultiTextured(_currentModelID);
 	}
 
 	// Editing buttons hoverability

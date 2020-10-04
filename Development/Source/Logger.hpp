@@ -55,7 +55,10 @@ public:
 	}
 
 private:
-	enum class MessageType { INFO, ERR, DEBUG, WARNING };
+	enum class MessageType 
+	{ 
+		INFO, ERR, DEBUG, WARNING 
+	};
 
 	inline static string _level_string[4] = { "Info", "Error", "Debug", "Warn" };
 

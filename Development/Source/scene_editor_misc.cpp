@@ -33,7 +33,7 @@ void SceneEditor::_selectModel(const string& modelID)
 void SceneEditor::_activateModel(const string& modelID)
 {
 	_activeModelID = modelID;
-	_transformation = Transformation::TRANSLATION;
+	_transformation = TransformationType::TRANSLATION;
 
 	// Activate properties screen
 	_rightWindow->getScreen("modelPropertiesMenu")->getButton("translation")->setHoverable(false);
@@ -57,7 +57,7 @@ void SceneEditor::_placeModel(const string& modelID, string modelName, vec3 posi
 {
 	// Add game entity
 	_fe3d.gameEntity_add(modelID, _fe3d.gameEntity_getObjPath(modelName), position, rotation, size);
-	_fe3d.aabbEntity_bindToGameEntity(modelID, _fe3d.aabbEntity_getSize(modelName), true);
+	_fe3d.aabbEntity_bindToGameEntity(modelID, vec3(0.0f), _fe3d.aabbEntity_getSize(modelName), true);
 	
 	// Model properties
 	_fe3d.gameEntity_setStaticToCamera(modelID, _fe3d.gameEntity_isStaticToCamera(modelName));
@@ -109,7 +109,7 @@ void SceneEditor::_placeModel(const string& modelID, vec3 position, vec3 rotatio
 {
 	// Add game entity
 	_fe3d.gameEntity_add(modelID, objPath, position, rotation, size);
-	_fe3d.aabbEntity_bindToGameEntity(modelID, aabbSize, true);
+	_fe3d.aabbEntity_bindToGameEntity(modelID, vec3(0.0f), aabbSize, true);
 
 	// Model properties
 	_fe3d.gameEntity_setStaticToCamera(modelID, isFrozen);
@@ -208,7 +208,7 @@ void SceneEditor::_handleValueChanging(const string& screenID, string buttonID, 
 	float multiplier, float minimum, float maximum)
 {
 	// Plus & minus button handling
-	if (_fe3d.input_getMouseDown(Input::MOUSE_BUTTON_LEFT))
+	if (_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_LEFT))
 	{
 		if (_rightWindow->getScreen(screenID)->getButton(buttonID)->isHovered())
 		{
@@ -247,7 +247,7 @@ void SceneEditor::_updateMiscellaneous()
 	if (_isLoaded)
 	{
 		// Update bounding box visibility
-		if (_fe3d.input_getKeyToggled(Input::KEY_B))
+		if (_fe3d.input_getKeyToggled(InputType::KEY_B))
 		{
 			_fe3d.misc_enableAabbFrameRendering();
 		}

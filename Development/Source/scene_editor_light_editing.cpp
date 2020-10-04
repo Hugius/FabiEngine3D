@@ -19,7 +19,7 @@ void SceneEditor::_updateLightEditing()
 				{
 					// Cursor must be in 3D space, no GUI interruptions, no RMB holding down
 					if (_fe3d.collision_checkCursorInAny() == entityID && _fe3d.misc_isMouseInsideViewport() &&
-						!_gui->getGlobalScreen()->isFocused() && !_fe3d.input_getMouseDown(Input::MOUSE_BUTTON_RIGHT))
+						!_gui->getGlobalScreen()->isFocused() && !_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 					{
 						// Set new selected lightbulb
 						_selectedLightBulbID = entityID;
@@ -36,14 +36,14 @@ void SceneEditor::_updateLightEditing()
 						_fe3d.guiEntity_changeTexture("@@cursor", "engine\\textures\\cursor_pointing.png");
 
 						// Check if user clicked lightbulb
-						if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
+						if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 						{
 							// Check if same lightbulb is clicked again
 							if (_selectedLightBulbID != ACTIVE_BULB_ID)
 							{
 								// Set new active light
 								ACTIVE_BULB_ID = _selectedLightBulbID;
-								_transformation = Transformation::TRANSLATION;
+								_transformation = TransformationType::TRANSLATION;
 
 								// Filling writefields
 								vec3 position = _fe3d.gameEntity_getPosition(ACTIVE_BULB_ID);
@@ -74,7 +74,7 @@ void SceneEditor::_updateLightEditing()
 			if (_selectedLightBulbID == "" && ACTIVE_BULB_ID != "" && _fe3d.misc_isMouseInsideViewport() && !_gui->getGlobalScreen()->isFocused())
 			{
 				// LMB pressed
-				if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT) && !_fe3d.input_getMouseDown(Input::MOUSE_BUTTON_RIGHT))
+				if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) && !_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{
 					ACTIVE_BULB_ID = "";
 					_rightWindow->setActiveScreen("main");
@@ -94,7 +94,7 @@ void SceneEditor::_updateLightEditing()
 				_rightWindow->setActiveScreen("pointLightPropertiesMenu");
 
 				// GUI management (pressed)
-				if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
+				if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 				{
 					if (_rightWindow->getScreen("pointLightPropertiesMenu")->getButton("delete")->isHovered()) // Delete button
 					{

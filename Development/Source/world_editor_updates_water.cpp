@@ -40,7 +40,7 @@ void WorldEditor::_updateWaterMenuMain()
 		screen->getButton("remove")->setHoverable(_fe3d.waterEntity_isExisting("@water"));
 
 		// GUI management
-		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
+		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
 			if (screen->getButton("create")->isHovered())
 			{
@@ -71,7 +71,7 @@ void WorldEditor::_updateWaterMenuChoice()
 		auto screen = _leftWindow->getScreen("waterEditorMenuChoice");
 
 		// GUI management
-		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
+		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
 			if (screen->getButton("mesh")->isHovered())
 			{
@@ -116,7 +116,7 @@ void WorldEditor::_updateWaterMenuMesh()
 		screen->getButton("down")->setHoverable(_fe3d.waterEntity_isExisting("@water"));
 
 		// Pressed LMB
-		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
+		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
 			if (screen->getButton("position")->isHovered())
 			{
@@ -135,7 +135,7 @@ void WorldEditor::_updateWaterMenuMesh()
 		}
 
 		// Holding LMB
-		if (_fe3d.input_getMouseDown(Input::MOUSE_BUTTON_LEFT))
+		if (_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_LEFT))
 		{
 			if (screen->getButton("up")->isHovered())
 			{
@@ -188,7 +188,7 @@ void WorldEditor::_updateWaterMenuEffects()
 		screen->getButton("isSpecular")->setHoverable(normalMapPath != "");
 
 		// GUI management
-		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
+		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
 			if (screen->getButton("uvRepeat")->isHovered())
 			{
@@ -329,7 +329,7 @@ void WorldEditor::_updateWaterMenuOptions()
 		float waveHeightFactor = _fe3d.waterEntity_getWaveHeightFactor("@water");
 
 		// GUI management
-		if (_fe3d.input_getMousePressed(Input::MOUSE_BUTTON_LEFT))
+		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
 			if (screen->getButton("speed")->isHovered())
 			{

@@ -9,7 +9,7 @@ void ModelEditor::_updateMiscellaneous()
 		_fe3d.input_setKeyTogglingLocked(_gui->getGlobalScreen()->isFocused() || !_fe3d.misc_isMouseInsideViewport());
 
 		// Update reference model visibility
-		if (_fe3d.input_getKeyToggled(Input::KEY_R))
+		if (_fe3d.input_getKeyToggled(InputType::KEY_R))
 		{
 			_fe3d.gameEntity_hide("@@cube");
 		}
@@ -69,18 +69,17 @@ void ModelEditor::_loadOBJ()
 			const string newFilePath = filePath.substr(rootDirectory.size());
 
 			// Delete existing entity
-			if (_fe3d.gameEntity_isExisting(_currentModelName))
+			if (_fe3d.gameEntity_isExisting(_currentModelID))
 			{
-				_fe3d.gameEntity_delete(_currentModelName);
+				_fe3d.gameEntity_delete(_currentModelID);
 			}
 
 			// Clear OBJ cache
 			_fe3d.misc_clearOBJCache(newFilePath);
 
 			// Add new game entity
-			_fe3d.gameEntity_add(_currentModelName, newFilePath, vec3(0.0f), vec3(0.0f), vec3(1.0f));
-			_fe3d.aabbEntity_bindToGameEntity(_currentModelName, vec3(1.0f), true);
-			_fe3d.gameEntity_setColor(_currentModelName, vec3(1.0f));
+			_fe3d.gameEntity_add(_currentModelID, newFilePath, vec3(0.0f), vec3(0.0f), vec3(1.0f));
+			_fe3d.gameEntity_setColor(_currentModelID, vec3(1.0f));
 		}
 		else
 		{
@@ -105,7 +104,7 @@ void ModelEditor::_loadDiffuseMap()
 		{
 			const string newFilePath = filePath.substr(rootDirectory.size());
 			_fe3d.misc_clearTextureCache(newFilePath);
-			_fe3d.gameEntity_setDiffuseMap(_currentModelName, newFilePath);
+			_fe3d.gameEntity_setDiffuseMap(_currentModelID, newFilePath);
 		}
 		else
 		{
@@ -130,8 +129,8 @@ void ModelEditor::_loadLightMap()
 		{
 			const string newFilePath = filePath.substr(rootDirectory.size());
 			_fe3d.misc_clearTextureCache(newFilePath);
-			_fe3d.gameEntity_setLightMap(_currentModelName, newFilePath);
-			_fe3d.gameEntity_setLightMapped(_currentModelName, true);
+			_fe3d.gameEntity_setLightMap(_currentModelID, newFilePath);
+			_fe3d.gameEntity_setLightMapped(_currentModelID, true);
 		}
 		else
 		{
@@ -156,8 +155,8 @@ void ModelEditor::_loadReflectionMap()
 		{
 			const string newFilePath = filePath.substr(rootDirectory.size());
 			_fe3d.misc_clearTextureCache(newFilePath);
-			_fe3d.gameEntity_setReflectionMap(_currentModelName, newFilePath);
-			_fe3d.gameEntity_setSkyReflective(_currentModelName, true);
+			_fe3d.gameEntity_setReflectionMap(_currentModelID, newFilePath);
+			_fe3d.gameEntity_setSkyReflective(_currentModelID, true);
 		}
 		else
 		{
@@ -182,8 +181,8 @@ void ModelEditor::_loadNormalMap()
 		{
 			const string newFilePath = filePath.substr(rootDirectory.size());
 			_fe3d.misc_clearTextureCache(newFilePath);
-			_fe3d.gameEntity_setNormalMap(_currentModelName, newFilePath);
-			_fe3d.gameEntity_setNormalMapped(_currentModelName, true);
+			_fe3d.gameEntity_setNormalMap(_currentModelID, newFilePath);
+			_fe3d.gameEntity_setNormalMapped(_currentModelID, true);
 		}
 		else
 		{
@@ -226,7 +225,7 @@ bool ModelEditor::_addModel(const string& modelName, string objName, string diff
 		if (objName != "")
 		{
 			_fe3d.gameEntity_add(modelName, objName, vec3(0.0f, 0.01f, 0.0f), vec3(0.0f), size, false);
-			_fe3d.aabbEntity_bindToGameEntity(modelName, aabbSize, true);
+			_fe3d.aabbEntity_bindToGameEntity(modelName, vec3(0.0f), aabbSize, true);
 			_fe3d.aabbEntity_hide(modelName);
 
 			// Diffuse map

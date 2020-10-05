@@ -55,63 +55,121 @@ void SceneEditor::_activateModel(const string& modelID)
 
 void SceneEditor::_placeModel(const string& newID, string previewID, vec3 position)
 {
-	// Add GAME entity
-	_fe3d.gameEntity_add(newID, _fe3d.gameEntity_getObjPath(previewID), position, vec3(0.0f), _fe3d.gameEntity_getSize(previewID));
-
-	// Bind AABB entities to GAME entity
-	for (auto& previewAabbID : _fe3d.aabbEntity_getBoundIDs(previewID, true, false))
+	// Check if instanced entity
+	if (_fe3d.gameEntity_isInstanced(previewID))
 	{
-		string newAabbID = newID + "_" + previewAabbID.substr(string(previewID + "_").size());
-		_fe3d.aabbEntity_bindToGameEntity(newID, _fe3d.aabbEntity_getPosition(previewAabbID), _fe3d.aabbEntity_getSize(previewAabbID), true, newAabbID);
+		if (_fe3d.gameEntity_isExisting(previewID + "_instanced")) // Add to offsets
+		{
+			auto offsets = _fe3d.gameEntity_getInstancedOffsets(previewID + "_instanced");
+			offsets.push_back(position);
+			_fe3d.gameEntity_setInstanced(previewID + "_instanced", true, offsets);
+		}
+		else
+		{
+			// Create new GAME entity
+			_fe3d.gameEntity_add(previewID + "_instanced", _fe3d.gameEntity_getObjPath(previewID), vec3(0.0f), vec3(0.0f), _fe3d.gameEntity_getSize(previewID));
+			
+			// Fill GAME entity
+			_fe3d.gameEntity_setFaceCulled(previewID + "_instanced", _fe3d.gameEntity_isFaceCulled(previewID));
+			_fe3d.gameEntity_setShadowed(previewID + "_instanced", _fe3d.gameEntity_isShadowed(previewID));
+			_fe3d.gameEntity_setTransparent(previewID + "_instanced", _fe3d.gameEntity_isTransparent(previewID));
+			_fe3d.gameEntity_setSceneReflective(previewID + "_instanced", _fe3d.gameEntity_isSceneReflective(previewID));
+			_fe3d.gameEntity_setSpecularLighted(previewID + "_instanced", _fe3d.gameEntity_isSpecularLighted(previewID));
+			_fe3d.gameEntity_setSpecularFactor(previewID + "_instanced", _fe3d.gameEntity_getSpecularFactor(previewID));
+			_fe3d.gameEntity_setSpecularIntensity(previewID + "_instanced", _fe3d.gameEntity_getSpecularIntensity(previewID));
+			_fe3d.gameEntity_setLightness(previewID + "_instanced", _fe3d.gameEntity_getLightness(previewID));
+			_fe3d.gameEntity_setOriginalLightness(previewID + "_instanced", _fe3d.gameEntity_getOriginalLightness(previewID));
+			_fe3d.gameEntity_setColor(previewID + "_instanced", _fe3d.gameEntity_getColor(previewID));
+			_fe3d.gameEntity_setUvRepeat(previewID + "_instanced", _fe3d.gameEntity_getUvRepeat(previewID));
+
+			// Diffuse map
+			if (_fe3d.gameEntity_getDiffuseMapPath(previewID) != "")
+			{
+				_fe3d.gameEntity_setDiffuseMap(previewID + "_instanced", _fe3d.gameEntity_getDiffuseMapPath(previewID));
+			}
+
+			// Light map
+			if (_fe3d.gameEntity_getLightMapPath(previewID) != "")
+			{
+				_fe3d.gameEntity_setLightMap(previewID + "_instanced", _fe3d.gameEntity_getLightMapPath(previewID));
+				_fe3d.gameEntity_setLightMapped(previewID + "_instanced", true);
+			}
+
+			// Reflection map
+			if (_fe3d.gameEntity_getReflectionMapPath(previewID) != "")
+			{
+				_fe3d.gameEntity_setReflectionMap(previewID + "_instanced", _fe3d.gameEntity_getReflectionMapPath(previewID));
+				_fe3d.gameEntity_setSkyReflective(previewID + "_instanced", true);
+			}
+
+			// Normal map
+			if (_fe3d.gameEntity_getNormalMapPath(previewID) != "")
+			{
+				_fe3d.gameEntity_setNormalMap(previewID + "_instanced", _fe3d.gameEntity_getNormalMapPath(previewID));
+				_fe3d.gameEntity_setNormalMapped(previewID + "_instanced", true);
+			}
+		}
 	}
-	
-	// Model properties
-	_fe3d.gameEntity_setStaticToCamera(newID, _fe3d.gameEntity_isStaticToCamera(previewID));
-	_fe3d.gameEntity_setFaceCulled(newID, _fe3d.gameEntity_isFaceCulled(previewID));
-	_fe3d.gameEntity_setShadowed(newID, _fe3d.gameEntity_isShadowed(previewID));
-	_fe3d.gameEntity_setTransparent(newID, _fe3d.gameEntity_isTransparent(previewID));
-	_fe3d.gameEntity_setSceneReflective(newID, _fe3d.gameEntity_isSceneReflective(previewID));
-	_fe3d.gameEntity_setSpecularLighted(newID, _fe3d.gameEntity_isSpecularLighted(previewID));
-	_fe3d.gameEntity_setSpecularFactor(newID, _fe3d.gameEntity_getSpecularFactor(previewID));
-	_fe3d.gameEntity_setSpecularIntensity(newID, _fe3d.gameEntity_getSpecularIntensity(previewID));
-	_fe3d.gameEntity_setLightness(newID, _fe3d.gameEntity_getLightness(previewID));
-	_fe3d.gameEntity_setOriginalLightness(newID, _fe3d.gameEntity_getOriginalLightness(previewID));
-	_fe3d.gameEntity_setColor(newID, _fe3d.gameEntity_getColor(previewID));
-	_fe3d.gameEntity_setUvRepeat(newID, _fe3d.gameEntity_getUvRepeat(previewID));
-	_fe3d.gameEntity_setLevelOfDetailEntity(newID, _fe3d.gameEntity_getLevelOfDetailEntityID(previewID));
-
-	// Diffuse map
-	if (_fe3d.gameEntity_getDiffuseMapPath(previewID) != "")
+	else // Normal entity
 	{
-		_fe3d.gameEntity_setDiffuseMap(newID, _fe3d.gameEntity_getDiffuseMapPath(previewID));
-	}
+		// Add GAME entity
+		_fe3d.gameEntity_add(newID, _fe3d.gameEntity_getObjPath(previewID), position, vec3(0.0f), _fe3d.gameEntity_getSize(previewID));
 
-	// Light map
-	if (_fe3d.gameEntity_getLightMapPath(previewID) != "")
-	{
-		_fe3d.gameEntity_setLightMap(newID, _fe3d.gameEntity_getLightMapPath(previewID));
-		_fe3d.gameEntity_setLightMapped(newID, true);
-	}
+		// Bind AABB entities to GAME entity
+		for (auto& previewAabbID : _fe3d.aabbEntity_getBoundIDs(previewID, true, false))
+		{
+			string newAabbID = newID + "_" + previewAabbID.substr(string(previewID + "_").size());
+			_fe3d.aabbEntity_bindToGameEntity(newID, _fe3d.aabbEntity_getPosition(previewAabbID), _fe3d.aabbEntity_getSize(previewAabbID), true, newAabbID);
+		}
 
-	// Reflection map
-	if (_fe3d.gameEntity_getReflectionMapPath(previewID) != "")
-	{
-		_fe3d.gameEntity_setReflectionMap(newID, _fe3d.gameEntity_getReflectionMapPath(previewID));
-		_fe3d.gameEntity_setSkyReflective(newID, true);
-	}
+		// Model properties
+		_fe3d.gameEntity_setStaticToCamera(newID, _fe3d.gameEntity_isStaticToCamera(previewID));
+		_fe3d.gameEntity_setFaceCulled(newID, _fe3d.gameEntity_isFaceCulled(previewID));
+		_fe3d.gameEntity_setShadowed(newID, _fe3d.gameEntity_isShadowed(previewID));
+		_fe3d.gameEntity_setTransparent(newID, _fe3d.gameEntity_isTransparent(previewID));
+		_fe3d.gameEntity_setSceneReflective(newID, _fe3d.gameEntity_isSceneReflective(previewID));
+		_fe3d.gameEntity_setSpecularLighted(newID, _fe3d.gameEntity_isSpecularLighted(previewID));
+		_fe3d.gameEntity_setSpecularFactor(newID, _fe3d.gameEntity_getSpecularFactor(previewID));
+		_fe3d.gameEntity_setSpecularIntensity(newID, _fe3d.gameEntity_getSpecularIntensity(previewID));
+		_fe3d.gameEntity_setLightness(newID, _fe3d.gameEntity_getLightness(previewID));
+		_fe3d.gameEntity_setOriginalLightness(newID, _fe3d.gameEntity_getOriginalLightness(previewID));
+		_fe3d.gameEntity_setColor(newID, _fe3d.gameEntity_getColor(previewID));
+		_fe3d.gameEntity_setUvRepeat(newID, _fe3d.gameEntity_getUvRepeat(previewID));
+		_fe3d.gameEntity_setLevelOfDetailEntity(newID, _fe3d.gameEntity_getLevelOfDetailEntityID(previewID));
 
-	// Normal map
-	if (_fe3d.gameEntity_getNormalMapPath(previewID) != "")
-	{
-		_fe3d.gameEntity_setNormalMap(newID, _fe3d.gameEntity_getNormalMapPath(previewID));
-		_fe3d.gameEntity_setNormalMapped(newID, true);
+		// Diffuse map
+		if (_fe3d.gameEntity_getDiffuseMapPath(previewID) != "")
+		{
+			_fe3d.gameEntity_setDiffuseMap(newID, _fe3d.gameEntity_getDiffuseMapPath(previewID));
+		}
+
+		// Light map
+		if (_fe3d.gameEntity_getLightMapPath(previewID) != "")
+		{
+			_fe3d.gameEntity_setLightMap(newID, _fe3d.gameEntity_getLightMapPath(previewID));
+			_fe3d.gameEntity_setLightMapped(newID, true);
+		}
+
+		// Reflection map
+		if (_fe3d.gameEntity_getReflectionMapPath(previewID) != "")
+		{
+			_fe3d.gameEntity_setReflectionMap(newID, _fe3d.gameEntity_getReflectionMapPath(previewID));
+			_fe3d.gameEntity_setSkyReflective(newID, true);
+		}
+
+		// Normal map
+		if (_fe3d.gameEntity_getNormalMapPath(previewID) != "")
+		{
+			_fe3d.gameEntity_setNormalMap(newID, _fe3d.gameEntity_getNormalMapPath(previewID));
+			_fe3d.gameEntity_setNormalMapped(newID, true);
+		}
 	}
 }
 
 void SceneEditor::_placeModel(const string& modelID, vec3 position, vec3 rotation, vec3 size, string objPath, string diffuseMapPath,
 	string lightMapPath, string reflectionMapPath, string normalMapPath, bool isFrozen, bool isFaceCulled, 
 	bool isShadowed, bool isTransparent, bool isReflective, bool isSpecular, float specularFactor, 
-	float specularIntensity, float lightness, vec3 color, float uvRepeat, string lodEntityID,
+	float specularIntensity, float lightness, vec3 color, float uvRepeat, string lodEntityID, bool isInstanced,
 	vector<string> aabbNames, vector<vec3> aabbPositions, vector<vec3> aabbSizes)
 {
 	// Add game entity
@@ -137,6 +195,7 @@ void SceneEditor::_placeModel(const string& modelID, vec3 position, vec3 rotatio
 	_fe3d.gameEntity_setColor(modelID, color);
 	_fe3d.gameEntity_setUvRepeat(modelID, uvRepeat);
 	_fe3d.gameEntity_setLevelOfDetailEntity(modelID, lodEntityID);
+	_fe3d.gameEntity_setInstanced(modelID, isInstanced, {});
 
 	// Diffuse map
 	if (diffuseMapPath != "")

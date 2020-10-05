@@ -46,12 +46,13 @@ void ModelEditor::initializeGUI()
 	
 	// Left-viewport: mainWindow - modelEditorMenuOptions
 	leftWindow->addScreen("modelEditorMenuOptions");
-	leftWindow->getScreen("modelEditorMenuOptions")->addButton("isFaceculled", vec2(0.0f, 0.75f), vec2(GW("Culling: OFF"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Culling: OFF", LVPC::textColor, LVPC::textHoverColor);
-	leftWindow->getScreen("modelEditorMenuOptions")->addButton("isTransparent", vec2(0.0f, 0.45f), vec2(GW("Alpha: OFF"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Alpha: OFF", LVPC::textColor, LVPC::textHoverColor);
-	leftWindow->getScreen("modelEditorMenuOptions")->addButton("setColor", vec2(0.0f, 0.15f), vec2(GW("Set color"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Set color", LVPC::textColor, LVPC::textHoverColor);
-	leftWindow->getScreen("modelEditorMenuOptions")->addButton("uvRepeat", vec2(0.0f, -0.15f), vec2(GW("Set UV-repeat"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Set UV-repeat", LVPC::textColor, LVPC::textHoverColor);
-	leftWindow->getScreen("modelEditorMenuOptions")->addButton("lodID", vec2(0.0f, -0.45f), vec2(GW("Level of detail"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Level of detail", LVPC::textColor, LVPC::textHoverColor);
-	leftWindow->getScreen("modelEditorMenuOptions")->addButton("back", vec2(0.0f, -0.75f), vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen("modelEditorMenuOptions")->addButton("isFaceculled", vec2(0.0f, 0.7875f), vec2(GW("Culling: OFF"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Culling: OFF", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen("modelEditorMenuOptions")->addButton("isTransparent", vec2(0.0f, 0.525f), vec2(GW("Alpha: OFF"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Alpha: OFF", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen("modelEditorMenuOptions")->addButton("isInstanced", vec2(0.0f, 0.2625f), vec2(GW("Instanced: OFF"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Instanced: OFF", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen("modelEditorMenuOptions")->addButton("setColor", vec2(0.0f, 0.0f), vec2(GW("Set color"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Set color", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen("modelEditorMenuOptions")->addButton("uvRepeat", vec2(0.0f, -0.2625f), vec2(GW("Set UV-repeat"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Set UV-repeat", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen("modelEditorMenuOptions")->addButton("lodID", vec2(0.0f, -0.525f), vec2(GW("Level of detail"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Level of detail", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen("modelEditorMenuOptions")->addButton("back", vec2(0.0f, -0.7875f), vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
 
 	// Left-viewport: mainWindow - modelEditorMenuLighting
 	leftWindow->addScreen("modelEditorMenuLighting");

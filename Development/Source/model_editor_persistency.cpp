@@ -31,7 +31,7 @@ void ModelEditor::loadModels()
 			// Placeholder variables
 			string modelName, objPath, diffuseMapPath, lightMapPath, reflectionMapPath, normalMapPath, lodEntityID;
 			float uvRepeat, specularFactor, specularIntensity, lightness;
-			bool isFaceCulled, isShadowed, isTransparent, isSpecular, isReflective;
+			bool isFaceCulled, isShadowed, isTransparent, isSpecular, isReflective, isInstanced;
 			vec3 modelSize, color;
 			vector<string> aabbNames;
 			vector<vec3> aabbPositions;
@@ -63,7 +63,8 @@ void ModelEditor::loadModels()
 				color.g >>
 				color.b >>
 				uvRepeat >>
-				lodEntityID;
+				lodEntityID >>
+				isInstanced;
 
 			// Extract AABB data from file
 			while (true)
@@ -102,7 +103,7 @@ void ModelEditor::loadModels()
 			// Add new model
 			_addModel(modelName, objPath, diffuseMapPath, lightMapPath, reflectionMapPath, normalMapPath, modelSize, isFaceCulled, isShadowed,
 				isTransparent, isReflective, isSpecular, specularFactor, specularIntensity, lightness,
-				vec3(color.r, color.g, color.b), uvRepeat, lodEntityID, aabbNames, aabbPositions, aabbSizes);
+				vec3(color.r, color.g, color.b), uvRepeat, lodEntityID, isInstanced, aabbNames, aabbPositions, aabbSizes);
 		}
 
 		// Close file
@@ -151,6 +152,7 @@ void ModelEditor::save()
 				auto color = _fe3d.gameEntity_getColor(modelName);
 				auto uvRepeat = _fe3d.gameEntity_getUvRepeat(modelName);
 				auto lodEntityID = _fe3d.gameEntity_getLevelOfDetailEntityID(modelName);
+				auto isInstanced = _fe3d.gameEntity_isInstanced(modelName);
 
 				// AABB data
 				vector<string> aabbNames;
@@ -202,7 +204,8 @@ void ModelEditor::save()
 					color.g << " " <<
 					color.b << " " <<
 					uvRepeat << " " <<
-					lodEntityID << " ";
+					lodEntityID << " " <<
+					isInstanced << " ";
 
 				// Write AABB data
 				for (unsigned int i = 0; i < aabbNames.size(); i++)

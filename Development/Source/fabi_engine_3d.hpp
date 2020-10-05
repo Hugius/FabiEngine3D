@@ -243,10 +243,12 @@ public:
 	void		   gameEntity_setMaxY(const string& ID, float y);
 	void		   gameEntity_setUvRepeat(const string& ID, float repeat);
 	void		   gameEntity_setLevelOfDetailDistance(float distance);
+	void		   gameEntity_setInstanced(const string& ID, bool instanced, vector<vec3> offsets);
 
 	// Game entity interface - getters
 	bool		   gameEntity_isExisting(const string& ID);
 	bool		   gameEntity_isVisible(const string& ID);
+	bool		   gameEntity_isInstanced(const string& ID);
 	bool		   gameEntity_isMultiTextured(const string& ID);
 	bool		   gameEntity_isTransparent(const string& ID);
 	bool		   gameEntity_isFaceCulled(const string& ID);
@@ -276,6 +278,7 @@ public:
 	string		   gameEntity_getNormalMapPath(const string& ID);
 	string		   gameEntity_getReflectionMapPath(const string& ID);
 	string		   gameEntity_getLevelOfDetailEntityID(const string& ID);
+	vector<vec3>   gameEntity_getInstancedOffsets(const string& ID);
 	vector<string> gameEntity_getAllIDs();
 	vector<string> gameEntity_getGroupIDs(const string& ID);
 

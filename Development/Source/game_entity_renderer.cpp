@@ -180,8 +180,8 @@ void GameEntityRenderer::render(const GameEntity* entity)
 			if (buffer->isInstanced())
 			{
 				_shader.uploadUniform("u_isInstanced", true);
-				glDrawArraysInstanced(GL_TRIANGLES, 0, buffer->getVertexCount(), buffer->getOffsetCount());
-				_renderBus.increaseTriangleCount((buffer->getOffsetCount() * buffer->getVertexCount()) / 3);
+				glDrawArraysInstanced(GL_TRIANGLES, 0, buffer->getVertexCount(), buffer->getInstancedOffsetCount());
+				_renderBus.increaseTriangleCount((buffer->getInstancedOffsetCount() * buffer->getVertexCount()) / 3);
 			}
 			else
 			{

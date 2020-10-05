@@ -100,7 +100,7 @@ void DepthRenderer::render(const GameEntity* entity)
 			if (buffer->isInstanced())
 			{
 				_shader.uploadUniform("u_isInstanced", true);
-				glDrawArraysInstanced(GL_TRIANGLES, 0, buffer->getVertexCount(), buffer->getOffsetCount());
+				glDrawArraysInstanced(GL_TRIANGLES, 0, buffer->getVertexCount(), buffer->getInstancedOffsetCount());
 			}
 			else
 			{

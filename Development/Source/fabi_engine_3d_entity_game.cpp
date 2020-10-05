@@ -173,6 +173,14 @@ bool FabiEngine3D::gameEntity_isVisible(const string& ID)
 	return _core->_gameEntityManager.getEntity(ID)->isVisible();
 }
 
+bool FabiEngine3D::gameEntity_isInstanced(const string& ID)
+{
+	if (!_core->_gameEntityManager.getEntity(ID)->getOglBuffers().empty())
+	{
+		return _core->_gameEntityManager.getEntity(ID)->getOglBuffer(0)->isInstanced();
+	}
+}
+
 bool FabiEngine3D::gameEntity_isMultiTextured(const string& ID)
 {
 	return (_core->_gameEntityManager.getEntity(ID)->getOglBuffers().size() > 1);
@@ -318,6 +326,32 @@ void FabiEngine3D::gameEntity_setLevelOfDetailDistance(float distance)
 	_core->_gameEntityManager.setLodDistance(distance);
 }
 
+void FabiEngine3D::gameEntity_setInstanced(const string& ID, bool instanced, vector<vec3> offsets)
+{
+	if (instanced) // Add instancing
+	{
+		for (auto& buffer : _core->_gameEntityManager.getEntity(ID)->getOglBuffers())
+		{
+			if (buffer->isInstanced())
+			{
+				buffer->removeInstancing();
+			}
+
+			buffer->addInstancing(offsets);
+		}
+	}
+	else // Remove instancing
+	{
+		for (auto& buffer : _core->_gameEntityManager.getEntity(ID)->getOglBuffers())
+		{
+			if (buffer->isInstanced())
+			{
+				buffer->removeInstancing();
+			}
+		}
+	}
+}
+
 void FabiEngine3D::gameEntity_setStaticToCamera(const string& ID, bool staticToCamera)
 {
 	_core->_gameEntityManager.getEntity(ID)->setCameraStatic(staticToCamera);
@@ -396,6 +430,18 @@ string FabiEngine3D::gameEntity_getReflectionMapPath(const string& ID)
 string FabiEngine3D::gameEntity_getLevelOfDetailEntityID(const string& ID)
 {
 	return _core->_gameEntityManager.getEntity(ID)->getLodEntityID();
+}
+
+vector<vec3> FabiEngine3D::gameEntity_getInstancedOffsets(const string& ID)
+{
+	if (gameEntity_isInstanced(ID))
+	{
+		return _core->_gameEntityManager.getEntity(ID)->getOglBuffer(0)->getInstancedOffsets();
+	}
+	else
+	{
+		return {};
+	}
 }
 
 void FabiEngine3D::gameEntity_setAlpha(const string& ID, float alpha)

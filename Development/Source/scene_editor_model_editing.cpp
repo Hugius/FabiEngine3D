@@ -200,5 +200,20 @@ void SceneEditor::_updateModelEditing()
 				}
 			}
 		}
+
+		// Only the delete button should be availible for instanced entities
+		if (_activeModelID != "")
+		{
+			_rightWindow->getScreen("modelPropertiesMenu")->getButton("translation")->setHoverable(_fe3d.gameEntity_isInstanced(_activeModelID));
+			_rightWindow->getScreen("modelPropertiesMenu")->getButton("rotation")->setHoverable(_fe3d.gameEntity_isInstanced(_activeModelID));
+			_rightWindow->getScreen("modelPropertiesMenu")->getButton("scaling")->setHoverable(_fe3d.gameEntity_isInstanced(_activeModelID));
+			_rightWindow->getScreen("modelPropertiesMenu")->getButton("freeze")->setHoverable(_fe3d.gameEntity_isInstanced(_activeModelID));
+			_rightWindow->getScreen("modelPropertiesMenu")->getButton("xPlus")->setHoverable(_fe3d.gameEntity_isInstanced(_activeModelID));
+			_rightWindow->getScreen("modelPropertiesMenu")->getButton("xMinus")->setHoverable(_fe3d.gameEntity_isInstanced(_activeModelID));
+			_rightWindow->getScreen("modelPropertiesMenu")->getButton("yPlus")->setHoverable(_fe3d.gameEntity_isInstanced(_activeModelID));
+			_rightWindow->getScreen("modelPropertiesMenu")->getButton("yMinus")->setHoverable(_fe3d.gameEntity_isInstanced(_activeModelID));
+			_rightWindow->getScreen("modelPropertiesMenu")->getButton("zPlus")->setHoverable(_fe3d.gameEntity_isInstanced(_activeModelID));
+			_rightWindow->getScreen("modelPropertiesMenu")->getButton("zMinus")->setHoverable(_fe3d.gameEntity_isInstanced(_activeModelID));
+		}
 	}
 }

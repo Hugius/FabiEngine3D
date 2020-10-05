@@ -75,7 +75,7 @@ private:
 	void _placeModel(const string& modelID, vec3 position, vec3 rotation, vec3 size, string objPath, string diffuseMapPath, 
 		string lightMapPath, string reflectionMapPath, string normalMapPath, bool isFrozen, 
 		bool isFaceCulled, bool isShadowed, bool isTransparent, bool isReflective, bool isSpecular, 
-		float specularFactor, float specularIntensity, float lightness, vec3 color, float uvRepeat, string lodEntityID,
+		float specularFactor, float specularIntensity, float lightness, vec3 color, float uvRepeat, string lodEntityID, bool isInstanced,
 		vector<string> aabbNames, vector<vec3> aabbPositions, vector<vec3> aabbSizes);
 	void _updateModelBlinking(const string& modelID, int& multiplier);
 	void _updateLightbulbAnimation(const string& modelID, int& multiplier);

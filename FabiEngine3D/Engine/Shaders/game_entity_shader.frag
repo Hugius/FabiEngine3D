@@ -112,7 +112,7 @@ void main()
 	color  = applySceneReflections(color); // Scene reflection
 	color *= vec3((ambient + directional) * shadow + point); // Lighting
 	color  = applyLightMapping(color); // LightMapping
-	color *= u_lightness * (shadow != vec3(1.0f) ? 1.0f : 0.75f); // Lightness
+	color *= u_lightness; // Lightness
     color  = applyFog(color); // Fog
 
 	// Set final color

@@ -213,7 +213,7 @@ vector<string>& ModelEditor::getModelNames()
 
 bool ModelEditor::_addModel(const string& modelName, string objName, string diffuseMapName, string lightMapName, string reflectionMapName, string normalMapName,
 	vec3 size, bool isFaceCulled, bool isShadowed, bool isTransparent, bool isReflective, bool isSpecular,
-	float specularFactor, float specularIntensity, float lightness, vec3 color, float uvRepeat, string lodEntityID,
+	float specularFactor, float specularIntensity, float lightness, vec3 color, float uvRepeat, string lodEntityID, bool isInstanced,
 	vector<string> aabbNames, vector<vec3> aabbPositions, vector<vec3> aabbSizes)
 {
 	// If model name not existing yet
@@ -266,6 +266,7 @@ bool ModelEditor::_addModel(const string& modelName, string objName, string diff
 			_fe3d.gameEntity_setTransparent(modelName, isTransparent);
 			_fe3d.gameEntity_setSceneReflective(modelName, isReflective);
 			_fe3d.gameEntity_setSpecularLighted(modelName, isSpecular);
+			_fe3d.gameEntity_setInstanced(modelName, isInstanced, { vec3(0.0f) });
 
 			// Set other options
 			_fe3d.gameEntity_setSpecularFactor(modelName, specularFactor);

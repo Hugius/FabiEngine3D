@@ -17,6 +17,10 @@ void ModelEditor::_updateModelEditingOptions()
 		{
 			_fe3d.gameEntity_setTransparent(_currentModelID, !_fe3d.gameEntity_isTransparent(_currentModelID));
 		}
+		else if (screen->getButton("isInstanced")->isHovered())
+		{
+			_fe3d.gameEntity_setInstanced(_currentModelID, !_fe3d.gameEntity_isInstanced(_currentModelID), { vec3(0.0f) });
+		}
 		else if (screen->getButton("setColor")->isHovered())
 		{
 			_gui->getGlobalScreen()->addValueForm("colorR", "R(0-255)", _fe3d.gameEntity_getColor(_currentModelID).r * 255.0f, vec2(-0.25f, 0.0f), vec2(0.2f, 0.1f));
@@ -44,8 +48,11 @@ void ModelEditor::_updateModelEditingOptions()
 	auto isCulled = _fe3d.gameEntity_isFaceCulled(_currentModelID);
 	auto transparentID = screen->getButton("isTransparent")->getTextfield()->getEntityID();
 	auto isTransparent = _fe3d.gameEntity_isTransparent(_currentModelID);
+	auto instancedID = screen->getButton("isInstanced")->getTextfield()->getEntityID();
+	auto isInstanced = _fe3d.gameEntity_isInstanced(_currentModelID);
 	_fe3d.textEntity_setTextContent(faceculledID, isCulled ? "Culling: ON" : "Culling: OFF");
 	_fe3d.textEntity_setTextContent(transparentID, isTransparent ? "Alpha: ON" : "Alpha: OFF");
+	_fe3d.textEntity_setTextContent(instancedID, isInstanced ? "Instanced: ON" : "Instanced: OFF");
 
 	// Setting model color
 	vec3 newColor = _fe3d.gameEntity_getColor(_currentModelID) * 255.0f;
@@ -76,4 +83,6 @@ void ModelEditor::_updateModelEditingOptions()
 			_fe3d.gameEntity_setLevelOfDetailEntity(_currentModelID, "@" + lodID);
 		}
 	}
+
+	std::cout << "hoii";
 }

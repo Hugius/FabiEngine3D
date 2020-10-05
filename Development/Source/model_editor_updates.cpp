@@ -110,7 +110,7 @@ void ModelEditor::_updateEditingScreen()
 						_fe3d.gameEntity_hide(_currentModelID);
 					}
 
-					// Reset variables and go back to last screen
+					// Reset variables and go back to main screen
 					_modelEditingEnabled = false;
 					_currentModelID = "";
 					_gui->getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuMain");
@@ -133,6 +133,7 @@ void ModelEditor::_updateEditingScreen()
 			screen->getButton("options")->setHoverable(hoverable);
 			screen->getButton("lighting")->setHoverable(hoverable);
 			screen->getButton("size")->setHoverable(hoverable);
+			screen->getButton("aabb")->setHoverable(hoverable && !_fe3d.gameEntity_isInstanced(_currentModelID));
 		}
 		else if (_gui->getViewport("left")->getWindow("main")->getActiveScreen()->getID() == "modelEditorMenuMesh")
 		{
@@ -172,7 +173,7 @@ void ModelEditor::_updateCreationScreen()
 				if (newModelName[0] != '@')
 				{
 					// Add model and check if not already existing
-					if (_addModel("@" + newModelName, "", "", "", "", "", vec3(0.0f), 0, 1, 0, 0, 0, 1.0f, 1.0f, 1.0f, vec3(1.0f), 1.0f, "", {}, {}, {}))
+					if (_addModel("@" + newModelName, "", "", "", "", "", vec3(0.0f), 0, 1, 0, 0, 0, 1.0f, 1.0f, 1.0f, vec3(1.0f), 1.0f, "", false, {}, {}, {}))
 					{
 						// Go to editor screen
 						_gui->getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
@@ -272,14 +273,19 @@ void ModelEditor::_updateModelRemoval()
 
 			if (_gui->getGlobalScreen()->isAnswerFormConfirmed("removeModel"))
 			{
+				// Delete entity
 				if (_fe3d.gameEntity_isExisting(_currentModelID))
 				{
 					_fe3d.gameEntity_delete(_currentModelID);
 				}
 
+				// Delete from name record
 				_modelNames.erase(std::remove(_modelNames.begin(), _modelNames.end(), _currentModelID), _modelNames.end());
 				_modelRemovalEnabled = false;
 				_currentModelID = "";
+
+				// Go back to main screen
+				_gui->getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuMain");
 			}
 			else if (_gui->getGlobalScreen()->isAnswerFormCancelled("removeModel"))
 			{

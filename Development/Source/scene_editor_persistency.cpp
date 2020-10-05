@@ -59,7 +59,7 @@ bool SceneEditor::_loadSceneFile(bool overwriteCamera)
 				string objPath, diffuseMapPath, lightMapPath, reflectionMapPath, normalMapPath, lodEntityID;
 				vec3 position, rotation, size, color;
 				float uvRepeat, specularFactor, specularIntensity, lightness;
-				bool isFaceculled, isShadowed, isTransparent, isSpecular, isReflective, isFrozen;
+				bool isFaceculled, isShadowed, isTransparent, isSpecular, isReflective, isFrozen, isInstanced;
 				vector<string> aabbNames;
 				vector<vec3> aabbPositions;
 				vector<vec3> aabbSizes;
@@ -93,7 +93,8 @@ bool SceneEditor::_loadSceneFile(bool overwriteCamera)
 					color.g >>
 					color.b >>
 					uvRepeat >>
-					lodEntityID;
+					lodEntityID >>
+					isInstanced;
 
 				// Extract AABB data from file
 				while (true)
@@ -132,7 +133,7 @@ bool SceneEditor::_loadSceneFile(bool overwriteCamera)
 				// Add the model
 				_placeModel(modelID, position, rotation, size, objPath, diffuseMapPath, lightMapPath, reflectionMapPath, normalMapPath, isFrozen,
 					isFaceculled, isShadowed, isTransparent, isReflective, isSpecular, specularFactor, specularIntensity, lightness,
-					color, uvRepeat, lodEntityID, aabbNames, aabbPositions, aabbSizes);
+					color, uvRepeat, lodEntityID, isInstanced, aabbNames, aabbPositions, aabbSizes);
 
 				// Hide LOD entity
 				if (makeInvisible)
@@ -345,6 +346,7 @@ void SceneEditor::save()
 				auto color = _fe3d.gameEntity_getColor(entityID);
 				auto uvRepeat = _fe3d.gameEntity_getUvRepeat(entityID);
 				auto lodEntityID = _fe3d.gameEntity_getLevelOfDetailEntityID(entityID);
+				auto isInstanced = _fe3d.gameEntity_isInstanced(entityID);
 
 				// AABB data
 				vector<string> aabbNames;
@@ -401,7 +403,8 @@ void SceneEditor::save()
 					color.g << " " <<
 					color.b << " " <<
 					uvRepeat << " " <<
-					lodEntityID << " ";
+					lodEntityID << " " <<
+					isInstanced << " ";
 
 				// Write AABB data
 				for (unsigned int i = 0; i < aabbNames.size(); i++)

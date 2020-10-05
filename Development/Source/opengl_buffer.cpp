@@ -1,15 +1,12 @@
 #include "opengl_buffer.hpp"
 
+#include <iostream>
+
 // 3D
 OpenGLBuffer::OpenGLBuffer(BufferType type, float data[], int dataCount)
 {
 	_bufferType = type;
 	_create3D(type, data, dataCount);
-}
-
-OpenGLBuffer::OpenGLBuffer(float data[], int dataCount, const vector<vec3> & offsets)
-{
-	_create3D_instanced(data, dataCount, offsets);
 }
 
 // 2D
@@ -82,35 +79,6 @@ void OpenGLBuffer::_create3D(BufferType type, float data[], int dataCount)
 	glBindVertexArray(0);
 }
 
-void OpenGLBuffer::_create3D_instanced(float data[], int dataCount, const vector<vec3> & offsets)
-{
-	// Create 3D
-	_create3D(BufferType::MODEL, data, dataCount);
-
-	// Create instanced VBO
-	glGenBuffers(1, &_vbo_instanced);
-
-	// Bind VAO
-	glBindVertexArray(_vao);
-
-	// Bind instanced VBO
-	glBindBuffer(GL_ARRAY_BUFFER, _vbo_instanced);
-	glBufferData(GL_ARRAY_BUFFER, offsets.size() * sizeof(vec3), &offsets[0], GL_STATIC_DRAW);
-
-	// Fill instanced VBO
-	glVertexAttribPointer(5, 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*)0);
-	glEnableVertexAttribArray(3);
-	glVertexAttribDivisor(3, 1);
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-	// Unbind VAO
-	glBindVertexArray(0);
-
-	// Other
-	_isInstanced = true;
-	_offsetCount = offsets.size();
-}
-
 void OpenGLBuffer::_create2D(float x, float y, float w, float h, bool centered)
 {
 	// Generate vertices
@@ -175,17 +143,52 @@ OpenGLBuffer::~OpenGLBuffer()
 	glDeleteBuffers(1, &_vbo_instanced);
 }
 
+void OpenGLBuffer::addInstancing(const vector<vec3>& offsets)
+{
+	// Create instanced VBO
+	glGenBuffers(1, &_vbo_instanced);
+
+	// Bind VAO
+	glBindVertexArray(_vao);
+
+	// Bind instanced VBO
+	glBindBuffer(GL_ARRAY_BUFFER, _vbo_instanced);
+	glBufferData(GL_ARRAY_BUFFER, offsets.size() * sizeof(vec3), &offsets[0], GL_STATIC_DRAW);
+
+	// Fill instanced VBO
+	glVertexAttribPointer(4, 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*)0);
+	glEnableVertexAttribArray(4);
+	glVertexAttribDivisor(4, 1);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+	// Unbind VAO
+	glBindVertexArray(0);
+
+	// Other
+	_isInstanced = true;
+	_offsetCount = offsets.size();
+	_instancedOffsets = offsets;
+}
+
+void OpenGLBuffer::removeInstancing()
+{
+	glDeleteBuffers(1, &_vbo_instanced);
+	_isInstanced = false;
+	_offsetCount = 0;
+	_instancedOffsets.clear();
+}
+
 const GLuint OpenGLBuffer::getVAO() const
 {
 	return _vao;
 }
 
-const int OpenGLBuffer::getVertexCount() const
+const unsigned int OpenGLBuffer::getVertexCount() const
 {
 	return _vertexCount;
 }
 
-const int OpenGLBuffer::getOffsetCount() const
+const unsigned int OpenGLBuffer::getInstancedOffsetCount() const
 {
 	return _offsetCount;
 }
@@ -198,4 +201,9 @@ const bool OpenGLBuffer::isInstanced() const
 const BufferType OpenGLBuffer::getBufferType() const
 {
 	return _bufferType;
+}
+
+const vector<vec3> OpenGLBuffer::getInstancedOffsets() const
+{
+	return _instancedOffsets;
 }

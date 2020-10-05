@@ -72,13 +72,14 @@ void ModelEditor::initializeGUI()
 
 	// Left-viewport: mainWindow - modelEditorMenuAabb
 	leftWindow->addScreen("modelEditorMenuAabb");
-	leftWindow->getScreen("modelEditorMenuAabb")->addButton("add", vec2(0.0f, 0.7875f), vec2(GW("Create AABB"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Create AABB", LVPC::textColor, LVPC::textHoverColor);
-	leftWindow->getScreen("modelEditorMenuAabb")->addButton("edit", vec2(0.0f, 0.525f), vec2(GW("Edit AABB"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Edit AABB", LVPC::textColor, LVPC::textHoverColor);
-	leftWindow->getScreen("modelEditorMenuAabb")->addButton("delete", vec2(0.0f, 0.2625f), vec2(GW("Delete"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Delete", LVPC::textColor, LVPC::textHoverColor);
-	leftWindow->getScreen("modelEditorMenuAabb")->addButton("toggleMove", vec2(0.0f, 0.0f), vec2(GW("Box move: OFF"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Box move: OFF", LVPC::textColor, LVPC::textHoverColor);
-	leftWindow->getScreen("modelEditorMenuAabb")->addButton("toggleResize", vec2(0.0f, -0.2625f), vec2(GW("Box resize: OFF"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Box resize: OFF", LVPC::textColor, LVPC::textHoverColor);
-	leftWindow->getScreen("modelEditorMenuAabb")->addButton("direction", vec2(0.0f, -0.525f), vec2(GW("Direction: X"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Direction: X", LVPC::textColor, LVPC::textHoverColor);
-	leftWindow->getScreen("modelEditorMenuAabb")->addButton("back", vec2(0.0f, -0.7875f), vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen("modelEditorMenuAabb")->addButton("add", vec2(0.0f, 0.83f), vec2(GW("Create AABB"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Create AABB", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen("modelEditorMenuAabb")->addButton("edit", vec2(0.0f, 0.59f), vec2(GW("Edit AABB"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Edit AABB", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen("modelEditorMenuAabb")->addButton("delete", vec2(0.0f, 0.36f), vec2(GW("Delete"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Delete", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen("modelEditorMenuAabb")->addButton("speed", vec2(0.0f, 0.13f), vec2(GW("Set speed"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Set speed", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen("modelEditorMenuAabb")->addButton("toggleMove", vec2(0.0f, -0.13f), vec2(GW("Box move: OFF"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Box move: OFF", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen("modelEditorMenuAabb")->addButton("toggleResize", vec2(0.0f, -0.36f), vec2(GW("Box resize: OFF"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Box resize: OFF", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen("modelEditorMenuAabb")->addButton("direction", vec2(0.0f, -0.59f), vec2(GW("Direction: X"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Direction: X", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen("modelEditorMenuAabb")->addButton("back", vec2(0.0f, -0.83f), vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
 }
 
 void ModelEditor::load()
@@ -147,6 +148,7 @@ void ModelEditor::unload()
 	_lastCursorPos = vec2(0.0f);
 	_cameraDistance = 5.0f;
 	_cameraScrollingAcceleration = 0.0f;
+	_aabbTransformationSpeed = 1.0f;
 	_modelCreationEnabled = false;
 	_modelChoosingEnabled = false;
 	_modelEditingEnabled = false;

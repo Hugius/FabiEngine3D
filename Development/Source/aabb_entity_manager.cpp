@@ -54,6 +54,7 @@ void AabbEntityManager::addAabbEntity(const string& ID, vec3 position, vec3 size
 
 	// Other
 	getEntity(ID)->setLocalTranslation(position);
+	getEntity(ID)->setLocalScaling(size);
 	getEntity(ID)->setTranslation(position);
 	getEntity(ID)->setScaling(size);
 	getEntity(ID)->setResponsiveness(responsive);
@@ -84,7 +85,13 @@ void AabbEntityManager::update(const vector<GameEntity*>& gameEntities, const ve
 				{
 					if (entity->getParentID() == gameEntity->getID()) // Check for match
 					{
-						entity->setTranslation(gameEntity->getTranslation() + entity->getLocalTranslation()); // Update translation
+						// Update scaling
+						vec3 parentSizeChange = gameEntity->getScaling() / gameEntity->getOriginalScaling();
+						entity->setScaling(entity->getLocalScaling() * parentSizeChange);
+
+						// Update translation
+						entity->setTranslation(gameEntity->getTranslation() + (entity->getLocalTranslation() * parentSizeChange));
+
 						found = true;
 					}
 				}

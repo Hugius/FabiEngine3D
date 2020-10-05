@@ -43,7 +43,7 @@ void SceneEditor::_updateModelPlacing()
 					}
 
 					// Add model
-					_placeModel(newID, _currentPreviewModelName, newPosition, vec3(0.0f), _fe3d.gameEntity_getSize(_currentPreviewModelName));
+					_placeModel(newID, _currentPreviewModelName, newPosition);
 
 					// Disable placement mode if no terrain availible to choose position from
 					if (_fe3d.terrainEntity_getSelectedID() == "")

@@ -100,7 +100,6 @@ void ModelEditor::_updateEditingScreen()
 					{
 						_gui->getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuAabb");
 						_fe3d.misc_enableAabbFrameRendering();
-						_fe3d.textEntity_show(_gui->getGlobalScreen()->getTextfield("selectedAabbName")->getEntityID());
 					}
 				}
 				else if (screen->getButton("back")->isHovered())

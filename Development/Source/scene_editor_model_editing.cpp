@@ -23,8 +23,11 @@ void SceneEditor::_updateModelEditing()
 				// Must not be preview entity
 				if (entityID[0] != '@')
 				{
+					auto hoveredID = _fe3d.collision_checkCursorInAny();
+					bool hovered = (hoveredID.size() >= entityID.size()) && (hoveredID.substr(0, entityID.size()) == entityID);
+
 					// Cursor must be in 3D space, no GUI interruptions, no RMB holding down
-					if (_fe3d.collision_checkCursorInAny() == entityID && _fe3d.misc_isMouseInsideViewport() &&
+					if (hovered && _fe3d.misc_isMouseInsideViewport() &&
 						!_gui->getGlobalScreen()->isFocused() && !_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 					{
 						// Select hovered model
@@ -106,8 +109,14 @@ void SceneEditor::_updateModelEditing()
 					}
 					else if (_rightWindow->getScreen("modelPropertiesMenu")->getButton("freeze")->isHovered()) // Freeze button
 					{
+						// Model
 						_fe3d.gameEntity_setStaticToCamera(_activeModelID, true);
-						_fe3d.aabbEntity_setResponsiveness(_activeModelID, false);
+
+						// AABB
+						for (auto& aabbID : _fe3d.aabbEntity_getBoundIDs(_activeModelID, true, false))
+						{
+							_fe3d.aabbEntity_setResponsiveness(aabbID, false);
+						}
 					}
 					else if (_rightWindow->getScreen("modelPropertiesMenu")->getButton("delete")->isHovered()) // Delete button
 					{
@@ -159,12 +168,6 @@ void SceneEditor::_updateModelEditing()
 					_handleValueChanging("modelPropertiesMenu", "zPlus", "z", size.z, _movementChangingSpeed, factor);
 					_handleValueChanging("modelPropertiesMenu", "zMinus", "z", size.z, -_movementChangingSpeed, factor);
 					_fe3d.gameEntity_setSize(_activeModelID, size);
-
-					// AABB size
-					float changeX = size.x / oldSize.x;
-					float changeY = size.y / oldSize.y; 
-					float changeZ = size.z / oldSize.z;
-					_fe3d.aabbEntity_setSize(_activeModelID, _fe3d.aabbEntity_getSize(_activeModelID) * vec3(changeX, changeY, changeZ));
 				}
 			}
 

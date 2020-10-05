@@ -40,6 +40,10 @@ void ModelEditor::_updateModelEditingAabb()
 			_currentAabbID = "";
 			_fe3d.textEntity_hide(_gui->getGlobalScreen()->getTextfield("selectedAabbName")->getEntityID());
 		}
+		else if (screen->getButton("speed")->isHovered())
+		{
+			_gui->getGlobalScreen()->addValueForm("speed", "Transformation speed", _aabbTransformationSpeed * 100.0f, vec2(0.0f, 0.0f), vec2(0.2f, 0.1f));
+		}
 		else if (screen->getButton("toggleMove")->isHovered())
 		{
 			_movingToggled = !_movingToggled;
@@ -93,6 +97,12 @@ void ModelEditor::_updateModelEditingAabb()
 	_fe3d.textEntity_setTextContent(screen->getButton("toggleMove")->getTextfield()->getEntityID(), _movingToggled ? "Box move: ON" : "Box move: OFF");
 	_fe3d.textEntity_setTextContent(screen->getButton("toggleResize")->getTextfield()->getEntityID(), _resizingToggled ? "Box resize: ON" : "Box resize: OFF");
 
+	// Filling transformation speed
+	if (_gui->getGlobalScreen()->checkValueForm("speed", _aabbTransformationSpeed, { }))
+	{
+		_aabbTransformationSpeed /= 100.0f;
+	}
+
 	// Create AABB
 	string newName;
 	if (_gui->getGlobalScreen()->checkValueForm("newAabbName", newName, {}))
@@ -115,6 +125,7 @@ void ModelEditor::_updateModelEditingAabb()
 			// Show AABB title
 			_fe3d.textEntity_setTextContent(_gui->getGlobalScreen()->getTextfield("selectedAabbName")->getEntityID(),
 				"AABB: " + _currentAabbID, 0.025f);
+			_fe3d.textEntity_show(_gui->getGlobalScreen()->getTextfield("selectedAabbName")->getEntityID());
 		}
 	}
 
@@ -145,6 +156,7 @@ void ModelEditor::_updateModelEditingAabb()
 				// Show AABB title
 				_fe3d.textEntity_setTextContent(_gui->getGlobalScreen()->getTextfield("selectedAabbName")->getEntityID(),
 					"AABB: " + _currentAabbID, 0.025f);
+				_fe3d.textEntity_show(_gui->getGlobalScreen()->getTextfield("selectedAabbName")->getEntityID());
 				_gui->getGlobalScreen()->removeChoiceForm("aabbList");
 			}
 			else
@@ -173,41 +185,21 @@ void ModelEditor::_updateModelEditingAabb()
 			vec3 newPosition = _fe3d.aabbEntity_getPosition(_currentModelID + "_" + _currentAabbID);
 
 			// Update scrolling
-			float scrollSpeed = float(_fe3d.input_getMouseWheelY()) * 0.05f;
+			float scrollingDirection = float(_fe3d.input_getMouseWheelY());
 
+			// Determine direction
 			switch (_direction)
 			{
 				case TransformationDirection::X:
-					if (newPosition.x == 0.0f)
-					{
-						newPosition.x += scrollSpeed;
-					}
-					else
-					{
-						newPosition.x *= 1.0f + scrollSpeed;
-					}
+					newPosition.x += _aabbTransformationSpeed * scrollingDirection;
 					break;
 
 				case TransformationDirection::Y:
-					if (newPosition.y == 0.0f)
-					{
-						newPosition.y += scrollSpeed;
-					}
-					else
-					{
-						newPosition.y *= 1.0f + scrollSpeed;
-					}
+					newPosition.y += _aabbTransformationSpeed * scrollingDirection;
 					break;
 
 				case TransformationDirection::Z:
-					if (newPosition.z == 0.0f)
-					{
-						newPosition.z += scrollSpeed;
-					}
-					else
-					{
-						newPosition.z *= 1.0f + scrollSpeed;
-					}
+					newPosition.z += _aabbTransformationSpeed * scrollingDirection;
 					break;
 			}
 

@@ -40,7 +40,7 @@ void ModelEditor::loadModels()
 			// For file extraction
 			std::istringstream iss(line);
 
-			// Extract all data from file
+			// Extract general data from file
 			iss >>
 				modelName >>
 				objPath >>
@@ -133,7 +133,7 @@ void ModelEditor::save()
 			// Check if a 3D entity for this model is existing
 			if (_fe3d.gameEntity_isExisting(modelName))
 			{
-				// General
+				// General data
 				auto objPath = _fe3d.gameEntity_getObjPath(modelName);
 				auto diffuseMapPath = _fe3d.gameEntity_getDiffuseMapPath(modelName);
 				auto lightMapPath = _fe3d.gameEntity_getLightMapPath(modelName);

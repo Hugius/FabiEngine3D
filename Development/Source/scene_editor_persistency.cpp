@@ -57,11 +57,14 @@ bool SceneEditor::_loadSceneFile(bool overwriteCamera)
 
 				// Values
 				string objPath, diffuseMapPath, lightMapPath, reflectionMapPath, normalMapPath, lodEntityID;
-				vec3 position, rotation, size, color, aabbSize;
+				vec3 position, rotation, size, color;
 				float uvRepeat, specularFactor, specularIntensity, lightness;
 				bool isFaceculled, isShadowed, isTransparent, isSpecular, isReflective, isFrozen;
+				vector<string> aabbNames;
+				vector<vec3> aabbPositions;
+				vector<vec3> aabbSizes;
 
-				// Load model data
+				// Extract general data from file
 				iss >>
 					position.x >>
 					position.y >>
@@ -90,10 +93,27 @@ bool SceneEditor::_loadSceneFile(bool overwriteCamera)
 					color.g >>
 					color.b >>
 					uvRepeat >>
-					aabbSize.x >>
-					aabbSize.y >>
-					aabbSize.z >>
 					lodEntityID;
+
+				// Extract AABB data from file
+				while (true)
+				{
+					// Check if file has AABB data left
+					string name;
+					vec3 position, size;
+					iss >> name;
+					if (name == "")
+					{
+						break;
+					}
+					else
+					{
+						iss >> position.x >> position.y >> position.z >> size.x >> size.y >> size.z;
+						aabbNames.push_back(name);
+						aabbPositions.push_back(position);
+						aabbSizes.push_back(size);
+					}
+				}
 
 				// Perform empty string & space conversions
 				objPath = (objPath == "?") ? "" : objPath;
@@ -108,11 +128,11 @@ bool SceneEditor::_loadSceneFile(bool overwriteCamera)
 				std::replace(reflectionMapPath.begin(), reflectionMapPath.end(), '?', ' ');
 				std::replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
 				std::replace(lodEntityID.begin(), lodEntityID.end(), '?', ' ');
-
+				
 				// Add the model
 				_placeModel(modelID, position, rotation, size, objPath, diffuseMapPath, lightMapPath, reflectionMapPath, normalMapPath, isFrozen,
 					isFaceculled, isShadowed, isTransparent, isReflective, isSpecular, specularFactor, specularIntensity, lightness,
-					color, uvRepeat, aabbSize, lodEntityID);
+					color, uvRepeat, lodEntityID, aabbNames, aabbPositions, aabbSizes);
 
 				// Hide LOD entity
 				if (makeInvisible)
@@ -304,7 +324,7 @@ void SceneEditor::save()
 			// Check if not a preview model or an LOD entity
 			if (entityID[0] != '@' || std::find(lodIDs.begin(), lodIDs.end(), entityID) != lodIDs.end())
 			{
-				// Retrieve all values to be saved
+				// General data
 				auto position = _fe3d.gameEntity_getPosition(entityID);
 				auto rotation = _fe3d.gameEntity_getRotation(entityID);
 				auto size = _fe3d.gameEntity_getSize(entityID);
@@ -324,8 +344,18 @@ void SceneEditor::save()
 				auto lightness = _fe3d.gameEntity_getLightness(entityID);
 				auto color = _fe3d.gameEntity_getColor(entityID);
 				auto uvRepeat = _fe3d.gameEntity_getUvRepeat(entityID);
-				auto aabbSize = _fe3d.aabbEntity_getSize(entityID);
 				auto lodEntityID = _fe3d.gameEntity_getLevelOfDetailEntityID(entityID);
+
+				// AABB data
+				vector<string> aabbNames;
+				vector<vec3> aabbPositions;
+				vector<vec3> aabbSizes;
+				for (auto& aabbID : _fe3d.aabbEntity_getBoundIDs(entityID, true, false))
+				{
+					aabbNames.push_back(aabbID.substr(string(entityID + "_").size()));
+					aabbPositions.push_back(_fe3d.aabbEntity_getPosition(aabbID));
+					aabbSizes.push_back(_fe3d.aabbEntity_getSize(aabbID));
+				}
 
 				// Perform empty string & space conversions
 				diffuseMapPath = (diffuseMapPath == "") ? "?" : diffuseMapPath;
@@ -371,10 +401,28 @@ void SceneEditor::save()
 					color.g << " " <<
 					color.b << " " <<
 					uvRepeat << " " <<
-					aabbSize.x << " " <<
-					aabbSize.y << " " <<
-					aabbSize.z << " " <<
-					lodEntityID << std::endl;
+					lodEntityID << " ";
+
+				// Write AABB data
+				for (unsigned int i = 0; i < aabbNames.size(); i++)
+				{
+					file <<
+						aabbNames[i] << " " <<
+						aabbPositions[i].x << " " <<
+						aabbPositions[i].y << " " <<
+						aabbPositions[i].z << " " <<
+						aabbSizes[i].x << " " <<
+						aabbSizes[i].y << " " <<
+						aabbSizes[i].z;
+
+					// Add space
+					if (i != (aabbNames.size() - 1))
+					{
+						file << " ";
+					}
+				}
+
+				file << std::endl;
 			}
 		}
 

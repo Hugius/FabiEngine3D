@@ -231,7 +231,6 @@ bool ModelEditor::_addModel(const string& modelName, string objName, string diff
 			for (unsigned int i = 0; i < aabbNames.size(); i++)
 			{
 				_fe3d.aabbEntity_bindToGameEntity(modelName, aabbPositions[i], aabbSizes[i], true, modelName + "_" + aabbNames[i]);
-				_fe3d.aabbEntity_hide(modelName + "_" + aabbNames[i]);
 			}
 
 			// Diffuse map

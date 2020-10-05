@@ -71,11 +71,12 @@ private:
 
 	// Miscellaneous
 	bool _loadSceneFile(bool overwriteCamera);
-	void _placeModel(const string& modelID, string modelName, vec3 position, vec3 rotation, vec3 size);
+	void _placeModel(const string& modelID, string modelName, vec3 position);
 	void _placeModel(const string& modelID, vec3 position, vec3 rotation, vec3 size, string objPath, string diffuseMapPath, 
 		string lightMapPath, string reflectionMapPath, string normalMapPath, bool isFrozen, 
 		bool isFaceCulled, bool isShadowed, bool isTransparent, bool isReflective, bool isSpecular, 
-		float specularFactor, float specularIntensity, float lightness, vec3 color, float uvRepeat, vec3 aabbSize, string lodEntityID);
+		float specularFactor, float specularIntensity, float lightness, vec3 color, float uvRepeat, string lodEntityID,
+		vector<string> aabbNames, vector<vec3> aabbPositions, vector<vec3> aabbSizes);
 	void _updateModelBlinking(const string& modelID, int& multiplier);
 	void _updateLightbulbAnimation(const string& modelID, int& multiplier);
 	void _handleValueChanging(const string& screenID, string buttonID, string wfID, float& value, float adder, float multiplier = 1.0f,

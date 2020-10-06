@@ -68,18 +68,18 @@ vec3 getTextureColor();
 vec3 getAmbientLighting();
 vec3 getDirectionalLighting(bool noShadowOcclusion);
 vec3 getPointLighting(bool noShadowOcclusion);
-vec3 getShadowLighting();
 vec3 applyFog(vec3 color);
+float getShadowValue();
 float getSpecularValue(vec3 position);
 
 // Calculate final fragment color
 void main()
 {
 	// Calculate lighting
-    vec3 shadow = getShadowLighting();
+    float shadow = getShadowValue();
 	vec3 ambient = getAmbientLighting();
-	vec3 directional = getDirectionalLighting(shadow == vec3(1.0f));
-	vec3 point = getPointLighting(shadow == vec3(1.0f));
+	vec3 directional = getDirectionalLighting(shadow == 1.0f);
+	vec3 point = getPointLighting(shadow == 1.0f);
 
 	// Apply lighting
 	vec3 color;
@@ -197,7 +197,7 @@ float getRandomFloat(vec3 seed, int i)
 	return fract(sin(dot_product) * 43758.5453);
 }
 
-vec3 getShadowLighting()
+float getShadowValue()
 {
 	if(u_shadowsEnabled)
 	{
@@ -219,7 +219,7 @@ vec3 getShadowLighting()
 			// Skip fragments outside of the depth map
 			if (projCoords.z > 1.0f)
 			{	
-				return vec3(1.0f);
+				return 1.0f;
 			}
 
 			// Poisson values
@@ -235,7 +235,7 @@ vec3 getShadowLighting()
 			for(int i = 0; i < 4; i++)
 			{
 				// Get random index
-				int index = int(16.0*getRandomFloat(floor(f_pos.xyz*1000.0f), i))%16;
+				int index = i;
 
 				// Calculate depth from shadow map
 				float shadowMapDepth = texture(u_sampler_shadowMap, projCoords.xy + (poissonDisk[index] / 700.0f)).r;
@@ -262,21 +262,21 @@ vec3 getShadowLighting()
 			{
 				if((maxDistance - (halfSize * 0.99f)) > 0.0f)
 				{
-					return vec3(0.0f);
+					return 0.0f;
 				}
 			}
 
 			// Return shadow value
-			return vec3(mix(shadow, 1.0f, alpha));
+			return mix(shadow, 1.0f, alpha);
 		}
 
 		// No shadow
-		return vec3(1.0f);
+		return 1.0f;
 	}
 	else
 	{
 		// No shadow
-		return vec3(1.0f);
+		return 1.0f;
 	}
 }
 

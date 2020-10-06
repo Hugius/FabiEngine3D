@@ -1,15 +1,16 @@
-MODEL 725@hills 0 -10 0 0 0 0 10 26 10 user\assets\models\hills.obj user\assets\textures\diffuse_maps\grass3.png ? ? ? 0 0 1 0 0 0 1 1 0.6 1 1 1 10 ? 0 
-MODEL 1537256661@pine 97.0606 6.37255 50.1007 0 0 0 1 1 1 user\assets\models\tree3.obj user\assets\textures\diffuse_maps\tree3.png ? ? user\assets\textures\normal_maps\pine.png 0 0 1 1 0 1 1 1 0.6 1 1 1 1 ? 0 trunk 0 0 0 0.5688 3.15713 0.5688 leaves 0 3.22034 0 4.53803 9.43424 4.08534
-MODEL grass_instanced 0 0 0 0 0 0 1.5 1.5 1.5 user\assets\models\grassfield.obj user\assets\textures\diffuse_maps\grassfield.png ? ? ? 0 0 1 1 0 0 1 1 0.75 1 1 1 1 ? 1 
-AMBIENT 1 1 1 0.5
-DIRECTIONAL 1000 1000 1000 1 1 1 1 200
+MODEL 725@hills 0 -10 0 0 0 0 10 26 10 user\assets\models\hills.obj user\assets\textures\diffuse_maps\grass3.png ? ? ? 0 0 1 0 0 0 1 1 0.6 1 1 1 10 ? 0
+MODEL 1537256661@pine 97.0606 6.37255 50.1007 0 0 0 1 1 1 user\assets\models\tree3.obj user\assets\textures\diffuse_maps\tree3.png ? ? user\assets\textures\normal_maps\pine.png 0 0 1 1 0 1 1 1 0.6 1 1 1 1 ? 0
+MODEL 25431562@pine 108.687 6.37255 58.4719 0 0 0 1 1 1 user\assets\models\tree3.obj user\assets\textures\diffuse_maps\tree3.png ? ? user\assets\textures\normal_maps\pine.png 0 0 1 1 0 1 1 1 0.6 1 1 1 1 ? 0
+MODEL grass_instanced 0 0 0 0 0 0 1.5 1.5 1.5 user\assets\models\grassfield.obj user\assets\textures\diffuse_maps\grassfield.png ? ? ? 0 0 1 1 0 0 1 1 0.75 1 1 1 1 ? 1 100.243 6.37255 65.6273 113.065 6.37255 72.8723 122.46 6.37254 86.928 101.825 6.37255 80.9189 84.3476 6.37255 61.4013 89.9163 6.37255 76.5504 80.9125 6.37255 94.8808 89.0293 6.37255 108.01 98.1386 6.37255 98.1968 112.333 6.37255 109.718 131.002 6.37255 102.481 158.83 6.37254 93.2937 137.932 6.37255 78.5509 127.492 6.37255 62.1111 122.044 6.37255 44.952 
+AMBIENT_LIGHT 1 1 1 0.5
+DIRECTIONAL_LIGHT 1000 1000 1000 1 1 1 1 200
 CAMERA_FOV 70
 LOD_DISTANCE 100
 EDITOR_SPEED 25
-EDITOR_POSITION 87.1458 18.9203 60.5637
-EDITOR_YAW 10.4949
-EDITOR_PITCH -10.1318
-GRAPHICS_SHADOWS 1 100 50.000000 50.000000 0.000000 0.000000 0.000000 0.000000 1 50
+EDITOR_POSITION 78.1992 31.4203 87.8697
+EDITOR_YAW 331.328
+EDITOR_PITCH -33.6665
+GRAPHICS_SHADOWS 1 100 50.000000 50.000000 0.000000 0.000000 0.000000 0.000000 1 0
 GRAPHICS_MOTIONBLUR 1 8
 GRAPHICS_DOF 1 0 100 10
 GRAPHICS_FOG 1 150 512 0.75 0.498039 0.498039 0.498039

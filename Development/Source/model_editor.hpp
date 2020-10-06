@@ -16,8 +16,6 @@ public:
 	ModelEditor(FabiEngine3D& fe3d, shared_ptr<EngineGuiManager> gui);
 	~ModelEditor() = default;
 
-	vector<string>& getTotalObjFileNames();
-	vector<string>& getModelNames();
 
 	void initializeGUI();
 	void load();
@@ -28,6 +26,9 @@ public:
 	void loadModels();
 
 	bool isLoaded();
+
+	vector<string>& getTotalObjFileNames();
+	vector<string>& getModelNames();
 
 private:
 	bool _addModel(const string& modelName, string objName, string diffuseMapName, string lightMapName, string reflectionMapName, string normalMapName,

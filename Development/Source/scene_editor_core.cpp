@@ -52,8 +52,8 @@ void SceneEditor::initializeGUI()
 	// Left-viewport: mainWindow - sceneEditorMenuBillboard
 	screenID = "sceneEditorMenuBillboard";
 	_leftWindow->addScreen(screenID);
-	_leftWindow->getScreen(screenID)->addButton("sceneEditorMenuBillboardPlace", vec2(0.0f, 0.475f), vec2(GW("Place billboard"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Place model", LVPC::textColor, LVPC::textHoverColor);
-	_leftWindow->getScreen(screenID)->addButton("sceneEditorMenuBillboardChoice", vec2(0.0f, 0.0f), vec2(GW("Choose billboard"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Choose model", LVPC::textColor, LVPC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("sceneEditorMenuBillboardPlace", vec2(0.0f, 0.475f), vec2(GW("Place billboard"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Place billboard", LVPC::textColor, LVPC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("sceneEditorMenuBillboardChoice", vec2(0.0f, 0.0f), vec2(GW("Choose billboard"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Choose billboard", LVPC::textColor, LVPC::textHoverColor);
 	_leftWindow->getScreen(screenID)->addButton("back", vec2(0.0f, -0.475f), vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
 
 	// Left-viewport: mainWindow - sceneEditorMenuBillboardPlace
@@ -170,14 +170,35 @@ void SceneEditor::initializeGUI()
 	_leftWindow->getScreen(screenID)->addButton("intensity", vec2(0.0f, 0.0f), vec2(GW("Intensity"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Intensity", LVPC::textColor, LVPC::textHoverColor);
 	_leftWindow->getScreen(screenID)->addButton("back", vec2(0.0f, -0.475f), vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
 
-	// Right-viewport: mainWindow - propertiesMenu
-	screenID = "propertiesMenu";
+	// Right-viewport: mainWindow - modelPropertiesMenu
+	screenID = "modelPropertiesMenu";
 	_rightWindow->addScreen(screenID);
 	_rightWindow->getScreen(screenID)->addTextfield("transformation", vec2(0.0f, 0.95f), vec2(1.75f, 0.1f), "Transformation", vec3(1.0f));
 	_rightWindow->getScreen(screenID)->addButton("translation", vec2(0.0f, 0.8f), vec2(0.75f, 0.2f), "translation.png", vec3(0.0f));
 	_rightWindow->getScreen(screenID)->addButton("rotation", vec2(0.0f, 0.55f), vec2(0.75f, 0.2f), "rotation.png", vec3(0.0f));
 	_rightWindow->getScreen(screenID)->addButton("scaling", vec2(0.0f, 0.3f), vec2(0.75f, 0.2f), "scaling.png", vec3(0.0f));
 	_rightWindow->getScreen(screenID)->addButton("freeze", vec2(0.0f, 0.13f), vec2(1.25f, 0.075f), vec3(0.0f, 0.0f, 0.75f), vec3(0.25f, 0.25f, 1.0f), "Freeze", LVPC::textColor, LVPC::textHoverColor);
+	_rightWindow->getScreen(screenID)->addButton("delete", vec2(0.0f, -0.03f), vec2(1.25f, 0.075f), vec3(0.75f, 0.0f, 0.0f), vec3(1.0f, 0.25f, 0.25f), "Delete", LVPC::textColor, LVPC::textHoverColor);
+	_rightWindow->getScreen(screenID)->addTextfield("x", vec2(0.0f, -0.15f), vec2(0.25f, 0.1f), "X", vec3(1.0f));
+	_rightWindow->getScreen(screenID)->addTextfield("y", vec2(0.0f, -0.4f), vec2(0.25f, 0.1f), "Y", vec3(1.0f));
+	_rightWindow->getScreen(screenID)->addTextfield("z", vec2(0.0f, -0.65f), vec2(0.25f, 0.1f), "Z", vec3(1.0f));
+	_rightWindow->getScreen(screenID)->addButton("xPlus", vec2(0.75f, -0.25f), vec2(0.5f, 0.15f), "plus.png", vec3(1.0f));
+	_rightWindow->getScreen(screenID)->addButton("yPlus", vec2(0.75f, -0.5f), vec2(0.5f, 0.15f), "plus.png", vec3(1.0f));
+	_rightWindow->getScreen(screenID)->addButton("zPlus", vec2(0.75f, -0.75f), vec2(0.5f, 0.15f), "plus.png", vec3(1.0f));
+	_rightWindow->getScreen(screenID)->addButton("xMinus", vec2(-0.75f, -0.25f), vec2(0.5f, 0.15f), "minus.png", vec3(1.0f));
+	_rightWindow->getScreen(screenID)->addButton("yMinus", vec2(-0.75f, -0.5f), vec2(0.5f, 0.15f), "minus.png", vec3(1.0f));
+	_rightWindow->getScreen(screenID)->addButton("zMinus", vec2(-0.75f, -0.75f), vec2(0.5f, 0.15f), "minus.png", vec3(1.0f));
+	_rightWindow->getScreen(screenID)->addWriteField("x", vec2(0.0f, -0.25f), vec2(1.0f, 0.1f), vec3(0.25f), vec3(0.75f), vec3(1.0f), vec3(0.0f), 0, 1, 1, 1, 1);
+	_rightWindow->getScreen(screenID)->addWriteField("y", vec2(0.0f, -0.5f), vec2(1.0f, 0.1f), vec3(0.25f), vec3(0.75f), vec3(1.0f), vec3(0.0f), 0, 1, 1, 1, 1);
+	_rightWindow->getScreen(screenID)->addWriteField("z", vec2(0.0f, -0.75f), vec2(1.0f, 0.1f), vec3(0.25f), vec3(0.75f), vec3(1.0f), vec3(0.0f), 0, 1, 1, 1, 1);
+
+	// Right-viewport: mainWindow - billboardPropertiesMenu
+	screenID = "billboardPropertiesMenu";
+	_rightWindow->addScreen(screenID);
+	_rightWindow->getScreen(screenID)->addTextfield("transformation", vec2(0.0f, 0.95f), vec2(1.75f, 0.1f), "Transformation", vec3(1.0f));
+	_rightWindow->getScreen(screenID)->addButton("translation", vec2(0.0f, 0.8f), vec2(0.75f, 0.2f), "translation.png", vec3(0.0f));
+	_rightWindow->getScreen(screenID)->addButton("rotation", vec2(0.0f, 0.55f), vec2(0.75f, 0.2f), "rotation.png", vec3(0.0f));
+	_rightWindow->getScreen(screenID)->addButton("scaling", vec2(0.0f, 0.3f), vec2(0.75f, 0.2f), "scaling.png", vec3(0.0f));
 	_rightWindow->getScreen(screenID)->addButton("delete", vec2(0.0f, -0.03f), vec2(1.25f, 0.075f), vec3(0.75f, 0.0f, 0.0f), vec3(1.0f, 0.25f, 0.25f), "Delete", LVPC::textColor, LVPC::textHoverColor);
 	_rightWindow->getScreen(screenID)->addTextfield("x", vec2(0.0f, -0.15f), vec2(0.25f, 0.1f), "X", vec3(1.0f));
 	_rightWindow->getScreen(screenID)->addTextfield("y", vec2(0.0f, -0.4f), vec2(0.25f, 0.1f), "Y", vec3(1.0f));
@@ -269,10 +290,21 @@ void SceneEditor::load()
 	_modelEditor.loadModels();
 	for (auto& modelName : _modelEditor.getModelNames())
 	{
-		// Check if there is a game entity present
+		// Check if there is a GAME entity present
 		if (_fe3d.gameEntity_isExisting(modelName))
 		{
 			_leftWindow->getScreen("sceneEditorMenuModelPlace")->getScrollingList("modelList")->addButton(modelName, modelName.substr(1));
+		}
+	}
+
+	// Preview billboard loading
+	_billboardEditor.loadBillboards();
+	for (auto& billboardName : _billboardEditor.getBillboardNames())
+	{
+		// Check if there is a BILLBOARD entity present
+		if (_fe3d.billboardEntity_isExisting(billboardName))
+		{
+			_leftWindow->getScreen("sceneEditorMenuBillboardPlace")->getScrollingList("billboardList")->addButton(billboardName, billboardName.substr(1));
 		}
 	}
 
@@ -386,11 +418,11 @@ void SceneEditor::unload()
 
 	// Reset variables
 	_currentPreviewModelName = "";
-	_currentBillboardName = "";
+	_currentPreviewBillboardName = "";
 	_selectedModelID = "";
 	_activeModelID = "";
-	_selectedLightnessMultiplier = 1;
-	_activeLightnessMultiplier = 1;
+	_selectedModelLightnessMultiplier = 1;
+	_activeModelLightnessMultiplier = 1;
 	_dontResetSelectedModel = false;
 	_isPlacingPointlight = false;
 	_isLoaded = false;
@@ -407,5 +439,6 @@ void SceneEditor::unload()
 
 	// Other
 	_leftWindow->getScreen("sceneEditorMenuModelPlace")->getScrollingList("modelList")->deleteButtons();
+	_leftWindow->getScreen("sceneEditorMenuModelPlace")->getScrollingList("billboardList")->deleteButtons();
 	_fe3d.misc_disableAabbFrameRendering();
 }

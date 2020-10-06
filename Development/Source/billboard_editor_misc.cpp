@@ -9,3 +9,8 @@ bool BillboardEditor::isLoaded()
 {
 	return _isLoaded;
 }
+
+vector<string>& BillboardEditor::getBillboardNames()
+{
+	return _billboardNames;
+}

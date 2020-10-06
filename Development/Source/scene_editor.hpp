@@ -73,18 +73,22 @@ private:
 
 	// Miscellaneous
 	bool _loadSceneFile(bool overwriteCamera);
-	void _placeModel(const string& modelID, string modelName, vec3 position);
-	void _placeModel(const string& modelID, vec3 position, vec3 rotation, vec3 size, string objPath, string diffuseMapPath, 
-		string lightMapPath, string reflectionMapPath, string normalMapPath, bool isFrozen, 
+	void _placeModel(const string& modelID, const string& modelName, vec3 position);
+	void _placeModel(const string& modelID, vec3 position, vec3 rotation, vec3 size, const string& objPath, const string& diffuseMapPath,
+		const string& lightMapPath, const string& reflectionMapPath, const string& normalMapPath, bool isFrozen,
 		bool isFaceCulled, bool isShadowed, bool isTransparent, bool isReflective, bool isSpecular, 
-		float specularFactor, float specularIntensity, float lightness, vec3 color, float uvRepeat, string lodEntityID, bool isInstanced,
-		vector<string> aabbNames, vector<vec3> aabbPositions, vector<vec3> aabbSizes);
+		float specularFactor, float specularIntensity, float lightness, vec3 color, float uvRepeat, const string& lodEntityID, bool isInstanced,
+		vector<vec3> instancedOffsets, vector<string> aabbNames, vector<vec3> aabbPositions, vector<vec3> aabbSizes);
+	void _placeBillboard(const string& billboardID, const string& billboardName);
 	void _updateModelBlinking(const string& modelID, int& multiplier);
+	void _updateBillboardBlinking(const string& billboardID, int& multiplier);
 	void _updateLightbulbAnimation(const string& modelID, int& multiplier);
-	void _handleValueChanging(const string& screenID, string buttonID, string wfID, float& value, float adder, float multiplier = 1.0f,
-		float minimum = (std::numeric_limits<float>::lowest)(), float maximum = (std::numeric_limits<float>::max)());
 	void _selectModel(const string& modelID);
 	void _activateModel(const string& modelID);
+	void _selectBillboard(const string& modelID);
+	void _activateBillboard(const string& modelID);
+	void _handleValueChanging(const string& screenID, string buttonID, string wfID, float& value, float adder, float multiplier = 1.0f,
+		float minimum = (std::numeric_limits<float>::lowest)(), float maximum = (std::numeric_limits<float>::max)());
 
 	// Instances
 	FabiEngine3D& _fe3d;
@@ -99,13 +103,19 @@ private:
 	string _currentPreviewModelName = "";
 	string _selectedModelID = "";
 	string _activeModelID = "";
-	int _selectedLightnessMultiplier = 1;
-	int _activeLightnessMultiplier = 1;
+	int _selectedModelLightnessMultiplier = 1;
+	int _activeModelLightnessMultiplier = 1;
 	bool _dontResetSelectedModel = false;
 	const float _modelBlinkingSpeed = 0.025f;
 
 	// Billboard variables
-	string _currentBillboardName = "";
+	string _currentPreviewBillboardName = "";
+	string _selectedBillboardID = "";
+	string _activeBillboardID = "";
+	int _selectedBillboardLightnessMultiplier = 1;
+	int _activeBillboardLightnessMultiplier = 1;
+	bool _dontResetSelectedBillboard = false;
+	const float _billboardBlinkingSpeed = 0.025f;
 
 	// Lighting variables
 	bool _isPlacingPointlight = false;

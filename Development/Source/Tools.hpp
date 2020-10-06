@@ -20,16 +20,12 @@ public:
 	Tools(Tools const&) = delete;
 	void operator=(Tools const&) = delete;
 
-	void  printInteger(int val);
-	void  printFloat(float val);
-	void  printDouble(double val);
 	int   getRandomInt(int min, int max);
 	int   DWORD_to_int(DWORD dword);
-	bool  compareData_string(const string& firstString, string targetString, string errorMsg);
+
 	float getRandomFloat(float min, float max);
 	float degreeToRadians(float degree);
 	float getPI();
-	float squared(float val);
 
 	template<typename T> inline const T & getMin(const T & first, const T & second)
 	{

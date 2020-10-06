@@ -36,15 +36,15 @@ void SceneEditor::_activateModel(const string& modelID)
 	_transformation = TransformationType::TRANSLATION;
 
 	// Activate properties screen
-	_rightWindow->getScreen("propertiesMenu")->getButton("translation")->setHoverable(false);
-	_rightWindow->getScreen("propertiesMenu")->getButton("rotation")->setHoverable(true);
-	_rightWindow->getScreen("propertiesMenu")->getButton("scaling")->setHoverable(true);
+	_rightWindow->getScreen("modelPropertiesMenu")->getButton("translation")->setHoverable(false);
+	_rightWindow->getScreen("modelPropertiesMenu")->getButton("rotation")->setHoverable(true);
+	_rightWindow->getScreen("modelPropertiesMenu")->getButton("scaling")->setHoverable(true);
 
 	// Filling writefields
 	vec3 position = _fe3d.gameEntity_getPosition(_activeModelID);
-	_rightWindow->getScreen("propertiesMenu")->getWriteField("x")->setTextContent(to_string(static_cast<int>(position.x)));
-	_rightWindow->getScreen("propertiesMenu")->getWriteField("y")->setTextContent(to_string(static_cast<int>(position.y)));
-	_rightWindow->getScreen("propertiesMenu")->getWriteField("z")->setTextContent(to_string(static_cast<int>(position.z)));
+	_rightWindow->getScreen("modelPropertiesMenu")->getWriteField("x")->setTextContent(to_string(static_cast<int>(position.x)));
+	_rightWindow->getScreen("modelPropertiesMenu")->getWriteField("y")->setTextContent(to_string(static_cast<int>(position.y)));
+	_rightWindow->getScreen("modelPropertiesMenu")->getWriteField("z")->setTextContent(to_string(static_cast<int>(position.z)));
 
 	// Removing the unique number from the modelID and updating the text content
 	string modelName = modelID.substr(modelID.find('@') + 1);
@@ -53,7 +53,15 @@ void SceneEditor::_activateModel(const string& modelID)
 	_fe3d.textEntity_setTextContent(textEntityID, "Active: " + modelName, 0.025f);
 }
 
-void SceneEditor::_placeModel(const string& newID, string previewID, vec3 position)
+void SceneEditor::_selectBillboard(const string& modelID)
+{
+}
+
+void SceneEditor::_activateBillboard(const string& modelID)
+{
+}
+
+void SceneEditor::_placeModel(const string& newID, const string& previewID, vec3 position)
 {
 	// Check if instanced entity
 	if (_fe3d.gameEntity_isInstanced(previewID))
@@ -169,11 +177,11 @@ void SceneEditor::_placeModel(const string& newID, string previewID, vec3 positi
 	}
 }
 
-void SceneEditor::_placeModel(const string& modelID, vec3 position, vec3 rotation, vec3 size, string objPath, string diffuseMapPath,
-	string lightMapPath, string reflectionMapPath, string normalMapPath, bool isFrozen, bool isFaceCulled, 
+void SceneEditor::_placeModel(const string& modelID, vec3 position, vec3 rotation, vec3 size, const string& objPath, const string& diffuseMapPath,
+	const string& lightMapPath, const string& reflectionMapPath, const string& normalMapPath, bool isFrozen, bool isFaceCulled,
 	bool isShadowed, bool isTransparent, bool isReflective, bool isSpecular, float specularFactor, 
-	float specularIntensity, float lightness, vec3 color, float uvRepeat, string lodEntityID, bool isInstanced,
-	vector<string> aabbNames, vector<vec3> aabbPositions, vector<vec3> aabbSizes)
+	float specularIntensity, float lightness, vec3 color, float uvRepeat, const string& lodEntityID, bool isInstanced,
+	vector<vec3> instancedOffsets, vector<string> aabbNames, vector<vec3> aabbPositions, vector<vec3> aabbSizes)
 {
 	// Add game entity
 	_fe3d.gameEntity_add(modelID, objPath, position, rotation, size);
@@ -198,7 +206,7 @@ void SceneEditor::_placeModel(const string& modelID, vec3 position, vec3 rotatio
 	_fe3d.gameEntity_setColor(modelID, color);
 	_fe3d.gameEntity_setUvRepeat(modelID, uvRepeat);
 	_fe3d.gameEntity_setLevelOfDetailEntity(modelID, lodEntityID);
-	_fe3d.gameEntity_setInstanced(modelID, isInstanced, {});
+	_fe3d.gameEntity_setInstanced(modelID, isInstanced, instancedOffsets);
 
 	// Diffuse map
 	if (diffuseMapPath != "")
@@ -251,6 +259,11 @@ void SceneEditor::_updateModelBlinking(const string& modelID, int& multiplier)
 		float speed = (_modelBlinkingSpeed * static_cast<float>(multiplier) * range);
 		_fe3d.gameEntity_setLightness(modelID, _fe3d.gameEntity_getLightness(modelID) + speed);
 	}
+}
+
+void SceneEditor::_updateBillboardBlinking(const string& billboardID, int& multiplier)
+{
+
 }
 
 void SceneEditor::_updateLightbulbAnimation(const string& modelID, int& multiplier)

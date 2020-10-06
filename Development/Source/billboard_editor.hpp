@@ -15,11 +15,13 @@ public:
 	void unload();
 	void update();
 	void setCurrentProjectName(const string& projectName);
+	void loadBillboards();
 
 	bool isLoaded();
 
+	vector<string>& getBillboardNames();
+
 private:
-	void _loadBillboards();
 	void _updateBillboardManagement();
 	void _updateBillboardCreation();
 	void _updateBillboardChoosing();

@@ -301,7 +301,7 @@ vec3 getShadowLighting()
             
             // Return shadow value
             shadow /= 9.0f;
-            shadow += 0.1f;
+            //shadow += 0.1f;
 			
 			// Long-distance shadows fading
 			float maxDistance = max(abs(f_pos.x - u_shadowAreaCenter.x), abs(f_pos.z - u_shadowAreaCenter.z)); // Max distance to center

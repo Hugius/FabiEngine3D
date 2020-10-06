@@ -262,10 +262,11 @@
     <ClCompile Include="Source\scene_editor_core.cpp" />
     <ClCompile Include="Source\scene_editor_light_editing.cpp" />
     <ClCompile Include="Source\scene_editor_light_placing.cpp" />
+    <ClCompile Include="Source\scene_editor_loading.cpp" />
     <ClCompile Include="Source\scene_editor_misc.cpp" />
     <ClCompile Include="Source\scene_editor_model_editing.cpp" />
     <ClCompile Include="Source\scene_editor_model_placing.cpp" />
-    <ClCompile Include="Source\scene_editor_persistency.cpp" />
+    <ClCompile Include="Source\scene_editor_saving.cpp" />
     <ClCompile Include="Source\scene_editor_settings_updates.cpp" />
     <ClCompile Include="Source\scene_editor_updates.cpp" />
     <ClCompile Include="Source\scene_editor_model_updates.cpp" />

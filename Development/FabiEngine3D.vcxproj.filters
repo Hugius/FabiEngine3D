@@ -313,9 +313,6 @@
     <ClCompile Include="Source\settings_editor.cpp">
       <Filter>src\Editor System\Settings Editor</Filter>
     </ClCompile>
-    <ClCompile Include="Source\scene_editor_persistency.cpp">
-      <Filter>src\Editor System\Scene Editor\Core</Filter>
-    </ClCompile>
     <ClCompile Include="Source\script.cpp">
       <Filter>src\Scripting System\Core</Filter>
     </ClCompile>
@@ -438,6 +435,12 @@
     </ClCompile>
     <ClCompile Include="Source\model_editor_updates_aabb.cpp">
       <Filter>src\Editor System\Model Editor\Updates</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\scene_editor_loading.cpp">
+      <Filter>src\Editor System\Scene Editor\Persistency</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\scene_editor_saving.cpp">
+      <Filter>src\Editor System\Scene Editor\Persistency</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -916,6 +919,9 @@
     </Filter>
     <Filter Include="src\Editor System\World Editor\Updates">
       <UniqueIdentifier>{c658aa7d-506b-4818-a69f-ce8a2da31340}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Editor System\Scene Editor\Persistency">
+      <UniqueIdentifier>{9f1c1ad7-904f-45b3-893c-2c27f98b34dc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

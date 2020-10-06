@@ -67,8 +67,8 @@ void BillboardEditor::load()
 	_fe3d.camera_enableLookat(_billboardPosition);
 
 	// Enable graphics
-	_fe3d.gfx_enableAmbientLighting(vec3(1.0f), 0.75f);
-	_fe3d.gfx_enableDirectionalLighting(vec3(1000.0f), vec3(1.0f), 0.75f);
+	_fe3d.gfx_enableAmbientLighting(vec3(1.0f), 0.45f);
+	_fe3d.gfx_enableDirectionalLighting(vec3(1000.0f), vec3(1.0f), 1.0f);
 	_fe3d.gfx_enableShadows(vec3(10.0f, 10.0f, 10.0f), vec3(0.0f), 25.0f, 50.0f, false);
 	
 	// 3D Environment
@@ -81,7 +81,7 @@ void BillboardEditor::load()
 	_fe3d.gameEntity_setFaceCulled("@@cube", true);
 
 	// Load billboards from file
-	_loadBillboards();
+	loadBillboards();
 
 	// Other
 	_gui->getGlobalScreen()->addTextfield("selectedBillboardName", vec2(0.0f, 0.85f), vec2(0.5f, 0.1f), "", vec3(1.0f));

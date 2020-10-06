@@ -160,7 +160,6 @@ void BillboardEditor::_updateBillboardChoosing()
 			// Show hovered billboard
 			if (_hoveredBillboardID != "")
 			{
-				std::cout << "hoi";
 				_fe3d.billboardEntity_show(_hoveredBillboardID);
 			}
 		}

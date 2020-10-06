@@ -4,7 +4,7 @@
 #include <sstream>
 #include <algorithm>
 
-void BillboardEditor::_loadBillboards()
+void BillboardEditor::loadBillboards()
 {
 	// Error checking
 	if (_currentProjectName == "")
@@ -115,9 +115,9 @@ void BillboardEditor::save()
 			diffusePath = (diffusePath == "") ? "?" : diffusePath;
 			fontPath = (fontPath == "") ? "?" : fontPath;
 			textContent = (textContent == "") ? "?" : textContent;
-			std::replace(diffusePath.begin(), diffusePath.end(), '?', ' ');
-			std::replace(fontPath.begin(), fontPath.end(), '?', ' ');
-			std::replace(textContent.begin(), textContent.end(), '?', ' ');
+			std::replace(diffusePath.begin(), diffusePath.end(), ' ', '?');
+			std::replace(fontPath.begin(), fontPath.end(), ' ', '?');
+			std::replace(textContent.begin(), textContent.end(), ' ', '?');
 
 			// Export data
 			file << billboardName << " " <<

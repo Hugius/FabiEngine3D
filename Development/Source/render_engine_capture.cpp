@@ -31,7 +31,7 @@ void RenderEngine::_captureSceneReflections(CameraManager& camera)
 		_sceneReflectionFramebuffer.bind();
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		// Save and disable reflective entity
+		// Save and disable reflective GAME entity
 		string reflectiveEntityID;
 		if (!waterReflectionEnabled)
 		{
@@ -52,13 +52,15 @@ void RenderEngine::_captureSceneReflections(CameraManager& camera)
 		camera.invertPitch();
 		camera.updateMatrices();
 
-		// Save reflection exceptions
-		bool shadowsEnabled = _renderBus.isShadowsEnabled(); // Shadows are performance-heavy with little visual impact on a reflection
-		float oldLightness = _entityBus->getSkyEntity()->getLightness(); // SkyHDR must not be in reflections
+		// Shadows are performance-heavy with little visual impact on reflections, so they should not appear
+		bool shadowsEnabled = _renderBus.isShadowsEnabled();
 		_renderBus.setShadowsEnabled(false);
 
+		// SkyHDR should not appear in reflections
+		float oldLightness = 0.0f;
+		if (_entityBus->getSkyEntity() != nullptr) oldLightness = _entityBus->getSkyEntity()->getLightness();
+		if (_entityBus->getSkyEntity() != nullptr) const_cast<SkyEntity*>(_entityBus->getSkyEntity())->setLightness(_entityBus->getSkyEntity()->getOriginalLightness());
 		// I know this is considered bad practice, but this is the only exception in the entire code-base
-		const_cast<SkyEntity*>(_entityBus->getSkyEntity())->setLightness(_entityBus->getSkyEntity()->getOriginalLightness());
 
 		// Render scene
 		_renderSkyEntity();
@@ -68,7 +70,7 @@ void RenderEngine::_captureSceneReflections(CameraManager& camera)
 
 		// Revert reflection exceptions
 		_renderBus.setShadowsEnabled(shadowsEnabled);
-		const_cast<SkyEntity*>(_entityBus->getSkyEntity())->setLightness(oldLightness);
+		if(_entityBus->getSkyEntity() != nullptr) const_cast<SkyEntity*>(_entityBus->getSkyEntity())->setLightness(oldLightness);
 
 		// Revert camera angle
 		cameraPos = camera.getPosition();
@@ -77,7 +79,7 @@ void RenderEngine::_captureSceneReflections(CameraManager& camera)
 		camera.invertPitch();
 		camera.updateMatrices();
 
-		// Restore reflective entity
+		// Restore reflective GAME entity
 		if (!waterReflectionEnabled)
 		{
 			for (auto& gameEntity : _entityBus->getGameEntities())

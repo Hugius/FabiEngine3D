@@ -36,15 +36,15 @@ void SceneEditor::_activateModel(const string& modelID)
 	_transformation = TransformationType::TRANSLATION;
 
 	// Activate properties screen
-	_rightWindow->getScreen("modelPropertiesMenu")->getButton("translation")->setHoverable(false);
-	_rightWindow->getScreen("modelPropertiesMenu")->getButton("rotation")->setHoverable(true);
-	_rightWindow->getScreen("modelPropertiesMenu")->getButton("scaling")->setHoverable(true);
+	_rightWindow->getScreen("propertiesMenu")->getButton("translation")->setHoverable(false);
+	_rightWindow->getScreen("propertiesMenu")->getButton("rotation")->setHoverable(true);
+	_rightWindow->getScreen("propertiesMenu")->getButton("scaling")->setHoverable(true);
 
 	// Filling writefields
 	vec3 position = _fe3d.gameEntity_getPosition(_activeModelID);
-	_rightWindow->getScreen("modelPropertiesMenu")->getWriteField("x")->setTextContent(to_string(static_cast<int>(position.x)));
-	_rightWindow->getScreen("modelPropertiesMenu")->getWriteField("y")->setTextContent(to_string(static_cast<int>(position.y)));
-	_rightWindow->getScreen("modelPropertiesMenu")->getWriteField("z")->setTextContent(to_string(static_cast<int>(position.z)));
+	_rightWindow->getScreen("propertiesMenu")->getWriteField("x")->setTextContent(to_string(static_cast<int>(position.x)));
+	_rightWindow->getScreen("propertiesMenu")->getWriteField("y")->setTextContent(to_string(static_cast<int>(position.y)));
+	_rightWindow->getScreen("propertiesMenu")->getWriteField("z")->setTextContent(to_string(static_cast<int>(position.z)));
 
 	// Removing the unique number from the modelID and updating the text content
 	string modelName = modelID.substr(modelID.find('@') + 1);
@@ -58,55 +58,58 @@ void SceneEditor::_placeModel(const string& newID, string previewID, vec3 positi
 	// Check if instanced entity
 	if (_fe3d.gameEntity_isInstanced(previewID))
 	{
-		if (_fe3d.gameEntity_isExisting(previewID + "_instanced")) // Add to offsets
+		const string instancedID = previewID.substr(1) + "_instanced";
+
+		if (_fe3d.gameEntity_isExisting(instancedID)) // Add to offsets
 		{
-			auto offsets = _fe3d.gameEntity_getInstancedOffsets(previewID + "_instanced");
+			auto offsets = _fe3d.gameEntity_getInstancedOffsets(instancedID);
 			offsets.push_back(position);
-			_fe3d.gameEntity_setInstanced(previewID + "_instanced", true, offsets);
+			_fe3d.gameEntity_setInstanced(instancedID, true, offsets);
 		}
 		else
 		{
 			// Create new GAME entity
-			_fe3d.gameEntity_add(previewID + "_instanced", _fe3d.gameEntity_getObjPath(previewID), vec3(0.0f), vec3(0.0f), _fe3d.gameEntity_getSize(previewID));
+			_fe3d.gameEntity_add(instancedID, _fe3d.gameEntity_getObjPath(previewID), vec3(0.0f), vec3(0.0f), _fe3d.gameEntity_getSize(previewID));
 			
 			// Fill GAME entity
-			_fe3d.gameEntity_setFaceCulled(previewID + "_instanced", _fe3d.gameEntity_isFaceCulled(previewID));
-			_fe3d.gameEntity_setShadowed(previewID + "_instanced", _fe3d.gameEntity_isShadowed(previewID));
-			_fe3d.gameEntity_setTransparent(previewID + "_instanced", _fe3d.gameEntity_isTransparent(previewID));
-			_fe3d.gameEntity_setSceneReflective(previewID + "_instanced", _fe3d.gameEntity_isSceneReflective(previewID));
-			_fe3d.gameEntity_setSpecularLighted(previewID + "_instanced", _fe3d.gameEntity_isSpecularLighted(previewID));
-			_fe3d.gameEntity_setSpecularFactor(previewID + "_instanced", _fe3d.gameEntity_getSpecularFactor(previewID));
-			_fe3d.gameEntity_setSpecularIntensity(previewID + "_instanced", _fe3d.gameEntity_getSpecularIntensity(previewID));
-			_fe3d.gameEntity_setLightness(previewID + "_instanced", _fe3d.gameEntity_getLightness(previewID));
-			_fe3d.gameEntity_setOriginalLightness(previewID + "_instanced", _fe3d.gameEntity_getOriginalLightness(previewID));
-			_fe3d.gameEntity_setColor(previewID + "_instanced", _fe3d.gameEntity_getColor(previewID));
-			_fe3d.gameEntity_setUvRepeat(previewID + "_instanced", _fe3d.gameEntity_getUvRepeat(previewID));
+			_fe3d.gameEntity_setFaceCulled(instancedID, _fe3d.gameEntity_isFaceCulled(previewID));
+			_fe3d.gameEntity_setShadowed(instancedID, _fe3d.gameEntity_isShadowed(previewID));
+			_fe3d.gameEntity_setTransparent(instancedID, _fe3d.gameEntity_isTransparent(previewID));
+			_fe3d.gameEntity_setSceneReflective(instancedID, _fe3d.gameEntity_isSceneReflective(previewID));
+			_fe3d.gameEntity_setSpecularLighted(instancedID, _fe3d.gameEntity_isSpecularLighted(previewID));
+			_fe3d.gameEntity_setSpecularFactor(instancedID, _fe3d.gameEntity_getSpecularFactor(previewID));
+			_fe3d.gameEntity_setSpecularIntensity(instancedID, _fe3d.gameEntity_getSpecularIntensity(previewID));
+			_fe3d.gameEntity_setLightness(instancedID, _fe3d.gameEntity_getLightness(previewID));
+			_fe3d.gameEntity_setOriginalLightness(instancedID, _fe3d.gameEntity_getOriginalLightness(previewID));
+			_fe3d.gameEntity_setColor(instancedID, _fe3d.gameEntity_getColor(previewID));
+			_fe3d.gameEntity_setUvRepeat(instancedID, _fe3d.gameEntity_getUvRepeat(previewID));
+			_fe3d.gameEntity_setInstanced(instancedID, true, { position });
 
 			// Diffuse map
 			if (_fe3d.gameEntity_getDiffuseMapPath(previewID) != "")
 			{
-				_fe3d.gameEntity_setDiffuseMap(previewID + "_instanced", _fe3d.gameEntity_getDiffuseMapPath(previewID));
+				_fe3d.gameEntity_setDiffuseMap(instancedID, _fe3d.gameEntity_getDiffuseMapPath(previewID));
 			}
 
 			// Light map
 			if (_fe3d.gameEntity_getLightMapPath(previewID) != "")
 			{
-				_fe3d.gameEntity_setLightMap(previewID + "_instanced", _fe3d.gameEntity_getLightMapPath(previewID));
-				_fe3d.gameEntity_setLightMapped(previewID + "_instanced", true);
+				_fe3d.gameEntity_setLightMap(instancedID, _fe3d.gameEntity_getLightMapPath(previewID));
+				_fe3d.gameEntity_setLightMapped(instancedID, true);
 			}
 
 			// Reflection map
 			if (_fe3d.gameEntity_getReflectionMapPath(previewID) != "")
 			{
-				_fe3d.gameEntity_setReflectionMap(previewID + "_instanced", _fe3d.gameEntity_getReflectionMapPath(previewID));
-				_fe3d.gameEntity_setSkyReflective(previewID + "_instanced", true);
+				_fe3d.gameEntity_setReflectionMap(instancedID, _fe3d.gameEntity_getReflectionMapPath(previewID));
+				_fe3d.gameEntity_setSkyReflective(instancedID, true);
 			}
 
 			// Normal map
 			if (_fe3d.gameEntity_getNormalMapPath(previewID) != "")
 			{
-				_fe3d.gameEntity_setNormalMap(previewID + "_instanced", _fe3d.gameEntity_getNormalMapPath(previewID));
-				_fe3d.gameEntity_setNormalMapped(previewID + "_instanced", true);
+				_fe3d.gameEntity_setNormalMap(instancedID, _fe3d.gameEntity_getNormalMapPath(previewID));
+				_fe3d.gameEntity_setNormalMapped(instancedID, true);
 			}
 		}
 	}

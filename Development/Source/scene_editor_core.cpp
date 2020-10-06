@@ -52,7 +52,21 @@ void SceneEditor::initializeGUI()
 	// Left-viewport: mainWindow - sceneEditorMenuBillboard
 	screenID = "sceneEditorMenuBillboard";
 	_leftWindow->addScreen(screenID);
-	_leftWindow->getScreen(screenID)->addButton("back", vec2(0.0f, -0.63f), vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("sceneEditorMenuBillboardPlace", vec2(0.0f, 0.475f), vec2(GW("Place billboard"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Place model", LVPC::textColor, LVPC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("sceneEditorMenuBillboardChoice", vec2(0.0f, 0.0f), vec2(GW("Choose billboard"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Choose model", LVPC::textColor, LVPC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("back", vec2(0.0f, -0.475f), vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
+
+	// Left-viewport: mainWindow - sceneEditorMenuBillboardPlace
+	screenID = "sceneEditorMenuBillboardPlace";
+	_leftWindow->addScreen(screenID);
+	_leftWindow->getScreen(screenID)->addScrollingList("billboardList", vec2(0.0f, 0.1f), vec2(1.8f, 1.75f), vec3(0.3f), LVPC::buttonColor, LVPC::buttonHoverColor, LVPC::textColor, LVPC::textHoverColor, vec2(0.15f, 0.1f));
+	_leftWindow->getScreen(screenID)->addButton("back", vec2(0.0f, -0.9f), vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
+
+	// Left-viewport: mainWindow - sceneEditorMenuBillboardChoice
+	screenID = "sceneEditorMenuBillboardChoice";
+	_leftWindow->addScreen(screenID);
+	_leftWindow->getScreen(screenID)->addScrollingList("billboardList", vec2(0.0f, 0.1f), vec2(1.8f, 1.75f), vec3(0.3f), LVPC::buttonColor, LVPC::buttonHoverColor, LVPC::textColor, LVPC::textHoverColor, vec2(0.15f, 0.1f));
+	_leftWindow->getScreen(screenID)->addButton("back", vec2(0.0f, -0.9f), vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
 
 	// Left-viewport: mainWindow - sceneEditorMenuLighting
 	screenID = "sceneEditorMenuLighting";
@@ -156,8 +170,8 @@ void SceneEditor::initializeGUI()
 	_leftWindow->getScreen(screenID)->addButton("intensity", vec2(0.0f, 0.0f), vec2(GW("Intensity"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Intensity", LVPC::textColor, LVPC::textHoverColor);
 	_leftWindow->getScreen(screenID)->addButton("back", vec2(0.0f, -0.475f), vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
 
-	// Right-viewport: mainWindow - modelPropertiesMenu
-	screenID = "modelPropertiesMenu";
+	// Right-viewport: mainWindow - propertiesMenu
+	screenID = "propertiesMenu";
 	_rightWindow->addScreen(screenID);
 	_rightWindow->getScreen(screenID)->addTextfield("transformation", vec2(0.0f, 0.95f), vec2(1.75f, 0.1f), "Transformation", vec3(1.0f));
 	_rightWindow->getScreen(screenID)->addButton("translation", vec2(0.0f, 0.8f), vec2(0.75f, 0.2f), "translation.png", vec3(0.0f));

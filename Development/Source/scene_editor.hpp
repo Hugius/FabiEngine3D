@@ -44,7 +44,9 @@ private:
 	// Billboard updates
 	void _updateMainBillboardMenu();
 	void _updateBilboardPlacingMenu();
-	void _updateBillboardEditingMenu();
+	void _updateBillboardChoosingMenu();
+	void _updateBillboardPlacing();
+	void _updateBillboardEditing();
 
 	// Light updates
 	void _updateMainLightingMenu();

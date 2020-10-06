@@ -75,39 +75,39 @@ void SceneEditor::_updateModelEditing()
 			// Update properties screen
 			if (_activeModelID != "")
 			{
-				_rightWindow->setActiveScreen("modelPropertiesMenu");
+				_rightWindow->setActiveScreen("propertiesMenu");
 
 				// GUI management (pressed)
 				if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 				{
-					if (_rightWindow->getScreen("modelPropertiesMenu")->getButton("translation")->isHovered()) // Translation button
+					if (_rightWindow->getScreen("propertiesMenu")->getButton("translation")->isHovered()) // Translation button
 					{
 						_transformation = TransformationType::TRANSLATION;
 
 						// Update buttons hoverability
-						_rightWindow->getScreen("modelPropertiesMenu")->getButton("translation")->setHoverable(false);
-						_rightWindow->getScreen("modelPropertiesMenu")->getButton("rotation")->setHoverable(true);
-						_rightWindow->getScreen("modelPropertiesMenu")->getButton("scaling")->setHoverable(true);
+						_rightWindow->getScreen("propertiesMenu")->getButton("translation")->setHoverable(false);
+						_rightWindow->getScreen("propertiesMenu")->getButton("rotation")->setHoverable(true);
+						_rightWindow->getScreen("propertiesMenu")->getButton("scaling")->setHoverable(true);
 					}
-					else if (_rightWindow->getScreen("modelPropertiesMenu")->getButton("rotation")->isHovered()) // Rotation button
+					else if (_rightWindow->getScreen("propertiesMenu")->getButton("rotation")->isHovered()) // Rotation button
 					{
 						_transformation = TransformationType::ROTATION;
 
 						// Update buttons hoverability
-						_rightWindow->getScreen("modelPropertiesMenu")->getButton("translation")->setHoverable(true);
-						_rightWindow->getScreen("modelPropertiesMenu")->getButton("rotation")->setHoverable(false);
-						_rightWindow->getScreen("modelPropertiesMenu")->getButton("scaling")->setHoverable(true);
+						_rightWindow->getScreen("propertiesMenu")->getButton("translation")->setHoverable(true);
+						_rightWindow->getScreen("propertiesMenu")->getButton("rotation")->setHoverable(false);
+						_rightWindow->getScreen("propertiesMenu")->getButton("scaling")->setHoverable(true);
 					}
-					else if (_rightWindow->getScreen("modelPropertiesMenu")->getButton("scaling")->isHovered()) // Scaling button
+					else if (_rightWindow->getScreen("propertiesMenu")->getButton("scaling")->isHovered()) // Scaling button
 					{
 						_transformation = TransformationType::SCALING;
 
 						// Update buttons hoverability
-						_rightWindow->getScreen("modelPropertiesMenu")->getButton("translation")->setHoverable(true);
-						_rightWindow->getScreen("modelPropertiesMenu")->getButton("rotation")->setHoverable(true);
-						_rightWindow->getScreen("modelPropertiesMenu")->getButton("scaling")->setHoverable(false);
+						_rightWindow->getScreen("propertiesMenu")->getButton("translation")->setHoverable(true);
+						_rightWindow->getScreen("propertiesMenu")->getButton("rotation")->setHoverable(true);
+						_rightWindow->getScreen("propertiesMenu")->getButton("scaling")->setHoverable(false);
 					}
-					else if (_rightWindow->getScreen("modelPropertiesMenu")->getButton("freeze")->isHovered()) // Freeze button
+					else if (_rightWindow->getScreen("propertiesMenu")->getButton("freeze")->isHovered()) // Freeze button
 					{
 						// Model
 						_fe3d.gameEntity_setStaticToCamera(_activeModelID, true);
@@ -118,7 +118,7 @@ void SceneEditor::_updateModelEditing()
 							_fe3d.aabbEntity_setResponsiveness(aabbID, false);
 						}
 					}
-					else if (_rightWindow->getScreen("modelPropertiesMenu")->getButton("delete")->isHovered()) // Delete button
+					else if (_rightWindow->getScreen("propertiesMenu")->getButton("delete")->isHovered()) // Delete button
 					{
 						_fe3d.gameEntity_delete(_activeModelID);
 						_rightWindow->setActiveScreen("main");
@@ -135,22 +135,22 @@ void SceneEditor::_updateModelEditing()
 				// Apply new model position / rotation / size
 				if (_transformation == TransformationType::TRANSLATION)
 				{
-					_handleValueChanging("modelPropertiesMenu", "xPlus", "x", position.x, _movementChangingSpeed);
-					_handleValueChanging("modelPropertiesMenu", "xMinus", "x", position.x, -_movementChangingSpeed);
-					_handleValueChanging("modelPropertiesMenu", "yPlus", "y", position.y, _movementChangingSpeed);
-					_handleValueChanging("modelPropertiesMenu", "yMinus", "y", position.y, -_movementChangingSpeed);
-					_handleValueChanging("modelPropertiesMenu", "zPlus", "z", position.z, _movementChangingSpeed);
-					_handleValueChanging("modelPropertiesMenu", "zMinus", "z", position.z, -_movementChangingSpeed);
+					_handleValueChanging("propertiesMenu", "xPlus", "x", position.x, _movementChangingSpeed);
+					_handleValueChanging("propertiesMenu", "xMinus", "x", position.x, -_movementChangingSpeed);
+					_handleValueChanging("propertiesMenu", "yPlus", "y", position.y, _movementChangingSpeed);
+					_handleValueChanging("propertiesMenu", "yMinus", "y", position.y, -_movementChangingSpeed);
+					_handleValueChanging("propertiesMenu", "zPlus", "z", position.z, _movementChangingSpeed);
+					_handleValueChanging("propertiesMenu", "zMinus", "z", position.z, -_movementChangingSpeed);
 					_fe3d.gameEntity_setPosition(_activeModelID, position);
 				}
 				else if (_transformation == TransformationType::ROTATION)
 				{
-					_handleValueChanging("modelPropertiesMenu", "xPlus", "x", rotation.x, _movementChangingSpeed);
-					_handleValueChanging("modelPropertiesMenu", "xMinus", "x", rotation.x, -_movementChangingSpeed);
-					_handleValueChanging("modelPropertiesMenu", "yPlus", "y", rotation.y, _movementChangingSpeed);
-					_handleValueChanging("modelPropertiesMenu", "yMinus", "y", rotation.y, -_movementChangingSpeed);
-					_handleValueChanging("modelPropertiesMenu", "zPlus", "z", rotation.z, _movementChangingSpeed);
-					_handleValueChanging("modelPropertiesMenu", "zMinus", "z", rotation.z, -_movementChangingSpeed);
+					_handleValueChanging("propertiesMenu", "xPlus", "x", rotation.x, _movementChangingSpeed);
+					_handleValueChanging("propertiesMenu", "xMinus", "x", rotation.x, -_movementChangingSpeed);
+					_handleValueChanging("propertiesMenu", "yPlus", "y", rotation.y, _movementChangingSpeed);
+					_handleValueChanging("propertiesMenu", "yMinus", "y", rotation.y, -_movementChangingSpeed);
+					_handleValueChanging("propertiesMenu", "zPlus", "z", rotation.z, _movementChangingSpeed);
+					_handleValueChanging("propertiesMenu", "zMinus", "z", rotation.z, -_movementChangingSpeed);
 					rotation.x = std::fmodf(rotation.x, 360.0f);
 					rotation.y = std::fmodf(rotation.y, 360.0f);
 					rotation.z = std::fmodf(rotation.z, 360.0f);
@@ -161,12 +161,12 @@ void SceneEditor::_updateModelEditing()
 					// Model size
 					vec3 oldSize = size;
 					float factor = 25.0f;
-					_handleValueChanging("modelPropertiesMenu", "xPlus", "x", size.x, _movementChangingSpeed, factor);
-					_handleValueChanging("modelPropertiesMenu", "xMinus", "x", size.x, -_movementChangingSpeed, factor);
-					_handleValueChanging("modelPropertiesMenu", "yPlus", "y", size.y, _movementChangingSpeed, factor);
-					_handleValueChanging("modelPropertiesMenu", "yMinus", "y", size.y, -_movementChangingSpeed, factor);
-					_handleValueChanging("modelPropertiesMenu", "zPlus", "z", size.z, _movementChangingSpeed, factor);
-					_handleValueChanging("modelPropertiesMenu", "zMinus", "z", size.z, -_movementChangingSpeed, factor);
+					_handleValueChanging("propertiesMenu", "xPlus", "x", size.x, _movementChangingSpeed, factor);
+					_handleValueChanging("propertiesMenu", "xMinus", "x", size.x, -_movementChangingSpeed, factor);
+					_handleValueChanging("propertiesMenu", "yPlus", "y", size.y, _movementChangingSpeed, factor);
+					_handleValueChanging("propertiesMenu", "yMinus", "y", size.y, -_movementChangingSpeed, factor);
+					_handleValueChanging("propertiesMenu", "zPlus", "z", size.z, _movementChangingSpeed, factor);
+					_handleValueChanging("propertiesMenu", "zMinus", "z", size.z, -_movementChangingSpeed, factor);
 					_fe3d.gameEntity_setSize(_activeModelID, size);
 				}
 			}
@@ -199,21 +199,6 @@ void SceneEditor::_updateModelEditing()
 					_selectedModelID = "";
 				}
 			}
-		}
-
-		// Only the delete button should be availible for instanced entities
-		if (_activeModelID != "")
-		{
-			_rightWindow->getScreen("modelPropertiesMenu")->getButton("translation")->setHoverable(_fe3d.gameEntity_isInstanced(_activeModelID));
-			_rightWindow->getScreen("modelPropertiesMenu")->getButton("rotation")->setHoverable(_fe3d.gameEntity_isInstanced(_activeModelID));
-			_rightWindow->getScreen("modelPropertiesMenu")->getButton("scaling")->setHoverable(_fe3d.gameEntity_isInstanced(_activeModelID));
-			_rightWindow->getScreen("modelPropertiesMenu")->getButton("freeze")->setHoverable(_fe3d.gameEntity_isInstanced(_activeModelID));
-			_rightWindow->getScreen("modelPropertiesMenu")->getButton("xPlus")->setHoverable(_fe3d.gameEntity_isInstanced(_activeModelID));
-			_rightWindow->getScreen("modelPropertiesMenu")->getButton("xMinus")->setHoverable(_fe3d.gameEntity_isInstanced(_activeModelID));
-			_rightWindow->getScreen("modelPropertiesMenu")->getButton("yPlus")->setHoverable(_fe3d.gameEntity_isInstanced(_activeModelID));
-			_rightWindow->getScreen("modelPropertiesMenu")->getButton("yMinus")->setHoverable(_fe3d.gameEntity_isInstanced(_activeModelID));
-			_rightWindow->getScreen("modelPropertiesMenu")->getButton("zPlus")->setHoverable(_fe3d.gameEntity_isInstanced(_activeModelID));
-			_rightWindow->getScreen("modelPropertiesMenu")->getButton("zMinus")->setHoverable(_fe3d.gameEntity_isInstanced(_activeModelID));
 		}
 	}
 }

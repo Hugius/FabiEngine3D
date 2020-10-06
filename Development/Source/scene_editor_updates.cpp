@@ -12,7 +12,9 @@ void SceneEditor::update()
 	// Billboard updates
 	_updateMainBillboardMenu();
 	_updateBilboardPlacingMenu();
-	_updateBillboardEditingMenu();
+	_updateBillboardChoosingMenu();
+	_updateBillboardPlacing();
+	_updateBillboardEditing();
 
 	// Lighting updates
 	_updateMainLightingMenu();

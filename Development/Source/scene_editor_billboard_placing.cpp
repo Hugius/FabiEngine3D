@@ -1,13 +1,6 @@
 #include "scene_editor.hpp"
 
-void SceneEditor::_updateBilboardPlacingMenu()
+void SceneEditor::_updateBillboardPlacing()
 {
-	if (_isLoaded)
-	{
-		// Only if user is in placement mode
-		if (_currentBillboardName != "")
-		{
 
-		}
-	}
 }

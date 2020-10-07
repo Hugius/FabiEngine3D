@@ -59,8 +59,8 @@ void BillboardEditor::loadBillboards()
 		// Add billboard name
 		_billboardNames.push_back(name);
 
-		// Check if billboard has a diffuse map
-		if (diffusePath != "")
+		// Determine billboard type
+		if (diffusePath != "") // Textured billboard
 		{
 			_fe3d.billBoardEntity_add(name, diffusePath, _billboardPosition, vec3(0.0f), size, transparent, facingX, facingY, false, false);
 			_fe3d.billboardEntity_setColor(name, color);
@@ -74,11 +74,11 @@ void BillboardEditor::loadBillboards()
 				_fe3d.billBoardEntity_playSpriteAnimation(name, -1);
 			}
 		}
-		else if (textContent != "")
+		else if (fontPath != "") // Text billboard
 		{
 			_fe3d.billBoardEntity_add(name, textContent, fontPath, color, _billboardPosition, vec3(0.0f), size, facingX, facingY, false);
 		}
-		else
+		else // Colored billboard
 		{
 			_fe3d.billBoardEntity_add(name, color, _billboardPosition, vec3(0.0f), size, facingX, facingY, false);
 		}

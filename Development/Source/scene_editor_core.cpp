@@ -439,6 +439,6 @@ void SceneEditor::unload()
 
 	// Other
 	_leftWindow->getScreen("sceneEditorMenuModelPlace")->getScrollingList("modelList")->deleteButtons();
-	_leftWindow->getScreen("sceneEditorMenuModelPlace")->getScrollingList("billboardList")->deleteButtons();
+	_leftWindow->getScreen("sceneEditorMenuBillboardPlace")->getScrollingList("billboardList")->deleteButtons();
 	_fe3d.misc_disableAabbFrameRendering();
 }

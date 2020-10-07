@@ -39,6 +39,7 @@ void DepthRenderer::render(const TerrainEntity* entity)
 		_shader.uploadUniform("u_modelMatrix", mat4(1.0f));
 		_shader.uploadUniform("u_isAlphaObject", false);
 		_shader.uploadUniform("u_isInstanced", false);
+		_shader.uploadUniform("u_isBillboard", false);
 		_shader.uploadUniform("u_maxY", (std::numeric_limits<float>::max)());
 
 		// Bind
@@ -71,6 +72,7 @@ void DepthRenderer::render(const GameEntity* entity)
 		_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix());
 		_shader.uploadUniform("u_isAlphaObject", entity->isTransparent());
 		_shader.uploadUniform("u_maxY", entity->getMaxY());
+		_shader.uploadUniform("u_isBillboard", false);
 
 		// Check if entity is static to the camera view
 		if (entity->isCameraStatic())
@@ -128,9 +130,28 @@ void DepthRenderer::render(const BillboardEntity* entity)
 {
 	if (entity->isVisible())
 	{
+		// Sprite animation
+		vec2 uvMultiplier = vec2(1.0f);
+		vec2 uvAdder = vec2(0.0f);
+		if (entity->hasSpriteAnimation())
+		{
+			uvMultiplier = vec2(1.0f / float(entity->getTotalSpriteColumns()), 1.0f / float(entity->getTotalSpriteRows()));
+			uvAdder = vec2(float(entity->getSpriteColumnIndex()) * uvMultiplier.x, float(entity->getSpriteRowIndex()) * uvMultiplier.y);
+		}
+
+		// Text UV repeat fix
+		if (entity->getTextContent() != "")
+		{
+			uvMultiplier = vec2(1.0f, 0.9f);
+		}
+
 		// Shader uniforms
 		_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix());
 		_shader.uploadUniform("u_isAlphaObject", entity->isTransparent());
+		_shader.uploadUniform("u_uvRepeat", entity->getUvRepeat());
+		_shader.uploadUniform("u_uvAdder", uvAdder);
+		_shader.uploadUniform("u_uvMultiplier", uvMultiplier);
+		_shader.uploadUniform("u_isBillboard", true);
 		_shader.uploadUniform("u_isInstanced", false);
 
 		// Texture

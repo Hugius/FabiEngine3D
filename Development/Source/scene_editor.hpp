@@ -73,13 +73,13 @@ private:
 
 	// Miscellaneous
 	bool _loadSceneFile(bool overwriteCamera);
-	void _placeModel(const string& modelID, const string& modelName, vec3 position);
-	void _placeModel(const string& modelID, vec3 position, vec3 rotation, vec3 size, const string& objPath, const string& diffuseMapPath,
+	void _placeModel(const string& newID, const string& previewID, vec3 position);
+	void _placeModel(const string& newID, vec3 position, vec3 rotation, vec3 size, const string& objPath, const string& diffuseMapPath,
 		const string& lightMapPath, const string& reflectionMapPath, const string& normalMapPath, bool isFrozen,
 		bool isFaceCulled, bool isShadowed, bool isTransparent, bool isReflective, bool isSpecular, 
 		float specularFactor, float specularIntensity, float lightness, vec3 color, float uvRepeat, const string& lodEntityID, bool isInstanced,
 		vector<vec3> instancedOffsets, vector<string> aabbNames, vector<vec3> aabbPositions, vector<vec3> aabbSizes);
-	void _placeBillboard(const string& billboardID, const string& billboardName);
+	void _placeBillboard(const string& newID, const string& previewID, vec3 position);
 	void _updateModelBlinking(const string& modelID, int& multiplier);
 	void _updateBillboardBlinking(const string& billboardID, int& multiplier);
 	void _updateLightbulbAnimation(const string& modelID, int& multiplier);

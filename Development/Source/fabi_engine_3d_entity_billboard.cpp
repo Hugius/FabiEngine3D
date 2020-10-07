@@ -109,6 +109,16 @@ void FabiEngine3D::billboardEntity_show(const string& ID)
 	_core->_billboardEntityManager.getEntity(ID)->setVisible(true);
 }
 
+float FabiEngine3D::billboardEntity_getOriginalLightness(const string& ID)
+{
+	return _core->_billboardEntityManager.getEntity(ID)->getOriginalLightness();
+}
+
+float FabiEngine3D::billboardEntity_getLightness(const string& ID)
+{
+	return _core->_billboardEntityManager.getEntity(ID)->getLightness();
+}
+
 bool FabiEngine3D::billboardEntity_isExisting(const string& ID)
 {
 	return _core->_billboardEntityManager.isExisting(ID);
@@ -210,6 +220,16 @@ void FabiEngine3D::billboardEntity_setCameraFacingY(const string& ID, bool enabl
 void FabiEngine3D::billboardEntity_setMaxY(const string& ID, float y)
 {
 	_core->_billboardEntityManager.getEntity(ID)->setMaxY(y);
+}
+
+void FabiEngine3D::billboardEntity_setOriginalLightness(const string& ID, float lightness)
+{
+	_core->_billboardEntityManager.getEntity(ID)->setOriginalLightness(lightness);
+}
+
+void FabiEngine3D::billboardEntity_setLightness(const string& ID, float lightness)
+{
+	_core->_billboardEntityManager.getEntity(ID)->setLightness(lightness);
 }
 
 bool FabiEngine3D::billboardEntity_isFacingCameraX(const string& ID)

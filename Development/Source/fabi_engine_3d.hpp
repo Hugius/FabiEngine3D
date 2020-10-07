@@ -305,16 +305,20 @@ public:
 	void billboardEntity_setCameraFacingX(const string& ID, bool enabled);
 	void billboardEntity_setCameraFacingY(const string& ID, bool enabled);
 	void billboardEntity_setMaxY(const string& ID, float y);
+	void billboardEntity_setOriginalLightness(const string& ID, float lightness);
+	void billboardEntity_setLightness(const string& ID, float lightness);
 
 	// Billboard entity interface (core) - getters
-	bool billboardEntity_isExisting(const string& ID);
-	bool billboardEntity_isVisible(const string& ID);
-	bool billboardEntity_isFacingCameraX(const string& ID);
-	bool billboardEntity_isFacingCameraY(const string& ID);
-	vec3 billboardEntity_getPosition(const string& ID);
-	vec3 billboardEntity_getRotation(const string& ID);
-	vec2 billboardEntity_getSize(const string& ID);
-	vec3 billboardEntity_getColor(const string& ID);
+	float billboardEntity_getOriginalLightness(const string& ID);
+	float billboardEntity_getLightness(const string& ID);
+	bool  billboardEntity_isExisting(const string& ID);
+	bool  billboardEntity_isVisible(const string& ID);
+	bool  billboardEntity_isFacingCameraX(const string& ID);
+	bool  billboardEntity_isFacingCameraY(const string& ID);
+	vec3  billboardEntity_getPosition(const string& ID);
+	vec3  billboardEntity_getRotation(const string& ID);
+	vec2  billboardEntity_getSize(const string& ID);
+	vec3  billboardEntity_getColor(const string& ID);
 	vector<string> billboardEntity_getAllIDs();
 
 	// Billboard entity interface (diffuseMap) - setters

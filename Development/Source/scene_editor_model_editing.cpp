@@ -15,7 +15,7 @@ void SceneEditor::_updateModelEditing()
 		}
 
 		// User must not be in placement mode
-		if (_currentPreviewModelName == "" && !_isPlacingPointlight)
+		if (_currentPreviewModelName == "" && _currentPreviewBillboardName == "" && !_isPlacingPointlight)
 		{
 			// Check if user selected a model
 			for (auto& entityID : _fe3d.gameEntity_getAllIDs())

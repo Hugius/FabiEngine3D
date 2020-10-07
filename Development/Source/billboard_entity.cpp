@@ -138,6 +138,16 @@ void BillboardEntity::increaseAnimationRepeats()
 	_animationRepeats++;
 }
 
+void BillboardEntity::setOriginalLightness(float val)
+{
+	_originalLightness = val;
+}
+
+void BillboardEntity::setLightness(float val)
+{
+	_lightness = val;
+}
+
 void BillboardEntity::setUvRepeat(float val)
 {
 	_uvRepeat = val;
@@ -196,6 +206,16 @@ const string& BillboardEntity::getFontPath() const
 const string& BillboardEntity::getDiffuseMapPath() const
 {
 	return _diffuseMapPath;
+}
+
+const float BillboardEntity::getOriginalLightness() const
+{
+	return _originalLightness;
+}
+
+const float BillboardEntity::getLightness() const
+{
+	return _lightness;
 }
 
 const float BillboardEntity::getUvRepeat() const

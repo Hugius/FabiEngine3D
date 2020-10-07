@@ -2,5 +2,207 @@
 
 void SceneEditor::_updateBillboardEditing()
 {
+	if (_isLoaded)
+	{
+		// Reset selected billboard from last frame
+		if (!_dontResetSelectedBillboard)
+		{
+			_selectedBillboardID = "";
+		}
+		else
+		{
+			_dontResetSelectedBillboard = false;
+		}
 
+		// User must not be in placement mode
+		if (_currentPreviewBillboardName == "" && _currentPreviewModelName == "" && !_isPlacingPointlight)
+		{
+			// Check if user selected a billboard
+			for (auto& entityID : _fe3d.billboardEntity_getAllIDs())
+			{
+				// Must not be preview entity
+				if (entityID[0] != '@')
+				{
+					auto hoveredID = _fe3d.collision_checkCursorInAny();
+					bool hovered = (hoveredID.size() >= entityID.size()) && (hoveredID.substr(0, entityID.size()) == entityID);
+
+					// Cursor must be in 3D space, no GUI interruptions, no RMB holding down
+					if (hovered && _fe3d.misc_isMouseInsideViewport() &&
+						!_gui->getGlobalScreen()->isFocused() && !_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_RIGHT))
+					{
+						// Select hovered billboard
+						_selectBillboard(entityID);
+
+						// Check if user clicked billboard
+						if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
+						{
+							// Check if same billboard is clicked again
+							if (_selectedBillboardID != _activeBillboardID)
+							{
+								_activateBillboard(_selectedBillboardID);
+							}
+						}
+					}
+					else
+					{
+						// Don't reset if billboard is active
+						if (entityID != _activeBillboardID && _selectedBillboardID == "")
+						{
+							_fe3d.billboardEntity_setLightness(entityID, _fe3d.billboardEntity_getOriginalLightness(entityID));
+						}
+					}
+				}
+			}
+
+			// Check if user made the active billboard inactive
+			if (_selectedBillboardID == "" && _activeBillboardID != "" && _fe3d.misc_isMouseInsideViewport() && !_gui->getGlobalScreen()->isFocused())
+			{
+				// LMB pressed
+				if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) && !_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_RIGHT))
+				{
+					_activeBillboardID = "";
+					_rightWindow->setActiveScreen("main");
+				}
+			}
+
+			// Update billboard lightness blinking
+			if (_selectedBillboardID != _activeBillboardID)
+			{
+				_updateBillboardBlinking(_selectedBillboardID, _selectedBillboardLightnessMultiplier);
+			}
+			_updateBillboardBlinking(_activeBillboardID, _activeBillboardLightnessMultiplier);
+
+			// Update properties screen
+			if (_activeBillboardID != "")
+			{
+				_rightWindow->setActiveScreen("billboardPropertiesMenu");
+
+				// GUI management (pressed)
+				if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
+				{
+					if (_rightWindow->getScreen("billboardPropertiesMenu")->getButton("translation")->isHovered()) // Translation button
+					{
+						_transformation = TransformationType::TRANSLATION;
+
+						// Update buttons hoverability
+						_rightWindow->getScreen("billboardPropertiesMenu")->getButton("translation")->setHoverable(false);
+						_rightWindow->getScreen("billboardPropertiesMenu")->getButton("rotation")->setHoverable(true);
+						_rightWindow->getScreen("billboardPropertiesMenu")->getButton("scaling")->setHoverable(true);
+					}
+					else if (_rightWindow->getScreen("billboardPropertiesMenu")->getButton("rotation")->isHovered()) // Rotation button
+					{
+						_transformation = TransformationType::ROTATION;
+
+						// Update buttons hoverability
+						_rightWindow->getScreen("billboardPropertiesMenu")->getButton("translation")->setHoverable(true);
+						_rightWindow->getScreen("billboardPropertiesMenu")->getButton("rotation")->setHoverable(false);
+						_rightWindow->getScreen("billboardPropertiesMenu")->getButton("scaling")->setHoverable(true);
+					}
+					else if (_rightWindow->getScreen("billboardPropertiesMenu")->getButton("scaling")->isHovered()) // Scaling button
+					{
+						_transformation = TransformationType::SCALING;
+
+						// Update buttons hoverability
+						_rightWindow->getScreen("billboardPropertiesMenu")->getButton("translation")->setHoverable(true);
+						_rightWindow->getScreen("billboardPropertiesMenu")->getButton("rotation")->setHoverable(true);
+						_rightWindow->getScreen("billboardPropertiesMenu")->getButton("scaling")->setHoverable(false);
+					}
+					else if (_rightWindow->getScreen("billboardPropertiesMenu")->getButton("delete")->isHovered()) // Delete button
+					{
+						_fe3d.billboardEntity_delete(_activeBillboardID);
+						_rightWindow->setActiveScreen("main");
+						_activeBillboardID = "";
+						return;
+					}
+				}
+
+				// Get entity transformation
+				vec3 position = _fe3d.billboardEntity_getPosition(_activeBillboardID);
+				vec3 rotation = _fe3d.billboardEntity_getRotation(_activeBillboardID);
+				vec2 size = _fe3d.billboardEntity_getSize(_activeBillboardID);
+
+				// Apply new billboard position / rotation / size
+				if (_transformation == TransformationType::TRANSLATION)
+				{
+					// Enable Z for position
+					_rightWindow->getScreen("billboardPropertiesMenu")->getButton("zMinus")->setHoverable(true);
+					_rightWindow->getScreen("billboardPropertiesMenu")->getButton("zPlus")->setHoverable(true);
+					_rightWindow->getScreen("billboardPropertiesMenu")->getWriteField("z")->setHoverable(true);
+
+					// Handle GUI input
+					_handleValueChanging("billboardPropertiesMenu", "xPlus", "x", position.x, _movementChangingSpeed);
+					_handleValueChanging("billboardPropertiesMenu", "xMinus", "x", position.x, -_movementChangingSpeed);
+					_handleValueChanging("billboardPropertiesMenu", "yPlus", "y", position.y, _movementChangingSpeed);
+					_handleValueChanging("billboardPropertiesMenu", "yMinus", "y", position.y, -_movementChangingSpeed);
+					_handleValueChanging("billboardPropertiesMenu", "zPlus", "z", position.z, _movementChangingSpeed);
+					_handleValueChanging("billboardPropertiesMenu", "zMinus", "z", position.z, -_movementChangingSpeed);
+					_fe3d.billboardEntity_setPosition(_activeBillboardID, position);
+				}
+				else if (_transformation == TransformationType::ROTATION)
+				{
+					// Enable Z for rotation
+					_rightWindow->getScreen("billboardPropertiesMenu")->getButton("zMinus")->setHoverable(true);
+					_rightWindow->getScreen("billboardPropertiesMenu")->getButton("zPlus")->setHoverable(true);
+					_rightWindow->getScreen("billboardPropertiesMenu")->getWriteField("z")->setHoverable(true);
+
+					// Handle GUI input
+					_handleValueChanging("billboardPropertiesMenu", "xPlus", "x", rotation.x, _movementChangingSpeed);
+					_handleValueChanging("billboardPropertiesMenu", "xMinus", "x", rotation.x, -_movementChangingSpeed);
+					_handleValueChanging("billboardPropertiesMenu", "yPlus", "y", rotation.y, _movementChangingSpeed);
+					_handleValueChanging("billboardPropertiesMenu", "yMinus", "y", rotation.y, -_movementChangingSpeed);
+					_handleValueChanging("billboardPropertiesMenu", "zPlus", "z", rotation.z, _movementChangingSpeed);
+					_handleValueChanging("billboardPropertiesMenu", "zMinus", "z", rotation.z, -_movementChangingSpeed);
+					rotation.x = std::fmodf(rotation.x, 360.0f);
+					rotation.y = std::fmodf(rotation.y, 360.0f);
+					rotation.z = std::fmodf(rotation.z, 360.0f);
+					_fe3d.billboardEntity_setRotation(_activeBillboardID, rotation);
+				}
+				else if (_transformation == TransformationType::SCALING)
+				{
+					// Disable Z for scaling
+					_rightWindow->getScreen("billboardPropertiesMenu")->getButton("zMinus")->setHoverable(false);
+					_rightWindow->getScreen("billboardPropertiesMenu")->getButton("zPlus")->setHoverable(false);
+					_rightWindow->getScreen("billboardPropertiesMenu")->getWriteField("z")->setHoverable(false);
+
+					// Handle GUI input
+					vec2 oldSize = size;
+					float factor = 25.0f;
+					_handleValueChanging("billboardPropertiesMenu", "xPlus", "x", size.x, _movementChangingSpeed, factor);
+					_handleValueChanging("billboardPropertiesMenu", "xMinus", "x", size.x, -_movementChangingSpeed, factor);
+					_handleValueChanging("billboardPropertiesMenu", "yPlus", "y", size.y, _movementChangingSpeed, factor);
+					_handleValueChanging("billboardPropertiesMenu", "yMinus", "y", size.y, -_movementChangingSpeed, factor);
+					_fe3d.billboardEntity_setSize(_activeBillboardID, size);
+				}
+			}
+
+			// Check if billboard is still selected or active
+			string textEntityID = _gui->getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID();
+			if (_selectedBillboardID == "" && _activeBillboardID == "")
+			{
+				_fe3d.textEntity_hide(textEntityID);
+			}
+			else
+			{
+				if (_selectedLightBulbID == "" && _activeLightBulbID == "")
+				{
+					_fe3d.textEntity_show(textEntityID);
+				}
+			}
+		}
+		else
+		{
+			if (_rightWindow->getActiveScreen()->getID() != "main")
+			{
+				// Reset when user wants to place billboards again
+				for (auto& entityID : _fe3d.billboardEntity_getAllIDs())
+				{
+					_rightWindow->setActiveScreen("main");
+					_fe3d.billboardEntity_setLightness(entityID, _fe3d.billboardEntity_getOriginalLightness(entityID));
+					_selectedBillboardLightnessMultiplier = 1;
+					_activeBillboardID = "";
+					_selectedBillboardID = "";
+				}
+			}
+		}
+	}
 }

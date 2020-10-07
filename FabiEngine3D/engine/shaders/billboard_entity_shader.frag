@@ -20,6 +20,7 @@ uniform vec3 u_fogColor;
 uniform float u_fogMinDistance;
 uniform float u_fogMaxDistance;
 uniform float u_fogDefaultFactor;
+uniform float u_lightness;
 
 // Boolean uniforms
 uniform bool u_fogEnabled;
@@ -54,6 +55,7 @@ void main()
 	}
 
 	o_finalColor.rgb = applyFog(o_finalColor.rgb);
+    o_finalColor.rgb *= u_lightness;
 }
 
 // Calculate fog color

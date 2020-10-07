@@ -1,15 +1,22 @@
 MODEL 725@hills 0 -10 0 0 0 0 10 26 10 user\assets\models\hills.obj user\assets\textures\diffuse_maps\grass3.png ? ? ? 0 0 1 0 0 0 1 1 0.6 1 1 1 10 ? 0
-MODEL 1537256661@pine 97.0606 6.37255 50.1007 0 0 0 1 1 1 user\assets\models\tree3.obj user\assets\textures\diffuse_maps\tree3.png ? ? user\assets\textures\normal_maps\pine.png 0 0 1 1 0 1 1 1 0.6 1 1 1 1 ? 0
-MODEL 25431562@pine 108.687 6.37255 58.4719 0 0 0 1 1 1 user\assets\models\tree3.obj user\assets\textures\diffuse_maps\tree3.png ? ? user\assets\textures\normal_maps\pine.png 0 0 1 1 0 1 1 1 0.6 1 1 1 1 ? 0
-MODEL grass_instanced 0 0 0 0 0 0 1.5 1.5 1.5 user\assets\models\grassfield.obj user\assets\textures\diffuse_maps\grassfield.png ? ? ? 0 0 1 1 0 0 1 1 0.75 1 1 1 1 ? 1 100.243 6.37255 65.6273 113.065 6.37255 72.8723 122.46 6.37254 86.928 101.825 6.37255 80.9189 84.3476 6.37255 61.4013 89.9163 6.37255 76.5504 80.9125 6.37255 94.8808 89.0293 6.37255 108.01 98.1386 6.37255 98.1968 112.333 6.37255 109.718 131.002 6.37255 102.481 158.83 6.37254 93.2937 137.932 6.37255 78.5509 127.492 6.37255 62.1111 122.044 6.37255 44.952 
+MODEL 430573372@pine 105.473 6.37255 53.063 0 0 0 1 1 1 user\assets\models\tree3.obj user\assets\textures\diffuse_maps\tree3.png ? ? user\assets\textures\normal_maps\pine.png 0 0 1 1 0 1 1 1 0.6 1 1 1 1 ? 0 trunk 0 0 0 0.5688 3.15713 0.5688 leaves 0 3.22034 0 4.53803 9.43424 4.08534
+MODEL 1856978303@pine 123.366 6.37255 70.5376 0 0 0 1 1 1 user\assets\models\tree3.obj user\assets\textures\diffuse_maps\tree3.png ? ? user\assets\textures\normal_maps\pine.png 0 0 1 1 0 1 1 1 0.6 1 1 1 1 ? 0 trunk 0 0 0 0.5688 3.15713 0.5688 leaves 0 3.22034 0 4.53803 9.43424 4.08534
+MODEL 523756742@pine 109.282 6.37254 85.4332 0 0 0 1 1 1 user\assets\models\tree3.obj user\assets\textures\diffuse_maps\tree3.png ? ? user\assets\textures\normal_maps\pine.png 0 0 1 1 0 1 1 1 0.6 1 1 1 1 ? 0 trunk 0 0 0 0.5688 3.15713 0.5688 leaves 0 3.22034 0 4.53803 9.43424 4.08534
+MODEL 480667347@pine 94.9127 6.37255 75.7023 0 0 0 1 1 1 user\assets\models\tree3.obj user\assets\textures\diffuse_maps\tree3.png ? ? user\assets\textures\normal_maps\pine.png 0 0 1 1 0 1 1 1 0.6 1 1 1 1 ? 0 trunk 0 0 0 0.5688 3.15713 0.5688 leaves 0 3.22034 0 4.53803 9.43424 4.08534
+MODEL 710413168@pine 86.2759 6.37255 60.6251 0 0 0 1 1 1 user\assets\models\tree3.obj user\assets\textures\diffuse_maps\tree3.png ? ? user\assets\textures\normal_maps\pine.png 0 0 1 1 0 1 1 1 0.6 1 1 1 1 ? 0 trunk 0 0 0 0.5688 3.15713 0.5688 leaves 0 3.22034 0 4.53803 9.43424 4.08534
+MODEL 991744621@pine 89.7975 6.37255 86.8135 0 0 0 1 1 1 user\assets\models\tree3.obj user\assets\textures\diffuse_maps\tree3.png ? ? user\assets\textures\normal_maps\pine.png 0 0 1 1 0 1 1 1 0.6 1 1 1 1 ? 0 trunk 0 0 0 0.5688 3.15713 0.5688 leaves 0 3.22034 0 4.53803 9.43424 4.08534
+MODEL 538598722@pine 76.8523 6.37255 74.4958 0 0 0 1 1 1 user\assets\models\tree3.obj user\assets\textures\diffuse_maps\tree3.png ? ? user\assets\textures\normal_maps\pine.png 0 0 1 1 0 1 1 1 0.6 1 1 1 1 ? 0 trunk 0 0 0 0.5688 3.15713 0.5688 leaves 0 3.22034 0 4.53803 9.43424 4.08534
+MODEL 985700215@pine 67.9673 6.37253 51.3478 0 0 0 1 1 1 user\assets\models\tree3.obj user\assets\textures\diffuse_maps\tree3.png ? ? user\assets\textures\normal_maps\pine.png 0 0 1 1 0 1 1 1 0.6 1 1 1 1 ? 0 trunk 0 0 0 0.5688 3.15713 0.5688 leaves 0 3.22034 0 4.53803 9.43424 4.08534
+MODEL 1738738365@pine 88.8563 6.37255 42.9637 0 0 0 1 1 1 user\assets\models\tree3.obj user\assets\textures\diffuse_maps\tree3.png ? ? user\assets\textures\normal_maps\pine.png 0 0 1 1 0 1 1 1 0.6 1 1 1 1 ? 0 trunk 0 0 0 0.5688 3.15713 0.5688 leaves 0 3.22034 0 4.53803 9.43424 4.08534
+MODEL grass_instanced 0 0 0 0 0 0 1.5 1.5 1.5 user\assets\models\grassfield.obj user\assets\textures\diffuse_maps\grassfield.png ? ? ? 0 0 1 1 0 0 1 1 0.75 1 1 1 1 ? 1 101.579 6.37255 62.4621 95.1465 6.37255 70.289 91.1426 6.37255 65.2357 87.8396 6.37254 73.1742 82.4712 6.37255 65.2596 83.2136 6.37255 56.4851 89.8212 6.37255 52.7052 99.7891 6.37255 46.0593 104.871 6.37255 53.8838 113.052 6.37255 59.4689 110.165 6.37255 66.439 103.785 6.37254 72.9549 101.009 6.37255 83.0744 95.2336 6.37255 81.9537 88.9118 6.37255 83.174
 AMBIENT_LIGHT 1 1 1 0.5
 DIRECTIONAL_LIGHT 1000 1000 1000 1 1 1 1 200
 CAMERA_FOV 70
 LOD_DISTANCE 100
 EDITOR_SPEED 5
-EDITOR_POSITION 98.2116 8.52028 60.64
-EDITOR_YAW 298.495
-EDITOR_PITCH -19.1665
+EDITOR_POSITION 78.5754 10.9203 66.1738
+EDITOR_YAW 357.495
+EDITOR_PITCH -2.83317
 GRAPHICS_SHADOWS 1 100 50.000000 50.000000 0.000000 0.000000 0.000000 0.000000 1 0
 GRAPHICS_MOTIONBLUR 1 8
 GRAPHICS_DOF 1 0 100 10

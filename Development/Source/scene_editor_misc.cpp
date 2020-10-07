@@ -20,7 +20,7 @@ void SceneEditor::_selectModel(const string& modelID)
 	_fe3d.guiEntity_changeTexture("@@cursor", "engine\\textures\\cursor_pointing.png");
 
 	// Check if nothing is active
-	if (_activeModelID == "" && _activeLightBulbID == "")
+	if (_activeModelID == "" && _activeBillboardID == "" && _activeLightBulbID == "")
 	{
 		// Removing the unique number from the modelID and updating the text content
 		string modelName = modelID.substr(modelID.find('@') + 1);
@@ -53,12 +53,45 @@ void SceneEditor::_activateModel(const string& modelID)
 	_fe3d.textEntity_setTextContent(textEntityID, "Active: " + modelName, 0.025f);
 }
 
-void SceneEditor::_selectBillboard(const string& modelID)
+void SceneEditor::_selectBillboard(const string& billboardID)
 {
+	_selectedBillboardID = billboardID;
+
+	// Change cursor
+	_fe3d.guiEntity_changeTexture("@@cursor", "engine\\textures\\cursor_pointing.png");
+
+	// Check if nothing is active
+	if (_activeBillboardID == "" && _activeModelID == "" && _activeLightBulbID == "")
+	{
+		// Removing the unique number from the billboardID and updating the text content
+		string billboardName = billboardID.substr(billboardID.find('@') + 1);
+		string textEntityID = _gui->getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID();
+		_fe3d.textEntity_show(textEntityID);
+		_fe3d.textEntity_setTextContent(textEntityID, "Selected: " + billboardName, 0.025f);
+	}
 }
 
-void SceneEditor::_activateBillboard(const string& modelID)
+void SceneEditor::_activateBillboard(const string& billboardID)
 {
+	_activeBillboardID = billboardID;
+	_transformation = TransformationType::TRANSLATION;
+
+	// Activate properties screen
+	_rightWindow->getScreen("billboardPropertiesMenu")->getButton("translation")->setHoverable(false);
+	_rightWindow->getScreen("billboardPropertiesMenu")->getButton("rotation")->setHoverable(true);
+	_rightWindow->getScreen("billboardPropertiesMenu")->getButton("scaling")->setHoverable(true);
+
+	// Filling writefields
+	vec3 position = _fe3d.billboardEntity_getPosition(_activeBillboardID);
+	_rightWindow->getScreen("billboardPropertiesMenu")->getWriteField("x")->setTextContent(to_string(static_cast<int>(position.x)));
+	_rightWindow->getScreen("billboardPropertiesMenu")->getWriteField("y")->setTextContent(to_string(static_cast<int>(position.y)));
+	_rightWindow->getScreen("billboardPropertiesMenu")->getWriteField("z")->setTextContent(to_string(static_cast<int>(position.z)));
+
+	// Removing the unique number from the billboardID and updating the text content
+	string billboardName = billboardID.substr(billboardID.find('@') + 1);
+	string textEntityID = _gui->getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID();
+	_fe3d.textEntity_show(textEntityID);
+	_fe3d.textEntity_setTextContent(textEntityID, "Active: " + billboardName, 0.025f);
 }
 
 void SceneEditor::_placeModel(const string& newID, const string& previewID, vec3 position)
@@ -301,7 +334,27 @@ void SceneEditor::_updateModelBlinking(const string& modelID, int& multiplier)
 
 void SceneEditor::_updateBillboardBlinking(const string& billboardID, int& multiplier)
 {
+	// Reset multiplier if nothing active / selected
+	if (billboardID == "")
+	{
+		multiplier = 1;
+	}
 
+	// Update billboard lightness
+	if (billboardID != "")
+	{
+		// Check if lightness reached bounds
+		if (_fe3d.billboardEntity_getLightness(billboardID) > _fe3d.billboardEntity_getOriginalLightness(billboardID) ||
+			_fe3d.billboardEntity_getLightness(billboardID) < 0.0f)
+		{
+			multiplier *= -1;
+		}
+
+		// Set billboard lightness
+		float range = _fe3d.billboardEntity_getOriginalLightness(billboardID);
+		float speed = (_billboardBlinkingSpeed * static_cast<float>(multiplier) * range);
+		_fe3d.billboardEntity_setLightness(billboardID, _fe3d.billboardEntity_getLightness(billboardID) + speed);
+	}
 }
 
 void SceneEditor::_updateLightbulbAnimation(const string& modelID, int& multiplier)

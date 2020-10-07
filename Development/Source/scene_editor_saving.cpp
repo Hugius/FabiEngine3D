@@ -121,23 +121,26 @@ void SceneEditor::save()
 					isInstanced;
 
 				// Write instanced offset data
-				if (!instancedOffsets.empty()) file << " ";
-				for (unsigned int i = 0; i < instancedOffsets.size(); i++)
+				if (isInstanced)
 				{
-					file <<
-						instancedOffsets[i].x << " " <<
-						instancedOffsets[i].y << " " <<
-						instancedOffsets[i].z;
-
-					// Add space
-					if (i != (instancedOffsets.size() - 1))
+					if (!instancedOffsets.empty()) file << " ";
+					for (unsigned int i = 0; i < instancedOffsets.size(); i++)
 					{
-						file << " ";
+						file <<
+							instancedOffsets[i].x << " " <<
+							instancedOffsets[i].y << " " <<
+							instancedOffsets[i].z;
+
+						// Add space
+						if (i != (instancedOffsets.size() - 1))
+						{
+							file << " ";
+						}
 					}
 				}
 
 				// Write AABB data
-				if (!instancedOffsets.empty()) file << " ";
+				if (!aabbNames.empty()) file << " ";
 				for (unsigned int i = 0; i < aabbNames.size(); i++)
 				{
 					file <<

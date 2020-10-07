@@ -62,6 +62,7 @@ void BillboardEntityRenderer::render(const BillboardEntity* entity)
 		_shader.uploadUniform("u_isAlphaObject", entity->isTransparent());
 		_shader.uploadUniform("u_noTexture", entity->getDiffuseMap() == 0);
 		_shader.uploadUniform("u_color", entity->getColor());
+		_shader.uploadUniform("u_lightness", entity->getLightness());
 		_shader.uploadUniform("u_uvRepeat", entity->getUvRepeat());
 		_shader.uploadUniform("u_uvAdder", uvAdder);
 		_shader.uploadUniform("u_uvMultiplier", uvMultiplier);

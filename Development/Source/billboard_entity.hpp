@@ -43,6 +43,8 @@ public:
 	void increasePassedFrames();
 	void resetPassedFrames();
 	void increaseAnimationRepeats();
+	void setOriginalLightness(float val);
+	void setLightness(float val);
 	void setUvRepeat(float val);
 	void setMaxY(float val);
 
@@ -57,6 +59,8 @@ public:
 	const string& getTextContent() const;
 	const string& getFontPath() const;
 	const string& getDiffuseMapPath() const;
+	const float getOriginalLightness() const;
+	const float getLightness() const;
 	const float getUvRepeat() const;
 	const float getMaxY() const;
 	const int getPassedFrames() const;
@@ -81,6 +85,8 @@ private:
 	vec3 _scaling         = vec3(1.0f, 1.0f, 1.0f);
 	vec3 _color           = vec3(1.0f);
 
+	float _originalLightness = 1.0f;
+	float _lightness = 1.0f;
 	float _uvRepeat = 1.0f;
 	float _maxY = (std::numeric_limits<float>::max)();
 	

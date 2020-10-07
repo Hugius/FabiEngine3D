@@ -71,9 +71,9 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>$(SolutionDir)FabiEngine3D\bin\</OutDir>
-    <IncludePath>$(SolutionDir)FabiEngine3D\Engine\libraries\includes\;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)FabiEngine3D\Engine\libraries\lib\;$(LibraryPath)</LibraryPath>
+    <OutDir>$(SolutionDir)..\FabiEngine3D\bin\</OutDir>
+    <IncludePath>$(SolutionDir)..\FabiEngine3D\Engine\libraries\includes\;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)..\FabiEngine3D\Engine\libraries\lib\;$(LibraryPath)</LibraryPath>
     <TargetName>FabiEngine3D</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">

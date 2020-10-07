@@ -179,7 +179,7 @@ void SceneEditor::_updateModelEditing()
 			}
 			else
 			{
-				if (_selectedLightBulbID == "" && _activeLightBulbID == "")
+				if (_selectedBillboardID == "" && _activeBillboardID == "" && _selectedLightBulbID == "" && _activeLightBulbID == "")
 				{
 					_fe3d.textEntity_show(textEntityID);
 				}

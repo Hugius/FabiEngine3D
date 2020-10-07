@@ -17,7 +17,6 @@ uniform vec2 u_uvAdder;
 uniform vec2 u_uvMultiplier;
 
 // Float uniforms
-uniform float u_uvRepeat;
 uniform float u_maxY;
 
 // Boolean uniforms
@@ -41,7 +40,7 @@ void main()
 	// Out variables
     if(u_isBillboard)
     {
-        f_uv = vec2(u_uvAdder.x + (v_uv.x*u_uvMultiplier.x), u_uvAdder.y + (-v_uv.y*u_uvMultiplier.y)) * u_uvRepeat;
+        f_uv = vec2(u_uvAdder.x + (v_uv.x*u_uvMultiplier.x), u_uvAdder.y + (-v_uv.y*u_uvMultiplier.y));
     }
     else
     {

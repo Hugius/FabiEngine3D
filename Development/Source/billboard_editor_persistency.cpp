@@ -108,10 +108,21 @@ void BillboardEditor::save()
 		// Write billboard data into file
 		for (auto& billboardName : _billboardNames)
 		{
+			// Retrieve all valus
+			auto size = _fe3d.billboardEntity_getSize(billboardName);
+			auto color = _fe3d.billboardEntity_getColor(billboardName);
+			auto diffusePath = _fe3d.billboardEntity_getDiffuseMapPath(billboardName);
+			auto fontPath = _fe3d.billboardEntity_getFontPath(billboardName);
+			auto textContent = _fe3d.billboardEntity_getTextContent(billboardName);
+			auto isFacingX = _fe3d.billboardEntity_isFacingCameraX(billboardName);
+			auto isFacingY = _fe3d.billboardEntity_isFacingCameraY(billboardName);
+			auto isTransparent = _fe3d.billboardEntity_isTransparent(billboardName);
+			auto isAnimated = _fe3d.billboardEntity_isAnimationPlaying(billboardName);
+			auto animationRows = _fe3d.billboardEntity_getAnimationRows(billboardName);
+			auto animationColumns = _fe3d.billboardEntity_getAnimationColumns(billboardName);
+			auto animationFramestep = _fe3d.billboardEntity_getAnimationFramestep(billboardName);
+
 			// Perform empty string & space conversions
-			string diffusePath = _fe3d.billboardEntity_getDiffuseMapPath(billboardName);
-			string fontPath = _fe3d.billboardEntity_getFontPath(billboardName);
-			string textContent = _fe3d.billboardEntity_getTextContent(billboardName);
 			diffusePath = (diffusePath == "") ? "?" : diffusePath;
 			fontPath = (fontPath == "") ? "?" : fontPath;
 			textContent = (textContent == "") ? "?" : textContent;
@@ -120,22 +131,23 @@ void BillboardEditor::save()
 			std::replace(textContent.begin(), textContent.end(), ' ', '?');
 
 			// Export data
-			file << billboardName << " " <<
-				_fe3d.billboardEntity_getSize(billboardName).x << " " <<
-				_fe3d.billboardEntity_getSize(billboardName).y << " " <<
-				_fe3d.billboardEntity_getColor(billboardName).r << " " <<
-				_fe3d.billboardEntity_getColor(billboardName).g << " " <<
-				_fe3d.billboardEntity_getColor(billboardName).b << " " <<
-				_fe3d.billboardEntity_isFacingCameraX(billboardName) << " " <<
-				_fe3d.billboardEntity_isFacingCameraY(billboardName) << " " <<
+			file <<
+				billboardName << " " <<
+				size.x << " " <<
+				size.y << " " <<
+				color.r << " " <<
+				color.g << " " <<
+				color.b << " " <<
+				isFacingX << " " <<
+				isFacingY << " " <<
 				diffusePath << " " <<
-				_fe3d.billboardEntity_isTransparent(billboardName) << " " <<
+				isTransparent << " " <<
 				fontPath << " " <<
 				textContent << " " <<
-				_fe3d.billboardEntity_isAnimationPlaying(billboardName) << " " <<
-				_fe3d.billboardEntity_getAnimationRows(billboardName) << " " <<
-				_fe3d.billboardEntity_getAnimationColumns(billboardName) << " " <<
-				_fe3d.billboardEntity_getAnimationFramestep(billboardName) << std::endl;
+				isAnimated << " " <<
+				animationRows << " " <<
+				animationColumns << " " <<
+				animationFramestep << std::endl;
 		}
 
 		// Close file

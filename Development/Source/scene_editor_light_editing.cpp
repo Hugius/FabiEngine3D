@@ -9,7 +9,7 @@ void SceneEditor::_updateLightEditing()
 	{
 		_selectedLightBulbID = "";
 
-		if (_currentPreviewModelName == "" && !_isPlacingPointlight)
+		if (_currentPreviewModelName == "" && _currentPreviewBillboardName == "" && !_isPlacingPointlight)
 		{
 			// Check if user selected a lightbulb model
 			for (auto& entityID : _fe3d.gameEntity_getAllIDs())
@@ -25,11 +25,11 @@ void SceneEditor::_updateLightEditing()
 						_selectedLightBulbID = entityID;
 
 						// Check if nothing is active
-						if (_activeLightBulbID == "" && _activeModelID == "")
+						if (_activeLightBulbID == "" && _activeModelID == "" && _activeBillboardID == "")
 						{
 							string textEntityID = _gui->getGlobalScreen()->getTextfield("selectedPointlightName")->getEntityID();
 							_fe3d.textEntity_show(textEntityID);
-							_fe3d.textEntity_setTextContent(textEntityID, "Selected: " + _selectedLightBulbID.substr(1), 0.025f);
+							_fe3d.textEntity_setTextContent(textEntityID, "Selected light: " + _selectedLightBulbID.substr(1), 0.025f);
 						}
 
 						// Change cursor
@@ -54,7 +54,7 @@ void SceneEditor::_updateLightEditing()
 								// Update selected text
 								string textEntityID = _gui->getGlobalScreen()->getTextfield("selectedPointlightName")->getEntityID();
 								_fe3d.textEntity_show(textEntityID);
-								_fe3d.textEntity_setTextContent(textEntityID, "Active: " + _selectedLightBulbID.substr(1), 0.025f);
+								_fe3d.textEntity_setTextContent(textEntityID, "Active light: " + _selectedLightBulbID.substr(1), 0.025f);
 							}
 						}
 					}
@@ -147,7 +147,7 @@ void SceneEditor::_updateLightEditing()
 			}
 			else
 			{
-				if (_selectedModelID == "" && _activeModelID == "")
+				if (_selectedModelID == "" && _activeModelID == "" && _selectedBillboardID == "" && _activeBillboardID == "")
 				{
 					_fe3d.textEntity_show(textEntityID);
 				}

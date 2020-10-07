@@ -32,7 +32,7 @@ void SceneEditor::save()
 			}
 		}
 
-		// Write game entities data into file
+		// Write GAME entities data into file
 		for (auto& entityID : _fe3d.gameEntity_getAllIDs())
 		{
 			// Check if not a preview model or an LOD entity
@@ -159,7 +159,66 @@ void SceneEditor::save()
 					}
 				}
 
+				// New line
 				file << std::endl;
+			}
+		}
+
+		// Write BILLBOARD entities data into file
+		for (auto& entityID : _fe3d.billboardEntity_getAllIDs())
+		{
+			// Check if not a preview entity
+			if (entityID[0] != '@')
+			{
+				// Retrieve all valus
+				auto position = _fe3d.billboardEntity_getPosition(entityID);
+				auto rotation = _fe3d.billboardEntity_getRotation(entityID);
+				auto size = _fe3d.billboardEntity_getSize(entityID);
+				auto color = _fe3d.billboardEntity_getColor(entityID);
+				auto diffusePath = _fe3d.billboardEntity_getDiffuseMapPath(entityID);
+				auto fontPath = _fe3d.billboardEntity_getFontPath(entityID);
+				auto textContent = _fe3d.billboardEntity_getTextContent(entityID);
+				auto isFacingX = _fe3d.billboardEntity_isFacingCameraX(entityID);
+				auto isFacingY = _fe3d.billboardEntity_isFacingCameraY(entityID);
+				auto isTransparent = _fe3d.billboardEntity_isTransparent(entityID);
+				auto isAnimated = _fe3d.billboardEntity_isAnimationPlaying(entityID);
+				auto animationRows = _fe3d.billboardEntity_getAnimationRows(entityID);
+				auto animationColumns = _fe3d.billboardEntity_getAnimationColumns(entityID);
+				auto animationFramestep = _fe3d.billboardEntity_getAnimationFramestep(entityID);
+
+				// Perform empty string & space conversions
+				diffusePath = (diffusePath == "") ? "?" : diffusePath;
+				fontPath = (fontPath == "") ? "?" : fontPath;
+				textContent = (textContent == "") ? "?" : textContent;
+				std::replace(diffusePath.begin(), diffusePath.end(), ' ', '?');
+				std::replace(fontPath.begin(), fontPath.end(), ' ', '?');
+				std::replace(textContent.begin(), textContent.end(), ' ', '?');
+
+				// Export data
+				file <<
+					"BILLBOARD " <<
+					entityID << " " <<
+					position.x << " " <<
+					position.y << " " <<
+					position.z << " " <<
+					rotation.x << " " <<
+					rotation.y << " " <<
+					rotation.z << " " <<
+					size.x << " " <<
+					size.y << " " <<
+					color.r << " " <<
+					color.g << " " <<
+					color.b << " " <<
+					isFacingX << " " <<
+					isFacingY << " " <<
+					diffusePath << " " <<
+					isTransparent << " " <<
+					fontPath << " " <<
+					textContent << " " <<
+					isAnimated << " " <<
+					animationRows << " " <<
+					animationColumns << " " <<
+					animationFramestep << std::endl;
 			}
 		}
 

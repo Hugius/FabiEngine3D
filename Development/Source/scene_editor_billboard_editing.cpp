@@ -15,7 +15,7 @@ void SceneEditor::_updateBillboardEditing()
 		}
 
 		// User must not be in placement mode
-		if (_currentPreviewBillboardName == "" && _currentPreviewModelName == "" && !_isPlacingPointlight)
+		if (_currentPreviewModelName == "" && _currentPreviewBillboardName == "" && !_isPlacingPointlight)
 		{
 			// Check if user selected a billboard
 			for (auto& entityID : _fe3d.billboardEntity_getAllIDs())
@@ -183,7 +183,7 @@ void SceneEditor::_updateBillboardEditing()
 			}
 			else
 			{
-				if (_selectedLightBulbID == "" && _activeLightBulbID == "")
+				if (_selectedModelID == "" && _activeModelID == "" && _selectedLightBulbID == "" && _activeLightBulbID == "")
 				{
 					_fe3d.textEntity_show(textEntityID);
 				}

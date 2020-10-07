@@ -148,7 +148,6 @@ void DepthRenderer::render(const BillboardEntity* entity)
 		// Shader uniforms
 		_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix());
 		_shader.uploadUniform("u_isAlphaObject", entity->isTransparent());
-		_shader.uploadUniform("u_uvRepeat", entity->getUvRepeat());
 		_shader.uploadUniform("u_uvAdder", uvAdder);
 		_shader.uploadUniform("u_uvMultiplier", uvMultiplier);
 		_shader.uploadUniform("u_isBillboard", true);

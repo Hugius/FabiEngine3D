@@ -274,9 +274,6 @@
     <ClCompile Include="Source\scene_editor_updates.cpp">
       <Filter>src\Editor System\Scene Editor\Core</Filter>
     </ClCompile>
-    <ClCompile Include="Source\scene_editor_misc.cpp">
-      <Filter>src\Editor System\Scene Editor\Core</Filter>
-    </ClCompile>
     <ClCompile Include="Source\scene_editor_light_editing.cpp">
       <Filter>src\Editor System\Scene Editor\Lighting</Filter>
     </ClCompile>
@@ -441,6 +438,12 @@
     </ClCompile>
     <ClCompile Include="Source\scene_editor_saving.cpp">
       <Filter>src\Editor System\Scene Editor\Persistency</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\scene_editor_misc.cpp">
+      <Filter>src\Editor System\Scene Editor\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\scene_editor_creation.cpp">
+      <Filter>src\Editor System\Scene Editor\Miscellaneous</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -922,6 +925,9 @@
     </Filter>
     <Filter Include="src\Editor System\Scene Editor\Persistency">
       <UniqueIdentifier>{9f1c1ad7-904f-45b3-893c-2c27f98b34dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Editor System\Scene Editor\Miscellaneous">
+      <UniqueIdentifier>{ebabbbff-7f2b-4a8c-87aa-692a4554d711}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

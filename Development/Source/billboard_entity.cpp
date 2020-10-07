@@ -148,11 +148,6 @@ void BillboardEntity::setLightness(float val)
 	_lightness = val;
 }
 
-void BillboardEntity::setUvRepeat(float val)
-{
-	_uvRepeat = val;
-}
-
 void BillboardEntity::setMaxY(float val)
 {
 	_maxY = val;
@@ -216,11 +211,6 @@ const float BillboardEntity::getOriginalLightness() const
 const float BillboardEntity::getLightness() const
 {
 	return _lightness;
-}
-
-const float BillboardEntity::getUvRepeat() const
-{
-	return _uvRepeat;
 }
 
 const float BillboardEntity::getMaxY() const

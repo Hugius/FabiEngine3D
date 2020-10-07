@@ -303,11 +303,6 @@ void FabiEngine3D::billboardEntity_setAnimationFramestep(const string& ID, int f
 	_core->_billboardEntityManager.getEntity(ID)->setMaxFramestep(framestep);
 }
 
-void FabiEngine3D::billboardEntity_setUvRepeat(const string& ID, float repeat)
-{
-	_core->_billboardEntityManager.getEntity(ID)->setUvRepeat(repeat);
-}
-
 const string& FabiEngine3D::billboardEntity_getDiffuseMapPath(const string& ID)
 {
 	return _core->_billboardEntityManager.getEntity(ID)->getDiffuseMapPath();
@@ -328,11 +323,6 @@ bool FabiEngine3D::billboardEntity_isAnimationPlaying(const string& ID)
 bool FabiEngine3D::billboardEntity_isTransparent(const string& ID)
 {
 	return _core->_billboardEntityManager.getEntity(ID)->isTransparent();
-}
-
-float FabiEngine3D::billboardEntity_getUvRepeat(const string& ID)
-{
-	return _core->_billboardEntityManager.getEntity(ID)->getUvRepeat();
 }
 
 int FabiEngine3D::billboardEntity_getAnimationRows(const string& ID)

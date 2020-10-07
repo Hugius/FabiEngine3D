@@ -166,7 +166,49 @@ bool SceneEditor::_loadSceneFile(bool overwriteCamera)
 			}
 			else if (entityType == "BILLBOARD")
 			{
+				// Placeholder variables
+				string billboardID, diffusePath, fontPath, textContent;
+				vec3 position, rotation, color;
+				vec2 size;
+				bool facingX, facingY, isTransparent, isAnimated;
+				int animationRows, animationColumns, animationFramestep;
 
+				// Extract from file
+				iss >>
+					billboardID >>
+					position.x >>
+					position.y >>
+					position.z >>
+					rotation.x >>
+					rotation.y >>
+					rotation.z >>
+					size.x >>
+					size.y >>
+					color.r >>
+					color.g >>
+					color.b >>
+					facingX >>
+					facingY >>
+					diffusePath >>
+					isTransparent >>
+					fontPath >>
+					textContent >>
+					isAnimated >>
+					animationRows >>
+					animationColumns >>
+					animationFramestep;
+
+				// Perform empty string & space conversions
+				diffusePath = (diffusePath == "?") ? "" : diffusePath;
+				fontPath = (fontPath == "?") ? "" : fontPath;
+				textContent = (textContent == "?") ? "" : textContent;
+				std::replace(diffusePath.begin(), diffusePath.end(), '?', ' ');
+				std::replace(fontPath.begin(), fontPath.end(), '?', ' ');
+				std::replace(textContent.begin(), textContent.end(), '?', ' ');
+
+				// Add the billboard
+				_placeBillboard(billboardID, diffusePath, fontPath, textContent, position, rotation, size, color, facingX, facingY, isTransparent, isAnimated,
+					animationRows, animationColumns, animationFramestep);
 			}
 			else if (entityType == "AMBIENT_LIGHT")
 			{

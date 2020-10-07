@@ -81,16 +81,17 @@ void AabbEntityManager::update(const vector<GameEntity*>& gameEntities, const ve
 			// Determine parent type
 			if (entity->getParentType() == AabbParentType::GAME_ENTITY)
 			{
-				for (auto& gameEntity : gameEntities) // Loop over GAME entities
+				for (auto& parentEntity : gameEntities) // Loop over GAME entities
 				{
-					if (entity->getParentID() == gameEntity->getID()) // Check for match
+					if (entity->getParentID() == parentEntity->getID()) // Check for match
 					{
-						// Update scaling
-						vec3 parentSizeChange = gameEntity->getScaling() / gameEntity->getOriginalScaling();
+						vec3 parentSizeChange = parentEntity->getScaling() / parentEntity->getOriginalScaling();
+
+						// Update scaling (based on parent translation)
 						entity->setScaling(entity->getLocalScaling() * parentSizeChange);
 
-						// Update translation
-						entity->setTranslation(gameEntity->getTranslation() + (entity->getLocalTranslation() * parentSizeChange));
+						// Update translation (based on parent translation + scaling)
+						entity->setTranslation(parentEntity->getTranslation() + (entity->getLocalTranslation() * parentSizeChange));
 
 						found = true;
 					}
@@ -104,11 +105,18 @@ void AabbEntityManager::update(const vector<GameEntity*>& gameEntities, const ve
 			}
 			else if(entity->getParentType() == AabbParentType::BILLBOARD_ENTITY)
 			{
-				for (auto& billboardEntity : billboardEntities) // Loop over BILLBOARD entities
+				for (auto& parentEntity : billboardEntities) // Loop over BILLBOARD entities
 				{
-					if (entity->getParentID() == billboardEntity->getID()) // Check for match
+					if (entity->getParentID() == parentEntity->getID()) // Check for match
 					{
-						entity->setTranslation(billboardEntity->getTranslation() + entity->getLocalTranslation()); // Update translation
+						// Update scaling (based on parent rotation)
+						float rotationFactor = fmodf(parentEntity->getRotation(),;
+						vec3 newSize = entity->getLocalScaling();
+						newSize.z = 
+						entity->setScaling(newSize);
+
+						entity->setTranslation(parentEntity->getTranslation() + entity->getLocalTranslation()); // Update translation
+
 						found = true;
 					}
 				}

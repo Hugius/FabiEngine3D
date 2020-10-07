@@ -330,12 +330,10 @@ public:
 	);
 	void billboardEntity_setDiffuseMap(const string& ID, const string& texturePath, bool textureFiltering);
 	void billboardEntity_setTransparent(const string& ID, bool enabled);
-	void billboardEntity_setUvRepeat(const string& ID, float repeat);
 
 	// Billboard entity interface (diffuseMap) - getters
 	const string& billboardEntity_getDiffuseMapPath(const string& ID);
 	bool billboardEntity_isTransparent(const string& ID);
-	float billboardEntity_getUvRepeat(const string& ID);
 
 	// Billboard entity interface (text) - setters
 	void billBoardEntity_add

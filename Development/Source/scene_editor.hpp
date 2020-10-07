@@ -80,6 +80,9 @@ private:
 		float specularFactor, float specularIntensity, float lightness, vec3 color, float uvRepeat, const string& lodEntityID, bool isInstanced,
 		vector<vec3> instancedOffsets, vector<string> aabbNames, vector<vec3> aabbPositions, vector<vec3> aabbSizes);
 	void _placeBillboard(const string& newID, const string& previewID, vec3 position);
+	void _placeBillboard(const string& newID, const string& diffusePath, const string& fontPath, const string& textContent,
+		vec3 position, vec3 rotation, vec2 size, vec3 color, bool facingX, bool facingY, bool isTransparent,
+		bool isAnimated, int animationRows, int animationColumns, int animationFramestep);
 	void _updateModelBlinking(const string& modelID, int& multiplier);
 	void _updateBillboardBlinking(const string& billboardID, int& multiplier);
 	void _updateLightbulbAnimation(const string& modelID, int& multiplier);

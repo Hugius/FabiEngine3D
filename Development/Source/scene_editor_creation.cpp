@@ -238,7 +238,7 @@ void SceneEditor::_placeBillboard(const string& newID, const string& diffusePath
 	{
 		_fe3d.billBoardEntity_add(newID, color, position, rotation, size, facingX, facingY);
 	}
-
+	
 	// Bind AABB entity to BILLBOARD entity
 	auto billboardSize = _fe3d.billboardEntity_getSize(newID);
 	_fe3d.aabbEntity_bindToBillboardEntity(newID, vec3(billboardSize.x, billboardSize.y, 0.1f), true);

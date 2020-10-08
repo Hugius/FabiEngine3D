@@ -1,6 +1,7 @@
 #include "aabb_entity_manager.hpp"
 #include "render_bus.hpp"
-#include "logger.hpp"
+#include "logger.hpp" 
+#include "tools.hpp"
 
 AabbEntityManager::AabbEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, RenderBus& renderBus) :
 	BaseEntityManager(objLoader, texLoader, renderBus)
@@ -110,12 +111,18 @@ void AabbEntityManager::update(const vector<GameEntity*>& gameEntities, const ve
 					if (entity->getParentID() == parentEntity->getID()) // Check for match
 					{
 						// Update scaling (based on parent rotation)
-						float rotationFactor = fmodf(parentEntity->getRotation(),;
-						vec3 newSize = entity->getLocalScaling();
-						newSize.z = 
+						float rotationX = fabsf(parentEntity->getRotation().x);
+						float rotationY = fabsf(parentEntity->getRotation().y);
+						float rotationZ = fabsf(parentEntity->getRotation().z);
+						vec3 localSize = entity->getLocalScaling();
+						vec3 newSize;
+						newSize.x = cosf(Tools::getInst().degreeToRadians(rotationY)) * localSize.x;
+						newSize.y = localSize.y;
+						newSize.z = sinf(Tools::getInst().degreeToRadians(rotationY)) * localSize.y;
 						entity->setScaling(newSize);
 
-						entity->setTranslation(parentEntity->getTranslation() + entity->getLocalTranslation()); // Update translation
+						// Update translation (based on parent translation + scaling)
+						entity->setTranslation(parentEntity->getTranslation() + entity->getLocalTranslation());
 
 						found = true;
 					}

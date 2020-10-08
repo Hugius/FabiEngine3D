@@ -63,6 +63,11 @@ float FabiEngine3D::misc_getFPS()
 	return 1000.0f / _core->_deltaTime;
 }
 
+float FabiEngine3D::misc_getPI()
+{
+	return Tools::getInst().getPI();
+}
+
 void FabiEngine3D::misc_showCursor()
 {
 	_core->_windowManager.showMouseCursor();

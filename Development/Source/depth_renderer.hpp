@@ -19,4 +19,5 @@ public:
 	void render(const WaterEntity* entity);
 	void render(const GameEntity* entity);
 	void render(const BillboardEntity* entity);
+	void render(const AabbEntity* entity);
 };

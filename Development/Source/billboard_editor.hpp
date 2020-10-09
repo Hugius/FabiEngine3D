@@ -38,7 +38,7 @@ private:
 
 	// Vectors
 	const vec3 _defaultCameraPosition = vec3(0.0f, 1.5f, 5.0f);
-	const vec3 _billboardPosition = vec3(0.0f, 1.5f, 0.0f);
+	const vec3 _billboardPosition = vec3(0.0f, 2.5f, 0.0f);
 
 	// Floats
 	const float _scrollWheelDivider = 250.0f;

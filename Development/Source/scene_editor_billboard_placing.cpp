@@ -22,7 +22,8 @@ void SceneEditor::_updateBillboardPlacing()
 					// Update preview billboard position
 					if (_fe3d.terrainEntity_isValidMousePoint())
 					{
-						newPosition = _fe3d.terrainEntity_getMousePoint();
+						vec2 size = _fe3d.billboardEntity_getSize(_currentPreviewBillboardName);
+						newPosition = _fe3d.terrainEntity_getMousePoint() + vec3(0.0f, size.y / 2.0f, 0.0f);
 						_fe3d.billboardEntity_setPosition(_currentPreviewBillboardName, newPosition);
 					}
 				}

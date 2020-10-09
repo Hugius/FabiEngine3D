@@ -284,6 +284,16 @@ void RenderEngine::_captureSceneDepth()
 			_depthRenderer.render(entity);
 		}
 
+		// Render AABB entities
+		if (_renderBus.isAabbFrameRenderingEnabled())
+		{
+			for (auto& entity : _entityBus->getAabbEntities())
+			{
+				_depthRenderer.render(entity);
+			}
+
+		}
+
 		// Unbind
 		_depthRenderer.unbind();
 		_sceneDepthFramebuffer.unbind();

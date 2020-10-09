@@ -182,7 +182,8 @@ void SceneEditor::_placeBillboard(const string& newID, const string& previewID, 
 	auto isFacingY = _fe3d.billboardEntity_isFacingCameraY(previewID);
 
 	// Add BILLBOARD entity
-	_fe3d.billBoardEntity_add(newID, color, position, vec3(0.0f), _fe3d.billboardEntity_getSize(previewID), isFacingX, isFacingY);
+	vec2 size = _fe3d.billboardEntity_getSize(previewID);
+	_fe3d.billBoardEntity_add(newID, color, position + vec3(0.0f, size.y / 2.0f, 0.0f), vec3(0.0f), size, isFacingX, isFacingY);
 
 	// Determine BILLBOARD entity type
 	if (_fe3d.billboardEntity_getDiffuseMapPath(previewID) != "") // Textured billboard
@@ -205,8 +206,7 @@ void SceneEditor::_placeBillboard(const string& newID, const string& previewID, 
 	}
 
 	// Bind AABB entity to BILLBOARD entity
-	auto billboardSize = _fe3d.billboardEntity_getSize(newID);
-	_fe3d.aabbEntity_bindToBillboardEntity(newID, vec3(billboardSize.x, billboardSize.y, 0.1f), true);
+	_fe3d.aabbEntity_bindToBillboardEntity(newID, vec3(0.0f), true);
 
 	// Miscellaneous
 	_fe3d.billboardEntity_setTransparent(newID, _fe3d.billboardEntity_isTransparent(previewID));
@@ -240,6 +240,5 @@ void SceneEditor::_placeBillboard(const string& newID, const string& diffusePath
 	}
 	
 	// Bind AABB entity to BILLBOARD entity
-	auto billboardSize = _fe3d.billboardEntity_getSize(newID);
-	_fe3d.aabbEntity_bindToBillboardEntity(newID, vec3(billboardSize.x, billboardSize.y, 0.1f), true);
+	_fe3d.aabbEntity_bindToBillboardEntity(newID, vec3(0.0f), true);
 }

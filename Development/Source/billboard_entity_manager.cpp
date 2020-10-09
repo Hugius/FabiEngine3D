@@ -31,12 +31,12 @@ void BillboardEntityManager::addBillboardEntity(const string& ID, vec3 color, ve
 	// Load OBJ model
 	float plane_data[] =
 	{
-		-0.5f,  1.0f, 0.0f, 0.0f, 1.0f,
-		-0.5f,  0.0f, 0.0f, 0.0f, 0.0f,
-		 0.5f,  0.0f, 0.0f, 1.0f, 0.0f,
-		 0.5f,  0.0f, 0.0f, 1.0f, 0.0f,
-		 0.5f,  1.0f, 0.0f, 1.0f, 1.0f,
-		-0.5f,  1.0f, 0.0f, 0.0f, 1.0f
+		-0.5f,  0.5f, 0.0f, 0.0f, 1.0f,
+		-0.5f,  -0.5f, 0.0f, 0.0f, 0.0f,
+		 0.5f,  -0.5f, 0.0f, 1.0f, 0.0f,
+		 0.5f,  -0.5f, 0.0f, 1.0f, 0.0f,
+		 0.5f,  0.5f, 0.0f, 1.0f, 1.0f,
+		-0.5f,  0.5f, 0.0f, 0.0f, 1.0f
 	};
 
 	// Create entity

@@ -31,22 +31,22 @@ void AabbEntityManager::addAabbEntity(const string& ID, vec3 position, vec3 size
 	// Load OBJ model
 	float box_data[] =
 	{
-		-0.5f,  1.0f, -0.5f,
-		 0.5f,  1.0f, -0.5f,
-		 0.5f,  0.0f, -0.5f,
-		-0.5f,  0.0f, -0.5f,
-		-0.5f,  1.0f, -0.5f,
-		-0.5f,  1.0f,  0.5f,
-		 0.5f,  1.0f,  0.5f,
-		 0.5f,  0.0f,  0.5f,
-		-0.5f,  0.0f,  0.5f,
-		-0.5f,  1.0f,  0.5f,
-		 0.5f,  1.0f,  0.5f,
-		 0.5f,  1.0f, -0.5f,
-		 0.5f,  0.0f, -0.5f,
-		 0.5f,  0.0f,  0.5f,
-		-0.5f,  0.0f,  0.5f,
-		-0.5f,  0.0f, -0.5f
+		-0.5f,  0.5f, -0.5f,
+		 0.5f,  0.5f, -0.5f,
+		 0.5f,  -0.5f, -0.5f,
+		-0.5f,  -0.5f, -0.5f,
+		-0.5f,  0.5f, -0.5f,
+		-0.5f,  0.5f,  0.5f,
+		 0.5f,  0.5f,  0.5f,
+		 0.5f,  -0.5f,  0.5f,
+		-0.5f,  -0.5f,  0.5f,
+		-0.5f,  0.5f,  0.5f,
+		 0.5f,  0.5f,  0.5f,
+		 0.5f,  0.5f, -0.5f,
+		 0.5f,  -0.5f, -0.5f,
+		 0.5f,  -0.5f,  0.5f,
+		-0.5f,  -0.5f,  0.5f,
+		-0.5f,  -0.5f, -0.5f
 	};
 
 	// Create entity
@@ -110,16 +110,34 @@ void AabbEntityManager::update(const vector<GameEntity*>& gameEntities, const ve
 				{
 					if (entity->getParentID() == parentEntity->getID()) // Check for match
 					{
-						// Update scaling (based on parent rotation)
+						// Retrieve parent rotation & size
 						float rotationX = fabsf(parentEntity->getRotation().x);
 						float rotationY = fabsf(parentEntity->getRotation().y);
 						float rotationZ = fabsf(parentEntity->getRotation().z);
-						vec3 localSize = entity->getLocalScaling();
-						vec3 newSize;
-						newSize.x = cosf(Tools::getInst().degreeToRadians(rotationY)) * localSize.x;
-						newSize.y = localSize.y;
-						newSize.z = sinf(Tools::getInst().degreeToRadians(rotationY)) * localSize.y;
-						entity->setScaling(newSize);
+						vec3 parentSize = parentEntity->getScaling();
+						float maxParentSize = max(parentSize.x, parentSize.y);
+						vec3 newAabbSize = vec3(parentSize.x, parentSize.y, 0.1f);
+
+						// Determine rotation direction
+						if (rotationX != 0.0f)
+						{
+							newAabbSize.z = fabsf(sinf(Tools::getInst().degreeToRadians(rotationX)) * parentSize.y);
+						}
+						else if (rotationY != 0.0f)
+						{
+							newAabbSize.x = fabsf(cosf(Tools::getInst().degreeToRadians(rotationY)) * parentSize.x);
+							newAabbSize.z = fabsf(sinf(Tools::getInst().degreeToRadians(rotationY)) * parentSize.x);
+						}
+						else if (rotationZ != 0.0f)
+						{
+							newAabbSize.x = fabsf(sinf(Tools::getInst().degreeToRadians(rotationZ)) * parentSize.y) +
+								fabsf(cosf(Tools::getInst().degreeToRadians(rotationZ)) * parentSize.x);
+							newAabbSize.y = fabsf(sinf(Tools::getInst().degreeToRadians(rotationZ)) * parentSize.x)
+								+ fabsf(cosf(Tools::getInst().degreeToRadians(rotationZ)) * parentSize.y);
+						}
+
+						// Update scaling (based on parent rotation)
+						entity->setScaling(newAabbSize);
 
 						// Update translation (based on parent translation + scaling)
 						entity->setTranslation(parentEntity->getTranslation() + entity->getLocalTranslation());

@@ -58,6 +58,28 @@ void DepthRenderer::render(const TerrainEntity* entity)
 	}
 }
 
+void DepthRenderer::render(const WaterEntity* entity)
+{
+	if (entity->isVisible())
+	{
+		// Shader uniforms
+		mat4 modelMatrix = mat4(1.0f);
+		modelMatrix = glm::translate(modelMatrix, entity->getPosition());
+		_shader.uploadUniform("u_modelMatrix", modelMatrix);
+		_shader.uploadUniform("u_isAlphaObject", false);
+		_shader.uploadUniform("u_isInstanced", false);
+
+		// Bind
+		glBindVertexArray(entity->getSimplifiedOglBuffer()->getVAO());
+
+		// Render
+		glDrawArrays(GL_TRIANGLES, 0, entity->getSimplifiedOglBuffer()->getVertexCount());
+
+		// Unbind
+		glBindVertexArray(0);
+	}
+}
+
 void DepthRenderer::render(const GameEntity* entity)
 {
 	if (entity->isVisible())
@@ -170,22 +192,18 @@ void DepthRenderer::render(const BillboardEntity* entity)
 	}
 }
 
-void DepthRenderer::render(const WaterEntity* entity)
+void DepthRenderer::render(const AabbEntity* entity)
 {
 	if (entity->isVisible())
 	{
 		// Shader uniforms
-		mat4 modelMatrix = mat4(1.0f);
-		modelMatrix = glm::translate(modelMatrix, entity->getPosition());
-		_shader.uploadUniform("u_modelMatrix", modelMatrix);
-		_shader.uploadUniform("u_isAlphaObject", false);
-		_shader.uploadUniform("u_isInstanced", false);
+		_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix());
 
-		// Bind
-		glBindVertexArray(entity->getSimplifiedOglBuffer()->getVAO());
+		// VAO
+		glBindVertexArray(entity->getOglBuffer()->getVAO());
 
 		// Render
-		glDrawArrays(GL_TRIANGLES, 0, entity->getSimplifiedOglBuffer()->getVertexCount());
+		glDrawArrays(GL_LINE_STRIP, 0, entity->getOglBuffer()->getVertexCount());
 
 		// Unbind
 		glBindVertexArray(0);

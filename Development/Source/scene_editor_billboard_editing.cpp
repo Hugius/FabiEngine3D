@@ -120,15 +120,29 @@ void SceneEditor::_updateBillboardEditing()
 				vec3 position = _fe3d.billboardEntity_getPosition(_activeBillboardID);
 				vec3 rotation = _fe3d.billboardEntity_getRotation(_activeBillboardID);
 				vec2 size = _fe3d.billboardEntity_getSize(_activeBillboardID);
+				
+				// Enabling all axes by default
+				_rightWindow->getScreen("billboardPropertiesMenu")->getButton("xMinus")->setHoverable(true);
+				_rightWindow->getScreen("billboardPropertiesMenu")->getButton("xPlus")->setHoverable(true);
+				_rightWindow->getScreen("billboardPropertiesMenu")->getWriteField("x")->setHoverable(true);
+				_rightWindow->getScreen("billboardPropertiesMenu")->getButton("yMinus")->setHoverable(true);
+				_rightWindow->getScreen("billboardPropertiesMenu")->getButton("yPlus")->setHoverable(true);
+				_rightWindow->getScreen("billboardPropertiesMenu")->getWriteField("y")->setHoverable(true);
+				_rightWindow->getScreen("billboardPropertiesMenu")->getButton("zMinus")->setHoverable(true);
+				_rightWindow->getScreen("billboardPropertiesMenu")->getButton("zPlus")->setHoverable(true);
+				_rightWindow->getScreen("billboardPropertiesMenu")->getWriteField("z")->setHoverable(true);
+
+				// Disabling Z axis for scaling operations on a billboard
+				if (_transformation == TransformationType::SCALING)
+				{
+					_rightWindow->getScreen("billboardPropertiesMenu")->getButton("zMinus")->setHoverable(false);
+					_rightWindow->getScreen("billboardPropertiesMenu")->getButton("zPlus")->setHoverable(false);
+					_rightWindow->getScreen("billboardPropertiesMenu")->getWriteField("z")->setHoverable(false);
+				}
 
 				// Apply new billboard position / rotation / size
 				if (_transformation == TransformationType::TRANSLATION)
 				{
-					// Enable Z for position
-					_rightWindow->getScreen("billboardPropertiesMenu")->getButton("zMinus")->setHoverable(true);
-					_rightWindow->getScreen("billboardPropertiesMenu")->getButton("zPlus")->setHoverable(true);
-					_rightWindow->getScreen("billboardPropertiesMenu")->getWriteField("z")->setHoverable(true);
-
 					// Handle GUI input
 					_handleValueChanging("billboardPropertiesMenu", "xPlus", "x", position.x, _movementChangingSpeed);
 					_handleValueChanging("billboardPropertiesMenu", "xMinus", "x", position.x, -_movementChangingSpeed);
@@ -140,18 +154,24 @@ void SceneEditor::_updateBillboardEditing()
 				}
 				else if (_transformation == TransformationType::ROTATION)
 				{
-					// Enable Z for rotation
-					_rightWindow->getScreen("billboardPropertiesMenu")->getButton("zMinus")->setHoverable(true);
-					_rightWindow->getScreen("billboardPropertiesMenu")->getButton("zPlus")->setHoverable(true);
-					_rightWindow->getScreen("billboardPropertiesMenu")->getWriteField("z")->setHoverable(true);
+					// Only 1 rotation direction
+					_rightWindow->getScreen("billboardPropertiesMenu")->getButton("xMinus")->setHoverable(rotation.z == 0.0f && rotation.y == 0.0f);
+					_rightWindow->getScreen("billboardPropertiesMenu")->getButton("xPlus")->setHoverable(rotation.z == 0.0f && rotation.y == 0.0f);
+					_rightWindow->getScreen("billboardPropertiesMenu")->getWriteField("x")->setHoverable(rotation.z == 0.0f && rotation.y == 0.0f);
+					_rightWindow->getScreen("billboardPropertiesMenu")->getButton("yMinus")->setHoverable(rotation.x == 0.0f && rotation.z == 0.0f);
+					_rightWindow->getScreen("billboardPropertiesMenu")->getButton("yPlus")->setHoverable(rotation.x == 0.0f && rotation.z == 0.0f);
+					_rightWindow->getScreen("billboardPropertiesMenu")->getWriteField("y")->setHoverable(rotation.x == 0.0f && rotation.z == 0.0f);
+					_rightWindow->getScreen("billboardPropertiesMenu")->getButton("zMinus")->setHoverable(rotation.x == 0.0f && rotation.y == 0.0f);
+					_rightWindow->getScreen("billboardPropertiesMenu")->getButton("zPlus")->setHoverable(rotation.x == 0.0f && rotation.y == 0.0f);
+					_rightWindow->getScreen("billboardPropertiesMenu")->getWriteField("z")->setHoverable(rotation.x == 0.0f && rotation.y == 0.0f);
 
 					// Handle GUI input
-					_handleValueChanging("billboardPropertiesMenu", "xPlus", "x", rotation.x, _movementChangingSpeed);
-					_handleValueChanging("billboardPropertiesMenu", "xMinus", "x", rotation.x, -_movementChangingSpeed);
-					_handleValueChanging("billboardPropertiesMenu", "yPlus", "y", rotation.y, _movementChangingSpeed);
-					_handleValueChanging("billboardPropertiesMenu", "yMinus", "y", rotation.y, -_movementChangingSpeed);
-					_handleValueChanging("billboardPropertiesMenu", "zPlus", "z", rotation.z, _movementChangingSpeed);
-					_handleValueChanging("billboardPropertiesMenu", "zMinus", "z", rotation.z, -_movementChangingSpeed);
+					_handleValueChanging("billboardPropertiesMenu", "xPlus", "x", rotation.x, _movementChangingSpeed * 2.0f);
+					_handleValueChanging("billboardPropertiesMenu", "xMinus", "x", rotation.x, -_movementChangingSpeed * 2.0f);
+					_handleValueChanging("billboardPropertiesMenu", "yPlus", "y", rotation.y, _movementChangingSpeed * 2.0f);
+					_handleValueChanging("billboardPropertiesMenu", "yMinus", "y", rotation.y, -_movementChangingSpeed * 2.0f);
+					_handleValueChanging("billboardPropertiesMenu", "zPlus", "z", rotation.z, _movementChangingSpeed * 2.0f);
+					_handleValueChanging("billboardPropertiesMenu", "zMinus", "z", rotation.z, -_movementChangingSpeed * 2.0f);
 					rotation.x = std::fmodf(rotation.x, 360.0f);
 					rotation.y = std::fmodf(rotation.y, 360.0f);
 					rotation.z = std::fmodf(rotation.z, 360.0f);
@@ -159,11 +179,6 @@ void SceneEditor::_updateBillboardEditing()
 				}
 				else if (_transformation == TransformationType::SCALING)
 				{
-					// Disable Z for scaling
-					_rightWindow->getScreen("billboardPropertiesMenu")->getButton("zMinus")->setHoverable(false);
-					_rightWindow->getScreen("billboardPropertiesMenu")->getButton("zPlus")->setHoverable(false);
-					_rightWindow->getScreen("billboardPropertiesMenu")->getWriteField("z")->setHoverable(false);
-
 					// Handle GUI input
 					vec2 oldSize = size;
 					float factor = 25.0f;

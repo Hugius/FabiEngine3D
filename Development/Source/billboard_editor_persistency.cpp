@@ -12,6 +12,9 @@ void BillboardEditor::loadBillboards()
 		_fe3d.logger_throwError("Tried to load as empty project!");
 	}
 
+	// Clear modelnames list from previous loads
+	_billboardNames.clear();
+
 	// Create or overwrite billboards file
 	std::ifstream file(_fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectName + "\\data\\billboard.fe3d");
 	string line;

@@ -136,7 +136,7 @@ void WorldEditor::initializeGUI()
 void WorldEditor::load()
 {
 	// Default camera
-	_fe3d.camera_load(_fe3d.camera_getFOV(), 0.1f, 10000.0f, vec3(0.0f));
+	_fe3d.camera_load(90.0f, 0.1f, 10000.0f, vec3(0.0f));
 	
 	// Enable graphics
 	_fe3d.gfx_enableAmbientLighting(vec3(1.0f), 0.75f);

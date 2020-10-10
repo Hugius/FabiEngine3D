@@ -63,7 +63,7 @@ void BillboardEditor::initializeGUI()
 void BillboardEditor::load()
 {
 	// Camera
-	_fe3d.camera_load(_fe3d.camera_getFOV(), 0.1f, 10000.0f, _defaultCameraPosition, -90.0f);
+	_fe3d.camera_load(90.0f, 0.1f, 10000.0f, _defaultCameraPosition, -90.0f);
 	_fe3d.camera_enableLookat(_billboardPosition);
 
 	// Enable graphics

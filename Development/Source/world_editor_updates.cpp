@@ -4,6 +4,8 @@ void WorldEditor::update()
 {
 	if (_isLoaded)
 	{
+		_updateMiscellaneous();
+
 		if (_currentWorldPart == WorldPart::NONE)
 		{
 			auto screen = _leftWindow->getScreen("worldEditorMenu");

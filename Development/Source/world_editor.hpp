@@ -68,4 +68,7 @@ private:
 	void _updateWaterMenuEffects();
 	void _updateWaterMenuOptions();
 	void _updateWaterCamera();
+
+	// Miscellaneous functions
+	void _updateMiscellaneous();
 };

@@ -28,6 +28,7 @@ private:
 	void _updateBillboardEditing();
 	void _updateBillboardRemoval();
 	void _updateBillboardCamera();
+	void _updateMiscellaneous();
 
 	// Booleans
 	bool _billboardCreationEnabled = false;

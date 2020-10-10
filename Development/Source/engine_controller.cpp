@@ -70,7 +70,7 @@ void EngineController::_initializeMiscellaneous()
 
 	// Default camera
 	float mouseSpeed = camera_getMouseSensitivity();
-	camera_load(camera_getFOV(), 0.1f, 10000.0f, vec3(0.0f));
+	camera_load(90.0f, 0.1f, 100.0f, vec3(0.0f));
 	camera_setMouseSensitivity(mouseSpeed);
 
 	// Custom cursor texture
@@ -86,39 +86,10 @@ void EngineController::_updateMiscellaneous()
 	string activeScreen = _gui->getViewport("left")->getWindow("main")->getActiveScreen()->getID();
 	if (activeScreen == "main" && lastScreen != "main")
 	{
-		camera_load(camera_getFOV(), 0.1f, 100.0f, vec3(0.0f));
+		camera_load(90.0f, 0.1f, 100.0f, vec3(0.0f));
 		skyEntity_select("@@defaultSky");
 	}
 	lastScreen = activeScreen;
-
-	// 3D tools only allowed when not running game preview or editing game scripts or in main menu
-	if (!_topViewportController.isScriptRunning() && 
-		_gui->getViewport("left")->getWindow("main")->getActiveScreen()->getID() != "scriptEditorMenuMain" &&
-		activeScreen != "main")
-	{
-		// Only allowed if cursor in 3D window
-		input_setKeyTogglingLocked(_gui->getGlobalScreen()->isFocused() || !misc_isMouseInsideViewport());
-
-		// Update wireframe visibility
-		if (input_getKeyToggled(InputType::KEY_F))
-		{
-			misc_enableWireframeRendering();
-		}
-		else
-		{
-			misc_disableWireframeRendering();
-		}
-
-		// Update debug rendering
-		if (input_getKeyToggled(InputType::KEY_H))
-		{
-			misc_enableDebugRendering();
-		}
-		else
-		{
-			misc_disableDebugRendering();
-		}
-	}
 
 	// Update custom cursor
 	guiEntity_setPosition("@@cursor", misc_convertToNDC(misc_convertFromScreenCoords(misc_getMousePos())));

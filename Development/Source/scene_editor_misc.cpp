@@ -211,6 +211,9 @@ void SceneEditor::_updateMiscellaneous()
 {
 	if (_isLoaded)
 	{
+		// Lock toggling if GUI focused
+		_fe3d.input_setKeyTogglingLocked(_gui->getGlobalScreen()->isFocused());
+
 		// Update bounding box visibility
 		if (_fe3d.input_getKeyToggled(InputType::KEY_B))
 		{
@@ -219,6 +222,26 @@ void SceneEditor::_updateMiscellaneous()
 		else
 		{
 			_fe3d.misc_disableAabbFrameRendering();
+		}
+
+		// Wireframe rendering
+		if (_fe3d.input_getKeyToggled(InputType::KEY_F))
+		{
+			_fe3d.misc_enableWireframeRendering();
+		}
+		else
+		{
+			_fe3d.misc_disableWireframeRendering();
+		}
+
+		// Debug rendering
+		if (_fe3d.input_getKeyToggled(InputType::KEY_H))
+		{
+			_fe3d.misc_enableDebugRendering();
+		}
+		else
+		{
+			_fe3d.misc_disableDebugRendering();
 		}
 	}
 }

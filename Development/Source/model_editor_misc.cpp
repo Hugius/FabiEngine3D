@@ -6,7 +6,8 @@ void ModelEditor::_updateMiscellaneous()
 {
 	if (_isLoaded)
 	{
-		_fe3d.input_setKeyTogglingLocked(_gui->getGlobalScreen()->isFocused() || !_fe3d.misc_isMouseInsideViewport());
+		// Lock toggling if GUI focused
+		_fe3d.input_setKeyTogglingLocked(_gui->getGlobalScreen()->isFocused());
 
 		// Update reference model visibility
 		if (_fe3d.input_getKeyToggled(InputType::KEY_R))
@@ -16,6 +17,26 @@ void ModelEditor::_updateMiscellaneous()
 		else
 		{
 			_fe3d.gameEntity_show("@@cube");
+		}
+
+		// Wireframe rendering
+		if (_fe3d.input_getKeyToggled(InputType::KEY_F))
+		{
+			_fe3d.misc_enableWireframeRendering();
+		}
+		else
+		{
+			_fe3d.misc_disableWireframeRendering();
+		}
+
+		// Debug rendering
+		if (_fe3d.input_getKeyToggled(InputType::KEY_H))
+		{
+			_fe3d.misc_enableDebugRendering();
+		}
+		else
+		{
+			_fe3d.misc_disableDebugRendering();
 		}
 	}
 }

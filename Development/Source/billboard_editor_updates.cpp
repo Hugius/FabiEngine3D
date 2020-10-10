@@ -10,6 +10,7 @@ void BillboardEditor::update()
 	_updateBillboardEditing();
 	_updateBillboardRemoval();
 	_updateBillboardCamera();
+	_updateMiscellaneous();
 }
 
 void BillboardEditor::_updateBillboardManagement()
@@ -227,12 +228,9 @@ void BillboardEditor::_updateBillboardCamera()
 		}
 		else
 		{
-			// Set to default camera position
-			if (!_billboardChoosingEnabled)
-			{
-				_fe3d.camera_setPosition(_defaultCameraPosition);
-				_fe3d.camera_enableLookat(_billboardPosition);
-			}
+			// Set default camera
+			_fe3d.camera_setPosition(_defaultCameraPosition);
+			_fe3d.camera_enableLookat(_billboardPosition);
 		}
 	}
 }

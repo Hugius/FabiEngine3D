@@ -319,6 +319,7 @@ void SceneEditor::load()
 	_gui->getGlobalScreen()->addTextfield("selectedModelName", vec2(0.0f, 0.85f), vec2(0.5f, 0.1f), "", vec3(1.0f));
 	_gui->getGlobalScreen()->addTextfield("selectedBillboardName", vec2(0.0f, 0.85f), vec2(0.5f, 0.1f), "", vec3(1.0f));
 	_gui->getGlobalScreen()->addTextfield("selectedPointlightName", vec2(0.0f, 0.85f), vec2(0.5f, 0.1f), "", vec3(1.0f));
+	_fe3d.gfx_enableSpotLighting(vec3(1.0f), 1.0f, 10.0f, 20.0f);
 
 	// Miscellaneous
 	_isLoaded = true;
@@ -439,6 +440,8 @@ void SceneEditor::unload()
 
 	// Other
 	_leftWindow->getScreen("sceneEditorMenuModelPlace")->getScrollingList("modelList")->deleteButtons();
+	_leftWindow->getScreen("sceneEditorMenuModelChoice")->getScrollingList("modelList")->deleteButtons();
 	_leftWindow->getScreen("sceneEditorMenuBillboardPlace")->getScrollingList("billboardList")->deleteButtons();
+	_leftWindow->getScreen("sceneEditorMenuBillboardChoice")->getScrollingList("billboardList")->deleteButtons();
 	_fe3d.misc_disableAabbFrameRendering();
 }

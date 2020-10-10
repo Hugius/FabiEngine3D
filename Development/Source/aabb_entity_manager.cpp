@@ -31,22 +31,22 @@ void AabbEntityManager::addAabbEntity(const string& ID, vec3 position, vec3 size
 	// Load OBJ model
 	float box_data[] =
 	{
-		-0.5f,  0.5f, -0.5f,
-		 0.5f,  0.5f, -0.5f,
-		 0.5f,  -0.5f, -0.5f,
-		-0.5f,  -0.5f, -0.5f,
-		-0.5f,  0.5f, -0.5f,
-		-0.5f,  0.5f,  0.5f,
-		 0.5f,  0.5f,  0.5f,
-		 0.5f,  -0.5f,  0.5f,
-		-0.5f,  -0.5f,  0.5f,
-		-0.5f,  0.5f,  0.5f,
-		 0.5f,  0.5f,  0.5f,
-		 0.5f,  0.5f, -0.5f,
-		 0.5f,  -0.5f, -0.5f,
-		 0.5f,  -0.5f,  0.5f,
-		-0.5f,  -0.5f,  0.5f,
-		-0.5f,  -0.5f, -0.5f
+		-0.5f,  1.0f, -0.5f,
+		 0.5f,  1.0f, -0.5f,
+		 0.5f,  -0.0f, -0.5f,
+		-0.5f,  -0.0f, -0.5f,
+		-0.5f,  1.0f, -0.5f,
+		-0.5f,  1.0f,  0.5f,
+		 0.5f,  1.0f,  0.5f,
+		 0.5f,  -0.0f,  0.5f,
+		-0.5f,  -0.0f,  0.5f,
+		-0.5f,  1.0f,  0.5f,
+		 0.5f,  1.0f,  0.5f,
+		 0.5f,  1.0f, -0.5f,
+		 0.5f,  -0.0f, -0.5f,
+		 0.5f,  -0.0f,  0.5f,
+		-0.5f,  -0.0f,  0.5f,
+		-0.5f,  -0.0f, -0.5f
 	};
 
 	// Create entity
@@ -140,7 +140,8 @@ void AabbEntityManager::update(const vector<GameEntity*>& gameEntities, const ve
 						entity->setScaling(newAabbSize);
 
 						// Update translation (based on parent translation + scaling)
-						entity->setTranslation(parentEntity->getTranslation() + entity->getLocalTranslation());
+						vec3 halfSizeOffset = vec3(0.0f, (parentEntity->getScaling().y / 2.0f), 0.0f);
+						entity->setTranslation(parentEntity->getTranslation() + entity->getLocalTranslation() - halfSizeOffset);
 
 						found = true;
 					}

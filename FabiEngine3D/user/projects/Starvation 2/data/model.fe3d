@@ -1,2 +1,3 @@
 @pine user\assets\models\tree3.obj user\assets\textures\diffuse_maps\tree3.png ? ? user\assets\textures\normal_maps\pine.png 1 1 1 0 1 1 0 1 1 1 0.6 1 1 1 1 ? 0 trunk 0 0 0 0.5688 3.15713 0.5688 leaves 0 3.22034 0 4.53803 9.43424 4.08534
 @grass user\assets\models\grassfield.obj user\assets\textures\diffuse_maps\grassfield.png ? ? ? 1.5 1.5 1.5 0 1 1 0 0 1 1 0.75 1 1 1 1 ? 1 
+@lantern user\assets\models\lantern2.obj user\assets\textures\diffuse_maps\lantern2.png ? ? ? 1.25 1.25 1.25 0 1 0 0 0 1 1 1 1 1 1 1 ? 0 pole 0 0 0 0.539009 6.56539 0.5688 holder 1 7 0 4.23624 0.66342 0.731421

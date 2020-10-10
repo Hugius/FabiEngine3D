@@ -407,7 +407,7 @@ void RenderEngine::_captureLensFlare()
 	if (_renderBus.isLensFlareEnabled())
 	{
 		// Calculate screen position
-		vec3 lightingPosition = _renderBus.getDirectionalLightingPosition();
+		vec3 lightingPosition = _renderBus.getDirectionalLightPosition();
 		mat4 viewMatrix = _renderBus.getViewMatrix();
 		mat4 projectionMatrix = _renderBus.getProjectionMatrix();
 		vec4 clipSpacePosition = projectionMatrix * viewMatrix * vec4(lightingPosition, 1.0f);

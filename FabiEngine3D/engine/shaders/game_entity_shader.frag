@@ -26,11 +26,13 @@ uniform mat4 u_skyRotationMatrix;
 
 // Vector3 uniforms
 uniform vec3 u_cameraPosition;
-uniform vec3 u_ambientLightingColor;
-uniform vec3 u_directionalLightingColor;
-uniform vec3 u_directionalLightingPosition;
+uniform vec3 u_cameraFront;
+uniform vec3 u_ambientLightColor;
+uniform vec3 u_directionalLightColor;
+uniform vec3 u_directionalLightPosition;
 uniform vec3 u_pointLightPositions[POINT_LIGHT_AMOUNT];
 uniform vec3 u_pointLightColors[POINT_LIGHT_AMOUNT];
+uniform vec3 u_spotLightColor;
 uniform vec3 u_color;
 uniform vec3 u_fogColor;
 uniform vec3 u_shadowAreaCenter;
@@ -38,10 +40,10 @@ uniform vec3 u_shadowAreaCenter;
 // Float uniforms
 uniform float u_pointLightIntensities[POINT_LIGHT_AMOUNT];
 uniform float u_pointLightDistanceFactors[POINT_LIGHT_AMOUNT];
-uniform float u_ambientLightingIntensity;
-uniform float u_directionalLightingIntensity;
-uniform float u_specularLightingFactor;
-uniform float u_specularLightingIntensity;
+uniform float u_ambientLightIntensity;
+uniform float u_directionalLightIntensity;
+uniform float u_specularLightFactor;
+uniform float u_specularLightIntensity;
 uniform float u_customAlpha;
 uniform float u_skyReflectionFactor;
 uniform float u_sceneReflectionFactor;
@@ -50,6 +52,9 @@ uniform float u_shadowAreaSize;
 uniform float u_fogMinDistance;
 uniform float u_fogMaxDistance;
 uniform float u_fogDefaultFactor;
+uniform float u_maxSpotlightAngle;
+uniform float u_spotLightIntensity;
+uniform float u_maxSpotLightDistance;
 
 // Boolean uniforms
 uniform bool u_isTransparent;
@@ -59,12 +64,13 @@ uniform bool u_isSkyReflective;
 uniform bool u_isSceneReflective;
 uniform bool u_isSpecularLighted;
 uniform bool u_isShadowed;
-uniform bool u_ambientLightingEnabled;
-uniform bool u_directionalLightingEnabled;
-uniform bool u_specularLightingEnabled;
+uniform bool u_ambientLightEnabled;
+uniform bool u_directionalLightEnabled;
+uniform bool u_specularLightEnabled;
+uniform bool u_spotLightEnabled;
 uniform bool u_lightMappingEnabled;
 uniform bool u_normalMappingEnabled;
-uniform bool u_pointLightingEnabled;
+uniform bool u_pointLightEnabled;
 uniform bool u_skyReflectionsEnabled;
 uniform bool u_sceneReflectionsEnabled;
 uniform bool u_fogEnabled;
@@ -85,11 +91,12 @@ vec3 getTextureColor();
 vec3 getAmbientLighting();
 vec3 getDirectionalLighting(vec3 normal, bool noShadowOcclusion);
 vec3 getPointLighting(vec3 normal, bool noShadowOcclusion);
-vec3 getShadowLighting();
+vec3 getSpotLighting(vec3 normal, bool noShadowOcclusion);
 vec3 applyLightMapping(vec3 color);
 vec3 applyFog(vec3 color);
 vec3 applySkyReflections(vec3 color, vec3 normal);
 vec3 applySceneReflections(vec3 color);
+float getShadowValue();
 float getSpecularValue(vec3 position, vec3 normal);
 
 // Calculate final fragment color
@@ -99,10 +106,11 @@ void main()
     vec3 normal = getNormalMappedVector();
 
 	// Calculate lighting
-    vec3 shadow      = getShadowLighting();
+    float shadow     = getShadowValue();
 	vec3 ambient     = getAmbientLighting();
-	vec3 directional = getDirectionalLighting(normal, shadow == vec3(1.0f));
-	vec3 point       = getPointLighting(normal, shadow == vec3(1.0f));
+	vec3 directional = getDirectionalLighting(normal, shadow == 1.0f);
+	vec3 point       = getPointLighting(normal, shadow == 1.0f);
+    vec3 spot        = getSpotLighting(normal, shadow == 1.0f);
 
 	// Apply lighting
 	vec3 color;
@@ -110,7 +118,7 @@ void main()
     color *= u_color;
 	color  = applySkyReflections(color, normal); // Sky reflection
 	color  = applySceneReflections(color); // Scene reflection
-	color *= vec3((ambient + directional) * shadow + point); // Lighting
+	color *= vec3(((ambient + directional) * shadow) + point + spot); // Lighting
 	color  = applyLightMapping(color); // LightMapping
 	color *= u_lightness; // Lightness
     color  = applyFog(color); // Fog
@@ -166,9 +174,9 @@ vec3 getTextureColor()
 // Calculate ambient lighting
 vec3 getAmbientLighting()
 {
-	if(u_ambientLightingEnabled)
+	if(u_ambientLightEnabled)
 	{
-		return u_ambientLightingColor * u_ambientLightingIntensity;
+		return u_ambientLightColor * u_ambientLightIntensity;
 	}
 	else
 	{
@@ -179,18 +187,18 @@ vec3 getAmbientLighting()
 // Calculate directional lighting
 vec3 getDirectionalLighting(vec3 normal, bool noShadowOcclusion)
 {
-	if(u_directionalLightingEnabled)
+	if(u_directionalLightEnabled)
 	{
         // Calculate lighting strength
         vec3 result = vec3(0.0f);
-		vec3 lightDirection = normalize(u_directionalLightingPosition - f_pos);
+		vec3 lightDirection = normalize(u_directionalLightPosition - f_pos);
 		float diffuse = max(dot(normal, lightDirection), 0.0);
 
         // Apply
         result += vec3(diffuse); // Diffuse
-        result += vec3(getSpecularValue(u_directionalLightingPosition, normal)) * float(noShadowOcclusion); // Specular
-        result *= u_directionalLightingColor; // Color
-        result *= u_directionalLightingIntensity; // Intensity
+        result += vec3(getSpecularValue(u_directionalLightPosition, normal)) * float(noShadowOcclusion); // Specular
+        result *= u_directionalLightColor; // Color
+        result *= u_directionalLightIntensity; // Intensity
 
         // Return
         return result;
@@ -204,7 +212,7 @@ vec3 getDirectionalLighting(vec3 normal, bool noShadowOcclusion)
 // Calculate point lighting
 vec3 getPointLighting(vec3 normal, bool noShadowOcclusion)
 {
-	if(u_pointLightingEnabled)
+	if(u_pointLightEnabled)
 	{
 		vec3 result = vec3(0.0f);
 		
@@ -238,18 +246,52 @@ vec3 getPointLighting(vec3 normal, bool noShadowOcclusion)
 	}
 }
 
+vec3 getSpotLighting(vec3 normal, bool noShadowOcclusion)
+{
+    if(u_spotLightEnabled)
+    {
+        float fragmentDistance = abs(length(u_cameraPosition - f_pos));
+        float distanceFactor = fragmentDistance / u_maxSpotLightDistance;
+        distanceFactor = clamp(distanceFactor, 0.0f, 1.0f);
+        distanceFactor = 1.0f - distanceFactor;
+
+        // Calculate lighting strength
+        vec3 result = vec3(0.0f);
+        vec3 lightDirection = normalize(u_cameraPosition - f_pos);
+        float smoothingFactor = 0.9f;
+        float spotTheta = dot(lightDirection, normalize(-u_cameraFront));
+        float epsilon   = u_maxSpotlightAngle - u_maxSpotlightAngle * smoothingFactor;
+        float intensity = clamp((spotTheta - u_maxSpotlightAngle * smoothingFactor) / epsilon, 0.0, 1.0);  
+
+        // Apply lighting calculations
+        float diffuse = max(dot(normal, lightDirection), 0.0);
+        float specular = getSpecularValue(u_cameraPosition, normal);
+        result += vec3(diffuse * intensity); // Diffuse
+        result += vec3(specular * float(noShadowOcclusion) * intensity); // Specular
+        result *= u_spotLightColor; // Color
+        result *= u_spotLightIntensity; // Intensity
+
+        // Return
+        return result * distanceFactor;
+    }
+    else
+    {
+        return vec3(0.0f);
+    }
+}
+
 float getSpecularValue(vec3 position, vec3 normal)
 {
-    if(u_specularLightingEnabled && u_isSpecularLighted)
+    if(u_specularLightEnabled && u_isSpecularLighted)
     {
         // Calculate
         vec3 lightDirection   = normalize(f_pos - position);
         vec3 viewDirection    = normalize(f_pos - u_cameraPosition);
         vec3 reflectDirection = reflect(-lightDirection, normal);
-        float result          = pow(max(dot(viewDirection, reflectDirection), 0.0f), u_specularLightingFactor);
+        float result          = pow(max(dot(viewDirection, reflectDirection), 0.0f), u_specularLightFactor);
 
         // Return
-        return result * u_specularLightingIntensity;
+        return result * u_specularLightIntensity;
     }
     else
     {
@@ -264,7 +306,7 @@ float getRandomFloat(vec3 seed, int i)
 	return fract(sin(dot_product) * 43758.5453);
 }
 
-vec3 getShadowLighting()
+float getShadowValue()
 {
 	if(u_shadowsEnabled && u_isShadowed)
 	{
@@ -286,7 +328,7 @@ vec3 getShadowLighting()
 			// Skip fragments outside of the depth map
 			if (projCoords.z > 1.0f)
 			{	
-				return vec3(1.0f);
+				return 1.0f;
 			}
 
             // Calculate PCF shadows
@@ -301,7 +343,6 @@ vec3 getShadowLighting()
             
             // Return shadow value
             shadow /= 9.0f;
-            //shadow += 0.1f;
 			
 			// Long-distance shadows fading
 			float maxDistance = max(abs(f_pos.x - u_shadowAreaCenter.x), abs(f_pos.z - u_shadowAreaCenter.z)); // Max distance to center
@@ -314,21 +355,21 @@ vec3 getShadowLighting()
 			{
 				if((maxDistance - (halfSize * 0.99f)) > 0.0f)
 				{
-					return vec3(0.0f);
+					return 0.0f;
 				}
 			}
 
 			// Return shadow value
-			return vec3(mix(shadow, 1.0f, alpha));
+			return mix(shadow, 1.0f, alpha);
 		}
 
 		// No shadow
-		return vec3(1.0f);
+		return 1.0f;
 	}
 	else
 	{
 		// No shadow
-		return vec3(1.0f);
+		return 1.0f;
 	}
 }
 

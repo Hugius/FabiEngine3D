@@ -29,13 +29,10 @@ void FabiEngine3D::billboardEntity_deleteAll()
 
 void FabiEngine3D::billboardEntity_delete(const string& ID)
 {
-	// Delete AABB child entity if existing
-	for (auto& entity : _core->_aabbEntityManager.getEntities())
+	// Delete all bound AABB entities if existing
+	for (auto& aabbID : aabbEntity_getBoundIDs(ID, false, true))
 	{
-		for (auto& aabbID : aabbEntity_getBoundIDs(entity->getID(), false, true))
-		{
-			_core->_aabbEntityManager.deleteEntity(ID, EntityType::AABB);
-		}
+		_core->_aabbEntityManager.deleteEntity(ID, EntityType::AABB);
 	}
 
 	// Delete BILLBOARD entity

@@ -21,18 +21,20 @@ layout(location = 5) uniform sampler2D u_sampler_shadowMap;
 
 // Vec3 uniforms
 uniform vec3 u_cameraPosition;
-uniform vec3 u_ambientLightingColor;
-uniform vec3 u_directionalLightingColor;
-uniform vec3 u_directionalLightingPosition;
+uniform vec3 u_cameraFront;
+uniform vec3 u_ambientLightColor;
+uniform vec3 u_directionalLightColor;
+uniform vec3 u_directionalLightPosition;
 uniform vec3 u_pointLightPositions[POINT_LIGHT_AMOUNT];
 uniform vec3 u_pointLightColors[POINT_LIGHT_AMOUNT];
+uniform vec3 u_spotLightColor;
 uniform vec3 u_shadowAreaCenter;
 uniform vec3 u_fogColor;
 
 // Float uniforms
 uniform float u_lightness;
-uniform float u_ambientLightingIntensity;
-uniform float u_directionalLightingIntensity;
+uniform float u_ambientLightIntensity;
+uniform float u_directionalLightIntensity;
 uniform float u_pointLightIntensities[POINT_LIGHT_AMOUNT];
 uniform float u_pointLightDistanceFactors[POINT_LIGHT_AMOUNT];
 uniform float u_blendMapRepeat;
@@ -43,18 +45,22 @@ uniform float u_shadowAreaSize;
 uniform float u_fogMinDistance;
 uniform float u_fogMaxDistance;
 uniform float u_fogDefaultFactor;
-uniform float u_specularLightingIntensity;
+uniform float u_specularLightIntensity;
+uniform float u_maxSpotlightAngle;
+uniform float u_spotLightIntensity;
+uniform float u_maxSpotLightDistance;
 
 // Boolean uniforms
 uniform bool u_isSpecularLighted;
 uniform bool u_isBlendMapped;
-uniform bool u_ambientLightingEnabled;
-uniform bool u_directionalLightingEnabled;
-uniform bool u_pointLightingEnabled;
+uniform bool u_ambientLightEnabled;
+uniform bool u_directionalLightEnabled;
+uniform bool u_pointLightEnabled;
+uniform bool u_spotLightEnabled;
 uniform bool u_fogEnabled;
 uniform bool u_shadowsEnabled;
 uniform bool u_shadowFrameRenderingEnabled;
-uniform bool u_specularLightingEnabled;
+uniform bool u_specularLightEnabled;
 
 // Integer uniforms
 uniform int u_shadowMapSize;
@@ -68,6 +74,7 @@ vec3 getTextureColor();
 vec3 getAmbientLighting();
 vec3 getDirectionalLighting(bool noShadowOcclusion);
 vec3 getPointLighting(bool noShadowOcclusion);
+vec3 getSpotLighting(bool noShadowOcclusion);
 vec3 applyFog(vec3 color);
 float getShadowValue();
 float getSpecularValue(vec3 position);
@@ -80,10 +87,12 @@ void main()
 	vec3 ambient = getAmbientLighting();
 	vec3 directional = getDirectionalLighting(shadow == 1.0f);
 	vec3 point = getPointLighting(shadow == 1.0f);
+	vec3 spot = getSpotLighting(shadow == 1.0f);
 
 	// Apply lighting
 	vec3 color;
-	color = getTextureColor() * vec3((ambient + directional) * shadow + point); // Lighting
+	color = getTextureColor();
+	color *= vec3(((ambient + directional) * shadow) + point + spot); // Lighting
 	color *= u_lightness; // Lightness
 	color = applyFog(color);
 
@@ -118,9 +127,9 @@ vec3 getTextureColor()
 // Calculate ambient lighting
 vec3 getAmbientLighting()
 {
-	if(u_ambientLightingEnabled)
+	if(u_ambientLightEnabled)
 	{
-		return u_ambientLightingColor * u_ambientLightingIntensity;
+		return u_ambientLightColor * u_ambientLightIntensity;
 	}
 	else
 	{
@@ -131,18 +140,18 @@ vec3 getAmbientLighting()
 // Calculate directional lighting
 vec3 getDirectionalLighting(bool noShadowOcclusion)
 {
-	if(u_directionalLightingEnabled)
+	if(u_directionalLightEnabled)
 	{
         // Calculate lighting strength
         vec3 result = vec3(0.0f);
-        vec3 lightDirection = normalize(u_directionalLightingPosition - f_pos);
+        vec3 lightDirection = normalize(u_directionalLightPosition - f_pos);
         float diffuse = max(dot(f_normal, lightDirection), 0.0);
 
         // Apply
         result += vec3(diffuse); // Diffuse
-        result += vec3(getSpecularValue(u_directionalLightingPosition)) * float(noShadowOcclusion); // Specular
-        result *= u_directionalLightingColor; // Color
-        result *= u_directionalLightingIntensity; // Intensity
+        result += vec3(getSpecularValue(u_directionalLightPosition)) * float(noShadowOcclusion); // Specular
+        result *= u_directionalLightColor; // Color
+        result *= u_directionalLightIntensity; // Intensity
 
         // Return
         return result;
@@ -156,7 +165,7 @@ vec3 getDirectionalLighting(bool noShadowOcclusion)
 // Calculate point lighting
 vec3 getPointLighting(bool noShadowOcclusion)
 {
-	if(u_pointLightingEnabled)
+	if(u_pointLightEnabled)
 	{
 		vec3 result = vec3(0.0f);
 		
@@ -188,6 +197,40 @@ vec3 getPointLighting(bool noShadowOcclusion)
 	{
 		return vec3(0.0f);
 	}
+}
+
+vec3 getSpotLighting(bool noShadowOcclusion)
+{
+    if(u_spotLightEnabled)
+    {
+    	float fragmentDistance = abs(length(u_cameraPosition - f_pos));
+        float distanceFactor = fragmentDistance / u_maxSpotLightDistance;
+        distanceFactor = clamp(distanceFactor, 0.0f, 1.0f);
+        distanceFactor = 1.0f - distanceFactor;
+
+        // Calculate lighting strength
+        vec3 result = vec3(0.0f);
+        vec3 lightDirection = normalize(u_cameraPosition - f_pos);
+        float smoothingFactor = 0.9f;
+        float spotTheta = dot(lightDirection, normalize(-u_cameraFront));
+        float epsilon   = u_maxSpotlightAngle - u_maxSpotlightAngle * smoothingFactor;
+        float intensity = clamp((spotTheta - u_maxSpotlightAngle * smoothingFactor) / epsilon, 0.0, 1.0);  
+
+        // Apply lighting calculations
+        float diffuse = max(dot(f_normal, lightDirection), 0.0);
+        float specular = getSpecularValue(u_cameraPosition);
+        result += vec3(diffuse * intensity); // Diffuse
+        result += vec3(specular * float(noShadowOcclusion) * intensity); // Specular
+        result *= u_spotLightColor; // Color
+        result *= u_spotLightIntensity; // Intensity
+
+        // Return
+        return result * distanceFactor;
+    }
+    else
+    {
+        return vec3(0.0f);
+    }
 }
 
 float getRandomFloat(vec3 seed, int i)
@@ -306,7 +349,7 @@ vec3 applyFog(vec3 color)
 
 float getSpecularValue(vec3 position)
 {
-    if(u_specularLightingEnabled && u_isSpecularLighted)
+    if(u_specularLightEnabled && u_isSpecularLighted)
     {
         // Calculate
         vec3 lightDirection   = normalize(f_pos - position);
@@ -315,7 +358,7 @@ float getSpecularValue(vec3 position)
         float result          = pow(max(dot(viewDirection, reflectDirection), 0.0f), 1.0f);
 
         // Return
-        return result * u_specularLightingIntensity;
+        return result * u_specularLightIntensity;
     }
     else
     {

@@ -179,6 +179,10 @@ bool FabiEngine3D::gameEntity_isInstanced(const string& ID)
 	{
 		return _core->_gameEntityManager.getEntity(ID)->getOglBuffer(0)->isInstanced();
 	}
+	else
+	{
+		return false;
+	}
 }
 
 bool FabiEngine3D::gameEntity_isMultiTextured(const string& ID)

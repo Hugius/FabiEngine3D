@@ -236,7 +236,7 @@ void SceneEditor::save()
 		// Directional lighting
 		vec3 directionalLightingColor = _fe3d.gfx_getDirectionalLightingColor();
 		vec3 directionalLightingPosition = _fe3d.gfx_getDirectionalLightingPosition();
-		float directionalLightingIntensity = _fe3d.gfx_geDirectionalLightingIntensity();
+		float directionalLightingIntensity = _fe3d.gfx_getDirectionalLightingIntensity();
 		float billboardSize = _fe3d.billboardEntity_getSize("@@lightSource").x;
 
 		file <<

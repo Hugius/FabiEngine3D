@@ -14,7 +14,7 @@ layout(location = 3) uniform sampler2D u_sampler_dudvMap;
 layout(location = 4) uniform sampler2D u_sampler_normalMap;
 
 // Vector3 uniforms
-uniform vec3 u_directionalLightingPosition;
+uniform vec3 u_ambientLightPosition;
 uniform vec3 u_cameraPosition;
 uniform vec3 u_color;
 uniform vec3 u_fogColor;
@@ -23,8 +23,8 @@ uniform vec3 u_fogColor;
 uniform vec2 u_rippleOffset;
 
 // Float uniforms
-uniform float u_specularLightingFactor;
-uniform float u_specularLightingIntensity;
+uniform float u_specularLightFactor;
+uniform float u_specularLightIntensity;
 uniform float u_nearZ;
 uniform float u_farZ;
 uniform float u_transparency;
@@ -98,10 +98,10 @@ vec4 getMainColor()
 	// Specular lighting
 	if(u_isSpecularLighted)
 	{
-		vec3 lightDir     = normalize(u_directionalLightingPosition - f_pos);
+		vec3 lightDir     = normalize(u_ambientLightPosition - f_pos);
 		vec3 viewDir      = normalize(f_pos - u_cameraPosition);
 		vec3 reflectDir   = reflect(normalize(lightDir), normal);
-		specular = pow(max(dot(reflectDir, viewDir), 0.0f), u_specularLightingFactor) * u_specularLightingIntensity;
+		specular = pow(max(dot(reflectDir, viewDir), 0.0f), u_specularLightFactor) * u_specularLightIntensity;
 	}
 
 	// Fresnel effect

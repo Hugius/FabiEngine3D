@@ -11,7 +11,7 @@ void WaterEntityRenderer::bind()
 	_shader.uploadUniform("u_projectionMatrix",	_renderBus.getProjectionMatrix());
 
 	// Fragment shader uniforms
-	_shader.uploadUniform("u_directionalLightingPosition", _renderBus.getDirectionalLightingPosition());
+	_shader.uploadUniform("u_ambientLightPosition", _renderBus.getDirectionalLightPosition());
 	_shader.uploadUniform("u_cameraPosition",			   _renderBus.getCameraPosition());
 	_shader.uploadUniform("u_fogMinDistance",			   _renderBus.getFogMinDistance());
 	_shader.uploadUniform("u_fogMaxDistance",			   _renderBus.getFogMaxDistance());
@@ -49,8 +49,8 @@ void WaterEntityRenderer::render(const WaterEntity* entity)
 		_shader.uploadUniform("u_waveHeightFactor", entity->getWaveHeightFactor());
 		_shader.uploadUniform("u_customPositionOffset", entity->getPosition());
 		_shader.uploadUniform("u_uvRepeat", entity->getUvRepeat());
-		_shader.uploadUniform("u_specularLightingFactor", entity->getSpecularLightingFactor());
-		_shader.uploadUniform("u_specularLightingIntensity", entity->getSpecularLightingIntensity());
+		_shader.uploadUniform("u_specularLightFactor", entity->getSpecularLightingFactor());
+		_shader.uploadUniform("u_specularLightIntensity", entity->getSpecularLightingIntensity());
 		_shader.uploadUniform("u_transparency", entity->getTransparency());
 		_shader.uploadUniform("u_isWaving", entity->isWaving());
 		_shader.uploadUniform("u_isRippling", entity->isRippling());

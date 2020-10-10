@@ -159,6 +159,7 @@ void CameraManager::updateMatrices()
 	// Update renderbus
 	_renderBus.setCameraYaw(_yaw);
 	_renderBus.setCameraPitch(_pitch);
+	_renderBus.setCameraFront(_front);
 	_renderBus.setCameraPosition(_position);
 	_renderBus.setViewMatrix(_viewMatrix);
 	_renderBus.setProjectionMatrix(_projectionMatrix);

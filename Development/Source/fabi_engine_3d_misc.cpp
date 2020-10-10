@@ -4,6 +4,7 @@
 #include "configuration.hpp"
 
 #include <chrono>
+#include <filesystem>
 
 int FabiEngine3D::misc_getUniqueInt(int min, int max)
 {
@@ -242,10 +243,14 @@ string FabiEngine3D::misc_vec2str(vec4 vec)
 
 string FabiEngine3D::misc_getRootDirectory()
 {
+	// Retrieve
 	char buffer[256]; size_t len = sizeof(buffer);
-	GetModuleFileName(NULL, buffer, len);
+	GetModuleFileName(NULL, buffer, len); // Get executable path
 	string rootDir = buffer;
-	rootDir = rootDir.substr(0, rootDir.size() - string("bin\\FabiEngine3D.exe").size());
+	rootDir = std::filesystem::absolute(rootDir).string(); // Remove any "..\" bullshit
+	rootDir = rootDir.substr(0, rootDir.size() - string("bin\\FabiEngine3D.exe").size()); // Go to engine root directory
+
+	// Return
 	return rootDir;
 }
 

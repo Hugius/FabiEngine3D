@@ -26,6 +26,15 @@ void FabiEngine3D::gfx_enablePointLighting()
 	_core->_renderBus.setPointLightingEnabled(true);
 }
 
+void FabiEngine3D::gfx_enableSpotLighting(vec3 color, float intensity, float angle, float distance)
+{
+	_core->_renderBus.setSpotLightingEnabled(true);
+	_core->_renderBus.setSpotLightColor(color);
+	_core->_renderBus.setSpotLightIntensity(intensity);
+	_core->_renderBus.setMaxSpotLightAngle(angle);
+	_core->_renderBus.setMaxSpotLightDistance(distance);
+}
+
 void FabiEngine3D::gfx_enableFog(float minDistance, float maxDistance, float defaultFactor, vec3 color)
 {
 	_core->_renderBus.setFogEnabled(true);
@@ -137,6 +146,11 @@ void FabiEngine3D::gfx_disablePointLighting()
 	_core->_renderBus.setPointLightingEnabled(false);
 }
 
+void FabiEngine3D::gfx_disableSpotLighting()
+{
+	_core->_renderBus.setSpotLightingEnabled(false);
+}
+
 void FabiEngine3D::gfx_disableFog()
 {
 	_core->_renderBus.setFogEnabled(false);
@@ -227,6 +241,11 @@ bool FabiEngine3D::gfx_isPointLightingEnabled()
 	return _core->_renderBus.isPointLightingEnabled();
 }
 
+bool FabiEngine3D::gfx_isSpotLightingEnabled()
+{
+	return _core->_renderBus.isSpotLightingEnabled();
+}
+
 bool FabiEngine3D::gfx_isFogEnabled()
 {
 	return _core->_renderBus.isFogEnabled();
@@ -314,27 +333,47 @@ int FabiEngine3D::gfx_getRefractionQuality()
 
 vec3 FabiEngine3D::gfx_getAmbientLightingColor()
 {
-	return _core->_renderBus.getAmbientLightingColor();
+	return _core->_renderBus.getAmbientLightColor();
 }
 
 float FabiEngine3D::gfx_getAmbientLightingIntensity()
 {
-	return _core->_renderBus.getAmbientLightingIntensity();
+	return _core->_renderBus.getAmbientLightIntensity();
 }
 
-float FabiEngine3D::gfx_geDirectionalLightingIntensity()
+float FabiEngine3D::gfx_getDirectionalLightingIntensity()
 {
-	return _core->_renderBus.getDirectionalLightingIntensity();
+	return _core->_renderBus.getDirectionalLightIntensity();
+}
+
+float FabiEngine3D::gfx_getSpotLightingIntensity()
+{
+	return _core->_renderBus.getSpotLightIntensity();
+}
+
+float FabiEngine3D::gfx_getSpotLightingAngle()
+{
+	return _core->_renderBus.getMaxSpotLightAngle();
+}
+
+float FabiEngine3D::gfx_getSpotLightingDistance()
+{
+	return _core->_renderBus.getMaxSpotLightDistance();
 }
 
 vec3 FabiEngine3D::gfx_getDirectionalLightingPosition()
 {
-	return _core->_renderBus.getDirectionalLightingPosition();
+	return _core->_renderBus.getDirectionalLightPosition();
 }
 
 vec3 FabiEngine3D::gfx_getDirectionalLightingColor()
 {
-	return _core->_renderBus.getDirectionalLightingColor();
+	return _core->_renderBus.getDirectionalLightColor();
+}
+
+vec3 FabiEngine3D::gfx_getSpotLightingColor()
+{
+	return _core->_renderBus.getSpotLightColor();
 }
 
 float FabiEngine3D::gfx_getFogMinDistance()

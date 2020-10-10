@@ -38,9 +38,11 @@ public:
 
 	// Vector3
 	void setCameraPosition(vec3 val);
+	void setCameraFront(vec3 val);
 	void setAmbientLightColor(vec3 val);
 	void setDirectionalLightPos(vec3 val);
 	void setDirectionalLightColor(vec3 val);
+	void setSpotLightColor(vec3 val);
 	void setShadowEyePosition(vec3 val);
 	void setShadowAreaCenter(vec3 val);
 	void setFogColor(vec3 val);
@@ -49,6 +51,9 @@ public:
 	// Floats
 	void setAmbientLightIntensity(float val);
 	void setDirectionalLightIntensity(float val);
+	void setSpotLightIntensity(float val);
+	void setMaxSpotLightAngle(float val);
+	void setMaxSpotLightDistance(float val);
 	void setFogMinDistance(float val);
 	void setFogMaxDistance(float val);
 	void setFogDefaultFactor(float val);
@@ -86,6 +91,7 @@ public:
 	void setDirectionalLightingEnabled(bool val);
 	void setSpecularLightingEnabled(bool val);
 	void setPointLightingEnabled(bool val);
+	void setSpotLightingEnabled(bool val);
 	void setFogEnabled(bool val);
 	void setLightMappingEnabled(bool val);
 	void setNormalMappingEnabled(bool val);
@@ -132,39 +138,44 @@ public:
 	const vec4 getFlareSourcePositionClipspace() const;
 	
 	// Vector3
-	const vec3 getCameraPosition()				const;
-	const vec3 getAmbientLightingColor()		const;
-	const vec3 getDirectionalLightingColor()    const;
-	const vec3 getDirectionalLightingPosition()	const;
-	const vec3 getShadowEyePosition()			const;
-	const vec3 getShadowAreaCenter()			const;
-	const vec3 getFogColor()					const;
-	const vec3 getFlareSourcePosition()			const;
+	const vec3 getCameraPosition()			 const;
+	const vec3 getCameraFront()				 const;
+	const vec3 getAmbientLightColor()		 const;
+	const vec3 getDirectionalLightColor()    const;
+	const vec3 getDirectionalLightPosition() const;
+	const vec3 getSpotLightColor()			 const;
+	const vec3 getShadowEyePosition()		 const;
+	const vec3 getShadowAreaCenter()		 const;
+	const vec3 getFogColor()				 const;
+	const vec3 getFlareSourcePosition()		 const;
 
 	// Floats
-	const float getAmbientLightingIntensity()	  const;
-	const float getDirectionalLightingIntensity() const;
-	const float getFogMinDistance()				  const;
-	const float getFogMaxDistance()				  const;
-	const float getFogDefaultFactor()			  const;
-	const float getBloomIntensity()				  const;
-	const float getBloomBrightnessTreshold()	  const;
-	const float getCameraYaw()					  const;
-	const float getCameraPitch()				  const;
-	const float getNearZ()						  const;
-	const float getFarZ()						  const;
-	const float getDofMaxDistance()				  const;
-	const float getDofBlurDistance()			  const;
-	const float getSkyReflectionFactor()		  const;
-	const float getSceneReflectionHeight()		  const;
-	const float getSceneReflectionOffset()		  const;
-	const float getSceneReflectionFactor()		  const;
-	const float getShadowAreaSize()				  const;
-	const float getShadowAreaReach()			  const;
-	const float getLensFlareAlpha()				  const;
-	const float getLensFlareIntensity()			  const;
-	const float getLensFlareMultiplier()		  const;
-	const float getMotionBlurStrength()			  const;
+	const float getAmbientLightIntensity()	   const;
+	const float getDirectionalLightIntensity() const;
+	const float getSpotLightIntensity()		   const;
+	const float getMaxSpotLightAngle()		   const;
+	const float getMaxSpotLightDistance()	   const;
+	const float getFogMinDistance()			   const;
+	const float getFogMaxDistance()			   const;
+	const float getFogDefaultFactor()		   const;
+	const float getBloomIntensity()			   const;
+	const float getBloomBrightnessTreshold()   const;
+	const float getCameraYaw()				   const;
+	const float getCameraPitch()			   const;
+	const float getNearZ()					   const;
+	const float getFarZ()					   const;
+	const float getDofMaxDistance()			   const;
+	const float getDofBlurDistance()		   const;
+	const float getSkyReflectionFactor()	   const;
+	const float getSceneReflectionHeight()	   const;
+	const float getSceneReflectionOffset()	   const;
+	const float getSceneReflectionFactor()	   const;
+	const float getShadowAreaSize()			   const;
+	const float getShadowAreaReach()		   const;
+	const float getLensFlareAlpha()			   const;
+	const float getLensFlareIntensity()		   const;
+	const float getLensFlareMultiplier()	   const;
+	const float getMotionBlurStrength()		   const;
 
 	// Integers
 	const int getBloomBlurSize()		  const;
@@ -180,6 +191,7 @@ public:
 	const bool isDirectionalLightingEnabled()  const;
 	const bool isSpecularLightingEnabled()     const;
 	const bool isPointLightingEnabled()        const;
+	const bool isSpotLightingEnabled()         const;
 	const bool isFogEnabled()                  const;
 	const bool isLightMappingEnabled()         const;
 	const bool isNormalMappingEnabled()		   const;
@@ -227,39 +239,44 @@ private:
 	vec4 _flareSourcePositionClipspace = vec4(0.0f);
 
 	// Vector3
-	vec3 _cameraPosition			  = vec3(0.0f);
-	vec3 _ambientLightingColor		  = vec3(1.0f);
-	vec3 _directionalLightingColor    = vec3(1.0f);
-	vec3 _directionalLightingPosition = vec3(0.0f);
-	vec3 _shadowEyePosition			  = vec3(0.0f);
-	vec3 _shadowAreaCenter			  = vec3(0.0f);
-	vec3 _fogColor					  = vec3(1.0f);
-	vec3 _flareSourcePosition		  = vec3(0.0f);
+	vec3 _cameraPosition		   = vec3(0.0f);
+	vec3 _cameraFront			   = vec3(0.0f);
+	vec3 _ambientLightColor		   = vec3(1.0f);
+	vec3 _directionalLightColor    = vec3(1.0f);
+	vec3 _directionalLightPosition = vec3(0.0f);
+	vec3 _spotLightColor		   = vec3(1.0f);
+	vec3 _shadowEyePosition		   = vec3(0.0f);
+	vec3 _shadowAreaCenter		   = vec3(0.0f);
+	vec3 _fogColor				   = vec3(1.0f);
+	vec3 _flareSourcePosition	   = vec3(0.0f);
 
 	// Floats
-	float _ambientLightingIntensity     = 0.0f;
-	float _directionalLightingIntensity = 0.0f;
-	float _fogMinDistance               = 0.0f;
-	float _fogMaxDistance				= 0.0f;
-	float _fogDefaultFactor				= 0.0f;
-	float _bloomIntensity               = 0.0f;
-	float _bloomBrightnessTreshold      = 0.0f;
-	float _cameraYaw                    = 0.0f;
-	float _cameraPitch                  = 0.0f;
-	float _nearZ                        = 0.0f;
-	float _farZ                         = 0.0f;
-	float _dofMaxDistance               = 0.0f;
-	float _dofBlurDistance				= 0.0f;
-	float _skyReflectionFactor          = 0.0f;
-	float _sceneReflectionHeight        = 0.0f;
-	float _sceneReflectionOffset	    = 0.0f;
-	float _sceneReflectionFactor        = 0.0f;
-	float _shadowAreaSize				= 0.0f;
-	float _shadowAreaReach				= 0.0f;
-	float _lensFlareAlpha				= 0.0f;
-	float _lensFlareIntensity			= 0.0f;
-	float _lensFlareMultiplier			= 0.0f;
-	float _motionBlurStrength			= 0.0f;
+	float _ambientLightIntensity     = 0.0f;
+	float _directionalLightIntensity = 0.0f;
+	float _spotLightIntensity		 = 0.0f;
+	float _maxSpotLightAngle		 = 0.0f;
+	float _maxSpotLightDistance		 = 0.0f;
+	float _fogMinDistance            = 0.0f;
+	float _fogMaxDistance			 = 0.0f;
+	float _fogDefaultFactor			 = 0.0f;
+	float _bloomIntensity            = 0.0f;
+	float _bloomBrightnessTreshold   = 0.0f;
+	float _cameraYaw                 = 0.0f;
+	float _cameraPitch               = 0.0f;
+	float _nearZ                     = 0.0f;
+	float _farZ                      = 0.0f;
+	float _dofMaxDistance            = 0.0f;
+	float _dofBlurDistance			 = 0.0f;
+	float _skyReflectionFactor       = 0.0f;
+	float _sceneReflectionHeight     = 0.0f;
+	float _sceneReflectionOffset	 = 0.0f;
+	float _sceneReflectionFactor     = 0.0f;
+	float _shadowAreaSize			 = 0.0f;
+	float _shadowAreaReach			 = 0.0f;
+	float _lensFlareAlpha			 = 0.0f;
+	float _lensFlareIntensity		 = 0.0f;
+	float _lensFlareMultiplier		 = 0.0f;
+	float _motionBlurStrength		 = 0.0f;
 	
 	// Integers
 	int _bloomBlurSize			= 0;
@@ -275,6 +292,7 @@ private:
 	bool _isDirectionalLightingEnabled  = false;
 	bool _isSpecularLightingEnabled     = false;
 	bool _isPointLightingEnabled        = false;
+	bool _isSpotLightingEnabled			= false;
 	bool _isFogEnabled                  = false;
 	bool _isLightMappingEnabled         = false;
 	bool _isNormalMappingEnabled		= false;
@@ -295,6 +313,6 @@ private:
 	bool _isDofDynamic					= false;
 
 	// Strings
-	string _cursorEntityID = "";
+	string _cursorEntityID   = "";
 	string _lensFlareMapPath = "";
 };

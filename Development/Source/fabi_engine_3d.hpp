@@ -529,6 +529,7 @@ public:
 	void gfx_enableDirectionalLighting(vec3 position, vec3 color, float intensity);
 	void gfx_enableSpecularLighting();
 	void gfx_enablePointLighting();
+	void gfx_enableSpotLighting(vec3 color, float intensity, float angle, float distance);
 	void gfx_enableFog(float minDistance, float maxDistance, float defaultFactor, vec3 color);
 	void gfx_enableSkyReflections(float factor);
 	void gfx_enableSceneReflections(float factor);
@@ -546,6 +547,7 @@ public:
 	void gfx_disableDirectionalLighting();
 	void gfx_disableSpecularLighting();
 	void gfx_disablePointLighting();
+	void gfx_disableSpotLighting();
 	void gfx_disableFog();
 	void gfx_disableSkyReflections();
 	void gfx_disableSceneReflections();
@@ -566,6 +568,7 @@ public:
 	bool gfx_isDirectionalLightingEnabled();
 	bool gfx_isSpecularLightingEnabled();
 	bool gfx_isPointLightingEnabled();
+	bool gfx_isSpotLightingEnabled();
 	bool gfx_isFogEnabled();
 	bool gfx_isLightMappingEnabled();
 	bool gfx_isNormalMappingEnabled();
@@ -587,7 +590,10 @@ public:
 	int gfx_getBloomBlurSize();
 	int gfx_getShadowInterval();
 	float gfx_getAmbientLightingIntensity();
-	float gfx_geDirectionalLightingIntensity();
+	float gfx_getDirectionalLightingIntensity();
+	float gfx_getSpotLightingIntensity();
+	float gfx_getSpotLightingAngle();
+	float gfx_getSpotLightingDistance();
 	float gfx_getFogMinDistance();
 	float gfx_getFogMaxDistance();
 	float gfx_getFogDefaultFactor();
@@ -607,6 +613,7 @@ public:
 	vec3 gfx_getDirectionalLightingPosition();
 	vec3 gfx_getAmbientLightingColor();
 	vec3 gfx_getDirectionalLightingColor();
+	vec3 gfx_getSpotLightingColor();
 	vec3 gfx_getFogColor();
 	vec3 gfx_getShadowEyePosition();
 	vec3 gfx_getShadowCenter();

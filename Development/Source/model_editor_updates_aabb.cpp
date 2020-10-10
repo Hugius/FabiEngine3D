@@ -182,10 +182,8 @@ void ModelEditor::_updateModelEditingAabb()
 		// Update moving through cursor
 		if (_movingToggled)
 		{
-			vec3 newPosition = _fe3d.aabbEntity_getPosition(_currentModelID + "_" + _currentAabbID);
-
-			// Update scrolling
 			float scrollingDirection = float(_fe3d.input_getMouseWheelY());
+			vec3 newPosition = _fe3d.aabbEntity_getPosition(_currentModelID + "_" + _currentAabbID);
 
 			// Determine direction
 			switch (_direction)
@@ -210,21 +208,21 @@ void ModelEditor::_updateModelEditingAabb()
 		// Update resizing through cursor
 		if (_resizingToggled)
 		{
-			float scrollSpeed = float(_fe3d.input_getMouseWheelY()) * 0.05f;
+			float scrollingDirection = float(_fe3d.input_getMouseWheelY());
 			vec3 newSize = _fe3d.aabbEntity_getSize(_currentModelID + "_" + _currentAabbID);
 
 			switch (_direction)
 			{
 				case TransformationDirection::X:
-					newSize.x *= (1.0f + scrollSpeed);
+					newSize.x += (_aabbTransformationSpeed * scrollingDirection);
 					break;
 
 				case TransformationDirection::Y:
-					newSize.y *= (1.0f + scrollSpeed);
+					newSize.y += (_aabbTransformationSpeed * scrollingDirection);
 					break;
 
 				case TransformationDirection::Z:
-					newSize.z *= (1.0f + scrollSpeed);
+					newSize.z += (_aabbTransformationSpeed * scrollingDirection);
 					break;
 			}
 

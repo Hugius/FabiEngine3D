@@ -85,19 +85,29 @@ void RenderBus::setCameraPosition(vec3 val)
 	_cameraPosition = val;
 }
 
+void RenderBus::setCameraFront(vec3 val)
+{
+	_cameraFront = val;
+}
+
 void RenderBus::setAmbientLightColor(vec3 val)
 {
-	_ambientLightingColor = val;
+	_ambientLightColor = val;
 }
 
 void RenderBus::setDirectionalLightPos(vec3 val)
 {
-	_directionalLightingPosition = val;
+	_directionalLightPosition = val;
 }
 
 void RenderBus::setDirectionalLightColor(vec3 val)
 {
-	_directionalLightingColor = val;
+	_directionalLightColor = val;
+}
+
+void RenderBus::setSpotLightColor(vec3 val)
+{
+	_spotLightColor = val;
 }
 
 void RenderBus::setShadowEyePosition(vec3 val)
@@ -165,14 +175,29 @@ void RenderBus::setMotionBlurStrength(float val)
 	_motionBlurStrength = val;
 }
 
+void RenderBus::setMaxSpotLightAngle(float val)
+{
+	_maxSpotLightAngle = val;
+}
+
+void RenderBus::setMaxSpotLightDistance(float val)
+{
+	_maxSpotLightDistance = val;
+}
+
 void RenderBus::setAmbientLightIntensity(float val)
 {
-	_ambientLightingIntensity = val;
+	_ambientLightIntensity = val;
 }
 
 void RenderBus::setDirectionalLightIntensity(float val)
 {
-	_directionalLightingIntensity = val;
+	_directionalLightIntensity = val;
+}
+
+void RenderBus::setSpotLightIntensity(float val)
+{
+	_spotLightIntensity = val;
 }
 
 void RenderBus::setFogMinDistance(float val)
@@ -301,6 +326,11 @@ void RenderBus::setSpecularLightingEnabled(bool val)
 void RenderBus::setPointLightingEnabled(bool val)
 {
 	_isPointLightingEnabled = val;
+}
+
+void RenderBus::setSpotLightingEnabled(bool val)
+{
+	_isSpotLightingEnabled = val;
 }
 
 void RenderBus::setFogEnabled(bool val)
@@ -483,14 +513,24 @@ const vec3 RenderBus::getCameraPosition() const
 	return _cameraPosition;
 }
 
-const vec3 RenderBus::getAmbientLightingColor() const
+const vec3 RenderBus::getCameraFront() const
 {
-	return _ambientLightingColor;
+	return _cameraFront;
 }
 
-const vec3 RenderBus::getDirectionalLightingPosition() const
+const vec3 RenderBus::getAmbientLightColor() const
 {
-	return _directionalLightingPosition;
+	return _ambientLightColor;
+}
+
+const vec3 RenderBus::getDirectionalLightPosition() const
+{
+	return _directionalLightPosition;
+}
+
+const vec3 RenderBus::getSpotLightColor() const
+{
+	return _spotLightColor;
 }
 
 const vec3 RenderBus::getShadowEyePosition() const
@@ -513,9 +553,9 @@ const vec3 RenderBus::getFlareSourcePosition() const
 	return _flareSourcePosition;
 }
 
-const vec3 RenderBus::getDirectionalLightingColor() const
+const vec3 RenderBus::getDirectionalLightColor() const
 {
-	return _directionalLightingColor;
+	return _directionalLightColor;
 }
 
 const float RenderBus::getSceneReflectionHeight() const
@@ -563,14 +603,29 @@ const float RenderBus::getMotionBlurStrength() const
 	return _motionBlurStrength;
 }
 
-const float RenderBus::getAmbientLightingIntensity() const
+const float RenderBus::getAmbientLightIntensity() const
 {
-	return _ambientLightingIntensity;
+	return _ambientLightIntensity;
 }
 
-const float RenderBus::getDirectionalLightingIntensity() const
+const float RenderBus::getDirectionalLightIntensity() const
 {
-	return _directionalLightingIntensity;
+	return _directionalLightIntensity;
+}
+
+const float RenderBus::getSpotLightIntensity() const
+{
+	return _spotLightIntensity;
+}
+
+const float RenderBus::getMaxSpotLightAngle() const
+{
+	return _maxSpotLightAngle;
+}
+
+const float RenderBus::getMaxSpotLightDistance() const
+{
+	return _maxSpotLightDistance;
 }
 
 const float RenderBus::getFogMinDistance() const
@@ -691,6 +746,11 @@ const bool RenderBus::isSpecularLightingEnabled() const
 const bool RenderBus::isPointLightingEnabled() const
 {
 	return _isPointLightingEnabled;
+}
+
+const bool RenderBus::isSpotLightingEnabled() const
+{
+	return _isSpotLightingEnabled;
 }
 
 const bool RenderBus::isFogEnabled() const

@@ -183,7 +183,7 @@ void SceneEditor::_placeBillboard(const string& newID, const string& previewID, 
 
 	// Add BILLBOARD entity
 	vec2 size = _fe3d.billboardEntity_getSize(previewID);
-	_fe3d.billBoardEntity_add(newID, color, position + vec3(0.0f, size.y / 2.0f, 0.0f), vec3(0.0f), size, isFacingX, isFacingY);
+	_fe3d.billBoardEntity_add(newID, color, position, vec3(0.0f), size, isFacingX, isFacingY);
 
 	// Determine BILLBOARD entity type
 	if (_fe3d.billboardEntity_getDiffuseMapPath(previewID) != "") // Textured billboard

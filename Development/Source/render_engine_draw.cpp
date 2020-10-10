@@ -51,71 +51,77 @@ void RenderEngine::_renderWaterEntity()
 
 void RenderEngine::_renderGameEntities()
 {
-	// Bind
-	_gameEntityRenderer.bind();
-
-	// Render lights
-	_gameEntityRenderer.renderLightEntities(_entityBus->getLightEntities());
-
-	// Render GAME entities
-	for (auto& entity : _entityBus->getGameEntities())
+	if (!_entityBus->getGameEntities().empty())
 	{
-		// Check if LOD entity needs to be rendered
-		if (entity->isLevelOfDetailed())
+		// Bind
+		_gameEntityRenderer.bind();
+
+		// Render lights
+		_gameEntityRenderer.renderLightEntities(_entityBus->getLightEntities());
+
+		// Render GAME entities
+		for (auto& entity : _entityBus->getGameEntities())
 		{
-			// Try to find LOD entity
-			for (auto& lodEntity : _entityBus->getGameEntities())
+			// Check if LOD entity needs to be rendered
+			if (entity->isLevelOfDetailed())
 			{
-				if (entity->getLodEntityID() == lodEntity->getID())
+				// Try to find LOD entity
+				for (auto& lodEntity : _entityBus->getGameEntities())
 				{
-					// Save original transformation
-					vec3 originalPosition = lodEntity->getTranslation();
-					vec3 originalRotation = lodEntity->getRotation();
-					vec3 originalSize = lodEntity->getScaling();
-					bool originalVisibility = lodEntity->isVisible();
+					if (entity->getLodEntityID() == lodEntity->getID())
+					{
+						// Save original transformation
+						vec3 originalPosition = lodEntity->getTranslation();
+						vec3 originalRotation = lodEntity->getRotation();
+						vec3 originalSize = lodEntity->getScaling();
+						bool originalVisibility = lodEntity->isVisible();
 
-					// Change transformation
-					lodEntity->setTranslation(entity->getTranslation());
-					lodEntity->setRotation(entity->getRotation());
-					lodEntity->setScaling((entity->getScaling() / entity->getOriginalScaling()) * originalSize);
-					lodEntity->setVisible(entity->isVisible());
-					lodEntity->updateModelMatrix();
+						// Change transformation
+						lodEntity->setTranslation(entity->getTranslation());
+						lodEntity->setRotation(entity->getRotation());
+						lodEntity->setScaling((entity->getScaling() / entity->getOriginalScaling()) * originalSize);
+						lodEntity->setVisible(entity->isVisible());
+						lodEntity->updateModelMatrix();
 
-					// Render LOD entity
-					_gameEntityRenderer.render(lodEntity);
+						// Render LOD entity
+						_gameEntityRenderer.render(lodEntity);
 
-					// Revert to original transformation
-					lodEntity->setTranslation(originalPosition);
-					lodEntity->setRotation(originalRotation);
-					lodEntity->setScaling(originalSize);
-					lodEntity->setVisible(originalVisibility);
-					lodEntity->updateModelMatrix();
+						// Revert to original transformation
+						lodEntity->setTranslation(originalPosition);
+						lodEntity->setRotation(originalRotation);
+						lodEntity->setScaling(originalSize);
+						lodEntity->setVisible(originalVisibility);
+						lodEntity->updateModelMatrix();
+					}
 				}
 			}
+			else // Render high-quality entity
+			{
+				_gameEntityRenderer.render(entity);
+			}
 		}
-		else // Render high-quality entity
-		{
-			_gameEntityRenderer.render(entity);
-		}
-	}
 
-	// Unbind
-	_gameEntityRenderer.unbind();
+		// Unbind
+		_gameEntityRenderer.unbind();
+	}
 }
 
 void RenderEngine::_renderBillboardEntities()
 {
-	// Bind
-	_billboardEntityRenderer.bind();
-
-	// Render BILLBOARD entities
-	for (auto & entity : _entityBus->getBillboardEntities())
+	if (!_entityBus->getBillboardEntities().empty())
 	{
-		_billboardEntityRenderer.render(entity);
-	}
+		// Bind
+		_billboardEntityRenderer.bind();
 
-	// Unbind
-	_billboardEntityRenderer.unbind();
+		// Render BILLBOARD entities
+		for (auto& entity : _entityBus->getBillboardEntities())
+		{
+			_billboardEntityRenderer.render(entity);
+		}
+
+		// Unbind
+		_billboardEntityRenderer.unbind();
+	}
 }
 
 void RenderEngine::_renderAabbEntities()

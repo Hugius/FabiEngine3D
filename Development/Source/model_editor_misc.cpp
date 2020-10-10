@@ -61,7 +61,7 @@ void ModelEditor::_loadOBJ()
 
 	// Check if not cancelled
 	if (filePath != "")
-	{		
+	{
 		// Check if user did not switch directory
 		if (filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
 			filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)

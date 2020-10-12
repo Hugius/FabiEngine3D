@@ -49,7 +49,7 @@ ScriptExecutor& ScriptEditor::getScriptExecutor()
 	// Check if script is loaded yet
 	if (!_isScriptLoadedFromFile)
 	{
-		_loadScriptFromFile();
+		_loadScriptsFromFile();
 	}
 	
 	return _scriptExecutor;

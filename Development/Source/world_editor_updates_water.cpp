@@ -9,9 +9,9 @@ void WorldEditor::_updateWaterMenuMain()
 		auto screen = _leftWindow->getScreen("waterEditorMenuMain");
 
 		// If water existing, show water and enable bloom
-		if (_fe3d.waterEntity_isExisting("@water"))
+		if (_fe3d.waterEntity_isExisting(_currentWaterID))
 		{
-			_fe3d.waterEntity_show("@water");
+			_fe3d.waterEntity_show(_currentWaterID);
 		}
 		else // Otherwise just show default sky
 		{
@@ -19,25 +19,25 @@ void WorldEditor::_updateWaterMenuMain()
 		}
 
 		// Show sky
-		if (_fe3d.skyEntity_isExisting("@sky"))
+		if (_fe3d.skyEntity_isExisting(_currentSkyID))
 		{
-			_fe3d.skyEntity_select("@sky");
-			_fe3d.skyEntity_show("@sky");
+			_fe3d.skyEntity_select(_currentSkyID);
+			_fe3d.skyEntity_show(_currentSkyID);
 		}
 
 		// Show terrain
-		if (_fe3d.terrainEntity_isExisting("@terrain"))
+		if (_fe3d.terrainEntity_isExisting(_currentTerrainID))
 		{
-			_fe3d.terrainEntity_show("@terrain");
+			_fe3d.terrainEntity_show(_currentTerrainID);
 		}
 
 		// Update water management if possible
 		_updateWaterMenuChoice();
 
 		// Update buttons hoverability
-		screen->getButton("create")->setHoverable(!_fe3d.waterEntity_isExisting("@water"));
-		screen->getButton("edit")->setHoverable(_fe3d.waterEntity_isExisting("@water"));
-		screen->getButton("remove")->setHoverable(_fe3d.waterEntity_isExisting("@water"));
+		screen->getButton("create")->setHoverable(!_fe3d.waterEntity_isExisting(_currentWaterID));
+		screen->getButton("edit")->setHoverable(_fe3d.waterEntity_isExisting(_currentWaterID));
+		screen->getButton("remove")->setHoverable(_fe3d.waterEntity_isExisting(_currentWaterID));
 
 		// GUI management
 		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
@@ -53,7 +53,7 @@ void WorldEditor::_updateWaterMenuMain()
 			}
 			else if (screen->getButton("remove")->isHovered())
 			{
-				_fe3d.waterEntity_delete("@water");
+				_fe3d.waterEntity_delete(_currentWaterID);
 			}
 			else if (screen->getButton("back")->isHovered())
 			{
@@ -92,8 +92,8 @@ void WorldEditor::_updateWaterMenuChoice()
 		}
 
 		// Screen hoverabilities
-		screen->getButton("effects")->setHoverable(_fe3d.waterEntity_isExisting("@water"));
-		screen->getButton("options")->setHoverable(_fe3d.waterEntity_isExisting("@water"));
+		screen->getButton("effects")->setHoverable(_fe3d.waterEntity_isExisting(_currentWaterID));
+		screen->getButton("options")->setHoverable(_fe3d.waterEntity_isExisting(_currentWaterID));
 
 		// Update sub-menus
 		_updateWaterCamera();
@@ -108,12 +108,12 @@ void WorldEditor::_updateWaterMenuMesh()
 	if (_leftWindow->getActiveScreen()->getID() == "waterEditorMenuMesh")
 	{
 		auto screen = _leftWindow->getScreen("waterEditorMenuMesh");
-		vec3 waterPosition = _fe3d.waterEntity_getPosition("@water");
-		float waterSize = _fe3d.waterEntity_getSize("@water");
+		vec3 waterPosition = _fe3d.waterEntity_getPosition(_currentWaterID);
+		float waterSize = _fe3d.waterEntity_getSize(_currentWaterID);
 
 		// Button hoverabilities
-		screen->getButton("up")->setHoverable(_fe3d.waterEntity_isExisting("@water"));
-		screen->getButton("down")->setHoverable(_fe3d.waterEntity_isExisting("@water"));
+		screen->getButton("up")->setHoverable(_fe3d.waterEntity_isExisting(_currentWaterID));
+		screen->getButton("down")->setHoverable(_fe3d.waterEntity_isExisting(_currentWaterID));
 
 		// Pressed LMB
 		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
@@ -139,18 +139,18 @@ void WorldEditor::_updateWaterMenuMesh()
 		{
 			if (screen->getButton("up")->isHovered())
 			{
-				_fe3d.waterEntity_setPosition("@water", waterPosition + vec3(0.0f, 0.1f, 0.0f));
+				_fe3d.waterEntity_setPosition(_currentWaterID, waterPosition + vec3(0.0f, 0.1f, 0.0f));
 			}
 			else if (screen->getButton("down")->isHovered())
 			{
-				_fe3d.waterEntity_setPosition("@water", waterPosition - vec3(0.0f, 0.1f, 0.0f));
+				_fe3d.waterEntity_setPosition(_currentWaterID, waterPosition - vec3(0.0f, 0.1f, 0.0f));
 			}
 		}
 
 		// Update size changes
 		if (_gui->getGlobalScreen()->checkValueForm("size", waterSize, { 0.0f }))
 		{
-			_fe3d.waterEntity_setSize("@water", waterSize);
+			_fe3d.waterEntity_setSize(_currentWaterID, waterSize);
 		}
 
 		// Update position changes
@@ -161,7 +161,7 @@ void WorldEditor::_updateWaterMenuMesh()
 			_gui->getGlobalScreen()->checkValueForm("positionZ", waterPosition.z, { })
 		)
 		{
-			_fe3d.waterEntity_setPosition("@water", waterPosition);
+			_fe3d.waterEntity_setPosition(_currentWaterID, waterPosition);
 		}
 	}
 }
@@ -172,17 +172,17 @@ void WorldEditor::_updateWaterMenuEffects()
 	{
 		// Variables
 		auto screen = _leftWindow->getScreen("waterEditorMenuEffects");
-		float uvRepeat = _fe3d.waterEntity_getUvRepeat("@water");
-		bool isReflective = _fe3d.waterEntity_isReflective("@water");
-		bool isRefractive = _fe3d.waterEntity_isRefractive("@water");
-		bool isWaving = _fe3d.waterEntity_isWaving("@water");
-		bool isRippling = _fe3d.waterEntity_isRippling("@water");
-		bool isSpecularLighted = _fe3d.waterEntity_isSpecularLighted("@water");
+		float uvRepeat = _fe3d.waterEntity_getUvRepeat(_currentWaterID);
+		bool isReflective = _fe3d.waterEntity_isReflective(_currentWaterID);
+		bool isRefractive = _fe3d.waterEntity_isRefractive(_currentWaterID);
+		bool isWaving = _fe3d.waterEntity_isWaving(_currentWaterID);
+		bool isRippling = _fe3d.waterEntity_isRippling(_currentWaterID);
+		bool isSpecularLighted = _fe3d.waterEntity_isSpecularLighted(_currentWaterID);
 
 		// Button hoverabilities
-		string displacementMapPath = _fe3d.waterEntity_getDisplacementMapPath("@water");
-		string dudvMapPath = _fe3d.waterEntity_getDudvMapPath("@water");
-		string normalMapPath = _fe3d.waterEntity_getNormalMapPath("@water");
+		string displacementMapPath = _fe3d.waterEntity_getDisplacementMapPath(_currentWaterID);
+		string dudvMapPath = _fe3d.waterEntity_getDudvMapPath(_currentWaterID);
+		string normalMapPath = _fe3d.waterEntity_getNormalMapPath(_currentWaterID);
 		screen->getButton("isWaving")->setHoverable(displacementMapPath != "");
 		screen->getButton("isRippling")->setHoverable(dudvMapPath != "");
 		screen->getButton("isSpecular")->setHoverable(normalMapPath != "");
@@ -210,7 +210,7 @@ void WorldEditor::_updateWaterMenuEffects()
 					{
 						const string newFilePath = filePath.substr(rootDirectory.size());
 						_fe3d.misc_clearTextureCache(newFilePath);
-						_fe3d.waterEntity_setDudvMap("@water", newFilePath);
+						_fe3d.waterEntity_setDudvMap(_currentWaterID, newFilePath);
 					}
 					else
 					{
@@ -234,7 +234,7 @@ void WorldEditor::_updateWaterMenuEffects()
 					{
 						const string newFilePath = filePath.substr(rootDirectory.size());
 						_fe3d.misc_clearTextureCache(newFilePath);
-						_fe3d.waterEntity_setNormalMap("@water", newFilePath);
+						_fe3d.waterEntity_setNormalMap(_currentWaterID, newFilePath);
 					}
 					else
 					{
@@ -258,7 +258,7 @@ void WorldEditor::_updateWaterMenuEffects()
 					{
 						const string newFilePath = filePath.substr(rootDirectory.size());
 						_fe3d.misc_clearTextureCache(newFilePath);
-						_fe3d.waterEntity_setDisplacementMap("@water", newFilePath);
+						_fe3d.waterEntity_setDisplacementMap(_currentWaterID, newFilePath);
 					}
 					else
 					{
@@ -269,27 +269,27 @@ void WorldEditor::_updateWaterMenuEffects()
 			else if (screen->getButton("isReflective")->isHovered())
 			{
 				isReflective = !isReflective;
-				_fe3d.waterEntity_setReflective("@water", isReflective);
+				_fe3d.waterEntity_setReflective(_currentWaterID, isReflective);
 			}
 			else if (screen->getButton("isRefractive")->isHovered())
 			{
 				isRefractive = !isRefractive;
-				_fe3d.waterEntity_setRefractive("@water", isRefractive);
+				_fe3d.waterEntity_setRefractive(_currentWaterID, isRefractive);
 			}
 			else if (screen->getButton("isWaving")->isHovered())
 			{
 				isWaving = !isWaving;
-				_fe3d.waterEntity_setWaving("@water", isWaving);
+				_fe3d.waterEntity_setWaving(_currentWaterID, isWaving);
 			}
 			else if (screen->getButton("isRippling")->isHovered())	
 			{
 				isRippling = !isRippling;
-				_fe3d.waterEntity_setRippling("@water", isRippling);
+				_fe3d.waterEntity_setRippling(_currentWaterID, isRippling);
 			}
 			else if (screen->getButton("isSpecular")->isHovered())
 			{
 				isSpecularLighted = !isSpecularLighted;
-				_fe3d.waterEntity_setSpecularLighted("@water", isSpecularLighted);
+				_fe3d.waterEntity_setSpecularLighted(_currentWaterID, isSpecularLighted);
 			}
 			else if (screen->getButton("back")->isHovered())
 			{
@@ -311,7 +311,7 @@ void WorldEditor::_updateWaterMenuEffects()
 
 		// Update uvRepeat changes
 		_gui->getGlobalScreen()->checkValueForm("uvRepeat", uvRepeat);
-		_fe3d.waterEntity_setUvRepeat("@water", uvRepeat);
+		_fe3d.waterEntity_setUvRepeat(_currentWaterID, uvRepeat);
 	}
 }
 
@@ -321,12 +321,12 @@ void WorldEditor::_updateWaterMenuOptions()
 	{
 		// Values
 		auto screen = _leftWindow->getScreen("waterEditorMenuOptions");
-		vec2 speed = _fe3d.waterEntity_getSpeed("@water");
-		float transparency = _fe3d.waterEntity_getTransparency("@water");
-		vec3 color = _fe3d.waterEntity_getColor("@water");
-		float specularFactor = _fe3d.waterEntity_getSpecularLightingFactor("@water");
-		float specularIntensity = _fe3d.waterEntity_getSpecularLightingIntensity("@water");
-		float waveHeightFactor = _fe3d.waterEntity_getWaveHeightFactor("@water");
+		vec2 speed = _fe3d.waterEntity_getSpeed(_currentWaterID);
+		float transparency = _fe3d.waterEntity_getTransparency(_currentWaterID);
+		vec3 color = _fe3d.waterEntity_getColor(_currentWaterID);
+		float specularFactor = _fe3d.waterEntity_getSpecularLightingFactor(_currentWaterID);
+		float specularIntensity = _fe3d.waterEntity_getSpecularLightingIntensity(_currentWaterID);
+		float waveHeightFactor = _fe3d.waterEntity_getWaveHeightFactor(_currentWaterID);
 
 		// GUI management
 		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
@@ -368,70 +368,85 @@ void WorldEditor::_updateWaterMenuOptions()
 		if (_gui->getGlobalScreen()->checkValueForm("speedX", speed.x))
 		{
 			speed.x /= 100000.0f;
-			_fe3d.waterEntity_setSpeed("@water", speed);
+			_fe3d.waterEntity_setSpeed(_currentWaterID, speed);
 		}
 
 		// Check if speed Z value confirmed
 		if (_gui->getGlobalScreen()->checkValueForm("speedZ", speed.y))
 		{
 			speed.y /= 100000.0f;
-			_fe3d.waterEntity_setSpeed("@water", speed);
+			_fe3d.waterEntity_setSpeed(_currentWaterID, speed);
 		}
 		
 		// Check if transparency value confirmed
 		if (_gui->getGlobalScreen()->checkValueForm("transparency", transparency))
 		{
 			transparency = std::clamp(transparency / 100.0f, 0.0f, 1.0f);
-			_fe3d.waterEntity_setTransparency("@water", transparency);
+			_fe3d.waterEntity_setTransparency(_currentWaterID, transparency);
 		}
 
 		// Check if color R value confirmed
 		if (_gui->getGlobalScreen()->checkValueForm("colorR", color.r))
 		{
 			color.r = std::clamp(color.r / 255.0f, 0.0f, 1.0f);
-			_fe3d.waterEntity_setColor("@water", color);
+			_fe3d.waterEntity_setColor(_currentWaterID, color);
 		}
 
 		// Check if color G value confirmed
 		if (_gui->getGlobalScreen()->checkValueForm("colorG", color.g))
 		{
 			color.g = std::clamp(color.g / 255.0f, 0.0f, 1.0f);
-			_fe3d.waterEntity_setColor("@water", color);
+			_fe3d.waterEntity_setColor(_currentWaterID, color);
 		}
 
 		// Check if color B value confirmed
 		if (_gui->getGlobalScreen()->checkValueForm("colorB", color.b))
 		{
 			color.b = std::clamp(color.b / 255.0f, 0.0f, 1.0f);
-			_fe3d.waterEntity_setColor("@water", color);
+			_fe3d.waterEntity_setColor(_currentWaterID, color);
 		}
 
 		// Check if specular factor value confirmed
 		if (_gui->getGlobalScreen()->checkValueForm("specularFactor", specularFactor))
 		{
 			specularFactor = std::clamp(specularFactor, 0.0f, 256.0f);
-			_fe3d.waterEntity_setSpecularLightingFactor("@water", specularFactor);
+			_fe3d.waterEntity_setSpecularLightingFactor(_currentWaterID, specularFactor);
 		}
 
 		// Check if specular intensity value confirmed
 		if (_gui->getGlobalScreen()->checkValueForm("specularIntensity", specularIntensity))
 		{
 			specularIntensity /= 100.0f;
-			_fe3d.waterEntity_setSpecularLightingIntensity("@water", specularIntensity);
+			_fe3d.waterEntity_setSpecularLightingIntensity(_currentWaterID, specularIntensity);
 		}
 
 		// Check if wave height value confirmed
 		if (_gui->getGlobalScreen()->checkValueForm("waveHeight", waveHeightFactor))
 		{
 			waveHeightFactor /= 100.0f;
-			_fe3d.waterEntity_setWaveHeightFactor("@water", waveHeightFactor);
+			_fe3d.waterEntity_setWaveHeightFactor(_currentWaterID, waveHeightFactor);
 		}
 	}
 }
 
+void WorldEditor::_updateWaterCreation()
+{
+
+}
+
+void WorldEditor::_updateWaterChoosing()
+{
+
+}
+
+void WorldEditor::_updateWaterRemoval()
+{
+
+}
+
 void WorldEditor::_updateWaterCamera()
 {
-	if (_fe3d.waterEntity_isExisting("@water"))
+	if (_fe3d.waterEntity_isExisting(_currentWaterID))
 	{
 		// Get scroll wheel input
 		if (!_gui->getGlobalScreen()->isFocused() && _fe3d.misc_isMouseInsideViewport())
@@ -445,8 +460,8 @@ void WorldEditor::_updateWaterCamera()
 		_totalCameraRotation += _cameraRotationSpeed;
 
 		// Calculate new camera position
-		vec3 waterPosition = _fe3d.waterEntity_getPosition("@water");
-		float waterSize = _fe3d.waterEntity_getSize("@water");
+		vec3 waterPosition = _fe3d.waterEntity_getPosition(_currentWaterID);
+		float waterSize = _fe3d.waterEntity_getSize(_currentWaterID);
 		float x = waterPosition.x + (waterSize / 2.0f) * sin(_totalCameraRotation);
 		float y = waterPosition.y + (waterPosition.y + (waterSize / 16.0f));
 		float z = waterPosition.z + (waterSize / 2.0f) * cos(_totalCameraRotation);

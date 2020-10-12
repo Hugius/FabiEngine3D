@@ -26,7 +26,7 @@ private:
 	void _updateGUI();
 	void _updateTextWriter();
 	void _updateMiscellaneous();
-	void _loadScriptFromFile();
+	void _loadScriptsFromFile();
 	void _saveScriptToFile();
 	void _reloadScriptTextDisplay();
 
@@ -43,6 +43,9 @@ private:
 	bool _isLoaded = false;
 	bool _isScriptLoadedFromFile = false;
 	bool _isWritingScript = false;
+
+	// Miscellaneous variables
+	vector<string> _scriptFileNamesToDelete;
 	
 	// Editor constants
 	const string _fontPath = "engine\\fonts\\lucida.ttf";

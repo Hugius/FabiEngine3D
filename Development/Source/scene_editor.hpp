@@ -102,6 +102,11 @@ private:
 	shared_ptr<EngineGuiWindow> _leftWindow = nullptr;
 	shared_ptr<EngineGuiWindow> _rightWindow = nullptr;
 
+	// Environment variables
+	string _currentSkyID = "";
+	string _currentTerrainID = "";
+	string _currentWaterID = "";
+
 	// Model variables
 	string _currentPreviewModelName = "";
 	string _selectedModelID = "";

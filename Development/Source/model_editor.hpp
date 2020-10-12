@@ -16,7 +16,6 @@ public:
 	ModelEditor(FabiEngine3D& fe3d, shared_ptr<EngineGuiManager> gui);
 	~ModelEditor() = default;
 
-
 	void initializeGUI();
 	void load();
 	void save();
@@ -42,7 +41,7 @@ private:
 	void _loadReflectionMap();
 	void _loadNormalMap();
 	void _updateManagementScreen();
-	void _updateCreationScreen();
+	void _updateModelCreation();
 	void _updateModelChoosing();
 	void _updateEditingScreen();
 	void _updateModelEditingMesh();

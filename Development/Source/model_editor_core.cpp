@@ -134,10 +134,6 @@ void ModelEditor::unload()
 	// Delete models
 	_fe3d.gameEntity_deleteAll();
 
-	// Delete model name textfield
-	_gui->getGlobalScreen()->deleteTextfield("selectedModelName");
-	_gui->getGlobalScreen()->deleteTextfield("selectedAabbName");
-
 	// Properties
 	_currentModelID = "";
 	_currentAabbID = "";
@@ -160,5 +156,7 @@ void ModelEditor::unload()
 	_direction = TransformationDirection::X;
 
 	// Miscellaneous
+	_gui->getGlobalScreen()->deleteTextfield("selectedModelName");
+	_gui->getGlobalScreen()->deleteTextfield("selectedAabbName");
 	_fe3d.misc_disableAabbFrameRendering();
 }

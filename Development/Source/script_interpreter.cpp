@@ -14,53 +14,93 @@ void ScriptInterpreter::load()
 	// For every scriptfile
 	for (auto& scriptID : _script.getAllScriptFileIDs())
 	{
-		// Extract first line
 		auto scriptFile = _script.getScriptFile(scriptID);
-		std::istringstream iss(scriptFile->getLineText(0));
-		string type, name;
-		iss >> type >> name;
 
-		// Determine script type
-		if (type == "META" && name == "script_type_init")
+		// Loop through every line
+		string scriptType = "";
+		for (unsigned int i = 0; i < scriptFile->getLineCount(); i++)
 		{
-			_initScriptIDs.push_back(scriptID);
+			// Extract line content
+			std::istringstream iss(scriptFile->getLineText(i));
+			string type, name;
+			iss >> type >> name;
+
+			// Determine META type
+			if (type == "META" && name == "script_type_init")
+			{
+				_initScriptIDs.push_back(scriptID);
+				scriptType = "script_type_init";
+			}
+			else if (type == "META" && name == "script_type_update")
+			{
+				_updateScriptIDs.push_back(scriptID);
+				scriptType = "script_type_update";
+			}
+			else if (type == "META" && name == "script_type_destroy")
+			{
+				_destroyScriptIDs.push_back(scriptID);
+				scriptType = "script_type_destroy";
+			}
+			else if (type == "META" && name == "execution_entry")
+			{
+				// Check if script type is defined
+				if (scriptType == "")
+				{
+					_fe3d.logger_throwWarning("Entry point defined before type @ script \"" + scriptID + "\"");
+					break;
+				}
+				else
+				{
+					// Set entry point
+					if (scriptType == "script_type_init" && _initEntryID == "")
+					{
+						_initEntryID = _initScriptIDs.back();
+					}
+					else if (scriptType == "script_type_update" && _updateEntryID == "")
+					{
+						_updateEntryID = _updateScriptIDs.back();
+					}
+					else if (scriptType == "script_type_destroy" && _destroyEntryID == "")
+					{
+						_destroyEntryID = _destroyScriptIDs.back();
+					}
+					else
+					{
+						_fe3d.logger_throwWarning("Entry point already defined @ script \"" + scriptID + "\"");
+					}
+				}
+			}
 		}
-		else if (type == "META" && name == "script_type_update")
+
+		// Give warning if no script type META found
+		if (scriptType == "")
 		{
-			_updateScriptIDs.push_back(scriptID);
-		}
-		else if (type == "META" && name == "script_type_destroy")
-		{
-			_destroyScriptIDs.push_back(scriptID);
-		}
-		else
-		{
-			_fe3d.logger_throwWarning("No META variable found in script \"" + scriptID + "\"");
+			_fe3d.logger_throwWarning("No script_type META found @ script \"" + scriptID + "\"");
 		}
 	}
 }
 
 void ScriptInterpreter::executeInitialization()
 {
-	for (auto& ID : _initScriptIDs)
+	if (_initEntryID != "")
 	{
-		_executeScript(ID);
+		_executeScript(_initEntryID, ScriptType::INIT);
 	}
 }
 
 void ScriptInterpreter::executeUpdate()
 {
-	for (auto& ID : _updateScriptIDs)
+	if (_updateEntryID != "")
 	{
-		_executeScript(ID);
+		_executeScript(_updateEntryID, ScriptType::UPDATE);
 	}
 }
 
 void ScriptInterpreter::executeDestruction()
 {
-	for (auto& ID : _destroyScriptIDs)
+	if (_destroyEntryID != "")
 	{
-		_executeScript(ID);
+		_executeScript(_destroyEntryID, ScriptType::DESTROY);
 	}
 }
 
@@ -71,7 +111,7 @@ void ScriptInterpreter::unload()
 	_destroyScriptIDs.clear();
 }
 
-void ScriptInterpreter::_executeScript(const string& ID)
+void ScriptInterpreter::_executeScript(const string& ID, ScriptType type)
 {
 	auto scriptFile = _script.getScriptFile(ID);
 

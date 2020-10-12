@@ -75,30 +75,37 @@ void BillboardEditor::_updateBillboardCreation()
 			// Check if user filled in a new name
 			if (_gui->getGlobalScreen()->checkValueForm("newBillboardName", newBillboardName, { _currentBillboardID }))
 			{
-				// Add @ sign to new name
-				newBillboardName = "@" + newBillboardName;
-
-				// Check if name already exists
-				if (std::find(_billboardNames.begin(), _billboardNames.end(), newBillboardName) == _billboardNames.end()) // If name not existing yet
+				if (newBillboardName[0] != '@')
 				{
-					// Go to editor
-					_gui->getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuChoice");
+					// Add @ sign to new name
+					newBillboardName = "@" + newBillboardName;
 
-					// Select billboard
-					_currentBillboardID = newBillboardName;
-					_billboardNames.push_back(newBillboardName);
+					// Check if name already exists
+					if (std::find(_billboardNames.begin(), _billboardNames.end(), newBillboardName) == _billboardNames.end()) // If name not existing yet
+					{
+						// Go to editor
+						_gui->getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuChoice");
 
-					// Miscellaneous
-					_fe3d.billBoardEntity_add(newBillboardName, vec3(1.0f), _billboardPosition, vec3(0.0f), vec2(1.0f), false, false);
-					_fe3d.textEntity_setTextContent(_gui->getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID(), "Billboard: " +
-						_currentBillboardID.substr(1), 0.025f);
-					_fe3d.textEntity_show(_gui->getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID());
-					_billboardCreationEnabled = false;
-					_billboardEditingEnabled = true;
+						// Select billboard
+						_currentBillboardID = newBillboardName;
+						_billboardNames.push_back(newBillboardName);
+
+						// Miscellaneous
+						_fe3d.billBoardEntity_add(newBillboardName, vec3(1.0f), _billboardPosition, vec3(0.0f), vec2(1.0f), false, false);
+						_fe3d.textEntity_setTextContent(_gui->getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID(), "Billboard: " +
+							_currentBillboardID.substr(1), 0.025f);
+						_fe3d.textEntity_show(_gui->getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID());
+						_billboardCreationEnabled = false;
+						_billboardEditingEnabled = true;
+					}
+					else // Name already exists
+					{
+						_fe3d.logger_throwWarning("Billboard name \"" + newBillboardName.substr(1) + "\" already exists!");
+					}
 				}
-				else // Name already exists
+				else
 				{
-					_fe3d.logger_throwWarning("Billboard name \"" + newBillboardName.substr(1) + "\" already exists!");
+					_fe3d.logger_throwWarning("New billboard name cannot begin with '@'");
 				}
 			}
 		}

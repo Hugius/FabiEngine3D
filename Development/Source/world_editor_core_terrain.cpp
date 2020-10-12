@@ -63,20 +63,20 @@ void WorldEditor::loadTerrainEntity()
 
 		// Add new terrain entity
 		_loadTerrainEntity(heightMapPath);
-		_fe3d.terrainEntity_setMaxHeight("@terrain", maxHeight);
-		_fe3d.terrainEntity_setUvRepeat("@terrain", uvRepeat);
-		_fe3d.terrainEntity_setBlendMapped("@terrain", isBlendMapped);
-		_fe3d.terrainEntity_setLightness("@terrain", lightness);
-		_fe3d.terrainEntity_setBlendRepeatR("@terrain", blendRepeatR);
-		_fe3d.terrainEntity_setBlendRepeatG("@terrain", blendRepeatG);
-		_fe3d.terrainEntity_setBlendRepeatB("@terrain", blendRepeatB);
-		_fe3d.terrainEntity_setSpecularLighted("@terrain", isSpecular);
-		_fe3d.terrainEntity_setSpecularLightingIntensity("@terrain", specularIntensity);
-		if (diffuseMapPath != "") _fe3d.terrainEntity_setDiffuseMap("@terrain", diffuseMapPath);
-		if (blendMapPath != "")   _fe3d.terrainEntity_setBlendMap("@terrain", blendMapPath);
-		if (blendMapPathR != "")  _fe3d.terrainEntity_setBlendMapR("@terrain", blendMapPathR);
-		if (blendMapPathG != "")  _fe3d.terrainEntity_setBlendMapG("@terrain", blendMapPathG);
-		if (blendMapPathB != "")  _fe3d.terrainEntity_setBlendMapB("@terrain", blendMapPathB);
+		_fe3d.terrainEntity_setMaxHeight(_currentTerrainID, maxHeight);
+		_fe3d.terrainEntity_setUvRepeat(_currentTerrainID, uvRepeat);
+		_fe3d.terrainEntity_setBlendMapped(_currentTerrainID, isBlendMapped);
+		_fe3d.terrainEntity_setLightness(_currentTerrainID, lightness);
+		_fe3d.terrainEntity_setBlendRepeatR(_currentTerrainID, blendRepeatR);
+		_fe3d.terrainEntity_setBlendRepeatG(_currentTerrainID, blendRepeatG);
+		_fe3d.terrainEntity_setBlendRepeatB(_currentTerrainID, blendRepeatB);
+		_fe3d.terrainEntity_setSpecularLighted(_currentTerrainID, isSpecular);
+		_fe3d.terrainEntity_setSpecularLightingIntensity(_currentTerrainID, specularIntensity);
+		if (diffuseMapPath != "") _fe3d.terrainEntity_setDiffuseMap(_currentTerrainID, diffuseMapPath);
+		if (blendMapPath != "")   _fe3d.terrainEntity_setBlendMap(_currentTerrainID, blendMapPath);
+		if (blendMapPathR != "")  _fe3d.terrainEntity_setBlendMapR(_currentTerrainID, blendMapPathR);
+		if (blendMapPathG != "")  _fe3d.terrainEntity_setBlendMapG(_currentTerrainID, blendMapPathG);
+		if (blendMapPathB != "")  _fe3d.terrainEntity_setBlendMapB(_currentTerrainID, blendMapPathB);
 
 		// Logging
 		_fe3d.logger_throwInfo("Terrain data from project \"" + _currentProjectName + "\" loaded!");
@@ -96,27 +96,27 @@ void WorldEditor::_saveTerrainData()
 		string filePath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectName + "\\data\\terrain.fe3d";
 
 		// Save terrain data
-		if (_fe3d.terrainEntity_isExisting("@terrain"))
+		if (_fe3d.terrainEntity_isExisting(_currentTerrainID))
 		{
 			// Load file
 			std::ofstream terrainFile(filePath);
 			
 			// Values
-			string heightMapPath = _fe3d.terrainEntity_getHeightMapPath("@terrain");
-			string diffuseMapPath = _fe3d.terrainEntity_getDiffuseMapPath("@terrain");
-			string blendMapPath = _fe3d.terrainEntity_getBlendMapPath("@terrain");
-			string blendMapPathR = _fe3d.terrainEntity_getBlendMapPathR("@terrain");
-			string blendMapPathG = _fe3d.terrainEntity_getBlendMapPathG("@terrain");
-			string blendMapPathB = _fe3d.terrainEntity_getBlendMapPathB("@terrain");
-			float maxHeight = _fe3d.terrainEntity_getMaxHeight("@terrain");
-			float uvRepeat = _fe3d.terrainEntity_getUvRepeat("@terrain");
-			float lightness = _fe3d.terrainEntity_getLightness("@terrain");
-			float specularIntensity = _fe3d.terrainEntity_getSpecularLightingIntensity("@terrain");
-			float blendRepeatR = _fe3d.terrainEntity_getBlendRepeatR("@terrain");
-			float blendRepeatG = _fe3d.terrainEntity_getBlendRepeatG("@terrain");
-			float blendRepeatB = _fe3d.terrainEntity_getBlendRepeatB("@terrain");
-			bool isBlendMapped = _fe3d.terrainEntity_isBlendMapped("@terrain");
-			bool isSpecular = _fe3d.terrainEntity_isSpecularLighted("@terrain");
+			string heightMapPath = _fe3d.terrainEntity_getHeightMapPath(_currentTerrainID);
+			string diffuseMapPath = _fe3d.terrainEntity_getDiffuseMapPath(_currentTerrainID);
+			string blendMapPath = _fe3d.terrainEntity_getBlendMapPath(_currentTerrainID);
+			string blendMapPathR = _fe3d.terrainEntity_getBlendMapPathR(_currentTerrainID);
+			string blendMapPathG = _fe3d.terrainEntity_getBlendMapPathG(_currentTerrainID);
+			string blendMapPathB = _fe3d.terrainEntity_getBlendMapPathB(_currentTerrainID);
+			float maxHeight = _fe3d.terrainEntity_getMaxHeight(_currentTerrainID);
+			float uvRepeat = _fe3d.terrainEntity_getUvRepeat(_currentTerrainID);
+			float lightness = _fe3d.terrainEntity_getLightness(_currentTerrainID);
+			float specularIntensity = _fe3d.terrainEntity_getSpecularLightingIntensity(_currentTerrainID);
+			float blendRepeatR = _fe3d.terrainEntity_getBlendRepeatR(_currentTerrainID);
+			float blendRepeatG = _fe3d.terrainEntity_getBlendRepeatG(_currentTerrainID);
+			float blendRepeatB = _fe3d.terrainEntity_getBlendRepeatB(_currentTerrainID);
+			bool isBlendMapped = _fe3d.terrainEntity_isBlendMapped(_currentTerrainID);
+			bool isSpecular = _fe3d.terrainEntity_isSpecularLighted(_currentTerrainID);
 
 			// Perform empty string & space conversions
 			heightMapPath = (heightMapPath == "") ? "?" : heightMapPath;
@@ -170,13 +170,13 @@ void WorldEditor::_saveTerrainData()
 void WorldEditor::_loadTerrainEntity(const string& heightMapPath)
 {
 	// Remove existing terrain entity
-	if (_fe3d.terrainEntity_isExisting("@terrain"))
+	if (_fe3d.terrainEntity_isExisting(_currentTerrainID))
 	{
-		_fe3d.terrainEntity_delete("@terrain");
+		_fe3d.terrainEntity_delete(_currentTerrainID);
 	}
 
 	// Create new terrain entity
-	_fe3d.terrainEntity_add("@terrain", heightMapPath);
-	_fe3d.terrainEntity_select("@terrain");
-	_fe3d.terrainEntity_hide("@terrain");
+	_fe3d.terrainEntity_add(_currentTerrainID, heightMapPath);
+	_fe3d.terrainEntity_select(_currentTerrainID);
+	_fe3d.terrainEntity_hide(_currentTerrainID);
 }

@@ -35,6 +35,7 @@ void ScriptEditor::_updateGUI()
 				}
 				else if (mainScreen->getButton("deleteScript")->isHovered())
 				{
+					_scriptFileNamesToDelete.push_back(_currentScriptFileID);
 					_fe3d.billboardEntity_deleteAll();
 					_script.removeScriptFile(_currentScriptFileID);
 					_isWritingScript = false;

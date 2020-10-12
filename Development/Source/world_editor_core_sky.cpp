@@ -50,11 +50,13 @@ void WorldEditor::loadSkyEntity()
 		skyFile.close();
 
 		// Load entity
-		_loadSkyEntity();
-		_fe3d.skyEntity_setDiffuseMaps("@sky", diffuseMapPaths);
-		_fe3d.skyEntity_setLightness("@sky", lightness);
-		_fe3d.skyEntity_setRotationSpeed("@sky", rotationSpeed);
-		_fe3d.skyEntity_setColor("@sky", color);
+		_fe3d.skyEntity_add(_currentSkyID);
+		_fe3d.skyEntity_select(_currentSkyID);
+		_fe3d.skyEntity_hide(_currentSkyID);
+		_fe3d.skyEntity_setDiffuseMaps(_currentSkyID, diffuseMapPaths);
+		_fe3d.skyEntity_setLightness(_currentSkyID, lightness);
+		_fe3d.skyEntity_setRotationSpeed(_currentSkyID, rotationSpeed);
+		_fe3d.skyEntity_setColor(_currentSkyID, color);
 
 		// Logging
 		_fe3d.logger_throwInfo("Sky data from project \"" + _currentProjectName + "\" loaded!");
@@ -74,16 +76,16 @@ void WorldEditor::_saveSkyData()
 		string filePath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectName + "\\data\\sky.fe3d";
 
 		// Save sky data
-		if (_fe3d.skyEntity_isExisting("@sky"))
+		if (_fe3d.skyEntity_isExisting(_currentSkyID))
 		{
 			// Load file
 			std::ofstream skyFile(filePath);
 
 			// Values
-			auto diffuseMapPaths = _fe3d.skyEntity_getDiffuseMapPaths("@sky");
-			float rotationSpeed = _fe3d.skyEntity_getRotationSpeed("@sky");
-			float lightness = _fe3d.skyEntity_getLightness("@sky");
-			vec3 color = _fe3d.skyEntity_getColor("@sky");
+			auto diffuseMapPaths = _fe3d.skyEntity_getDiffuseMapPaths(_currentSkyID);
+			float rotationSpeed = _fe3d.skyEntity_getRotationSpeed(_currentSkyID);
+			float lightness = _fe3d.skyEntity_getLightness(_currentSkyID);
+			vec3 color = _fe3d.skyEntity_getColor(_currentSkyID);
 
 			// Perform empty string & space conversions
 			for (auto& diffuseMapPath : diffuseMapPaths)
@@ -121,11 +123,4 @@ void WorldEditor::_saveSkyData()
 		// Logging
 		_fe3d.logger_throwInfo("Sky data from project \"" + _currentProjectName + "\" saved!");
 	}
-}
-
-void WorldEditor::_loadSkyEntity()
-{
-	_fe3d.skyEntity_add("@sky");
-	_fe3d.skyEntity_select("@sky");
-	_fe3d.skyEntity_hide("@sky");
 }

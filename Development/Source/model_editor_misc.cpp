@@ -303,7 +303,7 @@ bool ModelEditor::_addModel(const string& modelName, string objName, string diff
 	}
 	else
 	{
-		_fe3d.logger_throwWarning("Modelname \"" + modelName.substr(1) + "\" is already in use!");
+		_fe3d.logger_throwWarning("Model name \"" + modelName.substr(1) + "\" already exists!");
 
 		return false;
 	}

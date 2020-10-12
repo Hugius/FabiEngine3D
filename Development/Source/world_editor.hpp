@@ -41,13 +41,42 @@ private:
 	shared_ptr<EngineGuiManager> _gui = nullptr;
 	shared_ptr<EngineGuiWindow> _leftWindow = nullptr;
 
+	// Sky variables
+	vector <string> _skyNames;
+	string _currentSkyID = "";
+	string _hoveredSkyID = "";
+	bool _skyCreationEnabled = false;
+	bool _skyChoosingEnabled = false;
+	bool _skyEditingEnabled = false;
+	bool _skyRemovalEnabled = false;
+
+	// Terrain variables
+	vector <string> _terrainNames;
+	string _currentTerrainID = "";
+	string _hoveredTerrainID = "";
+	bool _terrainCreationEnabled = false;
+	bool _terrainChoosingEnabled = false;
+	bool _terrainEditingEnabled = false;
+	bool _terrainRemovalEnabled = false;
+
+	// Water variables
+	vector <string> _waterNames;
+	string _currentWaterID = "";
+	string _hoveredWaterID = "";
+	bool _waterCreationEnabled = false;
+	bool _waterChoosingEnabled = false;
+	bool _waterEditingEnabled = false;
+	bool _waterRemovalEnabled = false;
+
 	// Sky functions
 	void _saveSkyData();
-	void _loadSkyEntity();
 	void _updateSkyMenuMain();
 	void _updateSkyMenuChoice();
 	void _updateSkyMenuMesh();
 	void _updateSkyMenuOptions();
+	void _updateSkyCreation();
+	void _updateSkyChoosing();
+	void _updateSkyRemoval();
 	void _updateSkyCamera();
 
 	// Terrain function
@@ -57,6 +86,9 @@ private:
 	void _updateTerrainMenuChoice();
 	void _updateTerrainMenuMesh();
 	void _updateTerrainMenuBlendMap();
+	void _updateTerrainCreation();
+	void _updateTerrainChoosing();
+	void _updateTerrainRemoval();
 	void _updateTerrainCamera();
 
 	// Water functions
@@ -67,6 +99,9 @@ private:
 	void _updateWaterMenuMesh();
 	void _updateWaterMenuEffects();
 	void _updateWaterMenuOptions();
+	void _updateWaterCreation();
+	void _updateWaterChoosing();
+	void _updateWaterRemoval();
 	void _updateWaterCamera();
 
 	// Miscellaneous functions

@@ -5,7 +5,7 @@
 void ModelEditor::update()
 {
 	_updateManagementScreen();
-	_updateCreationScreen();
+	_updateModelCreation();
 	_updateModelChoosing();
 	_updateEditingScreen();
 	_updateModelRemoval();
@@ -158,7 +158,7 @@ void ModelEditor::_updateEditingScreen()
 	}
 }
 
-void ModelEditor::_updateCreationScreen()
+void ModelEditor::_updateModelCreation()
 {
 	if (_isLoaded)
 	{
@@ -188,6 +188,10 @@ void ModelEditor::_updateCreationScreen()
 						_modelCreationEnabled = false;
 						_modelEditingEnabled = true;
 					}
+				}
+				else
+				{
+					_fe3d.logger_throwWarning("New model name cannot begin with '@'");
 				}
 			}
 		}

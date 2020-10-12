@@ -265,21 +265,21 @@ void SceneEditor::load()
 	}
 
 	// Default camera height
-	if (!_fe3d.waterEntity_isExisting("@water") && !_fe3d.terrainEntity_isExisting("@terrain"))
+	if (!_fe3d.waterEntity_isExisting(_currentWaterID) && !_fe3d.terrainEntity_isExisting(_currentTerrainID))
 	{
 		float height = 0.0f;
 
 		// Set camera height relative to water size
-		if (_fe3d.waterEntity_isExisting("@water"))
+		if (_fe3d.waterEntity_isExisting(_currentWaterID))
 		{
-			float size = _fe3d.waterEntity_getSize("@water") / 2.0f;
-			height = _fe3d.waterEntity_getPosition("@water").y + (size / 10.0f);
+			float size = _fe3d.waterEntity_getSize(_currentWaterID) / 2.0f;
+			height = _fe3d.waterEntity_getPosition(_currentWaterID).y + (size / 10.0f);
 		}
 
 		// Terrain can overwrite camera height
-		if (_fe3d.terrainEntity_isExisting("@terrain"))
+		if (_fe3d.terrainEntity_isExisting(_currentTerrainID))
 		{
-			height = _fe3d.terrainEntity_getMaxHeight("@terrain");
+			height = _fe3d.terrainEntity_getMaxHeight(_currentTerrainID);
 		}
 
 		// Load camera
@@ -348,21 +348,21 @@ void SceneEditor::loadScene(bool overwriteCamera)
 	_worldEditor.loadWaterEntity();
 
 	// Show sky entity
-	if (_fe3d.skyEntity_isExisting("@sky"))
+	if (_fe3d.skyEntity_isExisting(_currentSkyID))
 	{
-		_fe3d.skyEntity_show("@sky");
+		_fe3d.skyEntity_show(_currentSkyID);
 	}
 
 	// Show terrain entity
-	if (_fe3d.terrainEntity_isExisting("@terrain"))
+	if (_fe3d.terrainEntity_isExisting(_currentTerrainID))
 	{
-		_fe3d.terrainEntity_show("@terrain");
+		_fe3d.terrainEntity_show(_currentTerrainID);
 	}
 
 	// Show water entity
-	if (_fe3d.waterEntity_isExisting("@water"))
+	if (_fe3d.waterEntity_isExisting(_currentWaterID))
 	{
-		_fe3d.waterEntity_show("@water");
+		_fe3d.waterEntity_show(_currentWaterID);
 	}
 
 	// Load scene
@@ -389,21 +389,21 @@ void SceneEditor::unloadScene()
 	_fe3d.gfx_disableLensFlare();
 
 	// Delete sky entity
-	if (_fe3d.skyEntity_isExisting("@sky"))
+	if (_fe3d.skyEntity_isExisting(_currentSkyID))
 	{
-		_fe3d.skyEntity_delete("@sky");
+		_fe3d.skyEntity_delete(_currentSkyID);
 	}
 
 	// Delete terrain entity
-	if (_fe3d.terrainEntity_isExisting("@terrain"))
+	if (_fe3d.terrainEntity_isExisting(_currentTerrainID))
 	{
-		_fe3d.terrainEntity_delete("@terrain");
+		_fe3d.terrainEntity_delete(_currentTerrainID);
 	}
 
 	// Delete water entity
-	if (_fe3d.waterEntity_isExisting("@water"))
+	if (_fe3d.waterEntity_isExisting(_currentWaterID))
 	{
-		_fe3d.waterEntity_delete("@water");
+		_fe3d.waterEntity_delete(_currentWaterID);
 	}
 
 	// Delete placed entities

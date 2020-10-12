@@ -9,10 +9,10 @@ void WorldEditor::_updateSkyMenuMain()
 		auto screen = _leftWindow->getScreen("skyEditorMenuMain");
 
 		// If sky existing, show sky
-		if (_fe3d.skyEntity_isExisting("@sky"))
+		if (_fe3d.skyEntity_isExisting(_currentSkyID))
 		{
-			_fe3d.skyEntity_show("@sky");
-			_fe3d.skyEntity_select("@sky");
+			_fe3d.skyEntity_show(_currentSkyID);
+			_fe3d.skyEntity_select(_currentSkyID);
 		}
 		else // Otherwise just show default sky
 		{
@@ -20,15 +20,15 @@ void WorldEditor::_updateSkyMenuMain()
 		}
 
 		// Hide terrain
-		if (_fe3d.terrainEntity_isExisting("@terrain"))
+		if (_fe3d.terrainEntity_isExisting(_currentTerrainID))
 		{
-			_fe3d.terrainEntity_hide("@terrain");
+			_fe3d.terrainEntity_hide(_currentTerrainID);
 		}
 
 		// Hide water
-		if (_fe3d.waterEntity_isExisting("@water"))
+		if (_fe3d.waterEntity_isExisting(_currentWaterID))
 		{
-			_fe3d.waterEntity_hide("@water");
+			_fe3d.waterEntity_hide(_currentWaterID);
 		}
 
 		// Update sky functionality
@@ -37,26 +37,25 @@ void WorldEditor::_updateSkyMenuMain()
 		_updateSkyMenuMesh();
 		_updateSkyMenuOptions();
 
-		// Update buttons hoverability
-		screen->getButton("create")->setHoverable(!_fe3d.skyEntity_isExisting("@sky"));
-		screen->getButton("edit")->setHoverable(_fe3d.skyEntity_isExisting("@sky"));
-		screen->getButton("remove")->setHoverable(_fe3d.skyEntity_isExisting("@sky"));
-
 		// GUI management
 		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
 			if (screen->getButton("create")->isHovered())
 			{
-				_loadSkyEntity();
-				_leftWindow->setActiveScreen("skyEditorMenuChoice");
+				_skyCreationEnabled = true;
+				_gui->getGlobalScreen()->addValueForm("newSkyName", "New sky name", "", vec2(0.0f), vec2(0.5f, 0.1f));
 			}
 			else if (screen->getButton("edit")->isHovered())
 			{
-				_leftWindow->setActiveScreen("skyEditorMenuChoice");
+				_skyChoosingEnabled = true;
+				_skyEditingEnabled = true;
+				for (auto& name : _skyNames) { name = name.substr(1); }
+				_gui->getGlobalScreen()->addChoiceForm("skyList", "Select sky", vec2(-0.4f, 0.1f), _skyNames);
+				for (auto& name : _skyNames) { name = "@" + name; }
 			}
 			else if (screen->getButton("remove")->isHovered())
 			{
-				_fe3d.skyEntity_delete("@sky");
+				_fe3d.skyEntity_delete(_currentSkyID);
 			}
 			else if (screen->getButton("back")->isHovered())
 			{
@@ -91,7 +90,7 @@ void WorldEditor::_updateSkyMenuChoice()
 		}
 
 		// Options screen hoverability
-		screen->getButton("options")->setHoverable(_fe3d.skyEntity_isExisting("@sky"));
+		screen->getButton("options")->setHoverable(_fe3d.skyEntity_isExisting(_currentSkyID));
 	}
 }
 
@@ -119,8 +118,8 @@ void WorldEditor::_updateSkyMenuMesh()
 						filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
 					{
 						const string newFilePath = filePath.substr(rootDirectory.size());
-						_fe3d.misc_clearCubeMapCache(_fe3d.skyEntity_getDiffuseMapPaths("@sky"));
-						_fe3d.skyEntity_setDiffuseMapRight("@sky", newFilePath);
+						_fe3d.misc_clearCubeMapCache(_fe3d.skyEntity_getDiffuseMapPaths(_currentSkyID));
+						_fe3d.skyEntity_setDiffuseMapRight(_currentSkyID, newFilePath);
 					}
 					else
 					{
@@ -143,8 +142,8 @@ void WorldEditor::_updateSkyMenuMesh()
 						filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
 					{
 						const string newFilePath = filePath.substr(rootDirectory.size());
-						_fe3d.misc_clearCubeMapCache(_fe3d.skyEntity_getDiffuseMapPaths("@sky"));
-						_fe3d.skyEntity_setDiffuseMapLeft("@sky", newFilePath);
+						_fe3d.misc_clearCubeMapCache(_fe3d.skyEntity_getDiffuseMapPaths(_currentSkyID));
+						_fe3d.skyEntity_setDiffuseMapLeft(_currentSkyID, newFilePath);
 					}
 					else
 					{
@@ -167,8 +166,8 @@ void WorldEditor::_updateSkyMenuMesh()
 						filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
 					{
 						const string newFilePath = filePath.substr(rootDirectory.size());
-						_fe3d.misc_clearCubeMapCache(_fe3d.skyEntity_getDiffuseMapPaths("@sky"));
-						_fe3d.skyEntity_setDiffuseMapTop("@sky", newFilePath);
+						_fe3d.misc_clearCubeMapCache(_fe3d.skyEntity_getDiffuseMapPaths(_currentSkyID));
+						_fe3d.skyEntity_setDiffuseMapTop(_currentSkyID, newFilePath);
 					}
 					else
 					{
@@ -191,8 +190,8 @@ void WorldEditor::_updateSkyMenuMesh()
 						filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
 					{
 						const string newFilePath = filePath.substr(rootDirectory.size());
-						_fe3d.misc_clearCubeMapCache(_fe3d.skyEntity_getDiffuseMapPaths("@sky"));
-						_fe3d.skyEntity_setDiffuseMapBottom("@sky", newFilePath);
+						_fe3d.misc_clearCubeMapCache(_fe3d.skyEntity_getDiffuseMapPaths(_currentSkyID));
+						_fe3d.skyEntity_setDiffuseMapBottom(_currentSkyID, newFilePath);
 					}
 					else
 					{
@@ -215,8 +214,8 @@ void WorldEditor::_updateSkyMenuMesh()
 						filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
 					{
 						const string newFilePath = filePath.substr(rootDirectory.size());
-						_fe3d.misc_clearCubeMapCache(_fe3d.skyEntity_getDiffuseMapPaths("@sky"));
-						_fe3d.skyEntity_setDiffuseMapFront("@sky", newFilePath);
+						_fe3d.misc_clearCubeMapCache(_fe3d.skyEntity_getDiffuseMapPaths(_currentSkyID));
+						_fe3d.skyEntity_setDiffuseMapFront(_currentSkyID, newFilePath);
 					}
 					else
 					{
@@ -239,8 +238,8 @@ void WorldEditor::_updateSkyMenuMesh()
 						filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
 					{
 						const string newFilePath = filePath.substr(rootDirectory.size());
-						_fe3d.misc_clearCubeMapCache(_fe3d.skyEntity_getDiffuseMapPaths("@sky"));
-						_fe3d.skyEntity_setDiffuseMapBack("@sky", newFilePath);
+						_fe3d.misc_clearCubeMapCache(_fe3d.skyEntity_getDiffuseMapPaths(_currentSkyID));
+						_fe3d.skyEntity_setDiffuseMapBack(_currentSkyID, newFilePath);
 					}
 					else
 					{
@@ -262,9 +261,9 @@ void WorldEditor::_updateSkyMenuOptions()
 	{
 		// Variables
 		auto screen = _leftWindow->getScreen("skyEditorMenuOptions");
-		float skyRotationSpeed = _fe3d.skyEntity_getRotationSpeed("@sky");
-		float skyLightness = _fe3d.skyEntity_getLightness("@sky");
-		vec3 skyColor = _fe3d.skyEntity_getColor("@sky");
+		float skyRotationSpeed = _fe3d.skyEntity_getRotationSpeed(_currentSkyID);
+		float skyLightness = _fe3d.skyEntity_getLightness(_currentSkyID);
+		vec3 skyColor = _fe3d.skyEntity_getColor(_currentSkyID);
 
 		// GUI management
 		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
@@ -320,9 +319,146 @@ void WorldEditor::_updateSkyMenuOptions()
 		}
 
 		// Dynamically update sky options
-		_fe3d.skyEntity_setRotationSpeed("@sky", skyRotationSpeed);
-		_fe3d.skyEntity_setLightness("@sky", skyLightness);
-		_fe3d.skyEntity_setColor("@sky", skyColor);
+		_fe3d.skyEntity_setRotationSpeed(_currentSkyID, skyRotationSpeed);
+		_fe3d.skyEntity_setLightness(_currentSkyID, skyLightness);
+		_fe3d.skyEntity_setColor(_currentSkyID, skyColor);
+	}
+}
+
+void WorldEditor::_updateSkyCreation()
+{
+	if (_isLoaded)
+	{
+		if (_skyCreationEnabled)
+		{
+			string newSkyName;
+
+			// Create new sky
+			if (_gui->getGlobalScreen()->checkValueForm("newSkyName", newSkyName, {}))
+			{
+				// Starting with at-sign not allowed
+				if (newSkyName[0] != '@')
+				{
+					newSkyName = "@" + newSkyName;
+
+					// If sky name not existing yet
+					if (std::find(_skyNames.begin(), _skyNames.end(), newSkyName) == _skyNames.end())
+					{
+						_currentSkyID = newSkyName;
+						_skyNames.push_back(_currentSkyID);
+						_fe3d.skyEntity_add(_currentSkyID);
+						_fe3d.skyEntity_select(_currentSkyID);
+						_fe3d.skyEntity_hide(_currentSkyID);
+						_leftWindow->setActiveScreen("skyEditorMenuChoice");
+						_skyCreationEnabled = false;
+						_skyEditingEnabled = true;
+					}
+					else
+					{
+						_fe3d.logger_throwWarning("Sky name \"" + newSkyName.substr(1) + "\" already exists!");
+					}
+				}
+				else
+				{
+					_fe3d.logger_throwWarning("New sky name cannot begin with '@'");
+				}
+			}
+		}
+	}
+}
+
+void WorldEditor::_updateSkyChoosing()
+{
+	if (_isLoaded)
+	{
+		if (_skyChoosingEnabled)
+		{
+			// Get selected button ID
+			string selectedButtonID = _gui->getGlobalScreen()->getSelectedChoiceFormButtonID("skyList");
+
+			// Hide last sky
+			if (_hoveredSkyID != "")
+			{
+				_fe3d.skyEntity_hide(_hoveredSkyID);
+			}
+
+			// Check if a sky name is hovered
+			if (selectedButtonID != "")
+			{
+				if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT)) // LMB pressed
+				{
+					// Select sky
+					_currentSkyID = "@" + selectedButtonID;
+					_hoveredSkyID = "";
+
+					// Go to editor screen & show sky name
+					if (_skyEditingEnabled)
+					{
+						_gui->getViewport("left")->getWindow("main")->setActiveScreen("skyEditorMenuChoice");
+						_fe3d.textEntity_setTextContent(_gui->getGlobalScreen()->getTextfield("selectedSkyName")->getEntityID(),
+							"Sky: " + _currentSkyID.substr(1), 0.025f);
+						_fe3d.textEntity_show(_gui->getGlobalScreen()->getTextfield("selectedSkyName")->getEntityID());
+					}
+
+					// Miscellaneous
+					_gui->getGlobalScreen()->removeChoiceForm("skyList");
+					_skyChoosingEnabled = false;
+
+				}
+				else
+				{
+					// Set new hovered sky
+					_hoveredSkyID = "@" + selectedButtonID;
+				}
+			}
+			else if (_gui->getGlobalScreen()->isChoiceFormCancelled("skyList")) // Cancelled choosing
+			{
+				_skyChoosingEnabled = false;
+				_skyEditingEnabled = false;
+				_skyRemovalEnabled = false;
+				_gui->getGlobalScreen()->removeChoiceForm("skyList");
+			}
+			else // Nothing hovered
+			{
+				_hoveredSkyID = "";
+			}
+
+			// Show hovered sky
+			if (_hoveredSkyID != "")
+			{
+				_fe3d.skyEntity_show(_hoveredSkyID);
+			}
+		}
+	}
+}
+
+void WorldEditor::_updateSkyRemoval()
+{
+	if (_isLoaded)
+	{
+		if (_modelRemovalEnabled && _currentModelID != "")
+		{
+			_gui->getGlobalScreen()->addAnswerForm("removeModel", "Are you sure?", vec2(0.0f));
+
+			if (_gui->getGlobalScreen()->isAnswerFormConfirmed("removeModel"))
+			{
+				// Delete entity
+				if (_fe3d.gameEntity_isExisting(_currentModelID))
+				{
+					_fe3d.gameEntity_delete(_currentModelID);
+				}
+
+				// Delete from name record
+				_modelNames.erase(std::remove(_modelNames.begin(), _modelNames.end(), _currentModelID), _modelNames.end());
+				_modelRemovalEnabled = false;
+				_currentModelID = "";
+			}
+			else if (_gui->getGlobalScreen()->isAnswerFormCancelled("removeModel"))
+			{
+				_modelRemovalEnabled = false;
+				_currentModelID = "";
+			}
+		}
 	}
 }
 

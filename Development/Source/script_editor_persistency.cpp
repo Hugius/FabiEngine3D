@@ -4,7 +4,7 @@
 #include <sstream>
 #include <filesystem>
 
-void ScriptEditor::_loadScriptFromFile()
+void ScriptEditor::_loadScriptsFromFile()
 {
 	// Error checking
 	if (_currentProjectName == "")
@@ -73,12 +73,27 @@ void ScriptEditor::_saveScriptToFile()
 			_fe3d.logger_throwError("Tried to save as empty project!");
 		}
 
-		// Write to a script file for every script
+		string directoryPath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectName + "\\scripts\\";
+
+		// Delete all text files containing deleted scripts
+		for (auto& scriptName : _scriptFileNamesToDelete)
+		{
+			string finalPath = directoryPath + scriptName + ".fe3d";
+
+			// Check if file exists
+			if (_fe3d.misc_isFileExisting(finalPath))
+			{
+				DeleteFile(LPCSTR(finalPath.c_str()));
+			}
+		}
+		_scriptFileNamesToDelete.clear();
+
+		// Write every script to a text file
 		for (auto& scriptName : _script.getAllScriptFileIDs())
 		{
 			// Create or overwrite script file
 			std::ofstream file;
-			file.open(_fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectName + "\\scripts\\" + scriptName + ".fe3d");
+			file.open(directoryPath + scriptName + ".fe3d");
 
 			// Write cursor indices to file
 			file << _script.getScriptFile(scriptName)->getCursorLineIndex() << " " << _script.getScriptFile(scriptName)->getCursorCharIndex() << std::endl;

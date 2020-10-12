@@ -150,6 +150,9 @@ void WorldEditor::load()
 	loadWaterEntity();
 
 	// Miscellaneous
+	_gui->getGlobalScreen()->addTextfield("selectedSkyName", vec2(0.0f, 0.85f), vec2(0.5f, 0.1f), "", vec3(1.0f));
+	_gui->getGlobalScreen()->addTextfield("selectedTerrainName", vec2(0.0f, 0.85f), vec2(0.5f, 0.1f), "", vec3(1.0f));
+	_gui->getGlobalScreen()->addTextfield("selectedWaterName", vec2(0.0f, 0.85f), vec2(0.5f, 0.1f), "", vec3(1.0f));
 	_isLoaded = true;
 }
 
@@ -169,21 +172,21 @@ void WorldEditor::unload()
 	_fe3d.gfx_disableWaterEffects();
 
 	// Delete sky entity
-	if (_fe3d.skyEntity_isExisting("@sky"))
+	if (_fe3d.skyEntity_isExisting(_currentSkyID))
 	{
-		_fe3d.skyEntity_delete("@sky");
+		_fe3d.skyEntity_delete(_currentSkyID);
 	}
 
 	// Delete terrain entity
-	if (_fe3d.terrainEntity_isExisting("@terrain"))
+	if (_fe3d.terrainEntity_isExisting(_currentTerrainID))
 	{
-		_fe3d.terrainEntity_delete("@terrain");
+		_fe3d.terrainEntity_delete(_currentTerrainID);
 	}
 
 	// Delete water entity
-	if (_fe3d.waterEntity_isExisting("@water"))
+	if (_fe3d.waterEntity_isExisting(_currentWaterID))
 	{
-		_fe3d.waterEntity_delete("@water");
+		_fe3d.waterEntity_delete(_currentWaterID);
 	}
 
 	// Reset variables
@@ -192,5 +195,8 @@ void WorldEditor::unload()
 	_totalCameraRotation = 0.0f;
 
 	// Miscellaneous
+	_gui->getGlobalScreen()->deleteTextfield("selectedSkyName");
+	_gui->getGlobalScreen()->deleteTextfield("selectedTerrainName");
+	_gui->getGlobalScreen()->deleteTextfield("selectedWaterName");
 	_isLoaded = false;
 }

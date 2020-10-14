@@ -1,12 +1,13 @@
 #include "fabi_engine_3d.hpp"
 #include "core_engine.hpp"
 
-void FabiEngine3D::terrainEntity_add(const string& ID, const string& heightMapPath)
+void FabiEngine3D::terrainEntity_add(const string& ID)
 {
-	// Create new terrain entity
 	_core->_terrainEntityManager.addTerrain(ID);
+}
 
-	// Generate terrain model
+void FabiEngine3D::terrainEntity_setHeightmap(const string& ID, const string& heightMapPath)
+{
 	auto& pixelColors = _core->_texLoader.getHeightMap(heightMapPath);
 	_core->_terrainEntityManager.getEntity(ID)->setHeightMapPath(heightMapPath);
 	_core->_terrainEntityManager.getEntity(ID)->setPixelColors(pixelColors);

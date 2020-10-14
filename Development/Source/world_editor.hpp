@@ -70,6 +70,7 @@ private:
 
 	// Sky functions
 	void _saveSkyData();
+	void _updateSkyEditor();
 	void _updateSkyMenuMain();
 	void _updateSkyMenuChoice();
 	void _updateSkyMenuMesh();
@@ -81,7 +82,7 @@ private:
 
 	// Terrain function
 	void _saveTerrainData();
-	void _loadTerrainEntity(const string& heightMapPath);
+	void _updateTerrainEditor();
 	void _updateTerrainMenuMain();
 	void _updateTerrainMenuChoice();
 	void _updateTerrainMenuMesh();
@@ -93,7 +94,7 @@ private:
 
 	// Water functions
 	void _saveWaterData();
-	void _loadWaterEntity();
+	void _updateWaterEditor();
 	void _updateWaterMenuMain();
 	void _updateWaterMenuChoice();
 	void _updateWaterMenuMesh();

@@ -237,7 +237,7 @@
     <ClCompile Include="Source\audio_player.cpp" />
     <ClCompile Include="Source\billboard_editor_core.cpp" />
     <ClCompile Include="Source\billboard_editor_misc.cpp" />
-    <ClCompile Include="Source\billboard_editor_persistency.cpp" />
+    <ClCompile Include="Source\billboard_editor_persistence.cpp" />
     <ClCompile Include="Source\billboard_editor_updates.cpp" />
     <ClCompile Include="Source\billboard_editor_updates_editing.cpp" />
     <ClCompile Include="Source\billboard_entity.cpp" />
@@ -255,7 +255,7 @@
     <ClCompile Include="Source\bottom_viewport_controller.cpp" />
     <ClCompile Include="Source\engine_gui_global_screen_misc.cpp" />
     <ClCompile Include="Source\engine_gui_scrollinglist.cpp" />
-    <ClCompile Include="Source\model_editor_persistency.cpp" />
+    <ClCompile Include="Source\model_editor_persistence.cpp" />
     <ClCompile Include="Source\model_editor_updates_aabb.cpp" />
     <ClCompile Include="Source\model_editor_updates_lighting.cpp" />
     <ClCompile Include="Source\scene_editor_billboard_editing.cpp" />
@@ -300,7 +300,7 @@
     <ClCompile Include="Source\script_editor_core.cpp" />
     <ClCompile Include="Source\script_editor_writer.cpp" />
     <ClCompile Include="Source\script_editor_misc.cpp" />
-    <ClCompile Include="Source\script_editor_persistency.cpp" />
+    <ClCompile Include="Source\script_editor_persistence.cpp" />
     <ClCompile Include="Source\script_editor_updates.cpp" />
     <ClCompile Include="Source\script_executor.cpp" />
     <ClCompile Include="Source\script_file.cpp" />
@@ -369,14 +369,17 @@
     <ClCompile Include="Source\core_engine_misc.cpp" />
     <ClCompile Include="Source\fabi_engine_3d.cpp" />
     <ClCompile Include="Source\world_editor_core.cpp" />
-    <ClCompile Include="Source\world_editor_core_sky.cpp" />
-    <ClCompile Include="Source\world_editor_core_terrain.cpp" />
-    <ClCompile Include="Source\world_editor_core_water.cpp" />
+    <ClCompile Include="Source\world_editor_persistence_sky.cpp" />
+    <ClCompile Include="Source\world_editor_persistence_terrain.cpp" />
+    <ClCompile Include="Source\world_editor_persistence_water.cpp" />
     <ClCompile Include="Source\world_editor_misc.cpp" />
     <ClCompile Include="Source\world_editor_updates.cpp" />
-    <ClCompile Include="Source\world_editor_updates_sky.cpp" />
-    <ClCompile Include="Source\world_editor_updates_terrain.cpp" />
-    <ClCompile Include="Source\world_editor_updates_water.cpp" />
+    <ClCompile Include="Source\world_editor_updates_sky_misc.cpp" />
+    <ClCompile Include="Source\world_editor_updates_sky_menu.cpp" />
+    <ClCompile Include="Source\world_editor_updates_terrain_menu.cpp" />
+    <ClCompile Include="Source\world_editor_updates_terrain_misc.cpp" />
+    <ClCompile Include="Source\world_editor_updates_water_menu.cpp" />
+    <ClCompile Include="Source\world_editor_updates_water_misc.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\FabiEngine3D\engine\shaders\aabb_entity_shader.frag" />

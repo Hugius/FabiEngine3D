@@ -25,7 +25,7 @@ void ShadowRenderer::unbind()
 
 void ShadowRenderer::render(const GameEntity* entity)
 {
-	if (entity->isVisible() && entity->isShadowed())
+	if (entity->isVisible() && !entity->getOglBuffers().empty() && entity->isShadowed())
 	{
 		// Face culling
 		if (entity->isFaceCulled())

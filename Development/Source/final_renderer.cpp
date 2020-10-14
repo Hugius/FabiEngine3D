@@ -17,7 +17,7 @@ void FinalRenderer::unbind()
 
 void FinalRenderer::render(const GuiEntity* entity, GLuint sceneMap)
 {
-	if (entity->isVisible())
+	if (entity->isVisible() && !entity->getOglBuffers().empty())
 	{
 		// Uniforms
 		_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix());

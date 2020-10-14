@@ -107,7 +107,8 @@ public:
 	vec3 skyEntity_getColor(const string& ID);
 
 	// Terrain entity interface - setters
-	void terrainEntity_add(const string& ID, const string& heightMapPath);
+	void terrainEntity_add(const string& ID);
+	void terrainEntity_setHeightmap(const string& ID, const string& heightMapPath);
 	void terrainEntity_delete(const string& ID);
 	void terrainEntity_hide(const string& ID);
 	void terrainEntity_show(const string& ID);

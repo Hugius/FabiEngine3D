@@ -171,22 +171,22 @@ void WorldEditor::unload()
 	_fe3d.gfx_disableSpecularLighting();
 	_fe3d.gfx_disableWaterEffects();
 
-	// Delete sky entity
-	if (_fe3d.skyEntity_isExisting(_currentSkyID))
+	// Delete skies
+	for (auto& name : _skyNames)
 	{
-		_fe3d.skyEntity_delete(_currentSkyID);
+		_fe3d.skyEntity_delete(name);
 	}
 
-	// Delete terrain entity
-	if (_fe3d.terrainEntity_isExisting(_currentTerrainID))
+	// Delete terrains
+	for (auto& name : _terrainNames)
 	{
-		_fe3d.terrainEntity_delete(_currentTerrainID);
+		_fe3d.terrainEntity_delete(name);
 	}
 
-	// Delete water entity
-	if (_fe3d.waterEntity_isExisting(_currentWaterID))
+	// Delete waters
+	for (auto& name : _waterNames)
 	{
-		_fe3d.waterEntity_delete(_currentWaterID);
+		_fe3d.waterEntity_delete(name);
 	}
 
 	// Reset variables

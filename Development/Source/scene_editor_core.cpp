@@ -347,24 +347,6 @@ void SceneEditor::loadScene(bool overwriteCamera)
 	_worldEditor.loadTerrainEntity();
 	_worldEditor.loadWaterEntity();
 
-	// Show sky entity
-	if (_fe3d.skyEntity_isExisting(_currentSkyID))
-	{
-		_fe3d.skyEntity_show(_currentSkyID);
-	}
-
-	// Show terrain entity
-	if (_fe3d.terrainEntity_isExisting(_currentTerrainID))
-	{
-		_fe3d.terrainEntity_show(_currentTerrainID);
-	}
-
-	// Show water entity
-	if (_fe3d.waterEntity_isExisting(_currentWaterID))
-	{
-		_fe3d.waterEntity_show(_currentWaterID);
-	}
-
 	// Load scene
 	_loadSceneFile(overwriteCamera);
 }

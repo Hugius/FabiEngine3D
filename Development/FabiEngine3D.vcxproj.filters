@@ -211,18 +211,6 @@
     <ClCompile Include="Source\world_editor_core.cpp">
       <Filter>src\Editor System\World Editor\Core</Filter>
     </ClCompile>
-    <ClCompile Include="Source\world_editor_core_sky.cpp">
-      <Filter>src\Editor System\World Editor\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\world_editor_core_terrain.cpp">
-      <Filter>src\Editor System\World Editor\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\world_editor_core_water.cpp">
-      <Filter>src\Editor System\World Editor\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\world_editor_misc.cpp">
-      <Filter>src\Editor System\World Editor\Core</Filter>
-    </ClCompile>
     <ClCompile Include="Source\fabi_engine_3d_entity_billboard.cpp">
       <Filter>src\Core System\Interface\Entities</Filter>
     </ClCompile>
@@ -349,9 +337,6 @@
     <ClCompile Include="Source\script_editor_core.cpp">
       <Filter>src\Editor System\Script Editor\Core</Filter>
     </ClCompile>
-    <ClCompile Include="Source\script_editor_persistency.cpp">
-      <Filter>src\Editor System\Script Editor\Core</Filter>
-    </ClCompile>
     <ClCompile Include="Source\script_editor_updates.cpp">
       <Filter>src\Editor System\Script Editor\Updates</Filter>
     </ClCompile>
@@ -397,12 +382,6 @@
     <ClCompile Include="Source\top_viewport_controller_misc.cpp">
       <Filter>src\Engine Controller System\Viewport Controllers</Filter>
     </ClCompile>
-    <ClCompile Include="Source\model_editor_persistency.cpp">
-      <Filter>src\Editor System\Model Editor\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\billboard_editor_persistency.cpp">
-      <Filter>src\Editor System\Billboard Editor\Core</Filter>
-    </ClCompile>
     <ClCompile Include="Source\script_executor.cpp">
       <Filter>src\Scripting System\Execution</Filter>
     </ClCompile>
@@ -418,16 +397,7 @@
     <ClCompile Include="Source\script_interpreter.cpp">
       <Filter>src\Scripting System\Execution</Filter>
     </ClCompile>
-    <ClCompile Include="Source\world_editor_updates_water.cpp">
-      <Filter>src\Editor System\World Editor\Updates</Filter>
-    </ClCompile>
     <ClCompile Include="Source\world_editor_updates.cpp">
-      <Filter>src\Editor System\World Editor\Updates</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\world_editor_updates_sky.cpp">
-      <Filter>src\Editor System\World Editor\Updates</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\world_editor_updates_terrain.cpp">
       <Filter>src\Editor System\World Editor\Updates</Filter>
     </ClCompile>
     <ClCompile Include="Source\model_editor_updates_aabb.cpp">
@@ -444,6 +414,45 @@
     </ClCompile>
     <ClCompile Include="Source\scene_editor_creation.cpp">
       <Filter>src\Editor System\Scene Editor\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\world_editor_updates_sky_menu.cpp">
+      <Filter>src\Editor System\World Editor\Updates</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\world_editor_updates_sky_misc.cpp">
+      <Filter>src\Editor System\World Editor\Updates</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\world_editor_misc.cpp">
+      <Filter>src\Editor System\World Editor\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\world_editor_persistence_water.cpp">
+      <Filter>src\Editor System\World Editor\Persistency</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\world_editor_persistence_terrain.cpp">
+      <Filter>src\Editor System\World Editor\Persistency</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\world_editor_persistence_sky.cpp">
+      <Filter>src\Editor System\World Editor\Persistency</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_editor_persistence.cpp">
+      <Filter>src\Editor System\Script Editor\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\billboard_editor_persistence.cpp">
+      <Filter>src\Editor System\Billboard Editor\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\model_editor_persistence.cpp">
+      <Filter>src\Editor System\Model Editor\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\world_editor_updates_terrain_misc.cpp">
+      <Filter>src\Editor System\World Editor\Updates</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\world_editor_updates_terrain_menu.cpp">
+      <Filter>src\Editor System\World Editor\Updates</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\world_editor_updates_water_misc.cpp">
+      <Filter>src\Editor System\World Editor\Updates</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\world_editor_updates_water_menu.cpp">
+      <Filter>src\Editor System\World Editor\Updates</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -928,6 +937,9 @@
     </Filter>
     <Filter Include="src\Editor System\Scene Editor\Miscellaneous">
       <UniqueIdentifier>{ebabbbff-7f2b-4a8c-87aa-692a4554d711}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Editor System\World Editor\Persistency">
+      <UniqueIdentifier>{509073d5-d60c-453d-973e-644649375ab1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

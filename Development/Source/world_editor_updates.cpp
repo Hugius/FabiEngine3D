@@ -18,23 +18,11 @@ void WorldEditor::update()
 			// Select the default sky
 			_fe3d.skyEntity_select("@@defaultSky");
 
-			// Hide sky
-			if (_fe3d.skyEntity_isExisting(_currentSkyID))
-			{
-				_fe3d.skyEntity_hide(_currentSkyID);
-			}
+			// No terrain
+			_fe3d.terrainEntity_select("");
 
-			// Hide terrain
-			if (_fe3d.terrainEntity_isExisting(_currentTerrainID))
-			{
-				_fe3d.terrainEntity_hide(_currentTerrainID);
-			}
-
-			// Hide water
-			if (_fe3d.waterEntity_isExisting(_currentWaterID))
-			{
-				_fe3d.waterEntity_hide(_currentWaterID);
-			}
+			// No water
+			_fe3d.waterEntity_select("");
 
 			// GUI management
 			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
@@ -75,22 +63,13 @@ void WorldEditor::update()
 		}
 		else
 		{
-			// Update sub-menus
-			_updateSkyMenuMain();
-			_updateTerrainMenuMain();
-			_updateWaterMenuMain();
+			// Update editors
+			_updateSkyEditor();
+			_updateTerrainEditor();
+			_updateWaterEditor();
 		}
 
 		// Update miscellaneous
-		_updateSkyCreation();
-		_updateSkyChoosing();
-		_updateSkyRemoval();
-		_updateTerrainCreation();
-		_updateTerrainChoosing();
-		_updateTerrainRemoval();
-		_updateWaterCreation();
-		_updateWaterChoosing();
-		_updateWaterRemoval();
 		_updateMiscellaneous();
 	}
 }

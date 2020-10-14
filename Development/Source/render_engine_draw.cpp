@@ -192,14 +192,14 @@ void RenderEngine::_renderDebugScreens()
 	GuiEntity normalSurface;
 	normalSurface.setDiffuseMap(_renderBus.getSceneMap());
 	normalSurface.load("normalSurface");
-	normalSurface.addOglBuffer(new OpenGLBuffer(-0.75f, 0.75f, 0.5f, 0.5f, true));
+	normalSurface.addOglBuffer(new OpenGLBuffer(-0.66666f, 0.66666f, 0.66666f, 0.66666f, true));
 	normalSurface.setMirroredVertically(true);
 
 	// Shadow scene
 	GuiEntity shadowSurface;
 	shadowSurface.setDiffuseMap(_renderBus.getShadowMap());
 	shadowSurface.load("shadowSurface");
-	shadowSurface.addOglBuffer(new OpenGLBuffer(-0.25f, 0.75f, 0.5f, 0.5f, true));
+	shadowSurface.addOglBuffer(new OpenGLBuffer(-0.66666f, 0.0f, 0.66666f, 0.66666f, true));
 	shadowSurface.setMirroredVertically(true);
 	shadowSurface.setDepthEntity(true);
 
@@ -207,14 +207,14 @@ void RenderEngine::_renderDebugScreens()
 	GuiEntity reflectionSurface;
 	reflectionSurface.setDiffuseMap(_renderBus.getSceneReflectionMap());
 	reflectionSurface.load("reflectionSurface");
-	reflectionSurface.addOglBuffer(new OpenGLBuffer(0.25f, 0.75f, 0.5f, 0.5f, true));
+	reflectionSurface.addOglBuffer(new OpenGLBuffer(-0.66666f, -0.66666f, 0.66666f, 0.66666f, true));
 	reflectionSurface.setMirroredVertically(true);
 
 	// Refraction scene
 	GuiEntity refractionSurface;
 	refractionSurface.setDiffuseMap(_renderBus.getSceneRefractionMap());
 	refractionSurface.load("refractionSurface");
-	refractionSurface.addOglBuffer(new OpenGLBuffer(0.75f, 0.75f, 0.5f, 0.5f, true));
+	refractionSurface.addOglBuffer(new OpenGLBuffer(0.0f, 0.66666f, 0.66666f, 0.66666f, true));
 	refractionSurface.setMirroredVertically(true);
 
 	// Depth scene
@@ -222,28 +222,28 @@ void RenderEngine::_renderDebugScreens()
 	depthSurface.setDepthEntity(true);
 	depthSurface.setDiffuseMap(_renderBus.getSceneDepthMap());
 	depthSurface.load("depthSurface");
-	depthSurface.addOglBuffer(new OpenGLBuffer(-0.75f, 0.25f, 0.5f, 0.5f, true));
+	depthSurface.addOglBuffer(new OpenGLBuffer(0.0f, 0.0f, 0.66666f, 0.66666f, true));
 	depthSurface.setMirroredVertically(true);
 
 	// Bloom scene
 	GuiEntity bloomSurface;
 	bloomSurface.setDiffuseMap(_renderBus.getBloomMap());
 	bloomSurface.load("bloomSurface");
-	bloomSurface.addOglBuffer(new OpenGLBuffer(-0.25f, 0.25f, 0.5f, 0.5f, true));
+	bloomSurface.addOglBuffer(new OpenGLBuffer(0.0f, -0.66666f, 0.66666f, 0.66666f, true));
 	bloomSurface.setMirroredVertically(true);
 	
 	// Blur scene
 	GuiEntity blurSurface;
 	blurSurface.setDiffuseMap(_renderBus.getBlurMap());
 	blurSurface.load("blurSurface");
-	blurSurface.addOglBuffer(new OpenGLBuffer(0.25f, 0.25f, 0.5f, 0.5f, true));
+	blurSurface.addOglBuffer(new OpenGLBuffer(0.66666f, 0.66666f, 0.66666f, 0.66666f, true));
 	blurSurface.setMirroredVertically(true);
 
 	// Final scene
 	GuiEntity finalSurface;
 	finalSurface.setDiffuseMap(_renderBus.getMotionBlurMap());
 	finalSurface.load("finalSurface");
-	finalSurface.addOglBuffer(new OpenGLBuffer(0.75f, 0.25f, 0.5f, 0.5f, true));
+	finalSurface.addOglBuffer(new OpenGLBuffer(0.66666f, 0.0f, 0.66666f, 0.66666f, true));
 	finalSurface.setMirroredVertically(true);
 	
 	// Render debug screens

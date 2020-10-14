@@ -84,7 +84,7 @@ void TerrainEntityRenderer::renderLightEntities(const vector<LightEntity*>& enti
 
 void TerrainEntityRenderer::render(const TerrainEntity* entity)
 {
-	if (entity->isVisible())
+	if (entity->isVisible() && !entity->getOglBuffers().empty())
 	{
 		// Faceculling
 		glEnable(GL_CULL_FACE);

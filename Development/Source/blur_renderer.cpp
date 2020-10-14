@@ -69,19 +69,22 @@ GLuint BlurRenderer::blurTexture(const GuiEntity* entity, GLuint texture, int in
 
 void BlurRenderer::_render(const GuiEntity* entity, GLuint texture)
 {
-	// Uniforms
-	_shader.uploadUniform("u_sampler_diffuse", 0);
+	if (entity->isVisible() && !entity->getOglBuffers().empty())
+	{
+		// Uniforms
+		_shader.uploadUniform("u_sampler_diffuse", 0);
 
-	// Bind
-	glBindVertexArray(entity->getOglBuffer()->getVAO());
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, texture);
+		// Bind
+		glBindVertexArray(entity->getOglBuffer()->getVAO());
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, texture);
 
-	// Render
-	glDrawArrays(GL_TRIANGLES, 0, 6);
+		// Render
+		glDrawArrays(GL_TRIANGLES, 0, 6);
 
-	// Unbind
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, 0);
-	glBindVertexArray(0);
+		// Unbind
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, 0);
+		glBindVertexArray(0);
+	}
 }

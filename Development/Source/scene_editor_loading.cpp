@@ -12,9 +12,10 @@ bool SceneEditor::_loadSceneFile(bool overwriteCamera)
 		_fe3d.logger_throwError("Tried to load as empty project!");
 	}
 
+	// Compose full folder path
 	string filePath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectName + "\\scenes\\scene.fe3d";
 
-	// Check if scene file existing
+	// Check if scene file exists
 	if (_fe3d.misc_isFileExisting(filePath))
 	{
 		// Load scene file

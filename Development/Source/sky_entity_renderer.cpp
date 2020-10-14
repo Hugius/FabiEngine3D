@@ -23,7 +23,7 @@ void SkyEntityRenderer::unbind()
 
 void SkyEntityRenderer::render(const SkyEntity* entity)
 {
-	if (entity->isVisible())
+	if (entity->isVisible() && !entity->getOglBuffers().empty())
 	{
 		// Uniforms
 		_shader.uploadUniform("u_lightness", entity->getLightness());

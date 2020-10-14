@@ -41,7 +41,7 @@ void WaterEntityRenderer::unbind()
 
 void WaterEntityRenderer::render(const WaterEntity* entity)
 {
-	if (entity->isVisible())
+	if (entity->isVisible() && !entity->getOglBuffers().empty())
 	{
 		// Shader uniforms
 		_shader.uploadUniform("u_rippleOffset", entity->getRippleOffset());

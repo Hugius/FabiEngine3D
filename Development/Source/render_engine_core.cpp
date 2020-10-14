@@ -66,10 +66,12 @@ void RenderEngine::renderScene(EntityBus * entityBus, CameraManager& camera)
 		_renderTerrainEntity();
 		_renderWaterEntity();
 		_renderGameEntities();
+		_renderBillboardEntities();
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 		glViewport(0, 0, Config::getInst().getWindowWidth(), Config::getInst().getWindowHeight());
 		_renderGuiEntities();
 		_renderTextEntities();
+		_renderCustomCursor();
 	}
 	else
 	{
@@ -137,44 +139,45 @@ void RenderEngine::renderScene(EntityBus * entityBus, CameraManager& camera)
 		}
 		_timer.stop();
 
-		// Post captures
-		_timer.start("postProcessing");
-		_captureBloom();
-		_captureDofBlur();
-		_captureLensFlare();
-		_capturePostProcessing();
-		_captureMotionBlur(camera);
-
-		// 2D rendering
-		glClear(GL_COLOR_BUFFER_BIT);
-
-		// Render debug or normal
+		// Render debug screens
 		if (_renderBus.isDebugRenderingEnabled())
 		{
+			glViewport(Config::getInst().getVpPos().x, Config::getInst().getVpPos().y, Config::getInst().getVpSize().x, Config::getInst().getVpSize().y + 1);
 			_renderDebugScreens();
-			_timer.stop();
+			glViewport(0, 0, Config::getInst().getWindowWidth(), Config::getInst().getWindowHeight());
 		}
-		else
+		else // Render 3D scene + postprocessing
 		{
+			// Post captures
+			_timer.start("postProcessing");
+			_captureBloom();
+			_captureDofBlur();
+			_captureLensFlare();
+			_capturePostProcessing();
+			_captureMotionBlur(camera);
+
+			// 2D rendering
+			glClear(GL_COLOR_BUFFER_BIT);
+
 			// Render final postprocessed texture
-			glViewport(Config::getInst().getVpPos().x, Config::getInst().getVpPos().y, Config::getInst().getVpSize().x, Config::getInst().getVpSize().y+1);
+			glViewport(Config::getInst().getVpPos().x, Config::getInst().getVpPos().y, Config::getInst().getVpSize().x, Config::getInst().getVpSize().y + 1);
 			_renderFinalSceneTexture();
 			glViewport(0, 0, Config::getInst().getWindowWidth(), Config::getInst().getWindowHeight());
 			_timer.stop();
-
-			// Render GUI entities
-			_timer.start("guiEntityRender");
-			_renderGuiEntities();
-			_timer.stop();
-
-			// Render text entities
-			_timer.start("textEntityRender");
-			_renderTextEntities();
-			_timer.stop();
-
-			// Render custom cursor entity
-			_renderCustomCursor();
 		}
+
+		// Render GUI entities
+		_timer.start("guiEntityRender");
+		_renderGuiEntities();
+		_timer.stop();
+
+		// Render text entities
+		_timer.start("textEntityRender");
+		_renderTextEntities();
+		_timer.stop();
+
+		// Render custom cursor entity
+		_renderCustomCursor();
 	}
 }
 

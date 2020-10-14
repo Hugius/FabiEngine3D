@@ -40,7 +40,7 @@ void BillboardEntityRenderer::unbind()
 
 void BillboardEntityRenderer::render(const BillboardEntity* entity)
 {
-	if (entity->isVisible())
+	if (entity->isVisible() && !entity->getOglBuffers().empty())
 	{
 		// Sprite animation
 		vec2 uvMultiplier = vec2(1.0f);

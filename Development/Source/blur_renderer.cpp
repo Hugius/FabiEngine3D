@@ -69,7 +69,7 @@ GLuint BlurRenderer::blurTexture(const GuiEntity* entity, GLuint texture, int in
 
 void BlurRenderer::_render(const GuiEntity* entity, GLuint texture)
 {
-	if (entity->isVisible() && !entity->getOglBuffers().empty())
+	if (entity->isVisible())
 	{
 		// Uniforms
 		_shader.uploadUniform("u_sampler_diffuse", 0);

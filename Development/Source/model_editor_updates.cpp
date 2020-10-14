@@ -222,7 +222,7 @@ void ModelEditor::_updateModelChoosing()
 			{
 				if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT)) // LMB pressed
 				{
-					// Select model
+					// Select modelf
 					_currentModelID = "@" + selectedButtonID;
 					_hoveredModelID = "";
 
@@ -235,10 +235,15 @@ void ModelEditor::_updateModelChoosing()
 						_fe3d.textEntity_show(_gui->getGlobalScreen()->getTextfield("selectedModelName")->getEntityID());
 					}
 
+					// Check if model has game entity
+					if (_fe3d.gameEntity_isExisting(_currentModelID))
+					{
+						_fe3d.gameEntity_show(_currentModelID);
+					}
+
 					// Miscellaneous
 					_gui->getGlobalScreen()->removeChoiceForm("modelList");
 					_modelChoosingEnabled = false;
-
 				}
 				else
 				{

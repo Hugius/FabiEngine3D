@@ -29,7 +29,7 @@ void DepthRenderer::unbind()
 
 void DepthRenderer::render(const TerrainEntity* entity)
 {
-	if (entity->isVisible() && !entity->getOglBuffers().empty())
+	if (entity->isVisible())
 	{
 		// Faceculling
 		glEnable(GL_CULL_FACE);
@@ -60,7 +60,7 @@ void DepthRenderer::render(const TerrainEntity* entity)
 
 void DepthRenderer::render(const WaterEntity* entity)
 {
-	if (entity->isVisible() && !entity->getOglBuffers().empty())
+	if (entity->isVisible())
 	{
 		// Shader uniforms
 		mat4 modelMatrix = mat4(1.0f);
@@ -82,7 +82,7 @@ void DepthRenderer::render(const WaterEntity* entity)
 
 void DepthRenderer::render(const GameEntity* entity)
 {
-	if (entity->isVisible() && !entity->getOglBuffers().empty())
+	if (entity->isVisible())
 	{
 		// Faceculling
 		if (entity->isFaceCulled())
@@ -150,7 +150,7 @@ void DepthRenderer::render(const GameEntity* entity)
 
 void DepthRenderer::render(const BillboardEntity* entity)
 {
-	if (entity->isVisible() && !entity->getOglBuffers().empty())
+	if (entity->isVisible())
 	{
 		// Sprite animation
 		vec2 uvMultiplier = vec2(1.0f);
@@ -194,7 +194,7 @@ void DepthRenderer::render(const BillboardEntity* entity)
 
 void DepthRenderer::render(const AabbEntity* entity)
 {
-	if (entity->isVisible() && !entity->getOglBuffers().empty())
+	if (entity->isVisible())
 	{
 		// Shader uniforms
 		_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix());

@@ -34,7 +34,7 @@ void PostRenderer::unbind()
 
 void PostRenderer::render(const GuiEntity* entity)
 {
-	if (entity->isVisible() && !entity->getOglBuffers().empty())
+	if (entity->isVisible())
 	{
 		// Shader uniforms
 		_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix());

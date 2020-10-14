@@ -73,7 +73,6 @@ void WorldEditor::loadWaterEntity()
 			// Load entity
 			_waterNames.push_back(name);
 			_fe3d.waterEntity_add(name);
-			_fe3d.waterEntity_hide(name);
 			_fe3d.waterEntity_setPosition(name, position);
 			_fe3d.waterEntity_setSize(name, size);
 			_fe3d.waterEntity_setWaving(name, isWaving);

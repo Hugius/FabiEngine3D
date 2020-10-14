@@ -28,7 +28,7 @@ void ScriptEditor::initializeGUI()
 void ScriptEditor::load()
 {
 	// Camera
-	_fe3d.camera_load(70.0f, 0.1f, 100.0f, _cameraStartingPosition, -90.0f);
+	_fe3d.camera_load(70.0f, 0.1f, 10000.0f, _cameraStartingPosition, -90.0f);
 
 	// Graphics
 	_fe3d.gfx_enableDirectionalLighting(vec3(100.0f), vec3(1.0f), 0.5f);

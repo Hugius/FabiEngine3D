@@ -111,7 +111,7 @@ void GameEntityRenderer::renderLightEntities(const vector<LightEntity*>& entitie
 
 void GameEntityRenderer::render(const GameEntity* entity)
 {
-	if (entity->isVisible() && !entity->getOglBuffers().empty())
+	if (entity->isVisible())
 	{
 		// Faceculling
 		if (entity->isFaceCulled())

@@ -8,26 +8,29 @@ void WorldEditor::_updateWaterMenuMain()
 	{
 		auto screen = _leftWindow->getScreen("waterEditorMenuMain");
 
-		// Update buttons hoverability
-		screen->getButton("create")->setHoverable(!_fe3d.waterEntity_isExisting(_currentWaterID));
-		screen->getButton("edit")->setHoverable(_fe3d.waterEntity_isExisting(_currentWaterID));
-		screen->getButton("remove")->setHoverable(_fe3d.waterEntity_isExisting(_currentWaterID));
-
 		// GUI management
 		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
 			if (screen->getButton("create")->isHovered())
 			{
-				_fe3d.waterEntity_add(_currentWaterID);
-				_leftWindow->setActiveScreen("waterEditorMenuChoice");
+				_waterCreationEnabled = true;
+				_gui->getGlobalScreen()->addValueForm("newWaterName", "New water name", "", vec2(0.0f), vec2(0.5f, 0.1f));
 			}
 			else if (screen->getButton("edit")->isHovered())
 			{
-				_leftWindow->setActiveScreen("waterEditorMenuChoice");
+				_waterChoosingEnabled = true;
+				_waterEditingEnabled = true;
+				for (auto& name : _waterNames) { name = name.substr(1); }
+				_gui->getGlobalScreen()->addChoiceForm("waterList", "Select water", vec2(-0.4f, 0.1f), _waterNames);
+				for (auto& name : _waterNames) { name = "@" + name; }
 			}
 			else if (screen->getButton("remove")->isHovered())
 			{
-				_fe3d.waterEntity_delete(_currentWaterID);
+				_waterChoosingEnabled = true;
+				_waterRemovalEnabled = true;
+				for (auto& name : _waterNames) { name = name.substr(1); }
+				_gui->getGlobalScreen()->addChoiceForm("waterList", "Select water", vec2(-0.4f, 0.1f), _waterNames);
+				for (auto& name : _waterNames) { name = "@" + name; }
 			}
 			else if (screen->getButton("back")->isHovered())
 			{
@@ -61,7 +64,12 @@ void WorldEditor::_updateWaterMenuChoice()
 			}
 			else if (screen->getButton("back")->isHovered())
 			{
+				_fe3d.camera_load(90.0f, 0.1f, 10000.0f, vec3(0.0f));
 				_leftWindow->setActiveScreen("waterEditorMenuMain");
+				_fe3d.textEntity_hide(_gui->getGlobalScreen()->getTextfield("selectedWaterName")->getEntityID());
+				_fe3d.waterEntity_select("");
+				_currentWaterID = "";
+				_waterEditingEnabled = false;
 			}
 		}
 

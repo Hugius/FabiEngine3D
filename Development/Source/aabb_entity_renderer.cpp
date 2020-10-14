@@ -22,7 +22,7 @@ void AabbEntityRenderer::unbind()
 
 void AabbEntityRenderer::render(const AabbEntity* entity)
 {
-	if (entity->isVisible() && !entity->getOglBuffers().empty())
+	if (entity->isVisible())
 	{
 		// Shader uniforms
 		_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix());

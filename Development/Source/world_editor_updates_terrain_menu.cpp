@@ -63,7 +63,12 @@ void WorldEditor::_updateTerrainMenuChoice()
 			}
 			else if (screen->getButton("back")->isHovered())
 			{
+				_fe3d.camera_load(90.0f, 0.1f, 10000.0f, vec3(0.0f));
 				_leftWindow->setActiveScreen("terrainEditorMenuMain");
+				_fe3d.textEntity_hide(_gui->getGlobalScreen()->getTextfield("selectedTerrainName")->getEntityID());
+				_fe3d.terrainEntity_select("");
+				_currentTerrainID = "";
+				_terrainEditingEnabled = false;
 			}
 		}
 	}
@@ -81,6 +86,7 @@ void WorldEditor::_updateTerrainMenuMesh()
 		screen->getButton("diffuseMap")->setHoverable(existing);
 		screen->getButton("maxHeight")->setHoverable(existing);
 		screen->getButton("uvRepeat")->setHoverable(existing);
+		screen->getButton("isSpecular")->setHoverable(existing);
 		screen->getButton("specularIntensity")->setHoverable(existing);
 		screen->getButton("lightness")->setHoverable(existing);
 
@@ -103,8 +109,18 @@ void WorldEditor::_updateTerrainMenuMesh()
 					{
 						const string newFilePath = filePath.substr(rootDirectory.size());
 						_fe3d.misc_clearHeightMapCache(newFilePath);
-						_fe3d.terrainEntity_setHeightmap(_currentTerrainID, newFilePath);
-						_fe3d.terrainEntity_select(_currentTerrainID);
+
+						// Check if terrain entity already exists
+						if (_fe3d.terrainEntity_isExisting(_currentTerrainID))
+						{
+							_fe3d.terrainEntity_setHeightmap(_currentTerrainID, newFilePath);
+							_fe3d.terrainEntity_select(_currentTerrainID);
+						}
+						else
+						{
+							_fe3d.terrainEntity_add(_currentTerrainID, newFilePath);
+							_fe3d.terrainEntity_select(_currentTerrainID);
+						}
 					}
 					else
 					{

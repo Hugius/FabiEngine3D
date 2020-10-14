@@ -160,7 +160,7 @@ void RenderEngine::renderScene(EntityBus * entityBus, CameraManager& camera)
 			glClear(GL_COLOR_BUFFER_BIT);
 
 			// Render final postprocessed texture
-			glViewport(Config::getInst().getVpPos().x, Config::getInst().getVpPos().y, Config::getInst().getVpSize().x, Config::getInst().getVpSize().y + 1);
+			glViewport(Config::getInst().getVpPos().x, Config::getInst().getVpPos().y, Config::getInst().getVpSize().x, Config::getInst().getVpSize().y +0);
 			_renderFinalSceneTexture();
 			glViewport(0, 0, Config::getInst().getWindowWidth(), Config::getInst().getWindowHeight());
 			_timer.stop();

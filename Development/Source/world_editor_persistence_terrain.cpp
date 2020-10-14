@@ -69,22 +69,24 @@ void WorldEditor::loadTerrainEntity()
 
 			// Add new terrain entity
 			_terrainNames.push_back(name);
-			_fe3d.terrainEntity_add(name);
-			_fe3d.terrainEntity_setHeightmap(name, heightMapPath);
-			_fe3d.terrainEntity_setMaxHeight(name, maxHeight);
-			_fe3d.terrainEntity_setUvRepeat(name, uvRepeat);
-			_fe3d.terrainEntity_setBlendMapped(name, isBlendMapped);
-			_fe3d.terrainEntity_setLightness(name, lightness);
-			_fe3d.terrainEntity_setBlendRepeatR(name, blendRepeatR);
-			_fe3d.terrainEntity_setBlendRepeatG(name, blendRepeatG);
-			_fe3d.terrainEntity_setBlendRepeatB(name, blendRepeatB);
-			_fe3d.terrainEntity_setSpecularLighted(name, isSpecular);
-			_fe3d.terrainEntity_setSpecularLightingIntensity(name, specularIntensity);
-			if (diffuseMapPath != "") _fe3d.terrainEntity_setDiffuseMap(name, diffuseMapPath);
-			if (blendMapPath != "")   _fe3d.terrainEntity_setBlendMap(name, blendMapPath);
-			if (blendMapPathR != "")  _fe3d.terrainEntity_setBlendMapR(name, blendMapPathR);
-			if (blendMapPathG != "")  _fe3d.terrainEntity_setBlendMapG(name, blendMapPathG);
-			if (blendMapPathB != "")  _fe3d.terrainEntity_setBlendMapB(name, blendMapPathB);
+			if (heightMapPath != "")
+			{
+				_fe3d.terrainEntity_add(name, heightMapPath);
+				_fe3d.terrainEntity_setMaxHeight(name, maxHeight);
+				_fe3d.terrainEntity_setUvRepeat(name, uvRepeat);
+				_fe3d.terrainEntity_setBlendMapped(name, isBlendMapped);
+				_fe3d.terrainEntity_setLightness(name, lightness);
+				_fe3d.terrainEntity_setBlendRepeatR(name, blendRepeatR);
+				_fe3d.terrainEntity_setBlendRepeatG(name, blendRepeatG);
+				_fe3d.terrainEntity_setBlendRepeatB(name, blendRepeatB);
+				_fe3d.terrainEntity_setSpecularLighted(name, isSpecular);
+				_fe3d.terrainEntity_setSpecularLightingIntensity(name, specularIntensity);
+				if (diffuseMapPath != "") _fe3d.terrainEntity_setDiffuseMap(name, diffuseMapPath);
+				if (blendMapPath != "")   _fe3d.terrainEntity_setBlendMap(name, blendMapPath);
+				if (blendMapPathR != "")  _fe3d.terrainEntity_setBlendMapR(name, blendMapPathR);
+				if (blendMapPathG != "")  _fe3d.terrainEntity_setBlendMapG(name, blendMapPathG);
+				if (blendMapPathB != "")  _fe3d.terrainEntity_setBlendMapB(name, blendMapPathB);
+			}
 		}
 
 		// Close file

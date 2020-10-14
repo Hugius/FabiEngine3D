@@ -36,7 +36,6 @@ void WorldEditor::_updateTerrainCreation()
 					{
 						_currentTerrainID = newTerrainName;
 						_terrainNames.push_back(_currentTerrainID);
-						_fe3d.terrainEntity_add(_currentTerrainID);
 						_leftWindow->setActiveScreen("terrainEditorMenuChoice");
 						_fe3d.textEntity_setTextContent(_gui->getGlobalScreen()->getTextfield("selectedTerrainName")->getEntityID(),
 							"Terrain: " + _currentTerrainID.substr(1), 0.025f);
@@ -82,13 +81,22 @@ void WorldEditor::_updateTerrainChoosing()
 					_currentTerrainID = "@" + selectedButtonID;
 					_hoveredTerrainID = "";
 
-					// Go to editor screen & show terrain name
+					// Only if going to editor
 					if (_terrainEditingEnabled)
 					{
+						// Go to editor screen
 						_gui->getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuChoice");
+
+						// Show terrain name
 						_fe3d.textEntity_setTextContent(_gui->getGlobalScreen()->getTextfield("selectedTerrainName")->getEntityID(),
 							"Terrain: " + _currentTerrainID.substr(1), 0.025f);
 						_fe3d.textEntity_show(_gui->getGlobalScreen()->getTextfield("selectedTerrainName")->getEntityID());
+
+						// Only select the terrain if it has a heightmap
+						if (_fe3d.terrainEntity_isExisting(_currentTerrainID))
+						{
+							_fe3d.terrainEntity_select(_currentTerrainID);
+						}
 					}
 
 					// Miscellaneous
@@ -116,7 +124,8 @@ void WorldEditor::_updateTerrainChoosing()
 			// Show hovered terrain
 			if (_hoveredTerrainID != "")
 			{
-				if (_fe3d.terrainEntity_getHeightMapPath(_hoveredTerrainID) != "")
+				// Only select the terrain if it has a heightmap
+				if (_fe3d.terrainEntity_isExisting(_hoveredTerrainID))
 				{
 					_fe3d.terrainEntity_select(_hoveredTerrainID);
 				}
@@ -154,11 +163,14 @@ void WorldEditor::_updateTerrainRemoval()
 
 void WorldEditor::_updateTerrainCamera()
 {
-	if (_isLoaded && _currentTerrainID != "")
+	if (_isLoaded)
 	{
-		if (_fe3d.terrainEntity_isExisting(_currentTerrainID))
+		// Check if a terrain is selected or hovered
+		string terrainID = (_currentTerrainID != "") ? _currentTerrainID : ((_hoveredTerrainID != "") ? _hoveredTerrainID : "");
+
+		// Check if terrain entity exists
+		if (_fe3d.terrainEntity_isExisting(terrainID))
 		{
-			std::cout << "hoi";
 			// Get scroll wheel input
 			if (!_gui->getGlobalScreen()->isFocused() && _fe3d.misc_isMouseInsideViewport())
 			{
@@ -169,9 +181,9 @@ void WorldEditor::_updateTerrainCamera()
 			_totalCameraRotation += _cameraRotationSpeed;
 
 			// Calculate new camera position
-			float x = (_fe3d.terrainEntity_getSize(_currentTerrainID) / 2.0f) * sin(_totalCameraRotation);
-			float y = (_fe3d.terrainEntity_getMaxHeight(_currentTerrainID) * 1.25f);
-			float z = (_fe3d.terrainEntity_getSize(_currentTerrainID) / 2.0f) * cos(_totalCameraRotation);
+			float x = (_fe3d.terrainEntity_getSize(terrainID) / 2.0f) * sin(_totalCameraRotation);
+			float y = (_fe3d.terrainEntity_getMaxHeight(terrainID) * 1.25f);
+			float z = (_fe3d.terrainEntity_getSize(terrainID) / 2.0f) * cos(_totalCameraRotation);
 
 			// Update camera position
 			_fe3d.camera_setPosition(vec3(x, y, z));

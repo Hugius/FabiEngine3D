@@ -1,9 +1,10 @@
 #include "fabi_engine_3d.hpp"
 #include "core_engine.hpp"
 
-void FabiEngine3D::terrainEntity_add(const string& ID)
+void FabiEngine3D::terrainEntity_add(const string& ID, const string& heightMapPath)
 {
 	_core->_terrainEntityManager.addTerrain(ID);
+	terrainEntity_setHeightmap(ID, heightMapPath);
 }
 
 void FabiEngine3D::terrainEntity_setHeightmap(const string& ID, const string& heightMapPath)

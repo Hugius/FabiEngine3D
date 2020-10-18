@@ -1,5 +1,52 @@
 #include "scene_editor.hpp"
 
+void SceneEditor::_placeSky(const string& newID, const string& previewID)
+{
+	_fe3d.skyEntity_add(newID);
+	_fe3d.skyEntity_setDiffuseMaps(newID, _fe3d.skyEntity_getDiffuseMapPaths(previewID));
+	_fe3d.skyEntity_setLightness(newID, _fe3d.skyEntity_getLightness(previewID));
+	_fe3d.skyEntity_setRotationSpeed(newID, _fe3d.skyEntity_getRotationSpeed(previewID));
+	_fe3d.skyEntity_setColor(newID, _fe3d.skyEntity_getColor(previewID));
+	_fe3d.skyEntity_select(newID);
+}
+
+void SceneEditor::_placeSky(const string& newID, const array<string, 6>& diffuseMapPaths, float lightness, float rotationSpeed, vec3 color)
+{
+	_fe3d.skyEntity_add(newID);
+	_fe3d.skyEntity_setDiffuseMaps(newID, diffuseMapPaths);
+	_fe3d.skyEntity_setLightness(newID, lightness);
+	_fe3d.skyEntity_setRotationSpeed(newID, rotationSpeed);
+	_fe3d.skyEntity_setColor(newID, color);
+	_fe3d.skyEntity_select(newID);
+}
+
+void SceneEditor::_placeTerrain(const string& newID, const string& previewID)
+{
+
+}
+
+void SceneEditor::_placeTerrain(const string& newID, const string& heightMapPath, float maxHeight, float uvRepeat, bool isBlendMapped, float lightness,
+	float blendRepeatR, float blendRepeatG, float blendRepeatB, bool isSpecular, float specularIntensity, const string& diffuseMapPath, 
+	const string& blendMapPath, const string& blendMapPathR, const string& blendMapPathG, const string& blendMapPathB)
+{
+	_fe3d.terrainEntity_add(newID, heightMapPath);
+	_fe3d.terrainEntity_setMaxHeight(newID, maxHeight);
+	_fe3d.terrainEntity_setUvRepeat(newID, uvRepeat);
+	_fe3d.terrainEntity_setBlendMapped(newID, isBlendMapped);
+	_fe3d.terrainEntity_setLightness(newID, lightness);
+	_fe3d.terrainEntity_setBlendRepeatR(newID, blendRepeatR);
+	_fe3d.terrainEntity_setBlendRepeatG(newID, blendRepeatG);
+	_fe3d.terrainEntity_setBlendRepeatB(newID, blendRepeatB);
+	_fe3d.terrainEntity_setSpecularLighted(newID, isSpecular);
+	_fe3d.terrainEntity_setSpecularLightingIntensity(newID, specularIntensity);
+	if (diffuseMapPath != "") _fe3d.terrainEntity_setDiffuseMap(newID, diffuseMapPath);
+	if (blendMapPath != "")   _fe3d.terrainEntity_setBlendMap(newID, blendMapPath);
+	if (blendMapPathR != "")  _fe3d.terrainEntity_setBlendMapR(newID, blendMapPathR);
+	if (blendMapPathG != "")  _fe3d.terrainEntity_setBlendMapG(newID, blendMapPathG);
+	if (blendMapPathB != "")  _fe3d.terrainEntity_setBlendMapB(newID, blendMapPathB);
+	_fe3d.terrainEntity_select(newID);
+}
+
 void SceneEditor::_placeModel(const string& newID, const string& previewID, vec3 position)
 {
 	// Check if instanced entity

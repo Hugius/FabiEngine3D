@@ -26,6 +26,18 @@ SkyEntity * SkyEntityManager::getSelectedSky()
 	}
 }
 
+const vector<SkyEntity*> SkyEntityManager::getEntities()
+{
+	vector<SkyEntity*> newVector;
+
+	for (auto& entity : _getBaseEntities())
+	{
+		newVector.push_back(dynamic_cast<SkyEntity*>(entity));
+	}
+
+	return newVector;
+}
+
 void SkyEntityManager::selectSky(const string& ID)
 {
 	_selectedID = ID;

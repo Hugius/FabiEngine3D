@@ -34,6 +34,12 @@ public:
 	bool isLoaded();
 
 private:
+	// Environment updates
+	void _updateMainEnvironmentMenu();
+	void _updateSkyMenu();
+	void _updateTerrainMenu();
+	void _updateWaterMenu();
+
 	// Model updates
 	void _updateMainModelMenu();
 	void _updateModelPlacingMenu();
@@ -71,8 +77,14 @@ private:
 	void _updateCamera();
 	void _updateMiscellaneous();
 
-	// Miscellaneous
+	// Creation functions
 	bool _loadSceneFile(bool overwriteCamera);
+	void _placeSky(const string& newID, const string& previewID);
+	void _placeSky(const string& newID, const array<string, 6>& diffuseMapPaths, float lightness, float rotationSpeed, vec3 color);
+	void _placeTerrain(const string& newID, const string& previewID);
+	void _placeTerrain(const string& newID, const string& heightMapPath, float maxHeight, float uvRepeat, bool isBlendMapped, float lightness,
+		float blendRepeatR, float blendRepeatG, float blendRepeatB, bool isSpecular, float specularIntensity, const string& diffuseMapPath, 
+		const string& blendMapPath, const string& blendMapPathR, const string& blendMapPathG, const string& blendMapPathB);
 	void _placeModel(const string& newID, const string& previewID, vec3 position);
 	void _placeModel(const string& newID, vec3 position, vec3 rotation, vec3 size, const string& objPath, const string& diffuseMapPath,
 		const string& lightMapPath, const string& reflectionMapPath, const string& normalMapPath, bool isFrozen,
@@ -83,6 +95,8 @@ private:
 	void _placeBillboard(const string& newID, const string& diffusePath, const string& fontPath, const string& textContent,
 		vec3 position, vec3 rotation, vec2 size, vec3 color, bool facingX, bool facingY, bool isTransparent,
 		bool isAnimated, int animationRows, int animationColumns, int animationFramestep);
+
+	// Miscellaneous
 	void _updateModelBlinking(const string& modelID, int& multiplier);
 	void _updateBillboardBlinking(const string& billboardID, int& multiplier);
 	void _updateLightbulbAnimation(const string& modelID, int& multiplier);

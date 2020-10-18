@@ -23,9 +23,9 @@ public:
 	void unload();
 	void update();
 	void setCurrentProjectName(const string& projectName);
-	void loadSkyEntity();
-	void loadTerrainEntity();
-	void loadWaterEntity();
+	void loadSkyEntities();
+	void loadTerrainEntities();
+	void loadWaterEntities();
 
 	bool isLoaded();
 

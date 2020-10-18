@@ -24,6 +24,18 @@ TerrainEntity * TerrainEntityManager::getSelectedTerrain()
 	}
 }
 
+const vector<TerrainEntity*> TerrainEntityManager::getEntities()
+{
+	vector<TerrainEntity*> newVector;
+
+	for (auto& entity : _getBaseEntities())
+	{
+		newVector.push_back(dynamic_cast<TerrainEntity*>(entity));
+	}
+
+	return newVector;
+}
+
 void TerrainEntityManager::selectTerrain(const string& ID)
 {
 	_selectedID = ID;

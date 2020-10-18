@@ -261,6 +261,7 @@
     <ClCompile Include="Source\scene_editor_billboard_editing.cpp" />
     <ClCompile Include="Source\scene_editor_core.cpp" />
     <ClCompile Include="Source\scene_editor_creation.cpp" />
+    <ClCompile Include="Source\scene_editor_environment.cpp" />
     <ClCompile Include="Source\scene_editor_light_editing.cpp" />
     <ClCompile Include="Source\scene_editor_light_placing.cpp" />
     <ClCompile Include="Source\scene_editor_loading.cpp" />

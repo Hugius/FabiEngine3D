@@ -11,10 +11,11 @@ public:
 	TerrainEntity * getEntity(const string& ID) override;
 	TerrainEntity * getSelectedTerrain();
 
+	const vector<TerrainEntity*> getEntities();
+
 	void selectTerrain(const string& ID);
 	void addTerrain(const string& ID);
 	void generateModel(const string& ID);
-	void loadNormalMapping(const string& ID);
 	void update() override {}
 
 	float getPixelHeight(const string& ID, float x, float z);

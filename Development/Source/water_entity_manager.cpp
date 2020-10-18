@@ -26,6 +26,18 @@ WaterEntity * WaterEntityManager::getSelectedWater()
 	}
 }
 
+const vector<WaterEntity*> WaterEntityManager::getEntities()
+{
+	vector<WaterEntity*> newVector;
+
+	for (auto& entity : _getBaseEntities())
+	{
+		newVector.push_back(dynamic_cast<WaterEntity*>(entity));
+	}
+
+	return newVector;
+}
+
 void WaterEntityManager::selectWater(const string& ID)
 {
 	_selectedID = ID;

@@ -4,7 +4,7 @@
 #include <sstream>
 #include <algorithm>
 
-void WorldEditor::loadSkyEntity()
+void WorldEditor::loadSkyEntities()
 {
 	// Error checking
 	if (_currentProjectName == "")

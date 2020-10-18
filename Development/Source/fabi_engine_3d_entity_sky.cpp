@@ -114,6 +114,18 @@ string FabiEngine3D::skyEntity_getSelectedID()
 	}
 }
 
+vector<string> FabiEngine3D::skyEntity_getAllIDs()
+{
+	vector<string> IDs;
+
+	for (auto entity : _core->_skyEntityManager.getEntities()) // Loop over SKY entities
+	{
+		IDs.push_back(entity->getID());
+	}
+
+	return IDs;
+}
+
 const array<string, 6>& FabiEngine3D::skyEntity_getDiffuseMapPaths(const string& ID)
 {
 	return _core->_skyEntityManager.getEntity(ID)->getDiffuseMapPaths();

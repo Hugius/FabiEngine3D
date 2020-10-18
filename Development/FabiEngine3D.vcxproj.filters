@@ -272,22 +272,22 @@
       <Filter>src\Editor System\Scene Editor\Lighting</Filter>
     </ClCompile>
     <ClCompile Include="Source\scene_editor_billboard_editing.cpp">
-      <Filter>src\Editor System\Scene Editor\Billboard Placing</Filter>
+      <Filter>src\Editor System\Scene Editor\Billboards</Filter>
     </ClCompile>
     <ClCompile Include="Source\scene_editor_billboard_placing.cpp">
-      <Filter>src\Editor System\Scene Editor\Billboard Placing</Filter>
+      <Filter>src\Editor System\Scene Editor\Billboards</Filter>
     </ClCompile>
     <ClCompile Include="Source\scene_editor_billboard_updates.cpp">
-      <Filter>src\Editor System\Scene Editor\Billboard Placing</Filter>
+      <Filter>src\Editor System\Scene Editor\Billboards</Filter>
     </ClCompile>
     <ClCompile Include="Source\scene_editor_model_editing.cpp">
-      <Filter>src\Editor System\Scene Editor\Model Placing</Filter>
+      <Filter>src\Editor System\Scene Editor\Models</Filter>
     </ClCompile>
     <ClCompile Include="Source\scene_editor_model_placing.cpp">
-      <Filter>src\Editor System\Scene Editor\Model Placing</Filter>
+      <Filter>src\Editor System\Scene Editor\Models</Filter>
     </ClCompile>
     <ClCompile Include="Source\scene_editor_model_updates.cpp">
-      <Filter>src\Editor System\Scene Editor\Model Placing</Filter>
+      <Filter>src\Editor System\Scene Editor\Models</Filter>
     </ClCompile>
     <ClCompile Include="Source\scene_editor_settings_updates.cpp">
       <Filter>src\Editor System\Scene Editor\Settings</Filter>
@@ -453,6 +453,9 @@
     </ClCompile>
     <ClCompile Include="Source\world_editor_updates_water_menu.cpp">
       <Filter>src\Editor System\World Editor\Updates</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\scene_editor_environment.cpp">
+      <Filter>src\Editor System\Scene Editor\Environment</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -860,12 +863,6 @@
     <Filter Include="src\Editor System\Scene Editor\Lighting">
       <UniqueIdentifier>{87bbfba5-bfdf-4cc4-afd0-4f8fda8eee69}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\Editor System\Scene Editor\Model Placing">
-      <UniqueIdentifier>{592d1e78-d741-44cb-9234-93c3133c3041}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\Editor System\Scene Editor\Billboard Placing">
-      <UniqueIdentifier>{5888ff61-c7f8-42b7-9050-7d8a4d4cc4ef}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\Editor System\Script Editor">
       <UniqueIdentifier>{da14d31f-6d01-4e12-a50c-99a603867d27}</UniqueIdentifier>
     </Filter>
@@ -874,9 +871,6 @@
     </Filter>
     <Filter Include="src\Editor System\Settings Editor">
       <UniqueIdentifier>{2f3bcc71-2a82-4cab-b118-59f0bb80357a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\Editor System\Scene Editor\Audio Placing">
-      <UniqueIdentifier>{5030e4d2-6075-445e-9d47-799bd42c1a88}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\Scripting System">
       <UniqueIdentifier>{60047f24-1eb4-4081-95b0-950f9a3cdeda}</UniqueIdentifier>
@@ -940,6 +934,18 @@
     </Filter>
     <Filter Include="src\Editor System\World Editor\Persistency">
       <UniqueIdentifier>{509073d5-d60c-453d-973e-644649375ab1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Editor System\Scene Editor\Billboards">
+      <UniqueIdentifier>{5888ff61-c7f8-42b7-9050-7d8a4d4cc4ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Editor System\Scene Editor\Models">
+      <UniqueIdentifier>{592d1e78-d741-44cb-9234-93c3133c3041}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Editor System\Scene Editor\Audio">
+      <UniqueIdentifier>{5030e4d2-6075-445e-9d47-799bd42c1a88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Editor System\Scene Editor\Environment">
+      <UniqueIdentifier>{2780c3eb-9ca4-4a02-b6d0-2656e4874c3c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

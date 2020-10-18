@@ -96,10 +96,11 @@ void WorldEditor::initializeGUI()
 
 	// Left-viewport: mainWindow - waterManagement
 	_leftWindow->addScreen("waterEditorMenuChoice");
-	_leftWindow->getScreen("waterEditorMenuChoice")->addButton("mesh", vec2(0.0f, 0.63f), vec2(GW("3D mesh"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "3D mesh", LVPC::textColor, LVPC::textHoverColor);
-	_leftWindow->getScreen("waterEditorMenuChoice")->addButton("effects", vec2(0.0f, 0.21f), vec2(GW("Effects"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Effects", LVPC::textColor, LVPC::textHoverColor);
-	_leftWindow->getScreen("waterEditorMenuChoice")->addButton("options", vec2(0.0f, -0.21f), vec2(GW("Options"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Options", LVPC::textColor, LVPC::textHoverColor);
-	_leftWindow->getScreen("waterEditorMenuChoice")->addButton("back", vec2(0.0f, -0.63f), vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
+	_leftWindow->getScreen("waterEditorMenuChoice")->addButton("terrain", vec2(0.0f, 0.7f), vec2(GW("Terrain"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Terrain", LVPC::textColor, LVPC::textHoverColor);
+	_leftWindow->getScreen("waterEditorMenuChoice")->addButton("mesh", vec2(0.0f, 0.35f), vec2(GW("3D mesh"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "3D mesh", LVPC::textColor, LVPC::textHoverColor);
+	_leftWindow->getScreen("waterEditorMenuChoice")->addButton("effects", vec2(0.0f, 0.0f), vec2(GW("Effects"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Effects", LVPC::textColor, LVPC::textHoverColor);
+	_leftWindow->getScreen("waterEditorMenuChoice")->addButton("options", vec2(0.0f, -0.35f), vec2(GW("Options"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Options", LVPC::textColor, LVPC::textHoverColor);
+	_leftWindow->getScreen("waterEditorMenuChoice")->addButton("back", vec2(0.0f, -0.7f), vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
 
 	// Left-viewport: mainWindow - waterMenuMesh
 	_leftWindow->addScreen("waterEditorMenuMesh");
@@ -145,9 +146,9 @@ void WorldEditor::load()
 	_fe3d.gfx_enableWaterEffects();
 
 	// Core
-	loadSkyEntity();
-	loadTerrainEntity();
-	loadWaterEntity();
+	loadSkyEntities();
+	loadTerrainEntities();
+	loadWaterEntities();
 
 	// Miscellaneous
 	_gui->getGlobalScreen()->addTextfield("selectedSkyName", vec2(0.0f, 0.85f), vec2(0.5f, 0.1f), "", vec3(1.0f));

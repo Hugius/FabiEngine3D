@@ -2,6 +2,12 @@
 
 void SceneEditor::update()
 {
+	// Environment updates
+	_updateMainEnvironmentMenu();
+	_updateSkyMenu();
+	_updateTerrainMenu();
+	_updateWaterMenu();
+
 	// Model updates
 	_updateMainModelMenu();
 	_updateModelPlacingMenu();
@@ -51,7 +57,11 @@ void SceneEditor::_updateMainMenu()
 			// GUI management
 			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				if (screen->getButton("sceneEditorMenuModel")->isHovered()) // Model button
+				if (screen->getButton("sceneEditorMenuEnvironment")->isHovered()) // Environment button
+				{
+					_leftWindow->setActiveScreen("sceneEditorMenuEnvironment");
+				}
+				else if (screen->getButton("sceneEditorMenuModel")->isHovered()) // Model button
 				{
 					_leftWindow->setActiveScreen("sceneEditorMenuModel");
 				}

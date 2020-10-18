@@ -11,6 +11,8 @@ public:
 	SkyEntity * getEntity(const string& ID) override;
 	SkyEntity * getSelectedSky();
 
+	const vector<SkyEntity*> getEntities();
+
 	void selectSky(const string& ID);
 	void addSkyEntity(const string& ID);
 	void update() override;

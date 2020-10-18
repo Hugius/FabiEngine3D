@@ -109,6 +109,18 @@ string FabiEngine3D::terrainEntity_getSelectedID()
 	}
 }
 
+vector<string> FabiEngine3D::terrainEntity_getAllIDs()
+{
+	vector<string> IDs;
+
+	for (auto entity : _core->_terrainEntityManager.getEntities()) // Loop over TERRAIN entities
+	{
+		IDs.push_back(entity->getID());
+	}
+
+	return IDs;
+}
+
 const string& FabiEngine3D::terrainEntity_getDiffuseMapPath(const string& ID)
 {
 	return _core->_terrainEntityManager.getEntity(ID)->getDiffuseMapPath();

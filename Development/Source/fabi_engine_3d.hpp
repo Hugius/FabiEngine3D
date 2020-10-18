@@ -101,6 +101,7 @@ public:
 	bool skyEntity_isExisting(const string& ID);
 	bool skyEntity_isVisible(const string& ID);
 	string skyEntity_getSelectedID();
+	vector<string> skyEntity_getAllIDs();
 	const array<string, 6>& skyEntity_getDiffuseMapPaths(const string& ID);
 	float skyEntity_getLightness(const string& ID);
 	float skyEntity_getRotationSpeed(const string& ID);
@@ -135,6 +136,7 @@ public:
 	bool terrainEntity_isBlendMapped(const string& ID);
 	bool terrainEntity_isInside(const string& ID, float x, float z);
 	string terrainEntity_getSelectedID();
+	vector<string> terrainEntity_getAllIDs();
 	const string& terrainEntity_getDiffuseMapPath(const string& ID);
 	const string& terrainEntity_getHeightMapPath(const string& ID);
 	const string& terrainEntity_getBlendMapPath(const string& ID);
@@ -198,6 +200,7 @@ public:
 	const string& waterEntity_getNormalMapPath(const string& ID);
 	const string& waterEntity_getDisplacementMapPath(const string& ID);
 	string waterEntity_getSelectedID();
+	vector<string> waterEntity_getAllIDs();
 
 	// Game entity interface - setters
 	void gameEntity_add

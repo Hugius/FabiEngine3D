@@ -171,6 +171,18 @@ string FabiEngine3D::waterEntity_getSelectedID()
 	}
 }
 
+vector<string> FabiEngine3D::waterEntity_getAllIDs()
+{
+	vector<string> IDs;
+
+	for (auto entity : _core->_waterEntityManager.getEntities()) // Loop over WATER entities
+	{
+		IDs.push_back(entity->getID());
+	}
+
+	return IDs;
+}
+
 float FabiEngine3D::waterEntity_getSize(const string& ID)
 {
 	return _core->_waterEntityManager.getEntity(ID)->getSize();

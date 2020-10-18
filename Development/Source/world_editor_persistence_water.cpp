@@ -4,7 +4,7 @@
 #include <sstream>
 #include <algorithm>
 
-void WorldEditor::loadWaterEntity()
+void WorldEditor::loadWaterEntities()
 {
 	// Error checking
 	if (_currentProjectName == "")

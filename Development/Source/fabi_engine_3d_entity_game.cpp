@@ -477,7 +477,7 @@ vector<string> FabiEngine3D::gameEntity_getAllIDs()
 {
 	vector<string> IDs;
 
-	for (auto entity : _core->_gameEntityManager.getEntities()) // Loop over game entities
+	for (auto entity : _core->_gameEntityManager.getEntities()) // Loop over GAME entities
 	{
 		IDs.push_back(entity->getID());
 	}
@@ -489,7 +489,7 @@ vector<string> FabiEngine3D::gameEntity_getGroupIDs(const string& ID)
 {
 	vector<string> IDs;
 
-	for (auto entity : _core->_gameEntityManager.getEntities()) // Loop over game entities
+	for (auto entity : _core->_gameEntityManager.getEntities()) // Loop over GAME entities
 	{
 		if (entity->getID().size() >= ID.size()) // Check if entity ID is at least the size of group ID
 		{

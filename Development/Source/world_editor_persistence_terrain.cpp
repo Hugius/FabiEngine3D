@@ -4,7 +4,7 @@
 #include <sstream>
 #include <algorithm>
 
-void WorldEditor::loadTerrainEntity()
+void WorldEditor::loadTerrainEntities()
 {
 	// Error checking
 	if (_currentProjectName == "")

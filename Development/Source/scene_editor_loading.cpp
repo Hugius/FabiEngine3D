@@ -35,7 +35,86 @@ bool SceneEditor::_loadSceneFile(bool overwriteCamera)
 			iss >> entityType;
 
 			// Load entity according to type
-			if (entityType == "MODEL")
+			if (entityType == "SKY")
+			{
+				// Values
+				string name;
+				std::array<string, 6> diffuseMapPaths{};
+				float rotationSpeed, lightness;
+				vec3 color;
+
+				// Load base data
+				iss >>
+					name >>
+					diffuseMapPaths[0] >>
+					diffuseMapPaths[1] >>
+					diffuseMapPaths[2] >>
+					diffuseMapPaths[3] >>
+					diffuseMapPaths[4] >>
+					diffuseMapPaths[5] >>
+					rotationSpeed >>
+					lightness >>
+					color.r >>
+					color.g >>
+					color.b;
+
+				// Perform empty string & space conversions
+				for (auto& diffuseMapPath : diffuseMapPaths)
+				{
+					diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
+					std::replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
+				}
+
+				// Load entity
+				_currentSkyID = name;
+				_placeSky(_currentSkyID, diffuseMapPaths, lightness, rotationSpeed, color);
+			}
+			else if (entityType == "TERRAIN")
+			{
+				// Values
+				string name, heightMapPath, diffuseMapPath, blendMapPath, blendMapPathR, blendMapPathG, blendMapPathB;
+				float maxHeight, uvRepeat, lightness, blendRepeatR, blendRepeatG, blendRepeatB, specularIntensity;
+				bool isBlendMapped, isSpecular;
+
+				// Load base data
+				iss >>
+					name >>
+					heightMapPath >>
+					diffuseMapPath >>
+					maxHeight >>
+					uvRepeat >>
+					lightness >>
+					isBlendMapped >>
+					blendMapPath >>
+					blendMapPathR >>
+					blendMapPathG >>
+					blendMapPathB >>
+					blendRepeatR >>
+					blendRepeatG >>
+					blendRepeatB >>
+					isSpecular >>
+					specularIntensity;
+
+				// Perform empty string & space conversions
+				heightMapPath = (heightMapPath == "?") ? "" : heightMapPath;
+				diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
+				blendMapPath = (blendMapPath == "?") ? "?" : blendMapPath;
+				blendMapPathR = (blendMapPathR == "?") ? "" : blendMapPathR;
+				blendMapPathG = (blendMapPathG == "?") ? "" : blendMapPathG;
+				blendMapPathB = (blendMapPathB == "?") ? "" : blendMapPathB;
+				std::replace(heightMapPath.begin(), heightMapPath.end(), '?', ' ');
+				std::replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
+				std::replace(blendMapPath.begin(), blendMapPath.end(), '?', ' ');
+				std::replace(blendMapPathR.begin(), blendMapPathR.end(), '?', ' ');
+				std::replace(blendMapPathG.begin(), blendMapPathG.end(), '?', ' ');
+				std::replace(blendMapPathB.begin(), blendMapPathB.end(), '?', ' ');
+
+				// Add new terrain entity
+				_currentTerrainID = name;
+				_placeTerrain(_currentTerrainID, heightMapPath, maxHeight, uvRepeat, isBlendMapped, lightness, blendRepeatR, blendRepeatG, blendRepeatB, 
+					isSpecular, specularIntensity, diffuseMapPath, blendMapPath, blendMapPathR, blendMapPathG, blendMapPathB);
+			}
+			else if (entityType == "MODEL")
 			{
 				// Model ID
 				string modelID;

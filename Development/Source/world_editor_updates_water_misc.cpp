@@ -95,11 +95,8 @@ void WorldEditor::_updateWaterChoosing()
 							"Water: " + _currentWaterID.substr(1), 0.025f);
 						_fe3d.textEntity_show(_gui->getGlobalScreen()->getTextfield("selectedWaterName")->getEntityID());
 
-						// Only select the water if it has a heightmap
-						if (_fe3d.waterEntity_isExisting(_currentWaterID))
-						{
-							_fe3d.waterEntity_select(_currentWaterID);
-						}
+						// Show entity
+						_fe3d.waterEntity_select(_currentWaterID);
 					}
 
 					// Miscellaneous
@@ -127,11 +124,7 @@ void WorldEditor::_updateWaterChoosing()
 			// Show hovered water
 			if (_hoveredWaterID != "")
 			{
-				// Only select the water if it has a heightmap
-				if (_fe3d.waterEntity_isExisting(_hoveredWaterID))
-				{
-					_fe3d.waterEntity_select(_hoveredWaterID);
-				}
+				_fe3d.waterEntity_select(_hoveredWaterID);
 			}
 		}
 	}

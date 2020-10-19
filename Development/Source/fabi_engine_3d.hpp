@@ -104,6 +104,7 @@ public:
 	vector<string> skyEntity_getAllIDs();
 	const array<string, 6>& skyEntity_getDiffuseMapPaths(const string& ID);
 	float skyEntity_getLightness(const string& ID);
+	float skyEntity_getOriginalLightness(const string& ID);
 	float skyEntity_getRotationSpeed(const string& ID);
 	vec3 skyEntity_getColor(const string& ID);
 
@@ -309,7 +310,6 @@ public:
 	void billboardEntity_setCameraFacingX(const string& ID, bool enabled);
 	void billboardEntity_setCameraFacingY(const string& ID, bool enabled);
 	void billboardEntity_setMaxY(const string& ID, float y);
-	void billboardEntity_setOriginalLightness(const string& ID, float lightness);
 	void billboardEntity_setLightness(const string& ID, float lightness);
 
 	// Billboard entity interface (core) - getters

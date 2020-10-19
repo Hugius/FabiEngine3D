@@ -100,6 +100,30 @@ void WorldEditor::loadWaterEntities()
 	}
 }
 
+void WorldEditor::unloadSkyEntities()
+{
+	for (auto& name : _skyNames)
+	{
+		_fe3d.skyEntity_delete(name);
+	}
+}
+
+void WorldEditor::unloadTerrainEntities()
+{
+	for (auto& name : _terrainNames)
+	{
+		_fe3d.terrainEntity_delete(name);
+	}
+}
+
+void WorldEditor::unloadWaterEntities()
+{
+	for (auto& name : _waterNames)
+	{
+		_fe3d.waterEntity_delete(name);
+	}
+}
+
 void WorldEditor::_saveWaterData()
 {
 	if (_isLoaded)

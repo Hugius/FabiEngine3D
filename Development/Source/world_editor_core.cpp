@@ -172,23 +172,10 @@ void WorldEditor::unload()
 	_fe3d.gfx_disableSpecularLighting();
 	_fe3d.gfx_disableWaterEffects();
 
-	// Delete skies
-	for (auto& name : _skyNames)
-	{
-		_fe3d.skyEntity_delete(name);
-	}
-
-	// Delete terrains
-	for (auto& name : _terrainNames)
-	{
-		_fe3d.terrainEntity_delete(name);
-	}
-
-	// Delete waters
-	for (auto& name : _waterNames)
-	{
-		_fe3d.waterEntity_delete(name);
-	}
+	// Delete entities
+	unloadSkyEntities();
+	unloadTerrainEntities();
+	unloadWaterEntities();
 
 	// Reset variables
 	_currentWorldPart = WorldPart::NONE;

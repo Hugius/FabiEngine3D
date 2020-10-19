@@ -83,13 +83,19 @@ void WorldEditor::_updateSkyChoosing()
 					_currentSkyID = "@" + selectedButtonID;
 					_hoveredSkyID = "";
 
-					// Go to editor screen & show sky name
+					// Only if going to editor
 					if (_skyEditingEnabled)
 					{
+						// Go to editor screen
 						_gui->getViewport("left")->getWindow("main")->setActiveScreen("skyEditorMenuChoice");
+
+						// Show sky name
 						_fe3d.textEntity_setTextContent(_gui->getGlobalScreen()->getTextfield("selectedSkyName")->getEntityID(),
 							"Sky: " + _currentSkyID.substr(1), 0.025f);
 						_fe3d.textEntity_show(_gui->getGlobalScreen()->getTextfield("selectedSkyName")->getEntityID());
+
+						// Show entity
+						_fe3d.skyEntity_select(_currentSkyID);
 					}
 
 					// Miscellaneous

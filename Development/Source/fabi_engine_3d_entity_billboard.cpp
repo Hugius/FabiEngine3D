@@ -219,11 +219,6 @@ void FabiEngine3D::billboardEntity_setMaxY(const string& ID, float y)
 	_core->_billboardEntityManager.getEntity(ID)->setMaxY(y);
 }
 
-void FabiEngine3D::billboardEntity_setOriginalLightness(const string& ID, float lightness)
-{
-	_core->_billboardEntityManager.getEntity(ID)->setOriginalLightness(lightness);
-}
-
 void FabiEngine3D::billboardEntity_setLightness(const string& ID, float lightness)
 {
 	_core->_billboardEntityManager.getEntity(ID)->setLightness(lightness);

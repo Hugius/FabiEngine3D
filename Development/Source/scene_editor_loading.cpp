@@ -114,6 +114,55 @@ bool SceneEditor::_loadSceneFile(bool overwriteCamera)
 				_placeTerrain(_currentTerrainID, heightMapPath, maxHeight, uvRepeat, isBlendMapped, lightness, blendRepeatR, blendRepeatG, blendRepeatB, 
 					isSpecular, specularIntensity, diffuseMapPath, blendMapPath, blendMapPathR, blendMapPathG, blendMapPathB);
 			}
+			else if (entityType == "WATER")
+			{
+				// Values
+				string name, dudvMapPath, normalMapPath, displacementMapPath;
+				bool isWaving, isRippling, isSpecularLighted, isReflective, isRefractive;
+				vec2 speed;
+				vec3 color, position;
+				float size, uvRepeat, waveHeightFactor, transparency, specularFactor, specularIntensity;
+
+				// Load base data
+				iss >>
+					name >>
+					dudvMapPath >>
+					normalMapPath >>
+					displacementMapPath >>
+					isWaving >>
+					isRippling >>
+					isSpecularLighted >>
+					isReflective >>
+					isRefractive >>
+					color.r >>
+					color.g >>
+					color.b >>
+					size >>
+					position.x >>
+					position.y >>
+					position.z >>
+					uvRepeat >>
+					waveHeightFactor >>
+					speed.x >>
+					speed.y >>
+					transparency >>
+					specularFactor >>
+					specularIntensity;
+
+				// Perform empty string & space conversions
+				dudvMapPath = (dudvMapPath == "?" ? "" : dudvMapPath);
+				normalMapPath = (normalMapPath == "?" ? "" : normalMapPath);
+				displacementMapPath = (displacementMapPath == "?" ? "" : displacementMapPath);
+				std::replace(dudvMapPath.begin(), dudvMapPath.end(), '?', ' ');
+				std::replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
+				std::replace(displacementMapPath.begin(), displacementMapPath.end(), '?', ' ');
+
+				// Load entity
+				_currentWaterID = name;
+				_placeWater(_currentWaterID, position, size, isWaving, isRippling, isSpecularLighted, isReflective,
+					isRefractive, waveHeightFactor, specularFactor, specularIntensity, transparency, color, uvRepeat,
+					speed, dudvMapPath, normalMapPath, displacementMapPath);
+			}
 			else if (entityType == "MODEL")
 			{
 				// Model ID

@@ -73,9 +73,6 @@ void BillboardEditor::load()
 	
 	// 3D Environment
 	_fe3d.skyEntity_select("@@editorSky");
-	_fe3d.gameEntity_add("@@grid", "engine\\models\\plane.obj", vec3(0.0f), vec3(0.0f), vec3(100.0f, 1.0f, 100.0f));
-	_fe3d.gameEntity_setDiffuseMap("@@grid", "engine\\textures\\grass.png");
-	_fe3d.gameEntity_setUvRepeat("@@grid", 25.0f);
 	_fe3d.gameEntity_add("@@cube", "engine\\models\\cube.obj", vec3(5.0f, 0.0f, 0.0f), vec3(0.0f), vec3(1.0f, 1.0f, 1.0f));
 	_fe3d.gameEntity_setDiffuseMap("@@cube", "engine\\textures\\cube.png");
 	_fe3d.gameEntity_setFaceCulled("@@cube", true);
@@ -96,7 +93,6 @@ void BillboardEditor::unload()
 	_fe3d.gfx_disableShadows();
 
 	// 3D environment
-	_fe3d.gameEntity_delete("@@grid");
 	_fe3d.gameEntity_delete("@@cube");
 
 	// Delete billboards

@@ -136,6 +136,11 @@ float FabiEngine3D::skyEntity_getLightness(const string& ID)
 	return _core->_skyEntityManager.getEntity(ID)->getLightness();
 }
 
+float FabiEngine3D::skyEntity_getOriginalLightness(const string& ID)
+{
+	return _core->_skyEntityManager.getEntity(ID)->getOriginalLightness();
+}
+
 float FabiEngine3D::skyEntity_getRotationSpeed(const string& ID)
 {
 	return _core->_skyEntityManager.getEntity(ID)->getRotationSpeed();

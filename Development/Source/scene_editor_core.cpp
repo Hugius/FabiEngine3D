@@ -49,15 +49,15 @@ void SceneEditor::initializeGUI()
 	// Left-viewport: mainWindow - sceneEditorMenuEnvironmentTerrain
 	screenID = "sceneEditorMenuEnvironmentTerrain";
 	_leftWindow->addScreen(screenID);
-	_leftWindow->getScreen(screenID)->addButton("choose", vec2(0.0f, 0.475f), vec2(GW("Choose sky"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Choose sky", LVPC::textColor, LVPC::textHoverColor);
-	_leftWindow->getScreen(screenID)->addButton("remove", vec2(0.0f, 0.0f), vec2(GW("Remove sky"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Remove sky", LVPC::textColor, LVPC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("choose", vec2(0.0f, 0.475f), vec2(GW("Choose terrain"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Choose terrain", LVPC::textColor, LVPC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("remove", vec2(0.0f, 0.0f), vec2(GW("Remove terrain"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Remove terrain", LVPC::textColor, LVPC::textHoverColor);
 	_leftWindow->getScreen(screenID)->addButton("back", vec2(0.0f, -0.475f), vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
 
 	// Left-viewport: mainWindow - sceneEditorMenuEnvironmentWater
 	screenID = "sceneEditorMenuEnvironmentWater";
 	_leftWindow->addScreen(screenID);
-	_leftWindow->getScreen(screenID)->addButton("choose", vec2(0.0f, 0.475f), vec2(GW("Choose sky"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Choose sky", LVPC::textColor, LVPC::textHoverColor);
-	_leftWindow->getScreen(screenID)->addButton("remove", vec2(0.0f, 0.0f), vec2(GW("Remove sky"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Remove sky", LVPC::textColor, LVPC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("choose", vec2(0.0f, 0.475f), vec2(GW("Choose water"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Choose water", LVPC::textColor, LVPC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("remove", vec2(0.0f, 0.0f), vec2(GW("Remove water"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Remove water", LVPC::textColor, LVPC::textHoverColor);
 	_leftWindow->getScreen(screenID)->addButton("back", vec2(0.0f, -0.475f), vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
 
 	// Left-viewport: mainWindow - sceneEditorMenuModelPlace
@@ -393,19 +393,24 @@ void SceneEditor::unloadScene()
 	_fe3d.gfx_disableMotionBlur();
 	_fe3d.gfx_disableLensFlare();
 
-	// Delete sky entity
+	// Delete environment preview entities
+	_worldEditor.unloadSkyEntities();
+	_worldEditor.unloadTerrainEntities();
+	_worldEditor.unloadWaterEntities();
+
+	// Delete placed sky entity
 	if (_fe3d.skyEntity_isExisting(_currentSkyID))
 	{
 		_fe3d.skyEntity_delete(_currentSkyID);
 	}
 
-	// Delete terrain entity
+	// Delete placed terrain entity
 	if (_fe3d.terrainEntity_isExisting(_currentTerrainID))
 	{
 		_fe3d.terrainEntity_delete(_currentTerrainID);
 	}
 
-	// Delete water entity
+	// Delete placed water entity
 	if (_fe3d.waterEntity_isExisting(_currentWaterID))
 	{
 		_fe3d.waterEntity_delete(_currentWaterID);

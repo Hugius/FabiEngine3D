@@ -38,7 +38,7 @@ private:
 	bool _isLoaded = false;
 
 	// Vectors
-	const vec3 _defaultCameraPosition = vec3(0.0f, 1.5f, 5.0f);
+	const vec3 _defaultCameraPosition = vec3(0.0f, 2.5f, 5.0f);
 	const vec3 _billboardPosition = vec3(0.0f, 2.5f, 0.0f);
 
 	// Floats

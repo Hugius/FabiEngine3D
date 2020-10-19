@@ -26,6 +26,9 @@ public:
 	void loadSkyEntities();
 	void loadTerrainEntities();
 	void loadWaterEntities();
+	void unloadSkyEntities();
+	void unloadTerrainEntities();
+	void unloadWaterEntities();
 
 	bool isLoaded();
 

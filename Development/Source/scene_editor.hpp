@@ -85,6 +85,10 @@ private:
 	void _placeTerrain(const string& newID, const string& heightMapPath, float maxHeight, float uvRepeat, bool isBlendMapped, float lightness,
 		float blendRepeatR, float blendRepeatG, float blendRepeatB, bool isSpecular, float specularIntensity, const string& diffuseMapPath, 
 		const string& blendMapPath, const string& blendMapPathR, const string& blendMapPathG, const string& blendMapPathB);
+	void _placeWater(const string& newID, const string& previewID);
+	void _placeWater(const string& newID, vec3 position, float size, bool isWaving, bool isRippling, bool isSpecularLighted, bool isReflective,
+		bool isRefractive, float waveHeightFactor, float specularFactor, float specularIntensity, float transparency, vec3 color, float uvRepeat,
+		vec2 speed, const string& dudvMapPath, const string& normalMapPath, const string& displacementMapPath);
 	void _placeModel(const string& newID, const string& previewID, vec3 position);
 	void _placeModel(const string& newID, vec3 position, vec3 rotation, vec3 size, const string& objPath, const string& diffuseMapPath,
 		const string& lightMapPath, const string& reflectionMapPath, const string& normalMapPath, bool isFrozen,

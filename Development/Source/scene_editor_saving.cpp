@@ -37,7 +37,7 @@ void SceneEditor::save()
 		{
 			auto diffuseMapPaths = _fe3d.skyEntity_getDiffuseMapPaths(_currentSkyID);
 			float rotationSpeed = _fe3d.skyEntity_getRotationSpeed(_currentSkyID);
-			float lightness = _fe3d.skyEntity_getLightness(_currentSkyID);
+			float lightness = _fe3d.skyEntity_getOriginalLightness(_currentSkyID);
 			vec3 color = _fe3d.skyEntity_getColor(_currentSkyID);
 
 			// Perform empty string & space conversions
@@ -101,6 +101,7 @@ void SceneEditor::save()
 
 			// Write terrain data to file
 			file <<
+				"TERRAIN " <<
 				_currentTerrainID << " " <<
 				heightMapPath << " " <<
 				diffuseMapPath << " " <<
@@ -116,6 +117,64 @@ void SceneEditor::save()
 				blendRepeatG << " " <<
 				blendRepeatB << " " <<
 				isSpecular << " " <<
+				specularIntensity << std::endl;
+		}
+
+		// Write WATER entity data into file
+		if (_currentWaterID != "")
+		{
+			// Values
+			string dudvMapPath = _fe3d.waterEntity_getDudvMapPath(_currentWaterID);
+			string normalMapPath = _fe3d.waterEntity_getNormalMapPath(_currentWaterID);
+			string displacementMapPath = _fe3d.waterEntity_getDisplacementMapPath(_currentWaterID);
+			bool isWaving = _fe3d.waterEntity_isWaving(_currentWaterID);
+			bool isRippling = _fe3d.waterEntity_isRippling(_currentWaterID);
+			bool isSpecularLighted = _fe3d.waterEntity_isSpecularLighted(_currentWaterID);
+			bool isReflective = _fe3d.waterEntity_isReflective(_currentWaterID);
+			bool isRefractive = _fe3d.waterEntity_isRefractive(_currentWaterID);
+			vec3 color = _fe3d.waterEntity_getColor(_currentWaterID);
+			float size = _fe3d.waterEntity_getSize(_currentWaterID);
+			vec3 position = _fe3d.waterEntity_getPosition(_currentWaterID);
+			float uvRepeat = _fe3d.waterEntity_getUvRepeat(_currentWaterID);
+			float waveHeightFactor = _fe3d.waterEntity_getWaveHeightFactor(_currentWaterID);
+			vec2 speed = _fe3d.waterEntity_getSpeed(_currentWaterID);
+			float transparency = _fe3d.waterEntity_getTransparency(_currentWaterID);
+			float specularFactor = _fe3d.waterEntity_getSpecularLightingFactor(_currentWaterID);
+			float specularIntensity = _fe3d.waterEntity_getSpecularLightingIntensity(_currentWaterID);
+
+			// Perform empty string & space conversions
+			dudvMapPath = (dudvMapPath == "" ? "?" : dudvMapPath);
+			normalMapPath = (normalMapPath == "" ? "?" : normalMapPath);
+			displacementMapPath = (displacementMapPath == "" ? "?" : displacementMapPath);
+			std::replace(dudvMapPath.begin(), dudvMapPath.end(), ' ', '?');
+			std::replace(normalMapPath.begin(), normalMapPath.end(), ' ', '?');
+			std::replace(displacementMapPath.begin(), displacementMapPath.end(), ' ', '?');
+
+			// Write data to file
+			file <<
+				"WATER " <<
+				_currentWaterID << " " <<
+				dudvMapPath << " " <<
+				normalMapPath << " " <<
+				displacementMapPath << " " <<
+				isWaving << " " <<
+				isRippling << " " <<
+				isSpecularLighted << " " <<
+				isReflective << " " <<
+				isRefractive << " " <<
+				color.r << " " <<
+				color.g << " " <<
+				color.b << " " <<
+				size << " " <<
+				position.x << " " <<
+				position.y << " " <<
+				position.z << " " <<
+				uvRepeat << " " <<
+				waveHeightFactor << " " <<
+				speed.x << " " <<
+				speed.y << " " <<
+				transparency << " " <<
+				specularFactor << " " <<
 				specularIntensity << std::endl;
 		}
 

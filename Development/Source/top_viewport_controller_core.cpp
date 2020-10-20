@@ -144,7 +144,6 @@ void TopViewportController::_updateGameManagement()
 				{
 					// Load all assets before executing script
 					SCRIPT_EXECUTOR.load();
-					_sceneEditor.loadScene(false);
 				}
 			}
 			else if (gameScreen->getButton("pause")->isHovered())
@@ -156,17 +155,14 @@ void TopViewportController::_updateGameManagement()
 			{
 				// Unload
 				SCRIPT_EXECUTOR.unload();
-				_sceneEditor.unloadScene();
 
 				// Load again
 				SCRIPT_EXECUTOR.load();
-				_sceneEditor.loadScene(false);
 			}
 			else if (gameScreen->getButton("stop")->isHovered())
 			{
 				// Reset everything and load main menu again
 				SCRIPT_EXECUTOR.unload();
-				_sceneEditor.unloadScene();
 				_fe3d.skyEntity_select("@@defaultSky");
 			}
 		}
@@ -212,7 +208,7 @@ void TopViewportController::_saveCurrentProject()
 	_fe3d.logger_throwInfo("Project \"" + _currentProjectName + "\" saved!");
 }
 
-void TopViewportController::_loadCurrentProject()
+void TopViewportController::_updateCurrentProject()
 {
 	// Change window title
 	if (_currentProjectName == "")

@@ -36,7 +36,7 @@ private:
 	void _updateProjectDeletion();
 	void _prepareProjectChoosing();
 	void _saveCurrentProject();
-	void _loadCurrentProject();
+	void _updateCurrentProject();
 
 	ModelEditor& _modelEditor;
 	WorldEditor& _worldEditor;

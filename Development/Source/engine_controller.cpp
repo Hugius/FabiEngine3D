@@ -42,32 +42,6 @@ void EngineController::_initializeMiscellaneous()
 	gfx_enableMSAA();
 	gfx_enableBloom(1.0f, 0.0f, 10);
 
-	// Default cube map
-	string textureFolderPath = "engine\\textures\\";
-	skyEntity_add("@@defaultSky");
-	skyEntity_setDiffuseMaps("@@defaultSky", { 
-		textureFolderPath + "default_right.png", 
-		textureFolderPath + "default_left.png", 
-		textureFolderPath + "default_top.png", 
-		textureFolderPath + "default_bottom.png", 
-		textureFolderPath + "default_front.png", 
-		textureFolderPath + "default_back.png" });
-	skyEntity_select("@@defaultSky");
-	skyEntity_setLightness("@@defaultSky", 0.65f);
-	skyEntity_setRotationSpeed("@@defaultSky", 0.25f);
-
-	// Editor cube map
-	skyEntity_add("@@editorSky");
-	skyEntity_setDiffuseMaps("@@editorSky", {
-		textureFolderPath + "editor_right.png",
-		textureFolderPath + "editor_left.png",
-		textureFolderPath + "editor_top.png",
-		textureFolderPath + "editor_bottom.png",
-		textureFolderPath + "editor_front.png",
-		textureFolderPath + "editor_back.png" });
-	skyEntity_setLightness("@@editorSky", 0.65f);
-	skyEntity_setRotationSpeed("@@editorSky", 0.25f);
-
 	// Default camera
 	float mouseSpeed = camera_getMouseSensitivity();
 	camera_load(90.0f, 0.1f, 100.0f, vec3(0.0f));
@@ -86,8 +60,21 @@ void EngineController::_updateMiscellaneous()
 	string activeScreen = _gui->getViewport("left")->getWindow("main")->getActiveScreen()->getID();
 	if (activeScreen == "main" && lastScreen != "main")
 	{
+		// Default camera
 		camera_load(90.0f, 0.1f, 100.0f, vec3(0.0f));
+
+		// Default cube map
+		string textureFolderPath = "engine\\textures\\";
+		skyEntity_add("@@defaultSky");
+		skyEntity_setDiffuseMaps("@@defaultSky", {
+			textureFolderPath + "default_right.png",
+			textureFolderPath + "default_left.png",
+			textureFolderPath + "default_top.png",
+			textureFolderPath + "default_bottom.png",
+			textureFolderPath + "default_front.png",
+			textureFolderPath + "default_back.png" });
 		skyEntity_select("@@defaultSky");
+		skyEntity_setLightness("@@defaultSky", 0.65f);
 	}
 	lastScreen = activeScreen;
 

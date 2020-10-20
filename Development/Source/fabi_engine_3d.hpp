@@ -82,6 +82,7 @@ public:
 
 	// Sky entity interface - setters
 	void skyEntity_add(const string& ID);
+	void skyEntity_deleteAll();
 	void skyEntity_delete(const string& ID);
 	void skyEntity_hide(const string& ID);
 	void skyEntity_show(const string& ID);
@@ -110,11 +111,12 @@ public:
 
 	// Terrain entity interface - setters
 	void terrainEntity_add(const string& ID, const string& heightMapPath);
-	void terrainEntity_setHeightmap(const string& ID, const string& heightMapPath);
+	void terrainEntity_deleteAll();
 	void terrainEntity_delete(const string& ID);
 	void terrainEntity_hide(const string& ID);
 	void terrainEntity_show(const string& ID);
 	void terrainEntity_select(const string& ID);
+	void terrainEntity_setHeightmap(const string& ID, const string& heightMapPath);
 	void terrainEntity_setMaxHeight(const string& ID, float height);
 	void terrainEntity_setUvRepeat(const string& ID, float repeat);
 	void terrainEntity_setDiffuseMap(const string& ID, const string& texturePath);
@@ -158,6 +160,7 @@ public:
 
 	// Water entity interface - setters
 	void waterEntity_add(const string& ID);
+	void waterEntity_deleteAll();
 	void waterEntity_delete(const string& ID);
 	void waterEntity_hide(const string& ID);
 	void waterEntity_show(const string& ID);

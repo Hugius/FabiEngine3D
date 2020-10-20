@@ -28,7 +28,7 @@ public:
 	void unload();
 	void update();
 	void setCurrentProjectName(const string&projectName);
-	void loadScene(bool overwriteCamera);
+	void loadScene(const string& fileName);
 	void unloadScene();
 
 	bool isLoaded();
@@ -74,11 +74,11 @@ private:
 
 	// Miscellaneous updates
 	void _updateMainMenu();
+	void _updateChoiceMenu();
 	void _updateCamera();
 	void _updateMiscellaneous();
 
 	// Creation functions
-	bool _loadSceneFile(bool overwriteCamera);
 	void _placeSky(const string& newID, const string& previewID);
 	void _placeSky(const string& newID, const array<string, 6>& diffuseMapPaths, float lightness, float rotationSpeed, vec3 color);
 	void _placeTerrain(const string& newID, const string& previewID);
@@ -101,6 +101,8 @@ private:
 		bool isAnimated, int animationRows, int animationColumns, int animationFramestep);
 
 	// Miscellaneous
+	vector<string> _loadSceneNames();
+	void _deleteSceneFile(const string& sceneName);
 	void _updateModelBlinking(const string& modelID, int& multiplier);
 	void _updateBillboardBlinking(const string& billboardID, int& multiplier);
 	void _updateLightbulbAnimation(const string& modelID, int& multiplier);
@@ -157,10 +159,13 @@ private:
 	string _activeLightBulbID = "";
 
 	// Miscellaneous
+	string _currentProjectName = "";
+	string _currentSceneName = "";
 	bool _isLoaded = false;
 	bool _isLoadingSceneEditor = false;
+	bool _isChoosingScene = false;
+	bool _isDeletingScene = false;
 	TransformationType _transformation = TransformationType::TRANSLATION;
-	string _currentProjectName = "";
 	float _customCameraSpeed = 1.0f;
 	const float _movementChangingSpeed = 0.1f;
 };

@@ -1,6 +1,7 @@
 #include "scene_editor.hpp"
 
 #include <algorithm>
+#include <filesystem>
 
 bool SceneEditor::isLoaded()
 {
@@ -92,6 +93,46 @@ void SceneEditor::_activateBillboard(const string& billboardID)
 	string textEntityID = _gui->getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID();
 	_fe3d.textEntity_show(textEntityID);
 	_fe3d.textEntity_setTextContent(textEntityID, "Active billboard: " + billboardName, 0.025f);
+}
+
+vector<string> SceneEditor::_loadSceneNames()
+{
+	vector<string> sceneNames;
+
+	// Compose folder path
+	string sceneDirectoryPath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectName + "\\scenes\\";
+
+	// Check if scenes directory exists
+	if (_fe3d.misc_isDirectory(sceneDirectoryPath))
+	{
+		// Get all project names
+		for (const auto& entry : std::filesystem::directory_iterator(sceneDirectoryPath))
+		{
+			string sceneName = string(entry.path().u8string());
+			sceneName.erase(0, sceneDirectoryPath.size());
+			sceneNames.push_back(sceneName.substr(0, sceneName.size() - 5));
+		}
+	}
+	else
+	{
+		_fe3d.logger_throwWarning("Project folder corrupted of project \"" + _currentProjectName + "\"!");
+	}
+
+	return sceneNames;
+}
+
+void SceneEditor::_deleteSceneFile(const string& sceneName)
+{
+	// Check if scene file is still existing
+	string filePath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectName + "\\scenes\\" + sceneName + ".fe3d";
+	if (_fe3d.misc_isFileExisting(filePath))
+	{
+		std::filesystem::remove_all(filePath);
+	}
+	else
+	{
+		_fe3d.logger_throwWarning("Project folder corrupted of project \"" + _currentProjectName + "\"!");
+	}
 }
 
 void SceneEditor::_updateModelBlinking(const string& modelID, int& multiplier)

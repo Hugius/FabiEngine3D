@@ -4,7 +4,7 @@
 #include <sstream>
 #include <algorithm>
 
-bool SceneEditor::_loadSceneFile(bool overwriteCamera)
+void SceneEditor::loadScene(const string& fileName)
 {
 	// Error checking
 	if (_currentProjectName == "")
@@ -13,11 +13,24 @@ bool SceneEditor::_loadSceneFile(bool overwriteCamera)
 	}
 
 	// Compose full folder path
-	string filePath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectName + "\\scenes\\scene.fe3d";
+	string filePath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectName + "\\scenes\\" + fileName + ".fe3d";
 
 	// Check if scene file exists
 	if (_fe3d.misc_isFileExisting(filePath))
 	{
+		// Default camera
+		_fe3d.camera_load(90.0f, 0.1f, 10000.0f, vec3(0.0f));
+
+		// Default graphics
+		_fe3d.gfx_enableAmbientLighting(vec3(1.0f), 1.0f);
+		_fe3d.gfx_enableSpecularLighting();
+		_fe3d.gfx_enablePointLighting();
+		_fe3d.gfx_enableSkyReflections(0.5f);
+		_fe3d.gfx_enableSceneReflections(0.5f);
+		_fe3d.gfx_enableLightMapping();
+		_fe3d.gfx_enableNormalMapping();
+		_fe3d.gfx_enableWaterEffects();
+
 		// Load scene file
 		std::ifstream file(filePath);
 		string line;
@@ -395,7 +408,7 @@ bool SceneEditor::_loadSceneFile(bool overwriteCamera)
 			}
 			else if (entityType == "EDITOR_POSITION")
 			{
-				if (overwriteCamera)
+				if (_isLoadingSceneEditor)
 				{
 					vec3 position;
 					iss >> position.x >> position.y >> position.z;
@@ -404,7 +417,7 @@ bool SceneEditor::_loadSceneFile(bool overwriteCamera)
 			}
 			else if (entityType == "EDITOR_YAW")
 			{
-				if (overwriteCamera)
+				if (_isLoadingSceneEditor)
 				{
 					float yaw;
 					iss >> yaw;
@@ -413,7 +426,7 @@ bool SceneEditor::_loadSceneFile(bool overwriteCamera)
 			}
 			else if (entityType == "EDITOR_PITCH")
 			{
-				if (overwriteCamera)
+				if (_isLoadingSceneEditor)
 				{
 					float pitch;
 					iss >> pitch;
@@ -474,11 +487,5 @@ bool SceneEditor::_loadSceneFile(bool overwriteCamera)
 
 		// Logging
 		_fe3d.logger_throwInfo("Scene data from project \"" + _currentProjectName + "\" loaded!");
-
-		return true;
-	}
-	else
-	{
-		return false;
 	}
 }

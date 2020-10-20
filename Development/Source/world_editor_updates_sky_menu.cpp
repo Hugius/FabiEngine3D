@@ -24,7 +24,7 @@ void WorldEditor::_updateSkyMenuMain()
 				_gui->getGlobalScreen()->addChoiceForm("skyList", "Select sky", vec2(-0.4f, 0.1f), _skyNames);
 				for (auto& name : _skyNames) { name = "@" + name; }
 			}
-			else if (screen->getButton("remove")->isHovered())
+			else if (screen->getButton("delete")->isHovered())
 			{
 				_skyChoosingEnabled = true;
 				_skyRemovalEnabled = true;

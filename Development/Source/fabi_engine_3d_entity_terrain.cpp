@@ -16,6 +16,15 @@ void FabiEngine3D::terrainEntity_setHeightmap(const string& ID, const string& he
 	_core->_terrainEntityManager.generateModel(ID);
 }
 
+void FabiEngine3D::terrainEntity_deleteAll()
+{
+	// For every TERRAIN entity
+	for (auto& entity : _core->_terrainEntityManager.getEntities())
+	{
+		terrainEntity_delete(entity->getID());
+	}
+}
+
 void FabiEngine3D::terrainEntity_delete(const string& ID)
 {
 	// Unselect terrain if selected

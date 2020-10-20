@@ -24,7 +24,7 @@ void WorldEditor::_updateTerrainMenuMain()
 				_gui->getGlobalScreen()->addChoiceForm("terrainList", "Select terrain", vec2(-0.4f, 0.1f), _terrainNames);
 				for (auto& name : _terrainNames) { name = "@" + name; }
 			}
-			else if (screen->getButton("remove")->isHovered())
+			else if (screen->getButton("delete")->isHovered())
 			{
 				_terrainChoosingEnabled = true;
 				_terrainRemovalEnabled = true;

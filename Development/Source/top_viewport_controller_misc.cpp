@@ -45,7 +45,7 @@ void TopViewportController::_updateProjectCreation()
 			string newDirectoryPath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + projectName;
 
 			// Check if project already exists
-			if (_fe3d.misc_isFileExisting(newDirectoryPath) && _fe3d.misc_isDirectory(newDirectoryPath)) // Project is existent
+			if (_fe3d.misc_isFileExisting(newDirectoryPath) && _fe3d.misc_isDirectory(newDirectoryPath))
 			{
 				Logger::throwWarning("Project \"" + projectName + "\"" + " already exists!");
 			}
@@ -59,7 +59,7 @@ void TopViewportController::_updateProjectCreation()
 
 				// Load current project
 				_currentProjectName = projectName;
-				_loadCurrentProject();
+				_updateCurrentProject();
 
 				// Logging
 				_fe3d.logger_throwInfo("New project \"" + _currentProjectName + "\" created!");
@@ -82,7 +82,7 @@ void TopViewportController::_updateProjectLoading()
 		{
 			// Load current project
 			_currentProjectName = clickedButtonID;
-			_loadCurrentProject();
+			_updateCurrentProject();
 
 			// Logging
 			_fe3d.logger_throwInfo("Existing project \"" + _currentProjectName + "\" loaded!");
@@ -127,19 +127,28 @@ void TopViewportController::_updateProjectDeletion()
 			{
 				// Unload current project
 				_currentProjectName = "";
-				_loadCurrentProject();
+				_updateCurrentProject();
 			}
 
-			// Deleting project folder
-			std::filesystem::remove_all(_fe3d.misc_getRootDirectory() + "user\\projects\\" + chosenButtonID);
+			// Check if project folder is still existing
+			string directoryPath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + chosenButtonID;
+			if (_fe3d.misc_isFileExisting(directoryPath) && _fe3d.misc_isDirectory(directoryPath))
+			{
+				// Deleting project folder
+				std::filesystem::remove_all(directoryPath);
 
-			// Logging
-			_fe3d.logger_throwInfo("Existing project \"" + chosenButtonID + "\" deleted!");
+				// Logging
+				_fe3d.logger_throwInfo("Existing project \"" + chosenButtonID + "\" deleted!");
 
-			// Miscellaneous
-			_deletingProject = false;
-			_fe3d.misc_setWindowTitle("FabiEngine3D");
-			chosenButtonID = "";
+				// Miscellaneous
+				_deletingProject = false;
+				_fe3d.misc_setWindowTitle("FabiEngine3D");
+				chosenButtonID = "";
+			}
+			else
+			{
+				_fe3d.logger_throwWarning("Project \"" + chosenButtonID + "\" is corrupted!");
+			}
 		}
 		else if (_gui->getGlobalScreen()->isAnswerFormCancelled("deleteProject"))
 		{
@@ -171,6 +180,6 @@ void TopViewportController::_prepareProjectChoosing()
 	}
 	else
 	{
-		_fe3d.logger_throwError("\"user\\projects\\\" folder does not exist anymore!");
+		_fe3d.logger_throwError("User folder is corrupted!");
 	}
 }

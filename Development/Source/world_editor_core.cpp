@@ -26,7 +26,7 @@ void WorldEditor::initializeGUI()
 	_leftWindow->addScreen("skyEditorMenuMain");
 	_leftWindow->getScreen("skyEditorMenuMain")->addButton("create", vec2(0.0f, 0.63f), vec2(GW("Create sky"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Create sky", LVPC::textColor, LVPC::textHoverColor);
 	_leftWindow->getScreen("skyEditorMenuMain")->addButton("edit", vec2(0.0f, 0.21f), vec2(GW("Edit sky"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Edit sky", LVPC::textColor, LVPC::textHoverColor);
-	_leftWindow->getScreen("skyEditorMenuMain")->addButton("remove", vec2(0.0f, -0.21f), vec2(GW("Remove sky"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Remove sky", LVPC::textColor, LVPC::textHoverColor);
+	_leftWindow->getScreen("skyEditorMenuMain")->addButton("delete", vec2(0.0f, -0.21f), vec2(GW("Remove sky"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Remove sky", LVPC::textColor, LVPC::textHoverColor);
 	_leftWindow->getScreen("skyEditorMenuMain")->addButton("back", vec2(0.0f, -0.63f), vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
 
 	// Left-viewport: mainWindow - skyMenuChoice
@@ -56,7 +56,7 @@ void WorldEditor::initializeGUI()
 	_leftWindow->addScreen("terrainEditorMenuMain");
 	_leftWindow->getScreen("terrainEditorMenuMain")->addButton("create", vec2(0.0f, 0.63f), vec2(GW("Create terain"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Create terain", LVPC::textColor, LVPC::textHoverColor);
 	_leftWindow->getScreen("terrainEditorMenuMain")->addButton("edit", vec2(0.0f, 0.21f), vec2(GW("Edit terrain"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Edit terrain", LVPC::textColor, LVPC::textHoverColor);
-	_leftWindow->getScreen("terrainEditorMenuMain")->addButton("remove", vec2(0.0f, -0.21f), vec2(GW("Remove terrain"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Remove terrain", LVPC::textColor, LVPC::textHoverColor);
+	_leftWindow->getScreen("terrainEditorMenuMain")->addButton("delete", vec2(0.0f, -0.21f), vec2(GW("Remove terrain"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Remove terrain", LVPC::textColor, LVPC::textHoverColor);
 	_leftWindow->getScreen("terrainEditorMenuMain")->addButton("back", vec2(0.0f, -0.63f), vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
 
 	// Left-viewport: mainWindow - terrainMenuChoice
@@ -91,7 +91,7 @@ void WorldEditor::initializeGUI()
 	_leftWindow->addScreen("waterEditorMenuMain");
 	_leftWindow->getScreen("waterEditorMenuMain")->addButton("create", vec2(0.0f, 0.63f), vec2(GW("Create water"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Create water", LVPC::textColor, LVPC::textHoverColor);
 	_leftWindow->getScreen("waterEditorMenuMain")->addButton("edit", vec2(0.0f, 0.21f), vec2(GW("Edit water"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Edit water", LVPC::textColor, LVPC::textHoverColor);
-	_leftWindow->getScreen("waterEditorMenuMain")->addButton("remove", vec2(0.0f, -0.21f), vec2(GW("Remove water"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Remove water", LVPC::textColor, LVPC::textHoverColor);
+	_leftWindow->getScreen("waterEditorMenuMain")->addButton("delete", vec2(0.0f, -0.21f), vec2(GW("Remove water"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Remove water", LVPC::textColor, LVPC::textHoverColor);
 	_leftWindow->getScreen("waterEditorMenuMain")->addButton("back", vec2(0.0f, -0.63f), vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
 
 	// Left-viewport: mainWindow - waterManagement
@@ -178,9 +178,30 @@ void WorldEditor::unload()
 	unloadWaterEntities();
 
 	// Reset variables
+	_skyNames.clear();
+	_terrainNames.clear();
+	_waterNames.clear();
 	_currentWorldPart = WorldPart::NONE;
 	_cameraRotationSpeed = 0.0f;
 	_totalCameraRotation = 0.0f;
+	_currentSkyID = "";
+	_hoveredSkyID = "";
+	_currentTerrainID = "";
+	_hoveredTerrainID = "";
+	_currentWaterID = "";
+	_hoveredWaterID = "";
+	_skyCreationEnabled = false;
+	_skyChoosingEnabled = false;
+	_skyEditingEnabled = false;
+	_skyRemovalEnabled = false;
+	_terrainCreationEnabled = false;
+	_terrainChoosingEnabled = false;
+	_terrainEditingEnabled = false;
+	_terrainRemovalEnabled = false;
+	_waterCreationEnabled = false;
+	_waterChoosingEnabled = false;
+	_waterEditingEnabled = false;
+	_waterRemovalEnabled = false;
 
 	// Miscellaneous
 	_gui->getGlobalScreen()->deleteTextfield("selectedSkyName");

@@ -41,7 +41,7 @@ void SceneEditor::_updateSkyMenu()
 			auto screen = _leftWindow->getScreen("sceneEditorMenuEnvironmentSky");
 
 			// Buttons hoverability
-			screen->getButton("remove")->setHoverable(_currentSkyID != "");
+			screen->getButton("delete")->setHoverable(_currentSkyID != "");
 
 			// GUI management
 			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
@@ -62,7 +62,7 @@ void SceneEditor::_updateSkyMenu()
 					// Add choice list
 					_gui->getGlobalScreen()->addChoiceForm("skyList", "Select sky", vec2(-0.4f, 0.1f), skyNames);
 				}
-				else if (screen->getButton("remove")->isHovered())
+				else if (screen->getButton("delete")->isHovered())
 				{
 					_fe3d.skyEntity_delete(_currentSkyID);
 					_currentSkyID = "";
@@ -104,7 +104,7 @@ void SceneEditor::_updateTerrainMenu()
 			auto screen = _leftWindow->getScreen("sceneEditorMenuEnvironmentTerrain");
 
 			// Buttons hoverability
-			screen->getButton("remove")->setHoverable(_currentTerrainID != "");
+			screen->getButton("delete")->setHoverable(_currentTerrainID != "");
 
 			// GUI management
 			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
@@ -125,7 +125,7 @@ void SceneEditor::_updateTerrainMenu()
 					// Add choice list
 					_gui->getGlobalScreen()->addChoiceForm("terrainList", "Select terrain", vec2(-0.4f, 0.1f), terrainNames);
 				}
-				else if (screen->getButton("remove")->isHovered())
+				else if (screen->getButton("delete")->isHovered())
 				{
 					_fe3d.terrainEntity_delete(_currentTerrainID);
 					_currentTerrainID = "";
@@ -167,7 +167,7 @@ void SceneEditor::_updateWaterMenu()
 			auto screen = _leftWindow->getScreen("sceneEditorMenuEnvironmentWater");
 
 			// Buttons hoverability
-			screen->getButton("remove")->setHoverable(_currentWaterID != "");
+			screen->getButton("delete")->setHoverable(_currentWaterID != "");
 
 			// GUI management
 			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
@@ -188,7 +188,7 @@ void SceneEditor::_updateWaterMenu()
 					// Add choice list
 					_gui->getGlobalScreen()->addChoiceForm("waterList", "Select water", vec2(-0.4f, 0.1f), waterNames);
 				}
-				else if (screen->getButton("remove")->isHovered())
+				else if (screen->getButton("delete")->isHovered())
 				{
 					_fe3d.waterEntity_delete(_currentWaterID);
 					_currentWaterID = "";

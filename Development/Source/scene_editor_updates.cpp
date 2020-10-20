@@ -2,6 +2,10 @@
 
 void SceneEditor::update()
 {
+	// Main updates
+	_updateMainMenu();
+	_updateChoiceMenu();
+
 	// Environment updates
 	_updateMainEnvironmentMenu();
 	_updateSkyMenu();
@@ -41,39 +45,101 @@ void SceneEditor::update()
 	_updateskyHdrGraphicsSettingsMenu();
 
 	// Miscellaneous
-	_updateMainMenu();
 	_updateCamera();
 	_updateMiscellaneous();
 }
 
 void SceneEditor::_updateMainMenu()
 {
+	if (_leftWindow->getActiveScreen()->getID() == "sceneEditorMenuMain")
+	{
+		auto screen = _leftWindow->getScreen("sceneEditorMenuMain");
+
+		// GUI management
+		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
+		{
+			if (screen->getButton("create")->isHovered())
+			{
+				_gui->getGlobalScreen()->addValueForm("newSceneName", "New scene name", "", vec2(0.0f), vec2(0.5f, 0.1f));
+			}
+			else if (screen->getButton("edit")->isHovered())
+			{
+				_isChoosingScene = true;
+				_gui->getGlobalScreen()->addChoiceForm("sceneList", "Select scene", vec2(0.0f, 0.1f), _loadSceneNames());
+			}
+			else if (screen->getButton("delete")->isHovered())
+			{
+				_isDeletingScene = true;
+				_gui->getGlobalScreen()->addChoiceForm("sceneList", "Select scene", vec2(0.0f, 0.1f), _loadSceneNames());
+			}
+			else if (screen->getButton("back")->isHovered())
+			{
+				unload();
+				_leftWindow->setActiveScreen("main");
+			}
+		}
+
+		// Update scene choosing or deleting
+		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
+		{
+			string selectedButtonID = _gui->getGlobalScreen()->getSelectedChoiceFormButtonID("sceneList");
+			if (selectedButtonID != "")
+			{
+				if (_isChoosingScene) // Choosing
+				{
+					_currentSceneName = selectedButtonID;
+
+					// Load selected scene
+					_isLoadingSceneEditor = true;
+					loadScene(_currentSceneName);
+					_isLoadingSceneEditor = false;
+					_isChoosingScene = false;
+					_leftWindow->setActiveScreen("sceneEditorMenuChoice");
+				}
+				else if (_isDeletingScene) // Deleting
+				{
+					_deleteSceneFile(selectedButtonID);
+					_isDeletingScene = false;
+				}
+
+				_gui->getGlobalScreen()->removeChoiceForm("sceneList");
+			}
+			else if (_gui->getGlobalScreen()->isChoiceFormCancelled("sceneList"))
+			{
+				_gui->getGlobalScreen()->removeChoiceForm("sceneList");
+			}
+		}
+	}
+}
+
+void SceneEditor::_updateChoiceMenu()
+{
 	if (_isLoaded)
 	{
-		if (_leftWindow->getActiveScreen()->getID() == "sceneEditorMenuMain")
+		if (_leftWindow->getActiveScreen()->getID() == "sceneEditorMenuChoice")
 		{
-			auto screen = _leftWindow->getScreen("sceneEditorMenuMain");
+			auto screen = _leftWindow->getScreen("sceneEditorMenuChoice");
 
 			// GUI management
 			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				if (screen->getButton("sceneEditorMenuEnvironment")->isHovered()) // Environment button
+				if (screen->getButton("environment")->isHovered()) // Environment button
 				{
 					_leftWindow->setActiveScreen("sceneEditorMenuEnvironment");
 				}
-				else if (screen->getButton("sceneEditorMenuModel")->isHovered()) // Model button
+				else if (screen->getButton("model")->isHovered()) // Model button
 				{
 					_leftWindow->setActiveScreen("sceneEditorMenuModel");
 				}
-				else if (screen->getButton("sceneEditorMenuBillboard")->isHovered()) // Billboard button
+				else if (screen->getButton("billboard")->isHovered()) // Billboard button
 				{
 					_leftWindow->setActiveScreen("sceneEditorMenuBillboard");
 				}
-				else if (screen->getButton("sceneEditorMenuLighting")->isHovered()) // Lighting button
+				else if (screen->getButton("lighting")->isHovered()) // Lighting button
 				{
 					_leftWindow->setActiveScreen("sceneEditorMenuLighting");
 				}
-				else if (screen->getButton("sceneEditorMenuSettings")->isHovered()) // Settings button
+				else if (screen->getButton("settings")->isHovered()) // Settings button
 				{
 					_leftWindow->setActiveScreen("sceneEditorMenuSettings");
 				}
@@ -87,13 +153,12 @@ void SceneEditor::_updateMainMenu()
 			if (_gui->getGlobalScreen()->isAnswerFormConfirmed("exitSceneEditor"))
 			{
 				save();
-				_leftWindow->setActiveScreen("main");
-				unload();
+				unloadScene();
+				_leftWindow->setActiveScreen("sceneEditorMenuMain");
 			}
 			else if (_gui->getGlobalScreen()->isAnswerFormCancelled("exitSceneEditor"))
 			{
-				_leftWindow->setActiveScreen("main");
-				unload();
+				_leftWindow->setActiveScreen("sceneEditorMenuMain");
 			}
 		}
 	}

@@ -24,7 +24,7 @@ void WorldEditor::_updateWaterMenuMain()
 				_gui->getGlobalScreen()->addChoiceForm("waterList", "Select water", vec2(-0.4f, 0.1f), _waterNames);
 				for (auto& name : _waterNames) { name = "@" + name; }
 			}
-			else if (screen->getButton("remove")->isHovered())
+			else if (screen->getButton("delete")->isHovered())
 			{
 				_waterChoosingEnabled = true;
 				_waterRemovalEnabled = true;

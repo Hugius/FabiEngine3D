@@ -23,12 +23,20 @@ void SceneEditor::initializeGUI()
 	// Left-viewport: mainWindow - sceneEditorMenuMain
 	screenID = "sceneEditorMenuMain";
 	_leftWindow->addScreen(screenID);
-	_leftWindow->getScreen(screenID)->addButton("sceneEditorMenuEnvironment", vec2(0.0f, 0.7875f), vec2(GW("Environment"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Environment", LVPC::textColor, LVPC::textHoverColor);
-	_leftWindow->getScreen(screenID)->addButton("sceneEditorMenuModel", vec2(0.0f, 0.525f), vec2(GW("Models"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Models", LVPC::textColor, LVPC::textHoverColor);
-	_leftWindow->getScreen(screenID)->addButton("sceneEditorMenuBillboard", vec2(0.0f, 0.2625f), vec2(GW("Billboards"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Billboards", LVPC::textColor, LVPC::textHoverColor);
-	_leftWindow->getScreen(screenID)->addButton("sceneEditorMenuLighting", vec2(0.0f, 0.0f), vec2(GW("Lighting"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Lighting", LVPC::textColor, LVPC::textHoverColor);
-	_leftWindow->getScreen(screenID)->addButton("sceneEditorMenuAudio", vec2(0.0f, -0.2625f), vec2(GW("Audio"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Audio", LVPC::textColor, LVPC::textHoverColor);
-	_leftWindow->getScreen(screenID)->addButton("sceneEditorMenuSettings", vec2(0.0f, -0.525f), vec2(GW("Settings"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Settings", LVPC::textColor, LVPC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("create", vec2(0.0f, 0.63f), vec2(GW("Create"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Create", LVPC::textColor, LVPC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("edit", vec2(0.0f, 0.21f), vec2(GW("Edit"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Edit", LVPC::textColor, LVPC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("delete", vec2(0.0f, -0.21f), vec2(GW("Remove"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Remove", LVPC::textColor, LVPC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("back", vec2(0.0f, -0.63f), vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
+
+	// Left-viewport: mainWindow - sceneEditorMenuChoice
+	screenID = "sceneEditorMenuChoice";
+	_leftWindow->addScreen(screenID);
+	_leftWindow->getScreen(screenID)->addButton("environment", vec2(0.0f, 0.7875f), vec2(GW("Environment"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Environment", LVPC::textColor, LVPC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("model", vec2(0.0f, 0.525f), vec2(GW("Models"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Models", LVPC::textColor, LVPC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("billboard", vec2(0.0f, 0.2625f), vec2(GW("Billboards"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Billboards", LVPC::textColor, LVPC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("lighting", vec2(0.0f, 0.0f), vec2(GW("Lighting"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Lighting", LVPC::textColor, LVPC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("audio", vec2(0.0f, -0.2625f), vec2(GW("Audio"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Audio", LVPC::textColor, LVPC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("settings", vec2(0.0f, -0.525f), vec2(GW("Settings"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Settings", LVPC::textColor, LVPC::textHoverColor);
 	_leftWindow->getScreen(screenID)->addButton("back", vec2(0.0f, -0.7875f), vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
 	
 	// Left-viewport: mainWindow - sceneEditorMenuEnvironment
@@ -43,21 +51,21 @@ void SceneEditor::initializeGUI()
 	screenID = "sceneEditorMenuEnvironmentSky";
 	_leftWindow->addScreen(screenID);
 	_leftWindow->getScreen(screenID)->addButton("choose", vec2(0.0f, 0.475f), vec2(GW("Choose sky"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Choose sky", LVPC::textColor, LVPC::textHoverColor);
-	_leftWindow->getScreen(screenID)->addButton("remove", vec2(0.0f, 0.0f), vec2(GW("Remove sky"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Remove sky", LVPC::textColor, LVPC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("delete", vec2(0.0f, 0.0f), vec2(GW("Remove sky"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Remove sky", LVPC::textColor, LVPC::textHoverColor);
 	_leftWindow->getScreen(screenID)->addButton("back", vec2(0.0f, -0.475f), vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
 
 	// Left-viewport: mainWindow - sceneEditorMenuEnvironmentTerrain
 	screenID = "sceneEditorMenuEnvironmentTerrain";
 	_leftWindow->addScreen(screenID);
 	_leftWindow->getScreen(screenID)->addButton("choose", vec2(0.0f, 0.475f), vec2(GW("Choose terrain"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Choose terrain", LVPC::textColor, LVPC::textHoverColor);
-	_leftWindow->getScreen(screenID)->addButton("remove", vec2(0.0f, 0.0f), vec2(GW("Remove terrain"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Remove terrain", LVPC::textColor, LVPC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("delete", vec2(0.0f, 0.0f), vec2(GW("Remove terrain"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Remove terrain", LVPC::textColor, LVPC::textHoverColor);
 	_leftWindow->getScreen(screenID)->addButton("back", vec2(0.0f, -0.475f), vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
 
 	// Left-viewport: mainWindow - sceneEditorMenuEnvironmentWater
 	screenID = "sceneEditorMenuEnvironmentWater";
 	_leftWindow->addScreen(screenID);
 	_leftWindow->getScreen(screenID)->addButton("choose", vec2(0.0f, 0.475f), vec2(GW("Choose water"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Choose water", LVPC::textColor, LVPC::textHoverColor);
-	_leftWindow->getScreen(screenID)->addButton("remove", vec2(0.0f, 0.0f), vec2(GW("Remove water"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Remove water", LVPC::textColor, LVPC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("delete", vec2(0.0f, 0.0f), vec2(GW("Remove water"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Remove water", LVPC::textColor, LVPC::textHoverColor);
 	_leftWindow->getScreen(screenID)->addButton("back", vec2(0.0f, -0.475f), vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
 
 	// Left-viewport: mainWindow - sceneEditorMenuModelPlace
@@ -276,9 +284,8 @@ void SceneEditor::initializeGUI()
 
 void SceneEditor::load()
 {
-	_isLoadingSceneEditor = true;
-	loadScene(true);
-	_isLoadingSceneEditor = false;
+	// Disable default skybox
+	_fe3d.skyEntity_select("");
 
 	// Load environment preview entities
 	_worldEditor.loadSkyEntities();
@@ -290,28 +297,6 @@ void SceneEditor::load()
 	{
 		_fe3d.billBoardEntity_add("@@lightSource", "engine\\textures\\light_source.png", _fe3d.gfx_getDirectionalLightingPosition(),
 			vec3(0.0f), vec2(0.0f), true, true, true, true);
-	}
-
-	// Default camera height
-	if (!_fe3d.waterEntity_isExisting(_currentWaterID) && !_fe3d.terrainEntity_isExisting(_currentTerrainID))
-	{
-		float height = 0.0f;
-
-		// Set camera height relative to water size
-		if (_fe3d.waterEntity_isExisting(_currentWaterID))
-		{
-			float size = _fe3d.waterEntity_getSize(_currentWaterID) / 2.0f;
-			height = _fe3d.waterEntity_getPosition(_currentWaterID).y + (size / 10.0f);
-		}
-
-		// Terrain can overwrite camera height
-		if (_fe3d.terrainEntity_isExisting(_currentTerrainID))
-		{
-			height = _fe3d.terrainEntity_getMaxHeight(_currentTerrainID);
-		}
-
-		// Load camera
-		_fe3d.camera_setPosition(vec3(0.0f, height, 0.0f));
 	}
 
 	// Preview model loading
@@ -352,28 +337,6 @@ void SceneEditor::load()
 	_isLoaded = true;
 }
 
-void SceneEditor::loadScene(bool overwriteCamera)
-{
-	// Default camera
-	_fe3d.camera_load(90.0f, 0.1f, 10000.0f, vec3(0.0f));
-
-	// Default graphics
-	_fe3d.gfx_enableAmbientLighting(vec3(1.0f), 1.0f);
-	_fe3d.gfx_enableSpecularLighting();
-	_fe3d.gfx_enablePointLighting();
-	_fe3d.gfx_enableSkyReflections(0.5f);
-	_fe3d.gfx_enableSceneReflections(0.5f);
-	_fe3d.gfx_enableLightMapping();
-	_fe3d.gfx_enableNormalMapping();
-	_fe3d.gfx_enableWaterEffects();
-
-	// Disable default skybox
-	_fe3d.skyEntity_select("");
-
-	// Load scene
-	_loadSceneFile(overwriteCamera);
-}
-
 void SceneEditor::unloadScene()
 {
 	// Disable graphics
@@ -393,30 +356,10 @@ void SceneEditor::unloadScene()
 	_fe3d.gfx_disableMotionBlur();
 	_fe3d.gfx_disableLensFlare();
 
-	// Delete environment preview entities
-	_worldEditor.unloadSkyEntities();
-	_worldEditor.unloadTerrainEntities();
-	_worldEditor.unloadWaterEntities();
-
-	// Delete placed sky entity
-	if (_fe3d.skyEntity_isExisting(_currentSkyID))
-	{
-		_fe3d.skyEntity_delete(_currentSkyID);
-	}
-
-	// Delete placed terrain entity
-	if (_fe3d.terrainEntity_isExisting(_currentTerrainID))
-	{
-		_fe3d.terrainEntity_delete(_currentTerrainID);
-	}
-
-	// Delete placed water entity
-	if (_fe3d.waterEntity_isExisting(_currentWaterID))
-	{
-		_fe3d.waterEntity_delete(_currentWaterID);
-	}
-
-	// Delete placed entities
+	// Delete entities
+	_fe3d.skyEntity_deleteAll();
+	_fe3d.terrainEntity_deleteAll();
+	_fe3d.waterEntity_deleteAll();
 	_fe3d.gameEntity_deleteAll();
 	_fe3d.billboardEntity_deleteAll();
 	_fe3d.lightEntity_deleteAll();
@@ -424,22 +367,35 @@ void SceneEditor::unloadScene()
 
 void SceneEditor::unload()
 {	
+	// Clear scenes
 	unloadScene();
 
 	// Reset variables
+	_currentSkyID = "";
+	_currentTerrainID = "";
+	_currentWaterID = "";
 	_currentPreviewModelName = "";
-	_currentPreviewBillboardName = "";
 	_selectedModelID = "";
 	_activeModelID = "";
 	_selectedModelLightnessMultiplier = 1;
 	_activeModelLightnessMultiplier = 1;
 	_dontResetSelectedModel = false;
+	_currentPreviewBillboardName = "";
+	_selectedBillboardID = "";
+	_activeBillboardID = "";
+	_selectedBillboardLightnessMultiplier = 1;
+	_activeBillboardLightnessMultiplier = 1;
+	_dontResetSelectedBillboard = false;
 	_isPlacingPointlight = false;
-	_isLoaded = false;
-	_transformation = TransformationType::TRANSLATION;
 	_selectedLightSizeMultiplier = 1;
 	_activeLightSizeMultiplier = 1;
+	_selectedLightBulbID = "";
 	_activeLightBulbID = "";
+	_currentSceneName = "";
+	_isLoadingSceneEditor = false;
+	_isChoosingScene = false;
+	_isDeletingScene = false;
+	_transformation = TransformationType::TRANSLATION;
 	_customCameraSpeed = 1.0f;
 
 	// Delete name textfields
@@ -453,4 +409,5 @@ void SceneEditor::unload()
 	_leftWindow->getScreen("place")->getScrollingList("billboardList")->deleteButtons();
 	_leftWindow->getScreen("choice")->getScrollingList("billboardList")->deleteButtons();
 	_fe3d.misc_disableAabbFrameRendering();
+	_isLoaded = false;
 }

@@ -9,6 +9,15 @@ void FabiEngine3D::waterEntity_add(const string& ID)
 	_core->_waterEntityManager.generateModel(ID);
 }
 
+void FabiEngine3D::waterEntity_deleteAll()
+{
+	// For every WATER entity
+	for (auto& entity : _core->_waterEntityManager.getEntities())
+	{
+		waterEntity_delete(entity->getID());
+	}
+}
+
 void FabiEngine3D::waterEntity_delete(const string& ID)
 {
 	// Unselect water if selected

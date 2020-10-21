@@ -71,7 +71,7 @@ void WorldEditor::_updateSkyChoosing()
 			// Hide last sky
 			if (_hoveredSkyID != "")
 			{
-				_fe3d.skyEntity_select("@@defaultSky");
+				_fe3d.skyEntity_select("@@engineBackground");
 			}
 
 			// Check if a sky name is hovered

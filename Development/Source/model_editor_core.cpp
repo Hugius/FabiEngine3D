@@ -145,12 +145,12 @@ void ModelEditor::unload()
 	_cameraDistance = 5.0f;
 	_cameraScrollingAcceleration = 0.0f;
 	_aabbTransformationSpeed = 1.0f;
-	_modelCreationEnabled = false;
-	_modelChoosingEnabled = false;
-	_modelEditingEnabled = false;
+	_isCreatingModel = false;
+	_isChoosingModel = false;
+	_isEditingModel = false;
 	_movingToggled = false;
 	_resizingToggled = false;
-	_modelRemovalEnabled = false;
+	_isDeletingModel = false;
 	_isLoaded = false;
 	_direction = TransformationDirection::X;
 

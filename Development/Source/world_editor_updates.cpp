@@ -16,7 +16,7 @@ void WorldEditor::update()
 			_fe3d.camera_disableLookat();
 
 			// Select the default sky
-			_fe3d.skyEntity_select("@@defaultSky");
+			_fe3d.skyEntity_select("@@engineBackground");
 
 			// No terrain
 			_fe3d.terrainEntity_select("");

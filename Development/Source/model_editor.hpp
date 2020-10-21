@@ -81,12 +81,12 @@ private:
 	const float _scrollWheelDivider = 15.0f;
 
 	// Booleans
-	bool _modelCreationEnabled = false;
-	bool _modelChoosingEnabled = false;
-	bool _modelEditingEnabled = false;
+	bool _isCreatingModel = false;
+	bool _isChoosingModel = false;
+	bool _isEditingModel = false;
+	bool _isDeletingModel = false;
 	bool _movingToggled = false;
 	bool _resizingToggled = false;
-	bool _modelRemovalEnabled = false;
 	bool _isLoaded = false;
 
 	// Miscellaneous

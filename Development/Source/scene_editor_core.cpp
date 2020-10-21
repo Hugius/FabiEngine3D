@@ -71,13 +71,13 @@ void SceneEditor::initializeGUI()
 	// Left-viewport: mainWindow - sceneEditorMenuModelPlace
 	screenID = "sceneEditorMenuModelPlace";
 	_leftWindow->addScreen(screenID);
-	_leftWindow->getScreen(screenID)->addScrollingList("modelList", vec2(0.0f, 0.1f), vec2(1.8f, 1.75f), vec3(0.3f), LVPC::buttonColor, LVPC::buttonHoverColor, LVPC::textColor, LVPC::textHoverColor, vec2(0.15f, 0.1f));
+	_leftWindow->getScreen(screenID)->addScrollingList("models", vec2(0.0f, 0.1f), vec2(1.8f, 1.75f), vec3(0.3f), LVPC::buttonColor, LVPC::buttonHoverColor, LVPC::textColor, LVPC::textHoverColor, vec2(0.15f, 0.1f));
 	_leftWindow->getScreen(screenID)->addButton("back", vec2(0.0f, -0.9f), vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
 	
 	// Left-viewport: mainWindow - sceneEditorMenuModelChoice
 	screenID = "sceneEditorMenuModelChoice";
 	_leftWindow->addScreen(screenID);
-	_leftWindow->getScreen(screenID)->addScrollingList("modelList", vec2(0.0f, 0.1f), vec2(1.8f, 1.75f), vec3(0.3f), LVPC::buttonColor, LVPC::buttonHoverColor, LVPC::textColor, LVPC::textHoverColor, vec2(0.15f, 0.1f));
+	_leftWindow->getScreen(screenID)->addScrollingList("models", vec2(0.0f, 0.1f), vec2(1.8f, 1.75f), vec3(0.3f), LVPC::buttonColor, LVPC::buttonHoverColor, LVPC::textColor, LVPC::textHoverColor, vec2(0.15f, 0.1f));
 	_leftWindow->getScreen(screenID)->addButton("back", vec2(0.0f, -0.9f), vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
 
 	// Left-viewport: mainWindow - sceneEditorMenuBillboard
@@ -88,15 +88,15 @@ void SceneEditor::initializeGUI()
 	_leftWindow->getScreen(screenID)->addButton("back", vec2(0.0f, -0.475f), vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
 
 	// Left-viewport: mainWindow - sceneEditorMenuBillboardPlace
-	screenID = "place";
+	screenID = "sceneEditorMenuBillboardPlace";
 	_leftWindow->addScreen(screenID);
-	_leftWindow->getScreen(screenID)->addScrollingList("billboardList", vec2(0.0f, 0.1f), vec2(1.8f, 1.75f), vec3(0.3f), LVPC::buttonColor, LVPC::buttonHoverColor, LVPC::textColor, LVPC::textHoverColor, vec2(0.15f, 0.1f));
+	_leftWindow->getScreen(screenID)->addScrollingList("billboards", vec2(0.0f, 0.1f), vec2(1.8f, 1.75f), vec3(0.3f), LVPC::buttonColor, LVPC::buttonHoverColor, LVPC::textColor, LVPC::textHoverColor, vec2(0.15f, 0.1f));
 	_leftWindow->getScreen(screenID)->addButton("back", vec2(0.0f, -0.9f), vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
 
 	// Left-viewport: mainWindow - sceneEditorMenuBillboardChoice
-	screenID = "choice";
+	screenID = "sceneEditorMenuBillboardChoice";
 	_leftWindow->addScreen(screenID);
-	_leftWindow->getScreen(screenID)->addScrollingList("billboardList", vec2(0.0f, 0.1f), vec2(1.8f, 1.75f), vec3(0.3f), LVPC::buttonColor, LVPC::buttonHoverColor, LVPC::textColor, LVPC::textHoverColor, vec2(0.15f, 0.1f));
+	_leftWindow->getScreen(screenID)->addScrollingList("billboards", vec2(0.0f, 0.1f), vec2(1.8f, 1.75f), vec3(0.3f), LVPC::buttonColor, LVPC::buttonHoverColor, LVPC::textColor, LVPC::textHoverColor, vec2(0.15f, 0.1f));
 	_leftWindow->getScreen(screenID)->addButton("back", vec2(0.0f, -0.9f), vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
 
 	// Left-viewport: mainWindow - sceneEditorMenuLighting
@@ -284,20 +284,14 @@ void SceneEditor::initializeGUI()
 
 void SceneEditor::load()
 {
-	// Disable default skybox
-	_fe3d.skyEntity_select("");
-
 	// Load environment preview entities
 	_worldEditor.loadSkyEntities();
 	_worldEditor.loadTerrainEntities();
 	_worldEditor.loadWaterEntities();
 
 	// Load lightsource billboard
-	if (!_fe3d.billboardEntity_isExisting("@@lightSource"))
-	{
-		_fe3d.billBoardEntity_add("@@lightSource", "engine\\textures\\light_source.png", _fe3d.gfx_getDirectionalLightingPosition(),
-			vec3(0.0f), vec2(0.0f), true, true, true, true);
-	}
+	_fe3d.billBoardEntity_add("@@lightSource", "engine\\textures\\light_source.png", _fe3d.gfx_getDirectionalLightingPosition(),
+		vec3(0.0f), vec2(0.0f), true, true, true, true);
 
 	// Preview model loading
 	_modelEditor.loadModels();
@@ -306,7 +300,7 @@ void SceneEditor::load()
 		// Check if there is a GAME entity present
 		if (_fe3d.gameEntity_isExisting(modelName))
 		{
-			_leftWindow->getScreen("sceneEditorMenuModelPlace")->getScrollingList("modelList")->addButton(modelName, modelName.substr(1));
+			_leftWindow->getScreen("sceneEditorMenuModelPlace")->getScrollingList("models")->addButton(modelName, modelName.substr(1));
 		}
 	}
 
@@ -317,7 +311,7 @@ void SceneEditor::load()
 		// Check if there is a BILLBOARD entity present
 		if (_fe3d.billboardEntity_isExisting(billboardName))
 		{
-			_leftWindow->getScreen("place")->getScrollingList("billboardList")->addButton(billboardName, billboardName.substr(1));
+			_leftWindow->getScreen("sceneEditorMenuBillboardPlace")->getScrollingList("billboards")->addButton(billboardName, billboardName.substr(1));
 		}
 	}
 
@@ -335,34 +329,6 @@ void SceneEditor::load()
 
 	// Miscellaneous
 	_isLoaded = true;
-}
-
-void SceneEditor::unloadScene()
-{
-	// Disable graphics
-	_fe3d.gfx_disableAmbientLighting();
-	_fe3d.gfx_disableDirectionalLighting();
-	_fe3d.gfx_disableSpecularLighting();
-	_fe3d.gfx_disablePointLighting();
-	_fe3d.gfx_disableFog();
-	_fe3d.gfx_disableSkyReflections();
-	_fe3d.gfx_disableSceneReflections();
-	_fe3d.gfx_disableLightMapping();
-	_fe3d.gfx_disableNormalMapping();
-	_fe3d.gfx_disableShadows();
-	_fe3d.gfx_disableWaterEffects();
-	_fe3d.gfx_disableSkyHDR();
-	_fe3d.gfx_disableDOF();
-	_fe3d.gfx_disableMotionBlur();
-	_fe3d.gfx_disableLensFlare();
-
-	// Delete entities
-	_fe3d.skyEntity_deleteAll();
-	_fe3d.terrainEntity_deleteAll();
-	_fe3d.waterEntity_deleteAll();
-	_fe3d.gameEntity_deleteAll();
-	_fe3d.billboardEntity_deleteAll();
-	_fe3d.lightEntity_deleteAll();
 }
 
 void SceneEditor::unload()
@@ -392,7 +358,6 @@ void SceneEditor::unload()
 	_selectedLightBulbID = "";
 	_activeLightBulbID = "";
 	_currentSceneName = "";
-	_isLoadingSceneEditor = false;
 	_isChoosingScene = false;
 	_isDeletingScene = false;
 	_transformation = TransformationType::TRANSLATION;
@@ -404,10 +369,10 @@ void SceneEditor::unload()
 	_gui->getGlobalScreen()->deleteTextfield("selectedPointlightName");
 
 	// Other
-	_leftWindow->getScreen("sceneEditorMenuModelPlace")->getScrollingList("modelList")->deleteButtons();
-	_leftWindow->getScreen("sceneEditorMenuModelChoice")->getScrollingList("modelList")->deleteButtons();
-	_leftWindow->getScreen("place")->getScrollingList("billboardList")->deleteButtons();
-	_leftWindow->getScreen("choice")->getScrollingList("billboardList")->deleteButtons();
+	_leftWindow->getScreen("sceneEditorMenuModelPlace")->getScrollingList("models")->deleteButtons();
+	_leftWindow->getScreen("sceneEditorMenuModelChoice")->getScrollingList("models")->deleteButtons();
+	_leftWindow->getScreen("sceneEditorMenuBillboardPlace")->getScrollingList("billboards")->deleteButtons();
+	_leftWindow->getScreen("sceneEditorMenuBillboardChoice")->getScrollingList("billboards")->deleteButtons();
 	_fe3d.misc_disableAabbFrameRendering();
 	_isLoaded = false;
 }

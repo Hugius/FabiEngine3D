@@ -32,7 +32,7 @@ void BillboardEditor::_updateBillboardManagement()
 				_billboardChoosingEnabled = true;
 				_billboardEditingEnabled = true;
 				for (auto& name : _billboardNames) { name = name.substr(1); }
-				_gui->getGlobalScreen()->addChoiceForm("billboardList", "Select billboard", vec2(-0.4f, 0.1f), _billboardNames);
+				_gui->getGlobalScreen()->addChoiceForm("billboards", "Select billboard", vec2(-0.4f, 0.1f), _billboardNames);
 				for (auto& name : _billboardNames) { name = "@" + name; }
 			}
 			else if (screen->getButton("deleteBillboard")->isHovered()) // Delete billboard button
@@ -40,7 +40,7 @@ void BillboardEditor::_updateBillboardManagement()
 				_billboardChoosingEnabled = true;
 				_billboardRemovalEnabled = true;
 				for (auto& name : _billboardNames) { name = name.substr(1); }
-				_gui->getGlobalScreen()->addChoiceForm("billboardList", "Select billboard", vec2(-0.4f, 0.1f), _billboardNames);
+				_gui->getGlobalScreen()->addChoiceForm("billboards", "Select billboard", vec2(-0.4f, 0.1f), _billboardNames);
 				for (auto& name : _billboardNames) { name = "@" + name; }
 			}
 			else if (screen->getButton("back")->isHovered()) // Back button
@@ -119,7 +119,7 @@ void BillboardEditor::_updateBillboardChoosing()
 		if (_billboardChoosingEnabled)
 		{
 			// Get selected button ID
-			string selectedButtonID = _gui->getGlobalScreen()->getSelectedChoiceFormButtonID("billboardList");
+			string selectedButtonID = _gui->getGlobalScreen()->getSelectedChoiceFormButtonID("billboards");
 
 			// Hide last billboard
 			if (_hoveredBillboardID != "")
@@ -144,7 +144,7 @@ void BillboardEditor::_updateBillboardChoosing()
 						_currentBillboardID.substr(1), 0.025f);
 					_fe3d.textEntity_show(_gui->getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID());
 					_fe3d.billboardEntity_show(_currentBillboardID);
-					_gui->getGlobalScreen()->removeChoiceForm("billboardList");
+					_gui->getGlobalScreen()->removeChoiceForm("billboards");
 					_billboardChoosingEnabled = false;
 				}
 				else
@@ -153,12 +153,12 @@ void BillboardEditor::_updateBillboardChoosing()
 					_hoveredBillboardID = "@" + selectedButtonID;
 				}
 			}
-			else if (_gui->getGlobalScreen()->isChoiceFormCancelled("billboardList")) // Cancelled choosing
+			else if (_gui->getGlobalScreen()->isChoiceFormCancelled("billboards")) // Cancelled choosing
 			{
 				_billboardChoosingEnabled = false;
 				_billboardEditingEnabled = false;
 				_billboardRemovalEnabled = false;
-				_gui->getGlobalScreen()->removeChoiceForm("billboardList");
+				_gui->getGlobalScreen()->removeChoiceForm("billboards");
 			}
 			else // Nothing hovered
 			{

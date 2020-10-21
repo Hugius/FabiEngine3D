@@ -21,6 +21,7 @@ void FabiEngine3D::billBoardEntity_add(const string& ID, const string& text, con
 
 void FabiEngine3D::billboardEntity_deleteAll()
 {
+	// For every BILLBOARD entity
 	for (auto& entity : _core->_billboardEntityManager.getEntities())
 	{
 		billboardEntity_delete(entity->getID());

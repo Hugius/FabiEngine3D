@@ -163,7 +163,7 @@ void TopViewportController::_updateGameManagement()
 			{
 				// Reset everything and load main menu again
 				SCRIPT_EXECUTOR.unload();
-				_fe3d.skyEntity_select("@@defaultSky");
+				_fe3d.skyEntity_select("@@engineBackground");
 			}
 		}
 

@@ -187,7 +187,7 @@ void SceneEditor::loadScene(const string& fileName)
 				if (modelID[0] == '@')
 				{
 					// Check if loading for scene editor
-					if (_isLoadingSceneEditor)
+					if (_isLoaded)
 					{
 						continue;
 					}
@@ -375,6 +375,12 @@ void SceneEditor::loadScene(const string& fileName)
 					directionalLightingColor.r >> directionalLightingColor.g >> directionalLightingColor.b >>
 					directionalLightingIntensity >> billboardSize;
 
+				// Delete preview billboard
+				if (_isLoaded)
+				{
+					_fe3d.billboardEntity_delete("@@lightSource");
+				}
+
 				// Apply
 				_fe3d.gfx_enableDirectionalLighting(directionalLightingPosition, directionalLightingColor, directionalLightingIntensity);
 				_fe3d.billBoardEntity_add("@@lightSource", "engine\\textures\\light_source.png", directionalLightingPosition, vec3(0.0f), vec2(billboardSize), true, true, true, true);
@@ -408,7 +414,7 @@ void SceneEditor::loadScene(const string& fileName)
 			}
 			else if (entityType == "EDITOR_POSITION")
 			{
-				if (_isLoadingSceneEditor)
+				if (_isLoaded)
 				{
 					vec3 position;
 					iss >> position.x >> position.y >> position.z;
@@ -417,7 +423,7 @@ void SceneEditor::loadScene(const string& fileName)
 			}
 			else if (entityType == "EDITOR_YAW")
 			{
-				if (_isLoadingSceneEditor)
+				if (_isLoaded)
 				{
 					float yaw;
 					iss >> yaw;
@@ -426,7 +432,7 @@ void SceneEditor::loadScene(const string& fileName)
 			}
 			else if (entityType == "EDITOR_PITCH")
 			{
-				if (_isLoadingSceneEditor)
+				if (_isLoaded)
 				{
 					float pitch;
 					iss >> pitch;
@@ -487,5 +493,104 @@ void SceneEditor::loadScene(const string& fileName)
 
 		// Logging
 		_fe3d.logger_throwInfo("Scene data from project \"" + _currentProjectName + "\" loaded!");
+	}
+}
+
+void SceneEditor::unloadScene()
+{
+	// Disable graphics
+	_fe3d.gfx_disableAmbientLighting();
+	_fe3d.gfx_disableDirectionalLighting();
+	_fe3d.gfx_disableSpecularLighting();
+	_fe3d.gfx_disablePointLighting();
+	_fe3d.gfx_disableFog();
+	_fe3d.gfx_disableSkyReflections();
+	_fe3d.gfx_disableSceneReflections();
+	_fe3d.gfx_disableLightMapping();
+	_fe3d.gfx_disableNormalMapping();
+	_fe3d.gfx_disableShadows();
+	_fe3d.gfx_disableWaterEffects();
+	_fe3d.gfx_disableSkyHDR();
+	_fe3d.gfx_disableDOF();
+	_fe3d.gfx_disableMotionBlur();
+	_fe3d.gfx_disableLensFlare();
+
+	if (_isLoaded) // Currently in scene editor
+	{
+		// Delete sky entities
+		for (auto& ID : _fe3d.skyEntity_getAllIDs())
+		{
+			if (ID[0] != '@')
+			{
+				_fe3d.skyEntity_delete(ID);
+			}
+		}
+
+		// Delete TERRAIN entities
+		for (auto& ID : _fe3d.terrainEntity_getAllIDs())
+		{
+			if (ID[0] != '@')
+			{
+				_fe3d.terrainEntity_delete(ID);
+			}
+		}
+
+		// Delete WATER entities
+		for (auto& ID : _fe3d.waterEntity_getAllIDs())
+		{
+			if (ID[0] != '@')
+			{
+				_fe3d.waterEntity_delete(ID);
+			}
+		}
+
+		// Delete GAME entities
+		for (auto& ID : _fe3d.gameEntity_getAllIDs())
+		{
+			if (ID[0] != '@')
+			{
+				_fe3d.gameEntity_delete(ID);
+			}
+		}
+
+		// Delete BILLBOARD entities
+		for (auto& ID : _fe3d.billboardEntity_getAllIDs())
+		{
+			if (ID[0] != '@')
+			{
+				_fe3d.billboardEntity_delete(ID);
+			}
+			else if(ID == "@@lightSource") // Hide special "preview" entity
+			{
+				_fe3d.billboardEntity_hide(ID);
+			}
+		}
+
+		// Delete LIGHT entities
+		for (auto& ID : _fe3d.lightEntity_getAllIDs())
+		{
+			if (ID[0] != '@')
+			{
+				_fe3d.lightEntity_delete(ID);
+			}
+		}
+	}
+	else // Playing game
+	{
+		// Delete all sky entities except the engine background
+		for (auto& ID : _fe3d.skyEntity_getAllIDs())
+		{
+			if (ID != "@@engineBackground")
+			{
+				_fe3d.skyEntity_delete(ID);
+			}
+		}
+
+		// Delete all other entities
+		_fe3d.terrainEntity_deleteAll();
+		_fe3d.waterEntity_deleteAll();
+		_fe3d.gameEntity_deleteAll();
+		_fe3d.billboardEntity_deleteAll();
+		_fe3d.lightEntity_deleteAll();
 	}
 }

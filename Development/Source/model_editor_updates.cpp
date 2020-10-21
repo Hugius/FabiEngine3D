@@ -25,22 +25,22 @@ void ModelEditor::_updateManagementScreen()
 			if (screen->getButton("addModel")->isHovered()) // Add model button
 			{
 				_gui->getGlobalScreen()->addValueForm("newModelName", "New model name", "", vec2(0.0f), vec2(0.5f, 0.1f));
-				_modelCreationEnabled = true;
+				_isCreatingModel = true;
 			}
 			else if (screen->getButton("editModel")->isHovered()) // Edit model button
 			{
-				_modelChoosingEnabled = true;
-				_modelEditingEnabled = true;
+				_isChoosingModel = true;
+				_isEditingModel = true;
 				for (auto& name : _modelNames) { name = name.substr(1); }
-				_gui->getGlobalScreen()->addChoiceForm("modelList", "Select model", vec2(-0.4f, 0.1f), _modelNames);
+				_gui->getGlobalScreen()->addChoiceForm("models", "Select model", vec2(-0.4f, 0.1f), _modelNames);
 				for (auto& name : _modelNames) { name = "@" + name; }
 			}
 			else if (screen->getButton("deleteModel")->isHovered()) // Delete model button
 			{
-				_modelChoosingEnabled = true;
-				_modelRemovalEnabled = true;
+				_isChoosingModel = true;
+				_isDeletingModel = true;
 				for (auto& name : _modelNames) { name = name.substr(1); }
-				_gui->getGlobalScreen()->addChoiceForm("modelList", "Select model", vec2(-0.4f, 0.1f), _modelNames);
+				_gui->getGlobalScreen()->addChoiceForm("models", "Select model", vec2(-0.4f, 0.1f), _modelNames);
 				for (auto& name : _modelNames) { name = "@" + name; }
 			}
 			else if (screen->getButton("back")->isHovered()) // Back button
@@ -66,7 +66,7 @@ void ModelEditor::_updateManagementScreen()
 
 void ModelEditor::_updateEditingScreen()
 {
-	if (_modelEditingEnabled && _currentModelID != "")
+	if (_isEditingModel && _currentModelID != "")
 	{
 		auto screen = _gui->getViewport("left")->getWindow("main")->getScreen("modelEditorMenuChoice");
 		
@@ -111,7 +111,7 @@ void ModelEditor::_updateEditingScreen()
 					}
 
 					// Reset variables and go back to main screen
-					_modelEditingEnabled = false;
+					_isEditingModel = false;
 					_currentModelID = "";
 					_gui->getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuMain");
 					_fe3d.textEntity_hide(_gui->getGlobalScreen()->getTextfield("selectedModelName")->getEntityID());
@@ -162,7 +162,7 @@ void ModelEditor::_updateModelCreation()
 {
 	if (_isLoaded)
 	{
-		if (_modelCreationEnabled)
+		if (_isCreatingModel)
 		{
 			string newModelName;
 
@@ -185,8 +185,8 @@ void ModelEditor::_updateModelCreation()
 						_fe3d.textEntity_setTextContent(_gui->getGlobalScreen()->getTextfield("selectedModelName")->getEntityID(),
 							"Model: " + _currentModelID.substr(1), 0.025f);
 						_fe3d.textEntity_show(_gui->getGlobalScreen()->getTextfield("selectedModelName")->getEntityID());
-						_modelCreationEnabled = false;
-						_modelEditingEnabled = true;
+						_isCreatingModel = false;
+						_isEditingModel = true;
 					}
 				}
 				else
@@ -202,10 +202,10 @@ void ModelEditor::_updateModelChoosing()
 {
 	if (_isLoaded)
 	{
-		if (_modelChoosingEnabled)
+		if (_isChoosingModel)
 		{
 			// Get selected button ID
-			string selectedButtonID = _gui->getGlobalScreen()->getSelectedChoiceFormButtonID("modelList");
+			string selectedButtonID = _gui->getGlobalScreen()->getSelectedChoiceFormButtonID("models");
 
 			// Hide last model
 			if (_hoveredModelID != "")
@@ -227,7 +227,7 @@ void ModelEditor::_updateModelChoosing()
 					_hoveredModelID = "";
 
 					// Go to editor screen & show model name
-					if (_modelEditingEnabled)
+					if (_isEditingModel)
 					{
 						_gui->getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
 						_fe3d.textEntity_setTextContent(_gui->getGlobalScreen()->getTextfield("selectedModelName")->getEntityID(),
@@ -242,8 +242,8 @@ void ModelEditor::_updateModelChoosing()
 					}
 
 					// Miscellaneous
-					_gui->getGlobalScreen()->removeChoiceForm("modelList");
-					_modelChoosingEnabled = false;
+					_gui->getGlobalScreen()->removeChoiceForm("models");
+					_isChoosingModel = false;
 				}
 				else
 				{
@@ -251,12 +251,12 @@ void ModelEditor::_updateModelChoosing()
 					_hoveredModelID = "@" + selectedButtonID;
 				}
 			}
-			else if (_gui->getGlobalScreen()->isChoiceFormCancelled("modelList")) // Cancelled choosing
+			else if (_gui->getGlobalScreen()->isChoiceFormCancelled("models")) // Cancelled choosing
 			{
-				_modelChoosingEnabled = false;
-				_modelEditingEnabled = false;
-				_modelRemovalEnabled = false;
-				_gui->getGlobalScreen()->removeChoiceForm("modelList");
+				_isChoosingModel = false;
+				_isEditingModel = false;
+				_isDeletingModel = false;
+				_gui->getGlobalScreen()->removeChoiceForm("models");
 			}
 			else // Nothing hovered
 			{
@@ -280,11 +280,11 @@ void ModelEditor::_updateModelRemoval()
 {
 	if (_isLoaded)
 	{
-		if (_modelRemovalEnabled && _currentModelID != "")
+		if (_isDeletingModel && _currentModelID != "")
 		{
-			_gui->getGlobalScreen()->addAnswerForm("removeModel", "Are you sure?", vec2(0.0f));
+			_gui->getGlobalScreen()->addAnswerForm("deleteModel", "Are you sure?", vec2(0.0f));
 
-			if (_gui->getGlobalScreen()->isAnswerFormConfirmed("removeModel"))
+			if (_gui->getGlobalScreen()->isAnswerFormConfirmed("deleteModel"))
 			{
 				// Delete entity
 				if (_fe3d.gameEntity_isExisting(_currentModelID))
@@ -294,12 +294,12 @@ void ModelEditor::_updateModelRemoval()
 
 				// Delete from name record
 				_modelNames.erase(std::remove(_modelNames.begin(), _modelNames.end(), _currentModelID), _modelNames.end());
-				_modelRemovalEnabled = false;
+				_isDeletingModel = false;
 				_currentModelID = "";
 			}
-			else if (_gui->getGlobalScreen()->isAnswerFormCancelled("removeModel"))
+			else if (_gui->getGlobalScreen()->isAnswerFormCancelled("deleteModel"))
 			{
-				_modelRemovalEnabled = false;
+				_isDeletingModel = false;
 				_currentModelID = "";
 			}
 		}

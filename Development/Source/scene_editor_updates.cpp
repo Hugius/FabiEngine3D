@@ -79,34 +79,66 @@ void SceneEditor::_updateMainMenu()
 			}
 		}
 
-		// Update scene choosing or deleting
+		// Update scene creation
+		string newSceneName;
+		if (_gui->getGlobalScreen()->checkValueForm("newSceneName", newSceneName, {}))
+		{
+			auto sceneNames = _loadSceneNames();
+
+			// If scene name not existing yet
+			if (std::find(sceneNames.begin(), sceneNames.end(), newSceneName) == sceneNames.end())
+			{
+				_currentSceneName = newSceneName;
+				_leftWindow->setActiveScreen("sceneEditorMenuChoice");
+			}
+			else
+			{
+				_fe3d.logger_throwWarning("Scene name \"" + newSceneName + "\" already exists!");
+			}
+		}
+
+		// Update scene choice
 		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
 			string selectedButtonID = _gui->getGlobalScreen()->getSelectedChoiceFormButtonID("sceneList");
 			if (selectedButtonID != "")
 			{
-				if (_isChoosingScene) // Choosing
-				{
-					_currentSceneName = selectedButtonID;
+				_currentSceneName = selectedButtonID;
 
-					// Load selected scene
-					_isLoadingSceneEditor = true;
+				// Load selected scene for editing
+				if (_isChoosingScene)
+				{
 					loadScene(_currentSceneName);
-					_isLoadingSceneEditor = false;
-					_isChoosingScene = false;
 					_leftWindow->setActiveScreen("sceneEditorMenuChoice");
 				}
-				else if (_isDeletingScene) // Deleting
+				else if (_isDeletingScene) // Prepare deletion confirmation
 				{
-					_deleteSceneFile(selectedButtonID);
-					_isDeletingScene = false;
+					_gui->getGlobalScreen()->addAnswerForm("deleteScene", "Are you sure?", vec2(0.0f));
 				}
 
+				// Miscellaneous
 				_gui->getGlobalScreen()->removeChoiceForm("sceneList");
+				_isChoosingScene = false;
 			}
 			else if (_gui->getGlobalScreen()->isChoiceFormCancelled("sceneList"))
 			{
 				_gui->getGlobalScreen()->removeChoiceForm("sceneList");
+			}
+		}
+
+		// Update scene deletion if chosen
+		if (_isDeletingScene && _currentSceneName != "")
+		{
+			if (_gui->getGlobalScreen()->isAnswerFormConfirmed("deleteScene")) // Confirmed
+			{
+				_deleteSceneFile(_currentSceneName);
+				_isDeletingScene = false;
+				_currentSceneName = "";
+			}
+			else if (_gui->getGlobalScreen()->isAnswerFormCancelled("deleteScene")) // Cancelled
+			{
+				_isDeletingScene = false;
+				_currentSceneName = "";
 			}
 		}
 	}
@@ -154,10 +186,15 @@ void SceneEditor::_updateChoiceMenu()
 			{
 				save();
 				unloadScene();
+				_fe3d.skyEntity_select("@@engineBackground");
+				_currentSceneName = "";
 				_leftWindow->setActiveScreen("sceneEditorMenuMain");
 			}
 			else if (_gui->getGlobalScreen()->isAnswerFormCancelled("exitSceneEditor"))
 			{
+				unloadScene();
+				_fe3d.skyEntity_select("@@engineBackground");
+				_currentSceneName = "";
 				_leftWindow->setActiveScreen("sceneEditorMenuMain");
 			}
 		}
@@ -166,7 +203,7 @@ void SceneEditor::_updateChoiceMenu()
 
 void SceneEditor::_updateCamera()
 {
-	if (_isLoaded)
+	if (_isLoaded && _currentSceneName != "")
 	{
 		// Camera looking
 		if (_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_RIGHT) && !_gui->getGlobalScreen()->isFocused())
@@ -227,5 +264,11 @@ void SceneEditor::_updateCamera()
 				_fe3d.camera_translateFollowZ(-_customCameraSpeed);
 			}
 		}
+	}
+	else
+	{
+		// Reset camera view
+		_fe3d.camera_setYaw(0.0f);
+		_fe3d.camera_setPitch(0.0f);
 	}
 }

@@ -162,7 +162,6 @@ private:
 	string _currentProjectName = "";
 	string _currentSceneName = "";
 	bool _isLoaded = false;
-	bool _isLoadingSceneEditor = false;
 	bool _isChoosingScene = false;
 	bool _isDeletingScene = false;
 	TransformationType _transformation = TransformationType::TRANSLATION;

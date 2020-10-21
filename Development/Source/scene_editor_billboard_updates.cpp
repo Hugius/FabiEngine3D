@@ -18,7 +18,7 @@ void SceneEditor::_updateMainBillboardMenu()
 					_leftWindow->setActiveScreen("choice");
 
 					// Clear all buttons from scrolling list
-					_leftWindow->getScreen("choice")->getScrollingList("billboardList")->deleteButtons();
+					_leftWindow->getScreen("sceneEditorMenuBillboardChoice")->getScrollingList("billboards")->deleteButtons();
 
 					// Add every placed billboard name
 					for (auto& billboardID : _fe3d.billboardEntity_getAllIDs())
@@ -30,7 +30,7 @@ void SceneEditor::_updateMainBillboardMenu()
 							string billboardName = billboardID.substr(billboardID.find('@') + 1);
 
 							// Add new button
-							_leftWindow->getScreen("choice")->getScrollingList("billboardList")->addButton(billboardID, billboardName);
+							_leftWindow->getScreen("sceneEditorMenuBillboardChoice")->getScrollingList("billboards")->addButton(billboardID, billboardName);
 						}
 					}
 				}
@@ -48,9 +48,9 @@ void SceneEditor::_updateBilboardPlacingMenu()
 	if (_isLoaded)
 	{
 		// Placing screen
-		if (_leftWindow->getActiveScreen()->getID() == "place")
+		if (_leftWindow->getActiveScreen()->getID() == "sceneEditorMenuBillboardPlace")
 		{
-			auto screen = _leftWindow->getScreen("place");
+			auto screen = _leftWindow->getScreen("sceneEditorMenuBillboardPlace");
 			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
 				// Loop over every created billboard
@@ -60,7 +60,7 @@ void SceneEditor::_updateBilboardPlacingMenu()
 					if (_fe3d.billboardEntity_isExisting(billboardName))
 					{
 						// Check if button is hovered
-						if (screen->getScrollingList("billboardList")->getButton(billboardName)->isHovered())
+						if (screen->getScrollingList("billboards")->getButton(billboardName)->isHovered())
 						{
 							// Hide old preview billboard
 							if (_currentPreviewBillboardName != "")
@@ -96,16 +96,16 @@ void SceneEditor::_updateBillboardChoosingMenu()
 		// Choosing screen
 		if (_leftWindow->getActiveScreen()->getID() == "choice")
 		{
-			auto screen = _leftWindow->getScreen("choice");
+			auto screen = _leftWindow->getScreen("sceneEditorMenuBillboardChoice");
 
 			// Remove deleted billboards from the scrollingList buttons
-			for (auto& button : _leftWindow->getScreen("choice")->getScrollingList("billboardList")->getButtons())
+			for (auto& button : _leftWindow->getScreen("sceneEditorMenuBillboardChoice")->getScrollingList("billboards")->getButtons())
 			{
 				// Check if billboard is still existing
 				if (!_fe3d.billboardEntity_isExisting(button->getID()))
 				{
 					// Delete button
-					_leftWindow->getScreen("choice")->getScrollingList("billboardList")->deleteButton(button->getID());
+					_leftWindow->getScreen("sceneEditorMenuBillboardChoice")->getScrollingList("billboards")->deleteButton(button->getID());
 					break;
 				}
 			}
@@ -117,7 +117,7 @@ void SceneEditor::_updateBillboardChoosingMenu()
 				if (billboardName[0] != '@')
 				{
 					// Check if button is hovered
-					if (screen->getScrollingList("billboardList")->getButton(billboardName)->isHovered())
+					if (screen->getScrollingList("billboards")->getButton(billboardName)->isHovered())
 					{
 						// Check if LMB pressed (activation)
 						if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))

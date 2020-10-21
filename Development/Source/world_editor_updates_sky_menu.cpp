@@ -62,7 +62,7 @@ void WorldEditor::_updateSkyMenuChoice()
 			{
 				_leftWindow->setActiveScreen("skyEditorMenuMain");
 				_fe3d.textEntity_hide(_gui->getGlobalScreen()->getTextfield("selectedSkyName")->getEntityID());
-				_fe3d.skyEntity_select("@@defaultSky");
+				_fe3d.skyEntity_select("@@engineBackground");
 				_currentSkyID = "";
 				_skyEditingEnabled = false;
 			}

@@ -43,9 +43,20 @@ void EngineController::_initializeMiscellaneous()
 	gfx_enableBloom(1.0f, 0.0f, 10);
 
 	// Default camera
-	float mouseSpeed = camera_getMouseSensitivity();
 	camera_load(90.0f, 0.1f, 100.0f, vec3(0.0f));
-	camera_setMouseSensitivity(mouseSpeed);
+
+	// Default cube map
+	string textureFolderPath = "engine\\textures\\";
+	skyEntity_add("@@engineBackground");
+	skyEntity_setDiffuseMaps("@@engineBackground", {
+		textureFolderPath + "default_right.png",
+		textureFolderPath + "default_left.png",
+		textureFolderPath + "default_top.png",
+		textureFolderPath + "default_bottom.png",
+		textureFolderPath + "default_front.png",
+		textureFolderPath + "default_back.png" });
+	skyEntity_select("@@engineBackground");
+	skyEntity_setLightness("@@engineBackground", 0.65f);
 
 	// Custom cursor texture
 	guiEntity_add("@@cursor", "engine\\textures\\cursor_default.png", vec2(0.0f), 0.0f, vec2(0.075f, 0.075f * misc_getAspectRatio()), true);
@@ -60,21 +71,8 @@ void EngineController::_updateMiscellaneous()
 	string activeScreen = _gui->getViewport("left")->getWindow("main")->getActiveScreen()->getID();
 	if (activeScreen == "main" && lastScreen != "main")
 	{
-		// Default camera
 		camera_load(90.0f, 0.1f, 100.0f, vec3(0.0f));
-
-		// Default cube map
-		string textureFolderPath = "engine\\textures\\";
-		skyEntity_add("@@defaultSky");
-		skyEntity_setDiffuseMaps("@@defaultSky", {
-			textureFolderPath + "default_right.png",
-			textureFolderPath + "default_left.png",
-			textureFolderPath + "default_top.png",
-			textureFolderPath + "default_bottom.png",
-			textureFolderPath + "default_front.png",
-			textureFolderPath + "default_back.png" });
-		skyEntity_select("@@defaultSky");
-		skyEntity_setLightness("@@defaultSky", 0.65f);
+		skyEntity_select("@@engineBackground");
 	}
 	lastScreen = activeScreen;
 

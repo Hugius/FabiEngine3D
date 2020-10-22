@@ -139,6 +139,17 @@ void RenderEngine::renderScene(EntityBus * entityBus, CameraManager& camera)
 		}
 		_timer.stop();
 
+		// Postprocessing captures
+		_timer.start("postProcessing");
+		_captureBloom();
+		_captureDofBlur();
+		_captureLensFlare();
+		_capturePostProcessing();
+		_captureMotionBlur(camera);
+
+		// 2D rendering
+		glClear(GL_COLOR_BUFFER_BIT);
+
 		// Render debug screens
 		if (_renderBus.isDebugRenderingEnabled())
 		{
@@ -146,25 +157,14 @@ void RenderEngine::renderScene(EntityBus * entityBus, CameraManager& camera)
 			_renderDebugScreens();
 			glViewport(0, 0, Config::getInst().getWindowWidth(), Config::getInst().getWindowHeight());
 		}
-		else // Render 3D scene + postprocessing
+		else // Render final postprocessed texture
 		{
-			// Post captures
-			_timer.start("postProcessing");
-			_captureBloom();
-			_captureDofBlur();
-			_captureLensFlare();
-			_capturePostProcessing();
-			_captureMotionBlur(camera);
-
-			// 2D rendering
-			glClear(GL_COLOR_BUFFER_BIT);
-
-			// Render final postprocessed texture
 			glViewport(Config::getInst().getVpPos().x, Config::getInst().getVpPos().y, Config::getInst().getVpSize().x, Config::getInst().getVpSize().y +0);
 			_renderFinalSceneTexture();
 			glViewport(0, 0, Config::getInst().getWindowWidth(), Config::getInst().getWindowHeight());
-			_timer.stop();
+			
 		}
+		_timer.stop();
 
 		// Render GUI entities
 		_timer.start("guiEntityRender");

@@ -85,6 +85,11 @@ void BillboardEntity::setTransparent(bool val)
 	_isTransparent = val;
 }
 
+void BillboardEntity::setDepthMapIncluded(bool val)
+{
+	_isDepthMapIncluded = val;
+}
+
 void BillboardEntity::playSpriteAnimation(int maxAnimationRepeats)
 {
 	_hasSpriteAnimation = true;
@@ -276,4 +281,9 @@ const bool BillboardEntity::isCameraFacingX() const
 const bool BillboardEntity::isCameraFacingY() const
 {
 	return _isCameraFacingY;
+}
+
+const bool BillboardEntity::isDepthMapIncluded() const
+{
+	return _isDepthMapIncluded;
 }

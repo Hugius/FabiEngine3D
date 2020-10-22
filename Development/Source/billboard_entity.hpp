@@ -23,6 +23,8 @@ public:
 	// Setters
 	void setCameraFacingX(bool val);
 	void setCameraFacingY(bool val);
+	void setTransparent(bool val);
+	void setDepthMapIncluded(bool val);
 	void setDiffuseMap(GLuint val);
 	void setTranslation(vec3 val);
 	void setInitialRotation(vec3 val);
@@ -32,7 +34,6 @@ public:
 	void setTextContent(const string& text);
 	void setFontPath(const string& fontPath);
 	void setDiffuseMapPath(const string& diffuseMapPath);
-	void setTransparent(bool val);
 	void playSpriteAnimation(int maxAnimationRepeats);
 	void stopSpriteAnimation();
 	void setSpriteRowIndex(int val);
@@ -73,6 +74,7 @@ public:
 	const bool hasSpriteAnimation() const;
 	const bool isCameraFacingX() const;
 	const bool isCameraFacingY() const;
+	const bool isDepthMapIncluded() const;
 
 private:
 	mat4 _modelMatrix = mat4(1.0f);
@@ -106,4 +108,5 @@ private:
 	bool _hasSpriteAnimation = false;
 	bool _isCameraFacingX	 = false;
 	bool _isCameraFacingY	 = false;
+	bool _isDepthMapIncluded = true;
 };

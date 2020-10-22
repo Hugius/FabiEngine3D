@@ -201,7 +201,6 @@ void RenderEngine::_renderDebugScreens()
 	shadowSurface.load("shadowSurface");
 	shadowSurface.addOglBuffer(new OpenGLBuffer(-0.66666f, 0.0f, 0.66666f, 0.66666f, true));
 	shadowSurface.setMirroredVertically(true);
-	shadowSurface.setDepthEntity(true);
 
 	// Reflection scene
 	GuiEntity reflectionSurface;

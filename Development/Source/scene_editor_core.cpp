@@ -292,6 +292,7 @@ void SceneEditor::load()
 	// Load lightsource billboard
 	_fe3d.billBoardEntity_add("@@lightSource", "engine\\textures\\light_source.png", _fe3d.gfx_getDirectionalLightingPosition(),
 		vec3(0.0f), vec2(0.0f), true, true, true, true);
+	_fe3d.billboardEntity_setDepthMapIncluded("@@lightSource", false);
 
 	// Preview model loading
 	_modelEditor.loadModels();

@@ -20,7 +20,7 @@ void PostRenderer::bind()
 	_shader.uploadUniform("u_flareSourcePositionClipspace", _renderBus.getFlareSourcePositionClipspace());
 	_shader.uploadUniform("u_flareSourcePosition", _renderBus.getFlareSourcePosition());
 	_shader.uploadUniform("u_cameraPosition", _renderBus.getCameraPosition());
-	
+
 	// Blending
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);

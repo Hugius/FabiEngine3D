@@ -215,6 +215,11 @@ void FabiEngine3D::billboardEntity_setCameraFacingY(const string& ID, bool enabl
 	_core->_billboardEntityManager.getEntity(ID)->setCameraFacingY(enabled);
 }
 
+void FabiEngine3D::billboardEntity_setDepthMapIncluded(const string& ID, bool enabled)
+{
+	_core->_billboardEntityManager.getEntity(ID)->setDepthMapIncluded(enabled);
+}
+
 void FabiEngine3D::billboardEntity_setMaxY(const string& ID, float y)
 {
 	_core->_billboardEntityManager.getEntity(ID)->setMaxY(y);
@@ -233,6 +238,11 @@ bool FabiEngine3D::billboardEntity_isFacingCameraX(const string& ID)
 bool FabiEngine3D::billboardEntity_isFacingCameraY(const string& ID)
 {
 	return _core->_billboardEntityManager.getEntity(ID)->isCameraFacingY();
+}
+
+bool FabiEngine3D::billboardEntity_isDepthMapIncluded(const string& ID)
+{
+	return _core->_billboardEntityManager.getEntity(ID)->isDepthMapIncluded();
 }
 
 void FabiEngine3D::billBoardEntity_setFont(const string& ID, const string& fontPath)

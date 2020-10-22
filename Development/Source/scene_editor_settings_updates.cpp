@@ -28,7 +28,7 @@ void SceneEditor::_updateMainSettingsMenu()
 				}
 				else if (screen->getButton("back")->isHovered())
 				{
-					_leftWindow->setActiveScreen("sceneEditorMenuMain");
+					_leftWindow->setActiveScreen("sceneEditorMenuChoice");
 				}
 			}
 

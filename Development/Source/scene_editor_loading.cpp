@@ -384,6 +384,7 @@ void SceneEditor::loadScene(const string& fileName)
 				// Apply
 				_fe3d.gfx_enableDirectionalLighting(directionalLightingPosition, directionalLightingColor, directionalLightingIntensity);
 				_fe3d.billBoardEntity_add("@@lightSource", "engine\\textures\\light_source.png", directionalLightingPosition, vec3(0.0f), vec2(billboardSize), true, true, true, true);
+				_fe3d.billboardEntity_setDepthMapIncluded("@@lightSource", false);
 			}
 			else if (entityType == "POINT_LIGHT")
 			{

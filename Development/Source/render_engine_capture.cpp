@@ -281,7 +281,11 @@ void RenderEngine::_captureSceneDepth()
 		// Render BILLBOARD entities
 		for (auto& entity : _entityBus->getBillboardEntities())
 		{
-			_depthRenderer.render(entity);
+			// Check if must be included in depth map
+			if (entity->isDepthMapIncluded())
+			{
+				_depthRenderer.render(entity);
+			}
 		}
 
 		// Render AABB entities

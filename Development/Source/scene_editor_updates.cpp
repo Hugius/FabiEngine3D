@@ -203,72 +203,75 @@ void SceneEditor::_updateChoiceMenu()
 
 void SceneEditor::_updateCamera()
 {
-	if (_isLoaded && _currentSceneName != "")
+	if (_isLoaded)
 	{
-		// Camera looking
-		if (_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_RIGHT) && !_gui->getGlobalScreen()->isFocused())
+		if (_currentSceneName != "")
 		{
-			if (_fe3d.misc_isMouseInsideViewport())
+			// Camera looking
+			if (_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_RIGHT) && !_gui->getGlobalScreen()->isFocused())
 			{
-				_fe3d.camera_enableFirstPersonView();
-				_fe3d.camera_disableLookat();
+				if (_fe3d.misc_isMouseInsideViewport())
+				{
+					_fe3d.camera_enableFirstPersonView();
+					_fe3d.camera_disableLookat();
+				}
+
+				// Disable cursor while in FPS mode
+				if (_fe3d.camera_isFirstPersonViewEnabled())
+				{
+					_fe3d.guiEntity_hide("@@cursor");
+				}
+			}
+			else
+			{
+				_fe3d.camera_disableFirstPersonView();
+
+				// Cannot show cursor if outside of engine window
+				if (_fe3d.misc_isMouseInsideWindow())
+				{
+					_fe3d.guiEntity_show("@@cursor");
+				}
 			}
 
-			// Disable cursor while in FPS mode
-			if (_fe3d.camera_isFirstPersonViewEnabled())
+			// Camera movement
+			if (!_gui->getGlobalScreen()->isFocused())
 			{
-				_fe3d.guiEntity_hide("@@cursor");
+				// X movement
+				if (_fe3d.input_getKeyDown(InputType::KEY_A))
+				{
+					_fe3d.camera_translateFollowX(-_customCameraSpeed);
+				}
+				else if (_fe3d.input_getKeyDown(InputType::KEY_D))
+				{
+					_fe3d.camera_translateFollowX(_customCameraSpeed);
+				}
+
+				// Y movement
+				if (_fe3d.input_getKeyDown(InputType::KEY_SPACE))
+				{
+					_fe3d.camera_translate(vec3(0.0f, _customCameraSpeed / 50.0f, 0.0f));
+				}
+				else if (_fe3d.input_getKeyDown(InputType::KEY_LSHIFT))
+				{
+					_fe3d.camera_translate(vec3(0.0f, -(_customCameraSpeed / 50.0f), 0.0f));
+				}
+
+				// Z movement
+				if (_fe3d.input_getKeyDown(InputType::KEY_W))
+				{
+					_fe3d.camera_translateFollowZ(_customCameraSpeed);
+				}
+				else if (_fe3d.input_getKeyDown(InputType::KEY_S))
+				{
+					_fe3d.camera_translateFollowZ(-_customCameraSpeed);
+				}
 			}
 		}
 		else
 		{
-			_fe3d.camera_disableFirstPersonView();
-
-			// Cannot show cursor if outside of engine window
-			if (_fe3d.misc_isMouseInsideWindow())
-			{
-				_fe3d.guiEntity_show("@@cursor");
-			}
+			// Reset camera view
+			_fe3d.camera_setYaw(0.0f);
+			_fe3d.camera_setPitch(0.0f);
 		}
-
-		// Camera movement
-		if (!_gui->getGlobalScreen()->isFocused())
-		{
-			// X movement
-			if (_fe3d.input_getKeyDown(InputType::KEY_A))
-			{
-				_fe3d.camera_translateFollowX(-_customCameraSpeed);
-			}
-			else if (_fe3d.input_getKeyDown(InputType::KEY_D))
-			{
-				_fe3d.camera_translateFollowX(_customCameraSpeed);
-			}
-
-			// Y movement
-			if (_fe3d.input_getKeyDown(InputType::KEY_SPACE))
-			{
-				_fe3d.camera_translate(vec3(0.0f, _customCameraSpeed / 50.0f, 0.0f));
-			}
-			else if (_fe3d.input_getKeyDown(InputType::KEY_LSHIFT))
-			{
-				_fe3d.camera_translate(vec3(0.0f, -(_customCameraSpeed / 50.0f), 0.0f));
-			}
-
-			// Z movement
-			if (_fe3d.input_getKeyDown(InputType::KEY_W))
-			{
-				_fe3d.camera_translateFollowZ(_customCameraSpeed);
-			}
-			else if (_fe3d.input_getKeyDown(InputType::KEY_S))
-			{
-				_fe3d.camera_translateFollowZ(-_customCameraSpeed);
-			}
-		}
-	}
-	else
-	{
-		// Reset camera view
-		_fe3d.camera_setYaw(0.0f);
-		_fe3d.camera_setPitch(0.0f);
 	}
 }

@@ -78,6 +78,20 @@ void ScriptInterpreter::load()
 			_fe3d.logger_throwWarning("No script_type META found @ script \"" + scriptID + "\"");
 		}
 	}
+
+	// No entry point errors
+	if (_initEntryID == "" && !_initScriptIDs.empty())
+	{
+		_fe3d.logger_throwWarning("No entry script chosen for INIT script(s)!");
+	}
+	if (_updateEntryID == "" && !_updateScriptIDs.empty())
+	{
+		_fe3d.logger_throwWarning("No entry script chosen for UPDATE script(s)!");
+	}
+	if (_destroyEntryID == "" && !_destroyScriptIDs.empty())
+	{
+		_fe3d.logger_throwWarning("No entry script chosen for DESTROY script(s)!");
+	}
 }
 
 void ScriptInterpreter::executeInitialization()
@@ -119,8 +133,33 @@ void ScriptInterpreter::_executeScript(const string& ID, ScriptType type)
 	for (size_t i = 0; i < scriptFile->getLineCount(); i++)
 	{
 		string scriptLine = scriptFile->getLineText(i);
+
+		// Check if line is not empty
+		if (scriptLine.empty())
+		{
+			continue;
+		}
+
 		std::istringstream iss(scriptLine);
 
+		string firstWord;
+		iss >> firstWord;
 
+		// Determine keyword type
+		if (scriptLine.substr(0, 4) == "FE3D") // Engine functionality
+		{
+			// Check if function call has opening parenthesis
+			auto findResult = std::find(scriptLine.begin(), scriptLine.end(), "(");
+			if (findResult != scriptLine.end())
+			{
+				unsigned int index = std::distance(scriptLine.begin(), findResult);
+
+				// Determine type of function
+				if (scriptLine.substr(0, index) == "FE3D_SCENE_LOAD")
+				{
+					
+				}
+			}
+		}
 	}
 }

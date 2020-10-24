@@ -8,7 +8,7 @@ LeftViewportController::LeftViewportController(FabiEngine3D& fe3d, shared_ptr<En
 	_worldEditor(fe3d, gui),
 	_billboardEditor(fe3d, gui),
 	_sceneEditor(fe3d, gui, _worldEditor, _modelEditor, _billboardEditor),
-	_scriptEditor(fe3d, gui),
+	_scriptEditor(fe3d, gui, _sceneEditor),
 	_settingsEditor(fe3d, gui)
 {
 

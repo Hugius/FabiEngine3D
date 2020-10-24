@@ -1,6 +1,7 @@
 #pragma once
 
 #include "script.hpp"
+#include "scene_editor.hpp"
 
 class ScriptInterpreter
 {
@@ -12,6 +13,7 @@ public:
 	void executeUpdate();
 	void executeDestruction();
 	void unload();
+	void setSceneEditorInstance(SceneEditor* sceneEditor);
 
 private:
 	enum class ScriptType
@@ -23,6 +25,7 @@ private:
 
 	FabiEngine3D& _fe3d;
 	Script& _script;
+	SceneEditor* _sceneEditor = nullptr;
 
 	void _executeScript(const string& ID, ScriptType type);
 

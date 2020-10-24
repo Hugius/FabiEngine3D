@@ -125,6 +125,11 @@ void ScriptInterpreter::unload()
 	_destroyScriptIDs.clear();
 }
 
+void ScriptInterpreter::setSceneEditorInstance(SceneEditor* sceneEditor)
+{
+	_sceneEditor = sceneEditor;
+}
+
 void ScriptInterpreter::_executeScript(const string& ID, ScriptType type)
 {
 	auto scriptFile = _script.getScriptFile(ID);
@@ -148,16 +153,23 @@ void ScriptInterpreter::_executeScript(const string& ID, ScriptType type)
 		// Determine keyword type
 		if (scriptLine.substr(0, 4) == "FE3D") // Engine functionality
 		{
-			// Check if function call has opening parenthesis
-			auto findResult = std::find(scriptLine.begin(), scriptLine.end(), "(");
-			if (findResult != scriptLine.end())
+			// Check if function call has opening & closing parentheses
+			auto openingParanthesisFound = std::find(scriptLine.begin(), scriptLine.end(), '(');
+			auto closingParanthesisFound = std::find(scriptLine.begin(), scriptLine.end(), ')');
+			if (openingParanthesisFound != scriptLine.end() && closingParanthesisFound != scriptLine.end())
 			{
-				unsigned int index = std::distance(scriptLine.begin(), findResult);
+				unsigned int openIndex = std::distance(scriptLine.begin(), openingParanthesisFound);
+				unsigned int closeIndex = std::distance(scriptLine.begin(), closingParanthesisFound);
+				string argumentString = scriptLine.substr(openIndex + 1, scriptLine.size() - closeIndex);
 
 				// Determine type of function
-				if (scriptLine.substr(0, index) == "FE3D_SCENE_LOAD")
+				if (scriptLine.substr(0, openIndex) == "FE3D_SCENE_LOAD")
 				{
-					
+					_sceneEditor->loadScene(argumentString);
+				}
+				else if (scriptLine.substr(0, openIndex) == "FE3D_SCENE_CLEAR")
+				{
+					_sceneEditor->unloadScene();
 				}
 			}
 		}

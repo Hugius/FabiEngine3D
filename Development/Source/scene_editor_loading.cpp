@@ -495,6 +495,10 @@ void SceneEditor::loadScene(const string& fileName)
 		// Logging
 		_fe3d.logger_throwInfo("Scene data from project \"" + _currentProjectName + "\" loaded!");
 	}
+	else
+	{
+		_fe3d.logger_throwWarning("Could not load scene file \"" + fileName + "\"!");
+	}
 }
 
 void SceneEditor::unloadScene()

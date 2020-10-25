@@ -3,7 +3,7 @@
 
 #define GW(text) LVPC::calcTextWidth(text, 0.15f, 1.8f)
 
-SceneEditor::SceneEditor(FabiEngine3D& fe3d, shared_ptr<EngineGuiManager> gui, WorldEditor& worldEditor, ModelEditor& modelEditor, BillboardEditor& billboardEditor) :
+SceneEditor::SceneEditor(FabiEngine3D& fe3d, EngineGuiManager& gui, WorldEditor& worldEditor, ModelEditor& modelEditor, BillboardEditor& billboardEditor) :
 	_fe3d(fe3d),
 	_gui(gui),
 	_worldEditor(worldEditor),
@@ -16,8 +16,8 @@ SceneEditor::SceneEditor(FabiEngine3D& fe3d, shared_ptr<EngineGuiManager> gui, W
 void SceneEditor::initializeGUI()
 {
 	// Private window instance of GUI windows
-	_leftWindow = _gui->getViewport("left")->getWindow("main");
-	_rightWindow = _gui->getViewport("right")->getWindow("main");
+	_leftWindow = _gui.getViewport("left")->getWindow("main");
+	_rightWindow = _gui.getViewport("right")->getWindow("main");
 	string screenID;
 
 	// Left-viewport: mainWindow - sceneEditorMenuMain
@@ -324,9 +324,9 @@ void SceneEditor::load()
 	_fe3d.gameEntity_setDepthMapIncluded(_previewPointlightID, false);
 
 	// Create name textfields
-	_gui->getGlobalScreen()->addTextfield("selectedModelName", vec2(0.0f, 0.85f), vec2(0.5f, 0.1f), "", vec3(1.0f));
-	_gui->getGlobalScreen()->addTextfield("selectedBillboardName", vec2(0.0f, 0.85f), vec2(0.5f, 0.1f), "", vec3(1.0f));
-	_gui->getGlobalScreen()->addTextfield("selectedPointlightName", vec2(0.0f, 0.85f), vec2(0.5f, 0.1f), "", vec3(1.0f));
+	_gui.getGlobalScreen()->addTextfield("selectedModelName", vec2(0.0f, 0.85f), vec2(0.5f, 0.1f), "", vec3(1.0f));
+	_gui.getGlobalScreen()->addTextfield("selectedBillboardName", vec2(0.0f, 0.85f), vec2(0.5f, 0.1f), "", vec3(1.0f));
+	_gui.getGlobalScreen()->addTextfield("selectedPointlightName", vec2(0.0f, 0.85f), vec2(0.5f, 0.1f), "", vec3(1.0f));
 
 	// Miscellaneous
 	_isLoaded = true;
@@ -335,7 +335,7 @@ void SceneEditor::load()
 void SceneEditor::unload()
 {	
 	// Clear scenes
-	unloadScene();
+	clearScene();
 
 	// Reset variables
 	_currentSkyID = "";
@@ -365,9 +365,9 @@ void SceneEditor::unload()
 	_customCameraSpeed = 1.0f;
 
 	// Delete name textfields
-	_gui->getGlobalScreen()->deleteTextfield("selectedModelName");
-	_gui->getGlobalScreen()->deleteTextfield("selectedBillboardName");
-	_gui->getGlobalScreen()->deleteTextfield("selectedPointlightName");
+	_gui.getGlobalScreen()->deleteTextfield("selectedModelName");
+	_gui.getGlobalScreen()->deleteTextfield("selectedBillboardName");
+	_gui.getGlobalScreen()->deleteTextfield("selectedPointlightName");
 
 	// Other
 	_leftWindow->getScreen("sceneEditorMenuModelPlace")->getScrollingList("models")->deleteButtons();

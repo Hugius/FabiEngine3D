@@ -5,7 +5,7 @@
 
 #define SCRIPT_EXECUTOR _scriptEditor.getScriptExecutor()
 
-TopViewportController::TopViewportController(FabiEngine3D& fe3d, shared_ptr<EngineGuiManager> gui, 
+TopViewportController::TopViewportController(FabiEngine3D& fe3d, EngineGuiManager& gui, 
 	ModelEditor& modelEditor, WorldEditor& worldEditor, BillboardEditor& billboardEditor, SceneEditor& sceneEditor, ScriptEditor& scriptEditor) :
 	ViewportController(fe3d, gui),
 	_modelEditor(modelEditor),
@@ -20,10 +20,10 @@ TopViewportController::TopViewportController(FabiEngine3D& fe3d, shared_ptr<Engi
 void TopViewportController::initialize()
 {
 	// Top-viewport windows
-	_gui->getViewport("top")->addWindow("projectWindow", vec2(-0.25f, 0.0f), vec2(0.9825f, 1.5f), TVPC::frameColor);
-	_gui->getViewport("top")->addWindow("gameWindow", vec2(0.25f, 0.0f), vec2(0.9825f, 1.5f), vec3(0.25f));
-	_projectWindow = _gui->getViewport("top")->getWindow("projectWindow");
-	_gameWindow = _gui->getViewport("top")->getWindow("gameWindow");
+	_gui.getViewport("top")->addWindow("projectWindow", vec2(-0.25f, 0.0f), vec2(0.9825f, 1.5f), TVPC::frameColor);
+	_gui.getViewport("top")->addWindow("gameWindow", vec2(0.25f, 0.0f), vec2(0.9825f, 1.5f), vec3(0.25f));
+	_projectWindow = _gui.getViewport("top")->getWindow("projectWindow");
+	_gameWindow = _gui.getViewport("top")->getWindow("gameWindow");
 	
 	// Top-viewport: projectWindow
 	_projectWindow->addScreen("main");
@@ -61,7 +61,7 @@ void TopViewportController::_updateProjectManagement()
 	{
 		if (projectScreen->getButton("newProject")->isHovered())
 		{
-			_gui->getGlobalScreen()->addValueForm("newProjectName", "Enter project name", "", vec2(0.0f), vec2(0.5f, 0.1f));
+			_gui.getGlobalScreen()->addValueForm("newProjectName", "Enter project name", "", vec2(0.0f), vec2(0.5f, 0.1f));
 			_creatingProject = true;
 		}
 		else if (projectScreen->getButton("loadProject")->isHovered())
@@ -82,7 +82,7 @@ void TopViewportController::_updateProjectManagement()
 		{
 			if (_currentProjectName != "") // A project must be loaded
 			{
-				_gui->getGlobalScreen()->addAnswerForm("exitEngine", "Save changes?", vec2(0.0f, 0.25f));
+				_gui.getGlobalScreen()->addAnswerForm("exitEngine", "Save changes?", vec2(0.0f, 0.25f));
 			}
 			else // Otherwise, just exit the engine
 			{
@@ -105,12 +105,12 @@ void TopViewportController::_updateProjectManagement()
 	projectScreen->getButton("quitEngine")->setHoverable(!scriptRunning);
 
 	// Check if user wants to save changes
-	if (_gui->getGlobalScreen()->isAnswerFormConfirmed("exitEngine"))
+	if (_gui.getGlobalScreen()->isAnswerFormConfirmed("exitEngine"))
 	{
 		_saveCurrentProject();
 		_fe3d.engine_stop();
 	}
-	else if (_gui->getGlobalScreen()->isAnswerFormCancelled("exitEngine"))
+	else if (_gui.getGlobalScreen()->isAnswerFormCancelled("exitEngine"))
 	{
 		_fe3d.engine_stop();
 	}
@@ -142,7 +142,6 @@ void TopViewportController::_updateGameManagement()
 				}
 				else
 				{
-					// Load all assets before executing script
 					SCRIPT_EXECUTOR.load();
 				}
 			}
@@ -163,12 +162,13 @@ void TopViewportController::_updateGameManagement()
 			{
 				// Reset everything and load main menu again
 				SCRIPT_EXECUTOR.unload();
+				_sceneEditor.clearScene();
 				_fe3d.skyEntity_select("@@engineBackground");
 			}
 		}
 
 		// Game buttons hoverability
-		bool isInMainMenu = (_gui->getViewport("left")->getWindow("main")->getActiveScreen()->getID() == "main");
+		bool isInMainMenu = (_gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID() == "main");
 		gameScreen->getButton("play")->setHoverable(isInMainMenu && !SCRIPT_EXECUTOR.isScriptEmpty() && !SCRIPT_EXECUTOR.isRunning());
 		gameScreen->getButton("pause")->setHoverable(isInMainMenu && SCRIPT_EXECUTOR.isRunning());
 		gameScreen->getButton("restart")->setHoverable(isInMainMenu && SCRIPT_EXECUTOR.isInitialized());
@@ -221,7 +221,7 @@ void TopViewportController::_updateCurrentProject()
 	}
 
 	// Go back to main editor screen
-	_gui->getViewport("left")->getWindow("main")->setActiveScreen("main");
+	_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
 
 	// Unload model editor
 	if (_modelEditor.isLoaded())

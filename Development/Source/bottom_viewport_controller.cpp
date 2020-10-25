@@ -6,10 +6,10 @@
 void BottomViewportController::initialize()
 {
 	// Bottom-viewport: statistics
-	_gui->getViewport("bottom")->addWindow("statistics", vec2(-0.25f, 0.0f), vec2(0.9875f, 1.8f), BottomViewportController::frameColor);
-	_gui->getViewport("bottom")->getWindow("statistics")->addScreen("main");
-	_gui->getViewport("bottom")->getWindow("statistics")->setActiveScreen("main");
-	_statsScreen = _gui->getViewport("bottom")->getWindow("statistics")->getScreen("main");
+	_gui.getViewport("bottom")->addWindow("statistics", vec2(-0.25f, 0.0f), vec2(0.9875f, 1.8f), BottomViewportController::frameColor);
+	_gui.getViewport("bottom")->getWindow("statistics")->addScreen("main");
+	_gui.getViewport("bottom")->getWindow("statistics")->setActiveScreen("main");
+	_statsScreen = _gui.getViewport("bottom")->getWindow("statistics")->getScreen("main");
 
 	// General statistics
 	_statsScreen->addTextfield("fps", vec2(-1.0f, 0.85f), vec2(0.0f), "", vec3(1.0f), false);
@@ -33,9 +33,9 @@ void BottomViewportController::initialize()
 	}
 
 	// Console window
-	_gui->getViewport("bottom")->addWindow("console", vec2(0.25f, 0.0f), vec2(0.9875f, 1.8f), BottomViewportController::frameColor);
-	_gui->getViewport("bottom")->getWindow("console")->addScreen("main");
-	_gui->getViewport("bottom")->getWindow("console")->setActiveScreen("main");
+	_gui.getViewport("bottom")->addWindow("console", vec2(0.25f, 0.0f), vec2(0.9875f, 1.8f), BottomViewportController::frameColor);
+	_gui.getViewport("bottom")->getWindow("console")->addScreen("main");
+	_gui.getViewport("bottom")->getWindow("console")->setActiveScreen("main");
 }
 
 void BottomViewportController::update()
@@ -194,7 +194,7 @@ void BottomViewportController::_updateConsoleScrolling()
 	if (!_consoleMessageStack.empty())
 	{
 		// Handy values
-		auto window = _gui->getViewport("bottom")->getWindow("console");
+		auto window = _gui.getViewport("bottom")->getWindow("console");
 		auto screen = window->getScreen("main");
 		float minY = window->getOriginalPosition().y - (window->getOriginalSize().y / 2.0f);
 		float maxY = window->getOriginalPosition().y + (window->getOriginalSize().y / 2.0f);
@@ -280,7 +280,7 @@ void BottomViewportController::_updateConsoleScrolling()
 void BottomViewportController::_addConsoleMessage(const string& newMessage)
 {
 	// Handy values
-	auto window = _gui->getViewport("bottom")->getWindow("console");
+	auto window = _gui.getViewport("bottom")->getWindow("console");
 	auto screen = window->getScreen("main");
 
 	// Add to stack for synchronization

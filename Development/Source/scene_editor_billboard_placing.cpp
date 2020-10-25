@@ -8,7 +8,7 @@ void SceneEditor::_updateBillboardPlacing()
 		if (_currentPreviewBillboardName != "")
 		{
 			// Check if mouse behavior isn't being invalid
-			if (_fe3d.misc_isMouseInsideViewport() && !_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_RIGHT) && !_gui->getGlobalScreen()->isFocused())
+			if (_fe3d.misc_isMouseInsideViewport() && !_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_RIGHT) && !_gui.getGlobalScreen()->isFocused())
 			{
 				// Default placement position
 				vec3 newPosition = vec3(0.0f);
@@ -57,7 +57,7 @@ void SceneEditor::_updateBillboardPlacing()
 					// Hide preview billboard
 					_fe3d.billboardEntity_hide(_currentPreviewBillboardName);
 					_currentPreviewBillboardName = "";
-					string textEntityID = _gui->getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID();
+					string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID();
 					_fe3d.textEntity_hide(textEntityID);
 				}
 			}

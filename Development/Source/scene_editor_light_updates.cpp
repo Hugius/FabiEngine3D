@@ -49,13 +49,13 @@ void SceneEditor::_updateAmbientLightingMenu()
 			{
 				if (screen->getButton("color")->isHovered())
 				{
-					_gui->getGlobalScreen()->addValueForm("ambientColorR", "R(0-255)", ambientLightingColor.r * 255.0f, vec2(-0.25f, 0.0f), vec2(0.2f, 0.1f));
-					_gui->getGlobalScreen()->addValueForm("ambientColorG", "G(0-255)", ambientLightingColor.g * 255.0f, vec2(0.0f, 0.0f), vec2(0.2f, 0.1f));
-					_gui->getGlobalScreen()->addValueForm("ambientColorB", "B(0-255)", ambientLightingColor.b * 255.0f, vec2(0.25f, 0.0f), vec2(0.2f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("ambientColorR", "R(0-255)", ambientLightingColor.r * 255.0f, vec2(-0.25f, 0.0f), vec2(0.2f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("ambientColorG", "G(0-255)", ambientLightingColor.g * 255.0f, vec2(0.0f, 0.0f), vec2(0.2f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("ambientColorB", "B(0-255)", ambientLightingColor.b * 255.0f, vec2(0.25f, 0.0f), vec2(0.2f, 0.1f));
 				}
 				else if (screen->getButton("intensity")->isHovered())
 				{
-					_gui->getGlobalScreen()->addValueForm("ambientIntensity", "Ambient intensity (%)", ambientLightingIntensity * 100.0f, vec2(0.0f), vec2(0.3f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("ambientIntensity", "Ambient intensity (%)", ambientLightingIntensity * 100.0f, vec2(0.0f), vec2(0.3f, 0.1f));
 				}
 				else if (screen->getButton("back")->isHovered())
 				{
@@ -64,25 +64,25 @@ void SceneEditor::_updateAmbientLightingMenu()
 			}
 
 			// Ambient value conversion
-			if (_gui->getGlobalScreen()->checkValueForm("ambientIntensity", ambientLightingIntensity))
+			if (_gui.getGlobalScreen()->checkValueForm("ambientIntensity", ambientLightingIntensity))
 			{
 				ambientLightingIntensity /= 100.0f;
 			}
 
 			// Color R values conversion
-			if (_gui->getGlobalScreen()->checkValueForm("ambientColorR", ambientLightingColor.r))
+			if (_gui.getGlobalScreen()->checkValueForm("ambientColorR", ambientLightingColor.r))
 			{
 				ambientLightingColor.r = std::clamp(ambientLightingColor.r / 255.0f, 0.0f, 1.0f);
 			}
 
 			// Color G values conversion
-			if (_gui->getGlobalScreen()->checkValueForm("ambientColorG", ambientLightingColor.g))
+			if (_gui.getGlobalScreen()->checkValueForm("ambientColorG", ambientLightingColor.g))
 			{
 				ambientLightingColor.g = std::clamp(ambientLightingColor.g / 255.0f, 0.0f, 1.0f);
 			}
 
 			// Color B values conversion
-			if (_gui->getGlobalScreen()->checkValueForm("ambientColorB", ambientLightingColor.b))
+			if (_gui.getGlobalScreen()->checkValueForm("ambientColorB", ambientLightingColor.b))
 			{
 				ambientLightingColor.b = std::clamp(ambientLightingColor.b / 255.0f, 0.0f, 1.0f);
 			}
@@ -110,23 +110,23 @@ void SceneEditor::_updateDirectionalLightingMenu()
 			{
 				if (screen->getButton("color")->isHovered())
 				{
-					_gui->getGlobalScreen()->addValueForm("directionalColorR", "R(0-255)", directionalLightingColor.r * 255.0f, vec2(-0.25f, 0.0f), vec2(0.2f, 0.1f));
-					_gui->getGlobalScreen()->addValueForm("directionalColorG", "G(0-255)", directionalLightingColor.g * 255.0f, vec2(0.0f, 0.0f), vec2(0.2f, 0.1f));
-					_gui->getGlobalScreen()->addValueForm("directionalColorB", "B(0-255)", directionalLightingColor.b * 255.0f, vec2(0.25f, 0.0f), vec2(0.2f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("directionalColorR", "R(0-255)", directionalLightingColor.r * 255.0f, vec2(-0.25f, 0.0f), vec2(0.2f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("directionalColorG", "G(0-255)", directionalLightingColor.g * 255.0f, vec2(0.0f, 0.0f), vec2(0.2f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("directionalColorB", "B(0-255)", directionalLightingColor.b * 255.0f, vec2(0.25f, 0.0f), vec2(0.2f, 0.1f));
 				}
 				else if (screen->getButton("position")->isHovered())
 				{
-					_gui->getGlobalScreen()->addValueForm("positionX", "X", directionalLightingPosition.x, vec2(-0.25f, 0.0f), vec2(0.2f, 0.1f));
-					_gui->getGlobalScreen()->addValueForm("positionY", "Y", directionalLightingPosition.y, vec2(0.0f, 0.0f), vec2(0.2f, 0.1f));
-					_gui->getGlobalScreen()->addValueForm("positionZ", "Z", directionalLightingPosition.z, vec2(0.25f, 0.0f), vec2(0.2f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("positionX", "X", directionalLightingPosition.x, vec2(-0.25f, 0.0f), vec2(0.2f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("positionY", "Y", directionalLightingPosition.y, vec2(0.0f, 0.0f), vec2(0.2f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("positionZ", "Z", directionalLightingPosition.z, vec2(0.25f, 0.0f), vec2(0.2f, 0.1f));
 				}
 				else if (screen->getButton("intensity")->isHovered())
 				{
-					_gui->getGlobalScreen()->addValueForm("directionalIntensity", "Directional intensity(%)", directionalLightingIntensity * 100.0f, vec2(0.0f), vec2(0.3f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("directionalIntensity", "Directional intensity(%)", directionalLightingIntensity * 100.0f, vec2(0.0f), vec2(0.3f, 0.1f));
 				}
 				else if (screen->getButton("billboardSize")->isHovered())
 				{
-					_gui->getGlobalScreen()->addValueForm("billboardSize", "Billboard size", billboardSize, vec2(0.0f), vec2(0.3f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("billboardSize", "Billboard size", billboardSize, vec2(0.0f), vec2(0.3f, 0.1f));
 				}
 				else if (screen->getButton("back")->isHovered())
 				{
@@ -135,36 +135,36 @@ void SceneEditor::_updateDirectionalLightingMenu()
 			}
 
 			// Color R values conversion
-			if (_gui->getGlobalScreen()->checkValueForm("directionalColorR", directionalLightingColor.r))
+			if (_gui.getGlobalScreen()->checkValueForm("directionalColorR", directionalLightingColor.r))
 			{
 				directionalLightingColor.r = std::clamp(directionalLightingColor.r / 255.0f, 0.0f, 1.0f);
 			}
 
 			// Color G values conversion
-			if (_gui->getGlobalScreen()->checkValueForm("directionalColorG", directionalLightingColor.g))
+			if (_gui.getGlobalScreen()->checkValueForm("directionalColorG", directionalLightingColor.g))
 			{
 				directionalLightingColor.g = std::clamp(directionalLightingColor.g / 255.0f, 0.0f, 1.0f);
 			}
 
 			// Color B values conversion
-			if (_gui->getGlobalScreen()->checkValueForm("directionalColorB", directionalLightingColor.b))
+			if (_gui.getGlobalScreen()->checkValueForm("directionalColorB", directionalLightingColor.b))
 			{
 				directionalLightingColor.b = std::clamp(directionalLightingColor.b / 255.0f, 0.0f, 1.0f);
 			}
 
 			// Update position values
-			_gui->getGlobalScreen()->checkValueForm("positionX", directionalLightingPosition.x);
-			_gui->getGlobalScreen()->checkValueForm("positionY", directionalLightingPosition.y);
-			_gui->getGlobalScreen()->checkValueForm("positionZ", directionalLightingPosition.z);
+			_gui.getGlobalScreen()->checkValueForm("positionX", directionalLightingPosition.x);
+			_gui.getGlobalScreen()->checkValueForm("positionY", directionalLightingPosition.y);
+			_gui.getGlobalScreen()->checkValueForm("positionZ", directionalLightingPosition.z);
 
 			// Directional intensity value conversion
-			if (_gui->getGlobalScreen()->checkValueForm("directionalIntensity", directionalLightingIntensity))
+			if (_gui.getGlobalScreen()->checkValueForm("directionalIntensity", directionalLightingIntensity))
 			{
 				directionalLightingIntensity /= 100.0f;
 			}
 
 			// Update billboard size value
-			_gui->getGlobalScreen()->checkValueForm("billboardSize", billboardSize);
+			_gui.getGlobalScreen()->checkValueForm("billboardSize", billboardSize);
 
 			// Update directional lighting
 			_fe3d.gfx_enableDirectionalLighting(directionalLightingPosition, directionalLightingColor, directionalLightingIntensity);

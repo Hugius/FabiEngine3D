@@ -10,7 +10,7 @@ void SceneEditor::_updateLightPlacing()
 			// Check if mouse behavior isn't being invalid
 			if (_fe3d.misc_isMouseInsideViewport() && 
 				!_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_RIGHT) && 
-				!_gui->getGlobalScreen()->isFocused())
+				!_gui.getGlobalScreen()->isFocused())
 			{
 				// Default placement position
 				vec3 newPosition = vec3(0.0f);

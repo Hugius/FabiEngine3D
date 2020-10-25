@@ -2,7 +2,7 @@
 
 void ModelEditor::_updateModelEditingAabb()
 {
-	auto screen = _gui->getViewport("left")->getWindow("main")->getScreen("modelEditorMenuAabb");
+	auto screen = _gui.getViewport("left")->getWindow("main")->getScreen("modelEditorMenuAabb");
 	vec3 currentSize = _fe3d.gameEntity_getSize(_currentModelID);
 
 	// Buttons hoverability
@@ -17,7 +17,7 @@ void ModelEditor::_updateModelEditingAabb()
 	{
 		if (screen->getButton("add")->isHovered())
 		{
-			_gui->getGlobalScreen()->addValueForm("newAabbName", "New AABB name", "", vec2(0.0f), vec2(0.5f, 0.1f));
+			_gui.getGlobalScreen()->addValueForm("newAabbName", "New AABB name", "", vec2(0.0f), vec2(0.5f, 0.1f));
 		}
 		else if (screen->getButton("edit")->isHovered())
 		{
@@ -29,20 +29,20 @@ void ModelEditor::_updateModelEditingAabb()
 			}
 
 			// Show choicelist
-			_gui->getGlobalScreen()->addChoiceForm("aabbList", "Select AABB", vec2(-0.4f, 0.1f), aabbNames);
+			_gui.getGlobalScreen()->addChoiceForm("aabbList", "Select AABB", vec2(-0.4f, 0.1f), aabbNames);
 		}
 		else if (screen->getButton("delete")->isHovered())
 		{
 			_movingToggled = false;
 			_resizingToggled = false;
-			_direction = TransformationDirection::X;
+			_transformationDirection = Direction::X;
 			_fe3d.aabbEntity_delete(_currentModelID + "_" + _currentAabbID);
 			_currentAabbID = "";
-			_fe3d.textEntity_hide(_gui->getGlobalScreen()->getTextfield("selectedAabbName")->getEntityID());
+			_fe3d.textEntity_hide(_gui.getGlobalScreen()->getTextfield("selectedAabbName")->getEntityID());
 		}
 		else if (screen->getButton("speed")->isHovered())
 		{
-			_gui->getGlobalScreen()->addValueForm("speed", "Transformation speed", _aabbTransformationSpeed * 100.0f, vec2(0.0f, 0.0f), vec2(0.2f, 0.1f));
+			_gui.getGlobalScreen()->addValueForm("speed", "Transformation speed", _aabbTransformationSpeed * 100.0f, vec2(0.0f, 0.0f), vec2(0.2f, 0.1f));
 		}
 		else if (screen->getButton("toggleMove")->isHovered())
 		{
@@ -63,17 +63,18 @@ void ModelEditor::_updateModelEditingAabb()
 		else if (screen->getButton("direction")->isHovered())
 		{
 			// Change direction
-			_direction = (_direction == TransformationDirection::X) ? TransformationDirection::Y : (_direction == TransformationDirection::Y) ? TransformationDirection::Z : TransformationDirection::X;
+			_transformationDirection = (_transformationDirection == Direction::X) ? Direction::Y : 
+				(_transformationDirection == Direction::Y) ? Direction::Z : Direction::X;
 		}
 		else if (screen->getButton("back")->isHovered())
 		{
 			_movingToggled = false;
 			_resizingToggled = false;
-			_direction = TransformationDirection::X;
+			_transformationDirection = Direction::X;
 			_currentAabbID = "";
-			_gui->getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
+			_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
 			_fe3d.misc_disableAabbFrameRendering();
-			_fe3d.textEntity_hide(_gui->getGlobalScreen()->getTextfield("selectedAabbName")->getEntityID());
+			_fe3d.textEntity_hide(_gui.getGlobalScreen()->getTextfield("selectedAabbName")->getEntityID());
 		}
 	}
 
@@ -92,20 +93,20 @@ void ModelEditor::_updateModelEditingAabb()
 
 	// Update button contents
 	string directions[3] = { "X", "Y", "Z" };
-	string newContent = "Direction: " + directions[int(_direction)];
+	string newContent = "Direction: " + directions[int(_transformationDirection)];
 	_fe3d.textEntity_setTextContent(screen->getButton("direction")->getTextfield()->getEntityID(), newContent);
 	_fe3d.textEntity_setTextContent(screen->getButton("toggleMove")->getTextfield()->getEntityID(), _movingToggled ? "Box move: ON" : "Box move: OFF");
 	_fe3d.textEntity_setTextContent(screen->getButton("toggleResize")->getTextfield()->getEntityID(), _resizingToggled ? "Box resize: ON" : "Box resize: OFF");
 
 	// Filling transformation speed
-	if (_gui->getGlobalScreen()->checkValueForm("speed", _aabbTransformationSpeed, { }))
+	if (_gui.getGlobalScreen()->checkValueForm("speed", _aabbTransformationSpeed, { }))
 	{
 		_aabbTransformationSpeed /= 100.0f;
 	}
 
 	// Create AABB
 	string newName;
-	if (_gui->getGlobalScreen()->checkValueForm("newAabbName", newName, {}))
+	if (_gui.getGlobalScreen()->checkValueForm("newAabbName", newName, {}))
 	{
 		if (_fe3d.aabbEntity_isExisting(_currentModelID + "_" + newName)) // Check if already exists
 		{
@@ -120,19 +121,19 @@ void ModelEditor::_updateModelEditingAabb()
 			// Reset editing
 			_movingToggled = false;
 			_resizingToggled = false;
-			_direction = TransformationDirection::X;
+			_transformationDirection = Direction::X;
 
 			// Show AABB title
-			_fe3d.textEntity_setTextContent(_gui->getGlobalScreen()->getTextfield("selectedAabbName")->getEntityID(),
+			_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedAabbName")->getEntityID(),
 				"AABB: " + _currentAabbID, 0.025f);
-			_fe3d.textEntity_show(_gui->getGlobalScreen()->getTextfield("selectedAabbName")->getEntityID());
+			_fe3d.textEntity_show(_gui.getGlobalScreen()->getTextfield("selectedAabbName")->getEntityID());
 		}
 	}
 
 	// Choose AABB
-	if (_gui->getGlobalScreen()->isChoiceFormExisting("aabbList"))
+	if (_gui.getGlobalScreen()->isChoiceFormExisting("aabbList"))
 	{
-		string selectedButtonID = _gui->getGlobalScreen()->getSelectedChoiceFormButtonID("aabbList");
+		string selectedButtonID = _gui.getGlobalScreen()->getSelectedChoiceFormButtonID("aabbList");
 		string hoveredAabbID = "";
 
 		// Hide every AABB
@@ -151,22 +152,22 @@ void ModelEditor::_updateModelEditingAabb()
 				// Reset editing
 				_movingToggled = false;
 				_resizingToggled = false;
-				_direction = TransformationDirection::X;
+				_transformationDirection = Direction::X;
 
 				// Show AABB title
-				_fe3d.textEntity_setTextContent(_gui->getGlobalScreen()->getTextfield("selectedAabbName")->getEntityID(),
+				_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedAabbName")->getEntityID(),
 					"AABB: " + _currentAabbID, 0.025f);
-				_fe3d.textEntity_show(_gui->getGlobalScreen()->getTextfield("selectedAabbName")->getEntityID());
-				_gui->getGlobalScreen()->removeChoiceForm("aabbList");
+				_fe3d.textEntity_show(_gui.getGlobalScreen()->getTextfield("selectedAabbName")->getEntityID());
+				_gui.getGlobalScreen()->removeChoiceForm("aabbList");
 			}
 			else
 			{
 				hoveredAabbID = selectedButtonID;
 			}
 		}
-		else if (_gui->getGlobalScreen()->isChoiceFormCancelled("aabbList")) // Cancelled choosing
+		else if (_gui.getGlobalScreen()->isChoiceFormCancelled("aabbList")) // Cancelled choosing
 		{
-			_gui->getGlobalScreen()->removeChoiceForm("aabbList");
+			_gui.getGlobalScreen()->removeChoiceForm("aabbList");
 		}
 
 		// Show hovered AABB
@@ -186,17 +187,17 @@ void ModelEditor::_updateModelEditingAabb()
 			vec3 newPosition = _fe3d.aabbEntity_getPosition(_currentModelID + "_" + _currentAabbID);
 
 			// Determine direction
-			switch (_direction)
+			switch (_transformationDirection)
 			{
-				case TransformationDirection::X:
+				case Direction::X:
 					newPosition.x += _aabbTransformationSpeed * scrollingDirection;
 					break;
 
-				case TransformationDirection::Y:
+				case Direction::Y:
 					newPosition.y += _aabbTransformationSpeed * scrollingDirection;
 					break;
 
-				case TransformationDirection::Z:
+				case Direction::Z:
 					newPosition.z += _aabbTransformationSpeed * scrollingDirection;
 					break;
 			}
@@ -211,17 +212,17 @@ void ModelEditor::_updateModelEditingAabb()
 			float scrollingDirection = float(_fe3d.input_getMouseWheelY());
 			vec3 newSize = _fe3d.aabbEntity_getSize(_currentModelID + "_" + _currentAabbID);
 
-			switch (_direction)
+			switch (_transformationDirection)
 			{
-				case TransformationDirection::X:
+				case Direction::X:
 					newSize.x += (_aabbTransformationSpeed * scrollingDirection);
 					break;
 
-				case TransformationDirection::Y:
+				case Direction::Y:
 					newSize.y += (_aabbTransformationSpeed * scrollingDirection);
 					break;
 
-				case TransformationDirection::Z:
+				case Direction::Z:
 					newSize.z += (_aabbTransformationSpeed * scrollingDirection);
 					break;
 			}

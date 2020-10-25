@@ -7,7 +7,7 @@
 
 #define GW(text) LVPC::calcTextWidth(text, 0.15f, 1.8f)
 
-ModelEditor::ModelEditor(FabiEngine3D& fe3d, shared_ptr<EngineGuiManager> gui) :
+ModelEditor::ModelEditor(FabiEngine3D& fe3d, EngineGuiManager& gui) :
 	_fe3d(fe3d),
 	_gui(gui)
 {
@@ -17,7 +17,7 @@ ModelEditor::ModelEditor(FabiEngine3D& fe3d, shared_ptr<EngineGuiManager> gui) :
 void ModelEditor::initializeGUI()
 {
 	// Private window instance of left viewport
-	auto leftWindow = _gui->getViewport("left")->getWindow("main");
+	auto leftWindow = _gui.getViewport("left")->getWindow("main");
 
 	// Left-viewport: mainWindow - modelManagement
 	leftWindow->addScreen("modelEditorMenuMain");
@@ -109,8 +109,8 @@ void ModelEditor::load()
 
 	// Other
 	loadModels();
-	_gui->getGlobalScreen()->addTextfield("selectedModelName", vec2(0.0f, 0.85f), vec2(0.5f, 0.1f), "", vec3(1.0f));
-	_gui->getGlobalScreen()->addTextfield("selectedAabbName", vec2(0.0f, 0.75f), vec2(0.5f, 0.1f), "", vec3(1.0f));
+	_gui.getGlobalScreen()->addTextfield("selectedModelName", vec2(0.0f, 0.85f), vec2(0.5f, 0.1f), "", vec3(1.0f));
+	_gui.getGlobalScreen()->addTextfield("selectedAabbName", vec2(0.0f, 0.75f), vec2(0.5f, 0.1f), "", vec3(1.0f));
 	_fe3d.gameEntity_setLevelOfDetailDistance(10000.0f);
 	_isLoaded = true;
 }
@@ -152,10 +152,10 @@ void ModelEditor::unload()
 	_resizingToggled = false;
 	_isDeletingModel = false;
 	_isLoaded = false;
-	_direction = TransformationDirection::X;
+	_transformationDirection = Direction::X;
 
 	// Miscellaneous
-	_gui->getGlobalScreen()->deleteTextfield("selectedModelName");
-	_gui->getGlobalScreen()->deleteTextfield("selectedAabbName");
+	_gui.getGlobalScreen()->deleteTextfield("selectedModelName");
+	_gui.getGlobalScreen()->deleteTextfield("selectedAabbName");
 	_fe3d.misc_disableAabbFrameRendering();
 }

@@ -19,7 +19,7 @@ void SceneEditor::_updateLightEditing()
 				{
 					// Cursor must be in 3D space, no GUI interruptions, no RMB holding down
 					if (_fe3d.collision_checkCursorInAny() == entityID && _fe3d.misc_isMouseInsideViewport() &&
-						!_gui->getGlobalScreen()->isFocused() && !_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_RIGHT))
+						!_gui.getGlobalScreen()->isFocused() && !_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 					{
 						// Set new selected lightbulb
 						_selectedLightBulbID = entityID;
@@ -27,7 +27,7 @@ void SceneEditor::_updateLightEditing()
 						// Check if nothing is active
 						if (_activeLightBulbID == "" && _activeModelID == "" && _activeBillboardID == "")
 						{
-							string textEntityID = _gui->getGlobalScreen()->getTextfield("selectedPointlightName")->getEntityID();
+							string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedPointlightName")->getEntityID();
 							_fe3d.textEntity_show(textEntityID);
 							_fe3d.textEntity_setTextContent(textEntityID, "Selected light: " + _selectedLightBulbID.substr(1), 0.025f);
 						}
@@ -52,7 +52,7 @@ void SceneEditor::_updateLightEditing()
 								_rightWindow->getScreen("pointLightPropertiesMenu")->getWriteField("z")->setTextContent(to_string(static_cast<int>(position.z)));
 							
 								// Update selected text
-								string textEntityID = _gui->getGlobalScreen()->getTextfield("selectedPointlightName")->getEntityID();
+								string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedPointlightName")->getEntityID();
 								_fe3d.textEntity_show(textEntityID);
 								_fe3d.textEntity_setTextContent(textEntityID, "Active light: " + _selectedLightBulbID.substr(1), 0.025f);
 							}
@@ -71,7 +71,7 @@ void SceneEditor::_updateLightEditing()
 			}
 			
 			// Check if user made the active lightbulb inactive
-			if (_selectedLightBulbID == "" && ACTIVE_BULB_ID != "" && _fe3d.misc_isMouseInsideViewport() && !_gui->getGlobalScreen()->isFocused())
+			if (_selectedLightBulbID == "" && ACTIVE_BULB_ID != "" && _fe3d.misc_isMouseInsideViewport() && !_gui.getGlobalScreen()->isFocused())
 			{
 				// LMB pressed
 				if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) && !_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_RIGHT))
@@ -140,7 +140,7 @@ void SceneEditor::_updateLightEditing()
 			}
 
 			// Check if light is still selected or active
-			string textEntityID = _gui->getGlobalScreen()->getTextfield("selectedPointlightName")->getEntityID();
+			string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedPointlightName")->getEntityID();
 			if (_selectedLightBulbID == "" && _activeLightBulbID == "")
 			{
 				_fe3d.textEntity_hide(textEntityID);

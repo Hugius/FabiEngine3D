@@ -3,7 +3,7 @@
 
 #define GW(text) LVPC::calcTextWidth(text, 0.15f, 1.8f)
 
-BillboardEditor::BillboardEditor(FabiEngine3D& fe3d, shared_ptr<EngineGuiManager> gui) :
+BillboardEditor::BillboardEditor(FabiEngine3D& fe3d, EngineGuiManager& gui) :
 	_fe3d(fe3d),
 	_gui(gui)
 {
@@ -13,7 +13,7 @@ BillboardEditor::BillboardEditor(FabiEngine3D& fe3d, shared_ptr<EngineGuiManager
 void BillboardEditor::initializeGUI()
 {
 	// Private window instance of left viewport
-	auto leftWindow = _gui->getViewport("left")->getWindow("main");
+	auto leftWindow = _gui.getViewport("left")->getWindow("main");
 
 	// Left-viewport: mainWindow - billboardManagement
 	leftWindow->addScreen("billboardEditorMenuMain");
@@ -80,7 +80,7 @@ void BillboardEditor::load()
 	loadBillboards();
 
 	// Other
-	_gui->getGlobalScreen()->addTextfield("selectedBillboardName", vec2(0.0f, 0.85f), vec2(0.5f, 0.1f), "", vec3(1.0f));
+	_gui.getGlobalScreen()->addTextfield("selectedBillboardName", vec2(0.0f, 0.85f), vec2(0.5f, 0.1f), "", vec3(1.0f));
 	_isLoaded = true;
 }
 
@@ -98,7 +98,7 @@ void BillboardEditor::unload()
 	_fe3d.billboardEntity_deleteAll();
 
 	// Delete billboard name textfield
-	_gui->getGlobalScreen()->deleteTextfield("selectedBillboardName");
+	_gui.getGlobalScreen()->deleteTextfield("selectedBillboardName");
 
 	// Reset variables
 	_billboardCreationEnabled = false;

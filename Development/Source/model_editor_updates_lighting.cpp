@@ -4,7 +4,7 @@
 
 void ModelEditor::_updateModelEditingLighting()
 {
-	auto screen = _gui->getViewport("left")->getWindow("main")->getScreen("modelEditorMenuLighting");
+	auto screen = _gui.getViewport("left")->getWindow("main")->getScreen("modelEditorMenuLighting");
 
 	// GUI management
 	if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
@@ -15,17 +15,17 @@ void ModelEditor::_updateModelEditingLighting()
 		}
 		else if (screen->getButton("specularFactor")->isHovered())
 		{
-			_gui->getGlobalScreen()->addValueForm("specularFactor", "Specular factor (0-256)",
+			_gui.getGlobalScreen()->addValueForm("specularFactor", "Specular factor (0-256)",
 				_fe3d.gameEntity_getSpecularFactor(_currentModelID), vec2(0.0f, 0.1f), vec2(0.2f, 0.1f));
 		}
 		else if (screen->getButton("specularIntensity")->isHovered())
 		{
-			_gui->getGlobalScreen()->addValueForm("specularIntensity", "Specular intensity (%)",
+			_gui.getGlobalScreen()->addValueForm("specularIntensity", "Specular intensity (%)",
 				_fe3d.gameEntity_getSpecularIntensity(_currentModelID) * 100.0f, vec2(0.0f, 0.1f), vec2(0.2f, 0.1f));
 		}
 		else if (screen->getButton("modelLightness")->isHovered())
 		{
-			_gui->getGlobalScreen()->addValueForm("modelLightness", "Model lightness (%)",
+			_gui.getGlobalScreen()->addValueForm("modelLightness", "Model lightness (%)",
 				_fe3d.gameEntity_getLightness(_currentModelID) * 100.0f, vec2(0.0f, 0.1f), vec2(0.2f, 0.1f));
 		}
 		else if (screen->getButton("isShadowed")->isHovered())
@@ -38,7 +38,7 @@ void ModelEditor::_updateModelEditingLighting()
 		}
 		else if (screen->getButton("back")->isHovered())
 		{
-			_gui->getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
+			_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
 		}
 	}
 
@@ -55,7 +55,7 @@ void ModelEditor::_updateModelEditingLighting()
 
 	// Update specular factor
 	float factor = _fe3d.gameEntity_getSpecularFactor(_currentModelID);
-	if (_gui->getGlobalScreen()->checkValueForm("specularFactor", factor))
+	if (_gui.getGlobalScreen()->checkValueForm("specularFactor", factor))
 	{
 		factor = std::clamp(factor, 0.0f, 256.0f);
 		_fe3d.gameEntity_setSpecularFactor(_currentModelID, factor);
@@ -63,7 +63,7 @@ void ModelEditor::_updateModelEditingLighting()
 
 	// Update specular intensity
 	float intensity = _fe3d.gameEntity_getSpecularIntensity(_currentModelID);
-	if (_gui->getGlobalScreen()->checkValueForm("specularIntensity", intensity))
+	if (_gui.getGlobalScreen()->checkValueForm("specularIntensity", intensity))
 	{
 		intensity /= 100.0f;
 		_fe3d.gameEntity_setSpecularIntensity(_currentModelID, intensity);
@@ -71,7 +71,7 @@ void ModelEditor::_updateModelEditingLighting()
 
 	// Update lightness
 	float lightness = _fe3d.gameEntity_getLightness(_currentModelID);
-	if (_gui->getGlobalScreen()->checkValueForm("modelLightness", lightness))
+	if (_gui.getGlobalScreen()->checkValueForm("modelLightness", lightness))
 	{
 		lightness /= 100.0f;
 		_fe3d.gameEntity_setLightness(_currentModelID, lightness);

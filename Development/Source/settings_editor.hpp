@@ -6,7 +6,7 @@
 class SettingsEditor final
 {
 public:
-	SettingsEditor(FabiEngine3D& fe3d, shared_ptr<EngineGuiManager> gui);
+	SettingsEditor(FabiEngine3D& fe3d, EngineGuiManager& gui);
 	~SettingsEditor() = default;
 
 	void initializeGUI();
@@ -16,7 +16,7 @@ public:
 
 private:
 	FabiEngine3D& _fe3d;
-	shared_ptr<EngineGuiManager> _gui = nullptr;
+	EngineGuiManager& _gui;
 	shared_ptr<EngineGuiWindow> _leftWindow = nullptr;
 
 	bool _isLoaded = false;

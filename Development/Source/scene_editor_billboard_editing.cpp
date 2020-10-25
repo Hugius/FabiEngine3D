@@ -28,7 +28,7 @@ void SceneEditor::_updateBillboardEditing()
 
 					// Cursor must be in 3D space, no GUI interruptions, no RMB holding down
 					if (hovered && _fe3d.misc_isMouseInsideViewport() &&
-						!_gui->getGlobalScreen()->isFocused() && !_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_RIGHT))
+						!_gui.getGlobalScreen()->isFocused() && !_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 					{
 						// Select hovered billboard
 						_selectBillboard(entityID);
@@ -55,7 +55,7 @@ void SceneEditor::_updateBillboardEditing()
 			}
 
 			// Check if user made the active billboard inactive
-			if (_selectedBillboardID == "" && _activeBillboardID != "" && _fe3d.misc_isMouseInsideViewport() && !_gui->getGlobalScreen()->isFocused())
+			if (_selectedBillboardID == "" && _activeBillboardID != "" && _fe3d.misc_isMouseInsideViewport() && !_gui.getGlobalScreen()->isFocused())
 			{
 				// LMB pressed
 				if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) && !_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_RIGHT))
@@ -191,7 +191,7 @@ void SceneEditor::_updateBillboardEditing()
 			}
 
 			// Check if billboard is still selected or active
-			string textEntityID = _gui->getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID();
+			string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID();
 			if (_selectedBillboardID == "" && _activeBillboardID == "")
 			{
 				_fe3d.textEntity_hide(textEntityID);

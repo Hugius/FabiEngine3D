@@ -24,7 +24,7 @@ void WorldEditor::_updateTerrainCreation()
 			string newTerrainName;
 
 			// Create new terrain
-			if (_gui->getGlobalScreen()->checkValueForm("newTerrainName", newTerrainName, {}))
+			if (_gui.getGlobalScreen()->checkValueForm("newTerrainName", newTerrainName, {}))
 			{
 				// Starting with at-sign not allowed
 				if (newTerrainName[0] != '@')
@@ -37,9 +37,9 @@ void WorldEditor::_updateTerrainCreation()
 						_currentTerrainID = newTerrainName;
 						_terrainNames.push_back(_currentTerrainID);
 						_leftWindow->setActiveScreen("terrainEditorMenuChoice");
-						_fe3d.textEntity_setTextContent(_gui->getGlobalScreen()->getTextfield("selectedTerrainName")->getEntityID(),
+						_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedTerrainName")->getEntityID(),
 							"Terrain: " + _currentTerrainID.substr(1), 0.025f);
-						_fe3d.textEntity_show(_gui->getGlobalScreen()->getTextfield("selectedTerrainName")->getEntityID());
+						_fe3d.textEntity_show(_gui.getGlobalScreen()->getTextfield("selectedTerrainName")->getEntityID());
 						_terrainCreationEnabled = false;
 						_terrainEditingEnabled = true;
 					}
@@ -64,7 +64,7 @@ void WorldEditor::_updateTerrainChoosing()
 		if (_terrainChoosingEnabled)
 		{
 			// Get selected button ID
-			string selectedButtonID = _gui->getGlobalScreen()->getSelectedChoiceFormButtonID("terrainList");
+			string selectedButtonID = _gui.getGlobalScreen()->getSelectedChoiceFormButtonID("terrainList");
 
 			// Hide last terrain
 			if (_hoveredTerrainID != "")
@@ -85,12 +85,12 @@ void WorldEditor::_updateTerrainChoosing()
 					if (_terrainEditingEnabled)
 					{
 						// Go to editor screen
-						_gui->getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuChoice");
+						_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuChoice");
 
 						// Show terrain name
-						_fe3d.textEntity_setTextContent(_gui->getGlobalScreen()->getTextfield("selectedTerrainName")->getEntityID(),
+						_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedTerrainName")->getEntityID(),
 							"Terrain: " + _currentTerrainID.substr(1), 0.025f);
-						_fe3d.textEntity_show(_gui->getGlobalScreen()->getTextfield("selectedTerrainName")->getEntityID());
+						_fe3d.textEntity_show(_gui.getGlobalScreen()->getTextfield("selectedTerrainName")->getEntityID());
 
 						// Only select the terrain if it has a heightmap
 						if (_fe3d.terrainEntity_isExisting(_currentTerrainID))
@@ -100,7 +100,7 @@ void WorldEditor::_updateTerrainChoosing()
 					}
 
 					// Miscellaneous
-					_gui->getGlobalScreen()->removeChoiceForm("terrainList");
+					_gui.getGlobalScreen()->removeChoiceForm("terrainList");
 					_terrainChoosingEnabled = false;
 				}
 				else
@@ -109,12 +109,12 @@ void WorldEditor::_updateTerrainChoosing()
 					_hoveredTerrainID = "@" + selectedButtonID;
 				}
 			}
-			else if (_gui->getGlobalScreen()->isChoiceFormCancelled("terrainList")) // Cancelled choosing
+			else if (_gui.getGlobalScreen()->isChoiceFormCancelled("terrainList")) // Cancelled choosing
 			{
 				_terrainChoosingEnabled = false;
 				_terrainEditingEnabled = false;
 				_terrainRemovalEnabled = false;
-				_gui->getGlobalScreen()->removeChoiceForm("terrainList");
+				_gui.getGlobalScreen()->removeChoiceForm("terrainList");
 			}
 			else // Nothing hovered
 			{
@@ -140,9 +140,9 @@ void WorldEditor::_updateTerrainRemoval()
 	{
 		if (_terrainRemovalEnabled && _currentTerrainID != "")
 		{
-			_gui->getGlobalScreen()->addAnswerForm("removeTerrain", "Are you sure?", vec2(0.0f));
+			_gui.getGlobalScreen()->addAnswerForm("removeTerrain", "Are you sure?", vec2(0.0f));
 
-			if (_gui->getGlobalScreen()->isAnswerFormConfirmed("removeTerrain"))
+			if (_gui.getGlobalScreen()->isAnswerFormConfirmed("removeTerrain"))
 			{
 				// Delete entity
 				_fe3d.terrainEntity_delete(_currentTerrainID);
@@ -152,7 +152,7 @@ void WorldEditor::_updateTerrainRemoval()
 				_terrainRemovalEnabled = false;
 				_currentTerrainID = "";
 			}
-			else if (_gui->getGlobalScreen()->isAnswerFormCancelled("removeTerrain"))
+			else if (_gui.getGlobalScreen()->isAnswerFormCancelled("removeTerrain"))
 			{
 				_terrainRemovalEnabled = false;
 				_currentTerrainID = "";
@@ -172,7 +172,7 @@ void WorldEditor::_updateTerrainCamera()
 		if (_fe3d.terrainEntity_isExisting(terrainID))
 		{
 			// Get scroll wheel input
-			if (!_gui->getGlobalScreen()->isFocused() && _fe3d.misc_isMouseInsideViewport())
+			if (!_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isMouseInsideViewport())
 			{
 				float rotationAcceleration = float(_fe3d.input_getMouseWheelY()) / _scrollWheelDivider;
 				_cameraRotationSpeed += rotationAcceleration;

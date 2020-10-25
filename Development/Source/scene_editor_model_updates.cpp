@@ -71,7 +71,7 @@ void SceneEditor::_updateModelPlacingMenu()
 							// Set new preview model
 							_currentPreviewModelName = modelName;
 							_fe3d.gameEntity_show(_currentPreviewModelName);
-							string textEntityID = _gui->getGlobalScreen()->getTextfield("selectedModelName")->getEntityID();
+							string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedModelName")->getEntityID();
 							_fe3d.textEntity_show(textEntityID);
 							_fe3d.textEntity_setTextContent(textEntityID, "Model: " + _currentPreviewModelName.substr(1), 0.025f);
 							break;

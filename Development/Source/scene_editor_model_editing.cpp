@@ -28,7 +28,7 @@ void SceneEditor::_updateModelEditing()
 
 					// Cursor must be in 3D space, no GUI interruptions, no RMB holding down
 					if (hovered && _fe3d.misc_isMouseInsideViewport() &&
-						!_gui->getGlobalScreen()->isFocused() && !_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_RIGHT))
+						!_gui.getGlobalScreen()->isFocused() && !_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 					{
 						// Select hovered model
 						_selectModel(entityID);
@@ -55,7 +55,7 @@ void SceneEditor::_updateModelEditing()
 			}
 
 			// Check if user made the active model inactive
-			if (_selectedModelID == "" && _activeModelID != "" && _fe3d.misc_isMouseInsideViewport() && !_gui->getGlobalScreen()->isFocused())
+			if (_selectedModelID == "" && _activeModelID != "" && _fe3d.misc_isMouseInsideViewport() && !_gui.getGlobalScreen()->isFocused())
 			{
 				// LMB pressed
 				if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) && !_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_RIGHT))
@@ -172,7 +172,7 @@ void SceneEditor::_updateModelEditing()
 			}
 
 			// Check if model is still selected or active
-			string textEntityID = _gui->getGlobalScreen()->getTextfield("selectedModelName")->getEntityID();
+			string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedModelName")->getEntityID();
 			if (_selectedModelID == "" && _activeModelID == "")
 			{
 				_fe3d.textEntity_hide(textEntityID);

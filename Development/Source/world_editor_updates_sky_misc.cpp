@@ -24,7 +24,7 @@ void WorldEditor::_updateSkyCreation()
 			string newSkyName;
 
 			// Create new sky
-			if (_gui->getGlobalScreen()->checkValueForm("newSkyName", newSkyName, {}))
+			if (_gui.getGlobalScreen()->checkValueForm("newSkyName", newSkyName, {}))
 			{
 				// Starting with at-sign not allowed
 				if (newSkyName[0] != '@')
@@ -39,9 +39,9 @@ void WorldEditor::_updateSkyCreation()
 						_fe3d.skyEntity_add(_currentSkyID);
 						_fe3d.skyEntity_select(_currentSkyID);
 						_leftWindow->setActiveScreen("skyEditorMenuChoice");
-						_fe3d.textEntity_setTextContent(_gui->getGlobalScreen()->getTextfield("selectedSkyName")->getEntityID(),
+						_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedSkyName")->getEntityID(),
 							"Sky: " + _currentSkyID.substr(1), 0.025f);
-						_fe3d.textEntity_show(_gui->getGlobalScreen()->getTextfield("selectedSkyName")->getEntityID());
+						_fe3d.textEntity_show(_gui.getGlobalScreen()->getTextfield("selectedSkyName")->getEntityID());
 						_skyCreationEnabled = false;
 						_skyEditingEnabled = true;
 					}
@@ -66,7 +66,7 @@ void WorldEditor::_updateSkyChoosing()
 		if (_skyChoosingEnabled)
 		{
 			// Get selected button ID
-			string selectedButtonID = _gui->getGlobalScreen()->getSelectedChoiceFormButtonID("skyList");
+			string selectedButtonID = _gui.getGlobalScreen()->getSelectedChoiceFormButtonID("skyList");
 
 			// Hide last sky
 			if (_hoveredSkyID != "")
@@ -87,19 +87,19 @@ void WorldEditor::_updateSkyChoosing()
 					if (_skyEditingEnabled)
 					{
 						// Go to editor screen
-						_gui->getViewport("left")->getWindow("main")->setActiveScreen("skyEditorMenuChoice");
+						_gui.getViewport("left")->getWindow("main")->setActiveScreen("skyEditorMenuChoice");
 
 						// Show sky name
-						_fe3d.textEntity_setTextContent(_gui->getGlobalScreen()->getTextfield("selectedSkyName")->getEntityID(),
+						_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedSkyName")->getEntityID(),
 							"Sky: " + _currentSkyID.substr(1), 0.025f);
-						_fe3d.textEntity_show(_gui->getGlobalScreen()->getTextfield("selectedSkyName")->getEntityID());
+						_fe3d.textEntity_show(_gui.getGlobalScreen()->getTextfield("selectedSkyName")->getEntityID());
 
 						// Show entity
 						_fe3d.skyEntity_select(_currentSkyID);
 					}
 
 					// Miscellaneous
-					_gui->getGlobalScreen()->removeChoiceForm("skyList");
+					_gui.getGlobalScreen()->removeChoiceForm("skyList");
 					_skyChoosingEnabled = false;
 				}
 				else
@@ -108,12 +108,12 @@ void WorldEditor::_updateSkyChoosing()
 					_hoveredSkyID = "@" + selectedButtonID;
 				}
 			}
-			else if (_gui->getGlobalScreen()->isChoiceFormCancelled("skyList")) // Cancelled choosing
+			else if (_gui.getGlobalScreen()->isChoiceFormCancelled("skyList")) // Cancelled choosing
 			{
 				_skyChoosingEnabled = false;
 				_skyEditingEnabled = false;
 				_skyRemovalEnabled = false;
-				_gui->getGlobalScreen()->removeChoiceForm("skyList");
+				_gui.getGlobalScreen()->removeChoiceForm("skyList");
 			}
 			else // Nothing hovered
 			{
@@ -135,9 +135,9 @@ void WorldEditor::_updateSkyRemoval()
 	{
 		if (_skyRemovalEnabled && _currentSkyID != "")
 		{
-			_gui->getGlobalScreen()->addAnswerForm("removeSky", "Are you sure?", vec2(0.0f));
+			_gui.getGlobalScreen()->addAnswerForm("removeSky", "Are you sure?", vec2(0.0f));
 
-			if (_gui->getGlobalScreen()->isAnswerFormConfirmed("removeSky"))
+			if (_gui.getGlobalScreen()->isAnswerFormConfirmed("removeSky"))
 			{
 				// Delete entity
 				_fe3d.skyEntity_delete(_currentSkyID);
@@ -147,7 +147,7 @@ void WorldEditor::_updateSkyRemoval()
 				_skyRemovalEnabled = false;
 				_currentSkyID = "";
 			}
-			else if (_gui->getGlobalScreen()->isAnswerFormCancelled("removeSky"))
+			else if (_gui.getGlobalScreen()->isAnswerFormCancelled("removeSky"))
 			{
 				_skyRemovalEnabled = false;
 				_currentSkyID = "";
@@ -160,7 +160,7 @@ void WorldEditor::_updateSkyCamera()
 {
 	if (_isLoaded && _currentSkyID != "")
 	{
-		if (_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_RIGHT) && !_gui->getGlobalScreen()->isFocused())
+		if (_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_RIGHT) && !_gui.getGlobalScreen()->isFocused())
 		{
 			if (_fe3d.misc_isMouseInsideViewport())
 			{

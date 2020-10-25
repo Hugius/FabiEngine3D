@@ -71,7 +71,7 @@ void SceneEditor::_updateBilboardPlacingMenu()
 							// Set new preview billboard
 							_currentPreviewBillboardName = billboardName;
 							_fe3d.billboardEntity_show(_currentPreviewBillboardName);
-							string textEntityID = _gui->getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID();
+							string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID();
 							_fe3d.textEntity_show(textEntityID);
 							_fe3d.textEntity_setTextContent(textEntityID, "Billboard: " + _currentPreviewBillboardName.substr(1), 0.025f);
 							break;

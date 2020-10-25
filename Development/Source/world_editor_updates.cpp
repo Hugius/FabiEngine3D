@@ -44,18 +44,18 @@ void WorldEditor::update()
 				}
 				else if (screen->getButton("back")->isHovered())
 				{
-					_gui->getGlobalScreen()->addAnswerForm("exitWorldEditor", "Save changes?", vec2(0.0f, 0.25f));
+					_gui.getGlobalScreen()->addAnswerForm("exitWorldEditor", "Save changes?", vec2(0.0f, 0.25f));
 				}
 			}
 
 			// Check if user wants to save changes
-			if (_gui->getGlobalScreen()->isAnswerFormConfirmed("exitWorldEditor"))
+			if (_gui.getGlobalScreen()->isAnswerFormConfirmed("exitWorldEditor"))
 			{
 				save();
 				_leftWindow->setActiveScreen("main");
 				unload();
 			}
-			else if (_gui->getGlobalScreen()->isAnswerFormCancelled("exitWorldEditor"))
+			else if (_gui.getGlobalScreen()->isAnswerFormCancelled("exitWorldEditor"))
 			{
 				_leftWindow->setActiveScreen("main");
 				unload();

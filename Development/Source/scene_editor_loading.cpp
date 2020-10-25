@@ -501,7 +501,7 @@ void SceneEditor::loadScene(const string& fileName)
 	}
 }
 
-void SceneEditor::unloadScene()
+void SceneEditor::clearScene()
 {
 	// Disable graphics
 	_fe3d.gfx_disableAmbientLighting();

@@ -12,7 +12,7 @@
 class TopViewportController final : public ViewportController
 {
 public:
-	TopViewportController(FabiEngine3D& fe3d, shared_ptr<EngineGuiManager> gui, 
+	TopViewportController(FabiEngine3D& fe3d, EngineGuiManager& gui, 
 		ModelEditor& modelEditor, WorldEditor& worldEditor, BillboardEditor& billboardEditor, SceneEditor& sceneEditor, ScriptEditor& scriptEditor);
 	~TopViewportController() = default;
 

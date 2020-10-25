@@ -141,6 +141,7 @@
     <ClInclude Include="Source\aabb_entity.hpp" />
     <ClInclude Include="Source\aabb_entity_manager.hpp" />
     <ClInclude Include="Source\aabb_entity_renderer.hpp" />
+    <ClInclude Include="Source\aabb_parent_type.hpp" />
     <ClInclude Include="Source\audio_chunk.hpp" />
     <ClInclude Include="Source\audio_loader.hpp" />
     <ClInclude Include="Source\audio_manager.hpp" />
@@ -151,7 +152,10 @@
     <ClInclude Include="Source\billboard_entity_manager.hpp" />
     <ClInclude Include="Source\billboard_entity_renderer.hpp" />
     <ClInclude Include="Source\bloom_hdr_renderer.hpp" />
+    <ClInclude Include="Source\blur_direction.hpp" />
     <ClInclude Include="Source\blur_renderer.hpp" />
+    <ClInclude Include="Source\blur_type.hpp" />
+    <ClInclude Include="Source\buffer_type.hpp" />
     <ClInclude Include="Source\camera_manager.hpp" />
     <ClInclude Include="Source\collision.hpp" />
     <ClInclude Include="Source\collision_detector.hpp" />
@@ -159,9 +163,12 @@
     <ClInclude Include="Source\configuration.hpp" />
     <ClInclude Include="Source\core_engine.hpp" />
     <ClInclude Include="Source\depth_renderer.hpp" />
+    <ClInclude Include="Source\direction.hpp" />
     <ClInclude Include="Source\engine_controller.hpp" />
     <ClInclude Include="Source\bottom_viewport_controller.hpp" />
     <ClInclude Include="Source\engine_gui_scrollinglist.hpp" />
+    <ClInclude Include="Source\entity_type.hpp" />
+    <ClInclude Include="Source\message_type.hpp" />
     <ClInclude Include="Source\script.hpp" />
     <ClInclude Include="Source\scene_editor.hpp" />
     <ClInclude Include="Source\left_viewport_controller.hpp" />
@@ -171,6 +178,8 @@
     <ClInclude Include="Source\script_executor.hpp" />
     <ClInclude Include="Source\script_file.hpp" />
     <ClInclude Include="Source\script_interpreter.hpp" />
+    <ClInclude Include="Source\script_type.hpp" />
+    <ClInclude Include="Source\script_value_type.hpp" />
     <ClInclude Include="Source\script_variable.hpp" />
     <ClInclude Include="Source\settings_editor.hpp" />
     <ClInclude Include="Source\top_viewport_controller.hpp" />
@@ -220,6 +229,7 @@
     <ClInclude Include="Source\texture_loader.hpp" />
     <ClInclude Include="Source\timer.hpp" />
     <ClInclude Include="Source\tools.hpp" />
+    <ClInclude Include="Source\transformation_type.hpp" />
     <ClInclude Include="Source\viewport_controller.hpp" />
     <ClInclude Include="Source\water_entity.hpp" />
     <ClInclude Include="Source\water_entity_manager.hpp" />
@@ -227,6 +237,7 @@
     <ClInclude Include="Source\window_manager.hpp" />
     <ClInclude Include="Source\fabi_engine_3d.hpp" />
     <ClInclude Include="Source\world_editor.hpp" />
+    <ClInclude Include="Source\world_part.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\aabb_entity_renderer.cpp" />
@@ -305,8 +316,8 @@
     <ClCompile Include="Source\script_editor_updates.cpp" />
     <ClCompile Include="Source\script_executor.cpp" />
     <ClCompile Include="Source\script_file.cpp" />
-    <ClCompile Include="Source\script_interpreter.cpp" />
-    <ClCompile Include="Source\script_value.cpp" />
+    <ClCompile Include="Source\script_interpreter_core.cpp" />
+    <ClCompile Include="Source\script_interpreter_misc.cpp" />
     <ClCompile Include="Source\settings_editor.cpp" />
     <ClCompile Include="Source\top_viewport_controller_core.cpp" />
     <ClCompile Include="Source\engine_gui_button.cpp" />

@@ -194,7 +194,7 @@ bool FabiEngine3D::collision_checkAnyWithCamera()
 {
 	for (auto entity : _core->_aabbEntityManager.getEntities()) // Loop over AABB entities
 	{
-		if (entity->getCollisionDirection() != CollisionDirection::NONE)
+		if (entity->getCollisionDirection() != Direction::NONE)
 		{
 			return true;
 		}
@@ -205,7 +205,7 @@ bool FabiEngine3D::collision_checkAnyWithCamera()
 
 bool FabiEngine3D::collision_checkEntityWithCamera(const string& ID)
 {
-	return _core->_aabbEntityManager.getEntity(ID)->getCollisionDirection() != CollisionDirection::NONE;
+	return _core->_aabbEntityManager.getEntity(ID)->getCollisionDirection() != Direction::NONE;
 }
 
 const string& FabiEngine3D::collision_checkEntityWithOthers(const string& ID)
@@ -271,7 +271,7 @@ const string& FabiEngine3D::collision_checkEntitiesWithCamera(const string& ID)
 				auto direction = entity->getCollisionDirection(); // Calculate direction
 
 				// True if collides
-				if (direction != CollisionDirection::NONE)
+				if (direction != Direction::NONE)
 				{
 					return entity->getID();
 				}
@@ -384,7 +384,7 @@ ivec3 FabiEngine3D::collision_checkEntityWithCameraDirection(const string& ID)
 	auto state = _core->_aabbEntityManager.getEntity(ID)->getCollisionDirection();
 
 	// Return collision
-	return ivec3(state == CollisionDirection::X, state == CollisionDirection::Y, state == CollisionDirection::Z);
+	return ivec3(state == Direction::X, state == Direction::Y, state == Direction::Z);
 }
 
 ivec3 FabiEngine3D::collision_checkEntitiesWithCameraDirection(const string& ID)
@@ -399,9 +399,9 @@ ivec3 FabiEngine3D::collision_checkEntitiesWithCameraDirection(const string& ID)
 				auto direction = entity->getCollisionDirection(); // Calculate direction
 
 				// Return direction if collides
-				if (direction != CollisionDirection::NONE)
+				if (direction != Direction::NONE)
 				{
-					return ivec3(direction == CollisionDirection::X, direction == CollisionDirection::Y, direction == CollisionDirection::Z);
+					return ivec3(direction == Direction::X, direction == Direction::Y, direction == Direction::Z);
 				}
 			}
 		}

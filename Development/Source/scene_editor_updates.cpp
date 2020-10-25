@@ -60,17 +60,17 @@ void SceneEditor::_updateMainMenu()
 		{
 			if (screen->getButton("create")->isHovered())
 			{
-				_gui->getGlobalScreen()->addValueForm("newSceneName", "New scene name", "", vec2(0.0f), vec2(0.5f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("newSceneName", "New scene name", "", vec2(0.0f), vec2(0.5f, 0.1f));
 			}
 			else if (screen->getButton("edit")->isHovered())
 			{
 				_isChoosingScene = true;
-				_gui->getGlobalScreen()->addChoiceForm("sceneList", "Select scene", vec2(0.0f, 0.1f), _loadSceneNames());
+				_gui.getGlobalScreen()->addChoiceForm("sceneList", "Select scene", vec2(0.0f, 0.1f), _loadSceneNames());
 			}
 			else if (screen->getButton("delete")->isHovered())
 			{
 				_isDeletingScene = true;
-				_gui->getGlobalScreen()->addChoiceForm("sceneList", "Select scene", vec2(0.0f, 0.1f), _loadSceneNames());
+				_gui.getGlobalScreen()->addChoiceForm("sceneList", "Select scene", vec2(0.0f, 0.1f), _loadSceneNames());
 			}
 			else if (screen->getButton("back")->isHovered())
 			{
@@ -81,7 +81,7 @@ void SceneEditor::_updateMainMenu()
 
 		// Update scene creation
 		string newSceneName;
-		if (_gui->getGlobalScreen()->checkValueForm("newSceneName", newSceneName, {}))
+		if (_gui.getGlobalScreen()->checkValueForm("newSceneName", newSceneName, {}))
 		{
 			auto sceneNames = _loadSceneNames();
 
@@ -100,7 +100,7 @@ void SceneEditor::_updateMainMenu()
 		// Update scene choice
 		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
-			string selectedButtonID = _gui->getGlobalScreen()->getSelectedChoiceFormButtonID("sceneList");
+			string selectedButtonID = _gui.getGlobalScreen()->getSelectedChoiceFormButtonID("sceneList");
 			if (selectedButtonID != "")
 			{
 				_currentSceneName = selectedButtonID;
@@ -113,29 +113,29 @@ void SceneEditor::_updateMainMenu()
 				}
 				else if (_isDeletingScene) // Prepare deletion confirmation
 				{
-					_gui->getGlobalScreen()->addAnswerForm("deleteScene", "Are you sure?", vec2(0.0f));
+					_gui.getGlobalScreen()->addAnswerForm("deleteScene", "Are you sure?", vec2(0.0f));
 				}
 
 				// Miscellaneous
-				_gui->getGlobalScreen()->removeChoiceForm("sceneList");
+				_gui.getGlobalScreen()->removeChoiceForm("sceneList");
 				_isChoosingScene = false;
 			}
-			else if (_gui->getGlobalScreen()->isChoiceFormCancelled("sceneList"))
+			else if (_gui.getGlobalScreen()->isChoiceFormCancelled("sceneList"))
 			{
-				_gui->getGlobalScreen()->removeChoiceForm("sceneList");
+				_gui.getGlobalScreen()->removeChoiceForm("sceneList");
 			}
 		}
 
 		// Update scene deletion if chosen
 		if (_isDeletingScene && _currentSceneName != "")
 		{
-			if (_gui->getGlobalScreen()->isAnswerFormConfirmed("deleteScene")) // Confirmed
+			if (_gui.getGlobalScreen()->isAnswerFormConfirmed("deleteScene")) // Confirmed
 			{
 				_deleteSceneFile(_currentSceneName);
 				_isDeletingScene = false;
 				_currentSceneName = "";
 			}
-			else if (_gui->getGlobalScreen()->isAnswerFormCancelled("deleteScene")) // Cancelled
+			else if (_gui.getGlobalScreen()->isAnswerFormCancelled("deleteScene")) // Cancelled
 			{
 				_isDeletingScene = false;
 				_currentSceneName = "";
@@ -177,22 +177,22 @@ void SceneEditor::_updateChoiceMenu()
 				}
 				else if (screen->getButton("back")->isHovered()) // Back button
 				{
-					_gui->getGlobalScreen()->addAnswerForm("exitSceneEditor", "Save changes?", vec2(0.0f, 0.25f));
+					_gui.getGlobalScreen()->addAnswerForm("exitSceneEditor", "Save changes?", vec2(0.0f, 0.25f));
 				}
 			}
 
 			// Check if user wants to save changes
-			if (_gui->getGlobalScreen()->isAnswerFormConfirmed("exitSceneEditor"))
+			if (_gui.getGlobalScreen()->isAnswerFormConfirmed("exitSceneEditor"))
 			{
 				save();
-				unloadScene();
+				clearScene();
 				_fe3d.skyEntity_select("@@engineBackground");
 				_currentSceneName = "";
 				_leftWindow->setActiveScreen("sceneEditorMenuMain");
 			}
-			else if (_gui->getGlobalScreen()->isAnswerFormCancelled("exitSceneEditor"))
+			else if (_gui.getGlobalScreen()->isAnswerFormCancelled("exitSceneEditor"))
 			{
-				unloadScene();
+				clearScene();
 				_fe3d.skyEntity_select("@@engineBackground");
 				_currentSceneName = "";
 				_leftWindow->setActiveScreen("sceneEditorMenuMain");
@@ -208,7 +208,7 @@ void SceneEditor::_updateCamera()
 		if (_currentSceneName != "")
 		{
 			// Camera looking
-			if (_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_RIGHT) && !_gui->getGlobalScreen()->isFocused())
+			if (_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_RIGHT) && !_gui.getGlobalScreen()->isFocused())
 			{
 				if (_fe3d.misc_isMouseInsideViewport())
 				{
@@ -234,7 +234,7 @@ void SceneEditor::_updateCamera()
 			}
 
 			// Camera movement
-			if (!_gui->getGlobalScreen()->isFocused())
+			if (!_gui.getGlobalScreen()->isFocused())
 			{
 				// X movement
 				if (_fe3d.input_getKeyDown(InputType::KEY_A))

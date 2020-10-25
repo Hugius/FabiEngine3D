@@ -25,7 +25,7 @@ void SceneEditor::_selectModel(const string& modelID)
 	{
 		// Removing the unique number from the modelID and updating the text content
 		string modelName = modelID.substr(modelID.find('@') + 1);
-		string textEntityID = _gui->getGlobalScreen()->getTextfield("selectedModelName")->getEntityID();
+		string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedModelName")->getEntityID();
 		_fe3d.textEntity_show(textEntityID);
 		_fe3d.textEntity_setTextContent(textEntityID, "Selected model : " + modelName, 0.025f);
 	}
@@ -49,7 +49,7 @@ void SceneEditor::_activateModel(const string& modelID)
 
 	// Removing the unique number from the modelID and updating the text content
 	string modelName = modelID.substr(modelID.find('@') + 1);
-	string textEntityID = _gui->getGlobalScreen()->getTextfield("selectedModelName")->getEntityID();
+	string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedModelName")->getEntityID();
 	_fe3d.textEntity_show(textEntityID);
 	_fe3d.textEntity_setTextContent(textEntityID, "Active model: " + modelName, 0.025f);
 }
@@ -66,7 +66,7 @@ void SceneEditor::_selectBillboard(const string& billboardID)
 	{
 		// Removing the unique number from the billboardID and updating the text content
 		string billboardName = billboardID.substr(billboardID.find('@') + 1);
-		string textEntityID = _gui->getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID();
+		string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID();
 		_fe3d.textEntity_show(textEntityID);
 		_fe3d.textEntity_setTextContent(textEntityID, "Selected billboard: " + billboardName, 0.025f);
 	}
@@ -90,7 +90,7 @@ void SceneEditor::_activateBillboard(const string& billboardID)
 
 	// Removing the unique number from the billboardID and updating the text content
 	string billboardName = billboardID.substr(billboardID.find('@') + 1);
-	string textEntityID = _gui->getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID();
+	string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID();
 	_fe3d.textEntity_show(textEntityID);
 	_fe3d.textEntity_setTextContent(textEntityID, "Active billboard: " + billboardName, 0.025f);
 }
@@ -253,7 +253,7 @@ void SceneEditor::_updateMiscellaneous()
 	if (_isLoaded)
 	{
 		// Lock toggling if GUI focused or cursor not in 3D viewport
-		_fe3d.input_setKeyTogglingLocked(_gui->getGlobalScreen()->isFocused() && _fe3d.misc_isMouseInsideViewport());
+		_fe3d.input_setKeyTogglingLocked(_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isMouseInsideViewport());
 
 		// Update bounding box visibility
 		if (_fe3d.input_getKeyToggled(InputType::KEY_B))

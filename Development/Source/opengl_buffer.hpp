@@ -1,5 +1,7 @@
 #pragma once
 
+#include "buffer_type.hpp"
+
 #include <vector>
 #include <GLM\\glm.hpp>
 #include <GLEW\\glew.h>
@@ -8,15 +10,7 @@ using std::vector;
 using glm::vec2;
 using glm::vec3;
 using glm::vec4;
-
-enum class BufferType
-{
-	MODEL,
-	MODEL_TANGENT,
-	CUBEMAP,
-	SURFACE,
-	AABB
-};
+using glm::mat4;
 
 class OpenGLBuffer final
 {

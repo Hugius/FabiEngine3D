@@ -2,32 +2,27 @@
 
 #include "script.hpp"
 #include "scene_editor.hpp"
+#include "script_type.hpp"
+#include "script_value.hpp"
 
 class ScriptInterpreter
 {
 public:
-	ScriptInterpreter(FabiEngine3D& fe3d, Script& script);
+	ScriptInterpreter(FabiEngine3D& fe3d, Script& script, SceneEditor& sceneEditor);
 
 	void load();
 	void executeInitialization();
 	void executeUpdate();
 	void executeDestruction();
 	void unload();
-	void setSceneEditorInstance(SceneEditor* sceneEditor);
 
 private:
-	enum class ScriptType
-	{
-		INIT,
-		UPDATE,
-		DESTROY
-	};
-
 	FabiEngine3D& _fe3d;
 	Script& _script;
-	SceneEditor* _sceneEditor = nullptr;
+	SceneEditor& _sceneEditor;
 
 	void _executeScript(const string& ID, ScriptType type);
+	vector<ScriptValue> _extractArguments(string argumentString);
 
 	vector<string> _initScriptIDs;
 	vector<string> _updateScriptIDs;

@@ -14,24 +14,24 @@ void ScriptEditor::_updateGUI()
 	if (_isLoaded)
 	{
 		// Main screen
-		auto leftWindow = _gui->getViewport("left")->getWindow("main");
+		auto leftWindow = _gui.getViewport("left")->getWindow("main");
 		auto mainScreen = leftWindow->getScreen("scriptEditorMenuMain");
 		
 		// Buttons hoverability
 		mainScreen->getButton("deleteScript")->setHoverable(_currentScriptFileID != "");
 
 		// Check if LMB is pressed
-		if (!_gui->getGlobalScreen()->isFocused())
+		if (!_gui.getGlobalScreen()->isFocused())
 		{
 			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
 				if (mainScreen->getButton("createScript")->isHovered())
 				{
-					_gui->getGlobalScreen()->addValueForm("newScriptName", "New script name", "", vec2(0.0f), vec2(0.5f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("newScriptName", "New script name", "", vec2(0.0f), vec2(0.5f, 0.1f));
 				}
 				else if (mainScreen->getButton("editScript")->isHovered())
 				{
-					_gui->getGlobalScreen()->addChoiceForm("scriptFileList", "Choose script", vec2(0.0f), _script.getAllScriptFileIDs());
+					_gui.getGlobalScreen()->addChoiceForm("scriptFileList", "Choose script", vec2(0.0f), _script.getAllScriptFileIDs());
 				}
 				else if (mainScreen->getButton("deleteScript")->isHovered())
 				{
@@ -47,19 +47,19 @@ void ScriptEditor::_updateGUI()
 				}
 				else if (mainScreen->getButton("back")->isHovered())
 				{
-					_gui->getGlobalScreen()->addAnswerForm("exitScriptEditor", "Save changes?", vec2(0.0f, 0.25f));
+					_gui.getGlobalScreen()->addAnswerForm("exitScriptEditor", "Save changes?", vec2(0.0f, 0.25f));
 				}
 			}
 		}
 
 		// Check if user wants to save changes
-		if (_gui->getGlobalScreen()->isAnswerFormConfirmed("exitScriptEditor"))
+		if (_gui.getGlobalScreen()->isAnswerFormConfirmed("exitScriptEditor"))
 		{
 			save();
 			unload();
 			leftWindow->setActiveScreen("main");
 		}
-		else if (_gui->getGlobalScreen()->isAnswerFormCancelled("exitScriptEditor"))
+		else if (_gui.getGlobalScreen()->isAnswerFormCancelled("exitScriptEditor"))
 		{
 			unload();
 			leftWindow->setActiveScreen("main");
@@ -75,7 +75,7 @@ void ScriptEditor::_updateMiscellaneous()
 		{
 			unsigned int cursorLineIndex = _script.getScriptFile(_currentScriptFileID)->getCursorLineIndex();
 
-			if (!_gui->getGlobalScreen()->isFocused() && _fe3d.misc_isMouseInsideViewport())
+			if (!_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isMouseInsideViewport())
 			{
 				// Camera movement input
 				if (_fe3d.input_getMouseWheelY() == -1 && cursorLineIndex > 12)
@@ -131,7 +131,7 @@ void ScriptEditor::_updateMiscellaneous()
 
 		// Check if user filled in a new script name
 		string newName;
-		if (_gui->getGlobalScreen()->checkValueForm("newScriptName", newName))
+		if (_gui.getGlobalScreen()->checkValueForm("newScriptName", newName))
 		{
 			auto existingNames = _script.getAllScriptFileIDs();
 			if (find(existingNames.begin(), existingNames.end(), newName) == existingNames.end())
@@ -149,20 +149,20 @@ void ScriptEditor::_updateMiscellaneous()
 		}
 
 		// Check if existing script file chosen for viewing
-		string selectedButtonID = _gui->getGlobalScreen()->getSelectedChoiceFormButtonID("scriptFileList");
+		string selectedButtonID = _gui.getGlobalScreen()->getSelectedChoiceFormButtonID("scriptFileList");
 		if (selectedButtonID != "")
 		{
 			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				_gui->getGlobalScreen()->removeChoiceForm("scriptFileList");
+				_gui.getGlobalScreen()->removeChoiceForm("scriptFileList");
 				_currentScriptFileID = selectedButtonID;
 				_isWritingScript = true;
 				_reloadScriptTextDisplay();
 			}
 		}
-		else if (_gui->getGlobalScreen()->isChoiceFormCancelled("scriptFileList"))
+		else if (_gui.getGlobalScreen()->isChoiceFormCancelled("scriptFileList"))
 		{
-			_gui->getGlobalScreen()->removeChoiceForm("scriptFileList");
+			_gui.getGlobalScreen()->removeChoiceForm("scriptFileList");
 		}
 	}
 }

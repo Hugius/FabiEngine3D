@@ -3,7 +3,7 @@
 
 #define GW(text) LVPC::calcTextWidth(text, 0.15f, 1.8f)
 
-WorldEditor::WorldEditor(FabiEngine3D& fe3d, shared_ptr<EngineGuiManager> gui) :
+WorldEditor::WorldEditor(FabiEngine3D& fe3d, EngineGuiManager& gui) :
 	_fe3d(fe3d),
 	_gui(gui)
 {
@@ -13,7 +13,7 @@ WorldEditor::WorldEditor(FabiEngine3D& fe3d, shared_ptr<EngineGuiManager> gui) :
 void WorldEditor::initializeGUI()
 {
 	// Private window instance of left viewport
-	_leftWindow = _gui->getViewport("left")->getWindow("main");
+	_leftWindow = _gui.getViewport("left")->getWindow("main");
 
 	// Left-viewport: mainWindow - worldEditorMenu
 	_leftWindow->addScreen("worldEditorMenu");
@@ -151,9 +151,9 @@ void WorldEditor::load()
 	loadWaterEntities();
 
 	// Miscellaneous
-	_gui->getGlobalScreen()->addTextfield("selectedSkyName", vec2(0.0f, 0.85f), vec2(0.5f, 0.1f), "", vec3(1.0f));
-	_gui->getGlobalScreen()->addTextfield("selectedTerrainName", vec2(0.0f, 0.85f), vec2(0.5f, 0.1f), "", vec3(1.0f));
-	_gui->getGlobalScreen()->addTextfield("selectedWaterName", vec2(0.0f, 0.85f), vec2(0.5f, 0.1f), "", vec3(1.0f));
+	_gui.getGlobalScreen()->addTextfield("selectedSkyName", vec2(0.0f, 0.85f), vec2(0.5f, 0.1f), "", vec3(1.0f));
+	_gui.getGlobalScreen()->addTextfield("selectedTerrainName", vec2(0.0f, 0.85f), vec2(0.5f, 0.1f), "", vec3(1.0f));
+	_gui.getGlobalScreen()->addTextfield("selectedWaterName", vec2(0.0f, 0.85f), vec2(0.5f, 0.1f), "", vec3(1.0f));
 	_isLoaded = true;
 }
 
@@ -204,8 +204,8 @@ void WorldEditor::unload()
 	_waterRemovalEnabled = false;
 
 	// Miscellaneous
-	_gui->getGlobalScreen()->deleteTextfield("selectedSkyName");
-	_gui->getGlobalScreen()->deleteTextfield("selectedTerrainName");
-	_gui->getGlobalScreen()->deleteTextfield("selectedWaterName");
+	_gui.getGlobalScreen()->deleteTextfield("selectedSkyName");
+	_gui.getGlobalScreen()->deleteTextfield("selectedTerrainName");
+	_gui.getGlobalScreen()->deleteTextfield("selectedWaterName");
 	_isLoaded = false;
 }

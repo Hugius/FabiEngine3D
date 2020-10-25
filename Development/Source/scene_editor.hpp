@@ -5,21 +5,15 @@
 #include "world_editor.hpp"
 #include "model_editor.hpp"
 #include "billboard_editor.hpp"
+#include "transformation_type.hpp"
 
 #include <map>
 #include <limits>
 
-enum class TransformationType
-{
-	TRANSLATION,
-	ROTATION,
-	SCALING,
-};
-
 class SceneEditor final
 {
 public:
-	SceneEditor(FabiEngine3D& fe3d, shared_ptr<EngineGuiManager> gui, WorldEditor& worldEditor, ModelEditor& modelEditor, BillboardEditor& billboardEditor);
+	SceneEditor(FabiEngine3D& fe3d, EngineGuiManager& gui, WorldEditor& worldEditor, ModelEditor& modelEditor, BillboardEditor& billboardEditor);
 	~SceneEditor() = default;
 
 	void initializeGUI();
@@ -29,7 +23,7 @@ public:
 	void update();
 	void setCurrentProjectName(const string&projectName);
 	void loadScene(const string& fileName);
-	void unloadScene();
+	void clearScene();
 
 	bool isLoaded();
 
@@ -115,7 +109,7 @@ private:
 
 	// Instances
 	FabiEngine3D& _fe3d;
-	shared_ptr<EngineGuiManager> _gui = nullptr;
+	EngineGuiManager& _gui;
 	WorldEditor& _worldEditor;
 	ModelEditor& _modelEditor;
 	BillboardEditor& _billboardEditor;

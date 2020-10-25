@@ -170,19 +170,19 @@
       <Filter>src\Core System\Core</Filter>
     </ClCompile>
     <ClCompile Include="Source\camera_manager.cpp">
-      <Filter>src\Miscellaneous\Code</Filter>
+      <Filter>src\Miscellaneous\Other</Filter>
     </ClCompile>
     <ClCompile Include="Source\configuration.cpp">
-      <Filter>src\Miscellaneous\Code</Filter>
+      <Filter>src\Miscellaneous\Other</Filter>
     </ClCompile>
     <ClCompile Include="Source\input_handler.cpp">
-      <Filter>src\Miscellaneous\Code</Filter>
+      <Filter>src\Miscellaneous\Other</Filter>
     </ClCompile>
     <ClCompile Include="Source\timer.cpp">
-      <Filter>src\Miscellaneous\Code</Filter>
+      <Filter>src\Miscellaneous\Other</Filter>
     </ClCompile>
     <ClCompile Include="Source\tools.cpp">
-      <Filter>src\Miscellaneous\Code</Filter>
+      <Filter>src\Miscellaneous\Other</Filter>
     </ClCompile>
     <ClCompile Include="Source\opengl_framebuffer_misc.cpp">
       <Filter>src\Rendering System\OpenGL</Filter>
@@ -382,20 +382,11 @@
     <ClCompile Include="Source\top_viewport_controller_misc.cpp">
       <Filter>src\Engine Controller System\Viewport Controllers</Filter>
     </ClCompile>
-    <ClCompile Include="Source\script_executor.cpp">
-      <Filter>src\Scripting System\Execution</Filter>
-    </ClCompile>
     <ClCompile Include="Source\script_file.cpp">
       <Filter>src\Scripting System\Core</Filter>
     </ClCompile>
-    <ClCompile Include="Source\script_value.cpp">
-      <Filter>src\Scripting System\Values</Filter>
-    </ClCompile>
     <ClCompile Include="Source\script_editor_writer.cpp">
       <Filter>src\Editor System\Script Editor\Updates</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\script_interpreter.cpp">
-      <Filter>src\Scripting System\Execution</Filter>
     </ClCompile>
     <ClCompile Include="Source\world_editor_updates.cpp">
       <Filter>src\Editor System\World Editor\Updates</Filter>
@@ -456,6 +447,15 @@
     </ClCompile>
     <ClCompile Include="Source\scene_editor_environment.cpp">
       <Filter>src\Editor System\Scene Editor\Environment</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_executor.cpp">
+      <Filter>src\Scripting System\Execution\Executor</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_interpreter_misc.cpp">
+      <Filter>src\Scripting System\Execution\Interpreter</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_interpreter_core.cpp">
+      <Filter>src\Scripting System\Execution\Interpreter</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -616,25 +616,22 @@
       <Filter>src\Core System\Core</Filter>
     </ClInclude>
     <ClInclude Include="Source\camera_manager.hpp">
-      <Filter>src\Miscellaneous\Code</Filter>
+      <Filter>src\Miscellaneous\Other</Filter>
     </ClInclude>
     <ClInclude Include="Source\configuration.hpp">
-      <Filter>src\Miscellaneous\Code</Filter>
+      <Filter>src\Miscellaneous\Other</Filter>
     </ClInclude>
     <ClInclude Include="Source\input_handler.hpp">
-      <Filter>src\Miscellaneous\Code</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\input_types.hpp">
-      <Filter>src\Miscellaneous\Code</Filter>
+      <Filter>src\Miscellaneous\Other</Filter>
     </ClInclude>
     <ClInclude Include="Source\logger.hpp">
-      <Filter>src\Miscellaneous\Code</Filter>
+      <Filter>src\Miscellaneous\Other</Filter>
     </ClInclude>
     <ClInclude Include="Source\timer.hpp">
-      <Filter>src\Miscellaneous\Code</Filter>
+      <Filter>src\Miscellaneous\Other</Filter>
     </ClInclude>
     <ClInclude Include="Source\tools.hpp">
-      <Filter>src\Miscellaneous\Code</Filter>
+      <Filter>src\Miscellaneous\Other</Filter>
     </ClInclude>
     <ClInclude Include="Source\engine_controller.hpp">
       <Filter>src\Engine Controller System\Core Controller</Filter>
@@ -714,17 +711,53 @@
     <ClInclude Include="Source\engine_gui_writefield.hpp">
       <Filter>src\GUI System\Elements</Filter>
     </ClInclude>
-    <ClInclude Include="Source\script_executor.hpp">
-      <Filter>src\Scripting System\Execution</Filter>
-    </ClInclude>
     <ClInclude Include="Source\script_file.hpp">
       <Filter>src\Scripting System\Core</Filter>
     </ClInclude>
     <ClInclude Include="Source\script_variable.hpp">
-      <Filter>src\Scripting System\Elements</Filter>
+      <Filter>src\Scripting System\Miscellaneous</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\script_type.hpp">
+      <Filter>src\Scripting System\Miscellaneous</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\input_types.hpp">
+      <Filter>src\Miscellaneous\Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\world_part.hpp">
+      <Filter>src\Miscellaneous\Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\transformation_type.hpp">
+      <Filter>src\Miscellaneous\Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\direction.hpp">
+      <Filter>src\Miscellaneous\Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\entity_type.hpp">
+      <Filter>src\Miscellaneous\Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\script_value_type.hpp">
+      <Filter>src\Miscellaneous\Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\aabb_parent_type.hpp">
+      <Filter>src\Miscellaneous\Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\buffer_type.hpp">
+      <Filter>src\Miscellaneous\Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\message_type.hpp">
+      <Filter>src\Miscellaneous\Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\blur_type.hpp">
+      <Filter>src\Miscellaneous\Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\blur_direction.hpp">
+      <Filter>src\Miscellaneous\Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\script_executor.hpp">
+      <Filter>src\Scripting System\Execution\Executor</Filter>
     </ClInclude>
     <ClInclude Include="Source\script_interpreter.hpp">
-      <Filter>src\Scripting System\Execution</Filter>
+      <Filter>src\Scripting System\Execution\Interpreter</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -833,9 +866,6 @@
     <Filter Include="src\Miscellaneous\Icon">
       <UniqueIdentifier>{4c4ee138-6869-4b50-b826-de5daeeb4e80}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\Miscellaneous\Code">
-      <UniqueIdentifier>{2592ce74-7374-40fa-ba9c-554b581bdc7d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\Editor System\Scene Editor">
       <UniqueIdentifier>{73f39bce-8d65-416c-abaa-6ed990784a08}</UniqueIdentifier>
     </Filter>
@@ -914,14 +944,8 @@
     <Filter Include="src\GUI System\Elements">
       <UniqueIdentifier>{21adc94a-d3c8-45c0-9dca-7651507f0e80}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\Scripting System\Values">
-      <UniqueIdentifier>{59d6a649-6476-46f1-ad35-28278273b1ca}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\Scripting System\Execution">
       <UniqueIdentifier>{584f8315-779f-4805-ad43-c607476a8f16}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\Scripting System\Elements">
-      <UniqueIdentifier>{777c0a5b-5e3e-41d8-bbbc-dbcd603a8e59}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\Editor System\World Editor\Updates">
       <UniqueIdentifier>{c658aa7d-506b-4818-a69f-ce8a2da31340}</UniqueIdentifier>
@@ -946,6 +970,21 @@
     </Filter>
     <Filter Include="src\Editor System\Scene Editor\Environment">
       <UniqueIdentifier>{2780c3eb-9ca4-4a02-b6d0-2656e4874c3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Scripting System\Miscellaneous">
+      <UniqueIdentifier>{59d6a649-6476-46f1-ad35-28278273b1ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Miscellaneous\Other">
+      <UniqueIdentifier>{2592ce74-7374-40fa-ba9c-554b581bdc7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Miscellaneous\Enums">
+      <UniqueIdentifier>{f6f456ee-3395-4214-b36f-2fd3e7745294}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Scripting System\Execution\Executor">
+      <UniqueIdentifier>{1088725b-73ef-4d79-b354-ac7efa55074b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Scripting System\Execution\Interpreter">
+      <UniqueIdentifier>{9ef89fd4-378e-4f48-8117-5e6d05463d66}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1028,7 +1067,7 @@
       <Filter>src\Rendering System\Shaders\Entity Shaders</Filter>
     </None>
     <None Include="Source\script_value.hpp">
-      <Filter>src\Scripting System\Values</Filter>
+      <Filter>src\Scripting System\Miscellaneous</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

@@ -5,7 +5,7 @@ void ScriptEditor::_updateTextWriter()
 	static bool wasGuiFocused = false;
 	
 	// User must be editing script file & no active GUI overlays
-	if (_isLoaded && _isWritingScript && !_gui->getGlobalScreen()->isFocused() && !wasGuiFocused)
+	if (_isLoaded && _isWritingScript && !_gui.getGlobalScreen()->isFocused() && !wasGuiFocused)
 	{
 		// Handy values
 		bool textHasChanged = false;
@@ -386,5 +386,5 @@ void ScriptEditor::_updateTextWriter()
 		_script.getScriptFile(_currentScriptFileID)->setCursorCharIndex(cursorCharIndex);
 	}
 
-	wasGuiFocused = _gui->getGlobalScreen()->isFocused();
+	wasGuiFocused = _gui.getGlobalScreen()->isFocused();
 }

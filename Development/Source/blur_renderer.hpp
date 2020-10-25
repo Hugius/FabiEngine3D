@@ -3,14 +3,7 @@
 #include "base_entity_renderer.hpp"
 #include "gui_entity.hpp"
 #include "opengl_framebuffer.hpp"
-
-enum class BlurDirection
-{
-	NONE,
-	HORIZONTAL,
-	VERTICAL,
-	BOTH
-};
+#include "blur_direction.hpp"
 
 class BlurRenderer final : public BaseEntityRenderer
 {

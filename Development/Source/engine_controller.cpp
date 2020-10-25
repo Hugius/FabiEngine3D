@@ -1,7 +1,7 @@
 #include "engine_controller.hpp"
 
 EngineController::EngineController() :
-	_gui(make_shared<EngineGuiManager>(*this)),
+	_gui(*this),
 	_leftViewportController(*this, _gui),
 	_rightViewportController(*this, _gui),
 	_topViewportController(*this, _gui, _leftViewportController.getModelEditor(), _leftViewportController.getWorldEditor(), 
@@ -23,7 +23,7 @@ void EngineController::FE3D_CONTROLLER_INIT()
 void EngineController::FE3D_CONTROLLER_UPDATE()
 {
 	_updateMiscellaneous();
-	_gui->update();
+	_gui.update();
 	_topViewportController.update();
 	_leftViewportController.update();
 	_rightViewportController.update();
@@ -68,7 +68,7 @@ void EngineController::_updateMiscellaneous()
 {
 	// Initialize main menu again if came from different screen
 	static string lastScreen = "";
-	string activeScreen = _gui->getViewport("left")->getWindow("main")->getActiveScreen()->getID();
+	string activeScreen = _gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID();
 	if (activeScreen == "main" && lastScreen != "main")
 	{
 		camera_load(90.0f, 0.1f, 100.0f, vec3(0.0f));

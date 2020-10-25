@@ -8,7 +8,7 @@ void SceneEditor::_updateModelPlacing()
 		if (_currentPreviewModelName != "")
 		{
 			// Check if mouse behavior isn't being invalid
-			if (_fe3d.misc_isMouseInsideViewport() && !_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_RIGHT) && !_gui->getGlobalScreen()->isFocused())
+			if (_fe3d.misc_isMouseInsideViewport() && !_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_RIGHT) && !_gui.getGlobalScreen()->isFocused())
 			{
 				// Default placement position
 				vec3 newPosition = vec3(0.0f);
@@ -56,7 +56,7 @@ void SceneEditor::_updateModelPlacing()
 					// Hide preview model
 					_fe3d.gameEntity_hide(_currentPreviewModelName);
 					_currentPreviewModelName = "";
-					string textEntityID = _gui->getGlobalScreen()->getTextfield("selectedModelName")->getEntityID();
+					string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedModelName")->getEntityID();
 					_fe3d.textEntity_hide(textEntityID);
 				}
 			}

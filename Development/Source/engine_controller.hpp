@@ -21,8 +21,7 @@ private:
 	void _initializeMiscellaneous();
 	void _updateMiscellaneous();
 
-	shared_ptr<EngineGuiManager> _gui = nullptr;
-	
+	EngineGuiManager _gui;
 	LeftViewportController _leftViewportController;
 	RightViewportController _rightViewportController;
 	TopViewportController _topViewportController;

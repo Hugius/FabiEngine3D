@@ -2,9 +2,10 @@
 
 #include <sstream>
 
-ScriptInterpreter::ScriptInterpreter(FabiEngine3D& fe3d, Script& script) :
+ScriptInterpreter::ScriptInterpreter(FabiEngine3D& fe3d, Script& script, SceneEditor& sceneEditor) :
 	_fe3d(fe3d),
-	_script(script)
+	_script(script),
+	_sceneEditor(sceneEditor)
 {
 
 }
@@ -123,11 +124,9 @@ void ScriptInterpreter::unload()
 	_initScriptIDs.clear();
 	_updateScriptIDs.clear();
 	_destroyScriptIDs.clear();
-}
-
-void ScriptInterpreter::setSceneEditorInstance(SceneEditor* sceneEditor)
-{
-	_sceneEditor = sceneEditor;
+	_initEntryID = "";
+	_updateEntryID = "";
+	_destroyEntryID = "";
 }
 
 void ScriptInterpreter::_executeScript(const string& ID, ScriptType type)
@@ -135,9 +134,9 @@ void ScriptInterpreter::_executeScript(const string& ID, ScriptType type)
 	auto scriptFile = _script.getScriptFile(ID);
 
 	// Interpret every line from top to bottom in script
-	for (size_t i = 0; i < scriptFile->getLineCount(); i++)
+	for (size_t lineIndex = 0; lineIndex < scriptFile->getLineCount(); lineIndex++)
 	{
-		string scriptLine = scriptFile->getLineText(i);
+		string scriptLine = scriptFile->getLineText(lineIndex);
 
 		// Check if line is not empty
 		if (scriptLine.empty())
@@ -147,9 +146,6 @@ void ScriptInterpreter::_executeScript(const string& ID, ScriptType type)
 
 		std::istringstream iss(scriptLine);
 
-		string firstWord;
-		iss >> firstWord;
-
 		// Determine keyword type
 		if (scriptLine.substr(0, 4) == "FE3D") // Engine functionality
 		{
@@ -158,19 +154,33 @@ void ScriptInterpreter::_executeScript(const string& ID, ScriptType type)
 			auto closingParanthesisFound = std::find(scriptLine.begin(), scriptLine.end(), ')');
 			if (openingParanthesisFound != scriptLine.end() && closingParanthesisFound != scriptLine.end())
 			{
+				// Extract argument string
 				unsigned int openIndex = std::distance(scriptLine.begin(), openingParanthesisFound);
 				unsigned int closeIndex = std::distance(scriptLine.begin(), closingParanthesisFound);
-				string argumentString = scriptLine.substr(openIndex + 1, scriptLine.size() - closeIndex);
+				string argumentString = scriptLine.substr(openIndex + 1, (closeIndex - openIndex - 1));
+
+				// Extract arguments from argument string
+				auto arguments = _extractArguments(argumentString);
+				if (arguments.empty() && !argumentString.empty())
+				{
+					_fe3d.logger_throwWarning("Syntax error @ script \"" + ID + "\" @ line " + to_string(lineIndex + 1) + ": argument(s) syntax!");
+					continue;
+				}
 
 				// Determine type of function
 				if (scriptLine.substr(0, openIndex) == "FE3D_SCENE_LOAD")
 				{
-					_sceneEditor->loadScene(argumentString);
+					_sceneEditor.loadScene(argumentString);
 				}
 				else if (scriptLine.substr(0, openIndex) == "FE3D_SCENE_CLEAR")
 				{
-					_sceneEditor->unloadScene();
+					_sceneEditor.clearScene();
 				}
+			}
+			else
+			{
+				_fe3d.logger_throwWarning("Syntax error @ script \"" + ID + "\" @ line " + to_string(lineIndex + 1) + ": bracket(s) not found!");
+				continue;
 			}
 		}
 	}

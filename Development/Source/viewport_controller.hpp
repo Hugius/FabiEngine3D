@@ -6,7 +6,7 @@
 class ViewportController
 {
 public:
-	ViewportController(FabiEngine3D& fe3d, shared_ptr<EngineGuiManager> gui);
+	ViewportController(FabiEngine3D& fe3d, EngineGuiManager& gui);
 
 	virtual void initialize() = 0;
 	virtual void update() = 0;
@@ -14,5 +14,5 @@ public:
 protected:
 	FabiEngine3D& _fe3d;
 
-	shared_ptr<EngineGuiManager> _gui = nullptr;
+	EngineGuiManager& _gui;
 };

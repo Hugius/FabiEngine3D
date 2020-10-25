@@ -8,7 +8,7 @@
 class ScriptEditor final
 {
 public:
-	ScriptEditor(FabiEngine3D& fe3d, shared_ptr<EngineGuiManager> gui, SceneEditor& sceneEditor);
+	ScriptEditor(FabiEngine3D& fe3d, EngineGuiManager& gui, SceneEditor& sceneEditor);
 	~ScriptEditor() = default;
 
 	void initializeGUI();
@@ -32,7 +32,7 @@ private:
 
 	// Core variables
 	FabiEngine3D& _fe3d;
-	shared_ptr<EngineGuiManager> _gui = nullptr;
+	EngineGuiManager& _gui;
 	Script _script;
 	ScriptExecutor _scriptExecutor;
 

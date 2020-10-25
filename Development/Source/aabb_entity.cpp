@@ -25,7 +25,7 @@ void AabbEntity::setParent(const string& ID, AabbParentType type)
 	_parentType = type;
 }
 
-void AabbEntity::setCollisionDirection(const CollisionDirection& direction)
+void AabbEntity::setCollisionDirection(const Direction& direction)
 {
 	_collisionDirection = direction;
 }
@@ -90,7 +90,7 @@ const AabbParentType& AabbEntity::getParentType() const
 	return _parentType;
 }
 
-const CollisionDirection& AabbEntity::getCollisionDirection() const
+const Direction& AabbEntity::getCollisionDirection() const
 {
 	return _collisionDirection;
 }

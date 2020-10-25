@@ -14,14 +14,14 @@ void WorldEditor::_updateWaterMenuMain()
 			if (screen->getButton("create")->isHovered())
 			{
 				_waterCreationEnabled = true;
-				_gui->getGlobalScreen()->addValueForm("newWaterName", "New water name", "", vec2(0.0f), vec2(0.5f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("newWaterName", "New water name", "", vec2(0.0f), vec2(0.5f, 0.1f));
 			}
 			else if (screen->getButton("edit")->isHovered())
 			{
 				_waterChoosingEnabled = true;
 				_waterEditingEnabled = true;
 				for (auto& name : _waterNames) { name = name.substr(1); }
-				_gui->getGlobalScreen()->addChoiceForm("waterList", "Select water", vec2(-0.4f, 0.1f), _waterNames);
+				_gui.getGlobalScreen()->addChoiceForm("waterList", "Select water", vec2(-0.4f, 0.1f), _waterNames);
 				for (auto& name : _waterNames) { name = "@" + name; }
 			}
 			else if (screen->getButton("delete")->isHovered())
@@ -29,7 +29,7 @@ void WorldEditor::_updateWaterMenuMain()
 				_waterChoosingEnabled = true;
 				_waterRemovalEnabled = true;
 				for (auto& name : _waterNames) { name = name.substr(1); }
-				_gui->getGlobalScreen()->addChoiceForm("waterList", "Select water", vec2(-0.4f, 0.1f), _waterNames);
+				_gui.getGlobalScreen()->addChoiceForm("waterList", "Select water", vec2(-0.4f, 0.1f), _waterNames);
 				for (auto& name : _waterNames) { name = "@" + name; }
 			}
 			else if (screen->getButton("back")->isHovered())
@@ -66,7 +66,7 @@ void WorldEditor::_updateWaterMenuChoice()
 			{
 				_fe3d.camera_load(90.0f, 0.1f, 10000.0f, vec3(0.0f));
 				_leftWindow->setActiveScreen("waterEditorMenuMain");
-				_fe3d.textEntity_hide(_gui->getGlobalScreen()->getTextfield("selectedWaterName")->getEntityID());
+				_fe3d.textEntity_hide(_gui.getGlobalScreen()->getTextfield("selectedWaterName")->getEntityID());
 				_fe3d.waterEntity_select("");
 				_currentWaterID = "";
 				_waterEditingEnabled = false;
@@ -96,13 +96,13 @@ void WorldEditor::_updateWaterMenuMesh()
 		{
 			if (screen->getButton("position")->isHovered())
 			{
-				_gui->getGlobalScreen()->addValueForm("positionX", "X", waterPosition.x, vec2(-0.25f, 0.0f), vec2(0.2f, 0.1f));
-				_gui->getGlobalScreen()->addValueForm("positionY", "Y", waterPosition.y, vec2(0.0f, 0.0f), vec2(0.2f, 0.1f));
-				_gui->getGlobalScreen()->addValueForm("positionZ", "Z", waterPosition.z, vec2(0.25f, 0.0f), vec2(0.2f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("positionX", "X", waterPosition.x, vec2(-0.25f, 0.0f), vec2(0.2f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("positionY", "Y", waterPosition.y, vec2(0.0f, 0.0f), vec2(0.2f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("positionZ", "Z", waterPosition.z, vec2(0.25f, 0.0f), vec2(0.2f, 0.1f));
 			}
 			else if (screen->getButton("size")->isHovered())
 			{
-				_gui->getGlobalScreen()->addValueForm("size", "Size", waterSize, vec2(0.0f), vec2(0.3f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("size", "Size", waterSize, vec2(0.0f), vec2(0.3f, 0.1f));
 			}			
 			else if (screen->getButton("back")->isHovered())
 			{
@@ -124,7 +124,7 @@ void WorldEditor::_updateWaterMenuMesh()
 		}
 
 		// Update size changes
-		if (_gui->getGlobalScreen()->checkValueForm("size", waterSize, { 0.0f }))
+		if (_gui.getGlobalScreen()->checkValueForm("size", waterSize, { 0.0f }))
 		{
 			_fe3d.waterEntity_setSize(_currentWaterID, waterSize);
 		}
@@ -132,9 +132,9 @@ void WorldEditor::_updateWaterMenuMesh()
 		// Update position changes
 		if 
 		(
-			_gui->getGlobalScreen()->checkValueForm("positionX", waterPosition.x, { }) ||
-			_gui->getGlobalScreen()->checkValueForm("positionY", waterPosition.y, { }) ||
-			_gui->getGlobalScreen()->checkValueForm("positionZ", waterPosition.z, { })
+			_gui.getGlobalScreen()->checkValueForm("positionX", waterPosition.x, { }) ||
+			_gui.getGlobalScreen()->checkValueForm("positionY", waterPosition.y, { }) ||
+			_gui.getGlobalScreen()->checkValueForm("positionZ", waterPosition.z, { })
 		)
 		{
 			_fe3d.waterEntity_setPosition(_currentWaterID, waterPosition);
@@ -168,7 +168,7 @@ void WorldEditor::_updateWaterMenuEffects()
 		{
 			if (screen->getButton("uvRepeat")->isHovered())
 			{
-				_gui->getGlobalScreen()->addValueForm("uvRepeat", "UV repeat", uvRepeat, vec2(0.0f), vec2(0.3f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("uvRepeat", "UV repeat", uvRepeat, vec2(0.0f), vec2(0.3f, 0.1f));
 			}
 			else if (screen->getButton("dudvMap")->isHovered())
 			{
@@ -286,7 +286,7 @@ void WorldEditor::_updateWaterMenuEffects()
 		_fe3d.textEntity_setTextContent(specularID, isSpecularLighted ? "Specular: ON" : "Specular: OFF");
 
 		// Update uvRepeat changes
-		_gui->getGlobalScreen()->checkValueForm("uvRepeat", uvRepeat);
+		_gui.getGlobalScreen()->checkValueForm("uvRepeat", uvRepeat);
 		_fe3d.waterEntity_setUvRepeat(_currentWaterID, uvRepeat);
 	}
 }
@@ -309,30 +309,30 @@ void WorldEditor::_updateWaterMenuOptions()
 		{
 			if (screen->getButton("speed")->isHovered())
 			{
-				_gui->getGlobalScreen()->addValueForm("speedX", "X", speed.x * 100000.0f, vec2(-0.15f, 0.0f), vec2(0.2f, 0.1f));
-				_gui->getGlobalScreen()->addValueForm("speedZ", "Z", speed.y * 100000.0f, vec2(0.15f, 0.0f), vec2(0.2f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("speedX", "X", speed.x * 100000.0f, vec2(-0.15f, 0.0f), vec2(0.2f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("speedZ", "Z", speed.y * 100000.0f, vec2(0.15f, 0.0f), vec2(0.2f, 0.1f));
 			}
 			else if (screen->getButton("transparency")->isHovered())
 			{
-				_gui->getGlobalScreen()->addValueForm("transparency", "Transparency (0-100%)", transparency * 100.0f, vec2(0.0f), vec2(0.3f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("transparency", "Transparency (0-100%)", transparency * 100.0f, vec2(0.0f), vec2(0.3f, 0.1f));
 			}
 			else if (screen->getButton("color")->isHovered())
 			{
-				_gui->getGlobalScreen()->addValueForm("colorR", "R(0-255)", color.r * 255.0f, vec2(-0.25f, 0.0f), vec2(0.15f, 0.1f));
-				_gui->getGlobalScreen()->addValueForm("colorG", "G(0-255)", color.g * 255.0f, vec2(0.0f, 0.0f), vec2(0.15f, 0.1f));
-				_gui->getGlobalScreen()->addValueForm("colorB", "B(0-255)", color.b * 255.0f, vec2(0.25f, 0.0f), vec2(0.15f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("colorR", "R(0-255)", color.r * 255.0f, vec2(-0.25f, 0.0f), vec2(0.15f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("colorG", "G(0-255)", color.g * 255.0f, vec2(0.0f, 0.0f), vec2(0.15f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("colorB", "B(0-255)", color.b * 255.0f, vec2(0.25f, 0.0f), vec2(0.15f, 0.1f));
 			}
 			else if (screen->getButton("specularFactor")->isHovered())
 			{
-				_gui->getGlobalScreen()->addValueForm("specularFactor", "Specular factor (0 - 256)", specularFactor, vec2(0.0f), vec2(0.3f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("specularFactor", "Specular factor (0 - 256)", specularFactor, vec2(0.0f), vec2(0.3f, 0.1f));
 			}
 			else if (screen->getButton("specularIntensity")->isHovered())
 			{
-				_gui->getGlobalScreen()->addValueForm("specularIntensity", "Specular intensity (%)", specularIntensity * 100.0f, vec2(0.0f), vec2(0.3f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("specularIntensity", "Specular intensity (%)", specularIntensity * 100.0f, vec2(0.0f), vec2(0.3f, 0.1f));
 			}
 			else if (screen->getButton("waveHeight")->isHovered())
 			{
-				_gui->getGlobalScreen()->addValueForm("waveHeight", "Wave height factor (%)", waveHeightFactor * 100.0f, vec2(0.0f), vec2(0.3f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("waveHeight", "Wave height factor (%)", waveHeightFactor * 100.0f, vec2(0.0f), vec2(0.3f, 0.1f));
 			}
 			else if (screen->getButton("back")->isHovered())
 			{
@@ -341,63 +341,63 @@ void WorldEditor::_updateWaterMenuOptions()
 		}
 
 		// Check if speed X value confirmed
-		if (_gui->getGlobalScreen()->checkValueForm("speedX", speed.x))
+		if (_gui.getGlobalScreen()->checkValueForm("speedX", speed.x))
 		{
 			speed.x /= 100000.0f;
 			_fe3d.waterEntity_setSpeed(_currentWaterID, speed);
 		}
 
 		// Check if speed Z value confirmed
-		if (_gui->getGlobalScreen()->checkValueForm("speedZ", speed.y))
+		if (_gui.getGlobalScreen()->checkValueForm("speedZ", speed.y))
 		{
 			speed.y /= 100000.0f;
 			_fe3d.waterEntity_setSpeed(_currentWaterID, speed);
 		}
 		
 		// Check if transparency value confirmed
-		if (_gui->getGlobalScreen()->checkValueForm("transparency", transparency))
+		if (_gui.getGlobalScreen()->checkValueForm("transparency", transparency))
 		{
 			transparency = std::clamp(transparency / 100.0f, 0.0f, 1.0f);
 			_fe3d.waterEntity_setTransparency(_currentWaterID, transparency);
 		}
 
 		// Check if color R value confirmed
-		if (_gui->getGlobalScreen()->checkValueForm("colorR", color.r))
+		if (_gui.getGlobalScreen()->checkValueForm("colorR", color.r))
 		{
 			color.r = std::clamp(color.r / 255.0f, 0.0f, 1.0f);
 			_fe3d.waterEntity_setColor(_currentWaterID, color);
 		}
 
 		// Check if color G value confirmed
-		if (_gui->getGlobalScreen()->checkValueForm("colorG", color.g))
+		if (_gui.getGlobalScreen()->checkValueForm("colorG", color.g))
 		{
 			color.g = std::clamp(color.g / 255.0f, 0.0f, 1.0f);
 			_fe3d.waterEntity_setColor(_currentWaterID, color);
 		}
 
 		// Check if color B value confirmed
-		if (_gui->getGlobalScreen()->checkValueForm("colorB", color.b))
+		if (_gui.getGlobalScreen()->checkValueForm("colorB", color.b))
 		{
 			color.b = std::clamp(color.b / 255.0f, 0.0f, 1.0f);
 			_fe3d.waterEntity_setColor(_currentWaterID, color);
 		}
 
 		// Check if specular factor value confirmed
-		if (_gui->getGlobalScreen()->checkValueForm("specularFactor", specularFactor))
+		if (_gui.getGlobalScreen()->checkValueForm("specularFactor", specularFactor))
 		{
 			specularFactor = std::clamp(specularFactor, 0.0f, 256.0f);
 			_fe3d.waterEntity_setSpecularLightingFactor(_currentWaterID, specularFactor);
 		}
 
 		// Check if specular intensity value confirmed
-		if (_gui->getGlobalScreen()->checkValueForm("specularIntensity", specularIntensity))
+		if (_gui.getGlobalScreen()->checkValueForm("specularIntensity", specularIntensity))
 		{
 			specularIntensity /= 100.0f;
 			_fe3d.waterEntity_setSpecularLightingIntensity(_currentWaterID, specularIntensity);
 		}
 
 		// Check if wave height value confirmed
-		if (_gui->getGlobalScreen()->checkValueForm("waveHeight", waveHeightFactor))
+		if (_gui.getGlobalScreen()->checkValueForm("waveHeight", waveHeightFactor))
 		{
 			waveHeightFactor /= 100.0f;
 			_fe3d.waterEntity_setWaveHeightFactor(_currentWaterID, waveHeightFactor);

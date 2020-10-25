@@ -2,19 +2,12 @@
 
 #include "fabi_engine_3d.hpp"
 #include "engine_gui_manager.hpp"
-
-enum class WorldPart
-{
-	NONE, 
-	SKY, 
-	TERRAIN, 
-	WATER 
-};
+#include "world_part.hpp"
 
 class WorldEditor final
 {
 public:
-	WorldEditor(FabiEngine3D& fe3d, shared_ptr<EngineGuiManager> gui);
+	WorldEditor(FabiEngine3D& fe3d, EngineGuiManager& gui);
 	~WorldEditor() = default;
 
 	void initializeGUI();
@@ -41,7 +34,7 @@ private:
 	float _totalCameraRotation = 0.0f;
 	string _currentProjectName = "";
 	FabiEngine3D& _fe3d;
-	shared_ptr<EngineGuiManager> _gui = nullptr;
+	EngineGuiManager& _gui;
 	shared_ptr<EngineGuiWindow> _leftWindow = nullptr;
 
 	// Sky variables

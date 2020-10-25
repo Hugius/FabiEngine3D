@@ -5,7 +5,7 @@
 class ScriptExecutor
 {
 public:
-	ScriptExecutor(FabiEngine3D& fe3d, Script& script);
+	ScriptExecutor(FabiEngine3D& fe3d, Script& script, SceneEditor& sceneEditor);
 
 	void load();
 	void update();

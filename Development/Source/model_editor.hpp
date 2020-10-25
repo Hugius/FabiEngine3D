@@ -2,18 +2,12 @@
 
 #include "fabi_engine_3d.hpp"
 #include "engine_gui_manager.hpp"
-
-enum class TransformationDirection
-{
-	X,
-	Y,
-	Z
-};
+#include "direction.hpp"
 
 class ModelEditor final
 {
 public:
-	ModelEditor(FabiEngine3D& fe3d, shared_ptr<EngineGuiManager> gui);
+	ModelEditor(FabiEngine3D& fe3d, EngineGuiManager& gui);
 	~ModelEditor() = default;
 
 	void initializeGUI();
@@ -55,7 +49,7 @@ private:
 
 	// Core
 	FabiEngine3D& _fe3d;
-	shared_ptr<EngineGuiManager> _gui = nullptr;
+	EngineGuiManager& _gui;
 
 	// Strings
 	string _currentModelID = "";
@@ -90,5 +84,5 @@ private:
 	bool _isLoaded = false;
 
 	// Miscellaneous
-	TransformationDirection _direction = TransformationDirection::X;
+	Direction _transformationDirection = Direction::X;
 };

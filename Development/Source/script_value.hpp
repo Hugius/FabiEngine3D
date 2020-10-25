@@ -1,35 +1,74 @@
 #pragma once
 
 #include "fabi_engine_3d.hpp"
+#include "script_value_type.hpp"
 
-enum class ScriptValueType
-{
-	STRING,
-	BOOLEAN,
-	NUMBER,
-	NONE
-};
-
-class ScriptValue
+class ScriptValue final
 {
 public:
-	ScriptValue(ScriptValueType type, bool isConstant);
-
-	void setString(string str);
-	void setBoolean(bool boolean);
-	void setNumber(float number);
+	template<typename T> ScriptValue(ScriptValueType type, T value) :
+		_type(type)
+	{
+		this->setValue(value);
+	}
 
 	ScriptValueType getType();
-	bool isConstant();
-	string getString();
-	bool getBoolean();
-	float getNumber();
+
+	void setValue(string value)
+	{
+		_string = value;
+	}
+
+	void setValue(float value)
+	{
+		_decimal = value;
+	}
+
+	void setValue(int value)
+	{
+		_integer = value;
+	}
+
+	void setValue(bool value)
+	{
+		_boolean = value;
+	}
+
+	template<typename T> T getValue();
 
 private:
 	const ScriptValueType _type;
-	const bool _isConstant;
 
 	string _string = "";
+	float _decimal = 0.0f;
+	int _integer = 0;
 	bool _boolean = false;
-	float _number = 0.0f;
 };
+
+template<typename T>
+inline T ScriptValue::getValue()
+{
+	switch (_type)
+	{
+		case ScriptValueType::STRING:
+		{
+			return _string;
+			break;
+		}
+		case ScriptValueType::DECIMAL:
+		{
+			return _decimal;
+			break;
+		}
+		case ScriptValueType::INTEGER:
+		{
+			return _integer;
+			break;
+		}
+		case ScriptValueType::BOOLEAN:
+		{
+			return _boolean;
+			break;
+		}
+	}
+}

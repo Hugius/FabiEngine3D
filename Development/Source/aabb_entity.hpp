@@ -1,26 +1,8 @@
 #pragma once
 
 #include "base_entity.hpp"
-
-#include <GLM\\glm.hpp>
-
-using glm::vec3;
-using glm::mat4;
-
-enum class AabbParentType
-{
-	NONE,
-	GAME_ENTITY,
-	BILLBOARD_ENTITY
-};
-
-enum class CollisionDirection 
-{
-	NONE, 
-	X, 
-	Y, 
-	Z 
-};
+#include "direction.hpp"
+#include "aabb_parent_type.hpp"
 
 class AabbEntity final: public BaseEntity
 {
@@ -39,7 +21,7 @@ public:
 	void setTranslation(vec3 val);
 	void setScaling(vec3 val);
 	void setParent(const string& ID, AabbParentType type);
-	void setCollisionDirection(const CollisionDirection& direction);
+	void setCollisionDirection(const Direction& direction);
 	void setResponsiveness(bool val);
 
 	// Getters
@@ -50,7 +32,7 @@ public:
 	const vec3 getScaling() const;
 	const string& getParentID() const;
 	const AabbParentType& getParentType() const;
-	const CollisionDirection& getCollisionDirection() const;
+	const Direction& getCollisionDirection() const;
 	const bool isResponsive() const;
 
 private:
@@ -64,7 +46,7 @@ private:
 	string _parentID = "";
 
 	AabbParentType _parentType = AabbParentType::NONE;
-	CollisionDirection _collisionDirection = CollisionDirection::NONE;
+	Direction _collisionDirection = Direction::NONE;
 
 	bool _responsive = false;
 };

@@ -1,9 +1,9 @@
 #include "script_executor.hpp"
 
-ScriptExecutor::ScriptExecutor(FabiEngine3D& fe3d, Script& script) :
+ScriptExecutor::ScriptExecutor(FabiEngine3D& fe3d, Script& script, SceneEditor& sceneEditor) :
 	_fe3d(fe3d),
 	_script(script),
-	_scriptInterpreter(fe3d, script)
+	_scriptInterpreter(fe3d, script, sceneEditor)
 {
 
 }

@@ -2,6 +2,8 @@
 
 #pragma warning (disable : 4996)
 
+#include "message_type.hpp"
+
 #include <conio.h>
 #include <Windows.h>
 #include <iostream>
@@ -55,11 +57,6 @@ public:
 	}
 
 private:
-	enum class MessageType 
-	{ 
-		INFO, ERR, DEBUG, WARNING 
-	};
-
 	inline static string _level_string[4] = { "Info", "Error", "Debug", "Warn" };
 
 	inline static std::vector<string> _messageStack;

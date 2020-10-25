@@ -13,19 +13,7 @@
 #include "light_entity.hpp"
 #include "gui_entity.hpp"
 #include "text_entity.hpp"
-
-enum class EntityType
-{
-	SKY,
-	TERRAIN,
-	WATER,
-	GAME,
-	BILLBOARD,
-	AABB,
-	LIGHT,
-	GUI,
-	TEXT
-};
+#include "entity_type.hpp"
 
 class BaseEntityManager
 {

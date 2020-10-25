@@ -6,7 +6,7 @@
 class BillboardEditor final
 {
 public:
-	BillboardEditor(FabiEngine3D& fe3d, shared_ptr<EngineGuiManager> gui);
+	BillboardEditor(FabiEngine3D& fe3d, EngineGuiManager& gui);
 	~BillboardEditor() = default;
 
 	void initializeGUI();
@@ -48,7 +48,7 @@ private:
 
 	// Core
 	FabiEngine3D& _fe3d;
-	shared_ptr<EngineGuiManager> _gui = nullptr;
+	EngineGuiManager& _gui;
 	
 	// Strings
 	string _hoveredBillboardID = "";

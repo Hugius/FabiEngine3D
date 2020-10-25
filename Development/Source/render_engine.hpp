@@ -17,13 +17,7 @@
 #include "final_renderer.hpp"
 #include "depth_renderer.hpp"
 #include "Timer.hpp"
-
-enum class BlurType
-{
-	DOF,
-	BLOOM,
-	MOTION
-};
+#include "blur_type.hpp"
 
 class RenderEngine final
 {

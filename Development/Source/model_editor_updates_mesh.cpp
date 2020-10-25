@@ -4,7 +4,7 @@
 
 void ModelEditor::_updateModelEditingMesh()
 {
-	auto screen = _gui->getViewport("left")->getWindow("main")->getScreen("modelEditorMenuMesh");
+	auto screen = _gui.getViewport("left")->getWindow("main")->getScreen("modelEditorMenuMesh");
 
 	// GUI management
 	if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
@@ -31,7 +31,7 @@ void ModelEditor::_updateModelEditingMesh()
 		}
 		else if (screen->getButton("back")->isHovered())
 		{
-			_gui->getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
+			_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
 		}
 	}
 

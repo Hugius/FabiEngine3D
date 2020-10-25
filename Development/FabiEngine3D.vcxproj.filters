@@ -457,6 +457,9 @@
     <ClCompile Include="Source\script_interpreter_core.cpp">
       <Filter>src\Scripting System\Execution\Interpreter</Filter>
     </ClCompile>
+    <ClCompile Include="Source\script_value.cpp">
+      <Filter>src\Scripting System\Miscellaneous</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\obj_loader.hpp">

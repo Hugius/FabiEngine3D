@@ -21,7 +21,8 @@ private:
 	Script& _script;
 	SceneEditor& _sceneEditor;
 
-	void _executeScript(const string& ID, ScriptType type);
+	void _executeScript(const string& scriptID, ScriptType scriptType);
+	void _throwSyntaxError(const string& scriptName, unsigned int lineIndex, const string& message);
 	vector<ScriptValue> _extractArguments(string argumentString);
 
 	vector<string> _initScriptIDs;

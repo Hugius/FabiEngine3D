@@ -318,6 +318,7 @@
     <ClCompile Include="Source\script_file.cpp" />
     <ClCompile Include="Source\script_interpreter_core.cpp" />
     <ClCompile Include="Source\script_interpreter_misc.cpp" />
+    <ClCompile Include="Source\script_value.cpp" />
     <ClCompile Include="Source\settings_editor.cpp" />
     <ClCompile Include="Source\top_viewport_controller_core.cpp" />
     <ClCompile Include="Source\engine_gui_button.cpp" />

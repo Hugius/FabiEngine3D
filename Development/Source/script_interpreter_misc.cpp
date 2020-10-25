@@ -2,12 +2,20 @@
 
 vector<ScriptValue> ScriptInterpreter::_extractArguments(string argumentString)
 {
+	// Temporary variables
 	vector<ScriptValue> argumentList;
 	bool buildingString = false;
 	bool buildingNumber = false;
+	bool buildingDecimal = false;
 	bool buildingBoolean = false;
 	bool finishedArgument = false;
-	string argumentContent = "";
+	string currentArgument = "";
+
+	// Argument string cannot be empty
+	if (argumentString.empty())
+	{
+		return {};
+	}
 
 	// Argument string cannot start with a comma
 	if (argumentString[0] == ',')
@@ -16,6 +24,7 @@ vector<ScriptValue> ScriptInterpreter::_extractArguments(string argumentString)
 	}
 
 	// For every character in argument string
+	unsigned int index = 0;
 	for (auto& c : argumentString)
 	{
 		if (finishedArgument) // First character after an argument has been extracted
@@ -33,75 +42,124 @@ vector<ScriptValue> ScriptInterpreter::_extractArguments(string argumentString)
 		{
 			if (buildingString) // Processing STRING argument
 			{
-				if (c == '"')
+				if (c == '"') // Add new string argument
 				{
-					argumentList.push_back(ScriptValue(ScriptValueType::STRING, argumentContent));
+					auto newArgument = ScriptValue(_fe3d, ScriptValueType::STRING);
+					newArgument.setString(currentArgument);
+					argumentList.push_back(newArgument);
 					buildingString = false;
 					finishedArgument = true;
 				}
-				else
+				else // Keep building string
 				{
-					argumentContent += c;
+					currentArgument += c;
 				}
 			}
 			else if (buildingNumber) // Processing NUMBER argument
 			{
 				if (isdigit(c)) // Keep building number
 				{
-					argumentContent += c;
+					currentArgument += c;
+				}
+				else if (c == '.' && !buildingDecimal) // Start building decimal
+				{
+					currentArgument += c;
+					buildingDecimal = true;
+				}
+				
+				// Check if number building finished
+				if (c == ',' || index == argumentString.size() - 1)
+				{
+					if (buildingDecimal) // Convert to decimal
+					{
+						// Check if decimal argument is valid
+						if (currentArgument.back() == '.')
+						{
+							return {};
+						}
+						else
+						{
+							auto newArgument = ScriptValue(_fe3d, ScriptValueType::DECIMAL);
+							newArgument.setDecimal(stof(currentArgument));
+							argumentList.push_back(newArgument);
+							buildingNumber = false;
+							buildingDecimal = false;
+						}
+					}
+					else // Convert to integer
+					{
+						auto newArgument = ScriptValue(_fe3d, ScriptValueType::INTEGER);
+						newArgument.setInteger(stoi(currentArgument));
+						argumentList.push_back(newArgument);
+						buildingNumber = false;
+					}
 				}
 			}
 			else if (buildingBoolean) // Processing BOOLEAN argument
 			{
-				argumentContent += c;
+				currentArgument += c;
 
 				// Check if argument is true, false, or invalid
-				if (argumentContent.size() == 4)
+				if (currentArgument.size() == 4)
 				{
-					if (argumentContent == "true") // Add new boolean argument
+					if (currentArgument == "true") // Add new boolean argument
 					{
-						argumentList.push_back(ScriptValue(ScriptValueType::BOOLEAN, true));
+						auto newArgument = ScriptValue(_fe3d, ScriptValueType::BOOLEAN);
+						newArgument.setBoolean(true);
+						argumentList.push_back(newArgument);
 						buildingBoolean = false;
 						finishedArgument = true;
 					}
-					else if (argumentContent != "fals") // Must be "fals" if 4 letter string
+					else if (currentArgument != "fals") // Must be "fals" if 4 letter string
 					{
 						return {};
 					}
 				}
-				else if (argumentContent.size() == 5 && argumentContent == "false") // Add new boolean argument
+				else if (currentArgument.size() == 5 && currentArgument == "false") // Add new boolean argument
 				{
-					argumentList.push_back(ScriptValue(ScriptValueType::BOOLEAN, false));
+					auto newArgument = ScriptValue(_fe3d, ScriptValueType::BOOLEAN);
+					newArgument.setBoolean(false);
+					argumentList.push_back(newArgument);
 					buildingBoolean = false;
 					finishedArgument = true;
 				}
-				else // Invalid boolean string
+				else if(currentArgument.size() > 5) // Invalid boolean string
 				{
 					return {};
 				}
 			}
 			else // Starting build of new argument
 			{
-				if (c == '"')
+				if (c == '"') // STRING
 				{
-					argumentContent = "";
+					currentArgument = "";
 					buildingString = true;
 				}
-				else if (isdigit(c))
+				else if (isdigit(c)) // NUMBER
 				{
-					argumentContent = "";
-					argumentContent.push_back(c);
+					currentArgument = "";
+					currentArgument.push_back(c);
 					buildingNumber = true;
 				}
-				else if (c == 't' || c == 'f')
+				else if (c == 't' || c == 'f') // BOOLEAN
 				{
-					argumentContent = "";
-					argumentContent.push_back(c);
+					currentArgument = "";
+					currentArgument.push_back(c);
 					buildingBoolean = true;
 				}
 			}
 		}
+
+		index++;
 	}
 
-	return argumentList;
+	// Check if not still building any arguments
+	if (!buildingString && !buildingNumber && !buildingBoolean)
+	{
+		return argumentList;
+	}
+	else // Syntax is wrong
+	{
+		return {};
+	}
 }

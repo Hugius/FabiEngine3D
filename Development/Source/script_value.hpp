@@ -6,37 +6,22 @@
 class ScriptValue final
 {
 public:
-	template<typename T> ScriptValue(ScriptValueType type, T value) :
-		_type(type)
-	{
-		this->setValue(value);
-	}
+	ScriptValue(FabiEngine3D& fe3d, ScriptValueType type);
+
+	void setString(const string& value);
+	void setDecimal(float value);
+	void setInteger(int value);
+	void setBoolean(bool value);
 
 	ScriptValueType getType();
-
-	void setValue(string value)
-	{
-		_string = value;
-	}
-
-	void setValue(float value)
-	{
-		_decimal = value;
-	}
-
-	void setValue(int value)
-	{
-		_integer = value;
-	}
-
-	void setValue(bool value)
-	{
-		_boolean = value;
-	}
-
-	template<typename T> T getValue();
+	const string& getString();
+	float getDecimal();
+	int getInteger();
+	bool getBoolean();
 
 private:
+	FabiEngine3D& _fe3d;
+
 	const ScriptValueType _type;
 
 	string _string = "";
@@ -44,31 +29,3 @@ private:
 	int _integer = 0;
 	bool _boolean = false;
 };
-
-template<typename T>
-inline T ScriptValue::getValue()
-{
-	switch (_type)
-	{
-		case ScriptValueType::STRING:
-		{
-			return _string;
-			break;
-		}
-		case ScriptValueType::DECIMAL:
-		{
-			return _decimal;
-			break;
-		}
-		case ScriptValueType::INTEGER:
-		{
-			return _integer;
-			break;
-		}
-		case ScriptValueType::BOOLEAN:
-		{
-			return _boolean;
-			break;
-		}
-	}
-}

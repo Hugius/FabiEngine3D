@@ -129,9 +129,9 @@ void ScriptInterpreter::unload()
 	_destroyEntryID = "";
 }
 
-void ScriptInterpreter::_executeScript(const string& ID, ScriptType type)
+void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType scriptType)
 {
-	auto scriptFile = _script.getScriptFile(ID);
+	auto scriptFile = _script.getScriptFile(scriptID);
 
 	// Interpret every line from top to bottom in script
 	for (size_t lineIndex = 0; lineIndex < scriptFile->getLineCount(); lineIndex++)
@@ -163,25 +163,55 @@ void ScriptInterpreter::_executeScript(const string& ID, ScriptType type)
 				auto arguments = _extractArguments(argumentString);
 				if (arguments.empty() && !argumentString.empty())
 				{
-					_fe3d.logger_throwWarning("Syntax error @ script \"" + ID + "\" @ line " + to_string(lineIndex + 1) + ": argument(s) syntax!");
+					_throwSyntaxError(scriptID, lineIndex, "argument(s) syntax!");
 					continue;
 				}
 
 				// Determine type of function
 				if (scriptLine.substr(0, openIndex) == "FE3D_SCENE_LOAD")
 				{
-					_sceneEditor.loadScene(argumentString);
+					if (arguments.size() == 1)
+					{
+						if (arguments[0].getType() == ScriptValueType::STRING)
+						{
+							_sceneEditor.loadScene(arguments[0].getString());
+						}
+						else
+						{
+							_throwSyntaxError(scriptID, lineIndex, "wrong argument type!");
+						}
+					}
+					else if (arguments.empty())
+					{
+						_throwSyntaxError(scriptID, lineIndex, "too little arguments!");
+					}
+					else
+					{
+						_throwSyntaxError(scriptID, lineIndex, "too many arguments!");
+					}
 				}
 				else if (scriptLine.substr(0, openIndex) == "FE3D_SCENE_CLEAR")
 				{
-					_sceneEditor.clearScene();
+					if (arguments.empty())
+					{
+						_sceneEditor.clearScene();
+					}
+					else
+					{
+						_throwSyntaxError(scriptID, lineIndex, "too many arguments!");
+					}
 				}
 			}
 			else
 			{
-				_fe3d.logger_throwWarning("Syntax error @ script \"" + ID + "\" @ line " + to_string(lineIndex + 1) + ": bracket(s) not found!");
+				_throwSyntaxError(scriptID, lineIndex, "bracket(s) not found!");
 				continue;
 			}
 		}
 	}
+}
+
+void ScriptInterpreter::_throwSyntaxError(const string& scriptName, unsigned int lineIndex, const string& message)
+{
+	_fe3d.logger_throwWarning("SYNTAX error @ script \"" + scriptName + "\" @ line " + to_string(lineIndex + 1) + ": " + message);
 }

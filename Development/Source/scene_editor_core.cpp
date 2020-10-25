@@ -334,8 +334,18 @@ void SceneEditor::load()
 
 void SceneEditor::unload()
 {	
-	// Clear scenes
+	// Clear scene
 	clearScene();
+
+	// Unload environment preview entities
+	_worldEditor.unloadSkyEntities();
+	_worldEditor.unloadTerrainEntities();
+	_worldEditor.unloadWaterEntities();
+
+	// Delete other preview entities
+	_fe3d.gameEntity_deleteAll();
+	_fe3d.billboardEntity_deleteAll();
+	_fe3d.lightEntity_deleteAll();
 
 	// Reset variables
 	_currentSkyID = "";
@@ -369,11 +379,13 @@ void SceneEditor::unload()
 	_gui.getGlobalScreen()->deleteTextfield("selectedBillboardName");
 	_gui.getGlobalScreen()->deleteTextfield("selectedPointlightName");
 
-	// Other
+	// Miscellaneous
 	_leftWindow->getScreen("sceneEditorMenuModelPlace")->getScrollingList("models")->deleteButtons();
 	_leftWindow->getScreen("sceneEditorMenuModelChoice")->getScrollingList("models")->deleteButtons();
 	_leftWindow->getScreen("sceneEditorMenuBillboardPlace")->getScrollingList("billboards")->deleteButtons();
 	_leftWindow->getScreen("sceneEditorMenuBillboardChoice")->getScrollingList("billboards")->deleteButtons();
 	_fe3d.misc_disableAabbFrameRendering();
+	_fe3d.misc_disableWireframeRendering();
+	_fe3d.misc_disableDebugRendering();
 	_isLoaded = false;
 }

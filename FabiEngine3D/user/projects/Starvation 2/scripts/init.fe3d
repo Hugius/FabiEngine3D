@@ -1,5 +1,5 @@
-3 22
+3 24
 META script_type_init
 META execution_entry
 
-FE3D_SCENE_LOAD(scene)
+FE3D_SCENE_LOAD("scene")

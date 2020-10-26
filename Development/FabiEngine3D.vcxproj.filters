@@ -460,6 +460,12 @@
     <ClCompile Include="Source\script_value.cpp">
       <Filter>src\Scripting System\Miscellaneous</Filter>
     </ClCompile>
+    <ClCompile Include="Source\script_interpreter_execution.cpp">
+      <Filter>src\Scripting System\Execution\Interpreter</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_variable.cpp">
+      <Filter>src\Scripting System\Miscellaneous</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\obj_loader.hpp">
@@ -761,6 +767,9 @@
     </ClInclude>
     <ClInclude Include="Source\script_interpreter.hpp">
       <Filter>src\Scripting System\Execution\Interpreter</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\script_variable_type.hpp">
+      <Filter>src\Scripting System\Miscellaneous</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

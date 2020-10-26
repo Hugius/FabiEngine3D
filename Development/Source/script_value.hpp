@@ -7,6 +7,12 @@ class ScriptValue final
 {
 public:
 	ScriptValue(FabiEngine3D& fe3d, ScriptValueType type);
+	ScriptValue(FabiEngine3D& fe3d, ScriptValueType type, const string& value);
+	ScriptValue(FabiEngine3D& fe3d, ScriptValueType type, float value);
+	ScriptValue(FabiEngine3D& fe3d, ScriptValueType type, int value);
+	ScriptValue(FabiEngine3D& fe3d, ScriptValueType type, bool value);
+
+	void operator=(const ScriptValue& other);
 
 	void setString(const string& value);
 	void setDecimal(float value);

@@ -163,3 +163,97 @@ vector<ScriptValue> ScriptInterpreter::_extractArguments(string argumentString)
 		return {};
 	}
 }
+
+void ScriptInterpreter::_throwScriptError(const string& message)
+{
+	_fe3d.logger_throwWarning("ERROR @ script \"" + _currentScriptID + "\" @ line " + to_string(_currentLineIndex + 1) + ": " + message);
+}
+
+void ScriptInterpreter::_addVariable(const string& scriptLine, ScriptVariableType type, vector<ScriptVariable>& variableList)
+{
+	// Temporary values
+	bool isConstant = false;
+	std::istringstream iss(scriptLine);
+	string variableID = "";
+	string equalSign = "";
+	string value = "";
+	iss >> variableID;
+
+	// Check if variable name is valid
+	if (!variableID.empty() && variableID != "IF" && variableID.substr(0, 4) != "fe3d")
+	{
+		iss >> equalSign;
+		if (equalSign == "=")
+		{
+			iss >> value;
+
+			if (value.empty())
+			{
+				_throwScriptError("invalid variable syntax!");
+			}
+			else
+			{
+				localVariables.push_back(ScriptVariable(_fe3d, variableID, false, ScriptValue(_fe3d, ScriptValueType::STRING, value)));
+			}
+		}
+		else
+		{
+			_throwScriptError("invalid variable syntax!");
+		}
+	}
+	else
+	{
+		_throwScriptError("invalid variable name!");
+	}
+
+	// Check if variable does not exist yet
+	for (auto& variable : localVariables)
+	{
+		if (variable.getID() == newVariable.getID())
+		{
+			_throwScriptError("variable \"" + newVariable.getID() + "\" already defined!");
+			continue;
+		}
+	}
+}
+
+bool ScriptInterpreter::_checkIfStatement(string conditionString)
+{
+	for (auto& c : conditionString)
+	{
+
+	}
+
+	if (conditionString.substr(0, 4) == "fe3d")
+	{
+		//_executeEngineFunction(scriptLine);
+	}
+	return false;
+}
+
+bool ScriptInterpreter::_validateArguments(vector<ScriptValue> arguments, vector<ScriptValueType> types)
+{
+	if (arguments.size() == types.size()) // Check if argument amount is correct
+	{
+		for (unsigned int i = 0; i < arguments.size(); i++)
+		{
+			if (arguments[i].getType() != types[i])
+			{
+				_throwScriptError("wrong argument type(s)!");
+				return false;
+			}
+		}
+
+		return true;
+	}
+	else if (arguments.size() < types.size()) // Not enough arguments
+	{
+		_throwScriptError("not enough arguments!");
+		return false;
+	}
+	else // Too many arguments
+	{
+		_throwScriptError("too many arguments!");
+		return false;
+	}
+}

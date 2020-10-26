@@ -7,6 +7,45 @@ ScriptValue::ScriptValue(FabiEngine3D& fe3d, ScriptValueType type) :
 
 }
 
+ScriptValue::ScriptValue(FabiEngine3D& fe3d, ScriptValueType type, const string& value) :
+	ScriptValue(fe3d, type)
+{
+	setString(value);
+}
+
+ScriptValue::ScriptValue(FabiEngine3D& fe3d, ScriptValueType type, float value) :
+	ScriptValue(fe3d, type)
+{
+	setDecimal(value);
+}
+
+ScriptValue::ScriptValue(FabiEngine3D& fe3d, ScriptValueType type, int value) :
+	ScriptValue(fe3d, type)
+{
+	setInteger(value);
+}
+
+ScriptValue::ScriptValue(FabiEngine3D& fe3d, ScriptValueType type, bool value) :
+	ScriptValue(fe3d, type)
+{
+	setBoolean(value);
+}
+
+void ScriptValue::operator=(const ScriptValue& other)
+{
+	if (this->_type == other._type)
+	{
+		this->_string = other._string;
+		this->_decimal = other._decimal;
+		this->_integer = other._integer;
+		this->_boolean = other._boolean;
+	}
+	else
+	{
+		_fe3d.logger_throwError("Cannot copy script value: not the same type!");
+	}
+}
+
 void ScriptValue::setString(const string& value)
 {
 	if (_type != ScriptValueType::STRING)

@@ -1,12 +1,28 @@
 #pragma once
 
 #include "script_value.hpp"
+#include "script_variable_type.hpp"
 
-struct ScriptVariable
+class ScriptVariable
 {
-	string ID;
+public:
+	ScriptVariable(FabiEngine3D& fe3d, ScriptVariableType type, const string& ID, bool constant, ScriptValue value);
 
-	bool constant;
+	const string& getID();
+	ScriptVariableType getType();
+	bool isConstant();
+	ScriptValue& getValue();
 
-	shared_ptr<ScriptValue> value;
+	void changeValue(ScriptValue value);
+
+private:
+	FabiEngine3D& _fe3d;
+
+	ScriptVariableType _type;
+
+	const string& _ID;
+
+	const bool _isConstant;
+
+	ScriptValue _value;
 };

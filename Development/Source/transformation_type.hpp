@@ -4,6 +4,5 @@ enum class TransformationType
 {
 	TRANSLATION,
 	ROTATION,
-	SCALING,
-	NONE
+	SCALING
 };

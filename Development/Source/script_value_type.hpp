@@ -6,6 +6,5 @@ enum class ScriptValueType
 	DECIMAL,
 	INTEGER,
 	BOOLEAN,
-	EMPTY,
-	NONE
+	EMPTY
 };

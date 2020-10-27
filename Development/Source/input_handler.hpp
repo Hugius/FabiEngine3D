@@ -16,6 +16,8 @@ public:
 	InputHandler(Timer& timer);
 	~InputHandler() = default;
 
+	void clearKeyToggles();
+	void clearMouseToggles();
 	void setLocked(bool locked);
 	void setKeyTogglingLocked(bool locked);
 	void setMouseTogglingLocked(bool locked);

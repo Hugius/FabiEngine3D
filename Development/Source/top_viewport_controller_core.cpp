@@ -147,23 +147,16 @@ void TopViewportController::_updateGameManagement()
 			}
 			else if (gameScreen->getButton("pause")->isHovered())
 			{
-				// Pause script execution
 				SCRIPT_EXECUTOR.pause();
 			}
 			else if (gameScreen->getButton("restart")->isHovered())
 			{
-				// Unload
 				SCRIPT_EXECUTOR.unload();
-
-				// Load again
 				SCRIPT_EXECUTOR.load();
 			}
 			else if (gameScreen->getButton("stop")->isHovered())
 			{
-				// Reset everything and load main menu again
 				SCRIPT_EXECUTOR.unload();
-				_sceneEditor.clearScene();
-				_fe3d.skyEntity_select("@@engineBackground");
 			}
 		}
 

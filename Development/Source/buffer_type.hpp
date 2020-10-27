@@ -6,6 +6,5 @@ enum class BufferType
 	MODEL_TANGENT,
 	CUBEMAP,
 	SURFACE,
-	AABB,
-	NONE
+	AABB
 };

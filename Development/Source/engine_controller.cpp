@@ -45,7 +45,7 @@ void EngineController::_initializeMiscellaneous()
 	// Default camera
 	camera_load(90.0f, 0.1f, 100.0f, vec3(0.0f));
 
-	// Default cube map
+	// Default engine background
 	string textureFolderPath = "engine\\textures\\";
 	skyEntity_add("@@engineBackground");
 	skyEntity_setDiffuseMaps("@@engineBackground", {

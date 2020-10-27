@@ -17,37 +17,66 @@ public:
 	void executeDestruction();
 	void unload();
 
+	bool hasThrownError();
+
 private:
+	// Functions
+	void _executeScript(const string& scriptID, ScriptType scriptType);
+	void _processVariableDefinition(const string& scriptLine, ScriptVariableScope scope);
+	void _throwScriptError(const string& message);
+	bool _isString(const string& value);
+	bool _isDecimal(const string& value);
+	bool _isInteger(const string& value);
+	bool _isBoolean(const string& value);
+	bool _isLocalVariableExisting(const string& variableID);
+	bool _isGlobalVariableExisting(const string& variableID);
+	bool _checkIfStatement(string condition);
+	bool _validateArguments(vector<ScriptValue> arguments, vector<ScriptValueType> types);
+	ScriptVariable& _getLocalVariable(const string& variableID);
+	ScriptVariable& _getGlobalVariable(const string& variableID);
+	vector<ScriptValue> _executeEngineFunction(const string& scriptLine);
+	vector<ScriptValue> _extractArguments(string argumentString);
+
+	// Instances
 	FabiEngine3D& _fe3d;
 	Script& _script;
 	SceneEditor& _sceneEditor;
 
-	// Functions
-	void _executeScript(const string& scriptID, ScriptType scriptType);
-	void _addVariable(const string& scriptLine, ScriptVariableType type, vector<ScriptVariable>& variableList);
-	void _throwScriptError(const string& message);
-	bool _checkIfStatement(string condition);
-	bool _validateArguments(vector<ScriptValue> arguments, vector<ScriptValueType> types);
-	ScriptValue _executeEngineFunction(const string& scriptLine);
-	vector<ScriptValue> _extractArguments(string argumentString);
-
-	// Maps
-	map<string, vector<ScriptVariable>> _staticVariables;
-	map<string, vector<ScriptVariable>> _globalVariables;
+	// Stacks
+	vector<vector<ScriptVariable>> _localVariablesStack;
+	vector<string> _currentScriptStackIDs;
+	vector<unsigned int> _currentLineStackIndices;
 
 	// Vectors
 	vector<string> _initScriptIDs;
 	vector<string> _updateScriptIDs;
 	vector<string> _destroyScriptIDs;
+	vector<ScriptVariable> _globalVariables;
 
 	// Strings
 	string _initEntryID = "";
 	string _updateEntryID = "";
 	string _destroyEntryID = "";
-	string _currentScriptID = "";
+	const string _metaKeyword	 = "META";
+	const string _executeKeyword = "EXEC";
+	const string _ifKeyword      = "IF";
+	const string _elseifKeyword  = "ELIF";
+	const string _elseKeyword    = "ELSE";
+	const string _globalKeyword  = "GLOB";
+	const string _constKeyword   = "CONST";
+	const string _stringKeyword  = "STR";
+	const string _decimalKeyword = "DEC";
+	const string _integerKeyword = "INT";
+	const string _booleanKeyword = "BOOL";
+	const string _isKeyword		 = "IS";
+	const string _notKeyword	 = "NOT";
+	const string _andKeyword	 = "AND";
+	const string _orKeyword		 = "OR";
+	const string _moreKeyword    = "MORE";
+	const string _lessKeyword    = "LESS";
 
-	// Integers
-	unsigned int _currentLineIndex = 0;
+	// Booleans
+	bool _hasThrownError = false;
 
 	// String to input type map
 	static inline const map<string, InputType> _keyInputStringMap =

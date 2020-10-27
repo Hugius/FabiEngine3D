@@ -18,6 +18,8 @@ public:
 	bool isRunning();
 
 private:
+	void _validateExecution();
+
 	FabiEngine3D& _fe3d;
 	Script& _script;
 	ScriptInterpreter _scriptInterpreter;

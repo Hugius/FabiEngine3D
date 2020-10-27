@@ -6,6 +6,16 @@ void FabiEngine3D::input_setLocked(bool locked)
 	return _core->_inputHandler.setLocked(locked);
 }
 
+void FabiEngine3D::input_clearKeyToggles()
+{
+	_core->_inputHandler.clearKeyToggles();
+}
+
+void FabiEngine3D::input_clearMouseToggles()
+{
+	_core->_inputHandler.clearMouseToggles();
+}
+
 void FabiEngine3D::input_setKeyTogglingLocked(bool locked)
 {
 	return _core->_inputHandler.setKeyTogglingLocked(locked);

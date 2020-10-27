@@ -1,15 +1,15 @@
 #pragma once
 
 #include "script_value.hpp"
-#include "script_variable_type.hpp"
+#include "script_variable_scope.hpp"
 
 class ScriptVariable
 {
 public:
-	ScriptVariable(FabiEngine3D& fe3d, ScriptVariableType type, const string& ID, bool constant, ScriptValue value);
+	ScriptVariable(FabiEngine3D& fe3d, ScriptVariableScope scope, const string& ID, bool constant, ScriptValue value);
 
 	const string& getID();
-	ScriptVariableType getType();
+	ScriptVariableScope getScope();
 	bool isConstant();
 	ScriptValue& getValue();
 
@@ -18,9 +18,9 @@ public:
 private:
 	FabiEngine3D& _fe3d;
 
-	ScriptVariableType _type;
+	ScriptVariableScope _scope;
 
-	const string& _ID;
+	string _ID;
 
 	const bool _isConstant;
 

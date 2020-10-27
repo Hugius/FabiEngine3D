@@ -1,6 +1,5 @@
-4 36
+3 0
 META script_type_update
 META execution_entry
 
-IF fe3d_input_key_down("KEY_SPACE"):
-    fe3d_camera_move(0.0, 0.05, 0.0)
+

@@ -154,6 +154,7 @@ void WorldEditor::load()
 	_gui.getGlobalScreen()->addTextfield("selectedSkyName", vec2(0.0f, 0.85f), vec2(0.5f, 0.1f), "", vec3(1.0f));
 	_gui.getGlobalScreen()->addTextfield("selectedTerrainName", vec2(0.0f, 0.85f), vec2(0.5f, 0.1f), "", vec3(1.0f));
 	_gui.getGlobalScreen()->addTextfield("selectedWaterName", vec2(0.0f, 0.85f), vec2(0.5f, 0.1f), "", vec3(1.0f));
+	_fe3d.input_clearKeyToggles();
 	_isLoaded = true;
 }
 

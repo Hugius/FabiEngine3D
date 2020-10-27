@@ -1,5 +1,10 @@
-2 3
+7 17
 META script_type_init
 META execution_entry
-hoi
-FE3D_SCENE_LOAD("scene")
+
+STR kip = "hoi"
+fe3d:print(kip)
+
+BOOL schaap = fe3d:input_key_down("KEY_W")
+fe3d:print(schaap)
+fe3d:scene_load("scene")

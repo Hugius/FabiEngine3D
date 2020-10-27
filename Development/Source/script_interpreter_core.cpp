@@ -27,22 +27,22 @@ void ScriptInterpreter::load()
 			iss >> type >> name;
 
 			// Determine META type
-			if (type == "META" && name == "script_type_init")
+			if (type == _metaKeyword && name == "script_type_init")
 			{
 				_initScriptIDs.push_back(scriptID);
 				scriptType = "script_type_init";
 			}
-			else if (type == "META" && name == "script_type_update")
+			else if (type == _metaKeyword && name == "script_type_update")
 			{
 				_updateScriptIDs.push_back(scriptID);
 				scriptType = "script_type_update";
 			}
-			else if (type == "META" && name == "script_type_destroy")
+			else if (type == _metaKeyword && name == "script_type_destroy")
 			{
 				_destroyScriptIDs.push_back(scriptID);
 				scriptType = "script_type_destroy";
 			}
-			else if (type == "META" && name == "execution_entry")
+			else if (type == _metaKeyword && name == "execution_entry")
 			{
 				// Check if script type is defined
 				if (scriptType == "")
@@ -124,7 +124,13 @@ void ScriptInterpreter::unload()
 	_initScriptIDs.clear();
 	_updateScriptIDs.clear();
 	_destroyScriptIDs.clear();
+	_localVariablesStack.clear();
+	_currentScriptStackIDs.clear();
+	_currentLineStackIndices.clear();
 	_initEntryID = "";
 	_updateEntryID = "";
 	_destroyEntryID = "";
+	_hasThrownError = false;
+	_sceneEditor.clearScene();
+	_fe3d.skyEntity_select("@@engineBackground");
 }

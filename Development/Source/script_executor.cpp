@@ -14,6 +14,7 @@ void ScriptExecutor::load()
 	_isInitialized = true;
 	_scriptInterpreter.load();
 	_scriptInterpreter.executeInitialization();
+	_validateExecution();
 }
 
 void ScriptExecutor::update()
@@ -21,7 +22,16 @@ void ScriptExecutor::update()
 	if (_isRunning)
 	{
 		_scriptInterpreter.executeUpdate();
+		_validateExecution();
 	}
+}
+
+void ScriptExecutor::unload()
+{
+	_scriptInterpreter.executeDestruction();
+	_scriptInterpreter.unload();
+	_isInitialized = false;
+	_isRunning = false;
 }
 
 void ScriptExecutor::pause()
@@ -32,14 +42,6 @@ void ScriptExecutor::pause()
 void ScriptExecutor::unpause()
 {
 	_isRunning = true;
-}
-
-void ScriptExecutor::unload()
-{
-	_scriptInterpreter.executeDestruction();
-	_scriptInterpreter.unload();
-	_isInitialized = false;
-	_isRunning = false;
 }
 
 bool ScriptExecutor::isScriptEmpty()
@@ -55,4 +57,14 @@ bool ScriptExecutor::isInitialized()
 bool ScriptExecutor::isRunning()
 {
 	return _isRunning;
+}
+
+void ScriptExecutor::_validateExecution()
+{
+	if (_scriptInterpreter.hasThrownError())
+	{
+		_scriptInterpreter.unload();
+		_isInitialized = false;
+		_isRunning = false;
+	}
 }

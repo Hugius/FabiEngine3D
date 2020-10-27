@@ -630,6 +630,8 @@ public:
 
 	// Input interface
 	void input_setLocked(bool locked);
+	void input_clearKeyToggles();
+	void input_clearMouseToggles();
 	void input_setKeyTogglingLocked(bool locked);
 	void input_setMouseTogglingLocked(bool locked);
 	bool input_getKeyDown(InputType keyName);

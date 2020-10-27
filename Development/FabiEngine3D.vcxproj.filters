@@ -466,6 +466,18 @@
     <ClCompile Include="Source\script_variable.cpp">
       <Filter>src\Scripting System\Miscellaneous</Filter>
     </ClCompile>
+    <ClCompile Include="Source\script_interpreter_arguments.cpp">
+      <Filter>src\Scripting System\Execution\Interpreter</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_interpreter_variables.cpp">
+      <Filter>src\Scripting System\Execution\Interpreter</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_interpreter_ifstatement.cpp">
+      <Filter>src\Scripting System\Execution\Interpreter</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_interpreter_functions.cpp">
+      <Filter>src\Scripting System\Execution\Interpreter</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\obj_loader.hpp">
@@ -768,8 +780,8 @@
     <ClInclude Include="Source\script_interpreter.hpp">
       <Filter>src\Scripting System\Execution\Interpreter</Filter>
     </ClInclude>
-    <ClInclude Include="Source\script_variable_type.hpp">
-      <Filter>src\Scripting System\Miscellaneous</Filter>
+    <ClInclude Include="Source\script_variable_scope.hpp">
+      <Filter>src\Miscellaneous\Enums</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

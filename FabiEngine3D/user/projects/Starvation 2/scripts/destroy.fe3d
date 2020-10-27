@@ -1,5 +1,5 @@
-3 17
+3 5
 META script_type_destroy
 META execution_entry
 
-FE3D_SCENE_CLEAR()
+fe3d:scene_clear()

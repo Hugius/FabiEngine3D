@@ -185,6 +185,18 @@ void InputHandler::f_checkInput()
 	}
 }
 
+void InputHandler::clearKeyToggles()
+{
+	_keysToggled.clear();
+	_keysToggled_mayNotPress.clear();
+}
+
+void InputHandler::clearMouseToggles()
+{
+	_mouseToggled.clear();
+	_mouseToggled_mayNotPress.clear();
+}
+
 void InputHandler::setLocked(bool locked)
 {
 	_everythingLocked = locked;

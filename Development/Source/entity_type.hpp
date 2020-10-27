@@ -10,6 +10,5 @@ enum class EntityType
 	AABB,
 	LIGHT,
 	GUI,
-	TEXT,
-	NONE
+	TEXT
 };

@@ -1,8 +1,8 @@
 #include "script_variable.hpp"
 
-ScriptVariable::ScriptVariable(FabiEngine3D& fe3d, ScriptVariableType type, const string& ID, bool constant, ScriptValue value) :
+ScriptVariable::ScriptVariable(FabiEngine3D& fe3d, ScriptVariableScope scope, const string& ID, bool constant, ScriptValue value) :
 	_fe3d(fe3d),
-	_type(type),
+	_scope(scope),
 	_ID(ID),
 	_isConstant(constant),
 	_value(value)
@@ -15,9 +15,9 @@ const string& ScriptVariable::getID()
 	return _ID;
 }
 
-ScriptVariableType ScriptVariable::getType()
+ScriptVariableScope ScriptVariable::getScope()
 {
-	return _type;
+	return _scope;
 }
 
 bool ScriptVariable::isConstant()

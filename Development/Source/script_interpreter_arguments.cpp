@@ -1,21 +1,12 @@
 #include "script_interpreter.hpp"
 
-bool ScriptInterpreter::_validateArguments(vector<ScriptValue> arguments, vector<ScriptValueType> types)
+bool ScriptInterpreter::_validateArgumentAmount(vector<ScriptValue> arguments, unsigned int amount)
 {
-	if (arguments.size() == types.size()) // Check if argument amount is correct
+	if (arguments.size() == amount) // Check if argument amount is correct
 	{
-		for (unsigned int i = 0; i < arguments.size(); i++)
-		{
-			if (arguments[i].getType() != types[i])
-			{
-				_throwScriptError("wrong argument type(s)!");
-				return false;
-			}
-		}
-
 		return true;
 	}
-	else if (arguments.size() < types.size()) // Not enough arguments
+	else if (arguments.size() < amount) // Not enough arguments
 	{
 		_throwScriptError("not enough arguments!");
 		return false;
@@ -25,6 +16,20 @@ bool ScriptInterpreter::_validateArguments(vector<ScriptValue> arguments, vector
 		_throwScriptError("too many arguments!");
 		return false;
 	}
+}
+
+bool ScriptInterpreter::_validateArgumentTypes(vector<ScriptValue> arguments, vector<ScriptValueType> types)
+{
+	for (unsigned int i = 0; i < arguments.size(); i++)
+	{
+		if (arguments[i].getType() != types[i])
+		{
+			_throwScriptError("wrong argument type(s)!");
+			return false;
+		}
+	}
+
+	return true;
 }
 
 vector<ScriptValue> ScriptInterpreter::_extractArguments(string argumentString)
@@ -46,7 +51,7 @@ vector<ScriptValue> ScriptInterpreter::_extractArguments(string argumentString)
 	}
 
 	// Argument string cannot start with a comma
-	if (argumentString[0] == ',')
+	if (argumentString.front() == ',')
 	{
 		_throwScriptError("invalid argument(s) syntax!");
 		return {};
@@ -74,9 +79,7 @@ vector<ScriptValue> ScriptInterpreter::_extractArguments(string argumentString)
 			{
 				if (c == '"') // Add new string argument
 				{
-					auto newArgument = ScriptValue(_fe3d, ScriptValueType::STRING);
-					newArgument.setString(currentArgument);
-					argumentList.push_back(newArgument);
+					argumentList.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, currentArgument));
 					buildingString = false;
 					finishedArgument = true;
 				}
@@ -110,18 +113,14 @@ vector<ScriptValue> ScriptInterpreter::_extractArguments(string argumentString)
 						}
 						else
 						{
-							auto newArgument = ScriptValue(_fe3d, ScriptValueType::DECIMAL);
-							newArgument.setDecimal(stof(currentArgument));
-							argumentList.push_back(newArgument);
+							argumentList.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, stof(currentArgument)));
 							buildingNumber = false;
 							buildingDecimal = false;
 						}
 					}
 					else // Convert to integer
 					{
-						auto newArgument = ScriptValue(_fe3d, ScriptValueType::INTEGER);
-						newArgument.setInteger(stoi(currentArgument));
-						argumentList.push_back(newArgument);
+						argumentList.push_back(ScriptValue(_fe3d, ScriptValueType::INTEGER, stoi(currentArgument)));
 						buildingNumber = false;
 					}
 				}
@@ -136,9 +135,7 @@ vector<ScriptValue> ScriptInterpreter::_extractArguments(string argumentString)
 				{
 					if (currentArgument == "<true>") // Add new boolean argument
 					{
-						auto newArgument = ScriptValue(_fe3d, ScriptValueType::BOOLEAN);
-						newArgument.setBoolean(true);
-						argumentList.push_back(newArgument);
+						argumentList.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, true));
 						buildingBoolean = false;
 						finishedArgument = true;
 					}
@@ -150,9 +147,7 @@ vector<ScriptValue> ScriptInterpreter::_extractArguments(string argumentString)
 				}
 				else if (currentArgument.size() == 7 && currentArgument == "<false>") // Add new boolean argument
 				{
-					auto newArgument = ScriptValue(_fe3d, ScriptValueType::BOOLEAN);
-					newArgument.setBoolean(false);
-					argumentList.push_back(newArgument);
+					argumentList.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, false));
 					buildingBoolean = false;
 					finishedArgument = true;
 				}

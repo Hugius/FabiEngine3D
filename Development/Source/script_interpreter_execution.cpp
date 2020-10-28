@@ -34,14 +34,14 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 		// Determine keyword type
 		if (scriptLine.substr(0, 5) == "fe3d:") // Engine function
 		{
-			_executeEngineFunction(scriptLine);
+			_processEngineFunctionCall(scriptLine);
 		}
 		else if (scriptLine.substr(0, _ifKeyword.size() + 1) == _ifKeyword + " ") // If statement
 		{
 			// Check if if statement ends with colon
-			if (scriptLine.back() != ':')
+			if (scriptLine.back() == ':')
 			{
-				if (_checkIfStatement(scriptLine.substr(2, scriptLine.size() - 3)))
+				if (_checkIfStatement(scriptLine.substr(3, scriptLine.size() - 4)))
 				{
 
 				}
@@ -73,12 +73,6 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 		{
 			_throwScriptError("unknown keyword!");
 			break;
-		}
-
-		
-		for (auto& var : _localVariablesStack.back())
-		{
-			//std::cout << var.getID() << std::endl;
 		}
 	}
 

@@ -24,17 +24,20 @@ private:
 	void _executeScript(const string& scriptID, ScriptType scriptType);
 	void _processVariableDefinition(const string& scriptLine, ScriptVariableScope scope);
 	void _throwScriptError(const string& message);
-	bool _isString(const string& value);
-	bool _isDecimal(const string& value);
-	bool _isInteger(const string& value);
-	bool _isBoolean(const string& value);
+	bool _isStringValue(const string& value);
+	bool _isDecimalValue(const string& value);
+	bool _isIntegerValue(const string& value);
+	bool _isBooleanValue(const string& value);
 	bool _isLocalVariableExisting(const string& variableID);
 	bool _isGlobalVariableExisting(const string& variableID);
-	bool _checkIfStatement(string condition);
-	bool _validateArguments(vector<ScriptValue> arguments, vector<ScriptValueType> types);
+	bool _checkIfStatement(string conditionString);
+	bool _validateCondition(ScriptValue& firstValue, string comparisonOperator, ScriptValue& secondValue);
+	bool _checkConditionResult(ScriptValue& firstValue, string comparisonOperator, ScriptValue& secondValue);
+	bool _validateArgumentAmount(vector<ScriptValue> arguments, unsigned int amount);
+	bool _validateArgumentTypes(vector<ScriptValue> arguments, vector<ScriptValueType> types);
 	ScriptVariable& _getLocalVariable(const string& variableID);
 	ScriptVariable& _getGlobalVariable(const string& variableID);
-	vector<ScriptValue> _executeEngineFunction(const string& scriptLine);
+	vector<ScriptValue> _processEngineFunctionCall(const string& scriptLine);
 	vector<ScriptValue> _extractArguments(string argumentString);
 
 	// Instances

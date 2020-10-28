@@ -37,7 +37,7 @@ void ScriptInterpreter::_processVariableDefinition(const string& scriptLine, Scr
 	if (variableType == _stringKeyword || variableType == _decimalKeyword || variableType == _integerKeyword || variableType == _booleanKeyword)
 	{
 		// Validate variable name
-		bool validName = !variableID.empty() && variableID.substr(0, 5) != "fe3d:" && !isdigit(variableID[0] && isalnum(variableID[0])) &&
+		bool validName = !variableID.empty() && variableID.substr(0, 5) != "fe3d:" && !isdigit(variableID.front() && isalnum(variableID.front())) &&
 			variableID != "<true>" && variableID != "<false>";
 
 		// Forbidden variable names
@@ -82,31 +82,31 @@ void ScriptInterpreter::_processVariableDefinition(const string& scriptLine, Scr
 				else
 				{
 					// Check if value is of the right type
-					if (variableType == _stringKeyword && _isString(variableValue))
+					if (variableType == _stringKeyword && _isStringValue(variableValue))
 					{
 						variableValue.erase(variableValue.begin());
 						variableValue.pop_back();
 						auto value = ScriptValue(_fe3d, ScriptValueType::STRING, variableValue);
 						variableList.push_back(ScriptVariable(_fe3d, scope, variableID, isConstant, value));
 					}
-					else if (variableType == _decimalKeyword && _isDecimal(variableValue))
+					else if (variableType == _decimalKeyword && _isDecimalValue(variableValue))
 					{
 						auto value = ScriptValue(_fe3d, ScriptValueType::DECIMAL, stof(variableValue));
 						variableList.push_back(ScriptVariable(_fe3d, scope, variableID, isConstant, value));
 					}
-					else if (variableType == _integerKeyword && _isInteger(variableValue))
+					else if (variableType == _integerKeyword && _isIntegerValue(variableValue))
 					{
 						auto value = ScriptValue(_fe3d, ScriptValueType::INTEGER, stoi(variableValue));
 						variableList.push_back(ScriptVariable(_fe3d, scope, variableID, isConstant, value));
 					}
-					else if (variableType == _booleanKeyword && _isBoolean(variableValue))
+					else if (variableType == _booleanKeyword && _isBooleanValue(variableValue))
 					{
 						auto value = ScriptValue(_fe3d, ScriptValueType::BOOLEAN, (variableValue == "<true>"));
 						variableList.push_back(ScriptVariable(_fe3d, scope, variableID, isConstant, value));
 					}
 					else if (variableValue.substr(0, 4) == "fe3d")
 					{
-						auto value = _executeEngineFunction(variableValue).back();
+						auto value = _processEngineFunctionCall(variableValue).back();
 
 						// Check if value is of the right type
 						if ((variableType == _stringKeyword && value.getType() == ScriptValueType::STRING) ||

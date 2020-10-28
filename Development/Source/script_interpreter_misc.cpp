@@ -1,11 +1,11 @@
 #include "script_interpreter.hpp"
 
-bool ScriptInterpreter::_isString(const string& value)
+bool ScriptInterpreter::_isStringValue(const string& value)
 {
-	return value.size() >= 2 && (value[0] == '"' && value.back() == '"');
+	return value.size() >= 2 && (value.front() == '"' && value.back() == '"');
 }
 
-bool ScriptInterpreter::_isDecimal(const string& value)
+bool ScriptInterpreter::_isDecimalValue(const string& value)
 {
 	// Validate characters
 	unsigned dots = 0;
@@ -24,15 +24,15 @@ bool ScriptInterpreter::_isDecimal(const string& value)
 	}
 
 	// Check if value is a valid decimal
-	return (value.size() >= 3) && (isdigit(value[0]) && isdigit(value.back())) && (dots == 1);
+	return (value.size() >= 3) && (isdigit(value.front()) && isdigit(value.back())) && (dots == 1);
 }
 
-bool ScriptInterpreter::_isInteger(const string& value)
+bool ScriptInterpreter::_isIntegerValue(const string& value)
 {
 	return (std::find_if(value.begin(), value.end(), [](unsigned char c) { return !std::isdigit(c); }) == value.end());
 }
 
-bool ScriptInterpreter::_isBoolean(const string& value)
+bool ScriptInterpreter::_isBooleanValue(const string& value)
 {
 	return (value == "<true>" || value == "<false>");
 }

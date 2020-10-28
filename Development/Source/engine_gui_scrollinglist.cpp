@@ -93,7 +93,7 @@ void EngineGuiScrollingList::_updateHovering()
 	_isHovered = false;
 
 	// Convert dimensions to same space
-	vec2 mousePos = _fe3d.misc_convertToNDC(_fe3d.misc_convertFromScreenCoords(_fe3d.misc_getMousePos()));
+	vec2 mousePos = _fe3d.misc_convertToNDC(_fe3d.misc_convertFromScreenCoords(_fe3d.misc_getCursorPosition()));
 	vec2 listPos = _fe3d.guiEntity_getPosition(_entityID);
 	vec2 listSize = _fe3d.guiEntity_getSize(_entityID);
 
@@ -115,7 +115,7 @@ void EngineGuiScrollingList::_updateScolling()
 		bool mustReset = false;
 
 		// Checking if cursor is inside scrolling list
-		vec2 mousePos = _fe3d.misc_convertToNDC(_fe3d.misc_convertFromScreenCoords(_fe3d.misc_getMousePos()));
+		vec2 mousePos = _fe3d.misc_convertToNDC(_fe3d.misc_convertFromScreenCoords(_fe3d.misc_getCursorPosition()));
 		if (mousePos.x > _originalPosition.x - (_originalSize.x / 2.0f) && mousePos.x < _originalPosition.x + (_originalSize.x / 2.0f))
 		{
 			if (mousePos.y > _originalPosition.y - (_originalSize.y / 2.0f) && mousePos.y < _originalPosition.y + (_originalSize.y / 2.0f))

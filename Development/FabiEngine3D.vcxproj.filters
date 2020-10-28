@@ -478,6 +478,9 @@
     <ClCompile Include="Source\script_interpreter_functions.cpp">
       <Filter>src\Scripting System\Execution\Interpreter</Filter>
     </ClCompile>
+    <ClCompile Include="Source\bottom_viewport_controller_console.cpp">
+      <Filter>src\Engine Controller System\Viewport Controllers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\obj_loader.hpp">

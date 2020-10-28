@@ -75,7 +75,7 @@ void ScriptEditor::_updateMiscellaneous()
 		{
 			unsigned int cursorLineIndex = _script.getScriptFile(_currentScriptFileID)->getCursorLineIndex();
 
-			if (!_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isMouseInsideViewport())
+			if (!_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isCursorInsideViewport())
 			{
 				// Camera movement input
 				if (_fe3d.input_getMouseWheelY() == -1 && cursorLineIndex > 12)

@@ -7,6 +7,12 @@ void ScriptEditor::_updateTextWriter()
 	// User must be editing script file & no active GUI overlays
 	if (_isLoaded && _isWritingScript && !_gui.getGlobalScreen()->isFocused() && !wasGuiFocused)
 	{
+		// Change cursor texture
+		if (_fe3d.misc_isCursorInsideViewport())
+		{
+			_fe3d.guiEntity_changeTexture("@@cursor", "engine\\textures\\cursor_text.png");
+		}
+
 		// Handy values
 		bool textHasChanged = false;
 		unsigned int cursorLineIndex = _script.getScriptFile(_currentScriptFileID)->getCursorLineIndex();
@@ -84,9 +90,49 @@ void ScriptEditor::_updateTextWriter()
 				}
 			}
 		}
-		else if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
+		else if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT)) // Move blinking cursor position
 		{
+			auto billboardID = _fe3d.collision_checkCursorInAny();
+			if (!billboardID.empty())
+			{
+				// Temporary values
+				bool extractingLineNumber = true;
+				string lineIndexString = "";
+				string charIndexString = "";
 
+				// Extract position indices
+				for (auto& c : billboardID)
+				{
+					// Add to string
+					if (extractingLineNumber)
+					{
+						lineIndexString += c;
+					}
+					else
+					{
+						charIndexString += c;
+					}
+
+					// Check if character billboard
+					if (c == '_')
+					{
+						extractingLineNumber = false;
+					}
+				}
+
+				// Set line index based on click location
+				cursorLineIndex = stoi(lineIndexString);
+
+				// Set character index based on click location
+				if (charIndexString.empty())
+				{
+					cursorCharIndex = _script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex).size(); // Place cursor at end of line
+				}
+				else
+				{
+					cursorCharIndex = stoi(charIndexString); // Place cursor at clicked position
+				}
+			}
 		}
 		else if (activeActionKey == InputType::KEY_LEFT) // Left arrow key
 		{
@@ -121,7 +167,8 @@ void ScriptEditor::_updateTextWriter()
 				{
 					singleActionAllowed = false;
 
-					if (cursorCharIndex < _script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex).size()) // If cursor somewhere on the line
+					// If cursor somewhere on the line
+					if (cursorCharIndex < _script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex).size())
 					{
 						cursorCharIndex++;
 					}
@@ -201,7 +248,8 @@ void ScriptEditor::_updateTextWriter()
 					}
 					else // Non-spacebar
 					{
-						if (_fe3d.input_getKeyDown(InputType::KEY_LSHIFT) || _fe3d.input_getKeyDown(InputType::KEY_RSHIFT)) // Uppercase or special character
+						// Uppercase or special character
+						if (_fe3d.input_getKeyDown(InputType::KEY_LSHIFT) || _fe3d.input_getKeyDown(InputType::KEY_RSHIFT))
 						{
 							newCharacters += (c - 32);
 						}
@@ -251,6 +299,12 @@ void ScriptEditor::_updateTextWriter()
 						newCharacters += element.first;
 					}
 				}
+			}
+
+			// Insert 4 spaces (TAB)
+			if (_fe3d.input_getKeyPressed(InputType::KEY_TAB))
+			{
+				newCharacters += "    ";
 			}
 
 			// Remove characters from line
@@ -312,7 +366,7 @@ void ScriptEditor::_updateTextWriter()
 					}
 				}
 			}
-			
+
 			// Add new typed character to line
 			if (newCharacters != "")
 			{

@@ -253,7 +253,7 @@ void SceneEditor::_updateMiscellaneous()
 	if (_isLoaded)
 	{
 		// Lock toggling if GUI focused or cursor not in 3D viewport
-		_fe3d.input_setKeyTogglingLocked(_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isMouseInsideViewport());
+		_fe3d.input_setKeyTogglingLocked(_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isCursorInsideViewport());
 
 		// Update bounding box visibility
 		if (_fe3d.input_getKeyToggled(InputType::KEY_B))

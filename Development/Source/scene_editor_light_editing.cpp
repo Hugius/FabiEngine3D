@@ -18,7 +18,7 @@ void SceneEditor::_updateLightEditing()
 				if (entityID.substr(0, 11) == "@pointlight")
 				{
 					// Cursor must be in 3D space, no GUI interruptions, no RMB holding down
-					if (_fe3d.collision_checkCursorInAny() == entityID && _fe3d.misc_isMouseInsideViewport() &&
+					if (_fe3d.collision_checkCursorInAny() == entityID && _fe3d.misc_isCursorInsideViewport() &&
 						!_gui.getGlobalScreen()->isFocused() && !_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 					{
 						// Set new selected lightbulb
@@ -71,7 +71,7 @@ void SceneEditor::_updateLightEditing()
 			}
 			
 			// Check if user made the active lightbulb inactive
-			if (_selectedLightBulbID == "" && ACTIVE_BULB_ID != "" && _fe3d.misc_isMouseInsideViewport() && !_gui.getGlobalScreen()->isFocused())
+			if (_selectedLightBulbID == "" && ACTIVE_BULB_ID != "" && _fe3d.misc_isCursorInsideViewport() && !_gui.getGlobalScreen()->isFocused())
 			{
 				// LMB pressed
 				if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) && !_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_RIGHT))

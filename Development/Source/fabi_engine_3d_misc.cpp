@@ -124,7 +124,7 @@ void FabiEngine3D::misc_disableDebugRendering()
 	_core->_renderBus.setDebugRenderingEnabled(false);
 }
 
-void FabiEngine3D::misc_setMousePos(ivec2 pos)
+void FabiEngine3D::misc_setCursorPosition(ivec2 pos)
 {
 	_core->_mousePicker.update(pos, _core->_terrainEntityManager);
 	_core->_windowManager.setMousePos(pos);
@@ -298,7 +298,7 @@ vec2 FabiEngine3D::misc_convertFromScreenCoords(ivec2 pos)
 	return vec2(x, y);
 }
 
-ivec2 FabiEngine3D::misc_getMousePos()
+ivec2 FabiEngine3D::misc_getCursorPosition()
 {
 	ivec2 mousePos = _core->_windowManager.getMousePos();
 
@@ -320,10 +320,10 @@ ivec2 FabiEngine3D::misc_getViewportSize()
 	return Config::getInst().getVpSize();
 }
 
-bool FabiEngine3D::misc_isMouseInsideViewport()
+bool FabiEngine3D::misc_isCursorInsideViewport()
 {
 	// Variables
-	ivec2 mousePos = misc_getMousePos();
+	ivec2 mousePos = misc_getCursorPosition();
 	ivec2 viewportPos = misc_getViewportPosition();
 	ivec2 viewportSize = misc_getViewportSize();
 
@@ -339,10 +339,10 @@ bool FabiEngine3D::misc_isMouseInsideViewport()
 	return false;
 }
 
-bool FabiEngine3D::misc_isMouseInsideWindow()
+bool FabiEngine3D::misc_isCursorInsideWindow()
 {
 	// Variables
-	ivec2 mousePos = misc_getMousePos();
+	ivec2 mousePos = misc_getCursorPosition();
 	ivec2 windowSize = misc_getWindowSize();
 	
 	// Checking if cursor is inside viewport

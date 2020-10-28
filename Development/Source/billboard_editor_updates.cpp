@@ -216,7 +216,7 @@ void BillboardEditor::_updateBillboardCamera()
 			float cameraHeight = _billboardPosition.y + (billboardSize.y / 2.0f);
 
 			// Get scroll wheel input
-			if (!_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isMouseInsideViewport())
+			if (!_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isCursorInsideViewport())
 			{
 				float rotationAcceleration = float(_fe3d.input_getMouseWheelY()) / _scrollWheelDivider;
 				_cameraRotationSpeed += rotationAcceleration;

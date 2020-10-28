@@ -37,13 +37,13 @@ void FabiEngine3D::aabbEntity_bindToGameEntity(const string& parentID, vec3 posi
 	}
 }
 
-void FabiEngine3D::aabbEntity_bindToBillboardEntity(const string& parentID, vec3 S, bool responsive, const string& customAabbID)
+void FabiEngine3D::aabbEntity_bindToBillboardEntity(const string& parentID, bool responsive, const string& customAabbID)
 {
 	if (customAabbID == "") // Use parent ID
 	{
 		if (_core->_billboardEntityManager.isExisting(parentID))
 		{
-			_core->_aabbEntityManager.bindAabbEntity(parentID, parentID, AabbParentType::BILLBOARD_ENTITY, vec3(0.0f), S, responsive);
+			_core->_aabbEntityManager.bindAabbEntity(parentID, parentID, AabbParentType::BILLBOARD_ENTITY, vec3(0.0f), vec3(0.0f), responsive);
 		}
 		else
 		{
@@ -54,7 +54,7 @@ void FabiEngine3D::aabbEntity_bindToBillboardEntity(const string& parentID, vec3
 	{
 		if (_core->_billboardEntityManager.isExisting(parentID))
 		{
-			_core->_aabbEntityManager.bindAabbEntity(customAabbID, parentID, AabbParentType::BILLBOARD_ENTITY, vec3(0.0f), S, responsive);
+			_core->_aabbEntityManager.bindAabbEntity(customAabbID, parentID, AabbParentType::BILLBOARD_ENTITY, vec3(0.0f), vec3(0.0f), responsive);
 		}
 		else
 		{
@@ -139,6 +139,11 @@ bool FabiEngine3D::aabbEntity_isResponsive(const string& ID)
 bool FabiEngine3D::aabbEntity_isExisting(const string& ID)
 {
 	return _core->_aabbEntityManager.isExisting(ID);
+}
+
+bool FabiEngine3D::aabbEntity_isVisible(const string& ID)
+{
+	return _core->_aabbEntityManager.getEntity(ID)->isVisible();
 }
 
 vector<string> FabiEngine3D::aabbEntity_getBoundIDs(const string& parentID, bool gameEntity, bool billboardEntity)

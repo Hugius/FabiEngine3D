@@ -62,6 +62,7 @@ private:
 	const int _continuousTextActionFrameMinimum = 75;
 	const int _continuousTextActionInterval = 5;
 	const unsigned int _maxPassedBarFrames = 50;
+	const unsigned int _maxCharactersPerLine = 100;
 	const string letterCharacters = " abcdefghijklmnopqrstuvwxyz";
 	const map<char, char> numberCharacterMap =
 	{

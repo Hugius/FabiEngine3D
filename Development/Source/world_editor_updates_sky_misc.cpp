@@ -162,7 +162,7 @@ void WorldEditor::_updateSkyCamera()
 	{
 		if (_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_RIGHT) && !_gui.getGlobalScreen()->isFocused())
 		{
-			if (_fe3d.misc_isMouseInsideViewport())
+			if (_fe3d.misc_isCursorInsideViewport())
 			{
 				_fe3d.gfx_enableMotionBlur(5.0f);
 				_fe3d.camera_enableFirstPersonView();

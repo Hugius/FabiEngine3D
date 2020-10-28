@@ -77,7 +77,7 @@ void EngineController::_updateMiscellaneous()
 	lastScreen = activeScreen;
 
 	// Update custom cursor
-	guiEntity_setPosition("@@cursor", misc_convertToNDC(misc_convertFromScreenCoords(misc_getMousePos())));
+	guiEntity_setPosition("@@cursor", misc_convertToNDC(misc_convertFromScreenCoords(misc_getCursorPosition())));
 	guiEntity_changeTexture("@@cursor", "engine\\textures\\cursor_default.png");
-	misc_isMouseInsideWindow() ? guiEntity_show("@@cursor") : guiEntity_hide("@@cursor");
+	misc_isCursorInsideWindow() ? guiEntity_show("@@cursor") : guiEntity_hide("@@cursor");
 }

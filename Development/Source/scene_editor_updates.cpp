@@ -210,7 +210,7 @@ void SceneEditor::_updateCamera()
 			// Camera looking
 			if (_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_RIGHT) && !_gui.getGlobalScreen()->isFocused())
 			{
-				if (_fe3d.misc_isMouseInsideViewport())
+				if (_fe3d.misc_isCursorInsideViewport())
 				{
 					_fe3d.camera_enableFirstPersonView();
 					_fe3d.camera_disableLookat();
@@ -227,7 +227,7 @@ void SceneEditor::_updateCamera()
 				_fe3d.camera_disableFirstPersonView();
 
 				// Cannot show cursor if outside of engine window
-				if (_fe3d.misc_isMouseInsideWindow())
+				if (_fe3d.misc_isCursorInsideWindow())
 				{
 					_fe3d.guiEntity_show("@@cursor");
 				}

@@ -21,7 +21,7 @@ bool EngineGuiViewport::isHovered()
 	if (_fe3d.guiEntity_isVisible(_ID))
 	{
 		// Convert dimensions to same space
-		vec2 mousePos = _fe3d.misc_convertToNDC(_fe3d.misc_convertFromScreenCoords(_fe3d.misc_getMousePos()));
+		vec2 mousePos = _fe3d.misc_convertToNDC(_fe3d.misc_convertFromScreenCoords(_fe3d.misc_getCursorPosition()));
 		vec2 buttonPos = _fe3d.guiEntity_getPosition(_ID);
 		vec2 buttonSize = _fe3d.guiEntity_getSize(_ID);
 

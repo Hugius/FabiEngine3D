@@ -375,7 +375,7 @@ public:
 	// AABB entity interface - setters
 	void aabbEntity_add(const string& ID, vec3 position, vec3 size, bool responsive);
 	void aabbEntity_bindToGameEntity(const string& parentID, vec3 position, vec3 size, bool responsive, const string& customAabbID = "");
-	void aabbEntity_bindToBillboardEntity(const string& parentID, vec3 S, bool responsive, const string& customAabbID = "");
+	void aabbEntity_bindToBillboardEntity(const string& parentID, bool responsive, const string& customAabbID = "");
 	void aabbEntity_deleteAll();
 	void aabbEntity_delete(const string& ID);
 	void aabbEntity_hide(const string& ID);
@@ -389,6 +389,7 @@ public:
 	vec3 aabbEntity_getSize(const string& ID);
 	bool aabbEntity_isResponsive(const string& ID);
 	bool aabbEntity_isExisting(const string& ID);
+	bool aabbEntity_isVisible(const string& ID);
 	vector<string> aabbEntity_getBoundIDs(const string& parentID, bool gameEntity, bool billboardEntity);
 	vector<string> aabbEntity_getAllIDs();
 
@@ -489,6 +490,7 @@ public:
 
 	// Text interface - getters
 	bool textEntity_isExisting(const string& ID);
+	bool textEntity_isVisible(const string& ID);
 	vec2 textEntity_getPosition(const string& ID);
 	vec2 textEntity_getSize(const string& ID);
 	vec2 textEntity_getMinPosition(const string& ID);
@@ -679,7 +681,7 @@ public:
 	void misc_hideAudioDebugging();
 	void misc_showCursor();
 	void misc_hideCursor();
-	void misc_setMousePos(ivec2 pos);
+	void misc_setCursorPosition(ivec2 pos);
 	void misc_setMainRenderingColor(vec3 color);
 	void misc_setWindowTitle(const string& title);
 	void misc_clearOBJCache(const string& filePath);
@@ -714,12 +716,12 @@ public:
 	vec2 misc_convertFromNDC(vec2 pos);
 	vec2 misc_convertFromScreenCoords(ivec2 pos);
 	ivec2 misc_convertToScreenCoords(vec2 pos);
-	ivec2 misc_getMousePos();
+	ivec2 misc_getCursorPosition();
 	ivec2 misc_getWindowSize();
 	ivec2 misc_getViewportPosition();
 	ivec2 misc_getViewportSize();
-	bool misc_isMouseInsideViewport();
-	bool misc_isMouseInsideWindow();
+	bool misc_isCursorInsideViewport();
+	bool misc_isCursorInsideWindow();
 	bool misc_isDirectory(const string& filePath);
 	bool misc_isFileExisting(const string& filePath);
 	bool misc_checkInterval(const string& key, int frameCount);

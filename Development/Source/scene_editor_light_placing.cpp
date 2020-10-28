@@ -8,7 +8,7 @@ void SceneEditor::_updateLightPlacing()
 		if (_isPlacingPointlight)
 		{
 			// Check if mouse behavior isn't being invalid
-			if (_fe3d.misc_isMouseInsideViewport() && 
+			if (_fe3d.misc_isCursorInsideViewport() && 
 				!_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_RIGHT) && 
 				!_gui.getGlobalScreen()->isFocused())
 			{

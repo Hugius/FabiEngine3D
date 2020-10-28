@@ -27,7 +27,7 @@ void SceneEditor::_updateBillboardEditing()
 					bool hovered = (hoveredID.size() >= entityID.size()) && (hoveredID.substr(0, entityID.size()) == entityID);
 
 					// Cursor must be in 3D space, no GUI interruptions, no RMB holding down
-					if (hovered && _fe3d.misc_isMouseInsideViewport() &&
+					if (hovered && _fe3d.misc_isCursorInsideViewport() &&
 						!_gui.getGlobalScreen()->isFocused() && !_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 					{
 						// Select hovered billboard
@@ -55,7 +55,7 @@ void SceneEditor::_updateBillboardEditing()
 			}
 
 			// Check if user made the active billboard inactive
-			if (_selectedBillboardID == "" && _activeBillboardID != "" && _fe3d.misc_isMouseInsideViewport() && !_gui.getGlobalScreen()->isFocused())
+			if (_selectedBillboardID == "" && _activeBillboardID != "" && _fe3d.misc_isCursorInsideViewport() && !_gui.getGlobalScreen()->isFocused())
 			{
 				// LMB pressed
 				if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) && !_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_RIGHT))

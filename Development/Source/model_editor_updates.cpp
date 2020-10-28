@@ -311,12 +311,12 @@ void ModelEditor::_updateCamera()
 	if (_isLoaded)
 	{
 		// Update cursor difference
-		vec2 cursorPosition = _fe3d.misc_convertFromScreenCoords(_fe3d.misc_getMousePos());
+		vec2 cursorPosition = _fe3d.misc_convertFromScreenCoords(_fe3d.misc_getCursorPosition());
 		vec2 cursorDifference = cursorPosition - _lastCursorPos;
-		_lastCursorPos = _fe3d.misc_convertFromScreenCoords(_fe3d.misc_getMousePos());
+		_lastCursorPos = _fe3d.misc_convertFromScreenCoords(_fe3d.misc_getCursorPosition());
 
 		// Update scrolling
-		if (!_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isMouseInsideViewport()) // No GUI focus and cursor must be within viewport
+		if (!_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isCursorInsideViewport()) // No GUI focus and cursor must be within viewport
 		{
 			if (!_movingToggled && !_resizingToggled) // No active moving or resizing
 			{
@@ -334,11 +334,11 @@ void ModelEditor::_updateCamera()
 		}
 
 		// Check if MMB pressed
-		if (!_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isMouseInsideViewport())
+		if (!_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isCursorInsideViewport())
 		{
 			if (_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_MIDDLE))
 			{
-				if (_fe3d.misc_isMouseInsideViewport()) // Only if cursor inside 3d screen
+				if (_fe3d.misc_isCursorInsideViewport()) // Only if cursor inside 3d screen
 				{
 					_cameraAcceleration.x += cursorDifference.x * _cameraSpeed;
 					_cameraAcceleration.y += cursorDifference.y * _cameraSpeed;

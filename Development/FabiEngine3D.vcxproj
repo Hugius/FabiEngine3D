@@ -258,6 +258,7 @@
     <ClCompile Include="Source\bloom_hdr_renderer.cpp" />
     <ClCompile Include="Source\aabb_entity.cpp" />
     <ClCompile Include="Source\aabb_entity_manager.cpp" />
+    <ClCompile Include="Source\bottom_viewport_controller_console.cpp" />
     <ClCompile Include="Source\collision.cpp" />
     <ClCompile Include="Source\collision_detector.cpp" />
     <ClCompile Include="Source\collision_resolver.cpp" />

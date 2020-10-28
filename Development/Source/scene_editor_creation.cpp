@@ -371,7 +371,7 @@ void SceneEditor::_placeBillboard(const string& newID, const string& previewID, 
 	}
 
 	// Bind AABB entity to BILLBOARD entity
-	_fe3d.aabbEntity_bindToBillboardEntity(newID, vec3(0.0f), true);
+	_fe3d.aabbEntity_bindToBillboardEntity(newID, true);
 
 	// Miscellaneous
 	_fe3d.billboardEntity_setTransparent(newID, _fe3d.billboardEntity_isTransparent(previewID));
@@ -405,5 +405,5 @@ void SceneEditor::_placeBillboard(const string& newID, const string& diffusePath
 	}
 	
 	// Bind AABB entity to BILLBOARD entity
-	_fe3d.aabbEntity_bindToBillboardEntity(newID, vec3(0.0f), true);
+	_fe3d.aabbEntity_bindToBillboardEntity(newID, true);
 }

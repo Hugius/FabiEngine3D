@@ -37,6 +37,11 @@ bool FabiEngine3D::textEntity_isExisting(const string& ID)
 	return _core->_textEntityManager.isExisting(ID);
 }
 
+bool FabiEngine3D::textEntity_isVisible(const string& ID)
+{
+	return _core->_textEntityManager.getEntity(ID)->isVisible();
+}
+
 void FabiEngine3D::textEntity_setTextContent(const string& ID, const string& textContent, float charWidth, float charHeight)
 {
 	auto entity = _core->_textEntityManager.getEntity(ID);

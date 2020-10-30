@@ -83,6 +83,4 @@ void ModelEditor::_updateModelEditingOptions()
 			_fe3d.gameEntity_setLevelOfDetailEntity(_currentModelID, "@" + lodID);
 		}
 	}
-
-	std::cout << "hoii";
 }

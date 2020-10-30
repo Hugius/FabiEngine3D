@@ -117,6 +117,6 @@ shared_ptr<EngineGuiScreen> EngineGuiWindow::getScreen(const string& ID)
 			return screen;
 		}
 	}
-
+	std::cout << ID << std::endl;
 	return nullptr;
 }

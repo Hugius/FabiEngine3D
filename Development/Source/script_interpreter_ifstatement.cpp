@@ -59,7 +59,6 @@ bool ScriptInterpreter::_checkIfStatement(string conditionString)
 			else if (elementString.substr(0, 5) == "fe3d:") // FE3D FUNCTION
 			{
 				auto value = _processEngineFunctionCall(elementString).back();
-				std::cout << "fe3d " << int(value.getType()) << std::endl;
 
 				// Check if FE3D function returned void
 				if (value.getType() == ScriptValueType::EMPTY)
@@ -213,4 +212,10 @@ bool ScriptInterpreter::_checkConditionResult(ScriptValue& firstValue, string co
 			return (firstValue.getInteger() < secondValue.getInteger());
 		}
 	}
+	else
+	{
+		_fe3d.logger_throwError("This error should not be thrown...(really, it fucking shouldn't)");
+	}
+
+	return false;
 }

@@ -57,7 +57,7 @@ private:
 	const unsigned int _continuousTextActionFrameMinimum = 75;
 	const unsigned int _continuousTextActionInterval = 10;
 	const unsigned int _maxPassedBarFrames = 50;
-	const unsigned int _maxCharactersPerLine = 90;
+	const unsigned int _maxCharactersPerLine = 98;
 	const unsigned int _maxLineAmount = 100;
 	const unsigned int _maxVisibleLines = 13;
 	const float _scrollingSpeed = 0.1f;

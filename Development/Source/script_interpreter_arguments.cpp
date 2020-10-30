@@ -53,7 +53,7 @@ vector<ScriptValue> ScriptInterpreter::_extractArguments(string argumentString)
 	// Argument string cannot start with a comma
 	if (argumentString.front() == ',')
 	{
-		_throwScriptError("invalid argument(s) syntax!");
+		_throwScriptError("cannot start argument with a comma!");
 		return {};
 	}
 
@@ -67,9 +67,9 @@ vector<ScriptValue> ScriptInterpreter::_extractArguments(string argumentString)
 			{
 				finishedArgument = false;
 			}
-			else // After an argument has been extracted, a comma must ALWAYS follow
+			else if (c != ' ') // After an argument has been extracted, a comma must ALWAYS follow
 			{
-				_throwScriptError("invalid argument(s) syntax!");
+				_throwScriptError("arguments must be separated by commas!");
 				return {};
 			}
 		}
@@ -90,7 +90,19 @@ vector<ScriptValue> ScriptInterpreter::_extractArguments(string argumentString)
 			}
 			else if (buildingNumber) // Processing NUMBER argument
 			{
-				if (isdigit(c)) // Keep building number
+				if (c == '-') // Negative number
+				{
+					if (!currentArgument.empty())
+					{
+						_throwScriptError("invalid decimal syntax!");
+						return {};
+					}
+					else
+					{
+						currentArgument += c;
+					}
+				}
+				else if (isdigit(c)) // Keep building number
 				{
 					currentArgument += c;
 				}
@@ -98,6 +110,11 @@ vector<ScriptValue> ScriptInterpreter::_extractArguments(string argumentString)
 				{
 					currentArgument += c;
 					buildingDecimal = true;
+				}
+				else
+				{
+					_throwScriptError("invalid character in number value!");
+					return {};
 				}
 
 				// Check if number building finished
@@ -108,7 +125,7 @@ vector<ScriptValue> ScriptInterpreter::_extractArguments(string argumentString)
 						// Check if decimal argument is valid
 						if (currentArgument.back() == '.')
 						{
-							_throwScriptError("invalid argument(s) syntax!");
+							_throwScriptError("invalid decimal syntax!");
 							return {};
 						}
 						else
@@ -141,7 +158,7 @@ vector<ScriptValue> ScriptInterpreter::_extractArguments(string argumentString)
 					}
 					else if (currentArgument != "<false") // Must be "<false" if 6 letter string
 					{
-						_throwScriptError("invalid argument(s) syntax!");
+						_throwScriptError("invalid boolean syntax!");
 						return {};
 					}
 				}
@@ -153,7 +170,7 @@ vector<ScriptValue> ScriptInterpreter::_extractArguments(string argumentString)
 				}
 				else if (currentArgument.size() > 7) // Invalid boolean string
 				{
-					_throwScriptError("invalid argument(s) syntax!");
+					_throwScriptError("invalid boolean syntax!");
 					return {};
 				}
 			}
@@ -188,7 +205,7 @@ vector<ScriptValue> ScriptInterpreter::_extractArguments(string argumentString)
 					currentArgument = "";
 					buildingString = true;
 				}
-				else if (isdigit(c)) // NUMBER
+				else if (isdigit(c) || c == '-') // NUMBER
 				{
 					currentArgument = "";
 					currentArgument.push_back(c);
@@ -199,6 +216,12 @@ vector<ScriptValue> ScriptInterpreter::_extractArguments(string argumentString)
 					currentArgument = "";
 					currentArgument.push_back(c);
 					buildingBoolean = true;
+				}
+				else if (c == ' ') // SPACE
+				{
+					currentArgument = "";
+					index++;
+					continue; // Ignore
 				}
 				else // Possible VARIABLE
 				{

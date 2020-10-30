@@ -2,22 +2,41 @@
 
 bool ScriptInterpreter::_isStringValue(const string& value)
 {
+	// Check if value has characters at all
+	if (value.empty())
+	{
+		return false;
+	}
+
 	return value.size() >= 2 && (value.front() == '"' && value.back() == '"');
 }
 
 bool ScriptInterpreter::_isDecimalValue(const string& value)
 {
-	// Validate characters
-	unsigned dots = 0;
-	for (auto& c : value)
+	// Check if value has characters at all
+	if (value.empty())
 	{
-		if (!isdigit(c) && c != '.')
+		return false;
+	}
+
+	// Check if value is perhaps negative
+	unsigned int startingIndex = 0;
+	if (value.front() == '-')
+	{
+		startingIndex = 1;
+	}
+
+	// Validate every character
+	unsigned dots = 0;
+	for (unsigned int i = startingIndex; i < value.size(); i++)
+	{
+		if (!isdigit(value[i]) && value[i] != '.')
 		{
 			return false;
 		}
 
 		// Count dots in value
-		if (c == '.')
+		if (value[i] == '.')
 		{
 			dots++;
 		}
@@ -29,7 +48,29 @@ bool ScriptInterpreter::_isDecimalValue(const string& value)
 
 bool ScriptInterpreter::_isIntegerValue(const string& value)
 {
-	return (std::find_if(value.begin(), value.end(), [](unsigned char c) { return !std::isdigit(c); }) == value.end());
+	// Check if value has characters at all
+	if (value.empty())
+	{
+		return false;
+	}
+
+	// Check if value is perhaps negative
+	unsigned int startingIndex = 0;
+	if (value.front() == '-')
+	{
+		startingIndex = 1;
+	}
+
+	// Check if every character is a digit
+	for (unsigned int i = startingIndex; i < value.size(); i++)
+	{
+		if (!isdigit(value[i]))
+		{
+			return false;
+		}
+	}
+
+	return true;
 }
 
 bool ScriptInterpreter::_isBooleanValue(const string& value)

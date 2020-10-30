@@ -20,24 +20,32 @@ public:
 	bool hasThrownError();
 
 private:
-	// Functions
+	// Core functions
 	void _executeScript(const string& scriptID, ScriptType scriptType);
-	void _processVariableDefinition(const string& scriptLine, ScriptVariableScope scope);
 	void _throwScriptError(const string& message);
+	vector<ScriptValue> _processEngineFunctionCall(const string& scriptLine);
+
+	// Value functions
 	bool _isStringValue(const string& value);
 	bool _isDecimalValue(const string& value);
 	bool _isIntegerValue(const string& value);
 	bool _isBooleanValue(const string& value);
+
+	// Variable functions
+	void _processVariableDefinition(const string& scriptLine, ScriptVariableScope scope);
 	bool _isLocalVariableExisting(const string& variableID);
 	bool _isGlobalVariableExisting(const string& variableID);
+	ScriptVariable& _getLocalVariable(const string& variableID);
+	ScriptVariable& _getGlobalVariable(const string& variableID);
+
+	// If statement functions
 	bool _checkIfStatement(string conditionString);
 	bool _validateCondition(ScriptValue& firstValue, string comparisonOperator, ScriptValue& secondValue);
 	bool _checkConditionResult(ScriptValue& firstValue, string comparisonOperator, ScriptValue& secondValue);
+
+	// Argument functions
 	bool _validateArgumentAmount(vector<ScriptValue> arguments, unsigned int amount);
 	bool _validateArgumentTypes(vector<ScriptValue> arguments, vector<ScriptValueType> types);
-	ScriptVariable& _getLocalVariable(const string& variableID);
-	ScriptVariable& _getGlobalVariable(const string& variableID);
-	vector<ScriptValue> _processEngineFunctionCall(const string& scriptLine);
 	vector<ScriptValue> _extractArguments(string argumentString);
 
 	// Instances

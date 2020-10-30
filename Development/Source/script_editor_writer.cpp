@@ -96,7 +96,7 @@ void ScriptEditor::_updateTextWriter()
 		}
 		else if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT)) // Move blinking cursor position
 		{
-			auto billboardID = _fe3d.collision_checkCursorInAny();
+			string billboardID = "";
 			if (!billboardID.empty())
 			{
 				// Temporary values

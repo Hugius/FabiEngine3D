@@ -9,11 +9,11 @@ void SceneEditor::_updateMainModelMenu()
 			auto screen = _leftWindow->getScreen("sceneEditorMenuModel");
 			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				if (screen->getButton("sceneEditorMenuModelPlace")->isHovered()) // Place model button
+				if (screen->getButton("place")->isHovered()) // Place model button
 				{
 					_leftWindow->setActiveScreen("sceneEditorMenuModelPlace");
 				}
-				else if (screen->getButton("sceneEditorMenuModelChoice")->isHovered()) // Choose model button
+				else if (screen->getButton("choice")->isHovered()) // Choose model button
 				{
 					_leftWindow->setActiveScreen("sceneEditorMenuModelChoice");
 

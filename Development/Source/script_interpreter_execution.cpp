@@ -55,9 +55,9 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 			return;
 		}
 
-		// Detect scope changes
+		// Check if there is any code right after a scope change
 		unsigned int currentLineScopeDepth = countedSpaces / _spacesPerIndent;
-		if((currentLineScopeDepth != _scopeDepthStack.back()) && _scopeHasChanged) // Check syntax after scope change
+		if(_scopeHasChanged && ((currentLineScopeDepth != _scopeDepthStack.back()) || scriptLineText.substr(0, 3) == "///"))
 		{
 			_throwScriptError("no indented code after scope change!");
 			return;
@@ -66,7 +66,7 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 		{
 			_scopeDepthStack.back() = currentLineScopeDepth;
 		}
-		else if (currentLineScopeDepth > _scopeDepthStack.back()) // Outside of current scope
+		else if (currentLineScopeDepth > _scopeDepthStack.back()) // Outside of current scope, so don't execute current line
 		{
 			continue;
 		}

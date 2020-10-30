@@ -68,6 +68,13 @@ void SceneEditor::initializeGUI()
 	_leftWindow->getScreen(screenID)->addButton("delete", vec2(0.0f, 0.0f), vec2(GW("Remove water"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Remove water", LVPC::textColor, LVPC::textHoverColor);
 	_leftWindow->getScreen(screenID)->addButton("back", vec2(0.0f, -0.475f), vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
 
+	// Left-viewport: mainWindow - sceneEditorMenuModel
+	screenID = "sceneEditorMenuModel";
+	_leftWindow->addScreen(screenID);
+	_leftWindow->getScreen(screenID)->addButton("place", vec2(0.0f, 0.475f), vec2(GW("Place model"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Place model", LVPC::textColor, LVPC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("choice", vec2(0.0f, 0.0f), vec2(GW("Choose model"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Choose model", LVPC::textColor, LVPC::textHoverColor);
+	_leftWindow->getScreen(screenID)->addButton("back", vec2(0.0f, -0.475f), vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
+
 	// Left-viewport: mainWindow - sceneEditorMenuModelPlace
 	screenID = "sceneEditorMenuModelPlace";
 	_leftWindow->addScreen(screenID);

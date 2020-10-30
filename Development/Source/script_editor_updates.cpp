@@ -41,10 +41,6 @@ void ScriptEditor::_updateGUI()
 					_isWritingScript = false;
 					_currentScriptFileID = "";
 				}
-				else if (mainScreen->getButton("globals")->isHovered())
-				{
-
-				}
 				else if (mainScreen->getButton("back")->isHovered())
 				{
 					_gui.getGlobalScreen()->addAnswerForm("exitScriptEditor", "Save changes?", vec2(0.0f, 0.25f));
@@ -73,12 +69,16 @@ void ScriptEditor::_updateMiscellaneous()
 	{
 		if (_isWritingScript)
 		{
-			unsigned int cursorLineIndex = _script.getScriptFile(_currentScriptFileID)->getCursorLineIndex();
-
+			// Temporary values
+			const unsigned int currentLineIndex = _script.getScriptFile(_currentScriptFileID)->getCursorLineIndex();
+			const unsigned int lineCount = _script.getScriptFile(_currentScriptFileID)->getLineCount();
+			const float lastLineHeight = _fe3d.billboardEntity_getPosition(to_string(lineCount - 1)).y;
+			
+			//  Check if camera allowed to move
 			if (!_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isCursorInsideViewport())
 			{
 				// Camera movement input
-				if (_fe3d.input_getMouseWheelY() == -1 && cursorLineIndex > 12)
+				if (_fe3d.input_getMouseWheelY() == -1 && currentLineIndex > (_maxVisibleLines - 1))
 				{
 					_scrollingAcceleration -= _scrollingSpeed;
 				}
@@ -88,11 +88,7 @@ void ScriptEditor::_updateMiscellaneous()
 				}
 			}
 
-			// Smooth camera movement
-			_scrollingAcceleration = std::clamp(_scrollingAcceleration, -_maxScrollingAcceleration, _maxScrollingAcceleration);
-			_scrollingAcceleration *= 0.95f;
-
-			// Camera must not go out of screen
+			// Camera must not go out of screen (upwards)
 			if (_fe3d.camera_getPosition().y > _cameraStartingPosition.y)
 			{
 				_scrollingAcceleration = 0.0f;
@@ -102,32 +98,52 @@ void ScriptEditor::_updateMiscellaneous()
 			{
 				_scrollingAcceleration = 0.0f;
 			}
-			else if (_fe3d.billboardEntity_isExisting(to_string(cursorLineIndex)) && cursorLineIndex > 12) // Trying to scroll down
-			{
-				float limitY = _fe3d.billboardEntity_getPosition(to_string(cursorLineIndex)).y + 6.5f;
 
-				// Check if camera is not seeing the space under the last line of the script
-				if (_fe3d.camera_getPosition().y < limitY)
+			// Check if code is out of screen
+			if (currentLineIndex > (_maxVisibleLines - 1))
+			{
+				if (_fe3d.camera_getPosition().y < (lastLineHeight + _cameraOffset)) // Camera must not go out of screen
 				{
 					_scrollingAcceleration = 0.0f;
-					float newY = limitY;
-					_fe3d.camera_setPosition(vec3(_cameraStartingPosition.x, newY, _cameraStartingPosition.z));
+					_fe3d.camera_setPosition(vec3(_cameraStartingPosition.x, lastLineHeight + _cameraOffset, _cameraStartingPosition.z));
 				}
-				else if (_fe3d.camera_getPosition().y == limitY && _scrollingAcceleration < 0.0f) // Forbid scrolling down
+				else if (_fe3d.camera_getPosition().y == (lastLineHeight + _cameraOffset) && _scrollingAcceleration < 0.0f) // Trying to scroll down
 				{
 					_scrollingAcceleration = 0.0f;
 				}
 			}
 
-			// Fixed camera position if lines are not out of screen
-			if (cursorLineIndex < 12)
+			// Synchronize camera position whenever writers adds or removes a line
+			static unsigned int lastLineIndex = currentLineIndex;
+			if ((currentLineIndex > (_maxVisibleLines - 1)) && (currentLineIndex != lastLineIndex) && (currentLineIndex == lineCount - 1))
 			{
-				_fe3d.camera_setPosition(_cameraStartingPosition);
+				std::cout << "1";
+				_scrollingAcceleration = 0.0f;
+				float currentLineHeight = _fe3d.billboardEntity_getPosition(to_string(currentLineIndex)).y;
+				_fe3d.camera_setPosition(vec3(_cameraStartingPosition.x, currentLineHeight + _cameraOffset, _cameraStartingPosition.z));
 			}
+			lastLineIndex = currentLineIndex;
 		}
 
-		// Move camera
+		// Smooth camera movement
+		_scrollingAcceleration = std::clamp(_scrollingAcceleration, -_maxScrollingAcceleration, _maxScrollingAcceleration);
+		_scrollingAcceleration *= 0.95f;
 		_fe3d.camera_translate(vec3(0.0f, _scrollingAcceleration, 0.0f));
+
+		// Stop rendering all text not visible by the camera
+		for (auto& ID : _fe3d.billboardEntity_getAllIDs())
+		{
+			// Check if billboard is outside of camera view
+			if ((_fe3d.billboardEntity_getPosition(ID).y - (_textCharacterSize.y)) <= (_fe3d.camera_getPosition().y + _cameraOffset) &&
+				(_fe3d.billboardEntity_getPosition(ID).y + (_textCharacterSize.y)) >= (_fe3d.camera_getPosition().y - _cameraOffset))
+			{
+				_fe3d.billboardEntity_show(ID);
+			}
+			else
+			{
+				_fe3d.billboardEntity_hide(ID);
+			}
+		}
 
 		// Check if user filled in a new script name
 		string newName;

@@ -23,31 +23,74 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 		_currentLineStackIndices.back() = lineIndex;
 
 		// Retrieve line text
-		string scriptLine = scriptFile->getLineText(lineIndex);
+		string scriptLineText = scriptFile->getLineText(lineIndex);
 
-		// Check if line is not empty or META text
-		if (scriptLine.empty() || scriptLine.substr(0, _metaKeyword.size()) == _metaKeyword)
+		// Empty lines are ignored
+		if (scriptLineText.empty())
+		{
+			continue;
+		}
+
+		// Meta keywords are ignored
+		if (scriptLineText.substr(0, _metaKeyword.size()) == _metaKeyword)
+		{
+			continue;
+		}
+
+		// Comments are ignored
+		if (scriptLineText.substr(0, 3) == "///")
+		{
+			continue;
+		}
+
+		// Count front spaces
+		unsigned int countedSpaces = 0;
+		for (auto& c : scriptLineText)
+		{
+			if (c == ' ')
+			{
+				countedSpaces++;
+			}
+			else
+			{
+				break;
+			}
+		}
+
+		// Check if indentation syntax is correct
+		if ((countedSpaces % _spacesPerIndent) == 0)
+		{
+			scriptLineText.erase(0, countedSpaces); // Remove front spaces
+		}
+		else
+		{
+			_throwScriptError("invalid indentation!");
+		}
+
+		// Only update scope depth if current line scope is lower
+		unsigned int currentLineScopeDepth = countedSpaces / _spacesPerIndent;
+		if (currentLineScopeDepth < _scopeDepth)
+		{
+			_scopeDepth = currentLineScopeDepth;
+		}
+		else if (currentLineScopeDepth > _scopeDepth)
 		{
 			continue;
 		}
 
 		// Determine keyword type
-		if (scriptLine.substr(0, 5) == "fe3d:") // Engine function
+		if (scriptLineText.substr(0, 5) == "fe3d:") // Engine function
 		{
-			_processEngineFunctionCall(scriptLine);
+			_processEngineFunctionCall(scriptLineText);
 		}
-		else if (scriptLine.substr(0, _ifKeyword.size() + 1) == _ifKeyword + " ") // If statement
+		else if (scriptLineText.substr(0, _ifKeyword.size() + 1) == _ifKeyword + " ") // If statement
 		{
 			// Check if if statement ends with colon
-			if (scriptLine.back() == ':')
+			if (scriptLineText.back() == ':')
 			{
-				if (_checkIfStatement(scriptLine.substr(3, scriptLine.size() - 4)))
+				if (_checkIfStatement(scriptLineText.substr(3, scriptLineText.size() - 4)))
 				{
-
-				}
-				else
-				{
-
+					_scopeDepth++;
 				}
 			}
 			else
@@ -57,17 +100,17 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 		}
 		else if // Local variable
 			(
-				scriptLine.substr(0, _stringKeyword.size() + 1) == _stringKeyword + " " ||
-				scriptLine.substr(0, _decimalKeyword.size() + 1) == _decimalKeyword + " " ||
-				scriptLine.substr(0, _integerKeyword.size() + 1) == _integerKeyword + " " ||
-				scriptLine.substr(0, _booleanKeyword.size() + 1) == _booleanKeyword + " "
+				scriptLineText.substr(0, _stringKeyword.size() + 1) == _stringKeyword + " " ||
+				scriptLineText.substr(0, _decimalKeyword.size() + 1) == _decimalKeyword + " " ||
+				scriptLineText.substr(0, _integerKeyword.size() + 1) == _integerKeyword + " " ||
+				scriptLineText.substr(0, _booleanKeyword.size() + 1) == _booleanKeyword + " "
 			)
 		{
-			_processVariableDefinition(scriptLine, ScriptVariableScope::LOCAL);
+			_processVariableDefinition(scriptLineText, ScriptVariableScope::LOCAL);
 		}
-		else if (scriptLine.substr(0, _globalKeyword.size() + 1) == _globalKeyword + " ") // Global variable
+		else if (scriptLineText.substr(0, _globalKeyword.size() + 1) == _globalKeyword + " ") // Global variable
 		{
-			_processVariableDefinition(scriptLine, ScriptVariableScope::GLOBAL);
+			_processVariableDefinition(scriptLineText, ScriptVariableScope::GLOBAL);
 		}
 		else
 		{

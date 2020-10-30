@@ -84,27 +84,33 @@ void ScriptInterpreter::_processVariableDefinition(const string& scriptLine, Scr
 					// Check if value is of the right type
 					if (variableType == _stringKeyword && _isStringValue(variableValue))
 					{
+						// Removing the "" around the string content
 						variableValue.erase(variableValue.begin());
 						variableValue.pop_back();
+
+						// Add new string variable
 						auto value = ScriptValue(_fe3d, ScriptValueType::STRING, variableValue);
 						variableList.push_back(ScriptVariable(_fe3d, scope, variableID, isConstant, value));
 					}
 					else if (variableType == _decimalKeyword && _isDecimalValue(variableValue))
 					{
+						// Add new string variable
 						auto value = ScriptValue(_fe3d, ScriptValueType::DECIMAL, stof(variableValue));
 						variableList.push_back(ScriptVariable(_fe3d, scope, variableID, isConstant, value));
 					}
 					else if (variableType == _integerKeyword && _isIntegerValue(variableValue))
 					{
+						// Add new string variable
 						auto value = ScriptValue(_fe3d, ScriptValueType::INTEGER, stoi(variableValue));
 						variableList.push_back(ScriptVariable(_fe3d, scope, variableID, isConstant, value));
 					}
 					else if (variableType == _booleanKeyword && _isBooleanValue(variableValue))
 					{
+						// Add new string variable
 						auto value = ScriptValue(_fe3d, ScriptValueType::BOOLEAN, (variableValue == "<true>"));
 						variableList.push_back(ScriptVariable(_fe3d, scope, variableID, isConstant, value));
 					}
-					else if (variableValue.substr(0, 4) == "fe3d")
+					else if (variableValue.substr(0, 5) == "fe3d:")
 					{
 						auto value = _processEngineFunctionCall(variableValue).back();
 

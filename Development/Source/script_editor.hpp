@@ -50,19 +50,22 @@ private:
 	// Editor constants
 	const string _fontPath = "engine\\fonts\\lucida.ttf";
 	const vec3 _cameraStartingPosition = vec3(0.0f, 0.0f, 10.0f);
-	const vec3 _scriptTextStartingPosition = vec3(-11.0f, 5.5f, 0.5f);
+	const vec3 _scriptTextStartingPosition = vec3(-11.0f, 6.0f, 0.5f);
 	const vec3 _lineNumberColor = vec3(0.0f, 1.0f, 0.0f);
 	const vec3 _characterColor = vec3(1.0f);
+	const vec2 _textCharacterSize = vec2(0.25f, 0.75f);
+	const unsigned int _continuousTextActionFrameMinimum = 75;
+	const unsigned int _continuousTextActionInterval = 10;
+	const unsigned int _maxPassedBarFrames = 50;
+	const unsigned int _maxCharactersPerLine = 90;
+	const unsigned int _maxLineAmount = 100;
+	const unsigned int _maxVisibleLines = 13;
 	const float _scrollingSpeed = 0.1f;
 	const float _maxScrollingAcceleration = 10.0f;
-	const vec2 _textCharacterSize = vec2(0.25f, 0.75f);
 	const float _horizontalCharacterOffset = 0.25f;
 	const float _verticalLineOffset = 1.0f;
 	const float _horizontalLineOffset = 0.5f;
-	const int _continuousTextActionFrameMinimum = 75;
-	const int _continuousTextActionInterval = 5;
-	const unsigned int _maxPassedBarFrames = 50;
-	const unsigned int _maxCharactersPerLine = 100;
+	const float _cameraOffset = (_verticalLineOffset * (_maxVisibleLines / 2.0f)) - (_textCharacterSize.y / 2.0f);
 	const string letterCharacters = " abcdefghijklmnopqrstuvwxyz";
 	const map<char, char> numberCharacterMap =
 	{

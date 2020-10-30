@@ -78,6 +78,10 @@ private:
 	const string _moreKeyword    = "MORE";
 	const string _lessKeyword    = "LESS";
 
+	// Integers
+	const unsigned int _spacesPerIndent = 4;
+	unsigned int _scopeDepth = 0;
+
 	// Booleans
 	bool _hasThrownError = false;
 

@@ -18,11 +18,10 @@ void ScriptEditor::initializeGUI()
 	// Main menu
 	string screenID = "scriptEditorMenuMain";
 	leftWindow->addScreen(screenID);
-	leftWindow->getScreen(screenID)->addButton("createScript", vec2(0.0f, 0.7f), vec2(GW("New script"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "New script", LVPC::textColor, LVPC::textHoverColor);
-	leftWindow->getScreen(screenID)->addButton("editScript", vec2(0.0f, 0.35f), vec2(GW("Edit script"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Edit script", LVPC::textColor, LVPC::textHoverColor);
-	leftWindow->getScreen(screenID)->addButton("deleteScript", vec2(0.0f, 0.0f), vec2(GW("Delete script"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Delete script", LVPC::textColor, LVPC::textHoverColor);
-	leftWindow->getScreen(screenID)->addButton("globals", vec2(0.0f, -0.35f), vec2(GW("Globals"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Globals", LVPC::textColor, LVPC::textHoverColor);
-	leftWindow->getScreen(screenID)->addButton("back", vec2(0.0f, -0.7f), vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen(screenID)->addButton("createScript", vec2(0.0f, 0.63f), vec2(GW("New script"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "New script", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen(screenID)->addButton("editScript", vec2(0.0f, 0.21f), vec2(GW("Edit script"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Edit script", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen(screenID)->addButton("deleteScript", vec2(0.0f, -0.21f), vec2(GW("Delete script"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Delete script", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen(screenID)->addButton("back", vec2(0.0f, -0.63f), vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
 }
 
 void ScriptEditor::load()
@@ -37,13 +36,13 @@ void ScriptEditor::load()
 	_fe3d.gfx_enablePointLighting();
 
 	// Background
-	_fe3d.gameEntity_add("background", "engine\\models\\plane.obj", vec3(0.0f), vec3(90.0f, 0.0f, 0.0f), vec3(100.0f));
+	_fe3d.gameEntity_add("background", "engine\\models\\plane.obj", vec3(0.0f), vec3(90.0f, 0.0f, 0.0f), vec3(static_cast<float>(_maxLineAmount) * 1.1f));
 	_fe3d.gameEntity_setDiffuseMap("background", "engine\\textures\\brick.png");
 	_fe3d.gameEntity_setNormalMap("background", "engine\\textures\\brick_normal.png");
 	_fe3d.gameEntity_setSpecularLighted("background", true);
 	_fe3d.gameEntity_setSpecularFactor("background", 32.0f);
 	_fe3d.gameEntity_setSpecularIntensity("background", 1.0f);
-	_fe3d.gameEntity_setUvRepeat("background", 25.0f);
+	_fe3d.gameEntity_setUvRepeat("background", (static_cast<float>(_maxLineAmount) * 1.1f) * 0.25f);
 	_fe3d.gameEntity_setNormalMapped("background", true);
 
 	// Selection light

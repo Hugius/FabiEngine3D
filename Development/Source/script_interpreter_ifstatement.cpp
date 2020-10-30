@@ -34,26 +34,42 @@ bool ScriptInterpreter::_checkIfStatement(string conditionString)
 	{
 		if (mustBeValue)
 		{
-			// Determine if element is a variable or a raw value
-			if (_isLocalVariableExisting(elementString))
+			if (_isLocalVariableExisting(elementString)) // LOCAL VARIABLE
 			{
 				comparisonValues.push_back(_getLocalVariable(elementString).getValue());
 			}
-			else if (_isStringValue(elementString))
+			else if (_isStringValue(elementString)) // STRING
 			{
+				elementString.erase(elementString.begin());
+				elementString.pop_back();
 				comparisonValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, elementString));
 			}
-			else if (_isDecimalValue(elementString))
+			else if (_isDecimalValue(elementString)) // DECIMAL
 			{
 				comparisonValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, stof(elementString)));
 			}
-			else if (_isIntegerValue(elementString))
+			else if (_isIntegerValue(elementString)) // INTEGER
 			{
 				comparisonValues.push_back(ScriptValue(_fe3d, ScriptValueType::INTEGER, stoi(elementString)));
 			}
-			else if (_isBooleanValue(elementString))
+			else if (_isBooleanValue(elementString)) // BOOLEAN
 			{
 				comparisonValues.push_back(ScriptValue(_fe3d, ScriptValueType::INTEGER, (elementString == "<true>")));
+			}
+			else if (elementString.substr(0, 5) == "fe3d:") // FE3D FUNCTION
+			{
+				auto value = _processEngineFunctionCall(elementString).back();
+
+				// Check if FE3D function returned void
+				if (value.getType() == ScriptValueType::EMPTY)
+				{
+					_throwScriptError("FE3D function return type cannot be empty!");
+					return false;
+				}
+				else
+				{
+					comparisonValues.push_back(value);
+				}
 			}
 			else
 			{
@@ -102,17 +118,35 @@ bool ScriptInterpreter::_checkIfStatement(string conditionString)
 		}
 	}
 
-	return false;
+	bool finalResult = true;
+
+	return conditions.back();
 }
 
 bool ScriptInterpreter::_validateCondition(ScriptValue& firstValue, string comparisonOperator, ScriptValue& secondValue)
 {
+	// Check if comparison values are of the same type
 	if (firstValue.getType() != secondValue.getType())
 	{
 		_throwScriptError("compared values not of the same type!");
 		return false;
 	}
+	
+	// Check if not trying to compare string values with the wrong operator
+	if ((comparisonOperator == _moreKeyword || comparisonOperator == _lessKeyword) && firstValue.getType() == ScriptValueType::STRING)
+	{
+		_throwScriptError("invalid comparison operator for string values!");
+		return false;
+	}
 
+	// Check if not trying to compare string values with the wrong operator
+	if ((comparisonOperator == _moreKeyword || comparisonOperator == _lessKeyword) && firstValue.getType() == ScriptValueType::BOOLEAN)
+	{
+		_throwScriptError("invalid comparison operator for boolean values!");
+		return false;
+	}
+
+	// Condition is valid
 	return true;
 }
 
@@ -120,18 +154,62 @@ bool ScriptInterpreter::_checkConditionResult(ScriptValue& firstValue, string co
 {
 	if (comparisonOperator == _isKeyword)
 	{
-		
+		if (firstValue.getType() == ScriptValueType::STRING)
+		{
+			return (firstValue.getString() == secondValue.getString());
+		}
+		else if (firstValue.getType() == ScriptValueType::DECIMAL)
+		{
+			return (firstValue.getDecimal() == secondValue.getDecimal());
+		}
+		else if (firstValue.getType() == ScriptValueType::INTEGER)
+		{
+			return (firstValue.getInteger() == secondValue.getInteger());
+		}
+		else if (firstValue.getType() == ScriptValueType::BOOLEAN)
+		{
+			return (firstValue.getBoolean() == secondValue.getBoolean());
+		}
 	}
 	else if (comparisonOperator == _notKeyword)
 	{
-
+		if (firstValue.getType() == ScriptValueType::STRING)
+		{
+			return (firstValue.getString() != secondValue.getString());
+		}
+		else if (firstValue.getType() == ScriptValueType::DECIMAL)
+		{
+			return (firstValue.getDecimal() != secondValue.getDecimal());
+		}
+		else if (firstValue.getType() == ScriptValueType::INTEGER)
+		{
+			return (firstValue.getInteger() != secondValue.getInteger());
+		}
+		else if (firstValue.getType() == ScriptValueType::BOOLEAN)
+		{
+			return (firstValue.getBoolean() != secondValue.getBoolean());
+		}
 	}
 	else if (comparisonOperator == _moreKeyword)
 	{
-
+		if (firstValue.getType() == ScriptValueType::DECIMAL)
+		{
+			return (firstValue.getDecimal() > secondValue.getDecimal());
+		}
+		else if (firstValue.getType() == ScriptValueType::INTEGER)
+		{
+			return (firstValue.getInteger() > secondValue.getInteger());
+		}
 	}
 	else if (comparisonOperator == _lessKeyword)
 	{
-
+		if (firstValue.getType() == ScriptValueType::DECIMAL)
+		{
+			return (firstValue.getDecimal() < secondValue.getDecimal());
+		}
+		else if (firstValue.getType() == ScriptValueType::INTEGER)
+		{
+			return (firstValue.getInteger() < secondValue.getInteger());
+		}
 	}
 }

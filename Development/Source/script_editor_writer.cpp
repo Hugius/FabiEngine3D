@@ -19,7 +19,7 @@ void ScriptEditor::_updateTextWriter()
 		unsigned int cursorCharIndex = _script.getScriptFile(_currentScriptFileID)->getCursorCharIndex();
 
 		// Timing functionality for continuous actions
-		const vector<InputType> actionKeys = 
+		const vector<InputType> actionKeys =
 		{ InputType::KEY_ENTER, InputType::KEY_BACKSPACE, InputType::KEY_DELETE, InputType::KEY_LEFT, InputType::KEY_RIGHT, InputType::KEY_UP, InputType::KEY_DOWN };
 		static InputType activeActionKey = InputType::NONE;
 		static unsigned int passedFrames = 0;
@@ -65,28 +65,32 @@ void ScriptEditor::_updateTextWriter()
 		// Determine text action type
 		if (_fe3d.input_getKeyDown(InputType::KEY_ENTER)) // Add new line
 		{
-			// Check if single or fast new line action
-			if (singleActionAllowed || continuousActionAllowed)
+			// Check if not exceeding the line limit
+			if (_script.getScriptFile(_currentScriptFileID)->getLineCount() < _maxLineAmount)
 			{
-				if (_fe3d.misc_checkInterval("textAction", _continuousTextActionInterval) || singleActionAllowed)
+				// Check if single or fast new line action
+				if (singleActionAllowed || continuousActionAllowed)
 				{
-					singleActionAllowed = false;
+					if (_fe3d.misc_checkInterval("textAction", _continuousTextActionInterval) || singleActionAllowed)
+					{
+						singleActionAllowed = false;
 
-					// Extract remaining text in current line from cursor position
-					string currentLineText = _script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex);
-					string textToExtract = currentLineText;
-					textToExtract = textToExtract.substr(cursorCharIndex, textToExtract.size() - cursorCharIndex);
-					
-					// Remove extracted text from current line
-					_script.getScriptFile(_currentScriptFileID)->setLineText(cursorLineIndex, currentLineText.substr(0, cursorCharIndex));
+						// Extract remaining text in current line from cursor position
+						string currentLineText = _script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex);
+						string textToExtract = currentLineText;
+						textToExtract = textToExtract.substr(cursorCharIndex, textToExtract.size() - cursorCharIndex);
 
-					// Set cursor to beginning of new line
-					cursorCharIndex = 0;
-					cursorLineIndex++;
+						// Remove extracted text from current line
+						_script.getScriptFile(_currentScriptFileID)->setLineText(cursorLineIndex, currentLineText.substr(0, cursorCharIndex));
 
-					// Add text on new line
-					_script.getScriptFile(_currentScriptFileID)->insertNewLine(cursorLineIndex, textToExtract);
-					textHasChanged = true;
+						// Set cursor to beginning of new line
+						cursorCharIndex = 0;
+						cursorLineIndex++;
+
+						// Add text on new line
+						_script.getScriptFile(_currentScriptFileID)->insertNewLine(cursorLineIndex, textToExtract);
+						textHasChanged = true;
+					}
 				}
 			}
 		}
@@ -231,80 +235,85 @@ void ScriptEditor::_updateTextWriter()
 		}
 		else // Other keypresses
 		{
-			// All characters of current line
+
+			// Temporary values
 			string currentLineText = _script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex);
 			string newCharacters = "";
 
-			// Letter characters
-			for (auto& c : letterCharacters)
+			// Check if not exceeding character limit of current line
+			if (currentLineText.size() < _maxCharactersPerLine)
 			{
-				// Check if character is pressed on keyboard
-				if (_fe3d.input_getKeyPressed(InputType(c)))
+				// Letter characters
+				for (auto& c : letterCharacters)
 				{
-					// Spacebar
-					if (c == ' ')
+					// Check if character is pressed on keyboard
+					if (_fe3d.input_getKeyPressed(InputType(c)))
 					{
-						newCharacters += c;
-					}
-					else // Non-spacebar
-					{
-						// Uppercase or special character
-						if (_fe3d.input_getKeyDown(InputType::KEY_LSHIFT) || _fe3d.input_getKeyDown(InputType::KEY_RSHIFT))
-						{
-							newCharacters += (c - 32);
-						}
-						else if ((GetKeyState(VK_CAPITAL) & 0x0001) != 0) // CAPSLOCK
-						{
-							newCharacters += (c - 32);
-						}
-						else // Lowercase character
+						// Spacebar
+						if (c == ' ')
 						{
 							newCharacters += c;
 						}
+						else // Non-spacebar
+						{
+							// Uppercase or special character
+							if (_fe3d.input_getKeyDown(InputType::KEY_LSHIFT) || _fe3d.input_getKeyDown(InputType::KEY_RSHIFT))
+							{
+								newCharacters += (c - 32);
+							}
+							else if ((GetKeyState(VK_CAPITAL) & 0x0001) != 0) // CAPSLOCK
+							{
+								newCharacters += (c - 32);
+							}
+							else // Lowercase character
+							{
+								newCharacters += c;
+							}
+						}
 					}
 				}
-			}
 
-			// Number characters
-			for (auto& element : numberCharacterMap)
-			{
-				// Check if character is pressed on keyboard
-				if (_fe3d.input_getKeyPressed(InputType(element.first)))
+				// Number characters
+				for (auto& element : numberCharacterMap)
 				{
-					// Check if shift was pressed
-					if (_fe3d.input_getKeyDown(InputType::KEY_LSHIFT) || _fe3d.input_getKeyDown(InputType::KEY_RSHIFT))
+					// Check if character is pressed on keyboard
+					if (_fe3d.input_getKeyPressed(InputType(element.first)))
 					{
-						newCharacters = element.second;
-					}
-					else
-					{
-						newCharacters = element.first;
+						// Check if shift was pressed
+						if (_fe3d.input_getKeyDown(InputType::KEY_LSHIFT) || _fe3d.input_getKeyDown(InputType::KEY_RSHIFT))
+						{
+							newCharacters = element.second;
+						}
+						else
+						{
+							newCharacters = element.first;
+						}
 					}
 				}
-			}
 
-			// Special characters
-			for (auto& element : specialCharacterMap)
-			{
-				// Check if character is pressed on keyboard
-				if (_fe3d.input_getKeyPressed(InputType(element.first)))
+				// Special characters
+				for (auto& element : specialCharacterMap)
 				{
-					// Check if shift was pressed
-					if (_fe3d.input_getKeyDown(InputType::KEY_LSHIFT) || _fe3d.input_getKeyDown(InputType::KEY_RSHIFT))
+					// Check if character is pressed on keyboard
+					if (_fe3d.input_getKeyPressed(InputType(element.first)))
 					{
-						newCharacters += element.second;
-					}
-					else
-					{
-						newCharacters += element.first;
+						// Check if shift was pressed
+						if (_fe3d.input_getKeyDown(InputType::KEY_LSHIFT) || _fe3d.input_getKeyDown(InputType::KEY_RSHIFT))
+						{
+							newCharacters += element.second;
+						}
+						else
+						{
+							newCharacters += element.first;
+						}
 					}
 				}
-			}
 
-			// Insert 4 spaces (TAB)
-			if (_fe3d.input_getKeyPressed(InputType::KEY_TAB))
-			{
-				newCharacters += "    ";
+				// Insert 4 spaces (TAB)
+				if (_fe3d.input_getKeyPressed(InputType::KEY_TAB))
+				{
+					newCharacters += "    ";
+				}
 			}
 
 			// Remove characters from line
@@ -330,7 +339,7 @@ void ScriptEditor::_updateTextWriter()
 
 								// Set cursor to last character of line above & merge text from current line
 								cursorCharIndex = _script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex).size();
-								_script.getScriptFile(_currentScriptFileID)->setLineText(cursorLineIndex, 
+								_script.getScriptFile(_currentScriptFileID)->setLineText(cursorLineIndex,
 									_script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex) + textToMerge);
 								textHasChanged = true;
 							}

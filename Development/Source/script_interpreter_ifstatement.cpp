@@ -54,11 +54,12 @@ bool ScriptInterpreter::_checkIfStatement(string conditionString)
 			}
 			else if (_isBooleanValue(elementString)) // BOOLEAN
 			{
-				comparisonValues.push_back(ScriptValue(_fe3d, ScriptValueType::INTEGER, (elementString == "<true>")));
+				comparisonValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, (elementString == "<true>")));
 			}
 			else if (elementString.substr(0, 5) == "fe3d:") // FE3D FUNCTION
 			{
 				auto value = _processEngineFunctionCall(elementString).back();
+				std::cout << "fe3d " << int(value.getType()) << std::endl;
 
 				// Check if FE3D function returned void
 				if (value.getType() == ScriptValueType::EMPTY)

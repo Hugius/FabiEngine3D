@@ -2,10 +2,11 @@
 
 void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType scriptType)
 {
-	// Save ID of script currently being executed
+	// Save local state of script currently being executed
 	_localVariablesStack.push_back({});
 	_currentScriptStackIDs.push_back(scriptID);
 	_currentLineStackIndices.push_back(0);
+	_scopeDepthStack.push_back(0);
 
 	// Retrieve script file
 	auto scriptFile = _script.getScriptFile(scriptID);
@@ -13,50 +14,36 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 	// Interpret every line from top to bottom in script
 	for (size_t lineIndex = 0; lineIndex < scriptFile->getLineCount(); lineIndex++)
 	{
-		// Skip the following lines of code if the last run caused an error
-		if (_hasThrownError)
-		{
-			break;
-		}
-
 		// Save index of line of script currently being executed
 		_currentLineStackIndices.back() = lineIndex;
 
 		// Retrieve line text
 		string scriptLineText = scriptFile->getLineText(lineIndex);
 
-		// Empty lines are ignored
-		if (scriptLineText.empty())
-		{
-			continue;
-		}
-
-		// Meta keywords are ignored
-		if (scriptLineText.substr(0, _metaKeyword.size()) == _metaKeyword)
-		{
-			continue;
-		}
-
-		// Comments are ignored
-		if (scriptLineText.substr(0, 3) == "///")
-		{
-			continue;
-		}
-
 		// Count front spaces
 		unsigned int countedSpaces = 0;
-		for (auto& c : scriptLineText)
+		for (unsigned int i = 0; i < scriptLineText.size(); i++)
 		{
-			if (c == ' ')
+			// Check if current character is a space
+			if (scriptLineText[i] == ' ')
 			{
-				countedSpaces++;
+				// Check if any text comes after the last space character
+				if (i == (scriptLineText.size() - 1))
+				{
+					_throwScriptError("useless indentation!");
+					return;
+				}
+				else
+				{
+					countedSpaces++;
+				}
 			}
 			else
 			{
 				break;
 			}
 		}
-
+		
 		// Check if indentation syntax is correct
 		if ((countedSpaces % _spacesPerIndent) == 0)
 		{
@@ -65,15 +52,34 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 		else
 		{
 			_throwScriptError("invalid indentation!");
+			return;
 		}
 
-		// Only update scope depth if current line scope is lower
+		// Detect scope changes
 		unsigned int currentLineScopeDepth = countedSpaces / _spacesPerIndent;
-		if (currentLineScopeDepth < _scopeDepth)
+		if((currentLineScopeDepth != _scopeDepthStack.back()) && _scopeHasChanged) // Check syntax after scope change
 		{
-			_scopeDepth = currentLineScopeDepth;
+			_throwScriptError("no indented code after scope change!");
+			return;
 		}
-		else if (currentLineScopeDepth > _scopeDepth)
+		else if(currentLineScopeDepth < _scopeDepthStack.back()) // End of current scope
+		{
+			_scopeDepthStack.back() = currentLineScopeDepth;
+		}
+		else if (currentLineScopeDepth > _scopeDepthStack.back()) // Outside of current scope
+		{
+			continue;
+		}
+		_scopeHasChanged = false;
+
+		// Empty lines are ignored
+		if (scriptLineText.empty())
+		{
+			continue;
+		}
+
+		// Comments are ignored
+		if (scriptLineText.substr(0, 3) == "///")
 		{
 			continue;
 		}
@@ -90,17 +96,19 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 			{
 				if (_checkIfStatement(scriptLineText.substr(3, scriptLineText.size() - 4)))
 				{
-					_scopeDepth++;
+					_scopeDepthStack.back()++;
+					_scopeHasChanged = true;
 				}
 			}
 			else
 			{
 				_throwScriptError("if statement must end with colon!");
+				return;
 			}
 		}
 		else if // Local variable
 			(
-				scriptLineText.substr(0, _stringKeyword.size() + 1) == _stringKeyword + " " ||
+				scriptLineText.substr(0, _stringKeyword.size()  + 1) == _stringKeyword  + " " ||
 				scriptLineText.substr(0, _decimalKeyword.size() + 1) == _decimalKeyword + " " ||
 				scriptLineText.substr(0, _integerKeyword.size() + 1) == _integerKeyword + " " ||
 				scriptLineText.substr(0, _booleanKeyword.size() + 1) == _booleanKeyword + " "
@@ -115,7 +123,13 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 		else
 		{
 			_throwScriptError("unknown keyword!");
-			break;
+			return;
+		}
+
+		// Skip the following lines of code if the last run caused an error
+		if (_hasThrownError)
+		{
+			return;
 		}
 	}
 
@@ -123,4 +137,5 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 	_localVariablesStack.pop_back();
 	_currentScriptStackIDs.pop_back();
 	_currentLineStackIndices.pop_back();
+	_scopeDepthStack.pop_back();
 }

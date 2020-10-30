@@ -93,6 +93,28 @@ void ScriptInterpreter::load()
 	{
 		_fe3d.logger_throwWarning("No entry script chosen for DESTROY script(s)!");
 	}
+
+	// Remove META keyword lines from script for the interpretation phase
+	for (auto& scriptID : _script.getAllScriptFileIDs())
+	{
+		auto scriptFile = _script.getScriptFile(scriptID);
+
+		// Loop through every line
+		BEGIN : for (unsigned int i = 0; i < scriptFile->getLineCount(); i++)
+		{
+			// Extract line content
+			std::istringstream iss(scriptFile->getLineText(i));
+			string possibleMetaKeyword;
+			iss >> possibleMetaKeyword;
+
+			// Check if META code
+			if (possibleMetaKeyword == _metaKeyword)
+			{
+				scriptFile->setLineText(i, "");
+				goto BEGIN;
+			}
+		}
+	}
 }
 
 void ScriptInterpreter::executeInitialization()

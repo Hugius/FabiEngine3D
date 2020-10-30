@@ -1,4 +1,4 @@
-6 2
+6 16
 META script_type_init
 META execution_entry
 
@@ -6,6 +6,7 @@ STR kip = "hoi"
 fe3d:print(kip)
 
 IF kip IS "hoi":
+    fe3d:print("fabienne is dik")
 
 BOOL schaap = fe3d:input_key_down("KEY_W")
 fe3d:print(schaap)

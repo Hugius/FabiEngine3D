@@ -1,5 +1,8 @@
-3 0
+6 4
 META script_type_update
 META execution_entry
 
-
+/// Forward movement
+BOOL w = fe3d:input_key_down("KEY_W")
+IF w IS <true>:
+    fe3d:camera_move(0.0, 0.0, 0.01)

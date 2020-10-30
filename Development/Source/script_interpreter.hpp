@@ -49,6 +49,7 @@ private:
 	vector<vector<ScriptVariable>> _localVariablesStack;
 	vector<string> _currentScriptStackIDs;
 	vector<unsigned int> _currentLineStackIndices;
+	vector<unsigned int> _scopeDepthStack;
 
 	// Vectors
 	vector<string> _initScriptIDs;
@@ -80,7 +81,7 @@ private:
 
 	// Integers
 	const unsigned int _spacesPerIndent = 4;
-	unsigned int _scopeDepth = 0;
+	bool _scopeHasChanged = false;
 
 	// Booleans
 	bool _hasThrownError = false;

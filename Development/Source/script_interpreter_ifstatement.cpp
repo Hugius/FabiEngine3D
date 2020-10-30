@@ -212,10 +212,7 @@ bool ScriptInterpreter::_checkConditionResult(ScriptValue& firstValue, string co
 			return (firstValue.getInteger() < secondValue.getInteger());
 		}
 	}
-	else
-	{
-		_fe3d.logger_throwError("This error should not be thrown...(really, it fucking shouldn't)");
-	}
 
+	_fe3d.logger_throwError("This error should not be thrown...(really, it fucking shouldn't)");
 	return false;
 }

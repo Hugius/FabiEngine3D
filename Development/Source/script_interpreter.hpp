@@ -22,8 +22,6 @@ public:
 private:
 	// Core functions
 	void _executeScript(const string& scriptID, ScriptType scriptType);
-	void _throwScriptError(const string& message);
-	vector<ScriptValue> _processEngineFunctionCall(const string& scriptLine);
 
 	// Value functions
 	bool _isStringValue(const string& value);
@@ -47,6 +45,12 @@ private:
 	bool _validateArgumentAmount(vector<ScriptValue> arguments, unsigned int amount);
 	bool _validateArgumentTypes(vector<ScriptValue> arguments, vector<ScriptValueType> types);
 	vector<ScriptValue> _extractArguments(string argumentString);
+
+	// Miscellaneous functions
+	unsigned int _countFrontSpaces(const string& scriptLineText);
+	bool _validateScopeChange(unsigned int countedSpaces, const string& scriptLineText);
+	void _throwScriptError(const string& message);
+	vector<ScriptValue> _processEngineFunctionCall(const string& scriptLine);
 
 	// Instances
 	FabiEngine3D& _fe3d;

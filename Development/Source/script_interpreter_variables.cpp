@@ -147,4 +147,11 @@ void ScriptInterpreter::_processVariableDefinition(const string& scriptLine, Scr
 	{
 		_throwScriptError("invalid variable type!");
 	}
+
+	// No characters allowed after variable creation statement
+	string temp;
+	if ((iss >> temp) || scriptLine.back() == ' ')
+	{
+		_throwScriptError("invalid variable creation syntax!");
+	}
 }

@@ -111,14 +111,14 @@ vector<ScriptValue> ScriptInterpreter::_extractArguments(string argumentString)
 					currentArgument += c;
 					buildingDecimal = true;
 				}
-				else
+				else if(c != ',' && c != ' ')
 				{
 					_throwScriptError("invalid character in number value!");
 					return {};
 				}
 
 				// Check if number building finished
-				if (c == ',' || (index == argumentString.size() - 1))
+				if (c == ',' || (index == argumentString.size() - 1) || c == ' ')
 				{
 					if (buildingDecimal) // Convert to decimal
 					{
@@ -133,12 +133,24 @@ vector<ScriptValue> ScriptInterpreter::_extractArguments(string argumentString)
 							argumentList.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, stof(currentArgument)));
 							buildingNumber = false;
 							buildingDecimal = false;
+
+							// Check if needs to be found yet
+							if (c != ',')
+							{
+								finishedArgument = true;
+							}
 						}
 					}
 					else // Convert to integer
 					{
 						argumentList.push_back(ScriptValue(_fe3d, ScriptValueType::INTEGER, stoi(currentArgument)));
 						buildingNumber = false;
+						
+						// Check if needs to be found yet
+						if (c != ',')
+						{
+							finishedArgument = true;
+						}
 					}
 				}
 			}
@@ -183,13 +195,19 @@ vector<ScriptValue> ScriptInterpreter::_extractArguments(string argumentString)
 				}
 
 				// Check if variable building finished
-				if (c == ',' || (index == argumentString.size() - 1))
+				if (c == ',' || (index == argumentString.size() - 1) || c == ' ')
 				{
 					// Check if the specified local variable exists
 					if (_isLocalVariableExisting(currentArgument))
 					{
 						argumentList.push_back(_getLocalVariable(currentArgument).getValue());
 						buildingVariable = false;
+
+						// Check if needs to be found yet
+						if (c != ',')
+						{
+							finishedArgument = true;
+						}
 					}
 					else
 					{

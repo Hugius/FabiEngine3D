@@ -21,27 +21,10 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 		string scriptLineText = scriptFile->getLineText(lineIndex);
 
 		// Count front spaces
-		unsigned int countedSpaces = 0;
-		for (unsigned int i = 0; i < scriptLineText.size(); i++)
+		unsigned int countedSpaces = _countFrontSpaces(scriptLineText);
+		if (_hasThrownError) // Check if an error was thrown
 		{
-			// Check if current character is a space
-			if (scriptLineText[i] == ' ')
-			{
-				// Check if any text comes after the last space character
-				if (i == (scriptLineText.size() - 1))
-				{
-					_throwScriptError("useless indentation!");
-					return;
-				}
-				else
-				{
-					countedSpaces++;
-				}
-			}
-			else
-			{
-				break;
-			}
+			return;
 		}
 		
 		// Check if indentation syntax is correct
@@ -55,30 +38,24 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 			return;
 		}
 
-		// Check if there is any code right after a scope change
-		unsigned int currentLineScopeDepth = countedSpaces / _spacesPerIndent;
-		if(_scopeHasChanged && ((currentLineScopeDepth != _scopeDepthStack.back()) || scriptLineText.substr(0, 3) == "///"))
+		// Validate a potentional scope change
+		bool scopeChangeValidation = _validateScopeChange(countedSpaces, scriptLineText);
+		if (_hasThrownError) // Check if an error was thrown
 		{
-			_throwScriptError("no indented code after scope change!");
 			return;
 		}
-		else if(currentLineScopeDepth < _scopeDepthStack.back()) // End of current scope
-		{
-			_scopeDepthStack.back() = currentLineScopeDepth;
-		}
-		else if (currentLineScopeDepth > _scopeDepthStack.back()) // Outside of current scope, so don't execute current line
+		else if (!scopeChangeValidation) // Current line outside of scope, skip
 		{
 			continue;
 		}
-		_scopeHasChanged = false;
 
-		// Empty lines are ignored
+		// Ignore empty lines
 		if (scriptLineText.empty())
 		{
 			continue;
 		}
 
-		// Comments are ignored
+		// Ignore comments
 		if (scriptLineText.substr(0, 3) == "///")
 		{
 			continue;

@@ -27,7 +27,7 @@ public:
 	void addButton(const string& ID, vec2 position, vec2 size, const string& textureName, vec3 hoverColor);
 	void addRectangle(const string& ID, vec2 position, vec2 size, vec3 color, bool isCentered = true);
 	void addRectangle(const string& ID, vec2 position, vec2 size, const string& textureName, bool isCentered = true);
-	void addTextfield(const string& ID, vec2 position, vec2 size, string textContent, vec3 textColor, bool isCentered = true);
+	void addTextfield(const string& ID, vec2 position, vec2 size, string textContent, vec3 textColor, bool isCentered = true, bool isDynamic = false);
 
 	void deleteScrollingList(const string& ID);
 	void deleteWriteField(const string& ID);

@@ -184,10 +184,17 @@ void RenderEngine::_renderTextEntities()
 		// Render
 		for (auto& textEntity : _entityBus->getTextEntities())
 		{
-			// Render every character individually
-			for (auto& characterEntity : textEntity->getCharacterEntities())
+			if (textEntity->isDynamic()) // Dynamic text rendering
 			{
-				_guiEntityRenderer.render(characterEntity);
+				// Render every character individually
+				for (auto& characterEntity : textEntity->getCharacterEntities())
+				{
+					_guiEntityRenderer.render(characterEntity);
+				}
+			}
+			else // Static text rendering
+			{
+				_guiEntityRenderer.render(textEntity);
 			}
 		}
 

@@ -8,12 +8,14 @@ public:
 	TextEntity() = default;
 	~TextEntity();
 	
+	void setDynamic(bool value);
 	void deleteCharacterEntities();
 	void updateCharacterEntities();
 	void addCharacterEntity(GuiEntity* character);
 	void setTextContent(const string& text);
 	void setFontPath(const string& fontPath);
 
+	bool isDynamic();
 	const vector<GuiEntity*>& getCharacterEntities() const;
 	const string& getTextContent() const;
 	const string& getFontPath() const;
@@ -24,4 +26,6 @@ private:
 	string _textContent = "";
 
 	string _fontPath = "";
+
+	bool _isDynamic = false;
 };

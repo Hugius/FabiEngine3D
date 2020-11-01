@@ -22,9 +22,10 @@ void FabiEngine3D::textEntity_showAll()
 	}
 }
 
-void FabiEngine3D::textEntity_add(const string& ID, const string& text, const string& fontPath, vec3 color, vec2 position, float rotation, vec2 size, bool isCentered)
+void FabiEngine3D::textEntity_add(const string& ID, const string& textContent, const string& fontPath, vec3 color, vec2 position,
+	float rotation, vec2 size, bool isCentered, bool isDynamic)
 {
-	_core->_textEntityManager.addTextEntity(ID, text, fontPath, color, position, rotation, size, false, isCentered);
+	_core->_textEntityManager.addTextEntity(ID, textContent, fontPath, color, position, rotation, size, false, isCentered, isDynamic);
 }
 
 void FabiEngine3D::textEntity_delete(const string& ID)
@@ -63,7 +64,14 @@ void FabiEngine3D::textEntity_setTextContent(const string& ID, const string& tex
 	entity->setScaling(newSize);
 
 	// Reload
-	_core->_textEntityManager.reloadCharacters(ID);
+	if (entity->isDynamic())
+	{
+		_core->_textEntityManager.reloadCharacters(ID);
+	}
+	else
+	{
+		entity->setDiffuseMap(_core->_texLoader.getText(textContent, entity->getFontPath()));
+	}
 }
 
 void FabiEngine3D::textEntity_setColor(const string& ID, vec3 color)

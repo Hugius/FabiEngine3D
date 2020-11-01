@@ -4,14 +4,15 @@
 
 TextEntityManager::TextEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, RenderBus& renderBus) :
 	BaseEntityManager(objLoader, texLoader, renderBus),
-	_openglBuffer(new OpenGLBuffer(0.0f, 0.0f, 1.0f, 1.0f, false, true))
+	_centeredOpenglBuffer(new OpenGLBuffer(0.0f, 0.0f, 1.0f, 1.0f, true, true)),
+	_nonCenteredOpenglBuffer(new OpenGLBuffer(0.0f, 0.0f, 1.0f, 1.0f, false, true))
 {
 
 }
 
 TextEntityManager::~TextEntityManager()
 {
-	delete _openglBuffer;
+	delete _nonCenteredOpenglBuffer;
 }
 
 TextEntity* TextEntityManager::getEntity(const string& ID)
@@ -35,7 +36,7 @@ void TextEntityManager::addTextEntity
 	const string& ID, const string& textContent,
 	const string& fontPath, vec3 color,
 	vec2 translation, float rotation, vec2 scaling,
-	bool overwrite, bool isCentered
+	bool overwrite, bool isCentered, bool isDynamic
 )
 {
 	// Optional overwrite
@@ -56,15 +57,26 @@ void TextEntityManager::addTextEntity
 	getEntity(ID)->setRotation(rotation);
 	getEntity(ID)->setScaling(scaling);
 	getEntity(ID)->setCentered(isCentered);
-	reloadCharacters(ID);
+	getEntity(ID)->setDynamic(isDynamic);
+
+	// Create separate character entities
+	if (isDynamic)
+	{
+		reloadCharacters(ID);
+	}
+	else // Load static text as a whole
+	{
+		getEntity(ID)->addOglBuffer(isCentered ? _centeredOpenglBuffer : _nonCenteredOpenglBuffer, false);
+		getEntity(ID)->setDiffuseMap(_texLoader.getText(textContent, getEntity(ID)->getFontPath()));
+		getEntity(ID)->updateModelMatrix();
+	}
 }
 
 void TextEntityManager::reloadCharacters(const string& ID)
 {
 	// Check if text content changed
-	if (_textContentMap.find(ID) == _textContentMap.end() || getEntity(ID)->getTextContent() != _textContentMap[ID])
+	if ((_textContentMap.find(ID) == _textContentMap.end()) || (getEntity(ID)->getTextContent() != _textContentMap[ID]))
 	{
-		std::cout << getEntity(ID)->getTextContent() << " " << _textContentMap[ID] << std::endl;
 		_textContentMap[ID] = getEntity(ID)->getTextContent();
 		getEntity(ID)->deleteCharacterEntities();
 
@@ -73,7 +85,7 @@ void TextEntityManager::reloadCharacters(const string& ID)
 		{
 			// Create new character entity
 			GuiEntity* newCharacter = new GuiEntity();
-			newCharacter->addOglBuffer(_openglBuffer, false);
+			newCharacter->addOglBuffer(_nonCenteredOpenglBuffer, false);
 
 			// Load diffuse map
 			string textContent = "";
@@ -94,7 +106,14 @@ void TextEntityManager::update()
 		// Create temporary game entity object
 		auto * entity = getEntity(baseEntity->getID());
 
-		// Update every character entity
-		entity->updateCharacterEntities();
+		// Update entity
+		if (entity->isDynamic())
+		{
+			entity->updateCharacterEntities(); // Individual characters
+		}
+		else
+		{
+			entity->updateModelMatrix(); // Whole word
+		}
 	}
 }

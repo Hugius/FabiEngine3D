@@ -469,9 +469,9 @@ public:
 	// Text entity interface - setters
 	void textEntity_add
 	(
-		const string& ID, const string& text,
+		const string& ID, const string& textContent,
 		const string& fontPath, vec3 color,
-		vec2 position, float rotation, vec2 size, bool isCentered
+		vec2 position, float rotation, vec2 size, bool isCentered, bool isDynamic
 	);
 	void textEntity_deleteAll();
 	void textEntity_delete(const string& ID);

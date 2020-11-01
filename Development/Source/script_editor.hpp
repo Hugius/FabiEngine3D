@@ -66,8 +66,8 @@ private:
 	const float _verticalLineOffset = 1.0f;
 	const float _horizontalLineOffset = 0.5f;
 	const float _cameraOffset = (_verticalLineOffset * (_maxVisibleLines / 2.0f)) - (_textCharacterSize.y / 2.0f);
-	const string letterCharacters = " abcdefghijklmnopqrstuvwxyz";
-	const map<char, char> numberCharacterMap =
+	const string _letterCharacters = " abcdefghijklmnopqrstuvwxyz";
+	const vector<pair<char, char>> _numberCharacters =
 	{
 		{'0', ')'},
 		{'1', '!'},
@@ -80,7 +80,7 @@ private:
 		{'8', '*'},
 		{'9', '('}
 	};
-	const map<char, char> specialCharacterMap =
+	const vector<pair<char, char>> _specialCharacters =
 	{
 		{'.', '>'},
 		{',', '<'},

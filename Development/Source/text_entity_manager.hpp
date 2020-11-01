@@ -17,7 +17,7 @@ public:
 		const string& ID, const string& textContent,
 		const string& fontPath, vec3 color,
 		vec2 translation, float rotation, vec2 scaling,
-		bool overwrite, bool isCentered
+		bool overwrite, bool isCentered, bool isDynamic
 	);
 
 	void reloadCharacters(const string& ID);
@@ -25,7 +25,8 @@ public:
 	void update() override;
 
 private:
-	OpenGLBuffer* _openglBuffer = nullptr;
+	OpenGLBuffer* _centeredOpenglBuffer = nullptr;
+	OpenGLBuffer* _nonCenteredOpenglBuffer = nullptr;
 
 	map<string, string> _textContentMap;
 };

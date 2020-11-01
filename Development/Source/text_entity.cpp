@@ -7,6 +7,11 @@ TextEntity::~TextEntity()
 	deleteCharacterEntities();
 }
 
+void TextEntity::setDynamic(bool value)
+{
+	_isDynamic = value;
+}
+
 void TextEntity::deleteCharacterEntities()
 {
 	for (auto& character : _characters)
@@ -71,6 +76,11 @@ void TextEntity::setTextContent(const string& text)
 void TextEntity::setFontPath(const string& fontPath)
 {
 	_fontPath = fontPath;
+}
+
+bool TextEntity::isDynamic()
+{
+	return _isDynamic;
 }
 
 const vector<GuiEntity*>& TextEntity::getCharacterEntities() const

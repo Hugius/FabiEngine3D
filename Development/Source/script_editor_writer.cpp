@@ -244,7 +244,7 @@ void ScriptEditor::_updateTextWriter()
 			if (currentLineText.size() < _maxCharactersPerLine)
 			{
 				// Letter characters
-				for (auto& c : letterCharacters)
+				for (auto& c : _letterCharacters)
 				{
 					// Check if character is pressed on keyboard
 					if (_fe3d.input_getKeyPressed(InputType(c)))
@@ -274,7 +274,7 @@ void ScriptEditor::_updateTextWriter()
 				}
 
 				// Number characters
-				for (auto& element : numberCharacterMap)
+				for (auto& element : _numberCharacters)
 				{
 					// Check if character is pressed on keyboard
 					if (_fe3d.input_getKeyPressed(InputType(element.first)))
@@ -292,7 +292,7 @@ void ScriptEditor::_updateTextWriter()
 				}
 
 				// Special characters
-				for (auto& element : specialCharacterMap)
+				for (auto& element : _specialCharacters)
 				{
 					// Check if character is pressed on keyboard
 					if (_fe3d.input_getKeyPressed(InputType(element.first)))

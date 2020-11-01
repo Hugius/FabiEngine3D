@@ -41,7 +41,7 @@ void ScriptEditor::_reloadScriptTextDisplay()
 				float characterX = _horizontalLineOffset + (_horizontalCharacterOffset * static_cast<float>(charIndex));
 				vec3 characterPosition = lineNumberPosition + vec3(characterX, 0.0f, 0.0f);
 
-				// Create new billboard
+				// Create new logical billboard
 				_fe3d.billBoardEntity_add(characterID, vec3(0.0f), characterPosition, vec3(0.0f), _textCharacterSize, false, false, false);
 				_fe3d.aabbEntity_bindToBillboardEntity(characterID, true);
 			}

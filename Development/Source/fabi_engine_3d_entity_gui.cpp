@@ -22,15 +22,15 @@ void FabiEngine3D::guiEntity_showAll()
 	}
 }
 
-void FabiEngine3D::guiEntity_add(const string& ID, const string& texturePath, vec2 translation, float rotation, vec2 scaling, bool centered, bool visible)
+void FabiEngine3D::guiEntity_add(const string& ID, const string& texturePath, vec2 translation, float rotation, vec2 scaling, bool isCentered, bool visible)
 {
-	_core->_guiEntityManager.addGuiEntity(ID, texturePath, translation, rotation, scaling, false, centered);
+	_core->_guiEntityManager.addGuiEntity(ID, texturePath, translation, rotation, scaling, false, isCentered);
 	_core->_guiEntityManager.getEntity(ID)->setVisible(visible);
 }
 
-void FabiEngine3D::guiEntity_add(const string& ID, vec3 color, vec2 translation, float rotation, vec2 scaling, bool centered, bool visible)
+void FabiEngine3D::guiEntity_add(const string& ID, vec3 color, vec2 translation, float rotation, vec2 scaling, bool isCentered, bool visible)
 {
-	_core->_guiEntityManager.addGuiEntity(ID, color, translation, rotation, scaling, centered);
+	_core->_guiEntityManager.addGuiEntity(ID, color, translation, rotation, scaling, isCentered);
 	_core->_guiEntityManager.getEntity(ID)->setVisible(visible);
 }
 

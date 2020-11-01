@@ -33,18 +33,18 @@ TTF_Font* TextureLoader::_loadFont(const string& fontPath)
 	return it->second; //Cache texture
 }
 
-GLuint TextureLoader::_loadText(const string& text, const string&fontPath)
+GLuint TextureLoader::_loadText(const string& textContent, const string&fontPath)
 {
 	std::string newText;
 
 	// No empty text
-	if (text == "")
+	if (textContent == "")
 	{
 		newText = " ";
 	}
 	else
 	{
-		newText = text;
+		newText = textContent;
 	}
 
 	// Load font
@@ -75,7 +75,7 @@ GLuint TextureLoader::_loadText(const string& text, const string&fontPath)
 	}
 	else
 	{
-		Logger::throwWarning("Pixel format not recognized while generating TEXT texture: \"" + text + "\"");
+		Logger::throwWarning("Pixel format not recognized while generating TEXT texture: \"" + textContent + "\"");
 		return 0;
 	}
 

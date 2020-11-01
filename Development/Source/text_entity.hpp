@@ -6,15 +6,21 @@ class TextEntity final : public GuiEntity
 {
 public:
 	TextEntity() = default;
-	~TextEntity() = default;
-
+	~TextEntity();
+	
+	void deleteCharacterEntities();
+	void updateCharacterEntities();
+	void addCharacterEntity(GuiEntity* character);
 	void setTextContent(const string& text);
 	void setFontPath(const string& fontPath);
 
+	const vector<GuiEntity*>& getCharacterEntities() const;
 	const string& getTextContent() const;
 	const string& getFontPath() const;
 
 private:
+	vector<GuiEntity*> _characters;
+
 	string _textContent = "";
 
 	string _fontPath = "";

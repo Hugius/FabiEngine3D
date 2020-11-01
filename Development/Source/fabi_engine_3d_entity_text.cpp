@@ -22,9 +22,9 @@ void FabiEngine3D::textEntity_showAll()
 	}
 }
 
-void FabiEngine3D::textEntity_add(const string& ID, const string& text, const string& fontPath, vec3 color, vec2 position, float rotation, vec2 size, bool centered)
+void FabiEngine3D::textEntity_add(const string& ID, const string& text, const string& fontPath, vec3 color, vec2 position, float rotation, vec2 size, bool isCentered)
 {
-	_core->_textEntityManager.addTextEntity(ID, text, fontPath, color, position, rotation, size, false, centered);
+	_core->_textEntityManager.addTextEntity(ID, text, fontPath, color, position, rotation, size, false, isCentered);
 }
 
 void FabiEngine3D::textEntity_delete(const string& ID)
@@ -44,22 +44,26 @@ bool FabiEngine3D::textEntity_isVisible(const string& ID)
 
 void FabiEngine3D::textEntity_setTextContent(const string& ID, const string& textContent, float charWidth, float charHeight)
 {
+	// Retrieve entity
 	auto entity = _core->_textEntityManager.getEntity(ID);
 
+	// Set new text
 	entity->setTextContent(textContent);
-	entity->setDiffuseMap(_core->_texLoader.getText(textContent, entity->getFontPath()));
 
 	// Calculate new size
 	vec2 newSize = entity->getScaling();
 	if (charWidth >= 0.0f)
 	{
-		newSize.x = charWidth * float(textContent.size());
+		newSize.x = charWidth * static_cast<float>(textContent.size());
 	}
 	if (charHeight >= 0.0f)
 	{
 		newSize.y = charHeight;
 	}
 	entity->setScaling(newSize);
+
+	// Reload
+	_core->_textEntityManager.reloadCharacters(ID);
 }
 
 void FabiEngine3D::textEntity_setColor(const string& ID, vec3 color)

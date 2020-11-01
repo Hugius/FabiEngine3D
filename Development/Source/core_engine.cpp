@@ -53,7 +53,7 @@ void CoreEngine::_setupApplication()
 	// Create engine logo
 	GuiEntity logo;
 	logo.load("logo");
-	logo.addOglBuffer(new OpenGLBuffer(0.0f, 0.0f, 2.0f, 2.0f, true));
+	logo.addOglBuffer(new OpenGLBuffer(0.0f, 0.0f, 2.0f, 2.0f, true, false));
 	logo.setDiffuseMap(_texLoader.getTexture("engine\\textures\\logo.png", true, true));
 	
 	// Get logo resolution

@@ -6,19 +6,26 @@ class TextEntityManager final : public BaseEntityManager
 {
 public:
 	TextEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, RenderBus& renderBus);
-	~TextEntityManager() = default;
+	~TextEntityManager();
 
-	TextEntity * getEntity(const string& ID) override;
+	TextEntity* getEntity(const string& ID) override;
 
 	const vector<TextEntity*> getEntities();
 
 	void addTextEntity
 	(
-		const string& ID, const string& text,
+		const string& ID, const string& textContent,
 		const string& fontPath, vec3 color,
 		vec2 translation, float rotation, vec2 scaling,
-		bool overwrite, bool centered
+		bool overwrite, bool isCentered
 	);
 
+	void reloadCharacters(const string& ID);
+
 	void update() override;
+
+private:
+	OpenGLBuffer* _openglBuffer = nullptr;
+
+	map<string, string> _textContentMap;
 };

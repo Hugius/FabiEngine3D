@@ -128,17 +128,20 @@ void RenderEngine::_renderAabbEntities()
 {
 	if (_renderBus.isAabbFrameRenderingEnabled())
 	{
-		// Bind
-		_aabbEntityRenderer.bind();
-
-		// Render AABB entities
-		for (auto& entity : _entityBus->getAabbEntities())
+		if (!_entityBus->getAabbEntities().empty())
 		{
-			_aabbEntityRenderer.render(entity);
-		}
+			// Bind
+			_aabbEntityRenderer.bind();
 
-		// Unbind
-		_aabbEntityRenderer.unbind();
+			// Render AABB entities
+			for (auto& entity : _entityBus->getAabbEntities())
+			{
+				_aabbEntityRenderer.render(entity);
+			}
+
+			// Unbind
+			_aabbEntityRenderer.unbind();
+		}
 	}
 }
 
@@ -151,24 +154,44 @@ void RenderEngine::_renderFinalSceneTexture()
 
 void RenderEngine::_renderGuiEntities()
 {
-	for (auto & entity : _entityBus->getGuiEntities())
+	if (!_entityBus->getGuiEntities().empty())
 	{
-		// Custom cursor entity must be rendered last
-		if (entity->getID() != _renderBus.getCursorEntityID())
+		// Bind
+		_guiEntityRenderer.bind();
+
+		// Render
+		for (auto& entity : _entityBus->getGuiEntities())
 		{
-			_guiEntityRenderer.bind();
-			_guiEntityRenderer.render(entity);
-			_guiEntityRenderer.unbind();
+			// Custom cursor entity must be rendered last
+			if (entity->getID() != _renderBus.getCursorEntityID())
+			{
+				_guiEntityRenderer.render(entity);
+			}
 		}
+
+		// Unbind
+		_guiEntityRenderer.unbind();
 	}
 }
 
 void RenderEngine::_renderTextEntities()
 {
-	for (auto & entity : _entityBus->getTextEntities())
+	if (!_entityBus->getTextEntities().empty())
 	{
+		// Bind
 		_guiEntityRenderer.bind();
-		_guiEntityRenderer.render(entity);
+
+		// Render
+		for (auto& textEntity : _entityBus->getTextEntities())
+		{
+			// Render every character individually
+			for (auto& characterEntity : textEntity->getCharacterEntities())
+			{
+				_guiEntityRenderer.render(characterEntity);
+			}
+		}
+
+		// Unbind
 		_guiEntityRenderer.unbind();
 	}
 }
@@ -192,28 +215,28 @@ void RenderEngine::_renderDebugScreens()
 	GuiEntity normalSurface;
 	normalSurface.setDiffuseMap(_renderBus.getSceneMap());
 	normalSurface.load("normalSurface");
-	normalSurface.addOglBuffer(new OpenGLBuffer(-0.66666f, 0.66666f, 0.66666f, 0.66666f, true));
+	normalSurface.addOglBuffer(new OpenGLBuffer(-0.66666f, 0.66666f, 0.66666f, 0.66666f, true, false));
 	normalSurface.setMirroredVertically(true);
 
 	// Shadow scene
 	GuiEntity shadowSurface;
 	shadowSurface.setDiffuseMap(_renderBus.getShadowMap());
 	shadowSurface.load("shadowSurface");
-	shadowSurface.addOglBuffer(new OpenGLBuffer(-0.66666f, 0.0f, 0.66666f, 0.66666f, true));
+	shadowSurface.addOglBuffer(new OpenGLBuffer(-0.66666f, 0.0f, 0.66666f, 0.66666f, true, false));
 	shadowSurface.setMirroredVertically(true);
 
 	// Reflection scene
 	GuiEntity reflectionSurface;
 	reflectionSurface.setDiffuseMap(_renderBus.getSceneReflectionMap());
 	reflectionSurface.load("reflectionSurface");
-	reflectionSurface.addOglBuffer(new OpenGLBuffer(-0.66666f, -0.66666f, 0.66666f, 0.66666f, true));
+	reflectionSurface.addOglBuffer(new OpenGLBuffer(-0.66666f, -0.66666f, 0.66666f, 0.66666f, true, false));
 	reflectionSurface.setMirroredVertically(true);
 
 	// Refraction scene
 	GuiEntity refractionSurface;
 	refractionSurface.setDiffuseMap(_renderBus.getSceneRefractionMap());
 	refractionSurface.load("refractionSurface");
-	refractionSurface.addOglBuffer(new OpenGLBuffer(0.0f, 0.66666f, 0.66666f, 0.66666f, true));
+	refractionSurface.addOglBuffer(new OpenGLBuffer(0.0f, 0.66666f, 0.66666f, 0.66666f, true, false));
 	refractionSurface.setMirroredVertically(true);
 
 	// Depth scene
@@ -221,28 +244,28 @@ void RenderEngine::_renderDebugScreens()
 	depthSurface.setDepthEntity(true);
 	depthSurface.setDiffuseMap(_renderBus.getSceneDepthMap());
 	depthSurface.load("depthSurface");
-	depthSurface.addOglBuffer(new OpenGLBuffer(0.0f, 0.0f, 0.66666f, 0.66666f, true));
+	depthSurface.addOglBuffer(new OpenGLBuffer(0.0f, 0.0f, 0.66666f, 0.66666f, true, false));
 	depthSurface.setMirroredVertically(true);
 
 	// Bloom scene
 	GuiEntity bloomSurface;
 	bloomSurface.setDiffuseMap(_renderBus.getBloomMap());
 	bloomSurface.load("bloomSurface");
-	bloomSurface.addOglBuffer(new OpenGLBuffer(0.0f, -0.66666f, 0.66666f, 0.66666f, true));
+	bloomSurface.addOglBuffer(new OpenGLBuffer(0.0f, -0.66666f, 0.66666f, 0.66666f, true, false));
 	bloomSurface.setMirroredVertically(true);
 	
 	// Blur scene
 	GuiEntity blurSurface;
 	blurSurface.setDiffuseMap(_renderBus.getBlurMap());
 	blurSurface.load("blurSurface");
-	blurSurface.addOglBuffer(new OpenGLBuffer(0.66666f, 0.66666f, 0.66666f, 0.66666f, true));
+	blurSurface.addOglBuffer(new OpenGLBuffer(0.66666f, 0.66666f, 0.66666f, 0.66666f, true, false));
 	blurSurface.setMirroredVertically(true);
 
 	// Final scene
 	GuiEntity finalSurface;
 	finalSurface.setDiffuseMap(_renderBus.getMotionBlurMap());
 	finalSurface.load("finalSurface");
-	finalSurface.addOglBuffer(new OpenGLBuffer(0.66666f, 0.0f, 0.66666f, 0.66666f, true));
+	finalSurface.addOglBuffer(new OpenGLBuffer(0.66666f, 0.0f, 0.66666f, 0.66666f, true, false));
 	finalSurface.setMirroredVertically(true);
 	
 	// Render debug screens

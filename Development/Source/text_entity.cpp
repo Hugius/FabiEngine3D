@@ -1,5 +1,68 @@
 #include "text_entity.hpp"
 
+#include <iostream>
+
+TextEntity::~TextEntity()
+{
+	deleteCharacterEntities();
+}
+
+void TextEntity::deleteCharacterEntities()
+{
+	for (auto& character : _characters)
+	{
+		delete character;
+	}
+
+	_characters.clear();
+}
+
+void TextEntity::updateCharacterEntities()
+{
+	// Temporary values
+	float xCharSize = this->getScaling().x / static_cast<float>(this->_textContent.size());
+	float yCharSize = this->getScaling().y;
+	unsigned int index = 0;
+	
+	// Update every character
+	for (auto& character : _characters)
+	{
+		// Temporary values
+		float xCharOffset = static_cast<float>(index) * xCharSize;
+		float yCharOffset = 0.0f;
+
+		// Check if text is isCentered
+		if (this->isCentered())
+		{
+			xCharOffset -= (this->getScaling().x / 2.0f);
+			yCharOffset -= (yCharSize / 2.0f);
+		}
+
+		// Set new transformation
+		character->setTranslation(this->getTranslation() + vec2(xCharOffset, yCharOffset));
+		character->setRotation(this->getRotation());
+		character->setScaling(vec2(xCharSize, yCharSize));
+
+		// Copy all properties
+		character->setColor(this->getColor());
+		character->setMirroredHorizontally(this->isMirroredHorizonally());
+		character->setMirroredVertically(this->isMirroredVertically());
+		character->setAlpha(this->getAlpha());
+		character->setCentered(this->isCentered());
+		character->setMinPosition(this->getMinPosition());
+		character->setMaxPosition(this->getMaxPosition());
+		character->setVisible(this->isVisible());
+		character->updateModelMatrix();
+
+		index++;
+	}
+}
+
+void TextEntity::addCharacterEntity(GuiEntity* character)
+{
+	_characters.push_back(character);
+}
+
 void TextEntity::setTextContent(const string& text)
 {
 	_textContent = text;
@@ -8,6 +71,11 @@ void TextEntity::setTextContent(const string& text)
 void TextEntity::setFontPath(const string& fontPath)
 {
 	_fontPath = fontPath;
+}
+
+const vector<GuiEntity*>& TextEntity::getCharacterEntities() const
+{
+	return _characters;
 }
 
 const string& TextEntity::getTextContent() const

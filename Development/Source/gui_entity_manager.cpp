@@ -3,9 +3,17 @@
 #include <iostream>
 
 GuiEntityManager::GuiEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, RenderBus& renderBus) :
-	BaseEntityManager(objLoader, texLoader, renderBus)
+	BaseEntityManager(objLoader, texLoader, renderBus),
+	_centeredOpenglBuffer(new OpenGLBuffer(0.0f, 0.0f, 1.0f, 1.0f, true, false)),
+	_nonCenteredOpenglBuffer(new OpenGLBuffer(0.0f, 0.0f, 1.0f, 1.0f, false, false))
 {
 	
+}
+
+GuiEntityManager::~GuiEntityManager()
+{
+	delete _centeredOpenglBuffer;
+	delete _nonCenteredOpenglBuffer;
 }
 
 GuiEntity* GuiEntityManager::getEntity(const string& ID)
@@ -25,33 +33,33 @@ const vector<GuiEntity*> GuiEntityManager::getEntities()
 	return newVector;
 }
 
-void GuiEntityManager::addGuiEntity(const string& ID, const string& texturePath, vec2 translation, float rotation, vec2 scaling, bool engine, bool centered)
+void GuiEntityManager::addGuiEntity(const string& ID, const string& texturePath, vec2 translation, float rotation, vec2 scaling, bool engine, bool isCentered)
 {
 	// Create entity
 	_createEntity(EntityType::GUI, ID)->load(ID);
-	getEntity(ID)->addOglBuffer(new OpenGLBuffer(0.0f, 0.0f, 1.0f, 1.0f, centered));
+	getEntity(ID)->addOglBuffer(isCentered ? _centeredOpenglBuffer : _nonCenteredOpenglBuffer, false);
 
 	// Load transformation
 	getEntity(ID)->setTranslation(translation);
 	getEntity(ID)->setRotation(rotation);
 	getEntity(ID)->setScaling(scaling);
-	getEntity(ID)->setCentered(centered);
+	getEntity(ID)->setCentered(isCentered);
 
 	// Load diffuse map
 	getEntity(ID)->setDiffuseMap(_texLoader.getTexture(texturePath, true, true, false));
 }
 
-void GuiEntityManager::addGuiEntity(const string& ID, vec3 color, vec2 translation, float rotation, vec2 scaling, bool centered)
+void GuiEntityManager::addGuiEntity(const string& ID, vec3 color, vec2 translation, float rotation, vec2 scaling, bool isCentered)
 {
 	// Create entity
 	_createEntity(EntityType::GUI, ID)->load(ID);
-	getEntity(ID)->addOglBuffer(new OpenGLBuffer(0.0f, 0.0f, 1.0f, 1.0f, centered));
+	getEntity(ID)->addOglBuffer(isCentered ? _centeredOpenglBuffer : _nonCenteredOpenglBuffer, false);
 
 	// Load transformation
 	getEntity(ID)->setTranslation(translation);
 	getEntity(ID)->setRotation(rotation);
 	getEntity(ID)->setScaling(scaling);
-	getEntity(ID)->setCentered(centered);
+	getEntity(ID)->setCentered(isCentered);
 
 	// Set color
 	getEntity(ID)->setColor(color);

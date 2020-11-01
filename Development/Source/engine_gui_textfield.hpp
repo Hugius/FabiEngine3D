@@ -6,7 +6,7 @@ class EngineGuiTextfield final
 {
 public:
 	EngineGuiTextfield(FabiEngine3D& fe3d, const string& parentID, const string& ID, vec2 position, vec2 size, 
-		string textContent, vec3 textColor, bool centered = true);
+		string textContent, vec3 textColor, bool isCentered = true);
 	~EngineGuiTextfield();
 
 	void show();

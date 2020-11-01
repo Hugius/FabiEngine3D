@@ -38,7 +38,7 @@ RenderEngine::RenderEngine(RenderBus& renderBus, Timer& timer) :
 	// Final screen texture
 	_finalSurface = new GuiEntity();
 	_finalSurface->load("finalSurface");
-	_finalSurface->addOglBuffer(new OpenGLBuffer(0.0f, 0.0f, 2.0f, 2.0f, true));
+	_finalSurface->addOglBuffer(new OpenGLBuffer(0.0f, 0.0f, 2.0f, 2.0f, true, false));
 	_finalSurface->setMirroredVertically(true);
 }
 

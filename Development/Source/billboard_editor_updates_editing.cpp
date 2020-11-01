@@ -216,7 +216,8 @@ void BillboardEditor::_updateBillboardEditing()
 							{
 								const string newFilePath = filePath.substr(rootDirectory.size());
 								_fe3d.misc_clearFontCache(newFilePath);
-								_fe3d.misc_clearTextCache(_fe3d.billboardEntity_getTextContent(_currentBillboardID));
+								_fe3d.misc_clearTextCache(_fe3d.billboardEntity_getTextContent(_currentBillboardID), 
+									_fe3d.billboardEntity_getFontPath(_currentBillboardID));
 								_fe3d.billBoardEntity_setFont(_currentBillboardID, newFilePath);
 							}
 							else
@@ -260,7 +261,7 @@ void BillboardEditor::_updateBillboardEditing()
 				if (_gui.getGlobalScreen()->checkValueForm("content", textContent, { }))
 				{
 					_fe3d.misc_clearFontCache(_fe3d.billboardEntity_getFontPath(_currentBillboardID));
-					_fe3d.misc_clearTextCache(textContent);
+					_fe3d.misc_clearTextCache(textContent, _fe3d.billboardEntity_getFontPath(_currentBillboardID));
 					_fe3d.billBoardEntity_setTextContent(_currentBillboardID, textContent);
 				}
 			}

@@ -36,15 +36,8 @@ void GuiEntityRenderer::render(const GuiEntity* entity)
 		_shader.uploadUniform("u_maxPosition", entity->getMaxPosition());
 		_shader.uploadUniform("u_alpha", entity->getAlpha());
 		_shader.uploadUniform("u_isDepthEntity", entity->isDepthEntity());
-		_shader.uploadUniform("u_noTexture", entity->getDiffuseMap() == 0);
-		_shader.uploadUniform("u_uvMultiplier", vec2(1.0f));
+		_shader.uploadUniform("u_noTexture", (entity->getDiffuseMap() == 0));
 		_shader.uploadUniform("u_sampler_diffuse", 0);
-
-		// Text UV repeat fix
-		if (dynamic_cast<const TextEntity*>(entity) != nullptr)
-		{
-			_shader.uploadUniform("u_uvMultiplier", vec2(1.0f, 0.9f));
-		}
 
 		// Bind
 		glBindVertexArray(entity->getOglBuffer()->getVAO());

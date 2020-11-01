@@ -10,9 +10,9 @@ OpenGLBuffer::OpenGLBuffer(BufferType type, float data[], int dataCount)
 }
 
 // 2D
-OpenGLBuffer::OpenGLBuffer(float x, float y, float w, float h, bool centered)
+OpenGLBuffer::OpenGLBuffer(float x, float y, float w, float h, bool isCentered, bool isText)
 {
-	_create2D(x, y, w, h, centered);
+	_create2D(x, y, w, h, isCentered, isText);
 }
 
 void OpenGLBuffer::_create3D(BufferType type, float data[], int dataCount)
@@ -79,24 +79,40 @@ void OpenGLBuffer::_create3D(BufferType type, float data[], int dataCount)
 	glBindVertexArray(0);
 }
 
-void OpenGLBuffer::_create2D(float x, float y, float w, float h, bool centered)
+void OpenGLBuffer::_create2D(float x, float y, float w, float h, bool isCentered, bool isText)
 {
 	// Generate vertices
 	float* data = nullptr;
 
 	// Determine center point of the quad
-	if (centered)
+	if (isCentered)
 	{
-		data = new float[24]
+		if (isText)
 		{
-			x - (w / 2.0f) , y - (h / 2.0f) , 0.0f,  0.0f,
-			x + (w / 2.0f) , y - (h / 2.0f) , 1.0f, 0.0f,
-			x + (w / 2.0f) , y + (h / 2.0f) , 1.0f, 1.0f,
+			data = new float[24]
+			{
+				x - (w / 2.0f) , y - (h / 2.0f) , 0.0f, 0.0f,
+				x + (w / 2.0f) , y - (h / 2.0f) , 1.0f, 0.0f,
+				x + (w / 2.0f) , y + (h / 2.0f) , 1.0f, 0.9f,
 
-			x + (w / 2.0f) , y + (h / 2.0f) , 1.0f, 1.0f,
-			x - (w / 2.0f) , y + (h / 2.0f) , 0.0f,  1.0f,
-			x - (w / 2.0f) , y - (h / 2.0f) , 0.0f,  0.0f
-		};
+				x + (w / 2.0f) , y + (h / 2.0f) , 1.0f, 0.9f,
+				x - (w / 2.0f) , y + (h / 2.0f) , 0.0f, 0.9f,
+				x - (w / 2.0f) , y - (h / 2.0f) , 0.0f, 0.0f
+			};
+		}
+		else
+		{
+			data = new float[24]
+			{
+				x - (w / 2.0f) , y - (h / 2.0f) , 0.0f, 0.0f,
+				x + (w / 2.0f) , y - (h / 2.0f) , 1.0f, 0.0f,
+				x + (w / 2.0f) , y + (h / 2.0f) , 1.0f, 1.0f,
+
+				x + (w / 2.0f) , y + (h / 2.0f) , 1.0f, 1.0f,
+				x - (w / 2.0f) , y + (h / 2.0f) , 0.0f, 1.0f,
+				x - (w / 2.0f) , y - (h / 2.0f) , 0.0f, 0.0f
+			};
+		}
 	}
 	else
 	{
@@ -104,10 +120,10 @@ void OpenGLBuffer::_create2D(float x, float y, float w, float h, bool centered)
 		{
 			x,     y,     0.0f, 0.0f,
 			x + w, y,     1.0f, 0.0f,
-			x + w, y + h, 1.0f, 1.0f,
+			x + w, y + h, 1.0f, 0.9f,
 
-			x + w, y + h, 1.0f, 1.0f,
-			x,     y + h, 0.0f, 1.0f,
+			x + w, y + h, 1.0f, 0.9f,
+			x,     y + h, 0.0f, 0.9f,
 			x,     y,     0.0f, 0.0f
 		};
 	}

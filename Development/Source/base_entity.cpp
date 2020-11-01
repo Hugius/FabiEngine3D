@@ -18,18 +18,22 @@ void BaseEntity::load(const string& ID)
 	}
 }
 
-void BaseEntity::addOglBuffer(OpenGLBuffer * buffer)
+void BaseEntity::addOglBuffer(OpenGLBuffer * buffer, bool deleteOnDestroy)
 {
 	_oglBuffers.push_back(buffer);
+	_oglBufferMemoryManagement.push_back(deleteOnDestroy);
 }
 
 void BaseEntity::clearOglBuffers()
 {
-	for (auto& buffer : _oglBuffers)
+	for (unsigned int i = 0; i < _oglBuffers.size(); i++)
 	{
-		if (buffer != nullptr)
+		if (_oglBufferMemoryManagement[i])
 		{
-			delete buffer;
+			if (_oglBuffers[i] != nullptr)
+			{
+				delete _oglBuffers[i];
+			}
 		}
 	}
 

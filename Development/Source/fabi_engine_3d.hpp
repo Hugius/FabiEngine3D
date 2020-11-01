@@ -434,8 +434,8 @@ public:
 	vector<string> lightEntity_getAllIDs();
 
 	// Gui entity interface - setters
-	void guiEntity_add(const string& ID, const string& texturePath, vec2 translation, float rotation, vec2 scaling, bool centered, bool visible = true);
-	void guiEntity_add(const string& ID, vec3 color, vec2 translation, float rotation, vec2 scaling, bool centered, bool visible = true);
+	void guiEntity_add(const string& ID, const string& texturePath, vec2 translation, float rotation, vec2 scaling, bool isCentered, bool visible = true);
+	void guiEntity_add(const string& ID, vec3 color, vec2 translation, float rotation, vec2 scaling, bool isCentered, bool visible = true);
 	void guiEntity_deleteAll();
 	void guiEntity_delete(const string& ID);
 	void guiEntity_hideAll();
@@ -471,7 +471,7 @@ public:
 	(
 		const string& ID, const string& text,
 		const string& fontPath, vec3 color,
-		vec2 position, float rotation, vec2 size, bool centered
+		vec2 position, float rotation, vec2 size, bool isCentered
 	);
 	void textEntity_deleteAll();
 	void textEntity_delete(const string& ID);
@@ -688,7 +688,7 @@ public:
 	void misc_setMainRenderingColor(vec3 color);
 	void misc_setWindowTitle(const string& title);
 	void misc_clearOBJCache(const string& filePath);
-	void misc_clearTextCache(const string& filePath);
+	void misc_clearTextCache(const string& textContent, const string& fontPath);
 	void misc_clearFontCache(const string& filePath);
 	void misc_clearTextureCache(const string& filePath);
 	void misc_clearCubeMapCache(const array<string, 6>& filePaths);

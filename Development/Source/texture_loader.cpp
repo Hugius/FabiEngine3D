@@ -1,13 +1,13 @@
 #include "texture_loader.hpp"
 #include "logger.hpp"
 
-GLuint TextureLoader::getText(const string& text, const string& filePath)
+GLuint TextureLoader::getText(const string& textContent, const string& fontPath)
 {
-	begin: auto it = _texts.find(text);
-	if (it == _texts.end()) // Not in map (yet)
+	begin: auto it = _textMaps.find(make_pair(textContent, fontPath));
+	if (it == _textMaps.end()) // Not in map (yet)
 	{
-		GLuint tempTxt = _loadText(text, filePath);
-		_texts.insert(std::make_pair(text, tempTxt));
+		GLuint tempTxt = _loadText(textContent, fontPath);
+		_textMaps.insert(make_pair(make_pair(textContent, fontPath), tempTxt));
 		goto begin;
 	}
 
@@ -53,12 +53,12 @@ vector<float>& TextureLoader::getHeightMap(const string& filePath)
 	return it->second; // Cache texture
 }
 
-void TextureLoader::clearTextCache(const string& filePath)
+void TextureLoader::clearTextCache(const string& textContent, const string& fontPath)
 {
-	if (_texts.find(filePath) != _texts.end())
+	if (_textMaps.find(make_pair(textContent, fontPath)) != _textMaps.end())
 	{
-		glDeleteTextures(1, &_texts[filePath]);
-		_texts.erase(filePath);
+		glDeleteTextures(1, &_textMaps[make_pair(textContent, fontPath)]);
+		_textMaps.erase(make_pair(textContent, fontPath));
 	}
 }
 

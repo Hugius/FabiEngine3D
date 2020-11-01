@@ -28,7 +28,7 @@ void ScriptEditor::_reloadScriptTextDisplay()
 			_fe3d.billBoardEntity_add(lineNumberID, lineNumberString, _fontPath, _lineNumberColor, lineNumberPosition, vec3(0.0f), lineNumberSize, 0, 0);
 			vec3 aabbPosition = lineNumberPosition - vec3(0.0f, _textCharacterSize.y / 2.0f, 0.0f);
 			vec3 aabbSize = vec3(_textCharacterSize.x * static_cast<float>(_maxCharactersPerLine * 2), _textCharacterSize.y, 0.05f);
-			//_fe3d.aabbEntity_add(lineNumberID, aabbPosition, aabbSize, true);
+			_fe3d.aabbEntity_add(lineNumberID, aabbPosition, aabbSize, true);
 
 			// Create line text display billboard
 			_fe3d.billBoardEntity_add(lineTextID, lineTextString, _fontPath, _characterColor, lineTextPosition, vec3(0.0f), lineTextSize, false, false);
@@ -43,7 +43,7 @@ void ScriptEditor::_reloadScriptTextDisplay()
 
 				// Create new billboard
 				_fe3d.billBoardEntity_add(characterID, vec3(0.0f), characterPosition, vec3(0.0f), _textCharacterSize, false, false, false);
-				//_fe3d.aabbEntity_bindToBillboardEntity(characterID, true);
+				_fe3d.aabbEntity_bindToBillboardEntity(characterID, true);
 			}
 		}
 	}

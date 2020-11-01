@@ -17,7 +17,7 @@ class OpenGLBuffer final
 public:
 	OpenGLBuffer() = delete;
 	OpenGLBuffer(BufferType type, float data[], int dataCount);   // 3D
-	OpenGLBuffer(float x, float y, float w, float h, bool centered); // 2D
+	OpenGLBuffer(float x, float y, float w, float h, bool isCentered, bool isText); // 2D
 	~OpenGLBuffer();
 	
 	void addInstancing(const vector<vec3>& offsets);
@@ -36,7 +36,7 @@ public:
 
 private:
 	void _create3D(BufferType type, float data[], int dataCount);
-	void _create2D(float x, float y, float w, float h, bool centered);
+	void _create2D(float x, float y, float w, float h, bool isCentered, bool isText);
 	
 	unsigned int _vertexCount;
 	unsigned int _offsetCount;

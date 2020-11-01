@@ -155,9 +155,9 @@ void FabiEngine3D::misc_clearOBJCache(const string& filePath)
 	_core->_objLoader.clearOBJCache(filePath);
 }
 
-void FabiEngine3D::misc_clearTextCache(const string& filePath)
+void FabiEngine3D::misc_clearTextCache(const string& textContent, const string& fontPath)
 {
-	_core->_texLoader.clearTextCache(filePath);
+	_core->_texLoader.clearTextCache(textContent, fontPath);
 }
 
 void FabiEngine3D::misc_clearFontCache(const string& filePath)

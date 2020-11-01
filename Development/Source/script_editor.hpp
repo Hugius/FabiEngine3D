@@ -66,6 +66,7 @@ private:
 	const float _verticalLineOffset = 1.0f;
 	const float _horizontalLineOffset = 0.5f;
 	const float _cameraOffset = (_verticalLineOffset * (_maxVisibleLines / 2.0f)) - (_textCharacterSize.y / 2.0f);
+	const string _allWritableCharacters = " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*().,/;\'[]\\-=><?:\"{}|_+";
 	const string _letterCharacters = " abcdefghijklmnopqrstuvwxyz";
 	const vector<pair<char, char>> _numberCharacters =
 	{
@@ -82,15 +83,15 @@ private:
 	};
 	const vector<pair<char, char>> _specialCharacters =
 	{
-		{'.', '>'},
-		{',', '<'},
-		{'/', '?'},
-		{';', ':'},
+		{'.', '>'  },
+		{',', '<'  },
+		{'/', '?'  },
+		{';', ':'  },
 		{'\'', '\"'},
-		{'[', '{'},
-		{']', '}'},
-		{'\\', '|'},
-		{'-', '_'},
-		{'=', '+'}
+		{'[', '{'  },
+		{']', '}'  },
+		{'\\', '|' },
+		{'-', '_'  },
+		{'=', '+'  }
 	};
 };

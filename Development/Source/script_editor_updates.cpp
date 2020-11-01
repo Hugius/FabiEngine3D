@@ -78,7 +78,7 @@ void ScriptEditor::_updateMiscellaneous()
 			if (!_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isCursorInsideViewport())
 			{
 				// Camera movement input
-				if (_fe3d.input_getMouseWheelY() == -1 && currentLineIndex > (_maxVisibleLines - 1))
+				if (_fe3d.input_getMouseWheelY() == -1 && lineCount > (_maxVisibleLines - 1))
 				{
 					_scrollingAcceleration -= _scrollingSpeed;
 				}
@@ -100,7 +100,7 @@ void ScriptEditor::_updateMiscellaneous()
 			}
 
 			// Check if code is out of screen
-			if (currentLineIndex > (_maxVisibleLines - 1))
+			if (lineCount > (_maxVisibleLines - 1))
 			{
 				if (_fe3d.camera_getPosition().y < (lastLineHeight + _cameraOffset)) // Camera must not go out of screen
 				{
@@ -111,6 +111,11 @@ void ScriptEditor::_updateMiscellaneous()
 				{
 					_scrollingAcceleration = 0.0f;
 				}
+			}
+			else // Reset camera position if too little amount of lines
+			{
+				_scrollingAcceleration = 0.0f;
+				_fe3d.camera_setPosition(_cameraStartingPosition);
 			}
 
 			// Synchronize camera position whenever writers adds or removes a line

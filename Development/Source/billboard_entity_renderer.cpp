@@ -75,8 +75,18 @@ void BillboardEntityRenderer::render(const BillboardEntity* entity)
 		glBindVertexArray(entity->getOglBuffer()->getVAO());
 
 		// Render
-		glDrawArrays(GL_TRIANGLES, 0, entity->getOglBuffer()->getVertexCount());
-		_renderBus.increaseTriangleCount(entity->getOglBuffer()->getVertexCount() / 3);
+		if (entity->getOglBuffer()->isInstanced()) // Instanced
+		{
+			_shader.uploadUniform("u_isInstanced", true);
+			glDrawArraysInstanced(GL_TRIANGLES, 0, entity->getOglBuffer()->getVertexCount(), entity->getOglBuffer()->getInstancedOffsetCount());
+			_renderBus.increaseTriangleCount((entity->getOglBuffer()->getInstancedOffsetCount() * entity->getOglBuffer()->getVertexCount()) / 3);
+		}
+		else // Non-instanced
+		{
+			_shader.uploadUniform("u_isInstanced", false);
+			glDrawArrays(GL_TRIANGLES, 0, entity->getOglBuffer()->getVertexCount());
+			_renderBus.increaseTriangleCount(entity->getOglBuffer()->getVertexCount() / 3);
+		}
 
 		// Unbind
 		glActiveTexture(GL_TEXTURE0);

@@ -1,4 +1,4 @@
-10 39
+14 86
 META script_type_update
 META execution_entry
 
@@ -9,4 +9,8 @@ IF fe3d:input_key_down("KEY_SPACE") IS <true>:
     fe3d:camera_move(0.0, 0.01, 0.0)
 
 IF ctrl IS <true>:
-    fe3d:camera_move(0.0 , -0.01 , 0.0 )
+    fe3d:camera_move(0.0 , -0.01 , 0.0)
+
+ogergreoeiorgkieorgkoergkerkergergerigkoergkoergkoiergkieorieorgoierkgioerkgieriergoergk
+eirogoregkioergkioerkgeriogkeorgkeorigkreiogkieorgkiorekgoierkgoierkogierkogierkgoierkogi
+0ke0fkekk0gk0kekgekrgegkg0regergerkg0erkg0ekr0iekr0ekrgiekri0erkig0ergk0irek0eirkg0ker

@@ -55,9 +55,9 @@ private:
 	const vec3 _characterColor = vec3(1.0f);
 	const vec2 _textCharacterSize = vec2(0.25f, 0.75f);
 	const unsigned int _continuousTextActionFrameMinimum = 75;
-	const unsigned int _continuousTextActionInterval = 10;
+	const unsigned int _continuousTextActionInterval = 5;
 	const unsigned int _maxPassedBarFrames = 50;
-	const unsigned int _maxCharactersPerLine = 98;
+	const unsigned int _maxCharactersPerLine = 88;
 	const unsigned int _maxLineAmount = 100;
 	const unsigned int _maxVisibleLines = 13;
 	const float _scrollingSpeed = 0.1f;

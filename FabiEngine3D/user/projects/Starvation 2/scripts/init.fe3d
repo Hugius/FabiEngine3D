@@ -1,13 +1,5 @@
-4 15
+2 0
 META script_type_init
 META execution_entry
 
-INT kip = -1
-fe3d:print(kip)
-
-IF kip IS -1:
-    fe3d:print("fabienne is dik")
-
-BOOL schaap = fe3d:input_key_down("KEY_W")
-fe3d:print(schaap)
 fe3d:scene_load("scene")

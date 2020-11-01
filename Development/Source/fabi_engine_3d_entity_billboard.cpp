@@ -205,6 +205,18 @@ vector<string> FabiEngine3D::billboardEntity_getAllIDs()
 	return IDs;
 }
 
+vector<vec3> FabiEngine3D::billboardEntity_getInstancedOffsets(const string& ID)
+{
+	if (billboardEntity_isInstanced(ID))
+	{
+		return _core->_billboardEntityManager.getEntity(ID)->getOglBuffer(0)->getInstancedOffsets();
+	}
+	else
+	{
+		return {};
+	}
+}
+
 void FabiEngine3D::billboardEntity_setCameraFacingX(const string& ID, bool enabled)
 {
 	_core->_billboardEntityManager.getEntity(ID)->setCameraFacingX(enabled);
@@ -230,6 +242,32 @@ void FabiEngine3D::billboardEntity_setLightness(const string& ID, float lightnes
 	_core->_billboardEntityManager.getEntity(ID)->setLightness(lightness);
 }
 
+void FabiEngine3D::billboardEntity_setInstanced(const string& ID, bool instanced, vector<vec3> offsets)
+{
+	if (instanced) // Add instancing
+	{
+		for (auto& buffer : _core->_billboardEntityManager.getEntity(ID)->getOglBuffers())
+		{
+			if (buffer->isInstanced())
+			{
+				buffer->removeInstancing();
+			}
+
+			buffer->addInstancing(offsets);
+		}
+	}
+	else // Remove instancing
+	{
+		for (auto& buffer : _core->_billboardEntityManager.getEntity(ID)->getOglBuffers())
+		{
+			if (buffer->isInstanced())
+			{
+				buffer->removeInstancing();
+			}
+		}
+	}
+}
+
 bool FabiEngine3D::billboardEntity_isFacingCameraX(const string& ID)
 {
 	return _core->_billboardEntityManager.getEntity(ID)->isCameraFacingX();
@@ -243,6 +281,18 @@ bool FabiEngine3D::billboardEntity_isFacingCameraY(const string& ID)
 bool FabiEngine3D::billboardEntity_isDepthMapIncluded(const string& ID)
 {
 	return _core->_billboardEntityManager.getEntity(ID)->isDepthMapIncluded();
+}
+
+bool FabiEngine3D::billboardEntity_isInstanced(const string& ID)
+{
+	if (!_core->_billboardEntityManager.getEntity(ID)->getOglBuffers().empty())
+	{
+		return _core->_billboardEntityManager.getEntity(ID)->getOglBuffer(0)->isInstanced();
+	}
+	else
+	{
+		return false;
+	}
 }
 
 void FabiEngine3D::billBoardEntity_setFont(const string& ID, const string& fontPath)

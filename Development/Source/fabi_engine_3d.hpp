@@ -315,6 +315,7 @@ public:
 	void billboardEntity_setDepthMapIncluded(const string& ID, bool enabled);
 	void billboardEntity_setMaxY(const string& ID, float y);
 	void billboardEntity_setLightness(const string& ID, float lightness);
+	void billboardEntity_setInstanced(const string& ID, bool instanced, vector<vec3> offsets);
 
 	// Billboard entity interface (core) - getters
 	float billboardEntity_getOriginalLightness(const string& ID);
@@ -324,11 +325,13 @@ public:
 	bool  billboardEntity_isFacingCameraX(const string& ID);
 	bool  billboardEntity_isFacingCameraY(const string& ID);
 	bool  billboardEntity_isDepthMapIncluded(const string& ID);
+	bool  billboardEntity_isInstanced(const string& ID);
 	vec3  billboardEntity_getPosition(const string& ID);
 	vec3  billboardEntity_getRotation(const string& ID);
 	vec2  billboardEntity_getSize(const string& ID);
 	vec3  billboardEntity_getColor(const string& ID);
 	vector<string> billboardEntity_getAllIDs();
+	vector<vec3>   billboardEntity_getInstancedOffsets(const string& ID);
 
 	// Billboard entity interface (diffuseMap) - setters
 	void billBoardEntity_add

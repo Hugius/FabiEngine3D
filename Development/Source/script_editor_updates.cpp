@@ -117,7 +117,6 @@ void ScriptEditor::_updateMiscellaneous()
 			static unsigned int lastLineIndex = currentLineIndex;
 			if ((currentLineIndex > (_maxVisibleLines - 1)) && (currentLineIndex != lastLineIndex) && (currentLineIndex == lineCount - 1))
 			{
-				std::cout << "1";
 				_scrollingAcceleration = 0.0f;
 				float currentLineHeight = _fe3d.billboardEntity_getPosition(to_string(currentLineIndex)).y;
 				_fe3d.camera_setPosition(vec3(_cameraStartingPosition.x, currentLineHeight + _cameraOffset, _cameraStartingPosition.z));
@@ -133,15 +132,19 @@ void ScriptEditor::_updateMiscellaneous()
 		// Stop rendering all text not visible by the camera
 		for (auto& ID : _fe3d.billboardEntity_getAllIDs())
 		{
-			// Check if billboard is outside of camera view
-			if ((_fe3d.billboardEntity_getPosition(ID).y - (_textCharacterSize.y)) <= (_fe3d.camera_getPosition().y + _cameraOffset) &&
-				(_fe3d.billboardEntity_getPosition(ID).y + (_textCharacterSize.y)) >= (_fe3d.camera_getPosition().y - _cameraOffset))
+			// Check if a displaying billboard (and not a logical billboard)
+			if(ID.size() >= 4 && (ID.substr(ID.size() - 4, 4) == "text"))
 			{
-				_fe3d.billboardEntity_show(ID);
-			}
-			else
-			{
-				_fe3d.billboardEntity_hide(ID);
+				// Check if billboard is outside of camera view
+				if ((_fe3d.billboardEntity_getPosition(ID).y - (_textCharacterSize.y)) <= (_fe3d.camera_getPosition().y + _cameraOffset) &&
+					(_fe3d.billboardEntity_getPosition(ID).y + (_textCharacterSize.y)) >= (_fe3d.camera_getPosition().y - _cameraOffset))
+				{
+					_fe3d.billboardEntity_show(ID);
+				}
+				else
+				{
+					_fe3d.billboardEntity_hide(ID);
+				}
 			}
 		}
 

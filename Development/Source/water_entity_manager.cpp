@@ -4,19 +4,19 @@
 #include <iostream>
 
 WaterEntityManager::WaterEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, RenderBus& renderBus) :
-	BaseEntityManager(objLoader, texLoader, renderBus)
+	BaseEntityManager(EntityType::WATER, objLoader, texLoader, renderBus)
 {
 
 }
 
-WaterEntity * WaterEntityManager::getEntity(const string& ID)
+shared_ptr<WaterEntity> WaterEntityManager::getEntity(const string& ID)
 {
-	return dynamic_cast<WaterEntity*>(_getBaseEntity(ID, EntityType::WATER));
+	return _getWaterEntity(ID);
 }
 
-WaterEntity * WaterEntityManager::getSelectedWater()
+shared_ptr<WaterEntity> WaterEntityManager::getSelectedWater()
 {
-	if (_getBaseEntities().empty() || _selectedID == "")
+	if (_getWaterEntities().empty() || _selectedID == "")
 	{
 		return nullptr;
 	}
@@ -26,16 +26,9 @@ WaterEntity * WaterEntityManager::getSelectedWater()
 	}
 }
 
-const vector<WaterEntity*> WaterEntityManager::getEntities()
+const vector<shared_ptr<WaterEntity>> WaterEntityManager::getEntities()
 {
-	vector<WaterEntity*> newVector;
-
-	for (auto& entity : _getBaseEntities())
-	{
-		newVector.push_back(dynamic_cast<WaterEntity*>(entity));
-	}
-
-	return newVector;
+	return _getWaterEntities();
 }
 
 void WaterEntityManager::selectWater(const string& ID)
@@ -45,7 +38,7 @@ void WaterEntityManager::selectWater(const string& ID)
 
 void WaterEntityManager::addWaterEntity(const string& ID)
 {
-	_createEntity(EntityType::WATER, ID)->load(ID);
+	_createEntity(ID);
 }
 
 void WaterEntityManager::generateModel(const string& ID)
@@ -162,21 +155,18 @@ void WaterEntityManager::update()
 	}
 
 	// Update all water entities
-	for (auto & baseEntity : _getBaseEntities())
+	for (auto& entity : _getWaterEntities())
 	{
-		// Create temporary water entity object
-		auto * water = getEntity(baseEntity->getID());
-
 		// Update water animations (rippling & waving)
-		if (water->isVisible() && _renderBus.isWaterEffectsEnabled())
+		if (entity->isVisible() && _renderBus.isWaterEffectsEnabled())
 		{
 			// Update ripple speed
-			vec2 newOffset = water->getRippleOffset() + water->getSpeed();
+			vec2 newOffset = entity->getRippleOffset() + entity->getSpeed();
 			newOffset = vec2(fmod(newOffset.x, 1.0f), fmod(newOffset.y, 1.0f));
-			water->setRippleOffset(newOffset);
+			entity->setRippleOffset(newOffset);
 
 			// Update waving speed (must be 25% slower)
-			water->setWaveOffset(water->getWaveOffset() + (water->getSpeed() / 4.0f));
+			entity->setWaveOffset(entity->getWaveOffset() + (entity->getSpeed() / 4.0f));
 		}
 	}
 }

@@ -15,10 +15,10 @@ public:
 	void bind()   override;
 	void unbind() override;
 
-	GLuint blurTexture(const GuiEntity * entity, GLuint texture, int index, int size, float intensity, BlurDirection direction);
+	GLuint blurTexture(const shared_ptr<GuiEntity> entity, GLuint texture, int index, int size, float intensity, BlurDirection direction);
 
 private:
-	void _render(const GuiEntity * entity, GLuint texture);
+	void _render(const shared_ptr<GuiEntity> entity, GLuint texture);
 
 	vector<OpenGLFramebuffer*> _horizontalFramebuffers;
 	vector<OpenGLFramebuffer*> _verticalFramebuffers;

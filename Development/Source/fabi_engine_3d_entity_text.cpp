@@ -3,7 +3,7 @@
 
 void FabiEngine3D::textEntity_deleteAll()
 {
-	_core->_textEntityManager.deleteEntities();
+	_core->_textEntityManager.deleteAllEntities();
 }
 
 void FabiEngine3D::textEntity_hideAll()
@@ -30,7 +30,7 @@ void FabiEngine3D::textEntity_add(const string& ID, const string& textContent, c
 
 void FabiEngine3D::textEntity_delete(const string& ID)
 {
-	_core->_textEntityManager.deleteEntity(ID, EntityType::TEXT);
+	_core->_textEntityManager.deleteEntity(ID);
 }
 
 bool FabiEngine3D::textEntity_isExisting(const string& ID)

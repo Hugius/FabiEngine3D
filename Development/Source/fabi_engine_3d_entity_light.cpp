@@ -3,7 +3,7 @@
 
 void FabiEngine3D::lightEntity_deleteAll()
 {
-	_core->_lightEntityManager.deleteEntities();
+	_core->_lightEntityManager.deleteAllEntities();
 }
 
 void FabiEngine3D::lightEntity_add(const string& ID, vec3 position, vec3 color, float intensity, float distanceFactor, bool visible)
@@ -14,7 +14,7 @@ void FabiEngine3D::lightEntity_add(const string& ID, vec3 position, vec3 color, 
 
 void FabiEngine3D::lightEntity_delete(const string& ID)
 {
-	_core->_lightEntityManager.deleteEntity(ID, EntityType::LIGHT);
+	_core->_lightEntityManager.deleteEntity(ID);
 }
 
 void FabiEngine3D::lightEntity_hide(const string& ID)

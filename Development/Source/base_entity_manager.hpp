@@ -15,32 +15,59 @@
 #include "text_entity.hpp"
 #include "entity_type.hpp"
 
+#include <memory>
+
+using std::shared_ptr;
+
 class BaseEntityManager
 {
 public:
-	BaseEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, RenderBus& renderBus);
-	virtual ~BaseEntityManager();
+	BaseEntityManager(EntityType type, OBJLoader& objLoader, TextureLoader& texLoader, RenderBus& renderBus);
+	~BaseEntityManager() = default;
 
-	void deleteEntity(const string& ID, EntityType type);
-	void deleteEntities();
+	void deleteEntity(const string& ID);
+	void deleteAllEntities();
 
 	bool isExisting(const string& ID);
-
-	virtual BaseEntity * getEntity(const string& ID) = 0;
 
 	virtual void update() = 0;
 
 protected:
+	EntityType	   _type;
 	OBJLoader&     _objLoader;
 	TextureLoader& _texLoader;
 	RenderBus&     _renderBus;
 
-	BaseEntity * _createEntity(EntityType type, const string& ID);
+	void _createEntity(const string& ID);
 
-	vector<BaseEntity*> & _getBaseEntities();
+	vector<shared_ptr<AabbEntity>>& _getAabbEntities();
+	vector<shared_ptr<BillboardEntity>>& _getBillboardEntities();
+	vector<shared_ptr<GameEntity>>& _getGameEntities();
+	vector<shared_ptr<GuiEntity>>& _getGuiEntities();
+	vector<shared_ptr<LightEntity>>& _getLightEntities();
+	vector<shared_ptr<SkyEntity>>& _getSkyEntities();
+	vector<shared_ptr<TerrainEntity>>& _getTerrainEntities();
+	vector<shared_ptr<TextEntity>>& _getTextEntities();
+	vector<shared_ptr<WaterEntity>>& _getWaterEntities();
 	
-	BaseEntity * _getBaseEntity(const string& ID, EntityType type);
+	shared_ptr<AabbEntity> _getAabbEntity(const string& ID);
+	shared_ptr<BillboardEntity> _getBillboardEntity(const string& ID);
+	shared_ptr<GameEntity> _getGameEntity(const string& ID);
+	shared_ptr<GuiEntity> _getGuiEntity(const string& ID);
+	shared_ptr<LightEntity> _getLightEntity(const string& ID);
+	shared_ptr<SkyEntity> _getSkyEntity(const string& ID);
+	shared_ptr<TerrainEntity> _getTerrainEntity(const string& ID);
+	shared_ptr<TextEntity> _getTextEntity(const string& ID);
+	shared_ptr<WaterEntity> _getWaterEntity(const string& ID);
 
 private:
-	vector<BaseEntity*> _entities;
+	vector<shared_ptr<AabbEntity>> _aabbEntities;
+	vector<shared_ptr<BillboardEntity>> _billboardEntities;
+	vector<shared_ptr<GameEntity>> _gameEntities;
+	vector<shared_ptr<GuiEntity>> _guiEntities;
+	vector<shared_ptr<LightEntity>> _lightEntities;
+	vector<shared_ptr<SkyEntity>> _skyEntities;
+	vector<shared_ptr<TerrainEntity>> _terrainEntities;
+	vector<shared_ptr<TextEntity>> _textEntities;
+	vector<shared_ptr<WaterEntity>> _waterEntities;
 };

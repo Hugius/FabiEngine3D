@@ -12,7 +12,7 @@ using glm::mat4;
 class GuiEntity : public BaseEntity
 {
 public:
-	GuiEntity()  = default;
+	using BaseEntity::BaseEntity;
 	~GuiEntity() = default;
 
 	// Model matrix

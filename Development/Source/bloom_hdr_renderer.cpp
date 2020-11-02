@@ -12,7 +12,7 @@ void BloomHdrRenderer::unbind()
 	_shader.unbind();
 }
 
-void BloomHdrRenderer::render(const GuiEntity * entity, GLuint sceneMap)
+void BloomHdrRenderer::render(const shared_ptr<GuiEntity> entity, GLuint sceneMap)
 {
 	if (entity->isVisible())
 	{

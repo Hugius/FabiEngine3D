@@ -27,7 +27,7 @@ void DepthRenderer::unbind()
 	_shader.unbind();
 }
 
-void DepthRenderer::render(const TerrainEntity* entity)
+void DepthRenderer::render(const shared_ptr<TerrainEntity> entity)
 {
 	if (entity->isVisible())
 	{
@@ -58,7 +58,7 @@ void DepthRenderer::render(const TerrainEntity* entity)
 	}
 }
 
-void DepthRenderer::render(const WaterEntity* entity)
+void DepthRenderer::render(const shared_ptr<WaterEntity> entity)
 {
 	if (entity->isVisible())
 	{
@@ -80,7 +80,7 @@ void DepthRenderer::render(const WaterEntity* entity)
 	}
 }
 
-void DepthRenderer::render(const GameEntity* entity)
+void DepthRenderer::render(const shared_ptr<GameEntity> entity)
 {
 	if (entity->isVisible())
 	{
@@ -148,7 +148,7 @@ void DepthRenderer::render(const GameEntity* entity)
 	}
 }
 
-void DepthRenderer::render(const BillboardEntity* entity)
+void DepthRenderer::render(const shared_ptr<BillboardEntity> entity)
 {
 	if (entity->isVisible())
 	{
@@ -203,7 +203,7 @@ void DepthRenderer::render(const BillboardEntity* entity)
 	}
 }
 
-void DepthRenderer::render(const AabbEntity* entity)
+void DepthRenderer::render(const shared_ptr<AabbEntity> entity)
 {
 	if (entity->isVisible())
 	{

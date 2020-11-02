@@ -11,7 +11,7 @@ using glm::mat4;
 class BillboardEntity final: public BaseEntity
 {
 public:
-	BillboardEntity()  = default;
+	using BaseEntity::BaseEntity;
 	~BillboardEntity() = default;
 
 	// Updates

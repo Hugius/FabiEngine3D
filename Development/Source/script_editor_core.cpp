@@ -30,7 +30,7 @@ void ScriptEditor::load()
 	_fe3d.camera_load(70.0f, 0.1f, 10000.0f, _cameraStartingPosition, -90.0f);
 
 	// Graphics
-	_fe3d.gfx_enableDirectionalLighting(vec3(100.0f), vec3(1.0f), 0.5f);
+	_fe3d.gfx_enableDirectionalLighting(vec3(1000.0f), vec3(1.0f), 0.5f);
 	_fe3d.gfx_enableSpecularLighting();
 	_fe3d.gfx_enableNormalMapping();
 	_fe3d.gfx_enablePointLighting();
@@ -41,7 +41,7 @@ void ScriptEditor::load()
 	_fe3d.gameEntity_setNormalMap("background", "engine\\textures\\brick_normal.png");
 	_fe3d.gameEntity_setSpecularLighted("background", true);
 	_fe3d.gameEntity_setSpecularFactor("background", 32.0f);
-	_fe3d.gameEntity_setSpecularIntensity("background", 1.0f);
+	_fe3d.gameEntity_setSpecularIntensity("background", 1.5f);
 	_fe3d.gameEntity_setUvRepeat("background", (static_cast<float>(_maxLineAmount) * 1.1f) * 0.25f);
 	_fe3d.gameEntity_setNormalMapped("background", true);
 

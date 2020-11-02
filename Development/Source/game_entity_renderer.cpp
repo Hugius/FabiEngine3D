@@ -85,7 +85,7 @@ void GameEntityRenderer::unbind()
 	_shader.unbind();
 }
 
-void GameEntityRenderer::renderLightEntities(const vector<LightEntity*>& entities)
+void GameEntityRenderer::renderLightEntities(const vector<shared_ptr<LightEntity>>& entities)
 {
 	_shader.uploadUniform("u_pointLightCount", static_cast<int>(entities.size()));
 
@@ -109,7 +109,7 @@ void GameEntityRenderer::renderLightEntities(const vector<LightEntity*>& entitie
 	}
 }
 
-void GameEntityRenderer::render(const GameEntity* entity)
+void GameEntityRenderer::render(const shared_ptr<GameEntity> entity)
 {
 	if (entity->isVisible())
 	{

@@ -8,9 +8,9 @@ public:
 	TextEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, RenderBus& renderBus);
 	~TextEntityManager();
 
-	TextEntity* getEntity(const string& ID) override;
+	shared_ptr<TextEntity> getEntity(const string& ID);
 
-	const vector<TextEntity*> getEntities();
+	const vector<shared_ptr<TextEntity>> getEntities();
 
 	void addTextEntity
 	(

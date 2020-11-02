@@ -57,7 +57,7 @@ void TerrainEntityRenderer::unbind()
 	_shader.unbind();
 }
 
-void TerrainEntityRenderer::renderLightEntities(const vector<LightEntity*>& entities)
+void TerrainEntityRenderer::renderLightEntities(const vector<shared_ptr<LightEntity>>& entities)
 {
 	// Upload
 	_shader.uploadUniform("u_pointLightCount", static_cast<int>(entities.size()));
@@ -82,7 +82,7 @@ void TerrainEntityRenderer::renderLightEntities(const vector<LightEntity*>& enti
 	}
 }
 
-void TerrainEntityRenderer::render(const TerrainEntity* entity)
+void TerrainEntityRenderer::render(const shared_ptr<TerrainEntity> entity)
 {
 	if (entity->isVisible())
 	{

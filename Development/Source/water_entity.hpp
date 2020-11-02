@@ -5,7 +5,7 @@
 class WaterEntity final : public BaseEntity
 {
 public:
-	WaterEntity()  = default;
+	using BaseEntity::BaseEntity;
 	~WaterEntity() = default;
 	
 	// Setters

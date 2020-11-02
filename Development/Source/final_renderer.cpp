@@ -15,7 +15,7 @@ void FinalRenderer::unbind()
 	_shader.unbind();
 }
 
-void FinalRenderer::render(const GuiEntity* entity, GLuint sceneMap)
+void FinalRenderer::render(const shared_ptr<GuiEntity> entity, GLuint sceneMap)
 {
 	if (entity->isVisible())
 	{

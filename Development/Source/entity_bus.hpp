@@ -15,37 +15,37 @@ class EntityBus final
 public:
 	EntityBus
 	(
-		const SkyEntity     * skyEntity,
-		const TerrainEntity * terrainEntity,
-		const WaterEntity   * waterEntity,
-		const vector<GameEntity*>      & gameEntities,
-		const vector<BillboardEntity*> & billboardEntities,
-		const vector<AabbEntity*>      & aabbEntities,
-		const vector<LightEntity*>     & lightEntities,
-		const vector<GuiEntity*>       & guiEntities,
-		const vector<TextEntity*>      & textEntities
+		const shared_ptr<SkyEntity> skyEntity,
+		const shared_ptr<TerrainEntity> terrainEntity,
+		const shared_ptr<WaterEntity> waterEntity,
+		const vector<shared_ptr<GameEntity>>      & gameEntities,
+		const vector<shared_ptr<BillboardEntity>> & billboardEntities,
+		const vector<shared_ptr<AabbEntity>>      & aabbEntities,
+		const vector<shared_ptr<LightEntity>>     & lightEntities,
+		const vector<shared_ptr<GuiEntity>>       & guiEntities,
+		const vector<shared_ptr<TextEntity>>      & textEntities
 	);
 
-	const SkyEntity     * getSkyEntity()     const;
-	const TerrainEntity * getTerrainEntity() const;
-	const WaterEntity   * getWaterEntity()   const;
+	const shared_ptr<SkyEntity> getSkyEntity()		   const;
+	const shared_ptr<TerrainEntity> getTerrainEntity() const;
+	const shared_ptr<WaterEntity> getWaterEntity()     const;
 
-	const vector<GameEntity*>      & getGameEntities()      const;
-	const vector<BillboardEntity*> & getBillboardEntities() const;
-	const vector<AabbEntity*>      & getAabbEntities()      const;
-	const vector<LightEntity*>     & getLightEntities()     const;
-	const vector<GuiEntity*>       & getGuiEntities()       const;
-	const vector<TextEntity*>      & getTextEntities()      const;
+	const vector<shared_ptr<GameEntity>>      & getGameEntities()      const;
+	const vector<shared_ptr<BillboardEntity>> & getBillboardEntities() const;
+	const vector<shared_ptr<AabbEntity>>      & getAabbEntities()      const;
+	const vector<shared_ptr<LightEntity>>     & getLightEntities()     const;
+	const vector<shared_ptr<GuiEntity>>       & getGuiEntities()       const;
+	const vector<shared_ptr<TextEntity>>      & getTextEntities()      const;
 
 private:
-	const SkyEntity     * _skyEntity     = nullptr;
-	const TerrainEntity * _terrainEntity = nullptr;
-	const WaterEntity   * _waterEntity   = nullptr;
+	const shared_ptr<SkyEntity> _skyEntity		   = nullptr;
+	const shared_ptr<TerrainEntity> _terrainEntity = nullptr;
+	const shared_ptr<WaterEntity> _waterEntity     = nullptr;
 	
-	const vector<GameEntity*>      _gameEntities;
-	const vector<BillboardEntity*> _billboardEntities;
-	const vector<AabbEntity*>      _aabbEntities;
-	const vector<LightEntity*>     _lightEntities;
-	const vector<GuiEntity*>       _guiEntities;
-	const vector<TextEntity*>      _textEntities;
+	const vector<shared_ptr<GameEntity>>      _gameEntities;
+	const vector<shared_ptr<BillboardEntity>> _billboardEntities;
+	const vector<shared_ptr<AabbEntity>>      _aabbEntities;
+	const vector<shared_ptr<LightEntity>>     _lightEntities;
+	const vector<shared_ptr<GuiEntity>>       _guiEntities;
+	const vector<shared_ptr<TextEntity>>      _textEntities;
 };

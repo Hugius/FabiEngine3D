@@ -23,7 +23,7 @@ void ShadowRenderer::unbind()
 	_shader.unbind();
 }
 
-void ShadowRenderer::render(const GameEntity* entity)
+void ShadowRenderer::render(const shared_ptr<GameEntity> entity)
 {
 	if (entity->isVisible() && !entity->getOglBuffers().empty() && entity->isShadowed())
 	{

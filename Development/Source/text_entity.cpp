@@ -1,12 +1,5 @@
 #include "text_entity.hpp"
 
-#include <iostream>
-
-TextEntity::~TextEntity()
-{
-	deleteCharacterEntities();
-}
-
 void TextEntity::setDynamic(bool value)
 {
 	_isDynamic = value;
@@ -14,11 +7,6 @@ void TextEntity::setDynamic(bool value)
 
 void TextEntity::deleteCharacterEntities()
 {
-	for (auto& character : _characters)
-	{
-		delete character;
-	}
-
 	_characters.clear();
 }
 
@@ -63,7 +51,7 @@ void TextEntity::updateCharacterEntities()
 	}
 }
 
-void TextEntity::addCharacterEntity(GuiEntity* character)
+void TextEntity::addCharacterEntity(shared_ptr<GuiEntity> character)
 {
 	_characters.push_back(character);
 }
@@ -83,7 +71,7 @@ bool TextEntity::isDynamic()
 	return _isDynamic;
 }
 
-const vector<GuiEntity*>& TextEntity::getCharacterEntities() const
+const vector<shared_ptr<GuiEntity>>& TextEntity::getCharacterEntities() const
 {
 	return _characters;
 }

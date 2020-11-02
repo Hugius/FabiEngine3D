@@ -9,10 +9,9 @@ using std::string;
 class BaseEntity
 {
 public:
-	BaseEntity() = default;
+	BaseEntity(const string& ID);
 	virtual ~BaseEntity();
 
-	void load(const string& ID);
 	void addOglBuffer(OpenGLBuffer* buffer, bool deleteOnDestroy = true);
 	void clearOglBuffers();
 	void setVisible(bool val);

@@ -10,6 +10,10 @@
 #include "gui_entity.hpp"
 #include "render_bus.hpp"
 
+#include <memory>
+
+using std::shared_ptr;
+
 class BaseEntityRenderer
 {
 public:

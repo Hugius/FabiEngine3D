@@ -8,9 +8,9 @@ public:
 	GameEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, RenderBus& renderBus);
 	~GameEntityManager() = default;
 
-	GameEntity * getEntity(const string& ID) override;
+	shared_ptr<GameEntity> getEntity(const string& ID);
 
-	const vector<GameEntity*> getEntities();
+	const vector<shared_ptr<GameEntity>> getEntities();
 
 	void addGameEntity
 	(

@@ -8,9 +8,9 @@ public:
 	GuiEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, RenderBus& renderBus);
 	~GuiEntityManager();
 
-	GuiEntity * getEntity(const string& ID) override;
+	shared_ptr<GuiEntity> getEntity(const string& ID);
 
-	const vector<GuiEntity*> getEntities();
+	const vector<shared_ptr<GuiEntity>> getEntities();
 
 	void addGuiEntity(const string& ID, const string& texturePath, vec2 translation, float rotation, vec2 scaling, bool engine, bool isCentered);
 	void addGuiEntity(const string& ID, vec3 color, vec2 translation, float rotation, vec2 scaling, bool isCentered);

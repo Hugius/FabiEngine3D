@@ -2,36 +2,34 @@
 #include "configuration.hpp"
 
 LightEntityManager::LightEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, RenderBus& renderBus) :
-	BaseEntityManager(objLoader, texLoader, renderBus)
+	BaseEntityManager(EntityType::LIGHT, objLoader, texLoader, renderBus)
 {
 
 }
 
-LightEntity * LightEntityManager::getEntity(const string& ID)
+shared_ptr<LightEntity> LightEntityManager::getEntity(const string& ID)
 {
-	return dynamic_cast<LightEntity*>(_getBaseEntity(ID, EntityType::LIGHT));
+	return _getLightEntity(ID);
 }
 
-const vector<LightEntity*> LightEntityManager::getEntities()
+const vector<shared_ptr<LightEntity>> LightEntityManager::getEntities()
 {
-	vector<LightEntity*> newVector;
-
-	for (auto& entity : _getBaseEntities())
-	{
-		newVector.push_back(dynamic_cast<LightEntity*>(entity));
-	}
-
-	return newVector;
+	return _getLightEntities();
 }
 
 void LightEntityManager::addLightEntity(const string& ID, vec3 position, vec3 color, float intensity, float distanceFactor)
 {
 	// Create entity
-	_createEntity(EntityType::LIGHT, ID)->load(ID);
+	_createEntity(ID);
 
 	// Fill entity
 	getEntity(ID)->setPosition(position);
 	getEntity(ID)->setColor(color);
 	getEntity(ID)->setIntensity(intensity);
 	getEntity(ID)->setDistanceFactor(distanceFactor);
+}
+
+void LightEntityManager::update()
+{
+
 }

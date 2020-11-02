@@ -2,8 +2,10 @@
 
 #include <iostream>
 
+using std::make_shared;
+
 TextEntityManager::TextEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, RenderBus& renderBus) :
-	BaseEntityManager(objLoader, texLoader, renderBus),
+	BaseEntityManager(EntityType::TEXT, objLoader, texLoader, renderBus),
 	_centeredOpenglBuffer(new OpenGLBuffer(0.0f, 0.0f, 1.0f, 1.0f, true, true)),
 	_nonCenteredOpenglBuffer(new OpenGLBuffer(0.0f, 0.0f, 1.0f, 1.0f, false, true))
 {
@@ -15,20 +17,14 @@ TextEntityManager::~TextEntityManager()
 	delete _nonCenteredOpenglBuffer;
 }
 
-TextEntity* TextEntityManager::getEntity(const string& ID)
+shared_ptr<TextEntity> TextEntityManager::getEntity(const string& ID)
 {
-	return dynamic_cast<TextEntity*>(_getBaseEntity(ID, EntityType::TEXT));
+	return _getTextEntity(ID);
 }
 
-const vector<TextEntity*> TextEntityManager::getEntities()
+const vector<shared_ptr<TextEntity>> TextEntityManager::getEntities()
 {
-	vector<TextEntity*> newVector;
-	for (auto & entity : _getBaseEntities())
-	{
-		newVector.push_back(dynamic_cast<TextEntity*>(entity));
-	}
-
-	return newVector;
+	return _getTextEntities();
 }
 
 void TextEntityManager::addTextEntity
@@ -44,12 +40,12 @@ void TextEntityManager::addTextEntity
 	{
 		if (isExisting(ID))
 		{
-			deleteEntity(ID, EntityType::TEXT);
+			deleteEntity(ID);
 		}
 	}
 
 	// Create entity
-	_createEntity(EntityType::TEXT, ID)->load(ID);
+	_createEntity(ID);
 	getEntity(ID)->setTextContent(textContent);
 	getEntity(ID)->setFontPath(fontPath);
 	getEntity(ID)->setColor(color);
@@ -84,7 +80,7 @@ void TextEntityManager::reloadCharacters(const string& ID)
 		for (auto& c : getEntity(ID)->getTextContent())
 		{
 			// Create new character entity
-			GuiEntity* newCharacter = new GuiEntity();
+			auto newCharacter = make_shared<GuiEntity>("uselessID");
 			newCharacter->addOglBuffer(_nonCenteredOpenglBuffer, false);
 
 			// Load diffuse map
@@ -101,11 +97,8 @@ void TextEntityManager::reloadCharacters(const string& ID)
 
 void TextEntityManager::update()
 {
-	for (auto & baseEntity : _getBaseEntities())
+	for (auto& entity : _getTextEntities())
 	{
-		// Create temporary game entity object
-		auto * entity = getEntity(baseEntity->getID());
-
 		// Update entity
 		if (entity->isDynamic())
 		{

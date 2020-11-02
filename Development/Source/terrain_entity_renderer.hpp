@@ -11,6 +11,6 @@ public:
 	
 	void bind()    override;
 	void unbind()  override;
-	void renderLightEntities(const vector<LightEntity*>& entities);
-	void render(const TerrainEntity * entity);
+	void renderLightEntities(const vector<shared_ptr<LightEntity>>& entities);
+	void render(const shared_ptr<TerrainEntity> entity);
 };

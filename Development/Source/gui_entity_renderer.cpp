@@ -22,7 +22,7 @@ void GuiEntityRenderer::unbind()
 	_shader.unbind();
 }
 
-void GuiEntityRenderer::render(const GuiEntity* entity)
+void GuiEntityRenderer::render(const shared_ptr<GuiEntity> entity)
 {
 	if (entity->isVisible())
 	{

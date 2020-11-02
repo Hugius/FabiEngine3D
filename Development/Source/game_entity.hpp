@@ -10,7 +10,7 @@ using glm::mat4;
 class GameEntity final : public BaseEntity
 {
 public:
-	GameEntity()  = default;
+	using BaseEntity::BaseEntity;
 	~GameEntity() = default;
 	
 	// Setters

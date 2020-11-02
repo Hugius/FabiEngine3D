@@ -12,5 +12,5 @@ public:
 
 	void bind()   override;
 	void unbind() override;
-	void render(const GameEntity* entity);
+	void render(const shared_ptr<GameEntity> entity);
 };

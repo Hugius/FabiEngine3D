@@ -11,6 +11,6 @@ public:
 
 	void bind()   override;
 	void unbind() override;
-	void render(const GuiEntity * entity, GLuint sceneMap);
+	void render(const shared_ptr<GuiEntity> entity, GLuint sceneMap);
 };
 

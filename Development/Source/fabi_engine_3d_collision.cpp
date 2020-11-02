@@ -3,7 +3,7 @@
 
 void FabiEngine3D::aabbEntity_deleteAll()
 {
-	_core->_aabbEntityManager.deleteEntities();
+	_core->_aabbEntityManager.deleteAllEntities();
 }
 
 void FabiEngine3D::aabbEntity_add(const string& ID, vec3 position, vec3 size, bool responsive)
@@ -65,7 +65,7 @@ void FabiEngine3D::aabbEntity_bindToBillboardEntity(const string& parentID, bool
 
 void FabiEngine3D::aabbEntity_delete(const string& ID)
 {
-	_core->_aabbEntityManager.deleteEntity(ID, EntityType::AABB);
+	_core->_aabbEntityManager.deleteEntity(ID);
 }
 
 void FabiEngine3D::aabbEntity_hide(const string& ID)
@@ -295,7 +295,7 @@ string FabiEngine3D::collision_checkCursorInAny()
 
 	for (auto entity : _core->_aabbEntityManager.getEntities()) // Loop over AABB entities
 	{
-		if (entity->isVisible() && entity->isResponsive())
+		if (entity->isResponsive())
 		{
 			// Calculate box left bottom (LB) and right top (RT)
 			vec3 lb, rt;
@@ -326,7 +326,7 @@ bool FabiEngine3D::collision_checkCursorInEntity(const string& ID)
 {
 	auto entity = _core->_aabbEntityManager.getEntity(ID);
 
-	if (entity->isVisible() && entity->isResponsive())
+	if (entity->isResponsive())
 	{
 		vec3 lb, rt;
 		lb.x = (entity->getTranslation().x - entity->getScaling().x / 2.0f);
@@ -349,7 +349,7 @@ string FabiEngine3D::collision_checkCursorInEntities(const string& ID, const str
 
 	for (auto entity : _core->_aabbEntityManager.getEntities()) // Loop over AABB entities
 	{
-		if (entity->isVisible() && entity->isResponsive())
+		if (entity->isResponsive())
 		{
 			if (entity->getID().size() >= ID.size()) // Check if entity ID is at least the size of group ID
 			{

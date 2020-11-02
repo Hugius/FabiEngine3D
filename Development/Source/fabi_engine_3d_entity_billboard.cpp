@@ -33,11 +33,11 @@ void FabiEngine3D::billboardEntity_delete(const string& ID)
 	// Delete all bound AABB entities if existing
 	for (auto& aabbID : aabbEntity_getBoundIDs(ID, false, true))
 	{
-		_core->_aabbEntityManager.deleteEntity(ID, EntityType::AABB);
+		_core->_aabbEntityManager.deleteEntity(ID);
 	}
 
 	// Delete BILLBOARD entity
-	_core->_billboardEntityManager.deleteEntity(ID, EntityType::BILLBOARD);
+	_core->_billboardEntityManager.deleteEntity(ID);
 }
 
 void FabiEngine3D::billboardEntity_deleteGroup(const string& ID)
@@ -61,13 +61,7 @@ void FabiEngine3D::billboardEntity_hideAll()
 {
 	for (auto& entity : _core->_billboardEntityManager.getEntities())
 	{
-		// Hide every bound AABB
-		for (auto& aabbID : aabbEntity_getBoundIDs(entity->getID(), false, true))
-		{
-			aabbEntity_hide(aabbID);
-		}
-
-		entity->setVisible(false);
+		billboardEntity_hide(entity->getID());
 	}
 }
 
@@ -75,35 +69,17 @@ void FabiEngine3D::billboardEntity_showAll()
 {
 	for (auto& entity : _core->_billboardEntityManager.getEntities())
 	{
-		// Show every bound AABB
-		for (auto& aabbID : aabbEntity_getBoundIDs(entity->getID(), false, true))
-		{
-			aabbEntity_show(aabbID);
-		}
-
-		entity->setVisible(true);
+		billboardEntity_show(entity->getID());
 	}
 }
 
 void FabiEngine3D::billboardEntity_hide(const string& ID)
 {
-	// Hide every bound AABB
-	for (auto& aabbID : aabbEntity_getBoundIDs(ID, false, true))
-	{
-		aabbEntity_hide(aabbID);
-	}
-
 	_core->_billboardEntityManager.getEntity(ID)->setVisible(false);
 }
 
 void FabiEngine3D::billboardEntity_show(const string& ID)
 {
-	// Show every bound AABB
-	for (auto& aabbID : aabbEntity_getBoundIDs(ID, false, true))
-	{
-		aabbEntity_show(aabbID);
-	}
-
 	_core->_billboardEntityManager.getEntity(ID)->setVisible(true);
 }
 

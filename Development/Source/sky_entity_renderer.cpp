@@ -21,7 +21,7 @@ void SkyEntityRenderer::unbind()
 	_shader.unbind();
 }
 
-void SkyEntityRenderer::render(const SkyEntity* entity)
+void SkyEntityRenderer::render(const shared_ptr<SkyEntity> entity)
 {
 	if (entity->isVisible())
 	{

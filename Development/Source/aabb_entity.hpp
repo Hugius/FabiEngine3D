@@ -7,7 +7,7 @@
 class AabbEntity final: public BaseEntity
 {
 public:
-	AabbEntity()  = default;
+	using BaseEntity::BaseEntity;
 	~AabbEntity() = default;
 
 	// Updates

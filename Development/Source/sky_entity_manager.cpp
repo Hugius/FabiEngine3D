@@ -4,19 +4,19 @@
 #include <iostream>
 
 SkyEntityManager::SkyEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, RenderBus& renderBus) :
-	BaseEntityManager(objLoader, texLoader, renderBus)
+	BaseEntityManager(EntityType::SKY, objLoader, texLoader, renderBus)
 {
 	
 }
 
-SkyEntity * SkyEntityManager::getEntity(const string& ID)
+shared_ptr<SkyEntity> SkyEntityManager::getEntity(const string& ID)
 {
-	return dynamic_cast<SkyEntity*>(_getBaseEntity(ID, EntityType::SKY));
+	return _getSkyEntity(ID);
 }
 
-SkyEntity * SkyEntityManager::getSelectedSky()
+shared_ptr<SkyEntity> SkyEntityManager::getSelectedSky()
 {
-	if (_getBaseEntities().empty() || _selectedID == "")
+	if (_getSkyEntities().empty() || _selectedID == "")
 	{
 		return nullptr;
 	}
@@ -26,16 +26,9 @@ SkyEntity * SkyEntityManager::getSelectedSky()
 	}
 }
 
-const vector<SkyEntity*> SkyEntityManager::getEntities()
+const vector<shared_ptr<SkyEntity>> SkyEntityManager::getEntities()
 {
-	vector<SkyEntity*> newVector;
-
-	for (auto& entity : _getBaseEntities())
-	{
-		newVector.push_back(dynamic_cast<SkyEntity*>(entity));
-	}
-
-	return newVector;
+	return _getSkyEntities();
 }
 
 void SkyEntityManager::selectSky(const string& ID)
@@ -92,7 +85,7 @@ void SkyEntityManager::addSkyEntity(const string& ID)
 	};
 
 	// Create entity
-	_createEntity(EntityType::SKY, ID)->load(ID);
+	_createEntity(ID);
 
 	// Fill entity
 	getEntity(ID)->addOglBuffer(new OpenGLBuffer(BufferType::CUBEMAP, skybox_data, sizeof(skybox_data) / sizeof(float)));
@@ -101,7 +94,7 @@ void SkyEntityManager::addSkyEntity(const string& ID)
 void SkyEntityManager::update()
 {
 	// Check if any sky exists and if one selected
-	if (!_getBaseEntities().empty() && getSelectedSky() != nullptr)
+	if (getSelectedSky() != nullptr)
 	{
 		// Renderbus updates
 		_renderBus.setSkyRotationMatrix(getSelectedSky()->getRotationMatrix());
@@ -115,20 +108,17 @@ void SkyEntityManager::update()
 
 void SkyEntityManager::_updateRotation()
 {
-	for (auto & baseEntity : _getBaseEntities())
+	for (auto & entity : _getSkyEntities())
 	{
-		// Create temporary sky object
-		auto * sky = getEntity(baseEntity->getID());
-
 		// Update
-		if (sky->isVisible())
+		if (entity->isVisible())
 		{
-			if (sky->getRotationSpeed() != 0.0f) // Check if has to rotate at all
+			if (entity->getRotationSpeed() != 0.0f) // Check if has to rotate at all
 			{
 				// Rotate matrix
-				sky->setRotationMatrix(glm::rotate(
-					sky->getRotationMatrix(),
-					glm::radians((sky->getRotationSpeed()) / 100.0f),
+				entity->setRotationMatrix(glm::rotate(
+					entity->getRotationMatrix(),
+					glm::radians((entity->getRotationSpeed()) / 100.0f),
 					vec3(0.0f, 1.0f, 0.0f)));
 			}
 		}

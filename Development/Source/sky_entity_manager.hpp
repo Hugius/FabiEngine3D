@@ -8,10 +8,10 @@ public:
 	SkyEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, RenderBus& renderBus);
 	~SkyEntityManager() = default;
 
-	SkyEntity * getEntity(const string& ID) override;
-	SkyEntity * getSelectedSky();
+	shared_ptr<SkyEntity> getEntity(const string& ID);
+	shared_ptr<SkyEntity> getSelectedSky();
 
-	const vector<SkyEntity*> getEntities();
+	const vector<shared_ptr<SkyEntity>> getEntities();
 
 	void selectSky(const string& ID);
 	void addSkyEntity(const string& ID);

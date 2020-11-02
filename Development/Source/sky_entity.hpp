@@ -11,7 +11,7 @@ using glm::mat4;
 class SkyEntity final : public BaseEntity
 {
 public:
-	SkyEntity()  = default;
+	using BaseEntity::BaseEntity;
 	~SkyEntity() = default;
 
 	void setDiffuseMapPaths(const array<string, 6>& val);

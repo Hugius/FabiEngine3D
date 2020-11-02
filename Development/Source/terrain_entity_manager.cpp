@@ -2,19 +2,19 @@
 #include "logger.hpp"
 
 TerrainEntityManager::TerrainEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, RenderBus& renderBus) :
-	BaseEntityManager(objLoader, texLoader, renderBus)
+	BaseEntityManager(EntityType::TERRAIN, objLoader, texLoader, renderBus)
 {
 
 }
 
-TerrainEntity * TerrainEntityManager::getEntity(const string& ID)
+shared_ptr<TerrainEntity> TerrainEntityManager::getEntity(const string& ID)
 {
-	return dynamic_cast<TerrainEntity*>(_getBaseEntity(ID, EntityType::TERRAIN));
+	return _getTerrainEntity(ID);
 }
 
-TerrainEntity * TerrainEntityManager::getSelectedTerrain()
+shared_ptr<TerrainEntity> TerrainEntityManager::getSelectedTerrain()
 {
-	if (_getBaseEntities().empty() || _selectedID == "")
+	if (_getTerrainEntities().empty() || _selectedID == "")
 	{
 		return nullptr;
 	}
@@ -24,16 +24,9 @@ TerrainEntity * TerrainEntityManager::getSelectedTerrain()
 	}
 }
 
-const vector<TerrainEntity*> TerrainEntityManager::getEntities()
+const vector<shared_ptr<TerrainEntity>> TerrainEntityManager::getEntities()
 {
-	vector<TerrainEntity*> newVector;
-
-	for (auto& entity : _getBaseEntities())
-	{
-		newVector.push_back(dynamic_cast<TerrainEntity*>(entity));
-	}
-
-	return newVector;
+	return _getTerrainEntities();
 }
 
 void TerrainEntityManager::selectTerrain(const string& ID)
@@ -43,7 +36,7 @@ void TerrainEntityManager::selectTerrain(const string& ID)
 
 void TerrainEntityManager::addTerrain(const string& ID)
 {
-	_createEntity(EntityType::TERRAIN, ID)->load(ID);
+	_createEntity(ID);
 }
 
 void TerrainEntityManager::generateModel(const string& ID)
@@ -167,6 +160,11 @@ void TerrainEntityManager::generateModel(const string& ID)
 	// Create OpenGL buffer
 	getEntity(ID)->clearOglBuffers();
 	getEntity(ID)->addOglBuffer(new OpenGLBuffer(BufferType::MODEL, &finalDataCollection[0], finalDataCollection.size()));
+}
+
+void TerrainEntityManager::update()
+{
+
 }
 
 float TerrainEntityManager::getPixelHeight(const string& ID, float x, float z)

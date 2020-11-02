@@ -7,7 +7,7 @@ CollisionResolver::CollisionResolver(CollisionDetector& collisionDetector) :
 	
 }
 
-void CollisionResolver::update(const vector<AabbEntity*> & boxes, TerrainEntityManager& terrainManager, CameraManager & camera)
+void CollisionResolver::update(const vector<shared_ptr<AabbEntity>> & boxes, TerrainEntityManager& terrainManager, CameraManager & camera)
 {
 	// Check if AABB collision is needed in the first place
 	if (_aabbResponseEnabled)

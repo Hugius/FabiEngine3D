@@ -3,32 +3,9 @@
 #include "logger.hpp"
 
 BillboardEntityManager::BillboardEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, RenderBus& renderBus, CameraManager& camera) :
-	BaseEntityManager(objLoader, texLoader, renderBus),
+	BaseEntityManager(EntityType::BILLBOARD, objLoader, texLoader, renderBus),
 	_camera(camera)
 {
-
-}
-
-BillboardEntity * BillboardEntityManager::getEntity(const string& ID)
-{
-	return dynamic_cast<BillboardEntity*>(_getBaseEntity(ID, EntityType::BILLBOARD));
-}
-
-const vector<BillboardEntity*> BillboardEntityManager::getEntities()
-{
-	vector<BillboardEntity*> newVector;
-
-	for (auto& entity : _getBaseEntities())
-	{
-		newVector.push_back(dynamic_cast<BillboardEntity*>(entity));
-	}
-
-	return newVector;
-}
-
-void BillboardEntityManager::addBillboardEntity(const string& ID, vec3 color, vec3 T, vec3 R, vec3 S, bool facingCameraX, bool facingCameraY)
-{
-	// Load OBJ model
 	float plane_data[] =
 	{
 		-0.5f,  0.5f, 0.0f, 0.0f, 1.0f,
@@ -39,9 +16,24 @@ void BillboardEntityManager::addBillboardEntity(const string& ID, vec3 color, ve
 		-0.5f,  0.5f, 0.0f, 0.0f, 1.0f
 	};
 
+	_openglBuffer = new OpenGLBuffer(BufferType::SURFACE, plane_data, sizeof(plane_data) / sizeof(float));
+}
+
+shared_ptr<BillboardEntity> BillboardEntityManager::getEntity(const string& ID)
+{
+	return _getBillboardEntity(ID);
+}
+
+const vector<shared_ptr<BillboardEntity>> BillboardEntityManager::getEntities()
+{
+	return _getBillboardEntities();
+}
+
+void BillboardEntityManager::addBillboardEntity(const string& ID, vec3 color, vec3 T, vec3 R, vec3 S, bool facingCameraX, bool facingCameraY)
+{
 	// Create entity
-	_createEntity(EntityType::BILLBOARD, ID)->load(ID);
-	getEntity(ID)->addOglBuffer(new OpenGLBuffer(BufferType::SURFACE, plane_data, sizeof(plane_data) / sizeof(float)));
+	_createEntity(ID);
+	getEntity(ID)->addOglBuffer(_openglBuffer, false);
 
 	// Other
 	getEntity(ID)->setTranslation(T);
@@ -82,11 +74,8 @@ void BillboardEntityManager::addBillboardEntity
 
 void BillboardEntityManager::update()
 {
-	for (auto & baseEntity : _getBaseEntities())
+	for (auto& entity : _getBillboardEntities())
 	{
-		// Create temporary billboard entity object
-		auto * entity = getEntity(baseEntity->getID());
-
 		// 3D camera facing
 		auto facingX = entity->isCameraFacingX();
 		auto facingY = entity->isCameraFacingY();

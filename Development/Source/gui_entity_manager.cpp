@@ -3,7 +3,7 @@
 #include <iostream>
 
 GuiEntityManager::GuiEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, RenderBus& renderBus) :
-	BaseEntityManager(objLoader, texLoader, renderBus),
+	BaseEntityManager(EntityType::GUI, objLoader, texLoader, renderBus),
 	_centeredOpenglBuffer(new OpenGLBuffer(0.0f, 0.0f, 1.0f, 1.0f, true, false)),
 	_nonCenteredOpenglBuffer(new OpenGLBuffer(0.0f, 0.0f, 1.0f, 1.0f, false, false))
 {
@@ -16,27 +16,20 @@ GuiEntityManager::~GuiEntityManager()
 	delete _nonCenteredOpenglBuffer;
 }
 
-GuiEntity* GuiEntityManager::getEntity(const string& ID)
+shared_ptr<GuiEntity> GuiEntityManager::getEntity(const string& ID)
 {
-	return dynamic_cast<GuiEntity*>(_getBaseEntity(ID, EntityType::GUI));
+	return _getGuiEntity(ID);
 }
 
-const vector<GuiEntity*> GuiEntityManager::getEntities()
+const vector<shared_ptr<GuiEntity>> GuiEntityManager::getEntities()
 {
-	vector<GuiEntity*> newVector;
-
-	for (auto& entity : _getBaseEntities())
-	{
-		newVector.push_back(dynamic_cast<GuiEntity*>(entity));
-	}
-
-	return newVector;
+	return _getGuiEntities();
 }
 
 void GuiEntityManager::addGuiEntity(const string& ID, const string& texturePath, vec2 translation, float rotation, vec2 scaling, bool engine, bool isCentered)
 {
 	// Create entity
-	_createEntity(EntityType::GUI, ID)->load(ID);
+	_createEntity(ID);
 	getEntity(ID)->addOglBuffer(isCentered ? _centeredOpenglBuffer : _nonCenteredOpenglBuffer, false);
 
 	// Load transformation
@@ -52,7 +45,7 @@ void GuiEntityManager::addGuiEntity(const string& ID, const string& texturePath,
 void GuiEntityManager::addGuiEntity(const string& ID, vec3 color, vec2 translation, float rotation, vec2 scaling, bool isCentered)
 {
 	// Create entity
-	_createEntity(EntityType::GUI, ID)->load(ID);
+	_createEntity(ID);
 	getEntity(ID)->addOglBuffer(isCentered ? _centeredOpenglBuffer : _nonCenteredOpenglBuffer, false);
 
 	// Load transformation
@@ -67,11 +60,8 @@ void GuiEntityManager::addGuiEntity(const string& ID, vec3 color, vec2 translati
 
 void GuiEntityManager::update()
 {
-	for (auto & baseEntity : _getBaseEntities())
+	for (auto& entity : _getGuiEntities())
 	{
-		// Create temporary game entity object
-		auto * entity = getEntity(baseEntity->getID());
-
 		// Calculate model matrix
 		if (entity->isVisible())
 		{

@@ -77,7 +77,7 @@ void FabiEngine3D::skyEntity_delete(const string& ID)
 		_core->_skyEntityManager.selectSky("");
 	}
 
-	_core->_skyEntityManager.deleteEntity(ID, EntityType::SKY);
+	_core->_skyEntityManager.deleteEntity(ID);
 }
 
 void FabiEngine3D::skyEntity_hide(const string& ID)

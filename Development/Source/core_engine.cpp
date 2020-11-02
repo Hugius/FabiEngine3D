@@ -51,10 +51,9 @@ void CoreEngine::_stop()
 void CoreEngine::_setupApplication()
 {
 	// Create engine logo
-	GuiEntity logo;
-	logo.load("logo");
-	logo.addOglBuffer(new OpenGLBuffer(0.0f, 0.0f, 2.0f, 2.0f, true, false));
-	logo.setDiffuseMap(_texLoader.getTexture("engine\\textures\\logo.png", true, true));
+	shared_ptr<GuiEntity> logo = make_shared<GuiEntity>("logo");
+	logo->addOglBuffer(new OpenGLBuffer(0.0f, 0.0f, 2.0f, 2.0f, true, false));
+	logo->setDiffuseMap(_texLoader.getTexture("engine\\textures\\logo.png", true, true));
 	
 	// Get logo resolution
 	SDL_DisplayMode DM;
@@ -69,7 +68,7 @@ void CoreEngine::_setupApplication()
 	_windowManager.makeColorOpaque(keyingColor);
 	_windowManager.setSize(logoResolution);
 	_windowManager.showWindow();
-	_renderEngine.renderEngineLogo(&logo, logoResolution);
+	_renderEngine.renderEngineLogo(logo, logoResolution);
 	_windowManager.swapBackBuffer();
 	
 	// Show logo for at least 1 second

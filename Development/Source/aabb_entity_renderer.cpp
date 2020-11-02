@@ -20,7 +20,7 @@ void AabbEntityRenderer::unbind()
 	_shader.unbind();
 }
 
-void AabbEntityRenderer::render(const AabbEntity* entity)
+void AabbEntityRenderer::render(const shared_ptr<AabbEntity> entity)
 {
 	if (entity->isVisible())
 	{

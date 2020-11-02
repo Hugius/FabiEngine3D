@@ -8,15 +8,15 @@ public:
 	TerrainEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, RenderBus& renderBus);
 	~TerrainEntityManager() = default;
 
-	TerrainEntity * getEntity(const string& ID) override;
-	TerrainEntity * getSelectedTerrain();
+	shared_ptr<TerrainEntity> getEntity(const string& ID);
+	shared_ptr<TerrainEntity> getSelectedTerrain();
 
-	const vector<TerrainEntity*> getEntities();
+	const vector<shared_ptr<TerrainEntity>> getEntities();
 
 	void selectTerrain(const string& ID);
 	void addTerrain(const string& ID);
 	void generateModel(const string& ID);
-	void update() override {}
+	void update() override;
 
 	float getPixelHeight(const string& ID, float x, float z);
 

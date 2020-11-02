@@ -25,7 +25,7 @@ public:
 	RenderEngine(RenderBus& renderBus, Timer& timer);
 	~RenderEngine() = default;
 
-	void renderEngineLogo(GuiEntity* entity, ivec2 viewport);
+	void renderEngineLogo(shared_ptr<GuiEntity> entity, ivec2 viewport);
 	void renderScene(EntityBus* entityBus, CameraManager& camera);
 	void loadMsaaFramebuffer(int quality);
 	void loadShadowFramebuffer(int quality);
@@ -43,7 +43,7 @@ private:
 	EntityBus* _entityBus = nullptr;
 
 	// Final screen texture
-	GuiEntity* _finalSurface = nullptr;
+	shared_ptr<GuiEntity> _finalSurface = nullptr;
 
 	// Renderers
 	SkyEntityRenderer        _skyEntityRenderer;

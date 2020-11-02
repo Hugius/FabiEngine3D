@@ -2,15 +2,15 @@
 
 EntityBus::EntityBus
 (
-	const SkyEntity     * skyEntity,
-	const TerrainEntity * terrainEntity,
-	const WaterEntity   * waterEntity,
-	const vector<GameEntity*>      & gameEntities,
-	const vector<BillboardEntity*> & billboardEntities,
-	const vector<AabbEntity*>      & aabbEntities,
-	const vector<LightEntity*>     & lightEntities,
-	const vector<GuiEntity*>       & guiEntities,
-	const vector<TextEntity*>      & textEntities
+	const shared_ptr<SkyEntity> skyEntity,
+	const shared_ptr<TerrainEntity> terrainEntity,
+	const shared_ptr<WaterEntity> waterEntity,
+	const vector<shared_ptr<GameEntity>>      & gameEntities,
+	const vector<shared_ptr<BillboardEntity>> & billboardEntities,
+	const vector<shared_ptr<AabbEntity>>      & aabbEntities,
+	const vector<shared_ptr<LightEntity>>     & lightEntities,
+	const vector<shared_ptr<GuiEntity>>       & guiEntities,
+	const vector<shared_ptr<TextEntity>>      & textEntities
 ) :
 	_skyEntity(skyEntity),
 	_terrainEntity(terrainEntity),
@@ -25,47 +25,47 @@ EntityBus::EntityBus
 	
 }
 
-const vector<GameEntity*> & EntityBus::getGameEntities() const
+const vector<shared_ptr<GameEntity>> & EntityBus::getGameEntities() const
 {
 	return _gameEntities;
 }
 
-const vector<BillboardEntity*> & EntityBus::getBillboardEntities() const
+const vector<shared_ptr<BillboardEntity>> & EntityBus::getBillboardEntities() const
 {
 	return _billboardEntities;
 }
 
-const vector<AabbEntity*>& EntityBus::getAabbEntities() const
+const vector<shared_ptr<AabbEntity>>& EntityBus::getAabbEntities() const
 {
 	return _aabbEntities;
 }
 
-const vector<GuiEntity*> & EntityBus::getGuiEntities() const
+const vector<shared_ptr<GuiEntity>> & EntityBus::getGuiEntities() const
 {
 	return _guiEntities;
 }
 
-const vector<TextEntity*> & EntityBus::getTextEntities() const
+const vector<shared_ptr<TextEntity>> & EntityBus::getTextEntities() const
 {
 	return _textEntities;
 }
 
-const vector<LightEntity*> & EntityBus::getLightEntities() const
+const vector<shared_ptr<LightEntity>> & EntityBus::getLightEntities() const
 {
 	return _lightEntities;
 }
 
-const SkyEntity * EntityBus::getSkyEntity() const
+const shared_ptr<SkyEntity> EntityBus::getSkyEntity() const
 {
 	return _skyEntity;
 }
 
-const TerrainEntity * EntityBus::getTerrainEntity() const
+const shared_ptr<TerrainEntity> EntityBus::getTerrainEntity() const
 {
 	return _terrainEntity;
 }
 
-const WaterEntity * EntityBus::getWaterEntity() const
+const shared_ptr<WaterEntity> EntityBus::getWaterEntity() const
 {
 	return _waterEntity;
 }

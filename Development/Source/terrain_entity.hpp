@@ -5,7 +5,7 @@
 class TerrainEntity final: public BaseEntity
 {
 public:
-	TerrainEntity()  = default;
+	using BaseEntity::BaseEntity;
 	~TerrainEntity() = default;
 
 	// Setters

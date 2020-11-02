@@ -1,12 +1,7 @@
 #include "base_entity.hpp"
 #include "logger.hpp"
 
-BaseEntity::~BaseEntity()
-{
-	clearOglBuffers();
-}
-
-void BaseEntity::load(const string& ID)
+BaseEntity::BaseEntity(const string& ID)
 {
 	if (ID == "")
 	{
@@ -16,6 +11,11 @@ void BaseEntity::load(const string& ID)
 	{
 		_ID = ID;
 	}
+}
+
+BaseEntity::~BaseEntity()
+{
+	clearOglBuffers();
 }
 
 void BaseEntity::addOglBuffer(OpenGLBuffer * buffer, bool deleteOnDestroy)

@@ -38,7 +38,7 @@ void BillboardEntityRenderer::unbind()
 	_shader.unbind();
 }
 
-void BillboardEntityRenderer::render(const BillboardEntity* entity)
+void BillboardEntityRenderer::render(const shared_ptr<BillboardEntity> entity)
 {
 	if (entity->isVisible())
 	{

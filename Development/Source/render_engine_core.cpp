@@ -4,6 +4,8 @@
 
 #include <algorithm>
 
+using std::make_shared;
+
 RenderEngine::RenderEngine(RenderBus& renderBus, Timer& timer) :
 	_renderBus(renderBus),
 	_timer(timer),
@@ -36,13 +38,12 @@ RenderEngine::RenderEngine(RenderBus& renderBus, Timer& timer) :
 	_blurRenderer.addFramebuffer(static_cast<int>(BlurType::MOTION), true);
 
 	// Final screen texture
-	_finalSurface = new GuiEntity();
-	_finalSurface->load("finalSurface");
+	_finalSurface = make_shared<GuiEntity>("finalSurface");
 	_finalSurface->addOglBuffer(new OpenGLBuffer(0.0f, 0.0f, 2.0f, 2.0f, true, false));
 	_finalSurface->setMirroredVertically(true);
 }
 
-void RenderEngine::renderEngineLogo(GuiEntity * entity, ivec2 viewport)
+void RenderEngine::renderEngineLogo(shared_ptr<GuiEntity> entity, ivec2 viewport)
 {
 	glViewport(0, 0, viewport.x, viewport.y);
 	glClear(GL_COLOR_BUFFER_BIT);

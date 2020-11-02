@@ -170,10 +170,7 @@ void BottomViewportController::update()
 		int total = 0;
 		for (auto& ID : _fe3d.aabbEntity_getAllIDs())
 		{
-			if (_fe3d.aabbEntity_isVisible(ID))
-			{
-				total++;
-			}
+			total++;
 		}
 
 		string text = "AABB entities: " + to_string(total);

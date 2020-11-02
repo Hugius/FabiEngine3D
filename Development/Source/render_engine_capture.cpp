@@ -56,11 +56,10 @@ void RenderEngine::_captureSceneReflections(CameraManager& camera)
 		bool shadowsEnabled = _renderBus.isShadowsEnabled();
 		_renderBus.setShadowsEnabled(false);
 
-		// SkyHDR should not appear in reflections
+		// Sky HDR must not appear in reflections
 		float oldLightness = 0.0f;
-		if (_entityBus->getSkyEntity() != nullptr) oldLightness = _entityBus->getSkyEntity()->getLightness();
-		if (_entityBus->getSkyEntity() != nullptr) const_cast<SkyEntity*>(_entityBus->getSkyEntity())->setLightness(_entityBus->getSkyEntity()->getOriginalLightness());
-		// I know this is considered bad practice, but this is the only exception in the entire code-base
+		if (_entityBus->getSkyEntity() != nullptr) { oldLightness = _entityBus->getSkyEntity()->getLightness(); }
+		if (_entityBus->getSkyEntity() != nullptr) { _entityBus->getSkyEntity()->setLightness(_entityBus->getSkyEntity()->getOriginalLightness()); }
 
 		// Render scene
 		_renderSkyEntity();
@@ -70,7 +69,7 @@ void RenderEngine::_captureSceneReflections(CameraManager& camera)
 
 		// Revert reflection exceptions
 		_renderBus.setShadowsEnabled(shadowsEnabled);
-		if(_entityBus->getSkyEntity() != nullptr) const_cast<SkyEntity*>(_entityBus->getSkyEntity())->setLightness(oldLightness);
+		if (_entityBus->getSkyEntity() != nullptr) { _entityBus->getSkyEntity()->setLightness(oldLightness); }
 
 		// Revert camera angle
 		cameraPos = camera.getPosition();

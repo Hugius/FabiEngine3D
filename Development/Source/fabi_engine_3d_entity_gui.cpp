@@ -3,7 +3,7 @@
 
 void FabiEngine3D::guiEntity_deleteAll()
 {
-	_core->_guiEntityManager.deleteEntities();
+	_core->_guiEntityManager.deleteAllEntities();
 }
 
 void FabiEngine3D::guiEntity_hideAll()
@@ -46,7 +46,7 @@ void FabiEngine3D::guiEntity_show(const string& ID)
 
 void FabiEngine3D::guiEntity_delete(const string& ID)
 {
-	_core->_guiEntityManager.deleteEntity(ID, EntityType::GUI);
+	_core->_guiEntityManager.deleteEntity(ID);
 }
 
 void FabiEngine3D::guiEntity_changeTexture(const string& ID, const string& texturePath)

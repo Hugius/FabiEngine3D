@@ -39,7 +39,7 @@ void WaterEntityRenderer::unbind()
 	_shader.unbind();
 }
 
-void WaterEntityRenderer::render(const WaterEntity* entity)
+void WaterEntityRenderer::render(const shared_ptr<WaterEntity> entity)
 {
 	if (entity->isVisible())
 	{

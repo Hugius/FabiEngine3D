@@ -11,5 +11,5 @@ public:
 
 	void bind() override;
 	void unbind() override;
-	void render(const WaterEntity * entity);
+	void render(const shared_ptr<WaterEntity> entity);
 };

@@ -4,31 +4,8 @@
 #include "tools.hpp"
 
 AabbEntityManager::AabbEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, RenderBus& renderBus) :
-	BaseEntityManager(objLoader, texLoader, renderBus)
+	BaseEntityManager(EntityType::AABB, objLoader, texLoader, renderBus)
 {
-	
-}
-
-AabbEntity * AabbEntityManager::getEntity(const string& ID)
-{
-	return dynamic_cast<AabbEntity*>(_getBaseEntity(ID, EntityType::AABB));
-}
-
-const vector<AabbEntity*> AabbEntityManager::getEntities()
-{
-	vector<AabbEntity*> newVector;
-
-	for (auto& entity : _getBaseEntities())
-	{
-		newVector.push_back(dynamic_cast<AabbEntity*>(entity));
-	}
-
-	return newVector;
-}
-
-void AabbEntityManager::addAabbEntity(const string& ID, vec3 position, vec3 size, bool responsive)
-{
-	// Load OBJ model
 	float box_data[] =
 	{
 		-0.5f,  1.0f, -0.5f,
@@ -49,9 +26,24 @@ void AabbEntityManager::addAabbEntity(const string& ID, vec3 position, vec3 size
 		-0.5f,  0.0f, -0.5f
 	};
 
+	_openglBuffer = new OpenGLBuffer(BufferType::AABB, box_data, sizeof(box_data) / sizeof(float));
+}
+
+shared_ptr<AabbEntity> AabbEntityManager::getEntity(const string& ID)
+{
+	return _getAabbEntity(ID);
+}
+
+const vector<shared_ptr<AabbEntity>>& AabbEntityManager::getEntities()
+{
+	return _getAabbEntities();
+}
+
+void AabbEntityManager::addAabbEntity(const string& ID, vec3 position, vec3 size, bool responsive)
+{
 	// Create entity
-	_createEntity(EntityType::AABB, ID)->load(ID);
-	getEntity(ID)->addOglBuffer(new OpenGLBuffer(BufferType::AABB, box_data, sizeof(box_data) / sizeof(float)));
+	_createEntity(ID);
+	getEntity(ID)->addOglBuffer(_openglBuffer, false);
 
 	// Other
 	getEntity(ID)->setLocalTranslation(position);
@@ -67,13 +59,10 @@ void AabbEntityManager::bindAabbEntity(const string& ID, const string& parentID,
 	getEntity(ID)->setParent(parentID, parentType);
 }
 
-void AabbEntityManager::update(const vector<GameEntity*>& gameEntities, const vector<BillboardEntity*>& billboardEntities)
+void AabbEntityManager::update(const vector<shared_ptr<GameEntity>>& gameEntities, const vector<shared_ptr<BillboardEntity>>& billboardEntities)
 {
-	for (auto & baseEntity : _getBaseEntities())
+	for (auto& entity : _getAabbEntities())
 	{
-		// Create temporary billboard entity object
-		auto * entity = getEntity(baseEntity->getID());
-
 		// Optional translation update
 		if (entity->getParentID() != "")
 		{
@@ -93,6 +82,9 @@ void AabbEntityManager::update(const vector<GameEntity*>& gameEntities, const ve
 
 						// Update translation (based on parent translation + scaling)
 						entity->setTranslation(parentEntity->getTranslation() + (entity->getLocalTranslation() * parentSizeChange));
+
+						// Update visibility
+						entity->setVisible(parentEntity->isVisible());
 
 						found = true;
 					}
@@ -142,6 +134,10 @@ void AabbEntityManager::update(const vector<GameEntity*>& gameEntities, const ve
 						// Update translation (based on parent translation + scaling)
 						vec3 halfSizeOffset = vec3(0.0f, (parentEntity->getScaling().y / 2.0f), 0.0f);
 						entity->setTranslation(parentEntity->getTranslation() + entity->getLocalTranslation() - halfSizeOffset);
+
+						// Update visibility
+						entity->setVisible(parentEntity->isVisible());
+
 
 						found = true;
 					}

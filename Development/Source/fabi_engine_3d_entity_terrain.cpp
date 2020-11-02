@@ -33,7 +33,7 @@ void FabiEngine3D::terrainEntity_delete(const string& ID)
 		_core->_terrainEntityManager.selectTerrain("");
 	}
 
-	_core->_terrainEntityManager.deleteEntity(ID, EntityType::TERRAIN);
+	_core->_terrainEntityManager.deleteEntity(ID);
 }
 
 void FabiEngine3D::terrainEntity_hide(const string& ID)

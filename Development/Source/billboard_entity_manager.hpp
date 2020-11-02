@@ -9,9 +9,9 @@ public:
 	BillboardEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, RenderBus& renderBus, CameraManager& camera);
 	~BillboardEntityManager() = default;
 
-	BillboardEntity * getEntity(const string& ID) override;
+	shared_ptr<BillboardEntity> getEntity(const string& ID);
 
-	const vector<BillboardEntity*> getEntities();
+	const vector<shared_ptr<BillboardEntity>> getEntities();
 
 	void addBillboardEntity
 	(
@@ -37,4 +37,8 @@ public:
 
 private:
 	CameraManager& _camera;
+
+	OpenGLBuffer* _openglBuffer = nullptr;
+
+	vector<shared_ptr<BillboardEntity>> _billboardEntities;
 };

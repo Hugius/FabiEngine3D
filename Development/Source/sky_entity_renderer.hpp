@@ -11,5 +11,5 @@ public:
 
 	void bind()   override;
 	void unbind() override;
-	void render(const SkyEntity * entity);
+	void render(const shared_ptr<SkyEntity> entity);
 };

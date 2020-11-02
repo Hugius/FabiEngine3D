@@ -25,11 +25,11 @@ void FabiEngine3D::gameEntity_delete(const string& ID)
 	// Delete all bound AABB entities if existing
 	for (auto& aabbID : aabbEntity_getBoundIDs(ID, true, false))
 	{
-		_core->_aabbEntityManager.deleteEntity(aabbID, EntityType::AABB);
+		_core->_aabbEntityManager.deleteEntity(aabbID);
 	}
 
 	// Delete GAME entity
-	_core->_gameEntityManager.deleteEntity(ID, EntityType::GAME);
+	_core->_gameEntityManager.deleteEntity(ID);
 }
 
 void FabiEngine3D::gameEntity_deleteGroup(const string& ID)
@@ -53,13 +53,7 @@ void FabiEngine3D::gameEntity_hideAll()
 {
 	for (auto entity : _core->_gameEntityManager.getEntities())
 	{
-		// Hide every bound AABB
-		for (auto& aabbID : aabbEntity_getBoundIDs(entity->getID(), true, false))
-		{
-			aabbEntity_hide(aabbID);
-		}
-
-		entity->setVisible(false);
+		gameEntity_hide(entity->getID());
 	}
 }
 
@@ -67,35 +61,17 @@ void FabiEngine3D::gameEntity_showAll()
 {
 	for (auto entity : _core->_gameEntityManager.getEntities())
 	{
-		// Show every bound AABB
-		for (auto& aabbID : aabbEntity_getBoundIDs(entity->getID(), true, false))
-		{
-			aabbEntity_show(aabbID);
-		}
-
-		entity->setVisible(true);
+		gameEntity_show(entity->getID());
 	}
 }
 
 void FabiEngine3D::gameEntity_hide(const string& ID)
 {
-	// Hide every bound AABB
-	for (auto& aabbID : aabbEntity_getBoundIDs(ID, true, false))
-	{
-		aabbEntity_hide(aabbID);
-	}
-
 	_core->_gameEntityManager.getEntity(ID)->setVisible(false);
 }
 
 void FabiEngine3D::gameEntity_show(const string& ID)
 {
-	// Show every bound AABB
-	for (auto& aabbID : aabbEntity_getBoundIDs(ID, true, false))
-	{
-		aabbEntity_show(aabbID);
-	}
-
 	_core->_gameEntityManager.getEntity(ID)->setVisible(true);
 }
 

@@ -5,7 +5,7 @@
 class LightEntity final : public BaseEntity
 {
 public:
-	LightEntity() = default;
+	using BaseEntity::BaseEntity;
 	~LightEntity() = default;
 
 	void setPosition(vec3 position);

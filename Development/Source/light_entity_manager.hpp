@@ -8,11 +8,11 @@ public:
 	LightEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, RenderBus& renderBus);
 	~LightEntityManager() = default;
 
-	LightEntity * getEntity(const string& ID) override;
+	shared_ptr<LightEntity> getEntity(const string& ID);
 
-	const vector<LightEntity*> getEntities();
+	const vector<shared_ptr<LightEntity>> getEntities();
 
 	void addLightEntity(const string& ID, vec3 position, vec3 color, float intensity, float distanceFactor);
 
-	void update() override {}
+	void update() override;
 };

@@ -3,26 +3,19 @@
 #include <iostream>
 
 GameEntityManager::GameEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, RenderBus& renderBus) :
-	BaseEntityManager(objLoader, texLoader, renderBus)
+	BaseEntityManager(EntityType::GAME, objLoader, texLoader, renderBus)
 {
 
 }
 
-GameEntity* GameEntityManager::getEntity(const string& ID)
+shared_ptr<GameEntity> GameEntityManager::getEntity(const string& ID)
 {
-	return dynamic_cast<GameEntity*>(_getBaseEntity(ID, EntityType::GAME));
+	return _getGameEntity(ID);
 }
 
-const vector<GameEntity*> GameEntityManager::getEntities()
+const vector<shared_ptr<GameEntity>> GameEntityManager::getEntities()
 {
-	vector<GameEntity*> newVector;
-
-	for (auto& entity : _getBaseEntities())
-	{
-		newVector.push_back(dynamic_cast<GameEntity*>(entity));
-	}
-
-	return newVector;
+	return _getGameEntities();
 }
 
 void GameEntityManager::addGameEntity
@@ -35,7 +28,7 @@ void GameEntityManager::addGameEntity
 	auto parts = _objLoader.loadOBJ(objName, false);
 
 	// Create entity
-	_createEntity(EntityType::GAME, ID)->load(ID);
+	_createEntity(ID);
 	getEntity(ID)->setObjPath(objName);
 
 	// Create OpenGL buffers
@@ -182,11 +175,8 @@ void GameEntityManager::setLodDistance(float distance)
 
 void GameEntityManager::update()
 {
-	for (auto & baseEntity : _getBaseEntities())
+	for (auto& entity : _getGameEntities())
 	{
-		// Create temporary game entity object
-		auto * entity = getEntity(baseEntity->getID());
-
 		// Only update if visible
 		if (entity->isVisible())
 		{

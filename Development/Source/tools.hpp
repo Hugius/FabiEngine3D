@@ -1,8 +1,10 @@
 #pragma once
 
+#define NOMINMAX
+
 #include <string>
 #include <random>
-#include <Windows.h>
+#include <windows.h>
 
 using std::string;
 

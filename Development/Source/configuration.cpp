@@ -1,4 +1,5 @@
 #include "configuration.hpp"
+#include "logger.hpp"
 
 #include <SDL\\SDL.h>
 #include <filesystem>

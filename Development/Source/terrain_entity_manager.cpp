@@ -9,7 +9,14 @@ TerrainEntityManager::TerrainEntityManager(OBJLoader& objLoader, TextureLoader& 
 
 shared_ptr<TerrainEntity> TerrainEntityManager::getEntity(const string& ID)
 {
-	return _getTerrainEntity(ID);
+	auto result = _getTerrainEntity(ID);
+
+	if (result == nullptr)
+	{
+		Logger::throwError("Nonexisting TERRAIN entity with ID " + ID + " requested");
+	}
+
+	return result;
 }
 
 shared_ptr<TerrainEntity> TerrainEntityManager::getSelectedTerrain()

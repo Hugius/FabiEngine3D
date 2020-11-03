@@ -1,5 +1,6 @@
 #include "water_entity_manager.hpp"
 #include "render_bus.hpp"
+#include "logger.hpp"
 
 #include <iostream>
 
@@ -11,7 +12,14 @@ WaterEntityManager::WaterEntityManager(OBJLoader& objLoader, TextureLoader& texL
 
 shared_ptr<WaterEntity> WaterEntityManager::getEntity(const string& ID)
 {
-	return _getWaterEntity(ID);
+	auto result = _getWaterEntity(ID);
+
+	if (result == nullptr)
+	{
+		Logger::throwError("Nonexisting WATER entity with ID " + ID + " requested");
+	}
+
+	return result;
 }
 
 shared_ptr<WaterEntity> WaterEntityManager::getSelectedWater()

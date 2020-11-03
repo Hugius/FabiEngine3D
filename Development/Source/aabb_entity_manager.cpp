@@ -31,7 +31,14 @@ AabbEntityManager::AabbEntityManager(OBJLoader& objLoader, TextureLoader& texLoa
 
 shared_ptr<AabbEntity> AabbEntityManager::getEntity(const string& ID)
 {
-	return _getAabbEntity(ID);
+	auto result = _getAabbEntity(ID);
+
+	if (result == nullptr)
+	{
+		Logger::throwError("Nonexisting AABB entity with ID " + ID + " requested");
+	}
+
+	return result;
 }
 
 const vector<shared_ptr<AabbEntity>>& AabbEntityManager::getEntities()
@@ -107,7 +114,7 @@ void AabbEntityManager::update(const vector<shared_ptr<GameEntity>>& gameEntitie
 						float rotationY = fabsf(parentEntity->getRotation().y);
 						float rotationZ = fabsf(parentEntity->getRotation().z);
 						vec3 parentSize = parentEntity->getScaling();
-						float maxParentSize = max(parentSize.x, parentSize.y);
+						float maxParentSize = std::max(parentSize.x, parentSize.y);
 						vec3 newAabbSize = vec3(parentSize.x, parentSize.y, 0.1f);
 
 						// Determine rotation direction

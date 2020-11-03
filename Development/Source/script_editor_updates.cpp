@@ -134,40 +134,6 @@ void ScriptEditor::_updateMiscellaneous()
 		_scrollingAcceleration *= 0.95f;
 		_fe3d.camera_translate(vec3(0.0f, _scrollingAcceleration, 0.0f));
 
-		// Stop rendering all text not visible by the camera
-		//for (auto& ID : _fe3d.billboardEntity_getAllIDs())
-		//{
-		//	// Check if a displaying billboard (and not a logical billboard)
-		//	if(ID.size() >= 4 && (ID.substr(ID.size() - 4, 4) == "text"))
-		//	{
-		//		// Check if billboard is outside of camera view
-		//		if ((_fe3d.billboardEntity_getPosition(ID).y - (_textCharacterSize.y)) <= (_fe3d.camera_getPosition().y + _cameraOffset) &&
-		//			(_fe3d.billboardEntity_getPosition(ID).y + (_textCharacterSize.y)) >= (_fe3d.camera_getPosition().y - _cameraOffset))
-		//		{
-		//			_fe3d.billboardEntity_show(ID);
-		//		}
-		//		else
-		//		{
-		//			_fe3d.billboardEntity_hide(ID);
-		//		}
-		//	}
-		//}
-
-		// Stop responsiveness of all text AABB not visible by the camera
-		//for (auto& ID : _fe3d.aabbEntity_getAllIDs())
-		//{
-		//	// Check if AABB entity is outside of camera view
-		//	if ((_fe3d.aabbEntity_getPosition(ID).y - (_textCharacterSize.y)) <= (_fe3d.camera_getPosition().y + _cameraOffset) &&
-		//		(_fe3d.aabbEntity_getPosition(ID).y + (_textCharacterSize.y)) >= (_fe3d.camera_getPosition().y - _cameraOffset))
-		//	{
-		//		_fe3d.aabbEntity_setResponsiveness(ID, true);
-		//	}
-		//	else
-		//	{
-		//		_fe3d.aabbEntity_setResponsiveness(ID, false);
-		//	}
-		//}
-
 		// Check if user filled in a new script name
 		string newName;
 		if (_gui.getGlobalScreen()->checkValueForm("newScriptName", newName))

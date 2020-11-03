@@ -2,10 +2,12 @@
 
 #pragma warning (disable : 4996)
 
+#define NOMINMAX
+
 #include "message_type.hpp"
 
 #include <conio.h>
-#include <Windows.h>
+#include <windows.h>
 #include <iostream>
 #include <ctime>
 #include <string>

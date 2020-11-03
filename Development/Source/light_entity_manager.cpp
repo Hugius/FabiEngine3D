@@ -1,5 +1,6 @@
 #include "light_entity_manager.hpp"
 #include "configuration.hpp"
+#include "logger.hpp"
 
 LightEntityManager::LightEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, RenderBus& renderBus) :
 	BaseEntityManager(EntityType::LIGHT, objLoader, texLoader, renderBus)
@@ -9,7 +10,14 @@ LightEntityManager::LightEntityManager(OBJLoader& objLoader, TextureLoader& texL
 
 shared_ptr<LightEntity> LightEntityManager::getEntity(const string& ID)
 {
-	return _getLightEntity(ID);
+	auto result = _getLightEntity(ID);
+
+	if (result == nullptr)
+	{
+		Logger::throwError("Nonexisting LIGHT entity with ID " + ID + " requested");
+	}
+
+	return result;
 }
 
 const vector<shared_ptr<LightEntity>> LightEntityManager::getEntities()

@@ -77,12 +77,18 @@ void ScriptEditor::unload()
 	_script.reset();
 
 	// Reset editor properties
+	_scriptFileNamesToDelete.clear();
+	_activeActionKey = InputType::NONE;
 	_currentScriptFileID = "";
 	_scrollingAcceleration = 0.0f;
 	_isLoaded = false;
 	_isScriptLoadedFromFile = false;
 	_isWritingScript = false;
-
-	// Miscellaneous
-	_isLoaded = false;
+	_singleActionAllowed = true;
+	_continuousActionAllowed = false;
+	_wasGuiFocused = false;
+	_isSelectingLines = false;
+	_firstSelectedLineIndex = -1;
+	_lastSelectedLineIndex = -1;
+	_passedFrames = 0;
 }

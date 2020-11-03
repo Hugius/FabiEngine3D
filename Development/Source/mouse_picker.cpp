@@ -2,6 +2,8 @@
 #include "render_bus.hpp"
 #include "configuration.hpp"
 
+#include <algorithm>
+
 const int   RECURSION_COUNT = 256;
 const float RAY_RANGE       = 512;
 
@@ -52,8 +54,8 @@ float MousePicker::checkCursorInBox(vec3 lb, vec3 rt, vec3 cameraPos)
 	float t5 = (lb.z - cameraPos.z) * dirfrac.z;
 	float t6 = (rt.z - cameraPos.z) * dirfrac.z;
 
-	float tmin = max(max(min(t1, t2), min(t3, t4)), min(t5, t6));
-	float tmax = min(min(max(t1, t2), max(t3, t4)), max(t5, t6));
+	float tmin = std::max(std::max(std::min(t1, t2), std::min(t3, t4)), std::min(t5, t6));
+	float tmax = std::min(std::min(std::max(t1, t2), std::max(t3, t4)), std::max(t5, t6));
 
 	// if tmax < 0, ray (line) is intersecting AABB, but the whole AABB is behind us
 	if (tmax < 0)

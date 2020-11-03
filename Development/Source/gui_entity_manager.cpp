@@ -1,4 +1,5 @@
 #include "gui_entity_manager.hpp"
+#include "logger.hpp"
 
 #include <iostream>
 
@@ -18,7 +19,14 @@ GuiEntityManager::~GuiEntityManager()
 
 shared_ptr<GuiEntity> GuiEntityManager::getEntity(const string& ID)
 {
-	return _getGuiEntity(ID);
+	auto result = _getGuiEntity(ID);
+
+	if (result == nullptr)
+	{
+		Logger::throwError("Nonexisting GUI entity with ID " + ID + " requested");
+	}
+
+	return result;
 }
 
 const vector<shared_ptr<GuiEntity>> GuiEntityManager::getEntities()

@@ -98,7 +98,7 @@ void AudioPlayer::update(CameraManager& camera, std::vector<AudioChunk>& chunks,
 				float xDiff = fabsf(chunk.getPosition().x - cameraPos.x); // Difference between camera X & point X
 				float yDiff = fabsf(chunk.getPosition().y - cameraPos.y); // Difference between camera Y & point Y
 				float zDiff = fabsf(chunk.getPosition().z - cameraPos.z); // Difference between camera Z & point Z
-				float maxDiff = max(xDiff, max(yDiff, zDiff)); // Maximum difference
+				float maxDiff = std::max(xDiff, std::max(yDiff, zDiff)); // Maximum difference
 				float volume = 128.0f - ((maxDiff / chunk.getMaxDistance()) * 128.0f); // Calculate volume
 				volume = std::clamp(volume, 0.0f, 128.0f); // Clamp to minimum and maximum
 				setChunkVolume(chunk, int(volume)); // Apply volume

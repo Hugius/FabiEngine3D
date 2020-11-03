@@ -1,4 +1,5 @@
 #include "game_entity_manager.hpp"
+#include "logger.hpp"
 
 #include <iostream>
 
@@ -10,7 +11,14 @@ GameEntityManager::GameEntityManager(OBJLoader& objLoader, TextureLoader& texLoa
 
 shared_ptr<GameEntity> GameEntityManager::getEntity(const string& ID)
 {
-	return _getGameEntity(ID);
+	auto result = _getGameEntity(ID);
+
+	if (result == nullptr)
+	{
+		Logger::throwError("Nonexisting GAME entity with ID " + ID + " requested");
+	}
+
+	return result;
 }
 
 const vector<shared_ptr<GameEntity>> GameEntityManager::getEntities()

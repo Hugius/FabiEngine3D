@@ -2,12 +2,14 @@
 #include "logger.hpp"
 #include "configuration.hpp"
 
+#define NOMINMAX
+
 #include <GLEW\\glew.h>
 #include <SDL\\SDL_image.h>
 #include <SDL\\SDL_mixer.h>
 #include <SDL\\SDL_ttf.h>
 #include <SDL\\SDL_syswm.h>
-#include <Windows.h>
+#include <windows.h>
 #include <ShellScalingAPI.h>
 
 WindowManager::WindowManager()

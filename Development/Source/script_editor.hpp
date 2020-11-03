@@ -37,15 +37,22 @@ private:
 	ScriptExecutor _scriptExecutor;
 
 	// Editor variables
+	vector<string> _scriptFileNamesToDelete;
+	vector<string> _copyClipboard;
+	InputType _activeActionKey = InputType::NONE;
 	string _currentProjectName = "";
 	string _currentScriptFileID = "";
 	float _scrollingAcceleration = 0.0f;
 	bool _isLoaded = false;
 	bool _isScriptLoadedFromFile = false;
 	bool _isWritingScript = false;
-
-	// Miscellaneous variables
-	vector<string> _scriptFileNamesToDelete;
+	bool _singleActionAllowed = true;
+	bool _continuousActionAllowed = false;
+	bool _wasGuiFocused = false;
+	bool _isSelectingLines = false;
+	int _firstSelectedLineIndex = -1;
+	int _lastSelectedLineIndex = -1;
+	unsigned int _passedFrames = 0;
 	
 	// Editor constants
 	const string _fontPath = "engine\\fonts\\lucida.ttf";
@@ -53,6 +60,7 @@ private:
 	const vec3 _scriptTextStartingPosition = vec3(-11.0f, 6.0f, 0.5f);
 	const vec3 _lineNumberColor = vec3(0.0f, 1.0f, 0.0f);
 	const vec3 _characterColor = vec3(1.0f);
+	const vec3 _selectionColor = vec3(0.25f);
 	const vec2 _textCharacterSize = vec2(0.25f, 0.75f);
 	const unsigned int _continuousTextActionFrameMinimum = 75;
 	const unsigned int _continuousTextActionInterval = 5;
@@ -93,5 +101,10 @@ private:
 		{'\\', '|' },
 		{'-', '_'  },
 		{'=', '+'  }
+	};
+	const vector<InputType> _actionKeys =
+	{ 
+		InputType::KEY_ENTER, InputType::KEY_BACKSPACE, InputType::KEY_DELETE, 
+		InputType::KEY_LEFT, InputType::KEY_RIGHT, InputType::KEY_UP, InputType::KEY_DOWN
 	};
 };

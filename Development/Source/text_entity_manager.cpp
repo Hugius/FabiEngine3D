@@ -1,4 +1,5 @@
 #include "text_entity_manager.hpp"
+#include "logger.hpp"
 
 #include <iostream>
 
@@ -19,7 +20,14 @@ TextEntityManager::~TextEntityManager()
 
 shared_ptr<TextEntity> TextEntityManager::getEntity(const string& ID)
 {
-	return _getTextEntity(ID);
+	auto result = _getTextEntity(ID);
+
+	if (result == nullptr)
+	{
+		Logger::throwError("Nonexisting TEXT entity with ID " + ID + " requested");
+	}
+
+	return result;
 }
 
 const vector<shared_ptr<TextEntity>> TextEntityManager::getEntities()

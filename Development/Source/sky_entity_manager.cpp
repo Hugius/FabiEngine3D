@@ -1,5 +1,6 @@
 #include "sky_entity_manager.hpp"
 #include "render_bus.hpp"
+#include "logger.hpp"
 
 #include <iostream>
 
@@ -11,7 +12,14 @@ SkyEntityManager::SkyEntityManager(OBJLoader& objLoader, TextureLoader& texLoade
 
 shared_ptr<SkyEntity> SkyEntityManager::getEntity(const string& ID)
 {
-	return _getSkyEntity(ID);
+	auto result = _getSkyEntity(ID);
+
+	if (result == nullptr)
+	{
+		Logger::throwError("Nonexisting SKY entity with ID " + ID + " requested");
+	}
+
+	return result;
 }
 
 shared_ptr<SkyEntity> SkyEntityManager::getSelectedSky()

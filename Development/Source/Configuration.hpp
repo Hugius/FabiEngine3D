@@ -1,7 +1,5 @@
 #pragma once
 
-#include "logger.hpp"
-
 #include <fstream>
 #include <GLM\\glm.hpp>
 #include <sstream>

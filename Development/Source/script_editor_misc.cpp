@@ -13,7 +13,7 @@ void ScriptEditor::_reloadScriptTextDisplay()
 		{
 			// Generation values
 			string lineNumberID = to_string(lineIndex);
-			string lineTextID = lineNumberID + "_text";
+			string lineTextID = "text_" + lineNumberID;
 			string lineNumberString = to_string(lineIndex + 1);
 			string lineTextString = _script.getScriptFile(_currentScriptFileID)->getLineText(lineIndex);
 			vec2 lineNumberSize = vec2(lineNumberString.size() * _textCharacterSize.x, _textCharacterSize.y);
@@ -27,7 +27,7 @@ void ScriptEditor::_reloadScriptTextDisplay()
 			// Create line number billboard
 			_fe3d.billBoardEntity_add(lineNumberID, lineNumberString, _fontPath, _lineNumberColor, lineNumberPosition, vec3(0.0f), lineNumberSize, 0, 0);
 			vec3 aabbPosition = lineNumberPosition - vec3(0.0f, _textCharacterSize.y / 2.0f, 0.0f);
-			vec3 aabbSize = vec3(_textCharacterSize.x * static_cast<float>(_maxCharactersPerLine * 2), _textCharacterSize.y, 0.05f);
+			vec3 aabbSize = vec3(_textCharacterSize.x * static_cast<float>(_maxCharactersPerLine * 2) * 1.1f, _textCharacterSize.y, 0.05f);
 			_fe3d.aabbEntity_add(lineNumberID, aabbPosition, aabbSize, true);
 			
 			// Create line text display billboard

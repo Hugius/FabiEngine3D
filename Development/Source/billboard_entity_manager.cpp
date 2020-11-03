@@ -21,7 +21,14 @@ BillboardEntityManager::BillboardEntityManager(OBJLoader& objLoader, TextureLoad
 
 shared_ptr<BillboardEntity> BillboardEntityManager::getEntity(const string& ID)
 {
-	return _getBillboardEntity(ID);
+	auto result = _getBillboardEntity(ID);
+
+	if (result == nullptr)
+	{
+		Logger::throwError("Nonexisting BILLBOARD entity with ID " + ID + " requested");
+	}
+
+	return result;
 }
 
 const vector<shared_ptr<BillboardEntity>> BillboardEntityManager::getEntities()

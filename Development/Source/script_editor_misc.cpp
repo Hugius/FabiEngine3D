@@ -43,9 +43,10 @@ void ScriptEditor::_reloadScriptTextDisplay()
 
 				// Create new character billboard for logic
 				_fe3d.billBoardEntity_add(characterID, vec3(0.0f), characterPosition, vec3(0.0f), _textCharacterSize, false, false, false);
-				_fe3d.aabbEntity_bindToBillboardEntity(characterID, true);
 			}
 		}
+
+		_wasScriptTextReloaded = true;
 	}
 }
 

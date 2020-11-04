@@ -25,6 +25,8 @@ public:
 private:
 	void _updateGUI();
 	void _updateTextWriter();
+	void _updateTextSelector(string& newCharacters, unsigned int& cursorLineIndex,
+		unsigned int& cursorCharIndex, int& hoveredLineIndex, bool& textHasChanged);
 	void _updateMiscellaneous();
 	void _loadScriptsFromFile();
 	void _saveScriptToFile();
@@ -49,7 +51,7 @@ private:
 	bool _singleActionAllowed = true;
 	bool _continuousActionAllowed = false;
 	bool _wasGuiFocused = false;
-	bool _isSelectingLines = false;
+	bool _wasScriptTextReloaded = false;
 	int _firstSelectedLineIndex = -1;
 	int _lastSelectedLineIndex = -1;
 	unsigned int _passedFrames = 0;

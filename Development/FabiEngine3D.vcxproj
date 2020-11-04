@@ -316,6 +316,7 @@
     <ClCompile Include="Source\script_editor_misc.cpp" />
     <ClCompile Include="Source\script_editor_persistence.cpp" />
     <ClCompile Include="Source\script_editor_updates.cpp" />
+    <ClCompile Include="Source\script_editor_selector.cpp" />
     <ClCompile Include="Source\script_executor.cpp" />
     <ClCompile Include="Source\script_file.cpp" />
     <ClCompile Include="Source\script_interpreter_arguments.cpp" />

@@ -93,7 +93,7 @@ void ScriptEditor::_updateTextWriter()
 		}
 
 		// Determine text functionality type
-		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_RIGHT))
+		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
 			// Check if anything was hovered at all
 			if (!hoveredBillboardID.empty())
@@ -396,30 +396,34 @@ void ScriptEditor::_updateTextWriter()
 			// Check if not exceeding character limit of current line
 			if (currentLineText.size() < _maxCharactersPerLine)
 			{
-				// Add newly typed character to line
-				if (!newCharacters.empty())
+				// Check if user is not selecting text
+				if (_firstSelectedLineIndex == -1)
 				{
-					if (currentLineText.empty() || cursorCharIndex == currentLineText.size()) // First or last character in line
+					// Add newly typed character to line
+					if (!newCharacters.empty())
 					{
-						for (auto& character : newCharacters)
+						if (currentLineText.empty() || cursorCharIndex == currentLineText.size()) // First or last character in line
 						{
-							currentLineText += character;
-							cursorCharIndex++;
+							for (auto& character : newCharacters)
+							{
+								currentLineText += character;
+								cursorCharIndex++;
+							}
 						}
-					}
-					else // Inbetween character in line
-					{
-						for (auto& character : newCharacters)
+						else // Inbetween character in line
 						{
-							currentLineText.insert(currentLineText.begin() + cursorCharIndex, character);
-							cursorCharIndex++;
+							for (auto& character : newCharacters)
+							{
+								currentLineText.insert(currentLineText.begin() + cursorCharIndex, character);
+								cursorCharIndex++;
+							}
 						}
+
+						textHasChanged = true;
+
+						// Save new line
+						_script.getScriptFile(_currentScriptFileID)->setLineText(cursorLineIndex, currentLineText);
 					}
-
-					textHasChanged = true;
-
-					// Save new line
-					_script.getScriptFile(_currentScriptFileID)->setLineText(cursorLineIndex, currentLineText);
 				}
 			}
 		}

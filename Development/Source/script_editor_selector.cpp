@@ -1,5 +1,7 @@
 #include "script_editor.hpp"
 
+#include <algorithm>
+
 void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& cursorLineIndex, 
 	unsigned int& cursorCharIndex, int& hoveredLineIndex, bool& textHasChanged)
 {
@@ -30,9 +32,9 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 				else
 				{
 					// Remove selected lines
+					int lineIndexToRemove = (_firstSelectedLineIndex > _lastSelectedLineIndex) ? _lastSelectedLineIndex : _firstSelectedLineIndex;
 					for (int i = 0; i <= abs(_firstSelectedLineIndex - _lastSelectedLineIndex); i++)
 					{
-						int lineIndexToRemove = (_firstSelectedLineIndex > _lastSelectedLineIndex) ? _lastSelectedLineIndex : _firstSelectedLineIndex;
 						_script.getScriptFile(_currentScriptFileID)->removeLine(static_cast<unsigned int>(lineIndexToRemove));
 					}
 				}
@@ -42,10 +44,23 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 				{
 					cursorLineIndex = _script.getScriptFile(_currentScriptFileID)->getLineCount();
 				}
-				_script.getScriptFile(_currentScriptFileID)->insertNewLine(cursorLineIndex, newCharacters); // Add new line
-				cursorCharIndex = newCharacters.empty() ? 0 : newCharacters.size(); // 
+				cursorCharIndex = newCharacters.empty() ? 0 : newCharacters.size(); // Index based on amount of newly added characters
 
-				// Make sure the script gets reloaded
+				// Add new line
+				_script.getScriptFile(_currentScriptFileID)->insertNewLine(cursorLineIndex, newCharacters);
+
+				// Add extra line for entering
+				if (_fe3d.input_getKeyPressed(InputType::KEY_ENTER))
+				{
+					// Check if not exceeding the line limit
+					if (_script.getScriptFile(_currentScriptFileID)->getLineCount() < _maxLineAmount)
+					{
+						_script.getScriptFile(_currentScriptFileID)->insertNewLine(cursorLineIndex, "");
+						cursorLineIndex++;
+					}
+				}
+
+				// Make sure the script gets re-rendered
 				textHasChanged = true;
 
 				// Make sure only the selected text is removed
@@ -110,8 +125,23 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 			}
 		}
 	}
-	else
+	else // User stopped selecting text
 	{
+		if (_firstSelectedLineIndex != -1) // Check if any text selected
+		{
+			if (_lastSelectedLineIndex == -1) // Only 1 line is selected
+			{
+				cursorLineIndex = _firstSelectedLineIndex;
+			}
+			else // Multiple lines selected
+			{
+				// Most upper selected line must be the cursor position
+				cursorLineIndex = std::min(_firstSelectedLineIndex, _lastSelectedLineIndex);
+			}
+
+			cursorCharIndex = _script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex).size();
+		}
+
 		// Control button combinations
 		if (_fe3d.input_getKeyDown(InputType::KEY_LCTRL))
 		{
@@ -138,7 +168,40 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 			}
 			else if (_fe3d.input_getKeyPressed(InputType::KEY_V)) // Paste copied text
 			{
+				// Check if clipboard is not empty
+				if (!_copyClipboard.empty())
+				{
+					// Create new lines
+					std::reverse(_copyClipboard.begin(), _copyClipboard.end());
+					for (unsigned int i = 0; i < _copyClipboard.size(); i++)
+					{
+						// Check if next line exists
+						if ((cursorLineIndex + i) < _script.getScriptFile(_currentScriptFileID)->getLineCount())
+						{
+							// Check if text can be placed on current line
+							if (_script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex + i).empty())
+							{
+								_script.getScriptFile(_currentScriptFileID)->setLineText(cursorLineIndex + i, _copyClipboard[i]);
+								continue;
+							}
+						}
 
+						// Try to create new line
+						if (_script.getScriptFile(_currentScriptFileID)->getLineCount() < _maxLineAmount)
+						{
+							_script.getScriptFile(_currentScriptFileID)->insertNewLine(cursorLineIndex + i, _copyClipboard[i]);
+						}
+					}
+					std::reverse(_copyClipboard.begin(), _copyClipboard.end());
+
+					// Change cursor position
+					cursorLineIndex += (_copyClipboard.size() - 1);
+					cursorLineIndex = std::min(cursorLineIndex, (_maxLineAmount - 1));
+					cursorCharIndex = _script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex).size();
+
+					// Make sure the script gets re-rendered
+					textHasChanged = true;
+				}
 			}
 		}
 	}

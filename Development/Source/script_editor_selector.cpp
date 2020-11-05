@@ -10,7 +10,8 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 	{
 		// Check if user cancels or edits any selected text
 		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_RIGHT) ||
-			_activeActionKey != InputType::NONE || !newCharacters.empty())
+			_activeActionKey != InputType::NONE || !newCharacters.empty() || 
+			(_fe3d.input_getKeyDown(InputType::KEY_LCTRL) && _fe3d.input_getKeyPressed(InputType::KEY_V)))
 		{
 			// Delete selection billboards
 			for (auto& ID : _fe3d.billboardEntity_getAllIDs())
@@ -23,7 +24,8 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 
 			// Check if text content has been changed
 			if (!newCharacters.empty() || _fe3d.input_getKeyPressed(InputType::KEY_BACKSPACE) ||
-				_fe3d.input_getKeyPressed(InputType::KEY_DELETE) || _fe3d.input_getKeyPressed(InputType::KEY_ENTER))
+				_fe3d.input_getKeyPressed(InputType::KEY_DELETE) || _fe3d.input_getKeyPressed(InputType::KEY_ENTER) ||
+				_fe3d.input_getKeyDown(InputType::KEY_LCTRL) && _fe3d.input_getKeyPressed(InputType::KEY_V))
 			{
 				if (_lastSelectedLineIndex == -1) // Only 1 line is selected
 				{
@@ -174,7 +176,6 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 					// Paste as much copied text as possible
 					unsigned int pastedAmount = 0;
 					bool firstLineEmpty = _script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex).empty();
-					std::reverse(_copyClipboard.begin(), _copyClipboard.end());
 					for (unsigned int i = 0; i < _copyClipboard.size(); i++)
 					{
 						// Check if next line exists
@@ -200,7 +201,6 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 							break;
 						}
 					}
-					std::reverse(_copyClipboard.begin(), _copyClipboard.end());
 
 					// Check if anything has been successfully pasted
 					if (pastedAmount > 0)

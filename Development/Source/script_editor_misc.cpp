@@ -8,8 +8,14 @@ void ScriptEditor::_reloadScriptTextDisplay()
 		_fe3d.billboardEntity_deleteAll();
 		_fe3d.aabbEntity_deleteAll();
 
+		// Create line separator billboard
+		float lineCount = static_cast<float>(_script.getScriptFile(_currentScriptFileID)->getLineCount());
+		vec2 separatorSize = vec2((_textCharacterSize.x / 4.0f), (lineCount * _verticalLineOffset));
+		vec3 separatorPosition = _scriptTextStartingPosition + vec3(_horizontalLineOffset / 2.0f, -(((lineCount - 1) / 2.0f) * _verticalLineOffset), 0.0f);
+		_fe3d.billBoardEntity_add("separator", _selectionColor, separatorPosition, vec3(0.0f), separatorSize, false, false);
+
 		// Create visible billboards for display and invisible billboards for logic
-		for (unsigned int lineIndex = 0; lineIndex < _script.getScriptFile(_currentScriptFileID)->getLineCount(); lineIndex++)
+		for (unsigned int lineIndex = 0; lineIndex < lineCount; lineIndex++)
 		{
 			// Generation values
 			string lineNumberID = to_string(lineIndex);
@@ -22,7 +28,7 @@ void ScriptEditor::_reloadScriptTextDisplay()
 				vec3((lineNumberString.size() - 1) * (_textCharacterSize.x / 2.0f), _verticalLineOffset * static_cast<float>(lineIndex), 0.0f);
 			vec3 lineTextPosition = _scriptTextStartingPosition +
 				vec3((lineTextString.size() - 1) * (_textCharacterSize.x / 2.0f), -_verticalLineOffset * static_cast<float>(lineIndex), 0.0f) +
-				vec3(_horizontalCharacterOffset + _textCharacterSize.x, 0.0f, 0.0f);
+				vec3(_horizontalLineOffset, 0.0f, 0.0f);
 
 			// Create line number billboard
 			_fe3d.billBoardEntity_add(lineNumberID, lineNumberString, _fontPath, _lineNumberColor, lineNumberPosition, vec3(0.0f), lineNumberSize, 0, 0);
@@ -46,7 +52,6 @@ void ScriptEditor::_reloadScriptTextDisplay()
 				// Create new character billboard for logic
 				_fe3d.billBoardEntity_add(characterID, vec3(0.0f), characterPosition, vec3(0.0f), _textCharacterSize, false, false, false);
 				_fe3d.aabbEntity_add(characterID, aabbPosition, aabbSize, true);
-				_fe3d.misc_enableAabbFrameRendering();
 			}
 		}
 	}

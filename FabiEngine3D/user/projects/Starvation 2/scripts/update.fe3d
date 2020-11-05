@@ -1,16 +1,19 @@
-14 86
+15 26
 META script_type_update
 META execution_entry
 
-/// Forward movement
-BOOL space = fe3d:input_key_down("KEY_SPACE")
-BOOL ctrl = fe3d:input_key_down("KEY_LCTRL")
+/// Flying
 IF fe3d:input_key_down("KEY_SPACE") IS <true>:
     fe3d:camera_move(0.0, 0.01, 0.0)
-
-IF ctrl IS <true>:
+IF fe3d:input_key_down("KEY_LCTRL") IS <true>:
     fe3d:camera_move(0.0 , -0.01 , 0.0)
 
-ogergreoeiorgkieorgkoergkerkergergerigkoergkoergkoiergkieorieorgoierkgioerkgieriergoergk
-eirogoregkioergkioerkgeriogkeorgkeorigkreiogkieorgkiorekgoierkgoierkogierkogierkgoierkogi
-0ke0fkekk0gk0kekgekrgegkg0regergerkg0erkg0ekr0iekr0ekrgiekri0erkig0ergk0irek0eirkg0ker
+/// Moving
+IF fe3d:input_key_down("KEY_W") IS <true>:
+    fe3d:camera_follow_z(0.01)
+IF fe3d:input_key_down("KEY_S") IS <true>:
+    fe3d:camera_follow_z(-0.01)
+IF fe3d:input_key_down("KEY_A") IS <true>:
+    fe3d:camera_follow_x(-0.01)
+IF fe3d:input_key_down("KEY_D") IS <true>:
+    fe3d:camera_follow_x(0.01)

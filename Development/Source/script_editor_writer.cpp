@@ -463,7 +463,7 @@ void ScriptEditor::_updateTextWriter()
 		if (cursorCharIndex == 0) // Default line position
 		{
 			vec3 linePosition = _fe3d.billboardEntity_getPosition(to_string(cursorLineIndex));
-			position = vec3(_scriptTextStartingPosition.x + _horizontalCharacterOffset, linePosition.y, linePosition.z);
+			position = vec3(_scriptTextStartingPosition.x + _horizontalLineOffset - _horizontalCharacterOffset, linePosition.y, linePosition.z);
 		}
 		else // Mid-text position
 		{

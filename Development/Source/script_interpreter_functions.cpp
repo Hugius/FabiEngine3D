@@ -36,19 +36,19 @@ vector<ScriptValue> ScriptInterpreter::_processEngineFunctionCall(const string& 
 						// Determine which type of value to print
 						if (arguments.back().getType() == ScriptValueType::STRING)
 						{
-							_fe3d.logger_throwInfo(arguments.front().getString());
+							_fe3d.logger_throwInfo(arguments[0].getString());
 						}
 						else if (arguments.back().getType() == ScriptValueType::DECIMAL)
 						{
-							_fe3d.logger_throwInfo(arguments.front().getDecimal());
+							_fe3d.logger_throwInfo(arguments[0].getDecimal());
 						}
 						else if (arguments.back().getType() == ScriptValueType::INTEGER)
 						{
-							_fe3d.logger_throwInfo(arguments.front().getInteger());
+							_fe3d.logger_throwInfo(arguments[0].getInteger());
 						}
 						else if (arguments.back().getType() == ScriptValueType::BOOLEAN)
 						{
-							_fe3d.logger_throwInfo(arguments.front().getBoolean() ? "true" : "false");
+							_fe3d.logger_throwInfo(arguments[0].getBoolean() ? "true" : "false");
 						}
 						
 						// Add return value
@@ -61,7 +61,7 @@ vector<ScriptValue> ScriptInterpreter::_processEngineFunctionCall(const string& 
 
 					if (_validateArgumentAmount(arguments, types.size()) && _validateArgumentTypes(arguments, types))
 					{
-						_sceneEditor.loadScene(arguments.front().getString());
+						_sceneEditor.loadScene(arguments[0].getString());
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 					}
 				}
@@ -79,7 +79,7 @@ vector<ScriptValue> ScriptInterpreter::_processEngineFunctionCall(const string& 
 
 					if (_validateArgumentAmount(arguments, types.size()) && _validateArgumentTypes(arguments, types))
 					{
-						_fe3d.camera_translate(vec3(arguments.front().getDecimal(), arguments[1].getDecimal(), arguments[2].getDecimal()));
+						_fe3d.camera_translate(vec3(arguments[0].getDecimal(), arguments[1].getDecimal(), arguments[2].getDecimal()));
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 					}
 				}
@@ -89,7 +89,37 @@ vector<ScriptValue> ScriptInterpreter::_processEngineFunctionCall(const string& 
 
 					if (_validateArgumentAmount(arguments, types.size()) && _validateArgumentTypes(arguments, types))
 					{
-						_fe3d.camera_setPosition(vec3(arguments.front().getDecimal(), arguments[1].getDecimal(), arguments[2].getDecimal()));
+						_fe3d.camera_setPosition(vec3(arguments[0].getDecimal(), arguments[1].getDecimal(), arguments[2].getDecimal()));
+						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+					}
+				}
+				else if (scriptLine.substr(0, openIndex) == "fe3d:camera_follow_x") // Follow X direction
+				{
+					auto types = { ScriptValueType::DECIMAL };
+
+					if (_validateArgumentAmount(arguments, types.size()) && _validateArgumentTypes(arguments, types))
+					{
+						_fe3d.camera_translateFollowX(arguments[0].getDecimal());
+						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+					}
+				}
+				else if (scriptLine.substr(0, openIndex) == "fe3d:camera_follow_z") // Follow Z direction
+				{
+					auto types = { ScriptValueType::DECIMAL };
+
+					if (_validateArgumentAmount(arguments, types.size()) && _validateArgumentTypes(arguments, types))
+					{
+						_fe3d.camera_translateFollowZ(arguments[0].getDecimal());
+						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+					}
+				}
+				else if (scriptLine.substr(0, openIndex) == "fe3d:camera_follow_zy") // Follow ZY direction
+				{
+					auto types = { ScriptValueType::DECIMAL };
+
+					if (_validateArgumentAmount(arguments, types.size()) && _validateArgumentTypes(arguments, types))
+					{
+						_fe3d.camera_translateFollowZY(arguments[0].getDecimal());
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 					}
 				}
@@ -99,7 +129,7 @@ vector<ScriptValue> ScriptInterpreter::_processEngineFunctionCall(const string& 
 
 					if (_validateArgumentAmount(arguments, types.size()) && _validateArgumentTypes(arguments, types))
 					{
-						auto result = _fe3d.input_getKeyDown(_keyInputStringMap.at(arguments.front().getString()));
+						auto result = _fe3d.input_getKeyDown(_keyInputStringMap.at(arguments[0].getString()));
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 					}
 				}
@@ -109,7 +139,7 @@ vector<ScriptValue> ScriptInterpreter::_processEngineFunctionCall(const string& 
 
 					if (_validateArgumentAmount(arguments, types.size()) && _validateArgumentTypes(arguments, types))
 					{
-						auto result = _fe3d.input_getKeyPressed(_keyInputStringMap.at(arguments.front().getString()));
+						auto result = _fe3d.input_getKeyPressed(_keyInputStringMap.at(arguments[0].getString()));
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 					}
 				}
@@ -119,7 +149,7 @@ vector<ScriptValue> ScriptInterpreter::_processEngineFunctionCall(const string& 
 
 					if (_validateArgumentAmount(arguments, types.size()) && _validateArgumentTypes(arguments, types))
 					{
-						auto result = _fe3d.input_getKeyToggled(_keyInputStringMap.at(arguments.front().getString()));
+						auto result = _fe3d.input_getKeyToggled(_keyInputStringMap.at(arguments[0].getString()));
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 					}
 				}

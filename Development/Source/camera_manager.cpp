@@ -171,7 +171,7 @@ void CameraManager::translateFollowX(float speed) // Side movement
 { 
 	if (_isFreeMovementEnabled)
 	{
-		_position += _right * (speed / 100.0f);
+		_position += (_right * speed);
 	}
 }
 
@@ -182,8 +182,8 @@ void CameraManager::translateFollowZ(float speed) // Forward movement
 		vec3 tempFront = _front;
 		tempFront.x = cos(glm::radians(_yaw));
 		tempFront.z = sin(glm::radians(_yaw));
-		_position.x += tempFront.x * (speed / 100.0f);
-		_position.z += tempFront.z * (speed / 100.0f);
+		_position.x += (tempFront.x * speed);
+		_position.z += (tempFront.z * speed);
 	}
 }
 
@@ -191,9 +191,9 @@ void CameraManager::translateFollowZY(float speed) // Forward movement
 {
 	if (_isFreeMovementEnabled)
 	{
-		_position.x += _front.x * (speed / 100.0f);
-		_position.y += _front.y * (speed / 100.0f);
-		_position.z += _front.z * (speed / 100.0f);
+		_position.x += (_front.x * speed);
+		_position.y += (_front.y * speed);
+		_position.z += (_front.z * speed);
 	}
 }
 

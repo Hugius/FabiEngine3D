@@ -88,7 +88,6 @@ void ScriptEditor::unload()
 	_singleActionAllowed = true;
 	_continuousActionAllowed = false;
 	_wasGuiFocused = false;
-	_wasScriptTextReloaded = false;
 	_firstSelectedLineIndex = -1;
 	_lastSelectedLineIndex = -1;
 	_passedFrames = 0;

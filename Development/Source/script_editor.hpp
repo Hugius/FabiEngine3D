@@ -51,7 +51,6 @@ private:
 	bool _singleActionAllowed = true;
 	bool _continuousActionAllowed = false;
 	bool _wasGuiFocused = false;
-	bool _wasScriptTextReloaded = false;
 	int _firstSelectedLineIndex = -1;
 	int _lastSelectedLineIndex = -1;
 	unsigned int _passedFrames = 0;
@@ -76,6 +75,7 @@ private:
 	const float _verticalLineOffset = 1.0f;
 	const float _horizontalLineOffset = 0.5f;
 	const float _cameraOffset = (_verticalLineOffset * (_maxVisibleLines / 2.0f)) - (_textCharacterSize.y / 2.0f);
+	const float _aabbDepth = 0.05f;
 	const string _allWritableCharacters = " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*().,/;\'[]\\-=><?:\"{}|_+";
 	const string _letterCharacters = " abcdefghijklmnopqrstuvwxyz";
 	const vector<pair<char, char>> _numberCharacters =

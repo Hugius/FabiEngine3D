@@ -100,7 +100,7 @@ void AabbEntityManager::update(const vector<shared_ptr<GameEntity>>& gameEntitie
 				// Error logging
 				if (!found)
 				{
-					Logger::throwError("Collision entity \"" + entity->getID() + "\" bound to nonexisting GAME entity \"" + entity->getParentID() + "\"");
+					Logger::throwError("AABB entity \"" + entity->getID() + "\" bound to nonexisting GAME entity \"" + entity->getParentID() + "\"");
 				}
 			}
 			else if(entity->getParentType() == AabbParentType::BILLBOARD_ENTITY)
@@ -153,7 +153,7 @@ void AabbEntityManager::update(const vector<shared_ptr<GameEntity>>& gameEntitie
 				// Error logging
 				if (!found)
 				{
-					Logger::throwError("Collision entity \"" + entity->getID() + "\" bound to nonexisting BILLBOARD entity \"" + entity->getParentID() + "\"");
+					Logger::throwError("AABB entity \"" + entity->getID() + "\" bound to nonexisting BILLBOARD entity \"" + entity->getParentID() + "\"");
 				}
 			}
 		}

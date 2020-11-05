@@ -134,51 +134,6 @@ void ScriptEditor::_updateMiscellaneous()
 		_scrollingAcceleration *= 0.95f;
 		_fe3d.camera_translate(vec3(0.0f, _scrollingAcceleration, 0.0f));
 
-		// Synchronize AABB's with character billboards (to prevent low framerate when reloading script text fast)
-		if (_wasScriptTextReloaded)
-		{
-			if (_fe3d.misc_checkInterval("billboardAabbSynchronization", 100))
-			{
-				for (auto& ID : _fe3d.billboardEntity_getAllIDs())
-				{
-					if (ID.find('_') != string::npos) // String must contain underscore
-					{
-						// Must be a character billboard
-						if (ID.substr(0, string("text_").size()) != "text_" && ID.substr(0, string("selection_").size()) != "selection_")
-						{
-							if (!_fe3d.aabbEntity_isExisting(ID)) // Check if not already exists
-							{
-								_fe3d.aabbEntity_bindToBillboardEntity(ID, false); // Add AABB
-							}
-						}
-					}
-				}
-
-				_wasScriptTextReloaded = false;
-			}
-		}
-
-		// Only render visible billboards
-		//if (_fe3d.misc_checkInterval("billboardVisibility", 100))
-		//{
-		//	for (auto& ID : _fe3d.billboardEntity_getAllIDs())
-		//	{
-		//		if (ID.substr(0, 5) == "text_")
-		//		{
-		//			// Check if billboard is outside of camera view
-		//			if ((_fe3d.billboardEntity_getPosition(ID).y - (_textCharacterSize.y)) <= (_fe3d.camera_getPosition().y + _cameraOffset) &&
-		//				(_fe3d.billboardEntity_getPosition(ID).y + (_textCharacterSize.y)) >= (_fe3d.camera_getPosition().y - _cameraOffset))
-		//			{
-		//				_fe3d.billboardEntity_show(ID);
-		//			}
-		//			else
-		//			{
-		//				_fe3d.billboardEntity_hide(ID);
-		//			}
-		//		}
-		//	}
-		//}
-
 		// Check if user filled in a new script name
 		string newName;
 		if (_gui.getGlobalScreen()->checkValueForm("newScriptName", newName))

@@ -13,7 +13,7 @@ void FabiEngine3D::aabbEntity_add(const string& ID, vec3 position, vec3 size, bo
 
 void FabiEngine3D::aabbEntity_bindToGameEntity(const string& parentID, vec3 position, vec3 size, bool responsive, const string& customAabbID)
 {
-	if (customAabbID == "") // Use parent ID
+	if (customAabbID.empty()) // Use parent ID
 	{
 		if (_core->_gameEntityManager.isExisting(parentID))
 		{
@@ -39,7 +39,7 @@ void FabiEngine3D::aabbEntity_bindToGameEntity(const string& parentID, vec3 posi
 
 void FabiEngine3D::aabbEntity_bindToBillboardEntity(const string& parentID, bool responsive, const string& customAabbID)
 {
-	if (customAabbID == "") // Use parent ID
+	if (customAabbID.empty()) // Use parent ID
 	{
 		if (_core->_billboardEntityManager.isExisting(parentID))
 		{

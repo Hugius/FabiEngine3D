@@ -16,7 +16,7 @@ void ScriptEditor::_updateTextWriter()
 		unsigned int cursorLineIndex = _script.getScriptFile(_currentScriptFileID)->getCursorLineIndex();
 		unsigned int cursorCharIndex = _script.getScriptFile(_currentScriptFileID)->getCursorCharIndex();
 		string newCharacters = "";
-
+		
 		// Check if a billboard is hovered
 		auto hoveredBillboardID = _fe3d.collision_checkCursorInAny();
 		int hoveredLineIndex = -1;

@@ -171,7 +171,9 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 				// Check if clipboard is not empty
 				if (!_copyClipboard.empty())
 				{
-					// Create new lines
+					// Paste as much copied text as possible
+					unsigned int pastedAmount = 0;
+					bool firstLineEmpty = _script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex).empty();
 					std::reverse(_copyClipboard.begin(), _copyClipboard.end());
 					for (unsigned int i = 0; i < _copyClipboard.size(); i++)
 					{
@@ -182,6 +184,7 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 							if (_script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex + i).empty())
 							{
 								_script.getScriptFile(_currentScriptFileID)->setLineText(cursorLineIndex + i, _copyClipboard[i]);
+								pastedAmount++;
 								continue;
 							}
 						}
@@ -190,17 +193,26 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 						if (_script.getScriptFile(_currentScriptFileID)->getLineCount() < _maxLineAmount)
 						{
 							_script.getScriptFile(_currentScriptFileID)->insertNewLine(cursorLineIndex + i, _copyClipboard[i]);
+							pastedAmount++;
+						}
+						else
+						{
+							break;
 						}
 					}
 					std::reverse(_copyClipboard.begin(), _copyClipboard.end());
 
-					// Change cursor position
-					cursorLineIndex += (_copyClipboard.size() - 1);
-					cursorLineIndex = std::min(cursorLineIndex, (_maxLineAmount - 1));
-					cursorCharIndex = _script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex).size();
+					// Check if anything has been successfully pasted
+					if (pastedAmount > 0)
+					{
+						// Change cursor position
+						cursorLineIndex += (pastedAmount - static_cast<int>(firstLineEmpty));
+						cursorLineIndex = std::min(cursorLineIndex, (_maxLineAmount - 1));
+						cursorCharIndex = _script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex).size();
 
-					// Make sure the script gets re-rendered
-					textHasChanged = true;
+						// Make sure the script gets re-rendered
+						textHasChanged = true;
+					}
 				}
 			}
 		}

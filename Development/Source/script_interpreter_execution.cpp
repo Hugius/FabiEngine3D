@@ -83,7 +83,7 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 				return;
 			}
 		}
-		else if // Local variable
+		else if // Create local variable
 			(
 				scriptLineText.substr(0, _stringKeyword.size()  + 1) == _stringKeyword  + " " ||
 				scriptLineText.substr(0, _decimalKeyword.size() + 1) == _decimalKeyword + " " ||
@@ -91,13 +91,17 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 				scriptLineText.substr(0, _booleanKeyword.size() + 1) == _booleanKeyword + " "
 			)
 		{
-			_processVariableDefinition(scriptLineText, ScriptVariableScope::LOCAL);
+			_processVariableDefinition(scriptLineText, ScriptVariableScope::LOCAL, false);
 		}
-		else if (scriptLineText.substr(0, _globalKeyword.size() + 1) == _globalKeyword + " ") // Global variable
+		else if (scriptLineText.substr(0, _globalKeyword.size() + 1) == _globalKeyword + " ") // Create global variable
 		{
-			_processVariableDefinition(scriptLineText, ScriptVariableScope::GLOBAL);
+			_processVariableDefinition(scriptLineText, ScriptVariableScope::GLOBAL, false);
 		}
-		else
+		else if (scriptLineText.substr(0, _editKeyword.size() + 1) == _editKeyword + " ") // Edit existing variable
+		{
+			_processVariableDefinition(scriptLineText, ScriptVariableScope::UNKNOWN, true);
+		}
+		else // Invalid keyboard
 		{
 			_throwScriptError("unknown keyword!");
 			return;

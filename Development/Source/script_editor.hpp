@@ -18,7 +18,7 @@ public:
 	void update();
 	void setCurrentProjectName(const string & projectName);
 
-	ScriptExecutor& getScriptExecutor();
+	ScriptExecutor& getScriptExecutor(bool reloadScript);
 
 	bool isLoaded();
 

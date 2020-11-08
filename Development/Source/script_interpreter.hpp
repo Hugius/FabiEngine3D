@@ -30,7 +30,7 @@ private:
 	bool _isBooleanValue(const string& value);
 
 	// Variable functions
-	void _processVariableDefinition(const string& scriptLine, ScriptVariableScope scope);
+	void _processVariableDefinition(const string& scriptLine, ScriptVariableScope scope, bool isEditing);
 	bool _isLocalVariableExisting(const string& variableID);
 	bool _isGlobalVariableExisting(const string& variableID);
 	ScriptVariable& _getLocalVariable(const string& variableID);
@@ -80,6 +80,7 @@ private:
 	const string _elseKeyword    = "ELSE";
 	const string _globalKeyword  = "GLOB";
 	const string _constKeyword   = "CONST";
+	const string _editKeyword	 = "EDIT";
 	const string _stringKeyword  = "STR";
 	const string _decimalKeyword = "DEC";
 	const string _integerKeyword = "INT";

@@ -100,7 +100,7 @@ void ScriptInterpreter::load()
 		auto scriptFile = _script.getScriptFile(scriptID);
 
 		// Loop through every line
-		BEGIN : for (unsigned int i = 0; i < scriptFile->getLineCount(); i++)
+		BEGIN: for (unsigned int i = 0; i < scriptFile->getLineCount(); i++)
 		{
 			// Extract line content
 			std::istringstream iss(scriptFile->getLineText(i));
@@ -143,15 +143,18 @@ void ScriptInterpreter::executeDestruction()
 
 void ScriptInterpreter::unload()
 {
+	// Reset all variables
+	_currentScriptStackIDs.clear();
+	_currentLineStackIndices.clear();
+	_scopeDepthStack.clear();
 	_initScriptIDs.clear();
 	_updateScriptIDs.clear();
 	_destroyScriptIDs.clear();
-	_localVariablesStack.clear();
-	_currentScriptStackIDs.clear();
-	_currentLineStackIndices.clear();
+	_globalVariables.clear();
 	_initEntryID = "";
 	_updateEntryID = "";
 	_destroyEntryID = "";
+	_scopeHasChanged = false;
 	_hasThrownError = false;
 	_sceneEditor.clearScene();
 	_fe3d.skyEntity_select("@@engineBackground");

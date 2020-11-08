@@ -3,7 +3,7 @@
 #include <fstream>
 #include <sstream>
 
-#define SCRIPT_EXECUTOR _scriptEditor.getScriptExecutor()
+#define SCRIPT_EXECUTOR _scriptEditor.getScriptExecutor(false)
 
 TopViewportController::TopViewportController(FabiEngine3D& fe3d, EngineGuiManager& gui, 
 	ModelEditor& modelEditor, WorldEditor& worldEditor, BillboardEditor& billboardEditor, SceneEditor& sceneEditor, ScriptEditor& scriptEditor) :
@@ -142,7 +142,7 @@ void TopViewportController::_updateGameManagement()
 				}
 				else
 				{
-					SCRIPT_EXECUTOR.load();
+					_scriptEditor.getScriptExecutor(true).load();
 				}
 			}
 			else if (gameScreen->getButton("pause")->isHovered())
@@ -152,7 +152,7 @@ void TopViewportController::_updateGameManagement()
 			else if (gameScreen->getButton("restart")->isHovered())
 			{
 				SCRIPT_EXECUTOR.unload();
-				SCRIPT_EXECUTOR.load();
+				_scriptEditor.getScriptExecutor(true).load();
 			}
 			else if (gameScreen->getButton("stop")->isHovered())
 			{

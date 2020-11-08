@@ -197,7 +197,7 @@ vector<ScriptValue> ScriptInterpreter::_extractArguments(string argumentString)
 				// Check if variable building finished
 				if (c == ',' || (index == argumentString.size() - 1) || c == ' ')
 				{
-					// Check if the specified local variable exists
+					// Check if the specified variable name exists
 					if (_isLocalVariableExisting(currentArgument))
 					{
 						argumentList.push_back(_getLocalVariable(currentArgument).getValue());
@@ -209,9 +209,20 @@ vector<ScriptValue> ScriptInterpreter::_extractArguments(string argumentString)
 							finishedArgument = true;
 						}
 					}
+					else if (_isGlobalVariableExisting(currentArgument))
+					{
+						argumentList.push_back(_getGlobalVariable(currentArgument).getValue());
+						buildingVariable = false;
+
+						// Check if needs to be found yet
+						if (c != ',')
+						{
+							finishedArgument = true;
+						}
+					}
 					else
 					{
-						_throwScriptError("local variable \"" + currentArgument + "\" does not exist!");
+						_throwScriptError("variable \"" + currentArgument + "\" does not exist!");
 						return {};
 					}
 				}

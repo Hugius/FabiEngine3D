@@ -43,7 +43,7 @@ bool ScriptInterpreter::_isDecimalValue(const string& value)
 	}
 
 	// Check if value is a valid decimal
-	return (value.size() >= 3) && (isdigit(value.front()) && isdigit(value.back())) && (dots == 1);
+	return (value.size() >= 3) && (isdigit(value[startingIndex]) && isdigit(value.back())) && (dots == 1);
 }
 
 bool ScriptInterpreter::_isIntegerValue(const string& value)
@@ -76,58 +76,6 @@ bool ScriptInterpreter::_isIntegerValue(const string& value)
 bool ScriptInterpreter::_isBooleanValue(const string& value)
 {
 	return (value == "<true>" || value == "<false>");
-}
-
-bool ScriptInterpreter::_isLocalVariableExisting(const string& variableID)
-{
-	for (auto& variable : _localVariablesStack.back())
-	{
-		if (variableID == variable.getID())
-		{
-			return true;
-		}
-	}
-
-	return false;
-}
-
-bool ScriptInterpreter::_isGlobalVariableExisting(const string& variableID)
-{
-	for (auto& variable : _globalVariables)
-	{
-		if (variableID == variable.getID())
-		{
-			return true;
-		}
-	}
-
-	return false;
-}
-
-ScriptVariable& ScriptInterpreter::_getLocalVariable(const string& variableID)
-{
-	for (auto& variable : _localVariablesStack.back())
-	{
-		if (variableID == variable.getID())
-		{
-			return variable;
-		}
-	}
-
-	_fe3d.logger_throwError("Local script variable \"" + variableID + "\" not found!"); 
-}
-
-ScriptVariable& ScriptInterpreter::_getGlobalVariable(const string& variableID)
-{
-	for (auto& variable : _globalVariables)
-	{
-		if (variableID == variable.getID())
-		{
-			return variable;
-		}
-	}
-
-	_fe3d.logger_throwError("Global script variable \"" + variableID + "\" not found!");
 }
 
 unsigned int ScriptInterpreter::_countFrontSpaces(const string& scriptLineText)

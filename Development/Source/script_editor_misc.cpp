@@ -57,10 +57,10 @@ void ScriptEditor::_reloadScriptTextDisplay()
 	}
 }
 
-ScriptExecutor& ScriptEditor::getScriptExecutor()
+ScriptExecutor& ScriptEditor::getScriptExecutor(bool reloadScript)
 {
-	// Check if script is loaded yet
-	if (!_isScriptLoadedFromFile)
+	// Load the original script
+	if (reloadScript || !_isScriptLoadedFromFile)
 	{
 		_loadScriptsFromFile();
 	}

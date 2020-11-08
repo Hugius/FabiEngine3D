@@ -7,6 +7,11 @@ ScriptFile::ScriptFile(FabiEngine3D& fe3d, const string& ID) :
 
 }
 
+void ScriptFile::addNewLine(const string& textContent)
+{
+	_lines.push_back(textContent);
+}
+
 void ScriptFile::insertNewLine(unsigned int index, const string& textContent)
 {
 	_lines.insert(_lines.begin() + index, textContent);
@@ -81,4 +86,9 @@ unsigned int ScriptFile::getCursorLineIndex()
 unsigned int ScriptFile::getCursorCharIndex()
 {
 	return _cursorCharIndex;
+}
+
+const vector<string>& ScriptFile::getLines()
+{
+	return _lines;
 }

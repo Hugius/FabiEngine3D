@@ -38,6 +38,10 @@ bool ScriptInterpreter::_checkIfStatement(string conditionString)
 			{
 				comparisonValues.push_back(_getLocalVariable(elementString).getValue());
 			}
+			else if (_isGlobalVariableExisting(elementString)) // GLOBAL VARIABLE
+			{
+				comparisonValues.push_back(_getGlobalVariable(elementString).getValue());
+			}
 			else if (_isStringValue(elementString)) // STRING
 			{
 				elementString.erase(elementString.begin());

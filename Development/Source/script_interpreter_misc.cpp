@@ -121,9 +121,16 @@ bool ScriptInterpreter::_validateScopeChange(unsigned int countedSpaces, const s
 	{
 		_scopeDepthStack.back() = currentLineScopeDepth;
 	}
-	else if (currentLineScopeDepth > _scopeDepthStack.back()) // Outside of current scope, so don't execute current line
+	else if (currentLineScopeDepth > _scopeDepthStack.back()) // Outside of current scope
 	{
-		return false;
+		if (_passedScopeChanger) // Skip current line
+		{
+			return false;
+		}
+		else // Useless indented statement
+		{
+			_throwScriptError("invalid indentation!");
+		}
 	}
 
 	_scopeHasChanged = false;

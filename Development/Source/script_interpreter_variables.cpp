@@ -148,7 +148,7 @@ void ScriptInterpreter::_processVariableDefinition(const string& scriptLine, Scr
 				nameString != "<true>" && nameString != "<false>";
 
 			// Forbidden variable names
-			for (auto& word : { _metaKeyword, _executeKeyword, _ifKeyword, _elseifKeyword, _elseKeyword, _globalKeyword,
+			for (auto& word : { _metaKeyword, _executeKeyword, _ifKeyword, _elifKeyword, _elseKeyword, _globalKeyword,
 				_constKeyword, _stringKeyword, _decimalKeyword, _integerKeyword, _booleanKeyword, _isKeyword,
 				_notKeyword, _andKeyword, _orKeyword, _moreKeyword, _lessKeyword })
 			{

@@ -1,21 +1,25 @@
-7 24
+22 2
 META script_type_update
 META execution_entry
 
-/// Flying
+/// Flying movement
 IF fe3d:input_key_down("KEY_SPACE") IS <true>:
     fe3d:camera_move(0.0, movingSpeed, 0.0)
-IF fe3d:input_key_down("KEY_LCTRL") IS <true>:
+ELIF fe3d:input_key_down("KEY_LCTRL") IS <true>:
     EDIT movingSpeed = -0.1
-    fe3d:camera_move(0.0, -0.1, 0.0)
+    fe3d:camera_move(0.0, movingSpeed, 0.0)
     EDIT movingSpeed = 0.1
 
-/// Moving
+/// WASD movement
 IF fe3d:input_key_down("KEY_W") IS <true>:
     fe3d:camera_follow_z(movingSpeed)
-IF fe3d:input_key_down("KEY_S") IS <true>:
-    fe3d:camera_follow_z(-movingSpeed)
+ELIF fe3d:input_key_down("KEY_S") IS <true>:
+    EDIT movingSpeed = -0.1
+    fe3d:camera_follow_z(movingSpeed)
+    EDIT movingSpeed = 0.1
 IF fe3d:input_key_down("KEY_A") IS <true>:
-    fe3d:camera_follow_x(-movingSpeed)
-IF fe3d:input_key_down("KEY_D") IS <true>:
+    EDIT movingSpeed = -0.1
+    fe3d:camera_follow_x(movingSpeed)
+    EDIT movingSpeed = 0.1
+ELIF fe3d:input_key_down("KEY_D") IS <true>:
     fe3d:camera_follow_x(movingSpeed)

@@ -5,6 +5,7 @@
 #include "script_type.hpp"
 #include "script_value.hpp"
 #include "script_variable.hpp"
+#include "script_scope_changer.hpp"
 
 class ScriptInterpreter
 {
@@ -76,7 +77,7 @@ private:
 	const string _metaKeyword	 = "META";
 	const string _executeKeyword = "EXEC";
 	const string _ifKeyword      = "IF";
-	const string _elseifKeyword  = "ELIF";
+	const string _elifKeyword  = "ELIF";
 	const string _elseKeyword    = "ELSE";
 	const string _globalKeyword  = "GLOB";
 	const string _constKeyword   = "CONST";
@@ -94,10 +95,15 @@ private:
 
 	// Integers
 	const unsigned int _spacesPerIndent = 4;
-	bool _scopeHasChanged = false;
 
 	// Booleans
 	bool _hasThrownError = false;
+	bool _scopeHasChanged = false;
+	bool _passedScopeChanger = false;
+	bool _lastConditionResult = false;
+
+	// Miscellaneous
+	ScriptScopeChanger _lastScopeChanger = ScriptScopeChanger::NONE;
 
 	// String to input type map
 	static inline const map<string, InputType> _keyInputStringMap =

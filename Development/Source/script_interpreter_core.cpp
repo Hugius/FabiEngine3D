@@ -156,6 +156,9 @@ void ScriptInterpreter::unload()
 	_destroyEntryID = "";
 	_scopeHasChanged = false;
 	_hasThrownError = false;
+	_passedScopeChanger = false;
+	_lastConditionResult = false;
+	_lastScopeChanger = ScriptScopeChanger::NONE;
 	_sceneEditor.clearScene();
 	_fe3d.skyEntity_select("@@engineBackground");
 }

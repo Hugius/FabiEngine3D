@@ -52,6 +52,7 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 		// Ignore empty lines
 		if (scriptLineText.empty())
 		{
+			_passedScopeChanger = false;
 			continue;
 		}
 
@@ -71,15 +72,100 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 			// Check if if statement ends with colon
 			if (scriptLineText.back() == ':')
 			{
-				if (_checkIfStatement(scriptLineText.substr(3, scriptLineText.size() - 4)))
+				string conditionString = scriptLineText.substr((_ifKeyword.size() + 1), scriptLineText.size() - (_ifKeyword.size() + 2));
+
+				// Check the condition of the if statement
+				if (_checkIfStatement(conditionString))
 				{
 					_scopeDepthStack.back()++;
 					_scopeHasChanged = true;
+					_lastConditionResult = true;
 				}
+				else
+				{
+					_passedScopeChanger = true;
+					_lastConditionResult = false;
+				}
+				_lastScopeChanger = ScriptScopeChanger::IF;
 			}
 			else
 			{
 				_throwScriptError("if statement must end with colon!");
+				return;
+			}
+		}
+		else if (scriptLineText.substr(0, _elifKeyword.size() + 1) == _elifKeyword + " ") // Else if statement
+		{
+			// Check if in sequence with if statement
+			if (_lastScopeChanger == ScriptScopeChanger::IF)
+			{
+				// Check if elif statement ends with colon
+				if (scriptLineText.back() == ':')
+				{
+					string conditionString = scriptLineText.substr((_elifKeyword.size() + 1), scriptLineText.size() - (_elifKeyword.size() + 2));
+
+					// Check the condition of the elif statement
+					if (!_lastConditionResult && _checkIfStatement(conditionString))
+					{
+						_scopeDepthStack.back()++;
+						_scopeHasChanged = true;
+						_lastConditionResult = true;
+					}
+					else
+					{
+						_passedScopeChanger = true;
+					}
+					_lastScopeChanger = ScriptScopeChanger::ELIF;
+				}
+				else
+				{
+					_throwScriptError("elif statement must end with colon!");
+					return;
+				}
+			}
+			else
+			{
+				_throwScriptError("elif statement can only come after if statement!");
+				return;
+			}
+		}
+		else if (scriptLineText.substr(0, _elseKeyword.size()) == _elseKeyword) // Else statement
+		{
+			// Check if in sequence with if or elif statement
+			if (_lastScopeChanger == ScriptScopeChanger::IF || _lastScopeChanger == ScriptScopeChanger::ELIF)
+			{
+				// Check if if statement ends with colon
+				if (scriptLineText.back() == ':')
+				{
+					if (scriptLineText.size() == (_elseKeyword.size() + 1))
+					{
+						// Check if all previous conditions failed
+						if (!_lastConditionResult)
+						{
+							_scopeDepthStack.back()++;
+							_scopeHasChanged = true;
+						}
+						else
+						{
+							_passedScopeChanger = true;
+						}
+						_lastScopeChanger = ScriptScopeChanger::ELSE;
+					}
+					else
+					{
+						_throwScriptError("else statement cannot have a condition!");
+						return;
+					}
+				}
+				else
+				{
+					_throwScriptError("else statement must end with colon!");
+					return;
+				}
+			}
+			else
+			{
+				_throwScriptError("else statement can only come after if or elif statement!");
 				return;
 			}
 		}

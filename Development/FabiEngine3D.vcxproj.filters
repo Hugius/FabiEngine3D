@@ -789,6 +789,9 @@
     <ClInclude Include="Source\script_variable_scope.hpp">
       <Filter>src\Miscellaneous\Enums</Filter>
     </ClInclude>
+    <ClInclude Include="Source\script_scope_changer.hpp">
+      <Filter>src\Miscellaneous\Enums</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">

@@ -178,6 +178,7 @@
     <ClInclude Include="Source\script_executor.hpp" />
     <ClInclude Include="Source\script_file.hpp" />
     <ClInclude Include="Source\script_interpreter.hpp" />
+    <ClInclude Include="Source\script_scope_changer.hpp" />
     <ClInclude Include="Source\script_type.hpp" />
     <ClInclude Include="Source\script_value_type.hpp" />
     <ClInclude Include="Source\script_variable.hpp" />

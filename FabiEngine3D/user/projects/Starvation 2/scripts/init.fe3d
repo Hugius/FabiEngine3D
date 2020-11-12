@@ -1,13 +1,12 @@
-8 17
+9 9
 META script_type_init
 META execution_entry
 
 fe3d:scene_load("scene")
 fe3d:camera_set_pos(0.0, 10.0, 0.0)
-fe3d:print("hoidoeiikbeneenschaapkipgeitkoevarkenminecraftikmoetietstypen!")
 STR kip = "hoi"
-GLOB DEC movingSpeed = 0.1
-IF movingSpeed IS 0.2:
-    fe3d:print("")
-ELSE:
-    fe3d:print("test3")
+GLOB DEC movingSpeed = 0.123
+IF 0.5 LESS movingSpeed:
+    fe3d:print("SCHAAP")
+DIV kippo "hoi"
+fe3d:print(movingSpeed)

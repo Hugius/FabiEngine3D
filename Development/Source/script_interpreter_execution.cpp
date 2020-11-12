@@ -187,7 +187,17 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 		{
 			_processVariableDefinition(scriptLineText, ScriptVariableScope::UNKNOWN, true);
 		}
-		else // Invalid keyboard
+		else if //Variable arithmetic
+			(
+				scriptLineText.substr(0, _plusKeyword.size() + 1) == _plusKeyword + " " ||
+				scriptLineText.substr(0, _minusKeyword.size() + 1) == _minusKeyword + " " ||
+				scriptLineText.substr(0, _multiplyKeyword.size() + 1) == _multiplyKeyword + " " ||
+				scriptLineText.substr(0, _divideKeyword.size() + 1) == _divideKeyword + " "
+			)
+		{
+			_processVariableArithmetic(scriptLineText);
+		}
+		else // Invalid keyword
 		{
 			_throwScriptError("unknown keyword!");
 			return;

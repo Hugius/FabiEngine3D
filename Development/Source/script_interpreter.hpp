@@ -32,6 +32,7 @@ private:
 
 	// Variable functions
 	void _processVariableDefinition(const string& scriptLine, ScriptVariableScope scope, bool isEditing);
+	void _processVariableArithmetic(const string& scriptLine);
 	bool _isLocalVariableExisting(const string& variableID);
 	bool _isGlobalVariableExisting(const string& variableID);
 	ScriptVariable& _getLocalVariable(const string& variableID);
@@ -74,24 +75,28 @@ private:
 	string _initEntryID = "";
 	string _updateEntryID = "";
 	string _destroyEntryID = "";
-	const string _metaKeyword	 = "META";
-	const string _executeKeyword = "EXEC";
-	const string _ifKeyword      = "IF";
-	const string _elifKeyword  = "ELIF";
-	const string _elseKeyword    = "ELSE";
-	const string _globalKeyword  = "GLOB";
-	const string _constKeyword   = "CONST";
-	const string _editKeyword	 = "EDIT";
-	const string _stringKeyword  = "STR";
-	const string _decimalKeyword = "DEC";
-	const string _integerKeyword = "INT";
-	const string _booleanKeyword = "BOOL";
-	const string _isKeyword		 = "IS";
-	const string _notKeyword	 = "NOT";
-	const string _andKeyword	 = "AND";
-	const string _orKeyword		 = "OR";
-	const string _moreKeyword    = "MORE";
-	const string _lessKeyword    = "LESS";
+	const string _metaKeyword	  = "META";
+	const string _executeKeyword  = "EXEC";
+	const string _ifKeyword       = "IF";
+	const string _elifKeyword	  = "ELIF";
+	const string _elseKeyword     = "ELSE";
+	const string _globalKeyword   = "GLOB";
+	const string _constKeyword    = "CONST";
+	const string _editKeyword	  = "EDIT";
+	const string _stringKeyword   = "STR";
+	const string _decimalKeyword  = "DEC";
+	const string _integerKeyword  = "INT";
+	const string _booleanKeyword  = "BOOL";
+	const string _isKeyword		  = "IS";
+	const string _notKeyword	  = "NOT";
+	const string _andKeyword	  = "AND";
+	const string _orKeyword		  = "OR";
+	const string _moreKeyword     = "MORE";
+	const string _lessKeyword     = "LESS";
+	const string _plusKeyword	  = "INCR";
+	const string _minusKeyword	  = "DECR";
+	const string _multiplyKeyword = "MUL";
+	const string _divideKeyword   = "DIV";
 
 	// Integers
 	const unsigned int _spacesPerIndent = 4;

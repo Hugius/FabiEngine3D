@@ -1,4 +1,4 @@
-9 9
+9 7
 META script_type_init
 META execution_entry
 
@@ -8,5 +8,5 @@ STR kip = "hoi"
 GLOB DEC movingSpeed = 0.123
 IF 0.5 LESS movingSpeed:
     fe3d:print("SCHAAP")
-DIV kippo "hoi"
+DIV kip "hoi"
 fe3d:print(movingSpeed)

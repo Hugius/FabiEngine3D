@@ -198,6 +198,8 @@ bool BaseEntityManager::isExisting(const string& ID)
 			return (_getTextEntity(ID) != nullptr);
 		}
 	}
+
+	return false;
 }
 
 void BaseEntityManager::_createEntity(const string& ID)

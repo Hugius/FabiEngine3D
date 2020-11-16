@@ -69,6 +69,11 @@ float FabiEngine3D::misc_getPI()
 	return Tools::getInst().getPI();
 }
 
+float FabiEngine3D::misc_degreesToRadians(float angle)
+{
+	return Tools::getInst().degreeToRadians(angle);
+}
+
 void FabiEngine3D::misc_showCursor()
 {
 	_core->_windowManager.showMouseCursor();

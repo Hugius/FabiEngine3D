@@ -9,7 +9,7 @@ void SceneEditor::loadScene(const string& fileName)
 	// Error checking
 	if (_currentProjectName == "")
 	{
-		_fe3d.logger_throwError("Tried to load as empty project!");
+		_fe3d.logger_throwError("No current project loaded!");
 	}
 
 	// Compose full folder path

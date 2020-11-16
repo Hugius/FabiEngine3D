@@ -12,9 +12,15 @@ void ScriptInterpreter::_processVariableDefinition(const string& scriptLine, Scr
 
 	if (editExisting) // Editing existing variable value
 	{
-		// Extract text values
+		// Extract text parts
 		string keyword;
-		iss >> keyword >> nameString >> equalSignString >> valueString;
+		iss >> keyword >> nameString >> equalSignString;
+
+		// Extract remaining text (value)
+		if (equalSignString == "=")
+		{
+			valueString = scriptLine.substr(scriptLine.find('=') + 2);
+		}
 
 		// Check if variable exists
 		if(!_isLocalVariableExisting(nameString) && !_isGlobalVariableExisting(nameString))
@@ -36,48 +42,65 @@ void ScriptInterpreter::_processVariableDefinition(const string& scriptLine, Scr
 		// Check if equal sign is valid
 		if (equalSignString == "=")
 		{
-			if ((variable.getValue().getType() == ScriptValueType::STRING) && _isStringValue(valueString)) // String
+			if ((variable.getValue().getType() == ScriptValueType::STRING) && _isStringValue(valueString)) // STRING
 			{
 				valueString.erase(valueString.begin());
 				valueString.pop_back();
 				variable.getValue().setString(valueString);
 			}
-			else if ((variable.getValue().getType() == ScriptValueType::DECIMAL) && _isDecimalValue(valueString)) // Decimal
+			else if ((variable.getValue().getType() == ScriptValueType::DECIMAL) && _isDecimalValue(valueString)) // DECIMAL
 			{
 				variable.getValue().setDecimal(stof(valueString));
 			}
-			else if ((variable.getValue().getType() == ScriptValueType::INTEGER) && _isIntegerValue(valueString)) // Integer
+			else if ((variable.getValue().getType() == ScriptValueType::INTEGER) && _isIntegerValue(valueString)) // INTEGER
 			{
 				variable.getValue().setInteger(stoi(valueString));
 			}
-			else if ((variable.getValue().getType() == ScriptValueType::BOOLEAN) && _isBooleanValue(valueString)) // Boolean
+			else if ((variable.getValue().getType() == ScriptValueType::BOOLEAN) && _isBooleanValue(valueString)) // BOOLEAN
 			{
 				variable.getValue().setBoolean(valueString == "<true>");
 			}
-			else if (valueString.substr(0, 5) == "fe3d:") // FE3D function result
+			else if // FUNCTION
+				(
+					valueString.substr(0, 5) == "fe3d:" ||
+					valueString.substr(0, 5) == "math:" ||
+					valueString.substr(0, 5) == "misc:"
+				)
 			{
-				auto value = _processEngineFunctionCall(valueString).back();
+				// Call function
+				auto values =
+					(valueString.substr(0, 5) == "fe3d:") ? _processEngineFunctionCall(valueString) :
+					(valueString.substr(0, 5) == "math:") ? _processMathematicalFunctionCall(valueString) :
+					_processMiscellaneousFunctionCall(valueString);
 
-				// Check if returned value is of the right type
-				if ((typeString == _stringKeyword) && (value.getType() == ScriptValueType::STRING))
+				// Check if function call went well
+				if (!_hasThrownError)
 				{
-					variable.getValue().setString(valueString);
-				}
-				else if ((typeString == _decimalKeyword) && (value.getType() == ScriptValueType::DECIMAL))
-				{
-					variable.getValue().setDecimal(stof(valueString));
-				}
-				else if ((typeString == _integerKeyword) && (value.getType() == ScriptValueType::INTEGER))
-				{
-					variable.getValue().setInteger(stoi(valueString));
-				}
-				else if ((typeString == _booleanKeyword) && (value.getType() == ScriptValueType::BOOLEAN))
-				{
-					variable.getValue().setBoolean(valueString == "<true>");
-				}
-				else
-				{
-					_throwScriptError("invalid variable value!");
+					// Check if returned value is of the right type
+					if ((variable.getValue().getType() == ScriptValueType::STRING) && (values[0].getType() == ScriptValueType::STRING))
+					{
+						variable.getValue().setString(values[0].getString());
+					}
+					else if ((variable.getValue().getType() == ScriptValueType::DECIMAL) && (values[0].getType() == ScriptValueType::DECIMAL))
+					{
+						variable.getValue().setDecimal(values[0].getDecimal());
+					}
+					else if ((variable.getValue().getType() == ScriptValueType::INTEGER) && (values[0].getType() == ScriptValueType::INTEGER))
+					{
+						variable.getValue().setInteger(values[0].getInteger());
+					}
+					else if ((variable.getValue().getType() == ScriptValueType::BOOLEAN) && (values[0].getType() == ScriptValueType::BOOLEAN))
+					{
+						variable.getValue().setBoolean(values[0].getBoolean());
+					}
+					else if (values[0].getType() == ScriptValueType::EMPTY)
+					{
+						_throwScriptError("function must return a value!");
+					}
+					else
+					{
+						_throwScriptError("function value type does not match the variable type!");
+					}
 				}
 			}
 			else if (_isLocalVariableExisting(valueString))
@@ -89,7 +112,7 @@ void ScriptInterpreter::_processVariableDefinition(const string& scriptLine, Scr
 				}
 				else
 				{
-					_throwScriptError("invalid variable value!");
+					_throwScriptError("variable values do not match!");
 				}
 			}
 			else if (_isGlobalVariableExisting(valueString))
@@ -101,17 +124,17 @@ void ScriptInterpreter::_processVariableDefinition(const string& scriptLine, Scr
 				}
 				else
 				{
-					_throwScriptError("invalid variable value!");
+					_throwScriptError("variable values do not match!");
 				}
 			}
 			else
 			{
-				_throwScriptError("invalid variable value!");
+				_throwScriptError("invalid value!");
 			}
 		}
 		else
 		{
-			_throwScriptError("invalid variable syntax!");
+			_throwScriptError("invalid syntax!");
 		}
 	}
 	else // Creating fresh new variable
@@ -131,28 +154,44 @@ void ScriptInterpreter::_processVariableDefinition(const string& scriptLine, Scr
 		// Extract other variable data
 		if (isConstant)
 		{
-			iss >> typeString >> nameString >> equalSignString >> valueString;
+			iss >> typeString >> nameString >> equalSignString;
 		}
 		else
 		{
 			typeString = possibleConstKeyword;
-			iss >> nameString >> equalSignString >> valueString;
+			iss >> nameString >> equalSignString;
 		}
 
+		// Extract remaining text (value)
+		if (equalSignString == "=")
+		{
+			valueString = scriptLine.substr(scriptLine.find('=') + 2);
+		}
 
 		// Check if variable type is valid
 		if (typeString == _stringKeyword || typeString == _decimalKeyword || typeString == _integerKeyword || typeString == _booleanKeyword)
 		{
 			// Validate variable name
-			bool validName = !nameString.empty() && nameString.substr(0, 5) != "fe3d:" && !isdigit(nameString.front() && isalnum(nameString.front())) &&
+			bool validName = !nameString.empty() && nameString.substr(0, 5) != "fe3d:" && nameString.substr(0, 5) != "math:" &&
+				nameString.substr(0, 5) != "misc:" && !isdigit(nameString.front() && isalnum(nameString.front())) &&
 				nameString != "<true>" && nameString != "<false>";
 
 			// Forbidden variable names
 			for (auto& word : { _metaKeyword, _executeKeyword, _ifKeyword, _elifKeyword, _elseKeyword, _globalKeyword,
-				_constKeyword, _stringKeyword, _decimalKeyword, _integerKeyword, _booleanKeyword, _isKeyword,
-				_notKeyword, _andKeyword, _orKeyword, _moreKeyword, _lessKeyword })
+				_constKeyword, _editKeyword, _stringKeyword, _decimalKeyword, _integerKeyword, _booleanKeyword, _isKeyword,
+				_notKeyword, _andKeyword, _orKeyword, _moreKeyword, _lessKeyword, _plusKeyword, _minusKeyword, _multiplyKeyword, _divideKeyword })
 			{
 				validName = validName && (nameString != word);
+			}
+
+			// Validate variable individual characters
+			for (auto& c : nameString)
+			{
+				// Only non-alphanumeric characters '_' and '-' allowed
+				if (c != '_' && c != '-' && !isalnum(c))
+				{
+					validName = false;
+				}
 			}
 
 			// Check if variable name is valid
@@ -190,7 +229,7 @@ void ScriptInterpreter::_processVariableDefinition(const string& scriptLine, Scr
 					else
 					{
 						// Check if value is of the right type
-						if (typeString == _stringKeyword && _isStringValue(valueString)) // String
+						if (typeString == _stringKeyword && _isStringValue(valueString)) // STRING
 						{
 							// Removing the "" around the string content
 							valueString.erase(valueString.begin());
@@ -200,39 +239,56 @@ void ScriptInterpreter::_processVariableDefinition(const string& scriptLine, Scr
 							auto value = ScriptValue(_fe3d, ScriptValueType::STRING, valueString);
 							variableList.push_back(ScriptVariable(_fe3d, scope, nameString, isConstant, value));
 						}
-						else if (typeString == _decimalKeyword && _isDecimalValue(valueString)) // Decimal
+						else if (typeString == _decimalKeyword && _isDecimalValue(valueString)) // DECIMAL
 						{
 							auto value = ScriptValue(_fe3d, ScriptValueType::DECIMAL, stof(valueString));
 							variableList.push_back(ScriptVariable(_fe3d, scope, nameString, isConstant, value));
 						}
-						else if (typeString == _integerKeyword && _isIntegerValue(valueString)) // Integer
+						else if (typeString == _integerKeyword && _isIntegerValue(valueString)) // INTEGER
 						{
 							auto value = ScriptValue(_fe3d, ScriptValueType::INTEGER, stoi(valueString));
 							variableList.push_back(ScriptVariable(_fe3d, scope, nameString, isConstant, value));
 						}
-						else if (typeString == _booleanKeyword && _isBooleanValue(valueString)) // Boolean
+						else if (typeString == _booleanKeyword && _isBooleanValue(valueString)) // BOOLEAN
 						{
 							auto value = ScriptValue(_fe3d, ScriptValueType::BOOLEAN, (valueString == "<true>"));
 							variableList.push_back(ScriptVariable(_fe3d, scope, nameString, isConstant, value));
 						}
-						else if (valueString.substr(0, 5) == "fe3d:") // FE3D function result
+						else if // FUNCTION
+							(
+								valueString.substr(0, 5) == "fe3d:" || 
+								valueString.substr(0, 5) == "math:" || 
+								valueString.substr(0, 5) == "misc:"
+							)
 						{
-							auto value = _processEngineFunctionCall(valueString).back();
+							// Call function
+							auto values =
+								(valueString.substr(0, 5) == "fe3d:") ? _processEngineFunctionCall(valueString) :
+								(valueString.substr(0, 5) == "math:") ? _processMathematicalFunctionCall(valueString) :
+								_processMiscellaneousFunctionCall(valueString);
 
-							// Check if returned value is of the right type
-							if (((typeString == _stringKeyword)  && (value.getType() == ScriptValueType::STRING)) ||
-								((typeString == _decimalKeyword) && (value.getType() == ScriptValueType::DECIMAL)) ||
-								((typeString == _integerKeyword) && (value.getType() == ScriptValueType::INTEGER)) ||
-								((typeString == _booleanKeyword) && (value.getType() == ScriptValueType::BOOLEAN)))
+							// Check if function call went well
+							if (!_hasThrownError)
 							{
-								variableList.push_back(ScriptVariable(_fe3d, scope, nameString, isConstant, value));
-							}
-							else
-							{
-								_throwScriptError("invalid variable value!");
+								// Check if returned value is of the right type
+								if (((typeString == _stringKeyword)  && (values[0].getType() == ScriptValueType::STRING))  ||
+									((typeString == _decimalKeyword) && (values[0].getType() == ScriptValueType::DECIMAL)) ||
+									((typeString == _integerKeyword) && (values[0].getType() == ScriptValueType::INTEGER)) ||
+									((typeString == _booleanKeyword) && (values[0].getType() == ScriptValueType::BOOLEAN)))
+								{
+									variableList.push_back(ScriptVariable(_fe3d, scope, nameString, isConstant, values[0]));
+								}
+								else if (values[0].getType() == ScriptValueType::EMPTY)
+								{
+									_throwScriptError("function must return a value!");
+								}
+								else
+								{
+									_throwScriptError("function value type does not match the variable type!");
+								}
 							}
 						}
-						else if (_isLocalVariableExisting(valueString) || _isGlobalVariableExisting(valueString))
+						else if (_isLocalVariableExisting(valueString) || _isGlobalVariableExisting(valueString)) // Variable
 						{
 							auto otherVariable = _isLocalVariableExisting(valueString) ? 
 								_getLocalVariable(valueString) : _getGlobalVariable(valueString);
@@ -247,36 +303,29 @@ void ScriptInterpreter::_processVariableDefinition(const string& scriptLine, Scr
 							}
 							else
 							{
-								_throwScriptError("invalid variable value!");
+								_throwScriptError("invalid function value!");
 							}
 						}
 						else
 						{
-							_throwScriptError("invalid variable value!");
+							_throwScriptError("invalid value!");
 						}
 					}
 				}
 				else
 				{
-					_throwScriptError("invalid variable syntax!");
+					_throwScriptError("invalid syntax!");
 				}
 			}
 			else
 			{
-				_throwScriptError("invalid variable name!");
+				_throwScriptError("forbidden variable name!");
 			}
 		}
 		else
 		{
 			_throwScriptError("invalid variable type!");
 		}
-	}
-
-	// No characters allowed after variable creation or alteration statement
-	string temp;
-	if ((iss >> temp) || scriptLine.back() == ' ')
-	{
-		_throwScriptError("invalid variable creation syntax!");
 	}
 }
 
@@ -394,7 +443,7 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 	string temp;
 	if ((iss >> temp) || scriptLine.back() == ' ')
 	{
-		_throwScriptError("invalid variable arithmetic syntax!");
+		_throwScriptError("invalid syntax!");
 		return;
 	}
 }

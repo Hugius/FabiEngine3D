@@ -704,6 +704,7 @@ public:
 	float misc_getAspectRatio();
 	float misc_getFPS();
 	float misc_getPI();
+	float misc_degreesToRadians(float angle);
 	string misc_getWinExplorerFilename(const string& startingDir, const string& fileType);
 	string misc_vec2str(ivec2 vec);
 	string misc_vec2str(ivec3 vec);

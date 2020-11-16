@@ -26,7 +26,7 @@ public:
 	int   DWORD_to_int(DWORD dword);
 
 	float getRandomFloat(float min, float max);
-	float degreeToRadians(float degree);
+	float degreeToRadians(float angle);
 	float getPI();
 
 	template<typename T> inline const T & getMin(const T & first, const T & second)

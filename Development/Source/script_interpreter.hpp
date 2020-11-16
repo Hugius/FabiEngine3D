@@ -53,6 +53,8 @@ private:
 	bool _validateScopeChange(unsigned int countedSpaces, const string& scriptLineText);
 	void _throwScriptError(const string& message);
 	vector<ScriptValue> _processEngineFunctionCall(const string& scriptLine);
+	vector<ScriptValue> _processMathematicalFunctionCall(const string& scriptLine);
+	vector<ScriptValue> _processMiscellaneousFunctionCall(const string& scriptLine);
 
 	// Instances
 	FabiEngine3D& _fe3d;

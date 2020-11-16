@@ -60,21 +60,6 @@ bool ScriptInterpreter::_checkIfStatement(string conditionString)
 			{
 				comparisonValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, (elementString == "<true>")));
 			}
-			else if (elementString.substr(0, 5) == "fe3d:") // FE3D FUNCTION
-			{
-				auto value = _processEngineFunctionCall(elementString).back();
-
-				// Check if FE3D function returned void
-				if (value.getType() == ScriptValueType::EMPTY)
-				{
-					_throwScriptError("FE3D function return type cannot be empty!");
-					return false;
-				}
-				else
-				{
-					comparisonValues.push_back(value);
-				}
-			}
 			else
 			{
 				_throwScriptError("invalid comparison value or variable!");

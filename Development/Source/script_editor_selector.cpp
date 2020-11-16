@@ -91,7 +91,7 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 				if (_fe3d.billboardEntity_getTextContent(textID).empty())
 				{
 					vec3 lineTextPosition = _fe3d.billboardEntity_getPosition(textID) - vec3(0.0f, 0.0f, 0.05f);
-					lineTextPosition.x = _scriptTextStartingPosition.x + _horizontalCharacterOffset + _textCharacterSize.x;
+					lineTextPosition.x = _scriptTextStartingPosition.x + _horizontalLineOffset;
 					_fe3d.billBoardEntity_add(selectionID, _selectionColor, lineTextPosition, vec3(0.0f), _textCharacterSize, false, false);
 				}
 				else

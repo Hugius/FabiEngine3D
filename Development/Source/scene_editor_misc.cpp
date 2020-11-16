@@ -8,6 +8,21 @@ bool SceneEditor::isLoaded()
 	return _isLoaded;
 }
 
+bool SceneEditor::isSceneExisting(const string& fileName)
+{
+	// Error checking
+	if (_currentProjectName == "")
+	{
+		_fe3d.logger_throwError("No current project loaded!");
+	}
+
+	// Compose full folder path
+	string filePath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectName + "\\scenes\\" + fileName + ".fe3d";
+
+	// Check if scene file exists
+	return (_fe3d.misc_isFileExisting(filePath));
+}
+
 void SceneEditor::setCurrentProjectName(const string& projectName)
 {
 	_currentProjectName = projectName;

@@ -75,6 +75,49 @@ vector<ScriptValue> ScriptInterpreter::_extractArguments(string argumentString)
 		}
 		else
 		{
+			// Starting build of new argument
+			if(!buildingString && !buildingNumber && !buildingBoolean && !buildingVariable)
+			{
+				if (c == '"') // STRING
+				{
+					currentArgument = "";
+					buildingString = true;
+				}
+				else if (isdigit(c) || c == '-') // NUMBER
+				{
+					currentArgument = "";
+					currentArgument.push_back(c);
+					buildingNumber = true;
+				}
+				else if (c == '<') // BOOLEAN
+				{
+					currentArgument = "";
+					currentArgument.push_back(c);
+					buildingBoolean = true;
+				}
+				else if (c == ' ') // SPACE
+				{
+					currentArgument = "";
+				}
+				else // Possible VARIABLE
+				{
+					currentArgument = "";
+					currentArgument.push_back(c);
+					buildingVariable = true;
+				}
+
+				if (index != (argumentString.size() - 1) || (buildingString || buildingBoolean)) // Skip to next character
+				{
+					index++;
+					continue;
+				}
+				else // This is the last character, handle the building
+				{
+					currentArgument = "";
+				}
+			}
+
+			// Determine argument type
 			if (buildingString) // Processing STRING argument
 			{
 				if (c == '"') // Add new string argument
@@ -111,7 +154,7 @@ vector<ScriptValue> ScriptInterpreter::_extractArguments(string argumentString)
 					currentArgument += c;
 					buildingDecimal = true;
 				}
-				else if(c != ',' && c != ' ')
+				else if (c != ',' && c != ' ')
 				{
 					_throwScriptError("invalid character in number value!");
 					return {};
@@ -134,7 +177,7 @@ vector<ScriptValue> ScriptInterpreter::_extractArguments(string argumentString)
 							buildingNumber = false;
 							buildingDecimal = false;
 
-							// Check if needs to be found yet
+							// Check if next comma still needs to be found
 							if (c != ',')
 							{
 								finishedArgument = true;
@@ -145,8 +188,8 @@ vector<ScriptValue> ScriptInterpreter::_extractArguments(string argumentString)
 					{
 						argumentList.push_back(ScriptValue(_fe3d, ScriptValueType::INTEGER, stoi(currentArgument)));
 						buildingNumber = false;
-						
-						// Check if needs to be found yet
+
+						// Check if next comma still needs to be found
 						if (c != ',')
 						{
 							finishedArgument = true;
@@ -227,45 +270,13 @@ vector<ScriptValue> ScriptInterpreter::_extractArguments(string argumentString)
 					}
 				}
 			}
-			else // Starting build of new argument
-			{
-				if (c == '"') // STRING
-				{
-					currentArgument = "";
-					buildingString = true;
-				}
-				else if (isdigit(c) || c == '-') // NUMBER
-				{
-					currentArgument = "";
-					currentArgument.push_back(c);
-					buildingNumber = true;
-				}
-				else if (c == '<') // BOOLEAN
-				{
-					currentArgument = "";
-					currentArgument.push_back(c);
-					buildingBoolean = true;
-				}
-				else if (c == ' ') // SPACE
-				{
-					currentArgument = "";
-					index++;
-					continue; // Ignore
-				}
-				else // Possible VARIABLE
-				{
-					currentArgument = "";
-					currentArgument.push_back(c);
-					buildingVariable = true;
-				}
-			}
 		}
 
 		index++;
 	}
-
+	
 	// Check if not still building any arguments
-	if (!buildingString && !buildingNumber && !buildingBoolean && !buildingVariable)
+	if (!buildingString && !buildingNumber && !buildingBoolean && !buildingVariable && finishedArgument)
 	{
 		return argumentList;
 	}

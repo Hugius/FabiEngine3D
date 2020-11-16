@@ -33,9 +33,9 @@ float Tools::getRandomFloat(float min, float max)
 	//return randomNumber;
 }
 
-float Tools::degreeToRadians(float degree)
+float Tools::degreeToRadians(float angle)
 {
-	return (degree * DEG2RAD);
+	return (angle * DEG2RAD);
 }
 
 float Tools::getPI()

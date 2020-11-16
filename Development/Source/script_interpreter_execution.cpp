@@ -67,6 +67,14 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 		{
 			_processEngineFunctionCall(scriptLineText);
 		}
+		else if (scriptLineText.substr(0, 5) == "math:") // Mathematical function
+		{
+			_processMathematicalFunctionCall(scriptLineText);
+		}
+		else if (scriptLineText.substr(0, 5) == "misc:") // Miscellaneous function
+		{
+			_processMiscellaneousFunctionCall(scriptLineText);
+		}
 		else if (scriptLineText.substr(0, _ifKeyword.size() + 1) == _ifKeyword + " ") // If statement
 		{
 			// Check if if statement ends with colon

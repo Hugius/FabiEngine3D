@@ -9,7 +9,7 @@ void WorldEditor::loadTerrainEntities()
 	// Error checking
 	if (_currentProjectName == "")
 	{
-		_fe3d.logger_throwError("Tried to load as empty project!");
+		_fe3d.logger_throwError("No current project loaded!");
 	}
 
 	// Clear names list from previous loads

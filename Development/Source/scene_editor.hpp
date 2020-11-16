@@ -26,6 +26,7 @@ public:
 	void clearScene();
 
 	bool isLoaded();
+	bool isSceneExisting(const string& fileName);
 
 private:
 	// Environment updates

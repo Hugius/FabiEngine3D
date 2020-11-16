@@ -1,12 +1,7 @@
-9 7
+5 26
 META script_type_init
 META execution_entry
 
 fe3d:scene_load("scene")
 fe3d:camera_set_pos(0.0, 10.0, 0.0)
-STR kip = "hoi"
-GLOB DEC movingSpeed = 0.123
-IF 0.5 LESS movingSpeed:
-    fe3d:print("SCHAAP")
-DIV kip "hoi"
-fe3d:print(movingSpeed)
+GLOB DEC movingSpeed = 0.1

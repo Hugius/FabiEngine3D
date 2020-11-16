@@ -1,25 +1,33 @@
-22 2
+10 0
 META script_type_update
 META execution_entry
 
+/// Input
+BOOL up = fe3d:input_key_down("KEY_SPACE")
+BOOL down = fe3d:input_key_down("KEY_LCTRL")
+BOOL forward = fe3d:input_key_down("KEY_W")
+BOOL backward = fe3d:input_key_down("KEY_S")
+BOOL left = fe3d:input_key_down("KEY_A")
+BOOL right = fe3d:input_key_down("KEY_D")
+
 /// Flying movement
-IF fe3d:input_key_down("KEY_SPACE") IS <true>:
+IF up IS <true>:
     fe3d:camera_move(0.0, movingSpeed, 0.0)
-ELIF fe3d:input_key_down("KEY_LCTRL") IS <true>:
-    EDIT movingSpeed = -0.1
+ELIF down IS <true>:
+    MUL movingSpeed -1.0
     fe3d:camera_move(0.0, movingSpeed, 0.0)
-    EDIT movingSpeed = 0.1
+    MUL movingSpeed -1.0
 
 /// WASD movement
-IF fe3d:input_key_down("KEY_W") IS <true>:
+IF forward IS <true>:
     fe3d:camera_follow_z(movingSpeed)
-ELIF fe3d:input_key_down("KEY_S") IS <true>:
-    EDIT movingSpeed = -0.1
+ELIF backward IS <true>:
+    MUL movingSpeed -1.0
     fe3d:camera_follow_z(movingSpeed)
-    EDIT movingSpeed = 0.1
-IF fe3d:input_key_down("KEY_A") IS <true>:
-    EDIT movingSpeed = -0.1
+    MUL movingSpeed -1.0
+IF left IS <true>:
+    MUL movingSpeed -1.0
     fe3d:camera_follow_x(movingSpeed)
-    EDIT movingSpeed = 0.1
-ELIF fe3d:input_key_down("KEY_D") IS <true>:
+    MUL movingSpeed -1.0
+ELIF right IS <true>:
     fe3d:camera_follow_x(movingSpeed)

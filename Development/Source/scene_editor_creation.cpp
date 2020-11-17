@@ -2,6 +2,13 @@
 
 void SceneEditor::_placeSky(const string& newID, const string& previewID)
 {
+	// Delete old
+	if (_fe3d.skyEntity_isExisting(newID))
+	{
+		_fe3d.skyEntity_delete(newID);
+	}
+
+	// Create new
 	_fe3d.skyEntity_add(newID);
 	_fe3d.skyEntity_setDiffuseMaps(newID, _fe3d.skyEntity_getDiffuseMapPaths(previewID));
 	_fe3d.skyEntity_setLightness(newID, _fe3d.skyEntity_getLightness(previewID));
@@ -12,6 +19,13 @@ void SceneEditor::_placeSky(const string& newID, const string& previewID)
 
 void SceneEditor::_placeSky(const string& newID, const array<string, 6>& diffuseMapPaths, float lightness, float rotationSpeed, vec3 color)
 {
+	// Delete old
+	if (_fe3d.skyEntity_isExisting(newID))
+	{
+		_fe3d.skyEntity_delete(newID);
+	}
+
+	// Create new
 	_fe3d.skyEntity_add(newID);
 	_fe3d.skyEntity_setDiffuseMaps(newID, diffuseMapPaths);
 	_fe3d.skyEntity_setLightness(newID, lightness);
@@ -22,6 +36,12 @@ void SceneEditor::_placeSky(const string& newID, const array<string, 6>& diffuse
 
 void SceneEditor::_placeTerrain(const string& newID, const string& previewID)
 {
+	// Delete old
+	if (_fe3d.terrainEntity_isExisting(newID))
+	{
+		_fe3d.terrainEntity_delete(newID);
+	}
+
 	// Create TERRAIN entity
 	_fe3d.terrainEntity_add(newID, _fe3d.terrainEntity_getHeightMapPath(previewID));
 	_fe3d.terrainEntity_select(newID);
@@ -72,6 +92,12 @@ void SceneEditor::_placeTerrain(const string& newID, const string& heightMapPath
 	float blendRepeatR, float blendRepeatG, float blendRepeatB, bool isSpecular, float specularIntensity, const string& diffuseMapPath, 
 	const string& blendMapPath, const string& blendMapPathR, const string& blendMapPathG, const string& blendMapPathB)
 {
+	// Delete old
+	if (_fe3d.terrainEntity_isExisting(newID))
+	{
+		_fe3d.terrainEntity_delete(newID);
+	}
+
 	// Create TERRAIN entity
 	_fe3d.terrainEntity_add(newID, heightMapPath);
 	_fe3d.terrainEntity_select(newID);
@@ -97,6 +123,12 @@ void SceneEditor::_placeTerrain(const string& newID, const string& heightMapPath
 
 void SceneEditor::_placeWater(const string& newID, const string& previewID)
 {
+	// Delete old
+	if (_fe3d.waterEntity_isExisting(newID))
+	{
+		_fe3d.waterEntity_delete(newID);
+	}
+
 	// Create WATER entity
 	_fe3d.waterEntity_add(newID);
 
@@ -139,6 +171,12 @@ void SceneEditor::_placeWater(const string& newID, vec3 position, float size, bo
 	bool isRefractive, float waveHeightFactor, float specularFactor, float specularIntensity, float transparency, vec3 color, float uvRepeat, vec2 speed,
 	const string& dudvMapPath, const string& normalMapPath, const string& displacementMapPath)
 {
+	// Delete old
+	if (_fe3d.waterEntity_isExisting(newID))
+	{
+		_fe3d.waterEntity_delete(newID);
+	}
+
 	// Create WATER entity
 	_fe3d.waterEntity_add(newID);
 	_fe3d.waterEntity_select(newID);

@@ -52,6 +52,7 @@ private:
 	unsigned int _countFrontSpaces(const string& scriptLineText);
 	bool _validateScopeChange(unsigned int countedSpaces, const string& scriptLineText);
 	void _throwScriptError(const string& message);
+	void _checkEngineWarnings();
 	vector<ScriptValue> _processEngineFunctionCall(const string& scriptLine);
 	vector<ScriptValue> _processMathematicalFunctionCall(const string& scriptLine);
 	vector<ScriptValue> _processMiscellaneousFunctionCall(const string& scriptLine);
@@ -102,6 +103,7 @@ private:
 
 	// Integers
 	const unsigned int _spacesPerIndent = 4;
+	unsigned int _lastLoggerMessageCount = 0;
 
 	// Booleans
 	bool _hasThrownError = false;

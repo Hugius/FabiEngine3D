@@ -239,11 +239,11 @@ void SceneEditor::_updateCamera()
 				// X movement
 				if (_fe3d.input_getKeyDown(InputType::KEY_A))
 				{
-					_fe3d.camera_translateFollowX(-_customCameraSpeed);
+					_fe3d.camera_translateFollowX(-_customCameraSpeed / 100.0f);
 				}
 				else if (_fe3d.input_getKeyDown(InputType::KEY_D))
 				{
-					_fe3d.camera_translateFollowX(_customCameraSpeed);
+					_fe3d.camera_translateFollowX(_customCameraSpeed / 100.0f);
 				}
 
 				// Y movement
@@ -259,11 +259,11 @@ void SceneEditor::_updateCamera()
 				// Z movement
 				if (_fe3d.input_getKeyDown(InputType::KEY_W))
 				{
-					_fe3d.camera_translateFollowZ(_customCameraSpeed);
+					_fe3d.camera_translateFollowZ(_customCameraSpeed / 100.0f);
 				}
 				else if (_fe3d.input_getKeyDown(InputType::KEY_S))
 				{
-					_fe3d.camera_translateFollowZ(-_customCameraSpeed);
+					_fe3d.camera_translateFollowZ(-_customCameraSpeed / 100.0f);
 				}
 			}
 		}

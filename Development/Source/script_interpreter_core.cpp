@@ -12,6 +12,9 @@ ScriptInterpreter::ScriptInterpreter(FabiEngine3D& fe3d, Script& script, SceneEd
 
 void ScriptInterpreter::load()
 {
+	// Save current amount of logged messages
+	_lastLoggerMessageCount = _fe3d.logger_getMessageStack().size();
+
 	// For every scriptfile
 	for (auto& scriptID : _script.getAllScriptFileIDs())
 	{
@@ -48,7 +51,6 @@ void ScriptInterpreter::load()
 				if (scriptType == "")
 				{
 					_fe3d.logger_throwWarning("Entry point defined before type @ script \"" + scriptID + "\"");
-					break;
 				}
 				else
 				{
@@ -115,6 +117,9 @@ void ScriptInterpreter::load()
 			}
 		}
 	}
+
+	// Check if any engine warnings were thrown
+	_checkEngineWarnings();
 }
 
 void ScriptInterpreter::executeInitialization()
@@ -144,6 +149,7 @@ void ScriptInterpreter::executeDestruction()
 void ScriptInterpreter::unload()
 {
 	// Reset all variables
+	_localVariablesStack.clear();
 	_currentScriptStackIDs.clear();
 	_currentLineStackIndices.clear();
 	_scopeDepthStack.clear();
@@ -154,8 +160,9 @@ void ScriptInterpreter::unload()
 	_initEntryID = "";
 	_updateEntryID = "";
 	_destroyEntryID = "";
-	_scopeHasChanged = false;
+	_lastLoggerMessageCount = 0;
 	_hasThrownError = false;
+	_scopeHasChanged = false;
 	_passedScopeChanger = false;
 	_lastConditionResult = false;
 	_lastScopeChanger = ScriptScopeChanger::NONE;

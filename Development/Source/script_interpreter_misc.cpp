@@ -143,6 +143,25 @@ void ScriptInterpreter::_throwScriptError(const string& message)
 	_hasThrownError = true;
 }
 
+void ScriptInterpreter::_checkEngineWarnings()
+{
+	auto messageStack = _fe3d.logger_getMessageStack();
+
+	// Check if any new messages were logged
+	if (messageStack.size() > _lastLoggerMessageCount)
+	{
+		// Loop over all new messages
+		for (unsigned int i = _lastLoggerMessageCount - 1; i < messageStack.size(); i++)
+		{
+			// Check if logged message is a warning
+			if (messageStack[i].substr(0, string("[Warn]").size()) == "[Warn]")
+			{
+				_hasThrownError = true;
+			}
+		}
+	}
+}
+
 bool ScriptInterpreter::hasThrownError()
 {
 	return _hasThrownError;

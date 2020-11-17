@@ -2,6 +2,21 @@
 
 void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType scriptType)
 {
+	// Detect infinite recursion
+	if (_localVariablesStack.size() >= 100)
+	{
+		_fe3d.logger_throwWarning("too many script execution layers, perhaps infinite recursion?");
+	}
+
+	// Check if any engine warnings were thrown
+	_checkEngineWarnings();
+
+	// Skip the following lines of code if the last run caused an error
+	if (_hasThrownError)
+	{
+		return;
+	}
+
 	// Save local state of script currently being executed
 	_localVariablesStack.push_back({});
 	_currentScriptStackIDs.push_back(scriptID);
@@ -14,6 +29,9 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 	// Interpret every line from top to bottom in script
 	for (size_t lineIndex = 0; lineIndex < scriptFile->getLineCount(); lineIndex++)
 	{
+		// Save current amount of logged messages
+		_lastLoggerMessageCount = _fe3d.logger_getMessageStack().size();
+
 		// Save index of line of script currently being executed
 		_currentLineStackIndices.back() = lineIndex;
 
@@ -74,6 +92,25 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 		else if (scriptLineText.substr(0, 5) == "misc:") // Miscellaneous function
 		{
 			_processMiscellaneousFunctionCall(scriptLineText);
+		}
+		else if (scriptLineText.substr(0, _executeKeyword.size() + 1) == _executeKeyword + " ") // Execute another script
+		{
+			// Determine scriptname to execute and current script type
+			std::istringstream iss(scriptLineText);
+			string scriptToExecute;
+			iss >> scriptToExecute >> scriptToExecute;
+			auto& scriptList = (scriptType == ScriptType::INIT) ? _initScriptIDs : (scriptType == ScriptType::UPDATE) ? _updateScriptIDs : _destroyScriptIDs;
+			
+			// Check if script exists
+			if (std::find(scriptList.begin(), scriptList.end(), scriptToExecute) != scriptList.end())
+			{
+				_executeScript(scriptToExecute, scriptType);
+			}
+			else
+			{
+				_throwScriptError("script \"" + scriptToExecute + "\" not found!");
+				return;
+			}
 		}
 		else if (scriptLineText.substr(0, _ifKeyword.size() + 1) == _ifKeyword + " ") // If statement
 		{
@@ -210,6 +247,9 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 			_throwScriptError("unknown keyword!");
 			return;
 		}
+
+		// Check if any engine warnings were thrown
+		_checkEngineWarnings();
 
 		// Skip the following lines of code if the last run caused an error
 		if (_hasThrownError)

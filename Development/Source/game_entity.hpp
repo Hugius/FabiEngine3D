@@ -61,6 +61,10 @@ public:
 	void setCameraStatic(bool val);
 	void setDepthMapIncluded(bool val);
 	void setLevelOfDetailed(bool val);
+	void clearDiffuseMaps();
+	void clearLightMaps();
+	void clearReflectionMaps();
+	void clearNormalMaps();
 	
 	// Getters
 	const mat4& getModelMatrix() const;

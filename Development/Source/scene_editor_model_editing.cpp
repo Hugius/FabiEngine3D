@@ -17,13 +17,15 @@ void SceneEditor::_updateModelEditing()
 		// User must not be in placement mode
 		if (_currentPreviewModelName == "" && _currentPreviewBillboardName == "" && !_isPlacingPointlight)
 		{
+			// Check which entity is selected
+			auto hoveredID = _fe3d.collision_checkCursorInAny();
+
 			// Check if user selected a model
 			for (auto& entityID : _fe3d.gameEntity_getAllIDs())
 			{
 				// Must not be preview entity
 				if (entityID[0] != '@')
 				{
-					auto hoveredID = _fe3d.collision_checkCursorInAny();
 					bool hovered = (hoveredID.size() >= entityID.size()) && (hoveredID.substr(0, entityID.size()) == entityID);
 
 					// Cursor must be in 3D space, no GUI interruptions, no RMB holding down
@@ -61,7 +63,7 @@ void SceneEditor::_updateModelEditing()
 				if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) && !_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{
 					_activeModelID = "";
-					_rightWindow->setActiveScreen("main");
+					_gui.getViewport("right")->getWindow("main")->setActiveScreen("main");
 				}
 			}
 
@@ -75,39 +77,39 @@ void SceneEditor::_updateModelEditing()
 			// Update properties screen
 			if (_activeModelID != "")
 			{
-				_rightWindow->setActiveScreen("modelPropertiesMenu");
+				_gui.getViewport("right")->getWindow("main")->setActiveScreen("modelPropertiesMenu");
 
 				// GUI management (pressed)
 				if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 				{
-					if (_rightWindow->getScreen("modelPropertiesMenu")->getButton("translation")->isHovered()) // Translation button
+					if (_gui.getViewport("right")->getWindow("main")->getScreen("modelPropertiesMenu")->getButton("translation")->isHovered()) // Translation button
 					{
 						_transformation = TransformationType::TRANSLATION;
 
 						// Update buttons hoverability
-						_rightWindow->getScreen("modelPropertiesMenu")->getButton("translation")->setHoverable(false);
-						_rightWindow->getScreen("modelPropertiesMenu")->getButton("rotation")->setHoverable(true);
-						_rightWindow->getScreen("modelPropertiesMenu")->getButton("scaling")->setHoverable(true);
+						_gui.getViewport("right")->getWindow("main")->getScreen("modelPropertiesMenu")->getButton("translation")->setHoverable(false);
+						_gui.getViewport("right")->getWindow("main")->getScreen("modelPropertiesMenu")->getButton("rotation")->setHoverable(true);
+						_gui.getViewport("right")->getWindow("main")->getScreen("modelPropertiesMenu")->getButton("scaling")->setHoverable(true);
 					}
-					else if (_rightWindow->getScreen("modelPropertiesMenu")->getButton("rotation")->isHovered()) // Rotation button
+					else if (_gui.getViewport("right")->getWindow("main")->getScreen("modelPropertiesMenu")->getButton("rotation")->isHovered()) // Rotation button
 					{
 						_transformation = TransformationType::ROTATION;
 
 						// Update buttons hoverability
-						_rightWindow->getScreen("modelPropertiesMenu")->getButton("translation")->setHoverable(true);
-						_rightWindow->getScreen("modelPropertiesMenu")->getButton("rotation")->setHoverable(false);
-						_rightWindow->getScreen("modelPropertiesMenu")->getButton("scaling")->setHoverable(true);
+						_gui.getViewport("right")->getWindow("main")->getScreen("modelPropertiesMenu")->getButton("translation")->setHoverable(true);
+						_gui.getViewport("right")->getWindow("main")->getScreen("modelPropertiesMenu")->getButton("rotation")->setHoverable(false);
+						_gui.getViewport("right")->getWindow("main")->getScreen("modelPropertiesMenu")->getButton("scaling")->setHoverable(true);
 					}
-					else if (_rightWindow->getScreen("modelPropertiesMenu")->getButton("scaling")->isHovered()) // Scaling button
+					else if (_gui.getViewport("right")->getWindow("main")->getScreen("modelPropertiesMenu")->getButton("scaling")->isHovered()) // Scaling button
 					{
 						_transformation = TransformationType::SCALING;
 
 						// Update buttons hoverability
-						_rightWindow->getScreen("modelPropertiesMenu")->getButton("translation")->setHoverable(true);
-						_rightWindow->getScreen("modelPropertiesMenu")->getButton("rotation")->setHoverable(true);
-						_rightWindow->getScreen("modelPropertiesMenu")->getButton("scaling")->setHoverable(false);
+						_gui.getViewport("right")->getWindow("main")->getScreen("modelPropertiesMenu")->getButton("translation")->setHoverable(true);
+						_gui.getViewport("right")->getWindow("main")->getScreen("modelPropertiesMenu")->getButton("rotation")->setHoverable(true);
+						_gui.getViewport("right")->getWindow("main")->getScreen("modelPropertiesMenu")->getButton("scaling")->setHoverable(false);
 					}
-					else if (_rightWindow->getScreen("modelPropertiesMenu")->getButton("freeze")->isHovered()) // Freeze button
+					else if (_gui.getViewport("right")->getWindow("main")->getScreen("modelPropertiesMenu")->getButton("freeze")->isHovered()) // Freeze button
 					{
 						// Model
 						_fe3d.gameEntity_setStaticToCamera(_activeModelID, true);
@@ -118,13 +120,22 @@ void SceneEditor::_updateModelEditing()
 							_fe3d.aabbEntity_setResponsiveness(aabbID, false);
 						}
 					}
-					else if (_rightWindow->getScreen("modelPropertiesMenu")->getButton("delete")->isHovered()) // Delete button
+					else if (_gui.getViewport("right")->getWindow("main")->getScreen("modelPropertiesMenu")->getButton("delete")->isHovered()) // Delete button
 					{
 						_fe3d.gameEntity_delete(_activeModelID);
-						_rightWindow->setActiveScreen("main");
+						_gui.getViewport("right")->getWindow("main")->setActiveScreen("main");
 						_activeModelID = "";
 						return;
 					}
+				}
+
+				// Alternative way of deleting
+				if (_fe3d.input_getKeyPressed(InputType::KEY_DELETE))
+				{
+					_fe3d.gameEntity_delete(_activeModelID);
+					_gui.getViewport("right")->getWindow("main")->setActiveScreen("main");
+					_activeModelID = "";
+					return;
 				}
 
 				// Get entity transformation
@@ -187,12 +198,12 @@ void SceneEditor::_updateModelEditing()
 		}
 		else
 		{
-			if (_rightWindow->getActiveScreen()->getID() != "main")
+			if (_gui.getViewport("right")->getWindow("main")->getActiveScreen()->getID() != "main")
 			{
 				// Reset when user wants to place models again
 				for (auto& entityID : _fe3d.gameEntity_getAllIDs())
 				{
-					_rightWindow->setActiveScreen("main");
+					_gui.getViewport("right")->getWindow("main")->setActiveScreen("main");
 					_fe3d.gameEntity_setLightness(entityID, _fe3d.gameEntity_getOriginalLightness(entityID));
 					_selectedModelLightnessMultiplier = 1;
 					_activeModelID = "";

@@ -25,20 +25,20 @@ void BillboardEditor::_updateBillboardManagement()
 			if (screen->getButton("addBillboard")->isHovered()) // Add billboard button
 			{
 				_gui.getGlobalScreen()->addValueForm("newBillboardName", "New billboard name", "", vec2(0.0f), vec2(0.5f, 0.1f));
-				_billboardCreationEnabled = true;
+				isCreatingBillboard = true;
 			}
 			else if (screen->getButton("editBillboard")->isHovered()) // Edit billboard button
 			{
-				_billboardChoosingEnabled = true;
-				_billboardEditingEnabled = true;
+				_isChoosingBillboard = true;
+				_isEditingBillboard = true;
 				for (auto& name : _billboardNames) { name = name.substr(1); }
 				_gui.getGlobalScreen()->addChoiceForm("billboards", "Select billboard", vec2(-0.4f, 0.1f), _billboardNames);
 				for (auto& name : _billboardNames) { name = "@" + name; }
 			}
 			else if (screen->getButton("deleteBillboard")->isHovered()) // Delete billboard button
 			{
-				_billboardChoosingEnabled = true;
-				_billboardRemovalEnabled = true;
+				_isChoosingBillboard = true;
+				_isRemovingBillboard = true;
 				for (auto& name : _billboardNames) { name = name.substr(1); }
 				_gui.getGlobalScreen()->addChoiceForm("billboards", "Select billboard", vec2(-0.4f, 0.1f), _billboardNames);
 				for (auto& name : _billboardNames) { name = "@" + name; }
@@ -68,7 +68,7 @@ void BillboardEditor::_updateBillboardCreation()
 {
 	if (_isLoaded)
 	{
-		if (_billboardCreationEnabled)
+		if (isCreatingBillboard)
 		{
 			string newBillboardName = "";
 
@@ -95,8 +95,8 @@ void BillboardEditor::_updateBillboardCreation()
 						_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID(), "Billboard: " +
 							_currentBillboardID.substr(1), 0.025f);
 						_fe3d.textEntity_show(_gui.getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID());
-						_billboardCreationEnabled = false;
-						_billboardEditingEnabled = true;
+						isCreatingBillboard = false;
+						_isEditingBillboard = true;
 					}
 					else // Name already exists
 					{
@@ -116,7 +116,7 @@ void BillboardEditor::_updateBillboardChoosing()
 {
 	if (_isLoaded)
 	{
-		if (_billboardChoosingEnabled)
+		if (_isChoosingBillboard)
 		{
 			// Get selected button ID
 			string selectedButtonID = _gui.getGlobalScreen()->getSelectedChoiceFormButtonID("billboards");
@@ -132,20 +132,23 @@ void BillboardEditor::_updateBillboardChoosing()
 			{
 				if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT)) // LMB pressed
 				{
-					// Go to editor
-					_gui.getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuChoice");
-
 					// Select billboard
 					_currentBillboardID = "@" + selectedButtonID;
 					_hoveredBillboardID = "";
 
+					// Go to editor
+					if (_isEditingBillboard)
+					{
+						_gui.getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuChoice");
+						_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID(), "Billboard: " +
+							_currentBillboardID.substr(1), 0.025f);
+						_fe3d.textEntity_show(_gui.getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID());
+					}
+
 					// Miscellaneous
-					_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID(), "Billboard: " +
-						_currentBillboardID.substr(1), 0.025f);
-					_fe3d.textEntity_show(_gui.getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID());
 					_fe3d.billboardEntity_show(_currentBillboardID);
 					_gui.getGlobalScreen()->removeChoiceForm("billboards");
-					_billboardChoosingEnabled = false;
+					_isChoosingBillboard = false;
 				}
 				else
 				{
@@ -155,9 +158,9 @@ void BillboardEditor::_updateBillboardChoosing()
 			}
 			else if (_gui.getGlobalScreen()->isChoiceFormCancelled("billboards")) // Cancelled choosing
 			{
-				_billboardChoosingEnabled = false;
-				_billboardEditingEnabled = false;
-				_billboardRemovalEnabled = false;
+				_isChoosingBillboard = false;
+				_isEditingBillboard = false;
+				_isRemovingBillboard = false;
 				_gui.getGlobalScreen()->removeChoiceForm("billboards");
 			}
 			else // Nothing hovered
@@ -178,7 +181,7 @@ void BillboardEditor::_updateBillboardRemoval()
 {
 	if (_isLoaded)
 	{
-		if (_billboardRemovalEnabled && _currentBillboardID != "")
+		if (_isRemovingBillboard && _currentBillboardID != "")
 		{
 			_gui.getGlobalScreen()->addAnswerForm("removeBillboard", "Are you sure?", vec2(0.0f));
 
@@ -194,11 +197,11 @@ void BillboardEditor::_updateBillboardRemoval()
 
 				// Miscellaneous
 				_gui.getGlobalScreen()->removeAnswerForm("removeBillboard");
-				_billboardRemovalEnabled = false;
+				_isRemovingBillboard = false;
 			}
 			else if (_gui.getGlobalScreen()->isAnswerFormCancelled("removeBillboard"))
 			{
-				_billboardChoosingEnabled = true;
+				_isChoosingBillboard = true;
 				_currentBillboardID = "";
 			}
 		}

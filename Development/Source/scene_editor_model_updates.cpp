@@ -4,21 +4,21 @@ void SceneEditor::_updateMainModelMenu()
 {
 	if (_isLoaded)
 	{
-		if (_leftWindow->getActiveScreen()->getID() == "sceneEditorMenuModel")
+		if (_gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID() == "sceneEditorMenuModel")
 		{
-			auto screen = _leftWindow->getScreen("sceneEditorMenuModel");
+			auto screen = _gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuModel");
 			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
 				if (screen->getButton("place")->isHovered()) // Place model button
 				{
-					_leftWindow->setActiveScreen("sceneEditorMenuModelPlace");
+					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuModelPlace");
 				}
 				else if (screen->getButton("choice")->isHovered()) // Choose model button
 				{
-					_leftWindow->setActiveScreen("sceneEditorMenuModelChoice");
+					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuModelChoice");
 
 					// Clear all buttons from scrolling list
-					_leftWindow->getScreen("sceneEditorMenuModelChoice")->getScrollingList("models")->deleteButtons();
+					_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuModelChoice")->getScrollingList("models")->deleteButtons();
 
 					// Add every placed model name
 					for (auto& modelID : _fe3d.gameEntity_getAllIDs())
@@ -30,13 +30,13 @@ void SceneEditor::_updateMainModelMenu()
 							string modelName = modelID.substr(modelID.find('@') + 1);
 
 							// Add new button
-							_leftWindow->getScreen("sceneEditorMenuModelChoice")->getScrollingList("models")->addButton(modelID, modelName);
+							_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuModelChoice")->getScrollingList("models")->addButton(modelID, modelName);
 						}
 					}
 				}
 				else if (screen->getButton("back")->isHovered()) // Back button
 				{
-					_leftWindow->setActiveScreen("sceneEditorMenuChoice");
+					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuChoice");
 				}
 			}
 		}
@@ -48,9 +48,9 @@ void SceneEditor::_updateModelPlacingMenu()
 	if (_isLoaded)
 	{
 		// Placing screen
-		if (_leftWindow->getActiveScreen()->getID() == "sceneEditorMenuModelPlace")
+		if (_gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID() == "sceneEditorMenuModelPlace")
 		{
-			auto screen = _leftWindow->getScreen("sceneEditorMenuModelPlace");
+			auto screen = _gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuModelPlace");
 			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
 				// Loop over every created model
@@ -82,7 +82,7 @@ void SceneEditor::_updateModelPlacingMenu()
 				// Back button
 				if (screen->getButton("back")->isHovered())
 				{
-					_leftWindow->setActiveScreen("sceneEditorMenuModel");
+					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuModel");
 				}
 			}
 		}
@@ -94,18 +94,18 @@ void SceneEditor::_updateModelChoosingMenu()
 	if (_isLoaded)
 	{
 		// Choosing screen
-		if (_leftWindow->getActiveScreen()->getID() == "sceneEditorMenuModelChoice")
+		if (_gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID() == "sceneEditorMenuModelChoice")
 		{
-			auto screen = _leftWindow->getScreen("sceneEditorMenuModelChoice");
+			auto screen = _gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuModelChoice");
 
 			// Remove deleted models from the scrollingList buttons
-			for (auto& button : _leftWindow->getScreen("sceneEditorMenuModelChoice")->getScrollingList("models")->getButtons())
+			for (auto& button : _gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuModelChoice")->getScrollingList("models")->getButtons())
 			{
 				// Check if model is still existing
 				if (!_fe3d.gameEntity_isExisting(button->getID()))
 				{
 					// Delete button
-					_leftWindow->getScreen("sceneEditorMenuModelChoice")->getScrollingList("models")->deleteButton(button->getID());
+					_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuModelChoice")->getScrollingList("models")->deleteButton(button->getID());
 					break;
 				}
 			}
@@ -140,7 +140,7 @@ void SceneEditor::_updateModelChoosingMenu()
 			{
 				if (screen->getButton("back")->isHovered())
 				{
-					_leftWindow->setActiveScreen("sceneEditorMenuModel");
+					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuModel");
 					_currentPreviewModelName = "";
 				}
 			}

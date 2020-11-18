@@ -6,7 +6,7 @@ void BillboardEditor::_updateBillboardEditing()
 {
 	if (_isLoaded)
 	{
-		if (_billboardEditingEnabled && _currentBillboardID != "")
+		if (_isEditingBillboard && _currentBillboardID != "")
 		{
 			// Shortened screen instance
 			auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
@@ -37,7 +37,7 @@ void BillboardEditor::_updateBillboardEditing()
 						_fe3d.billboardEntity_hide(_currentBillboardID);
 						_fe3d.textEntity_hide(_gui.getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID());
 						_currentBillboardID = "";
-						_billboardEditingEnabled = false;
+						_isEditingBillboard = false;
 						_gui.getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuMain");
 						return;
 					}

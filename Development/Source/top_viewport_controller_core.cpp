@@ -6,10 +6,10 @@
 #define SCRIPT_EXECUTOR _scriptEditor.getScriptExecutor(false)
 
 TopViewportController::TopViewportController(FabiEngine3D& fe3d, EngineGuiManager& gui, 
-	ModelEditor& modelEditor, WorldEditor& worldEditor, BillboardEditor& billboardEditor, SceneEditor& sceneEditor, ScriptEditor& scriptEditor) :
+	ModelEditor& modelEditor, EnvironmentEditor& environmentEditor, BillboardEditor& billboardEditor, SceneEditor& sceneEditor, ScriptEditor& scriptEditor) :
 	ViewportController(fe3d, gui),
 	_modelEditor(modelEditor),
-	_worldEditor(worldEditor),
+	_environmentEditor(environmentEditor),
 	_billboardEditor(billboardEditor),
 	_sceneEditor(sceneEditor),
 	_scriptEditor(scriptEditor)
@@ -192,7 +192,7 @@ void TopViewportController::_saveCurrentProject()
 
 	// Save everything
 	_modelEditor.save();
-	_worldEditor.save();
+	_environmentEditor.save();
 	_billboardEditor.save();
 	_sceneEditor.save();
 	_scriptEditor.save();
@@ -222,10 +222,10 @@ void TopViewportController::_updateCurrentProject()
 		_modelEditor.unload();
 	}
 
-	// Unload world editor
-	if (_worldEditor.isLoaded())
+	// Unload environment editor
+	if (_environmentEditor.isLoaded())
 	{
-		_worldEditor.unload();
+		_environmentEditor.unload();
 	}
 
 	// Unload billboard editor
@@ -248,7 +248,7 @@ void TopViewportController::_updateCurrentProject()
 
 	// Pass loaded project name
 	_modelEditor.setCurrentProjectName(_currentProjectName);
-	_worldEditor.setCurrentProjectName(_currentProjectName);
+	_environmentEditor.setCurrentProjectName(_currentProjectName);
 	_billboardEditor.setCurrentProjectName(_currentProjectName);
 	_sceneEditor.setCurrentProjectName(_currentProjectName);
 	_scriptEditor.setCurrentProjectName(_currentProjectName);

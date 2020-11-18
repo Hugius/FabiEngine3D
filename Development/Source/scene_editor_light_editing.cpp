@@ -47,9 +47,9 @@ void SceneEditor::_updateLightEditing()
 
 								// Filling writefields
 								vec3 position = _fe3d.gameEntity_getPosition(ACTIVE_BULB_ID);
-								_rightWindow->getScreen("pointLightPropertiesMenu")->getWriteField("x")->setTextContent(to_string(static_cast<int>(position.x)));
-								_rightWindow->getScreen("pointLightPropertiesMenu")->getWriteField("y")->setTextContent(to_string(static_cast<int>(position.y)));
-								_rightWindow->getScreen("pointLightPropertiesMenu")->getWriteField("z")->setTextContent(to_string(static_cast<int>(position.z)));
+								_gui.getViewport("right")->getWindow("main")->getScreen("pointLightPropertiesMenu")->getWriteField("x")->setTextContent(to_string(static_cast<int>(position.x)));
+								_gui.getViewport("right")->getWindow("main")->getScreen("pointLightPropertiesMenu")->getWriteField("y")->setTextContent(to_string(static_cast<int>(position.y)));
+								_gui.getViewport("right")->getWindow("main")->getScreen("pointLightPropertiesMenu")->getWriteField("z")->setTextContent(to_string(static_cast<int>(position.z)));
 							
 								// Update selected text
 								string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedPointlightName")->getEntityID();
@@ -77,7 +77,7 @@ void SceneEditor::_updateLightEditing()
 				if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) && !_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{
 					ACTIVE_BULB_ID = "";
-					_rightWindow->setActiveScreen("main");
+					_gui.getViewport("right")->getWindow("main")->setActiveScreen("main");
 				}
 			}
 
@@ -91,16 +91,16 @@ void SceneEditor::_updateLightEditing()
 			// Update properties screen
 			if (ACTIVE_BULB_ID != "")
 			{
-				_rightWindow->setActiveScreen("pointLightPropertiesMenu");
+				_gui.getViewport("right")->getWindow("main")->setActiveScreen("pointLightPropertiesMenu");
 
 				// GUI management (pressed)
 				if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 				{
-					if (_rightWindow->getScreen("pointLightPropertiesMenu")->getButton("delete")->isHovered()) // Delete button
+					if (_gui.getViewport("right")->getWindow("main")->getScreen("pointLightPropertiesMenu")->getButton("delete")->isHovered()) // Delete button
 					{
 						_fe3d.gameEntity_delete(ACTIVE_BULB_ID);
 						_fe3d.lightEntity_delete(ACTIVE_LIGHT_ID);
-						_rightWindow->setActiveScreen("main");
+						_gui.getViewport("right")->getWindow("main")->setActiveScreen("main");
 						ACTIVE_BULB_ID = "";
 						return;
 					}

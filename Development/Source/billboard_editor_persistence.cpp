@@ -96,7 +96,7 @@ void BillboardEditor::loadBillboards()
 		file.close();
 
 		// Logging
-		_fe3d.logger_throwInfo("Billboard editor data from project \"" + _currentProjectName + "\" loaded!");
+		_fe3d.logger_throwInfo("Billboard data from project \"" + _currentProjectName + "\" loaded!");
 	}
 }
 
@@ -163,6 +163,6 @@ void BillboardEditor::save()
 		file.close();
 
 		// Logging
-		_fe3d.logger_throwInfo("Billboard editor data from project \"" + _currentProjectName + "\" saved!");
+		_fe3d.logger_throwInfo("Billboard data from project \"" + _currentProjectName + "\" saved!");
 	}
 }

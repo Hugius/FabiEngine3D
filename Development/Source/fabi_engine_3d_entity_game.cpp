@@ -75,6 +75,11 @@ void FabiEngine3D::gameEntity_show(const string& ID)
 	_core->_gameEntityManager.getEntity(ID)->setVisible(true);
 }
 
+void FabiEngine3D::gameEntity_loadModel(const string& ID, const string& objPath)
+{
+	_core->_gameEntityManager.generateModel(ID, objPath);
+}
+
 void FabiEngine3D::gameEntity_setDiffuseMap(const string& ID, const string& texturePath)
 {
 	_core->_gameEntityManager.getEntity(ID)->setDiffuseMap(_core->_texLoader.getTexture(texturePath, true, true));
@@ -412,7 +417,7 @@ string FabiEngine3D::gameEntity_getLevelOfDetailEntityID(const string& ID)
 	return _core->_gameEntityManager.getEntity(ID)->getLodEntityID();
 }
 
-const vector<vec3>& FabiEngine3D::gameEntity_getInstancedOffsets(const string& ID)
+const vector<vec3> FabiEngine3D::gameEntity_getInstancedOffsets(const string& ID)
 {
 	if (gameEntity_isInstanced(ID))
 	{

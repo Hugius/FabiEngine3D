@@ -11,13 +11,13 @@ Collision CollisionDetector::check(const AabbEntity& box, vec3 point, vec3 point
 
 	// Get info
 	auto pos  = box.getTranslation();
-	auto size = box.getScaling();
+	auto size = box.getScaling() / 2.0f;
 	bool insideBox = false;
 
 	// Check for any collision at all
 	if (point.x > (pos.x - size.x) && point.x < (pos.x + size.x))
 	{
-		if (point.y > (pos.y - size.y) && point.y < (pos.y + size.y))
+		if (point.y > pos.y && point.y < (pos.y + (size.y * 2.0f)))
 		{
 			if (point.z > (pos.z - size.z) && point.z < (pos.z + size.z))
 			{
@@ -32,8 +32,8 @@ Collision CollisionDetector::check(const AabbEntity& box, vec3 point, vec3 point
 		// Get differences
 		float xDiffFirst = fabsf((pos.x - size.x) - point.x);
 		float xDiffSecnd = fabsf((pos.x + size.x) - point.x);
-		float yDiffFirst = fabsf((pos.y - size.y) - point.y);
-		float yDiffSecnd = fabsf((pos.y + size.y) - point.y);
+		float yDiffFirst = fabsf((pos.y) - point.y);
+		float yDiffSecnd = fabsf((pos.y + (size.y * 2.0f)) - point.y);
 		float zDiffFirst = fabsf((pos.z - size.z) - point.z);
 		float zDiffSecnd = fabsf((pos.z + size.z) - point.z);
 

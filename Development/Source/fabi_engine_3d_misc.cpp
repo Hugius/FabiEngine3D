@@ -135,16 +135,6 @@ void FabiEngine3D::misc_setCursorPosition(ivec2 pos)
 	_core->_windowManager.setMousePos(pos);
 }
 
-void FabiEngine3D::misc_showAudioDebugging()
-{
-	_core->_audioPlayer.setChannelDebugging(true);
-}
-
-void FabiEngine3D::misc_hideAudioDebugging()
-{
-	_core->_audioPlayer.setChannelDebugging(false);
-}
-
 void FabiEngine3D::misc_setMainRenderingColor(vec3 color)
 {
 	glClearColor(color.r, color.g, color.b, 1.0f);
@@ -183,6 +173,16 @@ void FabiEngine3D::misc_clearCubeMapCache(const array<string, 6>& filePaths)
 void FabiEngine3D::misc_clearHeightMapCache(const string& filePath)
 {
 	_core->_texLoader.clearHeightMapCache(filePath);
+}
+
+void FabiEngine3D::misc_clearAudioChunkCache(const string& filePath)
+{
+	_core->_audioLoader.clearChunkCache(filePath);
+}
+
+void FabiEngine3D::misc_clearAudioMusicCache(const string& filePath)
+{
+	_core->_audioLoader.clearMusicCache(filePath);
 }
 
 string FabiEngine3D::misc_getWinExplorerFilename(const string& startingDir, const string& fileType)

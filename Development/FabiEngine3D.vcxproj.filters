@@ -205,12 +205,6 @@
     <ClCompile Include="Source\viewport_controller.cpp">
       <Filter>src\Engine Controller System\Viewport Controllers</Filter>
     </ClCompile>
-    <ClCompile Include="Source\mouse_picker.cpp">
-      <Filter>src\Editor System\World Editor\Miscellaneous</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\world_editor_core.cpp">
-      <Filter>src\Editor System\World Editor\Core</Filter>
-    </ClCompile>
     <ClCompile Include="Source\fabi_engine_3d_entity_billboard.cpp">
       <Filter>src\Core System\Interface\Entities</Filter>
     </ClCompile>
@@ -388,9 +382,6 @@
     <ClCompile Include="Source\script_editor_writer.cpp">
       <Filter>src\Editor System\Script Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="Source\world_editor_updates.cpp">
-      <Filter>src\Editor System\World Editor\Updates</Filter>
-    </ClCompile>
     <ClCompile Include="Source\model_editor_updates_aabb.cpp">
       <Filter>src\Editor System\Model Editor\Updates</Filter>
     </ClCompile>
@@ -406,24 +397,6 @@
     <ClCompile Include="Source\scene_editor_creation.cpp">
       <Filter>src\Editor System\Scene Editor\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="Source\world_editor_updates_sky_menu.cpp">
-      <Filter>src\Editor System\World Editor\Updates</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\world_editor_updates_sky_misc.cpp">
-      <Filter>src\Editor System\World Editor\Updates</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\world_editor_misc.cpp">
-      <Filter>src\Editor System\World Editor\Miscellaneous</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\world_editor_persistence_water.cpp">
-      <Filter>src\Editor System\World Editor\Persistency</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\world_editor_persistence_terrain.cpp">
-      <Filter>src\Editor System\World Editor\Persistency</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\world_editor_persistence_sky.cpp">
-      <Filter>src\Editor System\World Editor\Persistency</Filter>
-    </ClCompile>
     <ClCompile Include="Source\script_editor_persistence.cpp">
       <Filter>src\Editor System\Script Editor\Core</Filter>
     </ClCompile>
@@ -432,18 +405,6 @@
     </ClCompile>
     <ClCompile Include="Source\model_editor_persistence.cpp">
       <Filter>src\Editor System\Model Editor\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\world_editor_updates_terrain_misc.cpp">
-      <Filter>src\Editor System\World Editor\Updates</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\world_editor_updates_terrain_menu.cpp">
-      <Filter>src\Editor System\World Editor\Updates</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\world_editor_updates_water_misc.cpp">
-      <Filter>src\Editor System\World Editor\Updates</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\world_editor_updates_water_menu.cpp">
-      <Filter>src\Editor System\World Editor\Updates</Filter>
     </ClCompile>
     <ClCompile Include="Source\scene_editor_environment.cpp">
       <Filter>src\Editor System\Scene Editor\Environment</Filter>
@@ -483,6 +444,57 @@
     </ClCompile>
     <ClCompile Include="Source\script_editor_selector.cpp">
       <Filter>src\Editor System\Script Editor\Updates</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\environment_editor_core.cpp">
+      <Filter>src\Editor System\Environment Editor\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\environment_editor_misc.cpp">
+      <Filter>src\Editor System\Environment Editor\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\environment_editor_persistence_sky.cpp">
+      <Filter>src\Editor System\Environment Editor\Persistency</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\environment_editor_persistence_terrain.cpp">
+      <Filter>src\Editor System\Environment Editor\Persistency</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\environment_editor_persistence_water.cpp">
+      <Filter>src\Editor System\Environment Editor\Persistency</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\environment_editor_updates.cpp">
+      <Filter>src\Editor System\Environment Editor\Updates</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\environment_editor_updates_sky_menu.cpp">
+      <Filter>src\Editor System\Environment Editor\Updates</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\environment_editor_updates_sky_misc.cpp">
+      <Filter>src\Editor System\Environment Editor\Updates</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\environment_editor_updates_terrain_menu.cpp">
+      <Filter>src\Editor System\Environment Editor\Updates</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\environment_editor_updates_terrain_misc.cpp">
+      <Filter>src\Editor System\Environment Editor\Updates</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\environment_editor_updates_water_menu.cpp">
+      <Filter>src\Editor System\Environment Editor\Updates</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\environment_editor_updates_water_misc.cpp">
+      <Filter>src\Editor System\Environment Editor\Updates</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\mouse_picker.cpp">
+      <Filter>src\Miscellaneous\Other</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\audio_editor_updates.cpp">
+      <Filter>src\Editor System\Audio Editor\Upates</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\audio_editor_core.cpp">
+      <Filter>src\Editor System\Audio Editor\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\audio_editor_misc.cpp">
+      <Filter>src\Editor System\Audio Editor\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\audio_editor_updates_editing.cpp">
+      <Filter>src\Editor System\Audio Editor\Upates</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -678,12 +690,6 @@
     <ClInclude Include="Source\viewport_controller.hpp">
       <Filter>src\Engine Controller System\Viewport Controllers</Filter>
     </ClInclude>
-    <ClInclude Include="Source\mouse_picker.hpp">
-      <Filter>src\Editor System\World Editor\Miscellaneous</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\world_editor.hpp">
-      <Filter>src\Editor System\World Editor\Core</Filter>
-    </ClInclude>
     <ClInclude Include="Source\fabi_engine_3d.hpp">
       <Filter>src\Core System\Interface\Core</Filter>
     </ClInclude>
@@ -750,9 +756,6 @@
     <ClInclude Include="Source\input_types.hpp">
       <Filter>src\Miscellaneous\Enums</Filter>
     </ClInclude>
-    <ClInclude Include="Source\world_part.hpp">
-      <Filter>src\Miscellaneous\Enums</Filter>
-    </ClInclude>
     <ClInclude Include="Source\transformation_type.hpp">
       <Filter>src\Miscellaneous\Enums</Filter>
     </ClInclude>
@@ -790,6 +793,18 @@
       <Filter>src\Miscellaneous\Enums</Filter>
     </ClInclude>
     <ClInclude Include="Source\script_scope_changer.hpp">
+      <Filter>src\Miscellaneous\Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\audio_editor.hpp">
+      <Filter>src\Editor System\Audio Editor\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\environment_editor.hpp">
+      <Filter>src\Editor System\Environment Editor\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\mouse_picker.hpp">
+      <Filter>src\Miscellaneous\Other</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\environment_type.hpp">
       <Filter>src\Miscellaneous\Enums</Filter>
     </ClInclude>
   </ItemGroup>
@@ -848,9 +863,6 @@
     <Filter Include="src\Editor System\Model Editor">
       <UniqueIdentifier>{06b28638-e83d-4d54-abcf-c2c9adef26f9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\Editor System\World Editor">
-      <UniqueIdentifier>{f2efcfc8-0ca8-4e00-93b6-56ca366b00b0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\Physics System\Core">
       <UniqueIdentifier>{122040e7-a21b-4601-8455-4f3c46a93e92}</UniqueIdentifier>
     </Filter>
@@ -908,9 +920,6 @@
     <Filter Include="src\Engine Controller System\Core Controller">
       <UniqueIdentifier>{316b82ce-ffae-4d2e-9166-6b85edc366b2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\Editor System\World Editor\Miscellaneous">
-      <UniqueIdentifier>{b12d5bf0-2b50-4e18-be37-22dc5cf1cd4d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\Core System\Interface\Entities">
       <UniqueIdentifier>{adeeb6df-d4ef-4802-82d0-536f350c87bd}</UniqueIdentifier>
     </Filter>
@@ -940,9 +949,6 @@
     </Filter>
     <Filter Include="src\Scripting System\Core">
       <UniqueIdentifier>{c7f19bd9-4b08-4f0a-9542-92e4de2a6e01}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\Editor System\World Editor\Core">
-      <UniqueIdentifier>{3e86e47e-1fba-4f5e-9a5b-96a6fd5fedee}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\Editor System\Model Editor\Core">
       <UniqueIdentifier>{3b098bd6-25d7-4439-aea4-cd81b21d4031}</UniqueIdentifier>
@@ -980,17 +986,11 @@
     <Filter Include="src\Scripting System\Execution">
       <UniqueIdentifier>{584f8315-779f-4805-ad43-c607476a8f16}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\Editor System\World Editor\Updates">
-      <UniqueIdentifier>{c658aa7d-506b-4818-a69f-ce8a2da31340}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\Editor System\Scene Editor\Persistency">
       <UniqueIdentifier>{9f1c1ad7-904f-45b3-893c-2c27f98b34dc}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\Editor System\Scene Editor\Miscellaneous">
       <UniqueIdentifier>{ebabbbff-7f2b-4a8c-87aa-692a4554d711}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\Editor System\World Editor\Persistency">
-      <UniqueIdentifier>{509073d5-d60c-453d-973e-644649375ab1}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\Editor System\Scene Editor\Billboards">
       <UniqueIdentifier>{5888ff61-c7f8-42b7-9050-7d8a4d4cc4ef}</UniqueIdentifier>
@@ -1018,6 +1018,36 @@
     </Filter>
     <Filter Include="src\Scripting System\Execution\Interpreter">
       <UniqueIdentifier>{9ef89fd4-378e-4f48-8117-5e6d05463d66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Editor System\Animation Editor">
+      <UniqueIdentifier>{af6b01ef-f290-4ee7-8415-52f858f94de8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Editor System\Audio Editor">
+      <UniqueIdentifier>{a825f042-8079-402c-b136-73666827a703}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Editor System\Audio Editor\Core">
+      <UniqueIdentifier>{8c058ff8-3626-4c4c-a4a4-7339debab535}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Editor System\Environment Editor">
+      <UniqueIdentifier>{f2efcfc8-0ca8-4e00-93b6-56ca366b00b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Editor System\Environment Editor\Miscellaneous">
+      <UniqueIdentifier>{b12d5bf0-2b50-4e18-be37-22dc5cf1cd4d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Editor System\Environment Editor\Core">
+      <UniqueIdentifier>{3e86e47e-1fba-4f5e-9a5b-96a6fd5fedee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Editor System\Environment Editor\Updates">
+      <UniqueIdentifier>{c658aa7d-506b-4818-a69f-ce8a2da31340}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Editor System\Environment Editor\Persistency">
+      <UniqueIdentifier>{509073d5-d60c-453d-973e-644649375ab1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Editor System\Audio Editor\Upates">
+      <UniqueIdentifier>{5eb1ef82-f07a-481c-8f86-1e402dc54b6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Editor System\Audio Editor\Miscellaneous">
+      <UniqueIdentifier>{7f5b1c3d-5d5d-44d8-8995-19e12fb1581d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

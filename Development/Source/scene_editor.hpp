@@ -2,7 +2,7 @@
 
 #include "fabi_engine_3d.hpp"
 #include "engine_gui_manager.hpp"
-#include "world_editor.hpp"
+#include "environment_editor.hpp"
 #include "model_editor.hpp"
 #include "billboard_editor.hpp"
 #include "transformation_type.hpp"
@@ -13,7 +13,7 @@
 class SceneEditor final
 {
 public:
-	SceneEditor(FabiEngine3D& fe3d, EngineGuiManager& gui, WorldEditor& worldEditor, ModelEditor& modelEditor, BillboardEditor& billboardEditor);
+	SceneEditor(FabiEngine3D& fe3d, EngineGuiManager& gui, EnvironmentEditor& environmentEditor, ModelEditor& modelEditor, BillboardEditor& billboardEditor);
 	~SceneEditor() = default;
 
 	void initializeGUI();
@@ -111,11 +111,9 @@ private:
 	// Instances
 	FabiEngine3D& _fe3d;
 	EngineGuiManager& _gui;
-	WorldEditor& _worldEditor;
+	EnvironmentEditor& _environmentEditor;
 	ModelEditor& _modelEditor;
 	BillboardEditor& _billboardEditor;
-	shared_ptr<EngineGuiWindow> _leftWindow = nullptr;
-	shared_ptr<EngineGuiWindow> _rightWindow = nullptr;
 
 	// Environment variables
 	string _currentSkyID = "";

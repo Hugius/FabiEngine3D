@@ -218,6 +218,7 @@ public:
 	void		   gameEntity_showAll();
 	void		   gameEntity_hide(const string& ID);
 	void		   gameEntity_show(const string& ID);
+	void		   gameEntity_loadModel(const string& ID, const string& objPath);
 	void		   gameEntity_setDiffuseMap(const string& ID, const string& texturePath);
 	void		   gameEntity_setLightMap(const string& ID, const string& texturePath);
 	void		   gameEntity_setNormalMap(const string& ID, const string& texturePath);
@@ -285,7 +286,7 @@ public:
 	string		   gameEntity_getNormalMapPath(const string& ID);
 	string		   gameEntity_getReflectionMapPath(const string& ID);
 	string		   gameEntity_getLevelOfDetailEntityID(const string& ID);
-	const vector<vec3>&   gameEntity_getInstancedOffsets(const string& ID);
+	const vector<vec3>    gameEntity_getInstancedOffsets(const string& ID);
 	const vector<string>& gameEntity_getDiffuseMapPaths(const string& ID);
 	const vector<string>& gameEntity_getLightMapPaths(const string& ID);
 	const vector<string>& gameEntity_getReflectionMapPaths(const string& ID);
@@ -527,6 +528,7 @@ public:
 	void audioEntity_changePoint(const std::string& ID, vec3 position);
 
 	// Audio entity interface - getters
+	bool audioEntity_isExisting(const std::string& ID);
 	bool audioEntity_isPlaying(const std::string& ID);
 	int  audioEntity_getVolume(const std::string& ID);
 	int  audioEntity_getUsedChannelCount();
@@ -683,8 +685,6 @@ public:
 	void misc_disableAabbFrameRendering();
 	void misc_enableDebugRendering();
 	void misc_disableDebugRendering();
-	void misc_showAudioDebugging();
-	void misc_hideAudioDebugging();
 	void misc_showCursor();
 	void misc_hideCursor();
 	void misc_setCursorPosition(ivec2 pos);
@@ -696,6 +696,8 @@ public:
 	void misc_clearTextureCache(const string& filePath);
 	void misc_clearCubeMapCache(const array<string, 6>& filePaths);
 	void misc_clearHeightMapCache(const string& filePath);
+	void misc_clearAudioChunkCache(const string& filePath);
+	void misc_clearAudioMusicCache(const string& filePath);
 
 	// Miscellaneous interface - getters
 	int misc_getUniqueInt(int min, int max);

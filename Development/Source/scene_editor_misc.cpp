@@ -52,15 +52,15 @@ void SceneEditor::_activateModel(const string& modelID)
 	_transformation = TransformationType::TRANSLATION;
 
 	// Activate properties screen
-	_rightWindow->getScreen("modelPropertiesMenu")->getButton("translation")->setHoverable(false);
-	_rightWindow->getScreen("modelPropertiesMenu")->getButton("rotation")->setHoverable(true);
-	_rightWindow->getScreen("modelPropertiesMenu")->getButton("scaling")->setHoverable(true);
+	_gui.getViewport("right")->getWindow("main")->getScreen("modelPropertiesMenu")->getButton("translation")->setHoverable(false);
+	_gui.getViewport("right")->getWindow("main")->getScreen("modelPropertiesMenu")->getButton("rotation")->setHoverable(true);
+	_gui.getViewport("right")->getWindow("main")->getScreen("modelPropertiesMenu")->getButton("scaling")->setHoverable(true);
 
 	// Filling writefields
 	vec3 position = _fe3d.gameEntity_getPosition(_activeModelID);
-	_rightWindow->getScreen("modelPropertiesMenu")->getWriteField("x")->setTextContent(to_string(static_cast<int>(position.x)));
-	_rightWindow->getScreen("modelPropertiesMenu")->getWriteField("y")->setTextContent(to_string(static_cast<int>(position.y)));
-	_rightWindow->getScreen("modelPropertiesMenu")->getWriteField("z")->setTextContent(to_string(static_cast<int>(position.z)));
+	_gui.getViewport("right")->getWindow("main")->getScreen("modelPropertiesMenu")->getWriteField("x")->setTextContent(to_string(static_cast<int>(position.x)));
+	_gui.getViewport("right")->getWindow("main")->getScreen("modelPropertiesMenu")->getWriteField("y")->setTextContent(to_string(static_cast<int>(position.y)));
+	_gui.getViewport("right")->getWindow("main")->getScreen("modelPropertiesMenu")->getWriteField("z")->setTextContent(to_string(static_cast<int>(position.z)));
 
 	// Removing the unique number from the modelID and updating the text content
 	string modelName = modelID.substr(modelID.find('@') + 1);
@@ -93,15 +93,15 @@ void SceneEditor::_activateBillboard(const string& billboardID)
 	_transformation = TransformationType::TRANSLATION;
 
 	// Activate properties screen
-	_rightWindow->getScreen("billboardPropertiesMenu")->getButton("translation")->setHoverable(false);
-	_rightWindow->getScreen("billboardPropertiesMenu")->getButton("rotation")->setHoverable(true);
-	_rightWindow->getScreen("billboardPropertiesMenu")->getButton("scaling")->setHoverable(true);
+	_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("translation")->setHoverable(false);
+	_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("rotation")->setHoverable(true);
+	_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("scaling")->setHoverable(true);
 
 	// Filling writefields
 	vec3 position = _fe3d.billboardEntity_getPosition(_activeBillboardID);
-	_rightWindow->getScreen("billboardPropertiesMenu")->getWriteField("x")->setTextContent(to_string(static_cast<int>(position.x)));
-	_rightWindow->getScreen("billboardPropertiesMenu")->getWriteField("y")->setTextContent(to_string(static_cast<int>(position.y)));
-	_rightWindow->getScreen("billboardPropertiesMenu")->getWriteField("z")->setTextContent(to_string(static_cast<int>(position.z)));
+	_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getWriteField("x")->setTextContent(to_string(static_cast<int>(position.x)));
+	_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getWriteField("y")->setTextContent(to_string(static_cast<int>(position.y)));
+	_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getWriteField("z")->setTextContent(to_string(static_cast<int>(position.z)));
 
 	// Removing the unique number from the billboardID and updating the text content
 	string billboardName = billboardID.substr(billboardID.find('@') + 1);
@@ -231,14 +231,14 @@ void SceneEditor::_handleValueChanging(const string& screenID, string buttonID, 
 	// Plus & minus button handling
 	if (_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_LEFT))
 	{
-		if (_rightWindow->getScreen(screenID)->getButton(buttonID)->isHovered())
+		if (_gui.getViewport("right")->getWindow("main")->getScreen(screenID)->getButton(buttonID)->isHovered())
 		{
 			value += adder;
 		}
 	}
 
 	// Writefield handling
-	auto writefield = _rightWindow->getScreen(screenID)->getWriteField(wfID);
+	auto writefield = _gui.getViewport("right")->getWindow("main")->getScreen(screenID)->getWriteField(wfID);
 	if (writefield->confirmedInput())
 	{
 		if (writefield->getTextContent() != "")
@@ -257,9 +257,9 @@ void SceneEditor::_handleValueChanging(const string& screenID, string buttonID, 
 	value = std::clamp(value, minimum, maximum);
 
 	// Writefield filling
-	if (!_rightWindow->getScreen(screenID)->getWriteField(wfID)->isActive())
+	if (!_gui.getViewport("right")->getWindow("main")->getScreen(screenID)->getWriteField(wfID)->isActive())
 	{
-		_rightWindow->getScreen(screenID)->getWriteField(wfID)->setTextContent(to_string(static_cast<int>(value * multiplier)));
+		_gui.getViewport("right")->getWindow("main")->getScreen(screenID)->getWriteField(wfID)->setTextContent(to_string(static_cast<int>(value * multiplier)));
 	}
 }
 

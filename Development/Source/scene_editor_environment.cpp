@@ -4,28 +4,28 @@ void SceneEditor::_updateMainEnvironmentMenu()
 {
 	if (_isLoaded)
 	{
-		if (_leftWindow->getActiveScreen()->getID() == "sceneEditorMenuEnvironment")
+		if (_gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID() == "sceneEditorMenuEnvironment")
 		{
-			auto screen = _leftWindow->getScreen("sceneEditorMenuEnvironment");
+			auto screen = _gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuEnvironment");
 
 			// GUI management
 			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
 				if (screen->getButton("sky")->isHovered())
 				{
-					_leftWindow->setActiveScreen("sceneEditorMenuEnvironmentSky");
+					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuEnvironmentSky");
 				}
 				else if (screen->getButton("terrain")->isHovered())
 				{
-					_leftWindow->setActiveScreen("sceneEditorMenuEnvironmentTerrain");
+					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuEnvironmentTerrain");
 				}
 				else if (screen->getButton("water")->isHovered())
 				{
-					_leftWindow->setActiveScreen("sceneEditorMenuEnvironmentWater");
+					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuEnvironmentWater");
 				}
 				else if (screen->getButton("back")->isHovered())
 				{
-					_leftWindow->setActiveScreen("sceneEditorMenuChoice");
+					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuChoice");
 				}
 			}
 		}
@@ -36,9 +36,9 @@ void SceneEditor::_updateSkyMenu()
 {
 	if (_isLoaded)
 	{
-		if (_leftWindow->getActiveScreen()->getID() == "sceneEditorMenuEnvironmentSky")
+		if (_gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID() == "sceneEditorMenuEnvironmentSky")
 		{
-			auto screen = _leftWindow->getScreen("sceneEditorMenuEnvironmentSky");
+			auto screen = _gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuEnvironmentSky");
 
 			// Buttons hoverability
 			screen->getButton("delete")->setHoverable(_currentSkyID != "");
@@ -69,7 +69,7 @@ void SceneEditor::_updateSkyMenu()
 				}
 				else if (screen->getButton("back")->isHovered())
 				{
-					_leftWindow->setActiveScreen("sceneEditorMenuEnvironment");
+					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuEnvironment");
 				}
 			}
 
@@ -99,9 +99,9 @@ void SceneEditor::_updateTerrainMenu()
 {
 	if (_isLoaded)
 	{
-		if (_leftWindow->getActiveScreen()->getID() == "sceneEditorMenuEnvironmentTerrain")
+		if (_gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID() == "sceneEditorMenuEnvironmentTerrain")
 		{
-			auto screen = _leftWindow->getScreen("sceneEditorMenuEnvironmentTerrain");
+			auto screen = _gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuEnvironmentTerrain");
 
 			// Buttons hoverability
 			screen->getButton("delete")->setHoverable(_currentTerrainID != "");
@@ -132,7 +132,7 @@ void SceneEditor::_updateTerrainMenu()
 				}
 				else if (screen->getButton("back")->isHovered())
 				{
-					_leftWindow->setActiveScreen("sceneEditorMenuEnvironment");
+					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuEnvironment");
 				}
 			}
 
@@ -162,9 +162,9 @@ void SceneEditor::_updateWaterMenu()
 {
 	if (_isLoaded)
 	{
-		if (_leftWindow->getActiveScreen()->getID() == "sceneEditorMenuEnvironmentWater")
+		if (_gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID() == "sceneEditorMenuEnvironmentWater")
 		{
-			auto screen = _leftWindow->getScreen("sceneEditorMenuEnvironmentWater");
+			auto screen = _gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuEnvironmentWater");
 
 			// Buttons hoverability
 			screen->getButton("delete")->setHoverable(_currentWaterID != "");
@@ -195,7 +195,7 @@ void SceneEditor::_updateWaterMenu()
 				}
 				else if (screen->getButton("back")->isHovered())
 				{
-					_leftWindow->setActiveScreen("sceneEditorMenuEnvironment");
+					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuEnvironment");
 				}
 			}
 

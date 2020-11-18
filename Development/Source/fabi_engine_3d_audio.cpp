@@ -106,6 +106,11 @@ void FabiEngine3D::audioEntity_changePoint(const std::string& ID, vec3 position)
 	_core->_audioManager.getChunk(ID).setPosition(position);
 }
 
+bool FabiEngine3D::audioEntity_isExisting(const std::string& ID)
+{
+	return _core->_audioManager.isChunkExisting(ID);
+}
+
 bool FabiEngine3D::audioEntity_isPlaying(const std::string& ID)
 {
 	return _core->_audioPlayer.isPlaying(_core->_audioManager.getChunk(ID));

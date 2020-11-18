@@ -15,20 +15,20 @@ SettingsEditor::SettingsEditor(FabiEngine3D& fe3d, EngineGuiManager& gui) :
 
 void SettingsEditor::initializeGUI()
 {
-	// Private window instance of GUI windows
-	_leftWindow = _gui.getViewport("left")->getWindow("main");
+	// Private window instance of left viewport
+	auto leftWindow = _gui.getViewport("left")->getWindow("main");
 	string screenID;
 
 	// Left-viewport: mainWindow - settingsEditorMenuMain
 	screenID = "settingsEditorMenuMain";
-	_leftWindow->addScreen(screenID);
-	_leftWindow->getScreen(screenID)->addButton("mouseSensitivity", vec2(0.0f, 0.7875f), vec2(GW("Mouse speed"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Mouse speed", LVPC::textColor, LVPC::textHoverColor);
-	_leftWindow->getScreen(screenID)->addButton("msaaQuality", vec2(0.0f, 0.525f), vec2(GW("MSAA"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "MSAA", LVPC::textColor, LVPC::textHoverColor);
-	_leftWindow->getScreen(screenID)->addButton("shadowQuality", vec2(0.0f, 0.2625f), vec2(GW("Shadows"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Shadows", LVPC::textColor, LVPC::textHoverColor);
-	_leftWindow->getScreen(screenID)->addButton("reflectionQuality", vec2(0.0f, 0.0f), vec2(GW("Reflections"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Reflections", LVPC::textColor, LVPC::textHoverColor);
-	_leftWindow->getScreen(screenID)->addButton("refractionQuality", vec2(0.0f, -0.2625f), vec2(GW("Refractions"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Refractions", LVPC::textColor, LVPC::textHoverColor);
-	_leftWindow->getScreen(screenID)->addButton("maxAudioChannels", vec2(0.0f, -0.525f), vec2(GW("Audio"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Audio", LVPC::textColor, LVPC::textHoverColor);
-	_leftWindow->getScreen(screenID)->addButton("back", vec2(0.0f, -0.7875f), vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->addScreen(screenID);
+	leftWindow->getScreen(screenID)->addButton("mouseSensitivity", vec2(0.0f, 0.7875f), vec2(GW("Mouse speed"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Mouse speed", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen(screenID)->addButton("msaaQuality", vec2(0.0f, 0.525f), vec2(GW("MSAA"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "MSAA", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen(screenID)->addButton("shadowQuality", vec2(0.0f, 0.2625f), vec2(GW("Shadows"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Shadows", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen(screenID)->addButton("reflectionQuality", vec2(0.0f, 0.0f), vec2(GW("Reflections"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Reflections", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen(screenID)->addButton("refractionQuality", vec2(0.0f, -0.2625f), vec2(GW("Refractions"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Refractions", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen(screenID)->addButton("maxAudioChannels", vec2(0.0f, -0.525f), vec2(GW("Audio"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Audio", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen(screenID)->addButton("back", vec2(0.0f, -0.7875f), vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
 }
 
 void SettingsEditor::load()
@@ -95,9 +95,9 @@ void SettingsEditor::update()
 {
 	if (_isLoaded)
 	{
-		if (_leftWindow->getActiveScreen()->getID() == "settingsEditorMenuMain")
+		if (_gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID() == "settingsEditorMenuMain")
 		{
-			auto screen = _leftWindow->getScreen("settingsEditorMenuMain");
+			auto screen = _gui.getViewport("left")->getWindow("main")->getScreen("settingsEditorMenuMain");
 			float mouseSpeed = _fe3d.camera_getMouseSensitivity();
 			int msaaQuality = _fe3d.gfx_getMsaaQuality();
 			int shadowQuality = _fe3d.gfx_getShadowQuality();
@@ -134,7 +134,7 @@ void SettingsEditor::update()
 				}
 				else if (screen->getButton("back")->isHovered())
 				{
-					_leftWindow->setActiveScreen("main");
+					_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
 				}
 			}
 

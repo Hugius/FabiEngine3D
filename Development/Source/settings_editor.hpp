@@ -17,7 +17,6 @@ public:
 private:
 	FabiEngine3D& _fe3d;
 	EngineGuiManager& _gui;
-	shared_ptr<EngineGuiWindow> _leftWindow = nullptr;
 
 	bool _isLoaded = false;
 };

@@ -6,28 +6,28 @@ void SceneEditor::_updateMainLightingMenu()
 {
 	if (_isLoaded)
 	{
-		if (_leftWindow->getActiveScreen()->getID() == "sceneEditorMenuLighting")
+		if (_gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID() == "sceneEditorMenuLighting")
 		{
-			auto screen = _leftWindow->getScreen("sceneEditorMenuLighting");
+			auto screen = _gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuLighting");
 
 			// GUI management
 			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
 				if (screen->getButton("ambient")->isHovered()) // Ambient light button
 				{
-					_leftWindow->setActiveScreen("sceneEditorMenuLightingAmbient");
+					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuLightingAmbient");
 				}
 				else if (screen->getButton("directional")->isHovered()) // Directional light button
 				{
-					_leftWindow->setActiveScreen("sceneEditorMenuLightingDirectional");
+					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuLightingDirectional");
 				}
 				else if (screen->getButton("point")->isHovered()) // Point light button
 				{
-					_leftWindow->setActiveScreen("sceneEditorMenuLightingPoint");
+					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuLightingPoint");
 				}
 				else if (screen->getButton("back")->isHovered()) // Back button
 				{
-					_leftWindow->setActiveScreen("sceneEditorMenuChoice");
+					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuChoice");
 				}
 			}
 		}
@@ -38,9 +38,9 @@ void SceneEditor::_updateAmbientLightingMenu()
 {
 	if (_isLoaded)
 	{
-		if (_leftWindow->getActiveScreen()->getID() == "sceneEditorMenuLightingAmbient")
+		if (_gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID() == "sceneEditorMenuLightingAmbient")
 		{
-			auto screen = _leftWindow->getScreen("sceneEditorMenuLightingAmbient");
+			auto screen = _gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuLightingAmbient");
 			vec3 ambientLightingColor = _fe3d.gfx_getAmbientLightingColor();
 			float ambientLightingIntensity = _fe3d.gfx_getAmbientLightingIntensity();
 	
@@ -59,7 +59,7 @@ void SceneEditor::_updateAmbientLightingMenu()
 				}
 				else if (screen->getButton("back")->isHovered())
 				{
-					_leftWindow->setActiveScreen("sceneEditorMenuLighting");
+					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuLighting");
 				}
 			}
 
@@ -97,9 +97,9 @@ void SceneEditor::_updateDirectionalLightingMenu()
 {
 	if (_isLoaded)
 	{
-		if (_leftWindow->getActiveScreen()->getID() == "sceneEditorMenuLightingDirectional")
+		if (_gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID() == "sceneEditorMenuLightingDirectional")
 		{
-			auto screen = _leftWindow->getScreen("sceneEditorMenuLightingDirectional");
+			auto screen = _gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuLightingDirectional");
 			vec3 directionalLightingColor = _fe3d.gfx_getDirectionalLightingColor();
 			vec3 directionalLightingPosition = _fe3d.gfx_getDirectionalLightingPosition();
 			float directionalLightingIntensity = _fe3d.gfx_getDirectionalLightingIntensity();
@@ -130,7 +130,7 @@ void SceneEditor::_updateDirectionalLightingMenu()
 				}
 				else if (screen->getButton("back")->isHovered())
 				{
-					_leftWindow->setActiveScreen("sceneEditorMenuLighting");
+					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuLighting");
 				}
 			}
 
@@ -180,9 +180,9 @@ void SceneEditor::_updatePointLightingMenu()
 {
 	if (_isLoaded)
 	{
-		if (_leftWindow->getActiveScreen()->getID() == "sceneEditorMenuLightingPoint")
+		if (_gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID() == "sceneEditorMenuLightingPoint")
 		{
-			auto screen = _leftWindow->getScreen("sceneEditorMenuLightingPoint");
+			auto screen = _gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuLightingPoint");
 
 			// GUI management
 			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
@@ -193,7 +193,7 @@ void SceneEditor::_updatePointLightingMenu()
 				}
 				else if (screen->getButton("back")->isHovered())
 				{
-					_leftWindow->setActiveScreen("sceneEditorMenuLighting");
+					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuLighting");
 					_isPlacingPointlight = false;
 				}
 			}

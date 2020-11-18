@@ -222,7 +222,7 @@ void ModelEditor::_updateModelChoosing()
 			{
 				if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT)) // LMB pressed
 				{
-					// Select modelf
+					// Select model
 					_currentModelID = "@" + selectedButtonID;
 					_hoveredModelID = "";
 

@@ -31,7 +31,6 @@ public:
 	void stopChunk(AudioChunk& chunk, int fadeMillis);
 	void setChunkVolume(AudioChunk& chunk, int volume);
 	void setMusicVolume(int volume);
-	void setChannelDebugging(bool val);
 
 	bool isPlaying(AudioChunk& chunk);
 
@@ -49,7 +48,6 @@ private:
 
 	int _musicIndex = 0;
 
-	bool _debugging = false;
 	bool _soundEnabled = true;
 	bool _musicEnabled = true;
 };

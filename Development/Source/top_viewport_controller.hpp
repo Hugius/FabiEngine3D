@@ -2,7 +2,7 @@
 
 #include "viewport_controller.hpp"
 #include "model_editor.hpp"
-#include "world_editor.hpp"
+#include "environment_editor.hpp"
 #include "billboard_editor.hpp"
 #include "scene_editor.hpp"
 #include "script_editor.hpp"
@@ -13,7 +13,7 @@ class TopViewportController final : public ViewportController
 {
 public:
 	TopViewportController(FabiEngine3D& fe3d, EngineGuiManager& gui, 
-		ModelEditor& modelEditor, WorldEditor& worldEditor, BillboardEditor& billboardEditor, SceneEditor& sceneEditor, ScriptEditor& scriptEditor);
+		ModelEditor& modelEditor, EnvironmentEditor& environmentEditor, BillboardEditor& billboardEditor, SceneEditor& sceneEditor, ScriptEditor& scriptEditor);
 	~TopViewportController() = default;
 
 	void initialize() override;
@@ -39,7 +39,7 @@ private:
 	void _updateCurrentProject();
 
 	ModelEditor& _modelEditor;
-	WorldEditor& _worldEditor;
+	EnvironmentEditor& _environmentEditor;
 	BillboardEditor& _billboardEditor;
 	SceneEditor& _sceneEditor;
 	ScriptEditor& _scriptEditor;

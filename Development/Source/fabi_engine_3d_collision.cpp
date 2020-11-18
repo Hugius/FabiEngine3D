@@ -220,11 +220,14 @@ const string& FabiEngine3D::collision_checkEntityWithOthers(const string& ID)
 	vec3 selfPos = self->getTranslation();
 	vec3 selfSize = self->getScaling();
 
-	if (self->isResponsive())
+	// Check if entity is responsive and visible
+	if (self->isResponsive() && self->isVisible())
 	{
-		for (auto other : _core->_aabbEntityManager.getEntities()) // Loop over all AABB entities
+		// Loop over all AABB entities
+		for (auto other : _core->_aabbEntityManager.getEntities())
 		{
-			if (other->getID() != ID && other->isResponsive()) // Don't check own entity & other entity must be responsive
+			// Don't check own entity & other entity must be responsive and visible
+			if (other->getID() != ID && other->isResponsive() && other->isVisible())
 			{
 				vec3 otherPos = other->getTranslation();
 				vec3 otherSize = other->getScaling();
@@ -295,25 +298,31 @@ string FabiEngine3D::collision_checkCursorInAny()
 
 	for (auto entity : _core->_aabbEntityManager.getEntities()) // Loop over AABB entities
 	{
-		if (entity->isResponsive())
+		// Check if parent entity is not level of detailed
+		if (!(entity->getParentType() == AabbParentType::GAME_ENTITY &&
+			_core->_gameEntityManager.getEntity(entity->getParentID())->isLevelOfDetailed()))
 		{
-			// Calculate box left bottom (LB) and right top (RT)
-			vec3 lb, rt;
-			lb.x = (entity->getTranslation().x - entity->getScaling().x / 2.0f);
-			lb.y = (entity->getTranslation().y);
-			lb.z = (entity->getTranslation().z + entity->getScaling().z / 2.0f);
-			rt.x = (entity->getTranslation().x + entity->getScaling().x / 2.0f);
-			rt.y = (entity->getTranslation().y + entity->getScaling().y);
-			rt.z = (entity->getTranslation().z - entity->getScaling().z / 2.0f);
-
-			// Check intersection
-			float distance = _core->_mousePicker.checkCursorInBox(lb, rt, _core->_cameraManager.getPosition());
-
-			// Check if closest to camera
-			if (distance != -1.0f && distance < closestDistance)
+			// Check if AABB is responsive
+			if (entity->isResponsive() && entity->isVisible())
 			{
-				closestDistance = distance;
-				closestBoxID = entity->getID();
+				// Calculate box left bottom (LB) and right top (RT)
+				vec3 lb, rt;
+				lb.x = (entity->getTranslation().x - entity->getScaling().x / 2.0f);
+				lb.y = (entity->getTranslation().y);
+				lb.z = (entity->getTranslation().z + entity->getScaling().z / 2.0f);
+				rt.x = (entity->getTranslation().x + entity->getScaling().x / 2.0f);
+				rt.y = (entity->getTranslation().y + entity->getScaling().y);
+				rt.z = (entity->getTranslation().z - entity->getScaling().z / 2.0f);
+
+				// Check intersection
+				float distance = _core->_mousePicker.checkCursorInBox(lb, rt, _core->_cameraManager.getPosition());
+
+				// Check if closest to camera
+				if (distance != -1.0f && distance < closestDistance)
+				{
+					closestDistance = distance;
+					closestBoxID = entity->getID();
+				}
 			}
 		}
 	}
@@ -326,7 +335,7 @@ bool FabiEngine3D::collision_checkCursorInEntity(const string& ID)
 {
 	auto entity = _core->_aabbEntityManager.getEntity(ID);
 
-	if (entity->isResponsive())
+	if (entity->isResponsive() && entity->isVisible())
 	{
 		vec3 lb, rt;
 		lb.x = (entity->getTranslation().x - entity->getScaling().x / 2.0f);
@@ -349,7 +358,7 @@ string FabiEngine3D::collision_checkCursorInEntities(const string& ID, const str
 
 	for (auto entity : _core->_aabbEntityManager.getEntities()) // Loop over AABB entities
 	{
-		if (entity->isResponsive())
+		if (entity->isResponsive() && entity->isVisible())
 		{
 			if (entity->getID().size() >= ID.size()) // Check if entity ID is at least the size of group ID
 			{
@@ -399,7 +408,9 @@ ivec3 FabiEngine3D::collision_checkEntitiesWithCameraDirection(const string& ID)
 		if (entity->getID().size() >= ID.size()) // Check if entity ID is at least the size of group ID
 		{
 			auto subString = entity->getID().substr(0, ID.size());
-			if (subString == ID) // If entity matches ID
+
+			// If entity matches ID
+			if (subString == ID)
 			{
 				auto direction = entity->getCollisionDirection(); // Calculate direction
 

@@ -12,28 +12,27 @@ void CollisionResolver::update(const vector<shared_ptr<AabbEntity>> & boxes, Ter
 	// Check if AABB collision is needed in the first place
 	if (_aabbResponseEnabled)
 	{
-		// Init
+		// Temporary values
 		static vec3 oldCameraPos;
 		vec3 currentCameraPos = camera.getPosition();
 		vec3 posDifference = oldCameraPos - currentCameraPos;
 		posDifference = vec3(fabsf(posDifference.x), fabsf(posDifference.y), fabsf(posDifference.z));
 		Collision collision(false, false, false);
 
-		// Detect
+		// Detect collision
 		for (auto& box : boxes)
 		{
-			auto direction = box->getCollisionDirection();
-			auto result = _collisionDetector.check(*box, currentCameraPos, posDifference, direction);
-			box->setCollisionDirection(direction);
-
-			// If responsive to camera
-			if (box->isResponsive())
+			// If responsive to camera collision
+			if (box->isResponsive() && box->isVisible())
 			{
+				auto direction = box->getCollisionDirection();
+				auto result = _collisionDetector.check(*box, currentCameraPos, posDifference, direction);
+				box->setCollisionDirection(direction);
 				collision += result;
 			}
 		}
 
-		// Response
+		// Respond to collision
 		vec3 newCameraPos = currentCameraPos;
 		if (collision.xCollided())
 		{

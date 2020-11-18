@@ -92,6 +92,9 @@ void ModelEditor::_loadOBJ()
 			// Delete existing entity
 			if (_fe3d.gameEntity_isExisting(_currentModelID))
 			{
+				// Clear OBJ cache
+				_fe3d.misc_clearOBJCache(newFilePath);
+
 				// Check if multiparted entity
 				if (_fe3d.gameEntity_isMultiTextured(_currentModelID))
 				{
@@ -114,15 +117,14 @@ void ModelEditor::_loadOBJ()
 					}
 				}
 
-				_fe3d.gameEntity_delete(_currentModelID);
+				// Reload model
+				_fe3d.gameEntity_loadModel(_currentModelID, newFilePath);
 			}
-
-			// Clear OBJ cache
-			_fe3d.misc_clearOBJCache(newFilePath);
-
-			// Add new game entity
-			_fe3d.gameEntity_add(_currentModelID, newFilePath, vec3(0.0f), vec3(0.0f), vec3(1.0f));
-			_fe3d.gameEntity_setColor(_currentModelID, vec3(1.0f));
+			else
+			{
+				// Create new entity
+				_fe3d.gameEntity_add(_currentModelID, newFilePath, vec3(0.0f), vec3(0.0f), vec3(1.0f));
+			}
 		}
 		else
 		{

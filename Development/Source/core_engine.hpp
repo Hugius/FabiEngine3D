@@ -21,7 +21,7 @@
 #include "shadow_manager.hpp"
 #include "mouse_picker.hpp"
 #include "model_editor.hpp"
-#include "world_editor.hpp"
+#include "environment_editor.hpp"
 #include "collision_resolver.hpp"
 #include "Timer.hpp"
 #include "audio_manager.hpp"

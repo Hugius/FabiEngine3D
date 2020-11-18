@@ -26,21 +26,36 @@ const vector<shared_ptr<GameEntity>> GameEntityManager::getEntities()
 	return _getGameEntities();
 }
 
-void GameEntityManager::addGameEntity
-(
-	const string& ID, const string& objName,
-	vec3 T, vec3 R, vec3 S
-)
+void GameEntityManager::addGameEntity(const string& ID, const string& objName, vec3 T, vec3 R, vec3 S)
+{
+	// Create entity
+	_createEntity(ID);
+	
+	// Load OBJ
+	generateModel(ID, objName);
+
+	// Load transformation
+	getEntity(ID)->setOriginalTranslation(T);
+	getEntity(ID)->setOriginalRotation(R);
+	getEntity(ID)->setOriginalScaling(S);
+	getEntity(ID)->setTranslation(T);
+	getEntity(ID)->setRotation(R);
+	getEntity(ID)->setScaling(S);
+}
+
+void GameEntityManager::generateModel(const string& ID, const string& objName)
 {
 	// Load OBJ model
 	auto parts = _objLoader.loadOBJ(objName, false);
-
-	// Create entity
-	_createEntity(ID);
 	getEntity(ID)->setObjPath(objName);
+	getEntity(ID)->clearOglBuffers();
+	getEntity(ID)->clearDiffuseMaps();
+	getEntity(ID)->clearLightMaps();
+	getEntity(ID)->clearReflectionMaps();
+	getEntity(ID)->clearNormalMaps();
 
 	// Create OpenGL buffers
-	for (auto & part : parts)
+	for (auto& part : parts)
 	{
 		vector<float> data;
 
@@ -127,14 +142,6 @@ void GameEntityManager::addGameEntity
 			}
 		}
 	}
-
-	// Load transformation
-	getEntity(ID)->setOriginalTranslation(T);
-	getEntity(ID)->setOriginalRotation(R);
-	getEntity(ID)->setOriginalScaling(S);
-	getEntity(ID)->setTranslation(T);
-	getEntity(ID)->setRotation(R);
-	getEntity(ID)->setScaling(S);
 }
 
 void GameEntityManager::loadNormalMapping(const string& ID)
@@ -209,9 +216,10 @@ void GameEntityManager::update()
 			float yDistance = fabsf(camPos.y - entityPos.y);
 			float zDistance = fabsf(camPos.z - entityPos.z);
 			float absolsuteDistance = sqrtf((xDistance * xDistance) + (yDistance * yDistance) + (zDistance * zDistance));
+			bool isFarEnough = (absolsuteDistance > _lodDistance) && (!entity->getLodEntityID().empty());
 
 			// Check if farther than LOD distance
-			entity->setLevelOfDetailed(absolsuteDistance > _lodDistance && entity->getLodEntityID() != "");
+			entity->setLevelOfDetailed(isFarEnough);
 		}
 	}
 }

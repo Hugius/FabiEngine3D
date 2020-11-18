@@ -1,0 +1,75 @@
+#include "environment_editor.hpp"
+
+void EnvironmentEditor::update()
+{
+	if (_isLoaded)
+	{
+		// Update main menu
+		if (_currentEnvironmentType == EnvironmentType::NONE)
+		{
+			auto screen = _gui.getViewport("left")->getWindow("main")->getScreen("environmentEditorMenu");
+
+			// Set default camera view
+			_fe3d.camera_setPosition(vec3(0.0f));
+			_fe3d.camera_setYaw(0.0f);
+			_fe3d.camera_setPitch(0.0f);
+			_fe3d.camera_disableLookat();
+
+			// Select the default sky
+			_fe3d.skyEntity_select("@@engineBackground");
+
+			// No terrain
+			_fe3d.terrainEntity_select("");
+
+			// No water
+			_fe3d.waterEntity_select("");
+
+			// GUI management
+			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
+			{
+				if (screen->getButton("sky")->isHovered())
+				{
+					_gui.getViewport("left")->getWindow("main")->setActiveScreen("skyEditorMenuMain");
+					_currentEnvironmentType = EnvironmentType::SKY;
+				}
+				else if (screen->getButton("terrain")->isHovered())
+				{
+					_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuMain");
+					_currentEnvironmentType = EnvironmentType::TERRAIN;
+				}
+				else if (screen->getButton("water")->isHovered())
+				{
+					_gui.getViewport("left")->getWindow("main")->setActiveScreen("waterEditorMenuMain");
+					_currentEnvironmentType = EnvironmentType::WATER;
+				}
+				else if (screen->getButton("back")->isHovered())
+				{
+					_gui.getGlobalScreen()->addAnswerForm("exitEnvironmentEditor", "Save changes?", vec2(0.0f, 0.25f));
+				}
+			}
+
+			// Check if user wants to save changes
+			if (_gui.getGlobalScreen()->isAnswerFormConfirmed("exitEnvironmentEditor"))
+			{
+				save();
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
+				unload();
+			}
+			else if (_gui.getGlobalScreen()->isAnswerFormCancelled("exitEnvironmentEditor"))
+			{
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
+				unload();
+			}
+		}
+		else
+		{
+			// Update editors
+			_updateSkyEditor();
+			_updateTerrainEditor();
+			_updateWaterEditor();
+		}
+
+		// Update miscellaneous
+		_updateMiscellaneous();
+	}
+}

@@ -248,6 +248,30 @@ void GameEntity::setLevelOfDetailed(bool val)
 	_isLevelOfDetailed = val;
 }
 
+void GameEntity::clearDiffuseMaps()
+{
+	_diffuseMaps.clear();
+	_diffuseMapPaths.clear();
+}
+
+void GameEntity::clearLightMaps()
+{
+	_lightMaps.clear();
+	_lightMapPaths.clear();
+}
+
+void GameEntity::clearReflectionMaps()
+{
+	_reflectionMaps.clear();
+	_reflectionMapPaths.clear();
+}
+
+void GameEntity::clearNormalMaps()
+{
+	_normalMaps.clear();
+	_normalMapPaths.clear();
+}
+
 void GameEntity::setOriginalLightness(float val)
 {
 	_originalLightness = val;

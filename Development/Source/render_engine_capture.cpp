@@ -8,9 +8,25 @@
 // Capturing reflection texture
 void RenderEngine::_captureSceneReflections(CameraManager& camera)
 {
+	// Check if water reflection needed
 	bool waterReflectionEnabled = (_renderBus.isWaterEffectsEnabled() && _entityBus->getWaterEntity() != nullptr) &&
 		_entityBus->getWaterEntity()->isReflective();
-	bool sceneReflectionEnabled = _renderBus.isSceneReflectionsEnabled();
+
+	// Save reflective GAME entity
+	string reflectiveEntityID;
+	if (!waterReflectionEnabled)
+	{
+		for (auto& gameEntity : _entityBus->getGameEntities())
+		{
+			if (gameEntity->isSceneReflective() && gameEntity->isVisible())
+			{
+				reflectiveEntityID = gameEntity->getID();
+			}
+		}
+	}
+
+	// Check if scene reflection needed
+	bool sceneReflectionEnabled = _renderBus.isSceneReflectionsEnabled() && !reflectiveEntityID.empty();
 	
 	// Check if needed to capture scene
 	if (waterReflectionEnabled || sceneReflectionEnabled)
@@ -32,7 +48,7 @@ void RenderEngine::_captureSceneReflections(CameraManager& camera)
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		// Save and disable reflective GAME entity
-		string reflectiveEntityID;
+		reflectiveEntityID = "";
 		if (!waterReflectionEnabled)
 		{
 			for (auto& gameEntity : _entityBus->getGameEntities())

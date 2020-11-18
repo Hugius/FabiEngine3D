@@ -13,7 +13,9 @@ ScriptEditor::ScriptEditor(FabiEngine3D& fe3d, EngineGuiManager& gui, SceneEdito
 }
 
 void ScriptEditor::initializeGUI()
-{	auto leftWindow = _gui.getViewport("left")->getWindow("main");
+{	
+	// Private window instance of left viewport
+	auto leftWindow = _gui.getViewport("left")->getWindow("main");
 
 	// Main menu
 	string screenID = "scriptEditorMenuMain";

@@ -1,11 +1,12 @@
 #pragma once
 
 #include "viewport_controller.hpp"
+#include "environment_editor.hpp"
 #include "model_editor.hpp"
-#include "world_editor.hpp"
 #include "billboard_editor.hpp"
 #include "scene_editor.hpp"
 #include "script_editor.hpp"
+#include "audio_editor.hpp"
 #include "settings_editor.hpp"
 
 #define LVPC LeftViewportController
@@ -19,7 +20,7 @@ public:
 	void update() override;
 
 	ModelEditor& getModelEditor();
-	WorldEditor& getWorldEditor();
+	EnvironmentEditor& getEnvironmentEditor();
 	BillboardEditor& getBillboardEditor();
 	SceneEditor& getSceneEditor();
 	ScriptEditor& getScriptEditor();
@@ -38,9 +39,10 @@ public:
 
 private:
 	ModelEditor _modelEditor;
-	WorldEditor _worldEditor;
+	EnvironmentEditor _environmentEditor;
 	BillboardEditor _billboardEditor;
 	SceneEditor _sceneEditor;
 	ScriptEditor _scriptEditor;
+	AudioEditor _audioEditor;
 	SettingsEditor _settingsEditor;
 };

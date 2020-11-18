@@ -51,9 +51,9 @@ void SceneEditor::update()
 
 void SceneEditor::_updateMainMenu()
 {
-	if (_leftWindow->getActiveScreen()->getID() == "sceneEditorMenuMain")
+	if (_gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID() == "sceneEditorMenuMain")
 	{
-		auto screen = _leftWindow->getScreen("sceneEditorMenuMain");
+		auto screen = _gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuMain");
 
 		// GUI management
 		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
@@ -75,7 +75,7 @@ void SceneEditor::_updateMainMenu()
 			else if (screen->getButton("back")->isHovered())
 			{
 				unload();
-				_leftWindow->setActiveScreen("main");
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
 			}
 		}
 
@@ -89,7 +89,7 @@ void SceneEditor::_updateMainMenu()
 			if (std::find(sceneNames.begin(), sceneNames.end(), newSceneName) == sceneNames.end())
 			{
 				_currentSceneName = newSceneName;
-				_leftWindow->setActiveScreen("sceneEditorMenuChoice");
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuChoice");
 			}
 			else
 			{
@@ -109,7 +109,7 @@ void SceneEditor::_updateMainMenu()
 				if (_isChoosingScene)
 				{
 					loadScene(_currentSceneName);
-					_leftWindow->setActiveScreen("sceneEditorMenuChoice");
+					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuChoice");
 				}
 				else if (_isDeletingScene) // Prepare deletion confirmation
 				{
@@ -148,32 +148,32 @@ void SceneEditor::_updateChoiceMenu()
 {
 	if (_isLoaded)
 	{
-		if (_leftWindow->getActiveScreen()->getID() == "sceneEditorMenuChoice")
+		if (_gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID() == "sceneEditorMenuChoice")
 		{
-			auto screen = _leftWindow->getScreen("sceneEditorMenuChoice");
+			auto screen = _gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuChoice");
 
 			// GUI management
 			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
 				if (screen->getButton("environment")->isHovered()) // Environment button
 				{
-					_leftWindow->setActiveScreen("sceneEditorMenuEnvironment");
+					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuEnvironment");
 				}
 				else if (screen->getButton("model")->isHovered()) // Model button
 				{
-					_leftWindow->setActiveScreen("sceneEditorMenuModel");
+					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuModel");
 				}
 				else if (screen->getButton("billboard")->isHovered()) // Billboard button
 				{
-					_leftWindow->setActiveScreen("sceneEditorMenuBillboard");
+					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuBillboard");
 				}
 				else if (screen->getButton("lighting")->isHovered()) // Lighting button
 				{
-					_leftWindow->setActiveScreen("sceneEditorMenuLighting");
+					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuLighting");
 				}
 				else if (screen->getButton("settings")->isHovered()) // Settings button
 				{
-					_leftWindow->setActiveScreen("sceneEditorMenuSettings");
+					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuSettings");
 				}
 				else if (screen->getButton("back")->isHovered()) // Back button
 				{
@@ -188,14 +188,14 @@ void SceneEditor::_updateChoiceMenu()
 				clearScene();
 				_fe3d.skyEntity_select("@@engineBackground");
 				_currentSceneName = "";
-				_leftWindow->setActiveScreen("sceneEditorMenuMain");
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuMain");
 			}
 			else if (_gui.getGlobalScreen()->isAnswerFormCancelled("exitSceneEditor"))
 			{
 				clearScene();
 				_fe3d.skyEntity_select("@@engineBackground");
 				_currentSceneName = "";
-				_leftWindow->setActiveScreen("sceneEditorMenuMain");
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuMain");
 			}
 		}
 	}

@@ -31,10 +31,10 @@ private:
 	void _updateMiscellaneous();
 
 	// Booleans
-	bool _billboardCreationEnabled = false;
-	bool _billboardChoosingEnabled = false;
-	bool _billboardEditingEnabled = false;
-	bool _billboardRemovalEnabled = false;
+	bool isCreatingBillboard = false;
+	bool _isChoosingBillboard = false;
+	bool _isEditingBillboard = false;
+	bool _isRemovingBillboard = false;
 	bool _isLoaded = false;
 
 	// Vectors

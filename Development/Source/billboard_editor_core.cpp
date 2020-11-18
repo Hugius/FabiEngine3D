@@ -102,10 +102,10 @@ void BillboardEditor::unload()
 	_gui.getGlobalScreen()->deleteTextfield("selectedBillboardName");
 
 	// Reset variables
-	_billboardCreationEnabled = false;
-	_billboardChoosingEnabled = false;
-	_billboardEditingEnabled = false;
-	_billboardRemovalEnabled = false;
+	isCreatingBillboard = false;
+	_isChoosingBillboard = false;
+	_isEditingBillboard = false;
+	_isRemovingBillboard = false;
 	_cameraRotationSpeed = 0.0f;
 	_totalCameraRotation = 0.0f;
 	_hoveredBillboardID = "";

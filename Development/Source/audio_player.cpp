@@ -25,17 +25,6 @@ void AudioPlayer::allocateChannels(int count)
 
 void AudioPlayer::update(CameraManager& camera, std::vector<AudioChunk>& chunks, std::vector<AudioMusic>& music)
 {
-	// Channel debugging
-	if (_debugging)
-	{
-		system("cls");
-
-		for (auto& element : _channelMap)
-		{
-			Logger::throwDebug("Channel", std::to_string(element.first + 1), " : ", element.second);
-		}
-	}
-
 	// Update stopped playing
 	for (auto& channelPair : _channelMap)
 	{
@@ -229,11 +218,6 @@ void AudioPlayer::setChunkVolume(AudioChunk& chunk, int volume)
 void AudioPlayer::setMusicVolume(int volume)
 {
 	Mix_VolumeMusic(volume);
-}
-
-void AudioPlayer::setChannelDebugging(bool val)
-{
-	_debugging = val;
 }
 
 bool AudioPlayer::isPlaying(AudioChunk& chunk)

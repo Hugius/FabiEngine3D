@@ -61,7 +61,7 @@ void SceneEditor::_updateBillboardEditing()
 				if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) && !_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{
 					_activeBillboardID = "";
-					_rightWindow->setActiveScreen("main");
+					_gui.getViewport("right")->getWindow("main")->setActiveScreen("main");
 				}
 			}
 
@@ -75,42 +75,42 @@ void SceneEditor::_updateBillboardEditing()
 			// Update properties screen
 			if (_activeBillboardID != "")
 			{
-				_rightWindow->setActiveScreen("billboardPropertiesMenu");
+				_gui.getViewport("right")->getWindow("main")->setActiveScreen("billboardPropertiesMenu");
 
 				// GUI management (pressed)
 				if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 				{
-					if (_rightWindow->getScreen("billboardPropertiesMenu")->getButton("translation")->isHovered()) // Translation button
+					if (_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("translation")->isHovered()) // Translation button
 					{
 						_transformation = TransformationType::TRANSLATION;
 
 						// Update buttons hoverability
-						_rightWindow->getScreen("billboardPropertiesMenu")->getButton("translation")->setHoverable(false);
-						_rightWindow->getScreen("billboardPropertiesMenu")->getButton("rotation")->setHoverable(true);
-						_rightWindow->getScreen("billboardPropertiesMenu")->getButton("scaling")->setHoverable(true);
+						_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("translation")->setHoverable(false);
+						_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("rotation")->setHoverable(true);
+						_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("scaling")->setHoverable(true);
 					}
-					else if (_rightWindow->getScreen("billboardPropertiesMenu")->getButton("rotation")->isHovered()) // Rotation button
+					else if (_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("rotation")->isHovered()) // Rotation button
 					{
 						_transformation = TransformationType::ROTATION;
 
 						// Update buttons hoverability
-						_rightWindow->getScreen("billboardPropertiesMenu")->getButton("translation")->setHoverable(true);
-						_rightWindow->getScreen("billboardPropertiesMenu")->getButton("rotation")->setHoverable(false);
-						_rightWindow->getScreen("billboardPropertiesMenu")->getButton("scaling")->setHoverable(true);
+						_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("translation")->setHoverable(true);
+						_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("rotation")->setHoverable(false);
+						_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("scaling")->setHoverable(true);
 					}
-					else if (_rightWindow->getScreen("billboardPropertiesMenu")->getButton("scaling")->isHovered()) // Scaling button
+					else if (_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("scaling")->isHovered()) // Scaling button
 					{
 						_transformation = TransformationType::SCALING;
 
 						// Update buttons hoverability
-						_rightWindow->getScreen("billboardPropertiesMenu")->getButton("translation")->setHoverable(true);
-						_rightWindow->getScreen("billboardPropertiesMenu")->getButton("rotation")->setHoverable(true);
-						_rightWindow->getScreen("billboardPropertiesMenu")->getButton("scaling")->setHoverable(false);
+						_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("translation")->setHoverable(true);
+						_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("rotation")->setHoverable(true);
+						_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("scaling")->setHoverable(false);
 					}
-					else if (_rightWindow->getScreen("billboardPropertiesMenu")->getButton("delete")->isHovered()) // Delete button
+					else if (_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("delete")->isHovered()) // Delete button
 					{
 						_fe3d.billboardEntity_delete(_activeBillboardID);
-						_rightWindow->setActiveScreen("main");
+						_gui.getViewport("right")->getWindow("main")->setActiveScreen("main");
 						_activeBillboardID = "";
 						return;
 					}
@@ -122,22 +122,22 @@ void SceneEditor::_updateBillboardEditing()
 				vec2 size = _fe3d.billboardEntity_getSize(_activeBillboardID);
 				
 				// Enabling all axes by default
-				_rightWindow->getScreen("billboardPropertiesMenu")->getButton("xMinus")->setHoverable(true);
-				_rightWindow->getScreen("billboardPropertiesMenu")->getButton("xPlus")->setHoverable(true);
-				_rightWindow->getScreen("billboardPropertiesMenu")->getWriteField("x")->setHoverable(true);
-				_rightWindow->getScreen("billboardPropertiesMenu")->getButton("yMinus")->setHoverable(true);
-				_rightWindow->getScreen("billboardPropertiesMenu")->getButton("yPlus")->setHoverable(true);
-				_rightWindow->getScreen("billboardPropertiesMenu")->getWriteField("y")->setHoverable(true);
-				_rightWindow->getScreen("billboardPropertiesMenu")->getButton("zMinus")->setHoverable(true);
-				_rightWindow->getScreen("billboardPropertiesMenu")->getButton("zPlus")->setHoverable(true);
-				_rightWindow->getScreen("billboardPropertiesMenu")->getWriteField("z")->setHoverable(true);
+				_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("xMinus")->setHoverable(true);
+				_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("xPlus")->setHoverable(true);
+				_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getWriteField("x")->setHoverable(true);
+				_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("yMinus")->setHoverable(true);
+				_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("yPlus")->setHoverable(true);
+				_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getWriteField("y")->setHoverable(true);
+				_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("zMinus")->setHoverable(true);
+				_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("zPlus")->setHoverable(true);
+				_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getWriteField("z")->setHoverable(true);
 
 				// Disabling Z axis for scaling operations on a billboard
 				if (_transformation == TransformationType::SCALING)
 				{
-					_rightWindow->getScreen("billboardPropertiesMenu")->getButton("zMinus")->setHoverable(false);
-					_rightWindow->getScreen("billboardPropertiesMenu")->getButton("zPlus")->setHoverable(false);
-					_rightWindow->getScreen("billboardPropertiesMenu")->getWriteField("z")->setHoverable(false);
+					_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("zMinus")->setHoverable(false);
+					_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("zPlus")->setHoverable(false);
+					_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getWriteField("z")->setHoverable(false);
 				}
 
 				// Apply new billboard position / rotation / size
@@ -155,15 +155,15 @@ void SceneEditor::_updateBillboardEditing()
 				else if (_transformation == TransformationType::ROTATION)
 				{
 					// Only 1 rotation direction
-					_rightWindow->getScreen("billboardPropertiesMenu")->getButton("xMinus")->setHoverable(rotation.z == 0.0f && rotation.y == 0.0f);
-					_rightWindow->getScreen("billboardPropertiesMenu")->getButton("xPlus")->setHoverable(rotation.z == 0.0f && rotation.y == 0.0f);
-					_rightWindow->getScreen("billboardPropertiesMenu")->getWriteField("x")->setHoverable(rotation.z == 0.0f && rotation.y == 0.0f);
-					_rightWindow->getScreen("billboardPropertiesMenu")->getButton("yMinus")->setHoverable(rotation.x == 0.0f && rotation.z == 0.0f);
-					_rightWindow->getScreen("billboardPropertiesMenu")->getButton("yPlus")->setHoverable(rotation.x == 0.0f && rotation.z == 0.0f);
-					_rightWindow->getScreen("billboardPropertiesMenu")->getWriteField("y")->setHoverable(rotation.x == 0.0f && rotation.z == 0.0f);
-					_rightWindow->getScreen("billboardPropertiesMenu")->getButton("zMinus")->setHoverable(rotation.x == 0.0f && rotation.y == 0.0f);
-					_rightWindow->getScreen("billboardPropertiesMenu")->getButton("zPlus")->setHoverable(rotation.x == 0.0f && rotation.y == 0.0f);
-					_rightWindow->getScreen("billboardPropertiesMenu")->getWriteField("z")->setHoverable(rotation.x == 0.0f && rotation.y == 0.0f);
+					_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("xMinus")->setHoverable(rotation.z == 0.0f && rotation.y == 0.0f);
+					_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("xPlus")->setHoverable(rotation.z == 0.0f && rotation.y == 0.0f);
+					_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getWriteField("x")->setHoverable(rotation.z == 0.0f && rotation.y == 0.0f);
+					_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("yMinus")->setHoverable(rotation.x == 0.0f && rotation.z == 0.0f);
+					_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("yPlus")->setHoverable(rotation.x == 0.0f && rotation.z == 0.0f);
+					_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getWriteField("y")->setHoverable(rotation.x == 0.0f && rotation.z == 0.0f);
+					_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("zMinus")->setHoverable(rotation.x == 0.0f && rotation.y == 0.0f);
+					_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("zPlus")->setHoverable(rotation.x == 0.0f && rotation.y == 0.0f);
+					_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getWriteField("z")->setHoverable(rotation.x == 0.0f && rotation.y == 0.0f);
 
 					// Handle GUI input
 					_handleValueChanging("billboardPropertiesMenu", "xPlus", "x", rotation.x, _movementChangingSpeed * 2.0f);
@@ -206,12 +206,12 @@ void SceneEditor::_updateBillboardEditing()
 		}
 		else
 		{
-			if (_rightWindow->getActiveScreen()->getID() != "main")
+			if (_gui.getViewport("right")->getWindow("main")->getActiveScreen()->getID() != "main")
 			{
 				// Reset when user wants to place billboards again
 				for (auto& entityID : _fe3d.billboardEntity_getAllIDs())
 				{
-					_rightWindow->setActiveScreen("main");
+					_gui.getViewport("right")->getWindow("main")->setActiveScreen("main");
 					_fe3d.billboardEntity_setLightness(entityID, _fe3d.billboardEntity_getOriginalLightness(entityID));
 					_selectedBillboardLightnessMultiplier = 1;
 					_activeBillboardID = "";

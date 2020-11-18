@@ -19,14 +19,14 @@ void ModelEditor::initializeGUI()
 	// Private window instance of left viewport
 	auto leftWindow = _gui.getViewport("left")->getWindow("main");
 
-	// Left-viewport: mainWindow - modelManagement
+	// Left-viewport: mainWindow - modelEditorMenuMain
 	leftWindow->addScreen("modelEditorMenuMain");
 	leftWindow->getScreen("modelEditorMenuMain")->addButton("addModel", vec2(0.0f, 0.63f), vec2(GW("Add model"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Add model", LVPC::textColor, LVPC::textHoverColor);
 	leftWindow->getScreen("modelEditorMenuMain")->addButton("editModel", vec2(0.0f, 0.21), vec2(GW("Edit model"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Edit model", LVPC::textColor, LVPC::textHoverColor);
 	leftWindow->getScreen("modelEditorMenuMain")->addButton("deleteModel", vec2(0.0f, -0.21), vec2(GW("Delete model"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Delete model", LVPC::textColor, LVPC::textHoverColor);
 	leftWindow->getScreen("modelEditorMenuMain")->addButton("back", vec2(0.0f, -0.63f), vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
 
-	// Left-viewport: mainWindow - modelEditingMain
+	// Left-viewport: mainWindow - modelEditorMenuChoice
 	leftWindow->addScreen("modelEditorMenuChoice");
 	leftWindow->getScreen("modelEditorMenuChoice")->addButton("mesh", vec2(0.0f, 0.75f), vec2(GW("3D mesh"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "3D mesh", LVPC::textColor, LVPC::textHoverColor);
 	leftWindow->getScreen("modelEditorMenuChoice")->addButton("options", vec2(0.0f, 0.45f), vec2(GW("Options"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Options", LVPC::textColor, LVPC::textHoverColor);

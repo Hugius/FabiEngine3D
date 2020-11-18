@@ -21,12 +21,13 @@ void TopViewportController::_updateMiscellaneous()
 {
 	bool hoverable = (_currentProjectName == "") ? false : !SCRIPT_EXECUTOR.isInitialized();
 
-	// Project menus
+	// Project menus hoverability
+	_gui.getViewport("left")->getWindow("main")->getScreen("main")->getButton("environmentEditor")->setHoverable(hoverable);
 	_gui.getViewport("left")->getWindow("main")->getScreen("main")->getButton("modelEditor")->setHoverable(hoverable);
-	_gui.getViewport("left")->getWindow("main")->getScreen("main")->getButton("worldEditor")->setHoverable(hoverable);
 	_gui.getViewport("left")->getWindow("main")->getScreen("main")->getButton("billboardEditor")->setHoverable(hoverable);
 	_gui.getViewport("left")->getWindow("main")->getScreen("main")->getButton("sceneEditor")->setHoverable(hoverable);
 	_gui.getViewport("left")->getWindow("main")->getScreen("main")->getButton("animationEditor")->setHoverable(hoverable);
+	_gui.getViewport("left")->getWindow("main")->getScreen("main")->getButton("audioEditor")->setHoverable(hoverable);
 	_gui.getViewport("left")->getWindow("main")->getScreen("main")->getButton("scriptEditor")->setHoverable(hoverable);
 
 	// Settings menu can be loaded without project

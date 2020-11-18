@@ -412,7 +412,7 @@ string FabiEngine3D::gameEntity_getLevelOfDetailEntityID(const string& ID)
 	return _core->_gameEntityManager.getEntity(ID)->getLodEntityID();
 }
 
-vector<vec3> FabiEngine3D::gameEntity_getInstancedOffsets(const string& ID)
+const vector<vec3>& FabiEngine3D::gameEntity_getInstancedOffsets(const string& ID)
 {
 	if (gameEntity_isInstanced(ID))
 	{
@@ -422,6 +422,26 @@ vector<vec3> FabiEngine3D::gameEntity_getInstancedOffsets(const string& ID)
 	{
 		return {};
 	}
+}
+
+const vector<string>& FabiEngine3D::gameEntity_getDiffuseMapPaths(const string& ID)
+{
+	return _core->_gameEntityManager.getEntity(ID)->getDiffuseMapPaths();
+}
+
+const vector<string>& FabiEngine3D::gameEntity_getLightMapPaths(const string& ID)
+{
+	return _core->_gameEntityManager.getEntity(ID)->getLightMapPaths();
+}
+
+const vector<string>& FabiEngine3D::gameEntity_getReflectionMapPaths(const string& ID)
+{
+	return _core->_gameEntityManager.getEntity(ID)->getReflectionMapPaths();
+}
+
+const vector<string>& FabiEngine3D::gameEntity_getNormalMapPaths(const string& ID)
+{
+	return _core->_gameEntityManager.getEntity(ID)->getNormalMapPaths();
 }
 
 void FabiEngine3D::gameEntity_setAlpha(const string& ID, float alpha)

@@ -39,6 +39,10 @@ public:
 	void setReflectionMapPath(const string& val);
 	void setNormalMapPath(const string& val);
 	void setLodEntityID(const string& val);
+	void addDiffuseMapPath(string val);
+	void addLightMapPath(string val);
+	void addReflectionMapPath(string val);
+	void addNormalMapPath(string val);
 	void setOriginalLightness(float val);
 	void setLightness(float val);
 	void setSpecularFactor(float val);
@@ -77,6 +81,10 @@ public:
 	const string& getReflectionMapPath() const;
 	const string& getNormalMapPath() const;
 	const string& getLodEntityID() const;
+	const vector<string>& getDiffuseMapPaths();
+	const vector<string>& getLightMapPaths();
+	const vector<string>& getReflectionMapPaths();
+	const vector<string>& getNormalMapPaths();
 	const float getOriginalLightness() const;
 	const float getLightness() const;
 	const float getSpecularFactor() const;
@@ -109,6 +117,11 @@ private:
 	string _reflectionMapPath = "";
 	string _normalMapPath = "";
 	string _lodEntityID = "";
+
+	vector<string> _diffuseMapPaths;
+	vector<string> _lightMapPaths;
+	vector<string> _reflectionMapPaths;
+	vector<string> _normalMapPaths;
 
 	vec3 _originalTranslation = vec3(0.0f);
 	vec3 _originalRotation = vec3(0.0f);

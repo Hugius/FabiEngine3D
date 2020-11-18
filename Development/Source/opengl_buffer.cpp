@@ -219,7 +219,7 @@ const BufferType OpenGLBuffer::getBufferType() const
 	return _bufferType;
 }
 
-const vector<vec3> OpenGLBuffer::getInstancedOffsets() const
+const vector<vec3>& OpenGLBuffer::getInstancedOffsets() const
 {
 	return _instancedOffsets;
 }

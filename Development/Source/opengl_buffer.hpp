@@ -32,7 +32,7 @@ public:
 
 	const BufferType getBufferType() const;
 
-	const vector<vec3> getInstancedOffsets() const;
+	const vector<vec3>& getInstancedOffsets() const;
 
 private:
 	void _create3D(BufferType type, float data[], int dataCount);

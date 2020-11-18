@@ -92,6 +92,28 @@ void ModelEditor::_loadOBJ()
 			// Delete existing entity
 			if (_fe3d.gameEntity_isExisting(_currentModelID))
 			{
+				// Check if multiparted entity
+				if (_fe3d.gameEntity_isMultiTextured(_currentModelID))
+				{
+					// Clear texture cache
+					for (auto& path : _fe3d.gameEntity_getDiffuseMapPaths(_currentModelID))
+					{
+						_fe3d.misc_clearTextureCache(path);
+					}
+					for (auto& path : _fe3d.gameEntity_getLightMapPaths(_currentModelID))
+					{
+						_fe3d.misc_clearTextureCache(path);
+					}
+					for (auto& path : _fe3d.gameEntity_getReflectionMapPaths(_currentModelID))
+					{
+						_fe3d.misc_clearTextureCache(path);
+					}
+					for (auto& path : _fe3d.gameEntity_getNormalMapPaths(_currentModelID))
+					{
+						_fe3d.misc_clearTextureCache(path);
+					}
+				}
+
 				_fe3d.gameEntity_delete(_currentModelID);
 			}
 

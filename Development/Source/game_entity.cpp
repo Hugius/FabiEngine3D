@@ -173,6 +173,26 @@ void GameEntity::setLodEntityID(const string& val)
 	_lodEntityID = val;
 }
 
+void GameEntity::addDiffuseMapPath(string val)
+{
+	_diffuseMapPaths.push_back(val);
+}
+
+void GameEntity::addLightMapPath(string val)
+{
+	_lightMapPaths.push_back(val);
+}
+
+void GameEntity::addReflectionMapPath(string val)
+{
+	_reflectionMapPaths.push_back(val);
+}
+
+void GameEntity::addNormalMapPath(string val)
+{
+	_normalMapPaths.push_back(val);
+}
+
 void GameEntity::setTransparent(bool val)
 {
 	_isTransparent = val;
@@ -351,6 +371,26 @@ const string& GameEntity::getNormalMapPath() const
 const string& GameEntity::getLodEntityID() const
 {
 	return _lodEntityID;
+}
+
+const vector<string>& GameEntity::getDiffuseMapPaths()
+{
+	return _diffuseMapPaths;
+}
+
+const vector<string>& GameEntity::getLightMapPaths()
+{
+	return _lightMapPaths;
+}
+
+const vector<string>& GameEntity::getReflectionMapPaths()
+{
+	return _reflectionMapPaths;
+}
+
+const vector<string>& GameEntity::getNormalMapPaths()
+{
+	return _normalMapPaths;
 }
 
 const bool GameEntity::isTransparent() const

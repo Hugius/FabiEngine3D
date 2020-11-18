@@ -285,7 +285,11 @@ public:
 	string		   gameEntity_getNormalMapPath(const string& ID);
 	string		   gameEntity_getReflectionMapPath(const string& ID);
 	string		   gameEntity_getLevelOfDetailEntityID(const string& ID);
-	vector<vec3>   gameEntity_getInstancedOffsets(const string& ID);
+	const vector<vec3>&   gameEntity_getInstancedOffsets(const string& ID);
+	const vector<string>& gameEntity_getDiffuseMapPaths(const string& ID);
+	const vector<string>& gameEntity_getLightMapPaths(const string& ID);
+	const vector<string>& gameEntity_getReflectionMapPaths(const string& ID);
+	const vector<string>& gameEntity_getNormalMapPaths(const string& ID);
 	vector<string> gameEntity_getAllIDs();
 	vector<string> gameEntity_getGroupIDs(const string& ID);
 

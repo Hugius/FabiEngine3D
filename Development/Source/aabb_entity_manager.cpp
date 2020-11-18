@@ -84,7 +84,7 @@ void AabbEntityManager::update(const vector<shared_ptr<GameEntity>>& gameEntitie
 					{
 						vec3 parentSizeChange = parentEntity->getScaling() / parentEntity->getOriginalScaling();
 
-						// Update scaling (based on parent translation)
+						// Update scaling (based on parent scaling)
 						entity->setScaling(entity->getLocalScaling() * parentSizeChange);
 
 						// Update translation (based on parent translation + scaling)

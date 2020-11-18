@@ -326,7 +326,7 @@ vn 0.4156 0.5234 0.7439
 vn 0.3347 0.6561 -0.6764
 vn -0.8391 0.2907 -0.4597
 FE3D_PART trunk
-FE3D_DIFFUSE_MAP trees\tree_lowpoly_trunk.png
+FE3D_DIFFUSE_MAP tree_lowpoly_trunk.png
 s 1
 f 86/1/1 85/2/2 84/3/3
 f 87/4/4 86/1/1 84/3/3
@@ -377,7 +377,7 @@ f 87/4/4 85/5/2 95/13/10
 f 95/13/10 85/5/2 83/36/24
 f 103/39/22 104/49/21 98/17/14
 FE3D_PART leaves
-FE3D_DIFFUSE_MAP trees\tree_lowpoly_leaves.png
+FE3D_DIFFUSE_MAP tree_lowpoly_leaves.png
 s off
 f 3/50/27 1/51/27 2/52/27
 f 5/53/28 7/54/28 8/55/28

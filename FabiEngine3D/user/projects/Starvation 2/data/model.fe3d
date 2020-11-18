@@ -1,3 +1,15 @@
-@pine user\assets\models\tree3.obj user\assets\textures\diffuse_maps\tree3.png ? ? user\assets\textures\normal_maps\pine.png 1 1 1 0 1 1 0 1 1 1 0.6 1 1 1 1 ? 0 trunk 0 0 0 0.5688 3.15713 0.5688 leaves 0 3.22034 0 4.53803 9.43424 4.08534
 @grass user\assets\models\grassfield.obj user\assets\textures\diffuse_maps\grassfield.png ? ? ? 1.5 1.5 1.5 0 1 1 0 0 1 1 0.75 1 1 1 1 ? 0 
 @lantern user\assets\models\lantern2.obj user\assets\textures\diffuse_maps\lantern2.png ? ? ? 1.25 1.25 1.25 0 1 0 0 0 1 1 1 1 1 1 1 ? 0 pole 0 0 0 0.539009 6.56539 0.5688 holder 1 7 0 4.23624 0.66342 0.731421
+@tree2 user\assets\models\tree2.obj user\assets\textures\diffuse_maps\tree2.png ? ? ? 3 3 3 0 1 1 0 0 1 1 1 1 1 1 1 @tree2_lod 0 trunk 0 0 0 1 9 1 leaves 0 8.75 0 12.75 8.25 10.25
+@tree2_lod user\assets\models\tree_lowpoly.obj ? ? ? ? 3 3.5 3 0 1 1 0 0 1 1 1 1 1 1 1 ? 0 
+@tree1 user\assets\models\tree3.obj user\assets\textures\diffuse_maps\tree3.png ? ? user\assets\textures\normal_maps\tree_3.png 1.5 1.5 1.5 0 1 1 0 0 1 1 1 1 1 1 1 @tree1_lod 0 trunk 0 0 0 0.8 13 0.8 leaves 0 3 0 4.2 10 4.5
+@tree1_lod user\assets\models\tree_lod.obj user\assets\textures\diffuse_maps\tree3_lod.png ? ? ? 5 9.5 5 0 0 1 0 0 1 1 0.75 1 1 1 1 ? 0 
+@tree3 user\assets\models\tree8.obj ? ? ? ? 3 3 3 0 1 1 0 0 1 1 1 1 1 1 1 @tree3_lod 0 trunk 0 0 0 2.2 6.3 2.4 leaves 0 6.2 0.8 12 14.5 12.6
+@tree3_lod user\assets\models\tree_lowpoly.obj ? ? ? ? 4 4 4 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 
+@tree4 user\assets\models\tree9.obj ? ? ? ? 3 3 3 0 1 1 0 0 1 1 1 1 1 1 1 @tree4_lod 0 trunk 0 0 0 1.1 2.2 1 leaves 0 2.2 0 2.8 4.9 2.5
+@tree4_lod user\assets\models\tree_lowpoly.obj ? ? ? ? 3 4.5 3 0 1 1 0 0 1 1 1 1 1 1 1 ? 0 
+@tree5 user\assets\models\tree10.obj ? ? ? ? 1.25 1.25 1.25 0 1 1 0 0 1 1 1 1 1 1 1 @tree5_lod 0 trunk 0 0 -1 8 5 4.5 leaves 2.5 5 -1.5 18.5 14.5 10
+@tree5_lod user\assets\models\tree_lowpoly.obj ? ? ? ? 4.5 4.5 4.5 0 1 0 0 0 10 150 0.5 1 1 1 1 ? 0 
+@tree6 user\assets\models\tree12.obj user\assets\textures\diffuse_maps\tree12.png ? ? ? 6 6 6 0 1 1 0 0 1 1 1 1 1 1 1 ? 0 trunk 0.1 0 0 -0.3 1.2 0.3 leaves 0 1.2 0 1.9 1.4 1.2
+@bush1 user\assets\models\tree1.obj user\assets\textures\diffuse_maps\tree1.png ? ? ? 1.5 1.1 1.5 0 1 1 0 0 1 1 1 1 1 1 1 @bush1_lod 0 bush 0 0 0 3 9.8 3
+@bush1_lod user\assets\models\tree_lod.obj user\assets\textures\diffuse_maps\tree1_lod.png ? ? ? 4 5 4 0 1 1 0 0 1 1 1 1 1 1 1 ? 0 

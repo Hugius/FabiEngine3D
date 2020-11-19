@@ -11,13 +11,12 @@ class AudioManager final
 public:
 	AudioManager(AudioLoader& audioLoader);
 
-	void deleteAllMusic();
-	void deleteAllChunks();
 	void addMusic(const string& fileName);
-	void removeMusic();
+	void deleteMusic();
 	void addGlobalChunk(const string& ID, const string& fileName);
 	void addPointChunk(const string& ID, const string& fileName, vec3 position, float maxDistance);
-	void removeChunk(const string& ID);
+	void deleteChunk(const string& ID);
+	void deleteAllChunks();
 
 	bool isChunkExisting(const string& ID);
 

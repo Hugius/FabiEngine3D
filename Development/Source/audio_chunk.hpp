@@ -5,14 +5,16 @@
 #include <GLM\\glm.hpp>
 
 using glm::vec3;
+using std::string;
 
 class AudioChunk final
 {
 public:
-	AudioChunk(const std::string& ID, Mix_Chunk* chunk);
-	AudioChunk(const std::string& ID, Mix_Chunk* chunk, vec3 position, float maxDistance);
+	AudioChunk(const string& ID, const string& filePath, Mix_Chunk* chunk);
+	AudioChunk(const string& ID, const string& filePath, Mix_Chunk* chunk, vec3 position, float maxDistance);
 
-	const std::string& getID() const;
+	const string& getID() const;
+	const string& getFilePath() const;
 
 	Mix_Chunk* getMixChunk() const;
 
@@ -25,7 +27,8 @@ public:
 	bool hasPosition() const;
 
 private:
-	std::string _ID = "";
+	string _ID = "";
+	string _filePath = "";
 	
 	Mix_Chunk* _chunk = nullptr;
 

@@ -25,6 +25,7 @@ public:
 	SceneEditor& getSceneEditor();
 	ScriptEditor& getScriptEditor();
 	SettingsEditor& getSettingsEditor();
+	AudioEditor& getAudioEditor();
 
 	// Static stuff for easier GUI function calls
 	static inline const float calcTextWidth(const string& text, float charWidth, float maxWidth)

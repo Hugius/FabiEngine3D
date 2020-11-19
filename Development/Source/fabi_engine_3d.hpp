@@ -508,36 +508,45 @@ public:
 	vector<string> textEntity_getAllIDs();
 
 	// Audio entity interface - setters
-	void audioEntity_setSoundEnabled(bool enabled);
-	void audioEntity_setMusicEnabled(bool enabled);
-	void audioEntity_deleteAllSounds();
-	void audioEntity_deleteAllMusic();
-	void audioEntity_stopAllSounds();
-	void audioEntity_stopAllMusic();
-	void audioEntity_addMusic(const std::string& audioPath);
-	void audioEntity_deleteMusic();
-	void audioEntity_setMusicVolume(int volume);
 	void audioEntity_addGlobal(const std::string& ID, const std::string& audioPath);
 	void audioEntity_addPoint(const std::string& ID, const std::string& audioPath, vec3 position, float maxDistance);
 	void audioEntity_delete(const std::string& ID);
+	void audioEntity_deleteAll();
 	void audioEntity_play(const std::string& ID, int loops, int initialVolume, bool noRestart = false, int fadeMillis = 0);
 	void audioEntity_pause(const std::string& ID);
 	void audioEntity_resume(const std::string& ID);
 	void audioEntity_stop(const std::string& ID, int fadeMillis = 0);
+	void audioEntity_stopAll();
 	void audioEntity_setVolume(const std::string& ID, int volume);
 	void audioEntity_changePoint(const std::string& ID, vec3 position);
 
 	// Audio entity interface - getters
+	string audioEntity_getFilePath(const std::string& ID);
 	bool audioEntity_isExisting(const std::string& ID);
 	bool audioEntity_isPlaying(const std::string& ID);
+	bool audioEntity_isPaused(const std::string& ID);
 	int  audioEntity_getVolume(const std::string& ID);
 	int  audioEntity_getUsedChannelCount();
 
-	// Audio interface - setters
-	void audio_setMaxChannels(int count);
+	// Music entity interface - setters
+	void music_addToPlaylist(const std::string& audioPath);
+	void music_deleteAll();
+	void music_setVolume(int volume);
+	void music_pause();
+	void music_resume();
 
-	// Audio interface - getters
-	int audio_getMaxChannels();
+	// Music interface - getters
+	bool music_isPlaying();
+	bool music_isPaused();
+	int  music_getVolume();
+
+	// Sound interface - setters
+	void sound_setAudioEnabled(bool enabled);
+	void sound_setMusicEnabled(bool enabled);
+	void sound_setMaxChannels(int count);
+
+	// Sound interface - getters
+	int sound_getMaxChannels();
 
 	// Graphics interface - setters
 	void gfx_setMsaaQuality(int quality);

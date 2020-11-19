@@ -4,7 +4,11 @@ void AudioEditor::_updateAudioEditing()
 {
 	if (_isLoaded)
 	{
+		// Temporary values
 		auto screen = _gui.getViewport("left")->getWindow("main")->getScreen("audioEditorMenuChoice");
+		bool isExisting = _fe3d.audioEntity_isExisting(_currentAudioID);
+		bool isPlaying = isExisting && _fe3d.audioEntity_isPlaying(_currentAudioID);
+		bool isPaused = isExisting && _fe3d.audioEntity_isPaused(_currentAudioID);
 
 		// GUI management
 		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
@@ -42,25 +46,29 @@ void AudioEditor::_updateAudioEditing()
 			}
 			else if (screen->getButton("play")->isHovered())
 			{
-				if (!_fe3d.audioEntity_isPlaying(_currentAudioID))
-				{
-
-				}
+				_fe3d.audioEntity_play(_currentAudioID, 0, 50);
+			}
+			else if (screen->getButton("resume")->isHovered())
+			{
+				_fe3d.audioEntity_resume(_currentAudioID);
 			}
 			else if (screen->getButton("pause")->isHovered())
 			{
-
+				_fe3d.audioEntity_pause(_currentAudioID);
 			}
 			else if (screen->getButton("stop")->isHovered())
 			{
-
-			}
-			else if (screen->getButton("volume")->isHovered())
-			{
-
+				_fe3d.audioEntity_stop(_currentAudioID);
 			}
 			else if (screen->getButton("back")->isHovered())
 			{
+				// Stop sound preview
+				if (isPlaying)
+				{
+					_fe3d.audioEntity_stop(_currentAudioID);
+				}
+
+				// Miscellaneous
 				_fe3d.textEntity_hide(_gui.getGlobalScreen()->getTextfield("selectedAudioName")->getEntityID());
 				_currentAudioID = "";
 				_isEditingAudio = false;
@@ -68,6 +76,10 @@ void AudioEditor::_updateAudioEditing()
 			}
 		}
 
-
+		// Buttons hoverability
+		screen->getButton("play")->setHoverable(!isPlaying && !isPaused);
+		screen->getButton("resume")->setHoverable(isPaused);
+		screen->getButton("pause")->setHoverable(isPlaying);
+		screen->getButton("stop")->setHoverable(isPlaying || isPaused);
 	}
 }

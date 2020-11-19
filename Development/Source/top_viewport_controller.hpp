@@ -1,11 +1,12 @@
 #pragma once
 
 #include "viewport_controller.hpp"
-#include "model_editor.hpp"
 #include "environment_editor.hpp"
+#include "model_editor.hpp"
 #include "billboard_editor.hpp"
 #include "scene_editor.hpp"
 #include "script_editor.hpp"
+#include "audio_editor.hpp"
 
 #define TVPC TopViewportController
 
@@ -13,7 +14,8 @@ class TopViewportController final : public ViewportController
 {
 public:
 	TopViewportController(FabiEngine3D& fe3d, EngineGuiManager& gui, 
-		ModelEditor& modelEditor, EnvironmentEditor& environmentEditor, BillboardEditor& billboardEditor, SceneEditor& sceneEditor, ScriptEditor& scriptEditor);
+		EnvironmentEditor& environmentEditor, ModelEditor& modelEditor, BillboardEditor& billboardEditor, 
+		SceneEditor& sceneEditor, ScriptEditor& scriptEditor, AudioEditor& audioEditor);
 	~TopViewportController() = default;
 
 	void initialize() override;
@@ -38,11 +40,12 @@ private:
 	void _saveCurrentProject();
 	void _updateCurrentProject();
 
-	ModelEditor& _modelEditor;
 	EnvironmentEditor& _environmentEditor;
+	ModelEditor& _modelEditor;
 	BillboardEditor& _billboardEditor;
 	SceneEditor& _sceneEditor;
 	ScriptEditor& _scriptEditor;
+	AudioEditor& _audioEditor;
 
 	shared_ptr<EngineGuiWindow> _projectWindow = nullptr;
 	shared_ptr<EngineGuiWindow> _gameWindow = nullptr;

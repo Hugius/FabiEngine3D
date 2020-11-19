@@ -130,3 +130,8 @@ SettingsEditor& LeftViewportController::getSettingsEditor()
 {
 	return _settingsEditor;
 }
+
+AudioEditor& LeftViewportController::getAudioEditor()
+{
+	return _audioEditor;
+}

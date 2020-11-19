@@ -1,14 +1,16 @@
 #include "audio_chunk.hpp"
 
-AudioChunk::AudioChunk(const std::string& ID, Mix_Chunk* chunk) :
+AudioChunk::AudioChunk(const string& ID, const string& filePath, Mix_Chunk* chunk) :
 	_ID(ID),
+	_filePath(filePath),
 	_chunk(chunk)
 {
 
 }
 
-AudioChunk::AudioChunk(const std::string& ID, Mix_Chunk* chunk, vec3 position, float maxDistance) :
+AudioChunk::AudioChunk(const string& ID, const string& filePath, Mix_Chunk* chunk, vec3 position, float maxDistance) :
 	_ID(ID),
+	_filePath(filePath),
 	_chunk(chunk),
 	_position(position),
 	_maxDistance(maxDistance),
@@ -20,6 +22,11 @@ AudioChunk::AudioChunk(const std::string& ID, Mix_Chunk* chunk, vec3 position, f
 const std::string& AudioChunk::getID() const
 {
 	return _ID;
+}
+
+const string& AudioChunk::getFilePath() const
+{
+	return _filePath;
 }
 
 Mix_Chunk* AudioChunk::getMixChunk() const

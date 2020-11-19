@@ -5,14 +5,16 @@
 
 #define SCRIPT_EXECUTOR _scriptEditor.getScriptExecutor(false)
 
-TopViewportController::TopViewportController(FabiEngine3D& fe3d, EngineGuiManager& gui, 
-	ModelEditor& modelEditor, EnvironmentEditor& environmentEditor, BillboardEditor& billboardEditor, SceneEditor& sceneEditor, ScriptEditor& scriptEditor) :
+TopViewportController::TopViewportController(FabiEngine3D& fe3d, EngineGuiManager& gui,
+	EnvironmentEditor& environmentEditor, ModelEditor& modelEditor, BillboardEditor& billboardEditor,
+	SceneEditor& sceneEditor, ScriptEditor& scriptEditor, AudioEditor& audioEditor) :
 	ViewportController(fe3d, gui),
 	_modelEditor(modelEditor),
 	_environmentEditor(environmentEditor),
 	_billboardEditor(billboardEditor),
 	_sceneEditor(sceneEditor),
-	_scriptEditor(scriptEditor)
+	_scriptEditor(scriptEditor),
+	_audioEditor(audioEditor)
 {
 
 }
@@ -191,11 +193,12 @@ void TopViewportController::_saveCurrentProject()
 	}
 
 	// Save everything
-	_modelEditor.save();
 	_environmentEditor.save();
+	_modelEditor.save();
 	_billboardEditor.save();
 	_sceneEditor.save();
 	_scriptEditor.save();
+	_audioEditor.save();
 
 	// Logging
 	_fe3d.logger_throwInfo("Project \"" + _currentProjectName + "\" saved!");
@@ -216,16 +219,16 @@ void TopViewportController::_updateCurrentProject()
 	// Go back to main editor screen
 	_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
 
-	// Unload model editor
-	if (_modelEditor.isLoaded())
-	{
-		_modelEditor.unload();
-	}
-
 	// Unload environment editor
 	if (_environmentEditor.isLoaded())
 	{
 		_environmentEditor.unload();
+	}
+
+	// Unload model editor
+	if (_modelEditor.isLoaded())
+	{
+		_modelEditor.unload();
 	}
 
 	// Unload billboard editor
@@ -246,10 +249,17 @@ void TopViewportController::_updateCurrentProject()
 		_scriptEditor.unload();
 	}
 
+	// Unload audio editor
+	if (_audioEditor.isLoaded())
+	{
+		_audioEditor.unload();
+	}
+
 	// Pass loaded project name
-	_modelEditor.setCurrentProjectName(_currentProjectName);
 	_environmentEditor.setCurrentProjectName(_currentProjectName);
+	_modelEditor.setCurrentProjectName(_currentProjectName);
 	_billboardEditor.setCurrentProjectName(_currentProjectName);
 	_sceneEditor.setCurrentProjectName(_currentProjectName);
 	_scriptEditor.setCurrentProjectName(_currentProjectName);
+	_audioEditor.setCurrentProjectName(_currentProjectName);
 }

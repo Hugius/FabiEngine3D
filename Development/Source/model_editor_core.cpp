@@ -103,9 +103,13 @@ void ModelEditor::load()
 	_fe3d.gfx_enableSpecularLighting();
 	
 	// 3D Environment
-	_fe3d.gameEntity_add("@@cube", "engine\\models\\cube.obj", vec3(0.0f), vec3(0.0f), vec3(1.0f, 1.0f, 1.0f));
+	_fe3d.gameEntity_add("@@cube", "engine\\models\\cube.obj", vec3(0.0f), vec3(0.0f), vec3(1.0f));
 	_fe3d.gameEntity_setDiffuseMap("@@cube", "engine\\textures\\cube.png");
 	_fe3d.gameEntity_setFaceCulled("@@cube", true);
+	_fe3d.gameEntity_add("@@grid", "engine\\models\\plane.obj", vec3(0.0f), vec3(0.0f), vec3(100.0f, 1.0f, 100.0f));
+	_fe3d.gameEntity_setDiffuseMap("@@grid", "engine\\textures\\grid.png");
+	_fe3d.gameEntity_setUvRepeat("@@grid", 10.0f);
+	_fe3d.gameEntity_setTransparent("@@grid", true);
 
 	// Other
 	loadModels();
@@ -127,9 +131,6 @@ void ModelEditor::unload()
 	_fe3d.gfx_disableLightMapping();
 	_fe3d.gfx_disableNormalMapping();
 	_fe3d.gfx_disableSpecularLighting();
-
-	// 3D environment
-	_fe3d.gameEntity_delete("@@cube");
 
 	// Delete models
 	_fe3d.gameEntity_deleteAll();

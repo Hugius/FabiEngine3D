@@ -4,8 +4,9 @@ EngineController::EngineController() :
 	_gui(*this),
 	_leftViewportController(*this, _gui),
 	_rightViewportController(*this, _gui),
-	_topViewportController(*this, _gui, _leftViewportController.getModelEditor(), _leftViewportController.getEnvironmentEditor(), 
-		_leftViewportController.getBillboardEditor(), _leftViewportController.getSceneEditor(), _leftViewportController.getScriptEditor()),
+	_topViewportController(*this, _gui, _leftViewportController.getEnvironmentEditor(), _leftViewportController.getModelEditor(),
+		_leftViewportController.getBillboardEditor(), _leftViewportController.getSceneEditor(), 
+		_leftViewportController.getScriptEditor(), _leftViewportController.getAudioEditor()),
 	_bottomViewportController(*this, _gui)
 {
 
@@ -57,6 +58,7 @@ void EngineController::_initializeMiscellaneous()
 		textureFolderPath + "default_back.png" });
 	skyEntity_select("@@engineBackground");
 	skyEntity_setLightness("@@engineBackground", 0.65f);
+	skyEntity_setRotationSpeed("@@engineBackground", 0.5f);
 
 	// Custom cursor texture
 	guiEntity_add("@@cursor", "engine\\textures\\cursor_default.png", vec2(0.0f), 0.0f, vec2(0.075f, 0.075f * misc_getAspectRatio()), true);

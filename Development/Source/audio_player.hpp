@@ -21,25 +21,31 @@ public:
 
 	void allocateChannels(int count);
 	void update(CameraManager& camera, std::vector<AudioChunk>& chunks, std::vector<AudioMusic>& music);	
-	void setSoundEnabled(bool val);
-	void setMusicEnabled(bool val);
-	void stopAllSounds();
-	void stopAllMusic();
+	void setChunksEnabled(bool val);
+	void stopAllChunks();
 	void playChunk(AudioChunk& chunk, int loops, int initialVolume, bool noRestart, int fadeMillis);
 	void pauseChunk(AudioChunk& chunk);
 	void resumeChunk(AudioChunk& chunk);
 	void stopChunk(AudioChunk& chunk, int fadeMillis);
 	void setChunkVolume(AudioChunk& chunk, int volume);
+	void setMusicEnabled(bool val);
+	void pauseMusic();
+	void resumeMusic();
 	void setMusicVolume(int volume);
+	void stopMusic();
 
-	bool isPlaying(AudioChunk& chunk);
-
-	int getVolume(AudioChunk& chunk);
+	bool isChunkPlaying(AudioChunk& chunk);
+	bool isChunkPaused(AudioChunk& chunk);
+	bool isMusicPlaying();
+	bool isMusicPaused();
+	
+	int getChunkVolume(AudioChunk& chunk);
+	int getMusicVolume();
 	int getUsedChannelCount();
 	int getAllocatedChannelCount();
 
 private:
-	std::pair<const int, string>& _getPair(AudioChunk& chunk);
+	int _getChunkChannel(AudioChunk& chunk);
 	bool _isInMap(AudioChunk& chunk);
 
 	int _getFreeChannel();
@@ -48,6 +54,6 @@ private:
 
 	int _musicIndex = 0;
 
-	bool _soundEnabled = true;
+	bool _chunksEnabled = true;
 	bool _musicEnabled = true;
 };

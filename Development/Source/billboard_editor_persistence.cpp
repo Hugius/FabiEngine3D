@@ -110,14 +110,14 @@ void BillboardEditor::save()
 			_fe3d.logger_throwError("Tried to save as empty project!");
 		}
 
-		// Create or overwrite billboards file
+		// Create or overwrite billboard file
 		std::ofstream file;
 		file.open(_fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectName + "\\data\\billboard.fe3d");
 
 		// Write billboard data into file
 		for (auto& billboardName : _billboardNames)
 		{
-			// Retrieve all valus
+			// Retrieve all values
 			auto size = _fe3d.billboardEntity_getSize(billboardName);
 			auto color = _fe3d.billboardEntity_getColor(billboardName);
 			auto diffusePath = _fe3d.billboardEntity_getDiffuseMapPath(billboardName);

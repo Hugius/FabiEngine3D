@@ -247,6 +247,7 @@
     <ClCompile Include="Source\audio_chunk.cpp" />
     <ClCompile Include="Source\audio_editor_core.cpp" />
     <ClCompile Include="Source\audio_editor_misc.cpp" />
+    <ClCompile Include="Source\audio_editor_persistence.cpp" />
     <ClCompile Include="Source\audio_editor_updates.cpp" />
     <ClCompile Include="Source\audio_editor_updates_editing.cpp" />
     <ClCompile Include="Source\audio_loader.cpp" />

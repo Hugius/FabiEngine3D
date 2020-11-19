@@ -16,9 +16,12 @@ public:
 	void unload();
 	void update();
 	void setCurrentProjectName(const string& projectName);
-	void loadSkyEntities();
-	void loadTerrainEntities();
-	void loadWaterEntities();
+	void loadSkyEntitiesFromFile();
+	void loadTerrainEntitiesFromFile();
+	void loadWaterEntitiesFromFile();
+	void saveSkyEntitiesToFile();
+	void saveTerrainEntitiesToFile();
+	void saveWaterEntitiesToFile();
 	void unloadSkyEntities();
 	void unloadTerrainEntities();
 	void unloadWaterEntities();
@@ -64,7 +67,6 @@ private:
 	bool _waterRemovalEnabled = false;
 
 	// Sky functions
-	void _saveSkyData();
 	void _updateSkyEditor();
 	void _updateSkyMenuMain();
 	void _updateSkyMenuChoice();
@@ -76,7 +78,6 @@ private:
 	void _updateSkyCamera();
 
 	// Terrain function
-	void _saveTerrainData();
 	void _updateTerrainEditor();
 	void _updateTerrainMenuMain();
 	void _updateTerrainMenuChoice();
@@ -88,7 +89,6 @@ private:
 	void _updateTerrainCamera();
 
 	// Water functions
-	void _saveWaterData();
 	void _updateWaterEditor();
 	void _updateWaterMenuMain();
 	void _updateWaterMenuChoice();

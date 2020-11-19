@@ -146,9 +146,9 @@ void EnvironmentEditor::load()
 	_fe3d.gfx_enableWaterEffects();
 
 	// Core
-	loadSkyEntities();
-	loadTerrainEntities();
-	loadWaterEntities();
+	loadSkyEntitiesFromFile();
+	loadTerrainEntitiesFromFile();
+	loadWaterEntitiesFromFile();
 
 	// Miscellaneous
 	_gui.getGlobalScreen()->addTextfield("selectedSkyName", vec2(0.0f, 0.85f), vec2(0.5f, 0.1f), "", vec3(1.0f));
@@ -160,9 +160,9 @@ void EnvironmentEditor::load()
 
 void EnvironmentEditor::save()
 {
-	_saveSkyData();
-	_saveTerrainData();
-	_saveWaterData();
+	saveSkyEntitiesToFile();
+	saveTerrainEntitiesToFile();
+	saveWaterEntitiesToFile();
 }
 
 void EnvironmentEditor::unload()

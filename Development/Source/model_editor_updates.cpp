@@ -52,7 +52,7 @@ void ModelEditor::_updateManagementScreen()
 		// Check if user wants to save changes
 		if (_gui.getGlobalScreen()->isAnswerFormConfirmed("exitModelEditor"))
 		{
-			save();
+			saveGameEntitiesToFile();
 			unload();
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
 		}

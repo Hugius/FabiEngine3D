@@ -4,7 +4,7 @@
 #include <sstream>
 #include <algorithm>
 
-void SceneEditor::loadScene(const string& fileName)
+void SceneEditor::loadSceneFromFile(const string& fileName)
 {
 	// Error checking
 	if (_currentProjectName == "")

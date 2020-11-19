@@ -81,5 +81,20 @@ void AudioEditor::_updateAudioEditing()
 		screen->getButton("resume")->setHoverable(isPaused);
 		screen->getButton("pause")->setHoverable(isPlaying);
 		screen->getButton("stop")->setHoverable(isPlaying || isPaused);
+
+		// Update audio status symbol
+		if (isPlaying)
+		{
+			_fe3d.billboardEntity_setDiffuseMap("@@audioStatus", "engine\\textures\\play.png", true);
+		}
+		else if (isPaused)
+		{
+			_fe3d.billboardEntity_setDiffuseMap("@@audioStatus", "engine\\textures\\pause.png", true);
+		}
+		else
+		{
+			_fe3d.billboardEntity_setDiffuseMap("@@audioStatus", "engine\\textures\\stop.png", true);
+		}
+		_fe3d.billboardEntity_rotate("@@audioStatus", vec3(0.0f, 0.5f, 0.0f));
 	}
 }

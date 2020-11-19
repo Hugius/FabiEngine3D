@@ -13,10 +13,11 @@ public:
 
 	void initializeGUI();
 	void load();
-	void save();
 	void unload();
 	void update();
 	void setCurrentProjectName(const string & projectName);
+	void loadScriptsFromFile();
+	void saveScriptsToFile();
 
 	ScriptExecutor& getScriptExecutor(bool reloadScript);
 
@@ -28,8 +29,6 @@ private:
 	void _updateTextSelector(string& newCharacters, unsigned int& cursorLineIndex,
 		unsigned int& cursorCharIndex, int& hoveredLineIndex, bool& textHasChanged);
 	void _updateMiscellaneous();
-	void _loadScriptsFromFile();
-	void _saveScriptToFile();
 	void _reloadScriptTextDisplay();
 
 	// Core variables

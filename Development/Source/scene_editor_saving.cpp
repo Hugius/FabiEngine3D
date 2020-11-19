@@ -3,7 +3,7 @@
 #include <fstream>
 #include <algorithm>
 
-void SceneEditor::save()
+void SceneEditor::saveSceneToFile()
 {
 	if (_isLoaded)
 	{

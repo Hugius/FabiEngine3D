@@ -194,11 +194,11 @@ void TopViewportController::_saveCurrentProject()
 
 	// Save everything
 	_environmentEditor.save();
-	_modelEditor.save();
-	_billboardEditor.save();
-	_sceneEditor.save();
-	_scriptEditor.save();
-	_audioEditor.save();
+	_modelEditor.saveGameEntitiesToFile();
+	_billboardEditor.saveBillboardEntitiesToFile();
+	_sceneEditor.saveSceneToFile();
+	_scriptEditor.saveScriptsToFile();
+	_audioEditor.saveAudioEntitiesToFile();
 
 	// Logging
 	_fe3d.logger_throwInfo("Project \"" + _currentProjectName + "\" saved!");

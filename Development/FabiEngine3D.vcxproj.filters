@@ -496,6 +496,9 @@
     <ClCompile Include="Source\audio_editor_updates_editing.cpp">
       <Filter>src\Editor System\Audio Editor\Upates</Filter>
     </ClCompile>
+    <ClCompile Include="Source\audio_editor_persistence.cpp">
+      <Filter>src\Editor System\Audio Editor\Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\obj_loader.hpp">

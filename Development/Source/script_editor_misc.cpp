@@ -62,7 +62,7 @@ ScriptExecutor& ScriptEditor::getScriptExecutor(bool reloadScript)
 	// Load the original script
 	if (reloadScript || !_isScriptLoadedFromFile)
 	{
-		_loadScriptsFromFile();
+		loadScriptsFromFile();
 	}
 	
 	return _scriptExecutor;

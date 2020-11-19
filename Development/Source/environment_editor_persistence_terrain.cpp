@@ -4,7 +4,7 @@
 #include <sstream>
 #include <algorithm>
 
-void EnvironmentEditor::loadTerrainEntities()
+void EnvironmentEditor::loadTerrainEntitiesFromFile()
 {
 	// Error checking
 	if (_currentProjectName == "")
@@ -97,7 +97,7 @@ void EnvironmentEditor::loadTerrainEntities()
 	}
 }
 
-void EnvironmentEditor::_saveTerrainData()
+void EnvironmentEditor::saveTerrainEntitiesToFile()
 {
 	if (_isLoaded)
 	{

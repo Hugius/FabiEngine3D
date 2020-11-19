@@ -4,7 +4,7 @@
 #include <sstream>
 #include <algorithm>
 
-void BillboardEditor::loadBillboards()
+void BillboardEditor::loadBillboardEntitiesFromFile()
 {
 	// Error checking
 	if (_currentProjectName == "")
@@ -100,7 +100,7 @@ void BillboardEditor::loadBillboards()
 	}
 }
 
-void BillboardEditor::save()
+void BillboardEditor::saveBillboardEntitiesToFile()
 {
 	if (_isLoaded)
 	{

@@ -51,15 +51,10 @@ void ScriptEditor::load()
 	_fe3d.lightEntity_add("@@selectionLight", vec3(0.0f), vec3(0.0f, 1.0f, 0.0f), 2.5f, 10.0f, false);
 
 	// Load script
-	_loadScriptsFromFile();
+	loadScriptsFromFile();
 
 	// Miscellaneous
 	_isLoaded = true;
-}
-
-void ScriptEditor::save()
-{
-	_saveScriptToFile();
 }
 
 void ScriptEditor::unload()

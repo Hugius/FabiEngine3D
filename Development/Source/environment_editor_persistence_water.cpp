@@ -4,7 +4,7 @@
 #include <sstream>
 #include <algorithm>
 
-void EnvironmentEditor::loadWaterEntities()
+void EnvironmentEditor::loadWaterEntitiesFromFile()
 {
 	// Error checking
 	if (_currentProjectName == "")
@@ -124,7 +124,7 @@ void EnvironmentEditor::unloadWaterEntities()
 	}
 }
 
-void EnvironmentEditor::_saveWaterData()
+void EnvironmentEditor::saveWaterEntitiesToFile()
 {
 	if (_isLoaded)
 	{

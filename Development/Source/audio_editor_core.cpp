@@ -1,9 +1,6 @@
 #include "audio_editor.hpp"
 #include "left_viewport_controller.hpp"
 
-#include <fstream>
-#include <algorithm>
-
 #define GW(text) LVPC::calcTextWidth(text, 0.15f, 1.8f)
 
 AudioEditor::AudioEditor(FabiEngine3D& fe3d, EngineGuiManager& gui) :
@@ -37,95 +34,19 @@ void AudioEditor::initializeGUI()
 
 void AudioEditor::load()
 {
-	// Error checking
-	if (_currentProjectName == "")
-	{
-		_fe3d.logger_throwError("No current project loaded!");
-	}
-
-	// Clear names list from previous loads
-	_audioNames.clear();
-
-	// Compose full folder path
-	string filePath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectName + "\\data\\audio.fe3d";
-
-	// Check if audio file exists
-	if (_fe3d.misc_isFileExisting(filePath))
-	{
-		std::ifstream file(filePath);
-		string line;
-
-		// Read model data
-		while (std::getline(file, line))
-		{
-			// Placeholder variables
-			string name, audioPath;
-
-			// For file extraction
-			std::istringstream iss(line);
-
-			// Extract from file
-			iss >> name >> audioPath;
-
-			// Perform empty string & space conversions
-			audioPath = (audioPath == "?") ? "" : audioPath;
-			std::replace(audioPath.begin(), audioPath.end(), '?', ' ');
-
-			// Add audio name
-			_audioNames.push_back(name);
-			_fe3d.audioEntity_addGlobal(name, audioPath);
-		}
-
-		// Close file
-		file.close();
-
-		// Logging
-		_fe3d.logger_throwInfo("Audio data from project \"" + _currentProjectName + "\" loaded!");
-	}
+	// Load all audio entities
+	loadAudioEntitiesFromFile();
 
 	// Miscellaneous
+	_fe3d.billBoardEntity_add("@@audioStatus", "engine\\textures\\stop.png", vec3(0.0f, 0.0f, -1.5f), vec3(0.0f), vec2(1.0f), true, false, false, true);
+	_fe3d.camera_load(90.0f, 0.1f, 100.0f, vec3(0.0f), -90.0f);
 	_gui.getGlobalScreen()->addTextfield("selectedAudioName", vec2(0.0f, 0.85f), vec2(0.5f, 0.1f), "", vec3(1.0f));
 	_isLoaded = true;
 }
 
-void AudioEditor::save()
-{
-	if (_isLoaded)
-	{
-		// Error checking
-		if (_currentProjectName == "")
-		{
-			_fe3d.logger_throwError("Tried to save as empty project!");
-		}
-
-		// Create or overwrite audio file
-		std::ofstream file;
-		file.open(_fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectName + "\\data\\audio.fe3d");
-
-		// Write audio data into file
-		for (auto& audioName : _audioNames)
-		{
-			// Retrieve all values
-			auto audioPath = _fe3d.audioEntity_getFilePath(audioName);
-
-			// Perform empty string & space conversions
-			audioPath = (audioPath == "") ? "?" : audioPath;
-			std::replace(audioPath.begin(), audioPath.end(), ' ', '?');
-
-			// Export data
-			file << audioName << " " << audioPath << " " << std::endl;
-		}
-
-		// Close file
-		file.close();
-
-		// Logging
-		_fe3d.logger_throwInfo("Audio data from project \"" + _currentProjectName + "\" saved!");
-	}
-}
-
 void AudioEditor::unload()
 {
+	_fe3d.billboardEntity_delete("@@audioStatus");
 	_fe3d.audioEntity_deleteAll();
 	_gui.getGlobalScreen()->deleteTextfield("selectedAudioName");
 	_isLoaded = false;

@@ -11,11 +11,11 @@ public:
 
 	void initializeGUI();
 	void load();
-	void save();
 	void unload();
 	void update();
 	void setCurrentProjectName(const string& projectName);
-	void loadBillboards();
+	void loadBillboardEntitiesFromFile();
+	void saveBillboardEntitiesToFile();
 
 	bool isLoaded();
 

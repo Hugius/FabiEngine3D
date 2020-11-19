@@ -4,7 +4,7 @@
 #include <sstream>
 #include <algorithm>
 
-void EnvironmentEditor::loadSkyEntities()
+void EnvironmentEditor::loadSkyEntitiesFromFile()
 {
 	// Error checking
 	if (_currentProjectName == "")
@@ -74,7 +74,7 @@ void EnvironmentEditor::loadSkyEntities()
 	}
 }
 
-void EnvironmentEditor::_saveSkyData()
+void EnvironmentEditor::saveSkyEntitiesToFile()
 {
 	if (_isLoaded)
 	{

@@ -51,7 +51,7 @@ void ScriptEditor::_updateGUI()
 		// Check if user wants to save changes
 		if (_gui.getGlobalScreen()->isAnswerFormConfirmed("exitScriptEditor"))
 		{
-			save();
+			saveScriptsToFile();
 			unload();
 			leftWindow->setActiveScreen("main");
 		}

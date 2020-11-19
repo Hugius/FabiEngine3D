@@ -4,7 +4,7 @@
 #include <sstream>
 #include <filesystem>
 
-void ScriptEditor::_loadScriptsFromFile()
+void ScriptEditor::loadScriptsFromFile()
 {
 	// Error checking
 	if (_currentProjectName == "")
@@ -62,7 +62,7 @@ void ScriptEditor::_loadScriptsFromFile()
 	_isScriptLoadedFromFile = true;
 }
 
-void ScriptEditor::_saveScriptToFile()
+void ScriptEditor::saveScriptsToFile()
 {
 	// Check if project is loaded properly
 	if (_isLoaded)

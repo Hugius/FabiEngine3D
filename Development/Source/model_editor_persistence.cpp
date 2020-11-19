@@ -5,7 +5,7 @@
 #include <sstream>
 #include <algorithm>
 
-void ModelEditor::loadModels()
+void ModelEditor::loadGameEntitiesFromFile()
 {
 	// Error checking
 	if (_currentProjectName == "")
@@ -114,7 +114,7 @@ void ModelEditor::loadModels()
 	}
 }
 
-void ModelEditor::save()
+void ModelEditor::saveGameEntitiesToFile()
 {
 	if (_isLoaded)
 	{

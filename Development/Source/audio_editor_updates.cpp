@@ -48,7 +48,7 @@ void AudioEditor::_updateMainMenu()
 		// Check if user wants to save changes
 		if (_gui.getGlobalScreen()->isAnswerFormConfirmed("exitAudioEditor"))
 		{
-			save();
+			saveAudioEntitiesToFile();
 			unload();
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
 		}

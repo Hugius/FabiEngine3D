@@ -52,7 +52,7 @@ void BillboardEditor::_updateBillboardManagement()
 		// Check if user wants to save changes
 		if (_gui.getGlobalScreen()->isAnswerFormConfirmed("exitBillboardEditor"))
 		{
-			save();
+			saveBillboardEntitiesToFile();
 			_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
 			unload();
 		}

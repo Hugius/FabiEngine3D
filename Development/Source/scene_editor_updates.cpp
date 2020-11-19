@@ -108,7 +108,7 @@ void SceneEditor::_updateMainMenu()
 				// Load selected scene for editing
 				if (_isChoosingScene)
 				{
-					loadScene(_currentSceneName);
+					loadSceneFromFile(_currentSceneName);
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuChoice");
 				}
 				else if (_isDeletingScene) // Prepare deletion confirmation
@@ -184,7 +184,7 @@ void SceneEditor::_updateChoiceMenu()
 			// Check if user wants to save changes
 			if (_gui.getGlobalScreen()->isAnswerFormConfirmed("exitSceneEditor"))
 			{
-				save();
+				saveSceneToFile();
 				clearScene();
 				_fe3d.skyEntity_select("@@engineBackground");
 				_currentSceneName = "";

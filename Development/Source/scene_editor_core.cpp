@@ -292,9 +292,9 @@ void SceneEditor::initializeGUI()
 void SceneEditor::load()
 {
 	// Load environment preview entities
-	_environmentEditor.loadSkyEntities();
-	_environmentEditor.loadTerrainEntities();
-	_environmentEditor.loadWaterEntities();
+	_environmentEditor.loadSkyEntitiesFromFile();
+	_environmentEditor.loadTerrainEntitiesFromFile();
+	_environmentEditor.loadWaterEntitiesFromFile();
 
 	// Load lightsource billboard
 	_fe3d.billBoardEntity_add("@@lightSource", "engine\\textures\\light_source.png", _fe3d.gfx_getDirectionalLightingPosition(),
@@ -302,7 +302,7 @@ void SceneEditor::load()
 	_fe3d.billboardEntity_setDepthMapIncluded("@@lightSource", false);
 
 	// Preview model loading
-	_modelEditor.loadModels();
+	_modelEditor.loadGameEntitiesFromFile();
 	for (auto& modelName : _modelEditor.getModelNames())
 	{
 		// Check if there is a GAME entity present
@@ -313,7 +313,7 @@ void SceneEditor::load()
 	}
 
 	// Preview billboard loading
-	_billboardEditor.loadBillboards();
+	_billboardEditor.loadBillboardEntitiesFromFile();
 	for (auto& billboardName : _billboardEditor.getBillboardNames())
 	{
 		// Check if there is a BILLBOARD entity present
@@ -352,6 +352,7 @@ void SceneEditor::unload()
 	_environmentEditor.unloadWaterEntities();
 
 	// Delete other preview entities
+	_fe3d.audioEntity_deleteAll();
 	_fe3d.gameEntity_deleteAll();
 	_fe3d.billboardEntity_deleteAll();
 	_fe3d.lightEntity_deleteAll();

@@ -59,7 +59,7 @@ vector<ScriptValue> ScriptInterpreter::_processEngineFunctionCall(const string& 
 
 					if (_validateArgumentAmount(arguments, types.size()) && _validateArgumentTypes(arguments, types))
 					{
-						_sceneEditor.loadScene(arguments[0].getString());
+						_sceneEditor.loadSceneFromFile(arguments[0].getString());
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 					}
 				}

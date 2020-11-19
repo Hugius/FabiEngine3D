@@ -11,10 +11,11 @@ public:
 
 	void initializeGUI();
 	void load();
-	void save();
 	void unload();
 	void update();
 	void setCurrentProjectName(const string& projectName);
+	void loadAudioEntitiesFromFile();
+	void saveAudioEntitiesToFile();
 
 	bool isLoaded();
 

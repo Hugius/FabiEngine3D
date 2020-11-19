@@ -73,7 +73,8 @@ void EngineController::_updateMiscellaneous()
 	string activeScreen = _gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID();
 	if (activeScreen == "main" && lastScreen != "main")
 	{
-		camera_load(90.0f, 0.1f, 100.0f, vec3(0.0f));
+		float lastYaw = camera_getYaw();
+		camera_load(90.0f, 0.1f, 100.0f, vec3(0.0f), lastYaw);
 		skyEntity_select("@@engineBackground");
 	}
 	lastScreen = activeScreen;

@@ -11,6 +11,12 @@ public:
 	virtual void initialize() = 0;
 	virtual void update() = 0;
 
+	// Static stuff for easier GUI function calls
+	static inline const float calcTextWidth(const string& text, float charWidth, float maxWidth)
+	{
+		return std::min(static_cast<float>(text.size()) * charWidth, maxWidth);
+	}
+
 protected:
 	FabiEngine3D& _fe3d;
 

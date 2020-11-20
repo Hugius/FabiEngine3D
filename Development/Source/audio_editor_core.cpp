@@ -18,8 +18,8 @@ void AudioEditor::initializeGUI()
 	// Left-viewport: mainWindow - audioEditorMenuMain
 	leftWindow->addScreen("audioEditorMenuMain");
 	leftWindow->getScreen("audioEditorMenuMain")->addButton("addAudio", vec2(0.0f, 0.63f), vec2(GW("Add audio"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Add audio", LVPC::textColor, LVPC::textHoverColor);
-	leftWindow->getScreen("audioEditorMenuMain")->addButton("editAudio", vec2(0.0f, 0.21), vec2(GW("Edit audio"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Edit audio", LVPC::textColor, LVPC::textHoverColor);
-	leftWindow->getScreen("audioEditorMenuMain")->addButton("deleteAudio", vec2(0.0f, -0.21), vec2(GW("Delete audio"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Delete audio", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen("audioEditorMenuMain")->addButton("editAudio", vec2(0.0f, 0.21f), vec2(GW("Edit audio"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Edit audio", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen("audioEditorMenuMain")->addButton("deleteAudio", vec2(0.0f, -0.21f), vec2(GW("Delete audio"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Delete audio", LVPC::textColor, LVPC::textHoverColor);
 	leftWindow->getScreen("audioEditorMenuMain")->addButton("back", vec2(0.0f, -0.63f), vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
 
 	// Left-viewport: mainWindow - audioEditorMenuChoice

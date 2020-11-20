@@ -2,6 +2,8 @@
 
 #include "viewport_controller.hpp"
 
+#define BVPC BottomViewportController
+
 class BottomViewportController final : public ViewportController
 {
 public:

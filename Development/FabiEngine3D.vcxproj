@@ -169,6 +169,9 @@
     <ClInclude Include="Source\bottom_viewport_controller.hpp" />
     <ClInclude Include="Source\engine_gui_scrollinglist.hpp" />
     <ClInclude Include="Source\entity_type.hpp" />
+    <ClInclude Include="Source\math.hpp" />
+    <ClInclude Include="Source\matrix33.hpp" />
+    <ClInclude Include="Source\matrix44.hpp" />
     <ClInclude Include="Source\message_type.hpp" />
     <ClInclude Include="Source\script.hpp" />
     <ClInclude Include="Source\scene_editor.hpp" />
@@ -233,6 +236,9 @@
     <ClInclude Include="Source\timer.hpp" />
     <ClInclude Include="Source\tools.hpp" />
     <ClInclude Include="Source\transformation_type.hpp" />
+    <ClInclude Include="Source\vector2.hpp" />
+    <ClInclude Include="Source\vector3.hpp" />
+    <ClInclude Include="Source\vector4.hpp" />
     <ClInclude Include="Source\viewport_controller.hpp" />
     <ClInclude Include="Source\water_entity.hpp" />
     <ClInclude Include="Source\water_entity_manager.hpp" />
@@ -275,6 +281,8 @@
     <ClCompile Include="Source\bottom_viewport_controller.cpp" />
     <ClCompile Include="Source\engine_gui_global_screen_misc.cpp" />
     <ClCompile Include="Source\engine_gui_scrollinglist.cpp" />
+    <ClCompile Include="Source\matrix33.cpp" />
+    <ClCompile Include="Source\matrix44.cpp" />
     <ClCompile Include="Source\model_editor_persistence.cpp" />
     <ClCompile Include="Source\model_editor_updates_aabb.cpp" />
     <ClCompile Include="Source\model_editor_updates_lighting.cpp" />
@@ -374,6 +382,9 @@
     <ClCompile Include="Source\text_entity_manager.cpp" />
     <ClCompile Include="Source\timer.cpp" />
     <ClCompile Include="Source\top_viewport_controller_misc.cpp" />
+    <ClCompile Include="Source\vector2.cpp" />
+    <ClCompile Include="Source\vector3.cpp" />
+    <ClCompile Include="Source\vector4.cpp" />
     <ClCompile Include="Source\viewport_controller.cpp" />
     <ClCompile Include="Source\water_entity.cpp" />
     <ClCompile Include="Source\water_entity_manager.cpp" />

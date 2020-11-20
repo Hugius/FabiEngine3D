@@ -18,8 +18,8 @@ void EnvironmentEditor::initializeGUI()
 	// Left-viewport: mainWindow - environmentEditorMenu
 	leftWindow->addScreen("environmentEditorMenu");
 	leftWindow->getScreen("environmentEditorMenu")->addButton("sky", vec2(0.0f, 0.63f), vec2(GW("Sky"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Sky", LVPC::textColor, LVPC::textHoverColor);
-	leftWindow->getScreen("environmentEditorMenu")->addButton("terrain", vec2(0.0f, 0.21), vec2(GW("Terrain"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Terrain", LVPC::textColor, LVPC::textHoverColor);
-	leftWindow->getScreen("environmentEditorMenu")->addButton("water", vec2(0.0f, -0.21), vec2(GW("Water"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Water", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen("environmentEditorMenu")->addButton("terrain", vec2(0.0f, 0.21f), vec2(GW("Terrain"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Terrain", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen("environmentEditorMenu")->addButton("water", vec2(0.0f, -0.21f), vec2(GW("Water"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Water", LVPC::textColor, LVPC::textHoverColor);
 	leftWindow->getScreen("environmentEditorMenu")->addButton("back", vec2(0.0f, -0.63f), vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
 	
 	// Left-viewport: mainWindow - skyMenuMain

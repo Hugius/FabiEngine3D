@@ -4,7 +4,6 @@
 #include "logger.hpp"
 
 #include <algorithm>
-#include <GLM/glm.hpp>
 
 const int   RECURSION_COUNT = 256;
 const float RAY_RANGE       = 512;

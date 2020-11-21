@@ -4,9 +4,6 @@
 
 #include <GLEW\\glew.h>
 #include <vector>
-#include <GLM/glm.hpp>
-
-using glm::ivec2;
 
 class OpenGLFramebuffer final
 {
@@ -14,9 +11,9 @@ public:
 	OpenGLFramebuffer() = default;
 	~OpenGLFramebuffer();
 
-	void createMsaaTexture (ivec2 position, ivec2 size, int amount, int aaSamples);
-	void createColorTexture(ivec2 position, ivec2 size, int amount, bool textureClamp);
-	void createDepthTexture(ivec2 position, ivec2 size, int amount);
+	void createMsaaTexture (Ivec2 position, Ivec2 size, int amount, int aaSamples);
+	void createColorTexture(Ivec2 position, Ivec2 size, int amount, bool textureClamp);
+	void createDepthTexture(Ivec2 position, Ivec2 size, int amount);
 	void reset();
 
 	void bind();
@@ -25,7 +22,7 @@ public:
 
 	int getAASamples();
 
-	ivec2 getSize();
+	Ivec2 getSize();
 
 	GLuint getFBO();
 	GLuint getTexture(int ID);
@@ -36,8 +33,8 @@ private:
 	std::vector<GLuint> _textures;
 
 	int _aaSamples = 0;
-	ivec2 _position = ivec2(0);
-	ivec2 _size = ivec2(0);
+	Ivec2 _position = Ivec2(0);
+	Ivec2 _size = Ivec2(0);
 
 	bool _isLoaded = false;
 };

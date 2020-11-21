@@ -2,11 +2,6 @@
 
 #include "base_entity.hpp"
 
-#include "mathematics.hpp"
-
-
-
-
 class GameEntity final : public BaseEntity
 {
 public:

@@ -1,9 +1,6 @@
 #include "shadow_manager.hpp"
 #include "render_bus.hpp"
 
-#include <GLM\\gtc\\matrix_transform.hpp>
-#include <iostream>
-
 void ShadowManager::loadShadows(Vec3 eye, Vec3 center, float size, float reach, bool isFollowingCamera, int interval)
 {
 	_eye    = eye;

@@ -2,11 +2,7 @@
 #include "logger.hpp"
 
 #include <ctime>
-#include <iostream>
 #include <sstream>
-
-#define PI		3.14159265358979323846264338327f
-#define DEG2RAD 0.01745329251994329576923690768489f
 
 using std::to_string;
 
@@ -31,16 +27,6 @@ float Tools::getRandomFloat(float min, float max)
 	
 	//float randomNumber = min + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (max - min)));
 	//return randomNumber;
-}
-
-float Tools::degreeToRadians(float angle)
-{
-	return (angle * DEG2RAD);
-}
-
-float Tools::getPI()
-{
-	return PI;
 }
 
 int Tools::DWORD_to_int(DWORD dword)

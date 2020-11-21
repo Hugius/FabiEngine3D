@@ -1,8 +1,6 @@
 #include "gui_entity_manager.hpp"
 #include "logger.hpp"
 
-#include <iostream>
-
 GuiEntityManager::GuiEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, RenderBus& renderBus) :
 	BaseEntityManager(EntityType::GUI, objLoader, texLoader, renderBus),
 	_centeredOpenglBuffer(new OpenGLBuffer(0.0f, 0.0f, 1.0f, 1.0f, true, false)),

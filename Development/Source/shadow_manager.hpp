@@ -2,11 +2,6 @@
 
 #include "render_bus.hpp"
 
-#include "mathematics.hpp"
-
-
-
-
 class ShadowManager final
 {
 public:

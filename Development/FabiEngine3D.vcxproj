@@ -169,6 +169,7 @@
     <ClInclude Include="Source\bottom_viewport_controller.hpp" />
     <ClInclude Include="Source\engine_gui_scrollinglist.hpp" />
     <ClInclude Include="Source\entity_type.hpp" />
+    <ClInclude Include="Source\ivector2.hpp" />
     <ClInclude Include="Source\mathematics.hpp" />
     <ClInclude Include="Source\matrix33.hpp" />
     <ClInclude Include="Source\matrix44.hpp" />
@@ -281,6 +282,7 @@
     <ClCompile Include="Source\bottom_viewport_controller.cpp" />
     <ClCompile Include="Source\engine_gui_global_screen_misc.cpp" />
     <ClCompile Include="Source\engine_gui_scrollinglist.cpp" />
+    <ClCompile Include="Source\ivector2.cpp" />
     <ClCompile Include="Source\matrix33.cpp" />
     <ClCompile Include="Source\matrix44.cpp" />
     <ClCompile Include="Source\model_editor_persistence.cpp" />

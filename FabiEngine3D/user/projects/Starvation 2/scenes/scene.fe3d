@@ -1,4 +1,4 @@
-SKY hoi user\assets\textures\cube_maps\day_right.png user\assets\textures\cube_maps\day_left.png user\assets\textures\cube_maps\day_top.png user\assets\textures\cube_maps\day_bottom.png user\assets\textures\cube_maps\day_front.png user\assets\textures\cube_maps\day_back.png 0 0.6 1 1 1
+SKY hoi user\assets\textures\cube_maps\day_right.png user\assets\textures\cube_maps\day_left.png user\assets\textures\cube_maps\day_top.png user\assets\textures\cube_maps\day_bottom.png user\assets\textures\cube_maps\day_front.png user\assets\textures\cube_maps\day_back.png 0.01 0.6 1 1 1
 TERRAIN default user\assets\textures\height_maps\terrain.bmp user\assets\textures\diffuse_maps\grass7.png 125 32 0.7 1 user\assets\textures\blend_maps\terrain.png user\assets\textures\diffuse_maps\clay.png user\assets\textures\diffuse_maps\stone8.png user\assets\textures\diffuse_maps\dirt.png 64 25 25 1 0.5
 WATER default user\assets\textures\dudv_maps\water.png user\assets\textures\normal_maps\water_default.png user\assets\textures\displacement_maps\water.png 1 1 1 1 1 0 0 1 325 5 4.5 -25 64 1 -0.00125 0 0.4 256 15
 MODEL 725@hills 0 -10 0 0 0 0 10 26 10 user\assets\models\hills.obj user\assets\textures\diffuse_maps\grass3.png ? ? ? 0 0 1 0 0 0 1 1 0.6 1 1 1 10 ? 0
@@ -7,9 +7,9 @@ DIRECTIONAL_LIGHT 1000 1000 1000 1 1 1 1 200
 CAMERA_FOV 90
 LOD_DISTANCE 75
 EDITOR_SPEED 15
-EDITOR_POSITION 84.6692 11.0203 47.3394
-EDITOR_YAW 347.328
-EDITOR_PITCH -9.83328
+EDITOR_POSITION 84.0648 17.6203 57.5801
+EDITOR_YAW 229.661
+EDITOR_PITCH 33.3334
 GRAPHICS_SHADOWS 1 100 50.000000 50.000000 0.000000 0.000000 0.000000 0.000000 1 0
 GRAPHICS_MOTIONBLUR 1 8
 GRAPHICS_DOF 1 0 100 10

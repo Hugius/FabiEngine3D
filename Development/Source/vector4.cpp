@@ -86,14 +86,19 @@ void Vec4::operator*=(const float & value)
 	this->w *= value;
 }
 
+float Vec4::getMagnitude() const
+{
+	return sqrtf(this->x * this->x + this->y * this->y + this->z * this->z + this->w * this->w);
+}
+
 void Vec4::normalize()
 {
-	if (*this != Vec4(0.0f, 0.0f, 0.0f, 0.0f)) { // Must be non-zero vector
-		this->x /= this->getMagnitude();
-		this->y /= this->getMagnitude();
-		this->z /= this->getMagnitude();
-		this->w /= this->getMagnitude();
-	}
+	float inverseSqrt = 1.0f / this->getMagnitude();
+
+	this->x *= inverseSqrt;
+	this->y *= inverseSqrt;
+	this->z *= inverseSqrt;
+	this->w *= inverseSqrt;
 }
 
 Vec4 Vec4::operator-()
@@ -139,11 +144,6 @@ Vec4 Vec4::operator/(const float & value) const
 Vec4 Vec4::operator*(const float & value) const
 {
 	return Vec4(this->x * value, this->y * value, this->z * value, this->w * value);
-}
-
-float Vec4::getMagnitude() const
-{
-	return sqrtf(this->x * this->x + this->y * this->y + this->z * this->z + this->w * this->w);
 }
 
 bool Vec4::operator==(const Vec4 & other) const

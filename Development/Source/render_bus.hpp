@@ -1,11 +1,9 @@
 #pragma once
 
-#include <GLEW\\glew.h>
 #include "mathematics.hpp"
+
+#include <GLEW\\glew.h>
 #include <string>
-
-
-
 
 using std::string;
 

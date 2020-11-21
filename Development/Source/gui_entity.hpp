@@ -2,13 +2,6 @@
 
 #include "base_entity.hpp"
 
-#include <GLEW\\glew.h>
-#include "mathematics.hpp"
-
-
-
-
-
 class GuiEntity : public BaseEntity
 {
 public:

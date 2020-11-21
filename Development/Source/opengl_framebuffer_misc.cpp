@@ -40,7 +40,7 @@ int OpenGLFramebuffer::getAASamples()
 /////////////////
 // Return size //
 /////////////////
-ivec2 OpenGLFramebuffer::getSize()
+Ivec2 OpenGLFramebuffer::getSize()
 {
 	return _size;
 }

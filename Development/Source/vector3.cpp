@@ -137,12 +137,12 @@ float Vec3::dot(const Vec3 & vector) const
 
 float Vec3::getMagnitude() const
 {
-	return float(sqrt(this->x*this->x + this->y*this->y + this->z*this->z));
+	return sqrt(this->x * this->x + this->y * this->y + this->z * this->z);
 }
 
 void Vec3::normalize()
 {
-	float inverseSqrt = 1.0f / sqrt(this->dot(*this));
+	float inverseSqrt = 1.0f / this->getMagnitude();
 
 	this->x *= inverseSqrt;
 	this->y *= inverseSqrt;

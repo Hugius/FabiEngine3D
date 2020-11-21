@@ -1,7 +1,5 @@
 #include "aabb_entity.hpp"
 
-#include <GLM\\gtc\\matrix_transform.hpp>
-
 void AabbEntity::updateModelMatrix()
 {
 	Matrix44 translationMatrix = Matrix44::createTranslation(_translation.x, _translation.y, _translation.z);

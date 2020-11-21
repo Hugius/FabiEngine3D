@@ -1,7 +1,5 @@
 #include "input_handler.hpp"
 
-#include <iostream>
-
 InputHandler::InputHandler(Timer& timer) :
 	_timer(timer)
 {

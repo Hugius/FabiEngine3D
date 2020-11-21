@@ -28,7 +28,7 @@ struct Matrix44
 	// Creation
 	Matrix44();
 	Matrix44(float value);
-	Matrix44(const Matrix33& mat);
+	Matrix44(const Matrix33& other);
 	Matrix44
 	(
 		float m00, float m01, float m02, float m03,
@@ -39,11 +39,11 @@ struct Matrix44
 
 	// Operators
 	float operator[](unsigned int index) const;
-	Vec4 operator*(const Vec4& vec) const;
-	Vec3 operator*(const Vec3& vec) const;
-	Matrix44 operator+(const Matrix44& mat) const;
-	Matrix44 operator-(const Matrix44& mat) const;
-	Matrix44 operator*(const Matrix44& mat) const;
+	Vec4 operator*(const Vec4& other) const;
+	Vec3 operator*(const Vec3& other) const;
+	Matrix44 operator+(const Matrix44& other) const;
+	Matrix44 operator-(const Matrix44& other) const;
+	Matrix44 operator*(const Matrix44& other) const;
 
 	// Axes
 	Vec3 GetXAxis() const;

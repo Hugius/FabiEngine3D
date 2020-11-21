@@ -1,8 +1,6 @@
 #include "text_entity_manager.hpp"
 #include "logger.hpp"
 
-#include <iostream>
-
 using std::make_shared;
 
 TextEntityManager::TextEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, RenderBus& renderBus) :

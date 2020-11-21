@@ -28,20 +28,20 @@ Config::Config()
 	SDL_GetDesktopDisplayMode(0, &DM);
 	if (_windowFullscreen)
 	{
-		_windowWidth = int(float(DM.w));
-		_windowHeight = int(float(DM.h));
+		_windowWidth  = static_cast<int>(static_cast<float>(DM.w));
+		_windowHeight = static_cast<int>(static_cast<float>(DM.h));
 	}
 	else
 	{
-		_windowWidth = int(float(DM.w) * 0.9f);
-		_windowHeight = int(float(DM.h) * 0.9f);
+		_windowWidth  = static_cast<int>(static_cast<float>(DM.w) * 0.9f);
+		_windowHeight = static_cast<int>(static_cast<float>(DM.h) * 0.9f);
 	}
 
 	// Set viewport dimensions
-	_viewportPosition.x = int(0.125f * float(_windowWidth));
-	_viewportPosition.y = int(0.2f * float(_windowHeight));
-	_viewportSize.x		= int(0.75f * float(_windowWidth));
-	_viewportSize.y		= int(0.75f * float(_windowHeight));
+	_viewportPosition.x = static_cast<int>(0.125f * static_cast<float>(_windowWidth));
+	_viewportPosition.y = static_cast<int>(0.2f * static_cast<float>(_windowHeight));
+	_viewportSize.x		= static_cast<int>(0.75f * static_cast<float>(_windowWidth));
+	_viewportSize.y		= static_cast<int>(0.75f * static_cast<float>(_windowHeight));
 
 	// Set update speed
 	_updateMsPerFrame = 6.94f; // 144 hz
@@ -92,32 +92,32 @@ void Config::_processOption(std::ifstream& file, float& option)
 	iss >> temp >> temp >> option;
 }
 
-const ivec2 Config::getWindowSize() const 
+Ivec2 Config::getWindowSize() const 
 { 
-	return ivec2(_windowWidth, _windowHeight); 
+	return Ivec2(_windowWidth, _windowHeight); 
 }
 
-const int Config::getWindowWidth() const 
+int Config::getWindowWidth() const 
 {
 	return _windowWidth;
 }
 
-const int Config::getWindowHeight() const 
+int Config::getWindowHeight() const 
 {
 	return _windowHeight; 
 }
 
-const ivec2 Config::getVpPos() const
+Ivec2 Config::getVpPos() const
 {
 	return _viewportPosition;
 }
 
-const ivec2 Config::getVpSize() const
+Ivec2 Config::getVpSize() const
 {
 	return _viewportSize;
 }
 
-const float Config::getUpdateMsPerFrame() const
+float Config::getUpdateMsPerFrame() const
 {
 	return _updateMsPerFrame;
 }

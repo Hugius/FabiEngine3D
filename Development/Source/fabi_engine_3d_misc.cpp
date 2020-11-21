@@ -66,12 +66,12 @@ float FabiEngine3D::misc_getFPS()
 
 float FabiEngine3D::misc_getPI()
 {
-	return Tools::getInst().getPI();
+	return Math::getPI();
 }
 
 float FabiEngine3D::misc_degreesToRadians(float angle)
 {
-	return Tools::getInst().degreeToRadians(angle);
+	return Math::degreesToRadians(angle);
 }
 
 void FabiEngine3D::misc_showCursor()
@@ -129,7 +129,7 @@ void FabiEngine3D::misc_disableDebugRendering()
 	_core->_renderBus.setDebugRenderingEnabled(false);
 }
 
-void FabiEngine3D::misc_setCursorPosition(ivec2 pos)
+void FabiEngine3D::misc_setCursorPosition(Ivec2 pos)
 {
 	_core->_mousePicker.update(pos, _core->_terrainEntityManager);
 	_core->_windowManager.setMousePos(pos);
@@ -216,19 +216,9 @@ string FabiEngine3D::misc_getWinExplorerFilename(const string& startingDir, cons
 	return filePath;
 }
 
-string FabiEngine3D::misc_vec2str(ivec2 vec)
+string FabiEngine3D::misc_vec2str(Ivec2 vec)
 {
 	return to_string(vec.x) + " " + to_string(vec.y);
-}
-
-string FabiEngine3D::misc_vec2str(ivec3 vec)
-{
-	return to_string(vec.x) + " " + to_string(vec.y) + " " + to_string(vec.z);
-}
-
-string FabiEngine3D::misc_vec2str(ivec4 vec)
-{
-	return to_string(vec.x) + " " + to_string(vec.y) + " " + to_string(vec.z) + " " + to_string(vec.w);
 }
 
 string FabiEngine3D::misc_vec2str(Vec2 vec)
@@ -287,15 +277,15 @@ Vec2 FabiEngine3D::misc_convertFromNDC(Vec2 pos)
 	return Vec2(pos.x, pos.y);
 }
 
-ivec2 FabiEngine3D::misc_convertToScreenCoords(Vec2 pos)
+Ivec2 FabiEngine3D::misc_convertToScreenCoords(Vec2 pos)
 {
 	float x = float(pos.x) * float(misc_getWindowWidth());
 	float y = float(pos.y) * float(misc_getWindowHeight());
 
-	return ivec2(int(x), int(y));
+	return Ivec2(int(x), int(y));
 }
 
-Vec2 FabiEngine3D::misc_convertFromScreenCoords(ivec2 pos)
+Vec2 FabiEngine3D::misc_convertFromScreenCoords(Ivec2 pos)
 {
 	float x = float(pos.x) / float(misc_getWindowWidth());
 	float y = float(pos.y) / float(misc_getWindowHeight());
@@ -303,24 +293,24 @@ Vec2 FabiEngine3D::misc_convertFromScreenCoords(ivec2 pos)
 	return Vec2(x, y);
 }
 
-ivec2 FabiEngine3D::misc_getCursorPosition()
+Ivec2 FabiEngine3D::misc_getCursorPosition()
 {
-	ivec2 mousePos = _core->_windowManager.getMousePos();
+	Ivec2 mousePos = _core->_windowManager.getMousePos();
 
-	return ivec2(mousePos.x, misc_getWindowHeight() - mousePos.y);
+	return Ivec2(mousePos.x, misc_getWindowHeight() - mousePos.y);
 }
 
-ivec2 FabiEngine3D::misc_getWindowSize()
+Ivec2 FabiEngine3D::misc_getWindowSize()
 {
 	return Config::getInst().getWindowSize();
 }
 
-ivec2 FabiEngine3D::misc_getViewportPosition()
+Ivec2 FabiEngine3D::misc_getViewportPosition()
 {
 	return Config::getInst().getVpPos();
 }
 
-ivec2 FabiEngine3D::misc_getViewportSize()
+Ivec2 FabiEngine3D::misc_getViewportSize()
 {
 	return Config::getInst().getVpSize();
 }
@@ -328,9 +318,9 @@ ivec2 FabiEngine3D::misc_getViewportSize()
 bool FabiEngine3D::misc_isCursorInsideViewport()
 {
 	// Variables
-	ivec2 mousePos = misc_getCursorPosition();
-	ivec2 viewportPos = misc_getViewportPosition();
-	ivec2 viewportSize = misc_getViewportSize();
+	Ivec2 mousePos = misc_getCursorPosition();
+	Ivec2 viewportPos = misc_getViewportPosition();
+	Ivec2 viewportSize = misc_getViewportSize();
 
 	// Checking if cursor is inside viewport
 	if (mousePos.x > viewportPos.x && mousePos.x < viewportPos.x + viewportSize.x)
@@ -347,8 +337,8 @@ bool FabiEngine3D::misc_isCursorInsideViewport()
 bool FabiEngine3D::misc_isCursorInsideWindow()
 {
 	// Variables
-	ivec2 mousePos = misc_getCursorPosition();
-	ivec2 windowSize = misc_getWindowSize();
+	Ivec2 mousePos = misc_getCursorPosition();
+	Ivec2 windowSize = misc_getWindowSize();
 	
 	// Checking if cursor is inside viewport
 	if (mousePos.x > 1 && mousePos.x < windowSize.x - 1)

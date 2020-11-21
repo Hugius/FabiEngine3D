@@ -25,7 +25,7 @@ public:
 	RenderEngine(RenderBus& renderBus, Timer& timer);
 	~RenderEngine() = default;
 
-	void renderEngineLogo(shared_ptr<GuiEntity> entity, ivec2 viewport);
+	void renderEngineLogo(shared_ptr<GuiEntity> entity, Ivec2 viewport);
 	void renderScene(EntityBus* entityBus, CameraManager& camera);
 	void loadMsaaFramebuffer(int quality);
 	void loadShadowFramebuffer(int quality);

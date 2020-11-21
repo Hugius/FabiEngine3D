@@ -6,15 +6,12 @@
 #include <map>
 #include <string>
 #include <SDL\\SDL_ttf.h>
-#include "mathematics.hpp"
 
-#include <GLM/glm.hpp>
 using std::pair;
 using std::array;
 using std::vector;
 using std::string;
 using std::map;
-using glm::ivec3;
 
 class TextureLoader final
 {

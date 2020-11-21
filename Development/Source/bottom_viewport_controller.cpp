@@ -79,7 +79,10 @@ void BottomViewportController::update()
 	if (_fe3d.misc_checkInterval("cameraPosition", 1))
 	{
 		string textID = _statsScreen->getTextfield("cameraPosition")->getEntityID();
-		string text = "Camera position: " + _fe3d.misc_vec2str(ivec3(_fe3d.camera_getPosition().x, _fe3d.camera_getPosition().y, _fe3d.camera_getPosition().z));
+		string text = "Camera position: " + 
+			to_string(static_cast<int>(_fe3d.camera_getPosition().x)) + " " +
+			to_string(static_cast<int>(_fe3d.camera_getPosition().y)) + " " +
+			to_string(static_cast<int>(_fe3d.camera_getPosition().z));
 		_fe3d.textEntity_setTextContent(textID, text, _charSize.x, _charSize.y);
 	}
 
@@ -96,7 +99,10 @@ void BottomViewportController::update()
 	if (_fe3d.misc_checkInterval("cursorPosition", 1))
 	{
 		string textID = _statsScreen->getTextfield("cursorPosition")->getEntityID();
-		string text = "Raycast position: " + _fe3d.misc_vec2str(ivec3(_fe3d.terrainEntity_getMousePoint().x, _fe3d.terrainEntity_getMousePoint().y, _fe3d.terrainEntity_getMousePoint().z));
+		string text = "Raycast position: " +
+			to_string(static_cast<int>(_fe3d.terrainEntity_getMousePoint().x)) + " " +
+			to_string(static_cast<int>(_fe3d.terrainEntity_getMousePoint().y)) + " " +
+			to_string(static_cast<int>(_fe3d.terrainEntity_getMousePoint().z));
 		_fe3d.textEntity_setTextContent(textID, text, _charSize.x, _charSize.y);
 	}
 

@@ -392,16 +392,16 @@ string FabiEngine3D::collision_checkCursorInEntities(const string& ID, const str
 	return closestBoxID;
 }
 
-ivec3 FabiEngine3D::collision_checkEntityWithCameraDirection(const string& ID)
+Direction FabiEngine3D::collision_checkEntityWithCameraDirection(const string& ID)
 {
 	// Calculate direction
-	auto state = _core->_aabbEntityManager.getEntity(ID)->getCollisionDirection();
+	auto direction = _core->_aabbEntityManager.getEntity(ID)->getCollisionDirection();
 
-	// Return collision
-	return ivec3(state == Direction::X, state == Direction::Y, state == Direction::Z);
+	// Return direction
+	return direction;
 }
 
-ivec3 FabiEngine3D::collision_checkEntitiesWithCameraDirection(const string& ID)
+Direction FabiEngine3D::collision_checkEntitiesWithCameraDirection(const string& ID)
 {
 	for (auto entity : _core->_aabbEntityManager.getEntities()) // Loop over AABB entities
 	{
@@ -417,12 +417,12 @@ ivec3 FabiEngine3D::collision_checkEntitiesWithCameraDirection(const string& ID)
 				// Return direction if collides
 				if (direction != Direction::NONE)
 				{
-					return ivec3(direction == Direction::X, direction == Direction::Y, direction == Direction::Z);
+					return direction;
 				}
 			}
 		}
 	}
 
 	// No collision
-	return ivec3(0);
+	return Direction::NONE;
 }

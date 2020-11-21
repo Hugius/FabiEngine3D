@@ -1,8 +1,6 @@
 #include "game_entity_manager.hpp"
 #include "logger.hpp"
 
-#include <iostream>
-
 GameEntityManager::GameEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, RenderBus& renderBus) :
 	BaseEntityManager(EntityType::GAME, objLoader, texLoader, renderBus)
 {

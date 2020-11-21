@@ -1,11 +1,10 @@
 #pragma once
 
 #include "logger.hpp"
+#include "mathematics.hpp"
 
 #include <GLEW\\glew.h>
 #include <map>
-#include "mathematics.hpp"
-#include <GLM\\gtc/type_ptr.hpp>
 
 using std::map;
 

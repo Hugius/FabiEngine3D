@@ -24,15 +24,15 @@ RenderEngine::RenderEngine(RenderBus& renderBus, Timer& timer) :
 	_finalRenderer            ("final_shader.vert",            "final_shader.frag",			   renderBus)
 {
 	// Framebuffers
-	_screenFramebuffer.createColorTexture(ivec2(0), Config::getInst().getVpSize(), 1, false);
-	_msaaFramebuffer.createMsaaTexture(ivec2(0), Config::getInst().getVpSize(), 0, 1);
-	_aaProcessorFramebuffer.createColorTexture(ivec2(0), Config::getInst().getVpSize(), 1, false);
-	_shadowFramebuffer.createDepthTexture(ivec2(0), ivec2(0), 1);
-	_sceneRefractionFramebuffer.createColorTexture(ivec2(0), ivec2(0), 1, false);
-	_sceneReflectionFramebuffer.createColorTexture(ivec2(0), ivec2(0), 1, false);
-	_bloomHdrFramebuffer.createColorTexture(ivec2(0), Config::getInst().getVpSize(), 1, false);
-	_postProcessingFramebuffer.createColorTexture(ivec2(0), Config::getInst().getVpSize(), 1, false);
-	_sceneDepthFramebuffer.createDepthTexture(ivec2(0), Config::getInst().getVpSize(), 1);
+	_screenFramebuffer.createColorTexture(Ivec2(0), Config::getInst().getVpSize(), 1, false);
+	_msaaFramebuffer.createMsaaTexture(Ivec2(0), Config::getInst().getVpSize(), 0, 1);
+	_aaProcessorFramebuffer.createColorTexture(Ivec2(0), Config::getInst().getVpSize(), 1, false);
+	_shadowFramebuffer.createDepthTexture(Ivec2(0), Ivec2(0), 1);
+	_sceneRefractionFramebuffer.createColorTexture(Ivec2(0), Ivec2(0), 1, false);
+	_sceneReflectionFramebuffer.createColorTexture(Ivec2(0), Ivec2(0), 1, false);
+	_bloomHdrFramebuffer.createColorTexture(Ivec2(0), Config::getInst().getVpSize(), 1, false);
+	_postProcessingFramebuffer.createColorTexture(Ivec2(0), Config::getInst().getVpSize(), 1, false);
+	_sceneDepthFramebuffer.createDepthTexture(Ivec2(0), Config::getInst().getVpSize(), 1);
 	_blurRenderer.addFramebuffer(static_cast<int>(BlurType::BLOOM),  true);
 	_blurRenderer.addFramebuffer(static_cast<int>(BlurType::DOF),    true);
 	_blurRenderer.addFramebuffer(static_cast<int>(BlurType::MOTION), true);
@@ -43,7 +43,7 @@ RenderEngine::RenderEngine(RenderBus& renderBus, Timer& timer) :
 	_finalSurface->setMirroredVertically(true);
 }
 
-void RenderEngine::renderEngineLogo(shared_ptr<GuiEntity> entity, ivec2 viewport)
+void RenderEngine::renderEngineLogo(shared_ptr<GuiEntity> entity, Ivec2 viewport)
 {
 	glViewport(0, 0, viewport.x, viewport.y);
 	glClear(GL_COLOR_BUFFER_BIT);
@@ -185,27 +185,27 @@ void RenderEngine::renderScene(EntityBus * entityBus, CameraManager& camera)
 void RenderEngine::loadMsaaFramebuffer(int quality)
 {
 	_msaaFramebuffer.reset();
-	_msaaFramebuffer.createMsaaTexture(ivec2(0), Config::getInst().getVpSize(), 1, quality);
+	_msaaFramebuffer.createMsaaTexture(Ivec2(0), Config::getInst().getVpSize(), 1, quality);
 	_renderBus.setMsaaSampleCount(quality);
 }
 
 void RenderEngine::loadShadowFramebuffer(int quality)
 {
 	_shadowFramebuffer.reset();
-	_shadowFramebuffer.createDepthTexture(ivec2(0), ivec2(quality), 1);
+	_shadowFramebuffer.createDepthTexture(Ivec2(0), Ivec2(quality), 1);
 	_renderBus.setShadowMapSize(quality);
 }
 
 void RenderEngine::loadReflectionFramebuffer(int quality)
 {
 	_sceneReflectionFramebuffer.reset();
-	_sceneReflectionFramebuffer.createColorTexture(ivec2(0), ivec2(quality), 1, false);
+	_sceneReflectionFramebuffer.createColorTexture(Ivec2(0), Ivec2(quality), 1, false);
 	_renderBus.setSceneReflectionMapSize(quality);
 }
 
 void RenderEngine::loadRefractionFramebuffer(int quality)
 {
 	_sceneRefractionFramebuffer.reset();
-	_sceneRefractionFramebuffer.createColorTexture(ivec2(0), ivec2(quality), 1, false);
+	_sceneRefractionFramebuffer.createColorTexture(Ivec2(0), Ivec2(quality), 1, false);
 	_renderBus.setSceneRefractionMapSize(quality);
 }

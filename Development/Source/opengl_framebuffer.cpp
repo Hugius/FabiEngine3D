@@ -3,9 +3,6 @@
 #include "configuration.hpp"
 #include "render_bus.hpp"
 
-#include <vector>
-#include <GLEW\\glew.h>
-
 #define GL_TEXTURE_MAX_ANISOTROPY_EXT     0x84FE
 #define GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT 0x84FF
 
@@ -20,7 +17,7 @@ OpenGLFramebuffer::~OpenGLFramebuffer()
 //////////////////////////////////
 // Create Anti Aliasing texture //
 //////////////////////////////////
-void OpenGLFramebuffer::createMsaaTexture(ivec2 position, ivec2 size, int amount, int aaSamples)
+void OpenGLFramebuffer::createMsaaTexture(Ivec2 position, Ivec2 size, int amount, int aaSamples)
 {
 	// Check if already loaded
 	if (!_isLoaded)
@@ -77,7 +74,7 @@ void OpenGLFramebuffer::createMsaaTexture(ivec2 position, ivec2 size, int amount
 //////////////////////////
 // Create color texture //
 //////////////////////////
-void OpenGLFramebuffer::createColorTexture(ivec2 position, ivec2 size, int amount, bool textureClamp)
+void OpenGLFramebuffer::createColorTexture(Ivec2 position, Ivec2 size, int amount, bool textureClamp)
 {
 	// Check if already loaded
 	if (!_isLoaded)
@@ -154,7 +151,7 @@ void OpenGLFramebuffer::createColorTexture(ivec2 position, ivec2 size, int amoun
 //////////////////////////
 // Create depth texture //
 //////////////////////////
-void OpenGLFramebuffer::createDepthTexture(ivec2 position, ivec2 size, int amount)
+void OpenGLFramebuffer::createDepthTexture(Ivec2 position, Ivec2 size, int amount)
 {
 	// Check if already loaded
 	if (!_isLoaded)

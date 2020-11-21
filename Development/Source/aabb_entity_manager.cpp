@@ -120,19 +120,19 @@ void AabbEntityManager::update(const vector<shared_ptr<GameEntity>>& gameEntitie
 						// Determine rotation direction
 						if (rotationX != 0.0f)
 						{
-							newAabbSize.z = fabsf(sinf(Tools::getInst().degreeToRadians(rotationX)) * parentSize.y);
+							newAabbSize.z = fabsf(sinf(Math::degreesToRadians(rotationX)) * parentSize.y);
 						}
 						else if (rotationY != 0.0f)
 						{
-							newAabbSize.x = fabsf(cosf(Tools::getInst().degreeToRadians(rotationY)) * parentSize.x);
-							newAabbSize.z = fabsf(sinf(Tools::getInst().degreeToRadians(rotationY)) * parentSize.x);
+							newAabbSize.x = fabsf(cosf(Math::degreesToRadians(rotationY)) * parentSize.x);
+							newAabbSize.z = fabsf(sinf(Math::degreesToRadians(rotationY)) * parentSize.x);
 						}
 						else if (rotationZ != 0.0f)
 						{
-							newAabbSize.x = fabsf(sinf(Tools::getInst().degreeToRadians(rotationZ)) * parentSize.y) +
-								fabsf(cosf(Tools::getInst().degreeToRadians(rotationZ)) * parentSize.x);
-							newAabbSize.y = fabsf(sinf(Tools::getInst().degreeToRadians(rotationZ)) * parentSize.x)
-								+ fabsf(cosf(Tools::getInst().degreeToRadians(rotationZ)) * parentSize.y);
+							newAabbSize.x = fabsf(sinf(Math::degreesToRadians(rotationZ)) * parentSize.y) +
+								fabsf(cosf(Math::degreesToRadians(rotationZ)) * parentSize.x);
+							newAabbSize.y = fabsf(sinf(Math::degreesToRadians(rotationZ)) * parentSize.x)
+								+ fabsf(cosf(Math::degreesToRadians(rotationZ)) * parentSize.y);
 						}
 
 						// Update scaling (based on parent rotation)

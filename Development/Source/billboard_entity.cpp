@@ -1,5 +1,4 @@
 #include "billboard_entity.hpp"
-#include "mathematics.hpp"
 
 void BillboardEntity::updateModelMatrix()
 {

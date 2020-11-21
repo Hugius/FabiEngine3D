@@ -57,8 +57,8 @@ void EngineController::_initializeMiscellaneous()
 		textureFolderPath + "default_front.png",
 		textureFolderPath + "default_back.png" });
 	skyEntity_select("@@engineBackground");
-	skyEntity_setLightness("@@engineBackground", 0.65f);
-	skyEntity_setRotationSpeed("@@engineBackground", 0.01f);
+	skyEntity_setLightness("@@engineBackground", 0.6f);
+	skyEntity_setRotationSpeed("@@engineBackground", 0.005f, true);
 
 	// Custom cursor texture
 	guiEntity_add("@@cursor", "engine\\textures\\cursor_default.png", Vec2(0.0f), 0.0f, Vec2(0.075f, 0.075f * misc_getAspectRatio()), true);
@@ -74,7 +74,8 @@ void EngineController::_updateMiscellaneous()
 	if (activeScreen == "main" && lastScreen != "main")
 	{
 		float lastYaw = camera_getYaw();
-		camera_load(90.0f, 0.1f, 100.0f, Vec3(0.0f), lastYaw);
+		float lastPitch = camera_getPitch();
+		camera_load(90.0f, 0.1f, 100.0f, Vec3(0.0f), lastYaw, lastPitch);
 		skyEntity_select("@@engineBackground");
 	}
 	lastScreen = activeScreen;

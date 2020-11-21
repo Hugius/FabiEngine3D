@@ -1,7 +1,8 @@
 #pragma once
 
 #include "vector2.hpp"
-#include "matrix44.hpp"
+
+struct Matrix44;
 
 struct Matrix33
 {
@@ -23,7 +24,7 @@ struct Matrix33
 
 	// Creation
 	Matrix33();
-	Matrix33(const Matrix44& mat);
+	Matrix33(const Matrix44& other);
 	Matrix33(float value);
 	Matrix33
 	(
@@ -33,7 +34,7 @@ struct Matrix33
 	);
 
 	// Operators
-	Matrix33 operator+(const Matrix33& mat) const;
-	Matrix33 operator-(const Matrix33& mat) const;
-	Matrix33 operator*(const Matrix33& mat) const;
+	Matrix33 operator+(const Matrix33& other) const;
+	Matrix33 operator-(const Matrix33& other) const;
+	Matrix33 operator*(const Matrix33& other) const;
 };

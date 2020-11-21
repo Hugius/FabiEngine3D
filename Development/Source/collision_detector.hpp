@@ -10,7 +10,4 @@ public:
 	virtual ~CollisionDetector() = default;
 	
 	Collision check(const AabbEntity& box, Vec3 point, Vec3 pointDifference, Direction& collisionDir);
-
-private:
-
 };

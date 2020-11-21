@@ -1,7 +1,5 @@
 #include "opengl_buffer.hpp"
 
-#include <iostream>
-
 // 3D
 OpenGLBuffer::OpenGLBuffer(BufferType type, float data[], int dataCount)
 {

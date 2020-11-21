@@ -2,13 +2,14 @@
 
 #include "input_types.hpp"
 #include "logger.hpp"
+#include "direction.hpp"
+#include "mathematics.hpp"
 
 #include <array>
 #include <vector>
 #include <map>
 #include <unordered_map>
 #include <string>
-#include "mathematics.hpp"
 #include <memory>
 
 using std::array;
@@ -17,12 +18,6 @@ using std::map;
 using std::unordered_map;
 using std::pair;
 using std::string;
-#include <GLM/glm.hpp>
-
-
-using glm::ivec2;
-using glm::ivec3;
-using glm::ivec4;
 using std::unique_ptr;
 using std::shared_ptr;
 using std::reverse;
@@ -94,7 +89,7 @@ public:
 	void skyEntity_setDiffuseMapFront(const string& ID, const string& texturePath);
 	void skyEntity_setDiffuseMapBack(const string& ID, const string& texturePath);
 	void skyEntity_setLightness(const string& ID, float lightness);
-	void skyEntity_setRotationSpeed(const string& ID, float speed);
+	void skyEntity_setRotationSpeed(const string& ID, float speed, bool allDirections = false);
 	void skyEntity_setColor(const string& ID, Vec3 color);
 
 	// Sky entity interface - getters
@@ -414,8 +409,8 @@ public:
 	bool		  collision_checkEntityWithCamera(const string& ID);
 	const string& collision_checkEntitiesWithCamera(const string& ID);
 	const string& collision_checkEntityWithOthers(const string& ID);
-	ivec3		  collision_checkEntityWithCameraDirection(const string& ID);
-	ivec3		  collision_checkEntitiesWithCameraDirection(const string& ID);
+	Direction	  collision_checkEntityWithCameraDirection(const string& ID);
+	Direction	  collision_checkEntitiesWithCameraDirection(const string& ID);
 
 	// Light entity interface - setters
 	void lightEntity_add(const string& ID, Vec3 position = Vec3(0.0f), Vec3 color = Vec3(1.0f), float intensity = 1.0f, float distanceFactor = 1.0f, bool visible = true);
@@ -696,7 +691,7 @@ public:
 	void misc_disableDebugRendering();
 	void misc_showCursor();
 	void misc_hideCursor();
-	void misc_setCursorPosition(ivec2 pos);
+	void misc_setCursorPosition(Ivec2 pos);
 	void misc_setMainRenderingColor(Vec3 color);
 	void misc_setWindowTitle(const string& title);
 	void misc_clearOBJCache(const string& filePath);
@@ -721,9 +716,7 @@ public:
 	float misc_getPI();
 	float misc_degreesToRadians(float angle);
 	string misc_getWinExplorerFilename(const string& startingDir, const string& fileType);
-	string misc_vec2str(ivec2 vec);
-	string misc_vec2str(ivec3 vec);
-	string misc_vec2str(ivec4 vec);
+	string misc_vec2str(Ivec2 vec);
 	string misc_vec2str(Vec2 vec);
 	string misc_vec2str(Vec3 vec);
 	string misc_vec2str(Vec4 vec);
@@ -732,12 +725,12 @@ public:
 	string misc_getOpenglVersion();
 	Vec2 misc_convertToNDC(Vec2 pos);
 	Vec2 misc_convertFromNDC(Vec2 pos);
-	Vec2 misc_convertFromScreenCoords(ivec2 pos);
-	ivec2 misc_convertToScreenCoords(Vec2 pos);
-	ivec2 misc_getCursorPosition();
-	ivec2 misc_getWindowSize();
-	ivec2 misc_getViewportPosition();
-	ivec2 misc_getViewportSize();
+	Vec2 misc_convertFromScreenCoords(Ivec2 pos);
+	Ivec2 misc_convertToScreenCoords(Vec2 pos);
+	Ivec2 misc_getCursorPosition();
+	Ivec2 misc_getWindowSize();
+	Ivec2 misc_getViewportPosition();
+	Ivec2 misc_getViewportSize();
 	bool misc_isCursorInsideViewport();
 	bool misc_isCursorInsideWindow();
 	bool misc_isDirectory(const string& filePath);

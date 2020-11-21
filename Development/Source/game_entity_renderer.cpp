@@ -29,7 +29,7 @@ void GameEntityRenderer::bind()
 	_shader.uploadUniform("u_spotLightColor",			   _renderBus.getSpotLightColor());
 	_shader.uploadUniform("u_spotLightIntensity",	       _renderBus.getSpotLightIntensity());
 	_shader.uploadUniform("u_maxSpotLightDistance",		   _renderBus.getMaxSpotLightDistance());
-	_shader.uploadUniform("u_maxSpotlightAngle",		   cosf(Tools::getInst().degreeToRadians(_renderBus.getMaxSpotLightAngle())));
+	_shader.uploadUniform("u_maxSpotlightAngle",		   cosf(Math::degreesToRadians(_renderBus.getMaxSpotLightAngle())));
 	_shader.uploadUniform("u_fogMinDistance",			   _renderBus.getFogMinDistance());
 	_shader.uploadUniform("u_fogMaxDistance",			   _renderBus.getFogMaxDistance());
 	_shader.uploadUniform("u_fogDefaultFactor",			   _renderBus.getFogDefaultFactor());

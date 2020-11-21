@@ -514,6 +514,9 @@
     <ClCompile Include="Source\vector4.cpp">
       <Filter>src\Math System</Filter>
     </ClCompile>
+    <ClCompile Include="Source\ivector2.cpp">
+      <Filter>src\Math System</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\obj_loader.hpp">
@@ -841,6 +844,9 @@
       <Filter>src\Math System</Filter>
     </ClInclude>
     <ClInclude Include="Source\mathematics.hpp">
+      <Filter>src\Math System</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ivector2.hpp">
       <Filter>src\Math System</Filter>
     </ClInclude>
   </ItemGroup>

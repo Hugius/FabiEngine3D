@@ -28,6 +28,6 @@ private:
 
 	bool _aabbResponseEnabled    = false;
 	bool _terrainResponseEnabled = false;
-	bool _aboveGround			  = false;
-	bool _underGround			  = false;
+	bool _aboveGround			 = false;
+	bool _underGround			 = false;
 };

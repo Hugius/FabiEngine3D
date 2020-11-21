@@ -1,14 +1,13 @@
 #pragma once
 
+#include "mathematics.hpp"
+
 #include <vector>
 #include <map>
 #include <string>
-#include "mathematics.hpp"
 
 using std::vector;
 using std::string;
-
-
 
 struct ObjPart 
 {

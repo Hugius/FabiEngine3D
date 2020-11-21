@@ -1,9 +1,16 @@
 #include "vector2.hpp"
+#include "ivector2.hpp"
 
 Vec2::Vec2()
 {
 	this->x = 0;
 	this->y = 0;
+}
+
+Vec2::Vec2(const Ivec2& other)
+{
+	this->x = static_cast<float>(other.x);
+	this->y = static_cast<float>(other.y);
 }
 
 Vec2::Vec2(float xy)

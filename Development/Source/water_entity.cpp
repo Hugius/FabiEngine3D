@@ -1,5 +1,3 @@
-#pragma once
-
 #include "water_entity.hpp"
 
 void WaterEntity::setPosition(Vec3 val)

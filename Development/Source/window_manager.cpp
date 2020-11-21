@@ -92,7 +92,7 @@ void WindowManager::setTitle(const string& title)
 	SDL_SetWindowTitle(_window, title.c_str());
 }
 
-void WindowManager::setSize(ivec2 size)
+void WindowManager::setSize(Ivec2 size)
 {
 	SDL_SetWindowSize(_window, size.x, size.y);
 	SDL_SetWindowPosition(_window, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
@@ -161,14 +161,14 @@ void WindowManager::hideMouseCursor()
 	SDL_ShowCursor(false);
 }
 
-void WindowManager::setMousePos(ivec2 pos)
+void WindowManager::setMousePos(Ivec2 pos)
 {
 	SDL_WarpMouseInWindow(_window, pos.x, pos.y);
 }
 
-const ivec2 WindowManager::getMousePos() const
+const Ivec2 WindowManager::getMousePos() const
 {
 	int x, y;
 	SDL_GetMouseState(&x, &y);
-	return ivec2(x, y);
+	return Ivec2(x, y);
 }

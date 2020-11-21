@@ -1,7 +1,5 @@
 #include "gui_entity.hpp"
 
-#include <GLM\\gtc\\matrix_transform.hpp>
-
 void GuiEntity::updateModelMatrix()
 {
 	Matrix44 translationMatrix = Matrix44::createTranslation(_translation.x, _translation.y, 0.0f);

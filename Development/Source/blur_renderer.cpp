@@ -6,8 +6,8 @@ void BlurRenderer::addFramebuffer(int index, bool textureClamp)
 {
 	_horizontalFramebuffers.push_back(new OpenGLFramebuffer());
 	_verticalFramebuffers.push_back(new OpenGLFramebuffer());
-	_horizontalFramebuffers.back()->createColorTexture(ivec2(0), Config::getInst().getVpSize(), 1, textureClamp);
-	_verticalFramebuffers.back()->createColorTexture(ivec2(0), Config::getInst().getVpSize(), 1, textureClamp);
+	_horizontalFramebuffers.back()->createColorTexture(Ivec2(0), Config::getInst().getVpSize(), 1, textureClamp);
+	_verticalFramebuffers.back()->createColorTexture(Ivec2(0), Config::getInst().getVpSize(), 1, textureClamp);
 }
 
 void BlurRenderer::bind()

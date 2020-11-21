@@ -1,16 +1,12 @@
 #pragma once
 
 #include "buffer_type.hpp"
+#include "mathematics.hpp"
 
 #include <vector>
-#include "mathematics.hpp"
 #include <GLEW\\glew.h>
 
 using std::vector;
-
-
-
-
 
 class OpenGLBuffer final
 {

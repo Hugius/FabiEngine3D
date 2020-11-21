@@ -3,11 +3,6 @@
 #include "window_manager.hpp"
 #include "render_bus.hpp"
 
-#include "mathematics.hpp"
-
-
-
-
 class CameraManager final
 {
 public:
@@ -45,8 +40,8 @@ public:
 	void center();
 
 	// Getters
-	const Matrix44 & getViewMatrix()            const;
-	const Matrix44 & getProjectionMatrix()      const;
+	const Matrix44 & getViewMatrix()        const;
+	const Matrix44 & getProjectionMatrix()  const;
 	const Vec3   getPosition()              const;
 	const Vec3   getFront()                 const;
 	const Vec3   getLookat()                const;

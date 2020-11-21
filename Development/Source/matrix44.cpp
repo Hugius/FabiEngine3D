@@ -48,74 +48,74 @@ Matrix44::Matrix44(float value)
 }
 
 // Create a matrix from another smaller matrix
-Matrix44::Matrix44(const Matrix33& mat)
+Matrix44::Matrix44(const Matrix33& other)
 {
-	this->m[0][0] = mat.m[0][0]; this->m[1][0] = mat.m[1][0]; this->m[2][0] = mat.m[2][0]; this->m[3][0] = 0.0f;
-	this->m[0][1] = mat.m[0][1]; this->m[1][1] = mat.m[1][1]; this->m[2][1] = mat.m[2][1]; this->m[3][1] = 0.0f;
-	this->m[0][2] = mat.m[0][2]; this->m[1][2] = mat.m[1][2]; this->m[2][2] = mat.m[2][2]; this->m[3][2] = 0.0f;
+	this->m[0][0] = other.m[0][0]; this->m[1][0] = other.m[1][0]; this->m[2][0] = other.m[2][0]; this->m[3][0] = 0.0f;
+	this->m[0][1] = other.m[0][1]; this->m[1][1] = other.m[1][1]; this->m[2][1] = other.m[2][1]; this->m[3][1] = 0.0f;
+	this->m[0][2] = other.m[0][2]; this->m[1][2] = other.m[1][2]; this->m[2][2] = other.m[2][2]; this->m[3][2] = 0.0f;
 	this->m[0][3] = 0.0f; this->m[1][3] = 0.0f; this->m[2][3] = 0.0f; this->m[3][3] = 1.0f;
 }
 
 // Matrix-vector3 multiplication
-Vec3 Matrix44::operator*(const Vec3& vec) const
+Vec3 Matrix44::operator*(const Vec3& other) const
 {
 	Vec3 newVector;
 
-	newVector.x = this->m[0][0] * vec.x + this->m[1][0] * vec.y + this->m[2][0] * vec.z + this->m[3][0] * 1.0f;
-	newVector.y = this->m[0][1] * vec.x + this->m[1][1] * vec.y + this->m[2][1] * vec.z + this->m[3][1] * 1.0f;
-	newVector.z = this->m[0][2] * vec.x + this->m[1][2] * vec.y + this->m[2][2] * vec.z + this->m[3][2] * 1.0f;
+	newVector.x = this->m[0][0] * other.x + this->m[1][0] * other.y + this->m[2][0] * other.z + this->m[3][0] * 1.0f;
+	newVector.y = this->m[0][1] * other.x + this->m[1][1] * other.y + this->m[2][1] * other.z + this->m[3][1] * 1.0f;
+	newVector.z = this->m[0][2] * other.x + this->m[1][2] * other.y + this->m[2][2] * other.z + this->m[3][2] * 1.0f;
 
 	return newVector;
 
 }
 
 // Matrix-vector4 multiplication
-Vec4 Matrix44::operator*(const Vec4& vec) const
+Vec4 Matrix44::operator*(const Vec4& other) const
 {
 	Vec4 newVector;
 
-	newVector.x = this->m[0][0] * vec.x + this->m[1][0] * vec.y + this->m[2][0] * vec.z + this->m[3][0] * vec.w;
-	newVector.y = this->m[0][1] * vec.x + this->m[1][1] * vec.y + this->m[2][1] * vec.z + this->m[3][1] * vec.w;
-	newVector.z = this->m[0][2] * vec.x + this->m[1][2] * vec.y + this->m[2][2] * vec.z + this->m[3][2] * vec.w;
-	newVector.w = this->m[0][3] * vec.x + this->m[1][3] * vec.y + this->m[2][3] * vec.z + this->m[3][3] * vec.w;
+	newVector.x = this->m[0][0] * other.x + this->m[1][0] * other.y + this->m[2][0] * other.z + this->m[3][0] * other.w;
+	newVector.y = this->m[0][1] * other.x + this->m[1][1] * other.y + this->m[2][1] * other.z + this->m[3][1] * other.w;
+	newVector.z = this->m[0][2] * other.x + this->m[1][2] * other.y + this->m[2][2] * other.z + this->m[3][2] * other.w;
+	newVector.w = this->m[0][3] * other.x + this->m[1][3] * other.y + this->m[2][3] * other.z + this->m[3][3] * other.w;
 
 	return newVector;
 
 }
 
 // Matrix-matrix addition
-Matrix44 Matrix44::operator+(const Matrix44& mat) const
+Matrix44 Matrix44::operator+(const Matrix44& other) const
 {
 	Matrix44 newMatrix;
 
 	for (int i = 0; i < 16; i++) {
-		newMatrix.f[i] = this->f[i] + mat.f[i];
+		newMatrix.f[i] = this->f[i] + other.f[i];
 	}
 
 	return newMatrix;
 }
 
 // Matrix-matrix subtraction
-Matrix44 Matrix44::operator-(const Matrix44& mat) const
+Matrix44 Matrix44::operator-(const Matrix44& other) const
 {
 	Matrix44 newMatrix;
 
 	for (int i = 0; i < 16; i++) {
-		newMatrix.f[i] = this->f[i] - mat.f[i];
+		newMatrix.f[i] = this->f[i] - other.f[i];
 	}
 
 	return newMatrix;
 }
 
 // Matrix-matrix multiplication
-Matrix44 Matrix44::operator*(const Matrix44& mat) const
+Matrix44 Matrix44::operator*(const Matrix44& other) const
 {
 	Matrix44 newMatrix(0.0f);
 
 	for (int column = 0; column < 4; column++) {
 		for (int row = 0; row < 4; row++) {
 			for (int inner = 0; inner < 4; inner++) {
-				newMatrix.m[row][column] += this->m[inner][column] * mat.m[row][inner];
+				newMatrix.m[row][column] += this->m[inner][column] * other.m[row][inner];
 			}
 		}
 	}
@@ -177,58 +177,132 @@ float Matrix44::getDeterminant() const
 bool Matrix44::invert()
 {
 	float determinant = this->getDeterminant();
-	if (determinant == 0.0f) // Check if determinant is valid
-	{ 
-		// Unsuccessful inversion
+
+	// Check if determinant is valid
+	if (determinant == 0.0f)
+	{
 		return false;
 	}
-	else 
+	else
 	{
-		// Declare variables
 		Matrix44 newMatrix;
-		float a = m[0][0], b = m[0][1], c = m[0][2], d = m[0][3];
-		float e = m[1][0], f = m[1][1], g = m[1][2], h = m[1][3];
-		float i = m[2][0], j = m[2][1], k = m[2][2], l = m[2][3];
-		float mm = m[3][0], n = m[3][1], o = m[3][2], p = m[3][3];
 
-		// Calculate matrix of minors
-		newMatrix.m[0][0] = (f * (k*p - o * l) - g * (j*p - n * l) + h * (j*o - n * k));
-		newMatrix.m[0][1] = (e * (k*p - o * l) - g * (i*p - mm * l) + h * (i*o - mm * k));
-		newMatrix.m[0][2] = (e * (j*p - n * l) - f * (i*p - mm * l) + h * (i*n - mm * j));
-		newMatrix.m[0][3] = (e * (j*o - n * k) - f * (i*o - mm * k) + g * (i*n - mm * j));
+		newMatrix.f[0] = this->f[5] * this->f[10] * this->f[15] -
+			this->f[5] * this->f[11] * this->f[14] -
+			this->f[9] * this->f[6] * this->f[15] +
+			this->f[9] * this->f[7] * this->f[14] +
+			this->f[13] * this->f[6] * this->f[11] -
+			this->f[13] * this->f[7] * this->f[10];
 
-		newMatrix.m[1][0] = (b * (k*p - o * l) - c * (j*p - n * l) + d * (j*o - n * k));
-		newMatrix.m[1][1] = (a * (k*p - o * l) - c * (i*p - mm * l) + d * (i*o - mm * k));
-		newMatrix.m[1][2] = (a * (j*p - n * l) - b * (i*p - mm * l) + d * (i*n - mm * j));
-		newMatrix.m[1][3] = (a * (j*o - n * k) - b * (i*o - mm * k) + c * (i*n - mm * j));
+		newMatrix.f[4] = -this->f[4] * this->f[10] * this->f[15] +
+			this->f[4] * this->f[11] * this->f[14] +
+			this->f[8] * this->f[6] * this->f[15] -
+			this->f[8] * this->f[7] * this->f[14] -
+			this->f[12] * this->f[6] * this->f[11] +
+			this->f[12] * this->f[7] * this->f[10];
 
-		newMatrix.m[2][0] = (b * (g*p - o * h) - c * (f*p - n * h) + d * (f*o - n * g));
-		newMatrix.m[2][1] = (a * (g*p - o * h) - c * (e*p - mm * h) + d * (e*o - mm * g));
-		newMatrix.m[2][2] = (a * (f*p - n * h) - b * (e*p - mm * h) + d * (e*n - mm * f));
-		newMatrix.m[2][3] = (a * (f*o - n * g) - b * (e*o - mm * g) + c * (e*n - mm * f));
+		newMatrix.f[8] = this->f[4] * this->f[9] * this->f[15] -
+			this->f[4] * this->f[11] * this->f[13] -
+			this->f[8] * this->f[5] * this->f[15] +
+			this->f[8] * this->f[7] * this->f[13] +
+			this->f[12] * this->f[5] * this->f[11] -
+			this->f[12] * this->f[7] * this->f[9];
 
-		newMatrix.m[3][0] = (b * (g*l - k * h) - c * (f*l - j * h) + d * (f*k - j * g));
-		newMatrix.m[3][1] = (a * (g*l - k * h) - c * (e*l - i * h) + d * (e*k - i * g));
-		newMatrix.m[3][2] = (a * (f*l - j * h) - b * (e*l - i * h) + d * (e*j - f * i));
-		newMatrix.m[3][3] = (a * (f*k - j * g) - b * (e*k - i * g) + c * (e*j - f * i));
+		newMatrix.f[12] = -this->f[4] * this->f[9] * this->f[14] +
+			this->f[4] * this->f[10] * this->f[13] +
+			this->f[8] * this->f[5] * this->f[14] -
+			this->f[8] * this->f[6] * this->f[13] -
+			this->f[12] * this->f[5] * this->f[10] +
+			this->f[12] * this->f[6] * this->f[9];
 
-		// Calculate matrix of cofactors
+		newMatrix.f[1] = -this->f[1] * this->f[10] * this->f[15] +
+			this->f[1] * this->f[11] * this->f[14] +
+			this->f[9] * this->f[2] * this->f[15] -
+			this->f[9] * this->f[3] * this->f[14] -
+			this->f[13] * this->f[2] * this->f[11] +
+			this->f[13] * this->f[3] * this->f[10];
+
+		newMatrix.f[5] = this->f[0] * this->f[10] * this->f[15] -
+			this->f[0] * this->f[11] * this->f[14] -
+			this->f[8] * this->f[2] * this->f[15] +
+			this->f[8] * this->f[3] * this->f[14] +
+			this->f[12] * this->f[2] * this->f[11] -
+			this->f[12] * this->f[3] * this->f[10];
+
+		newMatrix.f[9] = -this->f[0] * this->f[9] * this->f[15] +
+			this->f[0] * this->f[11] * this->f[13] +
+			this->f[8] * this->f[1] * this->f[15] -
+			this->f[8] * this->f[3] * this->f[13] -
+			this->f[12] * this->f[1] * this->f[11] +
+			this->f[12] * this->f[3] * this->f[9];
+
+		newMatrix.f[13] = this->f[0] * this->f[9] * this->f[14] -
+			this->f[0] * this->f[10] * this->f[13] -
+			this->f[8] * this->f[1] * this->f[14] +
+			this->f[8] * this->f[2] * this->f[13] +
+			this->f[12] * this->f[1] * this->f[10] -
+			this->f[12] * this->f[2] * this->f[9];
+
+		newMatrix.f[2] = this->f[1] * this->f[6] * this->f[15] -
+			this->f[1] * this->f[7] * this->f[14] -
+			this->f[5] * this->f[2] * this->f[15] +
+			this->f[5] * this->f[3] * this->f[14] +
+			this->f[13] * this->f[2] * this->f[7] -
+			this->f[13] * this->f[3] * this->f[6];
+
+		newMatrix.f[6] = -this->f[0] * this->f[6] * this->f[15] +
+			this->f[0] * this->f[7] * this->f[14] +
+			this->f[4] * this->f[2] * this->f[15] -
+			this->f[4] * this->f[3] * this->f[14] -
+			this->f[12] * this->f[2] * this->f[7] +
+			this->f[12] * this->f[3] * this->f[6];
+
+		newMatrix.f[10] = this->f[0] * this->f[5] * this->f[15] -
+			this->f[0] * this->f[7] * this->f[13] -
+			this->f[4] * this->f[1] * this->f[15] +
+			this->f[4] * this->f[3] * this->f[13] +
+			this->f[12] * this->f[1] * this->f[7] -
+			this->f[12] * this->f[3] * this->f[5];
+
+		newMatrix.f[14] = -this->f[0] * this->f[5] * this->f[14] +
+			this->f[0] * this->f[6] * this->f[13] +
+			this->f[4] * this->f[1] * this->f[14] -
+			this->f[4] * this->f[2] * this->f[13] -
+			this->f[12] * this->f[1] * this->f[6] +
+			this->f[12] * this->f[2] * this->f[5];
+
+		newMatrix.f[3] = -this->f[1] * this->f[6] * this->f[11] +
+			this->f[1] * this->f[7] * this->f[10] +
+			this->f[5] * this->f[2] * this->f[11] -
+			this->f[5] * this->f[3] * this->f[10] -
+			this->f[9] * this->f[2] * this->f[7] +
+			this->f[9] * this->f[3] * this->f[6];
+
+		newMatrix.f[7] = this->f[0] * this->f[6] * this->f[11] -
+			this->f[0] * this->f[7] * this->f[10] -
+			this->f[4] * this->f[2] * this->f[11] +
+			this->f[4] * this->f[3] * this->f[10] +
+			this->f[8] * this->f[2] * this->f[7] -
+			this->f[8] * this->f[3] * this->f[6];
+
+		newMatrix.f[11] = -this->f[0] * this->f[5] * this->f[11] +
+			this->f[0] * this->f[7] * this->f[9] +
+			this->f[4] * this->f[1] * this->f[11] -
+			this->f[4] * this->f[3] * this->f[9] -
+			this->f[8] * this->f[1] * this->f[7] +
+			this->f[8] * this->f[3] * this->f[5];
+
+		newMatrix.f[15] = this->f[0] * this->f[5] * this->f[10] -
+			this->f[0] * this->f[6] * this->f[9] -
+			this->f[4] * this->f[1] * this->f[10] +
+			this->f[4] * this->f[2] * this->f[9] +
+			this->f[8] * this->f[1] * this->f[6] -
+			this->f[8] * this->f[2] * this->f[5];
+
+		// Multiply resulting matrix by (1 / determinant)
 		for (int row = 0; row < 4; row++) {
 			for (int column = 0; column < 4; column++) {
-				if ((row + column) % 2 == 1) {
-					newMatrix.m[row][column] = -newMatrix.m[row][column];
-				}
-			}
-		}
-
-		// Calculate matrix adjugate
-		newMatrix.transpose();
-
-		// Multiply resulting matrix by 1 / determinant
-		for (int row = 0; row < 4; row++) {
-			for (int column = 0; column < 4; column++) {
-				newMatrix.m[row][column] = newMatrix.m[row][column] * (1.0f / determinant);
-				m[row][column] = newMatrix.m[row][column];
+				m[row][column] = newMatrix.m[row][column] * (1.0f / determinant);
 			}
 		}
 
@@ -245,7 +319,6 @@ void Matrix44::transpose()
 	for (int i = 0; i < 16; i++) {
 		tempMatrix.f[i] = this->f[i];
 	}
-
 
 	// Swap rows and columns
 	for (int r = 0; r < 4; r++) {
@@ -353,10 +426,10 @@ Matrix44 Matrix44::createOrtho(float left, float right, float bottom, float top,
 
 	newMatrix.m[0][0] = 2.0f / (right - left);
 	newMatrix.m[1][1] = 2.0f / (top - bottom);
-	newMatrix.m[2][2] = -2.0f / (farZ - nearZ);
+	newMatrix.m[2][2] = -(2.0f / (farZ - nearZ));
 	newMatrix.m[3][0] = -((right + left) / (right - left));
 	newMatrix.m[3][1] = -((top + bottom) / (top - bottom));
-	newMatrix.m[3][2] = -(4 * (nearZ) / (farZ - nearZ));
+	newMatrix.m[3][2] = -((farZ + nearZ) / (farZ - nearZ));
 
 	return newMatrix;
 };

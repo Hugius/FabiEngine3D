@@ -1,12 +1,9 @@
 #pragma once
 
-#include <fstream>
 #include "mathematics.hpp"
-#include <sstream>
-#include <GLM/glm.hpp>
 
-using glm::ivec2;
-using glm::ivec4;
+#include <fstream>
+#include <sstream>
 
 class Config
 {
@@ -23,12 +20,12 @@ public:
 	void operator=(Config const&) = delete;
 
 	// Interface functions
-	const ivec2 getWindowSize()        const;
-	const int   getWindowWidth()       const;
-	const int   getWindowHeight()      const;
-	const ivec2 getVpPos()			   const;
-	const ivec2 getVpSize()			   const;
-	const float getUpdateMsPerFrame()  const;
+	Ivec2 getWindowSize()        const;
+	int   getWindowWidth()       const;
+	int   getWindowHeight()      const;
+	Ivec2 getVpPos()			 const;
+	Ivec2 getVpSize()			 const;
+	float getUpdateMsPerFrame()  const;
 
 private:
 	Config();
@@ -42,7 +39,7 @@ private:
 	bool  _windowFullscreen = false;
 	int   _windowWidth = 0;
 	int   _windowHeight = 0;
-	ivec2 _viewportPosition = ivec2(0);
-	ivec2 _viewportSize = ivec2(0);
+	Ivec2 _viewportPosition = Ivec2(0);
+	Ivec2 _viewportSize = Ivec2(0);
 	float _updateMsPerFrame = 0.0f;
 };

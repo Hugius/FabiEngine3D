@@ -1,12 +1,11 @@
 #pragma once
 
 #include "base_entity.hpp"
+#include "direction.hpp"
 
-#include "mathematics.hpp"
 #include <array>
 
 using std::array;
-
 
 class SkyEntity final : public BaseEntity
 {
@@ -21,6 +20,7 @@ public:
 	void setOriginalLightness(float val);
 	void setLightness(float val);
 	void setRotationSpeed(float val);
+	void rotateAllDirections(bool val);
 
 	const array<string, 6>& getDiffuseMapPaths() const;
 	const Matrix44& getRotationMatrix()			 const;
@@ -38,6 +38,8 @@ private:
 	Vec3 _color = Vec3(1.0f);
 
 	GLuint _cubeMap = 0;
+
+	bool _rotateAllDirections = false;
 
 	float _originalLightness = 1.0f;
 	float _lightness		 = 1.0f;

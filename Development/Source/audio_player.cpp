@@ -2,7 +2,6 @@
 #include "logger.hpp"
 #include "configuration.hpp"
 
-#include <GLM\\gtc\\matrix_transform.hpp>
 #include <algorithm>
 
 AudioPlayer::AudioPlayer()

@@ -13,13 +13,11 @@
 #include <string>
 #include <vector>
 #include <sstream>
-#include "mathematics.hpp"
 #include <type_traits>
 
 using std::vector;
 using std::stringstream;
 using std::string;
-
 
 class Logger final
 {

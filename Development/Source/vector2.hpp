@@ -2,6 +2,8 @@
 
 #include <cmath>
 
+struct Ivec2;
+
 struct Vec2
 {
 	// Data access
@@ -18,6 +20,7 @@ struct Vec2
 
 	// Creation
 	Vec2();
+	Vec2(const Ivec2& other);
 	Vec2(float xy);
 	Vec2(float x, float y);
 

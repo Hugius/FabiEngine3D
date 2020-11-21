@@ -2,12 +2,6 @@
 
 #include "base_entity.hpp"
 
-#include "mathematics.hpp"
-#include <GLM\\gtc\\matrix_transform.hpp>
-
-using glm::ivec2;
-
-
 class BillboardEntity final: public BaseEntity
 {
 public:

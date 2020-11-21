@@ -2,8 +2,6 @@
 #include "render_bus.hpp"
 #include "logger.hpp"
 
-#include <iostream>
-
 WaterEntityManager::WaterEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, RenderBus& renderBus) :
 	BaseEntityManager(EntityType::WATER, objLoader, texLoader, renderBus)
 {

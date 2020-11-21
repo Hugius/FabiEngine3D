@@ -37,16 +37,6 @@ void ScriptEditor::load()
 	_fe3d.gfx_enableNormalMapping();
 	_fe3d.gfx_enablePointLighting();
 
-	// Background
-	_fe3d.gameEntity_add("background", "engine\\models\\plane.obj", Vec3(0.0f), Vec3(90.0f, 0.0f, 0.0f), Vec3(static_cast<float>(_maxLineAmount) * 1.1f));
-	_fe3d.gameEntity_setDiffuseMap("background", "engine\\textures\\brick.png");
-	_fe3d.gameEntity_setNormalMap("background", "engine\\textures\\brick_normal.png");
-	_fe3d.gameEntity_setSpecularLighted("background", true);
-	_fe3d.gameEntity_setSpecularFactor("background", 32.0f);
-	_fe3d.gameEntity_setSpecularIntensity("background", 1.5f);
-	_fe3d.gameEntity_setUvRepeat("background", (static_cast<float>(_maxLineAmount) * 1.1f) * 0.25f);
-	_fe3d.gameEntity_setNormalMapped("background", true);
-
 	// Selection light
 	_fe3d.lightEntity_add("@@selectionLight", Vec3(0.0f), Vec3(0.0f, 1.0f, 0.0f), 2.5f, 10.0f, false);
 

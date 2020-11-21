@@ -1,14 +1,7 @@
 #include "camera_manager.hpp"
 #include "configuration.hpp"
-#include "render_bus.hpp"
-#include "mathematics.hpp"
-#include "matrix44.hpp"
 
-#include <GLM\\gtc\\matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
-#include <GLM/glm.hpp>
 #include <algorithm>
-#include <iostream>
 
 CameraManager::CameraManager(RenderBus& renderBus) :
 	_renderBus(renderBus)
@@ -46,8 +39,8 @@ void CameraManager::reset()
 void CameraManager::update(WindowManager & windowManager)
 {
 	// Variables
-	ivec2 currentMousePos = windowManager.getMousePos();
-	static ivec2 lastMousePos = currentMousePos;
+	Ivec2 currentMousePos = windowManager.getMousePos();
+	static Ivec2 lastMousePos = currentMousePos;
 
 	if (_isFirstPersonViewEnabled)
 	{

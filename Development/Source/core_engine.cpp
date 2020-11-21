@@ -1,5 +1,6 @@
 #include "core_engine.hpp"
 #include "configuration.hpp"
+
 #include <ctime>
 #include <ratio>
 #include <chrono>
@@ -58,9 +59,9 @@ void CoreEngine::_setupApplication()
 	// Get logo resolution
 	SDL_DisplayMode DM;
 	SDL_GetDesktopDisplayMode(0, &DM);
-	float width = float(DM.w);
+	float width = float();
 	float height = float(DM.h);
-	ivec2 logoResolution = ivec2(int(width * 0.4f), int(height * 0.2f));
+	Ivec2 logoResolution = Ivec2(int(width * 0.4f), int(height * 0.2f));
 
 	// Window properties & rendering
 	Vec3 keyingColor = Vec3(0.2f);
@@ -77,7 +78,7 @@ void CoreEngine::_setupApplication()
 
 	// Vignettte
 	Vec2 pos = _fe3d.misc_convertToNDC(_fe3d.misc_convertFromScreenCoords(Config::getInst().getVpPos()));
-	Vec2 size = ((Vec2(Config::getInst().getVpSize().x, Config::getInst().getVpSize().y) / Vec2(Config::getInst().getWindowSize().x, Config::getInst().getWindowSize().y)) * 2.0f) + Vec2(0.0f, 0.005f);
+	Vec2 size = ((Vec2(Config::getInst().getVpSize()) / Vec2(Config::getInst().getWindowSize())) * 2.0f) + Vec2(0.0f, 0.005f);
 	_fe3d.guiEntity_add("@vignette", "engine\\textures\\vignette.png", pos, 0.0f, size, false);
 
 	// Initialize engine controller
@@ -105,16 +106,16 @@ void CoreEngine::_updateApplication()
 	_cameraManager.update(_windowManager);
 
 	// Calculate viewport position Y offset, because GUI borders are not all of the same size
-	Vec2 offset = Vec2(Config::getInst().getVpPos().x, Config::getInst().getWindowSize().y - (Config::getInst().getVpPos().y + Config::getInst().getVpSize().y));
+	Ivec2 offset = Ivec2(Config::getInst().getVpPos().x, Config::getInst().getWindowSize().y - (Config::getInst().getVpPos().y + Config::getInst().getVpSize().y));
 	
 	// Apply Y offset to mouse position
-	Vec2 mousePos = Vec2(_windowManager.getMousePos().x, _windowManager.getMousePos().y) - offset;
+	Vec2 mousePos = Vec2(_windowManager.getMousePos()) - Vec2(offset);
 
 	// Convert fullscreen coords to viewport coords
-	mousePos = (mousePos / Vec2(Config::getInst().getVpSize().x, Config::getInst().getVpSize().y)) * Vec2(Config::getInst().getWindowSize().x, Config::getInst().getWindowSize().y);
-
+	mousePos = (mousePos / Vec2(Config::getInst().getVpSize())) * Vec2(Config::getInst().getWindowSize());
+	
 	// Update physics
-	_mousePicker.update(ivec2(mousePos.x, mousePos.y), _terrainEntityManager);
+	_mousePicker.update(Ivec2(mousePos), _terrainEntityManager);
 	_collisionResolver.update(_aabbEntityManager.getEntities(), _terrainEntityManager, _cameraManager);
 
 	// 3D entity updates

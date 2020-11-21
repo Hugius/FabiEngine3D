@@ -1,8 +1,10 @@
 #include "mouse_picker.hpp"
 #include "render_bus.hpp"
 #include "configuration.hpp"
+#include "logger.hpp"
 
 #include <algorithm>
+#include <GLM/glm.hpp>
 
 const int   RECURSION_COUNT = 256;
 const float RAY_RANGE       = 512;
@@ -13,10 +15,10 @@ MousePicker::MousePicker(RenderBus& renderBus) :
 
 }
 
-void MousePicker::update(ivec2 mousePos, TerrainEntityManager& terrainManager)
+void MousePicker::update(Ivec2 mousePos, TerrainEntityManager& terrainManager)
 {
 	// Simple raycasting
-	Vec3 mouseRay = _getMouseRay(ivec2(mousePos.x, Config::getInst().getWindowHeight() - mousePos.y));
+	Vec3 mouseRay = _getMouseRay(Ivec2(mousePos.x, Config::getInst().getWindowHeight() - mousePos.y));
 	_ray = mouseRay;
 
 	// Check if a terrain is selected
@@ -72,7 +74,7 @@ float MousePicker::checkCursorInBox(Vec3 lb, Vec3 rt, Vec3 cameraPos)
 	return tmin;
 }
 
-Vec3 MousePicker::_getMouseRay(ivec2 mousePos)
+Vec3 MousePicker::_getMouseRay(Ivec2 mousePos)
 {
 	Vec2 NDC = _converToNDC(mousePos);
 	Vec4 clipCoords = Vec4(NDC.x, NDC.y, -1.0f, 1.0f);
@@ -81,7 +83,7 @@ Vec3 MousePicker::_getMouseRay(ivec2 mousePos)
 	return worldCoords;
 }
 
-Vec2 MousePicker::_converToNDC(ivec2 val)
+Vec2 MousePicker::_converToNDC(Ivec2 val)
 {
 	float x = ((2.0f * val.x) / Config::getInst().getWindowWidth ()) - 1.0f;
 	float y = ((2.0f * val.y) / Config::getInst().getWindowHeight()) - 1.0f;
@@ -90,17 +92,17 @@ Vec2 MousePicker::_converToNDC(ivec2 val)
 
 Vec4 MousePicker::_convertToViewSpace(Vec4 val)
 {
-	Matrix44 inversedProjection = _renderBus.getProjectionMatrix();
-	inversedProjection.invert();
-	Vec4 viewCoords = inversedProjection * val;
+	Matrix44 invertedProjection = _renderBus.getProjectionMatrix();
+	invertedProjection.invert();
+	Vec4 viewCoords = invertedProjection * val;
 	return Vec4(viewCoords.x, viewCoords.y, -1.0f, 0.0f);
 }
 
 Vec3 MousePicker::_convertToWorldSpace(Vec4 val)
 {
-	Matrix44 inversedView = _renderBus.getViewMatrix();
-	inversedView.invert();
-	Vec4 worldCoords = inversedView * val;
+	Matrix44 invertedView = _renderBus.getViewMatrix();
+	invertedView.invert();
+	Vec4 worldCoords = invertedView * val;
 	worldCoords.normalize();
 	return Vec3(worldCoords.x, worldCoords.y, worldCoords.z);
 }

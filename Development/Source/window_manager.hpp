@@ -1,12 +1,9 @@
 #pragma once
 
-#include <SDL\\SDL.h>
 #include "mathematics.hpp"
+
+#include <SDL\\SDL.h>
 #include <string>
-#include <GLM/glm.hpp>
-
-using glm::ivec2;
-
 
 class WindowManager final
 {
@@ -15,7 +12,7 @@ public:
 	~WindowManager();
 	
 	void setTitle(const std::string & title);
-	void setSize(ivec2 size);
+	void setSize(Ivec2 size);
 	void setOpacity(float value);
 	void makeColorOpaque(Vec3 color);
 	void showBorder();
@@ -27,9 +24,9 @@ public:
 	void hideWindow();
 	void showMouseCursor();
 	void hideMouseCursor();
-	void setMousePos(ivec2 pos);
+	void setMousePos(Ivec2 pos);
 
-	const ivec2 getMousePos() const;
+	const Ivec2 getMousePos() const;
 
 private:
 	SDL_Window * _window = nullptr;

@@ -31,7 +31,7 @@ void GuiEntityRenderer::render(const shared_ptr<GuiEntity> entity)
 		_shader.uploadUniform("u_mirrorHor", entity->isMirroredHorizonally());
 		_shader.uploadUniform("u_mirrorVer", entity->isMirroredVertically());
 		_shader.uploadUniform("u_color", entity->getColor());
-		_shader.uploadUniform("u_windowSize", Vec2(Config::getInst().getWindowSize().x, Config::getInst().getWindowSize().y));
+		_shader.uploadUniform("u_windowSize", Vec2(Config::getInst().getWindowSize()));
 		_shader.uploadUniform("u_minPosition", entity->getMinPosition());
 		_shader.uploadUniform("u_maxPosition", entity->getMaxPosition());
 		_shader.uploadUniform("u_alpha", entity->getAlpha());

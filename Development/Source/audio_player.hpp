@@ -3,13 +3,11 @@
 #include "audio_chunk.hpp"
 #include "audio_music.hpp"
 #include "camera_manager.hpp"
+#include "mathematics.hpp"
 
 #include <map>
 #include <string>
 #include <vector>
-#include "mathematics.hpp"
-
-
 
 using std::string;
 

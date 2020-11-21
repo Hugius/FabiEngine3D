@@ -1,8 +1,5 @@
 #include "game_entity.hpp"
 
-#include <GLM\\gtc\\matrix_transform.hpp>
-#include <iostream>
-
 void GameEntity::updateModelMatrix()
 {
 	Matrix44 translationMatrix = Matrix44::createTranslation(_translation.x, _translation.y, _translation.z);

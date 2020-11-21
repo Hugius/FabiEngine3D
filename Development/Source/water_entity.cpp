@@ -2,12 +2,12 @@
 
 #include "water_entity.hpp"
 
-void WaterEntity::setPosition(vec3 val)
+void WaterEntity::setPosition(Vec3 val)
 {
 	_position = val;
 }
 
-void WaterEntity::setColor(vec3 val)
+void WaterEntity::setColor(Vec3 val)
 {
 	_color = val;
 }
@@ -42,7 +42,7 @@ void WaterEntity::setDisplacementMapPath(const string& val)
 	_displacementMapPath = val;
 }
 
-void WaterEntity::setRippleOffset(vec2 val)
+void WaterEntity::setRippleOffset(Vec2 val)
 {
 	_rippleOffset = val;
 }
@@ -52,12 +52,12 @@ void WaterEntity::setUvRepeat(float val)
 	_uvRepeat = val;
 }
 
-void WaterEntity::setSpeed(vec2 val)
+void WaterEntity::setSpeed(Vec2 val)
 {
 	_speed = val;
 }
 
-void WaterEntity::setWaveOffset(vec2 val)
+void WaterEntity::setWaveOffset(Vec2 val)
 {
 	_waveOffset = val;
 }
@@ -117,12 +117,12 @@ void WaterEntity::setTransparency(float val)
 	_transparency = val;
 }
 
-const vec3 WaterEntity::getPosition() const
+const Vec3 WaterEntity::getPosition() const
 {
 	return _position;
 }
 
-const vec3 WaterEntity::getColor() const
+const Vec3 WaterEntity::getColor() const
 {
 	return _color;
 }
@@ -157,7 +157,7 @@ const string& WaterEntity::getDisplacementMapPath() const
 	return _displacementMapPath;
 }
 
-const vec2 WaterEntity::getRippleOffset() const
+const Vec2 WaterEntity::getRippleOffset() const
 {
 	return _rippleOffset;
 }
@@ -167,12 +167,12 @@ const float WaterEntity::getUvRepeat() const
 	return _uvRepeat;
 }
 
-const vec2 WaterEntity::getSpeed() const
+const Vec2 WaterEntity::getSpeed() const
 {
 	return _speed;
 }
 
-const vec2 WaterEntity::getWaveOffset() const
+const Vec2 WaterEntity::getWaveOffset() const
 {
 	return _waveOffset;
 }

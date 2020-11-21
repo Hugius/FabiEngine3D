@@ -64,16 +64,16 @@ void BottomViewportController::_updateConsoleScrolling()
 			for (auto& [ID, message] : _consoleMessageStack)
 			{
 				// Move time part
-				_fe3d.textEntity_move(screen->getTextfield(ID + "_time")->getEntityID(), vec2(0.0f, -_scrollingAcceleration));
+				_fe3d.textEntity_move(screen->getTextfield(ID + "_time")->getEntityID(), Vec2(0.0f, -_scrollingAcceleration));
 
 				// Move separator part
-				_fe3d.textEntity_move(screen->getTextfield(ID + "_separator")->getEntityID(), vec2(0.0f, -_scrollingAcceleration));
+				_fe3d.textEntity_move(screen->getTextfield(ID + "_separator")->getEntityID(), Vec2(0.0f, -_scrollingAcceleration));
 
 				// Move all message parts
 				unsigned int index = 0;
 				while (screen->getTextfield(ID + "_msg_" + to_string(index)) != nullptr)
 				{
-					_fe3d.textEntity_move(screen->getTextfield(ID + "_msg_" + to_string(index))->getEntityID(), vec2(0.0f, -_scrollingAcceleration));
+					_fe3d.textEntity_move(screen->getTextfield(ID + "_msg_" + to_string(index))->getEntityID(), Vec2(0.0f, -_scrollingAcceleration));
 					index++;
 				}
 			}
@@ -97,8 +97,8 @@ void BottomViewportController::_addConsoleMessage(const string& newMessage)
 	const float yOffset = 0.2f; // Vertical offset between messages
 	const float timePartOffset = _charSize.x * static_cast<float>(timePartLength) * 2.0f; // Offset from time part
 	const float separatorPartOffset = _charSize.x * static_cast<float>(seperatorPartLength) * 2.0f; // Offset from separator part
-	const vec2 minPosition = vec2(-1.0f, window->getOriginalPosition().y - (window->getOriginalSize().y / 2.0f));
-	const vec2 maxPosition = vec2(0.995f, window->getOriginalPosition().y + (window->getOriginalSize().y / 2.0f));
+	const Vec2 minPosition = Vec2(-1.0f, window->getOriginalPosition().y - (window->getOriginalSize().y / 2.0f));
+	const Vec2 maxPosition = Vec2(0.995f, window->getOriginalPosition().y + (window->getOriginalSize().y / 2.0f));
 
 	// Add to stack for synchronization
 	string newID = to_string(_consoleMessageStack.size());
@@ -132,9 +132,9 @@ void BottomViewportController::_addConsoleMessage(const string& newMessage)
 	for (auto& [ID, message] : _consoleMessageStack)
 	{
 		// Part colors
-		vec3 timePartColor = vec3(1.0f, 0.0f, 1.0f);
-		vec3 separatorPartColor = vec3(1.0f, 0.85f, 0.0f);
-		vec3 messagePartColor = vec3(1.0f);
+		Vec3 timePartColor = Vec3(1.0f, 0.0f, 1.0f);
+		Vec3 separatorPartColor = Vec3(1.0f, 0.85f, 0.0f);
+		Vec3 messagePartColor = Vec3(1.0f);
 
 		// Extract message type
 		unsigned int typePartLength = 0;
@@ -155,7 +155,7 @@ void BottomViewportController::_addConsoleMessage(const string& newMessage)
 		// Check if message is a warning, aka an "error" for the engine user
 		if (typeString == "[Warn]")
 		{
-			messagePartColor = vec3(1.0f, 0.0f, 0.0f);
+			messagePartColor = Vec3(1.0f, 0.0f, 0.0f);
 		}
 
 		// Different parts
@@ -187,13 +187,13 @@ void BottomViewportController::_addConsoleMessage(const string& newMessage)
 		if (messageParts.size() == 1)
 		{
 			// Add time textfield & add boundaries
-			screen->addTextfield(ID + "_time", vec2(-1.0f, static_cast<float>(index) * yOffset), vec2(0.0f), "", timePartColor, false);
+			screen->addTextfield(ID + "_time", Vec2(-1.0f, static_cast<float>(index) * yOffset), Vec2(0.0f), "", timePartColor, false);
 			_fe3d.textEntity_setTextContent(screen->getTextfield(ID + "_time")->getEntityID(), timePartText, _charSize.x, _charSize.y);
 			_fe3d.textEntity_setMinPosition(screen->getTextfield(ID + "_time")->getEntityID(), minPosition);
 			_fe3d.textEntity_setMaxPosition(screen->getTextfield(ID + "_time")->getEntityID(), maxPosition);
 
 			// Add separator textfield & add boundaries
-			screen->addTextfield(ID + "_separator", vec2(-1.0f + timePartOffset, static_cast<float>(index) * yOffset), vec2(0.0f), "", separatorPartColor, false);
+			screen->addTextfield(ID + "_separator", Vec2(-1.0f + timePartOffset, static_cast<float>(index) * yOffset), Vec2(0.0f), "", separatorPartColor, false);
 			_fe3d.textEntity_setTextContent(screen->getTextfield(ID + "_separator")->getEntityID(), separatorPartText, _charSize.x, _charSize.y);
 			_fe3d.textEntity_setMinPosition(screen->getTextfield(ID + "_separator")->getEntityID(), minPosition);
 			_fe3d.textEntity_setMaxPosition(screen->getTextfield(ID + "_separator")->getEntityID(), maxPosition);
@@ -210,7 +210,7 @@ void BottomViewportController::_addConsoleMessage(const string& newMessage)
 			string textfieldID = ID + "_msg_" + to_string(i);
 
 			// Add textfield
-			screen->addTextfield(textfieldID, vec2(-1.0f + timePartOffset + separatorPartOffset, static_cast<float>(index) * yOffset), vec2(0.0f), "", messagePartColor, false);
+			screen->addTextfield(textfieldID, Vec2(-1.0f + timePartOffset + separatorPartOffset, static_cast<float>(index) * yOffset), Vec2(0.0f), "", messagePartColor, false);
 			_fe3d.textEntity_setTextContent(screen->getTextfield(textfieldID)->getEntityID(), messageParts[i], _charSize.x, _charSize.y);
 
 			// Add boundaries
@@ -221,13 +221,13 @@ void BottomViewportController::_addConsoleMessage(const string& newMessage)
 			if ((messageParts.size() > 1) && i == (messageParts.size() - 1))
 			{
 				// Add time textfield & add boundaries
-				screen->addTextfield(ID + "_time", vec2(-1.0f, static_cast<float>(index) * yOffset), vec2(0.0f), "", timePartColor, false);
+				screen->addTextfield(ID + "_time", Vec2(-1.0f, static_cast<float>(index) * yOffset), Vec2(0.0f), "", timePartColor, false);
 				_fe3d.textEntity_setTextContent(screen->getTextfield(ID + "_time")->getEntityID(), timePartText, _charSize.x, _charSize.y);
 				_fe3d.textEntity_setMinPosition(screen->getTextfield(ID + "_time")->getEntityID(), minPosition);
 				_fe3d.textEntity_setMaxPosition(screen->getTextfield(ID + "_time")->getEntityID(), maxPosition);
 
 				// Add separator textfield & add boundaries
-				screen->addTextfield(ID + "_separator", vec2(-1.0f + timePartOffset, static_cast<float>(index) * yOffset), vec2(0.0f), "", separatorPartColor, false);
+				screen->addTextfield(ID + "_separator", Vec2(-1.0f + timePartOffset, static_cast<float>(index) * yOffset), Vec2(0.0f), "", separatorPartColor, false);
 				_fe3d.textEntity_setTextContent(screen->getTextfield(ID + "_separator")->getEntityID(), separatorPartText, _charSize.x, _charSize.y);
 				_fe3d.textEntity_setMinPosition(screen->getTextfield(ID + "_separator")->getEntityID(), minPosition);
 				_fe3d.textEntity_setMaxPosition(screen->getTextfield(ID + "_separator")->getEntityID(), maxPosition);

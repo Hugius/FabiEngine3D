@@ -4,7 +4,7 @@
 #include <GLM\\gtc\\matrix_transform.hpp>
 #include <iostream>
 
-void ShadowManager::loadShadows(vec3 eye, vec3 center, float size, float reach, bool isFollowingCamera, int interval)
+void ShadowManager::loadShadows(Vec3 eye, Vec3 center, float size, float reach, bool isFollowingCamera, int interval)
 {
 	_eye    = eye;
 	_center = center;
@@ -24,9 +24,9 @@ void ShadowManager::update(RenderBus& renderBus)
 			passedFrames = 0;
 
 			// Updated values
-			vec3 cameraPos = renderBus.getCameraPosition();
-			vec3 newEye = vec3(cameraPos.x, 0.0f, cameraPos.z) + _eye;
-			vec3 newCenter = vec3(cameraPos.x, 0.0f, cameraPos.z) + _center;
+			Vec3 cameraPos = renderBus.getCameraPosition();
+			Vec3 newEye = Vec3(cameraPos.x, 0.0f, cameraPos.z) + _eye;
+			Vec3 newCenter = Vec3(cameraPos.x, 0.0f, cameraPos.z) + _center;
 
 			// Apply
 			renderBus.setShadowEyePosition(newEye);
@@ -50,23 +50,23 @@ void ShadowManager::update(RenderBus& renderBus)
 	}
 }
 
-mat4 ShadowManager::_createLightSpaceMatrix(vec3 eye, vec3 center, float size, float reach)
+Matrix44 ShadowManager::_createLightSpaceMatrix(Vec3 eye, Vec3 center, float size, float reach)
 {
 	glEnable(GL_DEPTH_CLAMP_NV);
 
 	// Matrix generation
-	mat4 lightView = glm::lookAt(eye, center, vec3(0.0f, 1.0f, 0.0f));
-	mat4 lightProj = glm::ortho(-size / 2.0f, size / 2.0f, -size / 2.0f, size / 2.0f, 0.1f, reach);
+	Matrix44 lightView = Matrix44::createView(eye, center, Vec3(0.0f, 1.0f, 0.0f));
+	Matrix44 lightProj = Matrix44::createOrtho(-size / 2.0f, size / 2.0f, -size / 2.0f, size / 2.0f, 0.1f, reach);
 
 	return lightProj * lightView;
 }
 
-vec3 ShadowManager::getEye()
+Vec3 ShadowManager::getEye()
 {
 	return _eye;
 }
 
-vec3 ShadowManager::getCenter()
+Vec3 ShadowManager::getCenter()
 {
 	return _center;
 }

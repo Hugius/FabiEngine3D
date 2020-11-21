@@ -15,8 +15,8 @@ public:
 	void addTextEntity
 	(
 		const string& ID, const string& textContent,
-		const string& fontPath, vec3 color,
-		vec2 translation, float rotation, vec2 scaling,
+		const string& fontPath, Vec3 color,
+		Vec2 translation, float rotation, Vec2 scaling,
 		bool overwrite, bool isCentered, bool isDynamic
 	);
 

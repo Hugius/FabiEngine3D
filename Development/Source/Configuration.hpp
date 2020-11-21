@@ -1,8 +1,9 @@
 #pragma once
 
 #include <fstream>
-#include <GLM\\glm.hpp>
+#include "mathematics.hpp"
 #include <sstream>
+#include <GLM/glm.hpp>
 
 using glm::ivec2;
 using glm::ivec4;

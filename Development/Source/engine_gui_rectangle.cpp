@@ -1,6 +1,6 @@
 #include "engine_gui_rectangle.hpp"
 
-EngineGuiRectangle::EngineGuiRectangle(FabiEngine3D& fe3d, const string& parentID, const string& ID, vec2 position, vec2 size, vec3 color, bool isCentered) :
+EngineGuiRectangle::EngineGuiRectangle(FabiEngine3D& fe3d, const string& parentID, const string& ID, Vec2 position, Vec2 size, Vec3 color, bool isCentered) :
 	_fe3d(fe3d),
 	_ID(ID),
 	_entityID(parentID + "_" + ID),
@@ -12,14 +12,14 @@ EngineGuiRectangle::EngineGuiRectangle(FabiEngine3D& fe3d, const string& parentI
 	_fe3d.guiEntity_add(_entityID, color, position, 0.0f, size, isCentered);
 }
 
-EngineGuiRectangle::EngineGuiRectangle(FabiEngine3D& fe3d, const string& parentID, const string& ID, vec2 position, vec2 size, const string& textureName, bool isCentered) :
+EngineGuiRectangle::EngineGuiRectangle(FabiEngine3D& fe3d, const string& parentID, const string& ID, Vec2 position, Vec2 size, const string& textureName, bool isCentered) :
 	_fe3d(fe3d),
 	_ID(ID),
 	_entityID(parentID + "_" + ID),
 	_parentID(parentID),
 	_originalPosition(position),
 	_originalSize(size),
-	_originalColor(vec3(1.0f))
+	_originalColor(Vec3(1.0f))
 {
 	_fe3d.guiEntity_add(_entityID, "engine\\textures\\" + textureName, position, 0.0f, size, isCentered);
 }
@@ -39,17 +39,17 @@ void EngineGuiRectangle::hide()
 	_fe3d.guiEntity_hide(_entityID);
 }
 
-const vec2 EngineGuiRectangle::getOriginalPosition()
+const Vec2 EngineGuiRectangle::getOriginalPosition()
 {
 	return _originalPosition;
 }
 
-const vec2 EngineGuiRectangle::getOriginalSize()
+const Vec2 EngineGuiRectangle::getOriginalSize()
 {
 	return _originalSize;
 }
 
-const vec3 EngineGuiRectangle::getOriginalColor()
+const Vec3 EngineGuiRectangle::getOriginalColor()
 {
 	return _originalColor;
 }

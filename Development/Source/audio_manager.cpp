@@ -30,7 +30,7 @@ void AudioManager::addGlobalChunk(const std::string& ID, const std::string& file
 	_chunks.push_back(AudioChunk(ID, fileName, _audioLoader.getChunk(fileName)));
 }
 
-void AudioManager::addPointChunk(const std::string& ID, const std::string& fileName, vec3 position, float maxDistance)
+void AudioManager::addPointChunk(const std::string& ID, const std::string& fileName, Vec3 position, float maxDistance)
 {
 	_checkValidAdd(ID);
 	_chunks.push_back(AudioChunk(ID, fileName, _audioLoader.getChunk(fileName), position, maxDistance));

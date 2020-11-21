@@ -14,14 +14,14 @@ void EnvironmentEditor::_updateSkyMenuMain()
 			if (screen->getButton("create")->isHovered())
 			{
 				_skyCreationEnabled = true;
-				_gui.getGlobalScreen()->addValueForm("newSkyName", "New sky name", "", vec2(0.0f), vec2(0.5f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("newSkyName", "New sky name", "", Vec2(0.0f), Vec2(0.5f, 0.1f));
 			}
 			else if (screen->getButton("edit")->isHovered())
 			{
 				_skyChoosingEnabled = true;
 				_skyEditingEnabled = true;
 				for (auto& name : _skyNames) { name = name.substr(1); }
-				_gui.getGlobalScreen()->addChoiceForm("skyList", "Select sky", vec2(-0.4f, 0.1f), _skyNames);
+				_gui.getGlobalScreen()->addChoiceForm("skyList", "Select sky", Vec2(-0.4f, 0.1f), _skyNames);
 				for (auto& name : _skyNames) { name = "@" + name; }
 			}
 			else if (screen->getButton("delete")->isHovered())
@@ -29,7 +29,7 @@ void EnvironmentEditor::_updateSkyMenuMain()
 				_skyChoosingEnabled = true;
 				_skyRemovalEnabled = true;
 				for (auto& name : _skyNames) { name = name.substr(1); }
-				_gui.getGlobalScreen()->addChoiceForm("skyList", "Select sky", vec2(-0.4f, 0.1f), _skyNames);
+				_gui.getGlobalScreen()->addChoiceForm("skyList", "Select sky", Vec2(-0.4f, 0.1f), _skyNames);
 				for (auto& name : _skyNames) { name = "@" + name; }
 			}
 			else if (screen->getButton("back")->isHovered())
@@ -242,24 +242,24 @@ void EnvironmentEditor::_updateSkyMenuOptions()
 		auto screen = _gui.getViewport("left")->getWindow("main")->getScreen("skyEditorMenuOptions");
 		float skyRotationSpeed = _fe3d.skyEntity_getRotationSpeed(_currentSkyID);
 		float skyLightness = _fe3d.skyEntity_getLightness(_currentSkyID);
-		vec3 skyColor = _fe3d.skyEntity_getColor(_currentSkyID);
+		Vec3 skyColor = _fe3d.skyEntity_getColor(_currentSkyID);
 
 		// GUI management
 		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
 			if (screen->getButton("rotationSpeed")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("rotationSpeed", "Rotation speed", skyRotationSpeed * 100.0f, vec2(0.0f), vec2(0.3f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("rotationSpeed", "Rotation speed", skyRotationSpeed * 100.0f, Vec2(0.0f), Vec2(0.3f, 0.1f));
 			}
 			else if (screen->getButton("lightness")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("lightness", "Lightness (%)", skyLightness * 100.0f, vec2(0.0f), vec2(0.3f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("lightness", "Lightness (%)", skyLightness * 100.0f, Vec2(0.0f), Vec2(0.3f, 0.1f));
 			}
 			else if (screen->getButton("color")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("colorR", "R(0-255)", skyColor.r * 255.0f, vec2(-0.25f, 0.0f), vec2(0.15f, 0.1f));
-				_gui.getGlobalScreen()->addValueForm("colorG", "G(0-255)", skyColor.g * 255.0f, vec2(0.0f, 0.0f), vec2(0.15f, 0.1f));
-				_gui.getGlobalScreen()->addValueForm("colorB", "B(0-255)", skyColor.b * 255.0f, vec2(0.25f, 0.0f), vec2(0.15f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("colorR", "R(0-255)", skyColor.r * 255.0f, Vec2(-0.25f, 0.0f), Vec2(0.15f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("colorG", "G(0-255)", skyColor.g * 255.0f, Vec2(0.0f, 0.0f), Vec2(0.15f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("colorB", "B(0-255)", skyColor.b * 255.0f, Vec2(0.25f, 0.0f), Vec2(0.15f, 0.1f));
 			}
 			else if (screen->getButton("back")->isHovered())
 			{

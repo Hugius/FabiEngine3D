@@ -1,14 +1,14 @@
 #include "fabi_engine_3d.hpp"
 #include "core_engine.hpp"
 
-void FabiEngine3D::gfx_enableAmbientLighting(vec3 color, float intensity)
+void FabiEngine3D::gfx_enableAmbientLighting(Vec3 color, float intensity)
 {
 	_core->_renderBus.setAmbientLightingEnabled(true);
 	_core->_renderBus.setAmbientLightColor(color);
 	_core->_renderBus.setAmbientLightIntensity(intensity);
 }
 
-void FabiEngine3D::gfx_enableDirectionalLighting(vec3 position, vec3 color, float intensity)
+void FabiEngine3D::gfx_enableDirectionalLighting(Vec3 position, Vec3 color, float intensity)
 {
 	_core->_renderBus.setDirectionalLightingEnabled(true);
 	_core->_renderBus.setDirectionalLightPos(position);
@@ -26,7 +26,7 @@ void FabiEngine3D::gfx_enablePointLighting()
 	_core->_renderBus.setPointLightingEnabled(true);
 }
 
-void FabiEngine3D::gfx_enableSpotLighting(vec3 color, float intensity, float angle, float distance)
+void FabiEngine3D::gfx_enableSpotLighting(Vec3 color, float intensity, float angle, float distance)
 {
 	_core->_renderBus.setSpotLightingEnabled(true);
 	_core->_renderBus.setSpotLightColor(color);
@@ -35,7 +35,7 @@ void FabiEngine3D::gfx_enableSpotLighting(vec3 color, float intensity, float ang
 	_core->_renderBus.setMaxSpotLightDistance(distance);
 }
 
-void FabiEngine3D::gfx_enableFog(float minDistance, float maxDistance, float defaultFactor, vec3 color)
+void FabiEngine3D::gfx_enableFog(float minDistance, float maxDistance, float defaultFactor, Vec3 color)
 {
 	_core->_renderBus.setFogEnabled(true);
 	_core->_renderBus.setFogMinDistance(minDistance);
@@ -75,7 +75,7 @@ void FabiEngine3D::gfx_enableMSAA()
 	_core->_renderBus.setMsaaEnabled(true);
 }
 
-void FabiEngine3D::gfx_enableShadows(vec3 eye, vec3 center, float size, float reach, bool followingCamera, int interval)
+void FabiEngine3D::gfx_enableShadows(Vec3 eye, Vec3 center, float size, float reach, bool followingCamera, int interval)
 {
 	_core->_shadowManager.loadShadows(eye, center, size, reach, followingCamera, interval);
 	_core->_renderBus.setShadowsEnabled(true);
@@ -331,7 +331,7 @@ int FabiEngine3D::gfx_getRefractionQuality()
 	return _core->_renderBus.getSceneRefractionMapSize();
 }
 
-vec3 FabiEngine3D::gfx_getAmbientLightingColor()
+Vec3 FabiEngine3D::gfx_getAmbientLightingColor()
 {
 	return _core->_renderBus.getAmbientLightColor();
 }
@@ -361,17 +361,17 @@ float FabiEngine3D::gfx_getSpotLightingDistance()
 	return _core->_renderBus.getMaxSpotLightDistance();
 }
 
-vec3 FabiEngine3D::gfx_getDirectionalLightingPosition()
+Vec3 FabiEngine3D::gfx_getDirectionalLightingPosition()
 {
 	return _core->_renderBus.getDirectionalLightPosition();
 }
 
-vec3 FabiEngine3D::gfx_getDirectionalLightingColor()
+Vec3 FabiEngine3D::gfx_getDirectionalLightingColor()
 {
 	return _core->_renderBus.getDirectionalLightColor();
 }
 
-vec3 FabiEngine3D::gfx_getSpotLightingColor()
+Vec3 FabiEngine3D::gfx_getSpotLightingColor()
 {
 	return _core->_renderBus.getSpotLightColor();
 }
@@ -391,7 +391,7 @@ float FabiEngine3D::gfx_getFogDefaultFactor()
 	return _core->_renderBus.getFogDefaultFactor();
 }
 
-vec3 FabiEngine3D::gfx_getFogColor()
+Vec3 FabiEngine3D::gfx_getFogColor()
 {
 	return _core->_renderBus.getFogColor();
 }
@@ -411,12 +411,12 @@ float FabiEngine3D::gfx_getSceneReflectionFactor()
 	return _core->_renderBus.getSceneReflectionFactor();
 }
 
-vec3 FabiEngine3D::gfx_getShadowEyePosition()
+Vec3 FabiEngine3D::gfx_getShadowEyePosition()
 {
 	return _core->_shadowManager.getEye();
 }
 
-vec3 FabiEngine3D::gfx_getShadowCenter()
+Vec3 FabiEngine3D::gfx_getShadowCenter()
 {
 	return _core->_shadowManager.getCenter();
 }

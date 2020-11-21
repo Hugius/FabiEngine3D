@@ -25,7 +25,7 @@ const vector<shared_ptr<LightEntity>> LightEntityManager::getEntities()
 	return _getLightEntities();
 }
 
-void LightEntityManager::addLightEntity(const string& ID, vec3 position, vec3 color, float intensity, float distanceFactor)
+void LightEntityManager::addLightEntity(const string& ID, Vec3 position, Vec3 color, float intensity, float distanceFactor)
 {
 	// Create entity
 	_createEntity(ID);

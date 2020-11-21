@@ -75,24 +75,24 @@ private:
 
 	// Creation functions
 	void _placeSky(const string& newID, const string& previewID);
-	void _placeSky(const string& newID, const array<string, 6>& diffuseMapPaths, float lightness, float rotationSpeed, vec3 color);
+	void _placeSky(const string& newID, const array<string, 6>& diffuseMapPaths, float lightness, float rotationSpeed, Vec3 color);
 	void _placeTerrain(const string& newID, const string& previewID);
 	void _placeTerrain(const string& newID, const string& heightMapPath, float maxHeight, float uvRepeat, bool isBlendMapped, float lightness,
 		float blendRepeatR, float blendRepeatG, float blendRepeatB, bool isSpecular, float specularIntensity, const string& diffuseMapPath, 
 		const string& blendMapPath, const string& blendMapPathR, const string& blendMapPathG, const string& blendMapPathB);
 	void _placeWater(const string& newID, const string& previewID);
-	void _placeWater(const string& newID, vec3 position, float size, bool isWaving, bool isRippling, bool isSpecularLighted, bool isReflective,
-		bool isRefractive, float waveHeightFactor, float specularFactor, float specularIntensity, float transparency, vec3 color, float uvRepeat,
-		vec2 speed, const string& dudvMapPath, const string& normalMapPath, const string& displacementMapPath);
-	void _placeModel(const string& newID, const string& previewID, vec3 position);
-	void _placeModel(const string& newID, vec3 position, vec3 rotation, vec3 size, const string& objPath, const string& diffuseMapPath,
+	void _placeWater(const string& newID, Vec3 position, float size, bool isWaving, bool isRippling, bool isSpecularLighted, bool isReflective,
+		bool isRefractive, float waveHeightFactor, float specularFactor, float specularIntensity, float transparency, Vec3 color, float uvRepeat,
+		Vec2 speed, const string& dudvMapPath, const string& normalMapPath, const string& displacementMapPath);
+	void _placeModel(const string& newID, const string& previewID, Vec3 position);
+	void _placeModel(const string& newID, Vec3 position, Vec3 rotation, Vec3 size, const string& objPath, const string& diffuseMapPath,
 		const string& lightMapPath, const string& reflectionMapPath, const string& normalMapPath, bool isFrozen,
 		bool isFaceCulled, bool isShadowed, bool isTransparent, bool isReflective, bool isSpecular, 
-		float specularFactor, float specularIntensity, float lightness, vec3 color, float uvRepeat, const string& lodEntityID, bool isInstanced,
-		vector<vec3> instancedOffsets, vector<string> aabbNames, vector<vec3> aabbPositions, vector<vec3> aabbSizes);
-	void _placeBillboard(const string& newID, const string& previewID, vec3 position);
+		float specularFactor, float specularIntensity, float lightness, Vec3 color, float uvRepeat, const string& lodEntityID, bool isInstanced,
+		vector<Vec3> instancedOffsets, vector<string> aabbNames, vector<Vec3> aabbPositions, vector<Vec3> aabbSizes);
+	void _placeBillboard(const string& newID, const string& previewID, Vec3 position);
 	void _placeBillboard(const string& newID, const string& diffusePath, const string& fontPath, const string& textContent,
-		vec3 position, vec3 rotation, vec2 size, vec3 color, bool facingX, bool facingY, bool isTransparent,
+		Vec3 position, Vec3 rotation, Vec2 size, Vec3 color, bool facingX, bool facingY, bool isTransparent,
 		bool isAnimated, int animationRows, int animationColumns, int animationFramestep);
 
 	// Miscellaneous
@@ -141,8 +141,8 @@ private:
 	// Lighting variables
 	bool _isPlacingPointlight = false;
 	const string _previewPointlightID = "@previewPointlight";
-	const vec3 _defaultLightbulbSize = vec3(1.0f);
-	const vec3 _defaultLightbulbAabbSize = vec3(1.0f, 1.25f, 1.0f);
+	const Vec3 _defaultLightbulbSize = Vec3(1.0f);
+	const Vec3 _defaultLightbulbAabbSize = Vec3(1.0f, 1.25f, 1.0f);
 	const float _lightbulbAnimationSpeed = 0.01f;
 	const float _lightingChangingSpeed = 0.01f;
 	const float _colorChangingSpeed = 0.005f;

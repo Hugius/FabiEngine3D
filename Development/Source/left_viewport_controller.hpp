@@ -27,11 +27,11 @@ public:
 	SettingsEditor& getSettingsEditor();
 	AudioEditor& getAudioEditor();
 
-	static inline const vec3 frameColor = vec3(0.4f);
-	static inline const vec3 buttonColor = vec3(0.25f, 0.25f, 1.0f);
-	static inline const vec3 buttonHoverColor = vec3(0.75f, 0.75f, 1.0f);
-	static inline const vec3 textColor = vec3(1.0f);
-	static inline const vec3 textHoverColor = vec3(0.0f);
+	static inline const Vec3 frameColor = Vec3(0.4f);
+	static inline const Vec3 buttonColor = Vec3(0.25f, 0.25f, 1.0f);
+	static inline const Vec3 buttonHoverColor = Vec3(0.75f, 0.75f, 1.0f);
+	static inline const Vec3 textColor = Vec3(1.0f);
+	static inline const Vec3 textHoverColor = Vec3(0.0f);
 
 private:
 	ModelEditor _modelEditor;

@@ -4,10 +4,11 @@
 
 void GuiEntity::updateModelMatrix()
 {
-	_modelMatrix = mat4(1.0f);
-	_modelMatrix = glm::translate(_modelMatrix, vec3(_translation, 0.0f));
-	_modelMatrix = glm::rotate(_modelMatrix, glm::radians(_rotation), vec3(0.0f, 0.0f, 1.0f));
-	_modelMatrix = glm::scale(_modelMatrix, vec3(_scaling, 1.0f));
+	Matrix44 translationMatrix = Matrix44::createTranslation(_translation.x, _translation.y, 0.0f);
+	Matrix44 rotationMatrix = Matrix44::createRotationZ(Math::degreesToRadians(_rotation));
+	Matrix44 scalingMatrix = Matrix44::createScaling(_scaling.x, _scaling.y, 1.0f);
+
+	_modelMatrix = translationMatrix * rotationMatrix * scalingMatrix;
 }
 
 void GuiEntity::setDiffuseMap(GLuint diffuseMap)
@@ -15,7 +16,7 @@ void GuiEntity::setDiffuseMap(GLuint diffuseMap)
 	_diffuseMap = diffuseMap;
 }
 
-void GuiEntity::setColor(vec3 color)
+void GuiEntity::setColor(Vec3 color)
 {
 	_color = color;
 }
@@ -40,7 +41,7 @@ void GuiEntity::setCentered(bool val)
 	_isCentered = val;
 }
 
-void GuiEntity::setTranslation(vec2 val)
+void GuiEntity::setTranslation(Vec2 val)
 {
 	_translation = val;
 }
@@ -50,12 +51,12 @@ void GuiEntity::setRotation(float val)
 	_rotation = val;
 }
 
-void GuiEntity::setScaling(vec2 val)
+void GuiEntity::setScaling(Vec2 val)
 {
 	_scaling = val;
 }
 
-void GuiEntity::translate(vec2 val)
+void GuiEntity::translate(Vec2 val)
 {
 	_translation += val;
 }
@@ -65,17 +66,17 @@ void GuiEntity::rotate(float val)
 	_rotation += val;
 }
 
-void GuiEntity::scale(vec2 val)
+void GuiEntity::scale(Vec2 val)
 {
 	_scaling += val;
 }
 
-void GuiEntity::setMinPosition(vec2 val)
+void GuiEntity::setMinPosition(Vec2 val)
 {
 	_minPosition = val;
 }
 
-void GuiEntity::setMaxPosition(vec2 val)
+void GuiEntity::setMaxPosition(Vec2 val)
 {
 	_maxPosition = val;
 }
@@ -85,7 +86,7 @@ const GLuint GuiEntity::getDiffuseMap() const
 	return _diffuseMap;
 }
 
-const vec3 GuiEntity::getColor() const
+const Vec3 GuiEntity::getColor() const
 {
 	return _color;
 }
@@ -110,12 +111,12 @@ const bool GuiEntity::isCentered() const
 	return _isCentered;
 }
 
-const mat4 GuiEntity::getModelMatrix() const
+const Matrix44 GuiEntity::getModelMatrix() const
 {
 	return _modelMatrix;
 }
 
-const vec2 GuiEntity::getTranslation() const
+const Vec2 GuiEntity::getTranslation() const
 {
 	return _translation;
 }
@@ -125,17 +126,17 @@ const float GuiEntity::getRotation() const
 	return _rotation;
 }
 
-const vec2 GuiEntity::getScaling() const
+const Vec2 GuiEntity::getScaling() const
 {
 	return _scaling;
 }
 
-const vec2 GuiEntity::getMinPosition() const
+const Vec2 GuiEntity::getMinPosition() const
 {
 	return _minPosition;
 }
 
-const vec2 GuiEntity::getMaxPosition() const
+const Vec2 GuiEntity::getMaxPosition() const
 {
 	return _maxPosition;
 }

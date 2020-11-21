@@ -10,27 +10,27 @@ bool EngineGuiGlobalScreen::isFocused()
 	return _isFocused;
 }
 
-void EngineGuiGlobalScreen::setValueFormButtonsPosition(vec2 position)
+void EngineGuiGlobalScreen::setValueFormButtonsPosition(Vec2 position)
 {
 	_valueFormButtonsPosition = position;
 }
 
-void EngineGuiGlobalScreen::addValueForm(const string& ID, string title, int value, vec2 position, vec2 size)
+void EngineGuiGlobalScreen::addValueForm(const string& ID, string title, int value, Vec2 position, Vec2 size)
 {
 	_addValueForm(ID, title, to_string(value), position, size, true);
 }
 
-void EngineGuiGlobalScreen::addValueForm(const string& ID, string title, float value, vec2 position, vec2 size)
+void EngineGuiGlobalScreen::addValueForm(const string& ID, string title, float value, Vec2 position, Vec2 size)
 {
 	_addValueForm(ID, title, to_string(static_cast<int>(value)), position, size, true);
 }
 
-void EngineGuiGlobalScreen::addValueForm(const string& ID, string title, double value, vec2 position, vec2 size)
+void EngineGuiGlobalScreen::addValueForm(const string& ID, string title, double value, Vec2 position, Vec2 size)
 {
 	_addValueForm(ID, title, to_string(static_cast<int>(value)), position, size, true);
 }
 
-void EngineGuiGlobalScreen::addValueForm(const string& ID, string title, string value, vec2 position, vec2 size)
+void EngineGuiGlobalScreen::addValueForm(const string& ID, string title, string value, Vec2 position, Vec2 size)
 {
 	_addValueForm(ID, title, value, position, size, false);
 }
@@ -93,14 +93,14 @@ bool EngineGuiGlobalScreen::isValueFormExisting(const string& ID)
 	return std::find(_valueFormIDs.begin(), _valueFormIDs.end(), ID) != _valueFormIDs.end();
 }
 
-void EngineGuiGlobalScreen::_addValueForm(const string& ID, string title, string valueString, vec2 position, vec2 size, bool onlyNumbers)
+void EngineGuiGlobalScreen::_addValueForm(const string& ID, string title, string valueString, Vec2 position, Vec2 size, bool onlyNumbers)
 {
 	if (ID != "" && std::find(_valueFormIDs.begin(), _valueFormIDs.end(), ID) == _valueFormIDs.end())
 	{
 		_valueFormIDs.push_back(ID);
-		addRectangle(ID, position + vec2(0.0f, 0.15f), vec2(title.size() * 0.0275f, 0.125f), vec3(0.0f));
-		addTextfield(ID, position + vec2(0.0f, 0.15f), vec2(title.size() * 0.025f, 0.1f), title, vec3(1.0f));
-		addWriteField(ID, position, size, vec3(0.25f), vec3(0.5f), vec3(1.0f), vec3(0.0f), false, onlyNumbers, onlyNumbers, onlyNumbers, onlyNumbers);
+		addRectangle(ID, position + Vec2(0.0f, 0.15f), Vec2(title.size() * 0.0275f, 0.125f), Vec3(0.0f));
+		addTextfield(ID, position + Vec2(0.0f, 0.15f), Vec2(title.size() * 0.025f, 0.1f), title, Vec3(1.0f));
+		addWriteField(ID, position, size, Vec3(0.25f), Vec3(0.5f), Vec3(1.0f), Vec3(0.0f), false, onlyNumbers, onlyNumbers, onlyNumbers, onlyNumbers);
 		getWriteField(ID)->setTextContent(valueString);
 
 		// GUI focus & set first writefield active
@@ -113,8 +113,8 @@ void EngineGuiGlobalScreen::_addValueForm(const string& ID, string title, string
 		// Add done & cancel buttons
 		if (!checkButton("value_form_done"))
 		{
-			addButton("value_form_done", _valueFormButtonsPosition + vec2(-0.15f, -0.2f), vec2(0.15f, 0.1f), vec3(0.0f, 0.5f, 0.0f), vec3(0.0f, 1.0f, 0.0f), "Done", vec3(1.0f), vec3(0.0f));
-			addButton("value_form_cancel", _valueFormButtonsPosition + vec2(0.15f, -0.2f), vec2(0.15f, 0.1f), vec3(0.5f, 0.0f, 0.0f), vec3(1.0f, 0.0f, 0.0f), "Cancel", vec3(1.0f), vec3(0.0f));
+			addButton("value_form_done", _valueFormButtonsPosition + Vec2(-0.15f, -0.2f), Vec2(0.15f, 0.1f), Vec3(0.0f, 0.5f, 0.0f), Vec3(0.0f, 1.0f, 0.0f), "Done", Vec3(1.0f), Vec3(0.0f));
+			addButton("value_form_cancel", _valueFormButtonsPosition + Vec2(0.15f, -0.2f), Vec2(0.15f, 0.1f), Vec3(0.5f, 0.0f, 0.0f), Vec3(1.0f, 0.0f, 0.0f), "Cancel", Vec3(1.0f), Vec3(0.0f));
 		}
 	}
 }
@@ -178,15 +178,15 @@ bool EngineGuiGlobalScreen::_checkValueForm(const string& ID, string& valueStrin
 	return changed;
 }
 
-void EngineGuiGlobalScreen::addChoiceForm(const string& ID, string title, vec2 position, vector<string> buttonTitles)
+void EngineGuiGlobalScreen::addChoiceForm(const string& ID, string title, Vec2 position, vector<string> buttonTitles)
 {
 	if (_choiceFormID == "")
 	{
 		// Add GUI elements
-		addRectangle(ID, position + vec2(0.0f, 0.475f), vec2(title.size() * 0.0275f, 0.125f), vec3(0.0f));
-		addTextfield(ID, position + vec2(0.0f, 0.475f), vec2(title.size() * 0.025f, 0.1f), title, vec3(1.0f));
-		addScrollingList(ID, position, vec2(0.5, 0.75f), vec3(_scrollListColor), _buttonColor, _buttonHoverColor, _textColor, _textHoverColor, vec2(0.1f, 0.25f));
-		addButton("choice_form_cancel", position + vec2(0.0f, -0.45f), vec2(0.15f, 0.1f), vec3(0.5f, 0.0f, 0.0f), vec3(1.0f, 0.0f, 0.0f), "Cancel", vec3(1.0f), vec3(0.0f));
+		addRectangle(ID, position + Vec2(0.0f, 0.475f), Vec2(title.size() * 0.0275f, 0.125f), Vec3(0.0f));
+		addTextfield(ID, position + Vec2(0.0f, 0.475f), Vec2(title.size() * 0.025f, 0.1f), title, Vec3(1.0f));
+		addScrollingList(ID, position, Vec2(0.5, 0.75f), Vec3(_scrollListColor), _buttonColor, _buttonHoverColor, _textColor, _textHoverColor, Vec2(0.1f, 0.25f));
+		addButton("choice_form_cancel", position + Vec2(0.0f, -0.45f), Vec2(0.15f, 0.1f), Vec3(0.5f, 0.0f, 0.0f), Vec3(1.0f, 0.0f, 0.0f), "Cancel", Vec3(1.0f), Vec3(0.0f));
 
 		// Add buttons to scrolling list
 		for (auto& buttonTitle : buttonTitles)
@@ -246,14 +246,14 @@ bool EngineGuiGlobalScreen::isChoiceFormExisting(const string& ID)
 	return (ID == _choiceFormID);
 }
 
-void EngineGuiGlobalScreen::addAnswerForm(const string& ID, string title, vec2 position)
+void EngineGuiGlobalScreen::addAnswerForm(const string& ID, string title, Vec2 position)
 {
 	if (_answerFormID == "")
 	{
-		addRectangle("question", position - vec2(0.0f, 0.1f), vec2(0.03f * title.size(), 0.5f), vec3(0.25f));
-		addTextfield("question", position, vec2(0.025f * title.size(), 0.1f), title, vec3(1.0f));
-		addButton("answer_form_yes", position + vec2(-0.1f, -0.2f), vec2(0.075f, 0.1f), vec3(0.0f, 0.5f, 0.0f), vec3(0.0f, 1.0f, 0.0f), "Yes", vec3(1.0f), vec3(0.0f));
-		addButton("answer_form_no", position + vec2(0.1f, -0.2f), vec2(0.075f, 0.1f), vec3(0.5f, 0.0f, 0.0f), vec3(1.0f, 0.0f, 0.0f), "No", vec3(1.0f), vec3(0.0f));
+		addRectangle("question", position - Vec2(0.0f, 0.1f), Vec2(0.03f * title.size(), 0.5f), Vec3(0.25f));
+		addTextfield("question", position, Vec2(0.025f * title.size(), 0.1f), title, Vec3(1.0f));
+		addButton("answer_form_yes", position + Vec2(-0.1f, -0.2f), Vec2(0.075f, 0.1f), Vec3(0.0f, 0.5f, 0.0f), Vec3(0.0f, 1.0f, 0.0f), "Yes", Vec3(1.0f), Vec3(0.0f));
+		addButton("answer_form_no", position + Vec2(0.1f, -0.2f), Vec2(0.075f, 0.1f), Vec3(0.5f, 0.0f, 0.0f), Vec3(1.0f, 0.0f, 0.0f), "No", Vec3(1.0f), Vec3(0.0f));
 		_isFocused = true;
 		_answerFormID = ID;
 	}

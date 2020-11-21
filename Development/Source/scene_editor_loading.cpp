@@ -19,10 +19,10 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 	if (_fe3d.misc_isFileExisting(filePath))
 	{
 		// Default camera
-		_fe3d.camera_load(90.0f, 0.1f, 10000.0f, vec3(0.0f));
+		_fe3d.camera_load(90.0f, 0.1f, 10000.0f, Vec3(0.0f));
 
 		// Default graphics
-		_fe3d.gfx_enableAmbientLighting(vec3(1.0f), 1.0f);
+		_fe3d.gfx_enableAmbientLighting(Vec3(1.0f), 1.0f);
 		_fe3d.gfx_enableSpecularLighting();
 		_fe3d.gfx_enablePointLighting();
 		_fe3d.gfx_enableSkyReflections(0.5f);
@@ -54,7 +54,7 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 				string name;
 				std::array<string, 6> diffuseMapPaths{};
 				float rotationSpeed, lightness;
-				vec3 color;
+				Vec3 color;
 
 				// Load base data
 				iss >>
@@ -132,8 +132,8 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 				// Values
 				string name, dudvMapPath, normalMapPath, displacementMapPath;
 				bool isWaving, isRippling, isSpecularLighted, isReflective, isRefractive;
-				vec2 speed;
-				vec3 color, position;
+				Vec2 speed;
+				Vec3 color, position;
 				float size, uvRepeat, waveHeightFactor, transparency, specularFactor, specularIntensity;
 
 				// Load base data
@@ -199,13 +199,13 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 
 				// Values
 				string objPath, diffuseMapPath, lightMapPath, reflectionMapPath, normalMapPath, lodEntityID;
-				vec3 position, rotation, size, color;
+				Vec3 position, rotation, size, color;
 				float uvRepeat, specularFactor, specularIntensity, lightness;
 				bool isFaceculled, isShadowed, isTransparent, isSpecular, isReflective, isFrozen, isInstanced;
-				vector<vec3> instancedOffsets;
+				vector<Vec3> instancedOffsets;
 				vector<string> aabbNames;
-				vector<vec3> aabbPositions;
-				vector<vec3> aabbSizes;
+				vector<Vec3> aabbPositions;
+				vector<Vec3> aabbSizes;
 
 				// Extract general data from file
 				iss >>
@@ -253,7 +253,7 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 					}
 					else // Add offset
 					{
-						vec3 offset;
+						Vec3 offset;
 						offset.x = stof(nextElement);
 						iss >> offset.y >> offset.z;
 						instancedOffsets.push_back(offset);
@@ -265,7 +265,7 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 				{
 					// Check if file has AABB data left
 					string name;
-					vec3 position, size;
+					Vec3 position, size;
 					iss >> name;
 					if (name == "")
 					{
@@ -310,8 +310,8 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 			{
 				// Placeholder variables
 				string billboardID, diffusePath, fontPath, textContent;
-				vec3 position, rotation, color;
-				vec2 size;
+				Vec3 position, rotation, color;
+				Vec2 size;
 				bool facingX, facingY, isTransparent, isAnimated;
 				int animationRows, animationColumns, animationFramestep;
 
@@ -355,7 +355,7 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 			else if (entityType == "AMBIENT_LIGHT")
 			{
 				// Values
-				vec3 ambientLightingColor;
+				Vec3 ambientLightingColor;
 				float ambientLightingIntensity;
 
 				// Extract
@@ -367,7 +367,7 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 			else if (entityType == "DIRECTIONAL_LIGHT")
 			{
 				// Values
-				vec3 directionalLightingPosition, directionalLightingColor;
+				Vec3 directionalLightingPosition, directionalLightingColor;
 				float directionalLightingIntensity, billboardSize;
 
 				// Extract
@@ -383,24 +383,24 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 
 				// Apply
 				_fe3d.gfx_enableDirectionalLighting(directionalLightingPosition, directionalLightingColor, directionalLightingIntensity);
-				_fe3d.billBoardEntity_add("@@lightSource", "engine\\textures\\light_source.png", directionalLightingPosition, vec3(0.0f), vec2(billboardSize), true, true, true, true);
+				_fe3d.billBoardEntity_add("@@lightSource", "engine\\textures\\light_source.png", directionalLightingPosition, Vec3(0.0f), Vec2(billboardSize), true, true, true, true);
 				_fe3d.billboardEntity_setDepthMapIncluded("@@lightSource", false);
 			}
 			else if (entityType == "POINT_LIGHT")
 			{
 				// Values
 				string ID;
-				vec3 position, color;
+				Vec3 position, color;
 				float intensity, distance;
 
 				// Extract line data
 				iss >> ID >> position.x >> position.y >> position.z >> color.r >> color.g >> color.b >> intensity >> distance;
 
 				// Add entities
-				_fe3d.gameEntity_add("@" + ID, "engine\\models\\lamp.obj", position, vec3(0.0f), _defaultLightbulbSize);
+				_fe3d.gameEntity_add("@" + ID, "engine\\models\\lamp.obj", position, Vec3(0.0f), _defaultLightbulbSize);
 				_fe3d.gameEntity_setShadowed("@" + ID, false);
 				_fe3d.gameEntity_setDepthMapIncluded("@" + ID, false);
-				_fe3d.aabbEntity_bindToGameEntity("@" + ID, vec3(0.0f), _defaultLightbulbAabbSize, true);
+				_fe3d.aabbEntity_bindToGameEntity("@" + ID, Vec3(0.0f), _defaultLightbulbAabbSize, true);
 				_fe3d.lightEntity_add(ID, position, color, intensity, distance);
 			}
 			else if (entityType == "LOD_DISTANCE")
@@ -417,7 +417,7 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 			{
 				if (_isLoaded)
 				{
-					vec3 position;
+					Vec3 position;
 					iss >> position.x >> position.y >> position.z;
 					_fe3d.camera_setPosition(position);
 				}
@@ -444,7 +444,7 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 			{
 				bool enabled;
 				float size;
-				vec3 position, center;
+				Vec3 position, center;
 				bool isFollowingCamera;
 				int interval;
 				iss >> enabled >> size >> position.x >> position.y >> position.z >> center.x >> center.y >> center.z >> isFollowingCamera >> interval;
@@ -468,7 +468,7 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 			{
 				bool enabled;
 				float minDistance, maxDistance, defaultFactor;
-				vec3 color;
+				Vec3 color;
 				iss >> enabled >> minDistance >> maxDistance >> defaultFactor >> color.r >> color.g >> color.b;
 				_fe3d.gfx_enableFog(minDistance, maxDistance, defaultFactor, color);
 			}

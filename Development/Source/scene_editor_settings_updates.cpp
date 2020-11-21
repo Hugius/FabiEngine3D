@@ -20,11 +20,11 @@ void SceneEditor::_updateMainSettingsMenu()
 				}
 				else if (screen->getButton("setSpeed")->isHovered())
 				{
-					_gui.getGlobalScreen()->addValueForm("setSpeed", "Camera speed", _customCameraSpeed, vec2(0.0f), vec2(0.3f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("setSpeed", "Camera speed", _customCameraSpeed, Vec2(0.0f), Vec2(0.3f, 0.1f));
 				}
 				else if (screen->getButton("lodDistance")->isHovered())
 				{
-					_gui.getGlobalScreen()->addValueForm("lodDistance", "LOD Distance", lodDistance, vec2(0.0f), vec2(0.3f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("lodDistance", "LOD Distance", lodDistance, Vec2(0.0f), Vec2(0.3f, 0.1f));
 				}
 				else if (screen->getButton("back")->isHovered())
 				{
@@ -94,8 +94,8 @@ void SceneEditor::_updateShadowGraphicsSettingsMenu()
 		auto screen = _gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuSettingsGraphicsShadows");
 		bool enabled = _fe3d.gfx_isShadowsEnabled();
 		float size = _fe3d.gfx_getShadowSize();
-		vec3 position = _fe3d.gfx_getShadowEyePosition();
-		vec3 center = _fe3d.gfx_getShadowCenter();
+		Vec3 position = _fe3d.gfx_getShadowEyePosition();
+		Vec3 center = _fe3d.gfx_getShadowCenter();
 		bool isFollowingCamera = _fe3d.gfx_isShadowFollowingCamera();
 		int interval = _fe3d.gfx_getShadowInterval();
 
@@ -108,19 +108,19 @@ void SceneEditor::_updateShadowGraphicsSettingsMenu()
 			}
 			else if (screen->getButton("size")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("size", "Size", _fe3d.gfx_getShadowSize(), vec2(0.0f, 0.0f), vec2(0.2f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("size", "Size", _fe3d.gfx_getShadowSize(), Vec2(0.0f, 0.0f), Vec2(0.2f, 0.1f));
 			}
 			else if (screen->getButton("position")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("positionX", "X", _fe3d.gfx_getShadowEyePosition().x, vec2(-0.25f, 0.0f), vec2(0.2f, 0.1f));
-				_gui.getGlobalScreen()->addValueForm("positionY", "Y", _fe3d.gfx_getShadowEyePosition().y, vec2(0.0f, 0.0f), vec2(0.2f, 0.1f));
-				_gui.getGlobalScreen()->addValueForm("positionZ", "Z", _fe3d.gfx_getShadowEyePosition().z, vec2(0.25f, 0.0f), vec2(0.2f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("positionX", "X", _fe3d.gfx_getShadowEyePosition().x, Vec2(-0.25f, 0.0f), Vec2(0.2f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("positionY", "Y", _fe3d.gfx_getShadowEyePosition().y, Vec2(0.0f, 0.0f), Vec2(0.2f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("positionZ", "Z", _fe3d.gfx_getShadowEyePosition().z, Vec2(0.25f, 0.0f), Vec2(0.2f, 0.1f));
 			}
 			else if (screen->getButton("center")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("centerX", "X", _fe3d.gfx_getShadowCenter().x, vec2(-0.25f, 0.0f), vec2(0.2f, 0.1f));
-				_gui.getGlobalScreen()->addValueForm("centerY", "Y", _fe3d.gfx_getShadowCenter().y, vec2(0.0f, 0.0f), vec2(0.2f, 0.1f));
-				_gui.getGlobalScreen()->addValueForm("centerZ", "Z", _fe3d.gfx_getShadowCenter().z, vec2(0.25f, 0.0f), vec2(0.2f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("centerX", "X", _fe3d.gfx_getShadowCenter().x, Vec2(-0.25f, 0.0f), Vec2(0.2f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("centerY", "Y", _fe3d.gfx_getShadowCenter().y, Vec2(0.0f, 0.0f), Vec2(0.2f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("centerZ", "Z", _fe3d.gfx_getShadowCenter().z, Vec2(0.25f, 0.0f), Vec2(0.2f, 0.1f));
 			}
 			else if (screen->getButton("follow")->isHovered())
 			{
@@ -128,7 +128,7 @@ void SceneEditor::_updateShadowGraphicsSettingsMenu()
 			}
 			else if (screen->getButton("interval")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("interval", "Frame interval", _fe3d.gfx_getShadowInterval(), vec2(0.0f, 0.0f), vec2(0.2f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("interval", "Frame interval", _fe3d.gfx_getShadowInterval(), Vec2(0.0f, 0.0f), Vec2(0.2f, 0.1f));
 			}
 			else if (screen->getButton("back")->isHovered()) // Back button
 			{
@@ -196,7 +196,7 @@ void SceneEditor::_updateMotionblurGraphicsSettingsMenu()
 			}
 			else if (screen->getButton("strength")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("strength", "Strength (%)", strength * 10.0f, vec2(0.0f), vec2(0.2f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("strength", "Strength (%)", strength * 10.0f, Vec2(0.0f), Vec2(0.2f, 0.1f));
 			}
 			else if (screen->getButton("back")->isHovered())
 			{
@@ -252,11 +252,11 @@ void SceneEditor::_updateDofGraphicsSettingsMenu()
 			}
 			else if (screen->getButton("blurDistance")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("blurDistance", "Blur distance", blurDistance, vec2(0.0f), vec2(0.2f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("blurDistance", "Blur distance", blurDistance, Vec2(0.0f), Vec2(0.2f, 0.1f));
 			}
 			else if (screen->getButton("maxDistance")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("maxDistance", "DOF distance", maxDistance, vec2(0.0f), vec2(0.2f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("maxDistance", "DOF distance", maxDistance, Vec2(0.0f), Vec2(0.2f, 0.1f));
 			}
 			else if (screen->getButton("back")->isHovered())
 			{
@@ -300,7 +300,7 @@ void SceneEditor::_updateFogGraphicsSettingsMenu()
 		float minDistance = _fe3d.gfx_getFogMinDistance();
 		float maxDistance = _fe3d.gfx_getFogMaxDistance();
 		float defaultFactor = _fe3d.gfx_getFogDefaultFactor();
-		vec3 color = _fe3d.gfx_getFogColor();
+		Vec3 color = _fe3d.gfx_getFogColor();
 
 		// GUI management
 		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
@@ -311,21 +311,21 @@ void SceneEditor::_updateFogGraphicsSettingsMenu()
 			}
 			else if (screen->getButton("minDistance")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("minDistance", "Min distance", minDistance, vec2(0.0f), vec2(0.2f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("minDistance", "Min distance", minDistance, Vec2(0.0f), Vec2(0.2f, 0.1f));
 			}
 			else if (screen->getButton("maxDistance")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("maxDistance", "Max distance", maxDistance, vec2(0.0f), vec2(0.2f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("maxDistance", "Max distance", maxDistance, Vec2(0.0f), Vec2(0.2f, 0.1f));
 			}
 			else if (screen->getButton("defaultFactor")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("defaultFactor", "Default factor (0-100%)", defaultFactor * 100.0f, vec2(0.0f), vec2(0.2f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("defaultFactor", "Default factor (0-100%)", defaultFactor * 100.0f, Vec2(0.0f), Vec2(0.2f, 0.1f));
 			}
 			else if (screen->getButton("color")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("colorR", "R(0-255)", color.r * 255.0f, vec2(-0.25f, 0.0f), vec2(0.2f, 0.1f));
-				_gui.getGlobalScreen()->addValueForm("colorG", "G(0-255)", color.g * 255.0f, vec2(0.0f, 0.0f), vec2(0.2f, 0.1f));
-				_gui.getGlobalScreen()->addValueForm("colorB", "B(0-255)", color.b * 255.0f, vec2(0.25f, 0.0f), vec2(0.2f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("colorR", "R(0-255)", color.r * 255.0f, Vec2(-0.25f, 0.0f), Vec2(0.2f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("colorG", "G(0-255)", color.g * 255.0f, Vec2(0.0f, 0.0f), Vec2(0.2f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("colorB", "B(0-255)", color.b * 255.0f, Vec2(0.25f, 0.0f), Vec2(0.2f, 0.1f));
 			}
 			else if (screen->getButton("back")->isHovered())
 			{
@@ -419,11 +419,11 @@ void SceneEditor::_updateLensFlareGraphicsSettingsMenu()
 			}
 			else if (screen->getButton("intensity")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("intensity", "Flare intensity (%)", intensity * 100.0f, vec2(0.0f), vec2(0.2f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("intensity", "Flare intensity (%)", intensity * 100.0f, Vec2(0.0f), Vec2(0.2f, 0.1f));
 			}
 			else if (screen->getButton("multiplier")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("multiplier", "Size multiplier (%)", multiplier * 100.0f, vec2(0.0f), vec2(0.2f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("multiplier", "Size multiplier (%)", multiplier * 100.0f, Vec2(0.0f), Vec2(0.2f, 0.1f));
 			}
 			else if (screen->getButton("back")->isHovered())
 			{
@@ -481,7 +481,7 @@ void SceneEditor::_updateskyHdrGraphicsSettingsMenu()
 			}
 			else if (screen->getButton("intensity")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("intensity", "Extra intensity (%)", intensity * 100.0f, vec2(0.0f), vec2(0.2f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("intensity", "Extra intensity (%)", intensity * 100.0f, Vec2(0.0f), Vec2(0.2f, 0.1f));
 			}
 			else if (screen->getButton("back")->isHovered())
 			{

@@ -116,19 +116,11 @@ void SkyEntityManager::update()
 
 void SkyEntityManager::_updateRotation()
 {
-	for (auto & entity : _getSkyEntities())
+	for (auto& entity : _getSkyEntities())
 	{
-		// Update
 		if (entity->isVisible())
 		{
-			if (entity->getRotationSpeed() != 0.0f) // Check if has to rotate at all
-			{
-				// Rotate matrix
-				entity->setRotationMatrix(glm::rotate(
-					entity->getRotationMatrix(),
-					glm::radians((entity->getRotationSpeed()) / 100.0f),
-					vec3(0.0f, 1.0f, 0.0f)));
-			}
+			entity->updateRotationMatrix();
 		}
 	}
 }

@@ -2,25 +2,25 @@
 
 #include <string>
 #include <SDL\\SDL_mixer.h>
-#include <GLM\\glm.hpp>
+#include "mathematics.hpp"
 
-using glm::vec3;
+
 using std::string;
 
 class AudioChunk final
 {
 public:
 	AudioChunk(const string& ID, const string& filePath, Mix_Chunk* chunk);
-	AudioChunk(const string& ID, const string& filePath, Mix_Chunk* chunk, vec3 position, float maxDistance);
+	AudioChunk(const string& ID, const string& filePath, Mix_Chunk* chunk, Vec3 position, float maxDistance);
 
 	const string& getID() const;
 	const string& getFilePath() const;
 
 	Mix_Chunk* getMixChunk() const;
 
-	void setPosition(vec3 position);
+	void setPosition(Vec3 position);
 
-	vec3 getPosition() const;
+	Vec3 getPosition() const;
 
 	float getMaxDistance() const;
 
@@ -32,7 +32,7 @@ private:
 	
 	Mix_Chunk* _chunk = nullptr;
 
-	vec3 _position = vec3(0.0f);
+	Vec3 _position = Vec3(0.0f);
 
 	float _maxDistance = 0.0f;
 

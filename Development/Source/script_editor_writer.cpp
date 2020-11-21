@@ -455,21 +455,21 @@ void ScriptEditor::_updateTextWriter()
 		// If cursor billboard not existing, create new one
 		if (!_fe3d.billboardEntity_isExisting("cursor"))
 		{
-			_fe3d.billBoardEntity_add("cursor", "", _fontPath, vec3(1.0f), vec3(0.0f), vec3(0.0f), _textCharacterSize, 0, 0);
+			_fe3d.billBoardEntity_add("cursor", "", _fontPath, Vec3(1.0f), Vec3(0.0f), Vec3(0.0f), _textCharacterSize, 0, 0);
 		}
 
 		// Update cursor billboard text & position
-		vec3 position;
+		Vec3 position;
 		if (cursorCharIndex == 0) // Default line position
 		{
-			vec3 linePosition = _fe3d.billboardEntity_getPosition(to_string(cursorLineIndex));
-			position = vec3(_scriptTextStartingPosition.x + _horizontalLineOffset - _horizontalCharacterOffset, linePosition.y, linePosition.z);
+			Vec3 linePosition = _fe3d.billboardEntity_getPosition(to_string(cursorLineIndex));
+			position = Vec3(_scriptTextStartingPosition.x + _horizontalLineOffset - _horizontalCharacterOffset, linePosition.y, linePosition.z);
 		}
 		else // Mid-text position
 		{
 			position = _fe3d.billboardEntity_getPosition(to_string(cursorLineIndex) + "_" + to_string(cursorCharIndex - 1));
 		}
-		position += vec3(_textCharacterSize.x / 2.0f, 0.0f, 0.0f);
+		position += Vec3(_textCharacterSize.x / 2.0f, 0.0f, 0.0f);
 		_fe3d.billboardEntity_setPosition("cursor", position);
 		bool showBar = ((barEnabled && _firstSelectedLineIndex == -1) || _activeActionKey != InputType::NONE);
 		_fe3d.billBoardEntity_setTextContent("cursor", (showBar ? "|" : " "));

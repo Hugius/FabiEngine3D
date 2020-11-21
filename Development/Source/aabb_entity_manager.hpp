@@ -12,8 +12,8 @@ public:
 
 	const vector<shared_ptr<AabbEntity>>& getEntities();
 	
-	void addAabbEntity(const string& ID, vec3 position, vec3 size, bool responsive);
-	void bindAabbEntity(const string& ID, const string& parentID, AabbParentType parentType, vec3 position, vec3 size, bool responsive);
+	void addAabbEntity(const string& ID, Vec3 position, Vec3 size, bool responsive);
+	void bindAabbEntity(const string& ID, const string& parentID, AabbParentType parentType, Vec3 position, Vec3 size, bool responsive);
 
 	void update() override {}
 	void update(const vector<shared_ptr<GameEntity>>& gameEntities, const vector<shared_ptr<BillboardEntity>>& billboardEntities);

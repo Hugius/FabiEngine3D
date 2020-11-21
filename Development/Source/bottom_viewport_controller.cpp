@@ -6,36 +6,36 @@
 void BottomViewportController::initialize()
 {
 	// Bottom-viewport: statistics
-	_gui.getViewport("bottom")->addWindow("statistics", vec2(-0.25f, 0.0f), vec2(0.9875f, 1.8f), BottomViewportController::frameColor);
+	_gui.getViewport("bottom")->addWindow("statistics", Vec2(-0.25f, 0.0f), Vec2(0.9875f, 1.8f), BottomViewportController::frameColor);
 	_gui.getViewport("bottom")->getWindow("statistics")->addScreen("main");
 	_gui.getViewport("bottom")->getWindow("statistics")->setActiveScreen("main");
 	_statsScreen = _gui.getViewport("bottom")->getWindow("statistics")->getScreen("main");
 
 	// General statistics
-	_statsScreen->addTextfield("fps", vec2(-1.0f, 0.85f), vec2(0.0f), "", vec3(1.0f), false, true);
-	_statsScreen->addTextfield("gpuName", vec2(-1.0f, 0.7f), vec2(0.0f), "", vec3(1.0f), false, false);
-	_statsScreen->addTextfield("openglVersion", vec2(-1.0f, 0.55f), vec2(0.0f), "", vec3(1.0f), false, false);
-	_statsScreen->addTextfield("cameraPosition", vec2(-1.0f, 0.4f), vec2(0.0f), "", vec3(1.0f), false, true);
-	_statsScreen->addTextfield("cameraYawPitch", vec2(-1.0f, 0.25f), vec2(0.0f), "", vec3(1.0f), false, true);
-	_statsScreen->addTextfield("cursorPosition", vec2(-1.0f, 0.1f), vec2(0.0f), "", vec3(1.0f), false, true);
-	_statsScreen->addTextfield("triangleCount", vec2(-1.0f, -0.05f), vec2(0.0f), "", vec3(1.0f), false, true);
-	_statsScreen->addTextfield("gameEntityCount", vec2(-1.0f, -0.2f), vec2(0.0f), "", vec3(1.0f), false, true);
-	_statsScreen->addTextfield("billboardEntityCount", vec2(-1.0f, -0.35f), vec2(0.0f), "", vec3(1.0f), false, true);
-	_statsScreen->addTextfield("lightEntityCount", vec2(-1.0f, -0.5f), vec2(0.0f), "", vec3(1.0f), false, true);
-	_statsScreen->addTextfield("aabbEntityCount", vec2(-1.0f, -0.65f), vec2(0.0f), "", vec3(1.0f), false, true);
-	_statsScreen->addTextfield("guiEntityCount", vec2(-1.0f, -0.8f), vec2(0.0f), "", vec3(1.0f), false, true);
+	_statsScreen->addTextfield("fps", Vec2(-1.0f, 0.85f), Vec2(0.0f), "", Vec3(1.0f), false, true);
+	_statsScreen->addTextfield("gpuName", Vec2(-1.0f, 0.7f), Vec2(0.0f), "", Vec3(1.0f), false, false);
+	_statsScreen->addTextfield("openglVersion", Vec2(-1.0f, 0.55f), Vec2(0.0f), "", Vec3(1.0f), false, false);
+	_statsScreen->addTextfield("cameraPosition", Vec2(-1.0f, 0.4f), Vec2(0.0f), "", Vec3(1.0f), false, true);
+	_statsScreen->addTextfield("cameraYawPitch", Vec2(-1.0f, 0.25f), Vec2(0.0f), "", Vec3(1.0f), false, true);
+	_statsScreen->addTextfield("cursorPosition", Vec2(-1.0f, 0.1f), Vec2(0.0f), "", Vec3(1.0f), false, true);
+	_statsScreen->addTextfield("triangleCount", Vec2(-1.0f, -0.05f), Vec2(0.0f), "", Vec3(1.0f), false, true);
+	_statsScreen->addTextfield("gameEntityCount", Vec2(-1.0f, -0.2f), Vec2(0.0f), "", Vec3(1.0f), false, true);
+	_statsScreen->addTextfield("billboardEntityCount", Vec2(-1.0f, -0.35f), Vec2(0.0f), "", Vec3(1.0f), false, true);
+	_statsScreen->addTextfield("lightEntityCount", Vec2(-1.0f, -0.5f), Vec2(0.0f), "", Vec3(1.0f), false, true);
+	_statsScreen->addTextfield("aabbEntityCount", Vec2(-1.0f, -0.65f), Vec2(0.0f), "", Vec3(1.0f), false, true);
+	_statsScreen->addTextfield("guiEntityCount", Vec2(-1.0f, -0.8f), Vec2(0.0f), "", Vec3(1.0f), false, true);
 
 	// Performance profiling
 	auto performanceStats = _fe3d.misc_getPerformanceProfilingStatistics();
 	int counter = 1;
 	for (auto& [key, value] : performanceStats)
 	{
-		_statsScreen->addTextfield(key, vec2(-0.25f, 1.0f - (static_cast<float>(counter) * 0.15f)), vec2(0.0f, 0.15f), "", vec3(1.0f), false, false);
+		_statsScreen->addTextfield(key, Vec2(-0.25f, 1.0f - (static_cast<float>(counter) * 0.15f)), Vec2(0.0f, 0.15f), "", Vec3(1.0f), false, false);
 		counter++;
 	}
 
 	// Console window
-	_gui.getViewport("bottom")->addWindow("console", vec2(0.25f, 0.0f), vec2(0.9875f, 1.8f), BottomViewportController::frameColor);
+	_gui.getViewport("bottom")->addWindow("console", Vec2(0.25f, 0.0f), Vec2(0.9875f, 1.8f), BottomViewportController::frameColor);
 	_gui.getViewport("bottom")->getWindow("console")->addScreen("main");
 	_gui.getViewport("bottom")->getWindow("console")->setActiveScreen("main");
 }
@@ -79,7 +79,7 @@ void BottomViewportController::update()
 	if (_fe3d.misc_checkInterval("cameraPosition", 1))
 	{
 		string textID = _statsScreen->getTextfield("cameraPosition")->getEntityID();
-		string text = "Camera position: " + _fe3d.misc_vec2str(ivec3(_fe3d.camera_getPosition()));
+		string text = "Camera position: " + _fe3d.misc_vec2str(ivec3(_fe3d.camera_getPosition().x, _fe3d.camera_getPosition().y, _fe3d.camera_getPosition().z));
 		_fe3d.textEntity_setTextContent(textID, text, _charSize.x, _charSize.y);
 	}
 
@@ -96,7 +96,7 @@ void BottomViewportController::update()
 	if (_fe3d.misc_checkInterval("cursorPosition", 1))
 	{
 		string textID = _statsScreen->getTextfield("cursorPosition")->getEntityID();
-		string text = "Raycast position: " + _fe3d.misc_vec2str(ivec3(_fe3d.terrainEntity_getMousePoint()));
+		string text = "Raycast position: " + _fe3d.misc_vec2str(ivec3(_fe3d.terrainEntity_getMousePoint().x, _fe3d.terrainEntity_getMousePoint().y, _fe3d.terrainEntity_getMousePoint().z));
 		_fe3d.textEntity_setTextContent(textID, text, _charSize.x, _charSize.y);
 	}
 

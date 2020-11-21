@@ -33,7 +33,7 @@ void EnvironmentEditor::loadSkyEntitiesFromFile()
 			string name;
 			std::array<string, 6> diffuseMapPaths{};
 			float rotationSpeed, lightness;
-			vec3 color;
+			Vec3 color;
 
 			// Load base data
 			iss >>
@@ -96,7 +96,7 @@ void EnvironmentEditor::saveSkyEntitiesToFile()
 			auto diffuseMapPaths = _fe3d.skyEntity_getDiffuseMapPaths(name);
 			float rotationSpeed = _fe3d.skyEntity_getRotationSpeed(name);
 			float lightness = _fe3d.skyEntity_getLightness(name);
-			vec3 color = _fe3d.skyEntity_getColor(name);
+			Vec3 color = _fe3d.skyEntity_getColor(name);
 
 			// Perform empty string & space conversions
 			for (auto& diffuseMapPath : diffuseMapPaths)

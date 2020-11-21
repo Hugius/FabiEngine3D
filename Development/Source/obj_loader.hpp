@@ -3,12 +3,12 @@
 #include <vector>
 #include <map>
 #include <string>
-#include <GLM\\glm.hpp>
+#include "mathematics.hpp"
 
 using std::vector;
 using std::string;
-using glm::vec2;
-using glm::vec3;
+
+
 
 struct ObjPart 
 {
@@ -18,10 +18,10 @@ struct ObjPart
 	string normalMapName;
 	string reflectionMapName;
 	
-	vector<vec3> vertices;
-	vector<vec2> uvCoords;
-	vector<vec3> normals;
-	vector<vec3> tangents;
+	vector<Vec3> vertices;
+	vector<Vec2> uvCoords;
+	vector<Vec3> normals;
+	vector<Vec3> tangents;
 };
 
 class OBJLoader final

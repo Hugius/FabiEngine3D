@@ -34,7 +34,7 @@ const vector<shared_ptr<GuiEntity>> GuiEntityManager::getEntities()
 	return _getGuiEntities();
 }
 
-void GuiEntityManager::addGuiEntity(const string& ID, const string& texturePath, vec2 translation, float rotation, vec2 scaling, bool engine, bool isCentered)
+void GuiEntityManager::addGuiEntity(const string& ID, const string& texturePath, Vec2 translation, float rotation, Vec2 scaling, bool engine, bool isCentered)
 {
 	// Create entity
 	_createEntity(ID);
@@ -50,7 +50,7 @@ void GuiEntityManager::addGuiEntity(const string& ID, const string& texturePath,
 	getEntity(ID)->setDiffuseMap(_texLoader.getTexture(texturePath, true, true, false));
 }
 
-void GuiEntityManager::addGuiEntity(const string& ID, vec3 color, vec2 translation, float rotation, vec2 scaling, bool isCentered)
+void GuiEntityManager::addGuiEntity(const string& ID, Vec3 color, Vec2 translation, float rotation, Vec2 scaling, bool isCentered)
 {
 	// Create entity
 	_createEntity(ID);

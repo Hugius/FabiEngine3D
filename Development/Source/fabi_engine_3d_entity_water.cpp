@@ -79,7 +79,7 @@ void FabiEngine3D::waterEntity_select(const string& ID)
 	_core->_waterEntityManager.selectWater(ID);
 }
 
-void FabiEngine3D::waterEntity_setPosition(const string& ID, vec3 position)
+void FabiEngine3D::waterEntity_setPosition(const string& ID, Vec3 position)
 {
 	_core->_waterEntityManager.getEntity(ID)->setPosition(position);
 }
@@ -153,12 +153,12 @@ void FabiEngine3D::waterEntity_setSpecularLightingIntensity(const string& ID, fl
 	_core->_waterEntityManager.getEntity(ID)->setSpecularLightingIntensity(intensity);
 }
 
-void FabiEngine3D::waterEntity_setSpeed(const string& ID, vec2 speed)
+void FabiEngine3D::waterEntity_setSpeed(const string& ID, Vec2 speed)
 {
 	_core->_waterEntityManager.getEntity(ID)->setSpeed(speed);
 }
 
-void FabiEngine3D::waterEntity_setColor(const string& ID, vec3 color)
+void FabiEngine3D::waterEntity_setColor(const string& ID, Vec3 color)
 {
 	_core->_waterEntityManager.getEntity(ID)->setColor(color);
 }
@@ -202,7 +202,7 @@ float FabiEngine3D::waterEntity_getUvRepeat(const string& ID)
 	return _core->_waterEntityManager.getEntity(ID)->getUvRepeat();
 }
 
-vec2 FabiEngine3D::waterEntity_getSpeed(const string& ID)
+Vec2 FabiEngine3D::waterEntity_getSpeed(const string& ID)
 {
 	return _core->_waterEntityManager.getEntity(ID)->getSpeed();
 }
@@ -242,12 +242,12 @@ const string& FabiEngine3D::waterEntity_getDisplacementMapPath(const string& ID)
 	return _core->_waterEntityManager.getEntity(ID)->getDisplacementMapPath();
 }
 
-vec3 FabiEngine3D::waterEntity_getPosition(const string& ID)
+Vec3 FabiEngine3D::waterEntity_getPosition(const string& ID)
 {
 	return _core->_waterEntityManager.getEntity(ID)->getPosition();
 }
 
-vec3 FabiEngine3D::waterEntity_getColor(const string& ID)
+Vec3 FabiEngine3D::waterEntity_getColor(const string& ID)
 {
 	return _core->_waterEntityManager.getEntity(ID)->getColor();
 }

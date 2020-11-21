@@ -73,9 +73,9 @@ void RenderEngine::_renderGameEntities()
 					if (entity->getLodEntityID() == lodEntity->getID())
 					{
 						// Save original transformation
-						vec3 originalPosition = lodEntity->getTranslation();
-						vec3 originalRotation = lodEntity->getRotation();
-						vec3 originalSize = lodEntity->getScaling();
+						Vec3 originalPosition = lodEntity->getTranslation();
+						Vec3 originalRotation = lodEntity->getRotation();
+						Vec3 originalSize = lodEntity->getScaling();
 						bool originalVisibility = lodEntity->isVisible();
 
 						// Change transformation

@@ -139,9 +139,9 @@ void SceneEditor::_updateModelEditing()
 				}
 
 				// Get entity transformation
-				vec3 position = _fe3d.gameEntity_getPosition(_activeModelID);
-				vec3 rotation = _fe3d.gameEntity_getRotation(_activeModelID);
-				vec3 size	  = _fe3d.gameEntity_getSize(_activeModelID);
+				Vec3 position = _fe3d.gameEntity_getPosition(_activeModelID);
+				Vec3 rotation = _fe3d.gameEntity_getRotation(_activeModelID);
+				Vec3 size	  = _fe3d.gameEntity_getSize(_activeModelID);
 
 				// Apply new model position / rotation / size
 				if (_transformation == TransformationType::TRANSLATION)
@@ -170,7 +170,7 @@ void SceneEditor::_updateModelEditing()
 				else if (_transformation == TransformationType::SCALING)
 				{
 					// Model size
-					vec3 oldSize = size;
+					Vec3 oldSize = size;
 					float factor = 25.0f;
 					_handleValueChanging("modelPropertiesMenu", "xPlus", "x", size.x, _movementChangingSpeed, factor);
 					_handleValueChanging("modelPropertiesMenu", "xMinus", "x", size.x, -_movementChangingSpeed, factor);

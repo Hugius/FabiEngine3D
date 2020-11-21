@@ -2,11 +2,11 @@
 
 #include "terrain_entity_manager.hpp"
 
-#include <GLM\\glm.hpp>
+#include "mathematics.hpp"
 
 using glm::ivec2;
-using glm::vec3;
-using glm::vec4;
+
+
 
 class MousePicker final
 {
@@ -16,26 +16,26 @@ public:
 
 	void update(ivec2 mousePos, TerrainEntityManager& terrainManager);
 
-	float checkCursorInBox(vec3 lb, vec3 rt, vec3 cameraPos);
+	float checkCursorInBox(Vec3 lb, Vec3 rt, Vec3 cameraPos);
 
-	vec3 getRay();
-	vec3 getTerrainPoint();
+	Vec3 getRay();
+	Vec3 getTerrainPoint();
 
 	bool isValidTerrainPoint();
 
 private:
 	RenderBus& _renderBus;
 
-	vec3 _getMouseRay(ivec2 mousePos);
-	vec2 _converToNDC(ivec2 val);
-	vec4 _convertToViewSpace(vec4 val);
-	vec3 _convertToWorldSpace(vec4 val);
-	vec3 _getPointOnRay(vec3 ray, float distance);
-	vec3 _binarySearch(int count, float start, float finish, vec3 ray, TerrainEntityManager& terrainManager);
-	bool _notUnderTerrain(float start, float finish, vec3 ray, TerrainEntityManager& terrainManager);
+	Vec3 _getMouseRay(ivec2 mousePos);
+	Vec2 _converToNDC(ivec2 val);
+	Vec4 _convertToViewSpace(Vec4 val);
+	Vec3 _convertToWorldSpace(Vec4 val);
+	Vec3 _getPointOnRay(Vec3 ray, float distance);
+	Vec3 _binarySearch(int count, float start, float finish, Vec3 ray, TerrainEntityManager& terrainManager);
+	bool _notUnderTerrain(float start, float finish, Vec3 ray, TerrainEntityManager& terrainManager);
 
-	vec3 _ray = vec3(0.0f);
-	vec3 _terrainPoint = vec3(0.0f);
+	Vec3 _ray = Vec3(0.0f);
+	Vec3 _terrainPoint = Vec3(0.0f);
 
 	bool _isValidTerrainPoint = false;
 };

@@ -354,29 +354,31 @@ Matrix44 Matrix44::createOrtho(float left, float right, float bottom, float top,
 	newMatrix.m[0][0] = 2.0f / (right - left);
 	newMatrix.m[1][1] = 2.0f / (top - bottom);
 	newMatrix.m[2][2] = -2.0f / (farZ - nearZ);
-	newMatrix.m[3][0] = -(right + left) / (right - left);
-	newMatrix.m[3][1] = -(top + bottom) / (top - bottom);
+	newMatrix.m[3][0] = -((right + left) / (right - left));
+	newMatrix.m[3][1] = -((top + bottom) / (top - bottom));
 	newMatrix.m[3][2] = -(4 * (nearZ) / (farZ - nearZ));
 
 	return newMatrix;
 };
 
 // Create and return a new perspective projection matrix
-Matrix44 Matrix44::createPerspective(float fovY, float aspect, float nearZ, float farZ)
+Matrix44 Matrix44::createProjection(float fovY, float aspect, float nearZ, float farZ)
 {
-	Matrix44 result;
+	// Cache
+	float tanHalfFov = tan(fovY / 2.0f);
 
-	result.m[0][0] = 1.0f / (aspect*tan(fovY / 2.0f));
-	result.m[1][1] = 1.0f / tan(fovY / 2.0f);
-	result.m[2][2] = -(farZ + nearZ) / (farZ - nearZ);
-	result.m[2][3] = -1.0f;
-	result.m[3][2] = (-2.0f * farZ * nearZ) / (farZ - nearZ);
-	
-	return result;
+	// Create projection matrix
+	Matrix44 newMatrix(0.0f);
+	newMatrix.m[0][0] = 1.0f / (aspect * tanHalfFov);
+	newMatrix.m[1][1] = 1.0f / tanHalfFov;
+	newMatrix.m[2][2] = -((farZ + nearZ) / (farZ - nearZ));
+	newMatrix.m[2][3] = -1.0f;
+	newMatrix.m[3][2] = -((2.0f * farZ * nearZ) / (farZ - nearZ));
+	return newMatrix;
 }
 
 // Create and return a new view matrix
-Matrix44 Matrix44::createLookAt
+Matrix44 Matrix44::createView
 	(const Vec3 & eye, const Vec3 & center, const Vec3 & up)
 {
 	// Calculate direction vectors
@@ -387,7 +389,7 @@ Matrix44 Matrix44::createLookAt
 	Vec3 upVector = rightVector.cross(frontVector);
 
 	// Create view matrix
-	Matrix44 newMatrix;
+	Matrix44 newMatrix(1.0f);
 	newMatrix.m[0][0] = rightVector.x;
 	newMatrix.m[1][0] = rightVector.y;
 	newMatrix.m[2][0] = rightVector.z;
@@ -399,6 +401,6 @@ Matrix44 Matrix44::createLookAt
 	newMatrix.m[2][2] = -frontVector.z;
 	newMatrix.m[3][0] = -(rightVector.dot(eye));
 	newMatrix.m[3][1] = -(upVector.dot(eye));
-	newMatrix.m[3][2] = frontVector.dot(eye);
+	newMatrix.m[3][2] =  frontVector.dot(eye);
 	return newMatrix;
 }

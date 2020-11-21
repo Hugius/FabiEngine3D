@@ -36,7 +36,7 @@ const vector<shared_ptr<BillboardEntity>> BillboardEntityManager::getEntities()
 	return _getBillboardEntities();
 }
 
-void BillboardEntityManager::addBillboardEntity(const string& ID, vec3 color, vec3 T, vec3 R, vec3 S, bool facingCameraX, bool facingCameraY)
+void BillboardEntityManager::addBillboardEntity(const string& ID, Vec3 color, Vec3 T, Vec3 R, Vec3 S, bool facingCameraX, bool facingCameraY)
 {
 	// Create entity
 	_createEntity(ID);
@@ -55,11 +55,11 @@ void BillboardEntityManager::addBillboardEntity(const string& ID, vec3 color, ve
 void BillboardEntityManager::addBillboardEntity
 (
 	const string& ID, const string& texturePath,
-	vec3 T, vec3 R, vec3 S,
+	Vec3 T, Vec3 R, Vec3 S,
 	bool transparent, bool facingCameraX, bool facingCameraY, bool textureFiltering
 )
 {
-	addBillboardEntity(ID, vec3(1.0f), T, R, S, facingCameraX, facingCameraY);
+	addBillboardEntity(ID, Vec3(1.0f), T, R, S, facingCameraX, facingCameraY);
 	getEntity(ID)->setDiffuseMap(_texLoader.getTexture(texturePath, textureFiltering, true));
 	getEntity(ID)->setDiffuseMapPath(texturePath);
 	getEntity(ID)->setTransparent(transparent);
@@ -68,8 +68,8 @@ void BillboardEntityManager::addBillboardEntity
 void BillboardEntityManager::addBillboardEntity
 (
 	const string& ID, const string& text,
-	const string& fontPath, vec3 color,
-	vec3 T, vec3 R, vec3 S, bool facingCameraX, bool facingCameraY
+	const string& fontPath, Vec3 color,
+	Vec3 T, Vec3 R, Vec3 S, bool facingCameraX, bool facingCameraY
 )
 {
 	addBillboardEntity(ID, color, T, R, S, facingCameraX, facingCameraY);
@@ -86,10 +86,10 @@ void BillboardEntityManager::update()
 		// 3D camera facing
 		auto facingX = entity->isCameraFacingX();
 		auto facingY = entity->isCameraFacingY();
-		vec3 rotation = entity->getRotation();
+		Vec3 rotation = entity->getRotation();
 		if (facingX || facingY)
 		{
-			vec3 direction = entity->getTranslation() - _renderBus.getCameraPosition();
+			Vec3 direction = entity->getTranslation() - _renderBus.getCameraPosition();
 			float radiansX = atan2f(direction.y, (fabsf(direction.x) + fabsf(direction.z)) / 2.0f);
 			float radiansY = atan2f(direction.z, direction.x);
 			rotation.x = (radiansX * (180.0f / 3.141592653589793238463f)) * facingX;

@@ -25,9 +25,9 @@ public:
 
 private:
 	bool _addModel(const string& modelName, string objName, string diffuseMapName, string lightMapName, string reflectionMapName, string normalMapName,
-		vec3 size, bool isFaceCulled, bool isShadowed, bool isTransparent, bool isReflective, bool isSpecular,
-		float specularFactor, float specularIntensity, float lightness, vec3 color, float uvRepeat, string lodEntityID, bool isInstanced,
-		vector<string> aabbNames, vector<vec3> aabbPositions, vector<vec3> aabbSizes);
+		Vec3 size, bool isFaceCulled, bool isShadowed, bool isTransparent, bool isReflective, bool isSpecular,
+		float specularFactor, float specularIntensity, float lightness, Vec3 color, float uvRepeat, string lodEntityID, bool isInstanced,
+		vector<string> aabbNames, vector<Vec3> aabbPositions, vector<Vec3> aabbSizes);
 	void _loadObjFileNames();
 	void _loadOBJ();
 	void _loadDiffuseMap();
@@ -60,10 +60,10 @@ private:
 	vector<string> _objFileNamesList;
 
 	// Vectors
-	const vec3 _defaultCameraPosition = vec3(0.0f, 5.0f, 5.0f);
-	vec2 _totalCursorDifference = vec2(0.0f);
-	vec2 _cameraAcceleration = vec2(0.0f);
-	vec2 _lastCursorPos = vec2(0.0f);
+	const Vec3 _defaultCameraPosition = Vec3(0.0f, 5.0f, 5.0f);
+	Vec2 _totalCursorDifference = Vec2(0.0f);
+	Vec2 _cameraAcceleration = Vec2(0.0f);
+	Vec2 _lastCursorPos = Vec2(0.0f);
 
 	// Floats
 	float _cameraDistance = 5.0f;

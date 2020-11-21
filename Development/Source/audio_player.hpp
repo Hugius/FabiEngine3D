@@ -7,10 +7,10 @@
 #include <map>
 #include <string>
 #include <vector>
-#include <GLM\\glm.hpp>
+#include "mathematics.hpp"
 
-using glm::vec3;
-using glm::mat4;
+
+
 using std::string;
 
 class AudioPlayer final

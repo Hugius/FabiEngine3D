@@ -1,7 +1,7 @@
 #include "engine_gui_textfield.hpp"
 
-EngineGuiTextfield::EngineGuiTextfield(FabiEngine3D& fe3d, const string& parentID, const string& ID, vec2 position, vec2 size, 
-	string textContent, vec3 textColor, bool isCentered, bool isDynamic) :
+EngineGuiTextfield::EngineGuiTextfield(FabiEngine3D& fe3d, const string& parentID, const string& ID, Vec2 position, Vec2 size, 
+	string textContent, Vec3 textColor, bool isCentered, bool isDynamic) :
 	_fe3d(fe3d),
 	_ID(ID),
 	_entityID(parentID + "_" + ID),
@@ -28,17 +28,17 @@ void EngineGuiTextfield::hide()
 	_fe3d.textEntity_hide(_entityID);
 }
 
-const vec2 EngineGuiTextfield::getOriginalPosition()
+const Vec2 EngineGuiTextfield::getOriginalPosition()
 {
 	return _originalPosition;
 }
 
-const vec2 EngineGuiTextfield::getOriginalSize()
+const Vec2 EngineGuiTextfield::getOriginalSize()
 {
 	return _originalSize;
 }
 
-const vec3 EngineGuiTextfield::getOriginalColor()
+const Vec3 EngineGuiTextfield::getOriginalColor()
 {
 	return _originalColor;
 }

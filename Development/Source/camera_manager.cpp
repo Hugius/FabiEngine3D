@@ -1,9 +1,14 @@
 #include "camera_manager.hpp"
 #include "configuration.hpp"
 #include "render_bus.hpp"
+#include "mathematics.hpp"
+#include "matrix44.hpp"
 
 #include <GLM\\gtc\\matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+#include <GLM/glm.hpp>
 #include <algorithm>
+#include <iostream>
 
 CameraManager::CameraManager(RenderBus& renderBus) :
 	_renderBus(renderBus)
@@ -14,15 +19,14 @@ CameraManager::CameraManager(RenderBus& renderBus) :
 void CameraManager::reset()
 {
 	// Matrices
-	_viewMatrix = mat4(1.0f);
-	_projectionMatrix = mat4(1.0f);
+	_viewMatrix = Matrix44(1.0f);
+	_projectionMatrix = Matrix44(1.0f);
 
 	// Vectors
-	_up = vec3(0.0f);
-	_right = vec3(0.0f);
-	_front = vec3(0.0f);
-	_position = vec3(0.0f);
-	_lookat = vec3(0.0f);
+	_right = Vec3(0.0f);
+	_front = Vec3(0.0f);
+	_position = Vec3(0.0f);
+	_lookat = Vec3(0.0f);
 
 	// Floats
 	_fov = 0.0f;
@@ -122,39 +126,29 @@ void CameraManager::update(WindowManager & windowManager)
 
 void CameraManager::updateMatrices()
 {
-	// Normal front vector
-	_front.x = cos(glm::radians(_pitch)) * cos(glm::radians(_yaw));
-	_front.y = sin(glm::radians(_pitch));
-	_front.z = cos(glm::radians(_pitch)) * sin(glm::radians(_yaw));
-	_front = glm::normalize(_front);
-
 	// Lookat front vector
 	if(_isLookatEabled)
 	{
-		_front = _lookat;
-		_front = glm::normalize(_front - _position);
+		_front = _lookat - _position;
+		_front.normalize();
+	}
+	else // First person front vector
+	{
+		_front.x = cos(Math::degreesToRadians(_pitch)) * cos(Math::degreesToRadians(_yaw));
+		_front.y = sin(Math::degreesToRadians(_pitch));
+		_front.z = cos(Math::degreesToRadians(_pitch)) * sin(Math::degreesToRadians(_yaw));
+		_front.normalize();
 	}
 
 	// Calculate the view matrix input
-	_right = glm::normalize(glm::cross(_front, vec3(0.0f, 1.0f, 0.0f)));
-	_up    = glm::normalize(glm::cross(_right, _front));
+	_right = _front.cross(_up);
+	_right.normalize();
+	
+	// View matrix
+	_viewMatrix = Matrix44::createView(_position, _position + _front, _up);
 
 	// Projection matrix
-	_projectionMatrix = glm::perspective(glm::radians(_fov), _aspectRatio, _nearZ, _farZ);
-
-	// View matrix
-	_viewMatrix[0][0] =  _right.x;
-	_viewMatrix[1][0] =  _right.y;
-	_viewMatrix[2][0] =  _right.z;
-	_viewMatrix[0][1] =  _up.x;
-	_viewMatrix[1][1] =  _up.y;
-	_viewMatrix[2][1] =  _up.z;
-	_viewMatrix[0][2] = -_front.x;
-	_viewMatrix[1][2] = -_front.y;
-	_viewMatrix[2][2] = -_front.z;
-	_viewMatrix[3][0] = -glm::dot(_right, _position);
-	_viewMatrix[3][1] = -glm::dot(_up, _position);
-	_viewMatrix[3][2] =  glm::dot(_front, _position);
+	_projectionMatrix = Matrix44::createProjection(Math::degreesToRadians(_fov), _aspectRatio, _nearZ, _farZ);
 	
 	// Update renderbus
 	_renderBus.setCameraYaw(_yaw);
@@ -179,9 +173,9 @@ void CameraManager::translateFollowZ(float speed) // Forward movement
 {
 	if (_isFreeMovementEnabled)
 	{
-		vec3 tempFront = _front;
-		tempFront.x = cos(glm::radians(_yaw));
-		tempFront.z = sin(glm::radians(_yaw));
+		Vec3 tempFront = _front;
+		tempFront.x = cos(Math::degreesToRadians(_yaw));
+		tempFront.z = sin(Math::degreesToRadians(_yaw));
 		_position.x += (tempFront.x * speed);
 		_position.z += (tempFront.z * speed);
 	}
@@ -197,7 +191,7 @@ void CameraManager::translateFollowZY(float speed) // Forward movement
 	}
 }
 
-void CameraManager::enableLookat(vec3 position)
+void CameraManager::enableLookat(Vec3 position)
 {
 	_isLookatEabled = true;
 	_lookat = position;
@@ -230,7 +224,7 @@ void CameraManager::disableFreeMovement()
 
 void CameraManager::setFOV(float val)
 {
-	_viewMatrix[3][2] = glm::dot(_front, _position);
+	_viewMatrix.m[3][2] = _front.dot(_position);
 	_fov = val;
 }
 
@@ -261,17 +255,17 @@ void CameraManager::setFarZ(float val)
 	_farZ = val;
 }
 
-const vec3 CameraManager::getPosition() const
+const Vec3 CameraManager::getPosition() const
 {
 	return _position;
 }
 
-const vec3 CameraManager::getFront() const
+const Vec3 CameraManager::getFront() const
 {
 	return _front;
 }
 
-const vec3 CameraManager::getLookat() const
+const Vec3 CameraManager::getLookat() const
 {
 	return _lookat;
 }
@@ -331,7 +325,7 @@ const bool CameraManager::isLookatEnabled() const
 	return _isLookatEabled;
 }
 
-void CameraManager::translate(vec3 translation)
+void CameraManager::translate(Vec3 translation)
 {
 	if (_isFreeMovementEnabled)
 	{
@@ -339,7 +333,7 @@ void CameraManager::translate(vec3 translation)
 	}
 }
 
-void CameraManager::setPosition(vec3 val)
+void CameraManager::setPosition(Vec3 val)
 {
 	if (_isFreeMovementEnabled)
 	{
@@ -362,12 +356,12 @@ void CameraManager::center()
 	_mustCenter = true;
 }
 
-const mat4 & CameraManager::getViewMatrix() const
+const Matrix44 & CameraManager::getViewMatrix() const
 {
 	return _viewMatrix;
 }
 
-const mat4 & CameraManager::getProjectionMatrix() const
+const Matrix44 & CameraManager::getProjectionMatrix() const
 {
 	return _projectionMatrix;
 }

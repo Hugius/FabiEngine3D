@@ -17,7 +17,7 @@ void SceneEditor::_placeSky(const string& newID, const string& previewID)
 	_fe3d.skyEntity_select(newID);
 }
 
-void SceneEditor::_placeSky(const string& newID, const array<string, 6>& diffuseMapPaths, float lightness, float rotationSpeed, vec3 color)
+void SceneEditor::_placeSky(const string& newID, const array<string, 6>& diffuseMapPaths, float lightness, float rotationSpeed, Vec3 color)
 {
 	// Delete old
 	if (_fe3d.skyEntity_isExisting(newID))
@@ -167,8 +167,8 @@ void SceneEditor::_placeWater(const string& newID, const string& previewID)
 	}
 }
 
-void SceneEditor::_placeWater(const string& newID, vec3 position, float size, bool isWaving, bool isRippling, bool isSpecularLighted, bool isReflective,
-	bool isRefractive, float waveHeightFactor, float specularFactor, float specularIntensity, float transparency, vec3 color, float uvRepeat, vec2 speed,
+void SceneEditor::_placeWater(const string& newID, Vec3 position, float size, bool isWaving, bool isRippling, bool isSpecularLighted, bool isReflective,
+	bool isRefractive, float waveHeightFactor, float specularFactor, float specularIntensity, float transparency, Vec3 color, float uvRepeat, Vec2 speed,
 	const string& dudvMapPath, const string& normalMapPath, const string& displacementMapPath)
 {
 	// Delete old
@@ -203,7 +203,7 @@ void SceneEditor::_placeWater(const string& newID, vec3 position, float size, bo
 	if (displacementMapPath != "") _fe3d.waterEntity_setDisplacementMap(newID, displacementMapPath);
 }
 
-void SceneEditor::_placeModel(const string& newID, const string& previewID, vec3 position)
+void SceneEditor::_placeModel(const string& newID, const string& previewID, Vec3 position)
 {
 	// Check if instanced entity
 	if (_fe3d.gameEntity_isInstanced(previewID))
@@ -219,7 +219,7 @@ void SceneEditor::_placeModel(const string& newID, const string& previewID, vec3
 		else
 		{
 			// Create new GAME entity
-			_fe3d.gameEntity_add(instancedID, _fe3d.gameEntity_getObjPath(previewID), vec3(0.0f), vec3(0.0f), _fe3d.gameEntity_getSize(previewID));
+			_fe3d.gameEntity_add(instancedID, _fe3d.gameEntity_getObjPath(previewID), Vec3(0.0f), Vec3(0.0f), _fe3d.gameEntity_getSize(previewID));
 
 			// Fill GAME entity
 			_fe3d.gameEntity_setFaceCulled(instancedID, _fe3d.gameEntity_isFaceCulled(previewID));
@@ -266,7 +266,7 @@ void SceneEditor::_placeModel(const string& newID, const string& previewID, vec3
 	else // Normal entity
 	{
 		// Add GAME entity
-		_fe3d.gameEntity_add(newID, _fe3d.gameEntity_getObjPath(previewID), position, vec3(0.0f), _fe3d.gameEntity_getSize(previewID));
+		_fe3d.gameEntity_add(newID, _fe3d.gameEntity_getObjPath(previewID), position, Vec3(0.0f), _fe3d.gameEntity_getSize(previewID));
 
 		// Bind AABB entities to GAME entity
 		for (auto& previewAabbID : _fe3d.aabbEntity_getBoundIDs(previewID, true, false))
@@ -319,11 +319,11 @@ void SceneEditor::_placeModel(const string& newID, const string& previewID, vec3
 	}
 }
 
-void SceneEditor::_placeModel(const string& newID, vec3 position, vec3 rotation, vec3 size, const string& objPath, const string& diffuseMapPath,
+void SceneEditor::_placeModel(const string& newID, Vec3 position, Vec3 rotation, Vec3 size, const string& objPath, const string& diffuseMapPath,
 	const string& lightMapPath, const string& reflectionMapPath, const string& normalMapPath, bool isFrozen, bool isFaceCulled,
 	bool isShadowed, bool isTransparent, bool isReflective, bool isSpecular, float specularFactor,
-	float specularIntensity, float lightness, vec3 color, float uvRepeat, const string& lodEntityID, bool isInstanced,
-	vector<vec3> instancedOffsets, vector<string> aabbNames, vector<vec3> aabbPositions, vector<vec3> aabbSizes)
+	float specularIntensity, float lightness, Vec3 color, float uvRepeat, const string& lodEntityID, bool isInstanced,
+	vector<Vec3> instancedOffsets, vector<string> aabbNames, vector<Vec3> aabbPositions, vector<Vec3> aabbSizes)
 {
 	// Add GAME entity
 	_fe3d.gameEntity_add(newID, objPath, position, rotation, size);
@@ -378,15 +378,15 @@ void SceneEditor::_placeModel(const string& newID, vec3 position, vec3 rotation,
 	}
 }
 
-void SceneEditor::_placeBillboard(const string& newID, const string& previewID, vec3 position)
+void SceneEditor::_placeBillboard(const string& newID, const string& previewID, Vec3 position)
 {
 	auto color = _fe3d.billboardEntity_getColor(previewID);
 	auto isFacingX = _fe3d.billboardEntity_isFacingCameraX(previewID);
 	auto isFacingY = _fe3d.billboardEntity_isFacingCameraY(previewID);
 
 	// Add BILLBOARD entity
-	vec2 size = _fe3d.billboardEntity_getSize(previewID);
-	_fe3d.billBoardEntity_add(newID, color, position, vec3(0.0f), size, isFacingX, isFacingY);
+	Vec2 size = _fe3d.billboardEntity_getSize(previewID);
+	_fe3d.billBoardEntity_add(newID, color, position, Vec3(0.0f), size, isFacingX, isFacingY);
 
 	// Determine BILLBOARD entity type
 	if (_fe3d.billboardEntity_getDiffuseMapPath(previewID) != "") // Textured billboard
@@ -416,7 +416,7 @@ void SceneEditor::_placeBillboard(const string& newID, const string& previewID, 
 }
 
 void SceneEditor::_placeBillboard(const string& newID, const string& diffusePath, const string& fontPath, const string& textContent,
-	vec3 position, vec3 rotation, vec2 size, vec3 color, bool facingX, bool facingY, bool isTransparent,
+	Vec3 position, Vec3 rotation, Vec2 size, Vec3 color, bool facingX, bool facingY, bool isTransparent,
 	bool isAnimated, int animationRows, int animationColumns, int animationFramestep)
 {
 	if (diffusePath != "") // Textured billboard

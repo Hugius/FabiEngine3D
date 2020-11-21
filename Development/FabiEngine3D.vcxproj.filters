@@ -825,9 +825,6 @@
     <ClInclude Include="Source\environment_type.hpp">
       <Filter>src\Miscellaneous\Enums</Filter>
     </ClInclude>
-    <ClInclude Include="Source\math.hpp">
-      <Filter>src\Math System</Filter>
-    </ClInclude>
     <ClInclude Include="Source\matrix33.hpp">
       <Filter>src\Math System</Filter>
     </ClInclude>
@@ -841,6 +838,9 @@
       <Filter>src\Math System</Filter>
     </ClInclude>
     <ClInclude Include="Source\vector4.hpp">
+      <Filter>src\Math System</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\mathematics.hpp">
       <Filter>src\Math System</Filter>
     </ClInclude>
   </ItemGroup>

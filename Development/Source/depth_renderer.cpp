@@ -36,7 +36,7 @@ void DepthRenderer::render(const shared_ptr<TerrainEntity> entity)
 
 		// Shader uniforms
 		_shader.uploadUniform("u_viewMatrix", _renderBus.getViewMatrix());
-		_shader.uploadUniform("u_modelMatrix", mat4(1.0f));
+		_shader.uploadUniform("u_modelMatrix", Matrix44(1.0f));
 		_shader.uploadUniform("u_isAlphaObject", false);
 		_shader.uploadUniform("u_isInstanced", false);
 		_shader.uploadUniform("u_isBillboard", false);
@@ -63,8 +63,7 @@ void DepthRenderer::render(const shared_ptr<WaterEntity> entity)
 	if (entity->isVisible())
 	{
 		// Shader uniforms
-		mat4 modelMatrix = mat4(1.0f);
-		modelMatrix = glm::translate(modelMatrix, entity->getPosition());
+		Matrix44 modelMatrix = Matrix44::createTranslation(entity->getPosition().x, entity->getPosition().y, entity->getPosition().z);
 		_shader.uploadUniform("u_modelMatrix", modelMatrix);
 		_shader.uploadUniform("u_isAlphaObject", false);
 		_shader.uploadUniform("u_isInstanced", false);
@@ -99,7 +98,7 @@ void DepthRenderer::render(const shared_ptr<GameEntity> entity)
 		// Check if entity is static to the camera view
 		if (entity->isCameraStatic())
 		{
-			_shader.uploadUniform("u_viewMatrix", mat4(mat3(_renderBus.getViewMatrix())));
+			_shader.uploadUniform("u_viewMatrix", Matrix44(Matrix33(_renderBus.getViewMatrix())));
 		}
 		else
 		{
@@ -153,18 +152,18 @@ void DepthRenderer::render(const shared_ptr<BillboardEntity> entity)
 	if (entity->isVisible())
 	{
 		// Sprite animation
-		vec2 uvMultiplier = vec2(1.0f);
-		vec2 uvAdder = vec2(0.0f);
+		Vec2 uvMultiplier = Vec2(1.0f);
+		Vec2 uvAdder = Vec2(0.0f);
 		if (entity->hasSpriteAnimation())
 		{
-			uvMultiplier = vec2(1.0f / float(entity->getTotalSpriteColumns()), 1.0f / float(entity->getTotalSpriteRows()));
-			uvAdder = vec2(float(entity->getSpriteColumnIndex()) * uvMultiplier.x, float(entity->getSpriteRowIndex()) * uvMultiplier.y);
+			uvMultiplier = Vec2(1.0f / float(entity->getTotalSpriteColumns()), 1.0f / float(entity->getTotalSpriteRows()));
+			uvAdder = Vec2(float(entity->getSpriteColumnIndex()) * uvMultiplier.x, float(entity->getSpriteRowIndex()) * uvMultiplier.y);
 		}
 
 		// Text UV repeat fix
 		if (entity->getTextContent() != "")
 		{
-			uvMultiplier = vec2(1.0f, 0.9f);
+			uvMultiplier = Vec2(1.0f, 0.9f);
 		}
 
 		// Shader uniforms

@@ -1,12 +1,12 @@
 #pragma once
 
 #include <GLEW\\glew.h>
-#include <GLM\\glm.hpp>
+#include "mathematics.hpp"
 #include <string>
 
-using glm::vec3;
-using glm::vec4;
-using glm::mat4;
+
+
+
 using std::string;
 
 class RenderBus final
@@ -28,25 +28,25 @@ public:
 	void setLensFlareMap(GLuint val);
 
 	// Matrices
-	void setViewMatrix(const mat4 & val);
-	void setProjectionMatrix(const mat4 & val);
-	void setSkyRotationMatrix(const mat4 & val);
-	void setShadowMatrix(const mat4 & val);
+	void setViewMatrix(const Matrix44 & val);
+	void setProjectionMatrix(const Matrix44 & val);
+	void setSkyRotationMatrix(const Matrix44 & val);
+	void setShadowMatrix(const Matrix44 & val);
 
 	// Vector4
-	void setFlareSourcePositionClipspace(vec4 val);
+	void setFlareSourcePositionClipspace(Vec4 val);
 
 	// Vector3
-	void setCameraPosition(vec3 val);
-	void setCameraFront(vec3 val);
-	void setAmbientLightColor(vec3 val);
-	void setDirectionalLightPos(vec3 val);
-	void setDirectionalLightColor(vec3 val);
-	void setSpotLightColor(vec3 val);
-	void setShadowEyePosition(vec3 val);
-	void setShadowAreaCenter(vec3 val);
-	void setFogColor(vec3 val);
-	void setFlareSourcePosition(vec3 val);
+	void setCameraPosition(Vec3 val);
+	void setCameraFront(Vec3 val);
+	void setAmbientLightColor(Vec3 val);
+	void setDirectionalLightPos(Vec3 val);
+	void setDirectionalLightColor(Vec3 val);
+	void setSpotLightColor(Vec3 val);
+	void setShadowEyePosition(Vec3 val);
+	void setShadowAreaCenter(Vec3 val);
+	void setFogColor(Vec3 val);
+	void setFlareSourcePosition(Vec3 val);
 
 	// Floats
 	void setAmbientLightIntensity(float val);
@@ -129,25 +129,25 @@ public:
 	const GLuint getLensFlareMap()			const;
 	
 	// Matrices
-	const mat4& getViewMatrix()        const;
-	const mat4& getProjectionMatrix()  const;
-	const mat4& getSkyRotationMatrix() const;
-	const mat4& getShadowMatrix()      const;
+	const Matrix44& getViewMatrix()        const;
+	const Matrix44& getProjectionMatrix()  const;
+	const Matrix44& getSkyRotationMatrix() const;
+	const Matrix44& getShadowMatrix()      const;
 
 	// Vector4
-	const vec4 getFlareSourcePositionClipspace() const;
+	const Vec4 getFlareSourcePositionClipspace() const;
 	
 	// Vector3
-	const vec3 getCameraPosition()			 const;
-	const vec3 getCameraFront()				 const;
-	const vec3 getAmbientLightColor()		 const;
-	const vec3 getDirectionalLightColor()    const;
-	const vec3 getDirectionalLightPosition() const;
-	const vec3 getSpotLightColor()			 const;
-	const vec3 getShadowEyePosition()		 const;
-	const vec3 getShadowAreaCenter()		 const;
-	const vec3 getFogColor()				 const;
-	const vec3 getFlareSourcePosition()		 const;
+	const Vec3 getCameraPosition()			 const;
+	const Vec3 getCameraFront()				 const;
+	const Vec3 getAmbientLightColor()		 const;
+	const Vec3 getDirectionalLightColor()    const;
+	const Vec3 getDirectionalLightPosition() const;
+	const Vec3 getSpotLightColor()			 const;
+	const Vec3 getShadowEyePosition()		 const;
+	const Vec3 getShadowAreaCenter()		 const;
+	const Vec3 getFogColor()				 const;
+	const Vec3 getFlareSourcePosition()		 const;
 
 	// Floats
 	const float getAmbientLightIntensity()	   const;
@@ -230,25 +230,25 @@ private:
 	GLuint _lensFlareMap		  = 0;
 	
 	// Matrices
-	mat4 _viewMatrix        = mat4(1.0f);
-	mat4 _projectionMatrix  = mat4(1.0f);
-	mat4 _skyRotationMatrix = mat4(1.0f);
-	mat4 _shadowMatrix      = mat4(1.0f);
+	Matrix44 _viewMatrix        = Matrix44(1.0f);
+	Matrix44 _projectionMatrix  = Matrix44(1.0f);
+	Matrix44 _skyRotationMatrix = Matrix44(1.0f);
+	Matrix44 _shadowMatrix      = Matrix44(1.0f);
 
 	// Vector4
-	vec4 _flareSourcePositionClipspace = vec4(0.0f);
+	Vec4 _flareSourcePositionClipspace = Vec4(0.0f);
 
 	// Vector3
-	vec3 _cameraPosition		   = vec3(0.0f);
-	vec3 _cameraFront			   = vec3(0.0f);
-	vec3 _ambientLightColor		   = vec3(1.0f);
-	vec3 _directionalLightColor    = vec3(1.0f);
-	vec3 _directionalLightPosition = vec3(0.0f);
-	vec3 _spotLightColor		   = vec3(1.0f);
-	vec3 _shadowEyePosition		   = vec3(0.0f);
-	vec3 _shadowAreaCenter		   = vec3(0.0f);
-	vec3 _fogColor				   = vec3(1.0f);
-	vec3 _flareSourcePosition	   = vec3(0.0f);
+	Vec3 _cameraPosition		   = Vec3(0.0f);
+	Vec3 _cameraFront			   = Vec3(0.0f);
+	Vec3 _ambientLightColor		   = Vec3(1.0f);
+	Vec3 _directionalLightColor    = Vec3(1.0f);
+	Vec3 _directionalLightPosition = Vec3(0.0f);
+	Vec3 _spotLightColor		   = Vec3(1.0f);
+	Vec3 _shadowEyePosition		   = Vec3(0.0f);
+	Vec3 _shadowAreaCenter		   = Vec3(0.0f);
+	Vec3 _fogColor				   = Vec3(1.0f);
+	Vec3 _flareSourcePosition	   = Vec3(0.0f);
 
 	// Floats
 	float _ambientLightIntensity     = 0.0f;

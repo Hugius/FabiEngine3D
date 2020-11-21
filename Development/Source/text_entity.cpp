@@ -32,9 +32,9 @@ void TextEntity::updateCharacterEntities()
 		}
 
 		// Set new transformation
-		character->setTranslation(this->getTranslation() + vec2(xCharOffset, yCharOffset));
+		character->setTranslation(this->getTranslation() + Vec2(xCharOffset, yCharOffset));
 		character->setRotation(this->getRotation());
-		character->setScaling(vec2(xCharSize, yCharSize));
+		character->setScaling(Vec2(xCharSize, yCharSize));
 
 		// Copy all properties
 		character->setColor(this->getColor());

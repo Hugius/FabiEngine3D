@@ -142,11 +142,11 @@ float Vec3::getMagnitude() const
 
 void Vec3::normalize()
 {
-	if (*this != Vec3(0.0f, 0.0f, 0.0f)) { // Must be non-zero vector
-		this->x /= this->getMagnitude();
-		this->y /= this->getMagnitude();
-		this->z /= this->getMagnitude();
-	}
+	float inverseSqrt = 1.0f / sqrt(this->dot(*this));
+
+	this->x *= inverseSqrt;
+	this->y *= inverseSqrt;
+	this->z *= inverseSqrt;
 }
 
 bool Vec3::operator==(const Vec3 & other) const

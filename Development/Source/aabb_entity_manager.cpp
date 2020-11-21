@@ -46,7 +46,7 @@ const vector<shared_ptr<AabbEntity>>& AabbEntityManager::getEntities()
 	return _getAabbEntities();
 }
 
-void AabbEntityManager::addAabbEntity(const string& ID, vec3 position, vec3 size, bool responsive)
+void AabbEntityManager::addAabbEntity(const string& ID, Vec3 position, Vec3 size, bool responsive)
 {
 	// Create entity
 	_createEntity(ID);
@@ -60,7 +60,7 @@ void AabbEntityManager::addAabbEntity(const string& ID, vec3 position, vec3 size
 	getEntity(ID)->setResponsiveness(responsive);
 }
 
-void AabbEntityManager::bindAabbEntity(const string& ID, const string& parentID, AabbParentType parentType, vec3 position, vec3 size, bool responsive)
+void AabbEntityManager::bindAabbEntity(const string& ID, const string& parentID, AabbParentType parentType, Vec3 position, Vec3 size, bool responsive)
 {
 	addAabbEntity(ID, position, size, responsive);
 	getEntity(ID)->setParent(parentID, parentType);
@@ -82,7 +82,7 @@ void AabbEntityManager::update(const vector<shared_ptr<GameEntity>>& gameEntitie
 				{
 					if (entity->getParentID() == parentEntity->getID()) // Check for match
 					{
-						vec3 parentSizeChange = parentEntity->getScaling() / parentEntity->getOriginalScaling();
+						Vec3 parentSizeChange = parentEntity->getScaling() / parentEntity->getOriginalScaling();
 
 						// Update scaling (based on parent scaling)
 						entity->setScaling(entity->getLocalScaling() * parentSizeChange);
@@ -113,9 +113,9 @@ void AabbEntityManager::update(const vector<shared_ptr<GameEntity>>& gameEntitie
 						float rotationX = fabsf(parentEntity->getRotation().x);
 						float rotationY = fabsf(parentEntity->getRotation().y);
 						float rotationZ = fabsf(parentEntity->getRotation().z);
-						vec3 parentSize = parentEntity->getScaling();
+						Vec3 parentSize = parentEntity->getScaling();
 						float maxParentSize = std::max(parentSize.x, parentSize.y);
-						vec3 newAabbSize = vec3(parentSize.x, parentSize.y, 0.1f);
+						Vec3 newAabbSize = Vec3(parentSize.x, parentSize.y, 0.1f);
 
 						// Determine rotation direction
 						if (rotationX != 0.0f)
@@ -139,7 +139,7 @@ void AabbEntityManager::update(const vector<shared_ptr<GameEntity>>& gameEntitie
 						entity->setScaling(newAabbSize);
 
 						// Update translation (based on parent translation + scaling)
-						vec3 halfSizeOffset = vec3(0.0f, (parentEntity->getScaling().y / 2.0f), 0.0f);
+						Vec3 halfSizeOffset = Vec3(0.0f, (parentEntity->getScaling().y / 2.0f), 0.0f);
 						entity->setTranslation(parentEntity->getTranslation() + entity->getLocalTranslation() - halfSizeOffset);
 
 						// Update visibility

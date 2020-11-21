@@ -135,7 +135,7 @@ void EnvironmentEditor::_updateSkyRemoval()
 	{
 		if (_skyRemovalEnabled && _currentSkyID != "")
 		{
-			_gui.getGlobalScreen()->addAnswerForm("removeSky", "Are you sure?", vec2(0.0f));
+			_gui.getGlobalScreen()->addAnswerForm("removeSky", "Are you sure?", Vec2(0.0f));
 
 			if (_gui.getGlobalScreen()->isAnswerFormConfirmed("removeSky"))
 			{

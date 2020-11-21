@@ -12,7 +12,7 @@ public:
 
 	const vector<shared_ptr<GameEntity>> getEntities();
 
-	void addGameEntity(const string& ID, const string& objName, vec3 T, vec3 R, vec3 S);
+	void addGameEntity(const string& ID, const string& objName, Vec3 T, Vec3 R, Vec3 S);
 	void generateModel(const string& ID, const string& objName);
 	void loadNormalMapping(const string& ID);
 	void setLodDistance(float distance);

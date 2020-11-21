@@ -3,7 +3,7 @@
 void ModelEditor::_updateModelEditingAabb()
 {
 	auto screen = _gui.getViewport("left")->getWindow("main")->getScreen("modelEditorMenuAabb");
-	vec3 currentSize = _fe3d.gameEntity_getSize(_currentModelID);
+	Vec3 currentSize = _fe3d.gameEntity_getSize(_currentModelID);
 
 	// Buttons hoverability
 	bool isHoverable = (_currentAabbID != "");
@@ -17,7 +17,7 @@ void ModelEditor::_updateModelEditingAabb()
 	{
 		if (screen->getButton("add")->isHovered())
 		{
-			_gui.getGlobalScreen()->addValueForm("newAabbName", "New AABB name", "", vec2(0.0f), vec2(0.5f, 0.1f));
+			_gui.getGlobalScreen()->addValueForm("newAabbName", "New AABB name", "", Vec2(0.0f), Vec2(0.5f, 0.1f));
 		}
 		else if (screen->getButton("edit")->isHovered())
 		{
@@ -29,7 +29,7 @@ void ModelEditor::_updateModelEditingAabb()
 			}
 
 			// Show choicelist
-			_gui.getGlobalScreen()->addChoiceForm("aabbList", "Select AABB", vec2(-0.4f, 0.1f), aabbNames);
+			_gui.getGlobalScreen()->addChoiceForm("aabbList", "Select AABB", Vec2(-0.4f, 0.1f), aabbNames);
 		}
 		else if (screen->getButton("delete")->isHovered())
 		{
@@ -42,7 +42,7 @@ void ModelEditor::_updateModelEditingAabb()
 		}
 		else if (screen->getButton("speed")->isHovered())
 		{
-			_gui.getGlobalScreen()->addValueForm("speed", "Transformation speed", _aabbTransformationSpeed * 100.0f, vec2(0.0f, 0.0f), vec2(0.2f, 0.1f));
+			_gui.getGlobalScreen()->addValueForm("speed", "Transformation speed", _aabbTransformationSpeed * 100.0f, Vec2(0.0f, 0.0f), Vec2(0.2f, 0.1f));
 		}
 		else if (screen->getButton("toggleMove")->isHovered())
 		{
@@ -115,7 +115,7 @@ void ModelEditor::_updateModelEditingAabb()
 		else
 		{
 			// Add new AABB
-			_fe3d.aabbEntity_bindToGameEntity(_currentModelID, vec3(0.0f), vec3(1.0f), true, _currentModelID + "_" + newName);
+			_fe3d.aabbEntity_bindToGameEntity(_currentModelID, Vec3(0.0f), Vec3(1.0f), true, _currentModelID + "_" + newName);
 			_currentAabbID = newName;
 
 			// Reset editing
@@ -184,7 +184,7 @@ void ModelEditor::_updateModelEditingAabb()
 		if (_movingToggled)
 		{
 			float scrollingDirection = float(_fe3d.input_getMouseWheelY());
-			vec3 newPosition = _fe3d.aabbEntity_getPosition(_currentModelID + "_" + _currentAabbID);
+			Vec3 newPosition = _fe3d.aabbEntity_getPosition(_currentModelID + "_" + _currentAabbID);
 
 			// Determine direction
 			switch (_transformationDirection)
@@ -210,7 +210,7 @@ void ModelEditor::_updateModelEditingAabb()
 		if (_resizingToggled)
 		{
 			float scrollingDirection = float(_fe3d.input_getMouseWheelY());
-			vec3 newSize = _fe3d.aabbEntity_getSize(_currentModelID + "_" + _currentAabbID);
+			Vec3 newSize = _fe3d.aabbEntity_getSize(_currentModelID + "_" + _currentAabbID);
 
 			switch (_transformationDirection)
 			{

@@ -62,8 +62,8 @@ void RenderEngine::_captureSceneReflections(CameraManager& camera)
 		}
 
 		// Change camera angle
-		vec3 cameraPos = camera.getPosition();
-		vec3 newCameraPos = vec3(cameraPos.x, cameraPos.y - (cameraDistance * 2.0f), cameraPos.z);
+		Vec3 cameraPos = camera.getPosition();
+		Vec3 newCameraPos = Vec3(cameraPos.x, cameraPos.y - (cameraDistance * 2.0f), cameraPos.z);
 		camera.setPosition(newCameraPos);
 		camera.invertPitch();
 		camera.updateMatrices();
@@ -89,7 +89,7 @@ void RenderEngine::_captureSceneReflections(CameraManager& camera)
 
 		// Revert camera angle
 		cameraPos = camera.getPosition();
-		newCameraPos = vec3(cameraPos.x, cameraPos.y + (cameraDistance * 2.0f), cameraPos.z);
+		newCameraPos = Vec3(cameraPos.x, cameraPos.y + (cameraDistance * 2.0f), cameraPos.z);
 		camera.setPosition(newCameraPos);
 		camera.invertPitch();
 		camera.updateMatrices();
@@ -161,9 +161,9 @@ void RenderEngine::_captureShadows()
 					if (entity->getLodEntityID() == lodEntity->getID())
 					{
 						// Save original transformation
-						vec3 originalPosition = lodEntity->getTranslation();
-						vec3 originalRotation = lodEntity->getRotation();
-						vec3 originalSize = lodEntity->getScaling();
+						Vec3 originalPosition = lodEntity->getTranslation();
+						Vec3 originalRotation = lodEntity->getRotation();
+						Vec3 originalSize = lodEntity->getScaling();
 						bool originalVisibility = lodEntity->isVisible();
 
 						// Change transformation
@@ -262,9 +262,9 @@ void RenderEngine::_captureSceneDepth()
 						if (entity->getLodEntityID() == lodEntity->getID())
 						{
 							// Save original transformation
-							vec3 originalPosition = lodEntity->getTranslation();
-							vec3 originalRotation = lodEntity->getRotation();
-							vec3 originalSize = lodEntity->getScaling();
+							Vec3 originalPosition = lodEntity->getTranslation();
+							Vec3 originalRotation = lodEntity->getRotation();
+							Vec3 originalSize = lodEntity->getScaling();
 							bool originalVisibility = lodEntity->isVisible();
 
 							// Change transformation
@@ -426,10 +426,10 @@ void RenderEngine::_captureLensFlare()
 	if (_renderBus.isLensFlareEnabled())
 	{
 		// Calculate screen position
-		vec3 lightingPosition = _renderBus.getDirectionalLightPosition();
-		mat4 viewMatrix = _renderBus.getViewMatrix();
-		mat4 projectionMatrix = _renderBus.getProjectionMatrix();
-		vec4 clipSpacePosition = projectionMatrix * viewMatrix * vec4(lightingPosition, 1.0f);
+		Vec3 lightingPosition = _renderBus.getDirectionalLightPosition();
+		Matrix44 viewMatrix = _renderBus.getViewMatrix();
+		Matrix44 projectionMatrix = _renderBus.getProjectionMatrix();
+		Vec4 clipSpacePosition = projectionMatrix * viewMatrix * Vec4(lightingPosition.x, lightingPosition.y, lightingPosition.z, 1.0f);
 		float alpha = 0.0f;
 
 		// Calculate transparency value

@@ -20,10 +20,10 @@ void ScriptEditor::initializeGUI()
 	// Main menu
 	string screenID = "scriptEditorMenuMain";
 	leftWindow->addScreen(screenID);
-	leftWindow->getScreen(screenID)->addButton("createScript", vec2(0.0f, 0.63f), vec2(GW("New script"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "New script", LVPC::textColor, LVPC::textHoverColor);
-	leftWindow->getScreen(screenID)->addButton("editScript", vec2(0.0f, 0.21f), vec2(GW("Edit script"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Edit script", LVPC::textColor, LVPC::textHoverColor);
-	leftWindow->getScreen(screenID)->addButton("deleteScript", vec2(0.0f, -0.21f), vec2(GW("Delete script"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Delete script", LVPC::textColor, LVPC::textHoverColor);
-	leftWindow->getScreen(screenID)->addButton("back", vec2(0.0f, -0.63f), vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen(screenID)->addButton("createScript", Vec2(0.0f, 0.63f), Vec2(GW("New script"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "New script", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen(screenID)->addButton("editScript", Vec2(0.0f, 0.21f), Vec2(GW("Edit script"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Edit script", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen(screenID)->addButton("deleteScript", Vec2(0.0f, -0.21f), Vec2(GW("Delete script"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Delete script", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen(screenID)->addButton("back", Vec2(0.0f, -0.63f), Vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
 }
 
 void ScriptEditor::load()
@@ -32,13 +32,13 @@ void ScriptEditor::load()
 	_fe3d.camera_load(70.0f, 0.1f, 10000.0f, _cameraStartingPosition, -90.0f);
 
 	// Graphics
-	_fe3d.gfx_enableDirectionalLighting(vec3(1000.0f), vec3(1.0f), 0.5f);
+	_fe3d.gfx_enableDirectionalLighting(Vec3(1000.0f), Vec3(1.0f), 0.5f);
 	_fe3d.gfx_enableSpecularLighting();
 	_fe3d.gfx_enableNormalMapping();
 	_fe3d.gfx_enablePointLighting();
 
 	// Background
-	_fe3d.gameEntity_add("background", "engine\\models\\plane.obj", vec3(0.0f), vec3(90.0f, 0.0f, 0.0f), vec3(static_cast<float>(_maxLineAmount) * 1.1f));
+	_fe3d.gameEntity_add("background", "engine\\models\\plane.obj", Vec3(0.0f), Vec3(90.0f, 0.0f, 0.0f), Vec3(static_cast<float>(_maxLineAmount) * 1.1f));
 	_fe3d.gameEntity_setDiffuseMap("background", "engine\\textures\\brick.png");
 	_fe3d.gameEntity_setNormalMap("background", "engine\\textures\\brick_normal.png");
 	_fe3d.gameEntity_setSpecularLighted("background", true);
@@ -48,7 +48,7 @@ void ScriptEditor::load()
 	_fe3d.gameEntity_setNormalMapped("background", true);
 
 	// Selection light
-	_fe3d.lightEntity_add("@@selectionLight", vec3(0.0f), vec3(0.0f, 1.0f, 0.0f), 2.5f, 10.0f, false);
+	_fe3d.lightEntity_add("@@selectionLight", Vec3(0.0f), Vec3(0.0f, 1.0f, 0.0f), 2.5f, 10.0f, false);
 
 	// Load script
 	loadScriptsFromFile();

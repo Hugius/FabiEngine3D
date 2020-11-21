@@ -14,14 +14,14 @@ void EnvironmentEditor::_updateWaterMenuMain()
 			if (screen->getButton("create")->isHovered())
 			{
 				_waterCreationEnabled = true;
-				_gui.getGlobalScreen()->addValueForm("newWaterName", "New water name", "", vec2(0.0f), vec2(0.5f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("newWaterName", "New water name", "", Vec2(0.0f), Vec2(0.5f, 0.1f));
 			}
 			else if (screen->getButton("edit")->isHovered())
 			{
 				_waterChoosingEnabled = true;
 				_waterEditingEnabled = true;
 				for (auto& name : _waterNames) { name = name.substr(1); }
-				_gui.getGlobalScreen()->addChoiceForm("waterList", "Select water", vec2(-0.4f, 0.1f), _waterNames);
+				_gui.getGlobalScreen()->addChoiceForm("waterList", "Select water", Vec2(-0.4f, 0.1f), _waterNames);
 				for (auto& name : _waterNames) { name = "@" + name; }
 			}
 			else if (screen->getButton("delete")->isHovered())
@@ -29,7 +29,7 @@ void EnvironmentEditor::_updateWaterMenuMain()
 				_waterChoosingEnabled = true;
 				_waterRemovalEnabled = true;
 				for (auto& name : _waterNames) { name = name.substr(1); }
-				_gui.getGlobalScreen()->addChoiceForm("waterList", "Select water", vec2(-0.4f, 0.1f), _waterNames);
+				_gui.getGlobalScreen()->addChoiceForm("waterList", "Select water", Vec2(-0.4f, 0.1f), _waterNames);
 				for (auto& name : _waterNames) { name = "@" + name; }
 			}
 			else if (screen->getButton("back")->isHovered())
@@ -64,7 +64,7 @@ void EnvironmentEditor::_updateWaterMenuChoice()
 			}
 			else if (screen->getButton("back")->isHovered())
 			{
-				_fe3d.camera_load(90.0f, 0.1f, 10000.0f, vec3(0.0f));
+				_fe3d.camera_load(90.0f, 0.1f, 10000.0f, Vec3(0.0f));
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("waterEditorMenuMain");
 				_fe3d.textEntity_hide(_gui.getGlobalScreen()->getTextfield("selectedWaterName")->getEntityID());
 				_fe3d.waterEntity_select("");
@@ -84,7 +84,7 @@ void EnvironmentEditor::_updateWaterMenuMesh()
 	if (_gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID() == "waterEditorMenuMesh")
 	{
 		auto screen = _gui.getViewport("left")->getWindow("main")->getScreen("waterEditorMenuMesh");
-		vec3 waterPosition = _fe3d.waterEntity_getPosition(_currentWaterID);
+		Vec3 waterPosition = _fe3d.waterEntity_getPosition(_currentWaterID);
 		float waterSize = _fe3d.waterEntity_getSize(_currentWaterID);
 
 		// Button hoverabilities
@@ -96,13 +96,13 @@ void EnvironmentEditor::_updateWaterMenuMesh()
 		{
 			if (screen->getButton("position")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("positionX", "X", waterPosition.x, vec2(-0.25f, 0.0f), vec2(0.2f, 0.1f));
-				_gui.getGlobalScreen()->addValueForm("positionY", "Y", waterPosition.y, vec2(0.0f, 0.0f), vec2(0.2f, 0.1f));
-				_gui.getGlobalScreen()->addValueForm("positionZ", "Z", waterPosition.z, vec2(0.25f, 0.0f), vec2(0.2f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("positionX", "X", waterPosition.x, Vec2(-0.25f, 0.0f), Vec2(0.2f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("positionY", "Y", waterPosition.y, Vec2(0.0f, 0.0f), Vec2(0.2f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("positionZ", "Z", waterPosition.z, Vec2(0.25f, 0.0f), Vec2(0.2f, 0.1f));
 			}
 			else if (screen->getButton("size")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("size", "Size", waterSize, vec2(0.0f), vec2(0.3f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("size", "Size", waterSize, Vec2(0.0f), Vec2(0.3f, 0.1f));
 			}			
 			else if (screen->getButton("back")->isHovered())
 			{
@@ -115,11 +115,11 @@ void EnvironmentEditor::_updateWaterMenuMesh()
 		{
 			if (screen->getButton("up")->isHovered())
 			{
-				_fe3d.waterEntity_setPosition(_currentWaterID, waterPosition + vec3(0.0f, 0.1f, 0.0f));
+				_fe3d.waterEntity_setPosition(_currentWaterID, waterPosition + Vec3(0.0f, 0.1f, 0.0f));
 			}
 			else if (screen->getButton("down")->isHovered())
 			{
-				_fe3d.waterEntity_setPosition(_currentWaterID, waterPosition - vec3(0.0f, 0.1f, 0.0f));
+				_fe3d.waterEntity_setPosition(_currentWaterID, waterPosition - Vec3(0.0f, 0.1f, 0.0f));
 			}
 		}
 
@@ -168,7 +168,7 @@ void EnvironmentEditor::_updateWaterMenuEffects()
 		{
 			if (screen->getButton("uvRepeat")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("uvRepeat", "UV repeat", uvRepeat, vec2(0.0f), vec2(0.3f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("uvRepeat", "UV repeat", uvRepeat, Vec2(0.0f), Vec2(0.3f, 0.1f));
 			}
 			else if (screen->getButton("dudvMap")->isHovered())
 			{
@@ -297,9 +297,9 @@ void EnvironmentEditor::_updateWaterMenuOptions()
 	{
 		// Values
 		auto screen = _gui.getViewport("left")->getWindow("main")->getScreen("waterEditorMenuOptions");
-		vec2 speed = _fe3d.waterEntity_getSpeed(_currentWaterID);
+		Vec2 speed = _fe3d.waterEntity_getSpeed(_currentWaterID);
 		float transparency = _fe3d.waterEntity_getTransparency(_currentWaterID);
-		vec3 color = _fe3d.waterEntity_getColor(_currentWaterID);
+		Vec3 color = _fe3d.waterEntity_getColor(_currentWaterID);
 		float specularFactor = _fe3d.waterEntity_getSpecularLightingFactor(_currentWaterID);
 		float specularIntensity = _fe3d.waterEntity_getSpecularLightingIntensity(_currentWaterID);
 		float waveHeightFactor = _fe3d.waterEntity_getWaveHeightFactor(_currentWaterID);
@@ -309,30 +309,30 @@ void EnvironmentEditor::_updateWaterMenuOptions()
 		{
 			if (screen->getButton("speed")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("speedX", "X", speed.x * 100000.0f, vec2(-0.15f, 0.0f), vec2(0.2f, 0.1f));
-				_gui.getGlobalScreen()->addValueForm("speedZ", "Z", speed.y * 100000.0f, vec2(0.15f, 0.0f), vec2(0.2f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("speedX", "X", speed.x * 100000.0f, Vec2(-0.15f, 0.0f), Vec2(0.2f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("speedZ", "Z", speed.y * 100000.0f, Vec2(0.15f, 0.0f), Vec2(0.2f, 0.1f));
 			}
 			else if (screen->getButton("transparency")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("transparency", "Transparency (0-100%)", transparency * 100.0f, vec2(0.0f), vec2(0.3f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("transparency", "Transparency (0-100%)", transparency * 100.0f, Vec2(0.0f), Vec2(0.3f, 0.1f));
 			}
 			else if (screen->getButton("color")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("colorR", "R(0-255)", color.r * 255.0f, vec2(-0.25f, 0.0f), vec2(0.15f, 0.1f));
-				_gui.getGlobalScreen()->addValueForm("colorG", "G(0-255)", color.g * 255.0f, vec2(0.0f, 0.0f), vec2(0.15f, 0.1f));
-				_gui.getGlobalScreen()->addValueForm("colorB", "B(0-255)", color.b * 255.0f, vec2(0.25f, 0.0f), vec2(0.15f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("colorR", "R(0-255)", color.r * 255.0f, Vec2(-0.25f, 0.0f), Vec2(0.15f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("colorG", "G(0-255)", color.g * 255.0f, Vec2(0.0f, 0.0f), Vec2(0.15f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("colorB", "B(0-255)", color.b * 255.0f, Vec2(0.25f, 0.0f), Vec2(0.15f, 0.1f));
 			}
 			else if (screen->getButton("specularFactor")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("specularFactor", "Specular factor (0 - 256)", specularFactor, vec2(0.0f), vec2(0.3f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("specularFactor", "Specular factor (0 - 256)", specularFactor, Vec2(0.0f), Vec2(0.3f, 0.1f));
 			}
 			else if (screen->getButton("specularIntensity")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("specularIntensity", "Specular intensity (%)", specularIntensity * 100.0f, vec2(0.0f), vec2(0.3f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("specularIntensity", "Specular intensity (%)", specularIntensity * 100.0f, Vec2(0.0f), Vec2(0.3f, 0.1f));
 			}
 			else if (screen->getButton("waveHeight")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("waveHeight", "Wave height factor (%)", waveHeightFactor * 100.0f, vec2(0.0f), vec2(0.3f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("waveHeight", "Wave height factor (%)", waveHeightFactor * 100.0f, Vec2(0.0f), Vec2(0.3f, 0.1f));
 			}
 			else if (screen->getButton("back")->isHovered())
 			{

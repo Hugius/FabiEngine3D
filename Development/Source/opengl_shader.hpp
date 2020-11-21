@@ -4,14 +4,9 @@
 
 #include <GLEW\\glew.h>
 #include <map>
-#include <GLM\\glm.hpp>
+#include "mathematics.hpp"
 #include <GLM\\gtc/type_ptr.hpp>
 
-using glm::vec2;
-using glm::vec3;
-using glm::vec4;
-using glm::mat3;
-using glm::mat4;
 using std::map;
 
 class OpenGLShader final
@@ -63,9 +58,9 @@ private:
 	inline void _uploadUniform(const GLint & loc, const float & data)     { glUniform1f(loc, data); }
 	inline void _uploadUniform(const GLint & loc, const GLdouble & data)  { glUniform1d(loc, data); }
 	inline void _uploadUniform(const GLint & loc, const GLboolean & data) { glUniform1i(loc, data); }
-	inline void _uploadUniform(const GLint & loc, const vec2 & data)      { glUniform2f(loc, data.x, data.y); }
-	inline void _uploadUniform(const GLint & loc, const vec3 & data)      { glUniform3f(loc, data.x, data.y, data.z); }
-	inline void _uploadUniform(const GLint & loc, const vec4 & data)      { glUniform4f(loc, data.x, data.y, data.z, data.w); }
-	inline void _uploadUniform(const GLint & loc, const mat3 & data)      { glUniformMatrix3fv(loc, 1, GL_FALSE, glm::value_ptr(data)); }
-	inline void _uploadUniform(const GLint & loc, const mat4 & data)      { glUniformMatrix4fv(loc, 1, GL_FALSE, glm::value_ptr(data)); }
+	inline void _uploadUniform(const GLint & loc, const Vec2 & data)      { glUniform2f(loc, data.x, data.y); }
+	inline void _uploadUniform(const GLint & loc, const Vec3 & data)      { glUniform3f(loc, data.x, data.y, data.z); }
+	inline void _uploadUniform(const GLint & loc, const Vec4 & data)      { glUniform4f(loc, data.x, data.y, data.z, data.w); }
+	inline void _uploadUniform(const GLint & loc, const Matrix33 & data)  { glUniformMatrix3fv(loc, 1, GL_FALSE, data.f); }
+	inline void _uploadUniform(const GLint & loc, const Matrix44 & data)  { glUniformMatrix4fv(loc, 1, GL_FALSE, data.f); }
 };

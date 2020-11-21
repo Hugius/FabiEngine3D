@@ -24,7 +24,7 @@ void ModelEditor::_updateManagementScreen()
 		{
 			if (screen->getButton("addModel")->isHovered()) // Add model button
 			{
-				_gui.getGlobalScreen()->addValueForm("newModelName", "New model name", "", vec2(0.0f), vec2(0.5f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("newModelName", "New model name", "", Vec2(0.0f), Vec2(0.5f, 0.1f));
 				_isCreatingModel = true;
 			}
 			else if (screen->getButton("editModel")->isHovered()) // Edit model button
@@ -32,7 +32,7 @@ void ModelEditor::_updateManagementScreen()
 				_isChoosingModel = true;
 				_isEditingModel = true;
 				for (auto& name : _modelNames) { name = name.substr(1); }
-				_gui.getGlobalScreen()->addChoiceForm("models", "Select model", vec2(-0.4f, 0.1f), _modelNames);
+				_gui.getGlobalScreen()->addChoiceForm("models", "Select model", Vec2(-0.4f, 0.1f), _modelNames);
 				for (auto& name : _modelNames) { name = "@" + name; }
 			}
 			else if (screen->getButton("deleteModel")->isHovered()) // Delete model button
@@ -40,12 +40,12 @@ void ModelEditor::_updateManagementScreen()
 				_isChoosingModel = true;
 				_isDeletingModel = true;
 				for (auto& name : _modelNames) { name = name.substr(1); }
-				_gui.getGlobalScreen()->addChoiceForm("models", "Select model", vec2(-0.4f, 0.1f), _modelNames);
+				_gui.getGlobalScreen()->addChoiceForm("models", "Select model", Vec2(-0.4f, 0.1f), _modelNames);
 				for (auto& name : _modelNames) { name = "@" + name; }
 			}
 			else if (screen->getButton("back")->isHovered()) // Back button
 			{
-				_gui.getGlobalScreen()->addAnswerForm("exitModelEditor", "Save changes?", vec2(0.0f, 0.25f));
+				_gui.getGlobalScreen()->addAnswerForm("exitModelEditor", "Save changes?", Vec2(0.0f, 0.25f));
 			}
 		}
 
@@ -173,7 +173,7 @@ void ModelEditor::_updateModelCreation()
 				if (newModelName[0] != '@')
 				{
 					// Add model and check if not already existing
-					if (_addModel("@" + newModelName, "", "", "", "", "", vec3(0.0f), 0, 1, 0, 0, 0, 1.0f, 1.0f, 1.0f, vec3(1.0f), 1.0f, "", false, {}, {}, {}))
+					if (_addModel("@" + newModelName, "", "", "", "", "", Vec3(0.0f), 0, 1, 0, 0, 0, 1.0f, 1.0f, 1.0f, Vec3(1.0f), 1.0f, "", false, {}, {}, {}))
 					{
 						// Go to editor screen
 						_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
@@ -282,7 +282,7 @@ void ModelEditor::_updateModelRemoval()
 	{
 		if (_isDeletingModel && _currentModelID != "")
 		{
-			_gui.getGlobalScreen()->addAnswerForm("deleteModel", "Are you sure?", vec2(0.0f));
+			_gui.getGlobalScreen()->addAnswerForm("deleteModel", "Are you sure?", Vec2(0.0f));
 
 			if (_gui.getGlobalScreen()->isAnswerFormConfirmed("deleteModel"))
 			{
@@ -311,8 +311,8 @@ void ModelEditor::_updateCamera()
 	if (_isLoaded)
 	{
 		// Update cursor difference
-		vec2 cursorPosition = _fe3d.misc_convertFromScreenCoords(_fe3d.misc_getCursorPosition());
-		vec2 cursorDifference = cursorPosition - _lastCursorPos;
+		Vec2 cursorPosition = _fe3d.misc_convertFromScreenCoords(_fe3d.misc_getCursorPosition());
+		Vec2 cursorDifference = cursorPosition - _lastCursorPos;
 		_lastCursorPos = _fe3d.misc_convertFromScreenCoords(_fe3d.misc_getCursorPosition());
 
 		// Update scrolling
@@ -357,6 +357,6 @@ void ModelEditor::_updateCamera()
 		float z = (_cameraDistance * cos(_totalCursorDifference.x));
 
 		// Update camera position
-		_fe3d.camera_setPosition(vec3(x, y, z));
+		_fe3d.camera_setPosition(Vec3(x, y, z));
 	}
 }

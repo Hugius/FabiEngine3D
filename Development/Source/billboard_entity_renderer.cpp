@@ -4,7 +4,7 @@
 void BillboardEntityRenderer::bind()
 {
 	// Define clipping plane for scene reflections
-	vec4 clippingPlane = vec4(0.0f, 1.0f, 0.0f, -(_renderBus.getSceneReflectionHeight() + _renderBus.getSceneReflectionOffset()));
+	Vec4 clippingPlane = Vec4(0.0f, 1.0f, 0.0f, -(_renderBus.getSceneReflectionHeight() + _renderBus.getSceneReflectionOffset()));
 
 	// Bind shader
 	_shader.bind();
@@ -43,18 +43,18 @@ void BillboardEntityRenderer::render(const shared_ptr<BillboardEntity> entity)
 	if (entity->isVisible())
 	{
 		// Sprite animation
-		vec2 uvMultiplier = vec2(1.0f);
-		vec2 uvAdder = vec2(0.0f);
+		Vec2 uvMultiplier = Vec2(1.0f);
+		Vec2 uvAdder = Vec2(0.0f);
 		if (entity->hasSpriteAnimation())
 		{
-			uvMultiplier = vec2(1.0f / float(entity->getTotalSpriteColumns()), 1.0f / float(entity->getTotalSpriteRows()));
-			uvAdder = vec2(float(entity->getSpriteColumnIndex()) * uvMultiplier.x, float(entity->getSpriteRowIndex()) * uvMultiplier.y);
+			uvMultiplier = Vec2(1.0f / float(entity->getTotalSpriteColumns()), 1.0f / float(entity->getTotalSpriteRows()));
+			uvAdder = Vec2(float(entity->getSpriteColumnIndex()) * uvMultiplier.x, float(entity->getSpriteRowIndex()) * uvMultiplier.y);
 		}
 
 		// Text UV repeat fix
 		if (entity->getTextContent() != "")
 		{
-			uvMultiplier = vec2(1.0f, 0.9f);
+			uvMultiplier = Vec2(1.0f, 0.9f);
 		}
 
 		// Shader uniforms

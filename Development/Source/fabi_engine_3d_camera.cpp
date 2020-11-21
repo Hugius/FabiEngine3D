@@ -1,7 +1,7 @@
 #include "fabi_engine_3d.hpp"
 #include "core_engine.hpp"
 
-void FabiEngine3D::camera_load(float fov, float nearZ, float farZ, vec3 startPosition, float yaw, float pitch)
+void FabiEngine3D::camera_load(float fov, float nearZ, float farZ, Vec3 startPosition, float yaw, float pitch)
 {
 	_core->_cameraManager.reset();
 	_core->_cameraManager.setPosition(startPosition);
@@ -12,7 +12,7 @@ void FabiEngine3D::camera_load(float fov, float nearZ, float farZ, vec3 startPos
 	_core->_cameraManager.setFarZ(farZ);
 }
 
-void FabiEngine3D::camera_enableLookat(vec3 position)
+void FabiEngine3D::camera_enableLookat(Vec3 position)
 {
 	_core->_cameraManager.enableLookat(position);
 }
@@ -57,12 +57,12 @@ void FabiEngine3D::camera_translateFollowZ(float speed)
 	_core->_cameraManager.translateFollowZ(speed);
 }
 
-void FabiEngine3D::camera_translate(vec3 translation)
+void FabiEngine3D::camera_translate(Vec3 translation)
 {
 	_core->_cameraManager.translate(translation);
 }
 
-void FabiEngine3D::camera_setPosition(vec3 pos)
+void FabiEngine3D::camera_setPosition(Vec3 pos)
 {
 	_core->_cameraManager.setPosition(pos);
 }
@@ -147,7 +147,7 @@ float FabiEngine3D::camera_getMouseSensitivity()
 	return _core->_cameraManager.getMouseSensitivity();
 }
 
-vec3 FabiEngine3D::camera_getPosition()
+Vec3 FabiEngine3D::camera_getPosition()
 {
 	return _core->_cameraManager.getPosition();
 }

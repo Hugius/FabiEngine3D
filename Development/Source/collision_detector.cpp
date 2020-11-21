@@ -5,7 +5,7 @@
 
 using std::vector;
 
-Collision CollisionDetector::check(const AabbEntity& box, vec3 point, vec3 pointDifference, Direction& collisionDir)
+Collision CollisionDetector::check(const AabbEntity& box, Vec3 point, Vec3 pointDifference, Direction& collisionDir)
 {
 	Collision collision(false, false, false);
 

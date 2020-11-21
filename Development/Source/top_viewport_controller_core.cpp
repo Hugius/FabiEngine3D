@@ -22,8 +22,8 @@ TopViewportController::TopViewportController(FabiEngine3D& fe3d, EngineGuiManage
 void TopViewportController::initialize()
 {
 	// Top-viewport windows
-	_gui.getViewport("top")->addWindow("projectWindow", vec2(-0.25f, 0.0f), vec2(0.9825f, 1.5f), TVPC::frameColor);
-	_gui.getViewport("top")->addWindow("gameWindow", vec2(0.25f, 0.0f), vec2(0.9825f, 1.5f), vec3(0.25f));
+	_gui.getViewport("top")->addWindow("projectWindow", Vec2(-0.25f, 0.0f), Vec2(0.9825f, 1.5f), TVPC::frameColor);
+	_gui.getViewport("top")->addWindow("gameWindow", Vec2(0.25f, 0.0f), Vec2(0.9825f, 1.5f), Vec3(0.25f));
 	_projectWindow = _gui.getViewport("top")->getWindow("projectWindow");
 	_gameWindow = _gui.getViewport("top")->getWindow("gameWindow");
 	
@@ -31,20 +31,20 @@ void TopViewportController::initialize()
 	_projectWindow->addScreen("main");
 	_projectWindow->setActiveScreen("main");
 	auto screen = _projectWindow->getScreen("main");
-	screen->addButton("newProject", vec2(-0.767f, 0.0f), vec2(0.15f, 1.25f), TVPC::buttonColor, TVPC::buttonHoverColor, "NEW", TVPC::textColor, TVPC::textHoverColor);
-	screen->addButton("loadProject", vec2(-0.384f, 0.0f), vec2(0.2f, 1.25f), TVPC::buttonColor, TVPC::buttonHoverColor, "LOAD", TVPC::textColor, TVPC::textHoverColor);
-	screen->addButton("saveProject", vec2(0.0f, 0.0f), vec2(0.2f, 1.25f), TVPC::buttonColor, TVPC::buttonHoverColor, "SAVE", TVPC::textColor, TVPC::textHoverColor);
-	screen->addButton("deleteProject", vec2(0.384f, 0.0f), vec2(0.3f, 1.25f), TVPC::buttonColor, TVPC::buttonHoverColor, "DELETE", TVPC::textColor, TVPC::textHoverColor);
-	screen->addButton("quitEngine", vec2(0.767f, 0.0f), vec2(0.2f, 1.25f), TVPC::buttonColor, TVPC::buttonHoverColor, "QUIT", TVPC::textColor, TVPC::textHoverColor);
+	screen->addButton("newProject", Vec2(-0.767f, 0.0f), Vec2(0.15f, 1.25f), TVPC::buttonColor, TVPC::buttonHoverColor, "NEW", TVPC::textColor, TVPC::textHoverColor);
+	screen->addButton("loadProject", Vec2(-0.384f, 0.0f), Vec2(0.2f, 1.25f), TVPC::buttonColor, TVPC::buttonHoverColor, "LOAD", TVPC::textColor, TVPC::textHoverColor);
+	screen->addButton("saveProject", Vec2(0.0f, 0.0f), Vec2(0.2f, 1.25f), TVPC::buttonColor, TVPC::buttonHoverColor, "SAVE", TVPC::textColor, TVPC::textHoverColor);
+	screen->addButton("deleteProject", Vec2(0.384f, 0.0f), Vec2(0.3f, 1.25f), TVPC::buttonColor, TVPC::buttonHoverColor, "DELETE", TVPC::textColor, TVPC::textHoverColor);
+	screen->addButton("quitEngine", Vec2(0.767f, 0.0f), Vec2(0.2f, 1.25f), TVPC::buttonColor, TVPC::buttonHoverColor, "QUIT", TVPC::textColor, TVPC::textHoverColor);
 
 	// Top-viewport: gameWindow
 	_gameWindow->addScreen("main");
 	_gameWindow->setActiveScreen("main");
 	screen = _gameWindow->getScreen("main");
-	screen->addButton("play", vec2(-0.85f, 0.0f), vec2(0.1f, 1.75f), "play.png", vec3(2.0f));
-	screen->addButton("pause", vec2(-0.65f, 0.0f), vec2(0.1f, 1.75f), "pause.png", vec3(2.0f));
-	screen->addButton("restart", vec2(-0.45f, 0.0f), vec2(0.1f, 1.75f), "restart.png", vec3(2.0f));
-	screen->addButton("stop", vec2(-0.25f, 0.0f), vec2(0.1f, 1.75f), "stop.png", vec3(2.0f));
+	screen->addButton("play", Vec2(-0.85f, 0.0f), Vec2(0.1f, 1.75f), "play.png", Vec3(2.0f));
+	screen->addButton("pause", Vec2(-0.65f, 0.0f), Vec2(0.1f, 1.75f), "pause.png", Vec3(2.0f));
+	screen->addButton("restart", Vec2(-0.45f, 0.0f), Vec2(0.1f, 1.75f), "restart.png", Vec3(2.0f));
+	screen->addButton("stop", Vec2(-0.25f, 0.0f), Vec2(0.1f, 1.75f), "stop.png", Vec3(2.0f));
 }
 
 void TopViewportController::update()
@@ -63,7 +63,7 @@ void TopViewportController::_updateProjectManagement()
 	{
 		if (projectScreen->getButton("newProject")->isHovered())
 		{
-			_gui.getGlobalScreen()->addValueForm("newProjectName", "Enter project name", "", vec2(0.0f), vec2(0.5f, 0.1f));
+			_gui.getGlobalScreen()->addValueForm("newProjectName", "Enter project name", "", Vec2(0.0f), Vec2(0.5f, 0.1f));
 			_creatingProject = true;
 		}
 		else if (projectScreen->getButton("loadProject")->isHovered())
@@ -84,7 +84,7 @@ void TopViewportController::_updateProjectManagement()
 		{
 			if (_currentProjectName != "") // A project must be loaded
 			{
-				_gui.getGlobalScreen()->addAnswerForm("exitEngine", "Save changes?", vec2(0.0f, 0.25f));
+				_gui.getGlobalScreen()->addAnswerForm("exitEngine", "Save changes?", Vec2(0.0f, 0.25f));
 			}
 			else // Otherwise, just exit the engine
 			{

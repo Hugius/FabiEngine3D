@@ -106,7 +106,7 @@ void FabiEngine3D::skyEntity_setRotationSpeed(const string& ID, float speed)
 	_core->_skyEntityManager.getEntity(ID)->setRotationSpeed(speed);
 }
 
-void FabiEngine3D::skyEntity_setColor(const string& ID, vec3 color)
+void FabiEngine3D::skyEntity_setColor(const string& ID, Vec3 color)
 {
 	_core->_skyEntityManager.getEntity(ID)->setColor(color);
 }
@@ -155,7 +155,7 @@ float FabiEngine3D::skyEntity_getRotationSpeed(const string& ID)
 	return _core->_skyEntityManager.getEntity(ID)->getRotationSpeed();
 }
 
-vec3 FabiEngine3D::skyEntity_getColor(const string& ID)
+Vec3 FabiEngine3D::skyEntity_getColor(const string& ID)
 {
 	return _core->_skyEntityManager.getEntity(ID)->getColor();
 }

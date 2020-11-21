@@ -22,8 +22,8 @@ void FabiEngine3D::textEntity_showAll()
 	}
 }
 
-void FabiEngine3D::textEntity_add(const string& ID, const string& textContent, const string& fontPath, vec3 color, vec2 position,
-	float rotation, vec2 size, bool isCentered, bool isDynamic)
+void FabiEngine3D::textEntity_add(const string& ID, const string& textContent, const string& fontPath, Vec3 color, Vec2 position,
+	float rotation, Vec2 size, bool isCentered, bool isDynamic)
 {
 	_core->_textEntityManager.addTextEntity(ID, textContent, fontPath, color, position, rotation, size, false, isCentered, isDynamic);
 }
@@ -52,7 +52,7 @@ void FabiEngine3D::textEntity_setTextContent(const string& ID, const string& tex
 	entity->setTextContent(textContent);
 
 	// Calculate new size
-	vec2 newSize = entity->getScaling();
+	Vec2 newSize = entity->getScaling();
 	if (charWidth >= 0.0f)
 	{
 		newSize.x = charWidth * static_cast<float>(textContent.size());
@@ -74,7 +74,7 @@ void FabiEngine3D::textEntity_setTextContent(const string& ID, const string& tex
 	}
 }
 
-void FabiEngine3D::textEntity_setColor(const string& ID, vec3 color)
+void FabiEngine3D::textEntity_setColor(const string& ID, Vec3 color)
 {
 	_core->_textEntityManager.getEntity(ID)->setColor(color);
 }
@@ -94,7 +94,7 @@ void FabiEngine3D::textEntity_show(const string& ID)
 	_core->_textEntityManager.getEntity(ID)->setVisible(true);
 }
 
-void FabiEngine3D::textEntity_setPosition(const string& ID, vec2 position)
+void FabiEngine3D::textEntity_setPosition(const string& ID, Vec2 position)
 {
 	_core->_textEntityManager.getEntity(ID)->setTranslation(position);
 }
@@ -104,12 +104,12 @@ void FabiEngine3D::textEntity_setRotation(const string& ID, float rotation)
 	_core->_textEntityManager.getEntity(ID)->setRotation(rotation);
 }
 
-void FabiEngine3D::textEntity_setSize(const string& ID, vec2 size)
+void FabiEngine3D::textEntity_setSize(const string& ID, Vec2 size)
 {
 	_core->_textEntityManager.getEntity(ID)->setScaling(size);
 }
 
-void FabiEngine3D::textEntity_move(const string& ID, vec2 position)
+void FabiEngine3D::textEntity_move(const string& ID, Vec2 position)
 {
 	_core->_textEntityManager.getEntity(ID)->translate(position);
 }
@@ -119,22 +119,22 @@ void FabiEngine3D::textEntity_rotate(const string& ID, float rotation)
 	_core->_textEntityManager.getEntity(ID)->rotate(rotation);
 }
 
-void FabiEngine3D::textEntity_scale(const string& ID, vec2 size)
+void FabiEngine3D::textEntity_scale(const string& ID, Vec2 size)
 {
 	_core->_textEntityManager.getEntity(ID)->scale(size);
 }
 
-void FabiEngine3D::textEntity_setMinPosition(const string& ID, vec2 minPos)
+void FabiEngine3D::textEntity_setMinPosition(const string& ID, Vec2 minPos)
 {
 	_core->_textEntityManager.getEntity(ID)->setMinPosition(minPos);
 }
 
-void FabiEngine3D::textEntity_setMaxPosition(const string& ID, vec2 maxPos)
+void FabiEngine3D::textEntity_setMaxPosition(const string& ID, Vec2 maxPos)
 {
 	_core->_textEntityManager.getEntity(ID)->setMaxPosition(maxPos);
 }
 
-vec2 FabiEngine3D::textEntity_getPosition(const string& ID)
+Vec2 FabiEngine3D::textEntity_getPosition(const string& ID)
 {
 	return _core->_textEntityManager.getEntity(ID)->getTranslation();
 }
@@ -149,17 +149,17 @@ float FabiEngine3D::textEntity_getAlpha(const string& ID)
 	return _core->_textEntityManager.getEntity(ID)->getAlpha();
 }
 
-vec2 FabiEngine3D::textEntity_getSize(const string& ID)
+Vec2 FabiEngine3D::textEntity_getSize(const string& ID)
 {
 	return _core->_textEntityManager.getEntity(ID)->getScaling();
 }
 
-vec2 FabiEngine3D::textEntity_getMinPosition(const string& ID)
+Vec2 FabiEngine3D::textEntity_getMinPosition(const string& ID)
 {
 	return  _core->_textEntityManager.getEntity(ID)->getMinPosition();
 }
 
-vec2 FabiEngine3D::textEntity_getMaxPosition(const string& ID)
+Vec2 FabiEngine3D::textEntity_getMaxPosition(const string& ID)
 {
 	return  _core->_textEntityManager.getEntity(ID)->getMaxPosition();
 }

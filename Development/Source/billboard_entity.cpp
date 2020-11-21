@@ -1,13 +1,16 @@
 #include "billboard_entity.hpp"
+#include "mathematics.hpp"
 
 void BillboardEntity::updateModelMatrix()
 {
-	_modelMatrix = mat4(1.0f);
-	_modelMatrix = glm::translate(_modelMatrix, _translation);
-	_modelMatrix = glm::rotate(_modelMatrix, glm::radians(_rotation.z), vec3(0.0f, 0.0f, 1.0f));
-	_modelMatrix = glm::rotate(_modelMatrix, glm::radians(_rotation.y), vec3(0.0f, 1.0f, 0.0f));
-	_modelMatrix = glm::rotate(_modelMatrix, glm::radians(_rotation.x), vec3(1.0f, 0.0f, 0.0f));
-	_modelMatrix = glm::scale(_modelMatrix, _scaling);
+	Matrix44 translationMatrix = Matrix44::createTranslation(_translation.x, _translation.y, _translation.z);
+	Matrix44 rotationMatrix = Matrix44::createRotation(
+		Math::degreesToRadians(_rotation.x),
+		Math::degreesToRadians(_rotation.y),
+		Math::degreesToRadians(_rotation.z));
+	Matrix44 scalingMatrix = Matrix44::createScaling(_scaling.x, _scaling.y, _scaling.z);
+
+	_modelMatrix = translationMatrix * rotationMatrix * scalingMatrix;
 }
 
 void BillboardEntity::setCameraFacingX(bool val)
@@ -25,42 +28,42 @@ void BillboardEntity::setDiffuseMap(GLuint val)
 	_diffuseMap = val;
 }
 
-void BillboardEntity::setTranslation(vec3 val)
+void BillboardEntity::setTranslation(Vec3 val)
 {
 	_translation = val;
 }
 
-void BillboardEntity::setInitialRotation(vec3 val)
+void BillboardEntity::setInitialRotation(Vec3 val)
 {
 	_initialRotation = val;
 }
 
-void BillboardEntity::setRotation(vec3 val)
+void BillboardEntity::setRotation(Vec3 val)
 {
 	_rotation = val;
 }
 
-void BillboardEntity::setScaling(vec3 val)
+void BillboardEntity::setScaling(Vec3 val)
 {
 	_scaling = val;
 }
 
-void BillboardEntity::setColor(vec3 color)
+void BillboardEntity::setColor(Vec3 color)
 {
 	_color = color;
 }
 
-void BillboardEntity::translate(vec3 val)
+void BillboardEntity::translate(Vec3 val)
 {
 	_translation += val;
 }
 
-void BillboardEntity::rotate(vec3 val)
+void BillboardEntity::rotate(Vec3 val)
 {
 	_rotation += val;
 }
 
-void BillboardEntity::scale(vec3 val)
+void BillboardEntity::scale(Vec3 val)
 {
 	_scaling += val;
 }
@@ -158,7 +161,7 @@ void BillboardEntity::setMaxY(float val)
 	_maxY = val;
 }
 
-const mat4 & BillboardEntity::getModelMatrix() const
+const Matrix44 & BillboardEntity::getModelMatrix() const
 {
 	return _modelMatrix;
 }
@@ -168,27 +171,27 @@ const GLuint BillboardEntity::getDiffuseMap() const
 	return _diffuseMap;
 }
 
-const vec3 BillboardEntity::getTranslation() const
+const Vec3 BillboardEntity::getTranslation() const
 {
 	return _translation;
 }
 
-const vec3 BillboardEntity::getInitialRotation() const
+const Vec3 BillboardEntity::getInitialRotation() const
 {
 	return _initialRotation;
 }
 
-const vec3 BillboardEntity::getRotation() const
+const Vec3 BillboardEntity::getRotation() const
 {
 	return _rotation;
 }
 
-const vec3 BillboardEntity::getScaling() const
+const Vec3 BillboardEntity::getScaling() const
 {
 	return _scaling;
 }
 
-const vec3 BillboardEntity::getColor() const
+const Vec3 BillboardEntity::getColor() const
 {
 	return _color;
 }

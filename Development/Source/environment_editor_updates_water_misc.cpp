@@ -136,7 +136,7 @@ void EnvironmentEditor::_updateWaterRemoval()
 	{
 		if (_waterRemovalEnabled && _currentWaterID != "")
 		{
-			_gui.getGlobalScreen()->addAnswerForm("removeWater", "Are you sure?", vec2(0.0f));
+			_gui.getGlobalScreen()->addAnswerForm("removeWater", "Are you sure?", Vec2(0.0f));
 
 			if (_gui.getGlobalScreen()->isAnswerFormConfirmed("removeWater"))
 			{
@@ -179,14 +179,14 @@ void EnvironmentEditor::_updateWaterCamera()
 			_totalCameraRotation += _cameraRotationSpeed;
 
 			// Calculate new camera position
-			vec3 waterPosition = _fe3d.waterEntity_getPosition(waterID);
+			Vec3 waterPosition = _fe3d.waterEntity_getPosition(waterID);
 			float waterSize = _fe3d.waterEntity_getSize(waterID);
 			float x = waterPosition.x + (waterSize / 2.0f) * sin(_totalCameraRotation);
 			float y = waterPosition.y + (waterPosition.y + (waterSize / 16.0f));
 			float z = waterPosition.z + (waterSize / 2.0f) * cos(_totalCameraRotation);
 
 			// Update camera position
-			_fe3d.camera_setPosition(vec3(x, y, z));
+			_fe3d.camera_setPosition(Vec3(x, y, z));
 			_fe3d.camera_enableLookat(waterPosition);
 		}
 	}

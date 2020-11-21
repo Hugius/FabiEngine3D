@@ -13,10 +13,10 @@ void CollisionResolver::update(const vector<shared_ptr<AabbEntity>> & boxes, Ter
 	if (_aabbResponseEnabled)
 	{
 		// Temporary values
-		static vec3 oldCameraPos;
-		vec3 currentCameraPos = camera.getPosition();
-		vec3 posDifference = oldCameraPos - currentCameraPos;
-		posDifference = vec3(fabsf(posDifference.x), fabsf(posDifference.y), fabsf(posDifference.z));
+		static Vec3 oldCameraPos;
+		Vec3 currentCameraPos = camera.getPosition();
+		Vec3 posDifference = oldCameraPos - currentCameraPos;
+		posDifference = Vec3(fabsf(posDifference.x), fabsf(posDifference.y), fabsf(posDifference.z));
 		Collision collision(false, false, false);
 
 		// Detect collision
@@ -33,7 +33,7 @@ void CollisionResolver::update(const vector<shared_ptr<AabbEntity>> & boxes, Ter
 		}
 
 		// Respond to collision
-		vec3 newCameraPos = currentCameraPos;
+		Vec3 newCameraPos = currentCameraPos;
 		if (collision.xCollided())
 		{
 			newCameraPos.x = oldCameraPos.x;
@@ -69,13 +69,13 @@ void CollisionResolver::update(const vector<shared_ptr<AabbEntity>> & boxes, Ter
 			{
 				_aboveGround = false;
 				_underGround = true;
-				camera.translate(vec3(0.0f, _cameraSpeed, 0.0f));
+				camera.translate(Vec3(0.0f, _cameraSpeed, 0.0f));
 				camY = camera.getPosition().y;
 
 				// Check again
 				if (camY > targetY)
 				{
-					camera.setPosition(vec3(camX, targetY, camZ));
+					camera.setPosition(Vec3(camX, targetY, camZ));
 					_underGround = false;
 				}
 			}

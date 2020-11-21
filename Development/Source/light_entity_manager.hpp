@@ -12,7 +12,7 @@ public:
 
 	const vector<shared_ptr<LightEntity>> getEntities();
 
-	void addLightEntity(const string& ID, vec3 position, vec3 color, float intensity, float distanceFactor);
+	void addLightEntity(const string& ID, Vec3 position, Vec3 color, float intensity, float distanceFactor);
 
 	void update() override;
 };

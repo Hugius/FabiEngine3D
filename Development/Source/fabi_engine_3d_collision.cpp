@@ -6,12 +6,12 @@ void FabiEngine3D::aabbEntity_deleteAll()
 	_core->_aabbEntityManager.deleteAllEntities();
 }
 
-void FabiEngine3D::aabbEntity_add(const string& ID, vec3 position, vec3 size, bool responsive)
+void FabiEngine3D::aabbEntity_add(const string& ID, Vec3 position, Vec3 size, bool responsive)
 {
 	_core->_aabbEntityManager.addAabbEntity(ID, position, size, responsive);
 }
 
-void FabiEngine3D::aabbEntity_bindToGameEntity(const string& parentID, vec3 position, vec3 size, bool responsive, const string& customAabbID)
+void FabiEngine3D::aabbEntity_bindToGameEntity(const string& parentID, Vec3 position, Vec3 size, bool responsive, const string& customAabbID)
 {
 	if (customAabbID.empty()) // Use parent ID
 	{
@@ -43,7 +43,7 @@ void FabiEngine3D::aabbEntity_bindToBillboardEntity(const string& parentID, bool
 	{
 		if (_core->_billboardEntityManager.isExisting(parentID))
 		{
-			_core->_aabbEntityManager.bindAabbEntity(parentID, parentID, AabbParentType::BILLBOARD_ENTITY, vec3(0.0f), vec3(0.0f), responsive);
+			_core->_aabbEntityManager.bindAabbEntity(parentID, parentID, AabbParentType::BILLBOARD_ENTITY, Vec3(0.0f), Vec3(0.0f), responsive);
 		}
 		else
 		{
@@ -54,7 +54,7 @@ void FabiEngine3D::aabbEntity_bindToBillboardEntity(const string& parentID, bool
 	{
 		if (_core->_billboardEntityManager.isExisting(parentID))
 		{
-			_core->_aabbEntityManager.bindAabbEntity(customAabbID, parentID, AabbParentType::BILLBOARD_ENTITY, vec3(0.0f), vec3(0.0f), responsive);
+			_core->_aabbEntityManager.bindAabbEntity(customAabbID, parentID, AabbParentType::BILLBOARD_ENTITY, Vec3(0.0f), Vec3(0.0f), responsive);
 		}
 		else
 		{
@@ -83,7 +83,7 @@ void FabiEngine3D::aabbEntity_setResponsiveness(const string& ID, bool responsiv
 	_core->_aabbEntityManager.getEntity(ID)->setResponsiveness(responsive);
 }
 
-void FabiEngine3D::aabbEntity_setPosition(const string& ID, vec3 position)
+void FabiEngine3D::aabbEntity_setPosition(const string& ID, Vec3 position)
 {
 	if (_core->_aabbEntityManager.getEntity(ID)->getParentID() == "") // Standalone entity
 	{
@@ -95,7 +95,7 @@ void FabiEngine3D::aabbEntity_setPosition(const string& ID, vec3 position)
 	}
 }
 
-void FabiEngine3D::aabbEntity_setSize(const string& ID, vec3 size)
+void FabiEngine3D::aabbEntity_setSize(const string& ID, Vec3 size)
 {
 	if (_core->_aabbEntityManager.getEntity(ID)->getParentID() == "") // Standalone entity
 	{
@@ -107,7 +107,7 @@ void FabiEngine3D::aabbEntity_setSize(const string& ID, vec3 size)
 	}
 }
 
-vec3 FabiEngine3D::aabbEntity_getPosition(const string& ID)
+Vec3 FabiEngine3D::aabbEntity_getPosition(const string& ID)
 {
 	if (_core->_aabbEntityManager.getEntity(ID)->getParentID() == "") // Standalone entity
 	{
@@ -119,7 +119,7 @@ vec3 FabiEngine3D::aabbEntity_getPosition(const string& ID)
 	}
 }
 
-vec3 FabiEngine3D::aabbEntity_getSize(const string& ID)
+Vec3 FabiEngine3D::aabbEntity_getSize(const string& ID)
 {
 	if (_core->_aabbEntityManager.getEntity(ID)->getParentID() == "") // Standalone entity
 	{
@@ -217,8 +217,8 @@ const string& FabiEngine3D::collision_checkEntityWithOthers(const string& ID)
 {
 	// Self entity
 	auto self = _core->_aabbEntityManager.getEntity(ID);
-	vec3 selfPos = self->getTranslation();
-	vec3 selfSize = self->getScaling();
+	Vec3 selfPos = self->getTranslation();
+	Vec3 selfSize = self->getScaling();
 
 	// Check if entity is responsive and visible
 	if (self->isResponsive() && self->isVisible())
@@ -229,8 +229,8 @@ const string& FabiEngine3D::collision_checkEntityWithOthers(const string& ID)
 			// Don't check own entity & other entity must be responsive and visible
 			if (other->getID() != ID && other->isResponsive() && other->isVisible())
 			{
-				vec3 otherPos = other->getTranslation();
-				vec3 otherSize = other->getScaling();
+				Vec3 otherPos = other->getTranslation();
+				Vec3 otherSize = other->getScaling();
 
 				// Check XYZ collision between 2 entities
 				if
@@ -306,7 +306,7 @@ string FabiEngine3D::collision_checkCursorInAny()
 			if (entity->isResponsive() && entity->isVisible())
 			{
 				// Calculate box left bottom (LB) and right top (RT)
-				vec3 lb, rt;
+				Vec3 lb, rt;
 				lb.x = (entity->getTranslation().x - entity->getScaling().x / 2.0f);
 				lb.y = (entity->getTranslation().y);
 				lb.z = (entity->getTranslation().z + entity->getScaling().z / 2.0f);
@@ -337,7 +337,7 @@ bool FabiEngine3D::collision_checkCursorInEntity(const string& ID)
 
 	if (entity->isResponsive() && entity->isVisible())
 	{
-		vec3 lb, rt;
+		Vec3 lb, rt;
 		lb.x = (entity->getTranslation().x - entity->getScaling().x / 2.0f);
 		lb.y = (entity->getTranslation().y);
 		lb.z = (entity->getTranslation().z + entity->getScaling().z / 2.0f);
@@ -366,7 +366,7 @@ string FabiEngine3D::collision_checkCursorInEntities(const string& ID, const str
 				if (subString == ID && entity->getID() != exception) // If entity matches ID
 				{
 					// Calculate box left bottom (LB) and right top (RT)
-					vec3 lb, rt;
+					Vec3 lb, rt;
 					lb.x = (entity->getTranslation().x - entity->getScaling().x / 2.0f);
 					lb.y = (entity->getTranslation().y);
 					lb.z = (entity->getTranslation().z + entity->getScaling().z / 2.0f);

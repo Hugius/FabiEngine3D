@@ -7,10 +7,10 @@ EngineGuiManager::EngineGuiManager(FabiEngine3D& fe3d) :
 	_globalScreen = make_shared<EngineGuiGlobalScreen>(_fe3d);
 
 	// Viewports
-	_viewports.push_back(make_shared<EngineGuiViewport>(_fe3d, "top", vec2(0.0f, 0.95f), vec2(2.0f, 0.1f), vec3(0.15f)));
-	_viewports.push_back(make_shared<EngineGuiViewport>(_fe3d, "left", vec2(-0.875f, 0.15f), vec2(0.25f, 1.5f), vec3(0.15f)));
-	_viewports.push_back(make_shared<EngineGuiViewport>(_fe3d, "right", vec2(0.875f, 0.15f), vec2(0.25f, 1.5f), vec3(0.15f)));
-	_viewports.push_back(make_shared<EngineGuiViewport>(_fe3d, "bottom", vec2(0.0f, -0.8f), vec2(2.0f, 0.4f), vec3(0.15f)));
+	_viewports.push_back(make_shared<EngineGuiViewport>(_fe3d, "top", Vec2(0.0f, 0.95f), Vec2(2.0f, 0.1f), Vec3(0.15f)));
+	_viewports.push_back(make_shared<EngineGuiViewport>(_fe3d, "left", Vec2(-0.875f, 0.15f), Vec2(0.25f, 1.5f), Vec3(0.15f)));
+	_viewports.push_back(make_shared<EngineGuiViewport>(_fe3d, "right", Vec2(0.875f, 0.15f), Vec2(0.25f, 1.5f), Vec3(0.15f)));
+	_viewports.push_back(make_shared<EngineGuiViewport>(_fe3d, "bottom", Vec2(0.0f, -0.8f), Vec2(2.0f, 0.4f), Vec3(0.15f)));
 }
 
 void EngineGuiManager::update()

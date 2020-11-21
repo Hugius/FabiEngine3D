@@ -61,7 +61,7 @@ void FabiEngine3D::audioEntity_addGlobal(const std::string& ID, const std::strin
 	_core->_audioManager.addGlobalChunk(ID, fileName);
 }
 
-void FabiEngine3D::audioEntity_addPoint(const std::string& ID, const std::string& fileName, vec3 position, float maxDistance)
+void FabiEngine3D::audioEntity_addPoint(const std::string& ID, const std::string& fileName, Vec3 position, float maxDistance)
 {
 	_core->_audioManager.addPointChunk(ID, fileName, position, maxDistance);
 }
@@ -106,7 +106,7 @@ void FabiEngine3D::audioEntity_setVolume(const std::string& ID, int volume)
 	_core->_audioPlayer.setChunkVolume(_core->_audioManager.getChunk(ID), int((float(volume) / 100.0f) * 128.0f));
 }
 
-void FabiEngine3D::audioEntity_changePoint(const std::string& ID, vec3 position)
+void FabiEngine3D::audioEntity_changePoint(const std::string& ID, Vec3 position)
 {
 	_core->_audioManager.getChunk(ID).setPosition(position);
 }

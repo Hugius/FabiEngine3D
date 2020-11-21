@@ -2,11 +2,11 @@
 
 #include "base_entity.hpp"
 
-#include <GLM\\glm.hpp>
+#include "mathematics.hpp"
 #include <array>
 
 using std::array;
-using glm::mat4;
+
 
 class SkyEntity final : public BaseEntity
 {
@@ -14,17 +14,17 @@ public:
 	using BaseEntity::BaseEntity;
 	~SkyEntity() = default;
 
+	void updateRotationMatrix();
 	void setDiffuseMapPaths(const array<string, 6>& val);
-	void setRotationMatrix(const mat4& val);
-	void setColor(vec3 val);
+	void setColor(Vec3 val);
 	void setCubeMap(GLuint val);
 	void setOriginalLightness(float val);
 	void setLightness(float val);
 	void setRotationSpeed(float val);
 
 	const array<string, 6>& getDiffuseMapPaths() const;
-	const mat4& getRotationMatrix()				 const;
-	const vec3 getColor()						 const;
+	const Matrix44& getRotationMatrix()			 const;
+	const Vec3 getColor()						 const;
 	const GLuint getCubeMap()					 const;
 	const float getOriginalLightness()			 const;
 	const float getLightness()					 const;
@@ -33,13 +33,14 @@ public:
 private:
 	array<string, 6> _diffuseMapPaths = {"", "", "", "", "", ""};
 
-	mat4 _rotationMatrix = mat4(1.0f);
+	Matrix44 _rotationMatrix = Matrix44(1.0f);
 
-	vec3 _color = vec3(1.0f);
+	Vec3 _color = Vec3(1.0f);
 
-	GLuint _cubeMap   = 0;
+	GLuint _cubeMap = 0;
 
 	float _originalLightness = 1.0f;
 	float _lightness		 = 1.0f;
 	float _rotationSpeed     = 0.0f;
+	float _rotation			 = 0.0f;
 };

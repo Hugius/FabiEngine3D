@@ -41,7 +41,7 @@ void SceneEditor::saveSceneToFile()
 				auto diffuseMapPaths = _fe3d.skyEntity_getDiffuseMapPaths(_currentSkyID);
 				float rotationSpeed = _fe3d.skyEntity_getRotationSpeed(_currentSkyID);
 				float lightness = _fe3d.skyEntity_getOriginalLightness(_currentSkyID);
-				vec3 color = _fe3d.skyEntity_getColor(_currentSkyID);
+				Vec3 color = _fe3d.skyEntity_getColor(_currentSkyID);
 
 				// Perform empty string & space conversions
 				for (auto& diffuseMapPath : diffuseMapPaths)
@@ -135,12 +135,12 @@ void SceneEditor::saveSceneToFile()
 				bool isSpecularLighted = _fe3d.waterEntity_isSpecularLighted(_currentWaterID);
 				bool isReflective = _fe3d.waterEntity_isReflective(_currentWaterID);
 				bool isRefractive = _fe3d.waterEntity_isRefractive(_currentWaterID);
-				vec3 color = _fe3d.waterEntity_getColor(_currentWaterID);
+				Vec3 color = _fe3d.waterEntity_getColor(_currentWaterID);
 				float size = _fe3d.waterEntity_getSize(_currentWaterID);
-				vec3 position = _fe3d.waterEntity_getPosition(_currentWaterID);
+				Vec3 position = _fe3d.waterEntity_getPosition(_currentWaterID);
 				float uvRepeat = _fe3d.waterEntity_getUvRepeat(_currentWaterID);
 				float waveHeightFactor = _fe3d.waterEntity_getWaveHeightFactor(_currentWaterID);
-				vec2 speed = _fe3d.waterEntity_getSpeed(_currentWaterID);
+				Vec2 speed = _fe3d.waterEntity_getSpeed(_currentWaterID);
 				float transparency = _fe3d.waterEntity_getTransparency(_currentWaterID);
 				float specularFactor = _fe3d.waterEntity_getSpecularLightingFactor(_currentWaterID);
 				float specularIntensity = _fe3d.waterEntity_getSpecularLightingIntensity(_currentWaterID);
@@ -213,8 +213,8 @@ void SceneEditor::saveSceneToFile()
 
 					// AABB data
 					vector<string> aabbNames;
-					vector<vec3> aabbPositions;
-					vector<vec3> aabbSizes;
+					vector<Vec3> aabbPositions;
+					vector<Vec3> aabbSizes;
 					for (auto& aabbID : _fe3d.aabbEntity_getBoundIDs(entityID, true, false))
 					{
 						aabbNames.push_back(aabbID.substr(string(entityID + "_").size()));
@@ -372,7 +372,7 @@ void SceneEditor::saveSceneToFile()
 			}
 
 			// Ambient lighting
-			vec3 ambientLightingColor = _fe3d.gfx_getAmbientLightingColor();
+			Vec3 ambientLightingColor = _fe3d.gfx_getAmbientLightingColor();
 			float ambientLightingIntensity = _fe3d.gfx_getAmbientLightingIntensity();
 
 			file <<
@@ -383,8 +383,8 @@ void SceneEditor::saveSceneToFile()
 				ambientLightingIntensity << std::endl;
 
 			// Directional lighting
-			vec3 directionalLightingColor = _fe3d.gfx_getDirectionalLightingColor();
-			vec3 directionalLightingPosition = _fe3d.gfx_getDirectionalLightingPosition();
+			Vec3 directionalLightingColor = _fe3d.gfx_getDirectionalLightingColor();
+			Vec3 directionalLightingPosition = _fe3d.gfx_getDirectionalLightingPosition();
 			float directionalLightingIntensity = _fe3d.gfx_getDirectionalLightingIntensity();
 			float billboardSize = _fe3d.billboardEntity_getSize("@@lightSource").x;
 
@@ -435,7 +435,7 @@ void SceneEditor::saveSceneToFile()
 			file << "EDITOR_SPEED " << _customCameraSpeed << std::endl;
 
 			// Editor camera position
-			vec3 position = _fe3d.camera_getPosition();
+			Vec3 position = _fe3d.camera_getPosition();
 			file << "EDITOR_POSITION " << position.x << " " << position.y << " " << position.z << std::endl;
 
 			// Editor camera yaw
@@ -450,7 +450,7 @@ void SceneEditor::saveSceneToFile()
 			{
 				float size = _fe3d.gfx_getShadowSize();
 				position = _fe3d.gfx_getShadowEyePosition();
-				vec3 center = _fe3d.gfx_getShadowCenter();
+				Vec3 center = _fe3d.gfx_getShadowCenter();
 				bool isFollowingCamera = _fe3d.gfx_isShadowFollowingCamera();
 				int interval = _fe3d.gfx_getShadowInterval();
 				file << "GRAPHICS_SHADOWS " << enabled << " " << size << " " << _fe3d.misc_vec2str(position) << " " <<
@@ -482,7 +482,7 @@ void SceneEditor::saveSceneToFile()
 				float minDistance = _fe3d.gfx_getFogMinDistance();
 				float maxDistance = _fe3d.gfx_getFogMaxDistance();
 				float defaultFactor = _fe3d.gfx_getFogDefaultFactor();
-				vec3 color = _fe3d.gfx_getFogColor();
+				Vec3 color = _fe3d.gfx_getFogColor();
 				file << "GRAPHICS_FOG " << enabled << " " << minDistance << " " << maxDistance << " " << defaultFactor << " " << _fe3d.misc_vec2str(color) << std::endl;
 			}
 

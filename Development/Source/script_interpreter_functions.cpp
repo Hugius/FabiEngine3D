@@ -77,7 +77,7 @@ vector<ScriptValue> ScriptInterpreter::_processEngineFunctionCall(const string& 
 
 					if (_validateArgumentAmount(arguments, types.size()) && _validateArgumentTypes(arguments, types))
 					{
-						_fe3d.camera_translate(vec3(arguments[0].getDecimal(), arguments[1].getDecimal(), arguments[2].getDecimal()));
+						_fe3d.camera_translate(Vec3(arguments[0].getDecimal(), arguments[1].getDecimal(), arguments[2].getDecimal()));
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 					}
 				}
@@ -87,7 +87,7 @@ vector<ScriptValue> ScriptInterpreter::_processEngineFunctionCall(const string& 
 
 					if (_validateArgumentAmount(arguments, types.size()) && _validateArgumentTypes(arguments, types))
 					{
-						_fe3d.camera_setPosition(vec3(arguments[0].getDecimal(), arguments[1].getDecimal(), arguments[2].getDecimal()));
+						_fe3d.camera_setPosition(Vec3(arguments[0].getDecimal(), arguments[1].getDecimal(), arguments[2].getDecimal()));
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 					}
 				}

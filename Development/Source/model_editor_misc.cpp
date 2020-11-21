@@ -123,7 +123,7 @@ void ModelEditor::_loadOBJ()
 			else
 			{
 				// Create new entity
-				_fe3d.gameEntity_add(_currentModelID, newFilePath, vec3(0.0f), vec3(0.0f), vec3(1.0f));
+				_fe3d.gameEntity_add(_currentModelID, newFilePath, Vec3(0.0f), Vec3(0.0f), Vec3(1.0f));
 			}
 		}
 		else
@@ -257,9 +257,9 @@ vector<string>& ModelEditor::getModelNames()
 }
 
 bool ModelEditor::_addModel(const string& modelName, string objName, string diffuseMapName, string lightMapName, string reflectionMapName, string normalMapName,
-	vec3 size, bool isFaceCulled, bool isShadowed, bool isTransparent, bool isReflective, bool isSpecular,
-	float specularFactor, float specularIntensity, float lightness, vec3 color, float uvRepeat, string lodEntityID, bool isInstanced,
-	vector<string> aabbNames, vector<vec3> aabbPositions, vector<vec3> aabbSizes)
+	Vec3 size, bool isFaceCulled, bool isShadowed, bool isTransparent, bool isReflective, bool isSpecular,
+	float specularFactor, float specularIntensity, float lightness, Vec3 color, float uvRepeat, string lodEntityID, bool isInstanced,
+	vector<string> aabbNames, vector<Vec3> aabbPositions, vector<Vec3> aabbSizes)
 {
 	// If model name not existing yet
 	if (std::find(_modelNames.begin(), _modelNames.end(), modelName) == _modelNames.end())
@@ -270,7 +270,7 @@ bool ModelEditor::_addModel(const string& modelName, string objName, string diff
 		// Add 3D model
 		if (objName != "")
 		{
-			_fe3d.gameEntity_add(modelName, objName, vec3(0.0f, 0.01f, 0.0f), vec3(0.0f), size, false);
+			_fe3d.gameEntity_add(modelName, objName, Vec3(0.0f, 0.01f, 0.0f), Vec3(0.0f), size, false);
 
 			// Add AABBs
 			for (unsigned int i = 0; i < aabbNames.size(); i++)
@@ -311,7 +311,7 @@ bool ModelEditor::_addModel(const string& modelName, string objName, string diff
 			_fe3d.gameEntity_setTransparent(modelName, isTransparent);
 			_fe3d.gameEntity_setSceneReflective(modelName, isReflective);
 			_fe3d.gameEntity_setSpecularLighted(modelName, isSpecular);
-			_fe3d.gameEntity_setInstanced(modelName, isInstanced, { vec3(0.0f) });
+			_fe3d.gameEntity_setInstanced(modelName, isInstanced, { Vec3(0.0f) });
 
 			// Set other options
 			_fe3d.gameEntity_setSpecularFactor(modelName, specularFactor);

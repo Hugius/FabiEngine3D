@@ -1,11 +1,11 @@
 #include "light_entity.hpp"
 
-void LightEntity::setPosition(vec3 position)
+void LightEntity::setPosition(Vec3 position)
 {
 	_position = position;
 }
 
-void LightEntity::setColor(vec3 color)
+void LightEntity::setColor(Vec3 color)
 {
 	_color = color;
 }
@@ -20,12 +20,12 @@ void LightEntity::setDistanceFactor(float distance)
 	_distanceFactor = distance;
 }
 
-const vec3 LightEntity::getPosition() const
+const Vec3 LightEntity::getPosition() const
 {
 	return _position;
 }
 
-const vec3 LightEntity::getColor() const
+const Vec3 LightEntity::getColor() const
 {
 	return _color;
 }

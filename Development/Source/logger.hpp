@@ -13,13 +13,13 @@
 #include <string>
 #include <vector>
 #include <sstream>
-#include <GLM\\glm.hpp>
+#include "mathematics.hpp"
 #include <type_traits>
 
 using std::vector;
 using std::stringstream;
 using std::string;
-using glm::vec3;
+
 
 class Logger final
 {

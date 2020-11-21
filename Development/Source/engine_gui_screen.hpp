@@ -10,7 +10,7 @@
 class EngineGuiScreen final
 {
 public:
-	EngineGuiScreen(FabiEngine3D& fe3d, const string& parentID, const string& ID, vec2 position, vec2 size);
+	EngineGuiScreen(FabiEngine3D& fe3d, const string& parentID, const string& ID, Vec2 position, Vec2 size);
 
 	void update(bool hoverable);
 	void show();
@@ -19,15 +19,15 @@ public:
 	const string& getID();
 	const string& getParentID();
 
-	void addScrollingList(const string& ID, vec2 position, vec2 size, vec3 color, vec3 buttonColor, vec3 buttonHoverColor, vec3 textColor, 
-		vec3 textHoverColor, vec2 charSize);
-	void addWriteField(const string& ID, vec2 position, vec2 size, vec3 color, vec3 hoverColor, vec3 textColor, vec3 textHoverColor, 
+	void addScrollingList(const string& ID, Vec2 position, Vec2 size, Vec3 color, Vec3 buttonColor, Vec3 buttonHoverColor, Vec3 textColor, 
+		Vec3 textHoverColor, Vec2 charSize);
+	void addWriteField(const string& ID, Vec2 position, Vec2 size, Vec3 color, Vec3 hoverColor, Vec3 textColor, Vec3 textHoverColor, 
 		bool noNumbers, bool noCaps, bool noSpecials, bool noLetters, bool minusAllowed);
-	void addButton(const string& ID, vec2 position, vec2 size, vec3 color, vec3 hoverColor, string textContent, vec3 textColor, vec3 textHoverColor);
-	void addButton(const string& ID, vec2 position, vec2 size, const string& textureName, vec3 hoverColor);
-	void addRectangle(const string& ID, vec2 position, vec2 size, vec3 color, bool isCentered = true);
-	void addRectangle(const string& ID, vec2 position, vec2 size, const string& textureName, bool isCentered = true);
-	void addTextfield(const string& ID, vec2 position, vec2 size, string textContent, vec3 textColor, bool isCentered = true, bool isDynamic = false);
+	void addButton(const string& ID, Vec2 position, Vec2 size, Vec3 color, Vec3 hoverColor, string textContent, Vec3 textColor, Vec3 textHoverColor);
+	void addButton(const string& ID, Vec2 position, Vec2 size, const string& textureName, Vec3 hoverColor);
+	void addRectangle(const string& ID, Vec2 position, Vec2 size, Vec3 color, bool isCentered = true);
+	void addRectangle(const string& ID, Vec2 position, Vec2 size, const string& textureName, bool isCentered = true);
+	void addTextfield(const string& ID, Vec2 position, Vec2 size, string textContent, Vec3 textColor, bool isCentered = true, bool isDynamic = false);
 
 	void deleteScrollingList(const string& ID);
 	void deleteWriteField(const string& ID);
@@ -56,8 +56,8 @@ public:
 private:
 	FabiEngine3D& _fe3d;
 
-	vec2 _parentPosition;
-	vec2 _parentSize;
+	Vec2 _parentPosition;
+	Vec2 _parentSize;
 
 	const string _ID;
 	const string _parentID;
@@ -70,5 +70,5 @@ private:
 	vector<shared_ptr<EngineGuiRectangle>> _rectangles;
 	vector<shared_ptr<EngineGuiTextfield>> _textfields;
 
-	vec4 _convertDimensions(vec2 position, vec2 size);
+	Vec4 _convertDimensions(Vec2 position, Vec2 size);
 };

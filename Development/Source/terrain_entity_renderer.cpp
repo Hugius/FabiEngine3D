@@ -7,7 +7,7 @@ using std::to_string;
 void TerrainEntityRenderer::bind()
 {
 	// Define clipping plane for scene reflections
-	vec4 clippingPlane = vec4(0.0f, 1.0f, 0.0f, -(_renderBus.getSceneReflectionHeight()) + _renderBus.getSceneReflectionOffset());
+	Vec4 clippingPlane = Vec4(0.0f, 1.0f, 0.0f, -(_renderBus.getSceneReflectionHeight()) + _renderBus.getSceneReflectionOffset());
 
 	// Bind shader
 	_shader.bind();
@@ -74,8 +74,8 @@ void TerrainEntityRenderer::renderLightEntities(const vector<shared_ptr<LightEnt
 		}
 		else
 		{
-			_shader.uploadUniform("u_pointLightPositions[" + to_string(i) + "]", vec3(0.0f));
-			_shader.uploadUniform("u_pointLightColors[" + to_string(i) + "]", vec3(0.0f));
+			_shader.uploadUniform("u_pointLightPositions[" + to_string(i) + "]", Vec3(0.0f));
+			_shader.uploadUniform("u_pointLightColors[" + to_string(i) + "]", Vec3(0.0f));
 			_shader.uploadUniform("u_pointLightIntensities[" + to_string(i) + "]", 0.0f);
 			_shader.uploadUniform("u_pointLightDistanceFactors[" + to_string(i) + "]", 0.0f);
 		}

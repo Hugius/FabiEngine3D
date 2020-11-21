@@ -5,16 +5,16 @@
 void ModelEditor::_updateModelEditingSize()
 {
 	auto screen = _gui.getViewport("left")->getWindow("main")->getScreen("modelEditorMenuSize");
-	vec3 currentSize = _fe3d.gameEntity_getSize(_currentModelID);
+	Vec3 currentSize = _fe3d.gameEntity_getSize(_currentModelID);
 	
 	// GUI management 
 	if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 	{
 		if (screen->getButton("setSize")->isHovered())
 		{
-			_gui.getGlobalScreen()->addValueForm("sizeX", "X", currentSize.x * 100.0f, vec2(-0.25f, 0.0f), vec2(0.2f, 0.1f));
-			_gui.getGlobalScreen()->addValueForm("sizeY", "Y", currentSize.y * 100.0f, vec2(0.0f, 0.0f), vec2(0.2f, 0.1f));
-			_gui.getGlobalScreen()->addValueForm("sizeZ", "Z", currentSize.z * 100.0f, vec2(0.25f, 0.0f), vec2(0.2f, 0.1f));
+			_gui.getGlobalScreen()->addValueForm("sizeX", "X", currentSize.x * 100.0f, Vec2(-0.25f, 0.0f), Vec2(0.2f, 0.1f));
+			_gui.getGlobalScreen()->addValueForm("sizeY", "Y", currentSize.y * 100.0f, Vec2(0.0f, 0.0f), Vec2(0.2f, 0.1f));
+			_gui.getGlobalScreen()->addValueForm("sizeZ", "Z", currentSize.z * 100.0f, Vec2(0.25f, 0.0f), Vec2(0.2f, 0.1f));
 		}
 		else if (screen->getButton("toggleResize")->isHovered())
 		{
@@ -47,7 +47,7 @@ void ModelEditor::_updateModelEditingSize()
 	if (_resizingToggled)
 	{
 		float scrollSpeed = float(_fe3d.input_getMouseWheelY()) * 0.05f;
-		vec3 newSize = _fe3d.gameEntity_getSize(_currentModelID);
+		Vec3 newSize = _fe3d.gameEntity_getSize(_currentModelID);
 
 		switch (_transformationDirection)
 		{

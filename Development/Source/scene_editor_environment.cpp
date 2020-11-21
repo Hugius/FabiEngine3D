@@ -60,7 +60,7 @@ void SceneEditor::_updateSkyMenu()
 					}
 
 					// Add choice list
-					_gui.getGlobalScreen()->addChoiceForm("skyList", "Select sky", vec2(-0.4f, 0.1f), skyNames);
+					_gui.getGlobalScreen()->addChoiceForm("skyList", "Select sky", Vec2(-0.4f, 0.1f), skyNames);
 				}
 				else if (screen->getButton("delete")->isHovered())
 				{
@@ -123,7 +123,7 @@ void SceneEditor::_updateTerrainMenu()
 					}
 
 					// Add choice list
-					_gui.getGlobalScreen()->addChoiceForm("terrainList", "Select terrain", vec2(-0.4f, 0.1f), terrainNames);
+					_gui.getGlobalScreen()->addChoiceForm("terrainList", "Select terrain", Vec2(-0.4f, 0.1f), terrainNames);
 				}
 				else if (screen->getButton("delete")->isHovered())
 				{
@@ -186,7 +186,7 @@ void SceneEditor::_updateWaterMenu()
 					}
 
 					// Add choice list
-					_gui.getGlobalScreen()->addChoiceForm("waterList", "Select water", vec2(-0.4f, 0.1f), waterNames);
+					_gui.getGlobalScreen()->addChoiceForm("waterList", "Select water", Vec2(-0.4f, 0.1f), waterNames);
 				}
 				else if (screen->getButton("delete")->isHovered())
 				{

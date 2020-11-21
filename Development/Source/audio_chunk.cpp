@@ -8,7 +8,7 @@ AudioChunk::AudioChunk(const string& ID, const string& filePath, Mix_Chunk* chun
 
 }
 
-AudioChunk::AudioChunk(const string& ID, const string& filePath, Mix_Chunk* chunk, vec3 position, float maxDistance) :
+AudioChunk::AudioChunk(const string& ID, const string& filePath, Mix_Chunk* chunk, Vec3 position, float maxDistance) :
 	_ID(ID),
 	_filePath(filePath),
 	_chunk(chunk),
@@ -34,12 +34,12 @@ Mix_Chunk* AudioChunk::getMixChunk() const
 	return _chunk;
 }
 
-void AudioChunk::setPosition(vec3 position)
+void AudioChunk::setPosition(Vec3 position)
 {
 	_position = position;
 }
 
-vec3 AudioChunk::getPosition() const
+Vec3 AudioChunk::getPosition() const
 {
 	return _position;
 }

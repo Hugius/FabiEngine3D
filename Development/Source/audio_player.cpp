@@ -94,12 +94,12 @@ void AudioPlayer::update(CameraManager& camera, std::vector<AudioChunk>& chunks,
 
 				// Panning
 				auto cameraFront = camera.getFront(); // From camera vector
-				mat4 rotationMatrix(1.0f); // Identity matrix
-				rotationMatrix = glm::rotate(rotationMatrix, glm::radians(90.0f), vec3(0.0f, 1.0f, 0.0f)); // 90 degrees rotation
-				vec3 pointVector = cameraPos - chunk.getPosition(); // To camera vector
-				pointVector = vec3(rotationMatrix * glm::vec4(pointVector, 1.0f)); // Rotate direction
-				pointVector = glm::normalize(pointVector); // Normalize
-				float dot = glm::dot(pointVector, cameraFront); // Dot product
+				Matrix44 rotationMatrix = Matrix44::createRotationZ(Math::degreesToRadians(90.0f));
+				Vec3 pointVector = cameraPos - chunk.getPosition(); // To camera vector
+				Vec4 result = rotationMatrix * Vec4(pointVector.x, pointVector.y, pointVector.z, 1.0f);
+				pointVector = Vec3(result.x, result.y, result.z); // Rotate direction
+				pointVector.normalize(); // Normalize
+				float dot = pointVector.dot(cameraFront); // Dot product
 				float range = (dot / 2.0f) + 0.5f; // Convert (-1 to 1) scale to (0.0f to 1.0f) scale
 				Uint8 leftStrength = Uint8(255.0f * range); // Left ear
 				Uint8 rightStrength = Uint8(255.0f - (255.0f * range)); // Right ear

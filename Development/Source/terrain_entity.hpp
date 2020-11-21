@@ -64,9 +64,9 @@ public:
 
 private:
 	vector<float> _pixelColors;
-	vector<vec3> _vertices;
-	vector<vec2> _uvCoords;
-	vector<vec3> _normals;
+	vector<Vec3> _vertices;
+	vector<Vec2> _uvCoords;
+	vector<Vec3> _normals;
 
 	GLuint _diffuseMap = 0;
 	GLuint _blendMap   = 0;

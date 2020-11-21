@@ -9,11 +9,11 @@ public:
 	~WaterEntity() = default;
 	
 	// Setters
-	void setSpeed(vec2 val);
-	void setRippleOffset(vec2 val);
-	void setWaveOffset(vec2 val);
-	void setPosition(vec3 val);
-	void setColor(vec3 val);
+	void setSpeed(Vec2 val);
+	void setRippleOffset(Vec2 val);
+	void setWaveOffset(Vec2 val);
+	void setPosition(Vec3 val);
+	void setColor(Vec3 val);
 	void setDudvMap(GLuint val);
 	void setNormalMap(GLuint val);
 	void setDisplacementMap(GLuint val);
@@ -34,11 +34,11 @@ public:
 	void setSimplifiedOglBuffer(OpenGLBuffer* buffer);
 
 	// Getters
-	const vec2    getSpeed()					 const;
-	const vec2    getRippleOffset()				 const;
-	const vec2    getWaveOffset()				 const;
-	const vec3	  getPosition()					 const;
-	const vec3    getColor()					 const;
+	const Vec2    getSpeed()					 const;
+	const Vec2    getRippleOffset()				 const;
+	const Vec2    getWaveOffset()				 const;
+	const Vec3	  getPosition()					 const;
+	const Vec3    getColor()					 const;
 	const GLuint  getDudvMap()					 const;
 	const GLuint  getNormalMap()				 const;
 	const GLuint  getDisplacementMap()			 const;
@@ -59,12 +59,12 @@ public:
 	const OpenGLBuffer* getSimplifiedOglBuffer() const;
 
 private:
-	vec2 _speed		   = vec2(0.0f);
-	vec2 _rippleOffset = vec2(0.0f);
-	vec2 _waveOffset   = vec2(0.0f);
+	Vec2 _speed		   = Vec2(0.0f);
+	Vec2 _rippleOffset = Vec2(0.0f);
+	Vec2 _waveOffset   = Vec2(0.0f);
 
-	vec3 _position = vec3(0.0f);
-	vec3 _color = vec3(0.0f);
+	Vec3 _position = Vec3(0.0f);
+	Vec3 _color = Vec3(0.0f);
 
 	GLuint _dudvMap			= 0;
 	GLuint _normalMap		= 0;

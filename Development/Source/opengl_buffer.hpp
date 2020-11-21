@@ -3,14 +3,14 @@
 #include "buffer_type.hpp"
 
 #include <vector>
-#include <GLM\\glm.hpp>
+#include "mathematics.hpp"
 #include <GLEW\\glew.h>
 
 using std::vector;
-using glm::vec2;
-using glm::vec3;
-using glm::vec4;
-using glm::mat4;
+
+
+
+
 
 class OpenGLBuffer final
 {
@@ -20,7 +20,7 @@ public:
 	OpenGLBuffer(float x, float y, float w, float h, bool isCentered, bool isText); // 2D
 	~OpenGLBuffer();
 	
-	void addInstancing(const vector<vec3>& offsets);
+	void addInstancing(const vector<Vec3>& offsets);
 	void removeInstancing();
 
 	const GLuint getVAO() const;
@@ -32,7 +32,7 @@ public:
 
 	const BufferType getBufferType() const;
 
-	const vector<vec3>& getInstancedOffsets() const;
+	const vector<Vec3>& getInstancedOffsets() const;
 
 private:
 	void _create3D(BufferType type, float data[], int dataCount);
@@ -49,6 +49,6 @@ private:
 
 	BufferType _bufferType;
 
-	vector<vec3> _instancedOffsets;
+	vector<Vec3> _instancedOffsets;
 };
 

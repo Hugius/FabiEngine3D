@@ -7,7 +7,7 @@ using std::to_string;
 void GameEntityRenderer::bind()
 {
 	// Define clipping plane for scene reflections
-	vec4 clippingPlane = vec4(0.0f, 1.0f, 0.0f, -(_renderBus.getSceneReflectionHeight() + _renderBus.getSceneReflectionOffset()));
+	Vec4 clippingPlane = Vec4(0.0f, 1.0f, 0.0f, -(_renderBus.getSceneReflectionHeight() + _renderBus.getSceneReflectionOffset()));
 
 	// Bind shader
 	_shader.bind();
@@ -101,8 +101,8 @@ void GameEntityRenderer::renderLightEntities(const vector<shared_ptr<LightEntity
 		}
 		else
 		{
-			_shader.uploadUniform("u_pointLightPositions[" + to_string(i) + "]", vec3(0.0f));
-			_shader.uploadUniform("u_pointLightColors[" + to_string(i) + "]", vec3(0.0f));
+			_shader.uploadUniform("u_pointLightPositions[" + to_string(i) + "]", Vec3(0.0f));
+			_shader.uploadUniform("u_pointLightColors[" + to_string(i) + "]", Vec3(0.0f));
 			_shader.uploadUniform("u_pointLightIntensities[" + to_string(i) + "]", 0.0f);
 			_shader.uploadUniform("u_pointLightDistanceFactors[" + to_string(i) + "]", 0.0f);
 		}
@@ -120,7 +120,10 @@ void GameEntityRenderer::render(const shared_ptr<GameEntity> entity)
 		}
 
 		// Shader uniforms
-		_shader.uploadUniform("u_normalModelMatrix", mat3(glm::inverse(glm::transpose(entity->getModelMatrix()))));
+		auto normalModelMatrix = entity->getModelMatrix();
+		normalModelMatrix.transpose();
+		normalModelMatrix.invert();
+		_shader.uploadUniform("u_normalModelMatrix", Matrix33(normalModelMatrix));
 		_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix());
 		_shader.uploadUniform("u_color", entity->getColor());
 		_shader.uploadUniform("u_specularLightFactor", entity->getSpecularFactor());
@@ -141,7 +144,7 @@ void GameEntityRenderer::render(const shared_ptr<GameEntity> entity)
 		// Check if entity is static to the camera view
 		if (entity->isCameraStatic())
 		{
-			_shader.uploadUniform("u_viewMatrix", mat4(mat3(_renderBus.getViewMatrix())));
+			_shader.uploadUniform("u_viewMatrix", Matrix44(Matrix33(_renderBus.getViewMatrix())));
 		}
 		else
 		{

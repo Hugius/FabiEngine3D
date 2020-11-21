@@ -46,7 +46,7 @@ void SceneEditor::_updateLightEditing()
 								_transformation = TransformationType::TRANSLATION;
 
 								// Filling writefields
-								vec3 position = _fe3d.gameEntity_getPosition(ACTIVE_BULB_ID);
+								Vec3 position = _fe3d.gameEntity_getPosition(ACTIVE_BULB_ID);
 								_gui.getViewport("right")->getWindow("main")->getScreen("pointLightPropertiesMenu")->getWriteField("x")->setTextContent(to_string(static_cast<int>(position.x)));
 								_gui.getViewport("right")->getWindow("main")->getScreen("pointLightPropertiesMenu")->getWriteField("y")->setTextContent(to_string(static_cast<int>(position.y)));
 								_gui.getViewport("right")->getWindow("main")->getScreen("pointLightPropertiesMenu")->getWriteField("z")->setTextContent(to_string(static_cast<int>(position.z)));
@@ -107,8 +107,8 @@ void SceneEditor::_updateLightEditing()
 				}
 
 				// Get current values
-				vec3 position = _fe3d.lightEntity_getPosition(ACTIVE_LIGHT_ID);
-				vec3 color = _fe3d.lightEntity_getColor(ACTIVE_LIGHT_ID);
+				Vec3 position = _fe3d.lightEntity_getPosition(ACTIVE_LIGHT_ID);
+				Vec3 color = _fe3d.lightEntity_getColor(ACTIVE_LIGHT_ID);
 				float intensity = _fe3d.lightEntity_getIntensity(ACTIVE_LIGHT_ID);
 				float distance = _fe3d.lightEntity_getDistanceFactor(ACTIVE_LIGHT_ID);
 

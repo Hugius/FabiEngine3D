@@ -169,8 +169,8 @@ void WaterEntityManager::update()
 		if (entity->isVisible() && _renderBus.isWaterEffectsEnabled())
 		{
 			// Update ripple speed
-			vec2 newOffset = entity->getRippleOffset() + entity->getSpeed();
-			newOffset = vec2(fmod(newOffset.x, 1.0f), fmod(newOffset.y, 1.0f));
+			Vec2 newOffset = entity->getRippleOffset() + entity->getSpeed();
+			newOffset = Vec2(fmod(newOffset.x, 1.0f), fmod(newOffset.y, 1.0f));
 			entity->setRippleOffset(newOffset);
 
 			// Update waving speed (must be 25% slower)

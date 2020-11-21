@@ -13,13 +13,13 @@ void SceneEditor::_updateLightPlacing()
 				!_gui.getGlobalScreen()->isFocused())
 			{
 				// Default placement position
-				vec3 newPosition = vec3(0.0f);
+				Vec3 newPosition = Vec3(0.0f);
 
 				// Check if a terrain is loaded
 				if (_fe3d.terrainEntity_getSelectedID() != "")
 				{
 					// Update preview pointlight position
-					newPosition = _fe3d.terrainEntity_getMousePoint() + vec3(0.0f, 1.0f, 0.0f);
+					newPosition = _fe3d.terrainEntity_getMousePoint() + Vec3(0.0f, 1.0f, 0.0f);
 
 					// Show preview pointlight
 					_fe3d.lightEntity_show(_previewPointlightID);
@@ -42,11 +42,11 @@ void SceneEditor::_updateLightPlacing()
 					}
 
 					// Add light entity
-					_fe3d.gameEntity_add("@" + newID, "engine\\models\\lamp.obj", newPosition, vec3(0.0f), _defaultLightbulbSize);
-					_fe3d.gameEntity_setColor("@" + newID, vec3(1.0f));
+					_fe3d.gameEntity_add("@" + newID, "engine\\models\\lamp.obj", newPosition, Vec3(0.0f), _defaultLightbulbSize);
+					_fe3d.gameEntity_setColor("@" + newID, Vec3(1.0f));
 					_fe3d.gameEntity_setShadowed("@" + newID, false);
 					_fe3d.gameEntity_setDepthMapIncluded("@" + newID, false);
-					_fe3d.aabbEntity_bindToGameEntity("@" + newID, vec3(0.0f), _defaultLightbulbAabbSize, true);
+					_fe3d.aabbEntity_bindToGameEntity("@" + newID, Vec3(0.0f), _defaultLightbulbAabbSize, true);
 					_fe3d.lightEntity_add(newID, newPosition);
 
 					// Disable placement mode if no terrain availible to choose position from

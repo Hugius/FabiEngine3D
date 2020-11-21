@@ -135,7 +135,7 @@ void FabiEngine3D::misc_setCursorPosition(ivec2 pos)
 	_core->_windowManager.setMousePos(pos);
 }
 
-void FabiEngine3D::misc_setMainRenderingColor(vec3 color)
+void FabiEngine3D::misc_setMainRenderingColor(Vec3 color)
 {
 	glClearColor(color.r, color.g, color.b, 1.0f);
 }
@@ -231,17 +231,17 @@ string FabiEngine3D::misc_vec2str(ivec4 vec)
 	return to_string(vec.x) + " " + to_string(vec.y) + " " + to_string(vec.z) + " " + to_string(vec.w);
 }
 
-string FabiEngine3D::misc_vec2str(vec2 vec)
+string FabiEngine3D::misc_vec2str(Vec2 vec)
 {
 	return to_string(vec.x) + " " + to_string(vec.y);
 }
 
-string FabiEngine3D::misc_vec2str(vec3 vec)
+string FabiEngine3D::misc_vec2str(Vec3 vec)
 {
 	return to_string(vec.x) + " " + to_string(vec.y) + " " + to_string(vec.z);
 }
 
-string FabiEngine3D::misc_vec2str(vec4 vec)
+string FabiEngine3D::misc_vec2str(Vec4 vec)
 {
 	return to_string(vec.x) + " " + to_string(vec.y) + " " + to_string(vec.z) + " " + to_string(vec.w);
 }
@@ -269,25 +269,25 @@ string FabiEngine3D::misc_getOpenglVersion()
 	return string(reinterpret_cast<char*>(const_cast<GLubyte*>(glGetString(GL_VERSION)))).substr(0, 3);
 }
 
-vec2 FabiEngine3D::misc_convertToNDC(vec2 pos)
+Vec2 FabiEngine3D::misc_convertToNDC(Vec2 pos)
 {
 	pos.x = (pos.x * 2.0f) - 1.0f;
 	pos.y = (pos.y * 2.0f) - 1.0f;
 
-	return vec2(pos.x, pos.y);
+	return Vec2(pos.x, pos.y);
 }
 
-vec2 FabiEngine3D::misc_convertFromNDC(vec2 pos)
+Vec2 FabiEngine3D::misc_convertFromNDC(Vec2 pos)
 {
 	pos.x += 1.0f;
 	pos.x /= 2.0f;
 	pos.y += 1.0f;
 	pos.y /= 2.0f;
 
-	return vec2(pos.x, pos.y);
+	return Vec2(pos.x, pos.y);
 }
 
-ivec2 FabiEngine3D::misc_convertToScreenCoords(vec2 pos)
+ivec2 FabiEngine3D::misc_convertToScreenCoords(Vec2 pos)
 {
 	float x = float(pos.x) * float(misc_getWindowWidth());
 	float y = float(pos.y) * float(misc_getWindowHeight());
@@ -295,12 +295,12 @@ ivec2 FabiEngine3D::misc_convertToScreenCoords(vec2 pos)
 	return ivec2(int(x), int(y));
 }
 
-vec2 FabiEngine3D::misc_convertFromScreenCoords(ivec2 pos)
+Vec2 FabiEngine3D::misc_convertFromScreenCoords(ivec2 pos)
 {
 	float x = float(pos.x) / float(misc_getWindowWidth());
 	float y = float(pos.y) / float(misc_getWindowHeight());
 
-	return vec2(x, y);
+	return Vec2(x, y);
 }
 
 ivec2 FabiEngine3D::misc_getCursorPosition()

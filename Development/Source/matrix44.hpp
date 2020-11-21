@@ -64,6 +64,6 @@ struct Matrix44
 	static Matrix44 createRotationY(float angle);
 	static Matrix44 createRotationZ(float angle);
 	static Matrix44 createOrtho(float left, float right, float bottom, float top, float nearZ, float farZ);
-	static Matrix44 createPerspective(float fovY, float aspect, float nearZ, float farZ);
-	static Matrix44 createLookAt(const Vec3& eye, const Vec3& center, const Vec3& up);
+	static Matrix44 createProjection(float fovY, float aspect, float nearZ, float farZ);
+	static Matrix44 createView(const Vec3& eye, const Vec3& center, const Vec3& up);
 };

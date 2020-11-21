@@ -15,22 +15,22 @@ public:
 
 	void addBillboardEntity
 	(
-		const string& ID, vec3 color,
-		vec3 T, vec3 R, vec3 S, bool facingCameraX, bool facingCameraY
+		const string& ID, Vec3 color,
+		Vec3 T, Vec3 R, Vec3 S, bool facingCameraX, bool facingCameraY
 	);
 
 	void addBillboardEntity
 	(
 		const string& ID, const string& texturePath,
-		vec3 T, vec3 R, vec3 S,
+		Vec3 T, Vec3 R, Vec3 S,
 		bool transparent, bool facingCameraX, bool facingCameraY, bool textureFiltering
 	);
 
 	void addBillboardEntity
 	(
 		const string& ID, const string& text, 
-		const string& fontPath, vec3 color,
-		vec3 T, vec3 R, vec3 S, bool facingCameraX, bool facingCameraY
+		const string& fontPath, Vec3 color,
+		Vec3 T, Vec3 R, Vec3 S, bool facingCameraX, bool facingCameraY
 	);
 
 	void update() override;

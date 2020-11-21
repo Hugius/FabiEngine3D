@@ -6,8 +6,9 @@
 #include <map>
 #include <string>
 #include <SDL\\SDL_ttf.h>
-#include <GLM\\glm.hpp>
+#include "mathematics.hpp"
 
+#include <GLM/glm.hpp>
 using std::pair;
 using std::array;
 using std::vector;

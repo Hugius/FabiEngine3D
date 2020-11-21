@@ -12,36 +12,36 @@ public:
 
 	// Updates
 	void updateModelMatrix();
-	void translate(vec3 val);
-	void scale(vec3 val);
+	void translate(Vec3 val);
+	void scale(Vec3 val);
 
 	// Setters
-	void setLocalTranslation(vec3 val);
-	void setLocalScaling(vec3 val);
-	void setTranslation(vec3 val);
-	void setScaling(vec3 val);
+	void setLocalTranslation(Vec3 val);
+	void setLocalScaling(Vec3 val);
+	void setTranslation(Vec3 val);
+	void setScaling(Vec3 val);
 	void setParent(const string& ID, AabbParentType type);
 	void setCollisionDirection(const Direction& direction);
 	void setResponsiveness(bool val);
 
 	// Getters
-	const mat4 & getModelMatrix() const;
-	const vec3 getLocalTranslation() const;
-	const vec3 getLocalScaling() const;
-	const vec3 getTranslation() const;
-	const vec3 getScaling() const;
+	const Matrix44 & getModelMatrix() const;
+	const Vec3 getLocalTranslation() const;
+	const Vec3 getLocalScaling() const;
+	const Vec3 getTranslation() const;
+	const Vec3 getScaling() const;
 	const string& getParentID() const;
 	const AabbParentType& getParentType() const;
 	const Direction& getCollisionDirection() const;
 	const bool isResponsive() const;
 
 private:
-	mat4 _modelMatrix = mat4(1.0f);
+	Matrix44 _modelMatrix = Matrix44(1.0f);
 
-	vec3 _localTranslation = vec3(0.0f);
-	vec3 _localScaling = vec3(1.0f);
-	vec3 _translation = vec3(0.0f);
-	vec3 _scaling     = vec3(1.0f);
+	Vec3 _localTranslation = Vec3(0.0f);
+	Vec3 _localScaling = Vec3(1.0f);
+	Vec3 _translation = Vec3(0.0f);
+	Vec3 _scaling     = Vec3(1.0f);
 	
 	string _parentID = "";
 

@@ -24,7 +24,7 @@ void BillboardEditor::_updateBillboardManagement()
 		{
 			if (screen->getButton("addBillboard")->isHovered()) // Add billboard button
 			{
-				_gui.getGlobalScreen()->addValueForm("newBillboardName", "New billboard name", "", vec2(0.0f), vec2(0.5f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("newBillboardName", "New billboard name", "", Vec2(0.0f), Vec2(0.5f, 0.1f));
 				isCreatingBillboard = true;
 			}
 			else if (screen->getButton("editBillboard")->isHovered()) // Edit billboard button
@@ -32,7 +32,7 @@ void BillboardEditor::_updateBillboardManagement()
 				_isChoosingBillboard = true;
 				_isEditingBillboard = true;
 				for (auto& name : _billboardNames) { name = name.substr(1); }
-				_gui.getGlobalScreen()->addChoiceForm("billboards", "Select billboard", vec2(-0.4f, 0.1f), _billboardNames);
+				_gui.getGlobalScreen()->addChoiceForm("billboards", "Select billboard", Vec2(-0.4f, 0.1f), _billboardNames);
 				for (auto& name : _billboardNames) { name = "@" + name; }
 			}
 			else if (screen->getButton("deleteBillboard")->isHovered()) // Delete billboard button
@@ -40,12 +40,12 @@ void BillboardEditor::_updateBillboardManagement()
 				_isChoosingBillboard = true;
 				_isRemovingBillboard = true;
 				for (auto& name : _billboardNames) { name = name.substr(1); }
-				_gui.getGlobalScreen()->addChoiceForm("billboards", "Select billboard", vec2(-0.4f, 0.1f), _billboardNames);
+				_gui.getGlobalScreen()->addChoiceForm("billboards", "Select billboard", Vec2(-0.4f, 0.1f), _billboardNames);
 				for (auto& name : _billboardNames) { name = "@" + name; }
 			}
 			else if (screen->getButton("back")->isHovered()) // Back button
 			{
-				_gui.getGlobalScreen()->addAnswerForm("exitBillboardEditor", "Save changes?", vec2(0.0f, 0.25f));
+				_gui.getGlobalScreen()->addAnswerForm("exitBillboardEditor", "Save changes?", Vec2(0.0f, 0.25f));
 			}
 		}
 
@@ -91,7 +91,7 @@ void BillboardEditor::_updateBillboardCreation()
 						_billboardNames.push_back(newBillboardName);
 
 						// Miscellaneous
-						_fe3d.billBoardEntity_add(newBillboardName, vec3(1.0f), _billboardPosition, vec3(0.0f), vec2(1.0f), false, false);
+						_fe3d.billBoardEntity_add(newBillboardName, Vec3(1.0f), _billboardPosition, Vec3(0.0f), Vec2(1.0f), false, false);
 						_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID(), "Billboard: " +
 							_currentBillboardID.substr(1), 0.025f);
 						_fe3d.textEntity_show(_gui.getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID());
@@ -183,7 +183,7 @@ void BillboardEditor::_updateBillboardRemoval()
 	{
 		if (_isRemovingBillboard && _currentBillboardID != "")
 		{
-			_gui.getGlobalScreen()->addAnswerForm("removeBillboard", "Are you sure?", vec2(0.0f));
+			_gui.getGlobalScreen()->addAnswerForm("removeBillboard", "Are you sure?", Vec2(0.0f));
 
 			if (_gui.getGlobalScreen()->isAnswerFormConfirmed("removeBillboard"))
 			{
@@ -214,7 +214,7 @@ void BillboardEditor::_updateBillboardCamera()
 	{
 		if (_currentBillboardID != "" || _hoveredBillboardID != "")
 		{
-			vec2 billboardSize = _fe3d.billboardEntity_getSize((_currentBillboardID != "") ? _currentBillboardID : _hoveredBillboardID);
+			Vec2 billboardSize = _fe3d.billboardEntity_getSize((_currentBillboardID != "") ? _currentBillboardID : _hoveredBillboardID);
 			float cameraDistance = (std::max(billboardSize.x, billboardSize.y) * 2.0f);
 			float cameraHeight = _billboardPosition.y + (billboardSize.y / 2.0f);
 
@@ -233,8 +233,8 @@ void BillboardEditor::_updateBillboardCamera()
 			float z = cameraDistance * cos(_totalCameraRotation);
 
 			// Update camera position
-			_fe3d.camera_setPosition(vec3(x, y, z));
-			_fe3d.camera_enableLookat(vec3(0.0f, cameraHeight, 0.0f));
+			_fe3d.camera_setPosition(Vec3(x, y, z));
+			_fe3d.camera_enableLookat(Vec3(0.0f, cameraHeight, 0.0f));
 		}
 		else
 		{

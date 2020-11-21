@@ -5,12 +5,14 @@
 
 void GameEntity::updateModelMatrix()
 {
-	_modelMatrix = mat4(1.0f);
-	_modelMatrix = glm::translate(_modelMatrix, _translation);
-	_modelMatrix = glm::rotate(_modelMatrix, glm::radians(_rotation.x), vec3(1.0f, 0.0f, 0.0f));
-	_modelMatrix = glm::rotate(_modelMatrix, glm::radians(_rotation.y), vec3(0.0f, 1.0f, 0.0f));
-	_modelMatrix = glm::rotate(_modelMatrix, glm::radians(_rotation.z), vec3(0.0f, 0.0f, 1.0f));
-	_modelMatrix = glm::scale(_modelMatrix, _scaling);
+	Matrix44 translationMatrix = Matrix44::createTranslation(_translation.x, _translation.y, _translation.z);
+	Matrix44 rotationMatrix = Matrix44::createRotation(
+		Math::degreesToRadians(_rotation.x),
+		Math::degreesToRadians(_rotation.y),
+		Math::degreesToRadians(_rotation.z));
+	Matrix44 scalingMatrix = Matrix44::createScaling(_scaling.x, _scaling.y, _scaling.z);
+
+	_modelMatrix = translationMatrix * rotationMatrix * scalingMatrix;
 }
 
 void GameEntity::setDiffuseMap(GLuint val)
@@ -93,52 +95,52 @@ void GameEntity::addNormalMap(GLuint val)
 	}
 }
 
-void GameEntity::setOriginalTranslation(vec3 val)
+void GameEntity::setOriginalTranslation(Vec3 val)
 {
 	_originalTranslation = val;
 }
 
-void GameEntity::setTranslation(vec3 val)
+void GameEntity::setTranslation(Vec3 val)
 {
 	_translation = val;
 }
 
-void GameEntity::setOriginalRotation(vec3 val)
+void GameEntity::setOriginalRotation(Vec3 val)
 {
 	_originalRotation = val;
 }
 
-void GameEntity::setRotation(vec3 val)
+void GameEntity::setRotation(Vec3 val)
 {
 	_rotation = val;
 }
 
-void GameEntity::setOriginalScaling(vec3 val)
+void GameEntity::setOriginalScaling(Vec3 val)
 {
 	_originalScaling = val;
 }
 
-void GameEntity::setScaling(vec3 val)
+void GameEntity::setScaling(Vec3 val)
 {
 	_scaling = val;
 }
 
-void GameEntity::translate(vec3 val)
+void GameEntity::translate(Vec3 val)
 {
 	_translation += val;
 }
 
-void GameEntity::rotate(vec3 val)
+void GameEntity::rotate(Vec3 val)
 {
 	_rotation += val;
 }
 
-void GameEntity::scale(vec3 val)
+void GameEntity::scale(Vec3 val)
 {
 	_scaling += val;
 }
 
-void GameEntity::setColor(vec3 val)
+void GameEntity::setColor(Vec3 val)
 {
 	_color = val;
 }
@@ -307,7 +309,7 @@ void GameEntity::setUvRepeat(float val)
 	_uvRepeat = val;
 }
 
-const mat4& GameEntity::getModelMatrix() const
+const Matrix44& GameEntity::getModelMatrix() const
 {
 	return _modelMatrix;
 }
@@ -332,37 +334,37 @@ const GLuint GameEntity::getNormalMap(int index) const
 	return _normalMaps[index];
 }
 
-const vec3 GameEntity::getOriginalTranslation() const
+const Vec3 GameEntity::getOriginalTranslation() const
 {
 	return _originalTranslation;
 }
 
-const vec3 GameEntity::getTranslation() const
+const Vec3 GameEntity::getTranslation() const
 {
 	return _translation;
 }
 
-const vec3 GameEntity::getOriginalRotation() const
+const Vec3 GameEntity::getOriginalRotation() const
 {
 	return _originalRotation;
 }
 
-const vec3 GameEntity::getRotation() const
+const Vec3 GameEntity::getRotation() const
 {
 	return _rotation;
 }
 
-const vec3 GameEntity::getOriginalScaling() const
+const Vec3 GameEntity::getOriginalScaling() const
 {
 	return _originalScaling;
 }
 
-const vec3 GameEntity::getScaling() const
+const Vec3 GameEntity::getScaling() const
 {
 	return _scaling;
 }
 
-const vec3 GameEntity::getColor() const
+const Vec3 GameEntity::getColor() const
 {
 	return _color;
 }

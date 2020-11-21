@@ -20,7 +20,7 @@ void AudioEditor::_updateMainMenu()
 		{
 			if (screen->getButton("addAudio")->isHovered()) // Add audio button
 			{
-				_gui.getGlobalScreen()->addValueForm("newAudioName", "New audio name", "", vec2(0.0f), vec2(0.5f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("newAudioName", "New audio name", "", Vec2(0.0f), Vec2(0.5f, 0.1f));
 				_isCreatingAudio = true;
 			}
 			else if (screen->getButton("editAudio")->isHovered()) // Edit audio button
@@ -28,7 +28,7 @@ void AudioEditor::_updateMainMenu()
 				_isChoosingAudio = true;
 				_isEditingAudio = true;
 				for (auto& name : _audioNames) { name = name.substr(1); }
-				_gui.getGlobalScreen()->addChoiceForm("audioList", "Select audio", vec2(-0.4f, 0.1f), _audioNames);
+				_gui.getGlobalScreen()->addChoiceForm("audioList", "Select audio", Vec2(-0.4f, 0.1f), _audioNames);
 				for (auto& name : _audioNames) { name = "@" + name; }
 			}
 			else if (screen->getButton("deleteAudio")->isHovered()) // Delete audio button
@@ -36,12 +36,12 @@ void AudioEditor::_updateMainMenu()
 				_isChoosingAudio = true;
 				_isRemovingAudio = true;
 				for (auto& name : _audioNames) { name = name.substr(1); }
-				_gui.getGlobalScreen()->addChoiceForm("audioList", "Select audio", vec2(-0.4f, 0.1f), _audioNames);
+				_gui.getGlobalScreen()->addChoiceForm("audioList", "Select audio", Vec2(-0.4f, 0.1f), _audioNames);
 				for (auto& name : _audioNames) { name = "@" + name; }
 			}
 			else if (screen->getButton("back")->isHovered()) // Back button
 			{
-				_gui.getGlobalScreen()->addAnswerForm("exitAudioEditor", "Save changes?", vec2(0.0f, 0.25f));
+				_gui.getGlobalScreen()->addAnswerForm("exitAudioEditor", "Save changes?", Vec2(0.0f, 0.25f));
 			}
 		}
 
@@ -155,7 +155,7 @@ void AudioEditor::_updateAudioRemoval()
 	{
 		if (_isRemovingAudio && _currentAudioID != "")
 		{
-			_gui.getGlobalScreen()->addAnswerForm("removeAudio", "Are you sure?", vec2(0.0f));
+			_gui.getGlobalScreen()->addAnswerForm("removeAudio", "Are you sure?", Vec2(0.0f));
 
 			if (_gui.getGlobalScreen()->isAnswerFormConfirmed("removeAudio"))
 			{

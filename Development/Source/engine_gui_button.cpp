@@ -1,12 +1,12 @@
 #include "engine_gui_button.hpp"
 
-EngineGuiButton::EngineGuiButton(FabiEngine3D& fe3d, const string& parentID, const string& ID, vec2 position, vec2 size, vec3 color, vec3 hoverColor,
-	string textContent, vec3 textColor, vec3 textHoverColor, bool sizeIncreaseEnabled, bool colorChangeEnabled) :
+EngineGuiButton::EngineGuiButton(FabiEngine3D& fe3d, const string& parentID, const string& ID, Vec2 position, Vec2 size, Vec3 color, Vec3 hoverColor,
+	string textContent, Vec3 textColor, Vec3 textHoverColor, bool sizeIncreaseEnabled, bool colorChangeEnabled) :
 	_fe3d(fe3d),
 	_ID(ID),
 	_parentID(parentID),
 	_rectangle(make_shared<EngineGuiRectangle>(fe3d, parentID + "_button", ID, position, size, color)),
-	_textfield(make_shared<EngineGuiTextfield>(fe3d, parentID + "_button", ID, position, vec2(size.x * 0.8f, size.y * 0.7f), textContent, textColor)),
+	_textfield(make_shared<EngineGuiTextfield>(fe3d, parentID + "_button", ID, position, Vec2(size.x * 0.8f, size.y * 0.7f), textContent, textColor)),
 	_hoverColor(hoverColor),
 	_textHoverColor(textHoverColor),
 	_sizeIncreaseEnabled(sizeIncreaseEnabled),
@@ -15,8 +15,8 @@ EngineGuiButton::EngineGuiButton(FabiEngine3D& fe3d, const string& parentID, con
 
 }
 
-EngineGuiButton::EngineGuiButton(FabiEngine3D& fe3d, const string& parentID, const string& ID, vec2 position, vec2 size, 
-	const string& textureName, vec3 hoverColor, bool sizeIncreaseEnabled, bool colorChangeEnabled) :
+EngineGuiButton::EngineGuiButton(FabiEngine3D& fe3d, const string& parentID, const string& ID, Vec2 position, Vec2 size, 
+	const string& textureName, Vec3 hoverColor, bool sizeIncreaseEnabled, bool colorChangeEnabled) :
 	_fe3d(fe3d),
 	_ID(ID),
 	_parentID(parentID),
@@ -41,9 +41,9 @@ void EngineGuiButton::_updateHovering(bool hoverable)
 	if (_fe3d.guiEntity_isVisible(_rectangle->getEntityID()))
 	{
 		// Convert dimensions to same space
-		vec2 mousePos = _fe3d.misc_convertToNDC(_fe3d.misc_convertFromScreenCoords(_fe3d.misc_getCursorPosition()));
-		vec2 buttonPos = _fe3d.guiEntity_getPosition(_rectangle->getEntityID());
-		vec2 buttonSize = _fe3d.guiEntity_getSize(_rectangle->getEntityID());
+		Vec2 mousePos = _fe3d.misc_convertToNDC(_fe3d.misc_convertFromScreenCoords(_fe3d.misc_getCursorPosition()));
+		Vec2 buttonPos = _fe3d.guiEntity_getPosition(_rectangle->getEntityID());
+		Vec2 buttonSize = _fe3d.guiEntity_getSize(_rectangle->getEntityID());
 
 		// Check if cursor inside button
 		if (mousePos.x > buttonPos.x - (buttonSize.x / 2.0f) && mousePos.x < buttonPos.x + (buttonSize.x / 2.0f)) // X axis

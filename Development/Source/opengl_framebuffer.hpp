@@ -1,8 +1,10 @@
 #pragma once
 
-#include <GLM\\glm.hpp>
+#include "mathematics.hpp"
+
 #include <GLEW\\glew.h>
 #include <vector>
+#include <GLM/glm.hpp>
 
 using glm::ivec2;
 

@@ -4,7 +4,7 @@
 void FabiEngine3D::gameEntity_add
 (
 	const string& ID, const string& objName,
-	vec3 position, vec3 rotation, vec3 size, bool visible
+	Vec3 position, Vec3 rotation, Vec3 size, bool visible
 )
 {
 	_core->_gameEntityManager.addGameEntity(ID, objName, position, rotation, size);
@@ -221,47 +221,47 @@ bool FabiEngine3D::gameEntity_isDepthMapIncluded(const string& ID)
 	return _core->_gameEntityManager.getEntity(ID)->isDepthMapIncluded();
 }
 
-void FabiEngine3D::gameEntity_move(const string& ID, vec3 factor)
+void FabiEngine3D::gameEntity_move(const string& ID, Vec3 factor)
 {
 	_core->_gameEntityManager.getEntity(ID)->translate(factor);
 }
 
-void FabiEngine3D::gameEntity_rotate(const string& ID, vec3 factor)
+void FabiEngine3D::gameEntity_rotate(const string& ID, Vec3 factor)
 {
 	_core->_gameEntityManager.getEntity(ID)->rotate(factor);
 }
 
-void FabiEngine3D::gameEntity_scale(const string& ID, vec3 factor)
+void FabiEngine3D::gameEntity_scale(const string& ID, Vec3 factor)
 {
 	_core->_gameEntityManager.getEntity(ID)->scale(factor);
 }
 
-void FabiEngine3D::gameEntity_setPosition(const string& ID, vec3 position)
+void FabiEngine3D::gameEntity_setPosition(const string& ID, Vec3 position)
 {
 	_core->_gameEntityManager.getEntity(ID)->setTranslation(position);
 }
 
-void FabiEngine3D::gameEntity_setRotation(const string& ID, vec3 rotation)
+void FabiEngine3D::gameEntity_setRotation(const string& ID, Vec3 rotation)
 {
 	_core->_gameEntityManager.getEntity(ID)->setRotation(rotation);
 }
 
-void FabiEngine3D::gameEntity_setSize(const string& ID, vec3 size)
+void FabiEngine3D::gameEntity_setSize(const string& ID, Vec3 size)
 {
 	_core->_gameEntityManager.getEntity(ID)->setScaling(size);
 }
 
-vec3 FabiEngine3D::gameEntity_getPosition(const string& ID)
+Vec3 FabiEngine3D::gameEntity_getPosition(const string& ID)
 {
 	return _core->_gameEntityManager.getEntity(ID)->getTranslation();
 }
 
-vec3 FabiEngine3D::gameEntity_getRotation(const string& ID)
+Vec3 FabiEngine3D::gameEntity_getRotation(const string& ID)
 {
 	return _core->_gameEntityManager.getEntity(ID)->getRotation();
 }
 
-vec3 FabiEngine3D::gameEntity_getSize(const string& ID)
+Vec3 FabiEngine3D::gameEntity_getSize(const string& ID)
 {
 	return _core->_gameEntityManager.getEntity(ID)->getScaling();
 }
@@ -311,7 +311,7 @@ void FabiEngine3D::gameEntity_setLevelOfDetailDistance(float distance)
 	_core->_gameEntityManager.setLodDistance(distance);
 }
 
-void FabiEngine3D::gameEntity_setInstanced(const string& ID, bool instanced, vector<vec3> offsets)
+void FabiEngine3D::gameEntity_setInstanced(const string& ID, bool instanced, vector<Vec3> offsets)
 {
 	if (instanced) // Add instancing
 	{
@@ -382,7 +382,7 @@ float FabiEngine3D::gameEntity_getLevelOfDetailDistance()
 	return _core->_gameEntityManager.getLodDistance();
 }
 
-vec3 FabiEngine3D::gameEntity_getColor(const string& ID)
+Vec3 FabiEngine3D::gameEntity_getColor(const string& ID)
 {
 	return _core->_gameEntityManager.getEntity(ID)->getColor();
 }
@@ -417,7 +417,7 @@ string FabiEngine3D::gameEntity_getLevelOfDetailEntityID(const string& ID)
 	return _core->_gameEntityManager.getEntity(ID)->getLodEntityID();
 }
 
-const vector<vec3> FabiEngine3D::gameEntity_getInstancedOffsets(const string& ID)
+const vector<Vec3> FabiEngine3D::gameEntity_getInstancedOffsets(const string& ID)
 {
 	if (gameEntity_isInstanced(ID))
 	{
@@ -464,7 +464,7 @@ void FabiEngine3D::gameEntity_setDepthMapIncluded(const string& ID, bool enabled
 	_core->_gameEntityManager.getEntity(ID)->setDepthMapIncluded(enabled);
 }
 
-void FabiEngine3D::gameEntity_setColor(const string& ID, vec3 color)
+void FabiEngine3D::gameEntity_setColor(const string& ID, Vec3 color)
 {
 	_core->_gameEntityManager.getEntity(ID)->setColor(color);
 }

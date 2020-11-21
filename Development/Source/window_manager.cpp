@@ -103,7 +103,7 @@ void WindowManager::setOpacity(float value)
 	SDL_SetWindowOpacity(_window, value);
 }
 
-void WindowManager::makeColorOpaque(vec3 color)
+void WindowManager::makeColorOpaque(Vec3 color)
 {
 	// Get window handle
 	SDL_SysWMinfo wmInfo;

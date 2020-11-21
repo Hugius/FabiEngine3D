@@ -140,7 +140,7 @@ void EnvironmentEditor::_updateTerrainRemoval()
 	{
 		if (_terrainRemovalEnabled && _currentTerrainID != "")
 		{
-			_gui.getGlobalScreen()->addAnswerForm("removeTerrain", "Are you sure?", vec2(0.0f));
+			_gui.getGlobalScreen()->addAnswerForm("removeTerrain", "Are you sure?", Vec2(0.0f));
 
 			if (_gui.getGlobalScreen()->isAnswerFormConfirmed("removeTerrain"))
 			{
@@ -186,8 +186,8 @@ void EnvironmentEditor::_updateTerrainCamera()
 			float z = (_fe3d.terrainEntity_getSize(terrainID) / 2.0f) * cos(_totalCameraRotation);
 
 			// Update camera position
-			_fe3d.camera_setPosition(vec3(x, y, z));
-			_fe3d.camera_enableLookat(vec3(0.0f));
+			_fe3d.camera_setPosition(Vec3(x, y, z));
+			_fe3d.camera_enableLookat(Vec3(0.0f));
 		}
 	}
 }

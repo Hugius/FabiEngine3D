@@ -39,9 +39,9 @@ vector<ObjPart> OBJLoader::_loadOBJ(const string& filePath, bool calculateTangen
 {
 	// Declare variables
 	vector<ObjPart> objParts;
-	vector<vec3> temp_positions;
-	vector<vec2> temp_uvs;
-	vector<vec3> temp_normals;
+	vector<Vec3> temp_positions;
+	vector<Vec2> temp_uvs;
+	vector<Vec3> temp_normals;
 	string selectedPartName = "";
 	string tempDiffuseMapName = "";
 	string tempLightMapName = "";
@@ -77,7 +77,7 @@ vector<ObjPart> OBJLoader::_loadOBJ(const string& filePath, bool calculateTangen
 		// File content
 		if (strcmp(lineHeader, "v") == 0) // Vertices
 		{
-			vec3 vertex;
+			Vec3 vertex;
 			fscanf(file, "%f %f %f\n", &vertex.x, &vertex.y, &vertex.z);
 			temp_positions.push_back(vertex);
 
@@ -85,7 +85,7 @@ vector<ObjPart> OBJLoader::_loadOBJ(const string& filePath, bool calculateTangen
 		}
 		else if (strcmp(lineHeader, "vt") == 0) // Uv coords
 		{
-			vec2 uv;
+			Vec2 uv;
 			fscanf(file, "%f %f\n", &uv.x, &uv.y);
 			temp_uvs.push_back(uv);
 
@@ -93,7 +93,7 @@ vector<ObjPart> OBJLoader::_loadOBJ(const string& filePath, bool calculateTangen
 		}
 		else if (strcmp(lineHeader, "vn") == 0) // Normals
 		{
-			vec3 normal;
+			Vec3 normal;
 			fscanf(file, "%f %f %f\n", &normal.x, &normal.y, &normal.z);
 			temp_normals.push_back(normal);
 
@@ -259,26 +259,26 @@ void OBJLoader::_calculateTangents(vector<ObjPart>& objParts)
 		for (size_t i = 0; i < objPart.vertices.size(); i += 3)
 		{
 			// Vertices of 1 triangle
-			vec3 v0 = objPart.vertices[i + 0];
-			vec3 v1 = objPart.vertices[i + 1];
-			vec3 v2 = objPart.vertices[i + 2];
+			Vec3 v0 = objPart.vertices[i + 0];
+			Vec3 v1 = objPart.vertices[i + 1];
+			Vec3 v2 = objPart.vertices[i + 2];
 
 			// Shortcuts for UVs
-			vec2 uv0 = objPart.uvCoords[i + 0];
-			vec2 uv1 = objPart.uvCoords[i + 1];
-			vec2 uv2 = objPart.uvCoords[i + 2];
+			Vec2 uv0 = objPart.uvCoords[i + 0];
+			Vec2 uv1 = objPart.uvCoords[i + 1];
+			Vec2 uv2 = objPart.uvCoords[i + 2];
 
 			// Vertex delta
-			vec3 deltaPos1 = v1 - v0;
-			vec3 deltaPos2 = v2 - v0;
+			Vec3 deltaPos1 = v1 - v0;
+			Vec3 deltaPos2 = v2 - v0;
 
 			// UV delta
-			vec2 deltaUV1 = uv1 - uv0;
-			vec2 deltaUV2 = uv2 - uv0;
+			Vec2 deltaUV1 = uv1 - uv0;
+			Vec2 deltaUV2 = uv2 - uv0;
 
 			// Calculate tangent vector
 			float r = 1.0f / (deltaUV1.x * deltaUV2.y - deltaUV1.y * deltaUV2.x);
-			glm::vec3 tangent = (deltaPos1 * deltaUV2.y - deltaPos2 * deltaUV1.y) * r;
+			Vec3 tangent = (deltaPos1 * deltaUV2.y - deltaPos2 * deltaUV1.y) * r;
 
 			// Add to current OBJ part
 			objPart.tangents.push_back(tangent);

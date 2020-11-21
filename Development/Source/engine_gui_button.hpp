@@ -7,10 +7,10 @@
 class EngineGuiButton
 {
 public:
-	EngineGuiButton(FabiEngine3D& fe3d, const string& parentID, const string& ID, vec2 position, vec2 size, vec3 color, vec3 hoverColor,
-		string textContent, vec3 textColor, vec3 textHoverColor, bool sizeIncreaseEnabled = true, bool colorChangeEnabled = true);
-	EngineGuiButton(FabiEngine3D& fe3d, const string& parentID, const string& ID, vec2 position, vec2 size,
-		const string& textureName, vec3 hoverColor, bool sizeIncreaseEnabled = true, bool colorChangeEnabled = true);
+	EngineGuiButton(FabiEngine3D& fe3d, const string& parentID, const string& ID, Vec2 position, Vec2 size, Vec3 color, Vec3 hoverColor,
+		string textContent, Vec3 textColor, Vec3 textHoverColor, bool sizeIncreaseEnabled = true, bool colorChangeEnabled = true);
+	EngineGuiButton(FabiEngine3D& fe3d, const string& parentID, const string& ID, Vec2 position, Vec2 size,
+		const string& textureName, Vec3 hoverColor, bool sizeIncreaseEnabled = true, bool colorChangeEnabled = true);
 
 	virtual void update(bool hoverable);
 	void show();
@@ -31,8 +31,8 @@ protected:
 	const string _ID;
 	const string _parentID;
 
-	const vec3 _hoverColor;
-	const vec3 _textHoverColor;
+	const Vec3 _hoverColor;
+	const Vec3 _textHoverColor;
 
 	shared_ptr<EngineGuiRectangle> _rectangle = nullptr;
 	shared_ptr<EngineGuiTextfield> _textfield = nullptr;

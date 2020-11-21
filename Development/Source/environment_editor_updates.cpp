@@ -10,7 +10,7 @@ void EnvironmentEditor::update()
 			auto screen = _gui.getViewport("left")->getWindow("main")->getScreen("environmentEditorMenu");
 
 			// Set default camera view
-			_fe3d.camera_setPosition(vec3(0.0f));
+			_fe3d.camera_setPosition(Vec3(0.0f));
 			_fe3d.camera_setYaw(0.0f);
 			_fe3d.camera_setPitch(0.0f);
 			_fe3d.camera_disableLookat();
@@ -44,7 +44,7 @@ void EnvironmentEditor::update()
 				}
 				else if (screen->getButton("back")->isHovered())
 				{
-					_gui.getGlobalScreen()->addAnswerForm("exitEnvironmentEditor", "Save changes?", vec2(0.0f, 0.25f));
+					_gui.getGlobalScreen()->addAnswerForm("exitEnvironmentEditor", "Save changes?", Vec2(0.0f, 0.25f));
 				}
 			}
 

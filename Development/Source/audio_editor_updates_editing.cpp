@@ -95,6 +95,6 @@ void AudioEditor::_updateAudioEditing()
 		{
 			_fe3d.billboardEntity_setDiffuseMap("@@audioStatus", "engine\\textures\\stop.png", true);
 		}
-		_fe3d.billboardEntity_rotate("@@audioStatus", vec3(0.0f, 0.5f, 0.0f));
+		_fe3d.billboardEntity_rotate("@@audioStatus", Vec3(0.0f, 0.5f, 0.0f));
 	}
 }

@@ -11,7 +11,7 @@ void SceneEditor::_updateBillboardPlacing()
 			if (_fe3d.misc_isCursorInsideViewport() && !_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_RIGHT) && !_gui.getGlobalScreen()->isFocused())
 			{
 				// Default placement position
-				vec3 newPosition = vec3(0.0f);
+				Vec3 newPosition = Vec3(0.0f);
 
 				// Check if a terrain is loaded
 				if (_fe3d.terrainEntity_getSelectedID() != "")
@@ -22,8 +22,8 @@ void SceneEditor::_updateBillboardPlacing()
 					// Update preview billboard position
 					if (_fe3d.terrainEntity_isValidMousePoint())
 					{
-						vec2 size = _fe3d.billboardEntity_getSize(_currentPreviewBillboardName);
-						newPosition = _fe3d.terrainEntity_getMousePoint() + vec3(0.0f, size.y / 2.0f, 0.0f);
+						Vec2 size = _fe3d.billboardEntity_getSize(_currentPreviewBillboardName);
+						newPosition = _fe3d.terrainEntity_getMousePoint() + Vec3(0.0f, size.y / 2.0f, 0.0f);
 						_fe3d.billboardEntity_setPosition(_currentPreviewBillboardName, newPosition);
 					}
 				}

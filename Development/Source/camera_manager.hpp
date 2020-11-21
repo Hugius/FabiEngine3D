@@ -3,10 +3,10 @@
 #include "window_manager.hpp"
 #include "render_bus.hpp"
 
-#include <GLM\\glm.hpp>
+#include "mathematics.hpp"
 
-using glm::vec3;
-using glm::mat4;
+
+
 
 class CameraManager final
 {
@@ -21,7 +21,7 @@ public:
 	void updateMatrices();
 
 	// Setters
-	void setPosition(vec3 val);
+	void setPosition(Vec3 val);
 	void setFOV(float val);
 	void setMouseSensitivity(float val);
 	void setYaw(float val);
@@ -30,7 +30,7 @@ public:
 	void setFarZ(float val);
 
 	// Other
-	void enableLookat(vec3 position);
+	void enableLookat(Vec3 position);
 	void disableLookat();
 	void enableFirstPersonView();
 	void disableFirstPersonView();
@@ -39,17 +39,17 @@ public:
 	void translateFollowX(float speed);
 	void translateFollowZY(float speed);
 	void translateFollowZ(float speed);
-	void translate(vec3 translation);
+	void translate(Vec3 translation);
 	void invertYaw();
 	void invertPitch();
 	void center();
 
 	// Getters
-	const mat4 & getViewMatrix()            const;
-	const mat4 & getProjectionMatrix()      const;
-	const vec3   getPosition()              const;
-	const vec3   getFront()                 const;
-	const vec3   getLookat()                const;
+	const Matrix44 & getViewMatrix()            const;
+	const Matrix44 & getProjectionMatrix()      const;
+	const Vec3   getPosition()              const;
+	const Vec3   getFront()                 const;
+	const Vec3   getLookat()                const;
 	const float  getFOV()					const;
 	const float  getAspectRatio()			const;
 	const float  getYaw()                   const;
@@ -66,15 +66,15 @@ private:
 	RenderBus& _renderBus;
 
 	// Matrices
-	mat4 _viewMatrix = mat4(1.0f);
-	mat4 _projectionMatrix = mat4(1.0f);
+	Matrix44 _viewMatrix = Matrix44(1.0f);
+	Matrix44 _projectionMatrix = Matrix44(1.0f);
 
 	// Vectors
-	vec3 _up = vec3(0.0f);
-	vec3 _right = vec3(0.0f);
-	vec3 _front = vec3(0.0f);
-	vec3 _position = vec3(0.0f);
-	vec3 _lookat = vec3(0.0f);
+	const Vec3 _up = Vec3(0.0f, 1.0f, 0.0f);
+	Vec3 _right = Vec3(0.0f);
+	Vec3 _front = Vec3(0.0f);
+	Vec3 _position = Vec3(0.0f);
+	Vec3 _lookat = Vec3(0.0f);
 
 	// Floats
 	float _fov = 0.0f;

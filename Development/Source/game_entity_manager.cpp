@@ -26,7 +26,7 @@ const vector<shared_ptr<GameEntity>> GameEntityManager::getEntities()
 	return _getGameEntities();
 }
 
-void GameEntityManager::addGameEntity(const string& ID, const string& objName, vec3 T, vec3 R, vec3 S)
+void GameEntityManager::addGameEntity(const string& ID, const string& objName, Vec3 T, Vec3 R, Vec3 S)
 {
 	// Create entity
 	_createEntity(ID);
@@ -210,8 +210,8 @@ void GameEntityManager::update()
 			}
 
 			// Calculate absolute distance between camera and entity
-			vec3 camPos = _renderBus.getCameraPosition();
-			vec3 entityPos = entity->getTranslation();
+			Vec3 camPos = _renderBus.getCameraPosition();
+			Vec3 entityPos = entity->getTranslation();
 			float xDistance = fabsf(camPos.x - entityPos.x);
 			float yDistance = fabsf(camPos.y - entityPos.y);
 			float zDistance = fabsf(camPos.z - entityPos.z);

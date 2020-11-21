@@ -14,14 +14,14 @@ void EnvironmentEditor::_updateTerrainMenuMain()
 			if (screen->getButton("create")->isHovered())
 			{
 				_terrainCreationEnabled = true;
-				_gui.getGlobalScreen()->addValueForm("newTerrainName", "New terrain name", "", vec2(0.0f), vec2(0.5f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("newTerrainName", "New terrain name", "", Vec2(0.0f), Vec2(0.5f, 0.1f));
 			}
 			else if (screen->getButton("edit")->isHovered())
 			{
 				_terrainChoosingEnabled = true;
 				_terrainEditingEnabled = true;
 				for (auto& name : _terrainNames) { name = name.substr(1); }
-				_gui.getGlobalScreen()->addChoiceForm("terrainList", "Select terrain", vec2(-0.4f, 0.1f), _terrainNames);
+				_gui.getGlobalScreen()->addChoiceForm("terrainList", "Select terrain", Vec2(-0.4f, 0.1f), _terrainNames);
 				for (auto& name : _terrainNames) { name = "@" + name; }
 			}
 			else if (screen->getButton("delete")->isHovered())
@@ -29,7 +29,7 @@ void EnvironmentEditor::_updateTerrainMenuMain()
 				_terrainChoosingEnabled = true;
 				_terrainRemovalEnabled = true;
 				for (auto& name : _terrainNames) { name = name.substr(1); }
-				_gui.getGlobalScreen()->addChoiceForm("terrainList", "Select terrain", vec2(-0.4f, 0.1f), _terrainNames);
+				_gui.getGlobalScreen()->addChoiceForm("terrainList", "Select terrain", Vec2(-0.4f, 0.1f), _terrainNames);
 				for (auto& name : _terrainNames) { name = "@" + name; }
 			}
 			else if (screen->getButton("back")->isHovered())
@@ -63,7 +63,7 @@ void EnvironmentEditor::_updateTerrainMenuChoice()
 			}
 			else if (screen->getButton("back")->isHovered())
 			{
-				_fe3d.camera_load(90.0f, 0.1f, 10000.0f, vec3(0.0f));
+				_fe3d.camera_load(90.0f, 0.1f, 10000.0f, Vec3(0.0f));
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuMain");
 				_fe3d.textEntity_hide(_gui.getGlobalScreen()->getTextfield("selectedTerrainName")->getEntityID());
 				_fe3d.terrainEntity_select("");
@@ -155,12 +155,12 @@ void EnvironmentEditor::_updateTerrainMenuMesh()
 			else if (screen->getButton("maxHeight")->isHovered())
 			{
 				float maxHeight = _fe3d.terrainEntity_getMaxHeight(_currentTerrainID);
-				_gui.getGlobalScreen()->addValueForm("maxHeight", "Max height", maxHeight, vec2(0.0f), vec2(0.3f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("maxHeight", "Max height", maxHeight, Vec2(0.0f), Vec2(0.3f, 0.1f));
 			}
 			else if (screen->getButton("uvRepeat")->isHovered())
 			{
 				float uvRepeat = _fe3d.terrainEntity_getUvRepeat(_currentTerrainID);
-				_gui.getGlobalScreen()->addValueForm("uvRepeat", "UV repeat", uvRepeat, vec2(0.0f), vec2(0.3f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("uvRepeat", "UV repeat", uvRepeat, Vec2(0.0f), Vec2(0.3f, 0.1f));
 			}
 			else if (screen->getButton("isSpecular")->isHovered())
 			{
@@ -169,12 +169,12 @@ void EnvironmentEditor::_updateTerrainMenuMesh()
 			else if (screen->getButton("specularIntensity")->isHovered())
 			{
 				float intensity = _fe3d.terrainEntity_getSpecularLightingIntensity(_currentTerrainID);
-				_gui.getGlobalScreen()->addValueForm("intensity", "Intensity (%)", intensity * 100.0f, vec2(0.0f), vec2(0.3f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("intensity", "Intensity (%)", intensity * 100.0f, Vec2(0.0f), Vec2(0.3f, 0.1f));
 			}
 			else if (screen->getButton("lightness")->isHovered())
 			{
 				float lightness = _fe3d.terrainEntity_getLightness(_currentTerrainID);
-				_gui.getGlobalScreen()->addValueForm("lightness", "Lightness (%)", lightness * 100.0f, vec2(0.0f), vec2(0.3f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("lightness", "Lightness (%)", lightness * 100.0f, Vec2(0.0f), Vec2(0.3f, 0.1f));
 			}
 			else if (screen->getButton("back")->isHovered())
 			{
@@ -333,17 +333,17 @@ void EnvironmentEditor::_updateTerrainMenuBlendMap()
 			else if (screen->getButton("redRepeat")->isHovered())
 			{
 				float blendRepeatR = _fe3d.terrainEntity_getBlendRepeatR(_currentTerrainID);
-				_gui.getGlobalScreen()->addValueForm("redRepeat", "Red repeat", blendRepeatR, vec2(0.0f), vec2(0.3f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("redRepeat", "Red repeat", blendRepeatR, Vec2(0.0f), Vec2(0.3f, 0.1f));
 			}
 			else if (screen->getButton("greenRepeat")->isHovered())
 			{
 				float blendRepeatG = _fe3d.terrainEntity_getBlendRepeatG(_currentTerrainID);
-				_gui.getGlobalScreen()->addValueForm("greenRepeat", "Green repeat", blendRepeatG, vec2(0.0f), vec2(0.3f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("greenRepeat", "Green repeat", blendRepeatG, Vec2(0.0f), Vec2(0.3f, 0.1f));
 			}
 			else if (screen->getButton("blueRepeat")->isHovered())
 			{
 				float blendRepeatB = _fe3d.terrainEntity_getBlendRepeatB(_currentTerrainID);
-				_gui.getGlobalScreen()->addValueForm("blueRepeat", "Blue repeat", blendRepeatB, vec2(0.0f), vec2(0.3f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("blueRepeat", "Blue repeat", blendRepeatB, Vec2(0.0f), Vec2(0.3f, 0.1f));
 			}
 			else if (screen->getButton("back")->isHovered())
 			{

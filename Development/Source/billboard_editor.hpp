@@ -38,8 +38,8 @@ private:
 	bool _isLoaded = false;
 
 	// Vectors
-	const vec3 _defaultCameraPosition = vec3(0.0f, 2.5f, 5.0f);
-	const vec3 _billboardPosition = vec3(0.0f, 2.5f, 0.0f);
+	const Vec3 _defaultCameraPosition = Vec3(0.0f, 2.5f, 5.0f);
+	const Vec3 _billboardPosition = Vec3(0.0f, 2.5f, 0.0f);
 
 	// Floats
 	const float _scrollWheelDivider = 250.0f;

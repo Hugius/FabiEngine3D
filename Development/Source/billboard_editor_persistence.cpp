@@ -29,8 +29,8 @@ void BillboardEditor::loadBillboardEntitiesFromFile()
 		{
 			// Placeholder variables
 			string name, diffusePath, fontPath, textContent;
-			vec2 size;
-			vec3 color;
+			Vec2 size;
+			Vec3 color;
 			bool facingX, facingY, transparent, playing;
 			int rows, columns, framestep;
 
@@ -70,7 +70,7 @@ void BillboardEditor::loadBillboardEntitiesFromFile()
 			// Determine billboard type
 			if (diffusePath != "") // Textured billboard
 			{
-				_fe3d.billBoardEntity_add(name, diffusePath, _billboardPosition, vec3(0.0f), size, transparent, facingX, facingY, false, false);
+				_fe3d.billBoardEntity_add(name, diffusePath, _billboardPosition, Vec3(0.0f), size, transparent, facingX, facingY, false, false);
 				_fe3d.billboardEntity_setColor(name, color);
 
 				// Playing sprite animation
@@ -84,11 +84,11 @@ void BillboardEditor::loadBillboardEntitiesFromFile()
 			}
 			else if (fontPath != "") // Text billboard
 			{
-				_fe3d.billBoardEntity_add(name, textContent, fontPath, color, _billboardPosition, vec3(0.0f), size, facingX, facingY, false);
+				_fe3d.billBoardEntity_add(name, textContent, fontPath, color, _billboardPosition, Vec3(0.0f), size, facingX, facingY, false);
 			}
 			else // Colored billboard
 			{
-				_fe3d.billBoardEntity_add(name, color, _billboardPosition, vec3(0.0f), size, facingX, facingY, false);
+				_fe3d.billBoardEntity_add(name, color, _billboardPosition, Vec3(0.0f), size, facingX, facingY, false);
 			}
 		}
 

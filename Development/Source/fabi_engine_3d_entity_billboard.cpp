@@ -1,21 +1,21 @@
 #include "fabi_engine_3d.hpp"
 #include "core_engine.hpp"
 
-void FabiEngine3D::billBoardEntity_add(const string& ID, vec3 color, vec3 T, vec3 R, vec2 S, bool facingCameraX, bool facingCameraY, bool visible)
+void FabiEngine3D::billBoardEntity_add(const string& ID, Vec3 color, Vec3 T, Vec3 R, Vec2 S, bool facingCameraX, bool facingCameraY, bool visible)
 {
-	_core->_billboardEntityManager.addBillboardEntity(ID, color, T, R, vec3(S.x, S.y, 1.0f), facingCameraX, facingCameraY);
+	_core->_billboardEntityManager.addBillboardEntity(ID, color, T, R, Vec3(S.x, S.y, 1.0f), facingCameraX, facingCameraY);
 	_core->_billboardEntityManager.getEntity(ID)->setVisible(visible);
 }
 
-void FabiEngine3D::billBoardEntity_add(const string& ID, const string& diffuseMapPath, vec3 T, vec3 R, vec2 S, bool transparent, bool facingCameraX, bool facingCameraY, bool textureFiltering, bool visible)
+void FabiEngine3D::billBoardEntity_add(const string& ID, const string& diffuseMapPath, Vec3 T, Vec3 R, Vec2 S, bool transparent, bool facingCameraX, bool facingCameraY, bool textureFiltering, bool visible)
 {
-	_core->_billboardEntityManager.addBillboardEntity(ID, diffuseMapPath, T, R, vec3(S.x, S.y, 1.0f), transparent, facingCameraX, facingCameraY, textureFiltering);
+	_core->_billboardEntityManager.addBillboardEntity(ID, diffuseMapPath, T, R, Vec3(S.x, S.y, 1.0f), transparent, facingCameraX, facingCameraY, textureFiltering);
 	_core->_billboardEntityManager.getEntity(ID)->setVisible(visible);
 }
 
-void FabiEngine3D::billBoardEntity_add(const string& ID, const string& text, const string& fontPath, vec3 color, vec3 T, vec3 R, vec2 S, bool facingCameraX, bool facingCameraY, bool visible)
+void FabiEngine3D::billBoardEntity_add(const string& ID, const string& text, const string& fontPath, Vec3 color, Vec3 T, Vec3 R, Vec2 S, bool facingCameraX, bool facingCameraY, bool visible)
 {
-	_core->_billboardEntityManager.addBillboardEntity(ID, text, fontPath, color, T, R, vec3(S.x, S.y, 1.0f), facingCameraX, facingCameraY);
+	_core->_billboardEntityManager.addBillboardEntity(ID, text, fontPath, color, T, R, Vec3(S.x, S.y, 1.0f), facingCameraX, facingCameraY);
 	_core->_billboardEntityManager.getEntity(ID)->setVisible(visible);
 }
 
@@ -103,37 +103,37 @@ bool FabiEngine3D::billboardEntity_isVisible(const string& ID)
 	return _core->_billboardEntityManager.getEntity(ID)->isVisible();
 }
 
-void FabiEngine3D::billboardEntity_move(const string& ID, vec3 factor)
+void FabiEngine3D::billboardEntity_move(const string& ID, Vec3 factor)
 {
 	_core->_billboardEntityManager.getEntity(ID)->translate(factor);
 }
 
-void FabiEngine3D::billboardEntity_rotate(const string& ID, vec3 factor)
+void FabiEngine3D::billboardEntity_rotate(const string& ID, Vec3 factor)
 {
 	_core->_billboardEntityManager.getEntity(ID)->rotate(factor);
 }
 
-void FabiEngine3D::billboardEntity_scale(const string& ID, vec3 factor)
+void FabiEngine3D::billboardEntity_scale(const string& ID, Vec3 factor)
 {
 	_core->_billboardEntityManager.getEntity(ID)->scale(factor);
 }
 
-void FabiEngine3D::billboardEntity_setPosition(const string& ID, vec3 position)
+void FabiEngine3D::billboardEntity_setPosition(const string& ID, Vec3 position)
 {
 	_core->_billboardEntityManager.getEntity(ID)->setTranslation(position);
 }
 
-void FabiEngine3D::billboardEntity_setRotation(const string& ID, vec3 rotation)
+void FabiEngine3D::billboardEntity_setRotation(const string& ID, Vec3 rotation)
 {
 	_core->_billboardEntityManager.getEntity(ID)->setRotation(rotation);
 }
 
-void FabiEngine3D::billboardEntity_setSize(const string& ID, vec2 size)
+void FabiEngine3D::billboardEntity_setSize(const string& ID, Vec2 size)
 {
-	_core->_billboardEntityManager.getEntity(ID)->setScaling(vec3(size.x, size.y, 1.0f));
+	_core->_billboardEntityManager.getEntity(ID)->setScaling(Vec3(size.x, size.y, 1.0f));
 }
 
-void FabiEngine3D::billboardEntity_setColor(const string& ID, vec3 color)
+void FabiEngine3D::billboardEntity_setColor(const string& ID, Vec3 color)
 {
 	_core->_billboardEntityManager.getEntity(ID)->setColor(color);
 }
@@ -149,22 +149,22 @@ void FabiEngine3D::billboardEntity_setTransparent(const string& ID, bool enabled
 	_core->_billboardEntityManager.getEntity(ID)->setTransparent(enabled);
 }
 
-vec3 FabiEngine3D::billboardEntity_getPosition(const string& ID)
+Vec3 FabiEngine3D::billboardEntity_getPosition(const string& ID)
 {
 	return _core->_billboardEntityManager.getEntity(ID)->getTranslation();
 }
 
-vec3 FabiEngine3D::billboardEntity_getRotation(const string& ID)
+Vec3 FabiEngine3D::billboardEntity_getRotation(const string& ID)
 {
 	return _core->_billboardEntityManager.getEntity(ID)->getRotation();
 }
 
-vec2 FabiEngine3D::billboardEntity_getSize(const string& ID)
+Vec2 FabiEngine3D::billboardEntity_getSize(const string& ID)
 {
-	return vec2(_core->_billboardEntityManager.getEntity(ID)->getScaling().x, _core->_billboardEntityManager.getEntity(ID)->getScaling().y);
+	return Vec2(_core->_billboardEntityManager.getEntity(ID)->getScaling().x, _core->_billboardEntityManager.getEntity(ID)->getScaling().y);
 }
 
-vec3 FabiEngine3D::billboardEntity_getColor(const string& ID)
+Vec3 FabiEngine3D::billboardEntity_getColor(const string& ID)
 {
 	return _core->_billboardEntityManager.getEntity(ID)->getColor();
 }
@@ -181,7 +181,7 @@ vector<string> FabiEngine3D::billboardEntity_getAllIDs()
 	return IDs;
 }
 
-vector<vec3> FabiEngine3D::billboardEntity_getInstancedOffsets(const string& ID)
+vector<Vec3> FabiEngine3D::billboardEntity_getInstancedOffsets(const string& ID)
 {
 	if (billboardEntity_isInstanced(ID))
 	{
@@ -218,7 +218,7 @@ void FabiEngine3D::billboardEntity_setLightness(const string& ID, float lightnes
 	_core->_billboardEntityManager.getEntity(ID)->setLightness(lightness);
 }
 
-void FabiEngine3D::billboardEntity_setInstanced(const string& ID, bool instanced, vector<vec3> offsets)
+void FabiEngine3D::billboardEntity_setInstanced(const string& ID, bool instanced, vector<Vec3> offsets)
 {
 	if (instanced) // Add instancing
 	{

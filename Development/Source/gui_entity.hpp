@@ -3,11 +3,11 @@
 #include "base_entity.hpp"
 
 #include <GLEW\\glew.h>
-#include <GLM\\glm.hpp>
+#include "mathematics.hpp"
 
-using glm::vec2;
-using glm::vec3;
-using glm::mat4;
+
+
+
 
 class GuiEntity : public BaseEntity
 {
@@ -20,55 +20,55 @@ public:
 
 	// Texture & color
 	void setDiffuseMap(GLuint diffuseMap);
-	void setColor(vec3 color);
+	void setColor(Vec3 color);
 	void setMirroredHorizontally(bool val);
 	void setMirroredVertically(bool val);
 	void setAlpha(float val);
 
 	// Transformation
 	void setCentered(bool val);
-	void setTranslation(vec2 val);
+	void setTranslation(Vec2 val);
 	void setRotation(float val);
-	void setScaling(vec2 val);
-	void translate(vec2 val);
+	void setScaling(Vec2 val);
+	void translate(Vec2 val);
 	void rotate(float val);
-	void scale(vec2 val);
-	void setMinPosition(vec2 val);
-	void setMaxPosition(vec2 val);
+	void scale(Vec2 val);
+	void setMinPosition(Vec2 val);
+	void setMaxPosition(Vec2 val);
 
 	// Texture & color
 	const GLuint getDiffuseMap() const;
-	const vec3 getColor() const;
+	const Vec3 getColor() const;
 	const float getAlpha() const;
 	const bool isMirroredHorizonally() const;
 	const bool isMirroredVertically() const;
 
 	// Transformation
 	const bool isCentered() const;
-	const mat4 getModelMatrix() const;
-	const vec2 getTranslation() const;
+	const Matrix44 getModelMatrix() const;
+	const Vec2 getTranslation() const;
 	const float getRotation() const;
-	const vec2 getScaling() const;
-	const vec2 getMinPosition() const;
-	const vec2 getMaxPosition() const;
+	const Vec2 getScaling() const;
+	const Vec2 getMinPosition() const;
+	const Vec2 getMaxPosition() const;
 
 	// Other
 	void setDepthEntity(bool val);
 	const bool isDepthEntity() const;
 
 private:
-	mat4 _modelMatrix = mat4(1.0f);
+	Matrix44 _modelMatrix = Matrix44(1.0f);
 
 	GLuint _diffuseMap = 0;
 
-	vec3 _color = vec3(1.0f);
+	Vec3 _color = Vec3(1.0f);
 
-	vec2  _translation = vec2(0.0f);
+	Vec2  _translation = Vec2(0.0f);
 	float _rotation    = 0.0f;
-	vec2  _scaling     = vec2(1.0f);
+	Vec2  _scaling     = Vec2(1.0f);
 
-	vec2 _minPosition = vec2(-1.0f);
-	vec2 _maxPosition = vec2(1.0f);
+	Vec2 _minPosition = Vec2(-1.0f);
+	Vec2 _maxPosition = Vec2(1.0f);
 
 	float _alpha = 1.0f;
 

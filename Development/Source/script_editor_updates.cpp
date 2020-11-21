@@ -27,11 +27,11 @@ void ScriptEditor::_updateGUI()
 			{
 				if (mainScreen->getButton("createScript")->isHovered())
 				{
-					_gui.getGlobalScreen()->addValueForm("newScriptName", "New script name", "", vec2(0.0f), vec2(0.5f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("newScriptName", "New script name", "", Vec2(0.0f), Vec2(0.5f, 0.1f));
 				}
 				else if (mainScreen->getButton("editScript")->isHovered())
 				{
-					_gui.getGlobalScreen()->addChoiceForm("scriptFileList", "Choose script", vec2(0.0f), _script.getAllScriptFileIDs());
+					_gui.getGlobalScreen()->addChoiceForm("scriptFileList", "Choose script", Vec2(0.0f), _script.getAllScriptFileIDs());
 				}
 				else if (mainScreen->getButton("deleteScript")->isHovered())
 				{
@@ -43,7 +43,7 @@ void ScriptEditor::_updateGUI()
 				}
 				else if (mainScreen->getButton("back")->isHovered())
 				{
-					_gui.getGlobalScreen()->addAnswerForm("exitScriptEditor", "Save changes?", vec2(0.0f, 0.25f));
+					_gui.getGlobalScreen()->addAnswerForm("exitScriptEditor", "Save changes?", Vec2(0.0f, 0.25f));
 				}
 			}
 		}
@@ -105,7 +105,7 @@ void ScriptEditor::_updateMiscellaneous()
 				if (_fe3d.camera_getPosition().y < (lastLineHeight + _cameraOffset)) // Camera must not go out of screen
 				{
 					_scrollingAcceleration = 0.0f;
-					_fe3d.camera_setPosition(vec3(_cameraStartingPosition.x, lastLineHeight + _cameraOffset, _cameraStartingPosition.z));
+					_fe3d.camera_setPosition(Vec3(_cameraStartingPosition.x, lastLineHeight + _cameraOffset, _cameraStartingPosition.z));
 				}
 				else if (_fe3d.camera_getPosition().y == (lastLineHeight + _cameraOffset) && _scrollingAcceleration < 0.0f) // Trying to scroll down
 				{
@@ -124,7 +124,7 @@ void ScriptEditor::_updateMiscellaneous()
 			{
 				_scrollingAcceleration = 0.0f;
 				float currentLineHeight = _fe3d.billboardEntity_getPosition(to_string(currentLineIndex)).y;
-				_fe3d.camera_setPosition(vec3(_cameraStartingPosition.x, currentLineHeight + _cameraOffset, _cameraStartingPosition.z));
+				_fe3d.camera_setPosition(Vec3(_cameraStartingPosition.x, currentLineHeight + _cameraOffset, _cameraStartingPosition.z));
 			}
 			lastLineIndex = currentLineIndex;
 		}
@@ -132,7 +132,7 @@ void ScriptEditor::_updateMiscellaneous()
 		// Smooth camera movement
 		_scrollingAcceleration = std::clamp(_scrollingAcceleration, -_maxScrollingAcceleration, _maxScrollingAcceleration);
 		_scrollingAcceleration *= 0.95f;
-		_fe3d.camera_translate(vec3(0.0f, _scrollingAcceleration, 0.0f));
+		_fe3d.camera_translate(Vec3(0.0f, _scrollingAcceleration, 0.0f));
 
 		// Check if user filled in a new script name
 		string newName;

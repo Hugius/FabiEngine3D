@@ -1,16 +1,20 @@
 #include "sky_entity.hpp"
 
+void SkyEntity::updateRotationMatrix()
+{
+	if (_rotationSpeed != 0.0f)
+	{
+		_rotation += _rotationSpeed;
+		_rotationMatrix = Matrix44::createRotationY(Math::degreesToRadians(_rotation));
+	}
+}
+
 void SkyEntity::setDiffuseMapPaths(const array<string, 6>& val)
 {
 	_diffuseMapPaths = val;
 }
 
-void SkyEntity::setRotationMatrix(const mat4 & val)
-{
-	_rotationMatrix = val;
-}
-
-void SkyEntity::setColor(vec3 val)
+void SkyEntity::setColor(Vec3 val)
 {
 	_color = val;
 }
@@ -40,12 +44,12 @@ const array<string, 6>& SkyEntity::getDiffuseMapPaths() const
 	return _diffuseMapPaths;
 }
 
-const mat4 & SkyEntity::getRotationMatrix() const
+const Matrix44 & SkyEntity::getRotationMatrix() const
 {
 	return _rotationMatrix;
 }
 
-const vec3 SkyEntity::getColor() const
+const Vec3 SkyEntity::getColor() const
 {
 	return _color;
 }

@@ -32,10 +32,10 @@ void ModelEditor::loadGameEntitiesFromFile()
 			string modelName, objPath, diffuseMapPath, lightMapPath, reflectionMapPath, normalMapPath, lodEntityID;
 			float uvRepeat, specularFactor, specularIntensity, lightness;
 			bool isFaceCulled, isShadowed, isTransparent, isSpecular, isReflective, isInstanced;
-			vec3 modelSize, color;
+			Vec3 modelSize, color;
 			vector<string> aabbNames;
-			vector<vec3> aabbPositions;
-			vector<vec3> aabbSizes;
+			vector<Vec3> aabbPositions;
+			vector<Vec3> aabbSizes;
 
 			// For file extraction
 			std::istringstream iss(line);
@@ -71,7 +71,7 @@ void ModelEditor::loadGameEntitiesFromFile()
 			{
 				// Check if file has AABB data left
 				string name;
-				vec3 position, size;
+				Vec3 position, size;
 				iss >> name;
 				if (name == "")
 				{
@@ -103,7 +103,7 @@ void ModelEditor::loadGameEntitiesFromFile()
 			// Add new model
 			_addModel(modelName, objPath, diffuseMapPath, lightMapPath, reflectionMapPath, normalMapPath, modelSize, isFaceCulled, isShadowed,
 				isTransparent, isReflective, isSpecular, specularFactor, specularIntensity, lightness,
-				vec3(color.r, color.g, color.b), uvRepeat, lodEntityID, isInstanced, aabbNames, aabbPositions, aabbSizes);
+				Vec3(color.r, color.g, color.b), uvRepeat, lodEntityID, isInstanced, aabbNames, aabbPositions, aabbSizes);
 		}
 
 		// Close file
@@ -156,8 +156,8 @@ void ModelEditor::saveGameEntitiesToFile()
 
 				// AABB data
 				vector<string> aabbNames;
-				vector<vec3> aabbPositions;
-				vector<vec3> aabbSizes;
+				vector<Vec3> aabbPositions;
+				vector<Vec3> aabbSizes;
 				for (auto& aabbID : _fe3d.aabbEntity_getBoundIDs(modelName, true, false))
 				{
 					aabbNames.push_back(aabbID.substr(string(modelName + "_").size()));

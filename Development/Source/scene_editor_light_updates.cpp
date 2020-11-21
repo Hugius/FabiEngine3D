@@ -41,7 +41,7 @@ void SceneEditor::_updateAmbientLightingMenu()
 		if (_gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID() == "sceneEditorMenuLightingAmbient")
 		{
 			auto screen = _gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuLightingAmbient");
-			vec3 ambientLightingColor = _fe3d.gfx_getAmbientLightingColor();
+			Vec3 ambientLightingColor = _fe3d.gfx_getAmbientLightingColor();
 			float ambientLightingIntensity = _fe3d.gfx_getAmbientLightingIntensity();
 	
 			// GUI management
@@ -49,13 +49,13 @@ void SceneEditor::_updateAmbientLightingMenu()
 			{
 				if (screen->getButton("color")->isHovered())
 				{
-					_gui.getGlobalScreen()->addValueForm("ambientColorR", "R(0-255)", ambientLightingColor.r * 255.0f, vec2(-0.25f, 0.0f), vec2(0.2f, 0.1f));
-					_gui.getGlobalScreen()->addValueForm("ambientColorG", "G(0-255)", ambientLightingColor.g * 255.0f, vec2(0.0f, 0.0f), vec2(0.2f, 0.1f));
-					_gui.getGlobalScreen()->addValueForm("ambientColorB", "B(0-255)", ambientLightingColor.b * 255.0f, vec2(0.25f, 0.0f), vec2(0.2f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("ambientColorR", "R(0-255)", ambientLightingColor.r * 255.0f, Vec2(-0.25f, 0.0f), Vec2(0.2f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("ambientColorG", "G(0-255)", ambientLightingColor.g * 255.0f, Vec2(0.0f, 0.0f), Vec2(0.2f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("ambientColorB", "B(0-255)", ambientLightingColor.b * 255.0f, Vec2(0.25f, 0.0f), Vec2(0.2f, 0.1f));
 				}
 				else if (screen->getButton("intensity")->isHovered())
 				{
-					_gui.getGlobalScreen()->addValueForm("ambientIntensity", "Ambient intensity (%)", ambientLightingIntensity * 100.0f, vec2(0.0f), vec2(0.3f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("ambientIntensity", "Ambient intensity (%)", ambientLightingIntensity * 100.0f, Vec2(0.0f), Vec2(0.3f, 0.1f));
 				}
 				else if (screen->getButton("back")->isHovered())
 				{
@@ -100,8 +100,8 @@ void SceneEditor::_updateDirectionalLightingMenu()
 		if (_gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID() == "sceneEditorMenuLightingDirectional")
 		{
 			auto screen = _gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuLightingDirectional");
-			vec3 directionalLightingColor = _fe3d.gfx_getDirectionalLightingColor();
-			vec3 directionalLightingPosition = _fe3d.gfx_getDirectionalLightingPosition();
+			Vec3 directionalLightingColor = _fe3d.gfx_getDirectionalLightingColor();
+			Vec3 directionalLightingPosition = _fe3d.gfx_getDirectionalLightingPosition();
 			float directionalLightingIntensity = _fe3d.gfx_getDirectionalLightingIntensity();
 			float billboardSize = _fe3d.billboardEntity_getSize("@@lightSource").x;
 
@@ -110,23 +110,23 @@ void SceneEditor::_updateDirectionalLightingMenu()
 			{
 				if (screen->getButton("color")->isHovered())
 				{
-					_gui.getGlobalScreen()->addValueForm("directionalColorR", "R(0-255)", directionalLightingColor.r * 255.0f, vec2(-0.25f, 0.0f), vec2(0.2f, 0.1f));
-					_gui.getGlobalScreen()->addValueForm("directionalColorG", "G(0-255)", directionalLightingColor.g * 255.0f, vec2(0.0f, 0.0f), vec2(0.2f, 0.1f));
-					_gui.getGlobalScreen()->addValueForm("directionalColorB", "B(0-255)", directionalLightingColor.b * 255.0f, vec2(0.25f, 0.0f), vec2(0.2f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("directionalColorR", "R(0-255)", directionalLightingColor.r * 255.0f, Vec2(-0.25f, 0.0f), Vec2(0.2f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("directionalColorG", "G(0-255)", directionalLightingColor.g * 255.0f, Vec2(0.0f, 0.0f), Vec2(0.2f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("directionalColorB", "B(0-255)", directionalLightingColor.b * 255.0f, Vec2(0.25f, 0.0f), Vec2(0.2f, 0.1f));
 				}
 				else if (screen->getButton("position")->isHovered())
 				{
-					_gui.getGlobalScreen()->addValueForm("positionX", "X", directionalLightingPosition.x, vec2(-0.25f, 0.0f), vec2(0.2f, 0.1f));
-					_gui.getGlobalScreen()->addValueForm("positionY", "Y", directionalLightingPosition.y, vec2(0.0f, 0.0f), vec2(0.2f, 0.1f));
-					_gui.getGlobalScreen()->addValueForm("positionZ", "Z", directionalLightingPosition.z, vec2(0.25f, 0.0f), vec2(0.2f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("positionX", "X", directionalLightingPosition.x, Vec2(-0.25f, 0.0f), Vec2(0.2f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("positionY", "Y", directionalLightingPosition.y, Vec2(0.0f, 0.0f), Vec2(0.2f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("positionZ", "Z", directionalLightingPosition.z, Vec2(0.25f, 0.0f), Vec2(0.2f, 0.1f));
 				}
 				else if (screen->getButton("intensity")->isHovered())
 				{
-					_gui.getGlobalScreen()->addValueForm("directionalIntensity", "Directional intensity(%)", directionalLightingIntensity * 100.0f, vec2(0.0f), vec2(0.3f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("directionalIntensity", "Directional intensity(%)", directionalLightingIntensity * 100.0f, Vec2(0.0f), Vec2(0.3f, 0.1f));
 				}
 				else if (screen->getButton("billboardSize")->isHovered())
 				{
-					_gui.getGlobalScreen()->addValueForm("billboardSize", "Billboard size", billboardSize, vec2(0.0f), vec2(0.3f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("billboardSize", "Billboard size", billboardSize, Vec2(0.0f), Vec2(0.3f, 0.1f));
 				}
 				else if (screen->getButton("back")->isHovered())
 				{
@@ -171,7 +171,7 @@ void SceneEditor::_updateDirectionalLightingMenu()
 
 			// Update lightsource billboard
 			_fe3d.billboardEntity_setPosition("@@lightSource", directionalLightingPosition);
-			_fe3d.billboardEntity_setSize("@@lightSource",  vec2(billboardSize));
+			_fe3d.billboardEntity_setSize("@@lightSource",  Vec2(billboardSize));
 		}
 	}
 }

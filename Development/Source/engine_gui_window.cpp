@@ -1,6 +1,6 @@
 #include "engine_gui_window.hpp"
 
-EngineGuiWindow::EngineGuiWindow(FabiEngine3D& fe3d, const string& parentID, const string& ID, vec2 position, vec2 size, vec3 color) :
+EngineGuiWindow::EngineGuiWindow(FabiEngine3D& fe3d, const string& parentID, const string& ID, Vec2 position, Vec2 size, Vec3 color) :
 	_fe3d(fe3d),
 	_ID(ID),
 	_entityID(parentID + "_" + ID),
@@ -25,9 +25,9 @@ bool EngineGuiWindow::isHovered()
 	if (_fe3d.guiEntity_isVisible(_entityID))
 	{
 		// Convert dimensions to same space
-		vec2 mousePos = _fe3d.misc_convertToNDC(_fe3d.misc_convertFromScreenCoords(_fe3d.misc_getCursorPosition()));
-		vec2 buttonPos = _fe3d.guiEntity_getPosition(_entityID);
-		vec2 buttonSize = _fe3d.guiEntity_getSize(_entityID);
+		Vec2 mousePos = _fe3d.misc_convertToNDC(_fe3d.misc_convertFromScreenCoords(_fe3d.misc_getCursorPosition()));
+		Vec2 buttonPos = _fe3d.guiEntity_getPosition(_entityID);
+		Vec2 buttonSize = _fe3d.guiEntity_getSize(_entityID);
 
 		// Check if cursor inside entity
 		if (mousePos.x > buttonPos.x - (buttonSize.x / 2.0f) && mousePos.x < buttonPos.x + (buttonSize.x / 2.0f)) // X axis
@@ -57,12 +57,12 @@ const string& EngineGuiWindow::getParentID()
 	return _parentID;
 }
 
-const vec2 EngineGuiWindow::getOriginalPosition()
+const Vec2 EngineGuiWindow::getOriginalPosition()
 {
 	return _originalPosition;
 }
 
-const vec2 EngineGuiWindow::getOriginalSize()
+const Vec2 EngineGuiWindow::getOriginalSize()
 {
 	return _originalSize;
 }
@@ -79,8 +79,8 @@ void EngineGuiWindow::addScreen(const string& ID)
 	}
 
 	// Add new screen
-	vec2 windowPosition = _fe3d.guiEntity_getPosition(_entityID);
-	vec2 windowSize = _fe3d.guiEntity_getSize(_entityID);
+	Vec2 windowPosition = _fe3d.guiEntity_getPosition(_entityID);
+	Vec2 windowSize = _fe3d.guiEntity_getSize(_entityID);
 	_screens.push_back(make_shared<EngineGuiScreen>(_fe3d, _parentID + "_" + _ID, ID, windowPosition, windowSize));
 	getScreen(ID)->hide();
 }

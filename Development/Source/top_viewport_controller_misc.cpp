@@ -110,7 +110,7 @@ void TopViewportController::_updateProjectDeletion()
 		// Check if user clicked a project name
 		if (clickedButtonID != "" && _fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
-			_gui.getGlobalScreen()->addAnswerForm("deleteProject", "Are you sure?", vec2(0.0f, 0.25f));
+			_gui.getGlobalScreen()->addAnswerForm("deleteProject", "Are you sure?", Vec2(0.0f, 0.25f));
 			chosenButtonID = clickedButtonID;
 			_gui.getGlobalScreen()->removeChoiceForm("projectList");
 		}
@@ -177,7 +177,7 @@ void TopViewportController::_prepareProjectChoosing()
 		}
 
 		// Add buttons
-		_gui.getGlobalScreen()->addChoiceForm("projectList", "Select project", vec2(0.0f), projectNames);
+		_gui.getGlobalScreen()->addChoiceForm("projectList", "Select project", Vec2(0.0f), projectNames);
 	}
 	else
 	{

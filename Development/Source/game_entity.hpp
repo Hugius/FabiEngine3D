@@ -2,10 +2,10 @@
 
 #include "base_entity.hpp"
 
-#include <GLM\\glm.hpp>
+#include "mathematics.hpp"
 
-using glm::vec3;
-using glm::mat4;
+
+
 
 class GameEntity final : public BaseEntity
 {
@@ -23,16 +23,16 @@ public:
 	void addLightMap(GLuint val);
 	void addReflectionMap(GLuint val);
 	void addNormalMap(GLuint val);
-	void setOriginalTranslation(vec3 val);
-	void setTranslation(vec3 val);
-	void setOriginalRotation(vec3 val);
-	void setRotation(vec3 val);
-	void setOriginalScaling(vec3 val);
-	void setScaling(vec3 val);
-	void translate(vec3 val);
-	void rotate(vec3 val);
-	void scale(vec3 val);
-	void setColor(vec3 val);
+	void setOriginalTranslation(Vec3 val);
+	void setTranslation(Vec3 val);
+	void setOriginalRotation(Vec3 val);
+	void setRotation(Vec3 val);
+	void setOriginalScaling(Vec3 val);
+	void setScaling(Vec3 val);
+	void translate(Vec3 val);
+	void rotate(Vec3 val);
+	void scale(Vec3 val);
+	void setColor(Vec3 val);
 	void setObjPath(const string& val);
 	void setDiffuseMapPath(const string& val);
 	void setLightMapPath(const string& val);
@@ -67,18 +67,18 @@ public:
 	void clearNormalMaps();
 	
 	// Getters
-	const mat4& getModelMatrix() const;
+	const Matrix44& getModelMatrix() const;
 	const GLuint getDiffuseMap(int index) const;
 	const GLuint getLightMap(int index) const;
 	const GLuint getReflectionMap(int index) const;
 	const GLuint getNormalMap(int index) const;
-	const vec3 getOriginalTranslation() const;
-	const vec3 getTranslation() const;
-	const vec3 getOriginalRotation() const;
-	const vec3 getRotation() const;
-	const vec3 getOriginalScaling() const;
-	const vec3 getScaling() const;
-	const vec3 getColor() const;
+	const Vec3 getOriginalTranslation() const;
+	const Vec3 getTranslation() const;
+	const Vec3 getOriginalRotation() const;
+	const Vec3 getRotation() const;
+	const Vec3 getOriginalScaling() const;
+	const Vec3 getScaling() const;
+	const Vec3 getColor() const;
 	const string& getObjPath() const;
 	const string& getDiffuseMapPath() const;
 	const string& getLightMapPath() const;
@@ -113,7 +113,7 @@ public:
 	const bool isLevelOfDetailed() const;
 
 private:
-	mat4 _modelMatrix = mat4(1.0f);
+	Matrix44 _modelMatrix = Matrix44(1.0f);
 
 	string _objPath = "";
 	string _diffuseMapPath = "";
@@ -127,13 +127,13 @@ private:
 	vector<string> _reflectionMapPaths;
 	vector<string> _normalMapPaths;
 
-	vec3 _originalTranslation = vec3(0.0f);
-	vec3 _originalRotation = vec3(0.0f);
-	vec3 _originalScaling = vec3(0.0f);
-	vec3 _translation = vec3(0.0f);
-	vec3 _rotation = vec3(0.0f);
-	vec3 _scaling = vec3(1.0f);
-	vec3 _color = vec3(1.0f);
+	Vec3 _originalTranslation = Vec3(0.0f);
+	Vec3 _originalRotation = Vec3(0.0f);
+	Vec3 _originalScaling = Vec3(0.0f);
+	Vec3 _translation = Vec3(0.0f);
+	Vec3 _rotation = Vec3(0.0f);
+	Vec3 _scaling = Vec3(1.0f);
+	Vec3 _color = Vec3(1.0f);
 
 	vector<GLuint> _diffuseMaps;
 	vector<GLuint> _lightMaps;

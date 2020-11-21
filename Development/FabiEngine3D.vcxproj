@@ -169,7 +169,7 @@
     <ClInclude Include="Source\bottom_viewport_controller.hpp" />
     <ClInclude Include="Source\engine_gui_scrollinglist.hpp" />
     <ClInclude Include="Source\entity_type.hpp" />
-    <ClInclude Include="Source\math.hpp" />
+    <ClInclude Include="Source\mathematics.hpp" />
     <ClInclude Include="Source\matrix33.hpp" />
     <ClInclude Include="Source\matrix44.hpp" />
     <ClInclude Include="Source\message_type.hpp" />

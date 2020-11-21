@@ -56,12 +56,12 @@ private:
 	
 	// Editor constants
 	const string _fontPath = "engine\\fonts\\lucida.ttf";
-	const vec3 _cameraStartingPosition = vec3(0.0f, 0.0f, 10.0f);
-	const vec3 _scriptTextStartingPosition = vec3(-11.0f, 6.0f, 0.5f);
-	const vec3 _lineNumberColor = vec3(0.0f, 1.0f, 0.0f);
-	const vec3 _characterColor = vec3(1.0f);
-	const vec3 _selectionColor = vec3(0.25f);
-	const vec2 _textCharacterSize = vec2(0.25f, 0.75f);
+	const Vec3 _cameraStartingPosition = Vec3(0.0f, 0.0f, 10.0f);
+	const Vec3 _scriptTextStartingPosition = Vec3(-11.0f, 6.0f, 0.5f);
+	const Vec3 _lineNumberColor = Vec3(0.0f, 1.0f, 0.0f);
+	const Vec3 _characterColor = Vec3(1.0f);
+	const Vec3 _selectionColor = Vec3(0.25f);
+	const Vec2 _textCharacterSize = Vec2(0.25f, 0.75f);
 	const unsigned int _continuousTextActionFrameMinimum = 75;
 	const unsigned int _continuousTextActionInterval = 5;
 	const unsigned int _maxPassedBarFrames = 50;

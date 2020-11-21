@@ -4,17 +4,18 @@
 
 void AabbEntity::updateModelMatrix()
 {
-	_modelMatrix = mat4(1.0f);
-	_modelMatrix = glm::translate(_modelMatrix, _translation);
-	_modelMatrix = glm::scale(_modelMatrix, _scaling);
+	Matrix44 translationMatrix = Matrix44::createTranslation(_translation.x, _translation.y, _translation.z);
+	Matrix44 scalingMatrix = Matrix44::createScaling(_scaling.x, _scaling.y, _scaling.z);
+
+	_modelMatrix = translationMatrix * scalingMatrix;
 }
 
-void AabbEntity::setTranslation(vec3 val)
+void AabbEntity::setTranslation(Vec3 val)
 {
 	_translation = val;
 }
 
-void AabbEntity::setScaling(vec3 val)
+void AabbEntity::setScaling(Vec3 val)
 {
 	_scaling = val;
 }
@@ -35,47 +36,47 @@ void AabbEntity::setResponsiveness(bool val)
 	_responsive = val;
 }
 
-void AabbEntity::translate(vec3 val)
+void AabbEntity::translate(Vec3 val)
 {
 	_translation += val;
 }
 
-void AabbEntity::scale(vec3 val)
+void AabbEntity::scale(Vec3 val)
 {
 	_scaling += val;
 }
 
-void AabbEntity::setLocalTranslation(vec3 val)
+void AabbEntity::setLocalTranslation(Vec3 val)
 {
 	_localTranslation = val;
 }
 
-void AabbEntity::setLocalScaling(vec3 val)
+void AabbEntity::setLocalScaling(Vec3 val)
 {
 	_localScaling = val;
 }
 
-const mat4 & AabbEntity::getModelMatrix() const
+const Matrix44 & AabbEntity::getModelMatrix() const
 {
 	return _modelMatrix;
 }
 
-const vec3 AabbEntity::getLocalTranslation() const
+const Vec3 AabbEntity::getLocalTranslation() const
 {
 	return _localTranslation;
 }
 
-const vec3 AabbEntity::getLocalScaling() const
+const Vec3 AabbEntity::getLocalScaling() const
 {
 	return _localScaling;
 }
 
-const vec3 AabbEntity::getTranslation() const
+const Vec3 AabbEntity::getTranslation() const
 {
 	return _translation;
 }
 
-const vec3 AabbEntity::getScaling() const
+const Vec3 AabbEntity::getScaling() const
 {
 	return _scaling;
 }

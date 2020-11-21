@@ -2,11 +2,11 @@
 
 #include "base_entity.hpp"
 
-#include <GLM\\glm.hpp>
+#include "mathematics.hpp"
 #include <GLM\\gtc\\matrix_transform.hpp>
 
 using glm::ivec2;
-using glm::mat4;
+
 
 class BillboardEntity final: public BaseEntity
 {
@@ -16,9 +16,9 @@ public:
 
 	// Updates
 	void updateModelMatrix();
-	void translate(vec3 val);
-	void rotate(vec3 val);
-	void scale(vec3 val);
+	void translate(Vec3 val);
+	void rotate(Vec3 val);
+	void scale(Vec3 val);
 
 	// Setters
 	void setCameraFacingX(bool val);
@@ -26,11 +26,11 @@ public:
 	void setTransparent(bool val);
 	void setDepthMapIncluded(bool val);
 	void setDiffuseMap(GLuint val);
-	void setTranslation(vec3 val);
-	void setInitialRotation(vec3 val);
-	void setRotation(vec3 val);
-	void setScaling(vec3 val);
-	void setColor(vec3 color);
+	void setTranslation(Vec3 val);
+	void setInitialRotation(Vec3 val);
+	void setRotation(Vec3 val);
+	void setScaling(Vec3 val);
+	void setColor(Vec3 color);
 	void setTextContent(const string& text);
 	void setFontPath(const string& fontPath);
 	void setDiffuseMapPath(const string& diffuseMapPath);
@@ -49,13 +49,13 @@ public:
 	void setMaxY(float val);
 
 	// Getters
-	const mat4 & getModelMatrix() const;
+	const Matrix44 & getModelMatrix() const;
 	const GLuint getDiffuseMap() const;
-	const vec3 getTranslation() const;
-	const vec3 getInitialRotation() const;
-	const vec3 getRotation() const;
-	const vec3 getScaling() const;
-	const vec3 getColor() const;
+	const Vec3 getTranslation() const;
+	const Vec3 getInitialRotation() const;
+	const Vec3 getRotation() const;
+	const Vec3 getScaling() const;
+	const Vec3 getColor() const;
 	const string& getTextContent() const;
 	const string& getFontPath() const;
 	const string& getDiffuseMapPath() const;
@@ -77,13 +77,13 @@ public:
 	const bool isDepthMapIncluded() const;
 
 private:
-	mat4 _modelMatrix = mat4(1.0f);
+	Matrix44 _modelMatrix = Matrix44(1.0f);
 
-	vec3 _translation     = vec3(0.0f, 0.0f, 0.0f);
-	vec3 _rotation        = vec3(0.0f, 0.0f, 0.0f);
-	vec3 _initialRotation = vec3(0.0f, 0.0f, 0.0f);
-	vec3 _scaling         = vec3(1.0f, 1.0f, 1.0f);
-	vec3 _color           = vec3(1.0f);
+	Vec3 _translation     = Vec3(0.0f, 0.0f, 0.0f);
+	Vec3 _rotation        = Vec3(0.0f, 0.0f, 0.0f);
+	Vec3 _initialRotation = Vec3(0.0f, 0.0f, 0.0f);
+	Vec3 _scaling         = Vec3(1.0f, 1.0f, 1.0f);
+	Vec3 _color           = Vec3(1.0f);
 
 	float _originalLightness = 1.0f;
 	float _lightness = 1.0f;

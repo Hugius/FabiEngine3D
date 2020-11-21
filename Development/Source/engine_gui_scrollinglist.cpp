@@ -3,8 +3,8 @@
 #include <algorithm>
 
 EngineGuiScrollingList::EngineGuiScrollingList(
-	FabiEngine3D& fe3d, const string& parentID, const string& ID, vec2 position, vec2 size, vec3 color,
-	vec3 buttonColor, vec3 buttonHoverColor, vec3 textColor, vec3 textHoverColor, vec2 charSize) :
+	FabiEngine3D& fe3d, const string& parentID, const string& ID, Vec2 position, Vec2 size, Vec3 color,
+	Vec3 buttonColor, Vec3 buttonHoverColor, Vec3 textColor, Vec3 textHoverColor, Vec2 charSize) :
 	EngineGuiRectangle(fe3d, parentID + "_scrollinglist", ID, position, size, color),
 	_buttonColor(buttonColor),
 	_buttonHoverColor(buttonHoverColor),
@@ -31,18 +31,18 @@ void EngineGuiScrollingList::addButton(const string& ID, string textContent)
 	float h = _charSize.y;
 
 	// Add button
-	vec2 position = _convertPosition(vec2(x, y));
-	vec2 size = _convertSize(vec2(w, h));
-	_buttons.push_back(make_shared<EngineGuiButton>(_fe3d, _parentID, ID, vec2(position.x, position.y), vec2(size.x, size.y), 
+	Vec2 position = _convertPosition(Vec2(x, y));
+	Vec2 size = _convertSize(Vec2(w, h));
+	_buttons.push_back(make_shared<EngineGuiButton>(_fe3d, _parentID, ID, Vec2(position.x, position.y), Vec2(size.x, size.y), 
 		_buttonColor, _buttonHoverColor, textContent, _textColor, _textHoverColor));
 	
 	// Define list boundaries
 	string rectangleID = _buttons.back()->getRectangle()->getEntityID();
 	string textID = _buttons.back()->getTextfield()->getEntityID();
-	_fe3d.guiEntity_setMinPosition(rectangleID, vec2(-1.0f, _originalPosition.y - (_originalSize.y / 2.0f)));
-	_fe3d.textEntity_setMinPosition(textID, vec2(-1.0f, _originalPosition.y - (_originalSize.y / 2.0f)));
-	_fe3d.guiEntity_setMaxPosition(rectangleID, vec2(1.0f, _originalPosition.y + (_originalSize.y / 2.0f)));
-	_fe3d.textEntity_setMaxPosition(textID, vec2(1.0f, _originalPosition.y + (_originalSize.y / 2.0f)));
+	_fe3d.guiEntity_setMinPosition(rectangleID, Vec2(-1.0f, _originalPosition.y - (_originalSize.y / 2.0f)));
+	_fe3d.textEntity_setMinPosition(textID, Vec2(-1.0f, _originalPosition.y - (_originalSize.y / 2.0f)));
+	_fe3d.guiEntity_setMaxPosition(rectangleID, Vec2(1.0f, _originalPosition.y + (_originalSize.y / 2.0f)));
+	_fe3d.textEntity_setMaxPosition(textID, Vec2(1.0f, _originalPosition.y + (_originalSize.y / 2.0f)));
 }
 
 void EngineGuiScrollingList::deleteButton(const string& ID)
@@ -93,9 +93,9 @@ void EngineGuiScrollingList::_updateHovering()
 	_isHovered = false;
 
 	// Convert dimensions to same space
-	vec2 mousePos = _fe3d.misc_convertToNDC(_fe3d.misc_convertFromScreenCoords(_fe3d.misc_getCursorPosition()));
-	vec2 listPos = _fe3d.guiEntity_getPosition(_entityID);
-	vec2 listSize = _fe3d.guiEntity_getSize(_entityID);
+	Vec2 mousePos = _fe3d.misc_convertToNDC(_fe3d.misc_convertFromScreenCoords(_fe3d.misc_getCursorPosition()));
+	Vec2 listPos = _fe3d.guiEntity_getPosition(_entityID);
+	Vec2 listSize = _fe3d.guiEntity_getSize(_entityID);
 
 	// Check if cursor inside button
 	if (mousePos.x > listPos.x - (listSize.x / 2.0f) && mousePos.x < listPos.x + (listSize.x / 2.0f)) // X axis
@@ -115,7 +115,7 @@ void EngineGuiScrollingList::_updateScolling()
 		bool mustReset = false;
 
 		// Checking if cursor is inside scrolling list
-		vec2 mousePos = _fe3d.misc_convertToNDC(_fe3d.misc_convertFromScreenCoords(_fe3d.misc_getCursorPosition()));
+		Vec2 mousePos = _fe3d.misc_convertToNDC(_fe3d.misc_convertFromScreenCoords(_fe3d.misc_getCursorPosition()));
 		if (mousePos.x > _originalPosition.x - (_originalSize.x / 2.0f) && mousePos.x < _originalPosition.x + (_originalSize.x / 2.0f))
 		{
 			if (mousePos.y > _originalPosition.y - (_originalSize.y / 2.0f) && mousePos.y < _originalPosition.y + (_originalSize.y / 2.0f))
@@ -174,8 +174,8 @@ void EngineGuiScrollingList::_updateScolling()
 			}
 			else
 			{
-				_fe3d.guiEntity_move(rectangleID, vec2(0.0f, _scrollingSpeed));
-				_fe3d.textEntity_move(textID, vec2(0.0f, _scrollingSpeed));
+				_fe3d.guiEntity_move(rectangleID, Vec2(0.0f, _scrollingSpeed));
+				_fe3d.textEntity_move(textID, Vec2(0.0f, _scrollingSpeed));
 			}
 		}
 	}
@@ -190,19 +190,19 @@ void EngineGuiScrollingList::_updateButtons(bool hoverable)
 	}
 }
 
-vec2 EngineGuiScrollingList::_convertPosition(vec2 position)
+Vec2 EngineGuiScrollingList::_convertPosition(Vec2 position)
 {
-	vec2 listPosition = _fe3d.guiEntity_getPosition(_entityID);
-	vec2 listSize = _fe3d.guiEntity_getSize(_entityID);
-	vec2 buttonPosition = listPosition + (position * (listSize / 2.0f));
+	Vec2 listPosition = _fe3d.guiEntity_getPosition(_entityID);
+	Vec2 listSize = _fe3d.guiEntity_getSize(_entityID);
+	Vec2 buttonPosition = listPosition + (position * (listSize / 2.0f));
 	return buttonPosition;
 }
 
-vec2 EngineGuiScrollingList::_convertSize(vec2 size)
+Vec2 EngineGuiScrollingList::_convertSize(Vec2 size)
 {
-	vec2 listPosition = _fe3d.guiEntity_getPosition(_entityID);
-	vec2 listSize = _fe3d.guiEntity_getSize(_entityID);
-	vec2 buttonSize = (size / 2.0f) * listSize;
+	Vec2 listPosition = _fe3d.guiEntity_getPosition(_entityID);
+	Vec2 listSize = _fe3d.guiEntity_getSize(_entityID);
+	Vec2 buttonSize = (size / 2.0f) * listSize;
 	return buttonSize;
 }
 

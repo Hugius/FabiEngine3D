@@ -16,7 +16,7 @@ MousePicker::MousePicker(RenderBus& renderBus) :
 void MousePicker::update(ivec2 mousePos, TerrainEntityManager& terrainManager)
 {
 	// Simple raycasting
-	vec3 mouseRay = _getMouseRay(ivec2(mousePos.x, Config::getInst().getWindowHeight() - mousePos.y));
+	Vec3 mouseRay = _getMouseRay(ivec2(mousePos.x, Config::getInst().getWindowHeight() - mousePos.y));
 	_ray = mouseRay;
 
 	// Check if a terrain is selected
@@ -30,7 +30,7 @@ void MousePicker::update(ivec2 mousePos, TerrainEntityManager& terrainManager)
 		}
 		else // Looking at sky
 		{
-			_terrainPoint = vec3(0.0f);
+			_terrainPoint = Vec3(0.0f);
 			_isValidTerrainPoint = false;
 		}
 	}
@@ -40,9 +40,9 @@ void MousePicker::update(ivec2 mousePos, TerrainEntityManager& terrainManager)
 	}
 }
 
-float MousePicker::checkCursorInBox(vec3 lb, vec3 rt, vec3 cameraPos)
+float MousePicker::checkCursorInBox(Vec3 lb, Vec3 rt, Vec3 cameraPos)
 {
-	vec3 dirfrac;
+	Vec3 dirfrac;
 	dirfrac.x = 1.0f / _ray.x;
 	dirfrac.y = 1.0f / _ray.y;
 	dirfrac.z = 1.0f / _ray.z;
@@ -72,48 +72,50 @@ float MousePicker::checkCursorInBox(vec3 lb, vec3 rt, vec3 cameraPos)
 	return tmin;
 }
 
-vec3 MousePicker::_getMouseRay(ivec2 mousePos)
+Vec3 MousePicker::_getMouseRay(ivec2 mousePos)
 {
-	vec2 NDC = _converToNDC(mousePos);
-	vec4 clipCoords = vec4(NDC.x, NDC.y, -1.0f, 1.0f);
-	vec4 viewCoords = _convertToViewSpace(clipCoords);
-	vec3 worldCoords = _convertToWorldSpace(viewCoords);
+	Vec2 NDC = _converToNDC(mousePos);
+	Vec4 clipCoords = Vec4(NDC.x, NDC.y, -1.0f, 1.0f);
+	Vec4 viewCoords = _convertToViewSpace(clipCoords);
+	Vec3 worldCoords = _convertToWorldSpace(viewCoords);
 	return worldCoords;
 }
 
-vec2 MousePicker::_converToNDC(ivec2 val)
+Vec2 MousePicker::_converToNDC(ivec2 val)
 {
 	float x = ((2.0f * val.x) / Config::getInst().getWindowWidth ()) - 1.0f;
 	float y = ((2.0f * val.y) / Config::getInst().getWindowHeight()) - 1.0f;
-	return vec2(x, y);
+	return Vec2(x, y);
 }
 
-vec4 MousePicker::_convertToViewSpace(vec4 val)
+Vec4 MousePicker::_convertToViewSpace(Vec4 val)
 {
-	mat4 inversedProjection = glm::inverse(_renderBus.getProjectionMatrix());
-	vec4 viewCoords = inversedProjection * val;
-	return vec4(viewCoords.x, viewCoords.y, -1.0f, 0.0f);
+	Matrix44 inversedProjection = _renderBus.getProjectionMatrix();
+	inversedProjection.invert();
+	Vec4 viewCoords = inversedProjection * val;
+	return Vec4(viewCoords.x, viewCoords.y, -1.0f, 0.0f);
 }
 
-vec3 MousePicker::_convertToWorldSpace(vec4 val)
+Vec3 MousePicker::_convertToWorldSpace(Vec4 val)
 {
-	mat4 inversedView = glm::inverse(_renderBus.getViewMatrix());
-	vec4 worldCoords = inversedView * val;
-	worldCoords = glm::normalize(worldCoords);
-	return vec3(worldCoords.x, worldCoords.y, worldCoords.z);
+	Matrix44 inversedView = _renderBus.getViewMatrix();
+	inversedView.invert();
+	Vec4 worldCoords = inversedView * val;
+	worldCoords.normalize();
+	return Vec3(worldCoords.x, worldCoords.y, worldCoords.z);
 }
 
-vec3 MousePicker::_getPointOnRay(vec3 ray, float distance)
+Vec3 MousePicker::_getPointOnRay(Vec3 ray, float distance)
 {
-	vec3 cameraPos = _renderBus.getCameraPosition();
-	vec3 scaledRay = vec3(ray.x * distance, ray.y * distance, ray.z * distance);
+	Vec3 cameraPos = _renderBus.getCameraPosition();
+	Vec3 scaledRay = Vec3(ray.x * distance, ray.y * distance, ray.z * distance);
 	return cameraPos + scaledRay;
 }
 
-bool MousePicker::_notUnderTerrain(float start, float finish, vec3 ray, TerrainEntityManager & terrainManager)
+bool MousePicker::_notUnderTerrain(float start, float finish, Vec3 ray, TerrainEntityManager & terrainManager)
 {
-	vec3 startPoint = _getPointOnRay(ray, start);
-	vec3 endPoint   = _getPointOnRay(ray, finish);
+	Vec3 startPoint = _getPointOnRay(ray, start);
+	Vec3 endPoint   = _getPointOnRay(ray, finish);
 
 	float startHeight = terrainManager.getPixelHeight(
 		terrainManager.getSelectedTerrain()->getID(),
@@ -128,12 +130,12 @@ bool MousePicker::_notUnderTerrain(float start, float finish, vec3 ray, TerrainE
 	return (startPoint.y > startHeight && endPoint.y < endHeight);
 }
 
-vec3 MousePicker::getRay()
+Vec3 MousePicker::getRay()
 {
 	return _ray;
 }
 
-vec3 MousePicker::getTerrainPoint()
+Vec3 MousePicker::getTerrainPoint()
 {
 	return _terrainPoint;
 }
@@ -143,13 +145,13 @@ bool MousePicker::isValidTerrainPoint()
 	return _isValidTerrainPoint;
 }
 
-vec3 MousePicker::_binarySearch(int count, float start, float finish, vec3 ray, TerrainEntityManager& terrainManager)
+Vec3 MousePicker::_binarySearch(int count, float start, float finish, Vec3 ray, TerrainEntityManager& terrainManager)
 {
 	// Binary search algorithm
 	float half = start + ((finish - start) / 2.0f);
 	if (count >= RECURSION_COUNT) 
 	{
-		vec3 endPoint = _getPointOnRay(ray, half);
+		Vec3 endPoint = _getPointOnRay(ray, half);
 		
 		// Check if selected point is inside the terrain size
 		if (terrainManager.isInside(
@@ -161,7 +163,7 @@ vec3 MousePicker::_binarySearch(int count, float start, float finish, vec3 ray, 
 		}
 		else
 		{
-			return vec3(0.0f);
+			return Vec3(0.0f);
 		}
 	}
 

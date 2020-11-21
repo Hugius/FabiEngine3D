@@ -39,12 +39,12 @@ void EngineController::FE3D_CONTROLLER_DESTROY()
 void EngineController::_initializeMiscellaneous()
 {
 	// Permanent graphical effects
-	misc_setMainRenderingColor(vec3(0.0f));
+	misc_setMainRenderingColor(Vec3(0.0f));
 	gfx_enableMSAA();
 	gfx_enableBloom(1.0f, 0.0f, 10);
 
 	// Default camera
-	camera_load(90.0f, 0.1f, 100.0f, vec3(0.0f));
+	camera_load(90.0f, 0.1f, 100.0f, Vec3(0.0f));
 
 	// Default engine background
 	string textureFolderPath = "engine\\textures\\";
@@ -58,10 +58,10 @@ void EngineController::_initializeMiscellaneous()
 		textureFolderPath + "default_back.png" });
 	skyEntity_select("@@engineBackground");
 	skyEntity_setLightness("@@engineBackground", 0.65f);
-	skyEntity_setRotationSpeed("@@engineBackground", 0.5f);
+	skyEntity_setRotationSpeed("@@engineBackground", 0.01f);
 
 	// Custom cursor texture
-	guiEntity_add("@@cursor", "engine\\textures\\cursor_default.png", vec2(0.0f), 0.0f, vec2(0.075f, 0.075f * misc_getAspectRatio()), true);
+	guiEntity_add("@@cursor", "engine\\textures\\cursor_default.png", Vec2(0.0f), 0.0f, Vec2(0.075f, 0.075f * misc_getAspectRatio()), true);
 	misc_setCustomCursor("@@cursor");
 	misc_hideCursor();
 }
@@ -74,7 +74,7 @@ void EngineController::_updateMiscellaneous()
 	if (activeScreen == "main" && lastScreen != "main")
 	{
 		float lastYaw = camera_getYaw();
-		camera_load(90.0f, 0.1f, 100.0f, vec3(0.0f), lastYaw);
+		camera_load(90.0f, 0.1f, 100.0f, Vec3(0.0f), lastYaw);
 		skyEntity_select("@@engineBackground");
 	}
 	lastScreen = activeScreen;

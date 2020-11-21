@@ -11,7 +11,7 @@ void SceneEditor::_updateModelPlacing()
 			if (_fe3d.misc_isCursorInsideViewport() && !_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_RIGHT) && !_gui.getGlobalScreen()->isFocused())
 			{
 				// Default placement position
-				vec3 newPosition = vec3(0.0f);
+				Vec3 newPosition = Vec3(0.0f);
 
 				// Check if a terrain is loaded
 				if (_fe3d.terrainEntity_getSelectedID() != "")

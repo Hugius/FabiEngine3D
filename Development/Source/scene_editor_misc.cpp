@@ -57,7 +57,7 @@ void SceneEditor::_activateModel(const string& modelID)
 	_gui.getViewport("right")->getWindow("main")->getScreen("modelPropertiesMenu")->getButton("scaling")->setHoverable(true);
 
 	// Filling writefields
-	vec3 position = _fe3d.gameEntity_getPosition(_activeModelID);
+	Vec3 position = _fe3d.gameEntity_getPosition(_activeModelID);
 	_gui.getViewport("right")->getWindow("main")->getScreen("modelPropertiesMenu")->getWriteField("x")->setTextContent(to_string(static_cast<int>(position.x)));
 	_gui.getViewport("right")->getWindow("main")->getScreen("modelPropertiesMenu")->getWriteField("y")->setTextContent(to_string(static_cast<int>(position.y)));
 	_gui.getViewport("right")->getWindow("main")->getScreen("modelPropertiesMenu")->getWriteField("z")->setTextContent(to_string(static_cast<int>(position.z)));
@@ -98,7 +98,7 @@ void SceneEditor::_activateBillboard(const string& billboardID)
 	_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("scaling")->setHoverable(true);
 
 	// Filling writefields
-	vec3 position = _fe3d.billboardEntity_getPosition(_activeBillboardID);
+	Vec3 position = _fe3d.billboardEntity_getPosition(_activeBillboardID);
 	_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getWriteField("x")->setTextContent(to_string(static_cast<int>(position.x)));
 	_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getWriteField("y")->setTextContent(to_string(static_cast<int>(position.y)));
 	_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getWriteField("z")->setTextContent(to_string(static_cast<int>(position.z)));
@@ -220,8 +220,8 @@ void SceneEditor::_updateLightbulbAnimation(const string& modelID, int& multipli
 
 		// Set model size
 		float speed = (_lightbulbAnimationSpeed * static_cast<float>(multiplier));
-		_fe3d.gameEntity_setSize(modelID, _fe3d.gameEntity_getSize(modelID) + vec3(speed));
-		_fe3d.aabbEntity_setSize(modelID, _fe3d.aabbEntity_getSize(modelID) + vec3(speed));
+		_fe3d.gameEntity_setSize(modelID, _fe3d.gameEntity_getSize(modelID) + Vec3(speed));
+		_fe3d.aabbEntity_setSize(modelID, _fe3d.aabbEntity_getSize(modelID) + Vec3(speed));
 	}
 }
 

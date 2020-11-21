@@ -32,8 +32,8 @@ void EnvironmentEditor::loadWaterEntitiesFromFile()
 			// Values
 			string name, dudvMapPath, normalMapPath, displacementMapPath;
 			bool isWaving, isRippling, isSpecularLighted, isReflective, isRefractive;
-			vec2 speed;
-			vec3 color, position;
+			Vec2 speed;
+			Vec3 color, position;
 			float size, uvRepeat, waveHeightFactor, transparency, specularFactor, specularIntensity;
 
 			// Load base data
@@ -152,12 +152,12 @@ void EnvironmentEditor::saveWaterEntitiesToFile()
 			bool isSpecularLighted = _fe3d.waterEntity_isSpecularLighted(name);
 			bool isReflective = _fe3d.waterEntity_isReflective(name);
 			bool isRefractive = _fe3d.waterEntity_isRefractive(name);
-			vec3 color = _fe3d.waterEntity_getColor(name);
+			Vec3 color = _fe3d.waterEntity_getColor(name);
 			float size = _fe3d.waterEntity_getSize(name);
-			vec3 position = _fe3d.waterEntity_getPosition(name);
+			Vec3 position = _fe3d.waterEntity_getPosition(name);
 			float uvRepeat = _fe3d.waterEntity_getUvRepeat(name);
 			float waveHeightFactor = _fe3d.waterEntity_getWaveHeightFactor(name);
-			vec2 speed = _fe3d.waterEntity_getSpeed(name);
+			Vec2 speed = _fe3d.waterEntity_getSpeed(name);
 			float transparency = _fe3d.waterEntity_getTransparency(name);
 			float specularFactor = _fe3d.waterEntity_getSpecularLightingFactor(name);
 			float specularIntensity = _fe3d.waterEntity_getSpecularLightingIntensity(name);

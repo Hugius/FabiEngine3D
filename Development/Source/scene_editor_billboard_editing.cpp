@@ -117,9 +117,9 @@ void SceneEditor::_updateBillboardEditing()
 				}
 
 				// Get entity transformation
-				vec3 position = _fe3d.billboardEntity_getPosition(_activeBillboardID);
-				vec3 rotation = _fe3d.billboardEntity_getRotation(_activeBillboardID);
-				vec2 size = _fe3d.billboardEntity_getSize(_activeBillboardID);
+				Vec3 position = _fe3d.billboardEntity_getPosition(_activeBillboardID);
+				Vec3 rotation = _fe3d.billboardEntity_getRotation(_activeBillboardID);
+				Vec2 size = _fe3d.billboardEntity_getSize(_activeBillboardID);
 				
 				// Enabling all axes by default
 				_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("xMinus")->setHoverable(true);
@@ -180,7 +180,7 @@ void SceneEditor::_updateBillboardEditing()
 				else if (_transformation == TransformationType::SCALING)
 				{
 					// Handle GUI input
-					vec2 oldSize = size;
+					Vec2 oldSize = size;
 					float factor = 25.0f;
 					_handleValueChanging("billboardPropertiesMenu", "xPlus", "x", size.x, _movementChangingSpeed, factor);
 					_handleValueChanging("billboardPropertiesMenu", "xMinus", "x", size.x, -_movementChangingSpeed, factor);

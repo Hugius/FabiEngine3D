@@ -49,9 +49,9 @@ void TerrainEntityManager::addTerrain(const string& ID)
 void TerrainEntityManager::generateModel(const string& ID)
 {
 	// Data collections
-	vector<vec3> vertices;
-	vector<vec2> uvCoords;
-	vector<vec3> normals;
+	vector<Vec3> vertices;
+	vector<Vec2> uvCoords;
+	vector<Vec3> normals;
 
 	// Handy values
 	const auto& pixelColors = getEntity(ID)->getPixelColors();
@@ -80,12 +80,12 @@ void TerrainEntityManager::generateModel(const string& ID)
 			float RH = _getPixelHeight(x + halfSize + 1, z + halfSize, size, maxHeight, pixelColors);
 			float UH = _getPixelHeight(x + halfSize, z + halfSize + 1, size, maxHeight, pixelColors);
 			float DH = _getPixelHeight(x + halfSize, z + halfSize - 1, size, maxHeight, pixelColors);
-			vec3 normal = vec3(LH - RH, 3.0f, DH - UH);
-			normal = glm::normalize(normal);
+			Vec3 normal = Vec3(LH - RH, 3.0f, DH - UH);
+			normal.normalize();
 
 			// Single vertex
-			vertices.push_back(vec3(vertexX, vertexY, vertexZ));
-			uvCoords.push_back(vec2(uvX, uvY));
+			vertices.push_back(Vec3(vertexX, vertexY, vertexZ));
+			uvCoords.push_back(Vec2(uvX, uvY));
 			normals.push_back(normal);
 		}
 	}

@@ -20,10 +20,9 @@ void CoreEngine::_start()
 	{
 		// Calculate timing values
 		std::chrono::high_resolution_clock::time_point current = std::chrono::high_resolution_clock::now();
-		std::chrono::duration<double> timeDifference = std::chrono::duration_cast<std::chrono::duration<double>>(current - previous);
-		float elapsedMS = static_cast<float>(timeDifference.count()) * 1000.0f;
+		std::chrono::duration<float> timeDifference = std::chrono::duration_cast<std::chrono::duration<float>>(current - previous);
+		float elapsedMS = timeDifference.count() * 1000.0f;
 		_deltaTime = elapsedMS;
-		
 		previous = current;
 		lag += elapsedMS;
 
@@ -59,14 +58,14 @@ void CoreEngine::_setupApplication()
 	// Get logo resolution
 	SDL_DisplayMode DM;
 	SDL_GetDesktopDisplayMode(0, &DM);
-	float width = float();
+	float width = float(DM.w);
 	float height = float(DM.h);
-	Ivec2 logoResolution = Ivec2(int(width * 0.4f), int(height * 0.2f));
+	Ivec2 logoResolution = Ivec2(static_cast<int>(width * 0.4f), static_cast<int>(height * 0.2f));
 
 	// Window properties & rendering
 	Vec3 keyingColor = Vec3(0.2f);
 	glClearColor(keyingColor.r, keyingColor.g, keyingColor.b, 0.0f);
-	_windowManager.makeColorOpaque(keyingColor);
+	_windowManager.enableOpaqueness(keyingColor);
 	_windowManager.setSize(logoResolution);
 	_windowManager.showWindow();
 	_renderEngine.renderEngineLogo(logo, logoResolution);
@@ -75,6 +74,7 @@ void CoreEngine::_setupApplication()
 	// Show logo for at least 1 second
 	auto start = std::chrono::high_resolution_clock::now();
 	while (std::chrono::duration_cast<std::chrono::duration<float>>(std::chrono::high_resolution_clock::now() - start).count() * 1000.0f < 1000.0f) {}
+	_windowManager.disableOpaqueness(keyingColor);
 
 	// Vignettte
 	Vec2 pos = _fe3d.misc_convertToNDC(_fe3d.misc_convertFromScreenCoords(Config::getInst().getVpPos()));

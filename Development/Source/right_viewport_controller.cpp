@@ -29,8 +29,10 @@ void RightViewportController::initialize()
 	modelEditorScreen->addTextfield("title", Vec2(0.0f, 0.9f), Vec2(CW("Model Editor"), textHeight), "Model Editor", color);
 	modelEditorScreen->addTextfield("mouse", Vec2(-0.5f, 0.675f), Vec2(CW("Move cursor"), textHeight), "Move cursor", color, false);
 	modelEditorScreen->addTextfield("mouseLeft", Vec2(-0.5f, 0.475f), Vec2(CW("Confirm"), textHeight), "Confirm", color, false);
+	modelEditorScreen->addTextfield("r", Vec2(-0.5f, 0.275f), Vec2(CW("Ref box"), textHeight), "Ref box", color, false);
 	modelEditorScreen->addRectangle("mouse", Vec2(-1.0f, 0.65f), Vec2(0.6f, 0.15f), "mouse.png", false);
 	modelEditorScreen->addRectangle("mouseLeft", Vec2(-1.0f, 0.45f), Vec2(0.6f, 0.15f), "mouse_left.png", false);
+	modelEditorScreen->addRectangle("r", Vec2(-1.0f, 0.25f), Vec2(0.6f, 0.15f), "r.png", false);
 
 	// Default screen
 	rightWindow->setActiveScreen("mainMenuControls");

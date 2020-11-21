@@ -103,7 +103,7 @@ void WindowManager::setOpacity(float value)
 	SDL_SetWindowOpacity(_window, value);
 }
 
-void WindowManager::makeColorOpaque(Vec3 color)
+void WindowManager::enableOpaqueness(Vec3 color)
 {
 	// Get window handle
 	SDL_SysWMinfo wmInfo;
@@ -114,6 +114,19 @@ void WindowManager::makeColorOpaque(Vec3 color)
 	// Set transparency color
 	SetWindowLong(hwnd, GWL_EXSTYLE, GetWindowLong(hwnd, GWL_EXSTYLE) | WS_EX_LAYERED);
 	SetLayeredWindowAttributes(hwnd, RGB(static_cast<int>(color.r * 255.0f), static_cast<int>(color.g * 255), static_cast<int>(color.b * 255)), 0, LWA_COLORKEY);
+}
+
+void WindowManager::disableOpaqueness(Vec3 color)
+{
+	// Get window handle
+	SDL_SysWMinfo wmInfo;
+	SDL_VERSION(&wmInfo.version);
+	SDL_GetWindowWMInfo(_window, &wmInfo);
+	HWND hwnd = wmInfo.info.win.window;
+	Logger::throwDebug("hoi");
+	// Remove opaqueness property
+	SetWindowLong(hwnd, GWL_EXSTYLE, GetWindowLong(hwnd, GWL_EXSTYLE) | WS_EX_LAYERED);
+	SetLayeredWindowAttributes(hwnd, RGB(static_cast<int>(color.r * 255.0f), static_cast<int>(color.g * 255), static_cast<int>(color.b * 255)), 0, LWA_ALPHA);
 }
 
 void WindowManager::showBorder()

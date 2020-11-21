@@ -14,7 +14,8 @@ public:
 	void setTitle(const std::string & title);
 	void setSize(Ivec2 size);
 	void setOpacity(float value);
-	void makeColorOpaque(Vec3 color);
+	void enableOpaqueness(Vec3 color);
+	void disableOpaqueness(Vec3 color);
 	void showBorder();
 	void hideBorder();
 	void enableFullscreen();

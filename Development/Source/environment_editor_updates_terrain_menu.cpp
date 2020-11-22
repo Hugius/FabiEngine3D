@@ -4,14 +4,19 @@
 
 void EnvironmentEditor::_updateTerrainMenuMain()
 {
-	if (_gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID() == "terrainEditorMenuMain")
-	{
-		auto screen = _gui.getViewport("left")->getWindow("main")->getScreen("terrainEditorMenuMain");
+	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-		// GUI management
-		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
+	// GUI management
+	if (screen->getID() == "terrainEditorMenuMain")
+	{
+		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
 		{
-			if (screen->getButton("create")->isHovered())
+			if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
+			{
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("environmentEditorMenu");
+				_currentEnvironmentType = EnvironmentType::NONE;
+			}
+			else if (screen->getButton("create")->isHovered())
 			{
 				_terrainCreationEnabled = true;
 				_gui.getGlobalScreen()->addValueForm("newTerrainName", "New terrain name", "", Vec2(0.0f), Vec2(0.5f, 0.1f));
@@ -32,36 +37,20 @@ void EnvironmentEditor::_updateTerrainMenuMain()
 				_gui.getGlobalScreen()->addChoiceForm("terrainList", "Select terrain", Vec2(-0.4f, 0.1f), _terrainNames);
 				for (auto& name : _terrainNames) { name = "@" + name; }
 			}
-			else if (screen->getButton("back")->isHovered())
-			{
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("environmentEditorMenu");
-				_currentEnvironmentType = EnvironmentType::NONE;
-			}
 		}
 	}
 }
 
 void EnvironmentEditor::_updateTerrainMenuChoice()
 {
-	if (_gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID() == "terrainEditorMenuChoice")
+	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
+
+	// GUI management
+	if (screen->getID() == "terrainEditorMenuChoice")
 	{
-		auto screen = _gui.getViewport("left")->getWindow("main")->getScreen("terrainEditorMenuChoice");
-
-		// BlendMap screen hoverability
-		screen->getButton("blendMap")->setHoverable(_fe3d.terrainEntity_isExisting(_currentTerrainID));
-
-		// GUI management
-		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
+		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
 		{
-			if (screen->getButton("mesh")->isHovered())
-			{
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuMesh");
-			}
-			else if (screen->getButton("blendMap")->isHovered())
-			{
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuBlendMap");
-			}
-			else if (screen->getButton("back")->isHovered())
+			if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 			{
 				_fe3d.camera_load(90.0f, 0.1f, 10000.0f, Vec3(0.0f));
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuMain");
@@ -70,30 +59,35 @@ void EnvironmentEditor::_updateTerrainMenuChoice()
 				_currentTerrainID = "";
 				_terrainEditingEnabled = false;
 			}
+			else if (screen->getButton("mesh")->isHovered())
+			{
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuMesh");
+			}
+			else if (screen->getButton("blendMap")->isHovered())
+			{
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuBlendMap");
+			}
 		}
+
+		// BlendMap screen hoverability
+		screen->getButton("blendMap")->setHoverable(_fe3d.terrainEntity_isExisting(_currentTerrainID));
 	}
 }
 
 void EnvironmentEditor::_updateTerrainMenuMesh()
 {
-	if (_gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID() == "terrainEditorMenuMesh")
+	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
+
+	// GUI management
+	if (screen->getID() == "terrainEditorMenuMesh")
 	{
-		// Variables
-		auto screen = _gui.getViewport("left")->getWindow("main")->getScreen("terrainEditorMenuMesh");
-
-		// Buttons hoverability
-		bool existing = _fe3d.terrainEntity_isExisting(_currentTerrainID);
-		screen->getButton("diffuseMap")->setHoverable(existing);
-		screen->getButton("maxHeight")->setHoverable(existing);
-		screen->getButton("uvRepeat")->setHoverable(existing);
-		screen->getButton("isSpecular")->setHoverable(existing);
-		screen->getButton("specularIntensity")->setHoverable(existing);
-		screen->getButton("lightness")->setHoverable(existing);
-
-		// GUI management
-		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
+		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
 		{
-			if (screen->getButton("heightMap")->isHovered())
+			if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
+			{
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuChoice");
+			}
+			else if (screen->getButton("heightMap")->isHovered())
 			{
 				// Get the loaded filename
 				const string rootDirectory = _fe3d.misc_getRootDirectory();
@@ -176,11 +170,16 @@ void EnvironmentEditor::_updateTerrainMenuMesh()
 				float lightness = _fe3d.terrainEntity_getLightness(_currentTerrainID);
 				_gui.getGlobalScreen()->addValueForm("lightness", "Lightness (%)", lightness * 100.0f, Vec2(0.0f), Vec2(0.3f, 0.1f));
 			}
-			else if (screen->getButton("back")->isHovered())
-			{
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuChoice");
-			}
 		}
+
+		// Buttons hoverability
+		bool existing = _fe3d.terrainEntity_isExisting(_currentTerrainID);
+		screen->getButton("diffuseMap")->setHoverable(existing);
+		screen->getButton("maxHeight")->setHoverable(existing);
+		screen->getButton("uvRepeat")->setHoverable(existing);
+		screen->getButton("isSpecular")->setHoverable(existing);
+		screen->getButton("specularIntensity")->setHoverable(existing);
+		screen->getButton("lightness")->setHoverable(existing);
 
 		// If terrain entity exists
 		if (existing)
@@ -226,15 +225,18 @@ void EnvironmentEditor::_updateTerrainMenuMesh()
 
 void EnvironmentEditor::_updateTerrainMenuBlendMap()
 {
-	if (_gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID() == "terrainEditorMenuBlendMap")
-	{
-		// Variables
-		auto screen = _gui.getViewport("left")->getWindow("main")->getScreen("terrainEditorMenuBlendMap");
+	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-		// GUI management
-		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
+	// GUI management
+	if (screen->getID() == "terrainEditorMenuBlendMap")
+	{
+		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
 		{
-			if (screen->getButton("blendMap")->isHovered())
+			if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
+			{
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuChoice");
+			}
+			else if (screen->getButton("blendMap")->isHovered())
 			{
 				// Get the loaded filename
 				const string rootDirectory = _fe3d.misc_getRootDirectory();
@@ -344,10 +346,6 @@ void EnvironmentEditor::_updateTerrainMenuBlendMap()
 			{
 				float blendRepeatB = _fe3d.terrainEntity_getBlendRepeatB(_currentTerrainID);
 				_gui.getGlobalScreen()->addValueForm("blueRepeat", "Blue repeat", blendRepeatB, Vec2(0.0f), Vec2(0.3f, 0.1f));
-			}
-			else if (screen->getButton("back")->isHovered())
-			{
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuChoice");
 			}
 		}
 

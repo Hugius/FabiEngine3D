@@ -25,6 +25,7 @@ private:
 	void _updateAudioChoosing();
 	void _updateAudioEditing();
 	void _updateAudioRemoval();
+	void _updateMiscellaneous();
 
 	// Core
 	FabiEngine3D& _fe3d;

@@ -7,55 +7,59 @@ void AudioEditor::update()
 	_updateAudioChoosing();
 	_updateAudioEditing();
 	_updateAudioRemoval();
+	_updateMiscellaneous();
 }
 
 void AudioEditor::_updateMainMenu()
 {
 	if (_isLoaded)
 	{
-		auto screen = _gui.getViewport("left")->getWindow("main")->getScreen("audioEditorMenuMain");
+		auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
 		// GUI management
-		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
+		if (screen->getID() == "audioEditorMenuMain")
 		{
-			if (screen->getButton("addAudio")->isHovered()) // Add audio button
+			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
 			{
-				_gui.getGlobalScreen()->addValueForm("newAudioName", "New audio name", "", Vec2(0.0f), Vec2(0.5f, 0.1f));
-				_isCreatingAudio = true;
+				if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused())) // Back button
+				{
+					_gui.getGlobalScreen()->addAnswerForm("exitAudioEditor", "Save changes?", Vec2(0.0f, 0.25f));
+				}
+				else if (screen->getButton("addAudio")->isHovered()) // Add audio button
+				{
+					_gui.getGlobalScreen()->addValueForm("newAudioName", "New audio name", "", Vec2(0.0f), Vec2(0.5f, 0.1f));
+					_isCreatingAudio = true;
+				}
+				else if (screen->getButton("editAudio")->isHovered()) // Edit audio button
+				{
+					_isChoosingAudio = true;
+					_isEditingAudio = true;
+					for (auto& name : _audioNames) { name = name.substr(1); }
+					_gui.getGlobalScreen()->addChoiceForm("audioList", "Select audio", Vec2(-0.4f, 0.1f), _audioNames);
+					for (auto& name : _audioNames) { name = "@" + name; }
+				}
+				else if (screen->getButton("deleteAudio")->isHovered()) // Delete audio button
+				{
+					_isChoosingAudio = true;
+					_isRemovingAudio = true;
+					for (auto& name : _audioNames) { name = name.substr(1); }
+					_gui.getGlobalScreen()->addChoiceForm("audioList", "Select audio", Vec2(-0.4f, 0.1f), _audioNames);
+					for (auto& name : _audioNames) { name = "@" + name; }
+				}
 			}
-			else if (screen->getButton("editAudio")->isHovered()) // Edit audio button
-			{
-				_isChoosingAudio = true;
-				_isEditingAudio = true;
-				for (auto& name : _audioNames) { name = name.substr(1); }
-				_gui.getGlobalScreen()->addChoiceForm("audioList", "Select audio", Vec2(-0.4f, 0.1f), _audioNames);
-				for (auto& name : _audioNames) { name = "@" + name; }
-			}
-			else if (screen->getButton("deleteAudio")->isHovered()) // Delete audio button
-			{
-				_isChoosingAudio = true;
-				_isRemovingAudio = true;
-				for (auto& name : _audioNames) { name = name.substr(1); }
-				_gui.getGlobalScreen()->addChoiceForm("audioList", "Select audio", Vec2(-0.4f, 0.1f), _audioNames);
-				for (auto& name : _audioNames) { name = "@" + name; }
-			}
-			else if (screen->getButton("back")->isHovered()) // Back button
-			{
-				_gui.getGlobalScreen()->addAnswerForm("exitAudioEditor", "Save changes?", Vec2(0.0f, 0.25f));
-			}
-		}
 
-		// Check if user wants to save changes
-		if (_gui.getGlobalScreen()->isAnswerFormConfirmed("exitAudioEditor"))
-		{
-			saveAudioEntitiesToFile();
-			unload();
-			_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
-		}
-		else if (_gui.getGlobalScreen()->isAnswerFormCancelled("exitAudioEditor"))
-		{
-			unload();
-			_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
+			// Check if user wants to save changes
+			if (_gui.getGlobalScreen()->isAnswerFormConfirmed("exitAudioEditor"))
+			{
+				saveAudioEntitiesToFile();
+				unload();
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
+			}
+			else if (_gui.getGlobalScreen()->isAnswerFormCancelled("exitAudioEditor"))
+			{
+				unload();
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
+			}
 		}
 	}
 }

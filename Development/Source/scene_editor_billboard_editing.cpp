@@ -61,7 +61,7 @@ void SceneEditor::_updateBillboardEditing()
 				if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) && !_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{
 					_activeBillboardID = "";
-					_gui.getViewport("right")->getWindow("main")->setActiveScreen("main");
+					_gui.getViewport("right")->getWindow("main")->setActiveScreen("sceneEditorControls");
 				}
 			}
 
@@ -110,7 +110,7 @@ void SceneEditor::_updateBillboardEditing()
 					else if (_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("delete")->isHovered()) // Delete button
 					{
 						_fe3d.billboardEntity_delete(_activeBillboardID);
-						_gui.getViewport("right")->getWindow("main")->setActiveScreen("main");
+						_gui.getViewport("right")->getWindow("main")->setActiveScreen("sceneEditorControls");
 						_activeBillboardID = "";
 						return;
 					}
@@ -211,7 +211,7 @@ void SceneEditor::_updateBillboardEditing()
 				// Reset when user wants to place billboards again
 				for (auto& entityID : _fe3d.billboardEntity_getAllIDs())
 				{
-					_gui.getViewport("right")->getWindow("main")->setActiveScreen("main");
+					_gui.getViewport("right")->getWindow("main")->setActiveScreen("sceneEditorControls");
 					_fe3d.billboardEntity_setLightness(entityID, _fe3d.billboardEntity_getOriginalLightness(entityID));
 					_selectedBillboardLightnessMultiplier = 1;
 					_activeBillboardID = "";

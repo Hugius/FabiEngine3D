@@ -75,7 +75,7 @@ private:
 	FabiEngine3D & _fe3d;
 
 	// Miscellaneous variable
-	float _deltaTime = 0.0f;
+	float _deltaTimeMS = 0.0f;
 	bool _isRunning = false;
 	bool _showStats = false;
 };

@@ -111,12 +111,13 @@ void ModelEditor::load()
 	_fe3d.gameEntity_setUvRepeat("@@grid", 5.0f);
 	_fe3d.gameEntity_setTransparent("@@grid", true);
 
-	// Other
+	// Miscellaneous
 	loadGameEntitiesFromFile();
 	_gui.getGlobalScreen()->addTextfield("selectedModelName", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
 	_gui.getGlobalScreen()->addTextfield("selectedAabbName", Vec2(0.0f, 0.75f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
 	_fe3d.gameEntity_setLevelOfDetailDistance(10000.0f);
 	_fe3d.input_clearKeyToggles();
+	_gui.getViewport("right")->getWindow("main")->setActiveScreen("modelEditorControls");
 	_isLoaded = true;
 }
 
@@ -160,4 +161,5 @@ void ModelEditor::unload()
 	_gui.getGlobalScreen()->deleteTextfield("selectedModelName");
 	_gui.getGlobalScreen()->deleteTextfield("selectedAabbName");
 	_fe3d.misc_disableAabbFrameRendering();
+	_gui.getViewport("right")->getWindow("main")->setActiveScreen("mainMenuControls");
 }

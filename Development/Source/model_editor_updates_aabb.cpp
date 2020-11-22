@@ -2,8 +2,78 @@
 
 void ModelEditor::_updateModelEditingAabb()
 {
-	auto screen = _gui.getViewport("left")->getWindow("main")->getScreen("modelEditorMenuAabb");
+	// Temporary values
+	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 	Vec3 currentSize = _fe3d.gameEntity_getSize(_currentModelID);
+
+	// GUI management
+	if(screen->getID() == "modelEditorMenuAabb")
+	{
+		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
+		{
+			if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
+			{
+				_movingToggled = false;
+				_resizingToggled = false;
+				_transformationDirection = Direction::X;
+				_currentAabbID = "";
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
+				_fe3d.misc_disableAabbFrameRendering();
+				_fe3d.textEntity_hide(_gui.getGlobalScreen()->getTextfield("selectedAabbName")->getEntityID());
+			}
+			else if (screen->getButton("add")->isHovered())
+			{
+				_gui.getGlobalScreen()->addValueForm("newAabbName", "New AABB name", "", Vec2(0.0f), Vec2(0.5f, 0.1f));
+			}
+			else if (screen->getButton("edit")->isHovered())
+			{
+				// Retrieve all AABB names of this model
+				vector<string> aabbNames = _fe3d.aabbEntity_getBoundIDs(_currentModelID, true, false);
+				for (auto& name : aabbNames)
+				{
+					name = name.substr(string(_currentModelID + "_").size());
+				}
+
+				// Show choicelist
+				_gui.getGlobalScreen()->addChoiceForm("aabbList", "Select AABB", Vec2(-0.4f, 0.1f), aabbNames);
+			}
+			else if (screen->getButton("delete")->isHovered())
+			{
+				_movingToggled = false;
+				_resizingToggled = false;
+				_transformationDirection = Direction::X;
+				_fe3d.aabbEntity_delete(_currentModelID + "_" + _currentAabbID);
+				_currentAabbID = "";
+				_fe3d.textEntity_hide(_gui.getGlobalScreen()->getTextfield("selectedAabbName")->getEntityID());
+			}
+			else if (screen->getButton("speed")->isHovered())
+			{
+				_gui.getGlobalScreen()->addValueForm("speed", "Transformation speed", _aabbTransformationSpeed * 100.0f, Vec2(0.0f, 0.0f), Vec2(0.2f, 0.1f));
+			}
+			else if (screen->getButton("toggleMove")->isHovered())
+			{
+				_movingToggled = !_movingToggled;
+
+				// Toggle box move
+				string newContent = _resizingToggled ? "Box move: ON" : "Box move: OFF";
+				_fe3d.textEntity_setTextContent(screen->getButton("toggleMove")->getTextfield()->getEntityID(), newContent);
+			}
+			else if (screen->getButton("toggleResize")->isHovered())
+			{
+				_resizingToggled = !_resizingToggled;
+
+				// Toggle box resize
+				string newContent = _resizingToggled ? "Box resize: ON" : "Box resize: OFF";
+				_fe3d.textEntity_setTextContent(screen->getButton("toggleResize")->getTextfield()->getEntityID(), newContent);
+			}
+			else if (screen->getButton("direction")->isHovered())
+			{
+				// Change direction
+				_transformationDirection = (_transformationDirection == Direction::X) ? Direction::Y :
+					(_transformationDirection == Direction::Y) ? Direction::Z : Direction::X;
+			}
+		}
+	}
 
 	// Buttons hoverability
 	bool isHoverable = (_currentAabbID != "");
@@ -11,72 +81,6 @@ void ModelEditor::_updateModelEditingAabb()
 	screen->getButton("toggleMove")->setHoverable(isHoverable);
 	screen->getButton("toggleResize")->setHoverable(isHoverable);
 	screen->getButton("direction")->setHoverable(isHoverable);
-
-	// GUI management 
-	if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
-	{
-		if (screen->getButton("add")->isHovered())
-		{
-			_gui.getGlobalScreen()->addValueForm("newAabbName", "New AABB name", "", Vec2(0.0f), Vec2(0.5f, 0.1f));
-		}
-		else if (screen->getButton("edit")->isHovered())
-		{
-			// Retrieve all AABB names of this model
-			vector<string> aabbNames = _fe3d.aabbEntity_getBoundIDs(_currentModelID, true, false);
-			for (auto& name : aabbNames)
-			{
-				name = name.substr(string(_currentModelID + "_").size());
-			}
-
-			// Show choicelist
-			_gui.getGlobalScreen()->addChoiceForm("aabbList", "Select AABB", Vec2(-0.4f, 0.1f), aabbNames);
-		}
-		else if (screen->getButton("delete")->isHovered())
-		{
-			_movingToggled = false;
-			_resizingToggled = false;
-			_transformationDirection = Direction::X;
-			_fe3d.aabbEntity_delete(_currentModelID + "_" + _currentAabbID);
-			_currentAabbID = "";
-			_fe3d.textEntity_hide(_gui.getGlobalScreen()->getTextfield("selectedAabbName")->getEntityID());
-		}
-		else if (screen->getButton("speed")->isHovered())
-		{
-			_gui.getGlobalScreen()->addValueForm("speed", "Transformation speed", _aabbTransformationSpeed * 100.0f, Vec2(0.0f, 0.0f), Vec2(0.2f, 0.1f));
-		}
-		else if (screen->getButton("toggleMove")->isHovered())
-		{
-			_movingToggled = !_movingToggled;
-
-			// Toggle box move
-			string newContent = _resizingToggled ? "Box move: ON" : "Box move: OFF";
-			_fe3d.textEntity_setTextContent(screen->getButton("toggleMove")->getTextfield()->getEntityID(), newContent);
-		}
-		else if (screen->getButton("toggleResize")->isHovered())
-		{
-			_resizingToggled = !_resizingToggled;
-
-			// Toggle box resize
-			string newContent = _resizingToggled ? "Box resize: ON" : "Box resize: OFF";
-			_fe3d.textEntity_setTextContent(screen->getButton("toggleResize")->getTextfield()->getEntityID(), newContent);
-		}
-		else if (screen->getButton("direction")->isHovered())
-		{
-			// Change direction
-			_transformationDirection = (_transformationDirection == Direction::X) ? Direction::Y : 
-				(_transformationDirection == Direction::Y) ? Direction::Z : Direction::X;
-		}
-		else if (screen->getButton("back")->isHovered())
-		{
-			_movingToggled = false;
-			_resizingToggled = false;
-			_transformationDirection = Direction::X;
-			_currentAabbID = "";
-			_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
-			_fe3d.misc_disableAabbFrameRendering();
-			_fe3d.textEntity_hide(_gui.getGlobalScreen()->getTextfield("selectedAabbName")->getEntityID());
-		}
-	}
 
 	// Update AABB visibility
 	for (auto& entityID : _fe3d.aabbEntity_getAllIDs())
@@ -142,7 +146,8 @@ void ModelEditor::_updateModelEditingAabb()
 			_fe3d.aabbEntity_hide(entityID);
 		}
 
-		if (selectedButtonID != "") // Hovered
+		// Check if a AABB name is hovered
+		if (selectedButtonID != "")
 		{
 			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT)) // Clicked
 			{

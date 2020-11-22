@@ -4,12 +4,18 @@ void SceneEditor::_updateMainBillboardMenu()
 {
 	if (_isLoaded)
 	{
-		if (_gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID() == "sceneEditorMenuBillboard")
+		auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
+
+		// GUI management
+		if (screen->getID() == "sceneEditorMenuBillboard")
 		{
-			auto screen = _gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuBillboard");
-			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
+			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
 			{
-				if (screen->getButton("place")->isHovered()) // Place billboard button
+				if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused())) // Back button
+				{
+					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuChoice");
+				}
+				else if (screen->getButton("place")->isHovered()) // Place billboard button
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("place");
 				}
@@ -34,10 +40,6 @@ void SceneEditor::_updateMainBillboardMenu()
 						}
 					}
 				}
-				else if (screen->getButton("back")->isHovered()) // Back button
-				{
-					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuChoice");
-				}
 			}
 		}
 	}
@@ -47,42 +49,45 @@ void SceneEditor::_updateBilboardPlacingMenu()
 {
 	if (_isLoaded)
 	{
-		// Placing screen
-		if (_gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID() == "sceneEditorMenuBillboardPlace")
+		auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
+
+		// GUI management
+		if (screen->getID() == "sceneEditorMenuBillboardPlace")
 		{
-			auto screen = _gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuBillboardPlace");
-			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
+			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
 			{
-				// Loop over every created billboard
-				for (auto& billboardName : _billboardEditor.getBillboardNames())
-				{
-					// Check if billboard has a billboard entity
-					if (_fe3d.billboardEntity_isExisting(billboardName))
-					{
-						// Check if button is hovered
-						if (screen->getScrollingList("billboards")->getButton(billboardName)->isHovered())
-						{
-							// Hide old preview billboard
-							if (_currentPreviewBillboardName != "")
-							{
-								_fe3d.billboardEntity_hide(_currentPreviewBillboardName);
-							}
-
-							// Set new preview billboard
-							_currentPreviewBillboardName = billboardName;
-							_fe3d.billboardEntity_show(_currentPreviewBillboardName);
-							string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID();
-							_fe3d.textEntity_show(textEntityID);
-							_fe3d.textEntity_setTextContent(textEntityID, "Billboard: " + _currentPreviewBillboardName.substr(1), 0.025f);
-							break;
-						}
-					}
-				}
-
 				// Back button
-				if (screen->getButton("back")->isHovered())
+				if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuBillboard");
+				}
+				else
+				{
+					// Loop over every created billboard
+					for (auto& billboardName : _billboardEditor.getBillboardNames())
+					{
+						// Check if billboard has a billboard entity
+						if (_fe3d.billboardEntity_isExisting(billboardName))
+						{
+							// Check if button is hovered
+							if (screen->getScrollingList("billboards")->getButton(billboardName)->isHovered())
+							{
+								// Hide old preview billboard
+								if (_currentPreviewBillboardName != "")
+								{
+									_fe3d.billboardEntity_hide(_currentPreviewBillboardName);
+								}
+
+								// Set new preview billboard
+								_currentPreviewBillboardName = billboardName;
+								_fe3d.billboardEntity_show(_currentPreviewBillboardName);
+								string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID();
+								_fe3d.textEntity_show(textEntityID);
+								_fe3d.textEntity_setTextContent(textEntityID, "Billboard: " + _currentPreviewBillboardName.substr(1), 0.025f);
+								break;
+							}
+						}
+					}
 				}
 			}
 		}
@@ -93,11 +98,11 @@ void SceneEditor::_updateBillboardChoosingMenu()
 {
 	if (_isLoaded)
 	{
-		// Choosing screen
-		if (_gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID() == "choice")
-		{
-			auto screen = _gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuBillboardChoice");
+		auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
+		// GUI management
+		if (screen->getID() == "sceneEditorMenuBillboardChoice")
+		{
 			// Remove deleted billboards from the scrollingList buttons
 			for (auto& button : _gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuBillboardChoice")->getScrollingList("billboards")->getButtons())
 			{
@@ -136,9 +141,9 @@ void SceneEditor::_updateBillboardChoosingMenu()
 			}
 
 			// Back button
-			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
+			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
 			{
-				if (screen->getButton("back")->isHovered())
+				if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuBillboard");
 					_currentPreviewBillboardName = "";

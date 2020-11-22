@@ -220,7 +220,8 @@ bool EngineGuiGlobalScreen::isChoiceFormCancelled(const string& ID)
 {
 	if (ID == _choiceFormID)
 	{
-		return (getButton("choice_form_cancel")->isHovered() && _fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT));
+		return (getButton("choice_form_cancel")->isHovered() && _fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT)) ||
+			_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE);
 	}
 	else
 	{

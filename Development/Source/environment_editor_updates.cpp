@@ -7,7 +7,7 @@ void EnvironmentEditor::update()
 		// Update main menu
 		if (_currentEnvironmentType == EnvironmentType::NONE)
 		{
-			auto screen = _gui.getViewport("left")->getWindow("main")->getScreen("environmentEditorMenu");
+			auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
 			// Set default camera view
 			_fe3d.camera_setPosition(Vec3(0.0f));
@@ -25,40 +25,43 @@ void EnvironmentEditor::update()
 			_fe3d.waterEntity_select("");
 
 			// GUI management
-			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
+			if (screen->getID() == "environmentEditorMenu")
 			{
-				if (screen->getButton("sky")->isHovered())
+				if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
 				{
-					_gui.getViewport("left")->getWindow("main")->setActiveScreen("skyEditorMenuMain");
-					_currentEnvironmentType = EnvironmentType::SKY;
+					if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
+					{
+						_gui.getGlobalScreen()->addAnswerForm("exitEnvironmentEditor", "Save changes?", Vec2(0.0f, 0.25f));
+					}
+					else if (screen->getButton("sky")->isHovered())
+					{
+						_gui.getViewport("left")->getWindow("main")->setActiveScreen("skyEditorMenuMain");
+						_currentEnvironmentType = EnvironmentType::SKY;
+					}
+					else if (screen->getButton("terrain")->isHovered())
+					{
+						_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuMain");
+						_currentEnvironmentType = EnvironmentType::TERRAIN;
+					}
+					else if (screen->getButton("water")->isHovered())
+					{
+						_gui.getViewport("left")->getWindow("main")->setActiveScreen("waterEditorMenuMain");
+						_currentEnvironmentType = EnvironmentType::WATER;
+					}
 				}
-				else if (screen->getButton("terrain")->isHovered())
-				{
-					_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuMain");
-					_currentEnvironmentType = EnvironmentType::TERRAIN;
-				}
-				else if (screen->getButton("water")->isHovered())
-				{
-					_gui.getViewport("left")->getWindow("main")->setActiveScreen("waterEditorMenuMain");
-					_currentEnvironmentType = EnvironmentType::WATER;
-				}
-				else if (screen->getButton("back")->isHovered())
-				{
-					_gui.getGlobalScreen()->addAnswerForm("exitEnvironmentEditor", "Save changes?", Vec2(0.0f, 0.25f));
-				}
-			}
 
-			// Check if user wants to save changes
-			if (_gui.getGlobalScreen()->isAnswerFormConfirmed("exitEnvironmentEditor"))
-			{
-				save();
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
-				unload();
-			}
-			else if (_gui.getGlobalScreen()->isAnswerFormCancelled("exitEnvironmentEditor"))
-			{
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
-				unload();
+				// Check if user wants to save changes
+				if (_gui.getGlobalScreen()->isAnswerFormConfirmed("exitEnvironmentEditor"))
+				{
+					save();
+					_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
+					unload();
+				}
+				else if (_gui.getGlobalScreen()->isAnswerFormCancelled("exitEnvironmentEditor"))
+				{
+					_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
+					unload();
+				}
 			}
 		}
 		else

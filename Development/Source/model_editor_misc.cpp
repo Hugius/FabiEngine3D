@@ -19,16 +19,6 @@ void ModelEditor::_updateMiscellaneous()
 			_fe3d.gameEntity_show("@@cube");
 		}
 
-		// Wireframe rendering
-		if (_fe3d.input_getKeyToggled(InputType::KEY_F))
-		{
-			_fe3d.misc_enableWireframeRendering();
-		}
-		else
-		{
-			_fe3d.misc_disableWireframeRendering();
-		}
-
 		// Debug rendering
 		if (_fe3d.input_getKeyToggled(InputType::KEY_H))
 		{

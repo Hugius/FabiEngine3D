@@ -83,8 +83,9 @@ void BillboardEditor::load()
 	// Load billboards from file
 	loadBillboardEntitiesFromFile();
 
-	// Other
+	// Miscellaneous
 	_gui.getGlobalScreen()->addTextfield("selectedBillboardName", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
+	_gui.getViewport("right")->getWindow("main")->setActiveScreen("billboardEditorControls");
 	_isLoaded = true;
 }
 
@@ -97,6 +98,7 @@ void BillboardEditor::unload()
 
 	// 3D environment
 	_fe3d.gameEntity_delete("@@cube");
+	_fe3d.gameEntity_delete("@@grid");
 
 	// Delete billboards
 	_fe3d.billboardEntity_deleteAll();
@@ -116,5 +118,6 @@ void BillboardEditor::unload()
 	_billboardNames.clear();
 
 	// Miscellaneous
+	_gui.getViewport("right")->getWindow("main")->setActiveScreen("mainMenuControls");
 	_isLoaded = false;
 }

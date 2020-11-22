@@ -77,7 +77,7 @@ void SceneEditor::_updateLightEditing()
 				if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) && !_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{
 					ACTIVE_BULB_ID = "";
-					_gui.getViewport("right")->getWindow("main")->setActiveScreen("main");
+					_gui.getViewport("right")->getWindow("main")->setActiveScreen("sceneEditorControls");
 				}
 			}
 
@@ -100,7 +100,7 @@ void SceneEditor::_updateLightEditing()
 					{
 						_fe3d.gameEntity_delete(ACTIVE_BULB_ID);
 						_fe3d.lightEntity_delete(ACTIVE_LIGHT_ID);
-						_gui.getViewport("right")->getWindow("main")->setActiveScreen("main");
+						_gui.getViewport("right")->getWindow("main")->setActiveScreen("sceneEditorControls");
 						ACTIVE_BULB_ID = "";
 						return;
 					}

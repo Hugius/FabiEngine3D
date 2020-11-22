@@ -338,6 +338,7 @@ void SceneEditor::load()
 	// Miscellaneous
 	_fe3d.input_clearKeyToggles();
 	_fe3d.collision_enableCameraResponse();
+	_gui.getViewport("right")->getWindow("main")->setActiveScreen("sceneEditorControls");
 	_isLoaded = true;
 }
 
@@ -397,5 +398,6 @@ void SceneEditor::unload()
 	_fe3d.misc_disableAabbFrameRendering();
 	_fe3d.misc_disableWireframeRendering();
 	_fe3d.misc_disableDebugRendering();
+	_gui.getViewport("right")->getWindow("main")->setActiveScreen("mainMenuControls");
 	_isLoaded = false;
 }

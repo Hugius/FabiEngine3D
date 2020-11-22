@@ -51,14 +51,19 @@ void SceneEditor::update()
 
 void SceneEditor::_updateMainMenu()
 {
-	if (_gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID() == "sceneEditorMenuMain")
-	{
-		auto screen = _gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuMain");
+	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-		// GUI management
-		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
+	// GUI management
+	if (screen->getID() == "sceneEditorMenuMain")
+	{
+		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
 		{
-			if (screen->getButton("create")->isHovered())
+			if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
+			{
+				unload();
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
+			}
+			else if (screen->getButton("create")->isHovered())
 			{
 				_gui.getGlobalScreen()->addValueForm("newSceneName", "New scene name", "", Vec2(0.0f), Vec2(0.5f, 0.1f));
 			}
@@ -71,11 +76,6 @@ void SceneEditor::_updateMainMenu()
 			{
 				_isDeletingScene = true;
 				_gui.getGlobalScreen()->addChoiceForm("sceneList", "Select scene", Vec2(0.0f, 0.1f), _loadSceneNames());
-			}
-			else if (screen->getButton("back")->isHovered())
-			{
-				unload();
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
 			}
 		}
 
@@ -148,14 +148,18 @@ void SceneEditor::_updateChoiceMenu()
 {
 	if (_isLoaded)
 	{
-		if (_gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID() == "sceneEditorMenuChoice")
+		auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
+		
+		// GUI management
+		if (screen->getID() == "sceneEditorMenuChoice")
 		{
-			auto screen = _gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuChoice");
-
-			// GUI management
-			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
+			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
 			{
-				if (screen->getButton("environment")->isHovered()) // Environment button
+				if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused())) // Back button
+				{
+					_gui.getGlobalScreen()->addAnswerForm("exitSceneEditor", "Save changes?", Vec2(0.0f, 0.25f));
+				}
+				else if (screen->getButton("environment")->isHovered()) // Environment button
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuEnvironment");
 				}
@@ -174,10 +178,6 @@ void SceneEditor::_updateChoiceMenu()
 				else if (screen->getButton("settings")->isHovered()) // Settings button
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuSettings");
-				}
-				else if (screen->getButton("back")->isHovered()) // Back button
-				{
-					_gui.getGlobalScreen()->addAnswerForm("exitSceneEditor", "Save changes?", Vec2(0.0f, 0.25f));
 				}
 			}
 

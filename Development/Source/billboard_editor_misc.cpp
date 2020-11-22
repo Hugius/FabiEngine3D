@@ -22,14 +22,14 @@ void BillboardEditor::_updateMiscellaneous()
 		// Lock toggling if GUI focused or cursor not in 3D viewport
 		_fe3d.input_setKeyTogglingLocked(_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isCursorInsideViewport());
 
-		// Wireframe rendering
-		if (_fe3d.input_getKeyToggled(InputType::KEY_F))
+		// Update reference model visibility
+		if (_fe3d.input_getKeyToggled(InputType::KEY_R))
 		{
-			_fe3d.misc_enableWireframeRendering();
+			_fe3d.gameEntity_hide("@@cube");
 		}
 		else
 		{
-			_fe3d.misc_disableWireframeRendering();
+			_fe3d.gameEntity_show("@@cube");
 		}
 
 		// Debug rendering

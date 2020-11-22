@@ -61,7 +61,7 @@ float FabiEngine3D::misc_getAspectRatio()
 
 float FabiEngine3D::misc_getFPS()
 {
-	return 1000.0f / _core->_deltaTime;
+	return 1000.0f / _core->_deltaTimeMS;
 }
 
 float FabiEngine3D::misc_getPI()

@@ -6,14 +6,18 @@ void SceneEditor::_updateMainLightingMenu()
 {
 	if (_isLoaded)
 	{
-		if (_gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID() == "sceneEditorMenuLighting")
-		{
-			auto screen = _gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuLighting");
+		auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-			// GUI management
-			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
+		// GUI management
+		if (screen->getID() == "sceneEditorMenuLighting")
+		{
+			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
 			{
-				if (screen->getButton("ambient")->isHovered()) // Ambient light button
+				if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused())) // Back button
+				{
+					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuChoice");
+				}
+				else if (screen->getButton("ambient")->isHovered()) // Ambient light button
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuLightingAmbient");
 				}
@@ -25,10 +29,6 @@ void SceneEditor::_updateMainLightingMenu()
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuLightingPoint");
 				}
-				else if (screen->getButton("back")->isHovered()) // Back button
-				{
-					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuChoice");
-				}
 			}
 		}
 	}
@@ -38,16 +38,21 @@ void SceneEditor::_updateAmbientLightingMenu()
 {
 	if (_isLoaded)
 	{
-		if (_gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID() == "sceneEditorMenuLightingAmbient")
+		// Temporary values
+		auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
+		Vec3 ambientLightingColor = _fe3d.gfx_getAmbientLightingColor();
+		float ambientLightingIntensity = _fe3d.gfx_getAmbientLightingIntensity();
+
+		// GUI management
+		if (screen->getID() == "sceneEditorMenuLightingAmbient")
 		{
-			auto screen = _gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuLightingAmbient");
-			Vec3 ambientLightingColor = _fe3d.gfx_getAmbientLightingColor();
-			float ambientLightingIntensity = _fe3d.gfx_getAmbientLightingIntensity();
-	
-			// GUI management
-			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
+			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
 			{
-				if (screen->getButton("color")->isHovered())
+				if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
+				{
+					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuLighting");
+				}
+				else if (screen->getButton("color")->isHovered())
 				{
 					_gui.getGlobalScreen()->addValueForm("ambientColorR", "R(0-255)", ambientLightingColor.r * 255.0f, Vec2(-0.25f, 0.0f), Vec2(0.2f, 0.1f));
 					_gui.getGlobalScreen()->addValueForm("ambientColorG", "G(0-255)", ambientLightingColor.g * 255.0f, Vec2(0.0f, 0.0f), Vec2(0.2f, 0.1f));
@@ -56,10 +61,6 @@ void SceneEditor::_updateAmbientLightingMenu()
 				else if (screen->getButton("intensity")->isHovered())
 				{
 					_gui.getGlobalScreen()->addValueForm("ambientIntensity", "Ambient intensity (%)", ambientLightingIntensity * 100.0f, Vec2(0.0f), Vec2(0.3f, 0.1f));
-				}
-				else if (screen->getButton("back")->isHovered())
-				{
-					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuLighting");
 				}
 			}
 
@@ -97,18 +98,23 @@ void SceneEditor::_updateDirectionalLightingMenu()
 {
 	if (_isLoaded)
 	{
-		if (_gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID() == "sceneEditorMenuLightingDirectional")
-		{
-			auto screen = _gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuLightingDirectional");
-			Vec3 directionalLightingColor = _fe3d.gfx_getDirectionalLightingColor();
-			Vec3 directionalLightingPosition = _fe3d.gfx_getDirectionalLightingPosition();
-			float directionalLightingIntensity = _fe3d.gfx_getDirectionalLightingIntensity();
-			float billboardSize = _fe3d.billboardEntity_getSize("@@lightSource").x;
+		// Temporary values
+		auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
+		Vec3 directionalLightingColor = _fe3d.gfx_getDirectionalLightingColor();
+		Vec3 directionalLightingPosition = _fe3d.gfx_getDirectionalLightingPosition();
+		float directionalLightingIntensity = _fe3d.gfx_getDirectionalLightingIntensity();
+		float billboardSize = _fe3d.billboardEntity_getSize("@@lightSource").x;
 
-			// GUI management
-			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
+		// GUI management
+		if (screen->getID() == "sceneEditorMenuLightingDirectional")
+		{
+			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
 			{
-				if (screen->getButton("color")->isHovered())
+				if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
+				{
+					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuLighting");
+				}
+				else if (screen->getButton("color")->isHovered())
 				{
 					_gui.getGlobalScreen()->addValueForm("directionalColorR", "R(0-255)", directionalLightingColor.r * 255.0f, Vec2(-0.25f, 0.0f), Vec2(0.2f, 0.1f));
 					_gui.getGlobalScreen()->addValueForm("directionalColorG", "G(0-255)", directionalLightingColor.g * 255.0f, Vec2(0.0f, 0.0f), Vec2(0.2f, 0.1f));
@@ -127,10 +133,6 @@ void SceneEditor::_updateDirectionalLightingMenu()
 				else if (screen->getButton("billboardSize")->isHovered())
 				{
 					_gui.getGlobalScreen()->addValueForm("billboardSize", "Billboard size", billboardSize, Vec2(0.0f), Vec2(0.3f, 0.1f));
-				}
-				else if (screen->getButton("back")->isHovered())
-				{
-					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuLighting");
 				}
 			}
 
@@ -180,21 +182,21 @@ void SceneEditor::_updatePointLightingMenu()
 {
 	if (_isLoaded)
 	{
-		if (_gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID() == "sceneEditorMenuLightingPoint")
-		{
-			auto screen = _gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuLightingPoint");
+		auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-			// GUI management
-			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
+		// GUI management
+		if (screen->getID() == "sceneEditorMenuLightingPoint")
+		{
+			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
 			{
-				if (screen->getButton("add")->isHovered())
-				{
-					_isPlacingPointlight = true;
-				}
-				else if (screen->getButton("back")->isHovered())
+				if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuLighting");
 					_isPlacingPointlight = false;
+				}
+				else if (screen->getButton("add")->isHovered())
+				{
+					_isPlacingPointlight = true;
 				}
 			}
 		}

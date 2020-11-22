@@ -95,20 +95,25 @@ void SettingsEditor::update()
 {
 	if (_isLoaded)
 	{
-		if (_gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID() == "settingsEditorMenuMain")
-		{
-			auto screen = _gui.getViewport("left")->getWindow("main")->getScreen("settingsEditorMenuMain");
-			float mouseSpeed = _fe3d.camera_getMouseSensitivity();
-			int msaaQuality = _fe3d.gfx_getMsaaQuality();
-			int shadowQuality = _fe3d.gfx_getShadowQuality();
-			int reflectionQuality = _fe3d.gfx_getReflectionQuality();
-			int refractionQuality = _fe3d.gfx_getRefractionQuality();
-			int audioChannels = _fe3d.sound_getMaxChannels();
+		// Temporary values
+		auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
+		float mouseSpeed = _fe3d.camera_getMouseSensitivity();
+		int msaaQuality = _fe3d.gfx_getMsaaQuality();
+		int shadowQuality = _fe3d.gfx_getShadowQuality();
+		int reflectionQuality = _fe3d.gfx_getReflectionQuality();
+		int refractionQuality = _fe3d.gfx_getRefractionQuality();
+		int audioChannels = _fe3d.sound_getMaxChannels();
 
-			// GUI management
-			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
+		// GUI management
+		if (screen->getID() == "settingsEditorMenuMain")
+		{
+			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
 			{
-				if (screen->getButton("mouseSensitivity")->isHovered())
+				if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
+				{
+					_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
+				}
+				else if (screen->getButton("mouseSensitivity")->isHovered())
 				{
 					_gui.getGlobalScreen()->addValueForm("mouseSensitivity", "Mouse sensitivity", mouseSpeed, Vec2(0.0f, 0.0f), Vec2(0.2f, 0.1f));
 				}
@@ -131,10 +136,6 @@ void SettingsEditor::update()
 				else if (screen->getButton("maxAudioChannels")->isHovered())
 				{
 					_gui.getGlobalScreen()->addValueForm("maxAudioChannels", "Max audio channels", audioChannels, Vec2(0.0f, 0.0f), Vec2(0.2f, 0.1f));
-				}
-				else if (screen->getButton("back")->isHovered())
-				{
-					_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
 				}
 			}
 

@@ -4,14 +4,18 @@ void SceneEditor::_updateMainEnvironmentMenu()
 {
 	if (_isLoaded)
 	{
-		if (_gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID() == "sceneEditorMenuEnvironment")
-		{
-			auto screen = _gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuEnvironment");
+		auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-			// GUI management
-			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
+		// GUI management
+		if (screen->getID() == "sceneEditorMenuEnvironment")
+		{
+			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
 			{
-				if (screen->getButton("sky")->isHovered())
+				if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
+				{
+					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuChoice");
+				}
+				else if (screen->getButton("sky")->isHovered())
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuEnvironmentSky");
 				}
@@ -23,10 +27,6 @@ void SceneEditor::_updateMainEnvironmentMenu()
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuEnvironmentWater");
 				}
-				else if (screen->getButton("back")->isHovered())
-				{
-					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuChoice");
-				}
 			}
 		}
 	}
@@ -36,17 +36,18 @@ void SceneEditor::_updateSkyMenu()
 {
 	if (_isLoaded)
 	{
-		if (_gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID() == "sceneEditorMenuEnvironmentSky")
+		auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
+
+		// GUI management
+		if (screen->getID() == "sceneEditorMenuEnvironmentSky")
 		{
-			auto screen = _gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuEnvironmentSky");
-
-			// Buttons hoverability
-			screen->getButton("delete")->setHoverable(_currentSkyID != "");
-
-			// GUI management
-			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
+			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
 			{
-				if (screen->getButton("choose")->isHovered())
+				if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
+				{
+					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuEnvironment");
+				}
+				else if (screen->getButton("choose")->isHovered())
 				{
 					// Retrieve created skies
 					vector<string> skyNames;
@@ -66,11 +67,7 @@ void SceneEditor::_updateSkyMenu()
 				{
 					_fe3d.skyEntity_delete(_currentSkyID);
 					_currentSkyID = "";
-				}
-				else if (screen->getButton("back")->isHovered())
-				{
-					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuEnvironment");
-				}
+				}			
 			}
 
 			// Update sky choosing
@@ -89,6 +86,9 @@ void SceneEditor::_updateSkyMenu()
 				}
 			}
 
+			// Buttons hoverability
+			screen->getButton("delete")->setHoverable(_currentSkyID != "");
+
 			// Update sky selection
 			_fe3d.skyEntity_select(_currentSkyID);
 		}
@@ -99,17 +99,18 @@ void SceneEditor::_updateTerrainMenu()
 {
 	if (_isLoaded)
 	{
-		if (_gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID() == "sceneEditorMenuEnvironmentTerrain")
+		auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
+
+		// GUI management
+		if (screen->getID() == "sceneEditorMenuEnvironmentTerrain")
 		{
-			auto screen = _gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuEnvironmentTerrain");
-
-			// Buttons hoverability
-			screen->getButton("delete")->setHoverable(_currentTerrainID != "");
-
-			// GUI management
-			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
+			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
 			{
-				if (screen->getButton("choose")->isHovered())
+				if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
+				{
+					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuEnvironment");
+				}
+				else if (screen->getButton("choose")->isHovered())
 				{
 					// Retrieve created skies
 					vector<string> terrainNames;
@@ -129,10 +130,6 @@ void SceneEditor::_updateTerrainMenu()
 				{
 					_fe3d.terrainEntity_delete(_currentTerrainID);
 					_currentTerrainID = "";
-				}
-				else if (screen->getButton("back")->isHovered())
-				{
-					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuEnvironment");
 				}
 			}
 
@@ -154,6 +151,9 @@ void SceneEditor::_updateTerrainMenu()
 
 			// Update terrain selection
 			_fe3d.terrainEntity_select(_currentTerrainID);
+
+			// Buttons hoverability
+			screen->getButton("delete")->setHoverable(_currentTerrainID != "");
 		}
 	}
 }
@@ -162,17 +162,18 @@ void SceneEditor::_updateWaterMenu()
 {
 	if (_isLoaded)
 	{
-		if (_gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID() == "sceneEditorMenuEnvironmentWater")
+		auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
+
+		// GUI management
+		if (screen->getID() == "sceneEditorMenuEnvironmentWater")
 		{
-			auto screen = _gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuEnvironmentWater");
-
-			// Buttons hoverability
-			screen->getButton("delete")->setHoverable(_currentWaterID != "");
-
-			// GUI management
-			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
+			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
 			{
-				if (screen->getButton("choose")->isHovered())
+				if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
+				{
+					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuEnvironment");
+				}
+				else if (screen->getButton("choose")->isHovered())
 				{
 					// Retrieve created skies
 					vector<string> waterNames;
@@ -193,10 +194,6 @@ void SceneEditor::_updateWaterMenu()
 					_fe3d.waterEntity_delete(_currentWaterID);
 					_currentWaterID = "";
 				}
-				else if (screen->getButton("back")->isHovered())
-				{
-					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuEnvironment");
-				}
 			}
 
 			// Update water choosing
@@ -214,6 +211,9 @@ void SceneEditor::_updateWaterMenu()
 					_gui.getGlobalScreen()->removeChoiceForm("waterList");
 				}
 			}
+
+			// Buttons hoverability
+			screen->getButton("delete")->setHoverable(_currentWaterID != "");
 
 			// Update water selection
 			_fe3d.waterEntity_select(_currentWaterID);

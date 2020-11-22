@@ -4,14 +4,19 @@
 
 void EnvironmentEditor::_updateSkyMenuMain()
 {
-	if (_gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID() == "skyEditorMenuMain")
-	{
-		auto screen = _gui.getViewport("left")->getWindow("main")->getScreen("skyEditorMenuMain");
+	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-		// GUI management
-		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
+	// GUI management
+	if (screen->getID() == "skyEditorMenuMain")
+	{
+		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
 		{
-			if (screen->getButton("create")->isHovered())
+			if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
+			{
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("environmentEditorMenu");
+				_currentEnvironmentType = EnvironmentType::NONE;
+			}
+			else if (screen->getButton("create")->isHovered())
 			{
 				_skyCreationEnabled = true;
 				_gui.getGlobalScreen()->addValueForm("newSkyName", "New sky name", "", Vec2(0.0f), Vec2(0.5f, 0.1f));
@@ -32,39 +37,34 @@ void EnvironmentEditor::_updateSkyMenuMain()
 				_gui.getGlobalScreen()->addChoiceForm("skyList", "Select sky", Vec2(-0.4f, 0.1f), _skyNames);
 				for (auto& name : _skyNames) { name = "@" + name; }
 			}
-			else if (screen->getButton("back")->isHovered())
-			{
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("environmentEditorMenu");
-				_currentEnvironmentType = EnvironmentType::NONE;
-			}
 		}
 	}
 }
 
 void EnvironmentEditor::_updateSkyMenuChoice()
 {
-	if (_gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID() == "skyEditorMenuChoice")
-	{
-		auto screen = _gui.getViewport("left")->getWindow("main")->getScreen("skyEditorMenuChoice");
+	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-		// GUI management
-		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
+	// GUI management
+	if (screen->getID() == "skyEditorMenuChoice")
+	{
+		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
 		{
-			if (screen->getButton("mesh")->isHovered())
-			{
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("skyEditorMenuMesh");
-			}
-			else if (screen->getButton("options")->isHovered())
-			{
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("skyEditorMenuOptions");
-			}
-			else if (screen->getButton("back")->isHovered())
+			if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 			{
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("skyEditorMenuMain");
 				_fe3d.textEntity_hide(_gui.getGlobalScreen()->getTextfield("selectedSkyName")->getEntityID());
 				_fe3d.skyEntity_select("@@engineBackground");
 				_currentSkyID = "";
 				_skyEditingEnabled = false;
+			}
+			else if (screen->getButton("mesh")->isHovered())
+			{
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("skyEditorMenuMesh");
+			}
+			else if (screen->getButton("options")->isHovered())
+			{
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("skyEditorMenuOptions");
 			}
 		}
 
@@ -75,14 +75,18 @@ void EnvironmentEditor::_updateSkyMenuChoice()
 
 void EnvironmentEditor::_updateSkyMenuMesh()
 {
-	if (_gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID() == "skyEditorMenuMesh")
-	{
-		auto screen = _gui.getViewport("left")->getWindow("main")->getScreen("skyEditorMenuMesh");
+	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-		// GUI management
-		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
+	// GUI management
+	if (screen->getID() == "skyEditorMenuMesh")
+	{
+		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
 		{
-			if (screen->getButton("rightTexture")->isHovered())
+			if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
+			{
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("skyEditorMenuChoice");
+			}
+			else if (screen->getButton("rightTexture")->isHovered())
 			{
 				// Get the loaded filename
 				const string rootDirectory = _fe3d.misc_getRootDirectory();
@@ -226,28 +230,28 @@ void EnvironmentEditor::_updateSkyMenuMesh()
 					}
 				}
 			}
-			else if (screen->getButton("back")->isHovered())
-			{
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("skyEditorMenuChoice");
-			}
 		}
 	}
 }
 
 void EnvironmentEditor::_updateSkyMenuOptions()
 {
-	if (_gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID() == "skyEditorMenuOptions")
-	{
-		// Variables
-		auto screen = _gui.getViewport("left")->getWindow("main")->getScreen("skyEditorMenuOptions");
-		float skyRotationSpeed = _fe3d.skyEntity_getRotationSpeed(_currentSkyID);
-		float skyLightness = _fe3d.skyEntity_getLightness(_currentSkyID);
-		Vec3 skyColor = _fe3d.skyEntity_getColor(_currentSkyID);
+	// Temporary values
+	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
+	float skyRotationSpeed = _fe3d.skyEntity_getRotationSpeed(_currentSkyID);
+	float skyLightness = _fe3d.skyEntity_getLightness(_currentSkyID);
+	Vec3 skyColor = _fe3d.skyEntity_getColor(_currentSkyID);
 
-		// GUI management
-		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
+	// GUI management
+	if (screen->getID() == "skyEditorMenuOptions")
+	{
+		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
 		{
-			if (screen->getButton("rotationSpeed")->isHovered())
+			if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
+			{
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("skyEditorMenuChoice");
+			}
+			else if (screen->getButton("rotationSpeed")->isHovered())
 			{
 				_gui.getGlobalScreen()->addValueForm("rotationSpeed", "Rotation speed", skyRotationSpeed * 100.0f, Vec2(0.0f), Vec2(0.3f, 0.1f));
 			}
@@ -260,10 +264,6 @@ void EnvironmentEditor::_updateSkyMenuOptions()
 				_gui.getGlobalScreen()->addValueForm("colorR", "R(0-255)", skyColor.r * 255.0f, Vec2(-0.25f, 0.0f), Vec2(0.15f, 0.1f));
 				_gui.getGlobalScreen()->addValueForm("colorG", "G(0-255)", skyColor.g * 255.0f, Vec2(0.0f, 0.0f), Vec2(0.15f, 0.1f));
 				_gui.getGlobalScreen()->addValueForm("colorB", "B(0-255)", skyColor.b * 255.0f, Vec2(0.25f, 0.0f), Vec2(0.15f, 0.1f));
-			}
-			else if (screen->getButton("back")->isHovered())
-			{
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("skyEditorMenuChoice");
 			}
 		}
 

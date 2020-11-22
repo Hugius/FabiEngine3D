@@ -63,7 +63,7 @@ void SceneEditor::_updateModelEditing()
 				if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) && !_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 				{
 					_activeModelID = "";
-					_gui.getViewport("right")->getWindow("main")->setActiveScreen("main");
+					_gui.getViewport("right")->getWindow("main")->setActiveScreen("sceneEditorControls");
 				}
 			}
 
@@ -123,7 +123,7 @@ void SceneEditor::_updateModelEditing()
 					else if (_gui.getViewport("right")->getWindow("main")->getScreen("modelPropertiesMenu")->getButton("delete")->isHovered()) // Delete button
 					{
 						_fe3d.gameEntity_delete(_activeModelID);
-						_gui.getViewport("right")->getWindow("main")->setActiveScreen("main");
+						_gui.getViewport("right")->getWindow("main")->setActiveScreen("sceneEditorControls");
 						_activeModelID = "";
 						return;
 					}
@@ -133,7 +133,7 @@ void SceneEditor::_updateModelEditing()
 				if (_fe3d.input_getKeyPressed(InputType::KEY_DELETE))
 				{
 					_fe3d.gameEntity_delete(_activeModelID);
-					_gui.getViewport("right")->getWindow("main")->setActiveScreen("main");
+					_gui.getViewport("right")->getWindow("main")->setActiveScreen("sceneEditorControls");
 					_activeModelID = "";
 					return;
 				}
@@ -203,7 +203,7 @@ void SceneEditor::_updateModelEditing()
 				// Reset when user wants to place models again
 				for (auto& entityID : _fe3d.gameEntity_getAllIDs())
 				{
-					_gui.getViewport("right")->getWindow("main")->setActiveScreen("main");
+					_gui.getViewport("right")->getWindow("main")->setActiveScreen("sceneEditorControls");
 					_fe3d.gameEntity_setLightness(entityID, _fe3d.gameEntity_getOriginalLightness(entityID));
 					_selectedModelLightnessMultiplier = 1;
 					_activeModelID = "";

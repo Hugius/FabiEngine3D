@@ -13,27 +13,26 @@ void ScriptEditor::_updateGUI()
 {
 	if (_isLoaded)
 	{
-		// Main screen
-		auto leftWindow = _gui.getViewport("left")->getWindow("main");
-		auto mainScreen = leftWindow->getScreen("scriptEditorMenuMain");
-		
-		// Buttons hoverability
-		mainScreen->getButton("deleteScript")->setHoverable(_currentScriptFileID != "");
+		auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-		// Check if LMB is pressed
-		if (!_gui.getGlobalScreen()->isFocused())
+		// GUI management
+		if (screen->getID() == "scriptEditorMenuMain")
 		{
-			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
+			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
 			{
-				if (mainScreen->getButton("createScript")->isHovered())
+				if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
+				{
+					_gui.getGlobalScreen()->addAnswerForm("exitScriptEditor", "Save changes?", Vec2(0.0f, 0.25f));
+				}
+				else if (screen->getButton("createScript")->isHovered())
 				{
 					_gui.getGlobalScreen()->addValueForm("newScriptName", "New script name", "", Vec2(0.0f), Vec2(0.5f, 0.1f));
 				}
-				else if (mainScreen->getButton("editScript")->isHovered())
+				else if (screen->getButton("editScript")->isHovered())
 				{
 					_gui.getGlobalScreen()->addChoiceForm("scriptFileList", "Choose script", Vec2(0.0f), _script.getAllScriptFileIDs());
 				}
-				else if (mainScreen->getButton("deleteScript")->isHovered())
+				else if (screen->getButton("deleteScript")->isHovered())
 				{
 					_scriptFileNamesToDelete.push_back(_currentScriptFileID);
 					_fe3d.billboardEntity_deleteAll();
@@ -41,24 +40,23 @@ void ScriptEditor::_updateGUI()
 					_isWritingScript = false;
 					_currentScriptFileID = "";
 				}
-				else if (mainScreen->getButton("back")->isHovered())
-				{
-					_gui.getGlobalScreen()->addAnswerForm("exitScriptEditor", "Save changes?", Vec2(0.0f, 0.25f));
-				}
 			}
-		}
 
-		// Check if user wants to save changes
-		if (_gui.getGlobalScreen()->isAnswerFormConfirmed("exitScriptEditor"))
-		{
-			saveScriptsToFile();
-			unload();
-			leftWindow->setActiveScreen("main");
-		}
-		else if (_gui.getGlobalScreen()->isAnswerFormCancelled("exitScriptEditor"))
-		{
-			unload();
-			leftWindow->setActiveScreen("main");
+			// Buttons hoverability
+			screen->getButton("deleteScript")->setHoverable(_currentScriptFileID != "");
+
+			// Check if user wants to save changes
+			if (_gui.getGlobalScreen()->isAnswerFormConfirmed("exitScriptEditor"))
+			{
+				saveScriptsToFile();
+				unload();
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
+			}
+			else if (_gui.getGlobalScreen()->isAnswerFormCancelled("exitScriptEditor"))
+			{
+				unload();
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
+			}
 		}
 	}
 }

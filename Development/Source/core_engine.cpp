@@ -12,19 +12,14 @@ void CoreEngine::_start()
 	_isRunning = true;
 
 	// Variables
-	std::chrono::high_resolution_clock::time_point previous = std::chrono::high_resolution_clock::now();
+	auto previous = std::chrono::high_resolution_clock::now();
 	float lag = 0.0f;
 
 	// Main game-loop
 	while (_isRunning)
 	{
-		// Calculate timing values
-		std::chrono::high_resolution_clock::time_point current = std::chrono::high_resolution_clock::now();
-		std::chrono::duration<float> timeDifference = std::chrono::duration_cast<std::chrono::duration<float>>(current - previous);
-		float elapsedMS = timeDifference.count() * 1000.0f;
-		_deltaTime = elapsedMS;
-		previous = current;
-		lag += elapsedMS;
+		// Start measuring time
+		auto current = std::chrono::high_resolution_clock::now();
 
 		// Update 144 times per second
 		while (lag >= Config::getInst().getUpdateMsPerFrame())
@@ -37,6 +32,12 @@ void CoreEngine::_start()
 
 		// Render at full speed
 		_renderApplication();
+
+		// Calculate timing values
+		auto timeDifference = std::chrono::duration_cast<std::chrono::nanoseconds>(current - previous);
+		_deltaTimeMS = timeDifference.count() / 1000000.0f;
+		previous = current;
+		lag += _deltaTimeMS;
 	}
 
 	// Finish engine controller

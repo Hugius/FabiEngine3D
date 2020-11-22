@@ -1,6 +1,8 @@
 #include "bottom_viewport_controller.hpp"
 #include "left_viewport_controller.hpp"
 
+#include <algorithm>
+
 #define GW(text) LVPC::calcTextWidth(text, 0.04f, 2.0f)
 
 void BottomViewportController::initialize()
@@ -42,21 +44,23 @@ void BottomViewportController::initialize()
 
 void BottomViewportController::update()
 {
-	// Update FPS
-	static float totalFPS = 0.0f;
-	static int fpsCount = 0;
+	// Update fps display
+	static vector<float> fpsList;
 	if (_fe3d.misc_checkInterval("fps", 50))
 	{
+		// Calculate median
+		std::sort(fpsList.begin(), fpsList.end());
+		float fps = fpsList.empty() ? -1.0f : fpsList[24];
+
+		// Display FPS
 		string fpsTextID = _statsScreen->getTextfield("fps")->getEntityID();
-		string text = "FPS: " + to_string(static_cast<int>(totalFPS / fpsCount));
+		string text = "FPS: " + to_string(static_cast<int>(fps));
 		_fe3d.textEntity_setTextContent(fpsTextID, text, _charSize.x, _charSize.y);
-		totalFPS = 0.0f;
-		fpsCount = 0;
+		fpsList.clear();
 	}
 	else
 	{
-		totalFPS += _fe3d.misc_getFPS();
-		fpsCount++;
+		fpsList.push_back(_fe3d.misc_getFPS());
 	}
 
 	// Update GPU stats

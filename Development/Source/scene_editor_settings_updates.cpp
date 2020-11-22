@@ -6,15 +6,20 @@ void SceneEditor::_updateMainSettingsMenu()
 {
 	if (_isLoaded)
 	{
-		if (_gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID() == "sceneEditorMenuSettings")
-		{
-			auto screen = _gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuSettings");
-			float lodDistance = _fe3d.gameEntity_getLevelOfDetailDistance();
+		// Temporary values
+		auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
+		float lodDistance = _fe3d.gameEntity_getLevelOfDetailDistance();
 
-			// GUI management
-			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
+		// GUI management
+		if (screen->getID() == "sceneEditorMenuSettings")
+		{
+			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
 			{
-				if (screen->getButton("graphics")->isHovered())
+				if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
+				{
+					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuChoice");
+				}
+				else if (screen->getButton("graphics")->isHovered())
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuSettingsGraphics");
 				}
@@ -25,10 +30,6 @@ void SceneEditor::_updateMainSettingsMenu()
 				else if (screen->getButton("lodDistance")->isHovered())
 				{
 					_gui.getGlobalScreen()->addValueForm("lodDistance", "LOD Distance", lodDistance, Vec2(0.0f), Vec2(0.3f, 0.1f));
-				}
-				else if (screen->getButton("back")->isHovered())
-				{
-					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuChoice");
 				}
 			}
 
@@ -46,14 +47,18 @@ void SceneEditor::_updateMainSettingsMenu()
 
 void SceneEditor::_updateGraphicsSettingsMenu()
 {
-	if (_gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID() == "sceneEditorMenuSettingsGraphics")
-	{
-		auto screen = _gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuSettingsGraphics");
+	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
-		// GUI management
-		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
+	// GUI management
+	if (screen->getID() == "sceneEditorMenuSettingsGraphics")
+	{
+		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
 		{
-			if (screen->getButton("shadows")->isHovered())
+			if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
+			{
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuSettings");
+			}
+			else if (screen->getButton("shadows")->isHovered())
 			{
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuSettingsGraphicsShadows");
 				_fe3d.misc_enableShadowFrameRendering();
@@ -78,31 +83,32 @@ void SceneEditor::_updateGraphicsSettingsMenu()
 			{
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuSettingsGraphicsSkyHDR");
 			}
-			else if (screen->getButton("back")->isHovered()) // Back button
-			{
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuSettings");
-			}
 		}
 	}
 }
 
 void SceneEditor::_updateShadowGraphicsSettingsMenu()
 {
-	if (_gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID() == "sceneEditorMenuSettingsGraphicsShadows")
-	{
-		// Current values
-		auto screen = _gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuSettingsGraphicsShadows");
-		bool enabled = _fe3d.gfx_isShadowsEnabled();
-		float size = _fe3d.gfx_getShadowSize();
-		Vec3 position = _fe3d.gfx_getShadowEyePosition();
-		Vec3 center = _fe3d.gfx_getShadowCenter();
-		bool isFollowingCamera = _fe3d.gfx_isShadowFollowingCamera();
-		int interval = _fe3d.gfx_getShadowInterval();
+	// Temporary values
+	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
+	bool enabled = _fe3d.gfx_isShadowsEnabled();
+	float size = _fe3d.gfx_getShadowSize();
+	Vec3 position = _fe3d.gfx_getShadowEyePosition();
+	Vec3 center = _fe3d.gfx_getShadowCenter();
+	bool isFollowingCamera = _fe3d.gfx_isShadowFollowingCamera();
+	int interval = _fe3d.gfx_getShadowInterval();
 
-		// GUI management
-		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
+	// GUI management
+	if (screen->getID() == "sceneEditorMenuSettingsGraphicsShadows")
+	{
+		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
 		{
-			if (screen->getButton("enabled")->isHovered())
+			if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
+			{
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuSettingsGraphics");
+				_fe3d.misc_disableShadowFrameRendering();
+			}
+			else if (screen->getButton("enabled")->isHovered())
 			{
 				enabled = !enabled;
 			}
@@ -129,11 +135,6 @@ void SceneEditor::_updateShadowGraphicsSettingsMenu()
 			else if (screen->getButton("interval")->isHovered())
 			{
 				_gui.getGlobalScreen()->addValueForm("interval", "Frame interval", _fe3d.gfx_getShadowInterval(), Vec2(0.0f, 0.0f), Vec2(0.2f, 0.1f));
-			}
-			else if (screen->getButton("back")->isHovered()) // Back button
-			{
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuSettingsGraphics");
-				_fe3d.misc_disableShadowFrameRendering();
 			}
 		}
 
@@ -180,27 +181,27 @@ void SceneEditor::_updateShadowGraphicsSettingsMenu()
 
 void SceneEditor::_updateMotionblurGraphicsSettingsMenu()
 {
-	if (_gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID() == "sceneEditorMenuSettingsGraphicsMotionblur")
-	{
-		// Current values
-		auto screen = _gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuSettingsGraphicsMotionblur");
-		bool enabled = _fe3d.gfx_isMotionBlurEnabled();
-		float strength = _fe3d.gfx_getMotionBlurStrength();
+	// Temporary values
+	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
+	bool enabled = _fe3d.gfx_isMotionBlurEnabled();
+	float strength = _fe3d.gfx_getMotionBlurStrength();
 
-		// GUI management
-		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
+	// GUI management
+	if (screen->getID() == "sceneEditorMenuSettingsGraphicsMotionblur")
+	{
+		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
 		{
-			if (screen->getButton("enabled")->isHovered())
+			if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
+			{
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuSettingsGraphics");
+			}
+			else if (screen->getButton("enabled")->isHovered())
 			{
 				enabled = !enabled;
 			}
 			else if (screen->getButton("strength")->isHovered())
 			{
 				_gui.getGlobalScreen()->addValueForm("strength", "Strength (%)", strength * 10.0f, Vec2(0.0f), Vec2(0.2f, 0.1f));
-			}
-			else if (screen->getButton("back")->isHovered())
-			{
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuSettingsGraphics");
 			}
 		}
 		
@@ -230,19 +231,23 @@ void SceneEditor::_updateMotionblurGraphicsSettingsMenu()
 
 void SceneEditor::_updateDofGraphicsSettingsMenu()
 {
-	if (_gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID() == "sceneEditorMenuSettingsGraphicsDof")
-	{
-		// Current values
-		auto screen = _gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuSettingsGraphicsDof");
-		bool enabled = _fe3d.gfx_isDofEnabled();
-		bool dynamic = _fe3d.gfx_isDofDynamic();
-		float blurDistance = _fe3d.gfx_getDofBlurDistance();
-		float maxDistance = _fe3d.gfx_getDofMaxDistance();
+	// Temporary values
+	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
+	bool enabled = _fe3d.gfx_isDofEnabled();
+	bool dynamic = _fe3d.gfx_isDofDynamic();
+	float blurDistance = _fe3d.gfx_getDofBlurDistance();
+	float maxDistance = _fe3d.gfx_getDofMaxDistance();
 
-		// GUI management
-		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
+	// GUI management
+	if (screen->getID() == "sceneEditorMenuSettingsGraphicsDof")
+	{
+		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
 		{
-			if (screen->getButton("enabled")->isHovered())
+			if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
+			{
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuSettingsGraphics");
+			}
+			else if (screen->getButton("enabled")->isHovered())
 			{
 				enabled = !enabled;
 			}
@@ -257,10 +262,6 @@ void SceneEditor::_updateDofGraphicsSettingsMenu()
 			else if (screen->getButton("maxDistance")->isHovered())
 			{
 				_gui.getGlobalScreen()->addValueForm("maxDistance", "DOF distance", maxDistance, Vec2(0.0f), Vec2(0.2f, 0.1f));
-			}
-			else if (screen->getButton("back")->isHovered())
-			{
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuSettingsGraphics");
 			}
 		}
 
@@ -292,20 +293,24 @@ void SceneEditor::_updateDofGraphicsSettingsMenu()
 
 void SceneEditor::_updateFogGraphicsSettingsMenu()
 {
-	if (_gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID() == "sceneEditorMenuSettingsGraphicsFog")
-	{
-		// Current values
-		auto screen = _gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuSettingsGraphicsFog");
-		bool enabled = _fe3d.gfx_isFogEnabled();
-		float minDistance = _fe3d.gfx_getFogMinDistance();
-		float maxDistance = _fe3d.gfx_getFogMaxDistance();
-		float defaultFactor = _fe3d.gfx_getFogDefaultFactor();
-		Vec3 color = _fe3d.gfx_getFogColor();
+	// Temporary values
+	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
+	bool enabled = _fe3d.gfx_isFogEnabled();
+	float minDistance = _fe3d.gfx_getFogMinDistance();
+	float maxDistance = _fe3d.gfx_getFogMaxDistance();
+	float defaultFactor = _fe3d.gfx_getFogDefaultFactor();
+	Vec3 color = _fe3d.gfx_getFogColor();
 
-		// GUI management
-		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
+	// GUI management
+	if (screen->getID() == "sceneEditorMenuSettingsGraphicsFog")
+	{
+		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
 		{
-			if (screen->getButton("enabled")->isHovered())
+			if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
+			{
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuSettingsGraphics");
+			}
+			else if (screen->getButton("enabled")->isHovered())
 			{
 				enabled = !enabled;
 			}
@@ -326,10 +331,6 @@ void SceneEditor::_updateFogGraphicsSettingsMenu()
 				_gui.getGlobalScreen()->addValueForm("colorR", "R(0-255)", color.r * 255.0f, Vec2(-0.25f, 0.0f), Vec2(0.2f, 0.1f));
 				_gui.getGlobalScreen()->addValueForm("colorG", "G(0-255)", color.g * 255.0f, Vec2(0.0f, 0.0f), Vec2(0.2f, 0.1f));
 				_gui.getGlobalScreen()->addValueForm("colorB", "B(0-255)", color.b * 255.0f, Vec2(0.25f, 0.0f), Vec2(0.2f, 0.1f));
-			}
-			else if (screen->getButton("back")->isHovered())
-			{
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuSettingsGraphics");
 			}
 		}
 
@@ -376,19 +377,23 @@ void SceneEditor::_updateFogGraphicsSettingsMenu()
 
 void SceneEditor::_updateLensFlareGraphicsSettingsMenu()
 {
-	if (_gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID() == "sceneEditorMenuSettingsGraphicsLensFlare")
-	{
-		// Current values
-		auto screen = _gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuSettingsGraphicsLensFlare");
-		bool enabled = _fe3d.gfx_isLensFlareEnabled();
-		string flareMapPath = _fe3d.gfx_getLensFlareMapPath();
-		float intensity = _fe3d.gfx_getLensFlareIntensity();
-		float multiplier = _fe3d.gfx_getLensFlareMultiplier();
+	// Temporary values
+	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
+	bool enabled = _fe3d.gfx_isLensFlareEnabled();
+	string flareMapPath = _fe3d.gfx_getLensFlareMapPath();
+	float intensity = _fe3d.gfx_getLensFlareIntensity();
+	float multiplier = _fe3d.gfx_getLensFlareMultiplier();
 
-		// GUI management
-		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
+	// GUI management
+	if (screen->getID() == "sceneEditorMenuSettingsGraphicsLensFlare")
+	{
+		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
 		{
-			if (screen->getButton("enabled")->isHovered())
+			if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
+			{
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuSettingsGraphics");
+			}
+			else if (screen->getButton("enabled")->isHovered())
 			{
 				enabled = !enabled;
 			}
@@ -424,10 +429,6 @@ void SceneEditor::_updateLensFlareGraphicsSettingsMenu()
 			else if (screen->getButton("multiplier")->isHovered())
 			{
 				_gui.getGlobalScreen()->addValueForm("multiplier", "Size multiplier (%)", multiplier * 100.0f, Vec2(0.0f), Vec2(0.2f, 0.1f));
-			}
-			else if (screen->getButton("back")->isHovered())
-			{
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuSettingsGraphics");
 			}
 		}
 
@@ -465,27 +466,27 @@ void SceneEditor::_updateLensFlareGraphicsSettingsMenu()
 
 void SceneEditor::_updateskyHdrGraphicsSettingsMenu()
 {
-	if (_gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID() == "sceneEditorMenuSettingsGraphicsSkyHDR")
-	{
-		// Current values
-		auto screen = _gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuSettingsGraphicsSkyHDR");
-		bool enabled = _fe3d.gfx_isSkyHdrEnabled();
-		float intensity = _fe3d.gfx_getSkyHdrBrightnessFactor();
+	// Temporary values
+	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
+	bool enabled = _fe3d.gfx_isSkyHdrEnabled();
+	float intensity = _fe3d.gfx_getSkyHdrBrightnessFactor();
 
-		// GUI management
-		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
+	// GUI management
+	if (screen->getID() == "sceneEditorMenuSettingsGraphicsSkyHDR")
+	{
+		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
 		{
-			if (screen->getButton("enabled")->isHovered())
+			if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
+			{
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuSettingsGraphics");
+			}
+			else if (screen->getButton("enabled")->isHovered())
 			{
 				enabled = !enabled;
 			}
 			else if (screen->getButton("intensity")->isHovered())
 			{
 				_gui.getGlobalScreen()->addValueForm("intensity", "Extra intensity (%)", intensity * 100.0f, Vec2(0.0f), Vec2(0.2f, 0.1f));
-			}
-			else if (screen->getButton("back")->isHovered())
-			{
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuSettingsGraphics");
 			}
 		}
 

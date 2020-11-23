@@ -5,6 +5,7 @@
 #include "environment_editor.hpp"
 #include "model_editor.hpp"
 #include "billboard_editor.hpp"
+#include "audio_editor.hpp"
 #include "transformation_type.hpp"
 
 #include <map>
@@ -13,7 +14,8 @@
 class SceneEditor final
 {
 public:
-	SceneEditor(FabiEngine3D& fe3d, EngineGuiManager& gui, EnvironmentEditor& environmentEditor, ModelEditor& modelEditor, BillboardEditor& billboardEditor);
+	SceneEditor(FabiEngine3D& fe3d, EngineGuiManager& gui, EnvironmentEditor& environmentEditor, 
+		ModelEditor& modelEditor, BillboardEditor& billboardEditor, AudioEditor& audioEditor);
 	~SceneEditor() = default;
 
 	void initializeGUI();
@@ -44,18 +46,25 @@ private:
 
 	// Billboard updates
 	void _updateMainBillboardMenu();
-	void _updateBilboardPlacingMenu();
+	void _updateBillboardPlacingMenu();
 	void _updateBillboardChoosingMenu();
 	void _updateBillboardPlacing();
 	void _updateBillboardEditing();
 
-	// Light updates
+	// Lighting updates
 	void _updateMainLightingMenu();
 	void _updateAmbientLightingMenu();
 	void _updateDirectionalLightingMenu();
 	void _updatePointLightingMenu();
 	void _updateLightPlacing();
 	void _updateLightEditing();
+
+	// Audio updates
+	void _updateMainAudioMenu();
+	void _updateAudioPlacingMenu();
+	void _updateAudioChoosingMenu();
+	void _updateAudioPlacing();
+	void _updateAudioEditing();
 
 	// Settings updates
 	void _updateMainSettingsMenu();
@@ -103,8 +112,10 @@ private:
 	void _updateLightbulbAnimation(const string& modelID, int& multiplier);
 	void _selectModel(const string& modelID);
 	void _activateModel(const string& modelID);
-	void _selectBillboard(const string& modelID);
-	void _activateBillboard(const string& modelID);
+	void _selectBillboard(const string& billboardID);
+	void _activateBillboard(const string& billboardID);
+	void _selectAudiocaster(const string & audioID);
+	void _activateAudiocaster(const string & audioID);
 	void _handleValueChanging(const string& screenID, string buttonID, string wfID, float& value, float adder, float multiplier = 1.0f,
 		float minimum = (std::numeric_limits<float>::lowest)(), float maximum = (std::numeric_limits<float>::max)());
 
@@ -114,6 +125,7 @@ private:
 	EnvironmentEditor& _environmentEditor;
 	ModelEditor& _modelEditor;
 	BillboardEditor& _billboardEditor;
+	AudioEditor& _audioEditor;
 
 	// Environment variables
 	string _currentSkyID = "";
@@ -145,11 +157,26 @@ private:
 	const Vec3 _defaultLightbulbAabbSize = Vec3(1.0f, 1.25f, 1.0f);
 	const float _lightbulbAnimationSpeed = 0.01f;
 	const float _lightingChangingSpeed = 0.01f;
-	const float _colorChangingSpeed = 0.005f;
+	const float _lightingColorChangingSpeed = 0.005f;
 	int _selectedLightSizeMultiplier = 1;
 	int _activeLightSizeMultiplier = 1;
 	string _selectedLightBulbID = "";
 	string _activeLightBulbID = "";
+
+	// Audio variables
+	string _currentPreviewAudiocasterName = "";
+	string _selectedSpeakerID = "";
+	string _activeSpeakerID = "";
+	const string _previewSpeakerID = "@previewAudiocaster";
+	const Vec3 _defaultSpeakerSize = Vec3(1.0f);
+	const Vec3 _defaultSpeakerAabbSize = Vec3(1.25f, 1.25f, 1.0f);
+	const float _defaultAudiocasterDistance = 25.0f;
+	const float _speakerAnimationSpeed = 0.01f;
+	const float _audioVolumeChangingSpeed = 0.01f;
+	const float _audioDistanceChangingSpeed = 0.005f;
+	int _selectedAudioSizeMultiplier = 1;
+	int _activeAudioSizeMultiplier = 1;
+	bool _dontResetSelectedAudiocaster = false;
 
 	// Miscellaneous
 	string _currentProjectName = "";

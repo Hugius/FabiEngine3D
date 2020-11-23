@@ -288,6 +288,9 @@
     <ClCompile Include="Source\model_editor_persistence.cpp" />
     <ClCompile Include="Source\model_editor_updates_aabb.cpp" />
     <ClCompile Include="Source\model_editor_updates_lighting.cpp" />
+    <ClCompile Include="Source\scene_editor_audio_editing.cpp" />
+    <ClCompile Include="Source\scene_editor_audio_placing.cpp" />
+    <ClCompile Include="Source\scene_editor_audio_updates.cpp" />
     <ClCompile Include="Source\scene_editor_billboard_editing.cpp" />
     <ClCompile Include="Source\scene_editor_core.cpp" />
     <ClCompile Include="Source\scene_editor_creation.cpp" />

@@ -4,15 +4,16 @@ void AudioEditor::_updateAudioEditing()
 {
 	if (_isLoaded)
 	{
-		// Temporary values
 		auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
-		bool isExisting = _fe3d.audioEntity_isExisting(_currentAudioID);
-		bool isPlaying = isExisting && _fe3d.audioEntity_isPlaying(_currentAudioID);
-		bool isPaused = isExisting && _fe3d.audioEntity_isPaused(_currentAudioID);
 
-		// GUI management
 		if (screen->getID() == "audioEditorMenuChoice")
 		{
+			// Temporary values
+			bool isExisting = _fe3d.audioEntity_isExisting(_currentAudioID);
+			bool isPlaying = isExisting && _fe3d.audioEntity_isPlaying(_currentAudioID);
+			bool isPaused = isExisting && _fe3d.audioEntity_isPaused(_currentAudioID);
+
+			// GUI management
 			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
 			{
 				if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
@@ -52,7 +53,7 @@ void AudioEditor::_updateAudioEditing()
 							}
 
 							// Create new audio
-							_fe3d.audioEntity_addGlobal(_currentAudioID, newFilePath);
+							_fe3d.audioEntity_add2D(_currentAudioID, newFilePath);
 						}
 						else
 						{

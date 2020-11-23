@@ -5,7 +5,7 @@ void SceneEditor::_updateModelPlacing()
 	if (_isLoaded)
 	{
 		// Only if user is in placement mode
-		if (_currentPreviewModelName != "")
+		if (!_currentPreviewModelName.empty())
 		{
 			// Check if mouse behavior isn't being invalid
 			if (_fe3d.misc_isCursorInsideViewport() && !_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_RIGHT) && !_gui.getGlobalScreen()->isFocused())

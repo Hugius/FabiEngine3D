@@ -3,12 +3,14 @@
 
 #define GW(text) LVPC::calcTextWidth(text, 0.15f, 1.8f)
 
-SceneEditor::SceneEditor(FabiEngine3D& fe3d, EngineGuiManager& gui, EnvironmentEditor& environmentEditor, ModelEditor& modelEditor, BillboardEditor& billboardEditor) :
+SceneEditor::SceneEditor(FabiEngine3D& fe3d, EngineGuiManager& gui, EnvironmentEditor& environmentEditor, 
+	ModelEditor& modelEditor, BillboardEditor& billboardEditor, AudioEditor& audioEditor) :
 	_fe3d(fe3d),
 	_gui(gui),
 	_environmentEditor(environmentEditor),
 	_modelEditor(modelEditor),
-	_billboardEditor(billboardEditor)
+	_billboardEditor(billboardEditor),
+	_audioEditor(audioEditor)
 {
 
 }
@@ -133,8 +135,27 @@ void SceneEditor::initializeGUI()
 	// Left-viewport: mainWindow - sceneEditorMenuLightingPoint
 	screenID = "sceneEditorMenuLightingPoint";
 	leftWindow->addScreen(screenID);
-	leftWindow->getScreen(screenID)->addButton("add", Vec2(0.0f, 0.45f), Vec2(GW("Add light"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Add light", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen(screenID)->addButton("add", Vec2(0.0f, 0.45f), Vec2(GW("Place light"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Place light", LVPC::textColor, LVPC::textHoverColor);
 	leftWindow->getScreen(screenID)->addButton("back", Vec2(0.0f, -0.45f), Vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
+
+	// Left-viewport: mainWindow - sceneEditorMenuAudio
+	screenID = "sceneEditorMenuAudio";
+	leftWindow->addScreen(screenID);
+	leftWindow->getScreen(screenID)->addButton("place", Vec2(0.0f, 0.475f), Vec2(GW("Place audio"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Place audio", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen(screenID)->addButton("choice", Vec2(0.0f, 0.0f), Vec2(GW("Choose audio"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Choose audio", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen(screenID)->addButton("back", Vec2(0.0f, -0.475f), Vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
+
+	// Left-viewport: mainWindow - sceneEditorMenuAudioPlace
+	screenID = "sceneEditorMenuAudioPlace";
+	leftWindow->addScreen(screenID);
+	leftWindow->getScreen(screenID)->addScrollingList("audiocasters", Vec2(0.0f, 0.1f), Vec2(1.8f, 1.75f), Vec3(0.3f), LVPC::buttonColor, LVPC::buttonHoverColor, LVPC::textColor, LVPC::textHoverColor, Vec2(0.15f, 0.1f));
+	leftWindow->getScreen(screenID)->addButton("back", Vec2(0.0f, -0.9f), Vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
+
+	// Left-viewport: mainWindow - sceneEditorMenuAudioChoice
+	screenID = "sceneEditorMenuAudioChoice";
+	leftWindow->addScreen(screenID);
+	leftWindow->getScreen(screenID)->addScrollingList("audiocasters", Vec2(0.0f, 0.1f), Vec2(1.8f, 1.75f), Vec3(0.3f), LVPC::buttonColor, LVPC::buttonHoverColor, LVPC::textColor, LVPC::textHoverColor, Vec2(0.15f, 0.1f));
+	leftWindow->getScreen(screenID)->addButton("back", Vec2(0.0f, -0.9f), Vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
 
 	// Left-viewport: mainWindow - sceneEditorMenuSettings
 	screenID = "sceneEditorMenuSettings";
@@ -251,8 +272,8 @@ void SceneEditor::initializeGUI()
 	rightWindow->getScreen(screenID)->addWriteField("y", Vec2(0.0f, -0.5f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
 	rightWindow->getScreen(screenID)->addWriteField("z", Vec2(0.0f, -0.75f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
 
-	// Right-viewport: mainWindow - pointLightPropertiesMenu
-	screenID = "pointLightPropertiesMenu";
+	// Right-viewport: mainWindow - pointlightPropertiesMenu
+	screenID = "pointlightPropertiesMenu";
 	rightWindow->addScreen(screenID);
 	rightWindow->getScreen(screenID)->addTextfield("intensity", Vec2(0.0f, 0.95f), Vec2(1.5f, 0.1f), "Intensity", Vec3(1.0f));
 	rightWindow->getScreen(screenID)->addButton("intensityPlus", Vec2(0.75f, 0.85f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
@@ -287,6 +308,31 @@ void SceneEditor::initializeGUI()
 	rightWindow->getScreen(screenID)->addButton("bMinus", Vec2(-0.75f, -0.725f), Vec2(0.5f, 0.15f), "minus.png", Vec3(1.0f));
 	rightWindow->getScreen(screenID)->addWriteField("b", Vec2(0.0f, -0.725f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
 	rightWindow->getScreen(screenID)->addButton("delete", Vec2(0.0f, -0.9f), Vec2(1.5f, 0.1f), Vec3(0.75f, 0.0f, 0.0f), Vec3(1.0f, 0.25f, 0.25f), "Delete", LVPC::textColor, LVPC::textHoverColor);
+
+	// Right-viewport: mainWindow - audiocasterPropertiesMenu
+	screenID = "audiocasterPropertiesMenu";
+	rightWindow->addScreen(screenID);
+	rightWindow->getScreen(screenID)->addTextfield("volume", Vec2(0.0f, 0.95f), Vec2(1.5f, 0.1f), "Volume", Vec3(1.0f));
+	rightWindow->getScreen(screenID)->addButton("volumePlus", Vec2(0.75f, 0.85f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
+	rightWindow->getScreen(screenID)->addButton("volumeMinus", Vec2(-0.75f, 0.85f), Vec2(0.5f, 0.15f), "minus.png", Vec3(1.0f));
+	rightWindow->getScreen(screenID)->addWriteField("volume", Vec2(0.0f, 0.85f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
+	rightWindow->getScreen(screenID)->addTextfield("distance", Vec2(0.0f, 0.725f), Vec2(1.5f, 0.1f), "Distance", Vec3(1.0f));
+	rightWindow->getScreen(screenID)->addButton("distancePlus", Vec2(0.75f, 0.625f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
+	rightWindow->getScreen(screenID)->addButton("distanceMinus", Vec2(-0.75f, 0.625f), Vec2(0.5f, 0.15f), "minus.png", Vec3(1.0f));
+	rightWindow->getScreen(screenID)->addWriteField("distance", Vec2(0.0f, 0.625f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
+	rightWindow->getScreen(screenID)->addTextfield("x", Vec2(0.0f, 0.5f), Vec2(0.25f, 0.1f), "X", Vec3(1.0f));
+	rightWindow->getScreen(screenID)->addButton("xPlus", Vec2(0.75f, 0.4f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
+	rightWindow->getScreen(screenID)->addButton("xMinus", Vec2(-0.75f, 0.4f), Vec2(0.5f, 0.15f), "minus.png", Vec3(1.0f));
+	rightWindow->getScreen(screenID)->addWriteField("x", Vec2(0.0f, 0.4f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
+	rightWindow->getScreen(screenID)->addTextfield("y", Vec2(0.0f, 0.275f), Vec2(0.25f, 0.1f), "Y", Vec3(1.0f));
+	rightWindow->getScreen(screenID)->addButton("yPlus", Vec2(0.75f, 0.175f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
+	rightWindow->getScreen(screenID)->addButton("yMinus", Vec2(-0.75f, 0.175f), Vec2(0.5f, 0.15f), "minus.png", Vec3(1.0f));
+	rightWindow->getScreen(screenID)->addWriteField("y", Vec2(0.0f, 0.175f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
+	rightWindow->getScreen(screenID)->addTextfield("z", Vec2(0.0f, 0.05f), Vec2(0.25f, 0.1f), "Z", Vec3(1.0f));
+	rightWindow->getScreen(screenID)->addButton("zPlus", Vec2(0.75f, -0.05f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
+	rightWindow->getScreen(screenID)->addButton("zMinus", Vec2(-0.75f, -0.05f), Vec2(0.5f, 0.15f), "minus.png", Vec3(1.0f));
+	rightWindow->getScreen(screenID)->addWriteField("z", Vec2(0.0f, -0.05f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
+	rightWindow->getScreen(screenID)->addButton("delete", Vec2(0.0f, -0.175f), Vec2(1.5f, 0.1f), Vec3(0.75f, 0.0f, 0.0f), Vec3(1.0f, 0.25f, 0.25f), "Delete", LVPC::textColor, LVPC::textHoverColor);
 }
 
 void SceneEditor::load()
@@ -308,7 +354,8 @@ void SceneEditor::load()
 		// Check if there is a GAME entity present
 		if (_fe3d.gameEntity_isExisting(modelName))
 		{
-			_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuModelPlace")->getScrollingList("models")->addButton(modelName, modelName.substr(1));
+			_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuModelPlace")->getScrollingList("models")->
+				addButton(modelName, modelName.substr(1));
 		}
 	}
 
@@ -319,7 +366,8 @@ void SceneEditor::load()
 		// Check if there is a BILLBOARD entity present
 		if (_fe3d.billboardEntity_isExisting(billboardName))
 		{
-			_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuBillboardPlace")->getScrollingList("billboards")->addButton(billboardName, billboardName.substr(1));
+			_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuBillboardPlace")->getScrollingList("billboards")->
+				addButton(billboardName, billboardName.substr(1));
 		}
 	}
 
@@ -330,10 +378,22 @@ void SceneEditor::load()
 	_fe3d.gameEntity_setShadowed(_previewPointlightID, false);
 	_fe3d.gameEntity_setDepthMapIncluded(_previewPointlightID, false);
 
+	// Preview audiocaster loading
+	_audioEditor.loadAudioEntitiesFromFile();
+	_fe3d.gameEntity_add(_previewSpeakerID, "engine\\models\\speaker.obj", Vec3(0.0f), Vec3(0.0f), _defaultSpeakerSize, false);
+	_fe3d.gameEntity_setShadowed(_previewSpeakerID, false);
+	_fe3d.gameEntity_setDepthMapIncluded(_previewSpeakerID, false);
+	for (auto& audioName : _audioEditor.getAudioNames())
+	{
+		_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuAudioPlace")->getScrollingList("audiocasters")->
+			addButton(audioName, audioName.substr(1));
+	}
+
 	// Create name textfields
 	_gui.getGlobalScreen()->addTextfield("selectedModelName", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
 	_gui.getGlobalScreen()->addTextfield("selectedBillboardName", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
 	_gui.getGlobalScreen()->addTextfield("selectedPointlightName", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
+	_gui.getGlobalScreen()->addTextfield("selectedAudiocasterName", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
 
 	// Miscellaneous
 	_fe3d.input_clearKeyToggles();
@@ -389,12 +449,15 @@ void SceneEditor::unload()
 	_gui.getGlobalScreen()->deleteTextfield("selectedModelName");
 	_gui.getGlobalScreen()->deleteTextfield("selectedBillboardName");
 	_gui.getGlobalScreen()->deleteTextfield("selectedPointlightName");
+	_gui.getGlobalScreen()->deleteTextfield("selectedAudiocasterName");
 
 	// Miscellaneous
 	_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuModelPlace")->getScrollingList("models")->deleteButtons();
 	_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuModelChoice")->getScrollingList("models")->deleteButtons();
 	_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuBillboardPlace")->getScrollingList("billboards")->deleteButtons();
 	_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuBillboardChoice")->getScrollingList("billboards")->deleteButtons();
+	_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuAudioPlace")->getScrollingList("audiocasters")->deleteButtons();
+	_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuAudioChoice")->getScrollingList("audiocasters")->deleteButtons();
 	_fe3d.misc_disableAabbFrameRendering();
 	_fe3d.misc_disableWireframeRendering();
 	_fe3d.misc_disableDebugRendering();

@@ -19,6 +19,8 @@ public:
 
 	bool isLoaded();
 
+	vector<string> getAudioNames();
+
 private:
 	void _updateMainMenu();
 	void _updateAudioCreation();

@@ -149,7 +149,8 @@ void AudioPlayer::playChunk(AudioChunk& chunk, int loops, int initialVolume, boo
 				{
 					Mix_FadeInChannel(_getChunkChannel(chunk), chunk.getMixChunk(), loops, fadeMillis); // Fade in chunk again on same channel
 				}
-				setChunkVolume(chunk, initialVolume);
+
+				setChunkVolume(chunk, initialVolume); // Set volume
 			}
 		}
 		else // If not playing yet
@@ -166,7 +167,8 @@ void AudioPlayer::playChunk(AudioChunk& chunk, int loops, int initialVolume, boo
 			}
 
 			_channelMap[channel] = chunk.getID(); // Assign to new channel
-			setChunkVolume(chunk, initialVolume);
+
+			setChunkVolume(chunk, initialVolume); // Set volume
 		}
 	}
 }

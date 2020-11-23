@@ -47,9 +47,9 @@ void SceneEditor::_updateLightEditing()
 
 								// Filling writefields
 								Vec3 position = _fe3d.gameEntity_getPosition(ACTIVE_BULB_ID);
-								_gui.getViewport("right")->getWindow("main")->getScreen("pointLightPropertiesMenu")->getWriteField("x")->setTextContent(to_string(static_cast<int>(position.x)));
-								_gui.getViewport("right")->getWindow("main")->getScreen("pointLightPropertiesMenu")->getWriteField("y")->setTextContent(to_string(static_cast<int>(position.y)));
-								_gui.getViewport("right")->getWindow("main")->getScreen("pointLightPropertiesMenu")->getWriteField("z")->setTextContent(to_string(static_cast<int>(position.z)));
+								_gui.getViewport("right")->getWindow("main")->getScreen("pointlightPropertiesMenu")->getWriteField("x")->setTextContent(to_string(static_cast<int>(position.x)));
+								_gui.getViewport("right")->getWindow("main")->getScreen("pointlightPropertiesMenu")->getWriteField("y")->setTextContent(to_string(static_cast<int>(position.y)));
+								_gui.getViewport("right")->getWindow("main")->getScreen("pointlightPropertiesMenu")->getWriteField("z")->setTextContent(to_string(static_cast<int>(position.z)));
 							
 								// Update selected text
 								string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedPointlightName")->getEntityID();
@@ -91,12 +91,12 @@ void SceneEditor::_updateLightEditing()
 			// Update properties screen
 			if (ACTIVE_BULB_ID != "")
 			{
-				_gui.getViewport("right")->getWindow("main")->setActiveScreen("pointLightPropertiesMenu");
+				_gui.getViewport("right")->getWindow("main")->setActiveScreen("pointlightPropertiesMenu");
 
 				// GUI management (pressed)
 				if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 				{
-					if (_gui.getViewport("right")->getWindow("main")->getScreen("pointLightPropertiesMenu")->getButton("delete")->isHovered()) // Delete button
+					if (_gui.getViewport("right")->getWindow("main")->getScreen("pointlightPropertiesMenu")->getButton("delete")->isHovered()) // Delete button
 					{
 						_fe3d.gameEntity_delete(ACTIVE_BULB_ID);
 						_fe3d.lightEntity_delete(ACTIVE_LIGHT_ID);
@@ -113,22 +113,22 @@ void SceneEditor::_updateLightEditing()
 				float distance = _fe3d.lightEntity_getDistanceFactor(ACTIVE_LIGHT_ID);
 
 				// Update value filling and changing
-				_handleValueChanging("pointLightPropertiesMenu", "distancePlus", "distance", distance, _lightingChangingSpeed, 10.0f, 0.0f);
-				_handleValueChanging("pointLightPropertiesMenu", "distanceMinus", "distance", distance, -_lightingChangingSpeed, 10.0f, 0.0f);
-				_handleValueChanging("pointLightPropertiesMenu", "intensityPlus", "intensity", intensity, _lightingChangingSpeed, 10.0f, 0.0f);
-				_handleValueChanging("pointLightPropertiesMenu", "intensityMinus", "intensity", intensity, -_lightingChangingSpeed, 10.0f, 0.0f);
-				_handleValueChanging("pointLightPropertiesMenu", "xPlus", "x", position.x, _movementChangingSpeed);
-				_handleValueChanging("pointLightPropertiesMenu", "xMinus", "x", position.x, -_movementChangingSpeed);
-				_handleValueChanging("pointLightPropertiesMenu", "yPlus", "y", position.y, _movementChangingSpeed);
-				_handleValueChanging("pointLightPropertiesMenu", "yMinus", "y", position.y, -_movementChangingSpeed);
-				_handleValueChanging("pointLightPropertiesMenu", "zPlus", "z", position.z, _movementChangingSpeed);
-				_handleValueChanging("pointLightPropertiesMenu", "zMinus", "z", position.z, -_movementChangingSpeed);
-				_handleValueChanging("pointLightPropertiesMenu", "rPlus", "r", color.r, _colorChangingSpeed, 255.0f, 0.0f, 1.0f);
-				_handleValueChanging("pointLightPropertiesMenu", "rMinus", "r", color.r, -_colorChangingSpeed, 255.0f, 0.0f, 1.0f);
-				_handleValueChanging("pointLightPropertiesMenu", "gPlus", "g", color.g, _colorChangingSpeed, 255.0f, 0.0f, 1.0f);
-				_handleValueChanging("pointLightPropertiesMenu", "gMinus", "g", color.g, -_colorChangingSpeed, 255.0f, 0.0f, 1.0f);
-				_handleValueChanging("pointLightPropertiesMenu", "bPlus", "b", color.b, _colorChangingSpeed, 255.0f, 0.0f, 1.0f);
-				_handleValueChanging("pointLightPropertiesMenu", "bMinus", "b", color.b, -_colorChangingSpeed, 255.0f, 0.0f, 1.0f);
+				_handleValueChanging("pointlightPropertiesMenu", "distancePlus", "distance", distance, _lightingChangingSpeed, 10.0f, 0.0f);
+				_handleValueChanging("pointlightPropertiesMenu", "distanceMinus", "distance", distance, -_lightingChangingSpeed, 10.0f, 0.0f);
+				_handleValueChanging("pointlightPropertiesMenu", "intensityPlus", "intensity", intensity, _lightingChangingSpeed, 10.0f, 0.0f);
+				_handleValueChanging("pointlightPropertiesMenu", "intensityMinus", "intensity", intensity, -_lightingChangingSpeed, 10.0f, 0.0f);
+				_handleValueChanging("pointlightPropertiesMenu", "xPlus", "x", position.x, _movementChangingSpeed);
+				_handleValueChanging("pointlightPropertiesMenu", "xMinus", "x", position.x, -_movementChangingSpeed);
+				_handleValueChanging("pointlightPropertiesMenu", "yPlus", "y", position.y, _movementChangingSpeed);
+				_handleValueChanging("pointlightPropertiesMenu", "yMinus", "y", position.y, -_movementChangingSpeed);
+				_handleValueChanging("pointlightPropertiesMenu", "zPlus", "z", position.z, _movementChangingSpeed);
+				_handleValueChanging("pointlightPropertiesMenu", "zMinus", "z", position.z, -_movementChangingSpeed);
+				_handleValueChanging("pointlightPropertiesMenu", "rPlus", "r", color.r, _lightingColorChangingSpeed, 255.0f, 0.0f, 1.0f);
+				_handleValueChanging("pointlightPropertiesMenu", "rMinus", "r", color.r, -_lightingColorChangingSpeed, 255.0f, 0.0f, 1.0f);
+				_handleValueChanging("pointlightPropertiesMenu", "gPlus", "g", color.g, _lightingColorChangingSpeed, 255.0f, 0.0f, 1.0f);
+				_handleValueChanging("pointlightPropertiesMenu", "gMinus", "g", color.g, -_lightingColorChangingSpeed, 255.0f, 0.0f, 1.0f);
+				_handleValueChanging("pointlightPropertiesMenu", "bPlus", "b", color.b, _lightingColorChangingSpeed, 255.0f, 0.0f, 1.0f);
+				_handleValueChanging("pointlightPropertiesMenu", "bMinus", "b", color.b, -_lightingColorChangingSpeed, 255.0f, 0.0f, 1.0f);
 				
 				// Apply new values
 				_fe3d.gameEntity_setPosition(ACTIVE_BULB_ID, position);

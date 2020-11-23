@@ -95,18 +95,19 @@ void SettingsEditor::update()
 {
 	if (_isLoaded)
 	{
-		// Temporary values
 		auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
-		float mouseSpeed = _fe3d.camera_getMouseSensitivity();
-		int msaaQuality = _fe3d.gfx_getMsaaQuality();
-		int shadowQuality = _fe3d.gfx_getShadowQuality();
-		int reflectionQuality = _fe3d.gfx_getReflectionQuality();
-		int refractionQuality = _fe3d.gfx_getRefractionQuality();
-		int audioChannels = _fe3d.sound_getMaxChannels();
 
-		// GUI management
 		if (screen->getID() == "settingsEditorMenuMain")
 		{
+			// Temporary values
+			float mouseSpeed = _fe3d.camera_getMouseSensitivity();
+			int msaaQuality = _fe3d.gfx_getMsaaQuality();
+			int shadowQuality = _fe3d.gfx_getShadowQuality();
+			int reflectionQuality = _fe3d.gfx_getReflectionQuality();
+			int refractionQuality = _fe3d.gfx_getRefractionQuality();
+			int audioChannels = _fe3d.sound_getMaxChannels();
+
+			// GUI management
 			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
 			{
 				if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))

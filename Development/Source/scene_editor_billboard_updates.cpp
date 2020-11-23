@@ -17,11 +17,11 @@ void SceneEditor::_updateMainBillboardMenu()
 				}
 				else if (screen->getButton("place")->isHovered()) // Place billboard button
 				{
-					_gui.getViewport("left")->getWindow("main")->setActiveScreen("place");
+					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuBillboardPlace");
 				}
 				else if (screen->getButton("choice")->isHovered()) // Choose billboard button
 				{
-					_gui.getViewport("left")->getWindow("main")->setActiveScreen("choice");
+					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuBillboardChoice");
 
 					// Clear all buttons from scrolling list
 					_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuBillboardChoice")->getScrollingList("billboards")->deleteButtons();
@@ -29,7 +29,7 @@ void SceneEditor::_updateMainBillboardMenu()
 					// Add every placed billboard name
 					for (auto& billboardID : _fe3d.billboardEntity_getAllIDs())
 					{
-						// Check if billboard is not a preview billboard
+						// Check if billboard is not a preview
 						if (billboardID[0] != '@')
 						{
 							// Removing the unique number from the billboardID
@@ -45,7 +45,7 @@ void SceneEditor::_updateMainBillboardMenu()
 	}
 }
 
-void SceneEditor::_updateBilboardPlacingMenu()
+void SceneEditor::_updateBillboardPlacingMenu()
 {
 	if (_isLoaded)
 	{

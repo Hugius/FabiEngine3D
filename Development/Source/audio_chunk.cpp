@@ -37,6 +37,12 @@ Mix_Chunk* AudioChunk::getMixChunk() const
 void AudioChunk::setPosition(Vec3 position)
 {
 	_position = position;
+	_hasPosition = true;
+}
+
+void AudioChunk::setMaxDistance(float distance)
+{
+	_maxDistance = distance;
 }
 
 Vec3 AudioChunk::getPosition() const

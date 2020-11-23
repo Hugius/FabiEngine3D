@@ -110,6 +110,14 @@ void SceneEditor::_activateBillboard(const string& billboardID)
 	_fe3d.textEntity_setTextContent(textEntityID, "Active billboard: " + billboardName, 0.025f);
 }
 
+void SceneEditor::_selectAudiocaster(const string& audioID)
+{
+}
+
+void SceneEditor::_activateAudiocaster(const string& audioID)
+{
+}
+
 vector<string> SceneEditor::_loadSceneNames()
 {
 	vector<string> sceneNames;

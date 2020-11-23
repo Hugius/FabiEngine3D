@@ -517,6 +517,15 @@
     <ClCompile Include="Source\ivector2.cpp">
       <Filter>src\Math System</Filter>
     </ClCompile>
+    <ClCompile Include="Source\scene_editor_audio_editing.cpp">
+      <Filter>src\Editor System\Scene Editor\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\scene_editor_audio_updates.cpp">
+      <Filter>src\Editor System\Scene Editor\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\scene_editor_audio_placing.cpp">
+      <Filter>src\Editor System\Scene Editor\Audio</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\obj_loader.hpp">

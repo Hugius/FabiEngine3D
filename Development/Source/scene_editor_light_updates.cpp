@@ -38,14 +38,15 @@ void SceneEditor::_updateAmbientLightingMenu()
 {
 	if (_isLoaded)
 	{
-		// Temporary values
 		auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
-		Vec3 ambientLightingColor = _fe3d.gfx_getAmbientLightingColor();
-		float ambientLightingIntensity = _fe3d.gfx_getAmbientLightingIntensity();
 
-		// GUI management
 		if (screen->getID() == "sceneEditorMenuLightingAmbient")
 		{
+			// Temporary values
+			Vec3 ambientLightingColor = _fe3d.gfx_getAmbientLightingColor();
+			float ambientLightingIntensity = _fe3d.gfx_getAmbientLightingIntensity();
+
+			// GUI management
 			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
 			{
 				if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
@@ -98,16 +99,17 @@ void SceneEditor::_updateDirectionalLightingMenu()
 {
 	if (_isLoaded)
 	{
-		// Temporary values
 		auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
-		Vec3 directionalLightingColor = _fe3d.gfx_getDirectionalLightingColor();
-		Vec3 directionalLightingPosition = _fe3d.gfx_getDirectionalLightingPosition();
-		float directionalLightingIntensity = _fe3d.gfx_getDirectionalLightingIntensity();
-		float billboardSize = _fe3d.billboardEntity_getSize("@@lightSource").x;
 
-		// GUI management
 		if (screen->getID() == "sceneEditorMenuLightingDirectional")
 		{
+			// Temporary values
+			Vec3 directionalLightingColor = _fe3d.gfx_getDirectionalLightingColor();
+			Vec3 directionalLightingPosition = _fe3d.gfx_getDirectionalLightingPosition();
+			float directionalLightingIntensity = _fe3d.gfx_getDirectionalLightingIntensity();
+			float billboardSize = _fe3d.billboardEntity_getSize("@@lightSource").x;
+
+			// GUI management
 			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
 			{
 				if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))

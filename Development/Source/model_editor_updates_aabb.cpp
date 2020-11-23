@@ -2,13 +2,14 @@
 
 void ModelEditor::_updateModelEditingAabb()
 {
-	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
-	Vec3 currentSize = _fe3d.gameEntity_getSize(_currentModelID);
 
-	// GUI management
 	if(screen->getID() == "modelEditorMenuAabb")
 	{
+		// Temporary values
+		Vec3 currentSize = _fe3d.gameEntity_getSize(_currentModelID);
+
+		// GUI management
 		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
 		{
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))

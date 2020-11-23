@@ -235,7 +235,7 @@ void TopViewportController::_updateCurrentProject()
 		_fe3d.misc_setWindowTitle("FabiEngine3D - " + _currentProjectName);
 	}
 
-	// Go back to main editor screen
+	// Go back to main menu
 	_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
 
 	// Unload environment editor

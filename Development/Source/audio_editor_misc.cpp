@@ -10,6 +10,11 @@ bool AudioEditor::isLoaded()
 	return _isLoaded;
 }
 
+vector<string> AudioEditor::getAudioNames()
+{
+	return _audioNames;
+}
+
 void AudioEditor::_updateMiscellaneous()
 {
 	if (_isLoaded)

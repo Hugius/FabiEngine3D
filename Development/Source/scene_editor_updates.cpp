@@ -21,7 +21,7 @@ void SceneEditor::update()
 
 	// Billboard updates
 	_updateMainBillboardMenu();
-	_updateBilboardPlacingMenu();
+	_updateBillboardPlacingMenu();
 	_updateBillboardChoosingMenu();
 	_updateBillboardPlacing();
 	_updateBillboardEditing();
@@ -33,6 +33,13 @@ void SceneEditor::update()
 	_updatePointLightingMenu();
 	_updateLightPlacing();
 	_updateLightEditing();
+
+	// Audio updates
+	_updateMainAudioMenu();
+	_updateAudioPlacingMenu();
+	_updateAudioChoosingMenu();
+	_updateAudioPlacing();
+	_updateAudioEditing();
 
 	// Settings updates
 	_updateMainSettingsMenu();
@@ -174,6 +181,10 @@ void SceneEditor::_updateChoiceMenu()
 				else if (screen->getButton("lighting")->isHovered()) // Lighting button
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuLighting");
+				}
+				else if (screen->getButton("audio")->isHovered()) // Audio button
+				{
+					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuAudio");
 				}
 				else if (screen->getButton("settings")->isHovered()) // Settings button
 				{

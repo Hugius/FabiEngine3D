@@ -81,14 +81,15 @@ void EnvironmentEditor::_updateWaterMenuChoice()
 
 void EnvironmentEditor::_updateWaterMenuMesh()
 {
-	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
-	Vec3 waterPosition = _fe3d.waterEntity_getPosition(_currentWaterID);
-	float waterSize = _fe3d.waterEntity_getSize(_currentWaterID);
 
-	// GUI management
 	if (screen->getID() == "waterEditorMenuMesh")
 	{
+		// Temporary values
+		Vec3 waterPosition = _fe3d.waterEntity_getPosition(_currentWaterID);
+		float waterSize = _fe3d.waterEntity_getSize(_currentWaterID);
+
+		// GUI management
 		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
 		{
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
@@ -145,18 +146,19 @@ void EnvironmentEditor::_updateWaterMenuMesh()
 
 void EnvironmentEditor::_updateWaterMenuEffects()
 {		
-	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
-	float uvRepeat = _fe3d.waterEntity_getUvRepeat(_currentWaterID);
-	bool isReflective = _fe3d.waterEntity_isReflective(_currentWaterID);
-	bool isRefractive = _fe3d.waterEntity_isRefractive(_currentWaterID);
-	bool isWaving = _fe3d.waterEntity_isWaving(_currentWaterID);
-	bool isRippling = _fe3d.waterEntity_isRippling(_currentWaterID);
-	bool isSpecularLighted = _fe3d.waterEntity_isSpecularLighted(_currentWaterID);
 
-	// GUI management
 	if (screen->getID() == "waterEditorMenuEffects")
 	{
+		// Temporary values
+		float uvRepeat = _fe3d.waterEntity_getUvRepeat(_currentWaterID);
+		bool isReflective = _fe3d.waterEntity_isReflective(_currentWaterID);
+		bool isRefractive = _fe3d.waterEntity_isRefractive(_currentWaterID);
+		bool isWaving = _fe3d.waterEntity_isWaving(_currentWaterID);
+		bool isRippling = _fe3d.waterEntity_isRippling(_currentWaterID);
+		bool isSpecularLighted = _fe3d.waterEntity_isSpecularLighted(_currentWaterID);
+
+		// GUI management
 		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
 		{
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
@@ -294,18 +296,19 @@ void EnvironmentEditor::_updateWaterMenuEffects()
 
 void EnvironmentEditor::_updateWaterMenuOptions()
 {
-	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
-	Vec2 speed = _fe3d.waterEntity_getSpeed(_currentWaterID);
-	float transparency = _fe3d.waterEntity_getTransparency(_currentWaterID);
-	Vec3 color = _fe3d.waterEntity_getColor(_currentWaterID);
-	float specularFactor = _fe3d.waterEntity_getSpecularLightingFactor(_currentWaterID);
-	float specularIntensity = _fe3d.waterEntity_getSpecularLightingIntensity(_currentWaterID);
-	float waveHeightFactor = _fe3d.waterEntity_getWaveHeightFactor(_currentWaterID);
 
-	// GUI management
 	if (screen->getID() == "waterEditorMenuOptions")
 	{
+		// Temporary values
+		Vec2 speed = _fe3d.waterEntity_getSpeed(_currentWaterID);
+		float transparency = _fe3d.waterEntity_getTransparency(_currentWaterID);
+		Vec3 color = _fe3d.waterEntity_getColor(_currentWaterID);
+		float specularFactor = _fe3d.waterEntity_getSpecularLightingFactor(_currentWaterID);
+		float specularIntensity = _fe3d.waterEntity_getSpecularLightingIntensity(_currentWaterID);
+		float waveHeightFactor = _fe3d.waterEntity_getWaveHeightFactor(_currentWaterID);
+
+		// GUI management
 		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
 		{
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))

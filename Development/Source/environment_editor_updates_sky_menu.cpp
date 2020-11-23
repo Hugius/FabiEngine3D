@@ -236,15 +236,16 @@ void EnvironmentEditor::_updateSkyMenuMesh()
 
 void EnvironmentEditor::_updateSkyMenuOptions()
 {
-	// Temporary values
 	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
-	float skyRotationSpeed = _fe3d.skyEntity_getRotationSpeed(_currentSkyID);
-	float skyLightness = _fe3d.skyEntity_getLightness(_currentSkyID);
-	Vec3 skyColor = _fe3d.skyEntity_getColor(_currentSkyID);
 
-	// GUI management
 	if (screen->getID() == "skyEditorMenuOptions")
 	{
+		// Temporary values
+		float skyRotationSpeed = _fe3d.skyEntity_getRotationSpeed(_currentSkyID);
+		float skyLightness = _fe3d.skyEntity_getLightness(_currentSkyID);
+		Vec3 skyColor = _fe3d.skyEntity_getColor(_currentSkyID);
+
+		// GUI management
 		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
 		{
 			if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))

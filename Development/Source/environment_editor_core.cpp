@@ -155,6 +155,7 @@ void EnvironmentEditor::load()
 	_gui.getGlobalScreen()->addTextfield("selectedTerrainName", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
 	_gui.getGlobalScreen()->addTextfield("selectedWaterName", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
 	_fe3d.input_clearKeyToggles();
+	_gui.getViewport("right")->getWindow("main")->setActiveScreen("environmentEditorControls");
 	_isLoaded = true;
 }
 
@@ -208,5 +209,6 @@ void EnvironmentEditor::unload()
 	_gui.getGlobalScreen()->deleteTextfield("selectedSkyName");
 	_gui.getGlobalScreen()->deleteTextfield("selectedTerrainName");
 	_gui.getGlobalScreen()->deleteTextfield("selectedWaterName");
+	_gui.getViewport("right")->getWindow("main")->setActiveScreen("mainMenuControls");
 	_isLoaded = false;
 }

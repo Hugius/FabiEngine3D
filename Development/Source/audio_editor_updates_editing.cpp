@@ -77,6 +77,26 @@ void AudioEditor::_updateAudioEditing()
 					_fe3d.audioEntity_stop(_currentAudioID);
 				}
 			}
+			else
+			{
+				// Controlling audio playback through keyboard
+				if (_fe3d.input_getKeyPressed(InputType::KEY_SPACE) && !isPlaying && !isPaused)
+				{
+					_fe3d.audioEntity_play(_currentAudioID, 0, 50);
+				}
+				else if (_fe3d.input_getKeyPressed(InputType::KEY_R) && isPaused)
+				{
+					_fe3d.audioEntity_resume(_currentAudioID);
+				}
+				else if (_fe3d.input_getKeyPressed(InputType::KEY_P) && isPlaying)
+				{
+					_fe3d.audioEntity_pause(_currentAudioID);
+				}
+				else if (_fe3d.input_getKeyPressed(InputType::KEY_S) && (isPlaying || isPaused))
+				{
+					_fe3d.audioEntity_stop(_currentAudioID);
+				}
+			}
 
 			// Buttons hoverability
 			screen->getButton("play")->setHoverable(!isPlaying && !isPaused);

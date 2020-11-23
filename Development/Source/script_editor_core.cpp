@@ -44,6 +44,7 @@ void ScriptEditor::load()
 	loadScriptsFromFile();
 
 	// Miscellaneous
+	_gui.getViewport("right")->getWindow("main")->setActiveScreen("scriptEditorControls");
 	_isLoaded = true;
 }
 
@@ -69,7 +70,6 @@ void ScriptEditor::unload()
 	_activeActionKey = InputType::NONE;
 	_currentScriptFileID = "";
 	_scrollingAcceleration = 0.0f;
-	_isLoaded = false;
 	_isScriptLoadedFromFile = false;
 	_isWritingScript = false;
 	_singleActionAllowed = true;
@@ -78,4 +78,8 @@ void ScriptEditor::unload()
 	_firstSelectedLineIndex = -1;
 	_lastSelectedLineIndex = -1;
 	_passedFrames = 0;
+
+	// Miscellaneous
+	_gui.getViewport("right")->getWindow("main")->setActiveScreen("mainMenuControls");
+	_isLoaded = false;
 }

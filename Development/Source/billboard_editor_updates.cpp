@@ -186,7 +186,7 @@ void BillboardEditor::_updateBillboardRemoval()
 	{
 		if (_isRemovingBillboard && _currentBillboardID != "")
 		{
-			_gui.getGlobalScreen()->addAnswerForm("removeBillboard", "Are you sure?", Vec2(0.0f));
+			_gui.getGlobalScreen()->addAnswerForm("removeBillboard", "Are you sure?", Vec2(0.0f, 0.25f));
 
 			if (_gui.getGlobalScreen()->isAnswerFormConfirmed("removeBillboard"))
 			{
@@ -204,7 +204,8 @@ void BillboardEditor::_updateBillboardRemoval()
 			}
 			else if (_gui.getGlobalScreen()->isAnswerFormCancelled("removeBillboard"))
 			{
-				_isChoosingBillboard = true;
+				_fe3d.billboardEntity_hide(_currentBillboardID);
+				_isRemovingBillboard = false;
 				_currentBillboardID = "";
 			}
 		}

@@ -14,7 +14,7 @@ shared_ptr<WaterEntity> WaterEntityManager::getEntity(const string& ID)
 
 	if (result == nullptr)
 	{
-		Logger::throwError("Nonexisting WATER entity with ID " + ID + " requested");
+		Logger::throwError("Nonexisting WATER entity with ID \"" + ID + "\" requested");
 	}
 
 	return result;

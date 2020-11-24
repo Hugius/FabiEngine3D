@@ -94,10 +94,10 @@ void EnvironmentEditor::_updateWaterChoosing()
 						_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedWaterName")->getEntityID(),
 							"Water: " + _currentWaterID.substr(1), 0.025f);
 						_fe3d.textEntity_show(_gui.getGlobalScreen()->getTextfield("selectedWaterName")->getEntityID());
-
-						// Show entity
-						_fe3d.waterEntity_select(_currentWaterID);
 					}
+
+					// Show entity
+					_fe3d.waterEntity_select(_currentWaterID);
 
 					// Miscellaneous
 					_gui.getGlobalScreen()->removeChoiceForm("waterList");
@@ -136,7 +136,7 @@ void EnvironmentEditor::_updateWaterRemoval()
 	{
 		if (_waterRemovalEnabled && _currentWaterID != "")
 		{
-			_gui.getGlobalScreen()->addAnswerForm("removeWater", "Are you sure?", Vec2(0.0f));
+			_gui.getGlobalScreen()->addAnswerForm("removeWater", "Are you sure?", Vec2(0.0f, 0.25f));
 
 			if (_gui.getGlobalScreen()->isAnswerFormConfirmed("removeWater"))
 			{
@@ -150,6 +150,7 @@ void EnvironmentEditor::_updateWaterRemoval()
 			}
 			else if (_gui.getGlobalScreen()->isAnswerFormCancelled("removeWater"))
 			{
+				_fe3d.waterEntity_select("");
 				_waterRemovalEnabled = false;
 				_currentWaterID = "";
 			}

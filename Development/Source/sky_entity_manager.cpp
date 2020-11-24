@@ -14,7 +14,7 @@ shared_ptr<SkyEntity> SkyEntityManager::getEntity(const string& ID)
 
 	if (result == nullptr)
 	{
-		Logger::throwError("Nonexisting SKY entity with ID " + ID + " requested");
+		Logger::throwError("Nonexisting SKY entity with ID \"" + ID + "\" requested");
 	}
 
 	return result;

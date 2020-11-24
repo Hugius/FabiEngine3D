@@ -159,7 +159,7 @@ void AudioEditor::_updateAudioRemoval()
 	{
 		if (_isRemovingAudio && _currentAudioID != "")
 		{
-			_gui.getGlobalScreen()->addAnswerForm("removeAudio", "Are you sure?", Vec2(0.0f));
+			_gui.getGlobalScreen()->addAnswerForm("removeAudio", "Are you sure?", Vec2(0.0f, 0.25f));
 
 			if (_gui.getGlobalScreen()->isAnswerFormConfirmed("removeAudio"))
 			{

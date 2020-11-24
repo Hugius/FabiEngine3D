@@ -93,10 +93,10 @@ void EnvironmentEditor::_updateSkyChoosing()
 						_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedSkyName")->getEntityID(),
 							"Sky: " + _currentSkyID.substr(1), 0.025f);
 						_fe3d.textEntity_show(_gui.getGlobalScreen()->getTextfield("selectedSkyName")->getEntityID());
-
-						// Show entity
-						_fe3d.skyEntity_select(_currentSkyID);
 					}
+
+					// Show entity
+					_fe3d.skyEntity_select(_currentSkyID);
 
 					// Miscellaneous
 					_gui.getGlobalScreen()->removeChoiceForm("skyList");
@@ -135,7 +135,7 @@ void EnvironmentEditor::_updateSkyRemoval()
 	{
 		if (_skyRemovalEnabled && _currentSkyID != "")
 		{
-			_gui.getGlobalScreen()->addAnswerForm("removeSky", "Are you sure?", Vec2(0.0f));
+			_gui.getGlobalScreen()->addAnswerForm("removeSky", "Are you sure?", Vec2(0.0f, 0.25f));
 
 			if (_gui.getGlobalScreen()->isAnswerFormConfirmed("removeSky"))
 			{
@@ -149,6 +149,7 @@ void EnvironmentEditor::_updateSkyRemoval()
 			}
 			else if (_gui.getGlobalScreen()->isAnswerFormCancelled("removeSky"))
 			{
+				_fe3d.skyEntity_select("@@engineBackground");
 				_skyRemovalEnabled = false;
 				_currentSkyID = "";
 			}

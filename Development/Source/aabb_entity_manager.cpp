@@ -35,7 +35,7 @@ shared_ptr<AabbEntity> AabbEntityManager::getEntity(const string& ID)
 
 	if (result == nullptr)
 	{
-		Logger::throwError("Nonexisting AABB entity with ID " + ID + " requested");
+		Logger::throwError("Nonexisting AABB entity with ID \"" + ID + "\" requested");
 	}
 
 	return result;

@@ -122,7 +122,7 @@ void SceneEditor::_updateMainMenu()
 					}
 					else if (_isDeletingScene) // Prepare deletion confirmation
 					{
-						_gui.getGlobalScreen()->addAnswerForm("deleteScene", "Are you sure?", Vec2(0.0f));
+						_gui.getGlobalScreen()->addAnswerForm("deleteScene", "Are you sure?", Vec2(0.0f, 0.25f));
 					}
 
 					// Miscellaneous

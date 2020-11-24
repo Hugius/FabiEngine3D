@@ -141,7 +141,7 @@ void BaseEntityManager::deleteEntity(const string& ID)
 	temp[EntityType::LIGHT] = "LIGHT"; temp[EntityType::GUI] = "GUI"; temp[EntityType::TEXT] = "TEXT";
 
 	// Error logging
-	Logger::throwError("Nonexisting " + temp[_type] + " entity with ID " + ID + " requested for removal!");
+	Logger::throwError("Nonexisting " + temp[_type] + " entity with ID \"" + ID + "\" requested for removal!");
 }
 
 void BaseEntityManager::deleteAllEntities()

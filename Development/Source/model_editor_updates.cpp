@@ -285,7 +285,7 @@ void ModelEditor::_updateModelRemoval()
 	{
 		if (_isDeletingModel && _currentModelID != "")
 		{
-			_gui.getGlobalScreen()->addAnswerForm("deleteModel", "Are you sure?", Vec2(0.0f));
+			_gui.getGlobalScreen()->addAnswerForm("deleteModel", "Are you sure?", Vec2(0.0f, 0.25f));
 
 			if (_gui.getGlobalScreen()->isAnswerFormConfirmed("deleteModel"))
 			{
@@ -302,6 +302,12 @@ void ModelEditor::_updateModelRemoval()
 			}
 			else if (_gui.getGlobalScreen()->isAnswerFormCancelled("deleteModel"))
 			{
+				// Check if model has game entity
+				if (_fe3d.gameEntity_isExisting(_currentModelID))
+				{
+					_fe3d.gameEntity_hide(_currentModelID);
+				}
+
 				_isDeletingModel = false;
 				_currentModelID = "";
 			}

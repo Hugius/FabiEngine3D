@@ -91,12 +91,12 @@ void EnvironmentEditor::_updateTerrainChoosing()
 						_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedTerrainName")->getEntityID(),
 							"Terrain: " + _currentTerrainID.substr(1), 0.025f);
 						_fe3d.textEntity_show(_gui.getGlobalScreen()->getTextfield("selectedTerrainName")->getEntityID());
+					}
 
-						// Only select the terrain if it has a heightmap
-						if (_fe3d.terrainEntity_isExisting(_currentTerrainID))
-						{
-							_fe3d.terrainEntity_select(_currentTerrainID);
-						}
+					// Only select the terrain if it has a heightmap
+					if (_fe3d.terrainEntity_isExisting(_currentTerrainID))
+					{
+						_fe3d.terrainEntity_select(_currentTerrainID);
 					}
 
 					// Miscellaneous
@@ -140,7 +140,7 @@ void EnvironmentEditor::_updateTerrainRemoval()
 	{
 		if (_terrainRemovalEnabled && _currentTerrainID != "")
 		{
-			_gui.getGlobalScreen()->addAnswerForm("removeTerrain", "Are you sure?", Vec2(0.0f));
+			_gui.getGlobalScreen()->addAnswerForm("removeTerrain", "Are you sure?", Vec2(0.0f, 0.25f));
 
 			if (_gui.getGlobalScreen()->isAnswerFormConfirmed("removeTerrain"))
 			{
@@ -154,6 +154,7 @@ void EnvironmentEditor::_updateTerrainRemoval()
 			}
 			else if (_gui.getGlobalScreen()->isAnswerFormCancelled("removeTerrain"))
 			{
+				_fe3d.terrainEntity_select("");
 				_terrainRemovalEnabled = false;
 				_currentTerrainID = "";
 			}

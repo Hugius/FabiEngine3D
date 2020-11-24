@@ -21,7 +21,7 @@ shared_ptr<GuiEntity> GuiEntityManager::getEntity(const string& ID)
 
 	if (result == nullptr)
 	{
-		Logger::throwError("Nonexisting GUI entity with ID " + ID + " requested");
+		Logger::throwError("Nonexisting GUI entity with ID \"" + ID + "\" requested");
 	}
 
 	return result;

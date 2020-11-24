@@ -22,7 +22,7 @@ shared_ptr<TextEntity> TextEntityManager::getEntity(const string& ID)
 
 	if (result == nullptr)
 	{
-		Logger::throwError("Nonexisting TEXT entity with ID " + ID + " requested");
+		Logger::throwError("Nonexisting TEXT entity with ID \"" + ID + "\" requested");
 	}
 
 	return result;

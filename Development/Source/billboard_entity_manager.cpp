@@ -25,7 +25,7 @@ shared_ptr<BillboardEntity> BillboardEntityManager::getEntity(const string& ID)
 
 	if (result == nullptr)
 	{
-		Logger::throwError("Nonexisting BILLBOARD entity with ID " + ID + " requested");
+		Logger::throwError("Nonexisting BILLBOARD entity with ID \"" + ID + "\" requested");
 	}
 
 	return result;

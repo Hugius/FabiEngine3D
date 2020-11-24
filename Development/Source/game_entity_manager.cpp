@@ -13,7 +13,7 @@ shared_ptr<GameEntity> GameEntityManager::getEntity(const string& ID)
 
 	if (result == nullptr)
 	{
-		Logger::throwError("Nonexisting GAME entity with ID " + ID + " requested");
+		Logger::throwError("Nonexisting GAME entity with ID \"" + ID + "\" requested");
 	}
 
 	return result;

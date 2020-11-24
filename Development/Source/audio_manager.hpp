@@ -13,8 +13,8 @@ public:
 
 	void addMusic(const string& fileName);
 	void deleteMusic();
-	void addGlobalChunk(const string& ID, const string& fileName);
-	void addPointChunk(const string& ID, const string& fileName, Vec3 position, float maxDistance);
+	void add2D(const string& ID, const string& fileName);
+	void add3D(const string& ID, const string& fileName, Vec3 position, float maxVolume, float maxDistance);
 	void deleteChunk(const string& ID);
 	void deleteAllChunks();
 

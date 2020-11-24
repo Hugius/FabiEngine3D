@@ -11,10 +11,11 @@ class AudioChunk final
 {
 public:
 	AudioChunk(const string& ID, const string& filePath, Mix_Chunk* chunk);
-	AudioChunk(const string& ID, const string& filePath, Mix_Chunk* chunk, Vec3 position, float maxDistance);
+	AudioChunk(const string& ID, const string& filePath, Mix_Chunk* chunk, Vec3 position, float maxVolume, float maxDistance);
 
 	void setPosition(Vec3 position);
 	void setMaxDistance(float distance);
+	void setMaxVolume(float volume);
 
 	const string& getID() const;
 	const string& getFilePath() const;
@@ -24,6 +25,7 @@ public:
 	Vec3 getPosition() const;
 
 	float getMaxDistance() const;
+	float getMaxVolume() const;
 
 	bool hasPosition() const;
 
@@ -36,6 +38,7 @@ private:
 	Vec3 _position = Vec3(0.0f);
 
 	float _maxDistance = 0.0f;
+	float _maxVolume = 1.0f;
 
 	bool _hasPosition = false;
 };

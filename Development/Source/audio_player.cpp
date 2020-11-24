@@ -87,13 +87,13 @@ void AudioPlayer::update(CameraManager& camera, std::vector<AudioChunk>& chunks,
 				float yDiff = fabsf(chunk.getPosition().y - cameraPos.y); // Difference between camera Y & point Y
 				float zDiff = fabsf(chunk.getPosition().z - cameraPos.z); // Difference between camera Z & point Z
 				float maxDiff = std::max(xDiff, std::max(yDiff, zDiff)); // Maximum difference
-				float volume = 128.0f - ((maxDiff / chunk.getMaxDistance()) * 128.0f); // Calculate volume
-				volume = std::clamp(volume, 0.0f, 128.0f); // Clamp to minimum and maximum
-				setChunkVolume(chunk, int(volume)); // Apply volume
+				float volume = chunk.getMaxVolume() - ((maxDiff / chunk.getMaxDistance()) * chunk.getMaxVolume()); // Calculate volume
+				volume = std::clamp(volume, 0.0f, chunk.getMaxVolume()); // Clamp to minimum and maximum
+				setChunkVolume(chunk, static_cast<int>(volume * 128.0f)); // Apply volume
 
 				// Panning
 				auto cameraFront = camera.getFront(); // From camera vector
-				Matrix44 rotationMatrix = Matrix44::createRotationZ(Math::degreesToRadians(90.0f));
+				Matrix44 rotationMatrix = Matrix44::createRotationY(Math::degreesToRadians(90.0f));
 				Vec3 pointVector = cameraPos - chunk.getPosition(); // To camera vector
 				Vec4 result = rotationMatrix * Vec4(pointVector.x, pointVector.y, pointVector.z, 1.0f);
 				pointVector = Vec3(result.x, result.y, result.z); // Rotate direction

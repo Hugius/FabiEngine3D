@@ -15,7 +15,7 @@ void SceneEditor::_updateBillboardEditing()
 		}
 
 		// User must not be in placement mode
-		if (_currentPreviewModelName == "" && _currentPreviewBillboardName == "" && !_isPlacingPointlight)
+		if (_currentPreviewModelName == "" && _currentPreviewBillboardName == "" && !_isPlacingPointlight && _currentPreviewAudioName == "")
 		{
 			// Check if user selected a billboard
 			for (auto& entityID : _fe3d.billboardEntity_getAllIDs())
@@ -23,8 +23,8 @@ void SceneEditor::_updateBillboardEditing()
 				// Must not be preview entity
 				if (entityID[0] != '@')
 				{
-					auto hoveredID = _fe3d.collision_checkCursorInAny();
-					bool hovered = (hoveredID.size() >= entityID.size()) && (hoveredID.substr(0, entityID.size()) == entityID);
+					auto hoveredAabbID = _fe3d.collision_checkCursorInAny();
+					bool hovered = (hoveredAabbID.size() >= entityID.size()) && (hoveredAabbID.substr(0, entityID.size()) == entityID);
 
 					// Cursor must be in 3D space, no GUI interruptions, no RMB holding down
 					if (hovered && _fe3d.misc_isCursorInsideViewport() &&
@@ -198,7 +198,9 @@ void SceneEditor::_updateBillboardEditing()
 			}
 			else
 			{
-				if (_selectedModelID == "" && _activeModelID == "" && _selectedLightBulbID == "" && _activeLightBulbID == "")
+				if (_selectedModelID == "" && _activeModelID == "" && 
+					_selectedLightBulbID == "" && _activeLightBulbID == "" &&
+					_selectedSpeakerID == "" && _activeSpeakerID == "")
 				{
 					_fe3d.textEntity_show(textEntityID);
 				}

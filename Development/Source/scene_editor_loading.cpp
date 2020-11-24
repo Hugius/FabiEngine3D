@@ -399,9 +399,29 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 				// Add entities
 				_fe3d.gameEntity_add("@" + ID, "engine\\models\\lamp.obj", position, Vec3(0.0f), _defaultLightbulbSize);
 				_fe3d.gameEntity_setShadowed("@" + ID, false);
-				_fe3d.gameEntity_setDepthMapIncluded("@" + ID, false);
 				_fe3d.aabbEntity_bindToGameEntity("@" + ID, Vec3(0.0f), _defaultLightbulbAabbSize, true);
 				_fe3d.lightEntity_add(ID, position, color, intensity, distance);
+			}
+			else if (entityType == "AUDIO")
+			{
+				// Values
+				string ID, audioPath;
+				Vec3 position;
+				float maxVolume, maxDistance;
+
+				// Extract line data
+				iss >> ID >> audioPath >> position.x >> position.y >> position.z >> maxVolume >> maxDistance;
+
+				// Perform empty string & space conversions
+				audioPath = (audioPath == "?") ? "" : audioPath;
+				std::replace(audioPath.begin(), audioPath.end(), '?', ' ');
+
+				// Add entities
+				_fe3d.gameEntity_add("@speaker_" + ID, "engine\\models\\speaker.obj", position, Vec3(0.0f), _defaultSpeakerSize);
+				_fe3d.gameEntity_setShadowed("@speaker_" + ID, false);
+				_fe3d.aabbEntity_bindToGameEntity("@speaker_" + ID, Vec3(0.0f), _defaultSpeakerAabbSize, true);
+				_fe3d.audioEntity_add3D(ID, audioPath, position, maxVolume, maxDistance);
+				_fe3d.audioEntity_play(ID, -1, 0.5f);
 			}
 			else if (entityType == "LOD_DISTANCE")
 			{
@@ -498,104 +518,5 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 	else
 	{
 		_fe3d.logger_throwWarning("Could not load scene file \"" + fileName + "\"!");
-	}
-}
-
-void SceneEditor::clearScene()
-{
-	// Disable graphics
-	_fe3d.gfx_disableAmbientLighting();
-	_fe3d.gfx_disableDirectionalLighting();
-	_fe3d.gfx_disableSpecularLighting();
-	_fe3d.gfx_disablePointLighting();
-	_fe3d.gfx_disableFog();
-	_fe3d.gfx_disableSkyReflections();
-	_fe3d.gfx_disableSceneReflections();
-	_fe3d.gfx_disableLightMapping();
-	_fe3d.gfx_disableNormalMapping();
-	_fe3d.gfx_disableShadows();
-	_fe3d.gfx_disableWaterEffects();
-	_fe3d.gfx_disableSkyHDR();
-	_fe3d.gfx_disableDOF();
-	_fe3d.gfx_disableMotionBlur();
-	_fe3d.gfx_disableLensFlare();
-
-	if (_isLoaded) // Currently in scene editor
-	{
-		// Delete sky entities
-		for (auto& ID : _fe3d.skyEntity_getAllIDs())
-		{
-			if (ID[0] != '@')
-			{
-				_fe3d.skyEntity_delete(ID);
-			}
-		}
-
-		// Delete TERRAIN entities
-		for (auto& ID : _fe3d.terrainEntity_getAllIDs())
-		{
-			if (ID[0] != '@')
-			{
-				_fe3d.terrainEntity_delete(ID);
-			}
-		}
-
-		// Delete WATER entities
-		for (auto& ID : _fe3d.waterEntity_getAllIDs())
-		{
-			if (ID[0] != '@')
-			{
-				_fe3d.waterEntity_delete(ID);
-			}
-		}
-
-		// Delete GAME entities
-		for (auto& ID : _fe3d.gameEntity_getAllIDs())
-		{
-			if (ID[0] != '@')
-			{
-				_fe3d.gameEntity_delete(ID);
-			}
-		}
-
-		// Delete BILLBOARD entities
-		for (auto& ID : _fe3d.billboardEntity_getAllIDs())
-		{
-			if (ID[0] != '@')
-			{
-				_fe3d.billboardEntity_delete(ID);
-			}
-			else if(ID == "@@lightSource") // Hide special "preview" entity
-			{
-				_fe3d.billboardEntity_hide(ID);
-			}
-		}
-
-		// Delete LIGHT entities
-		for (auto& ID : _fe3d.lightEntity_getAllIDs())
-		{
-			if (ID[0] != '@')
-			{
-				_fe3d.lightEntity_delete(ID);
-			}
-		}
-	}
-	else // Playing game
-	{
-		// Delete all sky entities except the engine background
-		for (auto& ID : _fe3d.skyEntity_getAllIDs())
-		{
-			if (ID != "@@engineBackground")
-			{
-				_fe3d.skyEntity_delete(ID);
-			}
-		}
-
-		// Delete all other entities
-		_fe3d.terrainEntity_deleteAll();
-		_fe3d.waterEntity_deleteAll();
-		_fe3d.gameEntity_deleteAll();
-		_fe3d.billboardEntity_deleteAll();
-		_fe3d.lightEntity_deleteAll();
 	}
 }

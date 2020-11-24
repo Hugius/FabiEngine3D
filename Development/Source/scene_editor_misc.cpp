@@ -36,13 +36,13 @@ void SceneEditor::_selectModel(const string& modelID)
 	_fe3d.guiEntity_changeTexture("@@cursor", "engine\\textures\\cursor_pointing.png");
 
 	// Check if nothing is active
-	if (_activeModelID == "" && _activeBillboardID == "" && _activeLightBulbID == "")
+	if (_activeModelID == "" && _activeBillboardID == "" && _activeLightBulbID == "" && _activeSpeakerID == "")
 	{
 		// Removing the unique number from the modelID and updating the text content
 		string modelName = modelID.substr(modelID.find('@') + 1);
 		string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedModelName")->getEntityID();
 		_fe3d.textEntity_show(textEntityID);
-		_fe3d.textEntity_setTextContent(textEntityID, "Selected model : " + modelName, 0.025f);
+		_fe3d.textEntity_setTextContent(textEntityID, "Selected model: " + modelName, 0.025f);
 	}
 }
 
@@ -77,7 +77,7 @@ void SceneEditor::_selectBillboard(const string& billboardID)
 	_fe3d.guiEntity_changeTexture("@@cursor", "engine\\textures\\cursor_pointing.png");
 
 	// Check if nothing is active
-	if (_activeBillboardID == "" && _activeModelID == "" && _activeLightBulbID == "")
+	if (_activeBillboardID == "" && _activeModelID == "" && _activeLightBulbID == "" && _activeSpeakerID == "")
 	{
 		// Removing the unique number from the billboardID and updating the text content
 		string billboardName = billboardID.substr(billboardID.find('@') + 1);
@@ -110,12 +110,44 @@ void SceneEditor::_activateBillboard(const string& billboardID)
 	_fe3d.textEntity_setTextContent(textEntityID, "Active billboard: " + billboardName, 0.025f);
 }
 
-void SceneEditor::_selectAudiocaster(const string& audioID)
+void SceneEditor::_selectAudio(const string& audioID)
 {
+	_selectedSpeakerID = "@speaker_" + audioID;
+
+	// Change cursor
+	_fe3d.guiEntity_changeTexture("@@cursor", "engine\\textures\\cursor_pointing.png");
+
+	// Check if nothing is active
+	if (_activeBillboardID == "" && _activeModelID == "" && _activeLightBulbID == "" && _activeSpeakerID == "")
+	{
+		// Removing the unique number from the audioID and updating the text content
+		string audioName = audioID.substr(audioID.find('@') + 1);
+		string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedAudioName")->getEntityID();
+		_fe3d.textEntity_show(textEntityID);
+		_fe3d.textEntity_setTextContent(textEntityID, "Selected audio: " + audioName, 0.025f);
+	}
 }
 
-void SceneEditor::_activateAudiocaster(const string& audioID)
+void SceneEditor::_activateAudio(const string& audioID)
 {
+	_activeSpeakerID = "@speaker_" + audioID;
+	_transformation = TransformationType::TRANSLATION;
+
+	// Filling writefields
+	Vec3 position = _fe3d.audioEntity_getPosition(_activeSpeakerID.substr(string("@speaker_").size()));
+	float maxVolume = _fe3d.audioEntity_getMaxVolume(_activeSpeakerID.substr(string("@speaker_").size()));
+	float maxDistance = _fe3d.audioEntity_getMaxDistance(_activeSpeakerID.substr(string("@speaker_").size()));
+	_gui.getViewport("right")->getWindow("main")->getScreen("audioPropertiesMenu")->getWriteField("x")->setTextContent(to_string(static_cast<int>(position.x)));
+	_gui.getViewport("right")->getWindow("main")->getScreen("audioPropertiesMenu")->getWriteField("y")->setTextContent(to_string(static_cast<int>(position.y)));
+	_gui.getViewport("right")->getWindow("main")->getScreen("audioPropertiesMenu")->getWriteField("z")->setTextContent(to_string(static_cast<int>(position.z)));
+	_gui.getViewport("right")->getWindow("main")->getScreen("audioPropertiesMenu")->getWriteField("volume")->setTextContent(to_string(static_cast<int>(maxVolume * 100.0f)));
+	_gui.getViewport("right")->getWindow("main")->getScreen("audioPropertiesMenu")->getWriteField("distance")->setTextContent(to_string(static_cast<int>(maxDistance)));
+
+	// Removing the unique number from the billboardID and updating the text content
+	string audioName = audioID.substr(audioID.find('@') + 1);
+	string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedAudioName")->getEntityID();
+	_fe3d.textEntity_show(textEntityID);
+	_fe3d.textEntity_setTextContent(textEntityID, "Active audio: " + audioName, 0.025f);
 }
 
 vector<string> SceneEditor::_loadSceneNames()
@@ -233,7 +265,32 @@ void SceneEditor::_updateLightbulbAnimation(const string& modelID, int& multipli
 	}
 }
 
-void SceneEditor::_handleValueChanging(const string& screenID, string buttonID, string wfID, float& value, float adder, 
+void SceneEditor::_updateSpeakerAnimation(const string& modelID, int& multiplier)
+{
+	// Reset multiplier if nothing active / selected
+	if (modelID == "")
+	{
+		multiplier = 1;
+	}
+
+	// Update speaker animation
+	if (modelID != "")
+	{
+		// Check if model size reached bounds
+		if (_fe3d.gameEntity_getSize(modelID).x > _defaultSpeakerSize.x * 1.5f ||
+			_fe3d.gameEntity_getSize(modelID).x < _defaultSpeakerSize.x)
+		{
+			multiplier *= -1;
+		}
+
+		// Set model size
+		float speed = (_speakerAnimationSpeed * static_cast<float>(multiplier));
+		_fe3d.gameEntity_setSize(modelID, _fe3d.gameEntity_getSize(modelID) + Vec3(speed));
+		_fe3d.aabbEntity_setSize(modelID, _fe3d.aabbEntity_getSize(modelID) + Vec3(speed));
+	}
+}
+
+void SceneEditor::_handleValueChanging(const string& screenID, string buttonID, string writefieldID, float& value, float adder, 
 	float multiplier, float minimum, float maximum)
 {
 	// Plus & minus button handling
@@ -246,7 +303,7 @@ void SceneEditor::_handleValueChanging(const string& screenID, string buttonID, 
 	}
 
 	// Writefield handling
-	auto writefield = _gui.getViewport("right")->getWindow("main")->getScreen(screenID)->getWriteField(wfID);
+	auto writefield = _gui.getViewport("right")->getWindow("main")->getScreen(screenID)->getWriteField(writefieldID);
 	if (writefield->confirmedInput())
 	{
 		if (writefield->getTextContent() != "")
@@ -257,7 +314,7 @@ void SceneEditor::_handleValueChanging(const string& screenID, string buttonID, 
 				writefield->setTextContent(to_string(value));
 			}
 
-			value = float(stoi(writefield->getTextContent())) / multiplier;
+			value = static_cast<float>(stoi(writefield->getTextContent())) / multiplier;
 		}
 	}
 
@@ -265,9 +322,10 @@ void SceneEditor::_handleValueChanging(const string& screenID, string buttonID, 
 	value = std::clamp(value, minimum, maximum);
 
 	// Writefield filling
-	if (!_gui.getViewport("right")->getWindow("main")->getScreen(screenID)->getWriteField(wfID)->isActive())
+	if (!_gui.getViewport("right")->getWindow("main")->getScreen(screenID)->getWriteField(writefieldID)->isActive())
 	{
-		_gui.getViewport("right")->getWindow("main")->getScreen(screenID)->getWriteField(wfID)->setTextContent(to_string(static_cast<int>(value * multiplier)));
+		_gui.getViewport("right")->getWindow("main")->getScreen(screenID)->getWriteField(writefieldID)->
+			setTextContent(to_string(static_cast<int>(value * multiplier)));
 	}
 }
 
@@ -307,5 +365,114 @@ void SceneEditor::_updateMiscellaneous()
 		{
 			_fe3d.misc_disableDebugRendering();
 		}
+	}
+}
+
+void SceneEditor::clearScene()
+{
+	// Disable graphics
+	_fe3d.gfx_disableAmbientLighting();
+	_fe3d.gfx_disableDirectionalLighting();
+	_fe3d.gfx_disableSpecularLighting();
+	_fe3d.gfx_disablePointLighting();
+	_fe3d.gfx_disableFog();
+	_fe3d.gfx_disableSkyReflections();
+	_fe3d.gfx_disableSceneReflections();
+	_fe3d.gfx_disableLightMapping();
+	_fe3d.gfx_disableNormalMapping();
+	_fe3d.gfx_disableShadows();
+	_fe3d.gfx_disableWaterEffects();
+	_fe3d.gfx_disableSkyHDR();
+	_fe3d.gfx_disableDOF();
+	_fe3d.gfx_disableMotionBlur();
+	_fe3d.gfx_disableLensFlare();
+
+	if (_isLoaded) // Currently in scene editor
+	{
+		// Delete sky entities
+		for (auto& ID : _fe3d.skyEntity_getAllIDs())
+		{
+			if (ID[0] != '@')
+			{
+				_fe3d.skyEntity_delete(ID);
+			}
+		}
+
+		// Delete TERRAIN entities
+		for (auto& ID : _fe3d.terrainEntity_getAllIDs())
+		{
+			if (ID[0] != '@')
+			{
+				_fe3d.terrainEntity_delete(ID);
+			}
+		}
+
+		// Delete WATER entities
+		for (auto& ID : _fe3d.waterEntity_getAllIDs())
+		{
+			if (ID[0] != '@')
+			{
+				_fe3d.waterEntity_delete(ID);
+			}
+		}
+
+		// Delete GAME entities
+		for (auto& ID : _fe3d.gameEntity_getAllIDs())
+		{
+			if (ID[0] != '@' || _fe3d.gameEntity_getObjPath(ID) == _lightBulbModelPath || _fe3d.gameEntity_getObjPath(ID) == _speakerModelPath)
+			{
+				_fe3d.gameEntity_delete(ID);
+			}
+		}
+
+		// Delete BILLBOARD entities
+		for (auto& ID : _fe3d.billboardEntity_getAllIDs())
+		{
+			if (ID[0] != '@')
+			{
+				_fe3d.billboardEntity_delete(ID);
+			}
+			else if (ID == "@@lightSource") // Hide special "preview" entity
+			{
+				_fe3d.billboardEntity_hide(ID);
+			}
+		}
+
+		// Delete LIGHT entities
+		for (auto& ID : _fe3d.lightEntity_getAllIDs())
+		{
+			if (ID[0] != '@')
+			{
+				_fe3d.lightEntity_delete(ID);
+			}
+		}
+
+		// Delete AUDIO entities
+		for (auto& ID : _fe3d.audioEntity_getAllIDs())
+		{
+			if (ID[0] != '@')
+			{
+				_fe3d.audioEntity_delete(ID);
+			}
+		}
+	}
+	else // Playing game
+	{
+		// Delete all sky entities except the engine background
+		for (auto& ID : _fe3d.skyEntity_getAllIDs())
+		{
+			if (ID != "@@engineBackground")
+			{
+				_fe3d.skyEntity_delete(ID);
+			}
+		}
+
+		// Delete all other entities
+		_fe3d.terrainEntity_deleteAll();
+		_fe3d.waterEntity_deleteAll();
+		_fe3d.gameEntity_deleteAll();
+		_fe3d.billboardEntity_deleteAll();
+		_fe3d.lightEntity_deleteAll();
+		_fe3d.audioEntity_deleteAll();
 	}
 }

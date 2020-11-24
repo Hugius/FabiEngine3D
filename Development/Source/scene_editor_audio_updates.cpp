@@ -71,11 +71,11 @@ void SceneEditor::_updateAudioPlacingMenu()
 						if (screen->getScrollingList("audiocasters")->getButton(audioName)->isHovered())
 						{
 							// Set new preview audiocaster
-							_currentPreviewAudiocasterName = audioName;
+							_currentPreviewAudioName = audioName;
 							_fe3d.gameEntity_show(_previewSpeakerID);
-							string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedAudiocasterName")->getEntityID();
+							string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedAudioName")->getEntityID();
 							_fe3d.textEntity_show(textEntityID);
-							_fe3d.textEntity_setTextContent(textEntityID, "Audio: " + _currentPreviewAudiocasterName.substr(1), 0.025f);
+							_fe3d.textEntity_setTextContent(textEntityID, "Audio: " + _currentPreviewAudioName.substr(1), 0.025f);
 							break;
 						}
 					}
@@ -118,12 +118,12 @@ void SceneEditor::_updateAudioChoosingMenu()
 						// Check if LMB pressed (activation)
 						if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 						{
-							_activateAudiocaster(audioName);
+							_activateAudio(audioName);
 						}
 						else // Hovering (selection)
 						{
-							_dontResetSelectedAudiocaster = true;
-							_selectAudiocaster(audioName);
+							_dontResetSelectedAudio = true;
+							_selectAudio(audioName);
 						}
 
 						break;
@@ -137,7 +137,7 @@ void SceneEditor::_updateAudioChoosingMenu()
 				if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuAudio");
-					_currentPreviewAudiocasterName = "";
+					_currentPreviewAudioName = "";
 				}
 			}
 		}

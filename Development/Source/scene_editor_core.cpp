@@ -310,13 +310,13 @@ void SceneEditor::initializeGUI()
 	rightWindow->getScreen(screenID)->addButton("delete", Vec2(0.0f, -0.9f), Vec2(1.5f, 0.1f), Vec3(0.75f, 0.0f, 0.0f), Vec3(1.0f, 0.25f, 0.25f), "Delete", LVPC::textColor, LVPC::textHoverColor);
 
 	// Right-viewport: mainWindow - audiocasterPropertiesMenu
-	screenID = "audiocasterPropertiesMenu";
+	screenID = "audioPropertiesMenu";
 	rightWindow->addScreen(screenID);
-	rightWindow->getScreen(screenID)->addTextfield("volume", Vec2(0.0f, 0.95f), Vec2(1.5f, 0.1f), "Volume", Vec3(1.0f));
+	rightWindow->getScreen(screenID)->addTextfield("volume", Vec2(0.0f, 0.95f), Vec2(1.5f, 0.1f), "Max volume", Vec3(1.0f));
 	rightWindow->getScreen(screenID)->addButton("volumePlus", Vec2(0.75f, 0.85f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
 	rightWindow->getScreen(screenID)->addButton("volumeMinus", Vec2(-0.75f, 0.85f), Vec2(0.5f, 0.15f), "minus.png", Vec3(1.0f));
 	rightWindow->getScreen(screenID)->addWriteField("volume", Vec2(0.0f, 0.85f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
-	rightWindow->getScreen(screenID)->addTextfield("distance", Vec2(0.0f, 0.725f), Vec2(1.5f, 0.1f), "Distance", Vec3(1.0f));
+	rightWindow->getScreen(screenID)->addTextfield("distance", Vec2(0.0f, 0.725f), Vec2(1.5f, 0.1f), "Max distance", Vec3(1.0f));
 	rightWindow->getScreen(screenID)->addButton("distancePlus", Vec2(0.75f, 0.625f), Vec2(0.5f, 0.15f), "plus.png", Vec3(1.0f));
 	rightWindow->getScreen(screenID)->addButton("distanceMinus", Vec2(-0.75f, 0.625f), Vec2(0.5f, 0.15f), "minus.png", Vec3(1.0f));
 	rightWindow->getScreen(screenID)->addWriteField("distance", Vec2(0.0f, 0.625f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
@@ -374,15 +374,13 @@ void SceneEditor::load()
 	// Preview pointlight loading
 	_fe3d.lightEntity_add(_previewPointlightID);
 	_fe3d.lightEntity_hide(_previewPointlightID);
-	_fe3d.gameEntity_add(_previewPointlightID, "engine\\models\\lamp.obj", Vec3(0.0f), Vec3(0.0f), _defaultLightbulbSize, false);
+	_fe3d.gameEntity_add(_previewPointlightID, _lightBulbModelPath, Vec3(0.0f), Vec3(0.0f), _defaultLightbulbSize, false);
 	_fe3d.gameEntity_setShadowed(_previewPointlightID, false);
-	_fe3d.gameEntity_setDepthMapIncluded(_previewPointlightID, false);
 
-	// Preview audiocaster loading
+	// Preview audio loading
 	_audioEditor.loadAudioEntitiesFromFile();
-	_fe3d.gameEntity_add(_previewSpeakerID, "engine\\models\\speaker.obj", Vec3(0.0f), Vec3(0.0f), _defaultSpeakerSize, false);
+	_fe3d.gameEntity_add(_previewSpeakerID, _speakerModelPath, Vec3(0.0f), Vec3(0.0f), _defaultSpeakerSize, false);
 	_fe3d.gameEntity_setShadowed(_previewSpeakerID, false);
-	_fe3d.gameEntity_setDepthMapIncluded(_previewSpeakerID, false);
 	for (auto& audioName : _audioEditor.getAudioNames())
 	{
 		_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuAudioPlace")->getScrollingList("audiocasters")->
@@ -392,8 +390,7 @@ void SceneEditor::load()
 	// Create name textfields
 	_gui.getGlobalScreen()->addTextfield("selectedModelName", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
 	_gui.getGlobalScreen()->addTextfield("selectedBillboardName", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
-	_gui.getGlobalScreen()->addTextfield("selectedPointlightName", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
-	_gui.getGlobalScreen()->addTextfield("selectedAudiocasterName", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
+	_gui.getGlobalScreen()->addTextfield("selectedAudioName", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
 
 	// Miscellaneous
 	_fe3d.input_clearKeyToggles();
@@ -448,8 +445,7 @@ void SceneEditor::unload()
 	// Delete name textfields
 	_gui.getGlobalScreen()->deleteTextfield("selectedModelName");
 	_gui.getGlobalScreen()->deleteTextfield("selectedBillboardName");
-	_gui.getGlobalScreen()->deleteTextfield("selectedPointlightName");
-	_gui.getGlobalScreen()->deleteTextfield("selectedAudiocasterName");
+	_gui.getGlobalScreen()->deleteTextfield("selectedAudioName");
 
 	// Miscellaneous
 	_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuModelPlace")->getScrollingList("models")->deleteButtons();

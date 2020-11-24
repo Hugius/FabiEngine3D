@@ -504,38 +504,42 @@ public:
 
 	// Audio entity interface - setters
 	void audioEntity_add2D(const string& ID, const string& audioPath);
-	void audioEntity_add3D(const string& ID, const string& audioPath, Vec3 position, float maxDistance);
+	void audioEntity_add3D(const string& ID, const string& audioPath, Vec3 position, float maxVolume, float maxDistance);
 	void audioEntity_delete(const string& ID);
 	void audioEntity_deleteAll();
-	void audioEntity_play(const string& ID, int loops, int initialVolume, bool noRestart = false, int fadeMillis = 0);
+	void audioEntity_play(const string& ID, int loops, float initialVolume, bool noRestart = false, int fadeMillis = 0);
 	void audioEntity_pause(const string& ID);
 	void audioEntity_resume(const string& ID);
 	void audioEntity_stop(const string& ID, int fadeMillis = 0);
 	void audioEntity_stopAll();
-	void audioEntity_setVolume(const string& ID, int volume);
-	void audioEntity_setCasterPosition(const string& ID, Vec3 position);
+	void audioEntity_setVolume(const string& ID, float volume);
+	void audioEntity_setPosition(const string& ID, Vec3 position);
 	void audioEntity_setMaxDistance(const string& ID, float maxDistance);
+	void audioEntity_setMaxVolume(const string& ID, float volume);
 
 	// Audio entity interface - getters
 	vector<string> audioEntity_getAllIDs();
 	string audioEntity_getFilePath(const string& ID);
-	bool audioEntity_isExisting(const string& ID);
-	bool audioEntity_isPlaying(const string& ID);
-	bool audioEntity_isPaused(const string& ID);
-	int  audioEntity_getVolume(const string& ID);
-	int  audioEntity_getUsedChannelCount();
+	Vec3   audioEntity_getPosition(const string& ID);
+	float  audioEntity_getMaxDistance(const string& ID);
+	bool   audioEntity_isExisting(const string& ID);
+	bool   audioEntity_isPlaying(const string& ID);
+	bool   audioEntity_isPaused(const string& ID);
+	float  audioEntity_getVolume(const string& ID);
+	float  audioEntity_getMaxVolume(const string& ID);
+	int    audioEntity_getUsedChannelCount();
 
 	// Music entity interface - setters
 	void music_addToPlaylist(const string& audioPath);
 	void music_deleteAll();
-	void music_setVolume(int volume);
+	void music_setVolume(float volume);
 	void music_pause();
 	void music_resume();
 
 	// Music interface - getters
-	bool music_isPlaying();
-	bool music_isPaused();
-	int  music_getVolume();
+	bool  music_isPlaying();
+	bool  music_isPaused();
+	float music_getVolume();
 
 	// Sound interface - setters
 	void sound_setAudioEnabled(bool enabled);

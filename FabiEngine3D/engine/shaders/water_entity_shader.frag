@@ -84,7 +84,7 @@ vec4 getMainColor()
 	{
 		// DUDV mapping
 		vec2 distortedTexCoords = f_uv + texture(u_sampler_dudvMap, vec2(f_uv.x + u_rippleOffset.x, f_uv.y + u_rippleOffset.y)).rg * 0.1;
-		vec2 totalDistortion = (texture(u_sampler_dudvMap, distortedTexCoords).rg * 2.0 - 1.0) * 0.025f;
+		vec2 totalDistortion = (texture(u_sampler_dudvMap, distortedTexCoords).rg * 2.0 - 1.0f) * 0.025f;
 		texCoords  += totalDistortion;
 		texCoords.x = clamp(texCoords.x, 0.001f, 0.999f);
 		texCoords.y = clamp(texCoords.y, -0.999f, -0.001f);

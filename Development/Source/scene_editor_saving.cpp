@@ -402,7 +402,7 @@ void SceneEditor::saveSceneToFile()
 			// Point lights
 			for (auto& entityID : _fe3d.lightEntity_getAllIDs())
 			{
-				// Check if not preview model
+				// Check if not preview light
 				if (entityID[0] != '@')
 				{
 					auto position = _fe3d.lightEntity_getPosition(entityID);
@@ -412,7 +412,7 @@ void SceneEditor::saveSceneToFile()
 
 					// Write line to file
 					file <<
-						"POINT " <<
+						"POINT_LIGHT " <<
 						entityID << " " <<
 						position.x << " " <<
 						position.y << " " <<
@@ -421,6 +421,34 @@ void SceneEditor::saveSceneToFile()
 						color.g << " " <<
 						color.b << " " <<
 						intensity << " " <<
+						distance << std::endl;
+				}
+			}
+
+			// Audio casters
+			for (auto& entityID : _fe3d.audioEntity_getAllIDs())
+			{
+				// Check if not preview audio
+				if (entityID[0] != '@')
+				{
+					string audioPath = _fe3d.audioEntity_getFilePath(entityID);
+					auto position = _fe3d.audioEntity_getPosition(entityID);
+					auto volume = _fe3d.audioEntity_getMaxVolume(entityID);
+					auto distance = _fe3d.audioEntity_getMaxDistance(entityID);
+
+					// Perform empty string & space conversions
+					audioPath = (audioPath == "?") ? "" : audioPath;
+					std::replace(audioPath.begin(), audioPath.end(), '?', ' ');
+
+					// Write line to file
+					file <<
+						"AUDIO " <<
+						entityID << " " <<
+						audioPath << " " <<
+						position.x << " " <<
+						position.y << " " <<
+						position.z << " " <<
+						volume << " " <<
 						distance << std::endl;
 				}
 			}

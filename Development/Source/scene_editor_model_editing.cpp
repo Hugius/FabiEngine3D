@@ -15,7 +15,7 @@ void SceneEditor::_updateModelEditing()
 		}
 
 		// User must not be in placement mode
-		if (_currentPreviewModelName == "" && _currentPreviewBillboardName == "" && !_isPlacingPointlight)
+		if (_currentPreviewModelName == "" && _currentPreviewBillboardName == "" && !_isPlacingPointlight && _currentPreviewAudioName == "")
 		{
 			// Check which entity is selected
 			auto hoveredID = _fe3d.collision_checkCursorInAny();
@@ -190,7 +190,9 @@ void SceneEditor::_updateModelEditing()
 			}
 			else
 			{
-				if (_selectedBillboardID == "" && _activeBillboardID == "" && _selectedLightBulbID == "" && _activeLightBulbID == "")
+				if (_selectedBillboardID == "" && _activeBillboardID == "" &&
+					_selectedLightBulbID == "" && _activeLightBulbID == "" &&
+					_selectedSpeakerID == "" && _activeSpeakerID == "")
 				{
 					_fe3d.textEntity_show(textEntityID);
 				}

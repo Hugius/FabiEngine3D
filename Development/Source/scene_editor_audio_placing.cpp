@@ -5,7 +5,7 @@ void SceneEditor::_updateAudioPlacing()
 	if (_isLoaded)
 	{
 		// Only if user is in placement mode
-		if (!_currentPreviewAudiocasterName.empty())
+		if (!_currentPreviewAudioName.empty())
 		{
 			// Check if mouse behavior isn't being invalid
 			if (_fe3d.misc_isCursorInsideViewport() && 
@@ -22,16 +22,16 @@ void SceneEditor::_updateAudioPlacing()
 					newPosition = _fe3d.terrainEntity_getMousePoint() + Vec3(0.0f, 1.0f, 0.0f);
 
 					// Show & play preview audiocaster
-					if (_fe3d.audioEntity_isPaused(_currentPreviewAudiocasterName))
+					if (_fe3d.audioEntity_isPaused(_currentPreviewAudioName))
 					{
-						_fe3d.audioEntity_resume(_currentPreviewAudiocasterName);
+						_fe3d.audioEntity_resume(_currentPreviewAudioName);
 					}
 					else
 					{
-						_fe3d.audioEntity_play(_currentPreviewAudiocasterName, -1, 50, true);
+						_fe3d.audioEntity_play(_currentPreviewAudioName, -1, 50, true);
 					}
-					_fe3d.audioEntity_setCasterPosition(_currentPreviewAudiocasterName, newPosition);
-					_fe3d.audioEntity_setMaxDistance(_currentPreviewAudiocasterName, _defaultAudiocasterDistance);
+					_fe3d.audioEntity_setPosition(_currentPreviewAudioName, newPosition);
+					_fe3d.audioEntity_setMaxDistance(_currentPreviewAudioName, _defaultAudioMaxDistance);
 					_fe3d.gameEntity_show(_previewSpeakerID);
 					_fe3d.gameEntity_setPosition(_previewSpeakerID, newPosition);
 				}
@@ -41,7 +41,7 @@ void SceneEditor::_updateAudioPlacing()
 				{
 					// Add new audiocaster
 				begin: int randomSerial = _fe3d.misc_getUniqueInt(0, INT_MAX);
-					string newID = _currentPreviewAudiocasterName + "@" + to_string(randomSerial);
+					string newID = to_string(randomSerial) + "@" + _currentPreviewAudioName.substr(1);
 
 					// Check if ID not already exists
 					if (_fe3d.audioEntity_isExisting(newID))
@@ -49,19 +49,23 @@ void SceneEditor::_updateAudioPlacing()
 						goto begin;
 					}
 
+					// Stop audio playback
+					if (_fe3d.audioEntity_isPlaying(_currentPreviewAudioName))
+					{
+						_fe3d.audioEntity_stop(_currentPreviewAudioName);
+					}
+
 					// Add audio entity
-					_fe3d.gameEntity_add("@speaker" + newID, _fe3d.gameEntity_getObjPath(_previewSpeakerID), newPosition, Vec3(0.0f), _defaultSpeakerSize);
-					_fe3d.gameEntity_setColor("@speaker" + newID, Vec3(1.0f));
-					_fe3d.gameEntity_setShadowed("@speaker" + newID, false);
-					_fe3d.gameEntity_setDepthMapIncluded("@speaker" + newID, false);
-					_fe3d.aabbEntity_bindToGameEntity("@speaker" + newID, Vec3(0.0f), _defaultSpeakerAabbSize, true);
-					_fe3d.audioEntity_add3D(newID, _fe3d.audioEntity_getFilePath(_currentPreviewAudiocasterName), newPosition, _defaultAudiocasterDistance);
-					_fe3d.audioEntity_play(newID, -1, 50);
+					_fe3d.gameEntity_add("@speaker_" + newID, _fe3d.gameEntity_getObjPath(_previewSpeakerID), newPosition, Vec3(0.0f), _defaultSpeakerSize);
+					_fe3d.gameEntity_setShadowed("@speaker_" + newID, false);
+					_fe3d.aabbEntity_bindToGameEntity("@speaker_" + newID, Vec3(0.0f), _defaultSpeakerAabbSize, true);
+					_fe3d.audioEntity_add3D(newID, _fe3d.audioEntity_getFilePath(_currentPreviewAudioName), newPosition, 0.5f, _defaultAudioMaxDistance);
+					_fe3d.audioEntity_play(newID, -1, 0.5f);
 
 					// Disable placement mode if no terrain availible to choose position from
 					if (_fe3d.terrainEntity_getSelectedID() == "")
 					{
-						_currentPreviewAudiocasterName = "";
+						_currentPreviewAudioName = "";
 					}
 				}
 				else if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_MIDDLE)) // Cancelling audiocaster placement
@@ -70,16 +74,16 @@ void SceneEditor::_updateAudioPlacing()
 					_fe3d.gameEntity_hide(_previewSpeakerID);
 
 					// Stop audio playback
-					if (_fe3d.audioEntity_isPlaying(_currentPreviewAudiocasterName))
+					if (_fe3d.audioEntity_isPlaying(_currentPreviewAudioName))
 					{
-						_fe3d.audioEntity_pause(_currentPreviewAudiocasterName);
+						_fe3d.audioEntity_stop(_currentPreviewAudioName);
 					}
 
 					// Stop placing
-					_currentPreviewAudiocasterName = "";
+					_currentPreviewAudioName = "";
 
 					// Hide audio name
-					string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedAudiocasterName")->getEntityID();
+					string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedAudioName")->getEntityID();
 					_fe3d.textEntity_hide(textEntityID);
 				}
 			}
@@ -88,10 +92,10 @@ void SceneEditor::_updateAudioPlacing()
 				// Hide preview speaker
 				_fe3d.gameEntity_hide(_previewSpeakerID);
 
-				// Stop audio playback
-				if (_fe3d.audioEntity_isPlaying(_currentPreviewAudiocasterName))
+				// Pause audio playback
+				if (_fe3d.audioEntity_isPlaying(_currentPreviewAudioName))
 				{
-					_fe3d.audioEntity_pause(_currentPreviewAudiocasterName);
+					_fe3d.audioEntity_pause(_currentPreviewAudioName);
 				}
 			}
 		}

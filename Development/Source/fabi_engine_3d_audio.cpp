@@ -39,9 +39,9 @@ bool FabiEngine3D::music_isPaused()
 	return _core->_audioPlayer.isMusicPaused();
 }
 
-int FabiEngine3D::music_getVolume()
+float FabiEngine3D::music_getVolume()
 {
-	return _core->_audioPlayer.getMusicVolume();
+	return static_cast<float>(_core->_audioPlayer.getMusicVolume()) / 128.0f;
 }
 
 void FabiEngine3D::music_deleteAll()
@@ -50,20 +50,20 @@ void FabiEngine3D::music_deleteAll()
 	_core->_audioManager.deleteMusic();
 }
 
-void FabiEngine3D::music_setVolume(int volume)
+void FabiEngine3D::music_setVolume(float volume)
 {
-	volume = std::clamp(volume, 0, 100);
-	_core->_audioPlayer.setMusicVolume(int((float(volume) / 100.0f) * 128.0f));
+	volume = std::clamp(volume, 0.0f, 1.0f);
+	_core->_audioPlayer.setMusicVolume(static_cast<int>(volume * 128.0f));
 }
 
 void FabiEngine3D::audioEntity_add2D(const std::string& ID, const std::string& fileName)
 {
-	_core->_audioManager.addGlobalChunk(ID, fileName);
+	_core->_audioManager.add2D(ID, fileName);
 }
 
-void FabiEngine3D::audioEntity_add3D(const std::string& ID, const std::string& fileName, Vec3 position, float maxDistance)
+void FabiEngine3D::audioEntity_add3D(const std::string& ID, const std::string& fileName, Vec3 position, float maxVolume, float maxDistance)
 {
-	_core->_audioManager.addPointChunk(ID, fileName, position, maxDistance);
+	_core->_audioManager.add3D(ID, fileName, position, maxVolume, maxDistance);
 }
 
 void FabiEngine3D::audioEntity_delete(const std::string& ID)
@@ -79,10 +79,10 @@ void FabiEngine3D::audioEntity_delete(const std::string& ID)
 	_core->_audioManager.deleteChunk(ID);
 }
 
-void FabiEngine3D::audioEntity_play(const std::string& ID, int loops, int initialVolume, bool noRestart, int fadeMillis)
+void FabiEngine3D::audioEntity_play(const std::string& ID, int loops, float initialVolume, bool noRestart, int fadeMillis)
 {
-	initialVolume = std::clamp(initialVolume, 0, 100);
-	_core->_audioPlayer.playChunk(_core->_audioManager.getChunk(ID), loops, int((float(initialVolume) / 100.0f) * 128.0f), noRestart, fadeMillis);
+	initialVolume = std::clamp(initialVolume, 0.0f, 1.0f);
+	_core->_audioPlayer.playChunk(_core->_audioManager.getChunk(ID), loops, static_cast<int>(initialVolume * 128.0f), noRestart, fadeMillis);
 }
 
 void FabiEngine3D::audioEntity_pause(const std::string& ID)
@@ -100,13 +100,13 @@ void FabiEngine3D::audioEntity_stop(const std::string& ID, int fadeMillis)
 	_core->_audioPlayer.stopChunk(_core->_audioManager.getChunk(ID), fadeMillis);
 }
 
-void FabiEngine3D::audioEntity_setVolume(const std::string& ID, int volume)
+void FabiEngine3D::audioEntity_setVolume(const std::string& ID, float volume)
 {
-	volume = std::clamp(volume, 0, 100);
-	_core->_audioPlayer.setChunkVolume(_core->_audioManager.getChunk(ID), int((float(volume) / 100.0f) * 128.0f));
+	volume = std::clamp(volume, 0.0f, 1.0f);
+	_core->_audioPlayer.setChunkVolume(_core->_audioManager.getChunk(ID), static_cast<int>(volume * 128.0f));
 }
 
-void FabiEngine3D::audioEntity_setCasterPosition(const std::string& ID, Vec3 position)
+void FabiEngine3D::audioEntity_setPosition(const std::string& ID, Vec3 position)
 {
 	_core->_audioManager.getChunk(ID).setPosition(position);
 }
@@ -114,6 +114,12 @@ void FabiEngine3D::audioEntity_setCasterPosition(const std::string& ID, Vec3 pos
 void FabiEngine3D::audioEntity_setMaxDistance(const std::string& ID, float maxDistance)
 {
 	_core->_audioManager.getChunk(ID).setMaxDistance(maxDistance);
+}
+
+void FabiEngine3D::audioEntity_setMaxVolume(const string& ID, float volume)
+{
+	volume = std::clamp(volume, 0.0f, 1.0f);
+	_core->_audioManager.getChunk(ID).setMaxVolume(volume);
 }
 
 vector<string> FabiEngine3D::audioEntity_getAllIDs()
@@ -133,6 +139,16 @@ string FabiEngine3D::audioEntity_getFilePath(const std::string& ID)
 	return _core->_audioManager.getChunk(ID).getFilePath();
 }
 
+Vec3 FabiEngine3D::audioEntity_getPosition(const string& ID)
+{
+	return _core->_audioManager.getChunk(ID).getPosition();
+}
+
+float FabiEngine3D::audioEntity_getMaxDistance(const string& ID)
+{
+	return _core->_audioManager.getChunk(ID).getMaxDistance();
+}
+
 bool FabiEngine3D::audioEntity_isExisting(const std::string& ID)
 {
 	return _core->_audioManager.isChunkExisting(ID);
@@ -150,9 +166,15 @@ bool FabiEngine3D::audioEntity_isPaused(const std::string& ID)
 	return _core->_audioPlayer.isChunkPaused(_core->_audioManager.getChunk(ID));;
 }
 
-int FabiEngine3D::audioEntity_getVolume(const std::string& ID)
+float FabiEngine3D::audioEntity_getVolume(const std::string& ID)
 {
-	return _core->_audioPlayer.getChunkVolume(_core->_audioManager.getChunk(ID));
+	int volume = _core->_audioPlayer.getChunkVolume(_core->_audioManager.getChunk(ID));
+	return static_cast<float>(volume) / 128.0f;
+}
+
+float FabiEngine3D::audioEntity_getMaxVolume(const string& ID)
+{
+	return _core->_audioManager.getChunk(ID).getMaxVolume();
 }
 
 int FabiEngine3D::audioEntity_getUsedChannelCount()

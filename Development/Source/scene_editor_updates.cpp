@@ -58,94 +58,97 @@ void SceneEditor::update()
 
 void SceneEditor::_updateMainMenu()
 {
-	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
-
-	// GUI management
-	if (screen->getID() == "sceneEditorMenuMain")
+	if (_isLoaded)
 	{
-		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
+		auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
+
+		// GUI management
+		if (screen->getID() == "sceneEditorMenuMain")
 		{
-			if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
+			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
 			{
-				unload();
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
-			}
-			else if (screen->getButton("create")->isHovered())
-			{
-				_gui.getGlobalScreen()->addValueForm("newSceneName", "New scene name", "", Vec2(0.0f), Vec2(0.5f, 0.1f));
-			}
-			else if (screen->getButton("edit")->isHovered())
-			{
-				_isChoosingScene = true;
-				_gui.getGlobalScreen()->addChoiceForm("sceneList", "Select scene", Vec2(0.0f, 0.1f), _loadSceneNames());
-			}
-			else if (screen->getButton("delete")->isHovered())
-			{
-				_isDeletingScene = true;
-				_gui.getGlobalScreen()->addChoiceForm("sceneList", "Select scene", Vec2(0.0f, 0.1f), _loadSceneNames());
-			}
-		}
-
-		// Update scene creation
-		string newSceneName;
-		if (_gui.getGlobalScreen()->checkValueForm("newSceneName", newSceneName, {}))
-		{
-			auto sceneNames = _loadSceneNames();
-
-			// If scene name not existing yet
-			if (std::find(sceneNames.begin(), sceneNames.end(), newSceneName) == sceneNames.end())
-			{
-				_currentSceneName = newSceneName;
-				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuChoice");
-			}
-			else
-			{
-				_fe3d.logger_throwWarning("Scene name \"" + newSceneName + "\" already exists!");
-			}
-		}
-
-		// Update scene choice
-		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
-		{
-			string selectedButtonID = _gui.getGlobalScreen()->getSelectedChoiceFormButtonID("sceneList");
-			if (selectedButtonID != "")
-			{
-				_currentSceneName = selectedButtonID;
-
-				// Load selected scene for editing
-				if (_isChoosingScene)
+				if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 				{
-					loadSceneFromFile(_currentSceneName);
+					unload();
+					_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
+				}
+				else if (screen->getButton("create")->isHovered())
+				{
+					_gui.getGlobalScreen()->addValueForm("newSceneName", "New scene name", "", Vec2(0.0f), Vec2(0.5f, 0.1f));
+				}
+				else if (screen->getButton("edit")->isHovered())
+				{
+					_isChoosingScene = true;
+					_gui.getGlobalScreen()->addChoiceForm("sceneList", "Select scene", Vec2(0.0f, 0.1f), _loadSceneNames());
+				}
+				else if (screen->getButton("delete")->isHovered())
+				{
+					_isDeletingScene = true;
+					_gui.getGlobalScreen()->addChoiceForm("sceneList", "Select scene", Vec2(0.0f, 0.1f), _loadSceneNames());
+				}
+			}
+
+			// Update scene creation
+			string newSceneName;
+			if (_gui.getGlobalScreen()->checkValueForm("newSceneName", newSceneName, {}))
+			{
+				auto sceneNames = _loadSceneNames();
+
+				// If scene name not existing yet
+				if (std::find(sceneNames.begin(), sceneNames.end(), newSceneName) == sceneNames.end())
+				{
+					_currentSceneName = newSceneName;
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuChoice");
 				}
-				else if (_isDeletingScene) // Prepare deletion confirmation
+				else
 				{
-					_gui.getGlobalScreen()->addAnswerForm("deleteScene", "Are you sure?", Vec2(0.0f));
+					_fe3d.logger_throwWarning("Scene name \"" + newSceneName + "\" already exists!");
 				}
+			}
 
-				// Miscellaneous
-				_gui.getGlobalScreen()->removeChoiceForm("sceneList");
-				_isChoosingScene = false;
-			}
-			else if (_gui.getGlobalScreen()->isChoiceFormCancelled("sceneList"))
+			// Update scene choice
+			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 			{
-				_gui.getGlobalScreen()->removeChoiceForm("sceneList");
-			}
-		}
+				string selectedButtonID = _gui.getGlobalScreen()->getSelectedChoiceFormButtonID("sceneList");
+				if (selectedButtonID != "")
+				{
+					_currentSceneName = selectedButtonID;
 
-		// Update scene deletion if chosen
-		if (_isDeletingScene && _currentSceneName != "")
-		{
-			if (_gui.getGlobalScreen()->isAnswerFormConfirmed("deleteScene")) // Confirmed
-			{
-				_deleteSceneFile(_currentSceneName);
-				_isDeletingScene = false;
-				_currentSceneName = "";
+					// Load selected scene for editing
+					if (_isChoosingScene)
+					{
+						loadSceneFromFile(_currentSceneName);
+						_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuChoice");
+					}
+					else if (_isDeletingScene) // Prepare deletion confirmation
+					{
+						_gui.getGlobalScreen()->addAnswerForm("deleteScene", "Are you sure?", Vec2(0.0f));
+					}
+
+					// Miscellaneous
+					_gui.getGlobalScreen()->removeChoiceForm("sceneList");
+					_isChoosingScene = false;
+				}
+				else if (_gui.getGlobalScreen()->isChoiceFormCancelled("sceneList"))
+				{
+					_gui.getGlobalScreen()->removeChoiceForm("sceneList");
+				}
 			}
-			else if (_gui.getGlobalScreen()->isAnswerFormCancelled("deleteScene")) // Cancelled
+
+			// Update scene deletion if chosen
+			if (_isDeletingScene && _currentSceneName != "")
 			{
-				_isDeletingScene = false;
-				_currentSceneName = "";
+				if (_gui.getGlobalScreen()->isAnswerFormConfirmed("deleteScene")) // Confirmed
+				{
+					_deleteSceneFile(_currentSceneName);
+					_isDeletingScene = false;
+					_currentSceneName = "";
+				}
+				else if (_gui.getGlobalScreen()->isAnswerFormCancelled("deleteScene")) // Cancelled
+				{
+					_isDeletingScene = false;
+					_currentSceneName = "";
+				}
 			}
 		}
 	}

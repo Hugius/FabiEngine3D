@@ -29,6 +29,6 @@ void main()
 	}
 	else
 	{
-		o_finalColor = vec4(0.0f, 0.0f, 0.0f, 1.0);
+		o_finalColor = vec4(0.0f, 0.0f, 0.0f, 1.0f);
 	}
 }

@@ -192,7 +192,7 @@ vec3 getDirectionalLighting(vec3 normal, bool noShadowOcclusion)
         // Calculate lighting strength
         vec3 result = vec3(0.0f);
 		vec3 lightDirection = normalize(u_directionalLightPosition - f_pos);
-		float diffuse = max(dot(normal, lightDirection), 0.0);
+		float diffuse = max(dot(normal, lightDirection), 0.0f);
 
         // Apply
         result += vec3(diffuse); // Diffuse
@@ -221,7 +221,7 @@ vec3 getPointLighting(vec3 normal, bool noShadowOcclusion)
 		{
             // Calculate lighting strength
 			vec3  lightDir = normalize(u_pointLightPositions[i] - f_pos);
-			float diffuse = max(dot(normal, lightDir), 0.0);
+			float diffuse = max(dot(normal, lightDir), 0.0f);
 			float distance = length(u_pointLightPositions[i] - f_pos) * u_pointLightDistanceFactors[i];
 			float attenuation = 1.0f / (1.0f + 0.07f * distance + 0.017f * (distance * distance));
 
@@ -261,10 +261,10 @@ vec3 getSpotLighting(vec3 normal, bool noShadowOcclusion)
         float smoothingFactor = 0.9f;
         float spotTheta = dot(lightDirection, normalize(-u_cameraFront));
         float epsilon   = u_maxSpotlightAngle - u_maxSpotlightAngle * smoothingFactor;
-        float intensity = clamp((spotTheta - u_maxSpotlightAngle * smoothingFactor) / epsilon, 0.0, 1.0);  
+        float intensity = clamp((spotTheta - u_maxSpotlightAngle * smoothingFactor) / epsilon, 0.0f, 1.0f);  
 
         // Apply lighting calculations
-        float diffuse = max(dot(normal, lightDirection), 0.0);
+        float diffuse = max(dot(normal, lightDirection), 0.0f);
         float specular = getSpecularValue(u_cameraPosition, normal);
         result += vec3(diffuse * intensity); // Diffuse
         result += vec3(specular * float(noShadowOcclusion) * intensity); // Specular
@@ -421,7 +421,7 @@ vec3 applySkyReflections(vec3 color, vec3 normal)
 		{
 			vec3 viewDir      = normalize(f_pos - u_cameraPosition);
 			vec3 reflectDir   = reflect(viewDir, normal);
-			vec4 reflectColor = vec4(texture(u_sampler_skyMap, vec3(u_skyRotationMatrix * vec4(reflectDir, 1.0f))).rgb, 1.0);
+			vec4 reflectColor = vec4(texture(u_sampler_skyMap, vec3(u_skyRotationMatrix * vec4(reflectDir, 1.0f))).rgb, 1.0f);
 			vec3 mixedColor   = mix(color.rgb, reflectColor.rgb, u_skyReflectionFactor);
 
 			return mixedColor.rgb;

@@ -9,8 +9,11 @@ void SceneEditor::_updateLightEditing()
 	{
 		_selectedLightBulbID = "";
 
-		if (_currentPreviewModelName == "" && _currentPreviewBillboardName == "" && !_isPlacingPointlight)
+		// User must not be in placement mode
+		if (_currentPreviewModelName == "" && _currentPreviewBillboardName == "" && !_isPlacingPointlight && _currentPreviewAudioName == "")
 		{
+			string hoveredAabbID = _fe3d.collision_checkCursorInAny();
+
 			// Check if user selected a lightbulb model
 			for (auto& entityID : _fe3d.gameEntity_getAllIDs())
 			{
@@ -18,19 +21,11 @@ void SceneEditor::_updateLightEditing()
 				if (entityID.substr(0, 11) == "@pointlight")
 				{
 					// Cursor must be in 3D space, no GUI interruptions, no RMB holding down
-					if (_fe3d.collision_checkCursorInAny() == entityID && _fe3d.misc_isCursorInsideViewport() &&
+					if (hoveredAabbID == entityID && _fe3d.misc_isCursorInsideViewport() &&
 						!_gui.getGlobalScreen()->isFocused() && !_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_RIGHT))
 					{
 						// Set new selected lightbulb
 						_selectedLightBulbID = entityID;
-
-						// Check if nothing is active
-						if (_activeLightBulbID == "" && _activeModelID == "" && _activeBillboardID == "")
-						{
-							string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedPointlightName")->getEntityID();
-							_fe3d.textEntity_show(textEntityID);
-							_fe3d.textEntity_setTextContent(textEntityID, "Selected light: " + _selectedLightBulbID.substr(1), 0.025f);
-						}
 
 						// Change cursor
 						_fe3d.guiEntity_changeTexture("@@cursor", "engine\\textures\\cursor_pointing.png");
@@ -50,11 +45,6 @@ void SceneEditor::_updateLightEditing()
 								_gui.getViewport("right")->getWindow("main")->getScreen("pointlightPropertiesMenu")->getWriteField("x")->setTextContent(to_string(static_cast<int>(position.x)));
 								_gui.getViewport("right")->getWindow("main")->getScreen("pointlightPropertiesMenu")->getWriteField("y")->setTextContent(to_string(static_cast<int>(position.y)));
 								_gui.getViewport("right")->getWindow("main")->getScreen("pointlightPropertiesMenu")->getWriteField("z")->setTextContent(to_string(static_cast<int>(position.z)));
-							
-								// Update selected text
-								string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedPointlightName")->getEntityID();
-								_fe3d.textEntity_show(textEntityID);
-								_fe3d.textEntity_setTextContent(textEntityID, "Active light: " + _selectedLightBulbID.substr(1), 0.025f);
 							}
 						}
 					}
@@ -137,20 +127,6 @@ void SceneEditor::_updateLightEditing()
 				_fe3d.lightEntity_setColor(ACTIVE_LIGHT_ID, color);
 				_fe3d.lightEntity_setIntensity(ACTIVE_LIGHT_ID, intensity);
 				_fe3d.lightEntity_setDistanceFactor(ACTIVE_LIGHT_ID, distance);
-			}
-
-			// Check if light is still selected or active
-			string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedPointlightName")->getEntityID();
-			if (_selectedLightBulbID == "" && _activeLightBulbID == "")
-			{
-				_fe3d.textEntity_hide(textEntityID);
-			}
-			else
-			{
-				if (_selectedModelID == "" && _activeModelID == "" && _selectedBillboardID == "" && _activeBillboardID == "")
-				{
-					_fe3d.textEntity_show(textEntityID);
-				}
 			}
 		}
 	}

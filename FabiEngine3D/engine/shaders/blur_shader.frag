@@ -36,8 +36,8 @@ void main()
     {
         for(int i = 1; i < WEIGHT_AMOUNT; ++i)
         {
-            result += texture(u_sampler_diffuse, f_uv + vec2(tex_offset.x * i, 0.0)).rgb * kernel[i] * u_intensity;
-           	result += texture(u_sampler_diffuse, f_uv - vec2(tex_offset.x * i, 0.0)).rgb * kernel[i] * u_intensity;
+            result += texture(u_sampler_diffuse, f_uv + vec2(tex_offset.x * i, 0.0f)).rgb * kernel[i] * u_intensity;
+           	result += texture(u_sampler_diffuse, f_uv - vec2(tex_offset.x * i, 0.0f)).rgb * kernel[i] * u_intensity;
         }
     }
     else
@@ -49,5 +49,5 @@ void main()
         }
     }
 
-    o_finalColor = vec4(result, 1.0);
+    o_finalColor = vec4(result, 1.0f);
 }

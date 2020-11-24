@@ -24,16 +24,16 @@ void AudioManager::addMusic(const string& fileName)
 	_musicList.push_back(AudioMusic(_audioLoader.getMusic(fileName)));
 }
 
-void AudioManager::addGlobalChunk(const std::string& ID, const std::string& fileName)
+void AudioManager::add2D(const std::string& ID, const std::string& fileName)
 {
 	_checkValidAdd(ID);
 	_chunks.push_back(AudioChunk(ID, fileName, _audioLoader.getChunk(fileName)));
 }
 
-void AudioManager::addPointChunk(const std::string& ID, const std::string& fileName, Vec3 position, float maxDistance)
+void AudioManager::add3D(const std::string& ID, const std::string& fileName, Vec3 position, float maxVolume, float maxDistance)
 {
 	_checkValidAdd(ID);
-	_chunks.push_back(AudioChunk(ID, fileName, _audioLoader.getChunk(fileName), position, maxDistance));
+	_chunks.push_back(AudioChunk(ID, fileName, _audioLoader.getChunk(fileName), position, maxVolume, maxDistance));
 }
 
 void AudioManager::deleteChunk(const std::string& ID)

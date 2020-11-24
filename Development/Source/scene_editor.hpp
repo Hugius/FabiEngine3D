@@ -110,13 +110,14 @@ private:
 	void _updateModelBlinking(const string& modelID, int& multiplier);
 	void _updateBillboardBlinking(const string& billboardID, int& multiplier);
 	void _updateLightbulbAnimation(const string& modelID, int& multiplier);
+	void _updateSpeakerAnimation(const string& modelID, int& multiplier);
 	void _selectModel(const string& modelID);
 	void _activateModel(const string& modelID);
 	void _selectBillboard(const string& billboardID);
 	void _activateBillboard(const string& billboardID);
-	void _selectAudiocaster(const string & audioID);
-	void _activateAudiocaster(const string & audioID);
-	void _handleValueChanging(const string& screenID, string buttonID, string wfID, float& value, float adder, float multiplier = 1.0f,
+	void _selectAudio(const string & audioID);
+	void _activateAudio(const string & audioID);
+	void _handleValueChanging(const string& screenID, string buttonID, string writefieldID, float& value, float adder, float multiplier = 1.0f,
 		float minimum = (std::numeric_limits<float>::lowest)(), float maximum = (std::numeric_limits<float>::max)());
 
 	// Instances
@@ -153,6 +154,7 @@ private:
 	// Lighting variables
 	bool _isPlacingPointlight = false;
 	const string _previewPointlightID = "@previewPointlight";
+	const string _lightBulbModelPath = "engine\\models\\lamp.obj";
 	const Vec3 _defaultLightbulbSize = Vec3(1.0f);
 	const Vec3 _defaultLightbulbAabbSize = Vec3(1.0f, 1.25f, 1.0f);
 	const float _lightbulbAnimationSpeed = 0.01f;
@@ -164,19 +166,20 @@ private:
 	string _activeLightBulbID = "";
 
 	// Audio variables
-	string _currentPreviewAudiocasterName = "";
+	string _currentPreviewAudioName = "";
 	string _selectedSpeakerID = "";
 	string _activeSpeakerID = "";
-	const string _previewSpeakerID = "@previewAudiocaster";
+	const string _previewSpeakerID = "@previewSpeaker";
+	const string _speakerModelPath = "engine\\models\\speaker.obj";
 	const Vec3 _defaultSpeakerSize = Vec3(1.0f);
 	const Vec3 _defaultSpeakerAabbSize = Vec3(1.25f, 1.25f, 1.0f);
-	const float _defaultAudiocasterDistance = 25.0f;
+	const float _defaultAudioMaxDistance = 25.0f;
 	const float _speakerAnimationSpeed = 0.01f;
 	const float _audioVolumeChangingSpeed = 0.01f;
-	const float _audioDistanceChangingSpeed = 0.005f;
+	const float _audioDistanceChangingSpeed = 0.05f;
 	int _selectedAudioSizeMultiplier = 1;
 	int _activeAudioSizeMultiplier = 1;
-	bool _dontResetSelectedAudiocaster = false;
+	bool _dontResetSelectedAudio = false;
 
 	// Miscellaneous
 	string _currentProjectName = "";

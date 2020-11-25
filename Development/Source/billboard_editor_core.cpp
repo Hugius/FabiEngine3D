@@ -119,5 +119,7 @@ void BillboardEditor::unload()
 
 	// Miscellaneous
 	_gui.getViewport("right")->getWindow("main")->setActiveScreen("mainMenuControls");
+	_fe3d.misc_disableDebugRendering();
+	_fe3d.input_clearKeyToggles();
 	_isLoaded = false;
 }

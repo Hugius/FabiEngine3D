@@ -393,7 +393,6 @@ void SceneEditor::load()
 	_gui.getGlobalScreen()->addTextfield("selectedAudioName", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
 
 	// Miscellaneous
-	_fe3d.input_clearKeyToggles();
 	_fe3d.collision_enableCameraResponse();
 	_gui.getViewport("right")->getWindow("main")->setActiveScreen("sceneEditorControls");
 	_isLoaded = true;
@@ -457,6 +456,7 @@ void SceneEditor::unload()
 	_fe3d.misc_disableAabbFrameRendering();
 	_fe3d.misc_disableWireframeRendering();
 	_fe3d.misc_disableDebugRendering();
+	_fe3d.input_clearKeyToggles();
 	_gui.getViewport("right")->getWindow("main")->setActiveScreen("mainMenuControls");
 	_isLoaded = false;
 }

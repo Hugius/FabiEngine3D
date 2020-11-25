@@ -1,7 +1,8 @@
-4 27
+5 31
 META script_type_init
 META execution_entry
 
 fe3d:scene_load("scene")
 fe3d:camera_set_pos(0.0, 10.0, 0.0)
+fe3d:camera_lookat_enable(0.0, 0.0, 0.0)
 GLOB DEC movingSpeed = 0.05

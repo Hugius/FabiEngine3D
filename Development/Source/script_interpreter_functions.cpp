@@ -26,8 +26,10 @@ vector<ScriptValue> ScriptInterpreter::_processEngineFunctionCall(const string& 
 			// Check if argument extraction went well
 			if (!_hasThrownError)
 			{
+				auto functionName = scriptLine.substr(0, parenthesisIndex);
+
 				// Determine type of function
-				if (scriptLine.substr(0, parenthesisIndex) == "fe3d:print") // Printing (variable) a value
+				if (functionName == "fe3d:print") // Printing (variable) a value
 				{
 					if (_validateArgumentAmount(arguments, 1)) // Validate amount of arguments
 					{
@@ -48,7 +50,7 @@ vector<ScriptValue> ScriptInterpreter::_processEngineFunctionCall(const string& 
 						{
 							_fe3d.logger_throwInfo(arguments[0].getBoolean() ? "true" : "false");
 						}
-						
+
 						// Add return value
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 					}
@@ -121,6 +123,24 @@ vector<ScriptValue> ScriptInterpreter::_processEngineFunctionCall(const string& 
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 					}
 				}
+				else if (scriptLine.substr(0, parenthesisIndex) == "fe3d:camera_lookat_enable") // Enable lookat view
+				{
+					auto types = { ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
+
+					if (_validateArgumentAmount(arguments, types.size()) && _validateArgumentTypes(arguments, types))
+					{
+						_fe3d.camera_enableLookat(Vec3(arguments[0].getDecimal(), arguments[1].getDecimal(), arguments[2].getDecimal()));
+						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+					}
+				}
+				else if (scriptLine.substr(0, parenthesisIndex) == "fe3d:camera_lookat_disable") // Disable lookat view
+				{
+					if (_validateArgumentAmount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+					{
+						_fe3d.camera_disableLookat();
+						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+					}
+				}
 				else if (scriptLine.substr(0, parenthesisIndex) == "fe3d:input_key_down") // Hold keyboard key down
 				{
 					auto types = { ScriptValueType::STRING };
@@ -149,6 +169,44 @@ vector<ScriptValue> ScriptInterpreter::_processEngineFunctionCall(const string& 
 					{
 						auto result = _fe3d.input_getKeyToggled(_keyInputStringMap.at(arguments[0].getString()));
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
+					}
+				}
+				else if (scriptLine.substr(0, parenthesisIndex) == "fe3d:input_mouse_down") // Hold mouse button down
+				{
+					auto types = { ScriptValueType::STRING };
+
+					if (_validateArgumentAmount(arguments, types.size()) && _validateArgumentTypes(arguments, types))
+					{
+						auto result = _fe3d.input_getMouseDown(_mouseInputStringMap.at(arguments[0].getString()));
+						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
+					}
+				}
+				else if (scriptLine.substr(0, parenthesisIndex) == "fe3d:input_mouse_pressed") // Press mouse
+				{
+					auto types = { ScriptValueType::STRING };
+
+					if (_validateArgumentAmount(arguments, types.size()) && _validateArgumentTypes(arguments, types))
+					{
+						auto result = _fe3d.input_getMousePressed(_mouseInputStringMap.at(arguments[0].getString()));
+						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
+					}
+				}
+				else if (scriptLine.substr(0, parenthesisIndex) == "fe3d:input_mouse_toggled") // Togglepress mouse
+				{
+					auto types = { ScriptValueType::STRING };
+
+					if (_validateArgumentAmount(arguments, types.size()) && _validateArgumentTypes(arguments, types))
+					{
+						auto result = _fe3d.input_getMouseToggled(_mouseInputStringMap.at(arguments[0].getString()));
+						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
+					}
+				}
+				else if (scriptLine.substr(0, parenthesisIndex) == "fe3d:input_mousewheel_direction") // Mousewheel direction
+				{
+					if (_validateArgumentAmount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+					{
+						auto result = _fe3d.input_getMouseWheelY();
+						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::INTEGER, result));
 					}
 				}
 				else

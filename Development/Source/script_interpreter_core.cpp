@@ -167,5 +167,10 @@ void ScriptInterpreter::unload()
 	_lastConditionResult = false;
 	_lastScopeChanger = ScriptScopeChanger::NONE;
 	_sceneEditor.clearScene();
+
+	// Reset camera
+	_fe3d.camera_load(90.0f, 0.1f, 10000.0f, Vec3(0.0f));
+
+	// Choose engine background again
 	_fe3d.skyEntity_select("@@engineBackground");
 }

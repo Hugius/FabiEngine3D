@@ -210,5 +210,7 @@ void EnvironmentEditor::unload()
 	_gui.getGlobalScreen()->deleteTextfield("selectedTerrainName");
 	_gui.getGlobalScreen()->deleteTextfield("selectedWaterName");
 	_gui.getViewport("right")->getWindow("main")->setActiveScreen("mainMenuControls");
+	_fe3d.misc_disableDebugRendering();
+	_fe3d.input_clearKeyToggles();
 	_isLoaded = false;
 }

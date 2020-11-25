@@ -6,9 +6,10 @@
 
 using std::make_shared;
 
-RenderEngine::RenderEngine(RenderBus& renderBus, Timer& timer) :
+RenderEngine::RenderEngine(RenderBus& renderBus, Timer& timer, TextureLoader& textureLoader) :
 	_renderBus(renderBus),
 	_timer(timer),
+	_textureLoader(textureLoader),
 	_skyEntityRenderer        ("sky_entity_shader.vert",       "sky_entity_shader.frag",       renderBus),
 	_terrainEntityRenderer    ("terrain_entity_shader.vert",   "terrain_entity_shader.frag",   renderBus),
 	_waterEntityRenderer      ("water_entity_shader.vert",     "water_entity_shader.frag",     renderBus),

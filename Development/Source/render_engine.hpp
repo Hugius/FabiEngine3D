@@ -18,11 +18,12 @@
 #include "depth_renderer.hpp"
 #include "Timer.hpp"
 #include "blur_type.hpp"
+#include "texture_loader.hpp"
 
 class RenderEngine final
 {
 public:
-	RenderEngine(RenderBus& renderBus, Timer& timer);
+	RenderEngine(RenderBus& renderBus, Timer& timer, TextureLoader& textureLoader);
 	~RenderEngine() = default;
 
 	void renderEngineLogo(shared_ptr<GuiEntity> entity, Ivec2 viewport);
@@ -38,6 +39,9 @@ private:
 
 	// Renderbus
 	RenderBus& _renderBus;
+
+	// Texture loader for debug rendering text
+	TextureLoader& _textureLoader;
 
 	// Temp entitybus
 	EntityBus* _entityBus = nullptr;

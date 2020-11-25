@@ -161,5 +161,7 @@ void ModelEditor::unload()
 	_gui.getGlobalScreen()->deleteTextfield("selectedModelName");
 	_gui.getGlobalScreen()->deleteTextfield("selectedAabbName");
 	_fe3d.misc_disableAabbFrameRendering();
+	_fe3d.misc_disableDebugRendering();
+	_fe3d.input_clearKeyToggles();
 	_gui.getViewport("right")->getWindow("main")->setActiveScreen("mainMenuControls");
 }

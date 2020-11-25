@@ -55,7 +55,7 @@ private:
 	unsigned int _passedFrames = 0;
 	
 	// Editor constants
-	const string _fontPath = "engine\\fonts\\lucida.ttf";
+	const string _fontPath = "engine\\fonts\\font.ttf";
 	const Vec3 _cameraStartingPosition = Vec3(0.0f, 0.0f, 10.0f);
 	const Vec3 _scriptTextStartingPosition = Vec3(-11.0f, 6.0f, 0.5f);
 	const Vec3 _lineNumberColor = Vec3(0.0f, 1.0f, 0.0f);

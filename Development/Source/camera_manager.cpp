@@ -122,7 +122,8 @@ void CameraManager::updateMatrices()
 	// Lookat front vector
 	if(_isLookatEabled)
 	{
-		_front = _lookat - _position;
+		Vec3 offset = Vec3(0.00001f); // Small offset, otherwise screen goes black in certain circumstances
+		_front = (_lookat + offset) - _position;
 		_front.normalize();
 	}
 	else // First person front vector

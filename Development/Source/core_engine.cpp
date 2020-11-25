@@ -44,6 +44,16 @@ void CoreEngine::_start()
 	_fe3d.FE3D_CONTROLLER_DESTROY();
 }
 
+void CoreEngine::_pause()
+{
+	_isPaused = true;
+}
+
+void CoreEngine::_resume()
+{
+	_isPaused = false;
+}
+
 void CoreEngine::_stop()
 {
 	_isRunning = false;
@@ -103,37 +113,41 @@ void CoreEngine::_updateApplication()
 	// User updates
 	_fe3d.FE3D_CONTROLLER_UPDATE();
 
-	// Camera updates
-	_cameraManager.update(_windowManager);
+	// Only update 3D if engine not paused
+	if (!_isPaused)
+	{
+		// Camera updates
+		_cameraManager.update(_windowManager);
 
-	// Calculate viewport position Y offset, because GUI borders are not all of the same size
-	Ivec2 offset = Ivec2(Config::getInst().getVpPos().x, Config::getInst().getWindowSize().y - (Config::getInst().getVpPos().y + Config::getInst().getVpSize().y));
-	
-	// Apply Y offset to mouse position
-	Vec2 mousePos = Vec2(_windowManager.getMousePos()) - Vec2(offset);
+		// Calculate viewport position Y offset, because GUI borders are not all of the same size
+		Ivec2 offset = Ivec2(Config::getInst().getVpPos().x, Config::getInst().getWindowSize().y - (Config::getInst().getVpPos().y + Config::getInst().getVpSize().y));
 
-	// Convert fullscreen coords to viewport coords
-	mousePos = (mousePos / Vec2(Config::getInst().getVpSize())) * Vec2(Config::getInst().getWindowSize());
-	
-	// Update physics
-	_mousePicker.update(Ivec2(mousePos), _terrainEntityManager);
-	_collisionResolver.update(_aabbEntityManager.getEntities(), _terrainEntityManager, _cameraManager);
+		// Apply Y offset to mouse position
+		Vec2 mousePos = Vec2(_windowManager.getMousePos()) - Vec2(offset);
 
-	// 3D entity updates
-	_skyEntityManager.update();
-	_waterEntityManager.update();
-	_gameEntityManager.update();
-	_billboardEntityManager.update();
-	_aabbEntityManager.update(_gameEntityManager.getEntities(), _billboardEntityManager.getEntities());
+		// Convert fullscreen coords to viewport coords
+		mousePos = (mousePos / Vec2(Config::getInst().getVpSize())) * Vec2(Config::getInst().getWindowSize());
 
-	// 2D entity updates
+		// Update physics
+		_mousePicker.update(Ivec2(mousePos), _terrainEntityManager);
+		_collisionResolver.update(_aabbEntityManager.getEntities(), _terrainEntityManager, _cameraManager);
+
+		// 3D entity updates
+		_skyEntityManager.update();
+		_waterEntityManager.update();
+		_gameEntityManager.update();
+		_billboardEntityManager.update();
+		_aabbEntityManager.update(_gameEntityManager.getEntities(), _billboardEntityManager.getEntities());
+
+		// Miscellaneous updates
+		_shadowManager.update(_renderBus);
+		_cameraManager.updateMatrices();
+		_audioPlayer.update(_cameraManager, _audioManager.getChunks(), _audioManager.getMusic());
+	}
+
+	// Always update 2D logic
 	_guiEntityManager.update();
 	_textEntityManager.update();
-
-	// Miscellaneous updates
-	_shadowManager.update(_renderBus);
-	_cameraManager.updateMatrices();
-	_audioPlayer.update(_cameraManager, _audioManager.getChunks(), _audioManager.getMusic());
 
 	// Miscellaneous updates
 	_updateWindowFading();

@@ -161,7 +161,6 @@
     <ClInclude Include="Source\collision.hpp" />
     <ClInclude Include="Source\collision_detector.hpp" />
     <ClInclude Include="Source\collision_resolver.hpp" />
-    <ClInclude Include="Source\configuration.hpp" />
     <ClInclude Include="Source\core_engine.hpp" />
     <ClInclude Include="Source\depth_renderer.hpp" />
     <ClInclude Include="Source\direction.hpp" />
@@ -285,6 +284,7 @@
     <ClCompile Include="Source\ivector2.cpp" />
     <ClCompile Include="Source\matrix33.cpp" />
     <ClCompile Include="Source\matrix44.cpp" />
+    <ClCompile Include="Source\matrix44_functions.cpp" />
     <ClCompile Include="Source\model_editor_persistence.cpp" />
     <ClCompile Include="Source\model_editor_updates_aabb.cpp" />
     <ClCompile Include="Source\model_editor_updates_lighting.cpp" />

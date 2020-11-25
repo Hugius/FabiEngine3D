@@ -166,12 +166,12 @@ void WindowManager::hideWindow()
 
 void WindowManager::showMouseCursor()
 {
-	SDL_ShowCursor(true);
+	SDL_ShowCursor(SDL_ENABLE);
 }
 
 void WindowManager::hideMouseCursor()
 {
-	SDL_ShowCursor(false);
+	SDL_ShowCursor(SDL_DISABLE);
 }
 
 void WindowManager::setMousePos(Ivec2 pos)
@@ -184,4 +184,9 @@ const Ivec2 WindowManager::getMousePos() const
 	int x, y;
 	SDL_GetMouseState(&x, &y);
 	return Ivec2(x, y);
+}
+
+bool WindowManager::isCursorVisible() const
+{
+	return static_cast<bool>(SDL_ShowCursor(SDL_QUERY));
 }

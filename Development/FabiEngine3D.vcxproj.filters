@@ -526,6 +526,9 @@
     <ClCompile Include="Source\scene_editor_audio_placing.cpp">
       <Filter>src\Editor System\Scene Editor\Audio</Filter>
     </ClCompile>
+    <ClCompile Include="Source\matrix44_functions.cpp">
+      <Filter>src\Math System</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\obj_loader.hpp">
@@ -687,9 +690,6 @@
     <ClInclude Include="Source\camera_manager.hpp">
       <Filter>src\Miscellaneous\Other</Filter>
     </ClInclude>
-    <ClInclude Include="Source\configuration.hpp">
-      <Filter>src\Miscellaneous\Other</Filter>
-    </ClInclude>
     <ClInclude Include="Source\input_handler.hpp">
       <Filter>src\Miscellaneous\Other</Filter>
     </ClInclude>
@@ -728,9 +728,6 @@
     </ClInclude>
     <ClInclude Include="Source\render_bus.hpp">
       <Filter>src\Rendering System\Miscellaneous</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\settings_editor.hpp">
-      <Filter>src\Editor System\Settings Editor</Filter>
     </ClInclude>
     <ClInclude Include="Source\script.hpp">
       <Filter>src\Scripting System\Core</Filter>
@@ -857,6 +854,9 @@
     </ClInclude>
     <ClInclude Include="Source\ivector2.hpp">
       <Filter>src\Math System</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\settings_editor.hpp">
+      <Filter>src\Editor System\Settings Editor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -123,15 +123,20 @@ void TopViewportController::_updateProjectManagement()
 	// Exiting engine through ESCAPE
 	if (_gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID() == "main")
 	{
-		if (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused())
+		// Check if script not running
+		if (!((_currentProjectName == "") ? false : SCRIPT_EXECUTOR.isInitialized()))
 		{
-			if (_currentProjectName != "") // A project must be loaded
+			// Check if user pressed ESCAPE
+			if (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused())
 			{
-				_gui.getGlobalScreen()->addAnswerForm("exitEngine", "Save changes?", Vec2(0.0f, 0.25f));
-			}
-			else // Otherwise, just exit the engine
-			{
-				_fe3d.engine_stop();
+				if (_currentProjectName != "") // A project must be loaded
+				{
+					_gui.getGlobalScreen()->addAnswerForm("exitEngine", "Save changes?", Vec2(0.0f, 0.25f));
+				}
+				else // Otherwise, just exit the engine
+				{
+					_fe3d.engine_stop();
+				}
 			}
 		}
 	}
@@ -188,9 +193,10 @@ void TopViewportController::_updateGameManagement()
 		gameScreen->getButton("restart")->setHoverable(isInMainMenu && SCRIPT_EXECUTOR.isInitialized());
 		gameScreen->getButton("stop")->setHoverable(isInMainMenu && SCRIPT_EXECUTOR.isInitialized());
 
-		// Check if player wants to pause the running game
+		// Check if user wants to pause the running game
 		if (SCRIPT_EXECUTOR.isRunning())
 		{
+			// Check if user pressed ESCAPE
 			if (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
 			{
 				SCRIPT_EXECUTOR.pause();

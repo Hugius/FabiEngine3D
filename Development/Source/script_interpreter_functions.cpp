@@ -141,6 +141,22 @@ vector<ScriptValue> ScriptInterpreter::_processEngineFunctionCall(const string& 
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 					}
 				}
+				else if (scriptLine.substr(0, parenthesisIndex) == "fe3d:camera_firstperson_enable") // Enable first person view
+				{
+					if (_validateArgumentAmount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+					{
+						_fe3d.camera_enableFirstPersonView();
+						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+					}
+				}
+				else if (scriptLine.substr(0, parenthesisIndex) == "fe3d:camera_firstperson_disable") // Disable first person view
+				{
+					if (_validateArgumentAmount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+					{
+						_fe3d.camera_disableFirstPersonView();
+						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+					}
+				}
 				else if (scriptLine.substr(0, parenthesisIndex) == "fe3d:input_key_down") // Hold keyboard key down
 				{
 					auto types = { ScriptValueType::STRING };
@@ -207,6 +223,32 @@ vector<ScriptValue> ScriptInterpreter::_processEngineFunctionCall(const string& 
 					{
 						auto result = _fe3d.input_getMouseWheelY();
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::INTEGER, result));
+					}
+				}
+				else if (scriptLine.substr(0, parenthesisIndex) == "fe3d:misc_cursor_show") // SHow cursor
+				{
+					if (_validateArgumentAmount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+					{
+						_fe3d.misc_showCursor();
+						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+					}
+				}
+				else if (scriptLine.substr(0, parenthesisIndex) == "fe3d:misc_cursor_hide") // Hide cursor
+				{
+					if (_validateArgumentAmount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+					{
+						_fe3d.misc_hideCursor();
+						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+					}
+				}
+				else if (scriptLine.substr(0, parenthesisIndex) == "fe3d:misc_time_interval") // Time interval
+				{
+					auto types = { ScriptValueType::STRING, ScriptValueType::INTEGER };
+
+					if (_validateArgumentAmount(arguments, types.size()) && _validateArgumentTypes(arguments, types))
+					{
+						auto result = _fe3d.misc_checkInterval(arguments[0].getString(), arguments[1].getInteger());
+						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 					}
 				}
 				else

@@ -26,4 +26,5 @@ private:
 
 	bool _isInitialized = false;
 	bool _isRunning = false;
+	bool _wasCursorVisible = false;
 };

@@ -315,6 +315,11 @@ Ivec2 FabiEngine3D::misc_getViewportSize()
 	return Config::getInst().getVpSize();
 }
 
+bool FabiEngine3D::misc_isCursorVisible()
+{
+	return _core->_windowManager.isCursorVisible();
+}
+
 bool FabiEngine3D::misc_isCursorInsideViewport()
 {
 	// Variables

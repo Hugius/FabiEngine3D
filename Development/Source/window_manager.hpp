@@ -28,6 +28,7 @@ public:
 	void setMousePos(Ivec2 pos);
 
 	const Ivec2 getMousePos() const;
+	bool isCursorVisible() const;
 
 private:
 	SDL_Window * _window = nullptr;

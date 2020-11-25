@@ -30,9 +30,10 @@
 class CoreEngine final
 {
 	friend class FabiEngine3D;
+
 private:
 	// Core
-	CoreEngine(FabiEngine3D & fe3d);
+	CoreEngine(FabiEngine3D& fe3d);
 	virtual ~CoreEngine();
 
 	// Core instances
@@ -63,6 +64,8 @@ private:
 	
 	// Core functions
 	void _start();
+	void _pause();
+	void _resume();
 	void _stop();
 	void _setupApplication();
 	void _updateApplication();
@@ -76,6 +79,7 @@ private:
 
 	// Miscellaneous variable
 	float _deltaTimeMS = 0.0f;
+	bool _isPaused = false;
 	bool _isRunning = false;
 	bool _showStats = false;
 };

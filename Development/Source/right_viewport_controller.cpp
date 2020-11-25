@@ -105,7 +105,7 @@ void RightViewportController::initialize()
 	scriptEditorScreen->addTextfield("enter", Vec2(-0.5f, 0.275f), Vec2(CW("Next line"), textHeight), "Next line", black, false);
 	scriptEditorScreen->addTextfield("backspace", Vec2(-0.5f, 0.075f), Vec2(CW("Remove char"), textHeight), "Remove char", black, false);
 	scriptEditorScreen->addTextfield("esc", Vec2(-0.5f, -0.125f), Vec2(CW("Back"), textHeight), "Back", black, false);
-	scriptEditorScreen->addTextfield("arrows", Vec2(-0.725f, -0.47f), Vec2(CW("Navigation"), textHeight), "Navigation", black, false);
+	scriptEditorScreen->addTextfield("arrows", Vec2(-0.6f, -0.47f), Vec2(CW("Navigation"), textHeight), "Navigation", black, false);
 	scriptEditorScreen->addTextfield("ctrlC", Vec2(0.0f, -0.6f), Vec2(CW("Copy"), textHeight), "Copy", black, false);
 	scriptEditorScreen->addTextfield("ctrlV", Vec2(0.0f, -0.8f), Vec2(CW("Paste"), textHeight), "Paste", black, false);
 	scriptEditorScreen->addRectangle("mouseLeft", Vec2(-1.1f, 0.65f), Vec2(0.6f, 0.15f), "mouse_left.png", false);

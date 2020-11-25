@@ -30,12 +30,15 @@ class CoreEngine;
 class FabiEngine3D
 {
 	friend class CoreEngine;
+
 public:
 	FabiEngine3D();
 	virtual ~FabiEngine3D();
 
 	// Engine interface
 	void engine_start();
+	void engine_pause();
+	void engine_resume();
 	void engine_stop();
 
 	// Camera interface - setters
@@ -737,6 +740,7 @@ public:
 	Ivec2 misc_getWindowSize();
 	Ivec2 misc_getViewportPosition();
 	Ivec2 misc_getViewportSize();
+	bool misc_isCursorVisible();
 	bool misc_isCursorInsideViewport();
 	bool misc_isCursorInsideWindow();
 	bool misc_isDirectory(const string& filePath);

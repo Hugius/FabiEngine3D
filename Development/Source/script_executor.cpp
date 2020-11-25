@@ -10,38 +10,62 @@ ScriptExecutor::ScriptExecutor(FabiEngine3D& fe3d, Script& script, SceneEditor& 
 
 void ScriptExecutor::load()
 {
-	_isRunning = true;
-	_isInitialized = true;
+	_fe3d.misc_showCursor();
 	_scriptInterpreter.load();
 	_scriptInterpreter.executeInitialization();
 	_validateExecution();
+	_isInitialized = true;
+	_isRunning = true;
 }
 
 void ScriptExecutor::update()
 {
-	if (_isRunning)
+	if (_isInitialized && _isRunning)
 	{
 		_scriptInterpreter.executeUpdate();
+		_fe3d.guiEntity_hide("@@cursor");
 		_validateExecution();
 	}
 }
 
 void ScriptExecutor::unload()
 {
-	_scriptInterpreter.executeDestruction();
-	_scriptInterpreter.unload();
-	_isInitialized = false;
-	_isRunning = false;
+	if (_isInitialized)
+	{
+		_scriptInterpreter.executeDestruction();
+		_scriptInterpreter.unload();
+		_fe3d.misc_hideCursor();
+		_fe3d.engine_resume();
+		_isInitialized = false;
+		_isRunning = false;
+	}
 }
 
 void ScriptExecutor::pause()
 {
-	_isRunning = false;
+	if (_isInitialized && _isRunning)
+	{
+		_wasCursorVisible = _fe3d.misc_isCursorVisible();
+		_fe3d.misc_hideCursor();
+		_fe3d.engine_pause();
+		_isRunning = false;
+	}
 }
 
 void ScriptExecutor::unpause()
 {
-	_isRunning = true;
+	if (_isInitialized && !_isRunning)
+	{
+		// Reset cursor
+		if (_wasCursorVisible)
+		{
+			_fe3d.misc_showCursor();
+		}
+
+		// Resume game logic
+		_fe3d.engine_resume();
+		_isRunning = true;
+	}
 }
 
 bool ScriptExecutor::isScriptEmpty()

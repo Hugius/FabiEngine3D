@@ -13,9 +13,9 @@ void ScriptExecutor::load()
 	_fe3d.misc_showCursor();
 	_scriptInterpreter.load();
 	_scriptInterpreter.executeInitialization();
-	_validateExecution();
 	_isInitialized = true;
 	_isRunning = true;
+	_validateExecution();
 }
 
 void ScriptExecutor::update()
@@ -47,6 +47,7 @@ void ScriptExecutor::pause()
 	{
 		_wasCursorVisible = _fe3d.misc_isCursorVisible();
 		_fe3d.misc_hideCursor();
+		_fe3d.audioEntity_pauseAll();
 		_fe3d.engine_pause();
 		_isRunning = false;
 	}
@@ -63,6 +64,7 @@ void ScriptExecutor::unpause()
 		}
 
 		// Resume game logic
+		_fe3d.audioEntity_resumeAll();
 		_fe3d.engine_resume();
 		_isRunning = true;
 	}

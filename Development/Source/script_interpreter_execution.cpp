@@ -242,6 +242,10 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 		{
 			_processVariableArithmetic(scriptLineText);
 		}
+		else if (scriptLineText.substr(0, _castKeyword.size() + 1) == _castKeyword + " ") // Variable type casting
+		{
+			_processVariableTypecast(scriptLineText);
+		}
 		else // Invalid keyword
 		{
 			_throwScriptError("unknown keyword!");

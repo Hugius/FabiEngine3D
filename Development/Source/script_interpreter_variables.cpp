@@ -108,7 +108,11 @@ void ScriptInterpreter::_processVariableDefinition(const string& scriptLine, Scr
 				// Validate variable type
 				if (variable.getValue().getType() == _getLocalVariable(valueString).getValue().getType())
 				{
-					variable.changeValue(_getLocalVariable(valueString).getValue());
+					// Change the value
+					variable.getValue().setString(_getLocalVariable(valueString).getValue().getString());
+					variable.getValue().setDecimal(_getLocalVariable(valueString).getValue().getDecimal());
+					variable.getValue().setInteger(_getLocalVariable(valueString).getValue().getInteger());
+					variable.getValue().setBoolean(_getLocalVariable(valueString).getValue().getBoolean());
 				}
 				else
 				{
@@ -120,7 +124,11 @@ void ScriptInterpreter::_processVariableDefinition(const string& scriptLine, Scr
 				// Validate variable type
 				if (variable.getValue().getType() == _getGlobalVariable(valueString).getValue().getType())
 				{
-					variable.changeValue(_getGlobalVariable(valueString).getValue());
+					// Change the value
+					variable.getValue().setString(_getGlobalVariable(valueString).getValue().getString());
+					variable.getValue().setDecimal(_getGlobalVariable(valueString).getValue().getDecimal());
+					variable.getValue().setInteger(_getGlobalVariable(valueString).getValue().getInteger());
+					variable.getValue().setBoolean(_getGlobalVariable(valueString).getValue().getBoolean());
 				}
 				else
 				{
@@ -137,7 +145,7 @@ void ScriptInterpreter::_processVariableDefinition(const string& scriptLine, Scr
 			_throwScriptError("invalid syntax!");
 		}
 	}
-	else // Creating fresh new variable
+	else // Creating a fresh new variable
 	{
 		// Extract GLOB keyword
 		if (scope == ScriptVariableScope::GLOBAL)
@@ -404,7 +412,7 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 		}
 
 		// Set resulting value
-		variable.changeValue(ScriptValue(_fe3d, ScriptValueType::INTEGER, result));
+		variable.getValue().setInteger(result);
 	}
 	else if ((variable.getValue().getType() == ScriptValueType::DECIMAL) && _isDecimalValue(valueString)) // Decimal
 	{
@@ -431,11 +439,82 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 		}
 
 		// Set resulting value
-		variable.changeValue(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
+		variable.getValue().setDecimal(result);
 	}
 	else
 	{
 		_throwScriptError("invalid arithmetic value!");
+		return;
+	}
+
+	// No characters allowed after variable arithmetic
+	string temp;
+	if ((iss >> temp) || scriptLine.back() == ' ')
+	{
+		_throwScriptError("invalid syntax!");
+		return;
+	}
+}
+
+void ScriptInterpreter::_processVariableTypecast(const string& scriptLine)
+{
+	// Temporary values
+	std::istringstream iss(scriptLine);
+	string keyword = "";
+	string nameString = "";
+	string typeString = "";
+
+	// Extract data
+	iss >> keyword >> nameString >> typeString;
+
+	// Check if variable exists
+	if (!_isLocalVariableExisting(nameString) && !_isGlobalVariableExisting(nameString))
+	{
+		_throwScriptError("variable \"" + nameString + "\" not found!");
+		return;
+	}
+
+	// Retrieve variable
+	auto& variable = _isLocalVariableExisting(nameString) ? _getLocalVariable(nameString) : _getGlobalVariable(nameString);
+
+	// Check if variable can be changed
+	if (variable.isConstant())
+	{
+		_throwScriptError("variable \"" + nameString + "\" cannot be typecasted, it is constant!");
+		return;
+	}
+
+	// Check if type is not empty
+	if (typeString.empty())
+	{
+		_throwScriptError("no new type found!");
+		return;
+	}
+
+	// Determine to which new type the variable must cast
+	if ((variable.getValue().getType() == ScriptValueType::INTEGER) && (typeString == _decimalKeyword)) // From integer to decimal
+	{
+		variable.changeValue(ScriptValue(_fe3d, ScriptValueType::DECIMAL, static_cast<float>(variable.getValue().getInteger())));
+	}
+	else if ((variable.getValue().getType() == ScriptValueType::DECIMAL) && (typeString == _integerKeyword)) // From decimal to integer
+	{
+		variable.changeValue(ScriptValue(_fe3d, ScriptValueType::INTEGER, static_cast<int>(variable.getValue().getDecimal())));
+	}
+	else if ((variable.getValue().getType() == ScriptValueType::BOOLEAN) && (typeString == _integerKeyword)) // From boolean to integer
+	{
+		variable.changeValue(ScriptValue(_fe3d, ScriptValueType::INTEGER, static_cast<int>(variable.getValue().getBoolean())));
+	}
+	else if ((variable.getValue().getType() == ScriptValueType::INTEGER) && (typeString == _stringKeyword)) // From integer to string
+	{
+		variable.changeValue(ScriptValue(_fe3d, ScriptValueType::STRING, to_string(variable.getValue().getInteger())));
+	}
+	else if ((variable.getValue().getType() == ScriptValueType::DECIMAL) && (typeString == _stringKeyword)) // From decimal to string
+	{
+		variable.changeValue(ScriptValue(_fe3d, ScriptValueType::STRING, to_string(variable.getValue().getDecimal())));
+	}
+	else
+	{
+		_throwScriptError("variable \"" + nameString + "\" cannot be typecasted, wrong type!");
 		return;
 	}
 

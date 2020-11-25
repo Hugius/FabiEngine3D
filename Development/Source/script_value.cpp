@@ -35,7 +35,7 @@ void ScriptValue::operator=(const ScriptValue& other)
 {
 	if (this->_type == other._type)
 	{
-		this->_string = other._string;
+		this->_string  = other._string;
 		this->_decimal = other._decimal;
 		this->_integer = other._integer;
 		this->_boolean = other._boolean;

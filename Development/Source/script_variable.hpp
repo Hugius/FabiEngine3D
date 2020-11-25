@@ -3,7 +3,7 @@
 #include "script_value.hpp"
 #include "script_variable_scope.hpp"
 
-class ScriptVariable
+class ScriptVariable final
 {
 public:
 	ScriptVariable(FabiEngine3D& fe3d, ScriptVariableScope scope, const string& ID, bool constant, ScriptValue value);
@@ -24,5 +24,5 @@ private:
 
 	const bool _isConstant;
 
-	ScriptValue _value;
+	ScriptValue* _value = nullptr;
 };

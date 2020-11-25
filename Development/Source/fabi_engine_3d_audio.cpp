@@ -90,9 +90,19 @@ void FabiEngine3D::audioEntity_pause(const std::string& ID)
 	_core->_audioPlayer.pauseChunk(_core->_audioManager.getChunk(ID));
 }
 
+void FabiEngine3D::audioEntity_pauseAll()
+{
+	_core->_audioPlayer.pauseAllChunks();
+}
+
 void FabiEngine3D::audioEntity_resume(const std::string& ID)
 {
 	_core->_audioPlayer.resumeChunk(_core->_audioManager.getChunk(ID));
+}
+
+void FabiEngine3D::audioEntity_resumeAll()
+{
+	_core->_audioPlayer.resumeAllChunks();
 }
 
 void FabiEngine3D::audioEntity_stop(const std::string& ID, int fadeMillis)

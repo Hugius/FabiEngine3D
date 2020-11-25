@@ -77,7 +77,7 @@ void AudioPlayer::update(CameraManager& camera, std::vector<AudioChunk>& chunks,
 	// Update point chunks
 	for (auto& chunk : chunks)
 	{
-		if (chunk.hasPosition())
+		if (chunk.is3D())
 		{
 			if (isChunkPlaying(chunk)) // If emitting sound
 			{
@@ -113,6 +113,16 @@ void AudioPlayer::setChunksEnabled(bool val)
 	_chunksEnabled = val;
 }
 
+void AudioPlayer::pauseAllChunks()
+{
+	Mix_Pause(-1);
+}
+
+void AudioPlayer::resumeAllChunks()
+{
+	Mix_Resume(-1);
+}
+
 void AudioPlayer::setMusicEnabled(bool val)
 {
 	_musicEnabled = val;
@@ -137,6 +147,12 @@ void AudioPlayer::playChunk(AudioChunk& chunk, int loops, int initialVolume, boo
 {
 	if (_chunksEnabled)
 	{
+		// 3D chunks have volume based on distance
+		if (chunk.is3D())
+		{
+			initialVolume = 0;
+		}
+
 		if (_isInMap(chunk)) // If already playing
 		{
 			if (!noRestart)

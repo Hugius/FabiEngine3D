@@ -512,7 +512,9 @@ public:
 	void audioEntity_deleteAll();
 	void audioEntity_play(const string& ID, int loops, float initialVolume, bool noRestart = false, int fadeMillis = 0);
 	void audioEntity_pause(const string& ID);
+	void audioEntity_pauseAll();
 	void audioEntity_resume(const string& ID);
+	void audioEntity_resumeAll();
 	void audioEntity_stop(const string& ID, int fadeMillis = 0);
 	void audioEntity_stopAll();
 	void audioEntity_setVolume(const string& ID, float volume);

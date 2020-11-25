@@ -858,6 +858,9 @@
     <ClInclude Include="Source\settings_editor.hpp">
       <Filter>src\Editor System\Settings Editor</Filter>
     </ClInclude>
+    <ClInclude Include="Source\configuration.hpp">
+      <Filter>src\Miscellaneous\Other</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">

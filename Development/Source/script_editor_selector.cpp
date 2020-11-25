@@ -94,7 +94,7 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 					lineTextPosition.x = _scriptTextStartingPosition.x + _horizontalLineOffset;
 					_fe3d.billBoardEntity_add(selectionID, _selectionColor, lineTextPosition, Vec3(0.0f), _textCharacterSize, false, false);
 				}
-				else
+				else // Line is not empty
 				{
 					Vec3 lineTextPosition = _fe3d.billboardEntity_getPosition(textID) - Vec3(0.0f, 0.0f, 0.05f);
 					Vec2 lineTextSize = _fe3d.billboardEntity_getSize(textID);

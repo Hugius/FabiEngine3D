@@ -396,10 +396,15 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 				// Extract line data
 				iss >> ID >> position.x >> position.y >> position.z >> color.r >> color.g >> color.b >> intensity >> distance;
 
-				// Add entities
-				_fe3d.gameEntity_add("@" + ID, "engine\\models\\lamp.obj", position, Vec3(0.0f), _defaultLightbulbSize);
-				_fe3d.gameEntity_setShadowed("@" + ID, false);
-				_fe3d.aabbEntity_bindToGameEntity("@" + ID, Vec3(0.0f), _defaultLightbulbAabbSize, true);
+				// Add lightbulbs
+				if (_isLoaded)
+				{
+					_fe3d.gameEntity_add("@" + ID, "engine\\models\\lamp.obj", position, Vec3(0.0f), _defaultLightbulbSize);
+					_fe3d.gameEntity_setShadowed("@" + ID, false);
+					_fe3d.aabbEntity_bindToGameEntity("@" + ID, Vec3(0.0f), _defaultLightbulbAabbSize, true);
+				}
+
+				// Add light
 				_fe3d.lightEntity_add(ID, position, color, intensity, distance);
 			}
 			else if (entityType == "AUDIO")
@@ -416,12 +421,17 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 				audioPath = (audioPath == "?") ? "" : audioPath;
 				std::replace(audioPath.begin(), audioPath.end(), '?', ' ');
 
-				// Add entities
-				_fe3d.gameEntity_add("@speaker_" + ID, "engine\\models\\speaker.obj", position, Vec3(0.0f), _defaultSpeakerSize);
-				_fe3d.gameEntity_setShadowed("@speaker_" + ID, false);
-				_fe3d.aabbEntity_bindToGameEntity("@speaker_" + ID, Vec3(0.0f), _defaultSpeakerAabbSize, true);
+				// Add speaker
+				if (_isLoaded)
+				{
+					_fe3d.gameEntity_add("@speaker_" + ID, "engine\\models\\speaker.obj", position, Vec3(0.0f), _defaultSpeakerSize);
+					_fe3d.gameEntity_setShadowed("@speaker_" + ID, false);
+					_fe3d.aabbEntity_bindToGameEntity("@speaker_" + ID, Vec3(0.0f), _defaultSpeakerAabbSize, true);
+				}
+
+				// Add audio
 				_fe3d.audioEntity_add3D(ID, audioPath, position, maxVolume, maxDistance);
-				_fe3d.audioEntity_play(ID, -1, 0.5f);
+				_fe3d.audioEntity_play(ID, -1, 0.0f);
 			}
 			else if (entityType == "LOD_DISTANCE")
 			{

@@ -66,7 +66,7 @@ float AudioChunk::getMaxVolume() const
 	return _maxVolume;
 }
 
-bool AudioChunk::hasPosition() const
+bool AudioChunk::is3D() const
 {
 	return _hasPosition;
 }

@@ -27,7 +27,7 @@ public:
 	float getMaxDistance() const;
 	float getMaxVolume() const;
 
-	bool hasPosition() const;
+	bool is3D() const;
 
 private:
 	string _ID = "";

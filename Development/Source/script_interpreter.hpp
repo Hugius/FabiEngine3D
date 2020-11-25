@@ -33,6 +33,7 @@ private:
 	// Variable functions
 	void _processVariableDefinition(const string& scriptLine, ScriptVariableScope scope, bool isEditing);
 	void _processVariableArithmetic(const string& scriptLine);
+	void _processVariableTypecast(const string& scriptLine);
 	bool _isLocalVariableExisting(const string& variableID);
 	bool _isGlobalVariableExisting(const string& variableID);
 	ScriptVariable& _getLocalVariable(const string& variableID);
@@ -100,6 +101,7 @@ private:
 	const string _minusKeyword	  = "DECR";
 	const string _multiplyKeyword = "MUL";
 	const string _divideKeyword   = "DIV";
+	const string _castKeyword	  = "CAST";
 
 	// Integers
 	const unsigned int _spacesPerIndent = 4;

@@ -1,12 +1,6 @@
-6 7
+1 20
 META script_type_update
 META execution_entry
-
-/// Test
-BOOL int = fe3d:misc_time_interval("test", 100)
-IF int IS <true>:
-    INT scrolled = fe3d:input_mousewheel_direction()
-    fe3d:print(scrolled)
 
 /// Input
 BOOL up = fe3d:input_key_down("KEY_SPACE")

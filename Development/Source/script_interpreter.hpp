@@ -25,10 +25,13 @@ private:
 	void _executeScript(const string& scriptID, ScriptType scriptType);
 
 	// Value functions
-	bool _isStringValue(const string& value);
-	bool _isDecimalValue(const string& value);
-	bool _isIntegerValue(const string& value);
-	bool _isBooleanValue(const string& value);
+	bool _isVec3Value(const string& valueString);
+	bool _isStringValue(const string& valueString);
+	bool _isDecimalValue(const string& valueString);
+	bool _isIntegerValue(const string& valueString);
+	bool _isBooleanValue(const string& valueString);
+	Vec3 _extractVec3FromString(const string& valueString);
+	Ivec3 _checkVec3Part(const string& valueString);
 
 	// Variable functions
 	void _processVariableDefinition(const string& scriptLine, ScriptVariableScope scope, bool isEditing);
@@ -87,6 +90,7 @@ private:
 	const string _globalKeyword   = "GLOB";
 	const string _constKeyword    = "CONST";
 	const string _editKeyword	  = "EDIT";
+	const string _vec3Keyword	  = "VEC3";
 	const string _stringKeyword   = "STR";
 	const string _decimalKeyword  = "DEC";
 	const string _integerKeyword  = "INT";

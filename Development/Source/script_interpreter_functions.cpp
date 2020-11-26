@@ -34,7 +34,11 @@ vector<ScriptValue> ScriptInterpreter::_processEngineFunctionCall(const string& 
 					if (_validateArgumentAmount(arguments, 1)) // Validate amount of arguments
 					{
 						// Determine which type of value to print
-						if (arguments[0].getType() == ScriptValueType::STRING)
+						if (arguments[0].getType() == ScriptValueType::VEC3)
+						{
+							_fe3d.logger_throwInfo(_fe3d.misc_vec2str(arguments[0].getVec3()));
+						}
+						else if (arguments[0].getType() == ScriptValueType::STRING)
 						{
 							_fe3d.logger_throwInfo(arguments[0].getString());
 						}

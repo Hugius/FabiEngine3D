@@ -36,6 +36,7 @@ vector<ScriptValue> ScriptInterpreter::_extractArguments(string argumentString)
 {
 	// Temporary variables
 	vector<ScriptValue> argumentList;
+	bool buildingVec3 = false;
 	bool buildingString = false;
 	bool buildingNumber = false;
 	bool buildingDecimal = false;
@@ -76,9 +77,15 @@ vector<ScriptValue> ScriptInterpreter::_extractArguments(string argumentString)
 		else
 		{
 			// Starting build of new argument
-			if(!buildingString && !buildingNumber && !buildingBoolean && !buildingVariable)
+			if(!buildingVec3 && !buildingString && !buildingNumber && !buildingBoolean && !buildingVariable)
 			{
-				if (c == '"') // STRING
+				if (c == '[') // VEC3
+				{
+					currentArgument = "";
+					currentArgument.push_back(c);
+					buildingVec3 = true;
+				}
+				else if (c == '"') // STRING
 				{
 					currentArgument = "";
 					buildingString = true;
@@ -117,8 +124,30 @@ vector<ScriptValue> ScriptInterpreter::_extractArguments(string argumentString)
 				}
 			}
 
-			// Determine argument type
-			if (buildingString) // Processing STRING argument
+			if (buildingVec3) // Processing VEC3 argument
+			{
+				if (c == ']') // Add new vec3 argument
+				{
+					currentArgument += c;
+
+					// Check if filled in vec3 value is correct
+					if (_isVec3Value(currentArgument))
+					{
+						argumentList.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, _extractVec3FromString(currentArgument)));
+						buildingVec3 = false;
+						finishedArgument = true;
+					}
+					else
+					{
+						_throwScriptError("invalid vec3 syntax!");
+					}
+				}
+				else // Keep building vec3
+				{
+					currentArgument += c;
+				}
+			}
+			else if (buildingString) // Processing STRING argument
 			{
 				if (c == '"') // Add new string argument
 				{
@@ -240,21 +269,41 @@ vector<ScriptValue> ScriptInterpreter::_extractArguments(string argumentString)
 				// Check if variable building finished
 				if (c == ',' || (index == argumentString.size() - 1) || c == ' ')
 				{
-					// Check if the specified variable name exists
-					if (_isLocalVariableExisting(currentArgument))
-					{
-						argumentList.push_back(_getLocalVariable(currentArgument).getValue());
-						buildingVariable = false;
+					// Check if accessing individual float from vec3 variable
+					auto parts = _checkVec3Part(currentArgument);
 
-						// Check if needs to be found yet
-						if (c != ',')
-						{
-							finishedArgument = true;
-						}
-					}
-					else if (_isGlobalVariableExisting(currentArgument))
+					// Remove vec3 part text
+					if (parts != Ivec3(0))
 					{
-						argumentList.push_back(_getGlobalVariable(currentArgument).getValue());
+						currentArgument.pop_back();
+						currentArgument.pop_back();
+					}
+
+					// Check if the specified variable name exists
+					if (_isLocalVariableExisting(currentArgument) || _isGlobalVariableExisting(currentArgument))
+					{
+						// Retrieve value
+						auto variableValue = _isLocalVariableExisting(currentArgument) ? _getLocalVariable(currentArgument).getValue() :
+							_getGlobalVariable(currentArgument).getValue();
+
+						// Check if accessing a part of vec3 value
+						if (parts.x && variableValue.getType() == ScriptValueType::VEC3)
+						{
+							argumentList.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, variableValue.getVec3().x));
+						}
+						else if (parts.y && variableValue.getType() == ScriptValueType::VEC3)
+						{
+							argumentList.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, variableValue.getVec3().y));
+						}
+						else if (parts.z && variableValue.getType() == ScriptValueType::VEC3)
+						{
+							argumentList.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, variableValue.getVec3().z));
+						}
+						else // Normal value
+						{
+							argumentList.push_back(variableValue);
+						}
+
 						buildingVariable = false;
 
 						// Check if needs to be found yet

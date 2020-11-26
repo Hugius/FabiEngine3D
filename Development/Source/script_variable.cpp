@@ -9,7 +9,11 @@ ScriptVariable::ScriptVariable(FabiEngine3D& fe3d, ScriptVariableScope scope, co
 	_value = new ScriptValue(_fe3d, value.getType());
 
 	// Set new value
-	if (_value->getType() == ScriptValueType::STRING)
+	if (_value->getType() == ScriptValueType::VEC3)
+	{
+		_value->setVec3(value.getVec3());
+	}
+	else if (_value->getType() == ScriptValueType::STRING)
 	{
 		_value->setString(value.getString());
 	}
@@ -54,7 +58,11 @@ void ScriptVariable::changeValue(ScriptValue value)
 
 	// Set new value
 	_value = new ScriptValue(_fe3d, value.getType());
-	if (_value->getType() == ScriptValueType::STRING)
+	if (_value->getType() == ScriptValueType::VEC3)
+	{
+		_value->setVec3(value.getVec3());
+	}
+	else if (_value->getType() == ScriptValueType::STRING)
 	{
 		_value->setString(value.getString());
 	}

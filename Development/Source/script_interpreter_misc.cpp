@@ -1,70 +1,96 @@
 #include "script_interpreter.hpp"
 
-bool ScriptInterpreter::_isStringValue(const string& value)
+#include <sstream>
+
+bool ScriptInterpreter::_isVec3Value(const string& valueString)
 {
-	// Check if value has characters at all
-	if (value.empty())
+	// Check if value has enough characters
+	if (valueString.empty())
 	{
 		return false;
 	}
 
-	return value.size() >= 2 && (value.front() == '"' && value.back() == '"');
+	if (valueString.front() != '[' || valueString.back() != ']')
+	{
+		return false;
+	}
+
+	// Remove brackets
+	std::istringstream iss(valueString.substr(1, valueString.size() - 2));
+
+	// Extract XYZ
+	string x, y, z;
+	iss >> x >> y >> z;
+
+	// Check if value is a valid vec3
+	return (_isDecimalValue(x) && _isDecimalValue(y) && _isDecimalValue(z));
 }
 
-bool ScriptInterpreter::_isDecimalValue(const string& value)
+bool ScriptInterpreter::_isStringValue(const string& valueString)
 {
 	// Check if value has characters at all
-	if (value.empty())
+	if (valueString.empty())
+	{
+		return false;
+	}
+
+	return valueString.size() >= 2 && (valueString.front() == '"' && valueString.back() == '"');
+}
+
+bool ScriptInterpreter::_isDecimalValue(const string& valueString)
+{
+	// Check if value has characters at all
+	if (valueString.empty())
 	{
 		return false;
 	}
 
 	// Check if value is perhaps negative
 	unsigned int startingIndex = 0;
-	if (value.front() == '-')
+	if (valueString.front() == '-')
 	{
 		startingIndex = 1;
 	}
 
 	// Validate every character
 	unsigned dots = 0;
-	for (unsigned int i = startingIndex; i < value.size(); i++)
+	for (unsigned int i = startingIndex; i < valueString.size(); i++)
 	{
-		if (!isdigit(value[i]) && value[i] != '.')
+		if (!isdigit(valueString[i]) && valueString[i] != '.')
 		{
 			return false;
 		}
 
 		// Count dots in value
-		if (value[i] == '.')
+		if (valueString[i] == '.')
 		{
 			dots++;
 		}
 	}
 
 	// Check if value is a valid decimal
-	return (value.size() >= 3) && (isdigit(value[startingIndex]) && isdigit(value.back())) && (dots == 1);
+	return (valueString.size() >= 3) && (isdigit(valueString[startingIndex]) && isdigit(valueString.back())) && (dots == 1);
 }
 
-bool ScriptInterpreter::_isIntegerValue(const string& value)
+bool ScriptInterpreter::_isIntegerValue(const string& valueString)
 {
 	// Check if value has characters at all
-	if (value.empty())
+	if (valueString.empty())
 	{
 		return false;
 	}
 
 	// Check if value is perhaps negative
 	unsigned int startingIndex = 0;
-	if (value.front() == '-')
+	if (valueString.front() == '-')
 	{
 		startingIndex = 1;
 	}
 
 	// Check if every character is a digit
-	for (unsigned int i = startingIndex; i < value.size(); i++)
+	for (unsigned int i = startingIndex; i < valueString.size(); i++)
 	{
-		if (!isdigit(value[i]))
+		if (!isdigit(valueString[i]))
 		{
 			return false;
 		}
@@ -73,9 +99,50 @@ bool ScriptInterpreter::_isIntegerValue(const string& value)
 	return true;
 }
 
-bool ScriptInterpreter::_isBooleanValue(const string& value)
+bool ScriptInterpreter::_isBooleanValue(const string& valueString)
 {
-	return (value == "<true>" || value == "<false>");
+	return (valueString == "<true>" || valueString == "<false>");
+}
+
+Vec3 ScriptInterpreter::_extractVec3FromString(const string& valueString)
+{
+	// Check if vec3 value
+	if (!_isVec3Value(valueString))
+	{
+		_fe3d.logger_throwError("Tried to extract Vec3 value from non-vec3 valuestring!");
+	}
+
+	// Remove brackets
+	std::istringstream iss(valueString.substr(1, valueString.size() - 2));
+
+	// Extract XYZ
+	string x, y, z;
+	iss >> x >> y >> z;
+
+	return Vec3(stof(x), stof(y), stof(z));
+}
+
+Ivec3 ScriptInterpreter::_checkVec3Part(const string& valueString)
+{
+	Ivec3 parts = Ivec3(0);
+
+	if (valueString.size() > 2 &&
+		(valueString.substr(valueString.size() - 2) == ".x" || valueString.substr(valueString.size() - 2) == ".r"))
+	{
+		parts.x = 1;
+	}
+	else if (valueString.size() > 2 &&
+		(valueString.substr(valueString.size() - 2) == ".y" || valueString.substr(valueString.size() - 2) == ".g"))
+	{
+		parts.y = 1;
+	}
+	else if (valueString.size() > 2 &&
+		(valueString.substr(valueString.size() - 2) == ".z" || valueString.substr(valueString.size() - 2) == ".b"))
+	{
+		parts.z = 1;
+	}
+
+	return parts;
 }
 
 unsigned int ScriptInterpreter::_countFrontSpaces(const string& scriptLineText)

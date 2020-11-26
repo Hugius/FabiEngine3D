@@ -7,6 +7,12 @@ ScriptValue::ScriptValue(FabiEngine3D& fe3d, ScriptValueType type) :
 
 }
 
+ScriptValue::ScriptValue(FabiEngine3D& fe3d, ScriptValueType type, Vec3 value) :
+	ScriptValue(fe3d, type)
+{
+	setVec3(value);
+}
+
 ScriptValue::ScriptValue(FabiEngine3D& fe3d, ScriptValueType type, const string& value) :
 	ScriptValue(fe3d, type)
 {
@@ -35,6 +41,7 @@ void ScriptValue::operator=(const ScriptValue& other)
 {
 	if (this->_type == other._type)
 	{
+		this->_vec3    = other._vec3;
 		this->_string  = other._string;
 		this->_decimal = other._decimal;
 		this->_integer = other._integer;
@@ -44,6 +51,11 @@ void ScriptValue::operator=(const ScriptValue& other)
 	{
 		_fe3d.logger_throwError("Cannot copy script value: not the same type!");
 	}
+}
+
+void ScriptValue::setVec3(Vec3 value)
+{
+	_vec3 = value;
 }
 
 void ScriptValue::setString(const string& value)
@@ -89,6 +101,11 @@ void ScriptValue::setBoolean(bool value)
 ScriptValueType ScriptValue::getType()
 {
 	return _type;
+}
+
+Vec3 ScriptValue::getVec3()
+{
+	return _vec3;
 }
 
 const string& ScriptValue::getString()

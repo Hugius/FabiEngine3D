@@ -430,9 +430,6 @@
     <ClCompile Include="Source\script_interpreter_arguments.cpp">
       <Filter>src\Scripting System\Execution\Interpreter</Filter>
     </ClCompile>
-    <ClCompile Include="Source\script_interpreter_variables.cpp">
-      <Filter>src\Scripting System\Execution\Interpreter</Filter>
-    </ClCompile>
     <ClCompile Include="Source\script_interpreter_ifstatement.cpp">
       <Filter>src\Scripting System\Execution\Interpreter</Filter>
     </ClCompile>
@@ -528,6 +525,15 @@
     </ClCompile>
     <ClCompile Include="Source\matrix44_functions.cpp">
       <Filter>src\Math System</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ivector3.cpp">
+      <Filter>src\Math System</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_interpreter_variables_misc.cpp">
+      <Filter>src\Scripting System\Execution\Interpreter</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_interpreter_variables_creation.cpp">
+      <Filter>src\Scripting System\Execution\Interpreter</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -860,6 +866,9 @@
     </ClInclude>
     <ClInclude Include="Source\configuration.hpp">
       <Filter>src\Miscellaneous\Other</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ivector3.hpp">
+      <Filter>src\Math System</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

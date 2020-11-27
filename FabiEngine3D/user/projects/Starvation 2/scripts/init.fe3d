@@ -1,9 +1,12 @@
-7 27
+8 14
 META script_type_init
 META execution_entry
 
 fe3d:scene_load("scene")
-fe3d:camera_set_pos(0.0, 10.0, 0.0)
+fe3d:camera_position_set(0.0, 10.0, 0.0)
 fe3d:camera_firstperson_enable()
 fe3d:misc_cursor_hide()
 GLOB DEC movingSpeed = 0.05
+STR kip = "hoi"
+CONCAT kip " ik ben een schaap"
+fe3d:print(kip)

@@ -247,6 +247,10 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 		{
 			_processVariableTypecast(scriptLineText);
 		}
+		else if (scriptLineText.substr(0, _concatKeyword.size() + 1) == _concatKeyword + " ") // String concatenation
+		{
+			_processStringConcatenation(scriptLineText);
+		}
 		else // Invalid keyword
 		{
 			_throwScriptError("unknown keyword!");

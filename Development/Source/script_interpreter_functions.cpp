@@ -87,7 +87,7 @@ vector<ScriptValue> ScriptInterpreter::_processEngineFunctionCall(const string& 
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 					}
 				}
-				else if (scriptLine.substr(0, parenthesisIndex) == "fe3d:camera_get_pos") // Get camera position
+				else if (scriptLine.substr(0, parenthesisIndex) == "fe3d:camera_position_get") // Get camera position
 				{
 					if (_validateArgumentAmount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 					{
@@ -95,7 +95,7 @@ vector<ScriptValue> ScriptInterpreter::_processEngineFunctionCall(const string& 
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));
 					}
 				}
-				else if (scriptLine.substr(0, parenthesisIndex) == "fe3d:camera_set_pos") // Set camera position
+				else if (scriptLine.substr(0, parenthesisIndex) == "fe3d:camera_position_set") // Set camera position
 				{
 					auto types = { ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
@@ -133,6 +133,60 @@ vector<ScriptValue> ScriptInterpreter::_processEngineFunctionCall(const string& 
 					{
 						_fe3d.camera_translateFollowZY(arguments[0].getDecimal());
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+					}
+				}
+				else if (scriptLine.substr(0, parenthesisIndex) == "fe3d:camera_yaw_set") // Set yaw angle
+				{
+					auto types = { ScriptValueType::DECIMAL };
+
+					if (_validateArgumentAmount(arguments, types.size()) && _validateArgumentTypes(arguments, types))
+					{
+						_fe3d.camera_setYaw(arguments[0].getDecimal());
+						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+					}
+				}
+				else if (scriptLine.substr(0, parenthesisIndex) == "fe3d:camera_yaw_get") // Get yaw angle
+				{
+					if (_validateArgumentAmount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+					{
+						auto result = _fe3d.camera_getYaw();
+						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
+					}
+				}
+				else if (scriptLine.substr(0, parenthesisIndex) == "fe3d:camera_pitch_set") // Set pitch angle
+				{
+					auto types = { ScriptValueType::DECIMAL };
+
+					if (_validateArgumentAmount(arguments, types.size()) && _validateArgumentTypes(arguments, types))
+					{
+						_fe3d.camera_setPitch(arguments[0].getDecimal());
+						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+					}
+				}
+				else if (scriptLine.substr(0, parenthesisIndex) == "fe3d:camera_pitch_get") // Get pitch angle
+				{
+					if (_validateArgumentAmount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+					{
+						auto result = _fe3d.camera_getPitch();
+						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
+					}
+				}
+				else if (scriptLine.substr(0, parenthesisIndex) == "fe3d:camera_fov_set") // Set FOV angle
+				{
+					auto types = { ScriptValueType::DECIMAL };
+
+					if (_validateArgumentAmount(arguments, types.size()) && _validateArgumentTypes(arguments, types))
+					{
+						_fe3d.camera_setFOV(arguments[0].getDecimal());
+						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+					}
+				}
+				else if (scriptLine.substr(0, parenthesisIndex) == "fe3d:camera_fov_get") // Get FOV angle
+				{
+					if (_validateArgumentAmount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+					{
+						auto result = _fe3d.camera_getFOV();
+						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
 					}
 				}
 				else if (scriptLine.substr(0, parenthesisIndex) == "fe3d:camera_lookat_enable") // Enable lookat view

@@ -24,7 +24,7 @@ bool ScriptInterpreter::_checkIfStatement(string conditionString)
 			elementBuild += c;
 			elements.push_back(elementBuild);
 		}
-		else if ((c == ' ' && !buildingString && !buildingVec3)) // Check if whitespace
+		else if ((c == ' ' && !buildingString && !buildingVec3)) // Check for whitespace
 		{
 			elements.push_back(elementBuild);
 			elementBuild = "";

@@ -1,4 +1,4 @@
-1 20
+12 21
 META script_type_update
 META execution_entry
 
@@ -8,6 +8,10 @@ BOOL forward = fe3d:input_key_down("KEY_W")
 BOOL backward = fe3d:input_key_down("KEY_S")
 BOOL left = fe3d:input_key_down("KEY_A")
 BOOL right = fe3d:input_key_down("KEY_D")
+
+VEC3 position = fe3d:camera_get_pos()
+IF position IS [0.0 10.0 0.0]:
+    fe3d:print("hoi")
 
 /// Jumping movement
 IF up IS <true>:

@@ -9,13 +9,50 @@ bool ScriptInterpreter::_checkIfStatement(string conditionString)
 		return false;
 	}
 
-	// Extract all invidual elements of the if statement
-	std::istringstream iss(conditionString);
+	// Temporary values
 	vector<string> elements;
-	string element = "";
-	while (iss >> element)
+	string elementBuild = "";
+	unsigned int index = 0;
+	bool buildingString = false;
+	bool buildingVec3 = false;
+
+	// Extract all invidual elements of the if statement
+	for(auto& c : conditionString)
 	{
-		elements.push_back(element);
+		if(index == conditionString.size() - 1) // Check if last character
+		{
+			elementBuild += c;
+			elements.push_back(elementBuild);
+		}
+		else if ((c == ' ' && !buildingString && !buildingVec3)) // Check if whitespace
+		{
+			elements.push_back(elementBuild);
+			elementBuild = "";
+		}
+		else // Keep building element string
+		{
+			if (c == '"' && !buildingString)
+			{
+				buildingString = true;
+			}
+			else if (c == '"' && buildingString)
+			{
+				buildingString = false;
+			}
+			else if (c == '[')
+			{
+				buildingVec3 = true;
+			}
+			else if (c == ']')
+			{
+				buildingVec3 = false;
+			}
+
+			// Add character
+			elementBuild += c;
+		}
+
+		index++;
 	}
 
 	// Values needed for final boolean return
@@ -34,13 +71,9 @@ bool ScriptInterpreter::_checkIfStatement(string conditionString)
 	{
 		if (mustBeValue)
 		{
-			if (_isLocalVariableExisting(elementString)) // LOCAL VARIABLE
+			if (_isVec3Value(elementString)) // VEC3
 			{
-				comparisonValues.push_back(_getLocalVariable(elementString).getValue());
-			}
-			else if (_isGlobalVariableExisting(elementString)) // GLOBAL VARIABLE
-			{
-				comparisonValues.push_back(_getGlobalVariable(elementString).getValue());
+				comparisonValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, _extractVec3FromString(elementString)));
 			}
 			else if (_isStringValue(elementString)) // STRING
 			{
@@ -60,10 +93,47 @@ bool ScriptInterpreter::_checkIfStatement(string conditionString)
 			{
 				comparisonValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, (elementString == "<true>")));
 			}
-			else
+			else // VARIABLE
 			{
-				_throwScriptError("invalid comparison value or variable!");
-				return false;
+				// Check if accessing individual float from vec3 variable
+				auto parts = _checkVec3Part(elementString);
+				
+				// Remove vec3 part text
+				if (parts != Ivec3(0))
+				{
+					elementString.pop_back();
+					elementString.pop_back();
+				}
+
+				// Check if using a variable as value
+				if (_isLocalVariableExisting(elementString) || _isGlobalVariableExisting(elementString))
+				{
+					// Retrieve variable value
+					auto variable = _isLocalVariableExisting(elementString) ? _getLocalVariable(elementString) :
+						_getGlobalVariable(elementString);
+
+					if (parts.x) // Vec3.x
+					{
+						comparisonValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, variable.getValue().getVec3().x));
+					}
+					else if (parts.y) // Vec3.y
+					{
+						comparisonValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, variable.getValue().getVec3().y));
+					}
+					else if (parts.z) // Vec3.z
+					{
+						comparisonValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, variable.getValue().getVec3().z));
+					}
+					else // Normal variable
+					{
+						comparisonValues.push_back(variable.getValue());
+					}
+				}
+				else
+				{
+					_throwScriptError("invalid comparison value or variable!");
+					return false;
+				}
 			}
 
 			// Check if current condition is fully composed
@@ -103,7 +173,7 @@ bool ScriptInterpreter::_checkIfStatement(string conditionString)
 		}
 		else if (mustBeLogicalOperator)
 		{
-
+			
 		}
 	}
 
@@ -143,7 +213,11 @@ bool ScriptInterpreter::_checkConditionResult(ScriptValue& firstValue, string co
 {
 	if (comparisonOperator == _isKeyword)
 	{
-		if (firstValue.getType() == ScriptValueType::STRING)
+		if (firstValue.getType() == ScriptValueType::VEC3)
+		{
+			return (firstValue.getVec3() == secondValue.getVec3());
+		}
+		else if (firstValue.getType() == ScriptValueType::STRING)
 		{
 			return (firstValue.getString() == secondValue.getString());
 		}
@@ -162,7 +236,11 @@ bool ScriptInterpreter::_checkConditionResult(ScriptValue& firstValue, string co
 	}
 	else if (comparisonOperator == _notKeyword)
 	{
-		if (firstValue.getType() == ScriptValueType::STRING)
+		if (firstValue.getType() == ScriptValueType::VEC3)
+		{
+			return (firstValue.getVec3() != secondValue.getVec3());
+		}
+		else if (firstValue.getType() == ScriptValueType::STRING)
 		{
 			return (firstValue.getString() != secondValue.getString());
 		}
@@ -202,6 +280,6 @@ bool ScriptInterpreter::_checkConditionResult(ScriptValue& firstValue, string co
 		}
 	}
 
-	_fe3d.logger_throwError("This error should not be thrown...(really, it fucking shouldn't)");
+	_fe3d.logger_throwError("This error should not be thrown...");
 	return false;
 }

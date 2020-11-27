@@ -87,6 +87,14 @@ vector<ScriptValue> ScriptInterpreter::_processEngineFunctionCall(const string& 
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 					}
 				}
+				else if (scriptLine.substr(0, parenthesisIndex) == "fe3d:camera_get_pos") // Get camera position
+				{
+					if (_validateArgumentAmount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+					{
+						auto result = _fe3d.camera_getPosition();
+						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));
+					}
+				}
 				else if (scriptLine.substr(0, parenthesisIndex) == "fe3d:camera_set_pos") // Set camera position
 				{
 					auto types = { ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };

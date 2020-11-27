@@ -1,4 +1,4 @@
-8 11
+7 27
 META script_type_init
 META execution_entry
 
@@ -6,7 +6,4 @@ fe3d:scene_load("scene")
 fe3d:camera_set_pos(0.0, 10.0, 0.0)
 fe3d:camera_firstperson_enable()
 fe3d:misc_cursor_hide()
-VEC3 kip = [12.0 95.535 1.359]
-MUL kip 5.0
-fe3d:print(kip)
 GLOB DEC movingSpeed = 0.05

@@ -1,6 +1,6 @@
 #include "script_interpreter.hpp"
 
-bool ScriptInterpreter::_checkIfStatement(string conditionString)
+bool ScriptInterpreter::_checkConditionString(string conditionString)
 {
 	// Check if condition is not empty
 	if (conditionString.empty())
@@ -54,7 +54,7 @@ bool ScriptInterpreter::_checkIfStatement(string conditionString)
 
 		index++;
 	}
-
+	
 	// Values needed for final boolean return
 	vector<bool> conditions;
 	vector<string> logicalOperators;
@@ -142,7 +142,8 @@ bool ScriptInterpreter::_checkIfStatement(string conditionString)
 				// Check if condition is possible at all
 				if (_validateCondition(comparisonValues.front(), comparisonOperator, comparisonValues.back()))
 				{
-					conditions.push_back(_checkConditionResult(comparisonValues.front(), comparisonOperator, comparisonValues.back()));
+					conditions.push_back(_compareValues(comparisonValues.front(), comparisonOperator, comparisonValues.back()));
+					comparisonValues.clear();
 					mustBeValue = false;
 					mustBeLogicalOperator = true;
 				}
@@ -173,13 +174,52 @@ bool ScriptInterpreter::_checkIfStatement(string conditionString)
 		}
 		else if (mustBeLogicalOperator)
 		{
-			
+			if (elementString == _andKeyword || elementString == _orKeyword)
+			{
+				logicalOperators.push_back(elementString);
+				mustBeLogicalOperator = false;
+				mustBeValue = true;
+			}
+			else
+			{
+				_throwScriptError("invalid logical operator!");
+				return false;
+			}
 		}
 	}
 
-	bool finalResult = true;
+	// Single condition
+	if (conditions.size() == 1)
+	{
+		return conditions.front();
+	}
 
-	return conditions.back();
+	// Multiple conditions
+	bool finalCondition = conditions[0];
+	string currentLogicalOperator = "";
+	for (unsigned int i = 1; i < conditions.size(); i++)
+	{
+		if (currentLogicalOperator.empty()) // Save logical operator
+		{
+			currentLogicalOperator = logicalOperators[i - 1];
+		}
+		else if (currentLogicalOperator != logicalOperators[i - 1]) // Check logical operator
+		{
+			_throwScriptError("cannot use different logical operators!");
+			return false;
+		}
+
+		if (logicalOperators[i - 1] == _andKeyword) // AND
+		{
+			finalCondition = finalCondition && conditions[i];
+		}
+		else if(logicalOperators[i - 1] == _orKeyword) // OR
+		{
+			finalCondition = finalCondition || conditions[i];
+		}
+	}
+
+	return finalCondition;
 }
 
 bool ScriptInterpreter::_validateCondition(ScriptValue& firstValue, string comparisonOperator, ScriptValue& secondValue)
@@ -198,7 +238,7 @@ bool ScriptInterpreter::_validateCondition(ScriptValue& firstValue, string compa
 		return false;
 	}
 
-	// Check if not trying to compare string values with the wrong operator
+	// Check if not trying to compare boolean values with the wrong operator
 	if ((comparisonOperator == _moreKeyword || comparisonOperator == _lessKeyword) && firstValue.getType() == ScriptValueType::BOOLEAN)
 	{
 		_throwScriptError("invalid comparison operator for boolean values!");
@@ -209,7 +249,7 @@ bool ScriptInterpreter::_validateCondition(ScriptValue& firstValue, string compa
 	return true;
 }
 
-bool ScriptInterpreter::_checkConditionResult(ScriptValue& firstValue, string comparisonOperator, ScriptValue& secondValue)
+bool ScriptInterpreter::_compareValues(ScriptValue& firstValue, string comparisonOperator, ScriptValue& secondValue)
 {
 	if (comparisonOperator == _isKeyword)
 	{

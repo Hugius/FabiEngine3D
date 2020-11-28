@@ -346,7 +346,7 @@
     <ClCompile Include="Source\script_interpreter_core.cpp" />
     <ClCompile Include="Source\script_interpreter_execution.cpp" />
     <ClCompile Include="Source\script_interpreter_functions.cpp" />
-    <ClCompile Include="Source\script_interpreter_ifstatement.cpp" />
+    <ClCompile Include="Source\script_interpreter_conditions.cpp" />
     <ClCompile Include="Source\script_interpreter_misc.cpp" />
     <ClCompile Include="Source\script_interpreter_variables_creation.cpp" />
     <ClCompile Include="Source\script_interpreter_variables_misc.cpp" />

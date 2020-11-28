@@ -120,7 +120,7 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 				string conditionString = scriptLineText.substr((_ifKeyword.size() + 1), scriptLineText.size() - (_ifKeyword.size() + 2));
 
 				// Check the condition of the if statement
-				if (_checkIfStatement(conditionString))
+				if (_checkConditionString(conditionString))
 				{
 					_scopeDepthStack.back()++;
 					_scopeHasChanged = true;
@@ -150,7 +150,7 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 					string conditionString = scriptLineText.substr((_elifKeyword.size() + 1), scriptLineText.size() - (_elifKeyword.size() + 2));
 
 					// Check the condition of the elif statement
-					if (!_lastConditionResult && _checkIfStatement(conditionString))
+					if (!_lastConditionResult && _checkConditionString(conditionString))
 					{
 						_scopeDepthStack.back()++;
 						_scopeHasChanged = true;

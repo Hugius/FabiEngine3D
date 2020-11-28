@@ -44,9 +44,9 @@ private:
 	ScriptVariable& _getGlobalVariable(const string& variableID);
 
 	// If statement functions
-	bool _checkIfStatement(string conditionString);
+	bool _checkConditionString(string conditionString);
 	bool _validateCondition(ScriptValue& firstValue, string comparisonOperator, ScriptValue& secondValue);
-	bool _checkConditionResult(ScriptValue& firstValue, string comparisonOperator, ScriptValue& secondValue);
+	bool _compareValues(ScriptValue& firstValue, string comparisonOperator, ScriptValue& secondValue);
 
 	// Argument functions
 	bool _validateArgumentAmount(vector<ScriptValue> arguments, unsigned int amount);

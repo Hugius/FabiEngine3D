@@ -430,9 +430,6 @@
     <ClCompile Include="Source\script_interpreter_arguments.cpp">
       <Filter>src\Scripting System\Execution\Interpreter</Filter>
     </ClCompile>
-    <ClCompile Include="Source\script_interpreter_ifstatement.cpp">
-      <Filter>src\Scripting System\Execution\Interpreter</Filter>
-    </ClCompile>
     <ClCompile Include="Source\script_interpreter_functions.cpp">
       <Filter>src\Scripting System\Execution\Interpreter</Filter>
     </ClCompile>
@@ -533,6 +530,9 @@
       <Filter>src\Scripting System\Execution\Interpreter</Filter>
     </ClCompile>
     <ClCompile Include="Source\script_interpreter_variables_creation.cpp">
+      <Filter>src\Scripting System\Execution\Interpreter</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_interpreter_conditions.cpp">
       <Filter>src\Scripting System\Execution\Interpreter</Filter>
     </ClCompile>
   </ItemGroup>

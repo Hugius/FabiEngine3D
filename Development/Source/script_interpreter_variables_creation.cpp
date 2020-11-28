@@ -60,9 +60,19 @@ void ScriptInterpreter::_processVariableDefinition(const string& scriptLine, Scr
 			{
 				variable.getValue().setInteger(stoi(valueString));
 			}
-			else if ((variable.getValue().getType() == ScriptValueType::BOOLEAN) && _isBooleanValue(valueString)) // BOOLEAN
+			else if ((variable.getValue().getType() == ScriptValueType::BOOLEAN) && _isBooleanValue(valueString)) // BOOLEAN - normal
 			{
 				variable.getValue().setBoolean(valueString == "<true>");
+			}
+			else if // BOOLEAN - condition
+				(
+					(variable.getValue().getType() == ScriptValueType::BOOLEAN) && 
+					(valueString.front() == '(' && valueString.back() == ')')
+				)
+			{
+				valueString.erase(valueString.begin());
+				valueString.pop_back();
+				variable.getValue().setBoolean(_checkConditionString(valueString));
 			}
 			else if // FUNCTION
 				(
@@ -291,9 +301,19 @@ void ScriptInterpreter::_processVariableDefinition(const string& scriptLine, Scr
 							auto value = ScriptValue(_fe3d, ScriptValueType::INTEGER, stoi(valueString));
 							variableList.push_back(ScriptVariable(_fe3d, scope, nameString, isConstant, value));
 						}
-						else if (typeString == _booleanKeyword && _isBooleanValue(valueString)) // BOOLEAN
+						else if (typeString == _booleanKeyword && _isBooleanValue(valueString)) // BOOLEAN - normal
 						{
 							auto value = ScriptValue(_fe3d, ScriptValueType::BOOLEAN, (valueString == "<true>"));
+							variableList.push_back(ScriptVariable(_fe3d, scope, nameString, isConstant, value));
+						}
+						else if (typeString == _booleanKeyword && (valueString.front() == '(' && valueString.back() == ')')) // BOOLEAN - condition
+						{
+							// Removing the ( ) around the string content
+							valueString.erase(valueString.begin());
+							valueString.pop_back();
+
+							// Add new boolean variable
+							auto value = ScriptValue(_fe3d, ScriptValueType::BOOLEAN, _checkConditionString(valueString));
 							variableList.push_back(ScriptVariable(_fe3d, scope, nameString, isConstant, value));
 						}
 						else if // FUNCTION

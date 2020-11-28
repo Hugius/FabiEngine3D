@@ -123,6 +123,11 @@ void CameraManager::update(WindowManager & windowManager)
 
 void CameraManager::updateMatrices()
 {
+	// Clamp the camera position
+	_position.x = std::clamp(_position.x, -_farZ, _farZ);
+	_position.y = std::clamp(_position.y, -_farZ, _farZ);
+	_position.z = std::clamp(_position.z, -_farZ, _farZ);
+
 	// Lookat front vector
 	if(_isLookatEabled)
 	{

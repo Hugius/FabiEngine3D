@@ -216,7 +216,7 @@ void ScriptInterpreter::_processVariableDefinition(const string& scriptLine, Scr
 			// Forbidden variable names
 			for (auto& word : { _metaKeyword, _executeKeyword, _ifKeyword, _elifKeyword, _elseKeyword, _globalKeyword,
 				_constKeyword, _editKeyword, _vec3Keyword, _stringKeyword, _decimalKeyword, _integerKeyword, _booleanKeyword, _isKeyword,
-				_notKeyword, _andKeyword, _orKeyword, _moreKeyword, _lessKeyword, _plusKeyword, _minusKeyword, _multiplyKeyword, _divideKeyword })
+				_notKeyword, _andKeyword, _orKeyword, _moreKeyword, _lessKeyword, _additionKeyword, _subtractionKeyword, _multiplicationKeyword, _divisionKeyword })
 			{
 				validName = validName && (nameString != word);
 			}
@@ -346,11 +346,12 @@ void ScriptInterpreter::_processVariableDefinition(const string& scriptLine, Scr
 							// Check if using another variable as value
 							if (_isLocalVariableExisting(valueString) || _isGlobalVariableExisting(valueString))
 							{
+								// Retrieve other variable
 								auto otherVariable = _isLocalVariableExisting(valueString) ?
 									_getLocalVariable(valueString) : _getGlobalVariable(valueString);
 
 								// Check if using part of vec3 variable as value
-								if (typeString == _decimalKeyword || parts != Ivec3(0))
+								if (typeString == _decimalKeyword && parts != Ivec3(0))
 								{
 									// Determine part of vec3 variable
 									if (parts.x)
@@ -380,7 +381,7 @@ void ScriptInterpreter::_processVariableDefinition(const string& scriptLine, Scr
 								}
 								else
 								{
-									_throwScriptError("invalid function value!");
+									_throwScriptError("variable value types don't match!");
 								}
 							}
 							else

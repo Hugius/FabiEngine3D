@@ -291,6 +291,34 @@ vector<ScriptValue> ScriptInterpreter::_processEngineFunctionCall(const string& 
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::INTEGER, result));
 					}
 				}
+				else if (scriptLine.substr(0, parenthesisIndex) == "fe3d:raycast_in_entity") // Raycasting into a single entity
+				{
+					auto types = { ScriptValueType::STRING };
+
+					if (_validateArgumentAmount(arguments, types.size()) && _validateArgumentTypes(arguments, types))
+					{
+						auto result = _fe3d.collision_checkCursorInEntity(arguments[0].getString());
+						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
+					}
+				}
+				else if (scriptLine.substr(0, parenthesisIndex) == "fe3d:raycast_in_entities") // Raycasting into a multiple entities
+				{
+					auto types = { ScriptValueType::STRING };
+
+					if (_validateArgumentAmount(arguments, types.size()) && _validateArgumentTypes(arguments, types))
+					{
+						auto result = _fe3d.collision_checkCursorInEntities(arguments[0].getString());
+						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result));
+					}
+				}
+				else if (scriptLine.substr(0, parenthesisIndex) == "fe3d:raycast_in_any") // Raycasting into all entities
+				{
+					if (_validateArgumentAmount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+					{
+						auto result = _fe3d.collision_checkCursorInAny();
+						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result));
+					}
+				}
 				else if (scriptLine.substr(0, parenthesisIndex) == "fe3d:misc_cursor_show") // SHow cursor
 				{
 					if (_validateArgumentAmount(arguments, 0) && _validateArgumentTypes(arguments, {}))

@@ -120,6 +120,9 @@ void ScriptInterpreter::load()
 
 	// Check if any engine warnings were thrown
 	_checkEngineWarnings();
+
+	// Enable collision
+	_fe3d.collision_enableCameraResponse();
 }
 
 void ScriptInterpreter::executeInitialization()

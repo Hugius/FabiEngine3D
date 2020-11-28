@@ -42,7 +42,7 @@ void CameraManager::update(WindowManager & windowManager)
 	Ivec2 currentMousePos = windowManager.getMousePos();
 	static Ivec2 lastMousePos = currentMousePos;
 
-	if (_isFirstPersonViewEnabled)
+	if (_isFirstPersonViewEnabled && !_mustCenter)
 	{
 		// Variable
 		int left = Config::getInst().getVpPos().x;
@@ -92,6 +92,10 @@ void CameraManager::update(WindowManager & windowManager)
 		// Calculate yaw & pitch
 		_yawAcceleration += xOffset;
 		_pitchAcceleration += yOffset;
+	}
+	else
+	{
+		_mustCenter = false;
 	}
 
 	// Update yaw & pitch movements
@@ -198,6 +202,7 @@ void CameraManager::disableLookat()
 
 void CameraManager::enableFirstPersonView()
 {
+	_mustCenter = true;
 	_isFirstPersonViewEnabled = true;
 }
 

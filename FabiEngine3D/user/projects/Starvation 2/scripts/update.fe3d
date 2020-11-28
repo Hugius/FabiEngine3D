@@ -1,4 +1,4 @@
-18 16
+15 28
 META script_type_update
 META execution_entry
 
@@ -8,6 +8,19 @@ BOOL forward = fe3d:input_key_down("KEY_W")
 BOOL backward = fe3d:input_key_down("KEY_S")
 BOOL left = fe3d:input_key_down("KEY_A")
 BOOL right = fe3d:input_key_down("KEY_D")
+BOOL shift = fe3d:input_key_down("KEY_LSHIFT")
+
+/// Running speed
+CAST shift INT
+INCR shift 1
+CAST shift DEC
+DEC movingSpeed = _baseSpeed
+MUL movingSpeed shift
+
+///BOOL interval = fe3d:misc_time_interval("temp", 50)
+///IF interval IS <true>:
+///    STR selected = fe3d:raycast_in_any()
+///    fe3d:print(selected)
 
 /// Jumping movement
 IF up IS <true>:
@@ -16,16 +29,13 @@ IF up IS <true>:
 /// WASD movement
 IF forward IS <true>:
     fe3d:camera_follow_z(movingSpeed)
-    DEC fov = fe3d:camera_fov_get()
-    INCR fov 0.1
-    fe3d:camera_fov_set(fov)
-ELIF backward IS <true>:
-    MUL movingSpeed -1.0
+IF backward IS <true>:
+    NEG movingSpeed
     fe3d:camera_follow_z(movingSpeed)
-    MUL movingSpeed -1.0
+    NEG movingSpeed
 IF left IS <true>:
-    MUL movingSpeed -1.0
+    NEG movingSpeed
     fe3d:camera_follow_x(movingSpeed)
-    MUL movingSpeed -1.0
-ELIF right IS <true>:
+    NEG movingSpeed
+IF right IS <true>:
     fe3d:camera_follow_x(movingSpeed)

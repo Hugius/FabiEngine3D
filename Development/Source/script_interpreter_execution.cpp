@@ -235,19 +235,20 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 		}
 		else if //Variable arithmetic
 			(
-				scriptLineText.substr(0, _plusKeyword.size() + 1) == _plusKeyword + " " ||
-				scriptLineText.substr(0, _minusKeyword.size() + 1) == _minusKeyword + " " ||
-				scriptLineText.substr(0, _multiplyKeyword.size() + 1) == _multiplyKeyword + " " ||
-				scriptLineText.substr(0, _divideKeyword.size() + 1) == _divideKeyword + " "
+				scriptLineText.substr(0, _additionKeyword.size() + 1) == _additionKeyword + " " ||
+				scriptLineText.substr(0, _subtractionKeyword.size() + 1) == _subtractionKeyword + " " ||
+				scriptLineText.substr(0, _multiplicationKeyword.size() + 1) == _multiplicationKeyword + " " ||
+				scriptLineText.substr(0, _divisionKeyword.size() + 1) == _divisionKeyword + " " ||
+				scriptLineText.substr(0, _negationKeyword.size() + 1) == _negationKeyword + " "
 			)
 		{
 			_processVariableArithmetic(scriptLineText);
 		}
-		else if (scriptLineText.substr(0, _castKeyword.size() + 1) == _castKeyword + " ") // Variable type casting
+		else if (scriptLineText.substr(0, _castingKeyword.size() + 1) == _castingKeyword + " ") // Variable type casting
 		{
 			_processVariableTypecast(scriptLineText);
 		}
-		else if (scriptLineText.substr(0, _concatKeyword.size() + 1) == _concatKeyword + " ") // String concatenation
+		else if (scriptLineText.substr(0, _concatenationKeyword.size() + 1) == _concatenationKeyword + " ") // String concatenation
 		{
 			_processStringConcatenation(scriptLineText);
 		}

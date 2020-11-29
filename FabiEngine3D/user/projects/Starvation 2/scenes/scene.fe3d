@@ -3,7 +3,7 @@ TERRAIN default user\assets\textures\height_maps\terrain.bmp user\assets\texture
 WATER default user\assets\textures\dudv_maps\water.png user\assets\textures\normal_maps\water_default.png user\assets\textures\displacement_maps\water.png 1 1 1 1 1 0 0 1 325 5 4.5 -25 64 1 -0.00125 0 0.4 256 15
 MODEL @tree1_lod 0 0.01 0 0 0 0 5 9.5 5 user\assets\models\tree_lod.obj user\assets\textures\diffuse_maps\tree3_lod.png ? ? ? 0 0 0 1 0 0 1 1 0.75 1 1 1 1 ? 0
 MODEL @tree7_lod -17.5636 6.37255 -41.2777 0 0 0 5 13.5 5 user\assets\models\tree_lod.obj user\assets\textures\diffuse_maps\tree14_leaves.png ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0
-MODEL 725@hills 0 -10 0 0 0 0 10 26 10 user\assets\models\hills.obj user\assets\textures\diffuse_maps\grass3.png ? ? ? 0 0 1 0 0 0 1 1 0.6 1 1 1 10 ? 0
+MODEL 1493989539@hills 0 -10 0 0 0 0 10 26 10 user\assets\models\hills.obj user\assets\textures\diffuse_maps\grass3.png ? ? ? 0 0 1 0 0 0 1 1 0.6 1 1 1 10 ? 0
 MODEL 1838108647@tree7 -19.733 6.37255 -42.305 0 0 0 2 1.5 2 user\assets\models\tree14.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 @tree7_lod 0 trunk 0 0 -0.1 1.5 25 1.6 leaves 0 13 0 9.8 12.1 9
 MODEL 1902736022@tree1 -19.6735 6.37255 -56.7164 0 0 0 1.5 1.5 1.5 user\assets\models\tree3.obj user\assets\textures\diffuse_maps\tree3.png ? ? user\assets\textures\normal_maps\tree_3.png 0 0 1 1 0 0 1 1 1 1 1 1 1 @tree1_lod 0 trunk 0 0 0 0.8 19 0.8 leaves 0 7 0 8.2 12 7.5
 AMBIENT_LIGHT 1 1 1 0.5

@@ -1,4 +1,4 @@
-13 12
+18 0
 META script_type_update
 META execution_entry
 
@@ -17,10 +17,11 @@ CAST shift DEC
 DEC movingSpeed = _baseSpeed
 MUL movingSpeed shift
 
-///BOOL interval = fe3d:misc_time_interval("temp", 50)
-///IF interval IS <true>:
-///    STR selected = fe3d:raycast_in_any()
-///    fe3d:print(selected)
+STR selected = fe3d:raycast_in_any()
+IF selected NOT "":
+    BOOL interval = fe3d:misc_time_interval("temp", 50)
+    IF interval IS <true>:
+        fe3d:print(selected)
 
 /// Jumping movement
 IF up IS <true>:

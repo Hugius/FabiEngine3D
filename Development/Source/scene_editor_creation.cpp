@@ -319,19 +319,29 @@ void SceneEditor::_placeModel(const string& newID, const string& previewID, Vec3
 	}
 }
 
-void SceneEditor::_placeModel(const string& newID, Vec3 position, Vec3 rotation, Vec3 size, const string& objPath, const string& diffuseMapPath,
-	const string& lightMapPath, const string& reflectionMapPath, const string& normalMapPath, bool isFrozen, bool isFaceCulled,
-	bool isShadowed, bool isTransparent, bool isReflective, bool isSpecular, float specularFactor,
+void SceneEditor::_placeModel(bool scriptExecution, const string& modelName, const string& modelNumber, Vec3 position, Vec3 rotation, Vec3 size,
+	const string& objPath, const string& diffuseMapPath, const string& lightMapPath, const string& reflectionMapPath, const string& normalMapPath, 
+	bool isFrozen, bool isFaceCulled, bool isShadowed, bool isTransparent, bool isReflective, bool isSpecular, float specularFactor,
 	float specularIntensity, float lightness, Vec3 color, float uvRepeat, const string& lodEntityID, bool isInstanced,
 	vector<Vec3> instancedOffsets, vector<string> aabbNames, vector<Vec3> aabbPositions, vector<Vec3> aabbSizes)
 {
+	// Compose new model ID
+	string newID = scriptExecution ? (modelName + "@" + modelNumber) : (modelNumber + "@" + modelName);
+
 	// Add GAME entity
 	_fe3d.gameEntity_add(newID, objPath, position, rotation, size);
 
 	// Add AABBs
 	for (unsigned int i = 0; i < aabbNames.size(); i++)
 	{
-		_fe3d.aabbEntity_bindToGameEntity(newID, aabbPositions[i], aabbSizes[i], true, newID + "_" + aabbNames[i]);
+		if (scriptExecution) // modelname_aabbname@123
+		{
+			_fe3d.aabbEntity_bindToGameEntity(newID, aabbPositions[i], aabbSizes[i], true, modelName + "_" + aabbNames[i] + "@" + modelNumber);
+		}
+		else // 123@modelname_aabbname
+		{
+			_fe3d.aabbEntity_bindToGameEntity(newID, aabbPositions[i], aabbSizes[i], true, newID + "_" + aabbNames[i]);
+		}
 	}
 
 	// Model properties

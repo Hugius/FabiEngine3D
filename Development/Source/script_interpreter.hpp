@@ -58,9 +58,16 @@ private:
 	bool _validateScopeChange(unsigned int countedSpaces, const string& scriptLineText);
 	void _throwScriptError(const string& message);
 	void _checkEngineWarnings();
+
+	// Functioncall functions
 	vector<ScriptValue> _processEngineFunctionCall(const string& scriptLine);
 	vector<ScriptValue> _processMathematicalFunctionCall(const string& scriptLine);
 	vector<ScriptValue> _processMiscellaneousFunctionCall(const string& scriptLine);
+	bool _executeFe3dInputFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
+	bool _executeFe3dCameraFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
+	bool _executeFe3dCollisionFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
+	bool _executeFe3dGameEntityFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
+	bool _executeFe3dMiscFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 
 	// Instances
 	FabiEngine3D& _fe3d;

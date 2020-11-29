@@ -107,6 +107,11 @@ void FabiEngine3D::camera_setFarDistance(float farZ)
 	_core->_cameraManager.setFarZ(farZ);
 }
 
+void FabiEngine3D::camera_center()
+{
+	_core->_cameraManager.center();
+}
+
 float FabiEngine3D::camera_getYaw()
 {
 	return _core->_cameraManager.getYaw();

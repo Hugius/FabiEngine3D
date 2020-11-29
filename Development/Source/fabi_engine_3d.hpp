@@ -42,26 +42,27 @@ public:
 	void engine_stop();
 
 	// Camera interface - setters
-	void  camera_load(float fov, float nearZ, float farZ, Vec3 startPosition, float yaw = 0.0f, float pitch = 0.0f);
-	void  camera_enableLookat(Vec3 position);
-	void  camera_disableLookat();
-	void  camera_enableFirstPersonView();
-	void  camera_disableFirstPersonView();
-	void  camera_enableFreeMovement();
-	void  camera_disableFreeMovement();
-	void  camera_translateFollowX(float speed);
-	void  camera_translateFollowZY(float speed);
-	void  camera_translateFollowZ(float speed);
-	void  camera_translate(Vec3 translation);
-	void  camera_setPosition(Vec3 pos);
-	void  camera_invertYaw();
-	void  camera_invertPitch();
-	void  camera_setFOV(float fov);
-	void  camera_setMouseSensitivity(float speed);
-	void  camera_setYaw(float yaw);
-	void  camera_setPitch(float pitch);
-	void  camera_setNearDistance(float nearZ);
-	void  camera_setFarDistance(float farZ);
+	void camera_load(float fov, float nearZ, float farZ, Vec3 startPosition, float yaw = 0.0f, float pitch = 0.0f);
+	void camera_enableLookat(Vec3 position);
+	void camera_disableLookat();
+	void camera_enableFirstPersonView();
+	void camera_disableFirstPersonView();
+	void camera_enableFreeMovement();
+	void camera_disableFreeMovement();
+	void camera_translateFollowX(float speed);
+	void camera_translateFollowZY(float speed);
+	void camera_translateFollowZ(float speed);
+	void camera_translate(Vec3 translation);
+	void camera_setPosition(Vec3 pos);
+	void camera_invertYaw();
+	void camera_invertPitch();
+	void camera_setFOV(float fov);
+	void camera_setMouseSensitivity(float speed);
+	void camera_setYaw(float yaw);
+	void camera_setPitch(float pitch);
+	void camera_setNearDistance(float nearZ);
+	void camera_setFarDistance(float farZ);
+	void camera_center();
 
 	// Camera interface - getters
 	bool  camera_isLookatEnabled();

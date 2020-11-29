@@ -412,26 +412,11 @@
     <ClCompile Include="Source\script_executor.cpp">
       <Filter>src\Scripting System\Execution\Executor</Filter>
     </ClCompile>
-    <ClCompile Include="Source\script_interpreter_misc.cpp">
-      <Filter>src\Scripting System\Execution\Interpreter</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\script_interpreter_core.cpp">
-      <Filter>src\Scripting System\Execution\Interpreter</Filter>
-    </ClCompile>
     <ClCompile Include="Source\script_value.cpp">
       <Filter>src\Scripting System\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="Source\script_interpreter_execution.cpp">
-      <Filter>src\Scripting System\Execution\Interpreter</Filter>
-    </ClCompile>
     <ClCompile Include="Source\script_variable.cpp">
       <Filter>src\Scripting System\Miscellaneous</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\script_interpreter_arguments.cpp">
-      <Filter>src\Scripting System\Execution\Interpreter</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\script_interpreter_functions.cpp">
-      <Filter>src\Scripting System\Execution\Interpreter</Filter>
     </ClCompile>
     <ClCompile Include="Source\bottom_viewport_controller_console.cpp">
       <Filter>src\Engine Controller System\Viewport Controllers</Filter>
@@ -526,14 +511,44 @@
     <ClCompile Include="Source\ivector3.cpp">
       <Filter>src\Math System</Filter>
     </ClCompile>
-    <ClCompile Include="Source\script_interpreter_variables_misc.cpp">
-      <Filter>src\Scripting System\Execution\Interpreter</Filter>
+    <ClCompile Include="Source\script_interpreter_core.cpp">
+      <Filter>src\Scripting System\Execution\Interpreter\Core</Filter>
     </ClCompile>
-    <ClCompile Include="Source\script_interpreter_variables_creation.cpp">
-      <Filter>src\Scripting System\Execution\Interpreter</Filter>
+    <ClCompile Include="Source\script_interpreter_execution.cpp">
+      <Filter>src\Scripting System\Execution\Interpreter\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_interpreter_arguments.cpp">
+      <Filter>src\Scripting System\Execution\Interpreter\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="Source\script_interpreter_conditions.cpp">
-      <Filter>src\Scripting System\Execution\Interpreter</Filter>
+      <Filter>src\Scripting System\Execution\Interpreter\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_interpreter_misc.cpp">
+      <Filter>src\Scripting System\Execution\Interpreter\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_interpreter_variables_creation.cpp">
+      <Filter>src\Scripting System\Execution\Interpreter\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_interpreter_variables_misc.cpp">
+      <Filter>src\Scripting System\Execution\Interpreter\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_interpreter_func_camera.cpp">
+      <Filter>src\Scripting System\Execution\Interpreter\Functions</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_interpreter_func_collision.cpp">
+      <Filter>src\Scripting System\Execution\Interpreter\Functions</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_interpreter_func_core.cpp">
+      <Filter>src\Scripting System\Execution\Interpreter\Functions</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_interpreter_func_entity_game.cpp">
+      <Filter>src\Scripting System\Execution\Interpreter\Functions</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_interpreter_func_input.cpp">
+      <Filter>src\Scripting System\Execution\Interpreter\Functions</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_interpreter_func_misc.cpp">
+      <Filter>src\Scripting System\Execution\Interpreter\Functions</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -819,9 +834,6 @@
     <ClInclude Include="Source\script_executor.hpp">
       <Filter>src\Scripting System\Execution\Executor</Filter>
     </ClInclude>
-    <ClInclude Include="Source\script_interpreter.hpp">
-      <Filter>src\Scripting System\Execution\Interpreter</Filter>
-    </ClInclude>
     <ClInclude Include="Source\script_variable_scope.hpp">
       <Filter>src\Miscellaneous\Enums</Filter>
     </ClInclude>
@@ -869,6 +881,9 @@
     </ClInclude>
     <ClInclude Include="Source\ivector3.hpp">
       <Filter>src\Math System</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\script_interpreter.hpp">
+      <Filter>src\Scripting System\Execution\Interpreter\Core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1114,6 +1129,15 @@
     </Filter>
     <Filter Include="src\Math System">
       <UniqueIdentifier>{ade95dd8-ca22-496d-a02c-394d6cc2aaeb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Scripting System\Execution\Interpreter\Functions">
+      <UniqueIdentifier>{34644b65-a977-4554-bc11-0e04bacdc090}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Scripting System\Execution\Interpreter\Core">
+      <UniqueIdentifier>{794d5b54-fa03-4906-96c4-5796fb6daa70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Scripting System\Execution\Interpreter\Miscellaneous">
+      <UniqueIdentifier>{e3e33817-e236-4b5d-b624-9e5637a19f2a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -207,7 +207,6 @@ void CameraManager::disableLookat()
 
 void CameraManager::enableFirstPersonView()
 {
-	_mustCenter = true;
 	_isFirstPersonViewEnabled = true;
 }
 

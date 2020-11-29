@@ -294,16 +294,21 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 				std::replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
 				std::replace(lodEntityID.begin(), lodEntityID.end(), '?', ' ');
 
+				// Extract model name and number from ID
+				unsigned int atPos = std::distance(modelID.begin(), std::find(modelID.begin(), modelID.end(), '@'));
+				string modelNumber = modelID.substr(0, atPos);
+				string modelName = modelID.substr(atPos + 1);
+				modelID = modelName + "@" + modelNumber;
+				
 				// Add the model
-				_placeModel(modelID, position, rotation, size, objPath, diffuseMapPath, lightMapPath, reflectionMapPath, normalMapPath, isFrozen,
-					isFaceculled, isShadowed, isTransparent, isReflective, isSpecular, specularFactor, specularIntensity, lightness,
-					color, uvRepeat, lodEntityID, isInstanced, instancedOffsets, aabbNames, aabbPositions, aabbSizes);
+				_placeModel(!_isLoaded, modelName, modelNumber, position, rotation, size, objPath, diffuseMapPath, lightMapPath, 
+					reflectionMapPath, normalMapPath, isFrozen, isFaceculled, isShadowed, isTransparent, isReflective, isSpecular, specularFactor, 
+					specularIntensity, lightness, color, uvRepeat, lodEntityID, isInstanced, instancedOffsets, aabbNames, aabbPositions, aabbSizes);
 
 				// Hide LOD entity
 				if (makeInvisible)
 				{
 					_fe3d.gameEntity_hide(modelID);
-
 				}
 			}
 			else if (entityType == "BILLBOARD")

@@ -94,9 +94,9 @@ private:
 		bool isRefractive, float waveHeightFactor, float specularFactor, float specularIntensity, float transparency, Vec3 color, float uvRepeat,
 		Vec2 speed, const string& dudvMapPath, const string& normalMapPath, const string& displacementMapPath);
 	void _placeModel(const string& newID, const string& previewID, Vec3 position);
-	void _placeModel(const string& newID, Vec3 position, Vec3 rotation, Vec3 size, const string& objPath, const string& diffuseMapPath,
-		const string& lightMapPath, const string& reflectionMapPath, const string& normalMapPath, bool isFrozen,
-		bool isFaceCulled, bool isShadowed, bool isTransparent, bool isReflective, bool isSpecular, 
+	void _placeModel(bool scriptExecution, const string& modelName, const string& modelNumber, Vec3 position, Vec3 rotation, Vec3 size, 
+		const string& objPath, const string& diffuseMapPath, const string& lightMapPath, const string& reflectionMapPath, const string& normalMapPath, 
+		bool isFrozen, bool isFaceCulled, bool isShadowed, bool isTransparent, bool isReflective, bool isSpecular, 
 		float specularFactor, float specularIntensity, float lightness, Vec3 color, float uvRepeat, const string& lodEntityID, bool isInstanced,
 		vector<Vec3> instancedOffsets, vector<string> aabbNames, vector<Vec3> aabbPositions, vector<Vec3> aabbSizes);
 	void _placeBillboard(const string& newID, const string& previewID, Vec3 position);

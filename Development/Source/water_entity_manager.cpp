@@ -32,7 +32,7 @@ shared_ptr<WaterEntity> WaterEntityManager::getSelectedWater()
 	}
 }
 
-const vector<shared_ptr<WaterEntity>> WaterEntityManager::getEntities()
+const unordered_map<string, shared_ptr<WaterEntity>>& WaterEntityManager::getEntities()
 {
 	return _getWaterEntities();
 }
@@ -161,7 +161,7 @@ void WaterEntityManager::update()
 	}
 
 	// Update all water entities
-	for (auto& entity : _getWaterEntities())
+	for (auto& [ID, entity] : _getWaterEntities())
 	{
 		// Update water animations (rippling & waving)
 		if (entity->isVisible() && _renderBus.isWaterEffectsEnabled())

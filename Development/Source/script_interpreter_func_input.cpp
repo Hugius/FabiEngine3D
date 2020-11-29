@@ -82,4 +82,6 @@ bool ScriptInterpreter::_executeFe3dInputFunction(const string& functionName, ve
 	{
 		return false;
 	}
+
+	return false;
 }

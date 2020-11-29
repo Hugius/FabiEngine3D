@@ -28,6 +28,7 @@ public:
 	void scale(Vec2 val);
 	void setMinPosition(Vec2 val);
 	void setMaxPosition(Vec2 val);
+	void setDepth(unsigned int val);
 
 	// Texture & color
 	const GLuint getDiffuseMap() const;
@@ -44,6 +45,7 @@ public:
 	const Vec2 getScaling() const;
 	const Vec2 getMinPosition() const;
 	const Vec2 getMaxPosition() const;
+	const unsigned int getDepth() const;
 
 	// Other
 	void setDepthEntity(bool val);
@@ -64,6 +66,8 @@ private:
 	Vec2 _maxPosition = Vec2(1.0f);
 
 	float _alpha = 1.0f;
+
+	unsigned int _depth = 0;
 
 	bool _mirroredHorizontally = false;
 	bool _mirroredVertically   = false;

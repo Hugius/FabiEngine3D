@@ -11,7 +11,7 @@ public:
 	shared_ptr<WaterEntity> getEntity(const string& ID);
 	shared_ptr<WaterEntity> getSelectedWater();
 
-	const vector<shared_ptr<WaterEntity>> getEntities();
+	const unordered_map<string, shared_ptr<WaterEntity>>& getEntities();
 
 	void selectWater(const string& ID);
 	void addWaterEntity(const string& ID);

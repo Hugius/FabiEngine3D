@@ -19,7 +19,7 @@ shared_ptr<GameEntity> GameEntityManager::getEntity(const string& ID)
 	return result;
 }
 
-const vector<shared_ptr<GameEntity>> GameEntityManager::getEntities()
+const unordered_map<string, shared_ptr<GameEntity>>& GameEntityManager::getEntities()
 {
 	return _getGameEntities();
 }
@@ -192,7 +192,7 @@ void GameEntityManager::setLodDistance(float distance)
 
 void GameEntityManager::update()
 {
-	for (auto& entity : _getGameEntities())
+	for (auto& [ID, entity] : _getGameEntities())
 	{
 		// Only update if visible
 		if (entity->isVisible())

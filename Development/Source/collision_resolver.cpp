@@ -7,7 +7,10 @@ CollisionResolver::CollisionResolver(CollisionDetector& collisionDetector) :
 	
 }
 
-void CollisionResolver::update(const vector<shared_ptr<AabbEntity>> & boxes, TerrainEntityManager& terrainManager, CameraManager & camera)
+void CollisionResolver::update(
+	const unordered_map<string, shared_ptr<AabbEntity>>& boxes, 
+	TerrainEntityManager& terrainManager, 
+	CameraManager & camera)
 {
 	// Check if AABB collision is needed in the first place
 	if (_aabbResponseEnabled)
@@ -20,7 +23,7 @@ void CollisionResolver::update(const vector<shared_ptr<AabbEntity>> & boxes, Ter
 		Collision collision(false, false, false);
 
 		// Detect collision
-		for (auto& box : boxes)
+		for (auto& [ID, box] : boxes)
 		{
 			// If responsive to camera collision
 			if (box->isResponsive() && box->isVisible())

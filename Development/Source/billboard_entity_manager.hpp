@@ -11,7 +11,7 @@ public:
 
 	shared_ptr<BillboardEntity> getEntity(const string& ID);
 
-	const vector<shared_ptr<BillboardEntity>> getEntities();
+	const unordered_map<string, shared_ptr<BillboardEntity>>& getEntities();
 
 	void addBillboardEntity
 	(
@@ -40,5 +40,5 @@ private:
 
 	OpenGLBuffer* _openglBuffer = nullptr;
 
-	vector<shared_ptr<BillboardEntity>> _billboardEntities;
+	const unordered_map<string, shared_ptr<BillboardEntity>> _billboardEntities;
 };

@@ -10,7 +10,7 @@ public:
 
 	shared_ptr<TextEntity> getEntity(const string& ID);
 
-	const vector<shared_ptr<TextEntity>> getEntities();
+	const unordered_map<string, shared_ptr<TextEntity>>& getEntities();
 
 	void addTextEntity
 	(

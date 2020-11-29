@@ -11,7 +11,7 @@ void GuiEntityRenderer::bind()
 	_shader.uploadUniform("u_nearZ", _renderBus.getNearZ());
 	_shader.uploadUniform("u_farZ", _renderBus.getFarZ());
 
-	// Blending
+	// Alpha blending
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
@@ -24,7 +24,9 @@ void GuiEntityRenderer::unbind()
 
 void GuiEntityRenderer::render(const shared_ptr<GuiEntity> entity)
 {
-	if (entity->isVisible())
+	if (entity->isVisible() && 
+		((entity->getTranslation().y - entity->getScaling().y) < entity->getMaxPosition().y) &&
+		((entity->getTranslation().y + entity->getScaling().y) > entity->getMinPosition().y))
 	{
 		// Uniforms
 		_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix());

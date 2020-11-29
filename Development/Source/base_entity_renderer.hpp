@@ -11,8 +11,10 @@
 #include "render_bus.hpp"
 
 #include <memory>
+#include <unordered_map>
 
 using std::shared_ptr;
+using std::unordered_map;
 
 class BaseEntityRenderer
 {

@@ -38,4 +38,6 @@ bool ScriptInterpreter::_executeFe3dCollisionFunction(const string& functionName
 	{
 		return false;
 	}
+
+	return false;
 }

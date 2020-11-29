@@ -11,7 +11,7 @@ public:
 	shared_ptr<SkyEntity> getEntity(const string& ID);
 	shared_ptr<SkyEntity> getSelectedSky();
 
-	const vector<shared_ptr<SkyEntity>> getEntities();
+	const unordered_map<string, shared_ptr<SkyEntity>>& getEntities();
 
 	void selectSky(const string& ID);
 	void addSkyEntity(const string& ID);

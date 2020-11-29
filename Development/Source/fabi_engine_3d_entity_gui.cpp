@@ -8,7 +8,7 @@ void FabiEngine3D::guiEntity_deleteAll()
 
 void FabiEngine3D::guiEntity_hideAll()
 {
-	for (auto& entity : _core->_guiEntityManager.getEntities())
+	for (auto& [ID, entity] : _core->_guiEntityManager.getEntities())
 	{
 		entity->setVisible(false);
 	}
@@ -16,7 +16,7 @@ void FabiEngine3D::guiEntity_hideAll()
 
 void FabiEngine3D::guiEntity_showAll()
 {
-	for (auto& entity : _core->_guiEntityManager.getEntities())
+	for (auto& [ID, entity] : _core->_guiEntityManager.getEntities())
 	{
 		entity->setVisible(true);
 	}
@@ -128,7 +128,7 @@ vector<string> FabiEngine3D::guiEntity_getAllIDs()
 {
 	vector<string> IDs;
 
-	for (auto entity : _core->_guiEntityManager.getEntities())
+	for (auto [ID, entity] : _core->_guiEntityManager.getEntities())
 	{
 		IDs.push_back(entity->getID());
 	}

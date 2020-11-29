@@ -32,7 +32,7 @@ shared_ptr<SkyEntity> SkyEntityManager::getSelectedSky()
 	}
 }
 
-const vector<shared_ptr<SkyEntity>> SkyEntityManager::getEntities()
+const unordered_map<string, shared_ptr<SkyEntity>>& SkyEntityManager::getEntities()
 {
 	return _getSkyEntities();
 }
@@ -114,7 +114,7 @@ void SkyEntityManager::update()
 
 void SkyEntityManager::_updateRotation()
 {
-	for (auto& entity : _getSkyEntities())
+	for (auto& [ID, entity] : _getSkyEntities())
 	{
 		if (entity->isVisible())
 		{

@@ -12,13 +12,12 @@ class EngineGuiScreen final
 public:
 	EngineGuiScreen(FabiEngine3D& fe3d, const string& parentID, const string& ID, Vec2 position, Vec2 size);
 
+	// Core
 	void update(bool hoverable);
 	void show();
 	void hide();
 
-	const string& getID();
-	const string& getParentID();
-
+	// Add
 	void addScrollingList(const string& ID, Vec2 position, Vec2 size, Vec3 color, Vec3 buttonColor, Vec3 buttonHoverColor, Vec3 textColor, 
 		Vec3 textHoverColor, Vec2 charSize);
 	void addWriteField(const string& ID, Vec2 position, Vec2 size, Vec3 color, Vec3 hoverColor, Vec3 textColor, Vec3 textHoverColor, 
@@ -29,31 +28,43 @@ public:
 	void addRectangle(const string& ID, Vec2 position, Vec2 size, const string& textureName, bool isCentered = true);
 	void addTextfield(const string& ID, Vec2 position, Vec2 size, string textContent, Vec3 textColor, bool isCentered = true, bool isDynamic = false);
 
+	// Delete
 	void deleteScrollingList(const string& ID);
 	void deleteWriteField(const string& ID);
 	void deleteButton(const string& ID);
 	void deleteRectangle(const string& ID);
 	void deleteTextfield(const string& ID);
 
+	// Check
 	bool checkScrollingList(const string& ID);
 	bool checkWriteField(const string& ID);
 	bool checkButton(const string& ID);
 	bool checkRectangle(const string& ID);
 	bool checkTextfield(const string& ID);
 
+	// Get single
 	shared_ptr<EngineGuiScrollingList> getScrollingList(const string& ID);
 	shared_ptr<EngineGuiWriteField>    getWriteField(const string& ID);
 	shared_ptr<EngineGuiButton>        getButton(const string& ID);
 	shared_ptr<EngineGuiRectangle>     getRectangle(const string& ID);
 	shared_ptr<EngineGuiTextfield>     getTextfield(const string& ID);
 
+	// Get multiple
 	vector<shared_ptr<EngineGuiScrollingList>>& getScrollingLists();
 	vector<shared_ptr<EngineGuiWriteField>>&    getWriteFields();
 	vector<shared_ptr<EngineGuiButton>>&		getButtons();
 	vector<shared_ptr<EngineGuiRectangle>>&		getRectangles();
 	vector<shared_ptr<EngineGuiTextfield>>&		getTextfields();
 
+	// Miscellaneous
+	const string& getID();
+	const string& getParentID();
+	Vec2 convertPosition(Vec2 position);
+	Vec2 convertSize(Vec2 size);
+
 private:
+	Vec4 _convertDimensions(Vec2 position, Vec2 size);
+
 	FabiEngine3D& _fe3d;
 
 	Vec2 _parentPosition;
@@ -69,6 +80,4 @@ private:
 	vector<shared_ptr<EngineGuiButton>> _buttons;
 	vector<shared_ptr<EngineGuiRectangle>> _rectangles;
 	vector<shared_ptr<EngineGuiTextfield>> _textfields;
-
-	Vec4 _convertDimensions(Vec2 position, Vec2 size);
 };

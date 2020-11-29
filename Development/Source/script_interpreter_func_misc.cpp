@@ -88,4 +88,6 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 	{
 		return false;
 	}
+
+	return false;
 }

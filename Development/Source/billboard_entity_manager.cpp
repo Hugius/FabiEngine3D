@@ -31,7 +31,7 @@ shared_ptr<BillboardEntity> BillboardEntityManager::getEntity(const string& ID)
 	return result;
 }
 
-const vector<shared_ptr<BillboardEntity>> BillboardEntityManager::getEntities()
+const unordered_map<string, shared_ptr<BillboardEntity>>& BillboardEntityManager::getEntities()
 {
 	return _getBillboardEntities();
 }
@@ -81,7 +81,7 @@ void BillboardEntityManager::addBillboardEntity
 
 void BillboardEntityManager::update()
 {
-	for (auto& entity : _getBillboardEntities())
+	for (auto& [ID, entity] : _getBillboardEntities())
 	{
 		// 3D camera facing
 		auto facingX = entity->isCameraFacingX();
@@ -98,7 +98,7 @@ void BillboardEntityManager::update()
 
 		// Update rotation
 		entity->setRotation(rotation);
-		
+
 		// Calculate model matrix
 		if (entity->isVisible())
 		{
@@ -115,7 +115,7 @@ void BillboardEntityManager::update()
 				if (entity->getSpriteColumnIndex() >= entity->getTotalSpriteColumns() - 1) // Reached total columns
 				{
 					entity->setSpriteColumnIndex(0); // Reset column index
-					
+
 					if (entity->getSpriteRowIndex() >= entity->getTotalSpriteRows() - 1) // Reached total rows
 					{
 						entity->increaseAnimationRepeats();

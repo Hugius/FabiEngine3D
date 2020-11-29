@@ -18,118 +18,91 @@ void BaseEntityManager::deleteEntity(const string& ID)
 	{
 		case(EntityType::SKY):
 		{
-			for (size_t i = 0; i < _skyEntities.size(); i++)
+			if (_skyEntities.erase(ID))
 			{
-				if (_skyEntities[i]->getID() == ID)
-				{
-					_skyEntities.erase(_skyEntities.begin() + i);
-					return;
-				}
+				return;
 			}
+
 			break;
 		}
 
 		case(EntityType::TERRAIN):
 		{
-			for (size_t i = 0; i < _terrainEntities.size(); i++)
+			if (_terrainEntities.erase(ID))
 			{
-				if (_terrainEntities[i]->getID() == ID)
-				{
-					_terrainEntities.erase(_terrainEntities.begin() + i);
-					return;
-				}
+				return;
 			}
+
 			break;
 		}
 
 		case(EntityType::WATER):
 		{
-			for (size_t i = 0; i < _waterEntities.size(); i++)
+			if (_waterEntities.erase(ID))
 			{
-				if (_waterEntities[i]->getID() == ID)
-				{
-					_waterEntities.erase(_waterEntities.begin() + i);
-					return;
-				}
+				return;
 			}
+
 			break;
 		}
 
 		case(EntityType::GAME):
 		{
-			for (size_t i = 0; i < _gameEntities.size(); i++)
+			if (_gameEntities.erase(ID))
 			{
-				if (_gameEntities[i]->getID() == ID)
-				{
-					_gameEntities.erase(_gameEntities.begin() + i);
-					return;
-				}
+				return;
 			}
+
 			break;
 		}
 
 		case(EntityType::BILLBOARD):
 		{
-			for (size_t i = 0; i < _billboardEntities.size(); i++)
+			if (_billboardEntities.erase(ID))
 			{
-				if (_billboardEntities[i]->getID() == ID)
-				{
-					_billboardEntities.erase(_billboardEntities.begin() + i);
-					return;
-				}
+				return;
 			}
+
 			break;
 		}
 
 		case(EntityType::AABB):
 		{
-			for (size_t i = 0; i < _aabbEntities.size(); i++)
+			if (_aabbEntities.erase(ID))
 			{
-				if (_aabbEntities[i]->getID() == ID)
-				{
-					_aabbEntities.erase(_aabbEntities.begin() + i);
-					return;
-				}
+				return;
 			}
+
 			break;
 		}
 
 		case(EntityType::LIGHT):
 		{
-			for (size_t i = 0; i < _lightEntities.size(); i++)
+			if (_lightEntities.erase(ID))
 			{
-				if (_lightEntities[i]->getID() == ID)
-				{
-					_lightEntities.erase(_lightEntities.begin() + i);
-					return;
-				}
+				return;
 			}
+
 			break;
 		}
 
 		case(EntityType::GUI):
 		{
-			for (size_t i = 0; i < _guiEntities.size(); i++)
+			if (_guiEntities.erase(ID))
 			{
-				if (_guiEntities[i]->getID() == ID)
-				{
-					_guiEntities.erase(_guiEntities.begin() + i);
-					return;
-				}
+				return;
 			}
+
 			break;
 		}
 
 		case(EntityType::TEXT):
 		{
-			for (size_t i = 0; i < _textEntities.size(); i++)
+			if (_textEntities.erase(ID))
 			{
-				if (_textEntities[i]->getID() == ID)
-				{
-					_textEntities.erase(_textEntities.begin() + i);
-					return;
-				}
+				return;
 			}
+
 			break;
 		}
 	}
@@ -213,7 +186,7 @@ void BaseEntityManager::_createEntity(const string& ID)
 			{
 				Logger::throwError("Could not create SKY entity: \"" + ID + "\" already exists!");
 			}
-			_skyEntities.push_back(make_shared<SkyEntity>(ID));
+			_skyEntities.insert(make_pair(ID, make_shared<SkyEntity>(ID)));
 			return;
 		}
 
@@ -223,7 +196,7 @@ void BaseEntityManager::_createEntity(const string& ID)
 			{
 				Logger::throwError("Could not create TERRAIN entity: \"" + ID + "\" already exists!");
 			}
-			_terrainEntities.push_back(make_shared<TerrainEntity>(ID));
+			_terrainEntities.insert(make_pair(ID, make_shared<TerrainEntity>(ID)));
 			return;
 		}
 
@@ -233,7 +206,7 @@ void BaseEntityManager::_createEntity(const string& ID)
 			{
 				Logger::throwError("Could not create WATER entity: \"" + ID + "\" already exists!");
 			}
-			_waterEntities.push_back(make_shared<WaterEntity>(ID));
+			_waterEntities.insert(make_pair(ID, make_shared<WaterEntity>(ID)));
 			return;
 		}
 
@@ -243,7 +216,7 @@ void BaseEntityManager::_createEntity(const string& ID)
 			{
 				Logger::throwError("Could not create GAME entity: \"" + ID + "\" already exists!");
 			}
-			_gameEntities.push_back(make_shared<GameEntity>(ID));
+			_gameEntities.insert(make_pair(ID, make_shared<GameEntity>(ID)));
 			return;
 		}
 
@@ -253,7 +226,7 @@ void BaseEntityManager::_createEntity(const string& ID)
 			{
 				Logger::throwError("Could not create BILLBOARD entity: \"" + ID + "\" already exists!");
 			}
-			_billboardEntities.push_back(make_shared<BillboardEntity>(ID));
+			_billboardEntities.insert(make_pair(ID, make_shared<BillboardEntity>(ID)));
 			return;
 		}
 
@@ -263,7 +236,7 @@ void BaseEntityManager::_createEntity(const string& ID)
 			{
 				Logger::throwError("Could not create AABB entity: \"" + ID + "\" already exists!");
 			}
-			_aabbEntities.push_back(make_shared<AabbEntity>(ID));
+			_aabbEntities.insert(make_pair(ID, make_shared<AabbEntity>(ID)));
 			return;
 		}
 
@@ -273,7 +246,7 @@ void BaseEntityManager::_createEntity(const string& ID)
 			{
 				Logger::throwError("Could not create LIGHT entity: \"" + ID + "\" already exists!");
 			}
-			_lightEntities.push_back(make_shared<LightEntity>(ID));
+			_lightEntities.insert(make_pair(ID, make_shared<LightEntity>(ID)));
 			return;
 		}
 
@@ -283,7 +256,9 @@ void BaseEntityManager::_createEntity(const string& ID)
 			{
 				Logger::throwError("Could not create GUI entity: \"" + ID + "\" already exists!");
 			}
-			_guiEntities.push_back(make_shared<GuiEntity>(ID));
+			_guiEntities.insert(make_pair(ID, make_shared<GuiEntity>(ID)));
+			_getGuiEntity(ID)->setDepth(_guiDepth);
+			_guiDepth++;
 			return;
 		}
 
@@ -293,170 +268,181 @@ void BaseEntityManager::_createEntity(const string& ID)
 			{
 				Logger::throwError("Could not create TEXT entity: \"" + ID + "\" already exists!");
 			}
-			_textEntities.push_back(make_shared<TextEntity>(ID));
+			_textEntities.insert(make_pair(ID, make_shared<TextEntity>(ID)));
+			_getTextEntity(ID)->setDepth(_guiDepth);
+			_guiDepth++;
 			return;
 		}
 	}
 }
 
-vector<shared_ptr<AabbEntity>>& BaseEntityManager::_getAabbEntities()
+unordered_map<string, shared_ptr<AabbEntity>>& BaseEntityManager::_getAabbEntities()
 {
 	return _aabbEntities;
 }
 
-vector<shared_ptr<BillboardEntity>>& BaseEntityManager::_getBillboardEntities()
+unordered_map<string, shared_ptr<BillboardEntity>>& BaseEntityManager::_getBillboardEntities()
 {
 	return _billboardEntities;
 }
 
-vector<shared_ptr<GameEntity>>& BaseEntityManager::_getGameEntities()
+unordered_map<string, shared_ptr<GameEntity>>& BaseEntityManager::_getGameEntities()
 {
 	return _gameEntities;
 }
 
-vector<shared_ptr<GuiEntity>>& BaseEntityManager::_getGuiEntities()
+unordered_map<string, shared_ptr<GuiEntity>>& BaseEntityManager::_getGuiEntities()
 {
 	return _guiEntities;
 }
 
-vector<shared_ptr<LightEntity>>& BaseEntityManager::_getLightEntities()
+unordered_map<string, shared_ptr<LightEntity>>& BaseEntityManager::_getLightEntities()
 {
 	return _lightEntities;
 }
 
-vector<shared_ptr<SkyEntity>>& BaseEntityManager::_getSkyEntities()
+unordered_map<string, shared_ptr<SkyEntity>>& BaseEntityManager::_getSkyEntities()
 {
 	return _skyEntities;
 }
 
-vector<shared_ptr<TerrainEntity>>& BaseEntityManager::_getTerrainEntities()
+unordered_map<string, shared_ptr<TerrainEntity>>& BaseEntityManager::_getTerrainEntities()
 {
 	return _terrainEntities;
 }
 
-vector<shared_ptr<TextEntity>>& BaseEntityManager::_getTextEntities()
+unordered_map<string, shared_ptr<TextEntity>>& BaseEntityManager::_getTextEntities()
 {
 	return _textEntities;
 }
 
-vector<shared_ptr<WaterEntity>>& BaseEntityManager::_getWaterEntities()
+unordered_map<string, shared_ptr<WaterEntity>>& BaseEntityManager::_getWaterEntities()
 {
 	return _waterEntities;
 }
 
 shared_ptr<AabbEntity> BaseEntityManager::_getAabbEntity(const string& ID)
 {
-	for (auto& entity : _aabbEntities)
-	{
-		if (entity->getID() == ID)
-		{
-			return entity;
-		}
-	}
+	auto it = _aabbEntities.find(ID);
 
-	return nullptr;
+	if (it == _aabbEntities.end())
+	{
+		return nullptr;
+	}
+	else
+	{
+		return it->second;
+	}
 }
 
 shared_ptr<BillboardEntity> BaseEntityManager::_getBillboardEntity(const string& ID)
 {
-	for (auto& entity : _billboardEntities)
-	{
-		if (entity->getID() == ID)
-		{
-			return entity;
-		}
-	}
+	auto it = _billboardEntities.find(ID);
 
-	return nullptr;
+	if (it == _billboardEntities.end())
+	{
+		return nullptr;
+	}
+	else
+	{
+		return it->second;
+	}
 }
 
 shared_ptr<GameEntity> BaseEntityManager::_getGameEntity(const string& ID)
 {
-	for (auto& entity : _gameEntities)
-	{
-		if (entity->getID() == ID)
-		{
-			return entity;
-		}
-	}
+	auto it = _gameEntities.find(ID);
 
-	return nullptr;
+	if (it == _gameEntities.end())
+	{
+		return nullptr;
+	}
+	else
+	{
+		return it->second;
+	}
 }
 
 shared_ptr<GuiEntity> BaseEntityManager::_getGuiEntity(const string& ID)
 {
-	for (auto& entity : _guiEntities)
-	{
-		if (entity->getID() == ID)
-		{
-			return entity;
-		}
-	}
+	auto it = _guiEntities.find(ID);
 
-	return nullptr;
+	if (it == _guiEntities.end())
+	{
+		return nullptr;
+	}
+	else
+	{
+		return it->second;
+	}
 }
 
 shared_ptr<LightEntity> BaseEntityManager::_getLightEntity(const string& ID)
 {
-	for (auto& entity : _lightEntities)
-	{
-		if (entity->getID() == ID)
-		{
-			return entity;
-		}
-	}
+	auto it = _lightEntities.find(ID);
 
-	return nullptr;
+	if (it == _lightEntities.end())
+	{
+		return nullptr;
+	}
+	else
+	{
+		return it->second;
+	}
 }
 
 shared_ptr<SkyEntity> BaseEntityManager::_getSkyEntity(const string& ID)
 {
-	for (auto& entity : _skyEntities)
-	{
-		if (entity->getID() == ID)
-		{
-			return entity;
-		}
-	}
+	auto it = _skyEntities.find(ID);
 
-	return nullptr;
+	if (it == _skyEntities.end())
+	{
+		return nullptr;
+	}
+	else
+	{
+		return it->second;
+	}
 }
 
 shared_ptr<TerrainEntity> BaseEntityManager::_getTerrainEntity(const string& ID)
 {
-	for (auto& entity : _terrainEntities)
-	{
-		if (entity->getID() == ID)
-		{
-			return entity;
-		}
-	}
+	auto it = _terrainEntities.find(ID);
 
-	return nullptr;
+	if (it == _terrainEntities.end())
+	{
+		return nullptr;
+	}
+	else
+	{
+		return it->second;
+	}
 }
 
 shared_ptr<TextEntity> BaseEntityManager::_getTextEntity(const string& ID)
 {
-	for (auto& entity : _textEntities)
-	{
-		if (entity->getID() == ID)
-		{
-			return entity;
-		}
-	}
+	auto it = _textEntities.find(ID);
 
-	return nullptr;
+	if (it == _textEntities.end())
+	{
+		return nullptr;
+	}
+	else
+	{
+		return it->second;
+	}
 }
 
 shared_ptr<WaterEntity> BaseEntityManager::_getWaterEntity(const string& ID)
 {
-	for (auto& entity : _waterEntities)
-	{
-		if (entity->getID() == ID)
-		{
-			return entity;
-		}
-	}
+	auto it = _waterEntities.find(ID);
 
-	return nullptr;
+	if (it == _waterEntities.end())
+	{
+		return nullptr;
+	}
+	else
+	{
+		return it->second;
+	}
 }

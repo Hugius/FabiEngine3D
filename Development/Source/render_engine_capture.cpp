@@ -16,7 +16,7 @@ void RenderEngine::_captureSceneReflections(CameraManager& camera)
 	string reflectiveEntityID;
 	if (!waterReflectionEnabled)
 	{
-		for (auto& gameEntity : _entityBus->getGameEntities())
+		for (auto& [ID, gameEntity]: _entityBus->getGameEntities())
 		{
 			if (gameEntity->isSceneReflective() && gameEntity->isVisible())
 			{
@@ -51,7 +51,7 @@ void RenderEngine::_captureSceneReflections(CameraManager& camera)
 		reflectiveEntityID = "";
 		if (!waterReflectionEnabled)
 		{
-			for (auto& gameEntity : _entityBus->getGameEntities())
+			for (auto& [ID, gameEntity]: _entityBus->getGameEntities())
 			{
 				if (gameEntity->isSceneReflective() && gameEntity->isVisible())
 				{
@@ -97,7 +97,7 @@ void RenderEngine::_captureSceneReflections(CameraManager& camera)
 		// Restore reflective GAME entity
 		if (!waterReflectionEnabled)
 		{
-			for (auto& gameEntity : _entityBus->getGameEntities())
+			for (auto& [ID, gameEntity] : _entityBus->getGameEntities())
 			{
 				if (gameEntity->getID() == reflectiveEntityID)
 				{
@@ -150,15 +150,15 @@ void RenderEngine::_captureShadows()
 		_shadowRenderer.bind();
 
 		// Render GAME entities
-		for (auto& entity : _entityBus->getGameEntities())
+		for (auto& [ID, gameEntity] : _entityBus->getGameEntities())
 		{
 			// Check if LOD entity needs to be rendered
-			if (entity->isLevelOfDetailed())
+			if (gameEntity->isLevelOfDetailed())
 			{
 				// Try to find LOD entity
-				for (auto& lodEntity : _entityBus->getGameEntities())
+				for (auto& [ID, lodEntity] : _entityBus->getGameEntities())
 				{
-					if (entity->getLodEntityID() == lodEntity->getID())
+					if (gameEntity->getLodEntityID() == lodEntity->getID())
 					{
 						// Save original transformation
 						Vec3 originalPosition = lodEntity->getTranslation();
@@ -167,10 +167,10 @@ void RenderEngine::_captureShadows()
 						bool originalVisibility = lodEntity->isVisible();
 
 						// Change transformation
-						lodEntity->setTranslation(entity->getTranslation());
-						lodEntity->setRotation(entity->getRotation());
-						lodEntity->setScaling((entity->getScaling() / entity->getOriginalScaling()) * originalSize);
-						lodEntity->setVisible(entity->isVisible());
+						lodEntity->setTranslation(gameEntity->getTranslation());
+						lodEntity->setRotation(gameEntity->getRotation());
+						lodEntity->setScaling((gameEntity->getScaling() / gameEntity->getOriginalScaling()) * originalSize);
+						lodEntity->setVisible(gameEntity->isVisible());
 						lodEntity->updateModelMatrix();
 						
 						// Render LOD entity
@@ -187,7 +187,7 @@ void RenderEngine::_captureShadows()
 			}
 			else // Render high-quality entity
 			{
-				_shadowRenderer.render(entity);
+				_shadowRenderer.render(gameEntity);
 			}
 		}
 
@@ -248,18 +248,18 @@ void RenderEngine::_captureSceneDepth()
 		}
 
 		// Render GAME entities
-		for (auto& entity : _entityBus->getGameEntities())
+		for (auto& [ID, gameEntity] : _entityBus->getGameEntities())
 		{
 			// Check if must be included in depth map
-			if (entity->isDepthMapIncluded())
+			if (gameEntity->isDepthMapIncluded())
 			{
 				// Check if LOD entity needs to be rendered
-				if (entity->isLevelOfDetailed())
+				if (gameEntity->isLevelOfDetailed())
 				{
 					// Try to find LOD entity
-					for (auto& lodEntity : _entityBus->getGameEntities())
+					for (auto& [ID, lodEntity] : _entityBus->getGameEntities())
 					{
-						if (entity->getLodEntityID() == lodEntity->getID())
+						if (gameEntity->getLodEntityID() == lodEntity->getID())
 						{
 							// Save original transformation
 							Vec3 originalPosition = lodEntity->getTranslation();
@@ -268,10 +268,10 @@ void RenderEngine::_captureSceneDepth()
 							bool originalVisibility = lodEntity->isVisible();
 
 							// Change transformation
-							lodEntity->setTranslation(entity->getTranslation());
-							lodEntity->setRotation(entity->getRotation());
-							lodEntity->setScaling((entity->getScaling() / entity->getOriginalScaling()) * originalSize);
-							lodEntity->setVisible(entity->isVisible());
+							lodEntity->setTranslation(gameEntity->getTranslation());
+							lodEntity->setRotation(gameEntity->getRotation());
+							lodEntity->setScaling((gameEntity->getScaling() / gameEntity->getOriginalScaling()) * originalSize);
+							lodEntity->setVisible(gameEntity->isVisible());
 							lodEntity->updateModelMatrix();
 
 							// Render LOD entity
@@ -288,13 +288,13 @@ void RenderEngine::_captureSceneDepth()
 				}
 				else // Render high-quality entity
 				{
-					_depthRenderer.render(entity);
+					_depthRenderer.render(gameEntity);
 				}
 			}
 		}
 
 		// Render BILLBOARD entities
-		for (auto& entity : _entityBus->getBillboardEntities())
+		for (auto& [ID, entity] : _entityBus->getBillboardEntities())
 		{
 			// Check if must be included in depth map
 			if (entity->isDepthMapIncluded())
@@ -306,7 +306,7 @@ void RenderEngine::_captureSceneDepth()
 		// Render AABB entities
 		if (_renderBus.isAabbFrameRenderingEnabled())
 		{
-			for (auto& entity : _entityBus->getAabbEntities())
+			for (auto& [ID, entity] : _entityBus->getAabbEntities())
 			{
 				_depthRenderer.render(entity);
 			}

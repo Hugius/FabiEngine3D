@@ -31,7 +31,7 @@ shared_ptr<TerrainEntity> TerrainEntityManager::getSelectedTerrain()
 	}
 }
 
-const vector<shared_ptr<TerrainEntity>> TerrainEntityManager::getEntities()
+const unordered_map<string, shared_ptr<TerrainEntity>>& TerrainEntityManager::getEntities()
 {
 	return _getTerrainEntities();
 }

@@ -16,8 +16,11 @@
 #include "entity_type.hpp"
 
 #include <memory>
+#include <unordered_map>
 
 using std::shared_ptr;
+using std::unordered_map;
+using std::make_pair;
 
 class BaseEntityManager
 {
@@ -40,15 +43,15 @@ protected:
 
 	void _createEntity(const string& ID);
 
-	vector<shared_ptr<AabbEntity>>& _getAabbEntities();
-	vector<shared_ptr<BillboardEntity>>& _getBillboardEntities();
-	vector<shared_ptr<GameEntity>>& _getGameEntities();
-	vector<shared_ptr<GuiEntity>>& _getGuiEntities();
-	vector<shared_ptr<LightEntity>>& _getLightEntities();
-	vector<shared_ptr<SkyEntity>>& _getSkyEntities();
-	vector<shared_ptr<TerrainEntity>>& _getTerrainEntities();
-	vector<shared_ptr<TextEntity>>& _getTextEntities();
-	vector<shared_ptr<WaterEntity>>& _getWaterEntities();
+	unordered_map<string, shared_ptr<AabbEntity>>& _getAabbEntities();
+	unordered_map<string, shared_ptr<BillboardEntity>>& _getBillboardEntities();
+	unordered_map<string, shared_ptr<GameEntity>>& _getGameEntities();
+	unordered_map<string, shared_ptr<GuiEntity>>& _getGuiEntities();
+	unordered_map<string, shared_ptr<LightEntity>>& _getLightEntities();
+	unordered_map<string, shared_ptr<SkyEntity>>& _getSkyEntities();
+	unordered_map<string, shared_ptr<TerrainEntity>>& _getTerrainEntities();
+	unordered_map<string, shared_ptr<TextEntity>>& _getTextEntities();
+	unordered_map<string, shared_ptr<WaterEntity>>& _getWaterEntities();
 	
 	shared_ptr<AabbEntity> _getAabbEntity(const string& ID);
 	shared_ptr<BillboardEntity> _getBillboardEntity(const string& ID);
@@ -61,13 +64,15 @@ protected:
 	shared_ptr<WaterEntity> _getWaterEntity(const string& ID);
 
 private:
-	vector<shared_ptr<AabbEntity>> _aabbEntities;
-	vector<shared_ptr<BillboardEntity>> _billboardEntities;
-	vector<shared_ptr<GameEntity>> _gameEntities;
-	vector<shared_ptr<GuiEntity>> _guiEntities;
-	vector<shared_ptr<LightEntity>> _lightEntities;
-	vector<shared_ptr<SkyEntity>> _skyEntities;
-	vector<shared_ptr<TerrainEntity>> _terrainEntities;
-	vector<shared_ptr<TextEntity>> _textEntities;
-	vector<shared_ptr<WaterEntity>> _waterEntities;
+	unordered_map<string, shared_ptr<AabbEntity>> _aabbEntities;
+	unordered_map<string, shared_ptr<BillboardEntity>> _billboardEntities;
+	unordered_map<string, shared_ptr<GameEntity>> _gameEntities;
+	unordered_map<string, shared_ptr<GuiEntity>> _guiEntities;
+	unordered_map<string, shared_ptr<LightEntity>> _lightEntities;
+	unordered_map<string, shared_ptr<SkyEntity>> _skyEntities;
+	unordered_map<string, shared_ptr<TerrainEntity>> _terrainEntities;
+	unordered_map<string, shared_ptr<TextEntity>> _textEntities;
+	unordered_map<string, shared_ptr<WaterEntity>> _waterEntities;
+
+	unsigned int _guiDepth = 0;
 };

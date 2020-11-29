@@ -117,6 +117,24 @@ const string& EngineGuiScreen::getParentID()
 	return _parentID;
 }
 
+Vec2 EngineGuiScreen::convertPosition(Vec2 position)
+{
+	Vec2 screenPosition = _parentPosition;
+	Vec2 screenSize = _parentSize;
+	Vec2 buttonPosition = screenPosition + (position * (screenSize / 2.0f));
+
+	return buttonPosition;
+}
+
+Vec2 EngineGuiScreen::convertSize(Vec2 size)
+{
+	Vec2 screenPosition = _parentPosition;
+	Vec2 screenSize = _parentSize;
+	Vec2 buttonSize = (size / 2.0f) * screenSize;
+
+	return buttonSize;
+}
+
 void EngineGuiScreen::addScrollingList(const string& ID, Vec2 position, Vec2 size, Vec3 color,
 	Vec3 buttonColor, Vec3 buttonHoverColor, Vec3 textColor, Vec3 textHoverColor, Vec2 charSize)
 {

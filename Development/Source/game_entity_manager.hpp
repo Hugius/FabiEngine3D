@@ -10,7 +10,7 @@ public:
 
 	shared_ptr<GameEntity> getEntity(const string& ID);
 
-	const vector<shared_ptr<GameEntity>> getEntities();
+	const unordered_map<string, shared_ptr<GameEntity>>& getEntities();
 
 	void addGameEntity(const string& ID, const string& objName, Vec3 T, Vec3 R, Vec3 S);
 	void generateModel(const string& ID, const string& objName);

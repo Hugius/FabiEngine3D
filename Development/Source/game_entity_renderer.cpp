@@ -64,6 +64,8 @@ void GameEntityRenderer::bind()
 	// Depth testing
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);
+
+	// Alpha blending
 	glEnable(GL_CLIP_DISTANCE1);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -85,27 +87,30 @@ void GameEntityRenderer::unbind()
 	_shader.unbind();
 }
 
-void GameEntityRenderer::renderLightEntities(const vector<shared_ptr<LightEntity>>& entities)
+void GameEntityRenderer::renderLightEntities(const unordered_map<string, shared_ptr<LightEntity>>& entities)
 {
 	_shader.uploadUniform("u_pointLightCount", static_cast<int>(entities.size()));
 
 	// Render all lights
-	for (size_t i = 0; i < entities.size(); i++)
+	unsigned int index = 0;
+	for (auto& [ID, entity] : entities)
 	{
-		if (entities[i]->isVisible())
+		if (entity->isVisible())
 		{
-			_shader.uploadUniform("u_pointLightPositions[" + to_string(i) + "]", entities[i]->getPosition());
-			_shader.uploadUniform("u_pointLightColors[" + to_string(i) + "]", entities[i]->getColor());
-			_shader.uploadUniform("u_pointLightIntensities[" + to_string(i) + "]", entities[i]->getIntensity());
-			_shader.uploadUniform("u_pointLightDistanceFactors[" + to_string(i) + "]", entities[i]->getDistanceFactor());
+			_shader.uploadUniform("u_pointLightPositions[" + to_string(index) + "]", entity->getPosition());
+			_shader.uploadUniform("u_pointLightColors[" + to_string(index) + "]", entity->getColor());
+			_shader.uploadUniform("u_pointLightIntensities[" + to_string(index) + "]", entity->getIntensity());
+			_shader.uploadUniform("u_pointLightDistanceFactors[" + to_string(index) + "]", entity->getDistanceFactor());
 		}
 		else
 		{
-			_shader.uploadUniform("u_pointLightPositions[" + to_string(i) + "]", Vec3(0.0f));
-			_shader.uploadUniform("u_pointLightColors[" + to_string(i) + "]", Vec3(0.0f));
-			_shader.uploadUniform("u_pointLightIntensities[" + to_string(i) + "]", 0.0f);
-			_shader.uploadUniform("u_pointLightDistanceFactors[" + to_string(i) + "]", 0.0f);
+			_shader.uploadUniform("u_pointLightPositions[" + to_string(index) + "]", Vec3(0.0f));
+			_shader.uploadUniform("u_pointLightColors[" + to_string(index) + "]", Vec3(0.0f));
+			_shader.uploadUniform("u_pointLightIntensities[" + to_string(index) + "]", 0.0f);
+			_shader.uploadUniform("u_pointLightDistanceFactors[" + to_string(index) + "]", 0.0f);
 		}
+
+		index++;
 	}
 }
 

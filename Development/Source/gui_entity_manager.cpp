@@ -27,7 +27,7 @@ shared_ptr<GuiEntity> GuiEntityManager::getEntity(const string& ID)
 	return result;
 }
 
-const vector<shared_ptr<GuiEntity>> GuiEntityManager::getEntities()
+const unordered_map<string, shared_ptr<GuiEntity>>& GuiEntityManager::getEntities()
 {
 	return _getGuiEntities();
 }
@@ -66,7 +66,7 @@ void GuiEntityManager::addGuiEntity(const string& ID, Vec3 color, Vec2 translati
 
 void GuiEntityManager::update()
 {
-	for (auto& entity : _getGuiEntities())
+	for (auto& [ID, entity] : _getGuiEntities())
 	{
 		// Calculate model matrix
 		if (entity->isVisible())

@@ -28,7 +28,7 @@ shared_ptr<TextEntity> TextEntityManager::getEntity(const string& ID)
 	return result;
 }
 
-const vector<shared_ptr<TextEntity>> TextEntityManager::getEntities()
+const unordered_map<string, shared_ptr<TextEntity>>& TextEntityManager::getEntities()
 {
 	return _getTextEntities();
 }
@@ -103,7 +103,7 @@ void TextEntityManager::reloadCharacters(const string& ID)
 
 void TextEntityManager::update()
 {
-	for (auto& entity : _getTextEntities())
+	for (auto& [ID, entity] : _getTextEntities())
 	{
 		// Update entity
 		if (entity->isDynamic())

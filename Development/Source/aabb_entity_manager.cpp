@@ -41,7 +41,7 @@ shared_ptr<AabbEntity> AabbEntityManager::getEntity(const string& ID)
 	return result;
 }
 
-const vector<shared_ptr<AabbEntity>>& AabbEntityManager::getEntities()
+const unordered_map<string, shared_ptr<AabbEntity>>& AabbEntityManager::getEntities()
 {
 	return _getAabbEntities();
 }
@@ -66,9 +66,11 @@ void AabbEntityManager::bindAabbEntity(const string& ID, const string& parentID,
 	getEntity(ID)->setParent(parentID, parentType);
 }
 
-void AabbEntityManager::update(const vector<shared_ptr<GameEntity>>& gameEntities, const vector<shared_ptr<BillboardEntity>>& billboardEntities)
+void AabbEntityManager::update(
+	const unordered_map<string, shared_ptr<GameEntity>>& gameEntities, 
+	const unordered_map<string, shared_ptr<BillboardEntity>>& billboardEntities)
 {
-	for (auto& entity : _getAabbEntities())
+	for (auto& [ID, entity] : _getAabbEntities())
 	{
 		// Optional translation update
 		if (entity->getParentID() != "")
@@ -78,7 +80,7 @@ void AabbEntityManager::update(const vector<shared_ptr<GameEntity>>& gameEntitie
 			// Determine parent type
 			if (entity->getParentType() == AabbParentType::GAME_ENTITY)
 			{
-				for (auto& parentEntity : gameEntities) // Loop over GAME entities
+				for (auto& [ID, parentEntity] : gameEntities) // Loop over GAME entities
 				{
 					if (entity->getParentID() == parentEntity->getID()) // Check for match
 					{
@@ -105,7 +107,7 @@ void AabbEntityManager::update(const vector<shared_ptr<GameEntity>>& gameEntitie
 			}
 			else if(entity->getParentType() == AabbParentType::BILLBOARD_ENTITY)
 			{
-				for (auto& parentEntity : billboardEntities) // Loop over BILLBOARD entities
+				for (auto& [ID, parentEntity] : billboardEntities) // Loop over BILLBOARD entities
 				{
 					if (entity->getParentID() == parentEntity->getID()) // Check for match
 					{

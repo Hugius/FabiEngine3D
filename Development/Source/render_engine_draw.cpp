@@ -64,15 +64,15 @@ void RenderEngine::_renderGameEntities()
 		_gameEntityRenderer.renderLightEntities(_entityBus->getLightEntities());
 
 		// Render GAME entities
-		for (auto& entity : _entityBus->getGameEntities())
+		for (auto& [ID, gameEntity] : _entityBus->getGameEntities())
 		{
 			// Check if LOD entity needs to be rendered
-			if (entity->isLevelOfDetailed())
+			if (gameEntity->isLevelOfDetailed())
 			{
 				// Try to find LOD entity
-				for (auto& lodEntity : _entityBus->getGameEntities())
+				for (auto& [ID, lodEntity] : _entityBus->getGameEntities())
 				{
-					if (entity->getLodEntityID() == lodEntity->getID())
+					if (gameEntity->getLodEntityID() == lodEntity->getID())
 					{
 						// Save original transformation
 						Vec3 originalPosition = lodEntity->getTranslation();
@@ -81,10 +81,10 @@ void RenderEngine::_renderGameEntities()
 						bool originalVisibility = lodEntity->isVisible();
 
 						// Change transformation
-						lodEntity->setTranslation(entity->getTranslation());
-						lodEntity->setRotation(entity->getRotation());
-						lodEntity->setScaling((entity->getScaling() / entity->getOriginalScaling()) * originalSize);
-						lodEntity->setVisible(entity->isVisible());
+						lodEntity->setTranslation(gameEntity->getTranslation());
+						lodEntity->setRotation(gameEntity->getRotation());
+						lodEntity->setScaling((gameEntity->getScaling() / gameEntity->getOriginalScaling()) * originalSize);
+						lodEntity->setVisible(gameEntity->isVisible());
 						lodEntity->updateModelMatrix();
 
 						// Render LOD entity
@@ -101,7 +101,7 @@ void RenderEngine::_renderGameEntities()
 			}
 			else // Render high-quality entity
 			{
-				_gameEntityRenderer.render(entity);
+				_gameEntityRenderer.render(gameEntity);
 			}
 		}
 
@@ -118,7 +118,7 @@ void RenderEngine::_renderBillboardEntities()
 		_billboardEntityRenderer.bind();
 
 		// Render BILLBOARD entities
-		for (auto& entity : _entityBus->getBillboardEntities())
+		for (auto& [ID, entity] : _entityBus->getBillboardEntities())
 		{
 			_billboardEntityRenderer.render(entity);
 		}
@@ -138,7 +138,7 @@ void RenderEngine::_renderAabbEntities()
 			_aabbEntityRenderer.bind();
 
 			// Render AABB entities
-			for (auto& entity : _entityBus->getAabbEntities())
+			for (auto& [ID, entity] : _entityBus->getAabbEntities())
 			{
 				_aabbEntityRenderer.render(entity);
 			}
@@ -163,14 +163,21 @@ void RenderEngine::_renderGuiEntities()
 		// Bind
 		_guiEntityRenderer.bind();
 
-		// Render
-		for (auto& entity : _entityBus->getGuiEntities())
+		// Sort render order
+		std::map<unsigned int, shared_ptr<GuiEntity>> orderedMap;
+		for (auto& [ID, entity] : _entityBus->getGuiEntities())
 		{
 			// Custom cursor entity must be rendered last
-			if (entity->getID() != _renderBus.getCursorEntityID())
+			if (ID != _renderBus.getCursorEntityID())
 			{
-				_guiEntityRenderer.render(entity);
+				orderedMap.insert(std::make_pair(entity->getDepth(), entity));
 			}
+		}
+
+		// Render all entities
+		for (auto& [ID, entity] : orderedMap)
+		{
+			_guiEntityRenderer.render(entity);
 		}
 
 		// Unbind
@@ -185,8 +192,15 @@ void RenderEngine::_renderTextEntities()
 		// Bind
 		_guiEntityRenderer.bind();
 
-		// Render
-		for (auto& textEntity : _entityBus->getTextEntities())
+		// Sort render order
+		std::map<unsigned int, shared_ptr<TextEntity>> orderedMap;
+		for (auto& [ID, entity] : _entityBus->getTextEntities())
+		{
+			orderedMap.insert(std::make_pair(entity->getDepth(), entity));
+		}
+
+		// Render all entities
+		for (auto& [ID, textEntity] : orderedMap)
 		{
 			if (textEntity->isDynamic()) // Dynamic text rendering
 			{
@@ -209,9 +223,9 @@ void RenderEngine::_renderTextEntities()
 
 void RenderEngine::_renderCustomCursor()
 {
-	for (auto& entity : _entityBus->getGuiEntities())
+	for (auto& [ID, entity] : _entityBus->getGuiEntities())
 	{
-		if (entity->getID() == _renderBus.getCursorEntityID())
+		if (ID == _renderBus.getCursorEntityID())
 		{
 			_guiEntityRenderer.bind();
 			_guiEntityRenderer.render(entity);

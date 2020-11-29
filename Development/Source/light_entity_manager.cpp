@@ -20,7 +20,7 @@ shared_ptr<LightEntity> LightEntityManager::getEntity(const string& ID)
 	return result;
 }
 
-const vector<shared_ptr<LightEntity>> LightEntityManager::getEntities()
+const unordered_map<string, shared_ptr<LightEntity>>& LightEntityManager::getEntities()
 {
 	return _getLightEntities();
 }

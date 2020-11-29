@@ -18,4 +18,6 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 	{
 		return false;
 	}
+
+	return false;
 }

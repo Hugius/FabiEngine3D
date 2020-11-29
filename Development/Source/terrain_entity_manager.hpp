@@ -11,7 +11,7 @@ public:
 	shared_ptr<TerrainEntity> getEntity(const string& ID);
 	shared_ptr<TerrainEntity> getSelectedTerrain();
 
-	const vector<shared_ptr<TerrainEntity>> getEntities();
+	const unordered_map<string, shared_ptr<TerrainEntity>>& getEntities();
 
 	void selectTerrain(const string& ID);
 	void addTerrain(const string& ID);

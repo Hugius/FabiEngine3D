@@ -79,6 +79,11 @@ void GuiEntity::setMaxPosition(Vec2 val)
 	_maxPosition = val;
 }
 
+void GuiEntity::setDepth(unsigned int val)
+{
+	_depth = val;
+}
+
 const GLuint GuiEntity::getDiffuseMap() const
 {
 	return _diffuseMap;
@@ -137,6 +142,11 @@ const Vec2 GuiEntity::getMinPosition() const
 const Vec2 GuiEntity::getMaxPosition() const
 {
 	return _maxPosition;
+}
+
+const unsigned int GuiEntity::getDepth() const
+{
+	return _depth;
 }
 
 void GuiEntity::setDepthEntity(bool val)

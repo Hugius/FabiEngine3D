@@ -10,13 +10,15 @@ public:
 
 	shared_ptr<AabbEntity> getEntity(const string& ID);
 
-	const vector<shared_ptr<AabbEntity>>& getEntities();
+	const unordered_map<string, shared_ptr<AabbEntity>>& getEntities();
 	
 	void addAabbEntity(const string& ID, Vec3 position, Vec3 size, bool responsive);
 	void bindAabbEntity(const string& ID, const string& parentID, AabbParentType parentType, Vec3 position, Vec3 size, bool responsive);
 
 	void update() override {}
-	void update(const vector<shared_ptr<GameEntity>>& gameEntities, const vector<shared_ptr<BillboardEntity>>& billboardEntities);
+	void update(
+		const unordered_map<string, shared_ptr<GameEntity>>& gameEntities, 
+		const unordered_map<string, shared_ptr<BillboardEntity>>& billboardEntities);
 
 private:
 	OpenGLBuffer* _openglBuffer = nullptr;

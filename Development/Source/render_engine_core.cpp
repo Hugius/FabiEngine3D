@@ -150,7 +150,7 @@ void RenderEngine::renderScene(EntityBus * entityBus, CameraManager& camera)
 		_captureMotionBlur(camera);
 
 		// 2D rendering
-		glClear(GL_COLOR_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		// Render debug screens
 		if (_renderBus.isDebugRenderingEnabled())

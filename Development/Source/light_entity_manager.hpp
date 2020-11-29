@@ -10,7 +10,7 @@ public:
 
 	shared_ptr<LightEntity> getEntity(const string& ID);
 
-	const vector<shared_ptr<LightEntity>> getEntities();
+	const unordered_map<string, shared_ptr<LightEntity>>& getEntities();
 
 	void addLightEntity(const string& ID, Vec3 position, Vec3 color, float intensity, float distanceFactor);
 

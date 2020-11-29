@@ -170,4 +170,6 @@ bool ScriptInterpreter::_executeFe3dCameraFunction(const string& functionName, v
 	{
 		return false;
 	}
+
+	return false;
 }

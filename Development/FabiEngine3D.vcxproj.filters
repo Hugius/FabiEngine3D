@@ -517,16 +517,7 @@
     <ClCompile Include="Source\script_interpreter_execution.cpp">
       <Filter>src\Scripting System\Execution\Interpreter\Core</Filter>
     </ClCompile>
-    <ClCompile Include="Source\script_interpreter_conditions.cpp">
-      <Filter>src\Scripting System\Execution\Interpreter\Miscellaneous</Filter>
-    </ClCompile>
     <ClCompile Include="Source\script_interpreter_misc.cpp">
-      <Filter>src\Scripting System\Execution\Interpreter\Miscellaneous</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\script_interpreter_variables_creation.cpp">
-      <Filter>src\Scripting System\Execution\Interpreter\Miscellaneous</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\script_interpreter_variables_misc.cpp">
       <Filter>src\Scripting System\Execution\Interpreter\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="Source\script_interpreter_func_camera.cpp">
@@ -548,6 +539,18 @@
       <Filter>src\Scripting System\Execution\Interpreter\Functions</Filter>
     </ClCompile>
     <ClCompile Include="Source\script_interpreter_list.cpp">
+      <Filter>src\Scripting System\Execution\Interpreter\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_interpreter_variable_misc.cpp">
+      <Filter>src\Scripting System\Execution\Interpreter\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_interpreter_condition.cpp">
+      <Filter>src\Scripting System\Execution\Interpreter\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_interpreter_variable_edit.cpp">
+      <Filter>src\Scripting System\Execution\Interpreter\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_interpreter_variable_create.cpp">
       <Filter>src\Scripting System\Execution\Interpreter\Miscellaneous</Filter>
     </ClCompile>
   </ItemGroup>

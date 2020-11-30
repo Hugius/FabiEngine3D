@@ -3,6 +3,5 @@
 enum class ScriptVariableScope
 {
 	GLOBAL,
-	LOCAL,
-	UNKNOWN
+	LOCAL
 };

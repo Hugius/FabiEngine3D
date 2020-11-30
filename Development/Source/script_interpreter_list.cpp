@@ -151,6 +151,7 @@ vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(string listS
 					else
 					{
 						_throwScriptError("invalid vec3 syntax!");
+						return {};
 					}
 				}
 				else // Keep building vec3
@@ -280,39 +281,73 @@ vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(string listS
 				// Check if variable building finished
 				if (c == ',' || (index == listString.size() - 1) || c == ' ')
 				{
-					// Check if accessing individual float from vec3 variable
-					auto parts = _extractVec3PartFromString(currentValueString);
+					// Check if accessing individual value from list variable
+					bool isAccessingList = false;
+					auto listIndex = _extractListIndexFromString(currentValueString, isAccessingList);
 
-					// Remove vec3 part text
-					if (parts != Ivec3(0))
+					// Check if accessing individual float from vec3 variable
+					auto vec3Parts = _extractVec3PartFromString(currentValueString);
+
+					// Check if any error was thrown
+					if (_hasThrownError)
+					{
+						return {};
+					}
+
+					// Remove vec3 part characters
+					if (vec3Parts != Ivec3(0))
 					{
 						currentValueString.pop_back();
 						currentValueString.pop_back();
+					}
+
+					// Remove list accessing characters
+					if (isAccessingList)
+					{
+						auto openingBracketFound = std::find(currentValueString.begin(), currentValueString.end(), '[');
+						unsigned int bracketIndex = std::distance(currentValueString.begin(), openingBracketFound);
+						currentValueString = currentValueString.substr(0, bracketIndex);
 					}
 
 					// Check if the specified variable name exists
 					if (_isLocalVariableExisting(currentValueString) || _isGlobalVariableExisting(currentValueString))
 					{
 						// Retrieve value
-						auto variableValue = _isLocalVariableExisting(currentValueString) ? _getLocalVariable(currentValueString).getValue() :
-							_getGlobalVariable(currentValueString).getValue();
+						auto variable = _isLocalVariableExisting(currentValueString) ? _getLocalVariable(currentValueString) :
+							_getGlobalVariable(currentValueString);
 
-						// Check if accessing a part of vec3 value
-						if (parts.x && variableValue.getType() == ScriptValueType::VEC3)
+						if (vec3Parts.x && variable.getValue().getType() == ScriptValueType::VEC3) // Vec3.x
 						{
-							valueList.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, variableValue.getVec3().x));
+							valueList.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, variable.getValue().getVec3().x));
 						}
-						else if (parts.y && variableValue.getType() == ScriptValueType::VEC3)
+						else if (vec3Parts.y && variable.getValue().getType() == ScriptValueType::VEC3) // Vec3.y
 						{
-							valueList.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, variableValue.getVec3().y));
+							valueList.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, variable.getValue().getVec3().y));
 						}
-						else if (parts.z && variableValue.getType() == ScriptValueType::VEC3)
+						else if (vec3Parts.z && variable.getValue().getType() == ScriptValueType::VEC3) // Vec3.z
 						{
-							valueList.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, variableValue.getVec3().z));
+							valueList.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, variable.getValue().getVec3().z));
 						}
-						else // Normal value
+						else if (isAccessingList) // List[index]
 						{
-							valueList.push_back(variableValue);
+							// Check if list index is valid
+							if (_validateListIndex(variable, listIndex))
+							{
+								valueList.push_back(variable.getValue(listIndex));
+							}
+							else // Error
+							{
+								return {};
+							}
+						}
+						else if (variable.getType() == ScriptVariableType::SINGLE) // Normal value
+						{
+							valueList.push_back(variable.getValue());
+						}
+						else // Cannot be list variable
+						{
+							_throwScriptError("list variable cannot be used inside a list!");
+							return {};
 						}
 
 						buildingVariable = false;

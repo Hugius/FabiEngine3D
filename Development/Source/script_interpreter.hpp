@@ -36,7 +36,8 @@ private:
 	int _extractListIndexFromString(const string& valueString, bool& noListAccesss);
 
 	// Variable functions
-	void _processVariableDefinition(const string& scriptLine, ScriptVariableScope scope, bool isEditing);
+	void _processVariableCreation(const string& scriptLine, ScriptVariableScope scope);
+	void _processVariableAlteration(const string& scriptLine);
 	void _processVariableArithmetic(const string& scriptLine);
 	void _processVariableTypecast(const string& scriptLine);
 	void _processStringConcatenation(const string& scriptLine);
@@ -123,6 +124,8 @@ private:
 	const string _negationKeyword		= "NEG";
 	const string _castingKeyword	    = "CAST";
 	const string _concatenationKeyword  = "CONCAT";
+	const string _pushingKeyword		= "PUSH";
+	const string _pullingKeyword		= "PULL";
 
 	// Integers
 	const unsigned int _spacesPerIndent = 4;

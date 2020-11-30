@@ -224,15 +224,15 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 				scriptLineText.substr(0, _booleanKeyword.size() + 1) == _booleanKeyword + " "
 			)
 		{
-			_processVariableDefinition(scriptLineText, ScriptVariableScope::LOCAL, false);
+			_processVariableCreation(scriptLineText, ScriptVariableScope::LOCAL);
 		}
 		else if (scriptLineText.substr(0, _globalKeyword.size() + 1) == _globalKeyword + " ") // Create global variable
 		{
-			_processVariableDefinition(scriptLineText, ScriptVariableScope::GLOBAL, false);
+			_processVariableCreation(scriptLineText, ScriptVariableScope::GLOBAL);
 		}
 		else if (scriptLineText.substr(0, _editKeyword.size() + 1) == _editKeyword + " ") // Edit existing variable
 		{
-			_processVariableDefinition(scriptLineText, ScriptVariableScope::UNKNOWN, true);
+			_processVariableAlteration(scriptLineText);
 		}
 		else if //Variable arithmetic
 			(

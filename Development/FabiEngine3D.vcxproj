@@ -349,13 +349,14 @@
     <ClCompile Include="Source\script_interpreter_func_camera.cpp" />
     <ClCompile Include="Source\script_interpreter_func_collision.cpp" />
     <ClCompile Include="Source\script_interpreter_func_core.cpp" />
-    <ClCompile Include="Source\script_interpreter_conditions.cpp" />
+    <ClCompile Include="Source\script_interpreter_condition.cpp" />
     <ClCompile Include="Source\script_interpreter_func_entity_game.cpp" />
     <ClCompile Include="Source\script_interpreter_func_input.cpp" />
     <ClCompile Include="Source\script_interpreter_func_misc.cpp" />
     <ClCompile Include="Source\script_interpreter_misc.cpp" />
-    <ClCompile Include="Source\script_interpreter_variables_creation.cpp" />
-    <ClCompile Include="Source\script_interpreter_variables_misc.cpp" />
+    <ClCompile Include="Source\script_interpreter_variable_create.cpp" />
+    <ClCompile Include="Source\script_interpreter_variable_misc.cpp" />
+    <ClCompile Include="Source\script_interpreter_variable_edit.cpp" />
     <ClCompile Include="Source\script_value.cpp" />
     <ClCompile Include="Source\script_variable.cpp" />
     <ClCompile Include="Source\settings_editor.cpp" />

@@ -1,4 +1,4 @@
-18 0
+18 51
 META script_type_update
 META execution_entry
 
@@ -17,11 +17,13 @@ CAST shift DEC
 DEC movingSpeed = _baseSpeed
 MUL movingSpeed shift
 
-STR selected = fe3d:raycast_in_any()
-IF selected NOT "":
-    BOOL interval = fe3d:misc_time_interval("temp", 50)
-    IF interval IS <true>:
-        fe3d:print(selected)
+STR selectedID = fe3d:raycast_game_entity_group("tree7", "trunk")
+IF selectedID NOT "":
+    VEC3 camPos = fe3d:camera_position_get()
+    VEC3 selectedPos = fe3d:entity_game_position_get(selectedID)
+    DEC distance = math:distance(camPos, selectedPos)
+    IF distance LESS 5.0:
+        fe3d:entity_game_delete(selectedID)
 
 /// Jumping movement
 IF up IS <true>:

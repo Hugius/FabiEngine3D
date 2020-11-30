@@ -14,7 +14,7 @@ void FabiEngine3D::gameEntity_add
 void FabiEngine3D::gameEntity_deleteAll()
 {
 	// For every GAME entity
-	for (auto& [ID, entity] : _core->_gameEntityManager.getEntities())
+	for (auto& [keyID, entity] : _core->_gameEntityManager.getEntities())
 	{
 		gameEntity_delete(entity->getID());
 	}
@@ -34,7 +34,7 @@ void FabiEngine3D::gameEntity_delete(const string& ID)
 
 void FabiEngine3D::gameEntity_deleteGroup(const string& ID)
 {
-	for (auto& [ID, entity] : _core->_gameEntityManager.getEntities()) // Loop over GAME entities
+	for (auto& [keyID, entity] : _core->_gameEntityManager.getEntities()) // Loop over GAME entities
 	{
 		if (entity->getID().size() >= ID.size()) // Check if entity ID is at least the size of group ID
 		{
@@ -51,7 +51,7 @@ void FabiEngine3D::gameEntity_deleteGroup(const string& ID)
 
 void FabiEngine3D::gameEntity_hideAll()
 {
-	for (auto [ID, entity] : _core->_gameEntityManager.getEntities())
+	for (auto [keyID, entity] : _core->_gameEntityManager.getEntities())
 	{
 		gameEntity_hide(entity->getID());
 	}
@@ -59,7 +59,7 @@ void FabiEngine3D::gameEntity_hideAll()
 
 void FabiEngine3D::gameEntity_showAll()
 {
-	for (auto [ID, entity] : _core->_gameEntityManager.getEntities())
+	for (auto [keyID, entity] : _core->_gameEntityManager.getEntities())
 	{
 		gameEntity_show(entity->getID());
 	}
@@ -478,7 +478,7 @@ vector<string> FabiEngine3D::gameEntity_getAllIDs()
 {
 	vector<string> IDs;
 
-	for (auto [ID, entity] : _core->_gameEntityManager.getEntities()) // Loop over GAME entities
+	for (auto [keyID, entity] : _core->_gameEntityManager.getEntities()) // Loop over GAME entities
 	{
 		IDs.push_back(entity->getID());
 	}
@@ -490,7 +490,7 @@ vector<string> FabiEngine3D::gameEntity_getGroupIDs(const string& ID)
 {
 	vector<string> IDs;
 
-	for (auto [ID, entity] : _core->_gameEntityManager.getEntities()) // Loop over GAME entities
+	for (auto [keyID, entity] : _core->_gameEntityManager.getEntities()) // Loop over GAME entities
 	{
 		if (entity->getID().size() >= ID.size()) // Check if entity ID is at least the size of group ID
 		{

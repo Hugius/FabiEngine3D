@@ -81,7 +81,7 @@ vector<string> FabiEngine3D::lightEntity_getAllIDs()
 {
 	vector<string> IDs;
 
-	for (auto [ID, entity] : _core->_lightEntityManager.getEntities())
+	for (auto [keyID, entity] : _core->_lightEntityManager.getEntities())
 	{
 		IDs.push_back(entity->getID());
 	}

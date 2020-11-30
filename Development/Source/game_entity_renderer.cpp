@@ -93,7 +93,7 @@ void GameEntityRenderer::renderLightEntities(const unordered_map<string, shared_
 
 	// Render all lights
 	unsigned int index = 0;
-	for (auto& [ID, entity] : entities)
+	for (auto& [keyID, entity] : entities)
 	{
 		if (entity->isVisible())
 		{

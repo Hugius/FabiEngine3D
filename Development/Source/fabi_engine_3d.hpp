@@ -2,6 +2,7 @@
 
 #include "input_types.hpp"
 #include "logger.hpp"
+#include "aabb_parent_type.hpp"
 #include "direction.hpp"
 #include "mathematics.hpp"
 
@@ -398,6 +399,8 @@ public:
 	bool aabbEntity_isVisible(const string& ID);
 	vector<string> aabbEntity_getBoundIDs(const string& parentID, bool gameEntity, bool billboardEntity);
 	vector<string> aabbEntity_getAllIDs();
+	string aabbEntity_getParentID(const string& ID);
+	AabbParentType aabbEntity_getParentType(const string& ID);
 
 	// Global collision interface - setters
 	void collision_enableCameraResponse();

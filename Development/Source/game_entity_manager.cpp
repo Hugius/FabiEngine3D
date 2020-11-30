@@ -192,7 +192,7 @@ void GameEntityManager::setLodDistance(float distance)
 
 void GameEntityManager::update()
 {
-	for (auto& [ID, entity] : _getGameEntities())
+	for (auto& [keyID, entity] : _getGameEntities())
 	{
 		// Only update if visible
 		if (entity->isVisible())

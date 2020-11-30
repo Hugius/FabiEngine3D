@@ -23,7 +23,7 @@ void CollisionResolver::update(
 		Collision collision(false, false, false);
 
 		// Detect collision
-		for (auto& [ID, box] : boxes)
+		for (auto& [keyID, box] : boxes)
 		{
 			// If responsive to camera collision
 			if (box->isResponsive() && box->isVisible())

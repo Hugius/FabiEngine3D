@@ -30,6 +30,7 @@ private:
 		unsigned int& cursorCharIndex, int& hoveredLineIndex, bool& textHasChanged);
 	void _updateMiscellaneous();
 	void _reloadScriptTextDisplay();
+	void _copySelectedText();
 
 	// Core variables
 	FabiEngine3D& _fe3d;

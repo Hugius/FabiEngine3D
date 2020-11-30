@@ -84,10 +84,32 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 			return true;
 		}
 	}
+	else if (functionName == "fe3d:misc_substr") // Cut a part from a string
+	{
+		auto types = { ScriptValueType::STRING, ScriptValueType::INTEGER, ScriptValueType::INTEGER };
+
+		if (_validateArgumentAmount(arguments, types.size()) && _validateArgumentTypes(arguments, types))
+		{
+			auto result = arguments[0].getString().substr(arguments[1].getInteger(), arguments[2].getInteger());
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result));
+			return true;
+		}
+	}
 	else
 	{
 		return false;
 	}
 
 	return false;
+}
+
+bool ScriptInterpreter::_validateFe3dGameEntity(const string& ID)
+{
+	if (!_fe3d.gameEntity_isExisting(ID))
+	{
+		_throwScriptError("game entity with ID \"" + ID + "\" does not exist!");
+		return false;
+	}
+
+	return true;
 }

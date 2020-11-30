@@ -150,7 +150,7 @@ vector<string> FabiEngine3D::aabbEntity_getBoundIDs(const string& parentID, bool
 {
 	vector<string> IDs;
 
-	for (auto [ID, entity] : _core->_aabbEntityManager.getEntities())
+	for (auto [keyID, entity] : _core->_aabbEntityManager.getEntities())
 	{
 		if (parentID == entity->getParentID() && 
 			((entity->getParentType() == AabbParentType::GAME_ENTITY && gameEntity) ||
@@ -167,12 +167,22 @@ vector<string> FabiEngine3D::aabbEntity_getAllIDs()
 {
 	vector<string> IDs;
 
-	for (auto [ID, entity] : _core->_aabbEntityManager.getEntities())
+	for (auto [keyID, entity] : _core->_aabbEntityManager.getEntities())
 	{
 		IDs.push_back(entity->getID());
 	}
 
 	return IDs;
+}
+
+string FabiEngine3D::aabbEntity_getParentID(const string& ID)
+{
+	return _core->_aabbEntityManager.getEntity(ID)->getParentID();
+}
+
+AabbParentType FabiEngine3D::aabbEntity_getParentType(const string& ID)
+{
+	return _core->_aabbEntityManager.getEntity(ID)->getParentType();
 }
 
 void FabiEngine3D::collision_enableCameraResponse()
@@ -197,7 +207,7 @@ void FabiEngine3D::collision_disableCameraTerrainResponse()
 
 bool FabiEngine3D::collision_checkAnyWithCamera()
 {
-	for (auto [ID, entity] : _core->_aabbEntityManager.getEntities()) // Loop over AABB entities
+	for (auto [keyID, entity] : _core->_aabbEntityManager.getEntities()) // Loop over AABB entities
 	{
 		if (entity->getCollisionDirection() != Direction::NONE)
 		{
@@ -224,7 +234,7 @@ const string& FabiEngine3D::collision_checkEntityWithOthers(const string& ID)
 	if (self->isResponsive() && self->isVisible())
 	{
 		// Loop over all AABB entities
-		for (auto [ID, other] : _core->_aabbEntityManager.getEntities())
+		for (auto [keyID, other] : _core->_aabbEntityManager.getEntities())
 		{
 			// Don't check own entity & other entity must be responsive and visible
 			if (other->getID() != ID && other->isResponsive() && other->isVisible())
@@ -269,7 +279,7 @@ const string& FabiEngine3D::collision_checkEntityWithOthers(const string& ID)
 
 const string& FabiEngine3D::collision_checkEntitiesWithCamera(const string& ID)
 {
-	for (auto [ID, entity] : _core->_aabbEntityManager.getEntities()) // Loop over AABB entities
+	for (auto [keyID, entity] : _core->_aabbEntityManager.getEntities()) // Loop over AABB entities
 	{
 		if (entity->getID().size() >= ID.size()) // Check if entity ID is at least the size of group ID
 		{
@@ -296,7 +306,7 @@ string FabiEngine3D::collision_checkCursorInAny()
 	float closestDistance = (std::numeric_limits<float>::max)();
 	string closestBoxID = "";
 
-	for (auto [ID, entity] : _core->_aabbEntityManager.getEntities()) // Loop over AABB entities
+	for (auto [keyID, entity] : _core->_aabbEntityManager.getEntities()) // Loop over AABB entities
 	{
 		// Check if parent entity is not level of detailed
 		if (!(entity->getParentType() == AabbParentType::GAME_ENTITY &&
@@ -356,7 +366,7 @@ string FabiEngine3D::collision_checkCursorInEntities(const string& ID, const str
 	float closestDistance = (std::numeric_limits<float>::max)();
 	string closestBoxID = "";
 
-	for (auto [ID, entity] : _core->_aabbEntityManager.getEntities()) // Loop over AABB entities
+	for (auto [keyID, entity] : _core->_aabbEntityManager.getEntities()) // Loop over AABB entities
 	{
 		if (entity->isResponsive() && entity->isVisible())
 		{
@@ -403,7 +413,7 @@ Direction FabiEngine3D::collision_checkEntityWithCameraDirection(const string& I
 
 Direction FabiEngine3D::collision_checkEntitiesWithCameraDirection(const string& ID)
 {
-	for (auto [ID, entity] : _core->_aabbEntityManager.getEntities()) // Loop over AABB entities
+	for (auto [keyID, entity] : _core->_aabbEntityManager.getEntities()) // Loop over AABB entities
 	{
 		if (entity->getID().size() >= ID.size()) // Check if entity ID is at least the size of group ID
 		{

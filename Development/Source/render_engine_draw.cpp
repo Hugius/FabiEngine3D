@@ -64,13 +64,13 @@ void RenderEngine::_renderGameEntities()
 		_gameEntityRenderer.renderLightEntities(_entityBus->getLightEntities());
 
 		// Render GAME entities
-		for (auto& [ID, gameEntity] : _entityBus->getGameEntities())
+		for (auto& [keyID, gameEntity] : _entityBus->getGameEntities())
 		{
 			// Check if LOD entity needs to be rendered
 			if (gameEntity->isLevelOfDetailed())
 			{
 				// Try to find LOD entity
-				for (auto& [ID, lodEntity] : _entityBus->getGameEntities())
+				for (auto& [keyID, lodEntity] : _entityBus->getGameEntities())
 				{
 					if (gameEntity->getLodEntityID() == lodEntity->getID())
 					{
@@ -118,7 +118,7 @@ void RenderEngine::_renderBillboardEntities()
 		_billboardEntityRenderer.bind();
 
 		// Render BILLBOARD entities
-		for (auto& [ID, entity] : _entityBus->getBillboardEntities())
+		for (auto& [keyID, entity] : _entityBus->getBillboardEntities())
 		{
 			_billboardEntityRenderer.render(entity);
 		}
@@ -138,7 +138,7 @@ void RenderEngine::_renderAabbEntities()
 			_aabbEntityRenderer.bind();
 
 			// Render AABB entities
-			for (auto& [ID, entity] : _entityBus->getAabbEntities())
+			for (auto& [keyID, entity] : _entityBus->getAabbEntities())
 			{
 				_aabbEntityRenderer.render(entity);
 			}
@@ -165,17 +165,17 @@ void RenderEngine::_renderGuiEntities()
 
 		// Sort render order
 		std::map<unsigned int, shared_ptr<GuiEntity>> orderedMap;
-		for (auto& [ID, entity] : _entityBus->getGuiEntities())
+		for (auto& [keyID, entity] : _entityBus->getGuiEntities())
 		{
 			// Custom cursor entity must be rendered last
-			if (ID != _renderBus.getCursorEntityID())
+			if (entity->getID() != _renderBus.getCursorEntityID())
 			{
 				orderedMap.insert(std::make_pair(entity->getDepth(), entity));
 			}
 		}
 
 		// Render all entities
-		for (auto& [ID, entity] : orderedMap)
+		for (auto& [keyID, entity] : orderedMap)
 		{
 			_guiEntityRenderer.render(entity);
 		}
@@ -194,13 +194,13 @@ void RenderEngine::_renderTextEntities()
 
 		// Sort render order
 		std::map<unsigned int, shared_ptr<TextEntity>> orderedMap;
-		for (auto& [ID, entity] : _entityBus->getTextEntities())
+		for (auto& [keyID, entity] : _entityBus->getTextEntities())
 		{
 			orderedMap.insert(std::make_pair(entity->getDepth(), entity));
 		}
 
 		// Render all entities
-		for (auto& [ID, textEntity] : orderedMap)
+		for (auto& [keyID, textEntity] : orderedMap)
 		{
 			if (textEntity->isDynamic()) // Dynamic text rendering
 			{
@@ -223,9 +223,9 @@ void RenderEngine::_renderTextEntities()
 
 void RenderEngine::_renderCustomCursor()
 {
-	for (auto& [ID, entity] : _entityBus->getGuiEntities())
+	for (auto& [keyID, entity] : _entityBus->getGuiEntities())
 	{
-		if (ID == _renderBus.getCursorEntityID())
+		if (entity->getID() == _renderBus.getCursorEntityID())
 		{
 			_guiEntityRenderer.bind();
 			_guiEntityRenderer.render(entity);

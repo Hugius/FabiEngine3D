@@ -70,7 +70,7 @@ void AabbEntityManager::update(
 	const unordered_map<string, shared_ptr<GameEntity>>& gameEntities, 
 	const unordered_map<string, shared_ptr<BillboardEntity>>& billboardEntities)
 {
-	for (auto& [ID, entity] : _getAabbEntities())
+	for (auto& [keyID, entity] : _getAabbEntities())
 	{
 		// Optional translation update
 		if (entity->getParentID() != "")
@@ -80,7 +80,7 @@ void AabbEntityManager::update(
 			// Determine parent type
 			if (entity->getParentType() == AabbParentType::GAME_ENTITY)
 			{
-				for (auto& [ID, parentEntity] : gameEntities) // Loop over GAME entities
+				for (auto& [keyID, parentEntity] : gameEntities) // Loop over GAME entities
 				{
 					if (entity->getParentID() == parentEntity->getID()) // Check for match
 					{
@@ -107,7 +107,7 @@ void AabbEntityManager::update(
 			}
 			else if(entity->getParentType() == AabbParentType::BILLBOARD_ENTITY)
 			{
-				for (auto& [ID, parentEntity] : billboardEntities) // Loop over BILLBOARD entities
+				for (auto& [keyID, parentEntity] : billboardEntities) // Loop over BILLBOARD entities
 				{
 					if (entity->getParentID() == parentEntity->getID()) // Check for match
 					{

@@ -14,15 +14,6 @@ bool ScriptInterpreter::_executeFe3dCameraFunction(const string& functionName, v
 			return true;
 		}
 	}
-	else if (functionName == "fe3d:camera_position_get") // Get camera position
-	{
-		if (_validateArgumentAmount(arguments, 0) && _validateArgumentTypes(arguments, {}))
-		{
-			auto result = _fe3d.camera_getPosition();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));
-			return true;
-		}
-	}
 	else if (functionName == "fe3d:camera_position_set") // Set camera position
 	{
 		auto types = { ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
@@ -31,6 +22,15 @@ bool ScriptInterpreter::_executeFe3dCameraFunction(const string& functionName, v
 		{
 			_fe3d.camera_setPosition(Vec3(arguments[0].getDecimal(), arguments[1].getDecimal(), arguments[2].getDecimal()));
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			return true;
+		}
+	}
+	else if (functionName == "fe3d:camera_position_get") // Get camera position
+	{
+		if (_validateArgumentAmount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		{
+			auto result = _fe3d.camera_getPosition();
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));
 			return true;
 		}
 	}

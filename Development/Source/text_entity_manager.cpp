@@ -103,7 +103,7 @@ void TextEntityManager::reloadCharacters(const string& ID)
 
 void TextEntityManager::update()
 {
-	for (auto& [ID, entity] : _getTextEntities())
+	for (auto& [keyID, entity] : _getTextEntities())
 	{
 		// Update entity
 		if (entity->isDynamic())

@@ -16,7 +16,7 @@ void RenderEngine::_captureSceneReflections(CameraManager& camera)
 	string reflectiveEntityID;
 	if (!waterReflectionEnabled)
 	{
-		for (auto& [ID, gameEntity]: _entityBus->getGameEntities())
+		for (auto& [keyID, gameEntity]: _entityBus->getGameEntities())
 		{
 			if (gameEntity->isSceneReflective() && gameEntity->isVisible())
 			{
@@ -51,7 +51,7 @@ void RenderEngine::_captureSceneReflections(CameraManager& camera)
 		reflectiveEntityID = "";
 		if (!waterReflectionEnabled)
 		{
-			for (auto& [ID, gameEntity]: _entityBus->getGameEntities())
+			for (auto& [keyID, gameEntity]: _entityBus->getGameEntities())
 			{
 				if (gameEntity->isSceneReflective() && gameEntity->isVisible())
 				{
@@ -97,7 +97,7 @@ void RenderEngine::_captureSceneReflections(CameraManager& camera)
 		// Restore reflective GAME entity
 		if (!waterReflectionEnabled)
 		{
-			for (auto& [ID, gameEntity] : _entityBus->getGameEntities())
+			for (auto& [keyID, gameEntity] : _entityBus->getGameEntities())
 			{
 				if (gameEntity->getID() == reflectiveEntityID)
 				{
@@ -150,13 +150,13 @@ void RenderEngine::_captureShadows()
 		_shadowRenderer.bind();
 
 		// Render GAME entities
-		for (auto& [ID, gameEntity] : _entityBus->getGameEntities())
+		for (auto& [keyID, gameEntity] : _entityBus->getGameEntities())
 		{
 			// Check if LOD entity needs to be rendered
 			if (gameEntity->isLevelOfDetailed())
 			{
 				// Try to find LOD entity
-				for (auto& [ID, lodEntity] : _entityBus->getGameEntities())
+				for (auto& [keyID, lodEntity] : _entityBus->getGameEntities())
 				{
 					if (gameEntity->getLodEntityID() == lodEntity->getID())
 					{
@@ -248,7 +248,7 @@ void RenderEngine::_captureSceneDepth()
 		}
 
 		// Render GAME entities
-		for (auto& [ID, gameEntity] : _entityBus->getGameEntities())
+		for (auto& [keyID, gameEntity] : _entityBus->getGameEntities())
 		{
 			// Check if must be included in depth map
 			if (gameEntity->isDepthMapIncluded())
@@ -257,7 +257,7 @@ void RenderEngine::_captureSceneDepth()
 				if (gameEntity->isLevelOfDetailed())
 				{
 					// Try to find LOD entity
-					for (auto& [ID, lodEntity] : _entityBus->getGameEntities())
+					for (auto& [keyID, lodEntity] : _entityBus->getGameEntities())
 					{
 						if (gameEntity->getLodEntityID() == lodEntity->getID())
 						{
@@ -294,7 +294,7 @@ void RenderEngine::_captureSceneDepth()
 		}
 
 		// Render BILLBOARD entities
-		for (auto& [ID, entity] : _entityBus->getBillboardEntities())
+		for (auto& [keyID, entity] : _entityBus->getBillboardEntities())
 		{
 			// Check if must be included in depth map
 			if (entity->isDepthMapIncluded())
@@ -306,7 +306,7 @@ void RenderEngine::_captureSceneDepth()
 		// Render AABB entities
 		if (_renderBus.isAabbFrameRenderingEnabled())
 		{
-			for (auto& [ID, entity] : _entityBus->getAabbEntities())
+			for (auto& [keyID, entity] : _entityBus->getAabbEntities())
 			{
 				_depthRenderer.render(entity);
 			}

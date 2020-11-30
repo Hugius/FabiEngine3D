@@ -3,9 +3,9 @@
 bool ScriptInterpreter::_executeFe3dCollisionFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine type of function
-	if (functionName == "fe3d:raycast_in_entity") // Raycasting into a single entity
+	if (functionName == "fe3d:raycast_game_entity") // Raycasting into a single gameEntity
 	{
-		auto types = { ScriptValueType::STRING };
+		auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
 
 		if (_validateArgumentAmount(arguments, types.size()) && _validateArgumentTypes(arguments, types))
 		{
@@ -14,22 +14,40 @@ bool ScriptInterpreter::_executeFe3dCollisionFunction(const string& functionName
 			return true;
 		}
 	}
-	else if (functionName == "fe3d:raycast_in_entities") // Raycasting into a multiple entities
+	else if (functionName == "fe3d:raycast_game_entity_group") // Raycasting into multiple gameEntities
 	{
-		auto types = { ScriptValueType::STRING };
+		auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
 
 		if (_validateArgumentAmount(arguments, types.size()) && _validateArgumentTypes(arguments, types))
 		{
-			auto result = _fe3d.collision_checkCursorInEntities(arguments[0].getString());
+			// Find aabbEntity ID
+			string searchID = arguments[0].getString() + (!arguments[1].getString().empty() ? ("_" + arguments[1].getString()) : "");
+			auto result = _fe3d.collision_checkCursorInEntities(searchID);
+			
+			// Retrieve bound gameEntity ID
+			if (!result.empty() && (_fe3d.aabbEntity_getParentType(result) == AabbParentType::GAME_ENTITY))
+			{
+				result = _fe3d.aabbEntity_getParentID(result);
+			}
+
+			// Return
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result));
 			return true;
 		}
 	}
-	else if (functionName == "fe3d:raycast_in_any") // Raycasting into all entities
+	else if (functionName == "fe3d:raycast_game_entities") // Raycasting into all gameEntities
 	{
 		if (_validateArgumentAmount(arguments, 0) && _validateArgumentTypes(arguments, {}))
 		{
 			auto result = _fe3d.collision_checkCursorInAny();
+
+			// Check if AABB entity has a parent GAME entity
+			if (!result.empty() && _fe3d.aabbEntity_getParentType(result) == AabbParentType::GAME_ENTITY)
+			{
+				result = _fe3d.aabbEntity_getParentID(result);
+			}
+
+			// Return
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result));
 			return true;
 		}

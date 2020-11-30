@@ -32,6 +32,7 @@ vector<ScriptValue> ScriptInterpreter::_processEngineFunctionCall(const string& 
 				// Possibly execute FE3D function
 				executed = executed || _executeFe3dInputFunction(functionName, arguments, returnValues);
 				executed = executed || _executeFe3dCameraFunction(functionName, arguments, returnValues);
+				executed = executed || _executeFe3dGameEntityFunction(functionName, arguments, returnValues);
 				executed = executed || _executeFe3dCollisionFunction(functionName, arguments, returnValues);
 				executed = executed || _executeFe3dMiscFunction(functionName, arguments, returnValues);
 				
@@ -80,7 +81,7 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 				auto functionName = scriptLine.substr(0, parenthesisIndex);
 
 				// Determine type of function	
-				if (functionName == "math:tan")
+				if (functionName == "math:tan") // TAN
 				{
 					auto types = { ScriptValueType::DECIMAL };
 
@@ -90,7 +91,7 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, std::tan(angle)));
 					}
 				}
-				else if (functionName == "math:sin")
+				else if (functionName == "math:sin") // SIN
 				{
 					auto types = { ScriptValueType::DECIMAL };
 
@@ -100,7 +101,7 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, std::sin(angle)));
 					}
 				}
-				else if (functionName == "math:cos")
+				else if (functionName == "math:cos") // COS
 				{
 					auto types = { ScriptValueType::DECIMAL };
 
@@ -110,7 +111,7 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, std::cos(angle)));
 					}
 				}
-				else if (functionName == "math:pow")
+				else if (functionName == "math:pow") // POWER
 				{
 					if (_validateArgumentAmount(arguments, 2))
 					{
@@ -130,7 +131,7 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 						}
 					}
 				}
-				else if (functionName == "math:min")
+				else if (functionName == "math:min") // MIN
 				{
 					if (_validateArgumentAmount(arguments, 2))
 					{
@@ -150,7 +151,7 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 						}
 					}
 				}
-				else if (functionName == "math:max")
+				else if (functionName == "math:max") // MAX
 				{
 					if (_validateArgumentAmount(arguments, 2))
 					{
@@ -170,13 +171,53 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 						}
 					}
 				}
-				else if (functionName == "math:sqrt")
+				else if (functionName == "math:sqrt") // SQUAREROOT
 				{
 					auto types = { ScriptValueType::DECIMAL };
 
 					if (_validateArgumentAmount(arguments, types.size()) && _validateArgumentTypes(arguments, types))
 					{
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, std::sqrtf(arguments[0].getDecimal())));
+					}
+				}
+				else if (functionName == "math:abs") // ABSOLUTE
+				{
+					// Validate amount of arguments
+					if (_validateArgumentAmount(arguments, 1))
+					{
+						// Determine type of value
+						if (arguments[0].getType() == ScriptValueType::INTEGER)
+						{
+							returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::INTEGER, abs(arguments[0].getInteger())));
+						}
+						else if (arguments[0].getType() == ScriptValueType::DECIMAL)
+						{
+							returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, fabsf(arguments[0].getDecimal())));
+						}
+						else
+						{
+							_throwScriptError("wrong argument type(s)!");
+						}
+					}
+				}
+				else if (functionName == "math:distance") // DISTANCE
+				{
+					auto types = { ScriptValueType::VEC3, ScriptValueType::VEC3 };
+
+					if (_validateArgumentAmount(arguments, types.size()) && _validateArgumentTypes(arguments, types))
+					{
+						// Save positions
+						Vec3 firstPos = arguments[0].getVec3();
+						Vec3 secondPos = arguments[1].getVec3();
+
+						// Calculate distances
+						float xDistance = fabsf(firstPos.x - secondPos.x);
+						float yDistance = fabsf(firstPos.y - secondPos.y);
+						float zDistance = fabsf(firstPos.z - secondPos.z);
+
+						// Calculate absolute distance
+						float result = sqrtf((xDistance * xDistance) + (yDistance * yDistance) + (zDistance * zDistance));
+						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
 					}
 				}
 				else

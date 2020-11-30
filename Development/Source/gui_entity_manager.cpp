@@ -66,7 +66,7 @@ void GuiEntityManager::addGuiEntity(const string& ID, Vec3 color, Vec2 translati
 
 void GuiEntityManager::update()
 {
-	for (auto& [ID, entity] : _getGuiEntities())
+	for (auto& [keyID, entity] : _getGuiEntities())
 	{
 		// Calculate model matrix
 		if (entity->isVisible())

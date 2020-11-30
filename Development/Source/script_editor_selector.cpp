@@ -9,9 +9,12 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 	if (_firstSelectedLineIndex != -1)
 	{
 		// Check if user cancels or edits any selected text
-		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_RIGHT) ||
-			_activeActionKey != InputType::NONE || !newCharacters.empty() || 
-			(_fe3d.input_getKeyDown(InputType::KEY_LCTRL) && _fe3d.input_getKeyPressed(InputType::KEY_V)))
+		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || 
+			_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_RIGHT) ||
+			_activeActionKey != InputType::NONE || 
+			!newCharacters.empty() || 
+			(_fe3d.input_getKeyDown(InputType::KEY_LCTRL) && _fe3d.input_getKeyPressed(InputType::KEY_V)) ||
+			(_fe3d.input_getKeyDown(InputType::KEY_LCTRL) && _fe3d.input_getKeyPressed(InputType::KEY_X)))
 		{
 			// Delete selection billboards
 			for (auto& ID : _fe3d.billboardEntity_getAllIDs())
@@ -22,10 +25,19 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 				}
 			}
 
+			// Copy before removing text
+			if (_fe3d.input_getKeyDown(InputType::KEY_LCTRL) && _fe3d.input_getKeyPressed(InputType::KEY_X))
+			{
+				_copySelectedText();
+			}
+
 			// Check if text content has been changed
-			if (!newCharacters.empty() || _fe3d.input_getKeyPressed(InputType::KEY_BACKSPACE) ||
-				_fe3d.input_getKeyPressed(InputType::KEY_DELETE) || _fe3d.input_getKeyPressed(InputType::KEY_ENTER) ||
-				_fe3d.input_getKeyDown(InputType::KEY_LCTRL) && _fe3d.input_getKeyPressed(InputType::KEY_V))
+			if (!newCharacters.empty() || 
+				_fe3d.input_getKeyPressed(InputType::KEY_BACKSPACE) ||
+				_fe3d.input_getKeyPressed(InputType::KEY_DELETE) ||
+				_fe3d.input_getKeyPressed(InputType::KEY_ENTER) ||
+				(_fe3d.input_getKeyDown(InputType::KEY_LCTRL) && _fe3d.input_getKeyPressed(InputType::KEY_V)) ||
+				(_fe3d.input_getKeyDown(InputType::KEY_LCTRL) && _fe3d.input_getKeyPressed(InputType::KEY_X)))
 			{
 				if (_lastSelectedLineIndex == -1) // Only 1 line is selected
 				{
@@ -149,24 +161,7 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 		{
 			if (_fe3d.input_getKeyPressed(InputType::KEY_C)) // Copy selected text to clipboard
 			{
-				if (_firstSelectedLineIndex != -1) // Check if anything is selected at all
-				{
-					_copyClipboard.clear(); // Clear last copy
-
-					if (_lastSelectedLineIndex == -1) // Check if only 1 line selected
-					{
-						_copyClipboard.push_back(_script.getScriptFile(_currentScriptFileID)->getLineText(_firstSelectedLineIndex));
-					}
-					else // If multiple selected lines
-					{
-						// Determine selection direction
-						for (int i = ((_firstSelectedLineIndex > _lastSelectedLineIndex) ? _lastSelectedLineIndex : _firstSelectedLineIndex);
-							i <= ((_firstSelectedLineIndex > _lastSelectedLineIndex) ? _firstSelectedLineIndex : _lastSelectedLineIndex); i++)
-						{
-							_copyClipboard.push_back(_script.getScriptFile(_currentScriptFileID)->getLineText(i)); // Copy text lines
-						}
-					}
-				}
+				_copySelectedText();
 			}
 			else if (_fe3d.input_getKeyPressed(InputType::KEY_V)) // Paste copied text
 			{

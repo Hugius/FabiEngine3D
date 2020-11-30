@@ -1,34 +1,16 @@
 #include "script_variable.hpp"
 
-ScriptVariable::ScriptVariable(FabiEngine3D& fe3d, ScriptVariableScope scope, const string& ID, bool constant, ScriptValue value) :
+ScriptVariable::ScriptVariable(FabiEngine3D& fe3d, ScriptVariableScope scope, ScriptVariableType type, 
+	const string& ID, bool constant, vector<ScriptValue> values)
+	:
 	_fe3d(fe3d),
 	_scope(scope),
+	_type(type),
 	_ID(ID),
-	_isConstant(constant)
+	_isConstant(constant),
+	_values(values)
 {
-	_value = new ScriptValue(_fe3d, value.getType());
 
-	// Set new value
-	if (_value->getType() == ScriptValueType::VEC3)
-	{
-		_value->setVec3(value.getVec3());
-	}
-	else if (_value->getType() == ScriptValueType::STRING)
-	{
-		_value->setString(value.getString());
-	}
-	else if (_value->getType() == ScriptValueType::DECIMAL)
-	{
-		_value->setDecimal(value.getDecimal());
-	}
-	else if (_value->getType() == ScriptValueType::INTEGER)
-	{
-		_value->setInteger(value.getInteger());
-	}
-	else if (_value->getType() == ScriptValueType::BOOLEAN)
-	{
-		_value->setBoolean(value.getBoolean());
-	}
 }
 
 const string& ScriptVariable::getID()
@@ -41,46 +23,47 @@ ScriptVariableScope ScriptVariable::getScope()
 	return _scope;
 }
 
+ScriptVariableType ScriptVariable::getType()
+{
+	return _type;
+}
+
 bool ScriptVariable::isConstant()
 {
 	return _isConstant;
 }
 
-void ScriptVariable::changeValue(ScriptValue value)
+void ScriptVariable::changeValues(vector<ScriptValue> values)
 {
+	_values.clear();
+	_values = values;
+}
+
+void ScriptVariable::changeValue(ScriptValue value, unsigned int index)
+{
+	// Check if variable is immutable
 	if (_isConstant)
 	{
 		_fe3d.logger_throwError("Cannot change script value: variable is constant!");
 	}
 
 	// Delete old value
-	delete _value;
-
-	// Set new value
-	_value = new ScriptValue(_fe3d, value.getType());
-	if (_value->getType() == ScriptValueType::VEC3)
-	{
-		_value->setVec3(value.getVec3());
-	}
-	else if (_value->getType() == ScriptValueType::STRING)
-	{
-		_value->setString(value.getString());
-	}
-	else if (_value->getType() == ScriptValueType::DECIMAL)
-	{
-		_value->setDecimal(value.getDecimal());
-	}
-	else if (_value->getType() == ScriptValueType::INTEGER)
-	{
-		_value->setInteger(value.getInteger());
-	}
-	else if (_value->getType() == ScriptValueType::BOOLEAN)
-	{
-		_value->setBoolean(value.getBoolean());
-	}
+	_values.erase(_values.begin() + index);
+	_values.insert(_values.begin() + index, value);
 }
 
-ScriptValue& ScriptVariable::getValue()
+ScriptValue& ScriptVariable::getValue(unsigned int index)
 {
-	return *_value;
+	// Validate index
+	if (index >= _values.size())
+	{
+		_fe3d.logger_throwError("Invalid index at script variable!");
+	}
+
+	return _values[index];
+}
+
+unsigned int ScriptVariable::getValueCount()
+{
+	return _values.size();
 }

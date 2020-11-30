@@ -96,7 +96,7 @@ bool ScriptInterpreter::_checkConditionString(string conditionString)
 			else // VARIABLE
 			{
 				// Check if accessing individual float from vec3 variable
-				auto parts = _checkVec3Part(elementString);
+				auto parts = _extractVec3PartFromString(elementString);
 				
 				// Remove vec3 part text
 				if (parts != Ivec3(0))

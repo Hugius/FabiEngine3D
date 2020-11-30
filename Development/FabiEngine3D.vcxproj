@@ -189,6 +189,7 @@
     <ClInclude Include="Source\script_value_type.hpp" />
     <ClInclude Include="Source\script_variable.hpp" />
     <ClInclude Include="Source\script_variable_scope.hpp" />
+    <ClInclude Include="Source\script_variable_type.hpp" />
     <ClInclude Include="Source\settings_editor.hpp" />
     <ClInclude Include="Source\top_viewport_controller.hpp" />
     <ClInclude Include="Source\engine_gui_global_screen.hpp" />
@@ -342,7 +343,7 @@
     <ClCompile Include="Source\script_editor_selector.cpp" />
     <ClCompile Include="Source\script_executor.cpp" />
     <ClCompile Include="Source\script_file.cpp" />
-    <ClCompile Include="Source\script_interpreter_arguments.cpp" />
+    <ClCompile Include="Source\script_interpreter_list.cpp" />
     <ClCompile Include="Source\script_interpreter_core.cpp" />
     <ClCompile Include="Source\script_interpreter_execution.cpp" />
     <ClCompile Include="Source\script_interpreter_func_camera.cpp" />

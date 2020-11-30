@@ -2,27 +2,32 @@
 
 #include "script_value.hpp"
 #include "script_variable_scope.hpp"
+#include "script_variable_type.hpp"
 
 class ScriptVariable final
 {
 public:
-	ScriptVariable(FabiEngine3D& fe3d, ScriptVariableScope scope, const string& ID, bool constant, ScriptValue value);
+	ScriptVariable(FabiEngine3D& fe3d, ScriptVariableScope scope, ScriptVariableType type, const string& ID, bool constant, vector<ScriptValue> values);
 
 	const string& getID();
 	ScriptVariableScope getScope();
+	ScriptVariableType getType();
 	bool isConstant();
-	ScriptValue& getValue();
+	ScriptValue& getValue(unsigned int index = 0);
+	unsigned int getValueCount();
 
-	void changeValue(ScriptValue value);
+	void changeValues(vector<ScriptValue> values);
+	void changeValue(ScriptValue value, unsigned int index = 0);
 
 private:
 	FabiEngine3D& _fe3d;
 
 	ScriptVariableScope _scope;
+	ScriptVariableType _type;
 
 	string _ID;
 
 	const bool _isConstant;
 
-	ScriptValue* _value = nullptr;
+	vector<ScriptValue> _values;
 };

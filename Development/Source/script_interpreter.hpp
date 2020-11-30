@@ -25,13 +25,15 @@ private:
 	void _executeScript(const string& scriptID, ScriptType scriptType);
 
 	// Value functions
+	bool _isListValue(const string& valueString);
 	bool _isVec3Value(const string& valueString);
 	bool _isStringValue(const string& valueString);
 	bool _isDecimalValue(const string& valueString);
 	bool _isIntegerValue(const string& valueString);
 	bool _isBooleanValue(const string& valueString);
 	Vec3 _extractVec3FromString(const string& valueString);
-	Ivec3 _checkVec3Part(const string& valueString);
+	Ivec3 _extractVec3PartFromString(const string& valueString);
+	int _extractListIndexFromString(const string& valueString, bool& noListAccesss);
 
 	// Variable functions
 	void _processVariableDefinition(const string& scriptLine, ScriptVariableScope scope, bool isEditing);
@@ -48,10 +50,11 @@ private:
 	bool _validateCondition(ScriptValue& firstValue, string comparisonOperator, ScriptValue& secondValue);
 	bool _compareValues(ScriptValue& firstValue, string comparisonOperator, ScriptValue& secondValue);
 
-	// Argument functions
-	bool _validateArgumentAmount(vector<ScriptValue> arguments, unsigned int amount);
-	bool _validateArgumentTypes(vector<ScriptValue> arguments, vector<ScriptValueType> types);
-	vector<ScriptValue> _extractArguments(string argumentString);
+	// List functions
+	bool _validateListIndex(ScriptVariable& list, unsigned int index);
+	bool _validateListAmount(vector<ScriptValue> list, unsigned int amount);
+	bool _validateListTypes(vector<ScriptValue> list, vector<ScriptValueType> types);
+	vector<ScriptValue> _extractValuesFromListString(string listString);
 
 	// Miscellaneous functions
 	unsigned int _countFrontSpaces(const string& scriptLineText);
@@ -93,12 +96,15 @@ private:
 	string _destroyEntryID = "";
 	const string _metaKeyword			= "META";
 	const string _executeKeyword		= "EXEC";
+	const string _loopKeyword			= "LOOP";
+	const string _inKeyword				= "IN";
 	const string _ifKeyword				= "IF";
 	const string _elifKeyword			= "ELIF";
 	const string _elseKeyword			= "ELSE";
 	const string _globalKeyword			= "GLOB";
 	const string _constKeyword			= "CONST";
 	const string _editKeyword			= "EDIT";
+	const string _listKeyword			= "LIST";
 	const string _vec3Keyword			= "VEC3";
 	const string _stringKeyword			= "STR";
 	const string _decimalKeyword		= "DEC";

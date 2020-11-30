@@ -517,9 +517,6 @@
     <ClCompile Include="Source\script_interpreter_execution.cpp">
       <Filter>src\Scripting System\Execution\Interpreter\Core</Filter>
     </ClCompile>
-    <ClCompile Include="Source\script_interpreter_arguments.cpp">
-      <Filter>src\Scripting System\Execution\Interpreter\Miscellaneous</Filter>
-    </ClCompile>
     <ClCompile Include="Source\script_interpreter_conditions.cpp">
       <Filter>src\Scripting System\Execution\Interpreter\Miscellaneous</Filter>
     </ClCompile>
@@ -549,6 +546,9 @@
     </ClCompile>
     <ClCompile Include="Source\script_interpreter_func_misc.cpp">
       <Filter>src\Scripting System\Execution\Interpreter\Functions</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_interpreter_list.cpp">
+      <Filter>src\Scripting System\Execution\Interpreter\Miscellaneous</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -798,9 +798,6 @@
     <ClInclude Include="Source\script_variable.hpp">
       <Filter>src\Scripting System\Miscellaneous</Filter>
     </ClInclude>
-    <ClInclude Include="Source\script_type.hpp">
-      <Filter>src\Scripting System\Miscellaneous</Filter>
-    </ClInclude>
     <ClInclude Include="Source\input_types.hpp">
       <Filter>src\Miscellaneous\Enums</Filter>
     </ClInclude>
@@ -884,6 +881,12 @@
     </ClInclude>
     <ClInclude Include="Source\script_interpreter.hpp">
       <Filter>src\Scripting System\Execution\Interpreter\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\script_type.hpp">
+      <Filter>src\Miscellaneous\Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\script_variable_type.hpp">
+      <Filter>src\Miscellaneous\Enums</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

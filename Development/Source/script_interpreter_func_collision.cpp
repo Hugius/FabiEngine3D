@@ -7,7 +7,7 @@ bool ScriptInterpreter::_executeFe3dCollisionFunction(const string& functionName
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
 
-		if (_validateArgumentAmount(arguments, types.size()) && _validateArgumentTypes(arguments, types))
+		if (_validateListAmount(arguments, types.size()) && _validateListTypes(arguments, types))
 		{
 			auto result = _fe3d.collision_checkCursorInEntity(arguments[0].getString());
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
@@ -18,7 +18,7 @@ bool ScriptInterpreter::_executeFe3dCollisionFunction(const string& functionName
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
 
-		if (_validateArgumentAmount(arguments, types.size()) && _validateArgumentTypes(arguments, types))
+		if (_validateListAmount(arguments, types.size()) && _validateListTypes(arguments, types))
 		{
 			// Find aabbEntity ID
 			string searchID = arguments[0].getString() + (!arguments[1].getString().empty() ? ("_" + arguments[1].getString()) : "");
@@ -37,7 +37,7 @@ bool ScriptInterpreter::_executeFe3dCollisionFunction(const string& functionName
 	}
 	else if (functionName == "fe3d:raycast_game_entities") // Raycasting into all gameEntities
 	{
-		if (_validateArgumentAmount(arguments, 0) && _validateArgumentTypes(arguments, {}))
+		if (_validateListAmount(arguments, 0) && _validateListTypes(arguments, {}))
 		{
 			auto result = _fe3d.collision_checkCursorInAny();
 

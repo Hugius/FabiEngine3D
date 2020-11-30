@@ -2,6 +2,23 @@
 
 #include <sstream>
 
+bool ScriptInterpreter::_isListValue(const string& valueString)
+{
+	// Check if value has enough characters
+	if (valueString.empty())
+	{
+		return false;
+	}
+
+	// Check if value is surrounded by braces
+	if (valueString.front() != '{' || valueString.back() != '}')
+	{
+		return false;
+	}
+
+	return true;
+}
+
 bool ScriptInterpreter::_isVec3Value(const string& valueString)
 {
 	// Check if value has enough characters
@@ -10,6 +27,7 @@ bool ScriptInterpreter::_isVec3Value(const string& valueString)
 		return false;
 	}
 
+	// Check if value is surrounded by brackets
 	if (valueString.front() != '[' || valueString.back() != ']')
 	{
 		return false;
@@ -122,7 +140,7 @@ Vec3 ScriptInterpreter::_extractVec3FromString(const string& valueString)
 	return Vec3(stof(x), stof(y), stof(z));
 }
 
-Ivec3 ScriptInterpreter::_checkVec3Part(const string& valueString)
+Ivec3 ScriptInterpreter::_extractVec3PartFromString(const string& valueString)
 {
 	Ivec3 parts = Ivec3(0);
 
@@ -143,6 +161,33 @@ Ivec3 ScriptInterpreter::_checkVec3Part(const string& valueString)
 	}
 
 	return parts;
+}
+
+int ScriptInterpreter::_extractListIndexFromString(const string& valueString, bool& isAccessingList)
+{
+	auto openingBracketFound = std::find(valueString.begin(), valueString.end(), '[');
+	auto closingBracketFound = std::find(valueString.begin(), valueString.end(), ']');
+
+	// Check if brackets are in string
+	if (openingBracketFound != valueString.end() && closingBracketFound != valueString.end())
+	{
+		unsigned int bracketIndex = std::distance(valueString.begin(), openingBracketFound);
+		string indexString = valueString.substr(bracketIndex + 1);
+		indexString.pop_back();
+
+		// Check if index is a number
+		if (_isIntegerValue(indexString))
+		{
+			isAccessingList = true;
+			return stoi(indexString);
+		}
+		else
+		{
+			_throwScriptError("invalid list indexing syntax!");
+		}
+	}
+
+	return -1;
 }
 
 unsigned int ScriptInterpreter::_countFrontSpaces(const string& scriptLineText)

@@ -21,7 +21,7 @@ vector<ScriptValue> ScriptInterpreter::_processEngineFunctionCall(const string& 
 			unsigned int parenthesisIndex = std::distance(scriptLine.begin(), openingParanthesisFound);
 			string argumentString = scriptLine.substr(parenthesisIndex + 1);
 			argumentString.pop_back();
-			auto arguments = _extractArguments(argumentString);
+			auto arguments = _extractValuesFromListString(argumentString);
 
 			// Check if argument extraction went well
 			if (!_hasThrownError)
@@ -73,7 +73,7 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 			unsigned int parenthesisIndex = std::distance(scriptLine.begin(), openingParanthesisFound);
 			string argumentString = scriptLine.substr(parenthesisIndex + 1);
 			argumentString.pop_back();
-			auto arguments = _extractArguments(argumentString);
+			auto arguments = _extractValuesFromListString(argumentString);
 
 			// Check if argument extraction went well
 			if (!_hasThrownError)
@@ -85,7 +85,7 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 				{
 					auto types = { ScriptValueType::DECIMAL };
 
-					if (_validateArgumentAmount(arguments, types.size()) && _validateArgumentTypes(arguments, types))
+					if (_validateListAmount(arguments, types.size()) && _validateListTypes(arguments, types))
 					{
 						float angle = _fe3d.misc_degreesToRadians(arguments[0].getDecimal());
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, std::tan(angle)));
@@ -95,7 +95,7 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 				{
 					auto types = { ScriptValueType::DECIMAL };
 
-					if (_validateArgumentAmount(arguments, types.size()) && _validateArgumentTypes(arguments, types))
+					if (_validateListAmount(arguments, types.size()) && _validateListTypes(arguments, types))
 					{
 						float angle = _fe3d.misc_degreesToRadians(arguments[0].getDecimal());
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, std::sin(angle)));
@@ -105,7 +105,7 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 				{
 					auto types = { ScriptValueType::DECIMAL };
 
-					if (_validateArgumentAmount(arguments, types.size()) && _validateArgumentTypes(arguments, types))
+					if (_validateListAmount(arguments, types.size()) && _validateListTypes(arguments, types))
 					{
 						float angle = _fe3d.misc_degreesToRadians(arguments[0].getDecimal());
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, std::cos(angle)));
@@ -113,7 +113,7 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 				}
 				else if (functionName == "math:pow") // POWER
 				{
-					if (_validateArgumentAmount(arguments, 2))
+					if (_validateListAmount(arguments, 2))
 					{
 						if (arguments[0].getType() == ScriptValueType::INTEGER && arguments[1].getType() == ScriptValueType::INTEGER)
 						{
@@ -133,7 +133,7 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 				}
 				else if (functionName == "math:min") // MIN
 				{
-					if (_validateArgumentAmount(arguments, 2))
+					if (_validateListAmount(arguments, 2))
 					{
 						if (arguments[0].getType() == ScriptValueType::INTEGER && arguments[1].getType() == ScriptValueType::INTEGER)
 						{
@@ -153,7 +153,7 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 				}
 				else if (functionName == "math:max") // MAX
 				{
-					if (_validateArgumentAmount(arguments, 2))
+					if (_validateListAmount(arguments, 2))
 					{
 						if (arguments[0].getType() == ScriptValueType::INTEGER && arguments[1].getType() == ScriptValueType::INTEGER)
 						{
@@ -175,7 +175,7 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 				{
 					auto types = { ScriptValueType::DECIMAL };
 
-					if (_validateArgumentAmount(arguments, types.size()) && _validateArgumentTypes(arguments, types))
+					if (_validateListAmount(arguments, types.size()) && _validateListTypes(arguments, types))
 					{
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, std::sqrtf(arguments[0].getDecimal())));
 					}
@@ -183,7 +183,7 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 				else if (functionName == "math:abs") // ABSOLUTE
 				{
 					// Validate amount of arguments
-					if (_validateArgumentAmount(arguments, 1))
+					if (_validateListAmount(arguments, 1))
 					{
 						// Determine type of value
 						if (arguments[0].getType() == ScriptValueType::INTEGER)
@@ -204,7 +204,7 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 				{
 					auto types = { ScriptValueType::VEC3, ScriptValueType::VEC3 };
 
-					if (_validateArgumentAmount(arguments, types.size()) && _validateArgumentTypes(arguments, types))
+					if (_validateListAmount(arguments, types.size()) && _validateListTypes(arguments, types))
 					{
 						// Save positions
 						Vec3 firstPos = arguments[0].getVec3();
@@ -256,7 +256,7 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 			unsigned int parenthesisIndex = std::distance(scriptLine.begin(), openingParanthesisFound);
 			string argumentString = scriptLine.substr(parenthesisIndex + 1);
 			argumentString.pop_back();
-			auto arguments = _extractArguments(argumentString);
+			auto arguments = _extractValuesFromListString(argumentString);
 
 			// Check if argument extraction went well
 			if (!_hasThrownError)
@@ -266,7 +266,7 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 				// Determine type of function
 				if (functionName == "misc:to_string")
 				{
-					if (_validateArgumentAmount(arguments, 1))
+					if (_validateListAmount(arguments, 1))
 					{
 						if (arguments[0].getType() == ScriptValueType::INTEGER)
 						{
@@ -286,7 +286,7 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 				{
 					auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
 
-					if (_validateArgumentAmount(arguments, types.size()) && _validateArgumentTypes(arguments, types))
+					if (_validateListAmount(arguments, types.size()) && _validateListTypes(arguments, types))
 					{
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, arguments[0].getString() + arguments[1].getString()));
 					}

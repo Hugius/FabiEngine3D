@@ -13,8 +13,6 @@ public:
 	ScriptValue(FabiEngine3D& fe3d, ScriptValueType type, int value);
 	ScriptValue(FabiEngine3D& fe3d, ScriptValueType type, bool value);
 
-	void operator=(const ScriptValue& other);
-
 	void setVec3(Vec3 value);
 	void setString(const string& value);
 	void setDecimal(float value);

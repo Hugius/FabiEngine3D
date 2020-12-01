@@ -7,6 +7,7 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 	string operatorString = "";
 	string nameString = "";
 	string valueString = "";
+	unsigned int valueIndex = 0;
 
 	// Extract data
 	iss >> operatorString >> nameString;
@@ -28,7 +29,6 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 	// Check if accessing individual value from list variable
 	bool isAccessingList = false;
 	auto listIndex = _extractListIndexFromString(nameString, isAccessingList);
-	unsigned int valueIndex = 0;
 
 	// Check if accessing individual float from vec3 variable
 	auto vec3Parts = _extractVec3PartFromString(nameString);
@@ -145,8 +145,8 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 		}
 
 		// Retrieve arithmetic value
-		auto value = _isLocalVariableExisting(valueString) ? _getLocalVariable(valueString).getValue() : _isGlobalVariableExisting(valueString) ?
-			_getGlobalVariable(nameString).getValue() : _isIntegerValue(valueString) ? ScriptValue(_fe3d, ScriptValueType::INTEGER, stoi(valueString)) :
+		auto value = _isLocalVariableExisting(valueString) ? _getLocalVariable(valueString).getValue(valueIndex) : _isGlobalVariableExisting(valueString) ?
+			_getGlobalVariable(nameString).getValue(valueIndex) : _isIntegerValue(valueString) ? ScriptValue(_fe3d, ScriptValueType::INTEGER, stoi(valueString)) :
 			_isDecimalValue(valueString) ? ScriptValue(_fe3d, ScriptValueType::DECIMAL, stof(valueString)) : ScriptValue(_fe3d, ScriptValueType::EMPTY);
 
 		// Check if arithmetic value is valid
@@ -157,10 +157,10 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 		}
 
 		// Execute arithmetic operation
-		if ((variable.getValue().getType() == ScriptValueType::INTEGER) && value.getType() == ScriptValueType::INTEGER) // Integer
+		if ((variable.getValue(valueIndex).getType() == ScriptValueType::INTEGER) && value.getType() == ScriptValueType::INTEGER) // Integer
 		{
 			// Retrieve current variable value
-			int result = variable.getValue().getInteger();
+			int result = variable.getValue(valueIndex).getInteger();
 
 			// Determine arithmetic type
 			if (operatorString == _additionKeyword)
@@ -181,12 +181,12 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 			}
 
 			// Set resulting value
-			variable.getValue().setInteger(result);
+			variable.getValue(valueIndex).setInteger(result);
 		}
-		else if ((variable.getValue().getType() == ScriptValueType::DECIMAL) && value.getType() == ScriptValueType::DECIMAL) // Decimal
+		else if ((variable.getValue(valueIndex).getType() == ScriptValueType::DECIMAL) && value.getType() == ScriptValueType::DECIMAL) // Decimal
 		{
 			// Retrieve current variable value
-			float result = variable.getValue().getDecimal();
+			float result = variable.getValue(valueIndex).getDecimal();
 
 			// Determine arithmetic type
 			if (operatorString == _additionKeyword)
@@ -207,13 +207,13 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 			}
 
 			// Set resulting value
-			variable.getValue().setDecimal(result);
+			variable.getValue(valueIndex).setDecimal(result);
 		}
-		else if ((variable.getValue().getType() == ScriptValueType::VEC3) && value.getType() == ScriptValueType::DECIMAL) // Vec3
+		else if ((variable.getValue(valueIndex).getType() == ScriptValueType::VEC3) && value.getType() == ScriptValueType::DECIMAL) // Vec3
 		{
 			// Retrieve current variable value
-			Vec3 oldValue = variable.getValue().getVec3();
-			Vec3 result = variable.getValue().getVec3();
+			Vec3 oldValue = variable.getValue(valueIndex).getVec3();
+			Vec3 result = variable.getValue(valueIndex).getVec3();
 
 			// Determine arithmetic type
 			if (operatorString == _additionKeyword)
@@ -236,19 +236,19 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 			// Set resulting value
 			if (vec3Parts.x)
 			{
-				variable.getValue().setVec3(Vec3(result.x, oldValue.y, oldValue.z));
+				variable.getValue(valueIndex).setVec3(Vec3(result.x, oldValue.y, oldValue.z));
 			}
 			else if (vec3Parts.y)
 			{
-				variable.getValue().setVec3(Vec3(oldValue.x, result.y, oldValue.z));
+				variable.getValue(valueIndex).setVec3(Vec3(oldValue.x, result.y, oldValue.z));
 			}
 			else if (vec3Parts.z)
 			{
-				variable.getValue().setVec3(Vec3(oldValue.x, oldValue.y, result.z));
+				variable.getValue(valueIndex).setVec3(Vec3(oldValue.x, oldValue.y, result.z));
 			}
 			else
 			{
-				variable.getValue().setVec3(result);
+				variable.getValue(valueIndex).setVec3(result);
 			}
 		}
 		else

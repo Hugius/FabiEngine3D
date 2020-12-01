@@ -29,5 +29,5 @@ private:
 
 	const bool _isConstant;
 
-	vector<ScriptValue> _values;
+	vector<shared_ptr<ScriptValue>> _values;
 };

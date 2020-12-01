@@ -2,11 +2,20 @@
 
 bool ScriptInterpreter::_validateListIndex(ScriptVariable& list, unsigned int index)
 {
+	// Check if variable is a list in the first place
+	if (list.getType() == ScriptVariableType::SINGLE)
+	{
+		_throwScriptError("variable with ID \"" + list.getID() + "\" is not a list!");
+		return false;
+	}
+
+	// Check if list index is valid
 	if (index < 0 || index >= list.getValueCount())
 	{
 		_throwScriptError("invalid list index!");
 		return false;
 	}
+
 
 	return true;
 }

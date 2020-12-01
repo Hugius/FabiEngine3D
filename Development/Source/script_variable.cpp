@@ -7,10 +7,12 @@ ScriptVariable::ScriptVariable(FabiEngine3D& fe3d, ScriptVariableScope scope, Sc
 	_scope(scope),
 	_type(type),
 	_ID(ID),
-	_isConstant(constant),
-	_values(values)
+	_isConstant(constant)
 {
-
+	for (auto& value : values)
+	{
+		_values.push_back(make_shared<ScriptValue>(value));
+	}
 }
 
 const string& ScriptVariable::getID()
@@ -36,7 +38,11 @@ bool ScriptVariable::isConstant()
 void ScriptVariable::changeValues(vector<ScriptValue> values)
 {
 	_values.clear();
-	_values = values;
+
+	for (auto& value : values)
+	{
+		_values.push_back(make_shared<ScriptValue>(value));
+	}
 }
 
 void ScriptVariable::changeValue(ScriptValue value, unsigned int index)
@@ -49,7 +55,7 @@ void ScriptVariable::changeValue(ScriptValue value, unsigned int index)
 
 	// Delete old value
 	_values.erase(_values.begin() + index);
-	_values.insert(_values.begin() + index, value);
+	_values.insert(_values.begin() + index, make_shared<ScriptValue>(value));
 }
 
 ScriptValue& ScriptVariable::getValue(unsigned int index)
@@ -60,7 +66,7 @@ ScriptValue& ScriptVariable::getValue(unsigned int index)
 		_fe3d.logger_throwError("Invalid index at script variable!");
 	}
 
-	return _values[index];
+	return *_values[index];
 }
 
 unsigned int ScriptVariable::getValueCount()

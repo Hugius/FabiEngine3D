@@ -56,7 +56,7 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 		for (auto& word : { _metaKeyword, _executeKeyword, _loopKeyword, _inKeyword, _ifKeyword, _elifKeyword, _elseKeyword, _globalKeyword,
 			_constKeyword, _editKeyword, _listKeyword, _vec3Keyword, _stringKeyword, _decimalKeyword, _integerKeyword, _booleanKeyword, _isKeyword,
 			_notKeyword, _andKeyword, _orKeyword, _moreKeyword, _lessKeyword, _additionKeyword, _subtractionKeyword, _multiplicationKeyword, 
-			_divisionKeyword, _negationKeyword, _castingKeyword, _concatenationKeyword })
+			_divisionKeyword, _negationKeyword, _castingKeyword, _concatenationKeyword, _pushingKeyword, _pullingKeyword })
 		{
 			validName = validName && (nameString != word);
 		}
@@ -156,12 +156,7 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 						auto value = ScriptValue(_fe3d, ScriptValueType::BOOLEAN, _checkConditionString(valueString));
 						variableList.push_back(ScriptVariable(_fe3d, scope, ScriptVariableType::SINGLE, nameString, isConstant, { value }));
 					}
-					else if // FUNCTION
-						(
-							valueString.substr(0, 5) == "fe3d:" || 
-							valueString.substr(0, 5) == "math:" || 
-							valueString.substr(0, 5) == "misc:"
-						)
+					else if (valueString.substr(0, 5) == "fe3d:" || valueString.substr(0, 5) == "math:" || valueString.substr(0, 5) == "misc:")
 					{
 						// Call function
 						auto values =
@@ -176,9 +171,16 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 						}
 
 						// Check if returned value is of the right type
-						if ((typeString == _listKeyword) && (values.size() > 1))
+						if (values.size() > 1)
 						{
-							variableList.push_back(ScriptVariable(_fe3d, scope, ScriptVariableType::MULTIPLE, nameString, isConstant, values));
+							if (typeString == _listKeyword) // Variable is an array
+							{
+								variableList.push_back(ScriptVariable(_fe3d, scope, ScriptVariableType::MULTIPLE, nameString, isConstant, values));
+							}
+							else // Variable is not an array
+							{
+								_throwScriptError("function returned too many values!");
+							}
 						}
 						else if
 							(((typeString == _vec3Keyword)	 && (values[0].getType() == ScriptValueType::VEC3))    || 

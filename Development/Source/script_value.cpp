@@ -37,22 +37,6 @@ ScriptValue::ScriptValue(FabiEngine3D& fe3d, ScriptValueType type, bool value) :
 	setBoolean(value);
 }
 
-void ScriptValue::operator=(const ScriptValue& other)
-{
-	if (this->_type == other._type)
-	{
-		this->_vec3    = other._vec3;
-		this->_string  = other._string;
-		this->_decimal = other._decimal;
-		this->_integer = other._integer;
-		this->_boolean = other._boolean;
-	}
-	else
-	{
-		_fe3d.logger_throwError("Cannot copy script value: not the same type!");
-	}
-}
-
 void ScriptValue::setVec3(Vec3 value)
 {
 	_vec3 = value;

@@ -9,6 +9,7 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 	string equalSignString = "";
 	string valueString = "";
 	bool isConstant = false;
+	unsigned int valueIndex = 0;
 
 	// Extract text parts
 	string keyword;
@@ -18,6 +19,34 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 	if (equalSignString == "=")
 	{
 		valueString = scriptLine.substr(scriptLine.find('=') + 2);
+	}
+
+	// Check if changing individual value from list variable
+	bool isAccessingList = false;
+	auto listIndex = _extractListIndexFromString(nameString, isAccessingList);
+
+	// Check if changing individual float from vec3 variable
+	auto vec3Parts = _extractVec3PartFromString(nameString);
+
+	// Check if any error was thrown
+	if (_hasThrownError)
+	{
+		return;
+	}
+
+	// Remove vec3 part characters
+	if (vec3Parts != Ivec3(0))
+	{
+		nameString.pop_back();
+		nameString.pop_back();
+	}
+
+	// Remove list accessing characters
+	if (isAccessingList)
+	{
+		auto openingBracketFound = std::find(nameString.begin(), nameString.end(), '[');
+		unsigned int bracketIndex = std::distance(nameString.begin(), openingBracketFound);
+		nameString = nameString.substr(0, bracketIndex);
 	}
 
 	// Check if variable exists
@@ -37,6 +66,16 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 		return;
 	}
 
+	// Prepare list access
+	if (isAccessingList)
+	{
+		// Check if list index is valid
+		if (_validateListIndex(variable, listIndex))
+		{
+			valueIndex = listIndex;
+		}
+	}
+
 	// Check if equal sign is valid
 	if (equalSignString == "=")
 	{
@@ -51,50 +90,64 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 			auto values = _extractValuesFromListString(listString);
 			variable.changeValues(values);
 		}
-		else if (variable.getType() == ScriptVariableType::SINGLE &&
-			variable.getValue().getType() == ScriptValueType::VEC3 && _isVec3Value(valueString)) // VEC3
+		else if ((variable.getType() == ScriptVariableType::SINGLE || isAccessingList) &&
+			variable.getValue(valueIndex).getType() == ScriptValueType::VEC3 && _isVec3Value(valueString) && vec3Parts == Ivec3(0)) // VEC3
 		{
-			variable.getValue().setVec3(_extractVec3FromString(valueString));
+			variable.getValue(valueIndex).setVec3(_extractVec3FromString(valueString));
 		}
-		else if (variable.getType() == ScriptVariableType::SINGLE &&
-			variable.getValue().getType() == ScriptValueType::STRING && _isStringValue(valueString)) // STRING
+		else if ((variable.getType() == ScriptVariableType::SINGLE || isAccessingList) &&
+			variable.getValue(valueIndex).getType() == ScriptValueType::STRING && _isStringValue(valueString)) // STRING
 		{
 			valueString.erase(valueString.begin());
 			valueString.pop_back();
-			variable.getValue().setString(valueString);
+			variable.getValue(valueIndex).setString(valueString);
 		}
-		else if (variable.getType() == ScriptVariableType::SINGLE &&
-			variable.getValue().getType() == ScriptValueType::DECIMAL && _isDecimalValue(valueString)) // DECIMAL
+		else if ((variable.getType() == ScriptVariableType::SINGLE || isAccessingList) &&
+			variable.getValue(valueIndex).getType() == ScriptValueType::DECIMAL && _isDecimalValue(valueString)) // DECIMAL - normal
 		{
-			variable.getValue().setDecimal(stof(valueString));
+			variable.getValue(valueIndex).setDecimal(stof(valueString));
 		}
-		else if (variable.getType() == ScriptVariableType::SINGLE &&
-			variable.getValue().getType() == ScriptValueType::INTEGER && _isIntegerValue(valueString)) // INTEGER
+		else if (vec3Parts != Ivec3(0) &&
+			variable.getValue(valueIndex).getType() == ScriptValueType::VEC3 && _isDecimalValue(valueString)) // DECIMAL - vec3 part
 		{
-			variable.getValue().setInteger(stoi(valueString));
+			auto oldValue = variable.getValue(valueIndex).getVec3();
+
+			// Determine which part of vec3 must change
+			if (vec3Parts.x)
+			{
+				variable.getValue(valueIndex).setVec3(Vec3(stof(valueString), oldValue.y, oldValue.z));
+			}
+			else if (vec3Parts.y)
+			{
+				variable.getValue(valueIndex).setVec3(Vec3(oldValue.x, stof(valueString), oldValue.z));
+			}
+			else if (vec3Parts.z)
+			{
+				variable.getValue(valueIndex).setVec3(Vec3(oldValue.x, oldValue.y, stof(valueString)));
+			}
 		}
-		else if (variable.getType() == ScriptVariableType::SINGLE &&
-			variable.getValue().getType() == ScriptValueType::BOOLEAN && _isBooleanValue(valueString)) // BOOLEAN - normal
+		else if ((variable.getType() == ScriptVariableType::SINGLE || isAccessingList) &&
+			variable.getValue(valueIndex).getType() == ScriptValueType::INTEGER && _isIntegerValue(valueString)) // INTEGER
 		{
-			variable.getValue().setBoolean(valueString == "<true>");
+			variable.getValue(valueIndex).setInteger(stoi(valueString));
+		}
+		else if ((variable.getType() == ScriptVariableType::SINGLE || isAccessingList) &&
+			variable.getValue(valueIndex).getType() == ScriptValueType::BOOLEAN && _isBooleanValue(valueString)) // BOOLEAN - normal
+		{
+			variable.getValue(valueIndex).setBoolean(valueString == "<true>");
 		}
 		else if // BOOLEAN - condition
 			(
-				variable.getType() == ScriptVariableType::SINGLE &&
-				(variable.getValue().getType() == ScriptValueType::BOOLEAN) &&
+				(variable.getType() == ScriptVariableType::SINGLE || isAccessingList) &&
+				(variable.getValue(valueIndex).getType() == ScriptValueType::BOOLEAN) &&
 				(valueString.front() == '(' && valueString.back() == ')')
-				)
+			)
 		{
 			valueString.erase(valueString.begin());
 			valueString.pop_back();
-			variable.getValue().setBoolean(_checkConditionString(valueString));
+			variable.getValue(valueIndex).setBoolean(_checkConditionString(valueString));
 		}
-		else if // FUNCTION
-			(
-				valueString.substr(0, 5) == "fe3d:" ||
-				valueString.substr(0, 5) == "math:" ||
-				valueString.substr(0, 5) == "misc:"
-				)
+		else if (valueString.substr(0, 5) == "fe3d:" || valueString.substr(0, 5) == "math:" || valueString.substr(0, 5) == "misc:") // FUNCTION
 		{
 			// Call function
 			auto values =
@@ -109,25 +162,36 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 			}
 
 			// Check if returned value is of the right type
-			if ((variable.getValue().getType() == ScriptValueType::VEC3) && (values[0].getType() == ScriptValueType::VEC3))
+			if (values.size() > 1)
 			{
-				variable.getValue().setVec3(values[0].getVec3());
+				if (variable.getType() == ScriptVariableType::MULTIPLE) // Variable is an array
+				{
+					variable.changeValues(values);
+				}
+				else // Variable is not an array
+				{
+					_throwScriptError("function returned too many values!");
+				}
 			}
-			else if ((variable.getValue().getType() == ScriptValueType::STRING) && (values[0].getType() == ScriptValueType::STRING))
+			else if ((variable.getValue(valueIndex).getType() == ScriptValueType::VEC3) && (values[0].getType() == ScriptValueType::VEC3))
 			{
-				variable.getValue().setString(values[0].getString());
+				variable.getValue(valueIndex).setVec3(values[0].getVec3());
 			}
-			else if ((variable.getValue().getType() == ScriptValueType::DECIMAL) && (values[0].getType() == ScriptValueType::DECIMAL))
+			else if ((variable.getValue(valueIndex).getType() == ScriptValueType::STRING) && (values[0].getType() == ScriptValueType::STRING))
 			{
-				variable.getValue().setDecimal(values[0].getDecimal());
+				variable.getValue(valueIndex).setString(values[0].getString());
 			}
-			else if ((variable.getValue().getType() == ScriptValueType::INTEGER) && (values[0].getType() == ScriptValueType::INTEGER))
+			else if ((variable.getValue(valueIndex).getType() == ScriptValueType::DECIMAL) && (values[0].getType() == ScriptValueType::DECIMAL))
 			{
-				variable.getValue().setInteger(values[0].getInteger());
+				variable.getValue(valueIndex).setDecimal(values[0].getDecimal());
 			}
-			else if ((variable.getValue().getType() == ScriptValueType::BOOLEAN) && (values[0].getType() == ScriptValueType::BOOLEAN))
+			else if ((variable.getValue(valueIndex).getType() == ScriptValueType::INTEGER) && (values[0].getType() == ScriptValueType::INTEGER))
 			{
-				variable.getValue().setBoolean(values[0].getBoolean());
+				variable.getValue(valueIndex).setInteger(values[0].getInteger());
+			}
+			else if ((variable.getValue(valueIndex).getType() == ScriptValueType::BOOLEAN) && (values[0].getType() == ScriptValueType::BOOLEAN))
+			{
+				variable.getValue(valueIndex).setBoolean(values[0].getBoolean());
 			}
 			else if (values[0].getType() == ScriptValueType::EMPTY)
 			{
@@ -135,13 +199,13 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 			}
 			else
 			{
-				_throwScriptError("function value type does not match the variable type!");
+				_throwScriptError("function type does not match the variable type!");
 			}
 		}
 		else
 		{
 			// Temporary values
-			unsigned int valueIndex = 0;
+			unsigned int valueIndexTwo = 0;
 
 			// Check if accessing individual value from list variable
 			bool isAccessingList = false;
@@ -184,7 +248,7 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 					// Check if list index is valid
 					if (_validateListIndex(otherVariable, listIndex))
 					{
-						valueIndex = listIndex;
+						valueIndexTwo = listIndex;
 					}
 					else // Error
 					{
@@ -193,25 +257,25 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 				}
 
 				// Check if using part of list variable as value
-				if (variable.getValue().getType() == ScriptValueType::DECIMAL && vec3Parts != Ivec3(0))
+				if (variable.getValue(valueIndex).getType() == ScriptValueType::DECIMAL && vec3Parts != Ivec3(0))
 				{
-					if (vec3Parts.x && otherVariable.getValue().getType() == ScriptValueType::VEC3)
+					if (vec3Parts.x && otherVariable.getValue(valueIndexTwo).getType() == ScriptValueType::VEC3)
 					{
-						variable.getValue().setDecimal(otherVariable.getValue().getVec3().x);
+						variable.getValue(valueIndex).setDecimal(otherVariable.getValue(valueIndexTwo).getVec3().x);
 					}
-					else if (vec3Parts.y && otherVariable.getValue().getType() == ScriptValueType::VEC3)
+					else if (vec3Parts.y && otherVariable.getValue(valueIndexTwo).getType() == ScriptValueType::VEC3)
 					{
-						variable.getValue().setDecimal(otherVariable.getValue().getVec3().y);
+						variable.getValue(valueIndex).setDecimal(otherVariable.getValue(valueIndexTwo).getVec3().y);
 					}
-					else if (vec3Parts.z && otherVariable.getValue().getType() == ScriptValueType::VEC3)
+					else if (vec3Parts.z && otherVariable.getValue(valueIndexTwo).getType() == ScriptValueType::VEC3)
 					{
-						variable.getValue().setDecimal(otherVariable.getValue().getVec3().z);
+						variable.getValue(valueIndex).setDecimal(otherVariable.getValue(valueIndexTwo).getVec3().z);
 					}
 				}
 				else if ((otherVariable.getType() == ScriptVariableType::SINGLE || isAccessingList) && // Check if the value types match
-					variable.getValue().getType() == otherVariable.getValue().getType())
+					variable.getValue(valueIndex).getType() == otherVariable.getValue(valueIndexTwo).getType())
 				{
-					variable.changeValue(otherVariable.getValue(), valueIndex);
+					variable.changeValue(otherVariable.getValue(valueIndexTwo), valueIndex);
 				}
 				else
 				{

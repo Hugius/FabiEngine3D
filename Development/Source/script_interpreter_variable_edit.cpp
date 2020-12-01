@@ -186,6 +186,10 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 					{
 						valueIndex = listIndex;
 					}
+					else // Error
+					{
+						return;
+					}
 				}
 
 				// Check if using part of list variable as value

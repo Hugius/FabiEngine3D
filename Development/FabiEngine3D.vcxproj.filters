@@ -541,17 +541,20 @@
     <ClCompile Include="Source\script_interpreter_list.cpp">
       <Filter>src\Scripting System\Execution\Interpreter\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="Source\script_interpreter_variable_misc.cpp">
-      <Filter>src\Scripting System\Execution\Interpreter\Miscellaneous</Filter>
-    </ClCompile>
     <ClCompile Include="Source\script_interpreter_condition.cpp">
       <Filter>src\Scripting System\Execution\Interpreter\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="Source\script_interpreter_variable_edit.cpp">
-      <Filter>src\Scripting System\Execution\Interpreter\Miscellaneous</Filter>
+    <ClCompile Include="Source\script_interpreter_variable_misc.cpp">
+      <Filter>src\Scripting System\Execution\Interpreter\Variables</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_interpreter_variable_arithmetic.cpp">
+      <Filter>src\Scripting System\Execution\Interpreter\Variables</Filter>
     </ClCompile>
     <ClCompile Include="Source\script_interpreter_variable_create.cpp">
-      <Filter>src\Scripting System\Execution\Interpreter\Miscellaneous</Filter>
+      <Filter>src\Scripting System\Execution\Interpreter\Variables</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_interpreter_variable_edit.cpp">
+      <Filter>src\Scripting System\Execution\Interpreter\Variables</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1144,6 +1147,9 @@
     </Filter>
     <Filter Include="src\Scripting System\Execution\Interpreter\Miscellaneous">
       <UniqueIdentifier>{e3e33817-e236-4b5d-b624-9e5637a19f2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Scripting System\Execution\Interpreter\Variables">
+      <UniqueIdentifier>{03ec966f-fcd1-4950-8133-c2946afc67fa}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

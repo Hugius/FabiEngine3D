@@ -354,6 +354,7 @@
     <ClCompile Include="Source\script_interpreter_func_input.cpp" />
     <ClCompile Include="Source\script_interpreter_func_misc.cpp" />
     <ClCompile Include="Source\script_interpreter_misc.cpp" />
+    <ClCompile Include="Source\script_interpreter_variable_arithmetic.cpp" />
     <ClCompile Include="Source\script_interpreter_variable_create.cpp" />
     <ClCompile Include="Source\script_interpreter_variable_misc.cpp" />
     <ClCompile Include="Source\script_interpreter_variable_edit.cpp" />

@@ -15,28 +15,24 @@ bool ScriptInterpreter::_checkConditionString(string conditionString)
 	unsigned int index = 0;
 	bool buildingString = false;
 	bool buildingVec3 = false;
-	bool foundFirstChar = false;
 
 	// Extract all invidual elements of the if statement
 	for(auto& c : conditionString)
 	{
-		if (!foundFirstChar) // Need to find first character
+		if (c == ' ' && elementBuild.empty() && !buildingString && !buildingVec3) // Check for useless whitespace
 		{
-			if (c != ' ') // Ignore whitespace
-			{
-				elementBuild += c;
-				foundFirstChar = true;
-			}
+			index++;
+			continue;
 		}
 		else if(index == conditionString.size() - 1) // Check if last character
 		{
 			elementBuild += c;
 			elements.push_back(elementBuild);
 		}
-		else if ((c == ' ' && !buildingString && !buildingVec3)) // Check for whitespace
+		else if (c == ' ' && !buildingString && !buildingVec3) // Check for whitespace
 		{
 			elements.push_back(elementBuild);
-			elementBuild = "";
+			elementBuild.clear();
 		}
 		else // Keep building element string
 		{

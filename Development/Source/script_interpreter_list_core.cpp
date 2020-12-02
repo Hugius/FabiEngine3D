@@ -230,7 +230,7 @@ vector<ScriptValue> ScriptInterpreter::_extractValuesFromListString(string listS
 			else if (buildingVariable) // Processing VARIABLE value
 			{
 				// Build value
-				if (c != ',')
+				if (c != ',' && c != ' ')
 				{
 					currentValueString += c;
 				}

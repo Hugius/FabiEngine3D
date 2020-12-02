@@ -30,6 +30,19 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 		{
 			// Extract remaining text (value)
 			valueString = scriptLine.substr(scriptLine.find('=') + 2);
+			begin :
+			for (unsigned int i = 0; i < valueString.size(); i++)
+			{
+				if (valueString[i] == ' ')
+				{
+					valueString.erase(valueString.begin() + i);
+					goto begin;
+				}
+				else
+				{
+					break;
+				}
+			}
 		}
 		else
 		{

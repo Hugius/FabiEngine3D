@@ -277,7 +277,7 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 
 	// No characters allowed after variable arithmetic
 	string temp;
-	if ((iss >> temp) || scriptLine.back() == ' ')
+	if (iss >> temp || scriptLine.back() == ' ')
 	{
 		_throwScriptError("invalid syntax!");
 		return;

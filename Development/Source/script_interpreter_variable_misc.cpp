@@ -74,51 +74,39 @@ void ScriptInterpreter::_processVariableTypecast(const string& scriptLine)
 void ScriptInterpreter::_processStringConcatenation(const string& scriptLine)
 {
 	// Temporary values
-	vector<string> elements;
+	std::istringstream iss(scriptLine);
+	string keyword = "";
+	string nameString = "";
+	string valueString = "";
 	string elementBuild = "";
+	unsigned int elementsFound = 0;
 	unsigned int index = 0;
-	bool buildingString = false;
 
-	// Extract all invidual elements of the scriptline
-	for (auto& c : scriptLine)
+	// Extract text parts
+	iss >> keyword >> nameString;
+
+	// Check if variable name is missing
+	if (nameString.empty())
 	{
-		if(elements.size() == 3) // No characters allowed after string value
-		{
-			_throwScriptError("invalid syntax!");
-			return;
-		}
-		else if (index == scriptLine.size() - 1) // Check if last character
-		{
-			elementBuild += c;
-			elements.push_back(elementBuild);
-		}
-		else if ((c == ' ' && !buildingString)) // Check for whitespace
-		{
-			elements.push_back(elementBuild);
-			elementBuild = "";
-		}
-		else // Keep building string
-		{
-			if (c == '"' && !buildingString)
-			{
-				buildingString = true;
-			}
-			else if (c == '"' && buildingString)
-			{
-				buildingString = false;
-			}
-
-			// Add character
-			elementBuild += c;
-		}
-
-		index++;
+		_throwScriptError("variable name missing!");
+		return;
 	}
 
-	// Concatenation statement elements
-	string keyword = elements[0];
-	string nameString = elements[1];
-	string valueString = elements[2];
+	// Extract remaining text (value)
+	for (auto& c : scriptLine)
+	{
+		if (elementsFound < 2) // Keyword & name
+		{
+			if (c == ' ') // Whitespace
+			{
+				elementsFound++;
+			}
+		}
+		else // Value
+		{
+			valueString += c;
+		}
+	}
 
 	// Check if variable exists
 	if (!_isLocalVariableExisting(nameString) && !_isGlobalVariableExisting(nameString))

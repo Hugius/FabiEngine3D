@@ -12,7 +12,7 @@ bool ScriptInterpreter::_validateListIndex(ScriptVariable& list, unsigned int in
 	// Check if list index is valid
 	if (index < 0 || index >= list.getValueCount())
 	{
-		_throwScriptError("invalid list index!");
+		_throwScriptError("list index out of range");
 		return false;
 	}
 
@@ -60,34 +60,34 @@ void ScriptInterpreter::_processListPush(const string& scriptLine)
 	string valueString = "";
 	string elementBuild = "";
 	unsigned int elementsFound = 0;
-	unsigned int index = 0;
-	bool foundFirstChar = false;
 
 	// Extract text parts
 	iss >> keyword >> nameString;
 
-	// Check if variable name is missing
+	// Check if list name is missing
 	if (nameString.empty())
 	{
-		_throwScriptError("variable name missing!");
+		_throwScriptError("list name missing!");
 		return;
 	}
 
 	// Extract remaining text (value)
 	for (auto& c : scriptLine)
 	{
-		if (!foundFirstChar) // Need to find first character
+		if (c == ' ' && elementBuild.empty()) // Useless whitespace
 		{
-			if (c != ' ') // Ignore whitespace
-			{
-				foundFirstChar = true;
-			}
+			continue;
 		}
 		else if (elementsFound < 2) // Keyword & name
 		{
 			if (c == ' ') // Whitespace
 			{
 				elementsFound++;
+				elementBuild.clear();
+			}
+			else
+			{
+				elementBuild += c;
 			}
 		}
 		else // Value
@@ -96,18 +96,18 @@ void ScriptInterpreter::_processListPush(const string& scriptLine)
 		}
 	}
 	
-	// Check if variable exists
+	// Check if list exists
 	if (!_isLocalVariableExisting(nameString) && !_isGlobalVariableExisting(nameString))
 	{
 		_throwScriptError("list variable \"" + nameString + "\" not found!");
 		return;
 	}
 
-	// Retrieve variable
-	auto& variable = _isLocalVariableExisting(nameString) ? _getLocalVariable(nameString) : _getGlobalVariable(nameString);
+	// Retrieve list variable
+	auto& listVariable = _isLocalVariableExisting(nameString) ? _getLocalVariable(nameString) : _getGlobalVariable(nameString);
 
-	// A constant variable should not be changed
-	if (variable.isConstant())
+	// A constant list should not be changed
+	if (listVariable.isConstant())
 	{
 		_throwScriptError("cannot push to list variable \"" + nameString + "\", it is constant!");
 		return;
@@ -121,23 +121,23 @@ void ScriptInterpreter::_processListPush(const string& scriptLine)
 	}
 	else if (_isVec3Value(valueString)) // VEC3
 	{
-		variable.addValue(ScriptValue(_fe3d, ScriptValueType::VEC3, _extractVec3FromString(valueString)));
+		listVariable.addValue(ScriptValue(_fe3d, ScriptValueType::VEC3, _extractVec3FromString(valueString)));
 	}
 	else if (_isStringValue(valueString)) // STRING
 	{
-		variable.addValue(ScriptValue(_fe3d, ScriptValueType::STRING, valueString));
+		listVariable.addValue(ScriptValue(_fe3d, ScriptValueType::STRING, valueString));
 	}
 	else if (_isDecimalValue(valueString)) // DECIMAL
 	{
-		variable.addValue(ScriptValue(_fe3d, ScriptValueType::DECIMAL, stof(valueString)));
+		listVariable.addValue(ScriptValue(_fe3d, ScriptValueType::DECIMAL, stof(valueString)));
 	}
 	else if (_isIntegerValue(valueString)) // INTEGER
 	{
-		variable.addValue(ScriptValue(_fe3d, ScriptValueType::INTEGER, stoi(valueString)));
+		listVariable.addValue(ScriptValue(_fe3d, ScriptValueType::INTEGER, stoi(valueString)));
 	}
 	else if (_isBooleanValue(valueString)) // BOOLEAN
 	{
-		variable.addValue(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, valueString == "<true>"));
+		listVariable.addValue(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, valueString == "<true>"));
 	}
 	else
 	{
@@ -213,20 +213,20 @@ void ScriptInterpreter::_processListPush(const string& scriptLine)
 			{
 				if (vec3Parts.x && otherVariable.getValue(valueIndex).getType() == ScriptValueType::VEC3)
 				{
-					variable.addValue(ScriptValue(_fe3d, ScriptValueType::DECIMAL, otherVariable.getValue(valueIndex).getVec3().x));
+					listVariable.addValue(ScriptValue(_fe3d, ScriptValueType::DECIMAL, otherVariable.getValue(valueIndex).getVec3().x));
 				}
 				else if (vec3Parts.y && otherVariable.getValue(valueIndex).getType() == ScriptValueType::VEC3)
 				{
-					variable.addValue(ScriptValue(_fe3d, ScriptValueType::DECIMAL, otherVariable.getValue(valueIndex).getVec3().y));
+					listVariable.addValue(ScriptValue(_fe3d, ScriptValueType::DECIMAL, otherVariable.getValue(valueIndex).getVec3().y));
 				}
 				else if (vec3Parts.z && otherVariable.getValue(valueIndex).getType() == ScriptValueType::VEC3)
 				{
-					variable.addValue(ScriptValue(_fe3d, ScriptValueType::DECIMAL, otherVariable.getValue(valueIndex).getVec3().z));
+					listVariable.addValue(ScriptValue(_fe3d, ScriptValueType::DECIMAL, otherVariable.getValue(valueIndex).getVec3().z));
 				}
 			}
 			else // Normal value (or list access)
 			{
-				variable.addValue(otherVariable.getValue(valueIndex));
+				listVariable.addValue(otherVariable.getValue(valueIndex));
 			}
 		}
 		else
@@ -238,5 +238,68 @@ void ScriptInterpreter::_processListPush(const string& scriptLine)
 
 void ScriptInterpreter::_processListPull(const string& scriptLine)
 {
+	// Temporary values
+	std::istringstream iss(scriptLine);
+	string keyword = "";
+	string nameString = "";
+	string indexString = "";
 
+	// Extract text parts
+	iss >> keyword >> nameString >> indexString;
+
+	// Check if variable name is missing
+	if (nameString.empty())
+	{
+		_throwScriptError("list name missing!");
+		return;
+	}
+
+	// Check if list index is missing
+	if (indexString.empty())
+	{
+		_throwScriptError("list index missing!");
+		return;
+	}
+
+	// Check if list index is invalid
+	if (!_isIntegerValue(indexString))
+	{
+		_throwScriptError("invalid list index!");
+		return;
+	}
+
+	// Check if list exists
+	if (!_isLocalVariableExisting(nameString) && !_isGlobalVariableExisting(nameString))
+	{
+		_throwScriptError("list variable \"" + nameString + "\" not found!");
+		return;
+	}
+
+	// Retrieve list variable
+	auto& listVariable = _isLocalVariableExisting(nameString) ? _getLocalVariable(nameString) : _getGlobalVariable(nameString);
+
+	// A constant list should not be changed
+	if (listVariable.isConstant())
+	{
+		_throwScriptError("cannot push to list variable \"" + nameString + "\", it is constant!");
+		return;
+	}
+
+	// Check if list index is out of range
+	unsigned int index = stoi(indexString);
+	if (!_validateListIndex(listVariable, index))
+	{
+		return;
+	}
+
+	// Pull item from list by index
+	listVariable.removeValue(index);
+	
+	// No characters allowed after variable arithmetic
+	string temp;
+	if (iss >> temp || scriptLine.back() == ' ')
+	{
+		_throwScriptError("invalid syntax!");
+		return;
+	}
 }

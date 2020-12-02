@@ -258,7 +258,7 @@ bool ScriptInterpreter::_validateScopeChange(unsigned int countedSpaces, const s
 		}
 		else // Useless indented statement
 		{
-			_throwScriptError("invalid indentation!");
+			_throwScriptError("useless indentation before statement!");
 		}
 	}
 
@@ -268,7 +268,7 @@ bool ScriptInterpreter::_validateScopeChange(unsigned int countedSpaces, const s
 
 void ScriptInterpreter::_throwScriptError(const string& message)
 {
-	_fe3d.logger_throwWarning("ERROR @ script \"" + _currentScriptStackIDs.back() + "\" @ line " + to_string(_currentLineStackIndices.back() + 1) + ": " + message);
+	_fe3d.logger_throwWarning("ERROR @ script \"" + _currentScriptStack.back() + "\" @ line " + to_string(_currentLineIndexStack.back() + 1) + ": " + message);
 	_hasThrownError = true;
 }
 

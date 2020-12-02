@@ -84,7 +84,7 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 			return true;
 		}
 	}
-	else if (functionName == "fe3d:misc_substr") // Cut a part from a string
+	else if (functionName == "fe3d:misc_string_part") // Cut a part from a string
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::INTEGER, ScriptValueType::INTEGER };
 
@@ -92,6 +92,35 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 		{
 			auto result = arguments[0].getString().substr(arguments[1].getInteger(), arguments[2].getInteger());
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result));
+			return true;
+		}
+	}
+	else if (functionName == "fe3d:misc_list_size") // Get the size of a list variable
+	{
+		auto types = { ScriptValueType::STRING };
+
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		{
+			auto nameString = arguments[0].getString();
+
+			// Check if variable exists
+			if (!_isLocalVariableExisting(nameString) && !_isGlobalVariableExisting(nameString))
+			{
+				_throwScriptError("list variable \"" + nameString + "\" not found!");
+				return true;
+			}
+
+			// Check if variable is a list
+			auto listVariable = _isLocalVariableExisting(nameString) ? _getLocalVariable(nameString) : _getGlobalVariable(nameString);
+			if (listVariable.getType() == ScriptVariableType::SINGLE)
+			{
+				_throwScriptError("variable \"" + nameString + "\" is not a list!");
+				return true;
+			}
+
+			// Return list size
+			auto result = listVariable.getValueCount();
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::INTEGER, static_cast<int>(result)));
 			return true;
 		}
 	}

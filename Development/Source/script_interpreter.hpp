@@ -83,8 +83,8 @@ private:
 
 	// Stacks
 	vector<vector<ScriptVariable>> _localVariablesStack;
-	vector<string> _currentScriptStackIDs;
-	vector<unsigned int> _currentLineStackIndices;
+	vector<string> _currentScriptStack;
+	vector<unsigned int> _currentLineIndexStack;
 	vector<unsigned int> _scopeDepthStack;
 
 	// Vectors
@@ -92,6 +92,8 @@ private:
 	vector<string> _updateScriptIDs;
 	vector<string> _destroyScriptIDs;
 	vector<ScriptVariable> _globalVariables;
+	vector<unsigned int> _loopLineIndices;
+	vector<unsigned int> _loopScopeDepths;
 
 	// Strings
 	string _initEntryID = "";
@@ -100,7 +102,7 @@ private:
 	const string _metaKeyword			= "META";
 	const string _executeKeyword		= "EXEC";
 	const string _loopKeyword			= "LOOP";
-	const string _inKeyword				= "IN";
+	const string _breakKeyword			= "BREAK";
 	const string _ifKeyword				= "IF";
 	const string _elifKeyword			= "ELIF";
 	const string _elseKeyword			= "ELSE";
@@ -128,13 +130,17 @@ private:
 	const string _concatenationKeyword  = "CONCAT";
 	const string _pushingKeyword		= "PUSH";
 	const string _pullingKeyword		= "PULL";
+	const string _passKeyword			= "PASS";
 
 	// Integers
 	const unsigned int _spacesPerIndent = 4;
+	const unsigned int _maxLoopsPerFrame = 1000;
+	unsigned int _totalLoops = 0;
 	unsigned int _lastLoggerMessageCount = 0;
 
 	// Booleans
 	bool _hasThrownError = false;
+	bool _isInLoop = false;
 	bool _scopeHasChanged = false;
 	bool _passedScopeChanger = false;
 	bool _lastConditionResult = false;

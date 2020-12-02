@@ -153,18 +153,22 @@ void ScriptInterpreter::unload()
 {
 	// Reset all variables
 	_localVariablesStack.clear();
-	_currentScriptStackIDs.clear();
-	_currentLineStackIndices.clear();
+	_currentScriptStack.clear();
+	_currentLineIndexStack.clear();
 	_scopeDepthStack.clear();
 	_initScriptIDs.clear();
 	_updateScriptIDs.clear();
 	_destroyScriptIDs.clear();
 	_globalVariables.clear();
+	_loopLineIndices.clear();
+	_loopScopeDepths.clear();
 	_initEntryID = "";
 	_updateEntryID = "";
 	_destroyEntryID = "";
+	_totalLoops = 0;
 	_lastLoggerMessageCount = 0;
 	_hasThrownError = false;
+	_isInLoop = false;
 	_scopeHasChanged = false;
 	_passedScopeChanger = false;
 	_lastConditionResult = false;

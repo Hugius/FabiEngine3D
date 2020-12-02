@@ -19,25 +19,25 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 
 	// Save local state of script currently being executed
 	_localVariablesStack.push_back({});
-	_currentScriptStackIDs.push_back(scriptID);
-	_currentLineStackIndices.push_back(0);
+	_currentScriptStack.push_back(scriptID);
+	_currentLineIndexStack.push_back(0);
 	_scopeDepthStack.push_back(0);
 
 	// Retrieve script file
 	auto scriptFile = _script.getScriptFile(scriptID);
 
 	// Interpret every line from top to bottom in script
-	for (size_t lineIndex = 0; lineIndex < scriptFile->getLineCount(); lineIndex++)
+	for (unsigned int lineIndex = 0; lineIndex < scriptFile->getLineCount(); lineIndex++)
 	{
 		// Save current amount of logged messages
 		_lastLoggerMessageCount = _fe3d.logger_getMessageStack().size();
 
 		// Save index of line of script currently being executed
-		_currentLineStackIndices.back() = lineIndex;
+		_currentLineIndexStack.back() = lineIndex;
 
 		// Retrieve line text
 		string scriptLineText = scriptFile->getLineText(lineIndex);
-
+		
 		// Count front spaces
 		unsigned int countedSpaces = _countFrontSpaces(scriptLineText);
 		if (_hasThrownError) // Check if an error was thrown
@@ -56,6 +56,43 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 			return;
 		}
 
+		// Calculate current scope depth
+		unsigned int currentLineScopeDepth = countedSpaces / _spacesPerIndent;
+		
+		// Detect end of loop
+		bool endOfLoop = false;
+		if (!_loopLineIndices.empty())
+		{
+			if (currentLineScopeDepth < _loopScopeDepths.back()) // End of current loop scope
+			{
+				if (_totalLoops >= _maxLoopsPerFrame) // Infinite loop
+				{
+					_throwScriptError("maximum amount of loops reached, perhaps infinite looping?");
+					return;
+				}
+				else // Normal loop
+				{
+					// Go back to current loop's beginning
+					lineIndex = _loopLineIndices.back();
+					_scopeDepthStack.back() = _loopScopeDepths.back();
+					_totalLoops++;
+					continue;
+				}
+			}
+			else if (lineIndex == scriptFile->getLineCount() - 1) // End of script
+			{
+				if (_totalLoops >= _maxLoopsPerFrame) // Infinite loop
+				{
+					_throwScriptError("maximum amount of loops reached, perhaps infinite looping?");
+					return;
+				}
+				else // Normal loop
+				{
+					endOfLoop = true; // Go back to current loop's beginning after executing current scriptline
+				}
+			}
+		}
+
 		// Validate a potentional scope change
 		bool scopeChangeValidation = _validateScopeChange(countedSpaces, scriptLineText);
 		if (_hasThrownError) // Check if an error was thrown
@@ -66,11 +103,14 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 		{
 			continue;
 		}
+		else // Current line in correct scope
+		{
+			_passedScopeChanger = false;
+		}
 
 		// Ignore empty lines
 		if (scriptLineText.empty())
 		{
-			_passedScopeChanger = false;
 			continue;
 		}
 
@@ -99,7 +139,8 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 			std::istringstream iss(scriptLineText);
 			string scriptToExecute;
 			iss >> scriptToExecute >> scriptToExecute;
-			auto& scriptList = (scriptType == ScriptType::INIT) ? _initScriptIDs : (scriptType == ScriptType::UPDATE) ? _updateScriptIDs : _destroyScriptIDs;
+			auto& scriptList = (scriptType == ScriptType::INIT) ? _initScriptIDs : 
+				(scriptType == ScriptType::UPDATE) ? _updateScriptIDs : _destroyScriptIDs;
 			
 			// Check if script exists
 			if (std::find(scriptList.begin(), scriptList.end(), scriptToExecute) != scriptList.end())
@@ -112,9 +153,16 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 				return;
 			}
 		}
+		else if (scriptLineText == (_loopKeyword + ":")) // Loop statement
+		{
+			_scopeDepthStack.back()++; // New depth layer
+			_loopScopeDepths.push_back(_scopeDepthStack.back()); // Save loop's scope depth
+			_loopLineIndices.push_back(lineIndex); // Save loop's line index
+			_scopeHasChanged = true;
+		}
 		else if (scriptLineText.substr(0, _ifKeyword.size() + 1) == _ifKeyword + " ") // If statement
 		{
-			// Check if if statement ends with colon
+			// Check if if-statement ends with colon
 			if (scriptLineText.back() == ':')
 			{
 				string conditionString = scriptLineText.substr((_ifKeyword.size() + 1), scriptLineText.size() - (_ifKeyword.size() + 2));
@@ -216,8 +264,8 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 		}
 		else if // Create local variable
 			(
-				scriptLineText.substr(0, _listKeyword.size() + 1) == _listKeyword + " " ||
-				scriptLineText.substr(0, _vec3Keyword.size() + 1) == _vec3Keyword + " " ||
+				scriptLineText.substr(0, _listKeyword.size() + 1) == _listKeyword + " "		  ||
+				scriptLineText.substr(0, _vec3Keyword.size() + 1) == _vec3Keyword + " "		  ||
 				scriptLineText.substr(0, _stringKeyword.size()  + 1) == _stringKeyword  + " " ||
 				scriptLineText.substr(0, _decimalKeyword.size() + 1) == _decimalKeyword + " " ||
 				scriptLineText.substr(0, _integerKeyword.size() + 1) == _integerKeyword + " " ||
@@ -236,10 +284,10 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 		}
 		else if //Variable arithmetic
 			(
-				scriptLineText.substr(0, _additionKeyword.size() + 1) == _additionKeyword + " " ||
-				scriptLineText.substr(0, _subtractionKeyword.size() + 1) == _subtractionKeyword + " " ||
+				scriptLineText.substr(0, _additionKeyword.size() + 1) == _additionKeyword + " "				||
+				scriptLineText.substr(0, _subtractionKeyword.size() + 1) == _subtractionKeyword + " "		||
 				scriptLineText.substr(0, _multiplicationKeyword.size() + 1) == _multiplicationKeyword + " " ||
-				scriptLineText.substr(0, _divisionKeyword.size() + 1) == _divisionKeyword + " " ||
+				scriptLineText.substr(0, _divisionKeyword.size() + 1) == _divisionKeyword + " "				||
 				scriptLineText.substr(0, _negationKeyword.size() + 1) == _negationKeyword + " "
 			)
 		{
@@ -261,9 +309,20 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 		{
 			_processListPull(scriptLineText);
 		}
+		else if (scriptLineText == _breakKeyword) // Breaking out of loop
+		{
+			_scopeDepthStack.back()--;
+			_loopLineIndices.pop_back();
+			_loopScopeDepths.pop_back();
+			_passedScopeChanger = true;
+		}
+		else if (scriptLineText == _passKeyword) // Passing current script line
+		{
+			
+		}
 		else // Invalid keyword
 		{
-			_throwScriptError("unknown keyword!");
+			_throwScriptError("invalid statement!");
 			return;
 		}
 
@@ -275,11 +334,22 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 		{
 			return;
 		}
+		
+		// Go back to current loops beginning
+		if (endOfLoop)
+		{
+			lineIndex = _loopLineIndices.back();
+			_scopeDepthStack.back() = _loopScopeDepths.back();
+			_totalLoops++;
+		}
 	}
 
 	// End of this script file's execution
 	_localVariablesStack.pop_back();
-	_currentScriptStackIDs.pop_back();
-	_currentLineStackIndices.pop_back();
+	_currentScriptStack.pop_back();
+	_currentLineIndexStack.pop_back();
 	_scopeDepthStack.pop_back();
+	_loopLineIndices.clear();
+	_loopScopeDepths.clear();
+	_totalLoops = 0;
 }

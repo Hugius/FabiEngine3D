@@ -1,4 +1,4 @@
-9 26
+7 33
 META script_type_init
 META execution_entry
 
@@ -7,13 +7,3 @@ fe3d:camera_position_set(-37.0, 10.0, -51.0)
 fe3d:camera_firstperson_enable()
 fe3d:misc_cursor_hide()
 GLOB CONST DEC _baseSpeed = 0.035
-DEC              schaap     =   4.20
-IF  5.0 IS   5.0        : 
-    LIST kip = { 1.0, 2.0, 3.0, schaap       }
-STR hoi   =   "ik"
-CONCAT hoi " ben"
-MUL     kip[0]        5.0
-PUSH kip     4.0 
-PUSH kip schaap
-PULL     kip     9
-fe3d:print(    kip[0])

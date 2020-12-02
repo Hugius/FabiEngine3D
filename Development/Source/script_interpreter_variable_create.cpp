@@ -48,9 +48,9 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 	}
 
 	// Check if variable type is valid
-	if (typeString == _listKeyword ||
-		typeString == _vec3Keyword || 
-		typeString == _stringKeyword || 
+	if (typeString == _listKeyword    ||
+		typeString == _vec3Keyword    || 
+		typeString == _stringKeyword  || 
 		typeString == _decimalKeyword || 
 		typeString == _integerKeyword || 
 		typeString == _booleanKeyword)
@@ -61,10 +61,10 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 			nameString != "<true>" && nameString != "<false>";
 
 		// Forbidden variable names
-		for (auto& word : { _metaKeyword, _executeKeyword, _loopKeyword, _inKeyword, _ifKeyword, _elifKeyword, _elseKeyword, _globalKeyword,
+		for (auto& word : { _metaKeyword, _executeKeyword, _loopKeyword, _breakKeyword, _ifKeyword, _elifKeyword, _elseKeyword, _globalKeyword,
 			_constKeyword, _editKeyword, _listKeyword, _vec3Keyword, _stringKeyword, _decimalKeyword, _integerKeyword, _booleanKeyword, _isKeyword,
 			_notKeyword, _andKeyword, _orKeyword, _moreKeyword, _lessKeyword, _additionKeyword, _subtractionKeyword, _multiplicationKeyword, 
-			_divisionKeyword, _negationKeyword, _castingKeyword, _concatenationKeyword, _pushingKeyword, _pullingKeyword })
+			_divisionKeyword, _negationKeyword, _castingKeyword, _concatenationKeyword, _pushingKeyword, _pullingKeyword, _passKeyword })
 		{
 			validName = validName && (nameString != word);
 		}

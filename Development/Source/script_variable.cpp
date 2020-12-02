@@ -58,6 +58,16 @@ void ScriptVariable::changeValue(ScriptValue value, unsigned int index)
 	_values.insert(_values.begin() + index, make_shared<ScriptValue>(value));
 }
 
+void ScriptVariable::addValue(ScriptValue value)
+{
+	_values.push_back(make_shared<ScriptValue>(value));
+}
+
+void ScriptVariable::removeValue(unsigned int index)
+{
+	_values.erase(_values.begin() + index);
+}
+
 ScriptValue& ScriptVariable::getValue(unsigned int index)
 {
 	// Validate index

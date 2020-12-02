@@ -12,6 +12,13 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 	// Extract data
 	iss >> operatorString >> nameString;
 
+	// Check if variable name is missing
+	if (nameString.empty())
+	{
+		_throwScriptError("variable name missing!");
+		return;
+	}
+
 	// Only extract value if not negating
 	if (operatorString != _negationKeyword)
 	{
@@ -64,7 +71,17 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 	// Retrieve variable
 	auto& variable = _isLocalVariableExisting(nameString) ? _getLocalVariable(nameString) : _getGlobalVariable(nameString);
 
-	// Prepare list access
+	// Validate vec3 access
+	if (vec3Parts != Ivec3(0))
+	{
+		if (variable.getType() == ScriptVariableType::MULTIPLE || variable.getValue().getType() != ScriptValueType::VEC3)
+		{
+			_throwScriptError("variable with ID \"" + variable.getID() + "\" is not a vec3!");
+			return;
+		}
+	}
+
+	// Validate list access
 	if (isAccessingList)
 	{
 		// Check if list index is valid

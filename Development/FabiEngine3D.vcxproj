@@ -343,7 +343,7 @@
     <ClCompile Include="Source\script_editor_selector.cpp" />
     <ClCompile Include="Source\script_executor.cpp" />
     <ClCompile Include="Source\script_file.cpp" />
-    <ClCompile Include="Source\script_interpreter_list.cpp" />
+    <ClCompile Include="Source\script_interpreter_list_core.cpp" />
     <ClCompile Include="Source\script_interpreter_core.cpp" />
     <ClCompile Include="Source\script_interpreter_execution.cpp" />
     <ClCompile Include="Source\script_interpreter_func_camera.cpp" />
@@ -353,6 +353,7 @@
     <ClCompile Include="Source\script_interpreter_func_entity_game.cpp" />
     <ClCompile Include="Source\script_interpreter_func_input.cpp" />
     <ClCompile Include="Source\script_interpreter_func_misc.cpp" />
+    <ClCompile Include="Source\script_interpreter_list_misc.cpp" />
     <ClCompile Include="Source\script_interpreter_misc.cpp" />
     <ClCompile Include="Source\script_interpreter_variable_arithmetic.cpp" />
     <ClCompile Include="Source\script_interpreter_variable_create.cpp" />

@@ -53,9 +53,11 @@ private:
 
 	// List functions
 	bool _validateListIndex(ScriptVariable& list, unsigned int index);
-	bool _validateListAmount(vector<ScriptValue> list, unsigned int amount);
-	bool _validateListTypes(vector<ScriptValue> list, vector<ScriptValueType> types);
+	bool _validateListValueAmount(vector<ScriptValue> list, unsigned int amount);
+	bool _validateListValueTypes(vector<ScriptValue> list, vector<ScriptValueType> types);
 	vector<ScriptValue> _extractValuesFromListString(string listString);
+	void _processListPush(const string& scriptLine);
+	void _processListPull(const string& scriptLine);
 
 	// Miscellaneous functions
 	unsigned int _countFrontSpaces(const string& scriptLineText);

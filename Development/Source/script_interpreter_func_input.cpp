@@ -7,7 +7,7 @@ bool ScriptInterpreter::_executeFe3dInputFunction(const string& functionName, ve
 	{
 		auto types = { ScriptValueType::STRING };
 
-		if (_validateListAmount(arguments, types.size()) && _validateListTypes(arguments, types))
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
 			auto result = _fe3d.input_getKeyDown(_keyInputStringMap.at(arguments[0].getString()));
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
@@ -18,7 +18,7 @@ bool ScriptInterpreter::_executeFe3dInputFunction(const string& functionName, ve
 	{
 		auto types = { ScriptValueType::STRING };
 
-		if (_validateListAmount(arguments, types.size()) && _validateListTypes(arguments, types))
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
 			auto result = _fe3d.input_getKeyPressed(_keyInputStringMap.at(arguments[0].getString()));
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
@@ -29,7 +29,7 @@ bool ScriptInterpreter::_executeFe3dInputFunction(const string& functionName, ve
 	{
 		auto types = { ScriptValueType::STRING };
 
-		if (_validateListAmount(arguments, types.size()) && _validateListTypes(arguments, types))
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
 			auto result = _fe3d.input_getKeyToggled(_keyInputStringMap.at(arguments[0].getString()));
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
@@ -40,7 +40,7 @@ bool ScriptInterpreter::_executeFe3dInputFunction(const string& functionName, ve
 	{
 		auto types = { ScriptValueType::STRING };
 
-		if (_validateListAmount(arguments, types.size()) && _validateListTypes(arguments, types))
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
 			auto result = _fe3d.input_getMouseDown(_mouseInputStringMap.at(arguments[0].getString()));
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
@@ -51,7 +51,7 @@ bool ScriptInterpreter::_executeFe3dInputFunction(const string& functionName, ve
 	{
 		auto types = { ScriptValueType::STRING };
 
-		if (_validateListAmount(arguments, types.size()) && _validateListTypes(arguments, types))
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
 			auto result = _fe3d.input_getMousePressed(_mouseInputStringMap.at(arguments[0].getString()));
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
@@ -62,7 +62,7 @@ bool ScriptInterpreter::_executeFe3dInputFunction(const string& functionName, ve
 	{
 		auto types = { ScriptValueType::STRING };
 
-		if (_validateListAmount(arguments, types.size()) && _validateListTypes(arguments, types))
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
 			auto result = _fe3d.input_getMouseToggled(_mouseInputStringMap.at(arguments[0].getString()));
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
@@ -71,7 +71,7 @@ bool ScriptInterpreter::_executeFe3dInputFunction(const string& functionName, ve
 	}
 	else if (functionName == "fe3d:input_mousewheel_direction") // Mousewheel direction
 	{
-		if (_validateListAmount(arguments, 0) && _validateListTypes(arguments, {}))
+		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			auto result = _fe3d.input_getMouseWheelY();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::INTEGER, result));

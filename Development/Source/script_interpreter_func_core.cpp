@@ -85,7 +85,7 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 				{
 					auto types = { ScriptValueType::DECIMAL };
 
-					if (_validateListAmount(arguments, types.size()) && _validateListTypes(arguments, types))
+					if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 					{
 						float angle = _fe3d.misc_degreesToRadians(arguments[0].getDecimal());
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, std::tan(angle)));
@@ -95,7 +95,7 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 				{
 					auto types = { ScriptValueType::DECIMAL };
 
-					if (_validateListAmount(arguments, types.size()) && _validateListTypes(arguments, types))
+					if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 					{
 						float angle = _fe3d.misc_degreesToRadians(arguments[0].getDecimal());
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, std::sin(angle)));
@@ -105,7 +105,7 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 				{
 					auto types = { ScriptValueType::DECIMAL };
 
-					if (_validateListAmount(arguments, types.size()) && _validateListTypes(arguments, types))
+					if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 					{
 						float angle = _fe3d.misc_degreesToRadians(arguments[0].getDecimal());
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, std::cos(angle)));
@@ -113,7 +113,7 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 				}
 				else if (functionName == "math:pow") // POWER
 				{
-					if (_validateListAmount(arguments, 2))
+					if (_validateListValueAmount(arguments, 2))
 					{
 						if (arguments[0].getType() == ScriptValueType::INTEGER && arguments[1].getType() == ScriptValueType::INTEGER)
 						{
@@ -133,7 +133,7 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 				}
 				else if (functionName == "math:min") // MIN
 				{
-					if (_validateListAmount(arguments, 2))
+					if (_validateListValueAmount(arguments, 2))
 					{
 						if (arguments[0].getType() == ScriptValueType::INTEGER && arguments[1].getType() == ScriptValueType::INTEGER)
 						{
@@ -153,7 +153,7 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 				}
 				else if (functionName == "math:max") // MAX
 				{
-					if (_validateListAmount(arguments, 2))
+					if (_validateListValueAmount(arguments, 2))
 					{
 						if (arguments[0].getType() == ScriptValueType::INTEGER && arguments[1].getType() == ScriptValueType::INTEGER)
 						{
@@ -175,7 +175,7 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 				{
 					auto types = { ScriptValueType::DECIMAL };
 
-					if (_validateListAmount(arguments, types.size()) && _validateListTypes(arguments, types))
+					if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 					{
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, std::sqrtf(arguments[0].getDecimal())));
 					}
@@ -183,7 +183,7 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 				else if (functionName == "math:abs") // ABSOLUTE
 				{
 					// Validate amount of arguments
-					if (_validateListAmount(arguments, 1))
+					if (_validateListValueAmount(arguments, 1))
 					{
 						// Determine type of value
 						if (arguments[0].getType() == ScriptValueType::INTEGER)
@@ -204,7 +204,7 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 				{
 					auto types = { ScriptValueType::VEC3, ScriptValueType::VEC3 };
 
-					if (_validateListAmount(arguments, types.size()) && _validateListTypes(arguments, types))
+					if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 					{
 						// Save positions
 						Vec3 firstPos = arguments[0].getVec3();
@@ -266,7 +266,7 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 				// Determine type of function
 				if (functionName == "misc:to_string")
 				{
-					if (_validateListAmount(arguments, 1))
+					if (_validateListValueAmount(arguments, 1))
 					{
 						if (arguments[0].getType() == ScriptValueType::INTEGER)
 						{
@@ -286,7 +286,7 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 				{
 					auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
 
-					if (_validateListAmount(arguments, types.size()) && _validateListTypes(arguments, types))
+					if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 					{
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, arguments[0].getString() + arguments[1].getString()));
 					}

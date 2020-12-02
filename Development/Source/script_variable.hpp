@@ -18,6 +18,8 @@ public:
 
 	void changeValues(vector<ScriptValue> values);
 	void changeValue(ScriptValue value, unsigned int index = 0);
+	void addValue(ScriptValue value);
+	void removeValue(unsigned int index);
 
 private:
 	FabiEngine3D& _fe3d;

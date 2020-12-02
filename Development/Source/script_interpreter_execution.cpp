@@ -253,6 +253,14 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 		{
 			_processStringConcatenation(scriptLineText);
 		}
+		else if (scriptLineText.substr(0, _pushingKeyword.size() + 1) == _pushingKeyword + " ") // Adding to list
+		{
+			_processListPush(scriptLineText);
+		}
+		else if (scriptLineText.substr(0, _pullingKeyword.size() + 1) == _pullingKeyword + " ") // Removing from list
+		{
+			_processListPull(scriptLineText);
+		}
 		else // Invalid keyword
 		{
 			_throwScriptError("unknown keyword!");

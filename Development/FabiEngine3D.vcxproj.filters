@@ -521,40 +521,43 @@
       <Filter>src\Scripting System\Execution\Interpreter\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="Source\script_interpreter_func_camera.cpp">
-      <Filter>src\Scripting System\Execution\Interpreter\Functions</Filter>
+      <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
     </ClCompile>
     <ClCompile Include="Source\script_interpreter_func_collision.cpp">
-      <Filter>src\Scripting System\Execution\Interpreter\Functions</Filter>
+      <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
     </ClCompile>
     <ClCompile Include="Source\script_interpreter_func_core.cpp">
-      <Filter>src\Scripting System\Execution\Interpreter\Functions</Filter>
+      <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
     </ClCompile>
     <ClCompile Include="Source\script_interpreter_func_entity_game.cpp">
-      <Filter>src\Scripting System\Execution\Interpreter\Functions</Filter>
+      <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
     </ClCompile>
     <ClCompile Include="Source\script_interpreter_func_input.cpp">
-      <Filter>src\Scripting System\Execution\Interpreter\Functions</Filter>
+      <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
     </ClCompile>
     <ClCompile Include="Source\script_interpreter_func_misc.cpp">
-      <Filter>src\Scripting System\Execution\Interpreter\Functions</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\script_interpreter_list.cpp">
-      <Filter>src\Scripting System\Execution\Interpreter\Miscellaneous</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\script_interpreter_condition.cpp">
-      <Filter>src\Scripting System\Execution\Interpreter\Miscellaneous</Filter>
+      <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
     </ClCompile>
     <ClCompile Include="Source\script_interpreter_variable_misc.cpp">
-      <Filter>src\Scripting System\Execution\Interpreter\Variables</Filter>
+      <Filter>src\Scripting System\Execution\Interpreter\Variable</Filter>
     </ClCompile>
     <ClCompile Include="Source\script_interpreter_variable_arithmetic.cpp">
-      <Filter>src\Scripting System\Execution\Interpreter\Variables</Filter>
+      <Filter>src\Scripting System\Execution\Interpreter\Variable</Filter>
     </ClCompile>
     <ClCompile Include="Source\script_interpreter_variable_create.cpp">
-      <Filter>src\Scripting System\Execution\Interpreter\Variables</Filter>
+      <Filter>src\Scripting System\Execution\Interpreter\Variable</Filter>
     </ClCompile>
     <ClCompile Include="Source\script_interpreter_variable_edit.cpp">
-      <Filter>src\Scripting System\Execution\Interpreter\Variables</Filter>
+      <Filter>src\Scripting System\Execution\Interpreter\Variable</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_interpreter_list_misc.cpp">
+      <Filter>src\Scripting System\Execution\Interpreter\List</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_interpreter_condition.cpp">
+      <Filter>src\Scripting System\Execution\Interpreter\Condition</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_interpreter_list_core.cpp">
+      <Filter>src\Scripting System\Execution\Interpreter\List</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1139,17 +1142,23 @@
     <Filter Include="src\Math System">
       <UniqueIdentifier>{ade95dd8-ca22-496d-a02c-394d6cc2aaeb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\Scripting System\Execution\Interpreter\Functions">
-      <UniqueIdentifier>{34644b65-a977-4554-bc11-0e04bacdc090}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\Scripting System\Execution\Interpreter\Core">
       <UniqueIdentifier>{794d5b54-fa03-4906-96c4-5796fb6daa70}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\Scripting System\Execution\Interpreter\Miscellaneous">
       <UniqueIdentifier>{e3e33817-e236-4b5d-b624-9e5637a19f2a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\Scripting System\Execution\Interpreter\Variables">
+    <Filter Include="src\Scripting System\Execution\Interpreter\Function">
+      <UniqueIdentifier>{34644b65-a977-4554-bc11-0e04bacdc090}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Scripting System\Execution\Interpreter\Variable">
       <UniqueIdentifier>{03ec966f-fcd1-4950-8133-c2946afc67fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Scripting System\Execution\Interpreter\List">
+      <UniqueIdentifier>{266b3d9e-3493-43ea-842a-6c1df4476e8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Scripting System\Execution\Interpreter\Condition">
+      <UniqueIdentifier>{30741560-106d-48e3-b9ea-6a6330812f0f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

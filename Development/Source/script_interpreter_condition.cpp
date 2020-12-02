@@ -15,11 +15,20 @@ bool ScriptInterpreter::_checkConditionString(string conditionString)
 	unsigned int index = 0;
 	bool buildingString = false;
 	bool buildingVec3 = false;
+	bool foundFirstChar = false;
 
 	// Extract all invidual elements of the if statement
 	for(auto& c : conditionString)
 	{
-		if(index == conditionString.size() - 1) // Check if last character
+		if (!foundFirstChar) // Need to find first character
+		{
+			if (c != ' ') // Ignore whitespace
+			{
+				elementBuild += c;
+				foundFirstChar = true;
+			}
+		}
+		else if(index == conditionString.size() - 1) // Check if last character
 		{
 			elementBuild += c;
 			elements.push_back(elementBuild);

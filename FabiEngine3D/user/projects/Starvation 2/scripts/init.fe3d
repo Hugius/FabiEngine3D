@@ -1,4 +1,4 @@
-8 0
+11 26
 META script_type_init
 META execution_entry
 
@@ -7,4 +7,9 @@ fe3d:camera_position_set(-37.0, 10.0, -51.0)
 fe3d:camera_firstperson_enable()
 fe3d:misc_cursor_hide()
 GLOB CONST DEC _baseSpeed = 0.035
-
+LIST kip = {1.0, 2.0, 3.0}
+PUSH kip 4.0
+PUSH kip "hoi"
+VEC3 geit = [123.0 1.0 1.0]
+PUSH kip geit.x
+fe3d:print(kip[5])

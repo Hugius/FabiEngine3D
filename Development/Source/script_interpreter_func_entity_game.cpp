@@ -7,7 +7,7 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::VEC3 };
 
-		if (_validateListAmount(arguments, types.size()) && _validateListTypes(arguments, types))
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
 			if (_validateFe3dGameEntity(arguments[0].getString()))
 			{
@@ -22,7 +22,7 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 	{
 		auto types = { ScriptValueType::STRING };
 
-		if (_validateListAmount(arguments, types.size()) && _validateListTypes(arguments, types))
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
 			if (_validateFe3dGameEntity(arguments[0].getString()))
 			{
@@ -37,7 +37,7 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 	{
 		auto types = { ScriptValueType::STRING };
 
-		if (_validateListAmount(arguments, types.size()) && _validateListTypes(arguments, types))
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
 			if (_validateFe3dGameEntity(arguments[0].getString()))
 			{

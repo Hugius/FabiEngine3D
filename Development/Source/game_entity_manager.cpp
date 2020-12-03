@@ -51,32 +51,36 @@ void GameEntityManager::generateModel(const string& ID, const string& objName)
 	getEntity(ID)->clearLightMaps();
 	getEntity(ID)->clearReflectionMaps();
 	getEntity(ID)->clearNormalMaps();
-
+	
 	// Create OpenGL buffers
 	for (auto& part : parts)
 	{
-		vector<float> data;
+		// Temporary values
+		vector<float> bufferData;
 
 		// For every triangle vertex point
 		for (size_t i = 0; i < part.vertices.size(); i++)
 		{
 			// Vertex coordinate
-			data.push_back(part.vertices[i].x);
-			data.push_back(part.vertices[i].y);
-			data.push_back(part.vertices[i].z);
+			bufferData.push_back(part.vertices[i].x);
+			bufferData.push_back(part.vertices[i].y);
+			bufferData.push_back(part.vertices[i].z);
 
 			// UV coordinate
-			data.push_back(part.uvCoords[i].x);
-			data.push_back(part.uvCoords[i].y);
+			bufferData.push_back(part.uvCoords[i].x);
+			bufferData.push_back(part.uvCoords[i].y);
 
 			// Normal vector
-			data.push_back(part.normals[i].x);
-			data.push_back(part.normals[i].y);
-			data.push_back(part.normals[i].z);
+			bufferData.push_back(part.normals[i].x);
+			bufferData.push_back(part.normals[i].y);
+			bufferData.push_back(part.normals[i].z);
 		}
 
 		// OpenGL buffer
-		getEntity(ID)->addOglBuffer(new OpenGLBuffer(BufferType::MODEL, &data[0], data.size()));
+		getEntity(ID)->addOglBuffer(new OpenGLBuffer(BufferType::MODEL, &bufferData[0], bufferData.size()));
+
+		// New transformation part
+		getEntity(ID)->addPart(part.name);
 
 		// Load an OBJ part diffuse map
 		if (part.diffuseMapName != "")
@@ -185,11 +189,6 @@ void GameEntityManager::loadNormalMapping(const string& ID)
 	}
 }
 
-void GameEntityManager::setLodDistance(float distance)
-{
-	_lodDistance = distance;
-}
-
 void GameEntityManager::update()
 {
 	for (auto& [keyID, entity] : _getGameEntities())
@@ -220,6 +219,11 @@ void GameEntityManager::update()
 			entity->setLevelOfDetailed(isFarEnough);
 		}
 	}
+}
+
+void GameEntityManager::setLodDistance(float distance)
+{
+	_lodDistance = distance;
 }
 
 float GameEntityManager::getLodDistance()

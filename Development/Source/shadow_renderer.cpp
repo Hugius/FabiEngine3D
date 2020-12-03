@@ -34,15 +34,17 @@ void ShadowRenderer::render(const shared_ptr<GameEntity> entity)
 		}
 
 		// Uniforms
-		_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix());
 		_shader.uploadUniform("u_alphaObject", entity->isTransparent());
 		_shader.uploadUniform("u_maxY", entity->getMaxY());
 		_shader.uploadUniform("u_sampler_diffuseMap", 0);
 
 		// Bind & render
-		int index = 0;
+		unsigned int index = 0;
 		for (auto& buffer : entity->getOglBuffers())
 		{
+			// Model matrix
+			_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix(index));
+
 			// Diffuse map transparency
 			if (entity->isTransparent() && entity->hasDiffuseMap())
 			{

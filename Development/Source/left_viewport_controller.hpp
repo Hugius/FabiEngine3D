@@ -5,6 +5,7 @@
 #include "model_editor.hpp"
 #include "billboard_editor.hpp"
 #include "scene_editor.hpp"
+#include "animation_editor.hpp"
 #include "script_editor.hpp"
 #include "audio_editor.hpp"
 #include "settings_editor.hpp"
@@ -23,6 +24,7 @@ public:
 	EnvironmentEditor& getEnvironmentEditor();
 	BillboardEditor& getBillboardEditor();
 	SceneEditor& getSceneEditor();
+	AnimationEditor& getAnimationEditor();
 	ScriptEditor& getScriptEditor();
 	SettingsEditor& getSettingsEditor();
 	AudioEditor& getAudioEditor();
@@ -38,6 +40,7 @@ private:
 	EnvironmentEditor _environmentEditor;
 	BillboardEditor _billboardEditor;
 	SceneEditor _sceneEditor;
+	AnimationEditor _animationEditor;
 	ScriptEditor _scriptEditor;
 	AudioEditor _audioEditor;
 	SettingsEditor _settingsEditor;

@@ -31,7 +31,7 @@ private:
 	void _updateMiscellaneous();
 
 	// Booleans
-	bool isCreatingBillboard = false;
+	bool _isCreatingBillboard = false;
 	bool _isChoosingBillboard = false;
 	bool _isEditingBillboard = false;
 	bool _isRemovingBillboard = false;

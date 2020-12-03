@@ -183,7 +183,7 @@ vector<ObjPart> OBJLoader::_loadOBJ(const string& filePath, bool calculateTangen
 			for (auto& objPart : objParts)
 			{
 				// Find OBJ part
-				if (objPart.partName == selectedPartName)
+				if (objPart.name == selectedPartName)
 				{
 					alreadyExisting = true;
 
@@ -219,7 +219,7 @@ vector<ObjPart> OBJLoader::_loadOBJ(const string& filePath, bool calculateTangen
 				}
 
 				// Set OBJ part names
-				newPart.partName = selectedPartName;
+				newPart.name = selectedPartName;
 				newPart.diffuseMapName = tempDiffuseMapName;
 				newPart.lightMapName = tempLightMapName;
 				newPart.normalMapName = tempNormalMapName;

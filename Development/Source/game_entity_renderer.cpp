@@ -125,11 +125,6 @@ void GameEntityRenderer::render(const shared_ptr<GameEntity> entity)
 		}
 
 		// Shader uniforms
-		auto normalModelMatrix = entity->getModelMatrix();
-		normalModelMatrix.transpose();
-		normalModelMatrix.invert();
-		_shader.uploadUniform("u_normalModelMatrix", Matrix33(normalModelMatrix));
-		_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix());
 		_shader.uploadUniform("u_color", entity->getColor());
 		_shader.uploadUniform("u_specularLightFactor", entity->getSpecularFactor());
 		_shader.uploadUniform("u_specularLightIntensity", entity->getSpecularIntensity());
@@ -157,9 +152,16 @@ void GameEntityRenderer::render(const shared_ptr<GameEntity> entity)
 		}
 
 		// Bind & render
-		int index = 0;
+		unsigned int index = 0;
 		for (auto& buffer : entity->getOglBuffers())
 		{
+			// Model matrix
+			auto normalModelMatrix = entity->getModelMatrix(index);
+			normalModelMatrix.transpose();
+			normalModelMatrix.invert();
+			_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix(index));
+			_shader.uploadUniform("u_normalModelMatrix", Matrix33(normalModelMatrix));
+
 			// Diffuse map
 			if (entity->hasDiffuseMap())
 			{

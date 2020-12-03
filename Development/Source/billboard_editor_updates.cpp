@@ -31,7 +31,7 @@ void BillboardEditor::_updateBillboardManagement()
 				else if (screen->getButton("addBillboard")->isHovered()) // Add billboard button
 				{
 					_gui.getGlobalScreen()->addValueForm("newBillboardName", "New billboard name", "", Vec2(0.0f), Vec2(0.5f, 0.1f));
-					isCreatingBillboard = true;
+					_isCreatingBillboard = true;
 				}
 				else if (screen->getButton("editBillboard")->isHovered()) // Edit billboard button
 				{
@@ -71,7 +71,7 @@ void BillboardEditor::_updateBillboardCreation()
 {
 	if (_isLoaded)
 	{
-		if (isCreatingBillboard)
+		if (_isCreatingBillboard)
 		{
 			string newBillboardName = "";
 
@@ -98,7 +98,7 @@ void BillboardEditor::_updateBillboardCreation()
 						_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID(), "Billboard: " +
 							_currentBillboardID.substr(1), 0.025f);
 						_fe3d.textEntity_show(_gui.getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID());
-						isCreatingBillboard = false;
+						_isCreatingBillboard = false;
 						_isEditingBillboard = true;
 					}
 					else // Name already exists

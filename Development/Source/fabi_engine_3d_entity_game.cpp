@@ -221,49 +221,49 @@ bool FabiEngine3D::gameEntity_isDepthMapIncluded(const string& ID)
 	return _core->_gameEntityManager.getEntity(ID)->isDepthMapIncluded();
 }
 
-void FabiEngine3D::gameEntity_move(const string& ID, Vec3 factor)
+void FabiEngine3D::gameEntity_move(const string& ID, Vec3 factor, const string& partName)
 {
-	_core->_gameEntityManager.getEntity(ID)->translate(factor);
+	_core->_gameEntityManager.getEntity(ID)->translate(factor, partName);
 }
 
-void FabiEngine3D::gameEntity_rotate(const string& ID, Vec3 factor)
+void FabiEngine3D::gameEntity_rotate(const string& ID, Vec3 factor, const string& partName)
 {
-	_core->_gameEntityManager.getEntity(ID)->rotate(factor);
+	_core->_gameEntityManager.getEntity(ID)->rotate(factor, partName);
 }
 
-void FabiEngine3D::gameEntity_scale(const string& ID, Vec3 factor)
+void FabiEngine3D::gameEntity_scale(const string& ID, Vec3 factor, const string& partName)
 {
-	_core->_gameEntityManager.getEntity(ID)->scale(factor);
+	_core->_gameEntityManager.getEntity(ID)->scale(factor, partName);
 }
 
-void FabiEngine3D::gameEntity_setPosition(const string& ID, Vec3 position)
+void FabiEngine3D::gameEntity_setPosition(const string& ID, Vec3 position, const string& partName)
 {
-	_core->_gameEntityManager.getEntity(ID)->setTranslation(position);
+	_core->_gameEntityManager.getEntity(ID)->setTranslation(position, partName);
 }
 
-void FabiEngine3D::gameEntity_setRotation(const string& ID, Vec3 rotation)
+void FabiEngine3D::gameEntity_setRotation(const string& ID, Vec3 rotation, const string& partName)
 {
-	_core->_gameEntityManager.getEntity(ID)->setRotation(rotation);
+	_core->_gameEntityManager.getEntity(ID)->setRotation(rotation, partName);
 }
 
-void FabiEngine3D::gameEntity_setSize(const string& ID, Vec3 size)
+void FabiEngine3D::gameEntity_setSize(const string& ID, Vec3 size, const string& partName)
 {
-	_core->_gameEntityManager.getEntity(ID)->setScaling(size);
+	_core->_gameEntityManager.getEntity(ID)->setScaling(size, partName);
 }
 
-Vec3 FabiEngine3D::gameEntity_getPosition(const string& ID)
+Vec3 FabiEngine3D::gameEntity_getPosition(const string& ID, const string& partName)
 {
-	return _core->_gameEntityManager.getEntity(ID)->getTranslation();
+	return _core->_gameEntityManager.getEntity(ID)->getTranslation(partName);
 }
 
-Vec3 FabiEngine3D::gameEntity_getRotation(const string& ID)
+Vec3 FabiEngine3D::gameEntity_getRotation(const string& ID, const string& partName)
 {
-	return _core->_gameEntityManager.getEntity(ID)->getRotation();
+	return _core->_gameEntityManager.getEntity(ID)->getRotation(partName);
 }
 
-Vec3 FabiEngine3D::gameEntity_getSize(const string& ID)
+Vec3 FabiEngine3D::gameEntity_getSize(const string& ID, const string& partName)
 {
-	return _core->_gameEntityManager.getEntity(ID)->getScaling();
+	return _core->_gameEntityManager.getEntity(ID)->getScaling(partName);
 }
 
 void FabiEngine3D::gameEntity_enable(const string& ID)

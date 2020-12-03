@@ -11,7 +11,7 @@ using std::string;
 
 struct ObjPart 
 {
-	string partName;
+	string name;
 	string diffuseMapName;
 	string lightMapName;
 	string normalMapName;

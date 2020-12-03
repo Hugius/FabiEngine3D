@@ -19,14 +19,14 @@ public:
 	void addReflectionMap(GLuint val);
 	void addNormalMap(GLuint val);
 	void setOriginalTranslation(Vec3 val);
-	void setTranslation(Vec3 val);
+	void setTranslation(Vec3 val, const string& partName = "");
 	void setOriginalRotation(Vec3 val);
-	void setRotation(Vec3 val);
+	void setRotation(Vec3 val, const string& partName = "");
 	void setOriginalScaling(Vec3 val);
-	void setScaling(Vec3 val);
-	void translate(Vec3 val);
-	void rotate(Vec3 val);
-	void scale(Vec3 val);
+	void setScaling(Vec3 val, const string& partName = "");
+	void translate(Vec3 val, const string& partName = "");
+	void rotate(Vec3 val, const string& partName = "");
+	void scale(Vec3 val, const string& partName = "");
 	void setColor(Vec3 val);
 	void setObjPath(const string& val);
 	void setDiffuseMapPath(const string& val);
@@ -60,19 +60,20 @@ public:
 	void clearLightMaps();
 	void clearReflectionMaps();
 	void clearNormalMaps();
+	void addPart(const string& val);
 	
 	// Getters
-	const Matrix44& getModelMatrix() const;
-	const GLuint getDiffuseMap(int index) const;
-	const GLuint getLightMap(int index) const;
-	const GLuint getReflectionMap(int index) const;
-	const GLuint getNormalMap(int index) const;
+	const Matrix44& getModelMatrix(unsigned int index);
+	const GLuint getDiffuseMap(unsigned int index) const;
+	const GLuint getLightMap(unsigned int index) const;
+	const GLuint getReflectionMap(unsigned int index) const;
+	const GLuint getNormalMap(unsigned int index) const;
 	const Vec3 getOriginalTranslation() const;
-	const Vec3 getTranslation() const;
+	const Vec3 getTranslation(const string& partName = "");
 	const Vec3 getOriginalRotation() const;
-	const Vec3 getRotation() const;
+	const Vec3 getRotation(const string& partName = "");
 	const Vec3 getOriginalScaling() const;
-	const Vec3 getScaling() const;
+	const Vec3 getScaling(const string& partName = "");
 	const Vec3 getColor() const;
 	const string& getObjPath() const;
 	const string& getDiffuseMapPath() const;
@@ -80,10 +81,10 @@ public:
 	const string& getReflectionMapPath() const;
 	const string& getNormalMapPath() const;
 	const string& getLodEntityID() const;
-	const vector<string>& getDiffuseMapPaths();
-	const vector<string>& getLightMapPaths();
-	const vector<string>& getReflectionMapPaths();
-	const vector<string>& getNormalMapPaths();
+	const vector<string>& getDiffuseMapPaths() const;
+	const vector<string>& getLightMapPaths() const;
+	const vector<string>& getReflectionMapPaths() const;
+	const vector<string>& getNormalMapPaths() const;
 	const float getOriginalLightness() const;
 	const float getLightness() const;
 	const float getSpecularFactor() const;
@@ -108,7 +109,21 @@ public:
 	const bool isLevelOfDetailed() const;
 
 private:
-	Matrix44 _modelMatrix = Matrix44(1.0f);
+	unsigned int _getPartIndex(string partName);
+
+	vector<string> _partNames;
+	vector<Matrix44> _modelMatrices;
+	vector<string> _diffuseMapPaths;
+	vector<string> _lightMapPaths;
+	vector<string> _reflectionMapPaths;
+	vector<string> _normalMapPaths;
+	vector<Vec3> _translations;
+	vector<Vec3> _rotations;
+	vector<Vec3> _scalings;
+	vector<GLuint> _diffuseMaps;
+	vector<GLuint> _lightMaps;
+	vector<GLuint> _reflectionMaps;
+	vector<GLuint> _normalMaps;
 
 	string _objPath = "";
 	string _diffuseMapPath = "";
@@ -117,23 +132,10 @@ private:
 	string _normalMapPath = "";
 	string _lodEntityID = "";
 
-	vector<string> _diffuseMapPaths;
-	vector<string> _lightMapPaths;
-	vector<string> _reflectionMapPaths;
-	vector<string> _normalMapPaths;
-
 	Vec3 _originalTranslation = Vec3(0.0f);
 	Vec3 _originalRotation = Vec3(0.0f);
-	Vec3 _originalScaling = Vec3(0.0f);
-	Vec3 _translation = Vec3(0.0f);
-	Vec3 _rotation = Vec3(0.0f);
-	Vec3 _scaling = Vec3(1.0f);
+	Vec3 _originalScaling = Vec3(1.0f);
 	Vec3 _color = Vec3(1.0f);
-
-	vector<GLuint> _diffuseMaps;
-	vector<GLuint> _lightMaps;
-	vector<GLuint> _reflectionMaps;
-	vector<GLuint> _normalMaps;
 
 	float _originalLightness = 1.0f;
 	float _lightness = 1.0f;

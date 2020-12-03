@@ -1,15 +1,21 @@
 #include "game_entity.hpp"
+#include "logger.hpp"
 
 void GameEntity::updateModelMatrix()
 {
-	Matrix44 translationMatrix = Matrix44::createTranslation(_translation.x, _translation.y, _translation.z);
-	Matrix44 rotationMatrix = Matrix44::createRotation(
-		Math::degreesToRadians(_rotation.x),
-		Math::degreesToRadians(_rotation.y),
-		Math::degreesToRadians(_rotation.z));
-	Matrix44 scalingMatrix = Matrix44::createScaling(_scaling.x, _scaling.y, _scaling.z);
+	for (unsigned int i = 0; i < _modelMatrices.size(); i++)
+	{
+		// Calculate matrices
+		Matrix44 translationMatrix = Matrix44::createTranslation(_translations[i].x, _translations[i].y, _translations[i].z);
+		Matrix44 rotationMatrix = Matrix44::createRotation(
+			Math::degreesToRadians(_rotations[i].x),
+			Math::degreesToRadians(_rotations[i].y),
+			Math::degreesToRadians(_rotations[i].z));
+		Matrix44 scalingMatrix = Matrix44::createScaling(_scalings[i].x, _scalings[i].y, _scalings[i].z);
 
-	_modelMatrix = translationMatrix * rotationMatrix * scalingMatrix;
+		// Combine into 1 model matrix
+		_modelMatrices[i] = translationMatrix * rotationMatrix * scalingMatrix;
+	}
 }
 
 void GameEntity::setDiffuseMap(GLuint val)
@@ -97,9 +103,19 @@ void GameEntity::setOriginalTranslation(Vec3 val)
 	_originalTranslation = val;
 }
 
-void GameEntity::setTranslation(Vec3 val)
+void GameEntity::setTranslation(Vec3 val, const string& partName)
 {
-	_translation = val;
+	if (partName.empty() && _partNames.size() > 1)
+	{
+		for (auto& translation : _translations)
+		{
+			translation = val;
+		}
+	}
+	else
+	{
+		_translations[_getPartIndex(partName)] = val;
+	}
 }
 
 void GameEntity::setOriginalRotation(Vec3 val)
@@ -107,9 +123,19 @@ void GameEntity::setOriginalRotation(Vec3 val)
 	_originalRotation = val;
 }
 
-void GameEntity::setRotation(Vec3 val)
+void GameEntity::setRotation(Vec3 val, const string& partName)
 {
-	_rotation = val;
+	if (partName.empty() && _partNames.size() > 1)
+	{
+		for (auto& rotation : _rotations)
+		{
+			rotation = val;
+		}
+	}
+	else
+	{
+		_rotations[_getPartIndex(partName)] = val;
+	}
 }
 
 void GameEntity::setOriginalScaling(Vec3 val)
@@ -117,24 +143,64 @@ void GameEntity::setOriginalScaling(Vec3 val)
 	_originalScaling = val;
 }
 
-void GameEntity::setScaling(Vec3 val)
+void GameEntity::setScaling(Vec3 val, const string& partName)
 {
-	_scaling = val;
+	if (partName.empty() && _partNames.size() > 1)
+	{
+		for (auto& scaling : _scalings)
+		{
+			scaling = val;
+		}
+	}
+	else
+	{
+		_scalings[_getPartIndex(partName)] = val;
+	}
 }
 
-void GameEntity::translate(Vec3 val)
+void GameEntity::translate(Vec3 val, const string& partName)
 {
-	_translation += val;
+	if (partName.empty() && _partNames.size() > 1)
+	{
+		for (auto& translation : _translations)
+		{
+			translation += val;
+		}
+	}
+	else
+	{
+		_translations[_getPartIndex(partName)] += val;
+	}
 }
 
-void GameEntity::rotate(Vec3 val)
+void GameEntity::rotate(Vec3 val, const string& partName)
 {
-	_rotation += val;
+	if (partName.empty() && _partNames.size() > 1)
+	{
+		for (auto& rotation : _rotations)
+		{
+			rotation += val;
+		}
+	}
+	else
+	{
+		_rotations[_getPartIndex(partName)] += val;
+	}
 }
 
-void GameEntity::scale(Vec3 val)
+void GameEntity::scale(Vec3 val, const string& partName)
 {
-	_scaling += val;
+	if (partName.empty() && _partNames.size() > 1)
+	{
+		for (auto& scaling : _scalings)
+		{
+			scaling += val;
+		}
+	}
+	else
+	{
+		_scalings[_getPartIndex(partName)] += val;
+	}
 }
 
 void GameEntity::setColor(Vec3 val)
@@ -271,6 +337,15 @@ void GameEntity::clearNormalMaps()
 	_normalMapPaths.clear();
 }
 
+void GameEntity::addPart(const string& val)
+{
+	_partNames.push_back(val);
+	_modelMatrices.push_back(Matrix44(1.0f));
+	_translations.push_back(Vec3(0.0f));
+	_rotations.push_back(Vec3(0.0f));
+	_scalings.push_back(Vec3(1.0f));
+}
+
 void GameEntity::setOriginalLightness(float val)
 {
 	_originalLightness = val;
@@ -306,27 +381,27 @@ void GameEntity::setUvRepeat(float val)
 	_uvRepeat = val;
 }
 
-const Matrix44& GameEntity::getModelMatrix() const
+const Matrix44& GameEntity::getModelMatrix(unsigned int index)
 {
-	return _modelMatrix;
+	return _modelMatrices[index];
 }
 
-const GLuint GameEntity::getDiffuseMap(int index) const
+const GLuint GameEntity::getDiffuseMap(unsigned int index) const
 {
 	return _diffuseMaps[index];
 }
 
-const GLuint GameEntity::getLightMap(int index) const
+const GLuint GameEntity::getLightMap(unsigned int index) const
 {
 	return _lightMaps[index];
 }
 
-const GLuint GameEntity::getReflectionMap(int index) const
+const GLuint GameEntity::getReflectionMap(unsigned int index) const
 {
 	return _reflectionMaps[index];
 }
 
-const GLuint GameEntity::getNormalMap(int index) const
+const GLuint GameEntity::getNormalMap(unsigned int index) const
 {
 	return _normalMaps[index];
 }
@@ -336,9 +411,16 @@ const Vec3 GameEntity::getOriginalTranslation() const
 	return _originalTranslation;
 }
 
-const Vec3 GameEntity::getTranslation() const
+const Vec3 GameEntity::getTranslation(const string& partName)
 {
-	return _translation;
+	if (partName.empty() && _partNames.size() > 1)
+	{
+		return _translations[0];
+	}
+	else
+	{
+		return _translations[_getPartIndex(partName)];
+	}
 }
 
 const Vec3 GameEntity::getOriginalRotation() const
@@ -346,9 +428,16 @@ const Vec3 GameEntity::getOriginalRotation() const
 	return _originalRotation;
 }
 
-const Vec3 GameEntity::getRotation() const
+const Vec3 GameEntity::getRotation(const string& partName)
 {
-	return _rotation;
+	if (partName.empty() && _partNames.size() > 1)
+	{
+		return _rotations[0];
+	}
+	else
+	{
+		return _rotations[_getPartIndex(partName)];
+	}
 }
 
 const Vec3 GameEntity::getOriginalScaling() const
@@ -356,9 +445,16 @@ const Vec3 GameEntity::getOriginalScaling() const
 	return _originalScaling;
 }
 
-const Vec3 GameEntity::getScaling() const
+const Vec3 GameEntity::getScaling(const string& partName)
 {
-	return _scaling;
+	if (partName.empty() && _partNames.size() > 1)
+	{
+		return _scalings[0];
+	}
+	else
+	{
+		return _scalings[_getPartIndex(partName)];
+	}
 }
 
 const Vec3 GameEntity::getColor() const
@@ -396,22 +492,22 @@ const string& GameEntity::getLodEntityID() const
 	return _lodEntityID;
 }
 
-const vector<string>& GameEntity::getDiffuseMapPaths()
+const vector<string>& GameEntity::getDiffuseMapPaths() const
 {
 	return _diffuseMapPaths;
 }
 
-const vector<string>& GameEntity::getLightMapPaths()
+const vector<string>& GameEntity::getLightMapPaths() const
 {
 	return _lightMapPaths;
 }
 
-const vector<string>& GameEntity::getReflectionMapPaths()
+const vector<string>& GameEntity::getReflectionMapPaths() const
 {
 	return _reflectionMapPaths;
 }
 
-const vector<string>& GameEntity::getNormalMapPaths()
+const vector<string>& GameEntity::getNormalMapPaths() const
 {
 	return _normalMapPaths;
 }
@@ -489,6 +585,21 @@ const bool GameEntity::isDepthMapIncluded() const
 const bool GameEntity::isLevelOfDetailed() const
 {
 	return _isLevelOfDetailed;
+}
+
+unsigned int GameEntity::_getPartIndex(string partName)
+{
+	// Find index
+	for (unsigned int i = 0; i < _partNames.size(); i++)
+	{
+		if (partName == _partNames[i])
+		{
+			return i;
+		}
+	}
+
+	// Error
+	Logger::throwError("Game entity with ID \"" + getID() + "\" has no part called \"" + partName + "\"");
 }
 
 const float GameEntity::getOriginalLightness() const

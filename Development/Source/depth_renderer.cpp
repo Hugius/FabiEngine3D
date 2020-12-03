@@ -90,7 +90,6 @@ void DepthRenderer::render(const shared_ptr<GameEntity> entity)
 		}
 
 		// Shader uniforms
-		_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix());
 		_shader.uploadUniform("u_isAlphaObject", entity->isTransparent());
 		_shader.uploadUniform("u_maxY", entity->getMaxY());
 		_shader.uploadUniform("u_isBillboard", false);
@@ -106,9 +105,12 @@ void DepthRenderer::render(const shared_ptr<GameEntity> entity)
 		}
 
 		// Bind & render
-		int index = 0;
+		unsigned int index = 0;
 		for (auto& buffer : entity->getOglBuffers())
 		{
+			// Model matrix
+			_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix(index));
+
 			// Diffuse map
 			if (entity->hasDiffuseMap())
 			{

@@ -8,6 +8,7 @@ LeftViewportController::LeftViewportController(FabiEngine3D& fe3d, EngineGuiMana
 	_modelEditor(fe3d, gui),
 	_billboardEditor(fe3d, gui),
 	_sceneEditor(fe3d, gui, _environmentEditor, _modelEditor, _billboardEditor, _audioEditor),
+	_animationEditor(fe3d, gui),
 	_scriptEditor(fe3d, gui, _sceneEditor),
 	_audioEditor(fe3d, gui),
 	_settingsEditor(fe3d, gui)
@@ -35,6 +36,7 @@ void LeftViewportController::initialize()
 	_modelEditor.initializeGUI();
 	_billboardEditor.initializeGUI();
 	_sceneEditor.initializeGUI();
+	_animationEditor.initializeGUI();
 	_scriptEditor.initializeGUI();
 	_audioEditor.initializeGUI();
 	_settingsEditor.initializeGUI();
@@ -73,7 +75,8 @@ void LeftViewportController::update()
 		}
 		else if (screen->getButton("animationEditor")->isHovered()) // Animation editor button
 		{
-
+			_animationEditor.load();
+			window->setActiveScreen("animationEditorMenuMain");
 		}
 		else if (screen->getButton("scriptEditor")->isHovered()) // Script editor button
 		{
@@ -96,6 +99,7 @@ void LeftViewportController::update()
 	_modelEditor.update();
 	_billboardEditor.update();
 	_sceneEditor.update();
+	_animationEditor.update();
 	_scriptEditor.update();
 	_audioEditor.update();
 	_settingsEditor.update();
@@ -119,6 +123,11 @@ BillboardEditor& LeftViewportController::getBillboardEditor()
 SceneEditor& LeftViewportController::getSceneEditor()
 {
 	return _sceneEditor;
+}
+
+AnimationEditor& LeftViewportController::getAnimationEditor()
+{
+	return _animationEditor;
 }
 
 ScriptEditor& LeftViewportController::getScriptEditor()

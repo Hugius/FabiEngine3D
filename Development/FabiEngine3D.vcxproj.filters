@@ -431,13 +431,13 @@
       <Filter>src\Editor System\Environment Editor\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="Source\environment_editor_persistence_sky.cpp">
-      <Filter>src\Editor System\Environment Editor\Persistency</Filter>
+      <Filter>src\Editor System\Environment Editor\Persistence</Filter>
     </ClCompile>
     <ClCompile Include="Source\environment_editor_persistence_terrain.cpp">
-      <Filter>src\Editor System\Environment Editor\Persistency</Filter>
+      <Filter>src\Editor System\Environment Editor\Persistence</Filter>
     </ClCompile>
     <ClCompile Include="Source\environment_editor_persistence_water.cpp">
-      <Filter>src\Editor System\Environment Editor\Persistency</Filter>
+      <Filter>src\Editor System\Environment Editor\Persistence</Filter>
     </ClCompile>
     <ClCompile Include="Source\environment_editor_updates.cpp">
       <Filter>src\Editor System\Environment Editor\Updates</Filter>
@@ -464,7 +464,7 @@
       <Filter>src\Miscellaneous\Other</Filter>
     </ClCompile>
     <ClCompile Include="Source\audio_editor_updates.cpp">
-      <Filter>src\Editor System\Audio Editor\Upates</Filter>
+      <Filter>src\Editor System\Audio Editor\Updates</Filter>
     </ClCompile>
     <ClCompile Include="Source\audio_editor_core.cpp">
       <Filter>src\Editor System\Audio Editor\Core</Filter>
@@ -473,7 +473,7 @@
       <Filter>src\Editor System\Audio Editor\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="Source\audio_editor_updates_editing.cpp">
-      <Filter>src\Editor System\Audio Editor\Upates</Filter>
+      <Filter>src\Editor System\Audio Editor\Updates</Filter>
     </ClCompile>
     <ClCompile Include="Source\audio_editor_persistence.cpp">
       <Filter>src\Editor System\Audio Editor\Core</Filter>
@@ -558,6 +558,18 @@
     </ClCompile>
     <ClCompile Include="Source\script_interpreter_list_core.cpp">
       <Filter>src\Scripting System\Execution\Interpreter\List</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\animation_editor_core.cpp">
+      <Filter>src\Editor System\Animation Editor\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\animation_editor_misc.cpp">
+      <Filter>src\Editor System\Animation Editor\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\animation_editor_updates.cpp">
+      <Filter>src\Editor System\Animation Editor\Updates</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\animation_editor_persistence.cpp">
+      <Filter>src\Editor System\Animation Editor\Core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -897,6 +909,9 @@
     <ClInclude Include="Source\script_variable_type.hpp">
       <Filter>src\Miscellaneous\Enums</Filter>
     </ClInclude>
+    <ClInclude Include="Source\animation_editor.hpp">
+      <Filter>src\Editor System\Animation Editor\Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -1130,12 +1145,6 @@
     <Filter Include="src\Editor System\Environment Editor\Updates">
       <UniqueIdentifier>{c658aa7d-506b-4818-a69f-ce8a2da31340}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\Editor System\Environment Editor\Persistency">
-      <UniqueIdentifier>{509073d5-d60c-453d-973e-644649375ab1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\Editor System\Audio Editor\Upates">
-      <UniqueIdentifier>{5eb1ef82-f07a-481c-8f86-1e402dc54b6e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\Editor System\Audio Editor\Miscellaneous">
       <UniqueIdentifier>{7f5b1c3d-5d5d-44d8-8995-19e12fb1581d}</UniqueIdentifier>
     </Filter>
@@ -1159,6 +1168,21 @@
     </Filter>
     <Filter Include="src\Scripting System\Execution\Interpreter\Condition">
       <UniqueIdentifier>{30741560-106d-48e3-b9ea-6a6330812f0f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Editor System\Animation Editor\Core">
+      <UniqueIdentifier>{d2d75ad8-fe5d-46bb-9d39-e567fa484360}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Editor System\Animation Editor\Miscellaneous">
+      <UniqueIdentifier>{50702384-41af-4583-bbf2-8996e377d7ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Editor System\Environment Editor\Persistence">
+      <UniqueIdentifier>{509073d5-d60c-453d-973e-644649375ab1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Editor System\Animation Editor\Updates">
+      <UniqueIdentifier>{e73bb9ed-99e3-4b2d-b959-642ff4c6bce0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Editor System\Audio Editor\Updates">
+      <UniqueIdentifier>{5eb1ef82-f07a-481c-8f86-1e402dc54b6e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

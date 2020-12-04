@@ -5,10 +5,11 @@
 void AnimationEditor::update()
 {
 	_updateManagementScreen();
-	_updateCreationScreen();
-	_updateChoosingScreen();
+	_updateAnimationCreation();
+	_updateAnimationChoice();
 	_updateEditingScreen();
-	_updateRemovalScreen();
+	_updateFrameScreen();
+	_updateAnimationRemoval();
 	_updateCamera();
 	_updateMiscellaneous();
 }
@@ -63,7 +64,7 @@ void AnimationEditor::_updateManagementScreen()
 	}
 }
 
-void AnimationEditor::_updateCreationScreen()
+void AnimationEditor::_updateAnimationCreation()
 {
 	if (_isLoaded)
 	{
@@ -88,12 +89,15 @@ void AnimationEditor::_updateCreationScreen()
 
 						// Select animation
 						_currentAnimationID = newAnimationName;
+
+						// Create animation
 						_animations.push_back(make_shared<Animation>(newAnimationName));
 
 						// Miscellaneous
-						_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedAnimationName")->getEntityID(), "Animation: " +
-							_currentAnimationID.substr(1), 0.025f);
+						auto textID = _gui.getGlobalScreen()->getTextfield("selectedAnimationName")->getEntityID();
+						_fe3d.textEntity_setTextContent(textID, "Animation: " + _currentAnimationID.substr(1), 0.025f);
 						_fe3d.textEntity_show(_gui.getGlobalScreen()->getTextfield("selectedAnimationName")->getEntityID());
+						_fe3d.textEntity_show(_gui.getGlobalScreen()->getTextfield("selectedAnimationFrame")->getEntityID());
 						_isCreatingAnimation = false;
 						_isEditingAnimation = true;
 					}
@@ -111,7 +115,7 @@ void AnimationEditor::_updateCreationScreen()
 	}
 }
 
-void AnimationEditor::_updateChoosingScreen()
+void AnimationEditor::_updateAnimationChoice()
 {
 	if (_isLoaded)
 	{
@@ -132,9 +136,10 @@ void AnimationEditor::_updateChoosingScreen()
 					if (_isEditingAnimation)
 					{
 						_gui.getViewport("left")->getWindow("main")->setActiveScreen("animationEditorMenuChoice");
-						_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedAnimationName")->getEntityID(), "Animation: " +
-							_currentAnimationID.substr(1), 0.025f);
+						auto textID = _gui.getGlobalScreen()->getTextfield("selectedAnimationName")->getEntityID();
+						_fe3d.textEntity_setTextContent(textID, "Animation: " + _currentAnimationID.substr(1), 0.025f);
 						_fe3d.textEntity_show(_gui.getGlobalScreen()->getTextfield("selectedAnimationName")->getEntityID());
+						_fe3d.textEntity_show(_gui.getGlobalScreen()->getTextfield("selectedAnimationFrame")->getEntityID());
 					}
 
 					// Miscellaneous
@@ -153,7 +158,7 @@ void AnimationEditor::_updateChoosingScreen()
 	}
 }
 
-void AnimationEditor::_updateRemovalScreen()
+void AnimationEditor::_updateAnimationRemoval()
 {
 	if (_isLoaded)
 	{

@@ -23,10 +23,11 @@ public:
 
 private:
 	void _updateManagementScreen();
-	void _updateCreationScreen();
-	void _updateChoosingScreen();
+	void _updateAnimationCreation();
+	void _updateAnimationChoice();
 	void _updateEditingScreen();
-	void _updateRemovalScreen();
+	void _updateFrameScreen();
+	void _updateAnimationRemoval();
 	void _updateCamera();
 	void _updateMiscellaneous();
 	void _deleteAnimation(const string& ID);
@@ -57,6 +58,10 @@ private:
 	const float _minCameraHeight = 1.0f;
 	const float _cameraSpeed = 0.15f;
 	const float _scrollWheelDivider = 15.0f;
+
+	// Integers
+	const unsigned int _maxFrameCount = 100;
+	unsigned int _currentFrameIndex = 0;
 
 	// Booleans
 	bool _isCreatingAnimation = false;

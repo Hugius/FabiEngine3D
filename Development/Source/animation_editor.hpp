@@ -2,11 +2,13 @@
 
 #include "fabi_engine_3d.hpp"
 #include "engine_gui_manager.hpp"
+#include "animation.hpp"
+#include "model_editor.hpp"
 
 class AnimationEditor final
 {
 public:
-	AnimationEditor(FabiEngine3D& fe3d, EngineGuiManager& gui);
+	AnimationEditor(FabiEngine3D& fe3d, EngineGuiManager& gui, ModelEditor& modelEditor);
 	~AnimationEditor() = default;
 
 	void initializeGUI();
@@ -17,26 +19,30 @@ public:
 	void loadAnimationsFromFile();
 	void saveAnimationsToFile();
 
-	vector<string>& getAnimationNames();
-
 	bool isLoaded();
 
 private:
-	void _updateAnimationManagement();
-	void _updateAnimationCreation();
-	void _updateAnimationChoosing();
-	void _updateAnimationRemoval();
+	void _updateManagementScreen();
+	void _updateCreationScreen();
+	void _updateChoosingScreen();
+	void _updateEditingScreen();
+	void _updateRemovalScreen();
 	void _updateCamera();
 	void _updateMiscellaneous();
+	void _deleteAnimation(const string& ID);
+	bool _isAnimationExisting(const string& ID);
+	vector<string> _getAnimationIDs();
+	shared_ptr<Animation> _getAnimation(const string& ID);
 
 	// Core
 	FabiEngine3D& _fe3d;
 	EngineGuiManager& _gui;
+	ModelEditor& _modelEditor;
 
 	// Strings
-	string _currentAnimationID = "";
 	string _currentProjectName = "";
-	vector<string> _animationNames;
+	string _currentAnimationID = "";
+	vector<shared_ptr<Animation>> _animations;
 
 	// Vector3
 	const Vec3 _defaultCameraPosition = Vec3(0.0f, 5.0f, 5.0f);

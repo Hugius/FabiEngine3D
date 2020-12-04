@@ -4,16 +4,16 @@
 
 void AnimationEditor::update()
 {
-	_updateAnimationManagement();
-	_updateAnimationCreation();
-	_updateAnimationChoosing();
-	//_updateAnimationEditing();
-	_updateAnimationRemoval();
+	_updateManagementScreen();
+	_updateCreationScreen();
+	_updateChoosingScreen();
+	_updateEditingScreen();
+	_updateRemovalScreen();
 	_updateCamera();
 	_updateMiscellaneous();
 }
 
-void AnimationEditor::_updateAnimationManagement()
+void AnimationEditor::_updateManagementScreen()
 {
 	if (_isLoaded)
 	{
@@ -37,17 +37,13 @@ void AnimationEditor::_updateAnimationManagement()
 				{
 					_isChoosingAnimation = true;
 					_isEditingAnimation = true;
-					for (auto& name : _animationNames) { name = name.substr(1); }
-					_gui.getGlobalScreen()->addChoiceForm("animations", "Select animation", Vec2(-0.4f, 0.1f), _animationNames);
-					for (auto& name : _animationNames) { name = "@" + name; }
+					_gui.getGlobalScreen()->addChoiceForm("animations", "Select animation", Vec2(-0.4f, 0.1f), _getAnimationIDs());
 				}
 				else if (screen->getButton("deleteAnimation")->isHovered()) // Delete animation button
 				{
 					_isChoosingAnimation = true;
 					_isRemovingAnimation = true;
-					for (auto& name : _animationNames) { name = name.substr(1); }
-					_gui.getGlobalScreen()->addChoiceForm("animations", "Select animation", Vec2(-0.4f, 0.1f), _animationNames);
-					for (auto& name : _animationNames) { name = "@" + name; }
+					_gui.getGlobalScreen()->addChoiceForm("animations", "Select animation", Vec2(-0.4f, 0.1f), _getAnimationIDs());
 				}
 			}
 
@@ -67,7 +63,7 @@ void AnimationEditor::_updateAnimationManagement()
 	}
 }
 
-void AnimationEditor::_updateAnimationCreation()
+void AnimationEditor::_updateCreationScreen()
 {
 	if (_isLoaded)
 	{
@@ -84,17 +80,17 @@ void AnimationEditor::_updateAnimationCreation()
 					newAnimationName = "@" + newAnimationName;
 
 					// Check if name already exists
-					if (std::find(_animationNames.begin(), _animationNames.end(), newAnimationName) == _animationNames.end())
+					auto animationIDs = _getAnimationIDs();
+					if (std::find(animationIDs.begin(), animationIDs.end(), newAnimationName) == animationIDs.end())
 					{
 						// Go to editor
 						_gui.getViewport("left")->getWindow("main")->setActiveScreen("animationEditorMenuChoice");
 
 						// Select animation
 						_currentAnimationID = newAnimationName;
-						_animationNames.push_back(newAnimationName);
+						_animations.push_back(make_shared<Animation>(newAnimationName));
 
 						// Miscellaneous
-						//_fe3d.billBoardEntity_add(newAnimationName, Vec3(1.0f), _animationPosition, Vec3(0.0f), Vec2(1.0f), false, false);
 						_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedAnimationName")->getEntityID(), "Animation: " +
 							_currentAnimationID.substr(1), 0.025f);
 						_fe3d.textEntity_show(_gui.getGlobalScreen()->getTextfield("selectedAnimationName")->getEntityID());
@@ -115,7 +111,7 @@ void AnimationEditor::_updateAnimationCreation()
 	}
 }
 
-void AnimationEditor::_updateAnimationChoosing()
+void AnimationEditor::_updateChoosingScreen()
 {
 	if (_isLoaded)
 	{
@@ -142,7 +138,6 @@ void AnimationEditor::_updateAnimationChoosing()
 					}
 
 					// Miscellaneous
-					//_fe3d.animationEntity_show(_currentAnimationID);
 					_gui.getGlobalScreen()->removeChoiceForm("animations");
 					_isChoosingAnimation = false;
 				}
@@ -158,7 +153,7 @@ void AnimationEditor::_updateAnimationChoosing()
 	}
 }
 
-void AnimationEditor::_updateAnimationRemoval()
+void AnimationEditor::_updateRemovalScreen()
 {
 	if (_isLoaded)
 	{
@@ -172,8 +167,7 @@ void AnimationEditor::_updateAnimationRemoval()
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("animationEditorMenuMain");
 
 				// Delete animation
-				//_fe3d.animationEntity_delete(_currentAnimationID);
-				_animationNames.erase(std::remove(_animationNames.begin(), _animationNames.end(), _currentAnimationID), _animationNames.end());
+				_deleteAnimation(_currentAnimationID);
 				_currentAnimationID = "";
 
 				// Miscellaneous
@@ -229,7 +223,7 @@ void AnimationEditor::_updateCamera()
 		// Calculate cursor moving speed
 		_cameraAcceleration *= 0.975f;
 		_totalCursorDifference += _cameraAcceleration;
-		_totalCursorDifference.y = std::clamp(_totalCursorDifference.y, 0.0f, 1.0f);
+		_totalCursorDifference.y = std::clamp(_totalCursorDifference.y, -1.0f, 1.0f);
 
 		// Calculate new camera position
 		float x = (_cameraDistance * sin(_totalCursorDifference.x));

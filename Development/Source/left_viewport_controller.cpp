@@ -8,7 +8,7 @@ LeftViewportController::LeftViewportController(FabiEngine3D& fe3d, EngineGuiMana
 	_modelEditor(fe3d, gui),
 	_billboardEditor(fe3d, gui),
 	_sceneEditor(fe3d, gui, _environmentEditor, _modelEditor, _billboardEditor, _audioEditor),
-	_animationEditor(fe3d, gui),
+	_animationEditor(fe3d, gui, _modelEditor),
 	_scriptEditor(fe3d, gui, _sceneEditor),
 	_audioEditor(fe3d, gui),
 	_settingsEditor(fe3d, gui)

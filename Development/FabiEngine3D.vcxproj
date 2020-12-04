@@ -142,7 +142,9 @@
     <ClInclude Include="Source\aabb_entity_manager.hpp" />
     <ClInclude Include="Source\aabb_entity_renderer.hpp" />
     <ClInclude Include="Source\aabb_parent_type.hpp" />
+    <ClInclude Include="Source\animation.hpp" />
     <ClInclude Include="Source\animation_editor.hpp" />
+    <ClInclude Include="Source\animation_frame.hpp" />
     <ClInclude Include="Source\audio_chunk.hpp" />
     <ClInclude Include="Source\audio_editor.hpp" />
     <ClInclude Include="Source\audio_loader.hpp" />
@@ -258,6 +260,7 @@
     <ClCompile Include="Source\animation_editor_misc.cpp" />
     <ClCompile Include="Source\animation_editor_persistence.cpp" />
     <ClCompile Include="Source\animation_editor_updates.cpp" />
+    <ClCompile Include="Source\animation_editor_updates_editing.cpp" />
     <ClCompile Include="Source\audio_chunk.cpp" />
     <ClCompile Include="Source\audio_editor_core.cpp" />
     <ClCompile Include="Source\audio_editor_misc.cpp" />

@@ -357,7 +357,7 @@
     <ClCompile Include="Source\script_interpreter_core.cpp" />
     <ClCompile Include="Source\script_interpreter_execution.cpp" />
     <ClCompile Include="Source\script_interpreter_func_camera.cpp" />
-    <ClCompile Include="Source\script_interpreter_func_collision.cpp" />
+    <ClCompile Include="Source\script_interpreter_func_physics.cpp" />
     <ClCompile Include="Source\script_interpreter_func_core.cpp" />
     <ClCompile Include="Source\script_interpreter_condition.cpp" />
     <ClCompile Include="Source\script_interpreter_func_entity_game.cpp" />

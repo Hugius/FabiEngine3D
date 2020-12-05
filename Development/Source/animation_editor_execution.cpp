@@ -14,7 +14,7 @@ void AnimationEditor::startAnimation(const string& animationID, const string& mo
 			if (_fe3d.gameEntity_isExisting(modelID))
 			{
 				auto animation = _getAnimation(animationID);
-				animation->previewModelID = modelID;
+				animation->animatedModelID = modelID;
 				_playingAnimations.insert(std::make_pair(composedID, *animation));
 			}
 			else
@@ -86,17 +86,17 @@ void AnimationEditor::_updateAnimationExecution()
 				if (animation.totalTransformation.x != frame.targetTransformation.x)
 				{
 					animation.totalTransformation.x += frame.speed;
-					_fe3d.gameEntity_rotate(animation.previewModelID, Vec3(frame.speed, 0.0f, 0.0f));
+					_fe3d.gameEntity_rotate(animation.animatedModelID, Vec3(frame.speed, 0.0f, 0.0f));
 				}
 				if (animation.totalTransformation.y != frame.targetTransformation.y)
 				{
 					animation.totalTransformation.y += frame.speed;
-					_fe3d.gameEntity_rotate(animation.previewModelID, Vec3(0.0f, frame.speed, 0.0f));
+					_fe3d.gameEntity_rotate(animation.animatedModelID, Vec3(0.0f, frame.speed, 0.0f));
 				}
 				if (animation.totalTransformation.z != frame.targetTransformation.z)
 				{
 					animation.totalTransformation.z += frame.speed;
-					_fe3d.gameEntity_rotate(animation.previewModelID, Vec3(0.0f, 0.0f, frame.speed));
+					_fe3d.gameEntity_rotate(animation.animatedModelID, Vec3(0.0f, 0.0f, frame.speed));
 				}
 			}
 		}

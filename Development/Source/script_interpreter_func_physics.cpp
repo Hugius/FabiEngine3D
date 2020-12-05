@@ -3,7 +3,7 @@
 bool ScriptInterpreter::_executeFe3dCollisionFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine type of function
-	if (functionName == "fe3d:raycast_game_entity") // Raycasting into a single gameEntity
+	if (functionName == "fe3d:raycast_model") // Raycasting into a single gameEntity
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
 
@@ -14,7 +14,7 @@ bool ScriptInterpreter::_executeFe3dCollisionFunction(const string& functionName
 			return true;
 		}
 	}
-	else if (functionName == "fe3d:raycast_game_entity_group") // Raycasting into multiple gameEntities
+	else if (functionName == "fe3d:raycast_model_group") // Raycasting into multiple gameEntities
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
 
@@ -35,7 +35,7 @@ bool ScriptInterpreter::_executeFe3dCollisionFunction(const string& functionName
 			return true;
 		}
 	}
-	else if (functionName == "fe3d:raycast_game_entities") // Raycasting into all gameEntities
+	else if (functionName == "fe3d:raycast_models") // Raycasting into all gameEntities
 	{
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{

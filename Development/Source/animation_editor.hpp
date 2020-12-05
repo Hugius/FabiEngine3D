@@ -18,7 +18,6 @@ public:
 	void setCurrentProjectName(const string& projectName);
 	void loadAnimationsFromFile();
 	void saveAnimationsToFile();
-	void updateAnimationExecution();
 	void startAnimation(const string& animationID, const string& modelID);
 	bool isAnimationPlaying(const string& animationID, const string& modelID);
 	void stopAnimation(const string& animationID, const string& modelID);

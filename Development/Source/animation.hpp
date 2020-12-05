@@ -16,6 +16,7 @@ public:
 	const string ID;
 
 	string previewModelID = "";
+	string animatedModelID = "";
 
 	unsigned int frameIndex = 0;
 

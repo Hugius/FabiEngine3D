@@ -3,7 +3,43 @@
 bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine type of function
-	if (functionName == "fe3d:entity_game_position_set") // Set gameEntity position
+	if (functionName == "fe3d:model_animation_start") // Start gameEntity animation
+	{
+		auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
+
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		{
+			_animationEditor.startAnimation(arguments[0].getString(), arguments[1].getString());
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+
+			return true;
+		}
+	}
+	else if (functionName == "fe3d:model_animation_isplaying") // Check if gameEntity animation is playing
+	{
+		auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
+
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		{
+			_animationEditor.isAnimationPlaying(arguments[0].getString(), arguments[1].getString());
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN));
+
+			return true;
+		}
+	}
+	else if (functionName == "fe3d:model_animation_stop") // Stop gameEntity animation
+	{
+		auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
+
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		{
+			_animationEditor.stopAnimation(arguments[0].getString(), arguments[1].getString());
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+
+			return true;
+		}
+	}
+	else if (functionName == "fe3d:model_position_set") // Set gameEntity position
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::VEC3 };
 
@@ -18,7 +54,7 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 			return true;
 		}
 	}
-	else if (functionName == "fe3d:entity_game_position_get") // Get gameEntity position
+	else if (functionName == "fe3d:model_position_get") // Get gameEntity position
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -33,7 +69,7 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 			return true;
 		}
 	}
-	else if (functionName == "fe3d:entity_game_delete") // Delete gameEntity
+	else if (functionName == "fe3d:model_delete") // Delete gameEntity
 	{
 		auto types = { ScriptValueType::STRING };
 

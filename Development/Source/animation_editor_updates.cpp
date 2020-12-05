@@ -15,11 +15,6 @@ void AnimationEditor::update()
 	_updateMiscellaneous();
 }
 
-void AnimationEditor::updateAnimationExecution()
-{
-	_updateAnimationExecution();
-}
-
 void AnimationEditor::_updateManagementScreen()
 {
 	if (_isLoaded)

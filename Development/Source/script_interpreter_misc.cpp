@@ -266,6 +266,28 @@ bool ScriptInterpreter::_validateScopeChange(unsigned int countedSpaces, const s
 	return true;
 }
 
+bool ScriptInterpreter::_validateKeyInputString(const string& inputString)
+{
+	if (_keyInputStringMap.find(inputString) == _keyInputStringMap.end())
+	{
+		_throwScriptError("invalid keyboard key type!");
+		return false;
+	}
+
+	return true;
+}
+
+bool ScriptInterpreter::_validateMouseInputString(const string& inputString)
+{
+	if (_mouseInputStringMap.find(inputString) == _mouseInputStringMap.end())
+	{
+		_throwScriptError("invalid mouse button type!");
+		return false;
+	}
+
+	return true;
+}
+
 void ScriptInterpreter::_throwScriptError(const string& message)
 {
 	_fe3d.logger_throwWarning("ERROR @ script \"" + _currentScriptStack.back() + "\" @ line " + to_string(_currentLineIndexStack.back() + 1) + ": " + message);

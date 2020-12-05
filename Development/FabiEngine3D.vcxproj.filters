@@ -523,9 +523,6 @@
     <ClCompile Include="Source\script_interpreter_func_camera.cpp">
       <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
     </ClCompile>
-    <ClCompile Include="Source\script_interpreter_func_collision.cpp">
-      <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
-    </ClCompile>
     <ClCompile Include="Source\script_interpreter_func_core.cpp">
       <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
     </ClCompile>
@@ -576,6 +573,9 @@
     </ClCompile>
     <ClCompile Include="Source\animation_editor_execution.cpp">
       <Filter>src\Editor System\Animation Editor\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_interpreter_func_physics.cpp">
+      <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

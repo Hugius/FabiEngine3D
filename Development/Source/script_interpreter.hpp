@@ -1,16 +1,17 @@
 #pragma once
 
 #include "script.hpp"
-#include "scene_editor.hpp"
 #include "script_type.hpp"
 #include "script_value.hpp"
 #include "script_variable.hpp"
 #include "script_scope_changer.hpp"
+#include "scene_editor.hpp"
+#include "animation_editor.hpp"
 
 class ScriptInterpreter
 {
 public:
-	ScriptInterpreter(FabiEngine3D& fe3d, Script& script, SceneEditor& sceneEditor);
+	ScriptInterpreter(FabiEngine3D& fe3d, Script& script, SceneEditor& sceneEditor, AnimationEditor& animationEditor);
 
 	void load();
 	void executeInitialization();
@@ -62,6 +63,8 @@ private:
 	// Miscellaneous functions
 	unsigned int _countFrontSpaces(const string& scriptLineText);
 	bool _validateScopeChange(unsigned int countedSpaces, const string& scriptLineText);
+	bool _validateKeyInputString(const string& inputString);
+	bool _validateMouseInputString(const string& inputString);
 	void _throwScriptError(const string& message);
 	void _checkEngineWarnings();
 
@@ -80,6 +83,7 @@ private:
 	FabiEngine3D& _fe3d;
 	Script& _script;
 	SceneEditor& _sceneEditor;
+	AnimationEditor& _animationEditor;
 
 	// Stacks
 	vector<vector<ScriptVariable>> _localVariablesStack;

@@ -4,6 +4,7 @@
 
 void AnimationEditor::update()
 {
+	_updateAnimationExecution();
 	_updateManagementScreen();
 	_updateAnimationCreation();
 	_updateAnimationChoice();
@@ -12,6 +13,11 @@ void AnimationEditor::update()
 	_updateAnimationRemoval();
 	_updateCamera();
 	_updateMiscellaneous();
+}
+
+void AnimationEditor::updateAnimationExecution()
+{
+	_updateAnimationExecution();
 }
 
 void AnimationEditor::_updateManagementScreen()
@@ -75,40 +81,30 @@ void AnimationEditor::_updateAnimationCreation()
 			// Check if user filled in a new name
 			if (_gui.getGlobalScreen()->checkValueForm("newAnimationName", newAnimationName, { _currentAnimationID }))
 			{
-				if (newAnimationName[0] != '@')
+				// Check if name already exists
+				auto animationIDs = _getAnimationIDs();
+				if (std::find(animationIDs.begin(), animationIDs.end(), newAnimationName) == animationIDs.end())
 				{
-					// Add @ sign to new name
-					newAnimationName = "@" + newAnimationName;
+					// Go to editor
+					_gui.getViewport("left")->getWindow("main")->setActiveScreen("animationEditorMenuChoice");
 
-					// Check if name already exists
-					auto animationIDs = _getAnimationIDs();
-					if (std::find(animationIDs.begin(), animationIDs.end(), newAnimationName) == animationIDs.end())
-					{
-						// Go to editor
-						_gui.getViewport("left")->getWindow("main")->setActiveScreen("animationEditorMenuChoice");
+					// Select animation
+					_currentAnimationID = newAnimationName;
 
-						// Select animation
-						_currentAnimationID = newAnimationName;
+					// Create animation
+					_animations.push_back(make_shared<Animation>(_currentAnimationID));
 
-						// Create animation
-						_animations.push_back(make_shared<Animation>(newAnimationName));
-
-						// Miscellaneous
-						auto textID = _gui.getGlobalScreen()->getTextfield("selectedAnimationName")->getEntityID();
-						_fe3d.textEntity_setTextContent(textID, "Animation: " + _currentAnimationID.substr(1), 0.025f);
-						_fe3d.textEntity_show(_gui.getGlobalScreen()->getTextfield("selectedAnimationName")->getEntityID());
-						_fe3d.textEntity_show(_gui.getGlobalScreen()->getTextfield("selectedAnimationFrame")->getEntityID());
-						_isCreatingAnimation = false;
-						_isEditingAnimation = true;
-					}
-					else // Name already exists
-					{
-						_fe3d.logger_throwWarning("Animation name \"" + newAnimationName.substr(1) + "\" already exists!");
-					}
+					// Miscellaneous
+					auto textID = _gui.getGlobalScreen()->getTextfield("selectedAnimationName")->getEntityID();
+					_fe3d.textEntity_setTextContent(textID, "Animation: " + _currentAnimationID.substr(1), 0.025f);
+					_fe3d.textEntity_show(_gui.getGlobalScreen()->getTextfield("selectedAnimationName")->getEntityID());
+					_fe3d.textEntity_show(_gui.getGlobalScreen()->getTextfield("selectedAnimationFrame")->getEntityID());
+					_isCreatingAnimation = false;
+					_isEditingAnimation = true;
 				}
-				else
+				else // Name already exists
 				{
-					_fe3d.logger_throwWarning("New animation name cannot begin with '@'");
+					_fe3d.logger_throwWarning("Animation name \"" + newAnimationName.substr(1) + "\" already exists!");
 				}
 			}
 		}
@@ -130,16 +126,24 @@ void AnimationEditor::_updateAnimationChoice()
 				if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT)) // LMB pressed
 				{
 					// Select animation
-					_currentAnimationID = "@" + selectedButtonID;
+					_currentAnimationID = selectedButtonID;
 
 					// Go to editor
 					if (_isEditingAnimation)
 					{
 						_gui.getViewport("left")->getWindow("main")->setActiveScreen("animationEditorMenuChoice");
+
+						// Show text
 						auto textID = _gui.getGlobalScreen()->getTextfield("selectedAnimationName")->getEntityID();
 						_fe3d.textEntity_setTextContent(textID, "Animation: " + _currentAnimationID.substr(1), 0.025f);
 						_fe3d.textEntity_show(_gui.getGlobalScreen()->getTextfield("selectedAnimationName")->getEntityID());
 						_fe3d.textEntity_show(_gui.getGlobalScreen()->getTextfield("selectedAnimationFrame")->getEntityID());
+
+						// Show preview model
+						if (!_getAnimation(_currentAnimationID)->previewModelID.empty())
+						{
+							_fe3d.gameEntity_show(_getAnimation(_currentAnimationID)->previewModelID);
+						}
 					}
 
 					// Miscellaneous

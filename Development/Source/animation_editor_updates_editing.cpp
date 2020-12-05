@@ -9,6 +9,9 @@ void AnimationEditor::_updateEditingScreen()
 		// GUI management
 		if (screen->getID() == "animationEditorMenuChoice")
 		{
+			// Temporary values
+			auto currentAnimation = _getAnimation(_currentAnimationID);
+
 			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
 			{
 				if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused())) // Back button
@@ -16,7 +19,14 @@ void AnimationEditor::_updateEditingScreen()
 					_isEditingAnimation = false;
 					_currentAnimationID = "";
 					_fe3d.textEntity_hide(_gui.getGlobalScreen()->getTextfield("selectedAnimationName")->getEntityID());
+					_fe3d.textEntity_hide(_gui.getGlobalScreen()->getTextfield("selectedAnimationFrame")->getEntityID());
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("animationEditorMenuMain");
+					
+					// Hide preview model
+					if (!currentAnimation->previewModelID.empty())
+					{
+						_fe3d.gameEntity_hide(currentAnimation->previewModelID);
+					}
 				}
 				else if (screen->getButton("preview")->isHovered())
 				{
@@ -26,16 +36,19 @@ void AnimationEditor::_updateEditingScreen()
 				}
 				else if (screen->getButton("play")->isHovered())
 				{
-
+					startAnimation(_currentAnimationID, currentAnimation->previewModelID);
+					_fe3d.gameEntity_setPosition(currentAnimation->previewModelID, currentAnimation->initialTranslation);
+					_fe3d.gameEntity_setRotation(currentAnimation->previewModelID, currentAnimation->initialRotation);
+					_fe3d.gameEntity_setSize(currentAnimation->previewModelID, currentAnimation->initialScaling);
 				}
 				else if (screen->getButton("stop")->isHovered())
 				{
-
+					stopAnimation(_currentAnimationID, currentAnimation->previewModelID);
 				}
 				else if (screen->getButton("addFrame")->isHovered())
 				{
 					auto lastFrameCopy = _getAnimation(_currentAnimationID)->frames.back();
-					_getAnimation(_currentAnimationID)->frames.push_back(lastFrameCopy);
+					currentAnimation->frames.push_back(lastFrameCopy);
 					_currentFrameIndex++;
 				}
 				else if (screen->getButton("editFrame")->isHovered())
@@ -44,10 +57,10 @@ void AnimationEditor::_updateEditingScreen()
 				}
 				else if (screen->getButton("deleteFrame")->isHovered())
 				{
-					_getAnimation(_currentAnimationID)->frames.erase(_getAnimation(_currentAnimationID)->frames.begin() + _currentFrameIndex);
+					currentAnimation->frames.erase(currentAnimation->frames.begin() + _currentFrameIndex);
 
 					// Correct index
-					if (_currentFrameIndex == _getAnimation(_currentAnimationID)->frames.size())
+					if (_currentFrameIndex == currentAnimation->frames.size())
 					{
 						_currentFrameIndex--;
 					}
@@ -60,19 +73,39 @@ void AnimationEditor::_updateEditingScreen()
 				{
 					_currentFrameIndex++;
 				}
+				else if (screen->getButton("type")->isHovered())
+				{
+					if (currentAnimation->transformationType == TransformationType::TRANSLATION)
+					{
+						currentAnimation->transformationType = TransformationType::ROTATION;
+					}
+					else if (currentAnimation->transformationType == TransformationType::ROTATION)
+					{
+						currentAnimation->transformationType = TransformationType::SCALING;
+					}
+					else if (currentAnimation->transformationType == TransformationType::SCALING)
+					{
+						currentAnimation->transformationType = TransformationType::TRANSLATION;
+					}
+				}
 			}
+
+			// Showing transformation type
+			string newContent = currentAnimation->transformationType == TransformationType::TRANSLATION ? "Type: translation" : 
+				currentAnimation->transformationType == TransformationType::ROTATION ? "Type: rotation" : "Type: scaling";
+			_fe3d.textEntity_setTextContent(screen->getButton("type")->getTextfield()->getEntityID(), newContent);
 
 			// Showing frame index
 			auto textID = _gui.getGlobalScreen()->getTextfield("selectedAnimationFrame")->getEntityID();
 			_fe3d.textEntity_setTextContent(textID, "Frame: " + to_string(_currentFrameIndex + 1), 0.025f);
 
 			// Button hoverabilities
-			screen->getButton("play")->setHoverable(false);
-			screen->getButton("stop")->setHoverable(false);
-			screen->getButton("addFrame")->setHoverable(_getAnimation(_currentAnimationID)->frames.size() < _maxFrameCount);
-			screen->getButton("deleteFrame")->setHoverable(_getAnimation(_currentAnimationID)->frames.size() > 1);
+			screen->getButton("play")->setHoverable(!isAnimationPlaying(_currentAnimationID, currentAnimation->previewModelID));
+			screen->getButton("stop")->setHoverable(isAnimationPlaying(_currentAnimationID, currentAnimation->previewModelID));
+			screen->getButton("addFrame")->setHoverable(currentAnimation->frames.size() < _maxFrameCount);
+			screen->getButton("deleteFrame")->setHoverable(currentAnimation->frames.size() > 1);
 			screen->getButton("prev")->setHoverable(_currentFrameIndex > 0);
-			screen->getButton("next")->setHoverable(_currentFrameIndex < (_getAnimation(_currentAnimationID)->frames.size() - 1));
+			screen->getButton("next")->setHoverable(_currentFrameIndex < (currentAnimation->frames.size() - 1));
 
 			// Get selected button ID
 			string selectedButtonID = _gui.getGlobalScreen()->getSelectedChoiceFormButtonID("models");
@@ -84,20 +117,23 @@ void AnimationEditor::_updateEditingScreen()
 				if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 				{
 					// Hide old model
-					if (!_getAnimation(_currentAnimationID)->modelID.empty())
+					if (!currentAnimation->previewModelID.empty())
 					{
-						_fe3d.gameEntity_hide(_getAnimation(_currentAnimationID)->modelID);
+						_fe3d.gameEntity_hide(currentAnimation->previewModelID);
 					}
 
 					// Show new model
-					_getAnimation(_currentAnimationID)->modelID = "@" + selectedButtonID;
-					_fe3d.gameEntity_show("@" + selectedButtonID);
+					currentAnimation->previewModelID = "@" + selectedButtonID;
+					_fe3d.gameEntity_show(currentAnimation->previewModelID);
+					currentAnimation->initialTranslation = _fe3d.gameEntity_getPosition(currentAnimation->previewModelID);
+					currentAnimation->initialRotation = _fe3d.gameEntity_getRotation(currentAnimation->previewModelID);
+					currentAnimation->initialScaling = _fe3d.gameEntity_getSize(currentAnimation->previewModelID);
 					_gui.getGlobalScreen()->removeChoiceForm("models");
 				}
-				else if (_gui.getGlobalScreen()->isChoiceFormCancelled("models")) // Cancelled choosing
-				{
-					_gui.getGlobalScreen()->removeChoiceForm("models");
-				}
+			}
+			else if (_gui.getGlobalScreen()->isChoiceFormCancelled("models")) // Cancelled choosing
+			{
+				_gui.getGlobalScreen()->removeChoiceForm("models");
 			}
 		}
 	}
@@ -112,43 +148,39 @@ void AnimationEditor::_updateFrameScreen()
 		// GUI management
 		if (screen->getID() == "animationEditorMenuFrame")
 		{
+			// Temporary values
+			auto& transformation = _getAnimation(_currentAnimationID)->frames[_currentFrameIndex].targetTransformation;
+			auto& speed = _getAnimation(_currentAnimationID)->frames[_currentFrameIndex].speed;
+
 			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
 			{
 				if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused())) // Back button
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("animationEditorMenuChoice");
 				}
-				else if (screen->getButton("translation")->isHovered())
+				else if (screen->getButton("xTransformation")->isHovered())
 				{
-					auto translation = _getAnimation(_currentAnimationID)->frames[_currentFrameIndex].translation;
-					_gui.getGlobalScreen()->addValueForm("translationX", "X", translation.x, Vec2(-0.25f, 0.0f), Vec2(0.2f, 0.1f));
-					_gui.getGlobalScreen()->addValueForm("translationY", "Y", translation.y, Vec2(0.0f, 0.0f), Vec2(0.2f, 0.1f));
-					_gui.getGlobalScreen()->addValueForm("translationZ", "Z", translation.z, Vec2(0.25f, 0.0f), Vec2(0.2f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("xTransformation", "X", transformation.x, Vec2(0.0f, 0.0f), Vec2(0.2f, 0.1f));
 				}
-				else if (screen->getButton("rotation")->isHovered())
+				else if (screen->getButton("yTransformation")->isHovered())
 				{
-					auto rotation = _getAnimation(_currentAnimationID)->frames[_currentFrameIndex].rotation;
-					_gui.getGlobalScreen()->addValueForm("rotationX", "X", rotation.x, Vec2(-0.25f, 0.0f), Vec2(0.2f, 0.1f));
-					_gui.getGlobalScreen()->addValueForm("rotationY", "Y", rotation.y, Vec2(0.0f, 0.0f), Vec2(0.2f, 0.1f));
-					_gui.getGlobalScreen()->addValueForm("rotationZ", "Z", rotation.z, Vec2(0.25f, 0.0f), Vec2(0.2f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("yTransformation", "Y", transformation.y, Vec2(0.0f, 0.0f), Vec2(0.2f, 0.1f));
 				}
-				else if (screen->getButton("scaling")->isHovered())
+				else if (screen->getButton("zTransformation")->isHovered())
 				{
-					auto scaling = _getAnimation(_currentAnimationID)->frames[_currentFrameIndex].scaling;
-					_gui.getGlobalScreen()->addValueForm("scalingX", "X", scaling.x, Vec2(-0.25f, 0.0f), Vec2(0.2f, 0.1f));
-					_gui.getGlobalScreen()->addValueForm("scalingY", "Y", scaling.y, Vec2(0.0f, 0.0f), Vec2(0.2f, 0.1f));
-					_gui.getGlobalScreen()->addValueForm("scalingZ", "Z", scaling.z, Vec2(0.25f, 0.0f), Vec2(0.2f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("zTransformation", "Z", transformation.z, Vec2(0.0f, 0.0f), Vec2(0.2f, 0.1f));
 				}
 				else if (screen->getButton("speed")->isHovered())
 				{
-					auto speed = _getAnimation(_currentAnimationID)->frames[_currentFrameIndex].speed;
-					_gui.getGlobalScreen()->addValueForm("translationSpeed", "X", speed.x, Vec2(-0.25f, 0.0f), Vec2(0.2f, 0.1f));
-					_gui.getGlobalScreen()->addValueForm("rotationSpeed", "Y", speed.y, Vec2(0.0f, 0.0f), Vec2(0.2f, 0.1f));
-					_gui.getGlobalScreen()->addValueForm("scalingSpeed", "Z", speed.z, Vec2(0.25f, 0.0f), Vec2(0.2f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("transformationSpeed", "Transformation speed", speed, Vec2(0.0f, 0.0f), Vec2(0.2f, 0.1f));
 				}
 			}
 
-
+			// Update changes
+			_gui.getGlobalScreen()->checkValueForm("xTransformation", transformation.x, { });
+			_gui.getGlobalScreen()->checkValueForm("yTransformation", transformation.y, { });
+			_gui.getGlobalScreen()->checkValueForm("zTransformation", transformation.z, { });
+			_gui.getGlobalScreen()->checkValueForm("transformationSpeed", speed, { });
 		}
 	}
 }

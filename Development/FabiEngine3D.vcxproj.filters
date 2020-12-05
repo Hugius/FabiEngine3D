@@ -574,6 +574,9 @@
     <ClCompile Include="Source\animation_editor_updates_editing.cpp">
       <Filter>src\Editor System\Animation Editor\Updates</Filter>
     </ClCompile>
+    <ClCompile Include="Source\animation_editor_execution.cpp">
+      <Filter>src\Editor System\Animation Editor\Miscellaneous</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\obj_loader.hpp">
@@ -920,6 +923,9 @@
     </ClInclude>
     <ClInclude Include="Source\animation_frame.hpp">
       <Filter>src\Editor System\Animation Editor\Miscellaneous</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\animation_type.hpp">
+      <Filter>src\Miscellaneous\Enums</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

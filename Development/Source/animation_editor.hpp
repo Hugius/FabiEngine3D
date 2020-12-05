@@ -18,10 +18,15 @@ public:
 	void setCurrentProjectName(const string& projectName);
 	void loadAnimationsFromFile();
 	void saveAnimationsToFile();
+	void updateAnimationExecution();
+	void startAnimation(const string& animationID, const string& modelID);
+	bool isAnimationPlaying(const string& animationID, const string& modelID);
+	void stopAnimation(const string& animationID, const string& modelID);
 
 	bool isLoaded();
 
 private:
+	void _updateAnimationExecution();
 	void _updateManagementScreen();
 	void _updateAnimationCreation();
 	void _updateAnimationChoice();
@@ -39,6 +44,9 @@ private:
 	FabiEngine3D& _fe3d;
 	EngineGuiManager& _gui;
 	ModelEditor& _modelEditor;
+
+	// Containers
+	map<string, Animation> _playingAnimations;
 
 	// Strings
 	string _currentProjectName = "";

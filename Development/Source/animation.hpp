@@ -2,23 +2,29 @@
 
 #include "fabi_engine_3d.hpp"
 #include "animation_frame.hpp"
+#include "transformation_type.hpp"
 
 class Animation final
 {
 public:
 	Animation(const string& ID) : ID(ID)
 	{
-		modelID = "";
+		previewModelID = "";
 		frames.push_back(AnimationFrame());
 	}
 
 	const string ID;
 
-	string modelID;
+	string previewModelID = "";
+
+	unsigned int frameIndex = 0;
 
 	vector<AnimationFrame> frames;
 
-	Vec3 totalTranslation = Vec3(0.0f);
-	Vec3 totalRotation = Vec3(0.0f);
-	Vec3 totalScaling = Vec3(0.0f);
+	Vec3 initialTranslation = Vec3(0.0f);
+	Vec3 initialRotation = Vec3(0.0f);
+	Vec3 initialScaling = Vec3(0.0f);
+	Vec3 totalTransformation = Vec3(0.0f);
+
+	TransformationType transformationType = TransformationType::TRANSLATION;
 };

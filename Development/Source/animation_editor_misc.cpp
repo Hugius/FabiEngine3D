@@ -26,6 +26,42 @@ void AnimationEditor::_updateMiscellaneous()
 		{
 			_fe3d.misc_disableDebugRendering();
 		}
+
+		// Set current frame's transformation of editor
+		if (!_currentAnimationID.empty())
+		{
+			auto currentAnimation = _getAnimation(_currentAnimationID);
+
+			// Check if animation is not currently playing
+			if (!isAnimationPlaying(_currentAnimationID, currentAnimation->previewModelID))
+			{
+				// Check if animation has a preview model
+				if (!currentAnimation->previewModelID.empty())
+				{
+					const auto& frame = currentAnimation->frames[_currentFrameIndex];
+
+					// Determine type of transformation
+					if (currentAnimation->transformationType == TransformationType::TRANSLATION)
+					{
+						_fe3d.gameEntity_setPosition(currentAnimation->previewModelID, currentAnimation->initialTranslation + frame.targetTransformation);
+						_fe3d.gameEntity_setRotation(currentAnimation->previewModelID, currentAnimation->initialRotation);
+						_fe3d.gameEntity_setSize(currentAnimation->previewModelID, currentAnimation->initialScaling);
+					}
+					else if (currentAnimation->transformationType == TransformationType::ROTATION)
+					{
+						_fe3d.gameEntity_setPosition(currentAnimation->previewModelID, currentAnimation->initialTranslation);
+						_fe3d.gameEntity_setRotation(currentAnimation->previewModelID, currentAnimation->initialRotation + frame.targetTransformation);
+						_fe3d.gameEntity_setSize(currentAnimation->previewModelID, currentAnimation->initialScaling);
+					}
+					else if (currentAnimation->transformationType == TransformationType::SCALING)
+					{
+						_fe3d.gameEntity_setPosition(currentAnimation->previewModelID, currentAnimation->initialTranslation);
+						_fe3d.gameEntity_setRotation(currentAnimation->previewModelID, currentAnimation->initialRotation);
+						_fe3d.gameEntity_setSize(currentAnimation->previewModelID, currentAnimation->initialScaling + frame.targetTransformation);
+					}
+				}
+			}
+		}
 	}
 }
 

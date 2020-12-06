@@ -243,7 +243,7 @@ vector<string>& ModelEditor::getTotalObjFileNames()
 
 vector<string>& ModelEditor::getModelNames()
 {
-	return _modelNames;
+	return _modelIDs;
 }
 
 bool ModelEditor::_addModel(const string& modelName, string objName, string diffuseMapName, string lightMapName, string reflectionMapName, string normalMapName,
@@ -252,10 +252,10 @@ bool ModelEditor::_addModel(const string& modelName, string objName, string diff
 	vector<string> aabbNames, vector<Vec3> aabbPositions, vector<Vec3> aabbSizes)
 {
 	// If model name not existing yet
-	if (std::find(_modelNames.begin(), _modelNames.end(), modelName) == _modelNames.end())
+	if (std::find(_modelIDs.begin(), _modelIDs.end(), modelName) == _modelIDs.end())
 	{
 		// Add model name
-		_modelNames.push_back(modelName);
+		_modelIDs.push_back(modelName);
 
 		// Add 3D model
 		if (objName != "")

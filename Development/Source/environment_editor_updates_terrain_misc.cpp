@@ -26,31 +26,40 @@ void EnvironmentEditor::_updateTerrainCreation()
 			// Create new terrain
 			if (_gui.getGlobalScreen()->checkValueForm("newTerrainName", newTerrainName, {}))
 			{
-				// Starting with at-sign not allowed
+				// Check if name starts with @ sign
 				if (newTerrainName[0] != '@')
 				{
-					newTerrainName = "@" + newTerrainName;
-
-					// If terrain name not existing yet
-					if (std::find(_terrainNames.begin(), _terrainNames.end(), newTerrainName) == _terrainNames.end())
+					// Check if name contains spaces
+					if (newTerrainName.find(' ') == string::npos)
 					{
-						_currentTerrainID = newTerrainName;
-						_terrainNames.push_back(_currentTerrainID);
-						_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuChoice");
-						_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedTerrainName")->getEntityID(),
-							"Terrain: " + _currentTerrainID.substr(1), 0.025f);
-						_fe3d.textEntity_show(_gui.getGlobalScreen()->getTextfield("selectedTerrainName")->getEntityID());
-						_terrainCreationEnabled = false;
-						_terrainEditingEnabled = true;
+						// Add @ sign to new name
+						newTerrainName = "@" + newTerrainName;
+
+						// If terrain name not existing yet
+						if (std::find(_terrainIDs.begin(), _terrainIDs.end(), newTerrainName) == _terrainIDs.end())
+						{
+							_currentTerrainID = newTerrainName;
+							_terrainIDs.push_back(_currentTerrainID);
+							_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuChoice");
+							_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedTerrainName")->getEntityID(),
+								"Terrain: " + _currentTerrainID.substr(1), 0.025f);
+							_fe3d.textEntity_show(_gui.getGlobalScreen()->getTextfield("selectedTerrainName")->getEntityID());
+							_terrainCreationEnabled = false;
+							_terrainEditingEnabled = true;
+						}
+						else
+						{
+							_fe3d.logger_throwWarning("Terrain name \"" + newTerrainName.substr(1) + "\" already exists!");
+						}
 					}
 					else
 					{
-						_fe3d.logger_throwWarning("Terrain name \"" + newTerrainName.substr(1) + "\" already exists!");
+						_fe3d.logger_throwWarning("New terrain name cannot contain any spaces!");
 					}
 				}
 				else
 				{
-					_fe3d.logger_throwWarning("New terrain name cannot begin with '@'");
+					_fe3d.logger_throwWarning("New terrain name cannot begin with '@'!");
 				}
 			}
 		}
@@ -148,7 +157,7 @@ void EnvironmentEditor::_updateTerrainRemoval()
 				_fe3d.terrainEntity_delete(_currentTerrainID);
 
 				// Delete from name record
-				_terrainNames.erase(std::remove(_terrainNames.begin(), _terrainNames.end(), _currentTerrainID), _terrainNames.end());
+				_terrainIDs.erase(std::remove(_terrainIDs.begin(), _terrainIDs.end(), _currentTerrainID), _terrainIDs.end());
 				_terrainRemovalEnabled = false;
 				_currentTerrainID = "";
 			}

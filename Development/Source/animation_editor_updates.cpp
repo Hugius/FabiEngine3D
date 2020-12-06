@@ -76,30 +76,40 @@ void AnimationEditor::_updateAnimationCreation()
 			// Check if user filled in a new name
 			if (_gui.getGlobalScreen()->checkValueForm("newAnimationName", newAnimationName, { _currentAnimationID }))
 			{
-				// Check if name already exists
-				auto animationIDs = _getAnimationIDs();
-				if (std::find(animationIDs.begin(), animationIDs.end(), newAnimationName) == animationIDs.end())
+				// Check if name contains spaces
+				if (newAnimationName.find(' ') == string::npos)
 				{
-					// Go to editor
-					_gui.getViewport("left")->getWindow("main")->setActiveScreen("animationEditorMenuChoice");
+					// Check if name already exists
+					auto animationIDs = _getAnimationIDs();
+					if (std::find(animationIDs.begin(), animationIDs.end(), newAnimationName) == animationIDs.end())
+					{
 
-					// Select animation
-					_currentAnimationID = newAnimationName;
+						// Go to editor
+						_gui.getViewport("left")->getWindow("main")->setActiveScreen("animationEditorMenuChoice");
 
-					// Create animation
-					_animations.push_back(make_shared<Animation>(_currentAnimationID));
+						// Select animation
+						_currentAnimationID = newAnimationName;
 
-					// Miscellaneous
-					auto textID = _gui.getGlobalScreen()->getTextfield("selectedAnimationName")->getEntityID();
-					_fe3d.textEntity_setTextContent(textID, "Animation: " + _currentAnimationID.substr(1), 0.025f);
-					_fe3d.textEntity_show(_gui.getGlobalScreen()->getTextfield("selectedAnimationName")->getEntityID());
-					_fe3d.textEntity_show(_gui.getGlobalScreen()->getTextfield("selectedAnimationFrame")->getEntityID());
-					_isCreatingAnimation = false;
-					_isEditingAnimation = true;
+						// Create animation
+						_animations.push_back(make_shared<Animation>(_currentAnimationID));
+
+						// Miscellaneous
+						auto textID = _gui.getGlobalScreen()->getTextfield("selectedAnimationName")->getEntityID();
+						_fe3d.textEntity_setTextContent(textID, "Animation: " + _currentAnimationID.substr(1), 0.025f);
+						_fe3d.textEntity_show(_gui.getGlobalScreen()->getTextfield("selectedAnimationName")->getEntityID());
+						_fe3d.textEntity_show(_gui.getGlobalScreen()->getTextfield("selectedAnimationFrame")->getEntityID());
+						_isCreatingAnimation = false;
+						_isEditingAnimation = true;
+
+					}
+					else // Name already exists
+					{
+						_fe3d.logger_throwWarning("Animation name \"" + newAnimationName.substr(1) + "\" already exists!");
+					}
 				}
-				else // Name already exists
+				else
 				{
-					_fe3d.logger_throwWarning("Animation name \"" + newAnimationName.substr(1) + "\" already exists!");
+					_fe3d.logger_throwWarning("New animation name cannot contain any spaces!");
 				}
 			}
 		}

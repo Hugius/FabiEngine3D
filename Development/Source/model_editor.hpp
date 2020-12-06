@@ -56,7 +56,7 @@ private:
 	string _currentAabbID = "";
 	string _currentProjectName = "";
 	string _hoveredModelID = "";
-	vector<string> _modelNames;
+	vector<string> _modelIDs;
 	vector<string> _objFileNamesList;
 
 	// Vectors

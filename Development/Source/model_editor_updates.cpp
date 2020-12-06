@@ -37,17 +37,17 @@ void ModelEditor::_updateManagementScreen()
 				{
 					_isChoosingModel = true;
 					_isEditingModel = true;
-					for (auto& name : _modelNames) { name = name.substr(1); }
-					_gui.getGlobalScreen()->addChoiceForm("models", "Select model", Vec2(-0.4f, 0.1f), _modelNames);
-					for (auto& name : _modelNames) { name = "@" + name; }
+					for (auto& name : _modelIDs) { name = name.substr(1); }
+					_gui.getGlobalScreen()->addChoiceForm("models", "Select model", Vec2(-0.4f, 0.1f), _modelIDs);
+					for (auto& name : _modelIDs) { name = "@" + name; }
 				}
 				else if (screen->getButton("deleteModel")->isHovered()) // Delete model button
 				{
 					_isChoosingModel = true;
 					_isDeletingModel = true;
-					for (auto& name : _modelNames) { name = name.substr(1); }
-					_gui.getGlobalScreen()->addChoiceForm("models", "Select model", Vec2(-0.4f, 0.1f), _modelNames);
-					for (auto& name : _modelNames) { name = "@" + name; }
+					for (auto& name : _modelIDs) { name = name.substr(1); }
+					_gui.getGlobalScreen()->addChoiceForm("models", "Select model", Vec2(-0.4f, 0.1f), _modelIDs);
+					for (auto& name : _modelIDs) { name = "@" + name; }
 				}
 			}
 
@@ -175,26 +175,34 @@ void ModelEditor::_updateModelCreation()
 				// Starting with at-sign not allowed
 				if (newModelName[0] != '@')
 				{
-					// Add model and check if not already existing
-					if (_addModel("@" + newModelName, "", "", "", "", "", Vec3(0.0f), 0, 1, 0, 0, 0, 1.0f, 1.0f, 1.0f, Vec3(1.0f), 1.0f, "", false, {}, {}, {}))
+					// Check if name contains spaces
+					if (newModelName.find(' ') == string::npos)
 					{
-						// Go to editor screen
-						_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
-						
-						// Select model
-						_currentModelID = "@" + newModelName;
+						// Add model and check if not already existing
+						if (_addModel("@" + newModelName, "", "", "", "", "", Vec3(0.0f), 0, 1, 0, 0, 0, 1.0f, 1.0f, 1.0f, Vec3(1.0f), 1.0f, "", false, {}, {}, {}))
+						{
+							// Go to editor screen
+							_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
 
-						// Miscellaneous
-						_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedModelName")->getEntityID(),
-							"Model: " + _currentModelID.substr(1), 0.025f);
-						_fe3d.textEntity_show(_gui.getGlobalScreen()->getTextfield("selectedModelName")->getEntityID());
-						_isCreatingModel = false;
-						_isEditingModel = true;
+							// Select model
+							_currentModelID = "@" + newModelName;
+
+							// Miscellaneous
+							_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedModelName")->getEntityID(),
+								"Model: " + _currentModelID.substr(1), 0.025f);
+							_fe3d.textEntity_show(_gui.getGlobalScreen()->getTextfield("selectedModelName")->getEntityID());
+							_isCreatingModel = false;
+							_isEditingModel = true;
+						}
+					}
+					else
+					{
+						_fe3d.logger_throwWarning("New model name cannot contain any spaces!");
 					}
 				}
 				else
 				{
-					_fe3d.logger_throwWarning("New model name cannot begin with '@'");
+					_fe3d.logger_throwWarning("New model name cannot begin with '@'!");
 				}
 			}
 		}
@@ -296,7 +304,7 @@ void ModelEditor::_updateModelRemoval()
 				}
 
 				// Delete from name record
-				_modelNames.erase(std::remove(_modelNames.begin(), _modelNames.end(), _currentModelID), _modelNames.end());
+				_modelIDs.erase(std::remove(_modelIDs.begin(), _modelIDs.end(), _currentModelID), _modelIDs.end());
 				_isDeletingModel = false;
 				_currentModelID = "";
 			}

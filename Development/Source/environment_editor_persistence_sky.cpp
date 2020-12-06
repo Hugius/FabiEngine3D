@@ -13,7 +13,7 @@ void EnvironmentEditor::loadSkyEntitiesFromFile()
 	}
 
 	// Clear names list from previous loads
-	_skyNames.clear();
+	_skyIDs.clear();
 
 	// Compose full folder path
 	string filePath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectName + "\\data\\sky.fe3d";
@@ -30,14 +30,14 @@ void EnvironmentEditor::loadSkyEntitiesFromFile()
 			stringstream iss(line);
 
 			// Values
-			string name;
+			string skyID;
 			std::array<string, 6> diffuseMapPaths{};
 			float rotationSpeed, lightness;
 			Vec3 color;
 
 			// Load base data
 			iss >>
-				name >>
+				skyID >>
 				diffuseMapPaths[0] >>
 				diffuseMapPaths[1] >>
 				diffuseMapPaths[2] >>
@@ -58,12 +58,12 @@ void EnvironmentEditor::loadSkyEntitiesFromFile()
 			}
 
 			// Load entity
-			_skyNames.push_back(name);
-			_fe3d.skyEntity_add(name);
-			_fe3d.skyEntity_setDiffuseMaps(name, diffuseMapPaths);
-			_fe3d.skyEntity_setLightness(name, lightness);
-			_fe3d.skyEntity_setRotationSpeed(name, rotationSpeed);
-			_fe3d.skyEntity_setColor(name, color);
+			_skyIDs.push_back(skyID);
+			_fe3d.skyEntity_add(skyID);
+			_fe3d.skyEntity_setDiffuseMaps(skyID, diffuseMapPaths);
+			_fe3d.skyEntity_setLightness(skyID, lightness);
+			_fe3d.skyEntity_setRotationSpeed(skyID, rotationSpeed);
+			_fe3d.skyEntity_setColor(skyID, color);
 		}
 
 		// Close file
@@ -71,6 +71,14 @@ void EnvironmentEditor::loadSkyEntitiesFromFile()
 
 		// Logging
 		_fe3d.logger_throwInfo("Sky data from project \"" + _currentProjectName + "\" loaded!");
+	}
+}
+
+void EnvironmentEditor::unloadSkyEntities()
+{
+	for (auto& name : _skyIDs)
+	{
+		_fe3d.skyEntity_delete(name);
 	}
 }
 
@@ -90,13 +98,13 @@ void EnvironmentEditor::saveSkyEntitiesToFile()
 		std::ofstream file(filePath);
 
 		// Write every sky to file
-		for (auto& name : _skyNames)
+		for (auto& skyID : _skyIDs)
 		{
 			// Values
-			auto diffuseMapPaths = _fe3d.skyEntity_getDiffuseMapPaths(name);
-			float rotationSpeed = _fe3d.skyEntity_getRotationSpeed(name);
-			float lightness = _fe3d.skyEntity_getLightness(name);
-			Vec3 color = _fe3d.skyEntity_getColor(name);
+			auto diffuseMapPaths = _fe3d.skyEntity_getDiffuseMapPaths(skyID);
+			float rotationSpeed = _fe3d.skyEntity_getRotationSpeed(skyID);
+			float lightness = _fe3d.skyEntity_getLightness(skyID);
+			Vec3 color = _fe3d.skyEntity_getColor(skyID);
 
 			// Perform empty string & space conversions
 			for (auto& diffuseMapPath : diffuseMapPaths)
@@ -106,7 +114,7 @@ void EnvironmentEditor::saveSkyEntitiesToFile()
 			}
 
 			// Write name to file
-			file << name << " ";
+			file << skyID << " ";
 
 			// Write paths to file
 			for (auto& diffuseMapPath : diffuseMapPaths)

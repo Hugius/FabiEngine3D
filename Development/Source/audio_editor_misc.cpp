@@ -12,7 +12,7 @@ bool AudioEditor::isLoaded()
 
 vector<string> AudioEditor::getAudioNames()
 {
-	return _audioNames;
+	return _audioIDs;
 }
 
 void AudioEditor::_updateMiscellaneous()

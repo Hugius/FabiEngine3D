@@ -140,7 +140,7 @@ void ModelEditor::unload()
 	_currentModelID = "";
 	_currentAabbID = "";
 	_hoveredModelID = "";
-	_modelNames.clear();
+	_modelIDs.clear();
 	_objFileNamesList.clear();
 	_totalCursorDifference = Vec2(0.0f);
 	_cameraAcceleration = Vec2(0.0f);

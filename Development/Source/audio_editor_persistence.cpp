@@ -12,7 +12,7 @@ void AudioEditor::loadAudioEntitiesFromFile()
 	}
 
 	// Clear names list from previous loads
-	_audioNames.clear();
+	_audioIDs.clear();
 
 	// Compose full folder path
 	string filePath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectName + "\\data\\audio.fe3d";
@@ -27,21 +27,21 @@ void AudioEditor::loadAudioEntitiesFromFile()
 		while (std::getline(file, line))
 		{
 			// Placeholder variables
-			string name, audioPath;
+			string audioID, audioPath;
 
 			// For file extraction
 			std::istringstream iss(line);
 
 			// Extract from file
-			iss >> name >> audioPath;
+			iss >> audioID >> audioPath;
 
 			// Perform empty string & space conversions
 			audioPath = (audioPath == "?") ? "" : audioPath;
 			std::replace(audioPath.begin(), audioPath.end(), '?', ' ');
 
-			// Add audio name
-			_audioNames.push_back(name);
-			_fe3d.audioEntity_add2D(name, audioPath);
+			// Add audio ID
+			_audioIDs.push_back(audioID);
+			_fe3d.audioEntity_add2D(audioID, audioPath);
 		}
 
 		// Close file
@@ -67,17 +67,17 @@ void AudioEditor::saveAudioEntitiesToFile()
 		file.open(_fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectName + "\\data\\audio.fe3d");
 
 		// Write audio data into file
-		for (auto& audioName : _audioNames)
+		for (auto& audioID : _audioIDs)
 		{
 			// Retrieve all values
-			auto audioPath = _fe3d.audioEntity_getFilePath(audioName);
+			auto audioPath = _fe3d.audioEntity_getFilePath(audioID);
 
 			// Perform empty string & space conversions
 			audioPath = (audioPath == "") ? "?" : audioPath;
 			std::replace(audioPath.begin(), audioPath.end(), ' ', '?');
 
 			// Export data
-			file << audioName << " " << audioPath << " " << std::endl;
+			file << audioID << " " << audioPath << " " << std::endl;
 		}
 
 		// Close file

@@ -25,17 +25,17 @@ void EnvironmentEditor::_updateWaterMenuMain()
 			{
 				_waterChoosingEnabled = true;
 				_waterEditingEnabled = true;
-				for (auto& name : _waterNames) { name = name.substr(1); }
-				_gui.getGlobalScreen()->addChoiceForm("waterList", "Select water", Vec2(-0.4f, 0.1f), _waterNames);
-				for (auto& name : _waterNames) { name = "@" + name; }
+				for (auto& name : _waterIDs) { name = name.substr(1); }
+				_gui.getGlobalScreen()->addChoiceForm("waterList", "Select water", Vec2(-0.4f, 0.1f), _waterIDs);
+				for (auto& name : _waterIDs) { name = "@" + name; }
 			}
 			else if (screen->getButton("delete")->isHovered())
 			{
 				_waterChoosingEnabled = true;
 				_waterRemovalEnabled = true;
-				for (auto& name : _waterNames) { name = name.substr(1); }
-				_gui.getGlobalScreen()->addChoiceForm("waterList", "Select water", Vec2(-0.4f, 0.1f), _waterNames);
-				for (auto& name : _waterNames) { name = "@" + name; }
+				for (auto& name : _waterIDs) { name = name.substr(1); }
+				_gui.getGlobalScreen()->addChoiceForm("waterList", "Select water", Vec2(-0.4f, 0.1f), _waterIDs);
+				for (auto& name : _waterIDs) { name = "@" + name; }
 			}
 		}
 	}

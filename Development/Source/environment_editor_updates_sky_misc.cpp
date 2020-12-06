@@ -26,33 +26,42 @@ void EnvironmentEditor::_updateSkyCreation()
 			// Create new sky
 			if (_gui.getGlobalScreen()->checkValueForm("newSkyName", newSkyName, {}))
 			{
-				// Starting with at-sign not allowed
+				// Check if name starts with @ sign
 				if (newSkyName[0] != '@')
 				{
-					newSkyName = "@" + newSkyName;
-
-					// If sky name not existing yet
-					if (std::find(_skyNames.begin(), _skyNames.end(), newSkyName) == _skyNames.end())
+					// Check if name contains spaces
+					if (newSkyName.find(' ') == string::npos)
 					{
-						_currentSkyID = newSkyName;
-						_skyNames.push_back(_currentSkyID);
-						_fe3d.skyEntity_add(_currentSkyID);
-						_fe3d.skyEntity_select(_currentSkyID);
-						_gui.getViewport("left")->getWindow("main")->setActiveScreen("skyEditorMenuChoice");
-						_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedSkyName")->getEntityID(),
-							"Sky: " + _currentSkyID.substr(1), 0.025f);
-						_fe3d.textEntity_show(_gui.getGlobalScreen()->getTextfield("selectedSkyName")->getEntityID());
-						_skyCreationEnabled = false;
-						_skyEditingEnabled = true;
+						// Add @ sign to new name
+						newSkyName = "@" + newSkyName;
+
+						// If sky name not existing yet
+						if (std::find(_skyIDs.begin(), _skyIDs.end(), newSkyName) == _skyIDs.end())
+						{
+							_currentSkyID = newSkyName;
+							_skyIDs.push_back(_currentSkyID);
+							_fe3d.skyEntity_add(_currentSkyID);
+							_fe3d.skyEntity_select(_currentSkyID);
+							_gui.getViewport("left")->getWindow("main")->setActiveScreen("skyEditorMenuChoice");
+							_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedSkyName")->getEntityID(),
+								"Sky: " + _currentSkyID.substr(1), 0.025f);
+							_fe3d.textEntity_show(_gui.getGlobalScreen()->getTextfield("selectedSkyName")->getEntityID());
+							_skyCreationEnabled = false;
+							_skyEditingEnabled = true;
+						}
+						else
+						{
+							_fe3d.logger_throwWarning("Sky name \"" + newSkyName.substr(1) + "\" already exists!");
+						}
 					}
 					else
 					{
-						_fe3d.logger_throwWarning("Sky name \"" + newSkyName.substr(1) + "\" already exists!");
+						_fe3d.logger_throwWarning("New sky name cannot contain any spaces!");
 					}
 				}
 				else
 				{
-					_fe3d.logger_throwWarning("New sky name cannot begin with '@'");
+					_fe3d.logger_throwWarning("New sky name cannot begin with '@'!");
 				}
 			}
 		}
@@ -143,7 +152,7 @@ void EnvironmentEditor::_updateSkyRemoval()
 				_fe3d.skyEntity_delete(_currentSkyID);
 
 				// Delete from name record
-				_skyNames.erase(std::remove(_skyNames.begin(), _skyNames.end(), _currentSkyID), _skyNames.end());
+				_skyIDs.erase(std::remove(_skyIDs.begin(), _skyIDs.end(), _currentSkyID), _skyIDs.end());
 				_skyRemovalEnabled = false;
 				_currentSkyID = "";
 			}

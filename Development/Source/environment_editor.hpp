@@ -29,43 +29,6 @@ public:
 	bool isLoaded();
 
 private:
-	// General variables
-	bool _isLoaded = false;
-	EnvironmentType _currentEnvironmentType = EnvironmentType::NONE;
-	const float _scrollWheelDivider = 250.0f;
-	float _cameraRotationSpeed = 0.0f;
-	float _totalCameraRotation = 0.0f;
-	string _currentProjectName = "";
-	FabiEngine3D& _fe3d;
-	EngineGuiManager& _gui;
-
-	// Sky variables
-	vector <string> _skyNames;
-	string _currentSkyID = "";
-	string _hoveredSkyID = "";
-	bool _skyCreationEnabled = false;
-	bool _skyChoosingEnabled = false;
-	bool _skyEditingEnabled = false;
-	bool _skyRemovalEnabled = false;
-
-	// Terrain variables
-	vector <string> _terrainNames;
-	string _currentTerrainID = "";
-	string _hoveredTerrainID = "";
-	bool _terrainCreationEnabled = false;
-	bool _terrainChoosingEnabled = false;
-	bool _terrainEditingEnabled = false;
-	bool _terrainRemovalEnabled = false;
-
-	// Water variables
-	vector <string> _waterNames;
-	string _currentWaterID = "";
-	string _hoveredWaterID = "";
-	bool _waterCreationEnabled = false;
-	bool _waterChoosingEnabled = false;
-	bool _waterEditingEnabled = false;
-	bool _waterRemovalEnabled = false;
-
 	// Sky functions
 	void _updateSkyEditor();
 	void _updateSkyMenuMain();
@@ -102,4 +65,41 @@ private:
 
 	// Miscellaneous functions
 	void _updateMiscellaneous();
+
+	// General variables
+	bool _isLoaded = false;
+	EnvironmentType _currentEnvironmentType = EnvironmentType::NONE;
+	const float _scrollWheelDivider = 250.0f;
+	float _cameraRotationSpeed = 0.0f;
+	float _totalCameraRotation = 0.0f;
+	string _currentProjectName = "";
+	FabiEngine3D& _fe3d;
+	EngineGuiManager& _gui;
+
+	// Sky variables
+	vector <string> _skyIDs;
+	string _currentSkyID = "";
+	string _hoveredSkyID = "";
+	bool _skyCreationEnabled = false;
+	bool _skyChoosingEnabled = false;
+	bool _skyEditingEnabled = false;
+	bool _skyRemovalEnabled = false;
+
+	// Terrain variables
+	vector <string> _terrainIDs;
+	string _currentTerrainID = "";
+	string _hoveredTerrainID = "";
+	bool _terrainCreationEnabled = false;
+	bool _terrainChoosingEnabled = false;
+	bool _terrainEditingEnabled = false;
+	bool _terrainRemovalEnabled = false;
+
+	// Water variables
+	vector <string> _waterIDs;
+	string _currentWaterID = "";
+	string _hoveredWaterID = "";
+	bool _waterCreationEnabled = false;
+	bool _waterChoosingEnabled = false;
+	bool _waterEditingEnabled = false;
+	bool _waterRemovalEnabled = false;
 };

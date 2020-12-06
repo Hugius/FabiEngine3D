@@ -34,7 +34,7 @@ private:
 	EngineGuiManager& _gui;
 
 	// Audio
-	vector<string> _audioNames;
+	vector<string> _audioIDs;
 	string _currentAudioID = "";
 	string _hoveredAudioID = "";
 	bool _isCreatingAudio = false;

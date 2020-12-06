@@ -27,33 +27,42 @@ void EnvironmentEditor::_updateWaterCreation()
 			// Create new water
 			if (_gui.getGlobalScreen()->checkValueForm("newWaterName", newWaterName, {}))
 			{
-				// Starting with at-sign not allowed
+				// Check if name starts with @ sign
 				if (newWaterName[0] != '@')
 				{
-					newWaterName = "@" + newWaterName;
-
-					// If water name not existing yet
-					if (std::find(_waterNames.begin(), _waterNames.end(), newWaterName) == _waterNames.end())
+					// Check if name contains spaces
+					if (newWaterName.find(' ') == string::npos)
 					{
-						_currentWaterID = newWaterName;
-						_waterNames.push_back(_currentWaterID);
-						_fe3d.waterEntity_add(_currentWaterID);
-						_fe3d.waterEntity_select(_currentWaterID);
-						_gui.getViewport("left")->getWindow("main")->setActiveScreen("waterEditorMenuChoice");
-						_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedWaterName")->getEntityID(),
-							"Water: " + _currentWaterID.substr(1), 0.025f);
-						_fe3d.textEntity_show(_gui.getGlobalScreen()->getTextfield("selectedWaterName")->getEntityID());
-						_waterCreationEnabled = false;
-						_waterEditingEnabled = true;
+						// Add @ sign to new name
+						newWaterName = "@" + newWaterName;
+
+						// If water name not existing yet
+						if (std::find(_waterIDs.begin(), _waterIDs.end(), newWaterName) == _waterIDs.end())
+						{
+							_currentWaterID = newWaterName;
+							_waterIDs.push_back(_currentWaterID);
+							_fe3d.waterEntity_add(_currentWaterID);
+							_fe3d.waterEntity_select(_currentWaterID);
+							_gui.getViewport("left")->getWindow("main")->setActiveScreen("waterEditorMenuChoice");
+							_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedWaterName")->getEntityID(),
+								"Water: " + _currentWaterID.substr(1), 0.025f);
+							_fe3d.textEntity_show(_gui.getGlobalScreen()->getTextfield("selectedWaterName")->getEntityID());
+							_waterCreationEnabled = false;
+							_waterEditingEnabled = true;
+						}
+						else
+						{
+							_fe3d.logger_throwWarning("Water name \"" + newWaterName.substr(1) + "\" already exists!");
+						}
 					}
 					else
 					{
-						_fe3d.logger_throwWarning("Water name \"" + newWaterName.substr(1) + "\" already exists!");
+						_fe3d.logger_throwWarning("New water name cannot contain any spaces!");
 					}
 				}
 				else
 				{
-					_fe3d.logger_throwWarning("New water name cannot begin with '@'");
+					_fe3d.logger_throwWarning("New water name cannot begin with '@'!");
 				}
 			}
 		}
@@ -144,7 +153,7 @@ void EnvironmentEditor::_updateWaterRemoval()
 				_fe3d.waterEntity_delete(_currentWaterID);
 
 				// Delete from name record
-				_waterNames.erase(std::remove(_waterNames.begin(), _waterNames.end(), _currentWaterID), _waterNames.end());
+				_waterIDs.erase(std::remove(_waterIDs.begin(), _waterIDs.end(), _currentWaterID), _waterIDs.end());
 				_waterRemovalEnabled = false;
 				_currentWaterID = "";
 			}

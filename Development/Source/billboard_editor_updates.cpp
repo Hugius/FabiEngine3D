@@ -37,17 +37,17 @@ void BillboardEditor::_updateBillboardManagement()
 				{
 					_isChoosingBillboard = true;
 					_isEditingBillboard = true;
-					for (auto& name : _billboardNames) { name = name.substr(1); }
-					_gui.getGlobalScreen()->addChoiceForm("billboards", "Select billboard", Vec2(-0.4f, 0.1f), _billboardNames);
-					for (auto& name : _billboardNames) { name = "@" + name; }
+					for (auto& name : _billboardIDs) { name = name.substr(1); }
+					_gui.getGlobalScreen()->addChoiceForm("billboards", "Select billboard", Vec2(-0.4f, 0.1f), _billboardIDs);
+					for (auto& name : _billboardIDs) { name = "@" + name; }
 				}
 				else if (screen->getButton("deleteBillboard")->isHovered()) // Delete billboard button
 				{
 					_isChoosingBillboard = true;
 					_isRemovingBillboard = true;
-					for (auto& name : _billboardNames) { name = name.substr(1); }
-					_gui.getGlobalScreen()->addChoiceForm("billboards", "Select billboard", Vec2(-0.4f, 0.1f), _billboardNames);
-					for (auto& name : _billboardNames) { name = "@" + name; }
+					for (auto& name : _billboardIDs) { name = name.substr(1); }
+					_gui.getGlobalScreen()->addChoiceForm("billboards", "Select billboard", Vec2(-0.4f, 0.1f), _billboardIDs);
+					for (auto& name : _billboardIDs) { name = "@" + name; }
 				}
 			}
 
@@ -78,37 +78,46 @@ void BillboardEditor::_updateBillboardCreation()
 			// Check if user filled in a new name
 			if (_gui.getGlobalScreen()->checkValueForm("newBillboardName", newBillboardName, { _currentBillboardID }))
 			{
+				// Check if name starts with @ sign
 				if (newBillboardName[0] != '@')
 				{
-					// Add @ sign to new name
-					newBillboardName = "@" + newBillboardName;
-
-					// Check if name already exists
-					if (std::find(_billboardNames.begin(), _billboardNames.end(), newBillboardName) == _billboardNames.end()) // If name not existing yet
+					// Check if name contains spaces
+					if (newBillboardName.find(' ') == string::npos)
 					{
-						// Go to editor
-						_gui.getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuChoice");
+						// Add @ sign to new name
+						newBillboardName = "@" + newBillboardName;
 
-						// Select billboard
-						_currentBillboardID = newBillboardName;
-						_billboardNames.push_back(newBillboardName);
+						// Check if name already exists
+						if (std::find(_billboardIDs.begin(), _billboardIDs.end(), newBillboardName) == _billboardIDs.end()) // If name not existing yet
+						{
+							// Go to editor
+							_gui.getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuChoice");
 
-						// Miscellaneous
-						_fe3d.billBoardEntity_add(newBillboardName, Vec3(1.0f), _billboardPosition, Vec3(0.0f), Vec2(1.0f), false, false);
-						_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID(), "Billboard: " +
-							_currentBillboardID.substr(1), 0.025f);
-						_fe3d.textEntity_show(_gui.getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID());
-						_isCreatingBillboard = false;
-						_isEditingBillboard = true;
+							// Select billboard
+							_currentBillboardID = newBillboardName;
+							_billboardIDs.push_back(newBillboardName);
+
+							// Miscellaneous
+							_fe3d.billBoardEntity_add(newBillboardName, Vec3(1.0f), _billboardPosition, Vec3(0.0f), Vec2(1.0f), false, false);
+							_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID(), "Billboard: " +
+								_currentBillboardID.substr(1), 0.025f);
+							_fe3d.textEntity_show(_gui.getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID());
+							_isCreatingBillboard = false;
+							_isEditingBillboard = true;
+						}
+						else // Name already exists
+						{
+							_fe3d.logger_throwWarning("Billboard name \"" + newBillboardName.substr(1) + "\" already exists!");
+						}
 					}
-					else // Name already exists
+					else
 					{
-						_fe3d.logger_throwWarning("Billboard name \"" + newBillboardName.substr(1) + "\" already exists!");
+						_fe3d.logger_throwWarning("New billboard name cannot contain any spaces!");
 					}
 				}
 				else
 				{
-					_fe3d.logger_throwWarning("New billboard name cannot begin with '@'");
+					_fe3d.logger_throwWarning("New billboard name cannot begin with '@'!");
 				}
 			}
 		}
@@ -195,7 +204,7 @@ void BillboardEditor::_updateBillboardRemoval()
 
 				// Delete billboard
 				_fe3d.billboardEntity_delete(_currentBillboardID);
-				_billboardNames.erase(std::remove(_billboardNames.begin(), _billboardNames.end(), _currentBillboardID), _billboardNames.end());
+				_billboardIDs.erase(std::remove(_billboardIDs.begin(), _billboardIDs.end(), _currentBillboardID), _billboardIDs.end());
 				_currentBillboardID = "";
 
 				// Miscellaneous

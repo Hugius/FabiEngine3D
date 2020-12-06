@@ -1,5 +1,7 @@
 #include "animation_editor.hpp"
 
+#include <fstream>
+
 void AnimationEditor::loadAnimationsFromFile()
 {
 	// Error checking
@@ -9,10 +11,10 @@ void AnimationEditor::loadAnimationsFromFile()
 	}
 
 	// Clear names list from previous loads
-	_audioNames.clear();
+	_animations.clear();
 
 	// Compose full folder path
-	string filePath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectName + "\\data\\audio.fe3d";
+	string filePath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectName + "\\data\\animation.fe3d";
 
 	// Check if audio file exists
 	if (_fe3d.misc_isFileExisting(filePath))
@@ -33,12 +35,12 @@ void AnimationEditor::loadAnimationsFromFile()
 			iss >> name >> audioPath;
 
 			// Perform empty string & space conversions
-			audioPath = (audioPath == "?") ? "" : audioPath;
-			std::replace(audioPath.begin(), audioPath.end(), '?', ' ');
+			//audioPath = (audioPath == "?") ? "" : audioPath;
+			//std::replace(audioPath.begin(), audioPath.end(), '?', ' ');
 
-			// Add audio name
-			_audioNames.push_back(name);
-			_fe3d.audioEntity_add2D(name, audioPath);
+			//// Add audio name
+			//_audioNames.push_back(name);
+			//_fe3d.audioEntity_add2D(name, audioPath);
 		}
 
 		// Close file
@@ -61,20 +63,33 @@ void AnimationEditor::saveAnimationsToFile()
 
 		// Create or overwrite audio file
 		std::ofstream file;
-		file.open(_fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectName + "\\data\\animations.fe3d");
+		file.open(_fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectName + "\\data\\animation.fe3d");
 
 		// Write audio data into file
 		for (auto& animation : _animations)
 		{
 			// Retrieve all values
-			auto audioPath = _fe3d.audioEntity_getFilePath(audioName);
-
-			// Perform empty string & space conversions
-			audioPath = (audioPath == "") ? "?" : audioPath;
-			std::replace(audioPath.begin(), audioPath.end(), ' ', '?');
+			auto animationID = animation->ID;
+			auto previewModelID = animation->previewModelID;
+			auto initialTranslation = animation->initialTranslation;
+			auto initialRotation = animation->initialRotation;
+			auto initialScaling = animation->initialScaling;
+			auto transformationType = static_cast<int>(animation->transformationType);
 
 			// Export data
-			file << audioName << " " << audioPath << " " << std::endl;
+			file << 
+				animationID << " " << 
+				previewModelID << " " << 
+				initialTranslation.x << " " <<
+				initialTranslation.y << " " <<
+				initialTranslation.z << " " <<
+				initialRotation.x << " " <<
+				initialRotation.y << " " <<
+				initialRotation.z << " " <<
+				initialScaling.x << " " <<
+				initialScaling.y << " " <<
+				initialScaling.z << " " <<
+				transformationType << " " << std::endl;
 		}
 
 		// Close file

@@ -14,7 +14,7 @@ void ModelEditor::loadGameEntitiesFromFile()
 	}
 
 	// Clear names list from previous loads
-	_modelNames.clear();
+	_modelIDs.clear();
 
 	// Compose full folder path
 	string filePath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectName + "\\data\\model.fe3d";
@@ -29,7 +29,7 @@ void ModelEditor::loadGameEntitiesFromFile()
 		while (std::getline(file, line))
 		{
 			// Placeholder variables
-			string modelName, objPath, diffuseMapPath, lightMapPath, reflectionMapPath, normalMapPath, lodEntityID;
+			string modelID, objPath, diffuseMapPath, lightMapPath, reflectionMapPath, normalMapPath, lodEntityID;
 			float uvRepeat, specularFactor, specularIntensity, lightness;
 			bool isFaceCulled, isShadowed, isTransparent, isSpecular, isReflective, isInstanced;
 			Vec3 modelSize, color;
@@ -42,7 +42,7 @@ void ModelEditor::loadGameEntitiesFromFile()
 
 			// Extract general data from file
 			iss >>
-				modelName >>
+				modelID >>
 				objPath >>
 				diffuseMapPath >>
 				lightMapPath >>
@@ -101,7 +101,7 @@ void ModelEditor::loadGameEntitiesFromFile()
 			std::replace(lodEntityID.begin(), lodEntityID.end(), '?', ' ');
 
 			// Add new model
-			_addModel(modelName, objPath, diffuseMapPath, lightMapPath, reflectionMapPath, normalMapPath, modelSize, isFaceCulled, isShadowed,
+			_addModel(modelID, objPath, diffuseMapPath, lightMapPath, reflectionMapPath, normalMapPath, modelSize, isFaceCulled, isShadowed,
 				isTransparent, isReflective, isSpecular, specularFactor, specularIntensity, lightness,
 				Vec3(color.r, color.g, color.b), uvRepeat, lodEntityID, isInstanced, aabbNames, aabbPositions, aabbSizes);
 		}
@@ -129,38 +129,38 @@ void ModelEditor::saveGameEntitiesToFile()
 		file.open(_fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectName + "\\data\\model.fe3d");
 
 		// Write model data into file
-		for (auto& modelName : _modelNames)
+		for (auto& modelID : _modelIDs)
 		{
 			// Check if a 3D entity for this model is existing
-			if (_fe3d.gameEntity_isExisting(modelName))
+			if (_fe3d.gameEntity_isExisting(modelID))
 			{
 				// General data
-				auto objPath = _fe3d.gameEntity_getObjPath(modelName);
-				auto diffuseMapPath = _fe3d.gameEntity_getDiffuseMapPath(modelName);
-				auto lightMapPath = _fe3d.gameEntity_getLightMapPath(modelName);
-				auto reflectionMapPath = _fe3d.gameEntity_getReflectionMapPath(modelName);
-				auto normalMapPath = _fe3d.gameEntity_getNormalMapPath(modelName);
-				auto modelSize = _fe3d.gameEntity_getSize(modelName);
-				auto isFaceCulled = _fe3d.gameEntity_isFaceCulled(modelName);
-				auto isShadowed = _fe3d.gameEntity_isShadowed(modelName);
-				auto isTransparent = _fe3d.gameEntity_isTransparent(modelName);
-				auto isReflective = _fe3d.gameEntity_isSceneReflective(modelName);
-				auto isSpecular = _fe3d.gameEntity_isSpecularLighted(modelName);
-				auto specularFactor = _fe3d.gameEntity_getSpecularFactor(modelName);
-				auto specularStrength = _fe3d.gameEntity_getSpecularIntensity(modelName);
-				auto lightness = _fe3d.gameEntity_getLightness(modelName);
-				auto color = _fe3d.gameEntity_getColor(modelName);
-				auto uvRepeat = _fe3d.gameEntity_getUvRepeat(modelName);
-				auto lodEntityID = _fe3d.gameEntity_getLevelOfDetailEntityID(modelName);
-				auto isInstanced = _fe3d.gameEntity_isInstanced(modelName);
+				auto objPath = _fe3d.gameEntity_getObjPath(modelID);
+				auto diffuseMapPath = _fe3d.gameEntity_getDiffuseMapPath(modelID);
+				auto lightMapPath = _fe3d.gameEntity_getLightMapPath(modelID);
+				auto reflectionMapPath = _fe3d.gameEntity_getReflectionMapPath(modelID);
+				auto normalMapPath = _fe3d.gameEntity_getNormalMapPath(modelID);
+				auto modelSize = _fe3d.gameEntity_getSize(modelID);
+				auto isFaceCulled = _fe3d.gameEntity_isFaceCulled(modelID);
+				auto isShadowed = _fe3d.gameEntity_isShadowed(modelID);
+				auto isTransparent = _fe3d.gameEntity_isTransparent(modelID);
+				auto isReflective = _fe3d.gameEntity_isSceneReflective(modelID);
+				auto isSpecular = _fe3d.gameEntity_isSpecularLighted(modelID);
+				auto specularFactor = _fe3d.gameEntity_getSpecularFactor(modelID);
+				auto specularStrength = _fe3d.gameEntity_getSpecularIntensity(modelID);
+				auto lightness = _fe3d.gameEntity_getLightness(modelID);
+				auto color = _fe3d.gameEntity_getColor(modelID);
+				auto uvRepeat = _fe3d.gameEntity_getUvRepeat(modelID);
+				auto lodEntityID = _fe3d.gameEntity_getLevelOfDetailEntityID(modelID);
+				auto isInstanced = _fe3d.gameEntity_isInstanced(modelID);
 
 				// AABB data
 				vector<string> aabbNames;
 				vector<Vec3> aabbPositions;
 				vector<Vec3> aabbSizes;
-				for (auto& aabbID : _fe3d.aabbEntity_getBoundIDs(modelName, true, false))
+				for (auto& aabbID : _fe3d.aabbEntity_getBoundIDs(modelID, true, false))
 				{
-					aabbNames.push_back(aabbID.substr(string(modelName + "_").size()));
+					aabbNames.push_back(aabbID.substr(string(modelID + "_").size()));
 					aabbPositions.push_back(_fe3d.aabbEntity_getPosition(aabbID));
 					aabbSizes.push_back(_fe3d.aabbEntity_getSize(aabbID));
 				}
@@ -183,7 +183,7 @@ void ModelEditor::saveGameEntitiesToFile()
 
 				// Write general data
 				file <<
-					modelName << " " <<
+					modelID << " " <<
 					objPath << " " <<
 					diffuseMapPath << " " <<
 					lightMapPath << " " <<
@@ -205,7 +205,13 @@ void ModelEditor::saveGameEntitiesToFile()
 					color.b << " " <<
 					uvRepeat << " " <<
 					lodEntityID << " " <<
-					isInstanced << " ";
+					isInstanced;
+
+				// Add space
+				if (!aabbNames.empty())
+				{
+					file << " ";
+				}
 
 				// Write AABB data
 				for (unsigned int i = 0; i < aabbNames.size(); i++)
@@ -230,7 +236,7 @@ void ModelEditor::saveGameEntitiesToFile()
 			}
 			else
 			{
-				file << modelName << " ? ? ? ? ? 0.0 0.0 0.0 0 0 0 0 0.0 0.0 0.0 0.0 0 ?\n";
+				file << modelID << " ? ? ? ? ? 0.0 0.0 0.0 0 0 0 0 0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 ? 0\n";
 			}
 		}
 

@@ -54,5 +54,5 @@ private:
 	string _hoveredBillboardID = "";
 	string _currentBillboardID = "";
 	string _currentProjectName = "";
-	vector<string> _billboardNames;
+	vector<string> _billboardIDs;
 };

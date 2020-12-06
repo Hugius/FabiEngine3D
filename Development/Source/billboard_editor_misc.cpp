@@ -12,7 +12,7 @@ bool BillboardEditor::isLoaded()
 
 vector<string>& BillboardEditor::getBillboardNames()
 {
-	return _billboardNames;
+	return _billboardIDs;
 }
 
 void BillboardEditor::_updateMiscellaneous()

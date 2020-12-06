@@ -182,42 +182,42 @@ void SceneEditor::saveSceneToFile()
 			}
 
 			// Write GAME entities data into file
-			for (auto& entityID : _fe3d.gameEntity_getAllIDs())
+			for (auto& modelID : _fe3d.gameEntity_getAllIDs())
 			{
 				// Check if not a preview model or an LOD entity
-				if (entityID[0] != '@' || std::find(lodIDs.begin(), lodIDs.end(), entityID) != lodIDs.end())
+				if (modelID[0] != '@' || std::find(lodIDs.begin(), lodIDs.end(), modelID) != lodIDs.end())
 				{
 					// General data
-					auto position = _fe3d.gameEntity_getPosition(entityID);
-					auto rotation = _fe3d.gameEntity_getRotation(entityID);
-					auto size = _fe3d.gameEntity_getSize(entityID);
-					auto objPath = _fe3d.gameEntity_getObjPath(entityID);
-					auto diffuseMapPath = _fe3d.gameEntity_getDiffuseMapPath(entityID);
-					auto lightMapPath = _fe3d.gameEntity_getLightMapPath(entityID);
-					auto reflectionMapPath = _fe3d.gameEntity_getReflectionMapPath(entityID);
-					auto normalMapPath = _fe3d.gameEntity_getNormalMapPath(entityID);
-					auto isFrozen = _fe3d.gameEntity_isStaticToCamera(entityID);
-					auto isFaceCulled = _fe3d.gameEntity_isFaceCulled(entityID);
-					auto isShadowed = _fe3d.gameEntity_isShadowed(entityID);
-					auto isTransparent = _fe3d.gameEntity_isTransparent(entityID);
-					auto isReflective = _fe3d.gameEntity_isSceneReflective(entityID);
-					auto isSpecular = _fe3d.gameEntity_isSpecularLighted(entityID);
-					auto specularFactor = _fe3d.gameEntity_getSpecularFactor(entityID);
-					auto specularIntensity = _fe3d.gameEntity_getSpecularIntensity(entityID);
-					auto lightness = _fe3d.gameEntity_getLightness(entityID);
-					auto color = _fe3d.gameEntity_getColor(entityID);
-					auto uvRepeat = _fe3d.gameEntity_getUvRepeat(entityID);
-					auto lodEntityID = _fe3d.gameEntity_getLevelOfDetailEntityID(entityID);
-					auto isInstanced = _fe3d.gameEntity_isInstanced(entityID);
-					auto instancedOffsets = _fe3d.gameEntity_getInstancedOffsets(entityID);
+					auto position = _fe3d.gameEntity_getPosition(modelID);
+					auto rotation = _fe3d.gameEntity_getRotation(modelID);
+					auto size = _fe3d.gameEntity_getSize(modelID);
+					auto objPath = _fe3d.gameEntity_getObjPath(modelID);
+					auto diffuseMapPath = _fe3d.gameEntity_getDiffuseMapPath(modelID);
+					auto lightMapPath = _fe3d.gameEntity_getLightMapPath(modelID);
+					auto reflectionMapPath = _fe3d.gameEntity_getReflectionMapPath(modelID);
+					auto normalMapPath = _fe3d.gameEntity_getNormalMapPath(modelID);
+					auto isFrozen = _fe3d.gameEntity_isStaticToCamera(modelID);
+					auto isFaceCulled = _fe3d.gameEntity_isFaceCulled(modelID);
+					auto isShadowed = _fe3d.gameEntity_isShadowed(modelID);
+					auto isTransparent = _fe3d.gameEntity_isTransparent(modelID);
+					auto isReflective = _fe3d.gameEntity_isSceneReflective(modelID);
+					auto isSpecular = _fe3d.gameEntity_isSpecularLighted(modelID);
+					auto specularFactor = _fe3d.gameEntity_getSpecularFactor(modelID);
+					auto specularIntensity = _fe3d.gameEntity_getSpecularIntensity(modelID);
+					auto lightness = _fe3d.gameEntity_getLightness(modelID);
+					auto color = _fe3d.gameEntity_getColor(modelID);
+					auto uvRepeat = _fe3d.gameEntity_getUvRepeat(modelID);
+					auto lodID = _fe3d.gameEntity_getLevelOfDetailEntityID(modelID);
+					auto isInstanced = _fe3d.gameEntity_isInstanced(modelID);
+					auto instancedOffsets = _fe3d.gameEntity_getInstancedOffsets(modelID);
 
 					// AABB data
 					vector<string> aabbNames;
 					vector<Vec3> aabbPositions;
 					vector<Vec3> aabbSizes;
-					for (auto& aabbID : _fe3d.aabbEntity_getBoundIDs(entityID, true, false))
+					for (auto& aabbID : _fe3d.aabbEntity_getBoundIDs(modelID, true, false))
 					{
-						aabbNames.push_back(aabbID.substr(string(entityID + "_").size()));
+						aabbNames.push_back(aabbID.substr(string(modelID + "_").size()));
 						aabbPositions.push_back(_fe3d.aabbEntity_getPosition(aabbID));
 						aabbSizes.push_back(_fe3d.aabbEntity_getSize(aabbID));
 					}
@@ -227,18 +227,18 @@ void SceneEditor::saveSceneToFile()
 					lightMapPath = (lightMapPath == "") ? "?" : lightMapPath;
 					reflectionMapPath = (reflectionMapPath == "") ? "?" : reflectionMapPath;
 					normalMapPath = (normalMapPath == "") ? "?" : normalMapPath;
-					lodEntityID = (lodEntityID == "") ? "?" : lodEntityID;
+					lodID = (lodID == "") ? "?" : lodID;
 					std::replace(objPath.begin(), objPath.end(), ' ', '?');
 					std::replace(diffuseMapPath.begin(), diffuseMapPath.end(), ' ', '?');
 					std::replace(lightMapPath.begin(), lightMapPath.end(), ' ', '?');
 					std::replace(reflectionMapPath.begin(), reflectionMapPath.end(), ' ', '?');
 					std::replace(normalMapPath.begin(), normalMapPath.end(), ' ', '?');
-					std::replace(lodEntityID.begin(), lodEntityID.end(), ' ', '?');
+					std::replace(lodID.begin(), lodID.end(), ' ', '?');
 
 					// 1 model -> 1 line in file
 					file <<
 						"MODEL " <<
-						entityID << " " <<
+						modelID << " " <<
 						position.x << " " <<
 						position.y << " " <<
 						position.z << " " <<
@@ -266,7 +266,7 @@ void SceneEditor::saveSceneToFile()
 						color.g << " " <<
 						color.b << " " <<
 						uvRepeat << " " <<
-						lodEntityID << " " <<
+						lodID << " " <<
 						isInstanced;
 
 					// Write instanced offset data
@@ -314,26 +314,26 @@ void SceneEditor::saveSceneToFile()
 			}
 
 			// Write BILLBOARD entities data into file
-			for (auto& entityID : _fe3d.billboardEntity_getAllIDs())
+			for (auto& billboardID : _fe3d.billboardEntity_getAllIDs())
 			{
 				// Check if not a preview entity
-				if (entityID[0] != '@')
+				if (billboardID[0] != '@')
 				{
 					// Retrieve all valus
-					auto position = _fe3d.billboardEntity_getPosition(entityID);
-					auto rotation = _fe3d.billboardEntity_getRotation(entityID);
-					auto size = _fe3d.billboardEntity_getSize(entityID);
-					auto color = _fe3d.billboardEntity_getColor(entityID);
-					auto diffusePath = _fe3d.billboardEntity_getDiffuseMapPath(entityID);
-					auto fontPath = _fe3d.billboardEntity_getFontPath(entityID);
-					auto textContent = _fe3d.billboardEntity_getTextContent(entityID);
-					auto isFacingX = _fe3d.billboardEntity_isFacingCameraX(entityID);
-					auto isFacingY = _fe3d.billboardEntity_isFacingCameraY(entityID);
-					auto isTransparent = _fe3d.billboardEntity_isTransparent(entityID);
-					auto isAnimated = _fe3d.billboardEntity_isAnimationPlaying(entityID);
-					auto animationRows = _fe3d.billboardEntity_getAnimationRows(entityID);
-					auto animationColumns = _fe3d.billboardEntity_getAnimationColumns(entityID);
-					auto animationFramestep = _fe3d.billboardEntity_getAnimationFramestep(entityID);
+					auto position = _fe3d.billboardEntity_getPosition(billboardID);
+					auto rotation = _fe3d.billboardEntity_getRotation(billboardID);
+					auto size = _fe3d.billboardEntity_getSize(billboardID);
+					auto color = _fe3d.billboardEntity_getColor(billboardID);
+					auto diffusePath = _fe3d.billboardEntity_getDiffuseMapPath(billboardID);
+					auto fontPath = _fe3d.billboardEntity_getFontPath(billboardID);
+					auto textContent = _fe3d.billboardEntity_getTextContent(billboardID);
+					auto isFacingX = _fe3d.billboardEntity_isFacingCameraX(billboardID);
+					auto isFacingY = _fe3d.billboardEntity_isFacingCameraY(billboardID);
+					auto isTransparent = _fe3d.billboardEntity_isTransparent(billboardID);
+					auto isAnimated = _fe3d.billboardEntity_isAnimationPlaying(billboardID);
+					auto animationRows = _fe3d.billboardEntity_getAnimationRows(billboardID);
+					auto animationColumns = _fe3d.billboardEntity_getAnimationColumns(billboardID);
+					auto animationFramestep = _fe3d.billboardEntity_getAnimationFramestep(billboardID);
 
 					// Perform empty string & space conversions
 					diffusePath = (diffusePath == "") ? "?" : diffusePath;
@@ -346,7 +346,7 @@ void SceneEditor::saveSceneToFile()
 					// Export data
 					file <<
 						"BILLBOARD " <<
-						entityID << " " <<
+						billboardID << " " <<
 						position.x << " " <<
 						position.y << " " <<
 						position.z << " " <<
@@ -400,20 +400,20 @@ void SceneEditor::saveSceneToFile()
 				billboardSize << std::endl;
 
 			// Point lights
-			for (auto& entityID : _fe3d.lightEntity_getAllIDs())
+			for (auto& lightID : _fe3d.lightEntity_getAllIDs())
 			{
 				// Check if not preview light
-				if (entityID[0] != '@')
+				if (lightID[0] != '@')
 				{
-					auto position = _fe3d.lightEntity_getPosition(entityID);
-					auto color = _fe3d.lightEntity_getColor(entityID);
-					auto intensity = _fe3d.lightEntity_getIntensity(entityID);
-					auto distance = _fe3d.lightEntity_getDistanceFactor(entityID);
+					auto position = _fe3d.lightEntity_getPosition(lightID);
+					auto color = _fe3d.lightEntity_getColor(lightID);
+					auto intensity = _fe3d.lightEntity_getIntensity(lightID);
+					auto distance = _fe3d.lightEntity_getDistanceFactor(lightID);
 
 					// Write line to file
 					file <<
 						"POINT_LIGHT " <<
-						entityID << " " <<
+						lightID << " " <<
 						position.x << " " <<
 						position.y << " " <<
 						position.z << " " <<
@@ -426,15 +426,15 @@ void SceneEditor::saveSceneToFile()
 			}
 
 			// Audio casters
-			for (auto& entityID : _fe3d.audioEntity_getAllIDs())
+			for (auto& audioID : _fe3d.audioEntity_getAllIDs())
 			{
 				// Check if not preview audio
-				if (entityID[0] != '@')
+				if (audioID[0] != '@')
 				{
-					string audioPath = _fe3d.audioEntity_getFilePath(entityID);
-					auto position = _fe3d.audioEntity_getPosition(entityID);
-					auto volume = _fe3d.audioEntity_getMaxVolume(entityID);
-					auto distance = _fe3d.audioEntity_getMaxDistance(entityID);
+					string audioPath = _fe3d.audioEntity_getFilePath(audioID);
+					auto position = _fe3d.audioEntity_getPosition(audioID);
+					auto volume = _fe3d.audioEntity_getMaxVolume(audioID);
+					auto distance = _fe3d.audioEntity_getMaxDistance(audioID);
 
 					// Perform empty string & space conversions
 					audioPath = (audioPath == "?") ? "" : audioPath;
@@ -443,7 +443,7 @@ void SceneEditor::saveSceneToFile()
 					// Write line to file
 					file <<
 						"AUDIO " <<
-						entityID << " " <<
+						audioID << " " <<
 						audioPath << " " <<
 						position.x << " " <<
 						position.y << " " <<

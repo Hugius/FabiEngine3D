@@ -34,17 +34,17 @@ void AudioEditor::_updateMainMenu()
 				{
 					_isChoosingAudio = true;
 					_isEditingAudio = true;
-					for (auto& name : _audioNames) { name = name.substr(1); }
-					_gui.getGlobalScreen()->addChoiceForm("audioList", "Select audio", Vec2(-0.4f, 0.1f), _audioNames);
-					for (auto& name : _audioNames) { name = "@" + name; }
+					for (auto& name : _audioIDs) { name = name.substr(1); }
+					_gui.getGlobalScreen()->addChoiceForm("audioList", "Select audio", Vec2(-0.4f, 0.1f), _audioIDs);
+					for (auto& name : _audioIDs) { name = "@" + name; }
 				}
 				else if (screen->getButton("deleteAudio")->isHovered()) // Delete audio button
 				{
 					_isChoosingAudio = true;
 					_isRemovingAudio = true;
-					for (auto& name : _audioNames) { name = name.substr(1); }
-					_gui.getGlobalScreen()->addChoiceForm("audioList", "Select audio", Vec2(-0.4f, 0.1f), _audioNames);
-					for (auto& name : _audioNames) { name = "@" + name; }
+					for (auto& name : _audioIDs) { name = name.substr(1); }
+					_gui.getGlobalScreen()->addChoiceForm("audioList", "Select audio", Vec2(-0.4f, 0.1f), _audioIDs);
+					for (auto& name : _audioIDs) { name = "@" + name; }
 				}
 			}
 
@@ -75,36 +75,45 @@ void AudioEditor::_updateAudioCreation()
 			// Check if user filled in a new name
 			if (_gui.getGlobalScreen()->checkValueForm("newAudioName", newAudioName, { _currentAudioID }))
 			{
+				// Check if name starts with @ sign
 				if (newAudioName[0] != '@')
 				{
-					// Add @ sign to new name
-					newAudioName = "@" + newAudioName;
-
-					// Check if name already exists
-					if (std::find(_audioNames.begin(), _audioNames.end(), newAudioName) == _audioNames.end()) // If name not existing yet
+					// Check if name contains spaces
+					if (newAudioName.find(' ') == string::npos)
 					{
-						// Go to editor
-						_gui.getViewport("left")->getWindow("main")->setActiveScreen("audioEditorMenuChoice");
+						// Add @ sign to new name
+						newAudioName = "@" + newAudioName;
 
-						// Select audio
-						_currentAudioID = newAudioName;
-						_audioNames.push_back(newAudioName);
+						// Check if name already exists
+						if (std::find(_audioIDs.begin(), _audioIDs.end(), newAudioName) == _audioIDs.end()) // If name not existing yet
+						{
+							// Go to editor
+							_gui.getViewport("left")->getWindow("main")->setActiveScreen("audioEditorMenuChoice");
 
-						// Miscellaneous
-						_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedAudioName")->getEntityID(), "Audio: " +
-							_currentAudioID.substr(1), 0.025f);
-						_fe3d.textEntity_show(_gui.getGlobalScreen()->getTextfield("selectedAudioName")->getEntityID());
-						_isCreatingAudio = false;
-						_isEditingAudio = true;
+							// Select audio
+							_currentAudioID = newAudioName;
+							_audioIDs.push_back(newAudioName);
+
+							// Miscellaneous
+							_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedAudioName")->getEntityID(), "Audio: " +
+								_currentAudioID.substr(1), 0.025f);
+							_fe3d.textEntity_show(_gui.getGlobalScreen()->getTextfield("selectedAudioName")->getEntityID());
+							_isCreatingAudio = false;
+							_isEditingAudio = true;
+						}
+						else // Name already exists
+						{
+							_fe3d.logger_throwWarning("Audio name \"" + newAudioName.substr(1) + "\" already exists!");
+						}
 					}
-					else // Name already exists
+					else
 					{
-						_fe3d.logger_throwWarning("Audio name \"" + newAudioName.substr(1) + "\" already exists!");
+						_fe3d.logger_throwWarning("New audio name cannot contain any spaces!");
 					}
 				}
 				else
 				{
-					_fe3d.logger_throwWarning("New audio name cannot begin with '@'");
+					_fe3d.logger_throwWarning("New audio name cannot begin with '@'!");
 				}
 			}
 		}
@@ -173,7 +182,7 @@ void AudioEditor::_updateAudioRemoval()
 				}
 
 				// Miscellaneous
-				_audioNames.erase(std::remove(_audioNames.begin(), _audioNames.end(), _currentAudioID), _audioNames.end());
+				_audioIDs.erase(std::remove(_audioIDs.begin(), _audioIDs.end(), _currentAudioID), _audioIDs.end());
 				_currentAudioID = "";
 				_gui.getGlobalScreen()->removeAnswerForm("removeAudio");
 				_isRemovingAudio = false;

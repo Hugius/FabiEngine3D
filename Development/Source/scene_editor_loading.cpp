@@ -51,14 +51,14 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 			if (entityType == "SKY")
 			{
 				// Values
-				string name;
+				string skyID;
 				std::array<string, 6> diffuseMapPaths{};
 				float rotationSpeed, lightness;
 				Vec3 color;
 
 				// Load base data
 				iss >>
-					name >>
+					skyID >>
 					diffuseMapPaths[0] >>
 					diffuseMapPaths[1] >>
 					diffuseMapPaths[2] >>
@@ -79,19 +79,19 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 				}
 
 				// Load entity
-				_currentSkyID = name;
+				_currentSkyID = skyID;
 				_placeSky(_currentSkyID, diffuseMapPaths, lightness, rotationSpeed, color);
 			}
 			else if (entityType == "TERRAIN")
 			{
 				// Values
-				string name, heightMapPath, diffuseMapPath, blendMapPath, blendMapPathR, blendMapPathG, blendMapPathB;
+				string terrainID, heightMapPath, diffuseMapPath, blendMapPath, blendMapPathR, blendMapPathG, blendMapPathB;
 				float maxHeight, uvRepeat, lightness, blendRepeatR, blendRepeatG, blendRepeatB, specularIntensity;
 				bool isBlendMapped, isSpecular;
 
 				// Load base data
 				iss >>
-					name >>
+					terrainID >>
 					heightMapPath >>
 					diffuseMapPath >>
 					maxHeight >>
@@ -123,14 +123,14 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 				std::replace(blendMapPathB.begin(), blendMapPathB.end(), '?', ' ');
 
 				// Add new terrain entity
-				_currentTerrainID = name;
+				_currentTerrainID = terrainID;
 				_placeTerrain(_currentTerrainID, heightMapPath, maxHeight, uvRepeat, isBlendMapped, lightness, blendRepeatR, blendRepeatG, blendRepeatB, 
 					isSpecular, specularIntensity, diffuseMapPath, blendMapPath, blendMapPathR, blendMapPathG, blendMapPathB);
 			}
 			else if (entityType == "WATER")
 			{
 				// Values
-				string name, dudvMapPath, normalMapPath, displacementMapPath;
+				string waterID, dudvMapPath, normalMapPath, displacementMapPath;
 				bool isWaving, isRippling, isSpecularLighted, isReflective, isRefractive;
 				Vec2 speed;
 				Vec3 color, position;
@@ -138,7 +138,7 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 
 				// Load base data
 				iss >>
-					name >>
+					waterID >>
 					dudvMapPath >>
 					normalMapPath >>
 					displacementMapPath >>
@@ -171,7 +171,7 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 				std::replace(displacementMapPath.begin(), displacementMapPath.end(), '?', ' ');
 
 				// Load entity
-				_currentWaterID = name;
+				_currentWaterID = waterID;
 				_placeWater(_currentWaterID, position, size, isWaving, isRippling, isSpecularLighted, isReflective,
 					isRefractive, waveHeightFactor, specularFactor, specularIntensity, transparency, color, uvRepeat,
 					speed, dudvMapPath, normalMapPath, displacementMapPath);
@@ -264,17 +264,17 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 				while (true)
 				{
 					// Check if file has AABB data left
-					string name;
+					string aabbName;
 					Vec3 position, size;
-					iss >> name;
-					if (name == "")
+					iss >> aabbName;
+					if (aabbName == "")
 					{
 						break;
 					}
 					else
 					{
 						iss >> position.x >> position.y >> position.z >> size.x >> size.y >> size.z;
-						aabbNames.push_back(name);
+						aabbNames.push_back(aabbName);
 						aabbPositions.push_back(position);
 						aabbSizes.push_back(size);
 					}

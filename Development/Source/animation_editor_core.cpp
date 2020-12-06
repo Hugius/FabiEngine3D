@@ -60,6 +60,9 @@ void AnimationEditor::load()
 	_modelEditor.loadGameEntitiesFromFile();
 	_fe3d.gameEntity_setLevelOfDetailDistance(1000.0f);
 
+	// Load animations
+	loadAnimationsFromFile();
+
 	// Miscellaneous
 	_gui.getGlobalScreen()->addTextfield("selectedAnimationName", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
 	_gui.getGlobalScreen()->addTextfield("selectedAnimationFrame", Vec2(0.0f, 0.725f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
@@ -77,8 +80,9 @@ void AnimationEditor::unload()
 	// Delete models
 	_fe3d.gameEntity_deleteAll();
 
-	// Delete animation name textfield
+	// Delete animation textfields
 	_gui.getGlobalScreen()->deleteTextfield("selectedAnimationName");
+	_gui.getGlobalScreen()->deleteTextfield("selectedAnimationFrame");
 
 	// Reset variables
 	_currentAnimationID = "";

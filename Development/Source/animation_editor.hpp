@@ -21,6 +21,7 @@ public:
 	void startAnimation(const string& animationID, const string& modelID);
 	bool isAnimationPlaying(const string& animationID, const string& modelID);
 	void stopAnimation(const string& animationID, const string& modelID);
+	void stopAllAnimations();
 
 	bool isLoaded();
 
@@ -45,12 +46,12 @@ private:
 	ModelEditor& _modelEditor;
 
 	// Containers
+	vector<shared_ptr<Animation>> _animations;
 	map<string, Animation> _playingAnimations;
 
 	// Strings
 	string _currentProjectName = "";
 	string _currentAnimationID = "";
-	vector<shared_ptr<Animation>> _animations;
 
 	// Vector3
 	const Vec3 _defaultCameraPosition = Vec3(0.0f, 5.0f, 5.0f);

@@ -26,21 +26,61 @@ void AnimationEditor::loadAnimationsFromFile()
 		while (std::getline(file, line))
 		{
 			// Placeholder variables
-			string name, audioPath;
+			string animationID, previewModelID;
+			int transformationType;
 
 			// For file extraction
 			std::istringstream iss(line);
 
-			// Extract from file
-			iss >> name >> audioPath;
+			// Extract general data from file
+			iss >> animationID >> previewModelID >> transformationType;
 
-			// Perform empty string & space conversions
-			//audioPath = (audioPath == "?") ? "" : audioPath;
-			//std::replace(audioPath.begin(), audioPath.end(), '?', ' ');
+			// Extract frame data from file
+			vector<AnimationFrame> frames;
+			while (true)
+			{
+				// Temporary values
+				Vec3 targetTransformation;
+				float speed;
+				int speedType;
 
-			//// Add audio name
-			//_audioNames.push_back(name);
-			//_fe3d.audioEntity_add2D(name, audioPath);
+				// Check if file has frame data left
+				if (iss >> targetTransformation.x)
+				{
+					iss >> targetTransformation.y >> targetTransformation.z >> speed >> speedType;
+					AnimationFrame frame;
+					frame.targetTransformation = targetTransformation;
+					frame.speed = speed;
+					frame.speedType = AnimationSpeedType(speedType);
+					frames.push_back(frame);
+				}
+				else
+				{
+					break;
+				}
+			}
+
+			// Create new animation
+			auto newAnimation = make_shared<Animation>(animationID);
+			newAnimation->previewModelID = previewModelID;
+			newAnimation->transformationType = TransformationType(transformationType);
+			newAnimation->frames.insert(newAnimation->frames.end(), frames.begin(), frames.end());
+
+			// Check if preview model is still existing
+			if (_fe3d.gameEntity_isExisting(newAnimation->previewModelID))
+			{
+				newAnimation->initialTranslation = _fe3d.gameEntity_getPosition(newAnimation->previewModelID);
+				newAnimation->initialRotation = _fe3d.gameEntity_getRotation(newAnimation->previewModelID);
+				newAnimation->initialScaling = _fe3d.gameEntity_getSize(newAnimation->previewModelID);
+			}
+			else // Clear preview model
+			{
+				newAnimation->previewModelID = "";
+				_fe3d.logger_throwWarning("Preview model of animation with ID \"" + newAnimation->ID + "\" not existing anymore!");
+			}
+
+			// Add new animation
+			_animations.push_back(newAnimation);
 		}
 
 		// Close file
@@ -49,6 +89,11 @@ void AnimationEditor::loadAnimationsFromFile()
 		// Logging
 		_fe3d.logger_throwInfo("Audio data from project \"" + _currentProjectName + "\" loaded!");
 	}
+}
+
+void AnimationEditor::stopAllAnimations()
+{
+	_playingAnimations.clear();
 }
 
 void AnimationEditor::saveAnimationsToFile()
@@ -71,31 +116,52 @@ void AnimationEditor::saveAnimationsToFile()
 			// Retrieve all values
 			auto animationID = animation->ID;
 			auto previewModelID = animation->previewModelID;
-			auto initialTranslation = animation->initialTranslation;
-			auto initialRotation = animation->initialRotation;
-			auto initialScaling = animation->initialScaling;
 			auto transformationType = static_cast<int>(animation->transformationType);
 
-			// Export data
-			file << 
-				animationID << " " << 
-				previewModelID << " " << 
-				initialTranslation.x << " " <<
-				initialTranslation.y << " " <<
-				initialTranslation.z << " " <<
-				initialRotation.x << " " <<
-				initialRotation.y << " " <<
-				initialRotation.z << " " <<
-				initialScaling.x << " " <<
-				initialScaling.y << " " <<
-				initialScaling.z << " " <<
-				transformationType << " " << std::endl;
+			// Export  general data
+			file <<
+				animationID << " " <<
+				previewModelID << " " <<
+				transformationType;
+
+			// Add space
+			if (animation->frames.size() > 1)
+			{
+				file << " ";
+			}
+
+			// Export frame data
+			if (animation->frames.size() > 1)
+			{
+				for (unsigned int i = 1; i < animation->frames.size(); i++)
+				{
+					auto targetTransformation = animation->frames[i].targetTransformation;
+					auto speed = animation->frames[i].speed;
+					auto speedType = static_cast<int>(animation->frames[i].speedType);
+
+					file <<
+						targetTransformation.x << " " <<
+						targetTransformation.y << " " <<
+						targetTransformation.z << " " <<
+						speed << " " <<
+						speedType;
+
+					// Add space
+					if (i != (animation->frames.size() - 1))
+					{
+						file << " ";
+					}
+				}
+			}
+
+			// Add newline
+			file << std::endl;
 		}
 
 		// Close file
 		file.close();
 
 		// Logging
-		_fe3d.logger_throwInfo("Audio data from project \"" + _currentProjectName + "\" saved!");
+		_fe3d.logger_throwInfo("Animation data from project \"" + _currentProjectName + "\" saved!");
 	}
 }

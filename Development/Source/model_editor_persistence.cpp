@@ -231,7 +231,8 @@ void ModelEditor::saveGameEntitiesToFile()
 						file << " ";
 					}
 				}
-					
+				
+				// Add newline
 				file << std::endl;
 			}
 			else

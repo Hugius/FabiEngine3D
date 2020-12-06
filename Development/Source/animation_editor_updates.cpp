@@ -83,7 +83,6 @@ void AnimationEditor::_updateAnimationCreation()
 					auto animationIDs = _getAnimationIDs();
 					if (std::find(animationIDs.begin(), animationIDs.end(), newAnimationName) == animationIDs.end())
 					{
-
 						// Go to editor
 						_gui.getViewport("left")->getWindow("main")->setActiveScreen("animationEditorMenuChoice");
 
@@ -95,7 +94,7 @@ void AnimationEditor::_updateAnimationCreation()
 
 						// Miscellaneous
 						auto textID = _gui.getGlobalScreen()->getTextfield("selectedAnimationName")->getEntityID();
-						_fe3d.textEntity_setTextContent(textID, "Animation: " + _currentAnimationID.substr(1), 0.025f);
+						_fe3d.textEntity_setTextContent(textID, "Animation: " + _currentAnimationID, 0.025f);
 						_fe3d.textEntity_show(_gui.getGlobalScreen()->getTextfield("selectedAnimationName")->getEntityID());
 						_fe3d.textEntity_show(_gui.getGlobalScreen()->getTextfield("selectedAnimationFrame")->getEntityID());
 						_isCreatingAnimation = false;
@@ -104,7 +103,7 @@ void AnimationEditor::_updateAnimationCreation()
 					}
 					else // Name already exists
 					{
-						_fe3d.logger_throwWarning("Animation name \"" + newAnimationName.substr(1) + "\" already exists!");
+						_fe3d.logger_throwWarning("Animation name \"" + newAnimationName + "\" already exists!");
 					}
 				}
 				else
@@ -140,7 +139,7 @@ void AnimationEditor::_updateAnimationChoice()
 
 						// Show text
 						auto textID = _gui.getGlobalScreen()->getTextfield("selectedAnimationName")->getEntityID();
-						_fe3d.textEntity_setTextContent(textID, "Animation: " + _currentAnimationID.substr(1), 0.025f);
+						_fe3d.textEntity_setTextContent(textID, "Animation: " + _currentAnimationID, 0.025f);
 						_fe3d.textEntity_show(_gui.getGlobalScreen()->getTextfield("selectedAnimationName")->getEntityID());
 						_fe3d.textEntity_show(_gui.getGlobalScreen()->getTextfield("selectedAnimationFrame")->getEntityID());
 

@@ -7,12 +7,13 @@
 
 TopViewportController::TopViewportController(FabiEngine3D& fe3d, EngineGuiManager& gui,
 	EnvironmentEditor& environmentEditor, ModelEditor& modelEditor, BillboardEditor& billboardEditor,
-	SceneEditor& sceneEditor, ScriptEditor& scriptEditor, AudioEditor& audioEditor) :
+	SceneEditor& sceneEditor, AnimationEditor& animationEditor, ScriptEditor& scriptEditor, AudioEditor& audioEditor) :
 	ViewportController(fe3d, gui),
 	_modelEditor(modelEditor),
 	_environmentEditor(environmentEditor),
 	_billboardEditor(billboardEditor),
 	_sceneEditor(sceneEditor),
+	_animationEditor(animationEditor),
 	_scriptEditor(scriptEditor),
 	_audioEditor(audioEditor)
 {
@@ -222,6 +223,7 @@ void TopViewportController::_saveCurrentProject()
 	_modelEditor.saveGameEntitiesToFile();
 	_billboardEditor.saveBillboardEntitiesToFile();
 	_sceneEditor.saveSceneToFile();
+	_animationEditor.saveAnimationsToFile();
 	_scriptEditor.saveScriptsToFile();
 	_audioEditor.saveAudioEntitiesToFile();
 
@@ -268,6 +270,12 @@ void TopViewportController::_updateCurrentProject()
 		_sceneEditor.unload();
 	}
 
+	// Unload animation editor
+	if (_animationEditor.isLoaded())
+	{
+		_animationEditor.unload();
+	}
+
 	// Unload script editor
 	if (_scriptEditor.isLoaded())
 	{
@@ -285,6 +293,7 @@ void TopViewportController::_updateCurrentProject()
 	_modelEditor.setCurrentProjectName(_currentProjectName);
 	_billboardEditor.setCurrentProjectName(_currentProjectName);
 	_sceneEditor.setCurrentProjectName(_currentProjectName);
+	_animationEditor.setCurrentProjectName(_currentProjectName);
 	_scriptEditor.setCurrentProjectName(_currentProjectName);
 	_audioEditor.setCurrentProjectName(_currentProjectName);
 }

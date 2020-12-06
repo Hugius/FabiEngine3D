@@ -145,7 +145,7 @@
     <ClInclude Include="Source\animation.hpp" />
     <ClInclude Include="Source\animation_editor.hpp" />
     <ClInclude Include="Source\animation_frame.hpp" />
-    <ClInclude Include="Source\animation_type.hpp" />
+    <ClInclude Include="Source\animation_speed_type.hpp" />
     <ClInclude Include="Source\audio_chunk.hpp" />
     <ClInclude Include="Source\audio_editor.hpp" />
     <ClInclude Include="Source\audio_loader.hpp" />

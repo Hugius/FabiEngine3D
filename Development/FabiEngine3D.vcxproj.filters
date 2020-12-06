@@ -924,7 +924,7 @@
     <ClInclude Include="Source\animation_frame.hpp">
       <Filter>src\Editor System\Animation Editor\Miscellaneous</Filter>
     </ClInclude>
-    <ClInclude Include="Source\animation_type.hpp">
+    <ClInclude Include="Source\animation_speed_type.hpp">
       <Filter>src\Miscellaneous\Enums</Filter>
     </ClInclude>
   </ItemGroup>

@@ -9,8 +9,10 @@ void AnimationEditor::startAnimation(const string& animationID, const string& mo
 	// Check if animation is not already playing
 	if (_playingAnimations.find(composedID) == _playingAnimations.end())
 	{
+		// Check if animation exists
 		if (_isAnimationExisting(animationID))
 		{
+			// Check if model trying to animate exists
 			if (_fe3d.gameEntity_isExisting(modelID))
 			{
 				auto animation = _getAnimation(animationID);
@@ -60,10 +62,13 @@ void AnimationEditor::_updateAnimationExecution()
 {
 	vector<string> animationsThatEnded;
 
+	// Update all playing animations
 	for (auto& [ID, animation] : _playingAnimations)
 	{
+		// Retrieve current frame
 		const auto& frame = animation.frames[animation.frameIndex];
 
+		// Determine transformation type
 		if (animation.transformationType == TransformationType::TRANSLATION)
 		{
 			

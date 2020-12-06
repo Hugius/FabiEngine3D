@@ -5,7 +5,7 @@ EngineController::EngineController() :
 	_leftViewportController(*this, _gui),
 	_rightViewportController(*this, _gui),
 	_topViewportController(*this, _gui, _leftViewportController.getEnvironmentEditor(), _leftViewportController.getModelEditor(),
-		_leftViewportController.getBillboardEditor(), _leftViewportController.getSceneEditor(), 
+		_leftViewportController.getBillboardEditor(), _leftViewportController.getSceneEditor(), _leftViewportController.getAnimationEditor(),
 		_leftViewportController.getScriptEditor(), _leftViewportController.getAudioEditor()),
 	_bottomViewportController(*this, _gui)
 {

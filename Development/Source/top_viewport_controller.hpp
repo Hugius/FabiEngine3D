@@ -15,7 +15,7 @@ class TopViewportController final : public ViewportController
 public:
 	TopViewportController(FabiEngine3D& fe3d, EngineGuiManager& gui, 
 		EnvironmentEditor& environmentEditor, ModelEditor& modelEditor, BillboardEditor& billboardEditor, 
-		SceneEditor& sceneEditor, ScriptEditor& scriptEditor, AudioEditor& audioEditor);
+		SceneEditor& sceneEditor, AnimationEditor& animationEditor, ScriptEditor& scriptEditor, AudioEditor& audioEditor);
 	~TopViewportController() = default;
 
 	void initialize() override;
@@ -44,6 +44,7 @@ private:
 	ModelEditor& _modelEditor;
 	BillboardEditor& _billboardEditor;
 	SceneEditor& _sceneEditor;
+	AnimationEditor& _animationEditor;
 	ScriptEditor& _scriptEditor;
 	AudioEditor& _audioEditor;
 

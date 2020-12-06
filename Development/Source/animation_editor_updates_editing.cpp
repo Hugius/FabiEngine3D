@@ -53,6 +53,13 @@ void AnimationEditor::_updateEditingScreen()
 				}
 				else if (screen->getButton("editFrame")->isHovered())
 				{
+					// First stop animation
+					if (isAnimationPlaying(_currentAnimationID, currentAnimation->previewModelID))
+					{
+						stopAnimation(_currentAnimationID, currentAnimation->previewModelID);
+					}
+
+					// Go to editor screen
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("animationEditorMenuFrame");
 				}
 				else if (screen->getButton("deleteFrame")->isHovered())
@@ -103,7 +110,8 @@ void AnimationEditor::_updateEditingScreen()
 			screen->getButton("play")->setHoverable(!isAnimationPlaying(_currentAnimationID, currentAnimation->previewModelID));
 			screen->getButton("stop")->setHoverable(isAnimationPlaying(_currentAnimationID, currentAnimation->previewModelID));
 			screen->getButton("addFrame")->setHoverable(currentAnimation->frames.size() < _maxFrameCount);
-			screen->getButton("deleteFrame")->setHoverable(currentAnimation->frames.size() > 1);
+			screen->getButton("editFrame")->setHoverable(_currentFrameIndex > 0);
+			screen->getButton("deleteFrame")->setHoverable(currentAnimation->frames.size() > 1 && _currentFrameIndex > 0);
 			screen->getButton("prev")->setHoverable(_currentFrameIndex > 0);
 			screen->getButton("next")->setHoverable(_currentFrameIndex < (currentAnimation->frames.size() - 1));
 
@@ -172,15 +180,20 @@ void AnimationEditor::_updateFrameScreen()
 				}
 				else if (screen->getButton("speed")->isHovered())
 				{
-					_gui.getGlobalScreen()->addValueForm("transformationSpeed", "Transformation speed", speed, Vec2(0.0f, 0.0f), Vec2(0.2f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("transformationSpeed", "Transformation speed", speed * 100.0f, Vec2(0.0f, 0.0f), Vec2(0.2f, 0.1f));
 				}
 			}
 
-			// Update changes
+			// Update transformation changes
 			_gui.getGlobalScreen()->checkValueForm("xTransformation", transformation.x, { });
 			_gui.getGlobalScreen()->checkValueForm("yTransformation", transformation.y, { });
 			_gui.getGlobalScreen()->checkValueForm("zTransformation", transformation.z, { });
-			_gui.getGlobalScreen()->checkValueForm("transformationSpeed", speed, { });
+
+			// Update speed change
+			if (_gui.getGlobalScreen()->checkValueForm("transformationSpeed", speed, { }))
+			{
+				speed /= 100.0f;
+			}
 		}
 	}
 }

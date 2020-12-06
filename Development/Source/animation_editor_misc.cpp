@@ -69,7 +69,7 @@ void AnimationEditor::_deleteAnimation(const string& ID)
 {
 	for (unsigned int i = 0; i < _animations.size(); i++)
 	{
-		if (ID == _animations[i]->ID)
+		if (_animations[i]->ID == ID)
 		{
 			_animations.erase(_animations.begin() + i);
 		}
@@ -82,7 +82,7 @@ bool AnimationEditor::_isAnimationExisting(const string& ID)
 {
 	for (auto& animation : _animations)
 	{
-		if (ID == animation->ID)
+		if (animation->ID == ID)
 		{
 			return true;
 		}
@@ -107,7 +107,7 @@ shared_ptr<Animation> AnimationEditor::_getAnimation(const string& ID)
 {
 	for (auto& animation : _animations)
 	{
-		if (animation->ID == _currentAnimationID)
+		if (animation->ID == ID)
 		{
 			return animation;
 		}

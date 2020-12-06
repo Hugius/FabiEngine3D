@@ -1,7 +1,7 @@
 #pragma once
 
 #include "fabi_engine_3d.hpp"
-#include "animation_type.hpp"
+#include "animation_speed_type.hpp"
 
 struct AnimationFrame
 {
@@ -9,5 +9,5 @@ struct AnimationFrame
 
 	float speed = 0.0f;
 
-	AnimationType speedType;
+	AnimationSpeedType speedType;
 };

@@ -95,11 +95,12 @@ bool EngineGuiGlobalScreen::isValueFormExisting(const string& ID)
 
 void EngineGuiGlobalScreen::_addValueForm(const string& ID, string title, string valueString, Vec2 position, Vec2 size, bool onlyNumbers)
 {
+	// Check if not already exists
 	if (ID != "" && std::find(_valueFormIDs.begin(), _valueFormIDs.end(), ID) == _valueFormIDs.end())
 	{
 		_valueFormIDs.push_back(ID);
 		addRectangle(ID, position + Vec2(0.0f, 0.15f), Vec2(title.size() * 0.0275f, 0.125f), Vec3(0.0f));
-		addTextfield(ID, position + Vec2(0.0f, 0.15f), Vec2(title.size() * 0.025f, 0.1f), title, Vec3(1.0f));
+		addTextfield(ID, position + Vec2(0.0f, 0.15f), Vec2(title.size() * 0.0275f, 0.125f), title, Vec3(1.0f));
 		addWriteField(ID, position, size, Vec3(0.25f), Vec3(0.5f), Vec3(1.0f), Vec3(0.0f), false, onlyNumbers, onlyNumbers, onlyNumbers, onlyNumbers);
 		getWriteField(ID)->setTextContent(valueString);
 

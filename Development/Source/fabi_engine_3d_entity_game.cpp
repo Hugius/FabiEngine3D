@@ -166,7 +166,7 @@ bool FabiEngine3D::gameEntity_isInstanced(const string& ID)
 	}
 }
 
-bool FabiEngine3D::gameEntity_isMultiTextured(const string& ID)
+bool FabiEngine3D::gameEntity_isMultiParted(const string& ID)
 {
 	return (_core->_gameEntityManager.getEntity(ID)->getOglBuffers().size() > 1);
 }
@@ -447,6 +447,11 @@ const vector<string>& FabiEngine3D::gameEntity_getReflectionMapPaths(const strin
 const vector<string>& FabiEngine3D::gameEntity_getNormalMapPaths(const string& ID)
 {
 	return _core->_gameEntityManager.getEntity(ID)->getNormalMapPaths();
+}
+
+const vector<string>& FabiEngine3D::gameEntity_getPartNames(const string& ID)
+{
+	return _core->_gameEntityManager.getEntity(ID)->getPartNames();
 }
 
 void FabiEngine3D::gameEntity_setAlpha(const string& ID, float alpha)

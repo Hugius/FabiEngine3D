@@ -345,9 +345,9 @@ void ModelEditor::_updateCamera()
 
 		// Adding movement to the 3rd person view & making sure you cannot zoom inverted
 		_cameraDistance += _cameraScrollingAcceleration;
-		if (_cameraDistance < 0.0f)
+		if (_cameraDistance < 0.1f)
 		{
-			_cameraDistance = 0.0f;
+			_cameraDistance = 0.1f;
 		}
 
 		// Check if MMB pressed

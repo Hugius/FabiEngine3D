@@ -85,6 +85,7 @@ public:
 	const vector<string>& getLightMapPaths() const;
 	const vector<string>& getReflectionMapPaths() const;
 	const vector<string>& getNormalMapPaths() const;
+	const vector<string>& getPartNames() const;
 	const float getOriginalLightness() const;
 	const float getLightness() const;
 	const float getSpecularFactor() const;

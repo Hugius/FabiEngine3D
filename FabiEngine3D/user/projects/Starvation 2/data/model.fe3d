@@ -5,7 +5,7 @@
 @tree2_lod user\assets\models\tree_lowpoly.obj ? ? ? ? 3 3.5 3 0 1 1 0 0 1 1 1 1 1 1 1 ? 0
 @tree3 user\assets\models\tree8.obj ? ? ? ? 3 3 3 0 1 1 0 0 1 1 1 1 1 1 1 @tree3_lod 0 trunk 0 0 0 2.2 6.3 2.4 leaves 0 6.2 0.8 12 14.5 12.6
 @tree3_lod user\assets\models\tree_lowpoly.obj ? ? ? ? 4 4 4 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0
-@tree4 user\assets\models\tree9.obj ? ? ? ? 3 3 3 0 1 1 0 0 1 1 1 1 1 1 1 @tree4_lod 0 trunk 0 0 0 3.1 21.2 3 leaves 0 7.2 0 9.8 13.9 8.5
+@tree4 user\assets\models\tree9.obj ? ? ? ? 3 3 3 0 1 1 0 0 1 1 1 1 1 1 1 @tree4_lod 0 leaves 0 7.2 0 9.8 13.9 8.5 trunk 0 0 0 3.1 21.2 3
 @tree4_lod user\assets\models\tree_lowpoly.obj ? ? ? ? 3 4.5 3 0 1 1 0 0 1 1 1 1 1 1 1 ? 0
 @tree5 user\assets\models\tree10.obj ? ? ? ? 1.25 1.25 1.25 0 1 1 0 0 1 1 1 1 1 1 1 @tree5_lod 0 trunk 0 0 -1 8 5 4.5 leaves 2.5 5 -1.5 18.5 18.5 10
 @tree5_lod user\assets\models\tree_lowpoly.obj ? ? ? ? 4.5 4.5 4.5 0 1 0 0 0 10 150 0.5 1 1 1 1 ? 0
@@ -19,3 +19,4 @@
 @bush3 user\assets\models\tree13.obj ? ? ? ? 2 2 2 0 1 1 0 0 1 1 1 1 1 1 1 @bush3_lod 0 bush 0 0 0 2.2 5.5 2.3
 @bush3_lod user\assets\models\tree_lod.obj user\assets\textures\diffuse_maps\tree13_leaves.png ? ? ? 4 5.5 4 0 1 1 0 0 1 1 1 1 1 1 1 ? 0
 @lantern user\assets\models\lantern2.obj user\assets\textures\diffuse_maps\lantern2.png ? ? ? 1.24687 1.25 1.25 0 1 0 0 0 1 1 1 1 1 1 1 ? 0 pole 0 0 0 0.539009 8.26539 0.5688 holder 1 7 0 4.23624 0.66342 0.731421
+@skeleton user\assets\models\skeleton.obj ? ? ? ? 1 1 1 0 1 0 0 0 1 1 1 1 1 1 1 ? 0

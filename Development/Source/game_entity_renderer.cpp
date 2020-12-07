@@ -139,7 +139,6 @@ void GameEntityRenderer::render(const shared_ptr<GameEntity> entity)
 		_shader.uploadUniform("u_customAlpha", entity->getAlpha());
 		_shader.uploadUniform("u_isShadowed", entity->isShadowed());
 		_shader.uploadUniform("u_uvRepeat", entity->getUvRepeat());
-		_shader.uploadUniform("u_hasDiffuseMap", entity->hasDiffuseMap());
 		
 		// Check if entity is static to the camera view
 		if (entity->isCameraStatic())
@@ -163,28 +162,29 @@ void GameEntityRenderer::render(const shared_ptr<GameEntity> entity)
 			_shader.uploadUniform("u_normalModelMatrix", Matrix33(normalModelMatrix));
 
 			// Diffuse map
-			if (entity->hasDiffuseMap())
+			_shader.uploadUniform("u_hasDiffuseMap", entity->hasDiffuseMap() && entity->getDiffuseMap(index) != 0);
+			if (entity->hasDiffuseMap() && entity->getDiffuseMap(index) != 0)
 			{
 				glActiveTexture(GL_TEXTURE0);
 				glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap(index));
 			}
 
 			// Light map
-			if (entity->hasLightMap())
+			if (entity->hasLightMap() && entity->getLightMap(index) != 0)
 			{
 				glActiveTexture(GL_TEXTURE1);
 				glBindTexture(GL_TEXTURE_2D, entity->getLightMap(index));
 			}
 
 			// Normal map
-			if (entity->hasNormalMap())
+			if (entity->hasNormalMap() && entity->getNormalMap(index) != 0)
 			{
 				glActiveTexture(GL_TEXTURE2);
 				glBindTexture(GL_TEXTURE_2D, entity->getNormalMap(index));
 			}
 
 			// Reflection map for sky reflections
-			if (entity->hasReflectionMap())
+			if (entity->hasReflectionMap() && entity->getReflectionMap(index) != 0)
 			{
 				glActiveTexture(GL_TEXTURE3);
 				glBindTexture(GL_TEXTURE_2D, entity->getReflectionMap(index));

@@ -42,7 +42,7 @@ void ModelEditor::_updateModelEditingMesh()
 		bool hoverable = false;
 		if (existing)
 		{
-			hoverable = existing && !_fe3d.gameEntity_isMultiTextured(_currentModelID);
+			hoverable = existing && !_fe3d.gameEntity_isMultiParted(_currentModelID);
 		}
 
 		// Editing buttons hoverability

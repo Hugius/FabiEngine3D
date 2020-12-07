@@ -68,34 +68,22 @@ void GameEntity::setNormalMap(GLuint val)
 
 void GameEntity::addDiffuseMap(GLuint val)
 {
-	if (std::find(_diffuseMaps.begin(), _diffuseMaps.end(), val) == _diffuseMaps.end())
-	{
-		_diffuseMaps.push_back(val);
-	}
+	_diffuseMaps.push_back(val);
 }
 
 void GameEntity::addLightMap(GLuint val)
 {
-	if (std::find(_lightMaps.begin(), _lightMaps.end(), val) == _lightMaps.end())
-	{
-		_lightMaps.push_back(val);
-	}
+	_lightMaps.push_back(val);
 }
 
 void GameEntity::addReflectionMap(GLuint val)
 {
-	if (std::find(_reflectionMaps.begin(), _reflectionMaps.end(), val) == _reflectionMaps.end())
-	{
-		_reflectionMaps.push_back(val);
-	}
+	_reflectionMaps.push_back(val);
 }
 
 void GameEntity::addNormalMap(GLuint val)
 {
-	if (std::find(_normalMaps.begin(), _normalMaps.end(), val) == _normalMaps.end())
-	{
-		_normalMaps.push_back(val);
-	}
+	_normalMaps.push_back(val);
 }
 
 void GameEntity::setOriginalTranslation(Vec3 val)
@@ -510,6 +498,11 @@ const vector<string>& GameEntity::getReflectionMapPaths() const
 const vector<string>& GameEntity::getNormalMapPaths() const
 {
 	return _normalMapPaths;
+}
+
+const vector<string>& GameEntity::getPartNames() const
+{
+	return _partNames;
 }
 
 const bool GameEntity::isTransparent() const

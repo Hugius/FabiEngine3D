@@ -115,13 +115,10 @@ void AnimationEditor::_updateEditingScreen()
 			screen->getButton("prev")->setHoverable(_currentFrameIndex > 0);
 			screen->getButton("next")->setHoverable(_currentFrameIndex < (currentAnimation->frames.size() - 1));
 
-			// Get selected button ID
+			// Check if a animation name is clicked
 			string selectedButtonID = _gui.getGlobalScreen()->getSelectedChoiceFormButtonID("models");
-
-			// Check if a animation name is hovered
 			if (selectedButtonID != "")
 			{
-				// LMB pressed
 				if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 				{
 					// Hide old model
@@ -195,6 +192,26 @@ void AnimationEditor::_updateFrameScreen()
 						currentAnimation->frames[_currentFrameIndex].speedType = AnimationSpeedType::LINEAR;
 					}
 				}
+				else if (screen->getButton("part")->isHovered())
+				{
+					_gui.getGlobalScreen()->addChoiceForm("parts", "Select part", Vec2(-0.4f, 0.1f), 
+						_fe3d.gameEntity_getPartNames(currentAnimation->previewModelID));
+					
+				}
+			}
+
+			// Check if a animation name is clicked
+			string selectedButtonID = _gui.getGlobalScreen()->getSelectedChoiceFormButtonID("parts");
+			if (selectedButtonID != "")
+			{
+				if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
+				{
+
+				}
+			}
+			else if (_gui.getGlobalScreen()->isChoiceFormCancelled("parts")) // Cancelled choosing
+			{
+				_gui.getGlobalScreen()->removeChoiceForm("parts");
 			}
 
 			// Showing speed type

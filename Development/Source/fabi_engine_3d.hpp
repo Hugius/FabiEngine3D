@@ -258,7 +258,7 @@ public:
 	bool		   gameEntity_isExisting(const string& ID);
 	bool		   gameEntity_isVisible(const string& ID);
 	bool		   gameEntity_isInstanced(const string& ID);
-	bool		   gameEntity_isMultiTextured(const string& ID);
+	bool		   gameEntity_isMultiParted(const string& ID);
 	bool		   gameEntity_isTransparent(const string& ID);
 	bool		   gameEntity_isFaceCulled(const string& ID);
 	bool		   gameEntity_isLightMapped(const string& ID);
@@ -292,6 +292,7 @@ public:
 	const vector<string>& gameEntity_getLightMapPaths(const string& ID);
 	const vector<string>& gameEntity_getReflectionMapPaths(const string& ID);
 	const vector<string>& gameEntity_getNormalMapPaths(const string& ID);
+	const vector<string>& gameEntity_getPartNames(const string& ID);
 	vector<string> gameEntity_getAllIDs();
 	vector<string> gameEntity_getGroupIDs(const string& ID);
 

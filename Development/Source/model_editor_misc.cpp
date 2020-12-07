@@ -86,7 +86,7 @@ void ModelEditor::_loadOBJ()
 				_fe3d.misc_clearOBJCache(newFilePath);
 
 				// Check if multiparted entity
-				if (_fe3d.gameEntity_isMultiTextured(_currentModelID))
+				if (_fe3d.gameEntity_isMultiParted(_currentModelID))
 				{
 					// Clear texture cache
 					for (auto& path : _fe3d.gameEntity_getDiffuseMapPaths(_currentModelID))

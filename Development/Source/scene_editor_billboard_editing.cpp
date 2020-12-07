@@ -2,7 +2,7 @@
 
 void SceneEditor::_updateBillboardEditing()
 {
-	if (_isLoaded)
+	if (_isEditorLoaded)
 	{
 		// Reset selected billboard from last frame
 		if (!_dontResetSelectedBillboard)

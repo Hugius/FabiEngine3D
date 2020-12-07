@@ -4,7 +4,7 @@
 
 void BillboardEditor::_updateBillboardEditing()
 {
-	if (_isLoaded)
+	if (_isEditorLoaded)
 	{
 		if (_isEditingBillboard && _currentBillboardID != "")
 		{

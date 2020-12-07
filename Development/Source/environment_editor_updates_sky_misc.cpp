@@ -17,7 +17,7 @@ void EnvironmentEditor::_updateSkyEditor()
 
 void EnvironmentEditor::_updateSkyCreation()
 {
-	if (_isLoaded)
+	if (_isEditorLoaded)
 	{
 		if (_skyCreationEnabled)
 		{
@@ -70,7 +70,7 @@ void EnvironmentEditor::_updateSkyCreation()
 
 void EnvironmentEditor::_updateSkyChoosing()
 {
-	if (_isLoaded)
+	if (_isEditorLoaded)
 	{
 		if (_skyChoosingEnabled)
 		{
@@ -140,7 +140,7 @@ void EnvironmentEditor::_updateSkyChoosing()
 
 void EnvironmentEditor::_updateSkyRemoval()
 {
-	if (_isLoaded)
+	if (_isEditorLoaded)
 	{
 		if (_skyRemovalEnabled && _currentSkyID != "")
 		{
@@ -168,7 +168,7 @@ void EnvironmentEditor::_updateSkyRemoval()
 
 void EnvironmentEditor::_updateSkyCamera()
 {
-	if (_isLoaded && _currentSkyID != "")
+	if (_isEditorLoaded && _currentSkyID != "")
 	{
 		if (_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_RIGHT) && !_gui.getGlobalScreen()->isFocused())
 		{

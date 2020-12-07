@@ -107,7 +107,7 @@ void EnvironmentEditor::unloadTerrainEntities()
 
 void EnvironmentEditor::saveTerrainEntitiesToFile()
 {
-	if (_isLoaded)
+	if (_isEditorLoaded)
 	{
 		// Error checking
 		if (_currentProjectName == "")

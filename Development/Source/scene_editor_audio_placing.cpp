@@ -2,7 +2,7 @@
 
 void SceneEditor::_updateAudioPlacing()
 {
-	if (_isLoaded)
+	if (_isEditorLoaded)
 	{
 		// Only if user is in placement mode
 		if (!_currentPreviewAudioName.empty())

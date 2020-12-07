@@ -15,7 +15,7 @@ void BillboardEditor::update()
 
 void BillboardEditor::_updateBillboardManagement()
 {
-	if (_isLoaded)
+	if (_isEditorLoaded)
 	{
 		auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 		
@@ -69,7 +69,7 @@ void BillboardEditor::_updateBillboardManagement()
 
 void BillboardEditor::_updateBillboardCreation()
 {
-	if (_isLoaded)
+	if (_isEditorLoaded)
 	{
 		if (_isCreatingBillboard)
 		{
@@ -126,7 +126,7 @@ void BillboardEditor::_updateBillboardCreation()
 
 void BillboardEditor::_updateBillboardChoosing()
 {
-	if (_isLoaded)
+	if (_isEditorLoaded)
 	{
 		if (_isChoosingBillboard)
 		{
@@ -191,7 +191,7 @@ void BillboardEditor::_updateBillboardChoosing()
 
 void BillboardEditor::_updateBillboardRemoval()
 {
-	if (_isLoaded)
+	if (_isEditorLoaded)
 	{
 		if (_isRemovingBillboard && _currentBillboardID != "")
 		{
@@ -223,7 +223,7 @@ void BillboardEditor::_updateBillboardRemoval()
 
 void BillboardEditor::_updateBillboardCamera()
 {
-	if (_isLoaded)
+	if (_isEditorLoaded)
 	{
 		if (_currentBillboardID != "" || _hoveredBillboardID != "")
 		{

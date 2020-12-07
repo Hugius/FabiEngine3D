@@ -5,7 +5,7 @@
 
 void SceneEditor::saveSceneToFile()
 {
-	if (_isLoaded)
+	if (_isEditorLoaded)
 	{
 		// Error checking
 		if (_currentProjectName == "")

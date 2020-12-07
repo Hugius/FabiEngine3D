@@ -5,7 +5,7 @@
 
 bool SceneEditor::isLoaded()
 {
-	return _isLoaded;
+	return _isEditorLoaded;
 }
 
 bool SceneEditor::isSceneExisting(const string& fileName)
@@ -331,7 +331,7 @@ void SceneEditor::_handleValueChanging(const string& screenID, string buttonID, 
 
 void SceneEditor::_updateMiscellaneous()
 {
-	if (_isLoaded)
+	if (_isEditorLoaded)
 	{
 		// Lock toggling if GUI focused or cursor not in 3D viewport
 		_fe3d.input_setKeyTogglingLocked(_gui.getGlobalScreen()->isFocused() || !_fe3d.misc_isCursorInsideViewport());
@@ -387,7 +387,7 @@ void SceneEditor::clearScene()
 	_fe3d.gfx_disableMotionBlur();
 	_fe3d.gfx_disableLensFlare();
 
-	if (_isLoaded) // Currently in scene editor
+	if (_isEditorLoaded) // Currently in scene editor
 	{
 		// Delete sky entities
 		for (auto& ID : _fe3d.skyEntity_getAllIDs())

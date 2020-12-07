@@ -18,5 +18,5 @@ private:
 	FabiEngine3D& _fe3d;
 	EngineGuiManager& _gui;
 
-	bool _isLoaded = false;
+	bool _isEditorLoaded = false;
 };

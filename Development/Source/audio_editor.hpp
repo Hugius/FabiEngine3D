@@ -44,5 +44,5 @@ private:
 
 	// Miscellaneous
 	string _currentProjectName = "";
-	bool _isLoaded = false;
+	bool _isEditorLoaded = false;
 };

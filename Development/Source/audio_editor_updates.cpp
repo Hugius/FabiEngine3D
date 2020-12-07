@@ -12,7 +12,7 @@ void AudioEditor::update()
 
 void AudioEditor::_updateMainMenu()
 {
-	if (_isLoaded)
+	if (_isEditorLoaded)
 	{
 		auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
@@ -66,7 +66,7 @@ void AudioEditor::_updateMainMenu()
 
 void AudioEditor::_updateAudioCreation()
 {
-	if (_isLoaded)
+	if (_isEditorLoaded)
 	{
 		if (_isCreatingAudio)
 		{
@@ -122,7 +122,7 @@ void AudioEditor::_updateAudioCreation()
 
 void AudioEditor::_updateAudioChoosing()
 {
-	if (_isLoaded)
+	if (_isEditorLoaded)
 	{
 		if (_isChoosingAudio)
 		{
@@ -164,7 +164,7 @@ void AudioEditor::_updateAudioChoosing()
 
 void AudioEditor::_updateAudioRemoval()
 {
-	if (_isLoaded)
+	if (_isEditorLoaded)
 	{
 		if (_isRemovingAudio && _currentAudioID != "")
 		{

@@ -4,7 +4,7 @@
 
 void SceneEditor::_updateMainLightingMenu()
 {
-	if (_isLoaded)
+	if (_isEditorLoaded)
 	{
 		auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
@@ -36,7 +36,7 @@ void SceneEditor::_updateMainLightingMenu()
 
 void SceneEditor::_updateAmbientLightingMenu()
 {
-	if (_isLoaded)
+	if (_isEditorLoaded)
 	{
 		auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
@@ -97,7 +97,7 @@ void SceneEditor::_updateAmbientLightingMenu()
 
 void SceneEditor::_updateDirectionalLightingMenu()
 {
-	if (_isLoaded)
+	if (_isEditorLoaded)
 	{
 		auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
@@ -182,7 +182,7 @@ void SceneEditor::_updateDirectionalLightingMenu()
 
 void SceneEditor::_updatePointLightingMenu()
 {
-	if (_isLoaded)
+	if (_isEditorLoaded)
 	{
 		auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 

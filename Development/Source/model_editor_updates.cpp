@@ -15,7 +15,7 @@ void ModelEditor::update()
 
 void ModelEditor::_updateManagementScreen()
 {
-	if (_isLoaded)
+	if (_isEditorLoaded)
 	{
 		auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
@@ -163,7 +163,7 @@ void ModelEditor::_updateEditingScreen()
 
 void ModelEditor::_updateModelCreation()
 {
-	if (_isLoaded)
+	if (_isEditorLoaded)
 	{
 		if (_isCreatingModel)
 		{
@@ -211,7 +211,7 @@ void ModelEditor::_updateModelCreation()
 
 void ModelEditor::_updateModelChoosing()
 {
-	if (_isLoaded)
+	if (_isEditorLoaded)
 	{
 		if (_isChoosingModel)
 		{
@@ -289,7 +289,7 @@ void ModelEditor::_updateModelChoosing()
 
 void ModelEditor::_updateModelRemoval()
 {
-	if (_isLoaded)
+	if (_isEditorLoaded)
 	{
 		if (_isDeletingModel && _currentModelID != "")
 		{
@@ -325,7 +325,7 @@ void ModelEditor::_updateModelRemoval()
 
 void ModelEditor::_updateCamera()
 {
-	if (_isLoaded)
+	if (_isEditorLoaded)
 	{
 		// Update cursor difference
 		Vec2 cursorPosition = _fe3d.misc_convertFromScreenCoords(_fe3d.misc_getCursorPosition());

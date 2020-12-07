@@ -66,17 +66,20 @@ void AnimationEditor::loadAnimationsFromFile()
 			newAnimation->transformationType = TransformationType(transformationType);
 			newAnimation->frames.insert(newAnimation->frames.end(), frames.begin(), frames.end());
 
-			// Check if preview model is still existing
-			if (_fe3d.gameEntity_isExisting(newAnimation->previewModelID))
+			// Check if preview model is still existing for the editor
+			if (_isEditorLoading)
 			{
-				newAnimation->initialTranslation = _fe3d.gameEntity_getPosition(newAnimation->previewModelID);
-				newAnimation->initialRotation = _fe3d.gameEntity_getRotation(newAnimation->previewModelID);
-				newAnimation->initialScaling = _fe3d.gameEntity_getSize(newAnimation->previewModelID);
-			}
-			else // Clear preview model
-			{
-				newAnimation->previewModelID = "";
-				_fe3d.logger_throwWarning("Preview model of animation with ID \"" + newAnimation->ID + "\" not existing anymore!");
+				if (_fe3d.gameEntity_isExisting(newAnimation->previewModelID))
+				{
+					newAnimation->initialTranslation = _fe3d.gameEntity_getPosition(newAnimation->previewModelID);
+					newAnimation->initialRotation = _fe3d.gameEntity_getRotation(newAnimation->previewModelID);
+					newAnimation->initialScaling = _fe3d.gameEntity_getSize(newAnimation->previewModelID);
+				}
+				else // Clear preview model
+				{
+					newAnimation->previewModelID = "";
+					_fe3d.logger_throwWarning("Preview model of animation with ID \"" + newAnimation->ID + "\" not existing anymore!");
+				}
 			}
 
 			// Add new animation
@@ -98,7 +101,7 @@ void AnimationEditor::stopAllAnimations()
 
 void AnimationEditor::saveAnimationsToFile()
 {
-	if (_isLoaded)
+	if (_isEditorLoaded)
 	{
 		// Error checking
 		if (_currentProjectName == "")

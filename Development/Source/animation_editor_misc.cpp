@@ -7,12 +7,12 @@ void AnimationEditor::setCurrentProjectName(const string& projectName)
 
 bool AnimationEditor::isLoaded()
 {
-	return _isLoaded;
+	return _isEditorLoaded;
 }
 
 void AnimationEditor::_updateMiscellaneous()
 {
-	if (_isLoaded)
+	if (_isEditorLoaded)
 	{
 		// Lock toggling if GUI focused or cursor not in 3D viewport
 		_fe3d.input_setKeyTogglingLocked(_gui.getGlobalScreen()->isFocused() || !_fe3d.misc_isCursorInsideViewport());
@@ -89,6 +89,11 @@ bool AnimationEditor::_isAnimationExisting(const string& ID)
 	}
 
 	return false;
+}
+
+bool AnimationEditor::_hasReachedFloat(float first, float second, float speed)
+{
+	return (first >= second - fabsf(speed)) && (first <= second + fabsf(speed));
 }
 
 vector<string> AnimationEditor::_getAnimationIDs()

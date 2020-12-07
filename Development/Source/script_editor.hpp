@@ -45,7 +45,7 @@ private:
 	string _currentProjectName = "";
 	string _currentScriptFileID = "";
 	float _scrollingAcceleration = 0.0f;
-	bool _isLoaded = false;
+	bool _isEditorLoaded = false;
 	bool _isScriptLoadedFromFile = false;
 	bool _isWritingScript = false;
 	bool _singleActionAllowed = true;

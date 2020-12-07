@@ -18,7 +18,7 @@ public:
 	void setCurrentProjectName(const string& projectName);
 	void loadAnimationsFromFile();
 	void saveAnimationsToFile();
-	void startAnimation(const string& animationID, const string& modelID);
+	void startAnimation(const string& animationID, const string& modelID, int count);
 	bool isAnimationPlaying(const string& animationID, const string& modelID);
 	void stopAnimation(const string& animationID, const string& modelID);
 	void stopAllAnimations();
@@ -37,6 +37,7 @@ private:
 	void _updateMiscellaneous();
 	void _deleteAnimation(const string& ID);
 	bool _isAnimationExisting(const string& ID);
+	bool _hasReachedFloat(float first, float second, float speed);
 	vector<string> _getAnimationIDs();
 	shared_ptr<Animation> _getAnimation(const string& ID);
 
@@ -76,5 +77,6 @@ private:
 	bool _isChoosingAnimation = false;
 	bool _isEditingAnimation = false;
 	bool _isRemovingAnimation = false;
-	bool _isLoaded = false;
+	bool _isEditorLoaded = false;
+	bool _isEditorLoading = false;
 };

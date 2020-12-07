@@ -7,6 +7,7 @@ struct AnimationFrame
 {
 	Vec3 targetTransformation = Vec3(0.0f);
 
+	float originalSpeed = 0.0f;
 	float speed = 0.0f;
 
 	AnimationSpeedType speedType;

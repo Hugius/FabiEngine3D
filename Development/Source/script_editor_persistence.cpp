@@ -65,7 +65,7 @@ void ScriptEditor::loadScriptsFromFile()
 void ScriptEditor::saveScriptsToFile()
 {
 	// Check if project is loaded properly
-	if (_isLoaded)
+	if (_isEditorLoaded)
 	{
 		// Error checking
 		if (_currentProjectName == "")

@@ -7,7 +7,7 @@ void AudioEditor::setCurrentProjectName(const string& projectName)
 
 bool AudioEditor::isLoaded()
 {
-	return _isLoaded;
+	return _isEditorLoaded;
 }
 
 vector<string> AudioEditor::getAudioNames()
@@ -17,7 +17,7 @@ vector<string> AudioEditor::getAudioNames()
 
 void AudioEditor::_updateMiscellaneous()
 {
-	if (_isLoaded)
+	if (_isEditorLoaded)
 	{
 		// Temporary values
 		bool isExisting = _fe3d.audioEntity_isExisting(_currentAudioID);

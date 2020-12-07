@@ -2,7 +2,7 @@
 
 void AudioEditor::_updateAudioEditing()
 {
-	if (_isLoaded)
+	if (_isEditorLoaded)
 	{
 		auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 

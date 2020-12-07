@@ -2,7 +2,7 @@
 
 void SceneEditor::_updateMainBillboardMenu()
 {
-	if (_isLoaded)
+	if (_isEditorLoaded)
 	{
 		auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
@@ -47,7 +47,7 @@ void SceneEditor::_updateMainBillboardMenu()
 
 void SceneEditor::_updateBillboardPlacingMenu()
 {
-	if (_isLoaded)
+	if (_isEditorLoaded)
 	{
 		auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
@@ -96,7 +96,7 @@ void SceneEditor::_updateBillboardPlacingMenu()
 
 void SceneEditor::_updateBillboardChoosingMenu()
 {
-	if (_isLoaded)
+	if (_isEditorLoaded)
 	{
 		auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 

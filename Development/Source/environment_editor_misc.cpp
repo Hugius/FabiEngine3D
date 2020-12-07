@@ -9,12 +9,12 @@ void EnvironmentEditor::setCurrentProjectName(const string& projectName)
 
 bool EnvironmentEditor::isLoaded()
 {
-	return _isLoaded;
+	return _isEditorLoaded;
 }
 
 void EnvironmentEditor::_updateMiscellaneous()
 {
-	if (_isLoaded)
+	if (_isEditorLoaded)
 	{
 		// Lock toggling if GUI focused or cursor not in 3D viewport
 		_fe3d.input_setKeyTogglingLocked(_gui.getGlobalScreen()->isFocused() || !_fe3d.misc_isCursorInsideViewport());

@@ -54,7 +54,7 @@ void AudioEditor::loadAudioEntitiesFromFile()
 
 void AudioEditor::saveAudioEntitiesToFile()
 {
-	if (_isLoaded)
+	if (_isEditorLoaded)
 	{
 		// Error checking
 		if (_currentProjectName == "")

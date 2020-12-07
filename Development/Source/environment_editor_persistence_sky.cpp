@@ -84,7 +84,7 @@ void EnvironmentEditor::unloadSkyEntities()
 
 void EnvironmentEditor::saveSkyEntitiesToFile()
 {
-	if (_isLoaded)
+	if (_isEditorLoaded)
 	{
 		// Error checking
 		if (_currentProjectName == "")

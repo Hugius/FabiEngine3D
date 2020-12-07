@@ -45,7 +45,7 @@ void ScriptEditor::load()
 
 	// Miscellaneous
 	_gui.getViewport("right")->getWindow("main")->setActiveScreen("scriptEditorControls");
-	_isLoaded = true;
+	_isEditorLoaded = true;
 }
 
 void ScriptEditor::unload()
@@ -81,5 +81,5 @@ void ScriptEditor::unload()
 
 	// Miscellaneous
 	_gui.getViewport("right")->getWindow("main")->setActiveScreen("mainMenuControls");
-	_isLoaded = false;
+	_isEditorLoaded = false;
 }

@@ -38,11 +38,12 @@ void AnimationEditor::initializeGUI()
 
 	// Left-viewport: mainWindow - animationEditorMenuFrame
 	leftWindow->addScreen("animationEditorMenuFrame");
-	leftWindow->getScreen("animationEditorMenuFrame")->addButton("xTransformation", Vec2(0.0f, 0.7f), Vec2(GW("X"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "X", LVPC::textColor, LVPC::textHoverColor);
-	leftWindow->getScreen("animationEditorMenuFrame")->addButton("yTransformation", Vec2(0.0f, 0.35f), Vec2(GW("Y"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Y", LVPC::textColor, LVPC::textHoverColor);
-	leftWindow->getScreen("animationEditorMenuFrame")->addButton("zTransformation", Vec2(0.0f, 0.0f), Vec2(GW("Z"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Z", LVPC::textColor, LVPC::textHoverColor);
-	leftWindow->getScreen("animationEditorMenuFrame")->addButton("speed", Vec2(0.0f, -0.35f), Vec2(GW("Speed"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Speed", LVPC::textColor, LVPC::textHoverColor);
-	leftWindow->getScreen("animationEditorMenuFrame")->addButton("back", Vec2(0.0f, -0.7f), Vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen("animationEditorMenuFrame")->addButton("xTransformation", Vec2(0.0f, 0.75f), Vec2(GW("X direction"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "X direction", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen("animationEditorMenuFrame")->addButton("yTransformation", Vec2(0.0f, 0.45f), Vec2(GW("Y direction"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Y direction", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen("animationEditorMenuFrame")->addButton("zTransformation", Vec2(0.0f, 0.15f), Vec2(GW("Z direction"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Z direction", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen("animationEditorMenuFrame")->addButton("speed", Vec2(0.0f, -0.15f), Vec2(GW("Speed"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Speed", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen("animationEditorMenuFrame")->addButton("speedType", Vec2(0.0f, -0.45f), Vec2(GW("Type: linear"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Type: linear", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen("animationEditorMenuFrame")->addButton("back", Vec2(0.0f, -0.75f), Vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
 }
 
 void AnimationEditor::load()
@@ -61,13 +62,15 @@ void AnimationEditor::load()
 	_fe3d.gameEntity_setLevelOfDetailDistance(1000.0f);
 
 	// Load animations
+	_isEditorLoading = true;
 	loadAnimationsFromFile();
 
 	// Miscellaneous
 	_gui.getGlobalScreen()->addTextfield("selectedAnimationName", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
 	_gui.getGlobalScreen()->addTextfield("selectedAnimationFrame", Vec2(0.0f, 0.725f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
 	//_gui.getViewport("right")->getWindow("main")->setActiveScreen("animationEditorControls"); <---
-	_isLoaded = true;
+	_isEditorLoading = false;
+	_isEditorLoaded = true;
 }
 
 void AnimationEditor::unload()
@@ -101,5 +104,5 @@ void AnimationEditor::unload()
 	//_gui.getViewport("right")->getWindow("main")->setActiveScreen("mainMenuControls");
 	_fe3d.misc_disableDebugRendering();
 	_fe3d.input_clearKeyToggles();
-	_isLoaded = false;
+	_isEditorLoaded = false;
 }

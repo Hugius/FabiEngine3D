@@ -5,15 +5,15 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 	// Determine type of function
 	if (functionName == "fe3d:model_animation_start") // Start gameEntity animation
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
+		auto types = { ScriptValueType::STRING, ScriptValueType::STRING, ScriptValueType::INTEGER };
 
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
-			_animationEditor.startAnimation(arguments[0].getString(), arguments[1].getString());
+			_animationEditor.startAnimation(arguments[0].getString(), arguments[1].getString(), arguments[2].getInteger());
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
-
-			return true;
 		}
+
+		return true;
 	}
 	else if (functionName == "fe3d:model_animation_isplaying") // Check if gameEntity animation is playing
 	{
@@ -23,9 +23,9 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 		{
 			_animationEditor.isAnimationPlaying(arguments[0].getString(), arguments[1].getString());
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN));
-
-			return true;
 		}
+
+		return true;
 	}
 	else if (functionName == "fe3d:model_animation_stop") // Stop gameEntity animation
 	{
@@ -35,9 +35,9 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 		{
 			_animationEditor.stopAnimation(arguments[0].getString(), arguments[1].getString());
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
-
-			return true;
 		}
+
+		return true;
 	}
 	else if (functionName == "fe3d:model_position_set") // Set gameEntity position
 	{
@@ -50,9 +50,9 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 				_fe3d.gameEntity_setPosition(arguments[0].getString(), arguments[1].getVec3());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
-
-			return true;
 		}
+
+		return true;
 	}
 	else if (functionName == "fe3d:model_position_get") // Get gameEntity position
 	{
@@ -65,9 +65,9 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 				auto result = _fe3d.gameEntity_getPosition(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));
 			}
-			
-			return true;
 		}
+
+		return true;
 	}
 	else if (functionName == "fe3d:model_delete") // Delete gameEntity
 	{
@@ -80,14 +80,12 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 				_fe3d.gameEntity_delete(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
-			
-			return true;
 		}
+
+		return true;
 	}
 	else
 	{
 		return false;
 	}
-
-	return false;
 }

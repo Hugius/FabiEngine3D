@@ -42,7 +42,7 @@ void AudioEditor::load()
 	_fe3d.camera_load(90.0f, 0.1f, 100.0f, Vec3(0.0f), -90.0f);
 	_gui.getGlobalScreen()->addTextfield("selectedAudioName", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
 	_gui.getViewport("right")->getWindow("main")->setActiveScreen("audioEditorControls");
-	_isLoaded = true;
+	_isEditorLoaded = true;
 }
 
 void AudioEditor::unload()
@@ -51,5 +51,5 @@ void AudioEditor::unload()
 	_fe3d.audioEntity_deleteAll();
 	_gui.getGlobalScreen()->deleteTextfield("selectedAudioName");
 	_gui.getViewport("right")->getWindow("main")->setActiveScreen("mainMenuControls");
-	_isLoaded = false;
+	_isEditorLoaded = false;
 }

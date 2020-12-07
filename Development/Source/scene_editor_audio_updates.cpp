@@ -2,7 +2,7 @@
 
 void SceneEditor::_updateMainAudioMenu()
 {
-	if (_isLoaded)
+	if (_isEditorLoaded)
 	{
 		auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
@@ -48,7 +48,7 @@ void SceneEditor::_updateMainAudioMenu()
 
 void SceneEditor::_updateAudioPlacingMenu()
 {
-	if (_isLoaded)
+	if (_isEditorLoaded)
 	{
 		auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
@@ -87,7 +87,7 @@ void SceneEditor::_updateAudioPlacingMenu()
 
 void SceneEditor::_updateAudioChoosingMenu()
 {
-	if (_isLoaded)
+	if (_isEditorLoaded)
 	{
 		auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 

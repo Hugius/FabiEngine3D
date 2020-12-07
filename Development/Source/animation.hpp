@@ -20,6 +20,8 @@ public:
 
 	unsigned int frameIndex = 0;
 
+	int timesToPlay = 0;
+
 	vector<AnimationFrame> frames;
 
 	Vec3 initialTranslation = Vec3(0.0f);

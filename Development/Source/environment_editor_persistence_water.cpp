@@ -110,7 +110,7 @@ void EnvironmentEditor::unloadWaterEntities()
 
 void EnvironmentEditor::saveWaterEntitiesToFile()
 {
-	if (_isLoaded)
+	if (_isEditorLoaded)
 	{
 		// Error checking
 		if (_currentProjectName == "")

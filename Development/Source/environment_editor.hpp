@@ -67,7 +67,7 @@ private:
 	void _updateMiscellaneous();
 
 	// General variables
-	bool _isLoaded = false;
+	bool _isEditorLoaded = false;
 	EnvironmentType _currentEnvironmentType = EnvironmentType::NONE;
 	const float _scrollWheelDivider = 250.0f;
 	float _cameraRotationSpeed = 0.0f;

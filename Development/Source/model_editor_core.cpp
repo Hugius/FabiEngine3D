@@ -118,7 +118,7 @@ void ModelEditor::load()
 	_fe3d.gameEntity_setLevelOfDetailDistance(10000.0f);
 	_fe3d.input_clearKeyToggles();
 	_gui.getViewport("right")->getWindow("main")->setActiveScreen("modelEditorControls");
-	_isLoaded = true;
+	_isEditorLoaded = true;
 }
 
 void ModelEditor::unload()
@@ -154,7 +154,7 @@ void ModelEditor::unload()
 	_movingToggled = false;
 	_resizingToggled = false;
 	_isDeletingModel = false;
-	_isLoaded = false;
+	_isEditorLoaded = false;
 	_transformationDirection = Direction::X;
 
 	// Miscellaneous

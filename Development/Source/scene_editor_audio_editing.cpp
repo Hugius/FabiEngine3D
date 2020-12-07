@@ -5,7 +5,7 @@
 
 void SceneEditor::_updateAudioEditing()
 {
-	if (_isLoaded)
+	if (_isEditorLoaded)
 	{
 		// Reset selected billboard from last frame
 		if (!_dontResetSelectedAudio)

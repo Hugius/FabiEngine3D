@@ -17,7 +17,7 @@ void AnimationEditor::update()
 
 void AnimationEditor::_updateManagementScreen()
 {
-	if (_isLoaded)
+	if (_isEditorLoaded)
 	{
 		auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 		
@@ -67,7 +67,7 @@ void AnimationEditor::_updateManagementScreen()
 
 void AnimationEditor::_updateAnimationCreation()
 {
-	if (_isLoaded)
+	if (_isEditorLoaded)
 	{
 		if (_isCreatingAnimation)
 		{
@@ -117,7 +117,7 @@ void AnimationEditor::_updateAnimationCreation()
 
 void AnimationEditor::_updateAnimationChoice()
 {
-	if (_isLoaded)
+	if (_isEditorLoaded)
 	{
 		if (_isChoosingAnimation)
 		{
@@ -168,7 +168,7 @@ void AnimationEditor::_updateAnimationChoice()
 
 void AnimationEditor::_updateAnimationRemoval()
 {
-	if (_isLoaded)
+	if (_isEditorLoaded)
 	{
 		if (_isRemovingAnimation && _currentAnimationID != "")
 		{
@@ -198,7 +198,7 @@ void AnimationEditor::_updateAnimationRemoval()
 
 void AnimationEditor::_updateCamera()
 {
-	if (_isLoaded)
+	if (_isEditorLoaded)
 	{
 		// Update cursor difference
 		Vec2 cursorPosition = _fe3d.misc_convertFromScreenCoords(_fe3d.misc_getCursorPosition());

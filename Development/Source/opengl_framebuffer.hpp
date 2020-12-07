@@ -36,5 +36,5 @@ private:
 	Ivec2 _position = Ivec2(0);
 	Ivec2 _size = Ivec2(0);
 
-	bool _isLoaded = false;
+	bool _isInitialized = false;
 };

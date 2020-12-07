@@ -187,7 +187,7 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 				if (modelID[0] == '@')
 				{
 					// Check if loading for scene editor
-					if (_isLoaded)
+					if (_isEditorLoaded)
 					{
 						continue;
 					}
@@ -301,7 +301,7 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 				modelID = modelName + "@" + modelNumber;
 				
 				// Add the model
-				_placeModel(!_isLoaded, modelName, modelNumber, position, rotation, size, objPath, diffuseMapPath, lightMapPath, 
+				_placeModel(!_isEditorLoaded, modelName, modelNumber, position, rotation, size, objPath, diffuseMapPath, lightMapPath, 
 					reflectionMapPath, normalMapPath, isFrozen, isFaceculled, isShadowed, isTransparent, isReflective, isSpecular, specularFactor, 
 					specularIntensity, lightness, color, uvRepeat, lodEntityID, isInstanced, instancedOffsets, aabbNames, aabbPositions, aabbSizes);
 
@@ -381,7 +381,7 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 					directionalLightingIntensity >> billboardSize;
 
 				// Delete preview billboard
-				if (_isLoaded)
+				if (_isEditorLoaded)
 				{
 					_fe3d.billboardEntity_delete("@@lightSource");
 				}
@@ -402,7 +402,7 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 				iss >> ID >> position.x >> position.y >> position.z >> color.r >> color.g >> color.b >> intensity >> distance;
 
 				// Add lightbulbs
-				if (_isLoaded)
+				if (_isEditorLoaded)
 				{
 					_fe3d.gameEntity_add("@" + ID, "engine\\models\\lamp.obj", position, Vec3(0.0f), _defaultLightbulbSize);
 					_fe3d.gameEntity_setShadowed("@" + ID, false);
@@ -427,7 +427,7 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 				std::replace(audioPath.begin(), audioPath.end(), '?', ' ');
 
 				// Add speaker
-				if (_isLoaded)
+				if (_isEditorLoaded)
 				{
 					_fe3d.gameEntity_add("@speaker_" + ID, "engine\\models\\speaker.obj", position, Vec3(0.0f), _defaultSpeakerSize);
 					_fe3d.gameEntity_setShadowed("@speaker_" + ID, false);
@@ -450,7 +450,7 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 			}
 			else if (entityType == "EDITOR_POSITION")
 			{
-				if (_isLoaded)
+				if (_isEditorLoaded)
 				{
 					Vec3 position;
 					iss >> position.x >> position.y >> position.z;
@@ -459,7 +459,7 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 			}
 			else if (entityType == "EDITOR_YAW")
 			{
-				if (_isLoaded)
+				if (_isEditorLoaded)
 				{
 					float yaw;
 					iss >> yaw;
@@ -468,7 +468,7 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 			}
 			else if (entityType == "EDITOR_PITCH")
 			{
-				if (_isLoaded)
+				if (_isEditorLoaded)
 				{
 					float pitch;
 					iss >> pitch;

@@ -18,7 +18,7 @@ void EnvironmentEditor::_updateWaterEditor()
 
 void EnvironmentEditor::_updateWaterCreation()
 {
-	if (_isLoaded)
+	if (_isEditorLoaded)
 	{
 		if (_waterCreationEnabled)
 		{
@@ -71,7 +71,7 @@ void EnvironmentEditor::_updateWaterCreation()
 
 void EnvironmentEditor::_updateWaterChoosing()
 {
-	if (_isLoaded)
+	if (_isEditorLoaded)
 	{
 		if (_waterChoosingEnabled)
 		{
@@ -141,7 +141,7 @@ void EnvironmentEditor::_updateWaterChoosing()
 
 void EnvironmentEditor::_updateWaterRemoval()
 {
-	if (_isLoaded)
+	if (_isEditorLoaded)
 	{
 		if (_waterRemovalEnabled && _currentWaterID != "")
 		{
@@ -169,7 +169,7 @@ void EnvironmentEditor::_updateWaterRemoval()
 
 void EnvironmentEditor::_updateWaterCamera()
 {
-	if (_isLoaded)
+	if (_isEditorLoaded)
 	{
 		// Check if a water is selected or hovered
 		string waterID = (_currentWaterID != "") ? _currentWaterID : ((_hoveredWaterID != "") ? _hoveredWaterID : "");

@@ -116,7 +116,7 @@ void ModelEditor::loadGameEntitiesFromFile()
 
 void ModelEditor::saveGameEntitiesToFile()
 {
-	if (_isLoaded)
+	if (_isEditorLoaded)
 	{
 		// Error checking
 		if (_currentProjectName == "")

@@ -2,7 +2,7 @@
 
 void EnvironmentEditor::update()
 {
-	if (_isLoaded)
+	if (_isEditorLoaded)
 	{
 		// Update main menu
 		if (_currentEnvironmentType == EnvironmentType::NONE)

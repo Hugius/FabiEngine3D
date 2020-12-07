@@ -35,7 +35,7 @@ private:
 	bool _isChoosingBillboard = false;
 	bool _isEditingBillboard = false;
 	bool _isRemovingBillboard = false;
-	bool _isLoaded = false;
+	bool _isEditorLoaded = false;
 
 	// Vectors
 	const Vec3 _defaultCameraPosition = Vec3(0.0f, 2.5f, 5.0f);

@@ -11,7 +11,7 @@ void ScriptEditor::update()
 
 void ScriptEditor::_updateGUI()
 {
-	if (_isLoaded)
+	if (_isEditorLoaded)
 	{
 		auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
@@ -63,7 +63,7 @@ void ScriptEditor::_updateGUI()
 
 void ScriptEditor::_updateMiscellaneous()
 {
-	if (_isLoaded)
+	if (_isEditorLoaded)
 	{
 		if (_isWritingScript)
 		{

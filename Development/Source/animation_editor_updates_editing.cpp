@@ -2,7 +2,7 @@
 
 void AnimationEditor::_updateEditingScreen()
 {
-	if (_isLoaded)
+	if (_isEditorLoaded)
 	{
 		auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
@@ -36,7 +36,7 @@ void AnimationEditor::_updateEditingScreen()
 				}
 				else if (screen->getButton("play")->isHovered())
 				{
-					startAnimation(_currentAnimationID, currentAnimation->previewModelID);
+					startAnimation(_currentAnimationID, currentAnimation->previewModelID, 1);
 					_fe3d.gameEntity_setPosition(currentAnimation->previewModelID, currentAnimation->initialTranslation);
 					_fe3d.gameEntity_setRotation(currentAnimation->previewModelID, currentAnimation->initialRotation);
 					_fe3d.gameEntity_setSize(currentAnimation->previewModelID, currentAnimation->initialScaling);
@@ -149,7 +149,7 @@ void AnimationEditor::_updateEditingScreen()
 
 void AnimationEditor::_updateFrameScreen()
 {
-	if (_isLoaded)
+	if (_isEditorLoaded)
 	{
 		auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
@@ -157,8 +157,9 @@ void AnimationEditor::_updateFrameScreen()
 		if (screen->getID() == "animationEditorMenuFrame")
 		{
 			// Temporary values
-			auto& transformation = _getAnimation(_currentAnimationID)->frames[_currentFrameIndex].targetTransformation;
-			auto& speed = _getAnimation(_currentAnimationID)->frames[_currentFrameIndex].speed;
+			auto currentAnimation = _getAnimation(_currentAnimationID);
+			auto& transformation = currentAnimation->frames[_currentFrameIndex].targetTransformation;
+			auto& speed = currentAnimation->frames[_currentFrameIndex].speed;
 
 			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
 			{
@@ -182,7 +183,24 @@ void AnimationEditor::_updateFrameScreen()
 				{
 					_gui.getGlobalScreen()->addValueForm("transformationSpeed", "Transformation speed", speed * 100.0f, Vec2(0.0f, 0.0f), Vec2(0.2f, 0.1f));
 				}
+				else if (screen->getButton("speedType")->isHovered())
+				{
+					// Change speed type
+					if (currentAnimation->frames[_currentFrameIndex].speedType == AnimationSpeedType::LINEAR)
+					{
+						currentAnimation->frames[_currentFrameIndex].speedType = AnimationSpeedType::EXPONENTIAL;
+					}
+					else
+					{
+						currentAnimation->frames[_currentFrameIndex].speedType = AnimationSpeedType::LINEAR;
+					}
+				}
 			}
+
+			// Showing speed type
+			string newContent = (currentAnimation->frames[_currentFrameIndex].speedType == AnimationSpeedType::LINEAR) ? 
+				"Type: linear" : "Type: exponential";
+			_fe3d.textEntity_setTextContent(screen->getButton("speedType")->getTextfield()->getEntityID(), newContent);
 
 			// Update transformation changes
 			_gui.getGlobalScreen()->checkValueForm("xTransformation", transformation.x, { });

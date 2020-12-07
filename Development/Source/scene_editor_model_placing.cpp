@@ -2,7 +2,7 @@
 
 void SceneEditor::_updateModelPlacing()
 {
-	if (_isLoaded)
+	if (_isEditorLoaded)
 	{
 		// Only if user is in placement mode
 		if (!_currentPreviewModelName.empty())

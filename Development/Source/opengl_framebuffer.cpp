@@ -20,7 +20,7 @@ OpenGLFramebuffer::~OpenGLFramebuffer()
 void OpenGLFramebuffer::createMsaaTexture(Ivec2 position, Ivec2 size, int amount, int aaSamples)
 {
 	// Check if already loaded
-	if (!_isLoaded)
+	if (!_isInitialized)
 	{
 		// Dimensions
 		_position = position;
@@ -63,7 +63,7 @@ void OpenGLFramebuffer::createMsaaTexture(Ivec2 position, Ivec2 size, int amount
 			Logger::throwError("Framebuffer not initialized properly!");
 		}
 
-		_isLoaded = true;
+		_isInitialized = true;
 	}
 	else
 	{
@@ -77,7 +77,7 @@ void OpenGLFramebuffer::createMsaaTexture(Ivec2 position, Ivec2 size, int amount
 void OpenGLFramebuffer::createColorTexture(Ivec2 position, Ivec2 size, int amount, bool textureClamp)
 {
 	// Check if already loaded
-	if (!_isLoaded)
+	if (!_isInitialized)
 	{
 		// Dimensions
 		_position = position;
@@ -85,7 +85,7 @@ void OpenGLFramebuffer::createColorTexture(Ivec2 position, Ivec2 size, int amoun
 
 		// Generate FBO
 		glGenFramebuffers(1, &_fbo);
-		_isLoaded = true;
+		_isInitialized = true;
 
 		// Bind
 		bind();
@@ -154,7 +154,7 @@ void OpenGLFramebuffer::createColorTexture(Ivec2 position, Ivec2 size, int amoun
 void OpenGLFramebuffer::createDepthTexture(Ivec2 position, Ivec2 size, int amount)
 {
 	// Check if already loaded
-	if (!_isLoaded)
+	if (!_isInitialized)
 	{
 		// Dimensions
 		_position = position;
@@ -162,7 +162,7 @@ void OpenGLFramebuffer::createDepthTexture(Ivec2 position, Ivec2 size, int amoun
 
 		// Generate FBO
 		glGenFramebuffers(1, &_fbo);
-		_isLoaded = true;
+		_isInitialized = true;
 
 		// Bind
 		bind();
@@ -205,7 +205,7 @@ void OpenGLFramebuffer::createDepthTexture(Ivec2 position, Ivec2 size, int amoun
 
 void OpenGLFramebuffer::reset()
 {
-	if (_isLoaded)
+	if (_isInitialized)
 	{
 		// Remove FBO & RBO
 		glDeleteFramebuffers(1, &_fbo);
@@ -218,6 +218,6 @@ void OpenGLFramebuffer::reset()
 		}
 
 		// Can recreate FBO texture again
-		_isLoaded = false;
+		_isInitialized = false;
 	}
 }

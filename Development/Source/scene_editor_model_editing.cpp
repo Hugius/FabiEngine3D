@@ -2,7 +2,7 @@
 
 void SceneEditor::_updateModelEditing()
 {
-	if (_isLoaded)
+	if (_isEditorLoaded)
 	{
 		// Reset selected model from last frame
 		if (!_dontResetSelectedModel)

@@ -2,7 +2,7 @@
 
 void SceneEditor::_updateMainEnvironmentMenu()
 {
-	if (_isLoaded)
+	if (_isEditorLoaded)
 	{
 		auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
@@ -34,7 +34,7 @@ void SceneEditor::_updateMainEnvironmentMenu()
 
 void SceneEditor::_updateSkyMenu()
 {
-	if (_isLoaded)
+	if (_isEditorLoaded)
 	{
 		auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
@@ -97,7 +97,7 @@ void SceneEditor::_updateSkyMenu()
 
 void SceneEditor::_updateTerrainMenu()
 {
-	if (_isLoaded)
+	if (_isEditorLoaded)
 	{
 		auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
@@ -160,7 +160,7 @@ void SceneEditor::_updateTerrainMenu()
 
 void SceneEditor::_updateWaterMenu()
 {
-	if (_isLoaded)
+	if (_isEditorLoaded)
 	{
 		auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 

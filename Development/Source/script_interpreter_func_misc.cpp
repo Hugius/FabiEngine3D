@@ -32,8 +32,9 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 
 			// Add return value
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
-			return true;
 		}
+
+		return true;
 	}
 	else if (functionName == "fe3d:scene_load") // Load specific scene from file
 	{
@@ -43,8 +44,9 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 		{
 			_sceneEditor.loadSceneFromFile(arguments[0].getString());
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
-			return true;
 		}
+
+		return true;
 	}
 	else if (functionName == "fe3d:scene_clear") // Clear all entities and reset scene
 	{
@@ -52,8 +54,9 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 		{
 			_sceneEditor.clearScene();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
-			return true;
 		}
+
+		return true;
 	}
 	else if (functionName == "fe3d:misc_cursor_show") // SHow cursor
 	{
@@ -61,8 +64,9 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 		{
 			_fe3d.misc_showCursor();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
-			return true;
 		}
+
+		return true;
 	}
 	else if (functionName == "fe3d:misc_cursor_hide") // Hide cursor
 	{
@@ -70,8 +74,9 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 		{
 			_fe3d.misc_hideCursor();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
-			return true;
 		}
+
+		return true;
 	}
 	else if (functionName == "fe3d:misc_time_interval") // Time interval
 	{
@@ -81,8 +86,9 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 		{
 			auto result = _fe3d.misc_checkInterval(arguments[0].getString(), arguments[1].getInteger());
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
-			return true;
 		}
+
+		return true;
 	}
 	else if (functionName == "fe3d:misc_string_part") // Cut a part from a string
 	{
@@ -92,8 +98,9 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 		{
 			auto result = arguments[0].getString().substr(arguments[1].getInteger(), arguments[2].getInteger());
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result));
-			return true;
 		}
+
+		return true;
 	}
 	else if (functionName == "fe3d:misc_list_size") // Get the size of a list variable
 	{
@@ -107,7 +114,6 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 			if (!_isLocalVariableExisting(nameString) && !_isGlobalVariableExisting(nameString))
 			{
 				_throwScriptError("list variable \"" + nameString + "\" not found!");
-				return true;
 			}
 
 			// Check if variable is a list
@@ -115,21 +121,19 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 			if (listVariable.getType() == ScriptVariableType::SINGLE)
 			{
 				_throwScriptError("variable \"" + nameString + "\" is not a list!");
-				return true;
 			}
 
 			// Return list size
 			auto result = listVariable.getValueCount();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::INTEGER, static_cast<int>(result)));
-			return true;
 		}
+
+		return true;
 	}
 	else
 	{
 		return false;
 	}
-
-	return false;
 }
 
 bool ScriptInterpreter::_validateFe3dGameEntity(const string& ID)

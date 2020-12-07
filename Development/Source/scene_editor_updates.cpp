@@ -58,7 +58,7 @@ void SceneEditor::update()
 
 void SceneEditor::_updateMainMenu()
 {
-	if (_isLoaded)
+	if (_isEditorLoaded)
 	{
 		auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
@@ -156,7 +156,7 @@ void SceneEditor::_updateMainMenu()
 
 void SceneEditor::_updateChoiceMenu()
 {
-	if (_isLoaded)
+	if (_isEditorLoaded)
 	{
 		auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 		
@@ -217,7 +217,7 @@ void SceneEditor::_updateChoiceMenu()
 
 void SceneEditor::_updateCamera()
 {
-	if (_isLoaded)
+	if (_isEditorLoaded)
 	{
 		if (_currentSceneName != "")
 		{

@@ -2,7 +2,7 @@
 
 void SceneEditor::_updateMainModelMenu()
 {
-	if (_isLoaded)
+	if (_isEditorLoaded)
 	{
 		auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
@@ -47,7 +47,7 @@ void SceneEditor::_updateMainModelMenu()
 
 void SceneEditor::_updateModelPlacingMenu()
 {
-	if (_isLoaded)
+	if (_isEditorLoaded)
 	{
 		auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 
@@ -95,7 +95,7 @@ void SceneEditor::_updateModelPlacingMenu()
 
 void SceneEditor::_updateModelChoosingMenu()
 {
-	if (_isLoaded)
+	if (_isEditorLoaded)
 	{
 		auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 

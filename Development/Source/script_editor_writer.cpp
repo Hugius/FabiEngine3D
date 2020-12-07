@@ -3,7 +3,7 @@
 void ScriptEditor::_updateTextWriter()
 {
 	// User must be editing script file & no active GUI overlays
-	if (_isLoaded && _isWritingScript && !_gui.getGlobalScreen()->isFocused() && !_wasGuiFocused)
+	if (_isEditorLoaded && _isWritingScript && !_gui.getGlobalScreen()->isFocused() && !_wasGuiFocused)
 	{
 		// Change cursor texture
 		if (_fe3d.misc_isCursorInsideViewport())

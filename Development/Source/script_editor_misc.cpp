@@ -2,7 +2,7 @@
 
 void ScriptEditor::_reloadScriptTextDisplay()
 {
-	if (_isLoaded)
+	if (_isEditorLoaded)
 	{
 		// Remove all existing billboards & their respective AABBs
 		_fe3d.billboardEntity_deleteAll();
@@ -97,5 +97,5 @@ void ScriptEditor::setCurrentProjectName(const string& projectName)
 
 bool ScriptEditor::isLoaded()
 {
-	return _isLoaded;
+	return _isEditorLoaded;
 }

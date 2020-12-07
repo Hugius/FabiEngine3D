@@ -5,7 +5,7 @@
 
 void SceneEditor::_updateLightEditing()
 {
-	if (_isLoaded)
+	if (_isEditorLoaded)
 	{
 		_selectedLightBulbID = "";
 

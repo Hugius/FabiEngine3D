@@ -81,7 +81,7 @@ private:
 	bool _isDeletingModel = false;
 	bool _movingToggled = false;
 	bool _resizingToggled = false;
-	bool _isLoaded = false;
+	bool _isEditorLoaded = false;
 
 	// Miscellaneous
 	Direction _transformationDirection = Direction::X;

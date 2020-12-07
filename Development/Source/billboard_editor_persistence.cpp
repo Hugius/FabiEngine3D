@@ -102,7 +102,7 @@ void BillboardEditor::loadBillboardEntitiesFromFile()
 
 void BillboardEditor::saveBillboardEntitiesToFile()
 {
-	if (_isLoaded)
+	if (_isEditorLoaded)
 	{
 		// Error checking
 		if (_currentProjectName == "")

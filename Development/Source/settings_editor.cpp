@@ -61,7 +61,7 @@ void SettingsEditor::load()
 		file.close();
 	}
 
-	_isLoaded = true;
+	_isEditorLoaded = true;
 }
 
 void SettingsEditor::save()
@@ -93,7 +93,7 @@ void SettingsEditor::save()
 
 void SettingsEditor::update()
 {
-	if (_isLoaded)
+	if (_isEditorLoaded)
 	{
 		auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
 

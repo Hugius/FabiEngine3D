@@ -17,7 +17,7 @@ void EnvironmentEditor::_updateTerrainEditor()
 
 void EnvironmentEditor::_updateTerrainCreation()
 {
-	if (_isLoaded)
+	if (_isEditorLoaded)
 	{
 		if (_terrainCreationEnabled)
 		{
@@ -68,7 +68,7 @@ void EnvironmentEditor::_updateTerrainCreation()
 
 void EnvironmentEditor::_updateTerrainChoosing()
 {
-	if (_isLoaded)
+	if (_isEditorLoaded)
 	{
 		if (_terrainChoosingEnabled)
 		{
@@ -145,7 +145,7 @@ void EnvironmentEditor::_updateTerrainChoosing()
 
 void EnvironmentEditor::_updateTerrainRemoval()
 {
-	if (_isLoaded)
+	if (_isEditorLoaded)
 	{
 		if (_terrainRemovalEnabled && _currentTerrainID != "")
 		{
@@ -173,7 +173,7 @@ void EnvironmentEditor::_updateTerrainRemoval()
 
 void EnvironmentEditor::_updateTerrainCamera()
 {
-	if (_isLoaded)
+	if (_isEditorLoaded)
 	{
 		// Check if a terrain is selected or hovered
 		string terrainID = (_currentTerrainID != "") ? _currentTerrainID : ((_hoveredTerrainID != "") ? _hoveredTerrainID : "");

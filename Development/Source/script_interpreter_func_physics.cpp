@@ -11,8 +11,9 @@ bool ScriptInterpreter::_executeFe3dCollisionFunction(const string& functionName
 		{
 			auto result = _fe3d.collision_checkCursorInEntity(arguments[0].getString());
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
-			return true;
 		}
+
+		return true;
 	}
 	else if (functionName == "fe3d:raycast_model_group") // Raycasting into multiple gameEntities
 	{
@@ -32,8 +33,9 @@ bool ScriptInterpreter::_executeFe3dCollisionFunction(const string& functionName
 
 			// Return
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result));
-			return true;
 		}
+
+		return true;
 	}
 	else if (functionName == "fe3d:raycast_models") // Raycasting into all gameEntities
 	{
@@ -49,13 +51,12 @@ bool ScriptInterpreter::_executeFe3dCollisionFunction(const string& functionName
 
 			// Return
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result));
-			return true;
 		}
+
+		return true;
 	}
 	else
 	{
 		return false;
 	}
-
-	return false;
 }

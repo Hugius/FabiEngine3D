@@ -156,7 +156,7 @@ void EnvironmentEditor::load()
 	_gui.getGlobalScreen()->addTextfield("selectedWaterName", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
 	_fe3d.input_clearKeyToggles();
 	_gui.getViewport("right")->getWindow("main")->setActiveScreen("environmentEditorControls");
-	_isLoaded = true;
+	_isEditorLoaded = true;
 }
 
 void EnvironmentEditor::save()
@@ -212,5 +212,5 @@ void EnvironmentEditor::unload()
 	_gui.getViewport("right")->getWindow("main")->setActiveScreen("mainMenuControls");
 	_fe3d.misc_disableDebugRendering();
 	_fe3d.input_clearKeyToggles();
-	_isLoaded = false;
+	_isEditorLoaded = false;
 }

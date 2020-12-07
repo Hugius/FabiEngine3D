@@ -248,7 +248,7 @@ public:
 	void		   gameEntity_setOriginalLightness(const string& ID, float lightness);
 	void		   gameEntity_setLightness(const string& ID, float lightness);
 	void		   gameEntity_setAlpha(const string& ID, float alpha);
-	void		   gameEntity_setColor(const string& ID, Vec3 color);
+	void		   gameEntity_setColor(const string& ID, Vec3 color, const string& partName = "");
 	void		   gameEntity_setMaxY(const string& ID, float y);
 	void		   gameEntity_setUvRepeat(const string& ID, float repeat);
 	void		   gameEntity_setLevelOfDetailDistance(float distance);
@@ -280,7 +280,7 @@ public:
 	Vec3		   gameEntity_getPosition(const string& ID, const string& partName = "");
 	Vec3		   gameEntity_getRotation(const string& ID, const string& partName = "");
 	Vec3		   gameEntity_getSize(const string& ID, const string& partName = "");
-	Vec3		   gameEntity_getColor(const string& ID);
+	Vec3		   gameEntity_getColor(const string& ID, const string& partName = "");
 	string		   gameEntity_getObjPath(const string& ID);
 	string		   gameEntity_getDiffuseMapPath(const string& ID);
 	string		   gameEntity_getLightMapPath(const string& ID);

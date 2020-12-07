@@ -53,6 +53,7 @@ private:
 	// Strings
 	string _currentProjectName = "";
 	string _currentAnimationID = "";
+	string _currentPartName	   = "";
 
 	// Vector3
 	const Vec3 _defaultCameraPosition = Vec3(0.0f, 5.0f, 5.0f);
@@ -63,6 +64,7 @@ private:
 	// Floats
 	float _cameraDistance = 5.0f;
 	float _cameraScrollingAcceleration = 0.0f;
+	float _partColorStrength = 0.0f;
 	const float _minCameraDistance = 1.0f;
 	const float _minCameraHeight = 1.0f;
 	const float _cameraSpeed = 0.15f;
@@ -79,4 +81,5 @@ private:
 	bool _isRemovingAnimation = false;
 	bool _isEditorLoaded = false;
 	bool _isEditorLoading = false;
+	bool _partColorIncreasing = true;
 };

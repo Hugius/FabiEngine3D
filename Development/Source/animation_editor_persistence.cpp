@@ -39,19 +39,40 @@ void AnimationEditor::loadAnimationsFromFile()
 			vector<AnimationFrame> frames;
 			while (true)
 			{
-				// Temporary values
-				Vec3 targetTransformation;
-				float speed;
-				int speedType;
+				// Read the amount of model parts
+				unsigned int modelPartCount;
 
 				// Check if file has frame data left
-				if (iss >> targetTransformation.x)
+				if (iss >> modelPartCount)
 				{
-					iss >> targetTransformation.y >> targetTransformation.z >> speed >> speedType;
+					// Create frame
 					AnimationFrame frame;
-					frame.targetTransformation = targetTransformation;
-					frame.speed = speed;
-					frame.speedType = AnimationSpeedType(speedType);
+
+					// For every model part
+					for (unsigned int i = 0; i < modelPartCount; i++)
+					{
+						// Temporary values
+						string partName;
+						Vec3 targetTransformation;
+						float speed;
+						int speedType;
+
+						// Extract data
+						iss >> partName >> targetTransformation.x >> targetTransformation.y >> targetTransformation.z >> speed >> speedType;
+						
+						// Questionmark means empty partname
+						if (partName == "?")
+						{
+							partName = "";
+						}
+
+						// Add part to frame
+						frame.targetTransformations.insert(make_pair(partName, targetTransformation));
+						frame.speeds.insert(make_pair(partName, speed));
+						frame.speedTypes.insert(make_pair(partName, AnimationSpeedType(speedType)));
+					}
+
+					// Add frame
 					frames.push_back(frame);
 				}
 				else
@@ -74,6 +95,7 @@ void AnimationEditor::loadAnimationsFromFile()
 					newAnimation->initialTranslation = _fe3d.gameEntity_getPosition(newAnimation->previewModelID);
 					newAnimation->initialRotation = _fe3d.gameEntity_getRotation(newAnimation->previewModelID);
 					newAnimation->initialScaling = _fe3d.gameEntity_getSize(newAnimation->previewModelID);
+					newAnimation->initialColor = _fe3d.gameEntity_getColor(newAnimation->previewModelID);
 				}
 				else // Clear preview model
 				{
@@ -138,16 +160,49 @@ void AnimationEditor::saveAnimationsToFile()
 			{
 				for (unsigned int i = 1; i < animation->frames.size(); i++)
 				{
-					auto targetTransformation = animation->frames[i].targetTransformation;
-					auto speed = animation->frames[i].speed;
-					auto speedType = static_cast<int>(animation->frames[i].speedType);
+					// Write the amount of model parts
+					file << animation->frames[i].targetTransformations.size();
+					
+					// Retrieve all partnames
+					vector<string> partNames;
+					for (auto& [key, val] : animation->frames[i].targetTransformations)
+					{
+						// Convert empty partname to questionmark
+						if (key.empty())
+						{
+							partNames.push_back(key);
+						}
+						else
+						{
+							partNames.push_back("?");
+						}
+					}
 
-					file <<
-						targetTransformation.x << " " <<
-						targetTransformation.y << " " <<
-						targetTransformation.z << " " <<
-						speed << " " <<
-						speedType;
+					// For every model part
+					unsigned int partIndex = 0;
+					for (auto& partName : partNames)
+					{
+						// Retrieve data
+						const auto& targetTransformation = animation->frames[i].targetTransformations[partName];
+						const auto& speed = animation->frames[i].speeds[partName];
+						const auto& speedType = static_cast<int>(animation->frames[i].speedTypes[partName]);
+
+						// Write data
+						file <<
+							partName << " " <<
+							targetTransformation.x << " " <<
+							targetTransformation.y << " " <<
+							targetTransformation.z << " " <<
+							speed << " " <<
+							speedType;
+
+						// Add space
+						if (partIndex != (partNames.size() - 1))
+						{
+							file << " ";
+						}
+						partIndex++;
+					}
 
 					// Add space
 					if (i != (animation->frames.size() - 1))

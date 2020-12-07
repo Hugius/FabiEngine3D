@@ -125,7 +125,6 @@ void GameEntityRenderer::render(const shared_ptr<GameEntity> entity)
 		}
 
 		// Shader uniforms
-		_shader.uploadUniform("u_color", entity->getColor());
 		_shader.uploadUniform("u_specularLightFactor", entity->getSpecularFactor());
 		_shader.uploadUniform("u_specularLightIntensity", entity->getSpecularIntensity());
 		_shader.uploadUniform("u_isTransparent", entity->isTransparent());
@@ -154,6 +153,9 @@ void GameEntityRenderer::render(const shared_ptr<GameEntity> entity)
 		unsigned int index = 0;
 		for (auto& buffer : entity->getOglBuffers())
 		{
+			// Color
+			_shader.uploadUniform("u_color", entity->getColor(index));
+
 			// Model matrix
 			auto normalModelMatrix = entity->getModelMatrix(index);
 			normalModelMatrix.transpose();

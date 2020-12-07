@@ -191,9 +191,19 @@ void GameEntity::scale(Vec3 val, const string& partName)
 	}
 }
 
-void GameEntity::setColor(Vec3 val)
+void GameEntity::setColor(Vec3 val, const string& partName)
 {
-	_color = val;
+	if (partName.empty() && _partNames.size() > 1)
+	{
+		for (auto& color : _colors)
+		{
+			color = val;
+		}
+	}
+	else
+	{
+		_colors[_getPartIndex(partName)] = val;
+	}
 }
 
 void GameEntity::setObjPath(const string& val)
@@ -332,6 +342,7 @@ void GameEntity::addPart(const string& val)
 	_translations.push_back(Vec3(0.0f));
 	_rotations.push_back(Vec3(0.0f));
 	_scalings.push_back(Vec3(1.0f));
+	_colors.push_back(Vec3(1.0f));
 }
 
 void GameEntity::setOriginalLightness(float val)
@@ -394,6 +405,11 @@ const GLuint GameEntity::getNormalMap(unsigned int index) const
 	return _normalMaps[index];
 }
 
+const Vec3 GameEntity::getColor(unsigned int index)
+{
+	return _colors[index];
+}
+
 const Vec3 GameEntity::getOriginalTranslation() const
 {
 	return _originalTranslation;
@@ -403,7 +419,7 @@ const Vec3 GameEntity::getTranslation(const string& partName)
 {
 	if (partName.empty() && _partNames.size() > 1)
 	{
-		return _translations[0];
+		return _calculateAverage(_translations);
 	}
 	else
 	{
@@ -420,7 +436,7 @@ const Vec3 GameEntity::getRotation(const string& partName)
 {
 	if (partName.empty() && _partNames.size() > 1)
 	{
-		return _rotations[0];
+		return _calculateAverage(_rotations);
 	}
 	else
 	{
@@ -437,7 +453,7 @@ const Vec3 GameEntity::getScaling(const string& partName)
 {
 	if (partName.empty() && _partNames.size() > 1)
 	{
-		return _scalings[0];
+		return _calculateAverage(_scalings);
 	}
 	else
 	{
@@ -445,9 +461,16 @@ const Vec3 GameEntity::getScaling(const string& partName)
 	}
 }
 
-const Vec3 GameEntity::getColor() const
+const Vec3 GameEntity::getColor(const string& partName)
 {
-	return _color;
+	if (partName.empty() && _partNames.size() > 1)
+	{
+		return _calculateAverage(_colors);
+	}
+	else
+	{
+		return _colors[_getPartIndex(partName)];
+	}
 }
 
 const string& GameEntity::getObjPath() const
@@ -593,6 +616,18 @@ unsigned int GameEntity::_getPartIndex(string partName)
 
 	// Error
 	Logger::throwError("Game entity with ID \"" + getID() + "\" has no part called \"" + partName + "\"");
+}
+
+Vec3 GameEntity::_calculateAverage(vector<Vec3> elements)
+{
+	Vec3 total = Vec3(0.0f);
+
+	for (auto& element : elements)
+	{
+		total += element;
+	}
+
+	return total / static_cast<float>(elements.size());
 }
 
 const float GameEntity::getOriginalLightness() const

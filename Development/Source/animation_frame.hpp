@@ -3,12 +3,21 @@
 #include "fabi_engine_3d.hpp"
 #include "animation_speed_type.hpp"
 
-struct AnimationFrame
+class AnimationFrame
 {
-	Vec3 targetTransformation = Vec3(0.0f);
+public:
+	AnimationFrame()
+	{
+		targetTransformations.insert(make_pair("", Vec3(0.0f)));
+		originalSpeeds.insert(make_pair("", 0.0f));
+		speeds.insert(make_pair("", 0.0f));
+		speedTypes.insert(make_pair("", AnimationSpeedType::LINEAR));
+	}
 
-	float originalSpeed = 0.0f;
-	float speed = 0.0f;
+	map<string, Vec3> targetTransformations;
 
-	AnimationSpeedType speedType;
+	map<string, float> originalSpeeds;
+	map<string, float> speeds;
+
+	map<string, AnimationSpeedType> speedTypes;
 };

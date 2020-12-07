@@ -19,15 +19,15 @@ public:
 	void addReflectionMap(GLuint val);
 	void addNormalMap(GLuint val);
 	void setOriginalTranslation(Vec3 val);
-	void setTranslation(Vec3 val, const string& partName = "");
 	void setOriginalRotation(Vec3 val);
-	void setRotation(Vec3 val, const string& partName = "");
 	void setOriginalScaling(Vec3 val);
+	void setTranslation(Vec3 val, const string& partName = "");
+	void setRotation(Vec3 val, const string& partName = "");
 	void setScaling(Vec3 val, const string& partName = "");
 	void translate(Vec3 val, const string& partName = "");
 	void rotate(Vec3 val, const string& partName = "");
 	void scale(Vec3 val, const string& partName = "");
-	void setColor(Vec3 val);
+	void setColor(Vec3 val, const string& partName = "");
 	void setObjPath(const string& val);
 	void setDiffuseMapPath(const string& val);
 	void setLightMapPath(const string& val);
@@ -68,13 +68,14 @@ public:
 	const GLuint getLightMap(unsigned int index) const;
 	const GLuint getReflectionMap(unsigned int index) const;
 	const GLuint getNormalMap(unsigned int index) const;
+	const Vec3 getColor(unsigned int index);
 	const Vec3 getOriginalTranslation() const;
-	const Vec3 getTranslation(const string& partName = "");
 	const Vec3 getOriginalRotation() const;
-	const Vec3 getRotation(const string& partName = "");
 	const Vec3 getOriginalScaling() const;
+	const Vec3 getTranslation(const string& partName = "");
+	const Vec3 getRotation(const string& partName = "");
 	const Vec3 getScaling(const string& partName = "");
-	const Vec3 getColor() const;
+	const Vec3 getColor(const string& partName = "");
 	const string& getObjPath() const;
 	const string& getDiffuseMapPath() const;
 	const string& getLightMapPath() const;
@@ -111,6 +112,7 @@ public:
 
 private:
 	unsigned int _getPartIndex(string partName);
+	Vec3 _calculateAverage(vector<Vec3> elements);
 
 	vector<string> _partNames;
 	vector<Matrix44> _modelMatrices;
@@ -121,6 +123,7 @@ private:
 	vector<Vec3> _translations;
 	vector<Vec3> _rotations;
 	vector<Vec3> _scalings;
+	vector<Vec3> _colors;
 	vector<GLuint> _diffuseMaps;
 	vector<GLuint> _lightMaps;
 	vector<GLuint> _reflectionMaps;
@@ -136,7 +139,6 @@ private:
 	Vec3 _originalTranslation = Vec3(0.0f);
 	Vec3 _originalRotation = Vec3(0.0f);
 	Vec3 _originalScaling = Vec3(1.0f);
-	Vec3 _color = Vec3(1.0f);
 
 	float _originalLightness = 1.0f;
 	float _lightness = 1.0f;

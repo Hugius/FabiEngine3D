@@ -382,9 +382,9 @@ float FabiEngine3D::gameEntity_getLevelOfDetailDistance()
 	return _core->_gameEntityManager.getLodDistance();
 }
 
-Vec3 FabiEngine3D::gameEntity_getColor(const string& ID)
+Vec3 FabiEngine3D::gameEntity_getColor(const string& ID, const string& partName)
 {
-	return _core->_gameEntityManager.getEntity(ID)->getColor();
+	return _core->_gameEntityManager.getEntity(ID)->getColor(partName);
 }
 
 string FabiEngine3D::gameEntity_getObjPath(const string& ID)
@@ -469,9 +469,9 @@ void FabiEngine3D::gameEntity_setDepthMapIncluded(const string& ID, bool enabled
 	_core->_gameEntityManager.getEntity(ID)->setDepthMapIncluded(enabled);
 }
 
-void FabiEngine3D::gameEntity_setColor(const string& ID, Vec3 color)
+void FabiEngine3D::gameEntity_setColor(const string& ID, Vec3 color, const string& partName)
 {
-	_core->_gameEntityManager.getEntity(ID)->setColor(color);
+	_core->_gameEntityManager.getEntity(ID)->setColor(color, partName);
 }
 
 void FabiEngine3D::gameEntity_setSceneReflective(const string& ID, bool enabled)

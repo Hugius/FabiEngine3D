@@ -133,6 +133,7 @@ void AnimationEditor::_updateEditingScreen()
 					currentAnimation->initialTranslation = _fe3d.gameEntity_getPosition(currentAnimation->previewModelID);
 					currentAnimation->initialRotation = _fe3d.gameEntity_getRotation(currentAnimation->previewModelID);
 					currentAnimation->initialScaling = _fe3d.gameEntity_getSize(currentAnimation->previewModelID);
+					currentAnimation->initialColor = _fe3d.gameEntity_getColor(currentAnimation->previewModelID);
 					_gui.getGlobalScreen()->removeChoiceForm("models");
 				}
 			}
@@ -155,8 +156,8 @@ void AnimationEditor::_updateFrameScreen()
 		{
 			// Temporary values
 			auto currentAnimation = _getAnimation(_currentAnimationID);
-			auto& transformation = currentAnimation->frames[_currentFrameIndex].targetTransformation;
-			auto& speed = currentAnimation->frames[_currentFrameIndex].speed;
+			auto& transformation = currentAnimation->frames[_currentFrameIndex].targetTransformations[_currentPartName];
+			auto& speed = currentAnimation->frames[_currentFrameIndex].speeds[_currentPartName];
 
 			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
 			{
@@ -183,30 +184,31 @@ void AnimationEditor::_updateFrameScreen()
 				else if (screen->getButton("speedType")->isHovered())
 				{
 					// Change speed type
-					if (currentAnimation->frames[_currentFrameIndex].speedType == AnimationSpeedType::LINEAR)
+					if (currentAnimation->frames[_currentFrameIndex].speedTypes[_currentPartName] == AnimationSpeedType::LINEAR)
 					{
-						currentAnimation->frames[_currentFrameIndex].speedType = AnimationSpeedType::EXPONENTIAL;
+						currentAnimation->frames[_currentFrameIndex].speedTypes[_currentPartName] = AnimationSpeedType::EXPONENTIAL;
 					}
 					else
 					{
-						currentAnimation->frames[_currentFrameIndex].speedType = AnimationSpeedType::LINEAR;
+						currentAnimation->frames[_currentFrameIndex].speedTypes[_currentPartName] = AnimationSpeedType::LINEAR;
 					}
 				}
 				else if (screen->getButton("part")->isHovered())
 				{
-					_gui.getGlobalScreen()->addChoiceForm("parts", "Select part", Vec2(-0.4f, 0.1f), 
+					_gui.getGlobalScreen()->addChoiceForm("parts", "Select part", Vec2(-0.4f, 0.1f),
 						_fe3d.gameEntity_getPartNames(currentAnimation->previewModelID));
-					
+
 				}
 			}
 
-			// Check if a animation name is clicked
+			// Check if a animation partname is clicked
 			string selectedButtonID = _gui.getGlobalScreen()->getSelectedChoiceFormButtonID("parts");
 			if (selectedButtonID != "")
 			{
 				if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 				{
-
+					_currentPartName = selectedButtonID;
+					_gui.getGlobalScreen()->removeChoiceForm("parts");
 				}
 			}
 			else if (_gui.getGlobalScreen()->isChoiceFormCancelled("parts")) // Cancelled choosing
@@ -214,8 +216,19 @@ void AnimationEditor::_updateFrameScreen()
 				_gui.getGlobalScreen()->removeChoiceForm("parts");
 			}
 
+			// Emphasize selected model part
+			if (!_currentPartName.empty())
+			{
+				_fe3d.gameEntity_setColor(currentAnimation->previewModelID, currentAnimation->initialColor, "");
+				_fe3d.gameEntity_setColor(currentAnimation->previewModelID, Vec3(1.0f) - currentAnimation->initialColor, _currentPartName);
+			}
+
+			// Update color strength
+			_partColorIncreasing = (_partColorStrength == 1.0f) ? false : (_partColorStrength == 1.0f) ? true : _partColorIncreasing;
+			_partColorStrength += ((_partColorIncreasing ? 1.0f : -1.0f) * 0.01f);
+
 			// Showing speed type
-			string newContent = (currentAnimation->frames[_currentFrameIndex].speedType == AnimationSpeedType::LINEAR) ? 
+			string newContent = (currentAnimation->frames[_currentFrameIndex].speedTypes[_currentPartName] == AnimationSpeedType::LINEAR) ?
 				"Type: linear" : "Type: exponential";
 			_fe3d.textEntity_setTextContent(screen->getButton("speedType")->getTextfield()->getEntityID(), newContent);
 

@@ -48,7 +48,7 @@ private:
 
 	// Containers
 	vector<shared_ptr<Animation>> _animations;
-	map<string, Animation> _playingAnimations;
+	map<pair<string, string>, Animation> _playingAnimations;
 
 	// Strings
 	string _currentProjectName = "";
@@ -65,6 +65,7 @@ private:
 	float _cameraDistance = 5.0f;
 	float _cameraScrollingAcceleration = 0.0f;
 	float _partColorStrength = 0.0f;
+	float _colorChangingSpeed = 0.05f;
 	const float _minCameraDistance = 1.0f;
 	const float _minCameraHeight = 1.0f;
 	const float _cameraSpeed = 0.15f;

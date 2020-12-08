@@ -105,6 +105,12 @@ vector<ObjPart> OBJLoader::_loadOBJ(const string& filePath, bool calculateTangen
 			fscanf(file, "%s\n", name);
 			selectedPartName = name;
 
+			// Cannot be a questionmark
+			if (selectedPartName == "?")
+			{
+				Logger::throwError("Model part name cannot be '?' of model with filepath \"" + filePath + "\"!");
+			}
+
 			// Reset material names
 			tempDiffuseMapName = "";
 			tempLightMapName = "";

@@ -3,11 +3,10 @@
 void AnimationEditor::startAnimation(const string& animationID, const string& modelID, int count)
 {
 	// Temporary values
-	string composedID = animationID + "_" + modelID;
 	string errorMessage = "Trying to start animation with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
 
 	// Check if animation is not already playing
-	if (_playingAnimations.find(composedID) == _playingAnimations.end())
+	if (_playingAnimations.find(make_pair(animationID, modelID)) == _playingAnimations.end())
 	{
 		// Check if animation exists
 		if (_isAnimationExisting(animationID))
@@ -18,17 +17,23 @@ void AnimationEditor::startAnimation(const string& animationID, const string& mo
 				// Check if animation count is valid
 				if (count >= -1)
 				{
-					// Retrieve & prepare animation
+					// Retrieve animation
 					auto animation = _getAnimation(animationID);
 					animation->animatedModelID = modelID;
 					animation->timesToPlay = count;
+
+					// Synchronize frame speeds
 					for (auto& frame : animation->frames)
 					{
-						frame.originalSpeed = frame.speed;
+						frame.originalSpeeds.clear();
+						for (auto& partName : frame.partNames)
+						{
+							frame.originalSpeeds.insert(make_pair(partName, frame.speeds[partName]));
+						}
 					}
 
 					// Play animation
-					_playingAnimations.insert(std::make_pair(composedID, *animation));
+					_playingAnimations.insert(make_pair(make_pair(animationID, modelID), *animation));
 				}
 				else
 				{
@@ -53,20 +58,18 @@ void AnimationEditor::startAnimation(const string& animationID, const string& mo
 
 bool AnimationEditor::isAnimationPlaying(const string& animationID, const string& modelID)
 {
-	string composedID = animationID + "_" + modelID;
-	return _playingAnimations.find(composedID) != _playingAnimations.end();
+	return _playingAnimations.find(make_pair(animationID, modelID)) != _playingAnimations.end();
 }
 
 void AnimationEditor::stopAnimation(const string& animationID, const string& modelID)
 {
 	// Temporary values
-	string composedID = animationID + "_" + modelID;
 	string errorMessage = "Trying to stop animation with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
 
 	// Check if animation is already playing
-	if (_playingAnimations.find(composedID) != _playingAnimations.end())
+	if (_playingAnimations.find(make_pair(animationID, modelID)) != _playingAnimations.end())
 	{
-		_playingAnimations.erase(composedID);
+		_playingAnimations.erase(make_pair(animationID, modelID));
 	}
 	else
 	{
@@ -76,18 +79,120 @@ void AnimationEditor::stopAnimation(const string& animationID, const string& mod
 
 void AnimationEditor::_updateAnimationExecution()
 {
-	vector<string> animationsThatEnded;
+	// Temporary values
+	vector<pair<string, string>> animationsToStop;
+	vector<pair<string, string>> animationsToStart;
 
 	// Update all playing animations
-	for (auto& [ID, animation] : _playingAnimations)
+	for (auto& [idPair, animation] : _playingAnimations)
 	{
 		// Retrieve current frame
 		auto& frame = animation.frames[animation.frameIndex];
 
-		// Check if reached transformation of current frame
-		if (_hasReachedFloat(animation.totalTransformation.x, frame.targetTransformation.x, frame.speed) &&
-			_hasReachedFloat(animation.totalTransformation.y, frame.targetTransformation.y, frame.speed) &&
-			_hasReachedFloat(animation.totalTransformation.z, frame.targetTransformation.z, frame.speed))
+		// For every model part in this frame
+		unsigned int finishedPartsAmount = 0;
+		for (auto& partName : frame.partNames)
+		{
+			// Check if reached transformation of current frame
+			if (_hasReachedFloat(frame.totalTransformations[partName].x, frame.targetTransformations[partName].x, frame.speeds[partName]) &&
+				_hasReachedFloat(frame.totalTransformations[partName].y, frame.targetTransformations[partName].y, frame.speeds[partName]) &&
+				_hasReachedFloat(frame.totalTransformations[partName].z, frame.targetTransformations[partName].z, frame.speeds[partName]))
+			{
+				finishedPartsAmount++;
+			}
+			else
+			{
+				// X transformation
+				if (!_hasReachedFloat(frame.totalTransformations[partName].x, frame.targetTransformations[partName].x, frame.speeds[partName]))
+				{
+					// Determine speed type
+					if (frame.speedTypes[partName] == AnimationSpeedType::LINEAR)
+					{
+						frame.totalTransformations[partName].x += frame.speeds[partName];
+					}
+					else
+					{
+						frame.totalTransformations[partName].x += frame.speeds[partName];
+						frame.speeds[partName] += (frame.speeds[partName] / 100.0f);
+					}
+
+					// Determine transformation type
+					if (animation.transformationType == TransformationType::TRANSLATION)
+					{
+						_fe3d.gameEntity_move(animation.animatedModelID, Vec3(frame.speeds[partName], 0.0f, 0.0f), partName);
+					}
+					else if (animation.transformationType == TransformationType::ROTATION)
+					{
+						_fe3d.gameEntity_rotate(animation.animatedModelID, Vec3(frame.speeds[partName], 0.0f, 0.0f), partName);
+					}
+					else if (animation.transformationType == TransformationType::SCALING)
+					{
+						_fe3d.gameEntity_scale(animation.animatedModelID, Vec3(frame.speeds[partName], 0.0f, 0.0f), partName);
+					}
+				}
+
+				// Y transformation
+				if (!_hasReachedFloat(frame.totalTransformations[partName].y, frame.targetTransformations[partName].y, frame.speeds[partName]))
+				{
+					// Determine speed type
+					if (frame.speedTypes[partName] == AnimationSpeedType::LINEAR)
+					{
+						frame.totalTransformations[partName].y += frame.speeds[partName];
+					}
+					else
+					{
+						frame.totalTransformations[partName].y += frame.speeds[partName];
+						frame.speeds[partName] += (frame.speeds[partName] / 100.0f);
+					}
+
+					// Determine transformation type
+					if (animation.transformationType == TransformationType::TRANSLATION)
+					{
+						_fe3d.gameEntity_move(animation.animatedModelID, Vec3(0.0f, frame.speeds[partName], 0.0f), partName);
+					}
+					else if (animation.transformationType == TransformationType::ROTATION)
+					{
+						_fe3d.gameEntity_rotate(animation.animatedModelID, Vec3(0.0f, frame.speeds[partName], 0.0f), partName);
+					}
+					else if (animation.transformationType == TransformationType::SCALING)
+					{
+						_fe3d.gameEntity_scale(animation.animatedModelID, Vec3(0.0f, frame.speeds[partName], 0.0f), partName);
+					}
+				}
+
+				// Z transformation
+				if (!_hasReachedFloat(frame.totalTransformations[partName].z, frame.targetTransformations[partName].z, frame.speeds[partName]))
+				{
+					// Determine speed type
+					if (frame.speedTypes[partName] == AnimationSpeedType::LINEAR)
+					{
+						frame.totalTransformations[partName].z += frame.speeds[partName];
+					}
+					else
+					{
+						frame.totalTransformations[partName].z += frame.speeds[partName];
+						frame.speeds[partName] += (frame.speeds[partName] / 100.0f);
+					}
+
+					// Determine transformation type
+					if (animation.transformationType == TransformationType::TRANSLATION)
+					{
+						_fe3d.gameEntity_move(animation.animatedModelID, Vec3(0.0f, 0.0f, frame.speeds[partName]), partName);
+					}
+					else if (animation.transformationType == TransformationType::ROTATION)
+					{
+						_fe3d.gameEntity_rotate(animation.animatedModelID, Vec3(0.0f, 0.0f, frame.speeds[partName]), partName);
+					}
+					else if (animation.transformationType == TransformationType::SCALING)
+					{
+						_fe3d.gameEntity_scale(animation.animatedModelID, Vec3(0.0f, 0.0f, frame.speeds[partName]), partName);
+					}
+				}
+			}
+		}
+
+		// Check if animation is finished
+		if (finishedPartsAmount == frame.partNames.size())
 		{
 			// Next frame or reset animation
 			if (animation.frameIndex >= animation.frames.size() - 1)
@@ -95,14 +200,8 @@ void AnimationEditor::_updateAnimationExecution()
 				// Playing endlessly
 				if (animation.timesToPlay == -1)
 				{
-					// Reset animation values
-					animation.totalTransformation = Vec3(0.0f);
-					animation.frameIndex = 0;
-					for (auto& frame : animation.frames)
-					{
-						frame.speed = frame.originalSpeed;
-					}
-					continue;
+					animationsToStop.push_back(idPair);
+					animationsToStart.push_back(idPair);
 				}
 
 				// Played animation once
@@ -111,7 +210,7 @@ void AnimationEditor::_updateAnimationExecution()
 				// Check if animation has ended
 				if (animation.timesToPlay == 0)
 				{
-					animationsThatEnded.push_back(ID);
+					animationsToStop.push_back(idPair);
 				}
 				else
 				{
@@ -123,100 +222,17 @@ void AnimationEditor::_updateAnimationExecution()
 				animation.frameIndex++;
 			}
 		}
-		else
-		{
-			// X transformation
-			if (!_hasReachedFloat(animation.totalTransformation.x, frame.targetTransformation.x, frame.speed))
-			{
-				// Determine speed type
-				if (frame.speedType == AnimationSpeedType::LINEAR)
-				{
-					animation.totalTransformation.x += frame.speed;
-				}
-				else
-				{
-					animation.totalTransformation.x += frame.speed;
-					frame.speed += (frame.speed / 100.0f);
-				}
-
-				// Determine transformation type
-				if (animation.transformationType == TransformationType::TRANSLATION)
-				{
-					_fe3d.gameEntity_move(animation.animatedModelID, Vec3(frame.speed, 0.0f, 0.0f));
-				}
-				else if (animation.transformationType == TransformationType::ROTATION)
-				{
-					_fe3d.gameEntity_rotate(animation.animatedModelID, Vec3(frame.speed, 0.0f, 0.0f));
-				}
-				else if (animation.transformationType == TransformationType::SCALING)
-				{
-					_fe3d.gameEntity_scale(animation.animatedModelID, Vec3(frame.speed, 0.0f, 0.0f));
-				}
-			}
-
-			// Y transformation
-			if (!_hasReachedFloat(animation.totalTransformation.y, frame.targetTransformation.y, frame.speed))
-			{
-				// Determine speed type
-				if (frame.speedType == AnimationSpeedType::LINEAR)
-				{
-					animation.totalTransformation.y += frame.speed;
-				}
-				else
-				{
-					animation.totalTransformation.y += frame.speed;
-					frame.speed += (frame.speed / 100.0f);
-				}
-
-				// Determine transformation type
-				if (animation.transformationType == TransformationType::TRANSLATION)
-				{
-					_fe3d.gameEntity_move(animation.animatedModelID, Vec3(0.0f, frame.speed, 0.0f));
-				}
-				else if (animation.transformationType == TransformationType::ROTATION)
-				{
-					_fe3d.gameEntity_rotate(animation.animatedModelID, Vec3(0.0f, frame.speed, 0.0f));
-				}
-				else if (animation.transformationType == TransformationType::SCALING)
-				{
-					_fe3d.gameEntity_scale(animation.animatedModelID, Vec3(0.0f, frame.speed, 0.0f));
-				}
-			}
-
-			// Z transformation
-			if (!_hasReachedFloat(animation.totalTransformation.z, frame.targetTransformation.z, frame.speed))
-			{
-				// Determine speed type
-				if (frame.speedType == AnimationSpeedType::LINEAR)
-				{
-					animation.totalTransformation.z += frame.speed;
-				}
-				else
-				{
-					animation.totalTransformation.z += frame.speed;
-					frame.speed += (frame.speed / 100.0f);
-				}
-
-				// Determine transformation type
-				if (animation.transformationType == TransformationType::TRANSLATION)
-				{
-					_fe3d.gameEntity_move(animation.animatedModelID, Vec3(0.0f, 0.0f, frame.speed));
-				}
-				else if (animation.transformationType == TransformationType::ROTATION)
-				{
-					_fe3d.gameEntity_rotate(animation.animatedModelID, Vec3(0.0f, 0.0f, frame.speed));
-				}
-				else if (animation.transformationType == TransformationType::SCALING)
-				{
-					_fe3d.gameEntity_scale(animation.animatedModelID, Vec3(0.0f, 0.0f, frame.speed));
-				}
-			}
-		}
 	}
 
 	// Remove all animations that ended
-	for (auto& ID : animationsThatEnded)
+	for (auto& idPair : animationsToStop)
 	{
-		_playingAnimations.erase(ID);
+		stopAnimation(idPair.first, idPair.second);
+	}
+
+	// Start all animations that play endlessly
+	for (auto& idPair : animationsToStart)
+	{
+		startAnimation(idPair.first, idPair.second, -1);
 	}
 }

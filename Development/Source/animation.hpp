@@ -9,8 +9,14 @@ class Animation final
 public:
 	Animation(const string& ID) : ID(ID)
 	{
-		previewModelID = "";
-		frames.push_back(AnimationFrame());
+		// Add default frame
+		AnimationFrame frame;
+		frame.targetTransformations.insert(make_pair("", Vec3(0.0f)));
+		frame.totalTransformations.insert(make_pair("", Vec3(0.0f)));
+		frame.speeds.insert(make_pair("", 0.0f));
+		frame.speedTypes.insert(make_pair("", AnimationSpeedType::LINEAR));
+		frame.partNames.push_back("");
+		frames.push_back(frame);
 	}
 
 	const string ID;
@@ -28,7 +34,6 @@ public:
 	Vec3 initialRotation = Vec3(0.0f);
 	Vec3 initialScaling = Vec3(0.0f);
 	Vec3 initialColor = Vec3(0.0f);
-	Vec3 totalTransformation = Vec3(0.0f);
 
 	TransformationType transformationType = TransformationType::TRANSLATION;
 };

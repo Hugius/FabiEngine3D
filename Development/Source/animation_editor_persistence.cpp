@@ -67,6 +67,7 @@ void AnimationEditor::loadAnimationsFromFile()
 						}
 
 						// Add part to frame
+						frame.partNames.push_back(partName);
 						frame.targetTransformations.insert(make_pair(partName, targetTransformation));
 						frame.speeds.insert(make_pair(partName, speed));
 						frame.speedTypes.insert(make_pair(partName, AnimationSpeedType(speedType)));
@@ -149,43 +150,32 @@ void AnimationEditor::saveAnimationsToFile()
 				previewModelID << " " <<
 				transformationType;
 
-			// Add space
-			if (animation->frames.size() > 1)
-			{
-				file << " ";
-			}
-
 			// Export frame data
 			if (animation->frames.size() > 1)
 			{
+				// Add space
+				file << " ";
+
+				// For every frame
 				for (unsigned int i = 1; i < animation->frames.size(); i++)
 				{
 					// Write the amount of model parts
-					file << animation->frames[i].targetTransformations.size();
+					file << animation->frames[i].partNames.size() << " ";
 					
-					// Retrieve all partnames
-					vector<string> partNames;
-					for (auto& [key, val] : animation->frames[i].targetTransformations)
-					{
-						// Convert empty partname to questionmark
-						if (key.empty())
-						{
-							partNames.push_back(key);
-						}
-						else
-						{
-							partNames.push_back("?");
-						}
-					}
-
 					// For every model part
 					unsigned int partIndex = 0;
-					for (auto& partName : partNames)
+					for (auto& partName : animation->frames[i].partNames)
 					{
 						// Retrieve data
 						const auto& targetTransformation = animation->frames[i].targetTransformations[partName];
 						const auto& speed = animation->frames[i].speeds[partName];
 						const auto& speedType = static_cast<int>(animation->frames[i].speedTypes[partName]);
+						
+						// Questionmark means empty partname
+						if (partName.empty())
+						{
+							partName = "?";
+						}
 
 						// Write data
 						file <<
@@ -197,7 +187,7 @@ void AnimationEditor::saveAnimationsToFile()
 							speedType;
 
 						// Add space
-						if (partIndex != (partNames.size() - 1))
+						if (partIndex != (animation->frames[i].partNames.size() - 1))
 						{
 							file << " ";
 						}

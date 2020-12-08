@@ -16,8 +16,16 @@ void AnimationEditor::_updateEditingScreen()
 			{
 				if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused())) // Back button
 				{
+					// Stop animation if playing
+					if (isAnimationPlaying(_currentAnimationID, currentAnimation->previewModelID))
+					{
+						stopAnimation(_currentAnimationID, currentAnimation->previewModelID);
+					}
+
+					// Reset some values
 					_isEditingAnimation = false;
 					_currentAnimationID = "";
+					_currentFrameIndex = 0;
 					_fe3d.textEntity_hide(_gui.getGlobalScreen()->getTextfield("selectedAnimationName")->getEntityID());
 					_fe3d.textEntity_hide(_gui.getGlobalScreen()->getTextfield("selectedAnimationFrame")->getEntityID());
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("animationEditorMenuMain");
@@ -47,7 +55,28 @@ void AnimationEditor::_updateEditingScreen()
 				}
 				else if (screen->getButton("addFrame")->isHovered())
 				{
-					auto lastFrameCopy = _getAnimation(_currentAnimationID)->frames.back();
+					// Retrieve last (or default) frame
+					auto lastFrameCopy = currentAnimation->frames.back();
+
+					// Check if model has multiple parts
+					if (!currentAnimation->previewModelID.empty() && _fe3d.gameEntity_isMultiParted(currentAnimation->previewModelID))
+					{
+						// Check if last frame is default
+						if (lastFrameCopy.partNames.size() == 1)
+						{
+							// Add empty data for every model part
+							for (auto& partName : _fe3d.gameEntity_getPartNames(currentAnimation->previewModelID))
+							{
+								lastFrameCopy.partNames.push_back(partName);
+								lastFrameCopy.targetTransformations.insert(make_pair(partName, Vec3(0.0f)));
+								lastFrameCopy.totalTransformations.insert(make_pair(partName, Vec3(0.0f)));
+								lastFrameCopy.speeds.insert(make_pair(partName, 0.0f));
+								lastFrameCopy.speedTypes.insert(make_pair(partName, AnimationSpeedType::LINEAR));
+							}
+						}
+					}
+
+					// Add copied frame
 					currentAnimation->frames.push_back(lastFrameCopy);
 					_currentFrameIndex++;
 				}
@@ -107,13 +136,15 @@ void AnimationEditor::_updateEditingScreen()
 			_fe3d.textEntity_setTextContent(textID, "Frame: " + to_string(_currentFrameIndex + 1), 0.025f);
 
 			// Button hoverabilities
-			screen->getButton("play")->setHoverable(!isAnimationPlaying(_currentAnimationID, currentAnimation->previewModelID));
-			screen->getButton("stop")->setHoverable(isAnimationPlaying(_currentAnimationID, currentAnimation->previewModelID));
-			screen->getButton("addFrame")->setHoverable(currentAnimation->frames.size() < _maxFrameCount);
-			screen->getButton("editFrame")->setHoverable(_currentFrameIndex > 0);
-			screen->getButton("deleteFrame")->setHoverable(currentAnimation->frames.size() > 1 && _currentFrameIndex > 0);
-			screen->getButton("prev")->setHoverable(_currentFrameIndex > 0);
-			screen->getButton("next")->setHoverable(_currentFrameIndex < (currentAnimation->frames.size() - 1));
+			bool isPlaying = isAnimationPlaying(_currentAnimationID, currentAnimation->previewModelID);
+			screen->getButton("play")->setHoverable(!isPlaying);
+			screen->getButton("stop")->setHoverable(isPlaying);
+			screen->getButton("addFrame")->setHoverable(currentAnimation->frames.size() < _maxFrameCount && !isPlaying);
+			screen->getButton("editFrame")->setHoverable(_currentFrameIndex > 0 && !isPlaying);
+			screen->getButton("deleteFrame")->setHoverable(currentAnimation->frames.size() > 1 && _currentFrameIndex > 0 && !isPlaying);
+			screen->getButton("prev")->setHoverable(_currentFrameIndex > 0 && !isPlaying);
+			screen->getButton("next")->setHoverable(_currentFrameIndex < (currentAnimation->frames.size() - 1) && !isPlaying);
+			screen->getButton("type")->setHoverable(!isPlaying);
 
 			// Check if a animation name is clicked
 			string selectedButtonID = _gui.getGlobalScreen()->getSelectedChoiceFormButtonID("models");
@@ -128,12 +159,16 @@ void AnimationEditor::_updateEditingScreen()
 					}
 
 					// Show new model
-					currentAnimation->previewModelID = "@" + selectedButtonID;
 					_fe3d.gameEntity_show(currentAnimation->previewModelID);
+
+					// Set new values
+					currentAnimation->previewModelID = "@" + selectedButtonID;
 					currentAnimation->initialTranslation = _fe3d.gameEntity_getPosition(currentAnimation->previewModelID);
 					currentAnimation->initialRotation = _fe3d.gameEntity_getRotation(currentAnimation->previewModelID);
 					currentAnimation->initialScaling = _fe3d.gameEntity_getSize(currentAnimation->previewModelID);
 					currentAnimation->initialColor = _fe3d.gameEntity_getColor(currentAnimation->previewModelID);
+
+					// Miscellaneous
 					_gui.getGlobalScreen()->removeChoiceForm("models");
 				}
 			}
@@ -163,6 +198,8 @@ void AnimationEditor::_updateFrameScreen()
 			{
 				if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused())) // Back button
 				{
+					_currentPartName = "";
+					_fe3d.gameEntity_setColor(currentAnimation->previewModelID, currentAnimation->initialColor, "");
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("animationEditorMenuChoice");
 				}
 				else if (screen->getButton("xTransformation")->isHovered())
@@ -197,6 +234,7 @@ void AnimationEditor::_updateFrameScreen()
 				{
 					_gui.getGlobalScreen()->addChoiceForm("parts", "Select part", Vec2(-0.4f, 0.1f),
 						_fe3d.gameEntity_getPartNames(currentAnimation->previewModelID));
+					std::cout << _fe3d.gameEntity_getPartNames(currentAnimation->previewModelID).size();
 
 				}
 			}
@@ -220,12 +258,12 @@ void AnimationEditor::_updateFrameScreen()
 			if (!_currentPartName.empty())
 			{
 				_fe3d.gameEntity_setColor(currentAnimation->previewModelID, currentAnimation->initialColor, "");
-				_fe3d.gameEntity_setColor(currentAnimation->previewModelID, Vec3(1.0f) - currentAnimation->initialColor, _currentPartName);
+				_fe3d.gameEntity_setColor(currentAnimation->previewModelID, currentAnimation->initialColor * _partColorStrength, _currentPartName);
 			}
 
 			// Update color strength
-			_partColorIncreasing = (_partColorStrength == 1.0f) ? false : (_partColorStrength == 1.0f) ? true : _partColorIncreasing;
-			_partColorStrength += ((_partColorIncreasing ? 1.0f : -1.0f) * 0.01f);
+			_partColorIncreasing = (_partColorStrength >= 1.0f) ? false : (_partColorStrength <= 0.0f) ? true : _partColorIncreasing;
+			_partColorStrength += ((_partColorIncreasing ? 1.0f : -1.0f) * _colorChangingSpeed);
 
 			// Showing speed type
 			string newContent = (currentAnimation->frames[_currentFrameIndex].speedTypes[_currentPartName] == AnimationSpeedType::LINEAR) ?

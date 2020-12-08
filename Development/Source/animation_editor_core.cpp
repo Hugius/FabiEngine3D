@@ -67,8 +67,8 @@ void AnimationEditor::load()
 	loadAnimationsFromFile();
 
 	// Miscellaneous
-	_gui.getGlobalScreen()->addTextfield("selectedAnimationName", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
-	_gui.getGlobalScreen()->addTextfield("selectedAnimationFrame", Vec2(0.0f, 0.725f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
+	_gui.getGlobalScreen()->addTextfield("selectedAnimationName", Vec2(0.0f, -0.45f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
+	_gui.getGlobalScreen()->addTextfield("selectedAnimationFrame", Vec2(0.0f, -0.55f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
 	//_gui.getViewport("right")->getWindow("main")->setActiveScreen("animationEditorControls"); <---
 	_isEditorLoading = false;
 	_isEditorLoaded = true;

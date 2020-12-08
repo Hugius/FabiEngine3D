@@ -343,9 +343,11 @@ void ModelEditor::_updateCamera()
 		_cameraScrollingAcceleration *= 0.975f; // Slowing down (smoothing)
 		_cameraScrollingAcceleration = std::clamp(_cameraScrollingAcceleration, -1.0f, 1.0f);
 
-		// Adding movement to the 3rd person view & making sure you cannot zoom inverted
+		// Adding movement to the 3rd person view
 		_cameraDistance += _cameraScrollingAcceleration;
-		if (_cameraDistance < 0.1f)
+
+		// Small offset so user cannot zoom inverted
+		if (_cameraDistance < 0.1f) 
 		{
 			_cameraDistance = 0.1f;
 		}

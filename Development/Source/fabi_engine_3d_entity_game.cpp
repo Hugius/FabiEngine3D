@@ -168,7 +168,7 @@ bool FabiEngine3D::gameEntity_isInstanced(const string& ID)
 
 bool FabiEngine3D::gameEntity_isMultiParted(const string& ID)
 {
-	return (_core->_gameEntityManager.getEntity(ID)->getOglBuffers().size() > 1);
+	return (_core->_gameEntityManager.getEntity(ID)->getPartNames().size() > 1);
 }
 
 bool FabiEngine3D::gameEntity_isTransparent(const string& ID)

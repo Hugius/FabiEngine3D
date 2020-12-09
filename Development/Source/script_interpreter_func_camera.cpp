@@ -37,6 +37,28 @@ bool ScriptInterpreter::_executeFe3dCameraFunction(const string& functionName, v
 
 		return true;
 	}
+	else if (functionName == "fe3d:camera_lookat_position_set") // Set lookat position
+	{
+		auto types = { ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
+
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		{
+			_fe3d.camera_setLookatPosition(Vec3(arguments[0].getDecimal(), arguments[1].getDecimal(), arguments[2].getDecimal()));
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+		}
+
+		return true;
+	}
+	else if (functionName == "fe3d:camera_lookat_position_get") // Get lookat position
+	{
+		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			auto result = _fe3d.camera_getLookatPosition();
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));
+		}
+
+		return true;
+	}
 	else if (functionName == "fe3d:camera_follow_x") // Follow X direction
 	{
 		auto types = { ScriptValueType::DECIMAL };
@@ -141,11 +163,9 @@ bool ScriptInterpreter::_executeFe3dCameraFunction(const string& functionName, v
 	}
 	else if (functionName == "fe3d:camera_lookat_enable") // Enable lookat view
 	{
-		auto types = { ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
-
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			_fe3d.camera_enableLookat(Vec3(arguments[0].getDecimal(), arguments[1].getDecimal(), arguments[2].getDecimal()));
+			_fe3d.camera_enableLookat();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 

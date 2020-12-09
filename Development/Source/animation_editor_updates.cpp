@@ -200,6 +200,16 @@ void AnimationEditor::_updateCamera()
 {
 	if (_isEditorLoaded)
 	{
+		// Update vertical lookat movement
+		if (_fe3d.input_getKeyDown(InputType::KEY_SPACE))
+		{
+			_cameraLookatPosition.y += (_cameraSpeed / 2.0f);
+		}
+		if (_fe3d.input_getKeyDown(InputType::KEY_LCTRL))
+		{
+			_cameraLookatPosition.y -= (_cameraSpeed / 2.0f);
+		}
+
 		// Update cursor difference
 		Vec2 cursorPosition = _fe3d.misc_convertFromScreenCoords(_fe3d.misc_getCursorPosition());
 		Vec2 cursorDifference = cursorPosition - _lastCursorPos;
@@ -246,6 +256,7 @@ void AnimationEditor::_updateCamera()
 		float z = (_cameraDistance * cos(_totalCursorDifference.x));
 
 		// Update camera position
-		_fe3d.camera_setPosition(Vec3(x, y, z));
+		_fe3d.camera_setPosition(_cameraLookatPosition + Vec3(x, y, z));
+		_fe3d.camera_setLookatPosition(_cameraLookatPosition);
 	}
 }

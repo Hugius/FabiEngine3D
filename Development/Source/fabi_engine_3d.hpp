@@ -45,7 +45,7 @@ public:
 
 	// Camera interface - setters
 	void camera_load(float fov, float nearZ, float farZ, Vec3 startPosition, float yaw = 0.0f, float pitch = 0.0f);
-	void camera_enableLookat(Vec3 position);
+	void camera_enableLookat();
 	void camera_disableLookat();
 	void camera_enableFirstPersonView();
 	void camera_disableFirstPersonView();
@@ -55,7 +55,8 @@ public:
 	void camera_translateFollowZY(float speed);
 	void camera_translateFollowZ(float speed);
 	void camera_translate(Vec3 translation);
-	void camera_setPosition(Vec3 pos);
+	void camera_setPosition(Vec3 position);
+	void camera_setLookatPosition(Vec3 position);
 	void camera_invertYaw();
 	void camera_invertPitch();
 	void camera_setFOV(float fov);
@@ -71,6 +72,7 @@ public:
 	bool  camera_isFirstPersonViewEnabled();
 	bool  camera_isFreeMovementEnabled();
 	Vec3  camera_getPosition();
+	Vec3  camera_getLookatPosition();
 	float camera_getFOV();
 	float getAspectRatio();
 	float camera_getMouseSensitivity();
@@ -240,6 +242,7 @@ public:
 	void		   gameEntity_scale(const string& ID, Vec3 factor, const string& partName = "");
 	void		   gameEntity_setPosition(const string& ID, Vec3 position, const string& partName = "");
 	void		   gameEntity_setRotation(const string& ID, Vec3 rotation, const string& partName = "");
+	void		   gameEntity_setRotationOrigin(const string& ID, Vec3 rotationOrigin, const string& partName = "");
 	void		   gameEntity_setSize(const string& ID, Vec3 size, const string& partName = "");
 	void		   gameEntity_enable(const string& ID);
 	void		   gameEntity_disable(const string& ID);
@@ -280,6 +283,7 @@ public:
 	float		   gameEntity_getLevelOfDetailDistance();
 	Vec3		   gameEntity_getPosition(const string& ID, const string& partName = "");
 	Vec3		   gameEntity_getRotation(const string& ID, const string& partName = "");
+	Vec3		   gameEntity_getRotationOrigin(const string& ID, const string& partName = "");
 	Vec3		   gameEntity_getSize(const string& ID, const string& partName = "");
 	Vec3		   gameEntity_getColor(const string& ID, const string& partName = "");
 	string		   gameEntity_getObjPath(const string& ID);

@@ -1,6 +1,17 @@
 #include "game_entity.hpp"
 #include "logger.hpp"
 
+void GameEntity::addPart(const string& val)
+{
+	_partNames.push_back(val);
+	_modelMatrices.push_back(Matrix44(1.0f));
+	_translations.push_back(Vec3(0.0f));
+	_rotations.push_back(Vec3(0.0f));
+	_rotationOrigins.push_back(Vec3(0.0f));
+	_scalings.push_back(Vec3(1.0f));
+	_colors.push_back(Vec3(1.0f));
+}
+
 void GameEntity::updateModelMatrix()
 {
 	for (unsigned int i = 0; i < _modelMatrices.size(); i++)
@@ -12,7 +23,8 @@ void GameEntity::updateModelMatrix()
 		Matrix44 translationMatrix = Matrix44::createTranslation(_translations[i].x, _translations[i].y, _translations[i].z);
 		_modelMatrices[i] = _modelMatrices[i] * translationMatrix;
 
-		Matrix44 rotationOriginMatrix = Matrix44::createTranslation(0.0f, 2.0f, 0.0f);
+		// Rotation origin matrix - translate
+		Matrix44 rotationOriginMatrix = Matrix44::createTranslation(_rotationOrigins[i].x, _rotationOrigins[i].y, _rotationOrigins[i].z);
 		_modelMatrices[i] = _modelMatrices[i] * rotationOriginMatrix;
 
 		// Rotation matrix
@@ -22,7 +34,8 @@ void GameEntity::updateModelMatrix()
 			Math::degreesToRadians(_rotations[i].z));
 		_modelMatrices[i] = _modelMatrices[i] * rotationMatrix;
 
-		rotationOriginMatrix = Matrix44::createTranslation(0.0f, -2.0f, 0.0f);
+		// Rotation origin matrix - translate back
+		rotationOriginMatrix = Matrix44::createTranslation(-_rotationOrigins[i].x, -_rotationOrigins[i].y, -_rotationOrigins[i].z);
 		_modelMatrices[i] = _modelMatrices[i] * rotationOriginMatrix;
 
 		// Scaling matrix
@@ -136,6 +149,21 @@ void GameEntity::setRotation(Vec3 val, const string& partName)
 	else
 	{
 		_rotations[_getPartIndex(partName)] = val;
+	}
+}
+
+void GameEntity::setRotationOrigin(Vec3 val, const string& partName)
+{
+	if (partName.empty() && _partNames.size() > 1)
+	{
+		for (auto& rotation : _rotationOrigins)
+		{
+			rotation = val;
+		}
+	}
+	else
+	{
+		_rotationOrigins[_getPartIndex(partName)] = val;
 	}
 }
 
@@ -348,16 +376,6 @@ void GameEntity::clearNormalMaps()
 	_normalMapPaths.clear();
 }
 
-void GameEntity::addPart(const string& val)
-{
-	_partNames.push_back(val);
-	_modelMatrices.push_back(Matrix44(1.0f));
-	_translations.push_back(Vec3(0.0f));
-	_rotations.push_back(Vec3(0.0f));
-	_scalings.push_back(Vec3(1.0f));
-	_colors.push_back(Vec3(1.0f));
-}
-
 void GameEntity::setOriginalLightness(float val)
 {
 	_originalLightness = val;
@@ -454,6 +472,18 @@ const Vec3 GameEntity::getRotation(const string& partName)
 	else
 	{
 		return _rotations[_getPartIndex(partName)];
+	}
+}
+
+const Vec3 GameEntity::getRotationOrigin(const string& partName)
+{
+	if (partName.empty() && _partNames.size() > 1)
+	{
+		return _calculateAverage(_rotationOrigins);
+	}
+	else
+	{
+		return _rotationOrigins[_getPartIndex(partName)];
 	}
 }
 

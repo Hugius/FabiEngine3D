@@ -63,12 +63,13 @@ void AnimationEditor::loadAnimationsFromFile()
 					{
 						// Temporary values
 						string partName;
-						Vec3 targetTransformation;
+						Vec3 targetTransformation, rotationOrigin;
 						float speed;
 						int speedType;
 
 						// Extract data
-						iss >> partName >> targetTransformation.x >> targetTransformation.y >> targetTransformation.z >> speed >> speedType;
+						iss >> partName >> targetTransformation.x >> targetTransformation.y >> targetTransformation.z >> 
+							rotationOrigin.x >> rotationOrigin.y >> rotationOrigin.z >> speed >> speedType;
 
 						// Questionmark means empty partname
 						if (partName == "?")
@@ -78,6 +79,7 @@ void AnimationEditor::loadAnimationsFromFile()
 
 						// Add part to frame
 						frame.targetTransformations.insert(make_pair(partName, targetTransformation));
+						frame.rotationOrigins.insert(make_pair(partName, rotationOrigin));
 						frame.speeds.insert(make_pair(partName, speed));
 						frame.speedTypes.insert(make_pair(partName, AnimationSpeedType(speedType)));
 
@@ -189,6 +191,7 @@ void AnimationEditor::saveAnimationsToFile()
 						{
 							// Retrieve data
 							const auto& targetTransformation = animation->frames[i].targetTransformations[partName];
+							const auto& rotationOrigin = animation->frames[i].rotationOrigins[partName];
 							const auto& speed = animation->frames[i].speeds[partName];
 							const auto& speedType = static_cast<int>(animation->frames[i].speedTypes[partName]);
 
@@ -204,6 +207,9 @@ void AnimationEditor::saveAnimationsToFile()
 								targetTransformation.x << " " <<
 								targetTransformation.y << " " <<
 								targetTransformation.z << " " <<
+								rotationOrigin.x << " " <<
+								rotationOrigin.y << " " <<
+								rotationOrigin.z << " " <<
 								speed << " " <<
 								speedType;
 

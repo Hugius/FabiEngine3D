@@ -9,6 +9,7 @@ public:
 	~GameEntity() = default;
 	
 	// Setters
+	void addPart(const string& val);
 	void updateModelMatrix();
 	void setDiffuseMap(GLuint val);
 	void setLightMap(GLuint val);
@@ -23,6 +24,7 @@ public:
 	void setOriginalScaling(Vec3 val);
 	void setTranslation(Vec3 val, const string& partName = "");
 	void setRotation(Vec3 val, const string& partName = "");
+	void setRotationOrigin(Vec3 val, const string& partName = "");
 	void setScaling(Vec3 val, const string& partName = "");
 	void translate(Vec3 val, const string& partName = "");
 	void rotate(Vec3 val, const string& partName = "");
@@ -60,7 +62,6 @@ public:
 	void clearLightMaps();
 	void clearReflectionMaps();
 	void clearNormalMaps();
-	void addPart(const string& val);
 	
 	// Getters
 	const Matrix44& getModelMatrix(unsigned int index);
@@ -74,6 +75,7 @@ public:
 	const Vec3 getOriginalScaling() const;
 	const Vec3 getTranslation(const string& partName = "");
 	const Vec3 getRotation(const string& partName = "");
+	const Vec3 getRotationOrigin(const string& partName = "");
 	const Vec3 getScaling(const string& partName = "");
 	const Vec3 getColor(const string& partName = "");
 	const string& getObjPath() const;
@@ -122,6 +124,7 @@ private:
 	vector<string> _normalMapPaths;
 	vector<Vec3> _translations;
 	vector<Vec3> _rotations;
+	vector<Vec3> _rotationOrigins;
 	vector<Vec3> _scalings;
 	vector<Vec3> _colors;
 	vector<GLuint> _diffuseMaps;

@@ -46,6 +46,7 @@ void AnimationEditor::_updateMiscellaneous()
 					_fe3d.gameEntity_setPosition(currentAnimation->previewModelID, currentAnimation->initialTranslation, "");
 					_fe3d.gameEntity_setRotation(currentAnimation->previewModelID, currentAnimation->initialRotation, "");
 					_fe3d.gameEntity_setSize(currentAnimation->previewModelID, currentAnimation->initialScaling, "");
+					_fe3d.gameEntity_setRotationOrigin(currentAnimation->previewModelID, Vec3(0.0f), "");
 
 					// Set current frame's transformation of editor
 					for (auto partName : currentAnimation->partNames)
@@ -60,7 +61,10 @@ void AnimationEditor::_updateMiscellaneous()
 							}
 							else if (currentAnimation->transformationType == TransformationType::ROTATION)
 							{
-								_fe3d.gameEntity_rotate(currentAnimation->previewModelID, frame.targetTransformations[partName] - currentAnimation->initialRotation, partName);
+								auto currentRotationOrigin = _fe3d.gameEntity_getRotationOrigin(currentAnimation->previewModelID, partName);
+								_fe3d.gameEntity_setRotationOrigin(currentAnimation->previewModelID, 
+									currentRotationOrigin + frame.rotationOrigins[partName], partName);
+								_fe3d.gameEntity_rotate(currentAnimation->previewModelID, frame.targetTransformations[partName], partName);
 							}
 							else if (currentAnimation->transformationType == TransformationType::SCALING)
 							{

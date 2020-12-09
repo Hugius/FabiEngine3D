@@ -35,7 +35,7 @@ void RenderEngine::_captureSceneReflections(CameraManager& camera)
 		float cameraDistance;
 		if (camera.isLookatEnabled())
 		{
-			cameraDistance = (camera.getPosition().y - camera.getLookat().y);
+			cameraDistance = (camera.getPosition().y - camera.getLookatPosition().y);
 		}
 		else
 		{

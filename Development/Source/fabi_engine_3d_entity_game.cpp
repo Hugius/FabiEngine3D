@@ -259,6 +259,11 @@ void FabiEngine3D::gameEntity_setRotation(const string& ID, Vec3 rotation, const
 	_core->_gameEntityManager.getEntity(ID)->setRotation(rotation, partName);
 }
 
+void FabiEngine3D::gameEntity_setRotationOrigin(const string& ID, Vec3 rotationOrigin, const string& partName)
+{
+	_core->_gameEntityManager.getEntity(ID)->setRotationOrigin(rotationOrigin, partName);
+}
+
 void FabiEngine3D::gameEntity_setSize(const string& ID, Vec3 size, const string& partName)
 {
 	_core->_gameEntityManager.getEntity(ID)->setScaling(size, partName);
@@ -272,6 +277,11 @@ Vec3 FabiEngine3D::gameEntity_getPosition(const string& ID, const string& partNa
 Vec3 FabiEngine3D::gameEntity_getRotation(const string& ID, const string& partName)
 {
 	return _core->_gameEntityManager.getEntity(ID)->getRotation(partName);
+}
+
+Vec3 FabiEngine3D::gameEntity_getRotationOrigin(const string& ID, const string& partName)
+{
+	return _core->_gameEntityManager.getEntity(ID)->getRotationOrigin(partName);
 }
 
 Vec3 FabiEngine3D::gameEntity_getSize(const string& ID, const string& partName)

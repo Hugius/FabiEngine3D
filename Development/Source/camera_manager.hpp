@@ -17,6 +17,7 @@ public:
 
 	// Setters
 	void setPosition(Vec3 val);
+	void setLookatPosition(Vec3 val);
 	void setFOV(float val);
 	void setMouseSensitivity(float val);
 	void setYaw(float val);
@@ -25,7 +26,7 @@ public:
 	void setFarZ(float val);
 
 	// Other
-	void enableLookat(Vec3 position);
+	void enableLookat();
 	void disableLookat();
 	void enableFirstPersonView();
 	void disableFirstPersonView();
@@ -44,7 +45,7 @@ public:
 	const Matrix44 & getProjectionMatrix()  const;
 	const Vec3   getPosition()              const;
 	const Vec3   getFront()                 const;
-	const Vec3   getLookat()                const;
+	const Vec3   getLookatPosition()        const;
 	const float  getFOV()					const;
 	const float  getAspectRatio()			const;
 	const float  getYaw()                   const;
@@ -69,7 +70,7 @@ private:
 	Vec3 _right = Vec3(0.0f);
 	Vec3 _front = Vec3(0.0f);
 	Vec3 _position = Vec3(0.0f);
-	Vec3 _lookat = Vec3(0.0f);
+	Vec3 _lookatPosition = Vec3(0.0f);
 
 	// Floats
 	float _fov = 0.0f;

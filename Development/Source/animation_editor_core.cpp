@@ -38,20 +38,21 @@ void AnimationEditor::initializeGUI()
 
 	// Left-viewport: mainWindow - animationEditorMenuFrame
 	leftWindow->addScreen("animationEditorMenuFrame");
-	leftWindow->getScreen("animationEditorMenuFrame")->addButton("xTransformation", Vec2(0.0f, 0.7875f), Vec2(GW("X direction"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "X direction", LVPC::textColor, LVPC::textHoverColor);
-	leftWindow->getScreen("animationEditorMenuFrame")->addButton("yTransformation", Vec2(0.0f, 0.525f), Vec2(GW("Y direction"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Y direction", LVPC::textColor, LVPC::textHoverColor);
-	leftWindow->getScreen("animationEditorMenuFrame")->addButton("zTransformation", Vec2(0.0f, 0.2625f), Vec2(GW("Z direction"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Z direction", LVPC::textColor, LVPC::textHoverColor);
-	leftWindow->getScreen("animationEditorMenuFrame")->addButton("speed", Vec2(0.0f, 0.0f), Vec2(GW("Speed"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Speed", LVPC::textColor, LVPC::textHoverColor);
-	leftWindow->getScreen("animationEditorMenuFrame")->addButton("speedType", Vec2(0.0f, -0.2625f), Vec2(GW("Type: linear"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Type: linear", LVPC::textColor, LVPC::textHoverColor);
-	leftWindow->getScreen("animationEditorMenuFrame")->addButton("part", Vec2(0.0f, -0.525f), Vec2(GW("Choose part"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Choose part", LVPC::textColor, LVPC::textHoverColor);
-	leftWindow->getScreen("animationEditorMenuFrame")->addButton("back", Vec2(0.0f, -0.7875f), Vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen("animationEditorMenuFrame")->addButton("xTransformation", Vec2(0.0f, 0.83f), Vec2(GW("X direction"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "X direction", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen("animationEditorMenuFrame")->addButton("yTransformation", Vec2(0.0f, 0.59f), Vec2(GW("Y direction"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Y direction", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen("animationEditorMenuFrame")->addButton("zTransformation", Vec2(0.0f, 0.36f), Vec2(GW("Z direction"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Z direction", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen("animationEditorMenuFrame")->addButton("rotationOrigin", Vec2(0.0f, 0.13f), Vec2(GW("Rotation origin"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Rotation origin", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen("animationEditorMenuFrame")->addButton("speed", Vec2(0.0f, -0.13f), Vec2(GW("Speed"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Speed", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen("animationEditorMenuFrame")->addButton("speedType", Vec2(0.0f, -0.36f), Vec2(GW("Type: linear"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Type: linear", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen("animationEditorMenuFrame")->addButton("part", Vec2(0.0f, -0.59f), Vec2(GW("Choose part"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Choose part", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen("animationEditorMenuFrame")->addButton("back", Vec2(0.0f, -0.83f), Vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
 }
 
 void AnimationEditor::load()
 {
 	// Camera
 	_fe3d.camera_load(90.0f, 0.1f, 10000.0f, _defaultCameraPosition, -90.0f);
-	_fe3d.camera_enableLookat(Vec3(0.0f));
+	_fe3d.camera_enableLookat();
 
 	// Enable graphics
 	_fe3d.gfx_enableAmbientLighting(Vec3(1.0f), 0.45f);

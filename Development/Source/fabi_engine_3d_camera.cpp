@@ -12,9 +12,9 @@ void FabiEngine3D::camera_load(float fov, float nearZ, float farZ, Vec3 startPos
 	_core->_cameraManager.setFarZ(farZ);
 }
 
-void FabiEngine3D::camera_enableLookat(Vec3 position)
+void FabiEngine3D::camera_enableLookat()
 {
-	_core->_cameraManager.enableLookat(position);
+	_core->_cameraManager.enableLookat();
 }
 
 void FabiEngine3D::camera_disableLookat()
@@ -62,9 +62,14 @@ void FabiEngine3D::camera_translate(Vec3 translation)
 	_core->_cameraManager.translate(translation);
 }
 
-void FabiEngine3D::camera_setPosition(Vec3 pos)
+void FabiEngine3D::camera_setPosition(Vec3 position)
 {
-	_core->_cameraManager.setPosition(pos);
+	_core->_cameraManager.setPosition(position);
+}
+
+void FabiEngine3D::camera_setLookatPosition(Vec3 position)
+{
+	_core->_cameraManager.setLookatPosition(position);
 }
 
 void FabiEngine3D::camera_invertYaw()
@@ -155,6 +160,11 @@ float FabiEngine3D::camera_getMouseSensitivity()
 Vec3 FabiEngine3D::camera_getPosition()
 {
 	return _core->_cameraManager.getPosition();
+}
+
+Vec3 FabiEngine3D::camera_getLookatPosition()
+{
+	return _core->_cameraManager.getLookatPosition();
 }
 
 bool FabiEngine3D::camera_isLookatEnabled()

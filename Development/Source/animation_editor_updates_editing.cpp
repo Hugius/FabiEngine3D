@@ -72,23 +72,34 @@ void AnimationEditor::_updateEditingScreen()
 				}
 				else if (screen->getButton("addFrame")->isHovered())
 				{
-					// Create new frame
-					AnimationFrame frame("");
+					// Retrieve last (or default) frame
+					auto lastFrameCopy = currentAnimation->frames.back();
 
 					// Check if model has multiple parts
 					if (!currentAnimation->previewModelID.empty() && _fe3d.gameEntity_isMultiParted(currentAnimation->previewModelID))
 					{
-						// Add empty data for every model part
-						for (auto partName : currentAnimation->partNames)
+						// Check if last frame is the default frame
+						if (currentAnimation->frames.size() == 1)
 						{
-							frame.targetTransformations.insert(make_pair(partName, Vec3(0.0f)));
-							frame.speeds.insert(make_pair(partName, 0.0f));
-							frame.speedTypes.insert(make_pair(partName, AnimationSpeedType::LINEAR));
+							// Clear empty partname
+							lastFrameCopy.targetTransformations.clear();
+							lastFrameCopy.rotationOrigins.clear();
+							lastFrameCopy.speeds.clear();
+							lastFrameCopy.speedTypes.clear();
+
+							// Add empty data for every model part
+							for (auto partName : currentAnimation->partNames)
+							{
+								lastFrameCopy.targetTransformations.insert(make_pair(partName, Vec3(0.0f)));
+								lastFrameCopy.rotationOrigins.insert(make_pair(partName, Vec3(0.0f)));
+								lastFrameCopy.speeds.insert(make_pair(partName, 0.0f));
+								lastFrameCopy.speedTypes.insert(make_pair(partName, AnimationSpeedType::LINEAR));
+							}
 						}
 					}
 
-					// Add new frame
-					currentAnimation->frames.push_back(frame);
+					// Add copied frame
+					currentAnimation->frames.push_back(lastFrameCopy);
 					_currentFrameIndex++;
 				}
 				else if (screen->getButton("editFrame")->isHovered())
@@ -226,6 +237,7 @@ void AnimationEditor::_updateFrameScreen()
 			auto currentAnimation = _getAnimation(_currentAnimationID);
 			auto& transformation = currentAnimation->frames[_currentFrameIndex].targetTransformations[_currentPartName];
 			auto& speed = currentAnimation->frames[_currentFrameIndex].speeds[_currentPartName];
+			auto& rotationOrigin = currentAnimation->frames[_currentFrameIndex].rotationOrigins[_currentPartName];
 
 			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
 			{
@@ -246,6 +258,12 @@ void AnimationEditor::_updateFrameScreen()
 				else if (screen->getButton("zTransformation")->isHovered())
 				{
 					_gui.getGlobalScreen()->addValueForm("zTransformation", "Z", transformation.z, Vec2(0.0f, 0.0f), Vec2(0.2f, 0.1f));
+				}
+				else if (screen->getButton("rotationOrigin")->isHovered())
+				{
+					_gui.getGlobalScreen()->addValueForm("xRotationOrigin", "X", rotationOrigin.x * 100.0f, Vec2(-0.25f, 0.0f), Vec2(0.2f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("yRotationOrigin", "Y", rotationOrigin.y * 100.0f, Vec2(0.0f, 0.0f), Vec2(0.2f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("zRotationOrigin", "Z", rotationOrigin.z * 100.0f, Vec2(0.25f, 0.0f), Vec2(0.2f, 0.1f));
 				}
 				else if (screen->getButton("speed")->isHovered())
 				{
@@ -271,7 +289,52 @@ void AnimationEditor::_updateFrameScreen()
 
 				}
 			}
-			
+
+			// Emphasize selected model part
+			if (!_currentPartName.empty())
+			{
+				_fe3d.gameEntity_setColor(currentAnimation->previewModelID, currentAnimation->initialColor, "");
+				_fe3d.gameEntity_setColor(currentAnimation->previewModelID, currentAnimation->initialColor * _partColorStrength, _currentPartName);
+			}
+
+			// Update color strength
+			_partColorIncreasing = (_partColorStrength >= 1.0f) ? false : (_partColorStrength <= 0.0f) ? true : _partColorIncreasing;
+			_partColorStrength += ((_partColorIncreasing ? 1.0f : -1.0f) * _colorChangingSpeed);
+
+			// Showing speed type
+			string newContent = (currentAnimation->frames[_currentFrameIndex].speedTypes[_currentPartName] == AnimationSpeedType::LINEAR) ?
+				"Type: linear" : "Type: exponential";
+			_fe3d.textEntity_setTextContent(screen->getButton("speedType")->getTextfield()->getEntityID(), newContent);
+
+			// Update transformation vector changes
+			_gui.getGlobalScreen()->checkValueForm("xTransformation", transformation.x, { });
+			_gui.getGlobalScreen()->checkValueForm("yTransformation", transformation.y, { });
+			_gui.getGlobalScreen()->checkValueForm("zTransformation", transformation.z, { });
+
+			// Update rotation origin X change
+			if (_gui.getGlobalScreen()->checkValueForm("xRotationOrigin", rotationOrigin.x, { }))
+			{
+				rotationOrigin.x /= 100.0f;
+			}
+
+			// Update rotation origin Y change
+			if (_gui.getGlobalScreen()->checkValueForm("yRotationOrigin", rotationOrigin.y, { }))
+			{
+				rotationOrigin.y /= 100.0f;
+			}
+
+			// Update rotation origin Z change
+			if (_gui.getGlobalScreen()->checkValueForm("zRotationOrigin", rotationOrigin.z, { }))
+			{
+				rotationOrigin.z /= 100.0f;
+			}
+
+			// Update speed change
+			if (_gui.getGlobalScreen()->checkValueForm("transformationSpeed", speed, { }))
+			{
+				speed /= 100.0f;
+			}
+
 			// Check if a animation partname is clicked
 			string selectedButtonID = _gui.getGlobalScreen()->getSelectedChoiceFormButtonID("parts");
 			if (selectedButtonID != "")
@@ -294,33 +357,6 @@ void AnimationEditor::_updateFrameScreen()
 			else if (_gui.getGlobalScreen()->isChoiceFormCancelled("parts")) // Cancelled choosing
 			{
 				_gui.getGlobalScreen()->removeChoiceForm("parts");
-			}
-
-			// Emphasize selected model part
-			if (!_currentPartName.empty())
-			{
-				_fe3d.gameEntity_setColor(currentAnimation->previewModelID, currentAnimation->initialColor, "");
-				_fe3d.gameEntity_setColor(currentAnimation->previewModelID, currentAnimation->initialColor * _partColorStrength, _currentPartName);
-			}
-
-			// Update color strength
-			_partColorIncreasing = (_partColorStrength >= 1.0f) ? false : (_partColorStrength <= 0.0f) ? true : _partColorIncreasing;
-			_partColorStrength += ((_partColorIncreasing ? 1.0f : -1.0f) * _colorChangingSpeed);
-
-			// Showing speed type
-			string newContent = (currentAnimation->frames[_currentFrameIndex].speedTypes[_currentPartName] == AnimationSpeedType::LINEAR) ?
-				"Type: linear" : "Type: exponential";
-			_fe3d.textEntity_setTextContent(screen->getButton("speedType")->getTextfield()->getEntityID(), newContent);
-
-			// Update transformation changes
-			_gui.getGlobalScreen()->checkValueForm("xTransformation", transformation.x, { });
-			_gui.getGlobalScreen()->checkValueForm("yTransformation", transformation.y, { });
-			_gui.getGlobalScreen()->checkValueForm("zTransformation", transformation.z, { });
-
-			// Update speed change
-			if (_gui.getGlobalScreen()->checkValueForm("transformationSpeed", speed, { }))
-			{
-				speed /= 100.0f;
 			}
 		}
 	}

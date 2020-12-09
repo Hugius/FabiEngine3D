@@ -19,7 +19,7 @@ void CameraManager::reset()
 	_right = Vec3(0.0f);
 	_front = Vec3(0.0f);
 	_position = Vec3(0.0f);
-	_lookat = Vec3(0.0f);
+	_lookatPosition = Vec3(0.0f);
 
 	// Floats
 	_fov = 0.0f;
@@ -132,7 +132,7 @@ void CameraManager::updateMatrices()
 	if(_isLookatEabled)
 	{
 		Vec3 offset = Vec3(0.00001f); // Small offset, otherwise screen goes black in certain circumstances
-		_front = (_lookat + offset) - _position;
+		_front = (_lookatPosition + offset) - _position;
 		_front.normalize();
 	}
 	else // First person front vector
@@ -194,10 +194,9 @@ void CameraManager::translateFollowZY(float speed) // Forward movement
 	}
 }
 
-void CameraManager::enableLookat(Vec3 position)
+void CameraManager::enableLookat()
 {
 	_isLookatEabled = true;
-	_lookat = position;
 }
 
 void CameraManager::disableLookat()
@@ -268,9 +267,9 @@ const Vec3 CameraManager::getFront() const
 	return _front;
 }
 
-const Vec3 CameraManager::getLookat() const
+const Vec3 CameraManager::getLookatPosition() const
 {
-	return _lookat;
+	return _lookatPosition;
 }
 
 const float CameraManager::getYaw() const
@@ -342,6 +341,11 @@ void CameraManager::setPosition(Vec3 val)
 	{
 		_position = val;
 	}
+}
+
+void CameraManager::setLookatPosition(Vec3 val)
+{
+	_lookatPosition = val;
 }
 
 void CameraManager::invertYaw()

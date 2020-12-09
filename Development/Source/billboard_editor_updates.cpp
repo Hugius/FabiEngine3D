@@ -247,13 +247,13 @@ void BillboardEditor::_updateBillboardCamera()
 
 			// Update camera position
 			_fe3d.camera_setPosition(Vec3(x, y, z));
-			_fe3d.camera_enableLookat(Vec3(0.0f, cameraHeight, 0.0f));
+			_fe3d.camera_setLookatPosition(Vec3(0.0f, cameraHeight, 0.0f));
 		}
 		else
 		{
 			// Set default camera
 			_fe3d.camera_setPosition(_defaultCameraPosition);
-			_fe3d.camera_enableLookat(_billboardPosition);
+			_fe3d.camera_setLookatPosition(_billboardPosition);
 		}
 	}
 }

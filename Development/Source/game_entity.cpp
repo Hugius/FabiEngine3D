@@ -5,16 +5,29 @@ void GameEntity::updateModelMatrix()
 {
 	for (unsigned int i = 0; i < _modelMatrices.size(); i++)
 	{
-		// Calculate matrices
+		// Identity matrix
+		_modelMatrices[i] = Matrix44(1.0f);
+
+		// Translation matrix
 		Matrix44 translationMatrix = Matrix44::createTranslation(_translations[i].x, _translations[i].y, _translations[i].z);
+		_modelMatrices[i] = _modelMatrices[i] * translationMatrix;
+
+		Matrix44 rotationOriginMatrix = Matrix44::createTranslation(0.0f, 2.0f, 0.0f);
+		_modelMatrices[i] = _modelMatrices[i] * rotationOriginMatrix;
+
+		// Rotation matrix
 		Matrix44 rotationMatrix = Matrix44::createRotation(
 			Math::degreesToRadians(_rotations[i].x),
 			Math::degreesToRadians(_rotations[i].y),
 			Math::degreesToRadians(_rotations[i].z));
-		Matrix44 scalingMatrix = Matrix44::createScaling(_scalings[i].x, _scalings[i].y, _scalings[i].z);
+		_modelMatrices[i] = _modelMatrices[i] * rotationMatrix;
 
-		// Combine into 1 model matrix
-		_modelMatrices[i] = translationMatrix * rotationMatrix * scalingMatrix;
+		rotationOriginMatrix = Matrix44::createTranslation(0.0f, -2.0f, 0.0f);
+		_modelMatrices[i] = _modelMatrices[i] * rotationOriginMatrix;
+
+		// Scaling matrix
+		Matrix44 scalingMatrix = Matrix44::createScaling(_scalings[i].x, _scalings[i].y, _scalings[i].z);
+		_modelMatrices[i] = _modelMatrices[i] * scalingMatrix;
 	}
 }
 

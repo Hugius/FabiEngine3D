@@ -38,6 +38,7 @@ private:
 	void _deleteAnimation(const string& ID);
 	bool _isAnimationExisting(const string& ID);
 	bool _hasReachedFloat(float first, float second, float speed);
+	bool _comparePartNames(vector<string> first, vector<string> second);
 	vector<string> _getAnimationIDs();
 	shared_ptr<Animation> _getAnimation(const string& ID);
 

@@ -15,7 +15,7 @@ void EnvironmentEditor::loadWaterEntitiesFromFile()
 	// Clear names list from previous loads
 	_waterIDs.clear();
 
-	// Compose full folder path
+	// Compose full file path
 	string filePath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectName + "\\data\\water.fe3d";
 
 	// Load water file
@@ -118,7 +118,7 @@ void EnvironmentEditor::saveWaterEntitiesToFile()
 			_fe3d.logger_throwError("Tried to save as empty project!");
 		}
 
-		// Compose full folder path
+		// Compose full file path
 		string filePath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectName + "\\data\\water.fe3d";
 
 		// Load file

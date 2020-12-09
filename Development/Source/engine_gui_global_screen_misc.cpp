@@ -192,7 +192,7 @@ void EngineGuiGlobalScreen::addChoiceForm(const string& ID, string title, Vec2 p
 		// Add buttons to scrolling list
 		for (auto& buttonTitle : buttonTitles)
 		{
-			getScrollingList(ID)->addButton(buttonTitle, buttonTitle);
+			getScrollingList(ID)->addButton(buttonTitle, buttonTitle.empty() ? " " : buttonTitle);
 		}
 		
 		// Miscellaneous

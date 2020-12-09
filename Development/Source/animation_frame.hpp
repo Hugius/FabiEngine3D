@@ -6,13 +6,19 @@
 class AnimationFrame
 {
 public:
-	map<string, Vec3> targetTransformations;
-	map<string, Vec3> totalTransformations;
+	AnimationFrame() = default;
 
-	map<string, float> originalSpeeds;
+	AnimationFrame(const string& partName)
+	{
+		// Default data
+		targetTransformations.insert(make_pair(partName, Vec3(0.0f)));
+		speeds.insert(make_pair(partName, 0.0f));
+		speedTypes.insert(make_pair(partName, AnimationSpeedType::LINEAR));
+	}
+
+	map<string, Vec3> targetTransformations;
+
 	map<string, float> speeds;
 
 	map<string, AnimationSpeedType> speedTypes;
-
-	vector<string> partNames;
 };

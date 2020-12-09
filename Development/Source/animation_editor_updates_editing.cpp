@@ -22,6 +22,14 @@ void AnimationEditor::_updateEditingScreen()
 						stopAnimation(_currentAnimationID, currentAnimation->previewModelID);
 					}
 
+					// Reset preview model transformation
+					if (_fe3d.gameEntity_isExisting(currentAnimation->previewModelID))
+					{
+						_fe3d.gameEntity_setPosition(currentAnimation->previewModelID, currentAnimation->initialTranslation);
+						_fe3d.gameEntity_setRotation(currentAnimation->previewModelID, currentAnimation->initialRotation);
+						_fe3d.gameEntity_setSize(currentAnimation->previewModelID, currentAnimation->initialScaling);
+					}
+
 					// Reset some values
 					_isEditingAnimation = false;
 					_currentAnimationID = "";
@@ -44,40 +52,43 @@ void AnimationEditor::_updateEditingScreen()
 				}
 				else if (screen->getButton("play")->isHovered())
 				{
-					startAnimation(_currentAnimationID, currentAnimation->previewModelID, 1);
+					// Reset preview model transformation
+					_fe3d.gameEntity_setPosition(currentAnimation->previewModelID, currentAnimation->initialTranslation);
+					_fe3d.gameEntity_setRotation(currentAnimation->previewModelID, currentAnimation->initialRotation);
+					_fe3d.gameEntity_setSize(currentAnimation->previewModelID, currentAnimation->initialScaling);
+
+					// Start animation
+					startAnimation(_currentAnimationID, currentAnimation->previewModelID, -1);
+				}
+				else if (screen->getButton("stop")->isHovered())
+				{
+					// Stop animation
+					stopAnimation(_currentAnimationID, currentAnimation->previewModelID);
+
+					// Reset preview model transformation
 					_fe3d.gameEntity_setPosition(currentAnimation->previewModelID, currentAnimation->initialTranslation);
 					_fe3d.gameEntity_setRotation(currentAnimation->previewModelID, currentAnimation->initialRotation);
 					_fe3d.gameEntity_setSize(currentAnimation->previewModelID, currentAnimation->initialScaling);
 				}
-				else if (screen->getButton("stop")->isHovered())
-				{
-					stopAnimation(_currentAnimationID, currentAnimation->previewModelID);
-				}
 				else if (screen->getButton("addFrame")->isHovered())
 				{
-					// Retrieve last (or default) frame
-					auto lastFrameCopy = currentAnimation->frames.back();
+					// Create new frame
+					AnimationFrame frame("");
 
 					// Check if model has multiple parts
 					if (!currentAnimation->previewModelID.empty() && _fe3d.gameEntity_isMultiParted(currentAnimation->previewModelID))
 					{
-						// Check if last frame is default
-						if (lastFrameCopy.partNames.size() == 1)
+						// Add empty data for every model part
+						for (auto partName : currentAnimation->partNames)
 						{
-							// Add empty data for every model part
-							for (auto& partName : _fe3d.gameEntity_getPartNames(currentAnimation->previewModelID))
-							{
-								lastFrameCopy.partNames.push_back(partName);
-								lastFrameCopy.targetTransformations.insert(make_pair(partName, Vec3(0.0f)));
-								lastFrameCopy.totalTransformations.insert(make_pair(partName, Vec3(0.0f)));
-								lastFrameCopy.speeds.insert(make_pair(partName, 0.0f));
-								lastFrameCopy.speedTypes.insert(make_pair(partName, AnimationSpeedType::LINEAR));
-							}
+							frame.targetTransformations.insert(make_pair(partName, Vec3(0.0f)));
+							frame.speeds.insert(make_pair(partName, 0.0f));
+							frame.speedTypes.insert(make_pair(partName, AnimationSpeedType::LINEAR));
 						}
 					}
 
-					// Add copied frame
-					currentAnimation->frames.push_back(lastFrameCopy);
+					// Add new frame
+					currentAnimation->frames.push_back(frame);
 					_currentFrameIndex++;
 				}
 				else if (screen->getButton("editFrame")->isHovered())
@@ -126,47 +137,69 @@ void AnimationEditor::_updateEditingScreen()
 				}
 			}
 
+			// Button hoverabilities
+			bool isPlaying = isAnimationPlaying(_currentAnimationID, currentAnimation->previewModelID);
+			bool hasPreviewModel = !currentAnimation->previewModelID.empty();
+			screen->getButton("preview")->setHoverable(!isPlaying);
+			screen->getButton("play")->setHoverable(!isPlaying && hasPreviewModel && currentAnimation->frames.size() > 1);
+			screen->getButton("stop")->setHoverable(isPlaying&& hasPreviewModel);
+			screen->getButton("addFrame")->setHoverable(currentAnimation->frames.size() < _maxFrameCount && !isPlaying && hasPreviewModel);
+			screen->getButton("editFrame")->setHoverable(_currentFrameIndex > 0 && !isPlaying);
+			screen->getButton("deleteFrame")->setHoverable(currentAnimation->frames.size() > 1 && _currentFrameIndex > 0 && !isPlaying && hasPreviewModel);
+			screen->getButton("prev")->setHoverable(_currentFrameIndex > 0 && !isPlaying);
+			screen->getButton("next")->setHoverable(_currentFrameIndex < (currentAnimation->frames.size() - 1) && !isPlaying && hasPreviewModel);
+			screen->getButton("type")->setHoverable(!isPlaying && hasPreviewModel);
+
 			// Showing transformation type
-			string newContent = currentAnimation->transformationType == TransformationType::TRANSLATION ? "Type: translation" : 
+			string newContent = currentAnimation->transformationType == TransformationType::TRANSLATION ? "Type: translation" :
 				currentAnimation->transformationType == TransformationType::ROTATION ? "Type: rotation" : "Type: scaling";
 			_fe3d.textEntity_setTextContent(screen->getButton("type")->getTextfield()->getEntityID(), newContent);
 
 			// Showing frame index
-			auto textID = _gui.getGlobalScreen()->getTextfield("selectedAnimationFrame")->getEntityID();
-			_fe3d.textEntity_setTextContent(textID, "Frame: " + to_string(_currentFrameIndex + 1), 0.025f);
-
-			// Button hoverabilities
-			bool isPlaying = isAnimationPlaying(_currentAnimationID, currentAnimation->previewModelID);
-			screen->getButton("play")->setHoverable(!isPlaying);
-			screen->getButton("stop")->setHoverable(isPlaying);
-			screen->getButton("addFrame")->setHoverable(currentAnimation->frames.size() < _maxFrameCount && !isPlaying);
-			screen->getButton("editFrame")->setHoverable(_currentFrameIndex > 0 && !isPlaying);
-			screen->getButton("deleteFrame")->setHoverable(currentAnimation->frames.size() > 1 && _currentFrameIndex > 0 && !isPlaying);
-			screen->getButton("prev")->setHoverable(_currentFrameIndex > 0 && !isPlaying);
-			screen->getButton("next")->setHoverable(_currentFrameIndex < (currentAnimation->frames.size() - 1) && !isPlaying);
-			screen->getButton("type")->setHoverable(!isPlaying);
+			if (!isPlaying)
+			{
+				auto textID = _gui.getGlobalScreen()->getTextfield("selectedAnimationFrame")->getEntityID();
+				_fe3d.textEntity_setTextContent(textID, "Frame: " + to_string(_currentFrameIndex + 1), 0.025f);
+			}
 
 			// Check if a animation name is clicked
 			string selectedButtonID = _gui.getGlobalScreen()->getSelectedChoiceFormButtonID("models");
 			if (selectedButtonID != "")
 			{
+				// Check if LMB is pressed
 				if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 				{
+					// Compose selected model ID
+					string selectedModelID = "@" + selectedButtonID;
+
 					// Hide old model
-					if (!currentAnimation->previewModelID.empty())
+					if (hasPreviewModel)
 					{
-						_fe3d.gameEntity_hide(currentAnimation->previewModelID);
+						if (!currentAnimation->previewModelID.empty())
+						{
+							_fe3d.gameEntity_hide(currentAnimation->previewModelID);
+						}
 					}
 
 					// Show new model
-					_fe3d.gameEntity_show(currentAnimation->previewModelID);
+					_fe3d.gameEntity_show(selectedModelID);
 
-					// Set new values
-					currentAnimation->previewModelID = "@" + selectedButtonID;
+					// Change values
+					currentAnimation->previewModelID = selectedModelID;
 					currentAnimation->initialTranslation = _fe3d.gameEntity_getPosition(currentAnimation->previewModelID);
 					currentAnimation->initialRotation = _fe3d.gameEntity_getRotation(currentAnimation->previewModelID);
 					currentAnimation->initialScaling = _fe3d.gameEntity_getSize(currentAnimation->previewModelID);
 					currentAnimation->initialColor = _fe3d.gameEntity_getColor(currentAnimation->previewModelID);
+
+					// First time choosing preview model, add all partnames for this animation
+					if (currentAnimation->frames.size() == 1)
+					{
+						for (auto partName : _fe3d.gameEntity_getPartNames(currentAnimation->previewModelID))
+						{
+							currentAnimation->partNames.push_back(partName);
+							currentAnimation->totalTransformations.insert(make_pair(partName, Vec3(0.0f)));
+						}
+					}
 
 					// Miscellaneous
 					_gui.getGlobalScreen()->removeChoiceForm("models");
@@ -232,21 +265,30 @@ void AnimationEditor::_updateFrameScreen()
 				}
 				else if (screen->getButton("part")->isHovered())
 				{
-					_gui.getGlobalScreen()->addChoiceForm("parts", "Select part", Vec2(-0.4f, 0.1f),
-						_fe3d.gameEntity_getPartNames(currentAnimation->previewModelID));
-					std::cout << _fe3d.gameEntity_getPartNames(currentAnimation->previewModelID).size();
+					auto modelParts = currentAnimation->partNames;
+					modelParts.erase(modelParts.begin());
+					_gui.getGlobalScreen()->addChoiceForm("parts", "Select part", Vec2(-0.4f, 0.1f), modelParts);
 
 				}
 			}
-
+			
 			// Check if a animation partname is clicked
 			string selectedButtonID = _gui.getGlobalScreen()->getSelectedChoiceFormButtonID("parts");
 			if (selectedButtonID != "")
 			{
+				// Check if LMB pressed
 				if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 				{
-					_currentPartName = selectedButtonID;
-					_gui.getGlobalScreen()->removeChoiceForm("parts");
+					// Check if selected part exists on preview model
+					if (_fe3d.gameEntity_hasPart(currentAnimation->previewModelID, selectedButtonID))
+					{
+						_currentPartName = selectedButtonID;
+						_gui.getGlobalScreen()->removeChoiceForm("parts");
+					}
+					else
+					{
+						_fe3d.logger_throwWarning("Part does not exist on current preview model!");
+					}
 				}
 			}
 			else if (_gui.getGlobalScreen()->isChoiceFormCancelled("parts")) // Cancelled choosing

@@ -15,7 +15,7 @@ void EnvironmentEditor::loadSkyEntitiesFromFile()
 	// Clear names list from previous loads
 	_skyIDs.clear();
 
-	// Compose full folder path
+	// Compose full file path
 	string filePath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectName + "\\data\\sky.fe3d";
 
 	// Check if sky file exists

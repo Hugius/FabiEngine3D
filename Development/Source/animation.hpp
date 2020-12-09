@@ -9,19 +9,18 @@ class Animation final
 public:
 	Animation(const string& ID) : ID(ID)
 	{
+		// Empty partname = whole model
+		partNames.push_back("");
+		totalTransformations.insert(make_pair("", Vec3(0.0f)));
+
 		// Add default frame
-		AnimationFrame frame;
-		frame.targetTransformations.insert(make_pair("", Vec3(0.0f)));
-		frame.totalTransformations.insert(make_pair("", Vec3(0.0f)));
-		frame.speeds.insert(make_pair("", 0.0f));
-		frame.speedTypes.insert(make_pair("", AnimationSpeedType::LINEAR));
-		frame.partNames.push_back("");
-		frames.push_back(frame);
+		frames.push_back(AnimationFrame(""));
 	}
 
 	const string ID;
 
 	string previewModelID = "";
+	string oldPreviewModelID = "";
 	string animatedModelID = "";
 
 	unsigned int frameIndex = 0;
@@ -29,11 +28,14 @@ public:
 	int timesToPlay = 0;
 
 	vector<AnimationFrame> frames;
+	vector<string> partNames;
 
 	Vec3 initialTranslation = Vec3(0.0f);
 	Vec3 initialRotation = Vec3(0.0f);
 	Vec3 initialScaling = Vec3(0.0f);
 	Vec3 initialColor = Vec3(0.0f);
+
+	map<string, Vec3> totalTransformations;
 
 	TransformationType transformationType = TransformationType::TRANSLATION;
 };

@@ -14,7 +14,7 @@ void AudioEditor::loadAudioEntitiesFromFile()
 	// Clear names list from previous loads
 	_audioIDs.clear();
 
-	// Compose full folder path
+	// Compose full file path
 	string filePath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectName + "\\data\\audio.fe3d";
 
 	// Check if audio file exists

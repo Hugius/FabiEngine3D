@@ -1,6 +1,7 @@
 #include "animation_editor.hpp"
 
 #include <fstream>
+#include <algorithm>
 
 void AnimationEditor::loadAnimationsFromFile()
 {
@@ -13,10 +14,10 @@ void AnimationEditor::loadAnimationsFromFile()
 	// Clear names list from previous loads
 	_animations.clear();
 
-	// Compose full folder path
+	// Compose full file path
 	string filePath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectName + "\\data\\animation.fe3d";
 
-	// Check if audio file exists
+	// Check if animation file exists
 	if (_fe3d.misc_isFileExisting(filePath))
 	{
 		std::ifstream file(filePath);
@@ -34,6 +35,15 @@ void AnimationEditor::loadAnimationsFromFile()
 
 			// Extract general data from file
 			iss >> animationID >> previewModelID >> transformationType;
+
+			// Create new animation
+			auto newAnimation = make_shared<Animation>(animationID);
+			newAnimation->previewModelID = previewModelID;
+			newAnimation->transformationType = TransformationType(transformationType);
+
+			// Clear default empty partname
+			newAnimation->partNames.clear();
+			newAnimation->totalTransformations.clear();
 
 			// Extract frame data from file
 			vector<AnimationFrame> frames;
@@ -59,7 +69,7 @@ void AnimationEditor::loadAnimationsFromFile()
 
 						// Extract data
 						iss >> partName >> targetTransformation.x >> targetTransformation.y >> targetTransformation.z >> speed >> speedType;
-						
+
 						// Questionmark means empty partname
 						if (partName == "?")
 						{
@@ -67,10 +77,16 @@ void AnimationEditor::loadAnimationsFromFile()
 						}
 
 						// Add part to frame
-						frame.partNames.push_back(partName);
 						frame.targetTransformations.insert(make_pair(partName, targetTransformation));
 						frame.speeds.insert(make_pair(partName, speed));
 						frame.speedTypes.insert(make_pair(partName, AnimationSpeedType(speedType)));
+
+						// Add all partnames 1 time only
+						if (frames.empty())
+						{
+							newAnimation->partNames.push_back(partName);
+							newAnimation->totalTransformations.insert(make_pair(partName, Vec3(0.0f)));
+						}
 					}
 
 					// Add frame
@@ -82,15 +98,13 @@ void AnimationEditor::loadAnimationsFromFile()
 				}
 			}
 
-			// Create new animation
-			auto newAnimation = make_shared<Animation>(animationID);
-			newAnimation->previewModelID = previewModelID;
-			newAnimation->transformationType = TransformationType(transformationType);
+			// Add frames to animation
 			newAnimation->frames.insert(newAnimation->frames.end(), frames.begin(), frames.end());
 
-			// Check if preview model is still existing for the editor
+			// Only if loading animations in editor
 			if (_isEditorLoading)
 			{
+				// Check if preview model is still existing
 				if (_fe3d.gameEntity_isExisting(newAnimation->previewModelID))
 				{
 					newAnimation->initialTranslation = _fe3d.gameEntity_getPosition(newAnimation->previewModelID);
@@ -100,6 +114,7 @@ void AnimationEditor::loadAnimationsFromFile()
 				}
 				else // Clear preview model
 				{
+					newAnimation->oldPreviewModelID = newAnimation->previewModelID;
 					newAnimation->previewModelID = "";
 					_fe3d.logger_throwWarning("Preview model of animation with ID \"" + newAnimation->ID + "\" not existing anymore!");
 				}
@@ -113,7 +128,7 @@ void AnimationEditor::loadAnimationsFromFile()
 		file.close();
 
 		// Logging
-		_fe3d.logger_throwInfo("Audio data from project \"" + _currentProjectName + "\" loaded!");
+		_fe3d.logger_throwInfo("Animation data from project \"" + _currentProjectName + "\" loaded!");
 	}
 }
 
@@ -132,78 +147,85 @@ void AnimationEditor::saveAnimationsToFile()
 			_fe3d.logger_throwError("Tried to save as empty project!");
 		}
 
-		// Create or overwrite audio file
-		std::ofstream file;
-		file.open(_fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectName + "\\data\\animation.fe3d");
+		// Compose full file path
+		string filePath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectName + "\\data\\animation.fe3d";
 
-		// Write audio data into file
+		// Create or overwrite animation file
+		std::ofstream file;
+		file.open(filePath);
+
+		// Write animation data into file
 		for (auto& animation : _animations)
 		{
-			// Retrieve all values
-			auto animationID = animation->ID;
-			auto previewModelID = animation->previewModelID;
-			auto transformationType = static_cast<int>(animation->transformationType);
-
-			// Export  general data
-			file <<
-				animationID << " " <<
-				previewModelID << " " <<
-				transformationType;
-
-			// Export frame data
-			if (animation->frames.size() > 1)
+			// Only if animation has data
+			if (!animation->previewModelID.empty() || !animation->oldPreviewModelID.empty())
 			{
-				// Add space
-				file << " ";
+				// Retrieve all values
+				auto animationID = animation->ID;
+				auto previewModelID = animation->previewModelID.empty() ? animation->oldPreviewModelID : animation->previewModelID;
+				auto transformationType = static_cast<int>(animation->transformationType);
 
-				// For every frame
-				for (unsigned int i = 1; i < animation->frames.size(); i++)
+				// Export  general data
+				file <<
+					animationID << " " <<
+					previewModelID << " " <<
+					transformationType;
+
+				// Export frame data
+				if (animation->frames.size() > 1)
 				{
-					// Write the amount of model parts
-					file << animation->frames[i].partNames.size() << " ";
-					
-					// For every model part
-					unsigned int partIndex = 0;
-					for (auto& partName : animation->frames[i].partNames)
+					// Add space
+					file << " ";
+
+					// For every frame
+					for (unsigned int i = 1; i < animation->frames.size(); i++)
 					{
-						// Retrieve data
-						const auto& targetTransformation = animation->frames[i].targetTransformations[partName];
-						const auto& speed = animation->frames[i].speeds[partName];
-						const auto& speedType = static_cast<int>(animation->frames[i].speedTypes[partName]);
-						
-						// Questionmark means empty partname
-						if (partName.empty())
+						// Write the amount of model parts
+						file << animation->partNames.size() << " ";
+
+						// For every model part
+						unsigned int partIndex = 0;
+						for (auto partName : animation->partNames)
 						{
-							partName = "?";
+							// Retrieve data
+							const auto& targetTransformation = animation->frames[i].targetTransformations[partName];
+							const auto& speed = animation->frames[i].speeds[partName];
+							const auto& speedType = static_cast<int>(animation->frames[i].speedTypes[partName]);
+
+							// Questionmark means empty partname
+							if (partName.empty())
+							{
+								partName = "?";
+							}
+
+							// Write data
+							file <<
+								partName << " " <<
+								targetTransformation.x << " " <<
+								targetTransformation.y << " " <<
+								targetTransformation.z << " " <<
+								speed << " " <<
+								speedType;
+
+							// Add space
+							if (partIndex != (animation->partNames.size() - 1))
+							{
+								file << " ";
+							}
+							partIndex++;
 						}
 
-						// Write data
-						file <<
-							partName << " " <<
-							targetTransformation.x << " " <<
-							targetTransformation.y << " " <<
-							targetTransformation.z << " " <<
-							speed << " " <<
-							speedType;
-
 						// Add space
-						if (partIndex != (animation->frames[i].partNames.size() - 1))
+						if (i != (animation->frames.size() - 1))
 						{
 							file << " ";
 						}
-						partIndex++;
-					}
-
-					// Add space
-					if (i != (animation->frames.size() - 1))
-					{
-						file << " ";
 					}
 				}
-			}
 
-			// Add newline
-			file << std::endl;
+				// Add newline
+				file << std::endl;
+			}
 		}
 
 		// Close file

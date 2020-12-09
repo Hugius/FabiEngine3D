@@ -16,7 +16,7 @@ bool SceneEditor::isSceneExisting(const string& fileName)
 		_fe3d.logger_throwError("No current project loaded!");
 	}
 
-	// Compose full folder path
+	// Compose full file path
 	string filePath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectName + "\\scenes\\" + fileName + ".fe3d";
 
 	// Check if scene file exists

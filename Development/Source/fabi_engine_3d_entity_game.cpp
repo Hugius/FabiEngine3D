@@ -221,6 +221,19 @@ bool FabiEngine3D::gameEntity_isDepthMapIncluded(const string& ID)
 	return _core->_gameEntityManager.getEntity(ID)->isDepthMapIncluded();
 }
 
+bool FabiEngine3D::gameEntity_hasPart(const string& ID, const string& partName)
+{
+	for (auto& existingPartname : gameEntity_getPartNames(ID))
+	{
+		if (partName == existingPartname)
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
 void FabiEngine3D::gameEntity_move(const string& ID, Vec3 factor, const string& partName)
 {
 	_core->_gameEntityManager.getEntity(ID)->translate(factor, partName);

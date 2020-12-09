@@ -16,7 +16,7 @@ void ModelEditor::loadGameEntitiesFromFile()
 	// Clear names list from previous loads
 	_modelIDs.clear();
 
-	// Compose full folder path
+	// Compose full file path
 	string filePath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectName + "\\data\\model.fe3d";
 
 	// Check if model file exists

@@ -269,6 +269,7 @@ public:
 	bool		   gameEntity_isShadowed(const string& ID);
 	bool		   gameEntity_isStaticToCamera(const string& ID);
 	bool		   gameEntity_isDepthMapIncluded(const string& ID);
+	bool		   gameEntity_hasPart(const string& ID, const string& partName);
 	float		   gameEntity_getOriginalLightness(const string& ID);
 	float		   gameEntity_getLightness(const string& ID);
 	float		   gameEntity_getSpecularFactor(const string& ID);

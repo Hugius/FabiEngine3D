@@ -86,6 +86,7 @@ void AnimationEditor::_updateEditingScreen()
 							lastFrameCopy.rotationOrigins.clear();
 							lastFrameCopy.speeds.clear();
 							lastFrameCopy.speedTypes.clear();
+							lastFrameCopy.transformationTypes.clear();
 
 							// Add empty data for every model part
 							for (auto partName : currentAnimation->partNames)
@@ -94,6 +95,7 @@ void AnimationEditor::_updateEditingScreen()
 								lastFrameCopy.rotationOrigins.insert(make_pair(partName, Vec3(0.0f)));
 								lastFrameCopy.speeds.insert(make_pair(partName, 0.0f));
 								lastFrameCopy.speedTypes.insert(make_pair(partName, AnimationSpeedType::LINEAR));
+								lastFrameCopy.transformationTypes.insert(make_pair(partName, TransformationType::TRANSLATION));
 							}
 						}
 					}
@@ -131,21 +133,6 @@ void AnimationEditor::_updateEditingScreen()
 				{
 					_currentFrameIndex++;
 				}
-				else if (screen->getButton("type")->isHovered())
-				{
-					if (currentAnimation->transformationType == TransformationType::TRANSLATION)
-					{
-						currentAnimation->transformationType = TransformationType::ROTATION;
-					}
-					else if (currentAnimation->transformationType == TransformationType::ROTATION)
-					{
-						currentAnimation->transformationType = TransformationType::SCALING;
-					}
-					else if (currentAnimation->transformationType == TransformationType::SCALING)
-					{
-						currentAnimation->transformationType = TransformationType::TRANSLATION;
-					}
-				}
 			}
 
 			// Button hoverabilities
@@ -159,12 +146,6 @@ void AnimationEditor::_updateEditingScreen()
 			screen->getButton("deleteFrame")->setHoverable(currentAnimation->frames.size() > 1 && _currentFrameIndex > 0 && !isPlaying && hasPreviewModel);
 			screen->getButton("prev")->setHoverable(_currentFrameIndex > 0 && !isPlaying);
 			screen->getButton("next")->setHoverable(_currentFrameIndex < (currentAnimation->frames.size() - 1) && !isPlaying && hasPreviewModel);
-			screen->getButton("type")->setHoverable(!isPlaying && hasPreviewModel);
-
-			// Showing transformation type
-			string newContent = currentAnimation->transformationType == TransformationType::TRANSLATION ? "Type: translation" :
-				currentAnimation->transformationType == TransformationType::ROTATION ? "Type: rotation" : "Type: scaling";
-			_fe3d.textEntity_setTextContent(screen->getButton("type")->getTextfield()->getEntityID(), newContent);
 
 			// Showing frame index
 			if (!isPlaying)
@@ -236,8 +217,11 @@ void AnimationEditor::_updateFrameScreen()
 			// Temporary values
 			auto currentAnimation = _getAnimation(_currentAnimationID);
 			auto& transformation = currentAnimation->frames[_currentFrameIndex].targetTransformations[_currentPartName];
-			auto& speed = currentAnimation->frames[_currentFrameIndex].speeds[_currentPartName];
 			auto& rotationOrigin = currentAnimation->frames[_currentFrameIndex].rotationOrigins[_currentPartName];
+			auto& speed = currentAnimation->frames[_currentFrameIndex].speeds[_currentPartName];
+			auto& speedType = currentAnimation->frames[_currentFrameIndex].speedTypes[_currentPartName];
+			auto& transType = currentAnimation->frames[_currentFrameIndex].transformationTypes[_currentPartName];
+
 
 			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
 			{
@@ -247,17 +231,11 @@ void AnimationEditor::_updateFrameScreen()
 					_fe3d.gameEntity_setColor(currentAnimation->previewModelID, currentAnimation->initialColor, "");
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("animationEditorMenuChoice");
 				}
-				else if (screen->getButton("xTransformation")->isHovered())
+				else if (screen->getButton("transformation")->isHovered())
 				{
-					_gui.getGlobalScreen()->addValueForm("xTransformation", "X", transformation.x, Vec2(0.0f, 0.0f), Vec2(0.2f, 0.1f));
-				}
-				else if (screen->getButton("yTransformation")->isHovered())
-				{
+					_gui.getGlobalScreen()->addValueForm("xTransformation", "X", transformation.x, Vec2(-0.25f, 0.0f), Vec2(0.2f, 0.1f));
 					_gui.getGlobalScreen()->addValueForm("yTransformation", "Y", transformation.y, Vec2(0.0f, 0.0f), Vec2(0.2f, 0.1f));
-				}
-				else if (screen->getButton("zTransformation")->isHovered())
-				{
-					_gui.getGlobalScreen()->addValueForm("zTransformation", "Z", transformation.z, Vec2(0.0f, 0.0f), Vec2(0.2f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("zTransformation", "Z", transformation.z, Vec2(0.25f, 0.0f), Vec2(0.2f, 0.1f));
 				}
 				else if (screen->getButton("rotationOrigin")->isHovered())
 				{
@@ -272,21 +250,37 @@ void AnimationEditor::_updateFrameScreen()
 				else if (screen->getButton("speedType")->isHovered())
 				{
 					// Change speed type
-					if (currentAnimation->frames[_currentFrameIndex].speedTypes[_currentPartName] == AnimationSpeedType::LINEAR)
+					if (speedType == AnimationSpeedType::LINEAR)
 					{
-						currentAnimation->frames[_currentFrameIndex].speedTypes[_currentPartName] = AnimationSpeedType::EXPONENTIAL;
+						speedType = AnimationSpeedType::EXPONENTIAL;
 					}
 					else
 					{
-						currentAnimation->frames[_currentFrameIndex].speedTypes[_currentPartName] = AnimationSpeedType::LINEAR;
+						speedType = AnimationSpeedType::LINEAR;
+					}
+				}
+				else if (screen->getButton("transType")->isHovered())
+				{
+					// Change transformation type
+					if (transType == TransformationType::TRANSLATION)
+					{
+						transType = TransformationType::ROTATION;
+					}
+					else if (transType == TransformationType::ROTATION)
+					{
+						transType = TransformationType::SCALING;
+					}
+					else if (transType == TransformationType::SCALING)
+					{
+						transType = TransformationType::TRANSLATION;
 					}
 				}
 				else if (screen->getButton("part")->isHovered())
 				{
+					// Choosing part of preview model
 					auto modelParts = currentAnimation->partNames;
 					modelParts.erase(modelParts.begin());
 					_gui.getGlobalScreen()->addChoiceForm("parts", "Select part", Vec2(-0.4f, 0.1f), modelParts);
-
 				}
 			}
 
@@ -300,11 +294,6 @@ void AnimationEditor::_updateFrameScreen()
 			// Update color strength
 			_partColorIncreasing = (_partColorStrength >= 1.0f) ? false : (_partColorStrength <= 0.0f) ? true : _partColorIncreasing;
 			_partColorStrength += ((_partColorIncreasing ? 1.0f : -1.0f) * _colorChangingSpeed);
-
-			// Showing speed type
-			string newContent = (currentAnimation->frames[_currentFrameIndex].speedTypes[_currentPartName] == AnimationSpeedType::LINEAR) ?
-				"Type: linear" : "Type: exponential";
-			_fe3d.textEntity_setTextContent(screen->getButton("speedType")->getTextfield()->getEntityID(), newContent);
 
 			// Update transformation vector changes
 			_gui.getGlobalScreen()->checkValueForm("xTransformation", transformation.x, { });
@@ -334,6 +323,16 @@ void AnimationEditor::_updateFrameScreen()
 			{
 				speed /= 100.0f;
 			}
+
+			// Showing speed type
+			string newTextContent = (currentAnimation->frames[_currentFrameIndex].speedTypes[_currentPartName] == AnimationSpeedType::LINEAR) ?
+				"Speed: linear" : "Speed: exponential";
+			_fe3d.textEntity_setTextContent(screen->getButton("speedType")->getTextfield()->getEntityID(), newTextContent);
+
+			// Showing transformation type
+			newTextContent = transType == TransformationType::TRANSLATION ? "Type: translation" :
+				transType == TransformationType::ROTATION ? "Type: rotation" : "Type: scaling";
+			_fe3d.textEntity_setTextContent(screen->getButton("transType")->getTextfield()->getEntityID(), newTextContent);
 
 			// Check if a animation partname is clicked
 			string selectedButtonID = _gui.getGlobalScreen()->getSelectedChoiceFormButtonID("parts");

@@ -1,4 +1,4 @@
-25 62
+14 12
 META script_type_update
 META execution_entry
 
@@ -24,7 +24,7 @@ IF selectedID NOT "" AND lmb IS <true>:
     VEC3 selectedPos = fe3d:model_position_get(selectedID)
     DEC distance = math:distance(camPos, selectedPos)
     IF distance LESS 5.0:
-        fe3d:model_animation_start("tree_fall", selectedID, -1)
+        fe3d:model_animation_start("tree_fall", selectedID, 1)
         ///fe3d:entity_game_delete(selectedID)
 
 /// Jumping movement

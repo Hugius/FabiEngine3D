@@ -5,13 +5,14 @@
 #include "script_value.hpp"
 #include "script_variable.hpp"
 #include "script_scope_changer.hpp"
+#include "model_editor.hpp"
 #include "scene_editor.hpp"
 #include "animation_editor.hpp"
 
 class ScriptInterpreter
 {
 public:
-	ScriptInterpreter(FabiEngine3D& fe3d, Script& script, SceneEditor& sceneEditor, AnimationEditor& animationEditor);
+	ScriptInterpreter(FabiEngine3D& fe3d, Script& script, ModelEditor& modelEditor, SceneEditor& sceneEditor, AnimationEditor& animationEditor);
 
 	void load();
 	void executeInitialization();
@@ -82,6 +83,7 @@ private:
 	// Instances
 	FabiEngine3D& _fe3d;
 	Script& _script;
+	ModelEditor& _modelEditor;
 	SceneEditor& _sceneEditor;
 	AnimationEditor& _animationEditor;
 

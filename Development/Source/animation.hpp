@@ -2,7 +2,6 @@
 
 #include "fabi_engine_3d.hpp"
 #include "animation_frame.hpp"
-#include "transformation_type.hpp"
 
 class Animation final
 {
@@ -36,6 +35,4 @@ public:
 	Vec3 initialColor = Vec3(0.0f);
 
 	map<string, Vec3> totalTransformations;
-
-	TransformationType transformationType = TransformationType::TRANSLATION;
 };

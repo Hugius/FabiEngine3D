@@ -122,16 +122,16 @@ void AnimationEditor::_updateAnimationExecution()
 						}
 
 						// Determine transformation type
-						if (animation.transformationType == TransformationType::TRANSLATION)
+						if (frame.transformationTypes[partName] == TransformationType::TRANSLATION)
 						{
 							_fe3d.gameEntity_move(animation.animatedModelID, Vec3(frame.speeds[partName] + (-difference), 0.0f, 0.0f), partName);
 						}
-						else if (animation.transformationType == TransformationType::ROTATION)
+						else if (frame.transformationTypes[partName] == TransformationType::ROTATION)
 						{
 							_fe3d.gameEntity_setRotationOrigin(animation.animatedModelID, frame.rotationOrigins[partName], partName);
 							_fe3d.gameEntity_rotate(animation.animatedModelID, Vec3(frame.speeds[partName] + (-difference), 0.0f, 0.0f), partName);
 						}
-						else if (animation.transformationType == TransformationType::SCALING)
+						else if (frame.transformationTypes[partName] == TransformationType::SCALING)
 						{
 							_fe3d.gameEntity_scale(animation.animatedModelID, Vec3(frame.speeds[partName] + (-difference), 0.0f, 0.0f), partName);
 						}
@@ -160,16 +160,16 @@ void AnimationEditor::_updateAnimationExecution()
 						}
 
 						// Determine transformation type
-						if (animation.transformationType == TransformationType::TRANSLATION)
+						if (frame.transformationTypes[partName] == TransformationType::TRANSLATION)
 						{
 							_fe3d.gameEntity_move(animation.animatedModelID, Vec3(0.0f, frame.speeds[partName] + (-difference), 0.0f), partName);
 						}
-						else if (animation.transformationType == TransformationType::ROTATION)
+						else if (frame.transformationTypes[partName] == TransformationType::ROTATION)
 						{
 							_fe3d.gameEntity_setRotationOrigin(animation.animatedModelID, frame.rotationOrigins[partName], partName);
 							_fe3d.gameEntity_rotate(animation.animatedModelID, Vec3(0.0f, frame.speeds[partName] + (-difference), 0.0f), partName);
 						}
-						else if (animation.transformationType == TransformationType::SCALING)
+						else if (frame.transformationTypes[partName] == TransformationType::SCALING)
 						{
 							_fe3d.gameEntity_scale(animation.animatedModelID, Vec3(0.0f, frame.speeds[partName] + (-difference), 0.0f), partName);
 						}
@@ -198,16 +198,16 @@ void AnimationEditor::_updateAnimationExecution()
 						}
 
 						// Determine transformation type
-						if (animation.transformationType == TransformationType::TRANSLATION)
+						if (frame.transformationTypes[partName] == TransformationType::TRANSLATION)
 						{
 							_fe3d.gameEntity_move(animation.animatedModelID, Vec3(0.0f, 0.0f, frame.speeds[partName] + (-difference)), partName);
 						}
-						else if (animation.transformationType == TransformationType::ROTATION)
+						else if (frame.transformationTypes[partName] == TransformationType::ROTATION)
 						{
 							_fe3d.gameEntity_setRotationOrigin(animation.animatedModelID, frame.rotationOrigins[partName], partName);
 							_fe3d.gameEntity_rotate(animation.animatedModelID, Vec3(0.0f, 0.0f, frame.speeds[partName] + (-difference)), partName);
 						}
-						else if (animation.transformationType == TransformationType::SCALING)
+						else if (frame.transformationTypes[partName] == TransformationType::SCALING)
 						{
 							_fe3d.gameEntity_scale(animation.animatedModelID, Vec3(0.0f, 0.0f, frame.speeds[partName] + (-difference)), partName);
 						}

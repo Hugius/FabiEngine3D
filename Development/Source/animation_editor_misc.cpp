@@ -73,18 +73,18 @@ void AnimationEditor::_updateMiscellaneous()
 						if (_fe3d.gameEntity_hasPart(currentAnimation->previewModelID, partName) || partName.empty())
 						{
 							// Determine type of transformation
-							if (currentAnimation->transformationType == TransformationType::TRANSLATION)
+							if (frame.transformationTypes[partName] == TransformationType::TRANSLATION)
 							{
 								_fe3d.gameEntity_move(currentAnimation->previewModelID, frame.targetTransformations[partName], partName);
 							}
-							else if (currentAnimation->transformationType == TransformationType::ROTATION)
+							else if (frame.transformationTypes[partName] == TransformationType::ROTATION)
 							{
 								auto currentRotationOrigin = _fe3d.gameEntity_getRotationOrigin(currentAnimation->previewModelID, partName);
 								_fe3d.gameEntity_setRotationOrigin(currentAnimation->previewModelID, 
 									currentRotationOrigin + frame.rotationOrigins[partName], partName);
 								_fe3d.gameEntity_rotate(currentAnimation->previewModelID, frame.targetTransformations[partName], partName);
 							}
-							else if (currentAnimation->transformationType == TransformationType::SCALING)
+							else if (frame.transformationTypes[partName] == TransformationType::SCALING)
 							{
 								_fe3d.gameEntity_scale(currentAnimation->previewModelID, frame.targetTransformations[partName], partName);
 							}

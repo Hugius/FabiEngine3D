@@ -69,6 +69,25 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 
 		return true;
 	}
+	else if (functionName == "fe3d:model_place") // Create gameEntity
+	{
+		auto types =
+		{
+			ScriptValueType::STRING, ScriptValueType::STRING,
+			ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL,
+		};
+
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		{
+			if (_validateFe3dGameEntity(arguments[0].getString()))
+			{
+				_fe3d.gameEntity_delete(arguments[0].getString());
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			}
+		}
+
+		return true;
+	}
 	else if (functionName == "fe3d:model_delete") // Delete gameEntity
 	{
 		auto types = { ScriptValueType::STRING };

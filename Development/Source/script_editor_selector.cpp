@@ -153,6 +153,7 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 				cursorLineIndex = std::min(_firstSelectedLineIndex, _lastSelectedLineIndex);
 			}
 
+			// Place cursor at the end of current line
 			cursorCharIndex = _script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex).size();
 		}
 

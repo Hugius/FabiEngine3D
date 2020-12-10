@@ -160,6 +160,8 @@ void ScriptEditor::_updateMiscellaneous()
 				_gui.getGlobalScreen()->removeChoiceForm("scriptFileList");
 				_currentScriptFileID = selectedButtonID;
 				_isWritingScript = true;
+				_firstSelectedLineIndex = -1;
+				_lastSelectedLineIndex = -1;
 				_reloadScriptTextDisplay();
 			}
 		}

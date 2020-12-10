@@ -1,4 +1,4 @@
-5 32
+7 54
 META script_type_init
 META execution_entry
 
@@ -6,4 +6,5 @@ fe3d:scene_load("scene")
 fe3d:camera_position_set(-37.0, 10.0, -51.0)
 fe3d:camera_firstperson_enable()
 fe3d:misc_cursor_hide()
+fe3d:model_animation_start("skeleton_walk", selectedID, -1)
 GLOB CONST DEC _baseSpeed = 0.035

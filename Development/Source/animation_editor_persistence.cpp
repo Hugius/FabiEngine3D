@@ -28,18 +28,16 @@ void AnimationEditor::loadAnimationsFromFile()
 		{
 			// Placeholder variables
 			string animationID, previewModelID;
-			int transformationType;
 
 			// For file extraction
 			std::istringstream iss(line);
 
 			// Extract general data from file
-			iss >> animationID >> previewModelID >> transformationType;
+			iss >> animationID >> previewModelID;
 
 			// Create new animation
 			auto newAnimation = make_shared<Animation>(animationID);
 			newAnimation->previewModelID = previewModelID;
-			newAnimation->transformationType = TransformationType(transformationType);
 
 			// Clear default empty partname
 			newAnimation->partNames.clear();
@@ -65,11 +63,11 @@ void AnimationEditor::loadAnimationsFromFile()
 						string partName;
 						Vec3 targetTransformation, rotationOrigin;
 						float speed;
-						int speedType;
+						int speedType, transformationType;;
 
 						// Extract data
 						iss >> partName >> targetTransformation.x >> targetTransformation.y >> targetTransformation.z >> 
-							rotationOrigin.x >> rotationOrigin.y >> rotationOrigin.z >> speed >> speedType;
+							rotationOrigin.x >> rotationOrigin.y >> rotationOrigin.z >> speed >> speedType >> transformationType;
 
 						// Questionmark means empty partname
 						if (partName == "?")
@@ -82,6 +80,7 @@ void AnimationEditor::loadAnimationsFromFile()
 						frame.rotationOrigins.insert(make_pair(partName, rotationOrigin));
 						frame.speeds.insert(make_pair(partName, speed));
 						frame.speedTypes.insert(make_pair(partName, AnimationSpeedType(speedType)));
+						frame.transformationTypes.insert(make_pair(partName, TransformationType(transformationType)));
 
 						// Add all partnames 1 time only
 						if (frames.empty())
@@ -165,13 +164,11 @@ void AnimationEditor::saveAnimationsToFile()
 				// Retrieve all values
 				auto animationID = animation->ID;
 				auto previewModelID = animation->previewModelID.empty() ? animation->oldPreviewModelID : animation->previewModelID;
-				auto transformationType = static_cast<int>(animation->transformationType);
 
 				// Export  general data
 				file <<
 					animationID << " " <<
-					previewModelID << " " <<
-					transformationType;
+					previewModelID;
 
 				// Export frame data
 				if (animation->frames.size() > 1)
@@ -194,6 +191,7 @@ void AnimationEditor::saveAnimationsToFile()
 							const auto& rotationOrigin = animation->frames[i].rotationOrigins[partName];
 							const auto& speed = animation->frames[i].speeds[partName];
 							const auto& speedType = static_cast<int>(animation->frames[i].speedTypes[partName]);
+							const auto& transformationType = static_cast<int>(animation->frames[i].transformationTypes[partName]);
 
 							// Questionmark means empty partname
 							if (partName.empty())
@@ -211,7 +209,8 @@ void AnimationEditor::saveAnimationsToFile()
 								rotationOrigin.y << " " <<
 								rotationOrigin.z << " " <<
 								speed << " " <<
-								speedType;
+								speedType << " " <<
+								transformationType;
 
 							// Add space
 							if (partIndex != (animation->partNames.size() - 1))

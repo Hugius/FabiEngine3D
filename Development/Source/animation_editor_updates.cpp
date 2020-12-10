@@ -205,7 +205,7 @@ void AnimationEditor::_updateCamera()
 		{
 			_cameraLookatPosition.y += (_cameraSpeed / 2.0f);
 		}
-		if (_fe3d.input_getKeyDown(InputType::KEY_LCTRL))
+		if (_fe3d.input_getKeyDown(InputType::KEY_LSHIFT))
 		{
 			_cameraLookatPosition.y -= (_cameraSpeed / 2.0f);
 		}

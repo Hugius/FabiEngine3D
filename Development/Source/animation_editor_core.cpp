@@ -70,7 +70,7 @@ void AnimationEditor::load()
 	// Miscellaneous
 	_gui.getGlobalScreen()->addTextfield("selectedAnimationName", Vec2(0.0f, -0.45f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
 	_gui.getGlobalScreen()->addTextfield("selectedAnimationFrame", Vec2(0.0f, -0.55f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
-	//_gui.getViewport("right")->getWindow("main")->setActiveScreen("animationEditorControls"); <---
+	_gui.getViewport("right")->getWindow("main")->setActiveScreen("animationEditorControls");
 	_isEditorLoading = false;
 	_isEditorLoaded = true;
 }
@@ -90,20 +90,29 @@ void AnimationEditor::unload()
 	_gui.getGlobalScreen()->deleteTextfield("selectedAnimationFrame");
 
 	// Reset variables
-	_currentAnimationID = "";
 	_animations.clear();
+	_playingAnimations.clear();
+	_currentAnimationID = "";
+	_currentPartName = "";
+	_cameraLookatPosition = Vec3(0.0f);
 	_totalCursorDifference = Vec2(0.0f);
 	_cameraAcceleration = Vec2(0.0f);
 	_lastCursorPos = Vec2(0.0f);
 	_cameraDistance = 5.0f;
 	_cameraScrollingAcceleration = 0.0f;
+	_partColorStrength = 0.0f;
+	_colorChangingSpeed = 0.05f;
+	_currentFrameIndex = 0;
 	_isCreatingAnimation = false;
 	_isChoosingAnimation = false;
 	_isEditingAnimation = false;
 	_isRemovingAnimation = false;
+	_isEditorLoaded = false;
+	_isEditorLoading = false;
+	_partColorIncreasing = true;
 
 	// Miscellaneous
-	//_gui.getViewport("right")->getWindow("main")->setActiveScreen("mainMenuControls");
+	_gui.getViewport("right")->getWindow("main")->setActiveScreen("mainMenuControls");
 	_fe3d.misc_disableDebugRendering();
 	_fe3d.input_clearKeyToggles();
 	_isEditorLoaded = false;

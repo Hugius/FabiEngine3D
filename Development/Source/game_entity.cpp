@@ -352,6 +352,11 @@ void GameEntity::setLevelOfDetailed(bool val)
 	_isLevelOfDetailed = val;
 }
 
+void GameEntity::setWireframed(bool val)
+{
+	_wireframed = val;
+}
+
 void GameEntity::clearDiffuseMaps()
 {
 	_diffuseMaps.clear();
@@ -644,6 +649,11 @@ const bool GameEntity::isDepthMapIncluded() const
 const bool GameEntity::isLevelOfDetailed() const
 {
 	return _isLevelOfDetailed;
+}
+
+const bool GameEntity::isWireframed() const
+{
+	return _wireframed;
 }
 
 unsigned int GameEntity::_getPartIndex(string partName)

@@ -118,6 +118,12 @@ void GameEntityRenderer::render(const shared_ptr<GameEntity> entity)
 {
 	if (entity->isVisible())
 	{
+		// Wireframe
+		if (entity->isWireframed())
+		{
+			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		}
+
 		// Faceculling
 		if (entity->isFaceCulled())
 		{
@@ -221,6 +227,12 @@ void GameEntityRenderer::render(const shared_ptr<GameEntity> entity)
 		if (entity->isFaceCulled())
 		{
 			glDisable(GL_CULL_FACE);
+		}
+
+		// Wireframe
+		if (entity->isWireframed())
+		{
+			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 		}
 	}
 }

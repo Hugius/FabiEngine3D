@@ -58,7 +58,7 @@ void AnimationEditor::_updateEditingScreen()
 					_fe3d.gameEntity_setSize(currentAnimation->previewModelID, currentAnimation->initialScaling);
 
 					// Start animation
-					startAnimation(_currentAnimationID, currentAnimation->previewModelID, -1);
+					startAnimation(_currentAnimationID, currentAnimation->previewModelID, 1);
 				}
 				else if (screen->getButton("stop")->isHovered())
 				{

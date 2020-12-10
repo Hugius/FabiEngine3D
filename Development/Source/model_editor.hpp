@@ -61,6 +61,7 @@ private:
 
 	// Vectors
 	const Vec3 _defaultCameraPosition = Vec3(0.0f, 5.0f, 5.0f);
+	Vec3 _cameraLookatPosition = Vec3(0.0f);
 	Vec2 _totalCursorDifference = Vec2(0.0f);
 	Vec2 _cameraAcceleration = Vec2(0.0f);
 	Vec2 _lastCursorPos = Vec2(0.0f);

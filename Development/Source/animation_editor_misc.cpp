@@ -27,6 +27,24 @@ void AnimationEditor::_updateMiscellaneous()
 			_fe3d.misc_disableDebugRendering();
 		}
 
+		// Wireframed model rendering
+		if (!_currentAnimationID.empty())
+		{
+			string modelID = _getAnimation(_currentAnimationID)->previewModelID;
+
+			if (!modelID.empty() && _fe3d.gameEntity_isExisting(modelID))
+			{
+				if (_fe3d.input_getKeyToggled(InputType::KEY_F))
+				{
+					_fe3d.gameEntity_setWireframed(modelID, true);
+				}
+				else
+				{
+					_fe3d.gameEntity_setWireframed(modelID, false);
+				}
+			}
+		}
+
 		// Check if animation loaded in editor
 		if (!_currentAnimationID.empty())
 		{

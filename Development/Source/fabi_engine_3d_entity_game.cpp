@@ -216,6 +216,11 @@ bool FabiEngine3D::gameEntity_isStaticToCamera(const string& ID)
 	return _core->_gameEntityManager.getEntity(ID)->isCameraStatic();
 }
 
+bool FabiEngine3D::gameEntity_isWireframed(const string& ID)
+{
+	return _core->_gameEntityManager.getEntity(ID)->isWireframed();
+}
+
 bool FabiEngine3D::gameEntity_isDepthMapIncluded(const string& ID)
 {
 	return _core->_gameEntityManager.getEntity(ID)->isDepthMapIncluded();
@@ -360,9 +365,14 @@ void FabiEngine3D::gameEntity_setInstanced(const string& ID, bool instanced, vec
 	}
 }
 
-void FabiEngine3D::gameEntity_setStaticToCamera(const string& ID, bool staticToCamera)
+void FabiEngine3D::gameEntity_setStaticToCamera(const string& ID, bool enabled)
 {
-	_core->_gameEntityManager.getEntity(ID)->setCameraStatic(staticToCamera);
+	_core->_gameEntityManager.getEntity(ID)->setCameraStatic(enabled);
+}
+
+void FabiEngine3D::gameEntity_setWireframed(const string& ID, bool enabled)
+{
+	_core->_gameEntityManager.getEntity(ID)->setWireframed(enabled);
 }
 
 float FabiEngine3D::gameEntity_getOriginalLightness(const string& ID)

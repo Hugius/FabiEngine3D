@@ -58,6 +58,7 @@ public:
 	void setCameraStatic(bool val);
 	void setDepthMapIncluded(bool val);
 	void setLevelOfDetailed(bool val);
+	void setWireframed(bool val);
 	void clearDiffuseMaps();
 	void clearLightMaps();
 	void clearReflectionMaps();
@@ -111,6 +112,7 @@ public:
 	const bool isCameraStatic() const;
 	const bool isDepthMapIncluded() const;
 	const bool isLevelOfDetailed() const;
+	const bool isWireframed() const;
 
 private:
 	unsigned int _getPartIndex(string partName);
@@ -162,4 +164,5 @@ private:
 	bool _isShadowed         = true;
 	bool _isDepthMapIncluded = true;
 	bool _isLevelOfDetailed  = false;
+	bool _wireframed		 = false;
 };

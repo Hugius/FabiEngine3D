@@ -236,7 +236,8 @@ public:
 	void		   gameEntity_setSceneReflective(const string& ID, bool enabled);
 	void		   gameEntity_setShadowed(const string& ID, bool enabled);
 	void		   gameEntity_setDepthMapIncluded(const string& ID, bool enabled);
-	void		   gameEntity_setStaticToCamera(const string& ID, bool staticToCamera);
+	void		   gameEntity_setStaticToCamera(const string& ID, bool enabled);
+	void		   gameEntity_setWireframed(const string& ID, bool enabled);
 	void		   gameEntity_move(const string& ID, Vec3 factor, const string& partName = "");
 	void		   gameEntity_rotate(const string& ID, Vec3 factor, const string& partName = "");
 	void		   gameEntity_scale(const string& ID, Vec3 factor, const string& partName = "");
@@ -271,6 +272,7 @@ public:
 	bool		   gameEntity_isSceneReflective(const string& ID);
 	bool		   gameEntity_isShadowed(const string& ID);
 	bool		   gameEntity_isStaticToCamera(const string& ID);
+	bool		   gameEntity_isWireframed(const string& ID);
 	bool		   gameEntity_isDepthMapIncluded(const string& ID);
 	bool		   gameEntity_hasPart(const string& ID, const string& partName);
 	float		   gameEntity_getOriginalLightness(const string& ID);

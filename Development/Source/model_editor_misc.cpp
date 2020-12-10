@@ -28,6 +28,20 @@ void ModelEditor::_updateMiscellaneous()
 		{
 			_fe3d.misc_disableDebugRendering();
 		}
+
+		// Wireframed model rendering
+		string modelID = _currentModelID.empty() ? _hoveredModelID : _currentModelID;
+		if (!modelID.empty() && _fe3d.gameEntity_isExisting(modelID))
+		{
+			if (_fe3d.input_getKeyToggled(InputType::KEY_F))
+			{
+				_fe3d.gameEntity_setWireframed(modelID, true);
+			}
+			else
+			{
+				_fe3d.gameEntity_setWireframed(modelID, false);
+			}
+		}
 	}
 }
 

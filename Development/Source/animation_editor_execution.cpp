@@ -231,6 +231,7 @@ void AnimationEditor::_updateAnimationExecution()
 				{
 					animationsToStop.push_back(idPair);
 					animationsToStart.push_back(idPair);
+					continue;
 				}
 
 				// Played animation once

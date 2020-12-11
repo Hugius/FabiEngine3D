@@ -1,4 +1,4 @@
-14 12
+15 4
 META script_type_update
 META execution_entry
 
@@ -12,11 +12,9 @@ BOOL right = fe3d:input_key_down("KEY_D")
 BOOL shift = fe3d:input_key_down("KEY_LSHIFT")
 
 /// Running speed
-CAST shift INT
-INCR shift 1
-CAST shift DEC
 DEC movingSpeed = _baseSpeed
-MUL movingSpeed shift
+IF shift IS <true>:
+    MUL movingSpeed 1.5
 
 STR selectedID = fe3d:raycast_model_group("tree7", "trunk")
 IF selectedID NOT "" AND lmb IS <true>:
@@ -26,6 +24,9 @@ IF selectedID NOT "" AND lmb IS <true>:
     IF distance LESS 5.0:
         fe3d:model_animation_start("tree_fall", selectedID, 1)
         ///fe3d:entity_game_delete(selectedID)
+
+/// Moving skeleton
+fe3d:model_move("skellie", 0.0, 0.0, 0.01)
 
 /// Jumping movement
 IF up IS <true>:

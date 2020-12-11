@@ -127,6 +127,9 @@ void ScriptInterpreter::load()
 	// Enable collision
 	_fe3d.collision_enableCameraResponse();
 
+	// Load models
+	_modelEditor.loadGameEntitiesFromFile();
+
 	// Load animations
 	_animationEditor.loadAnimationsFromFile();
 }

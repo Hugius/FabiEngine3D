@@ -26,6 +26,7 @@ public:
 	void loadSceneFromFile(const string& fileName);
 	void saveSceneToFile();
 	void clearScene();
+	void placeModel(const string& newID, const string& previewID, Vec3 position);
 
 	bool isLoaded();
 	bool isSceneExisting(const string& fileName);
@@ -93,7 +94,6 @@ private:
 	void _placeWater(const string& newID, Vec3 position, float size, bool isWaving, bool isRippling, bool isSpecularLighted, bool isReflective,
 		bool isRefractive, float waveHeightFactor, float specularFactor, float specularIntensity, float transparency, Vec3 color, float uvRepeat,
 		Vec2 speed, const string& dudvMapPath, const string& normalMapPath, const string& displacementMapPath);
-	void _placeModel(const string& newID, const string& previewID, Vec3 position);
 	void _placeModel(bool scriptExecution, const string& modelName, const string& modelNumber, Vec3 position, Vec3 rotation, Vec3 size, 
 		const string& objPath, const string& diffuseMapPath, const string& lightMapPath, const string& reflectionMapPath, const string& normalMapPath, 
 		bool isFrozen, bool isFaceCulled, bool isShadowed, bool isTransparent, bool isReflective, bool isSpecular, 

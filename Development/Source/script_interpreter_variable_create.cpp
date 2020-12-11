@@ -79,6 +79,13 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 			}
 		}
 
+		// Check if global variable starts with '_'
+		if (scope == ScriptVariableScope::GLOBAL && nameString.front() != '_')
+		{
+			_throwScriptError("global variables must start with an underscore!");
+			return;
+		}
+
 		// Check if variable name is valid
 		if (validName)
 		{

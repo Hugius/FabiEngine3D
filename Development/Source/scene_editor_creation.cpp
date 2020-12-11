@@ -203,7 +203,7 @@ void SceneEditor::_placeWater(const string& newID, Vec3 position, float size, bo
 	if (displacementMapPath != "") _fe3d.waterEntity_setDisplacementMap(newID, displacementMapPath);
 }
 
-void SceneEditor::_placeModel(const string& newID, const string& previewID, Vec3 position)
+void SceneEditor::placeModel(const string& newID, const string& previewID, Vec3 position)
 {
 	// Check if instanced entity
 	if (_fe3d.gameEntity_isInstanced(previewID))

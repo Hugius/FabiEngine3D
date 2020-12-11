@@ -57,6 +57,9 @@ void AnimationEditor::_updateMiscellaneous()
 				// Check if animation has a preview model
 				if (!currentAnimation->previewModelID.empty())
 				{
+					// Retrieve model size
+					auto modelSize = _fe3d.gameEntity_getSize(currentAnimation->previewModelID);
+
 					// Retrieve current frame
 					auto frame = currentAnimation->frames[_currentFrameIndex];
 
@@ -69,6 +72,7 @@ void AnimationEditor::_updateMiscellaneous()
 					// Set current frame's transformation of editor
 					for (auto partName : currentAnimation->partNames)
 					{
+						std::cout << modelSize.y << " " << frame.rotationOrigins[partName].y << std::endl;
 						// Check if model has part
 						if (_fe3d.gameEntity_hasPart(currentAnimation->previewModelID, partName) || partName.empty())
 						{
@@ -81,7 +85,7 @@ void AnimationEditor::_updateMiscellaneous()
 							{
 								auto currentRotationOrigin = _fe3d.gameEntity_getRotationOrigin(currentAnimation->previewModelID, partName);
 								_fe3d.gameEntity_setRotationOrigin(currentAnimation->previewModelID, 
-									currentRotationOrigin + frame.rotationOrigins[partName], partName);
+									currentRotationOrigin + (modelSize * frame.rotationOrigins[partName]), partName);
 								_fe3d.gameEntity_rotate(currentAnimation->previewModelID, frame.targetTransformations[partName], partName);
 							}
 							else if (frame.transformationTypes[partName] == TransformationType::SCALING)

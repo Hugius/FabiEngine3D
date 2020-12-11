@@ -320,7 +320,7 @@ float getShadowValue()
 		)
 		{
 			// Variables
-			float shadow       = 1.0f;
+			float shadow       = 0.0f;
 			vec3 projCoords    = (f_shadowPos.xyz / f_shadowPos.w) * 0.5f + 0.5f;
 			float currentDepth = projCoords.z;
 			float texelSize    = 1.0f / float(u_shadowMapSize);
@@ -337,7 +337,7 @@ float getShadowValue()
                 for(int y = -1; y <= 1; ++y)
                 {
                     float pcfDepth = texture(u_sampler_shadowMap, projCoords.xy + vec2(x, y) * vec2(texelSize)).r; 
-                    shadow += currentDepth - texelSize > pcfDepth ? 0.2f : 1.0f;        
+                    shadow += (currentDepth - texelSize > pcfDepth) ? 0.2f : 1.0f;        
                 }    
             }
             

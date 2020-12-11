@@ -239,9 +239,9 @@ void AnimationEditor::_updateFrameScreen()
 				}
 				else if (screen->getButton("rotationOrigin")->isHovered())
 				{
-					_gui.getGlobalScreen()->addValueForm("xRotationOrigin", "X", rotationOrigin.x * 100.0f, Vec2(-0.25f, 0.0f), Vec2(0.2f, 0.1f));
-					_gui.getGlobalScreen()->addValueForm("yRotationOrigin", "Y", rotationOrigin.y * 100.0f, Vec2(0.0f, 0.0f), Vec2(0.2f, 0.1f));
-					_gui.getGlobalScreen()->addValueForm("zRotationOrigin", "Z", rotationOrigin.z * 100.0f, Vec2(0.25f, 0.0f), Vec2(0.2f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("xRotationOrigin", "X", rotationOrigin.x * 1000.0f, Vec2(-0.25f, 0.0f), Vec2(0.2f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("yRotationOrigin", "Y", rotationOrigin.y * 1000.0f, Vec2(0.0f, 0.0f), Vec2(0.2f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("zRotationOrigin", "Z", rotationOrigin.z * 1000.0f, Vec2(0.25f, 0.0f), Vec2(0.2f, 0.1f));
 				}
 				else if (screen->getButton("speed")->isHovered())
 				{
@@ -303,19 +303,19 @@ void AnimationEditor::_updateFrameScreen()
 			// Update rotation origin X change
 			if (_gui.getGlobalScreen()->checkValueForm("xRotationOrigin", rotationOrigin.x, { }))
 			{
-				rotationOrigin.x /= 100.0f;
+				rotationOrigin.x /= 1000.0f;
 			}
 
 			// Update rotation origin Y change
 			if (_gui.getGlobalScreen()->checkValueForm("yRotationOrigin", rotationOrigin.y, { }))
 			{
-				rotationOrigin.y /= 100.0f;
+				rotationOrigin.y /= 1000.0f;
 			}
 
 			// Update rotation origin Z change
 			if (_gui.getGlobalScreen()->checkValueForm("zRotationOrigin", rotationOrigin.z, { }))
 			{
-				rotationOrigin.z /= 100.0f;
+				rotationOrigin.z /= 1000.0f;
 			}
 
 			// Update speed change

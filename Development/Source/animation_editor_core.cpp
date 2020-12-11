@@ -56,6 +56,10 @@ void AnimationEditor::load()
 	_fe3d.gfx_enableAmbientLighting(Vec3(1.0f), 0.45f);
 	_fe3d.gfx_enableDirectionalLighting(Vec3(1000.0f), Vec3(1.0f), 1.0f);
 	_fe3d.gfx_enableShadows(Vec3(10.0f, 10.0f, 10.0f), Vec3(0.0f), 25.0f, 50.0f, false);
+	_fe3d.gfx_enableSkyReflections(0.5f);
+	_fe3d.gfx_enableLightMapping();
+	_fe3d.gfx_enableNormalMapping();
+	_fe3d.gfx_enableSpecularLighting();
 
 	// Load models
 	_modelEditor.loadGameEntitiesFromFile();
@@ -79,6 +83,10 @@ void AnimationEditor::unload()
 	_fe3d.gfx_disableAmbientLighting();
 	_fe3d.gfx_disableDirectionalLighting();
 	_fe3d.gfx_disableShadows();
+	_fe3d.gfx_disableSkyReflections();
+	_fe3d.gfx_disableLightMapping();
+	_fe3d.gfx_disableNormalMapping();
+	_fe3d.gfx_disableSpecularLighting();
 
 	// Delete models
 	_fe3d.gameEntity_deleteAll();

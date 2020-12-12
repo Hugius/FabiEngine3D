@@ -72,7 +72,6 @@ void AnimationEditor::_updateMiscellaneous()
 					// Set current frame's transformation of editor
 					for (auto partName : currentAnimation->partNames)
 					{
-						std::cout << modelSize.y << " " << frame.rotationOrigins[partName].y << std::endl;
 						// Check if model has part
 						if (_fe3d.gameEntity_hasPart(currentAnimation->previewModelID, partName) || partName.empty())
 						{

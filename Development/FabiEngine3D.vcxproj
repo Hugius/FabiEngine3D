@@ -258,6 +258,7 @@
   <ItemGroup>
     <ClCompile Include="Source\aabb_entity_renderer.cpp" />
     <ClCompile Include="Source\animation_editor_core.cpp" />
+    <ClCompile Include="Source\animation_editor_lifecycle.cpp" />
     <ClCompile Include="Source\animation_editor_misc.cpp" />
     <ClCompile Include="Source\animation_editor_persistence.cpp" />
     <ClCompile Include="Source\animation_editor_updates.cpp" />

@@ -136,11 +136,19 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 	}
 }
 
-bool ScriptInterpreter::_validateFe3dGameEntity(const string& ID)
+bool ScriptInterpreter::_validateFe3dGameEntity(const string& ID, bool previewEntity)
 {
 	if (!_fe3d.gameEntity_isExisting(ID))
 	{
-		_throwScriptError("game entity with ID \"" + ID + "\" does not exist!");
+		if (previewEntity)
+		{
+			_throwScriptError("model with ID \"" + ID.substr(1) + "\" does not exist!");
+		}
+		else
+		{
+			_throwScriptError("model with ID \"" + ID + "\" does not exist!");
+		}
+		
 		return false;
 	}
 

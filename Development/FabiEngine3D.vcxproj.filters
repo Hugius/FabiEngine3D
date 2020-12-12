@@ -577,6 +577,9 @@
     <ClCompile Include="Source\script_interpreter_func_physics.cpp">
       <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
     </ClCompile>
+    <ClCompile Include="Source\animation_editor_lifecycle.cpp">
+      <Filter>src\Editor System\Animation Editor\Miscellaneous</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\obj_loader.hpp">
@@ -918,14 +921,14 @@
     <ClInclude Include="Source\animation_editor.hpp">
       <Filter>src\Editor System\Animation Editor\Core</Filter>
     </ClInclude>
-    <ClInclude Include="Source\animation.hpp">
-      <Filter>src\Editor System\Animation Editor\Miscellaneous</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\animation_frame.hpp">
-      <Filter>src\Editor System\Animation Editor\Miscellaneous</Filter>
-    </ClInclude>
     <ClInclude Include="Source\animation_speed_type.hpp">
       <Filter>src\Miscellaneous\Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\animation.hpp">
+      <Filter>src\Editor System\Animation Editor\Data Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\animation_frame.hpp">
+      <Filter>src\Editor System\Animation Editor\Data Structures</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1198,6 +1201,9 @@
     </Filter>
     <Filter Include="src\Editor System\Audio Editor\Updates">
       <UniqueIdentifier>{5eb1ef82-f07a-481c-8f86-1e402dc54b6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Editor System\Animation Editor\Data Structures">
+      <UniqueIdentifier>{a0ba53c2-9ce4-494e-bbe4-cacbff1e3bda}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

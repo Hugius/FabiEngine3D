@@ -41,7 +41,9 @@ void AnimationEditor::loadAnimationsFromFile()
 
 			// Clear default empty partname
 			newAnimation->partNames.clear();
-			newAnimation->totalTransformations.clear();
+			newAnimation->totalTranslations.clear();
+			newAnimation->totalRotations.clear();
+			newAnimation->totalScalings.clear();
 
 			// Extract frame data from file
 			vector<AnimationFrame> frames;
@@ -86,7 +88,11 @@ void AnimationEditor::loadAnimationsFromFile()
 						if (frames.empty())
 						{
 							newAnimation->partNames.push_back(partName);
-							newAnimation->totalTransformations.insert(make_pair(partName, Vec3(0.0f)));
+
+							// Also add total transformation for each partname
+							newAnimation->totalTranslations.insert(make_pair(partName, Vec3(0.0f)));
+							newAnimation->totalRotations.insert(make_pair(partName, Vec3(0.0f)));
+							newAnimation->totalScalings.insert(make_pair(partName, Vec3(0.0f)));
 						}
 					}
 

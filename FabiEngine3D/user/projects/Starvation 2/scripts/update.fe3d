@@ -1,47 +1,17 @@
-15 4
+10 39
 META script_type_update
 META execution_entry
 
-/// Input
+EXEC movement_walk
+EXEC movement_jump
+EXEC player_animations
+
 BOOL lmb = fe3d:input_mouse_pressed("BUTTON_LEFT")
-BOOL up = fe3d:input_key_down("KEY_SPACE")
-BOOL forward = fe3d:input_key_down("KEY_W")
-BOOL backward = fe3d:input_key_down("KEY_S")
-BOOL left = fe3d:input_key_down("KEY_A")
-BOOL right = fe3d:input_key_down("KEY_D")
-BOOL shift = fe3d:input_key_down("KEY_LSHIFT")
-
-/// Running speed
-DEC movingSpeed = _baseSpeed
-IF shift IS <true>:
-    MUL movingSpeed 1.5
-
+VEC3 camPos = fe3d:camera_position_get()
 STR selectedID = fe3d:raycast_model_group("tree7", "trunk")
 IF selectedID NOT "" AND lmb IS <true>:
-    VEC3 camPos = fe3d:camera_position_get()
     VEC3 selectedPos = fe3d:model_position_get(selectedID)
     DEC distance = math:distance(camPos, selectedPos)
     IF distance LESS 5.0:
         fe3d:model_animation_start("tree_fall", selectedID, 1)
         ///fe3d:entity_game_delete(selectedID)
-
-/// Moving skeleton
-fe3d:model_move("skellie", 0.0, 0.0, 0.01)
-
-/// Jumping movement
-IF up IS <true>:
-    fe3d:camera_move(0.0, movingSpeed, 0.0)
-
-/// WASD movement
-IF forward IS <true>:
-    fe3d:camera_follow_z(movingSpeed)
-IF backward IS <true>:
-    NEG movingSpeed
-    fe3d:camera_follow_z(movingSpeed)
-    NEG movingSpeed
-IF left IS <true>:
-    NEG movingSpeed
-    fe3d:camera_follow_x(movingSpeed)
-    NEG movingSpeed
-IF right IS <true>:
-    fe3d:camera_follow_x(movingSpeed)

@@ -6,15 +6,16 @@ MODEL @tree7_lod 0 0.01 0 0 0 0 5 13.5 5 user\assets\models\tree_lod.obj user\as
 MODEL 1902736022@tree1 -19.6735 6.37255 -56.7164 0 0 0 1.5 1.5 1.5 user\assets\models\tree3.obj user\assets\textures\diffuse_maps\tree3.png ? ? user\assets\textures\normal_maps\tree_3.png 0 0 1 1 0 0 1 1 1 1 1 1 1 @tree1_lod 0 trunk 0 0 0 0.8 19 0.8 leaves 0 7 0 8.2 12 7.5
 MODEL 1493989539@hills 0 -10 0 0 0 0 10 26 10 user\assets\models\hills.obj user\assets\textures\diffuse_maps\grass3.png ? ? ? 0 0 1 0 0 0 1 1 0.6 1 1 1 10 ? 0
 MODEL 1838108647@tree7 -19.733 6.37255 -42.305 0 0 0 2 1.5 2 user\assets\models\tree14.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 @tree7_lod 0 trunk 0 0 -0.1 1.5 25 1.6 leaves 0 13 0 9.8 12.1 9
+MODEL 142937183@lantern -42.5138 6.37255 -48.1034 0 0 0 0.7 0.7 0.7 user\assets\models\lantern2.obj user\assets\textures\diffuse_maps\lantern2.png ? ? ? 0 0 1 0 0 0 16 10 1 1 1 1 1 ? 0 pole 0 0 0 0.339009 6.66539 0.3688 holder 0.7 5.84 0 3.33624 0.20342 0.231421 lamp 2.02 3.9 -1.49012e-08 0.6 1.1 0.6 chain 2.03 4.95 0 0.2 0.9 0.2
 AMBIENT_LIGHT 1 1 1 0.5
 DIRECTIONAL_LIGHT 1000 1000 1000 1 1 1 1 200
 POINT_LIGHT pointlight1262970285 52.9809 11.7843 72.0666 1 1 1 1 1
 CAMERA_FOV 90
 LOD_DISTANCE 75
 EDITOR_SPEED 1
-EDITOR_POSITION -39.7674 9.3203 -54.3454
-EDITOR_YAW 59.6607
-EDITOR_PITCH -14.4999
+EDITOR_POSITION -38.78 9.3203 -49.8595
+EDITOR_YAW 173.327
+EDITOR_PITCH -9.33323
 GRAPHICS_SHADOWS 1 100 50.000000 50.000000 0.000000 0.000000 0.000000 0.000000 1 0
 GRAPHICS_MOTIONBLUR 1 8
 GRAPHICS_DOF 1 0 100 10

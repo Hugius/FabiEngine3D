@@ -264,8 +264,9 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 		}
 		else if // Create local variable
 			(
-				scriptLineText.substr(0, _listKeyword.size() + 1) == _listKeyword + " "		  ||
-				scriptLineText.substr(0, _vec3Keyword.size() + 1) == _vec3Keyword + " "		  ||
+				scriptLineText.substr(0, _constKeyword.size() + 1)	 == _constKeyword + " "	  ||
+				scriptLineText.substr(0, _listKeyword.size() + 1)	 == _listKeyword + " "	  ||
+				scriptLineText.substr(0, _vec3Keyword.size() + 1)	 == _vec3Keyword + " "	  ||
 				scriptLineText.substr(0, _stringKeyword.size()  + 1) == _stringKeyword  + " " ||
 				scriptLineText.substr(0, _decimalKeyword.size() + 1) == _decimalKeyword + " " ||
 				scriptLineText.substr(0, _integerKeyword.size() + 1) == _integerKeyword + " " ||

@@ -9,7 +9,7 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 	if (_firstSelectedLineIndex != -1)
 	{
 		// Check if user cancels or edits any selected text
-		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || 
+		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) ||
 			_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_RIGHT) ||
 			_activeActionKey != InputType::NONE || 
 			!newCharacters.empty() || 
@@ -88,7 +88,7 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 	}
 
 	// Update text selection
-	if (_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_RIGHT))
+	if (_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_RIGHT) && _fe3d.misc_isCursorInsideViewport())
 	{
 		// Check if a line is hovered
 		if (hoveredLineIndex != -1)

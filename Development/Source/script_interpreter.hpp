@@ -78,7 +78,7 @@ private:
 	bool _executeFe3dCollisionFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	bool _executeFe3dGameEntityFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	bool _executeFe3dMiscFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
-	bool _validateFe3dGameEntity(const string& ID);
+	bool _validateFe3dGameEntity(const string& ID, bool previewEntity = false);
 
 	// Instances
 	FabiEngine3D& _fe3d;

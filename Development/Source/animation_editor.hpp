@@ -18,12 +18,16 @@ public:
 	void setCurrentProjectName(const string& projectName);
 	void loadAnimationsFromFile();
 	void saveAnimationsToFile();
-	void startAnimation(const string& animationID, const string& modelID, int count);
-	bool isAnimationPlaying(const string& animationID, const string& modelID);
+	void startAnimation(const string& animationID, const string& modelID, int timesToPlay);
+	void pauseAnimation(const string& animationID, const string& modelID);
+	void resumeAnimation(const string& animationID, const string& modelID);
 	void stopAnimation(const string& animationID, const string& modelID);
+	void fadeAnimation(const string& animationID, const string& modelID, int framestep);
 	void stopAllAnimations();
 
 	bool isLoaded();
+	bool isAnimationPlaying(const string& animationID, const string& modelID);
+	bool isAnimationPaused(const string& animationID, const string& modelID);
 
 private:
 	void _updateAnimationExecution();

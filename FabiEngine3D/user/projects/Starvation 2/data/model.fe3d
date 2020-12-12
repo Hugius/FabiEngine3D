@@ -18,6 +18,6 @@
 @bush2_lod user\assets\models\tree_lod.obj user\assets\textures\diffuse_maps\tree4_lod.png ? ? ? 4 5 4 0 1 1 0 0 1 1 1 1 1 1 1 ? 0
 @bush3 user\assets\models\tree13.obj ? ? ? ? 2 2 2 0 1 1 0 0 1 1 1 1 1 1 1 @bush3_lod 0 bush 0 0 0 2.2 5.5 2.3
 @bush3_lod user\assets\models\tree_lod.obj user\assets\textures\diffuse_maps\tree13_leaves.png ? ? ? 4 5.5 4 0 1 1 0 0 1 1 1 1 1 1 1 ? 0
-@lantern user\assets\models\lantern2.obj user\assets\textures\diffuse_maps\lantern2.png ? ? ? 0.6 0.6 0.6 0 1 0 0 0 16 10 1 1 1 1 1 ? 0 pole 0 0 0 0.539009 8.26539 0.5688 holder 1 7 0 4.23624 0.66342 0.731421
+@lantern user\assets\models\lantern2.obj user\assets\textures\diffuse_maps\lantern2.png ? ? ? 0.7 0.7 0.7 0 1 0 0 0 16 10 1 1 1 1 1 ? 0 pole 0 0 0 0.339009 6.66539 0.3688 holder 0.7 5.84 0 3.33624 0.20342 0.231421 lamp 2.02 3.9 -1.49012e-08 0.6 1.1 0.6 chain 2.03 4.95 0 0.2 0.9 0.2
 @skeleton user\assets\models\skeleton.obj ? ? ? ? 0.7 0.7 0.7 0 1 0 0 0 1 1 1 1 1 1 1 ? 0
-@mill user\assets\models\mill.obj ? ? ? ? 2 2 2 0 1 0 0 1 16 1.5 1 1 1 1 1 ? 0
+@mill user\assets\models\mill.obj ? ? ? ? 4.5 4.5 4.5 0 1 0 0 1 16 1.5 1 1 1 1 1 ? 0 wicks 0 0.89 0.9 4.3 4.2 -0.1 structure 0 0 -0.04 1.93 3.6 1.8

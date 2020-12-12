@@ -186,10 +186,15 @@ void AnimationEditor::_updateEditingScreen()
 					// First time choosing preview model, add all partnames for this animation
 					if (currentAnimation->frames.size() == 1)
 					{
+						// Retrieve partnames from model
 						for (auto partName : _fe3d.gameEntity_getPartNames(currentAnimation->previewModelID))
 						{
 							currentAnimation->partNames.push_back(partName);
-							currentAnimation->totalTransformations.insert(make_pair(partName, Vec3(0.0f)));
+
+							// Also add total transformation for each partname
+							currentAnimation->totalTranslations.insert(make_pair(partName, Vec3(0.0f)));
+							currentAnimation->totalRotations.insert(make_pair(partName, Vec3(0.0f)));
+							currentAnimation->totalScalings.insert(make_pair(partName, Vec3(0.0f)));
 						}
 					}
 

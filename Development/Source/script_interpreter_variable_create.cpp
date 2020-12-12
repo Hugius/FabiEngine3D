@@ -86,6 +86,13 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 			return;
 		}
 
+		// Check if local variable does not start with '_'
+		if (scope == ScriptVariableScope::LOCAL && nameString.front() == '_')
+		{
+			_throwScriptError("local variables cannot start with an underscore!");
+			return;
+		}
+
 		// Check if variable name is valid
 		if (validName)
 		{

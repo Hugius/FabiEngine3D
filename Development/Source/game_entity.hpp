@@ -141,6 +141,10 @@ private:
 	string _normalMapPath = "";
 	string _lodEntityID = "";
 
+	Vec3 _baseTranslation = Vec3(0.0f);
+	Vec3 _baseRotation = Vec3(0.0f);
+	Vec3 _baseRotationOrigin = Vec3(0.0f);
+	Vec3 _baseScaling = Vec3(1.0f);
 	Vec3 _originalTranslation = Vec3(0.0f);
 	Vec3 _originalRotation = Vec3(0.0f);
 	Vec3 _originalScaling = Vec3(1.0f);

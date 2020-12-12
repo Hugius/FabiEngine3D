@@ -1,0 +1,9 @@
+6 37
+META script_type_update
+
+INCR _skellieRotation 0.01
+DEC sinRot = math:sin(_skellieRotation)
+DEC cosRot = math:cos(_skellieRotation)
+///fe3d:model_move("skellie", sinRot, 0.0, cosRot)
+fe3d:model_rotate("skellie", 0.0, 0.25, 0.0)
+fe3d:model_rotate("millie", 0.0, 0.25, 0.0)

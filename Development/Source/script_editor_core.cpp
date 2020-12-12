@@ -79,5 +79,6 @@ void ScriptEditor::unload()
 
 	// Miscellaneous
 	_gui.getViewport("right")->getWindow("main")->setActiveScreen("mainMenuControls");
+	_fe3d.input_clearKeyToggles();
 	_isEditorLoaded = false;
 }

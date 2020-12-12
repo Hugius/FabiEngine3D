@@ -19,9 +19,28 @@ void GameEntity::updateModelMatrix()
 		// Identity matrix
 		_modelMatrices[i] = Matrix44(1.0f);
 
+		// Base translation matrix
+		Matrix44 baseTranslationMatrix = Matrix44::createTranslation(_baseTranslation.x, _baseTranslation.y, _baseTranslation.z);
+		_modelMatrices[i] = _modelMatrices[i] * baseTranslationMatrix;
+
 		// Translation matrix
 		Matrix44 translationMatrix = Matrix44::createTranslation(_translations[i].x, _translations[i].y, _translations[i].z);
 		_modelMatrices[i] = _modelMatrices[i] * translationMatrix;
+
+		// Base rotation origin matrix - translate
+		Matrix44 baseRotationOriginMatrix = Matrix44::createTranslation(_baseRotationOrigin.x, _baseRotationOrigin.y, _baseRotationOrigin.z);
+		_modelMatrices[i] = _modelMatrices[i] * baseRotationOriginMatrix;
+
+		// Base rotation matrix
+		Matrix44 baseRotationMatrix = Matrix44::createRotation(
+			Math::degreesToRadians(_baseRotation.x),
+			Math::degreesToRadians(_baseRotation.y),
+			Math::degreesToRadians(_baseRotation.z));
+		_modelMatrices[i] = _modelMatrices[i] * baseRotationMatrix;
+
+		// Base rotation origin matrix - translate back
+		baseRotationOriginMatrix = Matrix44::createTranslation(-_baseRotationOrigin.x, -_baseRotationOrigin.y, -_baseRotationOrigin.z);
+		_modelMatrices[i] = _modelMatrices[i] * baseRotationOriginMatrix;
 
 		// Rotation origin matrix - translate
 		Matrix44 rotationOriginMatrix = Matrix44::createTranslation(_rotationOrigins[i].x, _rotationOrigins[i].y, _rotationOrigins[i].z);
@@ -37,6 +56,10 @@ void GameEntity::updateModelMatrix()
 		// Rotation origin matrix - translate back
 		rotationOriginMatrix = Matrix44::createTranslation(-_rotationOrigins[i].x, -_rotationOrigins[i].y, -_rotationOrigins[i].z);
 		_modelMatrices[i] = _modelMatrices[i] * rotationOriginMatrix;
+
+		// Base scaling matrix
+		Matrix44 baseScalingMatrix = Matrix44::createScaling(_baseScaling.x, _baseScaling.y, _baseScaling.z);
+		_modelMatrices[i] = _modelMatrices[i] * baseScalingMatrix;
 
 		// Scaling matrix
 		Matrix44 scalingMatrix = Matrix44::createScaling(_scalings[i].x, _scalings[i].y, _scalings[i].z);
@@ -121,10 +144,7 @@ void GameEntity::setTranslation(Vec3 val, const string& partName)
 {
 	if (partName.empty() && _partNames.size() > 1)
 	{
-		for (auto& translation : _translations)
-		{
-			translation = val;
-		}
+		_baseTranslation = val;
 	}
 	else
 	{
@@ -141,10 +161,7 @@ void GameEntity::setRotation(Vec3 val, const string& partName)
 {
 	if (partName.empty() && _partNames.size() > 1)
 	{
-		for (auto& rotation : _rotations)
-		{
-			rotation = val;
-		}
+		_baseRotation = val;
 	}
 	else
 	{
@@ -156,10 +173,7 @@ void GameEntity::setRotationOrigin(Vec3 val, const string& partName)
 {
 	if (partName.empty() && _partNames.size() > 1)
 	{
-		for (auto& rotation : _rotationOrigins)
-		{
-			rotation = val;
-		}
+		_baseRotationOrigin = val;
 	}
 	else
 	{
@@ -176,10 +190,7 @@ void GameEntity::setScaling(Vec3 val, const string& partName)
 {
 	if (partName.empty() && _partNames.size() > 1)
 	{
-		for (auto& scaling : _scalings)
-		{
-			scaling = val;
-		}
+		_baseScaling = val;
 	}
 	else
 	{
@@ -191,10 +202,7 @@ void GameEntity::translate(Vec3 val, const string& partName)
 {
 	if (partName.empty() && _partNames.size() > 1)
 	{
-		for (auto& translation : _translations)
-		{
-			translation += val;
-		}
+		_baseTranslation += val;
 	}
 	else
 	{
@@ -206,10 +214,7 @@ void GameEntity::rotate(Vec3 val, const string& partName)
 {
 	if (partName.empty() && _partNames.size() > 1)
 	{
-		for (auto& rotation : _rotations)
-		{
-			rotation += val;
-		}
+		_baseRotation += val;
 	}
 	else
 	{
@@ -221,10 +226,7 @@ void GameEntity::scale(Vec3 val, const string& partName)
 {
 	if (partName.empty() && _partNames.size() > 1)
 	{
-		for (auto& scaling : _scalings)
-		{
-			scaling += val;
-		}
+		_baseScaling += val;
 	}
 	else
 	{
@@ -455,7 +457,7 @@ const Vec3 GameEntity::getTranslation(const string& partName)
 {
 	if (partName.empty() && _partNames.size() > 1)
 	{
-		return _calculateAverage(_translations);
+		return _baseTranslation;
 	}
 	else
 	{
@@ -472,7 +474,7 @@ const Vec3 GameEntity::getRotation(const string& partName)
 {
 	if (partName.empty() && _partNames.size() > 1)
 	{
-		return _calculateAverage(_rotations);
+		return _baseRotation;
 	}
 	else
 	{
@@ -484,7 +486,7 @@ const Vec3 GameEntity::getRotationOrigin(const string& partName)
 {
 	if (partName.empty() && _partNames.size() > 1)
 	{
-		return _calculateAverage(_rotationOrigins);
+		return _baseRotationOrigin;
 	}
 	else
 	{
@@ -501,7 +503,7 @@ const Vec3 GameEntity::getScaling(const string& partName)
 {
 	if (partName.empty() && _partNames.size() > 1)
 	{
-		return _calculateAverage(_scalings);
+		return _baseScaling;
 	}
 	else
 	{

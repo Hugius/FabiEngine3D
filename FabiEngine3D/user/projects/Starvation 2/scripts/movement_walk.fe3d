@@ -1,0 +1,34 @@
+14 58
+META script_type_update
+
+/// Temporary values
+DEC movingSpeed = 0.03
+
+/// Input
+BOOL forward = fe3d:input_key_down("KEY_W")
+BOOL backward = fe3d:input_key_down("KEY_S")
+BOOL left = fe3d:input_key_down("KEY_A")
+BOOL right = fe3d:input_key_down("KEY_D")
+BOOL shift = fe3d:input_key_down("KEY_LSHIFT")
+
+BOOL movingX = (left IS <true> OR right IS <true>)
+BOOL movingZ = (forward IS <true> OR backward IS <true>)
+EDIT _isWalking = (movingX IS <true> OR movingZ IS <true>)
+
+/// Running speed
+IF shift IS <true> AND forward IS <true>:
+    MUL movingSpeed 1.75
+
+/// WASD movement
+IF forward IS <true>:
+    fe3d:camera_follow_z(movingSpeed)
+IF backward IS <true>:
+    NEG movingSpeed
+    fe3d:camera_follow_z(movingSpeed)
+    NEG movingSpeed
+IF left IS <true>:
+    NEG movingSpeed
+    fe3d:camera_follow_x(movingSpeed)
+    NEG movingSpeed
+IF right IS <true>:
+    fe3d:camera_follow_x(movingSpeed)

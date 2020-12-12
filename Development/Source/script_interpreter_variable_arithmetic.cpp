@@ -162,9 +162,10 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 		}
 
 		// Retrieve arithmetic value
-		auto value = _isLocalVariableExisting(valueString) ? _getLocalVariable(valueString).getValue(valueIndex) : _isGlobalVariableExisting(valueString) ?
-			_getGlobalVariable(nameString).getValue(valueIndex) : _isIntegerValue(valueString) ? ScriptValue(_fe3d, ScriptValueType::INTEGER, stoi(valueString)) :
-			_isDecimalValue(valueString) ? ScriptValue(_fe3d, ScriptValueType::DECIMAL, stof(valueString)) : ScriptValue(_fe3d, ScriptValueType::EMPTY);
+		auto value = _isLocalVariableExisting(valueString) ? _getLocalVariable(valueString).getValue(valueIndex) : 
+			_isGlobalVariableExisting(valueString) ? _getGlobalVariable(valueString).getValue(valueIndex) : _isIntegerValue(valueString) ?
+			ScriptValue(_fe3d, ScriptValueType::INTEGER, stoi(valueString)) : _isDecimalValue(valueString) ? 
+			ScriptValue(_fe3d, ScriptValueType::DECIMAL, stof(valueString)) : ScriptValue(_fe3d, ScriptValueType::EMPTY);
 
 		// Check if arithmetic value is valid
 		if (value.getType() == ScriptValueType::EMPTY)

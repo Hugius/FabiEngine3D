@@ -18,11 +18,13 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 	// Check if scene file exists
 	if (_fe3d.misc_isFileExisting(filePath))
 	{
+		// No sky at default
+		_fe3d.skyEntity_select("");
+
 		// Default camera
 		_fe3d.camera_load(90.0f, 0.1f, 10000.0f, Vec3(0.0f));
 
 		// Default graphics
-		_fe3d.gfx_enableAmbientLighting(Vec3(1.0f), 1.0f);
 		_fe3d.gfx_enableSpecularLighting();
 		_fe3d.gfx_enablePointLighting();
 		_fe3d.gfx_enableSkyReflections(0.5f);

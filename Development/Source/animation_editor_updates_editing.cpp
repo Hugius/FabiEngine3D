@@ -222,7 +222,6 @@ void AnimationEditor::_updateFrameScreen()
 			auto& speedType = currentAnimation->frames[_currentFrameIndex].speedTypes[_currentPartName];
 			auto& transType = currentAnimation->frames[_currentFrameIndex].transformationTypes[_currentPartName];
 
-
 			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
 			{
 				if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused())) // Back button

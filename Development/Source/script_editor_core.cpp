@@ -35,7 +35,6 @@ void ScriptEditor::load()
 	_fe3d.gfx_enableDirectionalLighting(Vec3(1000.0f), Vec3(1.0f), 0.5f);
 	_fe3d.gfx_enableSpecularLighting();
 	_fe3d.gfx_enableNormalMapping();
-	_fe3d.gfx_enablePointLighting();
 
 	// Selection light
 	_fe3d.lightEntity_add("@@selectionLight", Vec3(0.0f), Vec3(0.0f, 1.0f, 0.0f), 2.5f, 10.0f, false);
@@ -54,7 +53,6 @@ void ScriptEditor::unload()
 	_fe3d.gfx_disableDirectionalLighting();
 	_fe3d.gfx_disableSpecularLighting();
 	_fe3d.gfx_disableNormalMapping();
-	_fe3d.gfx_disablePointLighting();
 
 	// Delete added entities
 	_fe3d.gameEntity_deleteAll();

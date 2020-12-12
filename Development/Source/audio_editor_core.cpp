@@ -39,7 +39,7 @@ void AudioEditor::load()
 
 	// Miscellaneous
 	_fe3d.billBoardEntity_add("@@audioStatus", "engine\\textures\\stop.png", Vec3(0.0f, 0.0f, -1.5f), Vec3(0.0f), Vec2(1.0f), true, false, false, true);
-	_fe3d.camera_load(90.0f, 0.1f, 100.0f, Vec3(0.0f), -90.0f);
+	_fe3d.camera_load(90.0f, 0.1f, 10000.0f, Vec3(0.0f), -90.0f);
 	_gui.getGlobalScreen()->addTextfield("selectedAudioName", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
 	_gui.getViewport("right")->getWindow("main")->setActiveScreen("audioEditorControls");
 	_isEditorLoaded = true;

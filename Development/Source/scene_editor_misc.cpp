@@ -419,9 +419,20 @@ void SceneEditor::clearScene()
 		// Delete GAME entities
 		for (auto& ID : _fe3d.gameEntity_getAllIDs())
 		{
-			if (ID[0] != '@' || _fe3d.gameEntity_getObjPath(ID) == _lightBulbModelPath || _fe3d.gameEntity_getObjPath(ID) == _speakerModelPath)
+			if (_currentSceneName.empty()) // Not editing scene
 			{
-				_fe3d.gameEntity_delete(ID);
+				if (ID[0] != '@')
+				{
+					_fe3d.gameEntity_delete(ID);
+				}
+			}
+			else // Editing scene
+			{
+				if (ID[0] != '@' || ((ID != _previewPointlightID) && (ID != _previewSpeakerID) &&
+					(_fe3d.gameEntity_getObjPath(ID) == _lightBulbModelPath) || (_fe3d.gameEntity_getObjPath(ID) == _speakerModelPath)))
+				{
+					_fe3d.gameEntity_delete(ID);
+				}
 			}
 		}
 

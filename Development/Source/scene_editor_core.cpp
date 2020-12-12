@@ -337,6 +337,19 @@ void SceneEditor::initializeGUI()
 
 void SceneEditor::load()
 {
+	// Default camera
+	_fe3d.camera_load(90.0f, 0.1f, 10000.0f, Vec3(0.0f));
+
+	// Default graphics
+	_fe3d.gfx_enableAmbientLighting(Vec3(1.0f), 0.5f);
+	_fe3d.gfx_enableSpecularLighting();
+	_fe3d.gfx_enablePointLighting();
+	_fe3d.gfx_enableSkyReflections(0.5f);
+	_fe3d.gfx_enableSceneReflections(0.5f);
+	_fe3d.gfx_enableLightMapping();
+	_fe3d.gfx_enableNormalMapping();
+	_fe3d.gfx_enableWaterEffects();
+
 	// Load environment preview entities
 	_environmentEditor.loadSkyEntitiesFromFile();
 	_environmentEditor.loadTerrainEntitiesFromFile();

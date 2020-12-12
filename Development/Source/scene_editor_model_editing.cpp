@@ -117,7 +117,7 @@ void SceneEditor::_updateModelEditing()
 						// AABB
 						for (auto& aabbID : _fe3d.aabbEntity_getBoundIDs(_activeModelID, true, false))
 						{
-							_fe3d.aabbEntity_setResponsiveness(aabbID, false);
+							_fe3d.aabbEntity_setResponsive(aabbID, false);
 						}
 					}
 					else if (_gui.getViewport("right")->getWindow("main")->getScreen("modelPropertiesMenu")->getButton("delete")->isHovered()) // Delete button

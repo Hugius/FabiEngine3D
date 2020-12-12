@@ -8,9 +8,8 @@ void SceneEditor::_updateLightPlacing()
 		if (_isPlacingPointlight)
 		{
 			// Check if mouse behavior isn't being invalid
-			if (_fe3d.misc_isCursorInsideViewport() && 
-				!_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_RIGHT) && 
-				!_gui.getGlobalScreen()->isFocused())
+			if ((_fe3d.misc_isCursorInsideViewport() && !_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_RIGHT) && 
+				!_gui.getGlobalScreen()->isFocused()) || _fe3d.terrainEntity_getSelectedID() == "")
 			{
 				// Default placement position
 				Vec3 newPosition = Vec3(0.0f);
@@ -29,7 +28,8 @@ void SceneEditor::_updateLightPlacing()
 				}
 
 				// Placing pointlight
-				if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.terrainEntity_getSelectedID() == "") // Can be bypassed if terrain does not exist
+				if ((_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) && _fe3d.terrainEntity_isValidMousePoint()) // If user pressed LMB
+					|| _fe3d.terrainEntity_getSelectedID() == "") // Can be bypassed if terrain does not exist
 				{
 					// Add new pointlight
 				begin: int randomSerial = _fe3d.misc_getUniqueInt(0, INT_MAX);
@@ -50,6 +50,8 @@ void SceneEditor::_updateLightPlacing()
 					// Disable placement mode if no terrain availible to choose position from
 					if (_fe3d.terrainEntity_getSelectedID() == "")
 					{
+						_fe3d.gameEntity_hide(_previewPointlightID);
+						_fe3d.lightEntity_hide(_previewPointlightID);
 						_isPlacingPointlight = false;
 					}
 				}

@@ -97,6 +97,10 @@ void SceneEditor::_updateMainMenu()
 				// If scene name not existing yet
 				if (std::find(sceneNames.begin(), sceneNames.end(), newSceneName) == sceneNames.end())
 				{
+					// Disable engine background
+					_fe3d.skyEntity_select("");
+
+					// Create new scene
 					_currentSceneName = newSceneName;
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuChoice");
 				}
@@ -202,6 +206,9 @@ void SceneEditor::_updateChoiceMenu()
 				clearScene();
 				_fe3d.skyEntity_select("@@engineBackground");
 				_currentSceneName = "";
+				_currentSkyID = "";
+				_currentTerrainID = "";
+				_currentWaterID = "";
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuMain");
 			}
 			else if (_gui.getGlobalScreen()->isAnswerFormCancelled("exitSceneEditor"))
@@ -209,6 +216,9 @@ void SceneEditor::_updateChoiceMenu()
 				clearScene();
 				_fe3d.skyEntity_select("@@engineBackground");
 				_currentSceneName = "";
+				_currentSkyID = "";
+				_currentTerrainID = "";
+				_currentWaterID = "";
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuMain");
 			}
 		}

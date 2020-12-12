@@ -44,7 +44,7 @@ void EngineController::_initializeMiscellaneous()
 	gfx_enableBloom(1.0f, 0.0f, 10);
 
 	// Default camera
-	camera_load(90.0f, 0.1f, 100.0f, Vec3(0.0f));
+	camera_load(90.0f, 0.1f, 10000.0f, Vec3(0.0f));
 
 	// Default engine background
 	string textureFolderPath = "engine\\textures\\";
@@ -75,7 +75,7 @@ void EngineController::_updateMiscellaneous()
 	{
 		float lastYaw = camera_getYaw();
 		float lastPitch = camera_getPitch();
-		camera_load(90.0f, 0.1f, 100.0f, Vec3(0.0f), lastYaw, lastPitch);
+		camera_load(90.0f, 0.1f, 10000.0f, Vec3(0.0f), lastYaw, lastPitch);
 		skyEntity_select("@@engineBackground");
 	}
 	lastScreen = activeScreen;

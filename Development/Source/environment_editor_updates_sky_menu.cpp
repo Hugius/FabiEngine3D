@@ -271,7 +271,7 @@ void EnvironmentEditor::_updateSkyMenuOptions()
 		// Speed value conversion
 		if (_gui.getGlobalScreen()->checkValueForm("rotationSpeed", skyRotationSpeed))
 		{
-			skyRotationSpeed /= 10000.0f;
+			skyRotationSpeed /= 100.0f;
 		}
 
 		// Lightness value conversion

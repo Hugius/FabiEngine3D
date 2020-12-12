@@ -199,6 +199,7 @@ void SceneEditor::_updatePointLightingMenu()
 				else if (screen->getButton("add")->isHovered())
 				{
 					_isPlacingPointlight = true;
+					_fe3d.misc_setCursorPosition(_fe3d.misc_convertToScreenCoords(Vec2(0.5f)));
 				}
 			}
 		}

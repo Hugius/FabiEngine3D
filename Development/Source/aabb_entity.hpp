@@ -22,7 +22,7 @@ public:
 	void setScaling(Vec3 val);
 	void setParent(const string& ID, AabbParentType type);
 	void setCollisionDirection(const Direction& direction);
-	void setResponsiveness(bool val);
+	void setResponsive(bool val);
 
 	// Getters
 	const Matrix44 & getModelMatrix() const;

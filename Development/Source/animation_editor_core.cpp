@@ -63,7 +63,6 @@ void AnimationEditor::load()
 
 	// Load models
 	_modelEditor.loadGameEntitiesFromFile();
-	_fe3d.gameEntity_setLevelOfDetailDistance(1000.0f);
 
 	// Load animations
 	_isEditorLoading = true;
@@ -91,7 +90,7 @@ void AnimationEditor::unload()
 	// Delete models
 	_fe3d.gameEntity_deleteAll();
 
-	// Delete animation textfields
+	// Delete animation extfields
 	_gui.getGlobalScreen()->deleteTextfield("selectedAnimationName");
 	_gui.getGlobalScreen()->deleteTextfield("selectedAnimationFrame");
 

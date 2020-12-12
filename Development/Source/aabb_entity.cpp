@@ -29,7 +29,7 @@ void AabbEntity::setCollisionDirection(const Direction& direction)
 	_collisionDirection = direction;
 }
 
-void AabbEntity::setResponsiveness(bool val)
+void AabbEntity::setResponsive(bool val)
 {
 	_responsive = val;
 }

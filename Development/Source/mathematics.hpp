@@ -8,9 +8,6 @@
 #include "matrix33.hpp"
 #include "matrix44.hpp"
 
-constexpr float PI = 3.14159265358979323846264338327f;
-constexpr float DEG2RAD = 0.01745329251994329576923690768489f;
-
 class Math final
 {
 public:
@@ -23,4 +20,8 @@ public:
 	{
 		return PI;
 	}
+
+private:
+	static constexpr float PI = 3.14159265358979323846264338327f;
+	static constexpr float DEG2RAD = 0.01745329251994329576923690768489f;
 };

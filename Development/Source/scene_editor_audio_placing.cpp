@@ -8,9 +8,8 @@ void SceneEditor::_updateAudioPlacing()
 		if (!_currentPreviewAudioName.empty())
 		{
 			// Check if mouse behavior isn't being invalid
-			if (_fe3d.misc_isCursorInsideViewport() && 
-				!_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_RIGHT) && 
-				!_gui.getGlobalScreen()->isFocused())
+			if ((_fe3d.misc_isCursorInsideViewport() && !_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_RIGHT) && 
+				!_gui.getGlobalScreen()->isFocused()) || _fe3d.terrainEntity_getSelectedID() == "")
 			{
 				// Default placement position
 				Vec3 newPosition = Vec3(0.0f);
@@ -37,7 +36,8 @@ void SceneEditor::_updateAudioPlacing()
 				}
 
 				// Placing audiocaster
-				if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.terrainEntity_getSelectedID() == "") // Can be bypassed if terrain does not exist
+				if ((_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) && _fe3d.terrainEntity_isValidMousePoint()) // If user pressed LMB
+					|| _fe3d.terrainEntity_getSelectedID() == "") // Can be bypassed if terrain does not exist
 				{
 					// Add new audiocaster
 				begin: int randomSerial = _fe3d.misc_getUniqueInt(0, INT_MAX);
@@ -65,6 +65,16 @@ void SceneEditor::_updateAudioPlacing()
 					// Disable placement mode if no terrain availible to choose position from
 					if (_fe3d.terrainEntity_getSelectedID() == "")
 					{
+						// Hide preview speaker
+						_fe3d.gameEntity_hide(_previewSpeakerID);
+
+						// Stop audio playback
+						if (_fe3d.audioEntity_isPlaying(_currentPreviewAudioName))
+						{
+							_fe3d.audioEntity_stop(_currentPreviewAudioName);
+						}
+
+						// Stop placing
 						_currentPreviewAudioName = "";
 					}
 				}

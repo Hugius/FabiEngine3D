@@ -1,6 +1,7 @@
 #include "billboard_entity_manager.hpp"
 #include "render_bus.hpp"
 #include "logger.hpp"
+#include "mathematics.hpp"
 
 BillboardEntityManager::BillboardEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, RenderBus& renderBus, CameraManager& camera) :
 	BaseEntityManager(EntityType::BILLBOARD, objLoader, texLoader, renderBus),
@@ -9,9 +10,9 @@ BillboardEntityManager::BillboardEntityManager(OBJLoader& objLoader, TextureLoad
 	float plane_data[] =
 	{
 		-0.5f,  0.5f, 0.0f, 0.0f, 1.0f,
-		-0.5f,  -0.5f, 0.0f, 0.0f, 0.0f,
-		 0.5f,  -0.5f, 0.0f, 1.0f, 0.0f,
-		 0.5f,  -0.5f, 0.0f, 1.0f, 0.0f,
+		-0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
+		 0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
+		 0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
 		 0.5f,  0.5f, 0.0f, 1.0f, 1.0f,
 		-0.5f,  0.5f, 0.0f, 0.0f, 1.0f
 	};
@@ -89,11 +90,20 @@ void BillboardEntityManager::update()
 		Vec3 rotation = entity->getRotation();
 		if (facingX || facingY)
 		{
+			// Calculate direction
 			Vec3 direction = entity->getTranslation() - _renderBus.getCameraPosition();
-			float radiansX = atan2f(direction.y, (fabsf(direction.x) + fabsf(direction.z)) / 2.0f);
-			float radiansY = atan2f(direction.z, direction.x);
-			rotation.x = (radiansX * (180.0f / 3.141592653589793238463f)) * facingX;
-			rotation.y = (-(radiansY * (180.0f / 3.141592653589793238463f)) - 90.0f) * facingY;
+
+			// Calculate angles
+			float degreesZ = atan2f(direction.y, fabsf(direction.x) + fabsf(direction.z));
+			float degreesY = atan2f(direction.z, direction.x);
+
+			// Convert to degrees
+			degreesZ *= (180.0f / Math::getPI());
+			degreesY *= (180.0f / Math::getPI());
+
+			// Apply rotation angles
+			rotation.z = (degreesZ) * static_cast<float>(facingX);
+			rotation.y = (-(degreesY) - 90.0f) * static_cast<float>(facingY);
 		}
 
 		// Update rotation

@@ -1,5 +1,5 @@
 @grass user\assets\models\grassfield.obj user\assets\textures\diffuse_maps\grassfield.png ? ? ? 1.5 1.5 1.5 0 1 1 0 0 1 1 0.75 1 1 1 1 ? 0
-@tree1 user\assets\models\tree3.obj user\assets\textures\diffuse_maps\tree3.png ? ? user\assets\textures\normal_maps\tree_3.png 1.5 1.5 1.5 0 1 1 0 0 1 1 1 1 1 1 1 @tree1_lod 0 trunk 0 0 0 0.8 19 0.8 leaves 0 7 0 8.2 12 7.5
+@tree1 user\assets\models\tree3.obj user\assets\textures\diffuse_maps\tree3.png ? ? user\assets\textures\normal_maps\tree_3.png 1.5 1.5 1.5 0 1 1 0 0 1 1 1 1 1 1 1 @tree1_lod 0 trunk 0 0 0 0.8 4.9 0.8 leaves 0 5 0 5.2 8 4.5
 @tree1_lod user\assets\models\tree_lod.obj user\assets\textures\diffuse_maps\tree3_lod.png ? ? ? 5 9.5 5 0 0 1 0 0 1 1 0.75 1 1 1 1 ? 0
 @tree2 user\assets\models\tree2.obj user\assets\textures\diffuse_maps\tree2.png ? ? ? 3 3 3 0 1 1 0 0 1 1 1 1 1 1 1 @tree2_lod 0 trunk 0 0 0 1 9 1 leaves 0 8.75 0 12.75 8.25 10.25
 @tree2_lod user\assets\models\tree_lowpoly.obj ? ? ? ? 3 3.5 3 0 1 1 0 0 1 1 1 1 1 1 1 ? 0

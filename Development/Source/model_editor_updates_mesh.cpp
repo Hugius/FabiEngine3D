@@ -46,6 +46,7 @@ void ModelEditor::_updateModelEditingMesh()
 		}
 
 		// Editing buttons hoverability
+		screen->getButton("loadOBJ")->setHoverable(!existing);
 		screen->getButton("loadDiffuseMap")->setHoverable(hoverable);
 		screen->getButton("loadLightMap")->setHoverable(hoverable);
 		screen->getButton("loadNormalMap")->setHoverable(hoverable);

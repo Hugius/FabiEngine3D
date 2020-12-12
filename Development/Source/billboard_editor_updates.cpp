@@ -228,8 +228,8 @@ void BillboardEditor::_updateBillboardCamera()
 		if (_currentBillboardID != "" || _hoveredBillboardID != "")
 		{
 			Vec2 billboardSize = _fe3d.billboardEntity_getSize((_currentBillboardID != "") ? _currentBillboardID : _hoveredBillboardID);
-			float cameraDistance = (std::max(billboardSize.x, billboardSize.y) * 2.0f);
-			float cameraHeight = _billboardPosition.y + (billboardSize.y / 2.0f);
+			float cameraDistance = (std::max(billboardSize.x, billboardSize.y));
+			float cameraHeight = _billboardPosition.y;
 
 			// Get scroll wheel input
 			if (!_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isCursorInsideViewport())

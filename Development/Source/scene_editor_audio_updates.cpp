@@ -76,6 +76,7 @@ void SceneEditor::_updateAudioPlacingMenu()
 							string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedAudioName")->getEntityID();
 							_fe3d.textEntity_show(textEntityID);
 							_fe3d.textEntity_setTextContent(textEntityID, "Audio: " + _currentPreviewAudioName.substr(1), 0.025f);
+							_fe3d.misc_setCursorPosition(_fe3d.misc_convertToScreenCoords(Vec2(0.5f)));
 							break;
 						}
 					}

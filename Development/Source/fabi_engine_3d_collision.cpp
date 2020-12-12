@@ -6,9 +6,10 @@ void FabiEngine3D::aabbEntity_deleteAll()
 	_core->_aabbEntityManager.deleteAllEntities();
 }
 
-void FabiEngine3D::aabbEntity_add(const string& ID, Vec3 position, Vec3 size, bool responsive)
+void FabiEngine3D::aabbEntity_add(const string& ID, Vec3 position, Vec3 size, bool responsive, bool visible)
 {
 	_core->_aabbEntityManager.addAabbEntity(ID, position, size, responsive);
+	_core->_aabbEntityManager.getEntity(ID)->setVisible(visible);
 }
 
 void FabiEngine3D::aabbEntity_bindToGameEntity(const string& parentID, Vec3 position, Vec3 size, bool responsive, const string& customAabbID)
@@ -78,9 +79,14 @@ void FabiEngine3D::aabbEntity_show(const string& ID)
 	_core->_aabbEntityManager.getEntity(ID)->setVisible(true);
 }
 
-void FabiEngine3D::aabbEntity_setResponsiveness(const string& ID, bool responsive)
+void FabiEngine3D::aabbEntity_setResponsive(const string& ID, bool responsive)
 {
-	_core->_aabbEntityManager.getEntity(ID)->setResponsiveness(responsive);
+	_core->_aabbEntityManager.getEntity(ID)->setResponsive(responsive);
+}
+
+void FabiEngine3D::aabbEntity_setVisible(const string& ID, bool visible)
+{
+	_core->_aabbEntityManager.getEntity(ID)->setVisible(visible);
 }
 
 void FabiEngine3D::aabbEntity_setPosition(const string& ID, Vec3 position)

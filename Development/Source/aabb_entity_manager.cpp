@@ -57,7 +57,7 @@ void AabbEntityManager::addAabbEntity(const string& ID, Vec3 position, Vec3 size
 	getEntity(ID)->setLocalScaling(size);
 	getEntity(ID)->setTranslation(position);
 	getEntity(ID)->setScaling(size);
-	getEntity(ID)->setResponsiveness(responsive);
+	getEntity(ID)->setResponsive(responsive);
 }
 
 void AabbEntityManager::bindAabbEntity(const string& ID, const string& parentID, AabbParentType parentType, Vec3 position, Vec3 size, bool responsive)
@@ -84,13 +84,11 @@ void AabbEntityManager::update(
 				{
 					if (entity->getParentID() == parentEntity->getID()) // Check for match
 					{
-						Vec3 parentSizeChange = parentEntity->getScaling() / parentEntity->getOriginalScaling();
-
 						// Update scaling (based on parent scaling)
-						entity->setScaling(entity->getLocalScaling() * parentSizeChange);
+						entity->setScaling(entity->getLocalScaling() * parentEntity->getScaling());
 
 						// Update translation (based on parent translation + scaling)
-						entity->setTranslation(parentEntity->getTranslation() + (entity->getLocalTranslation() * parentSizeChange));
+						entity->setTranslation(parentEntity->getTranslation() + (entity->getLocalTranslation() * parentEntity->getScaling()));
 
 						// Update visibility
 						entity->setVisible(parentEntity->isVisible());

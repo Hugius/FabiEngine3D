@@ -290,6 +290,7 @@ void SceneEditor::_updateDofGraphicsSettingsMenu()
 		}
 
 		// Update buttons hoverability
+		screen->getButton("dynamic")->setHoverable(enabled);
 		screen->getButton("blurDistance")->setHoverable(enabled);
 		screen->getButton("maxDistance")->setHoverable(enabled && dynamic);
 	}

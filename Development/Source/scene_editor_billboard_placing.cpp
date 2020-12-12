@@ -8,7 +8,8 @@ void SceneEditor::_updateBillboardPlacing()
 		if (!_currentPreviewBillboardName.empty())
 		{
 			// Check if mouse behavior isn't being invalid
-			if (_fe3d.misc_isCursorInsideViewport() && !_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_RIGHT) && !_gui.getGlobalScreen()->isFocused())
+			if ((_fe3d.misc_isCursorInsideViewport() && !_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_RIGHT) && 
+				!_gui.getGlobalScreen()->isFocused()) || _fe3d.terrainEntity_getSelectedID() == "")
 			{
 				// Default placement position
 				Vec3 newPosition = Vec3(0.0f);
@@ -49,6 +50,7 @@ void SceneEditor::_updateBillboardPlacing()
 					// Disable placement mode if no terrain availible to choose position from
 					if (_fe3d.terrainEntity_getSelectedID() == "")
 					{
+						_fe3d.billboardEntity_hide(_currentPreviewBillboardName);
 						_currentPreviewBillboardName = "";
 					}
 				}

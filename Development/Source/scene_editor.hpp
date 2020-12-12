@@ -153,10 +153,10 @@ private:
 
 	// Lighting variables
 	bool _isPlacingPointlight = false;
-	const string _previewPointlightID = "@previewPointlight";
+	const string _previewPointlightID = "@@previewPointlight";
 	const string _lightBulbModelPath = "engine\\models\\lamp.obj";
 	const Vec3 _defaultLightbulbSize = Vec3(1.0f);
-	const Vec3 _defaultLightbulbAabbSize = Vec3(1.0f, 1.25f, 1.0f);
+	const Vec3 _defaultLightbulbAabbSize = Vec3(0.7f, 1.15f, 0.7f);
 	const float _lightbulbAnimationSpeed = 0.01f;
 	const float _lightingChangingSpeed = 0.01f;
 	const float _lightingColorChangingSpeed = 0.005f;
@@ -172,7 +172,7 @@ private:
 	const string _previewSpeakerID = "@previewSpeaker";
 	const string _speakerModelPath = "engine\\models\\speaker.obj";
 	const Vec3 _defaultSpeakerSize = Vec3(1.0f);
-	const Vec3 _defaultSpeakerAabbSize = Vec3(1.25f, 1.25f, 1.0f);
+	const Vec3 _defaultSpeakerAabbSize = Vec3(1.25f, 1.3f, 1.0f);
 	const float _defaultAudioMaxDistance = 25.0f;
 	const float _speakerAnimationSpeed = 0.01f;
 	const float _audioVolumeChangingSpeed = 0.01f;

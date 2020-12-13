@@ -21,30 +21,19 @@ Config::Config()
 	}
 
 	// Store config file content
-	_processOption(file, _windowFullscreen);
+	_processOption(file, _windowSizeMultiplier);
 	
 	// Set window dimensions
 	SDL_DisplayMode DM;
 	SDL_GetDesktopDisplayMode(0, &DM);
-	if (_windowFullscreen)
-	{
-		_windowWidth  = static_cast<int>(static_cast<float>(DM.w));
-		_windowHeight = static_cast<int>(static_cast<float>(DM.h));
-	}
-	else
-	{
-		_windowWidth  = static_cast<int>(static_cast<float>(DM.w) * 0.9f);
-		_windowHeight = static_cast<int>(static_cast<float>(DM.h) * 0.9f);
-	}
+	_windowWidth = static_cast<int>(static_cast<float>(DM.w) * _windowSizeMultiplier);
+	_windowHeight = static_cast<int>(static_cast<float>(DM.h) * _windowSizeMultiplier);
 
 	// Set viewport dimensions
 	_viewportPosition.x = static_cast<int>(0.125f * static_cast<float>(_windowWidth));
 	_viewportPosition.y = static_cast<int>(0.2f * static_cast<float>(_windowHeight));
 	_viewportSize.x		= static_cast<int>(0.75f * static_cast<float>(_windowWidth));
 	_viewportSize.y		= static_cast<int>(0.75f * static_cast<float>(_windowHeight));
-
-	// Set update speed
-	_updateMsPerFrame = 6.94f; // 144 hz
 }
 
 void Config::_processOption(std::ifstream& file, bool& option)

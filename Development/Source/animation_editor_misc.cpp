@@ -69,23 +69,33 @@ void AnimationEditor::_updateMiscellaneous()
 						// Check if model has part
 						if (_fe3d.gameEntity_hasPart(currentAnimation->previewModelID, partName) || partName.empty())
 						{
-							// Determine type of transformation
-							if (frame.transformationTypes[partName] == TransformationType::TRANSLATION)
+							if (_currentFrameIndex == 0) // Default frame
 							{
-								_fe3d.gameEntity_setPosition(currentAnimation->previewModelID, 
-									currentAnimation->initialTranslation + frame.targetTransformations[partName], partName);
+								_fe3d.gameEntity_setPosition(currentAnimation->previewModelID, currentAnimation->initialTranslation, partName);
+								_fe3d.gameEntity_setRotationOrigin(currentAnimation->previewModelID, currentAnimation->initialRotationOrigin, partName);
+								_fe3d.gameEntity_setRotation(currentAnimation->previewModelID, currentAnimation->initialRotation, partName);
+								_fe3d.gameEntity_setSize(currentAnimation->previewModelID, currentAnimation->initialScaling, partName);
 							}
-							else if (frame.transformationTypes[partName] == TransformationType::ROTATION)
+							else // Frame created by user
 							{
-								_fe3d.gameEntity_setRotationOrigin(currentAnimation->previewModelID, 
-									(modelSize * frame.rotationOrigins[partName]), partName);
-								_fe3d.gameEntity_setRotation(currentAnimation->previewModelID, 
-									currentAnimation->initialRotation + frame.targetTransformations[partName], partName);
-							}
-							else if (frame.transformationTypes[partName] == TransformationType::SCALING)
-							{
-								_fe3d.gameEntity_setSize(currentAnimation->previewModelID, 
-									currentAnimation->initialScaling + frame.targetTransformations[partName], partName);
+								// Determine type of transformation
+								if (frame.transformationTypes[partName] == TransformationType::TRANSLATION)
+								{
+									_fe3d.gameEntity_setPosition(currentAnimation->previewModelID,
+										currentAnimation->initialTranslation + frame.targetTransformations[partName], partName);
+								}
+								else if (frame.transformationTypes[partName] == TransformationType::ROTATION)
+								{
+									_fe3d.gameEntity_setRotationOrigin(currentAnimation->previewModelID,
+										currentAnimation->initialRotationOrigin + (modelSize * frame.rotationOrigins[partName]), partName);
+									_fe3d.gameEntity_setRotation(currentAnimation->previewModelID,
+										currentAnimation->initialRotation + frame.targetTransformations[partName], partName);
+								}
+								else if (frame.transformationTypes[partName] == TransformationType::SCALING)
+								{
+									_fe3d.gameEntity_setSize(currentAnimation->previewModelID,
+										currentAnimation->initialScaling + frame.targetTransformations[partName], partName);
+								}
 							}
 						}
 					}

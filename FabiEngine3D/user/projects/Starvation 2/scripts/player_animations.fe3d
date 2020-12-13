@@ -1,4 +1,4 @@
-28 8
+46 13
 META script_type_update
 
 /// Walking skeleton animation
@@ -29,3 +29,26 @@ IF isPlaying IS <true>:
     IF _isRunning IS <true>:
         MUL speed 2.0
     fe3d:model_animation_speed_set("walk", "player", speed)
+
+BOOL lmb = fe3d:input_mouse_pressed("BUTTON_LEFT")
+EDIT isPlaying = fe3d:model_animation_isplaying("axe_cut", "axe")
+DECR yaw 20.0
+EDIT sinRot = math:sin(yaw)
+EDIT cosRot = math:cos(yaw)
+MUL sinRot 1.25
+MUL cosRot 1.25
+VEC3 ak47pos = camPos
+INCR ak47pos.x sinRot
+INCR ak47pos.z cosRot
+INCR ak47pos.y 1.0
+fe3d:model_position_set("axe", ak47pos.x, ak47pos.y, ak47pos.z)
+VEC3 axeRot = fe3d:model_rotation_get("axe")
+EDIT yaw = fe3d:camera_yaw_get()
+NEG yaw
+INCR yaw 90.0
+EDIT axeRot.y = yaw
+fe3d:model_rotation_set("axe", axeRot.x, axeRot.y, axeRot.z)
+
+/// Play axe cutting animation
+IF lmb IS <true> AND isPlaying IS <false>:
+    fe3d:model_animation_start("axe_cut", "axe", 1)

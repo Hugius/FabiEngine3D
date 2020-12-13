@@ -11,6 +11,7 @@ uniform mat4 u_lightSpaceMatrix;
 uniform mat4 u_modelMatrix;
 
 // Float uniforms
+uniform float u_currentY;
 uniform float u_maxY;
 
 // Boolean uniforms
@@ -26,7 +27,7 @@ void main()
 	vec4 lightSpacePos = u_lightSpaceMatrix * worldSpacePos;
 
 	gl_Position = lightSpacePos;
-	gl_ClipDistance[1] = dot(worldSpacePos, vec4(0.0f, -1.0f, 0.0f, u_maxY));
+	gl_ClipDistance[1] = dot(worldSpacePos, vec4(0.0f, -1.0f, 0.0f, u_currentY + u_maxY));
 	
 	f_uv = vec2(v_uv.x, -v_uv.y);
 	f_pos = v_pos;

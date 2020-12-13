@@ -1,13 +1,15 @@
 #pragma once
 
 #include "viewport_controller.hpp"
+#include "top_viewport_controller.hpp"
+#include "script_editor.hpp"
 
 #define BVPC BottomViewportController
 
 class BottomViewportController final : public ViewportController
 {
 public:
-	using ViewportController::ViewportController;
+	BottomViewportController(FabiEngine3D& fe3d, EngineGuiManager& gui, TopViewportController& topViewportController, ScriptEditor& scriptEditor);
 
 	void initialize() override;
 	void update() override;
@@ -19,6 +21,9 @@ public:
 	static inline const Vec3 textHoverColor = Vec3(0.0f);
 
 private:
+	TopViewportController& _topViewportController;
+	ScriptEditor& _scriptEditor;
+
 	shared_ptr<EngineGuiScreen> _statsScreen;
 
 	vector<pair<string, string>> _consoleMessageStack;
@@ -27,6 +32,7 @@ private:
 
 	void _updateConsoleScrolling();
 	void _addConsoleMessage(const string& newMessage);
+	void _deleteConsoleMessage(const string& ID);
 
 	float _scrollingAcceleration = 0.0f;
 };

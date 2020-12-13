@@ -65,6 +65,7 @@ void BillboardEntityRenderer::render(const shared_ptr<BillboardEntity> entity)
 		_shader.uploadUniform("u_lightness", entity->getLightness());
 		_shader.uploadUniform("u_uvAdder", uvAdder);
 		_shader.uploadUniform("u_uvMultiplier", uvMultiplier);
+		_shader.uploadUniform("u_currentY", entity->getTranslation().y);
 		_shader.uploadUniform("u_maxY", entity->getMaxY());
 
 		// Texture

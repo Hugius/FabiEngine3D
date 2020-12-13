@@ -704,6 +704,10 @@ public:
 	{
 		return Logger::getMessageStack();
 	}
+	inline void logger_clearMessageStack()
+	{
+		return Logger::clearMessageStack();
+	}
 
 	// Miscellaneous interface - setters
 	void misc_setCustomCursor(const string& guiEntityID);

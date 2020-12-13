@@ -19,6 +19,7 @@ uniform vec2 u_uvAdder;
 uniform vec2 u_uvMultiplier;
 
 // Float uniforms
+uniform float u_currentY;
 uniform float u_maxY;
 
 // Boolean uniforms
@@ -38,7 +39,7 @@ void main()
 	// GLSL variables
 	gl_Position = clipSpacePos;
 	gl_ClipDistance[0] = dot(worldSpacePos, u_clippingPlane);
-	gl_ClipDistance[1] = dot(worldSpacePos, vec4(0.0f, -1.0f, 0.0f, u_maxY));
+	gl_ClipDistance[1] = dot(worldSpacePos, vec4(0.0f, -1.0f, 0.0f, u_currentY + u_maxY));
 	
 	// Out variables
 	f_uv = vec2(u_uvAdder.x + (v_uv.x * u_uvMultiplier.x), u_uvAdder.y + (-v_uv.y * u_uvMultiplier.y));

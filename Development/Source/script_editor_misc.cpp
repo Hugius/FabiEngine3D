@@ -99,3 +99,8 @@ bool ScriptEditor::isLoaded()
 {
 	return _isEditorLoaded;
 }
+
+bool ScriptEditor::isWritingScript()
+{
+	return !_currentScriptFileID.empty();
+}

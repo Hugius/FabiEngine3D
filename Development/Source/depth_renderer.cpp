@@ -91,6 +91,7 @@ void DepthRenderer::render(const shared_ptr<GameEntity> entity)
 
 		// Shader uniforms
 		_shader.uploadUniform("u_isAlphaObject", entity->isTransparent());
+		_shader.uploadUniform("u_currentY", entity->getTranslation().y);
 		_shader.uploadUniform("u_maxY", entity->getMaxY());
 		_shader.uploadUniform("u_isBillboard", false);
 
@@ -171,6 +172,8 @@ void DepthRenderer::render(const shared_ptr<BillboardEntity> entity)
 		// Shader uniforms
 		_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix());
 		_shader.uploadUniform("u_isAlphaObject", entity->isTransparent());
+		_shader.uploadUniform("u_currentY", entity->getTranslation().y);
+		_shader.uploadUniform("u_maxY", entity->getMaxY());
 		_shader.uploadUniform("u_uvAdder", uvAdder);
 		_shader.uploadUniform("u_uvMultiplier", uvMultiplier);
 		_shader.uploadUniform("u_isBillboard", true);

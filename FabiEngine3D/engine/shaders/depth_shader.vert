@@ -17,6 +17,7 @@ uniform vec2 u_uvAdder;
 uniform vec2 u_uvMultiplier;
 
 // Float uniforms
+uniform float u_currentY;
 uniform float u_maxY;
 
 // Boolean uniforms
@@ -35,7 +36,7 @@ void main()
 
 	// GLSL variables
 	gl_Position = clipSpacePos;
-	gl_ClipDistance[1] = dot(worldSpacePos, vec4(0.0f, -1.0f, 0.0f, u_maxY));
+	gl_ClipDistance[1] = dot(worldSpacePos, vec4(0.0f, -1.0f, 0.0f, u_currentY + u_maxY));
 	
 	// Out variables
     if(u_isBillboard)

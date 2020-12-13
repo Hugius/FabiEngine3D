@@ -35,6 +35,7 @@ void ShadowRenderer::render(const shared_ptr<GameEntity> entity)
 
 		// Uniforms
 		_shader.uploadUniform("u_alphaObject", entity->isTransparent());
+		_shader.uploadUniform("u_currentY", entity->getTranslation().y);
 		_shader.uploadUniform("u_maxY", entity->getMaxY());
 		_shader.uploadUniform("u_sampler_diffuseMap", 0);
 

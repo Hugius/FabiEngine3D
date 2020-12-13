@@ -5,6 +5,15 @@
 
 #define GW(text) LVPC::calcTextWidth(text, 0.04f, 2.0f)
 
+BottomViewportController::BottomViewportController(FabiEngine3D& fe3d, EngineGuiManager& gui, 
+	TopViewportController& topViewportController, ScriptEditor& scriptEditor) :
+	ViewportController(fe3d, gui),
+	_topViewportController(topViewportController),
+	_scriptEditor(scriptEditor)
+{
+
+}
+
 void BottomViewportController::initialize()
 {
 	// Bottom-viewport: statistics
@@ -224,6 +233,21 @@ void BottomViewportController::update()
 		{
 			string textID = _statsScreen->getTextfield(key)->getEntityID();
 			_fe3d.textEntity_setTextContent(textID, key + ": " + to_string(value) + "%", _charSize.x, _charSize.y);
+		}
+	}
+
+	// Console text clearing
+	if (_fe3d.input_getKeyPressed(InputType::KEY_X))
+	{
+		// Validate
+		if (!_topViewportController.isScriptRunning() && !_gui.getGlobalScreen()->isFocused() && !_scriptEditor.isWritingScript())
+		{
+			_fe3d.logger_clearMessageStack();
+			for (const auto& [ID, message] : _consoleMessageStack)
+			{
+				_deleteConsoleMessage(ID);
+			}
+			_consoleMessageStack.clear();
 		}
 	}
 

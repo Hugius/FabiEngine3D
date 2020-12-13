@@ -100,6 +100,41 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 
 		return true;
 	}
+	else if (functionName == "fe3d:model_rotationorigin_set") // Set gameEntity rotation oriign
+	{
+		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
+
+		// Validate arguments
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existing model ID
+			if (_validateFe3dGameEntity(arguments[0].getString()))
+			{
+				_fe3d.gameEntity_setRotationOrigin(arguments[0].getString(),
+					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			}
+		}
+
+		return true;
+	}
+	else if (functionName == "fe3d:model_rotationorigin_get") // Get gameEntity rotation origin
+	{
+		auto types = { ScriptValueType::STRING };
+
+		// Validate arguments
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existing model ID
+			if (_validateFe3dGameEntity(arguments[0].getString()))
+			{
+				auto result = _fe3d.gameEntity_getRotationOrigin(arguments[0].getString());
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));
+			}
+		}
+
+		return true;
+	}
 	else if (functionName == "fe3d:model_rotation_set") // Set gameEntity rotation
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };

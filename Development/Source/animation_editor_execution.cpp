@@ -345,6 +345,11 @@ void AnimationEditor::_updateAnimationExecution()
 	// Remove all animations that ended
 	for (auto& idPair : animationsToStopSet)
 	{
+		//for (auto partName : _playingAnimations.at(idPair).partNames)
+		//{
+		//	_fe3d.gameEntity_setRotationOrigin(_playingAnimations.at(idPair).animatedModelID, Vec3(0.0f), partName);
+		//}
+
 		stopAnimation(idPair.first, idPair.second);
 	}
 

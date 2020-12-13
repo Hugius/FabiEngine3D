@@ -36,10 +36,12 @@ private:
 	void _processOption(std::ifstream& file, float& option);
 	
 	// Variables
-	bool  _windowFullscreen = false;
 	int   _windowWidth = 0;
 	int   _windowHeight = 0;
 	Ivec2 _viewportPosition = Ivec2(0);
 	Ivec2 _viewportSize = Ivec2(0);
-	float _updateMsPerFrame = 0.0f;
+	float _windowSizeMultiplier = 1.0f;
+
+	// Constants
+	const float _updateMsPerFrame = 6.94f; // 144 hz
 };

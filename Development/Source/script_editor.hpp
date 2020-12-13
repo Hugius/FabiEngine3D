@@ -22,6 +22,7 @@ public:
 	ScriptExecutor& getScriptExecutor(bool reloadScript);
 
 	bool isLoaded();
+	bool isWritingScript();
 
 private:
 	void _updateGUI();

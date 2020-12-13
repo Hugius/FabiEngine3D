@@ -85,7 +85,14 @@ void TopViewportController::_updateProjectManagement()
 			}
 			else if (screen->getButton("quitEngine")->isHovered())
 			{
-				_fe3d.engine_stop();
+				if (_currentProjectName != "") // A project must be loaded
+				{
+					_gui.getGlobalScreen()->addAnswerForm("exitEngine", "Save changes?", Vec2(0.0f, 0.25f));
+				}
+				else // Otherwise, just exit the engine
+				{
+					_fe3d.engine_stop();
+				}
 			}
 		}
 
@@ -95,12 +102,22 @@ void TopViewportController::_updateProjectManagement()
 		_updateProjectDeletion();
 
 		// Update save button hoverability
-		bool scriptRunning = (_currentProjectName == "") ? false : SCRIPT_EXECUTOR.isInitialized();
-		screen->getButton("newProject")->setHoverable(!scriptRunning);
-		screen->getButton("loadProject")->setHoverable(!scriptRunning);
-		screen->getButton("saveProject")->setHoverable(!scriptRunning && _currentProjectName != "");
-		screen->getButton("deleteProject")->setHoverable(!scriptRunning);
-		screen->getButton("quitEngine")->setHoverable(!scriptRunning);
+		screen->getButton("newProject")->setHoverable(!isScriptRunning());
+		screen->getButton("loadProject")->setHoverable(!isScriptRunning());
+		screen->getButton("saveProject")->setHoverable(!isScriptRunning() && _currentProjectName != "");
+		screen->getButton("deleteProject")->setHoverable(!isScriptRunning());
+		screen->getButton("quitEngine")->setHoverable(!isScriptRunning());
+
+		// Check if user wants to save changes
+		if (_gui.getGlobalScreen()->isAnswerFormConfirmed("exitEngine"))
+		{
+			_saveCurrentProject();
+			_fe3d.engine_stop();
+		}
+		else if (_gui.getGlobalScreen()->isAnswerFormCancelled("exitEngine"))
+		{
+			_fe3d.engine_stop();
+		}
 	}
 }
 

@@ -72,18 +72,36 @@ void AnimationEditor::setAnimationSpeedMultiplier(const string animationID, cons
 
 bool AnimationEditor::isAnimationPlaying(const string& animationID, const string& modelID)
 {
-	return _playingAnimations.find(make_pair(animationID, modelID)) != _playingAnimations.end();
+	// Temporary values
+	string errorMessage = "Trying to retrieve animation play status with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
+
+	// Check if animation does not exist
+	if (!_isAnimationExisting(animationID))
+	{
+		_fe3d.logger_throwWarning(errorMessage + "animation not existing!");
+		return false;
+	}
+	else
+	{
+		return _playingAnimations.find(make_pair(animationID, modelID)) != _playingAnimations.end();
+	}
 }
 
 bool AnimationEditor::isAnimationPaused(const string& animationID, const string& modelID)
 {
-	// Check if animation exists
-	if (_isAnimationExisting(animationID))
+	// Temporary values
+	string errorMessage = "Trying to retrieve animation pause status with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
+
+	// Check if animation does not exist
+	if (!_isAnimationExisting(animationID))
+	{
+		_fe3d.logger_throwWarning(errorMessage + "animation not existing!");
+		return false;
+	}
+	else
 	{
 		return _playingAnimations.at(make_pair(animationID, modelID)).isPaused;
 	}
-
-	return false;
 }
 
 void AnimationEditor::pauseAnimation(const string& animationID, const string& modelID)

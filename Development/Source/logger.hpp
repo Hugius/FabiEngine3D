@@ -56,6 +56,11 @@ public:
 		return _messageStack;
 	}
 
+	inline static void clearMessageStack()
+	{
+		return _messageStack.clear();
+	}
+
 private:
 	inline static string _level_string[4] = { "Info", "Error", "Debug", "Warn" };
 

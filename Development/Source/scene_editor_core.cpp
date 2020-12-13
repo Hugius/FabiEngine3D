@@ -466,6 +466,7 @@ void SceneEditor::unload()
 	_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuBillboardChoice")->getScrollingList("billboards")->deleteButtons();
 	_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuAudioPlace")->getScrollingList("audiocasters")->deleteButtons();
 	_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuAudioChoice")->getScrollingList("audiocasters")->deleteButtons();
+	_fe3d.collision_disableCameraResponse();
 	_fe3d.misc_disableAabbFrameRendering();
 	_fe3d.misc_disableWireframeRendering();
 	_fe3d.misc_disableDebugRendering();

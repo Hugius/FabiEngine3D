@@ -35,7 +35,7 @@ private:
 	bool _isBooleanValue(const string& valueString);
 	Vec3 _extractVec3FromString(const string& valueString);
 	Ivec3 _extractVec3PartFromString(const string& valueString);
-	int _extractListIndexFromString(const string& valueString, bool& noListAccesss);
+	int _extractListIndexFromString(const string& valueString, bool& isAccessingList);
 
 	// Variable functions
 	void _processVariableCreation(const string& scriptLine, ScriptVariableScope scope);

@@ -20,27 +20,29 @@ public:
 
 	const string ID;
 
-	string previewModelID = "";
-	string oldPreviewModelID = "";
-	string animatedModelID = "";
-
-	unsigned int frameIndex = 0;
-
-	int timesToPlay = 0;
-	int fadeFramestep = -1;
-	int maxFrameIndex = -1;
-
 	vector<AnimationFrame> frames;
 	vector<string> partNames;
+
+	map<string, Vec3> totalTranslations;
+	map<string, Vec3> totalRotations;
+	map<string, Vec3> totalScalings;
 
 	Vec3 initialTranslation = Vec3(0.0f);
 	Vec3 initialRotation = Vec3(0.0f);
 	Vec3 initialScaling = Vec3(0.0f);
 	Vec3 initialColor = Vec3(0.0f);
 
-	bool isPaused = false;
+	string previewModelID = "";
+	string oldPreviewModelID = "";
+	string animatedModelID = "";
 
-	map<string, Vec3> totalTranslations;
-	map<string, Vec3> totalRotations;
-	map<string, Vec3> totalScalings;
+	float speedMultiplier = 1.0f;
+
+	int timesToPlay = 0;
+	int fadeFramestep = -1;
+	int maxFrameIndex = -1;
+
+	unsigned int frameIndex = 0;
+
+	bool isPaused = false;
 };

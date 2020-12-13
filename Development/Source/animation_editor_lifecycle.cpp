@@ -46,6 +46,30 @@ void AnimationEditor::startAnimation(const string& animationID, const string& mo
 	}
 }
 
+void AnimationEditor::setAnimationSpeedMultiplier(const string animationID, const string& modelID, float speed)
+{
+	// Temporary values
+	string errorMessage = "Trying to set animation speed with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
+
+	// Check if animation exists
+	if (_isAnimationExisting(animationID))
+	{
+		// Check if animation is playing
+		if (isAnimationPlaying(animationID, modelID))
+		{
+			_playingAnimations.at(make_pair(animationID, modelID)).speedMultiplier = speed;
+		}
+		else
+		{
+			_fe3d.logger_throwWarning(errorMessage + "is not playing!");
+		}
+	}
+	else
+	{
+		_fe3d.logger_throwWarning(errorMessage + "animation not existing!");
+	}
+}
+
 bool AnimationEditor::isAnimationPlaying(const string& animationID, const string& modelID)
 {
 	return _playingAnimations.find(make_pair(animationID, modelID)) != _playingAnimations.end();

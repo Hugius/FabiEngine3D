@@ -49,12 +49,13 @@ void AnimationEditor::_updateAnimationExecution()
 			const auto& isTranslation = (transformationType == TransformationType::TRANSLATION);
 			const auto& isRotation = (transformationType == TransformationType::ROTATION);
 			const auto& isScaling = (transformationType == TransformationType::SCALING);
+			const auto& speed = frame.speeds[partName] * animation.speedMultiplier;
 
 			// Mutable values
 			auto& totalTranslation = animation.totalTranslations[partName];
 			auto& totalRotation = animation.totalRotations[partName];
 			auto& totalScaling = animation.totalScalings[partName];
-			auto& speed = frame.speeds[partName];
+			auto& baseSpeed = frame.speeds[partName];
 
 			// Check if reached transformation of current frame
 			if (((isTranslation && _hasReachedFloat(totalTranslation.x, targetTransformation.x, speed)) &&
@@ -93,7 +94,7 @@ void AnimationEditor::_updateAnimationExecution()
 					// Increase speed if exponential
 					if (speedType == AnimationSpeedType::EXPONENTIAL)
 					{
-						speed += (speed / 100.0f);
+						baseSpeed += (baseSpeed / 100.0f);
 					}
 
 					// Check if animation reached transformation now
@@ -158,7 +159,7 @@ void AnimationEditor::_updateAnimationExecution()
 					// Increase speed if exponential
 					if (speedType == AnimationSpeedType::EXPONENTIAL)
 					{
-						speed += (speed / 100.0f);
+						baseSpeed += (baseSpeed / 100.0f);
 					}
 
 					// Check if animation reached transformation now
@@ -223,7 +224,7 @@ void AnimationEditor::_updateAnimationExecution()
 					// Increase speed if exponential
 					if (speedType == AnimationSpeedType::EXPONENTIAL)
 					{
-						speed += (speed / 100.0f);
+						baseSpeed += (baseSpeed / 100.0f);
 					}
 
 					// Check if animation reached transformation now

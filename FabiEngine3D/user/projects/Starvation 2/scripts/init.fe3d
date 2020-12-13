@@ -1,9 +1,8 @@
-4 0
+15 57
 META script_type_init
 META execution_entry
 
 EXEC movement_init
-
 GLOB DEC _skellieRotation = 0.0
 
 fe3d:scene_load("scene")

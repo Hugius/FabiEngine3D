@@ -288,6 +288,19 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 
 		return true;
 	}
+	else if (functionName == "fe3d:model_animation_speed_set") // Set gameEntity animation speed multiplier
+	{
+		auto types = { ScriptValueType::STRING, ScriptValueType::STRING, ScriptValueType::DECIMAL };
+
+		// Validate arguments
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		{
+			_animationEditor.setAnimationSpeedMultiplier(arguments[0].getString(), arguments[1].getString(), arguments[2].getDecimal());
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+		}
+
+		return true;
+	}
 	else if (functionName == "fe3d:model_animation_isplaying") // Check if gameEntity animation is playing
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::STRING };

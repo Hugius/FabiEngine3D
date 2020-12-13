@@ -1,4 +1,4 @@
-17 52
+28 8
 META script_type_update
 
 /// Walking skeleton animation
@@ -23,3 +23,9 @@ IF _isWalking IS <true> AND isPlaying IS <false>:
     fe3d:model_animation_start("walk", "player", -1)
 ELIF _isWalking IS <false> AND isPlaying IS <true>:
     fe3d:model_animation_fade("walk", "player", 1)
+
+IF isPlaying IS <true>:
+    DEC speed = 1.0
+    IF _isRunning IS <true>:
+        MUL speed 2.0
+    fe3d:model_animation_speed_set("walk", "player", speed)

@@ -19,6 +19,7 @@ public:
 	void loadAnimationsFromFile();
 	void saveAnimationsToFile();
 	void startAnimation(const string& animationID, const string& modelID, int timesToPlay);
+	void setAnimationSpeedMultiplier(const string animationID, const string& modelID, float speed);
 	void pauseAnimation(const string& animationID, const string& modelID);
 	void resumeAnimation(const string& animationID, const string& modelID);
 	void stopAnimation(const string& animationID, const string& modelID);

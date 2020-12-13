@@ -1,13 +1,9 @@
-9 31
+4 0
 META script_type_init
 META execution_entry
 
-/// Global variables
-GLOB BOOL _isJumping = <false>
-GLOB BOOL _isFalling = <false>
-GLOB BOOL _isWalking = <false>
-GLOB CONST DEC _minCamHeight = 9.0
-GLOB DEC _jumpingSpeed = 0.1
+EXEC movement_init
+
 GLOB DEC _skellieRotation = 0.0
 
 fe3d:scene_load("scene")
@@ -15,6 +11,8 @@ fe3d:camera_position_set(-37.0, _minCamHeight, -51.0)
 fe3d:camera_firstperson_enable()
 fe3d:misc_cursor_hide()
 fe3d:model_place("skellie", "skeleton", -40.0, 6.4, -50.0)
-fe3d:model_animation_start("skeleton_walk", "skellie", -1)
+fe3d:model_animation_start("walk", "skellie", -1)
+fe3d:model_place("player", "skeleton", 0.0, 0.0, 0.0)
+fe3d:model_maxheight_set("player", 2.5)
 fe3d:model_place("millie", "mill", -60.0, 6.4, -50.0)
 fe3d:model_animation_start("mill_rotation", "millie", -1)

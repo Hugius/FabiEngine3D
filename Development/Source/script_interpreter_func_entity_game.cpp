@@ -206,6 +206,75 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 
 		return true;
 	}
+	else if (functionName == "fe3d:model_color_set") // Set gameEntity color
+	{
+		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
+
+		// Validate arguments
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existing model ID
+			if (_validateFe3dGameEntity(arguments[0].getString()))
+			{
+				_fe3d.gameEntity_setColor(arguments[0].getString(),
+					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			}
+		}
+
+		return true;
+	}
+	else if (functionName == "fe3d:model_color_get") // Get gameEntity color
+	{
+		auto types = { ScriptValueType::STRING };
+
+		// Validate arguments
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existing model ID
+			if (_validateFe3dGameEntity(arguments[0].getString()))
+			{
+				auto result = _fe3d.gameEntity_getColor(arguments[0].getString());
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));
+			}
+		}
+
+		return true;
+	}
+	else if (functionName == "fe3d:model_maxheight_set") // Set gameEntity maximum height
+	{
+		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL };
+
+		// Validate arguments
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existing model ID
+			if (_validateFe3dGameEntity(arguments[0].getString()))
+			{
+				_fe3d.gameEntity_setMaxHeight(arguments[0].getString(), arguments[1].getDecimal());
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			}
+		}
+
+		return true;
+	}
+	else if (functionName == "fe3d:model_maxheight_get") // Get gameEntity maximum height
+	{
+		auto types = { ScriptValueType::STRING };
+
+		// Validate arguments
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existing model ID
+			if (_validateFe3dGameEntity(arguments[0].getString()))
+			{
+				auto result = _fe3d.gameEntity_getMaxHeight(arguments[0].getString());
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
+			}
+		}
+
+		return true;
+	}
 	else if (functionName == "fe3d:model_animation_start") // Start gameEntity animation
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::STRING, ScriptValueType::INTEGER };

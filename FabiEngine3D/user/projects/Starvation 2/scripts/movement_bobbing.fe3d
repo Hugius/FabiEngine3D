@@ -1,0 +1,16 @@
+2 23
+META script_type_update
+
+DEC bobbingSpeed = 0.05
+IF _isRunning IS <true>:
+    MUL bobbingSpeed 2.0
+
+IF _isWalking IS <true>:
+    INCR _totalBobbing bobbingSpeed
+    MUL bobbingSpeed _bobbingDirection
+    DEC newPitch = fe3d:camera_pitch_get()
+    INCR newPitch bobbingSpeed
+    fe3d:camera_pitch_set(newPitch)
+    IF _totalBobbing MORE 3.0:
+        EDIT _totalBobbing = 0.0
+        MUL _bobbingDirection -1.0

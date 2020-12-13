@@ -1,9 +1,10 @@
-10 39
+5 21
 META script_type_update
 META execution_entry
 
 EXEC movement_walk
 EXEC movement_jump
+EXEC movement_bobbing
 EXEC player_animations
 
 BOOL lmb = fe3d:input_mouse_pressed("BUTTON_LEFT")

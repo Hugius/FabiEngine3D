@@ -162,14 +162,18 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 		}
 
 		// Retrieve arithmetic value
-		auto value = _isLocalVariableExisting(valueString) ? _getLocalVariable(valueString).getValue(valueIndex) : 
-			_isGlobalVariableExisting(valueString) ? _getGlobalVariable(valueString).getValue(valueIndex) : _isIntegerValue(valueString) ?
-			ScriptValue(_fe3d, ScriptValueType::INTEGER, stoi(valueString)) : _isDecimalValue(valueString) ? 
-			ScriptValue(_fe3d, ScriptValueType::DECIMAL, stof(valueString)) : ScriptValue(_fe3d, ScriptValueType::EMPTY);
+		auto value = _isLocalVariableExisting(valueString) ? _getLocalVariable(valueString).getValue(valueIndex) :
+			_isGlobalVariableExisting(valueString) ? _getGlobalVariable(valueString).getValue(valueIndex) :
+			_isIntegerValue(valueString) ? ScriptValue(_fe3d, ScriptValueType::INTEGER, stoi(valueString)) :
+			_isDecimalValue(valueString) ? ScriptValue(_fe3d, ScriptValueType::DECIMAL, stof(valueString)) :
+			_isVec3Value(valueString) ? ScriptValue(_fe3d, ScriptValueType::VEC3, _extractVec3FromString(valueString)) :
+			ScriptValue(_fe3d, ScriptValueType::EMPTY);
 
 		// Check if arithmetic value is valid
 		if (value.getType() == ScriptValueType::EMPTY)
 		{
+			std::cout << valueString << std::endl;
+			std::cout << _isGlobalVariableExisting(valueString) << std::endl;
 			_throwScriptError("invalid arithmetic value!");
 			return;
 		}
@@ -249,6 +253,48 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 			else if (operatorString == _divisionKeyword)
 			{
 				result /= value.getDecimal();
+			}
+
+			// Set resulting value
+			if (vec3Parts.x)
+			{
+				variable.getValue(valueIndex).setVec3(Vec3(result.x, oldValue.y, oldValue.z));
+			}
+			else if (vec3Parts.y)
+			{
+				variable.getValue(valueIndex).setVec3(Vec3(oldValue.x, result.y, oldValue.z));
+			}
+			else if (vec3Parts.z)
+			{
+				variable.getValue(valueIndex).setVec3(Vec3(oldValue.x, oldValue.y, result.z));
+			}
+			else
+			{
+				variable.getValue(valueIndex).setVec3(result);
+			}
+		}
+		else if ((variable.getValue(valueIndex).getType() == ScriptValueType::VEC3) && value.getType() == ScriptValueType::VEC3) // Vec3
+		{
+			// Retrieve current variable value
+			Vec3 oldValue = variable.getValue(valueIndex).getVec3();
+			Vec3 result = variable.getValue(valueIndex).getVec3();
+
+			// Determine arithmetic type
+			if (operatorString == _additionKeyword)
+			{
+				result += value.getVec3();
+			}
+			else if (operatorString == _subtractionKeyword)
+			{
+				result -= value.getVec3();
+			}
+			else if (operatorString == _multiplicationKeyword)
+			{
+				result *= value.getVec3();
+			}
+			else if (operatorString == _divisionKeyword)
+			{
+				result /= value.getVec3();
 			}
 
 			// Set resulting value

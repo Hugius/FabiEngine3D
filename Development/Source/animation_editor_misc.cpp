@@ -63,12 +63,6 @@ void AnimationEditor::_updateMiscellaneous()
 					// Retrieve current frame
 					auto frame = currentAnimation->frames[_currentFrameIndex];
 
-					// Set to initial transformation
-					_fe3d.gameEntity_setPosition(currentAnimation->previewModelID, currentAnimation->initialTranslation, "");
-					_fe3d.gameEntity_setRotation(currentAnimation->previewModelID, currentAnimation->initialRotation, "");
-					_fe3d.gameEntity_setSize(currentAnimation->previewModelID, currentAnimation->initialScaling, "");
-					_fe3d.gameEntity_setRotationOrigin(currentAnimation->previewModelID, Vec3(0.0f), "");
-
 					// Set current frame's transformation of editor
 					for (auto partName : currentAnimation->partNames)
 					{
@@ -78,18 +72,20 @@ void AnimationEditor::_updateMiscellaneous()
 							// Determine type of transformation
 							if (frame.transformationTypes[partName] == TransformationType::TRANSLATION)
 							{
-								_fe3d.gameEntity_move(currentAnimation->previewModelID, frame.targetTransformations[partName], partName);
+								_fe3d.gameEntity_setPosition(currentAnimation->previewModelID, 
+									currentAnimation->initialTranslation + frame.targetTransformations[partName], partName);
 							}
 							else if (frame.transformationTypes[partName] == TransformationType::ROTATION)
 							{
-								auto currentRotationOrigin = _fe3d.gameEntity_getRotationOrigin(currentAnimation->previewModelID, partName);
 								_fe3d.gameEntity_setRotationOrigin(currentAnimation->previewModelID, 
-									currentRotationOrigin + (modelSize * frame.rotationOrigins[partName]), partName);
-								_fe3d.gameEntity_rotate(currentAnimation->previewModelID, frame.targetTransformations[partName], partName);
+									(modelSize * frame.rotationOrigins[partName]), partName);
+								_fe3d.gameEntity_setRotation(currentAnimation->previewModelID, 
+									currentAnimation->initialRotation + frame.targetTransformations[partName], partName);
 							}
 							else if (frame.transformationTypes[partName] == TransformationType::SCALING)
 							{
-								_fe3d.gameEntity_scale(currentAnimation->previewModelID, frame.targetTransformations[partName], partName);
+								_fe3d.gameEntity_setSize(currentAnimation->previewModelID, 
+									currentAnimation->initialScaling + frame.targetTransformations[partName], partName);
 							}
 						}
 					}

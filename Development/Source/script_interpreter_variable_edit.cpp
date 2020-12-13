@@ -219,23 +219,47 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 				_throwScriptError("function returned too many values!");
 			}
 		}
-		else if ((variable.getValue(valueIndex).getType() == ScriptValueType::VEC3) && (values[0].getType() == ScriptValueType::VEC3))
+		else if ((variable.getValue(valueIndex).getType() == ScriptValueType::VEC3) &&  // VEC3
+			(values[0].getType() == ScriptValueType::VEC3))
 		{
 			variable.getValue(valueIndex).setVec3(values[0].getVec3());
 		}
-		else if ((variable.getValue(valueIndex).getType() == ScriptValueType::STRING) && (values[0].getType() == ScriptValueType::STRING))
+		else if ((variable.getValue(valueIndex).getType() == ScriptValueType::STRING) &&  // STRING
+			(values[0].getType() == ScriptValueType::STRING))
 		{
 			variable.getValue(valueIndex).setString(values[0].getString());
 		}
-		else if ((variable.getValue(valueIndex).getType() == ScriptValueType::DECIMAL) && (values[0].getType() == ScriptValueType::DECIMAL))
+		else if ((variable.getValue(valueIndex).getType() == ScriptValueType::DECIMAL) && // DECIMAL - normal
+			(values[0].getType() == ScriptValueType::DECIMAL))
 		{
 			variable.getValue(valueIndex).setDecimal(values[0].getDecimal());
 		}
-		else if ((variable.getValue(valueIndex).getType() == ScriptValueType::INTEGER) && (values[0].getType() == ScriptValueType::INTEGER))
+		else if (vec3Parts != Ivec3(0) && (variable.getValue(valueIndex).getType() == ScriptValueType::VEC3) && // DECIMAL - vec3 part
+			(values[0].getType() == ScriptValueType::DECIMAL))
+		{
+			auto oldValue = variable.getValue(valueIndex).getVec3();
+
+			// Determine which part of vec3 must change
+			if (vec3Parts.x)
+			{
+				variable.getValue(valueIndex).setVec3(Vec3(values[0].getDecimal(), oldValue.y, oldValue.z));
+			}
+			else if (vec3Parts.y)
+			{
+				variable.getValue(valueIndex).setVec3(Vec3(oldValue.x, values[0].getDecimal(), oldValue.z));
+			}
+			else if (vec3Parts.z)
+			{
+				variable.getValue(valueIndex).setVec3(Vec3(oldValue.x, oldValue.y, values[0].getDecimal()));
+			}
+		}
+		else if ((variable.getValue(valueIndex).getType() == ScriptValueType::INTEGER) &&  // INTEGER
+			(values[0].getType() == ScriptValueType::INTEGER))
 		{
 			variable.getValue(valueIndex).setInteger(values[0].getInteger());
 		}
-		else if ((variable.getValue(valueIndex).getType() == ScriptValueType::BOOLEAN) && (values[0].getType() == ScriptValueType::BOOLEAN))
+		else if ((variable.getValue(valueIndex).getType() == ScriptValueType::BOOLEAN) &&  // BOOLEAN
+			(values[0].getType() == ScriptValueType::BOOLEAN))
 		{
 			variable.getValue(valueIndex).setBoolean(values[0].getBoolean());
 		}

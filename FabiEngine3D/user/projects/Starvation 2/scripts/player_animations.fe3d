@@ -1,9 +1,25 @@
-6 37
+17 52
 META script_type_update
 
-INCR _skellieRotation 0.01
+/// Walking skeleton animation
+INCR _skellieRotation 0.25
 DEC sinRot = math:sin(_skellieRotation)
+DIV sinRot 50.0
 DEC cosRot = math:cos(_skellieRotation)
-///fe3d:model_move("skellie", sinRot, 0.0, cosRot)
+DIV cosRot 50.0
+fe3d:model_move("skellie", sinRot, 0.0, cosRot)
 fe3d:model_rotate("skellie", 0.0, 0.25, 0.0)
-fe3d:model_rotate("millie", 0.0, 0.25, 0.0)
+
+/// First person player animation
+VEC3 camPos = fe3d:camera_position_get()
+DEC yaw = fe3d:camera_yaw_get()
+NEG yaw
+INCR yaw 90.0
+DECR camPos.y 2.6
+fe3d:model_position_set("player", camPos.x, camPos.y, camPos.z)
+fe3d:model_rotation_set("player", 0.0, yaw, 0.0)
+BOOL isPlaying = fe3d:model_animation_isplaying("walk", "player")
+IF _isWalking IS <true> AND isPlaying IS <false>:
+    fe3d:model_animation_start("walk", "player", -1)
+ELIF _isWalking IS <false> AND isPlaying IS <true>:
+    fe3d:model_animation_fade("walk", "player", 1)

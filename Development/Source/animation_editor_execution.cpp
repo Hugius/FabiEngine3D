@@ -310,7 +310,6 @@ void AnimationEditor::_updateAnimationExecution()
 		}
 
 		// Check if animation needs to be faded
-		std::cout << "index: " << animation.frameIndex << std::endl;
 		if (animation.fadeFramestep != -1 && animation.maxFrameIndex == -1)
 		{
 			if (animation.fadeFramestep == 1)
@@ -318,12 +317,10 @@ void AnimationEditor::_updateAnimationExecution()
 				if ((animation.frameIndex % 2) != 0)
 				{
 					animation.maxFrameIndex = animation.frameIndex + 1;
-					std::cout << "kip";
 				}
 				else
 				{
-					animationsToStop.push_back(idPair);
-					std::cout << "geit";
+					animation.maxFrameIndex = animation.frameIndex;
 				}
 			}
 			else
@@ -334,7 +331,7 @@ void AnimationEditor::_updateAnimationExecution()
 				}
 				else
 				{
-					animationsToStop.push_back(idPair);
+					animation.maxFrameIndex = animation.frameIndex;
 				}
 			}
 		}

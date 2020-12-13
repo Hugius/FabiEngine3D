@@ -1,34 +1,47 @@
-14 58
+21 28
 META script_type_update
 
 /// Temporary values
-DEC movingSpeed = 0.03
-
-/// Input
 BOOL forward = fe3d:input_key_down("KEY_W")
 BOOL backward = fe3d:input_key_down("KEY_S")
 BOOL left = fe3d:input_key_down("KEY_A")
 BOOL right = fe3d:input_key_down("KEY_D")
 BOOL shift = fe3d:input_key_down("KEY_LSHIFT")
-
 BOOL movingX = (left IS <true> OR right IS <true>)
 BOOL movingZ = (forward IS <true> OR backward IS <true>)
 EDIT _isWalking = (movingX IS <true> OR movingZ IS <true>)
+DEC accSpeed = 0.0001
+DEC minSpeed = -0.025
+DEC maxSpeed = 0.025
 
 /// Running speed
 IF shift IS <true> AND forward IS <true>:
-    MUL movingSpeed 1.75
+    MUL minSpeed 2.0
+    MUL maxSpeed 2.0
+    EDIT _isRunning = <true>
+ELSE:
+    EDIT _isRunning = <false>
 
 /// WASD movement
-IF forward IS <true>:
-    fe3d:camera_follow_z(movingSpeed)
-IF backward IS <true>:
-    NEG movingSpeed
-    fe3d:camera_follow_z(movingSpeed)
-    NEG movingSpeed
 IF left IS <true>:
-    NEG movingSpeed
-    fe3d:camera_follow_x(movingSpeed)
-    NEG movingSpeed
+    DECR _movingAcc.x accSpeed
 IF right IS <true>:
-    fe3d:camera_follow_x(movingSpeed)
+    INCR _movingAcc.x accSpeed
+IF forward IS <true>:
+    INCR _movingAcc.z accSpeed
+IF backward IS <true>:
+    DECR _movingAcc.z accSpeed
+
+/// Update acceleration
+IF movingX IS <false>:
+    EDIT _movingAcc.x = 0.0
+IF movingZ IS <false>:
+    EDIT _movingAcc.z = 0.0
+
+/// Move camera
+INCR _movingSpeed _movingAcc
+MUL _movingSpeed 0.9
+EDIT _movingSpeed.x = math:clamp(_movingSpeed.x, minSpeed, maxSpeed)
+EDIT _movingSpeed.z = math:clamp(_movingSpeed.z, minSpeed, maxSpeed)
+fe3d:camera_follow_x(_movingSpeed.x)
+fe3d:camera_follow_z(_movingSpeed.z)

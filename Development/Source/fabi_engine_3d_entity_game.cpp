@@ -324,9 +324,9 @@ void FabiEngine3D::gameEntity_setLightness(const string& ID, float lightness)
 	_core->_gameEntityManager.getEntity(ID)->setLightness(lightness);
 }
 
-void FabiEngine3D::gameEntity_setMaxY(const string& ID, float y)
+void FabiEngine3D::gameEntity_setMaxHeight(const string& ID, float height)
 {
-	_core->_gameEntityManager.getEntity(ID)->setMaxY(y);
+	_core->_gameEntityManager.getEntity(ID)->setMaxY(height);
 }
 
 void FabiEngine3D::gameEntity_setUvRepeat(const string& ID, float repeat)
@@ -400,7 +400,7 @@ float FabiEngine3D::gameEntity_getAlpha(const string& ID)
 	return _core->_gameEntityManager.getEntity(ID)->getAlpha();
 }
 
-float FabiEngine3D::gameEntity_getMaxY(const string& ID)
+float FabiEngine3D::gameEntity_getMaxHeight(const string& ID)
 {
 	return _core->_gameEntityManager.getEntity(ID)->getMaxY();
 }

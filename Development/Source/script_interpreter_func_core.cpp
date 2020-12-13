@@ -1,5 +1,7 @@
 #include "script_interpreter.hpp"
 
+#include <algorithm>
+
 vector<ScriptValue> ScriptInterpreter::_processEngineFunctionCall(const string& scriptLine)
 {
 	// Temporary values
@@ -163,6 +165,31 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 						else if (arguments[0].getType() == ScriptValueType::DECIMAL && arguments[1].getType() == ScriptValueType::DECIMAL)
 						{
 							float result = std::max(arguments[0].getDecimal(), arguments[1].getDecimal());
+							returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
+						}
+						else
+						{
+							_throwScriptError("wrong argument type(s)!");
+						}
+					}
+				}
+				else if (functionName == "math:clamp") // CLAMP
+				{
+					if (_validateListValueAmount(arguments, 3))
+					{
+						if (arguments[0].getType() == ScriptValueType::INTEGER && 
+							arguments[2].getType() == ScriptValueType::INTEGER &&
+							arguments[3].getType() == ScriptValueType::INTEGER)
+						{
+							int result = std::clamp(arguments[0].getInteger(), arguments[1].getInteger(), arguments[2].getInteger());
+							returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::INTEGER, result));
+						}
+						else if (
+							arguments[0].getType() == ScriptValueType::DECIMAL && 
+							arguments[1].getType() == ScriptValueType::DECIMAL &&
+							arguments[2].getType() == ScriptValueType::DECIMAL)
+						{
+							float result = std::clamp(arguments[0].getDecimal(), arguments[1].getDecimal(), arguments[2].getDecimal());
 							returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
 						}
 						else

@@ -85,7 +85,8 @@ void TopViewportController::_updateProjectManagement()
 			}
 			else if (screen->getButton("quitEngine")->isHovered())
 			{
-				if (_currentProjectName != "") // A project must be loaded
+				// Check if currently in an editor
+				if (_currentProjectName != "" && _gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID() != "main")
 				{
 					_gui.getGlobalScreen()->addAnswerForm("exitEngine", "Save changes?", Vec2(0.0f, 0.25f));
 				}

@@ -345,6 +345,7 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 			// Determine type of variable value
 			if (variable.getValue(valueIndexOne).getType() == ScriptValueType::DECIMAL && vec3PartsTwo != Ivec3(0)) // decimal = vec.{xyz}
 			{
+				// Determine vec3 part
 				if (vec3PartsTwo.x)
 				{
 					variable.getValue(valueIndexOne).setDecimal(otherVariable.getValue(valueIndexTwo).getVec3().x);
@@ -364,6 +365,7 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 				auto newDecimal = vec3PartsTwo.x ? otherVariable.getValue(valueIndexTwo).getVec3().x : vec3PartsTwo.y ?
 					otherVariable.getValue(valueIndexTwo).getVec3().y : otherVariable.getValue(valueIndexTwo).getVec3().z;
 
+				// Determine vec3 part
 				if (vec3PartsOne.x)
 				{
 					variable.getValue(valueIndexOne).setVec3(Vec3(newDecimal, oldValue.y, oldValue.z));
@@ -379,8 +381,16 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 			}
 			else if (vec3PartsOne != Ivec3(0) && vec3PartsTwo == Ivec3(0)) // vec.{xyz} = decimal
 			{
+				// Check if other value is not a decimal
+				if (otherVariable.getValue(valueIndexTwo).getType() != ScriptValueType::DECIMAL)
+				{
+					_throwScriptError("variable types do not match!");
+					return;
+				}
+
 				auto oldValue = variable.getValue(valueIndexOne).getVec3();
 
+				// Determine vec3 part
 				if (vec3PartsOne.x)
 				{
 					variable.getValue(valueIndexOne).setVec3(Vec3(otherVariable.getValue(valueIndexTwo).getDecimal(), oldValue.y, oldValue.z));

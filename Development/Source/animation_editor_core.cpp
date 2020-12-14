@@ -55,7 +55,6 @@ void AnimationEditor::load()
 	// Enable graphics
 	_fe3d.gfx_enableAmbientLighting(Vec3(1.0f), 0.45f);
 	_fe3d.gfx_enableDirectionalLighting(Vec3(1000.0f), Vec3(1.0f), 1.0f);
-	_fe3d.gfx_enableShadows(Vec3(10.0f, 10.0f, 10.0f), Vec3(0.0f), 25.0f, 50.0f, false);
 	_fe3d.gfx_enableSkyReflections(0.5f);
 	_fe3d.gfx_enableLightMapping();
 	_fe3d.gfx_enableNormalMapping();

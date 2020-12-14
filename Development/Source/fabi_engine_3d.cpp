@@ -30,3 +30,8 @@ void FabiEngine3D::engine_stop()
 {
 	_core->_stop();
 }
+
+bool FabiEngine3D::engine_isPaused()
+{
+	return _core->_isPaused;
+}

@@ -95,7 +95,6 @@ void ModelEditor::load()
 	// Enable graphics
 	_fe3d.gfx_enableAmbientLighting(Vec3(1.0f), 0.75f);
 	_fe3d.gfx_enableDirectionalLighting(Vec3(1000.0f), Vec3(1.0f), 0.5f);
-	_fe3d.gfx_enableShadows(Vec3(100.0f, 75.0f, 0.0f), Vec3(0.0f), 200.0f, 200.0f, false);
 	_fe3d.gfx_enableSceneReflections(0.25f);
 	_fe3d.gfx_enableSkyReflections(0.5f);
 	_fe3d.gfx_enableLightMapping();

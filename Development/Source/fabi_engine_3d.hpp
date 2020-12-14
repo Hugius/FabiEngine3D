@@ -8,6 +8,7 @@
 
 #include <array>
 #include <vector>
+#include <set>
 #include <map>
 #include <unordered_map>
 #include <string>
@@ -15,6 +16,7 @@
 
 using std::array;
 using std::vector;
+using std::set;
 using std::map;
 using std::unordered_map;
 using std::pair;
@@ -42,6 +44,7 @@ public:
 	void engine_pause();
 	void engine_resume();
 	void engine_stop();
+	bool engine_isPaused();
 
 	// Camera interface - setters
 	void camera_load(float fov, float nearZ, float farZ, Vec3 startPosition, float yaw = 0.0f, float pitch = 0.0f);

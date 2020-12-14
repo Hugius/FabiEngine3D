@@ -26,13 +26,10 @@ void AnimationEditor::_updateEditingScreen()
 					if (_fe3d.gameEntity_isExisting(currentAnimation->previewModelID))
 					{
 						// For every model part
-						for (auto& partName : currentAnimation->partNames)
-						{
-							_fe3d.gameEntity_setPosition(currentAnimation->previewModelID, currentAnimation->initialTranslation, partName);
-							_fe3d.gameEntity_setRotationOrigin(currentAnimation->previewModelID, currentAnimation->initialRotationOrigin, partName);
-							_fe3d.gameEntity_setRotation(currentAnimation->previewModelID, currentAnimation->initialRotation, partName);
-							_fe3d.gameEntity_setSize(currentAnimation->previewModelID, currentAnimation->initialScaling, partName);
-						}
+						_fe3d.gameEntity_setPosition(currentAnimation->previewModelID, currentAnimation->initialTranslation, "");
+						_fe3d.gameEntity_setRotationOrigin(currentAnimation->previewModelID, currentAnimation->initialRotationOrigin, "");
+						_fe3d.gameEntity_setRotation(currentAnimation->previewModelID, currentAnimation->initialRotation, "");
+						_fe3d.gameEntity_setSize(currentAnimation->previewModelID, currentAnimation->initialScaling, "");
 					}
 
 					// Reset some values
@@ -58,13 +55,10 @@ void AnimationEditor::_updateEditingScreen()
 				else if (screen->getButton("play")->isHovered())
 				{
 					// Reset preview model transformation
-					for (auto& partName : currentAnimation->partNames)
-					{
-						_fe3d.gameEntity_setPosition(currentAnimation->previewModelID, currentAnimation->initialTranslation, partName);
-						_fe3d.gameEntity_setRotationOrigin(currentAnimation->previewModelID, currentAnimation->initialRotationOrigin, partName);
-						_fe3d.gameEntity_setRotation(currentAnimation->previewModelID, currentAnimation->initialRotation, partName);
-						_fe3d.gameEntity_setSize(currentAnimation->previewModelID, currentAnimation->initialScaling, partName);
-					}
+					_fe3d.gameEntity_setPosition(currentAnimation->previewModelID, currentAnimation->initialTranslation, "");
+					_fe3d.gameEntity_setRotationOrigin(currentAnimation->previewModelID, currentAnimation->initialRotationOrigin, "");
+					_fe3d.gameEntity_setRotation(currentAnimation->previewModelID, currentAnimation->initialRotation, "");
+					_fe3d.gameEntity_setSize(currentAnimation->previewModelID, currentAnimation->initialScaling, "");
 
 					// Start animation
 					startAnimation(_currentAnimationID, currentAnimation->previewModelID, 1);
@@ -75,13 +69,10 @@ void AnimationEditor::_updateEditingScreen()
 					stopAnimation(_currentAnimationID, currentAnimation->previewModelID);
 
 					// Reset preview model transformation
-					for (auto& partName : currentAnimation->partNames)
-					{
-						_fe3d.gameEntity_setPosition(currentAnimation->previewModelID, currentAnimation->initialTranslation, partName);
-						_fe3d.gameEntity_setRotationOrigin(currentAnimation->previewModelID, currentAnimation->initialRotationOrigin, partName);
-						_fe3d.gameEntity_setRotation(currentAnimation->previewModelID, currentAnimation->initialRotation, partName);
-						_fe3d.gameEntity_setSize(currentAnimation->previewModelID, currentAnimation->initialScaling, partName);
-					}
+					_fe3d.gameEntity_setPosition(currentAnimation->previewModelID, currentAnimation->initialTranslation, "");
+					_fe3d.gameEntity_setRotationOrigin(currentAnimation->previewModelID, currentAnimation->initialRotationOrigin, "");
+					_fe3d.gameEntity_setRotation(currentAnimation->previewModelID, currentAnimation->initialRotation, "");
+					_fe3d.gameEntity_setSize(currentAnimation->previewModelID, currentAnimation->initialScaling, "");
 				}
 				else if (screen->getButton("addFrame")->isHovered())
 				{

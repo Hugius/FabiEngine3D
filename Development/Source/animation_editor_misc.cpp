@@ -62,21 +62,21 @@ void AnimationEditor::_updateMiscellaneous()
 
 					// Retrieve current frame
 					auto frame = currentAnimation->frames[_currentFrameIndex];
-
-					// Set current frame's transformation of editor
-					for (auto partName : currentAnimation->partNames)
+					
+					// Default frame
+					if (_currentFrameIndex == 0)
 					{
-						// Check if model has part
-						if (_fe3d.gameEntity_hasPart(currentAnimation->previewModelID, partName) || partName.empty())
+						_fe3d.gameEntity_setPosition(currentAnimation->previewModelID, currentAnimation->initialTranslation, "");
+						_fe3d.gameEntity_setRotationOrigin(currentAnimation->previewModelID, currentAnimation->initialRotationOrigin, "");
+						_fe3d.gameEntity_setRotation(currentAnimation->previewModelID, currentAnimation->initialRotation, "");
+						_fe3d.gameEntity_setSize(currentAnimation->previewModelID, currentAnimation->initialScaling, "");
+					}
+					else // Frame created by user
+					{
+						for (auto partName : currentAnimation->partNames)
 						{
-							if (_currentFrameIndex == 0) // Default frame
-							{
-								_fe3d.gameEntity_setPosition(currentAnimation->previewModelID, currentAnimation->initialTranslation, partName);
-								_fe3d.gameEntity_setRotationOrigin(currentAnimation->previewModelID, currentAnimation->initialRotationOrigin, partName);
-								_fe3d.gameEntity_setRotation(currentAnimation->previewModelID, currentAnimation->initialRotation, partName);
-								_fe3d.gameEntity_setSize(currentAnimation->previewModelID, currentAnimation->initialScaling, partName);
-							}
-							else // Frame created by user
+							// Check if model has part
+							if (_fe3d.gameEntity_hasPart(currentAnimation->previewModelID, partName) || partName.empty())
 							{
 								// Determine type of transformation
 								if (frame.transformationTypes[partName] == TransformationType::TRANSLATION)

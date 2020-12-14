@@ -75,10 +75,10 @@ private:
 	float _cameraScrollingAcceleration = 0.0f;
 	float _partColorStrength = 0.0f;
 	float _colorChangingSpeed = 0.05f;
+	float _cameraSpeed = 0.1f;
 	const float _minCameraDistance = 1.0f;
 	const float _minCameraHeight = 1.0f;
-	const float _cameraSpeed = 0.15f;
-	const float _scrollWheelDivider = 15.0f;
+	const float _scrollWheelDivider = 5.0f;
 
 	// Integers
 	const unsigned int _maxFrameCount = 100;

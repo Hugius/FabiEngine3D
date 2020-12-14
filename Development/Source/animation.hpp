@@ -27,9 +27,6 @@ public:
 	map<string, Vec3> totalRotations;
 	map<string, Vec3> totalScalings;
 
-	Vec3 initialTranslation = Vec3(0.0f);
-	Vec3 initialRotationOrigin = Vec3(0.0f);
-	Vec3 initialRotation = Vec3(0.0f);
 	Vec3 initialScaling = Vec3(0.0f);
 	Vec3 initialColor = Vec3(0.0f);
 

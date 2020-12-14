@@ -42,9 +42,6 @@ void AnimationEditor::_updateAnimationExecution()
 				_fe3d.textEntity_setTextContent(textID, "Frame: " + to_string(animation.frameIndex + 1), 0.025f);
 			}
 
-			// Retrieve model size
-			auto modelSize = _fe3d.gameEntity_getSize(animation.animatedModelID);
-
 			// Retrieve current frame
 			auto& frame = animation.frames[animation.frameIndex];
 
@@ -60,14 +57,26 @@ void AnimationEditor::_updateAnimationExecution()
 				}
 
 				// Immutable values
+				const auto& currentModelSize = _fe3d.gameEntity_getSize(animation.animatedModelID);
 				const auto& transformationType = frame.transformationTypes[partName];
-				const auto& targetTransformation = frame.targetTransformations[partName];
-				const auto& speedType = frame.speedTypes[partName];
-				const auto& rotationOrigin = frame.rotationOrigins[partName];
 				const auto& isTranslation = (transformationType == TransformationType::TRANSLATION);
 				const auto& isRotation = (transformationType == TransformationType::ROTATION);
 				const auto& isScaling = (transformationType == TransformationType::SCALING);
+				const auto& speedMultiplier = (partName.empty() || (isTranslation || isScaling)) ? animation.initialScaling : Vec3(1.0f);
+				const auto& speedType = frame.speedTypes[partName];
+				const auto& rotationOrigin = frame.rotationOrigins[partName];
 				const auto& speed = frame.speeds[partName] * animation.speedMultiplier;
+				const auto& xSpeed = !isRotation ? (speedMultiplier.x * speed) : speed;
+				const auto& ySpeed = !isRotation ? (speedMultiplier.y * speed) : speed;
+				const auto& zSpeed = !isRotation ? (speedMultiplier.z * speed) : speed;
+
+				// Translation is relative to initial size
+				// Rotation is always relative to real-time size
+				// Scaling is relative to initial size
+				const auto& targetTransformation =
+					isTranslation ? (animation.initialScaling * frame.targetTransformations[partName]) :
+					isRotation ? frame.targetTransformations[partName] :
+					((partName.empty() ? animation.initialScaling : Vec3(1.0f)) * frame.targetTransformations[partName]);
 
 				// Mutable values
 				auto& totalTranslation = animation.totalTranslations[partName];
@@ -76,37 +85,37 @@ void AnimationEditor::_updateAnimationExecution()
 				auto& baseSpeed = frame.speeds[partName];
 
 				// Check if reached transformation of current frame
-				if (((isTranslation && _hasReachedFloat(totalTranslation.x, targetTransformation.x, speed)) &&
-					(isTranslation && _hasReachedFloat(totalTranslation.y, targetTransformation.y, speed)) &&
-					(isTranslation && _hasReachedFloat(totalTranslation.z, targetTransformation.z, speed))) ||
-					((isRotation && _hasReachedFloat(totalRotation.x, targetTransformation.x, speed)) &&
-						(isRotation && _hasReachedFloat(totalRotation.y, targetTransformation.y, speed)) &&
-						(isRotation && _hasReachedFloat(totalRotation.z, targetTransformation.z, speed))) ||
-					((isScaling && _hasReachedFloat(totalScaling.x, targetTransformation.x, speed)) &&
-						(isScaling && _hasReachedFloat(totalScaling.y, targetTransformation.y, speed)) &&
-						(isScaling && _hasReachedFloat(totalScaling.z, targetTransformation.z, speed))))
+				if (((isTranslation && _hasReachedFloat(totalTranslation.x, targetTransformation.x, xSpeed)) &&
+					(isTranslation && _hasReachedFloat(totalTranslation.y, targetTransformation.y, xSpeed)) &&
+					(isTranslation && _hasReachedFloat(totalTranslation.z, targetTransformation.z, xSpeed))) ||
+					((isRotation && _hasReachedFloat(totalRotation.x, targetTransformation.x, ySpeed)) &&
+					(isRotation && _hasReachedFloat(totalRotation.y, targetTransformation.y, ySpeed)) &&
+					(isRotation && _hasReachedFloat(totalRotation.z, targetTransformation.z, ySpeed))) ||
+					((isScaling && _hasReachedFloat(totalScaling.x, targetTransformation.x, zSpeed)) &&
+					(isScaling && _hasReachedFloat(totalScaling.y, targetTransformation.y, zSpeed)) &&
+					(isScaling && _hasReachedFloat(totalScaling.z, targetTransformation.z, zSpeed))))
 				{
 					finishedPartsAmount++;
 				}
 				else
 				{
 					// X transformation
-					if ((isTranslation && !_hasReachedFloat(totalTranslation.x, targetTransformation.x, speed)) ||
-						(isRotation && !_hasReachedFloat(totalRotation.x, targetTransformation.x, speed)) ||
-						(isScaling && !_hasReachedFloat(totalScaling.x, targetTransformation.x, speed)))
+					if ((isTranslation && !_hasReachedFloat(totalTranslation.x, targetTransformation.x, xSpeed)) ||
+						(isRotation && !_hasReachedFloat(totalRotation.x, targetTransformation.x, xSpeed)) ||
+						(isScaling && !_hasReachedFloat(totalScaling.x, targetTransformation.x, xSpeed)))
 					{
 						// Determine transformation type
 						if (transformationType == TransformationType::TRANSLATION)
 						{
-							totalTranslation.x += speed;
+							totalTranslation.x += xSpeed;
 						}
 						else if (transformationType == TransformationType::ROTATION)
 						{
-							totalRotation.x += speed;
+							totalRotation.x += xSpeed;
 						}
 						else if (transformationType == TransformationType::SCALING)
 						{
-							totalScaling.x += speed;
+							totalScaling.x += xSpeed;
 						}
 
 						// Increase speed if exponential
@@ -117,9 +126,9 @@ void AnimationEditor::_updateAnimationExecution()
 
 						// Check if animation reached transformation now
 						float difference = 0.0f;
-						if ((isTranslation && _hasReachedFloat(totalTranslation.x, targetTransformation.x, speed)) ||
-							(isRotation && _hasReachedFloat(totalRotation.x, targetTransformation.x, speed)) ||
-							(isScaling && _hasReachedFloat(totalScaling.x, targetTransformation.x, speed)))
+						if ((isTranslation && _hasReachedFloat(totalTranslation.x, targetTransformation.x, xSpeed)) ||
+							(isRotation && _hasReachedFloat(totalRotation.x, targetTransformation.x, xSpeed)) ||
+							(isScaling && _hasReachedFloat(totalScaling.x, targetTransformation.x, xSpeed)))
 						{
 							// Determine transformation type
 							if (transformationType == TransformationType::TRANSLATION)
@@ -142,36 +151,36 @@ void AnimationEditor::_updateAnimationExecution()
 						// Determine transformation type
 						if (transformationType == TransformationType::TRANSLATION)
 						{
-							_fe3d.gameEntity_move(animation.animatedModelID, Vec3(speed + (-difference), 0.0f, 0.0f), partName);
+							_fe3d.gameEntity_move(animation.animatedModelID, Vec3(xSpeed + (-difference), 0.0f, 0.0f), partName);
 						}
 						else if (transformationType == TransformationType::ROTATION)
 						{
-							_fe3d.gameEntity_setRotationOrigin(animation.animatedModelID, modelSize * rotationOrigin, partName);
-							_fe3d.gameEntity_rotate(animation.animatedModelID, Vec3(speed + (-difference), 0.0f, 0.0f), partName);
+							_fe3d.gameEntity_setRotationOrigin(animation.animatedModelID, currentModelSize * rotationOrigin, partName);
+							_fe3d.gameEntity_rotate(animation.animatedModelID, Vec3(xSpeed + (-difference), 0.0f, 0.0f), partName);
 						}
 						else if (transformationType == TransformationType::SCALING)
 						{
-							_fe3d.gameEntity_scale(animation.animatedModelID, Vec3(speed + (-difference), 0.0f, 0.0f), partName);
+							_fe3d.gameEntity_scale(animation.animatedModelID, Vec3(xSpeed + (-difference), 0.0f, 0.0f), partName);
 						}
 					}
 
 					// Y transformation
-					if ((isTranslation && !_hasReachedFloat(totalTranslation.y, targetTransformation.y, speed)) ||
-						(isRotation && !_hasReachedFloat(totalRotation.y, targetTransformation.y, speed)) ||
-						(isScaling && !_hasReachedFloat(totalScaling.y, targetTransformation.y, speed)))
+					if ((isTranslation && !_hasReachedFloat(totalTranslation.y, targetTransformation.y, ySpeed)) ||
+						(isRotation && !_hasReachedFloat(totalRotation.y, targetTransformation.y, ySpeed)) ||
+						(isScaling && !_hasReachedFloat(totalScaling.y, targetTransformation.y, ySpeed)))
 					{
 						// Determine transformation type
 						if (transformationType == TransformationType::TRANSLATION)
 						{
-							totalTranslation.y += speed;
+							totalTranslation.y += ySpeed;
 						}
 						else if (transformationType == TransformationType::ROTATION)
 						{
-							totalRotation.y += speed;
+							totalRotation.y += ySpeed;
 						}
 						else if (transformationType == TransformationType::SCALING)
 						{
-							totalScaling.y += speed;
+							totalScaling.y += ySpeed;
 						}
 
 						// Increase speed if exponential
@@ -182,9 +191,9 @@ void AnimationEditor::_updateAnimationExecution()
 
 						// Check if animation reached transformation now
 						float difference = 0.0f;
-						if ((isTranslation && _hasReachedFloat(totalTranslation.y, targetTransformation.y, speed)) |
-							(isRotation && _hasReachedFloat(totalRotation.y, targetTransformation.y, speed)) |
-							(isScaling && _hasReachedFloat(totalScaling.y, targetTransformation.y, speed)))
+						if ((isTranslation && _hasReachedFloat(totalTranslation.y, targetTransformation.y, ySpeed)) |
+							(isRotation && _hasReachedFloat(totalRotation.y, targetTransformation.y, ySpeed)) |
+							(isScaling && _hasReachedFloat(totalScaling.y, targetTransformation.y, ySpeed)))
 						{
 							// Determine transformation type
 							if (transformationType == TransformationType::TRANSLATION)
@@ -207,36 +216,36 @@ void AnimationEditor::_updateAnimationExecution()
 						// Determine transformation type
 						if (transformationType == TransformationType::TRANSLATION)
 						{
-							_fe3d.gameEntity_move(animation.animatedModelID, Vec3(0.0f, speed + (-difference), 0.0f), partName);
+							_fe3d.gameEntity_move(animation.animatedModelID, Vec3(0.0f, ySpeed + (-difference), 0.0f), partName);
 						}
 						else if (transformationType == TransformationType::ROTATION)
 						{
-							_fe3d.gameEntity_setRotationOrigin(animation.animatedModelID, modelSize * rotationOrigin, partName);
-							_fe3d.gameEntity_rotate(animation.animatedModelID, Vec3(0.0f, speed + (-difference), 0.0f), partName);
+							_fe3d.gameEntity_setRotationOrigin(animation.animatedModelID, currentModelSize * rotationOrigin, partName);
+							_fe3d.gameEntity_rotate(animation.animatedModelID, Vec3(0.0f, ySpeed + (-difference), 0.0f), partName);
 						}
 						else if (transformationType == TransformationType::SCALING)
 						{
-							_fe3d.gameEntity_scale(animation.animatedModelID, Vec3(0.0f, speed + (-difference), 0.0f), partName);
+							_fe3d.gameEntity_scale(animation.animatedModelID, Vec3(0.0f, ySpeed + (-difference), 0.0f), partName);
 						}
 					}
 
 					// Z transformation
-					if ((isTranslation && !_hasReachedFloat(totalTranslation.z, targetTransformation.z, speed)) ||
-						(isRotation && !_hasReachedFloat(totalRotation.z, targetTransformation.z, speed)) ||
-						(isScaling && !_hasReachedFloat(totalScaling.z, targetTransformation.z, speed)))
+					if ((isTranslation && !_hasReachedFloat(totalTranslation.z, targetTransformation.z, zSpeed)) ||
+						(isRotation && !_hasReachedFloat(totalRotation.z, targetTransformation.z, zSpeed)) ||
+						(isScaling && !_hasReachedFloat(totalScaling.z, targetTransformation.z, zSpeed)))
 					{
 						// Determine transformation type
 						if (transformationType == TransformationType::TRANSLATION)
 						{
-							totalTranslation.z += speed;
+							totalTranslation.z += zSpeed;
 						}
 						else if (transformationType == TransformationType::ROTATION)
 						{
-							totalRotation.z += speed;
+							totalRotation.z += zSpeed;
 						}
 						else if (transformationType == TransformationType::SCALING)
 						{
-							totalScaling.z += speed;
+							totalScaling.z += zSpeed;
 						}
 
 						// Increase speed if exponential
@@ -247,9 +256,9 @@ void AnimationEditor::_updateAnimationExecution()
 
 						// Check if animation reached transformation now
 						float difference = 0.0f;
-						if ((isTranslation && _hasReachedFloat(totalTranslation.z, targetTransformation.z, speed)) ||
-							(isRotation && _hasReachedFloat(totalRotation.z, targetTransformation.z, speed)) ||
-							(isScaling && _hasReachedFloat(totalScaling.z, targetTransformation.z, speed)))
+						if ((isTranslation && _hasReachedFloat(totalTranslation.z, targetTransformation.z, zSpeed)) ||
+							(isRotation && _hasReachedFloat(totalRotation.z, targetTransformation.z, zSpeed)) ||
+							(isScaling && _hasReachedFloat(totalScaling.z, targetTransformation.z, zSpeed)))
 						{
 							// Determine transformation type
 							if (transformationType == TransformationType::TRANSLATION)
@@ -272,16 +281,16 @@ void AnimationEditor::_updateAnimationExecution()
 						// Determine transformation type
 						if (transformationType == TransformationType::TRANSLATION)
 						{
-							_fe3d.gameEntity_move(animation.animatedModelID, Vec3(0.0f, 0.0f, speed + (-difference)), partName);
+							_fe3d.gameEntity_move(animation.animatedModelID, Vec3(0.0f, 0.0f, zSpeed + (-difference)), partName);
 						}
 						else if (transformationType == TransformationType::ROTATION)
 						{
-							_fe3d.gameEntity_setRotationOrigin(animation.animatedModelID, modelSize * rotationOrigin, partName);
-							_fe3d.gameEntity_rotate(animation.animatedModelID, Vec3(0.0f, 0.0f, speed + (-difference)), partName);
+							_fe3d.gameEntity_setRotationOrigin(animation.animatedModelID, currentModelSize * rotationOrigin, partName);
+							_fe3d.gameEntity_rotate(animation.animatedModelID, Vec3(0.0f, 0.0f, zSpeed + (-difference)), partName);
 						}
 						else if (transformationType == TransformationType::SCALING)
 						{
-							_fe3d.gameEntity_scale(animation.animatedModelID, Vec3(0.0f, 0.0f, speed + (-difference)), partName);
+							_fe3d.gameEntity_scale(animation.animatedModelID, Vec3(0.0f, 0.0f, zSpeed + (-difference)), partName);
 						}
 					}
 				}

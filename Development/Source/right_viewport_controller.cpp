@@ -58,14 +58,18 @@ void RightViewportController::initialize()
 	modelEditorScreen->addTextfield("f", Vec2(-0.5f, 0.075f), Vec2(CW("Wireframe"), textHeight), "Wireframe", black, false);
 	modelEditorScreen->addTextfield("space", Vec2(-0.5f, -0.125f), Vec2(CW("Move up"), textHeight), "Move up", black, false);
 	modelEditorScreen->addTextfield("shift", Vec2(-0.5f, -0.325f), Vec2(CW("Move down"), textHeight), "Move down", black, false);
-	modelEditorScreen->addTextfield("esc", Vec2(-0.5f, -0.525f), Vec2(CW("Back"), textHeight), "Back", black, false);
+	modelEditorScreen->addTextfield("up", Vec2(-0.5f, -0.525f), Vec2(CW("200% speed"), textHeight), "200% speed", black, false);
+	modelEditorScreen->addTextfield("down", Vec2(-0.5f, -0.725f), Vec2(CW("50% speed"), textHeight), "50% speed", black, false);
+	modelEditorScreen->addTextfield("esc", Vec2(-0.5f, -0.925f), Vec2(CW("Back"), textHeight), "Back", black, false);
 	modelEditorScreen->addRectangle("mouse", Vec2(-1.1f, 0.65f), Vec2(0.6f, 0.15f), "mouse.png", false);
 	modelEditorScreen->addRectangle("h", Vec2(-0.975f, 0.45f), Vec2(0.45f, 0.15f), "h.png", false);
 	modelEditorScreen->addRectangle("r", Vec2(-0.975f, 0.25f), Vec2(0.45f, 0.15f), "r.png", false);
 	modelEditorScreen->addRectangle("f", Vec2(-0.975f, 0.05f), Vec2(0.45f, 0.15f), "f.png", false);
 	modelEditorScreen->addRectangle("space", Vec2(-0.975f, -0.15f), Vec2(0.45f, 0.15f), "space.png", false);
 	modelEditorScreen->addRectangle("shift", Vec2(-0.975f, -0.35f), Vec2(0.45f, 0.15f), "shift.png", false);
-	modelEditorScreen->addRectangle("esc", Vec2(-0.975f, -0.55f), Vec2(0.45f, 0.15f), "esc.png", false);
+	modelEditorScreen->addRectangle("up", Vec2(-0.975f, -0.55f), Vec2(0.45f, 0.15f), "up.png", false);
+	modelEditorScreen->addRectangle("down", Vec2(-0.975f, -0.75f), Vec2(0.45f, 0.15f), "down.png", false);
+	modelEditorScreen->addRectangle("esc", Vec2(-0.975f, -0.95f), Vec2(0.45f, 0.15f), "esc.png", false);
 
 	// Billboard editor
 	auto billboardEditorScreen = rightWindow->getScreen("billboardEditorControls");
@@ -112,13 +116,17 @@ void RightViewportController::initialize()
 	animationEditorScreen->addTextfield("f", Vec2(-0.5f, 0.275f), Vec2(CW("Wireframe"), textHeight), "Wireframe", black, false);
 	animationEditorScreen->addTextfield("space", Vec2(-0.5f, 0.075f), Vec2(CW("Move up"), textHeight), "Move up", black, false);
 	animationEditorScreen->addTextfield("shift", Vec2(-0.5f, -0.125f), Vec2(CW("Move down"), textHeight), "Move down", black, false);
-	animationEditorScreen->addTextfield("esc", Vec2(-0.5f, -0.325f), Vec2(CW("Back"), textHeight), "Back", black, false);
+	animationEditorScreen->addTextfield("up", Vec2(-0.5f, -0.325f), Vec2(CW("200% speed"), textHeight), "200% speed", black, false);
+	animationEditorScreen->addTextfield("down", Vec2(-0.5f, -0.525f), Vec2(CW("50% speed"), textHeight), "50% speed", black, false);
+	animationEditorScreen->addTextfield("esc", Vec2(-0.5f, -0.725f), Vec2(CW("Back"), textHeight), "Back", black, false);
 	animationEditorScreen->addRectangle("mouse", Vec2(-1.1f, 0.65f), Vec2(0.6f, 0.15f), "mouse.png", false);
 	animationEditorScreen->addRectangle("h", Vec2(-0.975f, 0.45f), Vec2(0.45f, 0.15f), "h.png", false);
 	animationEditorScreen->addRectangle("f", Vec2(-0.975f, 0.25f), Vec2(0.45f, 0.15f), "f.png", false);
 	animationEditorScreen->addRectangle("space", Vec2(-0.975f, 0.05f), Vec2(0.45f, 0.15f), "space.png", false);
 	animationEditorScreen->addRectangle("shift", Vec2(-0.975f, -0.15f), Vec2(0.45f, 0.15f), "shift.png", false);
-	animationEditorScreen->addRectangle("esc", Vec2(-0.975f, -0.35f), Vec2(0.45f, 0.15f), "esc.png", false);
+	animationEditorScreen->addRectangle("up", Vec2(-0.975f, -0.35f), Vec2(0.45f, 0.15f), "up.png", false);
+	animationEditorScreen->addRectangle("down", Vec2(-0.975f, -0.55f), Vec2(0.45f, 0.15f), "down.png", false);
+	animationEditorScreen->addRectangle("esc", Vec2(-0.975f, -0.75f), Vec2(0.45f, 0.15f), "esc.png", false);
 
 	// Script editor
 	auto scriptEditorScreen = rightWindow->getScreen("scriptEditorControls");

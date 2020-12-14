@@ -1,4 +1,4 @@
-17 57
+18 0
 META script_type_init
 META execution_entry
 
@@ -15,5 +15,7 @@ fe3d:model_place("player", "skeleton", 0.0, 0.0, 0.0)
 fe3d:model_maxheight_set("player", 2.5)
 fe3d:model_place("axe", "axe", 0.0, 0.0, 0.0)
 fe3d:model_place("millie", "mill", -60.0, 6.4, -50.0)
-fe3d:model_rotation_set("millie", 0.0, 45.0, 0.0)
+fe3d:model_animation_start("updown", "millie", -1)
+fe3d:model_animation_start("rotation", "millie", -1)
+fe3d:model_animation_start("resize", "millie", -1)
 fe3d:model_animation_start("mill_rotation", "millie", -1)

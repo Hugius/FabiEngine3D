@@ -146,6 +146,7 @@ void ModelEditor::unload()
 	_cameraAcceleration = Vec2(0.0f);
 	_lastCursorPos = Vec2(0.0f);
 	_cameraDistance = 5.0f;
+	_cameraSpeed = 0.1f;
 	_cameraScrollingAcceleration = 0.0f;
 	_aabbTransformationSpeed = 1.0f;
 	_isCreatingModel = false;

@@ -26,10 +26,22 @@ void AnimationEditor::_updateEditingScreen()
 					if (_fe3d.gameEntity_isExisting(currentAnimation->previewModelID))
 					{
 						// For every model part
-						_fe3d.gameEntity_setPosition(currentAnimation->previewModelID, currentAnimation->initialTranslation, "");
-						_fe3d.gameEntity_setRotationOrigin(currentAnimation->previewModelID, currentAnimation->initialRotationOrigin, "");
-						_fe3d.gameEntity_setRotation(currentAnimation->previewModelID, currentAnimation->initialRotation, "");
-						_fe3d.gameEntity_setSize(currentAnimation->previewModelID, currentAnimation->initialScaling, "");
+						for (const auto& partName : currentAnimation->partNames)
+						{
+							_fe3d.gameEntity_setPosition(currentAnimation->previewModelID, Vec3(0.0f), partName);
+							_fe3d.gameEntity_setRotationOrigin(currentAnimation->previewModelID, Vec3(0.0f), partName);
+							_fe3d.gameEntity_setRotation(currentAnimation->previewModelID, Vec3(0.0f), partName);
+							
+							// Only whole model size must be original
+							if (partName.empty())
+							{
+								_fe3d.gameEntity_setSize(currentAnimation->previewModelID, currentAnimation->initialScaling, partName);
+							}
+							else
+							{
+								_fe3d.gameEntity_setSize(currentAnimation->previewModelID, Vec3(1.0f), partName);
+							}
+						}
 					}
 
 					// Reset some values
@@ -55,10 +67,22 @@ void AnimationEditor::_updateEditingScreen()
 				else if (screen->getButton("play")->isHovered())
 				{
 					// Reset preview model transformation
-					_fe3d.gameEntity_setPosition(currentAnimation->previewModelID, currentAnimation->initialTranslation, "");
-					_fe3d.gameEntity_setRotationOrigin(currentAnimation->previewModelID, currentAnimation->initialRotationOrigin, "");
-					_fe3d.gameEntity_setRotation(currentAnimation->previewModelID, currentAnimation->initialRotation, "");
-					_fe3d.gameEntity_setSize(currentAnimation->previewModelID, currentAnimation->initialScaling, "");
+					for (const auto& partName : currentAnimation->partNames)
+					{
+						_fe3d.gameEntity_setPosition(currentAnimation->previewModelID, Vec3(0.0f), partName);
+						_fe3d.gameEntity_setRotationOrigin(currentAnimation->previewModelID, Vec3(0.0f), partName);
+						_fe3d.gameEntity_setRotation(currentAnimation->previewModelID, Vec3(0.0f), partName);
+
+						// Only whole model size must be original
+						if (partName.empty())
+						{
+							_fe3d.gameEntity_setSize(currentAnimation->previewModelID, currentAnimation->initialScaling, partName);
+						}
+						else
+						{
+							_fe3d.gameEntity_setSize(currentAnimation->previewModelID, Vec3(1.0f), partName);
+						}
+					}
 
 					// Start animation
 					startAnimation(_currentAnimationID, currentAnimation->previewModelID, 1);
@@ -69,10 +93,23 @@ void AnimationEditor::_updateEditingScreen()
 					stopAnimation(_currentAnimationID, currentAnimation->previewModelID);
 
 					// Reset preview model transformation
-					_fe3d.gameEntity_setPosition(currentAnimation->previewModelID, currentAnimation->initialTranslation, "");
-					_fe3d.gameEntity_setRotationOrigin(currentAnimation->previewModelID, currentAnimation->initialRotationOrigin, "");
-					_fe3d.gameEntity_setRotation(currentAnimation->previewModelID, currentAnimation->initialRotation, "");
 					_fe3d.gameEntity_setSize(currentAnimation->previewModelID, currentAnimation->initialScaling, "");
+					for (const auto& partName : currentAnimation->partNames)
+					{
+						_fe3d.gameEntity_setPosition(currentAnimation->previewModelID, Vec3(0.0f), partName);
+						_fe3d.gameEntity_setRotationOrigin(currentAnimation->previewModelID, Vec3(0.0f), partName);
+						_fe3d.gameEntity_setRotation(currentAnimation->previewModelID, Vec3(0.0f), partName);
+						
+						// Only whole model size must be original
+						if (partName.empty())
+						{
+							_fe3d.gameEntity_setSize(currentAnimation->previewModelID, currentAnimation->initialScaling, partName);
+						}
+						else
+						{
+							_fe3d.gameEntity_setSize(currentAnimation->previewModelID, Vec3(1.0f), partName);
+						}
+					}
 				}
 				else if (screen->getButton("addFrame")->isHovered())
 				{
@@ -182,9 +219,6 @@ void AnimationEditor::_updateEditingScreen()
 
 					// Change values
 					currentAnimation->previewModelID = selectedModelID;
-					currentAnimation->initialTranslation = _fe3d.gameEntity_getPosition(currentAnimation->previewModelID);
-					currentAnimation->initialRotationOrigin = _fe3d.gameEntity_getRotationOrigin(currentAnimation->previewModelID);
-					currentAnimation->initialRotation = _fe3d.gameEntity_getRotation(currentAnimation->previewModelID);
 					currentAnimation->initialScaling = _fe3d.gameEntity_getSize(currentAnimation->previewModelID);
 					currentAnimation->initialColor = _fe3d.gameEntity_getColor(currentAnimation->previewModelID);
 
@@ -194,12 +228,16 @@ void AnimationEditor::_updateEditingScreen()
 						// Retrieve partnames from model
 						for (auto partName : _fe3d.gameEntity_getPartNames(currentAnimation->previewModelID))
 						{
-							currentAnimation->partNames.push_back(partName);
+							// Cannot add whole-model partname again
+							if (!partName.empty())
+							{
+								currentAnimation->partNames.push_back(partName);
 
-							// Also add total transformation for each partname
-							currentAnimation->totalTranslations.insert(make_pair(partName, Vec3(0.0f)));
-							currentAnimation->totalRotations.insert(make_pair(partName, Vec3(0.0f)));
-							currentAnimation->totalScalings.insert(make_pair(partName, Vec3(0.0f)));
+								// Also add total transformation for each partname
+								currentAnimation->totalTranslations.insert(make_pair(partName, Vec3(0.0f)));
+								currentAnimation->totalRotations.insert(make_pair(partName, Vec3(0.0f)));
+								currentAnimation->totalScalings.insert(make_pair(partName, Vec3(0.0f)));
+							}
 						}
 					}
 
@@ -232,6 +270,10 @@ void AnimationEditor::_updateFrameScreen()
 			auto& speedType = currentAnimation->frames[_currentFrameIndex].speedTypes[_currentPartName];
 			auto& transType = currentAnimation->frames[_currentFrameIndex].transformationTypes[_currentPartName];
 
+			// Translation in small units, scaling in %, rotation in whole degrees
+			float multiplier = (transType == TransformationType::TRANSLATION) ? 1000.0f :
+				(transType == TransformationType::SCALING) ? 100.0f : 1.0f;
+
 			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
 			{
 				if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused())) // Back button
@@ -242,9 +284,9 @@ void AnimationEditor::_updateFrameScreen()
 				}
 				else if (screen->getButton("transformation")->isHovered())
 				{
-					_gui.getGlobalScreen()->addValueForm("xTransformation", "X", transformation.x, Vec2(-0.25f, 0.0f), Vec2(0.2f, 0.1f));
-					_gui.getGlobalScreen()->addValueForm("yTransformation", "Y", transformation.y, Vec2(0.0f, 0.0f), Vec2(0.2f, 0.1f));
-					_gui.getGlobalScreen()->addValueForm("zTransformation", "Z", transformation.z, Vec2(0.25f, 0.0f), Vec2(0.2f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("xTransformation", "X", transformation.x * multiplier, Vec2(-0.25f, 0.0f), Vec2(0.2f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("yTransformation", "Y", transformation.y * multiplier, Vec2(0.0f, 0.0f), Vec2(0.2f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("zTransformation", "Z", transformation.z * multiplier, Vec2(0.25f, 0.0f), Vec2(0.2f, 0.1f));
 				}
 				else if (screen->getButton("rotationOrigin")->isHovered())
 				{
@@ -304,10 +346,23 @@ void AnimationEditor::_updateFrameScreen()
 			_partColorIncreasing = (_partColorStrength >= 1.0f) ? false : (_partColorStrength <= 0.0f) ? true : _partColorIncreasing;
 			_partColorStrength += ((_partColorIncreasing ? 1.0f : -1.0f) * _colorChangingSpeed);
 
-			// Update transformation vector changes
-			_gui.getGlobalScreen()->checkValueForm("xTransformation", transformation.x, { });
-			_gui.getGlobalScreen()->checkValueForm("yTransformation", transformation.y, { });
-			_gui.getGlobalScreen()->checkValueForm("zTransformation", transformation.z, { });
+			// Update transformation X change
+			if (_gui.getGlobalScreen()->checkValueForm("xTransformation", transformation.x, { }))
+			{
+				transformation.x /= multiplier;
+			}
+
+			// Update transformation Y change
+			if (_gui.getGlobalScreen()->checkValueForm("yTransformation", transformation.y, { }))
+			{
+				transformation.y /= multiplier;
+			}
+
+			// Update transformation Z change
+			if (_gui.getGlobalScreen()->checkValueForm("zTransformation", transformation.z, { }))
+			{
+				transformation.z /= multiplier;
+			}
 
 			// Update rotation origin X change
 			if (_gui.getGlobalScreen()->checkValueForm("xRotationOrigin", rotationOrigin.x, { }))

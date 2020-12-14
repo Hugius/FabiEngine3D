@@ -114,9 +114,6 @@ void AnimationEditor::loadAnimationsFromFile()
 				// Check if preview model is still existing
 				if (_fe3d.gameEntity_isExisting(newAnimation->previewModelID))
 				{
-					newAnimation->initialTranslation = _fe3d.gameEntity_getPosition(newAnimation->previewModelID);
-					newAnimation->initialRotationOrigin = _fe3d.gameEntity_getRotationOrigin(newAnimation->previewModelID);
-					newAnimation->initialRotation = _fe3d.gameEntity_getRotation(newAnimation->previewModelID);
 					newAnimation->initialScaling = _fe3d.gameEntity_getSize(newAnimation->previewModelID);
 					newAnimation->initialColor = _fe3d.gameEntity_getColor(newAnimation->previewModelID);
 				}

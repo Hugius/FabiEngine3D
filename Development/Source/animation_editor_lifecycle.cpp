@@ -21,6 +21,7 @@ void AnimationEditor::startAnimation(const string& animationID, const string& mo
 					auto animation = _getAnimation(animationID);
 					animation->animatedModelID = modelID;
 					animation->timesToPlay = timesToPlay;
+					animation->initialScaling = _fe3d.gameEntity_getSize(modelID);
 
 					// Play animation
 					_playingAnimations.insert(make_pair(make_pair(animationID, modelID), *animation));

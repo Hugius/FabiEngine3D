@@ -104,6 +104,7 @@ void AnimationEditor::unload()
 	_cameraAcceleration = Vec2(0.0f);
 	_lastCursorPos = Vec2(0.0f);
 	_cameraDistance = 5.0f;
+	_cameraSpeed = 0.1f;
 	_cameraScrollingAcceleration = 0.0f;
 	_partColorStrength = 0.0f;
 	_colorChangingSpeed = 0.05f;

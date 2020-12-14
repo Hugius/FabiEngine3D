@@ -200,6 +200,16 @@ void AnimationEditor::_updateCamera()
 {
 	if (_isEditorLoaded)
 	{
+		// Update camera speed alteration
+		if (_fe3d.input_getKeyPressed(InputType::KEY_UP))
+		{
+			_cameraSpeed *= 2.0f;
+		}
+		if (_fe3d.input_getKeyPressed(InputType::KEY_DOWN))
+		{
+			_cameraSpeed /= 2.0f;
+		}
+
 		// Update vertical lookat movement
 		if (_fe3d.input_getKeyDown(InputType::KEY_SPACE))
 		{
@@ -208,6 +218,12 @@ void AnimationEditor::_updateCamera()
 		if (_fe3d.input_getKeyDown(InputType::KEY_LSHIFT))
 		{
 			_cameraLookatPosition.y -= (_cameraSpeed / 2.0f);
+
+			// Cannot be negative
+			if (_cameraLookatPosition.y < 0.0f)
+			{
+				_cameraLookatPosition = 0.0f;
+			}
 		}
 
 		// Update cursor difference
@@ -216,9 +232,10 @@ void AnimationEditor::_updateCamera()
 		_lastCursorPos = _fe3d.misc_convertFromScreenCoords(_fe3d.misc_getCursorPosition());
 
 		// Update scrolling
-		if (!_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isCursorInsideViewport()) // No GUI focus and cursor must be within viewport
+		if (!_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isCursorInsideViewport())
 		{
-			_cameraScrollingAcceleration += float(-_fe3d.input_getMouseWheelY() / _scrollWheelDivider); // Add to acceleration
+			// Add to acceleration
+			_cameraScrollingAcceleration += float(-_fe3d.input_getMouseWheelY() / _scrollWheelDivider) * _cameraSpeed;
 		}
 		_cameraScrollingAcceleration *= 0.975f; // Slowing down (smoothing)
 		_cameraScrollingAcceleration = std::clamp(_cameraScrollingAcceleration, -1.0f, 1.0f);

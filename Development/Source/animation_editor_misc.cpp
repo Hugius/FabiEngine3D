@@ -57,21 +57,29 @@ void AnimationEditor::_updateMiscellaneous()
 				// Check if animation has a preview model
 				if (!currentAnimation->previewModelID.empty())
 				{
-					// Retrieve model size
-					auto modelSize = _fe3d.gameEntity_getSize(currentAnimation->previewModelID);
-
 					// Retrieve current frame
 					auto frame = currentAnimation->frames[_currentFrameIndex];
-					
-					// Default frame
-					if (_currentFrameIndex == 0)
+
+					// Default transformation
+					for (auto partName : currentAnimation->partNames)
 					{
-						_fe3d.gameEntity_setPosition(currentAnimation->previewModelID, currentAnimation->initialTranslation, "");
-						_fe3d.gameEntity_setRotationOrigin(currentAnimation->previewModelID, currentAnimation->initialRotationOrigin, "");
-						_fe3d.gameEntity_setRotation(currentAnimation->previewModelID, currentAnimation->initialRotation, "");
-						_fe3d.gameEntity_setSize(currentAnimation->previewModelID, currentAnimation->initialScaling, "");
+						_fe3d.gameEntity_setPosition(currentAnimation->previewModelID, Vec3(0.0f), partName);
+						_fe3d.gameEntity_setRotationOrigin(currentAnimation->previewModelID, Vec3(0.0f), partName);
+						_fe3d.gameEntity_setRotation(currentAnimation->previewModelID, Vec3(0.0f), partName);
+
+						// Only whole model size must be original
+						if (partName.empty())
+						{
+							_fe3d.gameEntity_setSize(currentAnimation->previewModelID, currentAnimation->initialScaling, partName);
+						}
+						else
+						{
+							_fe3d.gameEntity_setSize(currentAnimation->previewModelID, Vec3(1.0f), partName);
+						}
 					}
-					else // Frame created by user
+
+					// Frame created by user
+					if (_currentFrameIndex > 0)
 					{
 						for (auto partName : currentAnimation->partNames)
 						{
@@ -81,20 +89,31 @@ void AnimationEditor::_updateMiscellaneous()
 								// Determine type of transformation
 								if (frame.transformationTypes[partName] == TransformationType::TRANSLATION)
 								{
+									// Translation
 									_fe3d.gameEntity_setPosition(currentAnimation->previewModelID,
-										currentAnimation->initialTranslation + frame.targetTransformations[partName], partName);
+										(currentAnimation->initialScaling * frame.targetTransformations[partName]), partName);
 								}
 								else if (frame.transformationTypes[partName] == TransformationType::ROTATION)
 								{
+									// Retrieve current model size
+									const auto& currentModelSize = _fe3d.gameEntity_getSize(currentAnimation->previewModelID);
+
+									// Origin
 									_fe3d.gameEntity_setRotationOrigin(currentAnimation->previewModelID,
-										currentAnimation->initialRotationOrigin + (modelSize * frame.rotationOrigins[partName]), partName);
+										(currentModelSize * frame.rotationOrigins[partName]), partName);
+
+									// Rotation
 									_fe3d.gameEntity_setRotation(currentAnimation->previewModelID,
-										currentAnimation->initialRotation + frame.targetTransformations[partName], partName);
+										frame.targetTransformations[partName], partName);
 								}
 								else if (frame.transformationTypes[partName] == TransformationType::SCALING)
 								{
+									// Retrieve model size (or part default size)
+									const auto& modelSize = partName.empty() ? currentAnimation->initialScaling : Vec3(1.0f);
+
+									// Scaling
 									_fe3d.gameEntity_setSize(currentAnimation->previewModelID,
-										currentAnimation->initialScaling + frame.targetTransformations[partName], partName);
+										modelSize + (modelSize * frame.targetTransformations[partName]), partName);
 								}
 							}
 						}

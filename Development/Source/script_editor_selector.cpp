@@ -36,7 +36,7 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 				_fe3d.input_getKeyPressed(InputType::KEY_BACKSPACE) ||
 				_fe3d.input_getKeyPressed(InputType::KEY_DELETE) ||
 				_fe3d.input_getKeyPressed(InputType::KEY_ENTER) ||
-				(_fe3d.input_getKeyDown(InputType::KEY_LCTRL) && _fe3d.input_getKeyPressed(InputType::KEY_V)) ||
+				(_fe3d.input_getKeyDown(InputType::KEY_LCTRL) && _fe3d.input_getKeyPressed(InputType::KEY_V) && !_copyClipboard.empty()) ||
 				(_fe3d.input_getKeyDown(InputType::KEY_LCTRL) && _fe3d.input_getKeyPressed(InputType::KEY_X)))
 			{
 				if (_lastSelectedLineIndex == -1) // Only 1 line is selected

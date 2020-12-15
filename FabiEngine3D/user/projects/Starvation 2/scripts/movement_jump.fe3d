@@ -1,27 +1,23 @@
-0 23
+19 21
 META script_type_update
 
 /// Temporary values
 BOOL jump = fe3d:input_key_pressed("KEY_SPACE")
 VEC3 camPos = fe3d:camera_position_get()
 
-/// Jumping movement
-IF jump IS <true> AND _isJumping NOT <true> AND _isFalling NOT <true>:
+/// Initiate jump
+IF jump IS <true> AND _isJumping NOT <true>:
     EDIT _isJumping = <true>
+
+/// Jumping movement
 IF _isJumping IS <true>:
     IF _jumpingSpeed LESS 0.01:
         EDIT _isJumping = <false>
-        EDIT _isFalling = <true>
     ELSE:
         MUL _jumpingSpeed 0.95
         fe3d:camera_move(0.0, _jumpingSpeed, 0.0)
-IF _isFalling IS <true>:
-    IF camPos.y LESS _minCamHeight:
-        EDIT _isFalling = <false>
-        EDIT _jumpingSpeed = 0.1
-        fe3d:camera_position_set(camPos.x, _minCamHeight, camPos.z)
-    ELSE:
-        MUL _jumpingSpeed 1.1
-        NEG _jumpingSpeed
-        fe3d:camera_move(0.0, _jumpingSpeed, 0.0)
-        NEG _jumpingSpeed
+ELSE:
+    MUL _fallingSpeed 1.1
+    NEG _fallingSpeed
+    fe3d:camera_move(0.0, _fallingSpeed, 0.0)
+    NEG _fallingSpeed

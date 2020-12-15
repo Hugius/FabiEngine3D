@@ -224,6 +224,11 @@ bool FabiEngine3D::collision_checkAnyWithCamera()
 	return false;
 }
 
+bool FabiEngine3D::collision_checkCameraWithTerrain()
+{
+	return _core->_collisionResolver.isCameraUnderTerrain();
+}
+
 bool FabiEngine3D::collision_checkEntityWithCamera(const string& ID)
 {
 	return _core->_aabbEntityManager.getEntity(ID)->getCollisionDirection() != Direction::NONE;

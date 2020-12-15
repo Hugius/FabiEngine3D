@@ -17,8 +17,7 @@ public:
 	void enableTerrainResponse(float cameraHeight, float cameraSpeed);
 	void disableTerrainResponse();
 
-	bool isCameraAboveGround();
-	bool isCameraUnderGround();
+	bool isCameraUnderTerrain();
 
 private:
 	CollisionDetector& _collisionDetector;
@@ -28,6 +27,5 @@ private:
 
 	bool _aabbResponseEnabled    = false;
 	bool _terrainResponseEnabled = false;
-	bool _aboveGround			 = false;
-	bool _underGround			 = false;
+	bool _isCameraUnderTerrain		 = false;
 };

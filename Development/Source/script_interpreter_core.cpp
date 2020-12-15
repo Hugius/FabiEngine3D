@@ -123,7 +123,7 @@ void ScriptInterpreter::load()
 
 	// Check if any engine warnings were thrown
 	_checkEngineWarnings();
-
+	
 	// Enable collision
 	_fe3d.collision_enableCameraResponse();
 
@@ -144,6 +144,7 @@ void ScriptInterpreter::executeInitialization()
 
 void ScriptInterpreter::executeUpdate()
 {
+	_fe3d.collision_enableCameraTerrainResponse(8.0f, 0.1f);
 	if (_updateEntryID != "")
 	{
 		_executeScript(_updateEntryID, ScriptType::UPDATE);
@@ -161,27 +162,17 @@ void ScriptInterpreter::executeDestruction()
 void ScriptInterpreter::unload()
 {
 	// Reset all variables
-	_localVariablesStack.clear();
-	_currentScriptStack.clear();
-	_currentLineIndexStack.clear();
-	_scopeDepthStack.clear();
 	_initScriptIDs.clear();
 	_updateScriptIDs.clear();
 	_destroyScriptIDs.clear();
 	_globalVariables.clear();
-	_loopLineIndices.clear();
-	_loopScopeDepths.clear();
 	_initEntryID = "";
 	_updateEntryID = "";
 	_destroyEntryID = "";
-	_totalLoops = 0;
 	_lastLoggerMessageCount = 0;
 	_hasThrownError = false;
-	_isInLoop = false;
 	_scopeHasChanged = false;
 	_passedScopeChanger = false;
-	_lastConditionResult = false;
-	_lastScopeChanger = ScriptScopeChanger::NONE;
 	_sceneEditor.clearScene();
 	_animationEditor.stopAllAnimations();
 	_fe3d.collision_disableCameraResponse();

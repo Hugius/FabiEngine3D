@@ -1,14 +1,14 @@
-6 20
+10 30
 META script_type_init
 
 /// Global variables
 GLOB BOOL _isJumping = <false>
-GLOB BOOL _isFalling = <false>
 GLOB BOOL _isWalking = <false>
 GLOB BOOL _isRunning = <false>
 GLOB CONST DEC _minCamHeight = 9.0
 GLOB VEC3 _movingAcc = [0.0 0.0 0.0]
 GLOB VEC3 _movingSpeed = [0.0 0.0 0.0]
 GLOB DEC _jumpingSpeed = 0.1
+GLOB DEC _fallingSpeed = 0.001
 GLOB DEC _totalBobbing = 0.0
 GLOB DEC _bobbingDirection = 1.0

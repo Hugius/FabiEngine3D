@@ -1,4 +1,4 @@
-46 13
+11 33
 META script_type_update
 
 /// Walking skeleton animation
@@ -52,3 +52,9 @@ fe3d:model_rotation_set("axe", axeRot.x, axeRot.y, axeRot.z)
 /// Play axe cutting animation
 IF lmb IS <true> AND isPlaying IS <false>:
     fe3d:model_animation_start("axe_cut", "axe", 1)
+    BOOL visible = fe3d:model_visible_get("millie")
+    IF visible IS <true>:
+        EDIT visible = <false>
+    ELIF visible IS <false>:
+        EDIT visible = <true>
+    fe3d:model_visible_set("millie", visible)

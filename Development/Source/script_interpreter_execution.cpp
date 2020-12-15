@@ -2,8 +2,22 @@
 
 void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType scriptType)
 {
+	// Temporary local values for this script run
+	vector<unsigned int> loopLineIndices;
+	vector<unsigned int> loopScopeDepths;
+	vector<ScriptConditionStatement> conditionStatements;
+	unsigned int scopeDepth = 0;
+	unsigned int totalLoops = 0;
+
+	// Set current script run data
+	_currentScriptID = scriptID;
+	_localVariablesStack.push_back({});
+
+	// Increase execution depth
+	_executionDepth++;
+
 	// Detect infinite recursion
-	if (_localVariablesStack.size() >= 100)
+	if (_executionDepth >= _maxExecutionDepth)
 	{
 		_fe3d.logger_throwWarning("too many script execution layers, perhaps infinite recursion?");
 	}
@@ -17,12 +31,6 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 		return;
 	}
 
-	// Save local state of script currently being executed
-	_localVariablesStack.push_back({});
-	_currentScriptStack.push_back(scriptID);
-	_currentLineIndexStack.push_back(0);
-	_scopeDepthStack.push_back(0);
-
 	// Retrieve script file
 	auto scriptFile = _script.getScriptFile(scriptID);
 
@@ -33,7 +41,7 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 		_lastLoggerMessageCount = _fe3d.logger_getMessageStack().size();
 
 		// Save index of line of script currently being executed
-		_currentLineIndexStack.back() = lineIndex;
+		_currentLineIndex = lineIndex;
 
 		// Retrieve line text
 		string scriptLineText = scriptFile->getLineText(lineIndex);
@@ -61,11 +69,11 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 		
 		// Detect end of loop
 		bool endOfLoop = false;
-		if (!_loopLineIndices.empty())
+		if (!loopLineIndices.empty())
 		{
-			if (currentLineScopeDepth < _loopScopeDepths.back()) // End of current loop scope
+			if (currentLineScopeDepth <= loopScopeDepths.back()) // End of current loop scope
 			{
-				if (_totalLoops >= _maxLoopsPerFrame) // Infinite loop
+				if (totalLoops >= _maxLoopsPerFrame) // Infinite loop
 				{
 					_throwScriptError("maximum amount of loops reached, perhaps infinite looping?");
 					return;
@@ -73,15 +81,15 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 				else // Normal loop
 				{
 					// Go back to current loop's beginning
-					lineIndex = _loopLineIndices.back();
-					_scopeDepthStack.back() = _loopScopeDepths.back();
-					_totalLoops++;
+					lineIndex = loopLineIndices.back();
+					scopeDepth = loopScopeDepths.back() + 1;
+					totalLoops++;
 					continue;
 				}
 			}
 			else if (lineIndex == scriptFile->getLineCount() - 1) // End of script
 			{
-				if (_totalLoops >= _maxLoopsPerFrame) // Infinite loop
+				if (totalLoops >= _maxLoopsPerFrame) // Infinite loop
 				{
 					_throwScriptError("maximum amount of loops reached, perhaps infinite looping?");
 					return;
@@ -94,7 +102,7 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 		}
 
 		// Validate a potentional scope change
-		bool scopeChangeValidation = _validateScopeChange(countedSpaces, scriptLineText);
+		bool scopeChangeValidation = _validateScopeChange(countedSpaces, scriptLineText, scopeDepth);
 		if (_hasThrownError) // Check if an error was thrown
 		{
 			return;
@@ -155,31 +163,31 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 		}
 		else if (scriptLineText == (_loopKeyword + ":")) // Loop statement
 		{
-			_scopeDepthStack.back()++; // New depth layer
-			_loopScopeDepths.push_back(_scopeDepthStack.back()); // Save loop's scope depth
-			_loopLineIndices.push_back(lineIndex); // Save loop's line index
+			loopScopeDepths.push_back(scopeDepth); // Save loop's scope depth
+			loopLineIndices.push_back(lineIndex); // Save loop's line index
+			scopeDepth++; // New depth layer
 			_scopeHasChanged = true;
 		}
 		else if (scriptLineText.substr(0, _ifKeyword.size() + 1) == _ifKeyword + " ") // If statement
 		{
-			// Check if if-statement ends with colon
+			// Check if "if" statement ends with colon
 			if (scriptLineText.back() == ':')
 			{
+				// Extract condition string
 				string conditionString = scriptLineText.substr((_ifKeyword.size() + 1), scriptLineText.size() - (_ifKeyword.size() + 2));
 
 				// Check the condition of the if statement
 				if (_checkConditionString(conditionString))
 				{
-					_scopeDepthStack.back()++;
 					_scopeHasChanged = true;
-					_lastConditionResult = true;
+					conditionStatements.push_back(ScriptConditionStatement(scopeDepth, true));
+					scopeDepth++;
 				}
 				else
 				{
 					_passedScopeChanger = true;
-					_lastConditionResult = false;
+					conditionStatements.push_back(ScriptConditionStatement(scopeDepth, false));
 				}
-				_lastScopeChanger = ScriptScopeChanger::IF;
 			}
 			else
 			{
@@ -189,76 +197,89 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 		}
 		else if (scriptLineText.substr(0, _elifKeyword.size() + 1) == _elifKeyword + " ") // Else if statement
 		{
-			// Check if in sequence with if statement
-			if (_lastScopeChanger == ScriptScopeChanger::IF)
+			// Check if "elif" statement ends with colon
+			if (scriptLineText.back() == ':')
 			{
-				// Check if elif statement ends with colon
-				if (scriptLineText.back() == ':')
+				// Check if in sequence with if statement
+				if (_getLastConditionStatement(conditionStatements, scopeDepth) != nullptr &&
+					_getLastConditionStatement(conditionStatements, scopeDepth)->type == ScriptConditionType::IF)
 				{
+
+					// Extract condition string
 					string conditionString = scriptLineText.substr((_elifKeyword.size() + 1), scriptLineText.size() - (_elifKeyword.size() + 2));
 
-					// Check the condition of the elif statement
-					if (!_lastConditionResult && _checkConditionString(conditionString))
+					// Set to elif statement
+					_getLastConditionStatement(conditionStatements, scopeDepth)->type = ScriptConditionType::ELIF;
+
+					// Check the condition of the elif statements
+					if (!_getLastConditionStatement(conditionStatements, scopeDepth)->conditionResult && _checkConditionString(conditionString))
 					{
-						_scopeDepthStack.back()++;
 						_scopeHasChanged = true;
-						_lastConditionResult = true;
+						_getLastConditionStatement(conditionStatements, scopeDepth)->conditionResult = true;
+						scopeDepth++;
 					}
 					else
 					{
 						_passedScopeChanger = true;
 					}
-					_lastScopeChanger = ScriptScopeChanger::ELIF;
+
 				}
 				else
 				{
-					_throwScriptError("elif statement must end with colon!");
+					_throwScriptError("elif statement can only come after if statement!");
 					return;
 				}
 			}
 			else
 			{
-				_throwScriptError("elif statement can only come after if statement!");
+				_throwScriptError("elif statement must end with colon!");
 				return;
 			}
 		}
 		else if (scriptLineText.substr(0, _elseKeyword.size()) == _elseKeyword) // Else statement
 		{
-			// Check if in sequence with if or elif statement
-			if (_lastScopeChanger == ScriptScopeChanger::IF || _lastScopeChanger == ScriptScopeChanger::ELIF)
+			// Check if "else" statement ends with colon
+			if (scriptLineText.back() == ':')
 			{
-				// Check if if statement ends with colon
-				if (scriptLineText.back() == ':')
+				// Check if in sequence with if or elif statement
+				if (_getLastConditionStatement(conditionStatements, scopeDepth) != nullptr &&
+					(_getLastConditionStatement(conditionStatements, scopeDepth)->type == ScriptConditionType::IF ||
+						_getLastConditionStatement(conditionStatements, scopeDepth)->type == ScriptConditionType::ELIF))
 				{
+
+					// Check if the statement does not have a condition
 					if (scriptLineText.size() == (_elseKeyword.size() + 1))
 					{
+						// Set to else statement
+						_getLastConditionStatement(conditionStatements, scopeDepth)->type = ScriptConditionType::ELSE;
+
 						// Check if all previous conditions failed
-						if (!_lastConditionResult)
+						if (!_getLastConditionStatement(conditionStatements, scopeDepth)->conditionResult)
 						{
-							_scopeDepthStack.back()++;
+							scopeDepth++;
 							_scopeHasChanged = true;
 						}
 						else
 						{
 							_passedScopeChanger = true;
 						}
-						_lastScopeChanger = ScriptScopeChanger::ELSE;
 					}
 					else
 					{
 						_throwScriptError("else statement cannot have a condition!");
 						return;
 					}
+
 				}
 				else
 				{
-					_throwScriptError("else statement must end with colon!");
+					_throwScriptError("else statement can only come after if or elif statement!");
 					return;
 				}
 			}
 			else
 			{
-				_throwScriptError("else statement can only come after if or elif statement!");
+				_throwScriptError("else statement must end with colon!");
 				return;
 			}
 		}
@@ -312,14 +333,14 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 		}
 		else if (scriptLineText == _breakKeyword) // Breaking out of loop
 		{
-			_scopeDepthStack.back()--;
-			_loopLineIndices.pop_back();
-			_loopScopeDepths.pop_back();
+			scopeDepth--;
+			loopLineIndices.pop_back();
+			loopScopeDepths.pop_back();
 			_passedScopeChanger = true;
 		}
 		else if (scriptLineText == _passKeyword) // Passing current script line
 		{
-			
+			// <--- Purposely left blank
 		}
 		else // Invalid keyword
 		{
@@ -339,18 +360,13 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 		// Go back to current loops beginning
 		if (endOfLoop)
 		{
-			lineIndex = _loopLineIndices.back();
-			_scopeDepthStack.back() = _loopScopeDepths.back();
-			_totalLoops++;
+			lineIndex = loopLineIndices.back();
+			scopeDepth = loopScopeDepths.back() + 1;
+			totalLoops++;
 		}
 	}
 
-	// End of this script file's execution
+	// End of current script file's execution
 	_localVariablesStack.pop_back();
-	_currentScriptStack.pop_back();
-	_currentLineIndexStack.pop_back();
-	_scopeDepthStack.pop_back();
-	_loopLineIndices.clear();
-	_loopScopeDepths.clear();
-	_totalLoops = 0;
+	_executionDepth--;
 }

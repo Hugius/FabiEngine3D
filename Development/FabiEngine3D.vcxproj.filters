@@ -580,6 +580,21 @@
     <ClCompile Include="Source\animation_editor_lifecycle.cpp">
       <Filter>src\Editor System\Animation Editor\Miscellaneous</Filter>
     </ClCompile>
+    <ClCompile Include="Source\script_interpreter_func_entity_billboard.cpp">
+      <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_interpreter_func_entity_terrain.cpp">
+      <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_interpreter_func_entity_sky.cpp">
+      <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_interpreter_func_entity_water.cpp">
+      <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_interpreter_func_animations.cpp">
+      <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\obj_loader.hpp">
@@ -864,9 +879,6 @@
     <ClInclude Include="Source\script_variable_scope.hpp">
       <Filter>src\Miscellaneous\Enums</Filter>
     </ClInclude>
-    <ClInclude Include="Source\script_scope_changer.hpp">
-      <Filter>src\Miscellaneous\Enums</Filter>
-    </ClInclude>
     <ClInclude Include="Source\audio_editor.hpp">
       <Filter>src\Editor System\Audio Editor\Core</Filter>
     </ClInclude>
@@ -929,6 +941,12 @@
     </ClInclude>
     <ClInclude Include="Source\animation_frame.hpp">
       <Filter>src\Editor System\Animation Editor\Data Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\script_condition_statement.hpp">
+      <Filter>src\Scripting System\Miscellaneous</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\script_condition_type.hpp">
+      <Filter>src\Miscellaneous\Enums</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -237,20 +237,21 @@ unsigned int ScriptInterpreter::_countFrontSpaces(const string& scriptLineText)
 	return countedSpaces;
 }
 
-bool ScriptInterpreter::_validateScopeChange(unsigned int countedSpaces, const string& scriptLineText)
+bool ScriptInterpreter::_validateScopeChange(unsigned int countedSpaces, const string& scriptLineText, unsigned int& scopeDepth)
 {
+	// Calculate scope depth of current scriptline
 	unsigned int currentLineScopeDepth = countedSpaces / _spacesPerIndent;
 
 	// Check if there is any code right after a scope change
-	if (_scopeHasChanged && ((currentLineScopeDepth != _scopeDepthStack.back()) || scriptLineText.substr(0, 3) == "///"))
+	if (_scopeHasChanged && ((currentLineScopeDepth != scopeDepth) || scriptLineText.substr(0, 3) == "///"))
 	{
 		_throwScriptError("no indented code after scope change!");
 	}
-	else if (currentLineScopeDepth < _scopeDepthStack.back()) // End of current scope
+	else if (currentLineScopeDepth < scopeDepth) // End of current scope
 	{
-		_scopeDepthStack.back() = currentLineScopeDepth;
+		scopeDepth = currentLineScopeDepth;
 	}
-	else if (currentLineScopeDepth > _scopeDepthStack.back()) // Outside of current scope
+	else if (currentLineScopeDepth > scopeDepth) // Outside of current scope
 	{
 		if (_passedScopeChanger) // Skip current line
 		{
@@ -288,9 +289,23 @@ bool ScriptInterpreter::_validateMouseInputString(const string& inputString)
 	return true;
 }
 
+ScriptConditionStatement* ScriptInterpreter::_getLastConditionStatement(vector<ScriptConditionStatement>& statements, unsigned int scopeDepth)
+{
+	unsigned int i = statements.size();
+	while (i--)
+	{
+		if (statements[i].scopeDepth == scopeDepth)
+		{
+			return &statements[i];
+		}
+	}
+
+	return nullptr;
+}
+
 void ScriptInterpreter::_throwScriptError(const string& message)
 {
-	_fe3d.logger_throwWarning("ERROR @ script \"" + _currentScriptStack.back() + "\" @ line " + to_string(_currentLineIndexStack.back() + 1) + ": " + message);
+	_fe3d.logger_throwWarning("ERROR @ script \"" + _currentScriptID + "\" @ line " + to_string(_currentLineIndex + 1) + ": " + message);
 	_hasThrownError = true;
 }
 

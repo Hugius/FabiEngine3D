@@ -173,6 +173,7 @@
     <ClInclude Include="Source\bottom_viewport_controller.hpp" />
     <ClInclude Include="Source\engine_gui_scrollinglist.hpp" />
     <ClInclude Include="Source\entity_type.hpp" />
+    <ClInclude Include="Source\script_condition_statement.hpp" />
     <ClInclude Include="Source\ivector2.hpp" />
     <ClInclude Include="Source\ivector3.hpp" />
     <ClInclude Include="Source\mathematics.hpp" />
@@ -188,7 +189,7 @@
     <ClInclude Include="Source\script_executor.hpp" />
     <ClInclude Include="Source\script_file.hpp" />
     <ClInclude Include="Source\script_interpreter.hpp" />
-    <ClInclude Include="Source\script_scope_changer.hpp" />
+    <ClInclude Include="Source\script_condition_type.hpp" />
     <ClInclude Include="Source\script_type.hpp" />
     <ClInclude Include="Source\script_value_type.hpp" />
     <ClInclude Include="Source\script_variable.hpp" />
@@ -354,6 +355,11 @@
     <ClCompile Include="Source\script_editor_selector.cpp" />
     <ClCompile Include="Source\script_executor.cpp" />
     <ClCompile Include="Source\script_file.cpp" />
+    <ClCompile Include="Source\script_interpreter_func_animations.cpp" />
+    <ClCompile Include="Source\script_interpreter_func_entity_billboard.cpp" />
+    <ClCompile Include="Source\script_interpreter_func_entity_sky.cpp" />
+    <ClCompile Include="Source\script_interpreter_func_entity_terrain.cpp" />
+    <ClCompile Include="Source\script_interpreter_func_entity_water.cpp" />
     <ClCompile Include="Source\script_interpreter_list_core.cpp" />
     <ClCompile Include="Source\script_interpreter_core.cpp" />
     <ClCompile Include="Source\script_interpreter_execution.cpp" />

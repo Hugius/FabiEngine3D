@@ -10,7 +10,7 @@ CollisionResolver::CollisionResolver(CollisionDetector& collisionDetector) :
 void CollisionResolver::update(
 	const unordered_map<string, shared_ptr<AabbEntity>>& boxes, 
 	TerrainEntityManager& terrainManager, 
-	CameraManager & camera)
+	CameraManager& camera)
 {
 	// Check if AABB collision is needed in the first place
 	if (_aabbResponseEnabled)
@@ -60,32 +60,33 @@ void CollisionResolver::update(
 	// Check if terrain collision is needed in the first place
 	if (_terrainResponseEnabled)
 	{
+		// Check if a terrain is selected
 		if (terrainManager.getSelectedTerrain() != nullptr)
 		{
-			float camX = camera.getPosition().x;
-			float camY = camera.getPosition().y;
-			float camZ = camera.getPosition().z;
-			float targetY = terrainManager.getPixelHeight(terrainManager.getSelectedTerrain()->getID(), camX, camZ) + _cameraHeight;
+			// Retrieve height of terrain point at camera position
+			Vec3 camPos = camera.getPosition();
+			const float terrainX = camPos.x + (terrainManager.getSelectedTerrain()->getSize() / 2.0f);
+			const float terrainZ = camPos.z + (terrainManager.getSelectedTerrain()->getSize() / 2.0f);
+			const float targetY = terrainManager.getPixelHeight(terrainManager.getSelectedTerrain()->getID(), terrainX, terrainZ) + _cameraHeight;
 
 			// If camera goes underground
-			if (camY < targetY)
+			if (camPos.y < targetY)
 			{
-				_aboveGround = false;
-				_underGround = true;
-				camera.translate(Vec3(0.0f, _cameraSpeed, 0.0f));
-				camY = camera.getPosition().y;
+				_isCameraUnderTerrain = true;
 
-				// Check again
-				if (camY > targetY)
+				// Move camera upwards
+				camera.translate(Vec3(0.0f, _cameraSpeed, 0.0f));
+				camPos.y = camera.getPosition().y;
+
+				// Correct moved distance
+				if (camPos.y > targetY)
 				{
-					camera.setPosition(Vec3(camX, targetY, camZ));
-					_underGround = false;
+					camera.setPosition(Vec3(camPos.x, targetY, camPos.z));
 				}
 			}
-			else if (camY > targetY)
+			else
 			{
-				_aboveGround = true;
-				_underGround = false;
+				_isCameraUnderTerrain = false;
 			}
 		}
 	}
@@ -113,12 +114,7 @@ void CollisionResolver::disableTerrainResponse()
 	_terrainResponseEnabled = false;
 }
 
-bool CollisionResolver::isCameraAboveGround()
+bool CollisionResolver::isCameraUnderTerrain()
 {
-	return _aboveGround;
-}
-
-bool CollisionResolver::isCameraUnderGround()
-{
-	return _underGround;
+	return _isCameraUnderTerrain;
 }

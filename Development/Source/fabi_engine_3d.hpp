@@ -427,6 +427,7 @@ public:
 	bool		  collision_checkCursorInEntity(const string& ID);
 	string        collision_checkCursorInEntities(const string& ID, const string& exception = "");
 	bool		  collision_checkAnyWithCamera();
+	bool		  collision_checkCameraWithTerrain();
 	bool		  collision_checkEntityWithCamera(const string& ID);
 	const string& collision_checkEntitiesWithCamera(const string& ID);
 	const string& collision_checkEntityWithOthers(const string& ID);

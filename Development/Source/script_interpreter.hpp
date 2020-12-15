@@ -4,7 +4,7 @@
 #include "script_type.hpp"
 #include "script_value.hpp"
 #include "script_variable.hpp"
-#include "script_scope_changer.hpp"
+#include "script_condition_statement.hpp"
 #include "model_editor.hpp"
 #include "scene_editor.hpp"
 #include "animation_editor.hpp"
@@ -61,24 +61,30 @@ private:
 	void _processListPush(const string& scriptLine);
 	void _processListPull(const string& scriptLine);
 
-	// Miscellaneous functions
-	unsigned int _countFrontSpaces(const string& scriptLineText);
-	bool _validateScopeChange(unsigned int countedSpaces, const string& scriptLineText);
-	bool _validateKeyInputString(const string& inputString);
-	bool _validateMouseInputString(const string& inputString);
-	void _throwScriptError(const string& message);
-	void _checkEngineWarnings();
-
 	// Functioncall functions
 	vector<ScriptValue> _processEngineFunctionCall(const string& scriptLine);
 	vector<ScriptValue> _processMathematicalFunctionCall(const string& scriptLine);
 	vector<ScriptValue> _processMiscellaneousFunctionCall(const string& scriptLine);
 	bool _executeFe3dInputFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	bool _executeFe3dCameraFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
-	bool _executeFe3dCollisionFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
+	bool _executeFe3dPhysicsFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
+	bool _executeFe3dSkyEntityFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
+	bool _executeFe3dTerrainEntityFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
+	bool _executeFe3dWaterEntityFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	bool _executeFe3dGameEntityFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
+	bool _executeFe3dBillboardEntityFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
+	bool _executeFe3dAnimationFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	bool _executeFe3dMiscFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	bool _validateFe3dGameEntity(const string& ID, bool previewEntity = false);
+
+	// Miscellaneous functions
+	ScriptConditionStatement* _getLastConditionStatement(vector<ScriptConditionStatement>& statements, unsigned int scopeDepth);
+	unsigned int _countFrontSpaces(const string& scriptLineText);
+	bool _validateScopeChange(unsigned int countedSpaces, const string& scriptLineText, unsigned int& scopeDepth);
+	bool _validateKeyInputString(const string& inputString);
+	bool _validateMouseInputString(const string& inputString);
+	void _throwScriptError(const string& message);
+	void _checkEngineWarnings();
 
 	// Instances
 	FabiEngine3D& _fe3d;
@@ -87,24 +93,18 @@ private:
 	SceneEditor& _sceneEditor;
 	AnimationEditor& _animationEditor;
 
-	// Stacks
-	vector<vector<ScriptVariable>> _localVariablesStack;
-	vector<string> _currentScriptStack;
-	vector<unsigned int> _currentLineIndexStack;
-	vector<unsigned int> _scopeDepthStack;
-
 	// Vectors
 	vector<string> _initScriptIDs;
 	vector<string> _updateScriptIDs;
 	vector<string> _destroyScriptIDs;
 	vector<ScriptVariable> _globalVariables;
-	vector<unsigned int> _loopLineIndices;
-	vector<unsigned int> _loopScopeDepths;
+	vector<vector<ScriptVariable>> _localVariablesStack;
 
 	// Strings
 	string _initEntryID = "";
 	string _updateEntryID = "";
 	string _destroyEntryID = "";
+	string _currentScriptID = "";
 	const string _metaKeyword			= "META";
 	const string _executeKeyword		= "EXEC";
 	const string _loopKeyword			= "LOOP";
@@ -141,18 +141,15 @@ private:
 	// Integers
 	const unsigned int _spacesPerIndent = 4;
 	const unsigned int _maxLoopsPerFrame = 1000;
-	unsigned int _totalLoops = 0;
+	const unsigned int _maxExecutionDepth = 100;
 	unsigned int _lastLoggerMessageCount = 0;
+	unsigned int _currentLineIndex = 0;
+	unsigned int _executionDepth = 0;
 
 	// Booleans
 	bool _hasThrownError = false;
-	bool _isInLoop = false;
 	bool _scopeHasChanged = false;
 	bool _passedScopeChanger = false;
-	bool _lastConditionResult = false;
-
-	// Miscellaneous
-	ScriptScopeChanger _lastScopeChanger = ScriptScopeChanger::NONE;
 
 	// String to input type map
 	static inline const map<string, InputType> _keyInputStringMap =

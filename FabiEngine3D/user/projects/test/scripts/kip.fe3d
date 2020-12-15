@@ -1,0 +1,5 @@
+3 8
+META script_type_init
+
+fe3d:print("doei")
+EXEC kip

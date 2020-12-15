@@ -79,7 +79,7 @@ void ModelEditor::_loadObjFileNames()
 
 void ModelEditor::_loadOBJ()
 {
-	// Get the loaded filename
+	// Get the chosen filename
 	const string rootDirectory = _fe3d.misc_getRootDirectory();
 	const string targetDirectory = string("user\\assets\\models\\");
 	const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "OBJ");
@@ -139,7 +139,7 @@ void ModelEditor::_loadOBJ()
 
 void ModelEditor::_loadDiffuseMap()
 {
-	// Get the loaded filename
+	// Get the chosen filename
 	const string rootDirectory = _fe3d.misc_getRootDirectory();
 	const string targetDirectory = string("user\\assets\\textures\\diffuse_maps\\");
 	const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "PNG");
@@ -164,7 +164,7 @@ void ModelEditor::_loadDiffuseMap()
 
 void ModelEditor::_loadLightMap()
 {
-	// Get the loaded filename
+	// Get the chosen filename
 	const string rootDirectory = _fe3d.misc_getRootDirectory();
 	const string targetDirectory = string("user\\assets\\textures\\light_maps\\");
 	const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "PNG");
@@ -190,7 +190,7 @@ void ModelEditor::_loadLightMap()
 
 void ModelEditor::_loadReflectionMap()
 {
-	// Get the loaded filename
+	// Get the chosen filename
 	const string rootDirectory = _fe3d.misc_getRootDirectory();
 	const string targetDirectory = string("user\\assets\\textures\\reflection_maps\\");
 	const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "PNG");
@@ -216,8 +216,8 @@ void ModelEditor::_loadReflectionMap()
 
 void ModelEditor::_loadNormalMap()
 {
-	// Get the loaded filename
-		const string rootDirectory = _fe3d.misc_getRootDirectory();
+	// Get the chosen filename
+	const string rootDirectory = _fe3d.misc_getRootDirectory();
 	const string targetDirectory = string("user\\assets\\textures\\normal_maps\\");
 	const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "PNG");
 

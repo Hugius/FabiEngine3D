@@ -171,7 +171,7 @@ void EnvironmentEditor::_updateWaterMenuEffects()
 			}
 			else if (screen->getButton("dudvMap")->isHovered())
 			{
-				// Get the loaded filename
+				// Get the chosen filename
 				const string rootDirectory = _fe3d.misc_getRootDirectory();
 				const string targetDirectory = string("user\\assets\\textures\\dudv_maps\\");
 				const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "PNG");
@@ -195,7 +195,7 @@ void EnvironmentEditor::_updateWaterMenuEffects()
 			}
 			else if (screen->getButton("normalMap")->isHovered())
 			{
-				// Get the loaded filename
+				// Get the chosen filename
 				const string rootDirectory = _fe3d.misc_getRootDirectory();
 				const string targetDirectory = string("user\\assets\\textures\\normal_maps\\");
 				const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "PNG");
@@ -219,7 +219,7 @@ void EnvironmentEditor::_updateWaterMenuEffects()
 			}
 			else if (screen->getButton("displaceMap")->isHovered())
 			{
-				// Get the loaded filename
+				// Get the chosen filename
 				const string rootDirectory = _fe3d.misc_getRootDirectory();
 				const string targetDirectory = string("user\\assets\\textures\\displacement_maps\\");
 				const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "PNG");

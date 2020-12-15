@@ -32,6 +32,7 @@ void AudioEditor::_updateAudioEditing()
 				}
 				else if (screen->getButton("load")->isHovered())
 				{
+					// Get the chosen filename
 					const string rootDirectory = _fe3d.misc_getRootDirectory();
 					const string targetDirectory = string("user\\assets\\audio\\");
 					const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "MP3");

@@ -103,6 +103,7 @@ void BillboardEditor::_updateBillboardEditing()
 					}
 					else if (screen->getButton("texture")->isHovered())
 					{
+						// Get the chosen filename
 						const string rootDirectory = _fe3d.misc_getRootDirectory();
 						const string targetDirectory = string("user\\assets\\textures\\billboard_maps\\");
 						const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "PNG");
@@ -207,6 +208,7 @@ void BillboardEditor::_updateBillboardEditing()
 					}
 					else if (screen->getButton("font")->isHovered())
 					{
+						// Get the chosen filename
 						const string rootDirectory = _fe3d.misc_getRootDirectory();
 						const string targetDirectory = string("user\\assets\\fonts\\");
 						const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "TTF");

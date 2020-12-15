@@ -88,7 +88,7 @@ void EnvironmentEditor::_updateSkyMenuMesh()
 			}
 			else if (screen->getButton("rightTexture")->isHovered())
 			{
-				// Get the loaded filename
+				// Get the chosen filename
 				const string rootDirectory = _fe3d.misc_getRootDirectory();
 				const string targetDirectory = string("user\\assets\\textures\\cube_maps\\");
 				const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "PNG");
@@ -112,7 +112,7 @@ void EnvironmentEditor::_updateSkyMenuMesh()
 			}
 			else if (screen->getButton("leftTexture")->isHovered())
 			{
-				// Get the loaded filename
+				// Get the chosen filename
 				const string rootDirectory = _fe3d.misc_getRootDirectory();
 				const string targetDirectory = string("user\\assets\\textures\\cube_maps\\");
 				const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "PNG");
@@ -136,7 +136,7 @@ void EnvironmentEditor::_updateSkyMenuMesh()
 			}
 			else if (screen->getButton("topTexture")->isHovered())
 			{
-				// Get the loaded filename
+				// Get the chosen filename
 				const string rootDirectory = _fe3d.misc_getRootDirectory();
 				const string targetDirectory = string("user\\assets\\textures\\cube_maps\\");
 				const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "PNG");
@@ -160,7 +160,7 @@ void EnvironmentEditor::_updateSkyMenuMesh()
 			}
 			else if (screen->getButton("bottomTexture")->isHovered())
 			{
-				// Get the loaded filename
+				// Get the chosen filename
 				const string rootDirectory = _fe3d.misc_getRootDirectory();
 				const string targetDirectory = string("user\\assets\\textures\\cube_maps\\");
 				const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "PNG");
@@ -184,7 +184,7 @@ void EnvironmentEditor::_updateSkyMenuMesh()
 			}
 			else if (screen->getButton("frontTexture")->isHovered())
 			{
-				// Get the loaded filename
+				// Get the chosen filename
 				const string rootDirectory = _fe3d.misc_getRootDirectory();
 				const string targetDirectory = string("user\\assets\\textures\\cube_maps\\");
 				const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "PNG");
@@ -208,7 +208,7 @@ void EnvironmentEditor::_updateSkyMenuMesh()
 			}
 			else if (screen->getButton("backTexture")->isHovered())
 			{
-				// Get the loaded filename
+				// Get the chosen filename
 				const string rootDirectory = _fe3d.misc_getRootDirectory();
 				const string targetDirectory = string("user\\assets\\textures\\cube_maps\\");
 				const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "PNG");

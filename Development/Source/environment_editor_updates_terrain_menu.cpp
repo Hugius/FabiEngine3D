@@ -89,7 +89,7 @@ void EnvironmentEditor::_updateTerrainMenuMesh()
 			}
 			else if (screen->getButton("heightMap")->isHovered())
 			{
-				// Get the loaded filename
+				// Get the chosen filename
 				const string rootDirectory = _fe3d.misc_getRootDirectory();
 				const string targetDirectory = string("user\\assets\\textures\\height_maps\\");
 				const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "BMP");
@@ -124,7 +124,7 @@ void EnvironmentEditor::_updateTerrainMenuMesh()
 			}
 			else if (screen->getButton("diffuseMap")->isHovered())
 			{
-				// Get the loaded filename
+				// Get the chosen filename
 				const string rootDirectory = _fe3d.misc_getRootDirectory();
 				const string targetDirectory = string("user\\assets\\textures\\diffuse_maps\\");
 				const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "PNG");
@@ -238,7 +238,7 @@ void EnvironmentEditor::_updateTerrainMenuBlendMap()
 			}
 			else if (screen->getButton("blendMap")->isHovered())
 			{
-				// Get the loaded filename
+				// Get the chosen filename
 				const string rootDirectory = _fe3d.misc_getRootDirectory();
 				const string targetDirectory = string("user\\assets\\textures\\blend_maps\\");
 				const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "PNG");
@@ -262,7 +262,7 @@ void EnvironmentEditor::_updateTerrainMenuBlendMap()
 			}
 			else if (screen->getButton("red")->isHovered())
 			{
-				// Get the loaded filename
+				// Get the chosen filename
 				const string rootDirectory = _fe3d.misc_getRootDirectory();
 				const string targetDirectory = string("user\\assets\\textures\\diffuse_maps\\");
 				const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "PNG");
@@ -286,7 +286,7 @@ void EnvironmentEditor::_updateTerrainMenuBlendMap()
 			}
 			else if (screen->getButton("green")->isHovered())
 			{
-				// Get the loaded filename
+				// Get the chosen filename
 				const string rootDirectory = _fe3d.misc_getRootDirectory();
 				const string targetDirectory = string("user\\assets\\textures\\diffuse_maps\\");
 				const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "PNG");
@@ -310,7 +310,7 @@ void EnvironmentEditor::_updateTerrainMenuBlendMap()
 			}
 			else if (screen->getButton("blue")->isHovered())
 			{
-				// Get the loaded filename
+				// Get the chosen filename
 				const string rootDirectory = _fe3d.misc_getRootDirectory();
 				const string targetDirectory = string("user\\assets\\textures\\diffuse_maps\\");
 				const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "PNG");

@@ -235,10 +235,9 @@ void AnimationEditor::_updateCamera()
 		if (!_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isCursorInsideViewport())
 		{
 			// Add to acceleration
-			_cameraScrollingAcceleration += float(-_fe3d.input_getMouseWheelY() / _scrollWheelDivider) * _cameraSpeed;
+			_cameraScrollingAcceleration += (float(-_fe3d.input_getMouseWheelY() / _scrollWheelDivider) * _cameraSpeed);
 		}
 		_cameraScrollingAcceleration *= 0.975f; // Slowing down (smoothing)
-		_cameraScrollingAcceleration = std::clamp(_cameraScrollingAcceleration, -1.0f, 1.0f);
 
 		// Adding movement to the 3rd person view
 		_cameraDistance += _cameraScrollingAcceleration;

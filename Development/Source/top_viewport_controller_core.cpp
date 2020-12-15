@@ -23,10 +23,12 @@ TopViewportController::TopViewportController(FabiEngine3D& fe3d, EngineGuiManage
 void TopViewportController::initialize()
 {
 	// Top-viewport windows
-	_gui.getViewport("top")->addWindow("projectWindow", Vec2(-0.25f, 0.0f), Vec2(0.9825f, 1.5f), TVPC::frameColor);
-	_gui.getViewport("top")->addWindow("gameWindow", Vec2(0.25f, 0.0f), Vec2(0.9825f, 1.5f), Vec3(0.25f));
+	_gui.getViewport("top")->addWindow("projectWindow", Vec2(-0.25f, 0.0f), Vec2(0.9875f, 1.5f), TVPC::frameColor);
+	_gui.getViewport("top")->addWindow("gameWindow", Vec2(0.125f, 0.0f), Vec2(0.4875f, 1.5f), Vec3(0.25f));
+	_gui.getViewport("top")->addWindow("miscWindow", Vec2(0.375f, 0.0f), Vec2(0.4875f, 1.5f), Vec3(0.25f));
 	_projectWindow = _gui.getViewport("top")->getWindow("projectWindow");
 	_gameWindow = _gui.getViewport("top")->getWindow("gameWindow");
+	_miscWindow = _gui.getViewport("top")->getWindow("miscWindow");
 	
 	// Top-viewport: projectWindow
 	_projectWindow->addScreen("main");
@@ -42,20 +44,27 @@ void TopViewportController::initialize()
 	_gameWindow->addScreen("main");
 	_gameWindow->setActiveScreen("main");
 	screen = _gameWindow->getScreen("main");
-	screen->addButton("play", Vec2(-0.85f, 0.0f), Vec2(0.1f, 1.75f), "play.png", Vec3(2.0f));
-	screen->addButton("pause", Vec2(-0.65f, 0.0f), Vec2(0.1f, 1.75f), "pause.png", Vec3(2.0f));
-	screen->addButton("restart", Vec2(-0.45f, 0.0f), Vec2(0.1f, 1.75f), "restart.png", Vec3(2.0f));
-	screen->addButton("stop", Vec2(-0.25f, 0.0f), Vec2(0.1f, 1.75f), "stop.png", Vec3(2.0f));
+	screen->addButton("play", Vec2(-0.6f, 0.0f), Vec2(0.2f, 1.75f), "play.png", Vec3(2.0f));
+	screen->addButton("pause", Vec2(-0.2f, 0.0f), Vec2(0.2f, 1.75f), "pause.png", Vec3(2.0f));
+	screen->addButton("restart", Vec2(0.2f, 0.0f), Vec2(0.2f, 1.75f), "restart.png", Vec3(2.0f));
+	screen->addButton("stop", Vec2(0.6f, 0.0f), Vec2(0.2f, 1.75f), "stop.png", Vec3(2.0f));
+
+	// Top-viewport: miscWindow
+	_miscWindow->addScreen("main");
+	_miscWindow->setActiveScreen("main");
+	screen = _miscWindow->getScreen("main");
+	screen->addButton("cache", Vec2(0.0f, 0.0f), Vec2(0.3f, 1.25f), TVPC::buttonColor, TVPC::buttonHoverColor, "CACHE", TVPC::textColor, TVPC::textHoverColor);
 }
 
 void TopViewportController::update()
 {
-	_updateProjectManagement();
-	_updateGameManagement();
+	_updateProjectScreenManagement();
+	_updateGameScreenManagement();
+	_updateMiscScreenManagement();
 	_updateMiscellaneous();
 }
 
-void TopViewportController::_updateProjectManagement()
+void TopViewportController::_updateProjectScreenManagement()
 {
 	auto screen = _projectWindow->getActiveScreen();
 
@@ -122,7 +131,7 @@ void TopViewportController::_updateProjectManagement()
 	}
 }
 
-void TopViewportController::_updateGameManagement()
+void TopViewportController::_updateGameScreenManagement()
 {
 	auto gameScreen = _gameWindow->getScreen("main");
 
@@ -186,7 +195,38 @@ void TopViewportController::_updateGameManagement()
 		// Executing game script (if possible)
 		SCRIPT_EXECUTOR.update();
 	}
+}
 
+void TopViewportController::_updateMiscScreenManagement()
+{
+	auto miscScreen = _miscWindow->getScreen("main");
+
+	// Check if LMB pressed
+	if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
+	{
+		if (miscScreen->getButton("cache")->isHovered())
+		{
+			// Get the chosen filename
+			const string rootDirectory = _fe3d.misc_getRootDirectory();
+			const string targetDirectory = string("user\\assets\\");
+			const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "");
+
+			// Check if user did not cancel
+			if (filePath != "")
+			{
+				// Make path relative
+				const string newFilePath = filePath.substr(rootDirectory.size());
+
+				// Clear the cache of selected file
+				_fe3d.misc_clearOBJCache(newFilePath);
+				_fe3d.misc_clearFontCache(newFilePath);
+				_fe3d.misc_clearTextureCache(newFilePath);
+				_fe3d.misc_clearHeightMapCache(newFilePath);
+				_fe3d.misc_clearAudioChunkCache(newFilePath);
+				_fe3d.misc_clearAudioMusicCache(newFilePath);
+			}
+		}
+	}
 }
 
 void TopViewportController::_saveCurrentProject()

@@ -30,8 +30,9 @@ public:
 	static inline const Vec3 textHoverColor = Vec3(0.0f);
 
 private:
-	void _updateProjectManagement();
-	void _updateGameManagement();
+	void _updateProjectScreenManagement();
+	void _updateGameScreenManagement();
+	void _updateMiscScreenManagement();
 	void _updateMiscellaneous();
 	void _updateProjectCreation();
 	void _updateProjectLoading();
@@ -50,6 +51,7 @@ private:
 
 	shared_ptr<EngineGuiWindow> _projectWindow = nullptr;
 	shared_ptr<EngineGuiWindow> _gameWindow = nullptr;
+	shared_ptr<EngineGuiWindow> _miscWindow = nullptr;
 
 	string _currentProjectName = "";
 

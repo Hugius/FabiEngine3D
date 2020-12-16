@@ -17,6 +17,7 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 			if (arguments[0].getString().front() == '@')
 			{
 				_throwScriptError("New model ID cannot start with '@'");
+				return true;
 			}
 
 			// Validate preview model ID
@@ -409,6 +410,37 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 			{
 				auto result = _fe3d.gameEntity_getLightness(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
+			}
+		}
+	}
+	else if (functionName == "fe3d:model_set_aabb_responsive") // Set gameEntity AABB responsiveness
+	{
+		auto types = { ScriptValueType::STRING, ScriptValueType::BOOLEAN };
+
+		// Validate arguments
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existing model ID
+			if (_validateFe3dGameEntity(arguments[0].getString()))
+			{
+				// Retrieve all bound AABB IDs
+				auto aabbIDs = _fe3d.aabbEntity_getBoundIDs(arguments[0].getString(), true, false);
+
+				// Check if gameEntity has no AABBs
+				if (aabbIDs.empty())
+				{
+					_throwScriptError("Model has no bound AABBs!");
+					return true;
+				}
+
+				// Set responsiveness
+				for (auto& ID : aabbIDs)
+				{
+					_fe3d.aabbEntity_setResponsive(ID, arguments[1].getBoolean());
+				}
+				
+				// Return
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}
 	}

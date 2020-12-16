@@ -224,7 +224,7 @@ bool FabiEngine3D::collision_checkAnyWithCamera()
 	return false;
 }
 
-bool FabiEngine3D::collision_checkCameraWithTerrain()
+bool FabiEngine3D::collision_checkTerrainWithCamera()
 {
 	return _core->_collisionResolver.isCameraUnderTerrain();
 }

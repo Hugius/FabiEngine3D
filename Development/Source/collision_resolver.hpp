@@ -27,5 +27,5 @@ private:
 
 	bool _aabbResponseEnabled    = false;
 	bool _terrainResponseEnabled = false;
-	bool _isCameraUnderTerrain		 = false;
+	bool _isCameraUnderTerrain	 = false;
 };

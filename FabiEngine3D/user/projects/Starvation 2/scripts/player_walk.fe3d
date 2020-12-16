@@ -1,4 +1,4 @@
-40 0
+17 17
 META script_type_update
 
 /// Temporary values
@@ -11,6 +11,10 @@ EDIT _isWalking = (up IS <true> OR down IS <true> OR left IS <true> OR right IS 
 DEC accSpeed = 0.0001
 DEC minSpeed = -0.025
 DEC maxSpeed = 0.025
+
+STR collidedID = fe3d:collision_check_camera_aabb("tree7", "trunk")
+IF collidedID NOT "":
+    fe3d:model_move(collidedID, 10.0, 0.0, 0.0)
 
 /// Running speed
 IF shift IS <true> AND up IS <true>:

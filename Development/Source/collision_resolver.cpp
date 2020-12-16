@@ -41,7 +41,7 @@ void CollisionResolver::update(
 		{
 			newCameraPos.x = oldCameraPos.x;
 		}
-		if (collision.yCollided())
+		if (collision.yCollided() && !_isCameraUnderTerrain) // If camera is under terrain, response cannot be blocked
 		{
 			newCameraPos.y = oldCameraPos.y;
 		}

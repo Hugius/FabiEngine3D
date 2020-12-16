@@ -123,9 +123,6 @@ void ScriptInterpreter::load()
 
 	// Check if any engine warnings were thrown
 	_checkEngineWarnings();
-	
-	// Enable collision
-	_fe3d.collision_enableCameraResponse();
 
 	// Load models
 	_modelEditor.loadGameEntitiesFromFile();
@@ -160,6 +157,38 @@ void ScriptInterpreter::executeDestruction()
 
 void ScriptInterpreter::unload()
 {
+	// Unload all scenes and stop all animations
+	_sceneEditor.clearScene();
+	_animationEditor.stopAllAnimations();
+
+	// Disable collision response
+	_fe3d.collision_disableCameraTerrainResponse();
+	_fe3d.collision_disableCameraResponse();
+
+	// Disable graphics
+	_fe3d.gfx_disableAmbientLighting();
+	_fe3d.gfx_disableDirectionalLighting();
+	_fe3d.gfx_disableSpecularLighting();
+	_fe3d.gfx_disablePointLighting();
+	_fe3d.gfx_disableSpotLighting();
+	_fe3d.gfx_disableFog();
+	_fe3d.gfx_disableSkyReflections();
+	_fe3d.gfx_disableSceneReflections();
+	_fe3d.gfx_disableLightMapping();
+	_fe3d.gfx_disableNormalMapping();
+	_fe3d.gfx_disableShadows();
+	_fe3d.gfx_disableWaterEffects();
+	_fe3d.gfx_disableSkyHDR();
+	_fe3d.gfx_disableDOF();
+	_fe3d.gfx_disableMotionBlur();
+	_fe3d.gfx_disableLensFlare();
+
+	// Reset camera
+	_fe3d.camera_load(90.0f, 0.1f, 10000.0f, Vec3(0.0f));
+
+	// Choose engine background again
+	_fe3d.skyEntity_select("@@engineBackground");
+
 	// Reset all variables
 	_initScriptIDs.clear();
 	_updateScriptIDs.clear();
@@ -172,13 +201,4 @@ void ScriptInterpreter::unload()
 	_hasThrownError = false;
 	_scopeHasChanged = false;
 	_passedScopeChanger = false;
-	_sceneEditor.clearScene();
-	_animationEditor.stopAllAnimations();
-	_fe3d.collision_disableCameraResponse();
-
-	// Reset camera
-	_fe3d.camera_load(90.0f, 0.1f, 10000.0f, Vec3(0.0f));
-
-	// Choose engine background again
-	_fe3d.skyEntity_select("@@engineBackground");
 }

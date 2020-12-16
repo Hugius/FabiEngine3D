@@ -22,7 +22,10 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 		_fe3d.skyEntity_select("");
 
 		// Default camera
-		_fe3d.camera_load(90.0f, 0.1f, 10000.0f, Vec3(0.0f));
+		if (_isEditorLoaded)
+		{
+			_fe3d.camera_load(90.0f, 0.1f, 10000.0f, Vec3(0.0f));
+		}
 
 		// Default graphics
 		_fe3d.gfx_enableSpecularLighting();
@@ -448,7 +451,10 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 			}
 			else if (entityType == "EDITOR_SPEED")
 			{
-				iss >> _customCameraSpeed;
+				if (_isEditorLoaded)
+				{
+					iss >> _customCameraSpeed;
+				}
 			}
 			else if (entityType == "EDITOR_POSITION")
 			{

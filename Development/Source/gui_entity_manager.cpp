@@ -36,32 +36,34 @@ void GuiEntityManager::addGuiEntity(const string& ID, const string& texturePath,
 {
 	// Create entity
 	_createEntity(ID);
-	getEntity(ID)->addOglBuffer(isCentered ? _centeredOpenglBuffer : _nonCenteredOpenglBuffer, false);
+	auto entity = getEntity(ID);
+	entity->addOglBuffer(isCentered ? _centeredOpenglBuffer : _nonCenteredOpenglBuffer, false);
 
 	// Load transformation
-	getEntity(ID)->setTranslation(translation);
-	getEntity(ID)->setRotation(rotation);
-	getEntity(ID)->setScaling(scaling);
-	getEntity(ID)->setCentered(isCentered);
+	entity->setTranslation(translation);
+	entity->setRotation(rotation);
+	entity->setScaling(scaling);
+	entity->setCentered(isCentered);
 
 	// Load diffuse map
-	getEntity(ID)->setDiffuseMap(_texLoader.getTexture(texturePath, true, true, false));
+	entity->setDiffuseMap(_texLoader.getTexture(texturePath, true, true, false));
 }
 
 void GuiEntityManager::addGuiEntity(const string& ID, Vec3 color, Vec2 translation, float rotation, Vec2 scaling, bool isCentered)
 {
 	// Create entity
 	_createEntity(ID);
-	getEntity(ID)->addOglBuffer(isCentered ? _centeredOpenglBuffer : _nonCenteredOpenglBuffer, false);
+	auto entity = getEntity(ID);
+	entity->addOglBuffer(isCentered ? _centeredOpenglBuffer : _nonCenteredOpenglBuffer, false);
 
 	// Load transformation
-	getEntity(ID)->setTranslation(translation);
-	getEntity(ID)->setRotation(rotation);
-	getEntity(ID)->setScaling(scaling);
-	getEntity(ID)->setCentered(isCentered);
+	entity->setTranslation(translation);
+	entity->setRotation(rotation);
+	entity->setScaling(scaling);
+	entity->setCentered(isCentered);
 
 	// Set color
-	getEntity(ID)->setColor(color);
+	entity->setColor(color);
 }
 
 void GuiEntityManager::update()

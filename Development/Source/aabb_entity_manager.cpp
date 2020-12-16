@@ -50,14 +50,15 @@ void AabbEntityManager::addAabbEntity(const string& ID, Vec3 position, Vec3 size
 {
 	// Create entity
 	_createEntity(ID);
-	getEntity(ID)->addOglBuffer(_openglBuffer, false);
+	auto entity = getEntity(ID);
+	entity->addOglBuffer(_openglBuffer, false);
 
 	// Other
-	getEntity(ID)->setLocalTranslation(position);
-	getEntity(ID)->setLocalScaling(size);
-	getEntity(ID)->setTranslation(position);
-	getEntity(ID)->setScaling(size);
-	getEntity(ID)->setResponsive(responsive);
+	entity->setLocalTranslation(position);
+	entity->setLocalScaling(size);
+	entity->setTranslation(position);
+	entity->setScaling(size);
+	entity->setResponsive(responsive);
 }
 
 void AabbEntityManager::bindAabbEntity(const string& ID, const string& parentID, AabbParentType parentType, Vec3 position, Vec3 size, bool responsive)
@@ -144,7 +145,6 @@ void AabbEntityManager::update(
 
 						// Update visibility
 						entity->setVisible(parentEntity->isVisible());
-
 
 						found = true;
 					}

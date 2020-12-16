@@ -30,7 +30,7 @@ private:
 	void _updateTextSelector(string& newCharacters, unsigned int& cursorLineIndex,
 		unsigned int& cursorCharIndex, int& hoveredLineIndex, bool& textHasChanged);
 	void _updateMiscellaneous();
-	void _reloadScriptTextDisplay();
+	void _reloadScriptTextDisplay(bool reloadAabbs);
 	void _copySelectedText();
 
 	// Core variables
@@ -52,6 +52,7 @@ private:
 	bool _singleActionAllowed = true;
 	bool _continuousActionAllowed = false;
 	bool _wasGuiFocused = false;
+	bool _hasClickedLMB = false;
 	int _firstSelectedLineIndex = -1;
 	int _lastSelectedLineIndex = -1;
 	unsigned int _passedFrames = 0;

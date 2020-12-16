@@ -48,18 +48,20 @@ void TerrainEntityManager::addTerrain(const string& ID)
 
 void TerrainEntityManager::generateModel(const string& ID)
 {
+	auto entity = getEntity(ID);
+
 	// Data collections
 	vector<Vec3> vertices;
 	vector<Vec2> uvCoords;
 	vector<Vec3> normals;
 
 	// Handy values
-	const auto& pixelColors = getEntity(ID)->getPixelColors();
-	const float size = getEntity(ID)->getSize();
+	const auto& pixelColors = entity->getPixelColors();
+	const float size = entity->getSize();
 	const unsigned int uSize = static_cast<unsigned int>(size);
 	const float halfSize = size / 2.0f;
-	const float maxHeight = getEntity(ID)->getMaxHeight();
-	const float uvRepeat = getEntity(ID)->getUvRepeat();
+	const float maxHeight = entity->getMaxHeight();
+	const float uvRepeat = entity->getUvRepeat();
 
 	// Generate terrain vertices
 	for (float x = -halfSize; x < halfSize; x++)
@@ -165,8 +167,8 @@ void TerrainEntityManager::generateModel(const string& ID)
 	}
 
 	// Create OpenGL buffer
-	getEntity(ID)->clearOglBuffers();
-	getEntity(ID)->addOglBuffer(new OpenGLBuffer(BufferType::MODEL, &finalDataCollection[0], finalDataCollection.size()));
+	entity->clearOglBuffers();
+	entity->addOglBuffer(new OpenGLBuffer(BufferType::MODEL, &finalDataCollection[0], finalDataCollection.size()));
 }
 
 void TerrainEntityManager::update()

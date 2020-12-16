@@ -32,25 +32,28 @@ void GameEntityManager::addGameEntity(const string& ID, const string& objName, V
 	// Load OBJ
 	generateModel(ID, objName);
 
+	auto entity = getEntity(ID);
+
 	// Load transformation
-	getEntity(ID)->setOriginalTranslation(T);
-	getEntity(ID)->setOriginalRotation(R);
-	getEntity(ID)->setOriginalScaling(S);
-	getEntity(ID)->setTranslation(T);
-	getEntity(ID)->setRotation(R);
-	getEntity(ID)->setScaling(S);
+	entity->setOriginalTranslation(T);
+	entity->setOriginalRotation(R);
+	entity->setOriginalScaling(S);
+	entity->setTranslation(T);
+	entity->setRotation(R);
+	entity->setScaling(S);
 }
 
 void GameEntityManager::generateModel(const string& ID, const string& objName)
 {
 	// Load OBJ model
 	auto parts = _objLoader.loadOBJ(objName, false);
-	getEntity(ID)->setObjPath(objName);
-	getEntity(ID)->clearOglBuffers();
-	getEntity(ID)->clearDiffuseMaps();
-	getEntity(ID)->clearLightMaps();
-	getEntity(ID)->clearReflectionMaps();
-	getEntity(ID)->clearNormalMaps();
+	auto entity = getEntity(ID);
+	entity->setObjPath(objName);
+	entity->clearOglBuffers();
+	entity->clearDiffuseMaps();
+	entity->clearLightMaps();
+	entity->clearReflectionMaps();
+	entity->clearNormalMaps();
 	
 	// Create OpenGL buffers
 	for (auto& part : parts)
@@ -77,70 +80,70 @@ void GameEntityManager::generateModel(const string& ID, const string& objName)
 		}
 
 		// OpenGL buffer
-		getEntity(ID)->addOglBuffer(new OpenGLBuffer(BufferType::MODEL, &bufferData[0], bufferData.size()));
+		entity->addOglBuffer(new OpenGLBuffer(BufferType::MODEL, &bufferData[0], bufferData.size()));
 
 		// New transformation part
-		getEntity(ID)->addPart(part.name);
+		entity->addPart(part.name);
 
 		// Load an OBJ part diffuse map
 		if (part.diffuseMapName != "")
 		{
-			getEntity(ID)->addDiffuseMap(_texLoader.getTexture("user\\assets\\textures\\diffuse_maps\\" + part.diffuseMapName, true, true, true));
-			getEntity(ID)->addDiffuseMapPath("user\\assets\\textures\\diffuse_maps\\" + part.diffuseMapName);
+			entity->addDiffuseMap(_texLoader.getTexture("user\\assets\\textures\\diffuse_maps\\" + part.diffuseMapName, true, true, true));
+			entity->addDiffuseMapPath("user\\assets\\textures\\diffuse_maps\\" + part.diffuseMapName);
 		}
 		else
 		{
 			// Only add empty diffuse maps if multiparted model
 			if (parts.size() > 1)
 			{
-				getEntity(ID)->addDiffuseMap(0);
+				entity->addDiffuseMap(0);
 			}
 		}
 
 		// Load an OBJ part light map
 		if (part.lightMapName != "")
 		{
-			getEntity(ID)->setLightMapped(true);
-			getEntity(ID)->addLightMap(_texLoader.getTexture("user\\assets\\textures\\light_maps\\" + part.lightMapName, true, true, true));
-			getEntity(ID)->addLightMapPath("user\\assets\\textures\\light_maps\\" + part.lightMapName);
+			entity->setLightMapped(true);
+			entity->addLightMap(_texLoader.getTexture("user\\assets\\textures\\light_maps\\" + part.lightMapName, true, true, true));
+			entity->addLightMapPath("user\\assets\\textures\\light_maps\\" + part.lightMapName);
 		}
 		else
 		{
 			// Only add empty light maps if multiparted model
 			if (parts.size() > 1)
 			{
-				getEntity(ID)->addLightMap(0);
+				entity->addLightMap(0);
 			}
 		}
 
 		// Load an OBJ part normal map
 		if (part.normalMapName != "")
 		{
-			getEntity(ID)->addNormalMap(_texLoader.getTexture("user\\assets\\textures\\normal_maps\\" + part.normalMapName, true, true, true));
-			getEntity(ID)->addNormalMapPath("user\\assets\\textures\\normal_maps\\" + part.normalMapName);
+			entity->addNormalMap(_texLoader.getTexture("user\\assets\\textures\\normal_maps\\" + part.normalMapName, true, true, true));
+			entity->addNormalMapPath("user\\assets\\textures\\normal_maps\\" + part.normalMapName);
 		}
 		else
 		{
 			// Only add empty normal maps if multiparted model
 			if (parts.size() > 1)
 			{
-				getEntity(ID)->addNormalMap(0);
+				entity->addNormalMap(0);
 			}
 		}
 
 		// Load an OBJ part reflection map
 		if (part.reflectionMapName != "")
 		{
-			getEntity(ID)->setSkyReflective(true);
-			getEntity(ID)->addReflectionMap(_texLoader.getTexture("user\\assets\\textures\\reflection_maps\\" + part.reflectionMapName, true, true, true));
-			getEntity(ID)->addReflectionMapPath("user\\assets\\textures\\reflection_maps\\" + part.reflectionMapName);
+			entity->setSkyReflective(true);
+			entity->addReflectionMap(_texLoader.getTexture("user\\assets\\textures\\reflection_maps\\" + part.reflectionMapName, true, true, true));
+			entity->addReflectionMapPath("user\\assets\\textures\\reflection_maps\\" + part.reflectionMapName);
 		}
 		else
 		{
 			// Only add empty reflection maps if multiparted model
 			if (parts.size() > 1)
 			{
-				getEntity(ID)->addReflectionMap(0);
+				entity->addReflectionMap(0);
 			}
 		}
 	}

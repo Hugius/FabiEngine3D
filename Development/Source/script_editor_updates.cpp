@@ -148,7 +148,7 @@ void ScriptEditor::_updateMiscellaneous()
 				_currentScriptFileID = newName;
 				_script.addScriptFile(_currentScriptFileID);
 				_script.getScriptFile(_currentScriptFileID)->insertNewLine(0, "");
-				_reloadScriptTextDisplay();
+				_reloadScriptTextDisplay(true);
 			}
 			else
 			{
@@ -167,7 +167,7 @@ void ScriptEditor::_updateMiscellaneous()
 				_isWritingScript = true;
 				_firstSelectedLineIndex = -1;
 				_lastSelectedLineIndex = -1;
-				_reloadScriptTextDisplay();
+				_reloadScriptTextDisplay(true);
 			}
 		}
 		else if (_gui.getGlobalScreen()->isChoiceFormCancelled("scriptFileList"))

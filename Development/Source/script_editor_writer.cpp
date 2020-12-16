@@ -11,6 +11,14 @@ void ScriptEditor::_updateTextWriter()
 			_fe3d.guiEntity_changeTexture("@@cursor", "engine\\textures\\cursor_text.png");
 		}
 
+		// Reload all AABB entities when LMB is pressed
+		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
+		{
+			_reloadScriptTextDisplay(true);
+			_hasClickedLMB = true;
+			return;
+		}
+
 		// Temporary values
 		bool textHasChanged = false;
 		unsigned int cursorLineIndex = _script.getScriptFile(_currentScriptFileID)->getCursorLineIndex();
@@ -93,7 +101,7 @@ void ScriptEditor::_updateTextWriter()
 		}
 
 		// Determine text functionality type
-		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
+		if (_hasClickedLMB)
 		{
 			// Check if anything was hovered at all
 			if (!hoveredBillboardID.empty())
@@ -104,7 +112,8 @@ void ScriptEditor::_updateTextWriter()
 				// Set character index based on click location
 				if (hoveredCharacterIndex == -1)
 				{
-					cursorCharIndex = _script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex).size(); // Place cursor at end of line
+					// Place cursor at end of the line
+					cursorCharIndex = _script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex).size();
 				}
 				else
 				{
@@ -434,7 +443,7 @@ void ScriptEditor::_updateTextWriter()
 		// Reload text display when altered
 		if (textHasChanged)
 		{
-			_reloadScriptTextDisplay();
+			_reloadScriptTextDisplay(false);
 		}
 
 		// Update blinking cursor
@@ -479,5 +488,7 @@ void ScriptEditor::_updateTextWriter()
 		_script.getScriptFile(_currentScriptFileID)->setCursorCharIndex(cursorCharIndex);
 	}
 
+	// Miscellaneous
 	_wasGuiFocused = _gui.getGlobalScreen()->isFocused();
+	_hasClickedLMB = false;
 }

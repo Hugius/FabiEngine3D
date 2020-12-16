@@ -9,12 +9,11 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 	if (_firstSelectedLineIndex != -1)
 	{
 		// Check if user cancels or edits any selected text
-		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) ||
-			_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_RIGHT) ||
-			_activeActionKey != InputType::NONE || 
-			!newCharacters.empty() || 
-			(_fe3d.input_getKeyDown(InputType::KEY_LCTRL) && _fe3d.input_getKeyPressed(InputType::KEY_V)) ||
-			(_fe3d.input_getKeyDown(InputType::KEY_LCTRL) && _fe3d.input_getKeyPressed(InputType::KEY_X)))
+		if (_hasClickedLMB || _fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_RIGHT) || // LMB or RMB
+			_activeActionKey != InputType::NONE || // Action keys such as arrows, enter, etc.
+			!newCharacters.empty() || // Typed characters
+			(_fe3d.input_getKeyDown(InputType::KEY_LCTRL) && _fe3d.input_getKeyPressed(InputType::KEY_V)) || // CTRL + V
+			(_fe3d.input_getKeyDown(InputType::KEY_LCTRL) && _fe3d.input_getKeyPressed(InputType::KEY_X))) // CTRL + X
 		{
 			// Delete selection billboards
 			for (auto& ID : _fe3d.billboardEntity_getAllIDs())

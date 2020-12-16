@@ -41,16 +41,17 @@ void BillboardEntityManager::addBillboardEntity(const string& ID, Vec3 color, Ve
 {
 	// Create entity
 	_createEntity(ID);
-	getEntity(ID)->addOglBuffer(_openglBuffer, false);
+	auto entity = getEntity(ID);
+	entity->addOglBuffer(_openglBuffer, false);
 
 	// Other
-	getEntity(ID)->setTranslation(T);
-	getEntity(ID)->setRotation(R);
-	getEntity(ID)->setInitialRotation(R);
-	getEntity(ID)->setScaling(S);
-	getEntity(ID)->setCameraFacingX(facingCameraX);
-	getEntity(ID)->setCameraFacingY(facingCameraY);
-	getEntity(ID)->setColor(color);
+	entity->setTranslation(T);
+	entity->setRotation(R);
+	entity->setInitialRotation(R);
+	entity->setScaling(S);
+	entity->setCameraFacingX(facingCameraX);
+	entity->setCameraFacingY(facingCameraY);
+	entity->setColor(color);
 }
 
 void BillboardEntityManager::addBillboardEntity
@@ -61,9 +62,11 @@ void BillboardEntityManager::addBillboardEntity
 )
 {
 	addBillboardEntity(ID, Vec3(1.0f), T, R, S, facingCameraX, facingCameraY);
-	getEntity(ID)->setDiffuseMap(_texLoader.getTexture(texturePath, textureFiltering, true));
-	getEntity(ID)->setDiffuseMapPath(texturePath);
-	getEntity(ID)->setTransparent(transparent);
+
+	auto entity = getEntity(ID);
+	entity->setDiffuseMap(_texLoader.getTexture(texturePath, textureFiltering, true));
+	entity->setDiffuseMapPath(texturePath);
+	entity->setTransparent(transparent);
 }
 
 void BillboardEntityManager::addBillboardEntity
@@ -74,10 +77,12 @@ void BillboardEntityManager::addBillboardEntity
 )
 {
 	addBillboardEntity(ID, color, T, R, S, facingCameraX, facingCameraY);
-	getEntity(ID)->setDiffuseMap(_texLoader.getText(text, fontPath));
-	getEntity(ID)->setTransparent(true);
-	getEntity(ID)->setTextContent(text);
-	getEntity(ID)->setFontPath(fontPath);
+
+	auto entity = getEntity(ID);
+	entity->setDiffuseMap(_texLoader.getText(text, fontPath));
+	entity->setTransparent(true);
+	entity->setTextContent(text);
+	entity->setFontPath(fontPath);
 }
 
 void BillboardEntityManager::update()

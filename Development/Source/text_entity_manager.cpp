@@ -52,14 +52,15 @@ void TextEntityManager::addTextEntity
 
 	// Create entity
 	_createEntity(ID);
-	getEntity(ID)->setTextContent(textContent);
-	getEntity(ID)->setFontPath(fontPath);
-	getEntity(ID)->setColor(color);
-	getEntity(ID)->setTranslation(translation);
-	getEntity(ID)->setRotation(rotation);
-	getEntity(ID)->setScaling(scaling);
-	getEntity(ID)->setCentered(isCentered);
-	getEntity(ID)->setDynamic(isDynamic);
+	auto entity = getEntity(ID);
+	entity->setTextContent(textContent);
+	entity->setFontPath(fontPath);
+	entity->setColor(color);
+	entity->setTranslation(translation);
+	entity->setRotation(rotation);
+	entity->setScaling(scaling);
+	entity->setCentered(isCentered);
+	entity->setDynamic(isDynamic);
 
 	// Create separate character entities
 	if (isDynamic)
@@ -68,22 +69,24 @@ void TextEntityManager::addTextEntity
 	}
 	else // Load static text as a whole
 	{
-		getEntity(ID)->addOglBuffer(isCentered ? _centeredOpenglBuffer : _nonCenteredOpenglBuffer, false);
-		getEntity(ID)->setDiffuseMap(_texLoader.getText(textContent, getEntity(ID)->getFontPath()));
-		getEntity(ID)->updateModelMatrix();
+		entity->addOglBuffer(isCentered ? _centeredOpenglBuffer : _nonCenteredOpenglBuffer, false);
+		entity->setDiffuseMap(_texLoader.getText(textContent, entity->getFontPath()));
+		entity->updateModelMatrix();
 	}
 }
 
 void TextEntityManager::reloadCharacters(const string& ID)
 {
+	auto entity = getEntity(ID);
+
 	// Check if text content changed
-	if ((_textContentMap.find(ID) == _textContentMap.end()) || (getEntity(ID)->getTextContent() != _textContentMap[ID]))
+	if ((_textContentMap.find(ID) == _textContentMap.end()) || (entity->getTextContent() != _textContentMap[ID]))
 	{
-		_textContentMap[ID] = getEntity(ID)->getTextContent();
-		getEntity(ID)->deleteCharacterEntities();
+		_textContentMap[ID] = entity->getTextContent();
+		entity->deleteCharacterEntities();
 
 		// For every character
-		for (auto& c : getEntity(ID)->getTextContent())
+		for (auto& c : entity->getTextContent())
 		{
 			// Create new character entity
 			auto newCharacter = make_shared<GuiEntity>("uselessID");
@@ -92,12 +95,12 @@ void TextEntityManager::reloadCharacters(const string& ID)
 			// Load diffuse map
 			string textContent = "";
 			textContent += c;
-			newCharacter->setDiffuseMap(_texLoader.getText(textContent, getEntity(ID)->getFontPath()));
-			getEntity(ID)->addCharacterEntity(newCharacter);
+			newCharacter->setDiffuseMap(_texLoader.getText(textContent, entity->getFontPath()));
+			entity->addCharacterEntity(newCharacter);
 		}
 
 		// Synchronize
-		getEntity(ID)->updateCharacterEntities();
+		entity->updateCharacterEntities();
 	}
 }
 

@@ -27,8 +27,6 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}
-
-		return true;
 	}
 	else if (functionName == "fe3d:model_visible_set") // Set gameEntity visibility
 	{
@@ -52,8 +50,6 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}
-
-		return true;
 	}
 	else if (functionName == "fe3d:model_visible_get") // Get gameEntity visibility
 	{
@@ -69,8 +65,6 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 			}
 		}
-
-		return true;
 	}
 	else if (functionName == "fe3d:model_delete") // Delete gameEntity
 	{
@@ -86,8 +80,6 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}
-
-		return true;
 	}
 	else if (functionName == "fe3d:model_position_set") // Set gameEntity position
 	{
@@ -104,8 +96,6 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}
-
-		return true;
 	}
 	else if (functionName == "fe3d:model_move") // Move gameEntity
 	{
@@ -122,8 +112,6 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}
-
-		return true;
 	}
 	else if (functionName == "fe3d:model_position_get") // Get gameEntity position
 	{
@@ -139,8 +127,6 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));
 			}
 		}
-
-		return true;
 	}
 	else if (functionName == "fe3d:model_rotationorigin_set") // Set gameEntity rotation oriign
 	{
@@ -157,8 +143,6 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}
-
-		return true;
 	}
 	else if (functionName == "fe3d:model_rotationorigin_get") // Get gameEntity rotation origin
 	{
@@ -174,8 +158,6 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));
 			}
 		}
-
-		return true;
 	}
 	else if (functionName == "fe3d:model_rotation_set") // Set gameEntity rotation
 	{
@@ -192,8 +174,6 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}
-
-		return true;
 	}
 	else if (functionName == "fe3d:model_rotate") // Rotate gameEntity
 	{
@@ -210,8 +190,6 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}
-
-		return true;
 	}
 	else if (functionName == "fe3d:model_rotation_get") // Get gameEntity rotation
 	{
@@ -227,8 +205,6 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));
 			}
 		}
-
-		return true;
 	}
 	else if (functionName == "fe3d:model_size_set") // Set gameEntity size
 	{
@@ -245,8 +221,6 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}
-
-		return true;
 	}
 	else if (functionName == "fe3d:model_scale") // Scale gameEntity
 	{
@@ -263,8 +237,6 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}
-
-		return true;
 	}
 	else if (functionName == "fe3d:model_size_get") // Get gameEntity size
 	{
@@ -280,8 +252,6 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));
 			}
 		}
-
-		return true;
 	}
 	else if (functionName == "fe3d:model_color_set") // Set gameEntity color
 	{
@@ -298,8 +268,6 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}
-
-		return true;
 	}
 	else if (functionName == "fe3d:model_color_get") // Get gameEntity color
 	{
@@ -315,8 +283,6 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));
 			}
 		}
-
-		return true;
 	}
 	else if (functionName == "fe3d:model_maxheight_set") // Set gameEntity maximum height
 	{
@@ -332,8 +298,6 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}
-
-		return true;
 	}
 	else if (functionName == "fe3d:model_maxheight_get") // Get gameEntity maximum height
 	{
@@ -349,11 +313,11 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
 			}
 		}
-
-		return true;
 	}
 	else
 	{
 		return false;
 	}
+
+	return true;
 }

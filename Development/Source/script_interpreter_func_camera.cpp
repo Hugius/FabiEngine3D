@@ -12,8 +12,6 @@ bool ScriptInterpreter::_executeFe3dCameraFunction(const string& functionName, v
 			_fe3d.camera_translate(Vec3(arguments[0].getDecimal(), arguments[1].getDecimal(), arguments[2].getDecimal()));
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
-
-		return true;
 	}
 	else if (functionName == "fe3d:camera_position_set") // Set camera position
 	{
@@ -24,8 +22,6 @@ bool ScriptInterpreter::_executeFe3dCameraFunction(const string& functionName, v
 			_fe3d.camera_setPosition(Vec3(arguments[0].getDecimal(), arguments[1].getDecimal(), arguments[2].getDecimal()));
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
-
-		return true;
 	}
 	else if (functionName == "fe3d:camera_position_get") // Get camera position
 	{
@@ -34,8 +30,6 @@ bool ScriptInterpreter::_executeFe3dCameraFunction(const string& functionName, v
 			auto result = _fe3d.camera_getPosition();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));
 		}
-
-		return true;
 	}
 	else if (functionName == "fe3d:camera_lookat_position_set") // Set lookat position
 	{
@@ -46,8 +40,6 @@ bool ScriptInterpreter::_executeFe3dCameraFunction(const string& functionName, v
 			_fe3d.camera_setLookatPosition(Vec3(arguments[0].getDecimal(), arguments[1].getDecimal(), arguments[2].getDecimal()));
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
-
-		return true;
 	}
 	else if (functionName == "fe3d:camera_lookat_position_get") // Get lookat position
 	{
@@ -56,8 +48,6 @@ bool ScriptInterpreter::_executeFe3dCameraFunction(const string& functionName, v
 			auto result = _fe3d.camera_getLookatPosition();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));
 		}
-
-		return true;
 	}
 	else if (functionName == "fe3d:camera_follow_x") // Follow X direction
 	{
@@ -68,8 +58,6 @@ bool ScriptInterpreter::_executeFe3dCameraFunction(const string& functionName, v
 			_fe3d.camera_translateFollowX(arguments[0].getDecimal());
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
-
-		return true;
 	}
 	else if (functionName == "fe3d:camera_follow_z") // Follow Z direction
 	{
@@ -80,8 +68,6 @@ bool ScriptInterpreter::_executeFe3dCameraFunction(const string& functionName, v
 			_fe3d.camera_translateFollowZ(arguments[0].getDecimal());
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
-
-		return true;
 	}
 	else if (functionName == "fe3d:camera_follow_zy") // Follow ZY direction
 	{
@@ -92,8 +78,6 @@ bool ScriptInterpreter::_executeFe3dCameraFunction(const string& functionName, v
 			_fe3d.camera_translateFollowZY(arguments[0].getDecimal());
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
-
-		return true;
 	}
 	else if (functionName == "fe3d:camera_yaw_set") // Set yaw angle
 	{
@@ -104,8 +88,6 @@ bool ScriptInterpreter::_executeFe3dCameraFunction(const string& functionName, v
 			_fe3d.camera_setYaw(arguments[0].getDecimal());
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
-
-		return true;
 	}
 	else if (functionName == "fe3d:camera_yaw_get") // Get yaw angle
 	{
@@ -114,8 +96,6 @@ bool ScriptInterpreter::_executeFe3dCameraFunction(const string& functionName, v
 			auto result = _fe3d.camera_getYaw();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
 		}
-
-		return true;
 	}
 	else if (functionName == "fe3d:camera_pitch_set") // Set pitch angle
 	{
@@ -126,8 +106,6 @@ bool ScriptInterpreter::_executeFe3dCameraFunction(const string& functionName, v
 			_fe3d.camera_setPitch(arguments[0].getDecimal());
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
-
-		return true;
 	}
 	else if (functionName == "fe3d:camera_pitch_get") // Get pitch angle
 	{
@@ -136,8 +114,6 @@ bool ScriptInterpreter::_executeFe3dCameraFunction(const string& functionName, v
 			auto result = _fe3d.camera_getPitch();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
 		}
-
-		return true;
 	}
 	else if (functionName == "fe3d:camera_fov_set") // Set FOV angle
 	{
@@ -148,8 +124,6 @@ bool ScriptInterpreter::_executeFe3dCameraFunction(const string& functionName, v
 			_fe3d.camera_setFOV(arguments[0].getDecimal());
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
-
-		return true;
 	}
 	else if (functionName == "fe3d:camera_fov_get") // Get FOV angle
 	{
@@ -158,8 +132,6 @@ bool ScriptInterpreter::_executeFe3dCameraFunction(const string& functionName, v
 			auto result = _fe3d.camera_getFOV();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
 		}
-
-		return true;
 	}
 	else if (functionName == "fe3d:camera_lookat_enable") // Enable lookat view
 	{
@@ -168,8 +140,6 @@ bool ScriptInterpreter::_executeFe3dCameraFunction(const string& functionName, v
 			_fe3d.camera_enableLookat();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
-
-		return true;
 	}
 	else if (functionName == "fe3d:camera_lookat_disable") // Disable lookat view
 	{
@@ -178,8 +148,6 @@ bool ScriptInterpreter::_executeFe3dCameraFunction(const string& functionName, v
 			_fe3d.camera_disableLookat();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
-
-		return true;
 	}
 	else if (functionName == "fe3d:camera_firstperson_enable") // Enable first person view
 	{
@@ -189,8 +157,6 @@ bool ScriptInterpreter::_executeFe3dCameraFunction(const string& functionName, v
 			_fe3d.camera_enableFirstPersonView();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
-
-		return true;
 	}
 	else if (functionName == "fe3d:camera_firstperson_disable") // Disable first person view
 	{
@@ -199,11 +165,11 @@ bool ScriptInterpreter::_executeFe3dCameraFunction(const string& functionName, v
 			_fe3d.camera_disableFirstPersonView();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
-
-		return true;
 	}
 	else
 	{
 		return false;
 	}
+
+	return true;
 }

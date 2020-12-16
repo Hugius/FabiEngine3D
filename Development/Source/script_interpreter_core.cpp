@@ -144,7 +144,6 @@ void ScriptInterpreter::executeInitialization()
 
 void ScriptInterpreter::executeUpdate()
 {
-	_fe3d.collision_enableCameraTerrainResponse(8.0f, 0.1f);
 	if (_updateEntryID != "")
 	{
 		_executeScript(_updateEntryID, ScriptType::UPDATE);

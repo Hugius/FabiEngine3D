@@ -75,7 +75,7 @@ void CollisionResolver::update(
 				_isCameraUnderTerrain = true;
 
 				// Move camera upwards
-				camera.translate(Vec3(0.0f, _cameraSpeed, 0.0f));
+				camera.translate(Vec3(0.0f, fabsf(camPos.y - targetY) * _cameraSpeed, 0.0f));
 				camPos.y = camera.getPosition().y;
 
 				// Correct moved distance

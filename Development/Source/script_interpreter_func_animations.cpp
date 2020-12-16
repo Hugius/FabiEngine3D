@@ -12,8 +12,6 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 			_animationEditor.startAnimation(arguments[0].getString(), arguments[1].getString(), arguments[2].getInteger());
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
-
-		return true;
 	}
 	else if (functionName == "fe3d:model_animation_speed_set") // Set gameEntity animation speed multiplier
 	{
@@ -25,8 +23,6 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 			_animationEditor.setAnimationSpeedMultiplier(arguments[0].getString(), arguments[1].getString(), arguments[2].getDecimal());
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
-
-		return true;
 	}
 	else if (functionName == "fe3d:model_animation_isplaying") // Check if gameEntity animation is playing
 	{
@@ -38,8 +34,6 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 			auto result = _animationEditor.isAnimationPlaying(arguments[0].getString(), arguments[1].getString());
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 		}
-
-		return true;
 	}
 	else if (functionName == "fe3d:model_animation_ispaused") // Check if gameEntity animation is paused
 	{
@@ -51,8 +45,6 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 			auto result = _animationEditor.isAnimationPaused(arguments[0].getString(), arguments[1].getString());
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 		}
-
-		return true;
 	}
 	else if (functionName == "fe3d:model_animation_pause") // Pause gameEntity animation
 	{
@@ -64,8 +56,6 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 			_animationEditor.pauseAnimation(arguments[0].getString(), arguments[1].getString());
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
-
-		return true;
 	}
 	else if (functionName == "fe3d:model_animation_resume") // Resume gameEntity animation
 	{
@@ -77,8 +67,6 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 			_animationEditor.resumeAnimation(arguments[0].getString(), arguments[1].getString());
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
-
-		return true;
 	}
 	else if (functionName == "fe3d:model_animation_fade") // Fade gameEntity animation
 	{
@@ -90,8 +78,6 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 			_animationEditor.fadeAnimation(arguments[0].getString(), arguments[1].getString(), arguments[2].getInteger());
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
-
-		return true;
 	}
 	else if (functionName == "fe3d:model_animation_stop") // Stop gameEntity animation
 	{
@@ -103,11 +89,11 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 			_animationEditor.stopAnimation(arguments[0].getString(), arguments[1].getString());
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
-
-		return true;
 	}
 	else
 	{
 		return false;
 	}
+
+	return true;
 }

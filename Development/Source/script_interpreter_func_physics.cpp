@@ -12,8 +12,6 @@ bool ScriptInterpreter::_executeFe3dPhysicsFunction(const string& functionName, 
 			auto result = _fe3d.collision_checkCursorInEntity(arguments[0].getString());
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 		}
-
-		return true;
 	}
 	else if (functionName == "fe3d:raycast_model_group") // Raycasting into multiple gameEntities
 	{
@@ -34,8 +32,6 @@ bool ScriptInterpreter::_executeFe3dPhysicsFunction(const string& functionName, 
 			// Return
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result));
 		}
-
-		return true;
 	}
 	else if (functionName == "fe3d:raycast_models") // Raycasting into all gameEntities
 	{
@@ -52,11 +48,37 @@ bool ScriptInterpreter::_executeFe3dPhysicsFunction(const string& functionName, 
 			// Return
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result));
 		}
+	}
+	else if (functionName == "fe3d:collision_camera_terrain_enable") // Enable terrain-camera collision
+	{
+		auto types = { ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
-		return true;
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		{
+			_fe3d.collision_enableCameraTerrainResponse(arguments[0].getDecimal(), arguments[1].getDecimal());
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+		}
+	}
+	else if (functionName == "fe3d:collision_camera_terrain_under") // Check if camera is under terrain
+	{
+		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			bool result = _fe3d.collision_checkCameraWithTerrain();
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
+		}
+	}
+	else if (functionName == "fe3d:collision_camera_terrain_disable") // Disable terrain-camera collision
+	{
+		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			_fe3d.collision_enableCameraTerrainResponse(arguments[0].getDecimal(), arguments[1].getDecimal());
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+		}
 	}
 	else
 	{
 		return false;
 	}
+
+	return true;
 }

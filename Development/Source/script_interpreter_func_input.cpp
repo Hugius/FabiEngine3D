@@ -15,8 +15,6 @@ bool ScriptInterpreter::_executeFe3dInputFunction(const string& functionName, ve
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 			}
 		}
-
-		return true;
 	}
 	else if (functionName == "fe3d:input_key_pressed") // Press keyboard key
 	{
@@ -30,8 +28,6 @@ bool ScriptInterpreter::_executeFe3dInputFunction(const string& functionName, ve
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 			}
 		}
-
-		return true;
 	}
 	else if (functionName == "fe3d:input_key_toggled") // Togglepress keyboard key
 	{
@@ -45,8 +41,6 @@ bool ScriptInterpreter::_executeFe3dInputFunction(const string& functionName, ve
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 			}
 		}
-
-		return true;
 	}
 	else if (functionName == "fe3d:input_mouse_down") // Hold mouse button down
 	{
@@ -60,8 +54,6 @@ bool ScriptInterpreter::_executeFe3dInputFunction(const string& functionName, ve
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 			}
 		}
-
-		return true;
 	}
 	else if (functionName == "fe3d:input_mouse_pressed") // Press mouse
 	{
@@ -75,8 +67,6 @@ bool ScriptInterpreter::_executeFe3dInputFunction(const string& functionName, ve
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 			}
 		}
-
-		return true;
 	}
 	else if (functionName == "fe3d:input_mouse_toggled") // Togglepress mouse
 	{
@@ -90,8 +80,6 @@ bool ScriptInterpreter::_executeFe3dInputFunction(const string& functionName, ve
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 			}
 		}
-
-		return true;
 	}
 	else if (functionName == "fe3d:input_mousewheel_direction") // Mousewheel direction
 	{
@@ -100,11 +88,12 @@ bool ScriptInterpreter::_executeFe3dInputFunction(const string& functionName, ve
 			auto result = _fe3d.input_getMouseWheelY();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::INTEGER, result));
 		}
-
-		return true;
 	}
 	else
 	{
 		return false;
 	}
+
+
+	return true;
 }

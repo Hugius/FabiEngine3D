@@ -14,6 +14,7 @@ public:
 	void removeLastLine();
 	void setCursorLineIndex(unsigned int index);
 	void setCursorCharIndex(unsigned int index);
+	void changeID(const string& newID);
 
 	const string& getID();
 	const string& getLineText(unsigned int index);
@@ -24,7 +25,7 @@ public:
 
 private:
 	FabiEngine3D& _fe3d;
-	const string _ID;
+	string _ID;
 
 	unsigned int _cursorLineIndex = 0;
 	unsigned int _cursorCharIndex = 0;

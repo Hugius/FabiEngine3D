@@ -26,11 +26,15 @@ void ScriptEditor::_updateGUI()
 				}
 				else if (screen->getButton("createScript")->isHovered())
 				{
-					_gui.getGlobalScreen()->addValueForm("newScriptName", "New script name", "", Vec2(0.0f), Vec2(0.5f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("scriptCreate", "New script name", "", Vec2(0.0f), Vec2(0.5f, 0.1f));
 				}
 				else if (screen->getButton("editScript")->isHovered())
 				{
 					_gui.getGlobalScreen()->addChoiceForm("scriptFileList", "Choose script", Vec2(0.0f), _script.getAllScriptFileIDs());
+				}
+				else if (screen->getButton("renameScript")->isHovered())
+				{
+					_gui.getGlobalScreen()->addValueForm("scriptRename", "New script name", "", Vec2(0.0f), Vec2(0.5f, 0.1f));
 				}
 				else if (screen->getButton("deleteScript")->isHovered())
 				{
@@ -43,6 +47,7 @@ void ScriptEditor::_updateGUI()
 			}
 
 			// Buttons hoverability
+			screen->getButton("renameScript")->setHoverable(_currentScriptFileID != "");
 			screen->getButton("deleteScript")->setHoverable(_currentScriptFileID != "");
 
 			// Check if user wants to save changes
@@ -132,9 +137,9 @@ void ScriptEditor::_updateMiscellaneous()
 		_scrollingAcceleration *= 0.95f;
 		_fe3d.camera_translate(Vec3(0.0f, _scrollingAcceleration, 0.0f));
 
-		// Check if user filled in a new script name
+		// Check if user filled wants to create a new script
 		string newName;
-		if (_gui.getGlobalScreen()->checkValueForm("newScriptName", newName))
+		if (_gui.getGlobalScreen()->checkValueForm("scriptCreate", newName))
 		{
 			auto existingNames = _script.getAllScriptFileIDs();
 			if (find(existingNames.begin(), existingNames.end(), newName) == existingNames.end())
@@ -168,6 +173,21 @@ void ScriptEditor::_updateMiscellaneous()
 		else if (_gui.getGlobalScreen()->isChoiceFormCancelled("scriptFileList"))
 		{
 			_gui.getGlobalScreen()->removeChoiceForm("scriptFileList");
+		}
+
+		// Check if user filled wants to rename a script
+		if (_gui.getGlobalScreen()->checkValueForm("scriptRename", newName))
+		{
+			auto existingNames = _script.getAllScriptFileIDs();
+			if (find(existingNames.begin(), existingNames.end(), newName) == existingNames.end())
+			{
+				_script.renameScriptFile(_currentScriptFileID, newName);
+				_currentScriptFileID = newName;
+			}
+			else
+			{
+				_fe3d.logger_throwWarning("Script name already exists!");
+			}
 		}
 	}
 }

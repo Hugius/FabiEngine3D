@@ -1,4 +1,4 @@
-19 21
+21 33
 META script_type_update
 
 /// Temporary values
@@ -13,11 +13,16 @@ IF jump IS <true> AND _isJumping NOT <true>:
 IF _isJumping IS <true>:
     IF _jumpingSpeed LESS 0.01:
         EDIT _isJumping = <false>
+        EDIT _jumpingSpeed = 0.1
     ELSE:
         MUL _jumpingSpeed 0.95
         fe3d:camera_move(0.0, _jumpingSpeed, 0.0)
 ELSE:
-    MUL _fallingSpeed 1.1
-    NEG _fallingSpeed
-    fe3d:camera_move(0.0, _fallingSpeed, 0.0)
-    NEG _fallingSpeed
+    BOOL underGround = fe3d:collision_camera_terrain_under()
+    IF underGround IS <true>:
+        EDIT _fallingSpeed = 0.05
+    ELSE:
+        MUL _fallingSpeed 1.01
+        NEG _fallingSpeed
+        fe3d:camera_move(0.0, _fallingSpeed, 0.0)
+        NEG _fallingSpeed

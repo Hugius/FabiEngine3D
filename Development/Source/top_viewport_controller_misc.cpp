@@ -143,12 +143,11 @@ void TopViewportController::_updateProjectDeletion()
 
 				// Miscellaneous
 				_deletingProject = false;
-				_fe3d.misc_setWindowTitle("FabiEngine3D");
 				chosenButtonID = "";
 			}
 			else
 			{
-				_fe3d.logger_throwWarning("Project \"" + chosenButtonID + "\" is corrupted!");
+				_fe3d.logger_throwWarning("Project \"" + chosenButtonID + "\" was already deleted!");
 			}
 		}
 		else if (_gui.getGlobalScreen()->isAnswerFormCancelled("deleteProject"))

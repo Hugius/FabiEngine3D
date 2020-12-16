@@ -236,7 +236,7 @@ void BottomViewportController::update()
 		}
 	}
 
-	// Console text clearing
+	// Clear console messages if user wants to
 	if (_fe3d.input_getKeyPressed(InputType::KEY_X))
 	{
 		// Validate
@@ -249,6 +249,17 @@ void BottomViewportController::update()
 			}
 			_consoleMessageStack.clear();
 		}
+	}
+
+	// Clear console messages if it overflows
+	if (_consoleMessageStack.size() >= 100)
+	{
+		_fe3d.logger_clearMessageStack();
+		for (const auto& [ID, message] : _consoleMessageStack)
+		{
+			_deleteConsoleMessage(ID);
+		}
+		_consoleMessageStack.clear();
 	}
 
 	// Synchronize console text with core logger

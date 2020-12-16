@@ -52,7 +52,7 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
-	else if (functionName == "fe3d:misc_cursor_show") // SHow cursor
+	else if (functionName == "fe3d:misc_show_cursor") // SHow cursor
 	{
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
@@ -60,7 +60,7 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
-	else if (functionName == "fe3d:misc_cursor_hide") // Hide cursor
+	else if (functionName == "fe3d:misc_hide_cursor") // Hide cursor
 	{
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{

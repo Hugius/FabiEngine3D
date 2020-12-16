@@ -1,0 +1,18 @@
+3 16
+META script_type_init
+META execution_entry
+
+EXEC player_init
+
+fe3d:scene_load("scene")
+fe3d:camera_set_position(-37.0, 15.0, -51.0)
+fe3d:camera_enable_first_person()
+fe3d:misc_hide_cursor()
+fe3d:model_place("skellie", "skeleton", -40.0, 6.5, -50.0)
+fe3d:model_start_animation("walk", "skellie", -1)
+fe3d:model_place("player", "skeleton", 0.0, 0.0, 0.0)
+fe3d:model_set_max_height("player", 2.5)
+fe3d:model_place("axe", "axe", 0.0, 0.0, 0.0)
+fe3d:model_place("millie", "mill", -60.0, 6.4, -50.0)
+fe3d:model_set_rotation("millie", 0.0, 45.0, 0.0)
+fe3d:model_start_animation("mill_rotation", "millie", -1)

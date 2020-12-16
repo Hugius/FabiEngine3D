@@ -181,6 +181,7 @@ void ScriptEditor::_updateMiscellaneous()
 			auto existingNames = _script.getAllScriptFileIDs();
 			if (find(existingNames.begin(), existingNames.end(), newName) == existingNames.end())
 			{
+				_scriptFileNamesToDelete.push_back(_currentScriptFileID);
 				_script.renameScriptFile(_currentScriptFileID, newName);
 				_currentScriptFileID = newName;
 			}

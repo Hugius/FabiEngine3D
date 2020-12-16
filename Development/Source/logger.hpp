@@ -56,6 +56,11 @@ public:
 		return _messageStack;
 	}
 
+	inline static void setMessageStack(const vector<string>& customMessages)
+	{
+		_messageStack = customMessages;
+	}
+
 	inline static void clearMessageStack()
 	{
 		return _messageStack.clear();

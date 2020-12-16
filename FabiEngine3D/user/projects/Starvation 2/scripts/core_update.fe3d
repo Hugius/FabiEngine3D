@@ -1,0 +1,17 @@
+8 25
+META script_type_update
+META execution_entry
+
+EXEC player_walk
+EXEC player_jump
+EXEC player_bobbing
+EXEC player_animations
+
+BOOL lmb = fe3d:input_is_mouse_pressed("BUTTON_LEFT")
+VEC3 camPos = fe3d:camera_get_position()
+STR selectedID = fe3d:raycast_model_group("tree7", "trunk")
+IF selectedID NOT "" AND lmb IS <true>:
+    VEC3 selectedPos = fe3d:model_get_position(selectedID)
+    DEC distance = math:distance(camPos, selectedPos)
+    IF distance LESS 5.0:
+        fe3d:model_start_animation("tree_fall", selectedID, 1)

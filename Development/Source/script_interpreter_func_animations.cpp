@@ -2,7 +2,7 @@
 
 bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
-	if (functionName == "fe3d:model_animation_start") // Start gameEntity animation
+	if (functionName == "fe3d:model_start_animation") // Start gameEntity animation
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::STRING, ScriptValueType::INTEGER };
 
@@ -13,7 +13,7 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
-	else if (functionName == "fe3d:model_animation_speed_set") // Set gameEntity animation speed multiplier
+	else if (functionName == "fe3d:model_set_animation_speed") // Set gameEntity animation speed multiplier
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::STRING, ScriptValueType::DECIMAL };
 
@@ -24,7 +24,7 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
-	else if (functionName == "fe3d:model_animation_isplaying") // Check if gameEntity animation is playing
+	else if (functionName == "fe3d:model_is_animation_playing") // Check if gameEntity animation is playing
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
 
@@ -35,7 +35,7 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 		}
 	}
-	else if (functionName == "fe3d:model_animation_ispaused") // Check if gameEntity animation is paused
+	else if (functionName == "fe3d:model_is_animation_paused") // Check if gameEntity animation is paused
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
 
@@ -46,7 +46,7 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 		}
 	}
-	else if (functionName == "fe3d:model_animation_pause") // Pause gameEntity animation
+	else if (functionName == "fe3d:model_pause_animation") // Pause gameEntity animation
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
 
@@ -57,7 +57,7 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
-	else if (functionName == "fe3d:model_animation_resume") // Resume gameEntity animation
+	else if (functionName == "fe3d:model_resume_animation") // Resume gameEntity animation
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
 
@@ -68,7 +68,7 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
-	else if (functionName == "fe3d:model_animation_fade") // Fade gameEntity animation
+	else if (functionName == "fe3d:model_fade_animation") // Fade gameEntity animation
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::STRING, ScriptValueType::INTEGER };
 
@@ -79,7 +79,7 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
-	else if (functionName == "fe3d:model_animation_stop") // Stop gameEntity animation
+	else if (functionName == "fe3d:model_stop_animation") // Stop gameEntity animation
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
 

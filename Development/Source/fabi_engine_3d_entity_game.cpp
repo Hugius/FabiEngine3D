@@ -294,16 +294,6 @@ Vec3 FabiEngine3D::gameEntity_getSize(const string& ID, const string& partName)
 	return _core->_gameEntityManager.getEntity(ID)->getScaling(partName);
 }
 
-void FabiEngine3D::gameEntity_enable(const string& ID)
-{
-	_core->_gameEntityManager.getEntity(ID)->setVisible(true);
-}
-
-void FabiEngine3D::gameEntity_disable(const string& ID)
-{
-	_core->_gameEntityManager.getEntity(ID)->setVisible(false);
-}
-
 void FabiEngine3D::gameEntity_setSpecularFactor(const string& ID, float intensity)
 {
 	_core->_gameEntityManager.getEntity(ID)->setSpecularFactor(intensity);

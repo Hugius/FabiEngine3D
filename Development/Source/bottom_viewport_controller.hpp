@@ -35,4 +35,6 @@ private:
 	void _deleteConsoleMessage(const string& ID);
 
 	float _scrollingAcceleration = 0.0f;
+
+	unsigned int _maxConsoleMessages = 150;
 };

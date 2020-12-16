@@ -305,7 +305,8 @@ ScriptConditionStatement* ScriptInterpreter::_getLastConditionStatement(vector<S
 
 void ScriptInterpreter::_throwScriptError(const string& message)
 {
-	_fe3d.logger_throwWarning("ERROR @ script \"" + _currentScriptID + "\" @ line " + to_string(_currentLineIndex + 1) + ": " + message);
+	_fe3d.logger_throwWarning("ERROR @ script \"" + _currentScriptIDsStack.back() + "\" @ line " +
+		to_string(_currentLineIndexStack.back() + 1) + ": " + message);
 	_hasThrownError = true;
 }
 

@@ -248,8 +248,6 @@ public:
 	void		   gameEntity_setRotation(const string& ID, Vec3 rotation, const string& partName = "");
 	void		   gameEntity_setRotationOrigin(const string& ID, Vec3 rotationOrigin, const string& partName = "");
 	void		   gameEntity_setSize(const string& ID, Vec3 size, const string& partName = "");
-	void		   gameEntity_enable(const string& ID);
-	void		   gameEntity_disable(const string& ID);
 	void		   gameEntity_setSpecularFactor(const string& ID, float intensity);
 	void		   gameEntity_setSpecularIntensity(const string& ID, float intensity);
 	void		   gameEntity_setOriginalLightness(const string& ID, float lightness);
@@ -707,6 +705,10 @@ public:
 	inline const vector<string>& logger_getMessageStack()
 	{
 		return Logger::getMessageStack();
+	}
+	inline void logger_setMessageStack(const vector<string>& customMessages)
+	{
+		return Logger::setMessageStack(customMessages);
 	}
 	inline void logger_clearMessageStack()
 	{

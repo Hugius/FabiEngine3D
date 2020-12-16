@@ -10,7 +10,8 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 	unsigned int totalLoops = 0;
 
 	// Set current script run data
-	_currentScriptID = scriptID;
+	_currentScriptIDsStack.push_back(scriptID);
+	_currentLineIndexStack.push_back(0);
 	_localVariablesStack.push_back({});
 
 	// Increase execution depth
@@ -41,7 +42,7 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 		_lastLoggerMessageCount = _fe3d.logger_getMessageStack().size();
 
 		// Save index of line of script currently being executed
-		_currentLineIndex = lineIndex;
+		_currentLineIndexStack.back() = lineIndex;
 
 		// Retrieve line text
 		string scriptLineText = scriptFile->getLineText(lineIndex);
@@ -333,7 +334,7 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 		}
 		else if (scriptLineText == _breakKeyword) // Breaking out of loop
 		{
-			scopeDepth--;
+			scopeDepth = loopScopeDepths.back();
 			loopLineIndices.pop_back();
 			loopScopeDepths.pop_back();
 			_passedScopeChanger = true;
@@ -367,6 +368,8 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 	}
 
 	// End of current script file's execution
+	_currentScriptIDsStack.pop_back();
+	_currentLineIndexStack.pop_back();
 	_localVariablesStack.pop_back();
 	_executionDepth--;
 }

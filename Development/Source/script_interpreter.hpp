@@ -93,18 +93,21 @@ private:
 	SceneEditor& _sceneEditor;
 	AnimationEditor& _animationEditor;
 
+	// Stacks
+	vector<vector<ScriptVariable>> _localVariablesStack;
+	vector<string> _currentScriptIDsStack;
+	vector<unsigned int> _currentLineIndexStack;
+
 	// Vectors
 	vector<string> _initScriptIDs;
 	vector<string> _updateScriptIDs;
 	vector<string> _destroyScriptIDs;
 	vector<ScriptVariable> _globalVariables;
-	vector<vector<ScriptVariable>> _localVariablesStack;
 
 	// Strings
 	string _initEntryID = "";
 	string _updateEntryID = "";
 	string _destroyEntryID = "";
-	string _currentScriptID = "";
 	const string _metaKeyword			= "META";
 	const string _executeKeyword		= "EXEC";
 	const string _loopKeyword			= "LOOP";
@@ -143,7 +146,6 @@ private:
 	const unsigned int _maxLoopsPerFrame = 1000;
 	const unsigned int _maxExecutionDepth = 100;
 	unsigned int _lastLoggerMessageCount = 0;
-	unsigned int _currentLineIndex = 0;
 	unsigned int _executionDepth = 0;
 
 	// Booleans

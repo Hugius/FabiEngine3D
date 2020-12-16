@@ -252,18 +252,31 @@ void BottomViewportController::update()
 	}
 
 	// Clear console messages if it overflows
-	if (_consoleMessageStack.size() >= 100)
+	auto loggerMessages = _fe3d.logger_getMessageStack();
+	if (loggerMessages.size() > _maxConsoleMessages)
 	{
+		// Save most recent messages
+		std::reverse(loggerMessages.begin(), loggerMessages.end());
+		vector<string> newMessages;
+		for (unsigned int i = 0; i < (loggerMessages.size() - _maxConsoleMessages); i++)
+		{
+			newMessages.push_back(loggerMessages[i]);
+		}
+		
+		// Remove old messages
 		_fe3d.logger_clearMessageStack();
 		for (const auto& [ID, message] : _consoleMessageStack)
 		{
 			_deleteConsoleMessage(ID);
 		}
 		_consoleMessageStack.clear();
+
+		// Set new messages
+		_fe3d.logger_setMessageStack(newMessages);
 	}
 
 	// Synchronize console text with core logger
-	auto loggerMessages = _fe3d.logger_getMessageStack();
+	loggerMessages = _fe3d.logger_getMessageStack();
 	if (_consoleMessageStack.size() != loggerMessages.size())
 	{
 		auto synchronizationCount = loggerMessages.size() - _consoleMessageStack.size();

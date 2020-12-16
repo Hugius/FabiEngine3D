@@ -49,7 +49,7 @@ bool ScriptInterpreter::_executeFe3dPhysicsFunction(const string& functionName, 
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result));
 		}
 	}
-	else if (functionName == "fe3d:collision_camera_terrain_enable") // Enable terrain-camera collision
+	else if (functionName == "fe3d:collision_enable_camera_terrain") // Enable terrain-camera collision
 	{
 		auto types = { ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
@@ -59,7 +59,7 @@ bool ScriptInterpreter::_executeFe3dPhysicsFunction(const string& functionName, 
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
-	else if (functionName == "fe3d:collision_camera_terrain_under") // Check if camera is under terrain
+	else if (functionName == "fe3d:collision_is_camera_under_terrain") // Check if camera is under terrain
 	{
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
@@ -67,7 +67,7 @@ bool ScriptInterpreter::_executeFe3dPhysicsFunction(const string& functionName, 
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 		}
 	}
-	else if (functionName == "fe3d:collision_camera_terrain_disable") // Disable terrain-camera collision
+	else if (functionName == "fe3d:collision_disable_camera_terrain") // Disable terrain-camera collision
 	{
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{

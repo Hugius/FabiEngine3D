@@ -6,11 +6,11 @@ LeftViewportController::LeftViewportController(FabiEngine3D& fe3d, EngineGuiMana
 	ViewportController(fe3d, gui),
 	_environmentEditor(fe3d, gui),
 	_modelEditor(fe3d, gui),
-	_billboardEditor(fe3d, gui),
-	_sceneEditor(fe3d, gui, _environmentEditor, _modelEditor, _billboardEditor, _audioEditor),
 	_animationEditor(fe3d, gui, _modelEditor),
-	_scriptEditor(fe3d, gui, _modelEditor, _sceneEditor, _animationEditor),
+	_billboardEditor(fe3d, gui),
 	_audioEditor(fe3d, gui),
+	_sceneEditor(fe3d, gui, _environmentEditor, _modelEditor, _animationEditor, _billboardEditor, _audioEditor),
+	_scriptEditor(fe3d, gui, _modelEditor, _sceneEditor, _animationEditor),
 	_settingsEditor(fe3d, gui)
 {
 
@@ -24,21 +24,21 @@ void LeftViewportController::initialize()
 	_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
 	_gui.getViewport("left")->getWindow("main")->getScreen("main")->addButton("environmentEditor", Vec2(0.0f, 0.83f), Vec2(GW("Environment"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Environment", LVPC::textColor, LVPC::textHoverColor);
 	_gui.getViewport("left")->getWindow("main")->getScreen("main")->addButton("modelEditor", Vec2(0.0f, 0.59f), Vec2(GW("Models"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Models", LVPC::textColor, LVPC::textHoverColor);
-	_gui.getViewport("left")->getWindow("main")->getScreen("main")->addButton("billboardEditor", Vec2(0.0f, 0.36f), Vec2(GW("Billboards"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Billboards", LVPC::textColor, LVPC::textHoverColor);
-	_gui.getViewport("left")->getWindow("main")->getScreen("main")->addButton("sceneEditor", Vec2(0.0f, 0.13f), Vec2(GW("3D scenes"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "3D scenes", LVPC::textColor, LVPC::textHoverColor);
-	_gui.getViewport("left")->getWindow("main")->getScreen("main")->addButton("animationEditor", Vec2(0.0f, -0.13f), Vec2(GW("Animations"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Animations", LVPC::textColor, LVPC::textHoverColor);
-	_gui.getViewport("left")->getWindow("main")->getScreen("main")->addButton("scriptEditor", Vec2(0.0f, -0.36f), Vec2(GW("Scripting"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Scripting", LVPC::textColor, LVPC::textHoverColor);
-	_gui.getViewport("left")->getWindow("main")->getScreen("main")->addButton("audioEditor", Vec2(0.0f, -0.59f), Vec2(GW("Audio"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Audio", LVPC::textColor, LVPC::textHoverColor);
+	_gui.getViewport("left")->getWindow("main")->getScreen("main")->addButton("animationEditor", Vec2(0.0f, 0.36f), Vec2(GW("Animations"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Animations", LVPC::textColor, LVPC::textHoverColor);
+	_gui.getViewport("left")->getWindow("main")->getScreen("main")->addButton("billboardEditor", Vec2(0.0f, 0.13f), Vec2(GW("Billboards"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Billboards", LVPC::textColor, LVPC::textHoverColor);
+	_gui.getViewport("left")->getWindow("main")->getScreen("main")->addButton("audioEditor", Vec2(0.0f, -0.13f), Vec2(GW("Audio"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Audio", LVPC::textColor, LVPC::textHoverColor);
+	_gui.getViewport("left")->getWindow("main")->getScreen("main")->addButton("sceneEditor", Vec2(0.0f, -0.36f), Vec2(GW("3D scenes"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "3D scenes", LVPC::textColor, LVPC::textHoverColor);
+	_gui.getViewport("left")->getWindow("main")->getScreen("main")->addButton("scriptEditor", Vec2(0.0f, -0.59f), Vec2(GW("Scripting"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Scripting", LVPC::textColor, LVPC::textHoverColor);
 	_gui.getViewport("left")->getWindow("main")->getScreen("main")->addButton("settingsEditor", Vec2(0.0f, -0.83f), Vec2(GW("Settings"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Settings", LVPC::textColor, LVPC::textHoverColor);
 	
 	// Initialize editors GUI
 	_environmentEditor.initializeGUI();
 	_modelEditor.initializeGUI();
-	_billboardEditor.initializeGUI();
-	_sceneEditor.initializeGUI();
 	_animationEditor.initializeGUI();
-	_scriptEditor.initializeGUI();
+	_billboardEditor.initializeGUI();
 	_audioEditor.initializeGUI();
+	_sceneEditor.initializeGUI();
+	_scriptEditor.initializeGUI();
 	_settingsEditor.initializeGUI();
 
 	// Load settings editor (project independent)
@@ -63,30 +63,30 @@ void LeftViewportController::update()
 			_modelEditor.load();
 			window->setActiveScreen("modelEditorMenuMain");
 		}
+		else if (screen->getButton("animationEditor")->isHovered()) // Animation editor button
+		{
+			_animationEditor.load();
+			window->setActiveScreen("animationEditorMenuMain");
+		}
 		else if (screen->getButton("billboardEditor")->isHovered()) // Billboard editor button
 		{
 			_billboardEditor.load();
 			window->setActiveScreen("billboardEditorMenuMain");
+		}
+		else if (screen->getButton("audioEditor")->isHovered()) // Audio editor button
+		{
+			_audioEditor.load();
+			window->setActiveScreen("audioEditorMenuMain");
 		}
 		else if (screen->getButton("sceneEditor")->isHovered()) // Scene editor button
 		{
 			_sceneEditor.load();
 			window->setActiveScreen("sceneEditorMenuMain");
 		}
-		else if (screen->getButton("animationEditor")->isHovered()) // Animation editor button
-		{
-			_animationEditor.load();
-			window->setActiveScreen("animationEditorMenuMain");
-		}
 		else if (screen->getButton("scriptEditor")->isHovered()) // Script editor button
 		{
 			_scriptEditor.load();
 			window->setActiveScreen("scriptEditorMenuMain");
-		}
-		else if (screen->getButton("audioEditor")->isHovered()) // Audio editor button
-		{
-			_audioEditor.load();
-			window->setActiveScreen("audioEditorMenuMain");
 		}
 		else if (screen->getButton("settingsEditor")->isHovered()) // Settings editor button
 		{
@@ -97,17 +97,12 @@ void LeftViewportController::update()
 	// Update all editors
 	_environmentEditor.update();
 	_modelEditor.update();
-	_billboardEditor.update();
-	_sceneEditor.update();
 	_animationEditor.update();
-	_scriptEditor.update();
+	_billboardEditor.update();
 	_audioEditor.update();
+	_sceneEditor.update();
+	_scriptEditor.update();
 	_settingsEditor.update();
-}
-
-ModelEditor& LeftViewportController::getModelEditor()
-{
-	return _modelEditor;
 }
 
 EnvironmentEditor& LeftViewportController::getEnvironmentEditor()
@@ -115,19 +110,29 @@ EnvironmentEditor& LeftViewportController::getEnvironmentEditor()
 	return _environmentEditor;
 }
 
-BillboardEditor& LeftViewportController::getBillboardEditor()
+ModelEditor& LeftViewportController::getModelEditor()
 {
-	return _billboardEditor;
-}
-
-SceneEditor& LeftViewportController::getSceneEditor()
-{
-	return _sceneEditor;
+	return _modelEditor;
 }
 
 AnimationEditor& LeftViewportController::getAnimationEditor()
 {
 	return _animationEditor;
+}
+
+BillboardEditor& LeftViewportController::getBillboardEditor()
+{
+	return _billboardEditor;
+}
+
+AudioEditor& LeftViewportController::getAudioEditor()
+{
+	return _audioEditor;
+}
+
+SceneEditor& LeftViewportController::getSceneEditor()
+{
+	return _sceneEditor;
 }
 
 ScriptEditor& LeftViewportController::getScriptEditor()
@@ -138,9 +143,4 @@ ScriptEditor& LeftViewportController::getScriptEditor()
 SettingsEditor& LeftViewportController::getSettingsEditor()
 {
 	return _settingsEditor;
-}
-
-AudioEditor& LeftViewportController::getAudioEditor()
-{
-	return _audioEditor;
 }

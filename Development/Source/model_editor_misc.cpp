@@ -316,11 +316,10 @@ bool ModelEditor::_addModel(const string& modelName, string objName, string diff
 			_fe3d.gameEntity_setSceneReflective(modelName, isReflective);
 			_fe3d.gameEntity_setSpecularLighted(modelName, isSpecular);
 			_fe3d.gameEntity_setInstanced(modelName, isInstanced, { Vec3(0.0f) });
-
+			
 			// Set other options
 			_fe3d.gameEntity_setSpecularFactor(modelName, specularFactor);
 			_fe3d.gameEntity_setSpecularIntensity(modelName, specularIntensity);
-			_fe3d.gameEntity_setOriginalLightness(modelName, lightness);
 			_fe3d.gameEntity_setLightness(modelName, lightness);
 			_fe3d.gameEntity_setColor(modelName, color); 
 			_fe3d.gameEntity_setUvRepeat(modelName, uvRepeat);

@@ -383,11 +383,6 @@ void GameEntity::clearNormalMaps()
 	_normalMapPaths.clear();
 }
 
-void GameEntity::setOriginalLightness(float val)
-{
-	_originalLightness = val;
-}
-
 void GameEntity::setLightness(float val)
 {
 	_lightness = val;
@@ -683,11 +678,6 @@ Vec3 GameEntity::_calculateAverage(vector<Vec3> elements)
 	}
 
 	return total / static_cast<float>(elements.size());
-}
-
-const float GameEntity::getOriginalLightness() const
-{
-	return _originalLightness;
 }
 
 const float GameEntity::getLightness() const

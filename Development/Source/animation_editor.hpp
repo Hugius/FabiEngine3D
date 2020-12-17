@@ -29,6 +29,9 @@ public:
 	bool isLoaded();
 	bool isAnimationPlaying(const string& animationID, const string& modelID);
 	bool isAnimationPaused(const string& animationID, const string& modelID);
+	const vector<string> getAllAnimationNames();
+	const vector<string> getPlayingAnimationNames();
+	const vector<string> getPlayingAnimationNames(const string& modelID);
 
 private:
 	void _updateAnimationExecution();
@@ -54,8 +57,8 @@ private:
 
 	// Containers
 	vector<shared_ptr<Animation>> _animations;
-	vector<pair<string, string>> _animationsToStop;
-	vector<pair<string, string>> _animationsToStart;
+	set<pair<string, string>> _animationsToStop;
+	set<pair<string, string>> _animationsToStart;
 	map<pair<string, string>, Animation> _playingAnimations;
 
 	// Strings

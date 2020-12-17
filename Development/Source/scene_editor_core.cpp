@@ -4,11 +4,12 @@
 #define GW(text) LVPC::calcTextWidth(text, 0.15f, 1.8f)
 
 SceneEditor::SceneEditor(FabiEngine3D& fe3d, EngineGuiManager& gui, EnvironmentEditor& environmentEditor, 
-	ModelEditor& modelEditor, BillboardEditor& billboardEditor, AudioEditor& audioEditor) :
+	ModelEditor& modelEditor, AnimationEditor& animationEditor, BillboardEditor& billboardEditor, AudioEditor& audioEditor) :
 	_fe3d(fe3d),
 	_gui(gui),
 	_environmentEditor(environmentEditor),
 	_modelEditor(modelEditor),
+	_animationEditor(animationEditor),
 	_billboardEditor(billboardEditor),
 	_audioEditor(audioEditor)
 {
@@ -236,7 +237,7 @@ void SceneEditor::initializeGUI()
 	rightWindow->getScreen(screenID)->addButton("translation", Vec2(0.0f, 0.8f), Vec2(0.75f, 0.2f), "translation.png", Vec3(0.0f));
 	rightWindow->getScreen(screenID)->addButton("rotation", Vec2(0.0f, 0.55f), Vec2(0.75f, 0.2f), "rotation.png", Vec3(0.0f));
 	rightWindow->getScreen(screenID)->addButton("scaling", Vec2(0.0f, 0.3f), Vec2(0.75f, 0.2f), "scaling.png", Vec3(0.0f));
-	rightWindow->getScreen(screenID)->addButton("freeze", Vec2(0.0f, 0.13f), Vec2(1.25f, 0.075f), Vec3(0.0f, 0.0f, 0.75f), Vec3(0.25f, 0.25f, 1.0f), "Freeze", LVPC::textColor, LVPC::textHoverColor);
+	rightWindow->getScreen(screenID)->addButton("freeze", Vec2(0.0f, 0.13f), Vec2(1.15f, 0.075f), Vec3(0.0f, 0.0f, 0.75f), Vec3(0.25f, 0.25f, 1.0f), "Freeze", LVPC::textColor, LVPC::textHoverColor);
 	rightWindow->getScreen(screenID)->addButton("delete", Vec2(0.0f, -0.03f), Vec2(1.25f, 0.075f), Vec3(0.75f, 0.0f, 0.0f), Vec3(1.0f, 0.25f, 0.25f), "Delete", LVPC::textColor, LVPC::textHoverColor);
 	rightWindow->getScreen(screenID)->addTextfield("x", Vec2(0.0f, -0.15f), Vec2(0.25f, 0.1f), "X", Vec3(1.0f));
 	rightWindow->getScreen(screenID)->addTextfield("y", Vec2(0.0f, -0.4f), Vec2(0.25f, 0.1f), "Y", Vec3(1.0f));
@@ -250,6 +251,7 @@ void SceneEditor::initializeGUI()
 	rightWindow->getScreen(screenID)->addWriteField("x", Vec2(0.0f, -0.25f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
 	rightWindow->getScreen(screenID)->addWriteField("y", Vec2(0.0f, -0.5f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
 	rightWindow->getScreen(screenID)->addWriteField("z", Vec2(0.0f, -0.75f), Vec2(1.0f, 0.1f), Vec3(0.25f), Vec3(0.75f), Vec3(1.0f), Vec3(0.0f), 0, 1, 1, 1, 1);
+	rightWindow->getScreen(screenID)->addButton("animation", Vec2(0.0f, -0.9f), Vec2(1.5f, 0.08f), Vec3(0.0f, 0.0f, 0.75f), Vec3(0.25f, 0.25f, 1.0f), "Animation", LVPC::textColor, LVPC::textHoverColor);
 
 	// Right-viewport: mainWindow - billboardPropertiesMenu
 	screenID = "billboardPropertiesMenu";
@@ -350,17 +352,12 @@ void SceneEditor::load()
 	_fe3d.gfx_enableNormalMapping();
 	_fe3d.gfx_enableWaterEffects();
 
-	// Load environment preview entities
+	// Preview environment loading
 	_environmentEditor.loadSkyEntitiesFromFile();
 	_environmentEditor.loadTerrainEntitiesFromFile();
 	_environmentEditor.loadWaterEntitiesFromFile();
 
-	// Load lightsource billboard
-	_fe3d.billBoardEntity_add("@@lightSource", "engine\\textures\\light_source.png", _fe3d.gfx_getDirectionalLightingPosition(),
-		Vec3(0.0f), Vec2(0.0f), true, true, true, true);
-	_fe3d.billboardEntity_setDepthMapIncluded("@@lightSource", false);
-
-	// Preview model loading
+	// Preview models loading
 	_modelEditor.loadGameEntitiesFromFile();
 	for (auto& modelName : _modelEditor.getModelNames())
 	{
@@ -372,7 +369,10 @@ void SceneEditor::load()
 		}
 	}
 
-	// Preview billboard loading
+	// Preview animations loading
+	_animationEditor.loadAnimationsFromFile();
+
+	// Preview billboards loading
 	_billboardEditor.loadBillboardEntitiesFromFile();
 	for (auto& billboardName : _billboardEditor.getBillboardNames())
 	{
@@ -383,6 +383,11 @@ void SceneEditor::load()
 				addButton(billboardName, billboardName.substr(1));
 		}
 	}
+
+	// Load lightsource billboard
+	_fe3d.billBoardEntity_add("@@lightSource", "engine\\textures\\light_source.png", _fe3d.gfx_getDirectionalLightingPosition(),
+		Vec3(0.0f), Vec2(0.0f), true, true, true, true);
+	_fe3d.billboardEntity_setDepthMapIncluded("@@lightSource", false);
 
 	// Preview pointlight loading
 	_fe3d.lightEntity_add(_previewPointlightID);
@@ -427,10 +432,17 @@ void SceneEditor::unload()
 	_fe3d.billboardEntity_deleteAll();
 	_fe3d.lightEntity_deleteAll();
 
+	// Stop all playing animations
+	_animationEditor.stopAllAnimations();
+
 	// Reset variables
 	_currentSkyID = "";
 	_currentTerrainID = "";
 	_currentWaterID = "";
+	_initialModelLightness.clear();
+	_initialModelPosition.clear();
+	_initialModelRotation.clear();
+	_initialModelSize.clear();
 	_currentPreviewModelName = "";
 	_selectedModelID = "";
 	_activeModelID = "";

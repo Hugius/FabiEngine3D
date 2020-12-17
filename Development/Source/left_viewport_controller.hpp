@@ -20,14 +20,14 @@ public:
 	void initialize() override;
 	void update() override;
 
-	ModelEditor& getModelEditor();
 	EnvironmentEditor& getEnvironmentEditor();
-	BillboardEditor& getBillboardEditor();
-	SceneEditor& getSceneEditor();
+	ModelEditor& getModelEditor();
 	AnimationEditor& getAnimationEditor();
+	BillboardEditor& getBillboardEditor();
+	AudioEditor& getAudioEditor();
+	SceneEditor& getSceneEditor();
 	ScriptEditor& getScriptEditor();
 	SettingsEditor& getSettingsEditor();
-	AudioEditor& getAudioEditor();
 
 	static inline const Vec3 frameColor = Vec3(0.4f);
 	static inline const Vec3 buttonColor = Vec3(0.25f, 0.25f, 1.0f);
@@ -36,12 +36,12 @@ public:
 	static inline const Vec3 textHoverColor = Vec3(0.0f);
 
 private:
-	ModelEditor _modelEditor;
 	EnvironmentEditor _environmentEditor;
-	BillboardEditor _billboardEditor;
-	SceneEditor _sceneEditor;
+	ModelEditor _modelEditor;
 	AnimationEditor _animationEditor;
-	ScriptEditor _scriptEditor;
+	BillboardEditor _billboardEditor;
 	AudioEditor _audioEditor;
+	SceneEditor _sceneEditor;
+	ScriptEditor _scriptEditor;
 	SettingsEditor _settingsEditor;
 };

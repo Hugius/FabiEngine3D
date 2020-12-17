@@ -201,3 +201,42 @@ shared_ptr<Animation> AnimationEditor::_getAnimation(const string& ID)
 
 	_fe3d.logger_throwError("Cannot retrieve animation with ID \"" + ID + "\""); 
 }
+
+const vector<string> AnimationEditor::getAllAnimationNames()
+{
+	vector<string> names;
+
+	for (auto& animation : _animations)
+	{
+		names.push_back(animation->ID);
+	}
+
+	return names;
+}
+
+const vector<string> AnimationEditor::getPlayingAnimationNames()
+{
+	set<string> names;
+
+	for (const auto& [idPair, animation] : _playingAnimations)
+	{
+		names.insert(idPair.first);
+	}
+
+	return vector<string>(names.begin(), names.end());
+}
+
+const vector<string> AnimationEditor::getPlayingAnimationNames(const string& modelID)
+{
+	set<string> names;
+
+	for (const auto& [idPair, animation] : _playingAnimations)
+	{
+		if (modelID == idPair.second)
+		{
+			names.insert(idPair.first);
+		}
+	}
+
+	return vector<string>(names.begin(), names.end());
+}

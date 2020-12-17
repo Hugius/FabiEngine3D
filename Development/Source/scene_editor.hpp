@@ -6,6 +6,7 @@
 #include "model_editor.hpp"
 #include "billboard_editor.hpp"
 #include "audio_editor.hpp"
+#include "animation_editor.hpp"
 #include "transformation_type.hpp"
 
 #include <map>
@@ -15,7 +16,7 @@ class SceneEditor final
 {
 public:
 	SceneEditor(FabiEngine3D& fe3d, EngineGuiManager& gui, EnvironmentEditor& environmentEditor, 
-		ModelEditor& modelEditor, BillboardEditor& billboardEditor, AudioEditor& audioEditor);
+		ModelEditor& modelEditor, AnimationEditor& animationEditor, BillboardEditor& billboardEditor, AudioEditor& audioEditor);
 	~SceneEditor() = default;
 
 	void initializeGUI();
@@ -96,9 +97,9 @@ private:
 		Vec2 speed, const string& dudvMapPath, const string& normalMapPath, const string& displacementMapPath);
 	void _placeModel(bool scriptExecution, const string& modelName, const string& modelNumber, Vec3 position, Vec3 rotation, Vec3 size, 
 		const string& objPath, const string& diffuseMapPath, const string& lightMapPath, const string& reflectionMapPath, const string& normalMapPath, 
-		bool isFrozen, bool isFaceCulled, bool isShadowed, bool isTransparent, bool isReflective, bool isSpecular, 
-		float specularFactor, float specularIntensity, float lightness, Vec3 color, float uvRepeat, const string& lodEntityID, bool isInstanced,
-		vector<Vec3> instancedOffsets, vector<string> aabbNames, vector<Vec3> aabbPositions, vector<Vec3> aabbSizes);
+		bool isFrozen, bool isFaceCulled, bool isShadowed, bool isTransparent, bool isReflective, bool isSpecular, float specularFactor, 
+		float specularIntensity, float lightness, Vec3 color, float uvRepeat, const string& lodEntityID, bool isInstanced,
+		vector<Vec3> instancedOffsets, vector<string> aabbNames, vector<Vec3> aabbPositions, vector<Vec3> aabbSizes, string animationID);
 	void _placeBillboard(const string& newID, const string& previewID, Vec3 position);
 	void _placeBillboard(const string& newID, const string& diffusePath, const string& fontPath, const string& textContent,
 		Vec3 position, Vec3 rotation, Vec2 size, Vec3 color, bool facingX, bool facingY, bool isTransparent,
@@ -125,6 +126,7 @@ private:
 	EngineGuiManager& _gui;
 	EnvironmentEditor& _environmentEditor;
 	ModelEditor& _modelEditor;
+	AnimationEditor& _animationEditor;
 	BillboardEditor& _billboardEditor;
 	AudioEditor& _audioEditor;
 
@@ -134,6 +136,10 @@ private:
 	string _currentWaterID = "";
 
 	// Model variables
+	map<string, float> _initialModelLightness;
+	map<string, Vec3> _initialModelPosition;
+	map<string, Vec3> _initialModelRotation;
+	map<string, Vec3> _initialModelSize;
 	string _currentPreviewModelName = "";
 	string _selectedModelID = "";
 	string _activeModelID = "";
@@ -143,6 +149,7 @@ private:
 	const float _modelBlinkingSpeed = 0.025f;
 
 	// Billboard variables
+	map<string, float> _initialBillboardLightness;
 	string _currentPreviewBillboardName = "";
 	string _selectedBillboardID = "";
 	string _activeBillboardID = "";

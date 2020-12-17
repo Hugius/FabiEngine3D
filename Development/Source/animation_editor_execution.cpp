@@ -9,20 +9,38 @@ void AnimationEditor::_updateAnimationExecution()
 		// Remove all animations that ended
 		for (const auto& idPair : _animationsToStop)
 		{
-			// Reset all rotation origins
-			for (auto partName : _playingAnimations.at(idPair).partNames)
+			// Check if animation is still playing
+			if (isAnimationPlaying(idPair.first, idPair.second))
 			{
-				_fe3d.gameEntity_setRotationOrigin(_playingAnimations.at(idPair).animatedModelID, Vec3(0.0f), partName);
-			}
+				// Reset all rotation origins
+				auto animation = _playingAnimations.at(idPair);
+				for (auto partName : animation.partNames)
+				{
+					// Check if model still exists
+					if (_fe3d.gameEntity_isExisting(animation.animatedModelID))
+					{
+						// Check if model has part
+						if (_fe3d.gameEntity_hasPart(animation.animatedModelID, partName) || partName.empty())
+						{
+							_fe3d.gameEntity_setRotationOrigin(animation.animatedModelID, Vec3(0.0f), partName);
+						}
+					}
+				}
 
-			stopAnimation(idPair.first, idPair.second);
+				// Stop animation
+				stopAnimation(idPair.first, idPair.second);
+			}
 		}
 		_animationsToStop.clear();
 
 		// Start all animations that play endlessly
 		for (const auto& idPair : _animationsToStart)
 		{
-			startAnimation(idPair.first, idPair.second, -1);
+			// Check if animation is not already playing
+			if (!isAnimationPlaying(idPair.first, idPair.second))
+			{
+				startAnimation(idPair.first, idPair.second, -1);
+			}
 		}
 		_animationsToStart.clear();
 
@@ -49,6 +67,12 @@ void AnimationEditor::_updateAnimationExecution()
 			unsigned int finishedPartsAmount = 0;
 			for (auto partName : animation.partNames)
 			{
+				// Check if model still exists
+				if (!_fe3d.gameEntity_isExisting(animation.animatedModelID))
+				{
+					break;
+				}
+
 				// Check if model has part
 				if (!_fe3d.gameEntity_hasPart(animation.animatedModelID, partName) && !partName.empty())
 				{
@@ -329,7 +353,7 @@ void AnimationEditor::_updateAnimationExecution()
 				// Check if animation faded to its end
 				if (animation.frameIndex == animation.maxFrameIndex)
 				{
-					_animationsToStop.push_back(idPair);
+					_animationsToStop.insert(idPair);
 				}
 				else
 				{
@@ -339,8 +363,8 @@ void AnimationEditor::_updateAnimationExecution()
 						// Playing endlessly
 						if (animation.timesToPlay == -1)
 						{
-							_animationsToStop.push_back(idPair);
-							_animationsToStart.push_back(idPair);
+							_animationsToStop.insert(idPair);
+							_animationsToStart.insert(idPair);
 							continue;
 						}
 
@@ -350,7 +374,7 @@ void AnimationEditor::_updateAnimationExecution()
 						// Check if animation has ended
 						if (animation.timesToPlay == 0)
 						{
-							_animationsToStop.push_back(idPair);
+							_animationsToStop.insert(idPair);
 						}
 						else
 						{

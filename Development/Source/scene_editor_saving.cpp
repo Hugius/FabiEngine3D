@@ -187,6 +187,25 @@ void SceneEditor::saveSceneToFile()
 				// Check if not a preview model or an LOD entity
 				if (modelID[0] != '@' || std::find(lodIDs.begin(), lodIDs.end(), modelID) != lodIDs.end())
 				{
+					// Reset main transformation
+					_fe3d.gameEntity_setPosition(modelID, _initialModelPosition[modelID]);
+					_fe3d.gameEntity_setRotationOrigin(modelID, Vec3(0.0f));
+					_fe3d.gameEntity_setRotation(modelID, _initialModelRotation[modelID]);
+					_fe3d.gameEntity_setSize(modelID, _initialModelSize[modelID]);
+
+					// Reset part transformations
+					for (auto& partName : _fe3d.gameEntity_getPartNames(modelID))
+					{
+						// Only named parts
+						if (!partName.empty())
+						{
+							_fe3d.gameEntity_setPosition(modelID, Vec3(0.0f), partName);
+							_fe3d.gameEntity_setRotationOrigin(modelID, Vec3(0.0f), partName);
+							_fe3d.gameEntity_setRotation(modelID, Vec3(0.0f), partName);
+							_fe3d.gameEntity_setSize(modelID, Vec3(1.0f), partName);
+						}
+					}
+
 					// General data
 					auto position = _fe3d.gameEntity_getPosition(modelID);
 					auto rotation = _fe3d.gameEntity_getRotation(modelID);
@@ -204,12 +223,14 @@ void SceneEditor::saveSceneToFile()
 					auto isSpecular = _fe3d.gameEntity_isSpecularLighted(modelID);
 					auto specularFactor = _fe3d.gameEntity_getSpecularFactor(modelID);
 					auto specularIntensity = _fe3d.gameEntity_getSpecularIntensity(modelID);
-					auto lightness = _fe3d.gameEntity_getLightness(modelID);
+					auto lightness = _initialModelLightness[modelID];
 					auto color = _fe3d.gameEntity_getColor(modelID);
 					auto uvRepeat = _fe3d.gameEntity_getUvRepeat(modelID);
 					auto lodID = _fe3d.gameEntity_getLevelOfDetailEntityID(modelID);
 					auto isInstanced = _fe3d.gameEntity_isInstanced(modelID);
 					auto instancedOffsets = _fe3d.gameEntity_getInstancedOffsets(modelID);
+					auto animationID = _animationEditor.getPlayingAnimationNames(modelID).empty() ? "" : 
+						_animationEditor.getPlayingAnimationNames(modelID).front();
 
 					// AABB data
 					vector<string> aabbNames;
@@ -228,12 +249,14 @@ void SceneEditor::saveSceneToFile()
 					reflectionMapPath = (reflectionMapPath == "") ? "?" : reflectionMapPath;
 					normalMapPath = (normalMapPath == "") ? "?" : normalMapPath;
 					lodID = (lodID == "") ? "?" : lodID;
+					animationID = (animationID == "") ? "?" : animationID;
 					std::replace(objPath.begin(), objPath.end(), ' ', '?');
 					std::replace(diffuseMapPath.begin(), diffuseMapPath.end(), ' ', '?');
 					std::replace(lightMapPath.begin(), lightMapPath.end(), ' ', '?');
 					std::replace(reflectionMapPath.begin(), reflectionMapPath.end(), ' ', '?');
 					std::replace(normalMapPath.begin(), normalMapPath.end(), ' ', '?');
 					std::replace(lodID.begin(), lodID.end(), ' ', '?');
+					std::replace(animationID.begin(), animationID.end(), ' ', '?');
 
 					// 1 model -> 1 line in file
 					file <<
@@ -267,7 +290,8 @@ void SceneEditor::saveSceneToFile()
 						color.b << " " <<
 						uvRepeat << " " <<
 						lodID << " " <<
-						isInstanced;
+						isInstanced << " " <<
+						animationID;
 
 					// Write instanced offset data
 					if (isInstanced)

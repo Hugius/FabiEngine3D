@@ -203,7 +203,7 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 				}
 
 				// Values
-				string objPath, diffuseMapPath, lightMapPath, reflectionMapPath, normalMapPath, lodEntityID;
+				string objPath, diffuseMapPath, lightMapPath, reflectionMapPath, normalMapPath, lodEntityID, animationID;
 				Vec3 position, rotation, size, color;
 				float uvRepeat, specularFactor, specularIntensity, lightness;
 				bool isFaceculled, isShadowed, isTransparent, isSpecular, isReflective, isFrozen, isInstanced;
@@ -242,7 +242,8 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 					color.b >>
 					uvRepeat >>
 					lodEntityID >>
-					isInstanced;
+					isInstanced >>
+					animationID;
 
 				// Extract instanced offset data from file
 				while (isInstanced)
@@ -292,12 +293,14 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 				reflectionMapPath = (reflectionMapPath == "?") ? "" : reflectionMapPath;
 				normalMapPath = (normalMapPath == "?") ? "" : normalMapPath;
 				lodEntityID = (lodEntityID == "?") ? "" : lodEntityID;
+				animationID = (animationID == "?") ? "" : animationID;
 				std::replace(objPath.begin(), objPath.end(), '?', ' ');
 				std::replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
 				std::replace(lightMapPath.begin(), lightMapPath.end(), '?', ' ');
 				std::replace(reflectionMapPath.begin(), reflectionMapPath.end(), '?', ' ');
 				std::replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
 				std::replace(lodEntityID.begin(), lodEntityID.end(), '?', ' ');
+				std::replace(animationID.begin(), animationID.end(), '?', ' ');
 
 				// Extract model name and number from ID
 				unsigned int atPos = std::distance(modelID.begin(), std::find(modelID.begin(), modelID.end(), '@'));
@@ -308,7 +311,8 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 				// Add the model
 				_placeModel(!_isEditorLoaded, modelName, modelNumber, position, rotation, size, objPath, diffuseMapPath, lightMapPath, 
 					reflectionMapPath, normalMapPath, isFrozen, isFaceculled, isShadowed, isTransparent, isReflective, isSpecular, specularFactor, 
-					specularIntensity, lightness, color, uvRepeat, lodEntityID, isInstanced, instancedOffsets, aabbNames, aabbPositions, aabbSizes);
+					specularIntensity, lightness, color, uvRepeat, lodEntityID, 
+					isInstanced, instancedOffsets, aabbNames, aabbPositions, aabbSizes, animationID);
 
 				// Hide LOD entity
 				if (makeInvisible)

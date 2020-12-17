@@ -48,6 +48,8 @@ void AnimationEditor::initializeGUI()
 
 void AnimationEditor::load()
 {
+	_isEditorLoading = true;
+
 	// Camera
 	_fe3d.camera_load(90.0f, 0.1f, 10000.0f, _defaultCameraPosition, -90.0f);
 	_fe3d.camera_enableLookat();
@@ -65,7 +67,6 @@ void AnimationEditor::load()
 	_fe3d.gameEntity_setLevelOfDetailDistance(10000.0f);
 
 	// Load animations
-	_isEditorLoading = true;
 	loadAnimationsFromFile();
 
 	// Miscellaneous

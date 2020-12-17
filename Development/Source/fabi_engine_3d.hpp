@@ -250,7 +250,6 @@ public:
 	void		   gameEntity_setSize(const string& ID, Vec3 size, const string& partName = "");
 	void		   gameEntity_setSpecularFactor(const string& ID, float intensity);
 	void		   gameEntity_setSpecularIntensity(const string& ID, float intensity);
-	void		   gameEntity_setOriginalLightness(const string& ID, float lightness);
 	void		   gameEntity_setLightness(const string& ID, float lightness);
 	void		   gameEntity_setAlpha(const string& ID, float alpha);
 	void		   gameEntity_setColor(const string& ID, Vec3 color, const string& partName = "");
@@ -276,7 +275,6 @@ public:
 	bool		   gameEntity_isWireframed(const string& ID);
 	bool		   gameEntity_isDepthMapIncluded(const string& ID);
 	bool		   gameEntity_hasPart(const string& ID, const string& partName);
-	float		   gameEntity_getOriginalLightness(const string& ID);
 	float		   gameEntity_getLightness(const string& ID);
 	float		   gameEntity_getSpecularFactor(const string& ID);
 	float		   gameEntity_getSpecularIntensity(const string& ID);
@@ -332,7 +330,6 @@ public:
 	void billboardEntity_setInstanced(const string& ID, bool instanced, vector<Vec3> offsets);
 
 	// Billboard entity interface (core) - getters
-	float billboardEntity_getOriginalLightness(const string& ID);
 	float billboardEntity_getLightness(const string& ID);
 	float billboardEntity_getMaxHeight(const string& ID);
 	bool  billboardEntity_isExisting(const string& ID);

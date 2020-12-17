@@ -83,11 +83,6 @@ void FabiEngine3D::billboardEntity_show(const string& ID)
 	_core->_billboardEntityManager.getEntity(ID)->setVisible(true);
 }
 
-float FabiEngine3D::billboardEntity_getOriginalLightness(const string& ID)
-{
-	return _core->_billboardEntityManager.getEntity(ID)->getOriginalLightness();
-}
-
 float FabiEngine3D::billboardEntity_getLightness(const string& ID)
 {
 	return _core->_billboardEntityManager.getEntity(ID)->getLightness();

@@ -8,6 +8,3 @@ EXEC player_init
 
 fe3d:model_place("skellie", "skeleton", -40.0, 6.5, -50.0)
 fe3d:model_start_animation("walk", "skellie", -1)
-fe3d:model_place("millie", "mill", -60.0, 6.4, -50.0)
-fe3d:model_set_rotation("millie", 0.0, 45.0, 0.0)
-fe3d:model_start_animation("mill_rotation", "millie", -1)

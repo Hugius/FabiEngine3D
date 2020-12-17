@@ -7,7 +7,7 @@
 @tree3_lod user\assets\models\tree_lowpoly.obj ? ? ? ? 4 4 4 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0
 @tree4 user\assets\models\tree9.obj ? ? ? ? 3 3 3 0 1 1 0 0 1 1 1 1 1 1 1 @tree4_lod 0 leaves 0 7.2 0 9.8 13.9 8.5 trunk 0 0 0 3.1 21.2 3
 @tree4_lod user\assets\models\tree_lowpoly.obj ? ? ? ? 3 4.5 3 0 1 1 0 0 1 1 1 1 1 1 1 ? 0
-@tree5 user\assets\models\tree10.obj ? ? ? ? 1.25 1.25 1.25 0 1 1 0 0 1 1 1 1 1 1 1 @tree5_lod 0 trunk 0 0 -1 8 5 4.5 leaves 2.5 5 -1.5 18.5 18.5 10
+@tree5 user\assets\models\tree10.obj ? ? ? ? 1.25 1.25 1.25 0 1 1 0 0 1 1 0.25 1 1 1 1 @tree5_lod 0 trunk 0 0 -1 8 5 4.5 leaves 2.5 5 -1.5 18.5 18.5 10
 @tree5_lod user\assets\models\tree_lowpoly.obj ? ? ? ? 4.5 4.5 4.5 0 1 0 0 0 10 150 0.5 1 1 1 1 ? 0
 @tree6 user\assets\models\tree12.obj user\assets\textures\diffuse_maps\tree12.png ? ? ? 5 5 5 0 1 1 0 0 1 1 1 1 1 1 1 ? 0 trunk 0.3 0 -0.1 1.3 6 1.5 leaves 0.6 6 0 9.5 9.1 8.8
 @tree7 user\assets\models\tree14.obj ? ? ? ? 2 1.5 2 0 1 1 0 0 1 1 0.5 1 1 1 1 @tree7_lod 0 trunk 0 0 -0.1 1.5 25 1.6 leaves 0 13 0 9.8 12.1 9

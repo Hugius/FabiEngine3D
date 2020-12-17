@@ -204,6 +204,7 @@ void SceneEditor::_updateChoiceMenu()
 			{
 				saveSceneToFile();
 				clearScene();
+				_animationEditor.stopAllAnimations();
 				_fe3d.skyEntity_select("@@engineBackground");
 				_currentSceneName = "";
 				_currentSkyID = "";
@@ -214,6 +215,7 @@ void SceneEditor::_updateChoiceMenu()
 			else if (_gui.getGlobalScreen()->isAnswerFormCancelled("exitSceneEditor"))
 			{
 				clearScene();
+				_animationEditor.stopAllAnimations();
 				_fe3d.skyEntity_select("@@engineBackground");
 				_currentSceneName = "";
 				_currentSkyID = "";

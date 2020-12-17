@@ -202,14 +202,14 @@ void SceneEditor::_updateModelBlinking(const string& modelID, int& multiplier)
 	if (modelID != "")
 	{
 		// Check if lightness reached bounds
-		if (_fe3d.gameEntity_getLightness(modelID) > _fe3d.gameEntity_getOriginalLightness(modelID) || 
+		if (_fe3d.gameEntity_getLightness(modelID) > _initialModelLightness[modelID] ||
 			_fe3d.gameEntity_getLightness(modelID) < 0.0f)
 		{
 			multiplier *= -1;
 		}
 
 		// Set model lightness
-		float range = _fe3d.gameEntity_getOriginalLightness(modelID);
+		float range = _initialModelLightness[modelID];
 		float speed = (_modelBlinkingSpeed * static_cast<float>(multiplier) * range);
 		_fe3d.gameEntity_setLightness(modelID, _fe3d.gameEntity_getLightness(modelID) + speed);
 	}
@@ -227,14 +227,14 @@ void SceneEditor::_updateBillboardBlinking(const string& billboardID, int& multi
 	if (billboardID != "")
 	{
 		// Check if lightness reached bounds
-		if (_fe3d.billboardEntity_getLightness(billboardID) > _fe3d.billboardEntity_getOriginalLightness(billboardID) ||
+		if (_fe3d.billboardEntity_getLightness(billboardID) > 1.0f ||
 			_fe3d.billboardEntity_getLightness(billboardID) < 0.0f)
 		{
 			multiplier *= -1;
 		}
 
 		// Set billboard lightness
-		float range = _fe3d.billboardEntity_getOriginalLightness(billboardID);
+		float range = 1.0f;
 		float speed = (_billboardBlinkingSpeed * static_cast<float>(multiplier) * range);
 		_fe3d.billboardEntity_setLightness(billboardID, _fe3d.billboardEntity_getLightness(billboardID) + speed);
 	}

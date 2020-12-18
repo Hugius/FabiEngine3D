@@ -1,6 +1,6 @@
 #include "terrain_entity.hpp"
 
-void TerrainEntity::setPixelColors(vector<float>& val)
+void TerrainEntity::setPixelColors(const vector<float>& val)
 {
 	_pixelColors = val;
 }

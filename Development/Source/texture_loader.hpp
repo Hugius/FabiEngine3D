@@ -22,7 +22,7 @@ public:
 	GLuint		   getText(const string& textContent, const string& fontPath);
 	GLuint         getTexture(const string& filePath, bool mipmap, bool aniso, bool repeat = true);
 	GLuint         getCubeMap(const array<string, 6>& filePaths);
-	vector<float>& getHeightMap(const string& filePath);
+	const vector<float>& getHeightMap(const string& filePath);
 
 	void clearTextCache(const string& textContent, const string& fontPath);
 	void clearFontCache(const string& filePath);
@@ -31,11 +31,11 @@ public:
 	void clearHeightMapCache(const string& filePath);
 
 private:
-	map<string, GLuint>         _textures;
-	map<pair<string, string>, GLuint> _textMaps;
-	map<string, TTF_Font*>      _fonts;
-	map<string, vector<float>>  _heightMaps;
-	map<array<string, 6>, GLuint> _cubeMaps;
+	map<string, GLuint>				  _textureCache;
+	map<pair<string, string>, GLuint> _textCache;
+	map<string, TTF_Font*>			  _fontCache;
+	map<string, vector<float>>		  _heightMapCache;
+	map<array<string, 6>, GLuint>	  _cubeMapCache;
 
 	TTF_Font *    _loadFont(const string& filePath);
 	GLuint        _loadText(const string& textContent, const string& filePath);

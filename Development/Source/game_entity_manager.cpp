@@ -54,6 +54,12 @@ void GameEntityManager::generateModel(const string& ID, const string& objName)
 	entity->clearLightMaps();
 	entity->clearReflectionMaps();
 	entity->clearNormalMaps();
+
+	// Check if model loading failed
+	if (parts.empty())
+	{
+		entity->addPart("");
+	}
 	
 	// Create OpenGL buffers
 	for (auto& part : parts)
@@ -151,43 +157,47 @@ void GameEntityManager::generateModel(const string& ID, const string& objName)
 
 void GameEntityManager::loadNormalMapping(const string& ID)
 {
-	// Check if not already a tangent loaded model
-	if (getEntity(ID)->getOglBuffer()->getBufferType() != BufferType::MODEL_TANGENT)
+	// Check if entity has a buffer
+	if (!getEntity(ID)->getOglBuffers().empty())
 	{
-		// Load OBJ model
-		auto parts = _objLoader.loadOBJ(getEntity(ID)->getObjPath(), true);
-
-		// Create OpenGL buffers
-		for (auto& part : parts)
+		// Check if not already a tangent loaded model
+		if (getEntity(ID)->getOglBuffer()->getBufferType() != BufferType::MODEL_TANGENT)
 		{
-			vector<float> data;
+			// Load OBJ model
+			auto parts = _objLoader.loadOBJ(getEntity(ID)->getObjPath(), true);
 
-			// For every triangle vertex point
-			for (size_t i = 0; i < part.vertices.size(); i++)
+			// Create OpenGL buffers
+			for (auto& part : parts)
 			{
-				// Vertex coordinate
-				data.push_back(part.vertices[i].x);
-				data.push_back(part.vertices[i].y);
-				data.push_back(part.vertices[i].z);
+				vector<float> data;
 
-				// UV coordinate
-				data.push_back(part.uvCoords[i].x);
-				data.push_back(part.uvCoords[i].y);
+				// For every triangle vertex point
+				for (size_t i = 0; i < part.vertices.size(); i++)
+				{
+					// Vertex coordinate
+					data.push_back(part.vertices[i].x);
+					data.push_back(part.vertices[i].y);
+					data.push_back(part.vertices[i].z);
 
-				// Normal vector
-				data.push_back(part.normals[i].x);
-				data.push_back(part.normals[i].y);
-				data.push_back(part.normals[i].z);
+					// UV coordinate
+					data.push_back(part.uvCoords[i].x);
+					data.push_back(part.uvCoords[i].y);
 
-				// Tangent vector
-				data.push_back(part.tangents[i].x);
-				data.push_back(part.tangents[i].y);
-				data.push_back(part.tangents[i].z);
+					// Normal vector
+					data.push_back(part.normals[i].x);
+					data.push_back(part.normals[i].y);
+					data.push_back(part.normals[i].z);
+
+					// Tangent vector
+					data.push_back(part.tangents[i].x);
+					data.push_back(part.tangents[i].y);
+					data.push_back(part.tangents[i].z);
+				}
+
+				// OpenGL buffer
+				getEntity(ID)->clearOglBuffers();
+				getEntity(ID)->addOglBuffer(new OpenGLBuffer(BufferType::MODEL_TANGENT, &data[0], data.size()));
 			}
-
-			// OpenGL buffer
-			getEntity(ID)->clearOglBuffers();
-			getEntity(ID)->addOglBuffer(new OpenGLBuffer(BufferType::MODEL_TANGENT, &data[0], data.size()));
 		}
 	}
 }

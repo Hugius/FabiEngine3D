@@ -69,7 +69,7 @@ private:
 	// Floats
 	float _cameraDistance = 5.0f;
 	float _cameraScrollingAcceleration = 0.0f;
-	float _aabbTransformationSpeed = 1.0f;
+	float _aabbTransformationSpeed = 0.1f;
 	float _cameraSpeed = 0.1f;
 	const float _minCameraDistance = 1.0f;
 	const float _minCameraHeight = 1.0f;

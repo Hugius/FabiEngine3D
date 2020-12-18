@@ -1,0 +1,55 @@
+16 17
+META script_type_update
+
+/// Walking skeleton animation
+INCR _skellieRotation 0.25
+DEC sinRot = math:sin(_skellieRotation)
+DIV sinRot 50.0
+DEC cosRot = math:cos(_skellieRotation)
+DIV cosRot 50.0
+fe3d:model_move("skellie", sinRot, 0.0, cosRot)
+fe3d:model_rotate("skellie", 0.0, 0.25, 0.0)
+
+/// First person player animation
+VEC3 camPos = fe3d:camera_get_position()
+DEC yaw = fe3d:camera_get_yaw()
+NEG yaw
+INCR yaw 90.0
+DECR camPos.y 2.6
+fe3d:model_set_position("player", camPos.x, camPos.y, camPos.z)
+fe3d:model_set_rotation("player", 0.0, yaw, 0.0)
+BOOL isPlaying = fe3d:model_is_animation_playing("walk", "player")
+IF _isWalking IS <true> AND isPlaying IS <false>:
+    fe3d:model_start_animation("walk", "player", -1)
+ELIF _isWalking IS <false> AND isPlaying IS <true>:
+    fe3d:model_fade_animation("walk", "player", 1)
+
+/// Update running
+IF isPlaying IS <true>:
+    DEC speed = 1.0
+    IF _isRunning IS <true>:
+        MUL speed 2.0
+    fe3d:model_set_animation_speed("walk", "player", speed)
+
+BOOL lmb = fe3d:input_is_mouse_pressed("BUTTON_LEFT")
+EDIT isPlaying = fe3d:model_is_animation_playing("axe_cut", "axe")
+DECR yaw 20.0
+EDIT sinRot = math:sin(yaw)
+EDIT cosRot = math:cos(yaw)
+MUL sinRot 1.25
+MUL cosRot 1.25
+VEC3 ak47pos = camPos
+INCR ak47pos.x sinRot
+INCR ak47pos.z cosRot
+INCR ak47pos.y 1.0
+fe3d:model_set_position("axe", ak47pos.x, ak47pos.y, ak47pos.z)
+VEC3 axeRot = fe3d:model_get_rotation("axe")
+EDIT yaw = fe3d:camera_get_yaw()
+NEG yaw
+INCR yaw 90.0
+EDIT axeRot.y = yaw
+fe3d:model_set_rotation("axe", axeRot.x, axeRot.y, axeRot.z)
+
+/// Play axe cutting animation
+IF lmb IS <true> AND isPlaying IS <false>:
+    fe3d:model_start_animation("axe_cut", "axe", 1)

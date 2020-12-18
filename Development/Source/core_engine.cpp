@@ -21,6 +21,12 @@ void CoreEngine::_start()
 		// Start measuring time
 		auto current = std::chrono::high_resolution_clock::now();
 
+		// Check if the delay is getting too much
+		if (lag > (Config::getInst().getUpdateMsPerFrame() * 10.0f))
+		{
+			lag = Config::getInst().getUpdateMsPerFrame();
+		}
+
 		// Update 144 times per second
 		while (lag >= Config::getInst().getUpdateMsPerFrame())
 		{

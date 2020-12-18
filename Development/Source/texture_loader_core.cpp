@@ -14,20 +14,25 @@ TTF_Font* TextureLoader::_loadFont(const string& fontPath)
 	rootDir = rootDir.substr(0, rootDir.size() - string("bin\\FabiEngine3D.exe").size());
 
 	// Load font
-	auto it = _fonts.find(fontPath);
-	if (it == _fonts.end()) //Not in map (yet)
+	auto it = _fontCache.find(fontPath);
+	if (it == _fontCache.end()) //Not in map (yet)
 	{
-		// Font loading
+		// Try to load font
 		TTF_Font* font = TTF_OpenFont((rootDir + fontPath).c_str(), 50);
+
+		// Check if font loading is successful
 		if (font == nullptr)
 		{
-			Logger::throwError("Cannot load font: \"" + fontPath + "\"");
+			Logger::throwWarning("Cannot load font: \"" + fontPath + "\"");
+			return nullptr;
 		}
-		_fonts.insert(std::make_pair(fontPath, font));
-
-		Logger::throwInfo("Loaded font: \"" + fontPath + "\"");
-
-		return font; //Use new texture
+		else
+		{
+			// Save font to cache
+			_fontCache.insert(std::make_pair(fontPath, font));
+			Logger::throwInfo("Loaded font: \"" + fontPath + "\"");
+			return font;
+		}
 	}
 
 	return it->second; //Cache texture
@@ -49,6 +54,12 @@ GLuint TextureLoader::_loadText(const string& textContent, const string&fontPath
 
 	// Load font
 	auto font = _loadFont(fontPath);
+
+	// Check if font loading went well
+	if (font == nullptr)
+	{
+		return 0;
+	}
 
 	// Load color
 	SDL_Color * sdlColor = new SDL_Color{ 255, 255, 255 };

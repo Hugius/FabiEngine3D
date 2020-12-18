@@ -6,14 +6,24 @@
 #include <GLEW\\glew.h>
 #include <filesystem>
 
-vector<ObjPart> & OBJLoader::loadOBJ(const string& filePath, bool calculateTangents)
+const vector<ObjPart>& OBJLoader::loadOBJ(const string& filePath, bool calculateTangents)
 {
 	// Check if mesh data was loaded already, if not, load data and store in std::map
 	begin : auto iterator = _objPartsMap.find(filePath); // Search for existing OBJ parts
 	if (iterator == _objPartsMap.end()) 
 	{
-		_objPartsMap.insert(std::make_pair(filePath, _loadOBJ(filePath, calculateTangents))); // Insert new data
-		goto begin;
+		auto loadedModel = _loadOBJ(filePath, calculateTangents);
+
+		// Determine if needs to be cached
+		if (loadedModel.empty())
+		{
+			return {};
+		}
+		else
+		{
+			_objPartsMap.insert(std::make_pair(filePath, loadedModel)); // Insert new data
+			goto begin;
+		}
 	}
 	else
 	{

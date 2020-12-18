@@ -404,6 +404,13 @@ void ModelEditor::_updateCamera()
 		// Update camera position
 		_fe3d.camera_setPosition(_cameraLookatPosition + Vec3(x, y, z));
 		_fe3d.camera_setLookatPosition(_cameraLookatPosition);
-		_fe3d.gfx_enableShadows(Vec3(_cameraDistance * 2.0f), Vec3(0.0f), _cameraDistance * 4.0f, _cameraDistance * 6.0f, false);
+
+		// Update shadows
+		_fe3d.gfx_enableShadows(
+			Vec3(_cameraDistance * 2.0f, _cameraLookatPosition.y + _cameraDistance * 2.0f, _cameraDistance * 2.0f),
+			Vec3(0.0f), 
+			_cameraDistance * 4.0f, 
+			_cameraDistance * 6.0f, 
+			false);
 	}
 }

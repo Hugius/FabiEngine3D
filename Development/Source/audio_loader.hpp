@@ -19,6 +19,6 @@ public:
 	void clearMusicCache(const string& filePath);
 
 private:
-	std::map<string, Mix_Chunk*> _chunkMap;
-	std::map<string, Mix_Music*> _musicMap;
+	std::map<string, Mix_Chunk*> _chunkCache;
+	std::map<string, Mix_Music*> _musicCache;
 };

@@ -53,7 +53,7 @@ void TopViewportController::initialize()
 	_miscWindow->addScreen("main");
 	_miscWindow->setActiveScreen("main");
 	screen = _miscWindow->getScreen("main");
-	screen->addButton("cache", Vec2(0.0f, 0.0f), Vec2(0.3f, 1.25f), TVPC::buttonColor, TVPC::buttonHoverColor, "CACHE", TVPC::textColor, TVPC::textHoverColor);
+	screen->addButton("uncache", Vec2(0.0f, 0.0f), Vec2(0.5f, 1.25f), TVPC::buttonColor, TVPC::buttonHoverColor, "UNCACHE", TVPC::textColor, TVPC::textHoverColor);
 }
 
 void TopViewportController::update()
@@ -204,7 +204,7 @@ void TopViewportController::_updateMiscScreenManagement()
 	// Check if LMB pressed
 	if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 	{
-		if (miscScreen->getButton("cache")->isHovered())
+		if (miscScreen->getButton("uncache")->isHovered())
 		{
 			// Get the chosen filename
 			const string rootDirectory = _fe3d.misc_getRootDirectory();

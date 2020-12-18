@@ -9,7 +9,7 @@ public:
 	~TerrainEntity() = default;
 
 	// Setters
-	void setPixelColors(vector<float>& val);
+	void setPixelColors(const vector<float>& val);
 	void setHeightMapPath(const string& filePath);
 	void setDiffuseMap(GLuint val);
 	void setDiffuseMapPath(const string& filePath);

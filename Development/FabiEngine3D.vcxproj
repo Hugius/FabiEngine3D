@@ -436,7 +436,7 @@
     <ClCompile Include="Source\shadow_manager.cpp" />
     <ClCompile Include="Source\shadow_renderer.cpp" />
     <ClCompile Include="Source\sky_entity_renderer.cpp" />
-    <ClCompile Include="Source\texture_loader.cpp" />
+    <ClCompile Include="Source\texture_loader_interface.cpp" />
     <ClCompile Include="Source\texture_loader_core.cpp" />
     <ClCompile Include="Source\tools.cpp" />
     <ClCompile Include="Source\water_entity_renderer.cpp" />

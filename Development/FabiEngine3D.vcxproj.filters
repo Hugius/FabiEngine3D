@@ -4,9 +4,6 @@
     <ClCompile Include="Source\obj_loader.cpp">
       <Filter>src\Asset Management System\Models</Filter>
     </ClCompile>
-    <ClCompile Include="Source\texture_loader.cpp">
-      <Filter>src\Asset Management System\Textures</Filter>
-    </ClCompile>
     <ClCompile Include="Source\texture_loader_core.cpp">
       <Filter>src\Asset Management System\Textures</Filter>
     </ClCompile>
@@ -594,6 +591,9 @@
     </ClCompile>
     <ClCompile Include="Source\script_interpreter_func_animations.cpp">
       <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\texture_loader_interface.cpp">
+      <Filter>src\Asset Management System\Textures</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

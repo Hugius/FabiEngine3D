@@ -5,7 +5,7 @@
 
 AudioLoader::~AudioLoader()
 {
-	for (auto& element : _chunkMap)
+	for (auto& element : _chunkCache)
 	{
 		Mix_FreeChunk(element.second);
 	}
@@ -13,10 +13,10 @@ AudioLoader::~AudioLoader()
 
 Mix_Chunk* AudioLoader::getChunk(const string& filePath)
 {
-	auto iterator = _chunkMap.find(filePath);
+	auto iterator = _chunkCache.find(filePath);
 
 	// Check if audio chunk was loaded already, if not, load data and store in std::map
-	if (iterator == _chunkMap.end())
+	if (iterator == _chunkCache.end())
 	{
 		// Get application root directory
 		char buffer[256]; size_t len = sizeof(buffer);
@@ -29,7 +29,8 @@ Mix_Chunk* AudioLoader::getChunk(const string& filePath)
 
 		if (chunk == nullptr) // Could not load file
 		{
-			Logger::throwError("Could not load audio file \'", filePath, "\': " + string(SDL_GetError()));
+			Logger::throwWarning("Could not load audio file \"", filePath, "\"");
+			return nullptr;
 		}
 		else // Successfully loaded file
 		{
@@ -38,7 +39,7 @@ Mix_Chunk* AudioLoader::getChunk(const string& filePath)
 			auto extension = filePath.substr(filePath.size() - reversed.find("."), reversed.find(".")); // Substring file extension
 			std::transform(extension.begin(), extension.end(), extension.begin(), ::toupper); // Convert to uppercase
 			Logger::throwInfo("Loaded ", extension, " audio file: \"" + filePath + "\""); // Log loaded
-			_chunkMap.insert(std::make_pair(filePath, chunk)); // Insert new data
+			_chunkCache.insert(std::make_pair(filePath, chunk)); // Insert new data
 			return chunk;
 		}
 	}
@@ -50,10 +51,10 @@ Mix_Chunk* AudioLoader::getChunk(const string& filePath)
 
 Mix_Music* AudioLoader::getMusic(const string& filePath)
 {
-	auto iterator = _musicMap.find(filePath);
+	auto iterator = _musicCache.find(filePath);
 
 	// Check if audio music was loaded already, if not, load data and store in std::map
-	if (iterator == _musicMap.end())
+	if (iterator == _musicCache.end())
 	{
 		// Get application root directory
 		char buffer[256]; size_t len = sizeof(buffer);
@@ -66,7 +67,8 @@ Mix_Music* AudioLoader::getMusic(const string& filePath)
 
 		if (music == nullptr) // Could not load file
 		{
-			Logger::throwError("Could not load audio file \'", filePath, "\': " + string(SDL_GetError()));
+			Logger::throwWarning("Could not load audio file \"", filePath, "\"");
+			return nullptr;
 		}
 		else // Successfully loaded file
 		{
@@ -75,7 +77,7 @@ Mix_Music* AudioLoader::getMusic(const string& filePath)
 			auto extension = filePath.substr(filePath.size() - reversed.find("."), reversed.find(".")); // Substring file extension
 			std::transform(extension.begin(), extension.end(), extension.begin(), ::toupper); // Convert to uppercase
 			Logger::throwInfo("Loaded ", extension, " audio file: \"" + filePath + "\""); // Log loaded
-			_musicMap.insert(std::make_pair(filePath, music)); // Insert new data
+			_musicCache.insert(std::make_pair(filePath, music)); // Insert new data
 			return music;
 		}
 	}
@@ -87,16 +89,16 @@ Mix_Music* AudioLoader::getMusic(const string& filePath)
 
 void AudioLoader::clearChunkCache(const string& filePath)
 {
-	if (_chunkMap.find(filePath) != _chunkMap.end())
+	if (_chunkCache.find(filePath) != _chunkCache.end())
 	{
-		_chunkMap.erase(filePath);
+		_chunkCache.erase(filePath);
 	}
 }
 
 void AudioLoader::clearMusicCache(const string& filePath)
 {
-	if (_musicMap.find(filePath) != _musicMap.end())
+	if (_musicCache.find(filePath) != _musicCache.end())
 	{
-		_musicMap.erase(filePath);
+		_musicCache.erase(filePath);
 	}
 }

@@ -33,7 +33,5 @@ private:
 
 	string _currentID = "";
 
-	float _deltaTime = 0.0f;
-
 	int _passedFrameCount = 0;
 };

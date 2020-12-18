@@ -117,15 +117,15 @@ void CoreEngine::_updateApplication()
 	}
 
 	// User updates
+	_timer.start("coreUpdate");
 	_fe3d.FE3D_CONTROLLER_UPDATE();
+	_timer.stop();
 
 	// Only update 3D if engine not paused
 	if (!_isPaused)
 	{
-		// Camera updates
-		_cameraManager.update(_windowManager);
-
 		// Calculate viewport position Y offset, because GUI borders are not all of the same size
+		_timer.start("cameraUpdate");
 		Ivec2 offset = Ivec2(Config::getInst().getVpPos().x, Config::getInst().getWindowSize().y - (Config::getInst().getVpPos().y + Config::getInst().getVpSize().y));
 
 		// Apply Y offset to mouse position
@@ -134,29 +134,59 @@ void CoreEngine::_updateApplication()
 		// Convert fullscreen coords to viewport coords
 		mousePos = (mousePos / Vec2(Config::getInst().getVpSize())) * Vec2(Config::getInst().getWindowSize());
 
-		// Update physics
+		// Camera updates
+		_cameraManager.update(_windowManager);
+		_timer.stop();
+
+		// Raycast updates
+		_timer.start("raycastUpdate");
 		_mousePicker.update(Ivec2(mousePos), _terrainEntityManager);
+		_timer.stop();
+
+		// Collision updates
+		_timer.start("collisionUpdate");
 		_collisionResolver.update(_aabbEntityManager.getEntities(), _terrainEntityManager, _cameraManager);
+		_timer.stop();
 
 		// 3D entity updates
+		_timer.start("skyEntityUpdate");
 		_skyEntityManager.update();
+		_timer.stop();
+		_timer.start("waterEntityUpdate");
 		_waterEntityManager.update();
+		_timer.stop();
+		_timer.start("gameEntityUpdate");
 		_gameEntityManager.update();
+		_timer.stop();
+		_timer.start("billboardEntityUpdate");
 		_billboardEntityManager.update();
+		_timer.stop();
+		_timer.start("aabbEntityUpdate");
 		_aabbEntityManager.update(_gameEntityManager.getEntities(), _billboardEntityManager.getEntities());
+		_timer.stop();
 
-		// Miscellaneous updates
+		// Shadow updates
+		_timer.start("shadowUpdate");
 		_shadowManager.update(_renderBus);
 		_cameraManager.updateMatrices();
+		_timer.stop();
+
+		// Audio updates
+		_timer.start("audioUpdate");
 		_audioPlayer.update(_cameraManager, _audioManager.getChunks(), _audioManager.getMusic());
+		_timer.stop();
 	}
 
 	// Always update 2D logic
+	_timer.start("guiUpdate");
 	_guiEntityManager.update();
 	_textEntityManager.update();
+	_timer.stop();
 
 	// Miscellaneous updates
+	_timer.start("miscUpdate");
 	_updateWindowFading();
+	_timer.stop();
 }
 
 void CoreEngine::_renderApplication()

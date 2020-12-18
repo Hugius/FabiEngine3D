@@ -81,9 +81,14 @@ void AabbEntityManager::update(
 			// Determine parent type
 			if (entity->getParentType() == AabbParentType::GAME_ENTITY)
 			{
-				for (auto& [keyID, parentEntity] : gameEntities) // Loop over GAME entities
+				// Try to find the parent entity
+				auto foundGameEntity = gameEntities.find(entity->getParentID());
+				if(foundGameEntity != gameEntities.end())
 				{
-					if (entity->getParentID() == parentEntity->getID()) // Check for match
+					auto parentEntity = foundGameEntity->second;
+
+					// Game entity must not be LODded
+					if (!parentEntity->isLevelOfDetailed())
 					{
 						// Update scaling (based on parent scaling)
 						entity->setScaling(entity->getLocalScaling() * parentEntity->getScaling());
@@ -93,9 +98,9 @@ void AabbEntityManager::update(
 
 						// Update visibility
 						entity->setVisible(parentEntity->isVisible());
-
-						found = true;
 					}
+
+					found = true;
 				}
 
 				// Error logging
@@ -106,48 +111,49 @@ void AabbEntityManager::update(
 			}
 			else if(entity->getParentType() == AabbParentType::BILLBOARD_ENTITY)
 			{
-				for (auto& [keyID, parentEntity] : billboardEntities) // Loop over BILLBOARD entities
+				// Try to find the parent entity
+				auto foundGameEntity = billboardEntities.find(entity->getParentID());
+				if (foundGameEntity != billboardEntities.end())
 				{
-					if (entity->getParentID() == parentEntity->getID()) // Check for match
+					auto parentEntity = foundGameEntity->second;
+
+					// Retrieve parent rotation & size
+					float rotationX = fabsf(parentEntity->getRotation().x);
+					float rotationY = fabsf(parentEntity->getRotation().y);
+					float rotationZ = fabsf(parentEntity->getRotation().z);
+					Vec3 parentSize = parentEntity->getScaling();
+					float maxParentSize = std::max(parentSize.x, parentSize.y);
+					Vec3 newAabbSize = Vec3(parentSize.x, parentSize.y, 0.1f);
+
+					// Determine rotation direction
+					if (rotationX != 0.0f)
 					{
-						// Retrieve parent rotation & size
-						float rotationX = fabsf(parentEntity->getRotation().x);
-						float rotationY = fabsf(parentEntity->getRotation().y);
-						float rotationZ = fabsf(parentEntity->getRotation().z);
-						Vec3 parentSize = parentEntity->getScaling();
-						float maxParentSize = std::max(parentSize.x, parentSize.y);
-						Vec3 newAabbSize = Vec3(parentSize.x, parentSize.y, 0.1f);
-
-						// Determine rotation direction
-						if (rotationX != 0.0f)
-						{
-							newAabbSize.z = fabsf(sinf(Math::degreesToRadians(rotationX)) * parentSize.y);
-						}
-						else if (rotationY != 0.0f)
-						{
-							newAabbSize.x = fabsf(cosf(Math::degreesToRadians(rotationY)) * parentSize.x);
-							newAabbSize.z = fabsf(sinf(Math::degreesToRadians(rotationY)) * parentSize.x);
-						}
-						else if (rotationZ != 0.0f)
-						{
-							newAabbSize.x = fabsf(sinf(Math::degreesToRadians(rotationZ)) * parentSize.y) +
-								fabsf(cosf(Math::degreesToRadians(rotationZ)) * parentSize.x);
-							newAabbSize.y = fabsf(sinf(Math::degreesToRadians(rotationZ)) * parentSize.x)
-								+ fabsf(cosf(Math::degreesToRadians(rotationZ)) * parentSize.y);
-						}
-
-						// Update scaling (based on parent rotation)
-						entity->setScaling(newAabbSize);
-
-						// Update translation (based on parent translation + scaling)
-						Vec3 halfSizeOffset = Vec3(0.0f, (parentEntity->getScaling().y / 2.0f), 0.0f);
-						entity->setTranslation(parentEntity->getTranslation() + entity->getLocalTranslation() - halfSizeOffset);
-
-						// Update visibility
-						entity->setVisible(parentEntity->isVisible());
-
-						found = true;
+						newAabbSize.z = fabsf(sinf(Math::degreesToRadians(rotationX)) * parentSize.y);
 					}
+					else if (rotationY != 0.0f)
+					{
+						newAabbSize.x = fabsf(cosf(Math::degreesToRadians(rotationY)) * parentSize.x);
+						newAabbSize.z = fabsf(sinf(Math::degreesToRadians(rotationY)) * parentSize.x);
+					}
+					else if (rotationZ != 0.0f)
+					{
+						newAabbSize.x = fabsf(sinf(Math::degreesToRadians(rotationZ)) * parentSize.y) +
+							fabsf(cosf(Math::degreesToRadians(rotationZ)) * parentSize.x);
+						newAabbSize.y = fabsf(sinf(Math::degreesToRadians(rotationZ)) * parentSize.x)
+							+ fabsf(cosf(Math::degreesToRadians(rotationZ)) * parentSize.y);
+					}
+
+					// Update scaling (based on parent rotation)
+					entity->setScaling(newAabbSize);
+
+					// Update translation (based on parent translation + scaling)
+					Vec3 halfSizeOffset = Vec3(0.0f, (parentEntity->getScaling().y / 2.0f), 0.0f);
+					entity->setTranslation(parentEntity->getTranslation() + entity->getLocalTranslation() - halfSizeOffset);
+
+					// Update visibility
+					entity->setVisible(parentEntity->isVisible());
+
+					found = true;
 				}
 
 				// Error logging

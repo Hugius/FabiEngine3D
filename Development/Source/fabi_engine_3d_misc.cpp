@@ -372,7 +372,7 @@ bool FabiEngine3D::misc_isFileExisting(const string& filePath)
 
 bool FabiEngine3D::misc_checkInterval(const string& key, int frameCount)
 {
-	static std::map<string, int> intervalMap;
+	static map<string, int> intervalMap;
 
 	// Check if key exists
 	if (intervalMap.find(key) != intervalMap.end())
@@ -395,8 +395,47 @@ bool FabiEngine3D::misc_checkInterval(const string& key, int frameCount)
 	}
 }
 
-unordered_map<string, int> FabiEngine3D::misc_getPerformanceProfilingStatistics()
+unordered_map<string, int> FabiEngine3D::misc_getUpdateProfilingStatistics()
 {
+	// Final list of timer IDs
+	std::unordered_map<string, int> result =
+	{
+		std::pair<string, int>("coreUpdate", 0),
+		std::pair<string, int>("cameraUpdate", 0),
+		std::pair<string, int>("raycastUpdate", 0),
+		std::pair<string, int>("collisionUpdate", 0),
+		std::pair<string, int>("skyEntityUpdate", 0),
+		std::pair<string, int>("waterEntityUpdate", 0),
+		std::pair<string, int>("gameEntityUpdate", 0),
+		std::pair<string, int>("billboardEntityUpdate", 0),
+		std::pair<string, int>("aabbEntityUpdate", 0),
+		std::pair<string, int>("guiEntityUpdate", 0),
+		std::pair<string, int>("shadowUpdate", 0),
+		std::pair<string, int>("audioUpdate", 0),
+		std::pair<string, int>("miscUpdate", 0)
+	};
+
+	// Total list of timer IDs
+	vector<string> IDs =
+	{
+		"coreUpdate", "cameraUpdate", "raycastUpdate", "collisionUpdate", "skyEntityUpdate", 
+		"waterEntityUpdate", "gameEntityUpdate", "billboardEntityUpdate", "aabbEntityUpdate", 
+		"guiEntityUpdate", "shadowUpdate", "audioUpdate", "miscUpdate"
+	};
+
+	// Calculate percentages
+	for (auto& ID : IDs)
+	{
+		int percentage = static_cast<int>((_core->_timer.getDeltaPart(ID) / _core->_timer.getDeltaPartSum()) * 100.0f);
+		result[ID] += percentage;
+	}
+
+	return result;
+}
+
+unordered_map<string, int> FabiEngine3D::misc_getRenderProfilingStatistics()
+{
+	// Final list of timer IDs
 	std::unordered_map<string, int> result = 
 	{ 
 		std::pair<string, int>("bufferSwap", 0),
@@ -411,6 +450,7 @@ unordered_map<string, int> FabiEngine3D::misc_getPerformanceProfilingStatistics(
 		std::pair<string, int>("guiEntityRender", 0)
 	};
 
+	// Total list of timer IDs
 	vector<string> IDs =
 	{
 		"reflectionPreRender", "refractionPreRender", "shadowPreRender", "sceneDepthPreRender", 

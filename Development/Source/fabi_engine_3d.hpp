@@ -770,7 +770,8 @@ public:
 	bool misc_isDirectory(const string& filePath);
 	bool misc_isFileExisting(const string& filePath);
 	bool misc_checkInterval(const string& key, int frameCount);
-	unordered_map<string, int> misc_getPerformanceProfilingStatistics();
+	unordered_map<string, int> misc_getUpdateProfilingStatistics();
+	unordered_map<string, int> misc_getRenderProfilingStatistics();
 
 protected:
 	// Virtual interface

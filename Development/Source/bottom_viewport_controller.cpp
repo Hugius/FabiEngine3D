@@ -36,12 +36,21 @@ void BottomViewportController::initialize()
 	_statsScreen->addTextfield("aabbEntityCount", Vec2(-1.0f, -0.65f), Vec2(0.0f), "", Vec3(1.0f), false, true);
 	_statsScreen->addTextfield("guiEntityCount", Vec2(-1.0f, -0.8f), Vec2(0.0f), "", Vec3(1.0f), false, true);
 
-	// Performance profiling
-	auto performanceStats = _fe3d.misc_getPerformanceProfilingStatistics();
+	// Update profiling
+	auto updateStatistics = _fe3d.misc_getUpdateProfilingStatistics();
 	int counter = 1;
-	for (auto& [key, value] : performanceStats)
+	for (auto& [key, value] : updateStatistics)
 	{
-		_statsScreen->addTextfield(key, Vec2(-0.25f, 1.0f - (static_cast<float>(counter) * 0.15f)), Vec2(0.0f, 0.15f), "", Vec3(1.0f), false, false);
+		_statsScreen->addTextfield(key, Vec2(-0.2f, 1.0f - (static_cast<float>(counter) * 0.15f)), Vec2(0.0f, 0.15f), "", Vec3(1.0f), false, false);
+		counter++;
+	}
+
+	// Render profiling
+	auto renderStatistics = _fe3d.misc_getRenderProfilingStatistics();
+	counter = 1;
+	for (auto& [key, value] : renderStatistics)
+	{
+		_statsScreen->addTextfield(key, Vec2(0.4f, 1.0f - (static_cast<float>(counter) * 0.15f)), Vec2(0.0f, 0.15f), "", Vec3(1.0f), false, false);
 		counter++;
 	}
 
@@ -225,11 +234,22 @@ void BottomViewportController::update()
 		_fe3d.textEntity_setTextContent(textID, text, _charSize.x, _charSize.y);
 	}
 
-	// Update performance profiling
-	if (_fe3d.misc_checkInterval("performanceProfiling", 50))
+	// Update update profiling
+	if (_fe3d.misc_checkInterval("updateProfiling", 50))
 	{
-		auto performanceStats = _fe3d.misc_getPerformanceProfilingStatistics();
-		for (auto& [key, value] : performanceStats)
+		auto updateStatistics = _fe3d.misc_getUpdateProfilingStatistics();
+		for (auto& [key, value] : updateStatistics)
+		{
+			string textID = _statsScreen->getTextfield(key)->getEntityID();
+			_fe3d.textEntity_setTextContent(textID, key + ": " + to_string(value) + "%", _charSize.x, _charSize.y);
+		}
+	}
+
+	// Update render profiling
+	if (_fe3d.misc_checkInterval("renderProfiling", 50))
+	{
+		auto renderStatistics = _fe3d.misc_getRenderProfilingStatistics();
+		for (auto& [key, value] : renderStatistics)
 		{
 			string textID = _statsScreen->getTextfield(key)->getEntityID();
 			_fe3d.textEntity_setTextContent(textID, key + ": " + to_string(value) + "%", _charSize.x, _charSize.y);
@@ -289,5 +309,8 @@ void BottomViewportController::update()
 	}
 
 	// Update console window
-	_updateConsoleScrolling();
+	if (!_topViewportController.isScriptRunning())
+	{
+		_updateConsoleScrolling();
+	}
 }

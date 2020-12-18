@@ -1,4 +1,4 @@
-21 29
+25 30
 META script_type_update
 
 /// Temporary values
@@ -24,7 +24,7 @@ ELSE:
         EDIT _fallingSpeed = 0.05
         EDIT _mayJump = <true>
     ELSE:
-        MUL _fallingSpeed 1.01
+        MUL _fallingSpeed 1.025
         NEG _fallingSpeed
         fe3d:camera_move(0.0, _fallingSpeed, 0.0)
         NEG _fallingSpeed

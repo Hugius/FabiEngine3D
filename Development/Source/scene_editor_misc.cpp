@@ -387,7 +387,8 @@ void SceneEditor::clearScene()
 	_fe3d.gfx_disableMotionBlur();
 	_fe3d.gfx_disableLensFlare();
 
-	if (_isEditorLoaded) // Currently in scene editor
+	// Check if currently in scene editor
+	if (_isEditorLoaded)
 	{
 		// Delete sky entities
 		for (auto& ID : _fe3d.skyEntity_getAllIDs())

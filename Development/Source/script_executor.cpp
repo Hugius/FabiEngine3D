@@ -90,6 +90,7 @@ void ScriptExecutor::_validateExecution()
 	if (_scriptInterpreter.hasThrownError())
 	{
 		_scriptInterpreter.unload();
+		_fe3d.misc_hideCursor();
 		_isInitialized = false;
 		_isRunning = false;
 	}

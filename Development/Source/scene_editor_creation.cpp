@@ -205,7 +205,7 @@ void SceneEditor::_placeWater(const string& newID, Vec3 position, float size, bo
 
 void SceneEditor::placeModel(const string& newID, const string& previewID, Vec3 position)
 {
-	const string newEntityID = _fe3d.gameEntity_isInstanced(previewID) ? previewID.substr(1) + "_instanced" : newID;
+	const string newEntityID = _fe3d.gameEntity_isInstanced(previewID) ? "instanced@" + previewID.substr(1) : newID;
 
 	// Check if instanced entity
 	if (_fe3d.gameEntity_isInstanced(previewID))

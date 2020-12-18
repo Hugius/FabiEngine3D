@@ -1,4 +1,4 @@
-33 61
+31 20
 META script_type_update
 
 /// First person player animation
@@ -26,8 +26,8 @@ IF isPlaying IS <true>:
 DECR yaw 20.0
 DEC sinRot = math:sin(yaw)
 DEC cosRot = math:cos(yaw)
-MUL sinRot 1.25
-MUL cosRot 1.25
+MUL sinRot 0.8
+MUL cosRot 0.8
 VEC3 axePos = camPos
 INCR axePos.x sinRot
 INCR axePos.z cosRot

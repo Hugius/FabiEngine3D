@@ -306,18 +306,17 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 				unsigned int atPos = std::distance(modelID.begin(), std::find(modelID.begin(), modelID.end(), '@'));
 				string modelNumber = modelID.substr(0, atPos);
 				string modelName = modelID.substr(atPos + 1);
-				modelID = modelName + "@" + modelNumber;
-				
+
 				// Add the model
 				_placeModel(!_isEditorLoaded, modelName, modelNumber, position, rotation, size, objPath, diffuseMapPath, lightMapPath, 
 					reflectionMapPath, normalMapPath, isFrozen, isFaceculled, isShadowed, isTransparent, isReflective, isSpecular, specularFactor, 
 					specularIntensity, lightness, color, uvRepeat, lodEntityID, 
 					isInstanced, instancedOffsets, aabbNames, aabbPositions, aabbSizes, animationID);
 
-				// Hide LOD entity
+				// Hide LOD entity (running script)
 				if (makeInvisible)
 				{
-					_fe3d.gameEntity_hide(modelID);
+					_fe3d.gameEntity_hide(modelName + "@" + modelNumber);
 				}
 			}
 			else if (entityType == "BILLBOARD")

@@ -189,6 +189,9 @@ void ScriptInterpreter::unload()
 	// Choose engine background again
 	_fe3d.skyEntity_select("@@engineBackground");
 
+	// Miscellaneous
+	_fe3d.input_clearKeyToggles();
+
 	// Reset all variables
 	_initScriptIDs.clear();
 	_updateScriptIDs.clear();

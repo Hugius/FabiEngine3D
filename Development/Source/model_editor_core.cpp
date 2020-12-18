@@ -148,7 +148,7 @@ void ModelEditor::unload()
 	_cameraDistance = 5.0f;
 	_cameraSpeed = 0.1f;
 	_cameraScrollingAcceleration = 0.0f;
-	_aabbTransformationSpeed = 1.0f;
+	_aabbTransformationSpeed = 0.1f;
 	_isCreatingModel = false;
 	_isChoosingModel = false;
 	_isEditingModel = false;

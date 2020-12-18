@@ -24,7 +24,16 @@ void SceneEditor::_updateModelPlacing()
 					if (_fe3d.terrainEntity_isValidMousePoint())
 					{
 						newPosition = _fe3d.terrainEntity_getMousePoint();
-						_fe3d.gameEntity_setPosition(_currentPreviewModelName, newPosition);
+
+						// Instnaced entity has different positioning
+						if (_fe3d.gameEntity_isInstanced(_currentPreviewModelName))
+						{
+							_fe3d.gameEntity_setInstanced(_currentPreviewModelName, true, { newPosition });
+						}
+						else
+						{
+							_fe3d.gameEntity_setPosition(_currentPreviewModelName, newPosition);
+						}
 					}
 				}
 
@@ -33,7 +42,8 @@ void SceneEditor::_updateModelPlacing()
 					|| _fe3d.terrainEntity_getSelectedID() == "")  // Can be bypassed if terrain does not exist
 				{
 					// Add new model
-				begin: int randomSerial = _fe3d.misc_getUniqueInt(0, INT_MAX);
+					begin:
+					int randomSerial = _fe3d.misc_getUniqueInt(0, INT_MAX);
 					string newID = _currentPreviewModelName.substr(1); // Remove the '@'
 					newID = to_string(randomSerial) + "@" + newID; // Adding a number to make it unique
 

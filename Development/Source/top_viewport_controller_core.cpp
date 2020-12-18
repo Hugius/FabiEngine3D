@@ -66,6 +66,7 @@ void TopViewportController::update()
 
 void TopViewportController::_updateProjectScreenManagement()
 {
+	// Temporary values
 	auto screen = _projectWindow->getActiveScreen();
 
 	// GUI management
@@ -111,13 +112,6 @@ void TopViewportController::_updateProjectScreenManagement()
 		_updateProjectLoading();
 		_updateProjectDeletion();
 
-		// Update save button hoverability
-		screen->getButton("newProject")->setHoverable(!isScriptRunning());
-		screen->getButton("loadProject")->setHoverable(!isScriptRunning());
-		screen->getButton("saveProject")->setHoverable(!isScriptRunning() && _currentProjectName != "");
-		screen->getButton("deleteProject")->setHoverable(!isScriptRunning());
-		screen->getButton("quitEngine")->setHoverable(!isScriptRunning());
-
 		// Check if user wants to save changes
 		if (_gui.getGlobalScreen()->isAnswerFormConfirmed("exitEngine"))
 		{
@@ -133,7 +127,10 @@ void TopViewportController::_updateProjectScreenManagement()
 
 void TopViewportController::_updateGameScreenManagement()
 {
+	// Temporary values
+	auto projectScreen = _projectWindow->getActiveScreen();
 	auto gameScreen = _gameWindow->getScreen("main");
+	auto miscScreen = _miscWindow->getScreen("main");
 
 	// Check if currently a project is loaded
 	if (_currentProjectName == "")
@@ -175,12 +172,30 @@ void TopViewportController::_updateGameScreenManagement()
 			}
 		}
 
-		// Game buttons hoverability
+		// Update game buttons hoverability
 		bool isInMainMenu = (_gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID() == "main");
 		gameScreen->getButton("play")->setHoverable(isInMainMenu && !SCRIPT_EXECUTOR.isScriptEmpty() && !SCRIPT_EXECUTOR.isRunning());
 		gameScreen->getButton("pause")->setHoverable(isInMainMenu && SCRIPT_EXECUTOR.isRunning());
 		gameScreen->getButton("restart")->setHoverable(isInMainMenu && SCRIPT_EXECUTOR.isInitialized());
 		gameScreen->getButton("stop")->setHoverable(isInMainMenu && SCRIPT_EXECUTOR.isInitialized());
+
+		// Update other buttons hoverability
+		if (SCRIPT_EXECUTOR.isInitialized())
+		{
+			projectScreen->getButton("newProject")->setHoverable(false);
+			projectScreen->getButton("loadProject")->setHoverable(false);
+			projectScreen->getButton("saveProject")->setHoverable(false);
+			projectScreen->getButton("deleteProject")->setHoverable(false);
+			miscScreen->getButton("uncache")->setHoverable(false);
+		}
+		else
+		{
+			projectScreen->getButton("newProject")->setHoverable(true);
+			projectScreen->getButton("loadProject")->setHoverable(true);
+			projectScreen->getButton("saveProject")->setHoverable(_currentProjectName != "");
+			projectScreen->getButton("deleteProject")->setHoverable(true);
+			miscScreen->getButton("uncache")->setHoverable(true);
+		}
 
 		// Check if user wants to pause the running game
 		if (SCRIPT_EXECUTOR.isRunning())
@@ -199,12 +214,13 @@ void TopViewportController::_updateGameScreenManagement()
 
 void TopViewportController::_updateMiscScreenManagement()
 {
-	auto miscScreen = _miscWindow->getScreen("main");
+	// Temporary values
+	auto screen = _miscWindow->getScreen("main");
 
 	// Check if LMB pressed
 	if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 	{
-		if (miscScreen->getButton("uncache")->isHovered())
+		if (screen->getButton("uncache")->isHovered())
 		{
 			// Get the chosen filename
 			const string rootDirectory = _fe3d.misc_getRootDirectory();

@@ -41,50 +41,34 @@ void CameraManager::update(WindowManager & windowManager)
 {
 	// Temporary values
 	Ivec2 currentMousePos = windowManager.getMousePos();
-	static Ivec2 lastMousePos = currentMousePos;
+	const int left = Config::getInst().getVpPos().x;
+	const int right = Config::getInst().getVpPos().x + Config::getInst().getVpSize().x;
+	const int bottom = Config::getInst().getWindowSize().y - (Config::getInst().getVpPos().y + Config::getInst().getVpSize().y);
+	const int top = Config::getInst().getWindowSize().y - Config::getInst().getVpPos().y;
+	const int xMiddle = Config::getInst().getWindowSize().x / 2;
+	const int yMiddle = Config::getInst().getWindowSize().y / 2;
+
+	// Update cursor centering
+	if (_mustCenter)
+	{
+		// Check if reached center
+		if (currentMousePos == Ivec2(xMiddle, yMiddle))
+		{
+			_mustCenter = false;
+		}
+		else // Spawn mouse in middle of screen
+		{
+			windowManager.setMousePos({ xMiddle, yMiddle });
+		}
+		
+	}
 
 	// Only if first person camera is enabled
 	if (_isFirstPersonViewEnabled && !_mustCenter)
 	{
-		// Temporary values
-		const int left   = Config::getInst().getVpPos().x;
-		const int right  = Config::getInst().getVpPos().x + Config::getInst().getVpSize().x;
-		const int bottom = Config::getInst().getWindowSize().y - (Config::getInst().getVpPos().y + Config::getInst().getVpSize().y);
-		const int top    = Config::getInst().getWindowSize().y - Config::getInst().getVpPos().y;
-		const int xMiddle = right / 2;
-		const int yMiddle = top / 2;
-
-		// Reset mouse position if going out of screen (horizontal)
-		if (currentMousePos.x <= left)
-		{
-			windowManager.setMousePos({ xMiddle, currentMousePos.y });
-			lastMousePos.x = xMiddle;
-			return;
-		}
-		else if (currentMousePos.x >= right - 1) // Windows mouse cursor can only be 0-1919 (1080p example)
-		{
-			windowManager.setMousePos({ xMiddle, currentMousePos.y });
-			lastMousePos.x = xMiddle;
-			return;
-		}
-
-		// Reset mouse position if going out of screen (vertical)
-		if (currentMousePos.y <= bottom)
-		{
-			windowManager.setMousePos({ currentMousePos.x, yMiddle });
-			lastMousePos.y = yMiddle;
-			return;
-		}
-		else if (currentMousePos.y >= top - 1) // Windows mouse cursor can only be 0-1079 (1080p example)
-		{
-			windowManager.setMousePos({ currentMousePos.x, yMiddle });
-			lastMousePos.y = yMiddle;
-			return;
-		}
-
 		// Offset between current and last mouse pos
-		float xOffset = static_cast<float>(currentMousePos.x - lastMousePos.x);
-		float yOffset = static_cast<float>(lastMousePos.y - currentMousePos.y);
+		float xOffset = static_cast<float>(currentMousePos.x - xMiddle);
+		float yOffset = static_cast<float>(yMiddle - currentMousePos.y);
 
 		// Applying mouse sensitivity
 		xOffset *= (_mouseSensitivity) / 100.0f;
@@ -96,17 +80,16 @@ void CameraManager::update(WindowManager & windowManager)
 		// Calculate yaw & pitch
 		_yawAcceleration += xOffset;
 		_pitchAcceleration += yOffset;
-	}
-	else
-	{
-		_mustCenter = false;
+
+		// Spawn mouse in middle of screen
+		windowManager.setMousePos({ xMiddle, yMiddle });
 	}
 
 	// Update yaw & pitch movements
 	_yaw += _yawAcceleration;
 	_pitch += _pitchAcceleration;
-	_yawAcceleration *= 0.7f;
-	_pitchAcceleration *= 0.7f;
+	_yawAcceleration *= 0.75f;
+	_pitchAcceleration *= 0.75f;
 
 	// Limit yaw
 	if (_yaw < 0.0f)
@@ -120,9 +103,6 @@ void CameraManager::update(WindowManager & windowManager)
 
 	// Update matrices
 	updateMatrices();
-
-	// Set last mouse position
-	lastMousePos = currentMousePos;
 }
 
 void CameraManager::updateMatrices()
@@ -210,6 +190,12 @@ void CameraManager::disableLookat()
 
 void CameraManager::enableFirstPersonView()
 {
+	// Only center first time
+	if (!_isFirstPersonViewEnabled)
+	{
+		_mustCenter = true;
+	}
+
 	_isFirstPersonViewEnabled = true;
 }
 

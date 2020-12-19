@@ -14,11 +14,7 @@ EngineController::EngineController() :
 
 EngineController::~EngineController()
 {
-	if (_promptOnExit)
-	{
-		std::cout << std::endl << "Type something to continue...";
-		auto temp = _getch();
-	}
+
 }
 
 void EngineController::FE3D_CONTROLLER_INIT()
@@ -79,8 +75,8 @@ void EngineController::FE3D_CONTROLLER_UPDATE()
 		}
 		else // Error has been thrown
 		{
-			_promptOnExit = true;
 			engine_stop();
+			_promptOnExit = true;
 		}
 	}
 }
@@ -88,6 +84,11 @@ void EngineController::FE3D_CONTROLLER_UPDATE()
 void EngineController::FE3D_CONTROLLER_DESTROY()
 {
 
+}
+
+bool EngineController::mustPromptOnExit()
+{
+	return _promptOnExit;
 }
 
 void EngineController::_initializeMiscellaneous()

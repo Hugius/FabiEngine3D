@@ -82,6 +82,7 @@ void ScriptExecutor::unpause()
 		}
 
 		// Resume game logic
+		_fe3d.camera_center();
 		_fe3d.audioEntity_resumeAll();
 		_fe3d.engine_resume();
 		_isRunning = true;

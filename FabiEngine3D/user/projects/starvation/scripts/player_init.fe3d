@@ -1,4 +1,4 @@
-17 36
+20 42
 META script_type_init
 
 /// Global variables
@@ -14,10 +14,13 @@ GLOB DEC _fallingSpeed = 0.05
 GLOB DEC _totalBobbing = 0.0
 GLOB DEC _bobbingDirection = 1.0
 GLOB DEC _skellieRotation = 0.0
+GLOB STR _lastSelectedAxeID = ""
+GLOB LIST _inventory = {"", "", "", ""}
 
 fe3d:misc_hide_cursor()
-fe3d:camera_set_position(-150.0, 9.0, -130.0)
-fe3d:camera_set_yaw(60.0)
+/// -149.0, 48.0, 208.0
+fe3d:camera_set_position(-149.0, 48.0, 208.0)
+fe3d:camera_set_yaw(-25.0)
 fe3d:camera_set_pitch(0.0)
 fe3d:camera_enable_first_person_view()
 fe3d:collision_enable_camera_aabb_response()
@@ -25,4 +28,3 @@ fe3d:collision_enable_camera_terrain_response(_camHeight, 0.05)
 fe3d:model_place("player", "skeleton", 0.0, 0.0, 0.0)
 fe3d:model_set_max_height("player", 2.5)
 fe3d:model_set_aabb_responsive("player", <false>)
-fe3d:model_place("axe_stone", "axe_stone", 0.0, 0.0, 0.0)

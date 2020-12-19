@@ -17,6 +17,8 @@ public:
 	void FE3D_CONTROLLER_UPDATE();
 	void FE3D_CONTROLLER_DESTROY();
 
+	bool mustPromptOnExit();
+
 private:
 	void _initializeMiscellaneous();
 	void _updateMiscellaneous();

@@ -41,7 +41,7 @@ void MousePicker::update(Ivec2 mousePos, TerrainEntityManager& terrainManager)
 	}
 }
 
-float MousePicker::checkCursorInBox(Vec3 lb, Vec3 rt, Vec3 cameraPos)
+float MousePicker::checkCursorInBox(Vec3 lb, Vec3 rt, Vec3 cameraPos) // From some stackoverflow post i forgot
 {
 	Vec3 dirfrac;
 	dirfrac.x = 1.0f / _ray.x;

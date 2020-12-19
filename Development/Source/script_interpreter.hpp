@@ -12,7 +12,7 @@
 class ScriptInterpreter
 {
 public:
-	ScriptInterpreter(FabiEngine3D& fe3d, Script& script, ModelEditor& modelEditor, SceneEditor& sceneEditor, AnimationEditor& animationEditor);
+	ScriptInterpreter(FabiEngine3D& fe3d, Script& script, SceneEditor& sceneEditor, ModelEditor& modelEditor, AnimationEditor& animationEditor);
 
 	void load();
 	void executeInitialization();
@@ -89,8 +89,8 @@ private:
 	// Instances
 	FabiEngine3D& _fe3d;
 	Script& _script;
-	ModelEditor& _modelEditor;
 	SceneEditor& _sceneEditor;
+	ModelEditor& _modelEditor;
 	AnimationEditor& _animationEditor;
 
 	// Stacks

@@ -234,7 +234,7 @@ bool FabiEngine3D::collision_checkEntityWithCamera(const string& ID)
 	return _core->_aabbEntityManager.getEntity(ID)->getCollisionDirection() != Direction::NONE;
 }
 
-const string& FabiEngine3D::collision_checkEntityWithOthers(const string& ID)
+const string FabiEngine3D::collision_checkEntityWithOthers(const string& ID)
 {
 	// Self entity
 	auto self = _core->_aabbEntityManager.getEntity(ID);
@@ -288,7 +288,7 @@ const string& FabiEngine3D::collision_checkEntityWithOthers(const string& ID)
 	return "";
 }
 
-const string& FabiEngine3D::collision_checkEntitiesWithCamera(const string& ID)
+const string FabiEngine3D::collision_checkEntitiesWithCamera(const string& ID)
 {
 	for (auto [keyID, entity] : _core->_aabbEntityManager.getEntities()) // Loop over AABB entities
 	{

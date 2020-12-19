@@ -1,4 +1,4 @@
-24 33
+17 36
 META script_type_init
 
 /// Global variables
@@ -16,7 +16,7 @@ GLOB DEC _bobbingDirection = 1.0
 GLOB DEC _skellieRotation = 0.0
 
 fe3d:misc_hide_cursor()
-fe3d:camera_set_position(-150.0, 15.0, -130.0)
+fe3d:camera_set_position(-150.0, 9.0, -130.0)
 fe3d:camera_set_yaw(60.0)
 fe3d:camera_set_pitch(0.0)
 fe3d:camera_enable_first_person_view()

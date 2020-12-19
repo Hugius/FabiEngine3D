@@ -12,23 +12,77 @@ EngineController::EngineController() :
 
 }
 
+EngineController::~EngineController()
+{
+	if (_promptOnExit)
+	{
+		std::cout << std::endl << "Type something to continue...";
+		auto temp = _getch();
+	}
+}
+
 void EngineController::FE3D_CONTROLLER_INIT()
 {
-	_initializeMiscellaneous();
-	_rightViewportController.initialize();
-	_bottomViewportController.initialize();
-	_topViewportController.initialize();
-	_leftViewportController.initialize();
+	if (engine_getSelectedGame().empty()) // Engine preview
+	{
+		_initializeMiscellaneous();
+		_rightViewportController.initialize();
+		_bottomViewportController.initialize();
+		_topViewportController.initialize();
+		_leftViewportController.initialize();
+	}
+	else // Game preview
+	{
+		// Import settings
+		_leftViewportController.getSettingsEditor().load();
+
+		// Permanent graphical effects
+		misc_setMainRenderingColor(Vec3(1.0f, 0.0f, 0.0f));
+		gfx_enableMSAA();
+		gfx_enableBloom(1.0f, 0.0f, 10);
+
+		// Default camera
+		camera_load(90.0f, 0.1f, 10000.0f, Vec3(0.0f), 0, 0);
+		camera_center();
+
+		// Set name of game (project) to run
+		_leftViewportController.getSceneEditor().setCurrentProjectName(engine_getSelectedGame());
+		_leftViewportController.getModelEditor().setCurrentProjectName(engine_getSelectedGame());
+		_leftViewportController.getAnimationEditor().setCurrentProjectName(engine_getSelectedGame());
+		_leftViewportController.getScriptEditor().setCurrentProjectName(engine_getSelectedGame());
+
+		// Initialize script execution
+		_leftViewportController.getScriptEditor().getScriptExecutor(false).load();
+	}
 }
 
 void EngineController::FE3D_CONTROLLER_UPDATE()
 {
-	_updateMiscellaneous();
-	_gui.update();
-	_topViewportController.update();
-	_leftViewportController.update();
-	_rightViewportController.update();
-	_bottomViewportController.update();
+	if (engine_getSelectedGame().empty()) // Engine preview
+	{
+		_updateMiscellaneous();
+		_gui.update();
+		_topViewportController.update();
+		_leftViewportController.update();
+		_rightViewportController.update();
+		_bottomViewportController.update();
+	}
+	else // Game preview
+	{
+		if (_leftViewportController.getScriptEditor().getScriptExecutor(false).isRunning()) // Still running
+		{
+			// Update animation system
+			_leftViewportController.getAnimationEditor().update();
+
+			// Update script execution
+			_leftViewportController.getScriptEditor().getScriptExecutor(false).update();
+		}
+		else // Error has been thrown
+		{
+			_promptOnExit = true;
+			engine_stop();
+		}
+	}
 }
 
 void EngineController::FE3D_CONTROLLER_DESTROY()

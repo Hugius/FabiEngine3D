@@ -1,5 +1,6 @@
 #include "fabi_engine_3d.hpp"
 #include "core_engine.hpp"
+#include "configuration.hpp"
 
 FabiEngine3D::FabiEngine3D()
 {
@@ -34,4 +35,9 @@ void FabiEngine3D::engine_stop()
 bool FabiEngine3D::engine_isPaused()
 {
 	return _core->_isPaused;
+}
+
+string FabiEngine3D::engine_getSelectedGame()
+{
+	return Config::getInst().getSelectedGame();
 }

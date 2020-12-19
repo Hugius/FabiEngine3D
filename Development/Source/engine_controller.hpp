@@ -11,7 +11,7 @@ class EngineController final : public FabiEngine3D
 {
 public:
 	EngineController();
-	~EngineController() = default;
+	~EngineController();
 
 	void FE3D_CONTROLLER_INIT();
 	void FE3D_CONTROLLER_UPDATE();
@@ -28,4 +28,6 @@ private:
 	BottomViewportController _bottomViewportController;
 
 	string _currentProject = "";
+
+	bool _promptOnExit = false;
 };

@@ -45,6 +45,7 @@ public:
 	void engine_resume();
 	void engine_stop();
 	bool engine_isPaused();
+	string engine_getSelectedGame();
 
 	// Camera interface - setters
 	void camera_load(float fov, float nearZ, float farZ, Vec3 startPosition, float yaw = 0.0f, float pitch = 0.0f);
@@ -418,16 +419,16 @@ public:
 	void collision_disableCameraTerrainResponse();
 
 	// Global collision interface - getters
-	string        collision_checkCursorInAny();
-	bool		  collision_checkCursorInEntity(const string& ID);
-	string        collision_checkCursorInEntities(const string& ID, const string& exception = "");
-	bool		  collision_checkAnyWithCamera();
-	bool		  collision_checkTerrainWithCamera();
-	bool		  collision_checkEntityWithCamera(const string& ID);
-	const string& collision_checkEntitiesWithCamera(const string& ID);
-	const string& collision_checkEntityWithOthers(const string& ID);
-	Direction	  collision_checkEntityWithCameraDirection(const string& ID);
-	Direction	  collision_checkEntitiesWithCameraDirection(const string& ID);
+	string       collision_checkCursorInAny();
+	bool		 collision_checkCursorInEntity(const string& ID);
+	string       collision_checkCursorInEntities(const string& ID, const string& exception = "");
+	bool		 collision_checkAnyWithCamera();
+	bool		 collision_checkTerrainWithCamera();
+	bool		 collision_checkEntityWithCamera(const string& ID);
+	const string collision_checkEntitiesWithCamera(const string& ID);
+	const string collision_checkEntityWithOthers(const string& ID);
+	Direction	 collision_checkEntityWithCameraDirection(const string& ID);
+	Direction	 collision_checkEntitiesWithCameraDirection(const string& ID);
 
 	// Light entity interface - setters
 	void lightEntity_add(const string& ID, Vec3 position = Vec3(0.0f), Vec3 color = Vec3(1.0f), float intensity = 1.0f, float distanceFactor = 1.0f, bool visible = true);

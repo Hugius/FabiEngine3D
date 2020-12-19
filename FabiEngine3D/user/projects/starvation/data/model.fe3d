@@ -7,17 +7,9 @@
 @tree4 user\assets\models\trees\tree4.obj ? ? ? ? 1.75 1.75 1.75 0 1 1 0 0 1 1 1 1 1 1 1 @tree4_lod 0 trunk -0.05 0 0 0.9 2.15 0.9 leaves 0 2.15 0 3.1 4.95 2.5
 @tree5 user\assets\models\trees\tree5.obj user\assets\textures\diffuse_maps\trees\tree5.png ? ? ? 3.5 4 3.5 0 1 1 0 0 1 1 1 1 1 1 1 ? 0 trunk 0.05 0 0 0.45 1.45 0.45 leaves 0 1.45 0 1.6 1.15 1.65
 @tree6 user\assets\models\trees\tree6.obj ? ? ? ? 1.25 1 1.25 0 1 1 0 0 1 1 0.5 1 1 1 1 @tree6_lod 0 trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
-@tree1_lod user\assets\models\trees\tree_lowpoly.obj ? ? ? ? 2 2 2 0 1 1 0 0 1 1 1 1 1 1 1 ? 0
-@tree2_lod user\assets\models\trees\tree_lod.obj user\assets\textures\diffuse_maps\trees\tree2_lod.png ? ? ? 4.25 8 4.25 0 1 1 0 0 1 1 1 1 1 1 1 ? 0
-@tree3_lod user\assets\models\trees\tree_lowpoly.obj ? ? ? ? 2.5 2.5 2.5 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0
-@tree4_lod user\assets\models\trees\tree_lowpoly.obj ? ? ? ? 0.75 2.25 0.75 0 1 0 0 0 1 1 1 1 1 1 1 ? 0
 @bush1 user\assets\models\trees\bush1.obj user\assets\textures\diffuse_maps\trees\bush1.png ? ? ? 1 0.5 1 0 1 1 0 0 1 1 1 1 1 1 1 @bush1_lod 0 bush 0 0 0 2.4 9.8 2.5
 @bush2 user\assets\models\trees\bush2.obj user\assets\textures\diffuse_maps\trees\tree_bush_2.png ? ? user\assets\textures\normal_maps\trees\tree_bush_2.png 0.75 0.5 0.75 0 1 1 0 0 1 1 1 1 1 1 1 @bush2_lod 0 bush 0 0 0 3.1 10 3.1
 @bush3 user\assets\models\trees\bush3.obj ? ? ? ? 1.25 0.95 1.25 0 1 1 0 0 1 1 1 1 1 1 1 @bush3_lod 0 bush 0 0 0 1.9 5.5 1.8
-@bush1_lod user\assets\models\trees\tree_lod.obj user\assets\textures\diffuse_maps\trees\bush1_lod.png ? ? ? 2 2.5 2 0 1 1 0 0 1 1 1 1 1 1 1 ? 0
-@bush2_lod user\assets\models\trees\tree_lod.obj user\assets\textures\diffuse_maps\trees\bush2_lod.png ? ? ? 2 2.5 2 0 1 1 0 0 1 1 1 1 1 1 1 ? 0
-@bush3_lod user\assets\models\trees\tree_lod.obj user\assets\textures\diffuse_maps\trees\bush3_leaves.png ? ? ? 2.5 2.5 2.5 0 1 1 0 0 1 1 1 1 1 1 1 ? 0
-@tree6_lod user\assets\models\trees\tree_lod.obj user\assets\textures\diffuse_maps\trees\tree2_lod.png ? ? ? 3 8.5 3 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0
 @grassfield user\assets\models\foliage\grassfield.obj user\assets\textures\diffuse_maps\foliage\grassfield.png ? ? ? 0.8 0.8 0.8 0 1 1 0 0 1 1 1 1 1 1 1 ? 1
 @plant1 user\assets\models\foliage\plant1.obj user\assets\textures\diffuse_maps\foliage\plant1.png ? ? ? 0.3 0.3 0.3 0 1 1 0 0 1 1 1 1 1 1 1 ? 1
 @plant2 user\assets\models\foliage\plant2.obj user\assets\textures\diffuse_maps\foliage\plant2.png ? ? ? 1.25 1.25 1.25 0 1 1 0 0 1 1 1 1 1 1 1 ? 1
@@ -27,4 +19,3 @@
 @tree7 user\assets\models\trees\tree7.obj ? ? ? ? 1.5 1.5 1.5 0 1 1 0 1 1 1 0.5 1 1 1 1 @tree7_lod 0 trunk 0 0 0 0.6 3.4 0.5 leaves 0 3.4 0 4.8 3.8 5.3
 @mushroom1 user\assets\models\foliage\mushroom1.obj user\assets\textures\diffuse_maps\foliage\mushroom1.png ? ? ? 1 1 1 0 1 0 0 0 1 1 1 1 1 1 1 ? 1
 @mushroom2 user\assets\models\foliage\mushroom2.obj user\assets\textures\diffuse_maps\foliage\mushroom2.png ? ? ? 1.25 1.25 1.25 0 1 0 0 0 1 1 1 1 1 1 1 ? 1
-@tree7_lod user\assets\models\trees\tree_lowpoly.obj ? ? ? ? 2 2 2 0 1 1 0 0 1 1 0.7 1 1 1 1 ? 0

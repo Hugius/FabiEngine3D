@@ -8,7 +8,7 @@
 class ScriptEditor final
 {
 public:
-	ScriptEditor(FabiEngine3D& fe3d, EngineGuiManager& gui, ModelEditor& modelEditor, SceneEditor& sceneEditor, AnimationEditor& animationEditor);
+	ScriptEditor(FabiEngine3D& fe3d, EngineGuiManager& gui, SceneEditor& sceneEditor, ModelEditor& modelEditor, AnimationEditor& animationEditor);
 	~ScriptEditor() = default;
 
 	void initializeGUI();

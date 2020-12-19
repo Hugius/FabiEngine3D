@@ -2,6 +2,7 @@
 #include "configuration.hpp"
 
 #include <algorithm>
+#include <iostream>
 
 CameraManager::CameraManager(RenderBus& renderBus) :
 	_renderBus(renderBus)
@@ -45,36 +46,40 @@ void CameraManager::update(WindowManager & windowManager)
 	if (_isFirstPersonViewEnabled && !_mustCenter)
 	{
 		// Variable
-		int left = Config::getInst().getVpPos().x;
-		int right = Config::getInst().getVpPos().x + Config::getInst().getVpSize().x;
-		int bottom = Config::getInst().getWindowSize().y - (Config::getInst().getVpPos().y + Config::getInst().getVpSize().y);
-		int top = Config::getInst().getWindowSize().y - Config::getInst().getVpPos().y;
+		const int left   = Config::getInst().getVpPos().x;
+		const int right  = Config::getInst().getVpPos().x + Config::getInst().getVpSize().x;
+		const int bottom = Config::getInst().getWindowSize().y - (Config::getInst().getVpPos().y + Config::getInst().getVpSize().y);
+		const int top    = Config::getInst().getWindowSize().y - Config::getInst().getVpPos().y;
+		const int xMiddle = right / 2;
+		const int yMiddle = top / 2;
 		
+		std::cout << currentMousePos.x << " " << currentMousePos.y << " " << left << " " << right << " " << bottom << " " << top << std::endl;
+
 		// Reset mouse position if going out of screen (horizontal)
-		if (currentMousePos.x < left)
+		if (currentMousePos.x <= left)
 		{
-			windowManager.setMousePos({ right, currentMousePos.y });
-			lastMousePos.x = right;
+			windowManager.setMousePos({ xMiddle, currentMousePos.y });
+			lastMousePos.x = xMiddle;
 			return;
 		}
-		else if (currentMousePos.x > right)
+		else if (currentMousePos.x >= right - 1) // Windows mouse cursor can only be 0-1919 (1080p example)
 		{
-			windowManager.setMousePos({ left, currentMousePos.y });
-			lastMousePos.x = left;
+			windowManager.setMousePos({ xMiddle, currentMousePos.y });
+			lastMousePos.x = xMiddle;
 			return;
 		}
 
 		// Reset mouse position if going out of screen (vertical)
-		if (currentMousePos.y < bottom)
+		if (currentMousePos.y <= bottom)
 		{
-			windowManager.setMousePos({ currentMousePos.x, top});
-			lastMousePos.y = top;
+			windowManager.setMousePos({ currentMousePos.x, yMiddle });
+			lastMousePos.y = yMiddle;
 			return;
 		}
-		else if (currentMousePos.y > top)
+		else if (currentMousePos.y >= top - 1) // Windows mouse cursor can only be 0-1079 (1080p example)
 		{
-			windowManager.setMousePos({ currentMousePos.x, bottom });
-			lastMousePos.y = bottom;
+			windowManager.setMousePos({ currentMousePos.x, yMiddle });
+			lastMousePos.y = yMiddle;
 			return;
 		}
 

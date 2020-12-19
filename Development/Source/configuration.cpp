@@ -21,7 +21,8 @@ Config::Config()
 	}
 
 	// Store config file content
-	_processOption(file, _windowSizeMultiplier);
+	_processOption(file, _windowSizeMultiplier, "window_size_multiplier");
+	_processOption(file, _selectedGame, "selected_game");
 	
 	// Set window dimensions
 	SDL_DisplayMode DM;
@@ -30,55 +31,119 @@ Config::Config()
 	_windowHeight = static_cast<int>(static_cast<float>(DM.h) * _windowSizeMultiplier);
 
 	// Set viewport dimensions
-	_viewportPosition.x = static_cast<int>(0.125f * static_cast<float>(_windowWidth));
-	_viewportPosition.y = static_cast<int>(0.2f * static_cast<float>(_windowHeight));
-	_viewportSize.x		= static_cast<int>(0.75f * static_cast<float>(_windowWidth));
-	_viewportSize.y		= static_cast<int>(0.75f * static_cast<float>(_windowHeight));
+	if (_selectedGame.empty()) // Engine preview
+	{
+		_viewportPosition.x = static_cast<int>(0.125f * static_cast<float>(_windowWidth));
+		_viewportPosition.y = static_cast<int>(0.2f * static_cast<float>(_windowHeight));
+		_viewportSize.x = static_cast<int>(0.75f * static_cast<float>(_windowWidth));
+		_viewportSize.y = static_cast<int>(0.75f * static_cast<float>(_windowHeight));
+	}
+	else // Game preview
+	{
+		_viewportPosition.x = 0;
+		_viewportPosition.y = 0;
+		_viewportSize.x = static_cast<int>(static_cast<float>(_windowWidth));
+		_viewportSize.y = static_cast<int>(static_cast<float>(_windowHeight));
+	}
 }
 
-void Config::_processOption(std::ifstream& file, bool& option)
+void Config::_processOption(ifstream& file, string& option, string criteria)
 {
-	// Loading
+	// Temporary values
 	string line;
-	string temp;
-	string value;
+	string name;
+	string equals;
 	std::getline(file, line);
 	std::istringstream iss(line);
-	iss >> temp >> temp >> value;
+	iss >> name >> equals;
 
-	// Parsing to boolean value
-	if (value == "true")
+	// Check criteria
+	if (name == criteria)
 	{
-		option = true;
-	}
-	else if (value == "false")
-	{
-		option = false;
+		iss >> option;
 	}
 	else
 	{
-		Logger::throwError("Configuration file: wrong boolean value");
+		Logger::throwError("Configuration file: invalid option name!");
 	}
 }
 
-void Config::_processOption(std::ifstream& file, int& option)
+void Config::_processOption(std::ifstream& file, float& option, string criteria)
 {
-	// Loading
+	// Temporary values
 	string line;
-	string temp;
+	string name;
+	string equals;
 	std::getline(file, line);
 	std::istringstream iss(line);
-	iss >> temp >> temp >> option;
+	iss >> name >> equals;
+
+	// Check criteria
+	if (name == criteria)
+	{
+		iss >> option;
+	}
+	else
+	{
+		Logger::throwError("Configuration file: invalid option name!");
+	}
 }
 
-void Config::_processOption(std::ifstream& file, float& option)
+void Config::_processOption(std::ifstream& file, int& option, string criteria)
 {
-	// Loading
+	// Temporary values
 	string line;
-	string temp;
+	string name;
+	string equals;
 	std::getline(file, line);
 	std::istringstream iss(line);
-	iss >> temp >> temp >> option;
+	iss >> name >> equals;
+
+	// Check criteria
+	if (name == criteria)
+	{
+		iss >> option;
+	}
+	else
+	{
+		Logger::throwError("Configuration file: invalid option name!");
+	}
+}
+
+void Config::_processOption(std::ifstream& file, bool& option, string criteria)
+{
+	// Temporary values
+	string line;
+	string name;
+	string equals;
+	string value;
+
+	// Read line
+	std::getline(file, line);
+	std::istringstream iss(line);
+	iss >> name >> equals >> value;
+
+	// Check criteria
+	if (name == criteria)
+	{
+		// Parsing to boolean value
+		if (value == "true")
+		{
+			option = true;
+		}
+		else if (value == "false")
+		{
+			option = false;
+		}
+		else
+		{
+			Logger::throwError("Configuration file: wrong boolean value!");
+		}
+	}
+	else
+	{
+		Logger::throwError("Configuration file: invalid option name!");
+	}
 }
 
 Ivec2 Config::getWindowSize() const 
@@ -109,4 +174,9 @@ Ivec2 Config::getVpSize() const
 float Config::getUpdateMsPerFrame() const
 {
 	return _updateMsPerFrame;
+}
+
+string Config::getSelectedGame() const
+{
+	return _selectedGame;
 }

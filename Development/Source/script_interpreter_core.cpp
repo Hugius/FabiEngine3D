@@ -2,12 +2,12 @@
 
 #include <sstream>
 
-ScriptInterpreter::ScriptInterpreter(FabiEngine3D& fe3d, Script& script, ModelEditor& modelEditor, 
-	SceneEditor& sceneEditor, AnimationEditor& animationEditor) :
+ScriptInterpreter::ScriptInterpreter(FabiEngine3D& fe3d, Script& script, SceneEditor& sceneEditor,
+	ModelEditor& modelEditor, AnimationEditor& animationEditor) :
 	_fe3d(fe3d),
 	_script(script),
-	_modelEditor(modelEditor),
 	_sceneEditor(sceneEditor),
+	_modelEditor(modelEditor),
 	_animationEditor(animationEditor)
 {
 	

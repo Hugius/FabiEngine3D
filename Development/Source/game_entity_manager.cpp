@@ -219,17 +219,21 @@ void GameEntityManager::update()
 				_renderBus.setSceneReflectionOffset(0.0000001f);
 			}
 
-			// Calculate absolute distance between camera and entity
-			Vec3 camPos = _renderBus.getCameraPosition();
-			Vec3 entityPos = entity->getTranslation();
-			float xDistance = fabsf(camPos.x - entityPos.x);
-			float yDistance = fabsf(camPos.y - entityPos.y);
-			float zDistance = fabsf(camPos.z - entityPos.z);
-			float absolsuteDistance = sqrtf((xDistance * xDistance) + (yDistance * yDistance) + (zDistance * zDistance));
-			bool isFarEnough = (absolsuteDistance > _lodDistance) && (!entity->getLodEntityID().empty());
+			// Check if entity has LOD
+			if (!entity->getLodEntityID().empty())
+			{
+				// Calculate absolute distance between camera and entity
+				Vec3 camPos = _renderBus.getCameraPosition();
+				Vec3 entityPos = entity->getTranslation();
+				float xDistance = fabsf(camPos.x - entityPos.x);
+				float yDistance = fabsf(camPos.y - entityPos.y);
+				float zDistance = fabsf(camPos.z - entityPos.z);
+				float absolsuteDistance = sqrtf((xDistance * xDistance) + (yDistance * yDistance) + (zDistance * zDistance));
 
-			// Check if farther than LOD distance
-			entity->setLevelOfDetailed(isFarEnough);
+				// Check if farther than LOD distance
+				bool isFarEnough = (absolsuteDistance > _lodDistance) && (!entity->getLodEntityID().empty());
+				entity->setLevelOfDetailed(isFarEnough);
+			}
 		}
 	}
 }

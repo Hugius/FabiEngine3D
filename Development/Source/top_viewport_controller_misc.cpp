@@ -38,17 +38,23 @@ void TopViewportController::_updateProjectCreation()
 {
 	if (_creatingProject)
 	{
-		string projectName;
+		// Temporary values
+		string newProjectName;
 
-		if (_gui.getGlobalScreen()->checkValueForm("newProjectName", projectName))
+		// Check if value changed
+		if (_gui.getGlobalScreen()->checkValueForm("newProjectName", newProjectName))
 		{
 			// Get directory path for the new project
-			string newDirectoryPath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + projectName;
+			string newDirectoryPath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + newProjectName;
 
 			// Check if project already exists
 			if (_fe3d.misc_isFileExisting(newDirectoryPath) && _fe3d.misc_isDirectory(newDirectoryPath))
 			{
-				Logger::throwWarning("Project \"" + projectName + "\"" + " already exists!");
+				Logger::throwWarning("Project \"" + newProjectName + "\"" + " already exists!");
+			}
+			else if (newProjectName.find_first_not_of(" ") == string::npos)
+			{
+				Logger::throwWarning("New project name cannot contain any spaces!");
 			}
 			else // Project is non-existent
 			{
@@ -59,7 +65,7 @@ void TopViewportController::_updateProjectCreation()
 				auto temp4 = _mkdir((newDirectoryPath + "\\scripts").c_str());
 
 				// Load current project
-				_currentProjectName = projectName;
+				_currentProjectName = newProjectName;
 				_updateCurrentProject();
 
 				// Logging

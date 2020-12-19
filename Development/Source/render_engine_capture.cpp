@@ -77,10 +77,9 @@ void RenderEngine::_captureSceneReflections(CameraManager& camera)
 		if (_entityBus->getSkyEntity() != nullptr) { oldLightness = _entityBus->getSkyEntity()->getLightness(); }
 		if (_entityBus->getSkyEntity() != nullptr) { _entityBus->getSkyEntity()->setLightness(_entityBus->getSkyEntity()->getOriginalLightness()); }
 
-		// Render scene
+		// Render scene (except game entities, because the performance would be dramatic)
 		_renderSkyEntity();
 		_renderTerrainEntity();
-		_renderGameEntities();
 		_renderBillboardEntities();
 
 		// Revert reflection exceptions

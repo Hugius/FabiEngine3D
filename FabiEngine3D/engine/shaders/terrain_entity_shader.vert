@@ -12,7 +12,8 @@ uniform mat4 u_projMatrix;
 uniform mat4 u_shadowMatrix;
 
 // Vec4 uniforms
-uniform vec4 u_clippingPlane;
+uniform vec4 u_clippingPlaneReflection;
+uniform vec4 u_clippingPlaneRefraction;
 
 // Out variables
 out vec3 f_pos;
@@ -32,7 +33,8 @@ void main()
 
 	// GLSL variables
 	gl_Position = clipSpacePos;
-	gl_ClipDistance[0] = dot(worldSpacePos, u_clippingPlane);
+	gl_ClipDistance[0] = dot(worldSpacePos, u_clippingPlaneReflection);
+	gl_ClipDistance[1] = dot(worldSpacePos, u_clippingPlaneRefraction);
 	
 	// Out variables
 	f_pos = worldSpacePos.xyz;

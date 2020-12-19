@@ -76,16 +76,14 @@ void AabbEntityManager::update(
 		// Optional translation update
 		if (entity->getParentID() != "")
 		{
-			bool found = false;
-
 			// Determine parent type
 			if (entity->getParentType() == AabbParentType::GAME_ENTITY)
 			{
 				// Try to find the parent entity
-				auto foundGameEntity = gameEntities.find(entity->getParentID());
-				if(foundGameEntity != gameEntities.end())
+				auto foundPair = gameEntities.find(entity->getParentID());
+				if(foundPair != gameEntities.end())
 				{
-					auto parentEntity = foundGameEntity->second;
+					auto parentEntity = foundPair->second;
 
 					// Game entity must not be LODded
 					if (!parentEntity->isLevelOfDetailed())
@@ -99,12 +97,8 @@ void AabbEntityManager::update(
 						// Update visibility
 						entity->setVisible(parentEntity->isVisible());
 					}
-
-					found = true;
 				}
-
-				// Error logging
-				if (!found)
+				else
 				{
 					Logger::throwError("AABB entity \"" + entity->getID() + "\" bound to nonexisting GAME entity \"" + entity->getParentID() + "\"");
 				}
@@ -112,10 +106,10 @@ void AabbEntityManager::update(
 			else if(entity->getParentType() == AabbParentType::BILLBOARD_ENTITY)
 			{
 				// Try to find the parent entity
-				auto foundGameEntity = billboardEntities.find(entity->getParentID());
-				if (foundGameEntity != billboardEntities.end())
+				auto foundPair = billboardEntities.find(entity->getParentID());
+				if (foundPair != billboardEntities.end())
 				{
-					auto parentEntity = foundGameEntity->second;
+					auto parentEntity = foundPair->second;
 
 					// Retrieve parent rotation & size
 					float rotationX = fabsf(parentEntity->getRotation().x);
@@ -152,12 +146,8 @@ void AabbEntityManager::update(
 
 					// Update visibility
 					entity->setVisible(parentEntity->isVisible());
-
-					found = true;
 				}
-
-				// Error logging
-				if (!found)
+				else
 				{
 					Logger::throwError("AABB entity \"" + entity->getID() + "\" bound to nonexisting BILLBOARD entity \"" + entity->getParentID() + "\"");
 				}

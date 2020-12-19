@@ -17,7 +17,7 @@ void GameEntity::updateModelMatrix()
 	for (unsigned int i = 0; i < _modelMatrices.size(); i++)
 	{
 		// Instanced modelpart cannot have a modelmatrix position
-		if (getOglBuffer(i)->isInstanced())
+		if (!getOglBuffers().empty() && getOglBuffer(i)->isInstanced())
 		{
 			_translations[i] = Vec3(0.0f);
 		}

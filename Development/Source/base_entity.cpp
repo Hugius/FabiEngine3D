@@ -45,7 +45,7 @@ void BaseEntity::setVisible(bool val)
 	_visible = val;
 }
 
-const vector<OpenGLBuffer*> & BaseEntity::getOglBuffers() const
+const vector<OpenGLBuffer*>& BaseEntity::getOglBuffers() const
 {
 	return _oglBuffers;
 }

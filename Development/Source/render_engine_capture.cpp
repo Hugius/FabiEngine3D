@@ -124,15 +124,16 @@ void RenderEngine::_captureSceneRefractions()
 	if (waterRefractionEnabled)
 	{
 		// Bind
+		glEnable(GL_CLIP_DISTANCE1);
 		_sceneRefractionFramebuffer.bind();
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		// Render scene
 		_renderTerrainEntity();
-		_renderGameEntities();
 
 		// Unbind
 		_sceneRefractionFramebuffer.unbind();
+		glDisable(GL_CLIP_DISTANCE1);
 
 		// Assign texture
 		_renderBus.setSceneRefractionMap(_sceneRefractionFramebuffer.getTexture(0));
@@ -150,39 +151,44 @@ void RenderEngine::_captureShadows()
 		_shadowRenderer.bind();
 
 		// Render GAME entities
-		for (auto& [keyID, gameEntity] : _entityBus->getGameEntities())
+		auto allGameEntities = _entityBus->getGameEntities();
+		for (auto& [keyID, gameEntity] : allGameEntities)
 		{
 			// Check if LOD entity needs to be rendered
 			if (gameEntity->isLevelOfDetailed())
 			{
 				// Try to find LOD entity
-				for (auto& [keyID, lodEntity] : _entityBus->getGameEntities())
+				auto foundPair = allGameEntities.find(gameEntity->getLodEntityID());
+				if (foundPair != allGameEntities.end())
 				{
-					if (gameEntity->getLodEntityID() == lodEntity->getID())
-					{
-						// Save original transformation
-						Vec3 originalPosition = lodEntity->getTranslation();
-						Vec3 originalRotation = lodEntity->getRotation();
-						Vec3 originalSize = lodEntity->getScaling();
-						bool originalVisibility = lodEntity->isVisible();
+					auto lodEntity = foundPair->second;
 
-						// Change transformation
-						lodEntity->setTranslation(gameEntity->getTranslation());
-						lodEntity->setRotation(gameEntity->getRotation());
-						lodEntity->setScaling((gameEntity->getScaling() / gameEntity->getOriginalScaling()) * originalSize);
-						lodEntity->setVisible(gameEntity->isVisible());
-						lodEntity->updateModelMatrix();
-						
-						// Render LOD entity
-						_shadowRenderer.render(lodEntity);
+					// Save original transformation
+					Vec3 originalPosition = lodEntity->getTranslation();
+					Vec3 originalRotation = lodEntity->getRotation();
+					Vec3 originalSize = lodEntity->getScaling();
+					bool originalVisibility = lodEntity->isVisible();
 
-						// Revert to original transformation
-						lodEntity->setTranslation(originalPosition);
-						lodEntity->setRotation(originalRotation);
-						lodEntity->setScaling(originalSize);
-						lodEntity->setVisible(originalVisibility);
-						lodEntity->updateModelMatrix();
-					}
+					// Change transformation
+					lodEntity->setTranslation(gameEntity->getTranslation());
+					lodEntity->setRotation(gameEntity->getRotation());
+					lodEntity->setScaling((gameEntity->getScaling() / gameEntity->getOriginalScaling()) * originalSize);
+					lodEntity->setVisible(gameEntity->isVisible());
+					lodEntity->updateModelMatrix();
+
+					// Render LOD entity
+					_shadowRenderer.render(lodEntity);
+
+					// Revert to original transformation
+					lodEntity->setTranslation(originalPosition);
+					lodEntity->setRotation(originalRotation);
+					lodEntity->setScaling(originalSize);
+					lodEntity->setVisible(originalVisibility);
+					lodEntity->updateModelMatrix();
+				}
+				else
+				{
+					Logger::throwError("GAME entity \"" + gameEntity->getID() + "\" has a nonexisting LOD entity \"" + gameEntity->getLodEntityID() + "\"");
 				}
 			}
 			else // Render high-quality entity
@@ -248,7 +254,8 @@ void RenderEngine::_captureSceneDepth()
 		}
 
 		// Render GAME entities
-		for (auto& [keyID, gameEntity] : _entityBus->getGameEntities())
+		auto allGameEntities = _entityBus->getGameEntities();
+		for (auto& [keyID, gameEntity] : allGameEntities)
 		{
 			// Check if must be included in depth map
 			if (gameEntity->isDepthMapIncluded())
@@ -257,33 +264,36 @@ void RenderEngine::_captureSceneDepth()
 				if (gameEntity->isLevelOfDetailed())
 				{
 					// Try to find LOD entity
-					for (auto& [keyID, lodEntity] : _entityBus->getGameEntities())
+					auto foundPair = allGameEntities.find(gameEntity->getLodEntityID());
+					if (foundPair != allGameEntities.end())
 					{
-						if (gameEntity->getLodEntityID() == lodEntity->getID())
-						{
-							// Save original transformation
-							Vec3 originalPosition = lodEntity->getTranslation();
-							Vec3 originalRotation = lodEntity->getRotation();
-							Vec3 originalSize = lodEntity->getScaling();
-							bool originalVisibility = lodEntity->isVisible();
+						auto lodEntity = foundPair->second;
+						// Save original transformation
+						Vec3 originalPosition = lodEntity->getTranslation();
+						Vec3 originalRotation = lodEntity->getRotation();
+						Vec3 originalSize = lodEntity->getScaling();
+						bool originalVisibility = lodEntity->isVisible();
 
-							// Change transformation
-							lodEntity->setTranslation(gameEntity->getTranslation());
-							lodEntity->setRotation(gameEntity->getRotation());
-							lodEntity->setScaling((gameEntity->getScaling() / gameEntity->getOriginalScaling()) * originalSize);
-							lodEntity->setVisible(gameEntity->isVisible());
-							lodEntity->updateModelMatrix();
+						// Change transformation
+						lodEntity->setTranslation(gameEntity->getTranslation());
+						lodEntity->setRotation(gameEntity->getRotation());
+						lodEntity->setScaling((gameEntity->getScaling() / gameEntity->getOriginalScaling()) * originalSize);
+						lodEntity->setVisible(gameEntity->isVisible());
+						lodEntity->updateModelMatrix();
 
-							// Render LOD entity
-							_depthRenderer.render(lodEntity);
+						// Render LOD entity
+						_depthRenderer.render(lodEntity);
 
-							// Revert to original transformation
-							lodEntity->setTranslation(originalPosition);
-							lodEntity->setRotation(originalRotation);
-							lodEntity->setScaling(originalSize);
-							lodEntity->setVisible(originalVisibility);
-							lodEntity->updateModelMatrix();
-						}
+						// Revert to original transformation
+						lodEntity->setTranslation(originalPosition);
+						lodEntity->setRotation(originalRotation);
+						lodEntity->setScaling(originalSize);
+						lodEntity->setVisible(originalVisibility);
+						lodEntity->updateModelMatrix();
+					}
+					else
+					{
+						Logger::throwError("GAME entity \"" + gameEntity->getID() + "\" has a nonexisting LOD entity \"" + gameEntity->getLodEntityID() + "\"");
 					}
 				}
 				else // Render high-quality entity

@@ -7,7 +7,8 @@ using std::to_string;
 void TerrainEntityRenderer::bind()
 {
 	// Define clipping plane for scene reflections
-	Vec4 clippingPlane = Vec4(0.0f, 1.0f, 0.0f, -(_renderBus.getSceneReflectionHeight()) + _renderBus.getSceneReflectionOffset());
+	Vec4 clippingPlaneReflection = Vec4(0.0f, 1.0f, 0.0f, -(_renderBus.getSceneReflectionHeight()) + _renderBus.getSceneReflectionOffset());
+	Vec4 clippingPlaneRefraction = Vec4(0.0f, -1.0f, 0.0f, _renderBus.getSceneReflectionHeight());
 
 	// Bind shader
 	_shader.bind();
@@ -16,7 +17,8 @@ void TerrainEntityRenderer::bind()
 	_shader.uploadUniform("u_viewMatrix",    _renderBus.getViewMatrix());
 	_shader.uploadUniform("u_projMatrix",    _renderBus.getProjectionMatrix());
 	_shader.uploadUniform("u_shadowMatrix",  _renderBus.getShadowMatrix());
-	_shader.uploadUniform("u_clippingPlane", clippingPlane);
+	_shader.uploadUniform("u_clippingPlaneReflection", clippingPlaneReflection);
+	_shader.uploadUniform("u_clippingPlaneRefraction", clippingPlaneRefraction);
 	
 	// Fragment shader uniforms
 	_shader.uploadUniform("u_cameraPosition",              _renderBus.getCameraPosition());

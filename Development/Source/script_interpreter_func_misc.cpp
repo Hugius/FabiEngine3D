@@ -125,6 +125,13 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 
 bool ScriptInterpreter::_validateFe3dGameEntity(const string& ID, bool previewEntity)
 {
+	// Cannot use/delete a preview entity
+	if (!previewEntity && ID.front() == '@')
+	{
+		_throwScriptError("Existing model ID cannot start with '@'");
+	}
+
+	// Check if entity exists
 	if (!_fe3d.gameEntity_isExisting(ID))
 	{
 		if (previewEntity)

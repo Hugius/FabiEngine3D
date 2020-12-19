@@ -155,7 +155,8 @@ void WaterEntityManager::generateModel(const string& ID)
 void WaterEntityManager::update()
 {
 	// Update reflection height
-	if ((_renderBus.isWaterEffectsEnabled() && getSelectedWater() != nullptr) && getSelectedWater()->isReflective())
+	if ((_renderBus.isWaterEffectsEnabled() && getSelectedWater() != nullptr) && 
+		(getSelectedWater()->isReflective() || getSelectedWater()->isRefractive()))
 	{
 		_renderBus.setSceneReflectionHeight(getSelectedWater()->getPosition().y);
 		_renderBus.setSceneReflectionOffset(1.0f);

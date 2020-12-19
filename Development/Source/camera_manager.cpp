@@ -39,21 +39,20 @@ void CameraManager::reset()
 
 void CameraManager::update(WindowManager & windowManager)
 {
-	// Variables
+	// Temporary values
 	Ivec2 currentMousePos = windowManager.getMousePos();
 	static Ivec2 lastMousePos = currentMousePos;
 
+	// Only if first person camera is enabled
 	if (_isFirstPersonViewEnabled && !_mustCenter)
 	{
-		// Variable
+		// Temporary values
 		const int left   = Config::getInst().getVpPos().x;
 		const int right  = Config::getInst().getVpPos().x + Config::getInst().getVpSize().x;
 		const int bottom = Config::getInst().getWindowSize().y - (Config::getInst().getVpPos().y + Config::getInst().getVpSize().y);
 		const int top    = Config::getInst().getWindowSize().y - Config::getInst().getVpPos().y;
 		const int xMiddle = right / 2;
 		const int yMiddle = top / 2;
-		
-		std::cout << currentMousePos.x << " " << currentMousePos.y << " " << left << " " << right << " " << bottom << " " << top << std::endl;
 
 		// Reset mouse position if going out of screen (horizontal)
 		if (currentMousePos.x <= left)

@@ -125,10 +125,10 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 
 bool ScriptInterpreter::_validateFe3dGameEntity(const string& ID, bool previewEntity)
 {
-	// Cannot use/delete a preview entity
+	// Cannot request/delete a preview entity
 	if (!previewEntity && ID.front() == '@')
 	{
-		_throwScriptError("Existing model ID cannot start with '@'");
+		_throwScriptError("Requested model ID cannot start with '@'");
 	}
 
 	// Check if entity exists
@@ -136,11 +136,11 @@ bool ScriptInterpreter::_validateFe3dGameEntity(const string& ID, bool previewEn
 	{
 		if (previewEntity)
 		{
-			_throwScriptError("model with ID \"" + ID.substr(1) + "\" does not exist!");
+			_throwScriptError("Requested model with ID \"" + ID.substr(1) + "\" does not exist!");
 		}
 		else
 		{
-			_throwScriptError("model with ID \"" + ID + "\" does not exist!");
+			_throwScriptError("Requested model with ID \"" + ID + "\" does not exist!");
 		}
 		
 		return false;

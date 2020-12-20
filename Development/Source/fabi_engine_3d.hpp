@@ -413,7 +413,7 @@ public:
 	AabbParentType aabbEntity_getParentType(const string& ID);
 
 	// Global collision interface - setters
-	void collision_enableCameraResponse();
+	void collision_enableCameraResponse(float bottom, float top, float left, float right, float front, float back);
 	void collision_disableCameraResponse();
 	void collision_enableCameraTerrainResponse(float cameraHeight, float cameraSpeed);
 	void collision_disableCameraTerrainResponse();

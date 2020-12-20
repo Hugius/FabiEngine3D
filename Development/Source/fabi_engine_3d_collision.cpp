@@ -191,9 +191,9 @@ AabbParentType FabiEngine3D::aabbEntity_getParentType(const string& ID)
 	return _core->_aabbEntityManager.getEntity(ID)->getParentType();
 }
 
-void FabiEngine3D::collision_enableCameraResponse()
+void FabiEngine3D::collision_enableCameraResponse(float bottom, float top, float left, float right, float front, float back)
 {
-	_core->_collisionResolver.enableAabbResponse();
+	_core->_collisionResolver.enableAabbResponse(bottom, top, left, right, front, back);
 }
 
 void FabiEngine3D::collision_disableCameraResponse()

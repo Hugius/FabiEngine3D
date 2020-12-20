@@ -49,8 +49,8 @@ void SceneEditor::_updateModelEditing()
 					}
 					else
 					{
-						// Don't reset if model is active
-						if (entityID != _activeModelID && _selectedModelID == "")
+						// Don't reset if model is active or selected
+						if (entityID != _activeModelID && entityID != _selectedModelID)
 						{
 							_fe3d.gameEntity_setLightness(entityID, _initialModelLightness[entityID]);
 						}

@@ -5,43 +5,75 @@
 
 using std::vector;
 
-Collision CollisionDetector::check(const AabbEntity& box, Vec3 point, Vec3 pointDifference, Direction& collisionDir)
+Collision CollisionDetector::check(const AabbEntity& box, Vec3 middle, float bottom, float top, float left, float right, float front, float back, 
+	Vec3 pointDifference, Direction& collisionDir)
 {
+	// Temporary values
 	Collision collision(false, false, false);
 
-	// Get info
+	// Get AABB data
 	auto pos  = box.getTranslation();
 	auto size = box.getScaling() / 2.0f;
 	bool insideBox = false;
+	bool xInsideBox = false;
+	bool yInsideBox = false;
+	bool zInsideBox = false;
 
-	// Check for any collision at all
-	if (point.x > (pos.x - size.x) && point.x < (pos.x + size.x))
+	// X collision detection
+	if (((middle.x + right) > (pos.x - size.x) && (middle.x + right) < (pos.x + size.x)) ||
+		((middle.x - left) < (pos.x + size.x) && (middle.x - left) > (pos.x - size.x)))
 	{
-		if (point.y > pos.y && point.y < (pos.y + (size.y * 2.0f)))
-		{
-			if (point.z > (pos.z - size.z) && point.z < (pos.z + size.z))
-			{
-				insideBox = true;
-			}
-		}
+		xInsideBox = true;
 	}
 
-	// Check with which side the point collided
+	// Y collision detection
+	if (((middle.y + top) > (pos.y) && (middle.y + top) < (pos.y + (size.y * 2.0f))) ||
+		((middle.y - bottom) < (pos.y + (size.y * 2.0f)) && (middle.y - bottom) > (pos.y)))
+	{
+		yInsideBox = true;
+
+	}
+
+	// Z collision detection
+	if (((middle.z + front) > (pos.z - size.z) && (middle.z + front) < (pos.z + size.z)) ||
+		((middle.z - back) < (pos.z + size.z) && (middle.z - back) > (pos.z - size.z)))
+	{
+		zInsideBox = true;
+	}
+
+	// Check if AABB is smaller than the camera box
+	bool xTooSmall = (middle.x + right) > (pos.x + size.x)			&& (middle.x - left)   < (pos.x - size.x);
+	bool yTooSmall = (middle.y + top)   > (pos.y + (size.y * 2.0f)) && (middle.y - bottom) < pos.y;
+	bool zTooSmall = (middle.z + front) > (pos.z + size.z)			&& (middle.z - back)   < (pos.z - size.z);
+
+	// Check for any collision at all
+	if 
+		(
+			(xInsideBox && yInsideBox && zInsideBox) ||
+			(xTooSmall && yInsideBox && zInsideBox)  ||
+			(xInsideBox && yTooSmall && zInsideBox)  ||
+			(xInsideBox && yInsideBox && zTooSmall)
+		)
+	{
+		insideBox = true;
+	}
+
+	// Check with which side the box collided
 	if (insideBox)
 	{
-		// Get differences
-		float xDiffFirst = fabsf((pos.x - size.x) - point.x);
-		float xDiffSecnd = fabsf((pos.x + size.x) - point.x);
-		float yDiffFirst = fabsf((pos.y) - point.y);
-		float yDiffSecnd = fabsf((pos.y + (size.y * 2.0f)) - point.y);
-		float zDiffFirst = fabsf((pos.z - size.z) - point.z);
-		float zDiffSecnd = fabsf((pos.z + size.z) - point.z);
+		// Calculate differences
+		float xDiffFirst = fabsf((pos.x - size.x) - middle.x);
+		float xDiffSecnd = fabsf((pos.x + size.x) - middle.x);
+		float yDiffFirst = fabsf((pos.y) - middle.y);
+		float yDiffSecnd = fabsf((pos.y + (size.y * 2.0f)) - middle.y);
+		float zDiffFirst = fabsf((pos.z - size.z) - middle.z);
+		float zDiffSecnd = fabsf((pos.z + size.z) - middle.z);
 
 		// Calculate the minimum difference
 		vector<float> diffList = { xDiffFirst, xDiffSecnd, yDiffFirst, yDiffSecnd, zDiffFirst, zDiffSecnd };
 		float minDiff = *std::min_element(diffList.begin(), diffList.end());
 
-		// Collision checks
+		// Check in which directions the box moved
 		bool xCollision = (xDiffFirst <= pointDifference.x || xDiffSecnd <= pointDifference.x);
 		bool yCollision = (yDiffFirst <= pointDifference.y || yDiffSecnd <= pointDifference.y);
 		bool zCollision = (zDiffFirst <= pointDifference.z || zDiffSecnd <= pointDifference.z);

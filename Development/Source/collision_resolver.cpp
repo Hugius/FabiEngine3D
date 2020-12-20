@@ -29,7 +29,8 @@ void CollisionResolver::update(
 			if (box->isResponsive() && box->isVisible())
 			{
 				auto direction = box->getCollisionDirection();
-				auto result = _collisionDetector.check(*box, currentCameraPos, posDifference, direction);
+				auto result = _collisionDetector.check(*box, currentCameraPos, _cameraAabbBottom, _cameraAabbTop, 
+					_cameraAabbLeft, _cameraAabbRight, _cameraAabbFront, _cameraAabbBack, posDifference, direction);
 				box->setCollisionDirection(direction);
 				collision += result;
 			}
@@ -58,6 +59,7 @@ void CollisionResolver::update(
 	}
 	
 	// Check if terrain collision is needed in the first place
+	_isCameraUnderTerrain = false;
 	if (_terrainResponseEnabled)
 	{
 		// Check if a terrain is selected
@@ -67,7 +69,7 @@ void CollisionResolver::update(
 			Vec3 camPos = camera.getPosition();
 			const float terrainX = camPos.x + (terrainManager.getSelectedTerrain()->getSize() / 2.0f);
 			const float terrainZ = camPos.z + (terrainManager.getSelectedTerrain()->getSize() / 2.0f);
-			const float targetY = terrainManager.getPixelHeight(terrainManager.getSelectedTerrain()->getID(), terrainX, terrainZ) + _cameraHeight;
+			const float targetY = terrainManager.getPixelHeight(terrainManager.getSelectedTerrain()->getID(), terrainX, terrainZ) + _cameraTerrainHeight;
 
 			// If camera goes underground
 			if (camPos.y < targetY)
@@ -75,7 +77,7 @@ void CollisionResolver::update(
 				_isCameraUnderTerrain = true;
 
 				// Move camera upwards
-				camera.translate(Vec3(0.0f, fabsf(camPos.y - targetY) * _cameraSpeed, 0.0f));
+				camera.translate(Vec3(0.0f, fabsf(camPos.y - targetY) * _cameraTerrainSpeed, 0.0f));
 				camPos.y = camera.getPosition().y;
 
 				// Correct moved distance
@@ -84,17 +86,19 @@ void CollisionResolver::update(
 					camera.setPosition(Vec3(camPos.x, targetY, camPos.z));
 				}
 			}
-			else
-			{
-				_isCameraUnderTerrain = false;
-			}
 		}
 	}
 }
 
-void CollisionResolver::enableAabbResponse()
+void CollisionResolver::enableAabbResponse(float bottom, float top, float left, float right, float front, float back)
 {
 	_aabbResponseEnabled = true;
+	_cameraAabbBottom = bottom * 0.99f;
+	_cameraAabbTop = top * 0.99f;
+	_cameraAabbLeft = left * 0.99f;
+	_cameraAabbRight = right * 0.99f;
+	_cameraAabbFront = front * 0.99f;
+	_cameraAabbBack = back * 0.99f;
 }
 
 void CollisionResolver::disableAabbResponse()
@@ -105,8 +109,8 @@ void CollisionResolver::disableAabbResponse()
 void CollisionResolver::enableTerrainResponse(float cameraHeight, float cameraSpeed)
 {
 	_terrainResponseEnabled = true;
-	_cameraHeight = cameraHeight;
-	_cameraSpeed = cameraSpeed;
+	_cameraTerrainHeight = cameraHeight;
+	_cameraTerrainSpeed = cameraSpeed;
 }
 
 void CollisionResolver::disableTerrainResponse()

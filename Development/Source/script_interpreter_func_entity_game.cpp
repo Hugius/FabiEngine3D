@@ -3,7 +3,25 @@
 bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine type of function
-	if (functionName == "fe3d:model_place") // Create gameEntity
+	if (functionName == "fe3d:model_is_existing") // Get gameEntity existence
+	{
+		auto types = { ScriptValueType::STRING };
+
+		// Validate arguments
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		{
+			// Cannot request a preview entity
+			if (arguments[0].getString().front() == '@')
+			{
+				_throwScriptError("Requested model ID cannot start with '@'");
+			}
+
+			// Check if existing
+			auto result = _fe3d.gameEntity_isExisting(arguments[0].getString());
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
+		}
+	}
+	else if (functionName == "fe3d:model_place") // Create gameEntity
 	{
 		auto types =
 		{

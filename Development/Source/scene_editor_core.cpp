@@ -411,7 +411,7 @@ void SceneEditor::load()
 	_gui.getGlobalScreen()->addTextfield("selectedAudioName", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
 
 	// Miscellaneous
-	_fe3d.collision_enableCameraResponse();
+	_fe3d.collision_enableCameraResponse(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
 	_gui.getViewport("right")->getWindow("main")->setActiveScreen("sceneEditorControls");
 	_isEditorLoaded = true;
 }

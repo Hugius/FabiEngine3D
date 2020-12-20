@@ -44,4 +44,6 @@ private:
 	SceneEditor _sceneEditor;
 	ScriptEditor _scriptEditor;
 	SettingsEditor _settingsEditor;
+
+	string _lastActiveEditorScreen = "";
 };

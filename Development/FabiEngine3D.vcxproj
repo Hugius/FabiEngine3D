@@ -356,6 +356,7 @@
     <ClCompile Include="Source\script_executor.cpp" />
     <ClCompile Include="Source\script_file.cpp" />
     <ClCompile Include="Source\script_interpreter_func_animations.cpp" />
+    <ClCompile Include="Source\script_interpreter_func_entity_aabb.cpp" />
     <ClCompile Include="Source\script_interpreter_func_entity_billboard.cpp" />
     <ClCompile Include="Source\script_interpreter_func_entity_sky.cpp" />
     <ClCompile Include="Source\script_interpreter_func_entity_terrain.cpp" />

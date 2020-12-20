@@ -1,5 +1,32 @@
 #include "script_interpreter.hpp"
 
+bool ScriptInterpreter::_validateFe3dGameEntity(const string& ID, bool previewEntity)
+{
+	// Cannot request/delete a preview entity
+	if (!previewEntity && ID.front() == '@')
+	{
+		_throwScriptError("Requested model ID cannot start with '@'");
+		return false;
+	}
+
+	// Check if entity exists
+	if (!_fe3d.gameEntity_isExisting(ID))
+	{
+		if (previewEntity)
+		{
+			_throwScriptError("Requested model with ID \"" + ID.substr(1) + "\" does not exist!");
+		}
+		else
+		{
+			_throwScriptError("Requested model with ID \"" + ID + "\" does not exist!");
+		}
+
+		return false;
+	}
+
+	return true;
+}
+
 bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine type of function
@@ -14,6 +41,7 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 			if (arguments[0].getString().front() == '@')
 			{
 				_throwScriptError("Requested model ID cannot start with '@'");
+				return true;
 			}
 
 			// Check if existing
@@ -25,7 +53,9 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 	{
 		auto types =
 		{
-			ScriptValueType::STRING, ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL
+			ScriptValueType::STRING, // New gameEntity ID
+			ScriptValueType::STRING, // Preview gameEntity ID
+			ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL // Position
 		};
 
 		// Validate arguments
@@ -35,6 +65,13 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 			if (arguments[0].getString().front() == '@')
 			{
 				_throwScriptError("New model ID cannot start with '@'");
+				return true;
+			}
+
+			// Check if GAME entity already exists
+			if (_fe3d.gameEntity_isExisting(arguments[0].getString()))
+			{
+				_throwScriptError("Model with ID \"" + arguments[0].getString() + "\" already exists!");
 				return true;
 			}
 
@@ -121,9 +158,9 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 			}
 		}
 	}
-	else if (functionName == "fe3d:model_set_all_visible") // Set ALL gameEntities visibility
+	else if (functionName == "fe3d:model_set_all_visible") // Set all gameEntity visibilities
 	{
-		auto types = { ScriptValueType::BOOLEAN };
+		auto types = { ScriptValueType::BOOLEAN }; // Visibility
 
 		// Validate arguments
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
@@ -150,7 +187,7 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
-	else if (functionName == "fe3d:model_get_all_names") // Get ALL gameEntities visibility
+	else if (functionName == "fe3d:model_get_all_names") // Get all gameEntity names
 	{
 		// Validate arguments
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))

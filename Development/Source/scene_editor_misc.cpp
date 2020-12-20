@@ -484,6 +484,7 @@ void SceneEditor::clearScene()
 		_fe3d.waterEntity_deleteAll();
 		_fe3d.gameEntity_deleteAll();
 		_fe3d.billboardEntity_deleteAll();
+		_fe3d.aabbEntity_deleteAll();
 		_fe3d.lightEntity_deleteAll();
 		_fe3d.audioEntity_deleteAll();
 	}

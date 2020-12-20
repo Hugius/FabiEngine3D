@@ -595,6 +595,9 @@
     <ClCompile Include="Source\texture_loader_interface.cpp">
       <Filter>src\Asset Management System\Textures</Filter>
     </ClCompile>
+    <ClCompile Include="Source\script_interpreter_func_entity_aabb.cpp">
+      <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\obj_loader.hpp">

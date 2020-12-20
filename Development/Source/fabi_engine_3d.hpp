@@ -430,7 +430,7 @@ public:
 	Direction	 collision_checkCameraWithEntityDirection(const string& ID);
 	Direction	 collision_checkCameraWithAnyDirection();
 	Direction	 collision_checkCameraWithEntitiesDirection(const string& ID);
-	const string collision_checkEntityWithOthers(const string& ID);
+	const string collision_checkEntityWithEntities(const string& selfID, const string& otherID);
 
 	// Light entity interface - setters
 	void lightEntity_add(const string& ID, Vec3 position = Vec3(0.0f), Vec3 color = Vec3(1.0f), float intensity = 1.0f, float distanceFactor = 1.0f, bool visible = true);

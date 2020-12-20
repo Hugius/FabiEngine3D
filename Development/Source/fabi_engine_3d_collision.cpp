@@ -340,53 +340,82 @@ bool FabiEngine3D::collision_checkCameraWithEntity(const string& ID)
 	return _core->_aabbEntityManager.getEntity(ID)->getCollisionDirection() != Direction::NONE;
 }
 
-const string FabiEngine3D::collision_checkEntityWithOthers(const string& ID)
+const string FabiEngine3D::collision_checkEntityWithEntities(const string& selfID, const string& otherID)
 {
-	// Self entity
-	auto self = _core->_aabbEntityManager.getEntity(ID);
-	Vec3 selfPos = self->getTranslation();
-	Vec3 selfSize = self->getScaling();
-
-	// Check if entity is responsive and visible
-	if (self->isResponsive() && self->isVisible())
+	// Check if self entity exists
+	if (!_core->_aabbEntityManager.isExisting(selfID))
 	{
-		// Loop over all AABB entities
-		for (auto [keyID, other] : _core->_aabbEntityManager.getEntities())
+		return "";
+	}
+
+	// Temporary values
+	auto self = _core->_aabbEntityManager.getEntity(selfID);
+	Vec3 selfPos = self->getTranslation();
+	Vec3 selfSize = self->getScaling() / 2.0f;
+
+	// Check if self entity is responsive and visible
+	if (!self->isResponsive() || !self->isVisible())
+	{
+		return "";
+	}
+
+	// Loop over AABB entities
+	for (auto [keyID, other] : _core->_aabbEntityManager.getEntities())
+	{
+		if (other->getID().size() >= otherID.size()) // Check if entity ID is at least the size of group ID
 		{
-			// Don't check own entity & other entity must be responsive and visible
-			if (other->getID() != ID && other->isResponsive() && other->isVisible())
+			// Check if entity does not match ID
+			auto subString = other->getID().substr(0, otherID.size());
+			if (subString != otherID)
 			{
-				Vec3 otherPos = other->getTranslation();
-				Vec3 otherSize = other->getScaling();
+				continue;
+			}
 
-				// Check XYZ collision between 2 entities
-				if
-					(
-						// Check both all X collision situations
-						((selfPos.z > otherPos.z - otherSize.z && selfPos.z < otherPos.z + otherSize.z) || // Middle coordinate within
-							(selfPos.z - selfSize.z > otherPos.z - otherSize.z && selfPos.z - selfSize.z < otherPos.z + otherSize.z) || // Lower corner within
-							(selfPos.z + selfSize.z > otherPos.z - otherSize.z && selfPos.z + selfSize.z < otherPos.z + otherSize.z) || // Upper corner within 
-							(selfPos.z - selfSize.z < otherPos.z - otherSize.z && selfPos.z + selfSize.z > otherPos.z + otherSize.z))   // AABB too big but overlapping 
+			// Don't check own entity & other entity must be responsive and visible
+			if (other->getID() == self->getID() || !other->isResponsive() || !other->isVisible())
+			{
+				continue;
+			}
 
-						&&
+			// Temporary values
+			Vec3 otherPos = other->getTranslation();
+			Vec3 otherSize = other->getScaling() / 2.0f;
+			// Check XYZ collision between 2 entities
+			if
+			(
+				// Middle coordinate within
+				((selfPos.x > otherPos.x - otherSize.x && selfPos.x < otherPos.x + otherSize.x) ||
+				// Lower corner within
+				(selfPos.x - selfSize.x > otherPos.x - otherSize.x && selfPos.x - selfSize.x < otherPos.x + otherSize.x) ||
+				// Upper corner within 
+				(selfPos.x + selfSize.x > otherPos.x - otherSize.x && selfPos.x + selfSize.x < otherPos.x + otherSize.x) ||
+				// AABB too big but overlapping
+				(selfPos.x - selfSize.x <= otherPos.x - otherSize.x && selfPos.x + selfSize.x >= otherPos.x + otherSize.x)) 
 
-						// Check both all Y collision situations
-						((selfPos.y > otherPos.y - otherSize.y && selfPos.y < otherPos.y + otherSize.y) || // Middle coordinate within
-							(selfPos.y - selfSize.y > otherPos.y - otherSize.y && selfPos.y - selfSize.y < otherPos.y + otherSize.y) || // Lower corner within
-							(selfPos.y + selfSize.y > otherPos.y - otherSize.y && selfPos.y + selfSize.y < otherPos.y + otherSize.y) || // Upper corner within 
-							(selfPos.y - selfSize.y < otherPos.y - otherSize.y && selfPos.y + selfSize.y > otherPos.y + otherSize.y))   // AABB too big but overlapping 
+				&&
 
-						&&
+				// Middle coordinate within
+				((selfPos.y + selfSize.y > otherPos.y && selfPos.y + selfSize.y < otherPos.y + (otherSize.y * 2.0f)) ||
+				// Lower corner within
+				(selfPos.y > otherPos.y && selfPos.y < otherPos.y + (otherSize.y * 2.0f)) ||
+				// Upper corner within 
+				(selfPos.y + (selfSize.y * 2.0f) > otherPos.y && selfPos.y + (selfSize.y * 2.0f) < otherPos.y + (otherSize.y * 2.0f)) ||
+				// AABB too big but overlapping 
+				(selfPos.y <= otherPos.y && selfPos.y + (selfSize.y * 2.0f) >= otherPos.y + (otherSize.y * 2.0f)))
 
-						// Check both all Z collision situations
-						((selfPos.x > otherPos.x - otherSize.x && selfPos.x < otherPos.x + otherSize.x) || // Middle coordinate within
-							(selfPos.x - selfSize.x > otherPos.x - otherSize.x && selfPos.x - selfSize.x < otherPos.x + otherSize.x) || // Lower corner within
-							(selfPos.x + selfSize.x > otherPos.x - otherSize.x && selfPos.x + selfSize.x < otherPos.x + otherSize.x) || // Upper corner within 
-							(selfPos.x - selfSize.x < otherPos.x - otherSize.x && selfPos.x + selfSize.x > otherPos.x + otherSize.x))   // AABB too big but overlapping 
-						)
-				{
-					return other->getID();
-				}
+				&&
+
+				// Middle coordinate within
+				((selfPos.z > otherPos.z - otherSize.z && selfPos.z < otherPos.z + otherSize.z) ||
+				// Lower corner within
+				(selfPos.z - selfSize.z > otherPos.z - otherSize.z && selfPos.z - selfSize.z < otherPos.z + otherSize.z) ||
+				// Upper corner within 
+				(selfPos.z + selfSize.z > otherPos.z - otherSize.z && selfPos.z + selfSize.z < otherPos.z + otherSize.z) || 
+				// AABB too big but overlapping 
+				(selfPos.z - selfSize.z <= otherPos.z - otherSize.z && selfPos.z + selfSize.z >= otherPos.z + otherSize.z))   
+			)
+			{
+				return other->getID();
 			}
 		}
 	}
@@ -447,9 +476,7 @@ Direction FabiEngine3D::collision_checkCameraWithEntitiesDirection(const string&
 		if (entity->getID().size() >= ID.size()) // Check if entity ID is at least the size of group ID
 		{
 			auto subString = entity->getID().substr(0, ID.size());
-
-			// If entity matches ID
-			if (subString == ID)
+			if (subString == ID) // If entity matches ID
 			{
 				auto direction = entity->getCollisionDirection(); // Calculate direction
 

@@ -55,49 +55,51 @@ void LeftViewportController::update()
 	{
 		if (screen->getButton("environmentEditor")->isHovered()) // Environment editor button
 		{
-			_settingsEditor.load();
 			_environmentEditor.load();
 			window->setActiveScreen("environmentEditorMenu");
+			_lastActiveEditorScreen = "environmentEditorMenu";
 		}
 		else if (screen->getButton("modelEditor")->isHovered()) // Model editor button
 		{
-			_settingsEditor.load();
 			_modelEditor.load();
 			window->setActiveScreen("modelEditorMenuMain");
+			_lastActiveEditorScreen = "modelEditorMenuMain";
 		}
 		else if (screen->getButton("animationEditor")->isHovered()) // Animation editor button
 		{
-			_settingsEditor.load();
 			_animationEditor.load();
 			window->setActiveScreen("animationEditorMenuMain");
+			_lastActiveEditorScreen = "animationEditorMenuMain";
 		}
 		else if (screen->getButton("billboardEditor")->isHovered()) // Billboard editor button
 		{
-			_settingsEditor.load();
 			_billboardEditor.load();
 			window->setActiveScreen("billboardEditorMenuMain");
+			_lastActiveEditorScreen = "billboardEditorMenuMain";
 		}
 		else if (screen->getButton("audioEditor")->isHovered()) // Audio editor button
 		{
-			_settingsEditor.load();
 			_audioEditor.load();
 			window->setActiveScreen("audioEditorMenuMain");
+			_lastActiveEditorScreen = "audioEditorMenuMain";
 		}
 		else if (screen->getButton("sceneEditor")->isHovered()) // Scene editor button
 		{
-			_settingsEditor.load();
 			_sceneEditor.load();
 			window->setActiveScreen("sceneEditorMenuMain");
+			_lastActiveEditorScreen = "sceneEditorMenuMain";
 		}
 		else if (screen->getButton("scriptEditor")->isHovered()) // Script editor button
 		{
 			_fe3d.gfx_setMsaaQuality(16); // Maximum MSAA for text quality
 			_scriptEditor.load();
 			window->setActiveScreen("scriptEditorMenuMain");
+			_lastActiveEditorScreen = "scriptEditorMenuMain";
 		}
 		else if (screen->getButton("settingsEditor")->isHovered()) // Settings editor button
 		{
 			window->setActiveScreen("settingsEditorMenuMain");
+			_lastActiveEditorScreen = "settingsEditorMenuMain";
 		}
 	}
 
@@ -110,6 +112,14 @@ void LeftViewportController::update()
 	_sceneEditor.update();
 	_scriptEditor.update();
 	_settingsEditor.update();
+
+	// Check if user got out of script editor
+	if (_lastActiveEditorScreen == "scriptEditorMenuMain" && window->getActiveScreen()->getID() != "scriptEditorMenuMain")
+	{
+		// Reload settings (MSAA in particular)
+		_settingsEditor.load();
+		_lastActiveEditorScreen = "";
+	}
 }
 
 EnvironmentEditor& LeftViewportController::getEnvironmentEditor()

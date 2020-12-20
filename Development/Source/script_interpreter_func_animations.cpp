@@ -4,7 +4,7 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 {
 	if (functionName == "fe3d:model_start_animation") // Start gameEntity animation
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::STRING, ScriptValueType::INTEGER };
+		auto types = { ScriptValueType::STRING, ScriptValueType::STRING, ScriptValueType::INTEGER }; // AnimationID + gameEntityID + loops
 
 		// Validate arguments
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
@@ -15,7 +15,7 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 	}
 	else if (functionName == "fe3d:model_set_animation_speed") // Set gameEntity animation speed multiplier
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::STRING, ScriptValueType::DECIMAL };
+		auto types = { ScriptValueType::STRING, ScriptValueType::STRING, ScriptValueType::DECIMAL }; // AnimationID + gameEntityID + speed
 
 		// Validate arguments
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
@@ -26,7 +26,7 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 	}
 	else if (functionName == "fe3d:model_is_animation_playing") // Check if gameEntity animation is playing
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
+		auto types = { ScriptValueType::STRING, ScriptValueType::STRING }; // AnimationID + gameEntityID
 
 		// Validate arguments
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
@@ -37,7 +37,7 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 	}
 	else if (functionName == "fe3d:model_is_animation_paused") // Check if gameEntity animation is paused
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
+		auto types = { ScriptValueType::STRING, ScriptValueType::STRING }; // AnimationID + gameEntityID
 
 		// Validate arguments
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
@@ -48,7 +48,7 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 	}
 	else if (functionName == "fe3d:model_pause_animation") // Pause gameEntity animation
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
+		auto types = { ScriptValueType::STRING, ScriptValueType::STRING }; // AnimationID + gameEntityID
 
 		// Validate arguments
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
@@ -59,7 +59,7 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 	}
 	else if (functionName == "fe3d:model_resume_animation") // Resume gameEntity animation
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
+		auto types = { ScriptValueType::STRING, ScriptValueType::STRING }; // AnimationID + gameEntityID
 
 		// Validate arguments
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
@@ -70,7 +70,7 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 	}
 	else if (functionName == "fe3d:model_fade_animation") // Fade gameEntity animation
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::STRING, ScriptValueType::INTEGER };
+		auto types = { ScriptValueType::STRING, ScriptValueType::STRING, ScriptValueType::INTEGER }; // AnimationID + gameEntityID + framestep
 
 		// Validate arguments
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
@@ -81,7 +81,7 @@ bool ScriptInterpreter::_executeFe3dAnimationFunction(const string& functionName
 	}
 	else if (functionName == "fe3d:model_stop_animation") // Stop gameEntity animation
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
+		auto types = { ScriptValueType::STRING, ScriptValueType::STRING }; // AnimationID + gameEntityID
 
 		// Validate arguments
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))

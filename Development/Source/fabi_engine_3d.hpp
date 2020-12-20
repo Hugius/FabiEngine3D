@@ -413,22 +413,24 @@ public:
 	AabbParentType aabbEntity_getParentType(const string& ID);
 
 	// Global collision interface - setters
-	void collision_enableCameraResponse(float bottom, float top, float left, float right, float front, float back);
+	void collision_setCameraBoxSize(float bottom, float top, float left, float right, float front, float back);
+	void collision_enableCameraResponse(bool x, bool y, bool z);
 	void collision_disableCameraResponse();
 	void collision_enableCameraTerrainResponse(float cameraHeight, float cameraSpeed);
 	void collision_disableCameraTerrainResponse();
 
 	// Global collision interface - getters
-	string       collision_checkCursorInAny();
+	const string collision_checkCursorInAny();
 	bool		 collision_checkCursorInEntity(const string& ID);
-	string       collision_checkCursorInEntities(const string& ID, const string& exception = "");
-	bool		 collision_checkAnyWithCamera();
-	bool		 collision_checkTerrainWithCamera();
-	bool		 collision_checkEntityWithCamera(const string& ID);
-	const string collision_checkEntitiesWithCamera(const string& ID);
+	const string collision_checkCursorInEntities(const string& ID, const string& exception = "");
+	bool		 collision_checkCameraWithTerrain();
+	bool		 collision_checkCameraWithEntity(const string& ID);
+	const string collision_checkCameraWithAny();
+	const string collision_checkCameraWithEntities(const string& ID);
+	Direction	 collision_checkCameraWithEntityDirection(const string& ID);
+	Direction	 collision_checkCameraWithAnyDirection();
+	Direction	 collision_checkCameraWithEntitiesDirection(const string& ID);
 	const string collision_checkEntityWithOthers(const string& ID);
-	Direction	 collision_checkEntityWithCameraDirection(const string& ID);
-	Direction	 collision_checkEntitiesWithCameraDirection(const string& ID);
 
 	// Light entity interface - setters
 	void lightEntity_add(const string& ID, Vec3 position = Vec3(0.0f), Vec3 color = Vec3(1.0f), float intensity = 1.0f, float distanceFactor = 1.0f, bool visible = true);

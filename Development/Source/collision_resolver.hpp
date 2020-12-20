@@ -12,7 +12,8 @@ public:
 	virtual ~CollisionResolver() = default;
 	
 	void update(const unordered_map<string, shared_ptr<AabbEntity>>& boxes, TerrainEntityManager& terrainManager, CameraManager & camera);
-	void enableAabbResponse(float bottom, float top, float left, float right, float front, float back);
+	void setCameraBoxSize(float bottom, float top, float left, float right, float front, float back);
+	void enableAabbResponse(bool x, bool y, bool z);
 	void disableAabbResponse();
 	void enableTerrainResponse(float cameraHeight, float cameraSpeed);
 	void disableTerrainResponse();
@@ -31,7 +32,9 @@ private:
 	float _cameraTerrainHeight = 0.0f;
 	float _cameraTerrainSpeed = 0.0f;
 
-	bool _aabbResponseEnabled    = false;
+	bool _aabbResponseEnabledX   = false;
+	bool _aabbResponseEnabledY   = false;
+	bool _aabbResponseEnabledZ   = false;
 	bool _terrainResponseEnabled = false;
 	bool _isCameraUnderTerrain	 = false;
 };

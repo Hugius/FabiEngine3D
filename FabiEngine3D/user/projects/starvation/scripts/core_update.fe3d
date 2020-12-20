@@ -1,9 +1,5 @@
-0 23
+3 18
 META script_type_update
 META execution_entry
 
-EXEC player_walk
-EXEC player_jump
-EXEC player_bobbing
-EXEC player_animations
-EXEC player_intro
+EXEC player_update

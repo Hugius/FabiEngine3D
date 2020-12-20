@@ -1,4 +1,4 @@
-27 0
+24 60
 META script_type_init
 
 /// Global variables
@@ -22,7 +22,8 @@ fe3d:camera_set_position(0.0, 9.0, 140.0)
 fe3d:camera_set_yaw(-25.0)
 fe3d:camera_set_pitch(0.0)
 fe3d:camera_enable_first_person_view()
-fe3d:collision_enable_camera_aabb_response(_camHeight, 0.0, 0.0, 0.0, 0.0, 0.0)
+fe3d:collision_set_camera_box(_camHeight, 0.0, 0.5, 0.5, 0.5, 0.5)
+fe3d:collision_enable_camera_aabb_response(<true>, <false>, <true>)
 fe3d:collision_enable_camera_terrain_response(_camHeight, 0.05)
 fe3d:model_place("player", "skeleton", 0.0, 0.0, 0.0)
 fe3d:model_set_max_height("player", 2.5)

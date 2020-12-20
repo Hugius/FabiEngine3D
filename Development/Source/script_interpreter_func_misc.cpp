@@ -148,3 +148,16 @@ bool ScriptInterpreter::_validateFe3dGameEntity(const string& ID, bool previewEn
 
 	return true;
 }
+
+bool ScriptInterpreter::_validateFe3dAabbEntity(const string& ID)
+{
+	// Check if entity exists
+	if (!_fe3d.aabbEntity_isExisting(ID))
+	{
+		_throwScriptError("Requested AABB with ID \"" + ID + "\" does not exist!");
+
+		return false;
+	}
+
+	return true;
+}

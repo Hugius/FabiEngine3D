@@ -1,0 +1,8 @@
+5 22
+META script_type_update
+
+EXEC player_walk
+EXEC player_jump
+EXEC player_bobbing
+EXEC player_animations
+EXEC player_intro

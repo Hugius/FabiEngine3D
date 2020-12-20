@@ -76,6 +76,7 @@ private:
 	bool _executeFe3dAnimationFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	bool _executeFe3dMiscFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	bool _validateFe3dGameEntity(const string& ID, bool previewEntity = false);
+	bool _validateFe3dAabbEntity(const string& ID);
 
 	// Miscellaneous functions
 	ScriptConditionStatement* _getLastConditionStatement(vector<ScriptConditionStatement>& statements, unsigned int scopeDepth);

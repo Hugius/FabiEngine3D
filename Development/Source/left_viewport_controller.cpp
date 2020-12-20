@@ -55,36 +55,43 @@ void LeftViewportController::update()
 	{
 		if (screen->getButton("environmentEditor")->isHovered()) // Environment editor button
 		{
+			_settingsEditor.load();
 			_environmentEditor.load();
 			window->setActiveScreen("environmentEditorMenu");
 		}
 		else if (screen->getButton("modelEditor")->isHovered()) // Model editor button
 		{
+			_settingsEditor.load();
 			_modelEditor.load();
 			window->setActiveScreen("modelEditorMenuMain");
 		}
 		else if (screen->getButton("animationEditor")->isHovered()) // Animation editor button
 		{
+			_settingsEditor.load();
 			_animationEditor.load();
 			window->setActiveScreen("animationEditorMenuMain");
 		}
 		else if (screen->getButton("billboardEditor")->isHovered()) // Billboard editor button
 		{
+			_settingsEditor.load();
 			_billboardEditor.load();
 			window->setActiveScreen("billboardEditorMenuMain");
 		}
 		else if (screen->getButton("audioEditor")->isHovered()) // Audio editor button
 		{
+			_settingsEditor.load();
 			_audioEditor.load();
 			window->setActiveScreen("audioEditorMenuMain");
 		}
 		else if (screen->getButton("sceneEditor")->isHovered()) // Scene editor button
 		{
+			_settingsEditor.load();
 			_sceneEditor.load();
 			window->setActiveScreen("sceneEditorMenuMain");
 		}
 		else if (screen->getButton("scriptEditor")->isHovered()) // Script editor button
 		{
+			_fe3d.gfx_setMsaaQuality(16); // Maximum MSAA for text quality
 			_scriptEditor.load();
 			window->setActiveScreen("scriptEditorMenuMain");
 		}

@@ -13,7 +13,7 @@ void CollisionResolver::update(
 	CameraManager& camera)
 {
 	// Check if AABB collision is needed in the first place
-	if (_aabbResponseEnabled)
+	if (_aabbResponseEnabledX || _aabbResponseEnabledY || _aabbResponseEnabledZ)
 	{
 		// Temporary values
 		static Vec3 oldCameraPos;
@@ -38,15 +38,19 @@ void CollisionResolver::update(
 
 		// Respond to collision
 		Vec3 newCameraPos = currentCameraPos;
-		if (collision.xCollided())
+		if (collision.xCollided() && _aabbResponseEnabledX)
 		{
 			newCameraPos.x = oldCameraPos.x;
 		}
-		if (collision.yCollided() && !_isCameraUnderTerrain) // If camera is under terrain, response cannot be blocked
+		if (collision.yCollided() && _aabbResponseEnabledY)
 		{
-			newCameraPos.y = oldCameraPos.y;
+			// If camera is under terrain, response cannot be blocked
+			if (!_isCameraUnderTerrain)
+			{
+				newCameraPos.y = oldCameraPos.y;
+			}
 		}
-		if (collision.zCollided())
+		if (collision.zCollided() && _aabbResponseEnabledZ)
 		{
 			newCameraPos.z = oldCameraPos.z;
 		}
@@ -90,9 +94,8 @@ void CollisionResolver::update(
 	}
 }
 
-void CollisionResolver::enableAabbResponse(float bottom, float top, float left, float right, float front, float back)
+void CollisionResolver::setCameraBoxSize(float bottom, float top, float left, float right, float front, float back)
 {
-	_aabbResponseEnabled = true;
 	_cameraAabbBottom = bottom * 0.99f;
 	_cameraAabbTop = top * 0.99f;
 	_cameraAabbLeft = left * 0.99f;
@@ -101,9 +104,18 @@ void CollisionResolver::enableAabbResponse(float bottom, float top, float left, 
 	_cameraAabbBack = back * 0.99f;
 }
 
+void CollisionResolver::enableAabbResponse(bool x, bool y, bool z)
+{
+	_aabbResponseEnabledX = x;
+	_aabbResponseEnabledY = y;
+	_aabbResponseEnabledZ = z;
+}
+
 void CollisionResolver::disableAabbResponse()
 {
-	_aabbResponseEnabled = false;
+	_aabbResponseEnabledX = false;
+	_aabbResponseEnabledY = false;
+	_aabbResponseEnabledZ = false;
 }
 
 void CollisionResolver::enableTerrainResponse(float cameraHeight, float cameraSpeed)

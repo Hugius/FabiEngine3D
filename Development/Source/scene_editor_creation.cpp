@@ -419,7 +419,7 @@ void SceneEditor::_placeModel(bool scriptExecution, const string& modelName, con
 	}
 }
 
-void SceneEditor::_placeBillboard(const string& newID, const string& previewID, Vec3 position)
+void SceneEditor::placeBillboard(const string& newID, const string& previewID, Vec3 position)
 {
 	// Temporary values
 	auto color = _fe3d.billboardEntity_getColor(previewID);
@@ -428,7 +428,7 @@ void SceneEditor::_placeBillboard(const string& newID, const string& previewID, 
 
 	// Add BILLBOARD entity
 	Vec2 size = _fe3d.billboardEntity_getSize(previewID);
-	_fe3d.billBoardEntity_add(newID, color, position, Vec3(0.0f), size, isFacingX, isFacingY);
+	_fe3d.billboardEntity_add(newID, color, position, Vec3(0.0f), size, isFacingX, isFacingY);
 
 	// Determine BILLBOARD entity type
 	if (_fe3d.billboardEntity_getDiffuseMapPath(previewID) != "") // Textured billboard
@@ -437,8 +437,8 @@ void SceneEditor::_placeBillboard(const string& newID, const string& previewID, 
 	}
 	else if (_fe3d.billboardEntity_getFontPath(previewID) != "") // Text billboard
 	{
-		_fe3d.billBoardEntity_setFont(newID, _fe3d.billboardEntity_getFontPath(previewID));
-		_fe3d.billBoardEntity_setTextContent(newID, _fe3d.billboardEntity_getTextContent(previewID));
+		_fe3d.billboardEntity_setFont(newID, _fe3d.billboardEntity_getFontPath(previewID));
+		_fe3d.billboardEntity_setTextContent(newID, _fe3d.billboardEntity_getTextContent(previewID));
 	}
 
 	// Animation
@@ -447,7 +447,7 @@ void SceneEditor::_placeBillboard(const string& newID, const string& previewID, 
 		_fe3d.billboardEntity_setAnimationRows(newID, _fe3d.billboardEntity_getAnimationRows(previewID));
 		_fe3d.billboardEntity_setAnimationColumns(newID, _fe3d.billboardEntity_getAnimationColumns(previewID));
 		_fe3d.billboardEntity_setAnimationFramestep(newID, _fe3d.billboardEntity_getAnimationFramestep(previewID));
-		_fe3d.billBoardEntity_playSpriteAnimation(newID, -1);
+		_fe3d.billboardEntity_playSpriteAnimation(newID, -1);
 	}
 
 	// Bind AABB entity to BILLBOARD entity
@@ -463,7 +463,7 @@ void SceneEditor::_placeBillboard(const string& newID, const string& diffusePath
 {
 	if (diffusePath != "") // Textured billboard
 	{
-		_fe3d.billBoardEntity_add(newID, diffusePath, position, rotation, size, isTransparent, facingX, facingY, true);
+		_fe3d.billboardEntity_add(newID, diffusePath, position, rotation, size, isTransparent, facingX, facingY, true);
 		_fe3d.billboardEntity_setColor(newID, color);
 
 		// Animation
@@ -472,16 +472,16 @@ void SceneEditor::_placeBillboard(const string& newID, const string& diffusePath
 			_fe3d.billboardEntity_setAnimationFramestep(newID, animationFramestep);
 			_fe3d.billboardEntity_setAnimationRows(newID, animationRows);
 			_fe3d.billboardEntity_setAnimationColumns(newID, animationColumns);
-			_fe3d.billBoardEntity_playSpriteAnimation(newID, -1);
+			_fe3d.billboardEntity_playSpriteAnimation(newID, -1);
 		}
 	}
 	else if (fontPath != "") // Text billboard
 	{
-		_fe3d.billBoardEntity_add(newID, textContent, fontPath, color, position, rotation, size, facingX, facingY);
+		_fe3d.billboardEntity_add(newID, textContent, fontPath, color, position, rotation, size, facingX, facingY);
 	}
 	else // Colored billboard
 	{
-		_fe3d.billBoardEntity_add(newID, color, position, rotation, size, facingX, facingY);
+		_fe3d.billboardEntity_add(newID, color, position, rotation, size, facingX, facingY);
 	}
 	
 	// Bind AABB entity to BILLBOARD entity

@@ -1,4 +1,4 @@
-4 35
+3 40
 META script_type_update
 
 BOOL lmb = fe3d:input_is_mouse_pressed("BUTTON_LEFT")

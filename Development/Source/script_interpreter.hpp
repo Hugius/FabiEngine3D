@@ -8,11 +8,13 @@
 #include "model_editor.hpp"
 #include "scene_editor.hpp"
 #include "animation_editor.hpp"
+#include "billboard_editor.hpp"
 
 class ScriptInterpreter
 {
 public:
-	ScriptInterpreter(FabiEngine3D& fe3d, Script& script, SceneEditor& sceneEditor, ModelEditor& modelEditor, AnimationEditor& animationEditor);
+	ScriptInterpreter(FabiEngine3D& fe3d, Script& script, SceneEditor& sceneEditor, ModelEditor& modelEditor, 
+		AnimationEditor& animationEditor, BillboardEditor& billboardEditor);
 
 	void load();
 	void executeInitialization();
@@ -75,9 +77,12 @@ private:
 	bool _executeFe3dBillboardEntityFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	bool _executeFe3dAabbEntityFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	bool _executeFe3dAnimationFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
+	bool _executeFe3dLightingFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	bool _executeFe3dMiscFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	bool _validateFe3dGameEntity(const string& ID, bool previewEntity = false);
+	bool _validateFe3dBillboardEntity(const string& ID, bool previewEntity = false);
 	bool _validateFe3dAabbEntity(const string& ID);
+	bool _validateFe3dLightEntity(const string& ID);
 
 	// Miscellaneous functions
 	ScriptConditionStatement* _getLastConditionStatement(vector<ScriptConditionStatement>& statements, unsigned int scopeDepth);
@@ -94,6 +99,7 @@ private:
 	SceneEditor& _sceneEditor;
 	ModelEditor& _modelEditor;
 	AnimationEditor& _animationEditor;
+	BillboardEditor& _billboardEditor;
 
 	// Stacks
 	vector<vector<ScriptVariable>> _localVariablesStack;

@@ -1,10 +1,10 @@
 #include "script_executor.hpp"
 
 ScriptExecutor::ScriptExecutor(FabiEngine3D& fe3d, Script& script, SceneEditor& sceneEditor,
-	ModelEditor& modelEditor, AnimationEditor& animationEditor) :
+	ModelEditor& modelEditor, AnimationEditor& animationEditor, BillboardEditor& billboardEditor) :
 	_fe3d(fe3d),
 	_script(script),
-	_scriptInterpreter(fe3d, script, sceneEditor, modelEditor, animationEditor)
+	_scriptInterpreter(fe3d, script, sceneEditor, modelEditor, animationEditor, billboardEditor)
 {
 
 }

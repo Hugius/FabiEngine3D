@@ -116,7 +116,7 @@ bool ScriptInterpreter::_executeFe3dAabbEntityFunction(const string& functionNam
 			}
 		}
 	}
-	else if (functionName == "fe3d:model_get_size") // Get gameEntity size
+	else if (functionName == "fe3d:model_get_size") // Get aabbEntity size
 	{
 		auto types = { ScriptValueType::STRING };
 

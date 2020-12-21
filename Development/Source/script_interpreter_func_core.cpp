@@ -42,6 +42,7 @@ vector<ScriptValue> ScriptInterpreter::_processEngineFunctionCall(const string& 
 				executed = executed || _executeFe3dAabbEntityFunction(functionName, arguments, returnValues);
 				executed = executed || _executeFe3dAnimationFunction(functionName, arguments, returnValues);
 				executed = executed || _executeFe3dPhysicsFunction(functionName, arguments, returnValues);
+				executed = executed || _executeFe3dLightingFunction(functionName, arguments, returnValues);
 				executed = executed || _executeFe3dMiscFunction(functionName, arguments, returnValues);
 				
 				// Check if function call exists

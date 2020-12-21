@@ -31,8 +31,45 @@ bool ScriptInterpreter::_executeFe3dPhysicsFunction(const string& functionName, 
 		{
 			auto result = _fe3d.collision_checkCursorInAny();
 
-			// Check if AABB entity has a parent GAME entity
+			// Check if AABB entity has a parent gameEntity
 			if (!result.empty() && _fe3d.aabbEntity_getParentType(result) == AabbParentType::GAME_ENTITY)
+			{
+				result = _fe3d.aabbEntity_getParentID(result);
+			}
+
+			// Return
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result));
+		}
+	}
+	else if (functionName == "fe3d:raycast_into_billboard") // Raycasting into multiple billboardEntities
+	{
+		auto types = { ScriptValueType::STRING }; // BillboardEntityID
+
+		// Validate arguments
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		{
+			// Find aabbEntity ID
+			auto result = _fe3d.collision_checkCursorInEntities(arguments[0].getString());
+
+			// Retrieve bound billboardEntity ID
+			if (!result.empty() && (_fe3d.aabbEntity_getParentType(result) == AabbParentType::BILLBOARD_ENTITY))
+			{
+				result = _fe3d.aabbEntity_getParentID(result);
+			}
+
+			// Return
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result));
+		}
+	}
+	else if (functionName == "fe3d:raycast_into_billboards") // Raycasting into all billboardEntities
+	{
+		// Validate arguments
+		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			auto result = _fe3d.collision_checkCursorInAny();
+
+			// Check if AABB entity has a parent billboardEntity
+			if (!result.empty() && _fe3d.aabbEntity_getParentType(result) == AabbParentType::BILLBOARD_ENTITY)
 			{
 				result = _fe3d.aabbEntity_getParentID(result);
 			}

@@ -162,7 +162,7 @@ void BillboardEditor::_updateBillboardEditing()
 					}
 					else if (screen->getButton("animate")->isHovered())
 					{
-						_fe3d.billBoardEntity_playSpriteAnimation(_currentBillboardID, -1);
+						_fe3d.billboardEntity_playSpriteAnimation(_currentBillboardID, -1);
 					}
 					else if (screen->getButton("rows")->isHovered())
 					{
@@ -189,7 +189,7 @@ void BillboardEditor::_updateBillboardEditing()
 				{
 					if (playing) // Only if animation is already playing
 					{
-						_fe3d.billBoardEntity_playSpriteAnimation(_currentBillboardID, -1);
+						_fe3d.billboardEntity_playSpriteAnimation(_currentBillboardID, -1);
 					}
 				}
 
@@ -224,7 +224,7 @@ void BillboardEditor::_updateBillboardEditing()
 								_fe3d.misc_clearFontCache(newFilePath);
 								_fe3d.misc_clearTextCache(_fe3d.billboardEntity_getTextContent(_currentBillboardID), 
 									_fe3d.billboardEntity_getFontPath(_currentBillboardID));
-								_fe3d.billBoardEntity_setFont(_currentBillboardID, newFilePath);
+								_fe3d.billboardEntity_setFont(_currentBillboardID, newFilePath);
 							}
 							else
 							{
@@ -264,7 +264,7 @@ void BillboardEditor::_updateBillboardEditing()
 				{
 					_fe3d.misc_clearFontCache(_fe3d.billboardEntity_getFontPath(_currentBillboardID));
 					_fe3d.misc_clearTextCache(textContent, _fe3d.billboardEntity_getFontPath(_currentBillboardID));
-					_fe3d.billBoardEntity_setTextContent(_currentBillboardID, textContent);
+					_fe3d.billboardEntity_setTextContent(_currentBillboardID, textContent);
 				}
 			}
 		}

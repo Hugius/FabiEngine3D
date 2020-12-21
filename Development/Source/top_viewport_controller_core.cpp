@@ -124,6 +124,9 @@ void TopViewportController::_updateProjectScreenManagement()
 		{
 			_fe3d.engine_stop();
 		}
+
+		// Buttons hoverability
+		screen->getButton("saveProject")->setHoverable(_currentProjectName != "");
 	}
 }
 
@@ -194,11 +197,11 @@ void TopViewportController::_updateGameScreenManagement()
 		{
 			projectScreen->getButton("newProject")->setHoverable(true);
 			projectScreen->getButton("loadProject")->setHoverable(true);
-			projectScreen->getButton("saveProject")->setHoverable(_currentProjectName != "");
+			projectScreen->getButton("saveProject")->setHoverable(true);
 			projectScreen->getButton("deleteProject")->setHoverable(true);
 			miscScreen->getButton("uncache")->setHoverable(true);
 		}
-
+		std::cout << "wtf";
 		// Check if user wants to pause the running game
 		if (SCRIPT_EXECUTOR.isRunning())
 		{

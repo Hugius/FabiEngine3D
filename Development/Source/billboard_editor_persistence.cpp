@@ -70,7 +70,7 @@ void BillboardEditor::loadBillboardEntitiesFromFile()
 			// Determine billboard type
 			if (diffusePath != "") // Textured billboard
 			{
-				_fe3d.billBoardEntity_add(billboardID, diffusePath, _billboardPosition, Vec3(0.0f), size, transparent, facingX, facingY, false, false);
+				_fe3d.billboardEntity_add(billboardID, diffusePath, _billboardPosition, Vec3(0.0f), size, transparent, facingX, facingY, false, false);
 				_fe3d.billboardEntity_setColor(billboardID, color);
 
 				// Playing sprite animation
@@ -79,16 +79,16 @@ void BillboardEditor::loadBillboardEntitiesFromFile()
 					_fe3d.billboardEntity_setAnimationFramestep(billboardID, framestep);
 					_fe3d.billboardEntity_setAnimationRows(billboardID, rows);
 					_fe3d.billboardEntity_setAnimationColumns(billboardID, columns);
-					_fe3d.billBoardEntity_playSpriteAnimation(billboardID, -1);
+					_fe3d.billboardEntity_playSpriteAnimation(billboardID, -1);
 				}
 			}
 			else if (fontPath != "") // Text billboard
 			{
-				_fe3d.billBoardEntity_add(billboardID, textContent, fontPath, color, _billboardPosition, Vec3(0.0f), size, facingX, facingY, false);
+				_fe3d.billboardEntity_add(billboardID, textContent, fontPath, color, _billboardPosition, Vec3(0.0f), size, facingX, facingY, false);
 			}
 			else // Colored billboard
 			{
-				_fe3d.billBoardEntity_add(billboardID, color, _billboardPosition, Vec3(0.0f), size, facingX, facingY, false);
+				_fe3d.billboardEntity_add(billboardID, color, _billboardPosition, Vec3(0.0f), size, facingX, facingY, false);
 			}
 		}
 

@@ -361,6 +361,7 @@
     <ClCompile Include="Source\script_interpreter_func_entity_sky.cpp" />
     <ClCompile Include="Source\script_interpreter_func_entity_terrain.cpp" />
     <ClCompile Include="Source\script_interpreter_func_entity_water.cpp" />
+    <ClCompile Include="Source\script_interpreter_func_lighting.cpp" />
     <ClCompile Include="Source\script_interpreter_list_core.cpp" />
     <ClCompile Include="Source\script_interpreter_core.cpp" />
     <ClCompile Include="Source\script_interpreter_execution.cpp" />

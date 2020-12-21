@@ -98,7 +98,7 @@ void BillboardEditor::_updateBillboardCreation()
 							_billboardIDs.push_back(newBillboardName);
 
 							// Miscellaneous
-							_fe3d.billBoardEntity_add(newBillboardName, Vec3(1.0f), _billboardPosition, Vec3(0.0f), Vec2(1.0f), false, false);
+							_fe3d.billboardEntity_add(newBillboardName, Vec3(1.0f), _billboardPosition, Vec3(0.0f), Vec2(1.0f), false, false);
 							_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID(), "Billboard: " +
 								_currentBillboardID.substr(1), 0.025f);
 							_fe3d.textEntity_show(_gui.getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID());

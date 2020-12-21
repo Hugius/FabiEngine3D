@@ -68,7 +68,7 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 				return true;
 			}
 
-			// Check if GAME entity already exists
+			// Check if game entity already exists
 			if (_fe3d.gameEntity_isExisting(arguments[0].getString()))
 			{
 				_throwScriptError("Model with ID \"" + arguments[0].getString() + "\" already exists!");

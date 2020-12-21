@@ -304,7 +304,7 @@ public:
 	vector<string> gameEntity_getGroupIDs(const string& ID);
 
 	// Billboard entity interface (core) - setters
-	void billBoardEntity_add
+	void billboardEntity_add
 	(
 		const string& ID, Vec3 color,
 		Vec3 T, Vec3 R, Vec2 S, bool facingCameraX, bool facingCameraY, bool visible = true
@@ -347,7 +347,7 @@ public:
 	vector<Vec3>   billboardEntity_getInstancedOffsets(const string& ID);
 
 	// Billboard entity interface (diffuseMap) - setters
-	void billBoardEntity_add
+	void billboardEntity_add
 	(
 		const string& ID, const string& diffuseMapPath,
 		Vec3 T, Vec3 R, Vec2 S,
@@ -361,21 +361,21 @@ public:
 	bool billboardEntity_isTransparent(const string& ID);
 
 	// Billboard entity interface (text) - setters
-	void billBoardEntity_add
+	void billboardEntity_add
 	(
 		const string& ID, const string& text,
 		const string& fontPath, Vec3 color,
 		Vec3 T, Vec3 R, Vec2 S, bool facingCameraX, bool facingCameraY, bool visible = true
 	);
-	void billBoardEntity_setFont(const string& ID, const string& fontPath);
-	void billBoardEntity_setTextContent(const string& ID, const string& textContent);
+	void billboardEntity_setFont(const string& ID, const string& fontPath);
+	void billboardEntity_setTextContent(const string& ID, const string& textContent);
 
 	// Billboard entity interface (text) - getters
 	const string& billboardEntity_getFontPath(const string& ID);
 	const string& billboardEntity_getTextContent(const string& ID);
 	
 	// Billboard entity interface (animation) - setters
-	void billBoardEntity_playSpriteAnimation(const string& ID, int maxAnimationRepeats);
+	void billboardEntity_playSpriteAnimation(const string& ID, int maxAnimationRepeats);
 	void billboardEntity_stopSpriteAnimation(const string& ID);
 	void billboardEntity_setAnimationRows(const string& ID, int rows);
 	void billboardEntity_setAnimationColumns(const string& ID, int columns);

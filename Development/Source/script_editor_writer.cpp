@@ -464,7 +464,7 @@ void ScriptEditor::_updateTextWriter()
 		// If cursor billboard not existing, create new one
 		if (!_fe3d.billboardEntity_isExisting("cursor"))
 		{
-			_fe3d.billBoardEntity_add("cursor", "", _fontPath, Vec3(1.0f), Vec3(0.0f), Vec3(0.0f), _textCharacterSize, 0, 0);
+			_fe3d.billboardEntity_add("cursor", "", _fontPath, Vec3(1.0f), Vec3(0.0f), Vec3(0.0f), _textCharacterSize, 0, 0);
 		}
 
 		// Update cursor billboard text & position
@@ -481,7 +481,7 @@ void ScriptEditor::_updateTextWriter()
 		position += Vec3(_textCharacterSize.x / 2.0f, 0.0f, 0.0f);
 		_fe3d.billboardEntity_setPosition("cursor", position);
 		bool showBar = ((barEnabled && _firstSelectedLineIndex == -1) || _activeActionKey != InputType::NONE);
-		_fe3d.billBoardEntity_setTextContent("cursor", (showBar ? "|" : " "));
+		_fe3d.billboardEntity_setTextContent("cursor", (showBar ? "|" : " "));
 
 		// Set new cursor indices
 		_script.getScriptFile(_currentScriptFileID)->setCursorLineIndex(cursorLineIndex);

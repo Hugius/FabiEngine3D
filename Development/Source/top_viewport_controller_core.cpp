@@ -7,7 +7,8 @@
 
 TopViewportController::TopViewportController(FabiEngine3D& fe3d, EngineGuiManager& gui,
 	EnvironmentEditor& environmentEditor, ModelEditor& modelEditor, BillboardEditor& billboardEditor,
-	SceneEditor& sceneEditor, AnimationEditor& animationEditor, ScriptEditor& scriptEditor, AudioEditor& audioEditor) :
+	SceneEditor& sceneEditor, AnimationEditor& animationEditor, ScriptEditor& scriptEditor, 
+	AudioEditor& audioEditor, SettingsEditor& settingsEditor) :
 	ViewportController(fe3d, gui),
 	_modelEditor(modelEditor),
 	_environmentEditor(environmentEditor),
@@ -15,7 +16,8 @@ TopViewportController::TopViewportController(FabiEngine3D& fe3d, EngineGuiManage
 	_sceneEditor(sceneEditor),
 	_animationEditor(animationEditor),
 	_scriptEditor(scriptEditor),
-	_audioEditor(audioEditor)
+	_audioEditor(audioEditor),
+	_settingsEditor(settingsEditor)
 {
 
 }
@@ -266,7 +268,7 @@ void TopViewportController::_saveCurrentProject()
 	_fe3d.logger_throwInfo("Project \"" + _currentProjectName + "\" saved!");
 }
 
-void TopViewportController::_updateCurrentProject()
+void TopViewportController::_updateProjectChange()
 {
 	// Change window title
 	if (_currentProjectName == "")
@@ -311,11 +313,8 @@ void TopViewportController::_updateCurrentProject()
 		_animationEditor.unload();
 	}
 
-	// Unload script editor
-	if (_scriptEditor.isLoaded())
-	{
-		_scriptEditor.unload();
-	}
+	// Unload script editor (loaded by default)
+	_scriptEditor.unload();
 
 	// Unload audio editor
 	if (_audioEditor.isLoaded())
@@ -331,4 +330,5 @@ void TopViewportController::_updateCurrentProject()
 	_animationEditor.setCurrentProjectName(_currentProjectName);
 	_scriptEditor.setCurrentProjectName(_currentProjectName);
 	_audioEditor.setCurrentProjectName(_currentProjectName);
+	_settingsEditor.setCurrentProjectName(_currentProjectName);
 }

@@ -11,12 +11,16 @@ public:
 
 	void initializeGUI();
 	void load();
-	void save();
+	void unload();
 	void update();
+	void setCurrentProjectName(const string& projectName);
+	void save(bool newFile);
 
 private:
 	FabiEngine3D& _fe3d;
 	EngineGuiManager& _gui;
 
 	bool _isEditorLoaded = false;
+
+	string _currentProjectName = "";
 };

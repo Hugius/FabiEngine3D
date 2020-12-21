@@ -29,9 +29,7 @@ void TopViewportController::_updateMiscellaneous()
 	_gui.getViewport("left")->getWindow("main")->getScreen("main")->getButton("animationEditor")->setHoverable(hoverable);
 	_gui.getViewport("left")->getWindow("main")->getScreen("main")->getButton("audioEditor")->setHoverable(hoverable);
 	_gui.getViewport("left")->getWindow("main")->getScreen("main")->getButton("scriptEditor")->setHoverable(hoverable);
-
-	// Settings menu can be loaded without project
-	_gui.getViewport("left")->getWindow("main")->getScreen("main")->getButton("settingsEditor")->setHoverable(hoverable || (_currentProjectName == ""));
+	_gui.getViewport("left")->getWindow("main")->getScreen("main")->getButton("settingsEditor")->setHoverable(hoverable);
 }
 
 void TopViewportController::_updateProjectCreation()
@@ -50,11 +48,15 @@ void TopViewportController::_updateProjectCreation()
 			// Check if project already exists
 			if (_fe3d.misc_isFileExisting(newDirectoryPath) && _fe3d.misc_isDirectory(newDirectoryPath))
 			{
-				Logger::throwWarning("Project \"" + newProjectName + "\"" + " already exists!");
+				_fe3d.logger_throwWarning("Project \"" + newProjectName + "\"" + " already exists!");
 			}
 			else if (newProjectName.find_first_not_of(" ") == string::npos)
 			{
-				Logger::throwWarning("New project name cannot contain any spaces!");
+				_fe3d.logger_throwWarning("New project name cannot contain any spaces!");
+			}
+			else if (isupper(newProjectName.front()))
+			{
+				_fe3d.logger_throwWarning("New project name cannot start with capital!");
 			}
 			else // Project is non-existent
 			{
@@ -64,9 +66,16 @@ void TopViewportController::_updateProjectCreation()
 				auto temp3 = _mkdir((newDirectoryPath + "\\scenes").c_str());
 				auto temp4 = _mkdir((newDirectoryPath + "\\scripts").c_str());
 
+				// Create settings file
+				_settingsEditor.setCurrentProjectName(newProjectName);
+				_settingsEditor.save(true);
+
 				// Load current project
 				_currentProjectName = newProjectName;
-				_updateCurrentProject();
+				_updateProjectChange();
+
+				// Load settings for this project
+				_settingsEditor.load();
 
 				// Logging
 				_fe3d.logger_throwInfo("New project \"" + _currentProjectName + "\" created!");
@@ -89,7 +98,10 @@ void TopViewportController::_updateProjectLoading()
 		{
 			// Load current project
 			_currentProjectName = clickedButtonID;
-			_updateCurrentProject();
+			_updateProjectChange();
+
+			// Load settings for this project
+			_settingsEditor.load();
 
 			// Logging
 			_fe3d.logger_throwInfo("Existing project \"" + _currentProjectName + "\" loaded!");
@@ -134,7 +146,7 @@ void TopViewportController::_updateProjectDeletion()
 			{
 				// Unload current project
 				_currentProjectName = "";
-				_updateCurrentProject();
+				_updateProjectChange();
 			}
 
 			// Check if project folder is still existing

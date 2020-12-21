@@ -7,7 +7,7 @@
 CameraManager::CameraManager(RenderBus& renderBus) :
 	_renderBus(renderBus)
 {
-	_aspectRatio = float(Config::getInst().getWindowWidth()) / float(Config::getInst().getWindowHeight());
+	_aspectRatio = static_cast<float>(Config::getInst().getWindowWidth()) / static_cast<float>(Config::getInst().getWindowHeight());
 }
 
 void CameraManager::reset()
@@ -24,10 +24,13 @@ void CameraManager::reset()
 
 	// Floats
 	_fov = 0.0f;
-	_pitch = 0.0f;
+	_yawAcceleration = 0.0f;
+	_pitchAcceleration = 0.0f;
 	_yaw = 0.0f;
+	_pitch = 0.0f;
 	_nearZ = 0.0f;
 	_farZ = 0.0f;
+	_mouseSensitivity = 1.0f;
 	_mouseOffset = 0.0f;
 
 	// Booleans
@@ -48,22 +51,7 @@ void CameraManager::update(WindowManager & windowManager)
 	const int xMiddle = Config::getInst().getWindowSize().x / 2;
 	const int yMiddle = Config::getInst().getWindowSize().y / 2;
 
-	// Update cursor centering
-	if (_mustCenter)
-	{
-		// Check if reached center
-		if (currentMousePos == Ivec2(xMiddle, yMiddle))
-		{
-			_mustCenter = false;
-		}
-		else // Spawn mouse in middle of screen
-		{
-			windowManager.setMousePos({ xMiddle, yMiddle });
-		}
-		
-	}
-
-	// Only if first person camera is enabled
+	// Only if first person camera is enabled & not centering
 	if (_isFirstPersonViewEnabled && !_mustCenter)
 	{
 		// Offset between current and last mouse pos
@@ -83,6 +71,13 @@ void CameraManager::update(WindowManager & windowManager)
 
 		// Spawn mouse in middle of screen
 		windowManager.setMousePos({ xMiddle, yMiddle });
+	}
+
+	// Spawn mouse in middle of screen
+	if (_mustCenter)
+	{
+		windowManager.setMousePos({ xMiddle, yMiddle });
+		_mustCenter = false;
 	}
 
 	// Update yaw & pitch movements

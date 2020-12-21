@@ -7,6 +7,7 @@
 #include "scene_editor.hpp"
 #include "script_editor.hpp"
 #include "audio_editor.hpp"
+#include "settings_editor.hpp"
 
 #define TVPC TopViewportController
 
@@ -15,7 +16,8 @@ class TopViewportController final : public ViewportController
 public:
 	TopViewportController(FabiEngine3D& fe3d, EngineGuiManager& gui, 
 		EnvironmentEditor& environmentEditor, ModelEditor& modelEditor, BillboardEditor& billboardEditor, 
-		SceneEditor& sceneEditor, AnimationEditor& animationEditor, ScriptEditor& scriptEditor, AudioEditor& audioEditor);
+		SceneEditor& sceneEditor, AnimationEditor& animationEditor, ScriptEditor& scriptEditor, 
+		AudioEditor& audioEditor, SettingsEditor& settingsEditor);
 	~TopViewportController() = default;
 
 	void initialize() override;
@@ -39,7 +41,7 @@ private:
 	void _updateProjectDeletion();
 	void _prepareProjectChoosing();
 	void _saveCurrentProject();
-	void _updateCurrentProject();
+	void _updateProjectChange();
 
 	EnvironmentEditor& _environmentEditor;
 	ModelEditor& _modelEditor;
@@ -48,6 +50,7 @@ private:
 	AnimationEditor& _animationEditor;
 	ScriptEditor& _scriptEditor;
 	AudioEditor& _audioEditor;
+	SettingsEditor& _settingsEditor;
 
 	shared_ptr<EngineGuiWindow> _projectWindow = nullptr;
 	shared_ptr<EngineGuiWindow> _gameWindow = nullptr;

@@ -40,9 +40,6 @@ void LeftViewportController::initialize()
 	_sceneEditor.initializeGUI();
 	_scriptEditor.initializeGUI();
 	_settingsEditor.initializeGUI();
-
-	// Load settings editor (project independent)
-	_settingsEditor.load();
 }
 
 void LeftViewportController::update()
@@ -98,6 +95,7 @@ void LeftViewportController::update()
 		}
 		else if (screen->getButton("settingsEditor")->isHovered()) // Settings editor button
 		{
+			_settingsEditor.load();
 			window->setActiveScreen("settingsEditorMenuMain");
 			_lastActiveEditorScreen = "settingsEditorMenuMain";
 		}

@@ -166,6 +166,16 @@ bool ScriptInterpreter::_executeFe3dCameraFunction(const string& functionName, v
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
+	else if (functionName == "fe3d:camera_set_cursor_speed") // Set cursor speed
+	{
+		auto types = { ScriptValueType::DECIMAL };
+
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		{
+			_fe3d.camera_setMouseSensitivity(arguments[0].getDecimal());
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+		}
+	}
 	else
 	{
 		return false;

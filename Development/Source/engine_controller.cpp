@@ -6,7 +6,7 @@ EngineController::EngineController() :
 	_rightViewportController(*this, _gui),
 	_topViewportController(*this, _gui, _leftViewportController.getEnvironmentEditor(), _leftViewportController.getModelEditor(),
 		_leftViewportController.getBillboardEditor(), _leftViewportController.getSceneEditor(), _leftViewportController.getAnimationEditor(),
-		_leftViewportController.getScriptEditor(), _leftViewportController.getAudioEditor()),
+		_leftViewportController.getScriptEditor(), _leftViewportController.getAudioEditor(), _leftViewportController.getSettingsEditor()),
 	_bottomViewportController(*this, _gui, _topViewportController, _leftViewportController.getScriptEditor())
 {
 
@@ -29,6 +29,13 @@ void EngineController::FE3D_CONTROLLER_INIT()
 	}
 	else // Game preview
 	{
+		// Set name of game (project) to run
+		_leftViewportController.getSceneEditor().setCurrentProjectName(engine_getSelectedGame());
+		_leftViewportController.getModelEditor().setCurrentProjectName(engine_getSelectedGame());
+		_leftViewportController.getAnimationEditor().setCurrentProjectName(engine_getSelectedGame());
+		_leftViewportController.getScriptEditor().setCurrentProjectName(engine_getSelectedGame());
+		_leftViewportController.getSettingsEditor().setCurrentProjectName(engine_getSelectedGame());
+
 		// Import settings
 		_leftViewportController.getSettingsEditor().load();
 
@@ -40,12 +47,6 @@ void EngineController::FE3D_CONTROLLER_INIT()
 		// Default camera
 		camera_load(90.0f, 0.1f, 10000.0f, Vec3(0.0f), 0, 0);
 		camera_center();
-
-		// Set name of game (project) to run
-		_leftViewportController.getSceneEditor().setCurrentProjectName(engine_getSelectedGame());
-		_leftViewportController.getModelEditor().setCurrentProjectName(engine_getSelectedGame());
-		_leftViewportController.getAnimationEditor().setCurrentProjectName(engine_getSelectedGame());
-		_leftViewportController.getScriptEditor().setCurrentProjectName(engine_getSelectedGame());
 
 		// Initialize script execution
 		_leftViewportController.getScriptEditor().getScriptExecutor(false).load();
@@ -83,18 +84,18 @@ void EngineController::FE3D_CONTROLLER_UPDATE()
 
 void EngineController::FE3D_CONTROLLER_DESTROY()
 {
-
-}
-
-bool EngineController::mustPromptOnExit()
-{
-	return _promptOnExit;
+	// Check if script was running
+	if (_leftViewportController.getScriptEditor().getScriptExecutor(false).isRunning())
+	{
+		_leftViewportController.getScriptEditor().getScriptExecutor(false).unload();
+	}
 }
 
 void EngineController::_initializeMiscellaneous()
 {
 	// Permanent graphical effects
 	misc_setMainRenderingColor(Vec3(0.0f));
+	gfx_setMsaaQuality(16);
 	gfx_enableMSAA();
 	gfx_enableBloom(1.0f, 0.0f, 10);
 
@@ -139,4 +140,9 @@ void EngineController::_updateMiscellaneous()
 	guiEntity_setPosition("@@cursor", misc_convertToNDC(misc_convertFromScreenCoords(misc_getCursorPosition())));
 	guiEntity_changeTexture("@@cursor", "engine\\textures\\cursor_default.png");
 	misc_isCursorInsideWindow() ? guiEntity_show("@@cursor") : guiEntity_hide("@@cursor");
+}
+
+bool EngineController::mustPromptOnExit()
+{
+	return _promptOnExit;
 }

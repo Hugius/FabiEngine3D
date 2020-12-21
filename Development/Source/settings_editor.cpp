@@ -22,18 +22,24 @@ void SettingsEditor::initializeGUI()
 	// Left-viewport: mainWindow - settingsEditorMenuMain
 	screenID = "settingsEditorMenuMain";
 	leftWindow->addScreen(screenID);
-	leftWindow->getScreen(screenID)->addButton("mouseSensitivity", Vec2(0.0f, 0.7875f), Vec2(GW("Mouse speed"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Mouse speed", LVPC::textColor, LVPC::textHoverColor);
-	leftWindow->getScreen(screenID)->addButton("msaaQuality", Vec2(0.0f, 0.525f), Vec2(GW("MSAA"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "MSAA", LVPC::textColor, LVPC::textHoverColor);
-	leftWindow->getScreen(screenID)->addButton("shadowQuality", Vec2(0.0f, 0.2625f), Vec2(GW("Shadows"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Shadows", LVPC::textColor, LVPC::textHoverColor);
-	leftWindow->getScreen(screenID)->addButton("reflectionQuality", Vec2(0.0f, 0.0f), Vec2(GW("Reflections"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Reflections", LVPC::textColor, LVPC::textHoverColor);
-	leftWindow->getScreen(screenID)->addButton("refractionQuality", Vec2(0.0f, -0.2625f), Vec2(GW("Refractions"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Refractions", LVPC::textColor, LVPC::textHoverColor);
-	leftWindow->getScreen(screenID)->addButton("maxAudioChannels", Vec2(0.0f, -0.525f), Vec2(GW("Audio"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Audio", LVPC::textColor, LVPC::textHoverColor);
-	leftWindow->getScreen(screenID)->addButton("back", Vec2(0.0f, -0.7875f), Vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen(screenID)->addButton("msaaQuality", Vec2(0.0f, 0.75f), Vec2(GW("MSAA"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "MSAA", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen(screenID)->addButton("shadowQuality", Vec2(0.0f, 0.45f), Vec2(GW("Shadows"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Shadows", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen(screenID)->addButton("reflectionQuality", Vec2(0.0f, 0.15f), Vec2(GW("Reflections"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Reflections", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen(screenID)->addButton("refractionQuality", Vec2(0.0f, -0.15f), Vec2(GW("Refractions"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Refractions", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen(screenID)->addButton("maxAudioChannels", Vec2(0.0f, -0.45f), Vec2(GW("Audio"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Audio", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen(screenID)->addButton("back", Vec2(0.0f, -0.75f), Vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
 }
 
 void SettingsEditor::load()
 {
-	string filePath = _fe3d.misc_getRootDirectory() + "user\\settings.fe3d";
+	// Error checking
+	if (_currentProjectName == "")
+	{
+		_fe3d.logger_throwError("No current project loaded!");
+	}
+
+	// Compose full file path
+	string filePath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectName + "\\settings.fe3d";
 
 	// Check if settings file exists
 	if (_fe3d.misc_isFileExisting(filePath))
@@ -45,12 +51,10 @@ void SettingsEditor::load()
 		std::istringstream iss(line);
 
 		// Extract values from file
-		float mouseSpeed;
 		int msaaQuality, shadowQuality, reflectionQuality, refractionQuality, audioChannels;
-		iss >> mouseSpeed >> msaaQuality >> shadowQuality >> reflectionQuality >> refractionQuality >> audioChannels;
+		iss >> msaaQuality >> shadowQuality >> reflectionQuality >> refractionQuality >> audioChannels;
 
 		// Set values
-		_fe3d.camera_setMouseSensitivity(mouseSpeed);
 		_fe3d.gfx_setMsaaQuality(msaaQuality);
 		_fe3d.gfx_setShadowQuality(shadowQuality);
 		_fe3d.gfx_setReflectionQuality(reflectionQuality);
@@ -60,27 +64,53 @@ void SettingsEditor::load()
 		// Close file
 		file.close();
 	}
+	else
+	{
+		_fe3d.logger_throwWarning("Could not load settings file!");
+	}
 
 	_isEditorLoaded = true;
 }
 
-void SettingsEditor::save()
+void SettingsEditor::unload()
 {
+	_isEditorLoaded = false;
+}
+
+void SettingsEditor::save(bool newFile)
+{
+	// Error checking
+	if (_currentProjectName == "")
+	{
+		_fe3d.logger_throwError("No current project loaded!");
+	}
+
+	// Compose full file path
+	string filePath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectName + "\\settings.fe3d";
+
 	// Overwrite (or create) settings file
 	std::ofstream file;
-	file.open(_fe3d.misc_getRootDirectory() + "user\\settings.fe3d");
+	file.open(filePath);
 
 	// Get values
-	float mouseSpeed = _fe3d.camera_getMouseSensitivity();
 	int msaaQuality = _fe3d.gfx_getMsaaQuality();
 	int shadowQuality = _fe3d.gfx_getShadowQuality();
 	int reflectionQuality = _fe3d.gfx_getReflectionQuality();
 	int refractionQuality = _fe3d.gfx_getRefractionQuality();
 	int audioChannels = _fe3d.sound_getMaxChannels();
 
+	// Default values for new file
+	if (newFile)
+	{
+		msaaQuality = 4;
+		shadowQuality = 2048;
+		reflectionQuality = 128;
+		refractionQuality = 128;
+		audioChannels = 256;
+	}
+
 	// Write to file
 	file << 
-		mouseSpeed << " " << 
 		msaaQuality << " " << 
 		shadowQuality << " " << 
 		reflectionQuality << " " <<
@@ -100,7 +130,6 @@ void SettingsEditor::update()
 		if (screen->getID() == "settingsEditorMenuMain")
 		{
 			// Temporary values
-			float mouseSpeed = _fe3d.camera_getMouseSensitivity();
 			int msaaQuality = _fe3d.gfx_getMsaaQuality();
 			int shadowQuality = _fe3d.gfx_getShadowQuality();
 			int reflectionQuality = _fe3d.gfx_getReflectionQuality();
@@ -113,10 +142,6 @@ void SettingsEditor::update()
 				if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
-				}
-				else if (screen->getButton("mouseSensitivity")->isHovered())
-				{
-					_gui.getGlobalScreen()->addValueForm("mouseSensitivity", "Mouse sensitivity", mouseSpeed, Vec2(0.0f, 0.0f), Vec2(0.2f, 0.1f));
 				}
 				else if (screen->getButton("msaaQuality")->isHovered())
 				{
@@ -141,36 +166,36 @@ void SettingsEditor::update()
 			}
 
 			// Update forms
-			if (_gui.getGlobalScreen()->checkValueForm("mouseSensitivity", mouseSpeed, {}))
-			{
-				_fe3d.camera_setMouseSensitivity(mouseSpeed);
-				save();
-			}
-			else if (_gui.getGlobalScreen()->checkValueForm("msaaQuality", msaaQuality, {}))
+			if (_gui.getGlobalScreen()->checkValueForm("msaaQuality", msaaQuality, {}))
 			{
 				_fe3d.gfx_setMsaaQuality(msaaQuality);
-				save();
+				save(false);
 			}
 			else if (_gui.getGlobalScreen()->checkValueForm("shadowQuality", shadowQuality, {}))
 			{
 				_fe3d.gfx_setShadowQuality(shadowQuality);
-				save();
+				save(false);
 			}
 			else if (_gui.getGlobalScreen()->checkValueForm("reflectionQuality", reflectionQuality, {}))
 			{
 				_fe3d.gfx_setReflectionQuality(reflectionQuality);
-				save();
+				save(false);
 			}
 			else if (_gui.getGlobalScreen()->checkValueForm("refractionQuality", refractionQuality, {}))
 			{
 				_fe3d.gfx_setRefractionQuality(refractionQuality);
-				save();
+				save(false);
 			}
 			else if (_gui.getGlobalScreen()->checkValueForm("maxAudioChannels", audioChannels, {}))
 			{
 				_fe3d.sound_setMaxChannels(audioChannels);
-				save();
+				save(false);
 			}
 		}
 	}
+}
+
+void SettingsEditor::setCurrentProjectName(const string& projectName)
+{
+	_currentProjectName = projectName;
 }

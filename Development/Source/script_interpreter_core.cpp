@@ -3,13 +3,14 @@
 #include <sstream>
 
 ScriptInterpreter::ScriptInterpreter(FabiEngine3D& fe3d, Script& script, SceneEditor& sceneEditor,
-	ModelEditor& modelEditor, AnimationEditor& animationEditor, BillboardEditor& billboardEditor) :
+	ModelEditor& modelEditor, AnimationEditor& animationEditor, BillboardEditor& billboardEditor, AudioEditor& audioEditor) :
 	_fe3d(fe3d),
 	_script(script),
 	_sceneEditor(sceneEditor),
 	_modelEditor(modelEditor),
 	_animationEditor(animationEditor),
-	_billboardEditor(billboardEditor)
+	_billboardEditor(billboardEditor),
+	_audioEditor(audioEditor)
 {
 	
 }
@@ -128,11 +129,14 @@ void ScriptInterpreter::load()
 	// Load models
 	_modelEditor.loadGameEntitiesFromFile();
 
+	// Load animations
+	_animationEditor.loadAnimationsFromFile();
+
 	// Load billboards
 	_billboardEditor.loadBillboardEntitiesFromFile();
 
-	// Load animations
-	_animationEditor.loadAnimationsFromFile();
+	// Load audio
+	_audioEditor.loadAudioEntitiesFromFile();
 }
 
 void ScriptInterpreter::executeInitialization()

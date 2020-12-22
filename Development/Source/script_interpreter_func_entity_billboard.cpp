@@ -100,25 +100,6 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			}
 		}
 	}
-	else if (functionName == "fe3d:billboard_delete_all") // Delete all billboardEntities
-	{
-		// Validate arguments
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
-		{
-			// For every billboard
-			for (const auto& ID : _fe3d.billboardEntity_getAllIDs())
-			{
-				// Only non-preview billboards
-				if (ID.front() != '@')
-				{
-					_fe3d.billboardEntity_delete(ID);
-				}
-			}
-
-			// Return
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
-		}
-	}
 	else if (functionName == "fe3d:billboard_set_visible") // Set billboardEntity visibility
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::BOOLEAN };
@@ -157,35 +138,6 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 				auto result = _fe3d.billboardEntity_isVisible(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 			}
-		}
-	}
-	else if (functionName == "fe3d:billboard_set_all_visible") // Set all billboardEntity visibilities
-	{
-		auto types = { ScriptValueType::BOOLEAN }; // Visibility
-
-		// Validate arguments
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
-		{
-			// For every billboard
-			for (const auto& ID : _fe3d.billboardEntity_getAllIDs())
-			{
-				// Only non-preview billboards
-				if (ID.front() != '@')
-				{
-					// Determine if billboard must be visible or not
-					if (arguments[0].getBoolean())
-					{
-						_fe3d.billboardEntity_show(ID);
-					}
-					else
-					{
-						_fe3d.billboardEntity_hide(ID);
-					}
-				}
-			}
-
-			// Return
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
 	else if (functionName == "fe3d:billboard_get_all_names") // Get all billboardEntity names

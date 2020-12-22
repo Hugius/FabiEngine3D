@@ -4,11 +4,11 @@
 #define GW(text) LVPC::calcTextWidth(text, 0.2f, 1.8f)
 
 ScriptEditor::ScriptEditor(FabiEngine3D& fe3d, EngineGuiManager& gui, SceneEditor& sceneEditor,
-	ModelEditor& modelEditor, AnimationEditor& animationEditor, BillboardEditor& billboardEditor) :
+	ModelEditor& modelEditor, AnimationEditor& animationEditor, BillboardEditor& billboardEditor, AudioEditor& audioEditor) :
 	_fe3d(fe3d),
 	_gui(gui),
 	_script(fe3d),
-	_scriptExecutor(fe3d, _script, sceneEditor, modelEditor, animationEditor, billboardEditor)
+	_scriptExecutor(fe3d, _script, sceneEditor, modelEditor, animationEditor, billboardEditor, audioEditor)
 {
 
 }

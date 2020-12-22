@@ -99,25 +99,6 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 			}
 		}
 	}
-	else if (functionName == "fe3d:model_delete_all") // Delete all gameEntities
-	{
-		// Validate arguments
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
-		{
-			// For every model
-			for (const auto& ID : _fe3d.gameEntity_getAllIDs())
-			{
-				// Only non-preview models
-				if (ID.front() != '@')
-				{
-					_fe3d.gameEntity_delete(ID);
-				}
-			}
-
-			// Return
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
-		}
-	}
 	else if (functionName == "fe3d:model_set_visible") // Set gameEntity visibility
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::BOOLEAN };
@@ -156,35 +137,6 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 				auto result = _fe3d.gameEntity_isVisible(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 			}
-		}
-	}
-	else if (functionName == "fe3d:model_set_all_visible") // Set all gameEntity visibilities
-	{
-		auto types = { ScriptValueType::BOOLEAN }; // Visibility
-
-		// Validate arguments
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
-		{
-			// For every model
-			for (const auto& ID : _fe3d.gameEntity_getAllIDs())
-			{
-				// Only non-preview models
-				if (ID.front() != '@')
-				{
-					// Determine if model must be visible or not
-					if (arguments[0].getBoolean())
-					{
-						_fe3d.gameEntity_show(ID);
-					}
-					else
-					{
-						_fe3d.gameEntity_hide(ID);
-					}
-				}
-			}
-
-			// Return
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
 	else if (functionName == "fe3d:model_get_all_names") // Get all gameEntity names

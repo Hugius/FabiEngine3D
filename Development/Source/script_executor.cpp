@@ -1,10 +1,10 @@
 #include "script_executor.hpp"
 
 ScriptExecutor::ScriptExecutor(FabiEngine3D& fe3d, Script& script, SceneEditor& sceneEditor,
-	ModelEditor& modelEditor, AnimationEditor& animationEditor, BillboardEditor& billboardEditor) :
+	ModelEditor& modelEditor, AnimationEditor& animationEditor, BillboardEditor& billboardEditor, AudioEditor& audioEditor) :
 	_fe3d(fe3d),
 	_script(script),
-	_scriptInterpreter(fe3d, script, sceneEditor, modelEditor, animationEditor, billboardEditor)
+	_scriptInterpreter(fe3d, script, sceneEditor, modelEditor, animationEditor, billboardEditor, audioEditor)
 {
 
 }
@@ -66,6 +66,7 @@ void ScriptExecutor::pause()
 		_wasCursorVisible = _fe3d.misc_isCursorVisible();
 		_fe3d.misc_hideCursor();
 		_fe3d.audioEntity_pauseAll();
+		_fe3d.music_pause();
 		_fe3d.engine_pause();
 		_isRunning = false;
 	}
@@ -84,6 +85,7 @@ void ScriptExecutor::unpause()
 		// Resume game logic
 		_fe3d.camera_center();
 		_fe3d.audioEntity_resumeAll();
+		_fe3d.music_resume();
 		_fe3d.engine_resume();
 		_isRunning = true;
 	}

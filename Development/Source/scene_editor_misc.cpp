@@ -487,5 +487,6 @@ void SceneEditor::clearScene()
 		_fe3d.aabbEntity_deleteAll();
 		_fe3d.lightEntity_deleteAll();
 		_fe3d.audioEntity_deleteAll();
+		_fe3d.music_clearPlaylist();
 	}
 }

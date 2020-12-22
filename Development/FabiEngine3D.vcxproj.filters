@@ -613,6 +613,9 @@
     <ClCompile Include="Source\script_interpreter_func_graphics.cpp">
       <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
     </ClCompile>
+    <ClCompile Include="Source\script_interpreter_func_music.cpp">
+      <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\obj_loader.hpp">

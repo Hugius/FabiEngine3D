@@ -534,21 +534,21 @@ public:
 	void audioEntity_resumeAll();
 	void audioEntity_stop(const string& ID, int fadeMillis = 0);
 	void audioEntity_stopAll();
-	void audioEntity_setVolume(const string& ID, float volume);
 	void audioEntity_setPosition(const string& ID, Vec3 position);
-	void audioEntity_setMaxDistance(const string& ID, float maxDistance);
+	void audioEntity_setVolume(const string& ID, float volume);
 	void audioEntity_setMaxVolume(const string& ID, float volume);
+	void audioEntity_setMaxDistance(const string& ID, float maxDistance);
 
 	// Audio entity interface - getters
 	vector<string> audioEntity_getAllIDs();
 	string audioEntity_getFilePath(const string& ID);
 	Vec3   audioEntity_getPosition(const string& ID);
 	float  audioEntity_getMaxDistance(const string& ID);
+	float  audioEntity_getVolume(const string& ID);
+	float  audioEntity_getMaxVolume(const string& ID);
 	bool   audioEntity_isExisting(const string& ID);
 	bool   audioEntity_isPlaying(const string& ID);
 	bool   audioEntity_isPaused(const string& ID);
-	float  audioEntity_getVolume(const string& ID);
-	float  audioEntity_getMaxVolume(const string& ID);
 	int    audioEntity_getUsedChannelCount();
 
 	// Music entity interface - setters

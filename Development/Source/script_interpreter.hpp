@@ -9,12 +9,13 @@
 #include "scene_editor.hpp"
 #include "animation_editor.hpp"
 #include "billboard_editor.hpp"
+#include "audio_editor.hpp"
 
 class ScriptInterpreter
 {
 public:
 	ScriptInterpreter(FabiEngine3D& fe3d, Script& script, SceneEditor& sceneEditor, ModelEditor& modelEditor, 
-		AnimationEditor& animationEditor, BillboardEditor& billboardEditor);
+		AnimationEditor& animationEditor, BillboardEditor& billboardEditor, AudioEditor& audioEditor);
 
 	void load();
 	void executeInitialization();
@@ -82,11 +83,15 @@ private:
 	bool _executeFe3dAudioEntityFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	bool _executeFe3dAnimationFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	bool _executeFe3dLightingFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
+	bool _executeFe3dMusicFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	bool _executeFe3dMiscFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	bool _validateFe3dGameEntity(const string& ID, bool previewEntity = false);
 	bool _validateFe3dBillboardEntity(const string& ID, bool previewEntity = false);
 	bool _validateFe3dAabbEntity(const string& ID);
 	bool _validateFe3dLightEntity(const string& ID);
+	bool _validateFe3dGuiEntity(const string& ID);
+	bool _validateFe3dTextEntity(const string& ID);
+	bool _validateFe3dAudioEntity(const string& ID, bool previewEntity = false);
 
 	// Miscellaneous functions
 	ScriptConditionStatement* _getLastConditionStatement(vector<ScriptConditionStatement>& statements, unsigned int scopeDepth);
@@ -104,6 +109,7 @@ private:
 	ModelEditor& _modelEditor;
 	AnimationEditor& _animationEditor;
 	BillboardEditor& _billboardEditor;
+	AudioEditor& _audioEditor;
 
 	// Stacks
 	vector<vector<ScriptVariable>> _localVariablesStack;

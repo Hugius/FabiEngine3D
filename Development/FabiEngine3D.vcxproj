@@ -357,11 +357,15 @@
     <ClCompile Include="Source\script_file.cpp" />
     <ClCompile Include="Source\script_interpreter_func_animations.cpp" />
     <ClCompile Include="Source\script_interpreter_func_entity_aabb.cpp" />
+    <ClCompile Include="Source\script_interpreter_func_entity_audio.cpp" />
     <ClCompile Include="Source\script_interpreter_func_entity_billboard.cpp" />
+    <ClCompile Include="Source\script_interpreter_func_entity_gui.cpp" />
+    <ClCompile Include="Source\script_interpreter_func_entity_light.cpp" />
     <ClCompile Include="Source\script_interpreter_func_entity_sky.cpp" />
     <ClCompile Include="Source\script_interpreter_func_entity_terrain.cpp" />
+    <ClCompile Include="Source\script_interpreter_func_entity_text.cpp" />
     <ClCompile Include="Source\script_interpreter_func_entity_water.cpp" />
-    <ClCompile Include="Source\script_interpreter_func_lighting.cpp" />
+    <ClCompile Include="Source\script_interpreter_func_graphics.cpp" />
     <ClCompile Include="Source\script_interpreter_list_core.cpp" />
     <ClCompile Include="Source\script_interpreter_core.cpp" />
     <ClCompile Include="Source\script_interpreter_execution.cpp" />

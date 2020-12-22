@@ -101,7 +101,8 @@ private:
 		bool isFrozen, bool isFaceCulled, bool isShadowed, bool isTransparent, bool isReflective, bool isSpecular, float specularFactor, 
 		float specularIntensity, float lightness, Vec3 color, float uvRepeat, const string& lodEntityID, bool isInstanced,
 		vector<Vec3> instancedOffsets, vector<string> aabbNames, vector<Vec3> aabbPositions, vector<Vec3> aabbSizes, string animationID);
-	void _placeBillboard(const string& newID, const string& diffusePath, const string& fontPath, const string& textContent,
+	void _placeBillboard(bool scriptExecution, const string& billboardName, const string& billboardNumber,
+		const string& diffusePath, const string& fontPath, const string& textContent,
 		Vec3 position, Vec3 rotation, Vec2 size, Vec3 color, bool facingX, bool facingY, bool isTransparent,
 		bool isAnimated, int animationRows, int animationColumns, int animationFramestep);
 

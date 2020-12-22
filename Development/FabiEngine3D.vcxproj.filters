@@ -598,7 +598,19 @@
     <ClCompile Include="Source\script_interpreter_func_entity_aabb.cpp">
       <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
     </ClCompile>
-    <ClCompile Include="Source\script_interpreter_func_lighting.cpp">
+    <ClCompile Include="Source\script_interpreter_func_entity_light.cpp">
+      <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_interpreter_func_entity_audio.cpp">
+      <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_interpreter_func_entity_gui.cpp">
+      <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_interpreter_func_entity_text.cpp">
+      <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_interpreter_func_graphics.cpp">
       <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
     </ClCompile>
   </ItemGroup>

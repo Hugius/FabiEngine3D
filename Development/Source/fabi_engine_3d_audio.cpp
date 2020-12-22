@@ -44,7 +44,7 @@ float FabiEngine3D::music_getVolume()
 	return static_cast<float>(_core->_audioPlayer.getMusicVolume()) / 128.0f;
 }
 
-void FabiEngine3D::music_deleteAll()
+void FabiEngine3D::music_clearPlaylist()
 {
 	_core->_audioPlayer.stopMusic();
 	_core->_audioManager.deleteMusic();

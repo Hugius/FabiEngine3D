@@ -201,7 +201,7 @@ void TopViewportController::_updateGameScreenManagement()
 			projectScreen->getButton("deleteProject")->setHoverable(true);
 			miscScreen->getButton("uncache")->setHoverable(true);
 		}
-		std::cout << "wtf";
+
 		// Check if user wants to pause the running game
 		if (SCRIPT_EXECUTOR.isRunning())
 		{

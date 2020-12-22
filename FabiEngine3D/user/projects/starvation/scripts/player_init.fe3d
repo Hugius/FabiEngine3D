@@ -1,4 +1,4 @@
-30 53
+33 25
 META script_type_init
 
 /// Global variables
@@ -30,3 +30,6 @@ fe3d:model_place("player", "skeleton", 0.0, 0.0, 0.0)
 fe3d:model_set_max_height("player", 2.5)
 fe3d:model_set_aabb_responsive("player", <false>)
 fe3d:billboard_place("fire", "fire", 5.0, 8.0, 140.0)
+
+LIST billboards = fe3d:billboard_get_all_names()
+fe3d:print(billboards[0])

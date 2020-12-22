@@ -361,8 +361,13 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 				std::replace(fontPath.begin(), fontPath.end(), '?', ' ');
 				std::replace(textContent.begin(), textContent.end(), '?', ' ');
 
+				// Extract billboard name and number from ID
+				unsigned int atPos = std::distance(billboardID.begin(), std::find(billboardID.begin(), billboardID.end(), '@'));
+				string billboardNumber = billboardID.substr(0, atPos);
+				string billboardName = billboardID.substr(atPos + 1);
+
 				// Add the billboard
-				_placeBillboard(billboardID, diffusePath, fontPath, textContent, position, rotation, size, color, facingX, facingY, isTransparent, isAnimated,
+				_placeBillboard(!_isEditorLoaded, billboardName, billboardNumber, diffusePath, fontPath, textContent, position, rotation, size, color, facingX, facingY, isTransparent, isAnimated,
 					animationRows, animationColumns, animationFramestep);
 			}
 			else if (entityType == "AMBIENT_LIGHT")

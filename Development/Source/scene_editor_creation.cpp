@@ -457,10 +457,14 @@ void SceneEditor::placeBillboard(const string& newID, const string& previewID, V
 	_fe3d.billboardEntity_setTransparent(newID, _fe3d.billboardEntity_isTransparent(previewID));
 }
 
-void SceneEditor::_placeBillboard(const string& newID, const string& diffusePath, const string& fontPath, const string& textContent,
+void SceneEditor::_placeBillboard(bool scriptExecution, const string& billboardName, const string& billboardNumber,
+	const string& diffusePath, const string& fontPath, const string& textContent,
 	Vec3 position, Vec3 rotation, Vec2 size, Vec3 color, bool facingX, bool facingY, bool isTransparent,
 	bool isAnimated, int animationRows, int animationColumns, int animationFramestep)
 {
+	// Compose new model ID
+	string newID = scriptExecution ? (billboardName + "@" + billboardNumber) : (billboardNumber + "@" + billboardName);
+
 	if (diffusePath != "") // Textured billboard
 	{
 		_fe3d.billboardEntity_add(newID, diffusePath, position, rotation, size, isTransparent, facingX, facingY, true);
@@ -485,5 +489,12 @@ void SceneEditor::_placeBillboard(const string& newID, const string& diffusePath
 	}
 	
 	// Bind AABB entity to BILLBOARD entity
-	_fe3d.aabbEntity_bindToBillboardEntity(newID, true);
+	if (scriptExecution) // billboardname@123
+	{
+		_fe3d.aabbEntity_bindToBillboardEntity(newID, true, billboardName + "@" + billboardNumber);
+	}
+	else // 123@billboardname
+	{
+		_fe3d.aabbEntity_bindToBillboardEntity(newID, true, billboardNumber + "@" + billboardName);
+	}
 }

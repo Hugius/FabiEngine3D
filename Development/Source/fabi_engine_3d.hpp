@@ -553,7 +553,7 @@ public:
 
 	// Music entity interface - setters
 	void music_addToPlaylist(const string& audioPath);
-	void music_deleteAll();
+	void music_clearPlaylist();
 	void music_setVolume(float volume);
 	void music_pause();
 	void music_resume();

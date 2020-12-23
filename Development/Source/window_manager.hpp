@@ -14,12 +14,14 @@ public:
 	void setTitle(const std::string & title);
 	void setSize(Ivec2 size);
 	void setOpacity(float value);
-	void enableOpaqueness(Vec3 color);
-	void disableOpaqueness(Vec3 color);
+	void enableColorKeying(Vec3 color);
+	void disableColorKeying(Vec3 color);
 	void showBorder();
 	void hideBorder();
 	void enableFullscreen();
 	void disableFullscreen();
+	void enableVsync();
+	void disableVsync();
 	void swapBackBuffer();
 	void showWindow();
 	void hideWindow();

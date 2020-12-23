@@ -73,6 +73,8 @@ private:
 	Vec3 _lookatPosition = Vec3(0.0f);
 
 	// Floats
+	const float _maxYawAcceleration = 10.0f;
+	const float _maxPitchAcceleration = 10.0f;
 	float _fov = 0.0f;
 	float _aspectRatio = 0.0f;
 	float _yawAcceleration = 0.0f;

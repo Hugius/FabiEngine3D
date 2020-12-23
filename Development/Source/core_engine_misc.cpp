@@ -41,16 +41,20 @@ CoreEngine::~CoreEngine()
 
 void CoreEngine::_updateWindowFading()
 {
-	static float opacity = 0.0f;
+	// Only if in engine preview
+	if (Config::getInst().getSelectedGame().empty())
+	{
+		static float opacity = 0.0f;
 
-	// Stop if window is 100% visible
-	if (opacity < 1.0f)
-	{
-		_windowManager.setOpacity(opacity);
-		opacity += 0.01f;
-	}
-	else
-	{
-		_windowManager.setOpacity(1.0f);
+		// Stop if window is 100% visible
+		if (opacity < 1.0f)
+		{
+			_windowManager.setOpacity(opacity);
+			opacity += 0.01f;
+		}
+		else
+		{
+			_windowManager.setOpacity(1.0f);
+		}
 	}
 }

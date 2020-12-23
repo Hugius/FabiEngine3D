@@ -33,6 +33,8 @@ void EngineController::FE3D_CONTROLLER_INIT()
 		_leftViewportController.getSceneEditor().setCurrentProjectName(engine_getSelectedGame());
 		_leftViewportController.getModelEditor().setCurrentProjectName(engine_getSelectedGame());
 		_leftViewportController.getAnimationEditor().setCurrentProjectName(engine_getSelectedGame());
+		_leftViewportController.getBillboardEditor().setCurrentProjectName(engine_getSelectedGame());
+		_leftViewportController.getAudioEditor().setCurrentProjectName(engine_getSelectedGame());
 		_leftViewportController.getScriptEditor().setCurrentProjectName(engine_getSelectedGame());
 		_leftViewportController.getSettingsEditor().setCurrentProjectName(engine_getSelectedGame());
 
@@ -40,7 +42,6 @@ void EngineController::FE3D_CONTROLLER_INIT()
 		_leftViewportController.getSettingsEditor().load();
 
 		// Permanent graphical effects
-		misc_setMainRenderingColor(Vec3(1.0f, 0.0f, 0.0f));
 		gfx_enableMSAA();
 		gfx_enableBloom(1.0f, 0.0f, 10);
 
@@ -84,10 +85,14 @@ void EngineController::FE3D_CONTROLLER_UPDATE()
 
 void EngineController::FE3D_CONTROLLER_DESTROY()
 {
-	// Check if script was running
-	if (_leftViewportController.getScriptEditor().getScriptExecutor(false).isRunning())
+	// Game preview
+	if (!engine_getSelectedGame().empty())
 	{
-		_leftViewportController.getScriptEditor().getScriptExecutor(false).unload();
+		// Check if script was running
+		if (_leftViewportController.getScriptEditor().getScriptExecutor(false).isRunning())
+		{
+			_leftViewportController.getScriptEditor().getScriptExecutor(false).unload();
+		}
 	}
 }
 

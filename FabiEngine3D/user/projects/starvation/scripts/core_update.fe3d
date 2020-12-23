@@ -1,9 +1,5 @@
-5 50
+3 18
 META script_type_update
 META execution_entry
 
 EXEC player_update
-INT int = fe3d:misc_get_random_integer(0, 1000)
-DEC dec = fe3d:misc_get_random_decimal(0.0, 1000.0)
-fe3d:print(int)
-fe3d:print(dec)

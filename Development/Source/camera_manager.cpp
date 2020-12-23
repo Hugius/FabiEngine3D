@@ -81,6 +81,8 @@ void CameraManager::update(WindowManager & windowManager)
 	}
 
 	// Update yaw & pitch movements
+	_yawAcceleration = std::clamp(_yawAcceleration, -_maxYawAcceleration, _maxYawAcceleration);
+	_pitchAcceleration = std::clamp(_pitchAcceleration, -_maxPitchAcceleration, _maxPitchAcceleration);
 	_yaw += _yawAcceleration;
 	_pitch += _pitchAcceleration;
 	_yawAcceleration *= 0.75f;

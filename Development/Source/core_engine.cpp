@@ -67,45 +67,87 @@ void CoreEngine::_stop()
 
 void CoreEngine::_setupApplication()
 {
-	// Create engine logo
-	shared_ptr<GuiEntity> logo = make_shared<GuiEntity>("logo");
-	logo->addOglBuffer(new OpenGLBuffer(0.0f, 0.0f, 2.0f, 2.0f, true, false));
-	logo->setDiffuseMap(_texLoader.getTexture("engine\\textures\\logo.png", true, true));
-	
-	// Get logo resolution
-	SDL_DisplayMode DM;
-	SDL_GetDesktopDisplayMode(0, &DM);
-	float width = float(DM.w);
-	float height = float(DM.h);
-	Ivec2 logoResolution = Ivec2(static_cast<int>(width * 0.4f), static_cast<int>(height * 0.2f));
+	// Only if in engine preview
+	if (Config::getInst().getSelectedGame().empty())
+	{
+		// Create engine logo
+		shared_ptr<GuiEntity> logo = make_shared<GuiEntity>("logo");
+		logo->addOglBuffer(new OpenGLBuffer(0.0f, 0.0f, 2.0f, 2.0f, true, false));
+		logo->setDiffuseMap(_texLoader.getTexture("engine\\textures\\logo.png", true, true));
 
-	// Window properties & rendering
-	Vec3 keyingColor = Vec3(0.2f);
-	glClearColor(keyingColor.r, keyingColor.g, keyingColor.b, 0.0f);
-	_windowManager.enableOpaqueness(keyingColor);
-	_windowManager.setSize(logoResolution);
-	_windowManager.showWindow();
-	_renderEngine.renderEngineLogo(logo, logoResolution);
-	_windowManager.swapBackBuffer();
-	
-	// Show logo for at least 1 second
-	auto start = std::chrono::high_resolution_clock::now();
-	while (std::chrono::duration_cast<std::chrono::duration<float>>(std::chrono::high_resolution_clock::now() - start).count() * 1000.0f < 1000.0f) {}
-	_windowManager.disableOpaqueness(keyingColor);
+		// Calculate logo resolution
+		SDL_DisplayMode DM;
+		SDL_GetDesktopDisplayMode(0, &DM);
+		float width = float(DM.w);
+		float height = float(DM.h);
+		Ivec2 logoResolution = Ivec2(static_cast<int>(width * 0.4f), static_cast<int>(height * 0.2f));
 
-	// Vignettte
+		// Render logo
+		Vec3 keyingColor = Vec3(0.2f);
+		glClearColor(keyingColor.r, keyingColor.g, keyingColor.b, 0.0f);
+		_windowManager.enableColorKeying(keyingColor);
+		_windowManager.setSize(logoResolution);
+		_windowManager.showWindow();
+		_renderEngine.renderEngineLogo(logo, logoResolution);
+		_windowManager.swapBackBuffer();
+
+		// Initialize engine controller
+		_fe3d.FE3D_CONTROLLER_INIT();
+
+		// Show logo for at least 1 second
+		auto start = std::chrono::high_resolution_clock::now();
+		while (std::chrono::duration_cast<std::chrono::duration<float>>(std::chrono::high_resolution_clock::now() - start).count() * 1000.0f < 1000.0f) {}
+		_windowManager.disableColorKeying(keyingColor);
+
+		// Set window properties
+		_windowManager.setSize(Config::getInst().getWindowSize());
+		_windowManager.showWindow();
+		_windowManager.showBorder();
+		_windowManager.setOpacity(0.0f);
+	}
+
+	// Only if in game preview
+	if (!Config::getInst().getSelectedGame().empty())
+	{
+		// Set window properties
+		_windowManager.setSize(Config::getInst().getWindowSize());
+		_windowManager.showWindow();
+		_windowManager.showBorder();
+		_windowManager.enableVsync();
+
+		// Create engine logo
+		shared_ptr<GuiEntity> logo = make_shared<GuiEntity>("logo");
+		logo->addOglBuffer(new OpenGLBuffer(0.0f, 0.0f, 1.0f, 0.75f, true, false));
+		logo->setDiffuseMap(_texLoader.getTexture("engine\\textures\\logo.png", true, true));
+
+		// Render logo (intro fade in)
+		for (float opaqueness = 0.0f; opaqueness < 1.0f; opaqueness += 0.0025f)
+		{
+			logo->setColor(Vec3(opaqueness));
+			_inputHandler.f_checkInput();
+			_renderEngine.renderEngineLogo(logo, Config::getInst().getWindowSize());
+			_windowManager.swapBackBuffer();
+		}
+
+		// Initialize engine controller
+		_fe3d.FE3D_CONTROLLER_INIT();
+
+		// Render logo (intro fade out)
+		for (float opaqueness = 1.0f; opaqueness > 0.0f; opaqueness -= 0.005f)
+		{
+			logo->setColor(Vec3(opaqueness));
+			_renderEngine.renderEngineLogo(logo, Config::getInst().getWindowSize());
+			_windowManager.swapBackBuffer();
+		}
+
+		// Miscellaneous
+		_windowManager.disableVsync();
+	}
+
+	// Add vignettte
 	Vec2 pos = _fe3d.misc_convertToNDC(_fe3d.misc_convertFromScreenCoords(Config::getInst().getVpPos()));
 	Vec2 size = ((Vec2(Config::getInst().getVpSize()) / Vec2(Config::getInst().getWindowSize())) * 2.0f) + Vec2(0.0f, 0.005f);
 	_fe3d.guiEntity_add("@vignette", "engine\\textures\\vignette.png", pos, 0.0f, size, false);
-
-	// Initialize engine controller
-	_fe3d.FE3D_CONTROLLER_INIT();
-
-	// Set new window properties
-	_windowManager.setSize(Config::getInst().getWindowSize());
-	_windowManager.showWindow();
-	_windowManager.showBorder();
-	_windowManager.setOpacity(0.0f);
 }
 
 void CoreEngine::_updateApplication()

@@ -75,7 +75,7 @@ WindowManager::WindowManager()
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 	SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
-	SDL_GL_SetSwapInterval(0);
+	disableVsync();
 }
 
 WindowManager::~WindowManager()
@@ -103,7 +103,7 @@ void WindowManager::setOpacity(float value)
 	SDL_SetWindowOpacity(_window, value);
 }
 
-void WindowManager::enableOpaqueness(Vec3 color)
+void WindowManager::enableColorKeying(Vec3 color)
 {
 	// Get window handle
 	SDL_SysWMinfo wmInfo;
@@ -116,7 +116,7 @@ void WindowManager::enableOpaqueness(Vec3 color)
 	SetLayeredWindowAttributes(hwnd, RGB(static_cast<int>(color.r * 255.0f), static_cast<int>(color.g * 255), static_cast<int>(color.b * 255)), 0, LWA_COLORKEY);
 }
 
-void WindowManager::disableOpaqueness(Vec3 color)
+void WindowManager::disableColorKeying(Vec3 color)
 {
 	// Get window handle
 	SDL_SysWMinfo wmInfo;
@@ -147,6 +147,16 @@ void WindowManager::enableFullscreen()
 void WindowManager::disableFullscreen()
 {
 	SDL_SetWindowFullscreen(_window, SDL_FALSE);
+}
+
+void WindowManager::enableVsync()
+{
+	SDL_GL_SetSwapInterval(1);
+}
+
+void WindowManager::disableVsync()
+{
+	SDL_GL_SetSwapInterval(0);
 }
 
 void WindowManager::swapBackBuffer()

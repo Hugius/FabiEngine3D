@@ -233,7 +233,7 @@ vec3 getSpotLighting(bool noShadowOcclusion)
     }
 }
 
-float getRandomFloat(vec3 seed, int i)
+float getRandomFloat(vec3 seed, int i) // http://www.opengl-tutorial.org/intermediate-tutorials/tutorial-16-shadow-mapping/#stratified-poisson-sampling
 {
 	vec4 seed4 = vec4(seed,i);
 	float dot_product = dot(seed4, vec4(12.9898,78.233,45.164,94.673));
@@ -278,7 +278,7 @@ float getShadowValue()
 			for(int i = 0; i < 4; i++)
 			{
 				// Get random index
-				int index = i;
+				int index = int(16.0f*getRandomFloat(floor(f_pos.xyz*1000.0f), i))%16;
 
 				// Calculate depth from shadow map
 				float shadowMapDepth = texture(u_sampler_shadowMap, projCoords.xy + (poissonDisk[index] / 700.0f)).r;

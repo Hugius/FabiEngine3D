@@ -1,4 +1,4 @@
-30 53
+29 49
 META script_type_init
 
 /// Global variables
@@ -29,4 +29,3 @@ fe3d:collision_enable_camera_terrain_response(_camHeight, 0.05)
 fe3d:model_place("player", "skeleton", 0.0, 0.0, 0.0)
 fe3d:model_set_max_height("player", 2.5)
 fe3d:model_set_aabb_responsive("player", <false>)
-fe3d:billboard_place("fire", "fire", 5.0, 8.0, 140.0)

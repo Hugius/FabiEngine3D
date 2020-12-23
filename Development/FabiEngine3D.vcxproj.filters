@@ -409,12 +409,6 @@
     <ClCompile Include="Source\script_executor.cpp">
       <Filter>src\Scripting System\Execution\Executor</Filter>
     </ClCompile>
-    <ClCompile Include="Source\script_value.cpp">
-      <Filter>src\Scripting System\Miscellaneous</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\script_variable.cpp">
-      <Filter>src\Scripting System\Miscellaneous</Filter>
-    </ClCompile>
     <ClCompile Include="Source\bottom_viewport_controller_console.cpp">
       <Filter>src\Engine Controller System\Viewport Controllers</Filter>
     </ClCompile>
@@ -475,24 +469,6 @@
     <ClCompile Include="Source\audio_editor_persistence.cpp">
       <Filter>src\Editor System\Audio Editor\Core</Filter>
     </ClCompile>
-    <ClCompile Include="Source\matrix33.cpp">
-      <Filter>src\Math System</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\matrix44.cpp">
-      <Filter>src\Math System</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\vector2.cpp">
-      <Filter>src\Math System</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\vector3.cpp">
-      <Filter>src\Math System</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\vector4.cpp">
-      <Filter>src\Math System</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\ivector2.cpp">
-      <Filter>src\Math System</Filter>
-    </ClCompile>
     <ClCompile Include="Source\scene_editor_audio_editing.cpp">
       <Filter>src\Editor System\Scene Editor\Audio</Filter>
     </ClCompile>
@@ -501,12 +477,6 @@
     </ClCompile>
     <ClCompile Include="Source\scene_editor_audio_placing.cpp">
       <Filter>src\Editor System\Scene Editor\Audio</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\matrix44_functions.cpp">
-      <Filter>src\Math System</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\ivector3.cpp">
-      <Filter>src\Math System</Filter>
     </ClCompile>
     <ClCompile Include="Source\script_interpreter_core.cpp">
       <Filter>src\Scripting System\Execution\Interpreter\Core</Filter>
@@ -615,6 +585,36 @@
     </ClCompile>
     <ClCompile Include="Source\script_interpreter_func_music.cpp">
       <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ivector2.cpp">
+      <Filter>src\Math System\Vector</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ivector3.cpp">
+      <Filter>src\Math System\Vector</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\matrix33.cpp">
+      <Filter>src\Math System\Matrix</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\matrix44.cpp">
+      <Filter>src\Math System\Matrix</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\matrix44_functions.cpp">
+      <Filter>src\Math System\Matrix</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\vector2.cpp">
+      <Filter>src\Math System\Vector</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\vector3.cpp">
+      <Filter>src\Math System\Vector</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\vector4.cpp">
+      <Filter>src\Math System\Vector</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_value.cpp">
+      <Filter>src\Scripting System\Data Structures</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_variable.cpp">
+      <Filter>src\Scripting System\Data Structures</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -861,9 +861,6 @@
     <ClInclude Include="Source\script_file.hpp">
       <Filter>src\Scripting System\Core</Filter>
     </ClInclude>
-    <ClInclude Include="Source\script_variable.hpp">
-      <Filter>src\Scripting System\Miscellaneous</Filter>
-    </ClInclude>
     <ClInclude Include="Source\input_types.hpp">
       <Filter>src\Miscellaneous\Enums</Filter>
     </ClInclude>
@@ -912,35 +909,11 @@
     <ClInclude Include="Source\environment_type.hpp">
       <Filter>src\Miscellaneous\Enums</Filter>
     </ClInclude>
-    <ClInclude Include="Source\matrix33.hpp">
-      <Filter>src\Math System</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\matrix44.hpp">
-      <Filter>src\Math System</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\vector2.hpp">
-      <Filter>src\Math System</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\vector3.hpp">
-      <Filter>src\Math System</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\vector4.hpp">
-      <Filter>src\Math System</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\mathematics.hpp">
-      <Filter>src\Math System</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\ivector2.hpp">
-      <Filter>src\Math System</Filter>
-    </ClInclude>
     <ClInclude Include="Source\settings_editor.hpp">
       <Filter>src\Editor System\Settings Editor</Filter>
     </ClInclude>
     <ClInclude Include="Source\configuration.hpp">
       <Filter>src\Miscellaneous\Other</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\ivector3.hpp">
-      <Filter>src\Math System</Filter>
     </ClInclude>
     <ClInclude Include="Source\script_interpreter.hpp">
       <Filter>src\Scripting System\Execution\Interpreter\Core</Filter>
@@ -968,6 +941,33 @@
     </ClInclude>
     <ClInclude Include="Source\script_condition_type.hpp">
       <Filter>src\Miscellaneous\Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ivector2.hpp">
+      <Filter>src\Math System\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ivector3.hpp">
+      <Filter>src\Math System\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\matrix33.hpp">
+      <Filter>src\Math System\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\matrix44.hpp">
+      <Filter>src\Math System\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\vector2.hpp">
+      <Filter>src\Math System\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\vector3.hpp">
+      <Filter>src\Math System\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\vector4.hpp">
+      <Filter>src\Math System\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\mathematics.hpp">
+      <Filter>src\Math System\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\script_variable.hpp">
+      <Filter>src\Scripting System\Data Structures</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1244,6 +1244,18 @@
     <Filter Include="src\Editor System\Animation Editor\Data Structures">
       <UniqueIdentifier>{a0ba53c2-9ce4-494e-bbe4-cacbff1e3bda}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Math System\Vector">
+      <UniqueIdentifier>{13e67159-e38e-49e2-aff3-bf37e12014b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Math System\Matrix">
+      <UniqueIdentifier>{09e05e0d-34c2-4741-a778-9f4f3ec9a4ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Math System\Core">
+      <UniqueIdentifier>{32e03b84-0ba0-4e93-8890-777fad594f6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Scripting System\Data Structures">
+      <UniqueIdentifier>{2a0e634e-c81e-4443-804e-1ac36951dafc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\FabiEngine3D\Engine\Shaders\aabb_entity_shader.vert">
@@ -1325,7 +1337,7 @@
       <Filter>src\Rendering System\Shaders\Entity Shaders</Filter>
     </None>
     <None Include="Source\script_value.hpp">
-      <Filter>src\Scripting System\Miscellaneous</Filter>
+      <Filter>src\Scripting System\Data Structures</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

@@ -2,6 +2,13 @@
 
 bool ScriptInterpreter::_validateFe3dAabbEntity(const string& ID)
 {
+	// Cannot request/delete a preview entity
+	if (ID.front() == '@')
+	{
+		_throwScriptError("Requested AABB ID cannot start with '@'");
+		return false;
+	}
+
 	// Check if entity exists
 	if (!_fe3d.aabbEntity_isExisting(ID))
 	{
@@ -39,19 +46,25 @@ bool ScriptInterpreter::_executeFe3dAabbEntityFunction(const string& functionNam
 		// Validate arguments
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
+			// New AABB ID cannot start with '@'
+			if (arguments[0].getString().front() == '@')
+			{
+				_throwScriptError("New AABB ID cannot start with '@'");
+				return true;
+			}
+
 			// Check if AABB entity already exists
 			if (_fe3d.aabbEntity_isExisting(arguments[0].getString()))
 			{
 				_throwScriptError("AABB with ID \"" + arguments[0].getString() + "\" already exists!");
 				return true;
 			}
-			else
-			{
-				_fe3d.aabbEntity_add(arguments[0].getString(), 
-					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()),
-					Vec3(arguments[4].getDecimal(), arguments[5].getDecimal(), arguments[6].getDecimal()), true);
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
-			}
+
+			// Add AABB
+			_fe3d.aabbEntity_add(arguments[0].getString(), 
+				Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()),
+				Vec3(arguments[4].getDecimal(), arguments[5].getDecimal(), arguments[6].getDecimal()), true);
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
 	else if (functionName == "fe3d:aabb_delete") // Delete aabbEntity

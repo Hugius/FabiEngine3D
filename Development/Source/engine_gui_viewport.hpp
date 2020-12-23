@@ -13,6 +13,7 @@ public:
 	bool isHovered();
 
 	const string& getID();
+	const string& getEntityID();
 
 	void addWindow(const string& ID, Vec2 position, Vec2 size, Vec3 color);
 	
@@ -24,6 +25,7 @@ private:
 	FabiEngine3D& _fe3d;
 
 	string _ID = "";
+	string _entityID = "";
 
 	vector<shared_ptr<EngineGuiWindow>> _windows;
 };

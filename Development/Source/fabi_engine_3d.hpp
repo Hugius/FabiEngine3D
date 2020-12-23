@@ -481,6 +481,7 @@ public:
 	Vec2 guiEntity_getSize(const string& ID);
 	Vec2 guiEntity_getMinPosition(const string& ID);
 	Vec2 guiEntity_getMaxPosition(const string& ID);
+	Vec3 guiEntity_getColor(const string& ID);
 	float guiEntity_getRotation(const string& ID);
 	float guiEntity_getAlpha(const string& ID);
 	vector<string> guiEntity_getAllIDs();
@@ -757,6 +758,7 @@ public:
 	string misc_vec2str(Vec3 vec);
 	string misc_vec2str(Vec4 vec);
 	string misc_getRootDirectory();
+	string misc_getCpuName();
 	string misc_getGpuName();
 	string misc_getOpenglVersion();
 	Vec2 misc_convertToNDC(Vec2 pos);

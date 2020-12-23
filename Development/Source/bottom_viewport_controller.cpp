@@ -24,17 +24,18 @@ void BottomViewportController::initialize()
 
 	// General statistics
 	_statsScreen->addTextfield("fps", Vec2(-1.0f, 0.85f), Vec2(0.0f), "", Vec3(1.0f), false, true);
-	_statsScreen->addTextfield("gpuName", Vec2(-1.0f, 0.7f), Vec2(0.0f), "", Vec3(1.0f), false, false);
-	_statsScreen->addTextfield("openglVersion", Vec2(-1.0f, 0.55f), Vec2(0.0f), "", Vec3(1.0f), false, false);
-	_statsScreen->addTextfield("cameraPosition", Vec2(-1.0f, 0.4f), Vec2(0.0f), "", Vec3(1.0f), false, true);
-	_statsScreen->addTextfield("cameraYawPitch", Vec2(-1.0f, 0.25f), Vec2(0.0f), "", Vec3(1.0f), false, true);
-	_statsScreen->addTextfield("cursorPosition", Vec2(-1.0f, 0.1f), Vec2(0.0f), "", Vec3(1.0f), false, true);
-	_statsScreen->addTextfield("triangleCount", Vec2(-1.0f, -0.05f), Vec2(0.0f), "", Vec3(1.0f), false, true);
-	_statsScreen->addTextfield("gameEntityCount", Vec2(-1.0f, -0.2f), Vec2(0.0f), "", Vec3(1.0f), false, true);
-	_statsScreen->addTextfield("billboardEntityCount", Vec2(-1.0f, -0.35f), Vec2(0.0f), "", Vec3(1.0f), false, true);
-	_statsScreen->addTextfield("lightEntityCount", Vec2(-1.0f, -0.5f), Vec2(0.0f), "", Vec3(1.0f), false, true);
-	_statsScreen->addTextfield("aabbEntityCount", Vec2(-1.0f, -0.65f), Vec2(0.0f), "", Vec3(1.0f), false, true);
-	_statsScreen->addTextfield("guiEntityCount", Vec2(-1.0f, -0.8f), Vec2(0.0f), "", Vec3(1.0f), false, true);
+	_statsScreen->addTextfield("cpuName", Vec2(-1.0f, 0.7f), Vec2(0.0f), "", Vec3(1.0f), false, false);
+	_statsScreen->addTextfield("gpuName", Vec2(-1.0f, 0.55f), Vec2(0.0f), "", Vec3(1.0f), false, false);
+	_statsScreen->addTextfield("openglVersion", Vec2(-1.0f, 0.4f), Vec2(0.0f), "", Vec3(1.0f), false, false);
+	_statsScreen->addTextfield("cameraPosition", Vec2(-1.0f, 0.25f), Vec2(0.0f), "", Vec3(1.0f), false, true);
+	_statsScreen->addTextfield("cameraYawPitch", Vec2(-1.0f, 0.1f), Vec2(0.0f), "", Vec3(1.0f), false, true);
+	_statsScreen->addTextfield("cursorPosition", Vec2(-1.0f, -0.05f), Vec2(0.0f), "", Vec3(1.0f), false, true);
+	_statsScreen->addTextfield("triangleCount", Vec2(-1.0f, -0.2f), Vec2(0.0f), "", Vec3(1.0f), false, true);
+	_statsScreen->addTextfield("gameEntityCount", Vec2(-1.0f, -0.35f), Vec2(0.0f), "", Vec3(1.0f), false, true);
+	_statsScreen->addTextfield("billboardEntityCount", Vec2(-1.0f, -0.5f), Vec2(0.0f), "", Vec3(1.0f), false, true);
+	_statsScreen->addTextfield("lightEntityCount", Vec2(-1.0f, -0.65f), Vec2(0.0f), "", Vec3(1.0f), false, true);
+	_statsScreen->addTextfield("aabbEntityCount", Vec2(-1.0f, -0.8f), Vec2(0.0f), "", Vec3(1.0f), false, true);
+	_statsScreen->addTextfield("guiEntityCount", Vec2(-1.0f, -0.95f), Vec2(0.0f), "", Vec3(1.0f), false, true);
 
 	// Update profiling
 	auto updateStatistics = _fe3d.misc_getUpdateProfilingStatistics();
@@ -79,6 +80,14 @@ void BottomViewportController::update()
 	else
 	{
 		fpsList.push_back(_fe3d.misc_getFPS());
+	}
+
+	// Update CPU stats
+	if (_fe3d.misc_checkInterval("cpuName", 10000))
+	{
+		string textID = _statsScreen->getTextfield("cpuName")->getEntityID();
+		string text = "CPU: " + _fe3d.misc_getCpuName();
+		_fe3d.textEntity_setTextContent(textID, text, _charSize.x, _charSize.y);
 	}
 
 	// Update GPU stats

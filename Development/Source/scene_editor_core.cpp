@@ -433,9 +433,6 @@ void SceneEditor::unload()
 	_fe3d.billboardEntity_deleteAll();
 	_fe3d.lightEntity_deleteAll();
 
-	// Stop all playing animations
-	_animationEditor.stopAllAnimations();
-
 	// Reset variables
 	_currentSkyID = "";
 	_currentTerrainID = "";

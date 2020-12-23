@@ -4,7 +4,7 @@ EngineGuiTextfield::EngineGuiTextfield(FabiEngine3D& fe3d, const string& parentI
 	string textContent, Vec3 textColor, bool isCentered, bool isDynamic) :
 	_fe3d(fe3d),
 	_ID(ID),
-	_entityID(parentID + "_" + ID),
+	_entityID("@" + parentID + "_" + ID),
 	_parentID(parentID),
 	_originalPosition(position),
 	_originalSize(size),

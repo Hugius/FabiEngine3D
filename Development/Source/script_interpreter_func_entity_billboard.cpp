@@ -555,6 +555,54 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			}
 		}
 	}
+	else if (functionName == "fe3d:billboard_set_text") // Set billboardEntity text
+	{
+		auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
+
+		// Validate arguments
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existing billboard ID
+			if (_validateFe3dBillboardEntity(arguments[0].getString()))
+			{
+				// Check if billboard is of type text
+				if (_fe3d.billboardEntity_getFontPath(arguments[0].getString()).empty())
+				{
+					_throwScriptError("Billboard is not of type text!");
+					return true;
+				}
+				else
+				{
+					_fe3d.billboardEntity_setTextContent(arguments[0].getString(), arguments[1].getString());
+					returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				}
+			}
+		}
+	}
+	else if (functionName == "fe3d:billboard_get_text") // Get billboardEntity text
+	{
+		auto types = { ScriptValueType::STRING };
+
+		// Validate arguments
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existing billboard ID
+			if (_validateFe3dBillboardEntity(arguments[0].getString()))
+			{
+				// Check if billboard is of type text
+				if (_fe3d.billboardEntity_getFontPath(arguments[0].getString()).empty())
+				{
+					_throwScriptError("Billboard is not of type text!");
+					return true;
+				}
+				else
+				{
+					auto result = _fe3d.billboardEntity_getTextContent(arguments[0].getString());
+					returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result));
+				}
+			}
+		}
+	}
 	else
 	{
 		return false;

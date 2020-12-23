@@ -191,6 +191,7 @@ string FabiEngine3D::misc_getWinExplorerFilename(const string& startingDir, cons
 	string filter = fileType;
 	filter.push_back('\0');
 	filter += "*." + fileType + '\0';
+	auto startingDirectory = string(misc_getRootDirectory() + startingDir).c_str();
 
 	// Open file explorer
 	OPENFILENAME ofn;
@@ -207,7 +208,7 @@ string FabiEngine3D::misc_getWinExplorerFilename(const string& startingDir, cons
 	ofn.lpstrFileTitle = titleBuffer;
 	ofn.lpstrFileTitle[0] = '\0';
 	ofn.nMaxFileTitle = sizeof(titleBuffer);
-	ofn.lpstrInitialDir = string(misc_getRootDirectory() + startingDir).c_str(); // Starting directory
+	ofn.lpstrInitialDir = startingDirectory; // Starting directory
 	ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
 	GetOpenFileName(&ofn);
 
@@ -247,6 +248,51 @@ string FabiEngine3D::misc_getRootDirectory()
 
 	// Return
 	return rootDir;
+}
+
+string FabiEngine3D::misc_getCpuName() // https://stackoverflow.com/questions/850774/how-to-determine-the-hardware-cpu-and-ram-on-a-machine
+{
+	// Temporary values
+	int CPUInfo[4];
+	char nameString[48];
+
+	// Retrieve full CPU name string
+	__cpuid(CPUInfo, 0x80000002);
+	memcpy(nameString, CPUInfo, sizeof(CPUInfo));
+	__cpuid(CPUInfo, 0x80000003);
+	memcpy(nameString + 16, CPUInfo, sizeof(CPUInfo));
+	__cpuid(CPUInfo, 0x80000004);
+	memcpy(nameString + 32, CPUInfo, sizeof(CPUInfo));
+	
+	// Retrieve number of logical CPU cores
+	SYSTEM_INFO sysInfo;
+	GetSystemInfo(&sysInfo);
+	string coreCount = to_string(sysInfo.dwNumberOfProcessors);
+
+	// Temporary values
+	string fullString = nameString;
+	string vendorName, cpuName, clockSpeed;
+
+	// Remove long copyrighted Intel name
+	if (fullString.substr(0, 5) == "Intel")
+	{
+		fullString = fullString.substr(18);
+		vendorName = "Intel";
+	}
+
+	// Extract name & clockspeed
+	for (unsigned int i = 0; i < fullString.size(); i++)
+	{
+		if (fullString[i] == '@')
+		{
+			cpuName = fullString.substr(0, i - 5);
+			clockSpeed = fullString.substr(i + 2);
+			break;
+		}
+	}
+
+	// Return
+	return vendorName + " " + cpuName + " " + coreCount + "x" + clockSpeed;
 }
 
 string FabiEngine3D::misc_getGpuName()

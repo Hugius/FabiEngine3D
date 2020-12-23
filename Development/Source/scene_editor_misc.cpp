@@ -467,6 +467,9 @@ void SceneEditor::clearScene()
 				_fe3d.audioEntity_delete(ID);
 			}
 		}
+
+		// Delete music
+		_fe3d.music_clearPlaylist();
 	}
 	else // Playing game
 	{
@@ -488,5 +491,8 @@ void SceneEditor::clearScene()
 		_fe3d.lightEntity_deleteAll();
 		_fe3d.audioEntity_deleteAll();
 		_fe3d.music_clearPlaylist();
+
+		// Stop animations
+		_animationEditor.stopAllAnimations();
 	}
 }

@@ -3,7 +3,7 @@
 EngineGuiRectangle::EngineGuiRectangle(FabiEngine3D& fe3d, const string& parentID, const string& ID, Vec2 position, Vec2 size, Vec3 color, bool isCentered) :
 	_fe3d(fe3d),
 	_ID(ID),
-	_entityID(parentID + "_" + ID),
+	_entityID("@" + parentID + "_" + ID),
 	_parentID(parentID),
 	_originalPosition(position),
 	_originalSize(size),
@@ -15,7 +15,7 @@ EngineGuiRectangle::EngineGuiRectangle(FabiEngine3D& fe3d, const string& parentI
 EngineGuiRectangle::EngineGuiRectangle(FabiEngine3D& fe3d, const string& parentID, const string& ID, Vec2 position, Vec2 size, const string& textureName, bool isCentered) :
 	_fe3d(fe3d),
 	_ID(ID),
-	_entityID(parentID + "_" + ID),
+	_entityID("@" + parentID + "_" + ID),
 	_parentID(parentID),
 	_originalPosition(position),
 	_originalSize(size),

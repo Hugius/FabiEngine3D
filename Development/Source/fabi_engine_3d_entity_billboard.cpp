@@ -286,14 +286,18 @@ void FabiEngine3D::billboardEntity_setFont(const string& ID, const string& fontP
 
 void FabiEngine3D::billboardEntity_setTextContent(const string& ID, const string& textContent)
 {
-	string fontPath = _core->_billboardEntityManager.getEntity(ID)->getFontPath();
-	_core->_billboardEntityManager.getEntity(ID)->setTextContent(textContent);
-
-	// Only update texture if font is loaded
-	if (fontPath != "")
+	// Check if text content is not the same as the current one
+	if (_core->_billboardEntityManager.getEntity(ID)->getTextContent() != textContent)
 	{
-		_core->_billboardEntityManager.getEntity(ID)->setDiffuseMap(_core->_texLoader.getText(textContent, fontPath));
-		_core->_billboardEntityManager.getEntity(ID)->setTransparent(true);
+		string fontPath = _core->_billboardEntityManager.getEntity(ID)->getFontPath();
+		_core->_billboardEntityManager.getEntity(ID)->setTextContent(textContent);
+
+		// Only update texture if font is loaded
+		if (fontPath != "")
+		{
+			_core->_billboardEntityManager.getEntity(ID)->setDiffuseMap(_core->_texLoader.getText(textContent, fontPath));
+			_core->_billboardEntityManager.getEntity(ID)->setTransparent(true);
+		}
 	}
 }
 

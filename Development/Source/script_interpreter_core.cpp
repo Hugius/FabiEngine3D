@@ -165,9 +165,8 @@ void ScriptInterpreter::executeDestruction()
 
 void ScriptInterpreter::unload()
 {
-	// Unload all scenes and stop all animations
+	// Unload scene
 	_sceneEditor.clearScene();
-	_animationEditor.stopAllAnimations();
 
 	// Disable collision response
 	_fe3d.collision_disableCameraTerrainResponse();
@@ -190,6 +189,26 @@ void ScriptInterpreter::unload()
 	_fe3d.gfx_disableDOF();
 	_fe3d.gfx_disableMotionBlur();
 	_fe3d.gfx_disableLensFlare();
+
+	// Delete game GUI
+	for (const auto& ID : _fe3d.guiEntity_getAllIDs())
+	{
+		// Cannot delete engine GUI entities
+		if (ID.front() != '@')
+		{
+			_fe3d.guiEntity_delete(ID);
+		}
+	}
+
+	// Delete game text
+	for (const auto& ID : _fe3d.textEntity_getAllIDs())
+	{
+		// Cannot delete engine GUI entities
+		if (ID.front() != '@')
+		{
+			_fe3d.textEntity_delete(ID);
+		}
+	}
 
 	// Reset camera
 	_fe3d.camera_load(90.0f, 0.1f, 10000.0f, Vec3(0.0f));

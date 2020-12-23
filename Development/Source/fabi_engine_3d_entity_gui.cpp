@@ -151,6 +151,11 @@ Vec2 FabiEngine3D::guiEntity_getMaxPosition(const string& ID)
 	return _core->_guiEntityManager.getEntity(ID)->getMaxPosition();
 }
 
+Vec3 FabiEngine3D::guiEntity_getColor(const string& ID)
+{
+	return _core->_guiEntityManager.getEntity(ID)->getColor();
+}
+
 bool FabiEngine3D::guiEntity_isVisible(const string& ID)
 {
 	return _core->_guiEntityManager.getEntity(ID)->isVisible();

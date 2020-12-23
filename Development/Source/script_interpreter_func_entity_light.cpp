@@ -208,6 +208,24 @@ bool ScriptInterpreter::_executeFe3dLightEntityFunction(const string& functionNa
 			}
 		}
 	}
+	else if (functionName == "fe3d:light_get_all_names") // Get all lightEntity names
+	{
+		// Validate arguments
+		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			auto result = _fe3d.lightEntity_getAllIDs();
+
+			// For every light
+			for (auto& ID : result)
+			{
+				// Only non-preview lights
+				if (ID.front() != '@')
+				{
+					returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, ID));
+				}
+			}
+		}
+	}
 	else
 	{
 		return false;

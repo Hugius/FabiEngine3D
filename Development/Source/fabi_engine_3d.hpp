@@ -518,6 +518,7 @@ public:
 	Vec2 textEntity_getSize(const string& ID);
 	Vec2 textEntity_getMinPosition(const string& ID);
 	Vec2 textEntity_getMaxPosition(const string& ID);
+	Vec3 textEntity_getColor(const string& ID);
 	float textEntity_getRotation(const string& ID);
 	float textEntity_getAlpha(const string& ID);
 	const string& textEntity_getTextContent(const string& ID);

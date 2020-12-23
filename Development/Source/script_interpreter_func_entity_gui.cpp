@@ -73,16 +73,18 @@ bool ScriptInterpreter::_executeFe3dGuiEntityFunction(const string& functionName
 			// Compose full texture path
 			auto texturePath = string("user\\assets\\textures\\gui_maps\\") + arguments[1].getString();
 
-			// Calculate position in viewport
-			auto positionMultiplier = Vec2(_fe3d.misc_getViewportPosition()) / 
-				Vec2(static_cast<float>(_fe3d.misc_getWindowWidth()), static_cast<float>(_fe3d.misc_getWindowHeight()));
-			auto position = Vec2(arguments[2].getDecimal(), arguments[3].getDecimal()) * positionMultiplier;
-
 			// Calculate size in viewport
 			auto sizeMultiplier = Vec2(_fe3d.misc_getViewportSize()) / 
 				Vec2(static_cast<float>(_fe3d.misc_getWindowWidth()), static_cast<float>(_fe3d.misc_getWindowHeight()));
 			auto size = Vec2(arguments[5].getDecimal(), arguments[6].getDecimal()) * sizeMultiplier;
 
+			// Calculate position in viewport
+			auto positionMultiplier = Vec2(_fe3d.misc_getViewportPosition()) /
+				Vec2(static_cast<float>(_fe3d.misc_getWindowWidth()), static_cast<float>(_fe3d.misc_getWindowHeight()));
+			auto position = Vec2(arguments[2].getDecimal(), arguments[3].getDecimal()) * sizeMultiplier;
+			auto offset = Vec2(1.0f) - Vec2((positionMultiplier.x * 2.0f) + sizeMultiplier.x, (positionMultiplier.y * 2.0f) + sizeMultiplier.y);
+			position += Vec2(fabsf(offset.x), fabsf(offset.y));
+			
 			// Add image
 			_fe3d.guiEntity_add(
 				arguments[0].getString(),
@@ -109,7 +111,7 @@ bool ScriptInterpreter::_executeFe3dGuiEntityFunction(const string& functionName
 			}
 		}
 	}
-	else if (functionName == "fe3d:model_set_visible") // Set guiEntity visibility
+	else if (functionName == "fe3d:image_set_visible") // Set guiEntity visibility
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::BOOLEAN };
 
@@ -131,6 +133,21 @@ bool ScriptInterpreter::_executeFe3dGuiEntityFunction(const string& functionName
 
 				// Return
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			}
+		}
+	}
+	else if (functionName == "fe3d:image_is_visible") // Get guiEntity visibility
+	{
+		auto types = { ScriptValueType::STRING };
+
+		// Validate arguments
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existing image ID
+			if (_validateFe3dGuiEntity(arguments[0].getString()))
+			{
+				auto result = _fe3d.guiEntity_isVisible(arguments[0].getString());
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 			}
 		}
 	}
@@ -327,6 +344,24 @@ bool ScriptInterpreter::_executeFe3dGuiEntityFunction(const string& functionName
 			{
 				auto result = _fe3d.guiEntity_getColor(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));
+			}
+		}
+	}
+	else if (functionName == "fe3d:image_get_all_names") // Get all guiEntity names
+	{
+		// Validate arguments
+		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			auto result = _fe3d.guiEntity_getAllIDs();
+
+			// For every image
+			for (auto& ID : result)
+			{
+				// Only non-preview models
+				if (ID.front() != '@')
+				{
+					returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, ID));
+				}
 			}
 		}
 	}

@@ -30,7 +30,15 @@ void FabiEngine3D::textEntity_add(const string& ID, const string& textContent, c
 
 void FabiEngine3D::textEntity_delete(const string& ID)
 {
-	_core->_textEntityManager.deleteEntity(ID);
+	// Check if text if dynamic
+	if (_core->_textEntityManager.isExisting(ID) && _core->_textEntityManager.getEntity(ID)->isDynamic())
+	{
+		_core->_textEntityManager.deleteDynamicTextEntity(ID);
+	}
+	else
+	{
+		_core->_textEntityManager.deleteEntity(ID);
+	}
 }
 
 bool FabiEngine3D::textEntity_isExisting(const string& ID)
@@ -162,6 +170,11 @@ Vec2 FabiEngine3D::textEntity_getMinPosition(const string& ID)
 Vec2 FabiEngine3D::textEntity_getMaxPosition(const string& ID)
 {
 	return  _core->_textEntityManager.getEntity(ID)->getMaxPosition();
+}
+
+Vec3 FabiEngine3D::textEntity_getColor(const string& ID)
+{
+	return _core->_textEntityManager.getEntity(ID)->getColor();
 }
 
 const string& FabiEngine3D::textEntity_getTextContent(const string& ID)

@@ -82,26 +82,47 @@ void TextEntityManager::reloadCharacters(const string& ID)
 	// Check if text content changed
 	if ((_textContentMap.find(ID) == _textContentMap.end()) || (entity->getTextContent() != _textContentMap[ID]))
 	{
+		// Temporary values
+		bool invalidFont = false;
 		_textContentMap[ID] = entity->getTextContent();
 		entity->deleteCharacterEntities();
 
 		// For every character
 		for (auto& c : entity->getTextContent())
 		{
-			// Create new character entity
-			auto newCharacter = make_shared<GuiEntity>("uselessID");
-			newCharacter->addOglBuffer(_nonCenteredOpenglBuffer, false);
+			if (!invalidFont)
+			{
+				// Create new character entity
+				auto newCharacter = make_shared<GuiEntity>("uselessID");
+				newCharacter->addOglBuffer(_nonCenteredOpenglBuffer, false);
 
-			// Load diffuse map
-			string textContent = "";
-			textContent += c;
-			newCharacter->setDiffuseMap(_texLoader.getText(textContent, entity->getFontPath()));
-			entity->addCharacterEntity(newCharacter);
+				// Load text map
+				string textContent = "";
+				textContent += c;
+				auto texture = _texLoader.getText(textContent, entity->getFontPath());
+
+				// Check if font loading went well
+				if (texture != 0)
+				{
+					newCharacter->setDiffuseMap(texture);
+					entity->addCharacterEntity(newCharacter);
+				}
+				else
+				{
+					invalidFont = true;
+				}
+			}
 		}
 
 		// Synchronize
 		entity->updateCharacterEntities();
 	}
+}
+
+void TextEntityManager::deleteDynamicTextEntity(const string& ID)
+{
+	_textContentMap.erase(ID);
+	deleteEntity(ID);
 }
 
 void TextEntityManager::update()

@@ -238,8 +238,6 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 		// Check if arithmetic value is valid
 		if (value.getType() == ScriptValueType::EMPTY)
 		{
-			std::cout << valueString << std::endl;
-			std::cout << _isGlobalVariableExisting(valueString) << std::endl;
 			_throwScriptError("invalid arithmetic value!");
 			return;
 		}

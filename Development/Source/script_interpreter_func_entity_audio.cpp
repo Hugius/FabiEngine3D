@@ -396,6 +396,24 @@ bool ScriptInterpreter::_executeFe3dAudioEntityFunction(const string& functionNa
 			}
 		}
 	}
+	else if (functionName == "fe3d:audio_get_all_names") // Get all audioEntity names
+	{
+		// Validate arguments
+		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			auto result = _fe3d.audioEntity_getAllIDs();
+
+			// For every audio
+			for (auto& ID : result)
+			{
+				// Only non-preview audios
+				if (ID.front() != '@')
+				{
+					returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, ID));
+				}
+			}
+		}
+	}
 	else
 	{
 		return false;

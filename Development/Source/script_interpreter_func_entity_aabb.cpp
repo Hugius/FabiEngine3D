@@ -129,7 +129,7 @@ bool ScriptInterpreter::_executeFe3dAabbEntityFunction(const string& functionNam
 			}
 		}
 	}
-	else if (functionName == "fe3d:model_get_size") // Get aabbEntity size
+	else if (functionName == "fe3d:aabb_get_size") // Get aabbEntity size
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -158,6 +158,24 @@ bool ScriptInterpreter::_executeFe3dAabbEntityFunction(const string& functionNam
 				
 				// Return
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			}
+		}
+	}
+	else if (functionName == "fe3d:aabb_get_all_names") // Get all aabbEntity names
+	{
+		// Validate arguments
+		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			auto result = _fe3d.aabbEntity_getAllIDs();
+
+			// For every AABB
+			for (auto& ID : result)
+			{
+				// Only non-preview AABBs
+				if (ID.front() != '@')
+				{
+					returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, ID));
+				}
 			}
 		}
 	}

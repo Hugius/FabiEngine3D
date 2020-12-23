@@ -1,4 +1,4 @@
-32 62
+30 53
 META script_type_init
 
 /// Global variables
@@ -30,5 +30,3 @@ fe3d:model_place("player", "skeleton", 0.0, 0.0, 0.0)
 fe3d:model_set_max_height("player", 2.5)
 fe3d:model_set_aabb_responsive("player", <false>)
 fe3d:billboard_place("fire", "fire", 5.0, 8.0, 140.0)
-
-fe3d:image_place("test", "kip.png", 0.0, 0.0, 0.0, 0.25, 0.25)

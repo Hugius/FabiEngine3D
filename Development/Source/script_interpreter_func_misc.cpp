@@ -114,6 +114,34 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::INTEGER, static_cast<int>(result)));
 		}
 	}
+	else if (functionName == "fe3d:misc_get_random_integer") // Random integer
+	{
+		auto types = 
+		{
+			ScriptValueType::INTEGER, // Min
+			ScriptValueType::INTEGER  // Max
+		};
+
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		{
+			auto result = _fe3d.misc_getRandomInt(arguments[0].getInteger(), arguments[1].getInteger());
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::INTEGER, result));
+		}
+	}
+	else if (functionName == "fe3d:misc_get_random_decimal") // Random float
+	{
+		auto types =
+		{
+			ScriptValueType::DECIMAL, // Min
+			ScriptValueType::DECIMAL  // Max
+		};
+
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		{
+			auto result = _fe3d.misc_getRandomFloat(arguments[0].getDecimal(), arguments[1].getDecimal());
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
+		}
+	}
 	else
 	{
 		return false;

@@ -21,7 +21,7 @@ public:
 	);
 
 	void reloadCharacters(const string& ID);
-
+	void deleteDynamicTextEntity(const string& ID);
 	void update() override;
 
 private:

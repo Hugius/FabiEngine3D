@@ -33,7 +33,7 @@ void FabiEngine3D::billboardEntity_delete(const string& ID)
 	// Delete all bound AABB entities if existing
 	for (auto& aabbID : aabbEntity_getBoundIDs(ID, false, true))
 	{
-		_core->_aabbEntityManager.deleteEntity(ID);
+		_core->_aabbEntityManager.deleteEntity(aabbID);
 	}
 
 	// Delete BILLBOARD entity

@@ -203,7 +203,8 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 			{
 				// Check if in sequence with if statement
 				if (_getLastConditionStatement(conditionStatements, scopeDepth) != nullptr &&
-					_getLastConditionStatement(conditionStatements, scopeDepth)->type == ScriptConditionType::IF)
+					(_getLastConditionStatement(conditionStatements, scopeDepth)->type == ScriptConditionType::IF ||
+					_getLastConditionStatement(conditionStatements, scopeDepth)->type == ScriptConditionType::ELIF))
 				{
 
 					// Extract condition string
@@ -227,7 +228,7 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 				}
 				else
 				{
-					_throwScriptError("elif statement can only come after if statement!");
+					_throwScriptError("elif statement can only come after if or elif statement!");
 					return;
 				}
 			}

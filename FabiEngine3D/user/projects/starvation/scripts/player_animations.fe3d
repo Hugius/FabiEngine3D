@@ -1,4 +1,4 @@
-13 27
+0 23
 META script_type_update
 
 /// Skeleton position & rotation
@@ -29,12 +29,28 @@ ELSE:
 
 /// Retrieve equipped item
 STR itemID = _inventory[_equipIndex]
+
+/// Determine animation type
 STR animID = ""
-IF itemID IS "axe":
+IF _equipIndex IS 0:
+    EDIT animID = "sword_hit"
+ELIF _equipIndex IS 1:
+    EDIT animID = "pickaxe_mine"
+ELIF _equipIndex IS 2:
     EDIT animID = "axe_cut"
+ELIF _equipIndex IS 3:
+    EDIT animID = "shovel_dig"
+ELIF _equipIndex IS 4:
+    EDIT animID = "hoe_plow"
+ELIF _equipIndex IS 5:
+    EDIT animID = "scythe_reap"
+ELIF _equipIndex IS 6:
+    EDIT animID = "hammer_build"
+ELIF _equipIndex IS 8:
+    EDIT animID = "fishrod_throw"
 
 /// Update tool position, rotation, animation if equipped
-IF itemID NOT "":
+IF itemID NOT "" AND animID NOT "":
     DECR yaw 20.0
     DEC sinRot = math:sin(yaw)
     DEC cosRot = math:cos(yaw)

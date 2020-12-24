@@ -1,4 +1,4 @@
-30 31
+24 21
 META script_type_update
 
 BOOL axeAnim = fe3d:model_is_animation_playing("axe_cut", "axe")
@@ -27,6 +27,6 @@ IF axeAnim IS <false> AND _isCuttingTree IS <true>:
     IF hoveredID NOT "" AND _fallingTreeID IS "":
         VEC3 treePos = fe3d:model_get_position(hoveredID)
         DEC distance = math:distance(treePos, camPos)
-        IF distance LESS 5.0:
+        IF distance LESS 7.5:
             fe3d:model_start_animation("tree_fall", hoveredID, 1)
             EDIT _fallingTreeID = hoveredID

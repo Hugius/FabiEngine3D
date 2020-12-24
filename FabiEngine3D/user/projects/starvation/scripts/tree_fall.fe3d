@@ -1,4 +1,4 @@
-13 32
+17 42
 META script_type_update
 
 /// Tree falling updates
@@ -12,9 +12,11 @@ IF _fallingTreeID NOT "":
         PUSH _logIDs logID
         EDIT _fallingLogID = logID
         EDIT _fallingLogTargetHeight = treePos.y
+        STR treeIndex = misc:string_part(_fallingTreeID, 4, 1)
+        STR logModelID = misc:concat_strings("log", treeIndex)
         EDIT _fallingTreeID = ""
         INCR treePos.y 5.0
-        fe3d:model_place(logID, "log1", treePos.x, treePos.y, treePos.z)
+        fe3d:model_place(logID, logModelID, treePos.x, treePos.y, treePos.z)
 
 /// Log falling updates
 IF _fallingLogID NOT "":

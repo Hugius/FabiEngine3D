@@ -1,6 +1,7 @@
-3 18
+3 15
 META script_type_update
 META execution_entry
 
+EXEC hud_update
 EXEC player_update
 EXEC tree_update

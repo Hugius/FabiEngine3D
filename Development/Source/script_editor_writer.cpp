@@ -441,7 +441,7 @@ void ScriptEditor::_updateTextWriter()
 		_updateTextSelector(newCharacters, cursorLineIndex, cursorCharIndex, hoveredLineIndex, textHasChanged);
 
 		// Reload text display when altered
-		if (textHasChanged)
+		if (textHasChanged || _hasClickedLMB)
 		{
 			_reloadScriptTextDisplay(false);
 		}

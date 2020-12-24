@@ -1,8 +1,9 @@
-0 21
+5 13
 META script_type_init
 META execution_entry
 
 fe3d:scene_load("scene")
 
+EXEC hud_init
 EXEC player_init
 EXEC tree_init

@@ -1,4 +1,4 @@
-12 58
+12 53
 META script_type_update
 
 BOOL lmb = fe3d:input_is_mouse_pressed("BUTTON_LEFT")
@@ -10,9 +10,10 @@ IF selectedID NOT "":
         DEC distance = math:distance(camPos, selectedPos)
         IF distance LESS 5.0:
             fe3d:model_delete(selectedID)
-            fe3d:model_place("axe", "axe_stone", 0.0, 0.0, 0.0)
-            fe3d:model_set_aabb_responsive("axe", <false>)
-            EDIT _inventory[0] = "axe"
+            fe3d:model_place("axe_stone", "axe_stone", 0.0, 0.0, 0.0)
+            fe3d:model_set_aabb_responsive("axe_stone", <false>)
+            EDIT _inventory[2] = "axe_stone"
+            EDIT _equipIndex = 2
             EDIT _lastSelectedAxeID = ""
     ELSE:
         fe3d:model_set_color(selectedID, 0.0, 1.0, 0.0)

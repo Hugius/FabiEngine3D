@@ -58,25 +58,27 @@ void ScriptInterpreter::_processVariableTypecast(const string& scriptLine)
 	}
 	else if ((variable.getValue().getType() == ScriptValueType::STRING) && (typeString == _integerKeyword)) // From string to integer
 	{
+		// Check if string can be casted
 		if (_isIntegerValue(variable.getValue().getString()))
 		{
 			variable.changeValue(ScriptValue(_fe3d, ScriptValueType::INTEGER, stoi(variable.getValue().getString())));
 		}
 		else
 		{
-			_throwScriptError("variable \"" + nameString + "\" cannot be typecasted, invalid string!");
+			_throwScriptError("variable \"" + nameString + "\" cannot be typecasted to integer, invalid string!");
 			return;
 		}
 	}
 	else if ((variable.getValue().getType() == ScriptValueType::STRING) && (typeString == _decimalKeyword)) // From string to decimal
 	{
+		// Check if string can be casted
 		if (_isDecimalValue(variable.getValue().getString()))
 		{
 			variable.changeValue(ScriptValue(_fe3d, ScriptValueType::DECIMAL, stof(variable.getValue().getString())));
 		}
 		else
 		{
-			_throwScriptError("variable \"" + nameString + "\" cannot be typecasted, invalid string!");
+			_throwScriptError("variable \"" + nameString + "\" cannot be typecasted to decimal, invalid string!");
 			return;
 		}
 	}

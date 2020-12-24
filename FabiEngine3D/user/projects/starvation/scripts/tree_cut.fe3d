@@ -1,0 +1,32 @@
+30 31
+META script_type_update
+
+BOOL axeAnim = fe3d:model_is_animation_playing("axe_cut", "axe")
+
+/// Check if axe animation was started
+IF axeAnim IS <true>:
+    EDIT _isCuttingTree = <true>
+
+/// Check if cutting animation finished
+IF axeAnim IS <false> AND _isCuttingTree IS <true>:
+    EDIT _isCuttingTree = <false>
+    VEC3 camPos = fe3d:camera_get_position()
+    STR hoveredID = ""
+    STR checkID = ""
+    INT number = 1
+    LOOP:
+        CAST number STR
+        EDIT checkID = misc:concat_strings("tree", number)
+        CAST number INT
+        EDIT hoveredID = fe3d:raycast_into_model(checkID, "trunk")
+        IF hoveredID NOT "":
+            BREAK
+        IF number IS 6:
+            BREAK
+        INCR number 1
+    IF hoveredID NOT "" AND _fallingTreeID IS "":
+        VEC3 treePos = fe3d:model_get_position(hoveredID)
+        DEC distance = math:distance(treePos, camPos)
+        IF distance LESS 5.0:
+            fe3d:model_start_animation("tree_fall", hoveredID, 1)
+            EDIT _fallingTreeID = hoveredID

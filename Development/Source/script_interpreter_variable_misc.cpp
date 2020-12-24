@@ -56,6 +56,30 @@ void ScriptInterpreter::_processVariableTypecast(const string& scriptLine)
 	{
 		variable.changeValue(ScriptValue(_fe3d, ScriptValueType::STRING, to_string(variable.getValue().getDecimal())));
 	}
+	else if ((variable.getValue().getType() == ScriptValueType::STRING) && (typeString == _integerKeyword)) // From string to integer
+	{
+		if (_isIntegerValue(variable.getValue().getString()))
+		{
+			variable.changeValue(ScriptValue(_fe3d, ScriptValueType::INTEGER, stoi(variable.getValue().getString())));
+		}
+		else
+		{
+			_throwScriptError("variable \"" + nameString + "\" cannot be typecasted, invalid string!");
+			return;
+		}
+	}
+	else if ((variable.getValue().getType() == ScriptValueType::STRING) && (typeString == _decimalKeyword)) // From string to decimal
+	{
+		if (_isDecimalValue(variable.getValue().getString()))
+		{
+			variable.changeValue(ScriptValue(_fe3d, ScriptValueType::DECIMAL, stof(variable.getValue().getString())));
+		}
+		else
+		{
+			_throwScriptError("variable \"" + nameString + "\" cannot be typecasted, invalid string!");
+			return;
+		}
+	}
 	else
 	{
 		_throwScriptError("variable \"" + nameString + "\" cannot be typecasted, wrong type!");

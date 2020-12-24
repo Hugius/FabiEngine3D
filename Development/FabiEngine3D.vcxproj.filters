@@ -487,21 +487,6 @@
     <ClCompile Include="Source\script_interpreter_misc.cpp">
       <Filter>src\Scripting System\Execution\Interpreter\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="Source\script_interpreter_func_camera.cpp">
-      <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\script_interpreter_func_core.cpp">
-      <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\script_interpreter_func_entity_game.cpp">
-      <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\script_interpreter_func_input.cpp">
-      <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\script_interpreter_func_misc.cpp">
-      <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
-    </ClCompile>
     <ClCompile Include="Source\script_interpreter_variable_misc.cpp">
       <Filter>src\Scripting System\Execution\Interpreter\Variable</Filter>
     </ClCompile>
@@ -541,50 +526,11 @@
     <ClCompile Include="Source\animation_editor_execution.cpp">
       <Filter>src\Editor System\Animation Editor\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="Source\script_interpreter_func_physics.cpp">
-      <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
-    </ClCompile>
     <ClCompile Include="Source\animation_editor_lifecycle.cpp">
       <Filter>src\Editor System\Animation Editor\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="Source\script_interpreter_func_entity_billboard.cpp">
-      <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\script_interpreter_func_entity_terrain.cpp">
-      <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\script_interpreter_func_entity_sky.cpp">
-      <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\script_interpreter_func_entity_water.cpp">
-      <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\script_interpreter_func_animations.cpp">
-      <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
-    </ClCompile>
     <ClCompile Include="Source\texture_loader_interface.cpp">
       <Filter>src\Asset Management System\Textures</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\script_interpreter_func_entity_aabb.cpp">
-      <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\script_interpreter_func_entity_light.cpp">
-      <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\script_interpreter_func_entity_audio.cpp">
-      <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\script_interpreter_func_entity_gui.cpp">
-      <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\script_interpreter_func_entity_text.cpp">
-      <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\script_interpreter_func_graphics.cpp">
-      <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\script_interpreter_func_music.cpp">
-      <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
     </ClCompile>
     <ClCompile Include="Source\ivector2.cpp">
       <Filter>src\Math System\Vector</Filter>
@@ -615,6 +561,66 @@
     </ClCompile>
     <ClCompile Include="Source\script_variable.cpp">
       <Filter>src\Scripting System\Data Structures</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_interpreter_func_math.cpp">
+      <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_interpreter_func_fe3d_core.cpp">
+      <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_interpreter_func_fe3d_aabb.cpp">
+      <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_interpreter_func_fe3d_audio.cpp">
+      <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_interpreter_func_fe3d_billboard.cpp">
+      <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_interpreter_func_fe3d_game.cpp">
+      <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_interpreter_func_fe3d_gui.cpp">
+      <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_interpreter_func_fe3d_light.cpp">
+      <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_interpreter_func_fe3d_sky.cpp">
+      <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_interpreter_func_fe3d_terrain.cpp">
+      <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_interpreter_func_fe3d_text.cpp">
+      <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_interpreter_func_fe3d_water.cpp">
+      <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_interpreter_func_fe3d_graphics.cpp">
+      <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_interpreter_func_fe3d_input.cpp">
+      <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_interpreter_func_fe3d_misc.cpp">
+      <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_interpreter_func_fe3d_music.cpp">
+      <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_interpreter_func_fe3d_physics.cpp">
+      <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_interpreter_func_fe3d_animations.cpp">
+      <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_interpreter_func_fe3d_camera.cpp">
+      <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_interpreter_func_misc.cpp">
+      <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

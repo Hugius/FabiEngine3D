@@ -1,175 +1,168 @@
 #include "script_interpreter.hpp"
 
-bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
+vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const string& scriptLine)
 {
-	// Determine type of function
-	if (functionName == "fe3d:game_pause")
+	// Temporary values
+	vector<ScriptValue> returnValues;
+	auto openingParanthesisFound = std::find(scriptLine.begin(), scriptLine.end(), '(');
+	auto closingParanthesisFound = std::find(scriptLine.begin(), scriptLine.end(), ')');
+
+	// Check if function call has opening & closing parentheses
+	if (openingParanthesisFound != scriptLine.end() && closingParanthesisFound != scriptLine.end())
 	{
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		// Check if function call ends with a paranthesis
+		if (scriptLine.back() != ')')
 		{
-			_fe3d.engine_pause();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			_throwScriptError("function call must end with a paranthesis!");
 		}
-	}
-	else if (functionName == "fe3d:game_unpause")
-	{
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		else
 		{
-			_fe3d.engine_resume();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
-		}
-	}
-	else if (functionName == "fe3d:game_stop")
-	{
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
-		{
-			_fe3d.engine_stop();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
-		}
-	}
-	else if (functionName == "fe3d:print")
-	{
-		// Validate amount of arguments
-		if (_validateListValueAmount(arguments, 1))
-		{
-			// Determine which type of value to print
-			if (arguments[0].getType() == ScriptValueType::VEC3)
+			// Extract arguments from argument string
+			unsigned int parenthesisIndex = std::distance(scriptLine.begin(), openingParanthesisFound);
+			string argumentString = scriptLine.substr(parenthesisIndex + 1);
+			argumentString.pop_back();
+			auto arguments = _extractValuesFromListString(argumentString);
+
+			// Check if argument extraction went well
+			if (!_hasThrownError)
 			{
-				_fe3d.logger_throwInfo(_fe3d.misc_vec2str(arguments[0].getVec3()));
+				auto functionName = scriptLine.substr(0, parenthesisIndex);
+
+				// Determine type of function
+				if (functionName == "misc:to_string")
+				{
+					if (_validateListValueAmount(arguments, 1))
+					{
+						if (arguments[0].getType() == ScriptValueType::INTEGER)
+						{
+							returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, to_string(arguments[0].getInteger())));
+						}
+						else if (arguments[0].getType() == ScriptValueType::DECIMAL)
+						{
+							returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, to_string(arguments[0].getDecimal())));
+						}
+						else
+						{
+							_throwScriptError("wrong argument type(s)!");
+						}
+					}
+				}
+				else if (functionName == "misc:concat_strings")
+				{
+					auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
+
+					if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+					{
+						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, arguments[0].getString() + arguments[1].getString()));
+					}
+				}
+				else if (functionName == "misc:list_size") // Get the size of a list variable
+				{
+					auto types = { ScriptValueType::STRING };
+
+					if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+					{
+						auto nameString = arguments[0].getString();
+
+						// Check if variable exists
+						if (!_isLocalVariableExisting(nameString) && !_isGlobalVariableExisting(nameString))
+						{
+							_throwScriptError("list variable \"" + nameString + "\" not found!");
+						}
+
+						// Check if variable is a list
+						auto listVariable = _isLocalVariableExisting(nameString) ? _getLocalVariable(nameString) : _getGlobalVariable(nameString);
+						if (listVariable.getType() == ScriptVariableType::SINGLE)
+						{
+							_throwScriptError("variable \"" + nameString + "\" is not a list!");
+						}
+
+						// Return list size
+						auto result = listVariable.getValueCount();
+						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::INTEGER, static_cast<int>(result)));
+					}
+				}
+				else if (functionName == "misc:get_unique_integer") // Unique integer
+				{
+					auto types =
+					{
+						ScriptValueType::INTEGER, // Min
+						ScriptValueType::INTEGER  // Max
+					};
+
+					if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+					{
+						auto result = _fe3d.misc_getUniqueInt(arguments[0].getInteger(), arguments[1].getInteger());
+						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::INTEGER, result));
+					}
+				}
+				else if (functionName == "misc:get_random_integer") // Random integer
+				{
+					auto types =
+					{
+						ScriptValueType::INTEGER, // Min
+						ScriptValueType::INTEGER  // Max
+					};
+
+					if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+					{
+						auto result = _fe3d.misc_getRandomInt(arguments[0].getInteger(), arguments[1].getInteger());
+						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::INTEGER, result));
+					}
+				}
+				else if (functionName == "misc:get_random_decimal") // Random float
+				{
+					auto types =
+					{
+						ScriptValueType::DECIMAL, // Min
+						ScriptValueType::DECIMAL  // Max
+					};
+
+					if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+					{
+						auto result = _fe3d.misc_getRandomFloat(arguments[0].getDecimal(), arguments[1].getDecimal());
+						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
+					}
+				}
+				else if (functionName == "misc:string_part") // Cut a part from a string
+				{
+					auto types = { ScriptValueType::STRING, ScriptValueType::INTEGER, ScriptValueType::INTEGER };
+
+					if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+					{
+						// Validate index
+						if (arguments[1].getInteger() < static_cast<int>(arguments[0].getString().size()) && arguments[1].getInteger() >= 0)
+						{
+							auto result = arguments[0].getString().substr(arguments[1].getInteger(), arguments[2].getInteger());
+							returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result));
+						}
+						else
+						{
+							returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, ""));
+						}
+					}
+				}
+				else if (functionName == "fe3d:misc_time_interval") // Time interval
+				{
+					auto types = { ScriptValueType::STRING, ScriptValueType::INTEGER };
+
+					if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+					{
+						auto result = _fe3d.misc_checkInterval(arguments[0].getString(), arguments[1].getInteger());
+						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
+					}
+				}
+				else
+				{
+					_throwScriptError("MISC function not found!");
+				}
 			}
-			else if (arguments[0].getType() == ScriptValueType::STRING)
-			{
-				_fe3d.logger_throwInfo(arguments[0].getString());
-			}
-			else if (arguments[0].getType() == ScriptValueType::DECIMAL)
-			{
-				_fe3d.logger_throwInfo(arguments[0].getDecimal());
-			}
-			else if (arguments[0].getType() == ScriptValueType::INTEGER)
-			{
-				_fe3d.logger_throwInfo(arguments[0].getInteger());
-			}
-			else if (arguments[0].getType() == ScriptValueType::BOOLEAN)
-			{
-				_fe3d.logger_throwInfo(arguments[0].getBoolean() ? "true" : "false");
-			}
-
-			// Add return value
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
-		}
-	}
-	else if (functionName == "fe3d:scene_load") // Load specific scene from file
-	{
-		auto types = { ScriptValueType::STRING };
-
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
-		{
-			_sceneEditor.loadSceneFromFile(arguments[0].getString());
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
-		}
-	}
-	else if (functionName == "fe3d:scene_clear") // Clear all entities and reset scene
-	{
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
-		{
-			_sceneEditor.clearScene();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
-		}
-	}
-	else if (functionName == "fe3d:misc_show_cursor") // Show cursor
-	{
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
-		{
-			_fe3d.misc_showCursor();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
-		}
-	}
-	else if (functionName == "fe3d:misc_hide_cursor") // Hide cursor
-	{
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
-		{
-			_fe3d.misc_hideCursor();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
-		}
-	}
-	else if (functionName == "fe3d:misc_time_interval") // Time interval
-	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::INTEGER };
-
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
-		{
-			auto result = _fe3d.misc_checkInterval(arguments[0].getString(), arguments[1].getInteger());
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
-		}
-	}
-	else if (functionName == "fe3d:misc_string_part") // Cut a part from a string
-	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::INTEGER, ScriptValueType::INTEGER };
-
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
-		{
-			auto result = arguments[0].getString().substr(arguments[1].getInteger(), arguments[2].getInteger());
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result));
-		}
-	}
-	else if (functionName == "fe3d:misc_list_size") // Get the size of a list variable
-	{
-		auto types = { ScriptValueType::STRING };
-
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
-		{
-			auto nameString = arguments[0].getString();
-
-			// Check if variable exists
-			if (!_isLocalVariableExisting(nameString) && !_isGlobalVariableExisting(nameString))
-			{
-				_throwScriptError("list variable \"" + nameString + "\" not found!");
-			}
-
-			// Check if variable is a list
-			auto listVariable = _isLocalVariableExisting(nameString) ? _getLocalVariable(nameString) : _getGlobalVariable(nameString);
-			if (listVariable.getType() == ScriptVariableType::SINGLE)
-			{
-				_throwScriptError("variable \"" + nameString + "\" is not a list!");
-			}
-
-			// Return list size
-			auto result = listVariable.getValueCount();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::INTEGER, static_cast<int>(result)));
-		}
-	}
-	else if (functionName == "fe3d:misc_get_random_integer") // Random integer
-	{
-		auto types = 
-		{
-			ScriptValueType::INTEGER, // Min
-			ScriptValueType::INTEGER  // Max
-		};
-
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
-		{
-			auto result = _fe3d.misc_getRandomInt(arguments[0].getInteger(), arguments[1].getInteger());
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::INTEGER, result));
-		}
-	}
-	else if (functionName == "fe3d:misc_get_random_decimal") // Random float
-	{
-		auto types =
-		{
-			ScriptValueType::DECIMAL, // Min
-			ScriptValueType::DECIMAL  // Max
-		};
-
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
-		{
-			auto result = _fe3d.misc_getRandomFloat(arguments[0].getDecimal(), arguments[1].getDecimal());
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
 		}
 	}
 	else
 	{
-		return false;
+		_throwScriptError("invalid parantheses syntax!");
 	}
 
-	return true;
+	return returnValues;
 }

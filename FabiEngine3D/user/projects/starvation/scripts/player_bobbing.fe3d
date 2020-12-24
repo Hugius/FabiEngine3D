@@ -1,11 +1,13 @@
-2 23
+6 0
 META script_type_update
 
+/// Running speed
 DEC bobbingSpeed = 0.07
 IF _isRunning IS <true>:
     MUL bobbingSpeed 2.0
 
-IF _isWalking IS <true>:
+/// Update bobbing animation
+IF _isWalking IS <true> AND _isCuttingTree IS <false>:
     INCR _totalBobbing bobbingSpeed
     MUL bobbingSpeed _bobbingDirection
     DEC newPitch = fe3d:camera_get_pitch()

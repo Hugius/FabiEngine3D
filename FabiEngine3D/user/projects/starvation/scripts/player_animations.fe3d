@@ -1,7 +1,7 @@
-11 49
+13 28
 META script_type_update
 
-/// First person player animation
+/// Skeleton position & rotation
 VEC3 camPos = fe3d:camera_get_position()
 DEC yaw = fe3d:camera_get_yaw()
 NEG yaw
@@ -9,38 +9,51 @@ INCR yaw 90.0
 DECR camPos.y 2.6
 fe3d:model_set_position("player", camPos.x, camPos.y, camPos.z)
 fe3d:model_set_rotation("player", 0.0, yaw, 0.0)
-BOOL isPlaying = fe3d:model_is_animation_playing("walk", "player")
-IF _isWalking IS <true> AND isPlaying IS <false>:
-    fe3d:model_start_animation("walk", "player", -1)
-ELIF _isWalking IS <false> AND isPlaying IS <true>:
-    fe3d:model_fade_animation("walk", "player", 1)
 
-/// Update running
-IF isPlaying IS <true>:
-    DEC speed = 1.0
-    IF _isRunning IS <true>:
-        MUL speed 2.0
-    fe3d:model_set_animation_speed("walk", "player", speed)
+/// Walking animation
+BOOL isWalkPlaying = fe3d:model_is_animation_playing("walk", "player")
+IF _isCuttingTree IS <true>:
+    IF isWalkPlaying IS <true>:
+        fe3d:model_fade_animation("walk", "player", 1)
+ELSE:
+    IF _isWalking IS <true> AND isWalkPlaying IS <false>:
+        fe3d:model_start_animation("walk", "player", -1)
+    ELIF _isWalking IS <false> AND isWalkPlaying IS <true>:
+        fe3d:model_fade_animation("walk", "player", 1)
+    /// Update running animation
+    IF isWalkPlaying IS <true>:
+        DEC speed = 1.0
+        IF _isRunning IS <true>:
+            MUL speed 2.0
+        fe3d:model_set_animation_speed("walk", "player", speed)
 
-/// Update axe position, rotation, animation if equipped
-IF _inventory[0] NOT "":
+/// Retrieve equipped item
+STR itemID = _inventory[_equipIndex]
+STR animID = ""
+IF itemID IS "axe":
+    EDIT animID = "axe_cut"
+
+/// Update tool position, rotation, animation if equipped
+IF itemID NOT "":
     DECR yaw 20.0
     DEC sinRot = math:sin(yaw)
     DEC cosRot = math:cos(yaw)
     MUL sinRot 0.8
     MUL cosRot 0.8
-    VEC3 axePos = camPos
-    INCR axePos.x sinRot
-    INCR axePos.z cosRot
-    INCR axePos.y 1.0
-    fe3d:model_set_position("axe", axePos.x, axePos.y, axePos.z)
-    VEC3 axeRot = fe3d:model_get_rotation("axe")
-    EDIT yaw = fe3d:camera_get_yaw()
-    NEG yaw
-    INCR yaw 90.0
-    EDIT axeRot.y = yaw
-    fe3d:model_set_rotation("axe", axeRot.x, axeRot.y, axeRot.z)
+    VEC3 itemPos = camPos
+    INCR itemPos.x sinRot
+    INCR itemPos.z cosRot
+    INCR itemPos.y 1.0
+    fe3d:model_set_position(itemID, itemPos.x, itemPos.y, itemPos.z)
+    /// Rotation
+    VEC3 itemRot = fe3d:model_get_rotation(itemID)
+    EDIT itemRot.y = fe3d:camera_get_yaw()
+    NEG itemRot.y
+    INCR itemRot.y 90.0
+    fe3d:model_set_rotation(itemID, itemRot.x, itemRot.y, itemRot.z)
+    /// Animation
     BOOL lmb = fe3d:input_is_mouse_pressed("BUTTON_LEFT")
-    EDIT isPlaying = fe3d:model_is_animation_playing("axe_cut", "axe")
-    IF lmb IS <true> AND isPlaying IS <false>:
-        fe3d:model_start_animation("axe_cut", "axe", 1)
+    IF animID NOT "":
+        BOOL isItemPlaying = fe3d:model_is_animation_playing(animID, itemID)
+        IF lmb IS <true> AND isItemPlaying IS <false>:
+            fe3d:model_start_animation(animID, itemID, 1)

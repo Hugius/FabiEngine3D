@@ -1,10 +1,10 @@
 SKY default user\assets\textures\cube_maps\day_right.png user\assets\textures\cube_maps\day_left.png user\assets\textures\cube_maps\day_top.png user\assets\textures\cube_maps\day_bottom.png user\assets\textures\cube_maps\day_front.png user\assets\textures\cube_maps\day_back.png 0.01 0.6 1 1 1
 TERRAIN default user\assets\textures\height_maps\terrain.bmp user\assets\textures\diffuse_maps\terrain\grass5.png 125 128 0.7 1 user\assets\textures\blend_maps\terrain.png user\assets\textures\diffuse_maps\terrain\clay.png user\assets\textures\diffuse_maps\terrain\rock1.png user\assets\textures\diffuse_maps\terrain\ground2.png 64 32 64 1 0.5
 WATER default user\assets\textures\dudv_maps\water.png user\assets\textures\normal_maps\water\water_default.png user\assets\textures\displacement_maps\water.png 1 1 1 1 0 0 0 1 325 5 4.5 -25 64 1 -0.00125 0 0.5 256 15
+MODEL 948810145@tree6 -50.7516 16.1765 186.991 0 0 0 1.25 1 1.25 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
 MODEL 1683610691@tree6 -20 6.52527 115.337 0 0 0 1.25 1 1.25 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 @tree6_lod 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
 MODEL 2005272156@tree6 -61.5427 25.5474 169 0 0 0 1.25 1 1.25 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 @tree6_lod 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
 MODEL 702516831@tree6 -66.7695 25.9804 160.52 0 0 0 1.25 1 1.25 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 @tree6_lod 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
-MODEL 948810145@tree6 -50.7516 16.1765 186.991 0 0 0 1.25 1 1.25 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
 MODEL 1133850384@tree6 -15.6215 16.1274 165 0 0 0 1.25 1 1.25 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 @tree6_lod 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
 MODEL 87221378@hills 0 -1 0 0 0 0 4 10.4 4 user\assets\models\misc\hills.obj user\assets\textures\diffuse_maps\terrain\grass1.png ? ? ? 0 0 1 0 0 0 1 1 1 1 1 1 8 ? 0 ?
 MODEL 1896440182@tree6 -7.81551 6.37255 105.205 0 0 0 1.25 1 1.25 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 @tree6_lod 0 ? leaves 0 8.8 0 3.85 8.30001 3.6 trunk 0 0 0 0.85 8.80001 0.8
@@ -35,21 +35,17 @@ MODEL 926822241@tree6 -34.2137 18.1373 188.074 0 0 0 1.25 1 1.25 user\assets\mod
 MODEL 1050871314@stone1 2.85393 6.37254 125.887 0 0 0 2 2 2 user\assets\models\stones\stone1.obj user\assets\textures\diffuse_maps\stones\stone1.png ? ? ? 0 0 1 0 0 0 1 1 1 1 1 1 1 ? 0 ?
 MODEL 288196344@stone2 4.14051 6.37255 119.881 0 0 0 3 3 3 user\assets\models\stones\stone2.obj user\assets\textures\diffuse_maps\stones\stone2.png ? ? ? 0 0 1 0 0 0 1 1 1 1 1 1 1 ? 0 ?
 MODEL 927834018@stone3 6.05426 6.37255 113.689 0 0 0 2 2 2 user\assets\models\stones\stone3.obj user\assets\textures\diffuse_maps\stones\stone3.png ? ? ? 0 0 1 0 0 1 1 1 0.6 1 1 1 1 ? 0 ?
-MODEL 1480527004@stone4 7.07117 6.37255 107.663 0 0 0 2 2 2 user\assets\models\stones\stone4.obj user\assets\textures\diffuse_maps\stones\stone4.png ? ? ? 0 0 1 0 0 1 1 1 1 1 1 1 1 ? 0 ?
-MODEL 1219269021@stone5 8.13162 6.37255 101.116 0 0 0 0.5 0.5 0.5 user\assets\models\stones\stone5.obj user\assets\textures\diffuse_maps\stones\stone5.png ? ? ? 0 0 1 0 0 1 1 1 1 1 1 1 1 ? 0 ?
-MODEL 835235560@stone6 11.1048 6.37255 93.8866 0 0 0 1 1 1 user\assets\models\stones\stone6.obj user\assets\textures\diffuse_maps\stones\stone6.png ? ? ? 0 0 1 0 0 1 1 1 0.5 1 1 1 1 ? 0 ?
-MODEL 967379742@stone7 12.3788 6.37255 85.4675 0 0 0 0.01 0.01 0.01 user\assets\models\stones\stone7.obj user\assets\textures\diffuse_maps\stones\stone7.png ? ? user\assets\textures\normal_maps\stones\stone7.png 0 0 1 0 0 1 1 1 0.5 1 1 1 1 ? 0 ?
-MODEL 2132370113@stone8 13.1477 6.37254 78.2531 0 0 0 1 1 1 user\assets\models\stones\stone8.obj user\assets\textures\diffuse_maps\stones\stone8.png ? ? ? 0 0 1 0 0 1 1 1 0.5 1 1 1 1 ? 0 ?
-MODEL 1094798653@stone9 13.6089 6.37248 72.3646 0 0 0 0.03 0.03 0.03 user\assets\models\stones\stone9.obj user\assets\textures\diffuse_maps\stones\stone9.png ? ? user\assets\textures\normal_maps\stones\stone9.png 0 0 1 0 0 1 1 1 0.5 1 1 1 1 ? 0 ?
-MODEL 1547418076@stone10 15.2714 6.37255 57.5376 0 173.998 0 2 2 2 user\assets\models\stones\stone10.obj user\assets\textures\diffuse_maps\stones\stone10.png ? ? user\assets\textures\normal_maps\stones\stone10.png 0 0 1 0 0 1 1 1 0.5 1 1 1 1 ? 0 ?
+MODEL 1809645397@stone4 8.03098 6.37255 107.387 0 0 0 2.5 2.5 2.5 user\assets\models\stones\stone4.obj user\assets\textures\diffuse_maps\stones\stone4.png ? ? ? 0 0 1 0 0 1 1 1 1 1 1 1 1 ? 0 ?
+MODEL 243111792@stone5 10.4677 6.37255 99.1583 0 0 0 0.75 0.75 0.75 user\assets\models\stones\stone5.obj user\assets\textures\diffuse_maps\stones\stone5.png ? ? ? 0 0 1 0 0 1 1 1 1 1 1 1 1 ? 0 ?
+MODEL 999416373@stone6 14.0829 6.37255 88.7375 0 0 0 1.5 1.5 1.5 user\assets\models\stones\stone6.obj user\assets\textures\diffuse_maps\stones\stone6.png ? ? ? 0 0 1 0 0 1 1 1 0.5 1 1 1 1 ? 0 ?
 AMBIENT_LIGHT 1 1 1 0.5
 DIRECTIONAL_LIGHT 1000 1000 1000 1 1 1 1 200
 CAMERA_FOV 90
 LOD_DISTANCE 1000
 EDITOR_SPEED 5
-EDITOR_POSITION -6.61664 20.8404 75.0637
-EDITOR_YAW 9.57833
-EDITOR_PITCH -36.48
+EDITOR_POSITION 24.4257 17.8404 142.308
+EDITOR_YAW 141.099
+EDITOR_PITCH -23.8
 GRAPHICS_SHADOWS 1 100 50.000000 50.000000 0.000000 0.000000 0.000000 0.000000 1 0
 GRAPHICS_MOTIONBLUR 1 8
 GRAPHICS_DOF 1 0 100 10

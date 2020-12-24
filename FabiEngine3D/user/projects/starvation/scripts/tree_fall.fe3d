@@ -1,0 +1,25 @@
+13 32
+META script_type_update
+
+/// Tree falling updates
+IF _fallingTreeID NOT "":
+    BOOL treeAnim = fe3d:model_is_animation_playing("tree_fall", _fallingTreeID)
+    IF treeAnim IS <false>:
+        VEC3 treePos = fe3d:model_get_position(_fallingTreeID)
+        fe3d:model_delete(_fallingTreeID)
+        INT logID = misc:get_unique_integer(0, 1000)
+        CAST logID STR
+        PUSH _logIDs logID
+        EDIT _fallingLogID = logID
+        EDIT _fallingLogTargetHeight = treePos.y
+        EDIT _fallingTreeID = ""
+        INCR treePos.y 5.0
+        fe3d:model_place(logID, "log1", treePos.x, treePos.y, treePos.z)
+
+/// Log falling updates
+IF _fallingLogID NOT "":
+    VEC3 currentPos = fe3d:model_get_position(_fallingLogID)
+    IF currentPos.y MORE _fallingLogTargetHeight:
+        fe3d:model_move(_fallingLogID, 0.0, -0.1, 0.0)
+    ELSE:
+        EDIT _fallingLogID = ""

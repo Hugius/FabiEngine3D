@@ -24,7 +24,7 @@
 @log5 user\assets\models\trees\log5.obj user\assets\textures\diffuse_maps\trees\log5.png ? ? user\assets\textures\normal_maps\trees\log5.png 0.8 0.8 0.8 0 1 0 0 1 1 1 0.8 1 1 1 1 ? 0 log -0.1 0 0.4 6.4 3.1 4.4
 @log6 user\assets\models\trees\log6.obj user\assets\textures\diffuse_maps\trees\log6.png ? ? ? 0.5 0.5 1 0 1 0 0 1 1 1 0.6 1 1 1 1 ? 0 log 0.5 0 -0.5 4.2 3.6 6.1
 @logstack user\assets\models\trees\logstack.obj user\assets\textures\diffuse_maps\trees\logstack.png ? ? user\assets\textures\normal_maps\trees\logstack.png 2.5 2.5 2.5 0 1 0 0 1 1 1 0.5 1 1 1 1 ? 0 logstack 0 1.49012e-08 0 1.4 1 4
-@axe_iron user\assets\models\tools\axe_iron.obj user\assets\textures\diffuse_maps\tools\axe_iron.png ? user\assets\textures\reflection_maps\tools\axe_iron.png user\assets\textures\normal_maps\tools\axe_iron.png 1 1 1 0 1 0 0 1 1 1 1 1 1 1 1 ? 0
+@axe_iron user\assets\models\tools\axe_iron.obj user\assets\textures\diffuse_maps\tools\axe_iron.png ? user\assets\textures\reflection_maps\tools\axe_iron.png user\assets\textures\normal_maps\tools\axe_iron.png 0.65 0.65 0.65 0 0 0 0 1 1 1 0.8 1 1 1 1 ? 0 axe 0.05 0 0.15 0.4 2.55 1.15
 @stone1 user\assets\models\stones\stone1.obj user\assets\textures\diffuse_maps\stones\stone1.png ? ? ? 2 2 2 0 1 0 0 0 1 1 1 1 1 1 1 ? 0
 @stone2 user\assets\models\stones\stone2.obj user\assets\textures\diffuse_maps\stones\stone2.png ? ? ? 3 3 3 0 1 0 0 0 1 1 1 1 1 1 1 ? 0
 @stone3 user\assets\models\stones\stone3.obj user\assets\textures\diffuse_maps\stones\stone3.png ? ? ? 2 2 2 0 1 0 0 1 1 1 0.6 1 1 1 1 ? 0
@@ -32,3 +32,6 @@
 @stone5 user\assets\models\stones\stone5.obj user\assets\textures\diffuse_maps\stones\stone5.png ? ? ? 0.75 0.75 0.75 0 1 0 0 1 1 1 1 1 1 1 1 ? 0
 @stone6 user\assets\models\stones\stone6.obj user\assets\textures\diffuse_maps\stones\stone6.png ? ? ? 1.5 1.5 1.5 0 1 0 0 1 1 1 0.5 1 1 1 1 ? 0
 @sword_iron user\assets\models\tools\sword_iron.obj user\assets\textures\diffuse_maps\tools\sword_iron.png ? user\assets\textures\reflection_maps\tools\sword_iron.png user\assets\textures\normal_maps\tools\sword_iron.png 0.5 0.5 0.5 0 0 0 0 1 1 1 0.75 1 1 1 1 ? 0 sword 0 0 0 0.270001 4.07 0.83
+@sword_stone user\assets\models\tools\sword_stone.obj user\assets\textures\diffuse_maps\tools\sword_stone.png ? ? user\assets\textures\normal_maps\tools\sword_stone.png 0.5 0.5 0.5 0 0 0 0 1 1 1 0.75 1 1 1 1 ? 0 sword 0 0 0 0.3 4.4 1
+@pickaxe_stone user\assets\models\tools\pickaxe_stone.obj user\assets\textures\diffuse_maps\tools\pickaxe_stone.png ? ? user\assets\textures\normal_maps\tools\pickaxe_stone.png 0.5 0.5 0.5 0 0 0 0 1 1 1 0.5 1 1 1 1 ? 0 pickaxe 0 0 0 0.2 2.8 2.1
+@pickaxe_iron user\assets\models\tools\pickaxe_iron.obj user\assets\textures\diffuse_maps\tools\pickaxe_iron.png ? user\assets\textures\reflection_maps\tools\pickaxe_iron.png user\assets\textures\normal_maps\tools\pickaxe_iron.png 0.5 0.5 0.5 0 0 0 0 1 1 1 0.5 1 1 1 1 ? 0 pickaxe 0 0 0.1 0.4 2.9 2.4

@@ -1,4 +1,4 @@
-44 73
+51 0
 META script_type_init
 
 /// Globals
@@ -32,12 +32,12 @@ fe3d:image_place("torch_icon", "torch_icon.png", 0.375, -0.85, 0.0, 0.1, 0.15)
 fe3d:image_place("fishrod_icon", "fishrod_icon.png", 0.5, -0.85, 0.0, 0.1, 0.15)
 
 /// Equipped item slots
-///fe3d:image_place("sword_stone", "sword_stone.png", -0.5, -0.85, 0.0, 0.125, 0.2)
+fe3d:image_place("sword_stone", "sword_stone.png", -0.5, -0.85, 0.0, 0.125, 0.2)
 fe3d:image_place("sword_iron", "sword_iron.png", -0.5, -0.85, 0.0, 0.125, 0.2)
-///fe3d:image_place("pick_stone", "pick_stone.png", -0.375, -0.85, 0.0, 0.125, 0.2)
-///fe3d:image_place("pick_iron", "pick_iron.png", -0.375, -0.85, 0.0, 0.125, 0.2)
+fe3d:image_place("pickaxe_stone", "pickaxe_stone.png", -0.375, -0.85, 0.0, 0.125, 0.2)
+fe3d:image_place("pickaxe_iron", "pickaxe_iron.png", -0.375, -0.85, 0.0, 0.125, 0.2)
 fe3d:image_place("axe_stone", "axe_stone.png", -0.25,  -0.85, 0.0, 0.125, 0.2)
-///fe3d:image_place("axe_iron", "axe_iron.png", -0.25,  -0.85, 0.0, 0.125, 0.2)
+fe3d:image_place("axe_iron", "axe_iron.png", -0.25,  -0.85, 0.0, 0.125, 0.2)
 ///fe3d:image_place("shovel_stone", "shovel_stone.png", -0.25,  -0.85, 0.0, 0.125, 0.2)
 ///fe3d:image_place("shovel_iron", "shovel_iron.png", -0.25,  -0.85, 0.0, 0.125, 0.2)
 ///fe3d:image_place("hoe", "hoe.png", -0.25,  -0.85, 0.0, 0.125, 0.2)
@@ -45,12 +45,12 @@ fe3d:image_place("axe_stone", "axe_stone.png", -0.25,  -0.85, 0.0, 0.125, 0.2)
 ///fe3d:image_place("hammer", "hammer.png", -0.25,  -0.85, 0.0, 0.125, 0.2)
 ///fe3d:image_place("torch", "torch.png", -0.25,  -0.85, 0.0, 0.125, 0.2)
 ///fe3d:image_place("fishrod", "fishrod.png", -0.25,  -0.85, 0.0, 0.125, 0.2)
-///fe3d:image_set_visible("sword_stone", <false>)
+fe3d:image_set_visible("sword_stone", <false>)
 fe3d:image_set_visible("sword_iron", <false>)
-///fe3d:image_set_visible("pickaxe_stone", <false>)
-///fe3d:image_set_visible("pickaxe_iron", <false>)
+fe3d:image_set_visible("pickaxe_stone", <false>)
+fe3d:image_set_visible("pickaxe_iron", <false>)
 fe3d:image_set_visible("axe_stone", <false>)
-///fe3d:image_set_visible("axe_iron", <false>)
+fe3d:image_set_visible("axe_iron", <false>)
 ///fe3d:image_set_visible("shovel_stone", <false>)
 ///fe3d:image_set_visible("shovel_iron", <false>)
 ///fe3d:image_set_visible("hoe", <false>)

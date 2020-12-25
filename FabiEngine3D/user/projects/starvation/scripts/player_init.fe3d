@@ -1,4 +1,4 @@
-18 23
+47 20
 META script_type_init
 
 /// Global variables
@@ -30,7 +30,20 @@ fe3d:model_place("player", "skeleton", 0.0, 0.0, 0.0)
 fe3d:model_set_max_height("player", 2.5)
 fe3d:model_set_aabb_responsive("player", <false>)
 
-fe3d:model_place("sword_iron", "sword_iron", 0.0, 0.0, 0.0)
-fe3d:model_set_aabb_responsive("sword_iron", <false>)
-EDIT _inventory[0] = "sword_iron"
+STR id = "sword_iron"
+fe3d:model_place(id, id, 0.0, 0.0, 0.0)
+fe3d:model_set_aabb_responsive(id, <false>)
+EDIT _inventory[0] = id
+EDIT _equipIndex = 0
+
+EDIT id = "pickaxe_iron"
+fe3d:model_place(id, id, 0.0, 0.0, 0.0)
+fe3d:model_set_aabb_responsive(id, <false>)
+EDIT _inventory[1] = id
 EDIT _equipIndex = 1
+
+EDIT id = "axe_iron"
+fe3d:model_place(id, id, 0.0, 0.0, 0.0)
+fe3d:model_set_aabb_responsive(id, <false>)
+EDIT _inventory[2] = id
+EDIT _equipIndex = 2

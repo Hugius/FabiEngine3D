@@ -76,12 +76,12 @@ float FabiEngine3D::misc_degreesToRadians(float angle)
 
 void FabiEngine3D::misc_showCursor()
 {
-	_core->_windowManager.showMouseCursor();
+	_core->_windowManager.showCursor();
 }
 
 void FabiEngine3D::misc_hideCursor()
 {
-	_core->_windowManager.hideMouseCursor();
+	_core->_windowManager.hideCursor();
 }
 
 void FabiEngine3D::misc_setCustomCursor(const string& guiEntityID)
@@ -132,7 +132,7 @@ void FabiEngine3D::misc_disableDebugRendering()
 void FabiEngine3D::misc_setCursorPosition(Ivec2 pos)
 {
 	_core->_mousePicker.update(pos, _core->_terrainEntityManager);
-	_core->_windowManager.setMousePos(pos);
+	_core->_windowManager.setCursorPos(pos);
 }
 
 void FabiEngine3D::misc_setMainRenderingColor(Vec3 color)
@@ -341,7 +341,7 @@ Vec2 FabiEngine3D::misc_convertFromScreenCoords(Ivec2 pos)
 
 Ivec2 FabiEngine3D::misc_getCursorPosition()
 {
-	Ivec2 mousePos = _core->_windowManager.getMousePos();
+	Ivec2 mousePos = _core->_windowManager.getCursorPos();
 
 	return Ivec2(mousePos.x, misc_getWindowHeight() - mousePos.y);
 }

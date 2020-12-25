@@ -170,6 +170,7 @@ private:
 	bool _hasThrownError = false;
 	bool _scopeHasChanged = false;
 	bool _passedScopeChanger = false;
+	bool _startedInitialization = false;
 
 	// String to input type map
 	static inline const map<string, InputType> _keyInputStringMap =

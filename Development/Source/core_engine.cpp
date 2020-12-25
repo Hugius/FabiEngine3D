@@ -50,21 +50,6 @@ void CoreEngine::_start()
 	_fe3d.FE3D_CONTROLLER_DESTROY();
 }
 
-void CoreEngine::_pause()
-{
-	_isPaused = true;
-}
-
-void CoreEngine::_resume()
-{
-	_isPaused = false;
-}
-
-void CoreEngine::_stop()
-{
-	_isRunning = false;
-}
-
 void CoreEngine::_setupApplication()
 {
 	// Only if in engine preview
@@ -160,6 +145,9 @@ void CoreEngine::_setupApplication()
 
 void CoreEngine::_updateApplication()
 {
+	// Temporary values
+	static Ivec2 lastCursorPosition = _windowManager.getCursorPos();
+
 	// Exit application
 	if (_inputHandler.getKeyDown(InputType::WINDOW_X_BUTTON))
 	{
@@ -178,19 +166,19 @@ void CoreEngine::_updateApplication()
 		_timer.start("cameraUpdate");
 		Ivec2 offset = Ivec2(Config::getInst().getVpPos().x, Config::getInst().getWindowSize().y - (Config::getInst().getVpPos().y + Config::getInst().getVpSize().y));
 
-		// Apply Y offset to mouse position
-		Vec2 mousePos = Vec2(_windowManager.getMousePos()) - Vec2(offset);
+		// Apply Y offset to cursor position
+		Vec2 relativeCursorPosition = Vec2(_windowManager.getCursorPos()) - Vec2(offset);
 
 		// Convert fullscreen coords to viewport coords
-		mousePos = (mousePos / Vec2(Config::getInst().getVpSize())) * Vec2(Config::getInst().getWindowSize());
+		relativeCursorPosition = (relativeCursorPosition / Vec2(Config::getInst().getVpSize())) * Vec2(Config::getInst().getWindowSize());
 
 		// Camera updates
-		_cameraManager.update(_windowManager);
+		_cameraManager.update(lastCursorPosition);
 		_timer.stop();
 
 		// Raycast updates
 		_timer.start("raycastUpdate");
-		_mousePicker.update(Ivec2(mousePos), _terrainEntityManager);
+		_mousePicker.update(Ivec2(relativeCursorPosition), _terrainEntityManager);
 		_timer.stop();
 
 		// Collision updates
@@ -233,10 +221,13 @@ void CoreEngine::_updateApplication()
 	_textEntityManager.update();
 	_timer.stop();
 
-	// Miscellaneous updates
+	// Updates miscellaneous
 	_timer.start("miscUpdate");
 	_updateWindowFading();
 	_timer.stop();
+
+	// Save last cursor position
+	lastCursorPosition = _windowManager.getCursorPos();
 }
 
 void CoreEngine::_renderApplication()

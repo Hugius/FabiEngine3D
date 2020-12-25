@@ -1,7 +1,17 @@
-5 42
+12 15
 META script_type_update
 
-IF _isCuttingTree IS <true>:
+/// Check if any tool animation is playing
+EDIT _toolPlaying = <false>
+IF _pickaxePlaying IS <true> OR _axePlaying IS <true>:
+    EDIT _toolPlaying = <true>
+IF _shovelPlaying IS <true> OR _hoePlaying IS <true> OR _scythePlaying IS <true>:
+    EDIT _toolPlaying = <true>
+IF _hammerPlaying IS <true> OR _fishrodPlaying IS <true>:
+    EDIT _toolPlaying = <true>
+
+/// Disable camera movement when animation is playing (except for sword)
+IF _toolPlaying IS <true>:
     fe3d:camera_disable_first_person_view()
 ELSE:
     fe3d:camera_enable_first_person_view()

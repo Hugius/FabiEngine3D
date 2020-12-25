@@ -39,74 +39,83 @@ void AnimationEditor::loadAnimationsFromFile()
 			auto newAnimation = make_shared<Animation>(animationID);
 			newAnimation->previewModelID = previewModelID;
 
-			// Clear default empty partname
-			newAnimation->partNames.clear();
-			newAnimation->totalTranslations.clear();
-			newAnimation->totalRotations.clear();
-			newAnimation->totalScalings.clear();
-
-			// Extract frame data from file
-			vector<AnimationFrame> frames;
-			while (true)
+			// Check if there is any more content in line
+			string temp;
+			if (iss >> temp)
 			{
-				// Read the amount of model parts
-				unsigned int modelPartCount;
+				// Start reading again
+				iss = std::istringstream(line);
+				iss >> animationID >> previewModelID;
 
-				// Check if file has frame data left
-				if (iss >> modelPartCount)
+				// Clear default empty partname
+				newAnimation->partNames.clear();
+				newAnimation->totalTranslations.clear();
+				newAnimation->totalRotations.clear();
+				newAnimation->totalScalings.clear();
+
+				// Extract frame data from file
+				vector<AnimationFrame> frames;
+				while (true)
 				{
-					// Create frame
-					AnimationFrame frame;
+					// Read the amount of model parts
+					unsigned int modelPartCount;
 
-					// For every model part
-					for (unsigned int i = 0; i < modelPartCount; i++)
+					// Check if file has frame data left
+					if (iss >> modelPartCount)
 					{
-						// Temporary values
-						string partName;
-						Vec3 targetTransformation, rotationOrigin;
-						float speed;
-						int speedType, transformationType;;
+						// Create frame
+						AnimationFrame frame;
 
-						// Extract data
-						iss >> partName >> targetTransformation.x >> targetTransformation.y >> targetTransformation.z >> 
-							rotationOrigin.x >> rotationOrigin.y >> rotationOrigin.z >> speed >> speedType >> transformationType;
-
-						// Questionmark means empty partname
-						if (partName == "?")
+						// For every model part
+						for (unsigned int i = 0; i < modelPartCount; i++)
 						{
-							partName = "";
+							// Temporary values
+							string partName;
+							Vec3 targetTransformation, rotationOrigin;
+							float speed;
+							int speedType, transformationType;;
+
+							// Extract data
+							iss >> partName >> targetTransformation.x >> targetTransformation.y >> targetTransformation.z >>
+								rotationOrigin.x >> rotationOrigin.y >> rotationOrigin.z >> speed >> speedType >> transformationType;
+
+							// Questionmark means empty partname
+							if (partName == "?")
+							{
+								partName = "";
+							}
+
+							// Add part to frame
+							frame.targetTransformations.insert(make_pair(partName, targetTransformation));
+							frame.rotationOrigins.insert(make_pair(partName, rotationOrigin));
+							frame.speeds.insert(make_pair(partName, speed));
+							frame.speedTypes.insert(make_pair(partName, AnimationSpeedType(speedType)));
+							frame.transformationTypes.insert(make_pair(partName, TransformationType(transformationType)));
+
+							// Add all partnames 1 time only
+							if (frames.empty())
+							{
+								newAnimation->partNames.push_back(partName);
+
+								// Also add total transformation for each partname
+								newAnimation->totalTranslations.insert(make_pair(partName, Vec3(0.0f)));
+								newAnimation->totalRotations.insert(make_pair(partName, Vec3(0.0f)));
+								newAnimation->totalScalings.insert(make_pair(partName, Vec3(0.0f)));
+							}
 						}
 
-						// Add part to frame
-						frame.targetTransformations.insert(make_pair(partName, targetTransformation));
-						frame.rotationOrigins.insert(make_pair(partName, rotationOrigin));
-						frame.speeds.insert(make_pair(partName, speed));
-						frame.speedTypes.insert(make_pair(partName, AnimationSpeedType(speedType)));
-						frame.transformationTypes.insert(make_pair(partName, TransformationType(transformationType)));
-
-						// Add all partnames 1 time only
-						if (frames.empty())
-						{
-							newAnimation->partNames.push_back(partName);
-
-							// Also add total transformation for each partname
-							newAnimation->totalTranslations.insert(make_pair(partName, Vec3(0.0f)));
-							newAnimation->totalRotations.insert(make_pair(partName, Vec3(0.0f)));
-							newAnimation->totalScalings.insert(make_pair(partName, Vec3(0.0f)));
-						}
+						// Add frame
+						frames.push_back(frame);
 					}
+					else
+					{
+						break;
+					}
+				}
 
-					// Add frame
-					frames.push_back(frame);
-				}
-				else
-				{
-					break;
-				}
+				// Add frames to animation
+				newAnimation->frames.insert(newAnimation->frames.end(), frames.begin(), frames.end());
 			}
-
-			// Add frames to animation
-			newAnimation->frames.insert(newAnimation->frames.end(), frames.begin(), frames.end());
 
 			// Only if loading animations in editor
 			if (_isEditorLoading)

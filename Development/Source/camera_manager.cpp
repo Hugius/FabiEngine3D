@@ -4,8 +4,9 @@
 #include <algorithm>
 #include <iostream>
 
-CameraManager::CameraManager(RenderBus& renderBus) :
-	_renderBus(renderBus)
+CameraManager::CameraManager(RenderBus& renderBus, WindowManager& windowManager) :
+	_renderBus(renderBus),
+	_windowManager(windowManager)
 {
 	_aspectRatio = static_cast<float>(Config::getInst().getWindowWidth()) / static_cast<float>(Config::getInst().getWindowHeight());
 }
@@ -40,10 +41,10 @@ void CameraManager::reset()
 	_mustCenter = false;
 }
 
-void CameraManager::update(WindowManager & windowManager)
+void CameraManager::update(Ivec2 lastCursorPosition)
 {
 	// Temporary values
-	Ivec2 currentMousePos = windowManager.getMousePos();
+	Ivec2 currenCursorPosition = _windowManager.getCursorPos();
 	const int left = Config::getInst().getVpPos().x;
 	const int right = Config::getInst().getVpPos().x + Config::getInst().getVpSize().x;
 	const int bottom = Config::getInst().getWindowSize().y - (Config::getInst().getVpPos().y + Config::getInst().getVpSize().y);
@@ -54,14 +55,14 @@ void CameraManager::update(WindowManager & windowManager)
 	// Update cursor centering
 	if (_mustCenter)
 	{
-		// Check if reached center
-		if (currentMousePos == Ivec2(xMiddle, yMiddle))
+		// Check if cursor reached center or cursor is moving
+		if (currenCursorPosition == Ivec2(xMiddle, yMiddle) || currenCursorPosition != lastCursorPosition)
 		{
 			_mustCenter = false;
 		}
 		else // Spawn mouse in middle of screen
 		{
-			windowManager.setMousePos({ xMiddle, yMiddle });
+			_windowManager.setCursorPos({ xMiddle, yMiddle });
 		}
 
 	}
@@ -69,9 +70,9 @@ void CameraManager::update(WindowManager & windowManager)
 	// Only if first person camera is enabled & not centering
 	if (_isFirstPersonViewEnabled && !_mustCenter)
 	{
-		// Offset between current and last mouse pos
-		float xOffset = static_cast<float>(currentMousePos.x - xMiddle);
-		float yOffset = static_cast<float>(yMiddle - currentMousePos.y);
+		// Offset between current mouse position & middle of the screen
+		float xOffset = static_cast<float>(currenCursorPosition.x - xMiddle);
+		float yOffset = static_cast<float>(yMiddle - currenCursorPosition.y);
 
 		// Applying mouse sensitivity
 		xOffset *= (_mouseSensitivity) / 100.0f;
@@ -85,7 +86,7 @@ void CameraManager::update(WindowManager & windowManager)
 		_pitchAcceleration += yOffset;
 
 		// Spawn mouse in middle of screen
-		windowManager.setMousePos({ xMiddle, yMiddle });
+		_windowManager.setCursorPos({ xMiddle, yMiddle });
 	}
 
 	// Update yaw & pitch movements
@@ -198,7 +199,6 @@ void CameraManager::enableFirstPersonView()
 	// Only center first time
 	if (!_isFirstPersonViewEnabled)
 	{
-		std::cout << "TEST";
 		_mustCenter = true;
 	}
 

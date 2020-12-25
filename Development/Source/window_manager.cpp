@@ -174,22 +174,22 @@ void WindowManager::hideWindow()
 	SDL_HideWindow(_window);
 }
 
-void WindowManager::showMouseCursor()
+void WindowManager::showCursor()
 {
 	SDL_ShowCursor(SDL_ENABLE);
 }
 
-void WindowManager::hideMouseCursor()
+void WindowManager::hideCursor()
 {
 	SDL_ShowCursor(SDL_DISABLE);
 }
 
-void WindowManager::setMousePos(Ivec2 pos)
+void WindowManager::setCursorPos(Ivec2 pos)
 {
 	SDL_WarpMouseInWindow(_window, pos.x, pos.y);
 }
 
-const Ivec2 WindowManager::getMousePos() const
+const Ivec2 WindowManager::getCursorPos() const
 {
 	int x, y;
 	SDL_GetMouseState(&x, &y);

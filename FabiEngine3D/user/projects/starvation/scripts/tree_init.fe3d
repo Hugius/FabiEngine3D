@@ -1,7 +1,6 @@
-6 26
+1 0
 META script_type_init
 
-GLOB BOOL _isCuttingTree = <false>
 GLOB STR _fallingTreeID = ""
 GLOB LIST _logIDs = {}
 GLOB STR _fallingLogID = ""

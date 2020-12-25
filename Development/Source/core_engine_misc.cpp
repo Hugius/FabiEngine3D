@@ -12,7 +12,7 @@ CoreEngine::CoreEngine(FabiEngine3D& fe3d) :
 	_audioLoader(),
 	_inputHandler(_timer),
 	_renderBus(),
-	_cameraManager(_renderBus),
+	_cameraManager(_renderBus, _windowManager),
 	_renderEngine(_renderBus, _timer, _texLoader),
 	_skyEntityManager(_objLoader, _texLoader, _renderBus),
 	_terrainEntityManager(_objLoader, _texLoader, _renderBus),
@@ -57,4 +57,19 @@ void CoreEngine::_updateWindowFading()
 			_windowManager.setOpacity(1.0f);
 		}
 	}
+}
+
+void CoreEngine::_pause()
+{
+	_isPaused = true;
+}
+
+void CoreEngine::_resume()
+{
+	_isPaused = false;
+}
+
+void CoreEngine::_stop()
+{
+	_isRunning = false;
 }

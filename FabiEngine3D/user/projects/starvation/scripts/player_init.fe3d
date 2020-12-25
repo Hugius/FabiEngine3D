@@ -1,8 +1,9 @@
-47 20
+4 20
 META script_type_init
 
 /// Global variables
 GLOB BOOL _isJumping = <false>
+GLOB BOOL _isFalling = <false>
 GLOB BOOL _isWalking = <false>
 GLOB BOOL _isRunning = <false>
 GLOB BOOL _mayJump = <false>
@@ -14,7 +15,23 @@ GLOB DEC _fallingSpeed = 0.05
 GLOB DEC _totalBobbing = 0.0
 GLOB DEC _bobbingDirection = 1.0
 GLOB STR _lastSelectedAxeID = ""
-///GLOB DEC _lastYaw = fe3d:camera_get_yaw()
+GLOB BOOL _wasSwordPlaying = <false>
+GLOB BOOL _wasPickaxePlaying = <false>
+GLOB BOOL _wasAxePlaying = <false>
+GLOB BOOL _wasShovelPlaying = <false>
+GLOB BOOL _wasHoePlaying = <false>
+GLOB BOOL _wasScythePlaying = <false>
+GLOB BOOL _wasHammerPlaying = <false>
+GLOB BOOL _wasFishrodPlaying = <false>
+GLOB BOOL _swordPlaying = <false>
+GLOB BOOL _pickaxePlaying = <false>
+GLOB BOOL _axePlaying = <false>
+GLOB BOOL _shovelPlaying = <false>
+GLOB BOOL _hoePlaying = <false>
+GLOB BOOL _scythePlaying = <false>
+GLOB BOOL _hammerPlaying = <false>
+GLOB BOOL _fishrodPlaying = <false>
+GLOB BOOL _toolPlaying = <false>
 
 fe3d:cursor_hide()
 /// -149.0, 48.0, 208.0
@@ -47,3 +64,9 @@ fe3d:model_place(id, id, 0.0, 0.0, 0.0)
 fe3d:model_set_aabb_responsive(id, <false>)
 EDIT _inventory[2] = id
 EDIT _equipIndex = 2
+
+EDIT id = "shovel_iron"
+fe3d:model_place(id, id, 0.0, 0.0, 0.0)
+fe3d:model_set_aabb_responsive(id, <false>)
+EDIT _inventory[3] = id
+EDIT _equipIndex = 3

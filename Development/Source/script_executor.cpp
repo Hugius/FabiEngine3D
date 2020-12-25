@@ -17,6 +17,7 @@ void ScriptExecutor::load()
 	_scriptInterpreter.executeInitialization();
 	_isInitialized = true;
 	_isRunning = true;
+	_skipUpdate = true;
 
 	// Check for errors
 	_validateExecution();
@@ -27,7 +28,11 @@ void ScriptExecutor::update()
 	if (_isInitialized && _isRunning)
 	{
 		// Run script (1 frame)
-		_scriptInterpreter.executeUpdate();
+		if (!_skipUpdate)
+		{
+			_scriptInterpreter.executeUpdate();
+		}
+		_skipUpdate = false;
 
 		// Custom cursor is only enabled in engine preview
 		if (_fe3d.engine_getSelectedGame().empty())
@@ -88,6 +93,7 @@ void ScriptExecutor::unpause()
 		_fe3d.music_resume();
 		_fe3d.engine_resume();
 		_isRunning = true;
+		_skipUpdate = true;
 	}
 }
 

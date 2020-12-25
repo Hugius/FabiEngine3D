@@ -7,7 +7,7 @@ IF _isRunning IS <true>:
     MUL bobbingSpeed 2.0
 
 /// Update bobbing animation
-IF _isWalking IS <true> AND _isCuttingTree IS <false>:
+IF _isWalking IS <true> AND _toolPlaying IS <false>:
     INCR _totalBobbing bobbingSpeed
     MUL bobbingSpeed _bobbingDirection
     DEC newPitch = fe3d:camera_get_pitch()

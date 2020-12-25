@@ -1,18 +1,18 @@
 #pragma once
 
-#include "window_manager.hpp"
 #include "render_bus.hpp"
+#include "window_manager.hpp"
 
 class CameraManager final
 {
 public:
-	CameraManager(RenderBus& renderBus);
+	CameraManager(RenderBus& renderBus, WindowManager& windowManager);
 	~CameraManager() = default;
 
 	void reset();
 
 	// Update
-	void update(WindowManager & windowManager);
+	void update(Ivec2 lastCursorPosition);
 	void updateMatrices();
 
 	// Setters
@@ -59,7 +59,9 @@ public:
 	const bool   isFreeMovementEnabled()	const;
 
 private:
+	// Instances
 	RenderBus& _renderBus;
+	WindowManager& _windowManager;
 
 	// Matrices
 	Matrix44 _viewMatrix = Matrix44(1.0f);

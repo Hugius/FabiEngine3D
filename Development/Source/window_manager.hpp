@@ -25,11 +25,11 @@ public:
 	void swapBackBuffer();
 	void showWindow();
 	void hideWindow();
-	void showMouseCursor();
-	void hideMouseCursor();
-	void setMousePos(Ivec2 pos);
+	void showCursor();
+	void hideCursor();
+	void setCursorPos(Ivec2 pos);
 
-	const Ivec2 getMousePos() const;
+	const Ivec2 getCursorPos() const;
 	bool isCursorVisible() const;
 
 private:

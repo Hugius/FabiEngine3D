@@ -88,7 +88,7 @@ void CoreEngine::_setupApplication()
 		_windowManager.enableColorKeying(keyingColor);
 		_windowManager.setSize(logoResolution);
 		_windowManager.showWindow();
-		_renderEngine.renderEngineLogo(logo, logoResolution);
+		_renderEngine.renderEngineLogo(logo, nullptr, logoResolution);
 		_windowManager.swapBackBuffer();
 
 		// Initialize engine controller
@@ -115,17 +115,23 @@ void CoreEngine::_setupApplication()
 		_windowManager.showBorder();
 		_windowManager.enableVsync();
 
-		// Create engine logo
+		// Create logo
 		shared_ptr<GuiEntity> logo = make_shared<GuiEntity>("logo");
 		logo->addOglBuffer(new OpenGLBuffer(0.0f, 0.0f, 1.0f, 0.75f, true, false));
 		logo->setDiffuseMap(_texLoader.getTexture("engine\\textures\\logo.png", true, true));
 
+		// Create text
+		shared_ptr<TextEntity> text = make_shared<TextEntity>("text");
+		text->addOglBuffer(new OpenGLBuffer(-0.6f, 0.5f, 0.3f, 0.075f, true, true));
+		text->setDiffuseMap(_texLoader.getText("Created with", "engine\\fonts\\font.ttf"));
+
 		// Render logo (intro fade in)
-		for (float opaqueness = 0.0f; opaqueness < 1.0f; opaqueness += 0.0025f)
+		for (float opaqueness = 0.0f; opaqueness < 1.3f; opaqueness += 0.0025f)
 		{
-			logo->setColor(Vec3(opaqueness));
+			logo->setColor(Vec3(opaqueness - 0.3f));
+			text->setColor(Vec3(opaqueness));
 			_inputHandler.f_checkInput();
-			_renderEngine.renderEngineLogo(logo, Config::getInst().getWindowSize());
+			_renderEngine.renderEngineLogo(logo, text, Config::getInst().getWindowSize());
 			_windowManager.swapBackBuffer();
 		}
 
@@ -133,10 +139,12 @@ void CoreEngine::_setupApplication()
 		_fe3d.FE3D_CONTROLLER_INIT();
 
 		// Render logo (intro fade out)
-		for (float opaqueness = 1.0f; opaqueness > 0.0f; opaqueness -= 0.005f)
+		for (float opaqueness = 1.3f; opaqueness > 0.0f; opaqueness -= 0.005f)
 		{
-			logo->setColor(Vec3(opaqueness));
-			_renderEngine.renderEngineLogo(logo, Config::getInst().getWindowSize());
+			logo->setColor(Vec3(opaqueness - 0.3f));
+			text->setColor(Vec3(opaqueness));
+			_inputHandler.f_checkInput();
+			_renderEngine.renderEngineLogo(logo, text, Config::getInst().getWindowSize());
 			_windowManager.swapBackBuffer();
 		}
 

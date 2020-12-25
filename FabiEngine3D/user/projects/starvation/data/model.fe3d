@@ -31,3 +31,4 @@
 @stone4 user\assets\models\stones\stone4.obj user\assets\textures\diffuse_maps\stones\stone4.png ? ? ? 2.5 2.5 2.5 0 1 0 0 1 1 1 1 1 1 1 1 ? 0
 @stone5 user\assets\models\stones\stone5.obj user\assets\textures\diffuse_maps\stones\stone5.png ? ? ? 0.75 0.75 0.75 0 1 0 0 1 1 1 1 1 1 1 1 ? 0
 @stone6 user\assets\models\stones\stone6.obj user\assets\textures\diffuse_maps\stones\stone6.png ? ? ? 1.5 1.5 1.5 0 1 0 0 1 1 1 0.5 1 1 1 1 ? 0
+@sword_iron user\assets\models\tools\sword_iron.obj user\assets\textures\diffuse_maps\tools\sword_iron.png ? user\assets\textures\reflection_maps\tools\sword_iron.png user\assets\textures\normal_maps\tools\sword_iron.png 0.5 0.5 0.5 0 0 0 0 1 1 1 0.75 1 1 1 1 ? 0 sword 0 0 0 0.270001 4.07 0.83

@@ -50,6 +50,21 @@ void CameraManager::update(WindowManager & windowManager)
 	const int top = Config::getInst().getWindowSize().y - Config::getInst().getVpPos().y;
 	const int xMiddle = Config::getInst().getWindowSize().x / 2;
 	const int yMiddle = Config::getInst().getWindowSize().y / 2;
+	
+	// Update cursor centering
+	if (_mustCenter)
+	{
+		// Check if reached center
+		if (currentMousePos == Ivec2(xMiddle, yMiddle))
+		{
+			_mustCenter = false;
+		}
+		else // Spawn mouse in middle of screen
+		{
+			windowManager.setMousePos({ xMiddle, yMiddle });
+		}
+
+	}
 
 	// Only if first person camera is enabled & not centering
 	if (_isFirstPersonViewEnabled && !_mustCenter)
@@ -71,13 +86,6 @@ void CameraManager::update(WindowManager & windowManager)
 
 		// Spawn mouse in middle of screen
 		windowManager.setMousePos({ xMiddle, yMiddle });
-	}
-
-	// Spawn mouse in middle of screen
-	if (_mustCenter)
-	{
-		windowManager.setMousePos({ xMiddle, yMiddle });
-		_mustCenter = false;
 	}
 
 	// Update yaw & pitch movements
@@ -190,6 +198,7 @@ void CameraManager::enableFirstPersonView()
 	// Only center first time
 	if (!_isFirstPersonViewEnabled)
 	{
+		std::cout << "TEST";
 		_mustCenter = true;
 	}
 

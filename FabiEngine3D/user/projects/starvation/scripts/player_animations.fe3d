@@ -1,4 +1,4 @@
-0 23
+64 19
 META script_type_update
 
 /// Skeleton position & rotation
@@ -32,12 +32,16 @@ STR itemID = _inventory[_equipIndex]
 
 /// Determine animation type
 STR animID = ""
+DEC toolHeight = 0.0
 IF _equipIndex IS 0:
     EDIT animID = "sword_hit"
+    EDIT toolHeight = 1.5
 ELIF _equipIndex IS 1:
     EDIT animID = "pickaxe_mine"
+    EDIT toolHeight = 1.0
 ELIF _equipIndex IS 2:
     EDIT animID = "axe_cut"
+    EDIT toolHeight = 1.0
 ELIF _equipIndex IS 3:
     EDIT animID = "shovel_dig"
 ELIF _equipIndex IS 4:
@@ -59,7 +63,7 @@ IF itemID NOT "" AND animID NOT "":
     VEC3 itemPos = camPos
     INCR itemPos.x sinRot
     INCR itemPos.z cosRot
-    INCR itemPos.y 1.0
+    INCR itemPos.y toolHeight
     fe3d:model_set_position(itemID, itemPos.x, itemPos.y, itemPos.z)
     /// Rotation
     VEC3 itemRot = fe3d:model_get_rotation(itemID)

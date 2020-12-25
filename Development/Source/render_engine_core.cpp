@@ -44,12 +44,23 @@ RenderEngine::RenderEngine(RenderBus& renderBus, Timer& timer, TextureLoader& te
 	_finalSurface->setMirroredVertically(true);
 }
 
-void RenderEngine::renderEngineLogo(shared_ptr<GuiEntity> entity, Ivec2 viewport)
+void RenderEngine::renderEngineLogo(shared_ptr<GuiEntity> logo, shared_ptr<TextEntity> text, Ivec2 viewport)
 {
+	// Prepare
 	glViewport(0, 0, viewport.x, viewport.y);
 	glClear(GL_COLOR_BUFFER_BIT);
+
+	// Bind
 	_guiEntityRenderer.bind();
-	_guiEntityRenderer.render(entity);
+
+	// Render logo + text
+	_guiEntityRenderer.render(logo);
+	if (text != nullptr)
+	{
+		_guiEntityRenderer.render(text);
+	}
+
+	// Unbind
 	_guiEntityRenderer.unbind();
 }
 

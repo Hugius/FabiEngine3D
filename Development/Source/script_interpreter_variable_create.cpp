@@ -56,9 +56,12 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 		typeString == _booleanKeyword)
 	{
 		// Validate variable name
-		bool validName = !nameString.empty() && nameString.substr(0, 5) != "fe3d:" && nameString.substr(0, 5) != "math:" &&
-			nameString.substr(0, 5) != "misc:" && !isdigit(nameString.front() && isalnum(nameString.front())) &&
-			nameString != "<true>" && nameString != "<false>";
+		bool validName = !nameString.empty() &&
+			nameString.substr(0, 5) != "fe3d:" &&
+			nameString.substr(0, 5) != "math:" &&
+			nameString.substr(0, 5) != "misc:" && 
+			!isdigit(nameString.front()) &&
+			(isalnum(nameString.front()) || nameString.front() == '_');
 
 		// Forbidden variable names
 		for (auto& word : { _metaKeyword, _executeKeyword, _loopKeyword, _breakKeyword, _ifKeyword, _elifKeyword, _elseKeyword, _globalKeyword,
@@ -72,8 +75,8 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 		// Validate variable individual characters
 		for (auto& c : nameString)
 		{
-			// Only non-alphanumeric characters '_' and '-' allowed
-			if (c != '_' && c != '-' && !isalnum(c))
+			// Only non-alphanumeric character '_'
+			if (c != '_' && !isalnum(c))
 			{
 				validName = false;
 			}

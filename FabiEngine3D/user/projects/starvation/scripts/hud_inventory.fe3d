@@ -1,0 +1,76 @@
+4 4
+META script_type_update
+
+/// Check if player wants to open/close inventory
+IF _toolPlaying IS <false>:
+    BOOL tToggled = fe3d:input_is_key_toggled("KEY_T")
+    EDIT _isInvOpen = (tToggled IS <true>)
+
+/// Update inventory icon visibility
+BOOL slot1 = (_inventory[0] IS "")
+BOOL slot2 = (_inventory[1] IS "")
+BOOL slot3 = (_inventory[2] IS "")
+BOOL slot4 = (_inventory[3] IS "")
+BOOL slot5 = (_inventory[4] IS "")
+BOOL slot6 = (_inventory[5] IS "")
+BOOL slot7 = (_inventory[6] IS "")
+BOOL slot8 = (_inventory[7] IS "")
+BOOL slot9 = (_inventory[8] IS "")
+fe3d:image_set_visible("sword_icon", slot1)
+fe3d:image_set_visible("pickaxe_icon", slot2)
+fe3d:image_set_visible("axe_icon", slot3)
+fe3d:image_set_visible("shovel_icon", slot4)
+fe3d:image_set_visible("hoe_icon", slot5)
+fe3d:image_set_visible("scythe_icon", slot6)
+fe3d:image_set_visible("hammer_icon", slot7)
+fe3d:image_set_visible("torch_icon", slot8)
+fe3d:image_set_visible("fishrod_icon", slot9)
+
+/// Update inventory item visibility
+IF _inventory[0] NOT "":
+    fe3d:image_set_visible(_inventory[0], <true>)
+IF _inventory[1] NOT "":
+    fe3d:image_set_visible(_inventory[1], <true>)
+IF _inventory[2] NOT "":
+    fe3d:image_set_visible(_inventory[2], <true>)
+IF _inventory[3] NOT "":
+    fe3d:image_set_visible(_inventory[3], <true>)
+IF _inventory[4] NOT "":
+    fe3d:image_set_visible(_inventory[4], <true>)
+IF _inventory[5] NOT "":
+    fe3d:image_set_visible(_inventory[5], <true>)
+IF _inventory[6] NOT "":
+    fe3d:image_set_visible(_inventory[6], <true>)
+IF _inventory[7] NOT "":
+    fe3d:image_set_visible(_inventory[7], <true>)
+IF _inventory[8] NOT "":
+    fe3d:image_set_visible(_inventory[8], <true>)
+
+/// Hide inventory if closed
+fe3d:image_set_visible("slot1", _isInvOpen)
+fe3d:image_set_visible("slot2", _isInvOpen)
+fe3d:image_set_visible("slot3", _isInvOpen)
+fe3d:image_set_visible("slot4", _isInvOpen)
+fe3d:image_set_visible("slot5", _isInvOpen)
+fe3d:image_set_visible("slot6", _isInvOpen)
+fe3d:image_set_visible("slot7", _isInvOpen)
+fe3d:image_set_visible("slot8", _isInvOpen)
+fe3d:image_set_visible("slot9", _isInvOpen)
+IF _isInvOpen IS <false>:
+    fe3d:image_set_visible("sword_icon", <false>)
+    fe3d:image_set_visible("pickaxe_icon", <false>)
+    fe3d:image_set_visible("axe_icon", <false>)
+    fe3d:image_set_visible("shovel_icon", <false>)
+    fe3d:image_set_visible("hoe_icon", <false>)
+    fe3d:image_set_visible("scythe_icon", <false>)
+    fe3d:image_set_visible("hammer_icon", <false>)
+    fe3d:image_set_visible("torch_icon", <false>)
+    fe3d:image_set_visible("fishrod_icon", <false>)
+    fe3d:image_set_visible("sword_stone", <false>)
+    fe3d:image_set_visible("sword_iron", <false>)
+    fe3d:image_set_visible("pickaxe_stone", <false>)
+    fe3d:image_set_visible("pickaxe_iron", <false>)
+    fe3d:image_set_visible("axe_stone", <false>)
+    fe3d:image_set_visible("axe_iron", <false>)
+    fe3d:image_set_visible("shovel_stone", <false>)
+    fe3d:image_set_visible("shovel_iron", <false>)

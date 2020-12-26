@@ -4,6 +4,7 @@ META execution_entry
 
 fe3d:scene_load("scene")
 
-EXEC hud_init
+EXEC hud_init_ui
+EXEC hud_init_misc
 EXEC player_init
 EXEC tree_init

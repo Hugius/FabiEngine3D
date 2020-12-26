@@ -1,0 +1,18 @@
+2 43
+META script_type_update
+
+/// Check if player wants to open/close bag
+BOOL iToggled = fe3d:input_is_key_toggled("KEY_I")
+IF iToggled IS <true>:
+    fe3d:image_set_visible("bag_open", <true>)
+    fe3d:image_set_visible("bag_closed", <false>)
+ELSE:
+    fe3d:image_set_visible("bag_open", <false>)
+    fe3d:image_set_visible("bag_closed", <true>)
+
+/// Update bag items visibility
+fe3d:image_set_visible("wood", iToggled)
+fe3d:image_set_visible("stone", iToggled)
+fe3d:image_set_visible("iron_ore", iToggled)
+fe3d:image_set_visible("clay", iToggled)
+fe3d:image_set_visible("seeds", iToggled)

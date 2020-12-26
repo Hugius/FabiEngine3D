@@ -1,0 +1,28 @@
+17 47
+META script_type_init
+
+/// Globals
+GLOB LIST _inventory = {"", "", "", "", "", "", "", "", ""}
+GLOB INT _equipIndex = 0
+GLOB INT _lastEquipIndex = 0
+GLOB BOOL _isInvOpen = <false>
+GLOB LIST _bag = {"", "", "", "", "", "", "", "", ""}
+GLOB INT _health = 50
+GLOB INT _hunger = 100
+GLOB INT _thirst = 100
+
+/// Invisible by default
+fe3d:image_set_visible("bag_open", <false>)
+fe3d:image_set_visible("sword_stone", <false>)
+fe3d:image_set_visible("sword_iron", <false>)
+fe3d:image_set_visible("pickaxe_stone", <false>)
+fe3d:image_set_visible("pickaxe_iron", <false>)
+fe3d:image_set_visible("axe_stone", <false>)
+fe3d:image_set_visible("axe_iron", <false>)
+fe3d:image_set_visible("shovel_stone", <false>)
+fe3d:image_set_visible("shovel_iron", <false>)
+///fe3d:image_set_visible("hoe", <false>)
+///fe3d:image_set_visible("scythe", <false>)
+///fe3d:image_set_visible("hammer", <false>)
+///fe3d:image_set_visible("torch", <false>)
+///fe3d:image_set_visible("fishrod", <false>)

@@ -1,15 +1,26 @@
-41 57
+17 23
 META script_type_init
-
-/// Globals
-GLOB LIST _inventory = {"", "", "", "", "", "", "", "", ""}
-GLOB INT _equipIndex = 0
-GLOB INT _lastEquipIndex = 0
 
 /// Crosshair
 fe3d:image_place("crosshair", "crosshair.png", 0.0, 0.0, 0.0, 0.0325, 0.05)
 
-/// Paper slots
+/// Player icons
+fe3d:image_place("player", "player.png", -0.91, 0.85, 0.0, 0.2, 0.3)
+fe3d:text_place("name", "font.ttf", "Hugius", -0.9, 0.675, 0.0, 0.125, 0.05)
+fe3d:image_place("health", "heart_icon.png", -0.965, 0.6, 0.0, 0.07, 0.09)
+fe3d:image_place("hunger", "food_icon.png", -0.89, 0.6, 0.0, 0.07, 0.095)
+fe3d:image_place("thirst", "water_icon.png", -0.825, 0.6, 0.0, 0.07, 0.09)
+
+/// Bag icons
+fe3d:image_place("bag_closed", "bag_closed.png", 0.9, 0.85, 0.0, 0.2, 0.3)
+fe3d:image_place("bag_open", "bag_open.png", 0.9, 0.85, 0.0, 0.2, 0.3)
+fe3d:image_place("wood", "wood.png", 0.96, 0.65, 0.0, 0.07, 0.09)
+fe3d:image_place("stone", "stone.png", 0.96, 0.55, 0.0, 0.07, 0.09)
+fe3d:image_place("iron_ore", "iron_ore.png", 0.96, 0.45, 0.0, 0.07, 0.09)
+fe3d:image_place("clay", "clay.png", 0.96, 0.35, 0.0, 0.07, 0.09)
+fe3d:image_place("seeds", "seeds.png", 0.96, 0.25, 0.0, 0.07, 0.09)
+
+/// Inventory slots
 fe3d:image_place("slot1", "slot.png", -0.5,   -0.85, 0.0, 0.125, 0.2)
 fe3d:image_place("slot2", "slot.png", -0.375, -0.85, 0.0, 0.125, 0.2)
 fe3d:image_place("slot3", "slot.png", -0.25,  -0.85, 0.0, 0.125, 0.2)
@@ -20,7 +31,7 @@ fe3d:image_place("slot7", "slot.png",  0.25,  -0.85, 0.0, 0.125, 0.2)
 fe3d:image_place("slot8", "slot.png",  0.375, -0.85, 0.0, 0.125, 0.2)
 fe3d:image_place("slot9", "slot.png",  0.5,   -0.85, 0.0, 0.125, 0.2)
 
-/// Icon slots
+/// Inventory icons
 fe3d:image_place("sword_icon", "sword_icon.png", -0.5, -0.85, 0.0, 0.125, 0.17)
 fe3d:image_place("pickaxe_icon", "pickaxe_icon.png", -0.375, -0.85, 0.0, 0.1, 0.15)
 fe3d:image_place("axe_icon", "axe_icon.png", -0.25, -0.85, 0.0, 0.1, 0.15)
@@ -31,7 +42,7 @@ fe3d:image_place("hammer_icon", "hammer_icon.png", 0.25, -0.85, 0.0, 0.1, 0.15)
 fe3d:image_place("torch_icon", "torch_icon.png", 0.375, -0.85, 0.0, 0.1, 0.15)
 fe3d:image_place("fishrod_icon", "fishrod_icon.png", 0.5, -0.85, 0.0, 0.1, 0.15)
 
-/// Equipped item slots
+/// Inventory items
 fe3d:image_place("sword_stone", "sword_stone.png", -0.5, -0.85, 0.0, 0.125, 0.2)
 fe3d:image_place("sword_iron", "sword_iron.png", -0.5, -0.85, 0.0, 0.125, 0.2)
 fe3d:image_place("pickaxe_stone", "pickaxe_stone.png", -0.375, -0.85, 0.0, 0.125, 0.2)
@@ -45,16 +56,3 @@ fe3d:image_place("shovel_iron", "shovel_iron.png", -0.125,  -0.85, 0.0, 0.125, 0
 ///fe3d:image_place("hammer", "hammer.png", -0.125,  -0.85, 0.0, 0.125, 0.2)
 ///fe3d:image_place("torch", "torch.png", -0.25,  -0.85, 0.0, 0.125, 0.2)
 ///fe3d:image_place("fishrod", "fishrod.png", -0.25,  -0.85, 0.0, 0.125, 0.2)
-fe3d:image_set_visible("sword_stone", <false>)
-fe3d:image_set_visible("sword_iron", <false>)
-fe3d:image_set_visible("pickaxe_stone", <false>)
-fe3d:image_set_visible("pickaxe_iron", <false>)
-fe3d:image_set_visible("axe_stone", <false>)
-fe3d:image_set_visible("axe_iron", <false>)
-fe3d:image_set_visible("shovel_stone", <false>)
-fe3d:image_set_visible("shovel_iron", <false>)
-///fe3d:image_set_visible("hoe", <false>)
-///fe3d:image_set_visible("scythe", <false>)
-///fe3d:image_set_visible("hammer", <false>)
-///fe3d:image_set_visible("torch", <false>)
-///fe3d:image_set_visible("fishrod", <false>)

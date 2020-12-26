@@ -1,0 +1,20 @@
+1 0
+META script_type_update
+
+/// Update health icon color
+INT healthColor = _health
+CAST healthColor DEC
+DIV healthColor 100.0
+fe3d:image_set_color("health", healthColor, healthColor, healthColor)
+
+/// Update hunger icon color
+INT hungerColor = _hunger
+CAST hungerColor DEC
+DIV hungerColor 100.0
+fe3d:image_set_color("health", hungerColor, hungerColor, hungerColor)
+
+/// Update thirst icon color
+INT thirstColor = _thirst
+CAST thirstColor DEC
+DIV thirstColor 100.0
+fe3d:image_set_color("health", thirstColor, thirstColor, thirstColor)

@@ -1,13 +1,15 @@
-8 22
+6 18
 META script_type_update
 META execution_entry
 
+EXEC hud_player
+EXEC hud_bag
+EXEC hud_inventory
 EXEC hud_selection
-EXEC hud_visiblity
 EXEC player_walk
 EXEC player_jump
 EXEC player_bobbing
-EXEC player_animations
+EXEC player_animation
 EXEC player_intro
 EXEC player_misc
 EXEC tree_cut

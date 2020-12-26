@@ -1,4 +1,4 @@
-3 55
+25 62
 META script_type_update
 
 /// Check if cutting animation finished
@@ -7,6 +7,7 @@ IF _axePlaying IS <false> AND _wasAxePlaying IS <true>:
     STR hoveredID = ""
     STR checkID = ""
     INT number = 1
+    /// Check if aiming at tree & extract number
     LOOP:
         CAST number STR
         EDIT checkID = misc:concat_strings("tree", number)
@@ -17,9 +18,11 @@ IF _axePlaying IS <false> AND _wasAxePlaying IS <true>:
         IF number IS 6:
             BREAK
         INCR number 1
+    /// Start treefalling
     IF hoveredID NOT "" AND _fallingTreeID IS "":
         VEC3 treePos = fe3d:model_get_position(hoveredID)
         DEC distance = math:distance(treePos, camPos)
         IF distance LESS 5.0:
             fe3d:model_start_animation("tree_fall", hoveredID, 1)
+            fe3d:model_set_aabb_responsive(hoveredID, <false>)
             EDIT _fallingTreeID = hoveredID

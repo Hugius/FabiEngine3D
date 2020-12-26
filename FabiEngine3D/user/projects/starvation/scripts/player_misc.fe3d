@@ -1,5 +1,24 @@
-3 27
+20 0
 META script_type_update
+
+/// Update tool animations status
+STR modelID = _inventory[_equipIndex]
+EDIT _wasSwordPlaying = _swordPlaying
+EDIT _wasPickaxePlaying = _pickaxePlaying
+EDIT _wasAxePlaying = _axePlaying
+EDIT _wasShovelPlaying = _shovelPlaying
+EDIT _wasHoePlaying = _hoePlaying
+EDIT _wasScythePlaying = _scythePlaying
+EDIT _wasHammerPlaying = _hammerPlaying
+EDIT _wasFishrodPlaying = _fishrodPlaying
+EDIT _swordPlaying = fe3d:model_is_animation_playing("sword_hit", modelID)
+EDIT _pickaxePlaying = fe3d:model_is_animation_playing("pickaxe_mine", modelID)
+EDIT _axePlaying = fe3d:model_is_animation_playing("axe_cut", modelID)
+EDIT _shovelPlaying = fe3d:model_is_animation_playing("shovel_dig", modelID)
+EDIT _hoePlaying = fe3d:model_is_animation_playing("sword_hit", modelID)
+EDIT _scythePlaying = fe3d:model_is_animation_playing("sword_hit", modelID)
+EDIT _hammerPlaying = fe3d:model_is_animation_playing("sword_hit", modelID)
+EDIT _fishrodPlaying = fe3d:model_is_animation_playing("sword_hit", modelID)
 
 /// Check if any tool animation is playing
 EDIT _toolPlaying = <false>

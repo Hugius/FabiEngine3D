@@ -1,4 +1,4 @@
-2 43
+36 43
 META script_type_update
 
 /// Check if player wants to open/close bag
@@ -12,7 +12,45 @@ ELSE:
 
 /// Update bag items visibility
 fe3d:image_set_visible("wood", iToggled)
+fe3d:text_set_visible("wood_count", iToggled)
+fe3d:text_set_visible("wood_max", iToggled)
 fe3d:image_set_visible("stone", iToggled)
-fe3d:image_set_visible("iron_ore", iToggled)
+fe3d:text_set_visible("stone_count", iToggled)
+fe3d:text_set_visible("stone_max", iToggled)
+fe3d:image_set_visible("iron", iToggled)
+fe3d:text_set_visible("iron_count", iToggled)
+fe3d:text_set_visible("iron_max", iToggled)
 fe3d:image_set_visible("clay", iToggled)
+fe3d:text_set_visible("clay_count", iToggled)
+fe3d:text_set_visible("clay_max", iToggled)
 fe3d:image_set_visible("seeds", iToggled)
+fe3d:text_set_visible("seeds_count", iToggled)
+fe3d:text_set_visible("seeds_max", iToggled)
+
+/// Restrict bag item amounts
+INT size = misc:get_list_size("_bag")
+INT index = 0
+LOOP:
+    IF index IS size:
+        BREAK
+    ELSE:
+        IF _bag[index] MORE _maxBagItems:
+            EDIT _bag[index] = _maxBagItems
+        INCR index 1
+
+/// Update bag item amounts
+INT wood = _bag[0]
+INT stone = _bag[1]
+INT iron = _bag[2]
+INT clay = _bag[3]
+INT seeds = _bag[4]
+CAST wood STR
+CAST stone STR
+CAST iron STR
+CAST clay STR
+CAST seeds STR
+fe3d:text_set_content("wood_count", wood)
+fe3d:text_set_content("stone_count", stone)
+fe3d:text_set_content("iron_count", iron)
+fe3d:text_set_content("clay_count", clay)
+fe3d:text_set_content("seeds_count", seeds)

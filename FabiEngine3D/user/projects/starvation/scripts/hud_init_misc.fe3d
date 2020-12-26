@@ -1,4 +1,4 @@
-17 47
+11 31
 META script_type_init
 
 /// Globals
@@ -6,10 +6,11 @@ GLOB LIST _inventory = {"", "", "", "", "", "", "", "", ""}
 GLOB INT _equipIndex = 0
 GLOB INT _lastEquipIndex = 0
 GLOB BOOL _isInvOpen = <false>
-GLOB LIST _bag = {"", "", "", "", "", "", "", "", ""}
-GLOB INT _health = 50
+GLOB LIST _bag = {0, 0, 0, 0, 0}
+GLOB INT _health = 100
 GLOB INT _hunger = 100
 GLOB INT _thirst = 100
+GLOB CONST INT _maxBagItems = 5
 
 /// Invisible by default
 fe3d:image_set_visible("bag_open", <false>)

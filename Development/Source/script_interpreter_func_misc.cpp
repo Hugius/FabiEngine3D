@@ -56,7 +56,7 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, arguments[0].getString() + arguments[1].getString()));
 					}
 				}
-				else if (functionName == "misc:list_size") // Get the size of a list variable
+				else if (functionName == "misc:get_list_size") // Get the size of a list variable
 				{
 					auto types = { ScriptValueType::STRING };
 

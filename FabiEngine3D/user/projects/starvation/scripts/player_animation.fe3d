@@ -1,4 +1,4 @@
-55 87
+83 8
 META script_type_update
 
 /// Skeleton position & rotation
@@ -27,9 +27,6 @@ ELSE:
             MUL speed 2.0
         fe3d:model_set_animation_speed("walk", "player", speed)
 
-/// Retrieve equipped tool
-STR toolID = _inventory[_equipIndex]
-
 /// Determine tool animation type
 STR animID = ""
 IF _equipIndex IS 0:
@@ -54,6 +51,7 @@ ELIF _equipIndex IS 8:
     EDIT animID = "fishrod_throw"
 
 /// Update tool position, rotation, animation if equipped
+STR toolID = _inventory[_equipIndex]
 IF toolID NOT "" AND animID NOT "" AND _toolPlaying IS <false> AND _isInvOpen IS <true>:
     DECR yaw 20.0
     DEC sinRot = math:sin(yaw)
@@ -71,28 +69,18 @@ IF toolID NOT "" AND animID NOT "" AND _toolPlaying IS <false> AND _isInvOpen IS
     NEG toolRot.y
     INCR toolRot.y 90.0
     fe3d:model_set_rotation(toolID, toolRot.x, toolRot.y, toolRot.z)
-    /// Animation
+    /// Tool animation
     IF animID NOT "" AND _isJumping IS <false> AND _isFalling IS <false>:
         BOOL lmb = fe3d:input_is_mouse_pressed("BUTTON_LEFT")
         BOOL isPlaying = fe3d:model_is_animation_playing(animID, toolID)
         IF lmb IS <true> AND isPlaying IS <false>:
             fe3d:model_start_animation(animID, toolID, 1)
 
-/// Update tool animations status
-STR modelID = _inventory[_equipIndex]
-EDIT _wasSwordPlaying = _swordPlaying
-EDIT _wasPickaxePlaying = _pickaxePlaying
-EDIT _wasAxePlaying = _axePlaying
-EDIT _wasShovelPlaying = _shovelPlaying
-EDIT _wasHoePlaying = _hoePlaying
-EDIT _wasScythePlaying = _scythePlaying
-EDIT _wasHammerPlaying = _hammerPlaying
-EDIT _wasFishrodPlaying = _fishrodPlaying
-EDIT _swordPlaying = fe3d:model_is_animation_playing("sword_hit", modelID)
-EDIT _pickaxePlaying = fe3d:model_is_animation_playing("pickaxe_mine", modelID)
-EDIT _axePlaying = fe3d:model_is_animation_playing("axe_cut", modelID)
-EDIT _shovelPlaying = fe3d:model_is_animation_playing("shovel_dig", modelID)
-EDIT _hoePlaying = fe3d:model_is_animation_playing("sword_hit", modelID)
-EDIT _scythePlaying = fe3d:model_is_animation_playing("sword_hit", modelID)
-EDIT _hammerPlaying = fe3d:model_is_animation_playing("sword_hit", modelID)
-EDIT _fishrodPlaying = fe3d:model_is_animation_playing("sword_hit", modelID)
+/// Pickup animation
+EDIT _isPickingUp = <false>
+IF _isInvOpen IS <false> AND isWalkPlaying IS <false>:
+    BOOL f = fe3d:input_is_key_pressed("KEY_F")
+    BOOL isPlaying = fe3d:model_is_animation_playing("pickup", "player")
+    IF f IS <true> AND isPlaying IS <false>:
+        EDIT _isPickingUp = <true>
+        fe3d:model_start_animation("pickup", "player", 1)

@@ -1,4 +1,4 @@
-39 38
+33 32
 META script_type_init
 
 /// Global variables
@@ -32,6 +32,7 @@ GLOB BOOL _scythePlaying = <false>
 GLOB BOOL _hammerPlaying = <false>
 GLOB BOOL _fishrodPlaying = <false>
 GLOB BOOL _toolPlaying = <false>
+GLOB BOOL _isPickingUp = <false>
 
 fe3d:cursor_hide()
 /// -149.0, 48.0, 208.0

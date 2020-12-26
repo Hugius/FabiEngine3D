@@ -1,4 +1,4 @@
-16 26
+26 31
 META script_type_update
 
 /// Tree falling updates
@@ -9,6 +9,7 @@ IF _fallingTreeID NOT "":
         fe3d:model_delete(_fallingTreeID)
         INT logID = misc:get_unique_integer(0, 1000)
         CAST logID STR
+        EDIT logID = misc:concat_strings("log", logID)
         PUSH _logIDs logID
         EDIT _fallingLogID = logID
         EDIT _fallingLogTargetHeight = treePos.y
@@ -25,3 +26,13 @@ IF _fallingLogID NOT "":
         fe3d:model_move(_fallingLogID, 0.0, -0.1, 0.0)
     ELSE:
         EDIT _fallingLogID = ""
+
+/// Log picking updates
+STR hoveredID = fe3d:raycast_into_model("log", "")
+IF hoveredID NOT "" AND _isPickingUp IS <true>:
+    VEC3 camPos = fe3d:camera_get_position()
+    VEC3 logPos = fe3d:model_get_position(hoveredID)
+    DEC distance = math:distance(logPos, camPos)
+    IF distance LESS 5.0:
+        fe3d:model_delete(hoveredID)
+        INCR _bag[0] 1

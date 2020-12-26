@@ -1,4 +1,4 @@
-33 32
+24 15
 META script_type_init
 
 /// Global variables
@@ -23,6 +23,7 @@ GLOB BOOL _wasHoePlaying = <false>
 GLOB BOOL _wasScythePlaying = <false>
 GLOB BOOL _wasHammerPlaying = <false>
 GLOB BOOL _wasFishrodPlaying = <false>
+GLOB BOOL _wasPickupPlaying = <false>
 GLOB BOOL _swordPlaying = <false>
 GLOB BOOL _pickaxePlaying = <false>
 GLOB BOOL _axePlaying = <false>
@@ -32,7 +33,7 @@ GLOB BOOL _scythePlaying = <false>
 GLOB BOOL _hammerPlaying = <false>
 GLOB BOOL _fishrodPlaying = <false>
 GLOB BOOL _toolPlaying = <false>
-GLOB BOOL _isPickingUp = <false>
+GLOB BOOL _pickupPlaying = <false>
 
 fe3d:cursor_hide()
 /// -149.0, 48.0, 208.0
@@ -47,27 +48,3 @@ fe3d:collision_enable_camera_terrain_response(_camHeight, 0.05)
 fe3d:model_place("player", "skeleton", 0.0, 0.0, 0.0)
 fe3d:model_set_max_height("player", 2.5)
 fe3d:model_set_aabb_responsive("player", <false>)
-
-STR id = "sword_iron"
-fe3d:model_place(id, id, 0.0, 0.0, 0.0)
-fe3d:model_set_aabb_responsive(id, <false>)
-EDIT _inventory[0] = id
-EDIT _equipIndex = 0
-
-EDIT id = "pickaxe_iron"
-fe3d:model_place(id, id, 0.0, 0.0, 0.0)
-fe3d:model_set_aabb_responsive(id, <false>)
-EDIT _inventory[1] = id
-EDIT _equipIndex = 1
-
-EDIT id = "axe_iron"
-fe3d:model_place(id, id, 0.0, 0.0, 0.0)
-fe3d:model_set_aabb_responsive(id, <false>)
-EDIT _inventory[2] = id
-EDIT _equipIndex = 2
-
-EDIT id = "shovel_iron"
-fe3d:model_place(id, id, 0.0, 0.0, 0.0)
-fe3d:model_set_aabb_responsive(id, <false>)
-EDIT _inventory[3] = id
-EDIT _equipIndex = 3

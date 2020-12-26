@@ -1,4 +1,4 @@
-83 8
+13 53
 META script_type_update
 
 /// Skeleton position & rotation
@@ -12,7 +12,7 @@ fe3d:model_set_rotation("player", 0.0, yaw, 0.0)
 
 /// Walking animation
 BOOL isWalkPlaying = fe3d:model_is_animation_playing("walk", "player")
-IF _toolPlaying IS <true>:
+IF _toolPlaying IS <true> OR _pickupPlaying IS <true>:
     IF isWalkPlaying IS <true>:
         fe3d:model_fade_animation("walk", "player", 1)
 ELSE:
@@ -53,7 +53,7 @@ ELIF _equipIndex IS 8:
 /// Update tool position, rotation, animation if equipped
 STR toolID = _inventory[_equipIndex]
 IF toolID NOT "" AND animID NOT "" AND _toolPlaying IS <false> AND _isInvOpen IS <true>:
-    DECR yaw 20.0
+    DECR yaw 40.0
     DEC sinRot = math:sin(yaw)
     DEC cosRot = math:cos(yaw)
     MUL sinRot 0.8
@@ -77,10 +77,9 @@ IF toolID NOT "" AND animID NOT "" AND _toolPlaying IS <false> AND _isInvOpen IS
             fe3d:model_start_animation(animID, toolID, 1)
 
 /// Pickup animation
-EDIT _isPickingUp = <false>
-IF _isInvOpen IS <false> AND isWalkPlaying IS <false>:
-    BOOL f = fe3d:input_is_key_pressed("KEY_F")
-    BOOL isPlaying = fe3d:model_is_animation_playing("pickup", "player")
-    IF f IS <true> AND isPlaying IS <false>:
-        EDIT _isPickingUp = <true>
-        fe3d:model_start_animation("pickup", "player", 1)
+IF _isInvOpen IS <false> AND _isJumping IS <false> AND _isFalling IS <false>:
+    IF _isWalking IS <false>:
+        BOOL f = fe3d:input_is_key_pressed("KEY_F")
+        BOOL isPlaying = fe3d:model_is_animation_playing("pickup", "player")
+        IF f IS <true> AND isPlaying IS <false>:
+            fe3d:model_start_animation("pickup", "player", 1)

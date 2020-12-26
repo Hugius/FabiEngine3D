@@ -1,7 +1,7 @@
-20 0
+22 0
 META script_type_update
 
-/// Update tool animations status
+/// Update tool & pickup animations status
 STR modelID = _inventory[_equipIndex]
 EDIT _wasSwordPlaying = _swordPlaying
 EDIT _wasPickaxePlaying = _pickaxePlaying
@@ -11,6 +11,7 @@ EDIT _wasHoePlaying = _hoePlaying
 EDIT _wasScythePlaying = _scythePlaying
 EDIT _wasHammerPlaying = _hammerPlaying
 EDIT _wasFishrodPlaying = _fishrodPlaying
+EDIT _wasPickupPlaying = _pickupPlaying
 EDIT _swordPlaying = fe3d:model_is_animation_playing("sword_hit", modelID)
 EDIT _pickaxePlaying = fe3d:model_is_animation_playing("pickaxe_mine", modelID)
 EDIT _axePlaying = fe3d:model_is_animation_playing("axe_cut", modelID)
@@ -19,6 +20,7 @@ EDIT _hoePlaying = fe3d:model_is_animation_playing("sword_hit", modelID)
 EDIT _scythePlaying = fe3d:model_is_animation_playing("sword_hit", modelID)
 EDIT _hammerPlaying = fe3d:model_is_animation_playing("sword_hit", modelID)
 EDIT _fishrodPlaying = fe3d:model_is_animation_playing("sword_hit", modelID)
+EDIT _pickupPlaying = fe3d:model_is_animation_playing("pickup", "player")
 
 /// Check if any tool animation is playing
 EDIT _toolPlaying = <false>
@@ -29,7 +31,7 @@ IF _shovelPlaying IS <true> OR _hoePlaying IS <true> OR _scythePlaying IS <true>
 IF _hammerPlaying IS <true> OR _fishrodPlaying IS <true>:
     EDIT _toolPlaying = <true>
 
-/// Disable camera movement when animation is playing (except for sword)
+/// Disable camera movement when animation is playing
 IF _toolPlaying IS <true>:
     fe3d:camera_disable_first_person_view()
 ELSE:

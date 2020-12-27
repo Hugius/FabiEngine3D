@@ -1,4 +1,4 @@
-@skeleton user\assets\models\characters\skeleton.obj ? ? ? ? 0.7 0.7 0.7 0 1 0 0 0 1 1 1 1 1 1 1 ? 0 whole_body 0 0 0 1.4 4.25 1.5
+@skeleton user\assets\models\characters\skeleton.obj ? ? ? ? 0.7 0.7 0.7 0 0 0 0 0 1 1 0.5 1 1 1 1 ? 0 whole_body 0 0 0 1.4 4.25 1.5
 @axe_stone user\assets\models\tools\axe_stone.obj user\assets\textures\diffuse_maps\tools\axe_stone.png ? user\assets\textures\reflection_maps\tools\axe_stone.png user\assets\textures\normal_maps\tools\axe_stone.png 0.6 0.6 0.6 0 0 0 0 0 4 1 0.8 1 1 1 1 ? 0 axe 0 0 0.1 0.5 2.7 1.3
 @hills user\assets\models\misc\hills.obj user\assets\textures\diffuse_maps\terrain\grass1.png ? ? ? 1 1 1 0 1 0 0 0 1 1 1 1 1 1 8 ? 0
 @tree1 user\assets\models\trees\tree1.obj user\assets\textures\diffuse_maps\trees\tree1.png ? ? ? 1.75 1.75 1.75 0 1 1 0 0 1 1 1 1 1 1 1 ? 0 trunk 0 0 0 0.4 3.2 0.5 leaves 0 3.2 0 4.5 2.5 3.9

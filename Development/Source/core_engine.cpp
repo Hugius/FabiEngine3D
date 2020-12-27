@@ -156,6 +156,8 @@ void CoreEngine::_updateApplication()
 
 	// User updates
 	_timer.start("coreUpdate");
+	_fe3d._isRaycastUpdated = false;
+	_fe3d._hoveredAabbID = "";
 	_fe3d.FE3D_CONTROLLER_UPDATE();
 	_timer.stop();
 

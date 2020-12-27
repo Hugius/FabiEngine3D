@@ -421,8 +421,8 @@ public:
 
 	// Global collision interface - getters
 	const string collision_checkCursorInAny();
-	bool		 collision_checkCursorInEntity(const string& ID);
-	const string collision_checkCursorInEntities(const string& ID, const string& exception = "");
+	bool		 collision_checkCursorInEntity(const string& ID, bool canBeOccluded);
+	const string collision_checkCursorInEntities(const string& ID, bool canBeOccluded, const string& exception = "");
 	bool		 collision_checkCameraWithTerrain();
 	bool		 collision_checkCameraWithEntity(const string& ID);
 	const string collision_checkCameraWithAny();
@@ -787,4 +787,8 @@ protected:
 
 private:
 	CoreEngine* _core = nullptr;
+
+	bool _isRaycastUpdated = false;
+
+	string _hoveredAabbID = "";
 };

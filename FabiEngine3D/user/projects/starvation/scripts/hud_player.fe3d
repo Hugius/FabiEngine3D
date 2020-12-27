@@ -1,4 +1,4 @@
-1 0
+36 42
 META script_type_update
 
 /// Update health icon color
@@ -18,3 +18,21 @@ INT thirstColor = _thirst
 CAST thirstColor DEC
 DIV thirstColor 100.0
 fe3d:image_set_color("health", thirstColor, thirstColor, thirstColor)
+
+/// Update stamina icon color
+INT staminaColor = _stamina
+CAST staminaColor DEC
+DIV staminaColor 100.0
+fe3d:image_set_color("health", staminaColor, staminaColor, staminaColor)
+
+/// Update oxygen icon color
+INT oxygenColor = _oxygen
+CAST oxygenColor DEC
+DIV oxygenColor 100.0
+fe3d:image_set_color("health", oxygenColor, oxygenColor, oxygenColor)
+
+/// Update temperature icon color
+INT temperatureColor = _temperature
+CAST temperatureColor DEC
+DIV temperatureColor 100.0
+fe3d:image_set_color("health", temperatureColor, temperatureColor, temperatureColor)

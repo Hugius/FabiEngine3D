@@ -137,6 +137,11 @@ void ScriptInterpreter::load()
 
 	// Load audio
 	_audioEditor.loadAudioEntitiesFromFile();
+
+	// Miscellaneous
+	_fe3d.input_clearMouseToggles();
+	_fe3d.input_clearKeyToggles();
+	_fe3d.input_setKeyTogglingLocked(false);
 }
 
 void ScriptInterpreter::executeInitialization()
@@ -217,6 +222,7 @@ void ScriptInterpreter::unload()
 	_fe3d.skyEntity_select("@@engineBackground");
 
 	// Miscellaneous
+	_fe3d.input_clearMouseToggles();
 	_fe3d.input_clearKeyToggles();
 
 	// Reset all variables

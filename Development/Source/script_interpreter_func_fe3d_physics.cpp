@@ -5,14 +5,14 @@ bool ScriptInterpreter::_executeFe3dPhysicsFunction(const string& functionName, 
 	// Determine type of function
 	if (functionName == "fe3d:raycast_into_model") // Raycasting into multiple gameEntities
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::STRING }; // GameEntityID + AABBpartID
+		auto types = { ScriptValueType::STRING, ScriptValueType::STRING, ScriptValueType::BOOLEAN }; // GameEntityID + AABBpartID + canBeOccluded
 
 		// Validate arguments
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
 			// Find aabbEntity ID
 			string searchID = arguments[0].getString() + (!arguments[1].getString().empty() ? ("_" + arguments[1].getString()) : "");
-			auto result = _fe3d.collision_checkCursorInEntities(searchID);
+			auto result = _fe3d.collision_checkCursorInEntities(searchID, arguments[2].getBoolean());
 
 			// Retrieve bound gameEntity ID
 			if (!result.empty() && (_fe3d.aabbEntity_getParentType(result) == AabbParentType::GAME_ENTITY))
@@ -43,13 +43,13 @@ bool ScriptInterpreter::_executeFe3dPhysicsFunction(const string& functionName, 
 	}
 	else if (functionName == "fe3d:raycast_into_billboard") // Raycasting into multiple billboardEntities
 	{
-		auto types = { ScriptValueType::STRING }; // BillboardEntityID
+		auto types = { ScriptValueType::STRING, ScriptValueType::BOOLEAN }; // BillboardEntityID + canBeOccluded
 
 		// Validate arguments
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
 			// Find aabbEntity ID
-			auto result = _fe3d.collision_checkCursorInEntities(arguments[0].getString());
+			auto result = _fe3d.collision_checkCursorInEntities(arguments[0].getString(), arguments[1].getBoolean());
 
 			// Retrieve bound billboardEntity ID
 			if (!result.empty() && (_fe3d.aabbEntity_getParentType(result) == AabbParentType::BILLBOARD_ENTITY))

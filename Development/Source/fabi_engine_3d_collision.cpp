@@ -218,10 +218,11 @@ void FabiEngine3D::collision_disableCameraTerrainResponse()
 
 const string FabiEngine3D::collision_checkCursorInAny()
 {
+	// Temporary values
 	float closestDistance = (std::numeric_limits<float>::max)();
-	string closestBoxID = "";
 
-	for (auto [keyID, entity] : _core->_aabbEntityManager.getEntities()) // Loop over AABB entities
+	// Loop over AABB entities
+	for (auto [keyID, entity] : _core->_aabbEntityManager.getEntities())
 	{
 		// Check if parent entity is not level of detailed
 		if (!(entity->getParentType() == AabbParentType::GAME_ENTITY &&
@@ -246,75 +247,126 @@ const string FabiEngine3D::collision_checkCursorInAny()
 				if (distance != -1.0f && distance < closestDistance)
 				{
 					closestDistance = distance;
-					closestBoxID = entity->getID();
+					_hoveredAabbID = entity->getID();
 				}
 			}
 		}
 	}
 
-	// No intersection
-	return closestBoxID;
+	// Return
+	_isRaycastUpdated = true;
+	return _hoveredAabbID;
 }
 
-bool FabiEngine3D::collision_checkCursorInEntity(const string& ID)
+bool FabiEngine3D::collision_checkCursorInEntity(const string& ID, bool canBeOccluded)
 {
-	auto entity = _core->_aabbEntityManager.getEntity(ID);
-
-	if (entity->isResponsive() && entity->isVisible())
+	// Check whether the AABB can be raycasted if it's occluded by another AABB
+	if (canBeOccluded)
 	{
-		Vec3 lb, rt;
-		lb.x = (entity->getTranslation().x - entity->getScaling().x / 2.0f);
-		lb.y = (entity->getTranslation().y);
-		lb.z = (entity->getTranslation().z + entity->getScaling().z / 2.0f);
-		rt.x = (entity->getTranslation().x + entity->getScaling().x / 2.0f);
-		rt.y = (entity->getTranslation().y + entity->getScaling().y);
-		rt.z = (entity->getTranslation().z - entity->getScaling().z / 2.0f);
+		// Check if raycasting needs to be updated
+		if (!_isRaycastUpdated)
+		{
+			collision_checkCursorInAny();
+		}
 
-		return _core->_mousePicker.checkCursorInBox(lb, rt, _core->_cameraManager.getPosition()) != -1.0f;
+		// Check if hovered AABB still exists
+		if (_core->_aabbEntityManager.isExisting(_hoveredAabbID))
+		{
+			return (ID == _hoveredAabbID);
+		}
+		else
+		{
+			return false;
+		}
 	}
-
-	return false;
-}
-
-const string FabiEngine3D::collision_checkCursorInEntities(const string& ID, const string& exception)
-{
-	float closestDistance = (std::numeric_limits<float>::max)();
-	string closestBoxID = "";
-
-	for (auto [keyID, entity] : _core->_aabbEntityManager.getEntities()) // Loop over AABB entities
+	else
 	{
+		auto entity = _core->_aabbEntityManager.getEntity(ID);
 		if (entity->isResponsive() && entity->isVisible())
 		{
-			if (entity->getID().size() >= ID.size()) // Check if entity ID is at least the size of group ID
+			Vec3 lb, rt;
+			lb.x = (entity->getTranslation().x - entity->getScaling().x / 2.0f);
+			lb.y = (entity->getTranslation().y);
+			lb.z = (entity->getTranslation().z + entity->getScaling().z / 2.0f);
+			rt.x = (entity->getTranslation().x + entity->getScaling().x / 2.0f);
+			rt.y = (entity->getTranslation().y + entity->getScaling().y);
+			rt.z = (entity->getTranslation().z - entity->getScaling().z / 2.0f);
+
+			return _core->_mousePicker.checkCursorInBox(lb, rt, _core->_cameraManager.getPosition()) != -1.0f;
+		}
+	}
+}
+
+const string FabiEngine3D::collision_checkCursorInEntities(const string& ID, bool canBeOccluded, const string& exception)
+{
+	// Check whether the AABB can be raycasted if it's occluded by another AABB
+	if (canBeOccluded)
+	{
+		// Check if raycasting needs to be updated
+		if (!_isRaycastUpdated)
+		{
+			collision_checkCursorInAny();
+		}
+
+		// Check if hovered AABB is empty or nonexisting
+		if (_hoveredAabbID.empty() || !_core->_aabbEntityManager.isExisting(_hoveredAabbID))
+		{
+			return "";
+		}
+
+		// Check if ID matches (a part of) hovered AABB ID
+		if (_hoveredAabbID.size() >= ID.size())
+		{
+			auto subString = _hoveredAabbID.substr(0, ID.size());
+			if (subString == ID && _hoveredAabbID != exception)
 			{
-				auto subString = entity->getID().substr(0, ID.size());
-				if (subString == ID && entity->getID() != exception) // If entity matches ID
+				return _hoveredAabbID;
+			}
+		}
+		return "";
+	}
+	else
+	{
+		// Temporary values
+		float closestDistance = (std::numeric_limits<float>::max)();
+		string closestBoxID = "";
+
+		// Loop over AABB entities
+		for (auto [keyID, entity] : _core->_aabbEntityManager.getEntities())
+		{
+			if (entity->isResponsive() && entity->isVisible())
+			{
+				if (entity->getID().size() >= ID.size()) // Check if entity ID is at least the size of group ID
 				{
-					// Calculate box left bottom (LB) and right top (RT)
-					Vec3 lb, rt;
-					lb.x = (entity->getTranslation().x - entity->getScaling().x / 2.0f);
-					lb.y = (entity->getTranslation().y);
-					lb.z = (entity->getTranslation().z + entity->getScaling().z / 2.0f);
-					rt.x = (entity->getTranslation().x + entity->getScaling().x / 2.0f);
-					rt.y = (entity->getTranslation().y + entity->getScaling().y);
-					rt.z = (entity->getTranslation().z - entity->getScaling().z / 2.0f);
-
-					// Check intersection
-					float distance = _core->_mousePicker.checkCursorInBox(lb, rt, _core->_cameraManager.getPosition());
-
-					// Check if closest to camera
-					if (distance != -1.0f && distance < closestDistance)
+					auto subString = entity->getID().substr(0, ID.size());
+					if (subString == ID && entity->getID() != exception) // If entity matches ID
 					{
-						closestDistance = distance;
-						closestBoxID = entity->getID();
+						// Calculate box left bottom (LB) and right top (RT)
+						Vec3 lb, rt;
+						lb.x = (entity->getTranslation().x - entity->getScaling().x / 2.0f);
+						lb.y = (entity->getTranslation().y);
+						lb.z = (entity->getTranslation().z + entity->getScaling().z / 2.0f);
+						rt.x = (entity->getTranslation().x + entity->getScaling().x / 2.0f);
+						rt.y = (entity->getTranslation().y + entity->getScaling().y);
+						rt.z = (entity->getTranslation().z - entity->getScaling().z / 2.0f);
+
+						// Check intersection
+						float distance = _core->_mousePicker.checkCursorInBox(lb, rt, _core->_cameraManager.getPosition());
+
+						// Check if closest to camera
+						if (distance != -1.0f && distance < closestDistance)
+						{
+							closestDistance = distance;
+							closestBoxID = entity->getID();
+						}
 					}
 				}
 			}
 		}
-	}
 
-	// No intersection
-	return closestBoxID;
+		// No intersection
+		return closestBoxID;
+	}
 }
 
 const string FabiEngine3D::collision_checkCameraWithAny()

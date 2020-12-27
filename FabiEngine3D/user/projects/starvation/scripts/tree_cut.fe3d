@@ -1,4 +1,4 @@
-6 20
+13 73
 META script_type_update
 
 /// Check if cutting animation finished
@@ -12,7 +12,7 @@ IF _axePlaying IS <false> AND _wasAxePlaying IS <true>:
         CAST number STR
         EDIT checkID = misc:concat_strings("tree", number)
         CAST number INT
-        EDIT hoveredID = fe3d:raycast_into_model(checkID, "trunk")
+        EDIT hoveredID = fe3d:raycast_into_model(checkID, "trunk", <true>)
         IF hoveredID NOT "":
             BREAK
         IF number IS 6:

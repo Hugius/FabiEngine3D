@@ -1,8 +1,8 @@
-6 49
+3 63
 META script_type_update
 
 
-STR hoveredID = fe3d:raycast_into_model("axe_stone", "")
+STR hoveredID = fe3d:raycast_into_model("axe_stone", "", <true>)
 IF hoveredID NOT "" AND _wasPickupPlaying IS <true> AND _pickupPlaying IS <false>:
     VEC3 camPos = fe3d:camera_get_position()
     VEC3 axePos = fe3d:model_get_position(hoveredID)

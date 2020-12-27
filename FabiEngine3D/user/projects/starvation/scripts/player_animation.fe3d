@@ -1,4 +1,4 @@
-79 7
+74 71
 META script_type_update
 
 /// Skeleton position & rotation
@@ -73,8 +73,9 @@ IF toolID NOT "" AND animID NOT "" AND _toolPlaying IS <false> AND _isInvOpen IS
     IF animID NOT "" AND _isJumping IS <false> AND _isFalling IS <false>:
         BOOL lmb = fe3d:input_is_mouse_pressed("BUTTON_LEFT")
         BOOL isPlaying = fe3d:model_is_animation_playing(animID, toolID)
-        IF lmb IS <true> AND isPlaying IS <false>:
+        IF lmb IS <true> AND isPlaying IS <false> AND _stamina MORE 9.0:
             fe3d:model_start_animation(animID, toolID, 1)
+            DECR _stamina 10.0
 
 /// Pickup animation
 IF _isInvOpen IS <false> AND _isJumping IS <false> AND _isFalling IS <false>:

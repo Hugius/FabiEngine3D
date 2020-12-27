@@ -1,18 +1,20 @@
-11 59
+15 62
 META script_type_init
 
 /// Crosshair
 fe3d:image_place("crosshair", "crosshair.png", 0.0, 0.0, 0.0, 0.0325, 0.05)
 
 /// Player icons
-fe3d:image_place("player", "player.png", -0.91, 0.85, 0.0, 0.2, 0.3)
-fe3d:text_place("name", "font.ttf", "Hugius", -0.9, 0.675, 0.0, 0.125, 0.05)
-fe3d:image_place("health", "health_icon.png", -0.965, 0.6, 0.0, 0.07, 0.09)
-fe3d:image_place("hunger", "hunger_icon.png", -0.89, 0.6, 0.0, 0.07, 0.095)
-fe3d:image_place("thirst", "thirst_icon.png", -0.825, 0.6, 0.0, 0.07, 0.09)
-fe3d:image_place("stamina", "stamina_icon.png", -0.965, 0.45, 0.0, 0.07, 0.09)
-fe3d:image_place("oxygen", "oxygen_icon.png", -0.89, 0.45, 0.0, 0.07, 0.095)
-fe3d:image_place("temperature", "temperature_icon.png", -0.825, 0.45, 0.0, 0.07, 0.09)
+fe3d:image_place("scroll", "scroll.png", -0.85, 0.6, 0.0, 0.3, 0.8)
+fe3d:image_place("player", "player.png", -0.85, 0.775, 0.0, 0.2, 0.3)
+fe3d:text_place("name", "font.ttf", "Hugius", -0.85, 0.585, 0.0, 0.125, 0.05)
+fe3d:text_set_color("name", 0.0, 0.0, 0.0)
+fe3d:image_place("health", "health_icon.png", -0.925, 0.5, 0.0, 0.07, 0.09)
+fe3d:image_place("hunger", "hunger_icon.png", -0.85, 0.5, 0.0, 0.07, 0.095)
+fe3d:image_place("thirst", "thirst_icon.png", -0.775, 0.5, 0.0, 0.07, 0.09)
+fe3d:image_place("stamina", "stamina_icon.png", -0.925, 0.35, 0.0, 0.07, 0.09)
+fe3d:image_place("oxygen", "oxygen_icon.png", -0.85, 0.35, 0.0, 0.07, 0.095)
+fe3d:image_place("temperature", "temperature_icon.png", -0.775, 0.35, 0.0, 0.07, 0.09)
 
 /// Bag icons
 fe3d:image_place("bag_closed", "bag_closed.png", 0.9, 0.85, 0.0, 0.2, 0.3)

@@ -1,4 +1,4 @@
-46 0
+21 32
 META script_type_update
 
 /// Temporary values
@@ -14,11 +14,17 @@ DEC maxSpeed = 0.025
 
 /// Running speed
 IF shift IS <true> AND up IS <true>:
-    MUL minSpeed 2.0
-    MUL maxSpeed 2.0
-    EDIT _isRunning = <true>
+    IF _stamina MORE 0.0:
+        MUL minSpeed 2.0
+        MUL maxSpeed 2.0
+        EDIT _isRunning = <true>
+        DECR _stamina 0.1
+    ELSE:
+        EDIT _isRunning = <false>
 ELSE:
     EDIT _isRunning = <false>
+    IF _stamina LESS 100.0:
+        INCR _stamina 0.1
 
 /// WASD movement
 IF left IS <true>:

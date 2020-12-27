@@ -1,4 +1,4 @@
-13 21
+13 29
 META script_type_init
 
 /// Globals
@@ -7,12 +7,12 @@ GLOB INT _equipIndex = 0
 GLOB INT _lastEquipIndex = 0
 GLOB BOOL _isInvOpen = <false>
 GLOB LIST _bag = {0, 0, 0, 0, 0}
-GLOB INT _health = 100
-GLOB INT _hunger = 100
-GLOB INT _thirst = 100
-GLOB INT _stamina = 100
-GLOB INT _oxygen = 100
-GLOB INT _temperature = 100
+GLOB DEC _health = 100.0
+GLOB DEC _hunger = 100.0
+GLOB DEC _thirst = 100.0
+GLOB DEC _stamina = 100.0
+GLOB DEC _oxygen = 100.0
+GLOB DEC _temperature = 100.0
 GLOB CONST INT _maxBagItems = 5
 
 /// Invisible by default

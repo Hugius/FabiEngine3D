@@ -51,6 +51,9 @@ void EngineController::FE3D_CONTROLLER_INIT()
 
 		// Initialize script execution
 		_leftViewportController.getScriptEditor().getScriptExecutor(false).load();
+
+		// I have no idea why, but this fixes a very nasty performance bug
+		logger_clearMessageStack();
 	}
 }
 

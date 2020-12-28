@@ -57,9 +57,9 @@ void ModelEditor::initializeGUI()
 	// Left-viewport: mainWindow - modelEditorMenuLighting
 	leftWindow->addScreen("modelEditorMenuLighting");
 	leftWindow->getScreen("modelEditorMenuLighting")->addButton("isSpecular", Vec2(0.0f, 0.7875f), Vec2(GW("Specular: OFF"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Specular: OFF", LVPC::textColor, LVPC::textHoverColor);
-	leftWindow->getScreen("modelEditorMenuLighting")->addButton("specularFactor", Vec2(0.0f, 0.525f), Vec2(GW("Specular factor"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Specular factor", LVPC::textColor, LVPC::textHoverColor);
-	leftWindow->getScreen("modelEditorMenuLighting")->addButton("specularIntensity", Vec2(0.0f, 0.2625f), Vec2(GW("Specular intensity"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Specular intensity", LVPC::textColor, LVPC::textHoverColor);
-	leftWindow->getScreen("modelEditorMenuLighting")->addButton("modelLightness", Vec2(0.0f, 0.0f), Vec2(GW("Lightness"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Lightness", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen("modelEditorMenuLighting")->addButton("specularFactor", Vec2(0.0f, 0.525f), Vec2(GW("Spec factor"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Spec factor", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen("modelEditorMenuLighting")->addButton("specularIntensity", Vec2(0.0f, 0.2625f), Vec2(GW("Spec intensity"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Spec intensity", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen("modelEditorMenuLighting")->addButton("lightness", Vec2(0.0f, 0.0f), Vec2(GW("Lightness"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Lightness", LVPC::textColor, LVPC::textHoverColor);
 	leftWindow->getScreen("modelEditorMenuLighting")->addButton("isShadowed", Vec2(0.0f, -0.2625f), Vec2(GW("Shadowed : ON"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Shadowed : ON", LVPC::textColor, LVPC::textHoverColor);
 	leftWindow->getScreen("modelEditorMenuLighting")->addButton("isReflectiveSurface", Vec2(0.0f, -0.525f), Vec2(GW("Reflective : ON"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Reflective : ON", LVPC::textColor, LVPC::textHoverColor);
 	leftWindow->getScreen("modelEditorMenuLighting")->addButton("back", Vec2(0.0f, -0.7875f), Vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);

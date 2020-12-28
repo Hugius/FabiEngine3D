@@ -1,118 +1,188 @@
 #include "terrain_entity.hpp"
 
-void TerrainEntity::setPixelColors(const vector<float>& val)
+void TerrainEntity::setPixelColors(const vector<float>& value)
 {
-	_pixelColors = val;
+	_pixelColors = value;
 }
 
-void TerrainEntity::setHeightMapPath(const string& filePath)
+void TerrainEntity::setHeightMapPath(const string& value)
 {
-	_heightMapPath = filePath;
+	_heightMapPath = value;
 }
 
-void TerrainEntity::setDiffuseMap(GLuint val)
+void TerrainEntity::setDiffuseMap(GLuint value)
 {
-	_diffuseMap = val;
+	_diffuseMap = value;
 }
 
-void TerrainEntity::setDiffuseMapPath(const string& filePath)
+void TerrainEntity::setDiffuseMapPath(const string& value)
 {
-	_diffuseMapPath = filePath;
+	_diffuseMapPath = value;
 }
 
-void TerrainEntity::setBlendMap(GLuint val)
+void TerrainEntity::setNormalMap(GLuint value)
 {
-	_blendMap = val;
+	_normalMap = value;
 }
 
-void TerrainEntity::setBlendMapPath(const string& filePath)
+void TerrainEntity::setNormalMapPath(const string& value)
 {
-	_blendMapPath = filePath;
+	_normalMapPath = value;
 }
 
-void TerrainEntity::setBlendMapR(GLuint val)
+void TerrainEntity::setBlendMap(GLuint value)
 {
-	_blendMapR = val;
+	_blendMap = value;
 }
 
-void TerrainEntity::setBlendMapPathR(const string& filePath)
+void TerrainEntity::setBlendMapPath(const string& value)
 {
-	_blendMapPathR = filePath;
+	_blendMapPath = value;
 }
 
-void TerrainEntity::setBlendMapG(GLuint val)
+void TerrainEntity::setBlendMapR(GLuint value)
 {
-	_blendMapG = val;
+	_blendMapR = value;
 }
 
-void TerrainEntity::setBlendMapPathG(const string& filePath)
+void TerrainEntity::setBlendMapPathR(const string& value)
 {
-	_blendMapPathG = filePath;
+	_blendMapPathR = value;
 }
 
-void TerrainEntity::setBlendMapB(GLuint val)
+void TerrainEntity::setBlendMapG(GLuint value)
 {
-	_blendMapB = val;
+	_blendMapG = value;
 }
 
-void TerrainEntity::setBlendMapPathB(const string& filePath)
+void TerrainEntity::setBlendMapPathG(const string& value)
 {
-	_blendMapPathB = filePath;
+	_blendMapPathG = value;
 }
 
-void TerrainEntity::setUvRepeat(float val)
+void TerrainEntity::setBlendMapB(GLuint value)
 {
-	_uvRepeat = val;
+	_blendMapB = value;
 }
 
-void TerrainEntity::setBlendRepeatR(float val)
+void TerrainEntity::setBlendMapPathB(const string& value)
 {
-	_blendRepeatR = val;
+	_blendMapPathB = value;
 }
 
-void TerrainEntity::setBlendRepeatG(float val)
+void TerrainEntity::setNormalMapR(GLuint value)
 {
-	_blendRepeatG = val;
+	_normalMapR = value;
 }
 
-void TerrainEntity::setBlendRepeatB(float val)
+void TerrainEntity::setNormalMapPathR(const string& value)
 {
-	_blendRepeatB = val;
+	_normalMapPathR = value;
 }
 
-void TerrainEntity::setSize(float val)
+void TerrainEntity::setNormalMapG(GLuint value)
 {
-	_size = val;
+	_normalMapG = value;
 }
 
-void TerrainEntity::setMaxHeight(float val)
+void TerrainEntity::setNormalMapPathG(const string& value)
 {
-	_maxHeight = val;
+	_normalMapPathG = value;
 }
 
-void TerrainEntity::setSpecularLighted(bool val)
+void TerrainEntity::setNormalMapB(GLuint value)
 {
-	_isSpecularLighted = val;
+	_normalMapB = value;
 }
 
-void TerrainEntity::setBlendMapped(bool val)
+void TerrainEntity::setNormalMapPathB(const string& filePath)
 {
-	_isBlendMapped = val;
+	_normalMapPathB = filePath;
 }
 
-void TerrainEntity::setLightness(float val)
+void TerrainEntity::setUvRepeat(float value)
 {
-	_lightness = val;
+	_uvRepeat = value;
 }
 
-void TerrainEntity::setSpecularLightingIntensity(float val)
+void TerrainEntity::setBlendRepeatR(float value)
 {
-	_specularLightingIntensity = val;
+	_blendRepeatR = value;
+}
+
+void TerrainEntity::setBlendRepeatG(float value)
+{
+	_blendRepeatG = value;
+}
+
+void TerrainEntity::setBlendRepeatB(float value)
+{
+	_blendRepeatB = value;
+}
+
+void TerrainEntity::setSize(float value)
+{
+	_size = value;
+}
+
+void TerrainEntity::setMaxHeight(float value)
+{
+	_maxHeight = value;
+}
+
+void TerrainEntity::setSpecularLighted(bool value)
+{
+	_isSpecularLighted = value;
+}
+
+void TerrainEntity::setNormalMapped(bool value)
+{
+	_isNormalMapped = value;
+}
+
+void TerrainEntity::setNormalMappedR(bool value)
+{
+	_isNormalMappedR = value;
+}
+
+void TerrainEntity::setNormalMappedG(bool value)
+{
+	_isNormalMappedG = value;
+}
+
+void TerrainEntity::setNormalMappedB(bool value)
+{
+	_isNormalMappedB = value;
+}
+
+void TerrainEntity::setBlendMapped(bool value)
+{
+	_isBlendMapped = value;
+}
+
+void TerrainEntity::setLightness(float value)
+{
+	_lightness = value;
+}
+
+void TerrainEntity::setSpecularLightingFactor(float value)
+{
+	_specularLightingFactor = value;
+}
+
+void TerrainEntity::setSpecularLightingIntensity(float value)
+{
+	_specularLightingIntensity = value;
 }
 
 const GLuint TerrainEntity::getDiffuseMap() const
 {
 	return _diffuseMap;
+}
+
+const GLuint TerrainEntity::getNormalMap() const
+{
+	return _normalMap;
 }
 
 const GLuint TerrainEntity::getBlendMap() const
@@ -135,6 +205,21 @@ const GLuint TerrainEntity::getBlendMapB() const
 	return _blendMapB;
 }
 
+const GLuint TerrainEntity::getNormalMapR() const
+{
+	return _normalMapR;
+}
+
+const GLuint TerrainEntity::getNormalMapG() const
+{
+	return _normalMapG;
+}
+
+const GLuint TerrainEntity::getNormalMapB() const
+{
+	return _normalMapB;
+}
+
 const string& TerrainEntity::getHeightMapPath() const
 {
 	return _heightMapPath;
@@ -143,6 +228,11 @@ const string& TerrainEntity::getHeightMapPath() const
 const string& TerrainEntity::getDiffuseMapPath() const
 {
 	return _diffuseMapPath;
+}
+
+const string& TerrainEntity::getNormalMapPath() const
+{
+	return _normalMapPath;
 }
 
 const string& TerrainEntity::getBlendMapPath() const
@@ -163,6 +253,36 @@ const string& TerrainEntity::getBlendMapPathG() const
 const string& TerrainEntity::getBlendMapPathB() const
 {
 	return _blendMapPathB;
+}
+
+const string& TerrainEntity::getNormalMapPathR() const
+{
+	return _normalMapPathR;
+}
+
+const string& TerrainEntity::getNormalMapPathG() const
+{
+	return _normalMapPathG;
+}
+
+const string& TerrainEntity::getNormalMapPathB() const
+{
+	return _normalMapPathB;
+}
+
+vector<Vec3>& TerrainEntity::getVertices()
+{
+	return _vertices;
+}
+
+vector<Vec2>& TerrainEntity::getUvCoords()
+{
+	return _uvCoords;
+}
+
+vector<Vec3>& TerrainEntity::getNormals()
+{
+	return _normals;
 }
 
 const float TerrainEntity::getUvRepeat() const
@@ -200,6 +320,11 @@ const float TerrainEntity::getLightness() const
 	return _lightness;
 }
 
+const float TerrainEntity::getSpecularLightingFactor() const
+{
+	return _specularLightingFactor;
+}
+
 const float TerrainEntity::getSpecularLightingIntensity() const
 {
 	return _specularLightingIntensity;
@@ -213,6 +338,26 @@ const vector<float>& TerrainEntity::getPixelColors() const
 const bool TerrainEntity::isSpecularLighted() const
 {
 	return _isSpecularLighted;
+}
+
+const bool TerrainEntity::isNormalMapped() const
+{
+	return _isNormalMapped;
+}
+
+const bool TerrainEntity::isNormalMappedR() const
+{
+	return _isNormalMappedR;
+}
+
+const bool TerrainEntity::isNormalMappedG() const
+{
+	return _isNormalMappedG;
+}
+
+const bool TerrainEntity::isNormalMappedB() const
+{
+	return _isNormalMappedB;
 }
 
 const bool TerrainEntity::isBlendMapped() const

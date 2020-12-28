@@ -8,6 +8,7 @@ void EnvironmentEditor::_updateTerrainEditor()
 		_updateTerrainMenuChoice();
 		_updateTerrainMenuMesh();
 		_updateTerrainMenuBlendMap();
+		_updateTerrainMenuLighting();
 		_updateTerrainCreation();
 		_updateTerrainChoosing();
 		_updateTerrainRemoval();

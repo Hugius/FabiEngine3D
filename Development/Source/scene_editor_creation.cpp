@@ -54,13 +54,42 @@ void SceneEditor::_placeTerrain(const string& newID, const string& previewID)
 	_fe3d.terrainEntity_setBlendRepeatR(newID, _fe3d.terrainEntity_getBlendRepeatR(previewID));
 	_fe3d.terrainEntity_setBlendRepeatG(newID, _fe3d.terrainEntity_getBlendRepeatG(previewID));
 	_fe3d.terrainEntity_setBlendRepeatB(newID, _fe3d.terrainEntity_getBlendRepeatB(previewID));
+	_fe3d.terrainEntity_setNormalMapped(newID, _fe3d.terrainEntity_isNormalMapped(previewID));
+	_fe3d.terrainEntity_setNormalMappedR(newID, _fe3d.terrainEntity_isNormalMappedR(previewID));
+	_fe3d.terrainEntity_setNormalMappedG(newID, _fe3d.terrainEntity_isNormalMappedG(previewID));
+	_fe3d.terrainEntity_setNormalMappedB(newID, _fe3d.terrainEntity_isNormalMappedB(previewID));
 	_fe3d.terrainEntity_setSpecularLighted(newID, _fe3d.terrainEntity_isSpecularLighted(previewID));
+	_fe3d.terrainEntity_setSpecularLightingFactor(newID, _fe3d.terrainEntity_getSpecularLightingFactor(previewID));
 	_fe3d.terrainEntity_setSpecularLightingIntensity(newID, _fe3d.terrainEntity_getSpecularLightingIntensity(previewID));
 
-	// Diffuse maps
+	// Diffuse map
 	if (_fe3d.terrainEntity_getDiffuseMapPath(previewID) != "")
 	{
 		_fe3d.terrainEntity_setDiffuseMap(newID, _fe3d.terrainEntity_getDiffuseMapPath(previewID));
+	}
+
+	// Normal map
+	if (_fe3d.terrainEntity_getNormalMapPath(previewID) != "")
+	{
+		_fe3d.terrainEntity_setNormalMap(newID, _fe3d.terrainEntity_getNormalMapPath(previewID));
+	}
+
+	// Normal map R
+	if (_fe3d.terrainEntity_getNormalMapPathR(previewID) != "")
+	{
+		_fe3d.terrainEntity_setNormalMapR(newID, _fe3d.terrainEntity_getNormalMapPathR(previewID));
+	}
+
+	// Normal map G
+	if (_fe3d.terrainEntity_getNormalMapPathG(previewID) != "")
+	{
+		_fe3d.terrainEntity_setNormalMapG(newID, _fe3d.terrainEntity_getNormalMapPathG(previewID));
+	}
+
+	// Normal map B
+	if (_fe3d.terrainEntity_getNormalMapPathB(previewID) != "")
+	{
+		_fe3d.terrainEntity_setNormalMapB(newID, _fe3d.terrainEntity_getNormalMapPathB(previewID));
 	}
 
 	// Blend map
@@ -88,9 +117,12 @@ void SceneEditor::_placeTerrain(const string& newID, const string& previewID)
 	}
 }
 
-void SceneEditor::_placeTerrain(const string& newID, const string& heightMapPath, float maxHeight, float uvRepeat, bool isBlendMapped, float lightness,
-	float blendRepeatR, float blendRepeatG, float blendRepeatB, bool isSpecular, float specularIntensity, const string& diffuseMapPath, 
-	const string& blendMapPath, const string& blendMapPathR, const string& blendMapPathG, const string& blendMapPathB)
+void SceneEditor::_placeTerrain(const string& newID, const string& heightMapPath, float maxHeight, float uvRepeat, bool isBlendMapped, 
+	float lightness, float blendRepeatR, float blendRepeatG, float blendRepeatB, bool isNormalMapped, bool isNormalMappedR, bool isNormalMappedG,
+	bool isNormalMappedB, bool isSpecular, float specularFactor,
+	float specularIntensity, const string& diffuseMapPath, const string& normalMapPath, const string& normalMapPathR,
+	const string& normalMapPathG, const string& normalMapPathB, const string& blendMapPath,
+	const string& blendMapPathR, const string& blendMapPathG, const string& blendMapPathB)
 {
 	// Delete old
 	if (_fe3d.terrainEntity_isExisting(newID))
@@ -110,11 +142,20 @@ void SceneEditor::_placeTerrain(const string& newID, const string& heightMapPath
 	_fe3d.terrainEntity_setBlendRepeatR(newID, blendRepeatR);
 	_fe3d.terrainEntity_setBlendRepeatG(newID, blendRepeatG);
 	_fe3d.terrainEntity_setBlendRepeatB(newID, blendRepeatB);
+	_fe3d.terrainEntity_setNormalMapped(newID, isNormalMapped);
+	_fe3d.terrainEntity_setNormalMappedR(newID, isNormalMappedR);
+	_fe3d.terrainEntity_setNormalMappedG(newID, isNormalMappedG);
+	_fe3d.terrainEntity_setNormalMappedB(newID, isNormalMappedB);
 	_fe3d.terrainEntity_setSpecularLighted(newID, isSpecular);
+	_fe3d.terrainEntity_setSpecularLightingFactor(newID, specularFactor);
 	_fe3d.terrainEntity_setSpecularLightingIntensity(newID, specularIntensity);
 
 	// Texture maps
 	if (diffuseMapPath != "") _fe3d.terrainEntity_setDiffuseMap(newID, diffuseMapPath);
+	if (normalMapPath != "") _fe3d.terrainEntity_setNormalMap(newID, normalMapPath);
+	if (normalMapPathR != "") _fe3d.terrainEntity_setNormalMap(newID, normalMapPathR);
+	if (normalMapPathG != "") _fe3d.terrainEntity_setNormalMap(newID, normalMapPathG);
+	if (normalMapPathB != "") _fe3d.terrainEntity_setNormalMap(newID, normalMapPathB);
 	if (blendMapPath != "")   _fe3d.terrainEntity_setBlendMap(newID, blendMapPath);
 	if (blendMapPathR != "")  _fe3d.terrainEntity_setBlendMapR(newID, blendMapPathR);
 	if (blendMapPathG != "")  _fe3d.terrainEntity_setBlendMapG(newID, blendMapPathG);

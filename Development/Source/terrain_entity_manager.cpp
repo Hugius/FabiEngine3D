@@ -51,9 +51,9 @@ void TerrainEntityManager::generateModel(const string& ID)
 	auto entity = getEntity(ID);
 
 	// Data collections
-	vector<Vec3> vertices;
-	vector<Vec2> uvCoords;
-	vector<Vec3> normals;
+	vector<Vec3> tempVertices;
+	vector<Vec2> tempUvCoords;
+	vector<Vec3> tempNormals;
 
 	// Handy values
 	const auto& pixelColors = entity->getPixelColors();
@@ -86,14 +86,20 @@ void TerrainEntityManager::generateModel(const string& ID)
 			normal.normalize();
 
 			// Single vertex
-			vertices.push_back(Vec3(vertexX, vertexY, vertexZ));
-			uvCoords.push_back(Vec2(uvX, uvY));
-			normals.push_back(normal);
+			tempVertices.push_back(Vec3(vertexX, vertexY, vertexZ));
+			tempUvCoords.push_back(Vec2(uvX, uvY));
+			tempNormals.push_back(normal);
 		}
 	}
 
 	// Compose single data collection
 	vector<float> finalDataCollection;
+	auto& vertices = getEntity(ID)->getVertices();
+	auto& uvCoords = getEntity(ID)->getUvCoords();
+	auto& normals = getEntity(ID)->getNormals();
+	vertices.clear();
+	uvCoords.clear();
+	normals.clear();
 	for (unsigned int x = 0; x < uSize - 1; x++)
 	{
 		for (unsigned int z = 0; z < uSize - 1; z++)
@@ -105,70 +111,168 @@ void TerrainEntityManager::generateModel(const string& ID)
 			unsigned int bottomRightIndex = bottomLeftIndex + 1;
 
 			// Top-left
-			finalDataCollection.push_back(vertices[topLeftIndex].x);
-			finalDataCollection.push_back(vertices[topLeftIndex].y);
-			finalDataCollection.push_back(vertices[topLeftIndex].z);
-			finalDataCollection.push_back(uvCoords[topLeftIndex].x);
-			finalDataCollection.push_back(uvCoords[topLeftIndex].y);
-			finalDataCollection.push_back(normals[topLeftIndex].x);
-			finalDataCollection.push_back(normals[topLeftIndex].y);
-			finalDataCollection.push_back(normals[topLeftIndex].z);
+			finalDataCollection.push_back(tempVertices[topLeftIndex].x);
+			finalDataCollection.push_back(tempVertices[topLeftIndex].y);
+			finalDataCollection.push_back(tempVertices[topLeftIndex].z);
+			finalDataCollection.push_back(tempUvCoords[topLeftIndex].x);
+			finalDataCollection.push_back(tempUvCoords[topLeftIndex].y);
+			finalDataCollection.push_back(tempNormals[topLeftIndex].x);
+			finalDataCollection.push_back(tempNormals[topLeftIndex].y);
+			finalDataCollection.push_back(tempNormals[topLeftIndex].z);
+			vertices.push_back(tempVertices[topLeftIndex]);
+			uvCoords.push_back(tempUvCoords[topLeftIndex]);
+			normals.push_back(tempNormals[topLeftIndex]);
 
 			// Top-right
-			finalDataCollection.push_back(vertices[topRightIndex].x);
-			finalDataCollection.push_back(vertices[topRightIndex].y);
-			finalDataCollection.push_back(vertices[topRightIndex].z);
-			finalDataCollection.push_back(uvCoords[topRightIndex].x);
-			finalDataCollection.push_back(uvCoords[topRightIndex].y);
-			finalDataCollection.push_back(normals[topRightIndex].x);
-			finalDataCollection.push_back(normals[topRightIndex].y);
-			finalDataCollection.push_back(normals[topRightIndex].z);
+			finalDataCollection.push_back(tempVertices[topRightIndex].x);
+			finalDataCollection.push_back(tempVertices[topRightIndex].y);
+			finalDataCollection.push_back(tempVertices[topRightIndex].z);
+			finalDataCollection.push_back(tempUvCoords[topRightIndex].x);
+			finalDataCollection.push_back(tempUvCoords[topRightIndex].y);
+			finalDataCollection.push_back(tempNormals[topRightIndex].x);
+			finalDataCollection.push_back(tempNormals[topRightIndex].y);
+			finalDataCollection.push_back(tempNormals[topRightIndex].z);
+			vertices.push_back(tempVertices[topRightIndex]);
+			uvCoords.push_back(tempUvCoords[topRightIndex]);
+			normals.push_back(tempNormals[topRightIndex]);
 
 			// Bottom-right
-			finalDataCollection.push_back(vertices[bottomRightIndex].x);
-			finalDataCollection.push_back(vertices[bottomRightIndex].y);
-			finalDataCollection.push_back(vertices[bottomRightIndex].z);
-			finalDataCollection.push_back(uvCoords[bottomRightIndex].x);
-			finalDataCollection.push_back(uvCoords[bottomRightIndex].y);
-			finalDataCollection.push_back(normals[bottomRightIndex].x);
-			finalDataCollection.push_back(normals[bottomRightIndex].y);
-			finalDataCollection.push_back(normals[bottomRightIndex].z);
+			finalDataCollection.push_back(tempVertices[bottomRightIndex].x);
+			finalDataCollection.push_back(tempVertices[bottomRightIndex].y);
+			finalDataCollection.push_back(tempVertices[bottomRightIndex].z);
+			finalDataCollection.push_back(tempUvCoords[bottomRightIndex].x);
+			finalDataCollection.push_back(tempUvCoords[bottomRightIndex].y);
+			finalDataCollection.push_back(tempNormals[bottomRightIndex].x);
+			finalDataCollection.push_back(tempNormals[bottomRightIndex].y);
+			finalDataCollection.push_back(tempNormals[bottomRightIndex].z);
+			vertices.push_back(tempVertices[bottomRightIndex]);
+			uvCoords.push_back(tempUvCoords[bottomRightIndex]);
+			normals.push_back(tempNormals[bottomRightIndex]);
 
 			// Bottom-right
-			finalDataCollection.push_back(vertices[bottomRightIndex].x);
-			finalDataCollection.push_back(vertices[bottomRightIndex].y);
-			finalDataCollection.push_back(vertices[bottomRightIndex].z);
-			finalDataCollection.push_back(uvCoords[bottomRightIndex].x);
-			finalDataCollection.push_back(uvCoords[bottomRightIndex].y);
-			finalDataCollection.push_back(normals[bottomRightIndex].x);
-			finalDataCollection.push_back(normals[bottomRightIndex].y);
-			finalDataCollection.push_back(normals[bottomRightIndex].z);
+			finalDataCollection.push_back(tempVertices[bottomRightIndex].x);
+			finalDataCollection.push_back(tempVertices[bottomRightIndex].y);
+			finalDataCollection.push_back(tempVertices[bottomRightIndex].z);
+			finalDataCollection.push_back(tempUvCoords[bottomRightIndex].x);
+			finalDataCollection.push_back(tempUvCoords[bottomRightIndex].y);
+			finalDataCollection.push_back(tempNormals[bottomRightIndex].x);
+			finalDataCollection.push_back(tempNormals[bottomRightIndex].y);
+			finalDataCollection.push_back(tempNormals[bottomRightIndex].z);
+			vertices.push_back(tempVertices[bottomRightIndex]);
+			uvCoords.push_back(tempUvCoords[bottomRightIndex]);
+			normals.push_back(tempNormals[bottomRightIndex]);
 
 			// Bottom-left
-			finalDataCollection.push_back(vertices[bottomLeftIndex].x);
-			finalDataCollection.push_back(vertices[bottomLeftIndex].y);
-			finalDataCollection.push_back(vertices[bottomLeftIndex].z);
-			finalDataCollection.push_back(uvCoords[bottomLeftIndex].x);
-			finalDataCollection.push_back(uvCoords[bottomLeftIndex].y);
-			finalDataCollection.push_back(normals[bottomLeftIndex].x);
-			finalDataCollection.push_back(normals[bottomLeftIndex].y);
-			finalDataCollection.push_back(normals[bottomLeftIndex].z);
+			finalDataCollection.push_back(tempVertices[bottomLeftIndex].x);
+			finalDataCollection.push_back(tempVertices[bottomLeftIndex].y);
+			finalDataCollection.push_back(tempVertices[bottomLeftIndex].z);
+			finalDataCollection.push_back(tempUvCoords[bottomLeftIndex].x);
+			finalDataCollection.push_back(tempUvCoords[bottomLeftIndex].y);
+			finalDataCollection.push_back(tempNormals[bottomLeftIndex].x);
+			finalDataCollection.push_back(tempNormals[bottomLeftIndex].y);
+			finalDataCollection.push_back(tempNormals[bottomLeftIndex].z);
+			vertices.push_back(tempVertices[bottomLeftIndex]);
+			uvCoords.push_back(tempUvCoords[bottomLeftIndex]);
+			normals.push_back(tempNormals[bottomLeftIndex]);
 
 			// Top-left
-			finalDataCollection.push_back(vertices[topLeftIndex].x);
-			finalDataCollection.push_back(vertices[topLeftIndex].y);
-			finalDataCollection.push_back(vertices[topLeftIndex].z);
-			finalDataCollection.push_back(uvCoords[topLeftIndex].x);
-			finalDataCollection.push_back(uvCoords[topLeftIndex].y);
-			finalDataCollection.push_back(normals[topLeftIndex].x);
-			finalDataCollection.push_back(normals[topLeftIndex].y);
-			finalDataCollection.push_back(normals[topLeftIndex].z);
+			finalDataCollection.push_back(tempVertices[topLeftIndex].x);
+			finalDataCollection.push_back(tempVertices[topLeftIndex].y);
+			finalDataCollection.push_back(tempVertices[topLeftIndex].z);
+			finalDataCollection.push_back(tempUvCoords[topLeftIndex].x);
+			finalDataCollection.push_back(tempUvCoords[topLeftIndex].y);
+			finalDataCollection.push_back(tempNormals[topLeftIndex].x);
+			finalDataCollection.push_back(tempNormals[topLeftIndex].y);
+			finalDataCollection.push_back(tempNormals[topLeftIndex].z);
+			vertices.push_back(tempVertices[topLeftIndex]);
+			uvCoords.push_back(tempUvCoords[topLeftIndex]);
+			normals.push_back(tempNormals[topLeftIndex]);
 		}
 	}
 
 	// Create OpenGL buffer
 	entity->clearOglBuffers();
 	entity->addOglBuffer(new OpenGLBuffer(BufferType::MODEL, &finalDataCollection[0], finalDataCollection.size()));
+}
+
+void TerrainEntityManager::loadNormalMapping(const string& ID)
+{
+	// Check if entity has a buffer
+	if (!getEntity(ID)->getOglBuffers().empty())
+	{
+		// Check if not already a tangent loaded model
+		if (getEntity(ID)->getOglBuffer()->getBufferType() != BufferType::MODEL_TANGENT)
+		{
+			// Data collections
+			auto vertices = getEntity(ID)->getVertices();
+			auto uvCoords = getEntity(ID)->getUvCoords();
+			auto normals = getEntity(ID)->getNormals();
+			vector<Vec3> tangents;
+
+			// Handy values
+			const float size = getEntity(ID)->getSize();
+			const unsigned int uSize = static_cast<unsigned int>(size);
+
+			// Calculate tangents
+			for (size_t i = 0; i < vertices.size(); i += 3)
+			{
+				// Vertices of 1 triangle
+				Vec3 v0 = vertices[i + 0];
+				Vec3 v1 = vertices[i + 1];
+				Vec3 v2 = vertices[i + 2];
+
+				// Shortcuts for UVs
+				Vec2 uv0 = uvCoords[i + 0];
+				Vec2 uv1 = uvCoords[i + 1];
+				Vec2 uv2 = uvCoords[i + 2];
+
+				// Vertex delta
+				Vec3 deltaPos1 = v1 - v0;
+				Vec3 deltaPos2 = v2 - v0;
+
+				// UV delta
+				Vec2 deltaUV1 = uv1 - uv0;
+				Vec2 deltaUV2 = uv2 - uv0;
+
+				// Calculate tangent vector
+				float r = 1.0f / (deltaUV1.x * deltaUV2.y - deltaUV1.y * deltaUV2.x);
+				Vec3 tangent = (deltaPos1 * deltaUV2.y - deltaPos2 * deltaUV1.y) * r;
+
+				// Add to list
+				tangents.push_back(tangent);
+				tangents.push_back(tangent);
+				tangents.push_back(tangent);
+			}
+
+			// Compose single data collection
+			vector<float> finalDataCollection;
+			for (unsigned int i = 0; i < vertices.size(); i++)
+			{
+				// Vertex coordinate
+				finalDataCollection.push_back(vertices[i].x);
+				finalDataCollection.push_back(vertices[i].y);
+				finalDataCollection.push_back(vertices[i].z);
+
+				// UV coordinate
+				finalDataCollection.push_back(uvCoords[i].x);
+				finalDataCollection.push_back(uvCoords[i].y);
+
+				// Normal vector
+				finalDataCollection.push_back(normals[i].x);
+				finalDataCollection.push_back(normals[i].y);
+				finalDataCollection.push_back(normals[i].z);
+
+				// Tangent vector
+				finalDataCollection.push_back(tangents[i].x);
+				finalDataCollection.push_back(tangents[i].y);
+				finalDataCollection.push_back(tangents[i].z);
+			}
+
+			// Create OpenGL buffer
+			getEntity(ID)->clearOglBuffers();
+			getEntity(ID)->addOglBuffer(new OpenGLBuffer(BufferType::MODEL_TANGENT, &finalDataCollection[0], finalDataCollection.size()));
+		}
+	}
 }
 
 void TerrainEntityManager::update()

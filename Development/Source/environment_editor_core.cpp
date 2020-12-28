@@ -22,20 +22,20 @@ void EnvironmentEditor::initializeGUI()
 	leftWindow->getScreen("environmentEditorMenu")->addButton("water", Vec2(0.0f, -0.21f), Vec2(GW("Water"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Water", LVPC::textColor, LVPC::textHoverColor);
 	leftWindow->getScreen("environmentEditorMenu")->addButton("back", Vec2(0.0f, -0.63f), Vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
 	
-	// Left-viewport: mainWindow - skyMenuMain
+	// Left-viewport: mainWindow - skyEditorMenuMain
 	leftWindow->addScreen("skyEditorMenuMain");
 	leftWindow->getScreen("skyEditorMenuMain")->addButton("create", Vec2(0.0f, 0.63f), Vec2(GW("Create sky"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Create sky", LVPC::textColor, LVPC::textHoverColor);
 	leftWindow->getScreen("skyEditorMenuMain")->addButton("edit", Vec2(0.0f, 0.21f), Vec2(GW("Edit sky"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Edit sky", LVPC::textColor, LVPC::textHoverColor);
 	leftWindow->getScreen("skyEditorMenuMain")->addButton("delete", Vec2(0.0f, -0.21f), Vec2(GW("Remove sky"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Remove sky", LVPC::textColor, LVPC::textHoverColor);
 	leftWindow->getScreen("skyEditorMenuMain")->addButton("back", Vec2(0.0f, -0.63f), Vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
 
-	// Left-viewport: mainWindow - skyMenuChoice
+	// Left-viewport: mainWindow - skyEditorMenuChoice
 	leftWindow->addScreen("skyEditorMenuChoice");
 	leftWindow->getScreen("skyEditorMenuChoice")->addButton("mesh", Vec2(0.0f, 0.475f), Vec2(GW("3D mesh"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "3D mesh", LVPC::textColor, LVPC::textHoverColor);
 	leftWindow->getScreen("skyEditorMenuChoice")->addButton("options", Vec2(0.0f, 0.0f), Vec2(GW("Options"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Options", LVPC::textColor, LVPC::textHoverColor);
 	leftWindow->getScreen("skyEditorMenuChoice")->addButton("back", Vec2(0.0f, -0.475f), Vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
 
-	// Left-viewport: mainWindow - skyMenuMesh
+	// Left-viewport: mainWindow - skyEditorMenuMesh
 	leftWindow->addScreen("skyEditorMenuMesh");
 	leftWindow->getScreen("skyEditorMenuMesh")->addButton("leftTexture", Vec2(0.0f, 0.7875f), Vec2(GW("Left texture"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Left texture", LVPC::textColor, LVPC::textHoverColor);
 	leftWindow->getScreen("skyEditorMenuMesh")->addButton("rightTexture", Vec2(0.0f, 0.525f), Vec2(GW("Right texture"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Right texture", LVPC::textColor, LVPC::textHoverColor);
@@ -45,38 +45,36 @@ void EnvironmentEditor::initializeGUI()
 	leftWindow->getScreen("skyEditorMenuMesh")->addButton("bottomTexture", Vec2(0.0f, -0.525f), Vec2(GW("Bottom texture"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Bottom texture", LVPC::textColor, LVPC::textHoverColor);
 	leftWindow->getScreen("skyEditorMenuMesh")->addButton("back", Vec2(0.0f, -0.7875f), Vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
 
-	// Left-viewport: mainWindow - skyMenuOptions
+	// Left-viewport: mainWindow - skyEditorMenuOptions
 	leftWindow->addScreen("skyEditorMenuOptions");
 	leftWindow->getScreen("skyEditorMenuOptions")->addButton("rotationSpeed", Vec2(0.0f, 0.63f), Vec2(GW("Rotation speed"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Rotation speed", LVPC::textColor, LVPC::textHoverColor);
 	leftWindow->getScreen("skyEditorMenuOptions")->addButton("lightness", Vec2(0.0f, 0.21f), Vec2(GW("Lightness"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Lightness", LVPC::textColor, LVPC::textHoverColor);
 	leftWindow->getScreen("skyEditorMenuOptions")->addButton("color", Vec2(0.0f, -0.21f), Vec2(GW("Color"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Color", LVPC::textColor, LVPC::textHoverColor);
 	leftWindow->getScreen("skyEditorMenuOptions")->addButton("back", Vec2(0.0f, -0.63f), Vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
 
-	// Left-viewport: mainWindow - terrainMenuMain
+	// Left-viewport: mainWindow - terrainEditorMenuMain
 	leftWindow->addScreen("terrainEditorMenuMain");
 	leftWindow->getScreen("terrainEditorMenuMain")->addButton("create", Vec2(0.0f, 0.63f), Vec2(GW("Create terain"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Create terain", LVPC::textColor, LVPC::textHoverColor);
 	leftWindow->getScreen("terrainEditorMenuMain")->addButton("edit", Vec2(0.0f, 0.21f), Vec2(GW("Edit terrain"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Edit terrain", LVPC::textColor, LVPC::textHoverColor);
 	leftWindow->getScreen("terrainEditorMenuMain")->addButton("delete", Vec2(0.0f, -0.21f), Vec2(GW("Remove terrain"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Remove terrain", LVPC::textColor, LVPC::textHoverColor);
 	leftWindow->getScreen("terrainEditorMenuMain")->addButton("back", Vec2(0.0f, -0.63f), Vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
 
-	// Left-viewport: mainWindow - terrainMenuChoice
+	// Left-viewport: mainWindow - terrainEditorMenuChoice
 	leftWindow->addScreen("terrainEditorMenuChoice");
-	leftWindow->getScreen("terrainEditorMenuChoice")->addButton("mesh", Vec2(0.0f, 0.475f), Vec2(GW("3D mesh"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "3D mesh", LVPC::textColor, LVPC::textHoverColor);
-	leftWindow->getScreen("terrainEditorMenuChoice")->addButton("blendMap", Vec2(0.0f, 0.0f), Vec2(GW("BlendMap"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "BlendMap", LVPC::textColor, LVPC::textHoverColor);
-	leftWindow->getScreen("terrainEditorMenuChoice")->addButton("back", Vec2(0.0f, -0.475f), Vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen("terrainEditorMenuChoice")->addButton("mesh", Vec2(0.0f, 0.63f), Vec2(GW("3D mesh"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "3D mesh", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen("terrainEditorMenuChoice")->addButton("blendMap", Vec2(0.0f, 0.21f), Vec2(GW("BlendMap"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "BlendMap", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen("terrainEditorMenuChoice")->addButton("lighting", Vec2(0.0f, -0.21f), Vec2(GW("Lighting"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Lighting", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen("terrainEditorMenuChoice")->addButton("back", Vec2(0.0f, -0.63f), Vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
 
-	// Left-viewport: mainWindow - terrainMenuMesh
+	// Left-viewport: mainWindow - terrainEditorMenuMesh
 	leftWindow->addScreen("terrainEditorMenuMesh");
-	leftWindow->getScreen("terrainEditorMenuMesh")->addButton("heightMap", Vec2(0.0f, 0.83f), Vec2(GW("Height map"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Height map", LVPC::textColor, LVPC::textHoverColor);
-	leftWindow->getScreen("terrainEditorMenuMesh")->addButton("diffuseMap", Vec2(0.0f, 0.59f), Vec2(GW("Diffuse map"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Diffuse map", LVPC::textColor, LVPC::textHoverColor);
-	leftWindow->getScreen("terrainEditorMenuMesh")->addButton("maxHeight", Vec2(0.0f, 0.36f), Vec2(GW("Max height"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Max height", LVPC::textColor, LVPC::textHoverColor);
-	leftWindow->getScreen("terrainEditorMenuMesh")->addButton("uvRepeat", Vec2(0.0f, 0.13f), Vec2(GW("UV repeat"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "UV repeat", LVPC::textColor, LVPC::textHoverColor);
-	leftWindow->getScreen("terrainEditorMenuMesh")->addButton("isSpecular", Vec2(0.0f, -0.1f), Vec2(GW("Specular: OFF"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Specular: OFF", LVPC::textColor, LVPC::textHoverColor);
-	leftWindow->getScreen("terrainEditorMenuMesh")->addButton("specularIntensity", Vec2(0.0f, -0.33f), Vec2(GW("Specular intensity"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Specular intensity", LVPC::textColor, LVPC::textHoverColor);
-	leftWindow->getScreen("terrainEditorMenuMesh")->addButton("lightness", Vec2(0.0f, -0.56f), Vec2(GW("Lightness"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Lightness", LVPC::textColor, LVPC::textHoverColor);
-	leftWindow->getScreen("terrainEditorMenuMesh")->addButton("back", Vec2(0.0f, -0.79f), Vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen("terrainEditorMenuMesh")->addButton("heightMap", Vec2(0.0f, 0.7f), Vec2(GW("Height map"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Height map", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen("terrainEditorMenuMesh")->addButton("diffuseMap", Vec2(0.0f, 0.35f), Vec2(GW("Diffuse map"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Diffuse map", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen("terrainEditorMenuMesh")->addButton("maxHeight", Vec2(0.0f, 0.0f), Vec2(GW("Max height"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Max height", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen("terrainEditorMenuMesh")->addButton("uvRepeat", Vec2(0.0f, -0.35f), Vec2(GW("UV repeat"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "UV repeat", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen("terrainEditorMenuMesh")->addButton("back", Vec2(0.0f, -0.7f), Vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
 
-	// Left-viewport: mainWindow - terrainMenuBlendMap
+	// Left-viewport: mainWindow - terrainEditorMenuBlendMap
 	leftWindow->addScreen("terrainEditorMenuBlendMap");
 	leftWindow->getScreen("terrainEditorMenuBlendMap")->addButton("blendMap", Vec2(0.0f, 0.83f), Vec2(GW("Blend map"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Blend map", LVPC::textColor, LVPC::textHoverColor);
 	leftWindow->getScreen("terrainEditorMenuBlendMap")->addButton("red", Vec2(0.0f, 0.59f), Vec2(GW("Red texture"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Red texture", LVPC::textColor, LVPC::textHoverColor);
@@ -87,14 +85,26 @@ void EnvironmentEditor::initializeGUI()
 	leftWindow->getScreen("terrainEditorMenuBlendMap")->addButton("blueRepeat", Vec2(0.0f, -0.56f), Vec2(GW("Blue UV"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Blue UV", LVPC::textColor, LVPC::textHoverColor);
 	leftWindow->getScreen("terrainEditorMenuBlendMap")->addButton("back", Vec2(0.0f, -0.79f), Vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
 	
-	// Left-viewport: mainWindow - waterMenuMain
+	// Left-viewport: mainWindow - terrainEditorMenuLighting
+	leftWindow->addScreen("terrainEditorMenuLighting");
+	leftWindow->getScreen("terrainEditorMenuLighting")->addButton("normalMap", Vec2(0.0f, 0.8f), Vec2(GW("Normal map"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Normal map", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen("terrainEditorMenuLighting")->addButton("normalMapR", Vec2(0.0f, 0.6f), Vec2(GW("Red normal map"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Red normal map", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen("terrainEditorMenuLighting")->addButton("normalMapG", Vec2(0.0f, 0.4f), Vec2(GW("Green normal map"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Green normal map", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen("terrainEditorMenuLighting")->addButton("normalMapB", Vec2(0.0f, 0.2f), Vec2(GW("Blue normal map"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Blue normal map", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen("terrainEditorMenuLighting")->addButton("isSpecular", Vec2(0.0f, 0.0f), Vec2(GW("Specular: OFF"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Specular: OFF", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen("terrainEditorMenuLighting")->addButton("specularFactor", Vec2(0.0f, -0.2f), Vec2(GW("Spec factor"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Spec factor", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen("terrainEditorMenuLighting")->addButton("specularIntensity", Vec2(0.0f, -0.4f), Vec2(GW("Spec intensity"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Spec intensity", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen("terrainEditorMenuLighting")->addButton("lightness", Vec2(0.0f, -0.6f), Vec2(GW("Lightness"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Lightness", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen("terrainEditorMenuLighting")->addButton("back", Vec2(0.0f, -0.8f), Vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
+
+	// Left-viewport: mainWindow - waterEditorMenuMain
 	leftWindow->addScreen("waterEditorMenuMain");
 	leftWindow->getScreen("waterEditorMenuMain")->addButton("create", Vec2(0.0f, 0.63f), Vec2(GW("Create water"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Create water", LVPC::textColor, LVPC::textHoverColor);
 	leftWindow->getScreen("waterEditorMenuMain")->addButton("edit", Vec2(0.0f, 0.21f), Vec2(GW("Edit water"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Edit water", LVPC::textColor, LVPC::textHoverColor);
 	leftWindow->getScreen("waterEditorMenuMain")->addButton("delete", Vec2(0.0f, -0.21f), Vec2(GW("Remove water"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Remove water", LVPC::textColor, LVPC::textHoverColor);
 	leftWindow->getScreen("waterEditorMenuMain")->addButton("back", Vec2(0.0f, -0.63f), Vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
 
-	// Left-viewport: mainWindow - waterManagement
+	// Left-viewport: mainWindow - waterEditorMenuChoice
 	leftWindow->addScreen("waterEditorMenuChoice");
 	leftWindow->getScreen("waterEditorMenuChoice")->addButton("terrain", Vec2(0.0f, 0.7f), Vec2(GW("Terrain"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Terrain", LVPC::textColor, LVPC::textHoverColor);
 	leftWindow->getScreen("waterEditorMenuChoice")->addButton("mesh", Vec2(0.0f, 0.35f), Vec2(GW("3D mesh"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "3D mesh", LVPC::textColor, LVPC::textHoverColor);
@@ -102,7 +112,7 @@ void EnvironmentEditor::initializeGUI()
 	leftWindow->getScreen("waterEditorMenuChoice")->addButton("options", Vec2(0.0f, -0.35f), Vec2(GW("Options"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Options", LVPC::textColor, LVPC::textHoverColor);
 	leftWindow->getScreen("waterEditorMenuChoice")->addButton("back", Vec2(0.0f, -0.7f), Vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
 
-	// Left-viewport: mainWindow - waterMenuMesh
+	// Left-viewport: mainWindow - waterEditorMenuMesh
 	leftWindow->addScreen("waterEditorMenuMesh");
 	leftWindow->getScreen("waterEditorMenuMesh")->addButton("position", Vec2(0.0f, 0.7f), Vec2(GW("Position"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Position", LVPC::textColor, LVPC::textHoverColor);
 	leftWindow->getScreen("waterEditorMenuMesh")->addButton("size", Vec2(0.0f, 0.35f), Vec2(GW("Size"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Size", LVPC::textColor, LVPC::textHoverColor);
@@ -110,7 +120,7 @@ void EnvironmentEditor::initializeGUI()
 	leftWindow->getScreen("waterEditorMenuMesh")->addButton("down", Vec2(0.0f, -0.35f), Vec2(GW("Move down"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Move down", LVPC::textColor, LVPC::textHoverColor);
 	leftWindow->getScreen("waterEditorMenuMesh")->addButton("back", Vec2(0.0f, -0.7f), Vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
 
-	// Left-viewport: mainWindow - waterMenuEffects
+	// Left-viewport: mainWindow - waterEditorMenuEffects
 	leftWindow->addScreen("waterEditorMenuEffects");
 	leftWindow->getScreen("waterEditorMenuEffects")->addButton("uvRepeat", Vec2(0.0f, 0.859f), Vec2(GW("UV repeat"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "UV repeat", LVPC::textColor, LVPC::textHoverColor);
 	leftWindow->getScreen("waterEditorMenuEffects")->addButton("dudvMap", Vec2(0.0f, 0.668f), Vec2(GW("Dudv map"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Dudv map", LVPC::textColor, LVPC::textHoverColor);
@@ -123,7 +133,7 @@ void EnvironmentEditor::initializeGUI()
 	leftWindow->getScreen("waterEditorMenuEffects")->addButton("isSpecular", Vec2(0.0f, -0.669f), Vec2(GW("Specular: OFF"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Specular: OFF", LVPC::textColor, LVPC::textHoverColor);
 	leftWindow->getScreen("waterEditorMenuEffects")->addButton("back", Vec2(0.0f, -0.86f), Vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
 
-	// Left-viewport: mainWindow - waterMenuOptions
+	// Left-viewport: mainWindow - waterEditorMenuOptions
 	leftWindow->addScreen("waterEditorMenuOptions");
 	leftWindow->getScreen("waterEditorMenuOptions")->addButton("speed", Vec2(0.0f, 0.7875f), Vec2(GW("Water speed"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Water speed", LVPC::textColor, LVPC::textHoverColor);
 	leftWindow->getScreen("waterEditorMenuOptions")->addButton("transparency", Vec2(0.0f, 0.525f), Vec2(GW("Transparency"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Transparency", LVPC::textColor, LVPC::textHoverColor);
@@ -143,6 +153,7 @@ void EnvironmentEditor::load()
 	_fe3d.gfx_enableAmbientLighting(Vec3(1.0f), 0.75f);
 	_fe3d.gfx_enableDirectionalLighting(Vec3(1000.0f), Vec3(1.0f), 0.75f);
 	_fe3d.gfx_enableSpecularLighting();
+	_fe3d.gfx_enableNormalMapping();
 	_fe3d.gfx_enableWaterEffects();
 
 	// Core

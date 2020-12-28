@@ -67,10 +67,15 @@ void EnvironmentEditor::_updateTerrainMenuChoice()
 			{
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuBlendMap");
 			}
+			else if (screen->getButton("lighting")->isHovered())
+			{
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuLighting");
+			}
 		}
 
-		// BlendMap screen hoverability
+		// Screens hoverability
 		screen->getButton("blendMap")->setHoverable(_fe3d.terrainEntity_isExisting(_currentTerrainID));
+		screen->getButton("lighting")->setHoverable(_fe3d.terrainEntity_isExisting(_currentTerrainID));
 	}
 }
 
@@ -156,20 +161,6 @@ void EnvironmentEditor::_updateTerrainMenuMesh()
 				float uvRepeat = _fe3d.terrainEntity_getUvRepeat(_currentTerrainID);
 				_gui.getGlobalScreen()->addValueForm("uvRepeat", "UV repeat", uvRepeat, Vec2(0.0f), Vec2(0.3f, 0.1f));
 			}
-			else if (screen->getButton("isSpecular")->isHovered())
-			{
-				_fe3d.terrainEntity_setSpecularLighted(_currentTerrainID, !_fe3d.terrainEntity_isSpecularLighted(_currentTerrainID));
-			}
-			else if (screen->getButton("specularIntensity")->isHovered())
-			{
-				float intensity = _fe3d.terrainEntity_getSpecularLightingIntensity(_currentTerrainID);
-				_gui.getGlobalScreen()->addValueForm("intensity", "Intensity (%)", intensity * 100.0f, Vec2(0.0f), Vec2(0.3f, 0.1f));
-			}
-			else if (screen->getButton("lightness")->isHovered())
-			{
-				float lightness = _fe3d.terrainEntity_getLightness(_currentTerrainID);
-				_gui.getGlobalScreen()->addValueForm("lightness", "Lightness (%)", lightness * 100.0f, Vec2(0.0f), Vec2(0.3f, 0.1f));
-			}
 		}
 
 		// Buttons hoverability
@@ -177,9 +168,6 @@ void EnvironmentEditor::_updateTerrainMenuMesh()
 		screen->getButton("diffuseMap")->setHoverable(existing);
 		screen->getButton("maxHeight")->setHoverable(existing);
 		screen->getButton("uvRepeat")->setHoverable(existing);
-		screen->getButton("isSpecular")->setHoverable(existing);
-		screen->getButton("specularIntensity")->setHoverable(existing);
-		screen->getButton("lightness")->setHoverable(existing);
 
 		// If terrain entity exists
 		if (existing)
@@ -197,27 +185,6 @@ void EnvironmentEditor::_updateTerrainMenuMesh()
 			{
 				_fe3d.terrainEntity_setUvRepeat(_currentTerrainID, uvRepeat);
 			
-			}
-
-			// Update specular button content
-			auto specularID = screen->getButton("isSpecular")->getTextfield()->getEntityID();
-			auto isSpecular = _fe3d.terrainEntity_isSpecularLighted(_currentTerrainID);
-			_fe3d.textEntity_setTextContent(specularID, isSpecular ? "Specular: ON" : "Specular: OFF");
-
-			// Check if intensity confirmed
-			float intensity = _fe3d.terrainEntity_getSpecularLightingIntensity(_currentTerrainID);
-			if (_gui.getGlobalScreen()->checkValueForm("intensity", intensity))
-			{
-				intensity /= 100.0f;
-				_fe3d.terrainEntity_setSpecularLightingIntensity(_currentTerrainID, intensity);
-			}
-
-			// Check if lightness confirmed
-			float lightness = _fe3d.terrainEntity_getLightness(_currentTerrainID);
-			if (_gui.getGlobalScreen()->checkValueForm("lightness", lightness))
-			{
-				lightness /= 100.0f;
-				_fe3d.terrainEntity_setLightness(_currentTerrainID, lightness);
 			}
 		}
 	}
@@ -389,5 +356,175 @@ void EnvironmentEditor::_updateTerrainMenuBlendMap()
 		screen->getButton("redRepeat")->setHoverable(loadedBlendMap && loadedRedTex);
 		screen->getButton("greenRepeat")->setHoverable(loadedBlendMap && loadedGreenTex);
 		screen->getButton("blueRepeat")->setHoverable(loadedBlendMap && loadedBlueTex);
+	}
+}
+
+void EnvironmentEditor::_updateTerrainMenuLighting()
+{
+	auto screen = _gui.getViewport("left")->getWindow("main")->getActiveScreen();
+
+	// GUI management
+	if (screen->getID() == "terrainEditorMenuLighting")
+	{
+		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
+		{
+			if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
+			{
+				_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuChoice");
+			}
+			else if (screen->getButton("normalMap")->isHovered())
+			{
+				// Get the chosen filename
+				const string rootDirectory = _fe3d.misc_getRootDirectory();
+				const string targetDirectory = string("user\\assets\\textures\\normal_maps\\");
+				const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "PNG");
+
+				// Check if user chose a filename
+				if (filePath != "")
+				{
+					// Check if user did not switch directory
+					if (filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
+						filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
+					{
+						const string newFilePath = filePath.substr(rootDirectory.size());
+						_fe3d.misc_clearTextureCache(newFilePath);
+						_fe3d.terrainEntity_setNormalMap(_currentTerrainID, newFilePath);
+						_fe3d.terrainEntity_setNormalMapped(_currentTerrainID, true);
+					}
+					else
+					{
+						_fe3d.logger_throwWarning("Invalid filepath, directory switching not allowed!");
+					}
+				}
+			}
+			else if (screen->getButton("normalMapR")->isHovered())
+			{
+				// Get the chosen filename
+				const string rootDirectory = _fe3d.misc_getRootDirectory();
+				const string targetDirectory = string("user\\assets\\textures\\normal_maps\\");
+				const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "PNG");
+
+				// Check if user chose a filename
+				if (filePath != "")
+				{
+					// Check if user did not switch directory
+					if (filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
+						filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
+					{
+						const string newFilePath = filePath.substr(rootDirectory.size());
+						_fe3d.misc_clearTextureCache(newFilePath);
+						_fe3d.terrainEntity_setNormalMapR(_currentTerrainID, newFilePath);
+						_fe3d.terrainEntity_setNormalMappedR(_currentTerrainID, true);
+					}
+					else
+					{
+						_fe3d.logger_throwWarning("Invalid filepath, directory switching not allowed!");
+					}
+				}
+			}
+			else if (screen->getButton("normalMapG")->isHovered())
+			{
+				// Get the chosen filename
+				const string rootDirectory = _fe3d.misc_getRootDirectory();
+				const string targetDirectory = string("user\\assets\\textures\\normal_maps\\");
+				const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "PNG");
+
+				// Check if user chose a filename
+				if (filePath != "")
+				{
+					// Check if user did not switch directory
+					if (filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
+						filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
+					{
+						const string newFilePath = filePath.substr(rootDirectory.size());
+						_fe3d.misc_clearTextureCache(newFilePath);
+						_fe3d.terrainEntity_setNormalMapG(_currentTerrainID, newFilePath);
+						_fe3d.terrainEntity_setNormalMappedG(_currentTerrainID, true);
+					}
+					else
+					{
+						_fe3d.logger_throwWarning("Invalid filepath, directory switching not allowed!");
+					}
+				}
+			}
+			else if (screen->getButton("normalMapB")->isHovered())
+			{
+				// Get the chosen filename
+				const string rootDirectory = _fe3d.misc_getRootDirectory();
+				const string targetDirectory = string("user\\assets\\textures\\normal_maps\\");
+				const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "PNG");
+
+				// Check if user chose a filename
+				if (filePath != "")
+				{
+					// Check if user did not switch directory
+					if (filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
+						filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
+					{
+						const string newFilePath = filePath.substr(rootDirectory.size());
+						_fe3d.misc_clearTextureCache(newFilePath);
+						_fe3d.terrainEntity_setNormalMapB(_currentTerrainID, newFilePath);
+						_fe3d.terrainEntity_setNormalMappedB(_currentTerrainID, true);
+					}
+					else
+					{
+						_fe3d.logger_throwWarning("Invalid filepath, directory switching not allowed!");
+					}
+				}
+			}
+			else if (screen->getButton("isSpecular")->isHovered())
+			{
+				_fe3d.terrainEntity_setSpecularLighted(_currentTerrainID, !_fe3d.terrainEntity_isSpecularLighted(_currentTerrainID));
+			}
+			else if (screen->getButton("specularFactor")->isHovered())
+			{
+				float factor = _fe3d.terrainEntity_getSpecularLightingFactor(_currentTerrainID);
+				_gui.getGlobalScreen()->addValueForm("specularFactor", "Spec factor(0-256)", factor, Vec2(0.0f), Vec2(0.3f, 0.1f));
+			}
+			else if (screen->getButton("specularIntensity")->isHovered())
+			{
+				float intensity = _fe3d.terrainEntity_getSpecularLightingIntensity(_currentTerrainID);
+				_gui.getGlobalScreen()->addValueForm("specularIntensity", "Spec intensity(%)", intensity * 100.0f, Vec2(0.0f), Vec2(0.3f, 0.1f));
+			}
+			else if (screen->getButton("lightness")->isHovered())
+			{
+				float lightness = _fe3d.terrainEntity_getLightness(_currentTerrainID);
+				_gui.getGlobalScreen()->addValueForm("lightness", "Lightness (%)", lightness * 100.0f, Vec2(0.0f), Vec2(0.3f, 0.1f));
+			}
+		}
+
+		// Buttons hoverability
+		bool specularLighted = _fe3d.terrainEntity_isSpecularLighted(_currentTerrainID);
+		screen->getButton("specularFactor")->setHoverable(specularLighted);
+		screen->getButton("specularIntensity")->setHoverable(specularLighted);
+
+		// Update specular button content
+		auto specularID = screen->getButton("isSpecular")->getTextfield()->getEntityID();
+		auto isSpecular = _fe3d.terrainEntity_isSpecularLighted(_currentTerrainID);
+		_fe3d.textEntity_setTextContent(specularID, isSpecular ? "Specular: ON" : "Specular: OFF");
+
+		// Check if specular factor confirmed
+		float factor = _fe3d.terrainEntity_getSpecularLightingFactor(_currentTerrainID);
+		if (_gui.getGlobalScreen()->checkValueForm("specularFactor", factor))
+		{
+			factor = std::clamp(factor, 0.0f, 256.0f);
+			_fe3d.terrainEntity_setSpecularLightingFactor(_currentTerrainID, factor);
+		}
+
+		// Check if specular intensity confirmed
+		float intensity = _fe3d.terrainEntity_getSpecularLightingIntensity(_currentTerrainID);
+		if (_gui.getGlobalScreen()->checkValueForm("specularIntensity", intensity))
+		{
+			intensity /= 100.0f;
+			_fe3d.terrainEntity_setSpecularLightingIntensity(_currentTerrainID, intensity);
+		}
+
+		// Check if lightness confirmed
+		float lightness = _fe3d.terrainEntity_getLightness(_currentTerrainID);
+		if (_gui.getGlobalScreen()->checkValueForm("lightness", lightness))
+		{
+			lightness /= 100.0f;
+			_fe3d.terrainEntity_setLightness(_currentTerrainID, lightness);
+		}
 	}
 }

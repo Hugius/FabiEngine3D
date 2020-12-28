@@ -13,11 +13,15 @@ in mat3 f_tbnMatrix;
 
 // Textures
 layout(location = 0) uniform sampler2D u_sampler_diffuseMap;
-layout(location = 1) uniform sampler2D u_sampler_blendMap;
-layout(location = 2) uniform sampler2D u_sampler_blendMapR;
-layout(location = 3) uniform sampler2D u_sampler_blendMapG;
-layout(location = 4) uniform sampler2D u_sampler_blendMapB;
-layout(location = 5) uniform sampler2D u_sampler_shadowMap;
+layout(location = 1) uniform sampler2D u_sampler_normalMap;
+layout(location = 2) uniform sampler2D u_sampler_blendMap;
+layout(location = 3) uniform sampler2D u_sampler_blendMapR;
+layout(location = 4) uniform sampler2D u_sampler_blendMapG;
+layout(location = 5) uniform sampler2D u_sampler_blendMapB;
+layout(location = 6) uniform sampler2D u_sampler_normalMapR;
+layout(location = 7) uniform sampler2D u_sampler_normalMapG;
+layout(location = 8) uniform sampler2D u_sampler_normalMapB;
+layout(location = 9) uniform sampler2D u_sampler_shadowMap;
 
 // Vec3 uniforms
 uniform vec3 u_cameraPosition;
@@ -45,14 +49,20 @@ uniform float u_shadowAreaSize;
 uniform float u_fogMinDistance;
 uniform float u_fogMaxDistance;
 uniform float u_fogDefaultFactor;
+uniform float u_specularLightFactor;
 uniform float u_specularLightIntensity;
 uniform float u_maxSpotlightAngle;
 uniform float u_spotLightIntensity;
 uniform float u_maxSpotLightDistance;
 
 // Boolean uniforms
-uniform bool u_isSpecularLighted;
 uniform bool u_isBlendMapped;
+uniform bool u_isNormalMapped;
+uniform bool u_isNormalMappedR;
+uniform bool u_isNormalMappedG;
+uniform bool u_isNormalMappedB;
+uniform bool u_isSpecularLighted;
+uniform bool u_isNormalMappingEnabled;
 uniform bool u_ambientLightEnabled;
 uniform bool u_directionalLightEnabled;
 uniform bool u_pointLightEnabled;
@@ -70,24 +80,28 @@ uniform int u_pointLightCount;
 layout (location = 0) out vec4 o_finalColor;
 
 // Functions
+vec3 getNormalMappedVector();
 vec3 getTextureColor();
 vec3 getAmbientLighting();
-vec3 getDirectionalLighting(bool noShadowOcclusion);
-vec3 getPointLighting(bool noShadowOcclusion);
-vec3 getSpotLighting(bool noShadowOcclusion);
+vec3 getDirectionalLighting(bool noShadowOcclusion, vec3 normal);
+vec3 getPointLighting(bool noShadowOcclusion, vec3 normal);
+vec3 getSpotLighting(bool noShadowOcclusion, vec3 normal);
 vec3 applyFog(vec3 color);
 float getShadowValue();
-float getSpecularValue(vec3 position);
+float getSpecularValue(vec3 position, vec3 normal);
 
 // Calculate final fragment color
 void main()
 {
+	// Calculate new normal vector
+    vec3 normal = getNormalMappedVector();
+
 	// Calculate lighting
     float shadow = getShadowValue();
 	vec3 ambient = getAmbientLighting();
-	vec3 directional = getDirectionalLighting(shadow == 1.0f);
-	vec3 point = getPointLighting(shadow == 1.0f);
-	vec3 spot = getSpotLighting(shadow == 1.0f);
+	vec3 directional = getDirectionalLighting(shadow == 1.0f, normal);
+	vec3 point = getPointLighting(shadow == 1.0f, normal);
+	vec3 spot = getSpotLighting(shadow == 1.0f, normal);
 
 	// Apply lighting
 	vec3 color;
@@ -100,27 +114,118 @@ void main()
 	o_finalColor = vec4(color, 1.0f);
 }
 
+// Calculate new normal
+vec3 getNormalMappedVector()
+{
+    if(u_isNormalMappingEnabled && (u_isNormalMapped || u_isNormalMappedR || u_isNormalMappedG || u_isNormalMappedB))
+    {
+		if(u_isBlendMapped) // Blendmapped mixed normal
+		{
+			// Get color value of blendmap (R, G, B)
+			vec4 blendMapColor = texture(u_sampler_blendMap, f_uv / u_blendMapRepeat);
+
+			// Calculate diffuse color
+			vec3 mainTextureColor = vec4(texture(u_sampler_normalMap, f_uv) * (1.0f - blendMapColor.r - blendMapColor.g - blendMapColor.b)).rgb;
+
+			// Calculate blending color for every channel
+			vec3 rTextureColor = vec4(texture(u_sampler_normalMapR, (f_uv / u_blendMapRepeat) * u_blendMapRepeatR) * blendMapColor.r).rgb;
+			vec3 gTextureColor = vec4(texture(u_sampler_normalMapG, (f_uv / u_blendMapRepeat) * u_blendMapRepeatG) * blendMapColor.g).rgb;
+			vec3 bTextureColor = vec4(texture(u_sampler_normalMapB, (f_uv / u_blendMapRepeat) * u_blendMapRepeatB) * blendMapColor.b).rgb;
+			rTextureColor = u_isNormalMappedR ? rTextureColor : f_normal;
+			gTextureColor = u_isNormalMappedG ? gTextureColor : f_normal;
+			bTextureColor = u_isNormalMappedB ? bTextureColor : f_normal;
+
+			// Temporary values
+			vec3 totalColor = vec3(0.0f);
+			int amount = 0;
+
+			// Add diffuse color
+			if(u_isNormalMapped)
+			{
+				totalColor += mainTextureColor;
+				amount++;
+			}
+
+			// Add R color
+			if(u_isNormalMappedR)
+			{
+				totalColor += rTextureColor;
+				amount++;
+			}
+
+			// Add G color
+			if(u_isNormalMappedG)
+			{
+				totalColor += gTextureColor;
+				amount++;
+			}
+
+			// Add B color
+			if(u_isNormalMappedB)
+			{
+				totalColor += bTextureColor;
+				amount++;
+			}
+
+			// Compose final color
+			vec3 finalColor = totalColor / float(amount);
+
+			// Convert to normal space
+			vec3 normal = finalColor * 2.0f - 1.0f;
+			normal = normalize(f_tbnMatrix * normal);
+			return normal;
+		}
+		else // Diffuse normal
+		{
+			if(u_isNormalMapped)
+			{
+				// Calculate new normal vector
+				vec3 normal = texture(u_sampler_normalMap, f_uv).rgb;
+				normal = normal * 2.0f - 1.0f;
+				normal = normalize(f_tbnMatrix * normal);
+				return normal;
+			}
+			else
+			{
+				return f_normal;
+			}
+		}        
+    }
+    else
+    {
+        return f_normal;
+    }
+}
+
 // Calculate texture color
 vec3 getTextureColor()
 {
-	if(u_isBlendMapped)
+	if(u_isBlendMapped) // Blendmapped mixed texture
 	{
-		vec4 blendMapColor    = texture(u_sampler_blendMap,   f_uv / u_blendMapRepeat);
+		// Get color value of blendmap (R, G, B)
+		vec4 blendMapColor = texture(u_sampler_blendMap, f_uv / u_blendMapRepeat);
+
+		// Calculate diffuse color
 		vec4 mainTextureColor = texture(u_sampler_diffuseMap, f_uv) * (1.0f - blendMapColor.r - blendMapColor.g - blendMapColor.b);
-		vec4 rTextureColor    = texture(u_sampler_blendMapR, (f_uv / u_blendMapRepeat) * u_blendMapRepeatR) * blendMapColor.r;
-		vec4 gTextureColor    = texture(u_sampler_blendMapG, (f_uv / u_blendMapRepeat) * u_blendMapRepeatG) * blendMapColor.g;
-		vec4 bTextureColor    = texture(u_sampler_blendMapB, (f_uv / u_blendMapRepeat) * u_blendMapRepeatB) * blendMapColor.b;
-		vec4 newColor         = mainTextureColor + rTextureColor + gTextureColor + bTextureColor;
+
+		// Calculate blending color for every channel
+		vec4 rTextureColor = texture(u_sampler_blendMapR, (f_uv / u_blendMapRepeat) * u_blendMapRepeatR) * blendMapColor.r;
+		vec4 gTextureColor = texture(u_sampler_blendMapG, (f_uv / u_blendMapRepeat) * u_blendMapRepeatG) * blendMapColor.g;
+		vec4 bTextureColor = texture(u_sampler_blendMapB, (f_uv / u_blendMapRepeat) * u_blendMapRepeatB) * blendMapColor.b;
+
+		// Compose final color
+		vec4 newColor = mainTextureColor + rTextureColor + gTextureColor + bTextureColor;
         
+		// Return
 		return newColor.rgb;
 	}
-	else
+	else // Diffuse texture
 	{
-		// Calculating the texel color
-		vec4 texColor = texture(u_sampler_diffuseMap, vec2(-f_uv.x, f_uv.y));
+		// Calculate diffuse color
+		vec4 newColor = texture(u_sampler_diffuseMap, vec2(-f_uv.x, f_uv.y));
 
-		// Returning the texture color
-		return texColor.rgb;
+		// Return
+		return newColor.rgb;
 	}
 }
 
@@ -138,18 +243,18 @@ vec3 getAmbientLighting()
 }
 
 // Calculate directional lighting
-vec3 getDirectionalLighting(bool noShadowOcclusion)
+vec3 getDirectionalLighting(bool noShadowOcclusion, vec3 normal)
 {
 	if(u_directionalLightEnabled)
 	{
         // Calculate lighting strength
         vec3 result = vec3(0.0f);
         vec3 lightDirection = normalize(u_directionalLightPosition - f_pos);
-        float diffuse = max(dot(f_normal, lightDirection), 0.0f);
+        float diffuse = max(dot(normal, lightDirection), 0.0f);
 
         // Apply
         result += vec3(diffuse); // Diffuse
-        result += vec3(getSpecularValue(u_directionalLightPosition)) * float(noShadowOcclusion); // Specular
+        result += vec3(getSpecularValue(u_directionalLightPosition, normal)) * float(noShadowOcclusion); // Specular
         result *= u_directionalLightColor; // Color
         result *= u_directionalLightIntensity; // Intensity
 
@@ -163,7 +268,7 @@ vec3 getDirectionalLighting(bool noShadowOcclusion)
 }
 
 // Calculate point lighting
-vec3 getPointLighting(bool noShadowOcclusion)
+vec3 getPointLighting(bool noShadowOcclusion, vec3 normal)
 {
 	if(u_pointLightEnabled)
 	{
@@ -174,14 +279,14 @@ vec3 getPointLighting(bool noShadowOcclusion)
 		{
             // Calculate lighting strength
 			vec3  lightDir = normalize(u_pointLightPositions[i] - f_pos);
-			float diffuse = max(dot(f_normal, lightDir), 0.0f);
+			float diffuse = max(dot(normal, lightDir), 0.0f);
 			float distance = length(u_pointLightPositions[i] - f_pos) * u_pointLightDistanceFactors[i];
 			float attenuation = 1.0f / (1.0f + 0.07f * distance + 0.017f * (distance * distance));
 
             // Apply
             vec3 current = vec3(0.0f);
 			current += vec3(diffuse); // Diffuse
-            current += vec3(getSpecularValue(u_pointLightPositions[i])) * float(noShadowOcclusion); // Specular
+            current += vec3(getSpecularValue(u_pointLightPositions[i], normal)) * float(noShadowOcclusion); // Specular
             current *= u_pointLightColors[i]; // Color
             current *= attenuation; // Distance
             current *= u_pointLightIntensities[i]; // Intensity
@@ -199,7 +304,7 @@ vec3 getPointLighting(bool noShadowOcclusion)
 	}
 }
 
-vec3 getSpotLighting(bool noShadowOcclusion)
+vec3 getSpotLighting(bool noShadowOcclusion, vec3 normal)
 {
     if(u_spotLightEnabled)
     {
@@ -217,8 +322,8 @@ vec3 getSpotLighting(bool noShadowOcclusion)
         float intensity = clamp((spotTheta - u_maxSpotlightAngle * smoothingFactor) / epsilon, 0.0f, 1.0f);  
 
         // Apply lighting calculations
-        float diffuse = max(dot(f_normal, lightDirection), 0.0f);
-        float specular = getSpecularValue(u_cameraPosition);
+        float diffuse = max(dot(normal, lightDirection), 0.0f);
+        float specular = getSpecularValue(u_cameraPosition, normal);
         result += vec3(diffuse * intensity); // Diffuse
         result += vec3(specular * float(noShadowOcclusion) * intensity); // Specular
         result *= u_spotLightColor; // Color
@@ -347,15 +452,15 @@ vec3 applyFog(vec3 color)
 	}
 }
 
-float getSpecularValue(vec3 position)
+float getSpecularValue(vec3 position, vec3 normal)
 {
     if(u_specularLightEnabled && u_isSpecularLighted)
     {
         // Calculate
         vec3 lightDirection   = normalize(f_pos - position);
         vec3 viewDirection    = normalize(f_pos - u_cameraPosition);
-        vec3 reflectDirection = reflect(-lightDirection, f_normal);
-        float result          = pow(max(dot(viewDirection, reflectDirection), 0.0f), 1.0f);
+        vec3 reflectDirection = reflect(-lightDirection, normal);
+        float result          = pow(max(dot(viewDirection, reflectDirection), 0.0f), u_specularLightFactor);
 
         // Return
         return result * u_specularLightIntensity;

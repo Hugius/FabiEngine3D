@@ -127,6 +127,7 @@ void main()
 	o_finalColor = vec4(color, u_customAlpha);
 }
 
+// Calculate new normal
 vec3 getNormalMappedVector()
 {
     if(u_normalMappingEnabled && u_isNormalMapped)

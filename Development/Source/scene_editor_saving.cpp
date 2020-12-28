@@ -74,6 +74,10 @@ void SceneEditor::saveSceneToFile()
 				// Values
 				string heightMapPath = _fe3d.terrainEntity_getHeightMapPath(_currentTerrainID);
 				string diffuseMapPath = _fe3d.terrainEntity_getDiffuseMapPath(_currentTerrainID);
+				string normalMapPath = _fe3d.terrainEntity_getNormalMapPath(_currentTerrainID);
+				string normalMapPathR = _fe3d.terrainEntity_getNormalMapPathR(_currentTerrainID);
+				string normalMapPathG = _fe3d.terrainEntity_getNormalMapPathG(_currentTerrainID);
+				string normalMapPathB = _fe3d.terrainEntity_getNormalMapPathB(_currentTerrainID);
 				string blendMapPath = _fe3d.terrainEntity_getBlendMapPath(_currentTerrainID);
 				string blendMapPathR = _fe3d.terrainEntity_getBlendMapPathR(_currentTerrainID);
 				string blendMapPathG = _fe3d.terrainEntity_getBlendMapPathG(_currentTerrainID);
@@ -81,26 +85,39 @@ void SceneEditor::saveSceneToFile()
 				float maxHeight = _fe3d.terrainEntity_getMaxHeight(_currentTerrainID);
 				float uvRepeat = _fe3d.terrainEntity_getUvRepeat(_currentTerrainID);
 				float lightness = _fe3d.terrainEntity_getLightness(_currentTerrainID);
+				float specularFactor = _fe3d.terrainEntity_getSpecularLightingFactor(_currentTerrainID);
 				float specularIntensity = _fe3d.terrainEntity_getSpecularLightingIntensity(_currentTerrainID);
 				float blendRepeatR = _fe3d.terrainEntity_getBlendRepeatR(_currentTerrainID);
 				float blendRepeatG = _fe3d.terrainEntity_getBlendRepeatG(_currentTerrainID);
 				float blendRepeatB = _fe3d.terrainEntity_getBlendRepeatB(_currentTerrainID);
 				bool isBlendMapped = _fe3d.terrainEntity_isBlendMapped(_currentTerrainID);
+				bool isNormalMapped = _fe3d.terrainEntity_isNormalMapped(_currentTerrainID);
+				bool isNormalMappedR = _fe3d.terrainEntity_isNormalMappedR(_currentTerrainID);
+				bool isNormalMappedG = _fe3d.terrainEntity_isNormalMappedG(_currentTerrainID);
+				bool isNormalMappedB = _fe3d.terrainEntity_isNormalMappedB(_currentTerrainID);
 				bool isSpecular = _fe3d.terrainEntity_isSpecularLighted(_currentTerrainID);
 
 				// Perform empty string & space conversions
 				heightMapPath = (heightMapPath == "") ? "?" : heightMapPath;
 				diffuseMapPath = (diffuseMapPath == "") ? "?" : diffuseMapPath;
+				normalMapPath = (normalMapPath == "") ? "?" : normalMapPath;
 				blendMapPath = (blendMapPath == "") ? "?" : blendMapPath;
 				blendMapPathR = (blendMapPathR == "") ? "?" : blendMapPathR;
 				blendMapPathG = (blendMapPathG == "") ? "?" : blendMapPathG;
 				blendMapPathB = (blendMapPathB == "") ? "?" : blendMapPathB;
+				normalMapPathR = (normalMapPathR == "") ? "?" : normalMapPathR;
+				normalMapPathG = (normalMapPathG == "") ? "?" : normalMapPathG;
+				normalMapPathB = (normalMapPathB == "") ? "?" : normalMapPathB;
 				std::replace(heightMapPath.begin(), heightMapPath.end(), ' ', '?');
 				std::replace(diffuseMapPath.begin(), diffuseMapPath.end(), ' ', '?');
+				std::replace(normalMapPath.begin(), normalMapPath.end(), ' ', '?');
 				std::replace(blendMapPath.begin(), blendMapPath.end(), ' ', '?');
 				std::replace(blendMapPathR.begin(), blendMapPathR.end(), ' ', '?');
 				std::replace(blendMapPathG.begin(), blendMapPathG.end(), ' ', '?');
 				std::replace(blendMapPathB.begin(), blendMapPathB.end(), ' ', '?');
+				std::replace(normalMapPathR.begin(), normalMapPathR.end(), ' ', '?');
+				std::replace(normalMapPathG.begin(), normalMapPathG.end(), ' ', '?');
+				std::replace(normalMapPathB.begin(), normalMapPathB.end(), ' ', '?');
 
 				// Write terrain data to file
 				file <<
@@ -119,7 +136,16 @@ void SceneEditor::saveSceneToFile()
 					blendRepeatR << " " <<
 					blendRepeatG << " " <<
 					blendRepeatB << " " <<
+					isNormalMapped << " " <<
+					isNormalMappedR << " " <<
+					isNormalMappedG << " " <<
+					isNormalMappedB << " " <<
+					normalMapPath << " " <<
+					normalMapPathR << " " <<
+					normalMapPathG << " " <<
+					normalMapPathB << " " <<
 					isSpecular << " " <<
+					specularFactor << " " <<
 					specularIntensity << std::endl;
 			}
 

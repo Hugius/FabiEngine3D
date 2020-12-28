@@ -90,8 +90,11 @@ private:
 	void _placeSky(const string& newID, const array<string, 6>& diffuseMapPaths, float lightness, float rotationSpeed, Vec3 color);
 	void _placeTerrain(const string& newID, const string& previewID);
 	void _placeTerrain(const string& newID, const string& heightMapPath, float maxHeight, float uvRepeat, bool isBlendMapped, float lightness,
-		float blendRepeatR, float blendRepeatG, float blendRepeatB, bool isSpecular, float specularIntensity, const string& diffuseMapPath, 
-		const string& blendMapPath, const string& blendMapPathR, const string& blendMapPathG, const string& blendMapPathB);
+		float blendRepeatR, float blendRepeatG, float blendRepeatB, bool isNormalMapped, bool isNormalMappedR, bool isNormalMappedG,
+		bool isNormalMappedB, bool isSpecular, float specularFactor,
+		float specularIntensity, const string& diffuseMapPath, const string& normalMapPath, const string& normalMapPathR,
+		const string& normalMapPathG, const string& normalMapPathB, const string& blendMapPath,
+		const string& blendMapPathR, const string& blendMapPathG, const string& blendMapPathB);
 	void _placeWater(const string& newID, const string& previewID);
 	void _placeWater(const string& newID, Vec3 position, float size, bool isWaving, bool isRippling, bool isSpecularLighted, bool isReflective,
 		bool isRefractive, float waveHeightFactor, float specularFactor, float specularIntensity, float transparency, Vec3 color, float uvRepeat,

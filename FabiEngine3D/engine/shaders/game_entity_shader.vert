@@ -67,7 +67,8 @@ mat3 calculateTbnMatrix()
     // Normal mapping matrix
     if(u_normalMappingEnabled && u_isNormalMapped)
     {
-        vec3 tangent   = normalize(mat3(u_normalModelMatrix) * v_tangent);
+        vec3 tangent = normalize(mat3(u_normalModelMatrix) * v_tangent);
+			 tangent = normalize(tangent - dot(tangent, f_normal) * f_normal);
         vec3 bitangent = cross(f_normal, tangent);
         return mat3(tangent, bitangent, f_normal);
     }

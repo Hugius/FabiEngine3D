@@ -46,6 +46,7 @@ private:
 	void _updateTerrainMenuChoice();
 	void _updateTerrainMenuMesh();
 	void _updateTerrainMenuBlendMap();
+	void _updateTerrainMenuLighting();
 	void _updateTerrainCreation();
 	void _updateTerrainChoosing();
 	void _updateTerrainRemoval();

@@ -126,32 +126,50 @@ public:
 	void terrainEntity_setMaxHeight(const string& ID, float height);
 	void terrainEntity_setUvRepeat(const string& ID, float repeat);
 	void terrainEntity_setDiffuseMap(const string& ID, const string& texturePath);
+	void terrainEntity_setNormalMap(const string& ID, const string& texturePath);
 	void terrainEntity_setLightness(const string& ID, float lightness);
-	void terrainEntity_setSpecularLighted(const string& ID, bool enabled);
 	void terrainEntity_setBlendMapped(const string& ID, bool enabled);
+	void terrainEntity_setNormalMapped(const string& ID, bool enabled);
+	void terrainEntity_setNormalMappedR(const string& ID, bool enabled);
+	void terrainEntity_setNormalMappedG(const string& ID, bool enabled);
+	void terrainEntity_setNormalMappedB(const string& ID, bool enabled);
+	void terrainEntity_setSpecularLighted(const string& ID, bool enabled);
 	void terrainEntity_setBlendMap(const string& ID, const string& texturePath);
 	void terrainEntity_setBlendMapR(const string& ID, const string& texturePath);
 	void terrainEntity_setBlendMapG(const string& ID, const string& texturePath);
 	void terrainEntity_setBlendMapB(const string& ID, const string& texturePath);
+	void terrainEntity_setNormalMapR(const string& ID, const string& texturePath);
+	void terrainEntity_setNormalMapG(const string& ID, const string& texturePath);
+	void terrainEntity_setNormalMapB(const string& ID, const string& texturePath);
 	void terrainEntity_setBlendRepeatR(const string& ID, float repeat);
 	void terrainEntity_setBlendRepeatG(const string& ID, float repeat);
 	void terrainEntity_setBlendRepeatB(const string& ID, float repeat);
+	void terrainEntity_setSpecularLightingFactor(const string& ID, float factor);
 	void terrainEntity_setSpecularLightingIntensity(const string& ID, float intensity);
 
 	// Terrain entity interface - getters
 	bool terrainEntity_isExisting(const string& ID);
 	bool terrainEntity_isVisible(const string& ID);
-	bool terrainEntity_isSpecularLighted(const string& ID);
 	bool terrainEntity_isBlendMapped(const string& ID);
+	bool terrainEntity_isNormalMapped(const string& ID);
+	bool terrainEntity_isNormalMappedR(const string& ID);
+	bool terrainEntity_isNormalMappedG(const string& ID);
+	bool terrainEntity_isNormalMappedB(const string& ID);
+	bool terrainEntity_isSpecularLighted(const string& ID);
 	bool terrainEntity_isInside(const string& ID, float x, float z);
+	bool terrainEntity_isValidMousePoint();
 	string terrainEntity_getSelectedID();
 	vector<string> terrainEntity_getAllIDs();
 	const string& terrainEntity_getDiffuseMapPath(const string& ID);
+	const string& terrainEntity_getNormalMapPath(const string& ID);
 	const string& terrainEntity_getHeightMapPath(const string& ID);
 	const string& terrainEntity_getBlendMapPath(const string& ID);
 	const string& terrainEntity_getBlendMapPathR(const string& ID);
 	const string& terrainEntity_getBlendMapPathG(const string& ID);
 	const string& terrainEntity_getBlendMapPathB(const string& ID);
+	const string& terrainEntity_getNormalMapPathR(const string& ID);
+	const string& terrainEntity_getNormalMapPathG(const string& ID);
+	const string& terrainEntity_getNormalMapPathB(const string& ID);
 	float terrainEntity_getMaxHeight(const string& ID);
 	float terrainEntity_getUvRepeat(const string& ID);
 	float terrainEntity_getLightness(const string& ID);
@@ -160,9 +178,9 @@ public:
 	float terrainEntity_getBlendRepeatB(const string& ID);
 	float terrainEntity_getSize(const string& ID);
 	float terrainEntity_getPixelHeight(const string& ID, float x, float z);
+	float terrainEntity_getSpecularLightingFactor(const string& ID);
 	float terrainEntity_getSpecularLightingIntensity(const string& ID);
 	Vec3 terrainEntity_getMousePoint();
-	bool terrainEntity_isValidMousePoint();
 
 	// Water entity interface - setters
 	void waterEntity_add(const string& ID);

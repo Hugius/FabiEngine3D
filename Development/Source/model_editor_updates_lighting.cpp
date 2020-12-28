@@ -21,17 +21,17 @@ void ModelEditor::_updateModelEditingLighting()
 			}
 			else if (screen->getButton("specularFactor")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("specularFactor", "Specular factor (0-256)",
+				_gui.getGlobalScreen()->addValueForm("specularFactor", "Spec factor(0-256)",
 					_fe3d.gameEntity_getSpecularFactor(_currentModelID), Vec2(0.0f, 0.1f), Vec2(0.2f, 0.1f));
 			}
 			else if (screen->getButton("specularIntensity")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("specularIntensity", "Specular intensity (%)",
+				_gui.getGlobalScreen()->addValueForm("specularIntensity", "Spec intensity(%)",
 					_fe3d.gameEntity_getSpecularIntensity(_currentModelID) * 100.0f, Vec2(0.0f, 0.1f), Vec2(0.2f, 0.1f));
 			}
-			else if (screen->getButton("modelLightness")->isHovered())
+			else if (screen->getButton("lightness")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("modelLightness", "Model lightness (%)",
+				_gui.getGlobalScreen()->addValueForm("lightness", "Model lightness (%)",
 					_fe3d.gameEntity_getLightness(_currentModelID) * 100.0f, Vec2(0.0f, 0.1f), Vec2(0.2f, 0.1f));
 			}
 			else if (screen->getButton("isShadowed")->isHovered())
@@ -73,7 +73,7 @@ void ModelEditor::_updateModelEditingLighting()
 
 		// Update lightness
 		float lightness = _fe3d.gameEntity_getLightness(_currentModelID);
-		if (_gui.getGlobalScreen()->checkValueForm("modelLightness", lightness))
+		if (_gui.getGlobalScreen()->checkValueForm("lightness", lightness))
 		{
 			lightness /= 100.0f;
 			_fe3d.gameEntity_setLightness(_currentModelID, lightness);

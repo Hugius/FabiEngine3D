@@ -5,6 +5,7 @@
 layout(location = 0) in vec3 v_pos;
 layout(location = 1) in vec2 v_uv;
 layout(location = 2) in vec3 v_normal;
+layout(location = 3) in vec3 v_tangent;
 
 // Matrix44 uniforms
 uniform mat4 u_viewMatrix;
@@ -15,11 +16,16 @@ uniform mat4 u_shadowMatrix;
 uniform vec4 u_clippingPlaneReflection;
 uniform vec4 u_clippingPlaneRefraction;
 
+// Bool uniforms
+uniform bool u_isNormalMapped;
+uniform bool u_isNormalMappingEnabled;
+
 // Out variables
 out vec3 f_pos;
 out vec2 f_uv;
 out vec3 f_normal;
 out vec4 f_shadowPos;
+out mat3 f_tbnMatrix;
 
 // Declarations
 mat3 calculateTbnMatrix();
@@ -41,4 +47,20 @@ void main()
 	f_uv = v_uv;
 	f_normal = normalize(v_normal);
 	f_shadowPos = u_shadowMatrix * worldSpacePos;
+	f_tbnMatrix = calculateTbnMatrix();
+}
+
+mat3 calculateTbnMatrix()
+{
+    // Normal mapping matrix
+    if(u_isNormalMappingEnabled && u_isNormalMapped)
+    {
+		vec3 tangent = normalize(v_tangent - dot(v_tangent, f_normal) * f_normal);
+		vec3 bitangent = cross(f_normal, tangent);
+		return mat3(tangent, bitangent, f_normal);
+    }
+    else
+    {
+        return mat3(1.0f);
+    }
 }

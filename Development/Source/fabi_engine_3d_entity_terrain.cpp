@@ -61,6 +61,26 @@ bool FabiEngine3D::terrainEntity_isSpecularLighted(const string& ID)
 	return _core->_terrainEntityManager.getEntity(ID)->isSpecularLighted();
 }
 
+bool FabiEngine3D::terrainEntity_isNormalMapped(const string& ID)
+{
+	return _core->_terrainEntityManager.getEntity(ID)->isNormalMapped();
+}
+
+bool FabiEngine3D::terrainEntity_isNormalMappedR(const string& ID)
+{
+	return _core->_terrainEntityManager.getEntity(ID)->isNormalMappedR();
+}
+
+bool FabiEngine3D::terrainEntity_isNormalMappedG(const string& ID)
+{
+	return _core->_terrainEntityManager.getEntity(ID)->isNormalMappedG();
+}
+
+bool FabiEngine3D::terrainEntity_isNormalMappedB(const string& ID)
+{
+	return _core->_terrainEntityManager.getEntity(ID)->isNormalMappedB();
+}
+
 bool FabiEngine3D::terrainEntity_isBlendMapped(const string& ID)
 {
 	return _core->_terrainEntityManager.getEntity(ID)->isBlendMapped();
@@ -101,6 +121,11 @@ float FabiEngine3D::terrainEntity_getPixelHeight(const string& ID, float x, floa
 	return _core->_terrainEntityManager.getPixelHeight(ID, x, z);
 }
 
+float FabiEngine3D::terrainEntity_getSpecularLightingFactor(const string& ID)
+{
+	return _core->_terrainEntityManager.getEntity(ID)->getSpecularLightingFactor();
+}
+
 float FabiEngine3D::terrainEntity_getSpecularLightingIntensity(const string& ID)
 {
 	return _core->_terrainEntityManager.getEntity(ID)->getSpecularLightingIntensity();
@@ -135,6 +160,11 @@ const string& FabiEngine3D::terrainEntity_getDiffuseMapPath(const string& ID)
 	return _core->_terrainEntityManager.getEntity(ID)->getDiffuseMapPath();
 }
 
+const string& FabiEngine3D::terrainEntity_getNormalMapPath(const string& ID)
+{
+	return _core->_terrainEntityManager.getEntity(ID)->getNormalMapPath();
+}
+
 const string& FabiEngine3D::terrainEntity_getBlendMapPath(const string& ID)
 {
 	return _core->_terrainEntityManager.getEntity(ID)->getBlendMapPath();
@@ -153,6 +183,21 @@ const string& FabiEngine3D::terrainEntity_getBlendMapPathG(const string& ID)
 const string& FabiEngine3D::terrainEntity_getBlendMapPathB(const string& ID)
 {
 	return _core->_terrainEntityManager.getEntity(ID)->getBlendMapPathB();
+}
+
+const string& FabiEngine3D::terrainEntity_getNormalMapPathR(const string& ID)
+{
+	return _core->_terrainEntityManager.getEntity(ID)->getNormalMapPathR();
+}
+
+const string& FabiEngine3D::terrainEntity_getNormalMapPathG(const string& ID)
+{
+	return _core->_terrainEntityManager.getEntity(ID)->getNormalMapPathG();
+}
+
+const string& FabiEngine3D::terrainEntity_getNormalMapPathB(const string& ID)
+{
+	return _core->_terrainEntityManager.getEntity(ID)->getNormalMapPathB();
 }
 
 float FabiEngine3D::terrainEntity_getBlendRepeatR(const string& ID)
@@ -189,6 +234,12 @@ void FabiEngine3D::terrainEntity_setMaxHeight(const string& ID, float height)
 {
 	_core->_terrainEntityManager.getEntity(ID)->setMaxHeight(height);
 	_core->_terrainEntityManager.generateModel(ID);
+
+	// Load normal mapping again
+	if (_core->_terrainEntityManager.getEntity(ID)->isNormalMapped())
+	{
+		_core->_terrainEntityManager.loadNormalMapping(ID);
+	}
 }
 
 void FabiEngine3D::terrainEntity_setUvRepeat(const string& ID, float repeat)
@@ -201,6 +252,12 @@ void FabiEngine3D::terrainEntity_setDiffuseMap(const string& ID, const string& t
 {
 	_core->_terrainEntityManager.getEntity(ID)->setDiffuseMap(_core->_texLoader.getTexture(texturePath, true, true));
 	_core->_terrainEntityManager.getEntity(ID)->setDiffuseMapPath(texturePath);
+}
+
+void FabiEngine3D::terrainEntity_setNormalMap(const string& ID, const string& texturePath)
+{
+	_core->_terrainEntityManager.getEntity(ID)->setNormalMap(_core->_texLoader.getTexture(texturePath, true, true));
+	_core->_terrainEntityManager.getEntity(ID)->setNormalMapPath(texturePath);
 }
 
 void FabiEngine3D::terrainEntity_setBlendMap(const string& ID, const string& texturePath)
@@ -227,6 +284,24 @@ void FabiEngine3D::terrainEntity_setBlendMapB(const string& ID, const string& te
 	_core->_terrainEntityManager.getEntity(ID)->setBlendMapPathB(texturePath);
 }
 
+void FabiEngine3D::terrainEntity_setNormalMapR(const string& ID, const string& texturePath)
+{
+	_core->_terrainEntityManager.getEntity(ID)->setNormalMapR(_core->_texLoader.getTexture(texturePath, true, true));
+	_core->_terrainEntityManager.getEntity(ID)->setNormalMapPathR(texturePath);
+}
+
+void FabiEngine3D::terrainEntity_setNormalMapG(const string& ID, const string& texturePath)
+{
+	_core->_terrainEntityManager.getEntity(ID)->setNormalMapG(_core->_texLoader.getTexture(texturePath, true, true));
+	_core->_terrainEntityManager.getEntity(ID)->setNormalMapPathG(texturePath);
+}
+
+void FabiEngine3D::terrainEntity_setNormalMapB(const string& ID, const string& texturePath)
+{
+	_core->_terrainEntityManager.getEntity(ID)->setNormalMapB(_core->_texLoader.getTexture(texturePath, true, true));
+	_core->_terrainEntityManager.getEntity(ID)->setNormalMapPathB(texturePath);
+}
+
 void FabiEngine3D::terrainEntity_setBlendRepeatR(const string& ID, float repeat)
 {
 	_core->_terrainEntityManager.getEntity(ID)->setBlendRepeatR(repeat);
@@ -242,6 +317,11 @@ void FabiEngine3D::terrainEntity_setBlendRepeatB(const string& ID, float repeat)
 	_core->_terrainEntityManager.getEntity(ID)->setBlendRepeatB(repeat);
 }
 
+void FabiEngine3D::terrainEntity_setSpecularLightingFactor(const string& ID, float factor)
+{
+	_core->_terrainEntityManager.getEntity(ID)->setSpecularLightingFactor(factor);
+}
+
 void FabiEngine3D::terrainEntity_setSpecularLightingIntensity(const string& ID, float intensity)
 {
 	_core->_terrainEntityManager.getEntity(ID)->setSpecularLightingIntensity(intensity);
@@ -255,6 +335,50 @@ void FabiEngine3D::terrainEntity_setLightness(const string& ID, float lightness)
 void FabiEngine3D::terrainEntity_setSpecularLighted(const string& ID, bool enabled)
 {
 	_core->_terrainEntityManager.getEntity(ID)->setSpecularLighted(enabled);
+}
+
+void FabiEngine3D::terrainEntity_setNormalMapped(const string& ID, bool enabled)
+{
+	_core->_terrainEntityManager.getEntity(ID)->setNormalMapped(enabled);
+
+	// Calculate normal mapping tangents
+	if (enabled)
+	{
+		_core->_terrainEntityManager.loadNormalMapping(ID);
+	}
+}
+
+void FabiEngine3D::terrainEntity_setNormalMappedR(const string& ID, bool enabled)
+{
+	_core->_terrainEntityManager.getEntity(ID)->setNormalMappedR(enabled);
+
+	// Calculate normal mapping tangents
+	if (enabled)
+	{
+		_core->_terrainEntityManager.loadNormalMapping(ID);
+	}
+}
+
+void FabiEngine3D::terrainEntity_setNormalMappedG(const string& ID, bool enabled)
+{
+	_core->_terrainEntityManager.getEntity(ID)->setNormalMappedG(enabled);
+
+	// Calculate normal mapping tangents
+	if (enabled)
+	{
+		_core->_terrainEntityManager.loadNormalMapping(ID);
+	}
+}
+
+void FabiEngine3D::terrainEntity_setNormalMappedB(const string& ID, bool enabled)
+{
+	_core->_terrainEntityManager.getEntity(ID)->setNormalMappedB(enabled);
+
+	// Calculate normal mapping tangents
+	if (enabled)
+	{
+		_core->_terrainEntityManager.loadNormalMapping(ID);
+	}
 }
 
 void FabiEngine3D::terrainEntity_setBlendMapped(const string& ID, bool enabled)

@@ -90,9 +90,11 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 			else if (entityType == "TERRAIN")
 			{
 				// Values
-				string terrainID, heightMapPath, diffuseMapPath, blendMapPath, blendMapPathR, blendMapPathG, blendMapPathB;
-				float maxHeight, uvRepeat, lightness, blendRepeatR, blendRepeatG, blendRepeatB, specularIntensity;
-				bool isBlendMapped, isSpecular;
+				string terrainID, heightMapPath, diffuseMapPath, normalMapPath, 
+					normalMapPathR, normalMapPathG, normalMapPathB,
+					blendMapPath, blendMapPathR, blendMapPathG, blendMapPathB;
+				float maxHeight, uvRepeat, lightness, blendRepeatR, blendRepeatG, blendRepeatB, specularFactor, specularIntensity;
+				bool isBlendMapped, isNormalMapped, isNormalMappedR, isNormalMappedG, isNormalMappedB, isSpecular;
 
 				// Load base data
 				iss >>
@@ -110,18 +112,35 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 					blendRepeatR >>
 					blendRepeatG >>
 					blendRepeatB >>
+					isNormalMapped >>
+					isNormalMappedR >>
+					isNormalMappedG >>
+					isNormalMappedB >>
+					normalMapPath >>
+					normalMapPathR >>
+					normalMapPathG >>
+					normalMapPathB >>
 					isSpecular >>
+					specularFactor >>
 					specularIntensity;
 
 				// Perform empty string & space conversions
 				heightMapPath = (heightMapPath == "?") ? "" : heightMapPath;
 				diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
+				normalMapPath = (normalMapPath == "?") ? "" : normalMapPath;
+				normalMapPathR = (normalMapPathR == "?") ? "" : normalMapPathR;
+				normalMapPathG = (normalMapPathG == "?") ? "" : normalMapPathG;
+				normalMapPathB = (normalMapPathB == "?") ? "" : normalMapPathB;
 				blendMapPath = (blendMapPath == "?") ? "?" : blendMapPath;
 				blendMapPathR = (blendMapPathR == "?") ? "" : blendMapPathR;
 				blendMapPathG = (blendMapPathG == "?") ? "" : blendMapPathG;
 				blendMapPathB = (blendMapPathB == "?") ? "" : blendMapPathB;
 				std::replace(heightMapPath.begin(), heightMapPath.end(), '?', ' ');
 				std::replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
+				std::replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
+				std::replace(normalMapPathR.begin(), normalMapPathR.end(), '?', ' ');
+				std::replace(normalMapPathG.begin(), normalMapPathG.end(), '?', ' ');
+				std::replace(normalMapPathB.begin(), normalMapPathB.end(), '?', ' ');
 				std::replace(blendMapPath.begin(), blendMapPath.end(), '?', ' ');
 				std::replace(blendMapPathR.begin(), blendMapPathR.end(), '?', ' ');
 				std::replace(blendMapPathG.begin(), blendMapPathG.end(), '?', ' ');
@@ -129,8 +148,10 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 
 				// Add new terrain entity
 				_currentTerrainID = terrainID;
-				_placeTerrain(_currentTerrainID, heightMapPath, maxHeight, uvRepeat, isBlendMapped, lightness, blendRepeatR, blendRepeatG, blendRepeatB, 
-					isSpecular, specularIntensity, diffuseMapPath, blendMapPath, blendMapPathR, blendMapPathG, blendMapPathB);
+				_placeTerrain(_currentTerrainID, heightMapPath, maxHeight, uvRepeat, isBlendMapped, lightness, 
+					blendRepeatR, blendRepeatG, blendRepeatB, isNormalMapped, isNormalMappedR, isNormalMappedG, isNormalMappedB,
+					isSpecular, specularFactor, specularIntensity, diffuseMapPath, normalMapPath, normalMapPathR, normalMapPathG, 
+					normalMapPathB, blendMapPath, blendMapPathR, blendMapPathG, blendMapPathB);
 			}
 			else if (entityType == "WATER")
 			{

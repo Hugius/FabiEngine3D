@@ -121,59 +121,63 @@ vec3 getNormalMappedVector()
     {
 		if(u_isBlendMapped) // Blendmapped mixed normal
 		{
-			// Get color value of blendmap (R, G, B)
-			vec4 blendMapColor = texture(u_sampler_blendMap, f_uv / u_blendMapRepeat);
+			// Get color values of blendmap (R, G, B)
+			vec2 blendUV = f_uv / u_blendMapRepeat;
+			vec4 blendMapColor = texture(u_sampler_blendMap, blendUV);
+			float diffuseStrength = (1.0f - blendMapColor.r - blendMapColor.g - blendMapColor.b);
+			float rStrength = blendMapColor.r;
+			float gStrength = blendMapColor.g;
+			float bStrength = blendMapColor.b;
 
-			// Calculate diffuse color
-			vec3 mainTextureColor = vec4(texture(u_sampler_normalMap, f_uv) * (1.0f - blendMapColor.r - blendMapColor.g - blendMapColor.b)).rgb;
+			// Calculate total normal vector
+			vec3 totalNormal;
 
-			// Calculate blending color for every channel
-			vec3 rTextureColor = vec4(texture(u_sampler_normalMapR, (f_uv / u_blendMapRepeat) * u_blendMapRepeatR) * blendMapColor.r).rgb;
-			vec3 gTextureColor = vec4(texture(u_sampler_normalMapG, (f_uv / u_blendMapRepeat) * u_blendMapRepeatG) * blendMapColor.g).rgb;
-			vec3 bTextureColor = vec4(texture(u_sampler_normalMapB, (f_uv / u_blendMapRepeat) * u_blendMapRepeatB) * blendMapColor.b).rgb;
-			rTextureColor = u_isNormalMappedR ? rTextureColor : f_normal;
-			gTextureColor = u_isNormalMappedG ? gTextureColor : f_normal;
-			bTextureColor = u_isNormalMappedB ? bTextureColor : f_normal;
-
-			// Temporary values
-			vec3 totalColor = vec3(0.0f);
-			int amount = 0;
-
-			// Add diffuse color
+			// Diffuse normal map
 			if(u_isNormalMapped)
 			{
-				totalColor += mainTextureColor;
-				amount++;
+				vec3 normal = texture(u_sampler_normalMap, f_uv).rgb * 2.0f - 1.0f;
+				totalNormal += normalize(f_tbnMatrix * normal) * diffuseStrength;
 			}
-
-			// Add R color
+			else
+			{
+				totalNormal += f_normal * diffuseStrength;
+			}
+			
+			// BlendR normal map
 			if(u_isNormalMappedR)
 			{
-				totalColor += rTextureColor;
-				amount++;
+				vec3 normal = texture(u_sampler_normalMapR, blendUV * u_blendMapRepeatR).rgb * 2.0f - 1.0f;
+				totalNormal += normalize(f_tbnMatrix * normal) * rStrength;
+			}
+			else
+			{
+				totalNormal += f_normal * rStrength;
 			}
 
-			// Add G color
+			// BlendG normal map
 			if(u_isNormalMappedG)
 			{
-				totalColor += gTextureColor;
-				amount++;
+				vec3 normal = texture(u_sampler_normalMapG, blendUV * u_blendMapRepeatG).rgb * 2.0f - 1.0f;
+				totalNormal += normalize(f_tbnMatrix * normal) * gStrength;
+			}
+			else
+			{
+				totalNormal += f_normal * gStrength;
 			}
 
-			// Add B color
+			// BlendB normal map
 			if(u_isNormalMappedB)
 			{
-				totalColor += bTextureColor;
-				amount++;
+				vec3 normal = texture(u_sampler_normalMapB, blendUV * u_blendMapRepeatB).rgb * 2.0f - 1.0f;
+				totalNormal += normalize(f_tbnMatrix * normal) * bStrength;
+			}
+			else
+			{
+				totalNormal += f_normal * bStrength;
 			}
 
-			// Compose final color
-			vec3 finalColor = totalColor / float(amount);
-
-			// Convert to normal space
-			vec3 normal = finalColor * 2.0f - 1.0f;
-			normal = normalize(f_tbnMatrix * normal);
-			return normal;
+			// Return
+			return totalNormal;
 		}
 		else // Diffuse normal
 		{
@@ -203,18 +207,19 @@ vec3 getTextureColor()
 	if(u_isBlendMapped) // Blendmapped mixed texture
 	{
 		// Get color value of blendmap (R, G, B)
-		vec4 blendMapColor = texture(u_sampler_blendMap, f_uv / u_blendMapRepeat);
+		vec2 blendUV = f_uv / u_blendMapRepeat;
+		vec4 blendMapColor = texture(u_sampler_blendMap, blendUV);
 
 		// Calculate diffuse color
-		vec4 mainTextureColor = texture(u_sampler_diffuseMap, f_uv) * (1.0f - blendMapColor.r - blendMapColor.g - blendMapColor.b);
+		vec4 diffuseTextureColor = texture(u_sampler_diffuseMap, f_uv) * (1.0f - blendMapColor.r - blendMapColor.g - blendMapColor.b);
 
 		// Calculate blending color for every channel
-		vec4 rTextureColor = texture(u_sampler_blendMapR, (f_uv / u_blendMapRepeat) * u_blendMapRepeatR) * blendMapColor.r;
-		vec4 gTextureColor = texture(u_sampler_blendMapG, (f_uv / u_blendMapRepeat) * u_blendMapRepeatG) * blendMapColor.g;
-		vec4 bTextureColor = texture(u_sampler_blendMapB, (f_uv / u_blendMapRepeat) * u_blendMapRepeatB) * blendMapColor.b;
+		vec4 rTextureColor = texture(u_sampler_blendMapR, blendUV * u_blendMapRepeatR) * blendMapColor.r;
+		vec4 gTextureColor = texture(u_sampler_blendMapG, blendUV * u_blendMapRepeatG) * blendMapColor.g;
+		vec4 bTextureColor = texture(u_sampler_blendMapB, blendUV * u_blendMapRepeatB) * blendMapColor.b;
 
 		// Compose final color
-		vec4 newColor = mainTextureColor + rTextureColor + gTextureColor + bTextureColor;
+		vec4 newColor = diffuseTextureColor + rTextureColor + gTextureColor + bTextureColor;
         
 		// Return
 		return newColor.rgb;

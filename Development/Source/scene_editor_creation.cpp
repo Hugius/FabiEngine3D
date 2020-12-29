@@ -153,9 +153,9 @@ void SceneEditor::_placeTerrain(const string& newID, const string& heightMapPath
 	// Texture maps
 	if (diffuseMapPath != "") _fe3d.terrainEntity_setDiffuseMap(newID, diffuseMapPath);
 	if (normalMapPath != "") _fe3d.terrainEntity_setNormalMap(newID, normalMapPath);
-	if (normalMapPathR != "") _fe3d.terrainEntity_setNormalMap(newID, normalMapPathR);
-	if (normalMapPathG != "") _fe3d.terrainEntity_setNormalMap(newID, normalMapPathG);
-	if (normalMapPathB != "") _fe3d.terrainEntity_setNormalMap(newID, normalMapPathB);
+	if (normalMapPathR != "") _fe3d.terrainEntity_setNormalMapR(newID, normalMapPathR);
+	if (normalMapPathG != "") _fe3d.terrainEntity_setNormalMapG(newID, normalMapPathG);
+	if (normalMapPathB != "") _fe3d.terrainEntity_setNormalMapB(newID, normalMapPathB);
 	if (blendMapPath != "")   _fe3d.terrainEntity_setBlendMap(newID, blendMapPath);
 	if (blendMapPathR != "")  _fe3d.terrainEntity_setBlendMapR(newID, blendMapPathR);
 	if (blendMapPathG != "")  _fe3d.terrainEntity_setBlendMapG(newID, blendMapPathG);

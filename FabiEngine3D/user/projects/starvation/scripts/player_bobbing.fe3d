@@ -1,8 +1,8 @@
-14 30
+3 24
 META script_type_update
 
 /// Running speed
-DEC bobbingSpeed = 0.07
+DEC bobbingSpeed = 0.035
 IF _isRunning IS <true>:
     MUL bobbingSpeed 2.0
 

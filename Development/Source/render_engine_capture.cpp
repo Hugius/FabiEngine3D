@@ -363,7 +363,7 @@ void RenderEngine::_captureMotionBlur(CameraManager& camera)
 	float elapsedMS = static_cast<float>(timeDifference.count()) * 1000.0f;
 
 	// Blur variables
-	static int blurStrength;
+	static int blurStrength = 0;
 	static bool firstTime = true;
 
 	// If 1 frame passed
@@ -384,7 +384,7 @@ void RenderEngine::_captureMotionBlur(CameraManager& camera)
 			firstTime = false;
 
 			// Determine blur type & strength
-			if (xDifference != 0 && yDifference != 0)
+			if (xDifference != 0 || yDifference != 0)
 			{
 				if (xDifference >= yDifference)
 				{

@@ -49,9 +49,9 @@ void CameraManager::update(Ivec2 lastCursorPosition)
 	const int right = Config::getInst().getVpPos().x + Config::getInst().getVpSize().x;
 	const int bottom = Config::getInst().getWindowSize().y - (Config::getInst().getVpPos().y + Config::getInst().getVpSize().y);
 	const int top = Config::getInst().getWindowSize().y - Config::getInst().getVpPos().y;
-	const int xMiddle = Config::getInst().getWindowSize().x / 2;
-	const int yMiddle = Config::getInst().getWindowSize().y / 2;
-	
+	const int xMiddle = left + (Config::getInst().getVpSize().x / 2);
+	const int yMiddle = bottom + (Config::getInst().getVpSize().y / 2);
+
 	// Update cursor centering
 	if (_mustCenter)
 	{

@@ -135,6 +135,18 @@ void FabiEngine3D::misc_setCursorPosition(Ivec2 pos)
 	_core->_windowManager.setCursorPos(pos);
 }
 
+void FabiEngine3D::misc_setVsync(bool enabled)
+{
+	if (enabled)
+	{
+		_core->_windowManager.enableVsync();
+	}
+	else
+	{
+		_core->_windowManager.disableVsync();
+	}
+}
+
 void FabiEngine3D::misc_setMainRenderingColor(Vec3 color)
 {
 	glClearColor(color.r, color.g, color.b, 1.0f);

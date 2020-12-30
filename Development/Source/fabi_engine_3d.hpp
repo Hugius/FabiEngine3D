@@ -748,6 +748,7 @@ public:
 	void misc_showCursor();
 	void misc_hideCursor();
 	void misc_setCursorPosition(Ivec2 pos);
+	void misc_setVsync(bool enabled);
 	void misc_setMainRenderingColor(Vec3 color);
 	void misc_setWindowTitle(const string& title);
 	void misc_clearOBJCache(const string& filePath);

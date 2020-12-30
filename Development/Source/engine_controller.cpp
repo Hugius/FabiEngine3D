@@ -101,6 +101,9 @@ void EngineController::FE3D_CONTROLLER_DESTROY()
 
 void EngineController::_initializeMiscellaneous()
 {
+	// Enable vsync
+	misc_setVsync(true);
+
 	// Permanent graphical effects
 	misc_setMainRenderingColor(Vec3(0.0f));
 	gfx_setMsaaQuality(16);

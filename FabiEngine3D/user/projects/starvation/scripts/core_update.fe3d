@@ -1,4 +1,4 @@
-7 16
+13 16
 META script_type_update
 META execution_entry
 
@@ -12,5 +12,6 @@ EXEC player_walk
 EXEC player_bobbing
 EXEC player_intro
 EXEC player_misc
-EXEC tree_cut
-EXEC tree_fall
+EXEC tree_update
+EXEC stone_update
+EXEC misc_update

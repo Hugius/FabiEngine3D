@@ -1,0 +1,4 @@
+2 33
+META script_type_init
+
+GLOB STR _lastSelectedItemID = ""

@@ -1,0 +1,6 @@
+4 23
+META script_type_init
+
+GLOB LIST _stonesIDs = {}
+GLOB STR _fallingStonesID = ""
+GLOB DEC _fallingStonesTargetHeight = 0.0

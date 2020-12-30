@@ -1,0 +1,31 @@
+26 53
+META script_type_update
+
+/// Validate existence
+BOOL existing = fe3d:model_is_existing(_lastSelectedItemID)
+IF existing IS <false>:
+    EDIT _lastSelectedItemID = ""
+
+/// Reset color tint
+IF _lastSelectedItemID NOT "":
+    fe3d:model_set_color(_lastSelectedItemID, 1.0, 1.0, 1.0)
+    EDIT _lastSelectedItemID = ""
+
+/// Apply color tint if hovered
+LIST pickuppables = {"log", "stones", "axe", "pickaxe"}
+INT size = misc:get_list_size("pickuppables")
+INT index = 0
+STR hoveredID = ""
+VEC3 camPos = fe3d:camera_get_position()
+LOOP:
+    IF index IS size:
+        BREAK
+    EDIT hoveredID = fe3d:raycast_into_model(pickuppables[index], "", <true>)
+    IF hoveredID NOT "" AND _isInvOpen IS <false>:
+        VEC3 stonePos = fe3d:model_get_position(hoveredID)
+        DEC distance = math:distance(stonePos, camPos)
+        IF distance LESS 5.0:
+            fe3d:model_set_color(hoveredID, 0.25, 1.0, 0.25)
+            EDIT _lastSelectedItemID = hoveredID
+            BREAK
+    INCR index 1

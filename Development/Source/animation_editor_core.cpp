@@ -73,6 +73,8 @@ void AnimationEditor::load()
 	_gui.getGlobalScreen()->addTextfield("selectedAnimationName", Vec2(0.0f, -0.45f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
 	_gui.getGlobalScreen()->addTextfield("selectedAnimationFrame", Vec2(0.0f, -0.55f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
 	_gui.getViewport("right")->getWindow("main")->setActiveScreen("animationEditorControls");
+	_fe3d.input_clearMouseToggles();
+	_fe3d.input_clearKeyToggles();
 	_isEditorLoading = false;
 	_isEditorLoaded = true;
 }
@@ -123,5 +125,6 @@ void AnimationEditor::unload()
 	_fe3d.misc_disableDebugRendering();
 	_fe3d.input_clearMouseToggles();
 	_fe3d.input_clearKeyToggles();
+	_fe3d.input_setKeyTogglingLocked(false);
 	_isEditorLoaded = false;
 }

@@ -1,4 +1,4 @@
-5 0
+10 14
 META script_type_init
 META execution_entry
 
@@ -8,3 +8,5 @@ EXEC hud_init_ui
 EXEC hud_init_misc
 EXEC player_init
 EXEC tree_init
+EXEC stone_init
+EXEC misc_init

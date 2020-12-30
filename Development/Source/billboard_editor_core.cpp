@@ -84,6 +84,8 @@ void BillboardEditor::load()
 	loadBillboardEntitiesFromFile();
 
 	// Miscellaneous
+	_fe3d.input_clearMouseToggles();
+	_fe3d.input_clearKeyToggles();
 	_gui.getGlobalScreen()->addTextfield("selectedBillboardName", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
 	_gui.getViewport("right")->getWindow("main")->setActiveScreen("billboardEditorControls");
 	_isEditorLoaded = true;
@@ -122,5 +124,6 @@ void BillboardEditor::unload()
 	_fe3d.misc_disableDebugRendering();
 	_fe3d.input_clearMouseToggles();
 	_fe3d.input_clearKeyToggles();
+	_fe3d.input_setKeyTogglingLocked(false);
 	_isEditorLoaded = false;
 }

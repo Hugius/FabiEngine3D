@@ -70,7 +70,7 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 							_throwScriptError("list variable \"" + nameString + "\" not found!");
 						}
 
-						// Check if variable is a list
+						// Check if variable is not a list
 						auto listVariable = _isLocalVariableExisting(nameString) ? _getLocalVariable(nameString) : _getGlobalVariable(nameString);
 						if (listVariable.getType() == ScriptVariableType::SINGLE)
 						{
@@ -79,6 +79,32 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 
 						// Return list size
 						auto result = listVariable.getValueCount();
+						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::INTEGER, static_cast<int>(result)));
+					}
+				}
+				else if (functionName == "misc:get_string_size") // Get the size of a string variable
+				{
+					auto types = { ScriptValueType::STRING };
+
+					if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+					{
+						auto nameString = arguments[0].getString();
+
+						// Check if variable exists
+						if (!_isLocalVariableExisting(nameString) && !_isGlobalVariableExisting(nameString))
+						{
+							_throwScriptError("string variable \"" + nameString + "\" not found!");
+						}
+
+						// Check if variable is a list or any other value than string
+						auto listVariable = _isLocalVariableExisting(nameString) ? _getLocalVariable(nameString) : _getGlobalVariable(nameString);
+						if (listVariable.getType() == ScriptVariableType::MULTIPLE || listVariable.getValue().getType() != ScriptValueType::STRING)
+						{
+							_throwScriptError("variable \"" + nameString + "\" is not a string!");
+						}
+
+						// Return string size
+						auto result = listVariable.getValue().getString().size();
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::INTEGER, static_cast<int>(result)));
 					}
 				}

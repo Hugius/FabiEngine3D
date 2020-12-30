@@ -1,10 +1,10 @@
-9 9
+55 4
 META script_type_update
 
 /// Check if cutting animation finished
+STR hoveredID = ""
 IF _axePlaying IS <false> AND _wasAxePlaying IS <true> AND _fallingTreeID IS "":
     VEC3 camPos = fe3d:camera_get_position()
-    STR hoveredID = ""
     STR checkID = ""
     INT number = 1
     /// Check if aiming at tree & extract number
@@ -54,7 +54,7 @@ IF _fallingLogID NOT "":
         EDIT _fallingLogID = ""
 
 /// Log picking updates
-STR hoveredID = fe3d:raycast_into_model("log", "", <true>)
+EDIT hoveredID = fe3d:raycast_into_model("log", "", <true>)
 IF hoveredID NOT "" AND _wasPickupPlaying IS <true> AND _pickupPlaying IS <false>:
     VEC3 camPos = fe3d:camera_get_position()
     VEC3 logPos = fe3d:model_get_position(hoveredID)

@@ -1,4 +1,4 @@
-10 0
+64 57
 META script_type_update
 
 /// Check if player wants to open/close bag
@@ -13,44 +13,55 @@ ELSE:
 /// Update bag items visibility
 fe3d:image_set_visible("wood", iToggled)
 fe3d:text_set_visible("wood_count", iToggled)
-fe3d:text_set_visible("wood_max", iToggled)
 fe3d:image_set_visible("stone", iToggled)
 fe3d:text_set_visible("stone_count", iToggled)
-fe3d:text_set_visible("stone_max", iToggled)
-fe3d:image_set_visible("iron", iToggled)
-fe3d:text_set_visible("iron_count", iToggled)
-fe3d:text_set_visible("iron_max", iToggled)
 fe3d:image_set_visible("clay", iToggled)
 fe3d:text_set_visible("clay_count", iToggled)
-fe3d:text_set_visible("clay_max", iToggled)
 fe3d:image_set_visible("seeds", iToggled)
 fe3d:text_set_visible("seeds_count", iToggled)
-fe3d:text_set_visible("seeds_max", iToggled)
+fe3d:image_set_visible("iron", iToggled)
+fe3d:text_set_visible("iron_count", iToggled)
 
-/// Restrict bag item amounts
+/// Calculate total bag items AND show bag text
+LIST textNames = {"wood_count","stone_count","clay_count","seeds_count","iron_count"}
 INT size = misc:get_list_size("_bag")
 INT index = 0
+INT itemCount = 0
+INT strSize = 0
+DEC weight = 0.0
+EDIT _totalBagWeight = 0.0
 LOOP:
     IF index IS size:
         BREAK
     ELSE:
-        IF _bag[index] MORE _maxBagItems:
-            EDIT _bag[index] = _maxBagItems
+        EDIT itemCount = _bag[index]
+        CAST itemCount DEC
+        EDIT weight = itemCount
+        MUL weight _bagWeights[index]
+        INCR _totalBagWeight weight
+        CAST itemCount INT
+        CAST itemCount STR
+        EDIT strSize = misc:get_string_size("itemCount")
+        IF strSize IS 1:
+            EDIT itemCount = misc:concat_strings("00", itemCount)
+        ELIF strSize IS 2:
+            EDIT itemCount = misc:concat_strings("0", itemCount)
+        fe3d:text_set_content(textNames[index], itemCount)
+        CAST itemCount INT
         INCR index 1
 
-/// Update bag item amounts
-INT wood = _bag[0]
-INT stone = _bag[1]
-INT iron = _bag[2]
-INT clay = _bag[3]
-INT seeds = _bag[4]
-CAST wood STR
-CAST stone STR
-CAST iron STR
-CAST clay STR
-CAST seeds STR
-fe3d:text_set_content("wood_count", wood)
-fe3d:text_set_content("stone_count", stone)
-fe3d:text_set_content("iron_count", iron)
-fe3d:text_set_content("clay_count", clay)
-fe3d:text_set_content("seeds_count", seeds)
+/// Update bag icon color
+DEC totalWeight = _totalBagWeight
+DIV totalWeight _maxBagWeight
+DEC inverseColor = 1.0
+DECR inverseColor totalWeight
+fe3d:image_set_color("bag_open", 1.0, inverseColor, inverseColor)
+
+/// Update bag weight text
+BOOL isBagOpen = fe3d:image_is_visible("bag_open")
+fe3d:text_set_visible("bag_weight", isBagOpen)
+EDIT totalWeight = _totalBagWeight
+CAST totalWeight STR
+EDIT totalWeight = misc:string_part(totalWeight, 0, 4)
+EDIT totalWeight = misc:concat_strings(totalWeight, "KG")
+fe3d:text_set_content("bag_weight", totalWeight)

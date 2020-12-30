@@ -1,4 +1,4 @@
-53 26
+30 61
 META script_type_update
 
 /// Update health icon color
@@ -29,7 +29,7 @@ fe3d:image_set_color("oxygen", oxygenColor, oxygenColor, oxygenColor)
 /// Update temperature icon color
 DEC tempColor = _temperature
 DIV tempColor 100.0
-fe3d:image_set_color("temperature", tempColor, tempColor, tempColor)
+fe3d:image_set_color("temperature", tempColor, tempColor, 1.0)
 
 /// Update hunger
 DECR _hunger 0.0025

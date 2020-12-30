@@ -12,7 +12,7 @@ void ScriptEditor::_updateTextWriter()
 		}
 
 		// Reload all AABB entities when LMB is pressed
-		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
+		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) && _fe3d.misc_isCursorInsideViewport())
 		{
 			_reloadScriptTextDisplay(true);
 			_hasClickedLMB = true;

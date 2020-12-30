@@ -1,4 +1,4 @@
-10 28
+50 0
 META script_type_update
 
 /// Update health icon color
@@ -30,3 +30,38 @@ fe3d:image_set_color("oxygen", oxygenColor, oxygenColor, oxygenColor)
 DEC tempColor = _temperature
 DIV tempColor 100.0
 fe3d:image_set_color("temperature", tempColor, tempColor, tempColor)
+
+/// Update hunger
+DECR _hunger 0.001
+EDIT _hunger = math:clamp(_hunger, 0.0, 100.0)
+
+/// Update thirst
+DECR _thirst 0.001
+EDIT _thirst = math:clamp(_thirst, 0.0, 100.0)
+
+/// Update stamina
+EDIT _stamina = math:clamp(_stamina, 0.0, 100.0)
+
+/// Update oxygen
+VEC3 camPos = fe3d:camera_get_position()
+IF camPos.y LESS 9.0:
+    DECR _oxygen 0.1
+ELSE:
+    INCR _oxygen 0.1
+EDIT _oxygen = math:clamp(_oxygen, 0.0, 100.0)
+
+/// Update temperature
+IF camPos.y LESS 9.0:
+    DECR _temperature 0.05
+ELSE:
+    INCR _temperature 0.001
+EDIT _temperature = math:clamp(_temperature, 0.0, 100.0)
+
+/// Update health
+IF _hunger IS 0.0 OR _thirst IS 0.0 OR _oxygen IS 0.0 OR _temperature IS 0.0:
+    DECR _health 0.1
+EDIT _health = math:clamp(_health, 0.0, 100.0)
+
+/// Check if player died
+IF _health IS 0.0:
+    PASS

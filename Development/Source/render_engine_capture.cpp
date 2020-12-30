@@ -72,6 +72,10 @@ void RenderEngine::_captureSceneReflections(CameraManager& camera)
 		bool shadowsEnabled = _renderBus.isShadowsEnabled();
 		_renderBus.setShadowsEnabled(false);
 
+		// Normalmapping are performance-heavy with little visual impact on reflections, so they should not appear
+		bool normalMappingEnabled = _renderBus.isNormalMappingEnabled();
+		_renderBus.setNormalMappingEnabled(false);
+
 		// Sky HDR must not appear in reflections
 		float oldLightness = 0.0f;
 		if (_entityBus->getSkyEntity() != nullptr) { oldLightness = _entityBus->getSkyEntity()->getLightness(); }
@@ -84,6 +88,7 @@ void RenderEngine::_captureSceneReflections(CameraManager& camera)
 
 		// Revert reflection exceptions
 		_renderBus.setShadowsEnabled(shadowsEnabled);
+		_renderBus.setNormalMappingEnabled(normalMappingEnabled);
 		if (_entityBus->getSkyEntity() != nullptr) { _entityBus->getSkyEntity()->setLightness(oldLightness); }
 
 		// Revert camera angle

@@ -1,4 +1,4 @@
-11 26
+11 23
 META script_type_init
 
 /// Globals
@@ -10,7 +10,7 @@ GLOB LIST _bag = {0, 0, 0, 0, 0}
 GLOB DEC _health = 100.0
 GLOB DEC _hunger = 100.0
 GLOB DEC _thirst = 100.0
-GLOB DEC _stamina = 100000.0
+GLOB DEC _stamina = 100.0
 GLOB DEC _oxygen = 100.0
 GLOB DEC _temperature = 100.0
 GLOB CONST INT _maxBagItems = 5

@@ -296,7 +296,7 @@ void AnimationEditor::_updateFrameScreen()
 				}
 				else if (screen->getButton("speed")->isHovered())
 				{
-					_gui.getGlobalScreen()->addValueForm("transformationSpeed", "Transformation speed", speed * 100.0f, Vec2(0.0f, 0.0f), Vec2(0.2f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("transformationSpeed", "Transformation speed", speed * 1000.0f, Vec2(0.0f, 0.0f), Vec2(0.2f, 0.1f));
 				}
 				else if (screen->getButton("speedType")->isHovered())
 				{
@@ -385,7 +385,7 @@ void AnimationEditor::_updateFrameScreen()
 			// Update speed change
 			if (_gui.getGlobalScreen()->checkValueForm("transformationSpeed", speed, { }))
 			{
-				speed /= 100.0f;
+				speed /= 1000.0f;
 			}
 
 			// Showing speed type

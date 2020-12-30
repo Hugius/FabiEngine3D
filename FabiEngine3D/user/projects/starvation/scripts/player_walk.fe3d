@@ -1,4 +1,4 @@
-17 22
+22 5
 META script_type_update
 
 /// Temporary values
@@ -9,8 +9,8 @@ BOOL right = fe3d:input_is_key_down("KEY_D")
 BOOL shift = fe3d:input_is_key_down("KEY_LSHIFT")
 EDIT _isWalking = (up IS <true> OR down IS <true> OR left IS <true> OR right IS <true>)
 DEC accSpeed = 0.0001
-DEC minSpeed = -0.025
-DEC maxSpeed = 0.025
+DEC minSpeed = -0.0025
+DEC maxSpeed = 0.0025
 
 /// Running speed
 IF shift IS <true> AND up IS <true>:
@@ -27,13 +27,13 @@ ELSE:
         INCR _stamina 0.1
 
 /// WASD movement
-IF left IS <true>:
+IF left IS <true> AND _movingAcc.x MORE minSpeed:
     DECR _movingAcc.x accSpeed
-IF right IS <true>:
+IF right IS <true> AND _movingAcc.x LESS maxSpeed:
     INCR _movingAcc.x accSpeed
-IF up IS <true>:
+IF up IS <true> AND _movingAcc.z LESS maxSpeed:
     INCR _movingAcc.z accSpeed
-IF down IS <true>:
+IF down IS <true> AND _movingAcc.z MORE minSpeed:
     DECR _movingAcc.z accSpeed
 
 /// Update acceleration
@@ -48,9 +48,8 @@ IF down IS <false> AND _movingAcc.z LESS 0.0:
 
 /// Move camera
 INCR _movingSpeed _movingAcc
+MUL _movingAcc 0.99
 MUL _movingSpeed 0.9
-EDIT _movingSpeed.x = math:clamp(_movingSpeed.x, minSpeed, maxSpeed)
-EDIT _movingSpeed.z = math:clamp(_movingSpeed.z, minSpeed, maxSpeed)
 
 /// Only if no tool or pickup animations are playing
 IF _toolPlaying IS <false> AND _pickupPlaying IS <false>:

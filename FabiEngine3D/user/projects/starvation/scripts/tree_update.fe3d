@@ -1,4 +1,4 @@
-55 4
+40 26
 META script_type_update
 
 /// Check if cutting animation finished
@@ -6,18 +6,17 @@ STR hoveredID = ""
 IF _axePlaying IS <false> AND _wasAxePlaying IS <true> AND _fallingTreeID IS "":
     VEC3 camPos = fe3d:camera_get_position()
     STR checkID = ""
-    INT number = 1
+    LIST cuttables = {"tree2","tree6","tree7"}
+    INT size = 3
+    INT index = 0
     /// Check if aiming at tree & extract number
     LOOP:
-        CAST number STR
-        EDIT checkID = misc:concat_strings("tree", number)
-        CAST number INT
-        EDIT hoveredID = fe3d:raycast_into_model(checkID, "trunk", <true>)
+        IF index IS size:
+            BREAK
+        EDIT hoveredID = fe3d:raycast_into_model(cuttables[index], "trunk", <true>)
         IF hoveredID NOT "":
             BREAK
-        IF number IS 6:
-            BREAK
-        INCR number 1
+        INCR index 1
     /// Start treefalling
     IF hoveredID NOT "" AND _fallingTreeID IS "":
         VEC3 treePos = fe3d:model_get_position(hoveredID)
@@ -39,8 +38,9 @@ IF _fallingTreeID NOT "":
         PUSH _logIDs logID
         EDIT _fallingLogID = logID
         EDIT _fallingLogTargetHeight = treePos.y
-        STR treeIndex = misc:string_part(_fallingTreeID, 4, 1)
-        STR logModelID = misc:concat_strings("log", treeIndex)
+        INT logNumber = misc:get_random_integer(1, 4)
+        CAST logNumber STR
+        STR logModelID = misc:concat_strings("log", logNumber)
         EDIT _fallingTreeID = ""
         INCR treePos.y 5.0
         fe3d:model_place(logID, logModelID, treePos.x, treePos.y, treePos.z)

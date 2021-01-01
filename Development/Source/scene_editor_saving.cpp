@@ -510,7 +510,7 @@ void SceneEditor::saveSceneToFile()
 			file << "LOD_DISTANCE " << _fe3d.gameEntity_getLevelOfDetailDistance() << std::endl;
 
 			// Editor camera speed
-			file << "EDITOR_SPEED " << _customCameraSpeed << std::endl;
+			file << "EDITOR_SPEED " << _customEditorSpeed << std::endl;
 
 			// Editor camera position
 			Vec3 position = _fe3d.camera_getPosition();

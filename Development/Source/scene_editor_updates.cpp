@@ -265,31 +265,31 @@ void SceneEditor::_updateCamera()
 				// X movement
 				if (_fe3d.input_getKeyDown(InputType::KEY_A))
 				{
-					_fe3d.camera_translateFollowX(-_customCameraSpeed / 100.0f);
+					_fe3d.camera_translateFollowX(-_customEditorSpeed / 100.0f);
 				}
 				else if (_fe3d.input_getKeyDown(InputType::KEY_D))
 				{
-					_fe3d.camera_translateFollowX(_customCameraSpeed / 100.0f);
+					_fe3d.camera_translateFollowX(_customEditorSpeed / 100.0f);
 				}
 
 				// Y movement
 				if (_fe3d.input_getKeyDown(InputType::KEY_SPACE))
 				{
-					_fe3d.camera_translate(Vec3(0.0f, _customCameraSpeed / 50.0f, 0.0f));
+					_fe3d.camera_translate(Vec3(0.0f, _customEditorSpeed / 50.0f, 0.0f));
 				}
 				else if (_fe3d.input_getKeyDown(InputType::KEY_LSHIFT))
 				{
-					_fe3d.camera_translate(Vec3(0.0f, -(_customCameraSpeed / 50.0f), 0.0f));
+					_fe3d.camera_translate(Vec3(0.0f, -(_customEditorSpeed / 50.0f), 0.0f));
 				}
 
 				// Z movement
 				if (_fe3d.input_getKeyDown(InputType::KEY_W))
 				{
-					_fe3d.camera_translateFollowZ(_customCameraSpeed / 100.0f);
+					_fe3d.camera_translateFollowZ(_customEditorSpeed / 100.0f);
 				}
 				else if (_fe3d.input_getKeyDown(InputType::KEY_S))
 				{
-					_fe3d.camera_translateFollowZ(-_customCameraSpeed / 100.0f);
+					_fe3d.camera_translateFollowZ(-_customEditorSpeed / 100.0f);
 				}
 			}
 		}

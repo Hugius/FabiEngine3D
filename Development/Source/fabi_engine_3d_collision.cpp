@@ -499,29 +499,25 @@ const string FabiEngine3D::collision_checkCameraWithEntities(const string& ID)
 	return "";
 }
 
-Direction FabiEngine3D::collision_checkCameraWithEntityDirection(const string& ID)
+bool FabiEngine3D::collision_checkCameraWithEntityDirection(const string& ID, Direction direction)
 {
-	// Calculate direction
-	auto direction = _core->_aabbEntityManager.getEntity(ID)->getCollisionDirection();
-
-	// Return direction
-	return direction;
+	return (direction == _core->_aabbEntityManager.getEntity(ID)->getCollisionDirection());
 }
 
-Direction FabiEngine3D::collision_checkCameraWithAnyDirection()
+bool FabiEngine3D::collision_checkCameraWithAnyDirection(Direction direction)
 {
 	for (auto [keyID, entity] : _core->_aabbEntityManager.getEntities()) // Loop over AABB entities
 	{
-		if (entity->getCollisionDirection() != Direction::NONE)
+		if (direction == entity->getCollisionDirection())
 		{
-			return entity->getCollisionDirection();
+			return true;
 		}
 	}
 
-	return Direction::NONE;
+	return false;
 }
 
-Direction FabiEngine3D::collision_checkCameraWithEntitiesDirection(const string& ID)
+bool FabiEngine3D::collision_checkCameraWithEntitiesDirection(const string& ID, Direction direction)
 {
 	for (auto [keyID, entity] : _core->_aabbEntityManager.getEntities()) // Loop over AABB entities
 	{
@@ -530,17 +526,15 @@ Direction FabiEngine3D::collision_checkCameraWithEntitiesDirection(const string&
 			auto subString = entity->getID().substr(0, ID.size());
 			if (subString == ID) // If entity matches ID
 			{
-				auto direction = entity->getCollisionDirection(); // Calculate direction
-
 				// Return direction if collides
-				if (direction != Direction::NONE)
+				if (direction == entity->getCollisionDirection())
 				{
-					return direction;
+					return true;
 				}
 			}
 		}
 	}
 
 	// No collision
-	return Direction::NONE;
+	return false;
 }

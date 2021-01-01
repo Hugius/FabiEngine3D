@@ -156,6 +156,14 @@ bool ScriptInterpreter::_executeFe3dPhysicsFunction(const string& functionName, 
 		// Validate arguments
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
+			// Validate direction
+			if (arguments[2].getString() != "X" && arguments[2].getString() != "Y" && 
+				arguments[2].getString() != "Z" && arguments[2].getString() != "")
+			{
+				_throwScriptError("Invalid direction argument!");
+				return true;
+			}
+
 			string result = "";
 
 			// Find aabbEntity
@@ -167,11 +175,13 @@ bool ScriptInterpreter::_executeFe3dPhysicsFunction(const string& functionName, 
 			{
 				// Check direction
 				string searchID = arguments[0].getString() + (!arguments[1].getString().empty() ? ("_" + arguments[1].getString()) : "");
-				auto direction = _fe3d.collision_checkCameraWithEntityDirection(foundAabbID);
-				if ((direction == Direction::X && arguments[2].getString() == "X") ||
-					(direction == Direction::Y && arguments[2].getString() == "Y") ||
-					(direction == Direction::Z && arguments[2].getString() == "Z") ||
-					(direction != Direction::NONE && arguments[2].getString().empty()))
+				auto directionX = _fe3d.collision_checkCameraWithEntityDirection(foundAabbID, Direction::X);
+				auto directionY = _fe3d.collision_checkCameraWithEntityDirection(foundAabbID, Direction::Y);
+				auto directionZ = _fe3d.collision_checkCameraWithEntityDirection(foundAabbID, Direction::Z);
+				if ((directionX && arguments[2].getString() == "X") ||
+					(directionY && arguments[2].getString() == "Y") ||
+					(directionZ && arguments[2].getString() == "Z") ||
+					((directionX || directionY || directionZ) && arguments[2].getString().empty()))
 				{
 					result = _fe3d.aabbEntity_getParentID(foundAabbID);
 				}
@@ -188,6 +198,14 @@ bool ScriptInterpreter::_executeFe3dPhysicsFunction(const string& functionName, 
 		// Validate arguments
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
+			// Validate direction
+			if (arguments[0].getString() != "X" && arguments[0].getString() != "Y" &&
+				arguments[0].getString() != "Z" && arguments[0].getString() != "")
+			{
+				_throwScriptError("Invalid direction argument!");
+				return true;
+			}
+
 			string result = "";
 
 			// Find aabbEntity
@@ -197,11 +215,13 @@ bool ScriptInterpreter::_executeFe3dPhysicsFunction(const string& functionName, 
 			if (!foundAabbID.empty() && (_fe3d.aabbEntity_getParentType(foundAabbID) == AabbParentType::GAME_ENTITY))
 			{
 				// Check direction
-				auto direction = _fe3d.collision_checkCameraWithEntityDirection(foundAabbID);
-				if ((direction == Direction::X && arguments[0].getString() == "X") ||
-					(direction == Direction::Y && arguments[0].getString() == "Y") ||
-					(direction == Direction::Z && arguments[0].getString() == "Z") ||
-					(direction != Direction::NONE && arguments[0].getString().empty()))
+				auto directionX = _fe3d.collision_checkCameraWithAnyDirection(Direction::X);
+				auto directionY = _fe3d.collision_checkCameraWithAnyDirection(Direction::Y);
+				auto directionZ = _fe3d.collision_checkCameraWithAnyDirection(Direction::Z);
+				if ((directionX && arguments[0].getString() == "X") ||
+					(directionY && arguments[0].getString() == "Y") ||
+					(directionZ && arguments[0].getString() == "Z") ||
+					((directionX || directionY || directionZ) && arguments[0].getString().empty()))
 				{
 					result = _fe3d.aabbEntity_getParentID(foundAabbID);
 				}
@@ -218,6 +238,14 @@ bool ScriptInterpreter::_executeFe3dPhysicsFunction(const string& functionName, 
 		// Validate arguments
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
+			// Validate direction
+			if (arguments[1].getString() != "X" && arguments[1].getString() != "Y" && 
+				arguments[1].getString() != "Z" && arguments[1].getString() != "")
+			{
+				_throwScriptError("Invalid direction argument!");
+				return true;
+			}
+
 			// Validate existing AABB ID
 			if (_validateFe3dAabbEntity(arguments[0].getString()))
 			{
@@ -230,11 +258,13 @@ bool ScriptInterpreter::_executeFe3dPhysicsFunction(const string& functionName, 
 					if (_fe3d.aabbEntity_getParentType(arguments[0].getString()) == AabbParentType::NONE)
 					{
 						// Check direction
-						auto direction = _fe3d.collision_checkCameraWithEntityDirection(arguments[0].getString());
-						if ((direction == Direction::X && arguments[1].getString() == "X") ||
-							(direction == Direction::Y && arguments[1].getString() == "Y") ||
-							(direction == Direction::Z && arguments[1].getString() == "Z") ||
-							(direction != Direction::NONE && arguments[1].getString().empty()))
+						auto directionX = _fe3d.collision_checkCameraWithEntityDirection(arguments[0].getString(), Direction::X);
+						auto directionY = _fe3d.collision_checkCameraWithEntityDirection(arguments[0].getString(), Direction::Y);
+						auto directionZ = _fe3d.collision_checkCameraWithEntityDirection(arguments[0].getString(), Direction::Z);
+						if ((directionX && arguments[1].getString() == "X") ||
+							(directionY && arguments[1].getString() == "Y") ||
+							(directionZ && arguments[1].getString() == "Z") ||
+							((directionX || directionY || directionZ) && arguments[1].getString().empty()))
 						{
 							result = true;
 						}
@@ -253,6 +283,14 @@ bool ScriptInterpreter::_executeFe3dPhysicsFunction(const string& functionName, 
 		// Validate arguments
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
+			// Validate direction
+			if (arguments[0].getString() != "X" && arguments[0].getString() != "Y" &&
+				arguments[0].getString() != "Z" && arguments[0].getString() != "")
+			{
+				_throwScriptError("Invalid direction argument!");
+				return true;
+			}
+
 			bool result = false;
 
 			// Find aabbEntity
@@ -262,11 +300,13 @@ bool ScriptInterpreter::_executeFe3dPhysicsFunction(const string& functionName, 
 			if (!foundAabbID.empty() && (_fe3d.aabbEntity_getParentType(foundAabbID) == AabbParentType::NONE))
 			{
 				// Check direction
-				auto direction = _fe3d.collision_checkCameraWithAnyDirection();
-				if ((direction == Direction::X && arguments[0].getString() == "X") ||
-					(direction == Direction::Y && arguments[0].getString() == "Y") ||
-					(direction == Direction::Z && arguments[0].getString() == "Z") ||
-					(direction != Direction::NONE && arguments[0].getString().empty()))
+				auto directionX = _fe3d.collision_checkCameraWithAnyDirection(Direction::X);
+				auto directionY = _fe3d.collision_checkCameraWithAnyDirection(Direction::Y);
+				auto directionZ = _fe3d.collision_checkCameraWithAnyDirection(Direction::Z);
+				if ((directionX && arguments[0].getString() == "X") ||
+					(directionY && arguments[0].getString() == "Y") ||
+					(directionZ && arguments[0].getString() == "Z") ||
+					((directionX || directionY || directionZ) && arguments[0].getString().empty()))
 				{
 					result = true;
 				}

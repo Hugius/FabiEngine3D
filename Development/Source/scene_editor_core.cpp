@@ -465,7 +465,7 @@ void SceneEditor::unload()
 	_isChoosingScene = false;
 	_isDeletingScene = false;
 	_transformation = TransformationType::TRANSLATION;
-	_customCameraSpeed = 1.0f;
+	_customEditorSpeed = 1.0f;
 
 	// Delete name textfields
 	_gui.getGlobalScreen()->deleteTextfield("selectedModelName");

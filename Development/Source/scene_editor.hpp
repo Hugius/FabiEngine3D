@@ -199,6 +199,5 @@ private:
 	bool _isChoosingScene = false;
 	bool _isDeletingScene = false;
 	TransformationType _transformation = TransformationType::TRANSLATION;
-	float _customCameraSpeed = 1.0f;
-	const float _movementChangingSpeed = 0.1f;
+	float _customEditorSpeed = 1.0f;
 };

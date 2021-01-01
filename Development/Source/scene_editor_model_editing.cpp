@@ -198,22 +198,22 @@ void SceneEditor::_updateModelEditing()
 				// Apply new model position / rotation / size
 				if (_transformation == TransformationType::TRANSLATION)
 				{
-					_handleValueChanging("modelPropertiesMenu", "xPlus", "x", position.x, _movementChangingSpeed);
-					_handleValueChanging("modelPropertiesMenu", "xMinus", "x", position.x, -_movementChangingSpeed);
-					_handleValueChanging("modelPropertiesMenu", "yPlus", "y", position.y, _movementChangingSpeed);
-					_handleValueChanging("modelPropertiesMenu", "yMinus", "y", position.y, -_movementChangingSpeed);
-					_handleValueChanging("modelPropertiesMenu", "zPlus", "z", position.z, _movementChangingSpeed);
-					_handleValueChanging("modelPropertiesMenu", "zMinus", "z", position.z, -_movementChangingSpeed);
+					_handleValueChanging("modelPropertiesMenu", "xPlus", "x", position.x, _customEditorSpeed / 100.0f);
+					_handleValueChanging("modelPropertiesMenu", "xMinus", "x", position.x, -_customEditorSpeed / 100.0f);
+					_handleValueChanging("modelPropertiesMenu", "yPlus", "y", position.y, _customEditorSpeed / 100.0f);
+					_handleValueChanging("modelPropertiesMenu", "yMinus", "y", position.y, -_customEditorSpeed / 100.0f);
+					_handleValueChanging("modelPropertiesMenu", "zPlus", "z", position.z, _customEditorSpeed / 100.0f);
+					_handleValueChanging("modelPropertiesMenu", "zMinus", "z", position.z, -_customEditorSpeed / 100.0f);
 					_fe3d.gameEntity_setPosition(_activeModelID, position);
 				}
 				else if (_transformation == TransformationType::ROTATION)
 				{
-					_handleValueChanging("modelPropertiesMenu", "xPlus", "x", rotation.x, _movementChangingSpeed * 2.0f);
-					_handleValueChanging("modelPropertiesMenu", "xMinus", "x", rotation.x, -_movementChangingSpeed * 2.0f);
-					_handleValueChanging("modelPropertiesMenu", "yPlus", "y", rotation.y, _movementChangingSpeed * 2.0f);
-					_handleValueChanging("modelPropertiesMenu", "yMinus", "y", rotation.y, -_movementChangingSpeed * 2.0f);
-					_handleValueChanging("modelPropertiesMenu", "zPlus", "z", rotation.z, _movementChangingSpeed * 2.0f);
-					_handleValueChanging("modelPropertiesMenu", "zMinus", "z", rotation.z, -_movementChangingSpeed * 2.0f);
+					_handleValueChanging("modelPropertiesMenu", "xPlus", "x", rotation.x, _customEditorSpeed / 50.0f);
+					_handleValueChanging("modelPropertiesMenu", "xMinus", "x", rotation.x, -_customEditorSpeed / 50.0f);
+					_handleValueChanging("modelPropertiesMenu", "yPlus", "y", rotation.y, _customEditorSpeed / 50.0f);
+					_handleValueChanging("modelPropertiesMenu", "yMinus", "y", rotation.y, -_customEditorSpeed / 50.0f);
+					_handleValueChanging("modelPropertiesMenu", "zPlus", "z", rotation.z, _customEditorSpeed / 50.0f);
+					_handleValueChanging("modelPropertiesMenu", "zMinus", "z", rotation.z, -_customEditorSpeed / 50.0f);
 					rotation.x = std::fmodf(rotation.x, 360.0f);
 					rotation.y = std::fmodf(rotation.y, 360.0f);
 					rotation.z = std::fmodf(rotation.z, 360.0f);
@@ -224,12 +224,12 @@ void SceneEditor::_updateModelEditing()
 					// Model size
 					Vec3 oldSize = size;
 					float factor = 25.0f;
-					_handleValueChanging("modelPropertiesMenu", "xPlus", "x", size.x, _movementChangingSpeed, factor);
-					_handleValueChanging("modelPropertiesMenu", "xMinus", "x", size.x, -_movementChangingSpeed, factor);
-					_handleValueChanging("modelPropertiesMenu", "yPlus", "y", size.y, _movementChangingSpeed, factor);
-					_handleValueChanging("modelPropertiesMenu", "yMinus", "y", size.y, -_movementChangingSpeed, factor);
-					_handleValueChanging("modelPropertiesMenu", "zPlus", "z", size.z, _movementChangingSpeed, factor);
-					_handleValueChanging("modelPropertiesMenu", "zMinus", "z", size.z, -_movementChangingSpeed, factor);
+					_handleValueChanging("modelPropertiesMenu", "xPlus", "x", size.x, _customEditorSpeed / 100.0f, factor);
+					_handleValueChanging("modelPropertiesMenu", "xMinus", "x", size.x, -_customEditorSpeed / 100.0f, factor);
+					_handleValueChanging("modelPropertiesMenu", "yPlus", "y", size.y, _customEditorSpeed / 100.0f, factor);
+					_handleValueChanging("modelPropertiesMenu", "yMinus", "y", size.y, -_customEditorSpeed / 100.0f, factor);
+					_handleValueChanging("modelPropertiesMenu", "zPlus", "z", size.z, _customEditorSpeed / 100.0f, factor);
+					_handleValueChanging("modelPropertiesMenu", "zMinus", "z", size.z, -_customEditorSpeed / 100.0f, factor);
 					_fe3d.gameEntity_setSize(_activeModelID, size);
 				}
 			}

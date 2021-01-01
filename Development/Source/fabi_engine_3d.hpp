@@ -445,9 +445,9 @@ public:
 	bool		 collision_checkCameraWithEntity(const string& ID);
 	const string collision_checkCameraWithAny();
 	const string collision_checkCameraWithEntities(const string& ID);
-	Direction	 collision_checkCameraWithEntityDirection(const string& ID);
-	Direction	 collision_checkCameraWithAnyDirection();
-	Direction	 collision_checkCameraWithEntitiesDirection(const string& ID);
+	bool		 collision_checkCameraWithEntityDirection(const string& ID, Direction direction);
+	bool		 collision_checkCameraWithAnyDirection(Direction direction);
+	bool		 collision_checkCameraWithEntitiesDirection(const string& ID, Direction direction);
 	const string collision_checkEntityWithEntities(const string& selfID, const string& otherID);
 
 	// Light entity interface - setters

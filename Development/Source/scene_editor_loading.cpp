@@ -482,7 +482,7 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 			{
 				if (_isEditorLoaded)
 				{
-					iss >> _customCameraSpeed;
+					iss >> _customEditorSpeed;
 				}
 			}
 			else if (entityType == "EDITOR_POSITION")

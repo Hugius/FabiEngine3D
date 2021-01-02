@@ -211,9 +211,9 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 				valueIndexTwo = listIndexTwo;
 
 				// Check if list item value is valid
-				if (!(variableTwo->getValue(valueIndexOne).getType() == ScriptValueType::INTEGER) &&
-					!(variableTwo->getValue(valueIndexOne).getType() == ScriptValueType::DECIMAL) &&
-					!(variableTwo->getValue(valueIndexOne).getType() == ScriptValueType::VEC3))
+				if (!(variableTwo->getValue(valueIndexTwo).getType() == ScriptValueType::INTEGER) &&
+					!(variableTwo->getValue(valueIndexTwo).getType() == ScriptValueType::DECIMAL) &&
+					!(variableTwo->getValue(valueIndexTwo).getType() == ScriptValueType::VEC3))
 				{
 					_throwScriptError("arithmetic is only allowed with number values!");
 					return;
@@ -228,8 +228,8 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 		// Retrieve arithmetic value
 		auto value = isAccessingListTwo ? variableTwo->getValue(valueIndexTwo) : // List access
 			vec3PartsTwo != Ivec3(0) ? ScriptValue(_fe3d, ScriptValueType::DECIMAL, variableTwo->getValue().getVec3().f[vec3Index]) : // Vec3 part
-			_isLocalVariableExisting(valueString) ? _getLocalVariable(valueString).getValue(valueIndexOne) : // Local variable
-			_isGlobalVariableExisting(valueString) ? _getGlobalVariable(valueString).getValue(valueIndexOne) : // Global variable
+			_isLocalVariableExisting(valueString) ? _getLocalVariable(valueString).getValue(valueIndexTwo) : // Local variable
+			_isGlobalVariableExisting(valueString) ? _getGlobalVariable(valueString).getValue(valueIndexTwo) : // Global variable
 			_isIntegerValue(valueString) ? ScriptValue(_fe3d, ScriptValueType::INTEGER, stoi(valueString)) : // Integer
 			_isDecimalValue(valueString) ? ScriptValue(_fe3d, ScriptValueType::DECIMAL, stof(valueString)) : // Decimal
 			_isVec3Value(valueString) ? ScriptValue(_fe3d, ScriptValueType::VEC3, _extractVec3FromString(valueString)) : // Vec3

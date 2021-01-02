@@ -1,11 +1,14 @@
-14 30
+25 25
 META script_type_update
 
 /// Check if player is looking at a plant
+INT seedAmount = 9
 STR hoveredID = fe3d:raycast_into_model("bush", "", <true>)
 IF hoveredID IS "":
+    EDIT seedAmount = 6
     EDIT hoveredID = fe3d:raycast_into_model("plant", "", <true>)
 IF hoveredID IS "":
+    EDIT seedAmount = 3
     EDIT hoveredID = fe3d:raycast_into_model("mushroom", "", <true>)
 
 /// Plant picking updates
@@ -13,6 +16,12 @@ IF hoveredID NOT "" AND _wasPickupPlaying IS <true> AND _pickupPlaying IS <false
     VEC3 camPos = fe3d:camera_get_position()
     VEC3 plantPos = fe3d:model_get_position(hoveredID)
     DEC distance = math:distance(plantPos, camPos)
-    IF distance LESS _maxReach AND _bag[0] LESS 5:
+    DEC newWeight = _totalBagWeight
+    DEC seedsWeight = _bagWeights[3]
+    CAST seedAmount DEC
+    MUL seedsWeight seedAmount
+    CAST seedAmount INT
+    INCR newWeight seedsWeight
+    IF distance LESS _maxReach AND newWeight LESS _maxBagWeight:
         fe3d:model_delete(hoveredID)
-        INCR _bag[3] 1
+        INCR _bag[3] seedAmount

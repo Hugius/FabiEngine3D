@@ -1,4 +1,4 @@
-10 34
+37 8
 META script_type_update
 
 /// Check if mining animation finished
@@ -35,6 +35,8 @@ IF hoveredID NOT "" AND _wasPickupPlaying IS <true> AND _pickupPlaying IS <false
     VEC3 camPos = fe3d:camera_get_position()
     VEC3 stonesPos = fe3d:model_get_position(hoveredID)
     DEC distance = math:distance(stonesPos, camPos)
-    IF distance LESS _maxReach AND _bag[1] LESS 5:
+    DEC newWeight = _totalBagWeight
+    INCR newWeight _bagWeights[1]
+    IF distance LESS _maxReach AND newWeight LESS _maxBagWeight:
         fe3d:model_delete(hoveredID)
         INCR _bag[1] 1

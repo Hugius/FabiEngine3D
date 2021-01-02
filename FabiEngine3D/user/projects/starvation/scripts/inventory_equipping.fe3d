@@ -1,0 +1,76 @@
+67 0
+META script_type_update
+
+/// Check if any tool animation is playing
+BOOL isAnimPlaying = <false>
+IF _swordPlaying IS <true> OR _pickaxePlaying IS <true> OR _axePlaying IS <true>:
+    EDIT isAnimPlaying = <true>
+IF _shovelPlaying IS <true> OR _hoePlaying IS <true> OR _scythePlaying IS <true>:
+    EDIT isAnimPlaying = <true>
+IF _hammerPlaying IS <true> OR _fishrodPlaying IS <true>:
+    EDIT isAnimPlaying = <true>
+
+/// Unselect equipped tool
+IF _inventory[_equipIndex] NOT "":
+    fe3d:model_set_visible(_inventory[_equipIndex], <false>)
+
+/// Unselect equipped slot
+INT oldIndex = _lastEquipIndex
+INCR oldIndex 1
+CAST oldIndex STR
+STR oldSlotID = misc:concat_strings("slot", oldIndex)
+fe3d:image_set_color(oldSlotID, 1.0, 1.0, 1.0)
+
+/// Update tool selection - scrolling
+IF isAnimPlaying IS <false> AND _isInvOpen IS <true>:
+    INT scroll = fe3d:input_get_mousewheel_direction()
+    IF scroll LESS 0:
+        IF _equipIndex IS 8:
+            EDIT _equipIndex = 0
+        ELSE:
+            INCR _equipIndex 1
+    ELIF scroll MORE 0:
+        IF _equipIndex IS 0:
+            EDIT _equipIndex = 8
+        ELSE:
+            DECR _equipIndex 1
+    /// Update tool selection - number keys
+    BOOL key1 = fe3d:input_is_key_pressed("KEY_1")
+    BOOL key2 = fe3d:input_is_key_pressed("KEY_2")
+    BOOL key3 = fe3d:input_is_key_pressed("KEY_3")
+    BOOL key4 = fe3d:input_is_key_pressed("KEY_4")
+    BOOL key5 = fe3d:input_is_key_pressed("KEY_5")
+    BOOL key6 = fe3d:input_is_key_pressed("KEY_6")
+    BOOL key7 = fe3d:input_is_key_pressed("KEY_7")
+    BOOL key8 = fe3d:input_is_key_pressed("KEY_8")
+    BOOL key9 = fe3d:input_is_key_pressed("KEY_9")
+    IF key1 IS <true>:
+        EDIT _equipIndex = 0
+    ELIF key2 IS <true>:
+        EDIT _equipIndex = 1
+    ELIF key3 IS <true>:
+        EDIT _equipIndex = 2
+    ELIF key4 IS <true>:
+        EDIT _equipIndex = 3
+    ELIF key5 IS <true>:
+        EDIT _equipIndex = 4
+    ELIF key6 IS <true>:
+        EDIT _equipIndex = 5
+    ELIF key7 IS <true>:
+        EDIT _equipIndex = 6
+    ELIF key8 IS <true>:
+        EDIT _equipIndex = 7
+    ELIF key9 IS <true>:
+        EDIT _equipIndex = 8
+
+/// Select equipped tool
+IF _inventory[_equipIndex] NOT "" AND _isInvOpen IS <true>:
+    fe3d:model_set_visible(_inventory[_equipIndex], <true>)
+
+/// Select equipped slot
+INT newIndex = _equipIndex
+INCR newIndex 1
+CAST newIndex STR
+STR newSlotID = misc:concat_strings("slot", newIndex)
+fe3d:image_set_color(newSlotID, 0.3, 0.5, 0.3)
+EDIT _lastEquipIndex = _equipIndex

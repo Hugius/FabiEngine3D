@@ -1,17 +1,24 @@
-13 16
+7 19
 META script_type_update
 META execution_entry
 
-EXEC hud_player
-EXEC hud_bag
-EXEC hud_inventory
-EXEC hud_selection
+EXEC bag_update
+
+/// Tools inventory
+EXEC inventory_equipping
+EXEC inventory_misc
+
+/// Player
+EXEC player_status
 EXEC player_jump
 EXEC player_animation
 EXEC player_walk
 EXEC player_bobbing
 EXEC player_intro
 EXEC player_misc
-EXEC tree_update
-EXEC stone_update
+
+/// Other
+EXEC cutting_update
+EXEC mining_update
+EXEC gathering_update
 EXEC misc_update

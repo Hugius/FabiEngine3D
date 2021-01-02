@@ -20,6 +20,7 @@ public:
 	void setLocalScaling(Vec3 val);
 	void setTranslation(Vec3 val);
 	void setScaling(Vec3 val);
+	void swapScaling(Direction direction);
 	void setParent(const string& ID, AabbParentType type);
 	void setCollisionDirection(const Direction& direction);
 	void setResponsive(bool val);
@@ -47,6 +48,7 @@ private:
 
 	AabbParentType _parentType = AabbParentType::NONE;
 	Direction _collisionDirection = Direction::NONE;
+	Direction _swapScaling = Direction::NONE;
 
 	bool _responsive = false;
 };

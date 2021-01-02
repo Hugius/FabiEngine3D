@@ -91,6 +91,24 @@ void AabbEntityManager::update(
 						// Update scaling (based on parent scaling)
 						entity->setScaling(entity->getLocalScaling() * parentEntity->getScaling());
 
+						// Update "rotation" (based on parent rotation)
+						if (parentEntity->getRotation().x == 90.0f || parentEntity->getRotation().x == 270.0f)
+						{
+							entity->swapScaling(Direction::X);
+						}
+						else if (parentEntity->getRotation().y == 90.0f || parentEntity->getRotation().y == 270.0f)
+						{
+							entity->swapScaling(Direction::Y);
+						}
+						else if (parentEntity->getRotation().z == 90.0f || parentEntity->getRotation().z == 270.0f)
+						{
+							entity->swapScaling(Direction::Z);
+						}
+						else
+						{
+							entity->swapScaling(Direction::NONE);
+						}
+
 						// Update translation (based on parent translation + scaling)
 						entity->setTranslation(parentEntity->getTranslation() + (entity->getLocalTranslation() * parentEntity->getScaling()));
 

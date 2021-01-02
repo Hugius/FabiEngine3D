@@ -1,0 +1,18 @@
+14 30
+META script_type_update
+
+/// Check if player is looking at a plant
+STR hoveredID = fe3d:raycast_into_model("bush", "", <true>)
+IF hoveredID IS "":
+    EDIT hoveredID = fe3d:raycast_into_model("plant", "", <true>)
+IF hoveredID IS "":
+    EDIT hoveredID = fe3d:raycast_into_model("mushroom", "", <true>)
+
+/// Plant picking updates
+IF hoveredID NOT "" AND _wasPickupPlaying IS <true> AND _pickupPlaying IS <false>:
+    VEC3 camPos = fe3d:camera_get_position()
+    VEC3 plantPos = fe3d:model_get_position(hoveredID)
+    DEC distance = math:distance(plantPos, camPos)
+    IF distance LESS _maxReach AND _bag[0] LESS 5:
+        fe3d:model_delete(hoveredID)
+        INCR _bag[3] 1

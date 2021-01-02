@@ -2,9 +2,32 @@
 
 void AabbEntity::updateModelMatrix()
 {
-	Matrix44 translationMatrix = Matrix44::createTranslation(_translation.x, _translation.y, _translation.z);
-	Matrix44 scalingMatrix = Matrix44::createScaling(_scaling.x, _scaling.y, _scaling.z);
+	// Temporary values
+	Matrix44 translationMatrix;
+	Matrix44 scalingMatrix;
 
+	// Translation
+	translationMatrix = Matrix44::createTranslation(_translation.x, _translation.y, _translation.z);
+
+	// Scaling - swap scaling directions if needed (parent entity rotation)
+	if (_swapScaling == Direction::X)
+	{
+		scalingMatrix = Matrix44::createScaling(_scaling.x, _scaling.z, _scaling.y);
+	}
+	else if (_swapScaling == Direction::Y)
+	{
+		scalingMatrix = Matrix44::createScaling(_scaling.z, _scaling.y, _scaling.x);
+	}
+	else if (_swapScaling == Direction::Z)
+	{
+		scalingMatrix = Matrix44::createScaling(_scaling.y, _scaling.x, _scaling.z);
+	}
+	else
+	{
+		scalingMatrix = Matrix44::createScaling(_scaling.x, _scaling.y, _scaling.z);
+	}
+
+	// Final matrix
 	_modelMatrix = translationMatrix * scalingMatrix;
 }
 
@@ -16,6 +39,11 @@ void AabbEntity::setTranslation(Vec3 val)
 void AabbEntity::setScaling(Vec3 val)
 {
 	_scaling = val;
+}
+
+void AabbEntity::swapScaling(Direction direction)
+{
+	_swapScaling = direction;
 }
 
 void AabbEntity::setParent(const string& ID, AabbParentType type)
@@ -76,7 +104,22 @@ const Vec3 AabbEntity::getTranslation() const
 
 const Vec3 AabbEntity::getScaling() const
 {
-	return _scaling;
+	if (_swapScaling == Direction::X)
+	{
+		return Vec3(_scaling.x, _scaling.z, _scaling.y);
+	}
+	else if (_swapScaling == Direction::Y)
+	{
+		return Vec3(_scaling.z, _scaling.y, _scaling.x);
+	}
+	else if (_swapScaling == Direction::Z)
+	{
+		return Vec3(_scaling.y, _scaling.x, _scaling.z);
+	}
+	else
+	{
+		return Vec3(_scaling.x, _scaling.y, _scaling.z);
+	}
 }
 
 const string& AabbEntity::getParentID() const

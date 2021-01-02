@@ -1,12 +1,12 @@
-10 14
+5 13
 META script_type_init
 META execution_entry
 
 fe3d:scene_load("scene")
 
-EXEC hud_init_ui
-EXEC hud_init_misc
+EXEC bag_init
+EXEC inventory_init
 EXEC player_init
-EXEC tree_init
-EXEC stone_init
+EXEC cutting_init
+EXEC mining_init
 EXEC misc_init

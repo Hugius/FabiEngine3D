@@ -1,4 +1,4 @@
-26 53
+25 34
 META script_type_update
 
 /// Validate existence
@@ -12,7 +12,7 @@ IF _lastSelectedItemID NOT "":
     EDIT _lastSelectedItemID = ""
 
 /// Apply color tint if hovered
-LIST pickuppables = {"log", "stones", "axe", "pickaxe"}
+LIST pickuppables = {"log","stones","axe","pickaxe","bush","plant","mushroom"}
 INT size = misc:get_list_size("pickuppables")
 INT index = 0
 STR hoveredID = ""
@@ -24,7 +24,7 @@ LOOP:
     IF hoveredID NOT "" AND _isInvOpen IS <false>:
         VEC3 stonePos = fe3d:model_get_position(hoveredID)
         DEC distance = math:distance(stonePos, camPos)
-        IF distance LESS 5.0:
+        IF distance LESS _maxReach:
             fe3d:model_set_color(hoveredID, 0.25, 1.0, 0.25)
             EDIT _lastSelectedItemID = hoveredID
             BREAK

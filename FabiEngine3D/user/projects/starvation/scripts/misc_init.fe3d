@@ -1,5 +1,10 @@
-3 47
+4 30
 META script_type_init
 
+/// Globals
 GLOB STR _lastSelectedItemID = ""
+GLOB CONST DEC _maxReach = 5.0
 fe3d:model_place("aurelius", "male1", 6.0, 6.35, 136.0)
+
+/// Crosshair
+fe3d:image_place("crosshair", "crosshair.png", 0.0, 0.0, 0.0, 0.0325, 0.05)

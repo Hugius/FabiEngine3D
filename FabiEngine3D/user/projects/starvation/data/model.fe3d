@@ -38,7 +38,22 @@
 @rock1 user\assets\models\stones\rock1.obj user\assets\textures\diffuse_maps\stones\rock1.png ? ? ? 1.5 1.5 1.5 0 1 0 0 1 1 1 0.75 1 1 1 1 ? 0 rock -0.3 0 0 6.2 5.2 7.2
 @male1 user\assets\models\characters\male1.obj ? ? ? ? 0.6 0.6 0.6 0 0 0 0 1 1 1 0.6 1 1 1 1 ? 0 male 0 0 0.2 2 5.5 1.9
 @house1 user\assets\models\buildings\house1.obj ? ? ? ? 5.5 5.5 5.5 0 1 0 0 1 1 1 1 1 1 1 1 ? 0 house 0 0 0 1.3 1.4 1.9
-@bridge user\assets\models\buildings\bridge.obj user\assets\textures\diffuse_maps\buildings\bridge.png ? ? user\assets\textures\normal_maps\buildings\bridge.png 1.5 1.5 1.5 0 1 0 0 1 1 1 0.8 1 1 1 1 ? 0 right -1.35 -7.45058e-09 0 0.45 1.2 13 bridge 0 0 0 3.15 0.18 13 left 1.35 0 0 0.44 1.2 13
-@gate user\assets\models\buildings\gate.obj ? ? ? ? 1.25 1.25 1.25 0 0 0 0 0 1 1 0.6 1 1 1 1 ? 0 tower_left -8.4 0 -0.1 5.5 19 6.9 tower_right 8.5 0 0 5.5 19.2 6.9 gate_left -3.8 0 -1.5 4 14 5 gate_right 4 0 -1.5 4.4 14 5
+@bridge user\assets\models\buildings\bridge.obj user\assets\textures\diffuse_maps\buildings\bridge.png ? ? user\assets\textures\normal_maps\buildings\bridge.png 1.5 1.5 1.5 0 1 0 0 1 1 1 0.8 1 1 1 1 ? 0 right -1.35 -7.45058e-09 0 0.45 1.2 13 left 1.35 0 0 0.44 1.2 13 bridge 0 0 0 3.15 0.18 13
+@gate user\assets\models\buildings\gate.obj ? ? ? ? 1.25 1.25 1.25 0 0 0 0 0 1 1 0.6 1 1 1 1 ? 0 gate_right 4 0 -1.5 4.4 14 5 tower_right 8.5 0 0 5.5 19.2 6.9 tower_left -8.4 0 -0.1 5.5 19 6.9 gate_left -3.8 0 -1.5 4 14 5
 @wall user\assets\models\buildings\wall.obj ? ? ? ? 1.25 1.25 1.25 0 0 0 0 0 1 1 0.6 1 1 1 1 ? 0 wall 0 0 -0.5 21.3 14 2.8
 @tower1 user\assets\models\buildings\tower1.obj ? ? ? ? 1 1 1 0 1 0 0 0 1 1 0.6 1 1 1 1 ? 0 tower 0 0 0 9.1 34 9
+@windmill user\assets\models\buildings\windmill.obj ? ? ? ? 5 5 5 0 1 0 0 1 1 1 0.6 1 1 1 1 ? 0 tower 0 0 0 0.0999999 0.0499999 0.0599999 windmill 0 0 -0.03 1.9 3.6 1.9
+@well user\assets\models\buildings\well.obj user\assets\textures\diffuse_maps\buildings\well.png ? ? user\assets\textures\normal_maps\buildings\well.png 3.25 3.25 3.25 0 1 0 0 0 1 1 1 1 1 1 1 ? 0 well 0.03 0 -0.01 1.19 1.61 1.34
+@barn user\assets\models\buildings\barn.obj ? ? ? ? 1.1 1.1 1.1 0 1 0 0 1 1 1 0.75 1 1 1 1 ? 0 barn 0.1 0 0.1 14 13.3 10.9
+@wagon user\assets\models\misc\wagon.obj user\assets\textures\diffuse_maps\misc\wagon.png ? ? ? 1.75 1.75 1.75 0 1 0 0 1 1 1 1 1 1 1 1 ? 0 wagon 0 0 -0.7 1.7 1.32 3.2
+@barrel user\assets\models\misc\barrel.obj user\assets\textures\diffuse_maps\misc\barrel.png ? ? user\assets\textures\normal_maps\misc\barrel.png 2 2 2 0 1 0 0 1 1 1 0.75 1 1 1 1 ? 0 barrel 0 0 0 0.76 0.92 0.78
+@statue1 user\assets\models\misc\statue1.obj user\assets\textures\diffuse_maps\misc\statue1.png ? user\assets\textures\reflection_maps\misc\statue1.png user\assets\textures\normal_maps\misc\statue1.png 1 1 1 0 0 0 0 1 1 1 0.5 1 1 1 1 ? 0 statue 0 0 0 2.4 5.8 2.8
+@crate1 user\assets\models\misc\crate1.obj user\assets\textures\diffuse_maps\misc\crate1.png ? ? user\assets\textures\normal_maps\misc\crate1.png 2 2 2 0 1 0 0 1 1 1 0.5 1 1 1 1 ? 0 crate 0 0 0 0.9 0.9 0.9
+@beehive user\assets\models\misc\beehive.obj user\assets\textures\diffuse_maps\misc\beehive.png ? ? ? 1.75 1.75 1.75 0 1 0 0 1 1 1 0.75 1 1 1 1 ? 0 beehive -0.05 0 -0.05 2.4 2 2.1
+@tower2 user\assets\models\buildings\tower2.obj user\assets\textures\diffuse_maps\buildings\tower2.png ? ? user\assets\textures\normal_maps\buildings\tower2.png 3.5 3.5 3.5 0 1 0 0 1 1 1 0.6 1 1 1 1 ? 0 tower 0 0 0 2.25 7.75001 2.25
+@tower3 user\assets\models\buildings\tower3.obj user\assets\textures\diffuse_maps\buildings\tower3.png ? user\assets\textures\reflection_maps\buildings\tower3.png ? 1.5 1.5 1.5 0 1 0 0 1 1 1 0.75 1 1 1 1 ? 0 tower -0.1 0 -0.1 2.3 7.89999 2.4
+@soil user\assets\models\misc\plane.obj user\assets\textures\diffuse_maps\misc\soil.png ? ? user\assets\textures\normal_maps\misc\soil.png 10 10 10 0 1 0 0 1 1 1 0.75 1 1 1 5 ? 0
+@corn user\assets\models\misc\corn.obj user\assets\textures\diffuse_maps\misc\corn.png ? ? ? 2.25 2.25 2.25 0 1 0 0 1 1 1 0.75 1 1 1 1 ? 0
+@logbench user\assets\models\misc\logbench.obj user\assets\textures\diffuse_maps\misc\logbench.png ? ? user\assets\textures\normal_maps\misc\logbench.png 1 1 1 0 1 0 0 1 1 1 0.5 1 1 1 1 ? 0 logbench 0.1 0 0.1 2.6 2.2 2.5
+@timber user\assets\models\misc\timber.obj ? ? ? ? 1.75 1.75 1.75 0 0 0 0 1 1 1 0.5 1 1 1 1 ? 0 timber 0 0 0 5.6 0.95 0.9
+@portcullis user\assets\models\misc\portcullis.obj user\assets\textures\diffuse_maps\misc\metal.png ? ? ? 1.25 1.25 1.25 0 1 0 0 1 1 1 1 1 1 1 1 ? 0 portcullis 0 0 0 0.4 4 3

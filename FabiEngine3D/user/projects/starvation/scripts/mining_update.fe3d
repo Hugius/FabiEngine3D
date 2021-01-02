@@ -1,0 +1,40 @@
+10 34
+META script_type_update
+
+/// Check if mining animation finished
+STR hoveredID = ""
+IF _pickaxePlaying IS <false> AND _wasPickaxePlaying IS <true>:
+    VEC3 camPos = fe3d:camera_get_position()
+    EDIT hoveredID = fe3d:raycast_into_model("stone", "", <true>)
+    IF hoveredID NOT "":
+        VEC3 stonePos = fe3d:model_get_position(hoveredID)
+        DEC distance = math:distance(stonePos, camPos)
+        IF distance LESS _maxReach:
+            fe3d:model_delete(hoveredID)
+            INT stonesID = misc:get_unique_integer(0, 1000)
+            CAST stonesID STR
+            EDIT stonesID = misc:concat_strings("stones", stonesID)
+            PUSH _stonesIDs stonesID
+            EDIT _fallingStonesID = stonesID
+            EDIT _fallingStonesTargetHeight = stonePos.y
+            VEC3 sPos = stonePos
+            INCR sPos.y 5.0
+            fe3d:model_place(stonesID, "stones", sPos.x, sPos.y, sPos.z)
+
+/// Stones falling updates
+IF _fallingStonesID NOT "":
+    VEC3 currentPos = fe3d:model_get_position(_fallingStonesID)
+    IF currentPos.y MORE _fallingStonesTargetHeight:
+        fe3d:model_move(_fallingStonesID, 0.0, -0.1, 0.0)
+    ELSE:
+        EDIT _fallingStonesID = ""
+
+/// Stones picking updates
+EDIT hoveredID = fe3d:raycast_into_model("stones", "", <true>)
+IF hoveredID NOT "" AND _wasPickupPlaying IS <true> AND _pickupPlaying IS <false>:
+    VEC3 camPos = fe3d:camera_get_position()
+    VEC3 stonesPos = fe3d:model_get_position(hoveredID)
+    DEC distance = math:distance(stonesPos, camPos)
+    IF distance LESS _maxReach AND _bag[1] LESS 5:
+        fe3d:model_delete(hoveredID)
+        INCR _bag[1] 1

@@ -218,19 +218,29 @@ void ModelEditor::_updateModelEditingAabb()
 			float scrollingDirection = float(_fe3d.input_getMouseWheelY());
 			Vec3 newSize = _fe3d.aabbEntity_getSize(_currentModelID + "_" + _currentAabbID);
 
-			switch (_transformationDirection)
+			// Check if able to scroll
+			if (!_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isCursorInsideViewport())
 			{
-				case Direction::X:
-					newSize.x += (_aabbTransformationSpeed * scrollingDirection);
-					break;
+				switch (_transformationDirection)
+				{
+					case Direction::X:
+					{
+						newSize.x += (_aabbTransformationSpeed * scrollingDirection);
+						break;
+					}
 
-				case Direction::Y:
-					newSize.y += (_aabbTransformationSpeed * scrollingDirection);
-					break;
+					case Direction::Y:
+					{
+						newSize.y += (_aabbTransformationSpeed * scrollingDirection);
+						break;
+					}
 
-				case Direction::Z:
-					newSize.z += (_aabbTransformationSpeed * scrollingDirection);
-					break;
+					case Direction::Z:
+					{
+						newSize.z += (_aabbTransformationSpeed * scrollingDirection);
+						break;
+					}
+				}
 			}
 
 			// Apply new size

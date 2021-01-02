@@ -53,19 +53,29 @@ void ModelEditor::_updateModelEditingSize()
 			float scrollSpeed = float(_fe3d.input_getMouseWheelY()) * 0.05f;
 			Vec3 newSize = _fe3d.gameEntity_getSize(_currentModelID);
 
-			switch (_transformationDirection)
+			// Check if able to scroll
+			if (!_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isCursorInsideViewport())
 			{
-				case Direction::X:
-					newSize.x *= (1.0f + scrollSpeed);
-					break;
+				switch (_transformationDirection)
+				{
+					case Direction::X:
+					{
+						newSize.x *= (1.0f + scrollSpeed);
+						break;
+					}
 
-				case Direction::Y:
-					newSize.y *= (1.0f + scrollSpeed);
-					break;
+					case Direction::Y:
+					{
+						newSize.y *= (1.0f + scrollSpeed);
+						break;
+					}
 
-				case Direction::Z:
-					newSize.z *= (1.0f + scrollSpeed);
-					break;
+					case Direction::Z:
+					{
+						newSize.z *= (1.0f + scrollSpeed);
+						break;
+					}
+				}
 			}
 
 			// Apply new size

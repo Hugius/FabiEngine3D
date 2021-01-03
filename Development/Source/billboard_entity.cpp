@@ -150,9 +150,14 @@ void BillboardEntity::setLightness(float value)
 	_lightness = value;
 }
 
-void BillboardEntity::setMaxY(float value)
+void BillboardEntity::setMinHeight(float value)
 {
-	_maxY = value;
+	_minHeight = value;
+}
+
+void BillboardEntity::setMaxHeight(float value)
+{
+	_maxHeight = value;
 }
 
 const Matrix44 & BillboardEntity::getModelMatrix() const
@@ -210,9 +215,14 @@ const float BillboardEntity::getLightness() const
 	return _lightness;
 }
 
-const float BillboardEntity::getMaxY() const
+const float BillboardEntity::getMinHeight() const
 {
-	return _maxY;
+	return _minHeight;
+}
+
+const float BillboardEntity::getMaxHeight() const
+{
+	return _maxHeight;
 }
 
 const int BillboardEntity::getPassedFrames() const

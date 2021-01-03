@@ -277,7 +277,7 @@ bool EngineGuiGlobalScreen::isAnswerFormConfirmed(const string& ID)
 	return false;
 }
 
-bool EngineGuiGlobalScreen::isAnswerFormCancelled(const string& ID)
+bool EngineGuiGlobalScreen::isAnswerFormDenied(const string& ID)
 {
 	if (checkButton("answer_form_no") && (ID == _answerFormID))
 	{

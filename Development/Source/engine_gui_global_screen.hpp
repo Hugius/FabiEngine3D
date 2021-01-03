@@ -72,7 +72,7 @@ public:
 	// Answer form
 	void addAnswerForm(const string& ID, string title, Vec2 position);
 	bool isAnswerFormConfirmed(const string& ID);
-	bool isAnswerFormCancelled(const string& ID);
+	bool isAnswerFormDenied(const string& ID);
 	void removeAnswerForm(const string& ID);
 	bool isAnswerFormExisting(const string& ID);
 

@@ -13,17 +13,22 @@ void DepthRenderer::bind()
 	// Texture uniforms
 	_shader.uploadUniform("u_sampler_diffuseMap", 0);
 
+	// Clipping (minY & maxY)
+	glEnable(GL_CLIP_DISTANCE0);
+	glEnable(GL_CLIP_DISTANCE1);
+	glEnable(GL_CLIP_DISTANCE2);
+
 	// Depth testing
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);
-	glEnable(GL_CLIP_DISTANCE1);
 }
 
 void DepthRenderer::unbind()
 {
+	glDisable(GL_CLIP_DISTANCE0);
 	glDisable(GL_CLIP_DISTANCE1);
+	glDisable(GL_CLIP_DISTANCE2);
 	glDisable(GL_DEPTH_TEST);
-
 	_shader.unbind();
 }
 
@@ -40,7 +45,9 @@ void DepthRenderer::render(const shared_ptr<TerrainEntity> entity)
 		_shader.uploadUniform("u_isAlphaObject", false);
 		_shader.uploadUniform("u_isInstanced", false);
 		_shader.uploadUniform("u_isBillboard", false);
-		_shader.uploadUniform("u_maxY", (std::numeric_limits<float>::max)());
+		_shader.uploadUniform("u_minHeight", -(std::numeric_limits<float>::max)());
+		_shader.uploadUniform("u_maxHeight", (std::numeric_limits<float>::max)());
+		_shader.uploadUniform("u_clippingY", -(std::numeric_limits<float>::max)());
 
 		// Bind
 		glBindVertexArray(entity->getOglBuffer()->getVAO());
@@ -67,6 +74,9 @@ void DepthRenderer::render(const shared_ptr<WaterEntity> entity)
 		_shader.uploadUniform("u_modelMatrix", modelMatrix);
 		_shader.uploadUniform("u_isAlphaObject", false);
 		_shader.uploadUniform("u_isInstanced", false);
+		_shader.uploadUniform("u_minHeight", -(std::numeric_limits<float>::max)());
+		_shader.uploadUniform("u_maxHeight", (std::numeric_limits<float>::max)());
+		_shader.uploadUniform("u_clippingY", -(std::numeric_limits<float>::max)());
 
 		// Bind
 		glBindVertexArray(entity->getSimplifiedOglBuffer()->getVAO());
@@ -79,7 +89,7 @@ void DepthRenderer::render(const shared_ptr<WaterEntity> entity)
 	}
 }
 
-void DepthRenderer::render(const shared_ptr<GameEntity> entity)
+void DepthRenderer::render(const shared_ptr<GameEntity> entity, float clippingY)
 {
 	if (entity->isVisible())
 	{
@@ -92,7 +102,9 @@ void DepthRenderer::render(const shared_ptr<GameEntity> entity)
 		// Shader uniforms
 		_shader.uploadUniform("u_isAlphaObject", entity->isTransparent());
 		_shader.uploadUniform("u_currentY", entity->getTranslation().y);
-		_shader.uploadUniform("u_maxY", entity->getMaxY());
+		_shader.uploadUniform("u_minHeight", entity->getMinHeight());
+		_shader.uploadUniform("u_maxHeight", entity->getMaxHeight());
+		_shader.uploadUniform("u_clippingY", clippingY);
 		_shader.uploadUniform("u_isBillboard", false);
 
 		// Check if entity is static to the camera view
@@ -150,7 +162,7 @@ void DepthRenderer::render(const shared_ptr<GameEntity> entity)
 	}
 }
 
-void DepthRenderer::render(const shared_ptr<BillboardEntity> entity)
+void DepthRenderer::render(const shared_ptr<BillboardEntity> entity, float clippingY)
 {
 	if (entity->isVisible())
 	{
@@ -173,7 +185,9 @@ void DepthRenderer::render(const shared_ptr<BillboardEntity> entity)
 		_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix());
 		_shader.uploadUniform("u_isAlphaObject", entity->isTransparent());
 		_shader.uploadUniform("u_currentY", entity->getTranslation().y);
-		_shader.uploadUniform("u_maxY", entity->getMaxY());
+		_shader.uploadUniform("u_minHeight", entity->getMinHeight());
+		_shader.uploadUniform("u_maxHeight", entity->getMaxHeight());
+		_shader.uploadUniform("u_clippingY", clippingY);
 		_shader.uploadUniform("u_uvAdder", uvAdder);
 		_shader.uploadUniform("u_uvMultiplier", uvMultiplier);
 		_shader.uploadUniform("u_isBillboard", true);
@@ -207,12 +221,15 @@ void DepthRenderer::render(const shared_ptr<BillboardEntity> entity)
 	}
 }
 
-void DepthRenderer::render(const shared_ptr<AabbEntity> entity)
+void DepthRenderer::render(const shared_ptr<AabbEntity> entity, float clippingY)
 {
 	if (entity->isVisible())
 	{
 		// Shader uniforms
 		_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix());
+		_shader.uploadUniform("u_minHeight", -(std::numeric_limits<float>::max)());
+		_shader.uploadUniform("u_maxHeight", (std::numeric_limits<float>::max)());
+		_shader.uploadUniform("u_clippingY", clippingY);
 
 		// VAO
 		glBindVertexArray(entity->getOglBuffer()->getVAO());

@@ -88,9 +88,14 @@ float FabiEngine3D::billboardEntity_getLightness(const string& ID)
 	return _core->_billboardEntityManager.getEntity(ID)->getLightness();
 }
 
+float FabiEngine3D::billboardEntity_getMinHeight(const string& ID)
+{
+	return _core->_billboardEntityManager.getEntity(ID)->getMinHeight();
+}
+
 float FabiEngine3D::billboardEntity_getMaxHeight(const string& ID)
 {
-	return _core->_billboardEntityManager.getEntity(ID)->getMaxY();
+	return _core->_billboardEntityManager.getEntity(ID)->getMaxHeight();
 }
 
 bool FabiEngine3D::billboardEntity_isExisting(const string& ID)
@@ -208,9 +213,14 @@ void FabiEngine3D::billboardEntity_setDepthMapIncluded(const string& ID, bool en
 	_core->_billboardEntityManager.getEntity(ID)->setDepthMapIncluded(enabled);
 }
 
+void FabiEngine3D::billboardEntity_setMinHeight(const string& ID, float height)
+{
+	_core->_billboardEntityManager.getEntity(ID)->setMinHeight(height);
+}
+
 void FabiEngine3D::billboardEntity_setMaxHeight(const string& ID, float height)
 {
-	_core->_billboardEntityManager.getEntity(ID)->setMaxY(height);
+	_core->_billboardEntityManager.getEntity(ID)->setMaxHeight(height);
 }
 
 void FabiEngine3D::billboardEntity_setLightness(const string& ID, float lightness)

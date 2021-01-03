@@ -156,7 +156,7 @@ void EnvironmentEditor::_updateSkyRemoval()
 				_skyRemovalEnabled = false;
 				_currentSkyID = "";
 			}
-			else if (_gui.getGlobalScreen()->isAnswerFormCancelled("removeSky"))
+			else if (_gui.getGlobalScreen()->isAnswerFormDenied("removeSky"))
 			{
 				_fe3d.skyEntity_select("@@engineBackground");
 				_skyRemovalEnabled = false;

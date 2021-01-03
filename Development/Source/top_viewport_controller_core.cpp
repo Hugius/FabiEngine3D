@@ -120,7 +120,7 @@ void TopViewportController::_updateProjectScreenManagement()
 			_saveCurrentProject();
 			_fe3d.engine_stop();
 		}
-		else if (_gui.getGlobalScreen()->isAnswerFormCancelled("exitEngine"))
+		else if (_gui.getGlobalScreen()->isAnswerFormDenied("exitEngine"))
 		{
 			_fe3d.engine_stop();
 		}

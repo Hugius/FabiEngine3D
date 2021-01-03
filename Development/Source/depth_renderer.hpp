@@ -17,7 +17,7 @@ public:
 	void unbind() override;
 	void render(const shared_ptr<TerrainEntity> entity);
 	void render(const shared_ptr<WaterEntity> entity);
-	void render(const shared_ptr<GameEntity> entity);
-	void render(const shared_ptr<BillboardEntity> entity);
-	void render(const shared_ptr<AabbEntity> entity);
+	void render(const shared_ptr<GameEntity> entity, float clippingY);
+	void render(const shared_ptr<BillboardEntity> entity, float clippingY);
+	void render(const shared_ptr<AabbEntity> entity, float clippingY);
 };

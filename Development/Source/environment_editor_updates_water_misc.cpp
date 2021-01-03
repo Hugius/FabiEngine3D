@@ -157,7 +157,7 @@ void EnvironmentEditor::_updateWaterRemoval()
 				_waterRemovalEnabled = false;
 				_currentWaterID = "";
 			}
-			else if (_gui.getGlobalScreen()->isAnswerFormCancelled("removeWater"))
+			else if (_gui.getGlobalScreen()->isAnswerFormDenied("removeWater"))
 			{
 				_fe3d.waterEntity_select("");
 				_waterRemovalEnabled = false;

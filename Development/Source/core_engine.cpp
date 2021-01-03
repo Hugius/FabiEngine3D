@@ -86,19 +86,37 @@ void CoreEngine::_setupApplication()
 
 		// Set window properties
 		_windowManager.setSize(Config::getInst().getWindowSize());
-		_windowManager.showWindow();
-		_windowManager.showBorder();
 		_windowManager.setOpacity(0.0f);
+		if (Config::getInst().isWindowFullscreen())
+		{
+			_windowManager.enableFullscreen();
+		}
+		if (Config::getInst().isWindowBorderless())
+		{
+			_windowManager.hideBorder();
+		}
+		else
+		{
+			_windowManager.showBorder();
+		}
 	}
-
-	// Only if in game preview
-	if (!Config::getInst().getSelectedGame().empty())
+	else // Game preview
 	{
 		// Set window properties
-		_windowManager.setSize(Config::getInst().getWindowSize());
 		_windowManager.showWindow();
-		_windowManager.showBorder();
-		_windowManager.enableVsync();
+		_windowManager.setSize(Config::getInst().getWindowSize());
+		if (Config::getInst().isWindowFullscreen())
+		{
+			_windowManager.enableFullscreen();
+		}
+		if (Config::getInst().isWindowBorderless())
+		{
+			_windowManager.hideBorder();
+		}
+		else
+		{
+			_windowManager.showBorder();
+		}
 
 		// Create logo
 		shared_ptr<GuiEntity> logo = make_shared<GuiEntity>("logo");
@@ -111,7 +129,8 @@ void CoreEngine::_setupApplication()
 		text->setDiffuseMap(_texLoader.getText("Created with", "engine\\fonts\\font.ttf"));
 
 		// Render logo (intro fade in)
-		for (float opaqueness = 0.0f; opaqueness < 1.3f; opaqueness += 0.0025f)
+		_windowManager.enableVsync();
+		for (float opaqueness = 0.0f; opaqueness < 1.3f; opaqueness += 0.005f)
 		{
 			logo->setColor(Vec3(opaqueness - 0.3f));
 			text->setColor(Vec3(opaqueness));
@@ -124,6 +143,7 @@ void CoreEngine::_setupApplication()
 		_fe3d.FE3D_CONTROLLER_INIT();
 
 		// Render logo (intro fade out)
+		_windowManager.enableVsync();
 		for (float opaqueness = 1.3f; opaqueness > 0.0f; opaqueness -= 0.005f)
 		{
 			logo->setColor(Vec3(opaqueness - 0.3f));
@@ -133,7 +153,7 @@ void CoreEngine::_setupApplication()
 			_windowManager.swapBackBuffer();
 		}
 
-		// Miscellaneous
+		// Disable vsync
 		_windowManager.disableVsync();
 	}
 

@@ -27,6 +27,9 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 			_fe3d.camera_load(90.0f, 0.1f, 10000.0f, Vec3(0.0f));
 		}
 
+		// Disable vsync
+		_fe3d.misc_setVsync(false);
+
 		// Default graphics
 		_fe3d.gfx_enableSpecularLighting();
 		_fe3d.gfx_enablePointLighting();

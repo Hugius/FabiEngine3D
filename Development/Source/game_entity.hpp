@@ -43,7 +43,8 @@ public:
 	void setLightness(float value);
 	void setSpecularFactor(float value);
 	void setSpecularIntensity(float value);
-	void setMaxY(float value);
+	void setMinHeight(float value);
+	void setMaxHeight(float value);
 	void setAlpha(float value);
 	void setUvRepeat(float value);
 	void setTransparent(bool value);
@@ -94,7 +95,8 @@ public:
 	const float getSpecularIntensity() const;
 	const float getAlpha() const;
 	const float getUvRepeat() const;
-	const float getMaxY() const;
+	const float getMinHeight() const;
+	const float getMaxHeight() const;
 	const bool isTransparent() const;
 	const bool isFaceCulled() const;
 	const bool isLightMapped() const;
@@ -152,7 +154,8 @@ private:
 	float _specularIntensity = 1.0f;
 	float _alpha = 1.0f;
 	float _uvRepeat = 1.0f;
-	float _maxY = (std::numeric_limits<float>::max)();
+	float _minHeight = -(std::numeric_limits<float>::max)();
+	float _maxHeight = (std::numeric_limits<float>::max)();
 
 	bool _isCameraStatic	 = false;
 	bool _isTransparent      = false;

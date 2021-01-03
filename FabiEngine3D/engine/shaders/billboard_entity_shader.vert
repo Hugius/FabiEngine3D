@@ -20,7 +20,8 @@ uniform vec2 u_uvMultiplier;
 
 // Float uniforms
 uniform float u_currentY;
-uniform float u_maxY;
+uniform float u_minHeight;
+uniform float u_maxHeight;
 
 // Boolean uniforms
 uniform bool u_isInstanced;
@@ -38,8 +39,8 @@ void main()
 
 	// GLSL variables
 	gl_Position = clipSpacePos;
-	gl_ClipDistance[0] = dot(worldSpacePos, u_clippingPlane);
-	gl_ClipDistance[1] = dot(worldSpacePos, vec4(0.0f, -1.0f, 0.0f, u_currentY + u_maxY));
+	gl_ClipDistance[0] = dot(worldSpacePos, vec4(0.0f,  1.0f, 0.0f, -(u_currentY + u_minHeight)));
+	gl_ClipDistance[1] = dot(worldSpacePos, vec4(0.0f, -1.0f, 0.0f, u_currentY + u_maxHeight));
 	
 	// Out variables
 	f_uv = vec2(u_uvAdder.x + (v_uv.x * u_uvMultiplier.x), u_uvAdder.y + (-v_uv.y * u_uvMultiplier.y));

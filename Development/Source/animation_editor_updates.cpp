@@ -56,7 +56,7 @@ void AnimationEditor::_updateManagementScreen()
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
 				unload();
 			}
-			else if (_gui.getGlobalScreen()->isAnswerFormCancelled("exitAnimationEditor"))
+			else if (_gui.getGlobalScreen()->isAnswerFormDenied("exitAnimationEditor"))
 			{
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
 				unload();
@@ -187,7 +187,7 @@ void AnimationEditor::_updateAnimationRemoval()
 				_gui.getGlobalScreen()->removeAnswerForm("removeAnimation");
 				_isRemovingAnimation = false;
 			}
-			else if (_gui.getGlobalScreen()->isAnswerFormCancelled("removeAnimation"))
+			else if (_gui.getGlobalScreen()->isAnswerFormDenied("removeAnimation"))
 			{
 				_isRemovingAnimation = false;
 				_currentAnimationID = "";

@@ -3,9 +3,6 @@
 
 void BillboardEntityRenderer::bind()
 {
-	// Define clipping plane for scene reflections
-	Vec4 clippingPlane = Vec4(0.0f, 1.0f, 0.0f, -(_renderBus.getSceneReflectionHeight() + _renderBus.getSceneReflectionOffset()));
-
 	// Bind shader
 	_shader.bind();
 
@@ -13,7 +10,6 @@ void BillboardEntityRenderer::bind()
 	_shader.uploadUniform("u_cameraPosition", _renderBus.getCameraPosition());
 	_shader.uploadUniform("u_viewMatrix",	  _renderBus.getViewMatrix());
 	_shader.uploadUniform("u_projMatrix",	  _renderBus.getProjectionMatrix());
-	_shader.uploadUniform("u_clippingPlane",  clippingPlane);
 
 	// Fragment shader uniforms
 	_shader.uploadUniform("u_fogMinDistance",	_renderBus.getFogMinDistance());
@@ -25,14 +21,18 @@ void BillboardEntityRenderer::bind()
 	// Texture uniforms
 	_shader.uploadUniform("u_sampler_diffuseMap", 0);
 
+	// Clipping (minY & maxY)
+	glEnable(GL_CLIP_DISTANCE0);
+	glEnable(GL_CLIP_DISTANCE1);
+
 	// Depth testing
 	glEnable(GL_DEPTH_TEST);
-	glEnable(GL_CLIP_DISTANCE1);
 	glDepthFunc(GL_LEQUAL);
 }
 
 void BillboardEntityRenderer::unbind()
 {
+	glDisable(GL_CLIP_DISTANCE0);
 	glDisable(GL_CLIP_DISTANCE1);
 	glDisable(GL_DEPTH_TEST);
 	_shader.unbind();
@@ -66,7 +66,8 @@ void BillboardEntityRenderer::render(const shared_ptr<BillboardEntity> entity)
 		_shader.uploadUniform("u_uvAdder", uvAdder);
 		_shader.uploadUniform("u_uvMultiplier", uvMultiplier);
 		_shader.uploadUniform("u_currentY", entity->getTranslation().y);
-		_shader.uploadUniform("u_maxY", entity->getMaxY());
+		_shader.uploadUniform("u_minHeight", entity->getMinHeight());
+		_shader.uploadUniform("u_maxHeight", entity->getMaxHeight());
 
 		// Texture
 		glActiveTexture(GL_TEXTURE0);

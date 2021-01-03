@@ -55,7 +55,7 @@ void AudioEditor::_updateMainMenu()
 				unload();
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
 			}
-			else if (_gui.getGlobalScreen()->isAnswerFormCancelled("exitAudioEditor"))
+			else if (_gui.getGlobalScreen()->isAnswerFormDenied("exitAudioEditor"))
 			{
 				unload();
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
@@ -187,7 +187,7 @@ void AudioEditor::_updateAudioRemoval()
 				_gui.getGlobalScreen()->removeAnswerForm("removeAudio");
 				_isRemovingAudio = false;
 			}
-			else if (_gui.getGlobalScreen()->isAnswerFormCancelled("removeAudio"))
+			else if (_gui.getGlobalScreen()->isAnswerFormDenied("removeAudio"))
 			{
 				_isChoosingAudio = true;
 				_currentAudioID = "";

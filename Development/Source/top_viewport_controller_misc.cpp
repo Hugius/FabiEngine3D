@@ -168,7 +168,7 @@ void TopViewportController::_updateProjectDeletion()
 				_fe3d.logger_throwWarning("Project \"" + chosenButtonID + "\" was already deleted!");
 			}
 		}
-		else if (_gui.getGlobalScreen()->isAnswerFormCancelled("deleteProject"))
+		else if (_gui.getGlobalScreen()->isAnswerFormDenied("deleteProject"))
 		{
 			_deletingProject = false;
 			chosenButtonID = "";

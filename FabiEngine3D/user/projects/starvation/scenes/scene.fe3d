@@ -1,6 +1,6 @@
 SKY default user\assets\textures\cube_maps\day_right.png user\assets\textures\cube_maps\day_left.png user\assets\textures\cube_maps\day_top.png user\assets\textures\cube_maps\day_bottom.png user\assets\textures\cube_maps\day_front.png user\assets\textures\cube_maps\day_back.png 0.01 0.6 1 1 1
 TERRAIN default user\assets\textures\height_maps\terrain.bmp user\assets\textures\diffuse_maps\terrain\grass.png 125 96 0.7 1 user\assets\textures\blend_maps\terrain.png user\assets\textures\diffuse_maps\terrain\mud.png user\assets\textures\diffuse_maps\terrain\rock.png user\assets\textures\diffuse_maps\terrain\ground.png 150 64 128 1 1 1 1 user\assets\textures\normal_maps\terrain\grass.png user\assets\textures\normal_maps\terrain\mud.png user\assets\textures\normal_maps\terrain\rock.png user\assets\textures\normal_maps\terrain\ground.png 1 1 1
-WATER default user\assets\textures\dudv_maps\water.png user\assets\textures\normal_maps\water\water_default.png user\assets\textures\displacement_maps\water.png 1 1 1 1 0 0 0 1 325 5 4.5 -25 64 1 -0.001 0.0005 0.4 256 15
+WATER default user\assets\textures\dudv_maps\water.png user\assets\textures\normal_maps\water\water_default.png user\assets\textures\displacement_maps\water.png 1 1 1 1 0 0 0 1 325 5 4.5 -25 64 1 -0.001 0.0005 0.25 256 15
 MODEL 1176852047@timber 91.7699 6.37255 1 0 90 0 1.72 1.75 1.75 user\assets\models\misc\timber.obj ? ? ? ? 0 0 0 0 0 1 1 1 0.5 1 1 1 1 ? 0 ? timber 0 0 0 5.6 0.95 0.9
 MODEL 968532668@corn 78.9478 6.37255 3.12666 0 0 0 2.25 2.25 2.25 user\assets\models\misc\corn.obj user\assets\textures\diffuse_maps\misc\corn.png ? ? ? 0 0 1 0 0 1 1 1 0.75 1 1 1 1 ? 0 ?
 MODEL 728581712@bush2 102.551 6.37255 103.675 0 0 0 0.75 0.5 0.75 user\assets\models\trees\bush2.obj user\assets\textures\diffuse_maps\trees\tree_bush_2.png ? ? user\assets\textures\normal_maps\trees\tree_bush_2.png 0 0 1 1 0 0 1 1 1 1 1 1 1 ? 0 ? bush 0 0 0 3.1 10 3.1
@@ -288,19 +288,19 @@ MODEL 1470014795@haybale 17.2735 6.37255 63.2155 0 0 0 1.2 1.2 1.2 user\assets\m
 MODEL 498608841@haybale 15.5342 6.37255 60.3833 0 0 0 1.8 1.8 1.8 user\assets\models\misc\haybale.obj user\assets\textures\diffuse_maps\misc\haybale.png ? ? ? 0 0 1 0 0 1 1 1 0.5 1 1 1 1 ? 0 ? haybale 0 0 0 1.8 1.7 1.7
 MODEL 1623424494@haybale 19.3567 6.37255 59.4468 0 0 0 1.5 1.5 1.5 user\assets\models\misc\haybale.obj user\assets\textures\diffuse_maps\misc\haybale.png ? ? ? 0 0 1 0 0 1 1 1 0.5 1 1 1 1 ? 0 ? haybale 0 0 0 1.8 1.7 1.7
 MODEL 813467960@beehive 12.5851 6.37255 63.8489 0 0 0 1.75 1.75 1.75 user\assets\models\misc\beehive.obj user\assets\textures\diffuse_maps\misc\beehive.png ? ? ? 0 0 1 0 0 1 1 1 0.75 1 1 1 1 ? 0 ? beehive -0.05 0 -0.05 2.4 2 2.1
-MODEL 369178111@timberstack 53.7951 6.37255 1.15161 0 90 0 2.75 2.75 2.75 user\assets\models\misc\timberstack.obj user\assets\textures\diffuse_maps\misc\timberstack.png ? ? ? 0 0 0 0 0 1 1 1 0.5 1 1 1 1 ? 0 ? timberstack 0 1.49012e-08 0 1.4 1 4
+MODEL 369178111@timberstack 53.7951 6.37255 1.15161 0 90 0 2.75 2.75 2.75 user\assets\models\misc\timberstack.obj user\assets\textures\diffuse_maps\misc\timberstack.png ? ? ? 0 0 1 0 0 1 1 1 0.5 1 1 1 1 ? 0 ? timberstack 0 1.49012e-08 0 1.4 1 4
 MODEL 372700021@tree1 19.9623 6.37255 72.9763 0 0 0 1.75 1.75 1.75 user\assets\models\trees\tree1.obj user\assets\textures\diffuse_maps\trees\tree1.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 ? 0 ? leaves 0 3.2 0 4.5 2.5 3.9 trunk 0 0 0 0.4 3.2 0.5
-BILLBOARD 1942415421@fire 42.4117 10.0026 69.7343 0 -176.794 -0 1.8 1.2 1 1 1 0 1 user\assets\textures\billboard_maps\fire1.png 1 ? ? 1 6 6 2
+BILLBOARD 1942415421@fire 42.4117 10.0026 69.7343 0 -209.979 -0 1.8 1.2 1 1 1 0 1 user\assets\textures\billboard_maps\fire1.png 1 ? ? 1 6 6 2
 AMBIENT_LIGHT 1 1 1 0.5
 DIRECTIONAL_LIGHT 1000 1000 1000 1 1 1 1 200
 CAMERA_FOV 90
 LOD_DISTANCE 1000
 EDITOR_SPEED 5
-EDITOR_POSITION 40.6505 12.2417 38.2969
+EDITOR_POSITION 53.1627 12.2417 51.0972
 EDITOR_YAW 45.6501
 EDITOR_PITCH -13.2108
 GRAPHICS_SHADOWS 1 100 50.000000 50.000000 0.000000 0.000000 0.000000 0.000000 1 0
-GRAPHICS_MOTIONBLUR 1 0.1
+GRAPHICS_MOTIONBLUR 1 0.15
 GRAPHICS_DOF 1 1 5 3
 GRAPHICS_FOG 1 150 512 0.75 0.498039 0.498039 0.498039
 GRAPHICS_LENSFLARE 1 user\assets\textures\flare_maps\flare.png 1 1

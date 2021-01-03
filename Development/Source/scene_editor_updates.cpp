@@ -148,7 +148,7 @@ void SceneEditor::_updateMainMenu()
 					_isDeletingScene = false;
 					_currentSceneName = "";
 				}
-				else if (_gui.getGlobalScreen()->isAnswerFormCancelled("deleteScene")) // Cancelled
+				else if (_gui.getGlobalScreen()->isAnswerFormDenied("deleteScene")) // Cancelled
 				{
 					_isDeletingScene = false;
 					_currentSceneName = "";
@@ -202,25 +202,47 @@ void SceneEditor::_updateChoiceMenu()
 			// Check if user wants to save changes
 			if (_gui.getGlobalScreen()->isAnswerFormConfirmed("exitSceneEditor"))
 			{
+				// Save before closing
 				saveSceneToFile();
+
+				// Clear whole scene
 				clearScene();
 				_animationEditor.stopAllAnimations();
+
+				// Default skybox
 				_fe3d.skyEntity_select("@@engineBackground");
+
+				// Exiting scene, so vsync needed
+				_fe3d.misc_setVsync(true);
+
+				// No selected scene
 				_currentSceneName = "";
 				_currentSkyID = "";
 				_currentTerrainID = "";
 				_currentWaterID = "";
+
+				// Go to main menu
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuMain");
 			}
-			else if (_gui.getGlobalScreen()->isAnswerFormCancelled("exitSceneEditor"))
+			else if (_gui.getGlobalScreen()->isAnswerFormDenied("exitSceneEditor"))
 			{
+				// Clear whole scene
 				clearScene();
 				_animationEditor.stopAllAnimations();
+
+				// Default skybox
 				_fe3d.skyEntity_select("@@engineBackground");
+
+				// Exiting scene, so vsync needed
+				_fe3d.misc_setVsync(true);
+
+				// No selected scene
 				_currentSceneName = "";
 				_currentSkyID = "";
 				_currentTerrainID = "";
 				_currentWaterID = "";
+
+				// Go to main menu
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuMain");
 			}
 		}

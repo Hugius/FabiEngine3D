@@ -18,7 +18,9 @@ uniform vec2 u_uvMultiplier;
 
 // Float uniforms
 uniform float u_currentY;
-uniform float u_maxY;
+uniform float u_minHeight;
+uniform float u_maxHeight;
+uniform float u_clippingY;
 
 // Boolean uniforms
 uniform bool u_isInstanced;
@@ -36,8 +38,10 @@ void main()
 
 	// GLSL variables
 	gl_Position = clipSpacePos;
-	gl_ClipDistance[1] = dot(worldSpacePos, vec4(0.0f, -1.0f, 0.0f, u_currentY + u_maxY));
-	
+	gl_ClipDistance[0] = dot(worldSpacePos, vec4(0.0f,  1.0f, 0.0f, -(u_currentY + u_minHeight)));
+	gl_ClipDistance[1] = dot(worldSpacePos, vec4(0.0f, -1.0f, 0.0f, u_currentY + u_maxHeight));
+	gl_ClipDistance[2] = dot(worldSpacePos, vec4(0.0f,  1.0f, 0.0f, -u_clippingY));
+
 	// Out variables
     if(u_isBillboard)
     {
@@ -45,6 +49,6 @@ void main()
     }
     else
     {
-	   f_uv  = vec2(v_uv.x, -v_uv.y);
+		f_uv = vec2(v_uv.x, -v_uv.y);
     }
 }

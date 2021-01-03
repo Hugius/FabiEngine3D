@@ -344,6 +344,36 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			}
 		}
 	}
+	else if (functionName == "fe3d:billboard_set_min_height") // Set billboardEntity minimum height
+	{
+		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL };
+
+		// Validate arguments
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existing billboard ID
+			if (_validateFe3dBillboardEntity(arguments[0].getString()))
+			{
+				_fe3d.billboardEntity_setMinHeight(arguments[0].getString(), arguments[1].getDecimal());
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			}
+		}
+	}
+	else if (functionName == "fe3d:billboard_get_min_height") // Get billboardEntity minimum height
+	{
+		auto types = { ScriptValueType::STRING };
+
+		// Validate arguments
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existing billboard ID
+			if (_validateFe3dBillboardEntity(arguments[0].getString()))
+			{
+				auto result = _fe3d.billboardEntity_getMinHeight(arguments[0].getString());
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
+			}
+		}
+	}
 	else if (functionName == "fe3d:billboard_set_max_height") // Set billboardEntity maximum height
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL };

@@ -57,7 +57,7 @@ void EnvironmentEditor::update()
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
 					unload();
 				}
-				else if (_gui.getGlobalScreen()->isAnswerFormCancelled("exitEnvironmentEditor"))
+				else if (_gui.getGlobalScreen()->isAnswerFormDenied("exitEnvironmentEditor"))
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
 					unload();

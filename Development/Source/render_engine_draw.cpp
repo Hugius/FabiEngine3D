@@ -345,17 +345,17 @@ void RenderEngine::_renderDebugScreens()
 	postprocessedText->addOglBuffer(new OpenGLBuffer(0.66666f, -0.26f, calcTextWidth("Postprocessed render"), charHeight, true, false));
 	postprocessedText->setColor(color);
 
-	// Final scene - surface
-	shared_ptr<GuiEntity> finalSurface = make_shared<GuiEntity>("finalSurface");
-	finalSurface->setDiffuseMap(_renderBus.getMotionBlurMap());
-	finalSurface->addOglBuffer(new OpenGLBuffer(0.66666f, -0.66666f, 0.66666f, 0.66666f, true, false));
-	finalSurface->setMirroredVertically(true);
+	// Motion scene - surface
+	shared_ptr<GuiEntity> motionSurface = make_shared<GuiEntity>("motionSurface");
+	motionSurface->setDiffuseMap(_renderBus.getMotionBlurMap());
+	motionSurface->addOglBuffer(new OpenGLBuffer(0.66666f, -0.66666f, 0.66666f, 0.66666f, true, false));
+	motionSurface->setMirroredVertically(true);
 
-	// Final scene - text
-	shared_ptr<TextEntity> finalText = make_shared<TextEntity>("finalText");
-	finalText->setDiffuseMap(_textureLoader.getText("Final render", fontPath));
-	finalText->addOglBuffer(new OpenGLBuffer(0.66666f, -0.92f, calcTextWidth("Final render"), charHeight, true, false));
-	finalText->setColor(color);
+	// Motion scene - text
+	shared_ptr<TextEntity> motionText = make_shared<TextEntity>("motionText");
+	motionText->setDiffuseMap(_textureLoader.getText("Motion render", fontPath));
+	motionText->addOglBuffer(new OpenGLBuffer(0.66666f, -0.92f, calcTextWidth("Motion render"), charHeight, true, false));
+	motionText->setColor(color);
 	
 	// Render debug screens + text
 	_guiEntityRenderer.bind();
@@ -375,7 +375,7 @@ void RenderEngine::_renderDebugScreens()
 	_guiEntityRenderer.render(blurText);
 	_guiEntityRenderer.render(postprocessedSurface);
 	_guiEntityRenderer.render(postprocessedText);
-	_guiEntityRenderer.render(finalSurface);
-	_guiEntityRenderer.render(finalText);
+	_guiEntityRenderer.render(motionSurface);
+	_guiEntityRenderer.render(motionText);
 	_guiEntityRenderer.unbind();
 }

@@ -57,7 +57,7 @@ void ScriptEditor::_updateGUI()
 				unload();
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
 			}
-			else if (_gui.getGlobalScreen()->isAnswerFormCancelled("exitScriptEditor"))
+			else if (_gui.getGlobalScreen()->isAnswerFormDenied("exitScriptEditor"))
 			{
 				unload();
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");

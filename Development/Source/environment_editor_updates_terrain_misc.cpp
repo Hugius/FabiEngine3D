@@ -162,7 +162,7 @@ void EnvironmentEditor::_updateTerrainRemoval()
 				_terrainRemovalEnabled = false;
 				_currentTerrainID = "";
 			}
-			else if (_gui.getGlobalScreen()->isAnswerFormCancelled("removeTerrain"))
+			else if (_gui.getGlobalScreen()->isAnswerFormDenied("removeTerrain"))
 			{
 				_fe3d.terrainEntity_select("");
 				_terrainRemovalEnabled = false;

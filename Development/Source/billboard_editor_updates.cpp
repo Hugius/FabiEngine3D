@@ -58,7 +58,7 @@ void BillboardEditor::_updateBillboardManagement()
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
 				unload();
 			}
-			else if (_gui.getGlobalScreen()->isAnswerFormCancelled("exitBillboardEditor"))
+			else if (_gui.getGlobalScreen()->isAnswerFormDenied("exitBillboardEditor"))
 			{
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
 				unload();
@@ -211,7 +211,7 @@ void BillboardEditor::_updateBillboardRemoval()
 				_gui.getGlobalScreen()->removeAnswerForm("removeBillboard");
 				_isRemovingBillboard = false;
 			}
-			else if (_gui.getGlobalScreen()->isAnswerFormCancelled("removeBillboard"))
+			else if (_gui.getGlobalScreen()->isAnswerFormDenied("removeBillboard"))
 			{
 				_fe3d.billboardEntity_hide(_currentBillboardID);
 				_isRemovingBillboard = false;

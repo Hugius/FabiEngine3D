@@ -6,9 +6,6 @@ using std::to_string;
 
 void GameEntityRenderer::bind()
 {
-	// Define clipping plane for scene reflections
-	Vec4 clippingPlane = Vec4(0.0f, 1.0f, 0.0f, -(_renderBus.getSceneReflectionHeight() + _renderBus.getSceneReflectionOffset()));
-
 	// Bind shader
 	_shader.bind();
 
@@ -16,7 +13,6 @@ void GameEntityRenderer::bind()
 	_shader.uploadUniform("u_projMatrix",        _renderBus.getProjectionMatrix());
 	_shader.uploadUniform("u_skyRotationMatrix", _renderBus.getSkyRotationMatrix());
 	_shader.uploadUniform("u_shadowMatrix",      _renderBus.getShadowMatrix());
-	_shader.uploadUniform("u_clippingPlane",	 clippingPlane);
 	
 	// Fragment shader uniforms
 	_shader.uploadUniform("u_cameraPosition",			   _renderBus.getCameraPosition());
@@ -61,12 +57,15 @@ void GameEntityRenderer::bind()
 	_shader.uploadUniform("u_sampler_shadowMap", 5);
 	_shader.uploadUniform("u_sampler_skyMap", 6);
 
+	// Clipping (minY & maxY)
+	glEnable(GL_CLIP_DISTANCE0);
+	glEnable(GL_CLIP_DISTANCE1);
+
 	// Depth testing
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);
 
 	// Alpha blending
-	glEnable(GL_CLIP_DISTANCE1);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
@@ -82,6 +81,7 @@ void GameEntityRenderer::bind()
 void GameEntityRenderer::unbind()
 {
 	glDisable(GL_BLEND);
+	glDisable(GL_CLIP_DISTANCE0);
 	glDisable(GL_CLIP_DISTANCE1);
 	glDisable(GL_DEPTH_TEST);
 	_shader.unbind();
@@ -141,7 +141,8 @@ void GameEntityRenderer::render(const shared_ptr<GameEntity> entity)
 		_shader.uploadUniform("u_isSpecularLighted", entity->isSpecularLighted());
 		_shader.uploadUniform("u_lightness", entity->getLightness());
 		_shader.uploadUniform("u_currentY", entity->getTranslation().y);
-		_shader.uploadUniform("u_maxY", entity->getMaxY());
+		_shader.uploadUniform("u_minHeight", entity->getMinHeight());
+		_shader.uploadUniform("u_maxHeight", entity->getMaxHeight());
 		_shader.uploadUniform("u_customAlpha", entity->getAlpha());
 		_shader.uploadUniform("u_isShadowed", entity->isShadowed());
 		_shader.uploadUniform("u_uvRepeat", entity->getUvRepeat());

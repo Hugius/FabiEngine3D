@@ -35,11 +35,12 @@ public:
 	void setTotalSpriteRows(int value);
 	void setTotalSpriteColumns(int value);
 	void setMaxFramestep(int value);
+	void setLightness(float value);
+	void setMinHeight(float value);
+	void setMaxHeight(float value);
 	void increasePassedFrames();
 	void resetPassedFrames();
 	void increaseAnimationRepeats();
-	void setLightness(float value);
-	void setMaxY(float value);
 
 	// Getters
 	const Matrix44 & getModelMatrix() const;
@@ -53,7 +54,8 @@ public:
 	const string& getFontPath() const;
 	const string& getDiffuseMapPath() const;
 	const float getLightness() const;
-	const float getMaxY() const;
+	const float getMinHeight() const;
+	const float getMaxHeight() const;
 	const int getPassedFrames() const;
 	const int getMaxFramestep() const;
 	const int getTotalSpriteRows() const;
@@ -78,7 +80,8 @@ private:
 	Vec3 _color           = Vec3(1.0f);
 
 	float _lightness = 1.0f;
-	float _maxY = (std::numeric_limits<float>::max)();
+	float _minHeight = -(std::numeric_limits<float>::max)();
+	float _maxHeight = (std::numeric_limits<float>::max)();
 	
 	int _maxFramestep		 = 0;
 	int _passedFrames		 = 0;

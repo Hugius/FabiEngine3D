@@ -58,7 +58,7 @@ void ModelEditor::_updateManagementScreen()
 				unload();
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
 			}
-			else if (_gui.getGlobalScreen()->isAnswerFormCancelled("exitModelEditor"))
+			else if (_gui.getGlobalScreen()->isAnswerFormDenied("exitModelEditor"))
 			{
 				unload();
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
@@ -308,7 +308,7 @@ void ModelEditor::_updateModelRemoval()
 				_isDeletingModel = false;
 				_currentModelID = "";
 			}
-			else if (_gui.getGlobalScreen()->isAnswerFormCancelled("deleteModel"))
+			else if (_gui.getGlobalScreen()->isAnswerFormDenied("deleteModel"))
 			{
 				// Check if model has game entity
 				if (_fe3d.gameEntity_isExisting(_currentModelID))

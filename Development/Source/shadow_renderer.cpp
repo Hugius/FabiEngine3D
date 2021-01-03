@@ -10,14 +10,18 @@ void ShadowRenderer::bind()
 	// Vertex shader uniforms
 	_shader.uploadUniform("u_lightSpaceMatrix", _renderBus.getShadowMatrix());
 
-	// Depth & clipping
+	// Clipping (minY & maxY)
+	glEnable(GL_CLIP_DISTANCE0);
+	glEnable(GL_CLIP_DISTANCE1);
+
+	// Depth testing
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);
-	glEnable(GL_CLIP_DISTANCE1);
 }
 
 void ShadowRenderer::unbind()
 {
+	glDisable(GL_CLIP_DISTANCE0);
 	glDisable(GL_CLIP_DISTANCE1);
 	glDisable(GL_DEPTH_TEST);
 	_shader.unbind();
@@ -36,7 +40,8 @@ void ShadowRenderer::render(const shared_ptr<GameEntity> entity)
 		// Uniforms
 		_shader.uploadUniform("u_alphaObject", entity->isTransparent());
 		_shader.uploadUniform("u_currentY", entity->getTranslation().y);
-		_shader.uploadUniform("u_maxY", entity->getMaxY());
+		_shader.uploadUniform("u_minHeight", entity->getMinHeight());
+		_shader.uploadUniform("u_maxHeight", entity->getMaxHeight());
 		_shader.uploadUniform("u_sampler_diffuseMap", 0);
 
 		// Bind & render

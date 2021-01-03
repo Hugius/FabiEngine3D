@@ -360,6 +360,36 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 			}
 		}
 	}
+	else if (functionName == "fe3d:model_set_min_height") // Set gameEntity minimum height
+	{
+		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL };
+
+		// Validate arguments
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existing model ID
+			if (_validateFe3dGameEntity(arguments[0].getString()))
+			{
+				_fe3d.gameEntity_setMinHeight(arguments[0].getString(), arguments[1].getDecimal());
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			}
+		}
+	}
+	else if (functionName == "fe3d:model_get_min_height") // Get gameEntity minimum height
+	{
+		auto types = { ScriptValueType::STRING };
+
+		// Validate arguments
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existing model ID
+			if (_validateFe3dGameEntity(arguments[0].getString()))
+			{
+				auto result = _fe3d.gameEntity_getMinHeight(arguments[0].getString());
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
+			}
+		}
+	}
 	else if (functionName == "fe3d:model_set_max_height") // Set gameEntity maximum height
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL };

@@ -22,7 +22,8 @@ uniform vec4 u_clippingPlane;
 
 // Float uniforms
 uniform float u_currentY;
-uniform float u_maxY;
+uniform float u_minHeight;
+uniform float u_maxHeight;
 uniform float u_uvRepeat;
 
 // Boolean uniforms
@@ -50,8 +51,8 @@ void main()
 
 	// GLSL variables
 	gl_Position = clipSpacePos;
-	gl_ClipDistance[0] = dot(worldSpacePos, u_clippingPlane);
-	gl_ClipDistance[1] = dot(worldSpacePos, vec4(0.0f, -1.0f, 0.0f, u_currentY + u_maxY));
+	gl_ClipDistance[0] = dot(worldSpacePos, vec4(0.0f,  1.0f, 0.0f, -(u_currentY + u_minHeight)));
+	gl_ClipDistance[1] = dot(worldSpacePos, vec4(0.0f, -1.0f, 0.0f, u_currentY + u_maxHeight));
 	
 	// Out variables
 	f_pos       = worldSpacePos.xyz;

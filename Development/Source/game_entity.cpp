@@ -404,9 +404,14 @@ void GameEntity::setSpecularIntensity(float value)
 	_specularIntensity = value;
 }
 
-void GameEntity::setMaxY(float value)
+void GameEntity::setMinHeight(float value)
 {
-	_maxY = value;
+	_minHeight = value;
+}
+
+void GameEntity::setMaxHeight(float value)
+{
+	_maxHeight = value;
 }
 
 void GameEntity::setAlpha(float alpha)
@@ -701,9 +706,14 @@ const float GameEntity::getSpecularIntensity() const
 	return _specularIntensity;
 }
 
-const float GameEntity::getMaxY() const
+const float GameEntity::getMinHeight() const
 {
-	return _maxY;
+	return _minHeight;
+}
+
+const float GameEntity::getMaxHeight() const
+{
+	return _maxHeight;
 }
 
 const float GameEntity::getAlpha() const

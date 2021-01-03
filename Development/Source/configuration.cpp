@@ -22,17 +22,24 @@ Config::Config()
 
 	// Store config file content
 	_processOption(file, _windowSizeMultiplier, "window_size_multiplier");
+	_processOption(file, _isWindowFullscreen, "window_fullscreen");
+	_processOption(file, _isWindowBorderless, "window_borderless");
 	_processOption(file, _selectedGame, "selected_game");
 	
-	// Set window dimensions
+	// Save monitor dimensions
 	SDL_DisplayMode DM;
 	SDL_GetDesktopDisplayMode(0, &DM);
+	_monitorWidth = DM.w;
+	_monitorHeight = DM.h;
+
+	// Set window dimensions
 	_windowWidth = static_cast<int>(static_cast<float>(DM.w) * _windowSizeMultiplier);
 	_windowHeight = static_cast<int>(static_cast<float>(DM.h) * _windowSizeMultiplier);
 
 	// Set viewport dimensions
 	if (_selectedGame.empty()) // Engine preview
 	{
+		// Set viewport dimensions
 		_viewportPosition.x = static_cast<int>(0.125f * static_cast<float>(_windowWidth));
 		_viewportPosition.y = static_cast<int>(0.2f * static_cast<float>(_windowHeight));
 		_viewportSize.x = static_cast<int>(0.75f * static_cast<float>(_windowWidth));
@@ -40,6 +47,7 @@ Config::Config()
 	}
 	else // Game preview
 	{
+		// Set viewport dimensions
 		_viewportPosition.x = 0;
 		_viewportPosition.y = 0;
 		_viewportSize.x = static_cast<int>(static_cast<float>(_windowWidth));
@@ -64,7 +72,7 @@ void Config::_processOption(ifstream& file, string& option, string criteria)
 	}
 	else
 	{
-		Logger::throwError("Configuration file: invalid option name!");
+		Logger::throwError("Configuration file @ option \"" + criteria + "\": invalid option name!");
 	}
 }
 
@@ -85,7 +93,7 @@ void Config::_processOption(std::ifstream& file, float& option, string criteria)
 	}
 	else
 	{
-		Logger::throwError("Configuration file: invalid option name!");
+		Logger::throwError("Configuration file @ option \"" + criteria + "\": invalid option name!");
 	}
 }
 
@@ -106,7 +114,7 @@ void Config::_processOption(std::ifstream& file, int& option, string criteria)
 	}
 	else
 	{
-		Logger::throwError("Configuration file: invalid option name!");
+		Logger::throwError("Configuration file @ option \"" + criteria + "\": invalid option name!");
 	}
 }
 
@@ -137,16 +145,31 @@ void Config::_processOption(std::ifstream& file, bool& option, string criteria)
 		}
 		else
 		{
-			Logger::throwError("Configuration file: wrong boolean value!");
+			Logger::throwError("Configuration file @ option \"" + criteria + "\": invalid boolean value!");
 		}
 	}
 	else
 	{
-		Logger::throwError("Configuration file: invalid option name!");
+		Logger::throwError("Configuration file @ option \"" + criteria + "\": invalid option name!");
 	}
 }
 
-Ivec2 Config::getWindowSize() const 
+Ivec2 Config::getMonitorSize() const
+{
+	return Ivec2(_monitorWidth, _monitorHeight);
+}
+
+int Config::getMonitorWidth() const
+{
+	return _monitorWidth;
+}
+
+int Config::getMonitorHeight() const
+{
+	return _monitorHeight;
+}
+
+Ivec2 Config::getWindowSize() const
 { 
 	return Ivec2(_windowWidth, _windowHeight); 
 }
@@ -179,4 +202,14 @@ float Config::getUpdateMsPerFrame() const
 string Config::getSelectedGame() const
 {
 	return _selectedGame;
+}
+
+bool Config::isWindowFullscreen() const
+{
+	return _isWindowFullscreen;
+}
+
+bool Config::isWindowBorderless() const
+{
+	return _isWindowBorderless;
 }

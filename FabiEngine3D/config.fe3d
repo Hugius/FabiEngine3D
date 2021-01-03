@@ -1,2 +1,5 @@
 window_size_multiplier = 0.9
-selected_game = 
+window_fullscreen 	   = false
+window_borderless 	   = false
+selected_game 		   = 
+starvation_2

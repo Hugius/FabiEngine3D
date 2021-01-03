@@ -1,6 +1,7 @@
 #include "engine_controller.hpp"
 
 EngineController::EngineController() :
+	FabiEngine3D(),
 	_gui(*this),
 	_leftViewportController(*this, _gui),
 	_rightViewportController(*this, _gui),
@@ -9,7 +10,12 @@ EngineController::EngineController() :
 		_leftViewportController.getScriptEditor(), _leftViewportController.getAudioEditor(), _leftViewportController.getSettingsEditor()),
 	_bottomViewportController(*this, _gui, _topViewportController, _leftViewportController.getScriptEditor())
 {
-
+	// Check if project exists
+	string directoryPath = misc_getRootDirectory() + "user\\projects\\" + engine_getSelectedGame();
+	if (!misc_isFileExisting(directoryPath) || !misc_isDirectory(directoryPath))
+	{
+		logger_throwError("Game preview project with name \"" + engine_getSelectedGame() + "\" does not exist!");
+	}
 }
 
 EngineController::~EngineController()
@@ -135,7 +141,7 @@ void EngineController::_initializeMiscellaneous()
 
 void EngineController::_updateMiscellaneous()
 {
-	// Initialize main menu again if came from different screen
+	// Initialize main menu again if user came from another menu
 	static string lastScreen = "";
 	string activeScreen = _gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID();
 	if (activeScreen == "main" && lastScreen != "main")
@@ -144,6 +150,7 @@ void EngineController::_updateMiscellaneous()
 		float lastPitch = camera_getPitch();
 		camera_load(90.0f, 0.1f, 10000.0f, Vec3(0.0f), lastYaw, lastPitch);
 		skyEntity_select("@@engineBackground");
+		misc_setVsync(true);
 	}
 	lastScreen = activeScreen;
 

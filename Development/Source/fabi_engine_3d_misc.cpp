@@ -74,6 +74,11 @@ float FabiEngine3D::misc_degreesToRadians(float angle)
 	return Math::degreesToRadians(angle);
 }
 
+float FabiEngine3D::misc_radiansToDegrees(float angle)
+{
+	return Math::radiansToDegrees(angle);
+}
+
 void FabiEngine3D::misc_showCursor()
 {
 	_core->_windowManager.showCursor();

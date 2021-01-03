@@ -61,6 +61,50 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, std::cos(angle)));
 					}
 				}
+				else if (functionName == "math:atan") // ATAN
+				{
+					auto types = { ScriptValueType::DECIMAL };
+
+					if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+					{
+						float angle = std::atan(arguments[0].getDecimal());
+						float result = _fe3d.misc_radiansToDegrees(angle);
+						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
+					}
+				}
+				else if (functionName == "math:asin") // ASIN
+				{
+					auto types = { ScriptValueType::DECIMAL };
+
+					if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+					{
+						float angle = std::asin(arguments[0].getDecimal());
+						float result = _fe3d.misc_radiansToDegrees(angle);
+						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
+					}
+				}
+				else if (functionName == "math:acos") // ACOS
+				{
+					auto types = { ScriptValueType::DECIMAL };
+
+					if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+					{
+						float angle = std::acos(arguments[0].getDecimal());
+						float result = _fe3d.misc_radiansToDegrees(angle);
+						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
+					}
+				}
+				else if (functionName == "math:atan2") // ATAN2
+				{
+					auto types = { ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
+
+					if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+					{
+						float angle = std::atan2(arguments[0].getDecimal(), arguments[1].getDecimal());
+						float result = _fe3d.misc_radiansToDegrees(angle);
+						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
+					}
+				}
 				else if (functionName == "math:pow") // POWER
 				{
 					if (_validateListValueAmount(arguments, 2))

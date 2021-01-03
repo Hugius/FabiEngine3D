@@ -1,8 +1,8 @@
-10 56
+3 22
 META script_type_update
 
 /// Bobbing speed
-DEC bobbingSpeed = 0.01
+DEC bobbingSpeed = 0.0
 IF _isWalking IS <true>:
     EDIT bobbingSpeed = 0.035
 IF _isRunning IS <true>:

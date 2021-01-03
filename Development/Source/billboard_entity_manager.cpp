@@ -103,8 +103,8 @@ void BillboardEntityManager::update()
 			float degreesY = atan2f(direction.z, direction.x);
 
 			// Convert to degrees
-			degreesZ *= (180.0f / Math::getPI());
-			degreesY *= (180.0f / Math::getPI());
+			degreesZ = Math::radiansToDegrees(degreesZ);
+			degreesY = Math::radiansToDegrees(degreesY);
 
 			// Apply rotation angles
 			rotation.z = (degreesZ) * static_cast<float>(facingX);

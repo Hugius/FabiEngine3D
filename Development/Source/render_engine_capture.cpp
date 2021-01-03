@@ -363,59 +363,47 @@ void RenderEngine::_captureMotionBlur(CameraManager& camera)
 	static bool firstTime = true;
 	static float lastYaw;
 	static float lastPitch;
-	
-	// Timing variables
-	static std::chrono::high_resolution_clock::time_point previous = std::chrono::high_resolution_clock::now();
-	std::chrono::high_resolution_clock::time_point current = std::chrono::high_resolution_clock::now();
-	std::chrono::duration<double> timeDifference = std::chrono::duration_cast<std::chrono::duration<double>>(current - previous);
-	float elapsedMS = static_cast<float>(timeDifference.count()) * 1000.0f;
 
-	// If 1 frame passed
-	if (elapsedMS >= Config::getInst().getUpdateMsPerFrame() || firstTime)
+	// Check if motion blur is enabled
+	if (_renderBus.isMotionBlurEnabled())
 	{
-		if (_renderBus.isMotionBlurEnabled())
+		// Camera speed and blur direction variables
+		float xDifference = fabsf(camera.getYaw() - lastYaw) * _renderBus.getMotionBlurStrength();
+		float yDifference = fabsf(camera.getPitch() - lastPitch) * _renderBus.getMotionBlurStrength();
+
+		// Variables
+		static BlurDirection lastDirection = BlurDirection::NONE;
+		BlurDirection direction = BlurDirection::NONE;
+		firstTime = false;
+
+		// Determine blur direction & mix value
+		if (xDifference >= yDifference)
 		{
-			// Set for next frame
-			previous = current;
-			
-			// Camera speed and blur direction variables
-			float xDifference = fabsf(camera.getYaw() - lastYaw) * _renderBus.getMotionBlurStrength();
-			float yDifference = fabsf(camera.getPitch() - lastPitch) * _renderBus.getMotionBlurStrength();
-			
-			// Variables
-			static BlurDirection lastDirection = BlurDirection::NONE;
-			BlurDirection direction = BlurDirection::NONE;
-			firstTime = false;
-
-			// Determine blur direction & mix value
-			if (xDifference >= yDifference)
-			{
-				direction = BlurDirection::HORIZONTAL;
-				_renderBus.setMotionBlurMixValue(xDifference);
-			}
-			else
-			{
-				direction = BlurDirection::VERTICAL;
-				_renderBus.setMotionBlurMixValue(yDifference);
-			}			
-
-			// Set for next iteration
-			lastYaw = camera.getYaw();
-			lastPitch = camera.getPitch();
-
-			// Apply motion blur
-			_blurRenderer.bind();
-			_renderBus.setMotionBlurMap(_blurRenderer.blurTexture(_finalSurface, _renderBus.getPostProcessedSceneMap(), 
-				static_cast<int>(BlurType::MOTION), 10, 1.0f, direction));
-			_blurRenderer.unbind();
-
-			// Set last direction
-			lastDirection = direction;
+			direction = BlurDirection::HORIZONTAL;
+			_renderBus.setMotionBlurMixValue(xDifference);
 		}
-		else // No motion blur
+		else
 		{
-			_renderBus.setMotionBlurMap(_renderBus.getPostProcessedSceneMap());
+			direction = BlurDirection::VERTICAL;
+			_renderBus.setMotionBlurMixValue(yDifference);
 		}
+
+		// Set for next iteration
+		lastYaw = camera.getYaw();
+		lastPitch = camera.getPitch();
+
+		// Apply motion blur
+		_blurRenderer.bind();
+		_renderBus.setMotionBlurMap(_blurRenderer.blurTexture(_finalSurface, _renderBus.getPostProcessedSceneMap(),
+			static_cast<int>(BlurType::MOTION), 10, 1.0f, direction));
+		_blurRenderer.unbind();
+
+		// Set last direction
+		lastDirection = direction;
+	}
+	else // No motion blur
+	{
+		_renderBus.setMotionBlurMap(_renderBus.getPostProcessedSceneMap());
 	}
 }
 

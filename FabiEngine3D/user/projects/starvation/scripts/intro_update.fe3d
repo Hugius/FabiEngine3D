@@ -1,0 +1,40 @@
+37 46
+META script_type_update
+
+/// Useful values
+VEC3 camPos = fe3d:camera_get_position()
+
+/// Waypoints
+
+/// Talking NPC
+
+/// Picking up first stone axe
+STR hoveredID = fe3d:raycast_into_model("axe_stone", "", <true>)
+IF hoveredID NOT "" AND _wasPickupPlaying IS <true> AND _pickupPlaying IS <false>:
+    VEC3 axePos = fe3d:model_get_position(hoveredID)
+    DEC distance = math:distance(camPos, axePos)
+    IF distance LESS 5.0:
+        fe3d:model_delete(hoveredID)
+        fe3d:model_place("axe_stone", "axe_stone", 0.0, 0.0, 0.0)
+        fe3d:model_set_aabb_responsive("axe_stone", <false>)
+        EDIT _inventory[2] = "axe_stone"
+        EDIT _equipIndex = 2
+
+/// Picking up first stone pickaxe
+EDIT hoveredID = fe3d:raycast_into_model("pickaxe_stone", "", <true>)
+IF hoveredID NOT "" AND _wasPickupPlaying IS <true> AND _pickupPlaying IS <false>:
+    VEC3 pickaxePos = fe3d:model_get_position(hoveredID)
+    DEC distance = math:distance(camPos, pickaxePos)
+    IF distance LESS 5.0:
+        fe3d:model_delete(hoveredID)
+        fe3d:model_place("pickaxe_stone", "pickaxe_stone", 0.0, 0.0, 0.0)
+        fe3d:model_set_aabb_responsive("pickaxe_stone", <false>)
+        EDIT _inventory[1] = "pickaxe_stone"
+        EDIT _equipIndex = 1
+
+/// NPC rotation
+VEC3 npcPos = fe3d:model_get_position("aurelius")
+VEC3 direction = camPos
+DECR direction npcPos
+DEC npcRot = math:atan2(direction.x, direction.z)
+fe3d:model_set_rotation("aurelius", 0.0, npcRot, 0.0)

@@ -772,6 +772,7 @@ public:
 	float misc_getFPS();
 	float misc_getPI();
 	float misc_degreesToRadians(float angle);
+	float misc_radiansToDegrees(float angle);
 	string misc_getWinExplorerFilename(const string& startingDir, const string& fileType);
 	string misc_vec2str(Ivec2 vec);
 	string misc_vec2str(Vec2 vec);

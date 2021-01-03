@@ -16,6 +16,11 @@ public:
 		return (angle * DEG2RAD);
 	}
 
+	static inline float radiansToDegrees(float angle)
+	{
+		return (angle * RAD2DEG);
+	}
+	
 	static inline float getPI()
 	{
 		return PI;
@@ -24,4 +29,5 @@ public:
 private:
 	static constexpr float PI = 3.14159265358979323846264338327f;
 	static constexpr float DEG2RAD = 0.01745329251994329576923690768489f;
+	static constexpr float RAD2DEG = 57.295779513082320876798154814278f;
 };

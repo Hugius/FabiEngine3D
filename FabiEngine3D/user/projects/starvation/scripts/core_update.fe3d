@@ -1,4 +1,4 @@
-7 19
+18 17
 META script_type_update
 META execution_entry
 
@@ -14,10 +14,10 @@ EXEC player_jump
 EXEC player_animation
 EXEC player_walk
 EXEC player_bobbing
-EXEC player_intro
 EXEC player_misc
 
 /// Other
+EXEC intro_update
 EXEC cutting_update
 EXEC mining_update
 EXEC gathering_update

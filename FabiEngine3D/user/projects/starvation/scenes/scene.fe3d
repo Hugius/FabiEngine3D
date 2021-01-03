@@ -1,39 +1,40 @@
 SKY default user\assets\textures\cube_maps\day_right.png user\assets\textures\cube_maps\day_left.png user\assets\textures\cube_maps\day_top.png user\assets\textures\cube_maps\day_bottom.png user\assets\textures\cube_maps\day_front.png user\assets\textures\cube_maps\day_back.png 0.01 0.6 1 1 1
 TERRAIN default user\assets\textures\height_maps\terrain.bmp user\assets\textures\diffuse_maps\terrain\grass.png 125 96 0.7 1 user\assets\textures\blend_maps\terrain.png user\assets\textures\diffuse_maps\terrain\mud.png user\assets\textures\diffuse_maps\terrain\rock.png user\assets\textures\diffuse_maps\terrain\ground.png 150 64 128 1 1 1 1 user\assets\textures\normal_maps\terrain\grass.png user\assets\textures\normal_maps\terrain\mud.png user\assets\textures\normal_maps\terrain\rock.png user\assets\textures\normal_maps\terrain\ground.png 1 1 1
 WATER default user\assets\textures\dudv_maps\water.png user\assets\textures\normal_maps\water\water_default.png user\assets\textures\displacement_maps\water.png 1 1 1 1 0 0 0 1 325 5 4.5 -25 64 1 -0.001 0.0005 0.4 256 15
-MODEL 2147054142@tree6 130.915 6.37255 66.8296 0 0 0 1.25 1 1.25 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
-MODEL 1327527311@bush2 147.731 6.37255 68.4513 0 0 0 0.75 0.5 0.75 user\assets\models\trees\bush2.obj user\assets\textures\diffuse_maps\trees\tree_bush_2.png ? ? user\assets\textures\normal_maps\trees\tree_bush_2.png 0 0 1 1 0 0 1 1 1 1 1 1 1 ? 0 ? bush 0 0 0 3.1 10 3.1
 MODEL 1176852047@timber 91.7699 6.37255 1 0 90 0 1.72 1.75 1.75 user\assets\models\misc\timber.obj ? ? ? ? 0 0 0 0 0 1 1 1 0.5 1 1 1 1 ? 0 ? timber 0 0 0 5.6 0.95 0.9
 MODEL 968532668@corn 78.9478 6.37255 3.12666 0 0 0 2.25 2.25 2.25 user\assets\models\misc\corn.obj user\assets\textures\diffuse_maps\misc\corn.png ? ? ? 0 0 1 0 0 1 1 1 0.75 1 1 1 1 ? 0 ?
 MODEL 728581712@bush2 102.551 6.37255 103.675 0 0 0 0.75 0.5 0.75 user\assets\models\trees\bush2.obj user\assets\textures\diffuse_maps\trees\tree_bush_2.png ? ? user\assets\textures\normal_maps\trees\tree_bush_2.png 0 0 1 1 0 0 1 1 1 1 1 1 1 ? 0 ? bush 0 0 0 3.1 10 3.1
 MODEL 251296560@tree6 167.587 6.37255 53.9051 0 0 0 1.25 1 1.25 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
 MODEL 1692216148@tree6 156.039 6.37255 98.8178 0 0 0 1.25 1 1.25 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
 MODEL 1595701888@plant3 150.911 6.37255 38.8892 0 0 0 4.5 5 4.5 user\assets\models\foliage\plant3.obj user\assets\textures\diffuse_maps\foliage\plant3.png ? ? ? 0 0 1 0 0 0 1 1 1 1 1 1 1 ? 0 ? plant 0 0 0.08 0.5 0.34 0.3
+MODEL 2147054142@tree6 130.915 6.37255 66.8296 0 0 0 1.25 1 1.25 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
 MODEL 230717195@tree6 41.3263 6.37255 120.771 0 0 0 1.25 1 1.25 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
-MODEL 1406965968@bush1 33.1914 6.37255 117.348 0 0 0 1 0.5 1 user\assets\models\trees\bush1.obj user\assets\textures\diffuse_maps\trees\bush1.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 ? 0 ? bush 0 0 0 2.4 9.8 2.5
 MODEL 570442774@tree6 111.993 6.37255 102.097 0 0 0 1.25 1 1.25 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? leaves 0 8.8 0 3.85 8.30001 3.6 trunk 0 0 0 0.85 8.80001 0.8
 MODEL 817934319@bush2 165.918 6.37255 83.4741 0 0 0 0.75 0.5 0.75 user\assets\models\trees\bush2.obj user\assets\textures\diffuse_maps\trees\tree_bush_2.png ? ? user\assets\textures\normal_maps\trees\tree_bush_2.png 0 0 1 1 0 0 1 1 1 1 1 1 1 ? 0 ? bush 0 0 0 3.1 10 3.1
-MODEL 1174477819@tree6 145.712 6.37211 41.8047 0 0 0 1.25 1 1.25 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
 MODEL 108500405@tree2 16.1285 6.37255 132.453 0 0 0 1.25 1.25 1.25 user\assets\models\trees\tree2.obj user\assets\textures\diffuse_maps\trees\tree_bush_2.png ? ? user\assets\textures\normal_maps\trees\tree_bush_2.png 0 0 1 1 0 0 1 1 0.7 1 1 1 1 ? 0 ? leaves 0 4.6 0 4.2 8.2 4.1 trunk 0 0 0 0.7 4.6 0.8
-MODEL 862901338@tree6 34.1783 6.37255 110.863 0 0 0 1.25 1 1.25 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? leaves 0 8.8 0 3.85 8.30001 3.6 trunk 0 0 0 0.85 8.80001 0.8
 MODEL 2033455614@bush3 23.7353 6.37255 128.03 0 0 0 1.25 0.95 1.25 user\assets\models\trees\bush3.obj ? ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 ? 0 ? bush 0 0 0 1.9 5.5 1.8
 MODEL 249238024@plant3 34.048 6.37254 139.714 0 0 0 4.5 5 4.5 user\assets\models\foliage\plant3.obj user\assets\textures\diffuse_maps\foliage\plant3.png ? ? ? 0 0 1 0 0 0 1 1 1 1 1 1 1 ? 0 ? plant 0 0 0.08 0.5 0.34 0.3
 MODEL 1870092717@corn 73.6926 6.37255 -1.4104 0 0 0 2.25 2.25 2.25 user\assets\models\misc\corn.obj user\assets\textures\diffuse_maps\misc\corn.png ? ? ? 0 0 1 0 0 1 1 1 0.75 1 1 1 1 ? 0 ?
-MODEL 1426447566@plant2 70.7347 6.37255 94.9555 0 0 0 1.25 1.25 1.25 user\assets\models\foliage\plant2.obj user\assets\textures\diffuse_maps\foliage\plant2.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 ? 0 ? plant 0 0 0 2.2 1.3 2.1
 MODEL 1786742349@plant3 95.7983 6.37255 75.9422 0 0 0 4.5 5 4.5 user\assets\models\foliage\plant3.obj user\assets\textures\diffuse_maps\foliage\plant3.png ? ? ? 0 0 1 0 0 0 1 1 1 1 1 1 1 ? 0 ? plant 0 0 0.08 0.5 0.34 0.3
-MODEL 1949097909@bush3 124.598 6.37255 113.991 0 0 0 1.25 0.95 1.25 user\assets\models\trees\bush3.obj ? ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 ? 0 ? bush 0 0 0 1.9 5.5 1.8
-MODEL 571116041@corn 88.6783 6.37255 8.36302 0 0 0 2.25 2.25 2.25 user\assets\models\misc\corn.obj user\assets\textures\diffuse_maps\misc\corn.png ? ? ? 0 0 1 0 0 1 1 1 0.75 1 1 1 1 ? 0 ?
-MODEL 2077739399@bush3 39.9498 6.37255 106.399 0 0 0 1.25 0.95 1.25 user\assets\models\trees\bush3.obj ? ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 ? 0 ? bush 0 0 0 1.9 5.5 1.8
+MODEL 862901338@tree6 34.1783 6.37255 110.863 0 0 0 1.25 1 1.25 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? leaves 0 8.8 0 3.85 8.30001 3.6 trunk 0 0 0 0.85 8.80001 0.8
 MODEL 1155270058@timber 75.8523 6.37255 16.834 0 0 0 1.75 1.75 1.75 user\assets\models\misc\timber.obj ? ? ? ? 0 0 0 0 0 1 1 1 0.5 1 1 1 1 ? 0 ? timber 0 0 0 5.6 0.95 0.9
 MODEL 611677766@stone4 160.852 6.37255 36.1781 0 0 0 2.5 2.5 2.5 user\assets\models\stones\stone4.obj user\assets\textures\diffuse_maps\stones\stone4.png ? ? ? 0 0 1 0 0 1 1 1 1 1 1 1 1 ? 0 ? stone 0.15 0 -0.05 1.75 0.72 1.15
 MODEL 1854670065@plant1 118.217 6.37244 71.6112 0 0 0 0.3 0.3 0.3 user\assets\models\foliage\plant1.obj user\assets\textures\diffuse_maps\foliage\plant1.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 ? 0 ? plant 0 0 0 9 3.9 7.89999
 MODEL 328140132@well 11.6103 6.37255 14.5917 0 0 0 3.25 3.25 3.25 user\assets\models\buildings\well.obj user\assets\textures\diffuse_maps\buildings\well.png ? ? user\assets\textures\normal_maps\buildings\well.png 0 0 1 0 0 0 1 1 1 1 1 1 1 ? 0 ? well 0.03 0 -0.01 1.19 1.61 1.34
+MODEL 2077739399@bush3 39.9498 6.37255 106.399 0 0 0 1.25 0.95 1.25 user\assets\models\trees\bush3.obj ? ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 ? 0 ? bush 0 0 0 1.9 5.5 1.8
+MODEL 1949097909@bush3 124.598 6.37255 113.991 0 0 0 1.25 0.95 1.25 user\assets\models\trees\bush3.obj ? ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 ? 0 ? bush 0 0 0 1.9 5.5 1.8
+MODEL 571116041@corn 88.6783 6.37255 8.36302 0 0 0 2.25 2.25 2.25 user\assets\models\misc\corn.obj user\assets\textures\diffuse_maps\misc\corn.png ? ? ? 0 0 1 0 0 1 1 1 0.75 1 1 1 1 ? 0 ?
+MODEL 1174477819@tree6 145.712 6.37211 41.8047 0 0 0 1.25 1 1.25 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
+MODEL 1327527311@bush2 147.731 6.37255 68.4513 0 0 0 0.75 0.5 0.75 user\assets\models\trees\bush2.obj user\assets\textures\diffuse_maps\trees\tree_bush_2.png ? ? user\assets\textures\normal_maps\trees\tree_bush_2.png 0 0 1 1 0 0 1 1 1 1 1 1 1 ? 0 ? bush 0 0 0 3.1 10 3.1
+MODEL 1406965968@bush1 33.1914 6.37255 117.348 0 0 0 1 0.5 1 user\assets\models\trees\bush1.obj user\assets\textures\diffuse_maps\trees\bush1.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 ? 0 ? bush 0 0 0 2.4 9.8 2.5
+MODEL 1426447566@plant2 70.7347 6.37255 94.9555 0 0 0 1.25 1.25 1.25 user\assets\models\foliage\plant2.obj user\assets\textures\diffuse_maps\foliage\plant2.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 ? 0 ? plant 0 0 0 2.2 1.3 2.1
 MODEL 1633094214@plant3 76.7717 6.37255 124.244 0 0 0 4.5 5 4.5 user\assets\models\foliage\plant3.obj user\assets\textures\diffuse_maps\foliage\plant3.png ? ? ? 0 0 1 0 0 0 1 1 1 1 1 1 1 ? 0 ? plant 0 0 0.08 0.5 0.34 0.3
 MODEL 1490051131@stone4 142.576 6.37255 79.4003 0 0 0 2.5 2.5 2.5 user\assets\models\stones\stone4.obj user\assets\textures\diffuse_maps\stones\stone4.png ? ? ? 0 0 1 0 0 1 1 1 1 1 1 1 1 ? 0 ? stone 0.15 0 -0.05 1.75 0.72 1.15
 MODEL 642312986@tree6 118.516 6.37255 88.6248 0 0 0 1.6 1.52 1.6 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
 MODEL 152754758@bush1 91.086 6.37255 86.9546 0 0 0 1 0.5 1 user\assets\models\trees\bush1.obj user\assets\textures\diffuse_maps\trees\bush1.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 ? 0 ? bush 0 0 0 2.4 9.8 2.5
 MODEL 1026392561@corn 88.0859 6.37255 3.64754 0 0 0 2.25 2.25 2.25 user\assets\models\misc\corn.obj user\assets\textures\diffuse_maps\misc\corn.png ? ? ? 0 0 1 0 0 1 1 1 0.75 1 1 1 1 ? 0 ?
 MODEL 2114790631@timber 69.6526 6.37255 1 0 90 0 1.75 1.75 1.75 user\assets\models\misc\timber.obj ? ? ? ? 0 0 0 0 0 1 1 1 0.5 1 1 1 1 ? 0 ? timber 0 0 0 5.6 0.95 0.9
+MODEL 1228947928@lantern 40.8493 6.37254 69.7253 0 0 0 1 1 1 user\assets\models\misc\lantern.obj user\assets\textures\diffuse_maps\misc\lantern.png ? ? user\assets\textures\normal_maps\misc\lantern.png 0 0 1 0 0 1 1 1 1 1 1 1 1 ? 0 ? lantern 1.6 3.1 0 0.6 1.5 0.6 arm 1.1 4.3 0 1.7 0.3 0.3 pole 0 0 0 0.4 5.3 0.4
 MODEL 903727639@tree2 121.038 6.37255 107.934 0 0 0 1.6 1.8 1.6 user\assets\models\trees\tree2.obj user\assets\textures\diffuse_maps\trees\tree_bush_2.png ? ? user\assets\textures\normal_maps\trees\tree_bush_2.png 0 0 1 1 0 0 1 1 0.7 1 1 1 1 ? 0 ? trunk 0 0 0 0.7 4.6 0.8 leaves 0 4.6 0 4.2 8.2 4.1
 MODEL 95562319@animalpen 10.2492 6.37255 74.954 0 0 0 2.25 2.25 2.25 user\assets\models\misc\animalpen.obj user\assets\textures\diffuse_maps\misc\animalpen.png ? ? ? 0 0 1 0 0 1 1 1 0.75 1 1 1 1 ? 0 ? right 3.5 0 0 0.2 1.1 7.5 back 0 0 -3.5 7.5 1.1 0.2 front 0 0 3.5 7.6 1 0.2 left -3.5 0 0 0.2 1.1 7.5
 MODEL 399597230@tree6 146.457 6.37255 74.7012 0 0 0 1.6 1.68 1.6 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
@@ -102,7 +103,7 @@ MODEL 987538803@tree6 46.975 6.37255 111.097 0 0 0 1.6 1.4 1.6 user\assets\model
 MODEL 136697427@crate1 56.9858 6.37255 12.8051 0 0 0 1.6 1.6 1.6 user\assets\models\misc\crate1.obj user\assets\textures\diffuse_maps\misc\crate1.png ? ? user\assets\textures\normal_maps\misc\crate1.png 0 0 1 0 0 1 1 1 0.5 1 1 1 1 ? 0 ? crate 0 0 0 0.9 0.9 0.9
 MODEL 1035701772@tree6 49.9304 6.37255 129.055 0 0 0 1.16 0.92 1.16 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
 MODEL 829666111@tree6 41.912 10.2941 139.55 0 0 0 1.25 1 1.25 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
-MODEL 3709863@gate 29.7579 6.37255 -22.3264 0 0 0 1.25 1.25 1.25 user\assets\models\buildings\gate.obj ? ? ? ? 0 0 0 0 0 0 1 1 0.6 1 1 1 1 ? 0 ? gate_left -3.8 0 -1.5 4 14 5 tower_left -8.4 0 -0.1 5.5 19 6.9 tower_right 8.5 0 0 5.5 19.2 6.9 gate_right 4 0 -1.5 4.4 14 5
+MODEL 3709863@gate 29.7579 6.37255 -22.3264 0 0 0 1.25 1.25 1.25 user\assets\models\buildings\gate.obj ? ? ? ? 0 0 0 0 0 0 1 1 0.6 1 1 1 1 ? 0 ? tower_left -8.4 0 -0.1 5.5 19 6.9 gate_left -3.8 0 -1.5 4 14 5 tower_right 8.5 0 0 5.5 19.2 6.9 gate_right 4 0 -1.5 4.4 14 5
 MODEL 1723079576@tree6 67.1264 11.2745 134.23 0 0 0 1.25 1 1.25 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
 MODEL 2001589163@tree2 123.768 6.37255 77.1132 0 0 0 1.25 1.25 1.25 user\assets\models\trees\tree2.obj user\assets\textures\diffuse_maps\trees\tree_bush_2.png ? ? user\assets\textures\normal_maps\trees\tree_bush_2.png 0 0 1 1 0 0 1 1 0.7 1 1 1 1 ? 0 ? trunk 0 0 0 0.7 4.6 0.8 leaves 0 4.6 0 4.2 8.2 4.1
 MODEL 248093031@bridge 46.9838 6.12004 87.0248 0 0 0 1.5 1.5 1.5 user\assets\models\buildings\bridge.obj user\assets\textures\diffuse_maps\buildings\bridge.png ? ? user\assets\textures\normal_maps\buildings\bridge.png 0 0 1 0 0 1 1 1 0.8 1 1 1 1 ? 0 ? bridge 0 0 0 3.15 0.18 13 right -1.35 -7.45058e-09 0 0.45 1.2 13 left 1.35 0 0 0.44 1.2 13
@@ -289,17 +290,18 @@ MODEL 1623424494@haybale 19.3567 6.37255 59.4468 0 0 0 1.5 1.5 1.5 user\assets\m
 MODEL 813467960@beehive 12.5851 6.37255 63.8489 0 0 0 1.75 1.75 1.75 user\assets\models\misc\beehive.obj user\assets\textures\diffuse_maps\misc\beehive.png ? ? ? 0 0 1 0 0 1 1 1 0.75 1 1 1 1 ? 0 ? beehive -0.05 0 -0.05 2.4 2 2.1
 MODEL 369178111@timberstack 53.7951 6.37255 1.15161 0 90 0 2.75 2.75 2.75 user\assets\models\misc\timberstack.obj user\assets\textures\diffuse_maps\misc\timberstack.png ? ? ? 0 0 0 0 0 1 1 1 0.5 1 1 1 1 ? 0 ? timberstack 0 1.49012e-08 0 1.4 1 4
 MODEL 372700021@tree1 19.9623 6.37255 72.9763 0 0 0 1.75 1.75 1.75 user\assets\models\trees\tree1.obj user\assets\textures\diffuse_maps\trees\tree1.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 ? 0 ? leaves 0 3.2 0 4.5 2.5 3.9 trunk 0 0 0 0.4 3.2 0.5
+BILLBOARD 1942415421@fire 42.4117 10.0026 69.7343 0 -176.794 -0 1.8 1.2 1 1 1 0 1 user\assets\textures\billboard_maps\fire1.png 1 ? ? 1 6 6 2
 AMBIENT_LIGHT 1 1 1 0.5
 DIRECTIONAL_LIGHT 1000 1000 1000 1 1 1 1 200
 CAMERA_FOV 90
 LOD_DISTANCE 1000
 EDITOR_SPEED 5
-EDITOR_POSITION 56.8845 28.1418 17.5668
-EDITOR_YAW 114.211
-EDITOR_PITCH -29.4909
+EDITOR_POSITION 40.6505 12.2417 38.2969
+EDITOR_YAW 45.6501
+EDITOR_PITCH -13.2108
 GRAPHICS_SHADOWS 1 100 50.000000 50.000000 0.000000 0.000000 0.000000 0.000000 1 0
 GRAPHICS_MOTIONBLUR 1 0.1
-GRAPHICS_DOF 1 0 100 10
+GRAPHICS_DOF 1 1 5 3
 GRAPHICS_FOG 1 150 512 0.75 0.498039 0.498039 0.498039
 GRAPHICS_LENSFLARE 1 user\assets\textures\flare_maps\flare.png 1 1
 GRAPHICS_SKYHDR 1 0.3

@@ -565,9 +565,6 @@
     <ClCompile Include="Source\script_interpreter_func_math.cpp">
       <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
     </ClCompile>
-    <ClCompile Include="Source\script_interpreter_func_fe3d_core.cpp">
-      <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
-    </ClCompile>
     <ClCompile Include="Source\script_interpreter_func_fe3d_aabb.cpp">
       <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
     </ClCompile>
@@ -620,6 +617,9 @@
       <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
     </ClCompile>
     <ClCompile Include="Source\script_interpreter_func_misc.cpp">
+      <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_interpreter_func_fe3d_core.cpp">
       <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
     </ClCompile>
   </ItemGroup>

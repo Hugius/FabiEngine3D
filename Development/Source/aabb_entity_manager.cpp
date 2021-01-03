@@ -73,7 +73,7 @@ void AabbEntityManager::update(
 {
 	for (auto& [keyID, entity] : _getAabbEntities())
 	{
-		// Optional translation update
+		// Optional transformation updates
 		if (entity->getParentID() != "")
 		{
 			// Determine parent type

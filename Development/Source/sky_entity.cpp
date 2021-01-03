@@ -20,39 +20,39 @@ void SkyEntity::updateRotationMatrix()
 	}
 }
 
-void SkyEntity::setDiffuseMapPaths(const array<string, 6>& val)
+void SkyEntity::setDiffuseMapPaths(const array<string, 6>& value)
 {
-	_diffuseMapPaths = val;
+	_diffuseMapPaths = value;
 }
 
-void SkyEntity::setColor(Vec3 val)
+void SkyEntity::setColor(Vec3 value)
 {
-	_color = val;
+	_color = value;
 }
 
-void SkyEntity::setCubeMap(GLuint val)
+void SkyEntity::setCubeMap(GLuint value)
 {
-	_cubeMap = val;
+	_cubeMap = value;
 }
 
-void SkyEntity::setOriginalLightness(float val)
+void SkyEntity::setOriginalLightness(float value)
 {
-	_originalLightness = val;
+	_originalLightness = value;
 }
 
-void SkyEntity::setLightness(float val)
+void SkyEntity::setLightness(float value)
 {
-	_lightness = val;
+	_lightness = value;
 }
 
-void SkyEntity::setRotationSpeed(float val)
+void SkyEntity::setRotationSpeed(float value)
 {
-	_rotationSpeed = val;
+	_rotationSpeed = value;
 }
 
-void SkyEntity::rotateAllDirections(bool val)
+void SkyEntity::rotateAllDirections(bool value)
 {
-	_rotateAllDirections = val;
+	_rotateAllDirections = value;
 }
 
 const array<string, 6>& SkyEntity::getDiffuseMapPaths() const

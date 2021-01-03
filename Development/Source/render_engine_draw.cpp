@@ -157,7 +157,7 @@ void RenderEngine::_renderAabbEntities()
 void RenderEngine::_renderFinalSceneTexture()
 {
 	_finalRenderer.bind();
-	_finalRenderer.render(_finalSurface, _renderBus.getMotionBlurMap());
+	_finalRenderer.render(_finalSurface, _renderBus.getPostProcessedSceneMap(), _renderBus.getMotionBlurMap());
 	_finalRenderer.unbind();
 }
 

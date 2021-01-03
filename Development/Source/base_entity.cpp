@@ -40,9 +40,9 @@ void BaseEntity::clearOglBuffers()
 	_oglBuffers.clear();
 }
 
-void BaseEntity::setVisible(bool val)
+void BaseEntity::setVisible(bool value)
 {
-	_visible = val;
+	_visible = value;
 }
 
 const vector<OpenGLBuffer*>& BaseEntity::getOglBuffers() const

@@ -16,14 +16,14 @@ public:
 	void updateMatrices();
 
 	// Setters
-	void setPosition(Vec3 val);
-	void setLookatPosition(Vec3 val);
-	void setFOV(float val);
-	void setMouseSensitivity(float val);
-	void setYaw(float val);
-	void setPitch(float val);
-	void setNearZ(float val);
-	void setFarZ(float val);
+	void setPosition(Vec3 value);
+	void setLookatPosition(Vec3 value);
+	void setFOV(float value);
+	void setMouseSensitivity(float value);
+	void setYaw(float value);
+	void setPitch(float value);
+	void setNearZ(float value);
+	void setFarZ(float value);
 
 	// Other
 	void enableLookat();

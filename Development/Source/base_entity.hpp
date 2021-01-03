@@ -14,7 +14,7 @@ public:
 
 	void addOglBuffer(OpenGLBuffer* buffer, bool deleteOnDestroy = true);
 	void clearOglBuffers();
-	void setVisible(bool val);
+	void setVisible(bool value);
 
 	const vector<OpenGLBuffer*>& getOglBuffers() const;
 	const OpenGLBuffer* getOglBuffer(int index) const;

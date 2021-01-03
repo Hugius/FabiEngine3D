@@ -17,19 +17,19 @@ void Collision::operator+=(const Collision& c)
 	if (_z > 1) _z = 1;
 }
 
-void Collision::setX(bool val)
+void Collision::setX(bool value)
 { 
-	_x = val;
+	_x = value;
 }
 
-void Collision::setY(bool val)
+void Collision::setY(bool value)
 {
-	_y = val;
+	_y = value;
 }
 
-void Collision::setZ(bool val)
+void Collision::setZ(bool value)
 { 
-	_z = val; 
+	_z = value; 
 }
 
 inline bool Collision::xCollided() const

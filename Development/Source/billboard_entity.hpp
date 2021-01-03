@@ -10,36 +10,36 @@ public:
 
 	// Updates
 	void updateModelMatrix();
-	void translate(Vec3 val);
-	void rotate(Vec3 val);
-	void scale(Vec3 val);
+	void translate(Vec3 value);
+	void rotate(Vec3 value);
+	void scale(Vec3 value);
 
 	// Setters
-	void setCameraFacingX(bool val);
-	void setCameraFacingY(bool val);
-	void setTransparent(bool val);
-	void setDepthMapIncluded(bool val);
-	void setDiffuseMap(GLuint val);
-	void setTranslation(Vec3 val);
-	void setInitialRotation(Vec3 val);
-	void setRotation(Vec3 val);
-	void setScaling(Vec3 val);
+	void setCameraFacingX(bool value);
+	void setCameraFacingY(bool value);
+	void setTransparent(bool value);
+	void setDepthMapIncluded(bool value);
+	void setDiffuseMap(GLuint value);
+	void setTranslation(Vec3 value);
+	void setInitialRotation(Vec3 value);
+	void setRotation(Vec3 value);
+	void setScaling(Vec3 value);
 	void setColor(Vec3 color);
 	void setTextContent(const string& text);
 	void setFontPath(const string& fontPath);
 	void setDiffuseMapPath(const string& diffuseMapPath);
 	void playSpriteAnimation(int maxAnimationRepeats);
 	void stopSpriteAnimation();
-	void setSpriteRowIndex(int val);
-	void setSpriteColumnIndex(int val);
-	void setTotalSpriteRows(int val);
-	void setTotalSpriteColumns(int val);
-	void setMaxFramestep(int val);
+	void setSpriteRowIndex(int value);
+	void setSpriteColumnIndex(int value);
+	void setTotalSpriteRows(int value);
+	void setTotalSpriteColumns(int value);
+	void setMaxFramestep(int value);
 	void increasePassedFrames();
 	void resetPassedFrames();
 	void increaseAnimationRepeats();
-	void setLightness(float val);
-	void setMaxY(float val);
+	void setLightness(float value);
+	void setMaxY(float value);
 
 	// Getters
 	const Matrix44 & getModelMatrix() const;

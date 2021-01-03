@@ -9,28 +9,28 @@ public:
 	~WaterEntity() = default;
 	
 	// Setters
-	void setSpeed(Vec2 val);
-	void setRippleOffset(Vec2 val);
-	void setWaveOffset(Vec2 val);
-	void setPosition(Vec3 val);
-	void setColor(Vec3 val);
-	void setDudvMap(GLuint val);
-	void setNormalMap(GLuint val);
-	void setDisplacementMap(GLuint val);
-	void setDudvMapPath(const string& val);
-	void setNormalMapPath(const string& val);
-	void setDisplacementMapPath(const string& val);
-	void setUvRepeat(float val);
-	void setWaveHeightFactor(float val);
-	void setSpecularLightingFactor(float val);
-	void setSpecularLightingIntensity(float val);
-	void setSize(float val);
-	void setTransparency(float val);
-	void setWaving(bool val);
-	void setRippling(bool val);
-	void setSpecularLighted(bool val);
-	void setReflective(bool val);
-	void setRefractive(bool val);
+	void setSpeed(Vec2 value);
+	void setRippleOffset(Vec2 value);
+	void setWaveOffset(Vec2 value);
+	void setPosition(Vec3 value);
+	void setColor(Vec3 value);
+	void setDudvMap(GLuint value);
+	void setNormalMap(GLuint value);
+	void setDisplacementMap(GLuint value);
+	void setDudvMapPath(const string& value);
+	void setNormalMapPath(const string& value);
+	void setDisplacementMapPath(const string& value);
+	void setUvRepeat(float value);
+	void setWaveHeightFactor(float value);
+	void setSpecularLightingFactor(float value);
+	void setSpecularLightingIntensity(float value);
+	void setSize(float value);
+	void setTransparency(float value);
+	void setWaving(bool value);
+	void setRippling(bool value);
+	void setSpecularLighted(bool value);
+	void setReflective(bool value);
+	void setRefractive(bool value);
 	void setSimplifiedOglBuffer(OpenGLBuffer* buffer);
 
 	// Getters

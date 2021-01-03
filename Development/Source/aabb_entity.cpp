@@ -31,14 +31,14 @@ void AabbEntity::updateModelMatrix()
 	_modelMatrix = translationMatrix * scalingMatrix;
 }
 
-void AabbEntity::setTranslation(Vec3 val)
+void AabbEntity::setTranslation(Vec3 value)
 {
-	_translation = val;
+	_translation = value;
 }
 
-void AabbEntity::setScaling(Vec3 val)
+void AabbEntity::setScaling(Vec3 value)
 {
-	_scaling = val;
+	_scaling = value;
 }
 
 void AabbEntity::swapScaling(Direction direction)
@@ -57,29 +57,29 @@ void AabbEntity::setCollisionDirection(const Direction& direction)
 	_collisionDirection = direction;
 }
 
-void AabbEntity::setResponsive(bool val)
+void AabbEntity::setResponsive(bool value)
 {
-	_responsive = val;
+	_responsive = value;
 }
 
-void AabbEntity::translate(Vec3 val)
+void AabbEntity::translate(Vec3 value)
 {
-	_translation += val;
+	_translation += value;
 }
 
-void AabbEntity::scale(Vec3 val)
+void AabbEntity::scale(Vec3 value)
 {
-	_scaling += val;
+	_scaling += value;
 }
 
-void AabbEntity::setLocalTranslation(Vec3 val)
+void AabbEntity::setLocalTranslation(Vec3 value)
 {
-	_localTranslation = val;
+	_localTranslation = value;
 }
 
-void AabbEntity::setLocalScaling(Vec3 val)
+void AabbEntity::setLocalScaling(Vec3 value)
 {
-	_localScaling = val;
+	_localScaling = value;
 }
 
 const Matrix44 & AabbEntity::getModelMatrix() const

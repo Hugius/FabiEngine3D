@@ -19,7 +19,7 @@ public:
 
 	void allocateChannels(int count);
 	void update(CameraManager& camera, std::vector<AudioChunk>& chunks, std::vector<AudioMusic>& music);	
-	void setChunksEnabled(bool val);
+	void setChunksEnabled(bool value);
 	void pauseAllChunks();
 	void resumeAllChunks();
 	void stopAllChunks();
@@ -28,7 +28,7 @@ public:
 	void resumeChunk(AudioChunk& chunk);
 	void stopChunk(AudioChunk& chunk, int fadeMillis);
 	void setChunkVolume(AudioChunk& chunk, int volume);
-	void setMusicEnabled(bool val);
+	void setMusicEnabled(bool value);
 	void pauseMusic();
 	void resumeMusic();
 	void setMusicVolume(int volume);

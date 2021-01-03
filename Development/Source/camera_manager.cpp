@@ -220,10 +220,10 @@ void CameraManager::disableFreeMovement()
 	_isFreeMovementEnabled = false;
 }
 
-void CameraManager::setFOV(float val)
+void CameraManager::setFOV(float value)
 {
 	_viewMatrix.m[3][2] = _front.dot(_position);
-	_fov = val;
+	_fov = value;
 }
 
 void CameraManager::setMouseSensitivity(float speed)
@@ -231,26 +231,26 @@ void CameraManager::setMouseSensitivity(float speed)
 	_mouseSensitivity = speed;
 }
 
-void CameraManager::setYaw(float val)
+void CameraManager::setYaw(float value)
 {
-	_yaw = val;
+	_yaw = value;
 	_yaw = std::fmod(_yaw, 360.0f);
 }
 
-void CameraManager::setPitch(float val)
+void CameraManager::setPitch(float value)
 {
-	_pitch = val;
+	_pitch = value;
 	_pitch = std::clamp(_pitch, -89.0f, 89.0f);
 }
 
-void CameraManager::setNearZ(float val)
+void CameraManager::setNearZ(float value)
 {
-	_nearZ = val;
+	_nearZ = value;
 }
 
-void CameraManager::setFarZ(float val)
+void CameraManager::setFarZ(float value)
 {
-	_farZ = val;
+	_farZ = value;
 }
 
 const Vec3 CameraManager::getPosition() const
@@ -331,17 +331,17 @@ void CameraManager::translate(Vec3 translation)
 	}
 }
 
-void CameraManager::setPosition(Vec3 val)
+void CameraManager::setPosition(Vec3 value)
 {
 	if (_isFreeMovementEnabled)
 	{
-		_position = val;
+		_position = value;
 	}
 }
 
-void CameraManager::setLookatPosition(Vec3 val)
+void CameraManager::setLookatPosition(Vec3 value)
 {
-	_lookatPosition = val;
+	_lookatPosition = value;
 }
 
 void CameraManager::invertYaw()

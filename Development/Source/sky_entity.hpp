@@ -14,13 +14,13 @@ public:
 	~SkyEntity() = default;
 
 	void updateRotationMatrix();
-	void setDiffuseMapPaths(const array<string, 6>& val);
-	void setColor(Vec3 val);
-	void setCubeMap(GLuint val);
-	void setOriginalLightness(float val);
-	void setLightness(float val);
-	void setRotationSpeed(float val);
-	void rotateAllDirections(bool val);
+	void setDiffuseMapPaths(const array<string, 6>& value);
+	void setColor(Vec3 value);
+	void setCubeMap(GLuint value);
+	void setOriginalLightness(float value);
+	void setLightness(float value);
+	void setRotationSpeed(float value);
+	void rotateAllDirections(bool value);
 
 	const array<string, 6>& getDiffuseMapPaths() const;
 	const Matrix44& getRotationMatrix()			 const;

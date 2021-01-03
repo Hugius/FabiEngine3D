@@ -204,7 +204,7 @@ void SceneEditor::_updateMotionblurGraphicsSettingsMenu()
 			}
 			else if (screen->getButton("strength")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("strength", "Strength (%)", strength * 10.0f, Vec2(0.0f), Vec2(0.2f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("strength", "Strength (%)", strength * 100.0f, Vec2(0.0f), Vec2(0.2f, 0.1f));
 			}
 		}
 		
@@ -214,7 +214,7 @@ void SceneEditor::_updateMotionblurGraphicsSettingsMenu()
 		// Strength value
 		if (_gui.getGlobalScreen()->checkValueForm("strength", strength))
 		{
-			strength /= 10.0f;
+			strength /= 100.0f;
 		}
 
 		// Enable or disable motionblur

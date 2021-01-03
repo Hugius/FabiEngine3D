@@ -13,105 +13,106 @@ public:
 	RenderBus() = default;
 	
 	// Textures
-	void setSceneMap(GLuint val);
-	void setSkyReflectionCubeMap(GLuint val);
-	void setSceneReflectionMap(GLuint val);
-	void setSceneRefractionMap(GLuint val);
-	void setShadowMap(GLuint val);
-	void setBloomMap(GLuint val);
-	void setPostProcessedSceneMap(GLuint val);
-	void setSceneDepthMap(GLuint val);
-	void setBlurMap(GLuint val);
-	void setMotionBlurMap(GLuint val);
-	void setLensFlareMap(GLuint val);
+	void setSceneMap(GLuint value);
+	void setSkyReflectionCubeMap(GLuint value);
+	void setSceneReflectionMap(GLuint value);
+	void setSceneRefractionMap(GLuint value);
+	void setShadowMap(GLuint value);
+	void setBloomMap(GLuint value);
+	void setPostProcessedSceneMap(GLuint value);
+	void setSceneDepthMap(GLuint value);
+	void setBlurMap(GLuint value);
+	void setMotionBlurMap(GLuint value);
+	void setLensFlareMap(GLuint value);
 
 	// Matrices
-	void setViewMatrix(const Matrix44 & val);
-	void setProjectionMatrix(const Matrix44 & val);
-	void setSkyRotationMatrix(const Matrix44 & val);
-	void setShadowMatrix(const Matrix44 & val);
+	void setViewMatrix(const Matrix44 & value);
+	void setProjectionMatrix(const Matrix44 & value);
+	void setSkyRotationMatrix(const Matrix44 & value);
+	void setShadowMatrix(const Matrix44 & value);
 
 	// Vector4
-	void setFlareSourcePositionClipspace(Vec4 val);
+	void setFlareSourcePositionClipspace(Vec4 value);
 
 	// Vector3
-	void setCameraPosition(Vec3 val);
-	void setCameraFront(Vec3 val);
-	void setAmbientLightColor(Vec3 val);
-	void setDirectionalLightPos(Vec3 val);
-	void setDirectionalLightColor(Vec3 val);
-	void setSpotLightColor(Vec3 val);
-	void setShadowEyePosition(Vec3 val);
-	void setShadowAreaCenter(Vec3 val);
-	void setFogColor(Vec3 val);
-	void setFlareSourcePosition(Vec3 val);
+	void setCameraPosition(Vec3 value);
+	void setCameraFront(Vec3 value);
+	void setAmbientLightColor(Vec3 value);
+	void setDirectionalLightPos(Vec3 value);
+	void setDirectionalLightColor(Vec3 value);
+	void setSpotLightColor(Vec3 value);
+	void setShadowEyePosition(Vec3 value);
+	void setShadowAreaCenter(Vec3 value);
+	void setFogColor(Vec3 value);
+	void setFlareSourcePosition(Vec3 value);
 
 	// Floats
-	void setAmbientLightIntensity(float val);
-	void setDirectionalLightIntensity(float val);
-	void setSpotLightIntensity(float val);
-	void setMaxSpotLightAngle(float val);
-	void setMaxSpotLightDistance(float val);
-	void setFogMinDistance(float val);
-	void setFogMaxDistance(float val);
-	void setFogDefaultFactor(float val);
-	void setBloomIntensity(float val);
-	void setBloomBrightnessTreshold(float val);
-	void setCameraYaw(float val);
-	void setCameraPitch(float val);
-	void setNearZ(float val);
-	void setFarZ(float val);
-	void setDofMaxDistance(float val);
-	void setDofBlurDistance(float val);
-	void setSkyReflectionFactor(float val);
-	void setSceneReflectionHeight(float val);
-	void setSceneReflectionOffset(float val);
-	void setSceneReflectionFactor(float val);
-	void setShadowAreaSize(float val);
-	void setShadowAreaReach(float val);
-	void setLensFlareAlpha(float val);
-	void setLensFlareIntensity(float val);
-	void setLensFlareMultiplier(float val);
-	void setMotionBlurStrength(float val);
+	void setAmbientLightIntensity(float value);
+	void setDirectionalLightIntensity(float value);
+	void setSpotLightIntensity(float value);
+	void setMaxSpotLightAngle(float value);
+	void setMaxSpotLightDistance(float value);
+	void setFogMinDistance(float value);
+	void setFogMaxDistance(float value);
+	void setFogDefaultFactor(float value);
+	void setBloomIntensity(float value);
+	void setBloomBrightnessTreshold(float value);
+	void setCameraYaw(float value);
+	void setCameraPitch(float value);
+	void setNearZ(float value);
+	void setFarZ(float value);
+	void setDofMaxDistance(float value);
+	void setDofBlurDistance(float value);
+	void setSkyReflectionFactor(float value);
+	void setSceneReflectionHeight(float value);
+	void setSceneReflectionOffset(float value);
+	void setSceneReflectionFactor(float value);
+	void setShadowAreaSize(float value);
+	void setShadowAreaReach(float value);
+	void setLensFlareAlpha(float value);
+	void setLensFlareIntensity(float value);
+	void setLensFlareMultiplier(float value);
+	void setMotionBlurStrength(float value);
+	void setMotionBlurMixValue(float value);
 
 	// Integers
-	void setBloomBlurSize(int val);
+	void setBloomBlurSize(int value);
 	void resetTriangleCount();
-	void increaseTriangleCount(int val);
-	void setMsaaSampleCount(int val);
-	void setShadowMapSize(int val);
-	void setSceneReflectionMapSize(int val);
-	void setSceneRefractionMapSize(int val);
+	void increaseTriangleCount(int value);
+	void setMsaaSampleCount(int value);
+	void setShadowMapSize(int value);
+	void setSceneReflectionMapSize(int value);
+	void setSceneRefractionMapSize(int value);
 
 	// Booleans
-	void setMsaaEnabled(bool val);
-	void setAmbientLightingEnabled(bool val);
-	void setDirectionalLightingEnabled(bool val);
-	void setSpecularLightingEnabled(bool val);
-	void setPointLightingEnabled(bool val);
-	void setSpotLightingEnabled(bool val);
-	void setFogEnabled(bool val);
-	void setLightMappingEnabled(bool val);
-	void setNormalMappingEnabled(bool val);
-	void setSkyReflectionsEnabled(bool val);
-	void setSceneReflectionsEnabled(bool val);
-	void setBloomEnabled(bool val);
-	void setWaterEffectsEnabled(bool val);
-	void setSkyHdrEnabled(bool val);
-	void setShadowsEnabled(bool val);
-	void setDofEnabled(bool val);
-	void setMotionBlurEnabled(bool val);
-	void setLensFlareEnabled(bool val);
-	void setWireframeRenderingEnabled(bool val);
-	void setAabbFrameRenderingEnabled(bool val);
-	void setDebugRenderingEnabled(bool val);
-	void setShadowFrameRenderingEnabled(bool val);
-	void setTriangleCountingEnabled(bool val);
-	void setDofDynamic(bool val);
+	void setMsaaEnabled(bool value);
+	void setAmbientLightingEnabled(bool value);
+	void setDirectionalLightingEnabled(bool value);
+	void setSpecularLightingEnabled(bool value);
+	void setPointLightingEnabled(bool value);
+	void setSpotLightingEnabled(bool value);
+	void setFogEnabled(bool value);
+	void setLightMappingEnabled(bool value);
+	void setNormalMappingEnabled(bool value);
+	void setSkyReflectionsEnabled(bool value);
+	void setSceneReflectionsEnabled(bool value);
+	void setBloomEnabled(bool value);
+	void setWaterEffectsEnabled(bool value);
+	void setSkyHdrEnabled(bool value);
+	void setShadowsEnabled(bool value);
+	void setDofEnabled(bool value);
+	void setMotionBlurEnabled(bool value);
+	void setLensFlareEnabled(bool value);
+	void setWireframeRenderingEnabled(bool value);
+	void setAabbFrameRenderingEnabled(bool value);
+	void setDebugRenderingEnabled(bool value);
+	void setShadowFrameRenderingEnabled(bool value);
+	void setTriangleCountingEnabled(bool value);
+	void setDofDynamic(bool value);
 
 	// Strings
-	void setCursorEntityID(const string& val);
-	void setLensFlareMapPath(const string& val);
+	void setCursorEntityID(const string& value);
+	void setLensFlareMapPath(const string& value);
 
 	// Textures
 	const GLuint getSceneMap()              const;
@@ -174,6 +175,7 @@ public:
 	const float getLensFlareIntensity()		   const;
 	const float getLensFlareMultiplier()	   const;
 	const float getMotionBlurStrength()		   const;
+	const float getMotionBlurMixValue()		   const;
 
 	// Integers
 	const int getBloomBlurSize()		  const;
@@ -275,6 +277,7 @@ private:
 	float _lensFlareIntensity		 = 0.0f;
 	float _lensFlareMultiplier		 = 0.0f;
 	float _motionBlurStrength		 = 0.0f;
+	float _motionBlurMixValue		 = 0.0f;
 	
 	// Integers
 	int _bloomBlurSize			= 0;

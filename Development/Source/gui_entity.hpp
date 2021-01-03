@@ -14,21 +14,21 @@ public:
 	// Texture & color
 	void setDiffuseMap(GLuint diffuseMap);
 	void setColor(Vec3 color);
-	void setMirroredHorizontally(bool val);
-	void setMirroredVertically(bool val);
-	void setAlpha(float val);
+	void setMirroredHorizontally(bool value);
+	void setMirroredVertically(bool value);
+	void setAlpha(float value);
 
 	// Transformation
-	void setCentered(bool val);
-	void setTranslation(Vec2 val);
-	void setRotation(float val);
-	void setScaling(Vec2 val);
-	void translate(Vec2 val);
-	void rotate(float val);
-	void scale(Vec2 val);
-	void setMinPosition(Vec2 val);
-	void setMaxPosition(Vec2 val);
-	void setDepth(unsigned int val);
+	void setCentered(bool value);
+	void setTranslation(Vec2 value);
+	void setRotation(float value);
+	void setScaling(Vec2 value);
+	void translate(Vec2 value);
+	void rotate(float value);
+	void scale(Vec2 value);
+	void setMinPosition(Vec2 value);
+	void setMaxPosition(Vec2 value);
+	void setDepth(unsigned int value);
 
 	// Texture & color
 	const GLuint getDiffuseMap() const;
@@ -48,7 +48,7 @@ public:
 	const unsigned int getDepth() const;
 
 	// Other
-	void setDepthEntity(bool val);
+	void setDepthEntity(bool value);
 	const bool isDepthEntity() const;
 
 private:

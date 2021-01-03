@@ -1,103 +1,103 @@
 #include "water_entity.hpp"
 
-void WaterEntity::setPosition(Vec3 val)
+void WaterEntity::setPosition(Vec3 value)
 {
-	_position = val;
+	_position = value;
 }
 
-void WaterEntity::setColor(Vec3 val)
+void WaterEntity::setColor(Vec3 value)
 {
-	_color = val;
+	_color = value;
 }
 
-void WaterEntity::setDudvMap(GLuint val)
+void WaterEntity::setDudvMap(GLuint value)
 {
-	_dudvMap = val;
+	_dudvMap = value;
 }
 
-void WaterEntity::setNormalMap(GLuint val)
+void WaterEntity::setNormalMap(GLuint value)
 {
-	_normalMap = val;
+	_normalMap = value;
 }
 
-void WaterEntity::setDisplacementMap(GLuint val)
+void WaterEntity::setDisplacementMap(GLuint value)
 {
-	_displacementMap = val;
+	_displacementMap = value;
 }
 
-void WaterEntity::setDudvMapPath(const string& val)
+void WaterEntity::setDudvMapPath(const string& value)
 {
-	_dudvMapPath = val;
+	_dudvMapPath = value;
 }
 
-void WaterEntity::setNormalMapPath(const string& val)
+void WaterEntity::setNormalMapPath(const string& value)
 {
-	_normalMapPath = val;
+	_normalMapPath = value;
 }
 
-void WaterEntity::setDisplacementMapPath(const string& val)
+void WaterEntity::setDisplacementMapPath(const string& value)
 {
-	_displacementMapPath = val;
+	_displacementMapPath = value;
 }
 
-void WaterEntity::setRippleOffset(Vec2 val)
+void WaterEntity::setRippleOffset(Vec2 value)
 {
-	_rippleOffset = val;
+	_rippleOffset = value;
 }
 
-void WaterEntity::setUvRepeat(float val)
+void WaterEntity::setUvRepeat(float value)
 {
-	_uvRepeat = val;
+	_uvRepeat = value;
 }
 
-void WaterEntity::setSpeed(Vec2 val)
+void WaterEntity::setSpeed(Vec2 value)
 {
-	_speed = val;
+	_speed = value;
 }
 
-void WaterEntity::setWaveOffset(Vec2 val)
+void WaterEntity::setWaveOffset(Vec2 value)
 {
-	_waveOffset = val;
+	_waveOffset = value;
 }
 
-void WaterEntity::setWaveHeightFactor(float val)
+void WaterEntity::setWaveHeightFactor(float value)
 {
-	_waveHeightFactor = val;
+	_waveHeightFactor = value;
 }
 
-void WaterEntity::setSpecularLightingFactor(float val)
+void WaterEntity::setSpecularLightingFactor(float value)
 {
-	_specularLightingFactor = val;
+	_specularLightingFactor = value;
 }
 
-void WaterEntity::setSpecularLightingIntensity(float val)
+void WaterEntity::setSpecularLightingIntensity(float value)
 {
-	_specularLightingIntensity = val;
+	_specularLightingIntensity = value;
 }
 
-void WaterEntity::setWaving(bool val)
+void WaterEntity::setWaving(bool value)
 {
-	_isWaving = val;
+	_isWaving = value;
 }
 
-void WaterEntity::setRippling(bool val)
+void WaterEntity::setRippling(bool value)
 {
-	_isRippling = val;
+	_isRippling = value;
 }
 
-void WaterEntity::setSpecularLighted(bool val)
+void WaterEntity::setSpecularLighted(bool value)
 {
-	_isSpecularLighted = val;
+	_isSpecularLighted = value;
 }
 
-void WaterEntity::setReflective(bool val)
+void WaterEntity::setReflective(bool value)
 {
-	_isReflective = val;
+	_isReflective = value;
 }
 
-void WaterEntity::setRefractive(bool val)
+void WaterEntity::setRefractive(bool value)
 {
-	_isRefractive = val;
+	_isRefractive = value;
 }
 
 void WaterEntity::setSimplifiedOglBuffer(OpenGLBuffer* buffer)
@@ -105,14 +105,14 @@ void WaterEntity::setSimplifiedOglBuffer(OpenGLBuffer* buffer)
 	_simplifiedOglBuffer = buffer;
 }
 
-void WaterEntity::setSize(float val)
+void WaterEntity::setSize(float value)
 {
-	_size = val;
+	_size = value;
 }
 
-void WaterEntity::setTransparency(float val)
+void WaterEntity::setTransparency(float value)
 {
-	_transparency = val;
+	_transparency = value;
 }
 
 const Vec3 WaterEntity::getPosition() const

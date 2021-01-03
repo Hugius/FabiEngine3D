@@ -89,19 +89,19 @@ Vec2 MousePicker::_converToNDC(Ivec2 val)
 	return Vec2(x, y);
 }
 
-Vec4 MousePicker::_convertToViewSpace(Vec4 val)
+Vec4 MousePicker::_convertToViewSpace(Vec4 value)
 {
 	Matrix44 invertedProjection = _renderBus.getProjectionMatrix();
 	invertedProjection.invert();
-	Vec4 viewCoords = invertedProjection * val;
+	Vec4 viewCoords = invertedProjection * value;
 	return Vec4(viewCoords.x, viewCoords.y, -1.0f, 0.0f);
 }
 
-Vec3 MousePicker::_convertToWorldSpace(Vec4 val)
+Vec3 MousePicker::_convertToWorldSpace(Vec4 value)
 {
 	Matrix44 invertedView = _renderBus.getViewMatrix();
 	invertedView.invert();
-	Vec4 worldCoords = invertedView * val;
+	Vec4 worldCoords = invertedView * value;
 	worldCoords.normalize();
 	return Vec3(worldCoords.x, worldCoords.y, worldCoords.z);
 }

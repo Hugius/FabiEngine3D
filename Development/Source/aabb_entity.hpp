@@ -12,18 +12,18 @@ public:
 
 	// Updates
 	void updateModelMatrix();
-	void translate(Vec3 val);
-	void scale(Vec3 val);
+	void translate(Vec3 value);
+	void scale(Vec3 value);
 
 	// Setters
-	void setLocalTranslation(Vec3 val);
-	void setLocalScaling(Vec3 val);
-	void setTranslation(Vec3 val);
-	void setScaling(Vec3 val);
+	void setLocalTranslation(Vec3 value);
+	void setLocalScaling(Vec3 value);
+	void setTranslation(Vec3 value);
+	void setScaling(Vec3 value);
 	void swapScaling(Direction direction);
 	void setParent(const string& ID, AabbParentType type);
 	void setCollisionDirection(const Direction& direction);
-	void setResponsive(bool val);
+	void setResponsive(bool value);
 
 	// Getters
 	const Matrix44 & getModelMatrix() const;

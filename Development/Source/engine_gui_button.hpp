@@ -15,7 +15,7 @@ public:
 	virtual void update(bool hoverable);
 	void show();
 	void hide();
-	void setHoverable(bool val);
+	void setHoverable(bool value);
 
 	bool isHovered();
 

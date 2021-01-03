@@ -1,9 +1,9 @@
 #include "game_entity.hpp"
 #include "logger.hpp"
 
-void GameEntity::addPart(const string& val)
+void GameEntity::addPart(const string& value)
 {
-	_partNames.push_back(val);
+	_partNames.push_back(value);
 	_modelMatrices.push_back(Matrix44(1.0f));
 	_translations.push_back(Vec3(0.0f));
 	_rotations.push_back(Vec3(0.0f));
@@ -73,296 +73,296 @@ void GameEntity::updateModelMatrix()
 	}
 }
 
-void GameEntity::setDiffuseMap(GLuint val)
+void GameEntity::setDiffuseMap(GLuint value)
 {
 	if (_diffuseMaps.empty())
 	{
-		_diffuseMaps.push_back(val);
+		_diffuseMaps.push_back(value);
 	}
 	else
 	{
-		_diffuseMaps[0] = val;
+		_diffuseMaps[0] = value;
 	}
 }
 
-void GameEntity::setLightMap(GLuint val)
+void GameEntity::setLightMap(GLuint value)
 {
 	if (_lightMaps.empty())
 	{
-		_lightMaps.push_back(val);
+		_lightMaps.push_back(value);
 	}
 	else
 	{
-		_lightMaps[0] = val;
+		_lightMaps[0] = value;
 	}
 }
 
-void GameEntity::setReflectionMap(GLuint val)
+void GameEntity::setReflectionMap(GLuint value)
 {
 	if (_reflectionMaps.empty())
 	{
-		_reflectionMaps.push_back(val);
+		_reflectionMaps.push_back(value);
 	}
 	else
 	{
-		_reflectionMaps[0] = val;
+		_reflectionMaps[0] = value;
 	}
 }
 
-void GameEntity::setNormalMap(GLuint val)
+void GameEntity::setNormalMap(GLuint value)
 {
 	if (_normalMaps.empty())
 	{
-		_normalMaps.push_back(val);
+		_normalMaps.push_back(value);
 	}
 	else
 	{
-		_normalMaps[0] = val;
+		_normalMaps[0] = value;
 	}
 }
 
-void GameEntity::addDiffuseMap(GLuint val)
+void GameEntity::addDiffuseMap(GLuint value)
 {
-	_diffuseMaps.push_back(val);
+	_diffuseMaps.push_back(value);
 }
 
-void GameEntity::addLightMap(GLuint val)
+void GameEntity::addLightMap(GLuint value)
 {
-	_lightMaps.push_back(val);
+	_lightMaps.push_back(value);
 }
 
-void GameEntity::addReflectionMap(GLuint val)
+void GameEntity::addReflectionMap(GLuint value)
 {
-	_reflectionMaps.push_back(val);
+	_reflectionMaps.push_back(value);
 }
 
-void GameEntity::addNormalMap(GLuint val)
+void GameEntity::addNormalMap(GLuint value)
 {
-	_normalMaps.push_back(val);
+	_normalMaps.push_back(value);
 }
 
-void GameEntity::setOriginalTranslation(Vec3 val)
+void GameEntity::setOriginalTranslation(Vec3 value)
 {
-	_originalTranslation = val;
+	_originalTranslation = value;
 }
 
-void GameEntity::setTranslation(Vec3 val, const string& partName)
+void GameEntity::setTranslation(Vec3 value, const string& partName)
 {
 	if (partName.empty() && _partNames.size() > 1)
 	{
-		_baseTranslation = val;
+		_baseTranslation = value;
 	}
 	else
 	{
-		_translations[_getPartIndex(partName)] = val;
+		_translations[_getPartIndex(partName)] = value;
 	}
 }
 
-void GameEntity::setOriginalRotation(Vec3 val)
+void GameEntity::setOriginalRotation(Vec3 value)
 {
-	_originalRotation = val;
+	_originalRotation = value;
 }
 
-void GameEntity::setRotation(Vec3 val, const string& partName)
+void GameEntity::setRotation(Vec3 value, const string& partName)
 {
 	if (partName.empty() && _partNames.size() > 1)
 	{
-		_baseRotation = val;
+		_baseRotation = value;
 	}
 	else
 	{
-		_rotations[_getPartIndex(partName)] = val;
+		_rotations[_getPartIndex(partName)] = value;
 	}
 }
 
-void GameEntity::setRotationOrigin(Vec3 val, const string& partName)
+void GameEntity::setRotationOrigin(Vec3 value, const string& partName)
 {
 	if (partName.empty() && _partNames.size() > 1)
 	{
-		_baseRotationOrigin = val;
+		_baseRotationOrigin = value;
 	}
 	else
 	{
-		_rotationOrigins[_getPartIndex(partName)] = val;
+		_rotationOrigins[_getPartIndex(partName)] = value;
 	}
 }
 
-void GameEntity::setOriginalScaling(Vec3 val)
+void GameEntity::setOriginalScaling(Vec3 value)
 {
-	_originalScaling = val;
+	_originalScaling = value;
 }
 
-void GameEntity::setScaling(Vec3 val, const string& partName)
-{
-	if (partName.empty() && _partNames.size() > 1)
-	{
-		_baseScaling = val;
-	}
-	else
-	{
-		_scalings[_getPartIndex(partName)] = val;
-	}
-}
-
-void GameEntity::translate(Vec3 val, const string& partName)
+void GameEntity::setScaling(Vec3 value, const string& partName)
 {
 	if (partName.empty() && _partNames.size() > 1)
 	{
-		_baseTranslation += val;
+		_baseScaling = value;
 	}
 	else
 	{
-		_translations[_getPartIndex(partName)] += val;
+		_scalings[_getPartIndex(partName)] = value;
 	}
 }
 
-void GameEntity::rotate(Vec3 val, const string& partName)
+void GameEntity::translate(Vec3 value, const string& partName)
 {
 	if (partName.empty() && _partNames.size() > 1)
 	{
-		_baseRotation += val;
+		_baseTranslation += value;
 	}
 	else
 	{
-		_rotations[_getPartIndex(partName)] += val;
+		_translations[_getPartIndex(partName)] += value;
 	}
 }
 
-void GameEntity::scale(Vec3 val, const string& partName)
+void GameEntity::rotate(Vec3 value, const string& partName)
 {
 	if (partName.empty() && _partNames.size() > 1)
 	{
-		_baseScaling += val;
+		_baseRotation += value;
 	}
 	else
 	{
-		_scalings[_getPartIndex(partName)] += val;
+		_rotations[_getPartIndex(partName)] += value;
 	}
 }
 
-void GameEntity::setColor(Vec3 val, const string& partName)
+void GameEntity::scale(Vec3 value, const string& partName)
+{
+	if (partName.empty() && _partNames.size() > 1)
+	{
+		_baseScaling += value;
+	}
+	else
+	{
+		_scalings[_getPartIndex(partName)] += value;
+	}
+}
+
+void GameEntity::setColor(Vec3 value, const string& partName)
 {
 	if (partName.empty() && _partNames.size() > 1)
 	{
 		for (auto& color : _colors)
 		{
-			color = val;
+			color = value;
 		}
 	}
 	else
 	{
-		_colors[_getPartIndex(partName)] = val;
+		_colors[_getPartIndex(partName)] = value;
 	}
 }
 
-void GameEntity::setObjPath(const string& val)
+void GameEntity::setObjPath(const string& value)
 {
-	_objPath = val;
+	_objPath = value;
 }
 
-void GameEntity::setDiffuseMapPath(const string& val)
+void GameEntity::setDiffuseMapPath(const string& value)
 {
-	_diffuseMapPath = val;
+	_diffuseMapPath = value;
 }
 
-void GameEntity::setLightMapPath(const string& val)
+void GameEntity::setLightMapPath(const string& value)
 {
-	_lightMapPath = val;
+	_lightMapPath = value;
 }
 
-void GameEntity::setReflectionMapPath(const string& val)
+void GameEntity::setReflectionMapPath(const string& value)
 {
-	_reflectionMapPath = val;
+	_reflectionMapPath = value;
 }
 
-void GameEntity::setNormalMapPath(const string& val)
+void GameEntity::setNormalMapPath(const string& value)
 {
-	_normalMapPath = val;
+	_normalMapPath = value;
 }
 
-void GameEntity::setLodEntityID(const string& val)
+void GameEntity::setLodEntityID(const string& value)
 {
-	_lodEntityID = val;
+	_lodEntityID = value;
 }
 
-void GameEntity::addDiffuseMapPath(string val)
+void GameEntity::addDiffuseMapPath(string value)
 {
-	_diffuseMapPaths.push_back(val);
+	_diffuseMapPaths.push_back(value);
 }
 
-void GameEntity::addLightMapPath(string val)
+void GameEntity::addLightMapPath(string value)
 {
-	_lightMapPaths.push_back(val);
+	_lightMapPaths.push_back(value);
 }
 
-void GameEntity::addReflectionMapPath(string val)
+void GameEntity::addReflectionMapPath(string value)
 {
-	_reflectionMapPaths.push_back(val);
+	_reflectionMapPaths.push_back(value);
 }
 
-void GameEntity::addNormalMapPath(string val)
+void GameEntity::addNormalMapPath(string value)
 {
-	_normalMapPaths.push_back(val);
+	_normalMapPaths.push_back(value);
 }
 
-void GameEntity::setTransparent(bool val)
+void GameEntity::setTransparent(bool value)
 {
-	_isTransparent = val;
+	_isTransparent = value;
 }
 
-void GameEntity::setFaceCulled(bool val)
+void GameEntity::setFaceCulled(bool value)
 {
-	_isFaceCulled = val;
+	_isFaceCulled = value;
 }
 
-void GameEntity::setLightMapped(bool val)
+void GameEntity::setLightMapped(bool value)
 {
-	_isLightMapped = val;
+	_isLightMapped = value;
 }
 
-void GameEntity::setNormalMapped(bool val)
+void GameEntity::setNormalMapped(bool value)
 {
-	_isNormalMapped = val;
+	_isNormalMapped = value;
 }
 
-void GameEntity::setSkyReflective(bool val)
+void GameEntity::setSkyReflective(bool value)
 {
-	_isSkyReflective = val;
+	_isSkyReflective = value;
 }
 
-void GameEntity::setSceneReflective(bool val)
+void GameEntity::setSceneReflective(bool value)
 {
-	_isSceneReflective = val;
+	_isSceneReflective = value;
 }
 
-void GameEntity::setSpecularLighted(bool val)
+void GameEntity::setSpecularLighted(bool value)
 {
-	_isSpecularLighted = val;
+	_isSpecularLighted = value;
 }
 
-void GameEntity::setShadowed(bool val)
+void GameEntity::setShadowed(bool value)
 {
-	_isShadowed = val;
+	_isShadowed = value;
 }
 
-void GameEntity::setCameraStatic(bool val)
+void GameEntity::setCameraStatic(bool value)
 {
-	_isCameraStatic = val;
+	_isCameraStatic = value;
 }
 
-void GameEntity::setDepthMapIncluded(bool val)
+void GameEntity::setDepthMapIncluded(bool value)
 {
-	_isDepthMapIncluded = val;
+	_isDepthMapIncluded = value;
 }
 
-void GameEntity::setLevelOfDetailed(bool val)
+void GameEntity::setLevelOfDetailed(bool value)
 {
-	_isLevelOfDetailed = val;
+	_isLevelOfDetailed = value;
 }
 
-void GameEntity::setWireframed(bool val)
+void GameEntity::setWireframed(bool value)
 {
-	_wireframed = val;
+	_wireframed = value;
 }
 
 void GameEntity::clearDiffuseMaps()
@@ -389,24 +389,24 @@ void GameEntity::clearNormalMaps()
 	_normalMapPaths.clear();
 }
 
-void GameEntity::setLightness(float val)
+void GameEntity::setLightness(float value)
 {
-	_lightness = val;
+	_lightness = value;
 }
 
-void GameEntity::setSpecularFactor(float val)
+void GameEntity::setSpecularFactor(float value)
 {
-	_specularFactor = val;
+	_specularFactor = value;
 }
 
-void GameEntity::setSpecularIntensity(float val)
+void GameEntity::setSpecularIntensity(float value)
 {
-	_specularIntensity = val;
+	_specularIntensity = value;
 }
 
-void GameEntity::setMaxY(float val)
+void GameEntity::setMaxY(float value)
 {
-	_maxY = val;
+	_maxY = value;
 }
 
 void GameEntity::setAlpha(float alpha)
@@ -414,9 +414,9 @@ void GameEntity::setAlpha(float alpha)
 	_alpha = alpha;
 }
 
-void GameEntity::setUvRepeat(float val)
+void GameEntity::setUvRepeat(float value)
 {
-	_uvRepeat = val;
+	_uvRepeat = value;
 }
 
 const Matrix44& GameEntity::getModelMatrix(unsigned int index)

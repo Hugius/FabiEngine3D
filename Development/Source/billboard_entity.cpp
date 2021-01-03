@@ -12,39 +12,39 @@ void BillboardEntity::updateModelMatrix()
 	_modelMatrix = translationMatrix * rotationMatrix * scalingMatrix;
 }
 
-void BillboardEntity::setCameraFacingX(bool val)
+void BillboardEntity::setCameraFacingX(bool value)
 {
-	_isCameraFacingX = val;
+	_isCameraFacingX = value;
 }
 
-void BillboardEntity::setCameraFacingY(bool val)
+void BillboardEntity::setCameraFacingY(bool value)
 {
-	_isCameraFacingY = val;
+	_isCameraFacingY = value;
 }
 
-void BillboardEntity::setDiffuseMap(GLuint val)
+void BillboardEntity::setDiffuseMap(GLuint value)
 {
-	_diffuseMap = val;
+	_diffuseMap = value;
 }
 
-void BillboardEntity::setTranslation(Vec3 val)
+void BillboardEntity::setTranslation(Vec3 value)
 {
-	_translation = val;
+	_translation = value;
 }
 
-void BillboardEntity::setInitialRotation(Vec3 val)
+void BillboardEntity::setInitialRotation(Vec3 value)
 {
-	_initialRotation = val;
+	_initialRotation = value;
 }
 
-void BillboardEntity::setRotation(Vec3 val)
+void BillboardEntity::setRotation(Vec3 value)
 {
-	_rotation = val;
+	_rotation = value;
 }
 
-void BillboardEntity::setScaling(Vec3 val)
+void BillboardEntity::setScaling(Vec3 value)
 {
-	_scaling = val;
+	_scaling = value;
 }
 
 void BillboardEntity::setColor(Vec3 color)
@@ -52,19 +52,19 @@ void BillboardEntity::setColor(Vec3 color)
 	_color = color;
 }
 
-void BillboardEntity::translate(Vec3 val)
+void BillboardEntity::translate(Vec3 value)
 {
-	_translation += val;
+	_translation += value;
 }
 
-void BillboardEntity::rotate(Vec3 val)
+void BillboardEntity::rotate(Vec3 value)
 {
-	_rotation += val;
+	_rotation += value;
 }
 
-void BillboardEntity::scale(Vec3 val)
+void BillboardEntity::scale(Vec3 value)
 {
-	_scaling += val;
+	_scaling += value;
 }
 
 void BillboardEntity::setTextContent(const string& text)
@@ -82,14 +82,14 @@ void BillboardEntity::setDiffuseMapPath(const string& diffuseMapPath)
 	_diffuseMapPath = diffuseMapPath;
 }
 
-void BillboardEntity::setTransparent(bool val)
+void BillboardEntity::setTransparent(bool value)
 {
-	_isTransparent = val;
+	_isTransparent = value;
 }
 
-void BillboardEntity::setDepthMapIncluded(bool val)
+void BillboardEntity::setDepthMapIncluded(bool value)
 {
-	_isDepthMapIncluded = val;
+	_isDepthMapIncluded = value;
 }
 
 void BillboardEntity::playSpriteAnimation(int maxAnimationRepeats)
@@ -105,29 +105,29 @@ void BillboardEntity::stopSpriteAnimation()
 	_hasSpriteAnimation = false;
 }
 
-void BillboardEntity::setSpriteRowIndex(int val)
+void BillboardEntity::setSpriteRowIndex(int value)
 {
-	_spriteRowIndex = val;
+	_spriteRowIndex = value;
 }
 
-void BillboardEntity::setSpriteColumnIndex(int val)
+void BillboardEntity::setSpriteColumnIndex(int value)
 {
-	_spriteColumnIndex = val;
+	_spriteColumnIndex = value;
 }
 
-void BillboardEntity::setTotalSpriteRows(int val)
+void BillboardEntity::setTotalSpriteRows(int value)
 {
-	_totalSpriteRows = val;
+	_totalSpriteRows = value;
 }
 
-void BillboardEntity::setTotalSpriteColumns(int val)
+void BillboardEntity::setTotalSpriteColumns(int value)
 {
-	_totalSpriteColumns = val;
+	_totalSpriteColumns = value;
 }
 
-void BillboardEntity::setMaxFramestep(int val)
+void BillboardEntity::setMaxFramestep(int value)
 {
-	_maxFramestep = val;
+	_maxFramestep = value;
 }
 
 void BillboardEntity::increasePassedFrames()
@@ -145,14 +145,14 @@ void BillboardEntity::increaseAnimationRepeats()
 	_animationRepeats++;
 }
 
-void BillboardEntity::setLightness(float val)
+void BillboardEntity::setLightness(float value)
 {
-	_lightness = val;
+	_lightness = value;
 }
 
-void BillboardEntity::setMaxY(float val)
+void BillboardEntity::setMaxY(float value)
 {
-	_maxY = val;
+	_maxY = value;
 }
 
 const Matrix44 & BillboardEntity::getModelMatrix() const

@@ -108,9 +108,9 @@ void AudioPlayer::update(CameraManager& camera, std::vector<AudioChunk>& chunks,
 	}
 }
 
-void AudioPlayer::setChunksEnabled(bool val)
+void AudioPlayer::setChunksEnabled(bool value)
 {
-	_chunksEnabled = val;
+	_chunksEnabled = value;
 }
 
 void AudioPlayer::pauseAllChunks()
@@ -123,9 +123,9 @@ void AudioPlayer::resumeAllChunks()
 	Mix_Resume(-1);
 }
 
-void AudioPlayer::setMusicEnabled(bool val)
+void AudioPlayer::setMusicEnabled(bool value)
 {
-	_musicEnabled = val;
+	_musicEnabled = value;
 }
 
 void AudioPlayer::pauseMusic()

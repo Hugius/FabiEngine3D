@@ -22,8 +22,8 @@ private:
 
 	Vec3 _getMouseRay(Ivec2 mousePos);
 	Vec2 _converToNDC(Ivec2 val);
-	Vec4 _convertToViewSpace(Vec4 val);
-	Vec3 _convertToWorldSpace(Vec4 val);
+	Vec4 _convertToViewSpace(Vec4 value);
+	Vec3 _convertToWorldSpace(Vec4 value);
 	Vec3 _getPointOnRay(Vec3 ray, float distance);
 	Vec3 _binarySearch(int count, float start, float finish, Vec3 ray, TerrainEntityManager& terrainManager);
 	bool _notUnderTerrain(float start, float finish, Vec3 ray, TerrainEntityManager& terrainManager);

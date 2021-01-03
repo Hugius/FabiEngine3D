@@ -1,268 +1,273 @@
 #include "render_bus.hpp"
 
-void RenderBus::setSkyReflectionCubeMap(GLuint val)
+void RenderBus::setSkyReflectionCubeMap(GLuint value)
 {
-	_skyReflectionCubeMap = val;
+	_skyReflectionCubeMap = value;
 }
 
-void RenderBus::setSceneReflectionMap(GLuint val)
+void RenderBus::setSceneReflectionMap(GLuint value)
 {
-	_sceneReflectionMap = val;
+	_sceneReflectionMap = value;
 }
 
-void RenderBus::setSceneRefractionMap(GLuint val)
+void RenderBus::setSceneRefractionMap(GLuint value)
 {
-	_sceneRefractionMap = val;
+	_sceneRefractionMap = value;
 }
 
-void RenderBus::setBloomMap(GLuint val)
+void RenderBus::setBloomMap(GLuint value)
 {
-	_bloomMap = val;
+	_bloomMap = value;
 }
 
-void RenderBus::setSceneMap(GLuint val)
+void RenderBus::setSceneMap(GLuint value)
 {
-	_sceneMap = val;
+	_sceneMap = value;
 }
 
-void RenderBus::setShadowMap(GLuint val)
+void RenderBus::setShadowMap(GLuint value)
 {
-	_shadowMap = val;
+	_shadowMap = value;
 }
 
-void RenderBus::setMotionBlurMap(GLuint val)
+void RenderBus::setMotionBlurMap(GLuint value)
 {
-	_motionBlurMap = val;
+	_motionBlurMap = value;
 }
 
-void RenderBus::setLensFlareMap(GLuint val)
+void RenderBus::setLensFlareMap(GLuint value)
 {
-	_lensFlareMap = val;
+	_lensFlareMap = value;
 }
 
-void RenderBus::setSceneDepthMap(GLuint val)
+void RenderBus::setSceneDepthMap(GLuint value)
 {
-	_sceneDepthMap = val;
+	_sceneDepthMap = value;
 }
 
-void RenderBus::setBlurMap(GLuint val)
+void RenderBus::setBlurMap(GLuint value)
 {
-	_blurMap = val;
+	_blurMap = value;
 }
 
-void RenderBus::setPostProcessedSceneMap(GLuint val)
+void RenderBus::setPostProcessedSceneMap(GLuint value)
 {
-	_postProcessedSceneMap = val;
+	_postProcessedSceneMap = value;
 }
 
-void RenderBus::setViewMatrix(const Matrix44 & val)
+void RenderBus::setViewMatrix(const Matrix44& value)
 {
-	_viewMatrix = val;
+	_viewMatrix = value;
 }
 
-void RenderBus::setProjectionMatrix(const Matrix44 & val)
+void RenderBus::setProjectionMatrix(const Matrix44& value)
 {
-	_projectionMatrix = val;
+	_projectionMatrix = value;
 }
 
-void RenderBus::setSkyRotationMatrix(const Matrix44 & val)
+void RenderBus::setSkyRotationMatrix(const Matrix44& value)
 {
-	_skyRotationMatrix = val;
+	_skyRotationMatrix = value;
 }
 
-void RenderBus::setShadowMatrix(const Matrix44 & val)
+void RenderBus::setShadowMatrix(const Matrix44& value)
 {
-	_shadowMatrix = val;
+	_shadowMatrix = value;
 }
 
-void RenderBus::setFlareSourcePositionClipspace(Vec4 val)
+void RenderBus::setFlareSourcePositionClipspace(Vec4 value)
 {
-	_flareSourcePositionClipspace = val;
+	_flareSourcePositionClipspace = value;
 }
 
-void RenderBus::setCameraPosition(Vec3 val)
+void RenderBus::setCameraPosition(Vec3 value)
 {
-	_cameraPosition = val;
+	_cameraPosition = value;
 }
 
-void RenderBus::setCameraFront(Vec3 val)
+void RenderBus::setCameraFront(Vec3 value)
 {
-	_cameraFront = val;
+	_cameraFront = value;
 }
 
-void RenderBus::setAmbientLightColor(Vec3 val)
+void RenderBus::setAmbientLightColor(Vec3 value)
 {
-	_ambientLightColor = val;
+	_ambientLightColor = value;
 }
 
-void RenderBus::setDirectionalLightPos(Vec3 val)
+void RenderBus::setDirectionalLightPos(Vec3 value)
 {
-	_directionalLightPosition = val;
+	_directionalLightPosition = value;
 }
 
-void RenderBus::setDirectionalLightColor(Vec3 val)
+void RenderBus::setDirectionalLightColor(Vec3 value)
 {
-	_directionalLightColor = val;
+	_directionalLightColor = value;
 }
 
-void RenderBus::setSpotLightColor(Vec3 val)
+void RenderBus::setSpotLightColor(Vec3 value)
 {
-	_spotLightColor = val;
+	_spotLightColor = value;
 }
 
-void RenderBus::setShadowEyePosition(Vec3 val)
+void RenderBus::setShadowEyePosition(Vec3 value)
 {
-	_shadowEyePosition = val;
+	_shadowEyePosition = value;
 }
 
-void RenderBus::setShadowAreaCenter(Vec3 val)
+void RenderBus::setShadowAreaCenter(Vec3 value)
 {
-	_shadowAreaCenter = val;
+	_shadowAreaCenter = value;
 }
 
-void RenderBus::setFogColor(Vec3 val)
+void RenderBus::setFogColor(Vec3 value)
 {
-	_fogColor = val;
+	_fogColor = value;
 }
 
-void RenderBus::setFlareSourcePosition(Vec3 val)
+void RenderBus::setFlareSourcePosition(Vec3 value)
 {
-	_flareSourcePosition = val;
+	_flareSourcePosition = value;
 }
 
-void RenderBus::setSceneReflectionHeight(float val)
+void RenderBus::setSceneReflectionHeight(float value)
 {
-	_sceneReflectionHeight = val;
+	_sceneReflectionHeight = value;
 }
 
-void RenderBus::setSceneReflectionOffset(float val)
+void RenderBus::setSceneReflectionOffset(float value)
 {
-	_sceneReflectionOffset = val;
+	_sceneReflectionOffset = value;
 }
 
-void RenderBus::setSceneReflectionFactor(float val)
+void RenderBus::setSceneReflectionFactor(float value)
 {
-	_sceneReflectionFactor = val;
+	_sceneReflectionFactor = value;
 }
 
-void RenderBus::setShadowAreaSize(float val)
+void RenderBus::setShadowAreaSize(float value)
 {
-	_shadowAreaSize = val;
+	_shadowAreaSize = value;
 }
 
-void RenderBus::setShadowAreaReach(float val)
+void RenderBus::setShadowAreaReach(float value)
 {
-	_shadowAreaReach = val;
+	_shadowAreaReach = value;
 }
 
-void RenderBus::setLensFlareAlpha(float val)
+void RenderBus::setLensFlareAlpha(float value)
 {
-	_lensFlareAlpha = val;
+	_lensFlareAlpha = value;
 }
 
-void RenderBus::setLensFlareIntensity(float val)
+void RenderBus::setLensFlareIntensity(float value)
 {
-	_lensFlareIntensity = val;
+	_lensFlareIntensity = value;
 }
 
-void RenderBus::setLensFlareMultiplier(float val)
+void RenderBus::setLensFlareMultiplier(float value)
 {
-	_lensFlareMultiplier = val;
+	_lensFlareMultiplier = value;
 }
 
-void RenderBus::setMotionBlurStrength(float val)
+void RenderBus::setMotionBlurStrength(float value)
 {
-	_motionBlurStrength = val;
+	_motionBlurStrength = value;
 }
 
-void RenderBus::setMaxSpotLightAngle(float val)
+void RenderBus::setMotionBlurMixValue(float value)
 {
-	_maxSpotLightAngle = val;
+	_motionBlurMixValue = value;
 }
 
-void RenderBus::setMaxSpotLightDistance(float val)
+void RenderBus::setMaxSpotLightAngle(float value)
 {
-	_maxSpotLightDistance = val;
+	_maxSpotLightAngle = value;
 }
 
-void RenderBus::setAmbientLightIntensity(float val)
+void RenderBus::setMaxSpotLightDistance(float value)
 {
-	_ambientLightIntensity = val;
+	_maxSpotLightDistance = value;
 }
 
-void RenderBus::setDirectionalLightIntensity(float val)
+void RenderBus::setAmbientLightIntensity(float value)
 {
-	_directionalLightIntensity = val;
+	_ambientLightIntensity = value;
 }
 
-void RenderBus::setSpotLightIntensity(float val)
+void RenderBus::setDirectionalLightIntensity(float value)
 {
-	_spotLightIntensity = val;
+	_directionalLightIntensity = value;
 }
 
-void RenderBus::setFogMinDistance(float val)
+void RenderBus::setSpotLightIntensity(float value)
 {
-	_fogMinDistance = val;
+	_spotLightIntensity = value;
 }
 
-void RenderBus::setFogMaxDistance(float val)
+void RenderBus::setFogMinDistance(float value)
 {
-	_fogMaxDistance = val;
+	_fogMinDistance = value;
 }
 
-void RenderBus::setFogDefaultFactor(float val)
+void RenderBus::setFogMaxDistance(float value)
 {
-	_fogDefaultFactor = val;
+	_fogMaxDistance = value;
 }
 
-void RenderBus::setBloomIntensity(float val)
+void RenderBus::setFogDefaultFactor(float value)
 {
-	_bloomIntensity = val;
+	_fogDefaultFactor = value;
 }
 
-void RenderBus::setBloomBrightnessTreshold(float val)
+void RenderBus::setBloomIntensity(float value)
 {
-	_bloomBrightnessTreshold = val;
+	_bloomIntensity = value;
 }
 
-void RenderBus::setCameraYaw(float val)
+void RenderBus::setBloomBrightnessTreshold(float value)
 {
-	_cameraYaw = val;
+	_bloomBrightnessTreshold = value;
 }
 
-void RenderBus::setCameraPitch(float val)
+void RenderBus::setCameraYaw(float value)
 {
-	_cameraPitch = val;
+	_cameraYaw = value;
 }
 
-void RenderBus::setNearZ(float val)
+void RenderBus::setCameraPitch(float value)
 {
-	_nearZ = val;
+	_cameraPitch = value;
 }
 
-void RenderBus::setFarZ(float val)
+void RenderBus::setNearZ(float value)
 {
-	_farZ = val;
+	_nearZ = value;
 }
 
-void RenderBus::setDofMaxDistance(float val)
+void RenderBus::setFarZ(float value)
 {
-	_dofMaxDistance = val;
+	_farZ = value;
 }
 
-void RenderBus::setDofBlurDistance(float val)
+void RenderBus::setDofMaxDistance(float value)
 {
-	_dofBlurDistance = val;
+	_dofMaxDistance = value;
 }
 
-void RenderBus::setSkyReflectionFactor(float val)
+void RenderBus::setDofBlurDistance(float value)
 {
-	_skyReflectionFactor = val;
+	_dofBlurDistance = value;
 }
 
-void RenderBus::setBloomBlurSize(int val)
+void RenderBus::setSkyReflectionFactor(float value)
 {
-	_bloomBlurSize = val;
+	_skyReflectionFactor = value;
+}
+
+void RenderBus::setBloomBlurSize(int value)
+{
+	_bloomBlurSize = value;
 }
 
 void RenderBus::resetTriangleCount()
@@ -270,162 +275,162 @@ void RenderBus::resetTriangleCount()
 	_triangleCount = 0;
 }
 
-void RenderBus::increaseTriangleCount(int val)
+void RenderBus::increaseTriangleCount(int value)
 {
 	if (_isTriangleCountingEnabled)
 	{
-		_triangleCount += val;
+		_triangleCount += value;
 	}
 }
 
-void RenderBus::setMsaaSampleCount(int val)
+void RenderBus::setMsaaSampleCount(int value)
 {
-	_msaaSampleCount = val;
+	_msaaSampleCount = value;
 }
 
-void RenderBus::setShadowMapSize(int val)
+void RenderBus::setShadowMapSize(int value)
 {
-	_shadowMapSize = val;
+	_shadowMapSize = value;
 }
 
-void RenderBus::setSceneReflectionMapSize(int val)
+void RenderBus::setSceneReflectionMapSize(int value)
 {
-	_sceneReflectionMapSize = val;
+	_sceneReflectionMapSize = value;
 }
 
-void RenderBus::setSceneRefractionMapSize(int val)
+void RenderBus::setSceneRefractionMapSize(int value)
 {
-	_sceneRefractionMapSize = val;
+	_sceneRefractionMapSize = value;
 }
 
-void RenderBus::setMsaaEnabled(bool val)
+void RenderBus::setMsaaEnabled(bool value)
 {
-	_isMsaaEnabled = val;
+	_isMsaaEnabled = value;
 }
 
-void RenderBus::setSceneReflectionsEnabled(bool val)
+void RenderBus::setSceneReflectionsEnabled(bool value)
 {
-	_isSceneReflectionsEnabled = val;
+	_isSceneReflectionsEnabled = value;
 }
 
-void RenderBus::setAmbientLightingEnabled(bool val)
+void RenderBus::setAmbientLightingEnabled(bool value)
 {
-	_isAmbientLightingEnabled = val;
+	_isAmbientLightingEnabled = value;
 }
 
-void RenderBus::setDirectionalLightingEnabled(bool val)
+void RenderBus::setDirectionalLightingEnabled(bool value)
 {
-	_isDirectionalLightingEnabled = val;
+	_isDirectionalLightingEnabled = value;
 }
 
-void RenderBus::setSpecularLightingEnabled(bool val)
+void RenderBus::setSpecularLightingEnabled(bool value)
 {
-	_isSpecularLightingEnabled = val;
+	_isSpecularLightingEnabled = value;
 }
 
-void RenderBus::setPointLightingEnabled(bool val)
+void RenderBus::setPointLightingEnabled(bool value)
 {
-	_isPointLightingEnabled = val;
+	_isPointLightingEnabled = value;
 }
 
-void RenderBus::setSpotLightingEnabled(bool val)
+void RenderBus::setSpotLightingEnabled(bool value)
 {
-	_isSpotLightingEnabled = val;
+	_isSpotLightingEnabled = value;
 }
 
-void RenderBus::setFogEnabled(bool val)
+void RenderBus::setFogEnabled(bool value)
 {
-	_isFogEnabled = val;
+	_isFogEnabled = value;
 }
 
-void RenderBus::setLightMappingEnabled(bool val)
+void RenderBus::setLightMappingEnabled(bool value)
 {
-	_isLightMappingEnabled = val;
+	_isLightMappingEnabled = value;
 }
 
-void RenderBus::setNormalMappingEnabled(bool val)
+void RenderBus::setNormalMappingEnabled(bool value)
 {
-	_isNormalMappingEnabled = val;
+	_isNormalMappingEnabled = value;
 }
 
-void RenderBus::setSkyReflectionsEnabled(bool val)
+void RenderBus::setSkyReflectionsEnabled(bool value)
 {
-	_isSkyReflectionsEnabled = val;
+	_isSkyReflectionsEnabled = value;
 }
 
-void RenderBus::setBloomEnabled(bool val)
+void RenderBus::setBloomEnabled(bool value)
 {
-	_isBloomEnabled = val;
+	_isBloomEnabled = value;
 }
 
-void RenderBus::setWaterEffectsEnabled(bool val)
+void RenderBus::setWaterEffectsEnabled(bool value)
 {
-	_isWaterEffectsEnabled = val;
+	_isWaterEffectsEnabled = value;
 }
 
-void RenderBus::setSkyHdrEnabled(bool val)
+void RenderBus::setSkyHdrEnabled(bool value)
 {
-	_isSkyHdrEnabled = val;
+	_isSkyHdrEnabled = value;
 }
 
-void RenderBus::setShadowsEnabled(bool val)
+void RenderBus::setShadowsEnabled(bool value)
 {
-	_isShadowsEnabled = val;
+	_isShadowsEnabled = value;
 }
 
-void RenderBus::setDofEnabled(bool val)
+void RenderBus::setDofEnabled(bool value)
 {
-	_isDofEnabled = val;
+	_isDofEnabled = value;
 }
 
-void RenderBus::setMotionBlurEnabled(bool val)
+void RenderBus::setMotionBlurEnabled(bool value)
 {
-	_isMotionBlurEnabled = val;
+	_isMotionBlurEnabled = value;
 }
 
-void RenderBus::setLensFlareEnabled(bool val)
+void RenderBus::setLensFlareEnabled(bool value)
 {
-	_isLensFlareEnabled = val;
+	_isLensFlareEnabled = value;
 }
 
-void RenderBus::setWireframeRenderingEnabled(bool val)
+void RenderBus::setWireframeRenderingEnabled(bool value)
 {
-	_isWireframeRenderingEnabled = val;
+	_isWireframeRenderingEnabled = value;
 }
 
-void RenderBus::setAabbFrameRenderingEnabled(bool val)
+void RenderBus::setAabbFrameRenderingEnabled(bool value)
 {
-	_isAabbFrameRenderingEnabled = val;
+	_isAabbFrameRenderingEnabled = value;
 }
 
-void RenderBus::setDebugRenderingEnabled(bool val)
+void RenderBus::setDebugRenderingEnabled(bool value)
 {
-	_isDebugRenderingEnabled = val;
+	_isDebugRenderingEnabled = value;
 }
 
-void RenderBus::setShadowFrameRenderingEnabled(bool val)
+void RenderBus::setShadowFrameRenderingEnabled(bool value)
 {
-	_isShadowFrameRenderingEnabled = val;
+	_isShadowFrameRenderingEnabled = value;
 }
 
-void RenderBus::setTriangleCountingEnabled(bool val)
+void RenderBus::setTriangleCountingEnabled(bool value)
 {
-	_isTriangleCountingEnabled = val;
+	_isTriangleCountingEnabled = value;
 }
 
-void RenderBus::setDofDynamic(bool val)
+void RenderBus::setDofDynamic(bool value)
 {
-	_isDofDynamic = val;
+	_isDofDynamic = value;
 }
 
-void RenderBus::setCursorEntityID(const string& val)
+void RenderBus::setCursorEntityID(const string& value)
 {
-	_cursorEntityID = val;
+	_cursorEntityID = value;
 }
 
-void RenderBus::setLensFlareMapPath(const string& val)
+void RenderBus::setLensFlareMapPath(const string& value)
 {
-	_lensFlareMapPath = val;
+	_lensFlareMapPath = value;
 }
 
 const GLuint RenderBus::getSkyReflectionCubeMap() const
@@ -601,6 +606,11 @@ const float RenderBus::getLensFlareMultiplier() const
 const float RenderBus::getMotionBlurStrength() const
 {
 	return _motionBlurStrength;
+}
+
+const float RenderBus::getMotionBlurMixValue() const
+{
+	return _motionBlurMixValue;
 }
 
 const float RenderBus::getAmbientLightIntensity() const

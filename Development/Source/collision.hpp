@@ -7,9 +7,9 @@ public:
 
 	void operator+=(const Collision& c);
 
-	void setX(bool val);
-	void setY(bool val);
-	void setZ(bool val);
+	void setX(bool value);
+	void setY(bool value);
+	void setZ(bool value);
 
 	inline bool xCollided() const;
 	inline bool yCollided() const;

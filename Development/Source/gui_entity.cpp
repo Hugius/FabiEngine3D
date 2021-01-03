@@ -19,69 +19,69 @@ void GuiEntity::setColor(Vec3 color)
 	_color = color;
 }
 
-void GuiEntity::setMirroredHorizontally(bool val)
+void GuiEntity::setMirroredHorizontally(bool value)
 {
-	_mirroredHorizontally = val;
+	_mirroredHorizontally = value;
 }
 
-void GuiEntity::setMirroredVertically(bool val)
+void GuiEntity::setMirroredVertically(bool value)
 {
-	_mirroredVertically = val;
+	_mirroredVertically = value;
 }
 
-void GuiEntity::setAlpha(float val)
+void GuiEntity::setAlpha(float value)
 {
-	_alpha = val;
+	_alpha = value;
 }
 
-void GuiEntity::setCentered(bool val)
+void GuiEntity::setCentered(bool value)
 {
-	_isCentered = val;
+	_isCentered = value;
 }
 
-void GuiEntity::setTranslation(Vec2 val)
+void GuiEntity::setTranslation(Vec2 value)
 {
-	_translation = val;
+	_translation = value;
 }
 
-void GuiEntity::setRotation(float val)
+void GuiEntity::setRotation(float value)
 {
-	_rotation = val;
+	_rotation = value;
 }
 
-void GuiEntity::setScaling(Vec2 val)
+void GuiEntity::setScaling(Vec2 value)
 {
-	_scaling = val;
+	_scaling = value;
 }
 
-void GuiEntity::translate(Vec2 val)
+void GuiEntity::translate(Vec2 value)
 {
-	_translation += val;
+	_translation += value;
 }
 
-void GuiEntity::rotate(float val)
+void GuiEntity::rotate(float value)
 {
-	_rotation += val;
+	_rotation += value;
 }
 
-void GuiEntity::scale(Vec2 val)
+void GuiEntity::scale(Vec2 value)
 {
-	_scaling += val;
+	_scaling += value;
 }
 
-void GuiEntity::setMinPosition(Vec2 val)
+void GuiEntity::setMinPosition(Vec2 value)
 {
-	_minPosition = val;
+	_minPosition = value;
 }
 
-void GuiEntity::setMaxPosition(Vec2 val)
+void GuiEntity::setMaxPosition(Vec2 value)
 {
-	_maxPosition = val;
+	_maxPosition = value;
 }
 
-void GuiEntity::setDepth(unsigned int val)
+void GuiEntity::setDepth(unsigned int value)
 {
-	_depth = val;
+	_depth = value;
 }
 
 const GLuint GuiEntity::getDiffuseMap() const
@@ -149,9 +149,9 @@ const unsigned int GuiEntity::getDepth() const
 	return _depth;
 }
 
-void GuiEntity::setDepthEntity(bool val)
+void GuiEntity::setDepthEntity(bool value)
 {
-	_isDepthEntity = val;
+	_isDepthEntity = value;
 }
 
 const bool GuiEntity::isDepthEntity() const

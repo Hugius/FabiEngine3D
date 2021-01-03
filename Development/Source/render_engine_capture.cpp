@@ -272,6 +272,7 @@ void RenderEngine::_captureSceneDepth()
 					if (foundPair != allGameEntities.end())
 					{
 						auto lodEntity = foundPair->second;
+
 						// Save original transformation
 						Vec3 originalPosition = lodEntity->getTranslation();
 						Vec3 originalRotation = lodEntity->getRotation();
@@ -358,18 +359,16 @@ void RenderEngine::_capturePostProcessing()
 
 void RenderEngine::_captureMotionBlur(CameraManager& camera)
 {
+	// Temporary values
+	static bool firstTime = true;
 	static float lastYaw;
 	static float lastPitch;
-
+	
 	// Timing variables
 	static std::chrono::high_resolution_clock::time_point previous = std::chrono::high_resolution_clock::now();
 	std::chrono::high_resolution_clock::time_point current = std::chrono::high_resolution_clock::now();
 	std::chrono::duration<double> timeDifference = std::chrono::duration_cast<std::chrono::duration<double>>(current - previous);
 	float elapsedMS = static_cast<float>(timeDifference.count()) * 1000.0f;
-
-	// Blur variables
-	static int blurStrength = 0;
-	static bool firstTime = true;
 
 	// If 1 frame passed
 	if (elapsedMS >= Config::getInst().getUpdateMsPerFrame() || firstTime)
@@ -380,40 +379,25 @@ void RenderEngine::_captureMotionBlur(CameraManager& camera)
 			previous = current;
 			
 			// Camera speed and blur direction variables
-			int xDifference = static_cast<int>(fabsf(camera.getYaw() - lastYaw) * _renderBus.getMotionBlurStrength());
-			int yDifference = static_cast<int>(fabsf(camera.getPitch() - lastPitch) * _renderBus.getMotionBlurStrength());
+			float xDifference = fabsf(camera.getYaw() - lastYaw) * _renderBus.getMotionBlurStrength();
+			float yDifference = fabsf(camera.getPitch() - lastPitch) * _renderBus.getMotionBlurStrength();
 			
 			// Variables
 			static BlurDirection lastDirection = BlurDirection::NONE;
 			BlurDirection direction = BlurDirection::NONE;
 			firstTime = false;
 
-			// Determine blur type & strength
-			if (xDifference != 0 || yDifference != 0)
+			// Determine blur direction & mix value
+			if (xDifference >= yDifference)
 			{
-				if (xDifference >= yDifference)
-				{
-					blurStrength = xDifference;
-					direction = BlurDirection::HORIZONTAL;
-				}
-				else
-				{
-					blurStrength = yDifference;
-					direction = BlurDirection::VERTICAL;
-				}
+				direction = BlurDirection::HORIZONTAL;
+				_renderBus.setMotionBlurMixValue(xDifference);
 			}
-			else // No FPS camera movement
+			else
 			{
-				// Slowly fade out
-				if (blurStrength > 0)
-				{
-					direction = lastDirection;
-					blurStrength--;
-				}
-			}
-			
-			// Blur strength must be between 0 and 10
-			blurStrength = std::clamp(blurStrength, 0, 10);
+				direction = BlurDirection::VERTICAL;
+				_renderBus.setMotionBlurMixValue(yDifference);
+			}			
 
 			// Set for next iteration
 			lastYaw = camera.getYaw();
@@ -422,7 +406,7 @@ void RenderEngine::_captureMotionBlur(CameraManager& camera)
 			// Apply motion blur
 			_blurRenderer.bind();
 			_renderBus.setMotionBlurMap(_blurRenderer.blurTexture(_finalSurface, _renderBus.getPostProcessedSceneMap(), 
-				static_cast<int>(BlurType::MOTION), blurStrength, 1.0f, direction));
+				static_cast<int>(BlurType::MOTION), 10, 1.0f, direction));
 			_blurRenderer.unbind();
 
 			// Set last direction

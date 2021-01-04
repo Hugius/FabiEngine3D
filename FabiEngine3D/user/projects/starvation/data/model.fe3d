@@ -65,4 +65,4 @@
 @waterwheel user\assets\models\misc\waterwheel.obj ? ? ? ? 1.25 1.25 1.25 0 1 0 0 0 1 1 1 1 1 1 1 ? 0 waterwheel 0 0 0 2.5 3.65 4.2
 @sawmill user\assets\models\buildings\sawmill.obj user\assets\textures\diffuse_maps\buildings\sawmill.png ? ? ? 5 5 5 0 1 0 0 0 1 1 1 1 1 1 1 ? 0 bottom 0 0 0 3.3 0.3 1.1 left 0 0 -0.6 3.3 1 0.2 right 7.45058e-09 0 0.57 3.3 1 0.15
 @saw user\assets\models\misc\saw.obj user\assets\textures\diffuse_maps\misc\saw.png ? user\assets\textures\reflection_maps\misc\saw.png user\assets\textures\normal_maps\misc\saw.png 1.75 1.75 1.75 0 1 0 0 1 1 1 0.75 1 1 1 1 ? 0 saw 0 0 0 0.0999999 1 6
-@tower4 user\assets\models\buildings\tower4.obj ? ? ? ? 3 3 3 0 1 0 0 1 1 1 0.75 1 1 1 1 ? 0 tower 0 0 0 3.2 10.1 3.1
+@tower4 user\assets\models\buildings\tower4.obj ? ? ? ? 3 3 3 0 1 0 0 1 1 1 0.5 1 1 1 1 ? 0 tower 0 0 0 3.2 10.1 3.1

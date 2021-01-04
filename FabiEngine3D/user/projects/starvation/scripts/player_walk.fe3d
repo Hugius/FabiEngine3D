@@ -1,4 +1,4 @@
-12 0
+22 23
 META script_type_update
 
 /// Temporary values
@@ -20,8 +20,8 @@ IF _isUnderWater IS <true>:
 /// Determine max movement speed
 IF shift IS <true> AND up IS <true>:
     IF _stamina MORE 0.0 AND _isUnderWater IS <false>:
-        MUL minSpeed 2.0
-        MUL maxSpeed 2.0
+        MUL minSpeed 10.0
+        MUL maxSpeed 10.0
         EDIT _isRunning = <true>
         DECR _stamina 0.1
     ELSE:

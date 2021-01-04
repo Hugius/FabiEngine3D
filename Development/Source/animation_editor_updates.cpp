@@ -39,13 +39,13 @@ void AnimationEditor::_updateManagementScreen()
 				{
 					_isChoosingAnimation = true;
 					_isEditingAnimation = true;
-					_gui.getGlobalScreen()->addChoiceForm("animations", "Select animation", Vec2(-0.4f, 0.1f), _getAnimationIDs());
+					_gui.getGlobalScreen()->addChoiceForm("animations", "Select animation", Vec2(0.0f, 0.1f), _getAnimationIDs());
 				}
 				else if (screen->getButton("deleteAnimation")->isHovered()) // Delete animation button
 				{
 					_isChoosingAnimation = true;
 					_isRemovingAnimation = true;
-					_gui.getGlobalScreen()->addChoiceForm("animations", "Select animation", Vec2(-0.4f, 0.1f), _getAnimationIDs());
+					_gui.getGlobalScreen()->addChoiceForm("animations", "Select animation", Vec2(0.0f, 0.1f), _getAnimationIDs());
 				}
 			}
 

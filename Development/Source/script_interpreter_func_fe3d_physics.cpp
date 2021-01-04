@@ -94,7 +94,7 @@ bool ScriptInterpreter::_executeFe3dPhysicsFunction(const string& functionName, 
 		// Validate arguments
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			_fe3d.collision_enableCameraTerrainResponse(arguments[0].getDecimal(), arguments[1].getDecimal());
+			_fe3d.collision_disableCameraTerrainResponse();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}

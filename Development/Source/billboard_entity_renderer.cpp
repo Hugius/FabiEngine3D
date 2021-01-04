@@ -16,7 +16,7 @@ void BillboardEntityRenderer::bind()
 	_shader.uploadUniform("u_fogMaxDistance",	_renderBus.getFogMaxDistance());
 	_shader.uploadUniform("u_fogDefaultFactor",	_renderBus.getFogDefaultFactor());
 	_shader.uploadUniform("u_fogColor",			_renderBus.getFogColor());
-	_shader.uploadUniform("u_fogEnabled",		_renderBus.isFogEnabled());
+	_shader.uploadUniform("u_isFogEnabled",		_renderBus.isFogEnabled());
 
 	// Texture uniforms
 	_shader.uploadUniform("u_sampler_diffuseMap", 0);
@@ -60,7 +60,7 @@ void BillboardEntityRenderer::render(const shared_ptr<BillboardEntity> entity)
 		// Shader uniforms
 		_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix());
 		_shader.uploadUniform("u_isAlphaObject", entity->isTransparent());
-		_shader.uploadUniform("u_noTexture", entity->getDiffuseMap() == 0);
+		_shader.uploadUniform("u_hasTexture", entity->getDiffuseMap() != 0);
 		_shader.uploadUniform("u_color", entity->getColor());
 		_shader.uploadUniform("u_lightness", entity->getLightness());
 		_shader.uploadUniform("u_uvAdder", uvAdder);

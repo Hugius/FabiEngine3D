@@ -22,7 +22,7 @@ uniform float u_farZ;
 
 // Boolean uniforms
 uniform bool u_isDepthEntity;
-uniform bool u_noTexture;
+uniform bool u_hasTexture;
 
 // Out variables
 layout (location = 0) out vec4 o_finalColor;
@@ -53,14 +53,14 @@ void main()
 	}
 	else
 	{
-		if(u_noTexture) // Render only color
-		{
-			o_finalColor = vec4(u_color, u_alpha);
-		}
-		else // Render texture
+		if(u_hasTexture) // Render texture
 		{
 			vec4 texColor = texture(u_sampler_diffuse, f_uv);
 			o_finalColor = vec4(texColor.rgb * u_color, texColor.a * u_alpha);
+		}
+		else // Render color only
+		{
+			o_finalColor = vec4(u_color, u_alpha);
 		}
 	}
 }

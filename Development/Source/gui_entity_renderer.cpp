@@ -30,15 +30,15 @@ void GuiEntityRenderer::render(const shared_ptr<GuiEntity> entity)
 	{
 		// Uniforms
 		_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix());
-		_shader.uploadUniform("u_mirrorHor", entity->isMirroredHorizonally());
-		_shader.uploadUniform("u_mirrorVer", entity->isMirroredVertically());
+		_shader.uploadUniform("u_isMirroredHorizontally", entity->isMirroredHorizonally());
+		_shader.uploadUniform("u_isMirroredVertically", entity->isMirroredVertically());
 		_shader.uploadUniform("u_color", entity->getColor());
 		_shader.uploadUniform("u_windowSize", Vec2(Config::getInst().getWindowSize()));
 		_shader.uploadUniform("u_minPosition", entity->getMinPosition());
 		_shader.uploadUniform("u_maxPosition", entity->getMaxPosition());
 		_shader.uploadUniform("u_alpha", entity->getAlpha());
 		_shader.uploadUniform("u_isDepthEntity", entity->isDepthEntity());
-		_shader.uploadUniform("u_noTexture", (entity->getDiffuseMap() == 0));
+		_shader.uploadUniform("u_hasTexture", entity->getDiffuseMap() != 0);
 		_shader.uploadUniform("u_sampler_diffuse", 0);
 
 		// Bind

@@ -1,4 +1,4 @@
-3 33
+7 39
 META script_type_init
 
 /// Globals
@@ -6,4 +6,4 @@ GLOB BOOL _isUnderWater = <false>
 
 /// Textures
 fe3d:image_place("underwater", "underwater.png", 0.0, 0.0, 0.0, 2.0, 2.0)
-fe3d:image_set_alpha("underwater", 0.75)
+fe3d:image_set_alpha("underwater", 0.65)

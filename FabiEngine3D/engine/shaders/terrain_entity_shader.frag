@@ -63,14 +63,14 @@ uniform bool u_isNormalMappedG;
 uniform bool u_isNormalMappedB;
 uniform bool u_isSpecularLighted;
 uniform bool u_isNormalMappingEnabled;
-uniform bool u_ambientLightEnabled;
-uniform bool u_directionalLightEnabled;
-uniform bool u_pointLightEnabled;
-uniform bool u_spotLightEnabled;
-uniform bool u_fogEnabled;
-uniform bool u_shadowsEnabled;
-uniform bool u_shadowFrameRenderingEnabled;
-uniform bool u_specularLightEnabled;
+uniform bool u_isAmbientLightEnabled;
+uniform bool u_isDirectionalLightEnabled;
+uniform bool u_isPointLightEnabled;
+uniform bool u_isSpotLightEnabled;
+uniform bool u_isFogEnabled;
+uniform bool u_isShadowsEnabled;
+uniform bool u_isShadowFrameRenderEnabled;
+uniform bool u_isSpecularLightEnabled;
 
 // Integer uniforms
 uniform int u_shadowMapSize;
@@ -237,7 +237,7 @@ vec3 getTextureColor()
 // Calculate ambient lighting
 vec3 getAmbientLighting()
 {
-	if(u_ambientLightEnabled)
+	if(u_isAmbientLightEnabled)
 	{
 		return u_ambientLightColor * u_ambientLightIntensity;
 	}
@@ -250,7 +250,7 @@ vec3 getAmbientLighting()
 // Calculate directional lighting
 vec3 getDirectionalLighting(bool noShadowOcclusion, vec3 normal)
 {
-	if(u_directionalLightEnabled)
+	if(u_isDirectionalLightEnabled)
 	{
         // Calculate lighting strength
         vec3 result = vec3(0.0f);
@@ -275,7 +275,7 @@ vec3 getDirectionalLighting(bool noShadowOcclusion, vec3 normal)
 // Calculate point lighting
 vec3 getPointLighting(bool noShadowOcclusion, vec3 normal)
 {
-	if(u_pointLightEnabled)
+	if(u_isPointLightEnabled)
 	{
 		vec3 result = vec3(0.0f);
 		
@@ -311,7 +311,7 @@ vec3 getPointLighting(bool noShadowOcclusion, vec3 normal)
 
 vec3 getSpotLighting(bool noShadowOcclusion, vec3 normal)
 {
-    if(u_spotLightEnabled)
+    if(u_isSpotLightEnabled)
     {
     	float fragmentDistance = abs(length(u_cameraPosition - f_pos));
         float distanceFactor = fragmentDistance / u_maxSpotLightDistance;
@@ -352,7 +352,7 @@ float getRandomFloat(vec3 seed, int i) // http://www.opengl-tutorial.org/interme
 
 float getShadowValue()
 {
-	if(u_shadowsEnabled)
+	if(u_isShadowsEnabled)
 	{
 		float halfSize = u_shadowAreaSize / 2.0f;
 
@@ -411,7 +411,7 @@ float getShadowValue()
 			alpha /= (halfSize * 0.1f); // Convert value to 0.0 - 1.0 range
 
 			// Debug area frame rendering
-			if(u_shadowFrameRenderingEnabled)
+			if(u_isShadowFrameRenderEnabled)
 			{
 				if((maxDistance - (halfSize * 0.99f)) > 0.0f)
 				{
@@ -436,7 +436,7 @@ float getShadowValue()
 // Calculate fog color
 vec3 applyFog(vec3 color)
 {
-	if(u_fogEnabled)
+	if(u_isFogEnabled)
 	{
 		// Calculate distance in world space
 		float distance = length(f_pos.xyz - u_cameraPosition);
@@ -459,7 +459,7 @@ vec3 applyFog(vec3 color)
 
 float getSpecularValue(vec3 position, vec3 normal)
 {
-    if(u_specularLightEnabled && u_isSpecularLighted)
+    if(u_isSpecularLightEnabled && u_isSpecularLighted)
     {
         // Calculate
         vec3 lightDirection   = normalize(f_pos - position);

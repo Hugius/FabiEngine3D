@@ -64,19 +64,19 @@ uniform bool u_isSkyReflective;
 uniform bool u_isSceneReflective;
 uniform bool u_isSpecularLighted;
 uniform bool u_isShadowed;
-uniform bool u_ambientLightEnabled;
-uniform bool u_directionalLightEnabled;
-uniform bool u_specularLightEnabled;
-uniform bool u_spotLightEnabled;
+uniform bool u_isAmbientLightEnabled;
+uniform bool u_isDirectionalLightEnabled;
+uniform bool u_isSpecularLightEnabled;
+uniform bool u_isSpotLightEnabled;
 uniform bool u_lightMappingEnabled;
-uniform bool u_normalMappingEnabled;
-uniform bool u_pointLightEnabled;
+uniform bool u_isNormalMappingEnabled;
+uniform bool u_isPointLightEnabled;
 uniform bool u_skyReflectionsEnabled;
 uniform bool u_sceneReflectionsEnabled;
-uniform bool u_fogEnabled;
-uniform bool u_shadowsEnabled;
+uniform bool u_isFogEnabled;
+uniform bool u_isShadowsEnabled;
 uniform bool u_hasDiffuseMap;
-uniform bool u_shadowFrameRenderingEnabled;
+uniform bool u_isShadowFrameRenderEnabled;
 
 // Integer uniforms
 uniform int u_shadowMapSize;
@@ -130,7 +130,7 @@ void main()
 // Calculate new normal
 vec3 getNormalMappedVector()
 {
-    if(u_normalMappingEnabled && u_isNormalMapped)
+    if(u_isNormalMappingEnabled && u_isNormalMapped)
     {
         // Calculate new normal vector
         vec3 normal = texture(u_sampler_normalMap, f_uv).rgb;
@@ -158,7 +158,7 @@ vec3 getTextureColor()
 		// Calculating the texel color
 		vec4 texColor = texture(u_sampler_diffuseMap, f_uv);
 
-		// Removing white alpha background
+		// Removing alpha background
 		if(u_isTransparent)
 		{
 			if(texColor.a <= 0.25f)
@@ -175,7 +175,7 @@ vec3 getTextureColor()
 // Calculate ambient lighting
 vec3 getAmbientLighting()
 {
-	if(u_ambientLightEnabled)
+	if(u_isAmbientLightEnabled)
 	{
 		return u_ambientLightColor * u_ambientLightIntensity;
 	}
@@ -188,7 +188,7 @@ vec3 getAmbientLighting()
 // Calculate directional lighting
 vec3 getDirectionalLighting(vec3 normal, bool noShadowOcclusion)
 {
-	if(u_directionalLightEnabled)
+	if(u_isDirectionalLightEnabled)
 	{
         // Calculate lighting strength
         vec3 result = vec3(0.0f);
@@ -213,7 +213,7 @@ vec3 getDirectionalLighting(vec3 normal, bool noShadowOcclusion)
 // Calculate point lighting
 vec3 getPointLighting(vec3 normal, bool noShadowOcclusion)
 {
-	if(u_pointLightEnabled)
+	if(u_isPointLightEnabled)
 	{
 		vec3 result = vec3(0.0f);
 		
@@ -249,7 +249,7 @@ vec3 getPointLighting(vec3 normal, bool noShadowOcclusion)
 
 vec3 getSpotLighting(vec3 normal, bool noShadowOcclusion)
 {
-    if(u_spotLightEnabled)
+    if(u_isSpotLightEnabled)
     {
         float fragmentDistance = abs(length(u_cameraPosition - f_pos));
         float distanceFactor = fragmentDistance / u_maxSpotLightDistance;
@@ -283,7 +283,7 @@ vec3 getSpotLighting(vec3 normal, bool noShadowOcclusion)
 
 float getSpecularValue(vec3 position, vec3 normal)
 {
-    if(u_specularLightEnabled && u_isSpecularLighted)
+    if(u_isSpecularLightEnabled && u_isSpecularLighted)
     {
         // Calculate
         vec3 lightDirection   = normalize(f_pos - position);
@@ -302,7 +302,7 @@ float getSpecularValue(vec3 position, vec3 normal)
 
 float getShadowValue()
 {
-	if(u_shadowsEnabled && u_isShadowed)
+	if(u_isShadowsEnabled && u_isShadowed)
 	{
         float halfSize = u_shadowAreaSize / 2.0f;
 
@@ -345,7 +345,7 @@ float getShadowValue()
 			alpha /= (halfSize * 0.1f); // Convert value to 0.0 - 1.0 range
 
 			// Debug area frame rendering
-			if(u_shadowFrameRenderingEnabled)
+			if(u_isShadowFrameRenderEnabled)
 			{
 				if((maxDistance - (halfSize * 0.99f)) > 0.0f)
 				{
@@ -384,7 +384,7 @@ vec3 applyLightMapping(vec3 color)
 // Calculate fog color
 vec3 applyFog(vec3 color)
 {
-	if(u_fogEnabled)
+	if(u_isFogEnabled)
 	{
         // Calculate distance in world space
         float distance = length(f_pos.xyz - u_cameraPosition);

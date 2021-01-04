@@ -23,9 +23,9 @@ uniform float u_fogDefaultFactor;
 uniform float u_lightness;
 
 // Boolean uniforms
-uniform bool u_fogEnabled;
+uniform bool u_isFogEnabled;
 uniform bool u_isAlphaObject;
-uniform bool u_noTexture;
+uniform bool u_hasTexture;
 
 vec3 applyFog(vec3 color);
 
@@ -44,14 +44,13 @@ void main()
 		}
 	}
 
-	// Check if billboard has texture or only color
-	if(u_noTexture)
-	{
-		o_finalColor = vec4(u_color, texColor.a);
-	}
-	else
+	if(u_hasTexture) // Render texture
 	{
 		o_finalColor = vec4(texColor.rgb * u_color, texColor.a);
+	}
+	else // Render color only
+	{
+		o_finalColor = vec4(u_color, texColor.a);
 	}
 
 	o_finalColor.rgb = applyFog(o_finalColor.rgb);
@@ -61,7 +60,7 @@ void main()
 // Calculate fog color
 vec3 applyFog(vec3 color)
 {
-	if(u_fogEnabled)
+	if(u_isFogEnabled)
 	{
         // Calculate distance in world space
         float distance = length(f_pos.xyz - u_cameraPosition);

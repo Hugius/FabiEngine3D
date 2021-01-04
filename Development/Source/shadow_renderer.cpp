@@ -38,7 +38,7 @@ void ShadowRenderer::render(const shared_ptr<GameEntity> entity)
 		}
 
 		// Uniforms
-		_shader.uploadUniform("u_alphaObject", entity->isTransparent());
+		_shader.uploadUniform("u_isAlphaObject", entity->isTransparent());
 		_shader.uploadUniform("u_currentY", entity->getTranslation().y);
 		_shader.uploadUniform("u_minHeight", entity->getMinHeight());
 		_shader.uploadUniform("u_maxHeight", entity->getMaxHeight());

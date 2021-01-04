@@ -14,7 +14,6 @@ uniform mat4 u_shadowMatrix;
 
 // Vec4 uniforms
 uniform vec4 u_clippingPlaneReflection;
-uniform vec4 u_clippingPlaneRefraction;
 
 // Bool uniforms
 uniform bool u_isNormalMapped;
@@ -40,7 +39,6 @@ void main()
 	// GLSL variables
 	gl_Position = clipSpacePos;
 	gl_ClipDistance[0] = dot(worldSpacePos, u_clippingPlaneReflection);
-	gl_ClipDistance[1] = dot(worldSpacePos, u_clippingPlaneRefraction);
 	
 	// Out variables
 	f_pos = worldSpacePos.xyz;

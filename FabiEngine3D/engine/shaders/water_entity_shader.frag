@@ -14,7 +14,7 @@ layout(location = 3) uniform sampler2D u_sampler_dudvMap;
 layout(location = 4) uniform sampler2D u_sampler_normalMap;
 
 // Vector3 uniforms
-uniform vec3 u_ambientLightPosition;
+uniform vec3 u_directionalLightPosition;
 uniform vec3 u_cameraPosition;
 uniform vec3 u_color;
 uniform vec3 u_fogColor;
@@ -33,12 +33,13 @@ uniform float u_fogMaxDistance;
 uniform float u_fogDefaultFactor;
 
 // Boolean uniforms
-uniform bool u_fogEnabled;
-uniform bool u_effectsEnabled;
+uniform bool u_isFogEnabled;
+uniform bool u_isEffectsEnabled;
 uniform bool u_isRippling;
 uniform bool u_isSpecularLighted;
 uniform bool u_isReflective;
 uniform bool u_isRefractive;
+uniform bool u_isUnderWater;
 
 // Out variables
 layout(location = 0) out vec4 o_finalColor;
@@ -51,7 +52,7 @@ float convertDepthToLinear(float depth);
 // Calculate final fragment color
 void main()
 {    
-	if(u_effectsEnabled)
+	if(u_isEffectsEnabled)
 	{
 		o_finalColor = getMainColor();
 		o_finalColor.rgb = applyFog(o_finalColor.rgb);
@@ -73,11 +74,15 @@ vec4 getMainColor()
 	vec2 texCoords = vec2(ndc.x, -ndc.y);
 
 	// Depth map
-	float depth = texture(u_sampler_depthMap, vec2(texCoords.x, -texCoords.y)).r;
-	float floorDistance = convertDepthToLinear(depth);
-	float waterDistance = convertDepthToLinear(gl_FragCoord.z);
-	float waterDepth = floorDistance - waterDistance;
-	waterDepth = clamp(waterDepth / (u_transparency * 10.0f), 0.0f, 1.0f);
+	float alpha = 1.0f;
+	if(u_transparency > 0.0f)
+	{
+		float depth = texture(u_sampler_depthMap, vec2(texCoords.x, -texCoords.y)).r;
+		float floorDistance = convertDepthToLinear(depth);
+		float waterDistance = convertDepthToLinear(gl_FragCoord.z);
+		float waterDepth = floorDistance - waterDistance;
+		alpha = clamp(waterDepth / (u_transparency * 10.0f), 0.0f, 1.0f);
+	}
 
 	// Rippling effect
 	if(u_isRippling)
@@ -98,7 +103,7 @@ vec4 getMainColor()
 	// Specular lighting
 	if(u_isSpecularLighted)
 	{
-		vec3 lightDir     = normalize(u_ambientLightPosition - f_pos);
+		vec3 lightDir     = normalize(u_directionalLightPosition - f_pos);
 		vec3 viewDir      = normalize(f_pos - u_cameraPosition);
 		vec3 reflectDir   = reflect(normalize(lightDir), normal);
 		specular = pow(max(dot(reflectDir, viewDir), 0.0f), u_specularLightFactor) * u_specularLightIntensity;
@@ -114,12 +119,12 @@ vec4 getMainColor()
 	vec3 refractionColor = texture(u_sampler_refractionMap, vec2(texCoords.x, -texCoords.y)).rgb; // Refraction color
 
 	// Determine which textures to mix
-	if(u_isReflective && u_isRefractive) // Both
+	if(u_isReflective && u_isRefractive && !u_isUnderWater) // Both
 	{
 		finalColor = mix(reflectionColor, refractionColor, mixFactor); // Combining reflection & refraction
 		finalColor = mix(finalColor, u_color, 0.1f); // Water color tint
 	}
-	else if(u_isReflective) // Only reflection
+	else if(u_isReflective && !u_isUnderWater) // Only reflection
 	{
 		finalColor = mix(reflectionColor, vec3(0.0f), mixFactor);
 		finalColor = mix(finalColor, u_color, 0.1f); // Water color tint
@@ -141,13 +146,13 @@ vec4 getMainColor()
 	}
 
 	// Return final color
-	return vec4(finalColor, waterDepth);
+	return vec4(finalColor, alpha);
 }
 
 // Calculate fog color
 vec3 applyFog(vec3 color)
 {
-	if(u_fogEnabled)
+	if(u_isFogEnabled)
 	{
 		// Calculate distance in world space
 		float distance = length(f_pos.xyz - u_cameraPosition);

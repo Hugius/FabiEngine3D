@@ -198,7 +198,7 @@ void EnvironmentEditor::_updateWaterCamera()
 			// Update camera position
 			_fe3d.camera_setPosition(Vec3(x, y, z));
 			_fe3d.camera_enableLookat();
-			_fe3d.camera_setLookatPosition(Vec3(0.0f));
+			_fe3d.camera_setLookatPosition(waterPosition);
 		}
 	}
 }

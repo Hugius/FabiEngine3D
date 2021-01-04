@@ -1,8 +1,8 @@
 #include "water_entity.hpp"
 
-void WaterEntity::setPosition(Vec3 value)
+void WaterEntity::setTranslation(Vec3 value)
 {
-	_position = value;
+	_translation = value;
 }
 
 void WaterEntity::setColor(Vec3 value)
@@ -115,9 +115,9 @@ void WaterEntity::setTransparency(float value)
 	_transparency = value;
 }
 
-const Vec3 WaterEntity::getPosition() const
+const Vec3 WaterEntity::getTranslation() const
 {
-	return _position;
+	return _translation;
 }
 
 const Vec3 WaterEntity::getColor() const

@@ -3,13 +3,21 @@
 
 void ShadowManager::loadShadows(Vec3 eye, Vec3 center, float size, float reach, bool isFollowingCamera, int interval)
 {
+	// Set values
 	_eye    = eye;
 	_center = center;
 	_size   = size;
 	_reach  = reach;
 	_isFollowingCamera = isFollowingCamera;
+
+	// First time if interval changed
+	if (interval != _interval)
+	{
+		_passedFrames = interval;
+	}
+
+	// Set new interval
 	_interval = interval;
-	_passedFrames = interval;
 }
 
 void ShadowManager::update(RenderBus& renderBus)

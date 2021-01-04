@@ -11,16 +11,16 @@ void WaterEntityRenderer::bind()
 	_shader.uploadUniform("u_projectionMatrix",	_renderBus.getProjectionMatrix());
 
 	// Fragment shader uniforms
-	_shader.uploadUniform("u_ambientLightPosition", _renderBus.getDirectionalLightPosition());
-	_shader.uploadUniform("u_cameraPosition",			   _renderBus.getCameraPosition());
-	_shader.uploadUniform("u_fogMinDistance",			   _renderBus.getFogMinDistance());
-	_shader.uploadUniform("u_fogMaxDistance",			   _renderBus.getFogMaxDistance());
-	_shader.uploadUniform("u_fogDefaultFactor",			   _renderBus.getFogDefaultFactor());
-	_shader.uploadUniform("u_fogColor",					   _renderBus.getFogColor());
-	_shader.uploadUniform("u_fogEnabled",				   _renderBus.isFogEnabled());
-	_shader.uploadUniform("u_effectsEnabled",			   _renderBus.isWaterEffectsEnabled());
-	_shader.uploadUniform("u_nearZ",					   _renderBus.getNearZ());
-	_shader.uploadUniform("u_farZ",						   _renderBus.getFarZ());
+	_shader.uploadUniform("u_directionalLightPosition", _renderBus.getDirectionalLightPosition());
+	_shader.uploadUniform("u_cameraPosition",			_renderBus.getCameraPosition());
+	_shader.uploadUniform("u_fogMinDistance",			_renderBus.getFogMinDistance());
+	_shader.uploadUniform("u_fogMaxDistance",			_renderBus.getFogMaxDistance());
+	_shader.uploadUniform("u_fogDefaultFactor",			_renderBus.getFogDefaultFactor());
+	_shader.uploadUniform("u_fogColor",					_renderBus.getFogColor());
+	_shader.uploadUniform("u_isFogEnabled",				_renderBus.isFogEnabled());
+	_shader.uploadUniform("u_isEffectsEnabled",			_renderBus.isWaterEffectsEnabled());
+	_shader.uploadUniform("u_nearZ",					_renderBus.getNearZ());
+	_shader.uploadUniform("u_farZ",						_renderBus.getFarZ());
 
 	// Depth testing
 	glEnable(GL_DEPTH_TEST);
@@ -47,7 +47,7 @@ void WaterEntityRenderer::render(const shared_ptr<WaterEntity> entity)
 		_shader.uploadUniform("u_rippleOffset", entity->getRippleOffset());
 		_shader.uploadUniform("u_waveOffset", entity->getWaveOffset());
 		_shader.uploadUniform("u_waveHeightFactor", entity->getWaveHeightFactor());
-		_shader.uploadUniform("u_customPositionOffset", entity->getPosition());
+		_shader.uploadUniform("u_customPositionOffset", entity->getTranslation());
 		_shader.uploadUniform("u_uvRepeat", entity->getUvRepeat());
 		_shader.uploadUniform("u_specularLightFactor", entity->getSpecularLightingFactor());
 		_shader.uploadUniform("u_specularLightIntensity", entity->getSpecularLightingIntensity());
@@ -58,6 +58,14 @@ void WaterEntityRenderer::render(const shared_ptr<WaterEntity> entity)
 		_shader.uploadUniform("u_isReflective", entity->isReflective());
 		_shader.uploadUniform("u_isRefractive", entity->isRefractive());
 		_shader.uploadUniform("u_color", entity->getColor());
+
+		// Check if camera is underwater
+		bool isUnderWater = (_renderBus.getCameraPosition().y < entity->getTranslation().y);
+		isUnderWater = isUnderWater && (_renderBus.getCameraPosition().x > entity->getTranslation().x - (entity->getSize() / 2.0f));
+		isUnderWater = isUnderWater && (_renderBus.getCameraPosition().x < entity->getTranslation().x + (entity->getSize() / 2.0f));
+		isUnderWater = isUnderWater && (_renderBus.getCameraPosition().z > entity->getTranslation().z - (entity->getSize() / 2.0f));
+		isUnderWater = isUnderWater && (_renderBus.getCameraPosition().z < entity->getTranslation().z + (entity->getSize() / 2.0f));
+		_shader.uploadUniform("u_isUnderWater", isUnderWater);
 		
 		// Texture uniforms
 		_shader.uploadUniform("u_sampler_reflectionMap", 0);
@@ -83,11 +91,26 @@ void WaterEntityRenderer::render(const shared_ptr<WaterEntity> entity)
 		glActiveTexture(GL_TEXTURE0);
 
 		// Bind
-		glBindVertexArray(entity->getOglBuffer()->getVAO());
+		if (entity->isWaving())
+		{
+			glBindVertexArray(entity->getOglBuffer()->getVAO());
+		}
+		else
+		{
+			glBindVertexArray(entity->getSimplifiedOglBuffer()->getVAO());
+		}
 
 		// Render
-		glDrawArrays(GL_TRIANGLES, 0, entity->getOglBuffer()->getVertexCount());
-		_renderBus.increaseTriangleCount(entity->getOglBuffer()->getVertexCount() / 3);
+		if (entity->isWaving())
+		{
+			glDrawArrays(GL_TRIANGLES, 0, entity->getOglBuffer()->getVertexCount());
+			_renderBus.increaseTriangleCount(entity->getOglBuffer()->getVertexCount() / 3);
+		}
+		else
+		{
+			glDrawArrays(GL_TRIANGLES, 0, entity->getSimplifiedOglBuffer()->getVertexCount());
+			_renderBus.increaseTriangleCount(entity->getSimplifiedOglBuffer()->getVertexCount() / 3);
+		}
 
 		// Unbind
 		glActiveTexture(GL_TEXTURE0);

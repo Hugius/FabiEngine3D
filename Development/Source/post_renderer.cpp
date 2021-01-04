@@ -38,8 +38,8 @@ void PostRenderer::render(const shared_ptr<GuiEntity> entity)
 	{
 		// Shader uniforms
 		_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix());
-		_shader.uploadUniform("u_mirrorHor", entity->isMirroredHorizonally());
-		_shader.uploadUniform("u_mirrorVer", entity->isMirroredVertically());
+		_shader.uploadUniform("u_isMirroredHorizontally", entity->isMirroredHorizonally());
+		_shader.uploadUniform("u_isMirroredVertically", entity->isMirroredVertically());
 
 		// Texture uniforms
 		_shader.uploadUniform("u_sampler_scene", 0);

@@ -22,8 +22,8 @@ uniform float u_farZ;
 uniform float u_nearZ;
 
 // Boolean uniforms
-uniform bool u_mirrorHor;
-uniform bool u_mirrorVer;
+uniform bool u_isMirroredHorizontally;
+uniform bool u_isMirroredVertically;
 uniform bool u_isLensFlareEnabled;
 
 // Out variables
@@ -37,8 +37,8 @@ float calculateFlareOcclusion();
 void main()
 {
 	gl_Position = u_modelMatrix * vec4(v_pos, 0.0f, 1.0f);
-	f_uv.x = u_mirrorHor ? -v_uv.x : v_uv.x;
-	f_uv.y = u_mirrorVer ?  v_uv.y : -v_uv.y; 
+	f_uv.x = u_isMirroredHorizontally ? -v_uv.x : v_uv.x;
+	f_uv.y = u_isMirroredVertically ?  v_uv.y : -v_uv.y; 
     f_flareOcclusion = calculateFlareOcclusion();
 }
 

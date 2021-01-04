@@ -158,7 +158,7 @@ void WaterEntityManager::update()
 	if ((_renderBus.isWaterEffectsEnabled() && getSelectedWater() != nullptr) && 
 		(getSelectedWater()->isReflective() || getSelectedWater()->isRefractive()))
 	{
-		_renderBus.setSceneReflectionHeight(getSelectedWater()->getPosition().y);
+		_renderBus.setSceneReflectionHeight(getSelectedWater()->getTranslation().y);
 		_renderBus.setSceneReflectionOffset(1.0f);
 	}
 
@@ -174,7 +174,7 @@ void WaterEntityManager::update()
 			entity->setRippleOffset(newOffset);
 
 			// Update waving speed (must be 25% slower)
-			entity->setWaveOffset(entity->getWaveOffset() + (entity->getSpeed() / 4.0f));
+			entity->setWaveOffset(entity->getWaveOffset() + (entity->getSpeed() * 0.25f));
 		}
 	}
 }

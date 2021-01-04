@@ -25,6 +25,7 @@ uniform float u_clippingY;
 // Boolean uniforms
 uniform bool u_isInstanced;
 uniform bool u_isBillboard;
+uniform bool u_isUnderWater;
 
 // Out variables
 out vec2 f_uv;
@@ -40,7 +41,7 @@ void main()
 	gl_Position = clipSpacePos;
 	gl_ClipDistance[0] = dot(worldSpacePos, vec4(0.0f,  1.0f, 0.0f, -(u_currentY + u_minHeight)));
 	gl_ClipDistance[1] = dot(worldSpacePos, vec4(0.0f, -1.0f, 0.0f, u_currentY + u_maxHeight));
-	gl_ClipDistance[2] = dot(worldSpacePos, vec4(0.0f,  1.0f, 0.0f, -u_clippingY));
+	gl_ClipDistance[2] = dot(worldSpacePos, vec4(0.0f, u_isUnderWater ? -1.0f : 1.0f, 0.0f, u_isUnderWater ? u_clippingY : -u_clippingY));
 
 	// Out variables
     if(u_isBillboard)

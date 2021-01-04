@@ -12,7 +12,7 @@ public:
 	void setSpeed(Vec2 value);
 	void setRippleOffset(Vec2 value);
 	void setWaveOffset(Vec2 value);
-	void setPosition(Vec3 value);
+	void setTranslation(Vec3 value);
 	void setColor(Vec3 value);
 	void setDudvMap(GLuint value);
 	void setNormalMap(GLuint value);
@@ -37,7 +37,7 @@ public:
 	const Vec2    getSpeed()					 const;
 	const Vec2    getRippleOffset()				 const;
 	const Vec2    getWaveOffset()				 const;
-	const Vec3	  getPosition()					 const;
+	const Vec3	  getTranslation()				 const;
 	const Vec3    getColor()					 const;
 	const GLuint  getDudvMap()					 const;
 	const GLuint  getNormalMap()				 const;
@@ -63,7 +63,7 @@ private:
 	Vec2 _rippleOffset = Vec2(0.0f);
 	Vec2 _waveOffset   = Vec2(0.0f);
 
-	Vec3 _position = Vec3(0.0f);
+	Vec3 _translation = Vec3(0.0f);
 	Vec3 _color = Vec3(0.0f);
 
 	GLuint _dudvMap			= 0;

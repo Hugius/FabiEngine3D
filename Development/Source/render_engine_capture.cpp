@@ -32,15 +32,7 @@ void RenderEngine::_captureSceneReflections(CameraManager& camera)
 	if (waterReflectionEnabled || sceneReflectionEnabled)
 	{
 		// Calculate distance between camera and reflection surface
-		float cameraDistance;
-		if (camera.isLookatEnabled())
-		{
-			cameraDistance = (camera.getPosition().y - camera.getLookatPosition().y);
-		}
-		else
-		{
-			cameraDistance = (camera.getPosition().y - _renderBus.getSceneReflectionHeight());
-		}
+		float cameraDistance = fabsf(camera.getPosition().y - _renderBus.getSceneReflectionHeight());
 
 		// Start capturing reflection
 		_sceneReflectionFramebuffer.bind();
@@ -130,23 +122,24 @@ void RenderEngine::_captureSceneReflections(CameraManager& camera)
 // Capturing water refraction texture
 void RenderEngine::_captureSceneRefractions()
 {
+	// Temporary values
 	bool waterRefractionEnabled = (_renderBus.isWaterEffectsEnabled() &&_entityBus->getWaterEntity() != nullptr) && 
 		_entityBus->getWaterEntity()->isRefractive();
 
 	if (waterRefractionEnabled)
 	{
 		// Bind
-		glEnable(GL_CLIP_DISTANCE1);
 		_sceneRefractionFramebuffer.bind();
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		// Render scene
+		// Render whole scene
+		_renderSkyEntity();
 		_renderTerrainEntity();
 		_renderGameEntities();
+		_renderBillboardEntities();
 
 		// Unbind
 		_sceneRefractionFramebuffer.unbind();
-		glDisable(GL_CLIP_DISTANCE1);
 
 		// Assign texture
 		_renderBus.setSceneRefractionMap(_sceneRefractionFramebuffer.getTexture(0));
@@ -240,9 +233,34 @@ void RenderEngine::_captureBloom()
 
 void RenderEngine::_captureSceneDepth()
 {
+	// Temporary values
 	bool waterDepthNeeded = (_renderBus.isWaterEffectsEnabled() && _entityBus->getWaterEntity() != nullptr) &&
 		_entityBus->getWaterEntity()->getTransparency() > 0.0f;
+	bool isUnderWater = false;
+	float clippingY = -(std::numeric_limits<float>::max)();
 
+	// Prepare water depth
+	if (waterDepthNeeded)
+	{
+		// Check if camera is underwater
+		auto waterEntity = _entityBus->getWaterEntity();
+		isUnderWater = (_renderBus.getCameraPosition().y < waterEntity->getTranslation().y);
+		isUnderWater = isUnderWater && (_renderBus.getCameraPosition().x > waterEntity->getTranslation().x - (waterEntity->getSize() / 2.0f));
+		isUnderWater = isUnderWater && (_renderBus.getCameraPosition().x < waterEntity->getTranslation().x + (waterEntity->getSize() / 2.0f));
+		isUnderWater = isUnderWater && (_renderBus.getCameraPosition().z > waterEntity->getTranslation().z - (waterEntity->getSize() / 2.0f));
+		isUnderWater = isUnderWater && (_renderBus.getCameraPosition().z < waterEntity->getTranslation().z + (waterEntity->getSize() / 2.0f));
+
+		// Determine clipping Y based on underwater factor
+		if (isUnderWater)
+		{
+			clippingY = waterEntity->getTranslation().y;
+		}
+		else
+		{
+			clippingY = (waterEntity->getTranslation().y + waterEntity->getWaveHeightFactor());
+		}
+	}
+	
 	// Determine if scene depth rendering is needed or not
 	if (_renderBus.isDofEnabled() || _renderBus.isLensFlareEnabled() || waterDepthNeeded)
 	{
@@ -255,15 +273,6 @@ void RenderEngine::_captureSceneDepth()
 		if (_entityBus->getTerrainEntity() != nullptr)
 		{
 			_depthRenderer.render(_entityBus->getTerrainEntity());
-		}
-
-		// Render WATER entity
-		if (!waterDepthNeeded)
-		{
-			if (_entityBus->getWaterEntity() != nullptr)
-			{
-				_depthRenderer.render(_entityBus->getWaterEntity());
-			}
 		}
 
 		// Render GAME entities
@@ -295,16 +304,8 @@ void RenderEngine::_captureSceneDepth()
 						lodEntity->setVisible(gameEntity->isVisible());
 						lodEntity->updateModelMatrix();
 
-						// Render LOD entity (check if everything underwater must be clipped)
-						if (waterDepthNeeded)
-						{
-							_depthRenderer.render(lodEntity, _entityBus->getWaterEntity()->getPosition().y +
-								_entityBus->getWaterEntity()->getWaveHeightFactor());
-						}
-						else
-						{
-							_depthRenderer.render(lodEntity, -(std::numeric_limits<float>::max)());
-						}
+						// Render LOD entity
+						_depthRenderer.render(lodEntity, clippingY, isUnderWater);
 
 						// Revert to original transformation
 						lodEntity->setTranslation(originalPosition);
@@ -320,16 +321,7 @@ void RenderEngine::_captureSceneDepth()
 				}
 				else // Render high-quality entity
 				{
-					// Check if everything underwater must be clipped
-					if (waterDepthNeeded)
-					{
-						_depthRenderer.render(gameEntity, _entityBus->getWaterEntity()->getPosition().y + 
-							_entityBus->getWaterEntity()->getWaveHeightFactor());
-					}
-					else
-					{
-						_depthRenderer.render(gameEntity, -(std::numeric_limits<float>::max)());
-					}
+					_depthRenderer.render(gameEntity, clippingY, isUnderWater);
 				}
 			}
 		}
@@ -340,16 +332,7 @@ void RenderEngine::_captureSceneDepth()
 			// Check if entity must be included in depth map
 			if (entity->isDepthMapIncluded())
 			{
-				// Check if everything underwater must be clipped
-				if (waterDepthNeeded)
-				{
-					_depthRenderer.render(entity, _entityBus->getWaterEntity()->getPosition().y + 
-						_entityBus->getWaterEntity()->getWaveHeightFactor());
-				}
-				else
-				{
-					_depthRenderer.render(entity, -(std::numeric_limits<float>::max)());
-				}
+				_depthRenderer.render(entity, clippingY, isUnderWater);
 			}
 		}
 
@@ -358,16 +341,7 @@ void RenderEngine::_captureSceneDepth()
 		{
 			for (auto& [keyID, entity] : _entityBus->getAabbEntities())
 			{
-				// Check if everything underwater must be clipped
-				if (waterDepthNeeded)
-				{
-					_depthRenderer.render(entity, _entityBus->getWaterEntity()->getPosition().y + 
-						_entityBus->getWaterEntity()->getWaveHeightFactor());
-				}
-				else
-				{
-					_depthRenderer.render(entity, -(std::numeric_limits<float>::max)());
-				}
+				_depthRenderer.render(entity, clippingY, isUnderWater);
 			}
 		}
 

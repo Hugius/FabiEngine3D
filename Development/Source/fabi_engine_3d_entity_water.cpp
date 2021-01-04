@@ -81,7 +81,7 @@ void FabiEngine3D::waterEntity_select(const string& ID)
 
 void FabiEngine3D::waterEntity_setPosition(const string& ID, Vec3 position)
 {
-	_core->_waterEntityManager.getEntity(ID)->setPosition(position);
+	_core->_waterEntityManager.getEntity(ID)->setTranslation(position);
 }
 
 void FabiEngine3D::waterEntity_setSize(const string& ID, float size)
@@ -244,7 +244,7 @@ const string& FabiEngine3D::waterEntity_getDisplacementMapPath(const string& ID)
 
 Vec3 FabiEngine3D::waterEntity_getPosition(const string& ID)
 {
-	return _core->_waterEntityManager.getEntity(ID)->getPosition();
+	return _core->_waterEntityManager.getEntity(ID)->getTranslation();
 }
 
 Vec3 FabiEngine3D::waterEntity_getColor(const string& ID)

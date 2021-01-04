@@ -55,9 +55,18 @@ void EnvironmentEditor::_updateWaterMenuChoice()
 				_fe3d.camera_load(90.0f, 0.1f, 10000.0f, Vec3(0.0f));
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("waterEditorMenuMain");
 				_fe3d.textEntity_hide(_gui.getGlobalScreen()->getTextfield("selectedWaterName")->getEntityID());
+				_fe3d.terrainEntity_select("");
 				_fe3d.waterEntity_select("");
+				_hoveredTerrainID = "";
 				_currentWaterID = "";
 				_waterEditingEnabled = false;
+			}
+			else if (screen->getButton("terrain")->isHovered())
+			{
+				_terrainChoosingEnabled = true;
+				for (auto& name : _terrainIDs) { name = name.substr(1); }
+				_gui.getGlobalScreen()->addChoiceForm("terrainList", "Select terrain", Vec2(-0.4f, 0.1f), _terrainIDs);
+				for (auto& name : _terrainIDs) { name = "@" + name; }
 			}
 			else if (screen->getButton("mesh")->isHovered())
 			{
@@ -76,6 +85,60 @@ void EnvironmentEditor::_updateWaterMenuChoice()
 		// Screen hoverabilities
 		screen->getButton("effects")->setHoverable(_fe3d.waterEntity_isExisting(_currentWaterID));
 		screen->getButton("options")->setHoverable(_fe3d.waterEntity_isExisting(_currentWaterID));
+
+		// Update preview terrain choosing
+		if (_terrainChoosingEnabled)
+		{
+			// Get selected button ID
+			string selectedButtonID = _gui.getGlobalScreen()->getSelectedChoiceFormButtonID("terrainList");
+
+			// Hide last terrain
+			if (_hoveredTerrainID != "")
+			{
+				_fe3d.terrainEntity_select("");
+			}
+
+			// Check if a terrain name is hovered
+			if (selectedButtonID != "")
+			{
+				if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT)) // LMB pressed
+				{
+					// Only select the terrain if it has a heightmap
+					if (_fe3d.terrainEntity_isExisting(_currentTerrainID))
+					{
+						_fe3d.terrainEntity_select(_currentTerrainID);
+					}
+
+					// Miscellaneous
+					_gui.getGlobalScreen()->removeChoiceForm("terrainList");
+					_terrainChoosingEnabled = false;
+				}
+				else
+				{
+					// Set new hovered terrain
+					_hoveredTerrainID = "@" + selectedButtonID;
+				}
+			}
+			else if (_gui.getGlobalScreen()->isChoiceFormCancelled("terrainList")) // Cancelled choosing
+			{
+				_terrainChoosingEnabled = false;
+				_gui.getGlobalScreen()->removeChoiceForm("terrainList");
+			}
+			else // Nothing hovered
+			{
+				_hoveredTerrainID = "";
+			}
+
+			// Show hovered terrain
+			if (_hoveredTerrainID != "")
+			{
+				// Only select the terrain if it has a heightmap
+				if (_fe3d.terrainEntity_isExisting(_hoveredTerrainID))
+				{
+					_fe3d.terrainEntity_select(_hoveredTerrainID);
+				}
+			}
+		}
 	}
 }
 

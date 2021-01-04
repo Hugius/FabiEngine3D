@@ -9,8 +9,8 @@ layout(location = 1) in vec2 v_uv;
 uniform mat4 u_modelMatrix;
 
 // Boolean uniforms
-uniform bool u_mirrorHor;
-uniform bool u_mirrorVer;
+uniform bool u_isMirroredHorizontally;
+uniform bool u_isMirroredVertically;
 
 // Out variables
 out vec2 f_uv;
@@ -18,6 +18,6 @@ out vec2 f_uv;
 void main()
 {
 	gl_Position = u_modelMatrix * vec4(v_pos, 0.0f, 1.0f);
-	f_uv.x = u_mirrorHor ? -v_uv.x : v_uv.x;
-	f_uv.y = u_mirrorVer ?  v_uv.y : -v_uv.y; 
+	f_uv.x = u_isMirroredHorizontally ? -v_uv.x : v_uv.x;
+	f_uv.y = u_isMirroredVertically ?  v_uv.y : -v_uv.y; 
 }

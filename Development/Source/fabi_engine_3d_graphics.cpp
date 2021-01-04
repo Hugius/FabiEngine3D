@@ -183,6 +183,7 @@ void FabiEngine3D::gfx_disableMSAA()
 
 void FabiEngine3D::gfx_disableShadows()
 {
+	_core->_shadowManager.unloadShadows();
 	_core->_renderBus.setShadowsEnabled(false);
 }
 

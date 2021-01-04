@@ -1,23 +1,30 @@
 #include "shadow_manager.hpp"
 #include "render_bus.hpp"
 
+ShadowManager::ShadowManager()
+{
+	_passedFrames = (std::numeric_limits<unsigned int>::max)();
+}
+
 void ShadowManager::loadShadows(Vec3 eye, Vec3 center, float size, float reach, bool isFollowingCamera, int interval)
 {
-	// Set values
 	_eye    = eye;
 	_center = center;
 	_size   = size;
 	_reach  = reach;
 	_isFollowingCamera = isFollowingCamera;
-
-	// First time if interval changed
-	if (interval != _interval)
-	{
-		_passedFrames = interval;
-	}
-
-	// Set new interval
 	_interval = interval;
+}
+
+void ShadowManager::unloadShadows()
+{
+	_passedFrames = (std::numeric_limits<unsigned int>::max)();
+	_eye = Vec3(0.0f);
+	_center = Vec3(0.0f);
+	_size = 0.0f;
+	_reach = 0.0f;
+	_isFollowingCamera = false;
+	_interval = 0;
 }
 
 void ShadowManager::update(RenderBus& renderBus)
@@ -57,8 +64,6 @@ void ShadowManager::update(RenderBus& renderBus)
 
 Matrix44 ShadowManager::_createLightSpaceMatrix(Vec3 eye, Vec3 center, float size, float reach)
 {
-	glEnable(GL_DEPTH_CLAMP_NV);
-
 	// Matrix generation
 	Matrix44 lightView = Matrix44::createView(eye, center, Vec3(0.0f, 1.0f, 0.0f));
 	Matrix44 lightProj = Matrix44::createOrtho(-size / 2.0f, size / 2.0f, -size / 2.0f, size / 2.0f, 0.1f, reach);

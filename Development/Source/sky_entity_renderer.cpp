@@ -12,12 +12,14 @@ void SkyEntityRenderer::bind()
 
 	// Depth testing
 	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_DEPTH_CLAMP_NV);
 	glDepthFunc(GL_LEQUAL);
 }
 
 void SkyEntityRenderer::unbind()
 {
 	glDisable(GL_DEPTH_TEST);
+	glDisable(GL_DEPTH_CLAMP_NV);
 	_shader.unbind();
 }
 

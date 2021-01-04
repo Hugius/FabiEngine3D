@@ -1,4 +1,4 @@
-30 61
+60 5
 META script_type_update
 
 /// Update health icon color
@@ -43,16 +43,15 @@ EDIT _thirst = math:clamp(_thirst, 0.0, 100.0)
 EDIT _stamina = math:clamp(_stamina, 0.0, 100.0)
 
 /// Update oxygen
-VEC3 camPos = fe3d:camera_get_position()
-IF camPos.y LESS 9.0:
-    DECR _oxygen 0.1
+IF _isUnderWater IS <true>:
+    DECR _oxygen 0.03
 ELSE:
     INCR _oxygen 0.1
 EDIT _oxygen = math:clamp(_oxygen, 0.0, 100.0)
 
 /// Update temperature
-IF camPos.y LESS 9.0:
-    DECR _temperature 0.05
+IF _isUnderWater IS <true>:
+    DECR _temperature 0.015
 ELSE:
     INCR _temperature 0.001
 EDIT _temperature = math:clamp(_temperature, 0.0, 100.0)

@@ -32,7 +32,7 @@ void RenderEngine::_captureSceneReflections(CameraManager& camera)
 	if (waterReflectionEnabled || sceneReflectionEnabled)
 	{
 		// Calculate distance between camera and reflection surface
-		float cameraDistance = fabsf(camera.getPosition().y - _renderBus.getSceneReflectionHeight());
+		float cameraDistance = (camera.getPosition().y - _renderBus.getSceneReflectionHeight());
 
 		// Start capturing reflection
 		_sceneReflectionFramebuffer.bind();

@@ -124,14 +124,14 @@ vec4 getMainColor()
 		finalColor = mix(reflectionColor, refractionColor, mixFactor); // Combining reflection & refraction
 		finalColor = mix(finalColor, u_color, 0.1f); // Water color tint
 	}
-	else if(u_isReflective && !u_isUnderWater) // Only reflection
-	{
-		finalColor = mix(reflectionColor, vec3(0.0f), mixFactor);
-		finalColor = mix(finalColor, u_color, 0.1f); // Water color tint
-	}
 	else if(u_isRefractive) // Only refraction
 	{
 		finalColor = refractionColor;
+		finalColor = mix(finalColor, u_color, 0.1f); // Water color tint
+	}
+	else if(u_isReflective) // Only reflection
+	{
+		finalColor = mix(reflectionColor, vec3(0.0f), mixFactor);
 		finalColor = mix(finalColor, u_color, 0.1f); // Water color tint
 	}
 	else // None

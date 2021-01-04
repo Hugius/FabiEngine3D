@@ -5,10 +5,11 @@
 class ShadowManager final
 {
 public:
-	ShadowManager() = default;
+	ShadowManager();
 	~ShadowManager() = default;
 	
 	void loadShadows(Vec3 eye, Vec3 center, float size, float reach, bool followingCamera, int interval);
+	void unloadShadows();
 	void update(RenderBus& renderBus);
 
 	Vec3 getEye();
@@ -27,8 +28,8 @@ private:
 	float _size = 0.0f;
 	float _reach = 0.0f;
 
-	int _interval = 0;
-	int _passedFrames = 0;
+	unsigned int _interval = 0;
+	unsigned int _passedFrames = 0;
 
 	bool _isFollowingCamera = false;
 };

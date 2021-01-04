@@ -131,7 +131,7 @@ void SceneEditor::_updateModelEditing()
 					}
 					else if (rightWindow->getScreen("modelPropertiesMenu")->getButton("animation")->isHovered()) // Animation button
 					{
-						_gui.getGlobalScreen()->addChoiceForm("animations", "Select animation", Vec2(0.0f, 0.1f), 
+						_gui.getGlobalScreen()->addChoiceForm("animations", "Select animation", Vec2(0.0f, 0.1f),
 							_animationEditor.getAllAnimationNames());
 					}
 				}
@@ -193,7 +193,10 @@ void SceneEditor::_updateModelEditing()
 				// Get entity transformation
 				Vec3 position = _fe3d.gameEntity_getPosition(_activeModelID);
 				Vec3 rotation = _fe3d.gameEntity_getRotation(_activeModelID);
-				Vec3 size	  = _fe3d.gameEntity_getSize(_activeModelID);
+				Vec3 size = _fe3d.gameEntity_getSize(_activeModelID);
+				Vec3 oldPosition = position;
+				Vec3 oldRotation = rotation;
+				Vec3 oldSize = size;
 
 				// Apply new model position / rotation / size
 				if (_transformation == TransformationType::TRANSLATION)
@@ -204,7 +207,6 @@ void SceneEditor::_updateModelEditing()
 					_handleValueChanging("modelPropertiesMenu", "yMinus", "y", position.y, -_customEditorSpeed / 100.0f);
 					_handleValueChanging("modelPropertiesMenu", "zPlus", "z", position.z, _customEditorSpeed / 100.0f);
 					_handleValueChanging("modelPropertiesMenu", "zMinus", "z", position.z, -_customEditorSpeed / 100.0f);
-					_fe3d.gameEntity_setPosition(_activeModelID, position);
 				}
 				else if (_transformation == TransformationType::ROTATION)
 				{
@@ -217,20 +219,82 @@ void SceneEditor::_updateModelEditing()
 					rotation.x = std::fmodf(rotation.x, 360.0f);
 					rotation.y = std::fmodf(rotation.y, 360.0f);
 					rotation.z = std::fmodf(rotation.z, 360.0f);
-					_fe3d.gameEntity_setRotation(_activeModelID, rotation);
 				}
 				else if (_transformation == TransformationType::SCALING)
 				{
-					// Model size
-					Vec3 oldSize = size;
-					float factor = 25.0f;
+					const float factor = 25.0f;
 					_handleValueChanging("modelPropertiesMenu", "xPlus", "x", size.x, _customEditorSpeed / 100.0f, factor);
 					_handleValueChanging("modelPropertiesMenu", "xMinus", "x", size.x, -_customEditorSpeed / 100.0f, factor);
 					_handleValueChanging("modelPropertiesMenu", "yPlus", "y", size.y, _customEditorSpeed / 100.0f, factor);
 					_handleValueChanging("modelPropertiesMenu", "yMinus", "y", size.y, -_customEditorSpeed / 100.0f, factor);
 					_handleValueChanging("modelPropertiesMenu", "zPlus", "z", size.z, _customEditorSpeed / 100.0f, factor);
 					_handleValueChanging("modelPropertiesMenu", "zMinus", "z", size.z, -_customEditorSpeed / 100.0f, factor);
-					_fe3d.gameEntity_setSize(_activeModelID, size);
+				}
+
+				// Update transformations if changed
+				if (position != oldPosition || rotation != oldRotation || size != oldSize)
+				{
+					// Check if animation is playing
+					auto animationNames = _animationEditor.getPlayingAnimationNames(_activeModelID);
+					if (!animationNames.empty())
+					{
+						// Stop animation
+						_animationEditor.stopAnimation(animationNames.front(), _activeModelID);
+
+						// Save new initial position
+						if (position != oldPosition)
+						{
+							_initialModelPosition[_activeModelID] = position;
+						}
+
+						// Save new initial rotation
+						if (rotation != oldRotation)
+						{
+							_initialModelRotation[_activeModelID] = rotation;
+						}
+
+						// Save new initial size
+						if (size != oldSize)
+						{
+							_initialModelSize[_activeModelID] = size;
+						}
+
+						// Set new transformations
+						_fe3d.gameEntity_setPosition(_activeModelID, _initialModelPosition[_activeModelID]);
+						_fe3d.gameEntity_setRotationOrigin(_activeModelID, Vec3(0.0f));
+						_fe3d.gameEntity_setRotation(_activeModelID, _initialModelRotation[_activeModelID]);
+						_fe3d.gameEntity_setSize(_activeModelID, _initialModelSize[_activeModelID]);
+
+						// Reset part transformations
+						for (auto& partName : _fe3d.gameEntity_getPartNames(_activeModelID))
+						{
+							// Only named parts
+							if (!partName.empty())
+							{
+								_fe3d.gameEntity_setPosition(_activeModelID, Vec3(0.0f), partName);
+								_fe3d.gameEntity_setRotationOrigin(_activeModelID, Vec3(0.0f), partName);
+								_fe3d.gameEntity_setRotation(_activeModelID, Vec3(0.0f), partName);
+								_fe3d.gameEntity_setSize(_activeModelID, Vec3(1.0f), partName);
+							}
+						}
+
+						// Start animation again
+						_animationEditor.startAnimation(animationNames.front(), _activeModelID, -1);
+					}
+					else // No animation playing
+					{
+						// Update position
+						_initialModelPosition[_activeModelID] = position;
+						_fe3d.gameEntity_setPosition(_activeModelID, position);
+
+						// Update rotation
+						_initialModelRotation[_activeModelID] = rotation;
+						_fe3d.gameEntity_setRotation(_activeModelID, rotation);
+
+						// Update size
+						_initialModelSize[_activeModelID] = size;
+						_fe3d.gameEntity_setSize(_activeModelID, size);
+					}
 				}
 			}
 
@@ -248,14 +312,6 @@ void SceneEditor::_updateModelEditing()
 				{
 					_fe3d.textEntity_show(textEntityID);
 				}
-			}
-
-			// Update active model transformation if no animation is playing
-			if (!_activeModelID.empty() && _animationEditor.getPlayingAnimationNames(_activeModelID).empty())
-			{
-				_initialModelPosition[_activeModelID] = _fe3d.gameEntity_getPosition(_activeModelID);
-				_initialModelRotation[_activeModelID] = _fe3d.gameEntity_getRotation(_activeModelID);
-				_initialModelSize[_activeModelID] = _fe3d.gameEntity_getSize(_activeModelID);
 			}
 		}
 		else

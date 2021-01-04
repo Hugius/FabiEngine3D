@@ -213,22 +213,26 @@ void SceneEditor::saveSceneToFile()
 				// Check if not a preview model or an LOD entity
 				if (modelID[0] != '@' || std::find(lodIDs.begin(), lodIDs.end(), modelID) != lodIDs.end())
 				{
-					// Reset main transformation
-					_fe3d.gameEntity_setPosition(modelID, _initialModelPosition[modelID]);
-					_fe3d.gameEntity_setRotationOrigin(modelID, Vec3(0.0f));
-					_fe3d.gameEntity_setRotation(modelID, _initialModelRotation[modelID]);
-					_fe3d.gameEntity_setSize(modelID, _initialModelSize[modelID]);
-
-					// Reset part transformations
-					for (auto& partName : _fe3d.gameEntity_getPartNames(modelID))
+					// Check if model has bound animation
+					if (!_animationEditor.getPlayingAnimationNames(modelID).empty())
 					{
-						// Only named parts
-						if (!partName.empty())
+						// Reset main transformation
+						_fe3d.gameEntity_setPosition(modelID, _initialModelPosition[modelID]);
+						_fe3d.gameEntity_setRotationOrigin(modelID, Vec3(0.0f));
+						_fe3d.gameEntity_setRotation(modelID, _initialModelRotation[modelID]);
+						_fe3d.gameEntity_setSize(modelID, _initialModelSize[modelID]);
+
+						// Reset part transformations
+						for (auto& partName : _fe3d.gameEntity_getPartNames(modelID))
 						{
-							_fe3d.gameEntity_setPosition(modelID, Vec3(0.0f), partName);
-							_fe3d.gameEntity_setRotationOrigin(modelID, Vec3(0.0f), partName);
-							_fe3d.gameEntity_setRotation(modelID, Vec3(0.0f), partName);
-							_fe3d.gameEntity_setSize(modelID, Vec3(1.0f), partName);
+							// Only named parts
+							if (!partName.empty())
+							{
+								_fe3d.gameEntity_setPosition(modelID, Vec3(0.0f), partName);
+								_fe3d.gameEntity_setRotationOrigin(modelID, Vec3(0.0f), partName);
+								_fe3d.gameEntity_setRotation(modelID, Vec3(0.0f), partName);
+								_fe3d.gameEntity_setSize(modelID, Vec3(1.0f), partName);
+							}
 						}
 					}
 

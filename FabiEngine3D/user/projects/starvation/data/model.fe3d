@@ -38,7 +38,7 @@
 @rock1 user\assets\models\stones\rock1.obj user\assets\textures\diffuse_maps\stones\rock1.png ? ? ? 1.5 1.5 1.5 0 1 0 0 1 1 1 0.75 1 1 1 1 ? 0 rock -0.3 0 0 6.2 5.2 7.2
 @male1 user\assets\models\characters\male1.obj ? ? ? ? 0.57 0.57 0.57 0 0 0 0 1 1 1 0.6 1 1 1 1 ? 0 male 0 0 0.2 2 5.5 1.9
 @house1 user\assets\models\buildings\house1.obj ? ? ? ? 5.5 5.5 5.5 0 1 0 0 1 1 1 1 1 1 1 1 ? 0 house 0 0 0 1.3 1.4 1.9
-@bridge user\assets\models\buildings\bridge.obj user\assets\textures\diffuse_maps\buildings\bridge.png ? ? user\assets\textures\normal_maps\buildings\bridge.png 1.5 1.5 1.5 0 1 0 0 1 1 1 0.8 1 1 1 1 ? 0 right -1.35 -7.45058e-09 0 0.45 1.2 13 left 1.35 0 0 0.44 1.2 13 bridge 0 0 0 3.15 0.18 13
+@bridge user\assets\models\buildings\bridge.obj user\assets\textures\diffuse_maps\buildings\bridge.png ? ? user\assets\textures\normal_maps\buildings\bridge.png 1.5 1.5 1.5 0 1 0 0 1 1 1 0.8 1 1 1 1 ? 0 right -1.35 -7.45058e-09 0 0.45 1.2 13 bridge 0 0 0 3.15 0.18 13 left 1.35 0 0 0.44 1.2 13
 @gate user\assets\models\buildings\gate.obj ? ? ? ? 1.25 1.25 1.25 0 0 0 0 0 1 1 0.6 1 1 1 1 ? 0 gate_right 4 0 -1.5 4.4 14 5 tower_right 8.5 0 0 5.5 19.2 6.9 gate_left -3.8 0 -1.5 4 14 5 tower_left -8.4 0 -0.1 5.5 19 6.9
 @wall user\assets\models\buildings\wall.obj ? ? ? ? 1.25 1.25 1.25 0 0 0 0 0 1 1 0.6 1 1 1 1 ? 0 wall 0 0 -0.5 21.3 14 2.8
 @tower1 user\assets\models\buildings\tower1.obj ? ? ? ? 1 1 1 0 1 0 0 0 1 1 0.6 1 1 1 1 ? 0 tower 0 0 0 9.1 34 9
@@ -62,5 +62,7 @@
 @animalpen user\assets\models\misc\animalpen.obj user\assets\textures\diffuse_maps\misc\animalpen.png ? ? ? 2.25 2.25 2.25 0 1 0 0 1 1 1 0.75 1 1 1 1 ? 0 left -3.5 0 0 0.2 1.1 7.5 right 3.5 0 0 0.2 1.1 7.5 front 0 0 3.5 7.6 1 0.2 back 0 0 -3.5 7.5 1.1 0.2
 @haybale user\assets\models\misc\haybale.obj user\assets\textures\diffuse_maps\misc\haybale.png ? ? ? 1.5 1.5 1.5 0 1 0 0 1 1 1 0.5 1 1 1 1 ? 0 haybale 0 0 0 1.8 1.7 1.7
 @lantern user\assets\models\misc\lantern.obj user\assets\textures\diffuse_maps\misc\lantern.png ? ? user\assets\textures\normal_maps\misc\lantern.png 1 1 1 0 1 0 0 1 1 1 1 1 1 1 1 ? 0 pole 0 0 0 0.4 5.3 0.4 lantern 1.6 3.1 0 0.6 1.5 0.6 arm 1.1 4.3 0 1.7 0.3 0.3
-@waterwheel user\assets\models\misc\waterwheel.obj ? ? ? ? 1.25 1.25 1.25 0 1 0 0 0 1 1 1 1 1 1 1 ? 0
-@sawmill user\assets\models\buildings\sawmill.obj user\assets\textures\diffuse_maps\buildings\sawmill.png ? ? ? 5 5 5 0 1 0 0 0 1 1 1 1 1 1 1 ? 0
+@waterwheel user\assets\models\misc\waterwheel.obj ? ? ? ? 1.25 1.25 1.25 0 1 0 0 0 1 1 1 1 1 1 1 ? 0 waterwheel 0 0 0 2.5 3.65 4.2
+@sawmill user\assets\models\buildings\sawmill.obj user\assets\textures\diffuse_maps\buildings\sawmill.png ? ? ? 5 5 5 0 1 0 0 0 1 1 1 1 1 1 1 ? 0 bottom 0 0 0 3.3 0.3 1.1 left 0 0 -0.6 3.3 1 0.2 right 7.45058e-09 0 0.57 3.3 1 0.15
+@saw user\assets\models\misc\saw.obj user\assets\textures\diffuse_maps\misc\saw.png ? user\assets\textures\reflection_maps\misc\saw.png user\assets\textures\normal_maps\misc\saw.png 1.75 1.75 1.75 0 1 0 0 1 1 1 0.75 1 1 1 1 ? 0 saw 0 0 0 0.0999999 1 6
+@tower4 user\assets\models\buildings\tower4.obj ? ? ? ? 3 3 3 0 1 0 0 1 1 1 0.75 1 1 1 1 ? 0 tower 0 0 0 3.2 10.1 3.1

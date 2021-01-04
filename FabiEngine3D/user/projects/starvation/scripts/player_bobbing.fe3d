@@ -1,4 +1,4 @@
-3 22
+9 24
 META script_type_update
 
 /// Bobbing speed
@@ -7,6 +7,8 @@ IF _isWalking IS <true>:
     EDIT bobbingSpeed = 0.035
 IF _isRunning IS <true>:
     MUL bobbingSpeed 2.5
+IF _isUnderWater IS <true>:
+    MUL bobbingSpeed 0.5
 
 /// Update bobbing animation
 IF _toolPlaying IS <false> AND _pickupPlaying IS <false>:

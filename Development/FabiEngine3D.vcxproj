@@ -359,10 +359,9 @@
     <ClCompile Include="Source\script_interpreter_func_fe3d_aabb.cpp" />
     <ClCompile Include="Source\script_interpreter_func_fe3d_audio.cpp" />
     <ClCompile Include="Source\script_interpreter_func_fe3d_billboard.cpp" />
-    <ClCompile Include="Source\script_interpreter_func_fe3d_gui.cpp" />
+    <ClCompile Include="Source\script_interpreter_func_fe3d_image.cpp" />
     <ClCompile Include="Source\script_interpreter_func_fe3d_light.cpp" />
     <ClCompile Include="Source\script_interpreter_func_fe3d_sky.cpp" />
-    <ClCompile Include="Source\script_interpreter_func_fe3d_terrain.cpp" />
     <ClCompile Include="Source\script_interpreter_func_fe3d_text.cpp" />
     <ClCompile Include="Source\script_interpreter_func_fe3d_water.cpp" />
     <ClCompile Include="Source\script_interpreter_func_fe3d_graphics.cpp" />
@@ -376,7 +375,7 @@
     <ClCompile Include="Source\script_interpreter_func_fe3d_physics.cpp" />
     <ClCompile Include="Source\script_interpreter_func_fe3d_core.cpp" />
     <ClCompile Include="Source\script_interpreter_condition.cpp" />
-    <ClCompile Include="Source\script_interpreter_func_fe3d_game.cpp" />
+    <ClCompile Include="Source\script_interpreter_func_fe3d_model.cpp" />
     <ClCompile Include="Source\script_interpreter_func_fe3d_input.cpp" />
     <ClCompile Include="Source\script_interpreter_func_fe3d_misc.cpp" />
     <ClCompile Include="Source\script_interpreter_list_misc.cpp" />

@@ -1,4 +1,4 @@
-22 5
+12 0
 META script_type_update
 
 /// Temporary values
@@ -12,9 +12,14 @@ DEC accSpeed = 0.0001
 DEC minSpeed = -0.0025
 DEC maxSpeed = 0.0025
 
-/// Running speed
+/// Movement must be slowed if underwater
+IF _isUnderWater IS <true>:
+    MUL minSpeed 0.5
+    MUL maxSpeed 0.5
+
+/// Determine max movement speed
 IF shift IS <true> AND up IS <true>:
-    IF _stamina MORE 0.0:
+    IF _stamina MORE 0.0 AND _isUnderWater IS <false>:
         MUL minSpeed 2.0
         MUL maxSpeed 2.0
         EDIT _isRunning = <true>

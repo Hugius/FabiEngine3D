@@ -9,16 +9,16 @@ void ShadowManager::loadShadows(Vec3 eye, Vec3 center, float size, float reach, 
 	_reach  = reach;
 	_isFollowingCamera = isFollowingCamera;
 	_interval = interval;
+	_passedFrames = interval;
 }
 
 void ShadowManager::update(RenderBus& renderBus)
 {
 	if (_isFollowingCamera)
 	{
-		static int passedFrames = 0;
-		if (passedFrames >= _interval)
+		if (_passedFrames >= _interval)
 		{
-			passedFrames = 0;
+			_passedFrames = 0;
 
 			// Updated values
 			Vec3 cameraPos = renderBus.getCameraPosition();
@@ -34,7 +34,7 @@ void ShadowManager::update(RenderBus& renderBus)
 		}
 		else
 		{
-			passedFrames++;
+			_passedFrames++;
 		}
 	}
 	else

@@ -1,0 +1,12 @@
+9 31
+META script_type_update
+
+DEC height = fe3d:water_get_height()
+VEC3 camPos = fe3d:camera_get_position()
+
+IF camPos.y LESS height:
+    EDIT _isUnderWater = <true>
+    fe3d:image_set_visible("underwater", <true>)
+ELSE:
+    EDIT _isUnderWater = <false>
+    fe3d:image_set_visible("underwater", <false>)

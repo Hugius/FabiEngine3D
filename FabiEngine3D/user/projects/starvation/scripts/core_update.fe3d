@@ -1,4 +1,4 @@
-18 17
+22 22
 META script_type_update
 META execution_entry
 
@@ -21,4 +21,5 @@ EXEC intro_update
 EXEC cutting_update
 EXEC mining_update
 EXEC gathering_update
+EXEC underwater_update
 EXEC misc_update

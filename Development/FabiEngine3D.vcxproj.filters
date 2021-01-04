@@ -574,19 +574,10 @@
     <ClCompile Include="Source\script_interpreter_func_fe3d_billboard.cpp">
       <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
     </ClCompile>
-    <ClCompile Include="Source\script_interpreter_func_fe3d_game.cpp">
-      <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\script_interpreter_func_fe3d_gui.cpp">
-      <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
-    </ClCompile>
     <ClCompile Include="Source\script_interpreter_func_fe3d_light.cpp">
       <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
     </ClCompile>
     <ClCompile Include="Source\script_interpreter_func_fe3d_sky.cpp">
-      <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\script_interpreter_func_fe3d_terrain.cpp">
       <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
     </ClCompile>
     <ClCompile Include="Source\script_interpreter_func_fe3d_text.cpp">
@@ -620,6 +611,12 @@
       <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
     </ClCompile>
     <ClCompile Include="Source\script_interpreter_func_fe3d_core.cpp">
+      <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_interpreter_func_fe3d_image.cpp">
+      <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\script_interpreter_func_fe3d_model.cpp">
       <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
     </ClCompile>
   </ItemGroup>

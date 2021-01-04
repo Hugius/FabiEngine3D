@@ -399,6 +399,36 @@ bool ScriptInterpreter::_executeFe3dTextEntityFunction(const string& functionNam
 			}
 		}
 	}
+	else if (functionName == "fe3d:text_set_alpha") // Set textEntity alpha
+	{
+		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL };
+
+		// Validate arguments
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existing text ID
+			if (_validateFe3dTextEntity(arguments[0].getString()))
+			{
+				_fe3d.textEntity_setAlpha(arguments[0].getString(), arguments[1].getDecimal());
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			}
+		}
+	}
+	else if (functionName == "fe3d:text_get_alpha") // Get textEntity alpha
+	{
+		auto types = { ScriptValueType::STRING };
+
+		// Validate arguments
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existing text ID
+			if (_validateFe3dTextEntity(arguments[0].getString()))
+			{
+				auto result = _fe3d.textEntity_getAlpha(arguments[0].getString());
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
+			}
+		}
+	}
 	else
 	{
 		return false;

@@ -1,4 +1,4 @@
-84 61
+25 24
 META script_type_update
 
 /// Skeleton position & rotation
@@ -23,8 +23,10 @@ ELIF _pickupPlaying IS <false>:
     /// Update running animation
     IF isWalkPlaying IS <true>:
         DEC speed = 1.0
-        IF _isRunning IS <true>:
-            MUL speed 2.0
+        IF _isUnderWater IS <true>:
+            EDIT speed = 0.5
+        ELIF _isRunning IS <true>:
+            EDIT speed = 2.0
         fe3d:model_set_animation_speed("walk", "player", speed)
 
 /// Determine tool animation type

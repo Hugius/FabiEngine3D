@@ -28,6 +28,7 @@ private:
 	float _reach = 0.0f;
 
 	int _interval = 0;
+	int _passedFrames = 0;
 
 	bool _isFollowingCamera = false;
 };

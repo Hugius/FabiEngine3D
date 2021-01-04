@@ -1,9 +1,10 @@
-5 13
+5 20
 META script_type_init
 META execution_entry
 
 fe3d:scene_load("scene")
 
+EXEC underwater_init
 EXEC bag_init
 EXEC inventory_init
 EXEC player_init

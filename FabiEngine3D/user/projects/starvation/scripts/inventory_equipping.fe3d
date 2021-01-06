@@ -1,16 +1,16 @@
-67 0
+64 13
 META script_type_update
 
 /// Check if any tool animation is playing
 BOOL isAnimPlaying = <false>
-IF _swordPlaying IS <true> OR _pickaxePlaying IS <true> OR _axePlaying IS <true>:
+IF _isSwordPlaying IS <true> OR _isPickaxePlaying IS <true> OR _isAxePlaying IS <true>:
     EDIT isAnimPlaying = <true>
-IF _shovelPlaying IS <true> OR _hoePlaying IS <true> OR _scythePlaying IS <true>:
+IF _isShovelPlaying IS <true> OR _isHoePlaying IS <true> OR _isScythePlaying IS <true>:
     EDIT isAnimPlaying = <true>
-IF _hammerPlaying IS <true> OR _fishrodPlaying IS <true>:
+IF _isHammerPlaying IS <true> OR _isFishrodPlaying IS <true>:
     EDIT isAnimPlaying = <true>
 
-/// Unselect equipped tool
+/// Unequip old tool
 IF _inventory[_equipIndex] NOT "":
     fe3d:model_set_visible(_inventory[_equipIndex], <false>)
 
@@ -63,7 +63,7 @@ IF isAnimPlaying IS <false> AND _isInvOpen IS <true>:
     ELIF key9 IS <true>:
         EDIT _equipIndex = 8
 
-/// Select equipped tool
+/// Equip new tool
 IF _inventory[_equipIndex] NOT "" AND _isInvOpen IS <true>:
     fe3d:model_set_visible(_inventory[_equipIndex], <true>)
 

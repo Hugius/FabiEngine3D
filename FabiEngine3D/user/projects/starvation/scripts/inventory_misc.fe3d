@@ -1,10 +1,9 @@
-6 0
+3 7
 META script_type_update
 
 /// Check if player wants to open/close inventory
-IF _toolPlaying IS <false>:
-    BOOL tToggled = fe3d:input_is_key_toggled("KEY_T")
-    EDIT _isInvOpen = (tToggled IS <true>)
+IF _isToolPlaying IS <false>:
+    EDIT _isInvOpen = fe3d:input_is_key_toggled("KEY_I")
 
 /// Update inventory icon visibility
 BOOL slot1 = (_inventory[0] IS "")

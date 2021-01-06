@@ -1,10 +1,10 @@
-4 30
+8 79
 META script_type_init
 
 /// Globals
-GLOB STR _lastSelectedItemID = ""
-GLOB CONST DEC _maxReach = 5.0
-fe3d:model_place("aurelius", "male1", 6.0, 6.35, 136.0)
+GLOB CONST DEC _maxPickupReach = 5.0
+GLOB CONST DEC _maxToolReach = 5.0
 
-/// Crosshair
+/// HUD
 fe3d:image_place("crosshair", "crosshair.png", 0.0, 0.0, 0.0, 0.0325, 0.05)
+fe3d:text_place("pickup", "font.ttf", "Press F to pickup", 0.0, -0.2, 0.0, 0.35, 0.05)

@@ -1,0 +1,70 @@
+54 4
+META script_type_update
+
+/// NPC rotation
+LIST names = {"aurelius"}
+INT size = misc:get_list_size("names")
+INT index = 0
+STR hoveredID = ""
+STR name = ""
+VEC3 camPos = fe3d:camera_get_position()
+VEC3 npcPos = [0.0 0.0 0.0]
+VEC3 direction = [ 0.0 0.0 0.0]
+DEC npcRot = 0.0
+LOOP:
+    IF index IS size:
+        BREAK
+    ELSE:
+        EDIT name = misc:concat_strings("npc_", names[index])
+        EDIT npcPos = fe3d:model_get_position(name)
+        EDIT direction = camPos
+        DECR direction npcPos
+        EDIT npcRot = math:atan2(direction.x, direction.z)
+        fe3d:model_set_rotation(name, 0.0, npcRot, 0.0)
+    INCR index 1
+
+/// NPC hover
+fe3d:text_set_visible("talk", <false>)
+EDIT hoveredID = fe3d:raycast_into_model("npc", "", <true>)
+IF hoveredID NOT "":
+    EDIT npcPos = fe3d:model_get_position(hoveredID)
+    DEC distance = math:distance(camPos, npcPos)
+    IF distance LESS _maxNpcReach AND _isTalking IS <false>:
+        fe3d:text_set_visible("talk", <true>)
+    ELSE:
+        EDIT hoveredID = ""
+
+/// NPC dialogue - start & stop
+BOOL tPressed = fe3d:input_is_key_pressed("KEY_T")
+IF hoveredID NOT "" AND tPressed IS <true> AND _isTalking IS <false>:
+    EDIT _isTalking = <true>
+    EDIT _talkingNpcID = hoveredID
+    fe3d:cursor_show()
+ELIF tPressed IS <true> AND _isTalking IS <true>:
+    CAST _dialogueIndex STR
+    STR textID = misc:concat_strings(_talkingNpcID, _dialogueIndex)
+    CAST _dialogueIndex INT
+    fe3d:text_set_visible(textID, <false>)
+    EDIT _isTalking = <false>
+    EDIT _talkingNpcID = ""
+    EDIT _dialogueIndex = 0
+    fe3d:cursor_hide()
+
+/// NPC dialogue - talking process
+BOOL lmbPressed = fe3d:input_is_mouse_pressed("BUTTON_LEFT")
+IF _talkingNpcID NOT "":
+    CAST _dialogueIndex STR
+    STR textID = misc:concat_strings(_talkingNpcID, _dialogueIndex)
+    CAST _dialogueIndex INT
+    BOOL existing = fe3d:text_is_existing(textID)
+    /// Check if reached end of dialogue
+    IF existing IS <true>:
+        fe3d:text_set_visible(textID, <true>)
+        IF lmbPressed IS <true>:
+            fe3d:text_set_visible(textID, <false>)
+            INCR _dialogueIndex 1
+    ELSE:
+        EDIT _isTalking = <false>
+        EDIT _talkingNpcID = ""
+        EDIT _dialogueIndex = 0
+        fe3d:cursor_hide()

@@ -1,6 +1,7 @@
-4 23
+5 41
 META script_type_init
 
+/// Globals
 GLOB LIST _stonesIDs = {}
 GLOB STR _fallingStonesID = ""
 GLOB DEC _fallingStonesTargetHeight = 0.0

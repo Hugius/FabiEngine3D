@@ -1,4 +1,4 @@
-9 24
+12 86
 META script_type_update
 
 /// Bobbing speed
@@ -11,7 +11,7 @@ IF _isUnderWater IS <true>:
     MUL bobbingSpeed 0.5
 
 /// Update bobbing animation
-IF _toolPlaying IS <false> AND _pickupPlaying IS <false>:
+IF _isToolPlaying IS <false> AND _isPickupPlaying IS <false> AND _isTalking IS <false>:
     INCR _totalBobbing bobbingSpeed
     MUL bobbingSpeed _bobbingDirection
     DEC newPitch = fe3d:camera_get_pitch()

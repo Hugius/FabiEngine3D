@@ -1,4 +1,4 @@
-5 20
+11 13
 META script_type_init
 META execution_entry
 
@@ -10,4 +10,5 @@ EXEC inventory_init
 EXEC player_init
 EXEC cutting_init
 EXEC mining_init
+EXEC npc_init
 EXEC misc_init

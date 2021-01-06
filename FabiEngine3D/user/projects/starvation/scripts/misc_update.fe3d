@@ -1,31 +1,49 @@
-25 34
+39 36
 META script_type_update
 
-/// Validate existence
-BOOL existing = fe3d:model_is_existing(_lastSelectedItemID)
-IF existing IS <false>:
-    EDIT _lastSelectedItemID = ""
+/// Compose pickuppable items
+LIST pickuppables = {"log","stones","bush","plant","mushroom"}
+PUSH pickuppables "pickaxe_stone"
+PUSH pickuppables "pickaxe_iron"
+PUSH pickuppables "axe_stone"
+PUSH pickuppables "axe_iron"
 
-/// Reset color tint
-IF _lastSelectedItemID NOT "":
-    fe3d:model_set_color(_lastSelectedItemID, 1.0, 1.0, 1.0)
-    EDIT _lastSelectedItemID = ""
-
-/// Apply color tint if hovered
-LIST pickuppables = {"log","stones","axe","pickaxe","bush","plant","mushroom"}
+/// Pickupabbles hover
+fe3d:text_set_visible("pickup", <false>)
 INT size = misc:get_list_size("pickuppables")
 INT index = 0
 STR hoveredID = ""
+STR itemName = ""
 VEC3 camPos = fe3d:camera_get_position()
 LOOP:
     IF index IS size:
         BREAK
-    EDIT hoveredID = fe3d:raycast_into_model(pickuppables[index], "", <true>)
-    IF hoveredID NOT "" AND _isInvOpen IS <false>:
-        VEC3 stonePos = fe3d:model_get_position(hoveredID)
-        DEC distance = math:distance(stonePos, camPos)
-        IF distance LESS _maxReach:
-            fe3d:model_set_color(hoveredID, 0.25, 1.0, 0.25)
-            EDIT _lastSelectedItemID = hoveredID
-            BREAK
+    ELSE:
+        EDIT hoveredID = fe3d:raycast_into_model(pickuppables[index], "", <true>)
+        IF hoveredID NOT "":
+            VEC3 itemPos = fe3d:model_get_position(hoveredID)
+            DEC distance = math:distance(itemPos, camPos)
+            IF distance LESS _maxPickupReach:
+                EDIT itemName = pickuppables[index]
+                fe3d:text_set_visible("pickup", <true>)
+                BREAK
     INCR index 1
+
+/// Tools pickup
+BOOL pickaxe = (itemName IS "pickaxe_stone" OR itemName IS "pickaxe_iron")
+BOOL axe = (itemName IS "axe_stone" OR itemName IS "axe_iron")
+IF pickaxe IS <true>:
+    EDIT index = 1
+IF axe IS <true>:
+    EDIT index = 2
+IF pickaxe IS <true> OR axe IS <true>:
+    IF _wasPickupPlaying IS <true> AND _isPickupPlaying IS <false>:
+        fe3d:model_delete(hoveredID)
+        /// Unequip old tool
+        IF _inventory[_equipIndex] NOT "":
+            fe3d:model_set_visible(_inventory[_equipIndex], <false>)
+        /// Equip new tool
+        fe3d:model_place(itemName, itemName, 0.0, 0.0, 0.0)
+        fe3d:model_set_aabb_responsive(itemName, <false>)
+        EDIT _inventory[index] = itemName
+        EDIT _equipIndex = index

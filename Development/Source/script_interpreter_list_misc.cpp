@@ -125,6 +125,10 @@ void ScriptInterpreter::_processListPush(const string& scriptLine)
 	}
 	else if (_isStringValue(valueString)) // STRING
 	{
+		// Removing the "" around the string content
+		valueString.erase(valueString.begin());
+		valueString.pop_back();
+
 		listVariable.addValue(ScriptValue(_fe3d, ScriptValueType::STRING, valueString));
 	}
 	else if (_isDecimalValue(valueString)) // DECIMAL

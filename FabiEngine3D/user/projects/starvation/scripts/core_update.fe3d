@@ -1,7 +1,8 @@
-22 22
+26 9
 META script_type_update
 META execution_entry
 
+/// Bag inventory
 EXEC bag_update
 
 /// Tools inventory
@@ -16,10 +17,14 @@ EXEC player_walk
 EXEC player_bobbing
 EXEC player_misc
 
-/// Other
-EXEC intro_update
+/// Working
 EXEC cutting_update
 EXEC mining_update
 EXEC gathering_update
+
+/// NPC interaction
+EXEC npc_update
+
+/// Other
 EXEC underwater_update
 EXEC misc_update

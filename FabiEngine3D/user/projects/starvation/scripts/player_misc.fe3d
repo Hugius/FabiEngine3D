@@ -1,42 +1,42 @@
-40 29
+33 64
 META script_type_update
 
 /// Update tool & pickup animations status
 STR modelID = _inventory[_equipIndex]
-EDIT _wasSwordPlaying = _swordPlaying
-EDIT _wasPickaxePlaying = _pickaxePlaying
-EDIT _wasAxePlaying = _axePlaying
-EDIT _wasShovelPlaying = _shovelPlaying
-EDIT _wasHoePlaying = _hoePlaying
-EDIT _wasScythePlaying = _scythePlaying
-EDIT _wasHammerPlaying = _hammerPlaying
-EDIT _wasFishrodPlaying = _fishrodPlaying
-EDIT _wasPickupPlaying = _pickupPlaying
-EDIT _swordPlaying = fe3d:model_is_animation_playing("sword_hit", modelID)
-EDIT _pickaxePlaying = fe3d:model_is_animation_playing("pickaxe_mine", modelID)
-EDIT _axePlaying = fe3d:model_is_animation_playing("axe_cut", modelID)
-EDIT _shovelPlaying = fe3d:model_is_animation_playing("shovel_dig", modelID)
-EDIT _hoePlaying = fe3d:model_is_animation_playing("sword_hit", modelID)
-EDIT _scythePlaying = fe3d:model_is_animation_playing("sword_hit", modelID)
-EDIT _hammerPlaying = fe3d:model_is_animation_playing("sword_hit", modelID)
-EDIT _fishrodPlaying = fe3d:model_is_animation_playing("sword_hit", modelID)
-EDIT _pickupPlaying = fe3d:model_is_animation_playing("pickup", "player")
+EDIT _wasSwordPlaying = _isSwordPlaying
+EDIT _wasPickaxePlaying = _isPickaxePlaying
+EDIT _wasAxePlaying = _isAxePlaying
+EDIT _wasShovelPlaying = _isShovelPlaying
+EDIT _wasHoePlaying = _isHoePlaying
+EDIT _wasScythePlaying = _isScythePlaying
+EDIT _wasHammerPlaying = _isHammerPlaying
+EDIT _wasFishrodPlaying = _isFishrodPlaying
+EDIT _wasPickupPlaying = _isPickupPlaying
+EDIT _isSwordPlaying = fe3d:model_is_animation_playing("sword_hit", modelID)
+EDIT _isPickaxePlaying = fe3d:model_is_animation_playing("pickaxe_mine", modelID)
+EDIT _isAxePlaying = fe3d:model_is_animation_playing("axe_cut", modelID)
+EDIT _isShovelPlaying = fe3d:model_is_animation_playing("shovel_dig", modelID)
+EDIT _isHoePlaying = fe3d:model_is_animation_playing("sword_hit", modelID)
+EDIT _isScythePlaying = fe3d:model_is_animation_playing("sword_hit", modelID)
+EDIT _isHammerPlaying = fe3d:model_is_animation_playing("sword_hit", modelID)
+EDIT _isFishrodPlaying = fe3d:model_is_animation_playing("sword_hit", modelID)
+EDIT _isPickupPlaying = fe3d:model_is_animation_playing("pickup", "player")
 
 /// Check if any tool animation is playing
-EDIT _toolPlaying = <false>
-IF _pickaxePlaying IS <true> OR _axePlaying IS <true>:
-    EDIT _toolPlaying = <true>
-IF _shovelPlaying IS <true> OR _hoePlaying IS <true> OR _scythePlaying IS <true>:
-    EDIT _toolPlaying = <true>
-IF _hammerPlaying IS <true> OR _fishrodPlaying IS <true>:
-    EDIT _toolPlaying = <true>
+EDIT _isToolPlaying = <false>
+IF _isPickaxePlaying IS <true> OR _isAxePlaying IS <true>:
+    EDIT _isToolPlaying = <true>
+IF _isShovelPlaying IS <true> OR _isHoePlaying IS <true> OR _isScythePlaying IS <true>:
+    EDIT _isToolPlaying = <true>
+IF _isHammerPlaying IS <true> OR _isFishrodPlaying IS <true>:
+    EDIT _isToolPlaying = <true>
 
 /// Disable camera movement when animation is playing
-IF _toolPlaying IS <true> OR _pickupPlaying IS <true>:
+IF _isToolPlaying IS <true> OR _isPickupPlaying IS <true> OR _isTalking IS <true>:
     fe3d:camera_disable_first_person_view()
 ELSE:
     fe3d:camera_enable_first_person_view()
 
 /// Center cursor when pickup is playing
-IF _pickupPlaying IS <true>:
+IF _isPickupPlaying IS <true>:
     fe3d:camera_center_cursor()

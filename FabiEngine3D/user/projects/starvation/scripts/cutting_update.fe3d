@@ -1,9 +1,9 @@
-61 8
+8 16
 META script_type_update
 
 /// Check if cutting animation finished
 STR hoveredID = ""
-IF _axePlaying IS <false> AND _wasAxePlaying IS <true> AND _fallingTreeID IS "":
+IF _wasAxePlaying IS <true> AND _isAxePlaying IS <false> AND _fallingTreeID IS "":
     VEC3 camPos = fe3d:camera_get_position()
     STR checkID = ""
     LIST cuttables = {"tree2","tree6","tree7"}
@@ -21,7 +21,7 @@ IF _axePlaying IS <false> AND _wasAxePlaying IS <true> AND _fallingTreeID IS "":
     IF hoveredID NOT "" AND _fallingTreeID IS "":
         VEC3 treePos = fe3d:model_get_position(hoveredID)
         DEC distance = math:distance(treePos, camPos)
-        IF distance LESS _maxReach:
+        IF distance LESS _maxToolReach:
             fe3d:model_start_animation("tree_fall", hoveredID, 1)
             fe3d:model_set_aabb_responsive(hoveredID, <false>)
             EDIT _fallingTreeID = hoveredID
@@ -55,12 +55,12 @@ IF _fallingLogID NOT "":
 
 /// Log picking updates
 EDIT hoveredID = fe3d:raycast_into_model("log", "", <true>)
-IF hoveredID NOT "" AND _wasPickupPlaying IS <true> AND _pickupPlaying IS <false>:
+IF hoveredID NOT "" AND _wasPickupPlaying IS <true> AND _isPickupPlaying IS <false>:
     VEC3 camPos = fe3d:camera_get_position()
     VEC3 logPos = fe3d:model_get_position(hoveredID)
     DEC distance = math:distance(logPos, camPos)
     DEC newWeight = _totalBagWeight
     INCR newWeight _bagWeights[0]
-    IF distance LESS _maxReach AND newWeight LESS _maxBagWeight:
+    IF distance LESS _maxPickupReach AND newWeight LESS _maxBagWeight:
         fe3d:model_delete(hoveredID)
         INCR _bag[0] 1

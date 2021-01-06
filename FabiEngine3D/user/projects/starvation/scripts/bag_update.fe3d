@@ -1,9 +1,9 @@
-0 23
+21 37
 META script_type_update
 
 /// Check if player wants to open/close bag
-BOOL iToggled = fe3d:input_is_key_toggled("KEY_I")
-IF iToggled IS <true>:
+BOOL bToggled = fe3d:input_is_key_toggled("KEY_B")
+IF bToggled IS <true>:
     fe3d:image_set_visible("bag_open", <true>)
     fe3d:image_set_visible("bag_closed", <false>)
 ELSE:
@@ -11,16 +11,16 @@ ELSE:
     fe3d:image_set_visible("bag_closed", <true>)
 
 /// Update bag items visibility
-fe3d:image_set_visible("wood", iToggled)
-fe3d:text_set_visible("wood_count", iToggled)
-fe3d:image_set_visible("stone", iToggled)
-fe3d:text_set_visible("stone_count", iToggled)
-fe3d:image_set_visible("clay", iToggled)
-fe3d:text_set_visible("clay_count", iToggled)
-fe3d:image_set_visible("seeds", iToggled)
-fe3d:text_set_visible("seeds_count", iToggled)
-fe3d:image_set_visible("iron", iToggled)
-fe3d:text_set_visible("iron_count", iToggled)
+fe3d:image_set_visible("wood", bToggled)
+fe3d:text_set_visible("wood_count", bToggled)
+fe3d:image_set_visible("stone", bToggled)
+fe3d:text_set_visible("stone_count", bToggled)
+fe3d:image_set_visible("clay", bToggled)
+fe3d:text_set_visible("clay_count", bToggled)
+fe3d:image_set_visible("seeds", bToggled)
+fe3d:text_set_visible("seeds_count", bToggled)
+fe3d:image_set_visible("iron", bToggled)
+fe3d:text_set_visible("iron_count", bToggled)
 
 /// Calculate total bag items AND show bag text
 LIST textNames = {"wood_count","stone_count","clay_count","seeds_count","iron_count"}

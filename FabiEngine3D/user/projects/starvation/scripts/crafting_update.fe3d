@@ -1,4 +1,4 @@
-18 22
+27 25
 META script_type_update
 
 /// Update workbench hover
@@ -18,9 +18,16 @@ BOOL cPressed = fe3d:input_is_key_pressed("KEY_C")
 IF cPressed IS <true> AND isHovered IS <true> AND _isCrafting IS <false>:
     EDIT _isCrafting = <true>
     fe3d:cursor_show()
-ELIF cPressed IS <true> AND _isCrafting IS <true>:
-    EDIT _isCrafting = <false>
-    fe3d:cursor_hide()
 
 /// Update crafting menu - process
-
+BOOL lmbPressed = fe3d:input_is_mouse_pressed("BUTTON_LEFT")
+STR confirmed = fe3d:raycast_into_billboard("craft_confirm", <true>)
+STR cancelled = fe3d:raycast_into_billboard("craft_cancel", <true>)
+IF _isCrafting IS <true> AND lmbPressed IS <true>:
+    IF confirmed NOT "":
+        PASS
+    ELIF cancelled NOT "":
+        EDIT _isCrafting = <false>
+        fe3d:cursor_hide()
+    ELSE:
+        PASS

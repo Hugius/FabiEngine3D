@@ -1,4 +1,4 @@
-11 43
+8 28
 META script_type_init
 
 /// Globals
@@ -10,8 +10,10 @@ fe3d:model_place("workbench", "workbench", 0.0, 6.5, 145.0)
 fe3d:model_set_rotation("workbench", 0.0, 90.0, 0.0)
 
 /// Billboards
-fe3d:billboard_place("wood", "wood", 0.0, 9.0, 145.0)
-fe3d:billboard_set_camera_facing_y("wood", <true>)
+fe3d:billboard_place("craft_confirm", "craft", 1.0, 9.5, 145.0)
+fe3d:billboard_place("craft_cancel", "cancel", -1.0, 9.5, 145.0)
+fe3d:billboard_set_rotation("craft_confirm", 0.0, 180.0, 0.0)
+fe3d:billboard_set_rotation("craft_cancel", 0.0, 180.0, 0.0)
 
 /// HUD
 fe3d:text_place("craft", "font.ttf", "Press C to craft", 0.0, -0.2, 0.0, 0.35, 0.05)

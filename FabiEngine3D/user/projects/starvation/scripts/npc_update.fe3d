@@ -1,4 +1,4 @@
-54 4
+51 18
 META script_type_update
 
 /// NPC rotation
@@ -50,7 +50,7 @@ ELIF tPressed IS <true> AND _isTalking IS <true>:
     EDIT _dialogueIndex = 0
     fe3d:cursor_hide()
 
-/// NPC dialogue - talking process
+/// NPC dialogue - process
 BOOL lmbPressed = fe3d:input_is_mouse_pressed("BUTTON_LEFT")
 IF _talkingNpcID NOT "":
     CAST _dialogueIndex STR

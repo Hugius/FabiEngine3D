@@ -1,7 +1,0 @@
-3 27
-META script_type_init
-
-GLOB STR _fallingTreeID = ""
-GLOB STR _fallingLogID = ""
-GLOB LIST _logIDs = {}
-GLOB DEC _fallingLogTargetHeight = 0.0

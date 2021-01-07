@@ -1,4 +1,4 @@
-22 22
+33 4
 META script_type_update
 
 /// Temporary values
@@ -31,32 +31,28 @@ ELSE:
     IF _stamina LESS 100.0:
         INCR _stamina 0.1
 
-/// WASD movement
-IF left IS <true> AND _movingAcc.x MORE minSpeed:
-    DECR _movingAcc.x accSpeed
-IF right IS <true> AND _movingAcc.x LESS maxSpeed:
-    INCR _movingAcc.x accSpeed
-IF up IS <true> AND _movingAcc.z LESS maxSpeed:
-    INCR _movingAcc.z accSpeed
-IF down IS <true> AND _movingAcc.z MORE minSpeed:
-    DECR _movingAcc.z accSpeed
-
-/// Update acceleration
-IF left IS <false> AND _movingAcc.x LESS 0.0:
-    EDIT _movingAcc.x = 0.0
-IF right IS <false> AND _movingAcc.x MORE 0.0:
-    EDIT _movingAcc.x = 0.0
-IF up IS <false> AND _movingAcc.z MORE 0.0:
-    EDIT _movingAcc.z = 0.0
-IF down IS <false> AND _movingAcc.z LESS 0.0:
-    EDIT _movingAcc.z = 0.0
-
-/// Move camera
-INCR _movingSpeed _movingAcc
-MUL _movingAcc 0.99
-MUL _movingSpeed 0.9
-
-/// Only if no tool or pickup animations are playing
-IF _isToolPlaying IS <false> AND _isPickupPlaying IS <false> AND _isTalking IS <false>:
+/// Update camera movement
+BOOL condition1 = (_isToolPlaying IS <false> AND _isPickupPlaying IS <false>)
+BOOL condition2 = (_isTalking IS <false> AND _isCrafting IS <false>)
+IF condition1 IS <true> AND condition2 IS <true>:
+    IF left IS <true> AND _movingAcc.x MORE minSpeed:
+        DECR _movingAcc.x accSpeed
+    IF right IS <true> AND _movingAcc.x LESS maxSpeed:
+        INCR _movingAcc.x accSpeed
+    IF up IS <true> AND _movingAcc.z LESS maxSpeed:
+        INCR _movingAcc.z accSpeed
+    IF down IS <true> AND _movingAcc.z MORE minSpeed:
+        DECR _movingAcc.z accSpeed
+    IF left IS <false> AND _movingAcc.x LESS 0.0:
+        EDIT _movingAcc.x = 0.0
+    IF right IS <false> AND _movingAcc.x MORE 0.0:
+        EDIT _movingAcc.x = 0.0
+    IF up IS <false> AND _movingAcc.z MORE 0.0:
+        EDIT _movingAcc.z = 0.0
+    IF down IS <false> AND _movingAcc.z LESS 0.0:
+        EDIT _movingAcc.z = 0.0
+    INCR _movingSpeed _movingAcc
+    MUL _movingAcc 0.99
+    MUL _movingSpeed 0.9
     fe3d:camera_follow_x(_movingSpeed.x)
     fe3d:camera_follow_z(_movingSpeed.z)

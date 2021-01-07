@@ -1,30 +1,40 @@
-8 16
+24 31
 META script_type_update
 
-/// Check if cutting animation finished
+/// Check if aiming at tree & extract number
+STR checkID = ""
+LIST cuttables = {"tree2","tree6","tree7"}
+INT size = 3
+INT index = 0
 STR hoveredID = ""
+LOOP:
+    IF index IS size:
+        BREAK
+    EDIT hoveredID = fe3d:raycast_into_model(cuttables[index], "trunk", <true>)
+    IF hoveredID NOT "":
+        BREAK
+    INCR index 1
+
+/// Update tree hover
+fe3d:text_set_visible("cut", <false>)
+BOOL isHovered = <false>
+VEC3 camPos = fe3d:camera_get_position()
+IF hoveredID NOT "" AND _fallingTreeID IS "":
+    VEC3 treePos = fe3d:model_get_position(hoveredID)
+    DEC distance = math:distance(treePos, camPos)
+    IF distance LESS _maxTreeReach:
+        EDIT isHovered = <true>
+        STR toolID = _inventory[_equipIndex]
+        IF toolID IS "axe_stone" OR toolID IS "axe_iron":
+            IF _isInvOpen IS <true>:
+                fe3d:text_set_visible("cut", <true>)
+
+/// Check if cutting animation finished
 IF _wasAxePlaying IS <true> AND _isAxePlaying IS <false> AND _fallingTreeID IS "":
-    VEC3 camPos = fe3d:camera_get_position()
-    STR checkID = ""
-    LIST cuttables = {"tree2","tree6","tree7"}
-    INT size = 3
-    INT index = 0
-    /// Check if aiming at tree & extract number
-    LOOP:
-        IF index IS size:
-            BREAK
-        EDIT hoveredID = fe3d:raycast_into_model(cuttables[index], "trunk", <true>)
-        IF hoveredID NOT "":
-            BREAK
-        INCR index 1
-    /// Start treefalling
-    IF hoveredID NOT "" AND _fallingTreeID IS "":
-        VEC3 treePos = fe3d:model_get_position(hoveredID)
-        DEC distance = math:distance(treePos, camPos)
-        IF distance LESS _maxToolReach:
-            fe3d:model_start_animation("tree_fall", hoveredID, 1)
-            fe3d:model_set_aabb_responsive(hoveredID, <false>)
-            EDIT _fallingTreeID = hoveredID
+    IF isHovered IS <true>:
+        fe3d:model_start_animation("tree_fall", hoveredID, 1)
+        fe3d:model_set_aabb_responsive(hoveredID, <false>)
+        EDIT _fallingTreeID = hoveredID
 
 /// Tree falling updates
 IF _fallingTreeID NOT "":
@@ -56,7 +66,6 @@ IF _fallingLogID NOT "":
 /// Log picking updates
 EDIT hoveredID = fe3d:raycast_into_model("log", "", <true>)
 IF hoveredID NOT "" AND _wasPickupPlaying IS <true> AND _isPickupPlaying IS <false>:
-    VEC3 camPos = fe3d:camera_get_position()
     VEC3 logPos = fe3d:model_get_position(hoveredID)
     DEC distance = math:distance(logPos, camPos)
     DEC newWeight = _totalBagWeight

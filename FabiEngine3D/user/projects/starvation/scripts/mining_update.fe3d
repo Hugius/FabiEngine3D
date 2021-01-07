@@ -1,25 +1,34 @@
-10 33
+11 31
 META script_type_update
 
+/// Update stone hover
+fe3d:text_set_visible("mine", <false>)
+BOOL isHovered = <false>
+STR hoveredID = fe3d:raycast_into_model("stone", "", <true>)
+VEC3 camPos = fe3d:camera_get_position()
+IF hoveredID NOT "":
+    VEC3 stonePos = fe3d:model_get_position(hoveredID)
+    DEC distance = math:distance(stonePos, camPos)
+    IF distance LESS _maxStoneReach:
+        EDIT isHovered = <true>
+        STR toolID = _inventory[_equipIndex]
+        IF toolID IS "pickaxe_stone" OR toolID IS "pickaxe_iron":
+            IF _isInvOpen IS <true>:
+                fe3d:text_set_visible("mine", <true>)
+
 /// Check if mining animation finished
-STR hoveredID = ""
 IF _wasPickaxePlaying IS <true> AND _isPickaxePlaying IS <false>:
-    VEC3 camPos = fe3d:camera_get_position()
-    EDIT hoveredID = fe3d:raycast_into_model("stone", "", <true>)
-    IF hoveredID NOT "":
-        VEC3 stonePos = fe3d:model_get_position(hoveredID)
-        DEC distance = math:distance(stonePos, camPos)
-        IF distance LESS _maxToolReach:
-            fe3d:model_delete(hoveredID)
-            INT stonesID = misc:get_unique_integer(0, 1000)
-            CAST stonesID STR
-            EDIT stonesID = misc:concat_strings("stones", stonesID)
-            PUSH _stonesIDs stonesID
-            EDIT _fallingStonesID = stonesID
-            EDIT _fallingStonesTargetHeight = stonePos.y
-            VEC3 sPos = stonePos
-            INCR sPos.y 5.0
-            fe3d:model_place(stonesID, "stones", sPos.x, sPos.y, sPos.z)
+    IF isHovered IS <true>:
+        fe3d:model_delete(hoveredID)
+        INT stonesID = misc:get_unique_integer(0, 1000)
+        CAST stonesID STR
+        EDIT stonesID = misc:concat_strings("stones", stonesID)
+        PUSH _stonesIDs stonesID
+        EDIT _fallingStonesID = stonesID
+        EDIT _fallingStonesTargetHeight = stonePos.y
+        VEC3 sPos = stonePos
+        INCR sPos.y 5.0
+        fe3d:model_place(stonesID, "stones", sPos.x, sPos.y, sPos.z)
 
 /// Stones falling updates
 IF _fallingStonesID NOT "":
@@ -32,7 +41,6 @@ IF _fallingStonesID NOT "":
 /// Stones picking updates
 EDIT hoveredID = fe3d:raycast_into_model("stones", "", <true>)
 IF hoveredID NOT "" AND _wasPickupPlaying IS <true> AND _isPickupPlaying IS <false>:
-    VEC3 camPos = fe3d:camera_get_position()
     VEC3 stonesPos = fe3d:model_get_position(hoveredID)
     DEC distance = math:distance(stonesPos, camPos)
     DEC newWeight = _totalBagWeight

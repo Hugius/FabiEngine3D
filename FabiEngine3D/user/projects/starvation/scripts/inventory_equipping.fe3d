@@ -1,4 +1,4 @@
-64 13
+47 24
 META script_type_update
 
 /// Check if any tool animation is playing
@@ -22,7 +22,7 @@ STR oldSlotID = misc:concat_strings("slot", oldIndex)
 fe3d:image_set_color(oldSlotID, 1.0, 1.0, 1.0)
 
 /// Update tool selection - scrolling
-IF isAnimPlaying IS <false> AND _isInvOpen IS <true>:
+IF isAnimPlaying IS <false> AND _isInvOpen IS <true> AND _isCrafting IS <false>:
     INT scroll = fe3d:input_get_mousewheel_direction()
     IF scroll LESS 0:
         IF _equipIndex IS 8:

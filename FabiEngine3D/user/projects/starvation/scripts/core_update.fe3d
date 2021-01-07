@@ -1,4 +1,4 @@
-26 9
+27 20
 META script_type_update
 META execution_entry
 
@@ -26,5 +26,6 @@ EXEC gathering_update
 EXEC npc_update
 
 /// Other
+EXEC crafting_update
 EXEC underwater_update
 EXEC misc_update

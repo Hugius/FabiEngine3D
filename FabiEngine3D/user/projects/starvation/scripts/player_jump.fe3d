@@ -1,4 +1,4 @@
-10 43
+9 83
 META script_type_update
 
 /// Temporary values
@@ -8,8 +8,8 @@ STR yCollision = fe3d:collision_check_camera_models("Y")
 
 /// Initiate jump
 IF _isToolPlaying IS <false> AND _isPickupPlaying IS <false> AND _stamina MORE 19.0:
-    IF jump IS <true> AND _isJumping IS <false> AND _mayJump IS <true>:
-        IF _isUnderWater IS <false> AND _isTalking IS <false>:
+    IF _isUnderWater IS <false> AND _isTalking IS <false> AND _isCrafting IS <false>:
+        IF jump IS <true> AND _isJumping IS <false> AND _mayJump IS <true>:
             EDIT _isJumping = <true>
             EDIT _mayJump = <false>
             DECR _stamina 20.0

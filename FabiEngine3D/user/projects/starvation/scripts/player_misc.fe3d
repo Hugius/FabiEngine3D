@@ -1,4 +1,4 @@
-33 64
+33 11
 META script_type_update
 
 /// Update tool & pickup animations status
@@ -32,7 +32,9 @@ IF _isHammerPlaying IS <true> OR _isFishrodPlaying IS <true>:
     EDIT _isToolPlaying = <true>
 
 /// Disable camera movement when animation is playing
-IF _isToolPlaying IS <true> OR _isPickupPlaying IS <true> OR _isTalking IS <true>:
+BOOL condition1 = (_isToolPlaying IS <true> OR _isPickupPlaying IS <true>)
+BOOL condition2 = (_isTalking IS <true> OR _isCrafting IS <true>)
+IF condition1 IS <true> OR condition2 IS <true>:
     fe3d:camera_disable_first_person_view()
 ELSE:
     fe3d:camera_enable_first_person_view()

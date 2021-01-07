@@ -1,0 +1,20 @@
+4 35
+META script_type_init
+
+/// Globals
+GLOB CONST DEC _maxTreeReach = 3.5
+GLOB CONST DEC _maxStoneReach = 4.5
+GLOB STR _fallingTreeID = ""
+GLOB STR _fallingLogID = ""
+GLOB LIST _logIDs = {}
+GLOB DEC _fallingLogTargetHeight = 0.0
+GLOB LIST _stonesIDs = {}
+GLOB STR _fallingStonesID = ""
+GLOB DEC _fallingStonesTargetHeight = 0.0
+
+/// HUD
+fe3d:text_place("mine", "font.ttf", "Press LMB to mine", 0.0, -0.2, 0.0, 0.35, 0.05)
+fe3d:text_place("cut", "font.ttf", "Press LMB to cut", 0.0, -0.2, 0.0, 0.35, 0.05)
+fe3d:text_place("dig", "font.ttf", "Press LMB to dig", 0.0, -0.2, 0.0, 0.35, 0.05)
+fe3d:text_set_visible("mine", <false>)
+fe3d:text_set_visible("dig", <false>)

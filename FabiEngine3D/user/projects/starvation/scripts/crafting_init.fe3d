@@ -1,0 +1,17 @@
+11 43
+META script_type_init
+
+/// Globals
+GLOB CONST DEC _maxWorkbenchReach = 4.0
+GLOB BOOL _isCrafting = <false>
+
+/// Models
+fe3d:model_place("workbench", "workbench", 0.0, 6.5, 145.0)
+fe3d:model_set_rotation("workbench", 0.0, 90.0, 0.0)
+
+/// Billboards
+fe3d:billboard_place("wood", "wood", 0.0, 9.0, 145.0)
+fe3d:billboard_set_camera_facing_y("wood", <true>)
+
+/// HUD
+fe3d:text_place("craft", "font.ttf", "Press C to craft", 0.0, -0.2, 0.0, 0.35, 0.05)

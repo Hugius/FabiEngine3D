@@ -74,7 +74,7 @@ void ScriptInterpreter::_processListPush(const string& scriptLine)
 	// Extract remaining text (value)
 	for (auto& c : scriptLine)
 	{
-		if (c == ' ' && elementBuild.empty()) // Useless whitespace
+		if (c == ' ' && elementBuild.empty() && valueString.empty()) // Useless whitespace
 		{
 			continue;
 		}
@@ -95,7 +95,7 @@ void ScriptInterpreter::_processListPush(const string& scriptLine)
 			valueString += c;
 		}
 	}
-	
+
 	// Check if list exists
 	if (!_isLocalVariableExisting(nameString) && !_isGlobalVariableExisting(nameString))
 	{

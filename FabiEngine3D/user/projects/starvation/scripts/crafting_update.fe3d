@@ -1,4 +1,4 @@
-27 25
+56 42
 META script_type_update
 
 /// Update workbench hover
@@ -18,16 +18,65 @@ BOOL cPressed = fe3d:input_is_key_pressed("KEY_C")
 IF cPressed IS <true> AND isHovered IS <true> AND _isCrafting IS <false>:
     EDIT _isCrafting = <true>
     fe3d:cursor_show()
+    fe3d:model_set_visible(_craftables[_craftIndex], <true>)
+    fe3d:text_set_visible(_craftables[_craftIndex], <true>)
+    fe3d:billboard_set_visible("craft_confirm", <true>)
+    fe3d:billboard_set_visible("craft_cancel", <true>)
+ELIF cPressed IS <true> AND _isCrafting IS <true>:
+    EDIT _isCrafting = <false>
+    fe3d:cursor_hide()
+    fe3d:model_set_visible(_craftables[_craftIndex], <false>)
+    fe3d:text_set_visible(_craftables[_craftIndex], <false>)
+    fe3d:billboard_set_visible("craft_confirm", <false>)
+    fe3d:billboard_set_visible("craft_cancel", <false>)
+
+/// Prepare crafting process
+BOOL lmbPressed = fe3d:input_is_mouse_pressed("BUTTON_LEFT")
+STR confirm = fe3d:raycast_into_billboard("craft_confirm", <true>)
+STR cancel = fe3d:raycast_into_billboard("craft_cancel", <true>)
+BOOL confirmed = (confirm NOT "")
+BOOL cancelled = (cancel NOT "")
+
+/// Check if player has the required resources
+IF _isCrafting IS <true>:
+    IF _craftIndex IS 0:
+        EDIT confirmed = (_bag[0] MORE 0 AND _bag[1] MORE 1)
+
+/// Buttons hovering
+IF confirmed IS <true> AND _isCrafting IS <true>:
+    fe3d:billboard_set_size("craft_confirm", 1.25, 1.25)
+ELSE:
+    fe3d:billboard_set_size("craft_confirm", 1.0, 1.0)
+IF cancelled IS <true> AND _isCrafting IS <true>:
+    fe3d:billboard_set_size("craft_cancel", 1.25, 1.25)
+ELSE:
+    fe3d:billboard_set_size("craft_cancel", 1.0, 1.0)
 
 /// Update crafting menu - process
-BOOL lmbPressed = fe3d:input_is_mouse_pressed("BUTTON_LEFT")
-STR confirmed = fe3d:raycast_into_billboard("craft_confirm", <true>)
-STR cancelled = fe3d:raycast_into_billboard("craft_cancel", <true>)
 IF _isCrafting IS <true> AND lmbPressed IS <true>:
-    IF confirmed NOT "":
-        PASS
-    ELIF cancelled NOT "":
+    IF confirmed IS <true>:
+        IF _inventory[_equipIndex] NOT "":
+            fe3d:model_set_visible(_inventory[_equipIndex], <false>)
+        STR itemName = _craftables[_craftIndex]
+        fe3d:model_place(itemName, itemName, 0.0, 0.0, 0.0)
+        fe3d:model_set_aabb_responsive(itemName, <false>)
+        EDIT _inventory[_craftablesIndices[_craftIndex]] = itemName
+        EDIT _equipIndex = _craftablesIndices[_craftIndex]
+    ELIF cancelled IS <true>:
         EDIT _isCrafting = <false>
         fe3d:cursor_hide()
+        fe3d:model_set_visible(_craftables[_craftIndex], <false>)
+        fe3d:text_set_visible(_craftables[_craftIndex], <false>)
+        fe3d:billboard_set_visible("craft_confirm", <false>)
+        fe3d:billboard_set_visible("craft_cancel", <false>)
     ELSE:
-        PASS
+        fe3d:model_set_visible(_craftables[_craftIndex], <false>)
+        fe3d:text_set_visible(_craftables[_craftIndex], <false>)
+        INT maxIndex = misc:get_list_size("_craftables")
+        DECR maxIndex 1
+        IF _craftIndex IS maxIndex:
+            EDIT _craftIndex = 0
+        ELSE:
+            INCR _craftIndex 1
+        fe3d:model_set_visible(_craftables[_craftIndex], <true>)
+        fe3d:text_set_visible(_craftables[_craftIndex], <true>)

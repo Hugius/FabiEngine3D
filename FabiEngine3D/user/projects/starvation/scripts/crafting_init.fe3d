@@ -1,4 +1,4 @@
-40 38
+12 38
 META script_type_init
 
 /// Globals
@@ -8,6 +8,9 @@ GLOB INT _craftIndex = 0
 GLOB LIST _craftables = {}
 GLOB LIST _craftablesText = {}
 GLOB LIST _craftablesIndex = {0,0,1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8}
+GLOB LIST _craftablesWoodPrice = {1,1,1,1,1,1,1,1}
+GLOB LIST _craftablesStonePrice = {2,0,3,0,3,0,1,0}
+GLOB LIST _craftablesIronPrice = {0,2,0,3,0,3,0,1}
 PUSH _craftables "sword_stone_display"
 PUSH _craftables "sword_iron_display"
 PUSH _craftables "pickaxe_stone_display"

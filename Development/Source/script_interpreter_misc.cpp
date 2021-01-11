@@ -271,7 +271,7 @@ bool ScriptInterpreter::_validateKeyInputString(const string& inputString)
 {
 	if (_keyInputStringMap.find(inputString) == _keyInputStringMap.end())
 	{
-		_throwScriptError("invalid keyboard key type!");
+		_throwScriptError("invalid keyboard key!");
 		return false;
 	}
 
@@ -282,7 +282,7 @@ bool ScriptInterpreter::_validateMouseInputString(const string& inputString)
 {
 	if (_mouseInputStringMap.find(inputString) == _mouseInputStringMap.end())
 	{
-		_throwScriptError("invalid mouse button type!");
+		_throwScriptError("invalid mouse button!");
 		return false;
 	}
 

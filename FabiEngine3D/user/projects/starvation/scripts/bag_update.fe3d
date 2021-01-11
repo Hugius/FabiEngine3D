@@ -1,4 +1,4 @@
-63 28
+42 53
 META script_type_update
 
 /// Check if player wants to open/close bag
@@ -41,7 +41,7 @@ LOOP:
         INCR _totalBagWeight weight
         CAST itemCount INT
         CAST itemCount STR
-        EDIT strSize = misc:get_string_size("itemCount")
+        EDIT strSize = misc:get_string_size(itemCount)
         IF strSize IS 1:
             EDIT itemCount = misc:concat_strings("00", itemCount)
         ELIF strSize IS 2:

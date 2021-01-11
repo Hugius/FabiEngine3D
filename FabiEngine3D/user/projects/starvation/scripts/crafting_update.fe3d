@@ -1,4 +1,4 @@
-59 42
+33 56
 META script_type_update
 
 /// Update workbench hover
@@ -32,6 +32,7 @@ ELIF cPressed IS <true> AND _isCrafting IS <true>:
 
 /// Prepare crafting process
 BOOL lmbPressed = fe3d:input_is_mouse_pressed("BUTTON_LEFT")
+BOOL spacePressed = fe3d:input_is_key_pressed("KEY_SPACE")
 STR confirm = fe3d:raycast_into_billboard("craft_confirm", <true>)
 STR cancel = fe3d:raycast_into_billboard("craft_cancel", <true>)
 BOOL confirmed = (confirm NOT "")
@@ -39,22 +40,29 @@ BOOL cancelled = (cancel NOT "")
 
 /// Check if player has the required resources
 IF _isCrafting IS <true> AND confirmed IS <true>:
-    IF _craftIndex IS 0:
-        EDIT confirmed = (_bag[0] MORE 0 AND _bag[1] MORE 1)
+    INT wp = _craftablesWoodPrice[_craftIndex]
+    INT sp = _craftablesStonePrice[_craftIndex]
+    INT ip = _craftablesIronPrice[_craftIndex]
+    DECR wp 1
+    DECR sp 1
+    DECR ip 1
+    EDIT confirmed = (_bag[0] MORE wp AND _bag[1] MORE sp AND _bag[4] MORE ip)
 
 /// Buttons hovering
 IF confirmed IS <true> AND _isCrafting IS <true>:
     fe3d:billboard_set_size("craft_confirm", 1.25, 1.25)
+    fe3d:billboard_set_color("craft_confirm", 1.0, 1.0, 1.0)
 ELSE:
     fe3d:billboard_set_size("craft_confirm", 1.0, 1.0)
+    fe3d:billboard_set_color("craft_confirm", 0.0, 0.0, 0.0)
 IF cancelled IS <true> AND _isCrafting IS <true>:
     fe3d:billboard_set_size("craft_cancel", 1.25, 1.25)
 ELSE:
     fe3d:billboard_set_size("craft_cancel", 1.0, 1.0)
 
 /// Update crafting menu - process
-IF _isCrafting IS <true> AND lmbPressed IS <true>:
-    IF confirmed IS <true>:
+IF _isCrafting IS <true>:
+    IF confirmed IS <true> AND lmbPressed IS <true>:
         IF _inventory[_equipIndex] NOT "":
             fe3d:model_set_visible(_inventory[_equipIndex], <false>)
         STR itemName = _craftables[_craftIndex]
@@ -68,14 +76,17 @@ IF _isCrafting IS <true> AND lmbPressed IS <true>:
         INT index = _craftablesIndex[_craftIndex]
         EDIT _inventory[index] = itemName
         EDIT _equipIndex = index
-    ELIF cancelled IS <true>:
+        DECR _bag[0] _craftablesWoodPrice[_craftIndex]
+        DECR _bag[1] _craftablesStonePrice[_craftIndex]
+        DECR _bag[4] _craftablesIronPrice[_craftIndex]
+    ELIF cancelled IS <true> AND lmbPressed IS <true>:
         EDIT _isCrafting = <false>
         fe3d:cursor_hide()
         fe3d:model_set_visible(_craftables[_craftIndex], <false>)
         fe3d:text_set_visible(_craftables[_craftIndex], <false>)
         fe3d:billboard_set_visible("craft_confirm", <false>)
         fe3d:billboard_set_visible("craft_cancel", <false>)
-    ELSE:
+    ELIF spacePressed IS <true>:
         fe3d:model_set_visible(_craftables[_craftIndex], <false>)
         fe3d:text_set_visible(_craftables[_craftIndex], <false>)
         INT maxIndex = misc:get_list_size("_craftables")

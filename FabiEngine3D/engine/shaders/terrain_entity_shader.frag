@@ -396,7 +396,7 @@ float getShadowValue()
 				// Apply result value
 				if((currentDepth - texelSize) > shadowMapDepth)
 				{
-					shadow -= 0.15f; // Shadow
+					shadow -= 0.1f; // Shadow
 				}
 				else
 				{

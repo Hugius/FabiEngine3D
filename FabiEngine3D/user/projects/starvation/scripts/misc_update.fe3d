@@ -1,12 +1,10 @@
-40 28
+41 26
 META script_type_update
 
 /// Compose pickuppable items
-LIST pickuppables = {"log","stones","bush","plant","mushroom"}
+LIST pickuppables = { "log", "stones", "bush", "plant", "mushroom" }
 PUSH pickuppables "pickaxe_stone"
-PUSH pickuppables "pickaxe_iron"
 PUSH pickuppables "axe_stone"
-PUSH pickuppables "axe_iron"
 
 /// Pickupabbles hover
 fe3d:text_set_visible("pickup", <false>)
@@ -29,12 +27,12 @@ LOOP:
                 BREAK
     INCR index 1
 
-/// Tools pickup
+/// First tools pickup
 BOOL pickaxe = (itemName IS "pickaxe_stone" OR itemName IS "pickaxe_iron")
 BOOL axe = (itemName IS "axe_stone" OR itemName IS "axe_iron")
 IF pickaxe IS <true>:
     EDIT index = 1
-IF axe IS <true>:
+ELIF axe IS <true>:
     EDIT index = 2
 IF pickaxe IS <true> OR axe IS <true>:
     IF _wasPickupPlaying IS <true> AND _isPickupPlaying IS <false>:
@@ -43,7 +41,9 @@ IF pickaxe IS <true> OR axe IS <true>:
         IF _inventory[_equipIndex] NOT "":
             fe3d:model_set_visible(_inventory[_equipIndex], <false>)
         /// Equip new tool
-        fe3d:model_place(itemName, itemName, 0.0, 0.0, 0.0)
-        fe3d:model_set_aabb_responsive(itemName, <false>)
+        BOOL existing = fe3d:model_is_existing(itemName)
+        IF existing IS <false>:
+            fe3d:model_place(itemName, itemName, 0.0, 0.0, 0.0)
+            fe3d:model_set_aabb_responsive(itemName, <false>)
         EDIT _inventory[index] = itemName
         EDIT _equipIndex = index

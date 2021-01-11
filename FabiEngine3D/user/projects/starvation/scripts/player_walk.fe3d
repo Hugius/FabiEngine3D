@@ -1,4 +1,4 @@
-33 4
+59 24
 META script_type_update
 
 /// Temporary values
@@ -56,3 +56,6 @@ IF condition1 IS <true> AND condition2 IS <true>:
     MUL _movingSpeed 0.9
     fe3d:camera_follow_x(_movingSpeed.x)
     fe3d:camera_follow_z(_movingSpeed.z)
+ELSE:
+    MUL _movingAcc 0.99
+    MUL _movingSpeed 0.9

@@ -1,17 +1,26 @@
-6 43
+40 38
 META script_type_init
 
 /// Globals
 GLOB CONST DEC _maxWorkbenchReach = 4.0
 GLOB BOOL _isCrafting = <false>
 GLOB INT _craftIndex = 0
-GLOB LIST _craftablesIndices = {0,0,1,2,3,3}
-GLOB LIST _craftables = { "sword_stone", "sword_iron", "pickaxe_iron", "axe_iron" }
-PUSH _craftables "shovel_stone"
-PUSH _craftables "shovel_iron"
-GLOB LIST _craftablesText = {"Stone sword (1 x wood, 2 x stone)"}
+GLOB LIST _craftables = {}
+GLOB LIST _craftablesText = {}
+GLOB LIST _craftablesIndex = {0,0,1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8}
+PUSH _craftables "sword_stone_display"
+PUSH _craftables "sword_iron_display"
+PUSH _craftables "pickaxe_stone_display"
+PUSH _craftables "pickaxe_iron_display"
+PUSH _craftables "axe_stone_display"
+PUSH _craftables "axe_iron_display"
+PUSH _craftables "shovel_stone_display"
+PUSH _craftables "shovel_iron_display"
+PUSH _craftablesText "Stone sword (1 x wood, 2 x stone)"
 PUSH _craftablesText "Iron sword (1 x wood, 2 x iron)"
+PUSH _craftablesText "Stone pickaxe (1 x wood, 3 x stone)"
 PUSH _craftablesText "Iron pickaxe (1 x wood, 3 x iron)"
+PUSH _craftablesText "Stone axe (1 x wood, 3 x stone)"
 PUSH _craftablesText "Iron axe (1 x wood, 3 x iron)"
 PUSH _craftablesText "Stone shovel (1 x wood, 1 x stone)"
 PUSH _craftablesText "Iron shovel (1 x wood, 1 x iron)"
@@ -19,24 +28,30 @@ PUSH _craftablesText "Iron shovel (1 x wood, 1 x iron)"
 /// Models - creation
 fe3d:model_place("workbench", "workbench", 0.0, 6.5, 145.0)
 fe3d:model_set_rotation("workbench", 0.0, 90.0, 0.0)
-fe3d:model_place("sword_stone", "sword_stone", 1.5, 8.25, 145.0)
-fe3d:model_place("sword_iron", "sword_iron", 1.5, 8.25, 145.0)
-fe3d:model_place("pickaxe_iron", "pickaxe_iron", 1.5, 8.25, 145.0)
-fe3d:model_place("axe_iron", "axe_iron", 1.5, 8.25, 145.0)
-fe3d:model_place("shovel_stone", "shovel_stone", -0.25, 8.25, 145.0)
-fe3d:model_place("shovel_iron", "shovel_iron", -0.25, 8.25, 145.0)
-fe3d:model_set_rotation("sword_stone", 90.0, 0.0, 0.0)
-fe3d:model_set_rotation("sword_iron", 90.0, 0.0, 0.0)
-fe3d:model_set_rotation("pickaxe_iron", 90.0, 0.0, 0.0)
-fe3d:model_set_rotation("axe_iron", 90.0, 180.0, 0.0)
-fe3d:model_set_rotation("shovel_stone", -90.0, -90.0, 0.0)
-fe3d:model_set_rotation("shovel_iron", -90.0, -90.0, 0.0)
-fe3d:model_set_visible("sword_stone", <false>)
-fe3d:model_set_visible("sword_iron", <false>)
-fe3d:model_set_visible("pickaxe_iron", <false>)
-fe3d:model_set_visible("axe_iron", <false>)
-fe3d:model_set_visible("shovel_stone", <false>)
-fe3d:model_set_visible("shovel_iron", <false>)
+fe3d:model_place("sword_stone_display", "sword_stone", 1.5, 8.25, 145.0)
+fe3d:model_place("sword_iron_display", "sword_iron", 1.5, 8.25, 145.0)
+fe3d:model_place("pickaxe_stone_display", "pickaxe_stone", 1.5, 8.25, 145.0)
+fe3d:model_place("pickaxe_iron_display", "pickaxe_iron", 1.5, 8.25, 145.0)
+fe3d:model_place("axe_stone_display", "axe_stone", 1.5, 8.25, 145.0)
+fe3d:model_place("axe_iron_display", "axe_iron", 1.5, 8.25, 145.0)
+fe3d:model_place("shovel_stone_display", "shovel_stone", -0.25, 8.25, 145.0)
+fe3d:model_place("shovel_iron_display", "shovel_iron", -0.25, 8.25, 145.0)
+fe3d:model_set_rotation("sword_stone_display", 90.0, 0.0, 0.0)
+fe3d:model_set_rotation("sword_iron_display", 90.0, 0.0, 0.0)
+fe3d:model_set_rotation("pickaxe_stone_display", 90.0, 0.0, 0.0)
+fe3d:model_set_rotation("pickaxe_iron_display", 90.0, 0.0, 0.0)
+fe3d:model_set_rotation("axe_stone_display", 90.0, 180.0, 0.0)
+fe3d:model_set_rotation("axe_iron_display", 90.0, 180.0, 0.0)
+fe3d:model_set_rotation("shovel_stone_display", -90.0, -90.0, 0.0)
+fe3d:model_set_rotation("shovel_iron_display", -90.0, -90.0, 0.0)
+fe3d:model_set_visible("sword_stone_display", <false>)
+fe3d:model_set_visible("sword_iron_display", <false>)
+fe3d:model_set_visible("pickaxe_stone_display", <false>)
+fe3d:model_set_visible("pickaxe_iron_display", <false>)
+fe3d:model_set_visible("axe_stone_display", <false>)
+fe3d:model_set_visible("axe_iron_display", <false>)
+fe3d:model_set_visible("shovel_stone_display", <false>)
+fe3d:model_set_visible("shovel_iron_display", <false>)
 
 /// Billboards
 fe3d:billboard_place("craft_confirm", "craft", 1.0, 9.0, 145.0)
@@ -47,17 +62,4 @@ fe3d:billboard_set_visible("craft_confirm", <false>)
 fe3d:billboard_set_visible("craft_cancel", <false>)
 
 /// HUD
-STR f = "font.ttf"
-fe3d:text_place("craft", f, "Press C to craft", 0.0, -0.2, 0.0, 0.35, 0.05)
-fe3d:text_place(_craftables[0], f, _craftablesText[0], 0.0, -0.3, 0.0, 0.65, 0.05)
-fe3d:text_place(_craftables[1], f, _craftablesText[1], 0.0, -0.3, 0.0, 0.6, 0.05)
-fe3d:text_place(_craftables[2], f, _craftablesText[2], 0.0, -0.3, 0.0, 0.7, 0.05)
-fe3d:text_place(_craftables[3], f, _craftablesText[3], 0.0, -0.3, 0.0, 0.6, 0.05)
-fe3d:text_place(_craftables[4], f, _craftablesText[4], 0.0, -0.3, 0.0, 0.6, 0.05)
-fe3d:text_place(_craftables[5], f, _craftablesText[5], 0.0, -0.3, 0.0, 0.6, 0.05)
-fe3d:text_set_visible(_craftables[0], <false>)
-fe3d:text_set_visible(_craftables[1], <false>)
-fe3d:text_set_visible(_craftables[2], <false>)
-fe3d:text_set_visible(_craftables[3], <false>)
-fe3d:text_set_visible(_craftables[4], <false>)
-fe3d:text_set_visible(_craftables[5], <false>)
+EXEC crafting_init_hud

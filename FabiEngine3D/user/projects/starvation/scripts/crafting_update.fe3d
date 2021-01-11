@@ -1,4 +1,4 @@
-56 42
+59 42
 META script_type_update
 
 /// Update workbench hover
@@ -38,7 +38,7 @@ BOOL confirmed = (confirm NOT "")
 BOOL cancelled = (cancel NOT "")
 
 /// Check if player has the required resources
-IF _isCrafting IS <true>:
+IF _isCrafting IS <true> AND confirmed IS <true>:
     IF _craftIndex IS 0:
         EDIT confirmed = (_bag[0] MORE 0 AND _bag[1] MORE 1)
 
@@ -58,10 +58,16 @@ IF _isCrafting IS <true> AND lmbPressed IS <true>:
         IF _inventory[_equipIndex] NOT "":
             fe3d:model_set_visible(_inventory[_equipIndex], <false>)
         STR itemName = _craftables[_craftIndex]
-        fe3d:model_place(itemName, itemName, 0.0, 0.0, 0.0)
-        fe3d:model_set_aabb_responsive(itemName, <false>)
-        EDIT _inventory[_craftablesIndices[_craftIndex]] = itemName
-        EDIT _equipIndex = _craftablesIndices[_craftIndex]
+        INT length = misc:get_string_size(itemName)
+        DECR length 8
+        EDIT itemName = misc:get_string_part(itemName, 0, length)
+        BOOL existing = fe3d:model_is_existing(itemName)
+        IF existing IS <false>:
+            fe3d:model_place(itemName, itemName, 0.0, 0.0, 0.0)
+            fe3d:model_set_aabb_responsive(itemName, <false>)
+        INT index = _craftablesIndex[_craftIndex]
+        EDIT _inventory[index] = itemName
+        EDIT _equipIndex = index
     ELIF cancelled IS <true>:
         EDIT _isCrafting = <false>
         fe3d:cursor_hide()

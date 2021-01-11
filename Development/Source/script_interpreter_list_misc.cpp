@@ -266,7 +266,7 @@ void ScriptInterpreter::_processListPull(const string& scriptLine)
 	}
 
 	// Check if list index is invalid
-	if (!_isIntegerValue(indexString))
+	if (!_isIntegerValue(indexString) && !_isLocalVariableExisting(indexString) && !_isGlobalVariableExisting(indexString))
 	{
 		_throwScriptError("invalid list index!");
 		return;
@@ -289,8 +289,29 @@ void ScriptInterpreter::_processListPull(const string& scriptLine)
 		return;
 	}
 
+	// Determine index
+	unsigned int index = -1;
+	if (_isIntegerValue(indexString)) // Integer value
+	{
+		index = stoi(indexString);
+	}
+	else
+	{
+		// Retrieve index variable
+		auto indexVariable = _isLocalVariableExisting(indexString) ? _getLocalVariable(indexString) : _getGlobalVariable(indexString);
+
+		// Check if integer
+		if (indexVariable.getValue().getType() != ScriptValueType::INTEGER)
+		{
+			_throwScriptError("index variable is not an integer!");
+			return;
+		}
+
+		// Set index
+		index = indexVariable.getValue().getInteger();
+	}
+
 	// Check if list index is out of range
-	unsigned int index = stoi(indexString);
 	if (!_validateListIndex(listVariable, index))
 	{
 		return;

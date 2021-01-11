@@ -68,6 +68,7 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 						if (!_isLocalVariableExisting(nameString) && !_isGlobalVariableExisting(nameString))
 						{
 							_throwScriptError("list variable \"" + nameString + "\" not found!");
+							return returnValues;
 						}
 
 						// Check if variable is not a list
@@ -75,6 +76,7 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 						if (listVariable.getType() == ScriptVariableType::SINGLE)
 						{
 							_throwScriptError("variable \"" + nameString + "\" is not a list!");
+							return returnValues;
 						}
 
 						// Return list size
@@ -88,23 +90,8 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 
 					if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 					{
-						auto nameString = arguments[0].getString();
-
-						// Check if variable exists
-						if (!_isLocalVariableExisting(nameString) && !_isGlobalVariableExisting(nameString))
-						{
-							_throwScriptError("string variable \"" + nameString + "\" not found!");
-						}
-
-						// Check if variable is a list or any other value than string
-						auto listVariable = _isLocalVariableExisting(nameString) ? _getLocalVariable(nameString) : _getGlobalVariable(nameString);
-						if (listVariable.getType() == ScriptVariableType::MULTIPLE || listVariable.getValue().getType() != ScriptValueType::STRING)
-						{
-							_throwScriptError("variable \"" + nameString + "\" is not a string!");
-						}
-
 						// Return string size
-						auto result = listVariable.getValue().getString().size();
+						auto result = arguments[0].getString().size();
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::INTEGER, static_cast<int>(result)));
 					}
 				}
@@ -150,7 +137,7 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
 					}
 				}
-				else if (functionName == "misc:string_part") // Cut a part from a string
+				else if (functionName == "misc:get_string_part") // Cut a part from a string
 				{
 					auto types = { ScriptValueType::STRING, ScriptValueType::INTEGER, ScriptValueType::INTEGER };
 

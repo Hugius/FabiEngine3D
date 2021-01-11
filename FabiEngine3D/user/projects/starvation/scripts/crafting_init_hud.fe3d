@@ -1,0 +1,22 @@
+20 46
+META script_type_init
+
+/// HUD
+STR f = "font.ttf"
+fe3d:text_place("craft", f, "Press C to craft", 0.0, -0.2, 0.0, 0.35, 0.05)
+fe3d:text_place(_craftables[0], f, _craftablesText[0], 0.0, -0.3, 0.0, 0.65, 0.05)
+fe3d:text_place(_craftables[1], f, _craftablesText[1], 0.0, -0.3, 0.0, 0.6, 0.05)
+fe3d:text_place(_craftables[2], f, _craftablesText[2], 0.0, -0.3, 0.0, 0.7, 0.05)
+fe3d:text_place(_craftables[3], f, _craftablesText[3], 0.0, -0.3, 0.0, 0.6, 0.05)
+fe3d:text_place(_craftables[4], f, _craftablesText[4], 0.0, -0.3, 0.0, 0.6, 0.05)
+fe3d:text_place(_craftables[5], f, _craftablesText[5], 0.0, -0.3, 0.0, 0.6, 0.05)
+fe3d:text_place(_craftables[6], f, _craftablesText[6], 0.0, -0.3, 0.0, 0.6, 0.05)
+fe3d:text_place(_craftables[7], f, _craftablesText[7], 0.0, -0.3, 0.0, 0.6, 0.05)
+fe3d:text_set_visible(_craftables[0], <false>)
+fe3d:text_set_visible(_craftables[1], <false>)
+fe3d:text_set_visible(_craftables[2], <false>)
+fe3d:text_set_visible(_craftables[3], <false>)
+fe3d:text_set_visible(_craftables[4], <false>)
+fe3d:text_set_visible(_craftables[5], <false>)
+fe3d:text_set_visible(_craftables[6], <false>)
+fe3d:text_set_visible(_craftables[7], <false>)

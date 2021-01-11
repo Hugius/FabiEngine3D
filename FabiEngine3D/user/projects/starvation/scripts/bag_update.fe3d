@@ -1,4 +1,4 @@
-0 23
+63 28
 META script_type_update
 
 /// Check if player wants to open/close bag
@@ -62,6 +62,6 @@ BOOL isBagOpen = fe3d:image_is_visible("bag_open")
 fe3d:text_set_visible("bag_weight", isBagOpen)
 EDIT totalWeight = _totalBagWeight
 CAST totalWeight STR
-EDIT totalWeight = misc:string_part(totalWeight, 0, 4)
+EDIT totalWeight = misc:get_string_part(totalWeight, 0, 4)
 EDIT totalWeight = misc:concat_strings(totalWeight, "KG")
 fe3d:text_set_content("bag_weight", totalWeight)

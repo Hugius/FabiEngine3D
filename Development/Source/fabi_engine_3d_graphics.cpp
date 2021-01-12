@@ -52,12 +52,8 @@ void FabiEngine3D::gfx_enableSkyReflections(float factor)
 
 void FabiEngine3D::gfx_enableSceneReflections(float factor)
 {
-	// Check if water is already using reflection graphics
-	if (!_core->_renderBus.isWaterEffectsEnabled())
-	{
-		_core->_renderBus.setSceneReflectionsEnabled(true);
-		_core->_renderBus.setSceneReflectionFactor(factor);
-	}
+	_core->_renderBus.setSceneReflectionsEnabled(true);
+	_core->_renderBus.setSceneReflectionFactor(factor);
 }
 
 void FabiEngine3D::gfx_enableLightMapping()

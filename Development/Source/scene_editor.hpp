@@ -101,7 +101,7 @@ private:
 		Vec2 speed, const string& dudvMapPath, const string& normalMapPath, const string& displacementMapPath);
 	void _placeModel(bool scriptExecution, const string& modelName, const string& modelNumber, Vec3 position, Vec3 rotation, Vec3 size, 
 		const string& objPath, const string& diffuseMapPath, const string& lightMapPath, const string& reflectionMapPath, const string& normalMapPath, 
-		bool isFrozen, bool isFaceCulled, bool isShadowed, bool isTransparent, bool isReflective, bool isSpecular, float specularFactor, 
+		bool isFrozen, bool isFaceCulled, bool isShadowed, bool isTransparent, bool isSpecular, int reflectionType, float specularFactor,
 		float specularIntensity, float lightness, Vec3 color, float uvRepeat, const string& lodEntityID, bool isInstanced,
 		vector<Vec3> instancedOffsets, vector<string> aabbNames, vector<Vec3> aabbPositions, vector<Vec3> aabbSizes, string animationID);
 	void _placeBillboard(bool scriptExecution, const string& billboardName, const string& billboardNumber,

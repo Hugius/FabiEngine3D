@@ -38,9 +38,21 @@ void ModelEditor::_updateModelEditingLighting()
 			{
 				_fe3d.gameEntity_setShadowed(_currentModelID, !_fe3d.gameEntity_isShadowed(_currentModelID));
 			}
-			else if (screen->getButton("isReflectiveSurface")->isHovered())
+			else if (screen->getButton("reflectionType")->isHovered())
 			{
-				_fe3d.gameEntity_setSceneReflective(_currentModelID, !_fe3d.gameEntity_isSceneReflective(_currentModelID));
+				if (_fe3d.gameEntity_isSceneReflective(_currentModelID))
+				{
+					_fe3d.gameEntity_setSceneReflective(_currentModelID, false);
+				}
+				else if (_fe3d.gameEntity_isSkyReflective(_currentModelID))
+				{
+					_fe3d.gameEntity_setSkyReflective(_currentModelID, false);
+					_fe3d.gameEntity_setSceneReflective(_currentModelID, true);
+				}
+				else
+				{
+					_fe3d.gameEntity_setSkyReflective(_currentModelID, true);
+				}
 			}
 		}
 
@@ -49,11 +61,12 @@ void ModelEditor::_updateModelEditingLighting()
 		auto isSpecular = _fe3d.gameEntity_isSpecularLighted(_currentModelID);
 		auto shadowedID = screen->getButton("isShadowed")->getTextfield()->getEntityID();
 		auto isShadowed = _fe3d.gameEntity_isShadowed(_currentModelID);
-		auto reflectiveID = screen->getButton("isReflectiveSurface")->getTextfield()->getEntityID();
-		auto isReflective = _fe3d.gameEntity_isSceneReflective(_currentModelID);
+		auto reflectiveID = screen->getButton("reflectionType")->getTextfield()->getEntityID();
+		auto isSkyReflective = _fe3d.gameEntity_isSkyReflective(_currentModelID);
+		auto isSceneReflective = _fe3d.gameEntity_isSceneReflective(_currentModelID);
 		_fe3d.textEntity_setTextContent(specularID, isSpecular ? "Specular: ON" : "Specular: OFF");
 		_fe3d.textEntity_setTextContent(shadowedID, isShadowed ? "Shadowed: ON" : "Shadowed: OFF");
-		_fe3d.textEntity_setTextContent(reflectiveID, isReflective ? "Reflective: ON" : "Reflective: OFF");
+		_fe3d.textEntity_setTextContent(reflectiveID, isSkyReflective ? "Reflection: sky" : isSceneReflective ? "Reflection: scene" : "Reflective: OFF");
 
 		// Update specular factor
 		float factor = _fe3d.gameEntity_getSpecularFactor(_currentModelID);
@@ -79,24 +92,7 @@ void ModelEditor::_updateModelEditingLighting()
 			_fe3d.gameEntity_setLightness(_currentModelID, lightness);
 		}
 
-		// Update reflective button hoverability
-		screen->getButton("isReflectiveSurface")->setHoverable(false);
-		bool hoverable = true;
-		for (auto& entityID : _fe3d.gameEntity_getAllIDs())
-		{
-			// If model is reflective
-			if (_fe3d.gameEntity_isSceneReflective(entityID))
-			{
-				// If current model is reflective, it's allowed to change
-				if (entityID != _currentModelID)
-				{
-					hoverable = false;
-				}
-			}
-		}
-		screen->getButton("isReflectiveSurface")->setHoverable(hoverable);
-
-		// Update specular buttons hoverability
+		// Update buttons hoverability
 		screen->getButton("specularFactor")->setHoverable(_fe3d.gameEntity_isSpecularLighted(_currentModelID));
 		screen->getButton("specularIntensity")->setHoverable(_fe3d.gameEntity_isSpecularLighted(_currentModelID));
 	}

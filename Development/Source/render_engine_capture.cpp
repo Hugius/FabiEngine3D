@@ -9,45 +9,46 @@
 void RenderEngine::_captureSceneReflections(CameraManager& camera)
 {
 	// Check if water reflection needed
-	bool waterReflectionEnabled = (_renderBus.isWaterEffectsEnabled() && _entityBus->getWaterEntity() != nullptr) &&
+	bool waterReflectionsNeeded = (_renderBus.isWaterEffectsEnabled() && _entityBus->getWaterEntity() != nullptr) &&
 		_entityBus->getWaterEntity()->isReflective();
 
-	// Save reflective GAME entity
-	string reflectiveEntityID;
-	if (!waterReflectionEnabled)
+	// Search for a reflective GAME entity
+	bool anyReflectiveEntityFound = false;
+	if (!waterReflectionsNeeded)
 	{
 		for (auto& [keyID, gameEntity]: _entityBus->getGameEntities())
 		{
 			if (gameEntity->isSceneReflective() && gameEntity->isVisible())
 			{
-				reflectiveEntityID = gameEntity->getID();
+				anyReflectiveEntityFound = true;
+				break;
 			}
 		}
 	}
 
-	// Check if scene reflection needed
-	bool sceneReflectionEnabled = _renderBus.isSceneReflectionsEnabled() && !reflectiveEntityID.empty();
+	// Check if scene reflection needed (and not occupied by water rendering)
+	bool sceneReflectionsNeeded = _renderBus.isSceneReflectionsEnabled() && anyReflectiveEntityFound && !waterReflectionsNeeded;
 	
 	// Check if needed to capture scene
-	if (waterReflectionEnabled || sceneReflectionEnabled)
+	if (waterReflectionsNeeded || sceneReflectionsNeeded)
 	{
 		// Calculate distance between camera and reflection surface
 		float cameraDistance = (camera.getPosition().y - _renderBus.getSceneReflectionHeight());
 
-		// Start capturing reflection
+		// Start capturing reflections
 		_sceneReflectionFramebuffer.bind();
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		// Save and disable reflective GAME entity
-		reflectiveEntityID = "";
-		if (!waterReflectionEnabled)
+		// Save and hide reflective GAME entities
+		vector<string> reflectiveGameEntityIDs;
+		if (sceneReflectionsNeeded)
 		{
 			for (auto& [keyID, gameEntity]: _entityBus->getGameEntities())
 			{
 				if (gameEntity->isSceneReflective() && gameEntity->isVisible())
 				{
 					gameEntity->setVisible(false);
-					reflectiveEntityID = gameEntity->getID();
+					reflectiveGameEntityIDs.push_back(gameEntity->getID());
 				}
 			}
 		}
@@ -80,8 +81,8 @@ void RenderEngine::_captureSceneReflections(CameraManager& camera)
 		_renderTerrainEntity();
 		glDisable(GL_CLIP_DISTANCE0);
 
-		// Render game & billboard entities if not water reflections
-		if (sceneReflectionEnabled)
+		// Render game & billboard entities only for scene reflections
+		if (sceneReflectionsNeeded)
 		{
 			_renderGameEntities();
 			_renderBillboardEntities();
@@ -99,19 +100,22 @@ void RenderEngine::_captureSceneReflections(CameraManager& camera)
 		camera.invertPitch();
 		camera.updateMatrices();
 
-		// Restore reflective GAME entity
-		if (!waterReflectionEnabled)
+		// Restore reflective GAME entities
+		if (sceneReflectionsNeeded)
 		{
-			for (auto& [keyID, gameEntity] : _entityBus->getGameEntities())
+			for (auto& [keyID, gameEntity] : _entityBus->getGameEntities()) // Loop over all GAME entities
 			{
-				if (gameEntity->getID() == reflectiveEntityID)
+				for (auto& reflectiveID : reflectiveGameEntityIDs) // Loop over all reflective GAME entities
 				{
-					gameEntity->setVisible(true);
+					if (gameEntity->getID() == reflectiveID) // Check if IDs match
+					{
+						gameEntity->setVisible(true);
+					}
 				}
 			}
 		}
 
-		// Stop capturing reflection
+		// Stop capturing reflections
 		_sceneReflectionFramebuffer.unbind();
 
 		// Assign texture
@@ -381,46 +385,59 @@ void RenderEngine::_captureMotionBlur(CameraManager& camera)
 	static float lastYaw;
 	static float lastPitch;
 
-	// Check if motion blur is enabled
-	if (_renderBus.isMotionBlurEnabled())
+	// Timing values
+	static std::chrono::high_resolution_clock::time_point previousMS = std::chrono::high_resolution_clock::now();
+	std::chrono::high_resolution_clock::time_point currentMS = std::chrono::high_resolution_clock::now();
+	std::chrono::duration<double> timeDifference = std::chrono::duration_cast<std::chrono::duration<double>>(currentMS - previousMS);
+	float elapsedMS = static_cast<float>(timeDifference.count()) * 1000.0f;
+
+	// If 1 frame passed
+	if (elapsedMS >= Config::getInst().getUpdateMsPerFrame() || firstTime)
 	{
-		// Camera speed and blur direction variables
-		float xDifference = fabsf(camera.getYaw() - lastYaw) * _renderBus.getMotionBlurStrength();
-		float yDifference = fabsf(camera.getPitch() - lastPitch) * _renderBus.getMotionBlurStrength();
+		// Set for next frame
+		previousMS = currentMS;
 
-		// Variables
-		static BlurDirection lastDirection = BlurDirection::NONE;
-		BlurDirection direction = BlurDirection::NONE;
-		firstTime = false;
-
-		// Determine blur direction & mix value
-		if (xDifference >= yDifference)
+		// Check if motion blur is enabled
+		if (_renderBus.isMotionBlurEnabled())
 		{
-			direction = BlurDirection::HORIZONTAL;
-			_renderBus.setMotionBlurMixValue(xDifference);
+			// Camera speed and blur direction variables
+			float xDifference = fabsf(camera.getYaw() - lastYaw) * _renderBus.getMotionBlurStrength();
+			float yDifference = fabsf(camera.getPitch() - lastPitch) * _renderBus.getMotionBlurStrength();
+
+			// Variables
+			static BlurDirection lastDirection = BlurDirection::NONE;
+			BlurDirection direction = BlurDirection::NONE;
+			firstTime = false;
+
+			// Determine blur direction & mix value
+			if (xDifference >= yDifference)
+			{
+				direction = BlurDirection::HORIZONTAL;
+				_renderBus.setMotionBlurMixValue(xDifference);
+			}
+			else
+			{
+				direction = BlurDirection::VERTICAL;
+				_renderBus.setMotionBlurMixValue(yDifference);
+			}
+
+			// Set for next iteration
+			lastYaw = camera.getYaw();
+			lastPitch = camera.getPitch();
+
+			// Apply motion blur
+			_blurRenderer.bind();
+			_renderBus.setMotionBlurMap(_blurRenderer.blurTexture(_finalSurface, _renderBus.getPostProcessedSceneMap(),
+				static_cast<int>(BlurType::MOTION), 10, 1.0f, direction));
+			_blurRenderer.unbind();
+
+			// Set last direction
+			lastDirection = direction;
 		}
-		else
+		else // No motion blur
 		{
-			direction = BlurDirection::VERTICAL;
-			_renderBus.setMotionBlurMixValue(yDifference);
+			_renderBus.setMotionBlurMap(_renderBus.getPostProcessedSceneMap());
 		}
-
-		// Set for next iteration
-		lastYaw = camera.getYaw();
-		lastPitch = camera.getPitch();
-
-		// Apply motion blur
-		_blurRenderer.bind();
-		_renderBus.setMotionBlurMap(_blurRenderer.blurTexture(_finalSurface, _renderBus.getPostProcessedSceneMap(),
-			static_cast<int>(BlurType::MOTION), 10, 1.0f, direction));
-		_blurRenderer.unbind();
-
-		// Set last direction
-		lastDirection = direction;
-	}
-	else // No motion blur
-	{
-		_renderBus.setMotionBlurMap(_renderBus.getPostProcessedSceneMap());
 	}
 }
 

@@ -31,7 +31,8 @@ void ModelEditor::loadGameEntitiesFromFile()
 			// Placeholder variables
 			string modelID, objPath, diffuseMapPath, lightMapPath, reflectionMapPath, normalMapPath, lodEntityID;
 			float uvRepeat, specularFactor, specularIntensity, lightness;
-			bool isFaceCulled, isShadowed, isTransparent, isSpecular, isReflective, isInstanced;
+			int reflectionType;
+			bool isFaceCulled, isShadowed, isTransparent, isSpecular, isInstanced;
 			Vec3 modelSize, color;
 			vector<string> aabbNames;
 			vector<Vec3> aabbPositions;
@@ -54,7 +55,7 @@ void ModelEditor::loadGameEntitiesFromFile()
 				isFaceCulled >>
 				isShadowed >>
 				isTransparent >>
-				isReflective >>
+				reflectionType >>
 				isSpecular >>
 				specularFactor >>
 				specularIntensity >>
@@ -102,7 +103,7 @@ void ModelEditor::loadGameEntitiesFromFile()
 
 			// Add new model
 			_addModel(modelID, objPath, diffuseMapPath, lightMapPath, reflectionMapPath, normalMapPath, modelSize, isFaceCulled, isShadowed,
-				isTransparent, isReflective, isSpecular, specularFactor, specularIntensity, lightness,
+				isTransparent, isSpecular, reflectionType, specularFactor, specularIntensity, lightness,
 				Vec3(color.r, color.g, color.b), uvRepeat, lodEntityID, isInstanced, aabbNames, aabbPositions, aabbSizes);
 		}
 
@@ -144,7 +145,6 @@ void ModelEditor::saveGameEntitiesToFile()
 				auto isFaceCulled = _fe3d.gameEntity_isFaceCulled(modelID);
 				auto isShadowed = _fe3d.gameEntity_isShadowed(modelID);
 				auto isTransparent = _fe3d.gameEntity_isTransparent(modelID);
-				auto isReflective = _fe3d.gameEntity_isSceneReflective(modelID);
 				auto isSpecular = _fe3d.gameEntity_isSpecularLighted(modelID);
 				auto specularFactor = _fe3d.gameEntity_getSpecularFactor(modelID);
 				auto specularStrength = _fe3d.gameEntity_getSpecularIntensity(modelID);
@@ -153,6 +153,21 @@ void ModelEditor::saveGameEntitiesToFile()
 				auto uvRepeat = _fe3d.gameEntity_getUvRepeat(modelID);
 				auto lodEntityID = _fe3d.gameEntity_getLevelOfDetailEntityID(modelID);
 				auto isInstanced = _fe3d.gameEntity_isInstanced(modelID);
+
+				// Reflection type
+				int reflectionType;
+				if (_fe3d.gameEntity_isSceneReflective(modelID))
+				{
+					reflectionType = 2;
+				}
+				else if (_fe3d.gameEntity_isSceneReflective(modelID))
+				{
+					reflectionType = 1;
+				}
+				else
+				{
+					reflectionType = 0;
+				}
 
 				// AABB data
 				vector<string> aabbNames;
@@ -195,7 +210,7 @@ void ModelEditor::saveGameEntitiesToFile()
 					isFaceCulled << " " <<
 					isShadowed << " " <<
 					isTransparent << " " <<
-					isReflective << " " <<
+					reflectionType << " " <<
 					isSpecular << " " <<
 					specularFactor << " " <<
 					specularStrength << " " <<

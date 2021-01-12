@@ -40,7 +40,7 @@ private:
 			GLint loc = glGetUniformLocation(_program, uniformName.c_str());
 			if (loc == -1) 
 			{
-				//Logger::throwError("Uniform " + uniformName + " not found in shader " + _name);
+				Logger::throwError("Uniform " + uniformName + " not found in shader " + _name);
 			}
 
 			_uniformMap.insert(std::make_pair(uniformName, loc));

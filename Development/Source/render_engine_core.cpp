@@ -88,6 +88,12 @@ void RenderEngine::renderScene(EntityBus * entityBus, CameraManager& camera)
 	}
 	else
 	{
+		// Update reflection priorities
+		bool waterReflectionsNeeded = (_renderBus.isWaterEffectsEnabled() && _entityBus->getWaterEntity() != nullptr) &&
+			_entityBus->getWaterEntity()->isReflective();
+		bool sceneReflectionsEnabled = _renderBus.isSceneReflectionsEnabled();
+		_renderBus.setSceneReflectionsEnabled(sceneReflectionsEnabled && !waterReflectionsNeeded);
+
 		// Pre-rendering
 		_timer.start("reflectionPreRender");
 		_captureSceneReflections(camera);
@@ -191,6 +197,9 @@ void RenderEngine::renderScene(EntityBus * entityBus, CameraManager& camera)
 
 		// Render custom cursor entity
 		_renderCustomCursor();
+
+		// Update reflection priorities
+		_renderBus.setSceneReflectionsEnabled(sceneReflectionsEnabled);
 	}
 }
 

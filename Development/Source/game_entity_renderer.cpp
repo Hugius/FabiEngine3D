@@ -31,13 +31,13 @@ void GameEntityRenderer::bind()
 	_shader.uploadUniform("u_fogDefaultFactor",			   _renderBus.getFogDefaultFactor());
 	_shader.uploadUniform("u_fogColor",					   _renderBus.getFogColor());
 	_shader.uploadUniform("u_isFogEnabled",				   _renderBus.isFogEnabled());
-	_shader.uploadUniform("u_isAmbientLightEnabled",		   _renderBus.isAmbientLightingEnabled());
-	_shader.uploadUniform("u_isDirectionalLightEnabled",	   _renderBus.isDirectionalLightingEnabled());
-	_shader.uploadUniform("u_isSpotLightEnabled",		       _renderBus.isSpotLightingEnabled());
-	_shader.uploadUniform("u_isSpecularLightEnabled",	       _renderBus.isSpecularLightingEnabled());
+	_shader.uploadUniform("u_isAmbientLightEnabled",	   _renderBus.isAmbientLightingEnabled());
+	_shader.uploadUniform("u_isDirectionalLightEnabled",   _renderBus.isDirectionalLightingEnabled());
+	_shader.uploadUniform("u_isSpotLightEnabled",		   _renderBus.isSpotLightingEnabled());
+	_shader.uploadUniform("u_isSpecularLightEnabled",	   _renderBus.isSpecularLightingEnabled());
 	_shader.uploadUniform("u_isPointLightEnabled",		   _renderBus.isPointLightingEnabled());
 	_shader.uploadUniform("u_lightMappingEnabled",		   _renderBus.isLightMappingEnabled());
-	_shader.uploadUniform("u_isNormalMappingEnabled",		   _renderBus.isNormalMappingEnabled());
+	_shader.uploadUniform("u_isNormalMappingEnabled",	   _renderBus.isNormalMappingEnabled());
 	_shader.uploadUniform("u_skyReflectionsEnabled",	   _renderBus.isSkyReflectionsEnabled());
 	_shader.uploadUniform("u_sceneReflectionsEnabled",	   _renderBus.isSceneReflectionsEnabled());
 	_shader.uploadUniform("u_shadowAreaSize",			   _renderBus.getShadowAreaSize());
@@ -52,7 +52,7 @@ void GameEntityRenderer::bind()
 	_shader.uploadUniform("u_sampler_diffuseMap", 0);
 	_shader.uploadUniform("u_sampler_lightMap", 1);
 	_shader.uploadUniform("u_sampler_normalMap", 2);
-	_shader.uploadUniform("u_sampler_skyReflectionMap", 3);
+	_shader.uploadUniform("u_sampler_reflectionMap", 3);
 	_shader.uploadUniform("u_sampler_sceneReflectionMap", 4);
 	_shader.uploadUniform("u_sampler_shadowMap", 5);
 	_shader.uploadUniform("u_sampler_skyMap", 6);
@@ -195,7 +195,8 @@ void GameEntityRenderer::render(const shared_ptr<GameEntity> entity)
 				glBindTexture(GL_TEXTURE_2D, entity->getNormalMap(index));
 			}
 
-			// Reflection map for sky reflections
+			// Reflection(part) map
+			_shader.uploadUniform("u_hasReflectionMap", entity->hasReflectionMap() && entity->getReflectionMap(index) != 0);
 			if (entity->hasReflectionMap() && entity->getReflectionMap(index) != 0)
 			{
 				glActiveTexture(GL_TEXTURE3);

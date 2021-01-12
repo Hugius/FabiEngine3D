@@ -205,7 +205,6 @@ void ModelEditor::_loadReflectionMap()
 			const string newFilePath = filePath.substr(rootDirectory.size());
 			_fe3d.misc_clearTextureCache(newFilePath);
 			_fe3d.gameEntity_setReflectionMap(_currentModelID, newFilePath);
-			_fe3d.gameEntity_setSkyReflective(_currentModelID, true);
 		}
 		else
 		{
@@ -261,7 +260,7 @@ vector<string>& ModelEditor::getModelNames()
 }
 
 bool ModelEditor::_addModel(const string& modelName, string objName, string diffuseMapName, string lightMapName, string reflectionMapName, string normalMapName,
-	Vec3 size, bool isFaceCulled, bool isShadowed, bool isTransparent, bool isReflective, bool isSpecular,
+	Vec3 size, bool isFaceCulled, bool isShadowed, bool isTransparent, bool isSpecular, int reflectionType,
 	float specularFactor, float specularIntensity, float lightness, Vec3 color, float uvRepeat, string lodEntityID, bool isInstanced,
 	vector<string> aabbNames, vector<Vec3> aabbPositions, vector<Vec3> aabbSizes)
 {
@@ -313,7 +312,6 @@ bool ModelEditor::_addModel(const string& modelName, string objName, string diff
 			_fe3d.gameEntity_setFaceCulled(modelName, isFaceCulled);
 			_fe3d.gameEntity_setShadowed(modelName, isShadowed);
 			_fe3d.gameEntity_setTransparent(modelName, isTransparent);
-			_fe3d.gameEntity_setSceneReflective(modelName, isReflective);
 			_fe3d.gameEntity_setSpecularLighted(modelName, isSpecular);
 			_fe3d.gameEntity_setInstanced(modelName, isInstanced, { Vec3(0.0f) });
 			
@@ -324,6 +322,16 @@ bool ModelEditor::_addModel(const string& modelName, string objName, string diff
 			_fe3d.gameEntity_setColor(modelName, color); 
 			_fe3d.gameEntity_setUvRepeat(modelName, uvRepeat);
 			_fe3d.gameEntity_setLevelOfDetailEntity(modelName, lodEntityID);
+
+			// Reflection type
+			if (reflectionType == 1)
+			{
+				_fe3d.gameEntity_setSkyReflective(modelName, true);
+			}
+			else if (reflectionType == 2)
+			{
+				_fe3d.gameEntity_setSceneReflective(modelName, true);
+			}
 		}
 
 		return true;

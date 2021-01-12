@@ -217,13 +217,6 @@ void EngineGuiWriteField::_updateTyping()
 
 		// Update text content with or without bar
 		_fe3d.textEntity_setTextContent(_textfield->getEntityID(), _currentTextContent + (barEnabled ? "|" : " "), _charWidth);
-		
-		// Input cancellation
-		if (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
-		{
-			_cancelledInput = true;
-			_isActive = false;
-		}
 
 		// Input confirmation
 		if (_fe3d.input_getKeyPressed(InputType::KEY_ENTER))
@@ -240,7 +233,6 @@ void EngineGuiWriteField::_updateTyping()
 		// Update text content
 		_fe3d.textEntity_setTextContent(_textfield->getEntityID(), _currentTextContent, _charWidth);
 		_confirmedInput = false;
-		_cancelledInput = false;
 	}
 }
 
@@ -253,11 +245,6 @@ void EngineGuiWriteField::setPermActive(bool active)
 {
 	_isActive = active;
 	_mustBeActive = active;
-}
-
-bool EngineGuiWriteField::cancelledInput()
-{
-	return _cancelledInput;
 }
 
 bool EngineGuiWriteField::confirmedInput()

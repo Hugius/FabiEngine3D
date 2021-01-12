@@ -13,7 +13,6 @@ public:
 	void setActive(bool active);
 	void setPermActive(bool active);
 
-	bool cancelledInput();
 	bool confirmedInput();
 	bool isActive();
 	bool hasTextContentChanged();
@@ -28,7 +27,6 @@ private:
 
 	bool _mustBeActive = false;
 	bool _isActive = false;
-	bool _cancelledInput = false;
 	bool _confirmedInput = false;
 
 	const bool _noNumbers;

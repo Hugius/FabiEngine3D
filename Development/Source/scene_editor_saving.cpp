@@ -249,7 +249,6 @@ void SceneEditor::saveSceneToFile()
 					auto isFaceCulled = _fe3d.gameEntity_isFaceCulled(modelID);
 					auto isShadowed = _fe3d.gameEntity_isShadowed(modelID);
 					auto isTransparent = _fe3d.gameEntity_isTransparent(modelID);
-					auto isReflective = _fe3d.gameEntity_isSceneReflective(modelID);
 					auto isSpecular = _fe3d.gameEntity_isSpecularLighted(modelID);
 					auto specularFactor = _fe3d.gameEntity_getSpecularFactor(modelID);
 					auto specularIntensity = _fe3d.gameEntity_getSpecularIntensity(modelID);
@@ -261,6 +260,21 @@ void SceneEditor::saveSceneToFile()
 					auto instancedOffsets = _fe3d.gameEntity_getInstancedOffsets(modelID);
 					auto animationID = _animationEditor.getPlayingAnimationNames(modelID).empty() ? "" : 
 						_animationEditor.getPlayingAnimationNames(modelID).front();
+
+					// Reflection type
+					int reflectionType;
+					if (_fe3d.gameEntity_isSceneReflective(modelID))
+					{
+						reflectionType = 2;
+					}
+					else if (_fe3d.gameEntity_isSceneReflective(modelID))
+					{
+						reflectionType = 1;
+					}
+					else
+					{
+						reflectionType = 0;
+					}
 
 					// AABB data
 					vector<string> aabbNames;
@@ -310,7 +324,7 @@ void SceneEditor::saveSceneToFile()
 						isFaceCulled << " " <<
 						isShadowed << " " <<
 						isTransparent << " " <<
-						isReflective << " " <<
+						reflectionType << " " <<
 						isSpecular << " " <<
 						specularFactor << " " <<
 						specularIntensity << " " <<

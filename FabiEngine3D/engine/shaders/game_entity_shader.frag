@@ -2,7 +2,7 @@
 #extension GL_ARB_explicit_uniform_location : enable
 
 // Const variables
-#define POINT_LIGHT_AMOUNT 128
+#define MAX_POINT_LIGHT_COUNT 128
 
 // In variables
 in vec3 f_pos;
@@ -16,7 +16,7 @@ in mat3 f_tbnMatrix;
 layout(location = 0) uniform sampler2D   u_sampler_diffuseMap;
 layout(location = 1) uniform sampler2D   u_sampler_lightMap;
 layout(location = 2) uniform sampler2D   u_sampler_normalMap;
-layout(location = 3) uniform sampler2D   u_sampler_skyReflectionMap;
+layout(location = 3) uniform sampler2D   u_sampler_reflectionMap;
 layout(location = 4) uniform sampler2D   u_sampler_sceneReflectionMap;
 layout(location = 5) uniform sampler2D   u_sampler_shadowMap;
 layout(location = 6) uniform samplerCube u_sampler_skyMap;
@@ -30,16 +30,16 @@ uniform vec3 u_cameraFront;
 uniform vec3 u_ambientLightColor;
 uniform vec3 u_directionalLightColor;
 uniform vec3 u_directionalLightPosition;
-uniform vec3 u_pointLightPositions[POINT_LIGHT_AMOUNT];
-uniform vec3 u_pointLightColors[POINT_LIGHT_AMOUNT];
+uniform vec3 u_pointLightPositions[MAX_POINT_LIGHT_COUNT];
+uniform vec3 u_pointLightColors[MAX_POINT_LIGHT_COUNT];
 uniform vec3 u_spotLightColor;
 uniform vec3 u_color;
 uniform vec3 u_fogColor;
 uniform vec3 u_shadowAreaCenter;
 
 // Float uniforms
-uniform float u_pointLightIntensities[POINT_LIGHT_AMOUNT];
-uniform float u_pointLightDistanceFactors[POINT_LIGHT_AMOUNT];
+uniform float u_pointLightIntensities[MAX_POINT_LIGHT_COUNT];
+uniform float u_pointLightDistanceFactors[MAX_POINT_LIGHT_COUNT];
 uniform float u_ambientLightIntensity;
 uniform float u_directionalLightIntensity;
 uniform float u_specularLightFactor;
@@ -76,6 +76,7 @@ uniform bool u_sceneReflectionsEnabled;
 uniform bool u_isFogEnabled;
 uniform bool u_isShadowsEnabled;
 uniform bool u_hasDiffuseMap;
+uniform bool u_hasReflectionMap;
 uniform bool u_isShadowFrameRenderEnabled;
 
 // Integer uniforms
@@ -102,7 +103,7 @@ float getSpecularValue(vec3 position, vec3 normal);
 // Calculate final fragment color
 void main()
 {
-    // Calculate new normal vector
+    // Calculate normal vector
     vec3 normal = getNormalMappedVector();
 
 	// Calculate lighting
@@ -409,9 +410,10 @@ vec3 applySkyReflections(vec3 color, vec3 normal)
 {
 	if(u_skyReflectionsEnabled && u_isSkyReflective)
 	{
-		vec4 reflMapColor = texture(u_sampler_skyReflectionMap, f_uv);
+		vec4 reflectionMapColor = texture(u_sampler_reflectionMap, f_uv);
 		
-		if(reflMapColor.rgb != vec3(0.0f))
+		// Check if current texel allows for reflection
+		if(reflectionMapColor.rgb != vec3(0.0f))
 		{
 			vec3 viewDir      = normalize(f_pos - u_cameraPosition);
 			vec3 reflectDir   = reflect(viewDir, normal);
@@ -433,12 +435,20 @@ vec3 applySceneReflections(vec3 color)
 {
 	if(u_sceneReflectionsEnabled && u_isSceneReflective)
 	{
-		vec2 ndc             = (f_clip.xy / f_clip.w) / 2.0 + 0.5;
-		vec2 texCoords       = vec2(ndc.x, -ndc.y);
-		vec3 reflectionColor = texture(u_sampler_sceneReflectionMap, vec2(texCoords.x,  texCoords.y)).rgb;
-		vec3 mixedColor      = mix(color.rgb, reflectionColor, u_sceneReflectionFactor);
+		vec4 reflectionMapColor = u_hasReflectionMap ? texture(u_sampler_reflectionMap, f_uv) : vec4(0.0f);
+		
+		// Check if current texel allows for reflection
+		if(!u_hasReflectionMap || reflectionMapColor.rgb != vec3(0.0f))
+		{
+			vec2 ndc             = (f_clip.xy / f_clip.w) / 2.0 + 0.5;
+			vec2 texCoords       = vec2(ndc.x, -ndc.y);
+			vec3 reflectionColor = texture(u_sampler_sceneReflectionMap, vec2(texCoords.x,  texCoords.y)).rgb;
+			vec3 mixedColor      = mix(color.rgb, reflectionColor, u_sceneReflectionFactor);
         
-		return mixedColor.rgb;
+			return mixedColor.rgb;
+		}
+
+		return color;
 	}
 	else
 	{

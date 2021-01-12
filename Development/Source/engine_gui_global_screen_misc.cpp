@@ -129,10 +129,9 @@ bool EngineGuiGlobalScreen::_checkValueForm(const string& ID, string& valueStrin
 		bool done = _fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) && getButton("value_form_done")->isHovered();
 		bool cancelled = _fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) && getButton("value_form_cancel")->isHovered();
 		bool entered = getWriteField(ID)->confirmedInput();
-		bool escaped = getWriteField(ID)->cancelledInput();
 
 		// Check if user confirmed or cancelled
-		if (done || entered || cancelled || escaped)
+		if (done || entered || cancelled)
 		{
 			if (done || entered) // Pressed done or ENTER
 			{
@@ -221,8 +220,7 @@ bool EngineGuiGlobalScreen::isChoiceFormCancelled(const string& ID)
 {
 	if (ID == _choiceFormID)
 	{
-		return (getButton("choice_form_cancel")->isHovered() && _fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT)) ||
-			_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE);
+		return (getButton("choice_form_cancel")->isHovered() && _fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT));
 	}
 	else
 	{

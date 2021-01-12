@@ -230,7 +230,7 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 				string objPath, diffuseMapPath, lightMapPath, reflectionMapPath, normalMapPath, lodEntityID, animationID;
 				Vec3 position, rotation, size, color;
 				float uvRepeat, specularFactor, specularIntensity, lightness;
-				bool isFaceculled, isShadowed, isTransparent, isSpecular, isReflective, isFrozen, isInstanced;
+				bool isFaceculled, isShadowed, isTransparent, isSpecular, reflectionType, isFrozen, isInstanced;
 				vector<Vec3> instancedOffsets;
 				vector<string> aabbNames;
 				vector<Vec3> aabbPositions;
@@ -256,7 +256,7 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 					isFaceculled >>
 					isShadowed >>
 					isTransparent >>
-					isReflective >>
+					reflectionType >>
 					isSpecular >>
 					specularFactor >>
 					specularIntensity >>
@@ -333,7 +333,7 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 
 				// Add the model
 				_placeModel(!_isEditorLoaded, modelName, modelNumber, position, rotation, size, objPath, diffuseMapPath, lightMapPath, 
-					reflectionMapPath, normalMapPath, isFrozen, isFaceculled, isShadowed, isTransparent, isReflective, isSpecular, specularFactor, 
+					reflectionMapPath, normalMapPath, isFrozen, isFaceculled, isShadowed, isTransparent, isSpecular, reflectionType, specularFactor,
 					specularIntensity, lightness, color, uvRepeat, lodEntityID, 
 					isInstanced, instancedOffsets, aabbNames, aabbPositions, aabbSizes, animationID);
 

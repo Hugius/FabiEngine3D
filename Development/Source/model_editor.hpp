@@ -25,7 +25,7 @@ public:
 
 private:
 	bool _addModel(const string& modelName, string objName, string diffuseMapName, string lightMapName, string reflectionMapName, string normalMapName,
-		Vec3 size, bool isFaceCulled, bool isShadowed, bool isTransparent, bool isReflective, bool isSpecular,
+		Vec3 size, bool isFaceCulled, bool isShadowed, bool isTransparent, bool isSpecular, int reflectionType,
 		float specularFactor, float specularIntensity, float lightness, Vec3 color, float uvRepeat, string lodEntityID, bool isInstanced,
 		vector<string> aabbNames, vector<Vec3> aabbPositions, vector<Vec3> aabbSizes);
 	void _loadObjFileNames();

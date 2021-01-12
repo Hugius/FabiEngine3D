@@ -379,7 +379,7 @@ void SceneEditor::placeModel(const string& newID, const string& previewID, Vec3 
 
 void SceneEditor::_placeModel(bool scriptExecution, const string& modelName, const string& modelNumber, Vec3 position, Vec3 rotation, Vec3 size,
 	const string& objPath, const string& diffuseMapPath, const string& lightMapPath, const string& reflectionMapPath, const string& normalMapPath, 
-	bool isFrozen, bool isFaceCulled, bool isShadowed, bool isTransparent, bool isReflective, bool isSpecular, float specularFactor,
+	bool isFrozen, bool isFaceCulled, bool isShadowed, bool isTransparent, bool isSpecular, int reflectionType, float specularFactor,
 	float specularIntensity, float lightness, Vec3 color, float uvRepeat, const string& lodEntityID, bool isInstanced,
 	vector<Vec3> instancedOffsets, vector<string> aabbNames, vector<Vec3> aabbPositions, vector<Vec3> aabbSizes, string animationID)
 {
@@ -407,7 +407,6 @@ void SceneEditor::_placeModel(bool scriptExecution, const string& modelName, con
 	_fe3d.gameEntity_setFaceCulled(newID, isFaceCulled);
 	_fe3d.gameEntity_setShadowed(newID, isShadowed);
 	_fe3d.gameEntity_setTransparent(newID, isTransparent);
-	_fe3d.gameEntity_setSceneReflective(newID, isReflective);
 	_fe3d.gameEntity_setSpecularLighted(newID, isSpecular);
 	_fe3d.gameEntity_setSpecularFactor(newID, specularFactor);
 	_fe3d.gameEntity_setSpecularIntensity(newID, specularIntensity);
@@ -416,6 +415,16 @@ void SceneEditor::_placeModel(bool scriptExecution, const string& modelName, con
 	_fe3d.gameEntity_setUvRepeat(newID, uvRepeat);
 	_fe3d.gameEntity_setLevelOfDetailEntity(newID, lodEntityID);
 	_fe3d.gameEntity_setInstanced(newID, isInstanced, instancedOffsets);
+
+	// Reflection type
+	if (reflectionType == 1)
+	{
+		_fe3d.gameEntity_setSkyReflective(newID, true);
+	}
+	else if (reflectionType == 2)
+	{
+		_fe3d.gameEntity_setSceneReflective(newID, true);
+	}
 
 	// Save original lightness & transformation
 	if (_isEditorLoaded)

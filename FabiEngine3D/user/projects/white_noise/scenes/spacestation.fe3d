@@ -1,0 +1,12 @@
+SKY space user\assets\textures\cube_maps\space_right.png user\assets\textures\cube_maps\space_left.png user\assets\textures\cube_maps\space_top.png user\assets\textures\cube_maps\space_bottom.png user\assets\textures\cube_maps\space_front.png user\assets\textures\cube_maps\space_back.png 0 0.5 1 1 1
+MODEL 2023023477@floor_center 6 0 0 0 0 0 3 3 3 user\assets\models\spacestations\floor_center.obj user\assets\textures\diffuse_maps\spacestations\floor_center.png ? ? user\assets\textures\normal_maps\spacestations\floor_center.png 0 0 1 0 2 1 1 1 0.75 1 1 1 1 ? 0 ? floor_center 0 -0.1 0 2 0.0999999 2
+MODEL 934169021@floor_center 0 0 0 0 0 0 3 3 3 user\assets\models\spacestations\floor_center.obj user\assets\textures\diffuse_maps\spacestations\floor_center.png ? ? user\assets\textures\normal_maps\spacestations\floor_center.png 0 0 1 0 2 1 1 1 0.75 1 1 1 1 ? 0 ? floor_center 0 -0.1 0 2 0.0999999 2
+AMBIENT_LIGHT 1 1 1 0.5
+DIRECTIONAL_LIGHT 1000 1000 1000 1 1 1 0.75 0
+CAMERA_FOV 90
+LOD_DISTANCE 0
+EDITOR_SPEED 1
+EDITOR_POSITION 10.1898 3.37994 3.66702
+EDITOR_YAW 241.836
+EDITOR_PITCH -31.5982
+GRAPHICS_MOTIONBLUR 1 0.25

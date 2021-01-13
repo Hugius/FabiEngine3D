@@ -1,0 +1,13 @@
+9 43
+META script_type_init
+META execution_entry
+
+fe3d:scene_load("spacestation")
+fe3d:camera_set_position(0.0, 1.5, 0.0)
+fe3d:camera_enable_first_person_view()
+fe3d:camera_set_cursor_speed(2.0)
+fe3d:cursor_hide()
+fe3d:graphics_set_spot_light_color(1.0, 1.0, 1.0)
+fe3d:graphics_set_spot_light_intensity(1.0)
+fe3d:graphics_set_spot_light_angle(30.0)
+fe3d:graphics_set_spot_light_distance(10.0)

@@ -445,6 +445,7 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 				{
 					_fe3d.gameEntity_add("@" + ID, "engine\\models\\lamp.obj", position, Vec3(0.0f), _defaultLightbulbSize);
 					_fe3d.gameEntity_setShadowed("@" + ID, false);
+					_fe3d.gameEntity_setColor("@" + ID, color);
 					_fe3d.aabbEntity_bindToGameEntity("@" + ID, Vec3(0.0f), _defaultLightbulbAabbSize, true);
 				}
 

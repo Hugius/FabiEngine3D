@@ -119,7 +119,11 @@ bool ScriptInterpreter::_executeFe3dLightingFunction(const string& functionName,
 		// Validate arguments
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			_fe3d.gfx_enableSpotLighting(Vec3(1.0f), 1.0f, 45.0f, 1.0f);
+			_fe3d.gfx_enableSpotLighting(
+				_fe3d.gfx_getSpotLightingColor(),
+				_fe3d.gfx_getSpotLightingIntensity(),
+				_fe3d.gfx_getSpotLightingAngle(),
+				_fe3d.gfx_getSpotLightingDistance());
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}

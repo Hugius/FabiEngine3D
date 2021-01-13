@@ -371,21 +371,21 @@ void SceneEditor::_updateMiscellaneous()
 void SceneEditor::clearScene()
 {
 	// Disable graphics
-	_fe3d.gfx_disableAmbientLighting();
-	_fe3d.gfx_disableDirectionalLighting();
-	_fe3d.gfx_disableSpecularLighting();
-	_fe3d.gfx_disablePointLighting();
-	_fe3d.gfx_disableFog();
-	_fe3d.gfx_disableSkyReflections();
-	_fe3d.gfx_disableSceneReflections();
-	_fe3d.gfx_disableLightMapping();
-	_fe3d.gfx_disableNormalMapping();
-	_fe3d.gfx_disableShadows();
-	_fe3d.gfx_disableWaterEffects();
-	_fe3d.gfx_disableSkyHDR();
-	_fe3d.gfx_disableDOF();
-	_fe3d.gfx_disableMotionBlur();
-	_fe3d.gfx_disableLensFlare();
+	_fe3d.gfx_disableAmbientLighting(true);
+	_fe3d.gfx_disableDirectionalLighting(true);
+	_fe3d.gfx_disableSpecularLighting(true);
+	_fe3d.gfx_disablePointLighting(true);
+	_fe3d.gfx_disableFog(true);
+	_fe3d.gfx_disableSkyReflections(true);
+	_fe3d.gfx_disableSceneReflections(true);
+	_fe3d.gfx_disableLightMapping(true);
+	_fe3d.gfx_disableNormalMapping(true);
+	_fe3d.gfx_disableShadows(true);
+	_fe3d.gfx_disableWaterEffects(true);
+	_fe3d.gfx_disableSkyHDR(true);
+	_fe3d.gfx_disableDOF(true);
+	_fe3d.gfx_disableMotionBlur(true);
+	_fe3d.gfx_disableLensFlare(true);
 
 	// Check if currently in scene editor
 	if (_isEditorLoaded)

@@ -115,102 +115,173 @@ void FabiEngine3D::gfx_enableMotionBlur(float strength)
 
 void FabiEngine3D::gfx_enableLensFlare(const string& texturePath, float intensity, float multiplier)
 {
+	_core->_renderBus.setLensFlareEnabled(true);
 	_core->_renderBus.setLensFlareMap(_core->_texLoader.getTexture(texturePath, false, false));
 	_core->_renderBus.setLensFlareMapPath(texturePath);
-	_core->_renderBus.setLensFlareEnabled(true);
 	_core->_renderBus.setLensFlareIntensity(intensity);
 	_core->_renderBus.setLensFlareMultiplier(multiplier);
 }
 
-void FabiEngine3D::gfx_disableAmbientLighting()
+void FabiEngine3D::gfx_disableAmbientLighting(bool resetProperties)
 {
 	_core->_renderBus.setAmbientLightingEnabled(false);
+
+	if (resetProperties)
+	{
+		_core->_renderBus.setAmbientLightColor(0.0f);
+		_core->_renderBus.setAmbientLightIntensity(0.0f);
+	}
 }
 
-void FabiEngine3D::gfx_disableDirectionalLighting()
+void FabiEngine3D::gfx_disableDirectionalLighting(bool resetProperties)
 {
 	_core->_renderBus.setDirectionalLightingEnabled(false);
+
+	if (resetProperties)
+	{
+		_core->_renderBus.setDirectionalLightPos(Vec3(0.0f));
+		_core->_renderBus.setDirectionalLightColor(0.0f);
+		_core->_renderBus.setDirectionalLightIntensity(0.0f);
+	}
 }
 
-void FabiEngine3D::gfx_disableSpecularLighting()
+void FabiEngine3D::gfx_disableSpecularLighting(bool resetProperties)
 {
 	_core->_renderBus.setSpecularLightingEnabled(false);
 }
 
-void FabiEngine3D::gfx_disablePointLighting()
+void FabiEngine3D::gfx_disablePointLighting(bool resetProperties)
 {
 	_core->_renderBus.setPointLightingEnabled(false);
 }
 
-void FabiEngine3D::gfx_disableSpotLighting()
+void FabiEngine3D::gfx_disableSpotLighting(bool resetProperties)
 {
 	_core->_renderBus.setSpotLightingEnabled(false);
+
+	if (resetProperties)
+	{
+		_core->_renderBus.setSpotLightColor(Vec3(0.0f));
+		_core->_renderBus.setSpotLightIntensity(0.0f);
+		_core->_renderBus.setMaxSpotLightAngle(0.0f);
+		_core->_renderBus.setMaxSpotLightDistance(0.0f);
+	}
 }
 
-void FabiEngine3D::gfx_disableFog()
+void FabiEngine3D::gfx_disableFog(bool resetProperties)
 {
 	_core->_renderBus.setFogEnabled(false);
+
+	if (resetProperties)
+	{
+		_core->_renderBus.setFogMinDistance(0.0f);
+		_core->_renderBus.setFogMaxDistance(0.0f);
+		_core->_renderBus.setFogDefaultFactor(0.0f);
+		_core->_renderBus.setFogColor(Vec3(0.0f));
+	}
 }
 
-void FabiEngine3D::gfx_disableSkyReflections()
+void FabiEngine3D::gfx_disableSkyReflections(bool resetProperties)
 {
 	_core->_renderBus.setSkyReflectionsEnabled(false);
+
+	if (resetProperties)
+	{
+		_core->_renderBus.setSkyReflectionFactor(0.0f);
+	}
 }
 
-void FabiEngine3D::gfx_disableSceneReflections()
+void FabiEngine3D::gfx_disableSceneReflections(bool resetProperties)
 {
 	_core->_renderBus.setSceneReflectionsEnabled(false);
+
+	if (resetProperties)
+	{
+		_core->_renderBus.setSceneReflectionFactor(0.0f);
+	}
 }
 
-void FabiEngine3D::gfx_disableLightMapping()
+void FabiEngine3D::gfx_disableLightMapping(bool resetProperties)
 {
 	_core->_renderBus.setLightMappingEnabled(false);
 }
 
-void FabiEngine3D::gfx_disableNormalMapping()
+void FabiEngine3D::gfx_disableNormalMapping(bool resetProperties)
 {
 	_core->_renderBus.setNormalMappingEnabled(false);
 }
 
-void FabiEngine3D::gfx_disableMSAA()
+void FabiEngine3D::gfx_disableMSAA(bool resetProperties)
 {
 	_core->_renderBus.setMsaaEnabled(false);
 }
 
-void FabiEngine3D::gfx_disableShadows()
+void FabiEngine3D::gfx_disableShadows(bool resetProperties)
 {
-	_core->_shadowManager.unloadShadows();
 	_core->_renderBus.setShadowsEnabled(false);
+
+	if (resetProperties)
+	{
+		_core->_shadowManager.unloadShadows();
+	}
 }
 
-void FabiEngine3D::gfx_disableBloom()
+void FabiEngine3D::gfx_disableBloom(bool resetProperties)
 {
 	_core->_renderBus.setBloomEnabled(false);
+
+	if (resetProperties)
+	{
+		_core->_renderBus.setBloomIntensity(0.0f);
+		_core->_renderBus.setBloomBrightnessTreshold(0.0f);
+		_core->_renderBus.setBloomBlurSize(0);
+	}
 }
 
-void FabiEngine3D::gfx_disableWaterEffects()
+void FabiEngine3D::gfx_disableWaterEffects(bool resetProperties)
 {
 	_core->_renderBus.setWaterEffectsEnabled(false);
 }
 
-void FabiEngine3D::gfx_disableSkyHDR()
+void FabiEngine3D::gfx_disableSkyHDR(bool resetProperties)
 {
 	_core->_renderBus.setSkyHdrEnabled(false);
+	_core->_skyEntityManager.setBrightnessFactor(0.0f);
 }
 
-void FabiEngine3D::gfx_disableDOF()
+void FabiEngine3D::gfx_disableDOF(bool resetProperties)
 {
 	_core->_renderBus.setDofEnabled(false);
+
+	if (resetProperties)
+	{
+		_core->_renderBus.setDofDynamic(false);
+		_core->_renderBus.setDofMaxDistance(0.0f);
+		_core->_renderBus.setDofBlurDistance(0.0f);
+	}
 }
 
-void FabiEngine3D::gfx_disableMotionBlur()
+void FabiEngine3D::gfx_disableMotionBlur(bool resetProperties)
 {
 	_core->_renderBus.setMotionBlurEnabled(false);
+
+	if (resetProperties)
+	{
+		_core->_renderBus.setMotionBlurStrength(0.0f);
+	}
 }
 
-void FabiEngine3D::gfx_disableLensFlare()
+void FabiEngine3D::gfx_disableLensFlare(bool resetProperties)
 {
 	_core->_renderBus.setLensFlareEnabled(false);
+
+	if (resetProperties)
+	{
+		_core->_renderBus.setLensFlareMap(0);
+		_core->_renderBus.setLensFlareMapPath("");
+		_core->_renderBus.setLensFlareIntensity(0.0f);
+		_core->_renderBus.setLensFlareMultiplier(0.0f);
+	}
 }
 
 bool FabiEngine3D::gfx_isMsaaEnabled()

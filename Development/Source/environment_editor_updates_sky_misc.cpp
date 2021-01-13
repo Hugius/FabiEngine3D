@@ -155,10 +155,16 @@ void EnvironmentEditor::_updateSkyRemoval()
 				_skyIDs.erase(std::remove(_skyIDs.begin(), _skyIDs.end(), _currentSkyID), _skyIDs.end());
 				_skyRemovalEnabled = false;
 				_currentSkyID = "";
+
+				// Default sky
+				_fe3d.skyEntity_select("@@engineBackground");
 			}
 			else if (_gui.getGlobalScreen()->isAnswerFormDenied("removeSky"))
 			{
+				// Default sky
 				_fe3d.skyEntity_select("@@engineBackground");
+
+				// Miscellaneous
 				_skyRemovalEnabled = false;
 				_currentSkyID = "";
 			}

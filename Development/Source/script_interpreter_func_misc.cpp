@@ -155,7 +155,7 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 						}
 					}
 				}
-				else if (functionName == "fe3d:misc_time_interval") // Time interval
+				else if (functionName == "misc:time_interval") // Time interval
 				{
 					auto types = { ScriptValueType::STRING, ScriptValueType::INTEGER };
 

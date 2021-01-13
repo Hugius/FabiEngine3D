@@ -54,7 +54,7 @@ void FabiEngine3D::lightEntity_setIntensity(const string& ID, float intensity)
 
 void FabiEngine3D::lightEntity_setDistanceFactor(const string& ID, float factor)
 {
-	_core->_lightEntityManager.getEntity(ID)->setDistanceFactor(1.0f / factor);
+	_core->_lightEntityManager.getEntity(ID)->setDistanceFactor(factor);
 }
 
 Vec3 FabiEngine3D::lightEntity_getPosition(const string& ID)
@@ -74,7 +74,7 @@ float FabiEngine3D::lightEntity_getIntensity(const string& ID)
 
 float FabiEngine3D::lightEntity_getDistanceFactor(const string& ID)
 {
-	return 1.0f / _core->_lightEntityManager.getEntity(ID)->getDistanceFactor();
+	return _core->_lightEntityManager.getEntity(ID)->getDistanceFactor();
 }
 
 vector<string> FabiEngine3D::lightEntity_getAllIDs()

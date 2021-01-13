@@ -114,12 +114,12 @@ void SceneEditor::_updateModelEditing()
 					else if (rightWindow->getScreen("modelPropertiesMenu")->getButton("freeze")->isHovered()) // Freeze button
 					{
 						// Model
-						_fe3d.gameEntity_setStaticToCamera(_activeModelID, true);
+						_fe3d.gameEntity_setStaticToCamera(_activeModelID, !_fe3d.gameEntity_isStaticToCamera(_activeModelID));
 
 						// AABB
 						for (auto& aabbID : _fe3d.aabbEntity_getBoundIDs(_activeModelID, true, false))
 						{
-							_fe3d.aabbEntity_setResponsive(aabbID, false);
+							_fe3d.aabbEntity_setResponsive(aabbID, !_fe3d.gameEntity_isStaticToCamera(_activeModelID));
 						}
 					}
 					else if (rightWindow->getScreen("modelPropertiesMenu")->getButton("delete")->isHovered()) // Delete button
@@ -178,8 +178,10 @@ void SceneEditor::_updateModelEditing()
 					_gui.getGlobalScreen()->removeChoiceForm("animations");
 				}
 
-				// Buttons hoverability
-				rightWindow->getScreen("modelPropertiesMenu")->getButton("freeze")->setHoverable(!_fe3d.gameEntity_isStaticToCamera(_activeModelID));
+				// Update freeze button
+				auto freezeID = rightWindow->getScreen("modelPropertiesMenu")->getButton("freeze")->getTextfield()->getEntityID();
+				bool isFrozen = _fe3d.gameEntity_isStaticToCamera(_activeModelID);
+				_fe3d.textEntity_setTextContent(freezeID, isFrozen ? "Unfreeze" : "Freeze");
 
 				// Alternative way of deleting
 				if (_fe3d.input_getKeyPressed(InputType::KEY_DELETE))

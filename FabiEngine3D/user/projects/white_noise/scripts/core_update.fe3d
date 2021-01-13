@@ -1,0 +1,23 @@
+18 22
+META script_type_update
+META execution_entry
+
+BOOL wDown = fe3d:input_is_key_down("KEY_W")
+BOOL aDown = fe3d:input_is_key_down("KEY_A")
+BOOL sDown = fe3d:input_is_key_down("KEY_S")
+BOOL dDown = fe3d:input_is_key_down("KEY_D")
+BOOL fToggled = fe3d:input_is_key_toggled("KEY_F")
+
+IF wDown IS <true>:
+    fe3d:camera_follow_z(0.025)
+IF aDown IS <true>:
+    fe3d:camera_follow_x(-0.025)
+IF sDown IS <true>:
+    fe3d:camera_follow_z(-0.025)
+IF dDown IS <true>:
+    fe3d:camera_follow_x(0.025)
+
+IF fToggled IS <true>:
+    fe3d:graphics_enable_spot_light()
+ELSE:
+    fe3d:graphics_disable_spot_light()

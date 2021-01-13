@@ -13,3 +13,6 @@
 @ceiling_corner_out user\assets\models\spacestations\ceiling_corner_out.obj user\assets\textures\diffuse_maps\spacestations\ceiling_corner_out.png ? ? user\assets\textures\normal_maps\spacestations\ceiling_corner_out.png 1 1 1 0 1 0 0 1 1 1 0.75 1 1 1 1 ? 0 ceiling_corner_out 0 0 0 2 0.3 2
 @earth user\assets\models\planets\earth.obj user\assets\textures\diffuse_maps\planets\earth.png user\assets\textures\light_maps\planets\earth.png ? user\assets\textures\normal_maps\planets\earth.png 100 100 100 0 0 0 0 0 16 5 0.5 1 1 1 1 ? 0 earth 0 0 0 9 7 10
 @ceiling_lamp user\assets\models\spacestations\ceiling_lamp.obj user\assets\textures\diffuse_maps\spacestations\ceiling_lamp.png user\assets\textures\light_maps\spacestations\ceiling_lamp.png ? ? 1 1 1 0 1 0 0 0 1 1 10 1 1 1 1 ? 0 ceiling_lamp 0 0 0 1.41 0.180001 0.220001
+@satellite1 user\assets\models\spaceships\satellite1.obj ? ? ? ? 5 5 5 0 1 0 1 1 16 2.5 1 1 1 1 1 ? 0 sallite1 0 0 0 9.8 2.7 10.8
+@satellite2 user\assets\models\spaceships\satellite2.obj user\assets\textures\diffuse_maps\spaceships\satellite2.png ? ? user\assets\textures\normal_maps\spaceships\satellite2.png 3 3 3 0 1 0 1 1 1 1 0.75 1 1 1 1 ? 0 satellite2 0 0 0 18.5 4.9 2.8
+@control_tower user\assets\models\spacestations\control_tower.obj ? ? ? ? 1 1 1 0 1 1 0 0 32 1 0.75 1 1 1 1 ? 0

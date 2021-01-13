@@ -76,6 +76,8 @@ uniform bool u_sceneReflectionsEnabled;
 uniform bool u_isFogEnabled;
 uniform bool u_isShadowsEnabled;
 uniform bool u_hasDiffuseMap;
+uniform bool u_hasLightMap;
+uniform bool u_hasNormalMap;
 uniform bool u_hasReflectionMap;
 uniform bool u_isShadowFrameRenderEnabled;
 
@@ -131,7 +133,7 @@ void main()
 // Calculate new normal
 vec3 getNormalMappedVector()
 {
-    if(u_isNormalMappingEnabled && u_isNormalMapped)
+    if(u_isNormalMappingEnabled && u_isNormalMapped && u_hasNormalMap)
     {
         // Calculate new normal vector
         vec3 normal = texture(u_sampler_normalMap, f_uv).rgb;
@@ -371,7 +373,7 @@ float getShadowValue()
 
 vec3 applyLightMapping(vec3 color)
 {
-	if(u_lightMappingEnabled && u_isLightMapped)
+	if(u_lightMappingEnabled && u_isLightMapped && u_hasLightMap)
 	{
 		vec3 lightMapColor = texture(u_sampler_lightMap, f_uv).rgb;
 		vec3 lightMappedColor = color + lightMapColor;

@@ -298,7 +298,6 @@ bool ModelEditor::_addModel(const string& modelName, string objName, string diff
 			if (reflectionMapName != "")
 			{
 				_fe3d.gameEntity_setReflectionMap(modelName, reflectionMapName);
-				_fe3d.gameEntity_setSkyReflective(modelName, true);
 			}
 
 			// Normal map

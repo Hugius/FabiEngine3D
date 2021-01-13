@@ -179,6 +179,8 @@ void GameEntityRenderer::render(const shared_ptr<GameEntity> entity)
 			bool hasNormalMap = (entity->hasNormalMap() && entity->getNormalMap(index) != 0);
 			bool hasReflectionMap = (entity->hasReflectionMap() && entity->getReflectionMap(index) != 0);
 			_shader.uploadUniform("u_hasDiffuseMap", hasDiffuseMap);
+			_shader.uploadUniform("u_hasLightMap", hasLightMap);
+			_shader.uploadUniform("u_hasNormalMap", hasNormalMap);
 			_shader.uploadUniform("u_hasReflectionMap", hasReflectionMap);
 
 			// Diffuse map

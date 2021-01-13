@@ -1,1 +1,2 @@
 planet_spin @earth 1 ? 0 360 0 0 0 0 0.002 0 1
+satellite_rotate @satellite 3 ? 360 0 0 0 0 0 0.1 0 1 2 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0

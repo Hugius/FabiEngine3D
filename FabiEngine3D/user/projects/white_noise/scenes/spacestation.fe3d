@@ -1,12 +1,27 @@
-SKY space user\assets\textures\cube_maps\space_right.png user\assets\textures\cube_maps\space_left.png user\assets\textures\cube_maps\space_top.png user\assets\textures\cube_maps\space_bottom.png user\assets\textures\cube_maps\space_front.png user\assets\textures\cube_maps\space_back.png 0 0.5 1 1 1
-MODEL 2023023477@floor_center 6 0 0 0 0 0 3 3 3 user\assets\models\spacestations\floor_center.obj user\assets\textures\diffuse_maps\spacestations\floor_center.png ? ? user\assets\textures\normal_maps\spacestations\floor_center.png 0 0 1 0 2 1 1 1 0.75 1 1 1 1 ? 0 ? floor_center 0 -0.1 0 2 0.0999999 2
-MODEL 934169021@floor_center 0 0 0 0 0 0 3 3 3 user\assets\models\spacestations\floor_center.obj user\assets\textures\diffuse_maps\spacestations\floor_center.png ? ? user\assets\textures\normal_maps\spacestations\floor_center.png 0 0 1 0 2 1 1 1 0.75 1 1 1 1 ? 0 ? floor_center 0 -0.1 0 2 0.0999999 2
-AMBIENT_LIGHT 1 1 1 0.5
-DIRECTIONAL_LIGHT 1000 1000 1000 1 1 1 0.75 0
+SKY space user\assets\textures\cube_maps\space_right.png user\assets\textures\cube_maps\space_left.png user\assets\textures\cube_maps\space_top.png user\assets\textures\cube_maps\space_bottom.png user\assets\textures\cube_maps\space_front.png user\assets\textures\cube_maps\space_back.png 0 0.25 1 1 1
+MODEL 837197017@floor_side -2 0 2 0 0 0 1 1 1 user\assets\models\spacestations\floor_side.obj user\assets\textures\diffuse_maps\spacestations\floor_side.png ? user\assets\textures\reflection_maps\spacestations\floor_side.png user\assets\textures\normal_maps\spacestations\floor_side.png 0 0 1 0 2 1 2 1 0.75 1 1 1 1 ? 0 ? floor_side 0 -0.1 0 2 0.0999999 2
+MODEL 1205740281@wall_big -1 0 -3 0 0 0 1 1 1 user\assets\models\spacestations\wall_big.obj user\assets\textures\diffuse_maps\spacestations\wall_big.png ? ? user\assets\textures\normal_maps\spacestations\wall_big.png 0 0 1 0 0 1 1 1 0.75 1 1 1 1 ? 0 ? wall_big 0 0 0 4 4 0.6
+MODEL 553724899@ceiling_side -2 4 -2 0 180 0 1 1 1 user\assets\models\spacestations\ceiling_side.obj user\assets\textures\diffuse_maps\spacestations\ceiling_side.png ? ? user\assets\textures\normal_maps\spacestations\ceiling_side.png 0 0 1 0 0 1 1 1 0.75 1 1 1 1 ? 0 ? ceiling_side 0 0 0 2 0.3 2
+MODEL 1182098431@ceiling_side -2 4 2 0 0 0 1 1 1 user\assets\models\spacestations\ceiling_side.obj user\assets\textures\diffuse_maps\spacestations\ceiling_side.png ? ? user\assets\textures\normal_maps\spacestations\ceiling_side.png 0 0 1 0 0 1 1 1 0.75 1 1 1 1 ? 0 ? ceiling_side 0 0 0 2 0.3 2
+MODEL 155684555@floor_center -2 0 0 0 0 0 1 1 1 user\assets\models\spacestations\floor_center.obj user\assets\textures\diffuse_maps\spacestations\floor_center.png ? user\assets\textures\reflection_maps\spacestations\floor_center.png user\assets\textures\normal_maps\spacestations\floor_center.png 0 0 1 0 2 1 2 1 0.75 1 1 1 1 ? 0 ? floor_center 0 -0.1 0 2 0.0999999 2
+MODEL 279730199@floor_center 0 0 0 0 0 0 1 1 1 user\assets\models\spacestations\floor_center.obj user\assets\textures\diffuse_maps\spacestations\floor_center.png ? user\assets\textures\reflection_maps\spacestations\floor_center.png user\assets\textures\normal_maps\spacestations\floor_center.png 0 0 1 0 2 1 2 1 0.75 1 1 1 1 ? 0 ? floor_center 0 -0.1 0 2 0.0999999 2
+MODEL 1471355250@floor_side 0 0 2 0 0 0 1 1 1 user\assets\models\spacestations\floor_side.obj user\assets\textures\diffuse_maps\spacestations\floor_side.png ? user\assets\textures\reflection_maps\spacestations\floor_side.png user\assets\textures\normal_maps\spacestations\floor_side.png 0 0 1 0 2 1 2 1 0.75 1 1 1 1 ? 0 ? floor_side 0 -0.1 0 2 0.0999999 2
+MODEL 220679704@floor_side 0 0 -2 0 180 0 1 1 1 user\assets\models\spacestations\floor_side.obj user\assets\textures\diffuse_maps\spacestations\floor_side.png ? user\assets\textures\reflection_maps\spacestations\floor_side.png user\assets\textures\normal_maps\spacestations\floor_side.png 0 0 1 0 2 1 2 1 0.75 1 1 1 1 ? 0 ? floor_side 0 -0.1 0 2 0.0999999 2
+MODEL 180095660@floor_side -2 0 -2 0 180 0 1 1 1 user\assets\models\spacestations\floor_side.obj user\assets\textures\diffuse_maps\spacestations\floor_side.png ? user\assets\textures\reflection_maps\spacestations\floor_side.png user\assets\textures\normal_maps\spacestations\floor_side.png 0 0 1 0 2 1 2 1 0.75 1 1 1 1 ? 0 ? floor_side 0 -0.1 0 2 0.0999999 2
+MODEL 632423560@wall_big -1 0 3 0 180 0 1 1 1 user\assets\models\spacestations\wall_big.obj user\assets\textures\diffuse_maps\spacestations\wall_big.png ? ? user\assets\textures\normal_maps\spacestations\wall_big.png 0 0 1 0 0 1 1 1 0.75 1 1 1 1 ? 0 ? wall_big 0 0 0 4 4 0.6
+MODEL 1994658141@ceiling_center 0 4 0 0 0 0 1 1 1 user\assets\models\spacestations\ceiling_center.obj user\assets\textures\diffuse_maps\spacestations\ceiling_center.png ? ? user\assets\textures\normal_maps\spacestations\ceiling_center.png 0 0 1 0 0 1 1 1 0.75 1 1 1 1 ? 0 ? ceiling_center 0 0.15 0 2 0.15 2
+MODEL 642705057@ceiling_center -2 4 0 0 0 0 1 1 1 user\assets\models\spacestations\ceiling_center.obj user\assets\textures\diffuse_maps\spacestations\ceiling_center.png ? ? user\assets\textures\normal_maps\spacestations\ceiling_center.png 0 0 1 0 0 1 1 1 0.75 1 1 1 1 ? 0 ? ceiling_center 0 0.15 0 2 0.15 2
+MODEL 1765901865@ceiling_side 0 4 2 0 0 0 1 1 1 user\assets\models\spacestations\ceiling_side.obj user\assets\textures\diffuse_maps\spacestations\ceiling_side.png ? ? user\assets\textures\normal_maps\spacestations\ceiling_side.png 0 0 1 0 0 1 1 1 0.75 1 1 1 1 ? 0 ? ceiling_side 0 0 0 2 0.3 2
+MODEL 135812424@ceiling_side 0 4 -2 0 180 0 1 1 1 user\assets\models\spacestations\ceiling_side.obj user\assets\textures\diffuse_maps\spacestations\ceiling_side.png ? ? user\assets\textures\normal_maps\spacestations\ceiling_side.png 0 0 1 0 0 1 1 1 0.75 1 1 1 1 ? 0 ? ceiling_side 0 0 0 2 0.3 2
+MODEL 1916836511@earth 1750 0 1750 0 0 0 360 360 360 user\assets\models\planets\earth.obj user\assets\textures\diffuse_maps\planets\earth.png user\assets\textures\light_maps\planets\earth.png ? user\assets\textures\normal_maps\planets\earth.png 0 0 0 0 0 1 8 2 0.5 1 1 1 1 ? 0 planet_spin earth 0 -3.5 0 8.79999 8.79999 10.3
+AMBIENT_LIGHT 1 1 1 0.25
+DIRECTIONAL_LIGHT 5000 250 -8000 0.831373 0.686275 0.501961 0.75 750
 CAMERA_FOV 90
 LOD_DISTANCE 0
-EDITOR_SPEED 1
-EDITOR_POSITION 10.1898 3.37994 3.66702
-EDITOR_YAW 241.836
-EDITOR_PITCH -31.5982
+EDITOR_SPEED 100
+EDITOR_POSITION -17.8523 24.22 -0.643037
+EDITOR_YAW 16.9546
+EDITOR_PITCH -27.7736
 GRAPHICS_MOTIONBLUR 1 0.25
+GRAPHICS_DOF 1 1 1 1
+GRAPHICS_LENSFLARE 1 user\assets\textures\flare_maps\flare.png 2 1

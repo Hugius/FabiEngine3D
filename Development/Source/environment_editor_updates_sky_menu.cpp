@@ -254,7 +254,7 @@ void EnvironmentEditor::_updateSkyMenuOptions()
 			}
 			else if (screen->getButton("rotationSpeed")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("rotationSpeed", "Rotation speed", skyRotationSpeed * 100.0f, Vec2(0.0f), Vec2(0.3f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("rotationSpeed", "Rotation speed", skyRotationSpeed * 1000.0f, Vec2(0.0f), Vec2(0.3f, 0.1f));
 			}
 			else if (screen->getButton("lightness")->isHovered())
 			{
@@ -271,7 +271,7 @@ void EnvironmentEditor::_updateSkyMenuOptions()
 		// Speed value conversion
 		if (_gui.getGlobalScreen()->checkValueForm("rotationSpeed", skyRotationSpeed))
 		{
-			skyRotationSpeed /= 100.0f;
+			skyRotationSpeed /= 1000.0f;
 		}
 
 		// Lightness value conversion

@@ -179,7 +179,7 @@ void SceneEditor::_updateModelEditing()
 				}
 
 				// Buttons hoverability
-				rightWindow->getScreen("modelPropertiesMenu")->getButton("freeze")->setHoverable(_fe3d.gameEntity_isStaticToCamera(_activeModelID));
+				rightWindow->getScreen("modelPropertiesMenu")->getButton("freeze")->setHoverable(!_fe3d.gameEntity_isStaticToCamera(_activeModelID));
 
 				// Alternative way of deleting
 				if (_fe3d.input_getKeyPressed(InputType::KEY_DELETE))

@@ -410,10 +410,10 @@ vec3 applySkyReflections(vec3 color, vec3 normal)
 {
 	if(u_skyReflectionsEnabled && u_isSkyReflective)
 	{
-		vec4 reflectionMapColor = texture(u_sampler_reflectionMap, f_uv);
+		vec4 reflectionMapColor = u_hasReflectionMap ? texture(u_sampler_reflectionMap, f_uv) : vec4(0.0f);
 		
 		// Check if current texel allows for reflection
-		if(reflectionMapColor.rgb != vec3(0.0f))
+		if(!u_hasReflectionMap || reflectionMapColor.rgb != vec3(0.0f))
 		{
 			vec3 viewDir      = normalize(f_pos - u_cameraPosition);
 			vec3 reflectDir   = reflect(viewDir, normal);

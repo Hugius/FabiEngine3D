@@ -176,6 +176,7 @@ void SceneEditor::_updateDirectionalLightingMenu()
 			// Update lightsource billboard
 			_fe3d.billboardEntity_setPosition("@@lightSource", directionalLightingPosition);
 			_fe3d.billboardEntity_setSize("@@lightSource",  Vec2(billboardSize));
+			_fe3d.billboardEntity_setColor("@@lightSource", directionalLightingColor);
 		}
 	}
 }

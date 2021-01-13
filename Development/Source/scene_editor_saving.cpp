@@ -267,7 +267,7 @@ void SceneEditor::saveSceneToFile()
 					{
 						reflectionType = 2;
 					}
-					else if (_fe3d.gameEntity_isSceneReflective(modelID))
+					else if (_fe3d.gameEntity_isSkyReflective(modelID))
 					{
 						reflectionType = 1;
 					}

@@ -1,1 +1,1 @@
-planet_spin @earth 1 ? 360 360 0 0 0 0 0.003 0 1
+planet_spin @earth 1 ? 0 360 0 0 0 0 0.001 0 1

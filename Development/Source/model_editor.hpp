@@ -72,7 +72,7 @@ private:
 	float _aabbTransformationSpeed = 0.1f;
 	float _cameraSpeed = 0.1f;
 	const float _minCameraDistance = 1.0f;
-	const float _minCameraHeight = 1.0f;
+	const float _minCameraHeight = 0.01f;
 	const float _scrollWheelDivider = 5.0f;
 
 	// Booleans

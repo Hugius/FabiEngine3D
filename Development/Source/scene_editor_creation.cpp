@@ -267,6 +267,7 @@ void SceneEditor::placeModel(const string& newID, const string& previewID, Vec3 
 			_fe3d.gameEntity_setFaceCulled(newEntityID, _fe3d.gameEntity_isFaceCulled(previewID));
 			_fe3d.gameEntity_setShadowed(newEntityID, _fe3d.gameEntity_isShadowed(previewID));
 			_fe3d.gameEntity_setTransparent(newEntityID, _fe3d.gameEntity_isTransparent(previewID));
+			_fe3d.gameEntity_setSkyReflective(newEntityID, _fe3d.gameEntity_isSkyReflective(previewID));
 			_fe3d.gameEntity_setSceneReflective(newEntityID, _fe3d.gameEntity_isSceneReflective(previewID));
 			_fe3d.gameEntity_setSpecularLighted(newEntityID, _fe3d.gameEntity_isSpecularLighted(previewID));
 			_fe3d.gameEntity_setSpecularFactor(newEntityID, _fe3d.gameEntity_getSpecularFactor(previewID));
@@ -302,7 +303,6 @@ void SceneEditor::placeModel(const string& newID, const string& previewID, Vec3 
 			if (_fe3d.gameEntity_getReflectionMapPath(previewID) != "")
 			{
 				_fe3d.gameEntity_setReflectionMap(newEntityID, _fe3d.gameEntity_getReflectionMapPath(previewID));
-				_fe3d.gameEntity_setSkyReflective(newEntityID, true);
 			}
 
 			// Normal map
@@ -330,6 +330,7 @@ void SceneEditor::placeModel(const string& newID, const string& previewID, Vec3 
 		_fe3d.gameEntity_setFaceCulled(newEntityID, _fe3d.gameEntity_isFaceCulled(previewID));
 		_fe3d.gameEntity_setShadowed(newEntityID, _fe3d.gameEntity_isShadowed(previewID));
 		_fe3d.gameEntity_setTransparent(newEntityID, _fe3d.gameEntity_isTransparent(previewID));
+		_fe3d.gameEntity_setSkyReflective(newEntityID, _fe3d.gameEntity_isSkyReflective(previewID));
 		_fe3d.gameEntity_setSceneReflective(newEntityID, _fe3d.gameEntity_isSceneReflective(previewID));
 		_fe3d.gameEntity_setSpecularLighted(newEntityID, _fe3d.gameEntity_isSpecularLighted(previewID));
 		_fe3d.gameEntity_setSpecularFactor(newEntityID, _fe3d.gameEntity_getSpecularFactor(previewID));
@@ -365,7 +366,6 @@ void SceneEditor::placeModel(const string& newID, const string& previewID, Vec3 
 		if (_fe3d.gameEntity_getReflectionMapPath(previewID) != "")
 		{
 			_fe3d.gameEntity_setReflectionMap(newEntityID, _fe3d.gameEntity_getReflectionMapPath(previewID));
-			_fe3d.gameEntity_setSkyReflective(newEntityID, true);
 		}
 
 		// Normal map
@@ -452,7 +452,6 @@ void SceneEditor::_placeModel(bool scriptExecution, const string& modelName, con
 	if (reflectionMapPath != "")
 	{
 		_fe3d.gameEntity_setReflectionMap(newID, reflectionMapPath);
-		_fe3d.gameEntity_setSkyReflective(newID, true);
 	}
 
 	// Normal map

@@ -229,8 +229,9 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 				// Values
 				string objPath, diffuseMapPath, lightMapPath, reflectionMapPath, normalMapPath, lodEntityID, animationID;
 				Vec3 position, rotation, size, color;
+				int reflectionType;
 				float uvRepeat, specularFactor, specularIntensity, lightness;
-				bool isFaceculled, isShadowed, isTransparent, isSpecular, reflectionType, isFrozen, isInstanced;
+				bool isFaceculled, isShadowed, isTransparent, isSpecular, isFrozen, isInstanced;
 				vector<Vec3> instancedOffsets;
 				vector<string> aabbNames;
 				vector<Vec3> aabbPositions;
@@ -426,6 +427,7 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 				// Apply
 				_fe3d.gfx_enableDirectionalLighting(directionalLightingPosition, directionalLightingColor, directionalLightingIntensity);
 				_fe3d.billboardEntity_add("@@lightSource", "engine\\textures\\light_source.png", directionalLightingPosition, Vec3(0.0f), Vec2(billboardSize), true, true, true, true);
+				_fe3d.billboardEntity_setColor("@@lightSource", directionalLightingColor);
 				_fe3d.billboardEntity_setDepthMapIncluded("@@lightSource", false);
 			}
 			else if (entityType == "POINT_LIGHT")

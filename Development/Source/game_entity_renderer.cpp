@@ -173,31 +173,37 @@ void GameEntityRenderer::render(const shared_ptr<GameEntity> entity)
 			_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix(index));
 			_shader.uploadUniform("u_normalModelMatrix", Matrix33(normalModelMatrix));
 
+			// Check if entity has maps
+			bool hasDiffuseMap = (entity->hasDiffuseMap() && entity->getDiffuseMap(index) != 0);
+			bool hasLightMap = (entity->hasLightMap() && entity->getLightMap(index) != 0);
+			bool hasNormalMap = (entity->hasNormalMap() && entity->getNormalMap(index) != 0);
+			bool hasReflectionMap = (entity->hasReflectionMap() && entity->getReflectionMap(index) != 0);
+			_shader.uploadUniform("u_hasDiffuseMap", hasDiffuseMap);
+			_shader.uploadUniform("u_hasReflectionMap", hasReflectionMap);
+
 			// Diffuse map
-			_shader.uploadUniform("u_hasDiffuseMap", entity->hasDiffuseMap() && entity->getDiffuseMap(index) != 0);
-			if (entity->hasDiffuseMap() && entity->getDiffuseMap(index) != 0)
+			if (hasDiffuseMap)
 			{
 				glActiveTexture(GL_TEXTURE0);
 				glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap(index));
 			}
 
 			// Light map
-			if (entity->hasLightMap() && entity->getLightMap(index) != 0)
+			if (hasLightMap)
 			{
 				glActiveTexture(GL_TEXTURE1);
 				glBindTexture(GL_TEXTURE_2D, entity->getLightMap(index));
 			}
 
 			// Normal map
-			if (entity->hasNormalMap() && entity->getNormalMap(index) != 0)
+			if (hasNormalMap)
 			{
 				glActiveTexture(GL_TEXTURE2);
 				glBindTexture(GL_TEXTURE_2D, entity->getNormalMap(index));
 			}
 
 			// Reflection(part) map
-			_shader.uploadUniform("u_hasReflectionMap", entity->hasReflectionMap() && entity->getReflectionMap(index) != 0);
-			if (entity->hasReflectionMap() && entity->getReflectionMap(index) != 0)
+			if (hasReflectionMap)
 			{
 				glActiveTexture(GL_TEXTURE3);
 				glBindTexture(GL_TEXTURE_2D, entity->getReflectionMap(index));

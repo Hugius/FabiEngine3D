@@ -45,6 +45,10 @@ void ScriptEditor::_updateGUI()
 					_currentScriptFileID = "";
 				}
 			}
+			
+			// Update total line count text
+			auto lineCountID = screen->getTextfield("lineCount")->getEntityID();
+			_fe3d.textEntity_setTextContent(lineCountID, "Line count: " + to_string(_script.getTotalLineCount()));
 
 			// Buttons hoverability
 			screen->getButton("renameScript")->setHoverable(_currentScriptFileID != "");

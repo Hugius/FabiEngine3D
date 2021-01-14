@@ -12,7 +12,8 @@ public:
 	void removeScriptFile(const string& ID);
 	void reset();
 
-	int getScriptFileCount();
+	unsigned int getScriptFileCount();
+	unsigned int getTotalLineCount();
 
 	bool isScriptFileExisting(const string& ID);
 

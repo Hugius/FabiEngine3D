@@ -55,9 +55,21 @@ void Script::reset()
 	_scriptFiles.clear();
 }
 
-int Script::getScriptFileCount()
+unsigned int Script::getScriptFileCount()
 {
 	return _scriptFiles.size();
+}
+
+unsigned int Script::getTotalLineCount()
+{
+	unsigned int total = 0;
+
+	for (auto& scriptFile : _scriptFiles)
+	{
+		total += scriptFile->getLineCount();
+	}
+
+	return total;
 }
 
 bool Script::isScriptFileExisting(const string& ID)

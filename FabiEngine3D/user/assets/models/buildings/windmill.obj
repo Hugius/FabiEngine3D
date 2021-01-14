@@ -1,6 +1,7 @@
 FE3D_PART wicks
 FE3D_DIFFUSE_MAP buildings\windmill.png
 FE3D_NORMAL_MAP buildings\windmill.png
+FE3D_REFLECTION_MAP buildings\windmill.png
 v 0.034507 2.918364 0.891110
 v 0.780057 4.526932 0.929528
 v 0.034507 2.918364 0.934151
@@ -2485,6 +2486,8 @@ f 119/198/56 105/181/60 132/990/59
 FE3D_PART windmill
 FE3D_DIFFUSE_MAP buildings\windmill.png
 FE3D_NORMAL_MAP buildings\windmill.png
+FE3D_REFLECTION_MAP buildings\windmill.png
+FE3D_LIGHT_MAP buildings\windmill.png
 v 0.865338 0.674124 0.174940
 v 0.928781 0.676489 -0.121025
 v 0.905730 0.676059 0.180445

@@ -1,4 +1,4 @@
-4 0
+10 0
 META script_type_init
 
 /// Globals
@@ -7,3 +7,6 @@ GLOB CONST DEC _maxPickupReach = 5.0
 /// HUD
 fe3d:image_place("crosshair", "crosshair.png", 0.0, 0.0, 0.0, 0.0325, 0.05)
 fe3d:text_place("pickup", "font.ttf", "Press F to pickup", 0.0, -0.2, 0.0, 0.35, 0.05)
+
+/// Graphics
+fe3d:graphics_disable_light_mapping()

@@ -12,10 +12,10 @@ using std::string;
 struct ObjPart 
 {
 	string name;
-	string diffuseMapName;
-	string lightMapName;
-	string normalMapName;
-	string reflectionMapName;
+	string diffuseMapPath;
+	string lightMapPath;
+	string normalMapPath;
+	string reflectionMapPath;
 	
 	vector<Vec3> vertices;
 	vector<Vec2> uvCoords;

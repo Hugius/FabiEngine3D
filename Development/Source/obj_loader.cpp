@@ -53,10 +53,10 @@ vector<ObjPart> OBJLoader::_loadOBJ(const string& filePath, bool calculateTangen
 	vector<Vec2> temp_uvs;
 	vector<Vec3> temp_normals;
 	string selectedPartName = "";
-	string tempDiffuseMapName = "";
-	string tempLightMapName = "";
-	string tempNormalMapName = "";
-	string tempReflectionMapName = "";
+	string tempDiffuseMapPath = "";
+	string tempLightMapPath = "";
+	string tempNormalMapPath = "";
+	string tempReflectionMapPath = "";
 
 	// Get application root directory
 	char buffer[256]; size_t len = sizeof(buffer);
@@ -121,53 +121,54 @@ vector<ObjPart> OBJLoader::_loadOBJ(const string& filePath, bool calculateTangen
 				Logger::throwError("Model part name cannot be '?' of model with filepath \"" + filePath + "\"!");
 			}
 
-			// Reset material names
-			tempDiffuseMapName = "";
-			tempLightMapName = "";
-			tempReflectionMapName = "";
+			// Reset material paths
+			tempDiffuseMapPath = "";
+			tempLightMapPath = "";
+			tempReflectionMapPath = "";
+			tempNormalMapPath = "";
 
 			continue;
 		}
-		else if (strcmp(lineHeader, "FE3D_DIFFUSE_MAP") == 0) // Diffuse material
+		else if (strcmp(lineHeader, "FE3D_DIFFUSE_MAP") == 0) // Diffuse map material
 		{
 			if (selectedPartName != "")
 			{
 				char name[128];
 				fscanf(file, "%s\n", name);
-				tempDiffuseMapName = name;
+				tempDiffuseMapPath = name;
 			}
 
 			continue;
 		}
-		else if (strcmp(lineHeader, "FE3D_LIGHT_MAP") == 0) // Light material
+		else if (strcmp(lineHeader, "FE3D_LIGHT_MAP") == 0) // Light map material
 		{
 			if (selectedPartName != "")
 			{
 				char name[128];
 				fscanf(file, "%s\n", name);
-				tempLightMapName = name;
+				tempLightMapPath = name;
 			}
 
 			continue;
 		}
-		else if (strcmp(lineHeader, "FE3D_NORMAL_MAP") == 0) // Normal material
+		else if (strcmp(lineHeader, "FE3D_REFLECTION_MAP") == 0) // Reflection map material
 		{
 			if (selectedPartName != "")
 			{
 				char name[128];
 				fscanf(file, "%s\n", name);
-				tempNormalMapName = name;
+				tempReflectionMapPath = name;
 			}
 
 			continue;
 		}
-		else if (strcmp(lineHeader, "FE3D_REFLECTION_MAP") == 0) // Light material
+		else if (strcmp(lineHeader, "FE3D_NORMAL_MAP") == 0) // Normal map material
 		{
 			if (selectedPartName != "")
 			{
 				char name[128];
 				fscanf(file, "%s\n", name);
-				tempReflectionMapName = name;
+				tempNormalMapPath = name;
 			}
 
 			continue;
@@ -211,12 +212,7 @@ vector<ObjPart> OBJLoader::_loadOBJ(const string& filePath, bool calculateTangen
 						objPart.normals.push_back(temp_normals[normalIndex[i] - 1]);
 					}
 
-					// Set material names
-					objPart.diffuseMapName = tempDiffuseMapName;
-					objPart.lightMapName = tempLightMapName;
-					objPart.normalMapName = tempNormalMapName;
-					objPart.reflectionMapName = tempReflectionMapName;
-
+					// Part is found
 					break;
 				}
 			}
@@ -234,12 +230,14 @@ vector<ObjPart> OBJLoader::_loadOBJ(const string& filePath, bool calculateTangen
 					newPart.normals.push_back(temp_normals[normalIndex[i] - 1]);
 				}
 
-				// Set OBJ part names
+				// Set OBJ part name
 				newPart.name = selectedPartName;
-				newPart.diffuseMapName = tempDiffuseMapName;
-				newPart.lightMapName = tempLightMapName;
-				newPart.normalMapName = tempNormalMapName;
-				newPart.reflectionMapName = tempReflectionMapName;
+
+				// Set texture map paths
+				newPart.diffuseMapPath = tempDiffuseMapPath;
+				newPart.lightMapPath = tempLightMapPath;
+				newPart.normalMapPath = tempNormalMapPath;
+				newPart.reflectionMapPath = tempReflectionMapPath;
 
 				// Add new OBJ part
 				objParts.push_back(newPart);

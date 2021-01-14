@@ -32,7 +32,7 @@ bool ScriptInterpreter::_executeFe3dLightingFunction(const string& functionName,
 		// Validate arguments
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
-			_fe3d.gfx_enableAmbientLighting(_fe3d.gfx_getAmbientLightingColor(), arguments[3].getDecimal());
+			_fe3d.gfx_enableAmbientLighting(_fe3d.gfx_getAmbientLightingColor(), arguments[0].getDecimal());
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
@@ -322,6 +322,22 @@ bool ScriptInterpreter::_executeFe3dLightingFunction(const string& functionName,
 		{
 			auto result = _fe3d.gfx_getShadowEyePosition();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3));
+		}
+	}
+	else if (functionName == "fe3d:graphics_enable_light_mapping") // Enable lightmapping
+	{
+		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			_fe3d.gfx_enableLightMapping();
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+		}
+	}
+	else if (functionName == "fe3d:graphics_disable_light_mapping") // Disable lightmapping
+	{
+		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			_fe3d.gfx_disableLightMapping();
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
 	else

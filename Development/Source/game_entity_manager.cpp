@@ -92,10 +92,10 @@ void GameEntityManager::generateModel(const string& ID, const string& objName)
 		entity->addPart(part.name);
 
 		// Load an OBJ part diffuse map
-		if (part.diffuseMapName != "")
+		if (part.diffuseMapPath != "")
 		{
-			entity->addDiffuseMap(_texLoader.getTexture("user\\assets\\textures\\diffuse_maps\\" + part.diffuseMapName, true, true, true));
-			entity->addDiffuseMapPath("user\\assets\\textures\\diffuse_maps\\" + part.diffuseMapName);
+			entity->addDiffuseMap(_texLoader.getTexture("user\\assets\\textures\\diffuse_maps\\" + part.diffuseMapPath, true, true, true));
+			entity->addDiffuseMapPath("user\\assets\\textures\\diffuse_maps\\" + part.diffuseMapPath);
 		}
 		else
 		{
@@ -107,11 +107,11 @@ void GameEntityManager::generateModel(const string& ID, const string& objName)
 		}
 
 		// Load an OBJ part light map
-		if (part.lightMapName != "")
+		if (part.lightMapPath != "")
 		{
 			entity->setLightMapped(true);
-			entity->addLightMap(_texLoader.getTexture("user\\assets\\textures\\light_maps\\" + part.lightMapName, true, true, true));
-			entity->addLightMapPath("user\\assets\\textures\\light_maps\\" + part.lightMapName);
+			entity->addLightMap(_texLoader.getTexture("user\\assets\\textures\\light_maps\\" + part.lightMapPath, true, true, true));
+			entity->addLightMapPath("user\\assets\\textures\\light_maps\\" + part.lightMapPath);
 		}
 		else
 		{
@@ -123,10 +123,10 @@ void GameEntityManager::generateModel(const string& ID, const string& objName)
 		}
 
 		// Load an OBJ part normal map
-		if (part.normalMapName != "")
+		if (part.normalMapPath != "")
 		{
-			entity->addNormalMap(_texLoader.getTexture("user\\assets\\textures\\normal_maps\\" + part.normalMapName, true, true, true));
-			entity->addNormalMapPath("user\\assets\\textures\\normal_maps\\" + part.normalMapName);
+			entity->addNormalMap(_texLoader.getTexture("user\\assets\\textures\\normal_maps\\" + part.normalMapPath, true, true, true));
+			entity->addNormalMapPath("user\\assets\\textures\\normal_maps\\" + part.normalMapPath);
 		}
 		else
 		{
@@ -138,11 +138,11 @@ void GameEntityManager::generateModel(const string& ID, const string& objName)
 		}
 
 		// Load an OBJ part reflection map
-		if (part.reflectionMapName != "")
+		if (part.reflectionMapPath != "")
 		{
 			entity->setSkyReflective(true);
-			entity->addReflectionMap(_texLoader.getTexture("user\\assets\\textures\\reflection_maps\\" + part.reflectionMapName, true, true, true));
-			entity->addReflectionMapPath("user\\assets\\textures\\reflection_maps\\" + part.reflectionMapName);
+			entity->addReflectionMap(_texLoader.getTexture("user\\assets\\textures\\reflection_maps\\" + part.reflectionMapPath, true, true, true));
+			entity->addReflectionMapPath("user\\assets\\textures\\reflection_maps\\" + part.reflectionMapPath);
 		}
 		else
 		{

@@ -2,7 +2,8 @@
 
 EntityBus::EntityBus
 (
-	const shared_ptr<SkyEntity> skyEntity,
+	const shared_ptr<SkyEntity> mainSkyEntity,
+	const shared_ptr<SkyEntity> mixSkyEntity,
 	const shared_ptr<TerrainEntity> terrainEntity,
 	const shared_ptr<WaterEntity> waterEntity,
 	const unordered_map<string, shared_ptr<GameEntity>>      & gameEntities,
@@ -12,7 +13,8 @@ EntityBus::EntityBus
 	const unordered_map<string, shared_ptr<GuiEntity>>       & guiEntities,
 	const unordered_map<string, shared_ptr<TextEntity>>      & textEntities
 ) :
-	_skyEntity(skyEntity),
+	_mainSkyEntity(mainSkyEntity),
+	_mixSkyEntity(mixSkyEntity),
 	_terrainEntity(terrainEntity),
 	_waterEntity(waterEntity),
 	_gameEntities(gameEntities),
@@ -23,6 +25,16 @@ EntityBus::EntityBus
 	_textEntities(textEntities)
 {
 	
+}
+
+const shared_ptr<SkyEntity> EntityBus::getMainSkyEntity() const
+{
+	return _mainSkyEntity;
+}
+
+const shared_ptr<SkyEntity> EntityBus::getMixSkyEntity() const
+{
+	return _mixSkyEntity;
 }
 
 const unordered_map<string, shared_ptr<GameEntity>> & EntityBus::getGameEntities() const
@@ -53,11 +65,6 @@ const unordered_map<string, shared_ptr<TextEntity>> & EntityBus::getTextEntities
 const unordered_map<string, shared_ptr<LightEntity>> & EntityBus::getLightEntities() const
 {
 	return _lightEntities;
-}
-
-const shared_ptr<SkyEntity> EntityBus::getSkyEntity() const
-{
-	return _skyEntity;
 }
 
 const shared_ptr<TerrainEntity> EntityBus::getTerrainEntity() const

@@ -1,8 +1,13 @@
 #include "render_bus.hpp"
 
-void RenderBus::setSkyReflectionCubeMap(GLuint value)
+void RenderBus::setMainSkyReflectionCubeMap(GLuint value)
 {
-	_skyReflectionCubeMap = value;
+	_mainSkyReflectionCubeMap = value;
+}
+
+void RenderBus::setMixSkyReflectionCubeMap(GLuint value)
+{
+	_mixSkyReflectionCubeMap = value;
 }
 
 void RenderBus::setSceneReflectionMap(GLuint value)
@@ -130,6 +135,16 @@ void RenderBus::setFlareSourcePosition(Vec3 value)
 	_flareSourcePosition = value;
 }
 
+void RenderBus::setMainSkyColor(Vec3 value)
+{
+	_mainSkyColor = value;
+}
+
+void RenderBus::setMixSkyColor(Vec3 value)
+{
+	_mixSkyColor = value;
+}
+
 void RenderBus::setSceneReflectionHeight(float value)
 {
 	_sceneReflectionHeight = value;
@@ -178,6 +193,21 @@ void RenderBus::setMotionBlurStrength(float value)
 void RenderBus::setMotionBlurMixValue(float value)
 {
 	_motionBlurMixValue = value;
+}
+
+void RenderBus::setMainSkyLightness(float value)
+{
+	_mainSkyLightness = value;
+}
+
+void RenderBus::setMixSkyLightness(float value)
+{
+	_mixSkyLightness = value;
+}
+
+void RenderBus::setSkyMixValue(float value)
+{
+	_skyMixValue = value;
 }
 
 void RenderBus::setMaxSpotLightAngle(float value)
@@ -433,9 +463,14 @@ void RenderBus::setLensFlareMapPath(const string& value)
 	_lensFlareMapPath = value;
 }
 
-const GLuint RenderBus::getSkyReflectionCubeMap() const
+const GLuint RenderBus::getMainSkyReflectionCubeMap() const
 {
-	return _skyReflectionCubeMap;
+	return _mainSkyReflectionCubeMap;
+}
+
+const GLuint RenderBus::getMixSkyReflectionCubeMap() const
+{
+	return _mixSkyReflectionCubeMap;
 }
 
 const GLuint RenderBus::getSceneReflectionMap() const
@@ -558,6 +593,16 @@ const Vec3 RenderBus::getFlareSourcePosition() const
 	return _flareSourcePosition;
 }
 
+const Vec3 RenderBus::getMainSkyColor() const
+{
+	return _mainSkyColor;
+}
+
+const Vec3 RenderBus::getMixSkyColor() const
+{
+	return _mixSkyColor;
+}
+
 const Vec3 RenderBus::getDirectionalLightColor() const
 {
 	return _directionalLightColor;
@@ -611,6 +656,21 @@ const float RenderBus::getMotionBlurStrength() const
 const float RenderBus::getMotionBlurMixValue() const
 {
 	return _motionBlurMixValue;
+}
+
+const float RenderBus::getSkyMixValue() const
+{
+	return _skyMixValue;
+}
+
+const float RenderBus::getMainSkyLightness() const
+{
+	return _mainSkyLightness;
+}
+
+const float RenderBus::getMixSkyLightness() const
+{
+	return _mixSkyLightness;
 }
 
 const float RenderBus::getAmbientLightIntensity() const

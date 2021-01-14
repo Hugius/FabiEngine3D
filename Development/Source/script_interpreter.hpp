@@ -15,7 +15,7 @@ class ScriptInterpreter
 {
 public:
 	ScriptInterpreter(FabiEngine3D& fe3d, Script& script, SceneEditor& sceneEditor, ModelEditor& modelEditor, 
-		AnimationEditor& animationEditor, BillboardEditor& billboardEditor, AudioEditor& audioEditor);
+		AnimationEditor& animationEditor, BillboardEditor& billboardEditor, AudioEditor& audioEditor, EnvironmentEditor& environmentEditor);
 
 	void load();
 	void executeInitialization();
@@ -84,7 +84,7 @@ private:
 	bool _executeFe3dLightingFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	bool _executeFe3dMusicFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	bool _executeFe3dMiscFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
-	bool _validateFe3dSkyEntity(const string& ID);
+	bool _validateFe3dSkyEntity();
 	bool _validateFe3dWaterEntity();
 	bool _validateFe3dGameEntity(const string& ID, bool previewEntity = false);
 	bool _validateFe3dBillboardEntity(const string& ID, bool previewEntity = false);
@@ -111,6 +111,7 @@ private:
 	AnimationEditor& _animationEditor;
 	BillboardEditor& _billboardEditor;
 	AudioEditor& _audioEditor;
+	EnvironmentEditor& _environmentEditor;
 
 	// Stacks
 	vector<vector<ScriptVariable>> _localVariablesStack;

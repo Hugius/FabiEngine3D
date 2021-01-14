@@ -471,7 +471,7 @@ void SceneEditor::clearScene()
 		// Delete music
 		_fe3d.music_clearPlaylist();
 	}
-	else // Playing game
+	else // Executing script
 	{
 		// Delete all sky entities except the engine background
 		for (auto& ID : _fe3d.skyEntity_getAllIDs())
@@ -481,6 +481,8 @@ void SceneEditor::clearScene()
 				_fe3d.skyEntity_delete(ID);
 			}
 		}
+		_fe3d.skyEntity_mixWithSelected("");
+		_fe3d.skyEntity_setMixValue(0.0f);
 
 		// Delete all other entities
 		_fe3d.terrainEntity_deleteAll();

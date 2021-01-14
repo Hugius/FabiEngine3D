@@ -118,6 +118,10 @@ vec4 getMainColor()
 	vec3 reflectionColor = texture(u_sampler_reflectionMap, vec2(texCoords.x,  texCoords.y)).rgb; // Reflection color
 	vec3 refractionColor = texture(u_sampler_refractionMap, vec2(texCoords.x, -texCoords.y)).rgb; // Refraction color
 
+	// Bloom correction
+	reflectionColor *= 1.5f;
+	refractionColor *= 1.5f;
+
 	// Determine which textures to mix
 	if(u_isReflective && u_isRefractive && !u_isUnderWater) // Both
 	{

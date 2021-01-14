@@ -19,7 +19,8 @@ class EntityBus final
 public:
 	EntityBus
 	(
-		const shared_ptr<SkyEntity> skyEntity,
+		const shared_ptr<SkyEntity> mainSkyEntity,
+		const shared_ptr<SkyEntity> mixSkyEntity,
 		const shared_ptr<TerrainEntity> terrainEntity,
 		const shared_ptr<WaterEntity> waterEntity,
 		const unordered_map<string, shared_ptr<GameEntity>>      & gameEntities,
@@ -30,7 +31,8 @@ public:
 		const unordered_map<string, shared_ptr<TextEntity>>      & textEntities
 	);
 
-	const shared_ptr<SkyEntity> getSkyEntity()		   const;
+	const shared_ptr<SkyEntity> getMainSkyEntity()	   const;
+	const shared_ptr<SkyEntity> getMixSkyEntity()	   const;
 	const shared_ptr<TerrainEntity> getTerrainEntity() const;
 	const shared_ptr<WaterEntity> getWaterEntity()     const;
 
@@ -42,7 +44,8 @@ public:
 	const unordered_map<string, shared_ptr<TextEntity>>      & getTextEntities()      const;
 
 private:
-	const shared_ptr<SkyEntity> _skyEntity		   = nullptr;
+	const shared_ptr<SkyEntity> _mainSkyEntity     = nullptr;
+	const shared_ptr<SkyEntity> _mixSkyEntity	   = nullptr;
 	const shared_ptr<TerrainEntity> _terrainEntity = nullptr;
 	const shared_ptr<WaterEntity> _waterEntity     = nullptr;
 	

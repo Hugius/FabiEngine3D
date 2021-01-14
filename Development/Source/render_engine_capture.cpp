@@ -70,8 +70,12 @@ void RenderEngine::_captureSceneReflections(CameraManager& camera)
 
 		// Sky HDR must not appear in reflections
 		float oldLightness = 0.0f;
-		if (_entityBus->getSkyEntity() != nullptr) { oldLightness = _entityBus->getSkyEntity()->getLightness(); }
-		if (_entityBus->getSkyEntity() != nullptr) { _entityBus->getSkyEntity()->setLightness(_entityBus->getSkyEntity()->getOriginalLightness()); }
+		auto skyEntity = _entityBus->getMainSkyEntity();
+		if (skyEntity != nullptr)
+		{
+			oldLightness = skyEntity->getLightness();
+			skyEntity->setLightness(skyEntity->getOriginalLightness());
+		}
 
 		// Render sky
 		_renderSkyEntity();
@@ -91,7 +95,10 @@ void RenderEngine::_captureSceneReflections(CameraManager& camera)
 		// Revert reflection exceptions
 		_renderBus.setShadowsEnabled(shadowsEnabled);
 		_renderBus.setNormalMappingEnabled(normalMappingEnabled);
-		if (_entityBus->getSkyEntity() != nullptr) { _entityBus->getSkyEntity()->setLightness(oldLightness); }
+		if (skyEntity != nullptr)
+		{ 
+			skyEntity->setLightness(oldLightness);
+		}
 
 		// Revert camera angle
 		cameraPos = camera.getPosition();

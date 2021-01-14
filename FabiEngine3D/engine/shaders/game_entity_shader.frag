@@ -19,7 +19,8 @@ layout(location = 2) uniform sampler2D   u_sampler_normalMap;
 layout(location = 3) uniform sampler2D   u_sampler_reflectionMap;
 layout(location = 4) uniform sampler2D   u_sampler_sceneReflectionMap;
 layout(location = 5) uniform sampler2D   u_sampler_shadowMap;
-layout(location = 6) uniform samplerCube u_sampler_skyMap;
+layout(location = 6) uniform samplerCube u_sampler_mainSkyMap;
+layout(location = 7) uniform samplerCube u_sampler_mixSkyMap;
 
 // Matrix44 uniforms
 uniform mat4 u_skyRotationMatrix;
@@ -36,6 +37,8 @@ uniform vec3 u_spotLightColor;
 uniform vec3 u_color;
 uniform vec3 u_fogColor;
 uniform vec3 u_shadowAreaCenter;
+uniform vec3 u_mainSkyColor;
+uniform vec3 u_mixSkyColor;
 
 // Float uniforms
 uniform float u_pointLightIntensities[MAX_POINT_LIGHT_COUNT];
@@ -55,6 +58,10 @@ uniform float u_fogDefaultFactor;
 uniform float u_maxSpotlightAngle;
 uniform float u_spotLightIntensity;
 uniform float u_maxSpotLightDistance;
+uniform float u_skyMixValue;
+uniform float u_mainSkyLightness;
+uniform float u_mixSkyLightness;
+
 
 // Boolean uniforms
 uniform bool u_isTransparent;
@@ -418,10 +425,14 @@ vec3 applySkyReflections(vec3 color, vec3 normal)
 		// Check if current texel allows for reflection
 		if(!u_hasReflectionMap || reflectionMapColor.rgb != vec3(0.0f))
 		{
+			float mixValue    = clamp(u_skyMixValue, 0.0, 1.0f);
+			float lightness   = mix(u_mainSkyLightness, u_mixSkyLightness, mixValue);
 			vec3 viewDir      = normalize(f_pos - u_cameraPosition);
 			vec3 reflectDir   = reflect(viewDir, normal);
-			vec4 reflectColor = vec4(texture(u_sampler_skyMap, vec3(u_skyRotationMatrix * vec4(reflectDir, 1.0f))).rgb, 1.0f);
-			vec3 mixedColor   = mix(color.rgb, reflectColor.rgb, u_skyReflectionFactor);
+			vec3 mainSkyColor = texture(u_sampler_mainSkyMap, vec3(u_skyRotationMatrix * vec4(reflectDir, 1.0f))).rgb * u_mainSkyColor;
+			vec3 mixSkyColor  = texture(u_sampler_mixSkyMap, vec3(u_skyRotationMatrix * vec4(reflectDir, 1.0f))).rgb * u_mixSkyColor;
+			vec3 reflectColor = mix(mainSkyColor, mixSkyColor, mixValue) * lightness;
+			vec3 mixedColor   = mix(color, reflectColor, u_skyReflectionFactor);
 
 			return mixedColor.rgb;
 		}

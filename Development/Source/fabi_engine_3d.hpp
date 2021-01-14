@@ -103,6 +103,8 @@ public:
 	void skyEntity_setLightness(const string& ID, float lightness);
 	void skyEntity_setRotationSpeed(const string& ID, float speed, bool allDirections = false);
 	void skyEntity_setColor(const string& ID, Vec3 color);
+	void skyEntity_mixWithSelected(const string& ID);
+	void skyEntity_setMixValue(float mixValue);
 
 	// Sky entity interface - getters
 	bool skyEntity_isExisting(const string& ID);
@@ -113,6 +115,7 @@ public:
 	float skyEntity_getLightness(const string& ID);
 	float skyEntity_getOriginalLightness(const string& ID);
 	float skyEntity_getRotationSpeed(const string& ID);
+	float skyEntity_getMixValue();
 	Vec3 skyEntity_getColor(const string& ID);
 
 	// Terrain entity interface - setters

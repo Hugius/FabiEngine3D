@@ -14,7 +14,8 @@ public:
 	
 	// Textures
 	void setSceneMap(GLuint value);
-	void setSkyReflectionCubeMap(GLuint value);
+	void setMainSkyReflectionCubeMap(GLuint value);
+	void setMixSkyReflectionCubeMap(GLuint value);
 	void setSceneReflectionMap(GLuint value);
 	void setSceneRefractionMap(GLuint value);
 	void setShadowMap(GLuint value);
@@ -45,6 +46,8 @@ public:
 	void setShadowAreaCenter(Vec3 value);
 	void setFogColor(Vec3 value);
 	void setFlareSourcePosition(Vec3 value);
+	void setMainSkyColor(Vec3 value);
+	void setMixSkyColor(Vec3 value);
 
 	// Floats
 	void setAmbientLightIntensity(float value);
@@ -74,6 +77,9 @@ public:
 	void setLensFlareMultiplier(float value);
 	void setMotionBlurStrength(float value);
 	void setMotionBlurMixValue(float value);
+	void setSkyMixValue(float value);
+	void setMainSkyLightness(float value);
+	void setMixSkyLightness(float value);
 
 	// Integers
 	void setBloomBlurSize(int value);
@@ -115,17 +121,18 @@ public:
 	void setLensFlareMapPath(const string& value);
 
 	// Textures
-	const GLuint getSceneMap()              const;
-	const GLuint getSkyReflectionCubeMap()  const;
-	const GLuint getSceneReflectionMap()    const;
-	const GLuint getSceneRefractionMap()    const;
-	const GLuint getShadowMap()             const;
-	const GLuint getBloomMap()				const;
-	const GLuint getPostProcessedSceneMap() const;
-	const GLuint getSceneDepthMap()         const;
-	const GLuint getBlurMap()               const;
-	const GLuint getMotionBlurMap()         const;
-	const GLuint getLensFlareMap()			const;
+	const GLuint getSceneMap()                 const;
+	const GLuint getMainSkyReflectionCubeMap() const;
+	const GLuint getMixSkyReflectionCubeMap()  const;
+	const GLuint getSceneReflectionMap()	   const;
+	const GLuint getSceneRefractionMap()	   const;
+	const GLuint getShadowMap()				   const;
+	const GLuint getBloomMap()				   const;
+	const GLuint getPostProcessedSceneMap()	   const;
+	const GLuint getSceneDepthMap()			   const;
+	const GLuint getBlurMap()				   const;
+	const GLuint getMotionBlurMap()			   const;
+	const GLuint getLensFlareMap()			   const;
 	
 	// Matrices
 	const Matrix44& getViewMatrix()        const;
@@ -147,6 +154,8 @@ public:
 	const Vec3 getShadowAreaCenter()		 const;
 	const Vec3 getFogColor()				 const;
 	const Vec3 getFlareSourcePosition()		 const;
+	const Vec3 getMainSkyColor()			 const;
+	const Vec3 getMixSkyColor()				 const;
 
 	// Floats
 	const float getAmbientLightIntensity()	   const;
@@ -176,6 +185,9 @@ public:
 	const float getLensFlareMultiplier()	   const;
 	const float getMotionBlurStrength()		   const;
 	const float getMotionBlurMixValue()		   const;
+	const float getSkyMixValue()			   const;
+	const float getMainSkyLightness()		   const;
+	const float getMixSkyLightness()		   const;
 
 	// Integers
 	const int getBloomBlurSize()		  const;
@@ -217,17 +229,18 @@ public:
 
 private:
 	// Textures
-	GLuint _sceneMap              = 0;
-	GLuint _skyReflectionCubeMap  = 0;
-	GLuint _sceneReflectionMap    = 0;
-	GLuint _sceneRefractionMap    = 0;
-	GLuint _shadowMap             = 0;
-	GLuint _bloomMap              = 0;
-	GLuint _postProcessedSceneMap = 0;
-	GLuint _sceneDepthMap         = 0;
-	GLuint _blurMap               = 0;
-	GLuint _motionBlurMap         = 0;
-	GLuint _lensFlareMap		  = 0;
+	GLuint _sceneMap                 = 0;
+	GLuint _mainSkyReflectionCubeMap = 0;
+	GLuint _mixSkyReflectionCubeMap  = 0;
+	GLuint _sceneReflectionMap       = 0;
+	GLuint _sceneRefractionMap       = 0;
+	GLuint _shadowMap                = 0;
+	GLuint _bloomMap                 = 0;
+	GLuint _postProcessedSceneMap    = 0;
+	GLuint _sceneDepthMap            = 0;
+	GLuint _blurMap                  = 0;
+	GLuint _motionBlurMap            = 0;
+	GLuint _lensFlareMap		     = 0;
 	
 	// Matrices
 	Matrix44 _viewMatrix        = Matrix44(1.0f);
@@ -249,6 +262,8 @@ private:
 	Vec3 _shadowAreaCenter		   = Vec3(0.0f);
 	Vec3 _fogColor				   = Vec3(1.0f);
 	Vec3 _flareSourcePosition	   = Vec3(0.0f);
+	Vec3 _mainSkyColor			   = Vec3(0.0f);
+	Vec3 _mixSkyColor			   = Vec3(0.0f);
 
 	// Floats
 	float _ambientLightIntensity     = 0.0f;
@@ -278,6 +293,9 @@ private:
 	float _lensFlareMultiplier		 = 0.0f;
 	float _motionBlurStrength		 = 0.0f;
 	float _motionBlurMixValue		 = 0.0f;
+	float _skyMixValue				 = 0.0f;
+	float _mainSkyLightness			 = 0.0f;
+	float _mixSkyLightness			 = 0.0f;
 	
 	// Integers
 	int _bloomBlurSize			= 0;

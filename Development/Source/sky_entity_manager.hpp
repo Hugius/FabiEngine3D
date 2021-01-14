@@ -9,11 +9,13 @@ public:
 	~SkyEntityManager() = default;
 
 	shared_ptr<SkyEntity> getEntity(const string& ID);
-	shared_ptr<SkyEntity> getSelectedSky();
+	shared_ptr<SkyEntity> getSelectedMainSky();
+	shared_ptr<SkyEntity> getSelectedMixSky();
 
 	const unordered_map<string, shared_ptr<SkyEntity>>& getEntities();
 
-	void selectSky(const string& ID);
+	void selectMainSky(const string& ID);
+	void selectMixSky(const string& ID);
 	void addSkyEntity(const string& ID);
 	void update() override;
 	void setBrightnessFactor(float brightnessFactor);
@@ -26,5 +28,6 @@ private:
 
 	float _hdrBrightnessFactor = 0.0f;
 
-	string _selectedID = "";
+	string _selectedMainID = "";
+	string _selectedMixID = "";
 };

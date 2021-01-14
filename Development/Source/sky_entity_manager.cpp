@@ -20,15 +20,27 @@ shared_ptr<SkyEntity> SkyEntityManager::getEntity(const string& ID)
 	return result;
 }
 
-shared_ptr<SkyEntity> SkyEntityManager::getSelectedSky()
+shared_ptr<SkyEntity> SkyEntityManager::getSelectedMainSky()
 {
-	if (_getSkyEntities().empty() || _selectedID == "")
+	if (_getSkyEntities().empty() || _selectedMainID == "")
 	{
 		return nullptr;
 	}
 	else
 	{
-		return getEntity(_selectedID);
+		return getEntity(_selectedMainID);
+	}
+}
+
+shared_ptr<SkyEntity> SkyEntityManager::getSelectedMixSky()
+{
+	if (_getSkyEntities().empty() || _selectedMixID == "")
+	{
+		return nullptr;
+	}
+	else
+	{
+		return getEntity(_selectedMixID);
 	}
 }
 
@@ -37,9 +49,14 @@ const unordered_map<string, shared_ptr<SkyEntity>>& SkyEntityManager::getEntitie
 	return _getSkyEntities();
 }
 
-void SkyEntityManager::selectSky(const string& ID)
+void SkyEntityManager::selectMainSky(const string& ID)
 {
-	_selectedID = ID;
+	_selectedMainID = ID;
+}
+
+void SkyEntityManager::selectMixSky(const string& ID)
+{
+	_selectedMixID = ID;
 }
 
 void SkyEntityManager::addSkyEntity(const string& ID)
@@ -99,16 +116,28 @@ void SkyEntityManager::addSkyEntity(const string& ID)
 
 void SkyEntityManager::update()
 {
-	// Check if any sky exists and if one selected
-	if (getSelectedSky() != nullptr)
+	// Check if main sky exists
+	auto mainSky = getSelectedMainSky();
+	if (mainSky != nullptr)
 	{
 		// Renderbus updates
-		_renderBus.setSkyRotationMatrix(getSelectedSky()->getRotationMatrix());
-		_renderBus.setSkyReflectionCubeMap(getSelectedSky()->getCubeMap());
+		_renderBus.setSkyRotationMatrix(mainSky->getRotationMatrix());
+		_renderBus.setMainSkyReflectionCubeMap(mainSky->getCubeMap());
+		_renderBus.setMainSkyColor(mainSky->getColor());
+		_renderBus.setMainSkyLightness(mainSky->getLightness());
 
 		// Core updates
 		_updateRotation();
 		_updateEyeAdaption();
+
+		// Check if mix sky exists
+		auto mixSky = getSelectedMixSky();
+		if (getSelectedMixSky() != nullptr)
+		{
+			_renderBus.setMixSkyReflectionCubeMap(getSelectedMixSky()->getCubeMap());
+			_renderBus.setMixSkyColor(mixSky->getColor());
+			_renderBus.setMixSkyLightness(mixSky->getLightness());
+		}
 	}
 }
 
@@ -130,23 +159,23 @@ void SkyEntityManager::_updateEyeAdaption()
 	{
 		// Values
 		const float speed = 0.0005f; // Lightness changing speed
-		float lightness = getSelectedSky()->getLightness(); // Current lightness
+		float lightness = getSelectedMainSky()->getLightness(); // Current lightness
 		float pitch = std::min(_renderBus.getCameraPitch() + 30.0f, 90.0f); // Full conversion at 60 degrees pitch
-		float targetLightness = getSelectedSky()->getOriginalLightness() + (((90.0f - pitch) / 90.0f) * _hdrBrightnessFactor);
+		float targetLightness = getSelectedMainSky()->getOriginalLightness() + (((90.0f - pitch) / 90.0f) * _hdrBrightnessFactor);
 
 		// Based on verticle angle
 		if (lightness > targetLightness) // Decrease lightness
 		{
-			getSelectedSky()->setLightness(lightness - (speed * 3.5f));
+			getSelectedMainSky()->setLightness(lightness - (speed * 3.5f));
 		}
-		else if (getSelectedSky()->getLightness() < targetLightness) // Increase lightness
+		else if (getSelectedMainSky()->getLightness() < targetLightness) // Increase lightness
 		{
-			getSelectedSky()->setLightness(lightness + speed);
+			getSelectedMainSky()->setLightness(lightness + speed);
 		}
 	}
 	else // HDR not enabled
 	{
-		getSelectedSky()->setLightness(getSelectedSky()->getOriginalLightness()); // Revert lightness
+		getSelectedMainSky()->setLightness(getSelectedMainSky()->getOriginalLightness()); // Revert lightness
 	}
 }
 

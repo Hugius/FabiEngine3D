@@ -260,9 +260,9 @@ void CoreEngine::_renderApplication()
 	// Create bus with all entities
 	EntityBus entityBus
 	(
-		_skyEntityManager.getSelectedSky(), _terrainEntityManager.getSelectedTerrain(), _waterEntityManager.getSelectedWater(),
-		_gameEntityManager.getEntities(), _billboardEntityManager.getEntities(), _aabbEntityManager.getEntities(),
-		_lightEntityManager.getEntities(), _guiEntityManager.getEntities(), _textEntityManager.getEntities()
+		_skyEntityManager.getSelectedMainSky(), _skyEntityManager.getSelectedMixSky(), _terrainEntityManager.getSelectedTerrain(),
+		_waterEntityManager.getSelectedWater(), _gameEntityManager.getEntities(), _billboardEntityManager.getEntities(), 
+		_aabbEntityManager.getEntities(), _lightEntityManager.getEntities(), _guiEntityManager.getEntities(), _textEntityManager.getEntities()
 	);
 
 	// Render entities

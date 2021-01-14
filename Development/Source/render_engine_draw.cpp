@@ -7,13 +7,13 @@ using std::make_shared;
 
 void RenderEngine::_renderSkyEntity()
 {
-	if (_entityBus->getSkyEntity() != nullptr)
+	if (_entityBus->getMainSkyEntity() != nullptr)
 	{
 		// Bind
 		_skyEntityRenderer.bind();
 
 		// Render SKY entity
-		_skyEntityRenderer.render(_entityBus->getSkyEntity());
+		_skyEntityRenderer.render(_entityBus->getMainSkyEntity(), _entityBus->getMixSkyEntity());
 
 		// Unbind
 		_skyEntityRenderer.unbind();

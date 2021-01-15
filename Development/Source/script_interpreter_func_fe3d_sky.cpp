@@ -60,7 +60,7 @@ bool ScriptInterpreter::_executeFe3dSkyEntityFunction(const string& functionName
 	}
 	else if (functionName == "fe3d:sky_set_rotation_speed") // Set skyEntity rotation spped
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL };
+		auto types = { ScriptValueType::DECIMAL };
 
 		// Validate arguments
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
@@ -68,22 +68,20 @@ bool ScriptInterpreter::_executeFe3dSkyEntityFunction(const string& functionName
 			// Validate sky existence
 			if (_validateFe3dSkyEntity())
 			{
-				_fe3d.skyEntity_setRotationSpeed(arguments[0].getString(), arguments[1].getDecimal());
+				_fe3d.skyEntity_setRotationSpeed(_fe3d.skyEntity_getSelectedID(), arguments[0].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}
 	}
 	else if (functionName == "fe3d:sky_get_rotation_speed") // Get skyEntity rotation spped
 	{
-		auto types = { ScriptValueType::STRING };
-
 		// Validate arguments
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			// Validate sky existence
 			if (_validateFe3dSkyEntity())
 			{
-				auto result = _fe3d.skyEntity_getRotationSpeed(arguments[0].getString());
+				auto result = _fe3d.skyEntity_getRotationSpeed(_fe3d.skyEntity_getSelectedID());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
 			}
 		}

@@ -60,6 +60,13 @@ bool ScriptInterpreter::_checkConditionString(string conditionString)
 		index++;
 	}
 	
+	// Check if there at least 3 elements
+	if (elements.size() < 3)
+	{
+		_throwScriptError("not enough elements in condition!");
+		return false;
+	}
+
 	// Values needed for final boolean return
 	vector<bool> conditions;
 	vector<string> logicalOperators;

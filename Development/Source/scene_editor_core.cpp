@@ -388,6 +388,7 @@ void SceneEditor::load()
 	_fe3d.billboardEntity_add("@@lightSource", "engine\\textures\\light_source.png", _fe3d.gfx_getDirectionalLightingPosition(),
 		Vec3(0.0f), Vec2(0.0f), true, true, true, true);
 	_fe3d.billboardEntity_setDepthMapIncluded("@@lightSource", false);
+	_fe3d.billboardEntity_setLightness("@@lightSource", 1000.0f);
 
 	// Preview pointlight loading
 	_fe3d.lightEntity_add(_previewPointlightID);

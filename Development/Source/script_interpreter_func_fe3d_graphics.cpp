@@ -52,10 +52,12 @@ bool ScriptInterpreter::_executeFe3dLightingFunction(const string& functionName,
 		// Validate arguments
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
+			auto position = Vec3(arguments[0].getDecimal(), arguments[1].getDecimal(), arguments[2].getDecimal());
 			_fe3d.gfx_enableDirectionalLighting(
-				Vec3(arguments[0].getDecimal(), arguments[1].getDecimal(), arguments[2].getDecimal()),
+				position,
 				_fe3d.gfx_getDirectionalLightingColor(),
 				_fe3d.gfx_getDirectionalLightingIntensity());
+			_fe3d.billboardEntity_setPosition("@@lightSource", position);
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}

@@ -1,4 +1,4 @@
-3 24
+12 14
 META script_type_init
 META execution_entry
 
@@ -11,4 +11,5 @@ EXEC player_init
 EXEC collecting_init
 EXEC npc_init
 EXEC crafting_init
+EXEC time_init
 EXEC misc_init

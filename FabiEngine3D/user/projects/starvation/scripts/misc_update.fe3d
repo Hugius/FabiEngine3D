@@ -1,4 +1,4 @@
-51 0
+47 32
 META script_type_update
 
 /// Compose pickuppable items
@@ -47,7 +47,3 @@ IF pickaxe IS <true> OR axe IS <true>:
             fe3d:model_set_aabb_responsive(itemName, <false>)
         EDIT _inventory[index] = itemName
         EDIT _equipIndex = index
-
-/// Update sky
-fe3d:sky_set_mix_value(_skyMixValue)
-INCR _skyMixValue 0.001

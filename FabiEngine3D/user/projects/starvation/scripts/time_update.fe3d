@@ -1,0 +1,54 @@
+12 30
+META script_type_update
+
+/// Update time passing
+IF _passedTime MORE 100.0:
+    EDIT _passedTime = 0.0
+    EDIT _isTimeCycling = <true>
+    IF _isDayTime IS <true>:
+        EDIT _isDayTime = <false>
+    ELSE:
+        EDIT _isDayTime = <true>
+ELSE:
+    IF _isTimeCycling IS <false>:
+        INCR _passedTime 0.025
+
+/// Update day-night cycle
+IF _isTimeCycling IS <true>:
+    IF _isDayTime IS <true>:
+        INCR _ambLightIntensity 0.00025
+        INCR _dirLightIntensity 0.0005
+        DECR _skyMixValue 0.0005
+        IF _skyMixValue LESS 0.5:
+            INCR _dirLightPos.y 0.5
+        ELSE:
+            DECR _dirLightPos.y 0.5
+    ELSE:
+        DECR _ambLightIntensity 0.00025
+        DECR _dirLightIntensity 0.0005
+        INCR _skyMixValue 0.0005
+        IF _skyMixValue MORE 0.5:
+            INCR _dirLightPos.y 0.5
+        ELSE:
+            DECR _dirLightPos.y 0.5
+    IF _skyMixValue LESS 0.0 OR _skyMixValue MORE 1.0:
+        EDIT _isTimeCycling = <false>
+        IF _isDayTime IS <true>:
+            fe3d:graphics_disable_light_mapping()
+        ELSE:
+            fe3d:graphics_enable_light_mapping()
+
+/// Apply values
+DEC fogIntensity = 0.5
+DEC fogDecreaser = 0.4
+MUL fogDecreaser _skyMixValue
+DECR fogIntensity fogDecreaser
+DEC blueIntensity = 1.0
+DECR blueIntensity _skyMixValue
+VEC3 dirPos = _dirLightPos
+fe3d:sky_set_mix_value(_skyMixValue)
+fe3d:graphics_set_ambient_light_intensity(_ambLightIntensity)
+fe3d:graphics_set_directional_light_intensity(_dirLightIntensity)
+fe3d:graphics_set_directional_light_position(dirPos.x, dirPos.y, dirPos.z)
+fe3d:graphics_set_fog_color(fogIntensity, fogIntensity, fogIntensity)
+fe3d:water_set_color(0.0, 0.0, blueIntensity)

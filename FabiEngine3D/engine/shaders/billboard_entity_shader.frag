@@ -53,6 +53,7 @@ void main()
 		o_finalColor = vec4(u_color, texColor.a);
 	}
 
+	// Finalize color
 	o_finalColor.rgb = applyFog(o_finalColor.rgb);
     o_finalColor.rgb *= u_lightness;
 }

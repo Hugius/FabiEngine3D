@@ -350,6 +350,7 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 				string billboardID, diffusePath, fontPath, textContent;
 				Vec3 position, rotation, color;
 				Vec2 size;
+				float lightness;
 				bool facingX, facingY, isTransparent, isAnimated;
 				int animationRows, animationColumns, animationFramestep;
 
@@ -376,7 +377,8 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 					isAnimated >>
 					animationRows >>
 					animationColumns >>
-					animationFramestep;
+					animationFramestep >>
+					lightness;
 
 				// Perform empty string & space conversions
 				diffusePath = (diffusePath == "?") ? "" : diffusePath;
@@ -393,7 +395,7 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 
 				// Add the billboard
 				_placeBillboard(!_isEditorLoaded, billboardName, billboardNumber, diffusePath, fontPath, textContent, position, rotation, size, color, facingX, facingY, isTransparent, isAnimated,
-					animationRows, animationColumns, animationFramestep);
+					animationRows, animationColumns, animationFramestep, lightness);
 			}
 			else if (entityType == "AMBIENT_LIGHT")
 			{

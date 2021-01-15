@@ -504,12 +504,19 @@ void SceneEditor::placeBillboard(const string& newID, const string& previewID, V
 
 	// Miscellaneous
 	_fe3d.billboardEntity_setTransparent(newID, _fe3d.billboardEntity_isTransparent(previewID));
+	_fe3d.billboardEntity_setLightness(newID, _fe3d.billboardEntity_getLightness(previewID));
+
+	// Save original lightness
+	if (_isEditorLoaded)
+	{
+		_initialBillboardLightness[newID] = _fe3d.billboardEntity_getLightness(previewID);
+	}
 }
 
 void SceneEditor::_placeBillboard(bool scriptExecution, const string& billboardName, const string& billboardNumber,
 	const string& diffusePath, const string& fontPath, const string& textContent,
 	Vec3 position, Vec3 rotation, Vec2 size, Vec3 color, bool facingX, bool facingY, bool isTransparent,
-	bool isAnimated, int animationRows, int animationColumns, int animationFramestep)
+	bool isAnimated, int animationRows, int animationColumns, int animationFramestep, float lightness)
 {
 	// Compose new model ID
 	string newID = scriptExecution ? (billboardName + "@" + billboardNumber) : (billboardNumber + "@" + billboardName);
@@ -545,5 +552,14 @@ void SceneEditor::_placeBillboard(bool scriptExecution, const string& billboardN
 	else // 123@billboardname
 	{
 		_fe3d.aabbEntity_bindToBillboardEntity(newID, true, billboardNumber + "@" + billboardName);
+	}
+
+	// Miscellaneous
+	_fe3d.billboardEntity_setLightness(newID, lightness);
+
+	// Save original lightness
+	if (_isEditorLoaded)
+	{
+		_initialBillboardLightness[newID] = lightness;
 	}
 }

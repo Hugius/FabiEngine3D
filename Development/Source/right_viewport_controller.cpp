@@ -92,7 +92,7 @@ void RightViewportController::initialize()
 	sceneEditorScreen->addTextfield("h", Vec2(-0.5f, 0.075f), Vec2(CW("Debug render"), textHeight), "Debug render", black, false);
 	sceneEditorScreen->addTextfield("f", Vec2(-0.5f, -0.125f), Vec2(CW("Wireframe"), textHeight), "Wireframe", black, false);
 	sceneEditorScreen->addTextfield("b", Vec2(-0.5f, -0.325f), Vec2(CW("Toggle AABB"), textHeight), "Toggle AABB", black, false);
-	sceneEditorScreen->addTextfield("wasd", Vec2(-0.725f, -0.67f), Vec2(CW("XZ movement"), textHeight), "XZ movement", black, false);
+	sceneEditorScreen->addTextfield("wasd", Vec2(-0.7f, -0.67f), Vec2(CW("XZ movement"), textHeight), "XZ movement", black, false);
 	sceneEditorScreen->addTextfield("space", Vec2(-0.5f, -0.8f), Vec2(CW("Move up"), textHeight), "Move up", black, false);
 	sceneEditorScreen->addTextfield("shift", Vec2(-0.5f, -0.975f), Vec2(CW("Move down"), textHeight), "Move down", black, false);
 	sceneEditorScreen->addRectangle("mouse", Vec2(-1.1f, 0.65f), Vec2(0.6f, 0.15f), "mouse.png", false);

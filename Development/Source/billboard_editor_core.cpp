@@ -39,10 +39,11 @@ void BillboardEditor::initializeGUI()
 
 	// Left-viewport: mainWindow - billboardEditorMenuAppearance
 	leftWindow->addScreen("billboardEditorMenuAppearance");
-	leftWindow->getScreen("billboardEditorMenuAppearance")->addButton("color", Vec2(0.0f, 0.63f), Vec2(GW("Color"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Color", LVPC::textColor, LVPC::textHoverColor);
-	leftWindow->getScreen("billboardEditorMenuAppearance")->addButton("texture", Vec2(0.0f, 0.21f), Vec2(GW("Texture"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Texture", LVPC::textColor, LVPC::textHoverColor);
-	leftWindow->getScreen("billboardEditorMenuAppearance")->addButton("isTransparent", Vec2(0.0f, -0.21f), Vec2(GW("Alpha: OFF"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Alpha: OFF", LVPC::textColor, LVPC::textHoverColor);
-	leftWindow->getScreen("billboardEditorMenuAppearance")->addButton("back", Vec2(0.0f, -0.63f), Vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen("billboardEditorMenuAppearance")->addButton("lightness", Vec2(0.0f, 0.7f), Vec2(GW("Lightness"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Lightness", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen("billboardEditorMenuAppearance")->addButton("color", Vec2(0.0f, 0.35f), Vec2(GW("Color"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Color", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen("billboardEditorMenuAppearance")->addButton("texture", Vec2(0.0f, 0.0f), Vec2(GW("Texture"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Texture", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen("billboardEditorMenuAppearance")->addButton("isTransparent", Vec2(0.0f, -0.35f), Vec2(GW("Alpha: OFF"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Alpha: OFF", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen("billboardEditorMenuAppearance")->addButton("back", Vec2(0.0f, -0.7f), Vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
 
 	// Left-viewport: mainWindow - billboardEditorMenuAnimation
 	leftWindow->addScreen("billboardEditorMenuAnimation");

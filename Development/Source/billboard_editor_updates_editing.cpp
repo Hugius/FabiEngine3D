@@ -95,6 +95,10 @@ void BillboardEditor::_updateBillboardEditing()
 					{
 						_gui.getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuChoice");
 					}
+					else if (screen->getButton("lightness")->isHovered())
+					{
+						_gui.getGlobalScreen()->addValueForm("lightness", "Lightness (%)", _fe3d.billboardEntity_getLightness(_currentBillboardID) * 100.0f, Vec2(0.0f, 0.0f), Vec2(0.2f, 0.1f));
+					}
 					else if (screen->getButton("color")->isHovered())
 					{
 						_gui.getGlobalScreen()->addValueForm("colorR", "R(0-255)", _fe3d.billboardEntity_getColor(_currentBillboardID).r * 255.0f, Vec2(-0.25f, 0.0f), Vec2(0.2f, 0.1f));
@@ -130,6 +134,14 @@ void BillboardEditor::_updateBillboardEditing()
 						bool isTransparent = _fe3d.billboardEntity_isTransparent(_currentBillboardID);
 						_fe3d.billboardEntity_setTransparent(_currentBillboardID, !isTransparent);
 					}
+				}
+
+				// Setting billboard lightness
+				float newLightness;
+				if (_gui.getGlobalScreen()->checkValueForm("lightness", newLightness, { }))
+				{
+					newLightness /= 100.0f;
+					_fe3d.billboardEntity_setLightness(_currentBillboardID, newLightness);
 				}
 
 				// Setting billboard color

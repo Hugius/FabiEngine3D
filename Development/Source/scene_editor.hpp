@@ -107,7 +107,7 @@ private:
 	void _placeBillboard(bool scriptExecution, const string& billboardName, const string& billboardNumber,
 		const string& diffusePath, const string& fontPath, const string& textContent,
 		Vec3 position, Vec3 rotation, Vec2 size, Vec3 color, bool facingX, bool facingY, bool isTransparent,
-		bool isAnimated, int animationRows, int animationColumns, int animationFramestep);
+		bool isAnimated, int animationRows, int animationColumns, int animationFramestep, float lightness);
 
 	// Miscellaneous
 	vector<string> _loadSceneNames();

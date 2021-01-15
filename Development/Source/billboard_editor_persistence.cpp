@@ -31,6 +31,7 @@ void BillboardEditor::loadBillboardEntitiesFromFile()
 			string billboardID, diffusePath, fontPath, textContent;
 			Vec2 size;
 			Vec3 color;
+			float lightness;
 			bool facingX, facingY, transparent, playing;
 			int rows, columns, framestep;
 
@@ -54,7 +55,8 @@ void BillboardEditor::loadBillboardEntitiesFromFile()
 				playing >>
 				rows >>
 				columns >>
-				framestep;
+				framestep >>
+				lightness;
 
 			// Perform empty string & space conversions
 			diffusePath = (diffusePath == "?") ? "" : diffusePath;
@@ -90,6 +92,9 @@ void BillboardEditor::loadBillboardEntitiesFromFile()
 			{
 				_fe3d.billboardEntity_add(billboardID, color, _billboardPosition, Vec3(0.0f), size, facingX, facingY, false);
 			}
+
+			// Miscellaneous
+			_fe3d.billboardEntity_setLightness(billboardID, lightness);
 		}
 
 		// Close file
@@ -130,6 +135,7 @@ void BillboardEditor::saveBillboardEntitiesToFile()
 			auto animationRows = _fe3d.billboardEntity_getAnimationRows(billboardID);
 			auto animationColumns = _fe3d.billboardEntity_getAnimationColumns(billboardID);
 			auto animationFramestep = _fe3d.billboardEntity_getAnimationFramestep(billboardID);
+			auto lightness = _fe3d.billboardEntity_getLightness(billboardID);
 
 			// Perform empty string & space conversions
 			diffusePath = (diffusePath == "") ? "?" : diffusePath;
@@ -156,7 +162,8 @@ void BillboardEditor::saveBillboardEntitiesToFile()
 				isAnimated << " " <<
 				animationRows << " " <<
 				animationColumns << " " <<
-				animationFramestep << std::endl;
+				animationFramestep << " " <<
+				lightness << std::endl;
 		}
 
 		// Close file

@@ -227,14 +227,14 @@ void SceneEditor::_updateBillboardBlinking(const string& billboardID, int& multi
 	if (billboardID != "")
 	{
 		// Check if lightness reached bounds
-		if (_fe3d.billboardEntity_getLightness(billboardID) > 1.0f ||
+		if (_fe3d.billboardEntity_getLightness(billboardID) > _initialBillboardLightness[billboardID] ||
 			_fe3d.billboardEntity_getLightness(billboardID) < 0.0f)
 		{
 			multiplier *= -1;
 		}
 
 		// Set billboard lightness
-		float range = 1.0f;
+		float range = _initialBillboardLightness[billboardID];
 		float speed = (_billboardBlinkingSpeed * static_cast<float>(multiplier) * range);
 		_fe3d.billboardEntity_setLightness(billboardID, _fe3d.billboardEntity_getLightness(billboardID) + speed);
 	}

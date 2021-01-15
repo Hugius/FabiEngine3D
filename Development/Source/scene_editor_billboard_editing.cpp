@@ -48,7 +48,7 @@ void SceneEditor::_updateBillboardEditing()
 						// Don't reset if billboard is active
 						if (entityID != _activeBillboardID && _selectedBillboardID == "")
 						{
-							_fe3d.billboardEntity_setLightness(entityID, 1.0f);
+							_fe3d.billboardEntity_setLightness(entityID, _initialBillboardLightness[entityID]);
 						}
 					}
 				}
@@ -213,11 +213,15 @@ void SceneEditor::_updateBillboardEditing()
 				// Reset when user wants to place billboards again
 				for (auto& entityID : _fe3d.billboardEntity_getAllIDs())
 				{
-					_gui.getViewport("right")->getWindow("main")->setActiveScreen("sceneEditorControls");
-					_fe3d.billboardEntity_setLightness(entityID, 1.0f);
-					_selectedBillboardLightnessMultiplier = 1;
-					_activeBillboardID = "";
-					_selectedBillboardID = "";
+					// Check if not preview entity
+					if (entityID[0] != '@')
+					{
+						_gui.getViewport("right")->getWindow("main")->setActiveScreen("sceneEditorControls");
+						_fe3d.billboardEntity_setLightness(entityID, _initialBillboardLightness[entityID]);
+						_selectedBillboardLightnessMultiplier = 1;
+						_activeBillboardID = "";
+						_selectedBillboardID = "";
+					}
 				}
 			}
 		}

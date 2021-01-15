@@ -402,6 +402,7 @@ void SceneEditor::saveSceneToFile()
 					auto animationRows = _fe3d.billboardEntity_getAnimationRows(billboardID);
 					auto animationColumns = _fe3d.billboardEntity_getAnimationColumns(billboardID);
 					auto animationFramestep = _fe3d.billboardEntity_getAnimationFramestep(billboardID);
+					auto lightness = _initialBillboardLightness[billboardID];
 
 					// Perform empty string & space conversions
 					diffusePath = (diffusePath == "") ? "?" : diffusePath;
@@ -435,7 +436,8 @@ void SceneEditor::saveSceneToFile()
 						isAnimated << " " <<
 						animationRows << " " <<
 						animationColumns << " " <<
-						animationFramestep << std::endl;
+						animationFramestep << " " <<
+						lightness << std::endl;
 				}
 			}
 

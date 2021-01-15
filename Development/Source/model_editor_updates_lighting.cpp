@@ -31,7 +31,7 @@ void ModelEditor::_updateModelEditingLighting()
 			}
 			else if (screen->getButton("lightness")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("lightness", "Model lightness (%)",
+				_gui.getGlobalScreen()->addValueForm("lightness", "Lightness (%)",
 					_fe3d.gameEntity_getLightness(_currentModelID) * 100.0f, Vec2(0.0f, 0.1f), Vec2(0.2f, 0.1f));
 			}
 			else if (screen->getButton("isShadowed")->isHovered())

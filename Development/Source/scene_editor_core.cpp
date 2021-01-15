@@ -450,6 +450,7 @@ void SceneEditor::unload()
 	_selectedModelLightnessMultiplier = 1;
 	_activeModelLightnessMultiplier = 1;
 	_dontResetSelectedModel = false;
+	_initialBillboardLightness.clear();
 	_currentPreviewBillboardName = "";
 	_selectedBillboardID = "";
 	_activeBillboardID = "";

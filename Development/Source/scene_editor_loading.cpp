@@ -413,12 +413,12 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 			{
 				// Values
 				Vec3 directionalLightingPosition, directionalLightingColor;
-				float directionalLightingIntensity, billboardSize;
+				float directionalLightingIntensity, billboardSize, billboardLightness;
 
 				// Extract
 				iss >> directionalLightingPosition.x >> directionalLightingPosition.y >> directionalLightingPosition.z >>
 					directionalLightingColor.r >> directionalLightingColor.g >> directionalLightingColor.b >>
-					directionalLightingIntensity >> billboardSize;
+					directionalLightingIntensity >> billboardSize >> billboardLightness;
 
 				// Delete preview billboard
 				if (_isEditorLoaded)
@@ -429,9 +429,9 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 				// Apply
 				_fe3d.gfx_enableDirectionalLighting(directionalLightingPosition, directionalLightingColor, directionalLightingIntensity);
 				_fe3d.billboardEntity_add("@@lightSource", "engine\\textures\\light_source.png", directionalLightingPosition, Vec3(0.0f), Vec2(billboardSize), true, true, true, true);
+				_fe3d.billboardEntity_setLightness("@@lightSource", billboardLightness);
 				_fe3d.billboardEntity_setColor("@@lightSource", directionalLightingColor);
 				_fe3d.billboardEntity_setDepthMapIncluded("@@lightSource", false);
-				_fe3d.billboardEntity_setLightness("@@lightSource", 1000.0f);
 			}
 			else if (entityType == "POINT_LIGHT")
 			{

@@ -457,6 +457,7 @@ void SceneEditor::saveSceneToFile()
 			Vec3 directionalLightingPosition = _fe3d.gfx_getDirectionalLightingPosition();
 			float directionalLightingIntensity = _fe3d.gfx_getDirectionalLightingIntensity();
 			float billboardSize = _fe3d.billboardEntity_getSize("@@lightSource").x;
+			float billboardLightness = _fe3d.billboardEntity_getLightness("@@lightSource");
 
 			file <<
 				"DIRECTIONAL_LIGHT " <<
@@ -467,7 +468,8 @@ void SceneEditor::saveSceneToFile()
 				directionalLightingColor.g << " " <<
 				directionalLightingColor.b << " " <<
 				directionalLightingIntensity << " " <<
-				billboardSize << std::endl;
+				billboardSize << " " <<
+				billboardLightness << std::endl;
 
 			// Point lights
 			for (auto& lightID : _fe3d.lightEntity_getAllIDs())

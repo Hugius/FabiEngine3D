@@ -127,11 +127,12 @@ void SceneEditor::initializeGUI()
 	// Left-viewport: mainWindow - sceneEditorMenuLightingDirectional
 	screenID = "sceneEditorMenuLightingDirectional";
 	leftWindow->addScreen(screenID);
-	leftWindow->getScreen(screenID)->addButton("color", Vec2(0.0f, 0.7f), Vec2(GW("Color"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Color", LVPC::textColor, LVPC::textHoverColor);
-	leftWindow->getScreen(screenID)->addButton("position", Vec2(0.0f, 0.35f), Vec2(GW("Position"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Position", LVPC::textColor, LVPC::textHoverColor);
-	leftWindow->getScreen(screenID)->addButton("intensity", Vec2(0.0f, 0.0f), Vec2(GW("Intensity"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Intensity", LVPC::textColor, LVPC::textHoverColor);
-	leftWindow->getScreen(screenID)->addButton("billboardSize", Vec2(0.0f, -0.35f), Vec2(GW("Billboard size"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Billboard size", LVPC::textColor, LVPC::textHoverColor);
-	leftWindow->getScreen(screenID)->addButton("back", Vec2(0.0f, -0.7f), Vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen(screenID)->addButton("color", Vec2(0.0f, 0.75f), Vec2(GW("Color"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Color", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen(screenID)->addButton("position", Vec2(0.0f, 0.45f), Vec2(GW("Position"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Position", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen(screenID)->addButton("intensity", Vec2(0.0f, 0.15f), Vec2(GW("Intensity"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Intensity", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen(screenID)->addButton("billboardSize", Vec2(0.0f, -0.15f), Vec2(GW("Billboard size"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Billboard size", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen(screenID)->addButton("billboardLightness", Vec2(0.0f, -0.45f), Vec2(GW("Billboard lightness"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Billboard lightness", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen(screenID)->addButton("back", Vec2(0.0f, -0.75f), Vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
 	
 	// Left-viewport: mainWindow - sceneEditorMenuLightingPoint
 	screenID = "sceneEditorMenuLightingPoint";
@@ -388,7 +389,6 @@ void SceneEditor::load()
 	_fe3d.billboardEntity_add("@@lightSource", "engine\\textures\\light_source.png", _fe3d.gfx_getDirectionalLightingPosition(),
 		Vec3(0.0f), Vec2(0.0f), true, true, true, true);
 	_fe3d.billboardEntity_setDepthMapIncluded("@@lightSource", false);
-	_fe3d.billboardEntity_setLightness("@@lightSource", 1000.0f);
 
 	// Preview pointlight loading
 	_fe3d.lightEntity_add(_previewPointlightID);

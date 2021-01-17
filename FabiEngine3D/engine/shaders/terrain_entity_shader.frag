@@ -84,8 +84,8 @@ vec3 getNormalMappedVector();
 vec3 getTextureColor();
 vec3 getAmbientLighting();
 vec3 getDirectionalLighting(bool noShadowOcclusion, vec3 normal);
-vec3 getPointLighting(bool noShadowOcclusion, vec3 normal);
-vec3 getSpotLighting(bool noShadowOcclusion, vec3 normal);
+vec3 getPointLighting(vec3 normal);
+vec3 getSpotLighting(vec3 normal);
 vec3 applyFog(vec3 color);
 float getShadowValue();
 float getSpecularValue(vec3 position, vec3 normal);
@@ -100,8 +100,8 @@ void main()
     float shadow = getShadowValue();
 	vec3 ambient = getAmbientLighting();
 	vec3 directional = getDirectionalLighting(shadow == 1.0f, normal);
-	vec3 point = getPointLighting(shadow == 1.0f, normal);
-	vec3 spot = getSpotLighting(shadow == 1.0f, normal);
+	vec3 point = getPointLighting(normal);
+	vec3 spot = getSpotLighting(normal);
 
 	// Apply lighting
 	vec3 color;
@@ -258,7 +258,7 @@ vec3 getDirectionalLighting(bool noShadowOcclusion, vec3 normal)
         float diffuse = max(dot(normal, lightDirection), 0.0f);
 
         // Apply
-        result += vec3(diffuse); // Diffuse
+        result += vec3(diffuse * float(noShadowOcclusion)); // Diffuse
         result += vec3(getSpecularValue(u_directionalLightPosition, normal)) * float(noShadowOcclusion); // Specular
         result *= u_directionalLightColor; // Color
         result *= u_directionalLightIntensity; // Intensity
@@ -273,7 +273,7 @@ vec3 getDirectionalLighting(bool noShadowOcclusion, vec3 normal)
 }
 
 // Calculate point lighting
-vec3 getPointLighting(bool noShadowOcclusion, vec3 normal)
+vec3 getPointLighting(vec3 normal)
 {
 	if(u_isPointLightEnabled)
 	{
@@ -291,7 +291,7 @@ vec3 getPointLighting(bool noShadowOcclusion, vec3 normal)
             // Apply
             vec3 current = vec3(0.0f);
 			current += vec3(diffuse); // Diffuse
-            current += vec3(getSpecularValue(u_pointLightPositions[i], normal)) * float(noShadowOcclusion); // Specular
+            current += vec3(getSpecularValue(u_pointLightPositions[i], normal)); // Specular
             current *= u_pointLightColors[i]; // Color
             current *= attenuation; // Distance
             current *= u_pointLightIntensities[i]; // Intensity
@@ -309,7 +309,7 @@ vec3 getPointLighting(bool noShadowOcclusion, vec3 normal)
 	}
 }
 
-vec3 getSpotLighting(bool noShadowOcclusion, vec3 normal)
+vec3 getSpotLighting(vec3 normal)
 {
     if(u_isSpotLightEnabled)
     {
@@ -330,7 +330,7 @@ vec3 getSpotLighting(bool noShadowOcclusion, vec3 normal)
         float diffuse = max(dot(normal, lightDirection), 0.0f);
         float specular = getSpecularValue(u_cameraPosition, normal);
         result += vec3(diffuse * intensity); // Diffuse
-        result += vec3(specular * float(noShadowOcclusion) * intensity); // Specular
+        result += vec3(specular * intensity); // Specular
         result *= u_spotLightColor; // Color
         result *= u_spotLightIntensity; // Intensity
 

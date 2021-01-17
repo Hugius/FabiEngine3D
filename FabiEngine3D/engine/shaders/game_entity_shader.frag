@@ -206,7 +206,7 @@ vec3 getDirectionalLighting(vec3 normal, bool noShadowOcclusion)
 		float diffuse = max(dot(normal, lightDirection), 0.0f);
 
         // Apply
-        result += vec3(diffuse); // Diffuse
+        result += vec3(diffuse * float(noShadowOcclusion)); // Diffuse
         result += vec3(getSpecularValue(u_directionalLightPosition, normal)) * float(noShadowOcclusion); // Specular
         result *= u_directionalLightColor; // Color
         result *= u_directionalLightIntensity; // Intensity

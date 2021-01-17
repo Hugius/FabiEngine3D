@@ -525,7 +525,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			}
 		}
 	}
-	else if (functionName == "fe3d:billboard_play_animation") // Play billboardEntity animation
+	else if (functionName == "fe3d:billboard_start_animation") // Play billboardEntity animation
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::INTEGER };
 

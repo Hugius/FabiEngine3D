@@ -1,5 +1,3 @@
-@spaceship1 user\assets\models\spaceships\spaceship1.obj user\assets\textures\diffuse_maps\spaceships\spaceship1.png user\assets\textures\light_maps\spaceships\spaceship1.png ? user\assets\textures\normal_maps\spaceships\spaceship1.png 5 5 5 0 1 0 0 1 1 1 1 1 1 1 1 ? 0 spaceship 0 0 -0.4 9.6 3.5 5.9
-@spaceship2 user\assets\models\spaceships\spaceship2.obj ? ? ? ? 5 5 5 0 1 0 0 1 1 1 1 1 1 1 1 ? 0 spaceship 0 0 -0.6 17.8 2.9 19.3
 @floor_center user\assets\models\spacestations\floor_center.obj user\assets\textures\diffuse_maps\spacestations\floor_center.png ? user\assets\textures\reflection_maps\spacestations\floor_center.png user\assets\textures\normal_maps\spacestations\floor_center.png 1 1 1 0 1 0 2 1 1 1 0.75 1 1 1 1 ? 0 floor_center 0 -0.1 0 2 0.0999999 2
 @floor_side user\assets\models\spacestations\floor_side.obj user\assets\textures\diffuse_maps\spacestations\floor_side.png ? user\assets\textures\reflection_maps\spacestations\floor_side.png user\assets\textures\normal_maps\spacestations\floor_side.png 1 1 1 0 1 0 2 1 1 1 0.75 1 1 1 1 ? 0 floor_side 0 -0.1 0 2 0.0999999 2
 @floor_corner_in user\assets\models\spacestations\floor_corner_in.obj user\assets\textures\diffuse_maps\spacestations\floor_corner_in.png ? user\assets\textures\reflection_maps\spacestations\floor_corner_in.png user\assets\textures\normal_maps\spacestations\floor_corner_in.png 1 1 1 0 1 0 2 1 1 1 0.75 1 1 1 1 ? 0 floor_corner_in -1.49012e-08 -0.1 -1.49012e-08 2 0.0999999 2
@@ -13,13 +11,12 @@
 @ceiling_corner_out user\assets\models\spacestations\ceiling_corner_out.obj user\assets\textures\diffuse_maps\spacestations\ceiling_corner_out.png ? ? user\assets\textures\normal_maps\spacestations\ceiling_corner_out.png 1 1 1 0 1 0 0 1 1 1 0.75 1 1 1 1 ? 0 ceiling_corner_out 0 0 0 2 0.3 2
 @earth user\assets\models\planets\earth.obj user\assets\textures\diffuse_maps\planets\earth.png user\assets\textures\light_maps\planets\earth.png ? user\assets\textures\normal_maps\planets\earth.png 2.5 2.5 2.5 0 0 0 0 1 1 1 0.5 1 1 1 1 ? 0
 @ceiling_lamp user\assets\models\spacestations\ceiling_lamp.obj user\assets\textures\diffuse_maps\spacestations\ceiling_lamp.png user\assets\textures\light_maps\spacestations\ceiling_lamp.png ? ? 1 1 1 0 1 0 0 0 1 1 10 1 1 1 1 ? 0 ceiling_lamp 0 0 0 1.41 0.180001 0.220001
-@satellite1 user\assets\models\spaceships\satellite1.obj ? ? ? ? 5 5 5 0 1 0 1 1 16 2.5 1 1 1 1 1 ? 0 sallite1 0 0 0 9.8 2.7 10.8
-@satellite2 user\assets\models\spaceships\satellite2.obj user\assets\textures\diffuse_maps\spaceships\satellite2.png ? ? user\assets\textures\normal_maps\spaceships\satellite2.png 3 3 3 0 1 0 1 1 1 1 0.75 1 1 1 1 ? 0 satellite2 0 0 0 18.5 4.9 2.8
-@control_tower user\assets\models\spacestations\control_tower.obj ? ? ? ? 1 1 1 0 1 1 0 0 32 1 0.75 1 1 1 1 ? 0
+@satellite1 user\assets\models\satellites\satellite1.obj ? ? ? ? 5 5 5 0 0 0 1 1 16 1 1 1 1 1 1 ? 0
+@satellite2 user\assets\models\satellites\satellite2.obj user\assets\textures\diffuse_maps\satellites\satellite2.png ? ? user\assets\textures\normal_maps\satellites\satellite2.png 3 3 3 0 0 0 1 1 1 1 0.75 1 1 1 1 ? 0
+@control_tower user\assets\models\spacestations\control_tower.obj ? ? ? ? 2.5 2.5 2.5 0 1 1 0 0 32 1 0.75 1 1 1 1 ? 0
 @moon user\assets\models\planets\moon.obj user\assets\textures\diffuse_maps\planets\moon.png ? ? ? 0.5 0.5 0.5 0 0 0 0 0 1 1 1 1 1 1 1 ? 0
-@mercury user\assets\models\planets\mercury.obj user\assets\textures\diffuse_maps\planets\mercury.png ? ? ? 10 10 10 0 0 0 0 0 1 1 1 1 1 1 1 ? 0
-@venus user\assets\models\planets\venus.obj user\assets\textures\diffuse_maps\planets\venus.png ? ? ? 10 10 10 0 0 0 0 0 1 1 1 1 1 1 1 ? 0
-@mars user\assets\models\planets\mars.obj user\assets\textures\diffuse_maps\planets\mars.png ? ? ? 10 10 10 0 0 0 0 0 1 1 1 1 1 1 1 ? 0
-@jupiter user\assets\models\planets\jupiter.obj user\assets\textures\diffuse_maps\planets\jupiter.png ? ? ? 10 10 10 0 0 0 0 0 1 1 0.75 1 1 1 1 ? 0
-@uranus user\assets\models\planets\uranus.obj user\assets\textures\diffuse_maps\planets\uranus.png ? ? ? 10 10 10 0 1 0 0 0 1 1 0.5 1 1 1 1 ? 0
-@neptune user\assets\models\planets\neptune.obj user\assets\textures\diffuse_maps\planets\neptune.png ? ? ? 1 1 1 0 0 0 0 0 1 1 1 1 1 1 1 ? 0
+@satellite3 user\assets\models\satellites\satellite3.obj ? ? ? ? 3 3 3 0 0 0 1 1 1 1 1 1 1 1 1 ? 0
+@space_shuttle user\assets\models\spaceships\space_shuttle.obj ? ? ? ? 5 5 5 0 1 0 0 1 1 1 1 1 1 1 1 ? 0
+@cockpit user\assets\models\spaceships\cockpit.obj ? ? ? ? 1 1 1 0 1 0 0 1 1 1 1 1 1 1 1 ? 0 front 1.3 0.2 0 0.5 3 3
+@control_center user\assets\models\spacestations\control_center.obj ? ? ? ? 0.25 0.25 0.25 0 1 0 0 1 32 1 0.5 1 1 1 1 ? 0
+@docking_station user\assets\models\spacestations\docking_station.obj user\assets\textures\diffuse_maps\spacestations\docking_station.png user\assets\textures\light_maps\spacestations\docking_station.png ? user\assets\textures\normal_maps\spacestations\docking_station.png 10 10 10 0 0 0 1 1 1 1 1 1 1 1 1 ? 0

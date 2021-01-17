@@ -205,6 +205,24 @@ void AnimationEditor::_updateEditingScreen()
 					// Compose selected model ID
 					string selectedModelID = "@" + selectedButtonID;
 
+					// Check if parts are present
+					bool hasAllParts = true;
+					for (auto& partName : currentAnimation->partNames)
+					{
+						// Part cannot be empty
+						if (!partName.empty())
+						{
+							hasAllParts = hasAllParts && _fe3d.gameEntity_hasPart(selectedModelID, partName);
+						}
+					}
+
+					// Throw warning
+					if (!hasAllParts)
+					{
+						_fe3d.logger_throwWarning("Preview model does not have required animation parts!");
+						return;
+					}
+
 					// Hide old model
 					if (hasPreviewModel)
 					{

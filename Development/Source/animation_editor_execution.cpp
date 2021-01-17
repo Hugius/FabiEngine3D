@@ -73,13 +73,6 @@ void AnimationEditor::_updateAnimationExecution()
 					break;
 				}
 
-				// Check if model has part
-				if (!_fe3d.gameEntity_hasPart(animation.animatedModelID, partName) && !partName.empty())
-				{
-					finishedPartsAmount++;
-					continue;
-				}
-
 				// Immutable values
 				const auto& currentModelSize = _fe3d.gameEntity_getSize(animation.animatedModelID);
 				const auto& transformationType = frame.transformationTypes[partName];

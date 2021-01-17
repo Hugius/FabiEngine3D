@@ -23,8 +23,26 @@ void AnimationEditor::startAnimation(const string& animationID, const string& mo
 					animation->timesToPlay = timesToPlay;
 					animation->initialScaling = _fe3d.gameEntity_getSize(modelID);
 
+					// Check if model has all the parts
+					bool hasAllParts = true;
+					for (auto& partName : animation->partNames)
+					{
+						// Part cannot be empty
+						if (!partName.empty())
+						{
+							hasAllParts = hasAllParts && _fe3d.gameEntity_hasPart(modelID, partName);
+						}
+					}
+
 					// Play animation
-					_playingAnimations.insert(make_pair(make_pair(animationID, modelID), *animation));
+					if (hasAllParts)
+					{
+						_playingAnimations.insert(make_pair(make_pair(animationID, modelID), *animation));
+					}
+					else
+					{
+						_fe3d.logger_throwWarning(errorMessage + "model does not have required animation parts!");
+					}
 				}
 				else
 				{

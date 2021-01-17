@@ -13,10 +13,12 @@
 @ceiling_lamp user\assets\models\spacestations\ceiling_lamp.obj user\assets\textures\diffuse_maps\spacestations\ceiling_lamp.png user\assets\textures\light_maps\spacestations\ceiling_lamp.png ? ? 1 1 1 0 1 0 0 0 1 1 10 1 1 1 1 ? 0 ceiling_lamp 0 0 0 1.41 0.180001 0.220001
 @satellite1 user\assets\models\satellites\satellite1.obj ? ? ? ? 5 5 5 0 0 0 1 1 16 1 1 1 1 1 1 ? 0
 @satellite2 user\assets\models\satellites\satellite2.obj user\assets\textures\diffuse_maps\satellites\satellite2.png ? ? user\assets\textures\normal_maps\satellites\satellite2.png 3 3 3 0 0 0 1 1 1 1 0.75 1 1 1 1 ? 0
-@control_tower user\assets\models\spacestations\control_tower.obj ? ? ? ? 2.5 2.5 2.5 0 1 1 0 0 32 1 0.75 1 1 1 1 ? 0
+@control_tower user\assets\models\spacestations\control_tower.obj ? ? ? ? 2.5 2.5 2.5 0 1 1 0 0 32 1 0.5 1 1 1 1 ? 0
 @moon user\assets\models\planets\moon.obj user\assets\textures\diffuse_maps\planets\moon.png ? ? ? 0.5 0.5 0.5 0 0 0 0 0 1 1 1 1 1 1 1 ? 0
 @satellite3 user\assets\models\satellites\satellite3.obj ? ? ? ? 3 3 3 0 0 0 1 1 1 1 1 1 1 1 1 ? 0
 @space_shuttle user\assets\models\spaceships\space_shuttle.obj ? ? ? ? 5 5 5 0 1 0 0 1 1 1 1 1 1 1 1 ? 0
 @cockpit user\assets\models\spaceships\cockpit.obj ? ? ? ? 1 1 1 0 1 0 0 1 1 1 1 1 1 1 1 ? 0 front 1.3 0.2 0 0.5 3 3
 @control_center user\assets\models\spacestations\control_center.obj ? ? ? ? 0.25 0.25 0.25 0 1 0 0 1 32 1 0.5 1 1 1 1 ? 0
 @docking_station user\assets\models\spacestations\docking_station.obj user\assets\textures\diffuse_maps\spacestations\docking_station.png user\assets\textures\light_maps\spacestations\docking_station.png ? user\assets\textures\normal_maps\spacestations\docking_station.png 10 10 10 0 0 0 1 1 1 1 1 1 1 1 1 ? 0
+@door_big user\assets\models\spacestations\door_big.obj ? ? ? ? 1.25 1.25 1.25 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 door_big 0 0 0 0.3 2.3 2.9
+@door_small user\assets\models\spacestations\door_small.obj ? ? ? ? 1.25 1.25 1.25 0 1 1 0 0 1 1 1 1 1 1 1 ? 0

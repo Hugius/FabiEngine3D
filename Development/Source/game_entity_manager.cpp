@@ -58,9 +58,20 @@ void GameEntityManager::generateModel(const string& ID, const string& objName)
 	// Check if model loading failed
 	if (parts.empty())
 	{
+		// Add empty part so the entity does not crash the engine
 		entity->addPart("");
 	}
 	
+	// Check if multiparted model actually has multiple parts
+	if (parts.size() == 1 && !parts.back().name.empty())
+	{
+		// Add empty part so the entity does not crash the engine
+		parts.back().name = "";
+
+		// Warning
+		Logger::throwWarning("Multiparted model with ID \"" + ID + "\" only has 1 part!");
+	}
+
 	// Create OpenGL buffers
 	for (auto& part : parts)
 	{

@@ -1,4 +1,4 @@
-6 10
+26 47
 META script_type_init
 META execution_entry
 
@@ -24,3 +24,5 @@ GLOB STR _controlCenterID = fe3d:model_find_full_id("control_center")
 fe3d:model_start_animation("entrance_open", _controlCenterID, 1)
 fe3d:model_start_animation("exit_open", _controlCenterID, 1)
 fe3d:model_start_animation("overlay_open", _controlCenterID, 1)
+
+fe3d:model_place("ak47", "ak47", 0.0, 0.0, 0.0)

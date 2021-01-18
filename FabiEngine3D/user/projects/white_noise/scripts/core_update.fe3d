@@ -1,4 +1,4 @@
-13 17
+40 21
 META script_type_update
 META execution_entry
 
@@ -37,3 +37,28 @@ IF kip NOT "":
     IF lmbPressed IS <true>:
         fe3d:model_set_aabb_responsive(kip, <false>)
         fe3d:model_start_animation("door_big_open", kip, 1)
+
+STR gunID = "ak47"
+DEC gunOffset = -1.75
+VEC3 camPos = fe3d:camera_get_position()
+DEC yaw = fe3d:camera_get_yaw()
+IF <true> IS <true>:
+    INCR yaw 25.0
+    DEC sinRot = math:cos(yaw)
+    DEC cosRot = math:sin(yaw)
+    MUL sinRot 0.9
+    MUL cosRot 0.9
+    VEC3 gunPos = camPos
+    INCR gunPos.x sinRot
+    INCR gunPos.z cosRot
+    INCR gunPos.y gunOffset
+    fe3d:model_set_position(gunID, gunPos.x, gunPos.y, gunPos.z)
+    /// Rotation
+    VEC3 gunRot = fe3d:model_get_rotation(gunID)
+    EDIT gunRot.y = fe3d:camera_get_yaw()
+    NEG gunRot.y
+    INCR gunRot.y 0.0
+    fe3d:model_set_rotation(gunID, gunRot.x, gunRot.y, gunRot.z)
+    /// Shooting animation
+    IF lmbPressed IS <true>:
+        fe3d:model_start_animation("ak47_shoot", gunID, 1)

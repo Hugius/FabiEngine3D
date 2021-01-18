@@ -7,3 +7,4 @@ satellite2 @satellite2 1 ? 0 360 0 0 0 0 0.1 0 1
 satellite3 @satellite3 6 ? 0 0 360 0 1.9 0 0.1 0 1 1 0 0 0 0 0 0 0 0 0 2 0 0 0 0 0 0 0 0 0 3 0 0 0 0 0 0 0 0 0 4 0 0 0 0 0 0 0 0 0 5 0 0 0 0 0 0 0 0 0
 door_big_open @door_big 4 ? 0 0 0 0 0 0 0 0 0 frame 0 0 0 0 0 0 0 0 0 right 0 0 -1.5 0 0 0 -0.015 0 0 left 0 0 1.5 0 0 0 0.015 0 0
 door_small_open @door_small 3 ? 0 0 0 0 0 0 0 0 0 door 0 -2.1 0 0 0 0 -0.02 0 0 frame 0 0 0 0 0 0 0 0 0
+ak47_shoot @ak47 3 ? 10 0 0 0 0 0 2.5 0 1 mag 0 0 0 0 0 0 0 0 0 body 0 0 0 0 0 0 0 0 0 3 ? 0 0 0 0 0 0 -0.25 0 1 mag 0 0 0 0 0 0 0 0 0 body 0 0 0 0 0 0 0 0 0

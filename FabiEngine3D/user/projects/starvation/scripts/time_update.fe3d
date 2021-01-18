@@ -1,4 +1,4 @@
-39 12
+23 35
 META script_type_update
 
 /// Update time passing
@@ -16,21 +16,21 @@ ELSE:
 /// Update day-night cycle
 IF _isTimeCycling IS <true>:
     IF _isDayTime IS <true>:
-        INCR _ambLightIntensity 0.00025
-        INCR _dirLightIntensity 0.0005
-        DECR _skyMixValue 0.0005
+        INCR _ambLightIntensity 0.000125
+        INCR _dirLightIntensity 0.00025
+        DECR _skyMixValue 0.00025
         IF _skyMixValue LESS 0.5:
-            INCR _dirLightPos.y 0.5
+            INCR _dirLightPos.y 0.25
         ELSE:
-            DECR _dirLightPos.y 0.5
+            DECR _dirLightPos.y 0.25
     ELSE:
-        DECR _ambLightIntensity 0.00025
-        DECR _dirLightIntensity 0.0005
-        INCR _skyMixValue 0.0005
+        DECR _ambLightIntensity 0.000125
+        DECR _dirLightIntensity 0.00025
+        INCR _skyMixValue 0.00025
         IF _skyMixValue MORE 0.5:
-            INCR _dirLightPos.y 0.5
+            INCR _dirLightPos.y 0.25
         ELSE:
-            DECR _dirLightPos.y 0.5
+            DECR _dirLightPos.y 0.25
     IF _skyMixValue LESS 0.0 OR _skyMixValue MORE 1.0:
         EDIT _isTimeCycling = <false>
         IF _isDayTime IS <true>:

@@ -86,9 +86,14 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 					std::replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
 				}
 
+				// Only for scene editing
+				if (_isEditorLoaded)
+				{
+					_currentSkyID = skyID;
+				}
+
 				// Load entity
-				_currentSkyID = skyID;
-				_placeSky(_currentSkyID, diffuseMapPaths, lightness, rotationSpeed, color);
+				_placeSky(skyID, diffuseMapPaths, lightness, rotationSpeed, color);
 			}
 			else if (entityType == "TERRAIN")
 			{
@@ -149,9 +154,14 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 				std::replace(blendMapPathG.begin(), blendMapPathG.end(), '?', ' ');
 				std::replace(blendMapPathB.begin(), blendMapPathB.end(), '?', ' ');
 
+				// Only for scene editing
+				if (_isEditorLoaded)
+				{
+					_currentTerrainID = terrainID;
+				}
+
 				// Add new terrain entity
-				_currentTerrainID = terrainID;
-				_placeTerrain(_currentTerrainID, heightMapPath, maxHeight, uvRepeat, isBlendMapped, lightness, 
+				_placeTerrain(terrainID, heightMapPath, maxHeight, uvRepeat, isBlendMapped, lightness,
 					blendRepeatR, blendRepeatG, blendRepeatB, isNormalMapped, isNormalMappedR, isNormalMappedG, isNormalMappedB,
 					isSpecular, specularFactor, specularIntensity, diffuseMapPath, normalMapPath, normalMapPathR, normalMapPathG, 
 					normalMapPathB, blendMapPath, blendMapPathR, blendMapPathG, blendMapPathB);
@@ -199,9 +209,14 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 				std::replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
 				std::replace(displacementMapPath.begin(), displacementMapPath.end(), '?', ' ');
 
+				// Only for scene editing
+				if (_isEditorLoaded)
+				{
+					_currentWaterID = waterID;
+				}
+
 				// Load entity
-				_currentWaterID = waterID;
-				_placeWater(_currentWaterID, position, size, isWaving, isRippling, isSpecularLighted, isReflective,
+				_placeWater(waterID, position, size, isWaving, isRippling, isSpecularLighted, isReflective,
 					isRefractive, waveHeightFactor, specularFactor, specularIntensity, transparency, color, uvRepeat,
 					speed, dudvMapPath, normalMapPath, displacementMapPath);
 			}

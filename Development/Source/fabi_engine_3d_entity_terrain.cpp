@@ -23,6 +23,9 @@ void FabiEngine3D::terrainEntity_deleteAll()
 	{
 		terrainEntity_delete(entity->getID());
 	}
+
+	// Unselect terrain
+	_core->_terrainEntityManager.selectTerrain("");
 }
 
 void FabiEngine3D::terrainEntity_delete(const string& ID)

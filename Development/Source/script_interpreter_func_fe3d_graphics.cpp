@@ -342,6 +342,22 @@ bool ScriptInterpreter::_executeFe3dLightingFunction(const string& functionName,
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
+	else if (functionName == "fe3d:graphics_enable_point_lighting") // Enable pointlighting
+	{
+		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			_fe3d.gfx_enablePointLighting();
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+		}
+	}
+	else if (functionName == "fe3d:graphics_disable_point_lighting") // Disable pointlighting
+	{
+		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			_fe3d.gfx_disablePointLighting();
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+		}
+	}
 	else
 	{
 		return false;

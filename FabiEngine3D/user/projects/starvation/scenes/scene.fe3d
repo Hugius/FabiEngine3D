@@ -69,8 +69,8 @@ MODEL 854496727@tree6 128.65 6.37255 88.6721 0 0 0 1.25 1 1.25 user\assets\model
 MODEL 1335882733@tree6 146.502 6.37255 96.1787 0 0 0 1.25 1 1.25 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? leaves 0 8.8 0 3.85 8.30001 3.6 trunk 0 0 0 0.85 8.80001 0.8
 MODEL 188331756@tree6 173.665 6.37255 77.2065 0 0 0 1.25 1 1.25 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
 MODEL 1931767958@tree6 163.372 6.37255 65.6327 0 0 0 1.6 1.4 1.6 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
-MODEL 1992948212@tree6 84.9258 6.37255 89.9451 0 0 0 1.4 1.2 1.4 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? leaves 0 8.8 0 3.85 8.30001 3.6 trunk 0 0 0 0.85 8.80001 0.8
-MODEL 40189722@tree6 144.962 6.37255 62.5994 0 0 0 1.25 1 1.25 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? leaves 0 8.8 0 3.85 8.30001 3.6 trunk 0 0 0 0.85 8.80001 0.8
+MODEL 1992948212@tree6 84.9258 6.37255 89.9451 0 0 0 1.4 1.2 1.4 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
+MODEL 40189722@tree6 144.962 6.37255 62.5994 0 0 0 1.25 1 1.25 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
 MODEL 1762685737@tree6 180.059 6.37255 51.8118 0 0 0 1.25 1 1.25 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? leaves 0 8.8 0 3.85 8.30001 3.6 trunk 0 0 0 0.85 8.80001 0.8
 MODEL 106061724@tree6 180.036 6.37255 38.872 0 0 0 1.25 1 1.25 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
 MODEL 1163040573@mushroom1 138.475 6.37254 76.5652 0 0 0 1 1 1 user\assets\models\foliage\mushroom1.obj user\assets\textures\diffuse_maps\foliage\mushroom1.png ? ? ? 0 0 1 0 0 0 1 1 1 1 1 1 1 ? 0 ? mushroom 0 0 0 1.7 1.6 1.7
@@ -308,23 +308,23 @@ MODEL 1837872807@tree7 148.01 6.37255 84.4976 0 0 0 4.5 4.5 4.5 user\assets\mode
 MODEL 90925156@tree7 162.27 6.37255 74.802 0 0 0 4.5 5.4 4.5 user\assets\models\trees\tree7.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? leaves 0 1.18 0 2.54 3.95 2.57 trunk 0.03 0 -0.01 0.15 1.2 0.15
 MODEL 1061847323@torch1 29.2722 6.37255 22.0851 0 0 0 0.75 0.75 0.75 user\assets\models\misc\torch1.obj user\assets\textures\diffuse_maps\misc\torch1.png user\assets\textures\light_maps\misc\torch1.png user\assets\textures\reflection_maps\misc\torch1.png user\assets\textures\normal_maps\misc\torch1.png 0 0 1 0 1 0 1 1 0.5 1 1 1 1 ? 0 ? pole -0.02 0 0 0.4 4.03 0.36 basket 0 4.06 0 2.3 1 2.2
 MODEL 125445010@torch1 62.8861 6.37254 45.6879 0 0 0 0.75 0.75 0.75 user\assets\models\misc\torch1.obj user\assets\textures\diffuse_maps\misc\torch1.png user\assets\textures\light_maps\misc\torch1.png user\assets\textures\reflection_maps\misc\torch1.png user\assets\textures\normal_maps\misc\torch1.png 0 0 1 0 1 0 1 1 0.5 1 1 1 1 ? 0 ? pole -0.02 0 0 0.4 4.03 0.36 basket 0 4.06 0 2.3 1 2.2
-BILLBOARD 521088961@fire 42.7759 10.5926 47.5304 0 -4.87962 -0 5 3 1 1 1 0 1 user\assets\textures\billboard_maps\fire1.png 1 ? ? 1 6 6 3 2.5
-BILLBOARD 1705446200@fire 39.3491 10.6326 69.9562 0 -2.87011 -0 5 3 1 1 1 0 1 user\assets\textures\billboard_maps\fire1.png 1 ? ? 1 6 6 3 2.5
-BILLBOARD 654255707@fire 62.8829 10.75 45.7324 0 -20.9349 -0 5 3 1 1 1 0 1 user\assets\textures\billboard_maps\fire1.png 1 ? ? 1 6 6 3 2.5
-BILLBOARD 385894073@fire -5.55671 10.5226 27.1843 0 26.5167 -0 5 3 1 1 1 0 1 user\assets\textures\billboard_maps\fire1.png 1 ? ? 1 6 6 3 2.5
-BILLBOARD 72278297@fire 7.75863 10.5326 42.4855 0 22.6965 -0 5 3 1 1 1 0 1 user\assets\textures\billboard_maps\fire1.png 1 ? ? 1 6 6 3 2.5
-BILLBOARD 1790011452@fire 29.2683 10.5326 22.0414 0 4.98898 -0 5 3 1 1 1 0 1 user\assets\textures\billboard_maps\fire1.png 1 ? ? 1 6 6 3 2.5
-BILLBOARD 1233497612@fire 60.1718 10.5926 14.0814 0 -13.0916 -0 5 3 1 1 1 0 1 user\assets\textures\billboard_maps\fire1.png 1 ? ? 1 6 6 3 2.5
-BILLBOARD 756379894@fire 19.0739 10.6126 62.0151 0 19.6138 -0 5 3 1 1 1 0 1 user\assets\textures\billboard_maps\fire1.png 1 ? ? 1 6 6 3 2.5
+BILLBOARD 521088961@fire 42.7759 10.5926 47.5304 0 -89.6952 -0 5 3 1 1 1 0 1 user\assets\textures\billboard_maps\fire1.png 1 ? ? 1 6 6 3 2.5
+BILLBOARD 1705446200@fire 39.3491 10.6326 69.9562 0 -172.768 -0 5 3 1 1 1 0 1 user\assets\textures\billboard_maps\fire1.png 1 ? ? 1 6 6 3 2.5
+BILLBOARD 654255707@fire 62.8829 10.75 45.7324 0 -86.0281 -0 5 3 1 1 1 0 1 user\assets\textures\billboard_maps\fire1.png 1 ? ? 1 6 6 3 2.5
+BILLBOARD 385894073@fire -5.55671 10.5226 27.1843 0 64.1505 -0 5 3 1 1 1 0 1 user\assets\textures\billboard_maps\fire1.png 1 ? ? 1 6 6 3 2.5
+BILLBOARD 72278297@fire 7.75863 10.5326 42.4855 0 79.9825 -0 5 3 1 1 1 0 1 user\assets\textures\billboard_maps\fire1.png 1 ? ? 1 6 6 3 2.5
+BILLBOARD 1790011452@fire 29.2683 10.5326 22.0414 0 15.8354 -0 5 3 1 1 1 0 1 user\assets\textures\billboard_maps\fire1.png 1 ? ? 1 6 6 3 2.5
+BILLBOARD 1233497612@fire 60.1718 10.5926 14.0814 0 -35.2516 -0 5 3 1 1 1 0 1 user\assets\textures\billboard_maps\fire1.png 1 ? ? 1 6 6 3 2.5
+BILLBOARD 756379894@fire 19.0739 10.6126 62.0151 0 -230.343 -0 5 3 1 1 1 0 1 user\assets\textures\billboard_maps\fire1.png 1 ? ? 1 6 6 3 2.5
 AMBIENT_LIGHT 1 1 1 0.75
 DIRECTIONAL_LIGHT 1000 1000 1000 1 1 1 1 200 100
-POINT_LIGHT pointlight847720020 71.2816 7.91256 102.553 1 1 1 1 1
+POINT_LIGHT pointlight1804680928 42.8731 9.12255 47.5042 1 1 0.501961 1.5 1
 CAMERA_FOV 90
 LOD_DISTANCE 1000
-EDITOR_SPEED 1
-EDITOR_POSITION 37.1975 11.1216 112.873
-EDITOR_YAW 350.136
-EDITOR_PITCH -11.5505
+EDITOR_SPEED 5
+EDITOR_POSITION 36.5074 11.3216 47.5637
+EDITOR_YAW 5.53609
+EDITOR_PITCH -38.6705
 GRAPHICS_SHADOWS 1 100 50.000000 50.000000 50.000000 0.000000 0.000000 0.000000 1 100
 GRAPHICS_MOTIONBLUR 1 0.25
 GRAPHICS_DOF 1 1 5 2

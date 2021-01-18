@@ -1,4 +1,4 @@
-28 58
+13 17
 META script_type_update
 META execution_entry
 
@@ -6,17 +6,26 @@ BOOL wDown = fe3d:input_is_key_down("KEY_W")
 BOOL aDown = fe3d:input_is_key_down("KEY_A")
 BOOL sDown = fe3d:input_is_key_down("KEY_S")
 BOOL dDown = fe3d:input_is_key_down("KEY_D")
+BOOL shiftDown = fe3d:input_is_key_down("KEY_LSHIFT")
 BOOL fToggled = fe3d:input_is_key_toggled("KEY_F")
 BOOL lmbPressed = fe3d:input_is_mouse_pressed("BUTTON_LEFT")
+DEC speed = 0.015
+
+IF shiftDown IS <true> AND sDown IS <false>:
+    MUL speed 2.0
 
 IF wDown IS <true>:
-    fe3d:camera_follow_z(0.025)
+    fe3d:camera_follow_z(speed)
 IF aDown IS <true>:
-    fe3d:camera_follow_x(-0.025)
+    NEG speed
+    fe3d:camera_follow_x(speed)
+    NEG speed
 IF sDown IS <true>:
-    fe3d:camera_follow_z(-0.025)
+    NEG speed
+    fe3d:camera_follow_z(speed)
+    NEG speed
 IF dDown IS <true>:
-    fe3d:camera_follow_x(0.025)
+    fe3d:camera_follow_x(speed)
 
 IF fToggled IS <true>:
     fe3d:graphics_enable_spot_light()

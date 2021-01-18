@@ -181,24 +181,25 @@ void ScriptInterpreter::unload()
 	// Disable collision response
 	_fe3d.collision_disableCameraTerrainResponse();
 	_fe3d.collision_disableCameraResponse();
+	_fe3d.collision_setCameraBoxSize(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
 
 	// Disable graphics
-	_fe3d.gfx_disableAmbientLighting();
-	_fe3d.gfx_disableDirectionalLighting();
-	_fe3d.gfx_disableSpecularLighting();
-	_fe3d.gfx_disablePointLighting();
-	_fe3d.gfx_disableSpotLighting();
-	_fe3d.gfx_disableFog();
-	_fe3d.gfx_disableSkyReflections();
-	_fe3d.gfx_disableSceneReflections();
-	_fe3d.gfx_disableLightMapping();
-	_fe3d.gfx_disableNormalMapping();
-	_fe3d.gfx_disableShadows();
-	_fe3d.gfx_disableWaterEffects();
-	_fe3d.gfx_disableSkyHDR();
-	_fe3d.gfx_disableDOF();
-	_fe3d.gfx_disableMotionBlur();
-	_fe3d.gfx_disableLensFlare();
+	_fe3d.gfx_disableAmbientLighting(true);
+	_fe3d.gfx_disableDirectionalLighting(true);
+	_fe3d.gfx_disableSpecularLighting(true);
+	_fe3d.gfx_disablePointLighting(true);
+	_fe3d.gfx_disableSpotLighting(true);
+	_fe3d.gfx_disableFog(true);
+	_fe3d.gfx_disableSkyReflections(true);
+	_fe3d.gfx_disableSceneReflections(true);
+	_fe3d.gfx_disableLightMapping(true);
+	_fe3d.gfx_disableNormalMapping(true);
+	_fe3d.gfx_disableShadows(true);
+	_fe3d.gfx_disableWaterEffects(true);
+	_fe3d.gfx_disableSkyHDR(true);
+	_fe3d.gfx_disableDOF(true);
+	_fe3d.gfx_disableMotionBlur(true);
+	_fe3d.gfx_disableLensFlare(true);
 
 	// Delete game GUI
 	for (const auto& ID : _fe3d.guiEntity_getAllIDs())

@@ -1,4 +1,4 @@
-12 27
+39 12
 META script_type_update
 
 /// Update time passing
@@ -35,8 +35,10 @@ IF _isTimeCycling IS <true>:
         EDIT _isTimeCycling = <false>
         IF _isDayTime IS <true>:
             fe3d:graphics_disable_light_mapping()
+            fe3d:graphics_disable_point_lighting()
         ELSE:
             fe3d:graphics_enable_light_mapping()
+            fe3d:graphics_enable_point_lighting()
 
 /// Apply values
 DEC fogIntensity = 0.5

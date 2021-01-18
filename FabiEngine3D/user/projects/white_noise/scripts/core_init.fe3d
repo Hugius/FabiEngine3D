@@ -1,4 +1,4 @@
-11 65
+6 10
 META script_type_init
 META execution_entry
 
@@ -9,6 +9,7 @@ fe3d:scene_load("spacestation")
 fe3d:camera_set_position(0.0, 1.5, -53.0)
 fe3d:camera_enable_first_person_view()
 fe3d:camera_set_cursor_speed(2.0)
+fe3d:camera_set_yaw(-90.0)
 fe3d:cursor_hide()
 fe3d:collision_enable_camera_aabb_response(<true>, <true>, <true>)
 

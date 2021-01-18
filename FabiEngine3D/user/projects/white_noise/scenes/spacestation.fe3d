@@ -101,16 +101,17 @@ MODEL 796953294@ceiling_side -6 4 -73 0 180 0 1 1 1 user\assets\models\spacestat
 MODEL 1535914666@ceiling_side -6 4 -69 0 0 0 1 1 1 user\assets\models\spacestations\ceiling_side.obj user\assets\textures\diffuse_maps\spacestations\ceiling_side.png ? ? user\assets\textures\normal_maps\spacestations\ceiling_side.png 0 0 1 0 0 1 1 1 0.75 1 1 1 1 ? 0 ? ceiling_side 0 0 0 2 0.3 2
 MODEL 2121265625@ceiling_side -4 4 -69 0 0 0 1 1 1 user\assets\models\spacestations\ceiling_side.obj user\assets\textures\diffuse_maps\spacestations\ceiling_side.png ? ? user\assets\textures\normal_maps\spacestations\ceiling_side.png 0 0 1 0 0 1 1 1 0.75 1 1 1 1 ? 0 ? ceiling_side 0 0 0 2 0.3 2
 MODEL 267262117@ceiling_corner_out 2 4 -73 0 0 0 1 1 1 user\assets\models\spacestations\ceiling_corner_out.obj user\assets\textures\diffuse_maps\spacestations\ceiling_corner_out.png ? ? user\assets\textures\normal_maps\spacestations\ceiling_corner_out.png 0 0 1 0 0 1 1 1 0.75 1 1 1 1 ? 0 ? ceiling_corner_out 0 0 0 2 0.3 2
-MODEL 2034647489@door_big -7 0 -71 0 0 0 1.8 1.8 2.8 user\assets\models\spacestations\door_big.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? door_big 0 0 0 0.3 2.3 2.9
+MODEL 2034647489@door_big -6.76001 0 -71 0 0 0 1.8 1.8 2.32 user\assets\models\spacestations\door_big.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? door_big 0 0 0 0.3 2.3 2.9
+MODEL 954604944@ceiling_lamp 0 4 -59 0 90 0 1 1 1 user\assets\models\spacestations\ceiling_lamp.obj user\assets\textures\diffuse_maps\spacestations\ceiling_lamp.png user\assets\textures\light_maps\spacestations\ceiling_lamp.png ? ? 0 0 1 0 0 0 1 1 10 1 1 1 1 ? 0 ? ceiling_lamp 0 0 0 1.41 0.180001 0.220001
 AMBIENT_LIGHT 1 1 1 1
 DIRECTIONAL_LIGHT 5000 300 -7500 0.831373 0.686275 0.501961 1 500 1
-POINT_LIGHT pointlight1635785601 0 2 -60 0 0.635294 0.909804 1 0.5
+POINT_LIGHT pointlight1635785601 0 1 -59 0 0.635294 0.909804 1 0.5
 CAMERA_FOV 90
 LOD_DISTANCE 0
-EDITOR_SPEED 5
-EDITOR_POSITION -1.12459 2.33439 -70.8096
-EDITOR_YAW 178.102
-EDITOR_PITCH -11.7201
+EDITOR_SPEED 1
+EDITOR_POSITION 0.175339 2.59439 -62.4108
+EDITOR_YAW 84.1821
+EDITOR_PITCH -15.2002
 GRAPHICS_SHADOWS 1 100 25.000000 3.000000 -50.000000 0.000000 0.000000 0.000000 1 100
 GRAPHICS_MOTIONBLUR 1 0.2
 GRAPHICS_LENSFLARE 1 user\assets\textures\flare_maps\flare.png 2 1

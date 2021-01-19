@@ -49,7 +49,7 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 		}
 	}
-	else if (functionName == "fe3d:model_find_full_id") // Find full gameEntity ID
+	else if (functionName == "fe3d:model_find_full_ids") // Find full gameEntity IDs
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -63,19 +63,19 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 				return true;
 			}
 
-			// Find full gameEntity ID based on part ID
-			string result = "";
+			// Find full gameEntity IDs based on part ID
 			for (auto& ID : _fe3d.gameEntity_getAllIDs())
 			{
+				// If substring matches
 				if (arguments[0].getString() == ID.substr(0, arguments[0].getString().size()))
 				{
-					result = ID;
-					break;
+					// Only non-preview models
+					if (ID.front() != '@')
+					{
+						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, ID));
+					}
 				}
 			}
-
-			// Return
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result));
 		}
 	}
 	else if (functionName == "fe3d:model_place") // Create gameEntity

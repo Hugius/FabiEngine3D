@@ -1,4 +1,4 @@
-9 34
+10 22
 META script_type_init
 
 /// Globals
@@ -9,7 +9,9 @@ GLOB VEC3 _dirLightPos = fe3d:graphics_get_directional_light_position()
 GLOB DEC _passedTime = 0.0
 GLOB BOOL _isDayTime = <true>
 GLOB BOOL _isTimeCycling = <false>
+GLOB BOOL _areLightsOn = <false>
 
 /// Graphics
 fe3d:graphics_disable_light_mapping()
+fe3d:graphics_disable_point_lighting()
 fe3d:sky_mix_with_current("night")

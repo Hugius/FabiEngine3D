@@ -1,0 +1,35 @@
+16 25
+META script_type_update
+
+/// Input
+BOOL wDown = fe3d:input_is_key_down("KEY_W")
+BOOL aDown = fe3d:input_is_key_down("KEY_A")
+BOOL sDown = fe3d:input_is_key_down("KEY_S")
+BOOL dDown = fe3d:input_is_key_down("KEY_D")
+BOOL shiftDown = fe3d:input_is_key_down("KEY_LSHIFT")
+
+/// Sprinting
+DEC speed = 0.015
+IF _isWalking IS <true> AND shiftDown IS <true> AND sDown IS <false>:
+    EDIT _isRunning = <true>
+    MUL speed 2.0
+
+EDIT _isWalking = <false>
+EDIT _isRunning = <false>
+
+IF wDown IS <true>:
+    EDIT _isWalking = <true>
+    fe3d:camera_follow_z(speed)
+IF aDown IS <true>:
+    EDIT _isWalking = <true>
+    NEG speed
+    fe3d:camera_follow_x(speed)
+    NEG speed
+IF sDown IS <true>:
+    EDIT _isWalking = <true>
+    NEG speed
+    fe3d:camera_follow_z(speed)
+    NEG speed
+IF dDown IS <true>:
+    EDIT _isWalking = <true>
+    fe3d:camera_follow_x(speed)

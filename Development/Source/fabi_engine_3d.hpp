@@ -69,6 +69,7 @@ public:
 	void camera_setPitch(float pitch);
 	void camera_setNearDistance(float nearZ);
 	void camera_setFarDistance(float farZ);
+	void camera_setMaxPitch(float pitch);
 	void camera_center();
 
 	// Camera interface - getters
@@ -85,6 +86,7 @@ public:
 	float camera_getNearDistance();
 	float camera_getFarDistance();
 	float camera_getMouseOffset();
+	float camera_getMaxPitch();
 
 	// Sky entity interface - setters
 	void skyEntity_add(const string& ID);

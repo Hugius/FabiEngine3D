@@ -207,17 +207,18 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 			return;
 		}
 
-		// Check if returned value is of the right type
-		if (values.size() > 1)
+		// Check if function returned anything
+		if (values[0].getType() == ScriptValueType::EMPTY)
 		{
-			if (variable.getType() == ScriptVariableType::MULTIPLE) // Variable is an array
-			{
-				variable.changeValues(values);
-			}
-			else // Variable is not an array
-			{
-				_throwScriptError("function returned too many values!");
-			}
+			_throwScriptError("function must return a value!");
+		}
+		else if (variable.getType() == ScriptVariableType::MULTIPLE) // Check if variable is an array
+		{
+			variable.changeValues(values);
+		}
+		else if (values.size() > 1) // Check if function returned too many values
+		{
+			_throwScriptError("function returned too many values!");
 		}
 		else if ((variable.getType() == ScriptVariableType::SINGLE || isAccessingListOne) && 
 			(variable.getValue(valueIndexOne).getType() == ScriptValueType::VEC3) &&  // VEC3
@@ -268,10 +269,6 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 			(values[0].getType() == ScriptValueType::BOOLEAN))
 		{
 			variable.getValue(valueIndexOne).setBoolean(values[0].getBoolean());
-		}
-		else if (values[0].getType() == ScriptValueType::EMPTY)
-		{
-			_throwScriptError("function must return a value!");
 		}
 		else
 		{

@@ -38,7 +38,7 @@ void main()
 	// Removing white alpha background
 	if(u_isAlphaObject)
 	{
-		if(texColor.a <= 0.1f)
+		if(texColor.a <= 0.25f)
 		{
 			discard;
 		}

@@ -24,6 +24,7 @@ public:
 	void setPitch(float value);
 	void setNearZ(float value);
 	void setFarZ(float value);
+	void setMaxPitch(float value);
 
 	// Other
 	void enableLookat();
@@ -54,6 +55,7 @@ public:
 	const float  getFarZ()                  const;
 	const float  getMouseSensitivity()      const;
 	const float  getMouseOffset()           const;
+	const float  getMaxPitch()				const;
 	const bool   isLookatEnabled()			const;
 	const bool   isFirstPersonViewEnabled() const;
 	const bool   isFreeMovementEnabled()	const;
@@ -87,6 +89,7 @@ private:
 	float _farZ = 0.0f;
 	float _mouseSensitivity = 1.0f;
 	float _mouseOffset = 0.0f;
+	float _maxPitch = 0.0f;
 
 	// Booleans
 	bool _isLookatEabled		   = false;

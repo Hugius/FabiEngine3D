@@ -112,6 +112,11 @@ void FabiEngine3D::camera_setFarDistance(float farZ)
 	_core->_cameraManager.setFarZ(farZ);
 }
 
+void FabiEngine3D::camera_setMaxPitch(float pitch)
+{
+	_core->_cameraManager.setMaxPitch(pitch);
+}
+
 void FabiEngine3D::camera_center()
 {
 	_core->_cameraManager.center();
@@ -140,6 +145,11 @@ float FabiEngine3D::camera_getFarDistance()
 float FabiEngine3D::camera_getMouseOffset()
 {
 	return _core->_cameraManager.getMouseOffset();
+}
+
+float FabiEngine3D::camera_getMaxPitch()
+{
+	return _core->_cameraManager.getMaxPitch();
 }
 
 float FabiEngine3D::camera_getFOV()

@@ -1,64 +1,7 @@
-40 21
+5 16
 META script_type_update
 META execution_entry
 
-BOOL wDown = fe3d:input_is_key_down("KEY_W")
-BOOL aDown = fe3d:input_is_key_down("KEY_A")
-BOOL sDown = fe3d:input_is_key_down("KEY_S")
-BOOL dDown = fe3d:input_is_key_down("KEY_D")
-BOOL shiftDown = fe3d:input_is_key_down("KEY_LSHIFT")
-BOOL fToggled = fe3d:input_is_key_toggled("KEY_F")
-BOOL lmbPressed = fe3d:input_is_mouse_pressed("BUTTON_LEFT")
-DEC speed = 0.015
-
-IF shiftDown IS <true> AND sDown IS <false>:
-    MUL speed 2.0
-
-IF wDown IS <true>:
-    fe3d:camera_follow_z(speed)
-IF aDown IS <true>:
-    NEG speed
-    fe3d:camera_follow_x(speed)
-    NEG speed
-IF sDown IS <true>:
-    NEG speed
-    fe3d:camera_follow_z(speed)
-    NEG speed
-IF dDown IS <true>:
-    fe3d:camera_follow_x(speed)
-
-IF fToggled IS <true>:
-    fe3d:graphics_enable_spot_light()
-ELSE:
-    fe3d:graphics_disable_spot_light()
-
-STR kip = fe3d:raycast_into_model("door_big", "", <true>)
-IF kip NOT "":
-    IF lmbPressed IS <true>:
-        fe3d:model_set_aabb_responsive(kip, <false>)
-        fe3d:model_start_animation("door_big_open", kip, 1)
-
-STR gunID = "ak47"
-DEC gunOffset = -1.75
-VEC3 camPos = fe3d:camera_get_position()
-DEC yaw = fe3d:camera_get_yaw()
-IF <true> IS <true>:
-    INCR yaw 25.0
-    DEC sinRot = math:cos(yaw)
-    DEC cosRot = math:sin(yaw)
-    MUL sinRot 0.9
-    MUL cosRot 0.9
-    VEC3 gunPos = camPos
-    INCR gunPos.x sinRot
-    INCR gunPos.z cosRot
-    INCR gunPos.y gunOffset
-    fe3d:model_set_position(gunID, gunPos.x, gunPos.y, gunPos.z)
-    /// Rotation
-    VEC3 gunRot = fe3d:model_get_rotation(gunID)
-    EDIT gunRot.y = fe3d:camera_get_yaw()
-    NEG gunRot.y
-    INCR gunRot.y 0.0
-    fe3d:model_set_rotation(gunID, gunRot.x, gunRot.y, gunRot.z)
-    /// Shooting animation
-    IF lmbPressed IS <true>:
-        fe3d:model_start_animation("ak47_shoot", gunID, 1)
+EXEC player_movement
+EXEC player_gunplay
+EXEC player_misc

@@ -33,6 +33,7 @@ void CameraManager::reset()
 	_farZ = 0.0f;
 	_mouseSensitivity = 1.0f;
 	_mouseOffset = 0.0f;
+	_maxPitch = 90.0f;
 
 	// Booleans
 	_isLookatEabled = false;
@@ -105,7 +106,7 @@ void CameraManager::update(Ivec2 lastCursorPosition)
 	_yaw = std::fmod(_yaw, 360.0f);
 
 	// Limit pitch
-	_pitch = std::clamp(_pitch, -89.0f, 89.0f);
+	_pitch = std::clamp(_pitch, -(_maxPitch - 1.0f), (_maxPitch - 1.0f));
 
 	// Update matrices
 	updateMatrices();
@@ -253,6 +254,11 @@ void CameraManager::setFarZ(float value)
 	_farZ = value;
 }
 
+void CameraManager::setMaxPitch(float value)
+{
+	_maxPitch = value;
+}
+
 const Vec3 CameraManager::getPosition() const
 {
 	return _position;
@@ -296,6 +302,11 @@ const float CameraManager::getMouseSensitivity() const
 const float CameraManager::getMouseOffset() const
 {
 	return _mouseOffset;
+}
+
+const float CameraManager::getMaxPitch() const
+{
+	return _maxPitch;
 }
 
 const float CameraManager::getFOV() const

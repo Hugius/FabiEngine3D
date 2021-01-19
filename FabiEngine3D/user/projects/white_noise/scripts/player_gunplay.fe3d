@@ -1,0 +1,57 @@
+20 14
+META script_type_update
+
+/// Miscellaneous
+STR gunID = "ak47"
+EDIT _isShooting = fe3d:model_is_animation_playing("ak47_shoot", gunID)
+EDIT _isReloading = fe3d:model_is_animation_playing("ak47_reload", gunID)
+
+/// Input
+BOOL lmbDown = fe3d:input_is_mouse_down("BUTTON_LEFT")
+BOOL rmbDown = fe3d:input_is_mouse_down("BUTTON_RIGHT")
+BOOL rPressed = fe3d:input_is_key_pressed("KEY_R")
+
+
+fe3d:model_set_rotation_origin(gunID, 0.0, 0.65, 0.0)
+DEC xOffset = 0.2
+DEC yOffset = 0.2
+DEC zOffset = 0.2
+DEC yaw = fe3d:camera_get_yaw()
+INCR yaw 45.0
+IF rmbDown IS <true>:
+    DECR yaw 45.0
+    fe3d:camera_set_fov(70.0)
+    fe3d:image_set_visible("crosshair", <false>)
+ELSE:
+    fe3d:camera_set_fov(90.0)
+    fe3d:image_set_visible("crosshair", <true>)
+VEC3 camPos = fe3d:camera_get_position()
+
+DEC pitch = fe3d:camera_get_pitch()
+IF <true> IS <true>:
+    DEC xMultiplier = math:cos(yaw)
+    DEC yMultiplier = math:tan(pitch)
+    DEC zMultiplier = math:sin(yaw)
+    MUL xOffset xMultiplier
+    MUL yOffset yMultiplier
+    MUL zOffset zMultiplier
+    VEC3 gunPos = camPos
+    INCR gunPos.x xOffset
+    INCR gunPos.y yOffset
+    DECR gunPos.y 0.625
+    INCR gunPos.z zOffset
+    fe3d:model_set_position(gunID, gunPos.x, gunPos.y, gunPos.z)
+    /// Rotation
+    VEC3 gunRot = fe3d:model_get_rotation(gunID)
+    EDIT gunRot.y = fe3d:camera_get_yaw()
+    NEG gunRot.y
+    INCR gunRot.y 90.0
+    EDIT gunRot.z = pitch
+    NEG gunRot.z
+    fe3d:model_set_rotation(gunID, gunRot.x, gunRot.y, gunRot.z)
+    /// Shooting animation
+    IF lmbDown IS <true> AND _isShooting NOT <true> AND _isReloading IS <false>:
+        fe3d:model_start_animation("ak47_shoot", gunID, 1)
+
+IF rPressed IS <true> AND _isShooting IS <false>:
+    fe3d:model_start_animation("ak47_reload", gunID, 1)

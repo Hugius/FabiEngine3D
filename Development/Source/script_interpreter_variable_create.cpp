@@ -213,17 +213,18 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 						return;
 					}
 
-					// Check if returned value is of the right type
-					if (values.size() > 1)
+					// Check if function returned anything
+					if (values[0].getType() == ScriptValueType::EMPTY)
 					{
-						if (typeString == _listKeyword) // Variable is an array
-						{
-							variableList.push_back(ScriptVariable(_fe3d, scope, ScriptVariableType::MULTIPLE, nameString, isConstant, values));
-						}
-						else // Variable is not an array
-						{
-							_throwScriptError("function returned too many values!");
-						}
+						_throwScriptError("function must return a value!");
+					}
+					else if (typeString == _listKeyword) // Check if variable is an array
+					{
+						variableList.push_back(ScriptVariable(_fe3d, scope, ScriptVariableType::MULTIPLE, nameString, isConstant, values));
+					}
+					else if (values.size() > 1) // Check if function returned too many values
+					{					
+						_throwScriptError("function returned too many values!");
 					}
 					else if
 						(((typeString == _vec3Keyword)	 && (values[0].getType() == ScriptValueType::VEC3))    || 
@@ -233,11 +234,7 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 						((typeString == _booleanKeyword) && (values[0].getType() == ScriptValueType::BOOLEAN)))
 					{
 						variableList.push_back(ScriptVariable(_fe3d, scope, ScriptVariableType::SINGLE, nameString, isConstant, values));
-					}
-					else if (values[0].getType() == ScriptValueType::EMPTY)
-					{
-						_throwScriptError("function must return a value!");
-					}
+					} 
 					else
 					{
 						_throwScriptError("function value type does not match the variable type!");

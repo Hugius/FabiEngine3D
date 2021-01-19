@@ -151,9 +151,12 @@ bool ScriptInterpreter::_executeFe3dCameraFunction(const string& functionName, v
 	}
 	else if (functionName == "fe3d:camera_enable_first_person_view") // Enable first person view
 	{
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		auto types = { ScriptValueType::DECIMAL };
+
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
 			_fe3d.camera_enableFirstPersonView();
+			_fe3d.camera_setMaxPitch(arguments[0].getDecimal());
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}

@@ -1,0 +1,21 @@
+19 43
+META script_type_init
+
+/// Globals
+GLOB BOOL _isShooting = <false>
+GLOB BOOL _isReloading = <false>
+GLOB BOOL _isWalking = <false>
+GLOB BOOL _isRunning = <false>
+
+/// Camera
+fe3d:camera_set_position(0.0, 2.0, -53.0)
+fe3d:camera_enable_first_person_view(45.0)
+fe3d:camera_set_cursor_speed(2.0)
+fe3d:camera_set_yaw(-90.0)
+fe3d:cursor_hide()
+fe3d:collision_enable_camera_aabb_response(<true>, <true>, <true>)
+
+fe3d:graphics_set_spot_light_color(1.0, 1.0, 1.0)
+fe3d:graphics_set_spot_light_intensity(1.0)
+fe3d:graphics_set_spot_light_angle(30.0)
+fe3d:graphics_set_spot_light_distance(10.0)

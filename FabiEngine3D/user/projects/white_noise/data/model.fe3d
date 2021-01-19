@@ -22,4 +22,4 @@
 @docking_station user\assets\models\spacestations\docking_station.obj user\assets\textures\diffuse_maps\spacestations\docking_station.png user\assets\textures\light_maps\spacestations\docking_station.png ? user\assets\textures\normal_maps\spacestations\docking_station.png 10 10 10 0 0 0 1 1 1 1 1 1 1 1 1 ? 0
 @door_big user\assets\models\spacestations\door_big.obj ? ? ? ? 1.25 1.25 1.25 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 door_big 0 0 0 0.3 2.3 2.9
 @door_small user\assets\models\spacestations\door_small.obj ? ? ? ? 1.25 1.25 1.25 0 1 1 0 0 1 1 1 1 1 1 1 ? 0
-@ak47 user\assets\models\guns\ak47.obj ? ? ? ? 0.5 0.5 0.5 0 1 0 0 1 1 1 1 1 1 1 1 ? 0
+@ak47 user\assets\models\guns\ak47.obj ? ? ? ? 0.2 0.2 0.2 0 0 0 1 1 1 1 0.75 1 1 1 1 ? 0

@@ -49,6 +49,35 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 		}
 	}
+	else if (functionName == "fe3d:billboard_find_full_ids") // Find full billboardEntity IDs
+	{
+		auto types = { ScriptValueType::STRING };
+
+		// Validate arguments
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		{
+			// Cannot request a preview entity
+			if (arguments[0].getString().front() == '@')
+			{
+				_throwScriptError("Requested billboard ID cannot start with '@'");
+				return true;
+			}
+
+			// Find full billboardEntity IDs based on part ID
+			for (auto& ID : _fe3d.billboardEntity_getAllIDs())
+			{
+				// If substring matches
+				if (arguments[0].getString() == ID.substr(0, arguments[0].getString().size()))
+				{
+					// Only non-preview billboards
+					if (ID.front() != '@')
+					{
+						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, ID));
+					}
+				}
+			}
+		}
+	}
 	else if (functionName == "fe3d:billboard_place") // Create billboardEntity
 	{
 		auto types =

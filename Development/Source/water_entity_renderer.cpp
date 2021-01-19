@@ -1,6 +1,8 @@
 #include "water_entity_renderer.hpp"
 #include "configuration.hpp"
 
+using std::to_string;
+
 void WaterEntityRenderer::bind()
 {
 	// Bind shader
@@ -11,16 +13,25 @@ void WaterEntityRenderer::bind()
 	_shader.uploadUniform("u_projectionMatrix",	_renderBus.getProjectionMatrix());
 
 	// Fragment shader uniforms
-	_shader.uploadUniform("u_directionalLightPosition", _renderBus.getDirectionalLightPosition());
-	_shader.uploadUniform("u_cameraPosition",			_renderBus.getCameraPosition());
-	_shader.uploadUniform("u_fogMinDistance",			_renderBus.getFogMinDistance());
-	_shader.uploadUniform("u_fogMaxDistance",			_renderBus.getFogMaxDistance());
-	_shader.uploadUniform("u_fogDefaultFactor",			_renderBus.getFogDefaultFactor());
-	_shader.uploadUniform("u_fogColor",					_renderBus.getFogColor());
-	_shader.uploadUniform("u_isFogEnabled",				_renderBus.isFogEnabled());
-	_shader.uploadUniform("u_isEffectsEnabled",			_renderBus.isWaterEffectsEnabled());
-	_shader.uploadUniform("u_nearZ",					_renderBus.getNearZ());
-	_shader.uploadUniform("u_farZ",						_renderBus.getFarZ());
+	_shader.uploadUniform("u_directionalLightColor",	 _renderBus.getDirectionalLightColor());
+	_shader.uploadUniform("u_directionalLightPosition",  _renderBus.getDirectionalLightPosition());
+	_shader.uploadUniform("u_cameraPosition",			 _renderBus.getCameraPosition());
+	_shader.uploadUniform("u_fogMinDistance",			 _renderBus.getFogMinDistance());
+	_shader.uploadUniform("u_fogMaxDistance",			 _renderBus.getFogMaxDistance());
+	_shader.uploadUniform("u_fogDefaultFactor",			 _renderBus.getFogDefaultFactor());
+	_shader.uploadUniform("u_fogColor",					 _renderBus.getFogColor());
+	_shader.uploadUniform("u_isFogEnabled",				 _renderBus.isFogEnabled());
+	_shader.uploadUniform("u_isEffectsEnabled",			 _renderBus.isWaterEffectsEnabled());
+	_shader.uploadUniform("u_nearZ",					 _renderBus.getNearZ());
+	_shader.uploadUniform("u_farZ",						 _renderBus.getFarZ());
+	_shader.uploadUniform("u_isDirectionalLightEnabled", _renderBus.isDirectionalLightingEnabled());
+	_shader.uploadUniform("u_isSpecularLightEnabled",	 _renderBus.isSpecularLightingEnabled());
+	_shader.uploadUniform("u_isPointLightEnabled",		 _renderBus.isPointLightingEnabled());
+	_shader.uploadUniform("u_isSpotLightEnabled",		 _renderBus.isSpotLightingEnabled());
+	_shader.uploadUniform("u_spotLightColor",			 _renderBus.getSpotLightColor());
+	_shader.uploadUniform("u_spotLightIntensity",		 _renderBus.getSpotLightIntensity());
+	_shader.uploadUniform("u_maxSpotLightDistance",		 _renderBus.getMaxSpotLightDistance());
+	_shader.uploadUniform("u_directionalLightIntensity", _renderBus.getDirectionalLightIntensity());
 
 	// Depth testing
 	glEnable(GL_DEPTH_TEST);
@@ -39,6 +50,34 @@ void WaterEntityRenderer::unbind()
 	glDisable(GL_BLEND);
 
 	_shader.unbind();
+}
+
+void WaterEntityRenderer::renderLightEntities(const unordered_map<string, shared_ptr<LightEntity>>& entities)
+{
+	// Upload
+	_shader.uploadUniform("u_pointLightCount", static_cast<int>(entities.size()));
+
+	// Render all lights
+	unsigned int index = 0;
+	for (auto& [keyID, entity] : entities)
+	{
+		if (entity->isVisible())
+		{
+			_shader.uploadUniform("u_pointLightPositions[" + to_string(index) + "]", entity->getPosition());
+			_shader.uploadUniform("u_pointLightColors[" + to_string(index) + "]", entity->getColor());
+			_shader.uploadUniform("u_pointLightIntensities[" + to_string(index) + "]", entity->getIntensity());
+			_shader.uploadUniform("u_pointLightDistanceFactors[" + to_string(index) + "]", 1.0f / entity->getDistanceFactor());
+		}
+		else
+		{
+			_shader.uploadUniform("u_pointLightPositions[" + to_string(index) + "]", Vec3(0.0f));
+			_shader.uploadUniform("u_pointLightColors[" + to_string(index) + "]", Vec3(0.0f));
+			_shader.uploadUniform("u_pointLightIntensities[" + to_string(index) + "]", 0.0f);
+			_shader.uploadUniform("u_pointLightDistanceFactors[" + to_string(index) + "]", 0.0f);
+		}
+
+		index++;
+	}
 }
 
 void WaterEntityRenderer::render(const shared_ptr<WaterEntity> entity)

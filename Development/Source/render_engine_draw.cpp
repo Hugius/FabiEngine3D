@@ -45,6 +45,9 @@ void RenderEngine::_renderWaterEntity()
 		// Bind
 		_waterEntityRenderer.bind();
 
+		// Render lights
+		_waterEntityRenderer.renderLightEntities(_entityBus->getLightEntities());
+
 		// Render WATER entity
 		_waterEntityRenderer.render(_entityBus->getWaterEntity());
 

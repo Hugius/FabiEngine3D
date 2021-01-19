@@ -1,4 +1,4 @@
-29 16
+30 22
 META script_type_update
 META execution_entry
 
@@ -18,9 +18,11 @@ EXEC player_bobbing
 EXEC player_misc
 
 /// Working
+EXEC tool_animation
 EXEC cutting_update
 EXEC mining_update
 EXEC gathering_update
+EXEC collecting_update
 
 /// NPC interaction
 EXEC npc_update

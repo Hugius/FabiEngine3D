@@ -1,4 +1,4 @@
-33 11
+41 57
 META script_type_update
 
 /// Update tool & pickup animations status
@@ -40,5 +40,5 @@ ELSE:
     fe3d:camera_enable_first_person_view()
 
 /// Center cursor when pickup is playing
-IF _isPickupPlaying IS <true>:
+IF _isPickupPlaying IS <true> OR _isToolPlaying IS <true>:
     fe3d:camera_center_cursor()

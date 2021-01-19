@@ -1,4 +1,4 @@
-56 0
+8 32
 META script_type_init
 
 /// Globals
@@ -7,7 +7,7 @@ GLOB BOOL _isFalling = <false>
 GLOB BOOL _isWalking = <false>
 GLOB BOOL _isRunning = <false>
 GLOB BOOL _mayJump = <false>
-GLOB CONST DEC _camHeight = 2.75
+GLOB CONST DEC _playerHeight = 2.75
 GLOB VEC3 _movingAcc = [0.0 0.0 0.0]
 GLOB VEC3 _movingSpeed = [0.0 0.0 0.0]
 GLOB DEC _jumpingSpeed = 0.1
@@ -55,18 +55,19 @@ fe3d:image_place("temperature", "temperature_icon.png", -0.775, 0.35, 0.0, 0.07,
 /// Camera
 fe3d:cursor_hide()
 ///fe3d:camera_set_position(149.0, 48.0, 208.0)
-fe3d:camera_set_position(0.0, 9.0, 140.0)
+fe3d:camera_set_position(0.0, 25.0, 140.0)
 ///fe3d:camera_set_position(115.0, 9.0, -33.0)
 ///fe3d:camera_set_position(30.0, 9.0, -10.0)
 fe3d:camera_set_yaw(-25.0)
 fe3d:camera_set_pitch(0.0)
 fe3d:camera_enable_first_person_view()
 fe3d:camera_set_cursor_speed(5.0)
+fe3d:camera_set_max_pitch(75.0)
 
 /// Player + physics
-fe3d:collision_set_camera_box(_camHeight, 0.0, 0.5, 0.5, 0.5, 0.5)
+fe3d:collision_set_camera_box(_playerHeight, 0.0, 0.5, 0.5, 0.5, 0.5)
 fe3d:collision_enable_camera_aabb_response(<true>, <false>, <true>)
-fe3d:collision_enable_camera_terrain_response(_camHeight, 0.05)
+fe3d:collision_enable_camera_terrain_response(_playerHeight, 0.05)
 fe3d:model_place("player", "skeleton", 0.0, 0.0, 0.0)
 fe3d:model_set_max_height("player", 2.5)
 fe3d:model_set_aabb_responsive("player", <false>)

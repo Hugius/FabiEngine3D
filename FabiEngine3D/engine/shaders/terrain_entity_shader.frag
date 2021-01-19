@@ -2,7 +2,7 @@
 #extension GL_ARB_explicit_uniform_location : enable
 
 // Const variables
-#define POINT_LIGHT_AMOUNT 128
+#define MAX_POINT_LIGHT_COUNT 128
 
 // In variables
 in vec3 f_pos;
@@ -29,8 +29,8 @@ uniform vec3 u_cameraFront;
 uniform vec3 u_ambientLightColor;
 uniform vec3 u_directionalLightColor;
 uniform vec3 u_directionalLightPosition;
-uniform vec3 u_pointLightPositions[POINT_LIGHT_AMOUNT];
-uniform vec3 u_pointLightColors[POINT_LIGHT_AMOUNT];
+uniform vec3 u_pointLightPositions[MAX_POINT_LIGHT_COUNT];
+uniform vec3 u_pointLightColors[MAX_POINT_LIGHT_COUNT];
 uniform vec3 u_spotLightColor;
 uniform vec3 u_shadowAreaCenter;
 uniform vec3 u_fogColor;
@@ -39,8 +39,8 @@ uniform vec3 u_fogColor;
 uniform float u_lightness;
 uniform float u_ambientLightIntensity;
 uniform float u_directionalLightIntensity;
-uniform float u_pointLightIntensities[POINT_LIGHT_AMOUNT];
-uniform float u_pointLightDistanceFactors[POINT_LIGHT_AMOUNT];
+uniform float u_pointLightIntensities[MAX_POINT_LIGHT_COUNT];
+uniform float u_pointLightDistanceFactors[MAX_POINT_LIGHT_COUNT];
 uniform float u_blendMapRepeat;
 uniform float u_blendMapRepeatR;
 uniform float u_blendMapRepeatG;
@@ -309,10 +309,12 @@ vec3 getPointLighting(vec3 normal)
 	}
 }
 
+// Calculate spot lighting
 vec3 getSpotLighting(vec3 normal)
 {
     if(u_isSpotLightEnabled)
     {
+		// Calculate distance
     	float fragmentDistance = abs(length(u_cameraPosition - f_pos));
         float distanceFactor = fragmentDistance / u_maxSpotLightDistance;
         distanceFactor = clamp(distanceFactor, 0.0f, 1.0f);
@@ -343,6 +345,7 @@ vec3 getSpotLighting(vec3 normal)
     }
 }
 
+// Calculate random float
 float getRandomFloat(vec3 seed, int i) // http://www.opengl-tutorial.org/intermediate-tutorials/tutorial-16-shadow-mapping/#stratified-poisson-sampling
 {
 	vec4 seed4 = vec4(seed,i);
@@ -350,6 +353,7 @@ float getRandomFloat(vec3 seed, int i) // http://www.opengl-tutorial.org/interme
 	return fract(sin(dot_product) * 43758.5453);
 }
 
+// Calculate shadow lighting
 float getShadowValue()
 {
 	if(u_isShadowsEnabled)
@@ -457,6 +461,7 @@ vec3 applyFog(vec3 color)
 	}
 }
 
+// Calculate specular lighting
 float getSpecularValue(vec3 position, vec3 normal)
 {
     if(u_isSpecularLightEnabled && u_isSpecularLighted)

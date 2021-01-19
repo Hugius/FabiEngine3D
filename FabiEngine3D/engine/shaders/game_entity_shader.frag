@@ -258,6 +258,8 @@ vec3 getPointLighting(vec3 normal)
 	}
 }
 
+
+// Calculate spot lighting
 vec3 getSpotLighting(vec3 normal)
 {
     if(u_isSpotLightEnabled)
@@ -292,6 +294,7 @@ vec3 getSpotLighting(vec3 normal)
     }
 }
 
+// Calculate specular lighting
 float getSpecularValue(vec3 position, vec3 normal)
 {
     if(u_isSpecularLightEnabled && u_isSpecularLighted)
@@ -311,6 +314,7 @@ float getSpecularValue(vec3 position, vec3 normal)
     }
 }
 
+// Calculate shadow lighting
 float getShadowValue()
 {
 	if(u_isShadowsEnabled && u_isShadowed)
@@ -378,6 +382,7 @@ float getShadowValue()
 	}
 }
 
+// Calculate light mapping
 vec3 applyLightMapping(vec3 color)
 {
 	if(u_lightMappingEnabled && u_isLightMapped && u_hasLightMap)
@@ -416,6 +421,7 @@ vec3 applyFog(vec3 color)
 	}
 }
 
+// Calculate sky reflections
 vec3 applySkyReflections(vec3 color, vec3 normal)
 {
 	if(u_skyReflectionsEnabled && u_isSkyReflective)
@@ -445,6 +451,7 @@ vec3 applySkyReflections(vec3 color, vec3 normal)
 	}
 }
 
+// Calculate scene reflections
 vec3 applySceneReflections(vec3 color)
 {
 	if(u_sceneReflectionsEnabled && u_isSceneReflective)

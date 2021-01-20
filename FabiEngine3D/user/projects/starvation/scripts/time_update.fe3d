@@ -1,4 +1,4 @@
-16 28
+15 28
 META script_type_update
 
 /// Update time passing
@@ -14,10 +14,10 @@ ELSE:
         INCR _passedTime 0.25
 
 /// Update day-night cycle
-CONST DEC ambSpeed = 0.00015
-CONST DEC dirSpeed = 0.00025
+CONST DEC ambSpeed = 0.00018
+CONST DEC dirSpeed = 0.000125
 CONST DEC skySpeed = 0.00025
-CONST DEC heightSpeed = 0.25
+CONST DEC heightSpeed = 0.35
 IF _isTimeCycling IS <true>:
     IF _isDayTime IS <true>:
         INCR _ambLightIntensity ambSpeed

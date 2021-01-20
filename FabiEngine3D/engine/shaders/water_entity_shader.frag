@@ -24,7 +24,6 @@ uniform vec3 u_color;
 uniform vec3 u_fogColor;
 uniform vec3 u_pointLightPositions[MAX_POINT_LIGHT_COUNT];
 uniform vec3 u_pointLightColors[MAX_POINT_LIGHT_COUNT];
-uniform vec3 u_spotLightColor;
 
 // Vector2 uniforms
 uniform vec2 u_rippleOffset;
@@ -41,8 +40,6 @@ uniform float u_fogMaxDistance;
 uniform float u_fogDefaultFactor;
 uniform float u_pointLightIntensities[MAX_POINT_LIGHT_COUNT];
 uniform float u_pointLightDistanceFactors[MAX_POINT_LIGHT_COUNT];
-uniform float u_spotLightIntensity;
-uniform float u_maxSpotLightDistance;
 
 // Integer uniforms
 uniform int u_pointLightCount;
@@ -57,7 +54,6 @@ uniform bool u_isReflective;
 uniform bool u_isRefractive;
 uniform bool u_isUnderWater;
 uniform bool u_isPointLightEnabled;
-uniform bool u_isSpotLightEnabled;
 uniform bool u_isSpecularLightEnabled;
 
 // Out variables
@@ -66,7 +62,6 @@ layout(location = 0) out vec4 o_finalColor;
 // Functions
 vec4 getMainColor();
 vec3 getPointLighting(vec3 normal);
-vec3 getSpotLighting(vec3 normal);
 float getSpecularValue(vec3 position, vec3 normal);
 vec3 applyFog(vec3 color);
 float convertDepthToLinear(float depth);
@@ -125,14 +120,14 @@ vec4 getMainColor()
 	// Specular lighting
 	if(u_isDirectionalLightEnabled && u_isSpecularLightEnabled && u_isSpecularLighted)
 	{
-		vec3 lightDir     = normalize(u_directionalLightPosition - f_pos);
-		vec3 viewDir      = normalize(f_pos - u_cameraPosition);
-		vec3 reflectDir   = reflect(normalize(lightDir), normal);
-		float specular = pow(max(dot(reflectDir, viewDir), 0.0f), u_specularLightFactor);
-		specular *= u_directionalLightIntensity;
-		specular *= u_specularLightIntensity;
-		directionalLighting = vec3(specular);
-		directionalLighting *= u_directionalLightColor;
+		vec3 lightDir     = normalize(u_directionalLightPosition - f_pos); // Light ray
+		vec3 viewDir      = normalize(f_pos - u_cameraPosition); // View ray
+		vec3 reflectDir   = reflect(normalize(lightDir), normal); // Reflect ray
+		float specular = pow(max(dot(reflectDir, viewDir), 0.0f), u_specularLightFactor); // Calculate if perpendicular
+		specular *= u_directionalLightIntensity; // Directional intensity
+		specular *= u_specularLightIntensity; // Specular intensity
+		directionalLighting = vec3(specular); // Add to lighting
+		directionalLighting *= u_directionalLightColor; // Directional color
 	}
 
 	// Fresnel effect
@@ -174,7 +169,6 @@ vec4 getMainColor()
 	{
 		finalColor += directionalLighting;
 		finalColor += getPointLighting(normal);
-		finalColor += getSpotLighting(normal);
 	}
 
 	// Return final color
@@ -213,33 +207,6 @@ vec3 getPointLighting(vec3 normal)
 	{
 		return vec3(0.0f);
 	}
-}
-
-// Calculate spot lighting
-vec3 getSpotLighting(vec3 normal)
-{
-    if(u_isSpotLightEnabled)
-    {
-    	// Calculate distance
-    	float fragmentDistance = abs(length(u_cameraPosition - f_pos));
-        float distanceFactor = fragmentDistance / u_maxSpotLightDistance;
-        distanceFactor = clamp(distanceFactor, 0.0f, 1.0f);
-        distanceFactor = 1.0f - distanceFactor;
-
-        // Apply lighting calculations
-		vec3 result = vec3(0.0f);
-        float specular = getSpecularValue(u_cameraPosition, normal);
-        result += vec3(specular); // Specular
-        result *= u_spotLightColor; // Color
-        result *= u_spotLightIntensity; // Intensity
-
-        // Return
-        return result * distanceFactor;
-    }
-    else
-    {
-        return vec3(0.0f);
-    }
 }
 
 // Calculate specular lighting

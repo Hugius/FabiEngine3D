@@ -27,10 +27,6 @@ void WaterEntityRenderer::bind()
 	_shader.uploadUniform("u_isDirectionalLightEnabled", _renderBus.isDirectionalLightingEnabled());
 	_shader.uploadUniform("u_isSpecularLightEnabled",	 _renderBus.isSpecularLightingEnabled());
 	_shader.uploadUniform("u_isPointLightEnabled",		 _renderBus.isPointLightingEnabled());
-	_shader.uploadUniform("u_isSpotLightEnabled",		 _renderBus.isSpotLightingEnabled());
-	_shader.uploadUniform("u_spotLightColor",			 _renderBus.getSpotLightColor());
-	_shader.uploadUniform("u_spotLightIntensity",		 _renderBus.getSpotLightIntensity());
-	_shader.uploadUniform("u_maxSpotLightDistance",		 _renderBus.getMaxSpotLightDistance());
 	_shader.uploadUniform("u_directionalLightIntensity", _renderBus.getDirectionalLightIntensity());
 
 	// Depth testing

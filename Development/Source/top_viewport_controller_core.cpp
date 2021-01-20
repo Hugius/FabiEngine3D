@@ -298,10 +298,22 @@ void TopViewportController::_updateProjectChange()
 		_modelEditor.unload();
 	}
 
+	// Unload animation editor
+	if (_animationEditor.isLoaded())
+	{
+		_animationEditor.unload();
+	}
+
 	// Unload billboard editor
 	if (_billboardEditor.isLoaded())
 	{
 		_billboardEditor.unload();
+	}
+
+	// Unload audio editor
+	if (_audioEditor.isLoaded())
+	{
+		_audioEditor.unload();
 	}
 
 	// Unload scene editor
@@ -310,28 +322,16 @@ void TopViewportController::_updateProjectChange()
 		_sceneEditor.unload();
 	}
 
-	// Unload animation editor
-	if (_animationEditor.isLoaded())
-	{
-		_animationEditor.unload();
-	}
-
 	// Unload script editor (loaded by default)
 	_scriptEditor.unload();
-
-	// Unload audio editor
-	if (_audioEditor.isLoaded())
-	{
-		_audioEditor.unload();
-	}
 
 	// Pass loaded project name
 	_environmentEditor.setCurrentProjectName(_currentProjectName);
 	_modelEditor.setCurrentProjectName(_currentProjectName);
-	_billboardEditor.setCurrentProjectName(_currentProjectName);
-	_sceneEditor.setCurrentProjectName(_currentProjectName);
 	_animationEditor.setCurrentProjectName(_currentProjectName);
-	_scriptEditor.setCurrentProjectName(_currentProjectName);
+	_billboardEditor.setCurrentProjectName(_currentProjectName);
 	_audioEditor.setCurrentProjectName(_currentProjectName);
+	_sceneEditor.setCurrentProjectName(_currentProjectName);
+	_scriptEditor.setCurrentProjectName(_currentProjectName);
 	_settingsEditor.setCurrentProjectName(_currentProjectName);
 }

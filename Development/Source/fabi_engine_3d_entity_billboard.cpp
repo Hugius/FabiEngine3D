@@ -145,7 +145,7 @@ void FabiEngine3D::billboardEntity_setColor(const string& ID, Vec3 color)
 
 void FabiEngine3D::billboardEntity_setDiffuseMap(const string& ID, const string& texturePath, bool textureFiltering)
 {
-	_core->_billboardEntityManager.getEntity(ID)->setDiffuseMap(_core->_texLoader.getTexture(texturePath, textureFiltering, textureFiltering));
+	_core->_billboardEntityManager.getEntity(ID)->setDiffuseMap(_core->_textureLoader.getTexture(texturePath, textureFiltering, textureFiltering));
 	_core->_billboardEntityManager.getEntity(ID)->setDiffuseMapPath(texturePath);
 }
 
@@ -289,7 +289,7 @@ void FabiEngine3D::billboardEntity_setFont(const string& ID, const string& fontP
 	// Only update texture if text content is present
 	if (text != "")
 	{
-		_core->_billboardEntityManager.getEntity(ID)->setDiffuseMap(_core->_texLoader.getText(text, fontPath));
+		_core->_billboardEntityManager.getEntity(ID)->setDiffuseMap(_core->_textureLoader.getText(text, fontPath));
 		_core->_billboardEntityManager.getEntity(ID)->setTransparent(true);
 	}
 }
@@ -305,7 +305,7 @@ void FabiEngine3D::billboardEntity_setTextContent(const string& ID, const string
 		// Only update texture if font is loaded
 		if (fontPath != "")
 		{
-			_core->_billboardEntityManager.getEntity(ID)->setDiffuseMap(_core->_texLoader.getText(textContent, fontPath));
+			_core->_billboardEntityManager.getEntity(ID)->setDiffuseMap(_core->_textureLoader.getText(textContent, fontPath));
 			_core->_billboardEntityManager.getEntity(ID)->setTransparent(true);
 		}
 	}

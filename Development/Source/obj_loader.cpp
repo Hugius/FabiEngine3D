@@ -5,6 +5,32 @@
 
 #include <GLEW\\glew.h>
 #include <filesystem>
+#include <future>
+
+void OBJLoader::cacheOBJs(const vector<string>& filePaths)
+{
+	vector<std::future<vector<ObjPart>>> threads;
+
+	// Start all loading threads
+	for (const auto& filePath : filePaths)
+	{
+		threads.push_back(std::async(std::launch::async, &OBJLoader::_loadOBJ, this, filePath, false));
+	}
+
+	// Wait for all threads to finish
+	int index = 0; 
+	for (auto& thread : threads)
+	{
+		auto objParts = thread.get();
+
+		// Logging
+		Logger::throwInfo("Loaded OBJ model: \"" + filePaths[index] + "\"");
+
+		// Cache model
+		_objPartsMap[filePaths[index]] = objParts;
+		index++;
+	}
+}
 
 const vector<ObjPart>& OBJLoader::loadOBJ(const string& filePath, bool calculateTangents)
 {
@@ -12,12 +38,16 @@ const vector<ObjPart>& OBJLoader::loadOBJ(const string& filePath, bool calculate
 	begin : auto iterator = _objPartsMap.find(filePath); // Search for existing OBJ parts
 	if (iterator == _objPartsMap.end()) 
 	{
+		// Load OBJ
 		auto loadedModel = _loadOBJ(filePath, calculateTangents);
+
+		// Logging
+		Logger::throwInfo("Loaded OBJ model: \"" + filePath + "\"");
 
 		// Determine if needs to be cached
 		if (loadedModel.empty())
 		{
-			return {};
+			return {}; // Model loading went bad, so return and cache nothing
 		}
 		else
 		{
@@ -28,7 +58,7 @@ const vector<ObjPart>& OBJLoader::loadOBJ(const string& filePath, bool calculate
 	else
 	{
 		// Calculate tangents once for this model
-		if (calculateTangents && iterator->second[0].tangents.empty())
+		if (calculateTangents)
 		{
 			_calculateTangents(iterator->second);
 		}
@@ -257,9 +287,6 @@ vector<ObjPart> OBJLoader::_loadOBJ(const string& filePath, bool calculateTangen
 		Logger::throwWarning("Incorrect or too little content at OBJ file: \"" + filePath + "\"");
 		return {};
 	}
-
-	// Logging
-	Logger::throwInfo("Loaded OBJ model: \"" + filePath + "\"");
 
 	// Return new OBJ parts
 	return objParts;

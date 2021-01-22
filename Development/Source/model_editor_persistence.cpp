@@ -5,8 +5,89 @@
 #include <sstream>
 #include <algorithm>
 
+void ModelEditor::preLoadGameEntitiesFromFile()
+{
+	// Error checking
+	if (_currentProjectName == "")
+	{
+		_fe3d.logger_throwError("No current project loaded @ preLoadGameEntitiesFromFile()");
+	}
+
+	// Compose full file path
+	string filePath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectName + "\\data\\model.fe3d";
+
+	// Check if model file exists
+	if (_fe3d.misc_isFileExisting(filePath))
+	{
+		// Temporary values
+		std::ifstream file(filePath);
+		string line;
+		vector<string> objPaths;
+		vector<string> texturePaths;
+
+		// Read model data
+		while (std::getline(file, line))
+		{
+			// Placeholders
+			string modelID, objPath, diffuseMapPath, lightMapPath, reflectionMapPath, normalMapPath;
+
+			// For file extraction
+			std::istringstream iss(line);
+
+			// Extract data
+			iss >> modelID >> objPath >> diffuseMapPath >> lightMapPath >> reflectionMapPath >> normalMapPath;
+
+			// Perform empty string & space conversions
+			objPath = (objPath == "?") ? "" : objPath;
+			diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
+			lightMapPath = (lightMapPath == "?") ? "" : lightMapPath;
+			reflectionMapPath = (reflectionMapPath == "?") ? "" : reflectionMapPath;
+			normalMapPath = (normalMapPath == "?") ? "" : normalMapPath;
+			std::replace(objPath.begin(), objPath.end(), '?', ' ');
+			std::replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
+			std::replace(lightMapPath.begin(), lightMapPath.end(), '?', ' ');
+			std::replace(reflectionMapPath.begin(), reflectionMapPath.end(), '?', ' ');
+			std::replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
+
+			// Save file paths
+			objPaths.push_back(objPath);
+			if (!diffuseMapPath.empty())
+			{
+				texturePaths.push_back(diffuseMapPath);
+			}
+			if (!lightMapPath.empty())
+			{
+				texturePaths.push_back(lightMapPath);
+			}
+			if (!reflectionMapPath.empty())
+			{
+				texturePaths.push_back(reflectionMapPath);
+			}
+			if (!normalMapPath.empty())
+			{
+				texturePaths.push_back(normalMapPath);
+			}
+		}
+
+		// Close file
+		file.close();
+
+		// Cache OBJ files & texture files
+		_fe3d.misc_cacheOBJs(objPaths);
+		_fe3d.misc_cacheTextures(texturePaths);
+	}
+
+	// Miscellaneous
+	_isPreLoaded = true;
+}
+
 void ModelEditor::loadGameEntitiesFromFile()
 {
+	if (!_isPreLoaded)
+	{
+		preLoadGameEntitiesFromFile();
+	}
+
 	// Error checking
 	if (_currentProjectName == "")
 	{
@@ -22,8 +103,11 @@ void ModelEditor::loadGameEntitiesFromFile()
 	// Check if model file exists
 	if (_fe3d.misc_isFileExisting(filePath))
 	{
+		// Temporary values
 		std::ifstream file(filePath);
 		string line;
+		vector<string> objPaths;
+		vector<string> texturePaths;
 
 		// Read model data
 		while (std::getline(file, line))

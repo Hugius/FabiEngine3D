@@ -768,6 +768,8 @@ public:
 	void misc_clearHeightMapCache(const string& filePath);
 	void misc_clearAudioChunkCache(const string& filePath);
 	void misc_clearAudioMusicCache(const string& filePath);
+	void misc_cacheOBJs(const vector<string>& filePaths);
+	void misc_cacheTextures(const vector<string>& filePaths);
 
 	// Miscellaneous interface - getters
 	int misc_getUniqueInt(int min, int max);

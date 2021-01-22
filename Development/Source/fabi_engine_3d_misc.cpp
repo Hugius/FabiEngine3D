@@ -169,27 +169,27 @@ void FabiEngine3D::misc_clearOBJCache(const string& filePath)
 
 void FabiEngine3D::misc_clearTextCache(const string& textContent, const string& fontPath)
 {
-	_core->_texLoader.clearTextCache(textContent, fontPath);
+	_core->_textureLoader.clearTextCache(textContent, fontPath);
 }
 
 void FabiEngine3D::misc_clearFontCache(const string& filePath)
 {
-	_core->_texLoader.clearFontCache(filePath);
+	_core->_textureLoader.clearFontCache(filePath);
 }
 
 void FabiEngine3D::misc_clearTextureCache(const string& filePath)
 {
-	_core->_texLoader.clearTextureCache(filePath);
+	_core->_textureLoader.clearTextureCache(filePath);
 }
 
 void FabiEngine3D::misc_clearCubeMapCache(const array<string, 6>& filePaths)
 {
-	_core->_texLoader.clearCubeMapCache(filePaths);
+	_core->_textureLoader.clearCubeMapCache(filePaths);
 }
 
 void FabiEngine3D::misc_clearHeightMapCache(const string& filePath)
 {
-	_core->_texLoader.clearHeightMapCache(filePath);
+	_core->_textureLoader.clearHeightMapCache(filePath);
 }
 
 void FabiEngine3D::misc_clearAudioChunkCache(const string& filePath)
@@ -202,13 +202,24 @@ void FabiEngine3D::misc_clearAudioMusicCache(const string& filePath)
 	_core->_audioLoader.clearMusicCache(filePath);
 }
 
+void FabiEngine3D::misc_cacheOBJs(const vector<string>& filePaths)
+{
+	_core->_objLoader.cacheOBJs(filePaths);
+}
+
+void FabiEngine3D::misc_cacheTextures(const vector<string>& filePaths)
+{
+	_core->_textureLoader.cacheTextures(filePaths);
+}
+
 string FabiEngine3D::misc_getWinExplorerFilename(const string& startingDir, const string& fileType)
 {
 	// Prepare filter C-string
 	string filter = fileType;
 	filter.push_back('\0');
 	filter += "*." + fileType + '\0';
-	auto startingDirectory = string(misc_getRootDirectory() + startingDir).c_str();
+	auto startingDirectoryString = string(misc_getRootDirectory() + startingDir);
+	auto startingDirectory = startingDirectoryString.c_str();
 
 	// Open file explorer
 	OPENFILENAME ofn;

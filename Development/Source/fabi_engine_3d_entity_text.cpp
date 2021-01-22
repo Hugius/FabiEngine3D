@@ -78,7 +78,7 @@ void FabiEngine3D::textEntity_setTextContent(const string& ID, const string& tex
 	}
 	else
 	{
-		entity->setDiffuseMap(_core->_texLoader.getText(textContent, entity->getFontPath()));
+		entity->setDiffuseMap(_core->_textureLoader.getText(textContent, entity->getFontPath()));
 	}
 }
 

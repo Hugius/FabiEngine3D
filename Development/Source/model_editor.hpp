@@ -15,6 +15,7 @@ public:
 	void unload();
 	void update();
 	void setCurrentProjectName(const string& projectName);
+	void preLoadGameEntitiesFromFile();
 	void loadGameEntitiesFromFile();
 	void saveGameEntitiesToFile();
 
@@ -83,6 +84,7 @@ private:
 	bool _movingToggled = false;
 	bool _resizingToggled = false;
 	bool _isEditorLoaded = false;
+	bool _isPreLoaded = false;
 
 	// Miscellaneous
 	Direction _transformationDirection = Direction::X;

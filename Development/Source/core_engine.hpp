@@ -39,7 +39,7 @@ private:
 	// Core instances
 	WindowManager          _windowManager;
 	OBJLoader              _objLoader;
-	TextureLoader          _texLoader;
+	TextureLoader          _textureLoader;
 	AudioLoader			   _audioLoader;
 	InputHandler           _inputHandler;
 	RenderBus			   _renderBus;

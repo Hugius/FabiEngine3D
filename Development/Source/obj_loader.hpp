@@ -29,6 +29,7 @@ public:
 	OBJLoader() = default;
 	~OBJLoader() = default;
 
+	void cacheOBJs(const vector<string>& filePaths);
 	const vector<ObjPart>& loadOBJ(const string& filePath, bool calculateTangents);
 
 	void clearOBJCache(const string& filePath);

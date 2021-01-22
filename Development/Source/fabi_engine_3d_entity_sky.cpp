@@ -17,7 +17,7 @@ void FabiEngine3D::skyEntity_deleteAll()
 
 void FabiEngine3D::skyEntity_setDiffuseMaps(const string& ID, const array<string, 6>& texturePaths)
 {
-	_core->_skyEntityManager.getEntity(ID)->setCubeMap(_core->_texLoader.getCubeMap(texturePaths));
+	_core->_skyEntityManager.getEntity(ID)->setCubeMap(_core->_textureLoader.getCubeMap(texturePaths));
 	_core->_skyEntityManager.getEntity(ID)->setDiffuseMapPaths(texturePaths);
 }
 
@@ -25,7 +25,7 @@ void FabiEngine3D::skyEntity_setDiffuseMapRight(const string& ID, const string& 
 {
 	auto texturePaths = _core->_skyEntityManager.getEntity(ID)->getDiffuseMapPaths();
 	texturePaths[0] = texturePath;
-	_core->_skyEntityManager.getEntity(ID)->setCubeMap(_core->_texLoader.getCubeMap(texturePaths));
+	_core->_skyEntityManager.getEntity(ID)->setCubeMap(_core->_textureLoader.getCubeMap(texturePaths));
 	_core->_skyEntityManager.getEntity(ID)->setDiffuseMapPaths(texturePaths);
 }
 
@@ -33,7 +33,7 @@ void FabiEngine3D::skyEntity_setDiffuseMapLeft(const string& ID, const string& t
 {
 	auto texturePaths = _core->_skyEntityManager.getEntity(ID)->getDiffuseMapPaths();
 	texturePaths[1] = texturePath;
-	_core->_skyEntityManager.getEntity(ID)->setCubeMap(_core->_texLoader.getCubeMap(texturePaths));
+	_core->_skyEntityManager.getEntity(ID)->setCubeMap(_core->_textureLoader.getCubeMap(texturePaths));
 	_core->_skyEntityManager.getEntity(ID)->setDiffuseMapPaths(texturePaths);
 }
 
@@ -41,7 +41,7 @@ void FabiEngine3D::skyEntity_setDiffuseMapTop(const string& ID, const string& te
 {
 	auto texturePaths = _core->_skyEntityManager.getEntity(ID)->getDiffuseMapPaths();
 	texturePaths[2] = texturePath;
-	_core->_skyEntityManager.getEntity(ID)->setCubeMap(_core->_texLoader.getCubeMap(texturePaths));
+	_core->_skyEntityManager.getEntity(ID)->setCubeMap(_core->_textureLoader.getCubeMap(texturePaths));
 	_core->_skyEntityManager.getEntity(ID)->setDiffuseMapPaths(texturePaths);
 }
 
@@ -49,7 +49,7 @@ void FabiEngine3D::skyEntity_setDiffuseMapBottom(const string& ID, const string&
 {
 	auto texturePaths = _core->_skyEntityManager.getEntity(ID)->getDiffuseMapPaths();
 	texturePaths[3] = texturePath;
-	_core->_skyEntityManager.getEntity(ID)->setCubeMap(_core->_texLoader.getCubeMap(texturePaths));
+	_core->_skyEntityManager.getEntity(ID)->setCubeMap(_core->_textureLoader.getCubeMap(texturePaths));
 	_core->_skyEntityManager.getEntity(ID)->setDiffuseMapPaths(texturePaths);
 }
 
@@ -57,7 +57,7 @@ void FabiEngine3D::skyEntity_setDiffuseMapFront(const string& ID, const string& 
 {
 	auto texturePaths = _core->_skyEntityManager.getEntity(ID)->getDiffuseMapPaths();
 	texturePaths[4] = texturePath;
-	_core->_skyEntityManager.getEntity(ID)->setCubeMap(_core->_texLoader.getCubeMap(texturePaths));
+	_core->_skyEntityManager.getEntity(ID)->setCubeMap(_core->_textureLoader.getCubeMap(texturePaths));
 	_core->_skyEntityManager.getEntity(ID)->setDiffuseMapPaths(texturePaths);
 }
 
@@ -65,7 +65,7 @@ void FabiEngine3D::skyEntity_setDiffuseMapBack(const string& ID, const string& t
 {
 	auto texturePaths = _core->_skyEntityManager.getEntity(ID)->getDiffuseMapPaths();
 	texturePaths[5] = texturePath;
-	_core->_skyEntityManager.getEntity(ID)->setCubeMap(_core->_texLoader.getCubeMap(texturePaths));
+	_core->_skyEntityManager.getEntity(ID)->setCubeMap(_core->_textureLoader.getCubeMap(texturePaths));
 	_core->_skyEntityManager.getEntity(ID)->setDiffuseMapPaths(texturePaths);
 }
 

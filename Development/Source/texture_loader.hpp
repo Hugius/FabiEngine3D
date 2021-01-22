@@ -24,6 +24,8 @@ public:
 	GLuint         getCubeMap(const array<string, 6>& filePaths);
 	const vector<float>& getHeightMap(const string& filePath);
 
+	void cacheTextures(const vector<string>& filePaths);
+
 	void clearTextCache(const string& textContent, const string& fontPath);
 	void clearFontCache(const string& filePath);
 	void clearTextureCache(const string& filePath);
@@ -39,7 +41,8 @@ private:
 
 	TTF_Font *    _loadFont(const string& filePath);
 	GLuint        _loadText(const string& textContent, const string& filePath);
-	GLuint        _loadTexture(const string& filePath, bool mipmap, bool aniso, bool repeat);
+	SDL_Surface*  _loadImage(const string& filePath);
+	GLuint		  _convertToTexture(const string& filePath, SDL_Surface* image, bool mipmap, bool aniso, bool repeat);
 	GLuint        _loadCubeMap(const array<string, 6>& filePaths);
 	vector<float> _loadHeightMap(const string& filePath);
 };

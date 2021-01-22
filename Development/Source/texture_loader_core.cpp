@@ -96,44 +96,46 @@ GLuint TextureLoader::_loadText(const string& textContent, const string&fontPath
 	return tex;
 }
 
-GLuint TextureLoader::_loadTexture(const string& filePath, bool mipmap, bool aniso, bool repeat)
+SDL_Surface* TextureLoader::_loadImage(const string& filePath)
 {
 	// Get application root directory
 	char buffer[256]; size_t len = sizeof(buffer);
 	GetModuleFileName(NULL, buffer, len);
 	string rootDir = buffer;
 	rootDir = rootDir.substr(0, rootDir.size() - string("bin\\FabiEngine3D.exe").size());
+	auto fullFilePath = string(rootDir + filePath);
 
 	// Load actual texture data
-	SDL_Surface * surface = IMG_Load((rootDir + filePath).c_str());
+	SDL_Surface * surface = IMG_Load(fullFilePath.c_str());
 	if (surface == nullptr)
 	{
 		Logger::throwWarning("Cannot open texture: \"" + filePath + "\"");
-		return 0;
 	}
 
+	return surface;
+}
+
+GLuint TextureLoader::_convertToTexture(const string& filePath, SDL_Surface* image, bool mipmap, bool aniso, bool repeat)
+{
 	// Generate OpenGL texture
-	GLuint tex;
-	glGenTextures(1, &tex);
-	glBindTexture(GL_TEXTURE_2D, tex);
+	GLuint texture;
+	glGenTextures(1, &texture);
+	glBindTexture(GL_TEXTURE_2D, texture);
 
 	// Determing the pixel format
-	if (surface->format->BytesPerPixel == 4)
+	if (image->format->BytesPerPixel == 4)
 	{
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, surface->w, surface->h, 0, GL_RGBA, GL_UNSIGNED_BYTE, surface->pixels);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image->w, image->h, 0, GL_RGBA, GL_UNSIGNED_BYTE, image->pixels);
 	}
-	else if (surface->format->BytesPerPixel == 3)
+	else if (image->format->BytesPerPixel == 3)
 	{
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, surface->w, surface->h, 0, GL_RGB, GL_UNSIGNED_BYTE, surface->pixels);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, image->w, image->h, 0, GL_RGB, GL_UNSIGNED_BYTE, image->pixels);
 	}
 	else
 	{
 		Logger::throwWarning("Pixel format not recognized at texture: \"" + filePath + "\"");
 		return 0;
 	}
-
-	// Memory management
-	SDL_FreeSurface(surface);
 
 	// Mipmapping or not
 	if (mipmap)
@@ -164,11 +166,8 @@ GLuint TextureLoader::_loadTexture(const string& filePath, bool mipmap, bool ani
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_R, GL_REPEAT);
 	}
 
-	// Logging
-	Logger::throwInfo("Loaded texture: \"" + filePath + "\"");
-
 	// Return new texture
-	return tex;
+	return texture;
 }
 
 GLuint TextureLoader::_loadCubeMap(const array<string, 6>& filePaths)

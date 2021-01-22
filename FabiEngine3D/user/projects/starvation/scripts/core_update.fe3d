@@ -1,4 +1,4 @@
-30 22
+13 20
 META script_type_update
 META execution_entry
 
@@ -12,22 +12,25 @@ EXEC inventory_misc
 /// Player
 EXEC player_status
 EXEC player_jump
-EXEC player_animation
-EXEC player_walk
+EXEC player_movement
 EXEC player_bobbing
 EXEC player_misc
 
+/// Animations
+EXEC animation_player
+EXEC animation_tool
+
 /// Working
-EXEC tool_animation
 EXEC cutting_update
 EXEC mining_update
 EXEC gathering_update
-EXEC collecting_update
+EXEC fishing_update
 
 /// NPC interaction
 EXEC npc_update
 
 /// Other
+EXEC pickup_update
 EXEC crafting_update
 EXEC underwater_update
 EXEC time_update

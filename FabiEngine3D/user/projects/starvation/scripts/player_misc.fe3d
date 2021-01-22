@@ -1,4 +1,4 @@
-41 57
+17 62
 META script_type_update
 
 /// Update tool & pickup animations status
@@ -16,10 +16,10 @@ EDIT _isSwordPlaying = fe3d:model_is_animation_playing("sword_hit", modelID)
 EDIT _isPickaxePlaying = fe3d:model_is_animation_playing("pickaxe_mine", modelID)
 EDIT _isAxePlaying = fe3d:model_is_animation_playing("axe_cut", modelID)
 EDIT _isShovelPlaying = fe3d:model_is_animation_playing("shovel_dig", modelID)
-EDIT _isHoePlaying = fe3d:model_is_animation_playing("sword_hit", modelID)
-EDIT _isScythePlaying = fe3d:model_is_animation_playing("sword_hit", modelID)
-EDIT _isHammerPlaying = fe3d:model_is_animation_playing("sword_hit", modelID)
-EDIT _isFishrodPlaying = fe3d:model_is_animation_playing("sword_hit", modelID)
+EDIT _isHoePlaying = fe3d:model_is_animation_playing("hoe_plow", modelID)
+EDIT _isScythePlaying = fe3d:model_is_animation_playing("scythe_reap", modelID)
+EDIT _isHammerPlaying = fe3d:model_is_animation_playing("hammer_build", modelID)
+EDIT _isFishrodPlaying = fe3d:model_is_animation_playing("fishrod_throw", modelID)
 EDIT _isPickupPlaying = fe3d:model_is_animation_playing("pickup", "player")
 
 /// Check if any tool animation is playing

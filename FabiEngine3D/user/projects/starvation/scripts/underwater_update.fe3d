@@ -1,10 +1,13 @@
-9 8
+8 38
 META script_type_update
 
+/// Some values
 DEC height = fe3d:water_get_height()
 VEC3 camPos = fe3d:camera_get_position()
 
+/// Check if player is underwater or not
 IF camPos.y LESS height:
+    fe3d:camera_move(0.01, 0.0, -0.005)
     EDIT _isUnderWater = <true>
     fe3d:image_set_visible("underwater", <true>)
     IF _wasUnderWater IS <false>:
@@ -17,6 +20,7 @@ ELSE:
         EDIT _wetlensAlpha = 0.5
         EDIT _wasUnderWater = <false>
 
+/// Update wet lens effect
 IF _wetlensAlpha LESS 0.0:
     EDIT _wetlensAlpha = 0.0
 ELSE:

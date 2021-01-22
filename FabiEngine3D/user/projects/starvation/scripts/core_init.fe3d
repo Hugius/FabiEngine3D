@@ -1,4 +1,4 @@
-12 14
+9 11
 META script_type_init
 META execution_entry
 
@@ -8,7 +8,7 @@ EXEC underwater_init
 EXEC bag_init
 EXEC inventory_init
 EXEC player_init
-EXEC collecting_init
+EXEC pickup_init
 EXEC npc_init
 EXEC crafting_init
 EXEC time_init

@@ -116,11 +116,12 @@ void main()
     vec3 normal = getNormalMappedVector();
 
 	// Calculate lighting
-    float shadow     = getShadowValue();
-	vec3 ambient     = getAmbientLighting();
-	vec3 directional = getDirectionalLighting(normal, shadow == 1.0f);
-	vec3 point       = getPointLighting(normal);
-    vec3 spot        = getSpotLighting(normal);
+    float shadow		   = getShadowValue();
+	bool noShadowOcclusion = (shadow == 1.0f);
+	vec3 ambient		   = getAmbientLighting();
+	vec3 directional	   = getDirectionalLighting(normal, noShadowOcclusion);
+	vec3 point			   = getPointLighting(normal);
+    vec3 spot			   = getSpotLighting(normal);
 
 	// Apply lighting
 	vec3 color;
@@ -329,30 +330,36 @@ float getShadowValue()
 		)
 		{
 			// Variables
-			float shadow       = 0.0f;
-			vec3 projCoords    = (f_shadowPos.xyz / f_shadowPos.w) * 0.5f + 0.5f;
-			float currentDepth = projCoords.z;
-			float texelSize    = 1.0f / float(u_shadowMapSize);
+			float shadow        = 0.0f;
+			vec3 projCoords     = (f_shadowPos.xyz / f_shadowPos.w) * 0.5f + 0.5f;
+			float currentDepth  = projCoords.z;
+			float texelSize     = 1.0f / float(u_shadowMapSize);
 
 			// Skip fragments outside of the depth map
 			if (projCoords.z > 1.0f)
-			{	
+			{
 				return 1.0f;
 			}
 
-            // Calculate PCF shadows
-            for(int x = -1; x <= 1; ++x)
-            {
-                for(int y = -1; y <= 1; ++y)
-                {
-                    float pcfDepth = texture(u_sampler_shadowMap, projCoords.xy + vec2(x, y) * vec2(texelSize)).r; 
-                    shadow += (currentDepth - texelSize > pcfDepth) ? 0.35f : 1.0f;        
-                }    
-            }
+			// Calculate PCF shadows
+			for(int x = -1; x <= 1; x++)
+			{
+				for(int y = -1; y <= 1; y++)
+				{
+					float pcfDepth = texture(u_sampler_shadowMap, projCoords.xy + vec2(x, y) * vec2(texelSize)).r; 
+					shadow += (currentDepth - texelSize > pcfDepth) ? 0.35f : 1.0f;        
+				}    
+			}
             
-            // Return shadow value
-            shadow /= 9.0f;
+			// Calculate final shadow value
+			shadow /= 4.0f;
 			
+			// Limit soft shadows
+			if(shadow > 1.55f)
+			{
+				shadow = 1.0f;
+			}
+
 			// Long-distance shadows fading
 			float maxDistance = max(abs(f_pos.x - u_shadowAreaCenter.x), abs(f_pos.z - u_shadowAreaCenter.z)); // Max distance to center
 			float alpha = maxDistance - (halfSize * 0.9f); // Only for the outer 10% of the shadowed area

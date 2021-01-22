@@ -1,4 +1,4 @@
-12 38
+54 65
 META script_type_init
 
 /// Globals
@@ -7,10 +7,10 @@ GLOB BOOL _isCrafting = <false>
 GLOB INT _craftIndex = 0
 GLOB LIST _craftables = {}
 GLOB LIST _craftablesText = {}
-GLOB LIST _craftablesIndex = {0,0,1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8}
-GLOB LIST _craftablesWoodPrice = {1,1,1,1,1,1,1,1}
-GLOB LIST _craftablesStonePrice = {2,0,3,0,3,0,1,0}
-GLOB LIST _craftablesIronPrice = {0,2,0,3,0,3,0,1}
+GLOB LIST _craftablesIndex = {0,0,1,1,2,2,3,3,4,5,6,6,7,8}
+GLOB LIST _craftablesWoodPrice = {1,1,1,1,1,1,1,1,1,2,1,1,1,3}
+GLOB LIST _craftablesStonePrice = {3,0,3,0,3,0,1,0,0,0,1,0,0,0}
+GLOB LIST _craftablesIronPrice = {0,3,0,3,0,3,0,1,1,3,0,2,0,0}
 PUSH _craftables "sword_stone_display"
 PUSH _craftables "sword_iron_display"
 PUSH _craftables "pickaxe_stone_display"
@@ -19,14 +19,26 @@ PUSH _craftables "axe_stone_display"
 PUSH _craftables "axe_iron_display"
 PUSH _craftables "shovel_stone_display"
 PUSH _craftables "shovel_iron_display"
-PUSH _craftablesText "Stone sword (1 x wood, 2 x stone)"
-PUSH _craftablesText "Iron sword (1 x wood, 2 x iron)"
+PUSH _craftables "hoe_display"
+PUSH _craftables "scythe_display"
+PUSH _craftables "hammer_stone_display"
+PUSH _craftables "hammer_iron_display"
+PUSH _craftables "torch_display"
+PUSH _craftables "fishrod_display"
+PUSH _craftablesText "Stone sword (1 x wood, 3 x stone)"
+PUSH _craftablesText "Iron sword (1 x wood, 3 x iron)"
 PUSH _craftablesText "Stone pickaxe (1 x wood, 3 x stone)"
 PUSH _craftablesText "Iron pickaxe (1 x wood, 3 x iron)"
 PUSH _craftablesText "Stone axe (1 x wood, 3 x stone)"
 PUSH _craftablesText "Iron axe (1 x wood, 3 x iron)"
 PUSH _craftablesText "Stone shovel (1 x wood, 1 x stone)"
 PUSH _craftablesText "Iron shovel (1 x wood, 1 x iron)"
+PUSH _craftablesText "Hoe (1 x wood, 1 x iron)"
+PUSH _craftablesText "Scythe (2 x wood, 3 x iron)"
+PUSH _craftablesText "Stone hammer (1 x wood, 2 x stone)"
+PUSH _craftablesText "Iron hammer (1 x wood, 2 x iron)"
+PUSH _craftablesText "Torch (1 x wood)"
+PUSH _craftablesText "Fishing rod (3 x wood)"
 
 /// Models - creation
 fe3d:model_place("workbench", "workbench", 0.0, 6.5, 145.0)
@@ -39,14 +51,26 @@ fe3d:model_place("axe_stone_display", "axe_stone", 1.5, 8.25, 145.0)
 fe3d:model_place("axe_iron_display", "axe_iron", 1.5, 8.25, 145.0)
 fe3d:model_place("shovel_stone_display", "shovel_stone", -0.25, 8.25, 145.0)
 fe3d:model_place("shovel_iron_display", "shovel_iron", -0.25, 8.25, 145.0)
+fe3d:model_place("hoe_display", "hoe", 1.5, 8.25, 145.0)
+fe3d:model_place("scythe_display", "scythe", 1.5, 8.25, 145.0)
+fe3d:model_place("hammer_stone_display", "hammer_stone", 1.5, 8.3, 145.0)
+fe3d:model_place("hammer_iron_display", "hammer_iron", 1.5, 8.275, 145.0)
+fe3d:model_place("torch_display", "torch", 1.5, 8.25, 145.0)
+fe3d:model_place("fishrod_display", "fishrod", 1.5, 8.25, 145.0)
 fe3d:model_set_rotation("sword_stone_display", 90.0, 0.0, 0.0)
 fe3d:model_set_rotation("sword_iron_display", 90.0, 0.0, 0.0)
 fe3d:model_set_rotation("pickaxe_stone_display", 90.0, 0.0, 0.0)
 fe3d:model_set_rotation("pickaxe_iron_display", 90.0, 0.0, 0.0)
-fe3d:model_set_rotation("axe_stone_display", 90.0, 180.0, 0.0)
-fe3d:model_set_rotation("axe_iron_display", 90.0, 180.0, 0.0)
-fe3d:model_set_rotation("shovel_stone_display", -90.0, -90.0, 0.0)
-fe3d:model_set_rotation("shovel_iron_display", -90.0, -90.0, 0.0)
+fe3d:model_set_rotation("axe_stone_display", -90.0, 0.0, 180.0)
+fe3d:model_set_rotation("axe_iron_display", -90.0, 0.0, 180.0)
+fe3d:model_set_rotation("shovel_stone_display", 180.0, 90.0, 90.0)
+fe3d:model_set_rotation("shovel_iron_display", 180.0, 90.0, 90.0)
+fe3d:model_set_rotation("hoe_display", -90.0, -90.0, 90.0)
+fe3d:model_set_rotation("scythe_display", -90.0, -90.0, 90.0)
+fe3d:model_set_rotation("hammer_stone_display", -90.0, 0.0, 180.0)
+fe3d:model_set_rotation("hammer_iron_display", -90.0, 0.0, 180.0)
+fe3d:model_set_rotation("torch_display", -90.0, -90.0, 90.0)
+fe3d:model_set_rotation("fishrod_display", -90.0, -90.0, 90.0)
 fe3d:model_set_visible("sword_stone_display", <false>)
 fe3d:model_set_visible("sword_iron_display", <false>)
 fe3d:model_set_visible("pickaxe_stone_display", <false>)
@@ -55,6 +79,12 @@ fe3d:model_set_visible("axe_stone_display", <false>)
 fe3d:model_set_visible("axe_iron_display", <false>)
 fe3d:model_set_visible("shovel_stone_display", <false>)
 fe3d:model_set_visible("shovel_iron_display", <false>)
+fe3d:model_set_visible("hoe_display", <false>)
+fe3d:model_set_visible("scythe_display", <false>)
+fe3d:model_set_visible("hammer_stone_display", <false>)
+fe3d:model_set_visible("hammer_iron_display", <false>)
+fe3d:model_set_visible("torch_display", <false>)
+fe3d:model_set_visible("fishrod_display", <false>)
 
 /// Billboards
 fe3d:billboard_place("craft_confirm", "craft", 1.0, 9.0, 145.0)

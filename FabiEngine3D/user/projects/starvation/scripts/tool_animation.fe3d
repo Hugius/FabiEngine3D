@@ -1,4 +1,4 @@
-62 20
+27 25
 META script_type_update
 
 /// Determine tool animation type
@@ -17,12 +17,19 @@ ELIF _equipIndex IS 3:
     DEC toolOffset = 1.15
 ELIF _equipIndex IS 4:
     EDIT animID = "hoe_plow"
+    DEC toolOffset = 1.3
 ELIF _equipIndex IS 5:
     EDIT animID = "scythe_reap"
+    DEC toolOffset = 1.0
 ELIF _equipIndex IS 6:
     EDIT animID = "hammer_build"
+    DEC toolOffset = 1.25
+ELIF _equipIndex IS 7:
+    EDIT animID = "torch_lit"
+    DEC toolOffset = 1.15
 ELIF _equipIndex IS 8:
     EDIT animID = "fishrod_throw"
+    DEC toolOffset = 1.0
 
 /// Retrieve camera data
 VEC3 camPos = fe3d:camera_get_position()

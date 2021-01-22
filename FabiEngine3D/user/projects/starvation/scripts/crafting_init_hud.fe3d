@@ -1,4 +1,4 @@
-7 75
+18 30
 META script_type_init
 
 /// HUD
@@ -12,6 +12,12 @@ fe3d:text_place(_craftables[4], f, _craftablesText[4], 0.0, -0.3, 0.0, 0.6, 0.05
 fe3d:text_place(_craftables[5], f, _craftablesText[5], 0.0, -0.3, 0.0, 0.6, 0.05)
 fe3d:text_place(_craftables[6], f, _craftablesText[6], 0.0, -0.3, 0.0, 0.6, 0.05)
 fe3d:text_place(_craftables[7], f, _craftablesText[7], 0.0, -0.3, 0.0, 0.6, 0.05)
+fe3d:text_place(_craftables[8], f, _craftablesText[8], 0.0, -0.3, 0.0, 0.6, 0.05)
+fe3d:text_place(_craftables[9], f, _craftablesText[9], 0.0, -0.3, 0.0, 0.6, 0.05)
+fe3d:text_place(_craftables[10], f, _craftablesText[10], 0.0, -0.3, 0.0, 0.6, 0.05)
+fe3d:text_place(_craftables[11], f, _craftablesText[11], 0.0, -0.3, 0.0, 0.6, 0.05)
+fe3d:text_place(_craftables[12], f, _craftablesText[12], 0.0, -0.3, 0.0, 0.6, 0.05)
+fe3d:text_place(_craftables[13], f, _craftablesText[13], 0.0, -0.3, 0.0, 0.6, 0.05)
 fe3d:text_set_visible(_craftables[0], <false>)
 fe3d:text_set_visible(_craftables[1], <false>)
 fe3d:text_set_visible(_craftables[2], <false>)
@@ -20,3 +26,9 @@ fe3d:text_set_visible(_craftables[4], <false>)
 fe3d:text_set_visible(_craftables[5], <false>)
 fe3d:text_set_visible(_craftables[6], <false>)
 fe3d:text_set_visible(_craftables[7], <false>)
+fe3d:text_set_visible(_craftables[8], <false>)
+fe3d:text_set_visible(_craftables[9], <false>)
+fe3d:text_set_visible(_craftables[10], <false>)
+fe3d:text_set_visible(_craftables[11], <false>)
+fe3d:text_set_visible(_craftables[12], <false>)
+fe3d:text_set_visible(_craftables[13], <false>)

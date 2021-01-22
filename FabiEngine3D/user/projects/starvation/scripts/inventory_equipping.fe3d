@@ -1,4 +1,4 @@
-23 52
+14 0
 META script_type_update
 
 /// Check if any tool animation is playing
@@ -72,5 +72,5 @@ INT newIndex = _equipIndex
 INCR newIndex 1
 CAST newIndex STR
 STR newSlotID = misc:concat_strings("slot", newIndex)
-fe3d:image_set_color(newSlotID, 0.3, 0.5, 0.3)
+fe3d:image_set_color(newSlotID, 0.4, 0.6, 0.4)
 EDIT _lastEquipIndex = _equipIndex

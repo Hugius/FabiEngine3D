@@ -83,7 +83,7 @@ layout (location = 0) out vec4 o_finalColor;
 vec3 getNormalMappedVector();
 vec3 getTextureColor();
 vec3 getAmbientLighting();
-vec3 getDirectionalLighting(bool noShadowOcclusion, vec3 normal);
+vec3 getDirectionalLighting(vec3 normal, bool noShadowOcclusion);
 vec3 getPointLighting(vec3 normal);
 vec3 getSpotLighting(vec3 normal);
 vec3 applyFog(vec3 color);
@@ -97,11 +97,12 @@ void main()
     vec3 normal = getNormalMappedVector();
 
 	// Calculate lighting
-    float shadow = getShadowValue();
-	vec3 ambient = getAmbientLighting();
-	vec3 directional = getDirectionalLighting(shadow == 1.0f, normal);
-	vec3 point = getPointLighting(normal);
-	vec3 spot = getSpotLighting(normal);
+    float shadow		   = getShadowValue();
+	bool noShadowOcclusion = (shadow == 1.0f);
+	vec3 ambient		   = getAmbientLighting();
+	vec3 directional	   = getDirectionalLighting(normal, noShadowOcclusion);
+	vec3 point			   = getPointLighting(normal);
+	vec3 spot			   = getSpotLighting(normal);
 
 	// Apply lighting
 	vec3 color;
@@ -248,7 +249,7 @@ vec3 getAmbientLighting()
 }
 
 // Calculate directional lighting
-vec3 getDirectionalLighting(bool noShadowOcclusion, vec3 normal)
+vec3 getDirectionalLighting(vec3 normal, bool noShadowOcclusion)
 {
 	if(u_isDirectionalLightEnabled)
 	{
@@ -345,13 +346,15 @@ vec3 getSpotLighting(vec3 normal)
     }
 }
 
-// Calculate random float
-float getRandomFloat(vec3 seed, int i) // http://www.opengl-tutorial.org/intermediate-tutorials/tutorial-16-shadow-mapping/#stratified-poisson-sampling
-{
-	vec4 seed4 = vec4(seed,i);
-	float dot_product = dot(seed4, vec4(12.9898,78.233,45.164,94.673));
-	return fract(sin(dot_product) * 43758.5453);
-}
+/*
+	// Calculate random float
+	float getRandomFloat(vec3 seed, int i) // http://www.opengl-tutorial.org/intermediate-tutorials/tutorial-16-shadow-mapping/#stratified-poisson-sampling
+	{
+		vec4 seed4 = vec4(seed,i);
+		float dot_product = dot(seed4, vec4(12.9898f, 78.233f, 45.164f, 94.673f));
+		return fract(sin(dot_product) * 43758.5453f);
+	}
+*/
 
 // Calculate shadow lighting
 float getShadowValue()
@@ -368,7 +371,7 @@ float getShadowValue()
 		)
 		{
 			// Variables
-			float shadow       = 1.0f;
+			float shadow       = 0.0f;
 			vec3 projCoords    = (f_shadowPos.xyz / f_shadowPos.w) * 0.5f + 0.5f;
 			float currentDepth = projCoords.z;
 			float texelSize    = 1.0f / float(u_shadowMapSize);
@@ -379,35 +382,57 @@ float getShadowValue()
 				return 1.0f;
 			}
 
-			// Poisson values
-			const vec2 poissonDisk[4] = vec2[]
-			(
-			  vec2(-0.94201624f, -0.39906216f),
-			  vec2(0.94558609f, -0.76890725f),
-			  vec2(-0.094184101f, -0.92938870f),
-			  vec2(0.34495938f, 0.29387760)
-			);
+			/*
+				// Poisson values
+				const vec2 poissonDisk[4] = vec2[]
+				(
+					vec2(-0.94201624f, -0.39906216f),
+					vec2(0.94558609f, -0.76890725f),
+					vec2(-0.094184101f, -0.92938870f),
+					vec2(0.34495938f, 0.29387760)
+				);
 
-			// Calculate poisson sampled shadows
-			for(int i = 0; i < 4; i++)
-			{
-				// Get random index
-				int index = int(16.0f*getRandomFloat(floor(f_pos.xyz*1000.0f), i))%16;
-
-				// Calculate depth from shadow map
-				float shadowMapDepth = texture(u_sampler_shadowMap, projCoords.xy + (poissonDisk[index] / 700.0f)).r;
-
-				// Apply result value
-				if((currentDepth - texelSize) > shadowMapDepth)
+				// Calculate poisson sampled shadows
+				for(int i = 0; i < 4; i++)
 				{
-					shadow -= 0.15f; // Shadow
+					// Get random index
+					//int index = int(16.0f*getRandomFloat(floor(f_pos.xyz*1000.0f), i))%16;
+					int index = int(16.0f*getRandomFloat(floor(f_pos.xyz*1000.0f), i))%16;
+
+					// Calculate depth from shadow map
+					float shadowMapDepth = texture(u_sampler_shadowMap, projCoords.xy + (poissonDisk[index] / 700.0f)).r;
+
+					// Apply result value
+					if((currentDepth - texelSize) > shadowMapDepth)
+					{
+						shadow -= 0.15f; // Shadow
+					}
+					else
+					{
+						shadow -= 0.0f; // No shadow
+					}
 				}
-				else
-				{
-					shadow -= 0.0f; // No shadow
-				}
-			}
+			*/
 			
+			// Calculate PCF shadows
+			for(int x = -2; x <= 2; x++)
+			{
+				for(int y = -2; y <= 2; y++)
+				{
+					float pcfDepth = texture(u_sampler_shadowMap, projCoords.xy + vec2(x, y) * vec2(texelSize)).r; 
+					shadow += (currentDepth - texelSize > pcfDepth) ? 0.35f : 1.0f;        
+				}    
+			}
+            
+			// Calculate final shadow value
+			shadow /= 16.0f;
+
+			// Limit soft shadows
+			if(shadow > 1.55f)
+			{
+				shadow = 1.0f;
+			}
+
 			// Long-distance shadows fading
 			float maxDistance = max(abs(f_pos.x - u_shadowAreaCenter.x), abs(f_pos.z - u_shadowAreaCenter.z)); // Max distance to center
 			float alpha = maxDistance - (halfSize * 0.9f); // Only for the outer 10% of the shadowed area

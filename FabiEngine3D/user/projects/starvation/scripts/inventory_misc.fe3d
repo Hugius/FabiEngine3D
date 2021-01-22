@@ -1,4 +1,4 @@
-30 49
+40 0
 META script_type_update
 
 /// Check if player wants to open/close inventory
@@ -26,6 +26,20 @@ fe3d:image_set_visible("torch_icon", slot8)
 fe3d:image_set_visible("fishrod_icon", slot9)
 
 /// Update inventory item visibility
+fe3d:image_set_visible("sword_stone", <false>)
+fe3d:image_set_visible("sword_iron", <false>)
+fe3d:image_set_visible("pickaxe_stone", <false>)
+fe3d:image_set_visible("pickaxe_iron", <false>)
+fe3d:image_set_visible("axe_stone", <false>)
+fe3d:image_set_visible("axe_iron", <false>)
+fe3d:image_set_visible("shovel_stone", <false>)
+fe3d:image_set_visible("shovel_iron", <false>)
+fe3d:image_set_visible("hoe", <false>)
+fe3d:image_set_visible("scythe", <false>)
+fe3d:image_set_visible("hammer_stone", <false>)
+fe3d:image_set_visible("hammer_iron", <false>)
+fe3d:image_set_visible("torch", <false>)
+fe3d:image_set_visible("fishrod", <false>)
 IF _inventory[0] NOT "":
     fe3d:image_set_visible(_inventory[0], <true>)
 IF _inventory[1] NOT "":
@@ -73,3 +87,9 @@ IF _isInvOpen IS <false>:
     fe3d:image_set_visible("axe_iron", <false>)
     fe3d:image_set_visible("shovel_stone", <false>)
     fe3d:image_set_visible("shovel_iron", <false>)
+    fe3d:image_set_visible("hoe", <false>)
+    fe3d:image_set_visible("scythe", <false>)
+    fe3d:image_set_visible("hammer_stone", <false>)
+    fe3d:image_set_visible("hammer_iron", <false>)
+    fe3d:image_set_visible("torch", <false>)
+    fe3d:image_set_visible("fishrod", <false>)

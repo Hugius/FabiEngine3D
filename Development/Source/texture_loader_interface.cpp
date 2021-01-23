@@ -38,55 +38,36 @@ void TextureLoader::cacheTextures(const vector<string>& filePaths)
 		threads.push_back(std::async(std::launch::async, &TextureLoader::_loadImage, this, filePaths[i]));
 		threadStatuses.push_back(false);
 	}
-	
+
 	// Wait for all threads to finish
-	begin:
 	for (unsigned int i = 0; i < threads.size(); i++)
 	{
-		// Check if thread is valid
-		if (threads[i].valid())
+		// Retrieve the SDL image
+		auto loadedImage = threads[i].get();
+
+		// Update thread status
+		threadStatuses[i] = true;
+		finishedThreadCount++;
+
+		// Check image status
+		if (loadedImage != nullptr)
 		{
-			// Check if thread was not already finished
-			if (!threadStatuses[i])
+			// Load OpenGL texture
+			auto loadedTexture = _convertToTexture(filePaths[i], loadedImage, true, true, true);
+
+			// Free image memory
+			SDL_FreeSurface(loadedImage);
+
+			// Check texture status
+			if (loadedTexture != 0)
 			{
-				// Check if thread is finished
-				if (threads[i].wait_until(std::chrono::system_clock::time_point::min()) == std::future_status::ready)
-				{
-					// Retrieve the SDL image
-					auto loadedImage = threads[i].get();
+				// Logging
+				Logger::throwInfo("Loaded texture: \"" + filePaths[i] + "\"");
 
-					// Update thread status
-					threadStatuses[i] = true;
-					finishedThreadCount++;
-
-					// Check image status
-					if (loadedImage != nullptr)
-					{
-						// Load OpenGL texture
-						auto loadedTexture = _convertToTexture(filePaths[i], loadedImage, true, true, true);
-
-						// Check texture status
-						if (loadedTexture != 0)
-						{
-							// Logging
-							Logger::throwInfo("Loaded texture: \"" + filePaths[i] + "\"");
-
-							// Cache texture
-							_textureCache[filePaths[i]] = loadedTexture;
-						}
-					}
-
-					// Free image memory
-					SDL_FreeSurface(loadedImage);
-				}
+				// Cache texture
+				_textureCache[filePaths[i]] = loadedTexture;
 			}
 		}
-	}
-
-	// Check if a thread is not finished yet
-	if (finishedThreadCount != threads.size())
-	{
-		goto begin;
 	}
 }
 

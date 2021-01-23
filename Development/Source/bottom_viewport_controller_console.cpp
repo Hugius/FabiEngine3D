@@ -19,7 +19,7 @@ void BottomViewportController::_updateConsoleScrolling()
 		float latestMessageY = _fe3d.textEntity_getPosition(entityID).y - _charSize.y;
 
 		// Count all message text lines
-		int messageLineCount = _consoleMessageStack.size();
+		unsigned int messageLineCount = _consoleMessageStack.size();
 		for (auto& [ID, message] : _consoleMessageStack)
 		{
 			// If a message is too long for 1 line, count all the text lines

@@ -79,6 +79,7 @@ void ModelEditor::preLoadGameEntitiesFromFile()
 
 	// Miscellaneous
 	_isPreLoaded = true;
+	std::cout << "=========================================================================================================";
 }
 
 void ModelEditor::loadGameEntitiesFromFile()

@@ -318,7 +318,7 @@ int AudioPlayer::getMusicVolume()
 	return Mix_VolumeMusic(-1);
 }
 
-int AudioPlayer::getUsedChannelCount()
+unsigned int AudioPlayer::getUsedChannelCount()
 {
 	int count = 0;
 
@@ -333,7 +333,7 @@ int AudioPlayer::getUsedChannelCount()
 	return count;
 }
 
-int AudioPlayer::getAllocatedChannelCount()
+unsigned int AudioPlayer::getAllocatedChannelCount()
 {
 	return _channelMap.size();
 }

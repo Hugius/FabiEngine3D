@@ -105,14 +105,14 @@ SDL_Surface* TextureLoader::_loadImage(const string& filePath)
 	rootDir = rootDir.substr(0, rootDir.size() - string("bin\\FabiEngine3D.exe").size());
 	auto fullFilePath = string(rootDir + filePath);
 
-	// Load actual texture data
-	SDL_Surface * surface = IMG_Load(fullFilePath.c_str());
-	if (surface == nullptr)
+	// Load actual image data
+	SDL_Surface * image = IMG_Load(fullFilePath.c_str());
+	if (image == nullptr)
 	{
-		Logger::throwWarning("Cannot open texture: \"" + filePath + "\"");
+		Logger::throwWarning("Cannot open image: \"" + filePath + "\"");
 	}
 
-	return surface;
+	return image;
 }
 
 GLuint TextureLoader::_convertToTexture(const string& filePath, SDL_Surface* image, bool mipmap, bool aniso, bool repeat)

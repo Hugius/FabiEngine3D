@@ -17,6 +17,7 @@ public:
 	AudioPlayer();
 	~AudioPlayer() = default;
 
+	// Functions
 	void allocateChannels(int count);
 	void update(CameraManager& camera, std::vector<AudioChunk>& chunks, std::vector<AudioMusic>& music);	
 	void setChunksEnabled(bool value);
@@ -34,15 +35,19 @@ public:
 	void setMusicVolume(int volume);
 	void stopMusic();
 
+	// Booleans
 	bool isChunkPlaying(AudioChunk& chunk);
 	bool isChunkPaused(AudioChunk& chunk);
 	bool isMusicPlaying();
 	bool isMusicPaused();
 	
+	// Integers
 	int getChunkVolume(AudioChunk& chunk);
 	int getMusicVolume();
-	int getUsedChannelCount();
-	int getAllocatedChannelCount();
+
+	// Unsigned integers
+	unsigned int getUsedChannelCount();
+	unsigned int getAllocatedChannelCount();
 
 private:
 	int _getChunkChannel(AudioChunk& chunk);

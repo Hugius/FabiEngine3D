@@ -73,13 +73,12 @@ void ModelEditor::preLoadGameEntitiesFromFile()
 		file.close();
 
 		// Cache OBJ files & texture files
-		_fe3d.misc_cacheOBJs(objPaths);
-		_fe3d.misc_cacheTextures(texturePaths);
+		_fe3d.misc_cacheOBJsMultiThreaded(objPaths);
+		_fe3d.misc_cacheTexturesMultiThreaded2D(texturePaths);
 	}
 
 	// Miscellaneous
 	_isPreLoaded = true;
-	std::cout << "=========================================================================================================";
 }
 
 void ModelEditor::loadGameEntitiesFromFile()

@@ -58,7 +58,7 @@ void CoreEngine::_setupApplication()
 		// Create engine logo
 		shared_ptr<GuiEntity> logo = make_shared<GuiEntity>("logo");
 		logo->addOglBuffer(new OpenGLBuffer(0.0f, 0.0f, 2.0f, 2.0f, true, false));
-		logo->setDiffuseMap(_textureLoader.getTexture("engine\\textures\\logo.png", true, true));
+		logo->setDiffuseMap(_textureLoader.getTexture2D("engine\\textures\\logo.png", true, true));
 
 		// Calculate logo resolution
 		SDL_DisplayMode DM;
@@ -121,7 +121,7 @@ void CoreEngine::_setupApplication()
 		// Create logo
 		shared_ptr<GuiEntity> logo = make_shared<GuiEntity>("logo");
 		logo->addOglBuffer(new OpenGLBuffer(0.0f, 0.0f, 1.0f, 0.75f, true, false));
-		logo->setDiffuseMap(_textureLoader.getTexture("engine\\textures\\logo.png", true, true));
+		logo->setDiffuseMap(_textureLoader.getTexture2D("engine\\textures\\logo.png", true, true));
 
 		// Create text
 		shared_ptr<TextEntity> text = make_shared<TextEntity>("text");

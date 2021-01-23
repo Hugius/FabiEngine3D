@@ -46,7 +46,7 @@ void GuiEntityManager::addGuiEntity(const string& ID, const string& texturePath,
 	entity->setCentered(isCentered);
 
 	// Load diffuse map
-	entity->setDiffuseMap(_texLoader.getTexture(texturePath, true, true, false));
+	entity->setDiffuseMap(_texLoader.getTexture2D(texturePath, true, true, false));
 }
 
 void GuiEntityManager::addGuiEntity(const string& ID, Vec3 color, Vec2 translation, float rotation, Vec2 scaling, bool isCentered)

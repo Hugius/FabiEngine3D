@@ -140,6 +140,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OmitFramePointers>false</OmitFramePointers>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -184,6 +185,7 @@
     <ClInclude Include="Source\bottom_viewport_controller.hpp" />
     <ClInclude Include="Source\engine_gui_scrollinglist.hpp" />
     <ClInclude Include="Source\entity_type.hpp" />
+    <ClInclude Include="Source\obj_part.hpp" />
     <ClInclude Include="Source\script_condition_statement.hpp" />
     <ClInclude Include="Source\ivector2.hpp" />
     <ClInclude Include="Source\ivector3.hpp" />

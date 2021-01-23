@@ -1,5 +1,6 @@
 #include "opengl_shader.hpp"
 #include "logger.hpp"
+#include "tools.hpp"
 
 #include <fstream>
 #include <sstream>
@@ -18,10 +19,7 @@ OpenGLShader::OpenGLShader(const string& vertexFileName, const string& fragmentF
 	_fragmentFileName = fragmentFileName;
 
 	// Get application root directory
-	char buffer[256]; size_t len = sizeof(buffer);
-	GetModuleFileName(NULL, buffer, len);
-	string rootDir = buffer;
-	rootDir = rootDir.substr(0, rootDir.size() - string("bin\\FabiEngine3D.exe").size());
+	string rootDir = Tools::getInst().getRootDirectory();
 
 	// Open the shader text files
 	try 

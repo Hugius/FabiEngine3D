@@ -1,5 +1,6 @@
 #include "audio_loader.hpp"
 #include "logger.hpp"
+#include "tools.hpp"
 
 #include <algorithm>
 
@@ -19,10 +20,7 @@ Mix_Chunk* AudioLoader::getChunk(const string& filePath)
 	if (iterator == _chunkCache.end())
 	{
 		// Get application root directory
-		char buffer[256]; size_t len = sizeof(buffer);
-		GetModuleFileName(NULL, buffer, len);
-		string rootDir = buffer;
-		rootDir = rootDir.substr(0, rootDir.size() - string("bin\\FabiEngine3D.exe").size());
+		string rootDir = Tools::getInst().getRootDirectory();
 		
 		// Load audio file
 		Mix_Chunk* chunk = Mix_LoadWAV((rootDir + filePath).c_str());
@@ -57,10 +55,7 @@ Mix_Music* AudioLoader::getMusic(const string& filePath)
 	if (iterator == _musicCache.end())
 	{
 		// Get application root directory
-		char buffer[256]; size_t len = sizeof(buffer);
-		GetModuleFileName(NULL, buffer, len);
-		string rootDir = buffer;
-		rootDir = rootDir.substr(0, rootDir.size() - string("bin\\FabiEngine3D.exe").size());
+		string rootDir = Tools::getInst().getRootDirectory();
 
 		// Load audio file
 		Mix_Music* music = Mix_LoadMUS((rootDir + filePath).c_str());

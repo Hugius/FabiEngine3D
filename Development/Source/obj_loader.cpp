@@ -1,5 +1,6 @@
 #include "obj_loader.hpp"
 #include "logger.hpp"
+#include "tools.hpp"
 
 #pragma warning(disable:4996) // Disabling annoying warning
 
@@ -7,8 +8,9 @@
 #include <filesystem>
 #include <future>
 
-void OBJLoader::cacheOBJs(const vector<string>& filePaths)
+void OBJLoader::cacheOBJsMultiThreaded(const vector<string>& filePaths)
 {
+	// Temporary values
 	vector<std::future<vector<ObjPart>>> threads;
 
 	// Start all loading threads
@@ -18,40 +20,45 @@ void OBJLoader::cacheOBJs(const vector<string>& filePaths)
 	}
 
 	// Wait for all threads to finish
-	int index = 0; 
-	for (auto& thread : threads)
+	for (unsigned int i = 0; i < threads.size(); i++)
 	{
-		auto objParts = thread.get();
+		auto objParts = threads[i].get();
 
-		// Logging
-		Logger::throwInfo("Loaded OBJ model: \"" + filePaths[index] + "\"");
+		// Check if model loading went well
+		if (!objParts.empty())
+		{
+			// Logging
+			Logger::throwInfo("Loaded OBJ model: \"" + filePaths[i] + "\"");
 
-		// Cache model
-		_objPartsMap[filePaths[index]] = objParts;
-		index++;
+			// Cache model
+			_objCache[filePaths[i]] = objParts;
+		}
 	}
 }
 
 const vector<ObjPart>& OBJLoader::loadOBJ(const string& filePath, bool calculateTangents)
 {
 	// Check if mesh data was loaded already, if not, load data and store in std::map
-	begin : auto iterator = _objPartsMap.find(filePath); // Search for existing OBJ parts
-	if (iterator == _objPartsMap.end()) 
+	begin : auto iterator = _objCache.find(filePath); // Search for existing OBJ parts
+	if (iterator == _objCache.end()) 
 	{
 		// Load OBJ
 		auto loadedModel = _loadOBJ(filePath, calculateTangents);
 
-		// Logging
-		Logger::throwInfo("Loaded OBJ model: \"" + filePath + "\"");
-
-		// Determine if needs to be cached
+		// Check model status
 		if (loadedModel.empty())
 		{
-			return {}; // Model loading went bad, so return and cache nothing
+			return {};
 		}
 		else
 		{
-			_objPartsMap.insert(std::make_pair(filePath, loadedModel)); // Insert new data
+			// Logging
+			Logger::throwInfo("Loaded OBJ model: \"" + filePath + "\"");
+
+			// Cache model
+			_objCache.insert(std::make_pair(filePath, loadedModel));
+
+			// Return new model
 			goto begin;
 		}
 	}
@@ -69,9 +76,9 @@ const vector<ObjPart>& OBJLoader::loadOBJ(const string& filePath, bool calculate
 
 void OBJLoader::clearOBJCache(const string& filePath)
 {
-	if (_objPartsMap.find(filePath) != _objPartsMap.end())
+	if (_objCache.find(filePath) != _objCache.end())
 	{
-		_objPartsMap.erase(filePath);
+		_objCache.erase(filePath);
 	}
 }
 
@@ -89,10 +96,7 @@ vector<ObjPart> OBJLoader::_loadOBJ(const string& filePath, bool calculateTangen
 	string tempReflectionMapPath = "";
 
 	// Get application root directory
-	char buffer[256]; size_t len = sizeof(buffer);
-	GetModuleFileName(NULL, buffer, len);
-	string rootDir = buffer;
-	rootDir = rootDir.substr(0, rootDir.size() - string("bin\\FabiEngine3D.exe").size());
+	string rootDir = Tools::getInst().getRootDirectory();
 
 	// Load .obj file
 	string path = rootDir + filePath;

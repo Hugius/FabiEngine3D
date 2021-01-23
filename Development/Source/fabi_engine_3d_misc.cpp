@@ -179,17 +179,17 @@ void FabiEngine3D::misc_clearFontCache(const string& filePath)
 
 void FabiEngine3D::misc_clearTextureCache(const string& filePath)
 {
-	_core->_textureLoader.clearTextureCache(filePath);
+	_core->_textureLoader.clearTextureCache2D(filePath);
 }
 
 void FabiEngine3D::misc_clearCubeMapCache(const array<string, 6>& filePaths)
 {
-	_core->_textureLoader.clearCubeMapCache(filePaths);
+	_core->_textureLoader.clearTextureCache3D(filePaths);
 }
 
 void FabiEngine3D::misc_clearHeightMapCache(const string& filePath)
 {
-	_core->_textureLoader.clearHeightMapCache(filePath);
+	_core->_textureLoader.clearBitmapCache(filePath);
 }
 
 void FabiEngine3D::misc_clearAudioChunkCache(const string& filePath)
@@ -202,14 +202,14 @@ void FabiEngine3D::misc_clearAudioMusicCache(const string& filePath)
 	_core->_audioLoader.clearMusicCache(filePath);
 }
 
-void FabiEngine3D::misc_cacheOBJs(const vector<string>& filePaths)
+void FabiEngine3D::misc_cacheOBJsMultiThreaded(const vector<string>& filePaths)
 {
-	_core->_objLoader.cacheOBJs(filePaths);
+	_core->_objLoader.cacheOBJsMultiThreaded(filePaths);
 }
 
-void FabiEngine3D::misc_cacheTextures(const vector<string>& filePaths)
+void FabiEngine3D::misc_cacheTexturesMultiThreaded2D(const vector<string>& filePaths)
 {
-	_core->_textureLoader.cacheTextures(filePaths);
+	_core->_textureLoader.cacheTexturesMultiThreaded2D(filePaths);
 }
 
 string FabiEngine3D::misc_getWinExplorerFilename(const string& startingDir, const string& fileType)
@@ -267,15 +267,7 @@ string FabiEngine3D::misc_vec2str(Vec4 vec)
 
 string FabiEngine3D::misc_getRootDirectory()
 {
-	// Retrieve
-	char buffer[256]; size_t len = sizeof(buffer);
-	GetModuleFileName(NULL, buffer, len); // Get executable path
-	string rootDir = buffer;
-	rootDir = std::filesystem::absolute(rootDir).string(); // Remove any "..\" bullshit
-	rootDir = rootDir.substr(0, rootDir.size() - string("bin\\FabiEngine3D.exe").size()); // Go to engine root directory
-
-	// Return
-	return rootDir;
+	return Tools::getInst().getRootDirectory();
 }
 
 string FabiEngine3D::misc_getCpuName() // https://stackoverflow.com/questions/850774/how-to-determine-the-hardware-cpu-and-ram-on-a-machine

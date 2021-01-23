@@ -145,7 +145,7 @@ void FabiEngine3D::billboardEntity_setColor(const string& ID, Vec3 color)
 
 void FabiEngine3D::billboardEntity_setDiffuseMap(const string& ID, const string& texturePath, bool textureFiltering)
 {
-	_core->_billboardEntityManager.getEntity(ID)->setDiffuseMap(_core->_textureLoader.getTexture(texturePath, textureFiltering, textureFiltering));
+	_core->_billboardEntityManager.getEntity(ID)->setDiffuseMap(_core->_textureLoader.getTexture2D(texturePath, textureFiltering, textureFiltering));
 	_core->_billboardEntityManager.getEntity(ID)->setDiffuseMapPath(texturePath);
 }
 

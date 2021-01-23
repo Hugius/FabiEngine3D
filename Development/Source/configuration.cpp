@@ -1,5 +1,6 @@
 #include "configuration.hpp"
 #include "logger.hpp"
+#include "tools.hpp"
 
 #include <SDL\\SDL.h>
 #include <filesystem>
@@ -13,7 +14,7 @@ Config::Config()
 	rootDir = rootDir.substr(0, rootDir.size() - string("bin\\FabiEngine3D.exe").size());
 
 	// Open config file
-	string path = rootDir + "config.fe3d";
+	auto path = string(rootDir + "config.fe3d");
 	std::ifstream file(path);
 	if (!std::filesystem::exists(path))
 	{

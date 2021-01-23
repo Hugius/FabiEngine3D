@@ -972,6 +972,9 @@
     <ClInclude Include="Source\script_variable.hpp">
       <Filter>src\Scripting System\Data Structures</Filter>
     </ClInclude>
+    <ClInclude Include="Source\obj_part.hpp">
+      <Filter>src\Asset Management System\Models</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">

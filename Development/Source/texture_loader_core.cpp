@@ -1,109 +1,16 @@
 #include "texture_loader.hpp"
 #include "logger.hpp"
+#include "tools.hpp"
 
 #include <SDL\\SDL_image.h>
 
 using std::to_string;
 
-TTF_Font* TextureLoader::_loadFont(const string& fontPath)
-{
-	// Get application root directory
-	char buffer[256]; size_t len = sizeof(buffer);
-	GetModuleFileName(NULL, buffer, len);
-	string rootDir = buffer;
-	rootDir = rootDir.substr(0, rootDir.size() - string("bin\\FabiEngine3D.exe").size());
-
-	// Load font
-	auto it = _fontCache.find(fontPath);
-	if (it == _fontCache.end()) //Not in map (yet)
-	{
-		// Try to load font
-		TTF_Font* font = TTF_OpenFont((rootDir + fontPath).c_str(), 50);
-
-		// Check if font loading is successful
-		if (font == nullptr)
-		{
-			Logger::throwWarning("Cannot load font: \"" + fontPath + "\"");
-			return nullptr;
-		}
-		else
-		{
-			// Save font to cache
-			_fontCache.insert(std::make_pair(fontPath, font));
-			Logger::throwInfo("Loaded font: \"" + fontPath + "\"");
-			return font;
-		}
-	}
-
-	return it->second; //Cache texture
-}
-
-GLuint TextureLoader::_loadText(const string& textContent, const string&fontPath)
-{
-	std::string newText;
-
-	// No empty text
-	if (textContent == "")
-	{
-		newText = " ";
-	}
-	else
-	{
-		newText = textContent;
-	}
-
-	// Load font
-	auto font = _loadFont(fontPath);
-
-	// Check if font loading went well
-	if (font == nullptr)
-	{
-		return 0;
-	}
-
-	// Load color
-	SDL_Color * sdlColor = new SDL_Color{ 255, 255, 255 };
-
-	// Texture data of text
-	SDL_Surface* surface = TTF_RenderText_Blended(font, newText.c_str(), *sdlColor);
-
-	// OpenGL Texture
-	GLuint tex;
-	glGenTextures(1, &tex);
-	glBindTexture(GL_TEXTURE_2D, tex);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
-
-	// Determine pixel format
-	if (surface->format->BytesPerPixel == 4)
-	{
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, surface->w, surface->h, 0, GL_RGBA, GL_UNSIGNED_BYTE, surface->pixels);
-	}
-	else if (surface->format->BytesPerPixel == 3)
-	{
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, surface->w, surface->h, 0, GL_RGB, GL_UNSIGNED_BYTE, surface->pixels);
-	}
-	else
-	{
-		Logger::throwWarning("Pixel format not recognized while generating TEXT texture: \"" + textContent + "\"");
-		return 0;
-	}
-
-	// Memory management
-	SDL_FreeSurface(surface);
-
-	return tex;
-}
-
 SDL_Surface* TextureLoader::_loadImage(const string& filePath)
 {
 	// Get application root directory
-	char buffer[256]; size_t len = sizeof(buffer);
-	GetModuleFileName(NULL, buffer, len);
-	string rootDir = buffer;
-	rootDir = rootDir.substr(0, rootDir.size() - string("bin\\FabiEngine3D.exe").size());
-	auto fullFilePath = string(rootDir + filePath);
+	string rootDir = Tools::getInst().getRootDirectory();
+	string fullFilePath = string(rootDir + filePath);
 
 	// Load actual image data
 	SDL_Surface * image = IMG_Load(fullFilePath.c_str());
@@ -115,7 +22,7 @@ SDL_Surface* TextureLoader::_loadImage(const string& filePath)
 	return image;
 }
 
-GLuint TextureLoader::_convertToTexture(const string& filePath, SDL_Surface* image, bool mipmap, bool aniso, bool repeat)
+GLuint TextureLoader::_convertToTexture2D(const string& filePath, SDL_Surface* image, bool mipmap, bool aniso, bool repeat)
 {
 	// Generate OpenGL texture
 	GLuint texture;
@@ -166,90 +73,67 @@ GLuint TextureLoader::_convertToTexture(const string& filePath, SDL_Surface* ima
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_R, GL_REPEAT);
 	}
 
+	// Logging
+	Logger::throwInfo("Loaded 2D texture: \"" + filePath + "\"");
+
 	// Return new texture
 	return texture;
 }
 
-GLuint TextureLoader::_loadCubeMap(const array<string, 6>& filePaths)
+GLuint TextureLoader::_convertToTexture3D(const array<string, 6>& filePaths, const array<SDL_Surface*, 6>& images)
 {
 	// Get application root directory
-	char buffer[256]; size_t len = sizeof(buffer);
-	GetModuleFileName(NULL, buffer, len);
-	string rootDir = buffer;
-	rootDir = rootDir.substr(0, rootDir.size() - string("bin\\FabiEngine3D.exe").size());
+	string rootDir = Tools::getInst().getRootDirectory();
 
-	// Init
-	GLuint textureID;
-	glGenTextures(1, &textureID);
+	// Temporary values
+	GLuint texture;
+	glGenTextures(1, &texture);
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_CUBE_MAP, textureID);
+	glBindTexture(GL_TEXTURE_CUBE_MAP, texture);
 
-	// Retrieve the image size (for unfilled images)
-	int textureSize = -1;
-	for (GLuint i = 0; i < filePaths.size(); i++)
+	// Validate image sizes
+	int imageSize = -1;
+	for (unsigned int i = 0; i < images.size(); i++)
 	{
-		if (filePaths[i] != "")
+		// Check image status
+		if (images[i] != nullptr)
 		{
-			// Load SDL surface
-			SDL_Surface* surface = IMG_Load((rootDir + filePaths[i]).c_str());
-			if (surface == nullptr)
-			{
-				Logger::throwWarning("Cannot open cubemap texture: \"" + filePaths[i] + "\"");
-				return 0;
-			}
-
 			// Check if resolution dimensions are the same
-			if (surface->w != surface->h)
+			if (images[i]->w != images[i]->h)
 			{
-				Logger::throwWarning("Cubemap texture width must be same as height: \"" + filePaths[i] + "\"");
+				Logger::throwWarning("3D texture width must be same as height: \"" + filePaths[i] + "\"");
 				return 0;
 			}
 
 			// Check if resolution dimensions are the same as all others
-			if (textureSize != -1)
+			if (imageSize != -1)
 			{
-				if (textureSize != surface->w)
+				if (imageSize != images[i]->w)
 				{
-					Logger::throwWarning("All cubemap textures must have the same resolution: \"" + filePaths[i] + "\"");
+					Logger::throwWarning("All 3D textures must have the same resolution: \"" + filePaths[i] + "\"");
 					return 0;
 				}
 			}
-
-			// Set image size
-			textureSize = surface->w;
-
-			// Memory management
-			SDL_FreeSurface(surface);
 		}
 	}
 
-	// Add the faces images to the texture buffer(textureID)
-	for (GLuint i = 0; i < filePaths.size(); i++)
+	// Add the face images to the texture buffer
+	for (unsigned int i = 0; i < images.size(); i++)
 	{
-		// Check if texture path is not empty
-		if (filePaths[i] == "")
+		// Check image status
+		if (images[i] == nullptr)
 		{
-			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGB, textureSize, textureSize, 0, GL_RGB, GL_UNSIGNED_BYTE, nullptr);
+			// Black image
+			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGB, imageSize, imageSize, 0, GL_RGB, GL_UNSIGNED_BYTE, nullptr);
 		}
 		else
 		{
-			// Load SDL surface
-			SDL_Surface* surface = IMG_Load((rootDir + filePaths[i]).c_str());
-			if (surface == nullptr)
-			{
-				Logger::throwWarning("Cannot open cubeMap texture: \"" + filePaths[i] + "\"");
-				return 0;
-			}
-
-			// Convert to OpenGL texture
-			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGB, surface->w, surface->h, 0, GL_RGB, GL_UNSIGNED_BYTE, surface->pixels);
-
-			// Memory management
-			SDL_FreeSurface(surface);
-
-			// Logging
-			Logger::throwInfo("Loaded cubeMap texture: \"" + filePaths[i] + "\"");
+			// Loaded image
+			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGB, images[i]->w, images[i]->h, 0, GL_RGB, GL_UNSIGNED_BYTE, images[i]->pixels);
 		}
+
+		// Logging
+		Logger::throwInfo("Loaded 3D texture: \"" + filePaths[i] + "\"");
 	}
 
 	// OpenGL magic
@@ -261,17 +145,101 @@ GLuint TextureLoader::_loadCubeMap(const array<string, 6>& filePaths)
 	glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 
 	// Return new texture
-	return textureID;
+	return texture;
 }
 
-// http://stackoverflow.com/questions/1968561/getting-the-pixel-value-of-bmp-file
-vector<float> TextureLoader::_loadHeightMap(const string& filePath)
+TTF_Font* TextureLoader::_loadFont(const string& fontPath)
 {
 	// Get application root directory
-	char buffer[256]; size_t len = sizeof(buffer);
-	GetModuleFileName(NULL, buffer, len);
-	string rootDir = buffer;
-	rootDir = rootDir.substr(0, rootDir.size() - string("bin\\FabiEngine3D.exe").size());
+	string rootDir = Tools::getInst().getRootDirectory();
+
+	// Load font
+	auto it = _fontCache.find(fontPath);
+	if (it == _fontCache.end()) //Not in map (yet)
+	{
+		// Try to load font
+		TTF_Font* font = TTF_OpenFont((rootDir + fontPath).c_str(), 50);
+
+		// Check if font loading is successful
+		if (font == nullptr)
+		{
+			Logger::throwWarning("Cannot load font: \"" + fontPath + "\"");
+			return nullptr;
+		}
+		else
+		{
+			// Save font to cache
+			_fontCache.insert(std::make_pair(fontPath, font));
+			Logger::throwInfo("Loaded font: \"" + fontPath + "\"");
+			return font;
+		}
+	}
+
+	return it->second; //Cache texture
+}
+
+GLuint TextureLoader::_loadText(const string& textContent, const string& fontPath)
+{
+	std::string newText;
+
+	// No empty text
+	if (textContent == "")
+	{
+		newText = " ";
+	}
+	else
+	{
+		newText = textContent;
+	}
+
+	// Load font
+	auto font = _loadFont(fontPath);
+
+	// Check if font loading went well
+	if (font == nullptr)
+	{
+		return 0;
+	}
+
+	// Load color
+	SDL_Color* sdlColor = new SDL_Color{ 255, 255, 255 };
+
+	// Texture data of text
+	SDL_Surface* surface = TTF_RenderText_Blended(font, newText.c_str(), *sdlColor);
+
+	// OpenGL Texture
+	GLuint tex;
+	glGenTextures(1, &tex);
+	glBindTexture(GL_TEXTURE_2D, tex);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
+
+	// Determine pixel format
+	if (surface->format->BytesPerPixel == 4)
+	{
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, surface->w, surface->h, 0, GL_RGBA, GL_UNSIGNED_BYTE, surface->pixels);
+	}
+	else if (surface->format->BytesPerPixel == 3)
+	{
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, surface->w, surface->h, 0, GL_RGB, GL_UNSIGNED_BYTE, surface->pixels);
+	}
+	else
+	{
+		Logger::throwWarning("Pixel format not recognized while generating TEXT texture: \"" + textContent + "\"");
+		return 0;
+	}
+
+	// Memory management
+	SDL_FreeSurface(surface);
+
+	return tex;
+}
+
+vector<float> TextureLoader::_loadBitmapPixels(const string& filePath) // http://stackoverflow.com/questions/1968561/getting-the-pixel-value-of-bmp-file
+{
+	// Get application root directory
+	string rootDir = Tools::getInst().getRootDirectory();
 
 	// Pixels
 	vector<float> pixelIntensities;
@@ -281,7 +249,7 @@ vector<float> TextureLoader::_loadHeightMap(const string& filePath)
 	fopen_s(&streamIn, (rootDir + filePath).c_str(), "rb");
 	if (streamIn == (FILE*)0)
 	{
-		Logger::throwWarning("Cannot open heightmap texture: \"" + filePath + "\"");
+		Logger::throwWarning("Cannot open bitmap image: \"" + filePath + "\"");
 		return {};
 	}
 
@@ -298,19 +266,21 @@ vector<float> TextureLoader::_loadHeightMap(const string& filePath)
 	height = (header[25] << 24) | (header[24] << 16) | (header[23] << 8) | header[22];
 
 	// Read pixels
-	for (size_t i = 0; i < (width * height); i++)
+	auto size = static_cast<size_t>(width) * static_cast<size_t>(height);
+	for (size_t i = 0; i < size; i++)
 	{
 		auto r = getc(streamIn);
 		auto g = getc(streamIn);
 		auto b = getc(streamIn);
-		pixelIntensities.push_back(static_cast<float>(r));
+		float value = static_cast<float>(r + g + b) / 3.0f;
+		pixelIntensities.push_back((value));
 	}
 
 	// Close file
 	fclose(streamIn);
 
 	// Logging
-	Logger::throwInfo("Loaded BMP heightMap: \"" + filePath + "\"");
+	Logger::throwInfo("Loaded bitmap image: \"" + filePath + "\"");
 
 	// Return new texture
 	return pixelIntensities;

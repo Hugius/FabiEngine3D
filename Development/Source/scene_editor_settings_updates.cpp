@@ -419,7 +419,7 @@ void SceneEditor::_updateLensFlareGraphicsSettingsMenu()
 						filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
 					{
 						const string newFilePath = filePath.substr(rootDirectory.size());
-						_fe3d.misc_clearTextureCache(newFilePath);
+						_fe3d.misc_clearTextureCache2D(newFilePath);
 						_fe3d.gfx_enableLensFlare(newFilePath, intensity, multiplier);
 						_fe3d.gfx_disableLensFlare();
 					}

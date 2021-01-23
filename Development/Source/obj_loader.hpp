@@ -13,7 +13,7 @@ public:
 
 	const vector<ObjPart>& loadOBJ(const string& filePath, bool calculateTangents);
 
-	void cacheOBJsMultiThreaded(const vector<string>& filePaths);
+	void cacheOBJsMultiThreaded(const vector<string>& filePaths, vector<string>& resultingTexturePaths);
 
 	void clearOBJCache(const string& filePath);
 

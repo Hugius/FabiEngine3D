@@ -105,19 +105,19 @@ void ModelEditor::_loadOBJ()
 					// Clear texture cache
 					for (auto& path : _fe3d.gameEntity_getDiffuseMapPaths(_currentModelID))
 					{
-						_fe3d.misc_clearTextureCache(path);
+						_fe3d.misc_clearTextureCache2D(path);
 					}
 					for (auto& path : _fe3d.gameEntity_getLightMapPaths(_currentModelID))
 					{
-						_fe3d.misc_clearTextureCache(path);
+						_fe3d.misc_clearTextureCache2D(path);
 					}
 					for (auto& path : _fe3d.gameEntity_getReflectionMapPaths(_currentModelID))
 					{
-						_fe3d.misc_clearTextureCache(path);
+						_fe3d.misc_clearTextureCache2D(path);
 					}
 					for (auto& path : _fe3d.gameEntity_getNormalMapPaths(_currentModelID))
 					{
-						_fe3d.misc_clearTextureCache(path);
+						_fe3d.misc_clearTextureCache2D(path);
 					}
 				}
 
@@ -152,7 +152,7 @@ void ModelEditor::_loadDiffuseMap()
 			filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
 		{
 			const string newFilePath = filePath.substr(rootDirectory.size());
-			_fe3d.misc_clearTextureCache(newFilePath);
+			_fe3d.misc_clearTextureCache2D(newFilePath);
 			_fe3d.gameEntity_setDiffuseMap(_currentModelID, newFilePath);
 		}
 		else
@@ -177,7 +177,7 @@ void ModelEditor::_loadLightMap()
 			filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
 		{
 			const string newFilePath = filePath.substr(rootDirectory.size());
-			_fe3d.misc_clearTextureCache(newFilePath);
+			_fe3d.misc_clearTextureCache2D(newFilePath);
 			_fe3d.gameEntity_setLightMap(_currentModelID, newFilePath);
 			_fe3d.gameEntity_setLightMapped(_currentModelID, true);
 		}
@@ -203,7 +203,7 @@ void ModelEditor::_loadReflectionMap()
 			filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
 		{
 			const string newFilePath = filePath.substr(rootDirectory.size());
-			_fe3d.misc_clearTextureCache(newFilePath);
+			_fe3d.misc_clearTextureCache2D(newFilePath);
 			_fe3d.gameEntity_setReflectionMap(_currentModelID, newFilePath);
 		}
 		else
@@ -228,7 +228,7 @@ void ModelEditor::_loadNormalMap()
 			filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
 		{
 			const string newFilePath = filePath.substr(rootDirectory.size());
-			_fe3d.misc_clearTextureCache(newFilePath);
+			_fe3d.misc_clearTextureCache2D(newFilePath);
 			_fe3d.gameEntity_setNormalMap(_currentModelID, newFilePath);
 			_fe3d.gameEntity_setNormalMapped(_currentModelID, true);
 		}

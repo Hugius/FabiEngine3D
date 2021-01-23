@@ -241,8 +241,8 @@ void TopViewportController::_updateMiscScreenManagement()
 				// Clear the cache of selected file
 				_fe3d.misc_clearOBJCache(newFilePath);
 				_fe3d.misc_clearFontCache(newFilePath);
-				_fe3d.misc_clearTextureCache(newFilePath);
-				_fe3d.misc_clearHeightMapCache(newFilePath);
+				_fe3d.misc_clearTextureCache2D(newFilePath);
+				_fe3d.misc_clearBitmapCache(newFilePath);
 				_fe3d.misc_clearAudioChunkCache(newFilePath);
 				_fe3d.misc_clearAudioMusicCache(newFilePath);
 			}

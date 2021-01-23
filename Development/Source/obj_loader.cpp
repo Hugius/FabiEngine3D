@@ -7,14 +7,19 @@
 #include <GLEW\\glew.h>
 #include <filesystem>
 #include <future>
+#include <set>
 
-void OBJLoader::cacheOBJsMultiThreaded(const vector<string>& filePaths)
+void OBJLoader::cacheOBJsMultiThreaded(const vector<string>& filePaths, vector<string>& resultingTexturePaths)
 {
 	// Temporary values
 	vector<std::future<vector<ObjPart>>> threads;
 
+	// Remove duplicates
+	auto tempFilePaths = std::set<string>(filePaths.begin(), filePaths.end());
+	auto uniqueFilePaths = vector<string>(tempFilePaths.begin(), tempFilePaths.end());
+
 	// Start all loading threads
-	for (const auto& filePath : filePaths)
+	for (const auto& filePath : uniqueFilePaths)
 	{
 		threads.push_back(std::async(std::launch::async, &OBJLoader::_loadOBJ, this, filePath, false));
 	}
@@ -28,10 +33,31 @@ void OBJLoader::cacheOBJsMultiThreaded(const vector<string>& filePaths)
 		if (!objParts.empty())
 		{
 			// Logging
-			Logger::throwInfo("Loaded OBJ model: \"" + filePaths[i] + "\"");
+			Logger::throwInfo("Loaded OBJ model: \"" + uniqueFilePaths[i] + "\"");
 
 			// Cache model
-			_objCache[filePaths[i]] = objParts;
+			_objCache[uniqueFilePaths[i]] = objParts;
+		}
+
+		// Extract possible texture paths
+		for (const auto& part : objParts)
+		{
+			if (!part.diffuseMapPath.empty()) // Diffuse map
+			{
+				resultingTexturePaths.push_back(part.diffuseMapPath);
+			}
+			if (!part.lightMapPath.empty()) // Light map
+			{
+				resultingTexturePaths.push_back(part.lightMapPath);
+			}
+			if (!part.normalMapPath.empty()) // Normal map
+			{
+				resultingTexturePaths.push_back(part.normalMapPath);
+			}
+			if (!part.reflectionMapPath.empty()) // Reflection map
+			{
+				resultingTexturePaths.push_back(part.reflectionMapPath);
+			}
 		}
 	}
 }
@@ -268,10 +294,10 @@ vector<ObjPart> OBJLoader::_loadOBJ(const string& filePath, bool calculateTangen
 				newPart.name = selectedPartName;
 
 				// Set texture map paths
-				newPart.diffuseMapPath = tempDiffuseMapPath;
-				newPart.lightMapPath = tempLightMapPath;
-				newPart.normalMapPath = tempNormalMapPath;
-				newPart.reflectionMapPath = tempReflectionMapPath;
+				newPart.diffuseMapPath = tempDiffuseMapPath.empty() ? "" : string("user\\assets\\textures\\diffuse_maps\\" + tempDiffuseMapPath);
+				newPart.lightMapPath = tempLightMapPath.empty() ? "" : string("user\\assets\\textures\\light_maps\\" + tempLightMapPath);
+				newPart.normalMapPath = tempNormalMapPath.empty() ? "" : string("user\\assets\\textures\\normal_maps\\" + tempNormalMapPath);
+				newPart.reflectionMapPath = tempReflectionMapPath.empty() ? "" : string("user\\assets\\textures\\reflection_maps\\" + tempReflectionMapPath);
 
 				// Add new OBJ part
 				objParts.push_back(newPart);

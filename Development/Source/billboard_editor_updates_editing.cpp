@@ -120,7 +120,7 @@ void BillboardEditor::_updateBillboardEditing()
 								filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
 							{
 								const string newFilePath = filePath.substr(rootDirectory.size());
-								_fe3d.misc_clearTextureCache(newFilePath);
+								_fe3d.misc_clearTextureCache2D(newFilePath);
 								_fe3d.billboardEntity_setDiffuseMap(_currentBillboardID, newFilePath, false);
 							}
 							else

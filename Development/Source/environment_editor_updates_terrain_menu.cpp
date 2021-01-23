@@ -107,7 +107,7 @@ void EnvironmentEditor::_updateTerrainMenuMesh()
 						filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
 					{
 						const string newFilePath = filePath.substr(rootDirectory.size());
-						_fe3d.misc_clearHeightMapCache(newFilePath);
+						_fe3d.misc_clearBitmapCache(newFilePath);
 
 						// Check if terrain entity already exists
 						if (_fe3d.terrainEntity_isExisting(_currentTerrainID))
@@ -142,7 +142,7 @@ void EnvironmentEditor::_updateTerrainMenuMesh()
 						filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
 					{
 						const string newFilePath = filePath.substr(rootDirectory.size());
-						_fe3d.misc_clearTextureCache(newFilePath);
+						_fe3d.misc_clearTextureCache2D(newFilePath);
 						_fe3d.terrainEntity_setDiffuseMap(_currentTerrainID, newFilePath);
 					}
 					else
@@ -218,7 +218,7 @@ void EnvironmentEditor::_updateTerrainMenuBlendMap()
 						filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
 					{
 						const string newFilePath = filePath.substr(rootDirectory.size());
-						_fe3d.misc_clearTextureCache(newFilePath);
+						_fe3d.misc_clearTextureCache2D(newFilePath);
 						_fe3d.terrainEntity_setBlendMap(_currentTerrainID, newFilePath);
 					}
 					else
@@ -242,7 +242,7 @@ void EnvironmentEditor::_updateTerrainMenuBlendMap()
 						filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
 					{
 						const string newFilePath = filePath.substr(rootDirectory.size());
-						_fe3d.misc_clearTextureCache(newFilePath);
+						_fe3d.misc_clearTextureCache2D(newFilePath);
 						_fe3d.terrainEntity_setBlendMapR(_currentTerrainID, newFilePath);
 					}
 					else
@@ -266,7 +266,7 @@ void EnvironmentEditor::_updateTerrainMenuBlendMap()
 						filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
 					{
 						const string newFilePath = filePath.substr(rootDirectory.size());
-						_fe3d.misc_clearTextureCache(newFilePath);
+						_fe3d.misc_clearTextureCache2D(newFilePath);
 						_fe3d.terrainEntity_setBlendMapG(_currentTerrainID, newFilePath);
 					}
 					else
@@ -290,7 +290,7 @@ void EnvironmentEditor::_updateTerrainMenuBlendMap()
 						filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
 					{
 						const string newFilePath = filePath.substr(rootDirectory.size());
-						_fe3d.misc_clearTextureCache(newFilePath);
+						_fe3d.misc_clearTextureCache2D(newFilePath);
 						_fe3d.terrainEntity_setBlendMapB(_currentTerrainID, newFilePath);
 					}
 					else
@@ -387,7 +387,7 @@ void EnvironmentEditor::_updateTerrainMenuLighting()
 						filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
 					{
 						const string newFilePath = filePath.substr(rootDirectory.size());
-						_fe3d.misc_clearTextureCache(newFilePath);
+						_fe3d.misc_clearTextureCache2D(newFilePath);
 						_fe3d.terrainEntity_setNormalMap(_currentTerrainID, newFilePath);
 						_fe3d.terrainEntity_setNormalMapped(_currentTerrainID, true);
 					}
@@ -412,7 +412,7 @@ void EnvironmentEditor::_updateTerrainMenuLighting()
 						filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
 					{
 						const string newFilePath = filePath.substr(rootDirectory.size());
-						_fe3d.misc_clearTextureCache(newFilePath);
+						_fe3d.misc_clearTextureCache2D(newFilePath);
 						_fe3d.terrainEntity_setNormalMapR(_currentTerrainID, newFilePath);
 						_fe3d.terrainEntity_setNormalMappedR(_currentTerrainID, true);
 					}
@@ -437,7 +437,7 @@ void EnvironmentEditor::_updateTerrainMenuLighting()
 						filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
 					{
 						const string newFilePath = filePath.substr(rootDirectory.size());
-						_fe3d.misc_clearTextureCache(newFilePath);
+						_fe3d.misc_clearTextureCache2D(newFilePath);
 						_fe3d.terrainEntity_setNormalMapG(_currentTerrainID, newFilePath);
 						_fe3d.terrainEntity_setNormalMappedG(_currentTerrainID, true);
 					}
@@ -462,7 +462,7 @@ void EnvironmentEditor::_updateTerrainMenuLighting()
 						filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
 					{
 						const string newFilePath = filePath.substr(rootDirectory.size());
-						_fe3d.misc_clearTextureCache(newFilePath);
+						_fe3d.misc_clearTextureCache2D(newFilePath);
 						_fe3d.terrainEntity_setNormalMapB(_currentTerrainID, newFilePath);
 						_fe3d.terrainEntity_setNormalMappedB(_currentTerrainID, true);
 					}

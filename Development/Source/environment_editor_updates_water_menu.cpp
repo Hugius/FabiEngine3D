@@ -247,7 +247,7 @@ void EnvironmentEditor::_updateWaterMenuEffects()
 						filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
 					{
 						const string newFilePath = filePath.substr(rootDirectory.size());
-						_fe3d.misc_clearTextureCache(newFilePath);
+						_fe3d.misc_clearTextureCache2D(newFilePath);
 						_fe3d.waterEntity_setDudvMap(_currentWaterID, newFilePath);
 					}
 					else
@@ -271,7 +271,7 @@ void EnvironmentEditor::_updateWaterMenuEffects()
 						filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
 					{
 						const string newFilePath = filePath.substr(rootDirectory.size());
-						_fe3d.misc_clearTextureCache(newFilePath);
+						_fe3d.misc_clearTextureCache2D(newFilePath);
 						_fe3d.waterEntity_setNormalMap(_currentWaterID, newFilePath);
 					}
 					else
@@ -295,7 +295,7 @@ void EnvironmentEditor::_updateWaterMenuEffects()
 						filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
 					{
 						const string newFilePath = filePath.substr(rootDirectory.size());
-						_fe3d.misc_clearTextureCache(newFilePath);
+						_fe3d.misc_clearTextureCache2D(newFilePath);
 						_fe3d.waterEntity_setDisplacementMap(_currentWaterID, newFilePath);
 					}
 					else

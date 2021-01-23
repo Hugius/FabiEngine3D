@@ -101,7 +101,7 @@ void EnvironmentEditor::_updateSkyMenuMesh()
 						filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
 					{
 						const string newFilePath = filePath.substr(rootDirectory.size());
-						_fe3d.misc_clearCubeMapCache(_fe3d.skyEntity_getDiffuseMapPaths(_currentSkyID));
+						_fe3d.misc_clearTextureCache3D(_fe3d.skyEntity_getDiffuseMapPaths(_currentSkyID));
 						_fe3d.skyEntity_setDiffuseMapRight(_currentSkyID, newFilePath);
 					}
 					else
@@ -125,7 +125,7 @@ void EnvironmentEditor::_updateSkyMenuMesh()
 						filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
 					{
 						const string newFilePath = filePath.substr(rootDirectory.size());
-						_fe3d.misc_clearCubeMapCache(_fe3d.skyEntity_getDiffuseMapPaths(_currentSkyID));
+						_fe3d.misc_clearTextureCache3D(_fe3d.skyEntity_getDiffuseMapPaths(_currentSkyID));
 						_fe3d.skyEntity_setDiffuseMapLeft(_currentSkyID, newFilePath);
 					}
 					else
@@ -149,7 +149,7 @@ void EnvironmentEditor::_updateSkyMenuMesh()
 						filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
 					{
 						const string newFilePath = filePath.substr(rootDirectory.size());
-						_fe3d.misc_clearCubeMapCache(_fe3d.skyEntity_getDiffuseMapPaths(_currentSkyID));
+						_fe3d.misc_clearTextureCache3D(_fe3d.skyEntity_getDiffuseMapPaths(_currentSkyID));
 						_fe3d.skyEntity_setDiffuseMapTop(_currentSkyID, newFilePath);
 					}
 					else
@@ -173,7 +173,7 @@ void EnvironmentEditor::_updateSkyMenuMesh()
 						filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
 					{
 						const string newFilePath = filePath.substr(rootDirectory.size());
-						_fe3d.misc_clearCubeMapCache(_fe3d.skyEntity_getDiffuseMapPaths(_currentSkyID));
+						_fe3d.misc_clearTextureCache3D(_fe3d.skyEntity_getDiffuseMapPaths(_currentSkyID));
 						_fe3d.skyEntity_setDiffuseMapBottom(_currentSkyID, newFilePath);
 					}
 					else
@@ -197,7 +197,7 @@ void EnvironmentEditor::_updateSkyMenuMesh()
 						filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
 					{
 						const string newFilePath = filePath.substr(rootDirectory.size());
-						_fe3d.misc_clearCubeMapCache(_fe3d.skyEntity_getDiffuseMapPaths(_currentSkyID));
+						_fe3d.misc_clearTextureCache3D(_fe3d.skyEntity_getDiffuseMapPaths(_currentSkyID));
 						_fe3d.skyEntity_setDiffuseMapFront(_currentSkyID, newFilePath);
 					}
 					else
@@ -221,7 +221,7 @@ void EnvironmentEditor::_updateSkyMenuMesh()
 						filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
 					{
 						const string newFilePath = filePath.substr(rootDirectory.size());
-						_fe3d.misc_clearCubeMapCache(_fe3d.skyEntity_getDiffuseMapPaths(_currentSkyID));
+						_fe3d.misc_clearTextureCache3D(_fe3d.skyEntity_getDiffuseMapPaths(_currentSkyID));
 						_fe3d.skyEntity_setDiffuseMapBack(_currentSkyID, newFilePath);
 					}
 					else

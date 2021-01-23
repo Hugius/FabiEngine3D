@@ -1,6 +1,7 @@
 #include "texture_loader.hpp"
 
 #include <future>
+#include <set>
 
 void TextureLoader::cacheTexturesMultiThreaded2D(const vector<string>& filePaths)
 {
@@ -9,10 +10,14 @@ void TextureLoader::cacheTexturesMultiThreaded2D(const vector<string>& filePaths
 	vector<bool> threadStatuses;
 	unsigned int finishedThreadCount = 0;
 
+	// Remove duplicates
+	auto tempFilePaths = std::set<string>(filePaths.begin(), filePaths.end());
+	auto uniqueFilePaths = vector<string>(tempFilePaths.begin(), tempFilePaths.end());
+
 	// Start all loading threads
-	for (unsigned int i = 0; i < filePaths.size(); i++)
+	for (unsigned int i = 0; i < uniqueFilePaths.size(); i++)
 	{
-		threads.push_back(std::async(std::launch::async, &TextureLoader::_loadImage, this, filePaths[i]));
+		threads.push_back(std::async(std::launch::async, &TextureLoader::_loadImage, this, uniqueFilePaths[i]));
 		threadStatuses.push_back(false);
 	}
 
@@ -38,7 +43,7 @@ void TextureLoader::cacheTexturesMultiThreaded2D(const vector<string>& filePaths
 					if (loadedImage != nullptr)
 					{
 						// Load OpenGL texture
-						auto loadedTexture = _convertToTexture2D(filePaths[i], loadedImage, true, true, true);
+						auto loadedTexture = _convertToTexture2D(uniqueFilePaths[i], loadedImage, true, true, true);
 
 						// Free image memory
 						SDL_FreeSurface(loadedImage);
@@ -47,7 +52,7 @@ void TextureLoader::cacheTexturesMultiThreaded2D(const vector<string>& filePaths
 						if (loadedTexture != 0)
 						{
 							// Cache texture
-							_textureCache2D[filePaths[i]] = loadedTexture;
+							_textureCache2D[uniqueFilePaths[i]] = loadedTexture;
 						}
 					}
 				}

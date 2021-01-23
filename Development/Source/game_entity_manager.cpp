@@ -105,8 +105,8 @@ void GameEntityManager::generateModel(const string& ID, const string& objName)
 		// Load an OBJ part diffuse map
 		if (part.diffuseMapPath != "")
 		{
-			entity->addDiffuseMap(_texLoader.getTexture2D("user\\assets\\textures\\diffuse_maps\\" + part.diffuseMapPath, true, true, true));
-			entity->addDiffuseMapPath("user\\assets\\textures\\diffuse_maps\\" + part.diffuseMapPath);
+			entity->addDiffuseMap(_texLoader.getTexture2D(part.diffuseMapPath, true, true, true));
+			entity->addDiffuseMapPath(part.diffuseMapPath);
 		}
 		else
 		{
@@ -121,8 +121,8 @@ void GameEntityManager::generateModel(const string& ID, const string& objName)
 		if (part.lightMapPath != "")
 		{
 			entity->setLightMapped(true);
-			entity->addLightMap(_texLoader.getTexture2D("user\\assets\\textures\\light_maps\\" + part.lightMapPath, true, true, true));
-			entity->addLightMapPath("user\\assets\\textures\\light_maps\\" + part.lightMapPath);
+			entity->addLightMap(_texLoader.getTexture2D(part.lightMapPath, true, true, true));
+			entity->addLightMapPath(part.lightMapPath);
 		}
 		else
 		{
@@ -136,8 +136,8 @@ void GameEntityManager::generateModel(const string& ID, const string& objName)
 		// Load an OBJ part normal map
 		if (part.normalMapPath != "")
 		{
-			entity->addNormalMap(_texLoader.getTexture2D("user\\assets\\textures\\normal_maps\\" + part.normalMapPath, true, true, true));
-			entity->addNormalMapPath("user\\assets\\textures\\normal_maps\\" + part.normalMapPath);
+			entity->addNormalMap(_texLoader.getTexture2D(part.normalMapPath, true, true, true));
+			entity->addNormalMapPath(part.normalMapPath);
 		}
 		else
 		{
@@ -152,8 +152,8 @@ void GameEntityManager::generateModel(const string& ID, const string& objName)
 		if (part.reflectionMapPath != "")
 		{
 			entity->setSkyReflective(true);
-			entity->addReflectionMap(_texLoader.getTexture2D("user\\assets\\textures\\reflection_maps\\" + part.reflectionMapPath, true, true, true));
-			entity->addReflectionMapPath("user\\assets\\textures\\reflection_maps\\" + part.reflectionMapPath);
+			entity->addReflectionMap(_texLoader.getTexture2D(part.reflectionMapPath, true, true, true));
+			entity->addReflectionMapPath(part.reflectionMapPath);
 		}
 		else
 		{

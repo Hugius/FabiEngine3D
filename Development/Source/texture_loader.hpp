@@ -1,11 +1,11 @@
 #pragma once
 
 #include <GLEW\\glew.h>
+#include <SDL\\SDL_ttf.h>
 #include <array>
 #include <vector>
 #include <map>
 #include <string>
-#include <SDL\\SDL_ttf.h>
 
 using std::pair;
 using std::array;

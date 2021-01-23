@@ -72,8 +72,12 @@ void ModelEditor::preLoadGameEntitiesFromFile()
 		// Close file
 		file.close();
 
-		// Cache OBJ files & texture files
-		_fe3d.misc_cacheOBJsMultiThreaded(objPaths);
+		// Cache OBJ files
+		vector<string> objTexturePaths;
+		_fe3d.misc_cacheOBJsMultiThreaded(objPaths, objTexturePaths);
+		texturePaths.insert(texturePaths.end(), objTexturePaths.begin(), objTexturePaths.end());
+
+		// Cache texture files
 		_fe3d.misc_cacheTexturesMultiThreaded2D(texturePaths);
 	}
 

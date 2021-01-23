@@ -103,6 +103,18 @@ void TopViewportController::_updateProjectLoading()
 			// Load settings for this project
 			_settingsEditor.load();
 
+			// Preload all assets of this project
+			vector<string> texturePaths;
+			auto terrainTextures = _environmentEditor.getAllTerrainTexturePathsFromFile();
+			auto waterTextures = _environmentEditor.getAllWaterTexturePathsFromFile();
+			auto modelTextures = _modelEditor.getAllTexturePathsFromFile();
+			auto billboardTextures = _billboardEditor.getAllTexturePathsFromFile();
+			texturePaths.insert(texturePaths.end(), terrainTextures.begin(), terrainTextures.end());
+			texturePaths.insert(texturePaths.end(), waterTextures.begin(), waterTextures.end());
+			texturePaths.insert(texturePaths.end(), modelTextures.begin(), modelTextures.end());
+			texturePaths.insert(texturePaths.end(), billboardTextures.begin(), billboardTextures.end());
+			_fe3d.misc_cacheTexturesMultiThreaded2D(texturePaths);
+
 			// Logging
 			_fe3d.logger_throwInfo("Existing project \"" + _currentProjectName + "\" loaded!");
 

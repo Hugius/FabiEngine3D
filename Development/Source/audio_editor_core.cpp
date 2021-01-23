@@ -24,7 +24,7 @@ void AudioEditor::initializeGUI()
 
 	// Left-viewport: mainWindow - audioEditorMenuChoice
 	leftWindow->addScreen("audioEditorMenuChoice");
-	leftWindow->getScreen("audioEditorMenuChoice")->addButton("load", Vec2(0.0f, 0.75f), Vec2(GW("Load MP3"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Load MP3", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen("audioEditorMenuChoice")->addButton("load", Vec2(0.0f, 0.75f), Vec2(GW("Load OGG"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Load OGG", LVPC::textColor, LVPC::textHoverColor);
 	leftWindow->getScreen("audioEditorMenuChoice")->addButton("play", Vec2(0.0f, 0.45f), Vec2(GW("Play"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Play", LVPC::textColor, LVPC::textHoverColor);
 	leftWindow->getScreen("audioEditorMenuChoice")->addButton("resume", Vec2(0.0f, 0.15f), Vec2(GW("Resume"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Resume", LVPC::textColor, LVPC::textHoverColor);
 	leftWindow->getScreen("audioEditorMenuChoice")->addButton("pause", Vec2(0.0f, -0.15f), Vec2(GW("Pause"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Pause", LVPC::textColor, LVPC::textHoverColor);

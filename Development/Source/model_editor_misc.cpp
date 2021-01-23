@@ -249,12 +249,12 @@ bool ModelEditor::isLoaded()
 	return _isEditorLoaded;
 }
 
-vector<string>& ModelEditor::getTotalObjFileNames()
+const vector<string>& ModelEditor::getTotalObjFileNames()
 {
 	return _objFileNamesList;
 }
 
-vector<string>& ModelEditor::getModelNames()
+const vector<string>& ModelEditor::getModelNames()
 {
 	return _modelIDs;
 }

@@ -35,7 +35,7 @@ void SettingsEditor::load()
 	// Error checking
 	if (_currentProjectName == "")
 	{
-		_fe3d.logger_throwError("No current project loaded!");
+		_fe3d.logger_throwError("No current project loaded --> SettingsEditor::load()");
 	}
 
 	// Compose full file path
@@ -82,7 +82,7 @@ void SettingsEditor::save(bool newFile)
 	// Error checking
 	if (_currentProjectName == "")
 	{
-		_fe3d.logger_throwError("No current project loaded!");
+		_fe3d.logger_throwError("No current project loaded --> SettingsEditor::save()");
 	}
 
 	// Compose full file path

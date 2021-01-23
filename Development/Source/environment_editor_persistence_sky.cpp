@@ -9,7 +9,7 @@ void EnvironmentEditor::loadSkyEntitiesFromFile()
 	// Error checking
 	if (_currentProjectName == "")
 	{
-		_fe3d.logger_throwError("No current project loaded!");
+		_fe3d.logger_throwError("No current project loaded --> EnvironmentEditor::loadSkyEntitiesFromFile()");
 	}
 
 	// Clear names list from previous loads

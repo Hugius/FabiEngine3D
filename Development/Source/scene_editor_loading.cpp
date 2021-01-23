@@ -9,7 +9,7 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 	// Error checking
 	if (_currentProjectName == "")
 	{
-		_fe3d.logger_throwError("No current project loaded!");
+		_fe3d.logger_throwError("No current project loaded --> SceneEditor::loadSceneFromFile()");
 	}
 
 	// Compose full file path

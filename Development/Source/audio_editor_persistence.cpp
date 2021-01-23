@@ -8,7 +8,7 @@ void AudioEditor::loadAudioEntitiesFromFile()
 	// Error checking
 	if (_currentProjectName == "")
 	{
-		_fe3d.logger_throwError("No current project loaded!");
+		_fe3d.logger_throwError("No current project loaded --> AudioEditor::loadAudioEntitiesFromFile()");
 	}
 
 	// Clear names list from previous loads

@@ -19,7 +19,8 @@ public:
 
 	bool isLoaded();
 
-	vector<string>& getBillboardNames();
+	const vector<string> getAllTexturePathsFromFile();
+	const vector<string>& getBillboardNames();
 
 private:
 	void _updateBillboardManagement();

@@ -3,6 +3,7 @@
 
 #include <ctime>
 #include <sstream>
+#include <filesystem>
 
 using std::to_string;
 
@@ -22,6 +23,9 @@ const string Tools::getRootDirectory()
 
 	// Create final string
 	string rootDir = buffer;
+
+	// Convert to absolute path if it's relative
+	rootDir = std::filesystem::absolute(rootDir).string();
 
 	// Cut to engine root directory
 	rootDir = rootDir.substr(0, rootDir.size() - string("bin\\FabiEngine3D.exe").size());

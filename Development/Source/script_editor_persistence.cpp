@@ -9,7 +9,7 @@ void ScriptEditor::loadScriptsFromFile()
 	// Error checking
 	if (_currentProjectName == "")
 	{
-		_fe3d.logger_throwError("No current project loaded!");
+		_fe3d.logger_throwError("No current project loaded --> ScriptEditor::loadScriptsFromFile()");
 	}
 
 	// Clear last script

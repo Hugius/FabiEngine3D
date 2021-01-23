@@ -8,7 +8,7 @@ void AnimationEditor::loadAnimationsFromFile()
 	// Error checking
 	if (_currentProjectName == "")
 	{
-		_fe3d.logger_throwError("No current project loaded!");
+		_fe3d.logger_throwError("No current project loaded --> AnimationEditor::loadAnimationsFromFile()");
 	}
 
 	// Clear names list from previous loads

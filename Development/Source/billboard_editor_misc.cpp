@@ -10,7 +10,7 @@ bool BillboardEditor::isLoaded()
 	return _isEditorLoaded;
 }
 
-vector<string>& BillboardEditor::getBillboardNames()
+const vector<string>& BillboardEditor::getBillboardNames()
 {
 	return _billboardIDs;
 }

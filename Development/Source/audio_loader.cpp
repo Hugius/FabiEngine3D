@@ -3,6 +3,8 @@
 #include "tools.hpp"
 
 #include <algorithm>
+#include <future>
+#include <set>
 
 AudioLoader::~AudioLoader()
 {
@@ -12,39 +14,69 @@ AudioLoader::~AudioLoader()
 	}
 }
 
+void AudioLoader::cacheChunksMultiThreaded(const vector<string>& filePaths)
+{
+	//// Temporary values
+	//vector<std::future<Mix_Chunk*>> threads;
+
+	//// Remove duplicates
+	//auto tempFilePaths = std::set<string>(filePaths.begin(), filePaths.end());
+	//auto uniqueFilePaths = vector<string>(tempFilePaths.begin(), tempFilePaths.end());
+
+	//// Start all loading threads
+	//for (const auto& filePath : uniqueFilePaths)
+	//{
+	//	threads.push_back(std::async(std::launch::async, &AudioLoader::_loadChunk, this, filePath));
+	//}
+
+	//// Wait for all threads to finish
+	//for (unsigned int i = 0; i < threads.size(); i++)
+	//{
+	//	auto objParts = threads[i].get();
+
+	//	// Check if model loading went well
+	//	if (!objParts.empty())
+	//	{
+	//		// Logging
+	//		Logger::throwInfo("Loaded OBJ model: \"" + uniqueFilePaths[i] + "\"");
+
+	//		// Cache model
+	//		_objCache[uniqueFilePaths[i]] = objParts;
+	//	}
+	//}
+}
+
 Mix_Chunk* AudioLoader::getChunk(const string& filePath)
 {
+begin:
 	auto iterator = _chunkCache.find(filePath);
-
-	// Check if audio chunk was loaded already, if not, load data and store in std::map
-	if (iterator == _chunkCache.end())
+	if (iterator == _chunkCache.end()) // Not in map (yet)
 	{
-		// Get application root directory
-		string rootDir = Tools::getInst().getRootDirectory();
-		
-		// Load audio file
-		Mix_Chunk* chunk = Mix_LoadWAV((rootDir + filePath).c_str());
+		// Load chunk file
+		auto chunk = _loadChunk(filePath);
 
-		if (chunk == nullptr) // Could not load file
+		// Check chunk status
+		if (chunk == nullptr)
 		{
-			Logger::throwWarning("Could not load audio file \"", filePath, "\"");
 			return nullptr;
 		}
-		else // Successfully loaded file
+		else
 		{
 			auto reversed(filePath); // Copy
 			std::reverse(reversed.begin(), reversed.end()); // Reverse, cuz . must be last in path
 			auto extension = filePath.substr(filePath.size() - reversed.find("."), reversed.find(".")); // Substring file extension
 			std::transform(extension.begin(), extension.end(), extension.begin(), ::toupper); // Convert to uppercase
-			Logger::throwInfo("Loaded ", extension, " audio file: \"" + filePath + "\""); // Log loaded
-			_chunkCache.insert(std::make_pair(filePath, chunk)); // Insert new data
-			return chunk;
+			Logger::throwInfo("Loaded ", extension, " audio file: \"" + filePath + "\""); // Logging
+
+			// Cache chunk
+			_chunkCache.insert(std::make_pair(filePath, chunk));
+
+			// Return cached chunk
+			goto begin;
 		}
 	}
-	else
-	{
-		return iterator->second; // Return the corresponding OBJ parts
-	}
+
+	return iterator->second;
 }
 
 Mix_Music* AudioLoader::getMusic(const string& filePath)
@@ -96,4 +128,24 @@ void AudioLoader::clearMusicCache(const string& filePath)
 	{
 		_musicCache.erase(filePath);
 	}
+}
+
+Mix_Chunk* AudioLoader::_loadChunk(const string& filePath)
+{
+	// Get application root directory
+	string rootDir = Tools::getInst().getRootDirectory();
+
+	// Load audio file
+	Mix_Chunk* chunk = Mix_LoadWAV((rootDir + filePath).c_str());
+	if (chunk == nullptr)
+	{
+		Logger::throwWarning("Could not load audio file \"", filePath, "\"");
+	}
+
+	return chunk;
+}
+
+Mix_Music* AudioLoader::_loadMusic(const string& filePath)
+{
+	return nullptr;
 }

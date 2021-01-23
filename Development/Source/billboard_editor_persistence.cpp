@@ -4,12 +4,74 @@
 #include <sstream>
 #include <algorithm>
 
+const vector<string> BillboardEditor::getAllTexturePathsFromFile()
+{
+	// Error checking
+	if (_currentProjectName == "")
+	{
+		_fe3d.logger_throwError("No current project loaded --> BillboardEditor::getAllTexturePathsFromFile()");
+	}
+
+	// Compose full file path
+	string filePath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectName + "\\data\\billboard.fe3d";
+
+	// Check if billboard file exists
+	if (_fe3d.misc_isFileExisting(filePath))
+	{
+		// Temporary values
+		std::ifstream file(filePath);
+		string line;
+		vector<string> texturePaths;
+
+		// Read billboard data
+		while (std::getline(file, line))
+		{
+			// Temporary values
+			string billboardID, diffuseMapPath, fontPath, textContent;
+			Vec2 size;
+			Vec3 color;
+			float lightness;
+			bool facingX, facingY, transparent, playing;
+			int rows, columns, framestep;
+			std::istringstream iss(line);
+
+			// Extract data
+			iss >>
+				billboardID >>
+				size.x >>
+				size.y >>
+				color.r >>
+				color.g >>
+				color.b >>
+				facingX >>
+				facingY >>
+				diffuseMapPath;
+
+			// Perform empty string & space conversions
+			diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
+			std::replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
+
+			// Save file paths
+			if (!diffuseMapPath.empty())
+			{
+				texturePaths.push_back(diffuseMapPath);
+			}
+		}
+
+		// Close file
+		file.close();
+
+		// Return
+		return texturePaths;
+	}
+}
+
 void BillboardEditor::loadBillboardEntitiesFromFile()
 {
 	// Error checking
 	if (_currentProjectName == "")
 	{
-		_fe3d.logger_throwError("No current project loaded!");
+		_fe3d.logger_throwError("No current project loaded --> BillboardEditor::loadBillboardEntitiesFromFile()");
 	}
 
 	// Clear names list from previous loads
@@ -24,11 +86,11 @@ void BillboardEditor::loadBillboardEntitiesFromFile()
 		std::ifstream file(filePath);
 		string line;
 
-		// Read model data
+		// Read billboard data
 		while (std::getline(file, line))
 		{
 			// Placeholder variables
-			string billboardID, diffusePath, fontPath, textContent;
+			string billboardID, diffuseMapPath, fontPath, textContent;
 			Vec2 size;
 			Vec3 color;
 			float lightness;
@@ -48,7 +110,7 @@ void BillboardEditor::loadBillboardEntitiesFromFile()
 				color.b >>
 				facingX >>
 				facingY >>
-				diffusePath >>
+				diffuseMapPath >>
 				transparent >>
 				fontPath >>
 				textContent >>
@@ -59,10 +121,10 @@ void BillboardEditor::loadBillboardEntitiesFromFile()
 				lightness;
 
 			// Perform empty string & space conversions
-			diffusePath = (diffusePath == "?") ? "" : diffusePath;
+			diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
 			fontPath = (fontPath == "?") ? "" : fontPath;
 			textContent = (textContent == "?") ? "" : textContent;
-			std::replace(diffusePath.begin(), diffusePath.end(), '?', ' ');
+			std::replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
 			std::replace(fontPath.begin(), fontPath.end(), '?', ' ');
 			std::replace(textContent.begin(), textContent.end(), '?', ' ');
 
@@ -70,9 +132,9 @@ void BillboardEditor::loadBillboardEntitiesFromFile()
 			_billboardIDs.push_back(billboardID);
 
 			// Determine billboard type
-			if (diffusePath != "") // Textured billboard
+			if (diffuseMapPath != "") // Textured billboard
 			{
-				_fe3d.billboardEntity_add(billboardID, diffusePath, _billboardPosition, Vec3(0.0f), size, transparent, facingX, facingY, false, false);
+				_fe3d.billboardEntity_add(billboardID, diffuseMapPath, _billboardPosition, Vec3(0.0f), size, transparent, facingX, facingY, false, false);
 				_fe3d.billboardEntity_setColor(billboardID, color);
 
 				// Playing sprite animation
@@ -125,7 +187,7 @@ void BillboardEditor::saveBillboardEntitiesToFile()
 			// Retrieve all values
 			auto size = _fe3d.billboardEntity_getSize(billboardID);
 			auto color = _fe3d.billboardEntity_getColor(billboardID);
-			auto diffusePath = _fe3d.billboardEntity_getDiffuseMapPath(billboardID);
+			auto diffuseMapPath = _fe3d.billboardEntity_getDiffuseMapPath(billboardID);
 			auto fontPath = _fe3d.billboardEntity_getFontPath(billboardID);
 			auto textContent = _fe3d.billboardEntity_getTextContent(billboardID);
 			auto isFacingX = _fe3d.billboardEntity_isFacingCameraX(billboardID);
@@ -138,10 +200,10 @@ void BillboardEditor::saveBillboardEntitiesToFile()
 			auto lightness = _fe3d.billboardEntity_getLightness(billboardID);
 
 			// Perform empty string & space conversions
-			diffusePath = (diffusePath == "") ? "?" : diffusePath;
+			diffuseMapPath = (diffuseMapPath == "") ? "?" : diffuseMapPath;
 			fontPath = (fontPath == "") ? "?" : fontPath;
 			textContent = (textContent == "") ? "?" : textContent;
-			std::replace(diffusePath.begin(), diffusePath.end(), ' ', '?');
+			std::replace(diffuseMapPath.begin(), diffuseMapPath.end(), ' ', '?');
 			std::replace(fontPath.begin(), fontPath.end(), ' ', '?');
 			std::replace(textContent.begin(), textContent.end(), ' ', '?');
 
@@ -155,7 +217,7 @@ void BillboardEditor::saveBillboardEntitiesToFile()
 				color.b << " " <<
 				isFacingX << " " <<
 				isFacingY << " " <<
-				diffusePath << " " <<
+				diffuseMapPath << " " <<
 				isTransparent << " " <<
 				fontPath << " " <<
 				textContent << " " <<

@@ -26,6 +26,9 @@ public:
 	void unloadTerrainEntities();
 	void unloadWaterEntities();
 
+	const vector<string> getAllTerrainTexturePathsFromFile();
+	const vector<string> getAllWaterTexturePathsFromFile();
+
 	bool isLoaded();
 
 private:

@@ -4,12 +4,113 @@
 #include <sstream>
 #include <algorithm>
 
+const vector<string> EnvironmentEditor::getAllTerrainTexturePathsFromFile()
+{
+	// Error checking
+	if (_currentProjectName == "")
+	{
+		_fe3d.logger_throwError("No current project loaded --> EnvironmentEditor::getAllTerrainTexturePathsFromFile()");
+	}
+
+	// Compose full file path
+	string filePath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectName + "\\data\\terrain.fe3d";
+
+	// Load terrain file
+	if (_fe3d.misc_isFileExisting(filePath))
+	{
+		// Temporary values
+		std::ifstream file(filePath);
+		string line;
+		vector<string> texturePaths;
+
+		// Read terrain data
+		while (std::getline(file, line))
+		{
+			// Temporary values
+			string terrainID, heightMapPath, diffuseMapPath, normalMapPath,
+				normalMapPathR, normalMapPathG, normalMapPathB,
+				blendMapPath, blendMapPathR, blendMapPathG, blendMapPathB;
+			float maxHeight, uvRepeat, lightness, blendRepeatR, blendRepeatG, blendRepeatB, specularFactor, specularIntensity;
+			bool isBlendMapped, isNormalMapped, isNormalMappedR, isNormalMappedG, isNormalMappedB, isSpecular;
+			stringstream iss(line);
+
+			// Load base data
+			iss >>
+				terrainID >>
+				heightMapPath >>
+				diffuseMapPath >>
+				maxHeight >>
+				uvRepeat >>
+				lightness >>
+				isBlendMapped >>
+				blendMapPath >>
+				blendMapPathR >>
+				blendMapPathG >>
+				blendMapPathB >>
+				blendRepeatR >>
+				blendRepeatG >>
+				blendRepeatB >>
+				isNormalMapped >>
+				isNormalMappedR >>
+				isNormalMappedG >>
+				isNormalMappedB >>
+				normalMapPath >>
+				normalMapPathR >>
+				normalMapPathG >>
+				normalMapPathB >>
+				isSpecular >>
+				specularFactor >>
+				specularIntensity;
+
+			// Perform empty string & space conversions
+			heightMapPath = (heightMapPath == "?") ? "" : heightMapPath;
+			diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
+			normalMapPath = (normalMapPath == "?") ? "" : normalMapPath;
+			normalMapPathR = (normalMapPathR == "?") ? "" : normalMapPathR;
+			normalMapPathG = (normalMapPathG == "?") ? "" : normalMapPathG;
+			normalMapPathB = (normalMapPathB == "?") ? "" : normalMapPathB;
+			blendMapPath = (blendMapPath == "?") ? "?" : blendMapPath;
+			blendMapPathR = (blendMapPathR == "?") ? "" : blendMapPathR;
+			blendMapPathG = (blendMapPathG == "?") ? "" : blendMapPathG;
+			blendMapPathB = (blendMapPathB == "?") ? "" : blendMapPathB;
+			std::replace(heightMapPath.begin(), heightMapPath.end(), '?', ' ');
+			std::replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
+			std::replace(normalMapPathR.begin(), normalMapPathR.end(), '?', ' ');
+			std::replace(normalMapPathG.begin(), normalMapPathG.end(), '?', ' ');
+			std::replace(normalMapPathB.begin(), normalMapPathB.end(), '?', ' ');
+			std::replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
+			std::replace(blendMapPath.begin(), blendMapPath.end(), '?', ' ');
+			std::replace(blendMapPathR.begin(), blendMapPathR.end(), '?', ' ');
+			std::replace(blendMapPathG.begin(), blendMapPathG.end(), '?', ' ');
+			std::replace(blendMapPathB.begin(), blendMapPathB.end(), '?', ' ');
+
+			// Save file paths
+			if (!heightMapPath.empty())  texturePaths.push_back(heightMapPath);
+			if (!normalMapPath.empty())  texturePaths.push_back(normalMapPath);
+			if (!normalMapPathR.empty()) texturePaths.push_back(normalMapPathR);
+			if (!normalMapPathG.empty()) texturePaths.push_back(normalMapPathG);
+			if (!normalMapPathB.empty()) texturePaths.push_back(normalMapPathB);
+			if (!diffuseMapPath.empty()) texturePaths.push_back(diffuseMapPath);
+			if (!blendMapPath.empty())   texturePaths.push_back(blendMapPath);
+			if (!blendMapPathR.empty())  texturePaths.push_back(blendMapPathR);
+			if (!blendMapPathG.empty())  texturePaths.push_back(blendMapPathG);
+			if (!blendMapPathB.empty())  texturePaths.push_back(blendMapPathB);
+		}
+
+		// Close file
+		file.close();
+
+		// Return
+		return texturePaths;
+	}
+}
+
 void EnvironmentEditor::loadTerrainEntitiesFromFile()
 {
 	// Error checking
 	if (_currentProjectName == "")
 	{
-		_fe3d.logger_throwError("No current project loaded!");
+		_fe3d.logger_throwError("No current project loaded --> EnvironmentEditor::loadTerrainEntitiesFromFile()");
 	}
 
 	// Clear names list from previous loads
@@ -24,7 +125,7 @@ void EnvironmentEditor::loadTerrainEntitiesFromFile()
 		std::ifstream file(filePath);
 		string line;
 
-		// Read sky data
+		// Read terrain data
 		while (std::getline(file, line))
 		{
 			stringstream iss(line);

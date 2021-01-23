@@ -4,12 +4,76 @@
 #include <sstream>
 #include <algorithm>
 
+const vector<string> EnvironmentEditor::getAllWaterTexturePathsFromFile()
+{
+	// Error checking
+	if (_currentProjectName == "")
+	{
+		_fe3d.logger_throwError("No current project loaded --> EnvironmentEditor::getAllWaterTexturePathsFromFile()");
+	}
+
+	// Compose full file path
+	string filePath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectName + "\\data\\water.fe3d";
+
+	// Load water file
+	if (_fe3d.misc_isFileExisting(filePath))
+	{
+		// Temporary values
+		std::ifstream file(filePath);
+		string line;
+		vector<string> texturePaths;
+
+		// Read water data
+		while (std::getline(file, line))
+		{
+			// Temporary values
+			string waterID, dudvMapPath, normalMapPath, displacementMapPath;
+			stringstream iss(line);
+
+			// Load base data
+			iss >>
+				waterID >>
+				dudvMapPath >>
+				normalMapPath >>
+				displacementMapPath;
+
+			// Perform empty string & space conversions
+			dudvMapPath = (dudvMapPath == "?" ? "" : dudvMapPath);
+			normalMapPath = (normalMapPath == "?" ? "" : normalMapPath);
+			displacementMapPath = (displacementMapPath == "?" ? "" : displacementMapPath);
+			std::replace(dudvMapPath.begin(), dudvMapPath.end(), '?', ' ');
+			std::replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
+			std::replace(displacementMapPath.begin(), displacementMapPath.end(), '?', ' ');
+
+			// Save file paths
+			if (!dudvMapPath.empty())
+			{
+				texturePaths.push_back(dudvMapPath);
+			}
+			if (!normalMapPath.empty())
+			{
+				texturePaths.push_back(normalMapPath);
+			}
+			if (!displacementMapPath.empty())
+			{
+				texturePaths.push_back(displacementMapPath);
+			}
+		}
+
+		// Close file
+		file.close();
+
+		// Return
+		return texturePaths;
+	}
+}
+
 void EnvironmentEditor::loadWaterEntitiesFromFile()
 {
 	// Error checking
 	if (_currentProjectName == "")
 	{
-		_fe3d.logger_throwError("No current project loaded!");
+		_fe3d.logger_throwError("No current project loaded --> EnvironmentEditor::loadWaterEntitiesFromFile()");
 	}
 
 	// Clear names list from previous loads
@@ -24,7 +88,7 @@ void EnvironmentEditor::loadWaterEntitiesFromFile()
 		std::ifstream file(filePath);
 		string line;
 
-		// Read sky data
+		// Read water data
 		while (std::getline(file, line))
 		{
 			stringstream iss(line);

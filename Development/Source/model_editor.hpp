@@ -15,14 +15,14 @@ public:
 	void unload();
 	void update();
 	void setCurrentProjectName(const string& projectName);
-	void preLoadGameEntitiesFromFile();
 	void loadGameEntitiesFromFile();
 	void saveGameEntitiesToFile();
 
 	bool isLoaded();
 
-	vector<string>& getTotalObjFileNames();
-	vector<string>& getModelNames();
+	const vector<string> getAllTexturePathsFromFile();
+	const vector<string>& getTotalObjFileNames();
+	const vector<string>& getModelNames();
 
 private:
 	bool _addModel(const string& modelName, string objName, string diffuseMapName, string lightMapName, string reflectionMapName, string normalMapName,

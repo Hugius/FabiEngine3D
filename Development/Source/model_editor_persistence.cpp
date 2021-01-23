@@ -5,12 +5,12 @@
 #include <sstream>
 #include <algorithm>
 
-void ModelEditor::preLoadGameEntitiesFromFile()
+const vector<string> ModelEditor::getAllTexturePathsFromFile()
 {
 	// Error checking
 	if (_currentProjectName == "")
 	{
-		_fe3d.logger_throwError("No current project loaded @ preLoadGameEntitiesFromFile()");
+		_fe3d.logger_throwError("No current project loaded --> ModelEditor::preLoadGameEntitiesFromFile()");
 	}
 
 	// Compose full file path
@@ -28,10 +28,8 @@ void ModelEditor::preLoadGameEntitiesFromFile()
 		// Read model data
 		while (std::getline(file, line))
 		{
-			// Placeholders
+			// Temporary values
 			string modelID, objPath, diffuseMapPath, lightMapPath, reflectionMapPath, normalMapPath;
-
-			// For file extraction
 			std::istringstream iss(line);
 
 			// Extract data
@@ -75,27 +73,21 @@ void ModelEditor::preLoadGameEntitiesFromFile()
 		// Cache OBJ files
 		vector<string> objTexturePaths;
 		_fe3d.misc_cacheOBJsMultiThreaded(objPaths, objTexturePaths);
+
+		// Add to texture paths
 		texturePaths.insert(texturePaths.end(), objTexturePaths.begin(), objTexturePaths.end());
 
-		// Cache texture files
-		_fe3d.misc_cacheTexturesMultiThreaded2D(texturePaths);
+		// Return
+		return texturePaths;
 	}
-
-	// Miscellaneous
-	_isPreLoaded = true;
 }
 
 void ModelEditor::loadGameEntitiesFromFile()
 {
-	if (!_isPreLoaded)
-	{
-		preLoadGameEntitiesFromFile();
-	}
-
 	// Error checking
 	if (_currentProjectName == "")
 	{
-		_fe3d.logger_throwError("No current project loaded!");
+		_fe3d.logger_throwError("No current project loaded --> ModelEditor::loadGameEntitiesFromFile()");
 	}
 
 	// Clear names list from previous loads

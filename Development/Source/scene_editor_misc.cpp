@@ -13,7 +13,7 @@ bool SceneEditor::isSceneExisting(const string& fileName)
 	// Error checking
 	if (_currentProjectName == "")
 	{
-		_fe3d.logger_throwError("No current project loaded!");
+		_fe3d.logger_throwError("No current project loaded --> SceneEditor::isSceneExisting()");
 	}
 
 	// Compose full file path

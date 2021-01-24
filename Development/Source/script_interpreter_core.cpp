@@ -109,7 +109,8 @@ void ScriptInterpreter::load()
 		auto scriptFile = _script.getScriptFile(scriptID);
 
 		// Loop through every line
-		BEGIN: for (unsigned int i = 0; i < scriptFile->getLineCount(); i++)
+	BEGIN:
+		for (unsigned int i = 0; i < scriptFile->getLineCount(); i++)
 		{
 			// Extract line content
 			std::istringstream iss(scriptFile->getLineText(i));
@@ -127,6 +128,28 @@ void ScriptInterpreter::load()
 
 	// Check if any engine warnings were thrown
 	_checkEngineWarnings();
+
+	// Preload all big assets of this project, only in game preview
+	if (!_fe3d.engine_getSelectedGame().empty())
+	{
+		vector<string> texturePaths;
+
+		auto skyTextures = _environmentEditor.getAllSkyTexturePathsFromFile();
+		auto terrainTextures = _environmentEditor.getAllTerrainTexturePathsFromFile();
+		auto waterTextures = _environmentEditor.getAllWaterTexturePathsFromFile();
+		auto modelTextures = _modelEditor.getAllTexturePathsFromFile(); // This function already pre-caches all OBJ files
+		auto billboardTextures = _billboardEditor.getAllTexturePathsFromFile();
+		auto audioPaths = _audioEditor.getAllAudioPathsFromFile();
+
+		texturePaths.insert(texturePaths.end(), terrainTextures.begin(), terrainTextures.end());
+		texturePaths.insert(texturePaths.end(), waterTextures.begin(), waterTextures.end());
+		texturePaths.insert(texturePaths.end(), modelTextures.begin(), modelTextures.end());
+		texturePaths.insert(texturePaths.end(), billboardTextures.begin(), billboardTextures.end());
+
+		_fe3d.misc_cacheTexturesMultiThreaded2D(texturePaths); // Pre-cache 2D texture files
+		_fe3d.misc_cacheTexturesMultiThreaded3D(skyTextures); // Pre-cache 3D texture files
+		_fe3d.misc_cacheAudioMultiThreaded(audioPaths); // Pre-cache audio files
+	}
 
 	// Load skies
 	_environmentEditor.loadSkyEntitiesFromFile();

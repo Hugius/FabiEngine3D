@@ -103,18 +103,20 @@ void TopViewportController::_updateProjectLoading()
 			// Load settings for this project
 			_settingsEditor.load();
 
-			// Preload all assets of this project
+			// Preload all big assets of this project
 			vector<string> texturePaths;
+			auto skyTextures = _environmentEditor.getAllSkyTexturePathsFromFile();
 			auto terrainTextures = _environmentEditor.getAllTerrainTexturePathsFromFile();
 			auto waterTextures = _environmentEditor.getAllWaterTexturePathsFromFile();
-			auto modelTextures = _modelEditor.getAllTexturePathsFromFile(); // This function also loads and caches all OBJ files
+			auto modelTextures = _modelEditor.getAllTexturePathsFromFile(); // This function already pre-caches all OBJ files
 			auto billboardTextures = _billboardEditor.getAllTexturePathsFromFile();
 			auto audioPaths = _audioEditor.getAllAudioPathsFromFile();
 			texturePaths.insert(texturePaths.end(), terrainTextures.begin(), terrainTextures.end());
 			texturePaths.insert(texturePaths.end(), waterTextures.begin(), waterTextures.end());
 			texturePaths.insert(texturePaths.end(), modelTextures.begin(), modelTextures.end());
 			texturePaths.insert(texturePaths.end(), billboardTextures.begin(), billboardTextures.end());
-			_fe3d.misc_cacheTexturesMultiThreaded(texturePaths); // Pre-cache texture files
+			_fe3d.misc_cacheTexturesMultiThreaded2D(texturePaths); // Pre-cache 2D texture files
+			_fe3d.misc_cacheTexturesMultiThreaded3D(skyTextures); // Pre-cache 3D texture files
 			_fe3d.misc_cacheAudioMultiThreaded(audioPaths); // Pre-cache audio files
 
 			// Logging

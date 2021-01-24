@@ -97,7 +97,7 @@ void ModelEditor::_loadOBJ()
 			if (_fe3d.gameEntity_isExisting(_currentModelID))
 			{
 				// Clear OBJ cache
-				_fe3d.misc_clearOBJCache(newFilePath);
+				_fe3d.misc_clearMeshCache(newFilePath);
 
 				// Check if multiparted entity
 				if (_fe3d.gameEntity_isMultiParted(_currentModelID))

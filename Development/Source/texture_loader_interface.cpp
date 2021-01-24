@@ -2,6 +2,7 @@
 
 #include <future>
 #include <set>
+#include <iostream>
 
 void TextureLoader::cacheTexturesMultiThreaded2D(const vector<string>& filePaths)
 {
@@ -61,6 +62,54 @@ void TextureLoader::cacheTexturesMultiThreaded2D(const vector<string>& filePaths
 	}
 }
 
+void TextureLoader::cacheTexturesMultiThreaded3D(const vector<array<string, 6>>& filePaths)
+{
+	// Temporary values
+	vector<vector<std::future<SDL_Surface*>>> threads;
+
+	// Start all loading threads
+	for (unsigned int i = 0; i < filePaths.size(); i++)
+	{
+		// 6 threads for every 3D texture
+		threads.push_back({});
+		for (auto& path : filePaths[i])
+		{
+			threads.back().push_back(std::async(std::launch::async, &TextureLoader::_loadImage, this, path));
+		}
+	}
+
+	// Wait for all threads to finish
+	for (unsigned int i = 0; i < threads.size(); i++)
+	{
+		// 6 images for every 3D texture
+		array<SDL_Surface*, 6> loadedImages;
+		for (unsigned int j = 0; j < threads[i].size(); j++)
+		{
+			loadedImages[j] = threads[i][j].get();
+		}
+
+		// Load OpenGL texture
+		GLuint loadedTexture = _convertToTexture3D(filePaths[i], loadedImages);
+
+		// Free images memory
+		for (const auto& image : loadedImages)
+		{
+			// Only if memory is present
+			if (image != nullptr)
+			{
+				SDL_FreeSurface(image);
+			}
+		}
+
+		// Check texture status
+		if (loadedTexture != 0)
+		{
+			// Cache texture
+			_textureCache3D[filePaths[i]] = loadedTexture;
+		}
+	}
+}
+
 GLuint TextureLoader::getTexture2D(const string& filePath, bool mipmap, bool aniso, bool repeat)
 {
 begin:
@@ -110,7 +159,7 @@ begin:
 	{
 		// Temporary values
 		vector<std::future<SDL_Surface*>> threads;
-		array<SDL_Surface*, 6> loadedImages = { nullptr, nullptr, nullptr, nullptr, nullptr, nullptr };
+		array<SDL_Surface*, 6> loadedImages = { };
 
 		// Start all loading threads
 		for (unsigned int i = 0; i < filePaths.size(); i++)

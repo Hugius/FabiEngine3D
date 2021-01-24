@@ -761,7 +761,7 @@ public:
 	void misc_setVsync(bool enabled);
 	void misc_setMainRenderingColor(Vec3 color);
 	void misc_setWindowTitle(const string& title);
-	void misc_clearOBJCache(const string& filePath);
+	void misc_clearMeshCache(const string& filePath);
 	void misc_clearTextureCache2D(const string& filePath);
 	void misc_clearTextureCache3D(const array<string, 6>& filePaths);
 	void misc_clearFontCache(const string& filePath);
@@ -769,8 +769,9 @@ public:
 	void misc_clearBitmapCache(const string& filePath);
 	void misc_clearAudioChunkCache(const string& filePath);
 	void misc_clearAudioMusicCache(const string& filePath);
-	void misc_cacheOBJsMultiThreaded(const vector<string>& objPaths, vector<string>& resultingTexturePaths);
-	void misc_cacheTexturesMultiThreaded(const vector<string>& filePaths);
+	void misc_cacheMeshesMultiThreaded(const vector<string>& meshPaths, vector<string>& resultingTexturePaths);
+	void misc_cacheTexturesMultiThreaded2D(const vector<string>& filePaths);
+	void misc_cacheTexturesMultiThreaded3D(const vector<array<string, 6>>& filePaths);
 	void misc_cacheAudioMultiThreaded(const vector<string>& filePaths);
 
 	// Miscellaneous interface - getters

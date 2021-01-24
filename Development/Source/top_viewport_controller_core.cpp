@@ -239,7 +239,7 @@ void TopViewportController::_updateMiscScreenManagement()
 				const string newFilePath = filePath.substr(rootDirectory.size());
 
 				// Clear the cache of selected file
-				_fe3d.misc_clearOBJCache(newFilePath);
+				_fe3d.misc_clearMeshCache(newFilePath);
 				_fe3d.misc_clearFontCache(newFilePath);
 				_fe3d.misc_clearTextureCache2D(newFilePath);
 				_fe3d.misc_clearBitmapCache(newFilePath);

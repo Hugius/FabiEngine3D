@@ -26,6 +26,7 @@ public:
 	void unloadTerrainEntities();
 	void unloadWaterEntities();
 
+	const vector<array<string, 6>> getAllSkyTexturePathsFromFile();
 	const vector<string> getAllTerrainTexturePathsFromFile();
 	const vector<string> getAllWaterTexturePathsFromFile();
 

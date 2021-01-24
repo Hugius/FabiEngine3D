@@ -162,7 +162,7 @@ void FabiEngine3D::misc_setWindowTitle(const string& title)
 	_core->_windowManager.setTitle(title);
 }
 
-void FabiEngine3D::misc_clearOBJCache(const string& filePath)
+void FabiEngine3D::misc_clearMeshCache(const string& filePath)
 {
 	_core->_meshLoader.clearOBJCache(filePath);
 }
@@ -202,14 +202,19 @@ void FabiEngine3D::misc_clearAudioMusicCache(const string& filePath)
 	_core->_audioLoader.clearMusicCache(filePath);
 }
 
-void FabiEngine3D::misc_cacheOBJsMultiThreaded(const vector<string>& objPaths, vector<string>& resultingTexturePaths)
+void FabiEngine3D::misc_cacheMeshesMultiThreaded(const vector<string>& objPaths, vector<string>& resultingTexturePaths)
 {
 	_core->_meshLoader.cacheOBJsMultiThreaded(objPaths, resultingTexturePaths);
 }
 
-void FabiEngine3D::misc_cacheTexturesMultiThreaded(const vector<string>& filePaths)
+void FabiEngine3D::misc_cacheTexturesMultiThreaded2D(const vector<string>& filePaths)
 {
 	_core->_textureLoader.cacheTexturesMultiThreaded2D(filePaths);
+}
+
+void FabiEngine3D::misc_cacheTexturesMultiThreaded3D(const vector<array<string, 6>>& filePaths)
+{
+	_core->_textureLoader.cacheTexturesMultiThreaded3D(filePaths);
 }
 
 void FabiEngine3D::misc_cacheAudioMultiThreaded(const vector<string>& filePaths)

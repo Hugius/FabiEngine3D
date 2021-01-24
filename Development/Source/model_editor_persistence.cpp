@@ -72,7 +72,7 @@ const vector<string> ModelEditor::getAllTexturePathsFromFile()
 
 		// Cache OBJ files
 		vector<string> objTexturePaths;
-		_fe3d.misc_cacheOBJsMultiThreaded(objPaths, objTexturePaths);
+		_fe3d.misc_cacheMeshesMultiThreaded(objPaths, objTexturePaths);
 
 		// Add to texture paths
 		texturePaths.insert(texturePaths.end(), objTexturePaths.begin(), objTexturePaths.end());

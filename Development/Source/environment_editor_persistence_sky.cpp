@@ -4,6 +4,61 @@
 #include <sstream>
 #include <algorithm>
 
+const vector<array<string, 6>> EnvironmentEditor::getAllSkyTexturePathsFromFile()
+{
+	// Error checking
+	if (_currentProjectName == "")
+	{
+		_fe3d.logger_throwError("No current project loaded --> EnvironmentEditor::getAllSkyTexturePathsFromFile()");
+	}
+
+	// Compose full file path
+	string filePath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectName + "\\data\\sky.fe3d";
+
+	// Check if sky file exists
+	if (_fe3d.misc_isFileExisting(filePath))
+	{
+		std::ifstream file(filePath);
+		string line;
+		vector<array<string, 6>> texturePaths;
+
+		// Read sky data
+		while (std::getline(file, line))
+		{
+			// Temporary values
+			string skyID;
+			array<string, 6> diffuseMapPaths = {};
+			stringstream iss(line);
+
+			// Load base data
+			iss >>
+				skyID >>
+				diffuseMapPaths[0] >>
+				diffuseMapPaths[1] >>
+				diffuseMapPaths[2] >>
+				diffuseMapPaths[3] >>
+				diffuseMapPaths[4] >>
+				diffuseMapPaths[5];
+
+			// Perform empty string & space conversions
+			for (auto& diffuseMapPath : diffuseMapPaths)
+			{
+				diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
+				std::replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
+			}
+
+			// Save file paths
+			texturePaths.push_back(diffuseMapPaths);
+		}
+
+		// Close file
+		file.close();
+
+		// Return
+		return texturePaths;
+	}
+}
+
 void EnvironmentEditor::loadSkyEntitiesFromFile()
 {
 	// Error checking

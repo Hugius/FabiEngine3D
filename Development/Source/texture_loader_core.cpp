@@ -4,10 +4,11 @@
 
 #include <SDL\\SDL_image.h>
 
-using std::to_string;
-
 SDL_Surface* TextureLoader::_loadImage(const string& filePath)
 {
+	// Disable libpng warnings
+	auto temp = freopen("NUL:", "w", stderr);
+
 	// Get application root directory
 	string rootDir = Tools::getInst().getRootDirectory();
 	string fullFilePath = string(rootDir + filePath);
@@ -19,6 +20,7 @@ SDL_Surface* TextureLoader::_loadImage(const string& filePath)
 		Logger::throwWarning("Cannot open image: \"" + filePath + "\"");
 	}
 
+	// Return
 	return image;
 }
 

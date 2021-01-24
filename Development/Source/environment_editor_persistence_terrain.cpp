@@ -30,8 +30,8 @@ const vector<string> EnvironmentEditor::getAllTerrainTexturePathsFromFile()
 			string terrainID, heightMapPath, diffuseMapPath, normalMapPath,
 				normalMapPathR, normalMapPathG, normalMapPathB,
 				blendMapPath, blendMapPathR, blendMapPathG, blendMapPathB;
-			float maxHeight, uvRepeat, lightness, blendRepeatR, blendRepeatG, blendRepeatB, specularFactor, specularIntensity;
-			bool isBlendMapped, isNormalMapped, isNormalMappedR, isNormalMappedG, isNormalMappedB, isSpecular;
+			float maxHeight, uvRepeat, lightness, blendRepeatR, blendRepeatG, blendRepeatB;
+			bool isBlendMapped, isNormalMapped, isNormalMappedR, isNormalMappedG, isNormalMappedB;
 			stringstream iss(line);
 
 			// Load base data
@@ -57,10 +57,7 @@ const vector<string> EnvironmentEditor::getAllTerrainTexturePathsFromFile()
 				normalMapPath >>
 				normalMapPathR >>
 				normalMapPathG >>
-				normalMapPathB >>
-				isSpecular >>
-				specularFactor >>
-				specularIntensity;
+				normalMapPathB;
 
 			// Perform empty string & space conversions
 			heightMapPath = (heightMapPath == "?") ? "" : heightMapPath;

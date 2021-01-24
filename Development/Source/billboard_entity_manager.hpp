@@ -6,7 +6,7 @@
 class BillboardEntityManager final : public BaseEntityManager
 {
 public:
-	BillboardEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, RenderBus& renderBus, CameraManager& camera);
+	BillboardEntityManager(MeshLoader& meshLoader, TextureLoader& texLoader, RenderBus& renderBus, CameraManager& camera);
 	~BillboardEntityManager() = default;
 
 	shared_ptr<BillboardEntity> getEntity(const string& ID);

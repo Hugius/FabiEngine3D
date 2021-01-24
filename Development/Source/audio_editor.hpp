@@ -19,7 +19,8 @@ public:
 
 	bool isLoaded();
 
-	vector<string> getAudioNames();
+	const vector<string> getAllAudioPathsFromFile();
+	const vector<string>& getAudioNames();
 
 private:
 	void _updateMainMenu();

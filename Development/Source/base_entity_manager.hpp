@@ -1,6 +1,6 @@
 #pragma once
 
-#include "obj_loader.hpp"
+#include "mesh_loader.hpp"
 #include "texture_loader.hpp"
 #include "render_bus.hpp"
 #include "base_entity.hpp"
@@ -25,7 +25,7 @@ using std::make_pair;
 class BaseEntityManager
 {
 public:
-	BaseEntityManager(EntityType type, OBJLoader& objLoader, TextureLoader& texLoader, RenderBus& renderBus);
+	BaseEntityManager(EntityType type, MeshLoader& meshLoader, TextureLoader& texLoader, RenderBus& renderBus);
 	~BaseEntityManager() = default;
 
 	void deleteEntity(const string& ID);
@@ -37,8 +37,8 @@ public:
 
 protected:
 	EntityType	   _type;
-	OBJLoader&     _objLoader;
-	TextureLoader& _texLoader;
+	MeshLoader&    _meshLoader;
+	TextureLoader& _textureLoader;
 	RenderBus&     _renderBus;
 
 	void _createEntity(const string& ID);

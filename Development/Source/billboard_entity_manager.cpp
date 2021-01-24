@@ -3,8 +3,8 @@
 #include "logger.hpp"
 #include "mathematics.hpp"
 
-BillboardEntityManager::BillboardEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, RenderBus& renderBus, CameraManager& camera) :
-	BaseEntityManager(EntityType::BILLBOARD, objLoader, texLoader, renderBus),
+BillboardEntityManager::BillboardEntityManager(MeshLoader& meshLoader, TextureLoader& texLoader, RenderBus& renderBus, CameraManager& camera) :
+	BaseEntityManager(EntityType::BILLBOARD, meshLoader, texLoader, renderBus),
 	_camera(camera)
 {
 	float plane_data[] =
@@ -64,7 +64,7 @@ void BillboardEntityManager::addBillboardEntity
 	addBillboardEntity(ID, Vec3(1.0f), T, R, S, facingCameraX, facingCameraY);
 
 	auto entity = getEntity(ID);
-	entity->setDiffuseMap(_texLoader.getTexture2D(texturePath, textureFiltering, true));
+	entity->setDiffuseMap(_textureLoader.getTexture2D(texturePath, textureFiltering, true));
 	entity->setDiffuseMapPath(texturePath);
 	entity->setTransparent(transparent);
 }
@@ -79,7 +79,7 @@ void BillboardEntityManager::addBillboardEntity
 	addBillboardEntity(ID, color, T, R, S, facingCameraX, facingCameraY);
 
 	auto entity = getEntity(ID);
-	entity->setDiffuseMap(_texLoader.getText(text, fontPath));
+	entity->setDiffuseMap(_textureLoader.getText(text, fontPath));
 	entity->setTransparent(true);
 	entity->setTextContent(text);
 	entity->setFontPath(fontPath);

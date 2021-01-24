@@ -5,7 +5,7 @@
 class GuiEntityManager final : public BaseEntityManager
 {
 public:
-	GuiEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, RenderBus& renderBus);
+	GuiEntityManager(MeshLoader& meshLoader, TextureLoader& texLoader, RenderBus& renderBus);
 	~GuiEntityManager();
 
 	shared_ptr<GuiEntity> getEntity(const string& ID);

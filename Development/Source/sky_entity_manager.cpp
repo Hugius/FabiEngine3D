@@ -2,8 +2,8 @@
 #include "render_bus.hpp"
 #include "logger.hpp"
 
-SkyEntityManager::SkyEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, RenderBus& renderBus) :
-	BaseEntityManager(EntityType::SKY, objLoader, texLoader, renderBus)
+SkyEntityManager::SkyEntityManager(MeshLoader& meshLoader, TextureLoader& texLoader, RenderBus& renderBus) :
+	BaseEntityManager(EntityType::SKY, meshLoader, texLoader, renderBus)
 {
 	
 }

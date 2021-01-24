@@ -3,8 +3,10 @@
 #include <map>
 #include <string>
 #include <SDL\\SDL_mixer.h>
+#include <vector>
 
 using std::string;
+using std::vector;
 
 class AudioLoader final
 {
@@ -23,6 +25,10 @@ private:
 	std::map<string, Mix_Chunk*> _chunkCache;
 	std::map<string, Mix_Music*> _musicCache;
 
-	Mix_Chunk* _loadChunk(const string& filePath);
+	Mix_Chunk* _loadChunk(const string& filePath, unsigned char* data);
 	Mix_Music* _loadMusic(const string& filePath);
+
+	void _throwLog(const string& filePath);
+
+	char* _loadWaveFile(const std::string& filePath);
 };

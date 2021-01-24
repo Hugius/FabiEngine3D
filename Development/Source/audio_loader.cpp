@@ -5,45 +5,57 @@
 #include <algorithm>
 #include <future>
 #include <set>
+#include <fstream>
 
 AudioLoader::~AudioLoader()
 {
+	// Delete chunks
 	for (auto& element : _chunkCache)
 	{
 		Mix_FreeChunk(element.second);
+	}
+
+	// Delete music
+	for (auto& element : _musicCache)
+	{
+		Mix_FreeMusic(element.second);
 	}
 }
 
 void AudioLoader::cacheChunksMultiThreaded(const vector<string>& filePaths)
 {
-	//// Temporary values
-	//vector<std::future<Mix_Chunk*>> threads;
+	// Temporary values
+	vector<std::future<char*>> threads;
 
-	//// Remove duplicates
-	//auto tempFilePaths = std::set<string>(filePaths.begin(), filePaths.end());
-	//auto uniqueFilePaths = vector<string>(tempFilePaths.begin(), tempFilePaths.end());
+	// Remove duplicates
+	auto tempFilePaths = std::set<string>(filePaths.begin(), filePaths.end());
+	auto uniqueFilePaths = vector<string>(tempFilePaths.begin(), tempFilePaths.end());
 
-	//// Start all loading threads
-	//for (const auto& filePath : uniqueFilePaths)
-	//{
-	//	threads.push_back(std::async(std::launch::async, &AudioLoader::_loadChunk, this, filePath));
-	//}
+	// Start all loading threads
+	for (const auto& filePath : uniqueFilePaths)
+	{
+		threads.push_back(std::async(std::launch::async, &AudioLoader::_loadWaveFile, this, filePath));
+	}
 
-	//// Wait for all threads to finish
-	//for (unsigned int i = 0; i < threads.size(); i++)
-	//{
-	//	auto objParts = threads[i].get();
+	// Wait for all threads to finish
+	for (unsigned int i = 0; i < threads.size(); i++)
+	{
+		// Retrieve raw WAV data
+		auto data = threads[i].get();
 
-	//	// Check if model loading went well
-	//	if (!objParts.empty())
-	//	{
-	//		// Logging
-	//		Logger::throwInfo("Loaded OBJ model: \"" + uniqueFilePaths[i] + "\"");
+		// Load chunk file
+		auto chunk = _loadChunk(uniqueFilePaths[i], (unsigned char*)data);
 
-	//		// Cache model
-	//		_objCache[uniqueFilePaths[i]] = objParts;
-	//	}
-	//}
+		// Check if audio loading went well
+		if (chunk != nullptr)
+		{
+			// Logging
+			_throwLog(uniqueFilePaths[i]);
+
+			// Cache model
+			_chunkCache[uniqueFilePaths[i]] = chunk;
+		}
+	}
 }
 
 Mix_Chunk* AudioLoader::getChunk(const string& filePath)
@@ -52,8 +64,11 @@ begin:
 	auto iterator = _chunkCache.find(filePath);
 	if (iterator == _chunkCache.end()) // Not in map (yet)
 	{
+		// Load raw WAV data
+		auto data = _loadWaveFile(filePath);
+
 		// Load chunk file
-		auto chunk = _loadChunk(filePath);
+		auto chunk = _loadChunk(filePath, (unsigned char*)data);
 
 		// Check chunk status
 		if (chunk == nullptr)
@@ -62,11 +77,8 @@ begin:
 		}
 		else
 		{
-			auto reversed(filePath); // Copy
-			std::reverse(reversed.begin(), reversed.end()); // Reverse, cuz . must be last in path
-			auto extension = filePath.substr(filePath.size() - reversed.find("."), reversed.find(".")); // Substring file extension
-			std::transform(extension.begin(), extension.end(), extension.begin(), ::toupper); // Convert to uppercase
-			Logger::throwInfo("Loaded ", extension, " audio file: \"" + filePath + "\""); // Logging
+			// Logging
+			_throwLog(filePath);
 
 			// Cache chunk
 			_chunkCache.insert(std::make_pair(filePath, chunk));
@@ -81,10 +93,9 @@ begin:
 
 Mix_Music* AudioLoader::getMusic(const string& filePath)
 {
+begin:
 	auto iterator = _musicCache.find(filePath);
-
-	// Check if audio music was loaded already, if not, load data and store in std::map
-	if (iterator == _musicCache.end())
+	if (iterator == _musicCache.end()) // Not in map (yet)
 	{
 		// Get application root directory
 		string rootDir = Tools::getInst().getRootDirectory();
@@ -92,20 +103,22 @@ Mix_Music* AudioLoader::getMusic(const string& filePath)
 		// Load audio file
 		Mix_Music* music = Mix_LoadMUS((rootDir + filePath).c_str());
 
-		if (music == nullptr) // Could not load file
+		// Check music status
+		if (music == nullptr)
 		{
 			Logger::throwWarning("Could not load audio file \"", filePath, "\"");
 			return nullptr;
 		}
-		else // Successfully loaded file
+		else
 		{
-			auto reversed(filePath); // Copy
-			std::reverse(reversed.begin(), reversed.end()); // Reverse, cuz . must be last in path
-			auto extension = filePath.substr(filePath.size() - reversed.find("."), reversed.find(".")); // Substring file extension
-			std::transform(extension.begin(), extension.end(), extension.begin(), ::toupper); // Convert to uppercase
-			Logger::throwInfo("Loaded ", extension, " audio file: \"" + filePath + "\""); // Log loaded
-			_musicCache.insert(std::make_pair(filePath, music)); // Insert new data
-			return music;
+			// Logging
+			_throwLog(filePath);
+
+			// Cache music
+			_musicCache.insert(std::make_pair(filePath, music));
+
+			// Return cached music
+			goto begin;
 		}
 	}
 	else
@@ -130,13 +143,10 @@ void AudioLoader::clearMusicCache(const string& filePath)
 	}
 }
 
-Mix_Chunk* AudioLoader::_loadChunk(const string& filePath)
+Mix_Chunk* AudioLoader::_loadChunk(const string& filePath, unsigned char* data)
 {
-	// Get application root directory
-	string rootDir = Tools::getInst().getRootDirectory();
-
-	// Load audio file
-	Mix_Chunk* chunk = Mix_LoadWAV((rootDir + filePath).c_str());
+	// Load RAW audio data into an SDL chunk
+	Mix_Chunk* chunk = Mix_QuickLoad_WAV(data);
 	if (chunk == nullptr)
 	{
 		Logger::throwWarning("Could not load audio file \"", filePath, "\"");
@@ -148,4 +158,48 @@ Mix_Chunk* AudioLoader::_loadChunk(const string& filePath)
 Mix_Music* AudioLoader::_loadMusic(const string& filePath)
 {
 	return nullptr;
+}
+
+void AudioLoader::_throwLog(const string& filePath)
+{
+	auto reversed(filePath); // Copy
+	std::reverse(reversed.begin(), reversed.end()); // Reverse, because . must be last in path
+	auto extension = filePath.substr(filePath.size() - reversed.find("."), reversed.find(".")); // Substring file extension
+	std::transform(extension.begin(), extension.end(), extension.begin(), ::toupper); // Convert to uppercase
+	Logger::throwInfo("Loaded ", extension, " audio file: \"" + filePath + "\""); // Log message
+}
+
+char* AudioLoader::_loadWaveFile(const std::string& filePath)
+{
+	// Get application root directory
+	string rootDir = Tools::getInst().getRootDirectory();
+	auto fullFilePath = string(rootDir + filePath);
+
+	// Open WAV file
+	std::ifstream file(fullFilePath.c_str(), std::ios::binary);
+	if (!file)
+	{
+		Logger::throwWarning("Could not load audio file \"", fullFilePath, "\"");
+	}
+
+	// Go the end of file position
+	file.seekg(0, std::ios::end);
+
+	// Store the size of the whole file in bytes
+	auto dataSize = (DWORD)file.tellg();
+
+	// Allocate memory for the raw audio data
+	auto data = new char[dataSize];       
+
+	// Reset file position
+	file.seekg(0, std::ios::beg);
+
+	// Store the whole WAVE file data in the data array
+	file.read(data, dataSize);
+
+	// Close file reading
+	file.close();
+
+	// Return
+	return data;
 }

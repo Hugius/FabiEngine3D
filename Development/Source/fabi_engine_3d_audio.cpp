@@ -176,6 +176,11 @@ bool FabiEngine3D::audioEntity_isPaused(const std::string& ID)
 	return _core->_audioPlayer.isChunkPaused(_core->_audioManager.getChunk(ID));;
 }
 
+bool FabiEngine3D::audioEntity_isLoaded(const string& ID)
+{
+	return (_core->_audioManager.getChunk(ID).getMixChunk() != nullptr);
+}
+
 float FabiEngine3D::audioEntity_getVolume(const std::string& ID)
 {
 	int volume = _core->_audioPlayer.getChunkVolume(_core->_audioManager.getChunk(ID));

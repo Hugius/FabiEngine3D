@@ -1,8 +1,8 @@
 #include "game_entity_manager.hpp"
 #include "logger.hpp"
 
-GameEntityManager::GameEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, RenderBus& renderBus) :
-	BaseEntityManager(EntityType::GAME, objLoader, texLoader, renderBus)
+GameEntityManager::GameEntityManager(MeshLoader& meshLoader, TextureLoader& texLoader, RenderBus& renderBus) :
+	BaseEntityManager(EntityType::GAME, meshLoader, texLoader, renderBus)
 {
 
 }
@@ -46,7 +46,7 @@ void GameEntityManager::addGameEntity(const string& ID, const string& objName, V
 void GameEntityManager::generateModel(const string& ID, const string& objName)
 {
 	// Load OBJ model
-	auto parts = _objLoader.loadOBJ(objName, false);
+	auto parts = _meshLoader.loadOBJ(objName, false);
 	auto entity = getEntity(ID);
 	entity->setObjPath(objName);
 	entity->clearOglBuffers();
@@ -105,7 +105,7 @@ void GameEntityManager::generateModel(const string& ID, const string& objName)
 		// Load an OBJ part diffuse map
 		if (part.diffuseMapPath != "")
 		{
-			entity->addDiffuseMap(_texLoader.getTexture2D(part.diffuseMapPath, true, true, true));
+			entity->addDiffuseMap(_textureLoader.getTexture2D(part.diffuseMapPath, true, true, true));
 			entity->addDiffuseMapPath(part.diffuseMapPath);
 		}
 		else
@@ -121,7 +121,7 @@ void GameEntityManager::generateModel(const string& ID, const string& objName)
 		if (part.lightMapPath != "")
 		{
 			entity->setLightMapped(true);
-			entity->addLightMap(_texLoader.getTexture2D(part.lightMapPath, true, true, true));
+			entity->addLightMap(_textureLoader.getTexture2D(part.lightMapPath, true, true, true));
 			entity->addLightMapPath(part.lightMapPath);
 		}
 		else
@@ -136,7 +136,7 @@ void GameEntityManager::generateModel(const string& ID, const string& objName)
 		// Load an OBJ part normal map
 		if (part.normalMapPath != "")
 		{
-			entity->addNormalMap(_texLoader.getTexture2D(part.normalMapPath, true, true, true));
+			entity->addNormalMap(_textureLoader.getTexture2D(part.normalMapPath, true, true, true));
 			entity->addNormalMapPath(part.normalMapPath);
 		}
 		else
@@ -152,7 +152,7 @@ void GameEntityManager::generateModel(const string& ID, const string& objName)
 		if (part.reflectionMapPath != "")
 		{
 			entity->setSkyReflective(true);
-			entity->addReflectionMap(_texLoader.getTexture2D(part.reflectionMapPath, true, true, true));
+			entity->addReflectionMap(_textureLoader.getTexture2D(part.reflectionMapPath, true, true, true));
 			entity->addReflectionMapPath(part.reflectionMapPath);
 		}
 		else
@@ -175,7 +175,7 @@ void GameEntityManager::loadNormalMapping(const string& ID)
 		if (getEntity(ID)->getOglBuffer()->getBufferType() != BufferType::MODEL_TANGENT)
 		{
 			// Load OBJ model
-			auto parts = _objLoader.loadOBJ(getEntity(ID)->getObjPath(), true);
+			auto parts = _meshLoader.loadOBJ(getEntity(ID)->getObjPath(), true);
 
 			// Create OpenGL buffers
 			for (auto& part : parts)

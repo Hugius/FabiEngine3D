@@ -3,6 +3,52 @@
 #include <fstream>
 #include <algorithm>
 
+const vector<string> AudioEditor::getAllAudioPathsFromFile()
+{
+	// Error checking
+	if (_currentProjectName == "")
+	{
+		_fe3d.logger_throwError("No current project loaded --> AudioEditor::getAllAudioPathsFromFile()");
+	}
+
+	// Clear names list from previous loads
+	_audioIDs.clear();
+
+	// Compose full file path
+	string filePath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectName + "\\data\\audio.fe3d";
+
+	// Check if audio file exists
+	if (_fe3d.misc_isFileExisting(filePath))
+	{
+		std::ifstream file(filePath);
+		string line;
+		vector<string> audioPaths;
+
+		// Read model data
+		while (std::getline(file, line))
+		{
+			// Temporary values
+			string audioID, audioPath;
+			std::istringstream iss(line);
+
+			// Extract from file
+			iss >> audioID >> audioPath;
+
+			// Perform empty string & space conversions
+			audioPath = (audioPath == "?") ? "" : audioPath;
+			std::replace(audioPath.begin(), audioPath.end(), '?', ' ');
+
+			// Save file path
+			audioPaths.push_back(audioPath);
+		}
+
+		// Close file
+		file.close();
+
+		return audioPaths;
+	}
+}
+
 void AudioEditor::loadAudioEntitiesFromFile()
 {
 	// Error checking
@@ -77,7 +123,7 @@ void AudioEditor::saveAudioEntitiesToFile()
 			std::replace(audioPath.begin(), audioPath.end(), ' ', '?');
 
 			// Export data
-			file << audioID << " " << audioPath << " " << std::endl;
+			file << audioID << " " << audioPath << std::endl;
 		}
 
 		// Close file

@@ -1,8 +1,8 @@
 #include "gui_entity_manager.hpp"
 #include "logger.hpp"
 
-GuiEntityManager::GuiEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, RenderBus& renderBus) :
-	BaseEntityManager(EntityType::GUI, objLoader, texLoader, renderBus),
+GuiEntityManager::GuiEntityManager(MeshLoader& meshLoader, TextureLoader& texLoader, RenderBus& renderBus) :
+	BaseEntityManager(EntityType::GUI, meshLoader, texLoader, renderBus),
 	_centeredOpenglBuffer(new OpenGLBuffer(0.0f, 0.0f, 1.0f, 1.0f, true, false)),
 	_nonCenteredOpenglBuffer(new OpenGLBuffer(0.0f, 0.0f, 1.0f, 1.0f, false, false))
 {
@@ -46,7 +46,7 @@ void GuiEntityManager::addGuiEntity(const string& ID, const string& texturePath,
 	entity->setCentered(isCentered);
 
 	// Load diffuse map
-	entity->setDiffuseMap(_texLoader.getTexture2D(texturePath, true, true, false));
+	entity->setDiffuseMap(_textureLoader.getTexture2D(texturePath, true, true, false));
 }
 
 void GuiEntityManager::addGuiEntity(const string& ID, Vec3 color, Vec2 translation, float rotation, Vec2 scaling, bool isCentered)

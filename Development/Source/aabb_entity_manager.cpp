@@ -3,8 +3,8 @@
 #include "logger.hpp" 
 #include "tools.hpp"
 
-AabbEntityManager::AabbEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, RenderBus& renderBus) :
-	BaseEntityManager(EntityType::AABB, objLoader, texLoader, renderBus)
+AabbEntityManager::AabbEntityManager(MeshLoader& meshLoader, TextureLoader& texLoader, RenderBus& renderBus) :
+	BaseEntityManager(EntityType::AABB, meshLoader, texLoader, renderBus)
 {
 	float box_data[] =
 	{

@@ -12,6 +12,7 @@ void AudioEditor::_updateAudioEditing()
 			bool isExisting = _fe3d.audioEntity_isExisting(_currentAudioID);
 			bool isPlaying = isExisting && _fe3d.audioEntity_isPlaying(_currentAudioID);
 			bool isPaused = isExisting && _fe3d.audioEntity_isPaused(_currentAudioID);
+			bool isLoaded = isExisting && _fe3d.audioEntity_isLoaded(_currentAudioID);
 
 			// GUI management
 			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
@@ -35,7 +36,7 @@ void AudioEditor::_updateAudioEditing()
 					// Get the chosen filename
 					const string rootDirectory = _fe3d.misc_getRootDirectory();
 					const string targetDirectory = string("user\\assets\\audio\\");
-					const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "OGG");
+					const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "WAV");
 
 					// Check if user did not cancel
 					if (filePath != "")
@@ -101,7 +102,7 @@ void AudioEditor::_updateAudioEditing()
 			}
 
 			// Buttons hoverability
-			screen->getButton("play")->setHoverable(!isPlaying && !isPaused);
+			screen->getButton("play")->setHoverable(!isPlaying && !isPaused && isLoaded);
 			screen->getButton("resume")->setHoverable(isPaused);
 			screen->getButton("pause")->setHoverable(isPlaying);
 			screen->getButton("stop")->setHoverable(isPlaying || isPaused);

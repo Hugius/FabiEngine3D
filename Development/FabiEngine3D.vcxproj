@@ -185,7 +185,7 @@
     <ClInclude Include="Source\bottom_viewport_controller.hpp" />
     <ClInclude Include="Source\engine_gui_scrollinglist.hpp" />
     <ClInclude Include="Source\entity_type.hpp" />
-    <ClInclude Include="Source\obj_part.hpp" />
+    <ClInclude Include="Source\mesh_part.hpp" />
     <ClInclude Include="Source\script_condition_statement.hpp" />
     <ClInclude Include="Source\ivector2.hpp" />
     <ClInclude Include="Source\ivector3.hpp" />
@@ -237,7 +237,7 @@
     <ClInclude Include="Source\light_entity_manager.hpp" />
     <ClInclude Include="Source\logger.hpp" />
     <ClInclude Include="Source\mouse_picker.hpp" />
-    <ClInclude Include="Source\obj_loader.hpp" />
+    <ClInclude Include="Source\mesh_loader.hpp" />
     <ClInclude Include="Source\opengl_buffer.hpp" />
     <ClInclude Include="Source\post_renderer.hpp" />
     <ClInclude Include="Source\render_engine.hpp" />
@@ -447,7 +447,7 @@
     <ClCompile Include="Source\core_engine.cpp" />
     <ClCompile Include="Source\opengl_framebuffer.cpp" />
     <ClCompile Include="Source\opengl_framebuffer_misc.cpp" />
-    <ClCompile Include="Source\obj_loader.cpp" />
+    <ClCompile Include="Source\mesh_loader.cpp" />
     <ClCompile Include="Source\opengl_buffer.cpp" />
     <ClCompile Include="Source\input_handler.cpp" />
     <ClCompile Include="Source\post_renderer.cpp" />

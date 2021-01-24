@@ -107,13 +107,15 @@ void TopViewportController::_updateProjectLoading()
 			vector<string> texturePaths;
 			auto terrainTextures = _environmentEditor.getAllTerrainTexturePathsFromFile();
 			auto waterTextures = _environmentEditor.getAllWaterTexturePathsFromFile();
-			auto modelTextures = _modelEditor.getAllTexturePathsFromFile();
+			auto modelTextures = _modelEditor.getAllTexturePathsFromFile(); // This function also loads and caches all OBJ files
 			auto billboardTextures = _billboardEditor.getAllTexturePathsFromFile();
+			auto audioPaths = _audioEditor.getAllAudioPathsFromFile();
 			texturePaths.insert(texturePaths.end(), terrainTextures.begin(), terrainTextures.end());
 			texturePaths.insert(texturePaths.end(), waterTextures.begin(), waterTextures.end());
 			texturePaths.insert(texturePaths.end(), modelTextures.begin(), modelTextures.end());
 			texturePaths.insert(texturePaths.end(), billboardTextures.begin(), billboardTextures.end());
-			_fe3d.misc_cacheTexturesMultiThreaded2D(texturePaths);
+			_fe3d.misc_cacheTexturesMultiThreaded(texturePaths); // Pre-cache texture files
+			_fe3d.misc_cacheAudioMultiThreaded(audioPaths); // Pre-cache audio files
 
 			// Logging
 			_fe3d.logger_throwInfo("Existing project \"" + _currentProjectName + "\" loaded!");

@@ -1,14 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="Source\obj_loader.cpp">
-      <Filter>src\Asset Management System\Models</Filter>
-    </ClCompile>
     <ClCompile Include="Source\texture_loader_core.cpp">
       <Filter>src\Asset Management System\Textures</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\audio_loader.cpp">
-      <Filter>src\Audio System\Core</Filter>
     </ClCompile>
     <ClCompile Include="Source\audio_manager.cpp">
       <Filter>src\Audio System\Core</Filter>
@@ -619,16 +613,16 @@
     <ClCompile Include="Source\script_interpreter_func_fe3d_model.cpp">
       <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
     </ClCompile>
+    <ClCompile Include="Source\audio_loader.cpp">
+      <Filter>src\Asset Management System\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\mesh_loader.cpp">
+      <Filter>src\Asset Management System\Models</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\obj_loader.hpp">
-      <Filter>src\Asset Management System\Models</Filter>
-    </ClInclude>
     <ClInclude Include="Source\texture_loader.hpp">
       <Filter>src\Asset Management System\Textures</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\audio_loader.hpp">
-      <Filter>src\Audio System\Core</Filter>
     </ClInclude>
     <ClInclude Include="Source\audio_manager.hpp">
       <Filter>src\Audio System\Core</Filter>
@@ -972,7 +966,13 @@
     <ClInclude Include="Source\script_variable.hpp">
       <Filter>src\Scripting System\Data Structures</Filter>
     </ClInclude>
-    <ClInclude Include="Source\obj_part.hpp">
+    <ClInclude Include="Source\audio_loader.hpp">
+      <Filter>src\Asset Management System\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\mesh_part.hpp">
+      <Filter>src\Asset Management System\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\mesh_loader.hpp">
       <Filter>src\Asset Management System\Models</Filter>
     </ClInclude>
   </ItemGroup>
@@ -1261,6 +1261,9 @@
     </Filter>
     <Filter Include="src\Scripting System\Data Structures">
       <UniqueIdentifier>{2a0e634e-c81e-4443-804e-1ac36951dafc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Asset Management System\Audio">
+      <UniqueIdentifier>{eb5118cf-2311-4169-9676-e1dd99141d96}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

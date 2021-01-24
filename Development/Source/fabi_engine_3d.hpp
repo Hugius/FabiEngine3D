@@ -578,6 +578,7 @@ public:
 	bool   audioEntity_isExisting(const string& ID);
 	bool   audioEntity_isPlaying(const string& ID);
 	bool   audioEntity_isPaused(const string& ID);
+	bool   audioEntity_isLoaded(const string& ID);
 	int    audioEntity_getUsedChannelCount();
 
 	// Music entity interface - setters
@@ -769,7 +770,8 @@ public:
 	void misc_clearAudioChunkCache(const string& filePath);
 	void misc_clearAudioMusicCache(const string& filePath);
 	void misc_cacheOBJsMultiThreaded(const vector<string>& objPaths, vector<string>& resultingTexturePaths);
-	void misc_cacheTexturesMultiThreaded2D(const vector<string>& filePaths);
+	void misc_cacheTexturesMultiThreaded(const vector<string>& filePaths);
+	void misc_cacheAudioMultiThreaded(const vector<string>& filePaths);
 
 	// Miscellaneous interface - getters
 	int misc_getUniqueInt(int min, int max);

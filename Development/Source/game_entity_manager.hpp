@@ -5,7 +5,7 @@
 class GameEntityManager final :  public BaseEntityManager
 {
 public:
-	GameEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, RenderBus& renderBus);
+	GameEntityManager(MeshLoader& meshLoader, TextureLoader& texLoader, RenderBus& renderBus);
 	~GameEntityManager() = default;
 
 	shared_ptr<GameEntity> getEntity(const string& ID);

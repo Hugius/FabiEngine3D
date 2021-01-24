@@ -164,7 +164,7 @@ void FabiEngine3D::misc_setWindowTitle(const string& title)
 
 void FabiEngine3D::misc_clearOBJCache(const string& filePath)
 {
-	_core->_objLoader.clearOBJCache(filePath);
+	_core->_meshLoader.clearOBJCache(filePath);
 }
 
 void FabiEngine3D::misc_clearTextCache(const string& textContent, const string& fontPath)
@@ -204,12 +204,17 @@ void FabiEngine3D::misc_clearAudioMusicCache(const string& filePath)
 
 void FabiEngine3D::misc_cacheOBJsMultiThreaded(const vector<string>& objPaths, vector<string>& resultingTexturePaths)
 {
-	_core->_objLoader.cacheOBJsMultiThreaded(objPaths, resultingTexturePaths);
+	_core->_meshLoader.cacheOBJsMultiThreaded(objPaths, resultingTexturePaths);
 }
 
-void FabiEngine3D::misc_cacheTexturesMultiThreaded2D(const vector<string>& filePaths)
+void FabiEngine3D::misc_cacheTexturesMultiThreaded(const vector<string>& filePaths)
 {
 	_core->_textureLoader.cacheTexturesMultiThreaded2D(filePaths);
+}
+
+void FabiEngine3D::misc_cacheAudioMultiThreaded(const vector<string>& filePaths)
+{
+	_core->_audioLoader.cacheChunksMultiThreaded(filePaths);
 }
 
 string FabiEngine3D::misc_getWinExplorerFilename(const string& startingDir, const string& fileType)

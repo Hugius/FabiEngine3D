@@ -10,7 +10,7 @@ bool AudioEditor::isLoaded()
 	return _isEditorLoaded;
 }
 
-vector<string> AudioEditor::getAudioNames()
+const vector<string>& AudioEditor::getAudioNames()
 {
 	return _audioIDs;
 }

@@ -5,7 +5,7 @@
 class TerrainEntityManager final : public BaseEntityManager
 {
 public:
-	TerrainEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, RenderBus& renderBus);
+	TerrainEntityManager(MeshLoader& meshLoader, TextureLoader& texLoader, RenderBus& renderBus);
 	~TerrainEntityManager() = default;
 
 	shared_ptr<TerrainEntity> getEntity(const string& ID);

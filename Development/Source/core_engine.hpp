@@ -1,7 +1,7 @@
 #pragma once
 
 #include "fabi_engine_3d.hpp"
-#include "obj_loader.hpp"
+#include "mesh_loader.hpp"
 #include "texture_loader.hpp"
 #include "audio_loader.hpp"
 #include "input_handler.hpp"
@@ -38,7 +38,7 @@ private:
 
 	// Core instances
 	WindowManager          _windowManager;
-	OBJLoader              _objLoader;
+	MeshLoader             _meshLoader;
 	TextureLoader          _textureLoader;
 	AudioLoader			   _audioLoader;
 	InputHandler           _inputHandler;

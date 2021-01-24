@@ -2,8 +2,8 @@
 #include "configuration.hpp"
 #include "logger.hpp"
 
-LightEntityManager::LightEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, RenderBus& renderBus) :
-	BaseEntityManager(EntityType::LIGHT, objLoader, texLoader, renderBus)
+LightEntityManager::LightEntityManager(MeshLoader& meshLoader, TextureLoader& texLoader, RenderBus& renderBus) :
+	BaseEntityManager(EntityType::LIGHT, meshLoader, texLoader, renderBus)
 {
 
 }

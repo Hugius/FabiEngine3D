@@ -3,8 +3,8 @@
 
 using std::make_shared;
 
-TextEntityManager::TextEntityManager(OBJLoader& objLoader, TextureLoader& texLoader, RenderBus& renderBus) :
-	BaseEntityManager(EntityType::TEXT, objLoader, texLoader, renderBus),
+TextEntityManager::TextEntityManager(MeshLoader& meshLoader, TextureLoader& texLoader, RenderBus& renderBus) :
+	BaseEntityManager(EntityType::TEXT, meshLoader, texLoader, renderBus),
 	_centeredOpenglBuffer(new OpenGLBuffer(0.0f, 0.0f, 1.0f, 1.0f, true, true)),
 	_nonCenteredOpenglBuffer(new OpenGLBuffer(0.0f, 0.0f, 1.0f, 1.0f, false, true))
 {
@@ -70,7 +70,7 @@ void TextEntityManager::addTextEntity
 	else // Load static text as a whole
 	{
 		entity->addOglBuffer(isCentered ? _centeredOpenglBuffer : _nonCenteredOpenglBuffer, false);
-		entity->setDiffuseMap(_texLoader.getText(textContent, entity->getFontPath()));
+		entity->setDiffuseMap(_textureLoader.getText(textContent, entity->getFontPath()));
 		entity->updateModelMatrix();
 	}
 }
@@ -99,7 +99,7 @@ void TextEntityManager::reloadCharacters(const string& ID)
 				// Load text map
 				string textContent = "";
 				textContent += c;
-				auto texture = _texLoader.getText(textContent, entity->getFontPath());
+				auto texture = _textureLoader.getText(textContent, entity->getFontPath());
 
 				// Check if font loading went well
 				if (texture != 0)

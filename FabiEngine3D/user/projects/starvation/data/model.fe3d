@@ -46,7 +46,7 @@
 @well user\assets\models\buildings\well.obj user\assets\textures\diffuse_maps\buildings\well.png ? ? user\assets\textures\normal_maps\buildings\well.png 3.25 3.25 3.25 0 1 0 0 0 1 1 1 1 1 1 1 ? 0 well 0.03 0 -0.01 1.19 1.61 1.34
 @barn user\assets\models\buildings\barn.obj ? ? ? ? 1.1 1.1 1.1 0 1 0 0 1 1 1 0.75 1 1 1 1 ? 0 barn 0.1 0 0.1 14 13.3 10.9
 @wagon user\assets\models\misc\wagon.obj user\assets\textures\diffuse_maps\misc\wagon.png ? ? ? 1.75 1.75 1.75 0 1 0 0 1 1 1 0.75 1 1 1 1 ? 0 wagon 0 0 -0.7 1.7 1.32 3.2
-@barrel user\assets\models\misc\barrel.obj user\assets\textures\diffuse_maps\misc\barrel.png ? ? user\assets\textures\normal_maps\misc\barrel.png 2 2 2 0 1 0 1 1 1 1 0.75 1 1 1 1 ? 0 barrel 0 0 0 0.76 0.92 0.78
+@barrel user\assets\models\misc\barrel.obj user\assets\textures\diffuse_maps\misc\barrel.png ? user\assets\textures\reflection_maps\misc\barrel.png user\assets\textures\normal_maps\misc\barrel.png 2 2 2 0 1 0 1 1 1 1 0.75 1 1 1 1 ? 0 barrel 0 0 0 0.76 0.92 0.78
 @statue1 user\assets\models\misc\statue1.obj user\assets\textures\diffuse_maps\misc\statue1.png ? ? user\assets\textures\normal_maps\misc\statue1.png 1 1 1 0 0 0 1 1 1 1 0.5 1 1 1 1 ? 0 statue 0 0 0 2.4 5.8 2.8
 @crate1 user\assets\models\misc\crate1.obj user\assets\textures\diffuse_maps\misc\crate1.png ? ? user\assets\textures\normal_maps\misc\crate1.png 2 2 2 0 1 0 0 1 1 1 0.5 1 1 1 1 ? 0 crate 0 0 0 0.9 0.9 0.9
 @beehive user\assets\models\misc\beehive.obj user\assets\textures\diffuse_maps\misc\beehive.png ? ? ? 1.75 1.75 1.75 0 1 0 0 1 1 1 0.75 1 1 1 1 ? 0 beehive -0.05 0 -0.05 2.4 2 2.1

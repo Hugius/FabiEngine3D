@@ -165,6 +165,10 @@ void AnimationEditor::loadAnimationsFromFile()
 		// Logging
 		_fe3d.logger_throwInfo("Animation data from project \"" + _currentProjectName + "\" loaded!");
 	}
+	else
+	{
+		_fe3d.logger_throwWarning("Project \"" + _currentProjectName + "\" corrupted: animation.fe3d missing!");
+	}
 }
 
 void AnimationEditor::stopAllAnimations()
@@ -179,7 +183,7 @@ void AnimationEditor::saveAnimationsToFile()
 		// Error checking
 		if (_currentProjectName == "")
 		{
-			_fe3d.logger_throwError("Tried to save as empty project!");
+			_fe3d.logger_throwError("No current project loaded --> AnimationEditor::saveAnimationsToFile()");
 		}
 
 		// Compose full file path

@@ -66,7 +66,7 @@ void SettingsEditor::load()
 	}
 	else
 	{
-		_fe3d.logger_throwWarning("Could not load settings file!");
+		_fe3d.logger_throwWarning("Project \"" + _currentProjectName + "\" corrupted: settings.fe3d missing!");
 	}
 
 	_isEditorLoaded = true;

@@ -255,7 +255,7 @@ void TopViewportController::_saveCurrentProject()
 	// Error checking
 	if (_currentProjectName == "")
 	{
-		_fe3d.logger_throwError("Tried to save as empty project!");
+		_fe3d.logger_throwError("No current project loaded --> TopViewportController::_saveCurrentProject()");
 	}
 
 	// Save everything

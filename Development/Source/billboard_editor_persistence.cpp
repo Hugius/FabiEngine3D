@@ -64,6 +64,12 @@ const vector<string> BillboardEditor::getAllTexturePathsFromFile()
 		// Return
 		return texturePaths;
 	}
+	else
+	{
+		_fe3d.logger_throwWarning("Project \"" + _currentProjectName + "\" corrupted: billboard.fe3d missing!");
+	}
+
+	return {};
 }
 
 void BillboardEditor::loadBillboardEntitiesFromFile()
@@ -165,6 +171,10 @@ void BillboardEditor::loadBillboardEntitiesFromFile()
 		// Logging
 		_fe3d.logger_throwInfo("Billboard data from project \"" + _currentProjectName + "\" loaded!");
 	}
+	else
+	{
+		_fe3d.logger_throwWarning("Project \"" + _currentProjectName + "\" corrupted: billboard.fe3d missing!");
+	}
 }
 
 void BillboardEditor::saveBillboardEntitiesToFile()
@@ -174,7 +184,7 @@ void BillboardEditor::saveBillboardEntitiesToFile()
 		// Error checking
 		if (_currentProjectName == "")
 		{
-			_fe3d.logger_throwError("Tried to save as empty project!");
+			_fe3d.logger_throwError("No current project loaded --> BillboardEditor::saveBillboardEntitiesToFile()");
 		}
 
 		// Create or overwrite billboard file

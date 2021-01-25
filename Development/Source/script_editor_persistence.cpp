@@ -70,7 +70,7 @@ void ScriptEditor::saveScriptsToFile()
 		// Error checking
 		if (_currentProjectName == "")
 		{
-			_fe3d.logger_throwError("Tried to save as empty project!");
+			_fe3d.logger_throwError("No current project loaded --> ScriptEditor::saveScriptsToFile()");
 		}
 
 		string directoryPath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectName + "\\scripts\\";

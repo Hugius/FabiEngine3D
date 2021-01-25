@@ -100,6 +100,12 @@ const vector<string> EnvironmentEditor::getAllTerrainTexturePathsFromFile()
 		// Return
 		return texturePaths;
 	}
+	else
+	{
+		_fe3d.logger_throwWarning("Project \"" + _currentProjectName + "\" corrupted: terrain.fe3d missing!");
+	}
+
+	return {};
 }
 
 void EnvironmentEditor::loadTerrainEntitiesFromFile()
@@ -221,6 +227,10 @@ void EnvironmentEditor::loadTerrainEntitiesFromFile()
 		// Logging
 		_fe3d.logger_throwInfo("Terrain data from project \"" + _currentProjectName + "\" loaded!");
 	}
+	else
+	{
+		_fe3d.logger_throwWarning("Project \"" + _currentProjectName + "\" corrupted: terrain.fe3d missing!");
+	}
 }
 
 void EnvironmentEditor::unloadTerrainEntities()
@@ -238,7 +248,7 @@ void EnvironmentEditor::saveTerrainEntitiesToFile()
 		// Error checking
 		if (_currentProjectName == "")
 		{
-			_fe3d.logger_throwError("Tried to save as empty project!");
+			_fe3d.logger_throwError("No current project loaded --> EnvironmentEditor::saveTerrainEntitiesToFile()");
 		}
 
 		// Compose full terrain file path

@@ -47,6 +47,12 @@ const vector<string> AudioEditor::getAllAudioPathsFromFile()
 
 		return audioPaths;
 	}
+	else
+	{
+		_fe3d.logger_throwWarning("Project \"" + _currentProjectName + "\" corrupted: audio.fe3d missing!");
+	}
+
+	return {};
 }
 
 void AudioEditor::loadAudioEntitiesFromFile()
@@ -96,6 +102,10 @@ void AudioEditor::loadAudioEntitiesFromFile()
 		// Logging
 		_fe3d.logger_throwInfo("Audio data from project \"" + _currentProjectName + "\" loaded!");
 	}
+	else
+	{
+		_fe3d.logger_throwWarning("Project \"" + _currentProjectName + "\" corrupted: audio.fe3d missing!");
+	}
 }
 
 void AudioEditor::saveAudioEntitiesToFile()
@@ -105,7 +115,7 @@ void AudioEditor::saveAudioEntitiesToFile()
 		// Error checking
 		if (_currentProjectName == "")
 		{
-			_fe3d.logger_throwError("Tried to save as empty project!");
+			_fe3d.logger_throwError("No current project loaded --> AudioEditor::saveAudioEntitiesToFile()");
 		}
 
 		// Create or overwrite audio file

@@ -57,6 +57,12 @@ const vector<array<string, 6>> EnvironmentEditor::getAllSkyTexturePathsFromFile(
 		// Return
 		return texturePaths;
 	}
+	else
+	{
+		_fe3d.logger_throwWarning("Project \"" + _currentProjectName + "\" corrupted: sky.fe3d missing!");
+	}
+
+	return {};
 }
 
 void EnvironmentEditor::loadSkyEntitiesFromFile()
@@ -127,6 +133,10 @@ void EnvironmentEditor::loadSkyEntitiesFromFile()
 		// Logging
 		_fe3d.logger_throwInfo("Sky data from project \"" + _currentProjectName + "\" loaded!");
 	}
+	else
+	{
+		_fe3d.logger_throwWarning("Project \"" + _currentProjectName + "\" corrupted: sky.fe3d missing!");
+	}
 }
 
 void EnvironmentEditor::unloadSkyEntities()
@@ -144,7 +154,7 @@ void EnvironmentEditor::saveSkyEntitiesToFile()
 		// Error checking
 		if (_currentProjectName == "")
 		{
-			_fe3d.logger_throwError("Tried to save as empty project!");
+			_fe3d.logger_throwError("No current project loaded --> EnvironmentEditor::saveSkyEntitiesToFile()");
 		}
 
 		string filePath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectName + "\\data\\sky.fe3d";

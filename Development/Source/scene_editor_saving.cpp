@@ -10,7 +10,7 @@ void SceneEditor::saveSceneToFile()
 		// Error checking
 		if (_currentProjectName == "")
 		{
-			_fe3d.logger_throwError("Tried to save as empty project!");
+			_fe3d.logger_throwError("No current project loaded --> SceneEditor::saveSceneToFile()");
 		}
 
 		// Check if a scene is currently being edited

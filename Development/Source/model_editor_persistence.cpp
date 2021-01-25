@@ -80,6 +80,12 @@ const vector<string> ModelEditor::getAllTexturePathsFromFile()
 		// Return
 		return texturePaths;
 	}
+	else
+	{
+		_fe3d.logger_throwWarning("Project \"" + _currentProjectName + "\" corrupted: model.fe3d missing!");
+	}
+
+	return {};
 }
 
 void ModelEditor::loadGameEntitiesFromFile()
@@ -193,6 +199,10 @@ void ModelEditor::loadGameEntitiesFromFile()
 		// Logging
 		_fe3d.logger_throwInfo("Model data from project \"" + _currentProjectName + "\" loaded!");
 	}
+	else
+	{
+		_fe3d.logger_throwWarning("Project \"" + _currentProjectName + "\" corrupted: model.fe3d missing!");
+	}
 }
 
 void ModelEditor::saveGameEntitiesToFile()
@@ -202,7 +212,7 @@ void ModelEditor::saveGameEntitiesToFile()
 		// Error checking
 		if (_currentProjectName == "")
 		{
-			_fe3d.logger_throwError("Tried to save as empty project!");
+			_fe3d.logger_throwError("No current project loaded --> ModelEditor::saveGameEntitiesToFile()");
 		}
 
 		// Create or overwrite models file

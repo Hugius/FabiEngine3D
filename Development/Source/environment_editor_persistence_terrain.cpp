@@ -215,9 +215,9 @@ void EnvironmentEditor::loadTerrainEntitiesFromFile()
 				if (normalMapPathG != "")  _fe3d.terrainEntity_setNormalMapG(terrainID, normalMapPathG);
 				if (normalMapPathB != "")  _fe3d.terrainEntity_setNormalMapB(terrainID, normalMapPathB);
 				if (blendMapPath != "")   _fe3d.terrainEntity_setBlendMap(terrainID, blendMapPath);
-				if (blendMapPathR != "")  _fe3d.terrainEntity_setBlendMapR(terrainID, blendMapPathR);
-				if (blendMapPathG != "")  _fe3d.terrainEntity_setBlendMapG(terrainID, blendMapPathG);
-				if (blendMapPathB != "")  _fe3d.terrainEntity_setBlendMapB(terrainID, blendMapPathB);
+				if (blendMapPathR != "")  _fe3d.terrainEntity_setDiffuseMapR(terrainID, blendMapPathR);
+				if (blendMapPathG != "")  _fe3d.terrainEntity_setDiffuseMapG(terrainID, blendMapPathG);
+				if (blendMapPathB != "")  _fe3d.terrainEntity_setDiffuseMapB(terrainID, blendMapPathB);
 			}
 		}
 

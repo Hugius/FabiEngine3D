@@ -23,7 +23,7 @@ public:
 	(
 		const string& ID, const string& texturePath,
 		Vec3 T, Vec3 R, Vec3 S,
-		bool transparent, bool facingCameraX, bool facingCameraY, bool textureFiltering
+		bool transparent, bool facingCameraX, bool facingCameraY
 	);
 
 	void addBillboardEntity

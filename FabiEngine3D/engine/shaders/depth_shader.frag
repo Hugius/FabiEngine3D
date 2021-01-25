@@ -17,7 +17,7 @@ void main()
 
 	if(u_isAlphaObject)
 	{
-		if(texColor.a <= 0.25f)
+		if(texColor.a < 1.0f)
 		{
 			discard;
 		}

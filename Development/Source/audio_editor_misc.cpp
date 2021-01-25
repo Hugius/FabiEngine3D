@@ -27,15 +27,15 @@ void AudioEditor::_updateMiscellaneous()
 		// Update audio status symbol
 		if (isPlaying)
 		{
-			_fe3d.billboardEntity_setDiffuseMap("@@audioStatus", "engine\\textures\\play.png", true);
+			_fe3d.billboardEntity_setDiffuseMap("@@audioStatus", "engine\\textures\\play.png");
 		}
 		else if (isPaused)
 		{
-			_fe3d.billboardEntity_setDiffuseMap("@@audioStatus", "engine\\textures\\pause.png", true);
+			_fe3d.billboardEntity_setDiffuseMap("@@audioStatus", "engine\\textures\\pause.png");
 		}
 		else
 		{
-			_fe3d.billboardEntity_setDiffuseMap("@@audioStatus", "engine\\textures\\stop.png", true);
+			_fe3d.billboardEntity_setDiffuseMap("@@audioStatus", "engine\\textures\\stop.png");
 		}
 		_fe3d.billboardEntity_rotate("@@audioStatus", Vec3(0.0f, 0.5f, 0.0f));
 	}

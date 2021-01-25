@@ -172,7 +172,7 @@ vec3 getTextureColor()
 		// Removing alpha background
 		if(u_isTransparent)
 		{
-			if(texColor.a <= 0.25f)
+			if(texColor.a < 1.0f)
 			{
 				discard;
 			}

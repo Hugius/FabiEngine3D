@@ -243,7 +243,7 @@ void EnvironmentEditor::_updateTerrainMenuBlendMap()
 					{
 						const string newFilePath = filePath.substr(rootDirectory.size());
 						_fe3d.misc_clearTextureCache2D(newFilePath);
-						_fe3d.terrainEntity_setBlendMapR(_currentTerrainID, newFilePath);
+						_fe3d.terrainEntity_setDiffuseMapR(_currentTerrainID, newFilePath);
 					}
 					else
 					{
@@ -267,7 +267,7 @@ void EnvironmentEditor::_updateTerrainMenuBlendMap()
 					{
 						const string newFilePath = filePath.substr(rootDirectory.size());
 						_fe3d.misc_clearTextureCache2D(newFilePath);
-						_fe3d.terrainEntity_setBlendMapG(_currentTerrainID, newFilePath);
+						_fe3d.terrainEntity_setDiffuseMapG(_currentTerrainID, newFilePath);
 					}
 					else
 					{
@@ -291,7 +291,7 @@ void EnvironmentEditor::_updateTerrainMenuBlendMap()
 					{
 						const string newFilePath = filePath.substr(rootDirectory.size());
 						_fe3d.misc_clearTextureCache2D(newFilePath);
-						_fe3d.terrainEntity_setBlendMapB(_currentTerrainID, newFilePath);
+						_fe3d.terrainEntity_setDiffuseMapB(_currentTerrainID, newFilePath);
 					}
 					else
 					{

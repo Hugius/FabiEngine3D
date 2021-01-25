@@ -1,4 +1,8 @@
-2 0
+6 44
 META script_type_update
 
-
+/// Torch
+IF _equipIndex IS 7 AND _inventory[_equipIndex] NOT "":
+    fe3d:light_set_visible("torch", <true>)
+ELSE:
+    fe3d:light_set_visible("torch", <false>)

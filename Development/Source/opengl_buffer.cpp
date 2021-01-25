@@ -91,32 +91,16 @@ void OpenGLBuffer::_create2D(float x, float y, float w, float h, bool isCentered
 	// Determine center point of the quad
 	if (isCentered)
 	{
-		if (isText)
+		data = new float[24]
 		{
-			data = new float[24]
-			{
-				x - (w / 2.0f) , y - (h / 2.0f) , 0.0f, 0.0f,
-				x + (w / 2.0f) , y - (h / 2.0f) , 1.0f, 0.0f,
-				x + (w / 2.0f) , y + (h / 2.0f) , 1.0f, 0.9f,
+			x - (w / 2.0f) , y - (h / 2.0f) , 0.0f, 0.0f,
+			x + (w / 2.0f) , y - (h / 2.0f) , 1.0f, 0.0f,
+			x + (w / 2.0f) , y + (h / 2.0f) , 1.0f, 1.0f,
 
-				x + (w / 2.0f) , y + (h / 2.0f) , 1.0f, 0.9f,
-				x - (w / 2.0f) , y + (h / 2.0f) , 0.0f, 0.9f,
-				x - (w / 2.0f) , y - (h / 2.0f) , 0.0f, 0.0f
-			};
-		}
-		else
-		{
-			data = new float[24]
-			{
-				x - (w / 2.0f) , y - (h / 2.0f) , 0.0f, 0.0f,
-				x + (w / 2.0f) , y - (h / 2.0f) , 1.0f, 0.0f,
-				x + (w / 2.0f) , y + (h / 2.0f) , 1.0f, 1.0f,
-
-				x + (w / 2.0f) , y + (h / 2.0f) , 1.0f, 1.0f,
-				x - (w / 2.0f) , y + (h / 2.0f) , 0.0f, 1.0f,
-				x - (w / 2.0f) , y - (h / 2.0f) , 0.0f, 0.0f
-			};
-		}
+			x + (w / 2.0f) , y + (h / 2.0f) , 1.0f, 1.0f,
+			x - (w / 2.0f) , y + (h / 2.0f) , 0.0f, 1.0f,
+			x - (w / 2.0f) , y - (h / 2.0f) , 0.0f, 0.0f
+		};
 	}
 	else
 	{
@@ -124,10 +108,10 @@ void OpenGLBuffer::_create2D(float x, float y, float w, float h, bool isCentered
 		{
 			x,     y,     0.0f, 0.0f,
 			x + w, y,     1.0f, 0.0f,
-			x + w, y + h, 1.0f, 0.9f,
+			x + w, y + h, 1.0f, 1.0f,
 
-			x + w, y + h, 1.0f, 0.9f,
-			x,     y + h, 0.0f, 0.9f,
+			x + w, y + h, 1.0f, 1.0f,
+			x,     y + h, 0.0f, 1.0f,
 			x,     y,     0.0f, 0.0f
 		};
 	}

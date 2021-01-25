@@ -175,17 +175,17 @@ const string& FabiEngine3D::terrainEntity_getBlendMapPath(const string& ID)
 
 const string& FabiEngine3D::terrainEntity_getBlendMapPathR(const string& ID)
 {
-	return _core->_terrainEntityManager.getEntity(ID)->getBlendMapPathR();
+	return _core->_terrainEntityManager.getEntity(ID)->getDiffuseMapPathR();
 }
 
 const string& FabiEngine3D::terrainEntity_getBlendMapPathG(const string& ID)
 {
-	return _core->_terrainEntityManager.getEntity(ID)->getBlendMapPathG();
+	return _core->_terrainEntityManager.getEntity(ID)->getDiffuseMapPathG();
 }
 
 const string& FabiEngine3D::terrainEntity_getBlendMapPathB(const string& ID)
 {
-	return _core->_terrainEntityManager.getEntity(ID)->getBlendMapPathB();
+	return _core->_terrainEntityManager.getEntity(ID)->getDiffuseMapPathB();
 }
 
 const string& FabiEngine3D::terrainEntity_getNormalMapPathR(const string& ID)
@@ -253,55 +253,55 @@ void FabiEngine3D::terrainEntity_setUvRepeat(const string& ID, float repeat)
 
 void FabiEngine3D::terrainEntity_setDiffuseMap(const string& ID, const string& texturePath)
 {
-	_core->_terrainEntityManager.getEntity(ID)->setDiffuseMap(_core->_textureLoader.getTexture2D(texturePath, true, true));
+	_core->_terrainEntityManager.getEntity(ID)->setDiffuseMap(_core->_textureLoader.getTexture2D(texturePath, true, true, true));
 	_core->_terrainEntityManager.getEntity(ID)->setDiffuseMapPath(texturePath);
 }
 
 void FabiEngine3D::terrainEntity_setNormalMap(const string& ID, const string& texturePath)
 {
-	_core->_terrainEntityManager.getEntity(ID)->setNormalMap(_core->_textureLoader.getTexture2D(texturePath, true, true));
+	_core->_terrainEntityManager.getEntity(ID)->setNormalMap(_core->_textureLoader.getTexture2D(texturePath, false, false, true));
 	_core->_terrainEntityManager.getEntity(ID)->setNormalMapPath(texturePath);
 }
 
 void FabiEngine3D::terrainEntity_setBlendMap(const string& ID, const string& texturePath)
 {
-	_core->_terrainEntityManager.getEntity(ID)->setBlendMap(_core->_textureLoader.getTexture2D(texturePath, true, true));
+	_core->_terrainEntityManager.getEntity(ID)->setBlendMap(_core->_textureLoader.getTexture2D(texturePath, false, false, false));
 	_core->_terrainEntityManager.getEntity(ID)->setBlendMapPath(texturePath);
 }
 
-void FabiEngine3D::terrainEntity_setBlendMapR(const string& ID, const string& texturePath)
+void FabiEngine3D::terrainEntity_setDiffuseMapR(const string& ID, const string& texturePath)
 {
-	_core->_terrainEntityManager.getEntity(ID)->setBlendMapR(_core->_textureLoader.getTexture2D(texturePath, true, true));
-	_core->_terrainEntityManager.getEntity(ID)->setBlendMapPathR(texturePath);
+	_core->_terrainEntityManager.getEntity(ID)->setDiffuseMapR(_core->_textureLoader.getTexture2D(texturePath, true, true, true));
+	_core->_terrainEntityManager.getEntity(ID)->setDiffuseMapPathR(texturePath);
 }
 
-void FabiEngine3D::terrainEntity_setBlendMapG(const string& ID, const string& texturePath)
+void FabiEngine3D::terrainEntity_setDiffuseMapG(const string& ID, const string& texturePath)
 {
-	_core->_terrainEntityManager.getEntity(ID)->setBlendMapG(_core->_textureLoader.getTexture2D(texturePath, true, true));
-	_core->_terrainEntityManager.getEntity(ID)->setBlendMapPathG(texturePath);
+	_core->_terrainEntityManager.getEntity(ID)->setDiffuseMapG(_core->_textureLoader.getTexture2D(texturePath, true, true, true));
+	_core->_terrainEntityManager.getEntity(ID)->setDiffuseMapPathG(texturePath);
 }
 
-void FabiEngine3D::terrainEntity_setBlendMapB(const string& ID, const string& texturePath)
+void FabiEngine3D::terrainEntity_setDiffuseMapB(const string& ID, const string& texturePath)
 {
-	_core->_terrainEntityManager.getEntity(ID)->setBlendMapB(_core->_textureLoader.getTexture2D(texturePath, true, true));
-	_core->_terrainEntityManager.getEntity(ID)->setBlendMapPathB(texturePath);
+	_core->_terrainEntityManager.getEntity(ID)->setDiffuseMapB(_core->_textureLoader.getTexture2D(texturePath, true, true, true));
+	_core->_terrainEntityManager.getEntity(ID)->setDiffuseMapPathB(texturePath);
 }
 
 void FabiEngine3D::terrainEntity_setNormalMapR(const string& ID, const string& texturePath)
 {
-	_core->_terrainEntityManager.getEntity(ID)->setNormalMapR(_core->_textureLoader.getTexture2D(texturePath, true, true));
+	_core->_terrainEntityManager.getEntity(ID)->setNormalMapR(_core->_textureLoader.getTexture2D(texturePath, false, false, true));
 	_core->_terrainEntityManager.getEntity(ID)->setNormalMapPathR(texturePath);
 }
 
 void FabiEngine3D::terrainEntity_setNormalMapG(const string& ID, const string& texturePath)
 {
-	_core->_terrainEntityManager.getEntity(ID)->setNormalMapG(_core->_textureLoader.getTexture2D(texturePath, true, true));
+	_core->_terrainEntityManager.getEntity(ID)->setNormalMapG(_core->_textureLoader.getTexture2D(texturePath, false, false, true));
 	_core->_terrainEntityManager.getEntity(ID)->setNormalMapPathG(texturePath);
 }
 
 void FabiEngine3D::terrainEntity_setNormalMapB(const string& ID, const string& texturePath)
 {
-	_core->_terrainEntityManager.getEntity(ID)->setNormalMapB(_core->_textureLoader.getTexture2D(texturePath, true, true));
+	_core->_terrainEntityManager.getEntity(ID)->setNormalMapB(_core->_textureLoader.getTexture2D(texturePath, false, false, true));
 	_core->_terrainEntityManager.getEntity(ID)->setNormalMapPathB(texturePath);
 }
 

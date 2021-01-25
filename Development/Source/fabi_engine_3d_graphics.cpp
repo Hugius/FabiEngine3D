@@ -116,7 +116,7 @@ void FabiEngine3D::gfx_enableMotionBlur(float strength)
 void FabiEngine3D::gfx_enableLensFlare(const string& texturePath, float intensity, float multiplier)
 {
 	_core->_renderBus.setLensFlareEnabled(true);
-	_core->_renderBus.setLensFlareMap(_core->_textureLoader.getTexture2D(texturePath, false, false));
+	_core->_renderBus.setLensFlareMap(_core->_textureLoader.getTexture2D(texturePath, false, false, false));
 	_core->_renderBus.setLensFlareMapPath(texturePath);
 	_core->_renderBus.setLensFlareIntensity(intensity);
 	_core->_renderBus.setLensFlareMultiplier(multiplier);

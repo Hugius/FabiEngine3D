@@ -101,19 +101,19 @@ void SceneEditor::_placeTerrain(const string& newID, const string& previewID)
 	// Blend map red
 	if (_fe3d.terrainEntity_getBlendMapPathR(previewID) != "")
 	{
-		_fe3d.terrainEntity_setBlendMapR(newID, _fe3d.terrainEntity_getBlendMapPathR(previewID));
+		_fe3d.terrainEntity_setDiffuseMapR(newID, _fe3d.terrainEntity_getBlendMapPathR(previewID));
 	}
 
 	// Blend map green
 	if (_fe3d.terrainEntity_getBlendMapPathG(previewID) != "")
 	{
-		_fe3d.terrainEntity_setBlendMapG(newID, _fe3d.terrainEntity_getBlendMapPathG(previewID));
+		_fe3d.terrainEntity_setDiffuseMapG(newID, _fe3d.terrainEntity_getBlendMapPathG(previewID));
 	}
 
 	// Blend map blue
 	if (_fe3d.terrainEntity_getBlendMapPathB(previewID) != "")
 	{
-		_fe3d.terrainEntity_setBlendMapB(newID, _fe3d.terrainEntity_getBlendMapPathB(previewID));
+		_fe3d.terrainEntity_setDiffuseMapB(newID, _fe3d.terrainEntity_getBlendMapPathB(previewID));
 	}
 }
 
@@ -157,9 +157,9 @@ void SceneEditor::_placeTerrain(const string& newID, const string& heightMapPath
 	if (normalMapPathG != "") _fe3d.terrainEntity_setNormalMapG(newID, normalMapPathG);
 	if (normalMapPathB != "") _fe3d.terrainEntity_setNormalMapB(newID, normalMapPathB);
 	if (blendMapPath != "")   _fe3d.terrainEntity_setBlendMap(newID, blendMapPath);
-	if (blendMapPathR != "")  _fe3d.terrainEntity_setBlendMapR(newID, blendMapPathR);
-	if (blendMapPathG != "")  _fe3d.terrainEntity_setBlendMapG(newID, blendMapPathG);
-	if (blendMapPathB != "")  _fe3d.terrainEntity_setBlendMapB(newID, blendMapPathB);
+	if (blendMapPathR != "")  _fe3d.terrainEntity_setDiffuseMapR(newID, blendMapPathR);
+	if (blendMapPathG != "")  _fe3d.terrainEntity_setDiffuseMapG(newID, blendMapPathG);
+	if (blendMapPathB != "")  _fe3d.terrainEntity_setDiffuseMapB(newID, blendMapPathB);
 }
 
 void SceneEditor::_placeWater(const string& newID, const string& previewID)
@@ -482,7 +482,7 @@ void SceneEditor::placeBillboard(const string& newID, const string& previewID, V
 	// Determine BILLBOARD entity type
 	if (_fe3d.billboardEntity_getDiffuseMapPath(previewID) != "") // Textured billboard
 	{
-		_fe3d.billboardEntity_setDiffuseMap(newID, _fe3d.billboardEntity_getDiffuseMapPath(previewID), true);
+		_fe3d.billboardEntity_setDiffuseMap(newID, _fe3d.billboardEntity_getDiffuseMapPath(previewID));
 	}
 	else if (_fe3d.billboardEntity_getFontPath(previewID) != "") // Text billboard
 	{

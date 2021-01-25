@@ -17,12 +17,12 @@ public:
 	void setNormalMapPath(const string& value);
 	void setBlendMap(GLuint value);
 	void setBlendMapPath(const string& value);
-	void setBlendMapR(GLuint value);
-	void setBlendMapPathR(const string& value);
-	void setBlendMapG(GLuint value);
-	void setBlendMapPathG(const string& value);
-	void setBlendMapB(GLuint value);
-	void setBlendMapPathB(const string& value);
+	void setDiffuseMapR(GLuint value);
+	void setDiffuseMapPathR(const string& value);
+	void setDiffuseMapG(GLuint value);
+	void setDiffuseMapPathG(const string& value);
+	void setDiffuseMapB(GLuint value);
+	void setDiffuseMapPathB(const string& value);
 	void setNormalMapR(GLuint value);
 	void setNormalMapPathR(const string& value);
 	void setNormalMapG(GLuint value);
@@ -46,27 +46,27 @@ public:
 	void setSpecularLightingIntensity(float value);
 
 	// Textures
-	const GLuint getDiffuseMap() const;
-	const GLuint getNormalMap()  const;
-	const GLuint getBlendMap()   const;
-	const GLuint getBlendMapR()  const;
-	const GLuint getBlendMapG()  const;
-	const GLuint getBlendMapB()  const;
-	const GLuint getNormalMapR() const;
-	const GLuint getNormalMapG() const;
-	const GLuint getNormalMapB() const;
+	const GLuint getDiffuseMap()  const;
+	const GLuint getNormalMap()   const;
+	const GLuint getBlendMap()    const;
+	const GLuint getDiffuseMapR() const;
+	const GLuint getDiffuseMapG() const;
+	const GLuint getDiffuseMapB() const;
+	const GLuint getNormalMapR()  const;
+	const GLuint getNormalMapG()  const;
+	const GLuint getNormalMapB()  const;
 
 	// Texture paths
-	const string& getHeightMapPath()  const;
-	const string& getDiffuseMapPath() const;
-	const string& getNormalMapPath()  const;
-	const string& getBlendMapPath()   const;
-	const string& getBlendMapPathR()  const;
-	const string& getBlendMapPathG()  const;
-	const string& getBlendMapPathB()  const;
-	const string& getNormalMapPathR() const;
-	const string& getNormalMapPathG() const;
-	const string& getNormalMapPathB() const;
+	const string& getHeightMapPath()   const;
+	const string& getDiffuseMapPath()  const;
+	const string& getNormalMapPath()   const;
+	const string& getBlendMapPath()    const;
+	const string& getDiffuseMapPathR() const;
+	const string& getDiffuseMapPathG() const;
+	const string& getDiffuseMapPathB() const;
+	const string& getNormalMapPathR()  const;
+	const string& getNormalMapPathG()  const;
+	const string& getNormalMapPathB()  const;
 
 	// Vectors
 	vector<Vec3>& getVertices();
@@ -102,9 +102,9 @@ private:
 	GLuint _diffuseMap = 0;
 	GLuint _normalMap  = 0;
 	GLuint _blendMap   = 0;
-	GLuint _blendMapR  = 0;
-	GLuint _blendMapG  = 0;
-	GLuint _blendMapB  = 0;
+	GLuint _diffuseMapR  = 0;
+	GLuint _diffuseMapG  = 0;
+	GLuint _diffuseMapB  = 0;
 	GLuint _normalMapR = 0;
 	GLuint _normalMapG = 0;
 	GLuint _normalMapB = 0;
@@ -113,9 +113,9 @@ private:
 	string _diffuseMapPath = "";
 	string _normalMapPath  = "";
 	string _blendMapPath   = "";
-	string _blendMapPathR  = "";
-	string _blendMapPathG  = "";
-	string _blendMapPathB  = "";
+	string _diffuseMapPathR  = "";
+	string _diffuseMapPathG  = "";
+	string _diffuseMapPathB  = "";
 	string _normalMapPathR = "";
 	string _normalMapPathG = "";
 	string _normalMapPathB = "";

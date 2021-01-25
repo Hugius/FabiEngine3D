@@ -32,25 +32,26 @@ vec3 applyFog(vec3 color);
 // Calculate final fragment color
 void main()
 {
-	// Calculating the texel color
-	vec4 texColor = texture(u_sampler_diffuseMap, f_uv);
-
-	// Removing white alpha background
-	if(u_isAlphaObject)
-	{
-		if(texColor.a <= 0.25f)
-		{
-			discard;
-		}
-	}
-
 	if(u_hasTexture) // Render texture
 	{
-		o_finalColor = vec4(texColor.rgb * u_color, texColor.a);
+		// Calculating the texel color
+		vec4 texColor = texture(u_sampler_diffuseMap, f_uv);
+
+		// Removing white alpha background
+		if(u_isAlphaObject)
+		{
+			if(texColor.a < 1.0f)
+			{
+				discard;
+			}
+		}
+
+		// Set texture color
+		o_finalColor = vec4(texColor.rgb * u_color, 1.0f);
 	}
 	else // Render color only
 	{
-		o_finalColor = vec4(u_color, texColor.a);
+		o_finalColor = vec4(u_color, 1.0f);
 	}
 
 	// Finalize color

@@ -62,30 +62,30 @@ void TerrainEntityRenderer::unbind()
 
 void TerrainEntityRenderer::renderLightEntities(const unordered_map<string, shared_ptr<LightEntity>>& entities)
 {
-	// Upload
-	_shader.uploadUniform("u_pointLightCount", static_cast<int>(entities.size()));
-
-	// Render all lights
-	unsigned int index = 0;
+	// Compose a map of all visible lights
+	unordered_map<string, shared_ptr<LightEntity>> visibleEntities;
 	for (auto& [keyID, entity] : entities)
 	{
 		if (entity->isVisible())
 		{
-			_shader.uploadUniform("u_pointLightPositions[" + to_string(index) + "]", entity->getPosition());
-			_shader.uploadUniform("u_pointLightColors[" + to_string(index) + "]", entity->getColor());
-			_shader.uploadUniform("u_pointLightIntensities[" + to_string(index) + "]", entity->getIntensity());
-			_shader.uploadUniform("u_pointLightDistanceFactors[" + to_string(index) + "]", 1.0f / entity->getDistanceFactor());
+			visibleEntities[keyID] = entity;
 		}
-		else
-		{
-			_shader.uploadUniform("u_pointLightPositions[" + to_string(index) + "]", Vec3(0.0f));
-			_shader.uploadUniform("u_pointLightColors[" + to_string(index) + "]", Vec3(0.0f));
-			_shader.uploadUniform("u_pointLightIntensities[" + to_string(index) + "]", 0.0f);
-			_shader.uploadUniform("u_pointLightDistanceFactors[" + to_string(index) + "]", 0.0f);
-		}
+	}
+
+	// Render all lights
+	unsigned int index = 0;
+	for (auto& [keyID, entity] : visibleEntities)
+	{
+		_shader.uploadUniform("u_pointLightPositions[" + to_string(index) + "]", entity->getPosition());
+		_shader.uploadUniform("u_pointLightColors[" + to_string(index) + "]", entity->getColor());
+		_shader.uploadUniform("u_pointLightIntensities[" + to_string(index) + "]", entity->getIntensity());
+		_shader.uploadUniform("u_pointLightDistanceFactors[" + to_string(index) + "]", 1.0f / entity->getDistanceFactor());
 
 		index++;
 	}
+
+	// Upload amount
+	_shader.uploadUniform("u_pointLightCount", static_cast<int>(visibleEntities.size()));
 }
 
 void TerrainEntityRenderer::render(const shared_ptr<TerrainEntity> entity)
@@ -102,10 +102,10 @@ void TerrainEntityRenderer::render(const shared_ptr<TerrainEntity> entity)
 		_shader.uploadUniform("u_isNormalMappedG", entity->isNormalMappedG());
 		_shader.uploadUniform("u_isNormalMappedB", entity->isNormalMappedB());
 		_shader.uploadUniform("u_isSpecularLighted", entity->isSpecularLighted());
-		_shader.uploadUniform("u_blendMapRepeat", entity->getUvRepeat());
-		_shader.uploadUniform("u_blendMapRepeatR", entity->getBlendRepeatR());
-		_shader.uploadUniform("u_blendMapRepeatG", entity->getBlendRepeatG());
-		_shader.uploadUniform("u_blendMapRepeatB", entity->getBlendRepeatB());
+		_shader.uploadUniform("u_diffuseMapRepeat", entity->getUvRepeat());
+		_shader.uploadUniform("u_diffuseMapRepeatR", entity->getBlendRepeatR());
+		_shader.uploadUniform("u_diffuseMapRepeatG", entity->getBlendRepeatG());
+		_shader.uploadUniform("u_diffuseMapRepeatB", entity->getBlendRepeatB());
 		_shader.uploadUniform("u_lightness", entity->getLightness());
 		_shader.uploadUniform("u_specularLightFactor", entity->getSpecularLightingFactor());
 		_shader.uploadUniform("u_specularLightIntensity", entity->getSpecularLightingIntensity());
@@ -114,9 +114,9 @@ void TerrainEntityRenderer::render(const shared_ptr<TerrainEntity> entity)
 		_shader.uploadUniform("u_sampler_diffuseMap", 0);
 		_shader.uploadUniform("u_sampler_normalMap",  1);
 		_shader.uploadUniform("u_sampler_blendMap",	  2);
-		_shader.uploadUniform("u_sampler_blendMapR",  3);
-		_shader.uploadUniform("u_sampler_blendMapG",  4);
-		_shader.uploadUniform("u_sampler_blendMapB",  5);
+		_shader.uploadUniform("u_sampler_diffuseMapR",  3);
+		_shader.uploadUniform("u_sampler_diffuseMapG",  4);
+		_shader.uploadUniform("u_sampler_diffuseMapB",  5);
 		_shader.uploadUniform("u_sampler_normalMapR",  6);
 		_shader.uploadUniform("u_sampler_normalMapG",  7);
 		_shader.uploadUniform("u_sampler_normalMapB",  8);
@@ -130,11 +130,11 @@ void TerrainEntityRenderer::render(const shared_ptr<TerrainEntity> entity)
 		glActiveTexture(GL_TEXTURE2);
 		glBindTexture(GL_TEXTURE_2D, entity->getBlendMap());
 		glActiveTexture(GL_TEXTURE3);
-		glBindTexture(GL_TEXTURE_2D, entity->getBlendMapR());
+		glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMapR());
 		glActiveTexture(GL_TEXTURE4);
-		glBindTexture(GL_TEXTURE_2D, entity->getBlendMapG());
+		glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMapG());
 		glActiveTexture(GL_TEXTURE5);
-		glBindTexture(GL_TEXTURE_2D, entity->getBlendMapB());
+		glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMapB());
 		glActiveTexture(GL_TEXTURE6);
 		glBindTexture(GL_TEXTURE_2D, entity->getNormalMapR());
 		glActiveTexture(GL_TEXTURE7);

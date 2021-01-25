@@ -40,7 +40,7 @@ bool ScriptInterpreter::_executeFe3dLightEntityFunction(const string& functionNa
 		{
 			ScriptValueType::STRING, // ID
 			ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, // Position
-			ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, // Size
+			ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, // Color
 			ScriptValueType::DECIMAL, // Intensity
 			ScriptValueType::DECIMAL // Distance
 		};
@@ -85,7 +85,47 @@ bool ScriptInterpreter::_executeFe3dLightEntityFunction(const string& functionNa
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}
+		else if (functionName == "fe3d:light_set_visible") // Set lightEntity visibility
+		{
+			auto types = { ScriptValueType::STRING, ScriptValueType::BOOLEAN };
+
+			// Validate arguments
+			if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+			{
+				// Validate existing light ID
+				if (_validateFe3dLightEntity(arguments[0].getString()))
+				{
+					// Determine if light must be visible or not
+					if (arguments[1].getBoolean())
+					{
+						_fe3d.lightEntity_show(arguments[0].getString());
+					}
+					else
+					{
+						_fe3d.lightEntity_hide(arguments[0].getString());
+					}
+
+					returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+				}
+			}
+		}
+		else if (functionName == "fe3d:light_is_visible") // Get lightEntity visibility
+		{
+			auto types = { ScriptValueType::STRING };
+
+			// Validate arguments
+			if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+			{
+				// Validate existing light ID
+				if (_validateFe3dLightEntity(arguments[0].getString()))
+				{
+					auto result = _fe3d.lightEntity_isVisible(arguments[0].getString());
+					returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
+				}
+			}
+		}
 	}
+
 	else if (functionName == "fe3d:light_set_position") // Set lightEntity position
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };

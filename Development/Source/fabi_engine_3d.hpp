@@ -140,9 +140,9 @@ public:
 	void terrainEntity_setNormalMappedB(const string& ID, bool enabled);
 	void terrainEntity_setSpecularLighted(const string& ID, bool enabled);
 	void terrainEntity_setBlendMap(const string& ID, const string& texturePath);
-	void terrainEntity_setBlendMapR(const string& ID, const string& texturePath);
-	void terrainEntity_setBlendMapG(const string& ID, const string& texturePath);
-	void terrainEntity_setBlendMapB(const string& ID, const string& texturePath);
+	void terrainEntity_setDiffuseMapR(const string& ID, const string& texturePath);
+	void terrainEntity_setDiffuseMapG(const string& ID, const string& texturePath);
+	void terrainEntity_setDiffuseMapB(const string& ID, const string& texturePath);
 	void terrainEntity_setNormalMapR(const string& ID, const string& texturePath);
 	void terrainEntity_setNormalMapG(const string& ID, const string& texturePath);
 	void terrainEntity_setNormalMapB(const string& ID, const string& texturePath);
@@ -378,9 +378,9 @@ public:
 	(
 		const string& ID, const string& diffuseMapPath,
 		Vec3 T, Vec3 R, Vec2 S,
-		bool transparent, bool facingCameraX, bool facingCameraY, bool textureFiltering, bool visible = true
+		bool transparent, bool facingCameraX, bool facingCameraY, bool visible = true
 	);
-	void billboardEntity_setDiffuseMap(const string& ID, const string& texturePath, bool textureFiltering);
+	void billboardEntity_setDiffuseMap(const string& ID, const string& texturePath);
 	void billboardEntity_setTransparent(const string& ID, bool enabled);
 
 	// Billboard entity interface (diffuseMap) - getters

@@ -51,7 +51,7 @@ void FabiEngine3D::guiEntity_delete(const string& ID)
 
 void FabiEngine3D::guiEntity_changeTexture(const string& ID, const string& texturePath)
 {
-	_core->_guiEntityManager.getEntity(ID)->setDiffuseMap(_core->_textureLoader.getTexture2D(texturePath, true, true));
+	_core->_guiEntityManager.getEntity(ID)->setDiffuseMap(_core->_textureLoader.getTexture2D(texturePath, false, false, false));
 }
 
 bool FabiEngine3D::guiEntity_isExisting(const string& ID)

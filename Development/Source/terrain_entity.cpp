@@ -40,34 +40,34 @@ void TerrainEntity::setBlendMapPath(const string& value)
 	_blendMapPath = value;
 }
 
-void TerrainEntity::setBlendMapR(GLuint value)
+void TerrainEntity::setDiffuseMapR(GLuint value)
 {
-	_blendMapR = value;
+	_diffuseMapR = value;
 }
 
-void TerrainEntity::setBlendMapPathR(const string& value)
+void TerrainEntity::setDiffuseMapPathR(const string& value)
 {
-	_blendMapPathR = value;
+	_diffuseMapPathR = value;
 }
 
-void TerrainEntity::setBlendMapG(GLuint value)
+void TerrainEntity::setDiffuseMapG(GLuint value)
 {
-	_blendMapG = value;
+	_diffuseMapG = value;
 }
 
-void TerrainEntity::setBlendMapPathG(const string& value)
+void TerrainEntity::setDiffuseMapPathG(const string& value)
 {
-	_blendMapPathG = value;
+	_diffuseMapPathG = value;
 }
 
-void TerrainEntity::setBlendMapB(GLuint value)
+void TerrainEntity::setDiffuseMapB(GLuint value)
 {
-	_blendMapB = value;
+	_diffuseMapB = value;
 }
 
-void TerrainEntity::setBlendMapPathB(const string& value)
+void TerrainEntity::setDiffuseMapPathB(const string& value)
 {
-	_blendMapPathB = value;
+	_diffuseMapPathB = value;
 }
 
 void TerrainEntity::setNormalMapR(GLuint value)
@@ -190,19 +190,19 @@ const GLuint TerrainEntity::getBlendMap() const
 	return _blendMap;
 }
 
-const GLuint TerrainEntity::getBlendMapR() const
+const GLuint TerrainEntity::getDiffuseMapR() const
 {
-	return _blendMapR;
+	return _diffuseMapR;
 }
 
-const GLuint TerrainEntity::getBlendMapG() const
+const GLuint TerrainEntity::getDiffuseMapG() const
 {
-	return _blendMapG;
+	return _diffuseMapG;
 }
 
-const GLuint TerrainEntity::getBlendMapB() const
+const GLuint TerrainEntity::getDiffuseMapB() const
 {
-	return _blendMapB;
+	return _diffuseMapB;
 }
 
 const GLuint TerrainEntity::getNormalMapR() const
@@ -240,19 +240,19 @@ const string& TerrainEntity::getBlendMapPath() const
 	return _blendMapPath;
 }
 
-const string& TerrainEntity::getBlendMapPathR() const
+const string& TerrainEntity::getDiffuseMapPathR() const
 {
-	return _blendMapPathR;
+	return _diffuseMapPathR;
 }
 
-const string& TerrainEntity::getBlendMapPathG() const
+const string& TerrainEntity::getDiffuseMapPathG() const
 {
-	return _blendMapPathG;
+	return _diffuseMapPathG;
 }
 
-const string& TerrainEntity::getBlendMapPathB() const
+const string& TerrainEntity::getDiffuseMapPathB() const
 {
-	return _blendMapPathB;
+	return _diffuseMapPathB;
 }
 
 const string& TerrainEntity::getNormalMapPathR() const

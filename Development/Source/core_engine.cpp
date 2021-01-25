@@ -58,7 +58,7 @@ void CoreEngine::_setupApplication()
 		// Create engine logo
 		shared_ptr<GuiEntity> logo = make_shared<GuiEntity>("logo");
 		logo->addOglBuffer(new OpenGLBuffer(0.0f, 0.0f, 2.0f, 2.0f, true, false));
-		logo->setDiffuseMap(_textureLoader.getTexture2D("engine\\textures\\logo.png", true, true));
+		logo->setDiffuseMap(_textureLoader.getTexture2D("engine\\textures\\logo.png", false, false, false));
 
 		// Calculate logo resolution
 		SDL_DisplayMode DM;
@@ -121,7 +121,7 @@ void CoreEngine::_setupApplication()
 		// Create logo
 		shared_ptr<GuiEntity> logo = make_shared<GuiEntity>("logo");
 		logo->addOglBuffer(new OpenGLBuffer(0.0f, 0.0f, 1.0f, 0.75f, true, false));
-		logo->setDiffuseMap(_textureLoader.getTexture2D("engine\\textures\\logo.png", true, true));
+		logo->setDiffuseMap(_textureLoader.getTexture2D("engine\\textures\\logo.png", false, false, false));
 
 		// Create text
 		shared_ptr<TextEntity> text = make_shared<TextEntity>("text");
@@ -141,17 +141,6 @@ void CoreEngine::_setupApplication()
 
 		// Initialize engine controller
 		_fe3d.FE3D_CONTROLLER_INIT();
-
-		// Render logo (intro fade out)
-		_windowManager.enableVsync();
-		for (float opaqueness = 1.3f; opaqueness > 0.0f; opaqueness -= 0.005f)
-		{
-			logo->setColor(Vec3(opaqueness - 0.3f));
-			text->setColor(Vec3(opaqueness));
-			_inputHandler.f_checkInput();
-			_renderEngine.renderEngineLogo(logo, text, Config::getInst().getWindowSize());
-			_windowManager.swapBackBuffer();
-		}
 
 		// Disable vsync
 		_windowManager.disableVsync();

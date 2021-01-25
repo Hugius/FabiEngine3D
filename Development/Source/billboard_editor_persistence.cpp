@@ -140,7 +140,7 @@ void BillboardEditor::loadBillboardEntitiesFromFile()
 			// Determine billboard type
 			if (diffuseMapPath != "") // Textured billboard
 			{
-				_fe3d.billboardEntity_add(billboardID, diffuseMapPath, _billboardPosition, Vec3(0.0f), size, transparent, facingX, facingY, false, false);
+				_fe3d.billboardEntity_add(billboardID, diffuseMapPath, _billboardPosition, Vec3(0.0f), size, transparent, facingX, facingY, false);
 				_fe3d.billboardEntity_setColor(billboardID, color);
 
 				// Playing sprite animation

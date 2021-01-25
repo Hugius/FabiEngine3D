@@ -7,9 +7,9 @@ void FabiEngine3D::billboardEntity_add(const string& ID, Vec3 color, Vec3 T, Vec
 	_core->_billboardEntityManager.getEntity(ID)->setVisible(visible);
 }
 
-void FabiEngine3D::billboardEntity_add(const string& ID, const string& diffuseMapPath, Vec3 T, Vec3 R, Vec2 S, bool transparent, bool facingCameraX, bool facingCameraY, bool textureFiltering, bool visible)
+void FabiEngine3D::billboardEntity_add(const string& ID, const string& diffuseMapPath, Vec3 T, Vec3 R, Vec2 S, bool transparent, bool facingCameraX, bool facingCameraY, bool visible)
 {
-	_core->_billboardEntityManager.addBillboardEntity(ID, diffuseMapPath, T, R, Vec3(S.x, S.y, 1.0f), transparent, facingCameraX, facingCameraY, textureFiltering);
+	_core->_billboardEntityManager.addBillboardEntity(ID, diffuseMapPath, T, R, Vec3(S.x, S.y, 1.0f), transparent, facingCameraX, facingCameraY);
 	_core->_billboardEntityManager.getEntity(ID)->setVisible(visible);
 }
 
@@ -143,9 +143,9 @@ void FabiEngine3D::billboardEntity_setColor(const string& ID, Vec3 color)
 	_core->_billboardEntityManager.getEntity(ID)->setColor(color);
 }
 
-void FabiEngine3D::billboardEntity_setDiffuseMap(const string& ID, const string& texturePath, bool textureFiltering)
+void FabiEngine3D::billboardEntity_setDiffuseMap(const string& ID, const string& texturePath)
 {
-	_core->_billboardEntityManager.getEntity(ID)->setDiffuseMap(_core->_textureLoader.getTexture2D(texturePath, textureFiltering, textureFiltering));
+	_core->_billboardEntityManager.getEntity(ID)->setDiffuseMap(_core->_textureLoader.getTexture2D(texturePath, false, true, false));
 	_core->_billboardEntityManager.getEntity(ID)->setDiffuseMapPath(texturePath);
 }
 

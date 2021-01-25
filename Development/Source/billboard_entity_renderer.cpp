@@ -56,7 +56,7 @@ void BillboardEntityRenderer::render(const shared_ptr<BillboardEntity> entity)
 		// Text UV repeat fix
 		if (entity->getTextContent() != "")
 		{
-			uvMultiplier = Vec2(1.0f, 0.9f);
+			//uvMultiplier = Vec2(1.0f, 0.9f);
 		}
 
 		// Shader uniforms

@@ -19,5 +19,5 @@ void main()
 {
 	gl_Position = u_modelMatrix * vec4(v_pos, 0.0f, 1.0f);
 	f_uv.x = u_isMirroredHorizontally ? -v_uv.x : v_uv.x;
-	f_uv.y = u_isMirroredVertically ?  v_uv.y : -v_uv.y; 
+	f_uv.y = u_isMirroredVertically ? v_uv.y : -v_uv.y; 
 }

@@ -99,30 +99,33 @@ void GameEntityRenderer::unbind()
 
 void GameEntityRenderer::renderLightEntities(const unordered_map<string, shared_ptr<LightEntity>>& entities)
 {
-	// Compose a map of all visible lights
-	unordered_map<string, shared_ptr<LightEntity>> visibleEntities;
-	for (auto& [keyID, entity] : entities)
+	if (_renderBus.isPointLightingEnabled())
 	{
-		if (entity->isVisible())
+		// Compose a map of all visible lights
+		unordered_map<string, shared_ptr<LightEntity>> visibleEntities;
+		for (auto& [keyID, entity] : entities)
 		{
-			visibleEntities[keyID] = entity;
+			if (entity->isVisible())
+			{
+				visibleEntities[keyID] = entity;
+			}
 		}
+
+		// Render all lights
+		unsigned int index = 0;
+		for (auto& [keyID, entity] : visibleEntities)
+		{
+			_shader.uploadUniform("u_pointLightPositions[" + to_string(index) + "]", entity->getPosition());
+			_shader.uploadUniform("u_pointLightColors[" + to_string(index) + "]", entity->getColor());
+			_shader.uploadUniform("u_pointLightIntensities[" + to_string(index) + "]", entity->getIntensity());
+			_shader.uploadUniform("u_pointLightDistanceFactors[" + to_string(index) + "]", 1.0f / entity->getDistanceFactor());
+
+			index++;
+		}
+
+		// Upload amount
+		_shader.uploadUniform("u_pointLightCount", static_cast<int>(visibleEntities.size()));
 	}
-
-	// Render all lights
-	unsigned int index = 0;
-	for (auto& [keyID, entity] : visibleEntities)
-	{
-		_shader.uploadUniform("u_pointLightPositions[" + to_string(index) + "]", entity->getPosition());
-		_shader.uploadUniform("u_pointLightColors[" + to_string(index) + "]", entity->getColor());
-		_shader.uploadUniform("u_pointLightIntensities[" + to_string(index) + "]", entity->getIntensity());
-		_shader.uploadUniform("u_pointLightDistanceFactors[" + to_string(index) + "]", 1.0f / entity->getDistanceFactor());
-
-		index++;
-	}
-
-	// Upload amount
-	_shader.uploadUniform("u_pointLightCount", static_cast<int>(visibleEntities.size()));
 }
 
 void GameEntityRenderer::render(const shared_ptr<GameEntity> entity)

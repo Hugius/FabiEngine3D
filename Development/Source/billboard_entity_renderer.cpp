@@ -53,12 +53,6 @@ void BillboardEntityRenderer::render(const shared_ptr<BillboardEntity> entity)
 			uvAdder = Vec2(float(entity->getSpriteColumnIndex()) * uvMultiplier.x, float(entity->getSpriteRowIndex()) * uvMultiplier.y);
 		}
 
-		// Text UV repeat fix
-		if (entity->getTextContent() != "")
-		{
-			//uvMultiplier = Vec2(1.0f, 0.9f);
-		}
-
 		// Shader uniforms
 		_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix());
 		_shader.uploadUniform("u_isAlphaObject", entity->isTransparent());
@@ -70,6 +64,7 @@ void BillboardEntityRenderer::render(const shared_ptr<BillboardEntity> entity)
 		_shader.uploadUniform("u_currentY", entity->getTranslation().y);
 		_shader.uploadUniform("u_minHeight", entity->getMinHeight());
 		_shader.uploadUniform("u_maxHeight", entity->getMaxHeight());
+		_shader.uploadUniform("u_minAlpha", entity->getTextContent().empty() ? 1.0f : 0.1f);
 
 		// Texture
 		glActiveTexture(GL_TEXTURE0);

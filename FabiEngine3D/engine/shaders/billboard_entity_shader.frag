@@ -21,6 +21,7 @@ uniform float u_fogMinDistance;
 uniform float u_fogMaxDistance;
 uniform float u_fogDefaultFactor;
 uniform float u_lightness;
+uniform float u_minAlpha;
 
 // Boolean uniforms
 uniform bool u_isFogEnabled;
@@ -40,7 +41,7 @@ void main()
 		// Removing white alpha background
 		if(u_isAlphaObject)
 		{
-			if(texColor.a < 1.0f)
+			if(texColor.a < u_minAlpha)
 			{
 				discard;
 			}

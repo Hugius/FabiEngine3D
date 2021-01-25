@@ -1,7 +1,9 @@
-6 44
+4 33
 META script_type_update
 
 /// Torch
+VEC3 camPos = fe3d:camera_get_position()
+fe3d:light_set_position("torch", camPos.x, camPos.y, camPos.z)
 IF _equipIndex IS 7 AND _inventory[_equipIndex] NOT "":
     fe3d:light_set_visible("torch", <true>)
 ELSE:

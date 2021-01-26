@@ -1,4 +1,4 @@
-10 22
+9 13
 META script_type_init
 
 /// Globals
@@ -7,6 +7,7 @@ GLOB DEC _ambLightIntensity = fe3d:graphics_get_ambient_light_intensity()
 GLOB DEC _dirLightIntensity = fe3d:graphics_get_directional_light_intensity()
 GLOB VEC3 _dirLightPos = fe3d:graphics_get_directional_light_position()
 GLOB DEC _passedTime = 0.0
+GLOB BOOL _mustBeDayTime = <true>
 GLOB BOOL _isDayTime = <true>
 GLOB BOOL _isTimeCycling = <false>
 GLOB BOOL _areLightsOn = <false>

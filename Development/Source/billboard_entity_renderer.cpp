@@ -64,7 +64,7 @@ void BillboardEntityRenderer::render(const shared_ptr<BillboardEntity> entity)
 		_shader.uploadUniform("u_currentY", entity->getTranslation().y);
 		_shader.uploadUniform("u_minHeight", entity->getMinHeight());
 		_shader.uploadUniform("u_maxHeight", entity->getMaxHeight());
-		_shader.uploadUniform("u_minAlpha", entity->getTextContent().empty() ? 1.0f : 0.1f);
+		_shader.uploadUniform("u_minAlpha", entity->getTextContent().empty() ? 0.9f : 0.1f);
 
 		// Texture
 		glActiveTexture(GL_TEXTURE0);

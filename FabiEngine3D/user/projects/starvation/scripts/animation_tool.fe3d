@@ -1,4 +1,4 @@
-16 22
+75 58
 META script_type_update
 
 /// Determine tool animation type
@@ -25,7 +25,6 @@ ELIF _equipIndex IS 6:
     EDIT animID = "hammer_build"
     DEC toolOffset = 1.25
 ELIF _equipIndex IS 7:
-    EDIT animID = "torch_lit"
     DEC toolOffset = 1.15
 ELIF _equipIndex IS 8:
     EDIT animID = "fishrod_throw"
@@ -40,7 +39,7 @@ INCR yaw 90.0
 
 /// Update tool position, rotation, animation if equipped
 STR toolID = _inventory[_equipIndex]
-BOOL equipped = (toolID NOT "" AND animID NOT "")
+BOOL equipped = (toolID NOT "")
 BOOL allowed = (_isToolPlaying IS <false> AND _isInvOpen IS <true>)
 IF equipped IS <true> AND allowed IS <true>:
     DECR yaw 40.0
@@ -75,7 +74,7 @@ BOOL isBobbing = fe3d:model_is_animation_playing("tool_bobbing", toolID)
 IF equipped IS <true> AND allowed IS <true> AND _isWalking IS <true>:
     IF _isToolPlaying IS <false> AND _isPickupPlaying IS <false>:
         IF _isTalking IS <false> AND _isCrafting IS <false>:
-            IF isBobbing IS <false>:
+            IF isBobbing IS <false> AND toolID NOT "torch":
                 fe3d:model_start_animation("tool_bobbing", toolID, 1)
 
 /// Tool bobbing speed

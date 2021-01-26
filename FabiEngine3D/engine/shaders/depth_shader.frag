@@ -7,6 +7,9 @@ in vec2 f_uv;
 // Textures
 layout(location = 0) uniform sampler2D u_sampler_diffuseMap;
 
+// Float uniforms
+uniform float u_minAlpha;
+
 // Boolean uniforms
 uniform bool u_isAlphaObject;
 
@@ -17,7 +20,7 @@ void main()
 
 	if(u_isAlphaObject)
 	{
-		if(texColor.a < 0.25f)
+		if(texColor.a < u_minAlpha)
 		{
 			discard;
 		}

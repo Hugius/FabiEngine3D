@@ -112,6 +112,7 @@ void DepthRenderer::render(const shared_ptr<GameEntity> entity, float clippingY,
 		_shader.uploadUniform("u_clippingY", clippingY);
 		_shader.uploadUniform("u_isBillboard", false);
 		_shader.uploadUniform("u_isUnderWater", isUnderWater);
+		_shader.uploadUniform("u_minAlpha", 0.25f);
 
 		// Check if entity is static to the camera view
 		if (entity->isCameraStatic())
@@ -181,12 +182,6 @@ void DepthRenderer::render(const shared_ptr<BillboardEntity> entity, float clipp
 			uvAdder = Vec2(float(entity->getSpriteColumnIndex()) * uvMultiplier.x, float(entity->getSpriteRowIndex()) * uvMultiplier.y);
 		}
 
-		// Text UV repeat fix
-		if (entity->getTextContent() != "")
-		{
-			uvMultiplier = Vec2(1.0f, 0.9f);
-		}
-
 		// Shader uniforms
 		_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix());
 		_shader.uploadUniform("u_isAlphaObject", entity->isTransparent());
@@ -199,6 +194,7 @@ void DepthRenderer::render(const shared_ptr<BillboardEntity> entity, float clipp
 		_shader.uploadUniform("u_isBillboard", true);
 		_shader.uploadUniform("u_isInstanced", false);
 		_shader.uploadUniform("u_isUnderWater", isUnderWater);
+		_shader.uploadUniform("u_minAlpha", entity->getTextContent().empty() ? 0.9f : 0.1f);
 
 		// Texture
 		glActiveTexture(GL_TEXTURE0);

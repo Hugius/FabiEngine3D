@@ -27,8 +27,10 @@ public:
 	void stopAllAnimations();
 
 	bool isLoaded();
+	bool isAnimationStarted(const string& animationID, const string& modelID);
 	bool isAnimationPlaying(const string& animationID, const string& modelID);
 	bool isAnimationPaused(const string& animationID, const string& modelID);
+	unsigned int getAnimationFrameIndex(const string& animationID, const string& modelID);
 	const vector<string> getAllAnimationNames();
 	const vector<string> getPlayingAnimationNames();
 	const vector<string> getPlayingAnimationNames(const string& modelID);

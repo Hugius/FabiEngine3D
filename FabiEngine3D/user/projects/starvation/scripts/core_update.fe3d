@@ -1,4 +1,4 @@
-13 20
+18 19
 META script_type_update
 META execution_entry
 
@@ -17,6 +17,7 @@ EXEC player_bobbing
 EXEC player_misc
 
 /// Animations
+EXEC animation_misc
 EXEC animation_player
 EXEC animation_tool
 

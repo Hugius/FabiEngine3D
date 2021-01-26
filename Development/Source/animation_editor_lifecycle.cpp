@@ -11,8 +11,8 @@ void AnimationEditor::startAnimation(const string& animationID, const string& mo
 		// Check if model trying to animate exists
 		if (_fe3d.gameEntity_isExisting(modelID))
 		{
-			// Check if animation is not already playing
-			if (!isAnimationPlaying(animationID, modelID))
+			// Check if animation has not already started
+			if (!isAnimationStarted(animationID, modelID))
 			{
 				// Check if animation count is valid
 				if (timesToPlay >= -1)
@@ -51,7 +51,7 @@ void AnimationEditor::startAnimation(const string& animationID, const string& mo
 			}
 			else
 			{
-				_fe3d.logger_throwWarning(errorMessage + "is already playing!");
+				_fe3d.logger_throwWarning(errorMessage + "animation already playing!");
 			}
 		}
 		else
@@ -65,28 +65,22 @@ void AnimationEditor::startAnimation(const string& animationID, const string& mo
 	}
 }
 
-void AnimationEditor::setAnimationSpeedMultiplier(const string animationID, const string& modelID, float speed)
+bool AnimationEditor::isAnimationStarted(const string& animationID, const string& modelID)
 {
 	// Temporary values
-	string errorMessage = "Trying to set animation speed with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
+	string errorMessage = "Trying to retrieve animation play status with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
 
-	// Check if animation exists
-	if (_isAnimationExisting(animationID))
-	{
-		// Check if animation is playing
-		if (isAnimationPlaying(animationID, modelID))
-		{
-			_playingAnimations.at(make_pair(animationID, modelID)).speedMultiplier = speed;
-		}
-		else
-		{
-			_fe3d.logger_throwWarning(errorMessage + "is not playing!");
-		}
-	}
-	else
+	// Check if animation does not exist
+	if (!_isAnimationExisting(animationID))
 	{
 		_fe3d.logger_throwWarning(errorMessage + "animation not existing!");
 	}
+	else
+	{
+		return _playingAnimations.find(make_pair(animationID, modelID)) != _playingAnimations.end();
+	}
+
+	return false;
 }
 
 bool AnimationEditor::isAnimationPlaying(const string& animationID, const string& modelID)
@@ -98,12 +92,17 @@ bool AnimationEditor::isAnimationPlaying(const string& animationID, const string
 	if (!_isAnimationExisting(animationID))
 	{
 		_fe3d.logger_throwWarning(errorMessage + "animation not existing!");
-		return false;
+	}
+	else if (!isAnimationStarted(animationID, modelID))
+	{
+		_fe3d.logger_throwWarning(errorMessage + "animation not started!");
 	}
 	else
 	{
-		return _playingAnimations.find(make_pair(animationID, modelID)) != _playingAnimations.end();
+		return !_playingAnimations.at(make_pair(animationID, modelID)).isPaused;
 	}
+
+	return false;
 }
 
 bool AnimationEditor::isAnimationPaused(const string& animationID, const string& modelID)
@@ -115,12 +114,17 @@ bool AnimationEditor::isAnimationPaused(const string& animationID, const string&
 	if (!_isAnimationExisting(animationID))
 	{
 		_fe3d.logger_throwWarning(errorMessage + "animation not existing!");
-		return false;
+	}
+	else if (!isAnimationStarted(animationID, modelID))
+	{
+		_fe3d.logger_throwWarning(errorMessage + "animation not started!");
 	}
 	else
 	{
 		return _playingAnimations.at(make_pair(animationID, modelID)).isPaused;
 	}
+
+	return false;
 }
 
 void AnimationEditor::pauseAnimation(const string& animationID, const string& modelID)
@@ -131,14 +135,22 @@ void AnimationEditor::pauseAnimation(const string& animationID, const string& mo
 	// Check if animation exists
 	if (_isAnimationExisting(animationID))
 	{
-		// Check if animation is already playing
-		if (!isAnimationPaused(animationID, modelID))
+		// Check if animation has already started
+		if (isAnimationStarted(animationID, modelID))
 		{
-			_playingAnimations.at(make_pair(animationID, modelID)).isPaused = true;
+			// Check if animation is playing
+			if (isAnimationPlaying(animationID, modelID))
+			{
+				_playingAnimations.at(make_pair(animationID, modelID)).isPaused = true;
+			}
+			else
+			{
+				_fe3d.logger_throwWarning(errorMessage + "animation not playing!");
+			}
 		}
 		else
 		{
-			_fe3d.logger_throwWarning(errorMessage + "is not playing!");
+			_fe3d.logger_throwWarning(errorMessage + "animation not started!");
 		}
 	}
 	else
@@ -155,14 +167,22 @@ void AnimationEditor::resumeAnimation(const string& animationID, const string& m
 	// Check if animation exists
 	if (_isAnimationExisting(animationID))
 	{
-		// Check if animation is not already playing
-		if (isAnimationPaused(animationID, modelID))
+		// Check if animation has already started
+		if (isAnimationStarted(animationID, modelID))
 		{
-			_playingAnimations.at(make_pair(animationID, modelID)).isPaused = false;
+			// Check if animation is paused
+			if (isAnimationPaused(animationID, modelID))
+			{
+				_playingAnimations.at(make_pair(animationID, modelID)).isPaused = false;
+			}
+			else
+			{
+				_fe3d.logger_throwWarning(errorMessage + "animation already playing!");
+			}
 		}
 		else
 		{
-			_fe3d.logger_throwWarning(errorMessage + "is already playing!");
+			_fe3d.logger_throwWarning(errorMessage + "animation not started!");
 		}
 	}
 	else
@@ -179,14 +199,14 @@ void AnimationEditor::stopAnimation(const string& animationID, const string& mod
 	// Check if animation exists
 	if (_isAnimationExisting(animationID))
 	{
-		// Check if animation is already playing
-		if (isAnimationPlaying(animationID, modelID))
+		// Check if animation has already started
+		if (isAnimationStarted(animationID, modelID))
 		{
 			_playingAnimations.erase(make_pair(animationID, modelID));
 		}
 		else
 		{
-			_fe3d.logger_throwWarning(errorMessage + "was not playing!");
+			_fe3d.logger_throwWarning(errorMessage + "animation not started!");
 		}
 	}
 	else
@@ -203,18 +223,72 @@ void AnimationEditor::fadeAnimation(const string& animationID, const string& mod
 	// Check if animation exists
 	if (_isAnimationExisting(animationID))
 	{
-		// Check if animation is playing
-		if (isAnimationPlaying(animationID, modelID))
+		// Check if animation has already started
+		if (isAnimationStarted(animationID, modelID))
 		{
-			_playingAnimations.at(make_pair(animationID, modelID)).fadeFramestep = framestep;
+			// Check if animation is playing
+			if (isAnimationPlaying(animationID, modelID))
+			{
+				_playingAnimations.at(make_pair(animationID, modelID)).fadeFramestep = framestep;
+			}
+			else
+			{
+				_fe3d.logger_throwWarning(errorMessage + "animation not playing!");
+			}
 		}
 		else
 		{
-			_fe3d.logger_throwWarning(errorMessage + "is not playing!");
+			_fe3d.logger_throwWarning(errorMessage + "animation not started!");
 		}
 	}
 	else
 	{
 		_fe3d.logger_throwWarning(errorMessage + "animation not existing!");
 	}
+}
+
+void AnimationEditor::setAnimationSpeedMultiplier(const string animationID, const string& modelID, float speed)
+{
+	// Temporary values
+	string errorMessage = "Trying to set animation speed with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
+
+	// Check if animation exists
+	if (_isAnimationExisting(animationID))
+	{
+		// Check if animation has already started
+		if (isAnimationStarted(animationID, modelID))
+		{
+			_playingAnimations.at(make_pair(animationID, modelID)).speedMultiplier = speed;
+		}
+		else
+		{
+			_fe3d.logger_throwWarning(errorMessage + "animation not started!");
+		}
+	}
+	else
+	{
+		_fe3d.logger_throwWarning(errorMessage + "animation not existing!");
+	}
+}
+
+unsigned int AnimationEditor::getAnimationFrameIndex(const string& animationID, const string& modelID)
+{
+	// Temporary values
+	string errorMessage = "Trying to retrieve animation frame index with ID \"" + animationID + "\" on model with ID \"" + modelID + "\": ";
+
+	// Check if animation does not exist
+	if (!_isAnimationExisting(animationID))
+	{
+		_fe3d.logger_throwWarning(errorMessage + "animation not existing!");
+	}
+	else if (!isAnimationStarted(animationID, modelID))
+	{
+		_fe3d.logger_throwWarning(errorMessage + "animation not started!");
+	}
+	else
+	{
+		return _playingAnimations.at(make_pair(animationID, modelID)).frameIndex;
+	}
+
+	return false;
 }

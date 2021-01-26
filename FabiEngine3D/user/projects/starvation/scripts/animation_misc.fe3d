@@ -1,0 +1,32 @@
+21 55
+META script_type_update
+
+/// Update tool & pickup animations status
+STR modelID = _inventory[_equipIndex]
+EDIT _wasSwordPlaying = _isSwordPlaying
+EDIT _wasPickaxePlaying = _isPickaxePlaying
+EDIT _wasAxePlaying = _isAxePlaying
+EDIT _wasShovelPlaying = _isShovelPlaying
+EDIT _wasHoePlaying = _isHoePlaying
+EDIT _wasScythePlaying = _isScythePlaying
+EDIT _wasHammerPlaying = _isHammerPlaying
+EDIT _wasFishrodPlaying = _isFishrodPlaying
+EDIT _wasPickupPlaying = _isPickupPlaying
+EDIT _isSwordPlaying = fe3d:model_is_animation_started(modelID, "sword_hit")
+EDIT _isPickaxePlaying = fe3d:model_is_animation_started(modelID, "pickaxe_mine")
+EDIT _isAxePlaying = fe3d:model_is_animation_started(modelID, "axe_cut")
+EDIT _isShovelPlaying = fe3d:model_is_animation_started(modelID, "shovel_dig")
+EDIT _isHoePlaying = fe3d:model_is_animation_started(modelID, "hoe_plow")
+EDIT _isScythePlaying = fe3d:model_is_animation_started(modelID, "scythe_reap")
+EDIT _isHammerPlaying = fe3d:model_is_animation_started(modelID, "hammer_build")
+EDIT _isFishrodPlaying = fe3d:model_is_animation_started(modelID, "fishrod_throw")
+EDIT _isPickupPlaying = fe3d:model_is_animation_started("player", "pickup")
+
+/// Check if any tool animation is playing
+EDIT _isToolPlaying = <false>
+IF _isPickaxePlaying IS <true> OR _isAxePlaying IS <true>:
+    EDIT _isToolPlaying = <true>
+IF _isShovelPlaying IS <true> OR _isHoePlaying IS <true> OR _isScythePlaying IS <true>:
+    EDIT _isToolPlaying = <true>
+IF _isHammerPlaying IS <true> OR _isFishrodPlaying IS <true>:
+    EDIT _isToolPlaying = <true>

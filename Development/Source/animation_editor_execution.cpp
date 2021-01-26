@@ -10,7 +10,7 @@ void AnimationEditor::_updateAnimationExecution()
 		for (const auto& idPair : _animationsToStop)
 		{
 			// Check if animation is still playing
-			if (isAnimationPlaying(idPair.first, idPair.second))
+			if (isAnimationStarted(idPair.first, idPair.second))
 			{
 				// Reset all rotation origins
 				auto animation = _playingAnimations.at(idPair);
@@ -37,7 +37,7 @@ void AnimationEditor::_updateAnimationExecution()
 		for (const auto& idPair : _animationsToStart)
 		{
 			// Check if animation is not already playing
-			if (!isAnimationPlaying(idPair.first, idPair.second))
+			if (!isAnimationStarted(idPair.first, idPair.second))
 			{
 				startAnimation(idPair.first, idPair.second, -1);
 			}
@@ -208,8 +208,8 @@ void AnimationEditor::_updateAnimationExecution()
 
 						// Check if animation reached transformation now
 						float difference = 0.0f;
-						if ((isTranslation && _hasReachedFloat(totalTranslation.y, targetTransformation.y, ySpeed)) |
-							(isRotation && _hasReachedFloat(totalRotation.y, targetTransformation.y, ySpeed)) |
+						if ((isTranslation && _hasReachedFloat(totalTranslation.y, targetTransformation.y, ySpeed)) ||
+							(isRotation && _hasReachedFloat(totalRotation.y, targetTransformation.y, ySpeed)) ||
 							(isScaling && _hasReachedFloat(totalScaling.y, targetTransformation.y, ySpeed)))
 						{
 							// Determine transformation type

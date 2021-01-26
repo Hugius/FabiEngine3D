@@ -1,2 +1,13 @@
-0 23
+6 32
 META script_type_update
+
+IF _isFishrodPlaying IS <true>:
+    BOOL isPaused = fe3d:model_is_animation_paused("fishrod", "fishrod_throw")
+    BOOL lmbPressed = fe3d:input_is_mouse_pressed("BUTTON_LEFT")
+    IF isPaused IS <true>:
+        IF lmbPressed IS <true>:
+            fe3d:model_resume_animation("fishrod", "fishrod_throw")
+    ELSE:
+        INT index = fe3d:model_get_animation_frame_index("fishrod", "fishrod_throw")
+        IF index IS 3:
+            fe3d:model_pause_animation("fishrod", "fishrod_throw")

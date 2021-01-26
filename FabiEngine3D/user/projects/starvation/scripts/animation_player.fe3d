@@ -1,4 +1,4 @@
-1 0
+33 19
 META script_type_update
 
 /// Skeleton position & rotation
@@ -11,29 +11,29 @@ fe3d:model_set_position("player", camPos.x, camPos.y, camPos.z)
 fe3d:model_set_rotation("player", 0.0, yaw, 0.0)
 
 /// Walking animation
-BOOL isWalkPlaying = fe3d:model_is_animation_playing("walk", "player")
+BOOL isWalking = fe3d:model_is_animation_started("player", "walk")
 IF _isToolPlaying IS <true> OR _isTalking IS <true> OR _isCrafting IS <true>:
-    IF isWalkPlaying IS <true>:
-        fe3d:model_fade_animation("walk", "player", 1)
+    IF isWalking IS <true>:
+        fe3d:model_fade_animation("player", "walk", 1)
 ELIF _isPickupPlaying IS <false>:
-    IF _isWalking IS <true> AND isWalkPlaying IS <false>:
-        fe3d:model_start_animation("walk", "player", -1)
-    ELIF _isWalking IS <false> AND isWalkPlaying IS <true>:
-        fe3d:model_fade_animation("walk", "player", 1)
+    IF _isWalking IS <true> AND isWalking IS <false>:
+        fe3d:model_start_animation("player", "walk", -1)
+    ELIF _isWalking IS <false> AND isWalking IS <true>:
+        fe3d:model_fade_animation("player", "walk", 1)
     /// Update running animation
-    IF isWalkPlaying IS <true>:
+    IF isWalking IS <true>:
         DEC speed = 1.0
         IF _isUnderWater IS <true>:
             EDIT speed = 0.5
         ELIF _isRunning IS <true>:
             EDIT speed = 2.0
-        fe3d:model_set_animation_speed("walk", "player", speed)
+        fe3d:model_set_animation_speed("player", "walk", speed)
 
 /// Pickup animation
 BOOL fPressed = fe3d:input_is_key_pressed("KEY_F")
 BOOL a = (_isToolPlaying IS <false> AND _isJumping IS <false> AND _isFalling IS <false>)
-BOOL b = (isWalkPlaying IS <false> AND _isUnderWater IS <false> AND fPressed IS <true>)
+BOOL b = (isWalking IS <false> AND _isUnderWater IS <false> AND fPressed IS <true>)
 BOOL c = (_isPickupPlaying IS <false> AND _isTalking IS <false>)
 BOOL d = (_isCrafting IS <false>)
 IF a IS <true> AND b IS <true> AND c IS <true> AND d IS <true>:
-    fe3d:model_start_animation("pickup", "player", 1)
+    fe3d:model_start_animation("player", "pickup", 1)

@@ -1,4 +1,4 @@
-75 58
+71 48
 META script_type_update
 
 /// Determine tool animation type
@@ -66,20 +66,20 @@ IF equipped IS <true> AND allowed IS <true>:
         IF lmbPressed IS <true> AND _stamina MORE 9.0 AND _isUnderWater IS <false>:
             IF _isToolPlaying IS <false> AND _isPickupPlaying IS <false>:
                 IF _isTalking IS <false> AND _isCrafting IS <false>:
-                    fe3d:model_start_animation(animID, toolID, 1)
+                    fe3d:model_start_animation(toolID, animID, 1)
                     DECR _stamina 10.0
 
 /// Tool bobbing animation
-BOOL isBobbing = fe3d:model_is_animation_playing("tool_bobbing", toolID)
+BOOL isBobbing = fe3d:model_is_animation_started(toolID, "tool_bobbing")
 IF equipped IS <true> AND allowed IS <true> AND _isWalking IS <true>:
     IF _isToolPlaying IS <false> AND _isPickupPlaying IS <false>:
         IF _isTalking IS <false> AND _isCrafting IS <false>:
             IF isBobbing IS <false> AND toolID NOT "torch":
-                fe3d:model_start_animation("tool_bobbing", toolID, 1)
+                fe3d:model_start_animation(toolID, "tool_bobbing", 1)
 
 /// Tool bobbing speed
 IF isBobbing IS <true>:
     IF _isRunning IS <true>:
-        fe3d:model_set_animation_speed("tool_bobbing", toolID, 2.0)
+        fe3d:model_set_animation_speed(toolID, "tool_bobbing", 2.0)
     ELSE:
-        fe3d:model_set_animation_speed("tool_bobbing", toolID, 1.0)
+        fe3d:model_set_animation_speed(toolID, "tool_bobbing", 1.0)

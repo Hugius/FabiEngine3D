@@ -1,4 +1,4 @@
-47 12
+15 28
 META script_type_update
 
 /// Update time passing
@@ -14,7 +14,7 @@ ELSE:
         INCR _passedTime 0.1
 
 /// Update day-night cycle
-CONST DEC ambSpeed = 0.00016
+CONST DEC ambSpeed = 0.00015
 CONST DEC dirSpeed = 0.0001225
 CONST DEC skySpeed = 0.00025
 CONST DEC heightSpeed = 0.35

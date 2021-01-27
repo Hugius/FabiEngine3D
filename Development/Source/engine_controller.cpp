@@ -127,6 +127,7 @@ void EngineController::_initializeMiscellaneous()
 		textureFolderPath + "background_front.png" });
 	skyEntity_select("@@engineBackground");
 	skyEntity_setLightness("@@engineBackground", 0.6f);
+	skyEntity_setRotationSpeed("@@engineBackground", 0.002f);
 
 	// Custom cursor texture
 	guiEntity_add("@@cursor", "engine\\textures\\cursor_default.png", Vec2(0.0f), 0.0f, Vec2(0.075f, 0.075f * misc_getAspectRatio()), true);

@@ -20,7 +20,6 @@ public:
 	void setOriginalLightness(float value);
 	void setLightness(float value);
 	void setRotationSpeed(float value);
-	void rotateAllDirections(bool value);
 
 	const array<string, 6>& getDiffuseMapPaths() const;
 	const Matrix44& getRotationMatrix()			 const;
@@ -38,8 +37,6 @@ private:
 	Vec3 _color = Vec3(1.0f);
 
 	GLuint _cubeMap = 0;
-
-	bool _rotateAllDirections = false;
 
 	float _originalLightness = 1.0f;
 	float _lightness		 = 1.0f;

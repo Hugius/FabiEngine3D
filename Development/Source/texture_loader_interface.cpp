@@ -1,4 +1,5 @@
 #include "texture_loader.hpp"
+#include "logger.hpp"
 
 #include <future>
 #include <set>
@@ -41,7 +42,11 @@ void TextureLoader::cacheTexturesMultiThreaded2D(const vector<string>& filePaths
 					finishedThreadCount++;
 
 					// Check image status
-					if (loadedImage != nullptr)
+					if (loadedImage == nullptr)
+					{
+						Logger::throwWarning("Cannot open image: \"" + uniqueFilePaths[i] + "\"");
+					}
+					else
 					{
 						// Load OpenGL texture
 						auto loadedTexture = _convertToTexture2D(uniqueFilePaths[i], loadedImage, true, true, true);
@@ -85,7 +90,14 @@ void TextureLoader::cacheTexturesMultiThreaded3D(const vector<array<string, 6>>&
 		array<SDL_Surface*, 6> loadedImages;
 		for (unsigned int j = 0; j < threads[i].size(); j++)
 		{
+			// Save loaded image
 			loadedImages[j] = threads[i][j].get();
+
+			// Error logging
+			if (loadedImages[j] == nullptr && !filePaths[i][j].empty())
+			{
+				Logger::throwWarning("Cannot open image: \"" + filePaths[i][j] + "\"");
+			}
 		}
 
 		// Load OpenGL texture
@@ -122,6 +134,7 @@ begin:
 		// Check image status
 		if (loadedImage == nullptr)
 		{
+			Logger::throwWarning("Cannot open image: \"" + filePath + "\"");
 			return 0;
 		}
 		else
@@ -170,7 +183,14 @@ begin:
 		// Wait for all threads to finish
 		for (unsigned int i = 0; i < threads.size(); i++)
 		{
+			// Save loaded image
 			loadedImages[i] = threads[i].get();
+
+			// Error logging
+			if (loadedImages[i] == nullptr && !filePaths[i].empty())
+			{
+				Logger::throwWarning("Cannot open image: \"" + filePaths[i] + "\"");
+			}
 		}
 
 		// Load OpenGL texture

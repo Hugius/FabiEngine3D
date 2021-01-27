@@ -101,10 +101,9 @@ void FabiEngine3D::skyEntity_setLightness(const string& ID, float lightness)
 	_core->_skyEntityManager.getEntity(ID)->setOriginalLightness(lightness);
 }
 
-void FabiEngine3D::skyEntity_setRotationSpeed(const string& ID, float speed, bool allDirections)
+void FabiEngine3D::skyEntity_setRotationSpeed(const string& ID, float speed)
 {
 	_core->_skyEntityManager.getEntity(ID)->setRotationSpeed(speed);
-	_core->_skyEntityManager.getEntity(ID)->rotateAllDirections(allDirections);
 }
 
 void FabiEngine3D::skyEntity_setColor(const string& ID, Vec3 color)

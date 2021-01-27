@@ -62,7 +62,6 @@ uniform float u_skyMixValue;
 uniform float u_mainSkyLightness;
 uniform float u_mixSkyLightness;
 
-
 // Boolean uniforms
 uniform bool u_isTransparent;
 uniform bool u_isLightMapped;
@@ -347,7 +346,7 @@ float getShadowValue()
 				for(int y = -1; y <= 1; y++)
 				{
 					float pcfDepth = texture(u_sampler_shadowMap, projCoords.xy + vec2(x, y) * vec2(texelSize)).r; 
-					shadow += (currentDepth - texelSize > pcfDepth) ? 0.35f : 1.0f;        
+					shadow += (currentDepth - texelSize > pcfDepth) ? 0.3f : 1.0f;        
 				}    
 			}
             

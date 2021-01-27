@@ -15,10 +15,6 @@ SDL_Surface* TextureLoader::_loadImage(const string& filePath)
 
 	// Load actual image data
 	SDL_Surface * image = IMG_Load(fullFilePath.c_str());
-	if (image == nullptr)
-	{
-		Logger::throwWarning("Cannot open image: \"" + filePath + "\"");
-	}
 
 	// Return
 	return image;
@@ -108,7 +104,11 @@ GLuint TextureLoader::_convertToTexture3D(const array<string, 6>& filePaths, con
 			}
 
 			// Check if resolution dimensions are the same as all others
-			if (imageSize != -1)
+			if (imageSize == -1)
+			{
+				imageSize = images[i]->w;
+			}
+			else
 			{
 				if (imageSize != images[i]->w)
 				{
@@ -131,11 +131,11 @@ GLuint TextureLoader::_convertToTexture3D(const array<string, 6>& filePaths, con
 		else
 		{
 			// Loaded image
-			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGB, images[i]->w, images[i]->h, 0, GL_RGB, GL_UNSIGNED_BYTE, images[i]->pixels);
-		}
+			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGB, imageSize, imageSize, 0, GL_RGB, GL_UNSIGNED_BYTE, images[i]->pixels);
 
-		// Logging
-		Logger::throwInfo("Loaded 3D texture: \"" + filePaths[i] + "\"");
+			// Logging
+			Logger::throwInfo("Loaded 3D texture part: \"" + filePaths[i] + "\"");
+		}
 	}
 
 	// OpenGL magic

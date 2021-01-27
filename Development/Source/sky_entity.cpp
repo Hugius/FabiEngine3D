@@ -5,18 +5,7 @@ void SkyEntity::updateRotationMatrix()
 	if (_rotationSpeed != 0.0f)
 	{
 		_rotation += _rotationSpeed;
-
-		if (_rotateAllDirections)
-		{
-			_rotationMatrix = Matrix44::createRotation(
-				Math::degreesToRadians(_rotation), 
-				Math::degreesToRadians(_rotation), 
-				Math::degreesToRadians(0.0f));
-		}
-		else
-		{
-			_rotationMatrix = Matrix44::createRotationY(Math::degreesToRadians(_rotation));
-		}
+		_rotationMatrix = Matrix44::createRotationY(Math::degreesToRadians(_rotation));
 	}
 }
 
@@ -48,11 +37,6 @@ void SkyEntity::setLightness(float value)
 void SkyEntity::setRotationSpeed(float value)
 {
 	_rotationSpeed = value;
-}
-
-void SkyEntity::rotateAllDirections(bool value)
-{
-	_rotateAllDirections = value;
 }
 
 const array<string, 6>& SkyEntity::getDiffuseMapPaths() const

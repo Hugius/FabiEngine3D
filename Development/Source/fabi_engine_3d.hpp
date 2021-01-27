@@ -103,7 +103,7 @@ public:
 	void skyEntity_setDiffuseMapFront(const string& ID, const string& texturePath);
 	void skyEntity_setDiffuseMapBack(const string& ID, const string& texturePath);
 	void skyEntity_setLightness(const string& ID, float lightness);
-	void skyEntity_setRotationSpeed(const string& ID, float speed, bool allDirections = false);
+	void skyEntity_setRotationSpeed(const string& ID, float speed);
 	void skyEntity_setColor(const string& ID, Vec3 color);
 	void skyEntity_mixWithSelected(const string& ID);
 	void skyEntity_setMixValue(float mixValue);

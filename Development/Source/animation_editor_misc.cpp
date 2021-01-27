@@ -52,7 +52,7 @@ void AnimationEditor::_updateMiscellaneous()
 			auto currentAnimation = _getAnimation(_currentAnimationID);
 
 			// Check if animation is not currently playing
-			if (!isAnimationPlaying(_currentAnimationID, currentAnimation->previewModelID))
+			if (!isAnimationStarted(_currentAnimationID, currentAnimation->previewModelID))
 			{
 				// Check if animation has a preview model
 				if (!currentAnimation->previewModelID.empty())

@@ -18,11 +18,6 @@ EngineController::EngineController() :
 	}
 }
 
-EngineController::~EngineController()
-{
-
-}
-
 void EngineController::FE3D_CONTROLLER_INIT()
 {
 	if (engine_getSelectedGame().empty()) // Engine preview
@@ -124,15 +119,14 @@ void EngineController::_initializeMiscellaneous()
 	string textureFolderPath = "engine\\textures\\";
 	skyEntity_add("@@engineBackground");
 	skyEntity_setDiffuseMaps("@@engineBackground", {
-		textureFolderPath + "default_right.png",
-		textureFolderPath + "default_left.png",
-		textureFolderPath + "default_top.png",
-		textureFolderPath + "default_bottom.png",
-		textureFolderPath + "default_front.png",
-		textureFolderPath + "default_back.png" });
+		textureFolderPath + "background_right.png",
+		textureFolderPath + "background_left.png",
+		textureFolderPath + "background_top.png",
+		textureFolderPath + "background_bottom.png",
+		textureFolderPath + "background_back.png",
+		textureFolderPath + "background_front.png" });
 	skyEntity_select("@@engineBackground");
 	skyEntity_setLightness("@@engineBackground", 0.6f);
-	skyEntity_setRotationSpeed("@@engineBackground", 0.005f, true);
 
 	// Custom cursor texture
 	guiEntity_add("@@cursor", "engine\\textures\\cursor_default.png", Vec2(0.0f), 0.0f, Vec2(0.075f, 0.075f * misc_getAspectRatio()), true);

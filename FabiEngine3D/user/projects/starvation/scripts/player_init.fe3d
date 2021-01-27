@@ -1,4 +1,4 @@
-33 36
+7 30
 META script_type_init
 
 /// Globals
@@ -6,6 +6,7 @@ GLOB BOOL _isJumping = <false>
 GLOB BOOL _isFalling = <false>
 GLOB BOOL _isWalking = <false>
 GLOB BOOL _isRunning = <false>
+GLOB BOOL _isFishing = <false>
 GLOB BOOL _mayJump = <false>
 GLOB CONST DEC _playerHeight = 2.75
 GLOB VEC3 _movingAcc = [0.0 0.0 0.0]

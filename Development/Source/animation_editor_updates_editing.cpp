@@ -17,7 +17,7 @@ void AnimationEditor::_updateEditingScreen()
 				if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused())) // Back button
 				{
 					// Stop animation if playing
-					if (isAnimationPlaying(_currentAnimationID, currentAnimation->previewModelID))
+					if (isAnimationStarted(_currentAnimationID, currentAnimation->previewModelID))
 					{
 						stopAnimation(_currentAnimationID, currentAnimation->previewModelID);
 					}
@@ -148,7 +148,7 @@ void AnimationEditor::_updateEditingScreen()
 				else if (screen->getButton("editFrame")->isHovered())
 				{
 					// First stop animation
-					if (isAnimationPlaying(_currentAnimationID, currentAnimation->previewModelID))
+					if (isAnimationStarted(_currentAnimationID, currentAnimation->previewModelID))
 					{
 						stopAnimation(_currentAnimationID, currentAnimation->previewModelID);
 					}
@@ -177,7 +177,7 @@ void AnimationEditor::_updateEditingScreen()
 			}
 
 			// Button hoverabilities
-			bool isPlaying = (_isAnimationExisting(_currentAnimationID) && isAnimationPlaying(_currentAnimationID, currentAnimation->previewModelID));
+			bool isPlaying = (_isAnimationExisting(_currentAnimationID) && isAnimationStarted(_currentAnimationID, currentAnimation->previewModelID));
 			bool hasPreviewModel = !currentAnimation->previewModelID.empty();
 			screen->getButton("preview")->setHoverable(!isPlaying);
 			screen->getButton("play")->setHoverable(!isPlaying && hasPreviewModel && currentAnimation->frames.size() > 1);

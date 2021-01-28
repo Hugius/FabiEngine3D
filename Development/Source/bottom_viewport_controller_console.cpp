@@ -2,16 +2,18 @@
 
 void BottomViewportController::_updateConsoleScrolling()
 {
+	// Temporary values
+	const auto window = _gui.getViewport("bottom")->getWindow("console");
+	const float scrollValue = static_cast<float>(_fe3d.input_getMouseWheelY()) * static_cast<float>(window->isHovered());
+
 	// No scrolling for empty console
-	if (!_consoleMessageStack.empty())
+	if (!_consoleMessageStack.empty() && (scrollValue != 0.0f || fabsf(_scrollingAcceleration) > 0.000001f))
 	{
-		// Handy values
-		auto window = _gui.getViewport("bottom")->getWindow("console");
-		auto screen = window->getScreen("main");
-		float minY = window->getOriginalPosition().y - (window->getOriginalSize().y / 2.0f);
-		float maxY = window->getOriginalPosition().y + (window->getOriginalSize().y / 2.0f);
-		float oldestMessage = _fe3d.textEntity_getPosition(screen->getTextfield(_consoleMessageStack[0].first + "_time")->getEntityID()).y + _charSize.y;
-		float scrollValue = static_cast<float>(_fe3d.input_getMouseWheelY()) * static_cast<float>(window->isHovered());
+		// Temporary values
+		const auto screen = window->getScreen("main");
+		const float minY = window->getOriginalPosition().y - (window->getOriginalSize().y / 2.0f);
+		const float maxY = window->getOriginalPosition().y + (window->getOriginalSize().y / 2.0f);
+		const float oldestMessage = _fe3d.textEntity_getPosition(screen->getTextfield(_consoleMessageStack[0].first + "_time")->getEntityID()).y + _charSize.y;
 
 		// Calculate message part count for latest message Y
 		const string latestMessageID = _consoleMessageStack.back().first;
@@ -24,7 +26,7 @@ void BottomViewportController::_updateConsoleScrolling()
 		{
 			// If a message is too long for 1 line, count all the text lines
 			int count = 0;
-			while (screen->getTextfield(ID + "_msg_" + to_string(count)) != nullptr) 
+			while (screen->getTextfield(ID + "_msg_" + to_string(count)) != nullptr)
 			{
 				count++;
 			}

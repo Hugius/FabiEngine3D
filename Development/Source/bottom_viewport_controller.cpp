@@ -243,7 +243,7 @@ void BottomViewportController::update()
 		_fe3d.textEntity_setTextContent(textID, text, _charSize.x, _charSize.y);
 	}
 
-	// Update update profiling
+	// Update update-profiling
 	if (_fe3d.misc_checkInterval("updateProfiling", 50))
 	{
 		auto updateStatistics = _fe3d.misc_getUpdateProfilingStatistics();
@@ -254,7 +254,7 @@ void BottomViewportController::update()
 		}
 	}
 
-	// Update render profiling
+	// Update render-profiling
 	if (_fe3d.misc_checkInterval("renderProfiling", 50))
 	{
 		auto renderStatistics = _fe3d.misc_getRenderProfilingStatistics();

@@ -186,6 +186,7 @@ void RenderEngine::renderScene(EntityBus * entityBus, CameraManager& camera)
 		_timer.stop();
 
 		// Render GUI entities
+		_renderBus.setTriangleCountingEnabled(true);
 		_timer.start("guiEntityRender");
 		_renderGuiEntities();
 		_timer.stop();
@@ -197,6 +198,7 @@ void RenderEngine::renderScene(EntityBus * entityBus, CameraManager& camera)
 
 		// Render custom cursor entity
 		_renderCustomCursor();
+		_renderBus.setTriangleCountingEnabled(false);
 
 		// Update reflection priorities
 		_renderBus.setSceneReflectionsEnabled(sceneReflectionsEnabled);

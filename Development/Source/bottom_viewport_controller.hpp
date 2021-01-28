@@ -36,5 +36,5 @@ private:
 
 	float _scrollingAcceleration = 0.0f;
 
-	unsigned int _maxConsoleMessages = 50;
+	const unsigned int _maxConsoleMessages = 1000;
 };

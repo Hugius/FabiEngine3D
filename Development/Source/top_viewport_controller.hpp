@@ -25,6 +25,8 @@ public:
 
 	bool isScriptRunning();
 
+	const string& getCurrentProjectName();
+
 	static inline const Vec3 frameColor = Vec3(0.25f);
 	static inline const Vec3 buttonColor = Vec3(0.0f, 0.25f, 0.0f);
 	static inline const Vec3 buttonHoverColor = Vec3(0.0f, 0.5f, 0.0f);

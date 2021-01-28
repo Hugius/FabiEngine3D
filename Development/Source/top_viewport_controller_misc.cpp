@@ -17,6 +17,11 @@ bool TopViewportController::isScriptRunning()
 	}
 }
 
+const string& TopViewportController::getCurrentProjectName()
+{
+	return _currentProjectName;
+}
+
 void TopViewportController::_updateMiscellaneous()
 {
 	bool hoverable = (_currentProjectName == "") ? false : !SCRIPT_EXECUTOR.isInitialized();

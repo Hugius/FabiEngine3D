@@ -1,34 +1,5 @@
-33 56
+45 27
 META script_type_update
-
-/// Update workbench hover
-fe3d:text_set_visible("craft", <false>)
-BOOL isHovered = <false>
-STR hoveredID = fe3d:raycast_into_model("workbench", "", <true>)
-VEC3 camPos = fe3d:camera_get_position()
-IF hoveredID NOT "":
-    VEC3 workbenchPos = fe3d:model_get_position(hoveredID)
-    DEC distance = math:distance(workbenchPos, camPos)
-    IF distance LESS _maxWorkbenchReach AND _isCrafting IS <false>:
-        EDIT isHovered = <true>
-        fe3d:text_set_visible("craft", <true>)
-
-/// Update crafting menu - open & close
-BOOL cPressed = fe3d:input_is_key_pressed("KEY_C")
-IF cPressed IS <true> AND isHovered IS <true> AND _isCrafting IS <false>:
-    EDIT _isCrafting = <true>
-    fe3d:cursor_show()
-    fe3d:model_set_visible(_craftables[_craftIndex], <true>)
-    fe3d:text_set_visible(_craftables[_craftIndex], <true>)
-    fe3d:billboard_set_visible("craft_confirm", <true>)
-    fe3d:billboard_set_visible("craft_cancel", <true>)
-ELIF cPressed IS <true> AND _isCrafting IS <true>:
-    EDIT _isCrafting = <false>
-    fe3d:cursor_hide()
-    fe3d:model_set_visible(_craftables[_craftIndex], <false>)
-    fe3d:text_set_visible(_craftables[_craftIndex], <false>)
-    fe3d:billboard_set_visible("craft_confirm", <false>)
-    fe3d:billboard_set_visible("craft_cancel", <false>)
 
 /// Prepare crafting process
 BOOL lmbPressed = fe3d:input_is_mouse_pressed("BUTTON_LEFT")
@@ -46,7 +17,7 @@ IF _isCrafting IS <true> AND confirmed IS <true>:
     DECR wp 1
     DECR sp 1
     DECR ip 1
-    EDIT confirmed = (_bag[0] MORE wp AND _bag[1] MORE sp AND _bag[4] MORE ip)
+    EDIT confirmed = (_bag[0] MORE wp AND _bag[1] MORE sp AND _bag[7] MORE ip)
 
 /// Buttons hovering
 IF confirmed IS <true> AND _isCrafting IS <true>:
@@ -73,12 +44,18 @@ IF _isCrafting IS <true>:
         IF existing IS <false>:
             fe3d:model_place(itemName, itemName, 0.0, 0.0, 0.0)
             fe3d:model_set_aabb_responsive(itemName, <false>)
-        INT index = _craftablesIndex[_craftIndex]
-        EDIT _inventory[index] = itemName
-        EDIT _equipIndex = index
+        EDIT _equipIndex = _craftablesIndex[_craftIndex]
+        EDIT _inventory[_equipIndex] = itemName
         DECR _bag[0] _craftablesWoodPrice[_craftIndex]
         DECR _bag[1] _craftablesStonePrice[_craftIndex]
-        DECR _bag[4] _craftablesIronPrice[_craftIndex]
+        DECR _bag[7] _craftablesIronPrice[_craftIndex]
+        /// Iron tools have much longer durability
+        INT i = _craftIndex
+        IF i IS 1 OR i IS 3 OR i IS 5 OR i IS 7 OR i IS 8 OR i IS 9 OR i IS 11:
+            EDIT _durabilities[_equipIndex] = 100.0
+            fe3d:print("wtf")
+        ELSE:
+            EDIT _durabilities[_equipIndex] = 1.0
     ELIF cancelled IS <true> AND lmbPressed IS <true>:
         EDIT _isCrafting = <false>
         fe3d:cursor_hide()

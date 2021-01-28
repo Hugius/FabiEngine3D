@@ -1,9 +1,9 @@
-20 47
+7 0
 META script_type_init
 
 /// Globals
-GLOB LIST _bag = {3, 3, 3, 10, 0, 0, 0, 0, 0, 0}
-GLOB LIST _bagWeights = {5.0, 2.0, 0.5, 0.1, 0.25, 0.75, 1.0, 3.0, 0.2, 0.1}
+GLOB LIST _bag = {3, 3, 3, 10, 0, 0, 0, 5, 0}
+GLOB LIST _bagWeights = {5.0, 2.0, 0.5, 0.1, 0.25, 0.75, 1.0, 3.0, 0.2}
 GLOB DEC _totalBagWeight = 0.0
 GLOB CONST DEC _maxBagWeight = 30.0
 
@@ -19,7 +19,6 @@ fe3d:image_place("fish", "fish.png", 0.96, 0.15, 0.0, 0.07, 0.09)
 fe3d:image_place("meat", "meat.png", 0.96, 0.05, 0.0, 0.07, 0.09)
 fe3d:image_place("iron", "iron.png", 0.96, -0.05, 0.0, 0.07, 0.09)
 fe3d:image_place("coin", "coin.png", 0.96, -0.15, 0.0, 0.07, 0.09)
-fe3d:image_place("wool", "wool.png", 0.96, -0.25, 0.0, 0.07, 0.09)
 
 /// Bag text
 fe3d:text_place("bag_weight", "font.ttf", "22.0", 0.92, 0.92, 0.0, 0.09, 0.05)
@@ -32,4 +31,3 @@ fe3d:text_place("fish_count", "font.ttf", "0", 0.89, 0.15, 0.0, 0.045, 0.05)
 fe3d:text_place("meat_count", "font.ttf", "0", 0.89, 0.05, 0.0, 0.045, 0.05)
 fe3d:text_place("iron_count", "font.ttf", "0", 0.89, -0.05, 0.0, 0.045, 0.05)
 fe3d:text_place("coin_count", "font.ttf", "0", 0.89, -0.15, 0.0, 0.045, 0.05)
-fe3d:text_place("wool_count", "font.ttf", "0", 0.89, -0.25, 0.0, 0.045, 0.05)

@@ -1,4 +1,4 @@
-45 42
+31 44
 META script_type_update
 
 /// Update stone hover
@@ -30,6 +30,7 @@ IF _wasPickaxePlaying IS <true> AND _isPickaxePlaying IS <false>:
         VEC3 sPos = stonePos
         INCR sPos.y 5.0
         fe3d:model_place(stonesID, "stones", sPos.x, sPos.y, sPos.z)
+        DECR _durabilities[1] _durabilityHit
 
 /// Stones falling updates
 IF _fallingStonesID NOT "":

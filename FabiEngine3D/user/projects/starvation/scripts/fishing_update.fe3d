@@ -1,4 +1,4 @@
-20 50
+21 52
 META script_type_update
 
 /// Check if throwing is finished
@@ -20,7 +20,8 @@ IF _isFishing IS <true>:
     VEC3 terrainPos = fe3d:terrain_get_cursor_position()
     VEC3 camPos = fe3d:camera_get_position()
     IF terrainPos.y LESS 4.0 AND camPos.y LESS 8.0 AND playing IS <false>:
-        INT randomInt = misc:get_random_integer(0, 1000)
+        INT randomInt = misc:get_random_integer(0, 2000)
         IF randomInt IS 0:
             fe3d:model_resume_animation("fishrod", "fishrod_throw")
             INCR _bag[5] 1
+            DECR _durabilities[8] _durabilityHit

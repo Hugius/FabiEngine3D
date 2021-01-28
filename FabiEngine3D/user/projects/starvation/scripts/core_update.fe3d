@@ -1,4 +1,4 @@
-32 0
+35 18
 META script_type_update
 META execution_entry
 
@@ -7,6 +7,7 @@ EXEC bag_update
 
 /// Tools inventory
 EXEC inventory_equipping
+EXEC inventory_durability
 EXEC inventory_misc
 
 /// Player
@@ -32,7 +33,8 @@ EXEC npc_update
 
 /// Other
 EXEC pickup_update
-EXEC crafting_update
+EXEC crafting_process
+EXEC crafting_misc
 EXEC underwater_update
 EXEC time_update
 EXEC misc_update

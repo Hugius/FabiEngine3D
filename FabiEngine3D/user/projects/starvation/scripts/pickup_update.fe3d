@@ -1,4 +1,4 @@
-3 68
+47 39
 META script_type_update
 
 /// Compose pickuppable items
@@ -46,4 +46,5 @@ IF pickaxe IS <true> OR axe IS <true>:
             fe3d:model_place(itemName, itemName, 0.0, 0.0, 0.0)
             fe3d:model_set_aabb_responsive(itemName, <false>)
         EDIT _inventory[index] = itemName
+        EDIT _durabilities[index] = 1.0
         EDIT _equipIndex = index

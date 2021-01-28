@@ -24,7 +24,7 @@ void SceneEditor::_updateBillboardPlacing()
 					if (_fe3d.terrainEntity_isValidMousePoint())
 					{
 						Vec2 size = _fe3d.billboardEntity_getSize(_currentPreviewBillboardName);
-						newPosition = _fe3d.terrainEntity_getMousePoint() + Vec3(0.0f, size.y / 2.0f, 0.0f);
+						newPosition = _fe3d.terrainEntity_getCursorPosition3D() + Vec3(0.0f, size.y / 2.0f, 0.0f);
 						_fe3d.billboardEntity_setPosition(_currentPreviewBillboardName, newPosition);
 					}
 				}

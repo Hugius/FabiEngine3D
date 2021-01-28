@@ -375,6 +375,7 @@
     <ClCompile Include="Source\script_interpreter_func_fe3d_image.cpp" />
     <ClCompile Include="Source\script_interpreter_func_fe3d_light.cpp" />
     <ClCompile Include="Source\script_interpreter_func_fe3d_sky.cpp" />
+    <ClCompile Include="Source\script_interpreter_func_fe3d_terrain.cpp" />
     <ClCompile Include="Source\script_interpreter_func_fe3d_text.cpp" />
     <ClCompile Include="Source\script_interpreter_func_fe3d_water.cpp" />
     <ClCompile Include="Source\script_interpreter_func_fe3d_graphics.cpp" />

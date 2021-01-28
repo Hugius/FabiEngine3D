@@ -1,4 +1,4 @@
-10 77
+20 50
 META script_type_update
 
 /// Check if throwing is finished
@@ -13,3 +13,14 @@ IF _isFishrodPlaying IS <true>:
         fe3d:model_resume_animation("fishrod", "fishrod_throw")
 ELSE:
     EDIT _isFishing = <false>
+
+/// Update fish catching process
+IF _isFishing IS <true>:
+    BOOL playing = fe3d:model_is_animation_playing("fishrod", "fishrod_throw")
+    VEC3 terrainPos = fe3d:terrain_get_cursor_position()
+    VEC3 camPos = fe3d:camera_get_position()
+    IF terrainPos.y LESS 4.0 AND camPos.y LESS 8.0 AND playing IS <false>:
+        INT randomInt = misc:get_random_integer(0, 1000)
+        IF randomInt IS 0:
+            fe3d:model_resume_animation("fishrod", "fishrod_throw")
+            INCR _bag[5] 1

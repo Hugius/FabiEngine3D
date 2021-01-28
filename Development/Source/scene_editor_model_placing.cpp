@@ -23,7 +23,7 @@ void SceneEditor::_updateModelPlacing()
 					// Update preview model position
 					if (_fe3d.terrainEntity_isValidMousePoint())
 					{
-						newPosition = _fe3d.terrainEntity_getMousePoint();
+						newPosition = _fe3d.terrainEntity_getCursorPosition3D();
 
 						// Instnaced entity has different positioning
 						if (_fe3d.gameEntity_isInstanced(_currentPreviewModelName))

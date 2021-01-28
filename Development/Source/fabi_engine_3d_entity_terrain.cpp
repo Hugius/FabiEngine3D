@@ -109,7 +109,7 @@ bool FabiEngine3D::terrainEntity_isInside(const string& ID, float x, float z)
 	return _core->_terrainEntityManager.isInside(ID, x, z);
 }
 
-Vec3 FabiEngine3D::terrainEntity_getMousePoint()
+Vec3 FabiEngine3D::terrainEntity_getCursorPosition3D()
 {
 	return _core->_mousePicker.getTerrainPoint();
 }

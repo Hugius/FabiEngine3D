@@ -185,7 +185,7 @@ public:
 	float terrainEntity_getPixelHeight(const string& ID, float x, float z);
 	float terrainEntity_getSpecularLightingFactor(const string& ID);
 	float terrainEntity_getSpecularLightingIntensity(const string& ID);
-	Vec3 terrainEntity_getMousePoint();
+	Vec3 terrainEntity_getCursorPosition3D();
 
 	// Water entity interface - setters
 	void waterEntity_add(const string& ID);

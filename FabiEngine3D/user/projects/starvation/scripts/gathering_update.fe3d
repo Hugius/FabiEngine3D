@@ -1,4 +1,4 @@
-8 19
+17 36
 META script_type_update
 
 /// Check if player is looking at a plant
@@ -16,12 +16,6 @@ IF hoveredID NOT "" AND _wasPickupPlaying IS <true> AND _isPickupPlaying IS <fal
     VEC3 camPos = fe3d:camera_get_position()
     VEC3 plantPos = fe3d:model_get_position(hoveredID)
     DEC distance = math:distance(plantPos, camPos)
-    DEC newWeight = _totalBagWeight
-    DEC seedsWeight = _bagWeights[3]
-    CAST seedAmount DEC
-    MUL seedsWeight seedAmount
-    CAST seedAmount INT
-    INCR newWeight seedsWeight
-    IF distance LESS _maxPickupReach AND newWeight LESS _maxBagWeight:
+    IF distance LESS _maxPickupReach:
         fe3d:model_delete(hoveredID)
         INCR _bag[3] seedAmount

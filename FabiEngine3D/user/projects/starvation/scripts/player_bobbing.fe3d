@@ -1,10 +1,14 @@
-21 12
+9 16
 META script_type_update
 
 /// Bobbing speed
 DEC bobbingSpeed = 0.0
 IF _isWalking IS <true>:
     EDIT bobbingSpeed = 0.035
+IF _totalBagWeight MORE _maxBagWeight:
+    DEC weightFactor = _maxBagWeight
+    DIV weightFactor _totalBagWeight
+    MUL bobbingSpeed weightFactor
 IF _isRunning IS <true>:
     MUL bobbingSpeed 2.5
 IF _isUnderWater IS <true>:

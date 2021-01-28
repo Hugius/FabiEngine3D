@@ -131,9 +131,9 @@ void BottomViewportController::update()
 	{
 		string textID = _statsScreen->getTextfield("cursorPosition")->getEntityID();
 		string text = "Raycast position: " +
-			to_string(static_cast<int>(_fe3d.terrainEntity_getMousePoint().x)) + " " +
-			to_string(static_cast<int>(_fe3d.terrainEntity_getMousePoint().y)) + " " +
-			to_string(static_cast<int>(_fe3d.terrainEntity_getMousePoint().z));
+			to_string(static_cast<int>(_fe3d.terrainEntity_getCursorPosition3D().x)) + " " +
+			to_string(static_cast<int>(_fe3d.terrainEntity_getCursorPosition3D().y)) + " " +
+			to_string(static_cast<int>(_fe3d.terrainEntity_getCursorPosition3D().z));
 		_fe3d.textEntity_setTextContent(textID, text, _charSize.x, _charSize.y);
 	}
 

@@ -18,7 +18,7 @@ void SceneEditor::_updateLightPlacing()
 				if (_fe3d.terrainEntity_getSelectedID() != "")
 				{
 					// Update preview pointlight position
-					newPosition = _fe3d.terrainEntity_getMousePoint() + Vec3(0.0f, 1.0f, 0.0f);
+					newPosition = _fe3d.terrainEntity_getCursorPosition3D() + Vec3(0.0f, 1.0f, 0.0f);
 
 					// Show preview pointlight
 					_fe3d.lightEntity_show(_previewPointlightID);

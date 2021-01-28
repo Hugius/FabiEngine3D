@@ -1,4 +1,4 @@
-33 19
+7 27
 META script_type_update
 
 /// Skeleton position & rotation
@@ -20,13 +20,17 @@ ELIF _isPickupPlaying IS <false>:
         fe3d:model_start_animation("player", "walk", -1)
     ELIF _isWalking IS <false> AND isWalking IS <true>:
         fe3d:model_fade_animation("player", "walk", 1)
-    /// Update running animation
+    /// Update walking speed
     IF isWalking IS <true>:
         DEC speed = 1.0
+        IF _totalBagWeight MORE _maxBagWeight:
+            DEC weightFactor = _maxBagWeight
+            DIV weightFactor _totalBagWeight
+            MUL speed weightFactor
         IF _isUnderWater IS <true>:
-            EDIT speed = 0.5
-        ELIF _isRunning IS <true>:
-            EDIT speed = 2.0
+            MUL speed 0.5
+        IF _isRunning IS <true>:
+            MUL speed 2.0
         fe3d:model_set_animation_speed("player", "walk", speed)
 
 /// Pickup animation

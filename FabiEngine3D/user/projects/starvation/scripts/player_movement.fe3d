@@ -1,4 +1,4 @@
-28 29
+27 24
 META script_type_update
 
 /// Temporary values
@@ -12,6 +12,13 @@ DEC accSpeed = 0.0001
 DEC minSpeed = -0.0025
 DEC maxSpeed = 0.0025
 
+/// Movement must be slowed when carrying too much
+IF _totalBagWeight MORE _maxBagWeight:
+    DEC weightFactor = _maxBagWeight
+    DIV weightFactor _totalBagWeight
+    MUL minSpeed weightFactor
+    MUL maxSpeed weightFactor
+
 /// Movement must be slowed if underwater
 IF _isUnderWater IS <true>:
     MUL minSpeed 0.5
@@ -19,7 +26,7 @@ IF _isUnderWater IS <true>:
 
 /// Determine max movement speed
 IF shift IS <true> AND up IS <true>:
-    IF _stamina MORE 0.0 AND _isUnderWater IS <false>:
+    IF _stamina MORE 0.0:
         MUL minSpeed 2.0
         MUL maxSpeed 2.0
         EDIT _isRunning = <true>

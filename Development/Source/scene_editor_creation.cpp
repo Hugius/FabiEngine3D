@@ -261,7 +261,7 @@ void SceneEditor::placeModel(const string& newID, const string& previewID, Vec3 
 		else
 		{
 			// Create new GAME entity
-			_fe3d.gameEntity_add(newEntityID, _fe3d.gameEntity_getObjPath(previewID), Vec3(0.0f), Vec3(0.0f), _fe3d.gameEntity_getSize(previewID));
+			_fe3d.gameEntity_add(newEntityID, _fe3d.gameEntity_getMeshPath(previewID), Vec3(0.0f), Vec3(0.0f), _fe3d.gameEntity_getSize(previewID));
 
 			// Fill GAME entity
 			_fe3d.gameEntity_setFaceCulled(newEntityID, _fe3d.gameEntity_isFaceCulled(previewID));
@@ -316,7 +316,7 @@ void SceneEditor::placeModel(const string& newID, const string& previewID, Vec3 
 	else // Normal entity
 	{
 		// Add GAME entity
-		_fe3d.gameEntity_add(newEntityID, _fe3d.gameEntity_getObjPath(previewID), position, Vec3(0.0f), _fe3d.gameEntity_getSize(previewID));
+		_fe3d.gameEntity_add(newEntityID, _fe3d.gameEntity_getMeshPath(previewID), position, Vec3(0.0f), _fe3d.gameEntity_getSize(previewID));
 
 		// Bind AABB entities to GAME entity
 		for (auto& previewAabbID : _fe3d.aabbEntity_getBoundIDs(previewID, true, false))
@@ -378,7 +378,7 @@ void SceneEditor::placeModel(const string& newID, const string& previewID, Vec3 
 }
 
 void SceneEditor::_placeModel(bool scriptExecution, const string& modelName, const string& modelNumber, Vec3 position, Vec3 rotation, Vec3 size,
-	const string& objPath, const string& diffuseMapPath, const string& lightMapPath, const string& reflectionMapPath, const string& normalMapPath, 
+	const string& meshPath, const string& diffuseMapPath, const string& lightMapPath, const string& reflectionMapPath, const string& normalMapPath, 
 	bool isFrozen, bool isFaceCulled, bool isShadowed, bool isTransparent, bool isSpecular, int reflectionType, float specularFactor,
 	float specularIntensity, float lightness, Vec3 color, float uvRepeat, const string& lodEntityID, bool isInstanced,
 	vector<Vec3> instancedOffsets, vector<string> aabbNames, vector<Vec3> aabbPositions, vector<Vec3> aabbSizes, string animationID)
@@ -387,7 +387,7 @@ void SceneEditor::_placeModel(bool scriptExecution, const string& modelName, con
 	string newID = scriptExecution ? (modelName + "@" + modelNumber) : (modelNumber + "@" + modelName);
 
 	// Add GAME entity
-	_fe3d.gameEntity_add(newID, objPath, position, rotation, size);
+	_fe3d.gameEntity_add(newID, meshPath, position, rotation, size);
 
 	// Add AABBs
 	for (unsigned int i = 0; i < aabbNames.size(); i++)

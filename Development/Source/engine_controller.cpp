@@ -126,7 +126,6 @@ void EngineController::_initializeMiscellaneous()
 		textureFolderPath + "background_back.png",
 		textureFolderPath + "background_front.png" });
 	skyEntity_select("@@engineBackground");
-	skyEntity_setLightness("@@engineBackground", 0.6f);
 	skyEntity_setRotationSpeed("@@engineBackground", 0.002f);
 
 	// Custom cursor texture
@@ -146,6 +145,7 @@ void EngineController::_updateMiscellaneous()
 		float lastPitch = camera_getPitch();
 		camera_load(90.0f, 0.1f, 10000.0f, Vec3(0.0f), lastYaw, lastPitch);
 		skyEntity_select("@@engineBackground");
+		skyEntity_setLightness("@@engineBackground", 0.6f);
 		misc_setVsync(true);
 	}
 	lastScreen = activeScreen;

@@ -17,11 +17,11 @@ EngineGuiButton::EngineGuiButton(FabiEngine3D& fe3d, const string& parentID, con
 }
 
 EngineGuiButton::EngineGuiButton(FabiEngine3D& fe3d, const string& parentID, const string& ID, Vec2 position, Vec2 size, 
-	const string& textureName, Vec3 hoverColor, bool sizeIncreaseEnabled, bool colorChangeEnabled) :
+	const string& texturePath, Vec3 hoverColor, bool sizeIncreaseEnabled, bool colorChangeEnabled) :
 	_fe3d(fe3d),
 	_ID(ID),
 	_parentID(parentID),
-	_rectangle(make_shared<EngineGuiRectangle>(fe3d, parentID + "_button", ID, position, size, textureName)),
+	_rectangle(make_shared<EngineGuiRectangle>(fe3d, parentID + "_button", ID, position, size, texturePath)),
 	_hoverColor(hoverColor),
 	_sizeIncreaseEnabled(sizeIncreaseEnabled),
 	_colorChangeEnabled(colorChangeEnabled)

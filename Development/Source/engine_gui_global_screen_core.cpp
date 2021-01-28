@@ -47,9 +47,9 @@ void EngineGuiGlobalScreen::addButton(const string& ID, Vec2 position, Vec2 size
 	_buttons.push_back(make_shared<EngineGuiButton>(_fe3d, "globalscreen", ID, position, size, color, hoverColor, textContent, textColor, textHoverColor));
 }
 
-void EngineGuiGlobalScreen::addButton(const string& ID, Vec2 position, Vec2 size, const string& textureName, Vec3 hoverColor)
+void EngineGuiGlobalScreen::addButton(const string& ID, Vec2 position, Vec2 size, const string& texturePath, Vec3 hoverColor)
 {
-	_buttons.push_back(make_shared<EngineGuiButton>(_fe3d, "globalscreen", ID, position, size, textureName, hoverColor));
+	_buttons.push_back(make_shared<EngineGuiButton>(_fe3d, "globalscreen", ID, position, size, texturePath, hoverColor));
 }
 
 void EngineGuiGlobalScreen::addRectangle(const string& ID, Vec2 position, Vec2 size, Vec3 color)
@@ -57,9 +57,9 @@ void EngineGuiGlobalScreen::addRectangle(const string& ID, Vec2 position, Vec2 s
 	_rectangles.push_back(make_shared<EngineGuiRectangle>(_fe3d, "globalscreen", ID, position, size, color));
 }
 
-void EngineGuiGlobalScreen::addRectangle(const string& ID, Vec2 position, Vec2 size, const string& textureName)
+void EngineGuiGlobalScreen::addRectangle(const string& ID, Vec2 position, Vec2 size, const string& texturePath)
 {
-	_rectangles.push_back(make_shared<EngineGuiRectangle>(_fe3d, "globalscreen", ID, position, size, textureName));
+	_rectangles.push_back(make_shared<EngineGuiRectangle>(_fe3d, "globalscreen", ID, position, size, texturePath));
 }
 
 void EngineGuiGlobalScreen::addTextfield(const string& ID, Vec2 position, Vec2 size, string textContent, Vec3 textColor, bool isCentered)

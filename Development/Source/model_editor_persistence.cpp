@@ -22,33 +22,33 @@ const vector<string> ModelEditor::getAllTexturePathsFromFile()
 		// Temporary values
 		std::ifstream file(filePath);
 		string line;
-		vector<string> objPaths;
+		vector<string> meshPaths;
 		vector<string> texturePaths;
 
 		// Read model data
 		while (std::getline(file, line))
 		{
 			// Temporary values
-			string modelID, objPath, diffuseMapPath, lightMapPath, reflectionMapPath, normalMapPath;
+			string modelID, meshPath, diffuseMapPath, lightMapPath, reflectionMapPath, normalMapPath;
 			std::istringstream iss(line);
 
 			// Extract data
-			iss >> modelID >> objPath >> diffuseMapPath >> lightMapPath >> reflectionMapPath >> normalMapPath;
+			iss >> modelID >> meshPath >> diffuseMapPath >> lightMapPath >> reflectionMapPath >> normalMapPath;
 
 			// Perform empty string & space conversions
-			objPath = (objPath == "?") ? "" : objPath;
+			meshPath = (meshPath == "?") ? "" : meshPath;
 			diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
 			lightMapPath = (lightMapPath == "?") ? "" : lightMapPath;
 			reflectionMapPath = (reflectionMapPath == "?") ? "" : reflectionMapPath;
 			normalMapPath = (normalMapPath == "?") ? "" : normalMapPath;
-			std::replace(objPath.begin(), objPath.end(), '?', ' ');
+			std::replace(meshPath.begin(), meshPath.end(), '?', ' ');
 			std::replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
 			std::replace(lightMapPath.begin(), lightMapPath.end(), '?', ' ');
 			std::replace(reflectionMapPath.begin(), reflectionMapPath.end(), '?', ' ');
 			std::replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
 
 			// Save file paths
-			objPaths.push_back(objPath);
+			meshPaths.push_back(meshPath);
 			if (!diffuseMapPath.empty())
 			{
 				texturePaths.push_back(diffuseMapPath);
@@ -70,12 +70,12 @@ const vector<string> ModelEditor::getAllTexturePathsFromFile()
 		// Close file
 		file.close();
 
-		// Cache OBJ files
-		vector<string> objTexturePaths;
-		_fe3d.misc_cacheMeshesMultiThreaded(objPaths, objTexturePaths);
+		// Cache mesh files
+		vector<string> meshTexturePaths;
+		_fe3d.misc_cacheMeshesMultiThreaded(meshPaths, meshTexturePaths);
 
 		// Add to texture paths
-		texturePaths.insert(texturePaths.end(), objTexturePaths.begin(), objTexturePaths.end());
+		texturePaths.insert(texturePaths.end(), meshTexturePaths.begin(), meshTexturePaths.end());
 
 		// Return
 		return texturePaths;
@@ -108,14 +108,14 @@ void ModelEditor::loadGameEntitiesFromFile()
 		// Temporary values
 		std::ifstream file(filePath);
 		string line;
-		vector<string> objPaths;
+		vector<string> meshPaths;
 		vector<string> texturePaths;
 
 		// Read model data
 		while (std::getline(file, line))
 		{
 			// Placeholder variables
-			string modelID, objPath, diffuseMapPath, lightMapPath, reflectionMapPath, normalMapPath, lodEntityID;
+			string modelID, meshPath, diffuseMapPath, lightMapPath, reflectionMapPath, normalMapPath, lodEntityID;
 			float uvRepeat, specularFactor, specularIntensity, lightness;
 			int reflectionType;
 			bool isFaceCulled, isShadowed, isTransparent, isSpecular, isInstanced;
@@ -130,7 +130,7 @@ void ModelEditor::loadGameEntitiesFromFile()
 			// Extract general data from file
 			iss >>
 				modelID >>
-				objPath >>
+				meshPath >>
 				diffuseMapPath >>
 				lightMapPath >>
 				reflectionMapPath >>
@@ -174,13 +174,13 @@ void ModelEditor::loadGameEntitiesFromFile()
 			}
 
 			// Perform empty string & space conversions
-			objPath = (objPath == "?") ? "" : objPath;
+			meshPath = (meshPath == "?") ? "" : meshPath;
 			diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
 			lightMapPath = (lightMapPath == "?") ? "" : lightMapPath;
 			reflectionMapPath = (reflectionMapPath == "?") ? "" : reflectionMapPath;
 			normalMapPath = (normalMapPath == "?") ? "" : normalMapPath;
 			lodEntityID = (lodEntityID == "?") ? "" : lodEntityID;
-			std::replace(objPath.begin(), objPath.end(), '?', ' ');
+			std::replace(meshPath.begin(), meshPath.end(), '?', ' ');
 			std::replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
 			std::replace(lightMapPath.begin(), lightMapPath.end(), '?', ' ');
 			std::replace(reflectionMapPath.begin(), reflectionMapPath.end(), '?', ' ');
@@ -188,7 +188,7 @@ void ModelEditor::loadGameEntitiesFromFile()
 			std::replace(lodEntityID.begin(), lodEntityID.end(), '?', ' ');
 
 			// Add new model
-			_addModel(modelID, objPath, diffuseMapPath, lightMapPath, reflectionMapPath, normalMapPath, modelSize, isFaceCulled, isShadowed,
+			_addModel(modelID, meshPath, diffuseMapPath, lightMapPath, reflectionMapPath, normalMapPath, modelSize, isFaceCulled, isShadowed,
 				isTransparent, isSpecular, reflectionType, specularFactor, specularIntensity, lightness,
 				Vec3(color.r, color.g, color.b), uvRepeat, lodEntityID, isInstanced, aabbNames, aabbPositions, aabbSizes);
 		}
@@ -226,7 +226,7 @@ void ModelEditor::saveGameEntitiesToFile()
 			if (_fe3d.gameEntity_isExisting(modelID))
 			{
 				// General data
-				auto objPath = _fe3d.gameEntity_getObjPath(modelID);
+				auto meshPath = _fe3d.gameEntity_getMeshPath(modelID);
 				auto diffuseMapPath = _fe3d.gameEntity_getDiffuseMapPath(modelID);
 				auto lightMapPath = _fe3d.gameEntity_getLightMapPath(modelID);
 				auto reflectionMapPath = _fe3d.gameEntity_getReflectionMapPath(modelID);
@@ -271,13 +271,13 @@ void ModelEditor::saveGameEntitiesToFile()
 				}
 				
 				// Perform empty string & space conversions
-				objPath = (objPath == "") ? "?" : objPath;
+				meshPath = (meshPath == "") ? "?" : meshPath;
 				diffuseMapPath = (diffuseMapPath == "") ? "?" : diffuseMapPath;
 				lightMapPath = (lightMapPath == "") ? "?" : lightMapPath;
 				reflectionMapPath = (reflectionMapPath == "") ? "?" : reflectionMapPath;
 				normalMapPath = (normalMapPath == "") ? "?" : normalMapPath;
 				lodEntityID = (lodEntityID == "") ? "?" : lodEntityID;
-				std::replace(objPath.begin(), objPath.end(), ' ', '?');
+				std::replace(meshPath.begin(), meshPath.end(), ' ', '?');
 				std::replace(diffuseMapPath.begin(), diffuseMapPath.end(), ' ', '?');
 				std::replace(lightMapPath.begin(), lightMapPath.end(), ' ', '?');
 				std::replace(reflectionMapPath.begin(), reflectionMapPath.end(), ' ', '?');
@@ -289,7 +289,7 @@ void ModelEditor::saveGameEntitiesToFile()
 				// Write general data
 				file <<
 					modelID << " " <<
-					objPath << " " <<
+					meshPath << " " <<
 					diffuseMapPath << " " <<
 					lightMapPath << " " <<
 					reflectionMapPath << " " <<

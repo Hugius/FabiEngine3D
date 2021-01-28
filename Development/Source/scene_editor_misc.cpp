@@ -430,7 +430,7 @@ void SceneEditor::clearScene()
 			else // Editing scene
 			{
 				if (ID[0] != '@' || ((ID != _previewPointlightID) && (ID != _previewSpeakerID) &&
-					(_fe3d.gameEntity_getObjPath(ID) == _lightBulbModelPath) || (_fe3d.gameEntity_getObjPath(ID) == _speakerModelPath)))
+					(_fe3d.gameEntity_getMeshPath(ID) == _lightBulbModelPath) || (_fe3d.gameEntity_getMeshPath(ID) == _speakerModelPath)))
 				{
 					_fe3d.gameEntity_delete(ID);
 				}

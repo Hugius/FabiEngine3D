@@ -12,7 +12,7 @@ EngineGuiRectangle::EngineGuiRectangle(FabiEngine3D& fe3d, const string& parentI
 	_fe3d.guiEntity_add(_entityID, color, position, 0.0f, size, isCentered);
 }
 
-EngineGuiRectangle::EngineGuiRectangle(FabiEngine3D& fe3d, const string& parentID, const string& ID, Vec2 position, Vec2 size, const string& textureName, bool isCentered) :
+EngineGuiRectangle::EngineGuiRectangle(FabiEngine3D& fe3d, const string& parentID, const string& ID, Vec2 position, Vec2 size, const string& texturePath, bool isCentered) :
 	_fe3d(fe3d),
 	_ID(ID),
 	_entityID("@" + parentID + "_" + ID),
@@ -21,7 +21,7 @@ EngineGuiRectangle::EngineGuiRectangle(FabiEngine3D& fe3d, const string& parentI
 	_originalSize(size),
 	_originalColor(Vec3(1.0f))
 {
-	_fe3d.guiEntity_add(_entityID, "engine\\textures\\" + textureName, position, 0.0f, size, isCentered);
+	_fe3d.guiEntity_add(_entityID, "engine\\textures\\" + texturePath, position, 0.0f, size, isCentered);
 }
 
 EngineGuiRectangle::~EngineGuiRectangle()

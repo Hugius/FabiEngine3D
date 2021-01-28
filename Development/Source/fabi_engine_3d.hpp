@@ -100,8 +100,8 @@ public:
 	void skyEntity_setDiffuseMapLeft(const string& ID, const string& texturePath);
 	void skyEntity_setDiffuseMapTop(const string& ID, const string& texturePath);
 	void skyEntity_setDiffuseMapBottom(const string& ID, const string& texturePath);
-	void skyEntity_setDiffuseMapFront(const string& ID, const string& texturePath);
 	void skyEntity_setDiffuseMapBack(const string& ID, const string& texturePath);
+	void skyEntity_setDiffuseMapFront(const string& ID, const string& texturePath);
 	void skyEntity_setLightness(const string& ID, float lightness);
 	void skyEntity_setRotationSpeed(const string& ID, float speed);
 	void skyEntity_setColor(const string& ID, Vec3 color);
@@ -238,7 +238,7 @@ public:
 	// Game entity interface - setters
 	void gameEntity_add
 	(
-		const string& ID, const string& objPath,
+		const string& ID, const string& meshPath,
 		Vec3 position, Vec3 rotation, Vec3 size, bool visible = true
 	);
 	void		   gameEntity_deleteAll();
@@ -248,7 +248,7 @@ public:
 	void		   gameEntity_showAll();
 	void		   gameEntity_hide(const string& ID);
 	void		   gameEntity_show(const string& ID);
-	void		   gameEntity_loadModel(const string& ID, const string& objPath);
+	void		   gameEntity_loadModel(const string& ID, const string& meshPath);
 	void		   gameEntity_setDiffuseMap(const string& ID, const string& texturePath);
 	void		   gameEntity_setLightMap(const string& ID, const string& texturePath);
 	void		   gameEntity_setNormalMap(const string& ID, const string& texturePath);
@@ -313,7 +313,7 @@ public:
 	Vec3		   gameEntity_getRotationOrigin(const string& ID, const string& partName = "");
 	Vec3		   gameEntity_getSize(const string& ID, const string& partName = "");
 	Vec3		   gameEntity_getColor(const string& ID, const string& partName = "");
-	string		   gameEntity_getObjPath(const string& ID);
+	string		   gameEntity_getMeshPath(const string& ID);
 	string		   gameEntity_getDiffuseMapPath(const string& ID);
 	string		   gameEntity_getLightMapPath(const string& ID);
 	string		   gameEntity_getNormalMapPath(const string& ID);

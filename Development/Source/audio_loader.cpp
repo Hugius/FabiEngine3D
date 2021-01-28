@@ -26,6 +26,7 @@ void AudioLoader::cacheChunksMultiThreaded(const vector<string>& filePaths)
 {
 	// Temporary values
 	vector<std::future<char*>> threads;
+	vector<bool> chunkStatuses;
 
 	// Remove duplicates
 	auto tempFilePaths = std::set<string>(filePaths.begin(), filePaths.end());
@@ -34,26 +35,39 @@ void AudioLoader::cacheChunksMultiThreaded(const vector<string>& filePaths)
 	// Start all loading threads
 	for (const auto& filePath : uniqueFilePaths)
 	{
-		threads.push_back(std::async(std::launch::async, &AudioLoader::_loadWaveFile, this, filePath));
+		// Check if chunk is not already cached
+		if (_chunkCache.find(filePath) == _chunkCache.end())
+		{
+			threads.push_back(std::async(std::launch::async, &AudioLoader::_loadWaveFile, this, filePath));
+			chunkStatuses.push_back(false);
+		}
+		else
+		{
+			chunkStatuses.push_back(true);
+		}
 	}
 
 	// Wait for all threads to finish
 	for (unsigned int i = 0; i < threads.size(); i++)
 	{
-		// Retrieve raw WAV data
-		auto data = threads[i].get();
-
-		// Load chunk file
-		auto chunk = _loadChunk(uniqueFilePaths[i], (unsigned char*)data);
-
-		// Check if audio loading went well
-		if (chunk != nullptr)
+		// Check if chunk is not processed yet
+		if (!chunkStatuses[i])
 		{
-			// Logging
-			_throwLog(uniqueFilePaths[i]);
+			// Retrieve raw WAV data
+			auto data = threads[i].get();
 
-			// Cache model
-			_chunkCache[uniqueFilePaths[i]] = chunk;
+			// Load chunk file
+			auto chunk = _loadChunk(uniqueFilePaths[i], (unsigned char*)data);
+
+			// Check if audio loading went well
+			if (chunk != nullptr)
+			{
+				// Logging
+				_throwLog(uniqueFilePaths[i]);
+
+				// Cache model
+				_chunkCache[uniqueFilePaths[i]] = chunk;
+			}
 		}
 	}
 }
@@ -123,7 +137,7 @@ begin:
 	}
 	else
 	{
-		return iterator->second; // Return the corresponding OBJ parts
+		return iterator->second; // Return the corresponding mesh parts
 	}
 }
 

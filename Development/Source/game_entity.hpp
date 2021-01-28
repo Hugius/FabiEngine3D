@@ -30,7 +30,7 @@ public:
 	void rotate(Vec3 value, const string& partName = "");
 	void scale(Vec3 value, const string& partName = "");
 	void setColor(Vec3 value, const string& partName = "");
-	void setObjPath(const string& value);
+	void setMeshPath(const string& value);
 	void setDiffuseMapPath(const string& value);
 	void setLightMapPath(const string& value);
 	void setReflectionMapPath(const string& value);
@@ -79,7 +79,7 @@ public:
 	const Vec3 getRotationOrigin(const string& partName = "");
 	const Vec3 getScaling(const string& partName = "");
 	const Vec3 getColor(const string& partName = "");
-	const string& getObjPath() const;
+	const string& getMeshPath() const;
 	const string& getDiffuseMapPath() const;
 	const string& getLightMapPath() const;
 	const string& getReflectionMapPath() const;
@@ -134,7 +134,7 @@ private:
 	vector<GLuint> _reflectionMaps;
 	vector<GLuint> _normalMaps;
 
-	string _objPath = "";
+	string _meshPath = "";
 	string _diffuseMapPath = "";
 	string _lightMapPath = "";
 	string _reflectionMapPath = "";

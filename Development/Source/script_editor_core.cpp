@@ -35,6 +35,9 @@ void ScriptEditor::load()
 	// Camera
 	_fe3d.camera_load(70.0f, 0.1f, 10000.0f, _cameraStartingPosition, -90.0f);
 
+	// Background
+	_fe3d.skyEntity_setLightness("@@engineBackground", 0.3f);
+
 	// Graphics
 	_fe3d.gfx_enableDirectionalLighting(Vec3(1000.0f), Vec3(1.0f), 0.5f);
 	_fe3d.gfx_enableSpecularLighting();

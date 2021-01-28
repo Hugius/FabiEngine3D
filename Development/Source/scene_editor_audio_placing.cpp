@@ -56,7 +56,7 @@ void SceneEditor::_updateAudioPlacing()
 					}
 
 					// Add audio entity
-					_fe3d.gameEntity_add("@speaker_" + newID, _fe3d.gameEntity_getObjPath(_previewSpeakerID), newPosition, Vec3(0.0f), _defaultSpeakerSize);
+					_fe3d.gameEntity_add("@speaker_" + newID, _fe3d.gameEntity_getMeshPath(_previewSpeakerID), newPosition, Vec3(0.0f), _defaultSpeakerSize);
 					_fe3d.gameEntity_setShadowed("@speaker_" + newID, false);
 					_fe3d.aabbEntity_bindToGameEntity("@speaker_" + newID, Vec3(0.0f), _defaultSpeakerAabbSize, true);
 					_fe3d.audioEntity_add3D(newID, _fe3d.audioEntity_getFilePath(_currentPreviewAudioName), newPosition, 0.5f, _defaultAudioMaxDistance);

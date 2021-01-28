@@ -64,7 +64,8 @@ private:
 	const Vec3 _scriptTextStartingPosition = Vec3(-11.0f, 6.0f, 0.5f);
 	const Vec3 _lineNumberColor = Vec3(0.0f, 1.0f, 0.0f);
 	const Vec3 _characterColor = Vec3(1.0f);
-	const Vec3 _selectionColor = Vec3(0.25f);
+	const Vec3 _selectionColor = Vec3(0.15f);
+	const Vec3 _separatorColor = Vec3(1.0f, 0.85f, 0.0f);
 	const Vec2 _textCharacterSize = Vec2(0.25f, 0.75f);
 	const unsigned int _continuousTextActionFrameMinimum = 75;
 	const unsigned int _continuousTextActionInterval = 5;

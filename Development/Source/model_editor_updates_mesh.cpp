@@ -15,9 +15,9 @@ void ModelEditor::_updateModelEditingMesh()
 			{
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
 			}
-			else if (screen->getButton("loadOBJ")->isHovered())
+			else if (screen->getButton("loadMesh")->isHovered())
 			{
-				_loadOBJ();
+				_loadMesh();
 			}
 			else if (screen->getButton("loadDiffuseMap")->isHovered())
 			{
@@ -37,7 +37,7 @@ void ModelEditor::_updateModelEditingMesh()
 			}
 		}
 
-		// Check if OBJ exists
+		// Check if mesh exists
 		bool existing = _fe3d.gameEntity_isExisting(_currentModelID);
 		bool hoverable = false;
 		if (existing)
@@ -46,7 +46,7 @@ void ModelEditor::_updateModelEditingMesh()
 		}
 
 		// Editing buttons hoverability
-		screen->getButton("loadOBJ")->setHoverable(!existing);
+		screen->getButton("loadMesh")->setHoverable(!existing);
 		screen->getButton("loadDiffuseMap")->setHoverable(hoverable);
 		screen->getButton("loadLightMap")->setHoverable(hoverable);
 		screen->getButton("loadNormalMap")->setHoverable(hoverable);

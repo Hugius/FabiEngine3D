@@ -3,11 +3,11 @@
 
 void FabiEngine3D::gameEntity_add
 (
-	const string& ID, const string& objName,
+	const string& ID, const string& meshPath,
 	Vec3 position, Vec3 rotation, Vec3 size, bool visible
 )
 {
-	_core->_gameEntityManager.addGameEntity(ID, objName, position, rotation, size);
+	_core->_gameEntityManager.addGameEntity(ID, meshPath, position, rotation, size);
 	_core->_gameEntityManager.getEntity(ID)->setVisible(visible);
 }
 
@@ -75,9 +75,9 @@ void FabiEngine3D::gameEntity_show(const string& ID)
 	_core->_gameEntityManager.getEntity(ID)->setVisible(true);
 }
 
-void FabiEngine3D::gameEntity_loadModel(const string& ID, const string& objPath)
+void FabiEngine3D::gameEntity_loadModel(const string& ID, const string& meshPath)
 {
-	_core->_gameEntityManager.generateModel(ID, objPath);
+	_core->_gameEntityManager.generateModel(ID, meshPath);
 }
 
 void FabiEngine3D::gameEntity_setDiffuseMap(const string& ID, const string& texturePath)
@@ -410,9 +410,9 @@ Vec3 FabiEngine3D::gameEntity_getColor(const string& ID, const string& partName)
 	return _core->_gameEntityManager.getEntity(ID)->getColor(partName);
 }
 
-string FabiEngine3D::gameEntity_getObjPath(const string& ID)
+string FabiEngine3D::gameEntity_getMeshPath(const string& ID)
 {
-	return _core->_gameEntityManager.getEntity(ID)->getObjPath();
+	return _core->_gameEntityManager.getEntity(ID)->getMeshPath();
 }
 
 string FabiEngine3D::gameEntity_getDiffuseMapPath(const string& ID)

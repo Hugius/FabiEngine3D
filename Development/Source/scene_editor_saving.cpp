@@ -240,7 +240,7 @@ void SceneEditor::saveSceneToFile()
 					auto position = _fe3d.gameEntity_getPosition(modelID);
 					auto rotation = _fe3d.gameEntity_getRotation(modelID);
 					auto size = _fe3d.gameEntity_getSize(modelID);
-					auto objPath = _fe3d.gameEntity_getObjPath(modelID);
+					auto meshPath = _fe3d.gameEntity_getMeshPath(modelID);
 					auto diffuseMapPath = _fe3d.gameEntity_getDiffuseMapPath(modelID);
 					auto lightMapPath = _fe3d.gameEntity_getLightMapPath(modelID);
 					auto reflectionMapPath = _fe3d.gameEntity_getReflectionMapPath(modelID);
@@ -294,7 +294,7 @@ void SceneEditor::saveSceneToFile()
 					normalMapPath = (normalMapPath == "") ? "?" : normalMapPath;
 					lodID = (lodID == "") ? "?" : lodID;
 					animationID = (animationID == "") ? "?" : animationID;
-					std::replace(objPath.begin(), objPath.end(), ' ', '?');
+					std::replace(meshPath.begin(), meshPath.end(), ' ', '?');
 					std::replace(diffuseMapPath.begin(), diffuseMapPath.end(), ' ', '?');
 					std::replace(lightMapPath.begin(), lightMapPath.end(), ' ', '?');
 					std::replace(reflectionMapPath.begin(), reflectionMapPath.end(), ' ', '?');
@@ -315,7 +315,7 @@ void SceneEditor::saveSceneToFile()
 						size.x << " " <<
 						size.y << " " <<
 						size.z << " " <<
-						objPath << " " <<
+						meshPath << " " <<
 						diffuseMapPath << " " <<
 						lightMapPath << " " <<
 						reflectionMapPath << " " <<

@@ -164,7 +164,7 @@ void FabiEngine3D::misc_setWindowTitle(const string& title)
 
 void FabiEngine3D::misc_clearMeshCache(const string& filePath)
 {
-	_core->_meshLoader.clearOBJCache(filePath);
+	_core->_meshLoader.clearMeshCache(filePath);
 }
 
 void FabiEngine3D::misc_clearTextCache(const string& textContent, const string& fontPath)
@@ -202,9 +202,9 @@ void FabiEngine3D::misc_clearAudioMusicCache(const string& filePath)
 	_core->_audioLoader.clearMusicCache(filePath);
 }
 
-void FabiEngine3D::misc_cacheMeshesMultiThreaded(const vector<string>& objPaths, vector<string>& resultingTexturePaths)
+void FabiEngine3D::misc_cacheMeshesMultiThreaded(const vector<string>& meshPaths, vector<string>& resultingTexturePaths)
 {
-	_core->_meshLoader.cacheOBJsMultiThreaded(objPaths, resultingTexturePaths);
+	_core->_meshLoader.cacheMeshesMultiThreaded(meshPaths, resultingTexturePaths);
 }
 
 void FabiEngine3D::misc_cacheTexturesMultiThreaded2D(const vector<string>& filePaths)

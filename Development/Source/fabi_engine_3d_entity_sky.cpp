@@ -53,7 +53,7 @@ void FabiEngine3D::skyEntity_setDiffuseMapBottom(const string& ID, const string&
 	_core->_skyEntityManager.getEntity(ID)->setDiffuseMapPaths(texturePaths);
 }
 
-void FabiEngine3D::skyEntity_setDiffuseMapFront(const string& ID, const string& texturePath)
+void FabiEngine3D::skyEntity_setDiffuseMapBack(const string& ID, const string& texturePath)
 {
 	auto texturePaths = _core->_skyEntityManager.getEntity(ID)->getDiffuseMapPaths();
 	texturePaths[4] = texturePath;
@@ -61,7 +61,7 @@ void FabiEngine3D::skyEntity_setDiffuseMapFront(const string& ID, const string& 
 	_core->_skyEntityManager.getEntity(ID)->setDiffuseMapPaths(texturePaths);
 }
 
-void FabiEngine3D::skyEntity_setDiffuseMapBack(const string& ID, const string& texturePath)
+void FabiEngine3D::skyEntity_setDiffuseMapFront(const string& ID, const string& texturePath)
 {
 	auto texturePaths = _core->_skyEntityManager.getEntity(ID)->getDiffuseMapPaths();
 	texturePaths[5] = texturePath;

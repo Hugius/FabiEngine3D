@@ -27,7 +27,7 @@ public:
 
 	// Multithreaded caching
 	void cacheTexturesMultiThreaded2D(const vector<string>& filePaths);
-	void cacheTexturesMultiThreaded3D(const vector<array<string, 6>>& filePaths);
+	void cacheTexturesMultiThreaded3D(const vector<array<string, 6>>& filePathsList);
 
 	// Cache clearing
 	void clearTextureCache2D(const string& filePath);

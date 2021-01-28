@@ -21,16 +21,16 @@ public:
 	bool isLoaded();
 
 	const vector<string> getAllTexturePathsFromFile();
-	const vector<string>& getTotalObjFileNames();
+	const vector<string>& getAllMeshFileNames();
 	const vector<string>& getModelNames();
 
 private:
-	bool _addModel(const string& modelName, string objName, string diffuseMapName, string lightMapName, string reflectionMapName, string normalMapName,
+	bool _addModel(const string& modelName, string meshPath, string diffuseMapPath, string lightMapPath, string reflectionMapPath, string normalMapPath,
 		Vec3 size, bool isFaceCulled, bool isShadowed, bool isTransparent, bool isSpecular, int reflectionType,
 		float specularFactor, float specularIntensity, float lightness, Vec3 color, float uvRepeat, string lodEntityID, bool isInstanced,
 		vector<string> aabbNames, vector<Vec3> aabbPositions, vector<Vec3> aabbSizes);
-	void _loadObjFileNames();
-	void _loadOBJ();
+	void _loadMeshFileNames();
+	void _loadMesh();
 	void _loadDiffuseMap();
 	void _loadLightMap();
 	void _loadReflectionMap();
@@ -58,7 +58,7 @@ private:
 	string _currentProjectName = "";
 	string _hoveredModelID = "";
 	vector<string> _modelIDs;
-	vector<string> _objFileNamesList;
+	vector<string> _meshFileNames;
 
 	// Vectors
 	const Vec3 _defaultCameraPosition = Vec3(0.0f, 5.0f, 5.0f);

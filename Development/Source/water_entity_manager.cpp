@@ -137,7 +137,7 @@ void WaterEntityManager::generateModel(const string& ID)
 	entity->clearOglBuffers();
 	entity->addOglBuffer(new OpenGLBuffer(BufferType::SURFACE, &waterVertices[0], waterVertices.size()));
 
-	// Load OBJ model
+	// Load mesh
 	float simplified_data[] =
 	{
 		-halfSize,  0.0f,  halfSize, 0.0f, 1.0f,

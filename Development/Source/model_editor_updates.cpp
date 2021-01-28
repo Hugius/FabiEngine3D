@@ -121,14 +121,14 @@ void ModelEditor::_updateEditingScreen()
 				}
 			}
 
-			// Check if OBJ exists
+			// Check if mesh exists
 			bool existing = _fe3d.gameEntity_isExisting(_currentModelID);
 			bool hoverable = false;
 			if (existing)
 			{
 				hoverable = true;
 
-				// Show OBJ model
+				// Show mesh
 				_fe3d.gameEntity_show(_currentModelID);
 			}
 

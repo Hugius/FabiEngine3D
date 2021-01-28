@@ -21,9 +21,9 @@ public:
 	void addWriteField(const string& ID, Vec2 position, Vec2 size, Vec3 color, Vec3 hoverColor, Vec3 textColor, Vec3 textHoverColor, 
 		bool noNumbers, bool noCaps, bool noSpecials, bool noLetters, bool minusAllowed);
 	void addButton(const string& ID, Vec2 position, Vec2 size, Vec3 color, Vec3 hoverColor, string textContent, Vec3 textColor, Vec3 textHoverColor);
-	void addButton(const string& ID, Vec2 position, Vec2 size, const string& textureName, Vec3 hoverColor);
+	void addButton(const string& ID, Vec2 position, Vec2 size, const string& texturePath, Vec3 hoverColor);
 	void addRectangle(const string& ID, Vec2 position, Vec2 size, Vec3 color);
-	void addRectangle(const string& ID, Vec2 position, Vec2 size, const string& textureName);
+	void addRectangle(const string& ID, Vec2 position, Vec2 size, const string& texturePath);
 	void addTextfield(const string& ID, Vec2 position, Vec2 size, string textContent, Vec3 textColor, bool isCentered = true);
 
 	bool checkScrollingList(const string& ID);

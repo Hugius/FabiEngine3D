@@ -24,13 +24,13 @@ const unordered_map<string, shared_ptr<GameEntity>>& GameEntityManager::getEntit
 	return _getGameEntities();
 }
 
-void GameEntityManager::addGameEntity(const string& ID, const string& objName, Vec3 T, Vec3 R, Vec3 S)
+void GameEntityManager::addGameEntity(const string& ID, const string& meshPath, Vec3 T, Vec3 R, Vec3 S)
 {
 	// Create entity
 	_createEntity(ID);
 	
-	// Load OBJ
-	generateModel(ID, objName);
+	// Load mesh
+	generateModel(ID, meshPath);
 
 	auto entity = getEntity(ID);
 
@@ -43,12 +43,12 @@ void GameEntityManager::addGameEntity(const string& ID, const string& objName, V
 	entity->setScaling(S);
 }
 
-void GameEntityManager::generateModel(const string& ID, const string& objName)
+void GameEntityManager::generateModel(const string& ID, const string& meshPath)
 {
-	// Load OBJ model
-	auto parts = _meshLoader.loadOBJ(objName, false);
+	// Load mesh model
+	auto parts = _meshLoader.loadMesh(meshPath, false);
 	auto entity = getEntity(ID);
-	entity->setObjPath(objName);
+	entity->setMeshPath(meshPath);
 	entity->clearOglBuffers();
 	entity->clearDiffuseMaps();
 	entity->clearLightMaps();
@@ -102,7 +102,7 @@ void GameEntityManager::generateModel(const string& ID, const string& objName)
 		// New transformation part
 		entity->addPart(part.name);
 
-		// Load an OBJ part diffuse map
+		// Load an mesh part diffuse map
 		if (part.diffuseMapPath != "")
 		{
 			entity->addDiffuseMap(_textureLoader.getTexture2D(part.diffuseMapPath, true, true, true));
@@ -117,7 +117,7 @@ void GameEntityManager::generateModel(const string& ID, const string& objName)
 			}
 		}
 
-		// Load an OBJ part light map
+		// Load an mesh part light map
 		if (part.lightMapPath != "")
 		{
 			entity->setLightMapped(true);
@@ -133,7 +133,7 @@ void GameEntityManager::generateModel(const string& ID, const string& objName)
 			}
 		}
 
-		// Load an OBJ part normal map
+		// Load an mesh part normal map
 		if (part.normalMapPath != "")
 		{
 			entity->addNormalMap(_textureLoader.getTexture2D(part.normalMapPath, true, true, true));
@@ -148,7 +148,7 @@ void GameEntityManager::generateModel(const string& ID, const string& objName)
 			}
 		}
 
-		// Load an OBJ part reflection map
+		// Load an mesh part reflection map
 		if (part.reflectionMapPath != "")
 		{
 			entity->setSkyReflective(true);
@@ -174,8 +174,8 @@ void GameEntityManager::loadNormalMapping(const string& ID)
 		// Check if not already a tangent loaded model
 		if (getEntity(ID)->getOglBuffer()->getBufferType() != BufferType::MODEL_TANGENT)
 		{
-			// Load OBJ model
-			auto parts = _meshLoader.loadOBJ(getEntity(ID)->getObjPath(), true);
+			// Load mesh file
+			auto parts = _meshLoader.loadMesh(getEntity(ID)->getMeshPath(), true);
 
 			// Create OpenGL buffers
 			for (auto& part : parts)

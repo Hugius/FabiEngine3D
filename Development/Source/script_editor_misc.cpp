@@ -12,7 +12,7 @@ void ScriptEditor::_reloadScriptTextDisplay(bool reloadAabbs)
 		float lineCount = static_cast<float>(_script.getScriptFile(_currentScriptFileID)->getLineCount());
 		Vec2 separatorSize = Vec2((_textCharacterSize.x / 4.0f), (lineCount * _verticalLineOffset));
 		Vec3 separatorPosition = _scriptTextStartingPosition + Vec3(_horizontalLineOffset / 2.0f, -(((lineCount - 1) / 2.0f) * _verticalLineOffset), 0.0f);
-		_fe3d.billboardEntity_add("separator", _selectionColor, separatorPosition, Vec3(0.0f), separatorSize, false, false);
+		_fe3d.billboardEntity_add("separator", _separatorColor, separatorPosition, Vec3(0.0f), separatorSize, false, false);
 
 		// Create visible billboards for display and invisible billboards for logic
 		for (unsigned int lineIndex = 0; lineIndex < lineCount; lineIndex++)

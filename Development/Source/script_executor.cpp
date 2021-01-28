@@ -28,12 +28,15 @@ void ScriptExecutor::update()
 {
 	if (_isInitialized && _isRunning)
 	{
-		// Run script (1 frame)
+		// Skip first frame, then update fulltime
 		if (!_skipUpdate)
 		{
 			_scriptInterpreter.executeUpdate();
 		}
-		_skipUpdate = false;
+		else
+		{
+			_skipUpdate = false;
+		}
 
 		// Custom cursor is only enabled in engine preview
 		if (_fe3d.engine_getSelectedGame().empty())

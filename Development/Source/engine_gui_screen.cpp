@@ -155,10 +155,10 @@ void EngineGuiScreen::addButton(const string& ID, Vec2 position, Vec2 size, Vec3
 	_buttons.push_back(make_shared<EngineGuiButton>(_fe3d, _parentID + "_" + _ID, ID, Vec2(dimensions.x, dimensions.y), Vec2(dimensions.z, dimensions.w), color, hoverColor, textContent, textColor, textHoverColor));
 }
 
-void EngineGuiScreen::addButton(const string& ID, Vec2 position, Vec2 size, const string& textureName, Vec3 hoverColor)
+void EngineGuiScreen::addButton(const string& ID, Vec2 position, Vec2 size, const string& texturePath, Vec3 hoverColor)
 {
 	auto dimensions = _convertDimensions(position, size);
-	_buttons.push_back(make_shared<EngineGuiButton>(_fe3d, _parentID + "_" + _ID, ID, Vec2(dimensions.x, dimensions.y), Vec2(dimensions.z, dimensions.w), textureName, hoverColor));
+	_buttons.push_back(make_shared<EngineGuiButton>(_fe3d, _parentID + "_" + _ID, ID, Vec2(dimensions.x, dimensions.y), Vec2(dimensions.z, dimensions.w), texturePath, hoverColor));
 }
 
 void EngineGuiScreen::addRectangle(const string& ID, Vec2 position, Vec2 size, Vec3 color, bool isCentered)
@@ -167,10 +167,10 @@ void EngineGuiScreen::addRectangle(const string& ID, Vec2 position, Vec2 size, V
 	_rectangles.push_back(make_shared<EngineGuiRectangle>(_fe3d, _parentID + "_" + _ID, ID, Vec2(dimensions.x, dimensions.y), Vec2(dimensions.z, dimensions.w), color, isCentered));
 }
 
-void EngineGuiScreen::addRectangle(const string& ID, Vec2 position, Vec2 size, const string& textureName, bool isCentered)
+void EngineGuiScreen::addRectangle(const string& ID, Vec2 position, Vec2 size, const string& texturePath, bool isCentered)
 {
 	auto dimensions = _convertDimensions(position, size);
-	_rectangles.push_back(make_shared<EngineGuiRectangle>(_fe3d, _parentID + "_" + _ID, ID, Vec2(dimensions.x, dimensions.y), Vec2(dimensions.z, dimensions.w), textureName, isCentered));
+	_rectangles.push_back(make_shared<EngineGuiRectangle>(_fe3d, _parentID + "_" + _ID, ID, Vec2(dimensions.x, dimensions.y), Vec2(dimensions.z, dimensions.w), texturePath, isCentered));
 }
 
 void EngineGuiScreen::addTextfield(const string& ID, Vec2 position, Vec2 size, string textContent, Vec3 textColor, bool isCentered, bool isDynamic)

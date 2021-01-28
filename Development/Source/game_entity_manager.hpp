@@ -12,8 +12,8 @@ public:
 
 	const unordered_map<string, shared_ptr<GameEntity>>& getEntities();
 
-	void addGameEntity(const string& ID, const string& objName, Vec3 T, Vec3 R, Vec3 S);
-	void generateModel(const string& ID, const string& objName);
+	void addGameEntity(const string& ID, const string& meshPath, Vec3 T, Vec3 R, Vec3 S);
+	void generateModel(const string& ID, const string& meshPath);
 	void loadNormalMapping(const string& ID);
 	void setLodDistance(float distance);
 	void update() override;

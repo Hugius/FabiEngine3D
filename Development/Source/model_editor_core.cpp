@@ -37,7 +37,7 @@ void ModelEditor::initializeGUI()
 
 	// Left-viewport: mainWindow - modelEditorMenuMesh
 	leftWindow->addScreen("modelEditorMenuMesh");
-	leftWindow->getScreen("modelEditorMenuMesh")->addButton("loadOBJ", Vec2(0.0f, 0.75f), Vec2(GW("Load OBJ"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Load OBJ", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen("modelEditorMenuMesh")->addButton("loadMesh", Vec2(0.0f, 0.75f), Vec2(GW("Load mesh"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Load mesh", LVPC::textColor, LVPC::textHoverColor);
 	leftWindow->getScreen("modelEditorMenuMesh")->addButton("loadDiffuseMap", Vec2(0.0f, 0.45f), Vec2(GW("DiffuseMap"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "DiffuseMap", LVPC::textColor, LVPC::textHoverColor);
 	leftWindow->getScreen("modelEditorMenuMesh")->addButton("loadLightMap", Vec2(0.0f, 0.15f), Vec2(GW("LightMap"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "LightMap", LVPC::textColor, LVPC::textHoverColor);
 	leftWindow->getScreen("modelEditorMenuMesh")->addButton("loadReflectionMap", Vec2(0.0f, -0.15f), Vec2(GW("ReflectMap"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "ReflectMap", LVPC::textColor, LVPC::textHoverColor);
@@ -85,8 +85,8 @@ void ModelEditor::initializeGUI()
 
 void ModelEditor::load()
 {
-	// Load all OBJ filenames from assets folder
-	_loadObjFileNames();
+	// Load all mesh filenames from assets folder
+	_loadMeshFileNames();
 
 	// Camera
 	_fe3d.camera_load(90.0f, 0.1f, 10000.0f, _defaultCameraPosition);
@@ -141,7 +141,7 @@ void ModelEditor::unload()
 	_currentAabbID = "";
 	_hoveredModelID = "";
 	_modelIDs.clear();
-	_objFileNamesList.clear();
+	_meshFileNames.clear();
 	_cameraLookatPosition = Vec3(0.0f);
 	_totalCursorDifference = Vec2(0.0f);
 	_cameraAcceleration = Vec2(0.0f);

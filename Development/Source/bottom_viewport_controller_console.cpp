@@ -4,10 +4,10 @@ void BottomViewportController::_updateConsoleScrolling()
 {
 	// Temporary values
 	const auto window = _gui.getViewport("bottom")->getWindow("console");
-	const float scrollValue = static_cast<float>(_fe3d.input_getMouseWheelY()) * static_cast<float>(window->isHovered());
+	float scrollingSpeed = static_cast<float>(_fe3d.input_getMouseWheelY()) * static_cast<float>(window->isHovered()) * 0.1f;
 
 	// No scrolling for empty console
-	if (!_consoleMessageStack.empty() && (scrollValue != 0.0f || fabsf(_scrollingAcceleration) > 0.000001f))
+	if (!_consoleMessageStack.empty() && scrollingSpeed != 0.0f)
 	{
 		// Temporary values
 		const auto screen = window->getScreen("main");
@@ -39,51 +39,33 @@ void BottomViewportController::_updateConsoleScrolling()
 		// Check if there are enough messages to scroll through
 		if ((static_cast<float>(messageLineCount) * _charSize.y) > window->getOriginalSize().y)
 		{
-			// Update acceleration
-			_scrollingAcceleration += (scrollValue * 0.01f);
-			_scrollingAcceleration *= 0.95f;
-
 			// Only allow scrolling when not trying to scroll too far
-			if ((latestMessageY == minY && _scrollingAcceleration < 0.0f) || (oldestMessage == maxY && scrollValue > 0.0f))
+			if 
+			(
+				(latestMessageY >= minY && scrollingSpeed < 0.0f)
+				|| 
+				(oldestMessage <= maxY && scrollingSpeed > 0.0f)
+			)
 			{
-				_scrollingAcceleration = 0.0f;
-			}
-
-			// Reset scrolling Y when scrolled too far
-			bool resetY = false;
-			if (latestMessageY > minY)
-			{
-				_scrollingAcceleration = latestMessageY - minY;
-				resetY = true;
-			}
-			else if (oldestMessage < maxY)
-			{
-				_scrollingAcceleration = oldestMessage - maxY;
-				resetY = true;
+				scrollingSpeed = 0.0f;
 			}
 
 			// Move all messages
 			for (auto& [ID, message] : _consoleMessageStack)
 			{
 				// Move time part
-				_fe3d.textEntity_move(screen->getTextfield(ID + "_time")->getEntityID(), Vec2(0.0f, -_scrollingAcceleration));
+				_fe3d.textEntity_move(screen->getTextfield(ID + "_time")->getEntityID(), Vec2(0.0f, -scrollingSpeed));
 
 				// Move separator part
-				_fe3d.textEntity_move(screen->getTextfield(ID + "_separator")->getEntityID(), Vec2(0.0f, -_scrollingAcceleration));
+				_fe3d.textEntity_move(screen->getTextfield(ID + "_separator")->getEntityID(), Vec2(0.0f, -scrollingSpeed));
 
 				// Move all message parts
 				unsigned int index = 0;
 				while (screen->getTextfield(ID + "_msg_" + to_string(index)) != nullptr)
 				{
-					_fe3d.textEntity_move(screen->getTextfield(ID + "_msg_" + to_string(index))->getEntityID(), Vec2(0.0f, -_scrollingAcceleration));
+					_fe3d.textEntity_move(screen->getTextfield(ID + "_msg_" + to_string(index))->getEntityID(), Vec2(0.0f, -scrollingSpeed));
 					index++;
 				}
-			}
-
-			// Console not scrolling
-			if (resetY)
-			{
-				_scrollingAcceleration = 0.0f;
 			}
 		}
 	}

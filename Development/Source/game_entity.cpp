@@ -255,9 +255,9 @@ void GameEntity::setColor(Vec3 value, const string& partName)
 	}
 }
 
-void GameEntity::setObjPath(const string& value)
+void GameEntity::setMeshPath(const string& value)
 {
-	_objPath = value;
+	_meshPath = value;
 }
 
 void GameEntity::setDiffuseMapPath(const string& value)
@@ -529,9 +529,9 @@ const Vec3 GameEntity::getColor(const string& partName)
 	}
 }
 
-const string& GameEntity::getObjPath() const
+const string& GameEntity::getMeshPath() const
 {
-	return _objPath;
+	return _meshPath;
 }
 
 const string& GameEntity::getDiffuseMapPath() const

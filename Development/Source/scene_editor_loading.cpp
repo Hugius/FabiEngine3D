@@ -242,7 +242,7 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 				}
 
 				// Values
-				string objPath, diffuseMapPath, lightMapPath, reflectionMapPath, normalMapPath, lodEntityID, animationID;
+				string meshPath, diffuseMapPath, lightMapPath, reflectionMapPath, normalMapPath, lodEntityID, animationID;
 				Vec3 position, rotation, size, color;
 				int reflectionType;
 				float uvRepeat, specularFactor, specularIntensity, lightness;
@@ -263,7 +263,7 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 					size.x >>
 					size.y >>
 					size.z >>
-					objPath >>
+					meshPath >>
 					diffuseMapPath >>
 					lightMapPath >>
 					reflectionMapPath >>
@@ -327,14 +327,14 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 				}
 
 				// Perform empty string & space conversions
-				objPath = (objPath == "?") ? "" : objPath;
+				meshPath = (meshPath == "?") ? "" : meshPath;
 				diffuseMapPath = (diffuseMapPath == "?") ? "" : diffuseMapPath;
 				lightMapPath = (lightMapPath == "?") ? "" : lightMapPath;
 				reflectionMapPath = (reflectionMapPath == "?") ? "" : reflectionMapPath;
 				normalMapPath = (normalMapPath == "?") ? "" : normalMapPath;
 				lodEntityID = (lodEntityID == "?") ? "" : lodEntityID;
 				animationID = (animationID == "?") ? "" : animationID;
-				std::replace(objPath.begin(), objPath.end(), '?', ' ');
+				std::replace(meshPath.begin(), meshPath.end(), '?', ' ');
 				std::replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
 				std::replace(lightMapPath.begin(), lightMapPath.end(), '?', ' ');
 				std::replace(reflectionMapPath.begin(), reflectionMapPath.end(), '?', ' ');
@@ -348,7 +348,7 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 				string modelName = modelID.substr(atPos + 1);
 
 				// Add the model
-				_placeModel(!_isEditorLoaded, modelName, modelNumber, position, rotation, size, objPath, diffuseMapPath, lightMapPath, 
+				_placeModel(!_isEditorLoaded, modelName, modelNumber, position, rotation, size, meshPath, diffuseMapPath, lightMapPath, 
 					reflectionMapPath, normalMapPath, isFrozen, isFaceculled, isShadowed, isTransparent, isSpecular, reflectionType, specularFactor,
 					specularIntensity, lightness, color, uvRepeat, lodEntityID, 
 					isInstanced, instancedOffsets, aabbNames, aabbPositions, aabbSizes, animationID);

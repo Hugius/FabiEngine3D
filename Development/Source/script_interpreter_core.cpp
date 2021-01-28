@@ -137,7 +137,7 @@ void ScriptInterpreter::load()
 		auto skyTextures = _environmentEditor.getAllSkyTexturePathsFromFile();
 		auto terrainTextures = _environmentEditor.getAllTerrainTexturePathsFromFile();
 		auto waterTextures = _environmentEditor.getAllWaterTexturePathsFromFile();
-		auto modelTextures = _modelEditor.getAllTexturePathsFromFile(); // This function already pre-caches all OBJ files
+		auto modelTextures = _modelEditor.getAllTexturePathsFromFile(); // This function already pre-caches all mesh files
 		auto billboardTextures = _billboardEditor.getAllTexturePathsFromFile();
 		auto audioPaths = _audioEditor.getAllAudioPathsFromFile();
 

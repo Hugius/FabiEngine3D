@@ -11,15 +11,15 @@ public:
 	MeshLoader() = default;
 	~MeshLoader() = default;
 
-	const vector<MeshPart>& loadOBJ(const string& filePath, bool calculateTangents);
+	const vector<MeshPart>& loadMesh(const string& filePath, bool calculateTangents);
 
-	void cacheOBJsMultiThreaded(const vector<string>& filePaths, vector<string>& resultingTexturePaths);
+	void cacheMeshesMultiThreaded(const vector<string>& meshPaths, vector<string>& resultingTexturePaths);
 
-	void clearOBJCache(const string& filePath);
+	void clearMeshCache(const string& filePath);
 
 private:
-	vector<MeshPart> _loadOBJ(const string& filePath, bool calculateTangents);
-	void _calculateTangents(vector<MeshPart>& objParts);
+	vector<MeshPart> _loadMesh(const string& filePath, bool calculateTangents);
+	void _calculateTangents(vector<MeshPart>& meshParts);
 
-	std::map<string, vector<MeshPart>> _objCache;
+	std::map<string, vector<MeshPart>> _meshCache;
 };

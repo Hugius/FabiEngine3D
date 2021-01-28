@@ -45,39 +45,39 @@ void ModelEditor::_updateMiscellaneous()
 	}
 }
 
-void ModelEditor::_loadObjFileNames()
+void ModelEditor::_loadMeshFileNames()
 {
 	// Remove potential previous filenames
-	if (!_objFileNamesList.empty())
+	if (!_meshFileNames.empty())
 	{
-		_objFileNamesList.clear();
+		_meshFileNames.clear();
 	}
 
-	// Determine full OBJ directory
-	string objDirectoryPath = _fe3d.misc_getRootDirectory() + "user\\assets\\models\\";
+	// Determine full mesh directory
+	string meshDirectoryPath = _fe3d.misc_getRootDirectory() + "user\\assets\\models\\";
 	int endOfNameIndex = 0;
 
 	// Get all filenames
-	for (const auto& entry : std::filesystem::directory_iterator(objDirectoryPath))
+	for (const auto& entry : std::filesystem::directory_iterator(meshDirectoryPath))
 	{
-		string objPath = string(entry.path().u8string());
-		objPath.erase(0, objDirectoryPath.size());
+		string meshPath = string(entry.path().u8string());
+		meshPath.erase(0, meshDirectoryPath.size());
 
 		// Loop over file path
-		for (size_t i = 0; i < objPath.size(); i++)
+		for (size_t i = 0; i < meshPath.size(); i++)
 		{
 			// End of file name
-			if (objPath[i] == '.')
+			if (meshPath[i] == '.')
 			{
 				endOfNameIndex = i;
 			}
 		}
 
-		_objFileNamesList.push_back(objPath.substr(0, endOfNameIndex));
+		_meshFileNames.push_back(meshPath.substr(0, endOfNameIndex));
 	}
 }
 
-void ModelEditor::_loadOBJ()
+void ModelEditor::_loadMesh()
 {
 	// Get the chosen filename
 	const string rootDirectory = _fe3d.misc_getRootDirectory();
@@ -96,7 +96,7 @@ void ModelEditor::_loadOBJ()
 			// Delete existing entity
 			if (_fe3d.gameEntity_isExisting(_currentModelID))
 			{
-				// Clear OBJ cache
+				// Clear mesh cache
 				_fe3d.misc_clearMeshCache(newFilePath);
 
 				// Check if multiparted entity
@@ -249,9 +249,9 @@ bool ModelEditor::isLoaded()
 	return _isEditorLoaded;
 }
 
-const vector<string>& ModelEditor::getTotalObjFileNames()
+const vector<string>& ModelEditor::getAllMeshFileNames()
 {
-	return _objFileNamesList;
+	return _meshFileNames;
 }
 
 const vector<string>& ModelEditor::getModelNames()
@@ -259,7 +259,7 @@ const vector<string>& ModelEditor::getModelNames()
 	return _modelIDs;
 }
 
-bool ModelEditor::_addModel(const string& modelName, string objName, string diffuseMapName, string lightMapName, string reflectionMapName, string normalMapName,
+bool ModelEditor::_addModel(const string& modelName, string meshPath, string diffuseMapPath, string lightMapPath, string reflectionMapPath, string normalMapPath,
 	Vec3 size, bool isFaceCulled, bool isShadowed, bool isTransparent, bool isSpecular, int reflectionType,
 	float specularFactor, float specularIntensity, float lightness, Vec3 color, float uvRepeat, string lodEntityID, bool isInstanced,
 	vector<string> aabbNames, vector<Vec3> aabbPositions, vector<Vec3> aabbSizes)
@@ -271,9 +271,9 @@ bool ModelEditor::_addModel(const string& modelName, string objName, string diff
 		_modelIDs.push_back(modelName);
 
 		// Add 3D model
-		if (objName != "")
+		if (meshPath != "")
 		{
-			_fe3d.gameEntity_add(modelName, objName, Vec3(0.0f, 0.01f, 0.0f), Vec3(0.0f), size, false);
+			_fe3d.gameEntity_add(modelName, meshPath, Vec3(0.0f, 0.01f, 0.0f), Vec3(0.0f), size, false);
 
 			// Add AABBs
 			for (unsigned int i = 0; i < aabbNames.size(); i++)
@@ -282,28 +282,28 @@ bool ModelEditor::_addModel(const string& modelName, string objName, string diff
 			}
 
 			// Diffuse map
-			if (diffuseMapName != "")
+			if (diffuseMapPath != "")
 			{
-				_fe3d.gameEntity_setDiffuseMap(modelName, diffuseMapName);
+				_fe3d.gameEntity_setDiffuseMap(modelName, diffuseMapPath);
 			}
 
 			// Light map
-			if (lightMapName != "")
+			if (lightMapPath != "")
 			{
-				_fe3d.gameEntity_setLightMap(modelName, lightMapName);
+				_fe3d.gameEntity_setLightMap(modelName, lightMapPath);
 				_fe3d.gameEntity_setLightMapped(modelName, true);
 			}
 
 			// Reflection map
-			if (reflectionMapName != "")
+			if (reflectionMapPath != "")
 			{
-				_fe3d.gameEntity_setReflectionMap(modelName, reflectionMapName);
+				_fe3d.gameEntity_setReflectionMap(modelName, reflectionMapPath);
 			}
 
 			// Normal map
-			if (normalMapName != "")
+			if (normalMapPath != "")
 			{
-				_fe3d.gameEntity_setNormalMap(modelName, normalMapName);
+				_fe3d.gameEntity_setNormalMap(modelName, normalMapPath);
 				_fe3d.gameEntity_setNormalMapped(modelName, true);
 			}
 

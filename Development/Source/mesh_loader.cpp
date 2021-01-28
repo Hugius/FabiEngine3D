@@ -9,67 +9,82 @@
 #include <future>
 #include <set>
 
-void MeshLoader::cacheOBJsMultiThreaded(const vector<string>& filePaths, vector<string>& resultingTexturePaths)
+void MeshLoader::cacheMeshesMultiThreaded(const vector<string>& meshPaths, vector<string>& resultingTexturePaths)
 {
 	// Temporary values
 	vector<std::future<vector<MeshPart>>> threads;
+	vector<bool> meshStatuses;
 
 	// Remove duplicates
-	auto tempFilePaths = std::set<string>(filePaths.begin(), filePaths.end());
+	auto tempFilePaths = std::set<string>(meshPaths.begin(), meshPaths.end());
 	auto uniqueFilePaths = vector<string>(tempFilePaths.begin(), tempFilePaths.end());
 
 	// Start all loading threads
 	for (const auto& filePath : uniqueFilePaths)
 	{
-		threads.push_back(std::async(std::launch::async, &MeshLoader::_loadOBJ, this, filePath, false));
+		// Check if mesh is not already cached
+		if (_meshCache.find(filePath) == _meshCache.end())
+		{
+			threads.push_back(std::async(std::launch::async, &MeshLoader::_loadMesh, this, filePath, false));
+			meshStatuses.push_back(false);
+		}
+		else
+		{
+			meshStatuses.push_back(true);
+		}
 	}
 
 	// Wait for all threads to finish
-	for (unsigned int i = 0; i < threads.size(); i++)
+	for (unsigned int i = 0; i < meshStatuses.size(); i++)
 	{
-		auto objParts = threads[i].get();
-
-		// Check if model loading went well
-		if (!objParts.empty())
+		// Check if mesh is not processed yet
+		if (!meshStatuses[i])
 		{
-			// Logging
-			Logger::throwInfo("Loaded OBJ model: \"" + uniqueFilePaths[i] + "\"");
+			// Retrieve mesh parts
+			auto meshParts = threads[i].get();
 
-			// Cache model
-			_objCache[uniqueFilePaths[i]] = objParts;
-		}
+			// Check if model loading went well
+			if (!meshParts.empty())
+			{
+				// Logging
+				Logger::throwInfo("Loaded mesh: \"" + uniqueFilePaths[i] + "\"");
 
-		// Extract possible texture paths
-		for (const auto& part : objParts)
-		{
-			if (!part.diffuseMapPath.empty()) // Diffuse map
-			{
-				resultingTexturePaths.push_back(part.diffuseMapPath);
+				// Cache model
+				_meshCache[uniqueFilePaths[i]] = meshParts;
 			}
-			if (!part.lightMapPath.empty()) // Light map
+
+			// Extract possible texture paths
+			for (const auto& part : meshParts)
 			{
-				resultingTexturePaths.push_back(part.lightMapPath);
-			}
-			if (!part.normalMapPath.empty()) // Normal map
-			{
-				resultingTexturePaths.push_back(part.normalMapPath);
-			}
-			if (!part.reflectionMapPath.empty()) // Reflection map
-			{
-				resultingTexturePaths.push_back(part.reflectionMapPath);
+				if (!part.diffuseMapPath.empty()) // Diffuse map
+				{
+					resultingTexturePaths.push_back(part.diffuseMapPath);
+				}
+				if (!part.lightMapPath.empty()) // Light map
+				{
+					resultingTexturePaths.push_back(part.lightMapPath);
+				}
+				if (!part.normalMapPath.empty()) // Normal map
+				{
+					resultingTexturePaths.push_back(part.normalMapPath);
+				}
+				if (!part.reflectionMapPath.empty()) // Reflection map
+				{
+					resultingTexturePaths.push_back(part.reflectionMapPath);
+				}
 			}
 		}
 	}
 }
 
-const vector<MeshPart>& MeshLoader::loadOBJ(const string& filePath, bool calculateTangents)
+const vector<MeshPart>& MeshLoader::loadMesh(const string& filePath, bool calculateTangents)
 {
 	// Check if mesh data was loaded already, if not, load data and store in std::map
-	begin : auto iterator = _objCache.find(filePath); // Search for existing OBJ parts
-	if (iterator == _objCache.end()) 
+	begin : auto iterator = _meshCache.find(filePath); // Search for existing mesh parts
+	if (iterator == _meshCache.end()) 
 	{
-		// Load OBJ
-		auto loadedModel = _loadOBJ(filePath, calculateTangents);
+		// Load mesh
+		auto loadedModel = _loadMesh(filePath, calculateTangents);
 
 		// Check model status
 		if (loadedModel.empty())
@@ -79,10 +94,10 @@ const vector<MeshPart>& MeshLoader::loadOBJ(const string& filePath, bool calcula
 		else
 		{
 			// Logging
-			Logger::throwInfo("Loaded OBJ model: \"" + filePath + "\"");
+			Logger::throwInfo("Loaded mesh: \"" + filePath + "\"");
 
 			// Cache model
-			_objCache.insert(std::make_pair(filePath, loadedModel));
+			_meshCache.insert(std::make_pair(filePath, loadedModel));
 
 			// Return new model
 			goto begin;
@@ -96,22 +111,22 @@ const vector<MeshPart>& MeshLoader::loadOBJ(const string& filePath, bool calcula
 			_calculateTangents(iterator->second);
 		}
 
-		return iterator->second; // Return the corresponding OBJ parts
+		return iterator->second; // Return the corresponding mesh parts
 	}
 }
 
-void MeshLoader::clearOBJCache(const string& filePath)
+void MeshLoader::clearMeshCache(const string& filePath)
 {
-	if (_objCache.find(filePath) != _objCache.end())
+	if (_meshCache.find(filePath) != _meshCache.end())
 	{
-		_objCache.erase(filePath);
+		_meshCache.erase(filePath);
 	}
 }
 
-vector<MeshPart> MeshLoader::_loadOBJ(const string& filePath, bool calculateTangents)
+vector<MeshPart> MeshLoader::_loadMesh(const string& filePath, bool calculateTangents)
 {
 	// Declare variables
-	vector<MeshPart> objParts;
+	vector<MeshPart> meshParts;
 	vector<Vec3> temp_positions;
 	vector<Vec2> temp_uvs;
 	vector<Vec3> temp_normals;
@@ -129,7 +144,7 @@ vector<MeshPart> MeshLoader::_loadOBJ(const string& filePath, bool calculateTang
 	FILE * file = fopen(path.c_str(), "r");
 	if (!std::filesystem::exists(path) || filePath == "")
 	{
-		Logger::throwWarning("Cannot open OBJ file: \"" + filePath + "\"");
+		Logger::throwWarning("Cannot open mesh file: \"" + filePath + "\"");
 		return {};
 	}
 
@@ -250,26 +265,26 @@ vector<MeshPart> MeshLoader::_loadOBJ(const string& filePath, bool calculateTang
 			// Check if face amount is correct (3x3)
 			if (matches != 9)
 			{
-				Logger::throwWarning("Too many or not enough faces at OBJ file: \"" + filePath + "\"");
+				Logger::throwWarning("Too many or not enough faces at mesh file: \"" + filePath + "\"");
 				return {};
 			}
 
 			bool alreadyExisting = false;
 
-			// Check if able to add to existing OBJ part
-			for (auto& objPart : objParts)
+			// Check if able to add to existing mesh part
+			for (auto& meshPart : meshParts)
 			{
-				// Find OBJ part
-				if (objPart.name == selectedPartName)
+				// Find mesh part
+				if (meshPart.name == selectedPartName)
 				{
 					alreadyExisting = true;
 
 					// Add vertices
 					for (int i = 0; i < 3; i++)
 					{
-						objPart.vertices.push_back(temp_positions[posIndex[i] - 1]);
-						objPart.uvCoords.push_back(temp_uvs[uvIndex[i] - 1]);
-						objPart.normals.push_back(temp_normals[normalIndex[i] - 1]);
+						meshPart.vertices.push_back(temp_positions[posIndex[i] - 1]);
+						meshPart.uvCoords.push_back(temp_uvs[uvIndex[i] - 1]);
+						meshPart.normals.push_back(temp_normals[normalIndex[i] - 1]);
 					}
 
 					// Part is found
@@ -277,7 +292,7 @@ vector<MeshPart> MeshLoader::_loadOBJ(const string& filePath, bool calculateTang
 				}
 			}
 
-			// Create new OBJ part
+			// Create new mesh part
 			if (!alreadyExisting)
 			{
 				MeshPart newPart;
@@ -290,7 +305,7 @@ vector<MeshPart> MeshLoader::_loadOBJ(const string& filePath, bool calculateTang
 					newPart.normals.push_back(temp_normals[normalIndex[i] - 1]);
 				}
 
-				// Set OBJ part name
+				// Set mesh part name
 				newPart.name = selectedPartName;
 
 				// Set texture map paths
@@ -299,45 +314,45 @@ vector<MeshPart> MeshLoader::_loadOBJ(const string& filePath, bool calculateTang
 				newPart.normalMapPath = tempNormalMapPath.empty() ? "" : string("user\\assets\\textures\\normal_maps\\" + tempNormalMapPath);
 				newPart.reflectionMapPath = tempReflectionMapPath.empty() ? "" : string("user\\assets\\textures\\reflection_maps\\" + tempReflectionMapPath);
 
-				// Add new OBJ part
-				objParts.push_back(newPart);
+				// Add new mesh part
+				meshParts.push_back(newPart);
 			}
 		}
 	}
 
-	// Calculate tangents for all obj parts
+	// Calculate tangents for all mesh parts
 	if (calculateTangents)
 	{
-		_calculateTangents(objParts);
+		_calculateTangents(meshParts);
 	}
 
 	// Error checking
-	if (objParts.empty())
+	if (meshParts.empty())
 	{
-		Logger::throwWarning("Incorrect or too little content at OBJ file: \"" + filePath + "\"");
+		Logger::throwWarning("Incorrect or too little content at mesh file: \"" + filePath + "\"");
 		return {};
 	}
 
-	// Return new OBJ parts
-	return objParts;
+	// Return new mesh parts
+	return meshParts;
 }
 
-void MeshLoader::_calculateTangents(vector<MeshPart>& objParts)
+void MeshLoader::_calculateTangents(vector<MeshPart>& meshParts)
 {
 	// Calculate tangents for normal mapping
-	for (auto& objPart : objParts)
+	for (auto& meshPart : meshParts)
 	{
-		for (size_t i = 0; i < objPart.vertices.size(); i += 3)
+		for (size_t i = 0; i < meshPart.vertices.size(); i += 3)
 		{
 			// Vertices of 1 triangle
-			Vec3 v0 = objPart.vertices[i + 0];
-			Vec3 v1 = objPart.vertices[i + 1];
-			Vec3 v2 = objPart.vertices[i + 2];
+			Vec3 v0 = meshPart.vertices[i + 0];
+			Vec3 v1 = meshPart.vertices[i + 1];
+			Vec3 v2 = meshPart.vertices[i + 2];
 
 			// Shortcuts for UVs
-			Vec2 uv0 = objPart.uvCoords[i + 0];
-			Vec2 uv1 = objPart.uvCoords[i + 1];
-			Vec2 uv2 = objPart.uvCoords[i + 2];
+			Vec2 uv0 = meshPart.uvCoords[i + 0];
+			Vec2 uv1 = meshPart.uvCoords[i + 1];
+			Vec2 uv2 = meshPart.uvCoords[i + 2];
 
 			// Vertex delta
 			Vec3 deltaPos1 = v1 - v0;
@@ -351,10 +366,10 @@ void MeshLoader::_calculateTangents(vector<MeshPart>& objParts)
 			float r = 1.0f / (deltaUV1.x * deltaUV2.y - deltaUV1.y * deltaUV2.x);
 			Vec3 tangent = (deltaPos1 * deltaUV2.y - deltaPos2 * deltaUV1.y) * r;
 
-			// Add to current OBJ part
-			objPart.tangents.push_back(tangent);
-			objPart.tangents.push_back(tangent);
-			objPart.tangents.push_back(tangent);
+			// Add to current mesh part
+			meshPart.tangents.push_back(tangent);
+			meshPart.tangents.push_back(tangent);
+			meshPart.tangents.push_back(tangent);
 		}
 	}
 }

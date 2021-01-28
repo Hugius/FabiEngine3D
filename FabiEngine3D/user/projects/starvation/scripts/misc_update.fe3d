@@ -1,4 +1,4 @@
-7 23
+22 23
 META script_type_update
 
 /// Torch position
@@ -18,3 +18,7 @@ IF _isDayTime IS <false> AND equipped IS <true>:
 ELSE:
     fe3d:light_set_visible("torch", <false>)
     fe3d:billboard_set_visible("torch", <false>)
+
+/// Black intro fading
+fe3d:image_set_alpha("black", _blackAlpha)
+DECR _blackAlpha 0.0025

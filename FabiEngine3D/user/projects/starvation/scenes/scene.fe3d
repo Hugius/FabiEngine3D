@@ -152,7 +152,7 @@ MODEL 1107752096@tree6 193.257 10.7843 60.1932 0 0 0 1.25 1 1.25 user\assets\mod
 MODEL 270583440@tree6 201.86 15.2703 86 0 0 0 1.25 1 1.25 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
 MODEL 1720827548@statue1 35 6.37255 -15 0 180 0 1.2 1.2 1.2 user\assets\models\misc\statue1.obj user\assets\textures\diffuse_maps\misc\statue1.png ? ? user\assets\textures\normal_maps\misc\statue1.png 0 0 0 0 1 1 1 1 0.5 1 1 1 1 ? 0 ? statue 0 0 0 2.4 5.8 2.8
 MODEL 1486741576@tree6 187 8.918 89.7928 0 0 0 1.25 1 1.25 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
-MODEL 499407595@crate1 -15.6887 6.37255 16.3023 0 0 0 2.4 2.4 2.4 user\assets\models\misc\crate1.obj user\assets\textures\diffuse_maps\misc\crate1.png ? ? user\assets\textures\normal_maps\misc\crate1.png 0 0 1 0 0 1 1 1 0.5 1 1 1 1 ? 0 ? crate 0 0 0 0.9 0.9 0.9
+MODEL 499407595@crate1 -15.8887 6.37255 16.0023 0 0 0 2.4 2.4 2.4 user\assets\models\misc\crate1.obj user\assets\textures\diffuse_maps\misc\crate1.png ? ? user\assets\textures\normal_maps\misc\crate1.png 0 0 1 0 0 1 1 1 0.5 1 1 1 1 ? 0 ? crate 0 0 0 0.9 0.9 0.9
 MODEL 1019327876@tree6 174.93 8.82353 65.2092 0 0 0 1.25 1 1.25 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
 MODEL 1359794152@tree6 -15.2724 9.80392 133.214 0 0 0 1.25 1 1.25 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
 MODEL 1586334174@plant1 163.916 6.37255 43.1542 0 0 0 0.3 0.3 0.3 user\assets\models\foliage\plant1.obj user\assets\textures\diffuse_maps\foliage\plant1.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 ? 0 ? plant 0 0 0 9 3.9 7.89999
@@ -279,7 +279,7 @@ MODEL 866819577@wall -59.1121 6.37255 -24 0 0 0 1.25 1.25 1.25 user\assets\model
 MODEL 1520137174@tower1 -76.7326 6.37255 -22 0 0 0 1 1 1 user\assets\models\buildings\tower1.obj ? ? ? ? 0 0 1 0 0 1 1 1 0.5 1 1 1 1 ? 0 ? tower 0 0 0 9.1 34 9
 MODEL 677704261@wall 92.1286 6.37255 -24 0 0 0 1.25 1.25 1.25 user\assets\models\buildings\wall.obj ? ? ? ? 0 0 1 0 0 1 1 1 0.5 1 1 1 1 ? 0 ? wall 0 0 -0.5 21.3 14 2.8
 MODEL 186187849@tower1 136.302 6.37254 -22 0 0 0 1 1 1 user\assets\models\buildings\tower1.obj ? ? ? ? 0 0 1 0 0 1 1 1 0.5 1 1 1 1 ? 0 ? tower 0 0 0 9.1 34 9
-MODEL 1357367651@windmill -14.5435 6 22.9003 0 65 0 5.4 5.4 5.4 user\assets\models\buildings\windmill.obj ? ? ? ? 0 0 1 0 1 1 1 1 0.5 1 1 1 1 ? 0 windmill_rotation windmill 0 0 -0.03 1.9 3.6 1.9 tower 0 0 0 0.0999999 0.0499999 0.0599999
+MODEL 1357367651@windmill -14.5435 6 22.9003 0 65 0 5.8 5.8 5.8 user\assets\models\buildings\windmill.obj ? ? ? ? 0 0 1 0 1 1 1 1 0.5 1 1 1 1 ? 0 windmill_rotation windmill 0 0 -0.03 1.9 3.6 1.9 tower 0 0 0 0.0999999 0.0499999 0.0599999
 MODEL 1099082448@timber 91.8458 6.37255 11 0 90 0 1.75 1.75 1.75 user\assets\models\misc\timber.obj ? ? ? ? 0 0 1 0 0 1 1 1 0.5 1 1 1 1 ? 0 ? timber 0 0 0 5.6 0.95 0.9
 MODEL 1638265278@statue1 24.3 6.37255 -15 0 180 0 1.2 1.2 1.2 user\assets\models\misc\statue1.obj user\assets\textures\diffuse_maps\misc\statue1.png ? ? user\assets\textures\normal_maps\misc\statue1.png 0 0 0 0 1 1 1 1 0.5 1 1 1 1 ? 0 ? statue 0 0 0 2.4 5.8 2.8
 MODEL 87009552@soil 80.7289 6.37254 5.83277 0 0 0 10 10 10 user\assets\models\misc\plane.obj user\assets\textures\diffuse_maps\misc\soil.png ? ? user\assets\textures\normal_maps\misc\soil.png 0 0 1 0 0 1 1 1 0.75 1 1 1 5 ? 0 ?
@@ -310,13 +310,13 @@ MODEL 90925156@tree7 162.27 6.37255 74.802 0 0 0 4.5 5.4 4.5 user\assets\models\
 MODEL 125445010@torch1 62.8861 6.37254 45.6879 0 0 0 0.75 0.75 0.75 user\assets\models\misc\torch1.obj user\assets\textures\diffuse_maps\misc\torch1.png user\assets\textures\light_maps\misc\torch1.png user\assets\textures\reflection_maps\misc\torch1.png user\assets\textures\normal_maps\misc\torch1.png 0 0 1 0 1 0 1 1 0.5 1 1 1 1 ? 0 ? basket 0 4.06 0 2.3 1 2.2 pole -0.02 0 0 0.4 4.03 0.36
 MODEL instanced@grassfield 0 0 0 0 0 0 0.8 0.8 0.8 user\assets\models\foliage\grassfield.obj user\assets\textures\diffuse_maps\foliage\grassfield.png ? ? ? 0 0 1 1 0 0 1 1 1 1 1 1 1 ? 1 ? 15.4523 6.37255 79.817 11.8105 6.37255 80.064 8.02075 6.37255 79.7504 6.2325 6.37255 79.913 6.15546 6.37255 75.9433 10.2078 6.37255 75.0271 6.60099 6.37255 71.4428 8.18127 6.37255 69.8857 12.4874 6.37255 70.171 12.0055 6.37255 74.5734 15.3373 6.37255 74.8914 15.9747 6.37253 70.6673 15.2836 6.37255 77.3588 10.8191 6.37255 78.4536 15.2772 6.37255 78.6363 -5.7675 6.37255 70.9139 -1.3567 6.37255 70.2478 -1.59759 6.37255 74.715 -5.32808 6.37255 76.4281 -5.973 6.37255 78.7259 -0.749954 6.37255 78.6386
 MODEL 497108309@house3 81.8456 6.37255 40.8663 0 0 0 2 2 2 user\assets\models\buildings\house3.obj user\assets\textures\diffuse_maps\buildings\house3.png user\assets\textures\light_maps\buildings\house3.png user\assets\textures\reflection_maps\buildings\house3.png user\assets\textures\normal_maps\buildings\house3.png 0 0 1 0 1 1 1 1 1 1 1 1 1 ? 0 ? top -1.6 2.2 0 2.9 3.2 3.4 pole1 -2.93 0 1.45 0.2 2.21 0.22 pole2 -2.94 0 -1.45 0.2 2.22 0.23 base 1.5 0 -0.03 3.3 5.37999 3.36
-BILLBOARD 1705446200@fire 52 11 71 0 -163.469 -0 5 3 1 1 1 0 1 user\assets\textures\billboard_maps\fire1.png 1 ? ? 1 6 6 3 2.5
-BILLBOARD 521088961@fire 35 11 -19 0 -27.0445 -0 5 3 1 1 1 0 1 user\assets\textures\billboard_maps\fire1.png 1 ? ? 1 6 6 3 2.5
-BILLBOARD 385894073@fire -9.04673 11 12.6441 0 -242.641 -0 5 3 1 1 1 0 1 user\assets\textures\billboard_maps\fire1.png 1 ? ? 1 6 6 3 2.5
-BILLBOARD 654255707@fire 62.8829 11 45.7324 0 -147.154 -0 5 3 1 1 1 0 1 user\assets\textures\billboard_maps\fire1.png 1 ? ? 1 6 6 3 2.5
-BILLBOARD 1790011452@fire 25 11 -19 0 17.7834 -0 5 3 1 1 1 0 1 user\assets\textures\billboard_maps\fire1.png 1 ? ? 1 6 6 3 2.5
-BILLBOARD 1233497612@fire 60.1718 11 14.0814 0 -123.912 -0 5 3 1 1 1 0 1 user\assets\textures\billboard_maps\fire1.png 1 ? ? 1 6 6 3 2.5
-BILLBOARD 756379894@fire 19.0739 11 62.0151 0 -188.073 -0 5 3 1 1 1 0 1 user\assets\textures\billboard_maps\fire1.png 1 ? ? 1 6 6 3 2.5
+BILLBOARD 1705446200@fire 52 11 71 0 -128.047 -0 5 3 1 1 1 0 1 user\assets\textures\billboard_maps\fire1.png 1 ? ? 1 6 6 3 2.5
+BILLBOARD 521088961@fire 35 11 -19 0 -61.385 -0 5 3 1 1 1 0 1 user\assets\textures\billboard_maps\fire1.png 1 ? ? 1 6 6 3 2.5
+BILLBOARD 385894073@fire -9.04673 11 12.6441 0 -90.589 -0 5 3 1 1 1 0 1 user\assets\textures\billboard_maps\fire1.png 1 ? ? 1 6 6 3 2.5
+BILLBOARD 654255707@fire 62.8829 11 45.7324 0 -111.209 -0 5 3 1 1 1 0 1 user\assets\textures\billboard_maps\fire1.png 1 ? ? 1 6 6 3 2.5
+BILLBOARD 1790011452@fire 25 11 -19 0 -56.5823 -0 5 3 1 1 1 0 1 user\assets\textures\billboard_maps\fire1.png 1 ? ? 1 6 6 3 2.5
+BILLBOARD 1233497612@fire 60.1718 11 14.0814 0 -91.0904 -0 5 3 1 1 1 0 1 user\assets\textures\billboard_maps\fire1.png 1 ? ? 1 6 6 3 2.5
+BILLBOARD 756379894@fire 19.0739 11 62.0151 0 -139.815 -0 5 3 1 1 1 0 1 user\assets\textures\billboard_maps\fire1.png 1 ? ? 1 6 6 3 2.5
 AMBIENT_LIGHT 1 1 1 0.75
 DIRECTIONAL_LIGHT 1000 1000 1000 1 1 1 1 200 100
 POINT_LIGHT pointlight1804680928 35 9 -19 1 1 0.501961 2 1
@@ -329,12 +329,12 @@ POINT_LIGHT pointlight17009596 -9.07242 9 12.6915 1 1 0.501961 2 1
 CAMERA_FOV 90
 LOD_DISTANCE 1000
 EDITOR_SPEED 10
-EDITOR_POSITION 28.8586 11.4216 -6.96992
-EDITOR_YAW 265.283
-EDITOR_PITCH -2.98578
+EDITOR_POSITION -22.7451 29.2216 12.5033
+EDITOR_YAW 9.16334
+EDITOR_PITCH -62.9459
 GRAPHICS_SHADOWS 1 100 55.000000 55.000000 55.000000 0.000000 0.000000 0.000000 1 100
 GRAPHICS_MOTIONBLUR 1 0.25
 GRAPHICS_DOF 1 1 5 2
 GRAPHICS_FOG 1 150 512 0.75 0.501961 0.501961 0.501961
 GRAPHICS_LENSFLARE 1 user\assets\textures\flare_maps\flare.png 1 1
-GRAPHICS_SKYHDR 1 0.3
+GRAPHICS_SKYHDR 1 0.5

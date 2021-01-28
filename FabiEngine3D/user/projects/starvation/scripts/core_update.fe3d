@@ -1,37 +1,37 @@
-32 3
+32 0
 META script_type_update
 META execution_entry
 
 /// Bag inventory
-///EXEC bag_update
+EXEC bag_update
 
 /// Tools inventory
-///EXEC inventory_equipping
-///EXEC inventory_misc
+EXEC inventory_equipping
+EXEC inventory_misc
 
 /// Player
-///EXEC player_status
-///EXEC player_jump
-///EXEC player_movement
-///EXEC player_bobbing
-///EXEC player_misc
+EXEC player_status
+EXEC player_jump
+EXEC player_movement
+EXEC player_bobbing
+EXEC player_misc
 
 /// Animations
-///EXEC animation_misc
-///EXEC animation_player
-///EXEC animation_tool
+EXEC animation_misc
+EXEC animation_player
+EXEC animation_tool
 
 /// Working
-///EXEC cutting_update
-///EXEC mining_update
-///EXEC gathering_update
-///EXEC fishing_update
+EXEC cutting_update
+EXEC mining_update
+EXEC gathering_update
+EXEC fishing_update
 
 /// NPC interaction
-///EXEC npc_update
+EXEC npc_update
 
 /// Other
-///EXEC pickup_update
+EXEC pickup_update
 EXEC crafting_update
 EXEC underwater_update
 EXEC time_update

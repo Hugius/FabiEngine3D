@@ -149,17 +149,7 @@ void BottomViewportController::update()
 	if (_fe3d.misc_checkInterval("gameEntityCount", 10))
 	{
 		string textID = _statsScreen->getTextfield("gameEntityCount")->getEntityID();
-
-		int total = 0;
-		for (auto& ID : _fe3d.gameEntity_getAllIDs())
-		{
-			if (_fe3d.gameEntity_isVisible(ID))
-			{
-				total++;
-			}
-		}
-
-		string text = "Game entities: " + to_string(total);
+		string text = "Game entities: " + to_string(_fe3d.gameEntity_getAllIDs().size());
 		_fe3d.textEntity_setTextContent(textID, text, _charSize.x, _charSize.y);
 	}
 
@@ -167,17 +157,7 @@ void BottomViewportController::update()
 	if (_fe3d.misc_checkInterval("billboardEntityCount", 10))
 	{
 		string textID = _statsScreen->getTextfield("billboardEntityCount")->getEntityID();
-
-		int total = 0;
-		for (auto& ID : _fe3d.billboardEntity_getAllIDs())
-		{
-			if (_fe3d.billboardEntity_isVisible(ID))
-			{
-				total++;
-			}
-		}
-
-		string text = "Billboard entities: " + to_string(total);
+		string text = "Billboard entities: " + to_string(_fe3d.billboardEntity_getAllIDs().size());
 		_fe3d.textEntity_setTextContent(textID, text, _charSize.x, _charSize.y);
 	}
 
@@ -185,17 +165,7 @@ void BottomViewportController::update()
 	if (_fe3d.misc_checkInterval("lightEntityCount", 10))
 	{
 		string textID = _statsScreen->getTextfield("lightEntityCount")->getEntityID();
-
-		int total = 0;
-		for (auto& ID : _fe3d.lightEntity_getAllIDs())
-		{
-			if (_fe3d.lightEntity_isVisible(ID))
-			{
-				total++;
-			}
-		}
-
-		string text = "Light entities: " + to_string(total);
+		string text = "Light entities: " + to_string(_fe3d.lightEntity_getAllIDs().size());
 		_fe3d.textEntity_setTextContent(textID, text, _charSize.x, _charSize.y);
 	}
 
@@ -203,14 +173,7 @@ void BottomViewportController::update()
 	if (_fe3d.misc_checkInterval("aabbEntityCount", 10))
 	{
 		string textID = _statsScreen->getTextfield("aabbEntityCount")->getEntityID();
-
-		int total = 0;
-		for (auto& ID : _fe3d.aabbEntity_getAllIDs())
-		{
-			total++;
-		}
-
-		string text = "AABB entities: " + to_string(total);
+		string text = "AABB entities: " + to_string(_fe3d.aabbEntity_getAllIDs().size());
 		_fe3d.textEntity_setTextContent(textID, text, _charSize.x, _charSize.y);
 	}
 
@@ -218,28 +181,7 @@ void BottomViewportController::update()
 	if (_fe3d.misc_checkInterval("guiEntityCount", 10))
 	{
 		string textID = _statsScreen->getTextfield("guiEntityCount")->getEntityID();
-
-		int total = 0;
-
-		// Count GUI entities
-		for (auto& ID : _fe3d.guiEntity_getAllIDs())
-		{
-			if (_fe3d.guiEntity_isVisible(ID))
-			{
-				total++;
-			}
-		}
-
-		// Count text entities
-		for (auto& ID : _fe3d.textEntity_getAllIDs())
-		{
-			if (_fe3d.textEntity_isVisible(ID))
-			{
-				total++;
-			}
-		}
-
-		string text = "GUI entities: " + to_string(total);
+		string text = "GUI entities: " + to_string(_fe3d.guiEntity_getAllIDs().size() + _fe3d.textEntity_getAllIDs().size());
 		_fe3d.textEntity_setTextContent(textID, text, _charSize.x, _charSize.y);
 	}
 

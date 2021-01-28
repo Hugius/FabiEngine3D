@@ -1,4 +1,4 @@
-15 28
+12 28
 META script_type_update
 
 /// Update time passing
@@ -11,7 +11,7 @@ IF _passedTime MORE 100.0:
         EDIT _mustBeDayTime = <true>
 ELSE:
     IF _isTimeCycling IS <false>:
-        INCR _passedTime 0.1
+        INCR _passedTime 0.01
 
 /// Update day-night cycle
 CONST DEC ambSpeed = 0.00015

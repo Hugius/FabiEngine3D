@@ -23,7 +23,7 @@ public:
 	GLuint         getTexture2D(const string& filePath, bool mipmap, bool aniso, bool repeat);
 	GLuint         getTexture3D(const array<string, 6>& filePaths);
 	GLuint		   getText(const string& textContent, const string& fontPath);
-	const vector<float>& getBitmapPixels(const string& filePath);
+	const vector<float>* getBitmapPixels(const string& filePath);
 
 	// Multithreaded caching
 	void cacheTexturesMultiThreaded2D(const vector<string>& filePaths);

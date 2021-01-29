@@ -10,7 +10,7 @@ void FinalRenderer::bind()
 	// Enable shader
 	_shader.bind();
 
-	// Uniforms
+	// Shader uniforms
 	_shader.uploadUniform("u_mixValue", _renderBus.getMotionBlurMixValue());
 	_shader.uploadUniform("u_sampler_scene", 0);
 	_shader.uploadUniform("u_sampler_motionblur", 1);
@@ -29,24 +29,32 @@ void FinalRenderer::render(const shared_ptr<GuiEntity> entity, GLuint sceneMap, 
 {
 	if (entity->isVisible())
 	{
-		// Uniforms
+		// Shader uniforms
 		_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix());
 		_shader.uploadUniform("u_isMirroredHorizontally", entity->isMirroredHorizonally());
 		_shader.uploadUniform("u_isMirroredVertically", entity->isMirroredVertically());
 
-		// Bind
-		glBindVertexArray(entity->getOglBuffer()->getVAO());
+		// Bind textures
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, sceneMap);
 		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D, motionblurMap);
 
-		// Render
-		glDrawArrays(GL_TRIANGLES, 0, 6);
+		// Check if entity has an OpenGL buffer
+		if (!entity->getOglBuffers().empty())
+		{
+			// Bind buffer
+			glBindVertexArray(entity->getOglBuffer()->getVAO());
 
-		// Unbind
+			// Render
+			glDrawArrays(GL_TRIANGLES, 0, 6);
+
+			// Unbind buffer
+			glBindVertexArray(0);
+		}
+
+		// Unbind textures
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, 0);
-		glBindVertexArray(0);
 	}
 }

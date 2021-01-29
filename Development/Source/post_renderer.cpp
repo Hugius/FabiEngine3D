@@ -6,7 +6,7 @@ void PostRenderer::bind()
 	// Bind shader
 	_shader.bind();
 
-	// Fragment shader uniforms
+	// Shader uniforms
 	_shader.uploadUniform("u_nearZ", _renderBus.getNearZ());
 	_shader.uploadUniform("u_farZ", _renderBus.getFarZ());
 	_shader.uploadUniform("u_isBloomEnabled", _renderBus.isBloomEnabled());
@@ -48,8 +48,7 @@ void PostRenderer::render(const shared_ptr<GuiEntity> entity)
 		_shader.uploadUniform("u_sampler_blur", 3);
 		_shader.uploadUniform("u_sampler_flare", 4);
 		
-		// Bind
-		glBindVertexArray(entity->getOglBuffer()->getVAO());
+		// Bind textures
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, _renderBus.getSceneMap());
 		glActiveTexture(GL_TEXTURE1);
@@ -61,12 +60,21 @@ void PostRenderer::render(const shared_ptr<GuiEntity> entity)
 		glActiveTexture(GL_TEXTURE4);
 		glBindTexture(GL_TEXTURE_2D, _renderBus.getLensFlareMap());
 
-		// Render
-		glDrawArrays(GL_TRIANGLES, 0, 6);
+		// Check if entity has an OpenGL buffer
+		if (!entity->getOglBuffers().empty())
+		{
+			// Bind buffer
+			glBindVertexArray(entity->getOglBuffer()->getVAO());
 
-		// Unbind
+			// Render
+			glDrawArrays(GL_TRIANGLES, 0, 6);
+
+			// Unbind buffer
+			glBindVertexArray(0);
+		}
+
+		// Unbind textures
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, 0);
-		glBindVertexArray(0);
 	}
 }

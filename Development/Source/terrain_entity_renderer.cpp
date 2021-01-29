@@ -95,7 +95,7 @@ void TerrainEntityRenderer::render(const shared_ptr<TerrainEntity> entity)
 {
 	if (entity->isVisible())
 	{
-		// Faceculling
+		// Face culling
 		glEnable(GL_CULL_FACE);
 
 		// Shader uniforms
@@ -125,7 +125,7 @@ void TerrainEntityRenderer::render(const shared_ptr<TerrainEntity> entity)
 		_shader.uploadUniform("u_sampler_normalMapB",  8);
 		_shader.uploadUniform("u_sampler_shadowMap",  9);
 
-		// Texture binding
+		// Bind textures
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap());
 		glActiveTexture(GL_TEXTURE1);
@@ -147,17 +147,23 @@ void TerrainEntityRenderer::render(const shared_ptr<TerrainEntity> entity)
 		glActiveTexture(GL_TEXTURE9);
 		glBindTexture(GL_TEXTURE_2D, _renderBus.getShadowMap());
 
-		// Bind
-		glBindVertexArray(entity->getOglBuffer()->getVAO());
+		// Check if entity has an OpenGL buffer
+		if (!entity->getOglBuffers().empty())
+		{
+			// Bind buffer
+			glBindVertexArray(entity->getOglBuffer()->getVAO());
 
-		// Render
-		glDrawArrays(GL_TRIANGLES, 0, entity->getOglBuffer()->getVertexCount());
-		_renderBus.increaseTriangleCount(entity->getOglBuffer()->getVertexCount() / 3);
+			// Render
+			glDrawArrays(GL_TRIANGLES, 0, entity->getOglBuffer()->getVertexCount());
+			_renderBus.increaseTriangleCount(entity->getOglBuffer()->getVertexCount() / 3);
 
-		// Unbind
+			// Unbind buffer
+			glBindVertexArray(0);
+		}
+
+		// Unbind textures
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, 0);
-		glBindVertexArray(0);
 
 		// Face culling
 		glDisable(GL_CULL_FACE);

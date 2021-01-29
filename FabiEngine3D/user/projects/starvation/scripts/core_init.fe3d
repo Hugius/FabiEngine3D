@@ -1,8 +1,8 @@
-9 11
+6 13
 META script_type_init
 META execution_entry
 
-fe3d:scene_load("scene")
+fe3d:scene_load("starvia")
 
 EXEC underwater_init
 EXEC bag_init

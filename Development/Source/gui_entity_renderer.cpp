@@ -28,7 +28,7 @@ void GuiEntityRenderer::render(const shared_ptr<GuiEntity> entity)
 		((entity->getTranslation().y - entity->getScaling().y) < entity->getMaxPosition().y) &&
 		((entity->getTranslation().y + entity->getScaling().y) > entity->getMinPosition().y))
 	{
-		// Uniforms
+		// Shader uniforms
 		_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix());
 		_shader.uploadUniform("u_isMirroredHorizontally", entity->isMirroredHorizonally());
 		_shader.uploadUniform("u_isMirroredVertically", entity->isMirroredVertically());
@@ -41,18 +41,26 @@ void GuiEntityRenderer::render(const shared_ptr<GuiEntity> entity)
 		_shader.uploadUniform("u_hasTexture", entity->getDiffuseMap() != 0);
 		_shader.uploadUniform("u_sampler_diffuse", 0);
 
-		// Bind
-		glBindVertexArray(entity->getOglBuffer()->getVAO());
+		// Bind textures
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap());
 
-		// Render
-		glDrawArrays(GL_TRIANGLES, 0, 6);
-		_renderBus.increaseTriangleCount(2);
+		// Check if entity has an OpenGL buffer
+		if (!entity->getOglBuffers().empty())
+		{
+			// Bind buffer
+			glBindVertexArray(entity->getOglBuffer()->getVAO());
 
-		// Unbind
+			// Render
+			glDrawArrays(GL_TRIANGLES, 0, 6);
+			_renderBus.increaseTriangleCount(2);
+
+			// Unbind buffer
+			glBindVertexArray(0);
+		}
+
+		// Unbind textures
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, 0);
-		glBindVertexArray(0);
 	}
 }

@@ -23,7 +23,16 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 	{
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			_fe3d.engine_stop();
+			if (_fe3d.engine_getSelectedGame().empty()) // Engine preview
+			{
+				_gameMustStop = true;
+			}
+			else // Engine preview
+			{
+				_fe3d.engine_stop();
+			}
+			
+			// Return
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
@@ -54,7 +63,7 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 				_fe3d.logger_throwInfo(arguments[0].getBoolean() ? "true" : "false");
 			}
 
-			// Add return value
+			// Return
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}

@@ -31,7 +31,7 @@ GLuint BlurRenderer::blurTexture(const shared_ptr<GuiEntity> entity, GLuint text
 	bool overrideHorizontal = (direction == BlurDirection::HORIZONTAL);
 	bool overrideVertical = (direction == BlurDirection::VERTICAL);
 
-	// Uniforms
+	// Shader uniforms
 	_shader.uploadUniform("u_intensity", intensity);
 
 	// Blur the texture
@@ -71,20 +71,27 @@ void BlurRenderer::_render(const shared_ptr<GuiEntity> entity, GLuint texture)
 {
 	if (entity->isVisible())
 	{
-		// Uniforms
+		// Shader uniforms
 		_shader.uploadUniform("u_sampler_diffuse", 0);
 
-		// Bind
-		glBindVertexArray(entity->getOglBuffer()->getVAO());
+		// Bind textures
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, texture);
 
-		// Render
-		glDrawArrays(GL_TRIANGLES, 0, 6);
+		// Check if entity has an OpenGL buffer
+		if (!entity->getOglBuffers().empty())
+		{
+			// Bind buffer
+			glBindVertexArray(entity->getOglBuffer()->getVAO());
 
-		// Unbind
+			// Render
+			glDrawArrays(GL_TRIANGLES, 0, 6);
+
+			// Unbind buffer
+			glBindVertexArray(0);
+		}
+
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, 0);
-		glBindVertexArray(0);
 	}
 }

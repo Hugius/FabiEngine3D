@@ -66,30 +66,36 @@ void BillboardEntityRenderer::render(const shared_ptr<BillboardEntity> entity)
 		_shader.uploadUniform("u_maxHeight", entity->getMaxHeight());
 		_shader.uploadUniform("u_minAlpha", entity->getTextContent().empty() ? 0.9f : 0.1f);
 
-		// Texture
+		// Bind textures
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap());
 
-		// Bind
-		glBindVertexArray(entity->getOglBuffer()->getVAO());
-
-		// Render
-		if (entity->getOglBuffer()->isInstanced()) // Instanced
+		// Check if entity has an OpenGL buffer
+		if (!entity->getOglBuffers().empty())
 		{
-			_shader.uploadUniform("u_isInstanced", true);
-			glDrawArraysInstanced(GL_TRIANGLES, 0, entity->getOglBuffer()->getVertexCount(), entity->getOglBuffer()->getInstancedOffsetCount());
-			_renderBus.increaseTriangleCount((entity->getOglBuffer()->getInstancedOffsetCount() * entity->getOglBuffer()->getVertexCount()) / 3);
-		}
-		else // Non-instanced
-		{
-			_shader.uploadUniform("u_isInstanced", false);
-			glDrawArrays(GL_TRIANGLES, 0, entity->getOglBuffer()->getVertexCount());
-			_renderBus.increaseTriangleCount(entity->getOglBuffer()->getVertexCount() / 3);
+			// Bind buffer
+			glBindVertexArray(entity->getOglBuffer()->getVAO());
+
+			// Render
+			if (entity->getOglBuffer()->isInstanced()) // Instanced
+			{
+				_shader.uploadUniform("u_isInstanced", true);
+				glDrawArraysInstanced(GL_TRIANGLES, 0, entity->getOglBuffer()->getVertexCount(), entity->getOglBuffer()->getInstancedOffsetCount());
+				_renderBus.increaseTriangleCount((entity->getOglBuffer()->getInstancedOffsetCount() * entity->getOglBuffer()->getVertexCount()) / 3);
+			}
+			else // Non-instanced
+			{
+				_shader.uploadUniform("u_isInstanced", false);
+				glDrawArrays(GL_TRIANGLES, 0, entity->getOglBuffer()->getVertexCount());
+				_renderBus.increaseTriangleCount(entity->getOglBuffer()->getVertexCount() / 3);
+			}
+
+			// Unbind buffer
+			glBindVertexArray(0);
 		}
 
-		// Unbind
+		// Unbind textures
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, 0);
-		glBindVertexArray(0);
 	}
 }

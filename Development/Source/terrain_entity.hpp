@@ -9,7 +9,7 @@ public:
 	~TerrainEntity() = default;
 
 	// Setters
-	void setPixelColors(const vector<float>& value);
+	void setPixelValues(const vector<float>& value);
 	void setHeightMapPath(const string& value);
 	void setDiffuseMap(GLuint value);
 	void setDiffuseMapPath(const string& value);
@@ -85,7 +85,7 @@ public:
 	const float getSpecularLightingIntensity() const;
 
 	// Other
-	const vector<float>& getPixelColors() const;
+	const vector<float>& getPixelValues() const;
 	const bool isBlendMapped()			  const;
 	const bool isNormalMapped()			  const;
 	const bool isNormalMappedR()		  const;
@@ -94,7 +94,7 @@ public:
 	const bool isSpecularLighted()		  const;
 
 private:
-	vector<float> _pixelColors;
+	vector<float> _pixelValues;
 	vector<Vec3> _vertices;
 	vector<Vec2> _uvCoords;
 	vector<Vec3> _normals;

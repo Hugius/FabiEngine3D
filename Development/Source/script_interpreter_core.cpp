@@ -266,6 +266,7 @@ void ScriptInterpreter::unload()
 	_destroyEntryID = "";
 	_lastLoggerMessageCount = 0;
 	_hasThrownError = false;
+	_gameMustStop = false;
 	_scopeHasChanged = false;
 	_passedScopeChanger = false;
 }

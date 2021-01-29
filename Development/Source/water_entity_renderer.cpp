@@ -115,7 +115,7 @@ void WaterEntityRenderer::render(const shared_ptr<WaterEntity> entity)
 		_shader.uploadUniform("u_sampler_normalMap", 4);
 		_shader.uploadUniform("u_sampler_displacementMap", 5);
 		
-		// Textures
+		// Bind textures
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, _renderBus.getSceneReflectionMap());
 		glActiveTexture(GL_TEXTURE1);
@@ -130,31 +130,40 @@ void WaterEntityRenderer::render(const shared_ptr<WaterEntity> entity)
 		glBindTexture(GL_TEXTURE_2D, entity->getDisplacementMap());
 		glActiveTexture(GL_TEXTURE0);
 
-		// Bind
-		if (entity->isWaving())
+		// Check if entity has an OpenGL buffer
+		if (!entity->getOglBuffers().empty())
 		{
-			glBindVertexArray(entity->getOglBuffer()->getVAO());
-		}
-		else
-		{
-			glBindVertexArray(entity->getSimplifiedOglBuffer()->getVAO());
+			// Bind buffer
+			if (entity->isWaving())
+			{
+				glBindVertexArray(entity->getOglBuffer()->getVAO());
+			}
+			else
+			{
+				glBindVertexArray(entity->getSimplifiedOglBuffer()->getVAO());
+			}
+
+			// Render
+			if (!entity->getOglBuffers().empty())
+			{
+				if (entity->isWaving())
+				{
+					glDrawArrays(GL_TRIANGLES, 0, entity->getOglBuffer()->getVertexCount());
+					_renderBus.increaseTriangleCount(entity->getOglBuffer()->getVertexCount() / 3);
+				}
+				else
+				{
+					glDrawArrays(GL_TRIANGLES, 0, entity->getSimplifiedOglBuffer()->getVertexCount());
+					_renderBus.increaseTriangleCount(entity->getSimplifiedOglBuffer()->getVertexCount() / 3);
+				}
+			}
+
+			// Unbind buffer
+			glBindVertexArray(0);
 		}
 
-		// Render
-		if (entity->isWaving())
-		{
-			glDrawArrays(GL_TRIANGLES, 0, entity->getOglBuffer()->getVertexCount());
-			_renderBus.increaseTriangleCount(entity->getOglBuffer()->getVertexCount() / 3);
-		}
-		else
-		{
-			glDrawArrays(GL_TRIANGLES, 0, entity->getSimplifiedOglBuffer()->getVertexCount());
-			_renderBus.increaseTriangleCount(entity->getSimplifiedOglBuffer()->getVertexCount() / 3);
-		}
-
-		// Unbind
+		// Unbind textures
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, 0);
-		glBindVertexArray(0);
 	}
 }

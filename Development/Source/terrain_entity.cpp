@@ -1,8 +1,8 @@
 #include "terrain_entity.hpp"
 
-void TerrainEntity::setPixelColors(const vector<float>& value)
+void TerrainEntity::setPixelValues(const vector<float>& value)
 {
-	_pixelColors = value;
+	_pixelValues = value;
 }
 
 void TerrainEntity::setHeightMapPath(const string& value)
@@ -330,9 +330,9 @@ const float TerrainEntity::getSpecularLightingIntensity() const
 	return _specularLightingIntensity;
 }
 
-const vector<float>& TerrainEntity::getPixelColors() const
+const vector<float>& TerrainEntity::getPixelValues() const
 {
-	return _pixelColors;
+	return _pixelValues;
 }
 
 const bool TerrainEntity::isSpecularLighted() const

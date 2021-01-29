@@ -275,7 +275,7 @@ begin:
 	return it->second;
 }
 
-const vector<float>& TextureLoader::getBitmapPixels(const string& filePath)
+const vector<float>* TextureLoader::getBitmapPixels(const string& filePath)
 {
 begin:
 	auto it = _bitmapCache.find(filePath);
@@ -286,7 +286,7 @@ begin:
 		// Check pixels status
 		if (loadedPixels.empty())
 		{
-			return {};
+			return nullptr;
 		}
 		else
 		{
@@ -298,7 +298,7 @@ begin:
 		}
 	}
 
-	return it->second;
+	return &it->second;
 }
 
 void TextureLoader::clearTextureCache2D(const string& filePath)

@@ -333,3 +333,8 @@ bool ScriptInterpreter::hasThrownError()
 {
 	return _hasThrownError;
 }
+
+bool ScriptInterpreter::gameMustStop()
+{
+	return _gameMustStop;
+}

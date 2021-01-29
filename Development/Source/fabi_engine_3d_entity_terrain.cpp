@@ -9,11 +9,16 @@ void FabiEngine3D::terrainEntity_add(const string& ID, const string& heightMapPa
 
 void FabiEngine3D::terrainEntity_setHeightmap(const string& ID, const string& heightMapPath)
 {
-	auto& pixelColors = _core->_textureLoader.getBitmapPixels(heightMapPath);
-	_core->_terrainEntityManager.getEntity(ID)->setHeightMapPath(heightMapPath);
-	_core->_terrainEntityManager.getEntity(ID)->setPixelColors(pixelColors);
-	_core->_terrainEntityManager.getEntity(ID)->setSize(static_cast<float>(sqrt(pixelColors.size())));
-	_core->_terrainEntityManager.generateModel(ID);
+	auto pixelValues = _core->_textureLoader.getBitmapPixels(heightMapPath);
+
+	// Check if heightmap loading went well
+	if (pixelValues != nullptr)
+	{
+		_core->_terrainEntityManager.getEntity(ID)->setHeightMapPath(heightMapPath);
+		_core->_terrainEntityManager.getEntity(ID)->setPixelValues(*pixelValues);
+		_core->_terrainEntityManager.getEntity(ID)->setSize(static_cast<float>(sqrt(pixelValues->size())));
+		_core->_terrainEntityManager.generateModel(ID);
+	}
 }
 
 void FabiEngine3D::terrainEntity_deleteAll()
@@ -236,19 +241,29 @@ void FabiEngine3D::terrainEntity_select(const string& ID)
 void FabiEngine3D::terrainEntity_setMaxHeight(const string& ID, float height)
 {
 	_core->_terrainEntityManager.getEntity(ID)->setMaxHeight(height);
-	_core->_terrainEntityManager.generateModel(ID);
 
-	// Load normal mapping again
-	if (_core->_terrainEntityManager.getEntity(ID)->isNormalMapped())
-	{
-		_core->_terrainEntityManager.loadNormalMapping(ID);
+	// Check if terrain mesh is loaded
+	if (!_core->_terrainEntityManager.getEntity(ID)->getPixelValues().empty())
+	{	
+		_core->_terrainEntityManager.generateModel(ID);
+
+		// Load normal mapping again
+		if (_core->_terrainEntityManager.getEntity(ID)->isNormalMapped())
+		{
+			_core->_terrainEntityManager.loadNormalMapping(ID);
+		}
 	}
 }
 
 void FabiEngine3D::terrainEntity_setUvRepeat(const string& ID, float repeat)
 {
 	_core->_terrainEntityManager.getEntity(ID)->setUvRepeat(repeat);
-	_core->_terrainEntityManager.generateModel(ID);
+
+	// Check if terrain mesh is loaded
+	if (!_core->_terrainEntityManager.getEntity(ID)->getPixelValues().empty())
+	{
+		_core->_terrainEntityManager.generateModel(ID);
+	}
 }
 
 void FabiEngine3D::terrainEntity_setDiffuseMap(const string& ID, const string& texturePath)

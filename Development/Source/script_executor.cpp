@@ -118,11 +118,15 @@ bool ScriptExecutor::isRunning()
 
 void ScriptExecutor::_validateExecution()
 {
-	if (_scriptInterpreter.hasThrownError())
+	if (_scriptInterpreter.hasThrownError()) // Script threw an error
 	{
 		_scriptInterpreter.unload();
 		_fe3d.misc_hideCursor();
 		_isInitialized = false;
 		_isRunning = false;
+	}
+	else if (_scriptInterpreter.gameMustStop()) // Script must stop
+	{
+		this->unload();
 	}
 }

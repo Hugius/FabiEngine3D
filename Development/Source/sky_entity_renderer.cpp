@@ -30,7 +30,7 @@ void SkyEntityRenderer::render(const shared_ptr<SkyEntity> mainEntity, const sha
 		// Check if a second skybox should be mixed with the main skybox
 		bool secondEnabled = ((mixEntity != nullptr) && mixEntity->isVisible());
 
-		// Uniforms
+		// Shader uniforms
 		_shader.uploadUniform("u_mixValue", _renderBus.getSkyMixValue());
 		_shader.uploadUniform("u_mainLightness", mainEntity->getLightness());		
 		_shader.uploadUniform("u_mainColor", mainEntity->getColor());
@@ -40,7 +40,7 @@ void SkyEntityRenderer::render(const shared_ptr<SkyEntity> mainEntity, const sha
 			_shader.uploadUniform("u_mixColor", mixEntity->getColor());
 		}
 		
-		// Textures
+		// Bind textures
 		_shader.uploadUniform("u_sampler_mainCubeMap", 0);
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_CUBE_MAP, mainEntity->getCubeMap());
@@ -51,16 +51,25 @@ void SkyEntityRenderer::render(const shared_ptr<SkyEntity> mainEntity, const sha
 			glBindTexture(GL_TEXTURE_CUBE_MAP, mixEntity->getCubeMap());
 		}
 
-		// Bind
-		glBindVertexArray(mainEntity->getOglBuffer()->getVAO());
+		// Check if entity has an OpenGL buffer
+		if (!mainEntity->getOglBuffers().empty())
+		{
+			// Bind buffer
+			glBindVertexArray(mainEntity->getOglBuffer()->getVAO());
 
-		// Render
-		glDrawArrays(GL_TRIANGLES, 0, mainEntity->getOglBuffer()->getVertexCount());
-		_renderBus.increaseTriangleCount(mainEntity->getOglBuffer()->getVertexCount() / 3);
+			// Render
+			if (!mainEntity->getOglBuffers().empty())
+			{
+				glDrawArrays(GL_TRIANGLES, 0, mainEntity->getOglBuffer()->getVertexCount());
+				_renderBus.increaseTriangleCount(mainEntity->getOglBuffer()->getVertexCount() / 3);
+			}
 
-		// Unbind
+			// Unbind buffer
+			glBindVertexArray(0);
+		}
+
+		// Unbind textures
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
-		glBindVertexArray(0);
 	}
 }

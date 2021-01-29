@@ -7,7 +7,7 @@ void ShadowRenderer::bind()
 	// Bind shader
 	_shader.bind();
 
-	// Vertex shader uniforms
+	// Shader uniforms
 	_shader.uploadUniform("u_lightSpaceMatrix", _renderBus.getShadowMatrix());
 
 	// Clipping (minY & maxY)
@@ -39,7 +39,7 @@ void ShadowRenderer::render(const shared_ptr<GameEntity> entity)
 			glEnable(GL_CULL_FACE);
 		}
 
-		// Uniforms
+		// Shader uniforms
 		_shader.uploadUniform("u_isAlphaObject", entity->isTransparent());
 		_shader.uploadUniform("u_currentY", entity->getTranslation().y);
 		_shader.uploadUniform("u_minHeight", entity->getMinHeight());

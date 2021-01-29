@@ -1,4 +1,4 @@
-45 27
+53 51
 META script_type_update
 
 /// Prepare crafting process
@@ -53,7 +53,6 @@ IF _isCrafting IS <true>:
         INT i = _craftIndex
         IF i IS 1 OR i IS 3 OR i IS 5 OR i IS 7 OR i IS 8 OR i IS 9 OR i IS 11:
             EDIT _durabilities[_equipIndex] = 100.0
-            fe3d:print("wtf")
         ELSE:
             EDIT _durabilities[_equipIndex] = 1.0
     ELIF cancelled IS <true> AND lmbPressed IS <true>:

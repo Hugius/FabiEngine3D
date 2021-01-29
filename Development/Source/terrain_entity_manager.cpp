@@ -56,7 +56,7 @@ void TerrainEntityManager::generateModel(const string& ID)
 	vector<Vec3> tempNormals;
 
 	// Handy values
-	const auto& pixelColors = entity->getPixelColors();
+	const auto& pixelColors = entity->getPixelValues();
 	const float size = entity->getSize();
 	const unsigned int uSize = static_cast<unsigned int>(size);
 	const float halfSize = size / 2.0f;
@@ -282,7 +282,7 @@ void TerrainEntityManager::update()
 
 float TerrainEntityManager::getPixelHeight(const string& ID, float x, float z)
 {
-	return _getPixelHeight(x, z, getEntity(ID)->getSize(), getEntity(ID)->getMaxHeight(), getEntity(ID)->getPixelColors());
+	return _getPixelHeight(x, z, getEntity(ID)->getSize(), getEntity(ID)->getMaxHeight(), getEntity(ID)->getPixelValues());
 }
 
 float TerrainEntityManager::_getPixelHeight(float x, float z, float size, float maxHeight, const vector<float>& pixelColors)

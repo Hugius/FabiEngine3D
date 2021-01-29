@@ -1,4 +1,4 @@
-27 24
+36 23
 META script_type_update
 
 /// Temporary values
@@ -30,13 +30,13 @@ IF shift IS <true> AND up IS <true>:
         MUL minSpeed 2.0
         MUL maxSpeed 2.0
         EDIT _isRunning = <true>
-        DECR _stamina 0.1
+        DECR _stamina 0.001
     ELSE:
         EDIT _isRunning = <false>
 ELSE:
     EDIT _isRunning = <false>
-    IF _stamina LESS 100.0 AND _isToolPlaying IS <false>:
-        INCR _stamina 0.1
+    IF _stamina LESS 10.0 AND _isToolPlaying IS <false>:
+        INCR _stamina 0.001
 
 /// Update camera movement
 BOOL condition1 = (_isToolPlaying IS <false> AND _isPickupPlaying IS <false>)

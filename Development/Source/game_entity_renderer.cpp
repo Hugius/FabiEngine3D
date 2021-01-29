@@ -138,7 +138,7 @@ void GameEntityRenderer::render(const shared_ptr<GameEntity> entity)
 			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		}
 
-		// Faceculling
+		// Face culling
 		if (entity->isFaceCulled())
 		{
 			glEnable(GL_CULL_FACE);

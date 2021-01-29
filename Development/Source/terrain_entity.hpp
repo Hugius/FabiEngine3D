@@ -84,14 +84,25 @@ public:
 	const float getSpecularLightingFactor() const;
 	const float getSpecularLightingIntensity() const;
 
+	// Booleans
+	const bool isBlendMapped()	   const;
+	const bool isNormalMapped()	   const;
+	const bool isNormalMappedR()   const;
+	const bool isNormalMappedG()   const;
+	const bool isNormalMappedB()   const;
+	const bool isSpecularLighted() const;
+	const bool hasDiffuseMap()	   const;
+	const bool hasNormalMap()	   const;
+	const bool hasBlendMap()	   const;
+	const bool hasDiffuseMapR()	   const;
+	const bool hasDiffuseMapG()	   const;
+	const bool hasDiffuseMapB()	   const;
+	const bool hasNormalMapR()	   const;
+	const bool hasNormalMapG()	   const;
+	const bool hasNormalMapB()	   const;
+
 	// Other
 	const vector<float>& getPixelValues() const;
-	const bool isBlendMapped()			  const;
-	const bool isNormalMapped()			  const;
-	const bool isNormalMappedR()		  const;
-	const bool isNormalMappedG()		  const;
-	const bool isNormalMappedB()		  const;
-	const bool isSpecularLighted()		  const;
 
 private:
 	vector<float> _pixelValues;

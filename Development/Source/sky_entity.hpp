@@ -28,6 +28,7 @@ public:
 	const float getOriginalLightness()			 const;
 	const float getLightness()					 const;
 	const float getRotationSpeed()				 const;
+	const bool hasCubeMap()						 const;
 
 private:
 	array<string, 6> _diffuseMapPaths = {"", "", "", "", "", ""};

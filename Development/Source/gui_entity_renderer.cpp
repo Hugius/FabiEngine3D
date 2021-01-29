@@ -7,9 +7,12 @@ void GuiEntityRenderer::bind()
 	// Bind shader
 	_shader.bind();
 
-	// Vertex shader uniforms
+	// Shader uniforms
 	_shader.uploadUniform("u_nearZ", _renderBus.getNearZ());
 	_shader.uploadUniform("u_farZ", _renderBus.getFarZ());
+
+	// Texture uniforms
+	_shader.uploadUniform("u_sampler", 0);
 
 	// Alpha blending
 	glEnable(GL_BLEND);
@@ -39,11 +42,13 @@ void GuiEntityRenderer::render(const shared_ptr<GuiEntity> entity)
 		_shader.uploadUniform("u_alpha", entity->getAlpha());
 		_shader.uploadUniform("u_isDepthEntity", entity->isDepthEntity());
 		_shader.uploadUniform("u_hasTexture", entity->getDiffuseMap() != 0);
-		_shader.uploadUniform("u_sampler_diffuse", 0);
 
-		// Bind textures
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap());
+		// Bind texture
+		if (entity->hasDiffuseMap())
+		{
+			glActiveTexture(GL_TEXTURE0);
+			glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap());
+		}
 
 		// Check if entity has an OpenGL buffer
 		if (!entity->getOglBuffers().empty())
@@ -59,8 +64,11 @@ void GuiEntityRenderer::render(const shared_ptr<GuiEntity> entity)
 			glBindVertexArray(0);
 		}
 
-		// Unbind textures
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, 0);
+		// Unbind texture
+		if (entity->hasDiffuseMap())
+		{
+			glActiveTexture(GL_TEXTURE0);
+			glBindTexture(GL_TEXTURE_2D, 0);
+		}
 	}
 }

@@ -8,11 +8,9 @@ void WaterEntityRenderer::bind()
 	// Bind shader
 	_shader.bind();
 
-	// Vertex shader uniforms
+	// Shader uniforms
 	_shader.uploadUniform("u_viewMatrix",		_renderBus.getViewMatrix());
 	_shader.uploadUniform("u_projectionMatrix",	_renderBus.getProjectionMatrix());
-
-	// Fragment shader uniforms
 	_shader.uploadUniform("u_directionalLightColor",	 _renderBus.getDirectionalLightColor());
 	_shader.uploadUniform("u_directionalLightPosition",  _renderBus.getDirectionalLightPosition());
 	_shader.uploadUniform("u_cameraPosition",			 _renderBus.getCameraPosition());
@@ -29,12 +27,28 @@ void WaterEntityRenderer::bind()
 	_shader.uploadUniform("u_isPointLightEnabled",		 _renderBus.isPointLightingEnabled());
 	_shader.uploadUniform("u_directionalLightIntensity", _renderBus.getDirectionalLightIntensity());
 
+	// Texture uniforms
+	_shader.uploadUniform("u_sampler_reflectionMap",   0);
+	_shader.uploadUniform("u_sampler_refractionMap",   1);
+	_shader.uploadUniform("u_sampler_depthMap",		   2);
+	_shader.uploadUniform("u_sampler_dudvMap",		   3);
+	_shader.uploadUniform("u_sampler_normalMap",	   4);
+	_shader.uploadUniform("u_sampler_displacementMap", 5);
+
+	// Bind textures
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, _renderBus.getSceneReflectionMap());
+	glActiveTexture(GL_TEXTURE1);
+	glBindTexture(GL_TEXTURE_2D, _renderBus.getSceneRefractionMap());
+	glActiveTexture(GL_TEXTURE2);
+	glBindTexture(GL_TEXTURE_2D, _renderBus.getSceneDepthMap());
+
 	// Depth testing
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_DEPTH_CLAMP_NV);
 	glDepthFunc(GL_LEQUAL);
 
-	// Blending
+	// Alpha blending
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
@@ -44,7 +58,12 @@ void WaterEntityRenderer::unbind()
 	glDisable(GL_DEPTH_TEST);
 	glDisable(GL_DEPTH_CLAMP_NV);
 	glDisable(GL_BLEND);
-
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, 0);
+	glActiveTexture(GL_TEXTURE1);
+	glBindTexture(GL_TEXTURE_2D, 0);
+	glActiveTexture(GL_TEXTURE2);
+	glBindTexture(GL_TEXTURE_2D, 0);
 	_shader.unbind();
 }
 
@@ -107,28 +126,22 @@ void WaterEntityRenderer::render(const shared_ptr<WaterEntity> entity)
 		isUnderWater = isUnderWater && (_renderBus.getCameraPosition().z < entity->getTranslation().z + (entity->getSize() / 2.0f));
 		_shader.uploadUniform("u_isUnderWater", isUnderWater);
 		
-		// Texture uniforms
-		_shader.uploadUniform("u_sampler_reflectionMap", 0);
-		_shader.uploadUniform("u_sampler_refractionMap", 1);
-		_shader.uploadUniform("u_sampler_depthMap", 2);
-		_shader.uploadUniform("u_sampler_dudvMap", 3);
-		_shader.uploadUniform("u_sampler_normalMap", 4);
-		_shader.uploadUniform("u_sampler_displacementMap", 5);
-		
 		// Bind textures
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, _renderBus.getSceneReflectionMap());
-		glActiveTexture(GL_TEXTURE1);
-		glBindTexture(GL_TEXTURE_2D, _renderBus.getSceneRefractionMap());
-		glActiveTexture(GL_TEXTURE2);
-		glBindTexture(GL_TEXTURE_2D, _renderBus.getSceneDepthMap());
-		glActiveTexture(GL_TEXTURE3);
-		glBindTexture(GL_TEXTURE_2D, entity->getDudvMap());
-		glActiveTexture(GL_TEXTURE4);
-		glBindTexture(GL_TEXTURE_2D, entity->getNormalMap());
-		glActiveTexture(GL_TEXTURE5);
-		glBindTexture(GL_TEXTURE_2D, entity->getDisplacementMap());
-		glActiveTexture(GL_TEXTURE0);
+		if (entity->hasDudvMap())
+		{
+			glActiveTexture(GL_TEXTURE3);
+			glBindTexture(GL_TEXTURE_2D, entity->getDudvMap());
+		}
+		if (entity->hasNormalMap())
+		{
+			glActiveTexture(GL_TEXTURE4);
+			glBindTexture(GL_TEXTURE_2D, entity->getNormalMap());
+		}
+		if (entity->hasDisplacementMap())
+		{
+			glActiveTexture(GL_TEXTURE5);
+			glBindTexture(GL_TEXTURE_2D, entity->getDisplacementMap());
+		}
 
 		// Check if entity has an OpenGL buffer
 		if (!entity->getOglBuffers().empty())
@@ -163,7 +176,21 @@ void WaterEntityRenderer::render(const shared_ptr<WaterEntity> entity)
 		}
 
 		// Unbind textures
+		if (entity->hasDudvMap())
+		{
+			glActiveTexture(GL_TEXTURE3);
+			glBindTexture(GL_TEXTURE_2D, 0);
+		}
+		if (entity->hasNormalMap())
+		{
+			glActiveTexture(GL_TEXTURE4);
+			glBindTexture(GL_TEXTURE_2D, 0);
+		}
+		if (entity->hasDisplacementMap())
+		{
+			glActiveTexture(GL_TEXTURE5);
+			glBindTexture(GL_TEXTURE_2D, 0);
+		}
 		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 }

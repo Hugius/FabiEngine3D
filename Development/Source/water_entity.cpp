@@ -225,6 +225,21 @@ const bool WaterEntity::isRefractive() const
 	return _isRefractive;
 }
 
+const bool WaterEntity::hasDudvMap() const
+{
+	return (_dudvMap != 0);
+}
+
+const bool WaterEntity::hasNormalMap() const
+{
+	return (_normalMap != 0);
+}
+
+const bool WaterEntity::hasDisplacementMap() const
+{
+	return (_displacementMap != 0);
+}
+
 const OpenGLBuffer* WaterEntity::getSimplifiedOglBuffer() const
 {
 	return _simplifiedOglBuffer;

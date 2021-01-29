@@ -144,7 +144,7 @@ void DepthRenderer::render(const shared_ptr<GameEntity> entity, float clippingY,
 				glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap(index));
 			}
 
-			// VAO
+			// Bind buffer
 			glBindVertexArray(buffer->getVAO());
 
 			// Render
@@ -159,12 +159,18 @@ void DepthRenderer::render(const shared_ptr<GameEntity> entity, float clippingY,
 				glDrawArrays(GL_TRIANGLES, 0, buffer->getVertexCount());
 			}
 
+			// Diffuse map
+			if (entity->hasDiffuseMap())
+			{
+				glActiveTexture(GL_TEXTURE0);
+				glBindTexture(GL_TEXTURE_2D, 0);
+			}
+
+			// Miscellaneous
 			index++;
 		}
 
-		// Unbind
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, 0);
+		// Unbind buffer
 		glBindVertexArray(0);
 
 		// Face culling
@@ -203,8 +209,11 @@ void DepthRenderer::render(const shared_ptr<BillboardEntity> entity, float clipp
 		_shader.uploadUniform("u_minAlpha", entity->getTextContent().empty() ? 0.9f : 0.1f);
 
 		// Bind textures
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap());
+		if (entity->hasDiffuseMap())
+		{
+			glActiveTexture(GL_TEXTURE0);
+			glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap());
+		}
 
 		// Check if entity has an OpenGL buffer
 		if (!entity->getOglBuffers().empty())
@@ -231,8 +240,11 @@ void DepthRenderer::render(const shared_ptr<BillboardEntity> entity, float clipp
 		}
 
 		// Unbind textures
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, 0);
+		if (entity->hasDiffuseMap())
+		{
+			glActiveTexture(GL_TEXTURE0);
+			glBindTexture(GL_TEXTURE_2D, 0);
+		}
 	}
 }
 

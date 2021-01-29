@@ -19,7 +19,7 @@ void BillboardEntityRenderer::bind()
 	_shader.uploadUniform("u_isFogEnabled",		_renderBus.isFogEnabled());
 
 	// Texture uniforms
-	_shader.uploadUniform("u_sampler_diffuseMap", 0);
+	_shader.uploadUniform("u_sampler", 0);
 
 	// Clipping (minY & maxY)
 	glEnable(GL_CLIP_DISTANCE0);
@@ -66,9 +66,12 @@ void BillboardEntityRenderer::render(const shared_ptr<BillboardEntity> entity)
 		_shader.uploadUniform("u_maxHeight", entity->getMaxHeight());
 		_shader.uploadUniform("u_minAlpha", entity->getTextContent().empty() ? 0.9f : 0.1f);
 
-		// Bind textures
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap());
+		// Bind texture
+		if (entity->hasDiffuseMap())
+		{
+			glActiveTexture(GL_TEXTURE0);
+			glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap());
+		}
 
 		// Check if entity has an OpenGL buffer
 		if (!entity->getOglBuffers().empty())
@@ -94,8 +97,11 @@ void BillboardEntityRenderer::render(const shared_ptr<BillboardEntity> entity)
 			glBindVertexArray(0);
 		}
 
-		// Unbind textures
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, 0);
+		// Unbind texture
+		if (entity->hasDiffuseMap())
+		{
+			glActiveTexture(GL_TEXTURE0);
+			glBindTexture(GL_TEXTURE_2D, 0);
+		}
 	}
 }

@@ -19,33 +19,49 @@ void TerrainEntityRenderer::bind()
 	_shader.uploadUniform("u_clippingPlaneReflection", clippingPlaneReflection);
 	
 	// Fragment shader uniforms
-	_shader.uploadUniform("u_cameraPosition",              _renderBus.getCameraPosition());
-	_shader.uploadUniform("u_cameraFront",				   _renderBus.getCameraFront());
-	_shader.uploadUniform("u_ambientLightColor",		   _renderBus.getAmbientLightColor());
-	_shader.uploadUniform("u_directionalLightColor",	   _renderBus.getDirectionalLightColor());
-	_shader.uploadUniform("u_directionalLightPosition",    _renderBus.getDirectionalLightPosition());
-	_shader.uploadUniform("u_ambientLightIntensity",       _renderBus.getAmbientLightIntensity());
-	_shader.uploadUniform("u_directionalLightIntensity",   _renderBus.getDirectionalLightIntensity());
-	_shader.uploadUniform("u_spotLightColor",			   _renderBus.getSpotLightColor());
-	_shader.uploadUniform("u_spotLightIntensity",	       _renderBus.getSpotLightIntensity());
-	_shader.uploadUniform("u_maxSpotLightDistance",		   _renderBus.getMaxSpotLightDistance());
-	_shader.uploadUniform("u_maxSpotlightAngle",		   cosf(Math::degreesToRadians(_renderBus.getMaxSpotLightAngle())));
-	_shader.uploadUniform("u_fogMinDistance",			   _renderBus.getFogMinDistance());
-	_shader.uploadUniform("u_fogMaxDistance",			   _renderBus.getFogMaxDistance());
-	_shader.uploadUniform("u_fogDefaultFactor",			   _renderBus.getFogDefaultFactor());
-	_shader.uploadUniform("u_fogColor",					   _renderBus.getFogColor());
-	_shader.uploadUniform("u_isFogEnabled",				   _renderBus.isFogEnabled());
-	_shader.uploadUniform("u_isNormalMappingEnabled",	   _renderBus.isNormalMappingEnabled());
-	_shader.uploadUniform("u_isAmbientLightEnabled",	   _renderBus.isAmbientLightingEnabled());
-	_shader.uploadUniform("u_isDirectionalLightEnabled",   _renderBus.isDirectionalLightingEnabled());
-	_shader.uploadUniform("u_isSpecularLightEnabled",	   _renderBus.isSpecularLightingEnabled());
-	_shader.uploadUniform("u_isPointLightEnabled",		   _renderBus.isPointLightingEnabled());
-	_shader.uploadUniform("u_isSpotLightEnabled",		   _renderBus.isSpotLightingEnabled());
-	_shader.uploadUniform("u_shadowAreaSize",			   _renderBus.getShadowAreaSize());
-	_shader.uploadUniform("u_shadowAreaCenter",			   _renderBus.getShadowAreaCenter());
-	_shader.uploadUniform("u_isShadowsEnabled",			   _renderBus.isShadowsEnabled());
+	_shader.uploadUniform("u_cameraPosition",             _renderBus.getCameraPosition());
+	_shader.uploadUniform("u_cameraFront",				  _renderBus.getCameraFront());
+	_shader.uploadUniform("u_ambientLightColor",		  _renderBus.getAmbientLightColor());
+	_shader.uploadUniform("u_directionalLightColor",	  _renderBus.getDirectionalLightColor());
+	_shader.uploadUniform("u_directionalLightPosition",   _renderBus.getDirectionalLightPosition());
+	_shader.uploadUniform("u_ambientLightIntensity",      _renderBus.getAmbientLightIntensity());
+	_shader.uploadUniform("u_directionalLightIntensity",  _renderBus.getDirectionalLightIntensity());
+	_shader.uploadUniform("u_spotLightColor",			  _renderBus.getSpotLightColor());
+	_shader.uploadUniform("u_spotLightIntensity",	      _renderBus.getSpotLightIntensity());
+	_shader.uploadUniform("u_maxSpotLightDistance",		  _renderBus.getMaxSpotLightDistance());
+	_shader.uploadUniform("u_maxSpotlightAngle",		  cosf(Math::degreesToRadians(_renderBus.getMaxSpotLightAngle())));
+	_shader.uploadUniform("u_fogMinDistance",			  _renderBus.getFogMinDistance());
+	_shader.uploadUniform("u_fogMaxDistance",			  _renderBus.getFogMaxDistance());
+	_shader.uploadUniform("u_fogDefaultFactor",			  _renderBus.getFogDefaultFactor());
+	_shader.uploadUniform("u_fogColor",					  _renderBus.getFogColor());
+	_shader.uploadUniform("u_isFogEnabled",				  _renderBus.isFogEnabled());
+	_shader.uploadUniform("u_isNormalMappingEnabled",	  _renderBus.isNormalMappingEnabled());
+	_shader.uploadUniform("u_isAmbientLightEnabled",	  _renderBus.isAmbientLightingEnabled());
+	_shader.uploadUniform("u_isDirectionalLightEnabled",  _renderBus.isDirectionalLightingEnabled());
+	_shader.uploadUniform("u_isSpecularLightEnabled",	  _renderBus.isSpecularLightingEnabled());
+	_shader.uploadUniform("u_isPointLightEnabled",		  _renderBus.isPointLightingEnabled());
+	_shader.uploadUniform("u_isSpotLightEnabled",		  _renderBus.isSpotLightingEnabled());
+	_shader.uploadUniform("u_shadowAreaSize",			  _renderBus.getShadowAreaSize());
+	_shader.uploadUniform("u_shadowAreaCenter",			  _renderBus.getShadowAreaCenter());
+	_shader.uploadUniform("u_isShadowsEnabled",			  _renderBus.isShadowsEnabled());
 	_shader.uploadUniform("u_isShadowFrameRenderEnabled", _renderBus.isShadowFrameRenderingEnabled());
-	_shader.uploadUniform("u_shadowMapSize",			   _renderBus.getShadowMapSize());
+	_shader.uploadUniform("u_shadowMapSize",			  _renderBus.getShadowMapSize());
+
+	// Texture uniforms
+	_shader.uploadUniform("u_sampler_diffuseMap",  0);
+	_shader.uploadUniform("u_sampler_normalMap",   1);
+	_shader.uploadUniform("u_sampler_blendMap",    2);
+	_shader.uploadUniform("u_sampler_diffuseMapR", 3);
+	_shader.uploadUniform("u_sampler_diffuseMapG", 4);
+	_shader.uploadUniform("u_sampler_diffuseMapB", 5);
+	_shader.uploadUniform("u_sampler_normalMapR",  6);
+	_shader.uploadUniform("u_sampler_normalMapG",  7);
+	_shader.uploadUniform("u_sampler_normalMapB",  8);
+	_shader.uploadUniform("u_sampler_shadowMap",   9);
+
+	// Bind textures
+	glActiveTexture(GL_TEXTURE9);
+	glBindTexture(GL_TEXTURE_2D, _renderBus.getShadowMap());
 
 	// Depth testing
 	glEnable(GL_DEPTH_TEST);
@@ -57,6 +73,8 @@ void TerrainEntityRenderer::unbind()
 {
 	glDisable(GL_DEPTH_TEST);
 	glDisable(GL_DEPTH_CLAMP_NV);
+	glActiveTexture(GL_TEXTURE9);
+	glBindTexture(GL_TEXTURE_2D, 0);
 	_shader.unbind();
 }
 
@@ -112,40 +130,62 @@ void TerrainEntityRenderer::render(const shared_ptr<TerrainEntity> entity)
 		_shader.uploadUniform("u_lightness", entity->getLightness());
 		_shader.uploadUniform("u_specularLightFactor", entity->getSpecularLightingFactor());
 		_shader.uploadUniform("u_specularLightIntensity", entity->getSpecularLightingIntensity());
-
-		// Texture uniforms
-		_shader.uploadUniform("u_sampler_diffuseMap", 0);
-		_shader.uploadUniform("u_sampler_normalMap",  1);
-		_shader.uploadUniform("u_sampler_blendMap",	  2);
-		_shader.uploadUniform("u_sampler_diffuseMapR",  3);
-		_shader.uploadUniform("u_sampler_diffuseMapG",  4);
-		_shader.uploadUniform("u_sampler_diffuseMapB",  5);
-		_shader.uploadUniform("u_sampler_normalMapR",  6);
-		_shader.uploadUniform("u_sampler_normalMapG",  7);
-		_shader.uploadUniform("u_sampler_normalMapB",  8);
-		_shader.uploadUniform("u_sampler_shadowMap",  9);
+		_shader.uploadUniform("u_hasDiffuseMap", entity->hasDiffuseMap());
+		_shader.uploadUniform("u_hasNormalMap", entity->hasNormalMap());
+		_shader.uploadUniform("u_hasBlendMap", entity->hasBlendMap());
+		_shader.uploadUniform("u_hasDiffuseMapR", entity->hasDiffuseMapR());
+		_shader.uploadUniform("u_hasDiffuseMapG", entity->hasDiffuseMapG());
+		_shader.uploadUniform("u_hasDiffuseMapB", entity->hasDiffuseMapB());
+		_shader.uploadUniform("u_hasNormalMapR", entity->hasNormalMapR());
+		_shader.uploadUniform("u_hasNormalMapG", entity->hasNormalMapG());
+		_shader.uploadUniform("u_hasNormalMapB", entity->hasNormalMapB());
 
 		// Bind textures
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap());
-		glActiveTexture(GL_TEXTURE1);
-		glBindTexture(GL_TEXTURE_2D, entity->getNormalMap());
-		glActiveTexture(GL_TEXTURE2);
-		glBindTexture(GL_TEXTURE_2D, entity->getBlendMap());
-		glActiveTexture(GL_TEXTURE3);
-		glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMapR());
-		glActiveTexture(GL_TEXTURE4);
-		glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMapG());
-		glActiveTexture(GL_TEXTURE5);
-		glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMapB());
-		glActiveTexture(GL_TEXTURE6);
-		glBindTexture(GL_TEXTURE_2D, entity->getNormalMapR());
-		glActiveTexture(GL_TEXTURE7);
-		glBindTexture(GL_TEXTURE_2D, entity->getNormalMapG());
-		glActiveTexture(GL_TEXTURE8);
-		glBindTexture(GL_TEXTURE_2D, entity->getNormalMapB());
-		glActiveTexture(GL_TEXTURE9);
-		glBindTexture(GL_TEXTURE_2D, _renderBus.getShadowMap());
+		if (entity->hasDiffuseMap())
+		{
+			glActiveTexture(GL_TEXTURE0);
+			glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap());
+		}
+		if (entity->hasNormalMap())
+		{
+			glActiveTexture(GL_TEXTURE1);
+			glBindTexture(GL_TEXTURE_2D, entity->getNormalMap());
+		}
+		if (entity->hasBlendMap())
+		{
+			glActiveTexture(GL_TEXTURE2);
+			glBindTexture(GL_TEXTURE_2D, entity->getBlendMap());
+		}
+		if (entity->hasDiffuseMapR())
+		{
+			glActiveTexture(GL_TEXTURE3);
+			glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMapR());
+		}
+		if (entity->hasDiffuseMapG())
+		{
+			glActiveTexture(GL_TEXTURE4);
+			glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMapG());
+		}
+		if (entity->hasDiffuseMapB())
+		{
+			glActiveTexture(GL_TEXTURE5);
+			glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMapB());
+		}
+		if (entity->hasNormalMapR())
+		{
+			glActiveTexture(GL_TEXTURE6);
+			glBindTexture(GL_TEXTURE_2D, entity->getNormalMapR());
+		}
+		if (entity->hasNormalMapG())
+		{
+			glActiveTexture(GL_TEXTURE7);
+			glBindTexture(GL_TEXTURE_2D, entity->getNormalMapG());
+		}
+		if (entity->hasNormalMapB())
+		{
+			glActiveTexture(GL_TEXTURE8);
+			glBindTexture(GL_TEXTURE_2D, entity->getNormalMapB());
+		}
 
 		// Check if entity has an OpenGL buffer
 		if (!entity->getOglBuffers().empty())
@@ -162,8 +202,52 @@ void TerrainEntityRenderer::render(const shared_ptr<TerrainEntity> entity)
 		}
 
 		// Unbind textures
+		if (entity->hasDiffuseMap())
+		{
+			glActiveTexture(GL_TEXTURE0);
+			glBindTexture(GL_TEXTURE_2D, 0);
+		}
+		if (entity->hasNormalMap())
+		{
+			glActiveTexture(GL_TEXTURE1);
+			glBindTexture(GL_TEXTURE_2D, 0);
+		}
+		if (entity->hasBlendMap())
+		{
+			glActiveTexture(GL_TEXTURE2);
+			glBindTexture(GL_TEXTURE_2D, 0);
+		}
+		if (entity->hasDiffuseMapR())
+		{
+			glActiveTexture(GL_TEXTURE3);
+			glBindTexture(GL_TEXTURE_2D, 0);
+		}
+		if (entity->hasDiffuseMapG())
+		{
+			glActiveTexture(GL_TEXTURE4);
+			glBindTexture(GL_TEXTURE_2D, 0);
+		}
+		if (entity->hasDiffuseMapB())
+		{
+			glActiveTexture(GL_TEXTURE5);
+			glBindTexture(GL_TEXTURE_2D, 0);
+		}
+		if (entity->hasNormalMapR())
+		{
+			glActiveTexture(GL_TEXTURE6);
+			glBindTexture(GL_TEXTURE_2D, 0);
+		}
+		if (entity->hasNormalMapG())
+		{
+			glActiveTexture(GL_TEXTURE7);
+			glBindTexture(GL_TEXTURE_2D, 0);
+		}
+		if (entity->hasNormalMapB())
+		{
+			glActiveTexture(GL_TEXTURE8);
+			glBindTexture(GL_TEXTURE_2D, 0);
+		}
 		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, 0);
 
 		// Face culling
 		glDisable(GL_CULL_FACE);

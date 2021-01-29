@@ -69,6 +69,7 @@ public:
 	const bool isCameraFacingX() const;
 	const bool isCameraFacingY() const;
 	const bool isDepthMapIncluded() const;
+	const bool hasDiffuseMap() const;
 
 private:
 	Matrix44 _modelMatrix = Matrix44(1.0f);

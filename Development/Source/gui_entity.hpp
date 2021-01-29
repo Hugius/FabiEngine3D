@@ -36,6 +36,7 @@ public:
 	const float getAlpha() const;
 	const bool isMirroredHorizonally() const;
 	const bool isMirroredVertically() const;
+	const bool hasDiffuseMap() const;
 
 	// Transformation
 	const bool isCentered() const;

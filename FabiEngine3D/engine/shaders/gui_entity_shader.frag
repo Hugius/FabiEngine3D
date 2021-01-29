@@ -5,7 +5,7 @@
 in vec2 f_uv;
 
 // Textures
-uniform sampler2D u_sampler_diffuse;
+uniform sampler2D u_sampler;
 
 // Vec3 uniforms
 uniform vec3 u_color;
@@ -48,14 +48,14 @@ void main()
 
 	if(u_isDepthEntity) // Visualizing depth map
 	{
-		float depth = texture(u_sampler_diffuse, f_uv).r;
+		float depth = texture(u_sampler, f_uv).r;
 		o_finalColor = vec4(vec3((convertDepthToPerspective(depth, u_nearZ, u_farZ / 25.0f))), 1.0f);
 	}
 	else
 	{
 		if(u_hasTexture) // Render texture
 		{
-			vec4 texColor = texture(u_sampler_diffuse, f_uv);
+			vec4 texColor = texture(u_sampler, f_uv);
 			o_finalColor = vec4(texColor.rgb * u_color, texColor.a * u_alpha);
 		}
 		else // Render color only

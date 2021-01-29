@@ -76,7 +76,7 @@ void GameEntityRenderer::bind()
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-	// Texture binding
+	// Bind textures
 	glActiveTexture(GL_TEXTURE4);
 	glBindTexture(GL_TEXTURE_2D, _renderBus.getSceneReflectionMap());
 	glActiveTexture(GL_TEXTURE5);
@@ -89,11 +89,24 @@ void GameEntityRenderer::bind()
 
 void GameEntityRenderer::unbind()
 {
+	// Unbind textures
+	glActiveTexture(GL_TEXTURE4);
+	glBindTexture(GL_TEXTURE_2D, 0);
+	glActiveTexture(GL_TEXTURE5);
+	glBindTexture(GL_TEXTURE_2D, 0);
+	glActiveTexture(GL_TEXTURE6);
+	glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
+	glActiveTexture(GL_TEXTURE7);
+	glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
+
+	// Disable OpenGL functionality
 	glDisable(GL_BLEND);
 	glDisable(GL_CLIP_DISTANCE0);
 	glDisable(GL_CLIP_DISTANCE1);
 	glDisable(GL_DEPTH_TEST);
 	glDisable(GL_DEPTH_CLAMP_NV);
+
+	// Unbind shader
 	_shader.unbind();
 }
 
@@ -240,12 +253,40 @@ void GameEntityRenderer::render(const shared_ptr<GameEntity> entity)
 				_renderBus.increaseTriangleCount(buffer->getVertexCount() / 3);
 			}
 
+			// Diffuse map
+			if (hasDiffuseMap)
+			{
+				glActiveTexture(GL_TEXTURE0);
+				glBindTexture(GL_TEXTURE_2D, 0);
+			}
+
+			// Light map
+			if (hasLightMap)
+			{
+				glActiveTexture(GL_TEXTURE1);
+				glBindTexture(GL_TEXTURE_2D, 0);
+			}
+
+			// Normal map
+			if (hasNormalMap)
+			{
+				glActiveTexture(GL_TEXTURE2);
+				glBindTexture(GL_TEXTURE_2D, 0);
+			}
+
+			// Reflection(part) map
+			if (hasReflectionMap)
+			{
+				glActiveTexture(GL_TEXTURE3);
+				glBindTexture(GL_TEXTURE_2D, 0);
+			}
+
+			// Miscellaneous
+			glActiveTexture(GL_TEXTURE0);
 			index++;
 		}
 
-		// Unbind
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, 0);
+		// Unbind buffer
 		glBindVertexArray(0);
 
 		// Face culling

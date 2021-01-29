@@ -71,23 +71,23 @@ const vector<string> EnvironmentEditor::getAllTerrainTexturePathsFromFile()
 			blendMapPathG = (blendMapPathG == "?") ? "" : blendMapPathG;
 			blendMapPathB = (blendMapPathB == "?") ? "" : blendMapPathB;
 			std::replace(heightMapPath.begin(), heightMapPath.end(), '?', ' ');
+			std::replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
 			std::replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
 			std::replace(normalMapPathR.begin(), normalMapPathR.end(), '?', ' ');
 			std::replace(normalMapPathG.begin(), normalMapPathG.end(), '?', ' ');
 			std::replace(normalMapPathB.begin(), normalMapPathB.end(), '?', ' ');
-			std::replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
 			std::replace(blendMapPath.begin(), blendMapPath.end(), '?', ' ');
 			std::replace(blendMapPathR.begin(), blendMapPathR.end(), '?', ' ');
 			std::replace(blendMapPathG.begin(), blendMapPathG.end(), '?', ' ');
 			std::replace(blendMapPathB.begin(), blendMapPathB.end(), '?', ' ');
 
 			// Save file paths
+			if (!diffuseMapPath.empty()) texturePaths.push_back(diffuseMapPath);
 			if (!heightMapPath.empty())  texturePaths.push_back(heightMapPath);
 			if (!normalMapPath.empty())  texturePaths.push_back(normalMapPath);
 			if (!normalMapPathR.empty()) texturePaths.push_back(normalMapPathR);
 			if (!normalMapPathG.empty()) texturePaths.push_back(normalMapPathG);
 			if (!normalMapPathB.empty()) texturePaths.push_back(normalMapPathB);
-			if (!diffuseMapPath.empty()) texturePaths.push_back(diffuseMapPath);
 			if (!blendMapPath.empty())   texturePaths.push_back(blendMapPath);
 			if (!blendMapPathR.empty())  texturePaths.push_back(blendMapPathR);
 			if (!blendMapPathG.empty())  texturePaths.push_back(blendMapPathG);
@@ -180,11 +180,11 @@ void EnvironmentEditor::loadTerrainEntitiesFromFile()
 			blendMapPathG = (blendMapPathG == "?") ? "" : blendMapPathG;
 			blendMapPathB = (blendMapPathB == "?") ? "" : blendMapPathB;
 			std::replace(heightMapPath.begin(), heightMapPath.end(), '?', ' ');
+			std::replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
 			std::replace(normalMapPath.begin(), normalMapPath.end(), '?', ' ');
 			std::replace(normalMapPathR.begin(), normalMapPathR.end(), '?', ' ');
 			std::replace(normalMapPathG.begin(), normalMapPathG.end(), '?', ' ');
 			std::replace(normalMapPathB.begin(), normalMapPathB.end(), '?', ' ');
-			std::replace(diffuseMapPath.begin(), diffuseMapPath.end(), '?', ' ');
 			std::replace(blendMapPath.begin(), blendMapPath.end(), '?', ' ');
 			std::replace(blendMapPathR.begin(), blendMapPathR.end(), '?', ' ');
 			std::replace(blendMapPathG.begin(), blendMapPathG.end(), '?', ' ');
@@ -211,9 +211,9 @@ void EnvironmentEditor::loadTerrainEntitiesFromFile()
 				_fe3d.terrainEntity_setSpecularLightingIntensity(terrainID, specularIntensity);
 				if (diffuseMapPath != "") _fe3d.terrainEntity_setDiffuseMap(terrainID, diffuseMapPath);
 				if (normalMapPath != "")  _fe3d.terrainEntity_setNormalMap(terrainID, normalMapPath);
-				if (normalMapPathR != "")  _fe3d.terrainEntity_setNormalMapR(terrainID, normalMapPathR);
-				if (normalMapPathG != "")  _fe3d.terrainEntity_setNormalMapG(terrainID, normalMapPathG);
-				if (normalMapPathB != "")  _fe3d.terrainEntity_setNormalMapB(terrainID, normalMapPathB);
+				if (normalMapPathR != "") _fe3d.terrainEntity_setNormalMapR(terrainID, normalMapPathR);
+				if (normalMapPathG != "") _fe3d.terrainEntity_setNormalMapG(terrainID, normalMapPathG);
+				if (normalMapPathB != "") _fe3d.terrainEntity_setNormalMapB(terrainID, normalMapPathB);
 				if (blendMapPath != "")   _fe3d.terrainEntity_setBlendMap(terrainID, blendMapPath);
 				if (blendMapPathR != "")  _fe3d.terrainEntity_setDiffuseMapR(terrainID, blendMapPathR);
 				if (blendMapPathG != "")  _fe3d.terrainEntity_setDiffuseMapG(terrainID, blendMapPathG);

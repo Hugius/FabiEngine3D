@@ -5,11 +5,15 @@ void SkyEntityRenderer::bind()
 	// Bind shader
 	_shader.bind();
 
-	// Vertex shader uniforms
+	// Shader uniforms
 	_shader.uploadUniform("u_viewMatrix", Matrix44(Matrix33(_renderBus.getViewMatrix())));
 	_shader.uploadUniform("u_projectionMatrix", _renderBus.getProjectionMatrix());
 	_shader.uploadUniform("u_rotationMatrix", _renderBus.getSkyRotationMatrix());
 
+	// Texture uniforms
+	_shader.uploadUniform("u_sampler_mainCubeMap", 0);
+	_shader.uploadUniform("u_sampler_mixCubeMap", 1);
+	
 	// Depth testing
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_DEPTH_CLAMP_NV);
@@ -41,12 +45,13 @@ void SkyEntityRenderer::render(const shared_ptr<SkyEntity> mainEntity, const sha
 		}
 		
 		// Bind textures
-		_shader.uploadUniform("u_sampler_mainCubeMap", 0);
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_CUBE_MAP, mainEntity->getCubeMap());
-		if (secondEnabled)
+		if (mainEntity->hasCubeMap())
 		{
-			_shader.uploadUniform("u_sampler_mixCubeMap", 1);
+			glActiveTexture(GL_TEXTURE0);
+			glBindTexture(GL_TEXTURE_CUBE_MAP, mainEntity->getCubeMap());
+		}
+		if (secondEnabled && mixEntity->hasCubeMap())
+		{
 			glActiveTexture(GL_TEXTURE1);
 			glBindTexture(GL_TEXTURE_CUBE_MAP, mixEntity->getCubeMap());
 		}
@@ -69,7 +74,16 @@ void SkyEntityRenderer::render(const shared_ptr<SkyEntity> mainEntity, const sha
 		}
 
 		// Unbind textures
+		if (mainEntity->hasCubeMap())
+		{
+			glActiveTexture(GL_TEXTURE0);
+			glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
+		}
+		if (secondEnabled && mixEntity->hasCubeMap())
+		{
+			glActiveTexture(GL_TEXTURE1);
+			glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
+		}
 		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 	}
 }

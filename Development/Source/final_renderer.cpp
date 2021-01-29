@@ -3,7 +3,7 @@
 
 void FinalRenderer::bind()
 {
-	// Blending
+	// Alpha blending
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
@@ -18,10 +18,7 @@ void FinalRenderer::bind()
 
 void FinalRenderer::unbind()
 {
-	// Blending
 	glDisable(GL_BLEND);
-
-	// Disable shader
 	_shader.unbind();
 }
 
@@ -55,6 +52,8 @@ void FinalRenderer::render(const shared_ptr<GuiEntity> entity, GLuint sceneMap, 
 
 		// Unbind textures
 		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, 0);
+		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 }

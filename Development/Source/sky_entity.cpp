@@ -73,3 +73,8 @@ const float SkyEntity::getRotationSpeed() const
 {
 	return _rotationSpeed;
 }
+
+const bool SkyEntity::hasCubeMap() const
+{
+	return (_cubeMap != 0);
+}

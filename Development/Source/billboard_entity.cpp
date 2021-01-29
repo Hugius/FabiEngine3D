@@ -289,3 +289,8 @@ const bool BillboardEntity::isDepthMapIncluded() const
 {
 	return _isDepthMapIncluded;
 }
+
+const bool BillboardEntity::hasDiffuseMap() const
+{
+	return (_diffuseMap != 0);
+}

@@ -109,6 +109,11 @@ const bool GuiEntity::isMirroredVertically() const
 	return _mirroredVertically;
 }
 
+const bool GuiEntity::hasDiffuseMap() const
+{
+	return (_diffuseMap != 0);
+}
+
 const bool GuiEntity::isCentered() const
 {
 	return _isCentered;

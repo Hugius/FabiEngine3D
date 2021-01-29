@@ -220,6 +220,7 @@ void EnvironmentEditor::_updateTerrainMenuBlendMap()
 						const string newFilePath = filePath.substr(rootDirectory.size());
 						_fe3d.misc_clearTextureCache2D(newFilePath);
 						_fe3d.terrainEntity_setBlendMap(_currentTerrainID, newFilePath);
+						_fe3d.terrainEntity_setBlendMapped(_currentTerrainID, true);
 					}
 					else
 					{
@@ -342,12 +343,6 @@ void EnvironmentEditor::_updateTerrainMenuBlendMap()
 		bool loadedRedTex   = _fe3d.terrainEntity_getBlendMapPathR(_currentTerrainID) != "";
 		bool loadedGreenTex = _fe3d.terrainEntity_getBlendMapPathG(_currentTerrainID) != "";
 		bool loadedBlueTex  = _fe3d.terrainEntity_getBlendMapPathB(_currentTerrainID) != "";
-
-		// Enabling blendMapping when every needed texture is chosen
-		if (loadedBlendMap && loadedRedTex && loadedGreenTex && loadedBlueTex)
-		{
-			_fe3d.terrainEntity_setBlendMapped(_currentTerrainID, true);
-		}
 
 		// Button hoverability
 		screen->getButton("red")->setHoverable(loadedBlendMap);

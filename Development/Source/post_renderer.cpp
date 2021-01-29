@@ -21,7 +21,14 @@ void PostRenderer::bind()
 	_shader.uploadUniform("u_flareSourcePosition", _renderBus.getFlareSourcePosition());
 	_shader.uploadUniform("u_cameraPosition", _renderBus.getCameraPosition());
 
-	// Blending
+	// Texture uniforms
+	_shader.uploadUniform("u_sampler_scene", 0);
+	_shader.uploadUniform("u_sampler_bloom", 1);
+	_shader.uploadUniform("u_sampler_depth", 2);
+	_shader.uploadUniform("u_sampler_blur",  3);
+	_shader.uploadUniform("u_sampler_flare", 4);
+
+	// Alpha blending
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
@@ -40,13 +47,6 @@ void PostRenderer::render(const shared_ptr<GuiEntity> entity)
 		_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix());
 		_shader.uploadUniform("u_isMirroredHorizontally", entity->isMirroredHorizonally());
 		_shader.uploadUniform("u_isMirroredVertically", entity->isMirroredVertically());
-
-		// Texture uniforms
-		_shader.uploadUniform("u_sampler_scene", 0);
-		_shader.uploadUniform("u_sampler_bloom", 1);
-		_shader.uploadUniform("u_sampler_depth", 2);
-		_shader.uploadUniform("u_sampler_blur", 3);
-		_shader.uploadUniform("u_sampler_flare", 4);
 		
 		// Bind textures
 		glActiveTexture(GL_TEXTURE0);
@@ -75,6 +75,14 @@ void PostRenderer::render(const shared_ptr<GuiEntity> entity)
 
 		// Unbind textures
 		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, 0);
+		glActiveTexture(GL_TEXTURE1);
+		glBindTexture(GL_TEXTURE_2D, 0);
+		glActiveTexture(GL_TEXTURE2);
+		glBindTexture(GL_TEXTURE_2D, 0);
+		glActiveTexture(GL_TEXTURE3);
+		glBindTexture(GL_TEXTURE_2D, 0);
+		glActiveTexture(GL_TEXTURE5);
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 }

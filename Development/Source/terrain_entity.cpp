@@ -340,6 +340,51 @@ const bool TerrainEntity::isSpecularLighted() const
 	return _isSpecularLighted;
 }
 
+const bool TerrainEntity::hasDiffuseMap() const
+{
+	return (_diffuseMap != 0);
+}
+
+const bool TerrainEntity::hasNormalMap() const
+{
+	return (_normalMap != 0);
+}
+
+const bool TerrainEntity::hasBlendMap() const
+{
+	return (_blendMap != 0);
+}
+
+const bool TerrainEntity::hasDiffuseMapR() const
+{
+	return (_diffuseMapR != 0);
+}
+
+const bool TerrainEntity::hasDiffuseMapG() const
+{
+	return (_diffuseMapG != 0);
+}
+
+const bool TerrainEntity::hasDiffuseMapB() const
+{
+	return (_diffuseMapB != 0);
+}
+
+const bool TerrainEntity::hasNormalMapR() const
+{
+	return (_normalMapR != 0);
+}
+
+const bool TerrainEntity::hasNormalMapG() const
+{
+	return (_normalMapG != 0);
+}
+
+const bool TerrainEntity::hasNormalMapB() const
+{
+	return (_normalMapB != 0);
+}
+
 const bool TerrainEntity::isNormalMapped() const
 {
 	return _isNormalMapped;

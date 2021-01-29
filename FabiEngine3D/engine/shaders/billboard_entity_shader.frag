@@ -6,7 +6,7 @@ in vec2 f_uv;
 in vec3 f_pos;
 
 // Textures
-layout(location = 0) uniform sampler2D u_sampler_diffuseMap;
+layout(location = 0) uniform sampler2D u_sampler;
 
 // Out variables
 layout (location = 0) out vec4 o_finalColor;
@@ -36,7 +36,7 @@ void main()
 	if(u_hasTexture) // Render texture
 	{
 		// Calculating the texel color
-		vec4 texColor = texture(u_sampler_diffuseMap, f_uv);
+		vec4 texColor = texture(u_sampler, f_uv);
 
 		// Removing white alpha background
 		if(u_isAlphaObject)

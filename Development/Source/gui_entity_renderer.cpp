@@ -41,13 +41,13 @@ void GuiEntityRenderer::render(const shared_ptr<GuiEntity> entity)
 		_shader.uploadUniform("u_maxPosition", entity->getMaxPosition());
 		_shader.uploadUniform("u_alpha", entity->getAlpha());
 		_shader.uploadUniform("u_isDepthEntity", entity->isDepthEntity());
-		_shader.uploadUniform("u_hasTexture", entity->getDiffuseMap() != 0);
+		_shader.uploadUniform("u_hasTexture", entity->getTexture() != 0);
 
 		// Bind texture
-		if (entity->hasDiffuseMap())
+		if (entity->hasTexture())
 		{
 			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(GL_TEXTURE_2D, entity->getDiffuseMap());
+			glBindTexture(GL_TEXTURE_2D, entity->getTexture());
 		}
 
 		// Check if entity has an OpenGL buffer
@@ -65,7 +65,7 @@ void GuiEntityRenderer::render(const shared_ptr<GuiEntity> entity)
 		}
 
 		// Unbind texture
-		if (entity->hasDiffuseMap())
+		if (entity->hasTexture())
 		{
 			glActiveTexture(GL_TEXTURE0);
 			glBindTexture(GL_TEXTURE_2D, 0);

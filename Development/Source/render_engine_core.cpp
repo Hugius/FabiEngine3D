@@ -147,13 +147,13 @@ void RenderEngine::renderScene(EntityBus * entityBus, CameraManager& camera)
 		{
 			_msaaFramebuffer.processAAData(&_aaProcessorFramebuffer);
 			_msaaFramebuffer.unbind();
-			_finalSurface->setDiffuseMap(_aaProcessorFramebuffer.getTexture(0));
+			_finalSurface->setTexture(_aaProcessorFramebuffer.getTexture(0));
 			_renderBus.setSceneMap(_aaProcessorFramebuffer.getTexture(0));
 		}
 		else
 		{
 			_screenFramebuffer.unbind();
-			_finalSurface->setDiffuseMap(_screenFramebuffer.getTexture(0));
+			_finalSurface->setTexture(_screenFramebuffer.getTexture(0));
 			_renderBus.setSceneMap(_screenFramebuffer.getTexture(0));
 		}
 		_timer.stop();

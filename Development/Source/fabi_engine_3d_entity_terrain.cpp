@@ -274,13 +274,13 @@ void FabiEngine3D::terrainEntity_setDiffuseMap(const string& ID, const string& t
 
 void FabiEngine3D::terrainEntity_setNormalMap(const string& ID, const string& texturePath)
 {
-	_core->_terrainEntityManager.getEntity(ID)->setNormalMap(_core->_textureLoader.getTexture2D(texturePath, false, false, true));
+	_core->_terrainEntityManager.getEntity(ID)->setNormalMap(_core->_textureLoader.getTexture2D(texturePath, true, true, true));
 	_core->_terrainEntityManager.getEntity(ID)->setNormalMapPath(texturePath);
 }
 
 void FabiEngine3D::terrainEntity_setBlendMap(const string& ID, const string& texturePath)
 {
-	_core->_terrainEntityManager.getEntity(ID)->setBlendMap(_core->_textureLoader.getTexture2D(texturePath, false, false, false));
+	_core->_terrainEntityManager.getEntity(ID)->setBlendMap(_core->_textureLoader.getTexture2D(texturePath, true, true, false));
 	_core->_terrainEntityManager.getEntity(ID)->setBlendMapPath(texturePath);
 }
 
@@ -304,19 +304,19 @@ void FabiEngine3D::terrainEntity_setDiffuseMapB(const string& ID, const string& 
 
 void FabiEngine3D::terrainEntity_setNormalMapR(const string& ID, const string& texturePath)
 {
-	_core->_terrainEntityManager.getEntity(ID)->setNormalMapR(_core->_textureLoader.getTexture2D(texturePath, false, false, true));
+	_core->_terrainEntityManager.getEntity(ID)->setNormalMapR(_core->_textureLoader.getTexture2D(texturePath, true, true, true));
 	_core->_terrainEntityManager.getEntity(ID)->setNormalMapPathR(texturePath);
 }
 
 void FabiEngine3D::terrainEntity_setNormalMapG(const string& ID, const string& texturePath)
 {
-	_core->_terrainEntityManager.getEntity(ID)->setNormalMapG(_core->_textureLoader.getTexture2D(texturePath, false, false, true));
+	_core->_terrainEntityManager.getEntity(ID)->setNormalMapG(_core->_textureLoader.getTexture2D(texturePath, true, true, true));
 	_core->_terrainEntityManager.getEntity(ID)->setNormalMapPathG(texturePath);
 }
 
 void FabiEngine3D::terrainEntity_setNormalMapB(const string& ID, const string& texturePath)
 {
-	_core->_terrainEntityManager.getEntity(ID)->setNormalMapB(_core->_textureLoader.getTexture2D(texturePath, false, false, true));
+	_core->_terrainEntityManager.getEntity(ID)->setNormalMapB(_core->_textureLoader.getTexture2D(texturePath, true, true, true));
 	_core->_terrainEntityManager.getEntity(ID)->setNormalMapPathB(texturePath);
 }
 

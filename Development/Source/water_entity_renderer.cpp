@@ -9,8 +9,8 @@ void WaterEntityRenderer::bind()
 	_shader.bind();
 
 	// Shader uniforms
-	_shader.uploadUniform("u_viewMatrix",		_renderBus.getViewMatrix());
-	_shader.uploadUniform("u_projectionMatrix",	_renderBus.getProjectionMatrix());
+	_shader.uploadUniform("u_viewMatrix",			     _renderBus.getViewMatrix());
+	_shader.uploadUniform("u_projectionMatrix",		     _renderBus.getProjectionMatrix());
 	_shader.uploadUniform("u_directionalLightColor",	 _renderBus.getDirectionalLightColor());
 	_shader.uploadUniform("u_directionalLightPosition",  _renderBus.getDirectionalLightPosition());
 	_shader.uploadUniform("u_cameraPosition",			 _renderBus.getCameraPosition());

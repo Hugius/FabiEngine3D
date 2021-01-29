@@ -253,110 +253,110 @@ void RenderEngine::_renderDebugScreens()
 
 	// Normal scene - surface
 	shared_ptr<GuiEntity> normalSurface = make_shared<GuiEntity>("normalSurface");
-	normalSurface->setDiffuseMap(_renderBus.getSceneMap());
+	normalSurface->setTexture(_renderBus.getSceneMap());
 	normalSurface->addOglBuffer(new OpenGLBuffer(-0.66666f, 0.66666f, 0.66666f, 0.66666f, true, false));
 	normalSurface->setMirroredVertically(true);
 
 	// Normal scene - text
 	shared_ptr<TextEntity> normalText = make_shared<TextEntity>("normalText");
-	normalText->setDiffuseMap(_textureLoader.getText("Default render", fontPath));
+	normalText->setTexture(_textureLoader.getText("Default render", fontPath));
 	normalText->addOglBuffer(new OpenGLBuffer(-0.66666f, 0.4f, calcTextWidth("Default render"), charHeight, true, false));
 	normalText->setColor(color);
 
 	// Shadow scene - surface
 	shared_ptr<GuiEntity> shadowSurface = make_shared<GuiEntity>("shadowSurface");
-	shadowSurface->setDiffuseMap(_renderBus.getShadowMap());
+	shadowSurface->setTexture(_renderBus.getShadowMap());
 	shadowSurface->addOglBuffer(new OpenGLBuffer(-0.66666f, 0.0f, 0.66666f, 0.66666f, true, false));
 	shadowSurface->setMirroredVertically(true);
 
 	// Shadow scene - text
 	shared_ptr<TextEntity> shadowText = make_shared<TextEntity>("shadowText");
-	shadowText->setDiffuseMap(_textureLoader.getText("Shadow render", fontPath));
+	shadowText->setTexture(_textureLoader.getText("Shadow render", fontPath));
 	shadowText->addOglBuffer(new OpenGLBuffer(-0.66666f, -0.26f, calcTextWidth("Shadow render"), charHeight, true, false));
 	shadowText->setColor(color);
 
 	// Reflection scene - surface
 	shared_ptr<GuiEntity> reflectionSurface = make_shared<GuiEntity>("reflectionSurface");
-	reflectionSurface->setDiffuseMap(_renderBus.getSceneReflectionMap());
+	reflectionSurface->setTexture(_renderBus.getSceneReflectionMap());
 	reflectionSurface->addOglBuffer(new OpenGLBuffer(-0.66666f, -0.66666f, 0.66666f, 0.66666f, true, false));
 	reflectionSurface->setMirroredVertically(true);
 
 	// Reflection scene - text
 	shared_ptr<TextEntity> reflectionText = make_shared<TextEntity>("reflectionText");
-	reflectionText->setDiffuseMap(_textureLoader.getText("Reflection render", fontPath));
+	reflectionText->setTexture(_textureLoader.getText("Reflection render", fontPath));
 	reflectionText->addOglBuffer(new OpenGLBuffer(-0.66666f, -0.92f, calcTextWidth("Reflection render"), charHeight, true, false));
 	reflectionText->setColor(color);
 
 	// Refraction scene - surface
 	shared_ptr<GuiEntity> refractionSurface = make_shared<GuiEntity>("refractionSurface");
-	refractionSurface->setDiffuseMap(_renderBus.getSceneRefractionMap());
+	refractionSurface->setTexture(_renderBus.getSceneRefractionMap());
 	refractionSurface->addOglBuffer(new OpenGLBuffer(0.0f, 0.66666f, 0.66666f, 0.66666f, true, false));
 	refractionSurface->setMirroredVertically(true);
 
 	// Refraction scene - text
 	shared_ptr<TextEntity> refractionText = make_shared<TextEntity>("refractionText");
-	refractionText->setDiffuseMap(_textureLoader.getText("Refraction render", fontPath));
+	refractionText->setTexture(_textureLoader.getText("Refraction render", fontPath));
 	refractionText->addOglBuffer(new OpenGLBuffer(0.0f, 0.4f, calcTextWidth("Refraction render"), charHeight, true, false));
 	refractionText->setColor(color);
 
 	// Depth scene - surface
 	shared_ptr<GuiEntity> depthSurface = make_shared<GuiEntity>("depthSurface");
 	depthSurface->setDepthEntity(true);
-	depthSurface->setDiffuseMap(_renderBus.getSceneDepthMap());
+	depthSurface->setTexture(_renderBus.getSceneDepthMap());
 	depthSurface->addOglBuffer(new OpenGLBuffer(0.0f, 0.0f, 0.66666f, 0.66666f, true, false));
 	depthSurface->setMirroredVertically(true);
 
 	// Depth scene - text
 	shared_ptr<TextEntity> depthText = make_shared<TextEntity>("depthText");
-	depthText->setDiffuseMap(_textureLoader.getText("Depth render", fontPath));
+	depthText->setTexture(_textureLoader.getText("Depth render", fontPath));
 	depthText->addOglBuffer(new OpenGLBuffer(0.0f, -0.26f, calcTextWidth("Depth render"), charHeight, true, false));
 	depthText->setColor(color);
 
 	// Bloom scene - surface
 	shared_ptr<GuiEntity> bloomSurface = make_shared<GuiEntity>("bloomSurface");
-	bloomSurface->setDiffuseMap(_renderBus.getBloomMap());
+	bloomSurface->setTexture(_renderBus.getBloomMap());
 	bloomSurface->addOglBuffer(new OpenGLBuffer(0.0f, -0.66666f, 0.66666f, 0.66666f, true, false));
 	bloomSurface->setMirroredVertically(true);
 
 	// Bloom scene - text
 	shared_ptr<TextEntity> bloomText = make_shared<TextEntity>("bloomText");
-	bloomText->setDiffuseMap(_textureLoader.getText("Bloom render", fontPath));
+	bloomText->setTexture(_textureLoader.getText("Bloom render", fontPath));
 	bloomText->addOglBuffer(new OpenGLBuffer(0.0f, -0.92f, calcTextWidth("Bloom render"), charHeight, true, false));
 	bloomText->setColor(color);
 	
 	// Blur scene - surface
 	shared_ptr<GuiEntity> blurSurface = make_shared<GuiEntity>("blurSurface");
-	blurSurface->setDiffuseMap(_renderBus.getBlurMap());
+	blurSurface->setTexture(_renderBus.getBlurMap());
 	blurSurface->addOglBuffer(new OpenGLBuffer(0.66666f, 0.66666f, 0.66666f, 0.66666f, true, false));
 	blurSurface->setMirroredVertically(true);
 
 	// Blur scene - text
 	shared_ptr<TextEntity> blurText = make_shared<TextEntity>("blurText");
-	blurText->setDiffuseMap(_textureLoader.getText("Blur render", fontPath));
+	blurText->setTexture(_textureLoader.getText("Blur render", fontPath));
 	blurText->addOglBuffer(new OpenGLBuffer(0.66666f, 0.4f, calcTextWidth("Blur render"), charHeight, true, false));
 	blurText->setColor(color);
 
 	// Postprocessed scene - surface
 	shared_ptr<GuiEntity> postprocessedSurface = make_shared<GuiEntity>("postprocessedSurface");
-	postprocessedSurface->setDiffuseMap(_renderBus.getPostProcessedSceneMap());
+	postprocessedSurface->setTexture(_renderBus.getPostProcessedSceneMap());
 	postprocessedSurface->addOglBuffer(new OpenGLBuffer(0.66666f, 0.0f, 0.66666f, 0.66666f, true, false));
 	postprocessedSurface->setMirroredVertically(true);
 
 	// Postprocessed scene - text
 	shared_ptr<TextEntity> postprocessedText = make_shared<TextEntity>("postprocessedText");
-	postprocessedText->setDiffuseMap(_textureLoader.getText("Postprocessed render", fontPath));
+	postprocessedText->setTexture(_textureLoader.getText("Postprocessed render", fontPath));
 	postprocessedText->addOglBuffer(new OpenGLBuffer(0.66666f, -0.26f, calcTextWidth("Postprocessed render"), charHeight, true, false));
 	postprocessedText->setColor(color);
 
 	// Motion scene - surface
 	shared_ptr<GuiEntity> motionSurface = make_shared<GuiEntity>("motionSurface");
-	motionSurface->setDiffuseMap(_renderBus.getMotionBlurMap());
+	motionSurface->setTexture(_renderBus.getMotionBlurMap());
 	motionSurface->addOglBuffer(new OpenGLBuffer(0.66666f, -0.66666f, 0.66666f, 0.66666f, true, false));
 	motionSurface->setMirroredVertically(true);
 
 	// Motion scene - text
 	shared_ptr<TextEntity> motionText = make_shared<TextEntity>("motionText");
-	motionText->setDiffuseMap(_textureLoader.getText("Motion render", fontPath));
+	motionText->setTexture(_textureLoader.getText("Motion render", fontPath));
 	motionText->addOglBuffer(new OpenGLBuffer(0.66666f, -0.92f, calcTextWidth("Motion render"), charHeight, true, false));
 	motionText->setColor(color);
 	

@@ -9,9 +9,9 @@ void GuiEntity::updateModelMatrix()
 	_modelMatrix = translationMatrix * rotationMatrix * scalingMatrix;
 }
 
-void GuiEntity::setDiffuseMap(GLuint diffuseMap)
+void GuiEntity::setTexture(GLuint texture)
 {
-	_diffuseMap = diffuseMap;
+	_texture = texture;
 }
 
 void GuiEntity::setColor(Vec3 color)
@@ -84,9 +84,9 @@ void GuiEntity::setDepth(unsigned int value)
 	_depth = value;
 }
 
-const GLuint GuiEntity::getDiffuseMap() const
+const GLuint GuiEntity::getTexture() const
 {
-	return _diffuseMap;
+	return _texture;
 }
 
 const Vec3 GuiEntity::getColor() const
@@ -109,9 +109,9 @@ const bool GuiEntity::isMirroredVertically() const
 	return _mirroredVertically;
 }
 
-const bool GuiEntity::hasDiffuseMap() const
+const bool GuiEntity::hasTexture() const
 {
-	return (_diffuseMap != 0);
+	return (_texture != 0);
 }
 
 const bool GuiEntity::isCentered() const

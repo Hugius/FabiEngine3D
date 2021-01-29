@@ -1,8 +1,9 @@
-6 13
+3 21
 META script_type_init
 META execution_entry
 
-fe3d:scene_load("starvia")
+fe3d:scene_load("home")
+GLOB STR _currentWorld = "home"
 
 EXEC underwater_init
 EXEC bag_init

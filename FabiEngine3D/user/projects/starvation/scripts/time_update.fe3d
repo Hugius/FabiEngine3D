@@ -1,4 +1,4 @@
-12 30
+63 4
 META script_type_update
 
 /// Update time passing
@@ -61,7 +61,8 @@ fe3d:graphics_set_ambient_light_intensity(_ambLightIntensity)
 fe3d:graphics_set_directional_light_intensity(_dirLightIntensity)
 fe3d:graphics_set_directional_light_position(dirPos.x, dirPos.y, dirPos.z)
 fe3d:graphics_set_fog_color(fogIntensity, fogIntensity, fogIntensity)
-fe3d:water_set_color(0.0, 0.0, blueIntensity)
+IF _currentWorld IS "starvia":
+    fe3d:water_set_color(0.0, 0.0, blueIntensity)
 
 /// Update fire billboards
 CONST LIST billboards = fe3d:billboard_find_full_ids("fire")

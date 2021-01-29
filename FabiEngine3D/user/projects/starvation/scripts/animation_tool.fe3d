@@ -1,4 +1,4 @@
-71 48
+67 65
 META script_type_update
 
 /// Determine tool animation type
@@ -67,7 +67,6 @@ IF equipped IS <true> AND allowed IS <true>:
             IF _isToolPlaying IS <false> AND _isPickupPlaying IS <false>:
                 IF _isTalking IS <false> AND _isCrafting IS <false>:
                     fe3d:model_start_animation(toolID, animID, 1)
-                    DECR _stamina 10.0
 
 /// Tool bobbing animation
 BOOL isBobbing = fe3d:model_is_animation_started(toolID, "tool_bobbing")

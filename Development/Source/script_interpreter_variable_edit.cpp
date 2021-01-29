@@ -207,14 +207,13 @@ void ScriptInterpreter::_processVariableAlteration(const string& scriptLine)
 			return;
 		}
 
-		// Check if function returned anything
-		if (values[0].getType() == ScriptValueType::EMPTY)
-		{
-			_throwScriptError("function must return a value!");
-		}
-		else if (variable.getType() == ScriptVariableType::MULTIPLE) // Check if variable is an array
+		if (variable.getType() == ScriptVariableType::MULTIPLE) // Check if variable is an array
 		{
 			variable.changeValues(values);
+		}
+		else if (values[0].getType() == ScriptValueType::EMPTY) // Check if function returned anything
+		{
+			_throwScriptError("function must return a value!");
 		}
 		else if (values.size() > 1) // Check if function returned too many values
 		{

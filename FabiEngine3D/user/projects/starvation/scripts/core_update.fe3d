@@ -1,4 +1,4 @@
-10 0
+36 30
 META script_type_update
 META execution_entry
 
@@ -35,6 +35,7 @@ EXEC npc_update
 EXEC pickup_update
 EXEC crafting_process
 EXEC crafting_misc
-EXEC underwater_update
+IF _currentWorld IS "starvia":
+    EXEC underwater_update
 EXEC time_update
 EXEC misc_update

@@ -1,8 +1,8 @@
-47 39
+3 21
 META script_type_update
 
 /// Compose pickuppable items
-LIST pickuppables = { "log", "stones", "bush", "plant", "mushroom" }
+LIST pickuppables = {"log","stones","shrub","bamboo","plant","mushroom"}
 PUSH pickuppables "pickaxe_stone"
 PUSH pickuppables "axe_stone"
 

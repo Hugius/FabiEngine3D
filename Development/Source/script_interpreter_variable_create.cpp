@@ -213,14 +213,13 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 						return;
 					}
 
-					// Check if function returned anything
-					if (values[0].getType() == ScriptValueType::EMPTY)
-					{
-						_throwScriptError("function must return a value!");
-					}
-					else if (typeString == _listKeyword) // Check if variable is an array
+					if (typeString == _listKeyword) // Check if variable is an array
 					{
 						variableList.push_back(ScriptVariable(_fe3d, scope, ScriptVariableType::MULTIPLE, nameString, isConstant, values));
+					}
+					else if (values[0].getType() == ScriptValueType::EMPTY) // Check if function returned anything
+					{
+						_throwScriptError("function must return a value!");
 					}
 					else if (values.size() > 1) // Check if function returned too many values
 					{					

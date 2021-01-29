@@ -525,9 +525,6 @@ void SceneEditor::saveSceneToFile()
 				}
 			}
 
-			// Camera FOV
-			file << "CAMERA_FOV " << _fe3d.camera_getFOV() << std::endl;
-
 			// LOD distance
 			file << "LOD_DISTANCE " << _fe3d.gameEntity_getLevelOfDetailDistance() << std::endl;
 

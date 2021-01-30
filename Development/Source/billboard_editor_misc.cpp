@@ -1,8 +1,8 @@
 #include "billboard_editor.hpp"
 
-void BillboardEditor::setCurrentProjectName(const string& projectName)
+void BillboardEditor::setCurrentProjectID(const string& projectName)
 {
-	_currentProjectName = projectName;
+	_currentProjectID = projectName;
 }
 
 bool BillboardEditor::isLoaded()

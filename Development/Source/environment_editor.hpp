@@ -15,7 +15,7 @@ public:
 	void save();
 	void unload();
 	void update();
-	void setCurrentProjectName(const string& projectName);
+	void setCurrentProjectID(const string& projectName);
 	void loadSkyEntitiesFromFile();
 	void loadTerrainEntitiesFromFile();
 	void loadWaterEntitiesFromFile();
@@ -77,7 +77,7 @@ private:
 	const float _scrollWheelDivider = 250.0f;
 	float _cameraRotationSpeed = 0.0f;
 	float _totalCameraRotation = 0.0f;
-	string _currentProjectName = "";
+	string _currentProjectID = "";
 	FabiEngine3D& _fe3d;
 	EngineGuiManager& _gui;
 

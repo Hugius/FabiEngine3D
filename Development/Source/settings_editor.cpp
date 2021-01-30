@@ -33,13 +33,13 @@ void SettingsEditor::initializeGUI()
 void SettingsEditor::load()
 {
 	// Error checking
-	if (_currentProjectName == "")
+	if (_currentProjectID == "")
 	{
 		_fe3d.logger_throwError("No current project loaded --> SettingsEditor::load()");
 	}
 
 	// Compose full file path
-	string filePath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectName + "\\settings.fe3d";
+	string filePath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectID + "\\settings.fe3d";
 
 	// Check if settings file exists
 	if (_fe3d.misc_isFileExisting(filePath))
@@ -66,7 +66,7 @@ void SettingsEditor::load()
 	}
 	else
 	{
-		_fe3d.logger_throwWarning("Project \"" + _currentProjectName + "\" corrupted: settings.fe3d missing!");
+		_fe3d.logger_throwWarning("Project \"" + _currentProjectID + "\" corrupted: settings.fe3d missing!");
 	}
 
 	_isEditorLoaded = true;
@@ -80,13 +80,13 @@ void SettingsEditor::unload()
 void SettingsEditor::save(bool newFile)
 {
 	// Error checking
-	if (_currentProjectName == "")
+	if (_currentProjectID == "")
 	{
 		_fe3d.logger_throwError("No current project loaded --> SettingsEditor::save()");
 	}
 
 	// Compose full file path
-	string filePath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectName + "\\settings.fe3d";
+	string filePath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectID + "\\settings.fe3d";
 
 	// Overwrite (or create) settings file
 	std::ofstream file;
@@ -195,7 +195,7 @@ void SettingsEditor::update()
 	}
 }
 
-void SettingsEditor::setCurrentProjectName(const string& projectName)
+void SettingsEditor::setCurrentProjectID(const string& projectName)
 {
-	_currentProjectName = projectName;
+	_currentProjectID = projectName;
 }

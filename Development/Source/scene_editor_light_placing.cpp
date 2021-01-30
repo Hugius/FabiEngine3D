@@ -46,6 +46,7 @@ void SceneEditor::_updateLightPlacing()
 					_fe3d.gameEntity_setShadowed("@" + newID, false);
 					_fe3d.aabbEntity_bindToGameEntity("@" + newID, Vec3(0.0f), _defaultLightbulbAabbSize, true);
 					_fe3d.lightEntity_add(newID, newPosition);
+					_loadedLightIDs.push_back(newID);
 
 					// Disable placement mode if no terrain availible to choose position from
 					if (_fe3d.terrainEntity_getSelectedID() == "")

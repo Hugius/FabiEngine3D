@@ -437,6 +437,14 @@ void SceneEditor::unload()
 	_fe3d.lightEntity_deleteAll();
 
 	// Reset variables
+	_loadedSceneID = "";
+	_loadedSkyID = "";
+	_loadedTerrainID = "";
+	_loadedWaterID = "";
+	_loadedModelIDs.clear();
+	_loadedBillboardIDs.clear();
+	_loadedLightIDs.clear();
+	_loadedAudioIDs.clear();
 	_currentSkyID = "";
 	_currentTerrainID = "";
 	_currentWaterID = "";
@@ -462,7 +470,7 @@ void SceneEditor::unload()
 	_activeLightSizeMultiplier = 1;
 	_selectedLightBulbID = "";
 	_activeLightBulbID = "";
-	_currentSceneName = "";
+	_currentSceneID = "";
 	_isChoosingScene = false;
 	_isDeletingScene = false;
 	_transformation = TransformationType::TRANSLATION;

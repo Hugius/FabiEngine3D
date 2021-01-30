@@ -2,6 +2,12 @@
 
 void SceneEditor::_placeSky(const string& newID, const string& previewID)
 {
+	// If editing scene, save ID
+	if (!_currentSceneID.empty())
+	{
+		_loadedSkyID = newID;
+	}
+
 	// Delete old
 	if (_fe3d.skyEntity_isExisting(newID))
 	{
@@ -19,6 +25,8 @@ void SceneEditor::_placeSky(const string& newID, const string& previewID)
 
 void SceneEditor::_placeSky(const string& newID, const array<string, 6>& diffuseMapPaths, float lightness, float rotationSpeed, Vec3 color)
 {
+	_loadedSkyID = newID;
+
 	// Delete old
 	if (_fe3d.skyEntity_isExisting(newID))
 	{
@@ -36,6 +44,12 @@ void SceneEditor::_placeSky(const string& newID, const array<string, 6>& diffuse
 
 void SceneEditor::_placeTerrain(const string& newID, const string& previewID)
 {
+	// If editing scene, save ID
+	if (!_currentSceneID.empty())
+	{
+		_loadedTerrainID = newID;
+	}
+
 	// Delete old
 	if (_fe3d.terrainEntity_isExisting(newID))
 	{
@@ -124,6 +138,8 @@ void SceneEditor::_placeTerrain(const string& newID, const string& heightMapPath
 	const string& normalMapPathG, const string& normalMapPathB, const string& blendMapPath,
 	const string& blendMapPathR, const string& blendMapPathG, const string& blendMapPathB)
 {
+	_loadedTerrainID = newID;
+
 	// Delete old
 	if (_fe3d.terrainEntity_isExisting(newID))
 	{
@@ -164,6 +180,12 @@ void SceneEditor::_placeTerrain(const string& newID, const string& heightMapPath
 
 void SceneEditor::_placeWater(const string& newID, const string& previewID)
 {
+	// If editing scene, save ID
+	if (!_currentSceneID.empty())
+	{
+		_loadedWaterID = newID;
+	}
+
 	// Delete old
 	if (_fe3d.waterEntity_isExisting(newID))
 	{
@@ -212,6 +234,8 @@ void SceneEditor::_placeWater(const string& newID, Vec3 position, float size, bo
 	bool isRefractive, float waveHeightFactor, float specularFactor, float specularIntensity, float transparency, Vec3 color, float uvRepeat, Vec2 speed,
 	const string& dudvMapPath, const string& normalMapPath, const string& displacementMapPath)
 {
+	_loadedWaterID = newID;
+
 	// Delete old
 	if (_fe3d.waterEntity_isExisting(newID))
 	{
@@ -246,7 +270,14 @@ void SceneEditor::_placeWater(const string& newID, Vec3 position, float size, bo
 
 void SceneEditor::placeModel(const string& newID, const string& previewID, Vec3 position)
 {
+	// Compose full entity ID
 	const string newEntityID = _fe3d.gameEntity_isInstanced(previewID) ? "instanced@" + previewID.substr(1) : newID;
+
+	// If editing scene, save ID
+	if (!_currentSceneID.empty())
+	{
+		_loadedModelIDs.push_back(newEntityID);
+	}
 
 	// Check if instanced entity
 	if (_fe3d.gameEntity_isInstanced(previewID))
@@ -385,6 +416,7 @@ void SceneEditor::_placeModel(bool scriptExecution, const string& modelName, con
 {
 	// Compose new model ID
 	string newID = scriptExecution ? (modelName + "@" + modelNumber) : (modelNumber + "@" + modelName);
+	_loadedModelIDs.push_back(newID);
 
 	// Add GAME entity
 	_fe3d.gameEntity_add(newID, meshPath, position, rotation, size);
@@ -470,6 +502,12 @@ void SceneEditor::_placeModel(bool scriptExecution, const string& modelName, con
 
 void SceneEditor::placeBillboard(const string& newID, const string& previewID, Vec3 position)
 {
+	// If editing scene, save ID
+	if (!_currentSceneID.empty())
+	{
+		_loadedBillboardIDs.push_back(newID);
+	}
+
 	// Temporary values
 	auto color = _fe3d.billboardEntity_getColor(previewID);
 	auto isFacingX = _fe3d.billboardEntity_isFacingCameraX(previewID);
@@ -520,6 +558,7 @@ void SceneEditor::_placeBillboard(bool scriptExecution, const string& billboardN
 {
 	// Compose new model ID
 	string newID = scriptExecution ? (billboardName + "@" + billboardNumber) : (billboardNumber + "@" + billboardName);
+	_loadedBillboardIDs.push_back(newID);
 
 	if (diffusePath != "") // Textured billboard
 	{

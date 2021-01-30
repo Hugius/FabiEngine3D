@@ -1,8 +1,8 @@
 #include "animation_editor.hpp"
 
-void AnimationEditor::setCurrentProjectName(const string& projectName)
+void AnimationEditor::setCurrentProjectID(const string& projectName)
 {
-	_currentProjectName = projectName;
+	_currentProjectID = projectName;
 }
 
 bool AnimationEditor::isLoaded()

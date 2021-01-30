@@ -8,17 +8,17 @@ void SceneEditor::saveSceneToFile()
 	if (_isEditorLoaded)
 	{
 		// Error checking
-		if (_currentProjectName == "")
+		if (_currentProjectID == "")
 		{
 			_fe3d.logger_throwError("No current project loaded --> SceneEditor::saveSceneToFile()");
 		}
 
 		// Check if a scene is currently being edited
-		if (_currentSceneName != "")
+		if (_currentSceneID != "")
 		{
 			// Create or overwrite models file
 			std::ofstream file;
-			file.open(_fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectName + "\\scenes\\" + _currentSceneName + ".fe3d");
+			file.open(_fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectID + "\\scenes\\" + _currentSceneID + ".fe3d");
 
 			// Save LOD IDs
 			vector<string> lodIDs;
@@ -605,7 +605,7 @@ void SceneEditor::saveSceneToFile()
 			file.close();
 
 			// Logging
-			_fe3d.logger_throwInfo("Scene data from project \"" + _currentProjectName + "\" saved!");
+			_fe3d.logger_throwInfo("Scene data from project \"" + _currentProjectID + "\" saved!");
 		}
 	}
 }

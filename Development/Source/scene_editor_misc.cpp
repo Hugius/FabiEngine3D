@@ -11,21 +11,26 @@ bool SceneEditor::isLoaded()
 bool SceneEditor::isSceneExisting(const string& fileName)
 {
 	// Error checking
-	if (_currentProjectName == "")
+	if (_currentProjectID == "")
 	{
 		_fe3d.logger_throwError("No current project loaded --> SceneEditor::isSceneExisting()");
 	}
 
 	// Compose full file path
-	string filePath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectName + "\\scenes\\" + fileName + ".fe3d";
+	string filePath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectID + "\\scenes\\" + fileName + ".fe3d";
 
 	// Check if scene file exists
 	return (_fe3d.misc_isFileExisting(filePath));
 }
 
-void SceneEditor::setCurrentProjectName(const string& projectName)
+const string& SceneEditor::getLoadedSceneID()
 {
-	_currentProjectName = projectName;
+	return _loadedSceneID;
+}
+
+void SceneEditor::setCurrentProjectID(const string& projectName)
+{
+	_currentProjectID = projectName;
 }
 
 void SceneEditor::_selectModel(const string& modelID)
@@ -155,7 +160,7 @@ vector<string> SceneEditor::_loadSceneNames()
 	vector<string> sceneNames;
 
 	// Compose folder path
-	string sceneDirectoryPath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectName + "\\scenes\\";
+	string sceneDirectoryPath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectID + "\\scenes\\";
 
 	// Check if scenes directory exists
 	if (_fe3d.misc_isDirectory(sceneDirectoryPath))
@@ -170,7 +175,7 @@ vector<string> SceneEditor::_loadSceneNames()
 	}
 	else
 	{
-		_fe3d.logger_throwWarning("Project folder corrupted of project \"" + _currentProjectName + "\"!");
+		_fe3d.logger_throwWarning("Project folder corrupted of project \"" + _currentProjectID + "\"!");
 	}
 
 	return sceneNames;
@@ -179,14 +184,14 @@ vector<string> SceneEditor::_loadSceneNames()
 void SceneEditor::_deleteSceneFile(const string& sceneName)
 {
 	// Check if scene file is still existing
-	string filePath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectName + "\\scenes\\" + sceneName + ".fe3d";
+	string filePath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectID + "\\scenes\\" + sceneName + ".fe3d";
 	if (_fe3d.misc_isFileExisting(filePath))
 	{
 		std::filesystem::remove_all(filePath);
 	}
 	else
 	{
-		_fe3d.logger_throwWarning("Project folder corrupted of project \"" + _currentProjectName + "\"!");
+		_fe3d.logger_throwWarning("Project folder corrupted of project \"" + _currentProjectID + "\"!");
 	}
 }
 
@@ -387,114 +392,76 @@ void SceneEditor::clearScene()
 	_fe3d.gfx_disableMotionBlur(true);
 	_fe3d.gfx_disableLensFlare(true);
 
-	// Check if currently in scene editor
-	if (_isEditorLoaded)
+	// Delete SKY entity
+	if (!_loadedSkyID.empty())
 	{
-		// Delete sky entities
-		for (auto& ID : _fe3d.skyEntity_getAllIDs())
-		{
-			if (ID[0] != '@')
-			{
-				_fe3d.skyEntity_delete(ID);
-			}
-		}
-
-		// Delete TERRAIN entities
-		for (auto& ID : _fe3d.terrainEntity_getAllIDs())
-		{
-			if (ID[0] != '@')
-			{
-				_fe3d.terrainEntity_delete(ID);
-			}
-		}
-
-		// Delete WATER entities
-		for (auto& ID : _fe3d.waterEntity_getAllIDs())
-		{
-			if (ID[0] != '@')
-			{
-				_fe3d.waterEntity_delete(ID);
-			}
-		}
-
-		// Delete GAME entities
-		for (auto& ID : _fe3d.gameEntity_getAllIDs())
-		{
-			if (_currentSceneName.empty()) // Not editing scene
-			{
-				if (ID[0] != '@')
-				{
-					_fe3d.gameEntity_delete(ID);
-				}
-			}
-			else // Editing scene
-			{
-				if (ID[0] != '@' || ((ID != _previewPointlightID) && (ID != _previewSpeakerID) &&
-					(_fe3d.gameEntity_getMeshPath(ID) == _lightBulbModelPath) || (_fe3d.gameEntity_getMeshPath(ID) == _speakerModelPath)))
-				{
-					_fe3d.gameEntity_delete(ID);
-				}
-			}
-		}
-
-		// Delete BILLBOARD entities
-		for (auto& ID : _fe3d.billboardEntity_getAllIDs())
-		{
-			if (ID[0] != '@')
-			{
-				_fe3d.billboardEntity_delete(ID);
-			}
-			else if (ID == "@@lightSource") // Hide special "preview" entity
-			{
-				_fe3d.billboardEntity_hide(ID);
-			}
-		}
-
-		// Delete LIGHT entities
-		for (auto& ID : _fe3d.lightEntity_getAllIDs())
-		{
-			if (ID[0] != '@')
-			{
-				_fe3d.lightEntity_delete(ID);
-			}
-		}
-
-		// Delete AUDIO entities
-		for (auto& ID : _fe3d.audioEntity_getAllIDs())
-		{
-			if (ID[0] != '@')
-			{
-				_fe3d.audioEntity_delete(ID);
-			}
-		}
-
-		// Delete music
-		_fe3d.music_clearPlaylist();
-	}
-	else // Executing script
-	{
-		// Delete all sky entities except the engine background
-		for (auto& ID : _fe3d.skyEntity_getAllIDs())
-		{
-			if (ID != "@@engineBackground")
-			{
-				_fe3d.skyEntity_delete(ID);
-			}
-		}
+		_fe3d.skyEntity_delete(_loadedSkyID);
 		_fe3d.skyEntity_mixWithSelected("");
 		_fe3d.skyEntity_setMixValue(0.0f);
-
-		// Delete all other entities
-		_fe3d.terrainEntity_deleteAll();
-		_fe3d.waterEntity_deleteAll();
-		_fe3d.gameEntity_deleteAll();
-		_fe3d.billboardEntity_deleteAll();
-		_fe3d.aabbEntity_deleteAll();
-		_fe3d.lightEntity_deleteAll();
-		_fe3d.audioEntity_deleteAll();
-		_fe3d.music_clearPlaylist();
-
-		// Stop animations
-		_animationEditor.stopAllAnimations();
 	}
+
+	// Delete TERRAIN entity
+	if (!_loadedTerrainID.empty())
+	{
+		_fe3d.terrainEntity_delete(_loadedTerrainID);
+	}
+
+	// Delete WATER entity
+	if (!_loadedWaterID.empty())
+	{
+		_fe3d.waterEntity_delete(_loadedWaterID);
+	}
+
+	// Delete GAME entities
+	for (auto& ID : _loadedModelIDs)
+	{
+		_fe3d.gameEntity_delete(ID);
+
+		// Stop animation
+		auto animationID = _animationEditor.getPlayingAnimationNames(ID);
+		if (!animationID.empty())
+		{
+			_animationEditor.stopAnimation(animationID.back(), ID);
+		}
+	}
+
+	// Delete BILLBOARD entities
+	for (auto& ID : _loadedBillboardIDs)
+	{
+		_fe3d.billboardEntity_delete(ID);
+	}
+
+	// Delete LIGHT entities
+	for (auto& ID : _loadedLightIDs)
+	{
+		_fe3d.lightEntity_delete(ID);
+
+		// Remove corresponding lightbulb model
+		if (!_currentSceneID.empty())
+		{
+			_fe3d.gameEntity_delete("@" + ID);
+		}
+	}
+
+	// Delete AUDIO entities
+	for (auto& ID : _loadedAudioIDs)
+	{
+		_fe3d.audioEntity_delete(ID);
+
+		// Remove corresponding speaker model
+		if (!_currentSceneID.empty())
+		{
+			_fe3d.gameEntity_delete("@speaker_" + ID);
+		}
+	}
+
+	// Reset saved IDs
+	_loadedSceneID = "";
+	_loadedSkyID = "";
+	_loadedTerrainID = "";
+	_loadedWaterID = "";
+	_loadedModelIDs.clear();
+	_loadedBillboardIDs.clear();
+	_loadedLightIDs.clear();
+	_loadedAudioIDs.clear();
 }

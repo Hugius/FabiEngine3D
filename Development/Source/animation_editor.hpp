@@ -15,7 +15,7 @@ public:
 	void load();
 	void unload();
 	void update();
-	void setCurrentProjectName(const string& projectName);
+	void setCurrentProjectID(const string& projectName);
 	void loadAnimationsFromFile();
 	void saveAnimationsToFile();
 	void startAnimation(const string& animationID, const string& modelID, int timesToPlay);
@@ -64,7 +64,7 @@ private:
 	map<pair<string, string>, Animation> _playingAnimations;
 
 	// Strings
-	string _currentProjectName = "";
+	string _currentProjectID = "";
 	string _currentAnimationID = "";
 	string _currentPartName	   = "";
 

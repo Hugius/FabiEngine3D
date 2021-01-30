@@ -101,7 +101,7 @@ void SceneEditor::_updateMainMenu()
 					_fe3d.skyEntity_select("");
 
 					// Create new scene
-					_currentSceneName = newSceneName;
+					_currentSceneID = newSceneName;
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuChoice");
 				}
 				else
@@ -116,12 +116,12 @@ void SceneEditor::_updateMainMenu()
 				string selectedButtonID = _gui.getGlobalScreen()->getSelectedChoiceFormButtonID("sceneList");
 				if (selectedButtonID != "")
 				{
-					_currentSceneName = selectedButtonID;
+					_currentSceneID = selectedButtonID;
 
 					// Load selected scene for editing
 					if (_isChoosingScene)
 					{
-						loadSceneFromFile(_currentSceneName);
+						loadSceneFromFile(_currentSceneID);
 						_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuChoice");
 					}
 					else if (_isDeletingScene) // Prepare deletion confirmation
@@ -140,18 +140,18 @@ void SceneEditor::_updateMainMenu()
 			}
 
 			// Update scene deletion if chosen
-			if (_isDeletingScene && _currentSceneName != "")
+			if (_isDeletingScene && _currentSceneID != "")
 			{
 				if (_gui.getGlobalScreen()->isAnswerFormConfirmed("deleteScene")) // Confirmed
 				{
-					_deleteSceneFile(_currentSceneName);
+					_deleteSceneFile(_currentSceneID);
 					_isDeletingScene = false;
-					_currentSceneName = "";
+					_currentSceneID = "";
 				}
 				else if (_gui.getGlobalScreen()->isAnswerFormDenied("deleteScene")) // Cancelled
 				{
 					_isDeletingScene = false;
-					_currentSceneName = "";
+					_currentSceneID = "";
 				}
 			}
 		}
@@ -207,7 +207,6 @@ void SceneEditor::_updateChoiceMenu()
 
 				// Clear whole scene
 				clearScene();
-				_animationEditor.stopAllAnimations();
 
 				// Default skybox
 				_fe3d.skyEntity_select("@@engineBackground");
@@ -216,7 +215,7 @@ void SceneEditor::_updateChoiceMenu()
 				_fe3d.misc_setVsync(true);
 
 				// No selected scene
-				_currentSceneName = "";
+				_currentSceneID = "";
 				_currentSkyID = "";
 				_currentTerrainID = "";
 				_currentWaterID = "";
@@ -228,7 +227,6 @@ void SceneEditor::_updateChoiceMenu()
 			{
 				// Clear whole scene
 				clearScene();
-				_animationEditor.stopAllAnimations();
 
 				// Default skybox
 				_fe3d.skyEntity_select("@@engineBackground");
@@ -237,7 +235,7 @@ void SceneEditor::_updateChoiceMenu()
 				_fe3d.misc_setVsync(true);
 
 				// No selected scene
-				_currentSceneName = "";
+				_currentSceneID = "";
 				_currentSkyID = "";
 				_currentTerrainID = "";
 				_currentWaterID = "";
@@ -253,7 +251,7 @@ void SceneEditor::_updateCamera()
 {
 	if (_isEditorLoaded)
 	{
-		if (_currentSceneName != "")
+		if (_currentSceneID != "")
 		{
 			// Camera looking
 			if (_fe3d.input_getMouseDown(InputType::MOUSE_BUTTON_RIGHT) && !_gui.getGlobalScreen()->isFocused())

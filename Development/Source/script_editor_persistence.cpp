@@ -7,7 +7,7 @@
 void ScriptEditor::loadScriptsFromFile()
 {
 	// Error checking
-	if (_currentProjectName == "")
+	if (_currentProjectID == "")
 	{
 		_fe3d.logger_throwError("No current project loaded --> ScriptEditor::loadScriptsFromFile()");
 	}
@@ -17,7 +17,7 @@ void ScriptEditor::loadScriptsFromFile()
 
 	// Retrieve all filenames in the scripts folder
 	vector<string> scriptFilenames;
-	string directoryPath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectName + "\\scripts\\";
+	string directoryPath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectID + "\\scripts\\";
 	for (const auto& entry : std::filesystem::directory_iterator(directoryPath))
 	{
 		// Extract filename
@@ -57,7 +57,7 @@ void ScriptEditor::loadScriptsFromFile()
 	}
 
 	// Logging
-	_fe3d.logger_throwInfo("Script data from project \"" + _currentProjectName + "\" loaded!");
+	_fe3d.logger_throwInfo("Script data from project \"" + _currentProjectID + "\" loaded!");
 
 	_isScriptLoadedFromFile = true;
 }
@@ -68,12 +68,12 @@ void ScriptEditor::saveScriptsToFile()
 	if (_isEditorLoaded)
 	{
 		// Error checking
-		if (_currentProjectName == "")
+		if (_currentProjectID == "")
 		{
 			_fe3d.logger_throwError("No current project loaded --> ScriptEditor::saveScriptsToFile()");
 		}
 
-		string directoryPath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectName + "\\scripts\\";
+		string directoryPath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectID + "\\scripts\\";
 
 		// Delete all text files containing deleted scripts
 		for (auto& scriptName : _scriptFileNamesToDelete)
@@ -109,6 +109,6 @@ void ScriptEditor::saveScriptsToFile()
 		}
 
 		// Logging
-		_fe3d.logger_throwInfo("Script data from project \"" + _currentProjectName + "\" saved!");
+		_fe3d.logger_throwInfo("Script data from project \"" + _currentProjectID + "\" saved!");
 	}
 }

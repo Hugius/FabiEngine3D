@@ -1,8 +1,8 @@
 #include "audio_editor.hpp"
 
-void AudioEditor::setCurrentProjectName(const string& projectName)
+void AudioEditor::setCurrentProjectID(const string& projectName)
 {
-	_currentProjectName = projectName;
+	_currentProjectID = projectName;
 }
 
 bool AudioEditor::isLoaded()

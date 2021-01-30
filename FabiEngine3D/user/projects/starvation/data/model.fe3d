@@ -71,5 +71,4 @@
 @house2 user\assets\models\buildings\house2.obj ? ? ? ? 1.75 1.75 1.75 0 1 0 0 1 1 1 0.5 1 1 1 1 ? 0
 @house3 user\assets\models\buildings\house3.obj user\assets\textures\diffuse_maps\buildings\house3.png user\assets\textures\light_maps\buildings\house3.png user\assets\textures\reflection_maps\buildings\house3.png user\assets\textures\normal_maps\buildings\house3.png 2 2 2 0 1 0 1 1 1 2.5 1 1 1 1 1 ? 0 pole2 -2.94 0 -1.45 0.2 2.22 0.23 pole1 -2.93 0 1.45 0.2 2.21 0.22 base 1.5 0 -0.03 3.3 5.37999 3.36 top -1.6 2.2 0 2.9 3.2 3.4
 @shrub user\assets\models\foliage\shrub.obj ? ? ? ? 5 5 5 0 1 1 0 1 1 1 0.4 1 1 1 1 ? 0 shrub 0 0 0 1 0.88 1
-@bamboo user\assets\models\foliage\bamboo.obj user\assets\textures\diffuse_maps\foliage\bamboo.png ? ? ? 3 1.5 3 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 bamboo -0.1 0 -0.1 1.65 4 1.7
 @claypile user\assets\models\foliage\claypile.obj user\assets\textures\diffuse_maps\foliage\claypile.png ? ? user\assets\textures\normal_maps\foliage\claypile.png 0.75 0.5 0.75 0 1 0 0 1 1 1.5 0.4 1 1 1 1 ? 0 claypile -0.1 0 0.2 10.4 2.5 11.7

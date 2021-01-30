@@ -23,7 +23,7 @@ public:
 	void load();
 	void unload();
 	void update();
-	void setCurrentProjectName(const string&projectName);
+	void setCurrentProjectID(const string&projectName);
 	void loadSceneFromFile(const string& fileName);
 	void saveSceneToFile();
 	void clearScene();
@@ -32,6 +32,8 @@ public:
 
 	bool isLoaded();
 	bool isSceneExisting(const string& fileName);
+
+	const string& getLoadedSceneID();
 
 private:
 	// Environment updates
@@ -135,11 +137,15 @@ private:
 	AudioEditor& _audioEditor;
 
 	// Environment variables
+	string _loadedSkyID = "";
+	string _loadedTerrainID = "";
+	string _loadedWaterID = "";
 	string _currentSkyID = "";
 	string _currentTerrainID = "";
 	string _currentWaterID = "";
 
 	// Model variables
+	vector<string> _loadedModelIDs;
 	map<string, float> _initialModelLightness;
 	map<string, Vec3> _initialModelPosition;
 	map<string, Vec3> _initialModelRotation;
@@ -153,6 +159,7 @@ private:
 	const float _modelBlinkingSpeed = 0.025f;
 
 	// Billboard variables
+	vector<string> _loadedBillboardIDs;
 	map<string, float> _initialBillboardLightness;
 	string _currentPreviewBillboardName = "";
 	string _selectedBillboardID = "";
@@ -163,6 +170,7 @@ private:
 	const float _billboardBlinkingSpeed = 0.025f;
 
 	// Lighting variables
+	vector<string> _loadedLightIDs;
 	bool _isPlacingPointlight = false;
 	const string _previewPointlightID = "@@previewPointlight";
 	const string _lightBulbModelPath = "engine\\models\\lamp.obj";
@@ -177,6 +185,7 @@ private:
 	string _activeLightBulbID = "";
 
 	// Audio variables
+	vector<string> _loadedAudioIDs;
 	string _currentPreviewAudioName = "";
 	string _selectedSpeakerID = "";
 	string _activeSpeakerID = "";
@@ -193,8 +202,9 @@ private:
 	bool _dontResetSelectedAudio = false;
 
 	// Miscellaneous
-	string _currentProjectName = "";
-	string _currentSceneName = "";
+	string _loadedSceneID = "";
+	string _currentProjectID = "";
+	string _currentSceneID = "";
 	bool _isEditorLoaded = false;
 	bool _isChoosingScene = false;
 	bool _isDeletingScene = false;

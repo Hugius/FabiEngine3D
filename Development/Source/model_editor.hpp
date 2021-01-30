@@ -14,7 +14,7 @@ public:
 	void load();
 	void unload();
 	void update();
-	void setCurrentProjectName(const string& projectName);
+	void setCurrentProjectID(const string& projectName);
 	void loadGameEntitiesFromFile();
 	void saveGameEntitiesToFile();
 
@@ -55,7 +55,7 @@ private:
 	// Strings
 	string _currentModelID = "";
 	string _currentAabbID = "";
-	string _currentProjectName = "";
+	string _currentProjectID = "";
 	string _hoveredModelID = "";
 	vector<string> _modelIDs;
 	vector<string> _meshFileNames;

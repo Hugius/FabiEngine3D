@@ -16,7 +16,7 @@ public:
 	void load();
 	void unload();
 	void update();
-	void setCurrentProjectName(const string & projectName);
+	void setCurrentProjectID(const string & projectName);
 	void loadScriptsFromFile();
 	void saveScriptsToFile();
 
@@ -44,7 +44,7 @@ private:
 	vector<string> _scriptFileNamesToDelete;
 	vector<string> _copyClipboard;
 	InputType _activeActionKey = InputType::NONE;
-	string _currentProjectName = "";
+	string _currentProjectID = "";
 	string _currentScriptFileID = "";
 	float _scrollingAcceleration = 0.0f;
 	bool _isEditorLoaded = false;

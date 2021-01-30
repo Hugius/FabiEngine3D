@@ -2,9 +2,9 @@
 
 #include <algorithm>
 
-void EnvironmentEditor::setCurrentProjectName(const string& projectName)
+void EnvironmentEditor::setCurrentProjectID(const string& projectName)
 {
-	_currentProjectName = projectName;
+	_currentProjectID = projectName;
 }
 
 bool EnvironmentEditor::isLoaded()

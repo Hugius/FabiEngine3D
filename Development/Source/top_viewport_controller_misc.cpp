@@ -7,7 +7,7 @@
 
 bool TopViewportController::isScriptRunning()
 {
-	if (_currentProjectName == "")
+	if (_currentProjectID == "")
 	{
 		return false;
 	}
@@ -19,12 +19,12 @@ bool TopViewportController::isScriptRunning()
 
 const string& TopViewportController::getCurrentProjectName()
 {
-	return _currentProjectName;
+	return _currentProjectID;
 }
 
 void TopViewportController::_updateMiscellaneous()
 {
-	bool hoverable = (_currentProjectName == "") ? false : !SCRIPT_EXECUTOR.isInitialized();
+	bool hoverable = (_currentProjectID == "") ? false : !SCRIPT_EXECUTOR.isInitialized();
 
 	// Project menus hoverability
 	_gui.getViewport("left")->getWindow("main")->getScreen("main")->getButton("environmentEditor")->setHoverable(hoverable);
@@ -72,18 +72,18 @@ void TopViewportController::_updateProjectCreation()
 				auto temp4 = _mkdir((newDirectoryPath + "\\scripts").c_str());
 
 				// Create settings file
-				_settingsEditor.setCurrentProjectName(newProjectName);
+				_settingsEditor.setCurrentProjectID(newProjectName);
 				_settingsEditor.save(true);
 
 				// Load current project
-				_currentProjectName = newProjectName;
+				_currentProjectID = newProjectName;
 				_updateProjectChange();
 
 				// Load settings for this project
 				_settingsEditor.load();
 
 				// Logging
-				_fe3d.logger_throwInfo("New project \"" + _currentProjectName + "\" created!");
+				_fe3d.logger_throwInfo("New project \"" + _currentProjectID + "\" created!");
 
 				// Miscellaneous
 				_creatingProject = false;
@@ -102,7 +102,7 @@ void TopViewportController::_updateProjectLoading()
 		if (clickedButtonID != "" && _fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 		{
 			// Load current project
-			_currentProjectName = clickedButtonID;
+			_currentProjectID = clickedButtonID;
 			_updateProjectChange();
 
 			// Load settings for this project
@@ -125,7 +125,7 @@ void TopViewportController::_updateProjectLoading()
 			_fe3d.misc_cacheAudioMultiThreaded(audioPaths); // Pre-cache audio files
 
 			// Logging
-			_fe3d.logger_throwInfo("Existing project \"" + _currentProjectName + "\" loaded!");
+			_fe3d.logger_throwInfo("Existing project \"" + _currentProjectID + "\" loaded!");
 
 			// Miscellaneous
 			_loadingProject = false;
@@ -163,10 +163,10 @@ void TopViewportController::_updateProjectDeletion()
 		if (_gui.getGlobalScreen()->isAnswerFormConfirmed("deleteProject"))
 		{
 			// Check if deleting currently opened project
-			if (chosenButtonID == _currentProjectName)
+			if (chosenButtonID == _currentProjectID)
 			{
 				// Unload current project
-				_currentProjectName = "";
+				_currentProjectID = "";
 				_updateProjectChange();
 			}
 

@@ -73,8 +73,17 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
+			_sceneEditor.clearScene();
 			_sceneEditor.loadSceneFromFile(arguments[0].getString());
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+		}
+	}
+	else if (functionName == "fe3d:scene_get_current")
+	{
+		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			auto result = _sceneEditor.getLoadedSceneID();
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result));
 		}
 	}
 	else if (functionName == "fe3d:scene_clear") // Clear all entities and reset scene

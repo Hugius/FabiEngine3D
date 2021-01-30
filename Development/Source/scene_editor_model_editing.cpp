@@ -145,7 +145,7 @@ void SceneEditor::_updateModelEditing()
 					if (!lastAnimationID.empty())
 					{
 						// Stop animation
-						_animationEditor.stopAnimation(lastAnimationID.front(), _activeModelID);
+						_animationEditor.stopAnimation(lastAnimationID.back(), _activeModelID);
 
 						// Reset main transformation
 						_fe3d.gameEntity_setPosition(_activeModelID, _initialModelPosition[_activeModelID]);

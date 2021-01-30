@@ -6,7 +6,7 @@
 void AnimationEditor::loadAnimationsFromFile()
 {
 	// Error checking
-	if (_currentProjectName == "")
+	if (_currentProjectID == "")
 	{
 		_fe3d.logger_throwError("No current project loaded --> AnimationEditor::loadAnimationsFromFile()");
 	}
@@ -15,7 +15,7 @@ void AnimationEditor::loadAnimationsFromFile()
 	_animations.clear();
 
 	// Compose full file path
-	string filePath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectName + "\\data\\animation.fe3d";
+	string filePath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectID + "\\data\\animation.fe3d";
 
 	// Check if animation file exists
 	if (_fe3d.misc_isFileExisting(filePath))
@@ -163,11 +163,11 @@ void AnimationEditor::loadAnimationsFromFile()
 		file.close();
 
 		// Logging
-		_fe3d.logger_throwInfo("Animation data from project \"" + _currentProjectName + "\" loaded!");
+		_fe3d.logger_throwInfo("Animation data from project \"" + _currentProjectID + "\" loaded!");
 	}
 	else
 	{
-		_fe3d.logger_throwWarning("Project \"" + _currentProjectName + "\" corrupted: animation.fe3d missing!");
+		_fe3d.logger_throwWarning("Project \"" + _currentProjectID + "\" corrupted: animation.fe3d missing!");
 	}
 }
 
@@ -181,13 +181,13 @@ void AnimationEditor::saveAnimationsToFile()
 	if (_isEditorLoaded)
 	{
 		// Error checking
-		if (_currentProjectName == "")
+		if (_currentProjectID == "")
 		{
 			_fe3d.logger_throwError("No current project loaded --> AnimationEditor::saveAnimationsToFile()");
 		}
 
 		// Compose full file path
-		string filePath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectName + "\\data\\animation.fe3d";
+		string filePath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectID + "\\data\\animation.fe3d";
 
 		// Create or overwrite animation file
 		std::ofstream file;
@@ -275,6 +275,6 @@ void AnimationEditor::saveAnimationsToFile()
 		file.close();
 
 		// Logging
-		_fe3d.logger_throwInfo("Animation data from project \"" + _currentProjectName + "\" saved!");
+		_fe3d.logger_throwInfo("Animation data from project \"" + _currentProjectID + "\" saved!");
 	}
 }

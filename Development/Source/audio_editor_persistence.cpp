@@ -6,7 +6,7 @@
 const vector<string> AudioEditor::getAllAudioPathsFromFile()
 {
 	// Error checking
-	if (_currentProjectName == "")
+	if (_currentProjectID == "")
 	{
 		_fe3d.logger_throwError("No current project loaded --> AudioEditor::getAllAudioPathsFromFile()");
 	}
@@ -15,7 +15,7 @@ const vector<string> AudioEditor::getAllAudioPathsFromFile()
 	_audioIDs.clear();
 
 	// Compose full file path
-	string filePath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectName + "\\data\\audio.fe3d";
+	string filePath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectID + "\\data\\audio.fe3d";
 
 	// Check if audio file exists
 	if (_fe3d.misc_isFileExisting(filePath))
@@ -49,7 +49,7 @@ const vector<string> AudioEditor::getAllAudioPathsFromFile()
 	}
 	else
 	{
-		_fe3d.logger_throwWarning("Project \"" + _currentProjectName + "\" corrupted: audio.fe3d missing!");
+		_fe3d.logger_throwWarning("Project \"" + _currentProjectID + "\" corrupted: audio.fe3d missing!");
 	}
 
 	return {};
@@ -58,7 +58,7 @@ const vector<string> AudioEditor::getAllAudioPathsFromFile()
 void AudioEditor::loadAudioEntitiesFromFile()
 {
 	// Error checking
-	if (_currentProjectName == "")
+	if (_currentProjectID == "")
 	{
 		_fe3d.logger_throwError("No current project loaded --> AudioEditor::loadAudioEntitiesFromFile()");
 	}
@@ -67,7 +67,7 @@ void AudioEditor::loadAudioEntitiesFromFile()
 	_audioIDs.clear();
 
 	// Compose full file path
-	string filePath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectName + "\\data\\audio.fe3d";
+	string filePath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectID + "\\data\\audio.fe3d";
 
 	// Check if audio file exists
 	if (_fe3d.misc_isFileExisting(filePath))
@@ -100,11 +100,11 @@ void AudioEditor::loadAudioEntitiesFromFile()
 		file.close();
 
 		// Logging
-		_fe3d.logger_throwInfo("Audio data from project \"" + _currentProjectName + "\" loaded!");
+		_fe3d.logger_throwInfo("Audio data from project \"" + _currentProjectID + "\" loaded!");
 	}
 	else
 	{
-		_fe3d.logger_throwWarning("Project \"" + _currentProjectName + "\" corrupted: audio.fe3d missing!");
+		_fe3d.logger_throwWarning("Project \"" + _currentProjectID + "\" corrupted: audio.fe3d missing!");
 	}
 }
 
@@ -113,14 +113,14 @@ void AudioEditor::saveAudioEntitiesToFile()
 	if (_isEditorLoaded)
 	{
 		// Error checking
-		if (_currentProjectName == "")
+		if (_currentProjectID == "")
 		{
 			_fe3d.logger_throwError("No current project loaded --> AudioEditor::saveAudioEntitiesToFile()");
 		}
 
 		// Create or overwrite audio file
 		std::ofstream file;
-		file.open(_fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectName + "\\data\\audio.fe3d");
+		file.open(_fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectID + "\\data\\audio.fe3d");
 
 		// Write audio data into file
 		for (auto& audioID : _audioIDs)
@@ -140,6 +140,6 @@ void AudioEditor::saveAudioEntitiesToFile()
 		file.close();
 
 		// Logging
-		_fe3d.logger_throwInfo("Audio data from project \"" + _currentProjectName + "\" saved!");
+		_fe3d.logger_throwInfo("Audio data from project \"" + _currentProjectID + "\" saved!");
 	}
 }

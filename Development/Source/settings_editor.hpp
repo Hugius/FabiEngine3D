@@ -13,7 +13,7 @@ public:
 	void load();
 	void unload();
 	void update();
-	void setCurrentProjectName(const string& projectName);
+	void setCurrentProjectID(const string& projectName);
 	void save(bool newFile);
 
 private:
@@ -22,5 +22,5 @@ private:
 
 	bool _isEditorLoaded = false;
 
-	string _currentProjectName = "";
+	string _currentProjectID = "";
 };

@@ -1,4 +1,4 @@
-7 23
+11 13
 META script_type_init
 META execution_entry
 
@@ -11,7 +11,6 @@ EXEC crafting_init_hud
 EXEC inventory_init
 EXEC misc_init
 EXEC npc_init
-EXEC pickup_init
 EXEC player_init
 EXEC time_init
 EXEC water_init

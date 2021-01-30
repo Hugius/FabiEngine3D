@@ -1,6 +1,8 @@
-33 36
+40 24
 META script_type_update
 META execution_entry
+
+STR currentWorld = fe3d:scene_get_current()
 
 /// Bag inventory
 EXEC bag_update
@@ -29,13 +31,24 @@ EXEC gathering_update
 EXEC fishing_update
 
 /// NPC interaction
-EXEC npc_update
+IF currentWorld IS "starvia_outside":
+    EXEC npc_update
 
-/// Other
-IF _currentWorld IS "starvia_outside":
+/// Water
+IF currentWorld IS "starvia_outside":
     EXEC water_update
-EXEC pickup_update
-EXEC crafting_process
-EXEC crafting_misc
+
+/// Pickup
+IF currentWorld IS "home":
+    EXEC pickup_update
+
+/// Crafting
+IF currentWorld IS "home":
+    EXEC crafting_process
+    EXEC crafting_misc
+
+/// Time
 EXEC time_update
+
+/// Miscellaneous
 EXEC misc_update

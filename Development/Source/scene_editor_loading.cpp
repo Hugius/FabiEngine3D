@@ -7,17 +7,26 @@
 void SceneEditor::loadSceneFromFile(const string& fileName)
 {
 	// Error checking
-	if (_currentProjectName == "")
+	if (_currentProjectID == "")
 	{
 		_fe3d.logger_throwError("No current project loaded --> SceneEditor::loadSceneFromFile()");
 	}
 
 	// Compose full file path
-	string filePath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectName + "\\scenes\\" + fileName + ".fe3d";
+	string filePath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectID + "\\scenes\\" + fileName + ".fe3d";
 
 	// Check if scene file exists
 	if (_fe3d.misc_isFileExisting(filePath))
 	{
+		_loadedSceneID = fileName;
+		_loadedSkyID = "";
+		_loadedTerrainID = "";
+		_loadedWaterID = "";
+		_loadedModelIDs.clear();
+		_loadedBillboardIDs.clear();
+		_loadedLightIDs.clear();
+		_loadedAudioIDs.clear();
+
 		// No sky at default
 		_fe3d.skyEntity_select("");
 
@@ -92,7 +101,7 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 					_currentSkyID = skyID;
 				}
 
-				// Load entity
+				// Add new sky entity
 				_placeSky(skyID, diffuseMapPaths, lightness, rotationSpeed, color);
 			}
 			else if (entityType == "TERRAIN")
@@ -215,7 +224,7 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 					_currentWaterID = waterID;
 				}
 
-				// Load entity
+				// Add new water entity
 				_placeWater(waterID, position, size, isWaving, isRippling, isSpecularLighted, isReflective,
 					isRefractive, waveHeightFactor, specularFactor, specularIntensity, transparency, color, uvRepeat,
 					speed, dudvMapPath, normalMapPath, displacementMapPath);
@@ -424,7 +433,7 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 				// Apply
 				_fe3d.gfx_enableAmbientLighting(ambientLightingColor, ambientLightingIntensity);
 			}
-			else if (entityType == "DIRECTIONAL_LIGHT")
+			else if (entityType == "DIRECTIONAL_LIGHT") 
 			{
 				// Values
 				Vec3 directionalLightingPosition, directionalLightingColor;
@@ -436,7 +445,7 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 					directionalLightingIntensity >> billboardSize >> billboardLightness;
 
 				// Delete preview billboard
-				if (_isEditorLoaded)
+				if (_fe3d.billboardEntity_isExisting("@@lightSource"))
 				{
 					_fe3d.billboardEntity_delete("@@lightSource");
 				}
@@ -469,6 +478,7 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 
 				// Add light
 				_fe3d.lightEntity_add(ID, position, color, intensity, distance);
+				_loadedLightIDs.push_back(ID);
 			}
 			else if (entityType == "AUDIO")
 			{
@@ -495,6 +505,7 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 				// Add audio
 				_fe3d.audioEntity_add3D(ID, audioPath, position, maxVolume, maxDistance);
 				_fe3d.audioEntity_play(ID, -1, 0.0f);
+				_loadedAudioIDs.push_back(ID);
 			}
 			else if (entityType == "LOD_DISTANCE")
 			{
@@ -589,7 +600,7 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 		file.close();
 
 		// Logging
-		_fe3d.logger_throwInfo("Scene data from project \"" + _currentProjectName + "\" loaded!");
+		_fe3d.logger_throwInfo("Scene data from project \"" + _currentProjectID + "\" loaded!");
 	}
 	else
 	{

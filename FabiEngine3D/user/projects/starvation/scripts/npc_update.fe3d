@@ -1,4 +1,4 @@
-56 25
+10 18
 META script_type_update
 
 /// NPC rotation
@@ -9,7 +9,7 @@ STR hoveredID = ""
 STR name = ""
 VEC3 camPos = fe3d:camera_get_position()
 VEC3 npcPos = [0.0 0.0 0.0]
-VEC3 direction = [ 0.0 0.0 0.0]
+VEC3 direction = [0.0 0.0 0.0]
 DEC npcRot = 0.0
 LOOP:
     IF index IS size:

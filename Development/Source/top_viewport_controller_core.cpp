@@ -98,7 +98,7 @@ void TopViewportController::_updateProjectScreenManagement()
 			else if (screen->getButton("quitEngine")->isHovered())
 			{
 				// Check if currently in an editor
-				if (_currentProjectName != "" && _gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID() != "main")
+				if (_currentProjectID != "" && _gui.getViewport("left")->getWindow("main")->getActiveScreen()->getID() != "main")
 				{
 					_gui.getGlobalScreen()->addAnswerForm("exitEngine", "Save changes?", Vec2(0.0f, 0.25f));
 				}
@@ -126,7 +126,7 @@ void TopViewportController::_updateProjectScreenManagement()
 		}
 
 		// Buttons hoverability
-		screen->getButton("saveProject")->setHoverable(_currentProjectName != "");
+		screen->getButton("saveProject")->setHoverable(_currentProjectID != "");
 	}
 }
 
@@ -138,7 +138,7 @@ void TopViewportController::_updateGameScreenManagement()
 	auto miscScreen = _miscWindow->getScreen("main");
 
 	// Check if currently a project is loaded
-	if (_currentProjectName == "")
+	if (_currentProjectID == "")
 	{
 		gameScreen->getButton("play")->setHoverable(false);
 		gameScreen->getButton("pause")->setHoverable(false);
@@ -253,7 +253,7 @@ void TopViewportController::_updateMiscScreenManagement()
 void TopViewportController::_saveCurrentProject()
 {
 	// Error checking
-	if (_currentProjectName == "")
+	if (_currentProjectID == "")
 	{
 		_fe3d.logger_throwError("No current project loaded --> TopViewportController::_saveCurrentProject()");
 	}
@@ -268,19 +268,19 @@ void TopViewportController::_saveCurrentProject()
 	_audioEditor.saveAudioEntitiesToFile();
 
 	// Logging
-	_fe3d.logger_throwInfo("Project \"" + _currentProjectName + "\" saved!");
+	_fe3d.logger_throwInfo("Project \"" + _currentProjectID + "\" saved!");
 }
 
 void TopViewportController::_updateProjectChange()
 {
 	// Change window title
-	if (_currentProjectName == "")
+	if (_currentProjectID == "")
 	{
 		_fe3d.misc_setWindowTitle("FabiEngine3D");
 	}
 	else
 	{
-		_fe3d.misc_setWindowTitle("FabiEngine3D - " + _currentProjectName);
+		_fe3d.misc_setWindowTitle("FabiEngine3D - " + _currentProjectID);
 	}
 
 	// Go back to main menu
@@ -326,12 +326,12 @@ void TopViewportController::_updateProjectChange()
 	_scriptEditor.unload();
 
 	// Pass loaded project name
-	_environmentEditor.setCurrentProjectName(_currentProjectName);
-	_modelEditor.setCurrentProjectName(_currentProjectName);
-	_animationEditor.setCurrentProjectName(_currentProjectName);
-	_billboardEditor.setCurrentProjectName(_currentProjectName);
-	_audioEditor.setCurrentProjectName(_currentProjectName);
-	_sceneEditor.setCurrentProjectName(_currentProjectName);
-	_scriptEditor.setCurrentProjectName(_currentProjectName);
-	_settingsEditor.setCurrentProjectName(_currentProjectName);
+	_environmentEditor.setCurrentProjectID(_currentProjectID);
+	_modelEditor.setCurrentProjectID(_currentProjectID);
+	_animationEditor.setCurrentProjectID(_currentProjectID);
+	_billboardEditor.setCurrentProjectID(_currentProjectID);
+	_audioEditor.setCurrentProjectID(_currentProjectID);
+	_sceneEditor.setCurrentProjectID(_currentProjectID);
+	_scriptEditor.setCurrentProjectID(_currentProjectID);
+	_settingsEditor.setCurrentProjectID(_currentProjectID);
 }

@@ -13,7 +13,7 @@ public:
 	void load();
 	void unload();
 	void update();
-	void setCurrentProjectName(const string& projectName);
+	void setCurrentProjectID(const string& projectName);
 	void loadAudioEntitiesFromFile();
 	void saveAudioEntitiesToFile();
 
@@ -44,6 +44,6 @@ private:
 	bool _isRemovingAudio = false;
 
 	// Miscellaneous
-	string _currentProjectName = "";
+	string _currentProjectID = "";
 	bool _isEditorLoaded = false;
 };

@@ -31,14 +31,14 @@ void EngineController::FE3D_CONTROLLER_INIT()
 	else // Game preview
 	{
 		// Set name of game (project) to run
-		_leftViewportController.getEnvironmentEditor().setCurrentProjectName(engine_getSelectedGame());
-		_leftViewportController.getModelEditor().setCurrentProjectName(engine_getSelectedGame());
-		_leftViewportController.getAnimationEditor().setCurrentProjectName(engine_getSelectedGame());
-		_leftViewportController.getBillboardEditor().setCurrentProjectName(engine_getSelectedGame());
-		_leftViewportController.getAudioEditor().setCurrentProjectName(engine_getSelectedGame());
-		_leftViewportController.getScriptEditor().setCurrentProjectName(engine_getSelectedGame());
-		_leftViewportController.getSceneEditor().setCurrentProjectName(engine_getSelectedGame());
-		_leftViewportController.getSettingsEditor().setCurrentProjectName(engine_getSelectedGame());
+		_leftViewportController.getEnvironmentEditor().setCurrentProjectID(engine_getSelectedGame());
+		_leftViewportController.getModelEditor().setCurrentProjectID(engine_getSelectedGame());
+		_leftViewportController.getAnimationEditor().setCurrentProjectID(engine_getSelectedGame());
+		_leftViewportController.getBillboardEditor().setCurrentProjectID(engine_getSelectedGame());
+		_leftViewportController.getAudioEditor().setCurrentProjectID(engine_getSelectedGame());
+		_leftViewportController.getScriptEditor().setCurrentProjectID(engine_getSelectedGame());
+		_leftViewportController.getSceneEditor().setCurrentProjectID(engine_getSelectedGame());
+		_leftViewportController.getSettingsEditor().setCurrentProjectID(engine_getSelectedGame());
 
 		// Import settings
 		_leftViewportController.getSettingsEditor().load();

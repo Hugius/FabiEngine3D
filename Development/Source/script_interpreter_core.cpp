@@ -198,8 +198,26 @@ void ScriptInterpreter::executeDestruction()
 
 void ScriptInterpreter::unload()
 {
-	// Unload scene
-	_sceneEditor.clearScene();
+	// Delete all sky entities except the engine background
+	for (auto& ID : _fe3d.skyEntity_getAllIDs())
+	{
+		if (ID != "@@engineBackground")
+		{
+			_fe3d.skyEntity_delete(ID);
+		}
+	}
+	_fe3d.skyEntity_mixWithSelected("");
+	_fe3d.skyEntity_setMixValue(0.0f);
+
+	// Delete all other entities
+	_fe3d.terrainEntity_deleteAll();
+	_fe3d.waterEntity_deleteAll();
+	_fe3d.gameEntity_deleteAll();
+	_fe3d.billboardEntity_deleteAll();
+	_fe3d.aabbEntity_deleteAll();
+	_fe3d.lightEntity_deleteAll();
+	_fe3d.audioEntity_deleteAll();
+	_fe3d.music_clearPlaylist();
 
 	// Disable collision response
 	_fe3d.collision_disableCameraTerrainResponse();
@@ -249,6 +267,12 @@ void ScriptInterpreter::unload()
 
 	// Choose engine background again
 	_fe3d.skyEntity_select("@@engineBackground");
+
+	// Delete music
+	_fe3d.music_clearPlaylist();
+
+	// Stop animations
+	_animationEditor.stopAllAnimations();
 
 	// Miscellaneous
 	_fe3d.input_clearMouseToggles();

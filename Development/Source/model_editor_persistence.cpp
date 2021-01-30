@@ -8,13 +8,13 @@
 const vector<string> ModelEditor::getAllTexturePathsFromFile()
 {
 	// Error checking
-	if (_currentProjectName == "")
+	if (_currentProjectID == "")
 	{
 		_fe3d.logger_throwError("No current project loaded --> ModelEditor::preLoadGameEntitiesFromFile()");
 	}
 
 	// Compose full file path
-	string filePath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectName + "\\data\\model.fe3d";
+	string filePath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectID + "\\data\\model.fe3d";
 
 	// Check if model file exists
 	if (_fe3d.misc_isFileExisting(filePath))
@@ -82,7 +82,7 @@ const vector<string> ModelEditor::getAllTexturePathsFromFile()
 	}
 	else
 	{
-		_fe3d.logger_throwWarning("Project \"" + _currentProjectName + "\" corrupted: model.fe3d missing!");
+		_fe3d.logger_throwWarning("Project \"" + _currentProjectID + "\" corrupted: model.fe3d missing!");
 	}
 
 	return {};
@@ -91,7 +91,7 @@ const vector<string> ModelEditor::getAllTexturePathsFromFile()
 void ModelEditor::loadGameEntitiesFromFile()
 {
 	// Error checking
-	if (_currentProjectName == "")
+	if (_currentProjectID == "")
 	{
 		_fe3d.logger_throwError("No current project loaded --> ModelEditor::loadGameEntitiesFromFile()");
 	}
@@ -100,7 +100,7 @@ void ModelEditor::loadGameEntitiesFromFile()
 	_modelIDs.clear();
 
 	// Compose full file path
-	string filePath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectName + "\\data\\model.fe3d";
+	string filePath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectID + "\\data\\model.fe3d";
 
 	// Check if model file exists
 	if (_fe3d.misc_isFileExisting(filePath))
@@ -197,11 +197,11 @@ void ModelEditor::loadGameEntitiesFromFile()
 		file.close();
 
 		// Logging
-		_fe3d.logger_throwInfo("Model data from project \"" + _currentProjectName + "\" loaded!");
+		_fe3d.logger_throwInfo("Model data from project \"" + _currentProjectID + "\" loaded!");
 	}
 	else
 	{
-		_fe3d.logger_throwWarning("Project \"" + _currentProjectName + "\" corrupted: model.fe3d missing!");
+		_fe3d.logger_throwWarning("Project \"" + _currentProjectID + "\" corrupted: model.fe3d missing!");
 	}
 }
 
@@ -210,14 +210,14 @@ void ModelEditor::saveGameEntitiesToFile()
 	if (_isEditorLoaded)
 	{
 		// Error checking
-		if (_currentProjectName == "")
+		if (_currentProjectID == "")
 		{
 			_fe3d.logger_throwError("No current project loaded --> ModelEditor::saveGameEntitiesToFile()");
 		}
 
 		// Create or overwrite models file
 		std::ofstream file;
-		file.open(_fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectName + "\\data\\model.fe3d");
+		file.open(_fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectID + "\\data\\model.fe3d");
 
 		// Write model data into file
 		for (auto& modelID : _modelIDs)
@@ -350,6 +350,6 @@ void ModelEditor::saveGameEntitiesToFile()
 		file.close();
 
 		// Logging
-		_fe3d.logger_throwInfo("Model data from project \"" + _currentProjectName + "\" saved!");
+		_fe3d.logger_throwInfo("Model data from project \"" + _currentProjectID + "\" saved!");
 	}
 }

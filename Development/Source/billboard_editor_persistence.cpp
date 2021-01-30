@@ -7,13 +7,13 @@
 const vector<string> BillboardEditor::getAllTexturePathsFromFile()
 {
 	// Error checking
-	if (_currentProjectName == "")
+	if (_currentProjectID == "")
 	{
 		_fe3d.logger_throwError("No current project loaded --> BillboardEditor::getAllTexturePathsFromFile()");
 	}
 
 	// Compose full file path
-	string filePath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectName + "\\data\\billboard.fe3d";
+	string filePath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectID + "\\data\\billboard.fe3d";
 
 	// Check if billboard file exists
 	if (_fe3d.misc_isFileExisting(filePath))
@@ -66,7 +66,7 @@ const vector<string> BillboardEditor::getAllTexturePathsFromFile()
 	}
 	else
 	{
-		_fe3d.logger_throwWarning("Project \"" + _currentProjectName + "\" corrupted: billboard.fe3d missing!");
+		_fe3d.logger_throwWarning("Project \"" + _currentProjectID + "\" corrupted: billboard.fe3d missing!");
 	}
 
 	return {};
@@ -75,7 +75,7 @@ const vector<string> BillboardEditor::getAllTexturePathsFromFile()
 void BillboardEditor::loadBillboardEntitiesFromFile()
 {
 	// Error checking
-	if (_currentProjectName == "")
+	if (_currentProjectID == "")
 	{
 		_fe3d.logger_throwError("No current project loaded --> BillboardEditor::loadBillboardEntitiesFromFile()");
 	}
@@ -84,7 +84,7 @@ void BillboardEditor::loadBillboardEntitiesFromFile()
 	_billboardIDs.clear();
 
 	// Compose full file path
-	string filePath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectName + "\\data\\billboard.fe3d";
+	string filePath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectID + "\\data\\billboard.fe3d";
 
 	// Check if billboard file exists
 	if (_fe3d.misc_isFileExisting(filePath))
@@ -169,11 +169,11 @@ void BillboardEditor::loadBillboardEntitiesFromFile()
 		file.close();
 
 		// Logging
-		_fe3d.logger_throwInfo("Billboard data from project \"" + _currentProjectName + "\" loaded!");
+		_fe3d.logger_throwInfo("Billboard data from project \"" + _currentProjectID + "\" loaded!");
 	}
 	else
 	{
-		_fe3d.logger_throwWarning("Project \"" + _currentProjectName + "\" corrupted: billboard.fe3d missing!");
+		_fe3d.logger_throwWarning("Project \"" + _currentProjectID + "\" corrupted: billboard.fe3d missing!");
 	}
 }
 
@@ -182,14 +182,14 @@ void BillboardEditor::saveBillboardEntitiesToFile()
 	if (_isEditorLoaded)
 	{
 		// Error checking
-		if (_currentProjectName == "")
+		if (_currentProjectID == "")
 		{
 			_fe3d.logger_throwError("No current project loaded --> BillboardEditor::saveBillboardEntitiesToFile()");
 		}
 
 		// Create or overwrite billboard file
 		std::ofstream file;
-		file.open(_fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectName + "\\data\\billboard.fe3d");
+		file.open(_fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectID + "\\data\\billboard.fe3d");
 
 		// Write billboard data into file
 		for (auto& billboardID : _billboardIDs)
@@ -242,6 +242,6 @@ void BillboardEditor::saveBillboardEntitiesToFile()
 		file.close();
 
 		// Logging
-		_fe3d.logger_throwInfo("Billboard data from project \"" + _currentProjectName + "\" saved!");
+		_fe3d.logger_throwInfo("Billboard data from project \"" + _currentProjectID + "\" saved!");
 	}
 }

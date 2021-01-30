@@ -58,7 +58,7 @@ private:
 	shared_ptr<EngineGuiWindow> _gameWindow = nullptr;
 	shared_ptr<EngineGuiWindow> _miscWindow = nullptr;
 
-	string _currentProjectName = "";
+	string _currentProjectID = "";
 
 	bool _creatingProject = false;
 	bool _loadingProject = false;

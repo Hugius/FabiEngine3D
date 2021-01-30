@@ -13,7 +13,7 @@ public:
 	void load();
 	void unload();
 	void update();
-	void setCurrentProjectName(const string& projectName);
+	void setCurrentProjectID(const string& projectName);
 	void loadBillboardEntitiesFromFile();
 	void saveBillboardEntitiesToFile();
 
@@ -54,6 +54,6 @@ private:
 	// Strings
 	string _hoveredBillboardID = "";
 	string _currentBillboardID = "";
-	string _currentProjectName = "";
+	string _currentProjectID = "";
 	vector<string> _billboardIDs;
 };

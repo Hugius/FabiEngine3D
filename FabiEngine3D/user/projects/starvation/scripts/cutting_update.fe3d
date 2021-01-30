@@ -1,4 +1,4 @@
-36 38
+72 22
 META script_type_update
 
 /// Check if aiming at tree & extract number
@@ -71,4 +71,4 @@ IF hoveredID NOT "" AND _wasPickupPlaying IS <true> AND _isPickupPlaying IS <fal
     DEC distance = math:distance(logPos, camPos)
     IF distance LESS _maxPickupReach:
         fe3d:model_delete(hoveredID)
-        INCR _bag[0] 1
+        INCR _bag[0] 3

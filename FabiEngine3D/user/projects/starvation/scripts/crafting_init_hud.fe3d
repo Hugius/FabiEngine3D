@@ -1,4 +1,4 @@
-14 74
+40 51
 META script_type_init
 
 /// HUD
@@ -32,3 +32,11 @@ fe3d:text_set_visible(_craftables[10], <false>)
 fe3d:text_set_visible(_craftables[11], <false>)
 fe3d:text_set_visible(_craftables[12], <false>)
 fe3d:text_set_visible(_craftables[13], <false>)
+
+/// Billboards
+fe3d:billboard_place("craft_confirm", "craft", -5.0, 2.75, -6.0)
+fe3d:billboard_place("craft_cancel", "cancel", -7.0, 2.75, -6.0)
+fe3d:billboard_set_rotation("craft_confirm", 0.0, 180.0, 0.0)
+fe3d:billboard_set_rotation("craft_cancel", 0.0, 180.0, 0.0)
+fe3d:billboard_set_visible("craft_confirm", <false>)
+fe3d:billboard_set_visible("craft_cancel", <false>)

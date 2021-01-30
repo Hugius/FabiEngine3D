@@ -1,4 +1,4 @@
-6 23
+9 23
 META script_type_update
 
 /// Check if player is looking at a plant
@@ -9,7 +9,10 @@ IF hoveredID IS "":
     EDIT hoveredID = fe3d:raycast_into_model("bamboo", "", <true>)
 IF hoveredID IS "":
     EDIT seedAmount = 6
-    EDIT hoveredID = fe3d:raycast_into_model("plant", "", <true>)
+    EDIT hoveredID = fe3d:raycast_into_model("fern", "", <true>)
+IF hoveredID IS "":
+    EDIT seedAmount = 3
+    EDIT hoveredID = fe3d:raycast_into_model("flower", "", <true>)
 IF hoveredID IS "":
     EDIT seedAmount = 3
     EDIT hoveredID = fe3d:raycast_into_model("mushroom", "", <true>)

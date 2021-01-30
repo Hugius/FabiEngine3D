@@ -1,25 +1,34 @@
-31 44
+59 22
 META script_type_update
 
 /// Update stone hover
 fe3d:text_set_visible("mine", <false>)
 BOOL isHovered = <false>
+BOOL allowed = <true>
+STR toolID = _inventory[_equipIndex]
 STR hoveredID = fe3d:raycast_into_model("stone", "", <true>)
 STR stonesException = fe3d:raycast_into_model("stones", "", <true>)
 VEC3 camPos = fe3d:camera_get_position()
 IF hoveredID NOT "" AND stonesException IS "":
     VEC3 stonePos = fe3d:model_get_position(hoveredID)
     DEC stoneDistance = math:distance(stonePos, camPos)
-    IF stoneDistance LESS _maxStoneReach:
+    DEC stoneReach = _maxStoneReach
+    STR subString = misc:get_string_part(hoveredID, 0, 6)
+    IF subString IS "stone4":
+        MUL stoneReach 1.2
+    ELIF subString IS "stone5":
+        MUL stoneReach 1.5
+        IF toolID NOT "pickaxe_iron":
+            EDIT allowed = <false>
+    IF stoneDistance LESS stoneReach AND allowed IS <true>:
         EDIT isHovered = <true>
-        STR toolID = _inventory[_equipIndex]
         IF toolID IS "pickaxe_stone" OR toolID IS "pickaxe_iron":
             IF _isInvOpen IS <true>:
                 fe3d:text_set_visible("mine", <true>)
 
 /// Check if mining animation finished
 IF _wasPickaxePlaying IS <true> AND _isPickaxePlaying IS <false>:
-    IF isHovered IS <true>:
+    IF isHovered IS <true> AND allowed IS <true>:
         fe3d:model_delete(hoveredID)
         INT stonesID = misc:get_unique_integer(0, 1000)
         CAST stonesID STR
@@ -30,6 +39,8 @@ IF _wasPickaxePlaying IS <true> AND _isPickaxePlaying IS <false>:
         VEC3 sPos = stonePos
         INCR sPos.y 5.0
         fe3d:model_place(stonesID, "stones", sPos.x, sPos.y, sPos.z)
+        IF subString IS "stone5":
+            fe3d:model_set_size(stonesID, 1.2, 1.2, 1.2)
         DECR _durabilities[1] _durabilityHit
 
 /// Stones falling updates
@@ -47,4 +58,4 @@ IF hoveredID NOT "" AND _wasPickupPlaying IS <true> AND _isPickupPlaying IS <fal
     DEC stonesDistance = math:distance(stonesPos, camPos)
     IF stonesDistance LESS _maxPickupReach:
         fe3d:model_delete(hoveredID)
-        INCR _bag[1] 1
+        INCR _bag[1] 6

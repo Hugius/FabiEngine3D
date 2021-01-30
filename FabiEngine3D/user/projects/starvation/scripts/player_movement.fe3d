@@ -1,4 +1,4 @@
-36 23
+64 8
 META script_type_update
 
 /// Temporary values
@@ -58,6 +58,16 @@ IF condition1 IS <true> AND condition2 IS <true>:
         EDIT _movingAcc.z = 0.0
     IF down IS <false> AND _movingAcc.z LESS 0.0:
         EDIT _movingAcc.z = 0.0
+    VEC3 camPos = fe3d:camera_get_position()
+    IF camPos.x LESS -60.0:
+        fe3d:camera_set_position(-60.0, camPos.y, camPos.z)
+    IF camPos.x MORE 60.0:
+        fe3d:camera_set_position(60.0, camPos.y, camPos.z)
+    EDIT camPos = fe3d:camera_get_position()
+    IF camPos.z LESS -60.0:
+        fe3d:camera_set_position(camPos.x, camPos.y, -60.0)
+    IF camPos.z MORE 60.0:
+        fe3d:camera_set_position(camPos.x, camPos.y, 60.0)
     INCR _movingSpeed _movingAcc
     MUL _movingAcc 0.99
     MUL _movingSpeed 0.9

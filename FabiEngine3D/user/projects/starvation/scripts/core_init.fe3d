@@ -1,16 +1,17 @@
-3 21
+7 23
 META script_type_init
 META execution_entry
 
 fe3d:scene_load("home")
 GLOB STR _currentWorld = "home"
 
-EXEC underwater_init
 EXEC bag_init
+EXEC crafting_init_main
+EXEC crafting_init_hud
 EXEC inventory_init
-EXEC player_init
-EXEC pickup_init
-EXEC npc_init
-EXEC crafting_init
-EXEC time_init
 EXEC misc_init
+EXEC npc_init
+EXEC pickup_init
+EXEC player_init
+EXEC time_init
+EXEC water_init

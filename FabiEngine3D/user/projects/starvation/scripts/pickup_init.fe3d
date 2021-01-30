@@ -1,9 +1,9 @@
-12 0
+4 35
 META script_type_init
 
 /// Globals
-GLOB CONST DEC _maxTreeReach = 3.5
-GLOB CONST DEC _maxStoneReach = 4.5
+GLOB CONST DEC _maxTreeReach = 4.0
+GLOB CONST DEC _maxStoneReach = 5.0
 GLOB STR _fallingTreeID = ""
 GLOB STR _fallingLogID = ""
 GLOB LIST _logIDs = {}

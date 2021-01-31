@@ -1,4 +1,4 @@
-31 8
+27 26
 META script_type_update
 
 /// Torch position
@@ -25,7 +25,8 @@ fe3d:image_set_alpha("black", _blackAlpha)
 DECR _blackAlpha 0.0025
 
 /// Travelling to Starvia
-IF _currentWorld IS "home":
+STR currentWorld = fe3d:scene_get_current()
+IF currentWorld IS "home":
     STR signID = fe3d:collision_check_camera_model("sign", "", "")
     IF signID NOT "":
         EDIT _currentWorld = "starvia_outside"

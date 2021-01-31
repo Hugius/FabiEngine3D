@@ -435,7 +435,7 @@ vec3 applySkyReflections(vec3 color, vec3 normal)
 		vec4 reflectionMapColor = u_hasReflectionMap ? texture(u_sampler_reflectionMap, f_uv) : vec4(0.0f);
 		
 		// Check if current texel allows for reflection
-		if(!u_hasReflectionMap || reflectionMapColor.rgb != vec3(0.0f))
+		if(reflectionMapColor.rgb != vec3(0.0f))
 		{
 			float mixValue    = clamp(u_skyMixValue, 0.0, 1.0f);
 			float lightness   = mix(u_mainSkyLightness, u_mixSkyLightness, mixValue);
@@ -465,7 +465,7 @@ vec3 applySceneReflections(vec3 color)
 		vec4 reflectionMapColor = u_hasReflectionMap ? texture(u_sampler_reflectionMap, f_uv) : vec4(0.0f);
 		
 		// Check if current texel allows for reflection
-		if(!u_hasReflectionMap || reflectionMapColor.rgb != vec3(0.0f))
+		if(reflectionMapColor.rgb != vec3(0.0f))
 		{
 			vec2 ndc             = (f_clip.xy / f_clip.w) / 2.0 + 0.5;
 			vec2 texCoords       = vec2(ndc.x, -ndc.y);

@@ -33,7 +33,7 @@
 @shovel_iron user\assets\models\tools\shovel_iron.obj user\assets\textures\diffuse_maps\tools\shovel_iron.png ? user\assets\textures\reflection_maps\tools\shovel_iron.png user\assets\textures\normal_maps\tools\shovel_iron.png 1.05 0.8 1.05 0 0 0 1 1 1 1 0.75 1 1 1 1 ? 0 shovel 0 0 0 0.4 2.1 0.15
 @hammer_iron user\assets\models\tools\hammer_iron.obj user\assets\textures\diffuse_maps\tools\hammer_iron.png ? user\assets\textures\reflection_maps\tools\hammer_iron.png user\assets\textures\normal_maps\tools\hammer_iron.png 0.4 0.4 0.4 0 0 0 1 1 1 2.5 0.7 1 1 1 1 ? 0 hammer_iron 0 0 0 0.65 3.4 1.55
 @male1 user\assets\models\characters\male1.obj ? ? ? ? 0.57 0.57 0.57 0 0 0 0 1 1 1 0.6 1 1 1 1 ? 0 male 0 0 0.2 2 5.5 1.9
-@bridge user\assets\models\buildings\bridge.obj user\assets\textures\diffuse_maps\buildings\bridge.png ? ? user\assets\textures\normal_maps\buildings\bridge.png 1.5 1.5 1.5 0 1 0 0 1 1 1 0.8 1 1 1 1 ? 0 left 1.35 0 0 0.44 1.2 13 bridge 0 0 0 3.15 0.18 13 right -1.35 -7.45058e-09 0 0.45 1.2 13
+@bridge user\assets\models\buildings\bridge.obj user\assets\textures\diffuse_maps\buildings\bridge.png ? ? user\assets\textures\normal_maps\buildings\bridge.png 1.5 1.5 1.5 0 1 0 0 1 1 1 0.8 1 1 1 1 ? 0 bridge 0 0 0 3.15 0.18 13 left 1.35 0 0 0.44 1.2 13 right -1.35 -7.45058e-09 0 0.45 1.2 13
 @gate user\assets\models\buildings\gate.obj ? ? ? ? 1.25 1.25 1.25 0 1 0 0 1 1 1 0.5 1 1 1 1 ? 0 gate_right 4 0 -1.5 4.4 14 5 gate_left -3.8 0 -1.5 4 14 5 tower_right 8.5 0 0 5.5 19.2 6.9 tower_left -8.4 0 -0.1 5.5 19 6.9
 @wall user\assets\models\buildings\wall.obj ? ? ? ? 1.25 1.25 1.25 0 1 0 0 1 1 1 0.5 1 1 1 1 ? 0 wall 0 0 -0.5 21.3 14 2.8
 @tower1 user\assets\models\buildings\tower1.obj ? ? ? ? 1 1 1 0 1 0 0 1 1 1 0.5 1 1 1 1 ? 0 tower 0 0 0 9.1 34 9
@@ -42,7 +42,7 @@
 @barn user\assets\models\buildings\barn.obj ? ? ? ? 1.1 1.1 1.1 0 1 0 0 1 1 1 0.75 1 1 1 1 ? 0 barn 0.1 0 0.1 14 13.3 10.9
 @wagon user\assets\models\misc\wagon.obj user\assets\textures\diffuse_maps\misc\wagon.png ? ? ? 1.75 1.75 1.75 0 1 0 0 1 1 1 0.75 1 1 1 1 ? 0 wagon 0 0 -0.7 1.7 1.32 3.2
 @barrel user\assets\models\misc\barrel.obj user\assets\textures\diffuse_maps\misc\barrel.png ? user\assets\textures\reflection_maps\misc\barrel.png user\assets\textures\normal_maps\misc\barrel.png 2 2 2 0 1 0 1 1 1 1 0.75 1 1 1 1 ? 0 barrel 0 0 0 0.76 0.92 0.78
-@statue1 user\assets\models\misc\statue1.obj user\assets\textures\diffuse_maps\misc\statue1.png ? ? user\assets\textures\normal_maps\misc\statue1.png 1 1 1 0 0 0 1 1 1 1 0.5 1 1 1 1 ? 0 statue 0 0 0 2.4 5.8 2.8
+@statue1 user\assets\models\misc\statue1.obj user\assets\textures\diffuse_maps\misc\statue1.png ? user\assets\textures\reflection_maps\misc\statue1.png user\assets\textures\normal_maps\misc\statue1.png 1 1 1 0 0 0 1 1 1 1 0.5 1 1 1 1 ? 0 statue 0 0 0 2.4 5.8 2.8
 @crate1 user\assets\models\misc\crate1.obj user\assets\textures\diffuse_maps\misc\crate1.png ? ? user\assets\textures\normal_maps\misc\crate1.png 2 2 2 0 1 0 0 1 1 1 0.5 1 1 1 1 ? 0 crate 0 0 0 0.9 0.9 0.9
 @beehive user\assets\models\misc\beehive.obj user\assets\textures\diffuse_maps\misc\beehive.png ? ? ? 1.75 1.75 1.75 0 1 0 0 1 1 1 0.75 1 1 1 1 ? 0 beehive -0.05 0 -0.05 2.4 2 2.1
 @tower2 user\assets\models\buildings\tower2.obj user\assets\textures\diffuse_maps\buildings\tower2.png ? ? user\assets\textures\normal_maps\buildings\tower2.png 3.5 3.5 3.5 0 1 0 0 1 1 1 0.6 1 1 1 1 ? 0 tower 0 0 0 2.25 7.75001 2.25
@@ -51,8 +51,7 @@
 @corn user\assets\models\misc\corn.obj user\assets\textures\diffuse_maps\misc\corn.png ? ? ? 2.25 2.25 2.25 0 1 0 0 1 1 1 0.75 1 1 1 1 ? 0
 @worklog user\assets\models\misc\worklog.obj user\assets\textures\diffuse_maps\misc\worklog.png ? ? user\assets\textures\normal_maps\misc\worklog.png 1 1 1 0 1 0 0 1 1 1 0.5 1 1 1 1 ? 0 worklog 0.1 0 0.1 2.6 2.2 2.5
 @timber user\assets\models\misc\timber.obj ? ? ? ? 1.75 1.75 1.75 0 1 0 0 1 1 1 0.5 1 1 1 1 ? 0 timber 0 0 0 5.6 0.95 0.9
-@portcullis user\assets\models\misc\portcullis.obj user\assets\textures\diffuse_maps\misc\metal.png ? ? ? 1.25 1.25 1.25 0 1 0 1 1 1 1 0.25 1 1 1 1 ? 0 portcullis 0 0 0 0.4 4 3
-@palisade user\assets\models\misc\palisade.obj user\assets\textures\diffuse_maps\misc\palisade.png ? ? user\assets\textures\normal_maps\misc\palisade.png 6.5 6.5 6.5 0 1 0 0 1 1 1 0.75 1 1 1 1 ? 0 palisade 0 0 -0.01 0.0400006 0.66 0.65
+@portcullis user\assets\models\misc\portcullis.obj user\assets\textures\diffuse_maps\misc\metal.png ? user\assets\textures\reflection_maps\misc\metal.png ? 1.25 1.25 1.25 0 1 0 1 1 1 1 0.25 1 1 1 1 ? 0 portcullis 0 0 0 0.4 4 3
 @sign user\assets\models\misc\sign.obj user\assets\textures\diffuse_maps\misc\sign.png ? ? user\assets\textures\normal_maps\misc\sign.png 0.6 0.75 0.75 0 0 0 0 1 1 1 0.7 1 1 1 1 ? 0 sign 0 0 0.02 1.5 4 0.4
 @animalpen user\assets\models\misc\animalpen.obj user\assets\textures\diffuse_maps\misc\animalpen.png ? ? ? 2.25 2.25 2.25 0 1 0 0 1 1 1 0.75 1 1 1 1 ? 0 front 0 0 3.5 7.6 1 0.2 left -3.5 0 0 0.2 1.1 7.5 right 3.5 0 0 0.2 1.1 7.5 back 0 0 -3.5 7.5 1.1 0.2
 @haybale user\assets\models\misc\haybale.obj user\assets\textures\diffuse_maps\misc\haybale.png ? ? ? 1.5 1.5 1.5 0 1 0 0 1 1 1 0.5 1 1 1 1 ? 0 haybale 0 0 0 1.8 1.7 1.7
@@ -68,7 +67,18 @@
 @torch user\assets\models\tools\torch.obj user\assets\textures\diffuse_maps\tools\torch.png ? ? user\assets\textures\normal_maps\tools\torch.png 1 1 1 0 0 0 0 1 1 1 0.75 1 1 1 1 ? 0 torch 0 0 0 0.17 1.58 0.17
 @fishrod user\assets\models\tools\fishrod.obj ? ? ? ? 1 1 1 0 0 0 0 0 1 1 1 1 1 1 1 ? 0 fishrod 0.03 -0.46 0.74 0.2 1.94 1.68
 @house1 user\assets\models\buildings\house1.obj ? ? ? ? 1.75 1.75 1.75 0 1 0 0 1 1 1 0.75 1 1 1 1 ? 0 base -1.5 0 -0.1 5 7.99999 9.5 side 2.05 0 2.65 2.15 3.5 3.95
-@house2 user\assets\models\buildings\house2.obj ? ? ? ? 1.75 1.75 1.75 0 1 0 0 1 1 1 0.5 1 1 1 1 ? 0
+@house2 user\assets\models\buildings\house2.obj ? ? ? ? 0.9 0.9 0.9 0 1 0 0 1 1 1 1 1 1 1 1 ? 0
 @house3 user\assets\models\buildings\house3.obj user\assets\textures\diffuse_maps\buildings\house3.png user\assets\textures\light_maps\buildings\house3.png user\assets\textures\reflection_maps\buildings\house3.png user\assets\textures\normal_maps\buildings\house3.png 2 2 2 0 1 0 1 1 1 2.5 1 1 1 1 1 ? 0 pole2 -2.94 0 -1.45 0.2 2.22 0.23 pole1 -2.93 0 1.45 0.2 2.21 0.22 base 1.5 0 -0.03 3.3 5.37999 3.36 top -1.6 2.2 0 2.9 3.2 3.4
 @shrub user\assets\models\foliage\shrub.obj ? ? ? ? 5 5 5 0 1 1 0 1 1 1 0.4 1 1 1 1 ? 0 shrub 0 0 0 1 0.88 1
 @claypile user\assets\models\foliage\claypile.obj user\assets\textures\diffuse_maps\foliage\claypile.png ? ? user\assets\textures\normal_maps\foliage\claypile.png 0.75 0.5 0.75 0 1 0 0 1 1 1.5 0.4 1 1 1 1 ? 0 claypile -0.1 0 0.2 8.59999 2.5 9.39999
+@warehouse user\assets\models\buildings\warehouse.obj ? ? ? ? 1 1 1 0 1 0 0 0 1 1 1 1 1 1 1 ? 0
+@house4 user\assets\models\buildings\house4.obj user\assets\textures\diffuse_maps\buildings\house4.png ? ? ? 1 1 1 0 1 0 0 1 1 1 0.75 1 1 1 1 ? 0
+@house5 user\assets\models\buildings\house5.obj ? ? ? ? 2 2 2 0 1 0 1 1 1 1 1 1 1 1 1 ? 0
+@house6 user\assets\models\buildings\house6.obj user\assets\textures\diffuse_maps\buildings\house6.png user\assets\textures\light_maps\buildings\house6.png user\assets\textures\reflection_maps\buildings\house6.png ? 1 1 1 0 1 0 1 1 1 1 0.5 1 1 1 1 ? 0
+@house7 user\assets\models\buildings\house7.obj ? ? ? ? 1 1 1 0 1 0 0 0 1 1 0.5 1 1 1 1 ? 0
+@house8 user\assets\models\buildings\house8.obj ? ? ? ? 2 2 2 0 1 0 1 0 1 1 0.5 1 1 1 1 ? 0
+@house9 user\assets\models\buildings\house9.obj user\assets\textures\diffuse_maps\buildings\house9.png ? ? ? 1 1 1 0 1 0 0 0 1 1 0.75 1 1 1 1 ? 0
+@house10 user\assets\models\buildings\house10.obj user\assets\textures\diffuse_maps\buildings\house10.png ? ? user\assets\textures\normal_maps\buildings\house10.png 1 1 1 0 1 0 1 1 1 1 0.5 1 1 1 1 ? 0
+@house11 user\assets\models\buildings\house11.obj ? ? ? ? 1 1 1 0 1 0 0 1 1 1 0.75 1 1 1 1 ? 0
+@house12 user\assets\models\buildings\house12.obj user\assets\textures\diffuse_maps\buildings\house12.png user\assets\textures\light_maps\buildings\house12.png user\assets\textures\reflection_maps\buildings\house12.png user\assets\textures\normal_maps\buildings\house12.png 1 1 1 0 1 0 1 1 1 1 1 1 1 1 1 ? 0
+@house13 user\assets\models\buildings\house13.obj user\assets\textures\diffuse_maps\buildings\house13.png user\assets\textures\light_maps\buildings\house13.png user\assets\textures\reflection_maps\buildings\house13.png ? 1 1 1 0 1 0 1 1 1 1 0.5 1 1 1 1 ? 0

@@ -395,7 +395,13 @@ void SceneEditor::clearScene()
 	// Delete SKY entity
 	if (!_loadedSkyID.empty())
 	{
-		_fe3d.skyEntity_delete(_loadedSkyID);
+		// Delete sky
+		if (_fe3d.skyEntity_isExisting(_loadedSkyID))
+		{
+			_fe3d.skyEntity_delete(_loadedSkyID);
+		}
+
+		// Miscellaneous
 		_fe3d.skyEntity_mixWithSelected("");
 		_fe3d.skyEntity_setMixValue(0.0f);
 	}
@@ -403,19 +409,31 @@ void SceneEditor::clearScene()
 	// Delete TERRAIN entity
 	if (!_loadedTerrainID.empty())
 	{
-		_fe3d.terrainEntity_delete(_loadedTerrainID);
+		// Delete terrain
+		if (_fe3d.terrainEntity_isExisting(_loadedTerrainID))
+		{
+			_fe3d.terrainEntity_delete(_loadedTerrainID);
+		}
 	}
 
 	// Delete WATER entity
 	if (!_loadedWaterID.empty())
 	{
-		_fe3d.waterEntity_delete(_loadedWaterID);
+		// Delete water
+		if (_fe3d.waterEntity_isExisting(_loadedWaterID))
+		{
+			_fe3d.waterEntity_delete(_loadedWaterID);
+		}
 	}
 
 	// Delete GAME entities
 	for (auto& ID : _loadedModelIDs)
 	{
-		_fe3d.gameEntity_delete(ID);
+		// Delete model
+		if (_fe3d.gameEntity_isExisting(ID))
+		{
+			_fe3d.gameEntity_delete(ID);
+		}
 
 		// Stop animation
 		auto animationID = _animationEditor.getPlayingAnimationNames(ID);
@@ -428,13 +446,21 @@ void SceneEditor::clearScene()
 	// Delete BILLBOARD entities
 	for (auto& ID : _loadedBillboardIDs)
 	{
-		_fe3d.billboardEntity_delete(ID);
+		// Delete billboard
+		if (_fe3d.billboardEntity_isExisting(ID))
+		{
+			_fe3d.billboardEntity_delete(ID);
+		}
 	}
 
 	// Delete LIGHT entities
 	for (auto& ID : _loadedLightIDs)
 	{
-		_fe3d.lightEntity_delete(ID);
+		// Delete light
+		if (_fe3d.lightEntity_isExisting(ID))
+		{
+			_fe3d.lightEntity_delete(ID);
+		}
 
 		// Remove corresponding lightbulb model
 		if (!_currentSceneID.empty())
@@ -446,7 +472,11 @@ void SceneEditor::clearScene()
 	// Delete AUDIO entities
 	for (auto& ID : _loadedAudioIDs)
 	{
-		_fe3d.audioEntity_delete(ID);
+		// Delete audio
+		if (_fe3d.audioEntity_isExisting(ID))
+		{
+			_fe3d.audioEntity_delete(ID);
+		}
 
 		// Remove corresponding speaker model
 		if (!_currentSceneID.empty())

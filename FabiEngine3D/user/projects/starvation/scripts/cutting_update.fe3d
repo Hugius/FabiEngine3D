@@ -1,4 +1,4 @@
-21 37
+20 37
 META script_type_update
 
 /// Check if aiming at tree & extract number
@@ -16,15 +16,15 @@ LOOP:
     INCR index 1
 
 /// Update tree hover
-fe3d:text_set_visible("cut", <false>)
 BOOL isHovered = <false>
 VEC3 camPos = fe3d:camera_get_position()
+STR toolID = _inventory[_equipIndex]
+fe3d:text_set_visible("cut", <false>)
 IF hoveredID NOT "" AND _fallingTreeID IS "":
     VEC3 treePos = fe3d:model_get_position(hoveredID)
     DEC distance = math:distance(treePos, camPos)
     IF distance LESS _maxTreeReach:
         EDIT isHovered = <true>
-        STR toolID = _inventory[_equipIndex]
         IF toolID IS "axe_stone" OR toolID IS "axe_iron":
             IF _isInvOpen IS <true>:
                 fe3d:text_set_visible("cut", <true>)

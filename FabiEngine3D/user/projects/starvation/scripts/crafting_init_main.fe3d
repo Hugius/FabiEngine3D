@@ -1,4 +1,4 @@
-97 38
+99 30
 META script_type_init
 
 /// Globals
@@ -97,3 +97,5 @@ fe3d:model_set_aabb_responsive("hoe_display", <false>)
 fe3d:model_set_aabb_responsive("scythe_display", <false>)
 fe3d:model_set_aabb_responsive("hammer_stone_display", <false>)
 fe3d:model_set_aabb_responsive("hammer_iron_display", <false>)
+fe3d:model_set_aabb_responsive("torch_display", <false>)
+fe3d:model_set_aabb_responsive("fishrod_display", <false>)

@@ -100,7 +100,7 @@ void RenderBus::setAmbientLightColor(Vec3 value)
 	_ambientLightColor = value;
 }
 
-void RenderBus::setDirectionalLightPos(Vec3 value)
+void RenderBus::setDirectionalLightPosition(Vec3 value)
 {
 	_directionalLightPosition = value;
 }

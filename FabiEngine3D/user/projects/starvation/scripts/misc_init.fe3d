@@ -1,4 +1,4 @@
-24 0
+22 29
 META script_type_init
 
 /// Globals
@@ -21,7 +21,9 @@ fe3d:text_place("pickup", "font.ttf", "Press F to pickup", 0.0, -0.2, 0.0, 0.35,
 fe3d:text_place("mine", "font.ttf", "Press LMB to mine", 0.0, -0.2, 0.0, 0.35, 0.05)
 fe3d:text_place("cut", "font.ttf", "Press LMB to cut", 0.0, -0.2, 0.0, 0.35, 0.05)
 fe3d:text_place("dig", "font.ttf", "Press LMB to dig", 0.0, -0.2, 0.0, 0.35, 0.05)
+fe3d:text_set_visible("pickup", <false>)
 fe3d:text_set_visible("mine", <false>)
+fe3d:text_set_visible("cut", <false>)
 fe3d:text_set_visible("dig", <false>)
 
 /// Torch light

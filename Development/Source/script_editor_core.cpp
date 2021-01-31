@@ -59,9 +59,9 @@ void ScriptEditor::load()
 void ScriptEditor::unload()
 {
 	// Graphics
-	_fe3d.gfx_disableDirectionalLighting();
-	_fe3d.gfx_disableSpecularLighting();
-	_fe3d.gfx_disableNormalMapping();
+	_fe3d.gfx_disableDirectionalLighting(true);
+	_fe3d.gfx_disableSpecularLighting(true);
+	_fe3d.gfx_disableNormalMapping(true);
 
 	// Delete added entities
 	_fe3d.gameEntity_deleteAll();

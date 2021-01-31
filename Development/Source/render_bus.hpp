@@ -39,7 +39,7 @@ public:
 	void setCameraPosition(Vec3 value);
 	void setCameraFront(Vec3 value);
 	void setAmbientLightColor(Vec3 value);
-	void setDirectionalLightPos(Vec3 value);
+	void setDirectionalLightPosition(Vec3 value);
 	void setDirectionalLightColor(Vec3 value);
 	void setSpotLightColor(Vec3 value);
 	void setShadowEyePosition(Vec3 value);

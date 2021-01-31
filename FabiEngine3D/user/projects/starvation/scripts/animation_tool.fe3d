@@ -1,4 +1,4 @@
-67 65
+15 24
 META script_type_update
 
 /// Determine tool animation type
@@ -14,7 +14,7 @@ ELIF _equipIndex IS 2:
     DEC toolOffset = 1.15
 ELIF _equipIndex IS 3:
     EDIT animID = "shovel_dig"
-    DEC toolOffset = 1.15
+    DEC toolOffset = 1.0
 ELIF _equipIndex IS 4:
     EDIT animID = "hoe_plow"
     DEC toolOffset = 1.3

@@ -1,4 +1,4 @@
-4 49
+9 56
 META script_type_init
 
 /// Globals
@@ -8,6 +8,7 @@ GLOB DEC _totalBagWeight = 0.0
 GLOB CONST DEC _maxBagWeight = 30.0
 
 /// Bag icons
+fe3d:image_place("scroll_bag", "scroll.png", 0.925, 0.25, 0.0, 0.175, 1.2)
 fe3d:image_place("bag_closed", "bag_closed.png", 0.9, 0.85, 0.0, 0.2, 0.3)
 fe3d:image_place("bag_open", "bag_open.png", 0.9, 0.85, 0.0, 0.2, 0.3)
 fe3d:image_place("wood", "wood.png", 0.96, 0.65, 0.0, 0.07, 0.09)
@@ -31,3 +32,12 @@ fe3d:text_place("fish_count", "font.ttf", "0", 0.89, 0.15, 0.0, 0.045, 0.05)
 fe3d:text_place("meat_count", "font.ttf", "0", 0.89, 0.05, 0.0, 0.045, 0.05)
 fe3d:text_place("iron_count", "font.ttf", "0", 0.89, -0.05, 0.0, 0.045, 0.05)
 fe3d:text_place("coin_count", "font.ttf", "0", 0.89, -0.15, 0.0, 0.045, 0.05)
+fe3d:text_set_color("wood_count", 0.0, 0.0, 0.0)
+fe3d:text_set_color("stone_count", 0.0, 0.0, 0.0)
+fe3d:text_set_color("clay_count", 0.0, 0.0, 0.0)
+fe3d:text_set_color("seeds_count", 0.0, 0.0, 0.0)
+fe3d:text_set_color("corn_count", 0.0, 0.0, 0.0)
+fe3d:text_set_color("fish_count", 0.0, 0.0, 0.0)
+fe3d:text_set_color("meat_count", 0.0, 0.0, 0.0)
+fe3d:text_set_color("iron_count", 0.0, 0.0, 0.0)
+fe3d:text_set_color("coin_count", 0.0, 0.0, 0.0)

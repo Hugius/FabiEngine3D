@@ -82,13 +82,13 @@ void AnimationEditor::load()
 void AnimationEditor::unload()
 {
 	// Disable graphics
-	_fe3d.gfx_disableAmbientLighting();
-	_fe3d.gfx_disableDirectionalLighting();
-	_fe3d.gfx_disableShadows();
-	_fe3d.gfx_disableSkyReflections();
-	_fe3d.gfx_disableLightMapping();
-	_fe3d.gfx_disableNormalMapping();
-	_fe3d.gfx_disableSpecularLighting();
+	_fe3d.gfx_disableAmbientLighting(true);
+	_fe3d.gfx_disableDirectionalLighting(true);
+	_fe3d.gfx_disableShadows(true);
+	_fe3d.gfx_disableSkyReflections(true);
+	_fe3d.gfx_disableLightMapping(true);
+	_fe3d.gfx_disableNormalMapping(true);
+	_fe3d.gfx_disableSpecularLighting(true);
 
 	// Delete models
 	_fe3d.gameEntity_deleteAll();

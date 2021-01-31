@@ -1,4 +1,4 @@
-8 67
+11 12
 META script_type_update
 
 INT index = 0
@@ -7,7 +7,7 @@ LOOP:
     IF index IS size:
         BREAK
     ELSE:
-        IF _durabilities[index] IS 0.0 AND _inventory[index] NOT "":
+        IF _durabilities[index] LESS _durabilityHit AND _inventory[index] NOT "":
             fe3d:model_set_visible(_inventory[index], <false>)
             EDIT _inventory[index] = ""
             EDIT _durabilities[index] = 0.0

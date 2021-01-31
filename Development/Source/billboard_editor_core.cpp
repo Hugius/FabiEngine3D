@@ -95,9 +95,9 @@ void BillboardEditor::load()
 void BillboardEditor::unload()
 {
 	// Disable graphics
-	_fe3d.gfx_disableAmbientLighting();
-	_fe3d.gfx_disableDirectionalLighting();
-	_fe3d.gfx_disableShadows();
+	_fe3d.gfx_disableAmbientLighting(true);
+	_fe3d.gfx_disableDirectionalLighting(true);
+	_fe3d.gfx_disableShadows(true);
 
 	// 3D environment
 	_fe3d.gameEntity_delete("@@cube");

@@ -11,7 +11,7 @@ void FabiEngine3D::gfx_enableAmbientLighting(Vec3 color, float intensity)
 void FabiEngine3D::gfx_enableDirectionalLighting(Vec3 position, Vec3 color, float intensity)
 {
 	_core->_renderBus.setDirectionalLightingEnabled(true);
-	_core->_renderBus.setDirectionalLightPos(position);
+	_core->_renderBus.setDirectionalLightPosition(position);
 	_core->_renderBus.setDirectionalLightColor(color);
 	_core->_renderBus.setDirectionalLightIntensity(intensity);
 }
@@ -139,7 +139,7 @@ void FabiEngine3D::gfx_disableDirectionalLighting(bool resetProperties)
 
 	if (resetProperties)
 	{
-		_core->_renderBus.setDirectionalLightPos(Vec3(0.0f));
+		_core->_renderBus.setDirectionalLightPosition(Vec3(0.0f));
 		_core->_renderBus.setDirectionalLightColor(0.0f);
 		_core->_renderBus.setDirectionalLightIntensity(0.0f);
 	}

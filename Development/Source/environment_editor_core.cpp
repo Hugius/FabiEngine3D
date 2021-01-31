@@ -181,10 +181,10 @@ void EnvironmentEditor::save()
 void EnvironmentEditor::unload()
 {
 	// Disable graphics
-	_fe3d.gfx_disableAmbientLighting();
-	_fe3d.gfx_disableDirectionalLighting();
-	_fe3d.gfx_disableSpecularLighting();
-	_fe3d.gfx_disableWaterEffects();
+	_fe3d.gfx_disableAmbientLighting(true);
+	_fe3d.gfx_disableDirectionalLighting(true);
+	_fe3d.gfx_disableSpecularLighting(true);
+	_fe3d.gfx_disableWaterEffects(true);
 
 	// Delete entities
 	unloadSkyEntities();

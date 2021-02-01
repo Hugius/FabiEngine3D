@@ -1,9 +1,8 @@
-40 51
+3 18
 META script_type_init
 
 /// HUD
 STR f = "font.ttf"
-fe3d:text_place("craft", f, "Press C to craft", 0.0, -0.2, 0.0, 0.35, 0.05)
 fe3d:text_place(_craftables[0], f, _craftablesText[0], 0.0, -0.3, 0.0, 0.65, 0.05)
 fe3d:text_place(_craftables[1], f, _craftablesText[1], 0.0, -0.3, 0.0, 0.6, 0.05)
 fe3d:text_place(_craftables[2], f, _craftablesText[2], 0.0, -0.3, 0.0, 0.75, 0.05)

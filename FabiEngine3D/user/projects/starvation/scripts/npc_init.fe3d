@@ -1,4 +1,4 @@
-13 27
+11 7
 META script_type_init
 
 /// Globals
@@ -11,10 +11,6 @@ GLOB INT _dialogueIndex = 0
 fe3d:model_place("npc_aurelius", "male1", 6.0, 6.35, 136.0)
 
 /// HUD
-fe3d:text_place("talk", "font.ttf", "Press T to talk", 0.0, -0.2, 0.0, 0.3, 0.05)
-fe3d:text_set_visible("talk", <false>)
-
-/// Dialogues
 STR aurelius0 = "Greetings stranger, welcome to Starvia valley!"
 STR aurelius1 = "My name is Aurelius. I am the king's adviser."
 STR aurelius2 = "You should visit the king, he is looking for new land lords."

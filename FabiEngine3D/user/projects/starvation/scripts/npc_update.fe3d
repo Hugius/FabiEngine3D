@@ -1,4 +1,4 @@
-10 18
+41 6
 META script_type_update
 
 /// NPC rotation
@@ -35,12 +35,12 @@ IF hoveredID NOT "":
         EDIT hoveredID = ""
 
 /// NPC dialogue - start & stop
-BOOL tPressed = fe3d:input_is_key_pressed("KEY_T")
-IF hoveredID NOT "" AND tPressed IS <true> AND _isTalking IS <false>:
+BOOL ePressed = fe3d:input_is_key_pressed("KEY_E")
+IF hoveredID NOT "" AND ePressed IS <true> AND _isTalking IS <false>:
     EDIT _isTalking = <true>
     EDIT _talkingNpcID = hoveredID
     fe3d:cursor_show()
-ELIF tPressed IS <true> AND _isTalking IS <true>:
+ELIF ePressed IS <true> AND _isTalking IS <true>:
     CAST _dialogueIndex STR
     STR textID = misc:concat_strings(_talkingNpcID, _dialogueIndex)
     CAST _dialogueIndex INT

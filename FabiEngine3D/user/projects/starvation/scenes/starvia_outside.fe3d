@@ -1,27 +1,33 @@
 SKY day user\assets\textures\cube_maps\day_right.png user\assets\textures\cube_maps\day_left.png user\assets\textures\cube_maps\day_top.png user\assets\textures\cube_maps\day_bottom.png user\assets\textures\cube_maps\day_back.png user\assets\textures\cube_maps\day_front.png 0.002 0.6 1 1 1
 TERRAIN starvia user\assets\textures\height_maps\starvia.bmp user\assets\textures\diffuse_maps\terrain\grass.png 125 96 0.9 1 user\assets\textures\blend_maps\starvia.png user\assets\textures\diffuse_maps\terrain\mud.png user\assets\textures\diffuse_maps\terrain\rock.png user\assets\textures\diffuse_maps\terrain\ground.png 150 64 128 1 1 1 1 user\assets\textures\normal_maps\terrain\grass.png user\assets\textures\normal_maps\terrain\mud.png user\assets\textures\normal_maps\terrain\rock.png user\assets\textures\normal_maps\terrain\ground.png 1 8 1
 WATER river user\assets\textures\dudv_maps\water.png user\assets\textures\normal_maps\water\wave5.png user\assets\textures\displacement_maps\water.png 1 1 1 1 0 0 0 1 325 5 4.5 -25 64 1.25 -0.001 0.0005 0.25 128 2
-MODEL 1692216148@tree6 156.039 6.37255 98.8178 0 0 0 1.25 1 1.25 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
-MODEL 2118440183@tree2 111.392 6.37255 92.85 0 0 0 1.4 1.4 1.4 user\assets\models\trees\tree2.obj user\assets\textures\diffuse_maps\trees\tree_bush_2.png ? ? user\assets\textures\normal_maps\trees\tree_bush_2.png 0 0 1 1 0 0 1 1 0.7 1 1 1 1 ? 0 ? trunk 0 0 0 0.7 4.6 0.8 leaves 0 4.6 0 4.2 8.2 4.1
+MODEL 1488352478@tree6 132.671 6.37255 107.458 0 0 0 1.25 1 1.25 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? leaves 0 8.8 0 3.85 8.30001 3.6 trunk 0 0 0 0.85 8.80001 0.8
+MODEL 2049305885@corn 87.9716 6.37254 13.2074 0 0 0 2.25 2.25 2.25 user\assets\models\misc\corn.obj user\assets\textures\diffuse_maps\misc\corn.png ? ? ? 0 0 1 0 0 1 1 1 0.75 1 1 1 1 ? 0 ?
+MODEL 216672874@worklog 64.5436 6.37255 42.8742 0 0 0 1 1 1 user\assets\models\misc\worklog.obj user\assets\textures\diffuse_maps\misc\worklog.png ? ? user\assets\textures\normal_maps\misc\worklog.png 0 0 1 0 0 1 1 1 0.5 1 1 1 1 ? 0 ? worklog 0.1 0 0.1 2.6 2.2 2.5
+MODEL 1287076171@worklog 22.217 6.37255 58.2516 0 90 0 1 1 1 user\assets\models\misc\worklog.obj user\assets\textures\diffuse_maps\misc\worklog.png ? ? user\assets\textures\normal_maps\misc\worklog.png 0 0 1 0 0 1 1 1 0.5 1 1 1 1 ? 0 ? worklog 0.1 0 0.1 2.6 2.2 2.5
+MODEL 560650676@tower1 -15 6.37255 -22 0 0 0 1 1 1 user\assets\models\buildings\tower1.obj ? ? ? ? 0 0 1 0 0 1 1 1 0.5 1 1 1 1 ? 0 ? tower 0 0 0 9.1 34 9
+MODEL 746363113@wagon 11.4344 6.37255 54.8699 0 0 0 1.72 1.75 1.75 user\assets\models\misc\wagon.obj user\assets\textures\diffuse_maps\misc\wagon.png ? ? ? 0 0 1 0 0 1 1 1 1 1 1 1 1 ? 0 ? wagon 0 0 -0.7 1.7 1.32 3.2
+MODEL 177597953@tree6 90.4279 6.37255 72.9015 0 0 0 1.25 1 1.25 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? leaves 0 8.8 0 3.85 8.30001 3.6 trunk 0 0 0 0.85 8.80001 0.8
+MODEL 1021908365@tree2 92.723 6.37255 96.5551 0 0 0 1.25 1.25 1.25 user\assets\models\trees\tree2.obj user\assets\textures\diffuse_maps\trees\tree_bush_2.png ? ? user\assets\textures\normal_maps\trees\tree_bush_2.png 0 0 1 1 0 0 1 1 0.7 1 1 1 1 ? 0 ? leaves 0 4.6 0 4.2 8.2 4.1 trunk 0 0 0 0.7 4.6 0.8
+MODEL 2008892948@torch1 52 6.37255 71 0 0 0 0.75 0.75 0.75 user\assets\models\misc\torch1.obj user\assets\textures\diffuse_maps\misc\torch1.png user\assets\textures\light_maps\misc\torch1.png user\assets\textures\reflection_maps\misc\torch1.png user\assets\textures\normal_maps\misc\torch1.png 0 0 1 0 1 0 1 1 0.5 1 1 1 1 ? 0 ? basket 0 4.06 0 2.3 1 2.2 pole -0.02 0 0 0.4 4.03 0.36
+MODEL 2087681847@barn -4.1 6.37255 74 0 90 0 1.1 1.1 1.1 user\assets\models\buildings\barn.obj ? ? ? ? 0 0 1 0 0 1 1 1 0.75 1 1 1 1 ? 0 ? barn 0.1 0 0.1 14 13.3 10.9
+MODEL 1581697508@timber 85.624 6.37255 -5.21878 0 0 0 1.75 1.75 1.75 user\assets\models\misc\timber.obj ? ? ? ? 0 0 1 0 0 1 1 1 0.5 1 1 1 1 ? 0 ? timber 0 0 0 5.6 0.95 0.9
+MODEL 259862192@tree2 176.098 6.37255 31.8512 0 0 0 1.25 1.25 1.25 user\assets\models\trees\tree2.obj user\assets\textures\diffuse_maps\trees\tree_bush_2.png ? ? user\assets\textures\normal_maps\trees\tree_bush_2.png 0 0 1 1 0 0 1 1 0.7 1 1 1 1 ? 0 ? trunk 0 0 0 0.7 4.6 0.8 leaves 0 4.6 0 4.2 8.2 4.1
 MODEL 1277976223@stone5 64.4931 6.37255 118.991 0 0 0 2.8 2.8 2.8 user\assets\models\stones\stone5.obj user\assets\textures\diffuse_maps\stones\stone5.png ? ? ? 0 0 1 0 0 1 1 1 0.75 1 1 1 1 ? 0 ? rock -0.3 0 0 6.2 5.2 7.2
+MODEL 741739366@tree2 173.46 6.37255 47.6508 0 0 0 1.25 1.25 1.25 user\assets\models\trees\tree2.obj user\assets\textures\diffuse_maps\trees\tree_bush_2.png ? ? user\assets\textures\normal_maps\trees\tree_bush_2.png 0 0 1 1 0 0 1 1 0.7 1 1 1 1 ? 0 ? leaves 0 4.6 0 4.2 8.2 4.1 trunk 0 0 0 0.7 4.6 0.8
+MODEL 424762050@tree6 166.495 6.37255 23.4791 0 0 0 1.25 1 1.25 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? leaves 0 8.8 0 3.85 8.30001 3.6 trunk 0 0 0 0.85 8.80001 0.8
+MODEL 106061724@tree6 180.036 6.37255 38.872 0 0 0 1.25 1 1.25 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? leaves 0 8.8 0 3.85 8.30001 3.6 trunk 0 0 0 0.85 8.80001 0.8
+MODEL 2132996491@timber 87.6156 7.26255 51.2814 0 0 0 2.4 2 2.4 user\assets\models\misc\timber.obj ? ? ? ? 0 0 1 0 0 1 1 1 0.5 1 1 1 1 ? 0 ? timber 0 0 0 5.6 0.95 0.9
 MODEL 1801678234@tree6 169.468 6.37255 107.225 0 0 0 1.25 1 1.25 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
 MODEL 638448730@tree7 167.236 6.37254 37.3462 0 0 0 4.5 4.5 4.5 user\assets\models\trees\tree7.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? leaves 0 1.18 0 2.54 3.95 2.57 trunk 0.03 0 -0.01 0.15 1.2 0.15
 MODEL 1041434871@tree6 117.583 6.37255 115.602 0 0 0 1.25 1 1.25 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
 MODEL 324239021@tree6 186.362 13.7255 72.0224 0 0 0 1.25 1 1.25 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
-MODEL 741739366@tree2 173.46 6.37255 47.6508 0 0 0 1.25 1.25 1.25 user\assets\models\trees\tree2.obj user\assets\textures\diffuse_maps\trees\tree_bush_2.png ? ? user\assets\textures\normal_maps\trees\tree_bush_2.png 0 0 1 1 0 0 1 1 0.7 1 1 1 1 ? 0 ? leaves 0 4.6 0 4.2 8.2 4.1 trunk 0 0 0 0.7 4.6 0.8
-MODEL 424762050@tree6 166.495 6.37255 23.4791 0 0 0 1.25 1 1.25 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? leaves 0 8.8 0 3.85 8.30001 3.6 trunk 0 0 0 0.85 8.80001 0.8
-MODEL 560650676@tower1 -15 6.37255 -22 0 0 0 1 1 1 user\assets\models\buildings\tower1.obj ? ? ? ? 0 0 1 0 0 1 1 1 0.5 1 1 1 1 ? 0 ? tower 0 0 0 9.1 34 9
-MODEL 1488352478@tree6 132.671 6.37255 107.458 0 0 0 1.25 1 1.25 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? leaves 0 8.8 0 3.85 8.30001 3.6 trunk 0 0 0 0.85 8.80001 0.8
-MODEL 216672874@worklog 64.5436 6.37255 42.8742 0 0 0 1 1 1 user\assets\models\misc\worklog.obj user\assets\textures\diffuse_maps\misc\worklog.png ? ? user\assets\textures\normal_maps\misc\worklog.png 0 0 1 0 0 1 1 1 0.5 1 1 1 1 ? 0 ? worklog 0.1 0 0.1 2.6 2.2 2.5
-MODEL 259862192@tree2 176.098 6.37255 31.8512 0 0 0 1.25 1.25 1.25 user\assets\models\trees\tree2.obj user\assets\textures\diffuse_maps\trees\tree_bush_2.png ? ? user\assets\textures\normal_maps\trees\tree_bush_2.png 0 0 1 1 0 0 1 1 0.7 1 1 1 1 ? 0 ? trunk 0 0 0 0.7 4.6 0.8 leaves 0 4.6 0 4.2 8.2 4.1
-MODEL 2049305885@corn 87.9716 6.37254 13.2074 0 0 0 2.25 2.25 2.25 user\assets\models\misc\corn.obj user\assets\textures\diffuse_maps\misc\corn.png ? ? ? 0 0 1 0 0 1 1 1 0.75 1 1 1 1 ? 0 ?
-MODEL 2132996491@timber 87.6156 7.26255 51.2814 0 0 0 2.4 2 2.4 user\assets\models\misc\timber.obj ? ? ? ? 0 0 1 0 0 1 1 1 0.5 1 1 1 1 ? 0 ? timber 0 0 0 5.6 0.95 0.9
-MODEL 106061724@tree6 180.036 6.37255 38.872 0 0 0 1.25 1 1.25 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? leaves 0 8.8 0 3.85 8.30001 3.6 trunk 0 0 0 0.85 8.80001 0.8
+MODEL 1692216148@tree6 156.039 6.37255 98.8178 0 0 0 1.25 1 1.25 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
+MODEL 2118440183@tree2 111.392 6.37255 92.85 0 0 0 1.4 1.4 1.4 user\assets\models\trees\tree2.obj user\assets\textures\diffuse_maps\trees\tree_bush_2.png ? ? user\assets\textures\normal_maps\trees\tree_bush_2.png 0 0 1 1 0 0 1 1 0.7 1 1 1 1 ? 0 ? trunk 0 0 0 0.7 4.6 0.8 leaves 0 4.6 0 4.2 8.2 4.1
+MODEL 95562319@pen 10.2492 6.37255 74.954 0 0 0 2.25 2.25 2.25 user\assets\models\misc\pen.obj user\assets\textures\diffuse_maps\misc\pen.png ? ? ? 0 0 1 0 0 1 1 1 0.75 1 1 1 1 ? 0 ? front 0 0 3.5 7.6 1 0.2 back 0 0 -3.5 7.5 1.1 0.2 right 3.5 0 0 0.2 1.1 7.5 left -3.5 0 0 0.2 1.1 7.5
+MODEL 513956538@tree6 111.642 6.37255 73.9492 0 0 0 1.25 1 1.25 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
 MODEL 29695020@tree2 139.484 6.37255 69.7829 0 0 0 1.25 1.25 1.25 user\assets\models\trees\tree2.obj user\assets\textures\diffuse_maps\trees\tree_bush_2.png ? ? user\assets\textures\normal_maps\trees\tree_bush_2.png 0 0 1 1 0 0 1 1 0.7 1 1 1 1 ? 0 ? trunk 0 0 0 0.7 4.6 0.8 leaves 0 4.6 0 4.2 8.2 4.1
-MODEL 746363113@wagon 11.4344 6.37255 54.8699 0 0 0 1.72 1.75 1.75 user\assets\models\misc\wagon.obj user\assets\textures\diffuse_maps\misc\wagon.png ? ? ? 0 0 1 0 0 1 1 1 1 1 1 1 1 ? 0 ? wagon 0 0 -0.7 1.7 1.32 3.2
-MODEL 1287076171@worklog 22.217 6.37255 58.2516 0 90 0 1 1 1 user\assets\models\misc\worklog.obj user\assets\textures\diffuse_maps\misc\worklog.png ? ? user\assets\textures\normal_maps\misc\worklog.png 0 0 1 0 0 1 1 1 0.5 1 1 1 1 ? 0 ? worklog 0.1 0 0.1 2.6 2.2 2.5
-MODEL 2087681847@barn -4.1 6.37255 74 0 90 0 1.1 1.1 1.1 user\assets\models\buildings\barn.obj ? ? ? ? 0 0 1 0 0 1 1 1 0.75 1 1 1 1 ? 0 ? barn 0.1 0 0.1 14 13.3 10.9
-MODEL 1851987018@tree6 103.096 6.37255 95.5465 0 0 0 1.6 1.4 1.6 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
+MODEL 1851987018@tree6 103.096 6.37255 95.5465 0 0 0 1.6 1.4 1.6 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? leaves 0 8.8 0 3.85 8.30001 3.6 trunk 0 0 0 0.85 8.80001 0.8
 MODEL 1560735042@tree6 147.034 6.37255 109.038 0 0 0 1.25 1 1.25 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
 MODEL 1176852047@timber 91.7699 6.37255 1 0 90 0 1.72 1.75 1.75 user\assets\models\misc\timber.obj ? ? ? ? 0 0 1 0 0 1 1 1 0.5 1 1 1 1 ? 0 ? timber 0 0 0 5.6 0.95 0.9
 MODEL 968532668@corn 78.9478 6.37255 3.12666 0 0 0 2.25 2.25 2.25 user\assets\models\misc\corn.obj user\assets\textures\diffuse_maps\misc\corn.png ? ? ? 0 0 1 0 0 1 1 1 0.75 1 1 1 1 ? 0 ?
@@ -38,7 +44,7 @@ MODEL 1870092717@corn 73.6926 6.37255 -1.4104 0 0 0 2.25 2.25 2.25 user\assets\m
 MODEL 1206061153@tree6 83.007 6.37255 99.9008 0 0 0 1.25 1 1.25 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? leaves 0 8.8 0 3.85 8.30001 3.6 trunk 0 0 0 0.85 8.80001 0.8
 MODEL 1470014795@haybale 17.2735 6.37255 63.2155 0 0 0 1.2 1.2 1.2 user\assets\models\misc\haybale.obj user\assets\textures\diffuse_maps\misc\haybale.png ? ? ? 0 0 1 0 0 1 1 1 0.5 1 1 1 1 ? 0 ? haybale 0 0 0 1.8 1.7 1.7
 MODEL 1155270058@timber 75.8523 6.37255 16.834 0 0 0 1.75 1.75 1.75 user\assets\models\misc\timber.obj ? ? ? ? 0 0 1 0 0 1 1 1 0.5 1 1 1 1 ? 0 ? timber 0 0 0 5.6 0.95 0.9
-MODEL 328140132@well1 -16.6097 6.37255 11.6517 0 -30 0 3.25 3.25 3.25 user\assets\models\buildings\well1.obj user\assets\textures\diffuse_maps\buildings\well1.png ? ? user\assets\textures\normal_maps\buildings\well1.png 0 0 1 0 0 0 1 1 1 1 1 1 1 ? 0 ? well1 0.03 0 -0.01 1.19 1.61 1.34
+MODEL 328140132@well1 -16.6097 6.37255 11.6517 0 -30 0 3.25 3.25 3.25 user\assets\models\misc\well1.obj user\assets\textures\diffuse_maps\misc\well1.png ? ? user\assets\textures\normal_maps\misc\well1.png 0 0 1 0 0 0 1 1 1 1 1 1 1 ? 0 ? well1 0.03 0 -0.01 1.19 1.61 1.34
 MODEL 1087053684@tree6 134.044 6.37255 96.6883 0 0 0 1.25 1 1.25 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
 MODEL 571116041@corn 88.6783 6.37255 8.36302 0 0 0 2.25 2.25 2.25 user\assets\models\misc\corn.obj user\assets\textures\diffuse_maps\misc\corn.png ? ? ? 0 0 1 0 0 1 1 1 0.75 1 1 1 1 ? 0 ?
 MODEL 1051445768@waterwheel 87.6943 4.04117 58.8814 0 90 0 2 2 2 user\assets\models\misc\waterwheel.obj ? ? ? ? 0 0 1 0 0 0 1 1 1 1 1 1 1 ? 0 waterwheel_rotation waterwheel 0 0 0 2.5 3.65 4.2
@@ -47,15 +53,11 @@ MODEL 1992948212@tree6 84.9258 6.37255 89.9451 0 0 0 1.4 1.2 1.4 user\assets\mod
 MODEL 40189722@tree6 144.962 6.37255 62.5994 0 0 0 1.25 1 1.25 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
 MODEL 1001721475@barrel 17.2699 6.37255 57.5619 0 0 0 2.4 2.4 2.4 user\assets\models\misc\barrel.obj user\assets\textures\diffuse_maps\misc\barrel.png ? user\assets\textures\reflection_maps\misc\barrel.png user\assets\textures\normal_maps\misc\barrel.png 0 0 1 0 1 1 1 1 0.75 1 1 1 1 ? 0 ? barrel 0 0 0 0.76 0.92 0.78
 MODEL 573741045@sawmill 88.3009 5.12254 51.273 0 0 0 6 8 6 user\assets\models\buildings\sawmill.obj user\assets\textures\diffuse_maps\buildings\sawmill.png ? ? ? 0 0 1 0 0 0 1 1 1 1 1 1 1 ? 0 ? left 0 0 -0.6 3.3 1 0.2 bottom 0 0 0 3.3 0.3 1.1 right 7.45058e-09 0 0.57 3.3 1 0.15
-MODEL 177597953@tree6 90.4279 6.37255 72.9015 0 0 0 1.25 1 1.25 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? leaves 0 8.8 0 3.85 8.30001 3.6 trunk 0 0 0 0.85 8.80001 0.8
-MODEL 1021908365@tree2 92.723 6.37255 96.5551 0 0 0 1.25 1.25 1.25 user\assets\models\trees\tree2.obj user\assets\textures\diffuse_maps\trees\tree_bush_2.png ? ? user\assets\textures\normal_maps\trees\tree_bush_2.png 0 0 1 1 0 0 1 1 0.7 1 1 1 1 ? 0 ? leaves 0 4.6 0 4.2 8.2 4.1 trunk 0 0 0 0.7 4.6 0.8
-MODEL 2008892948@torch1 52 6.37255 71 0 0 0 0.75 0.75 0.75 user\assets\models\misc\torch1.obj user\assets\textures\diffuse_maps\misc\torch1.png user\assets\textures\light_maps\misc\torch1.png user\assets\textures\reflection_maps\misc\torch1.png user\assets\textures\normal_maps\misc\torch1.png 0 0 1 0 1 0 1 1 0.5 1 1 1 1 ? 0 ? basket 0 4.06 0 2.3 1 2.2 pole -0.02 0 0 0.4 4.03 0.36
 MODEL 2114790631@timber 69.6526 6.37255 1 0 90 0 1.75 1.75 1.75 user\assets\models\misc\timber.obj ? ? ? ? 0 0 1 0 0 1 1 1 0.5 1 1 1 1 ? 0 ? timber 0 0 0 5.6 0.95 0.9
 MODEL 1026392561@corn 88.0859 6.37255 3.64754 0 0 0 2.25 2.25 2.25 user\assets\models\misc\corn.obj user\assets\textures\diffuse_maps\misc\corn.png ? ? ? 0 0 1 0 0 1 1 1 0.75 1 1 1 1 ? 0 ?
 MODEL 642312986@tree6 118.516 6.37255 88.6248 0 0 0 1.6 1.52 1.6 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
 MODEL 903727639@tree2 121.038 6.37255 107.934 0 0 0 1.6 1.8 1.6 user\assets\models\trees\tree2.obj user\assets\textures\diffuse_maps\trees\tree_bush_2.png ? ? user\assets\textures\normal_maps\trees\tree_bush_2.png 0 0 1 1 0 0 1 1 0.7 1 1 1 1 ? 0 ? trunk 0 0 0 0.7 4.6 0.8 leaves 0 4.6 0 4.2 8.2 4.1
 MODEL 399597230@tree6 146.457 6.37255 74.7012 0 0 0 1.6 1.68 1.6 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
-MODEL 95562319@pen 10.2492 6.37255 74.954 0 0 0 2.25 2.25 2.25 user\assets\models\misc\pen.obj user\assets\textures\diffuse_maps\misc\pen.png ? ? ? 0 0 1 0 0 1 1 1 0.75 1 1 1 1 ? 0 ? front 0 0 3.5 7.6 1 0.2 back 0 0 -3.5 7.5 1.1 0.2 right 3.5 0 0 0.2 1.1 7.5 left -3.5 0 0 0.2 1.1 7.5
 MODEL 1858939032@tree2 156.458 6.37255 56.9257 0 0 0 1.25 1.25 1.25 user\assets\models\trees\tree2.obj user\assets\textures\diffuse_maps\trees\tree_bush_2.png ? ? user\assets\textures\normal_maps\trees\tree_bush_2.png 0 0 1 1 0 0 1 1 0.7 1 1 1 1 ? 0 ? leaves 0 4.6 0 4.2 8.2 4.1 trunk 0 0 0 0.7 4.6 0.8
 MODEL 494887049@hills 0 -1 0 0 0 0 4 10.4 4 user\assets\models\misc\hills.obj user\assets\textures\diffuse_maps\terrain\rock.png ? ? ? 0 0 0 0 0 0 1 1 1 1 1 1 8 ? 0 ?
 MODEL 425114849@worklog 62.0448 6.37255 0.137234 0 0 0 1 1 1 user\assets\models\misc\worklog.obj user\assets\textures\diffuse_maps\misc\worklog.png ? ? user\assets\textures\normal_maps\misc\worklog.png 0 0 1 0 0 1 1 1 0.5 1 1 1 1 ? 0 ? worklog 0.1 0 0.1 2.6 2.2 2.5
@@ -98,13 +100,12 @@ MODEL 680786799@tree6 128.391 6.37255 119.508 0 0 0 1.25 1 1.25 user\assets\mode
 MODEL 49977655@wall 56.8534 6.37254 -24 0 0 0 1.25 1.25 1.25 user\assets\models\buildings\wall.obj ? ? ? ? 0 0 1 0 0 1 1 1 0.5 1 1 1 1 ? 0 ? wall 0 0 -0.5 21.3 14 2.8
 MODEL 248093031@bridge 46.9838 6.12004 87.0248 0 0 0 1.5 1.5 1.5 user\assets\models\buildings\bridge.obj user\assets\textures\diffuse_maps\buildings\bridge.png ? ? user\assets\textures\normal_maps\buildings\bridge.png 0 0 1 0 0 1 1 1 0.8 1 1 1 1 ? 0 ? bridge 0 0 0 3.15 0.18 13 left 1.35 0 0 0.44 1.2 13 right -1.35 -7.45058e-09 0 0.45 1.2 13
 MODEL 2001589163@tree2 123.768 6.37255 77.1132 0 0 0 1.25 1.25 1.25 user\assets\models\trees\tree2.obj user\assets\textures\diffuse_maps\trees\tree_bush_2.png ? ? user\assets\textures\normal_maps\trees\tree_bush_2.png 0 0 1 1 0 0 1 1 0.7 1 1 1 1 ? 0 ? trunk 0 0 0 0.7 4.6 0.8 leaves 0 4.6 0 4.2 8.2 4.1
-MODEL 3709863@gate 29.7579 6.37255 -22.3264 0 0 0 1.25 1.25 1.25 user\assets\models\buildings\gate.obj ? ? ? ? 0 0 1 0 0 1 1 1 0.5 1 1 1 1 ? 0 ? tower_left -8.4 0 -0.1 5.5 19 6.9 gate_left -3.8 0 -1.5 4 14 5 tower_right 8.5 0 0 5.5 19.2 6.9 gate_right 4 0 -1.5 4.4 14 5
+MODEL 3709863@gate 29.7579 6.37255 -22.3264 0 0 0 1.25 1.25 1.25 user\assets\models\buildings\gate.obj ? ? ? ? 0 0 1 0 0 1 1 1 0.5 1 1 1 1 ? 0 ? gate_right 4 0 -1.5 4.4 14 5 tower_left -8.4 0 -0.1 5.5 19 6.9 gate_left -3.8 0 -1.5 4 14 5 tower_right 8.5 0 0 5.5 19.2 6.9
 MODEL 2020951533@worklog -12.085 6.37253 12.8385 0 90 0 1 1 1 user\assets\models\misc\worklog.obj user\assets\textures\diffuse_maps\misc\worklog.png ? ? user\assets\textures\normal_maps\misc\worklog.png 0 0 1 0 0 1 1 1 0.5 1 1 1 1 ? 0 ? worklog 0.1 0 0.1 2.6 2.2 2.5
 MODEL 1792097883@tree6 61.0823 6.37255 98.2493 0 0 0 1.25 1 1.25 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
 MODEL 1918938106@beehive 54.3977 6.37255 15.0891 0 0 0 1.75 1.75 1.75 user\assets\models\misc\beehive.obj user\assets\textures\diffuse_maps\misc\beehive.png ? ? ? 0 0 1 0 0 1 1 1 0.75 1 1 1 1 ? 0 ? beehive -0.05 0 -0.05 2.4 2 2.1
 MODEL 1868012117@tree6 74.1878 6.37255 92.1494 0 0 0 1.25 1 1.25 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
 MODEL 1790266595@tree6 86.0317 6.37255 80.7835 0 0 0 1.25 1 1.25 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? leaves 0 8.8 0 3.85 8.30001 3.6 trunk 0 0 0 0.85 8.80001 0.8
-MODEL 513956538@tree6 111.642 6.37255 73.9492 0 0 0 1.25 1 1.25 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
 MODEL 1741428686@tree6 119.891 6.37255 67.0521 0 0 0 1.25 1 1.25 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? leaves 0 8.8 0 3.85 8.30001 3.6 trunk 0 0 0 0.85 8.80001 0.8
 MODEL 1111107789@tree6 142.916 6.37255 49.987 0 0 0 1.25 1 1.25 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
 MODEL 1739724874@tree6 156.554 6.37255 43.5245 0 0 0 1.25 1 1.25 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
@@ -126,7 +127,6 @@ MODEL 1978995291@timberstack 53.3943 6.43255 65.9679 0 90 0 2.2 2.2 2.2 user\ass
 MODEL 1623424494@haybale 19.3567 6.37255 59.4468 0 0 0 1.5 1.5 1.5 user\assets\models\misc\haybale.obj user\assets\textures\diffuse_maps\misc\haybale.png ? ? ? 0 0 1 0 0 1 1 1 0.5 1 1 1 1 ? 0 ? haybale 0 0 0 1.8 1.7 1.7
 MODEL 1691590098@tree5 44.1001 6.37243 -10 0 0 0 1.5 1.5 1.5 user\assets\models\trees\tree5.obj ? ? ? ? 0 0 1 1 0 1 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.6 3.4 0.5 leaves 0 3.4 0 4.8 3.8 5.3
 MODEL 2106251449@corn 73.6278 6.37255 3.43779 0 0 0 2.25 2.25 2.25 user\assets\models\misc\corn.obj user\assets\textures\diffuse_maps\misc\corn.png ? ? ? 0 0 1 0 0 1 1 1 0.75 1 1 1 1 ? 0 ?
-MODEL 1581697508@timber 85.624 6.37255 -5.21878 0 0 0 1.75 1.75 1.75 user\assets\models\misc\timber.obj ? ? ? ? 0 0 1 0 0 1 1 1 0.5 1 1 1 1 ? 0 ? timber 0 0 0 5.6 0.95 0.9
 MODEL 2025500236@corn 77.6577 6.37255 7.98411 0 0 0 2.25 2.25 2.25 user\assets\models\misc\corn.obj user\assets\textures\diffuse_maps\misc\corn.png ? ? ? 0 0 1 0 0 1 1 1 0.75 1 1 1 1 ? 0 ?
 MODEL 423713778@tree6 70.0814 6.37255 99.5469 0 0 0 1.8 1.68 1.8 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? leaves 0 8.8 0 3.85 8.30001 3.6 trunk 0 0 0 0.85 8.80001 0.8
 MODEL 830310617@barrel -14.1725 6.37255 14.3292 0 0 0 2 2 2 user\assets\models\misc\barrel.obj user\assets\textures\diffuse_maps\misc\barrel.png ? user\assets\textures\reflection_maps\misc\barrel.png user\assets\textures\normal_maps\misc\barrel.png 0 0 1 0 1 1 1 1 0.75 1 1 1 1 ? 0 ? barrel 0 0 0 0.76 0.92 0.78
@@ -180,13 +180,13 @@ MODEL instanced@grassfield 0 0 0 0 0 0 0.8 0.8 0.8 user\assets\models\foliage\gr
 MODEL 497108309@house3 81.8456 6.37255 40.8663 0 0 0 2 2 2 user\assets\models\buildings\house3.obj user\assets\textures\diffuse_maps\buildings\house3.png user\assets\textures\light_maps\buildings\house3.png user\assets\textures\reflection_maps\buildings\house3.png user\assets\textures\normal_maps\buildings\house3.png 0 0 1 0 1 1 1 1 1 1 1 1 1 ? 0 ? top -1.6 2.2 0 2.9 3.2 3.4 pole1 -2.93 0 1.45 0.2 2.21 0.22 pole2 -2.94 0 -1.45 0.2 2.22 0.23 base 1.5 0 -0.03 3.3 5.37999 3.36
 MODEL 1546455832@sign 44.0108 6.37255 97.4966 0 0 0 0.6 0.75 0.75 user\assets\models\misc\sign.obj user\assets\textures\diffuse_maps\misc\sign.png ? ? user\assets\textures\normal_maps\misc\sign.png 0 0 0 0 0 1 1 1 0.7 1 1 1 1 ? 0 ? sign 0 0 0.02 1.5 4 0.4
 MODEL 1396442966@wagon 67.4043 6.37255 45.838 0 0 0 1.75 1.75 1.75 user\assets\models\misc\wagon.obj user\assets\textures\diffuse_maps\misc\wagon.png ? ? ? 0 0 1 0 0 1 1 1 0.75 1 1 1 1 ? 0 ? wagon 0 0 -0.7 1.7 1.32 3.2
-BILLBOARD 1705446200@fire 52 11 71 0 -28.4127 -0 5 3 1 1 1 0 1 user\assets\textures\billboard_maps\fire1.png 1 ? ? 1 6 6 3 2.5
-BILLBOARD 521088961@fire 35 11 -19 0 -3.96983 -0 5 3 1 1 1 0 1 user\assets\textures\billboard_maps\fire1.png 1 ? ? 1 6 6 3 2.5
-BILLBOARD 385894073@fire -9.04673 11 12.6441 0 17.7121 -0 5 3 1 1 1 0 1 user\assets\textures\billboard_maps\fire1.png 1 ? ? 1 6 6 3 2.5
-BILLBOARD 654255707@fire 62.8829 11 45.7324 0 -26.7304 -0 5 3 1 1 1 0 1 user\assets\textures\billboard_maps\fire1.png 1 ? ? 1 6 6 3 2.5
-BILLBOARD 1790011452@fire 25 11 -19 0 0.137146 -0 5 3 1 1 1 0 1 user\assets\textures\billboard_maps\fire1.png 1 ? ? 1 6 6 3 2.5
-BILLBOARD 1233497612@fire 60.1718 11 14.0814 0 -18.16 -0 5 3 1 1 1 0 1 user\assets\textures\billboard_maps\fire1.png 1 ? ? 1 6 6 3 2.5
-BILLBOARD 756379894@fire 19.0739 11 62.0151 0 6.13056 -0 5 3 1 1 1 0 1 user\assets\textures\billboard_maps\fire1.png 1 ? ? 1 6 6 3 2.5
+BILLBOARD 1705446200@fire 52 11 71 0 -32.322 -0 5 3 1 1 1 0 1 user\assets\textures\billboard_maps\fire1.png 1 ? ? 1 6 6 3 2.5
+BILLBOARD 521088961@fire 35 11 -19 0 7.21017 -0 5 3 1 1 1 0 1 user\assets\textures\billboard_maps\fire1.png 1 ? ? 1 6 6 3 2.5
+BILLBOARD 385894073@fire -9.04673 11 12.6441 0 40.6066 -0 5 3 1 1 1 0 1 user\assets\textures\billboard_maps\fire1.png 1 ? ? 1 6 6 3 2.5
+BILLBOARD 654255707@fire 62.8829 11 45.7324 0 -25.4749 -0 5 3 1 1 1 0 1 user\assets\textures\billboard_maps\fire1.png 1 ? ? 1 6 6 3 2.5
+BILLBOARD 1790011452@fire 25 11 -19 0 12.9084 -0 5 3 1 1 1 0 1 user\assets\textures\billboard_maps\fire1.png 1 ? ? 1 6 6 3 2.5
+BILLBOARD 1233497612@fire 60.1718 11 14.0814 0 -11.2995 -0 5 3 1 1 1 0 1 user\assets\textures\billboard_maps\fire1.png 1 ? ? 1 6 6 3 2.5
+BILLBOARD 756379894@fire 19.0739 11 62.0151 0 59.8924 -0 5 3 1 1 1 0 1 user\assets\textures\billboard_maps\fire1.png 1 ? ? 1 6 6 3 2.5
 AMBIENT_LIGHT 1 1 1 0.75
 DIRECTIONAL_LIGHT 1000 1000 1000 1 1 1 1 150 100
 POINT_LIGHT pointlight1804680928 35 9 -19 1 1 0.501961 2 1
@@ -198,9 +198,9 @@ POINT_LIGHT pointlight937929794 60.184 9 14.1708 1 1 0.501961 2 1
 POINT_LIGHT pointlight17009596 -9.07242 9 12.6915 1 1 0.501961 2 1
 LOD_DISTANCE 1000
 EDITOR_SPEED 10
-EDITOR_POSITION 25.3334 26.9414 120.293
-EDITOR_YAW 308.882
-EDITOR_PITCH -42.36
+EDITOR_POSITION 47.3214 26.1414 78.3946
+EDITOR_YAW 315.482
+EDITOR_PITCH -34.96
 GRAPHICS_SHADOWS 1 100 55.000000 55.000000 55.000000 0.000000 0.000000 0.000000 1 100
 GRAPHICS_MOTIONBLUR 1 0.25
 GRAPHICS_DOF 1 1 5 2

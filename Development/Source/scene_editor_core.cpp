@@ -360,7 +360,7 @@ void SceneEditor::load()
 
 	// Preview models loading
 	_modelEditor.loadGameEntitiesFromFile();
-	for (auto& modelName : _modelEditor.getModelNames())
+	for (auto& modelName : _modelEditor.getLoadedModelIDs())
 	{
 		// Check if there is a GAME entity present
 		if (_fe3d.gameEntity_isExisting(modelName))
@@ -375,7 +375,7 @@ void SceneEditor::load()
 
 	// Preview billboards loading
 	_billboardEditor.loadBillboardEntitiesFromFile();
-	for (auto& billboardName : _billboardEditor.getBillboardNames())
+	for (auto& billboardName : _billboardEditor.getLoadedBillboardIDs())
 	{
 		// Check if there is a BILLBOARD entity present
 		if (_fe3d.billboardEntity_isExisting(billboardName))
@@ -400,7 +400,7 @@ void SceneEditor::load()
 	_audioEditor.loadAudioEntitiesFromFile();
 	_fe3d.gameEntity_add(_previewSpeakerID, _speakerModelPath, Vec3(0.0f), Vec3(0.0f), _defaultSpeakerSize, false);
 	_fe3d.gameEntity_setShadowed(_previewSpeakerID, false);
-	for (auto& audioName : _audioEditor.getAudioNames())
+	for (auto& audioName : _audioEditor.getLoadedAudioIDs())
 	{
 		_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuAudioPlace")->getScrollingList("audiocasters")->
 			addButton(audioName, audioName.substr(1));

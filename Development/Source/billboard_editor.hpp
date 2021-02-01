@@ -20,7 +20,7 @@ public:
 	bool isLoaded();
 
 	const vector<string> getAllTexturePathsFromFile();
-	const vector<string>& getBillboardNames();
+	const vector<string>& getLoadedBillboardIDs();
 
 private:
 	void _updateBillboardManagement();
@@ -55,5 +55,5 @@ private:
 	string _hoveredBillboardID = "";
 	string _currentBillboardID = "";
 	string _currentProjectID = "";
-	vector<string> _billboardIDs;
+	vector<string> _loadedBillboardIDs;
 };

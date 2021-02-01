@@ -25,17 +25,17 @@ void EnvironmentEditor::_updateTerrainMenuMain()
 			{
 				_terrainChoosingEnabled = true;
 				_terrainEditingEnabled = true;
-				for (auto& name : _terrainIDs) { name = name.substr(1); }
-				_gui.getGlobalScreen()->addChoiceForm("terrainList", "Select terrain", Vec2(-0.4f, 0.1f), _terrainIDs);
-				for (auto& name : _terrainIDs) { name = "@" + name; }
+				auto IDs = getLoadedTerrainIDs();
+				for (auto& name : IDs) { name = name.substr(1); }
+				_gui.getGlobalScreen()->addChoiceForm("terrainList", "Select terrain", Vec2(-0.4f, 0.1f), IDs);
 			}
 			else if (screen->getButton("delete")->isHovered())
 			{
 				_terrainChoosingEnabled = true;
 				_terrainRemovalEnabled = true;
-				for (auto& name : _terrainIDs) { name = name.substr(1); }
-				_gui.getGlobalScreen()->addChoiceForm("terrainList", "Select terrain", Vec2(-0.4f, 0.1f), _terrainIDs);
-				for (auto& name : _terrainIDs) { name = "@" + name; }
+				auto IDs = getLoadedTerrainIDs();
+				for (auto& name : IDs) { name = name.substr(1); }
+				_gui.getGlobalScreen()->addChoiceForm("terrainList", "Select terrain", Vec2(-0.4f, 0.1f), IDs);
 			}
 		}
 	}

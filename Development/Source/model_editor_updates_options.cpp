@@ -76,7 +76,7 @@ void ModelEditor::_updateModelEditingOptions()
 		if (_gui.getGlobalScreen()->checkValueForm("lodID", lodID, { }))
 		{
 			// Check if LOD entity exists
-			if (std::find(_modelIDs.begin(), _modelIDs.end(), "@" + lodID) == _modelIDs.end())
+			if (std::find(_loadedModelIDs.begin(), _loadedModelIDs.end(), "@" + lodID) == _loadedModelIDs.end())
 			{
 				_fe3d.logger_throwWarning("Cannot find LOD entity name: \"" + lodID + "\"");
 			}

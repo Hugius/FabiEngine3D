@@ -25,17 +25,17 @@ void EnvironmentEditor::_updateSkyMenuMain()
 			{
 				_skyChoosingEnabled = true;
 				_skyEditingEnabled = true;
-				for (auto& name : _skyIDs) { name = name.substr(1); }
-				_gui.getGlobalScreen()->addChoiceForm("skyList", "Select sky", Vec2(-0.4f, 0.1f), _skyIDs);
-				for (auto& name : _skyIDs) { name = "@" + name; }
+				auto IDs = getLoadedSkyIDs();
+				for (auto& name : IDs) { name = name.substr(1); }
+				_gui.getGlobalScreen()->addChoiceForm("skyList", "Select sky", Vec2(-0.4f, 0.1f), IDs);
 			}
 			else if (screen->getButton("delete")->isHovered())
 			{
 				_skyChoosingEnabled = true;
 				_skyRemovalEnabled = true;
-				for (auto& name : _skyIDs) { name = name.substr(1); }
-				_gui.getGlobalScreen()->addChoiceForm("skyList", "Select sky", Vec2(-0.4f, 0.1f), _skyIDs);
-				for (auto& name : _skyIDs) { name = "@" + name; }
+				auto IDs = getLoadedSkyIDs();
+				for (auto& name : IDs) { name = name.substr(1); }
+				_gui.getGlobalScreen()->addChoiceForm("skyList", "Select sky", Vec2(-0.4f, 0.1f), IDs);
 			}
 		}
 	}

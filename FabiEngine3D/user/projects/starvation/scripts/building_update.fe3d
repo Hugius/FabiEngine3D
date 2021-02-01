@@ -1,2 +1,11 @@
-0 23
+9 0
 META script_type_update
+
+BOOL pPressed = fe3d:input_is_key_pressed("KEY_P")
+IF pPressed IS <true>:
+    IF _isBuilding IS <false>
+        EDIT _isBuilding = <true>
+    ELSE:
+        EDIT _isBuilding = <false>
+
+

@@ -97,7 +97,7 @@ void ModelEditor::loadGameEntitiesFromFile()
 	}
 
 	// Clear names list from previous loads
-	_modelIDs.clear();
+	_loadedModelIDs.clear();
 
 	// Compose full file path
 	string filePath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectID + "\\data\\model.fe3d";
@@ -220,7 +220,7 @@ void ModelEditor::saveGameEntitiesToFile()
 		file.open(_fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectID + "\\data\\model.fe3d");
 
 		// Write model data into file
-		for (auto& modelID : _modelIDs)
+		for (auto& modelID : _loadedModelIDs)
 		{
 			// Check if a 3D entity for this model is existing
 			if (_fe3d.gameEntity_isExisting(modelID))

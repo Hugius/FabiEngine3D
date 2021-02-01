@@ -29,6 +29,9 @@ public:
 	const vector<array<string, 6>> getAllSkyTexturePathsFromFile();
 	const vector<string> getAllTerrainTexturePathsFromFile();
 	const vector<string> getAllWaterTexturePathsFromFile();
+	const vector<string>& getLoadedSkyIDs();
+	const vector<string>& getLoadedTerrainIDs();
+	const vector<string>& getLoadedWaterIDs();
 
 	bool isLoaded();
 
@@ -82,7 +85,7 @@ private:
 	EngineGuiManager& _gui;
 
 	// Sky variables
-	vector <string> _skyIDs;
+	vector <string> _loadedSkyIDs;
 	string _currentSkyID = "";
 	string _hoveredSkyID = "";
 	bool _skyCreationEnabled = false;
@@ -91,7 +94,7 @@ private:
 	bool _skyRemovalEnabled = false;
 
 	// Terrain variables
-	vector <string> _terrainIDs;
+	vector <string> _loadedTerrainIDs;
 	string _currentTerrainID = "";
 	string _hoveredTerrainID = "";
 	bool _terrainCreationEnabled = false;
@@ -100,7 +103,7 @@ private:
 	bool _terrainRemovalEnabled = false;
 
 	// Water variables
-	vector <string> _waterIDs;
+	vector <string> _loadedWaterIDs;
 	string _currentWaterID = "";
 	string _hoveredWaterID = "";
 	bool _waterCreationEnabled = false;

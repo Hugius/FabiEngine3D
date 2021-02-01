@@ -63,7 +63,7 @@ void SceneEditor::_updateModelPlacingMenu()
 				else
 				{
 					// Loop over every created model
-					for (auto& modelName : _modelEditor.getModelNames())
+					for (auto& modelName : _modelEditor.getLoadedModelIDs())
 					{
 						// Check if model has a game entity
 						if (_fe3d.gameEntity_isExisting(modelName))

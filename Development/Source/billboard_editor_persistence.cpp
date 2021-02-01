@@ -81,7 +81,7 @@ void BillboardEditor::loadBillboardEntitiesFromFile()
 	}
 
 	// Clear names list from previous loads
-	_billboardIDs.clear();
+	_loadedBillboardIDs.clear();
 
 	// Compose full file path
 	string filePath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectID + "\\data\\billboard.fe3d";
@@ -135,7 +135,7 @@ void BillboardEditor::loadBillboardEntitiesFromFile()
 			std::replace(textContent.begin(), textContent.end(), '?', ' ');
 
 			// Add billboard name
-			_billboardIDs.push_back(billboardID);
+			_loadedBillboardIDs.push_back(billboardID);
 
 			// Determine billboard type
 			if (diffuseMapPath != "") // Textured billboard
@@ -192,7 +192,7 @@ void BillboardEditor::saveBillboardEntitiesToFile()
 		file.open(_fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectID + "\\data\\billboard.fe3d");
 
 		// Write billboard data into file
-		for (auto& billboardID : _billboardIDs)
+		for (auto& billboardID : _loadedBillboardIDs)
 		{
 			// Retrieve all values
 			auto size = _fe3d.billboardEntity_getSize(billboardID);

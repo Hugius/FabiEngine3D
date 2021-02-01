@@ -192,9 +192,9 @@ void EnvironmentEditor::unload()
 	unloadWaterEntities();
 
 	// Reset variables
-	_skyIDs.clear();
-	_terrainIDs.clear();
-	_waterIDs.clear();
+	_loadedSkyIDs.clear();
+	_loadedTerrainIDs.clear();
+	_loadedWaterIDs.clear();
 	_currentEnvironmentType = EnvironmentType::NONE;
 	_cameraRotationSpeed = 0.0f;
 	_totalCameraRotation = 0.0f;

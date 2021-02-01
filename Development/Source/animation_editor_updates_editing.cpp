@@ -60,7 +60,7 @@ void AnimationEditor::_updateEditingScreen()
 				}
 				else if (screen->getButton("preview")->isHovered())
 				{
-					auto modelIDs = _fe3d.gameEntity_getAllIDs();
+					auto modelIDs = _modelEditor.getLoadedModelIDs();
 					for (auto& ID : modelIDs) { ID = ID.substr(1); }
 					_gui.getGlobalScreen()->addChoiceForm("models", "Select model", Vec2(-0.4f, 0.1f), modelIDs);
 				}

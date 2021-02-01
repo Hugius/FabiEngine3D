@@ -1,5 +1,7 @@
 #include "animation_editor.hpp"
 
+#include <algorithm>
+
 void AnimationEditor::setCurrentProjectID(const string& projectName)
 {
 	_currentProjectID = projectName;
@@ -182,18 +184,6 @@ bool AnimationEditor::_comparePartNames(vector<string> first, vector<string> sec
 	return true;
 }
 
-vector<string> AnimationEditor::_getAnimationIDs()
-{
-	vector<string> names;
-
-	for (auto& animation : _animations)
-	{
-		names.push_back(animation->ID);
-	}
-
-	return names;
-}
-
 shared_ptr<Animation> AnimationEditor::_getAnimation(const string& ID)
 {
 	for (auto& animation : _animations)
@@ -207,16 +197,20 @@ shared_ptr<Animation> AnimationEditor::_getAnimation(const string& ID)
 	_fe3d.logger_throwError("Cannot retrieve animation with ID \"" + ID + "\""); 
 }
 
-const vector<string> AnimationEditor::getAllAnimationNames()
+const vector<string> AnimationEditor::getLoadedAnimationIDs()
 {
-	vector<string> names;
+	vector<string> IDs;
 
+	// Find all IDs
 	for (auto& animation : _animations)
 	{
-		names.push_back(animation->ID);
+		IDs.push_back(animation->ID);
 	}
 
-	return names;
+	// Sort alphabetically
+	std::sort(IDs.begin(), IDs.end());
+
+	return IDs;
 }
 
 const vector<string> AnimationEditor::getPlayingAnimationNames()

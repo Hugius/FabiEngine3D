@@ -36,10 +36,10 @@ void EnvironmentEditor::_updateSkyCreation()
 						newSkyName = "@" + newSkyName;
 
 						// If sky name not existing yet
-						if (std::find(_skyIDs.begin(), _skyIDs.end(), newSkyName) == _skyIDs.end())
+						if (std::find(_loadedSkyIDs.begin(), _loadedSkyIDs.end(), newSkyName) == _loadedSkyIDs.end())
 						{
 							_currentSkyID = newSkyName;
-							_skyIDs.push_back(_currentSkyID);
+							_loadedSkyIDs.push_back(_currentSkyID);
 							_fe3d.skyEntity_add(_currentSkyID);
 							_fe3d.skyEntity_select(_currentSkyID);
 							_gui.getViewport("left")->getWindow("main")->setActiveScreen("skyEditorMenuChoice");
@@ -152,7 +152,7 @@ void EnvironmentEditor::_updateSkyRemoval()
 				_fe3d.skyEntity_delete(_currentSkyID);
 
 				// Delete from name record
-				_skyIDs.erase(std::remove(_skyIDs.begin(), _skyIDs.end(), _currentSkyID), _skyIDs.end());
+				_loadedSkyIDs.erase(std::remove(_loadedSkyIDs.begin(), _loadedSkyIDs.end(), _currentSkyID), _loadedSkyIDs.end());
 				_skyRemovalEnabled = false;
 				_currentSkyID = "";
 

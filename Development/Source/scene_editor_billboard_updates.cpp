@@ -64,7 +64,7 @@ void SceneEditor::_updateBillboardPlacingMenu()
 				else
 				{
 					// Loop over every created billboard
-					for (auto& billboardName : _billboardEditor.getBillboardNames())
+					for (auto& billboardName : _billboardEditor.getLoadedBillboardIDs())
 					{
 						// Check if billboard has a billboard entity
 						if (_fe3d.billboardEntity_isExisting(billboardName))

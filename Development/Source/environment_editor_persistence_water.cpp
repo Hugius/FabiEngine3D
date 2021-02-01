@@ -83,7 +83,7 @@ void EnvironmentEditor::loadWaterEntitiesFromFile()
 	}
 
 	// Clear names list from previous loads
-	_waterIDs.clear();
+	_loadedWaterIDs.clear();
 
 	// Compose full file path
 	string filePath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectID + "\\data\\water.fe3d";
@@ -141,7 +141,7 @@ void EnvironmentEditor::loadWaterEntitiesFromFile()
 			std::replace(displacementMapPath.begin(), displacementMapPath.end(), '?', ' ');
 
 			// Load entity
-			_waterIDs.push_back(waterID);
+			_loadedWaterIDs.push_back(waterID);
 			_fe3d.waterEntity_add(waterID);
 			_fe3d.waterEntity_setPosition(waterID, position);
 			_fe3d.waterEntity_setSize(waterID, size);
@@ -176,7 +176,7 @@ void EnvironmentEditor::loadWaterEntitiesFromFile()
 
 void EnvironmentEditor::unloadWaterEntities()
 {
-	for (auto& name : _waterIDs)
+	for (auto& name : _loadedWaterIDs)
 	{
 		_fe3d.waterEntity_delete(name);
 	}
@@ -199,7 +199,7 @@ void EnvironmentEditor::saveWaterEntitiesToFile()
 		std::ofstream file(filePath);
 
 		// Write every water to file
-		for (auto& waterID : _waterIDs)
+		for (auto& waterID : _loadedWaterIDs)
 		{
 			// Values
 			string dudvMapPath = _fe3d.waterEntity_getDudvMapPath(waterID);
@@ -261,4 +261,10 @@ void EnvironmentEditor::saveWaterEntitiesToFile()
 		// Logging
 		_fe3d.logger_throwInfo("Water data from project \"" + _currentProjectID + "\" saved!");
 	}
+}
+
+const vector<string>& EnvironmentEditor::getLoadedWaterIDs()
+{
+	std::sort(_loadedWaterIDs.begin(), _loadedWaterIDs.end());
+	return _loadedWaterIDs;
 }

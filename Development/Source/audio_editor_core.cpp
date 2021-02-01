@@ -49,10 +49,22 @@ void AudioEditor::load()
 
 void AudioEditor::unload()
 {
+	// Delete everything
 	_fe3d.billboardEntity_delete("@@audioStatus");
 	_fe3d.audioEntity_deleteAll();
 	_gui.getGlobalScreen()->deleteTextfield("selectedAudioName");
 	_gui.getViewport("right")->getWindow("main")->setActiveScreen("mainMenuControls");
+
+	// Reset variables
+	_loadedAudioIDs.clear();
+	_currentAudioID = "";
+	_hoveredAudioID = "";
+	_isCreatingAudio = false;
+	_isChoosingAudio = false;
+	_isEditingAudio = false;
+	_isRemovingAudio = false;
+
+	// Miscellaneous
 	_fe3d.input_clearMouseToggles();
 	_fe3d.input_clearKeyToggles();
 	_isEditorLoaded = false;

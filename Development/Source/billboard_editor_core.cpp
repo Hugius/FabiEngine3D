@@ -118,7 +118,7 @@ void BillboardEditor::unload()
 	_totalCameraRotation = 0.0f;
 	_hoveredBillboardID = "";
 	_currentBillboardID = "";
-	_billboardIDs.clear();
+	_loadedBillboardIDs.clear();
 
 	// Miscellaneous
 	_gui.getViewport("right")->getWindow("main")->setActiveScreen("mainMenuControls");

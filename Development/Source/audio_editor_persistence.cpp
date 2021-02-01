@@ -12,7 +12,7 @@ const vector<string> AudioEditor::getAllAudioPathsFromFile()
 	}
 
 	// Clear names list from previous loads
-	_audioIDs.clear();
+	_loadedAudioIDs.clear();
 
 	// Compose full file path
 	string filePath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectID + "\\data\\audio.fe3d";
@@ -64,7 +64,7 @@ void AudioEditor::loadAudioEntitiesFromFile()
 	}
 
 	// Clear names list from previous loads
-	_audioIDs.clear();
+	_loadedAudioIDs.clear();
 
 	// Compose full file path
 	string filePath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectID + "\\data\\audio.fe3d";
@@ -92,7 +92,7 @@ void AudioEditor::loadAudioEntitiesFromFile()
 			std::replace(audioPath.begin(), audioPath.end(), '?', ' ');
 
 			// Add audio ID
-			_audioIDs.push_back(audioID);
+			_loadedAudioIDs.push_back(audioID);
 			_fe3d.audioEntity_add2D(audioID, audioPath);
 		}
 
@@ -123,7 +123,7 @@ void AudioEditor::saveAudioEntitiesToFile()
 		file.open(_fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectID + "\\data\\audio.fe3d");
 
 		// Write audio data into file
-		for (auto& audioID : _audioIDs)
+		for (auto& audioID : _loadedAudioIDs)
 		{
 			// Retrieve all values
 			auto audioPath = _fe3d.audioEntity_getFilePath(audioID);

@@ -471,110 +471,61 @@ bool FabiEngine3D::misc_checkInterval(const string& key, int frameCount)
 	}
 }
 
-unordered_map<string, int> FabiEngine3D::misc_getUpdateProfilingStatistics()
+vector<pair<string, int>> FabiEngine3D::misc_getUpdateProfilingStatistics()
 {
 	// Final list of timer IDs
-	std::unordered_map<string, int> result =
+	vector<pair<string, int>> result =
 	{
-		std::pair<string, int>("coreUpdate", 0),
-		std::pair<string, int>("cameraUpdate", 0),
-		std::pair<string, int>("raycastUpdate", 0),
-		std::pair<string, int>("collisionUpdate", 0),
-		std::pair<string, int>("skyEntityUpdate", 0),
-		std::pair<string, int>("waterEntityUpdate", 0),
-		std::pair<string, int>("gameEntityUpdate", 0),
-		std::pair<string, int>("billboardEntityUpdate", 0),
-		std::pair<string, int>("aabbEntityUpdate", 0),
-		std::pair<string, int>("guiEntityUpdate", 0),
-		std::pair<string, int>("shadowUpdate", 0),
-		std::pair<string, int>("audioUpdate", 0),
-		std::pair<string, int>("miscUpdate", 0)
-	};
-
-	// Total list of timer IDs
-	vector<string> IDs =
-	{
-		"coreUpdate", "cameraUpdate", "raycastUpdate", "collisionUpdate", "skyEntityUpdate", 
-		"waterEntityUpdate", "gameEntityUpdate", "billboardEntityUpdate", "aabbEntityUpdate", 
-		"guiEntityUpdate", "shadowUpdate", "audioUpdate", "miscUpdate"
+		pair<string, int>("coreUpdate", 0),
+		pair<string, int>("cameraUpdate", 0),
+		pair<string, int>("raycastUpdate", 0),
+		pair<string, int>("collisionUpdate", 0),
+		pair<string, int>("skyEntityUpdate", 0),
+		pair<string, int>("waterEntityUpdate", 0),
+		pair<string, int>("gameEntityUpdate", 0),
+		pair<string, int>("billboardEntityUpdate", 0),
+		pair<string, int>("aabbEntityUpdate", 0),
+		pair<string, int>("guiEntityUpdate", 0),
+		pair<string, int>("shadowUpdate", 0),
+		pair<string, int>("audioUpdate", 0),
+		pair<string, int>("miscUpdate", 0)
 	};
 
 	// Calculate percentages
-	for (auto& ID : IDs)
+	for (auto& [ID, percentage] : result)
 	{
-		int percentage = static_cast<int>((_core->_timer.getDeltaPart(ID) / _core->_timer.getDeltaPartSum()) * 100.0f);
-		result[ID] += percentage;
+		int newPercentage = static_cast<int>((_core->_timer.getDeltaPart(ID) / _core->_timer.getDeltaPartSum()) * 100.0f);
+		percentage = newPercentage;
 	}
 
 	return result;
 }
 
-unordered_map<string, int> FabiEngine3D::misc_getRenderProfilingStatistics()
+vector<pair<string, int>> FabiEngine3D::misc_getRenderProfilingStatistics()
 {
 	// Final list of timer IDs
-	std::unordered_map<string, int> result = 
-	{ 
-		std::pair<string, int>("bufferSwap", 0),
-		std::pair<string, int>("waterPreRender", 0),
-		std::pair<string, int>("shadowPreRender", 0),
-		std::pair<string, int>("postProcessing", 0),
-		std::pair<string, int>("skyEntityRender", 0),
-		std::pair<string, int>("terrainEntityRender", 0),
-		std::pair<string, int>("waterEntityRender", 0),
-		std::pair<string, int>("gameEntityRender", 0),
-		std::pair<string, int>("billboardEntityRender", 0),
-		std::pair<string, int>("guiEntityRender", 0)
-	};
-
-	// Total list of timer IDs
-	vector<string> IDs =
+	vector<pair<string, int>> result =
 	{
-		"reflectionPreRender", "refractionPreRender", "shadowPreRender", "sceneDepthPreRender", 
-		"skyEntityRender", "terrainEntityRender", "waterEntityRender", "gameEntityRender", "billboardEntityRender", "aabbEntityRender", 
-		"antiAliasing", "postProcessing", "guiEntityRender", "textEntityRender", "bufferSwap"
+		pair<string, int>("reflectionPreRender", 0),
+		pair<string, int>("refractionPreRender", 0),
+		pair<string, int>("shadowPreRender", 0),
+		pair<string, int>("depthPreRender", 0),
+		pair<string, int>("skyEntityRender", 0),
+		pair<string, int>("terrainEntityRender", 0),
+		pair<string, int>("waterEntityRender", 0),
+		pair<string, int>("gameEntityRender", 0),
+		pair<string, int>("billboardEntityRender", 0),
+		pair<string, int>("aabbEntityRender", 0),
+		pair<string, int>("guiTextEntityRender", 0),
+		pair<string, int>("postProcessing", 0),
+		pair<string, int>("bufferSwap", 0)
 	};
 	
 	// Calculate percentages
-	for (auto& ID : IDs)
+	for (auto& [ID, percentage] : result)
 	{
-		int percentage = static_cast<int>((_core->_timer.getDeltaPart(ID) / _core->_timer.getDeltaPartSum()) * 100.0f);
-
-		if (ID == "reflectionPreRender")
-		{
-			result["waterPreRender"] += percentage;
-		}
-		else if (ID == "refractionPreRender")
-		{
-			result["waterPreRender"] += percentage;
-		}
-		else if (ID == "sceneDepthPreRender")
-		{
-			// Determine if depth rendering being used by water or post-processing
-			if (_core->_renderBus.isDofEnabled() || _core->_renderBus.isLensFlareEnabled())
-			{
-				result["postProcessing"] += percentage;
-			}
-			else
-			{
-				result["waterPreRender"] += percentage;
-			}
-		}
-		else if (ID == "antiAliasing")
-		{
-			result["postProcessing"] += percentage;
-		}
-		else if (ID == "textEntityRender")
-		{
-			result["guiEntityRender"] += percentage;
-		}
-		else if (ID == "aabbEntityRender")
-		{
-			result["gameEntityRender"] += percentage;
-		}
-		else
-		{
-			result[ID] += percentage;
-		}
+		int newPercentage = static_cast<int>((_core->_timer.getDeltaPart(ID) / _core->_timer.getDeltaPartSum()) * 100.0f);
+		percentage = newPercentage;
 	}
 
 	return result;

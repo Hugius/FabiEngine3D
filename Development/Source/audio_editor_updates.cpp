@@ -34,17 +34,17 @@ void AudioEditor::_updateMainMenu()
 				{
 					_isChoosingAudio = true;
 					_isEditingAudio = true;
-					for (auto& name : _audioIDs) { name = name.substr(1); }
-					_gui.getGlobalScreen()->addChoiceForm("audioList", "Select audio", Vec2(-0.4f, 0.1f), _audioIDs);
-					for (auto& name : _audioIDs) { name = "@" + name; }
+					auto IDs = getLoadedAudioIDs();
+					for (auto& name : IDs) { name = name.substr(1); }
+					_gui.getGlobalScreen()->addChoiceForm("audioList", "Select audio", Vec2(-0.4f, 0.1f), IDs);
 				}
 				else if (screen->getButton("deleteAudio")->isHovered()) // Delete audio button
 				{
 					_isChoosingAudio = true;
 					_isRemovingAudio = true;
-					for (auto& name : _audioIDs) { name = name.substr(1); }
-					_gui.getGlobalScreen()->addChoiceForm("audioList", "Select audio", Vec2(-0.4f, 0.1f), _audioIDs);
-					for (auto& name : _audioIDs) { name = "@" + name; }
+					auto IDs = getLoadedAudioIDs();
+					for (auto& name : IDs) { name = name.substr(1); }
+					_gui.getGlobalScreen()->addChoiceForm("audioList", "Select audio", Vec2(-0.4f, 0.1f), IDs);
 				}
 			}
 
@@ -85,14 +85,14 @@ void AudioEditor::_updateAudioCreation()
 						newAudioName = "@" + newAudioName;
 
 						// Check if name already exists
-						if (std::find(_audioIDs.begin(), _audioIDs.end(), newAudioName) == _audioIDs.end()) // If name not existing yet
+						if (std::find(_loadedAudioIDs.begin(), _loadedAudioIDs.end(), newAudioName) == _loadedAudioIDs.end()) // If name not existing yet
 						{
 							// Go to editor
 							_gui.getViewport("left")->getWindow("main")->setActiveScreen("audioEditorMenuChoice");
 
 							// Select audio
 							_currentAudioID = newAudioName;
-							_audioIDs.push_back(newAudioName);
+							_loadedAudioIDs.push_back(newAudioName);
 
 							// Miscellaneous
 							_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedAudioName")->getEntityID(), "Audio: " +
@@ -182,7 +182,7 @@ void AudioEditor::_updateAudioRemoval()
 				}
 
 				// Miscellaneous
-				_audioIDs.erase(std::remove(_audioIDs.begin(), _audioIDs.end(), _currentAudioID), _audioIDs.end());
+				_loadedAudioIDs.erase(std::remove(_loadedAudioIDs.begin(), _loadedAudioIDs.end(), _currentAudioID), _loadedAudioIDs.end());
 				_currentAudioID = "";
 				_gui.getGlobalScreen()->removeAnswerForm("removeAudio");
 				_isRemovingAudio = false;

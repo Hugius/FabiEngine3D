@@ -37,10 +37,10 @@ void EnvironmentEditor::_updateTerrainCreation()
 						newTerrainName = "@" + newTerrainName;
 
 						// If terrain name not existing yet
-						if (std::find(_terrainIDs.begin(), _terrainIDs.end(), newTerrainName) == _terrainIDs.end())
+						if (std::find(_loadedTerrainIDs.begin(), _loadedTerrainIDs.end(), newTerrainName) == _loadedTerrainIDs.end())
 						{
 							_currentTerrainID = newTerrainName;
-							_terrainIDs.push_back(_currentTerrainID);
+							_loadedTerrainIDs.push_back(_currentTerrainID);
 							_gui.getViewport("left")->getWindow("main")->setActiveScreen("terrainEditorMenuChoice");
 							_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedTerrainName")->getEntityID(),
 								"Terrain: " + _currentTerrainID.substr(1), 0.025f);
@@ -158,7 +158,7 @@ void EnvironmentEditor::_updateTerrainRemoval()
 				_fe3d.terrainEntity_delete(_currentTerrainID);
 
 				// Delete from name record
-				_terrainIDs.erase(std::remove(_terrainIDs.begin(), _terrainIDs.end(), _currentTerrainID), _terrainIDs.end());
+				_loadedTerrainIDs.erase(std::remove(_loadedTerrainIDs.begin(), _loadedTerrainIDs.end(), _currentTerrainID), _loadedTerrainIDs.end());
 				_terrainRemovalEnabled = false;
 				_currentTerrainID = "";
 			}

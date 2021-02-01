@@ -37,10 +37,10 @@ void EnvironmentEditor::_updateWaterCreation()
 						newWaterName = "@" + newWaterName;
 
 						// If water name not existing yet
-						if (std::find(_waterIDs.begin(), _waterIDs.end(), newWaterName) == _waterIDs.end())
+						if (std::find(_loadedWaterIDs.begin(), _loadedWaterIDs.end(), newWaterName) == _loadedWaterIDs.end())
 						{
 							_currentWaterID = newWaterName;
-							_waterIDs.push_back(_currentWaterID);
+							_loadedWaterIDs.push_back(_currentWaterID);
 							_fe3d.waterEntity_add(_currentWaterID);
 							_fe3d.waterEntity_select(_currentWaterID);
 							_gui.getViewport("left")->getWindow("main")->setActiveScreen("waterEditorMenuChoice");
@@ -153,7 +153,7 @@ void EnvironmentEditor::_updateWaterRemoval()
 				_fe3d.waterEntity_delete(_currentWaterID);
 
 				// Delete from name record
-				_waterIDs.erase(std::remove(_waterIDs.begin(), _waterIDs.end(), _currentWaterID), _waterIDs.end());
+				_loadedWaterIDs.erase(std::remove(_loadedWaterIDs.begin(), _loadedWaterIDs.end(), _currentWaterID), _loadedWaterIDs.end());
 				_waterRemovalEnabled = false;
 				_currentWaterID = "";
 			}

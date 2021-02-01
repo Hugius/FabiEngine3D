@@ -20,7 +20,7 @@ public:
 	bool isLoaded();
 
 	const vector<string> getAllAudioPathsFromFile();
-	const vector<string>& getAudioNames();
+	const vector<string>& getLoadedAudioIDs();
 
 private:
 	void _updateMainMenu();
@@ -35,7 +35,7 @@ private:
 	EngineGuiManager& _gui;
 
 	// Audio
-	vector<string> _audioIDs;
+	vector<string> _loadedAudioIDs;
 	string _currentAudioID = "";
 	string _hoveredAudioID = "";
 	bool _isCreatingAudio = false;

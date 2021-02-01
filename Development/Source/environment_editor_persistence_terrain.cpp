@@ -117,7 +117,7 @@ void EnvironmentEditor::loadTerrainEntitiesFromFile()
 	}
 
 	// Clear names list from previous loads
-	_terrainIDs.clear();
+	_loadedTerrainIDs.clear();
 
 	// Compose full terrain file path
 	string filePath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectID + "\\data\\terrain.fe3d";
@@ -191,7 +191,7 @@ void EnvironmentEditor::loadTerrainEntitiesFromFile()
 			std::replace(blendMapPathB.begin(), blendMapPathB.end(), '?', ' ');
 
 			// Add new terrain entity
-			_terrainIDs.push_back(terrainID);
+			_loadedTerrainIDs.push_back(terrainID);
 			if (heightMapPath != "")
 			{
 				_fe3d.terrainEntity_add(terrainID, heightMapPath);
@@ -235,7 +235,7 @@ void EnvironmentEditor::loadTerrainEntitiesFromFile()
 
 void EnvironmentEditor::unloadTerrainEntities()
 {
-	for (auto& name : _terrainIDs)
+	for (auto& name : _loadedTerrainIDs)
 	{
 		_fe3d.terrainEntity_delete(name);
 	}
@@ -258,7 +258,7 @@ void EnvironmentEditor::saveTerrainEntitiesToFile()
 		std::ofstream file(filePath);
 			
 		// Write every terrain to file
-		for (auto& terrainID : _terrainIDs)
+		for (auto& terrainID : _loadedTerrainIDs)
 		{
 			// Values
 			string heightMapPath = _fe3d.terrainEntity_getHeightMapPath(terrainID);
@@ -343,4 +343,10 @@ void EnvironmentEditor::saveTerrainEntitiesToFile()
 		// Logging
 		_fe3d.logger_throwInfo("Terrain data from project \"" + _currentProjectID + "\" saved!");
 	}
+}
+
+const vector<string>& EnvironmentEditor::getLoadedTerrainIDs()
+{
+	std::sort(_loadedTerrainIDs.begin(), _loadedTerrainIDs.end());
+	return _loadedTerrainIDs;
 }

@@ -254,9 +254,10 @@ const vector<string>& ModelEditor::getAllMeshFileNames()
 	return _meshFileNames;
 }
 
-const vector<string>& ModelEditor::getModelNames()
+const vector<string>& ModelEditor::getLoadedModelIDs()
 {
-	return _modelIDs;
+	std::sort(_loadedModelIDs.begin(), _loadedModelIDs.end());
+	return _loadedModelIDs;
 }
 
 bool ModelEditor::_addModel(const string& modelName, string meshPath, string diffuseMapPath, string lightMapPath, string reflectionMapPath, string normalMapPath,
@@ -265,10 +266,10 @@ bool ModelEditor::_addModel(const string& modelName, string meshPath, string dif
 	vector<string> aabbNames, vector<Vec3> aabbPositions, vector<Vec3> aabbSizes)
 {
 	// If model name not existing yet
-	if (std::find(_modelIDs.begin(), _modelIDs.end(), modelName) == _modelIDs.end())
+	if (std::find(_loadedModelIDs.begin(), _loadedModelIDs.end(), modelName) == _loadedModelIDs.end())
 	{
 		// Add model name
-		_modelIDs.push_back(modelName);
+		_loadedModelIDs.push_back(modelName);
 
 		// Add 3D model
 		if (meshPath != "")

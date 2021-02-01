@@ -132,7 +132,7 @@ void SceneEditor::_updateModelEditing()
 					else if (rightWindow->getScreen("modelPropertiesMenu")->getButton("animation")->isHovered()) // Animation button
 					{
 						_gui.getGlobalScreen()->addChoiceForm("animations", "Select animation", Vec2(0.0f, 0.1f),
-							_animationEditor.getAllAnimationNames());
+							_animationEditor.getLoadedAnimationIDs());
 					}
 				}
 

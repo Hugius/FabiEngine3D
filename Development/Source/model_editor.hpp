@@ -22,7 +22,7 @@ public:
 
 	const vector<string> getAllTexturePathsFromFile();
 	const vector<string>& getAllMeshFileNames();
-	const vector<string>& getModelNames();
+	const vector<string>& getLoadedModelIDs();
 
 private:
 	bool _addModel(const string& modelName, string meshPath, string diffuseMapPath, string lightMapPath, string reflectionMapPath, string normalMapPath,
@@ -57,7 +57,7 @@ private:
 	string _currentAabbID = "";
 	string _currentProjectID = "";
 	string _hoveredModelID = "";
-	vector<string> _modelIDs;
+	vector<string> _loadedModelIDs;
 	vector<string> _meshFileNames;
 
 	// Vectors

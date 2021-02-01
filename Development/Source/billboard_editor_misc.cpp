@@ -1,5 +1,7 @@
 #include "billboard_editor.hpp"
 
+#include <algorithm>
+
 void BillboardEditor::setCurrentProjectID(const string& projectName)
 {
 	_currentProjectID = projectName;
@@ -10,9 +12,10 @@ bool BillboardEditor::isLoaded()
 	return _isEditorLoaded;
 }
 
-const vector<string>& BillboardEditor::getBillboardNames()
+const vector<string>& BillboardEditor::getLoadedBillboardIDs()
 {
-	return _billboardIDs;
+	std::sort(_loadedBillboardIDs.begin(), _loadedBillboardIDs.end());
+	return _loadedBillboardIDs;
 }
 
 void BillboardEditor::_updateMiscellaneous()

@@ -1,4 +1,4 @@
-27 26
+29 21
 META script_type_update
 
 /// Torch position
@@ -29,6 +29,5 @@ STR currentWorld = fe3d:scene_get_current()
 IF currentWorld IS "home":
     STR signID = fe3d:collision_check_camera_model("sign", "", "")
     IF signID NOT "":
-        EDIT _currentWorld = "starvia_outside"
         fe3d:scene_load("starvia_outside")
         fe3d:camera_set_position(0.0, 9.0, 140.0)

@@ -65,7 +65,7 @@ void SceneEditor::_updateAudioPlacingMenu()
 				else
 				{
 					// Loop over every created audiocaster
-					for (auto& audioName : _audioEditor.getAudioNames())
+					for (auto& audioName : _audioEditor.getLoadedAudioIDs())
 					{
 						// Check if button is hovered
 						if (screen->getScrollingList("audiocasters")->getButton(audioName)->isHovered())

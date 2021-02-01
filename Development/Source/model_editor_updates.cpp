@@ -37,17 +37,17 @@ void ModelEditor::_updateManagementScreen()
 				{
 					_isChoosingModel = true;
 					_isEditingModel = true;
-					for (auto& name : _modelIDs) { name = name.substr(1); }
-					_gui.getGlobalScreen()->addChoiceForm("models", "Select model", Vec2(-0.4f, 0.1f), _modelIDs);
-					for (auto& name : _modelIDs) { name = "@" + name; }
+					auto IDs = getLoadedModelIDs();
+					for (auto& name : IDs) { name = name.substr(1); }
+					_gui.getGlobalScreen()->addChoiceForm("models", "Select model", Vec2(-0.4f, 0.1f), IDs);
 				}
 				else if (screen->getButton("deleteModel")->isHovered()) // Delete model button
 				{
 					_isChoosingModel = true;
 					_isDeletingModel = true;
-					for (auto& name : _modelIDs) { name = name.substr(1); }
-					_gui.getGlobalScreen()->addChoiceForm("models", "Select model", Vec2(-0.4f, 0.1f), _modelIDs);
-					for (auto& name : _modelIDs) { name = "@" + name; }
+					auto IDs = getLoadedModelIDs();
+					for (auto& name : IDs) { name = name.substr(1); }
+					_gui.getGlobalScreen()->addChoiceForm("models", "Select model", Vec2(-0.4f, 0.1f), IDs);
 				}
 			}
 
@@ -304,7 +304,7 @@ void ModelEditor::_updateModelRemoval()
 				}
 
 				// Delete from name record
-				_modelIDs.erase(std::remove(_modelIDs.begin(), _modelIDs.end(), _currentModelID), _modelIDs.end());
+				_loadedModelIDs.erase(std::remove(_loadedModelIDs.begin(), _loadedModelIDs.end(), _currentModelID), _loadedModelIDs.end());
 				_isDeletingModel = false;
 				_currentModelID = "";
 			}

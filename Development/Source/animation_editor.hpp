@@ -31,7 +31,7 @@ public:
 	bool isAnimationPlaying(const string& animationID, const string& modelID);
 	bool isAnimationPaused(const string& animationID, const string& modelID);
 	unsigned int getAnimationFrameIndex(const string& animationID, const string& modelID);
-	const vector<string> getAllAnimationNames();
+	const vector<string> getLoadedAnimationIDs();
 	const vector<string> getPlayingAnimationNames();
 	const vector<string> getPlayingAnimationNames(const string& modelID);
 
@@ -49,7 +49,6 @@ private:
 	bool _isAnimationExisting(const string& ID);
 	bool _hasReachedFloat(float first, float second, float speed);
 	bool _comparePartNames(vector<string> first, vector<string> second);
-	vector<string> _getAnimationIDs();
 	shared_ptr<Animation> _getAnimation(const string& ID);
 
 	// Core

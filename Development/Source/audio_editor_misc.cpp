@@ -1,5 +1,7 @@
 #include "audio_editor.hpp"
 
+#include <algorithm>
+
 void AudioEditor::setCurrentProjectID(const string& projectName)
 {
 	_currentProjectID = projectName;
@@ -10,9 +12,10 @@ bool AudioEditor::isLoaded()
 	return _isEditorLoaded;
 }
 
-const vector<string>& AudioEditor::getAudioNames()
+const vector<string>& AudioEditor::getLoadedAudioIDs()
 {
-	return _audioIDs;
+	std::sort(_loadedAudioIDs.begin(), _loadedAudioIDs.end());
+	return _loadedAudioIDs;
 }
 
 void AudioEditor::_updateMiscellaneous()

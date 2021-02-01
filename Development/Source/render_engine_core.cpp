@@ -104,7 +104,7 @@ void RenderEngine::renderScene(EntityBus * entityBus, CameraManager& camera)
 		_timer.start("shadowPreRender");
 		_captureShadows();
 		_timer.stop();
-		_timer.start("sceneDepthPreRender");
+		_timer.start("depthPreRender");
 		_captureSceneDepth();
 		_timer.stop();
 
@@ -142,7 +142,7 @@ void RenderEngine::renderScene(EntityBus * entityBus, CameraManager& camera)
 		_renderBus.setTriangleCountingEnabled(false);
 
 		// Unbind screen framebuffer
-		_timer.start("antiAliasing");
+		_timer.start("postProcessing");
 		if (_renderBus.isMsaaEnabled())
 		{
 			_msaaFramebuffer.processAAData(&_aaProcessorFramebuffer);
@@ -156,10 +156,8 @@ void RenderEngine::renderScene(EntityBus * entityBus, CameraManager& camera)
 			_finalSurface->setTexture(_screenFramebuffer.getTexture(0));
 			_renderBus.setSceneMap(_screenFramebuffer.getTexture(0));
 		}
-		_timer.stop();
 
 		// Postprocessing captures
-		_timer.start("postProcessing");
 		_captureBloom();
 		_captureDofBlur();
 		_captureLensFlare();
@@ -186,19 +184,17 @@ void RenderEngine::renderScene(EntityBus * entityBus, CameraManager& camera)
 		_timer.stop();
 
 		// Render GUI entities
+		_timer.start("guiTextEntityRender");
 		_renderBus.setTriangleCountingEnabled(true);
-		_timer.start("guiEntityRender");
 		_renderGuiEntities();
-		_timer.stop();
 
 		// Render text entities
-		_timer.start("textEntityRender");
 		_renderTextEntities();
-		_timer.stop();
 
 		// Render custom cursor entity
 		_renderCustomCursor();
 		_renderBus.setTriangleCountingEnabled(false);
+		_timer.stop();
 
 		// Update reflection priorities
 		_renderBus.setSceneReflectionsEnabled(sceneReflectionsEnabled);

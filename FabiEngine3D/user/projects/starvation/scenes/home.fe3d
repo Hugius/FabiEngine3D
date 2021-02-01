@@ -23,6 +23,10 @@ MODEL 321853209@mushroom2 -19.3625 -4.76837e-07 -32.1728 0 0 0 1.25 1.25 1.25 us
 MODEL 1570025429@tree6 28.2266 2.05883 -39.4525 0 0 0 2.2 2.2 2.2 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
 MODEL 587243467@shrub -21.6362 0.294117 26.7956 0 0 0 5 5 5 user\assets\models\foliage\shrub.obj ? ? ? ? 0 0 1 1 0 1 1 1 0.4 1 1 1 1 ? 0 ? shrub 0 0 0 1 0.88 1
 MODEL 2102846300@stone3 -54.2004 0.294118 -3.77543 0 0 0 2 2 2 user\assets\models\stones\stone3.obj user\assets\textures\diffuse_maps\stones\stone3.png ? ? ? 0 0 1 0 0 1 1 1 0.6 1 1 1 1 ? 0 ? stone -0.05 0 0.1 2.65 1.36 2.6
+MODEL 1662689722@tree6 -45.0713 -5.72205e-05 -4.42151 0 0 0 1.25 1 1.25 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
+MODEL 173200293@tree7 -53.6749 7.94117 25.7141 0 0 0 4.5 4.5 4.5 user\assets\models\trees\tree7.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0.03 0 -0.01 0.15 1.2 0.15 leaves 0 1.18 0 2.24 3.95 2.37
+MODEL 1183066027@tree6 -11.2029 2.35294 38.8723 0 0 0 1.25 1 1.25 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
+MODEL 880712551@stone1 -44.5305 0.294117 -11.2688 0 0 0 3 3 3 user\assets\models\stones\stone1.obj user\assets\textures\diffuse_maps\stones\stone1.png ? ? ? 0 0 1 0 0 0 1 1 1 1 1 1 1 ? 0 ? stone 0 0 -0.09 1.21 0.95 1.39
 MODEL 511875590@mushroom1 33.3081 0.882353 -30.8286 0 0 0 1 1 1 user\assets\models\foliage\mushroom1.obj user\assets\textures\diffuse_maps\foliage\mushroom1.png ? ? ? 0 0 1 0 0 0 1 1 1 1 1 1 1 ? 0 ? mushroom 0 0 0 1.7 1.6 1.7
 MODEL 707489367@tree6 39.0776 -7.62939e-06 3.40843 0 0 0 1.6 1.6 1.6 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
 MODEL 1253950462@stone4 43.6253 -2.38419e-07 -0.687203 0 0 0 2.5 2.5 2.5 user\assets\models\stones\stone4.obj user\assets\textures\diffuse_maps\stones\stone4.png ? ? ? 0 0 1 0 0 1 1 1 1 1 1 1 1 ? 0 ? stone 0.15 0 -0.05 1.75 0.72 1.15
@@ -70,7 +74,6 @@ MODEL 1217954973@tree6 37.3273 0.294121 12.5867 0 0 0 1.25 1 1.25 user\assets\mo
 MODEL 1610282857@tree6 5.33137 0.294121 29.5998 0 0 0 1.2 1.2 1.2 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? leaves 0 8.8 0 3.85 8.30001 3.6 trunk 0 0 0 0.85 8.80001 0.8
 MODEL 1417977669@tree6 -16.6685 0.588234 30.3265 0 0 0 1.8 1.8 1.8 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? leaves 0 8.8 0 3.85 8.30001 3.6 trunk 0 0 0 0.85 8.80001 0.8
 MODEL 177173647@tree6 -33.766 0.294117 19.19 0 0 0 1.25 1 1.25 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? leaves 0 8.8 0 3.85 8.30001 3.6 trunk 0 0 0 0.85 8.80001 0.8
-MODEL 1662689722@tree6 -45.0713 -5.72205e-05 -4.42151 0 0 0 1.25 1 1.25 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
 MODEL 339333190@tree6 -41.7126 0.294121 -25.0762 0 0 0 2 2 2 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
 MODEL 1823446254@tree6 -10.1515 -3.8147e-06 16.7898 0 0 0 1.25 1 1.25 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
 MODEL 890069053@tree7 11.589 2.64706 42.6321 0 0 0 6 6 6 user\assets\models\trees\tree7.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0.03 0 -0.01 0.15 1.2 0.15 leaves 0 1.18 0 2.24 3.95 2.37
@@ -90,8 +93,6 @@ MODEL 978068931@tree6 -7.51928 0.294117 -38.7708 0 0 0 1.25 1 1.25 user\assets\m
 MODEL 1486877800@tree6 11.443 -3.8147e-06 -7.90298 0 0 0 1.25 1 1.25 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
 MODEL 1489823662@tree6 -1.30645 -3.8147e-06 27.3626 0 0 0 1.25 1 1.25 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? leaves 0 8.8 0 3.85 8.30001 3.6 trunk 0 0 0 0.85 8.80001 0.8
 MODEL 324781149@tree6 2.85004 -3.8147e-06 36.3789 0 0 0 1.25 1 1.25 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
-MODEL 173200293@tree7 -53.6749 7.94117 25.7141 0 0 0 4.5 4.5 4.5 user\assets\models\trees\tree7.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0.03 0 -0.01 0.15 1.2 0.15 leaves 0 1.18 0 2.24 3.95 2.37
-MODEL 1183066027@tree6 -11.2029 2.35294 38.8723 0 0 0 1.25 1 1.25 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
 MODEL 1880146031@tree6 39.9034 1.47059 32.1295 0 0 0 1.25 1 1.25 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? leaves 0 8.8 0 3.85 8.30001 3.6 trunk 0 0 0 0.85 8.80001 0.8
 MODEL 1458955817@tree6 2.76503 -3.8147e-06 8.7074 0 0 0 1.25 1 1.25 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
 MODEL 1160437276@tree6 12.7681 2.64706 -53.7435 0 0 0 1.25 1 1.25 user\assets\models\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? leaves 0 8.8 0 3.85 8.30001 3.6 trunk 0 0 0 0.85 8.80001 0.8
@@ -107,7 +108,7 @@ MODEL 1077438560@tree7 -15.6227 -1.90735e-06 -32.408 0 0 0 4.5 4.5 4.5 user\asse
 MODEL 1333744087@tree7 -61.4916 2.44118 -23.4361 0 0 0 4.5 4.5 4.5 user\assets\models\trees\tree7.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0.03 0 -0.01 0.15 1.2 0.15 leaves 0 1.18 0 2.24 3.95 2.37
 MODEL 1044170430@tree7 6.41463 -1.90735e-06 -16.0264 0 0 0 4.5 4.5 4.5 user\assets\models\trees\tree7.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? leaves 0 1.18 0 2.24 3.95 2.37 trunk 0.03 0 -0.01 0.15 1.2 0.15
 MODEL 1891433262@tree7 22.137 0.588238 26.5143 0 0 0 4.5 4.5 4.5 user\assets\models\trees\tree7.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0.03 0 -0.01 0.15 1.2 0.15 leaves 0 1.18 0 2.24 3.95 2.37
-MODEL 187829369@tree7 -5.18801 0.294117 33.9905 0 0 0 4.5 4.5 4.5 user\assets\models\trees\tree7.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0.03 0 -0.01 0.15 1.2 0.15 leaves 0 1.18 0 2.24 3.95 2.37
+MODEL 187829369@tree7 -5.18801 0.294117 33.9905 0 0 0 4.5 4.5 4.5 user\assets\models\trees\tree7.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? leaves 0 1.18 0 2.24 3.95 2.37 trunk 0.03 0 -0.01 0.15 1.2 0.15
 MODEL 353712442@tree7 -62.8669 2.64706 3.19224 0 0 0 4.5 4.5 4.5 user\assets\models\trees\tree7.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0.03 0 -0.01 0.15 1.2 0.15 leaves 0 1.18 0 2.24 3.95 2.37
 MODEL 2128824985@tree7 18.7485 -1.90735e-06 -1.013 0 0 0 4.5 4.5 4.5 user\assets\models\trees\tree7.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? leaves 0 1.18 0 2.24 3.95 2.37 trunk 0.03 0 -0.01 0.15 1.2 0.15
 MODEL 573362308@tree7 7.42749 -7.62939e-06 18.0775 0 0 0 4.5 4.5 4.5 user\assets\models\trees\tree7.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? leaves 0 1.18 0 2.24 3.95 2.37 trunk 0.03 0 -0.01 0.15 1.2 0.15
@@ -141,12 +142,10 @@ MODEL 1125296495@stone1 19.9728 -9.53674e-07 -25.7152 0 0 0 3 3 3 user\assets\mo
 MODEL 236357525@log4 -17.0273 -1.90735e-06 -3.63433 0 0 0 0.8 0.8 0.8 user\assets\models\misc\log4.obj user\assets\textures\diffuse_maps\misc\log4.png ? ? user\assets\textures\normal_maps\misc\log4.png 0 0 1 0 0 1 4 1 0.8 1 1 1 1 ? 0 ? log -0.1 0 0.4 6.2 3.1 4.4
 MODEL 1064351895@mushroom1 -13.3696 2.64706 -57.431 0 0 0 1 1 1 user\assets\models\foliage\mushroom1.obj user\assets\textures\diffuse_maps\foliage\mushroom1.png ? ? ? 0 0 1 0 0 0 1 1 1 1 1 1 1 ? 0 ? mushroom 0 0 0 1.7 1.6 1.7
 MODEL 152487784@stones -18.2675 -4.76837e-07 -7.86916 0 0 0 0.75 0.75 0.75 user\assets\models\stones\stones.obj user\assets\textures\diffuse_maps\stones\stones.png ? ? ? 0 0 1 0 0 0 1 1 1 1 1 1 1 ? 0 ? stones 0.4 0 0.2 5.1 1.3 5.5
-MODEL 1521107280@sign 40.3452 2.05882 34.3263 0 -90 0 0.6 0.75 0.75 user\assets\models\misc\sign.obj user\assets\textures\diffuse_maps\misc\sign.png ? ? user\assets\textures\normal_maps\misc\sign.png 0 0 0 0 0 1 1 1 0.7 1 1 1 1 ? 0 ? sign 0 0 0.02 1.5 4 0.4
 MODEL 1823332911@stone1 16.9513 -9.53674e-07 5.06405 0 0 0 3 3 3 user\assets\models\stones\stone1.obj user\assets\textures\diffuse_maps\stones\stone1.png ? ? ? 0 0 1 0 0 0 1 1 1 1 1 1 1 ? 0 ? stone 0 0 -0.09 1.21 0.95 1.39
 MODEL 1700483967@shrub 21.3298 -4.76837e-07 -6.03109 0 0 0 5 5 5 user\assets\models\foliage\shrub.obj ? ? ? ? 0 0 1 1 0 1 1 1 0.4 1 1 1 1 ? 0 ? shrub 0 0 0 1 0.88 1
 MODEL 765749193@stone1 -21.9734 4.76837e-07 -36.221 0 0 0 3 3 3 user\assets\models\stones\stone1.obj user\assets\textures\diffuse_maps\stones\stone1.png ? ? ? 0 0 1 0 0 0 1 1 1 1 1 1 1 ? 0 ? stone 0 0 -0.09 1.21 0.95 1.39
 MODEL 757173510@flower -6.31148 -1.43051e-06 20.9087 0 0 0 4.5 5 4.5 user\assets\models\foliage\flower.obj user\assets\textures\diffuse_maps\foliage\flower.png ? ? ? 0 0 1 0 0 0 1 1 1 1 1 1 1 ? 0 ? plant 0.02 0 -3.72529e-09 0.54 0.34 0.3
-MODEL 880712551@stone1 -44.5305 0.294117 -11.2688 0 0 0 3 3 3 user\assets\models\stones\stone1.obj user\assets\textures\diffuse_maps\stones\stone1.png ? ? ? 0 0 1 0 0 0 1 1 1 1 1 1 1 ? 0 ? stone 0 0 -0.09 1.21 0.95 1.39
 MODEL 140480257@stone3 -32.817 -4.76837e-07 -25.1086 0 0 0 2 2 2 user\assets\models\stones\stone3.obj user\assets\textures\diffuse_maps\stones\stone3.png ? ? ? 0 0 1 0 0 1 1 1 0.6 1 1 1 1 ? 0 ? stone -0.05 0 0.1 2.65 1.36 2.6
 MODEL 1778521057@stone1 -36.9653 -4.76837e-07 8.57643 0 0 0 3 3 3 user\assets\models\stones\stone1.obj user\assets\textures\diffuse_maps\stones\stone1.png ? ? ? 0 0 1 0 0 0 1 1 1 1 1 1 1 ? 0 ? stone 0 0 -0.09 1.21 0.95 1.39
 MODEL 1289825542@stone1 -14.26 0.289007 23.28 0 0 0 3 3 3 user\assets\models\stones\stone1.obj user\assets\textures\diffuse_maps\stones\stone1.png ? ? ? 0 0 1 0 0 0 1 1 1 1 1 1 1 ? 0 ? stone 0 0 -0.09 1.21 0.95 1.39
@@ -188,13 +187,14 @@ MODEL 504837532@shrub -39.9258 0.588235 -17.4042 0 0 0 5 5 5 user\assets\models\
 MODEL 1309215713@shrub -5.60338 -5.72205e-06 27.0866 0 0 0 5 5 5 user\assets\models\foliage\shrub.obj ? ? ? ? 0 0 1 1 0 1 1 1 0.4 1 1 1 1 ? 0 ? shrub 0 0 0 1 0.88 1
 MODEL 1363215455@shrub -23.8792 -9.53674e-07 -26.2553 0 0 0 5 5 5 user\assets\models\foliage\shrub.obj ? ? ? ? 0 0 1 1 0 1 1 1 0.4 1 1 1 1 ? 0 ? shrub 0 0 0 1 0.88 1
 MODEL 896383171@claypile -13.2594 -4.76837e-07 -13.9285 0 90 0 0.75 0.5 0.75 user\assets\models\foliage\claypile.obj user\assets\textures\diffuse_maps\foliage\claypile.png ? ? user\assets\textures\normal_maps\foliage\claypile.png 0 0 1 0 0 1 1 1.5 0.4 1 1 1 1 ? 0 ? claypile -0.1 0 0.2 8.59999 2.5 9.39999
+MODEL 1305995499@sign 47.4416 3.82353 36.2023 0 -90 0 0.6 0.75 0.75 user\assets\models\misc\sign.obj user\assets\textures\diffuse_maps\misc\sign.png ? ? user\assets\textures\normal_maps\misc\sign.png 0 0 1 0 0 1 1 1 0.5 1 1 1 1 ? 0 ? sign 0 0 0.07 2.7 4 0.65
 AMBIENT_LIGHT 1 1 1 0.75
 DIRECTIONAL_LIGHT 1000 1000 1000 1 1 1 1 150 100
 LOD_DISTANCE 1000
 EDITOR_SPEED 7
-EDITOR_POSITION -6.42731 5.1017 -12.4683
-EDITOR_YAW 186.398
-EDITOR_PITCH -63.4001
+EDITOR_POSITION 45.5371 6.2217 36.4121
+EDITOR_YAW 1.27808
+EDITOR_PITCH -16.5601
 GRAPHICS_SHADOWS 1 125 60.000000 60.000000 60.000000 0.000000 0.000000 0.000000 0 100
 GRAPHICS_MOTIONBLUR 1 0.25
 GRAPHICS_DOF 1 1 5 2

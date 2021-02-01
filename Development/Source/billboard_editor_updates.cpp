@@ -37,17 +37,17 @@ void BillboardEditor::_updateBillboardManagement()
 				{
 					_isChoosingBillboard = true;
 					_isEditingBillboard = true;
-					for (auto& name : _billboardIDs) { name = name.substr(1); }
-					_gui.getGlobalScreen()->addChoiceForm("billboards", "Select billboard", Vec2(-0.4f, 0.1f), _billboardIDs);
-					for (auto& name : _billboardIDs) { name = "@" + name; }
+					auto IDs = getLoadedBillboardIDs();
+					for (auto& name : IDs) { name = name.substr(1); }
+					_gui.getGlobalScreen()->addChoiceForm("billboards", "Select billboard", Vec2(-0.4f, 0.1f), IDs);
 				}
 				else if (screen->getButton("deleteBillboard")->isHovered()) // Delete billboard button
 				{
 					_isChoosingBillboard = true;
 					_isRemovingBillboard = true;
-					for (auto& name : _billboardIDs) { name = name.substr(1); }
-					_gui.getGlobalScreen()->addChoiceForm("billboards", "Select billboard", Vec2(-0.4f, 0.1f), _billboardIDs);
-					for (auto& name : _billboardIDs) { name = "@" + name; }
+					auto IDs = getLoadedBillboardIDs();
+					for (auto& name : IDs) { name = name.substr(1); }
+					_gui.getGlobalScreen()->addChoiceForm("billboards", "Select billboard", Vec2(-0.4f, 0.1f), IDs);
 				}
 			}
 
@@ -88,14 +88,14 @@ void BillboardEditor::_updateBillboardCreation()
 						newBillboardName = "@" + newBillboardName;
 
 						// Check if name already exists
-						if (std::find(_billboardIDs.begin(), _billboardIDs.end(), newBillboardName) == _billboardIDs.end()) // If name not existing yet
+						if (std::find(_loadedBillboardIDs.begin(), _loadedBillboardIDs.end(), newBillboardName) == _loadedBillboardIDs.end()) // If name not existing yet
 						{
 							// Go to editor
 							_gui.getViewport("left")->getWindow("main")->setActiveScreen("billboardEditorMenuChoice");
 
 							// Select billboard
 							_currentBillboardID = newBillboardName;
-							_billboardIDs.push_back(newBillboardName);
+							_loadedBillboardIDs.push_back(newBillboardName);
 
 							// Miscellaneous
 							_fe3d.billboardEntity_add(newBillboardName, Vec3(1.0f), _billboardPosition, Vec3(0.0f), Vec2(1.0f), false, false);
@@ -204,7 +204,7 @@ void BillboardEditor::_updateBillboardRemoval()
 
 				// Delete billboard
 				_fe3d.billboardEntity_delete(_currentBillboardID);
-				_billboardIDs.erase(std::remove(_billboardIDs.begin(), _billboardIDs.end(), _currentBillboardID), _billboardIDs.end());
+				_loadedBillboardIDs.erase(std::remove(_loadedBillboardIDs.begin(), _loadedBillboardIDs.end(), _currentBillboardID), _loadedBillboardIDs.end());
 				_currentBillboardID = "";
 
 				// Miscellaneous

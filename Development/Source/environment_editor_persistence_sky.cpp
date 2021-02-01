@@ -74,7 +74,7 @@ void EnvironmentEditor::loadSkyEntitiesFromFile()
 	}
 
 	// Clear names list from previous loads
-	_skyIDs.clear();
+	_loadedSkyIDs.clear();
 
 	// Compose full file path
 	string filePath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectID + "\\data\\sky.fe3d";
@@ -119,7 +119,7 @@ void EnvironmentEditor::loadSkyEntitiesFromFile()
 			}
 
 			// Load entity
-			_skyIDs.push_back(skyID);
+			_loadedSkyIDs.push_back(skyID);
 			_fe3d.skyEntity_add(skyID);
 			_fe3d.skyEntity_setDiffuseMaps(skyID, diffuseMapPaths);
 			_fe3d.skyEntity_setLightness(skyID, lightness);
@@ -141,7 +141,7 @@ void EnvironmentEditor::loadSkyEntitiesFromFile()
 
 void EnvironmentEditor::unloadSkyEntities()
 {
-	for (auto& name : _skyIDs)
+	for (auto& name : _loadedSkyIDs)
 	{
 		_fe3d.skyEntity_delete(name);
 	}
@@ -163,7 +163,7 @@ void EnvironmentEditor::saveSkyEntitiesToFile()
 		std::ofstream file(filePath);
 
 		// Write every sky to file
-		for (auto& skyID : _skyIDs)
+		for (auto& skyID : _loadedSkyIDs)
 		{
 			// Values
 			auto diffuseMapPaths = _fe3d.skyEntity_getDiffuseMapPaths(skyID);
@@ -202,4 +202,10 @@ void EnvironmentEditor::saveSkyEntitiesToFile()
 		// Logging
 		_fe3d.logger_throwInfo("Sky data from project \"" + _currentProjectID + "\" saved!");
 	}
+}
+
+const vector<string>& EnvironmentEditor::getLoadedSkyIDs()
+{
+	std::sort(_loadedSkyIDs.begin(), _loadedSkyIDs.end());
+	return _loadedSkyIDs;
 }

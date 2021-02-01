@@ -453,6 +453,12 @@ void SceneEditor::clearScene()
 		}
 	}
 
+	// Hide lightsource billboard
+	if (_fe3d.billboardEntity_isExisting("@@lightSource"))
+	{
+		_fe3d.billboardEntity_hide("@@lightSource");
+	}
+
 	// Delete LIGHT entities
 	for (auto& ID : _loadedLightIDs)
 	{

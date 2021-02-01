@@ -1,0 +1,6 @@
+4 61
+META script_type_init
+
+GLOB BOOL _isBuilding = <false>
+
+GLOB LIST _buildables = ["storage","well2","house2","house5","house6","pen"]

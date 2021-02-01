@@ -1,4 +1,4 @@
-43 48
+44 53
 META script_type_init
 
 /// Globals
@@ -43,7 +43,7 @@ GLOB DEC _temperature = 1.0
 
 /// Player HUD
 fe3d:image_place("scroll_player", "scroll_player.png", -0.85, 0.6, 0.0, 0.3, 0.8)
-fe3d:image_place("player", "player.png", -0.85, 0.75, 0.0, 0.15, 0.25)
+fe3d:image_place("player", "player.png", -0.85, 0.755, 0.0, 0.175, 0.275)
 fe3d:text_place("name", "font.ttf", "Sir Skeletus", -0.85, 0.585, 0.0, 0.175, 0.05)
 fe3d:text_set_color("name", 0.0, 0.0, 0.0)
 fe3d:image_place("health", "health_icon.png", -0.925, 0.5, 0.0, 0.07, 0.09)

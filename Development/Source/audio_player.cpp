@@ -16,7 +16,7 @@ void AudioPlayer::allocateChannels(int count)
 
 	// Initialize audio channels to none
 	_channelMap.clear();
-	for (int i = 0; i < count; i++)
+	for (unsigned int i = 0; i < count; i++)
 	{
 		_channelMap.insert(std::make_pair(i, ""));
 	}

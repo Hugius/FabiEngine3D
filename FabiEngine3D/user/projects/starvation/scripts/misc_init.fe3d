@@ -1,4 +1,4 @@
-32 28
+37 27
 META script_type_init
 
 /// Globals
@@ -22,6 +22,10 @@ fe3d:text_place("pickup", f, "Press F to pickup", 0.0, -0.2, 0.0, 0.35, 0.05)
 fe3d:text_place("mine", f, "Press LMB to mine", 0.0, -0.2, 0.0, 0.35, 0.05)
 fe3d:text_place("cut", f, "Press LMB to cut", 0.0, -0.2, 0.0, 0.35, 0.05)
 fe3d:text_place("dig", f, "Press LMB to dig", 0.0, -0.2, 0.0, 0.35, 0.05)
+fe3d:text_place("plow", f, "Press LMB to plow", 0.0, -0.2, 0.0, 0.35, 0.05)
+fe3d:text_place("reap", f, "Press LMB to reap", 0.0, -0.2, 0.0, 0.35, 0.05)
+fe3d:text_place("build", f, "Press LMB to build", 0.0, -0.2, 0.0, 0.35, 0.05)
+fe3d:text_place("fish", f, "Press LMB to fish", 0.0, -0.2, 0.0, 0.35, 0.05)
 fe3d:text_place("craft", f, "Press E to use workbench", 0.0, -0.2, 0.0, 0.35, 0.05)
 fe3d:text_place("talk", f, "Press E to talk", 0.0, -0.2, 0.0, 0.3, 0.05)
 fe3d:text_place("enter", f, "Press E to enter", 0.0, -0.2, 0.0, 0.3, 0.05)
@@ -29,6 +33,10 @@ fe3d:text_set_visible("pickup", <false>)
 fe3d:text_set_visible("mine", <false>)
 fe3d:text_set_visible("cut", <false>)
 fe3d:text_set_visible("dig", <false>)
+fe3d:text_set_visible("plow", <false>)
+fe3d:text_set_visible("reap", <false>)
+fe3d:text_set_visible("build", <false>)
+fe3d:text_set_visible("fish", <false>)
 fe3d:text_set_visible("craft", <false>)
 fe3d:text_set_visible("talk", <false>)
 fe3d:text_set_visible("enter", <false>)

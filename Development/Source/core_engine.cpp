@@ -128,11 +128,16 @@ void CoreEngine::_setupApplication()
 		text->addOglBuffer(new OpenGLBuffer(-0.6f, 0.5f, 0.3f, 0.075f, true, true));
 		text->setTexture(_textureLoader.getText("Created with", "engine\\fonts\\font.ttf"));
 
+		// Play intro sound effect
+		_audioManager.add2D("intro", "engine\\audio\\intro.wav");
+		_audioPlayer.allocateChannels(1);
+		_audioPlayer.playChunk(_audioManager.getChunk("intro"), 0, 100, false, 0);
+
 		// Render logo (intro fade in)
 		_windowManager.enableVsync();
-		for (float opaqueness = 0.0f; opaqueness < 1.3f; opaqueness += 0.005f)
+		for (float opaqueness = 0.0f; opaqueness < 1.0f; opaqueness += 0.01f)
 		{
-			logo->setColor(Vec3(opaqueness - 0.3f));
+			logo->setColor(Vec3(opaqueness));
 			text->setColor(Vec3(opaqueness));
 			_inputHandler.f_checkInput();
 			_renderEngine.renderEngineLogo(logo, text, Config::getInst().getWindowSize());

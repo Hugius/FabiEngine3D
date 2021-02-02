@@ -372,7 +372,7 @@ bool ScriptInterpreter::_executeFe3dPhysicsFunction(const string& functionName, 
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result));
 		}
 	}
-	else if (functionName == "fe3d:collision_check_model_billboards") // Check if gameEntity AABB collided with any billboardEntity AABB
+	else if (functionName == "fe3d:collision_check_model_billboards") // Check if gameEntity AABB collided with another billboardEntity AABB
 	{
 		auto types =
 		{
@@ -426,7 +426,7 @@ bool ScriptInterpreter::_executeFe3dPhysicsFunction(const string& functionName, 
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result));
 		}
 	}
-	else if (functionName == "fe3d:collision_check_model_aabbs") // Check if gameEntity AABB collided with any AABB
+	else if (functionName == "fe3d:collision_check_model_aabbs") // Check if gameEntity AABB collided with another AABB
 	{
 		auto types =
 		{

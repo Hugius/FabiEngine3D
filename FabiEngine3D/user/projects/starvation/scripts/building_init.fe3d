@@ -1,8 +1,7 @@
-3 41
+21 54
 META script_type_init
 
 /// Globals
-GLOB LIST _buildOffsets = {8.0, 8.5, 11.85, 9.5, 3.5, 5.5}
 GLOB LIST _buildables = {}
 PUSH _buildables "small_house_display"
 PUSH _buildables "medium_house_display"
@@ -10,7 +9,11 @@ PUSH _buildables "big_house_display"
 PUSH _buildables "storage_display"
 PUSH _buildables "well_display"
 PUSH _buildables "pen_display"
+GLOB LIST _buildOffsets = {8.0, 9.25, 11.85, 8.0, 3.5, 6.5}
+GLOB LIST _buildHeights = {7.5, 10.0, 12.5, 5.0, 5.0, 3.0}
+GLOB LIST _buildCounters = {0,0,0,0,0,0}
 GLOB BOOL _isBuilding = <false>
+GLOB DEC _buildRotation = 0.0
 GLOB INT _buildIndex = 0
 GLOB INT _maxBuildIndex = misc:get_list_size("_buildables")
 DECR _maxBuildIndex 1
@@ -18,23 +21,16 @@ DECR _maxBuildIndex 1
 /// Models
 fe3d:model_place("small_house_display", "house14", 0.0, 0.0, 0.0)
 fe3d:model_set_visible("small_house_display", <false>)
-fe3d:model_set_aabb_responsive("small_house_display", <false>)
 fe3d:model_place("medium_house_display", "house2", 0.0, 0.0, 0.0)
 fe3d:model_set_visible("medium_house_display", <false>)
-fe3d:model_set_aabb_responsive("medium_house_display", <false>)
 fe3d:model_place("big_house_display", "house13", 0.0, 0.0, 0.0)
 fe3d:model_set_visible("big_house_display", <false>)
-fe3d:model_set_aabb_responsive("big_house_display", <false>)
 fe3d:model_place("storage_display", "storage", 0.0, 0.0, 0.0)
 fe3d:model_set_visible("storage_display", <false>)
-fe3d:model_set_rotation("storage_display", 0.0, 90.0, 0.0)
-fe3d:model_set_aabb_responsive("storage_display", <false>)
 fe3d:model_place("well_display", "well2", 0.0, 0.0, 0.0)
 fe3d:model_set_visible("well_display", <false>)
-fe3d:model_set_aabb_responsive("well_display", <false>)
 fe3d:model_place("pen_display", "pen", 0.0, 0.0, 0.0)
 fe3d:model_set_visible("pen_display", <false>)
-fe3d:model_set_aabb_responsive("pen_display", <false>)
 VEC3 penSize = fe3d:model_get_size("pen_display")
 MUL penSize.x 0.5
 MUL penSize.z 0.5

@@ -394,7 +394,7 @@ bool FabiEngine3D::collision_checkCameraWithEntity(const string& ID)
 
 const string FabiEngine3D::collision_checkEntityWithEntities(const string& selfID, const string& otherID)
 {
-	// Check if self entity exists
+	// Check if self entity does not exist
 	if (!_core->_aabbEntityManager.isExisting(selfID))
 	{
 		return "";
@@ -423,8 +423,14 @@ const string FabiEngine3D::collision_checkEntityWithEntities(const string& selfI
 				continue;
 			}
 
-			// Don't check own entity & other entity must be responsive and visible
-			if (other->getID() == self->getID() || !other->isResponsive() || !other->isVisible())
+			// Don't check own entity AABB('s)
+			if (other->getParentID() == self->getParentID())
+			{
+				continue;
+			}
+
+			// Other entity must be responsive and visible
+			if (!other->isResponsive() || !other->isVisible())
 			{
 				continue;
 			}

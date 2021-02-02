@@ -189,6 +189,14 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 		ScriptVariable* variableTwo = nullptr;
 		if (vec3PartsTwo != Ivec3(0) || isAccessingListTwo)
 		{
+			// Check if variable exists
+			if (!_isLocalVariableExisting(valueString) && !_isGlobalVariableExisting(valueString))
+			{
+				_throwScriptError("variable \"" + valueString + "\" not found!");
+				return;
+			}
+
+			// Retreve variable
 			variableTwo = &(_isLocalVariableExisting(valueString) ? _getLocalVariable(valueString) : _getGlobalVariable(valueString));
 		}
 

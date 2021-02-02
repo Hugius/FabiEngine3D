@@ -333,6 +333,7 @@ float getShadowValue()
 			vec3 projCoords     = (f_shadowPos.xyz / f_shadowPos.w) * 0.5f + 0.5f;
 			float currentDepth  = projCoords.z;
 			float texelSize     = 1.0f / float(u_shadowMapSize);
+			float bias = 0.00075f;
 
 			// Skip fragments outside of the depth map
 			if (projCoords.z > 1.0f)
@@ -346,15 +347,15 @@ float getShadowValue()
 				for(int y = -1; y <= 1; y++)
 				{
 					float pcfDepth = texture(u_sampler_shadowMap, projCoords.xy + vec2(x, y) * vec2(texelSize)).r; 
-					shadow += (currentDepth - texelSize > pcfDepth) ? 0.5f : 1.0f;        
+					shadow += (currentDepth - bias > pcfDepth) ? 0.5f : 1.0f;        
 				}    
 			}
             
 			// Calculate final shadow value
 			shadow /= 9.0f;
 			
-			// Limit soft shadows
-			if(shadow > 1.55f)
+			// Limit shadows
+			if(shadow > 1.0f)
 			{
 				shadow = 1.0f;
 			}

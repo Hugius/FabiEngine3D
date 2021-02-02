@@ -418,7 +418,6 @@ float getShadowValue()
 				for(int i = 0; i < 4; i++)
 				{
 					// Get random index
-					//int index = int(16.0f*getRandomFloat(floor(f_pos.xyz*1000.0f), i))%16;
 					int index = int(16.0f*getRandomFloat(floor(f_pos.xyz*1000.0f), i))%16;
 
 					// Calculate depth from shadow map
@@ -449,8 +448,8 @@ float getShadowValue()
 			// Calculate final shadow value
 			shadow /= 9.0f;
 
-			// Limit soft shadows
-			if(shadow > 1.55f)
+			// Limit shadows
+			if(shadow > 1.0f)
 			{
 				shadow = 1.0f;
 			}

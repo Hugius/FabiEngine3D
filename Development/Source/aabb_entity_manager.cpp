@@ -83,26 +83,43 @@ void AabbEntityManager::update(
 				auto foundPair = gameEntities.find(entity->getParentID());
 				if(foundPair != gameEntities.end())
 				{
+					// Retrieve parent entity
 					auto parentEntity = foundPair->second;
 
 					// Game entity must not be LODded
 					if (!parentEntity->isLevelOfDetailed())
 					{
-						// Update scaling (based on parent scaling)
-						entity->setScaling(entity->getLocalScaling() * parentEntity->getScaling());
+						// Calculate rotation (based on parent rotation)
+						float rotation = parentEntity->getRotation().y;
 
-						// Update "rotation" (based on parent rotation)
-						if (fabsf(parentEntity->getRotation().y) == 90.0f || fabsf(parentEntity->getRotation().y) == 270.0f)
+						// Update scaling (based on parent scaling & AABB rotation)
+						entity->setScaling(entity->getLocalScaling() * parentEntity->getScaling());
+						Vec3 newScaling = entity->getScaling();
+						if ((fabsf(rotation) > 45.0f && fabsf(rotation) < 135.0f) || (fabsf(rotation) > 225.0f && fabsf(rotation) < 315.0f))
 						{
-							entity->swapScaling(true);
-						}
-						else
-						{
-							entity->swapScaling(false);
+							entity->setScaling(Vec3(newScaling.z, newScaling.y, newScaling.x));
 						}
 
 						// Update translation (based on parent translation + scaling)
-						entity->setTranslation(parentEntity->getTranslation() + (entity->getLocalTranslation() * parentEntity->getScaling()));
+						auto localTranslation = (entity->getLocalTranslation() * parentEntity->getScaling());
+						float roundedRotation = 
+							(rotation > 45.0f && rotation < 135.0f) ? 90.0f : // 90 degrees rounded
+							(rotation >= 135.0f && rotation <= 225.0f) ? 180.0f : // 180 degrees rounded
+							(rotation > 225.0f && rotation < 315.0f) ? 270.0f : // 270 degrees rounded
+							(rotation < -45.0f && rotation > -135.0f) ? -90.0f : // -90 degrees rounded
+							(rotation <= -135.0f && rotation >= -225.0f) ? -180.0f : // -180 degrees rounded
+							(rotation < -225.0f && rotation > -315.0f) ? -270.0f : // -270 degrees rounded
+							0.0f; // No rotation
+						if (roundedRotation != 0.0f)
+						{
+							Matrix44 rotationMatrix = Matrix44::createRotationY(Math::degreesToRadians(roundedRotation));
+							Vec4 result = rotationMatrix * Vec4(localTranslation.x, localTranslation.y, localTranslation.z, 1.0f);
+							entity->setTranslation(parentEntity->getTranslation() + Vec3(result.x, result.y, result.z));
+						}
+						else
+						{
+							entity->setTranslation(parentEntity->getTranslation() + localTranslation);
+						}
 
 						// Update visibility
 						entity->setVisible(parentEntity->isVisible());

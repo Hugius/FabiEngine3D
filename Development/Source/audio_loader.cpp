@@ -56,17 +56,25 @@ void AudioLoader::cacheChunksMultiThreaded(const vector<string>& filePaths)
 			// Retrieve raw WAV data
 			auto data = threads[i].get();
 
-			// Load chunk file
-			auto chunk = _loadChunk(uniqueFilePaths[i], (unsigned char*)data);
-
-			// Check if audio loading went well
-			if (chunk != nullptr)
+			// Check data status
+			if (data == nullptr)
 			{
-				// Logging
-				_throwLog(uniqueFilePaths[i]);
+				Logger::throwWarning("Could not load audio file \"", uniqueFilePaths[i], "\"");
+			}
+			else
+			{
+				// Load chunk file
+				auto chunk = _loadChunk(uniqueFilePaths[i], (unsigned char*)data);
 
-				// Cache model
-				_chunkCache[uniqueFilePaths[i]] = chunk;
+				// Check chunk status
+				if (chunk != nullptr)
+				{
+					// Logging
+					_throwLoadedMessage(uniqueFilePaths[i]);
+
+					// Cache chunk
+					_chunkCache[uniqueFilePaths[i]] = chunk;
+				}
 			}
 		}
 	}
@@ -81,24 +89,32 @@ begin:
 		// Load raw WAV data
 		auto data = _loadWaveFile(filePath);
 
-		// Load chunk file
-		auto chunk = _loadChunk(filePath, (unsigned char*)data);
-
-		// Check chunk status
-		if (chunk == nullptr)
+		// Check data status
+		if (data == nullptr)
 		{
-			return nullptr;
+			Logger::throwWarning("Could not load audio file \"", filePath, "\"");
 		}
 		else
 		{
-			// Logging
-			_throwLog(filePath);
+			// Load chunk file
+			auto chunk = _loadChunk(filePath, (unsigned char*)data);
 
-			// Cache chunk
-			_chunkCache.insert(std::make_pair(filePath, chunk));
+			// Check chunk status
+			if (chunk == nullptr)
+			{
+				return nullptr;
+			}
+			else
+			{
+				// Logging
+				_throwLoadedMessage(filePath);
 
-			// Return cached chunk
-			goto begin;
+				// Cache chunk
+				_chunkCache.insert(std::make_pair(filePath, chunk));
+
+				// Return cached chunk
+				goto begin;
+			}
 		}
 	}
 
@@ -126,7 +142,7 @@ begin:
 		else
 		{
 			// Logging
-			_throwLog(filePath);
+			_throwLoadedMessage(filePath);
 
 			// Cache music
 			_musicCache.insert(std::make_pair(filePath, music));
@@ -174,7 +190,7 @@ Mix_Music* AudioLoader::_loadMusic(const string& filePath)
 	return nullptr;
 }
 
-void AudioLoader::_throwLog(const string& filePath)
+void AudioLoader::_throwLoadedMessage(const string& filePath)
 {
 	auto reversed(filePath); // Copy
 	std::reverse(reversed.begin(), reversed.end()); // Reverse, because . must be last in path
@@ -193,7 +209,7 @@ char* AudioLoader::_loadWaveFile(const std::string& filePath)
 	std::ifstream file(fullFilePath.c_str(), std::ios::binary);
 	if (!file)
 	{
-		Logger::throwWarning("Could not load audio file \"", fullFilePath, "\"");
+		return nullptr;
 	}
 
 	// Go the end of file position

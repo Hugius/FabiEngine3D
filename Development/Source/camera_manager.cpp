@@ -99,11 +99,7 @@ void CameraManager::update(Ivec2 lastCursorPosition)
 	_pitchAcceleration *= 0.75f;
 
 	// Limit yaw
-	if (_yaw < 0.0f)
-	{
-		_yaw = 360.0f - fabsf(_yaw);
-	}
-	_yaw = std::fmod(_yaw, 360.0f);
+	_yaw = std::fmodf(_yaw, 360.0f);
 
 	// Limit pitch
 	_pitch = std::clamp(_pitch, -(_maxPitch - 1.0f), (_maxPitch - 1.0f));
@@ -235,7 +231,7 @@ void CameraManager::setMouseSensitivity(float speed)
 void CameraManager::setYaw(float value)
 {
 	_yaw = value;
-	_yaw = std::fmod(_yaw, 360.0f);
+	_yaw = std::fmodf(_yaw, 360.0f);
 }
 
 void CameraManager::setPitch(float value)

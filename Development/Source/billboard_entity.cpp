@@ -40,6 +40,11 @@ void BillboardEntity::setInitialRotation(Vec3 value)
 void BillboardEntity::setRotation(Vec3 value)
 {
 	_rotation = value;
+
+	// Limit rotation
+	_rotation.x = std::fmodf(_rotation.x, 360.0f);
+	_rotation.y = std::fmodf(_rotation.y, 360.0f);
+	_rotation.z = std::fmodf(_rotation.z, 360.0f);
 }
 
 void BillboardEntity::setScaling(Vec3 value)
@@ -60,6 +65,11 @@ void BillboardEntity::translate(Vec3 value)
 void BillboardEntity::rotate(Vec3 value)
 {
 	_rotation += value;
+
+	// Limit rotation
+	_rotation.x = std::fmodf(_rotation.x, 360.0f);
+	_rotation.y = std::fmodf(_rotation.y, 360.0f);
+	_rotation.z = std::fmodf(_rotation.z, 360.0f);
 }
 
 void BillboardEntity::scale(Vec3 value)

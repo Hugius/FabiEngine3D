@@ -218,9 +218,6 @@ void SceneEditor::_updateModelEditing()
 					_handleValueChanging("modelPropertiesMenu", "yMinus", "y", rotation.y, -_customEditorSpeed / 50.0f);
 					_handleValueChanging("modelPropertiesMenu", "zPlus", "z", rotation.z, _customEditorSpeed / 50.0f);
 					_handleValueChanging("modelPropertiesMenu", "zMinus", "z", rotation.z, -_customEditorSpeed / 50.0f);
-					rotation.x = std::fmodf(rotation.x, 360.0f);
-					rotation.y = std::fmodf(rotation.y, 360.0f);
-					rotation.z = std::fmodf(rotation.z, 360.0f);
 				}
 				else if (_transformation == TransformationType::SCALING)
 				{

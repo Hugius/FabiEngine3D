@@ -170,7 +170,7 @@ void WaterEntityManager::update()
 		{
 			// Update ripple speed
 			Vec2 newOffset = entity->getRippleOffset() + entity->getSpeed();
-			newOffset = Vec2(fmod(newOffset.x, 1.0f), fmod(newOffset.y, 1.0f));
+			newOffset = Vec2(fmodf(newOffset.x, 1.0f), fmodf(newOffset.y, 1.0f));
 			entity->setRippleOffset(newOffset);
 
 			// Update waving speed (must be 25% slower)

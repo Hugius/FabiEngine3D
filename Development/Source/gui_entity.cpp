@@ -47,6 +47,9 @@ void GuiEntity::setTranslation(Vec2 value)
 void GuiEntity::setRotation(float value)
 {
 	_rotation = value;
+
+	// Limit rotation
+	_rotation = std::fmodf(_rotation, 360.0f);
 }
 
 void GuiEntity::setScaling(Vec2 value)
@@ -62,6 +65,9 @@ void GuiEntity::translate(Vec2 value)
 void GuiEntity::rotate(float value)
 {
 	_rotation += value;
+
+	// Limit rotation
+	_rotation = std::fmodf(_rotation, 360.0f);
 }
 
 void GuiEntity::scale(Vec2 value)

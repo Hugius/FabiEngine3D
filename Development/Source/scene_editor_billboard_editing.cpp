@@ -172,9 +172,6 @@ void SceneEditor::_updateBillboardEditing()
 					_handleValueChanging("billboardPropertiesMenu", "yMinus", "y", rotation.y, -_customEditorSpeed / 50.0f);
 					_handleValueChanging("billboardPropertiesMenu", "zPlus", "z", rotation.z, _customEditorSpeed / 50.0f);
 					_handleValueChanging("billboardPropertiesMenu", "zMinus", "z", rotation.z, -_customEditorSpeed / 50.0f);
-					rotation.x = std::fmodf(rotation.x, 360.0f);
-					rotation.y = std::fmodf(rotation.y, 360.0f);
-					rotation.z = std::fmodf(rotation.z, 360.0f);
 					_fe3d.billboardEntity_setRotation(_activeBillboardID, rotation);
 				}
 				else if (_transformation == TransformationType::SCALING)

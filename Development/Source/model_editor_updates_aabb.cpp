@@ -184,7 +184,7 @@ void ModelEditor::_updateModelEditingAabb()
 	}
 
 	// Check if currently editing an AABB
-	if (_currentAabbID != "" && !_gui.getGlobalScreen()->isFocused() && !_fe3d.misc_isCursorInsideViewport())
+	if (_currentAabbID != "" && !_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isCursorInsideViewport())
 	{
 		// Update moving through cursor
 		if (_movingToggled)

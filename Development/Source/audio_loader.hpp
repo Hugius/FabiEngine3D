@@ -28,7 +28,7 @@ private:
 	Mix_Chunk* _loadChunk(const string& filePath, unsigned char* data);
 	Mix_Music* _loadMusic(const string& filePath);
 
-	void _throwLog(const string& filePath);
+	void _throwLoadedMessage(const string& filePath);
 
 	char* _loadWaveFile(const std::string& filePath);
 };

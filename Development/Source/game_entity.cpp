@@ -168,10 +168,20 @@ void GameEntity::setRotation(Vec3 value, const string& partName)
 	if (partName.empty() && _partNames.size() > 1)
 	{
 		_baseRotation = value;
+
+		// Limit rotation
+		_baseRotation.x = std::fmodf(_baseRotation.x, 360.0f);
+		_baseRotation.y = std::fmodf(_baseRotation.y, 360.0f);
+		_baseRotation.z = std::fmodf(_baseRotation.z, 360.0f);
 	}
 	else
 	{
 		_rotations[_getPartIndex(partName)] = value;
+
+		// Limit rotation
+		_rotations[_getPartIndex(partName)].x = std::fmodf(_rotations[_getPartIndex(partName)].x, 360.0f);
+		_rotations[_getPartIndex(partName)].y = std::fmodf(_rotations[_getPartIndex(partName)].y, 360.0f);
+		_rotations[_getPartIndex(partName)].z = std::fmodf(_rotations[_getPartIndex(partName)].z, 360.0f);
 	}
 }
 
@@ -221,10 +231,20 @@ void GameEntity::rotate(Vec3 value, const string& partName)
 	if (partName.empty() && _partNames.size() > 1)
 	{
 		_baseRotation += value;
+
+		// Limit rotation
+		_baseRotation.x = std::fmodf(_baseRotation.x, 360.0f);
+		_baseRotation.y = std::fmodf(_baseRotation.y, 360.0f);
+		_baseRotation.z = std::fmodf(_baseRotation.z, 360.0f);
 	}
 	else
 	{
 		_rotations[_getPartIndex(partName)] += value;
+
+		// Limit rotation
+		_rotations[_getPartIndex(partName)].x = std::fmodf(_rotations[_getPartIndex(partName)].x, 360.0f);
+		_rotations[_getPartIndex(partName)].y = std::fmodf(_rotations[_getPartIndex(partName)].y, 360.0f);
+		_rotations[_getPartIndex(partName)].z = std::fmodf(_rotations[_getPartIndex(partName)].z, 360.0f);
 	}
 }
 

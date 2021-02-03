@@ -39,8 +39,18 @@ The engine only uses 2 libraries: OpenGL 4.5 & SDL2. It is written in C++17 and 
 - Arithmetic operations: increase, decrease, multiply, divide
 - Logical operations: if, elif, else, is, not, and or
 ## Engine interface
-![interface](https://www.linkpicture.com/q/Screenshot_45_29.png)
+![interface](https://www.linkpicture.com/q/Screenshot_45_29.png)  
+The engine GUI is divided into 5 sections:
+- Left viewport: editor menus and project settings
+- Top viewport: project management & game preview management
+- Right viewport: controls & scene editor properties
+- Bottom viewport: statistics & logging console
+- Mid viewport: 3D display screen
 ## Folder structures
+The engine root directory has 3 folders:
+- "bin\": this folder holds the .exe file and all corresponding DLLs (do NOT touch)
+- "engine\": this folder holds all engine resources such as libraries & shaders (do NOT touch)
+- "user\": this folder is where all your game assets are stored. It also holds the project files.
 ## Development order
 ## Scripting system
 ## Best practices

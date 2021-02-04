@@ -102,6 +102,8 @@ You can create, edit, delete models that can be added to a scene later. A model 
 - **Light map**: colored 24bit PNG file from `user\assets\textures\light_maps\`
 - **Reflection part map**: colored 24bit PNG file from `user\assets\textures\reflection_maps\`
 - **Normal map**: colored 24bit PNG file from `user\assets\textures\normal_maps\`
+Properties: size, culling, alpha removal, instanced rendering, color, UV-repeat, level of detail.
+Lighting: specular reflection (+ factor & intensity), lightness, shadowed, sky reflection, scene reflection.
 ## Animation editor
 ## Billboard editor
 ## Audio editor

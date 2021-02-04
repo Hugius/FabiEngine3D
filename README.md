@@ -12,7 +12,7 @@ The engine only uses 2 libraries: OpenGL 4.5 & SDL2. It is written in C++17 and 
 - **3D rendering**: sky, terrain, water, model, billboard
 - **2D rendering**: image, text
 - **Graphics**: ambient lighting, directional lighting, specular reflections, point lights, shadows, sky reflections, realtime scene reflections, fog
-- **Textures**: diffuse, cube, normal, reflection(part), light, height, gui, flare, dudv, displacement, blend, billboard
+- **Textures**: diffuse, cube, normal, reflection part, light, height, gui, flare, dudv, displacement, blend, billboard
 - **Post processing**: bloom, DOF, motion blur, anti aliasing, sky HDR, lens flare
 ### Audio
 - Custom music playlist
@@ -78,10 +78,10 @@ The sky environment is rendered as a **skybox**, which has 6 different textures.
 ![sky](https://www.linkpicture.com/q/sky.png)
 ### Terrain
 The terrain environment is generated with a **height map** texture. A terrain can have a **diffuse map** texture, but can also be textured using a **blend mapping**. The R,G,B channels represent different textures. So in total a terrain can be textured with up to 4 different textures! All of these rendered textures can also be improved with **normal mapping**. You can also edit some properties: max height, UV-repeat, lighting.
-- **Height map**: grayscale 24bit BMP from `user\assets\textures\height_maps\`
-- **Blend map**: colored 24bit PNG from `user\assets\textures\blend_maps\`
-- **Diffuse maps**: colored 24bit PNG from`user\assets\textures\diffuse_maps\`
-- **Normal maps**: colored 24bit PNG from `user\assets\textures\normal_maps\`  
+- **Height map**: grayscale 24bit BMP file from `user\assets\textures\height_maps\`
+- **Blend map**: colored 24bit PNG file from `user\assets\textures\blend_maps\`
+- **Diffuse maps**: colored 24bit PNG file from `user\assets\textures\diffuse_maps\`
+- **Normal maps**: colored 24bit PNG file from `user\assets\textures\normal_maps\`  
 ![terrain](https://www.linkpicture.com/q/Screenshot_46_26.png)
 ### Water
 The water environment is simply a flat plane in 3D space. You can style the water rendering in multiple ways:
@@ -96,6 +96,12 @@ Properties: position, size, wave height, specular factor & intensity, wave/rippl
 You also have the option to show a created terrain while creating a water environment, mainly for having a reference for the position and size of the water plane.
 ![water](https://www.linkpicture.com/q/Screenshot_47_19.png)
 ## Model editor
+You can create, edit, delete models that can be added to a scene later. A model must **at least** consist of a mesh. Textures can be added to the model as well as a custom color.
+- **Mesh**: .obj format mesh file from  `user\assets\meshes`
+- **Diffuse map**: colored 24bit PNG file from `user\assets\textures\diffuse_maps\`
+- **Light map**: colored 24bit PNG file from `user\assets\textures\light_maps\`
+- **Reflection part map**: colored 24bit PNG file from `user\assets\textures\reflection_maps\`
+- **Normal map**: colored 24bit PNG file from `user\assets\textures\normal_maps\`
 ## Animation editor
 ## Billboard editor
 ## Audio editor

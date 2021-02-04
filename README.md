@@ -84,11 +84,11 @@ The terrain environment is generated with a **height map** texture. A terrain ca
 ### Water
 The water environment is simply a flat plane in 3D space. You can style the water rendering in multiple ways:
 - Custom color (RGB)
-- Sky & terrain reflection (on/off)
-- Water refraction (on/off)
-- Rippling effect (on/off, DUDV map needed: colored 24bit PNG from `user\assets\textures\dudv_maps\`)
-- Waves (on/off, displacement map needed: **grayscale** 24bit PNG from `user\assets\textures\displacement_maps\`)
-- Specular reflection (on/off, normal map needed: colored 24bit PNG from `user\assets\textures\normal_maps\`)  
+- Sky & terrain reflection (on/off, only shown when above water surface)
+- Water refraction (on/off, **Warning**: huge performance impact!)
+- Rippling effect (on/off, **DUDV map** needed: colored 24bit PNG from `user\assets\textures\dudv_maps\`)
+- Waves (on/off, **displacement map** needed: **grayscale** 24bit PNG from `user\assets\textures\displacement_maps\`)
+- Specular reflection (on/off, **normal map** needed: colored 24bit PNG from `user\assets\textures\normal_maps\`)  
 You can also edit some properties: position, size, wave height, specular factor & intensity, wave/ripple speed, UV-repeat, color, edge transparency.
 ## Model editor
 ## Animation editor
@@ -98,5 +98,7 @@ You can also edit some properties: position, size, wave height, specular factor 
 ## Script editor
 ## Project settings
 ## FabScript
-## Best practices
-- 
+## Miscellaneous
+### Best practices
+### Performance
+### Config file

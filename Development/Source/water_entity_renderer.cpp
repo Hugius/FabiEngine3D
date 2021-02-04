@@ -119,7 +119,7 @@ void WaterEntityRenderer::render(const shared_ptr<WaterEntity> entity)
 		_shader.uploadUniform("u_color", entity->getColor());
 
 		// Check if camera is underwater
-		bool isUnderWater = (_renderBus.getCameraPosition().y < entity->getTranslation().y);
+		bool isUnderWater = (_renderBus.getCameraPosition().y < (entity->getTranslation().y + entity->getWaveHeightFactor()));
 		isUnderWater = isUnderWater && (_renderBus.getCameraPosition().x > entity->getTranslation().x - (entity->getSize() / 2.0f));
 		isUnderWater = isUnderWater && (_renderBus.getCameraPosition().x < entity->getTranslation().x + (entity->getSize() / 2.0f));
 		isUnderWater = isUnderWater && (_renderBus.getCameraPosition().z > entity->getTranslation().z - (entity->getSize() / 2.0f));

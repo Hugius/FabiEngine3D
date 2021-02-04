@@ -12,7 +12,7 @@ The engine only uses 2 libraries: OpenGL 4.5 & SDL2. It is written in C++17 and 
 - **3D rendering**: sky, terrain, water, model, billboard
 - **2D rendering**: image, text
 - **Graphics**: ambient lighting, directional lighting, specular reflections, point lights, shadows, sky reflections, realtime scene reflections, fog
-- **Textures**: diffuse mapping, normal mapping, reflection(part) mapping, light mapping
+- **Textures**: diffuse, cube, normal, reflection(part), light, height, gui, flare, dudv, displacement, blend, billboard
 - **Post processing**: bloom, DOF, motion blur, anti aliasing, sky HDR, lens flare
 ### Audio
 - Custom music playlist
@@ -48,9 +48,9 @@ The engine GUI is divided into 5 sections:
 - Mid viewport: 3D display screen
 ## Folder structures
 The engine root directory has 3 folders:
-- "bin\": this folder holds the .exe file and all corresponding DLLs (do **NOT** touch)
-- "engine\": this folder holds all engine resources such as libraries & shaders (do **NOT** touch)
-- "user\": this folder is where all your game assets are stored. It also holds the project files.
+- `bin\`: this folder holds the .exe file and all corresponding DLLs (do **NOT** touch)
+- `engine\`: this folder holds all engine resources such as libraries & shaders (do **NOT** touch)
+- `user\`: this folder is where all your game assets are stored. It also holds the project files.
 ## Development order
 - **Project management**
   > In the top-viewport you can create, edit, save and delete projects. 1 project = 1 game.
@@ -71,8 +71,25 @@ The engine root directory has 3 folders:
 - **Project settings**
   > This is where you can setup mostly graphical properties of your game such as shadow quality, reflection quality, etc.
 ## Project management
-
+You can create, edit/load, save and delete a project. Every project is a different game and must have a unique name. A project has its own folder in the engine "user\projects\" directory. An important note is to **NOT** change anything in this directory! The only directory that you can change is the `user\assets\`folder.
 ## Environment editor
+### Sky
+The sky environment is rendered as a **skybox**, which has 6 different textures. You can load these 6 images from `user\assets\textures\cube_maps\`. The cubemap resolutions must be the same and the bit depth must be **24bit**. Image format must be **PNG**. You can also edit some properties: lightness, color, rotation speed.
+### Terrain
+The terrain environment is generated with a **height map** texture. A terrain can have a **diffuse map** texture, but can also be textured using a **blend mapping**. The R,G,B channels represent different textures. So in total a terrain can be textured with up to 4 different textures! All of these rendered textures can also be improved with **normal mapping**. You can also edit some properties: max height, UV-repeat, lighting.
+- **Height map**: **grayscale** 24bit BMP from `user\assets\textures\height_maps\`
+- **Blend map**: colored 24bit PNG from `user\assets\textures\blend_maps\`
+- **Diffuse maps**: colored 24bit PNG from`user\assets\textures\diffuse_maps\`
+- **Normal maps**: colored 24bit PNG from `user\assets\textures\normal_maps\`
+### Water
+The water environment is simply a flat plane in 3D space. You can style the water rendering in multiple ways:
+- Custom color (RGB)
+- Sky & terrain reflection (on/off)
+- Water refraction (on/off)
+- Rippling effect (on/off, DUDV map needed: colored 24bit PNG from `user\assets\textures\dudv_maps\`)
+- Waves (on/off, displacement map needed: **grayscale** 24bit PNG from `user\assets\textures\displacement_maps\`)
+- Specular reflection (on/off, normal map needed: colored 24bit PNG from `user\assets\textures\normal_maps\`)  
+You can also edit some properties: position, size, wave height, specular factor & intensity, wave/ripple speed, UV-repeat, color, edge transparency.
 ## Model editor
 ## Animation editor
 ## Billboard editor

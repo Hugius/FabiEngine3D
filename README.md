@@ -39,7 +39,7 @@ The engine only uses 2 libraries: OpenGL 4.5 & SDL2. It is written in C++17 and 
 - Arithmetic operations: increase, decrease, multiply, divide
 - Logical operations: if, elif, else, is, not, and or
 ## Engine interface
-![interface](https://www.linkpicture.com/q/Screenshot_45_29.png)  
+![interface](https://www.linkpicture.com/q/Screenshot_49_23.png)  
 The engine GUI is divided into 5 sections:
 - Left viewport: editor menus and project settings
 - Top viewport: project management & game preview management
@@ -75,21 +75,26 @@ You can create, edit/load, save and delete a project. Every project is a differe
 ## Environment editor
 ### Sky
 The sky environment is rendered as a **skybox**, which has 6 different textures. You can load these 6 images from `user\assets\textures\cube_maps\`. The cubemap resolutions must be the same and the bit depth must be **24bit**. Image format must be **PNG**. You can also edit some properties: lightness, color, rotation speed.
+![sky](https://www.linkpicture.com/q/sky.png)
 ### Terrain
 The terrain environment is generated with a **height map** texture. A terrain can have a **diffuse map** texture, but can also be textured using a **blend mapping**. The R,G,B channels represent different textures. So in total a terrain can be textured with up to 4 different textures! All of these rendered textures can also be improved with **normal mapping**. You can also edit some properties: max height, UV-repeat, lighting.
-- **Height map**: **grayscale** 24bit BMP from `user\assets\textures\height_maps\`
+- **Height map**: grayscale 24bit BMP from `user\assets\textures\height_maps\`
 - **Blend map**: colored 24bit PNG from `user\assets\textures\blend_maps\`
 - **Diffuse maps**: colored 24bit PNG from`user\assets\textures\diffuse_maps\`
-- **Normal maps**: colored 24bit PNG from `user\assets\textures\normal_maps\`
+- **Normal maps**: colored 24bit PNG from `user\assets\textures\normal_maps\`  
+![terrain](https://www.linkpicture.com/q/Screenshot_46_26.png)
 ### Water
 The water environment is simply a flat plane in 3D space. You can style the water rendering in multiple ways:
 - Custom color (RGB)
 - Sky & terrain reflection (on/off, only shown when above water surface)
 - Water refraction (on/off, **Warning**: huge performance impact!)
 - Rippling effect (on/off, **DUDV map** needed: colored 24bit PNG from `user\assets\textures\dudv_maps\`)
-- Waves (on/off, **displacement map** needed: **grayscale** 24bit PNG from `user\assets\textures\displacement_maps\`)
+- Waves (on/off, **displacement map** needed: grayscale 24bit PNG from `user\assets\textures\displacement_maps\`)
 - Specular reflection (on/off, **normal map** needed: colored 24bit PNG from `user\assets\textures\normal_maps\`)  
-You can also edit some properties: position, size, wave height, specular factor & intensity, wave/ripple speed, UV-repeat, color, edge transparency.
+
+Properties: position, size, wave height, specular factor & intensity, wave/ripple speed, UV-repeat, color, edge transparency.  
+You also have the option to show a created terrain while creating a water environment, mainly for having a reference for the position and size of the water plane.
+![water](https://www.linkpicture.com/q/Screenshot_47_19.png)
 ## Model editor
 ## Animation editor
 ## Billboard editor
@@ -98,6 +103,7 @@ You can also edit some properties: position, size, wave height, specular factor 
 ## Script editor
 ## Project settings
 ## FabScript
+## Game execution
 ## Miscellaneous
 ### Best practices
 ### Performance

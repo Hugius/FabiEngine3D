@@ -1,7 +1,7 @@
 SKY day user\assets\textures\cube_maps\day_right.png user\assets\textures\cube_maps\day_left.png user\assets\textures\cube_maps\day_top.png user\assets\textures\cube_maps\day_bottom.png user\assets\textures\cube_maps\day_back.png user\assets\textures\cube_maps\day_front.png 0.002 0.6 1 1 1
 TERRAIN home user\assets\textures\height_maps\home.bmp user\assets\textures\diffuse_maps\terrain\grass.png 75 48 0.9 1 user\assets\textures\blend_maps\home.png user\assets\textures\diffuse_maps\terrain\mud.png user\assets\textures\diffuse_maps\terrain\rock.png user\assets\textures\diffuse_maps\terrain\ground.png 75 32 64 1 1 1 1 user\assets\textures\normal_maps\terrain\grass.png user\assets\textures\normal_maps\terrain\mud.png user\assets\textures\normal_maps\terrain\rock.png user\assets\textures\normal_maps\terrain\ground.png 1 8 1
-MODEL 1838849439@hills 0 -1 0 0 0 0 4 10.4 4 user\assets\models\misc\hills.obj user\assets\textures\diffuse_maps\terrain\rock.png ? ? ? 0 0 0 0 0 0 1 1 1 1 1 1 8 ? 0 ?
-MODEL 685767404@tree5 -5.78273 -1.90735e-06 -2.13852 0 0 0 1.5 1.5 1.5 user\assets\models\trees\tree5.obj ? ? ? ? 0 0 1 1 0 1 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.6 3.4 0.5 leaves 0 3.4 0 4.8 3.8 5.3
+MODEL 1838849439@hills 0 -1 0 0 0 0 4 10.4 4 user\assets\meshes\misc\hills.obj user\assets\textures\diffuse_maps\terrain\rock.png ? ? ? 0 0 0 0 0 0 1 1 1 1 1 1 8 ? 0 ?
+MODEL 685767404@tree5 -5.78273 -1.90735e-06 -2.13852 0 0 0 1.5 1.5 1.5 user\assets\meshes\trees\tree5.obj ? ? ? ? 0 0 1 1 0 1 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.6 3.4 0.5 leaves 0 3.4 0 4.8 3.8 5.3
 AMBIENT_LIGHT 1 1 1 0.75
 DIRECTIONAL_LIGHT 1000 1000 1000 1 1 1 1 150 100
 LOD_DISTANCE 1000

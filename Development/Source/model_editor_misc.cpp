@@ -54,7 +54,7 @@ void ModelEditor::_loadMeshFileNames()
 	}
 
 	// Determine full mesh directory
-	string meshDirectoryPath = _fe3d.misc_getRootDirectory() + "user\\assets\\models\\";
+	string meshDirectoryPath = _fe3d.misc_getRootDirectory() + "user\\assets\\meshes\\";
 	int endOfNameIndex = 0;
 
 	// Get all filenames
@@ -81,7 +81,7 @@ void ModelEditor::_loadMesh()
 {
 	// Get the chosen filename
 	const string rootDirectory = _fe3d.misc_getRootDirectory();
-	const string targetDirectory = string("user\\assets\\models\\");
+	const string targetDirectory = string("user\\assets\\meshes\\");
 	const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "OBJ");
 
 	// Check if not cancelled

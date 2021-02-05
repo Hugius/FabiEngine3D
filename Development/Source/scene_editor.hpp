@@ -173,7 +173,7 @@ private:
 	vector<string> _loadedLightIDs;
 	bool _isPlacingPointlight = false;
 	const string _previewPointlightID = "@@previewPointlight";
-	const string _lightBulbModelPath = "engine\\models\\lamp.obj";
+	const string _lightBulbModelPath = "engine\\meshes\\lamp.obj";
 	const Vec3 _defaultLightbulbSize = Vec3(1.0f);
 	const Vec3 _defaultLightbulbAabbSize = Vec3(0.7f, 1.15f, 0.7f);
 	const float _lightbulbAnimationSpeed = 0.01f;
@@ -190,7 +190,7 @@ private:
 	string _selectedSpeakerID = "";
 	string _activeSpeakerID = "";
 	const string _previewSpeakerID = "@previewSpeaker";
-	const string _speakerModelPath = "engine\\models\\speaker.obj";
+	const string _speakerModelPath = "engine\\meshes\\speaker.obj";
 	const Vec3 _defaultSpeakerSize = Vec3(1.0f);
 	const Vec3 _defaultSpeakerAabbSize = Vec3(1.25f, 1.3f, 1.0f);
 	const float _defaultAudioMaxDistance = 25.0f;

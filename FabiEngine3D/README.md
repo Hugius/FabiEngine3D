@@ -12,7 +12,7 @@ The engine only uses 2 libraries: OpenGL 4.5 & SDL2. It is written in C++17 and 
 - **3D rendering**: sky, terrain, water, model, billboard
 - **2D rendering**: image, text
 - **Graphics**: ambient lighting, directional lighting, specular reflections, point lights, shadows, sky reflections, realtime scene reflections, fog
-- **Textures**: diffuse, cube, normal, reflectionpart, light, height, gui, flare, dudv, displacement, blend, billboard
+- **Textures**: diffuse, cube, normal, reflection, light, height, gui, flare, dudv, displacement, blend, billboard
 - **Post processing**: bloom, DOF, motion blur, anti aliasing, sky HDR, lens flare
 ### Audio
 - Custom music playlist
@@ -87,8 +87,8 @@ The engine root directory has 3 folders:
 - You can create, edit, delete sky environments that can be placed in a scene
 - The sky environment is rendered as a **skybox**, which has 6 different texturs
 - You can load these 6 images from `user\assets\textures\cube_maps\`
-- The cubemap resolutions must be the same and the bit depth must be **24bit**
-- Image format must be **PNG**
+- The image format must be a colored 24bit `PNG`
+- The image resolutions must be the same
 - Properties include: lightness, color, rotation speed
 ### Terrain
 ![terrain](engine/readme/terrain_editor.png)
@@ -98,10 +98,10 @@ The engine root directory has 3 folders:
 - In total a terrain can be textured with up to 4 different textures!
 - All of these rendered textures can be improved with **normal mapping**
 - Properties include: max height, UV-repeat, lighting
-- **Height map**: grayscale 24bit BMP file from `user\assets\textures\height_maps\`
-- **Blend map**: colored 24bit PNG file from `user\assets\textures\blend_maps\`
-- **Diffuse maps**: colored 24bit PNG file from `user\assets\textures\diffuse_maps\`
-- **Normal maps**: colored 24bit PNG file from `user\assets\textures\normal_maps\`
+- **Height map**: grayscale 24bit `BMP` format image file from `user\assets\textures\height_maps\`
+- **Blend map**: colored 24bit `PNG` file format image from `user\assets\textures\blend_maps\`
+- **Diffuse maps**: colored 24bit `PNG` format image file from `user\assets\textures\diffuse_maps\`
+- **Normal maps**: colored 24bit `PNG` format image file from `user\assets\textures\normal_maps\`
 ### Water
 ![water](engine/readme/water_editor.png)
 - You can create, edit, delete water environments that can be placed in a scene
@@ -111,9 +111,9 @@ The engine root directory has 3 folders:
 - Custom color (RGB)
 - Sky & terrain reflection (on/off, only shown when above water surface)
 - Water refraction (on/off, **Warning**: huge performance impact!)
-- Rippling effect (on/off, **DUDV map** needed: colored 24bit PNG from `user\assets\textures\dudv_maps\`)
-- Waves (on/off, **displacement map** needed: grayscale 24bit PNG from `user\assets\textures\displacement_maps\`)
-- Specular reflection (on/off, **normal map** needed: colored 24bit PNG from `user\assets\textures\normal_maps\`)    
+- Rippling effect (on/off, **DUDV map** needed: colored 24bit `PNG` format image from `user\assets\textures\dudv_maps\`)
+- Waves (on/off, **displacement map** needed: grayscale 24bit `PNG` format image from `user\assets\textures\displacement_maps\`)
+- Specular reflection (on/off, **normal map** needed: colored 24bit `PNG` format image from `user\assets\textures\normal_maps\`)    
 
 ## Model editor
 ![model](engine/readme/model_editor.png)
@@ -124,20 +124,21 @@ The engine root directory has 3 folders:
 - Lighting: specular reflection (+ factor & intensity), lightness, shadowed, sky reflection, scene reflection
 - You can also add 1 or more **AABBs** to the model. Every individual box has a position and size.
 - All AABBs are bound to the model's transformation (translation, rotation, scaling)
+- A mesh should be modeled so that the center is at the **lowest** vertex
 ### Normal mesh
-- **Mesh**: OBJ format mesh file from  `user\assets\meshes`
-- **Diffuse map**: colored 24bit PNG file from `user\assets\textures\diffuse_maps\`
-- **Light map**: colored 24bit PNG file from `user\assets\textures\light_maps\`
-- **Reflectionpart map**: colored 24bit PNG file from `user\assets\textures\reflection_maps\`
-- **Normal map**: colored 24bit PNG file from `user\assets\textures\normal_maps\`
+- **Mesh**: `OBJ` format mesh file from `user\assets\meshes`
+- **Diffuse map**: colored 24bit/32bit `PNG` format image file from `user\assets\textures\diffuse_maps\`
+- **Light map**: colored 24bit `PNG` format image file from `user\assets\textures\light_maps\`
+- **Reflection map**: colored 24bit `PNG` format image file from `user\assets\textures\reflection_maps\`
+- **Normal map**: colored 24bit `PNG` format image file from `user\assets\textures\normal_maps\`
 ### Multitextured/multiparted mesh
 - A mesh can consist of **multiple parts** (including textures for every part)
 - In the **.obj** file, you need to specify when a certain part of vertices starts
 - You can start a new mesh part by writing `FE3D_PART <name>` in the OBJ file
-- You can bind a **diffuse** map to the part by writing `FE3D_DIFFUSE_MAP <path><filename>` on the line after
-- You can bind a **light** map to the part by writing `FE3D_LIGHT_MAP <path><filename>` on the line after
-- You can bind a **reflectionpart** map to the part by writing `FE3D_REFLECTION_MAP <path><filename>` on the line after
-- You can bind a **normal** map to the part by writing `FE3D_NORMAL_MAP <path><filename>` on the line after
+- You can bind a **diffuse** map to the part by writing `FE3D_DIFFUSE_MAP <path><filename>` on the next line
+- You can bind a **light** map to the part by writing `FE3D_LIGHT_MAP <path><filename>` on the next line
+- You can bind a **reflection** map to the part by writing `FE3D_REFLECTION_MAP <path><filename>` on the next line
+- You can bind a **normal** map to the part by writing `FE3D_NORMAL_MAP <path><filename>` on the next line
 
 ## Animation editor
 ![model](engine/readme/animation_editor.png)
@@ -153,11 +154,19 @@ The engine root directory has 3 folders:
 ## Billboard editor
 ![billboard](engine/readme/billboard_editor.png)
 - You can create, edit, delete billboards that can be placed in a scene or placed with scripting
+- There are 2 types of billboards: text & non-text/textured
+- A text billboard consists of custom (colored) text using a custom loaded **font**
+- A non-text billboard can have a **texture** and/or custom **color**
+- A textured billboard can have a **sprite animation**
+- Properties include: lightness, color, alpha removal, facing camera X/Y
+- When billboard texture is animated, you must specify the amount of rows & columns. You can also set the animation speed.
+- **Font**: `TTF` format font file from `user\assets\fonts`
+- **Texture**: colored 24bit/32bit `PNG` format image file from `user\assets\textures\billboard_maps`
 
 ## Audio editor
 ![audio](engine/readme/audio_editor.png)
 - You can create, edit, delete audio that can be placed in a scene or **placed/played** with scripting
-- **Audio data**: WAV format audio file from  `user\assets\meshes`
+- **Audio data**: `WAV` format audio file from `user\assets\audio`
 - Audio can be played in **2D**
 - Audio can be played in **3D** (position, max distance, max volume)
 - 3D audio has stereo panning

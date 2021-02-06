@@ -2,6 +2,7 @@
 
 #include <filesystem>
 #include <direct.h>
+#include <fstream>  
 
 #define SCRIPT_EXECUTOR _scriptEditor.getScriptExecutor(false)
 
@@ -70,6 +71,22 @@ void TopViewportController::_updateProjectCreation()
 				auto temp2 = _mkdir((newDirectoryPath + "\\data").c_str());
 				auto temp3 = _mkdir((newDirectoryPath + "\\scenes").c_str());
 				auto temp4 = _mkdir((newDirectoryPath + "\\scripts").c_str());
+
+				// Create new empty project files
+				auto file = std::ofstream(string(newDirectoryPath + "\\data\\animation.fe3d"));
+				file.close();
+				file = std::ofstream(string(newDirectoryPath + "\\data\\audio.fe3d"));
+				file.close();
+				file = std::ofstream(string(newDirectoryPath + "\\data\\billboard.fe3d"));
+				file.close();
+				file = std::ofstream(string(newDirectoryPath + "\\data\\model.fe3d"));
+				file.close();
+				file = std::ofstream(string(newDirectoryPath + "\\data\\sky.fe3d"));
+				file.close();
+				file = std::ofstream(string(newDirectoryPath + "\\data\\terrain.fe3d"));
+				file.close();
+				file = std::ofstream(string(newDirectoryPath + "\\data\\water.fe3d"));
+				file.close();
 
 				// Create settings file
 				_settingsEditor.setCurrentProjectID(newProjectName);

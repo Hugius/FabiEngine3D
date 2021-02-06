@@ -73,7 +73,7 @@ void BillboardEditor::load()
 	_fe3d.gfx_enableShadows(Vec3(10.0f, 10.0f, 10.0f), Vec3(0.0f), 25.0f, 50.0f, false);
 	
 	// 3D Environment
-	_fe3d.gameEntity_add("@@cube", "engine\\meshes\\cube.obj", Vec3(5.0f, 0.0f, 0.0f), Vec3(0.0f), Vec3(1.0f, 1.0f, 1.0f));
+	_fe3d.gameEntity_add("@@cube", "engine\\meshes\\cube.obj", Vec3(0.0f), Vec3(0.0f), Vec3(1.0f, 1.0f, 1.0f));
 	_fe3d.gameEntity_setDiffuseMap("@@cube", "engine\\textures\\cube.png");
 	_fe3d.gameEntity_setFaceCulled("@@cube", true);
 	_fe3d.gameEntity_add("@@grid", "engine\\meshes\\plane.obj", Vec3(0.0f), Vec3(0.0f), Vec3(50.0f, 1.0f, 50.0f));

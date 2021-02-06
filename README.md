@@ -104,6 +104,7 @@ You can create, edit, delete models that can be added to a scene later. A model 
 - **Normal map**: colored 24bit PNG file from `user\assets\textures\normal_maps\`
 Properties: size, culling, alpha removal, instanced rendering, color, UV-repeat, level of detail.
 Lighting: specular reflection (+ factor & intensity), lightness, shadowed, sky reflection, scene reflection.
+You can also add 1 or more AABBs to the model. Every individual box has a position and size. These AABBs are bound to the model's transformation.
 ## Animation editor
 ## Billboard editor
 ## Audio editor

@@ -104,9 +104,9 @@ void SettingsEditor::save(bool newFile)
 	{
 		msaaQuality = 4;
 		shadowQuality = 2048;
-		reflectionQuality = 128;
-		refractionQuality = 128;
-		audioChannels = 256;
+		reflectionQuality = 256;
+		refractionQuality = 256;
+		audioChannels = 128;
 	}
 
 	// Write to file

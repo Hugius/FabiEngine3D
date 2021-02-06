@@ -17,7 +17,7 @@ The engine only uses 2 libraries: OpenGL 4.5 & SDL2. It is written in C++17 and 
 ### Audio
 - Custom music playlist
 - 2D audio playback
-- 3D audio playback
+- 3D audio playback (volume distance, stereo panning)
 ### Input
 - Keyboard input
 - Mouse input
@@ -84,6 +84,7 @@ The engine root directory has 3 folders:
 ## Environment editor
 ### Sky
 ![sky](engine/readme/sky_editor.png)
+- You can create, edit, delete sky environments that can be placed in a scene
 - The sky environment is rendered as a **skybox**, which has 6 different texturs
 - You can load these 6 images from `user\assets\textures\cube_maps\`
 - The cubemap resolutions must be the same and the bit depth must be **24bit**
@@ -91,6 +92,7 @@ The engine root directory has 3 folders:
 - Properties include: lightness, color, rotation speed
 ### Terrain
 ![terrain](engine/readme/terrain_editor.png)
+- You can create, edit, delete terrain environments that can be placed in a scene
 - The terrain environment is generated with a **height map** texture
 - A terrain can have a **diffuse map** texture, but can also be textured using a **blend mapping**
 - In total a terrain can be textured with up to 4 different textures!
@@ -102,6 +104,7 @@ The engine root directory has 3 folders:
 - **Normal maps**: colored 24bit PNG file from `user\assets\textures\normal_maps\`
 ### Water
 ![water](engine/readme/water_editor.png)
+- You can create, edit, delete water environments that can be placed in a scene
 - The water environment is simply a **flat plane** in 3D space
 - Properties include: position, size, wave height, specular factor & intensity, wave/ripple speed, UV-repeat, color, edge transparency
 - You also have the option to show a created terrain while creating a water environment, mainly for having a reference
@@ -114,12 +117,13 @@ The engine root directory has 3 folders:
 
 ## Model editor
 ![model](engine/readme/model_editor.png)
-- You can create, edit, delete models that can be added to a scene or placed with scripting
+- You can create, edit, delete models that can be placed in scene or placed with scripting
 - A model must **at least** consist of a mesh
 - Textures can be added to the model as well as a custom color
 - Properties include: size, culling, alpha removal, instanced rendering, color, UV-repeat, level of detail
 - Lighting: specular reflection (+ factor & intensity), lightness, shadowed, sky reflection, scene reflection
-- You can also add 1 or more **AABBs** to the model. Every individual box has a position and size. These AABBs are bound to the model's transformation
+- You can also add 1 or more **AABBs** to the model. Every individual box has a position and size.
+- All AABBs are bound to the model's transformation (translation, rotation, scaling)
 ### Normal mesh
 - **Mesh**: OBJ format mesh file from  `user\assets\meshes`
 - **Diffuse map**: colored 24bit PNG file from `user\assets\textures\diffuse_maps\`
@@ -129,7 +133,7 @@ The engine root directory has 3 folders:
 ### Multitextured/multiparted mesh
 - A mesh can consist of **multiple parts** (including textures for every part)
 - In the **.obj** file, you need to specify when a certain part of vertices starts
-- You can start a mesh part by writing `FE3D_PART <name>` in the OBJ file
+- You can start a new mesh part by writing `FE3D_PART <name>` in the OBJ file
 - You can bind a **diffuse** map to the part by writing `FE3D_DIFFUSE_MAP <path><filename>` on the line after
 - You can bind a **light** map to the part by writing `FE3D_LIGHT_MAP <path><filename>` on the line after
 - You can bind a **reflectionpart** map to the part by writing `FE3D_REFLECTION_MAP <path><filename>` on the line after
@@ -137,7 +141,7 @@ The engine root directory has 3 folders:
 
 ## Animation editor
 ![model](engine/readme/animation_editor.png)
-- You can create, edit, delete animations that can be appied to **models** during gameplay or in the scene editor
+- You can create, edit, delete animations that can be applied to **models** with scripting or in the scene editor
 - You can select a **preview model** for the animation playback
 - An animation consists of 1 or more **keyframes**
 - Every keyframe has a different **target** transformation
@@ -147,20 +151,38 @@ The engine root directory has 3 folders:
 - The **last** animation keyframe should be the same as the **initial** frame
 
 ## Billboard editor
+![billboard](engine/readme/billboard_editor.png)
+- You can create, edit, delete billboards that can be placed in a scene or placed with scripting
 
 ## Audio editor
+![audio](engine/readme/audio_editor.png)
+- You can create, edit, delete audio that can be placed in a scene or **placed/played** with scripting
+- **Audio data**: WAV format audio file from  `user\assets\meshes`
+- Audio can be played in **2D**
+- Audio can be played in **3D** (position, max distance, max volume)
+- 3D audio has stereo panning
+- Audio can be added to the **music** playlist
 
 ## Scene editor
+![scene](engine/readme/scene_editor.png)
 
 ## Script editor
+![script](engine/readme/script_editor.png)
 
 ## Project settings
+- MSAA qualiity (default: 4)
+- Shadow qualiity (default: 2048)
+- Reflection qualiity (default: 256)
+- Refraction qualiity (default: 256)
+- Max audio channels (default: 128)
 
 ## FabScript
 
 ## Game execution
+![execution](engine/readme/execution.png)
 
 ## Miscellaneous
-### Best practices
+### Tips
 ### Performance
+![performance](engine/readme/performance.png)
 ### Config file

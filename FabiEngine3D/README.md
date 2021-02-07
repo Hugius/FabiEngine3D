@@ -77,14 +77,14 @@ The engine root directory has 3 folders:
 ## Project management
 - You can create, edit/load, save and delete a project
 - Every **project** is a different **game** and must have a **unique** name
-- A project has its own folder in the engine "user\projects\" directory
+- A project has its own folder in the engine `user\projects\` directory
 - An important note is to **NOT** change anything in this directory!
 - The only directory that you can change is the `user\assets\`folder
 
 ## Environment editor
 ### Sky
 ![sky](engine/readme/sky_editor.png)
-- You can create, edit, delete sky environments that can be placed in a scene
+- You can create/edit/delete sky environments that can be placed in a scene
 - The sky environment is rendered as a **skybox**, which has 6 different texturs
 - You can load these 6 images from `user\assets\textures\cube_maps\`
 - The image format must be a colored 24bit `PNG`
@@ -92,7 +92,7 @@ The engine root directory has 3 folders:
 - Properties include: lightness, color, rotation speed
 ### Terrain
 ![terrain](engine/readme/terrain_editor.png)
-- You can create, edit, delete terrain environments that can be placed in a scene
+- You can create/edit/delete terrain environments that can be placed in a scene
 - The terrain environment is generated with a **height map** texture
 - A terrain can have a **diffuse map** texture, but can also be textured using a **blend mapping**
 - In total a terrain can be textured with up to 4 different textures!
@@ -104,7 +104,7 @@ The engine root directory has 3 folders:
 - **Normal maps**: colored 24bit `PNG` format image file from `user\assets\textures\normal_maps\`
 ### Water
 ![water](engine/readme/water_editor.png)
-- You can create, edit, delete water environments that can be placed in a scene
+- You can create/edit/delete water environments that can be placed in a scene
 - The water environment is simply a **flat plane** in 3D space
 - Properties include: position, size, wave height, specular factor & intensity, wave/ripple speed, UV-repeat, color, edge transparency
 - You also have the option to show a created terrain while creating a water environment, mainly for having a reference
@@ -117,7 +117,7 @@ The engine root directory has 3 folders:
 
 ## Model editor
 ![model](engine/readme/model_editor.png)
-- You can create, edit, delete models that can be placed in scene or placed with scripting
+- You can create/edit/delete models that can be placed in scene or placed with scripting
 - A model must **at least** consist of a mesh
 - Textures can be added to the model as well as a custom color
 - Properties include: size, culling, alpha removal, instanced rendering, color, UV-repeat, level of detail
@@ -142,7 +142,7 @@ The engine root directory has 3 folders:
 
 ## Animation editor
 ![model](engine/readme/animation_editor.png)
-- You can create, edit, delete animations that can be applied to **models** with scripting or in the scene editor
+- You can create/edit/delete animations that can be applied to **models** with scripting or in the scene editor
 - You can select a **preview model** for the animation playback
 - An animation consists of 1 or more **keyframes**
 - Every keyframe has a different **target** transformation
@@ -153,19 +153,20 @@ The engine root directory has 3 folders:
 
 ## Billboard editor
 ![billboard](engine/readme/billboard_editor.png)
-- You can create, edit, delete billboards that can be placed in a scene or placed with scripting
+- You can create/edit/delete billboards that can be placed in a scene or placed with scripting
 - There are 2 types of billboards: text & non-text/textured
 - A text billboard consists of custom (colored) text using a custom loaded **font**
 - A non-text billboard can have a **texture** and/or custom **color**
 - A textured billboard can have a **sprite animation**
 - Properties include: lightness, color, alpha removal, facing camera X/Y
 - When billboard texture is animated, you must specify the amount of rows & columns. You can also set the animation speed.
+- Every billboard has its own flat AABB based on their size
 - **Font**: `TTF` format font file from `user\assets\fonts`
 - **Texture**: colored 24bit/32bit `PNG` format image file from `user\assets\textures\billboard_maps`
 
 ## Audio editor
 ![audio](engine/readme/audio_editor.png)
-- You can create, edit, delete audio that can be placed in a scene or **placed/played** with scripting
+- You can create/edit/delete audio that can be placed in a scene or **placed/played** with scripting
 - **Audio data**: `WAV` format audio file from `user\assets\audio`
 - Audio can be played in **2D**
 - Audio can be played in **3D** (position, max distance, max volume)
@@ -174,9 +175,54 @@ The engine root directory has 3 folders:
 
 ## Scene editor
 ![scene](engine/readme/scene_editor.png)
+### Environment
+- Sky: you can select **only 1** sky, created in the environment editor
+- Terrain: you can select **only 1** terrain, created in the environment editor
+- Water: you can select **only 1** water, created in the environment editor
+### Models
+- You can place **multiple** models in the scene
+- If a terrain is selected, the model will be placed **on top** of the terrain
+- If no terrain is selected, the model will be placed at **XYZ(0,0,0)**
+- Every placed model can be **edited** (position, rotation, size, animation, deleting, freezing into local space)
+### Billboards
+- You can place **multiple** billboards in the scene
+- If a terrain is selected, the billboard will be placed **on top** of the terrain
+- If no terrain is selected, the billboard will be placed at **XYZ(0,0,0)**
+- Every placed billboard can be **edited** (position, rotation, size, deleting)
+- Billboards will **NOT** be affected by scene lighting
+- Every billboard's **AABB** will be scaled based on their rotation
+### Lights
+- You can add **ambient lighting** which has a custom color & intensity
+- You can add **directional lighting** which has a custom color, intensity and position
+- Directional lighting also has the option to show a lightsource circle billboard (with custom intensity)
+- You can place **multiple point lights** in the scene
+- If a terrain is selected, the point light will be placed **on top** of the terrain
+- If no terrain is selected, the point light will be placed at **XYZ(0,0,0)**
+- Every placed point light can be **edited** (position, max distance, intensity, color, deleting)
+### Audio
+- You can place **multiple** 3D audio casters in the scene
+- If a terrain is selected, the audio caster will be placed **on top** of the terrain
+- If no terrain is selected, the audio caster will be placed at **XYZ(0,0,0)**
+- Every placed audio caster can be **edited** (position, max volume, max distance, deleting)
+### Graphics
+- You can add **shadows** to scene based on (casting position, box size, box center, option to follow camera + interval)
+- You can enable **motion blur** with a custom strength
+- You can enable dynamic Depth Of Field (**DOF**) based on (min distance, blur distance) or enable a static **distant blur**
+- You can enable **fog** based on (min distance, max distance, intensity, color)
+- You can enable **dynamic skyHDR** based on (max extra intensity)
+- You can enable a **lens flare** for directional lighting based on (flare map, intensity, multiplier)
+- **Flare map**: colored 24bit `PNG` format image file from `user\assets\textures\flare_maps`
+### Other settings
+- You can change the editor movement speed, which will be saved for next time
+- You can set the minimum distance by which level of detailed models will change their rendering
 
 ## Script editor
 ![script](engine/readme/script_editor.png)
+- You can create/edit/rename/delete scripts that will be executed in a certain order
+- There are 3 types of scripts: initialization, update, destruction
+- Initialization script: will only be executed once, when the game is started
+- Update script: will be executed every frame when the game is running
+- Destruction script: will only be executed one, when the game is stopped
 
 ## Project settings
 - MSAA qualiity (default: 4)

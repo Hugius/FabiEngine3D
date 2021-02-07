@@ -192,18 +192,26 @@ The engine root directory has 3 folders:
 - Billboards will **NOT** be affected by scene lighting
 - Every billboard's **AABB** will be scaled based on their rotation
 ### Lights
-- You can add ambient lighting which has a custom color & intensity
-- You can add directional lighting which has a custom color, intensity and position
+- You can add **ambient lighting** which has a custom color & intensity
+- You can add **directional lighting** which has a custom color, intensity and position
 - Directional lighting also has the option to show a lightsource circle billboard (with custom intensity)
-- You can place **multiple** point lights in the scene
+- You can place **multiple point lights** in the scene
 - If a terrain is selected, the point light will be placed **on top** of the terrain
 - If no terrain is selected, the point light will be placed at **XYZ(0,0,0)**
 - Every placed point light can be **edited** (position, max distance, intensity, color, deleting)
 ### Audio
+- You can place **multiple** 3D audio casters in the scene
+- If a terrain is selected, the audio caster will be placed **on top** of the terrain
+- If no terrain is selected, the audio caster will be placed at **XYZ(0,0,0)**
+- Every placed audio caster can be **edited** (position, max volume, max distance, deleting)
 ### Graphics
-- You can add shadows to scene: casting position, box size, box center, option to follow camera + interval
-- You can enable motion blur with a custom strength
-- You can enable dynamic Depth Of Field (DOF) based on the min distance & blur distance or enable a static distant blur
+- You can add **shadows** to scene based on (casting position, box size, box center, option to follow camera + interval)
+- You can enable **motion blur** with a custom strength
+- You can enable dynamic Depth Of Field (**DOF**) based on (min distance, blur distance) or enable a static **distant blur**
+- You can enable **fog** based on (min distance, max distance, intensity, color)
+- You can enable **dynamic skyHDR** based on (max extra intensity)
+- You can enable a **lens flare** for directional lighting based on (flare map, intensity, multiplier)
+- **Flare map**: colored 24bit `PNG` format image file from `user\assets\textures\flare_maps`
 ### Other settings
 - You can change the editor movement speed, which will be saved for next time
 - You can set the minimum distance by which level of detailed models will change their rendering

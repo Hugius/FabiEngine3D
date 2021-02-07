@@ -2,6 +2,26 @@
 FabiEngine3D is a small game engine for simple 3D games.  
 It contains various features such as: asset loading, 2D & 3D rendering, audio, user input, physics, scripting and an engine GUI to work with.  
 The engine only uses 2 libraries: OpenGL 4.5 & SDL2. It is written in C++17 and works only on Windows.
+
+## Table of contents
+1. [Features](#features)
+2. [Engine interface](#engine-interface)
+3. [Folder structures](#folder-structures)
+4. [Development order](#development-order)
+5. [Project management](#project management)
+6. [Environment editor](#environment-editor)
+7. [Model editor](#model-editor)
+8. [Animation editor](#animation-editor)
+9. [Billboard editor](#billboard-editor)
+10. [Audio editor](#audio-editor)
+11. [Scene editor](#scene-editor)
+12. [Script editor](#script-editor)
+13. [Project settings](#project-settings)
+14. [FabScript](#fabScript)
+14. [Game execution](#game-execution)
+14. [Miscellaneous](#miscellaneous)
+14. [Screenshots](#screenshots)
+
 ## Features
 ### Asset loading
 - Multithreaded PNG texture file loading
@@ -40,7 +60,6 @@ The engine only uses 2 libraries: OpenGL 4.5 & SDL2. It is written in C++17 and 
 - Logical operations: if, elif, else, is, not, and or
 
 ## Engine interface
-![interface](engine/readme/interface.png)  
 The engine GUI is divided into 5 sections:
 - Left viewport: editor menus and project settings
 - Top viewport: project management & game preview management
@@ -83,7 +102,6 @@ The engine root directory has 3 folders:
 
 ## Environment editor
 ### Sky
-![sky](engine/readme/sky_editor.png)
 - You can create/edit/delete sky environments that can be placed in a scene
 - The sky environment is rendered as a **skybox**, which has 6 different texturs
 - You can load these 6 images from `user\assets\textures\cube_maps\`
@@ -91,7 +109,6 @@ The engine root directory has 3 folders:
 - The image resolutions must be the same
 - Properties include: lightness, color, rotation speed
 ### Terrain
-![terrain](engine/readme/terrain_editor.png)
 - You can create/edit/delete terrain environments that can be placed in a scene
 - The terrain environment is generated with a **height map** texture
 - A terrain can have a **diffuse map** texture, but can also be textured using a **blend mapping**
@@ -103,7 +120,6 @@ The engine root directory has 3 folders:
 - **Diffuse maps**: colored 24bit `PNG` format image file from `user\assets\textures\diffuse_maps\`
 - **Normal maps**: colored 24bit `PNG` format image file from `user\assets\textures\normal_maps\`
 ### Water
-![water](engine/readme/water_editor.png)
 - You can create/edit/delete water environments that can be placed in a scene
 - The water environment is simply a **flat plane** in 3D space
 - Properties include: position, size, wave height, specular factor & intensity, wave/ripple speed, UV-repeat, color, edge transparency
@@ -116,7 +132,6 @@ The engine root directory has 3 folders:
 - Specular reflection (on/off, **normal map** needed: colored 24bit `PNG` format image from `user\assets\textures\normal_maps\`)    
 
 ## Model editor
-![model](engine/readme/model_editor.png)
 - You can create/edit/delete models that can be placed in scene or placed with scripting
 - A model must **at least** consist of a mesh
 - Textures can be added to the model as well as a custom color
@@ -141,7 +156,6 @@ The engine root directory has 3 folders:
 - You can bind a **normal** map to the part by writing `FE3D_NORMAL_MAP <path><filename>` on the next line
 
 ## Animation editor
-![model](engine/readme/animation_editor.png)
 - You can create/edit/delete animations that can be applied to **models** with scripting or in the scene editor
 - You can select a **preview model** for the animation playback
 - An animation consists of 1 or more **keyframes**
@@ -152,7 +166,6 @@ The engine root directory has 3 folders:
 - The **last** animation keyframe should be the same as the **initial** frame
 
 ## Billboard editor
-![billboard](engine/readme/billboard_editor.png)
 - You can create/edit/delete billboards that can be placed in a scene or placed with scripting
 - There are 2 types of billboards: text & non-text/textured
 - A text billboard consists of custom (colored) text using a custom loaded **font**
@@ -165,7 +178,6 @@ The engine root directory has 3 folders:
 - **Texture**: colored 24bit/32bit `PNG` format image file from `user\assets\textures\billboard_maps`
 
 ## Audio editor
-![audio](engine/readme/audio_editor.png)
 - You can create/edit/delete audio that can be placed in a scene or **placed/played** with scripting
 - **Audio data**: `WAV` format audio file from `user\assets\audio`
 - Audio can be played in **2D**
@@ -174,7 +186,6 @@ The engine root directory has 3 folders:
 - Audio can be added to the **music** playlist
 
 ## Scene editor
-![scene](engine/readme/scene_editor.png)
 ### Environment
 - Sky: you can select **only 1** sky, created in the environment editor
 - Terrain: you can select **only 1** terrain, created in the environment editor
@@ -217,7 +228,6 @@ The engine root directory has 3 folders:
 - You can set the minimum distance by which level of detailed models will change their rendering
 
 ## Script editor
-![script](engine/readme/script_editor.png)
 - You can create/edit/rename/delete scripts that will be executed in a certain order
 - There are 3 types of scripts: initialization, update, destruction
 - **Initialization** script: will only be executed once, when the game is started
@@ -234,7 +244,6 @@ The engine root directory has 3 folders:
 ## FabScript
 
 ## Game execution
-![execution](engine/readme/execution.png)
 ### Inside engine interface
 - You can play/pause/resume/stop the game preview
 - All changes made with the scripting will be reset when the preview exits
@@ -249,7 +258,6 @@ The engine root directory has 3 folders:
 ### Tips
 - You can create your own custom subfolder within the main folder of `user\assets`
 ### Performance
-![performance](engine/readme/performance.png)
 - You can use the performance statistics to analyze your game's performance
 - The amounts of entities are the **total** amounts
 - The amount of triangles is the **realtime** amount being rendered every frame
@@ -263,3 +271,17 @@ The engine root directory has 3 folders:
 - `window_fullscreen`: boolean value; toggle window fullscreen
 - `window_borderless`: boolean value; toggle window border visibility
 - `selected_game`: string value; select name of project/game to be run on FabiEngine3D launch
+
+## Screenshots
+![interface](engine/readme/interface.png)
+![sky](engine/readme/sky_editor.png)
+![terrain](engine/readme/terrain_editor.png)
+![water](engine/readme/water_editor.png)
+![model](engine/readme/model_editor.png)
+![model](engine/readme/animation_editor.png)
+![billboard](engine/readme/billboard_editor.png)
+![audio](engine/readme/audio_editor.png)
+![scene](engine/readme/scene_editor.png)
+![script](engine/readme/script_editor.png)
+![execution](engine/readme/execution.png)
+![performance](engine/readme/performance.png)

@@ -257,11 +257,12 @@ The engine root directory has 3 folders:
 
 ## Miscellaneous
 ### Tips
-- You can create your own custom subfolder within the main folder of `user\assets`
-- All rotational degrees cannot be higher than 360 or lower than -360 (for example 500 will be 140)
+- You can create your own custom **subfolders** within the main folder of `user\assets`
+- All rotational **degrees** cannot be higher than 360 or lower than -360 (for example 500 will be 140)
 - AABB's will transform based on their rotation, but only in 90 degree steps (0, 90, 180, 270 degrees)
+- The top viewport has a button called "**uncache**" which forces the engine to load an asset again, even if it was cached
 ### Performance
-- You can use the performance statistics to analyze your game's performance
+- You can use the performance statistics to analyze your **game's performance**
 - The amounts of entities are the **total** amounts
 - The amount of triangles is the **realtime** amount being rendered every frame
 - `coreUpdate` includes all function calls and calculations in your update scripts

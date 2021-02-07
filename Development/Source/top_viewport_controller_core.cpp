@@ -55,7 +55,8 @@ void TopViewportController::initialize()
 	_miscWindow->addScreen("main");
 	_miscWindow->setActiveScreen("main");
 	screen = _miscWindow->getScreen("main");
-	screen->addButton("uncache", Vec2(0.0f, 0.0f), Vec2(0.5f, 1.25f), TVPC::buttonColor, TVPC::buttonHoverColor, "UNCACHE", TVPC::textColor, TVPC::textHoverColor);
+	screen->addButton("uncache", Vec2(-0.55f, 0.0f), Vec2(0.5f, 1.25f), TVPC::buttonColor, TVPC::buttonHoverColor, "UNCACHE", TVPC::textColor, TVPC::textHoverColor);
+	screen->addButton("documentation", Vec2(0.35f, 0.0f), Vec2(0.9f, 1.25f), TVPC::buttonColor, TVPC::buttonHoverColor, "DOCUMENTATION", TVPC::textColor, TVPC::textHoverColor);
 }
 
 void TopViewportController::update()
@@ -246,6 +247,10 @@ void TopViewportController::_updateMiscScreenManagement()
 				_fe3d.misc_clearAudioChunkCache(newFilePath);
 				_fe3d.misc_clearAudioMusicCache(newFilePath);
 			}
+		}
+		else if (screen->getButton("documentation")->isHovered())
+		{
+			ShellExecute(0, 0, "https://github.com/ConsolePeasant92/FabiEngine3D/blob/master/FabiEngine3D/README.md", 0, 0, SW_SHOW);
 		}
 	}
 }

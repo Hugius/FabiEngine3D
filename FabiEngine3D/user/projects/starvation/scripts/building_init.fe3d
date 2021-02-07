@@ -1,4 +1,4 @@
-21 54
+31 46
 META script_type_init
 
 /// Globals
@@ -31,7 +31,3 @@ fe3d:model_place("well_display", "well2", 0.0, 0.0, 0.0)
 fe3d:model_set_visible("well_display", <false>)
 fe3d:model_place("pen_display", "pen", 0.0, 0.0, 0.0)
 fe3d:model_set_visible("pen_display", <false>)
-VEC3 penSize = fe3d:model_get_size("pen_display")
-MUL penSize.x 0.5
-MUL penSize.z 0.5
-fe3d:model_set_size("pen_display", penSize.x, penSize.y, penSize.z)

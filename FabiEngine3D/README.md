@@ -220,9 +220,9 @@ The engine root directory has 3 folders:
 ![script](engine/readme/script_editor.png)
 - You can create/edit/rename/delete scripts that will be executed in a certain order
 - There are 3 types of scripts: initialization, update, destruction
-- Initialization script: will only be executed once, when the game is started
-- Update script: will be executed every frame when the game is running
-- Destruction script: will only be executed one, when the game is stopped
+- **Initialization** script: will only be executed once, when the game is started
+- **Update** script: will be executed every frame when the game is running
+- **Destruction** script: will only be executed one, when the game is stopped
 
 ## Project settings
 - MSAA qualiity (default: 4)
@@ -235,9 +235,31 @@ The engine root directory has 3 folders:
 
 ## Game execution
 ![execution](engine/readme/execution.png)
+### Inside engine interface
+- You can play/pause/resume/stop the game preview
+- All changes made with the scripting will be reset when the preview exits
+- You can pause the gameplay with **ESCAPE**
+### Outside engine interface
+- Exit FabiEngine3D
+- Open the **config** file (`config.fe3d`)
+- Set `selected_game` to the name of the project/game you want to run
+- Start FabiEngine3D
 
 ## Miscellaneous
 ### Tips
+- You can create your own custom subfolder within the main folder of `user\assets`
 ### Performance
 ![performance](engine/readme/performance.png)
+- You can use the performance statistics to analyze your game's performance
+- The amounts of entities are the **total** amounts
+- The amount of triangles is the **realtime** amount being rendered every frame
+- `coreUpdate` includes all function calls and calculations in your update scripts
+- `bufferSwap` means the actual buffering on the output screen
+- Use LOD entities to improve your performance
+- Lower the graphics quality in the project settings to improve your performance
 ### Config file
+- The config file (`config.fe3d`) has multiple settings for the application appearance
+- `window_size_multiplier`: decimal value between 0.0 and 1.0; 1.0 means the full monitor resolution
+- `window_fullscreen`: boolean value; toggle window fullscreen
+- `window_borderless`: boolean value; toggle window border visibility
+- `selected_game`: string value; select name of project/game to be run on FabiEngine3D launch

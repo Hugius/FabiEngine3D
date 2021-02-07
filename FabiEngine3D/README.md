@@ -8,7 +8,7 @@ The engine only uses 2 libraries: OpenGL 4.5 & SDL2. It is written in C++17 and 
 2. [Engine interface](#engine-interface)
 3. [Folder structures](#folder-structures)
 4. [Development order](#development-order)
-5. [Project management](#project management)
+5. [Project management](#project-management)
 6. [Environment editor](#environment-editor)
 7. [Model editor](#model-editor)
 8. [Animation editor](#animation-editor)
@@ -245,6 +245,7 @@ The engine root directory has 3 folders:
 
 ## Game execution
 ### Inside engine interface
+![execution](engine/readme/execution.png)
 - You can play/pause/resume/stop the game preview
 - All changes made with the scripting will be reset when the preview exits
 - You can pause the gameplay with **ESCAPE**
@@ -257,6 +258,8 @@ The engine root directory has 3 folders:
 ## Miscellaneous
 ### Tips
 - You can create your own custom subfolder within the main folder of `user\assets`
+- All rotational degrees cannot be higher than 360 or lower than -360 (for example 500 will be 140)
+- AABB's will transform based on their rotation, but only in 90 degree steps (0, 90, 180, 270 degrees)
 ### Performance
 - You can use the performance statistics to analyze your game's performance
 - The amounts of entities are the **total** amounts
@@ -273,15 +276,25 @@ The engine root directory has 3 folders:
 - `selected_game`: string value; select name of project/game to be run on FabiEngine3D launch
 
 ## Screenshots
+### Engine interface example
 ![interface](engine/readme/interface.png)
+### Sky editor example
 ![sky](engine/readme/sky_editor.png)
+### Terrain editor example
 ![terrain](engine/readme/terrain_editor.png)
+### Water editor example
 ![water](engine/readme/water_editor.png)
+### Model editor example
 ![model](engine/readme/model_editor.png)
-![model](engine/readme/animation_editor.png)
+### Animation editor example
+![animation](engine/readme/animation_editor.png)
+### Billboard editor example
 ![billboard](engine/readme/billboard_editor.png)
+### Audio editor example
 ![audio](engine/readme/audio_editor.png)
+### Scene editor example
 ![scene](engine/readme/scene_editor.png)
+### Script editor example
 ![script](engine/readme/script_editor.png)
-![execution](engine/readme/execution.png)
+### Performance statistics example
 ![performance](engine/readme/performance.png)

@@ -252,8 +252,7 @@ The engine root directory has 3 folders:
 - **Update** script: `META script_type_update`
 - **Destruction** script: `META script_type_destroy`
 - You also need to specify the first script to run for every type: `META execution_entry`  
-
-Example initialization script:
+#### Example code
 ```
 1. META script_type_init
 2. META execution_entry
@@ -261,56 +260,84 @@ Example initialization script:
 4. /// Your code <--- This is a comment by the way
 ```
 ### Variables & values
-- Syntax: `<scope> <mutability> <type> <name> = <value>`
-- Types to choose from: `VEC3` (vector3), `STR` (string), `INT` (integer), `DEC` (decimal), `BOOL` (boolean)
+#### Creation yntax
+- You can **create** a variable using: `<scope> <mutability> <type> <name> = <value>`
+#### Alteration syntax
+- You can **edit** a variable using: `EDIT <name> = <value>`
+#### Scope
 - A variable **scope** can be **global** (`GLOB` keyword) or **local** (no extra keyword)
 - A local variable can only be accessed in the **same script** file
 - A global variable can be accessed by **ALL** script files
 - A local variable will be deleted after **the end** of a script file execution, once created
 - A global variable will **never** be deleted, once created
+#### Mutability
 - A variable can be **immutable** (`CONST` keyword) or **mutable** (no extra keyword)
+- If you try to change a CONST variable, you will get an error!
+#### Naming conventions
 - A variable name **must** be unique and not conflicting with FabScript keywords
 - A variable name **must** start with an alpha value (abc...)
 - A global variable name **must** start with '_'
-- You can edit a variable value using: `EDIT <name> = <value>`
-- You can cast a variable to a different type using: `CAST <name> <type>`
+#### Casting
+- You can **cast** a variable to a different type using: `CAST <name> <type>`
 - You can cast from INT to DEC and vice versa
 - You can cast from INT to BOOL and vice versa
 - You can cast from INT to STR and vice versa (if possible)
 - You can cast from DEC to STR and vice versa (if possible)
-- A list variable is a special type that is basically an array with different types of values
-
-Example variable creations:
+#### Values
+- Types to choose from: `VEC3` (vector3), `STR` (string), `INT` (integer), `DEC` (decimal), `BOOL` (boolean)
+#### BOOL
+- A boolean can only be true or false just like binary (example: `<true>` or `<false>`)
+#### STR
+- A string can be any characters, as long as it's surrounded with " " (example: `"hello world"`)
+#### INT
+- An integer is a whole number which can be negative (example: `42`)
+#### DEC
+- A decimal is a floating point number which can be negative (example: `42.536`)
+#### VEC3
+- A vec3 is composed of 3 individual **decimal** values (example: `[1.0 2.0 3.0]`)
+- Usually a VEC3 is a position/direction or color
+- To **access/change** the individual components, add .x/.y/.z or .r/.g/.b after the variable name (example: `<name>.x`)
+#### LIST
+- A list is a special type of variable that holds 0 or more **individual values** (example: `{42, "test", <false>}`)
+- A list **cannot** hold another list value/variable
+- You can **access** individual list components using: `<name>[<index>]`
+- You can **add** a new value to the list using: `PUSH <name> <value>`
+- You can **delete** an existing value from the list using: `PULL <name> <index>`
+- Remember: an index starts from **0**!
+- NOTE: you **cannot** access a VEC3 decimal from a list directly
+#### Example code
 ```
-/// Basic variable syntax for each type
-VEC3 myVector = [1.0 2.0 3.0]
+/// Variable syntax for each type
+BOOL myBoolean = <false>
 STR myString = "hello world"
 INT myInteger = 42
 DEC myDecimal = 42.94858
-BOOL myBoolean = <false>
+VEC3 myVector = [1.0 2.0 3.0]
+LIST myList = {42, myBoolean, [4 2 0]}
 
-/// If you try to change a CONST variable, you will get an error!
+/// Constant variables
 CONST STR immutableString = "i cannot be changed"
 STR mutableString = "try to change me"
 EDIT mutableString = "i changed you"
 
-/// Global variables can be accessed throughout the WHOLE codebase
+/// Global variables
 GLOB INT _someInteger = 5
 GLOB CONST INT _constInteger = 5
 
-/// You can only cast a variable to another type if it's possible
+/// Casting variables
 CAST myDecimal INT
 STR intString = "123"
 CAST intString INT
 
-/// You can access a VEC3 variable using .xyz or .rgb (usually a VEC3 is a position/direction or color)
-/// redColor.r = 1.0, redColor.g = 0.0, redColor.b = 0.0
+/// Vector3 variable
 VEC3 redColor = [1.0 0.0 0.0]
+DEC redValue = redColor.r
 
-/// A list variable holds 0 or more values (can be different types)
-/// Individual list components can be accessed using an index (starts with 0!!!)
-/// myList[0] = "hello", myList[1] = 123, etc.
-LIST myList = {"hello", 123, 45.0, redColor, redColor.x}
+/// List variable
+LIST myList = {"hello", 123, 45.0, redColor, redColor.x, <false>}
+STR temp1 = myList[0]
+PUSH temp1 "newValue"
+PULL temp1 6
 ```
 ### Arithmetic operations
 ### Logic operations

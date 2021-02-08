@@ -17,7 +17,7 @@ The engine only uses 2 libraries: OpenGL 4.5 & SDL2. It is written in C++17 and 
 11. [Scene editor](#scene-editor)
 12. [Script editor](#script-editor)
 13. [Project settings](#project-settings)
-14. [FabScript](#fabScript)
+14. [FabScript](#fabscript)
 14. [Game execution](#game-execution)
 14. [Miscellaneous](#miscellaneous)
 14. [Screenshots](#screenshots)
@@ -229,10 +229,11 @@ The engine root directory has 3 folders:
 
 ## Script editor
 - You can create/edit/rename/delete scripts that will be executed in a certain order
-- There are 3 types of scripts: initialization, update, destruction
-- **Initialization** script: will only be executed once, when the game is started
-- **Update** script: will be executed every frame when the game is running
-- **Destruction** script: will only be executed one, when the game is stopped
+- You can use the **mouse** to navigate through the code or use the **arrow keys**
+- Script files have a line **limit of 100**, to force you to create small but well-structured scripts
+- You can **scroll** through lines using the mousewheel
+- You can use CTRL + C to **copy** a **line**
+- You can use CTRL + V to **paste** a **line**
 
 ## Project settings
 - MSAA qualiity (default: 4)
@@ -242,6 +243,82 @@ The engine root directory has 3 folders:
 - Max audio channels (default: 128)
 
 ## FabScript
+- FabScript is a custom **interpreted** scripting language created for FabiEngine3D.
+- Experience with coding is a prerequisite (Python, Java, C++, C#, Javascript, etc.).
+- Scripts are run from the first line to the last line, from left to right.
+### META
+- Line 1 of every script file should specify its type: initialization, update, destruction
+- **Initialization** script: `META script_type_init`
+- **Update** script: `META script_type_update`
+- **Destruction** script: `META script_type_destroy`
+- You also need to specify the first script to run for every type: `META execution_entry`  
+
+Example initialization script:
+```
+1. META script_type_init
+2. META execution_entry
+3. 
+4. /// Your code <--- This is a comment by the way
+```
+### Variables & values
+- Syntax: `<scope> <mutability> <type> <name> = <value>`
+- Types to choose from: `VEC3` (vector3), `STR` (string), `INT` (integer), `DEC` (decimal), `BOOL` (boolean)
+- A variable **scope** can be **global** (`GLOB` keyword) or **local** (no extra keyword)
+- A local variable can only be accessed in the **same script** file
+- A global variable can be accessed by **ALL** script files
+- A local variable will be deleted after **the end** of a script file execution, once created
+- A global variable will **never** be deleted, once created
+- A variable can be **immutable** (`CONST` keyword) or **mutable** (no extra keyword)
+- A variable name **must** be unique and not conflicting with FabScript keywords
+- A variable name **must** start with an alpha value (abc...)
+- A global variable name **must** start with '_'
+- You can edit a variable value using: `EDIT <name> = <value>`
+- You can cast a variable to a different type using: `CAST <name> <type>`
+- You can cast from INT to DEC and vice versa
+- You can cast from INT to BOOL and vice versa
+- You can cast from INT to STR and vice versa (if possible)
+- You can cast from DEC to STR and vice versa (if possible)
+- A list variable is a special type that is basically an array with different types of values
+
+Example variable creations:
+```
+/// Basic variable syntax for each type
+VEC3 myVector = [1.0 2.0 3.0]
+STR myString = "hello world"
+INT myInteger = 42
+DEC myDecimal = 42.94858
+BOOL myBoolean = <false>
+
+/// If you try to change a CONST variable, you will get an error!
+CONST STR immutableString = "i cannot be changed"
+STR mutableString = "try to change me"
+EDIT mutableString = "i changed you"
+
+/// Global variables can be accessed throughout the WHOLE codebase
+GLOB INT _someInteger = 5
+GLOB CONST INT _constInteger = 5
+
+/// You can only cast a variable to another type if it's possible
+CAST myDecimal INT
+STR intString = "123"
+CAST intString INT
+
+/// You can access a VEC3 variable using .xyz or .rgb (usually a VEC3 is a position/direction or color)
+/// redColor.r = 1.0, redColor.g = 0.0, redColor.b = 0.0
+VEC3 redColor = [1.0 0.0 0.0]
+
+/// A list variable holds 0 or more values (can be different types)
+/// Individual list components can be accessed using an index (starts with 0!!!)
+/// myList[0] = "hello", myList[1] = 123, etc.
+LIST myList = {"hello", 123, 45.0, redColor, redColor.x}
+```
+### Arithmetic operations
+### Logic operations
+### Loops
+### Executing other scripts
+### Engine functions
+### Math functions
+### Miscellaneous functions
 
 ## Game execution
 ### Inside engine interface

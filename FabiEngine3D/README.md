@@ -295,7 +295,7 @@ Click [here](#script-editor-example) to see an example
 - You can cast from DEC to STR and vice versa (if possible)
 #### Basic values
 - Types to choose from: `VEC3` (vector3), `STR` (string), `INT` (integer), `DEC` (decimal), `BOOL` (boolean)
-- A boolean can only be true or false just like binary (example: `<true>` or `<false>`)
+- A boolean can only be true or false just like binary (example: `<true>` or `<false>`) (NOTE: the < and > are in this case **NOT** placeholders)
 - A string can be any characters, as long as it's surrounded with " " (example: `"hello world"`)
 - An integer is a whole number which can be negative (example: `42`)
 - A decimal is a floating point number which can be negative (example: `42.536`)
@@ -346,18 +346,20 @@ PUSH temp1 "newValue"
 PULL temp1 6
 ```
 ### Arithmetic operations
-#### Types
-- There are 4 types of arithmetic: addition, subtraction, multiplication, division
+#### Arithmetic types
+- There are 5 types of arithmetic: addition, subtraction, multiplication, division, negation
 - Addition syntax: `INCR <name> <value>`
 - Subtraction syntax: `DECR <name> <value>`
 - Multiplication syntax: `MUL <name> <value>`
 - Division syntax: `DIV <name> <value>`
+- Negation syntax: `NEG <name>`
 - The result of the arithmetic operation will be stored in the variable the operation was applied on
 #### Example code
 ```
 INT myInteger = 40
 DIV myInteger 5
-/// Now myInteger will be 8
+NEG myInteger
+/// Now myInteger will be -8
 ```
 ### Logic operations
 #### Logic types
@@ -366,12 +368,48 @@ DIV myInteger 5
 - To check if one value is **higher** than the other: `<value> MORE <value>` (only works for `INT` and `DEC` values)
 - To check if one value is **lower** than the other: `<value> LESS <value>` (only works for `INT` and `DEC` values)
 #### Logic statements
+- There are 3 types: if-statement, elif-statement, else-statement
+- Every logic statement **must** end with a `:`
+- All code under a logic statement **must** must be indented with 4 spaces / 1 TAB
+- The order is: if - elif - else
+- These statements can be nested infinitely
+- Works the same as all other programming languages
+#### Example code
+```
+INT age = 41
+IF test IS 42:
+    fe3d:print("i am 42!")
+ELIF age LESS 42:
+    fe3d:print("i am younger than 42!")
+ELSE:
+    fe3d:print("i am higher than 42!")
+```
 ### Loops
 ### Executing other scripts
+- For every script **type** (init, update, destroy) there is an `execution_entry` META defined
+- From there you can decide the **order of execution** yourself
+- You can **execute** another script file using: `EXEC <name>`
+- After the script is executed, the program will continue running the script **where it left off**
+- The script that is executed must have the **same type** as the caller script
+- This works the same way as **functions** in other programming languages
+#### Example code
+```
+/// Code in main_script.fe3d
+EXEC print_script
+fe3d:print("goodbye world")
+
+/// Code in print_script.fe3d
+fe3d:print("hello world")
+
+/// After end of program the console output will be:
+/// > hello world
+/// > goodbye world
+```
 ### Engine functions
 ### Math functions
 ### Miscellaneous functions
 ### Tips & tricks
+- You can set the value of a `BOOL` variable to the result of a condition using: `... *name* = (<condition>)`
 
 ## Game execution
 ### Inside engine interface

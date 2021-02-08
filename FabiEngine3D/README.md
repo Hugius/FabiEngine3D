@@ -260,7 +260,7 @@ The engine root directory has 3 folders:
 4. /// Your code <--- This is a comment by the way
 ```
 ### Variables & values
-#### Creation yntax
+#### Creation syntax
 - You can **create** a variable using: `<scope> <mutability> <type> <name> = <value>`
 #### Alteration syntax
 - You can **edit** a variable using: `EDIT <name> = <value>`
@@ -283,15 +283,11 @@ The engine root directory has 3 folders:
 - You can cast from INT to BOOL and vice versa
 - You can cast from INT to STR and vice versa (if possible)
 - You can cast from DEC to STR and vice versa (if possible)
-#### Values
+#### Basic values
 - Types to choose from: `VEC3` (vector3), `STR` (string), `INT` (integer), `DEC` (decimal), `BOOL` (boolean)
-#### BOOL
 - A boolean can only be true or false just like binary (example: `<true>` or `<false>`)
-#### STR
 - A string can be any characters, as long as it's surrounded with " " (example: `"hello world"`)
-#### INT
 - An integer is a whole number which can be negative (example: `42`)
-#### DEC
 - A decimal is a floating point number which can be negative (example: `42.536`)
 #### VEC3
 - A vec3 is composed of 3 individual **decimal** values (example: `[1.0 2.0 3.0]`)
@@ -340,12 +336,32 @@ PUSH temp1 "newValue"
 PULL temp1 6
 ```
 ### Arithmetic operations
+#### Types
+- There are 4 types of arithmetic: addition, subtraction, multiplication, division
+- Addition syntax: `INCR <name> <value>`
+- Subtraction syntax: `DECR <name> <value>`
+- Multiplication syntax: `MUL <name> <value>`
+- Division syntax: `DIV <name> <value>`
+- The result of the arithmetic operation will be stored in the variable the operation was applied on
+#### Example code
+```
+INT myInteger = 40
+DIV myInteger 5
+/// Now myInteger will be 8
+```
 ### Logic operations
+#### Logic types
+- To check if two values are **the same**: `<value> IS <value>`
+- To check if two values are **different**: `<value> NOT <value>`
+- To check if one value is **higher** than the other: `<value> MORE <value>` (only works for `INT` and `DEC` values)
+- To check if one value is **lower** than the other: `<value> LESS <value>` (only works for `INT` and `DEC` values)
+#### Logic statements
 ### Loops
 ### Executing other scripts
 ### Engine functions
 ### Math functions
 ### Miscellaneous functions
+### Tips & tricks
 
 ## Game execution
 ### Inside engine interface
@@ -360,12 +376,13 @@ PULL temp1 6
 - Start FabiEngine3D
 
 ## Miscellaneous
-### Tips
+### Tips & tricks
 - You can create your own custom **subfolders** within the main folder of `user\assets`
 - All rotational **degrees** cannot be higher than 360 or lower than -360 (for example 500 will be 140)
 - AABB's will transform based on their rotation, but only in 90 degree steps (0, 90, 180, 270 degrees)
 - The top viewport has a button called "**uncache**" which forces the engine to load an asset again, even if it was cached
 ### Performance
+- Click [here](#performance-statistics-example) to see the image for this chapter
 - You can use the performance statistics to analyze your **game's performance**
 - The amounts of entities are the **total** amounts
 - The amount of triangles is the **realtime** amount being rendered every frame
@@ -374,7 +391,7 @@ PULL temp1 6
 - Use LOD entities to improve your performance
 - Lower the graphics quality in the project settings to improve your performance
 ### Config file
-- The config file (`config.fe3d`) has multiple settings for the application appearance
+- The config file (`config.fe3d`) has multiple **settings** for the application appearance
 - `window_size_multiplier`: decimal value between 0.0 and 1.0; 1.0 means the full monitor resolution
 - `window_fullscreen`: boolean value; toggle window fullscreen
 - `window_borderless`: boolean value; toggle window border visibility

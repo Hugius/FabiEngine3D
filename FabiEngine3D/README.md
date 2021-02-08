@@ -60,6 +60,7 @@ The engine only uses 2 libraries: OpenGL 4.5 & SDL2. It is written in C++17 and 
 - Logical operations: if, elif, else, is, not, and or
 
 ## Engine interface
+Click [here](#engine-interface-example) to see an example
 The engine GUI is divided into 5 sections:
 - Left viewport: editor menus and project settings
 - Top viewport: project management & game preview management
@@ -102,6 +103,7 @@ The engine root directory has 3 folders:
 
 ## Environment editor
 ### Sky
+Click [here](#sky-editor-example) to see an example
 - You can create/edit/delete sky environments that can be placed in a scene
 - The sky environment is rendered as a **skybox**, which has 6 different texturs
 - You can load these 6 images from `user\assets\textures\cube_maps\`
@@ -109,6 +111,7 @@ The engine root directory has 3 folders:
 - The image resolutions must be the same
 - Properties include: lightness, color, rotation speed
 ### Terrain
+Click [here](#terrain-editor-example) to see an example
 - You can create/edit/delete terrain environments that can be placed in a scene
 - The terrain environment is generated with a **height map** texture
 - A terrain can have a **diffuse map** texture, but can also be textured using a **blend mapping**
@@ -120,6 +123,7 @@ The engine root directory has 3 folders:
 - **Diffuse maps**: colored 24bit `PNG` format image file from `user\assets\textures\diffuse_maps\`
 - **Normal maps**: colored 24bit `PNG` format image file from `user\assets\textures\normal_maps\`
 ### Water
+Click [here](#water-editor-example) to see an example
 - You can create/edit/delete water environments that can be placed in a scene
 - The water environment is simply a **flat plane** in 3D space
 - Properties include: position, size, wave height, specular factor & intensity, wave/ripple speed, UV-repeat, color, edge transparency
@@ -132,6 +136,7 @@ The engine root directory has 3 folders:
 - Specular reflection (on/off, **normal map** needed: colored 24bit `PNG` format image from `user\assets\textures\normal_maps\`)    
 
 ## Model editor
+Click [here](#model-editor-example) to see an example
 - You can create/edit/delete models that can be placed in scene or placed with scripting
 - A model must **at least** consist of a mesh
 - Textures can be added to the model as well as a custom color
@@ -156,6 +161,7 @@ The engine root directory has 3 folders:
 - You can bind a **normal** map to the part by writing `FE3D_NORMAL_MAP <path><filename>` on the next line
 
 ## Animation editor
+Click [here](#animation-editor-example) to see an example
 - You can create/edit/delete animations that can be applied to **models** with scripting or in the scene editor
 - You can select a **preview model** for the animation playback
 - An animation consists of 1 or more **keyframes**
@@ -166,6 +172,7 @@ The engine root directory has 3 folders:
 - The **last** animation keyframe should be the same as the **initial** frame
 
 ## Billboard editor
+Click [here](#billboard-editor-example) to see an example
 - You can create/edit/delete billboards that can be placed in a scene or placed with scripting
 - There are 2 types of billboards: text & non-text/textured
 - A text billboard consists of custom (colored) text using a custom loaded **font**
@@ -178,6 +185,7 @@ The engine root directory has 3 folders:
 - **Texture**: colored 24bit/32bit `PNG` format image file from `user\assets\textures\billboard_maps`
 
 ## Audio editor
+Click [here](#audio-editor-example) to see an example
 - You can create/edit/delete audio that can be placed in a scene or **placed/played** with scripting
 - **Audio data**: `WAV` format audio file from `user\assets\audio`
 - Audio can be played in **2D**
@@ -186,6 +194,7 @@ The engine root directory has 3 folders:
 - Audio can be added to the **music** playlist
 
 ## Scene editor
+Click [here](#scene-editor-example) to see an example
 ### Environment
 - Sky: you can select **only 1** sky, created in the environment editor
 - Terrain: you can select **only 1** terrain, created in the environment editor
@@ -228,6 +237,7 @@ The engine root directory has 3 folders:
 - You can set the minimum distance by which level of detailed models will change their rendering
 
 ## Script editor
+Click [here](#script-editor-example) to see an example
 - You can create/edit/rename/delete scripts that will be executed in a certain order
 - You can use the **mouse** to navigate through the code or use the **arrow keys**
 - Script files have a line **limit of 100**, to force you to create small but well-structured scripts
@@ -382,7 +392,7 @@ DIV myInteger 5
 - AABB's will transform based on their rotation, but only in 90 degree steps (0, 90, 180, 270 degrees)
 - The top viewport has a button called "**uncache**" which forces the engine to load an asset again, even if it was cached
 ### Performance
-- Click [here](#performance-statistics-example) to see the image for this chapter
+- Click [here](#performance-statistics-example) to see an example
 - You can use the performance statistics to analyze your **game's performance**
 - The amounts of entities are the **total** amounts
 - The amount of triangles is the **realtime** amount being rendered every frame

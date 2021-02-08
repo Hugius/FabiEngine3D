@@ -48,6 +48,10 @@ void ScriptInterpreter::_processVariableTypecast(const string& scriptLine)
 	{
 		variable.changeValue(ScriptValue(_fe3d, ScriptValueType::INTEGER, static_cast<int>(variable.getValue().getBoolean())));
 	}
+	else if ((variable.getValue().getType() == ScriptValueType::INTEGER) && (typeString == _booleanKeyword)) // From integer to boolean
+	{
+		variable.changeValue(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, static_cast<bool>(variable.getValue().getInteger())));
+	}
 	else if ((variable.getValue().getType() == ScriptValueType::INTEGER) && (typeString == _stringKeyword)) // From integer to string
 	{
 		variable.changeValue(ScriptValue(_fe3d, ScriptValueType::STRING, to_string(variable.getValue().getInteger())));

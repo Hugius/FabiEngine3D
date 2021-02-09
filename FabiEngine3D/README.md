@@ -440,7 +440,52 @@ fe3d:print(myString)
 
 # Function List
 ### Engine functions
+#### Input
+#### Camera
+#### Physics
+#### Graphics
+#### Sky
+#### Terrain
+#### Water
+#### Model
+#### Animations
+#### Billboard
+#### AABB
+#### Light
+#### Audio
+#### Music
+#### Image
+#### Text
+#### Miscellaneous
 ### Math functions
+- `math:tan`(DEC degrees) ---> DEC
+  > Returns the tangent of **degrees**.
+- `math:sin`(DEC degrees) ---> DEC
+  > Returns the sine of **degrees**.
+- `math:cos`(DEC degrees) ---> DEC
+  > Returns the cosine of **degrees**.
+- `math:atan`(DEC value) ---> DEC
+  > Returns the arc tangent of **value**.
+- `math:asin`(DEC value) ---> DEC
+  > Returns the arc sine of **value**.
+- `math:acos`(DEC value) ---> DEC
+  > Returns the arc cosine of **value**.
+- `math:atan2`(DEC value1, DEC value2) ---> DEC
+  > Returns the arc tangent of **value1** and **value2**.
+- `math:pow`(INT/DEC base, INT/DEC exponent) ---> INT/DEC
+  > Returns the result of **base** to the power of **exponent**. Can be either INT or DEC.
+- `math:min`(INT/DEC first, INT/DEC second) ---> INT/DEC
+  > Returns the lower value of **first** and **second**. Can be either INT or DEC.
+- `math:max`(INT/DEC first, INT/DEC second) ---> INT/DEC
+  > Returns the higher value of **first** and **second**. Can be either INT or DEC.
+- `math:clamp`(INT/DEC value, INT/DEC min, INT/DEC max) ---> INT/DEC
+  > Returns the clamped **value** between **min** and **max**. Can be either INT or DEC.
+- `math:sqrt`(DEC value) ---> DEC
+  > Returns the square root of **value**.
+- `math:abs`(INT/DEC value) ---> INT/DEC
+  > Returns the absolute value of **value**. Can be either INT or DEC.
+- `math:distance`(VEC3 pos1, VEC3 pos2) ---> INT/DEC
+  > Returns the absolute distance between **pos1** and **pos2**.
 ### Miscellaneous functions
 - `misc:concat_strings`(STR firstString, STR secondString) ---> STR
   > Concatenates **firstString** and **secondString** together and returns the result.

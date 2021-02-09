@@ -458,8 +458,8 @@ fe3d:print(myString)
 #### Text
 #### Miscellaneous
 ### Math functions
-- `math:tan`(DEC degrees) ---> DEC
-  > Returns the tangent of **degrees**.
+- `math:tan(DEC degrees)` ---> DEC  
+  Returns the tangent of **degrees**.
 - `math:sin`(DEC degrees) ---> DEC
   > Returns the sine of **degrees**.
 - `math:cos`(DEC degrees) ---> DEC

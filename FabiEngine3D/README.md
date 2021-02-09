@@ -3,27 +3,28 @@ FabiEngine3D is a small game engine for simple 3D games.
 It contains various features such as: asset loading, 2D & 3D rendering, audio, user input, physics, scripting and an engine GUI to work with.  
 The engine only uses 2 libraries: OpenGL 4.5 & SDL2. It is written in C++17 and works only on Windows.
 
-## Table of contents
+# Table of contents
 1. [Features](#features)
-2. [Engine interface](#engine-interface)
-3. [Folder structures](#folder-structures)
-4. [Development order](#development-order)
-5. [Project management](#project-management)
-6. [Environment editor](#environment-editor)
-7. [Model editor](#model-editor)
-8. [Animation editor](#animation-editor)
-9. [Billboard editor](#billboard-editor)
-10. [Audio editor](#audio-editor)
-11. [Scene editor](#scene-editor)
-12. [Script editor](#script-editor)
-13. [Project settings](#project-settings)
+2. [Engine Interface](#engine-interface)
+3. [Folder Structures](#folder-structures)
+4. [Development Order](#development-order)
+5. [Project Management](#project-management)
+6. [Environment Editor](#environment-editor)
+7. [Model Editor](#model-editor)
+8. [Animation Editor](#animation-editor)
+9. [Billboard Editor](#billboard-editor)
+10. [Audio Editor](#audio-editor)
+11. [Scene Editor](#scene-editor)
+12. [Script Editor](#script-editor)
+13. [Project Settings](#project-settings)
 14. [FabScript](#fabscript)
-14. [Game execution](#game-execution)
-14. [Miscellaneous](#miscellaneous)
-14. [Screenshots](#screenshots)
+15. [Function List](#function-list)
+16. [Game Execution](#game-execution)
+17. [Miscellaneous](#miscellaneous)
+18. [Screenshots](#screenshots)
 
-## Features
-### Asset loading
+# Features
+### Asset Loading
 - Multithreaded PNG texture file loading
 - Multithreaded OBJ mesh file loading
 - Multithreaded WAV audio file loading
@@ -59,7 +60,8 @@ The engine only uses 2 libraries: OpenGL 4.5 & SDL2. It is written in C++17 and 
 - Arithmetic operations: increase, decrease, multiply, divide
 - Logical operations: if, elif, else, is, not, and or
 
-## Engine interface
+# Engine Interface
+Click [here](#engine-interface-example) to see an example
 The engine GUI is divided into 5 sections:
 - Left viewport: editor menus and project settings
 - Top viewport: project management & game preview management
@@ -67,13 +69,13 @@ The engine GUI is divided into 5 sections:
 - Bottom viewport: statistics & logging console
 - Mid viewport: 3D display screen
 
-## Folder structures
+# Folder Structures
 The engine root directory has 3 folders:
 - `bin\`: this folder holds the .exe file and all corresponding DLLs (do **NOT** touch)
 - `engine\`: this folder holds all engine resources such as libraries & shaders (do **NOT** touch)
 - `user\`: this folder is where all your game assets are stored. It also holds the project files
 
-## Development order
+# Development Order
 - **Project management**
   > In the top-viewport you can create, edit, save and delete projects. 1 project = 1 game
 - **Environment editor**
@@ -93,15 +95,16 @@ The engine root directory has 3 folders:
 - **Project settings**
   > This is where you can setup mostly graphical properties of your game such as shadow quality, reflection quality, etc
 
-## Project management
+# Project Management
 - You can create, edit/load, save and delete a project
 - Every **project** is a different **game** and must have a **unique** name
 - A project has its own folder in the engine `user\projects\` directory
 - An important note is to **NOT** change anything in this directory!
 - The only directory that you can change is the `user\assets\`folder
 
-## Environment editor
+# Environment Editor
 ### Sky
+Click [here](#sky-editor-example) to see an example
 - You can create/edit/delete sky environments that can be placed in a scene
 - The sky environment is rendered as a **skybox**, which has 6 different texturs
 - You can load these 6 images from `user\assets\textures\cube_maps\`
@@ -109,6 +112,7 @@ The engine root directory has 3 folders:
 - The image resolutions must be the same
 - Properties include: lightness, color, rotation speed
 ### Terrain
+Click [here](#terrain-editor-example) to see an example
 - You can create/edit/delete terrain environments that can be placed in a scene
 - The terrain environment is generated with a **height map** texture
 - A terrain can have a **diffuse map** texture, but can also be textured using a **blend mapping**
@@ -120,6 +124,7 @@ The engine root directory has 3 folders:
 - **Diffuse maps**: colored 24bit `PNG` format image file from `user\assets\textures\diffuse_maps\`
 - **Normal maps**: colored 24bit `PNG` format image file from `user\assets\textures\normal_maps\`
 ### Water
+Click [here](#water-editor-example) to see an example
 - You can create/edit/delete water environments that can be placed in a scene
 - The water environment is simply a **flat plane** in 3D space
 - Properties include: position, size, wave height, specular factor & intensity, wave/ripple speed, UV-repeat, color, edge transparency
@@ -131,7 +136,8 @@ The engine root directory has 3 folders:
 - Waves (on/off, **displacement map** needed: grayscale 24bit `PNG` format image from `user\assets\textures\displacement_maps\`)
 - Specular reflection (on/off, **normal map** needed: colored 24bit `PNG` format image from `user\assets\textures\normal_maps\`)    
 
-## Model editor
+# Model Editor
+Click [here](#model-editor-example) to see an example
 - You can create/edit/delete models that can be placed in scene or placed with scripting
 - A model must **at least** consist of a mesh
 - Textures can be added to the model as well as a custom color
@@ -155,7 +161,8 @@ The engine root directory has 3 folders:
 - You can bind a **reflection** map to the part by writing `FE3D_REFLECTION_MAP <path><filename>` on the next line
 - You can bind a **normal** map to the part by writing `FE3D_NORMAL_MAP <path><filename>` on the next line
 
-## Animation editor
+# Animation Editor
+Click [here](#animation-editor-example) to see an example
 - You can create/edit/delete animations that can be applied to **models** with scripting or in the scene editor
 - You can select a **preview model** for the animation playback
 - An animation consists of 1 or more **keyframes**
@@ -165,7 +172,8 @@ The engine root directory has 3 folders:
 - If the model has **multiple parts**, each part has its own transformation every keyframe
 - The **last** animation keyframe should be the same as the **initial** frame
 
-## Billboard editor
+# Billboard Editor
+Click [here](#billboard-editor-example) to see an example
 - You can create/edit/delete billboards that can be placed in a scene or placed with scripting
 - There are 2 types of billboards: text & non-text/textured
 - A text billboard consists of custom (colored) text using a custom loaded **font**
@@ -177,7 +185,8 @@ The engine root directory has 3 folders:
 - **Font**: `TTF` format font file from `user\assets\fonts`
 - **Texture**: colored 24bit/32bit `PNG` format image file from `user\assets\textures\billboard_maps`
 
-## Audio editor
+# Audio Editor
+Click [here](#audio-editor-example) to see an example
 - You can create/edit/delete audio that can be placed in a scene or **placed/played** with scripting
 - **Audio data**: `WAV` format audio file from `user\assets\audio`
 - Audio can be played in **2D**
@@ -185,7 +194,8 @@ The engine root directory has 3 folders:
 - 3D audio has stereo panning
 - Audio can be added to the **music** playlist
 
-## Scene editor
+# Scene Editor
+Click [here](#scene-editor-example) to see an example
 ### Environment
 - Sky: you can select **only 1** sky, created in the environment editor
 - Terrain: you can select **only 1** terrain, created in the environment editor
@@ -227,7 +237,8 @@ The engine root directory has 3 folders:
 - You can change the editor movement speed, which will be saved for next time
 - You can set the minimum distance by which level of detailed models will change their rendering
 
-## Script editor
+# Script Editor
+Click [here](#script-editor-example) to see an example
 - You can create/edit/rename/delete scripts that will be executed in a certain order
 - You can use the **mouse** to navigate through the code or use the **arrow keys**
 - Script files have a line **limit of 100**, to force you to create small but well-structured scripts
@@ -235,14 +246,14 @@ The engine root directory has 3 folders:
 - You can use CTRL + C to **copy** a **line**
 - You can use CTRL + V to **paste** a **line**
 
-## Project settings
+# Project Settings
 - MSAA qualiity (default: 4)
 - Shadow qualiity (default: 2048)
 - Reflection qualiity (default: 256)
 - Refraction qualiity (default: 256)
 - Max audio channels (default: 128)
 
-## FabScript
+# FabScript
 - FabScript is a custom **interpreted** scripting language created for FabiEngine3D.
 - Experience with coding is a prerequisite (Python, Java, C++, C#, Javascript, etc.).
 - Scripts are run from the first line to the last line, from left to right.
@@ -252,8 +263,7 @@ The engine root directory has 3 folders:
 - **Update** script: `META script_type_update`
 - **Destruction** script: `META script_type_destroy`
 - You also need to specify the first script to run for every type: `META execution_entry`  
-
-Example initialization script:
+#### Example code
 ```
 1. META script_type_init
 2. META execution_entry
@@ -261,66 +271,189 @@ Example initialization script:
 4. /// Your code <--- This is a comment by the way
 ```
 ### Variables & values
-- Syntax: `<scope> <mutability> <type> <name> = <value>`
-- Types to choose from: `VEC3` (vector3), `STR` (string), `INT` (integer), `DEC` (decimal), `BOOL` (boolean)
+#### Creation syntax
+- You can **create** a variable using: `<scope> <mutability> <type> <name> = <value>`
+#### Alteration syntax
+- You can **edit** a variable using: `EDIT <name> = <value>`
+#### Scope
 - A variable **scope** can be **global** (`GLOB` keyword) or **local** (no extra keyword)
 - A local variable can only be accessed in the **same script** file
 - A global variable can be accessed by **ALL** script files
 - A local variable will be deleted after **the end** of a script file execution, once created
 - A global variable will **never** be deleted, once created
+#### Mutability
 - A variable can be **immutable** (`CONST` keyword) or **mutable** (no extra keyword)
+- If you try to change a CONST variable, you will get an error!
+#### Naming conventions
 - A variable name **must** be unique and not conflicting with FabScript keywords
 - A variable name **must** start with an alpha value (abc...)
 - A global variable name **must** start with '_'
-- You can edit a variable value using: `EDIT <name> = <value>`
-- You can cast a variable to a different type using: `CAST <name> <type>`
+#### Casting
+- You can **cast** a variable to a different type using: `CAST <name> <type>`
 - You can cast from INT to DEC and vice versa
 - You can cast from INT to BOOL and vice versa
 - You can cast from INT to STR and vice versa (if possible)
 - You can cast from DEC to STR and vice versa (if possible)
-- A list variable is a special type that is basically an array with different types of values
-
-Example variable creations:
+#### Basic values
+- Types to choose from: `VEC3` (vector3), `STR` (string), `INT` (integer), `DEC` (decimal), `BOOL` (boolean)
+- A boolean can only be true or false just like binary (example: `<true>` or `<false>`) (NOTE: the < and > are in this case **NOT** placeholders)
+- A string can be any characters, as long as it's surrounded with " " (example: `"hello world"`)
+- An integer is a whole number which can be negative (example: `42`)
+- A decimal is a floating point number which can be negative (example: `42.536`)
+#### VEC3
+- A vec3 is composed of 3 individual **decimal** values (example: `[1.0 2.0 3.0]`)
+- Usually a VEC3 is a position/direction or color
+- To **access/change** the individual components, add .x/.y/.z or .r/.g/.b after the variable name (example: `<name>.x`)
+#### LIST
+- A list is a special type of variable that holds 0 or more **individual values** (example: `{42, "test", <false>}`)
+- A list **cannot** hold another list value/variable
+- You can **access** individual list components using: `<name>[<index>]`
+- You can **add** a new value to the list using: `PUSH <name> <value>`
+- You can **delete** an existing value from the list using: `PULL <name> <index>`
+- Remember: an index starts from **0**!
+- NOTE: you **cannot** access a VEC3 decimal from a list directly
+#### Example code
 ```
-/// Basic variable syntax for each type
-VEC3 myVector = [1.0 2.0 3.0]
+/// Variable syntax for each type
+BOOL myBoolean = <false>
 STR myString = "hello world"
 INT myInteger = 42
 DEC myDecimal = 42.94858
-BOOL myBoolean = <false>
+VEC3 myVector = [1.0 2.0 3.0]
+LIST myList = {42, myBoolean, [4 2 0]}
 
-/// If you try to change a CONST variable, you will get an error!
+/// Constant variables
 CONST STR immutableString = "i cannot be changed"
 STR mutableString = "try to change me"
 EDIT mutableString = "i changed you"
 
-/// Global variables can be accessed throughout the WHOLE codebase
+/// Global variables
 GLOB INT _someInteger = 5
 GLOB CONST INT _constInteger = 5
 
-/// You can only cast a variable to another type if it's possible
+/// Casting variables
 CAST myDecimal INT
 STR intString = "123"
 CAST intString INT
 
-/// You can access a VEC3 variable using .xyz or .rgb (usually a VEC3 is a position/direction or color)
-/// redColor.r = 1.0, redColor.g = 0.0, redColor.b = 0.0
+/// Vector3 variable
 VEC3 redColor = [1.0 0.0 0.0]
+DEC redValue = redColor.r
 
-/// A list variable holds 0 or more values (can be different types)
-/// Individual list components can be accessed using an index (starts with 0!!!)
-/// myList[0] = "hello", myList[1] = 123, etc.
-LIST myList = {"hello", 123, 45.0, redColor, redColor.x}
+/// List variable
+LIST myList = {"hello", 123, 45.0, redColor, redColor.x, <false>}
+STR temp1 = myList[0]
+PUSH temp1 "newValue"
+PULL temp1 6
 ```
 ### Arithmetic operations
+#### Arithmetic types
+- There are 5 types of arithmetic: addition, subtraction, multiplication, division, negation
+- Addition syntax: `INCR <name> <value>`
+- Subtraction syntax: `DECR <name> <value>`
+- Multiplication syntax: `MUL <name> <value>`
+- Division syntax: `DIV <name> <value>`
+- Negation syntax: `NEG <name>`
+- The result of the arithmetic operation will be stored in the variable the operation was applied on
+#### Example code
+```
+INT myInteger = 40
+DIV myInteger 5
+NEG myInteger
+/// Now myInteger will be -8
+```
 ### Logic operations
+#### Logic types
+- To check if two values are **the same**: `<value> IS <value>`
+- To check if two values are **different**: `<value> NOT <value>`
+- To check if one value is **higher** than the other: `<value> MORE <value>` (only works for `INT` and `DEC` values)
+- To check if one value is **lower** than the other: `<value> LESS <value>` (only works for `INT` and `DEC` values)
+#### Logic statements
+- There are 3 types: if-statement, elif-statement, else-statement
+- Every logic statement **must** end with a `:`
+- All code under a logic statement **must** must be indented with 4 spaces / 1 TAB
+- The order is: if - elif - else
+- These statements can be nested infinitely
+- Works the same as all other programming languages
+#### Example code
+```
+INT age = 41
+IF test IS 42:
+    fe3d:print("i am 42!")
+ELIF age LESS 42:
+    fe3d:print("i am younger than 42!")
+ELSE:
+    fe3d:print("i am higher than 42!")
+```
 ### Loops
+- Use a `LOOP` statement if you want to run a block of code multiple times
+- Once a loop is started, you can only get out using the `BREAK` statement
+- You can use loops for iterating over a LIST for example
+#### Example code
+```
+LIST myList = {"hello","beautiful", "world"}
+INT index = 0
+LOOP:
+    IF index IS 2:
+        BREAK
+    fe3d:print(myList[index])
+    
+/// Console output:
+/// > hello
+/// > beautiful
+/// > world
+```
 ### Executing other scripts
+- For every script **type** (init, update, destroy) there is an `execution_entry` META defined
+- From there you can decide the **order of execution** yourself
+- You can **execute** another script file using: `EXEC <name>`
+- After the script is executed, the program will continue running the script **where it left off**
+- The script that is executed must have the **same type** as the caller script
+- This works the same way as **functions** in other programming languages
+#### Example code
+```
+/// Code in main_script.fe3d
+EXEC print_script
+fe3d:print("goodbye world")
+
+/// Code in print_script.fe3d
+fe3d:print("hello world")
+
+/// Console output:
+/// > hello world
+/// > goodbye world
+```
+### Functions
+- You can call functions that are built-in FabiEngine3D
+- There are 3 types of functions: `fe3d` functions, `math` functions, `misc` functions
+#### Example code
+```
+STR myString = "i am printed"
+fe3d:print(myString)
+
+/// Console output:
+/// > i am printed
+```
+### Tips & tricks
+- You can set the value of a `BOOL` variable to the result of a condition using: `... *name* = (<condition>)`
+- You can use the `PASS` statement as an empty placeholder for a logical statement or loop
+
+# Function List
 ### Engine functions
 ### Math functions
 ### Miscellaneous functions
+- `misc:concat_strings`(STR firstString, STR secondString) ---> STR
+  > Concatenates 2 strings together and returns the result.
+- `misc:get_list_size`(STR listName) ---> INT
+  > Counts the total of list items and returns the amount. The listname must be put in a string value.
+- `misc:get_string_size`(STR string) ---> INT
+  > Counts the total of string characters and returns the amount.
+- `misc:get_string_part`(STR string, INT startIndex, INT count) ---> STR
+  > Cuts a part from a string and return the cut part. Example: string = "test", startIndex = 1, count = 2, returns:"est".
+- `misc:get_unique_integer`(INT min, INT max) ---> INT
+  > Returns a unique random integer between min and max.
 
-## Game execution
+# Game Execution
 ### Inside engine interface
 ![execution](engine/readme/execution.png)
 - You can play/pause/resume/stop the game preview
@@ -332,13 +465,14 @@ LIST myList = {"hello", 123, 45.0, redColor, redColor.x}
 - Set `selected_game` to the name of the project/game you want to run
 - Start FabiEngine3D
 
-## Miscellaneous
-### Tips
+# Miscellaneous
+### Tips & tricks
 - You can create your own custom **subfolders** within the main folder of `user\assets`
 - All rotational **degrees** cannot be higher than 360 or lower than -360 (for example 500 will be 140)
 - AABB's will transform based on their rotation, but only in 90 degree steps (0, 90, 180, 270 degrees)
 - The top viewport has a button called "**uncache**" which forces the engine to load an asset again, even if it was cached
 ### Performance
+- Click [here](#performance-statistics-example) to see an example
 - You can use the performance statistics to analyze your **game's performance**
 - The amounts of entities are the **total** amounts
 - The amount of triangles is the **realtime** amount being rendered every frame
@@ -347,13 +481,13 @@ LIST myList = {"hello", 123, 45.0, redColor, redColor.x}
 - Use LOD entities to improve your performance
 - Lower the graphics quality in the project settings to improve your performance
 ### Config file
-- The config file (`config.fe3d`) has multiple settings for the application appearance
+- The config file (`config.fe3d`) has multiple **settings** for the application appearance
 - `window_size_multiplier`: decimal value between 0.0 and 1.0; 1.0 means the full monitor resolution
 - `window_fullscreen`: boolean value; toggle window fullscreen
 - `window_borderless`: boolean value; toggle window border visibility
 - `selected_game`: string value; select name of project/game to be run on FabiEngine3D launch
 
-## Screenshots
+# Screenshots
 ### Engine interface example
 ![interface](engine/readme/interface.png)
 ### Sky editor example

@@ -472,9 +472,9 @@ fe3d:print(myString)
   Returns the arc cosine of **value**.
 - `math:atan2`(`DEC` value1, `DEC` value2) ---> `DEC`  
   Returns the arc tangent of **value1** and **value2**.
-- `math:pow`(`INT base, `INT` exponent) ---> `INT`  
+- `math:pow`(`INT` base, `INT` exponent) ---> `INT`  
   Returns the result of **base** to the power of **exponent**.
-- `math:pow`(`DEC base, `DEC` exponent) ---> `DEC`  
+- `math:pow`(`DEC` base, `DEC` exponent) ---> `DEC`  
   Returns the result of **base** to the power of **exponent**.
 - `math:min`(`INT` first, `INT` second) ---> `INT`  
   Returns the lower value of **first** and **second**.
@@ -498,21 +498,21 @@ fe3d:print(myString)
   Returns the absolute distance between **pos1** and **pos2**.
 ### Miscellaneous functions
 - `misc:concat_strings`(`STR` firstString, `STR` secondString) ---> `STR`  
-  Concatenates **firstString** and **secondString** together and returns the result.
-- `misc:get_list_size`(`STR` listName) ---> `INT`  
-  Counts the total of list items and returns the amount. **listName** must be put in a string value.
-- `misc:get_string_size`(`STR` string) ---> `INT`  
-  Counts the total of **string** characters and returns the amount.
-- `misc:get_string_part`(`STR` string, `INT` startIndex, `INT` count) ---> `STR`  
-  Cuts a part from a string and return the cut part. Example: **string** = "test", **startIndex** = 1, **count** = 2, returns:"est".
-- `misc:get_unique_integer`(INT min, INT max) ---> `INT`  
+  Returns **firstString** and **secondString** concatenated together.
+- `misc:get_list_size`(`STR` name) ---> `INT`  
+  Returns the counted total of list items and returns the amount. **name** must be put in a string value.
+- `misc:get_string_size`(`STR` value) ---> `INT`  
+  Returns the counted total of **value** characters and returns the amount.
+- `misc:get_string_part`(`STR` value, `INT` startIndex, `INT` count) ---> `STR`  
+  Returns a part from **value**. Example: **string** = "test", **startIndex** = 1, **count** = 2, returns:"est".
+- `misc:get_unique_integer`(`INT` min, `INT` max) ---> `INT`  
   Returns a unique random integer between **min** and **max**.
-- `misc:get_random_integer`(INT min, INT max) ---> `INT`  
+- `misc:get_random_integer`(`INT` min, `INT` max) ---> `INT`  
   Returns a random integer between **min** and **max**.
-- `misc:get_random_decimal`(DEC min, DEC max) ---> `DEC`  
+- `misc:get_random_decimal`(`DEC` min, `DEC` max) ---> `DEC`  
   Returns a random decimal between **min** and **max**.
-- `misc:time_interval`(`STR` name, INT frameInterval) ---> `BOOL`  
-  Returns true every **frameInterval** frames for the unique **name**
+- `misc:time_interval`(`STR` name, `INT` frames) ---> `BOOL`  
+  Returns true every **frames** for the unique **name**
 
 # Game Execution
 ### Inside engine interface

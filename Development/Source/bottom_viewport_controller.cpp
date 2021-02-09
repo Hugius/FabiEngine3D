@@ -208,7 +208,7 @@ void BottomViewportController::update()
 	}
 
 	// Clear console messages if user wants to
-	if (_fe3d.input_getKeyPressed(InputType::KEY_X))
+	if (_fe3d.input_getKeyPressed(InputType::KEY_C))
 	{
 		// Validate
 		if (!_topViewportController.isScriptRunning() && !_gui.getGlobalScreen()->isFocused() && !_scriptEditor.isWritingScript())

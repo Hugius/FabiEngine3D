@@ -29,25 +29,7 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 				auto functionName = scriptLine.substr(0, parenthesisIndex);
 
 				// Determine type of function
-				if (functionName == "misc:to_string")
-				{
-					if (_validateListValueAmount(arguments, 1))
-					{
-						if (arguments[0].getType() == ScriptValueType::INTEGER)
-						{
-							returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, to_string(arguments[0].getInteger())));
-						}
-						else if (arguments[0].getType() == ScriptValueType::DECIMAL)
-						{
-							returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, to_string(arguments[0].getDecimal())));
-						}
-						else
-						{
-							_throwScriptError("wrong argument type(s)!");
-						}
-					}
-				}
-				else if (functionName == "misc:concat_strings")
+				if (functionName == "misc:concat_strings")
 				{
 					auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
 
@@ -95,6 +77,24 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::INTEGER, static_cast<int>(result)));
 					}
 				}
+				else if (functionName == "misc:get_string_part") // Cut a part from a string
+				{
+					auto types = { ScriptValueType::STRING, ScriptValueType::INTEGER, ScriptValueType::INTEGER };
+
+					if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+					{
+						// Validate index
+						if (arguments[1].getInteger() < static_cast<int>(arguments[0].getString().size()) && arguments[1].getInteger() >= 0)
+						{
+							auto result = arguments[0].getString().substr(arguments[1].getInteger(), arguments[2].getInteger());
+							returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result));
+						}
+						else
+						{
+							returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, ""));
+						}
+					}
+				}
 				else if (functionName == "misc:get_unique_integer") // Unique integer
 				{
 					auto types =
@@ -135,24 +135,6 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 					{
 						auto result = _fe3d.misc_getRandomFloat(arguments[0].getDecimal(), arguments[1].getDecimal());
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
-					}
-				}
-				else if (functionName == "misc:get_string_part") // Cut a part from a string
-				{
-					auto types = { ScriptValueType::STRING, ScriptValueType::INTEGER, ScriptValueType::INTEGER };
-
-					if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
-					{
-						// Validate index
-						if (arguments[1].getInteger() < static_cast<int>(arguments[0].getString().size()) && arguments[1].getInteger() >= 0)
-						{
-							auto result = arguments[0].getString().substr(arguments[1].getInteger(), arguments[2].getInteger());
-							returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result));
-						}
-						else
-						{
-							returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, ""));
-						}
 					}
 				}
 				else if (functionName == "misc:time_interval") // Time interval

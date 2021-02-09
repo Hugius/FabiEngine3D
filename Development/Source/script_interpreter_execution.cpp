@@ -148,17 +148,37 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 			std::istringstream iss(scriptLineText);
 			string scriptToExecute;
 			iss >> scriptToExecute >> scriptToExecute;
-			auto& scriptList = (scriptType == ScriptType::INIT) ? _initScriptIDs : 
-				(scriptType == ScriptType::UPDATE) ? _updateScriptIDs : _destroyScriptIDs;
-			
+
+			// Check if script is of the same type
+			if 
+				(
+					(scriptType == ScriptType::INIT &&
+					(std::find(_updateScriptIDs.begin(), _updateScriptIDs.end(), scriptToExecute) != _updateScriptIDs.end() ||
+					std::find(_destroyScriptIDs.begin(), _destroyScriptIDs.end(), scriptToExecute) != _destroyScriptIDs.end()))
+					||
+					(scriptType == ScriptType::UPDATE &&
+					(std::find(_initScriptIDs.begin(), _initScriptIDs.end(), scriptToExecute) != _initScriptIDs.end() ||
+					std::find(_destroyScriptIDs.begin(), _destroyScriptIDs.end(), scriptToExecute) != _destroyScriptIDs.end()))
+					||
+					(scriptType == ScriptType::DESTROY &&
+					(std::find(_initScriptIDs.begin(), _initScriptIDs.end(), scriptToExecute) != _initScriptIDs.end() ||
+					std::find(_updateScriptIDs.begin(), _updateScriptIDs.end(), scriptToExecute) != _updateScriptIDs.end()))
+				)
+			{
+				_throwScriptError("script \"" + scriptToExecute + "\" is not of the same type!");
+				return;
+			}
+
 			// Check if script exists
+			auto& scriptList = (scriptType == ScriptType::INIT) ? _initScriptIDs :
+				(scriptType == ScriptType::UPDATE) ? _updateScriptIDs : _destroyScriptIDs;
 			if (std::find(scriptList.begin(), scriptList.end(), scriptToExecute) != scriptList.end())
 			{
 				_executeScript(scriptToExecute, scriptType);
 			}
 			else
 			{
-				_throwScriptError("script \"" + scriptToExecute + "\" not found!");
+				_throwScriptError("script \"" + scriptToExecute + "\" does not exist!");
 				return;
 			}
 		}
@@ -320,10 +340,6 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 		else if (scriptLineText.substr(0, _castingKeyword.size() + 1) == _castingKeyword + " ") // Variable type casting
 		{
 			_processVariableTypecast(scriptLineText);
-		}
-		else if (scriptLineText.substr(0, _concatenationKeyword.size() + 1) == _concatenationKeyword + " ") // String concatenation
-		{
-			_processStringConcatenation(scriptLineText);
 		}
 		else if (scriptLineText.substr(0, _pushingKeyword.size() + 1) == _pushingKeyword + " ") // Adding to list
 		{

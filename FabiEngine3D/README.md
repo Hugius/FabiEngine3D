@@ -470,8 +470,8 @@ fe3d:print(myString)
   Returns the arc sine of **value**.
 - `math:acos`(`DEC` value) ---> `DEC`  
   Returns the arc cosine of **value**.
-- `math:atan2`(`DEC` value1, `DEC` value2) ---> `DEC`  
-  Returns the arc tangent of **value1** and **value2**.
+- `math:atan2`(`DEC` first, `DEC` second) ---> `DEC`  
+  Returns the arc tangent of **first** and **second**.
 - `math:pow`(`INT` base, `INT` exponent) ---> `INT`  
   Returns the result of **base** to the power of **exponent**.
 - `math:pow`(`DEC` base, `DEC` exponent) ---> `DEC`  
@@ -488,23 +488,23 @@ fe3d:print(myString)
   Returns the clamped **value** between **min** and **max**.
 - `math:clamp`(`DEC` value, `DEC` min, `DEC` max) ---> `DEC`  
   Returns the clamped **value** between **min** and **max**.
-- `math:sqrt`(`DEC` value) ---> `DEC`
+- `math:sqrt`(`DEC` value) ---> `DEC`  
   Returns the square root of **value**.
 - `math:abs`(`INT` value) ---> `INT`  
   Returns the absolute value of **value**.
 - `math:abs`(`DEC` value) ---> `DEC`  
   Returns the absolute value of **value**.
-- `math:distance`(`VEC3` pos1, `VEC3` pos2) ---> `DEC`  
-  Returns the absolute distance between **pos1** and **pos2**.
+- `math:distance`(`VEC3` first, `VEC3` second) ---> `DEC`  
+  Returns the absolute distance between **first** and **second**.
 ### Miscellaneous functions
-- `misc:concat_strings`(`STR` firstString, `STR` secondString) ---> `STR`  
-  Returns **firstString** and **secondString** concatenated together.
+- `misc:concat_strings`(`STR` first, `STR` second) ---> `STR`  
+  Returns **first** and **second** concatenated together.
 - `misc:get_list_size`(`STR` name) ---> `INT`  
   Returns the counted total of list items and returns the amount. **name** must be put in a string value.
 - `misc:get_string_size`(`STR` value) ---> `INT`  
   Returns the counted total of **value** characters and returns the amount.
-- `misc:get_string_part`(`STR` value, `INT` startIndex, `INT` count) ---> `STR`  
-  Returns a part from **value**. Example: **string** = "test", **startIndex** = 1, **count** = 2, returns:"est".
+- `misc:get_string_part`(`STR` value, `INT` index, `INT` count) ---> `STR`  
+  Returns a part from **value**. Example: **value** = "test", **index** = 1, **count** = 2, returns:"est".
 - `misc:get_unique_integer`(`INT` min, `INT` max) ---> `INT`  
   Returns a unique random integer between **min** and **max**.
 - `misc:get_random_integer`(`INT` min, `INT` max) ---> `INT`  

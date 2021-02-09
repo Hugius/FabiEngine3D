@@ -3,27 +3,28 @@ FabiEngine3D is a small game engine for simple 3D games.
 It contains various features such as: asset loading, 2D & 3D rendering, audio, user input, physics, scripting and an engine GUI to work with.  
 The engine only uses 2 libraries: OpenGL 4.5 & SDL2. It is written in C++17 and works only on Windows.
 
-## Table of contents
+# Table of contents
 1. [Features](#features)
-2. [Engine interface](#engine-interface)
-3. [Folder structures](#folder-structures)
-4. [Development order](#development-order)
-5. [Project management](#project-management)
-6. [Environment editor](#environment-editor)
-7. [Model editor](#model-editor)
-8. [Animation editor](#animation-editor)
-9. [Billboard editor](#billboard-editor)
-10. [Audio editor](#audio-editor)
-11. [Scene editor](#scene-editor)
-12. [Script editor](#script-editor)
-13. [Project settings](#project-settings)
+2. [Engine Interface](#engine-interface)
+3. [Folder Structures](#folder-structures)
+4. [Development Order](#development-order)
+5. [Project Management](#project-management)
+6. [Environment Editor](#environment-editor)
+7. [Model Editor](#model-editor)
+8. [Animation Editor](#animation-editor)
+9. [Billboard Editor](#billboard-editor)
+10. [Audio Editor](#audio-editor)
+11. [Scene Editor](#scene-editor)
+12. [Script Editor](#script-editor)
+13. [Project Settings](#project-settings)
 14. [FabScript](#fabscript)
-14. [Game execution](#game-execution)
+14. [Function List](#function-list)
+14. [Game Execution](#game-execution)
 14. [Miscellaneous](#miscellaneous)
 14. [Screenshots](#screenshots)
 
-## Features
-### Asset loading
+# Features
+### Asset Loading
 - Multithreaded PNG texture file loading
 - Multithreaded OBJ mesh file loading
 - Multithreaded WAV audio file loading
@@ -59,7 +60,7 @@ The engine only uses 2 libraries: OpenGL 4.5 & SDL2. It is written in C++17 and 
 - Arithmetic operations: increase, decrease, multiply, divide
 - Logical operations: if, elif, else, is, not, and or
 
-## Engine interface
+# Engine Interface
 Click [here](#engine-interface-example) to see an example
 The engine GUI is divided into 5 sections:
 - Left viewport: editor menus and project settings
@@ -68,13 +69,13 @@ The engine GUI is divided into 5 sections:
 - Bottom viewport: statistics & logging console
 - Mid viewport: 3D display screen
 
-## Folder structures
+# Folder Structures
 The engine root directory has 3 folders:
 - `bin\`: this folder holds the .exe file and all corresponding DLLs (do **NOT** touch)
 - `engine\`: this folder holds all engine resources such as libraries & shaders (do **NOT** touch)
 - `user\`: this folder is where all your game assets are stored. It also holds the project files
 
-## Development order
+# Development Order
 - **Project management**
   > In the top-viewport you can create, edit, save and delete projects. 1 project = 1 game
 - **Environment editor**
@@ -94,14 +95,14 @@ The engine root directory has 3 folders:
 - **Project settings**
   > This is where you can setup mostly graphical properties of your game such as shadow quality, reflection quality, etc
 
-## Project management
+# Project Management
 - You can create, edit/load, save and delete a project
 - Every **project** is a different **game** and must have a **unique** name
 - A project has its own folder in the engine `user\projects\` directory
 - An important note is to **NOT** change anything in this directory!
 - The only directory that you can change is the `user\assets\`folder
 
-## Environment editor
+# Environment Editor
 ### Sky
 Click [here](#sky-editor-example) to see an example
 - You can create/edit/delete sky environments that can be placed in a scene
@@ -135,7 +136,7 @@ Click [here](#water-editor-example) to see an example
 - Waves (on/off, **displacement map** needed: grayscale 24bit `PNG` format image from `user\assets\textures\displacement_maps\`)
 - Specular reflection (on/off, **normal map** needed: colored 24bit `PNG` format image from `user\assets\textures\normal_maps\`)    
 
-## Model editor
+# Model Editor
 Click [here](#model-editor-example) to see an example
 - You can create/edit/delete models that can be placed in scene or placed with scripting
 - A model must **at least** consist of a mesh
@@ -160,7 +161,7 @@ Click [here](#model-editor-example) to see an example
 - You can bind a **reflection** map to the part by writing `FE3D_REFLECTION_MAP <path><filename>` on the next line
 - You can bind a **normal** map to the part by writing `FE3D_NORMAL_MAP <path><filename>` on the next line
 
-## Animation editor
+# Animation Editor
 Click [here](#animation-editor-example) to see an example
 - You can create/edit/delete animations that can be applied to **models** with scripting or in the scene editor
 - You can select a **preview model** for the animation playback
@@ -171,7 +172,7 @@ Click [here](#animation-editor-example) to see an example
 - If the model has **multiple parts**, each part has its own transformation every keyframe
 - The **last** animation keyframe should be the same as the **initial** frame
 
-## Billboard editor
+# Billboard Editor
 Click [here](#billboard-editor-example) to see an example
 - You can create/edit/delete billboards that can be placed in a scene or placed with scripting
 - There are 2 types of billboards: text & non-text/textured
@@ -184,7 +185,7 @@ Click [here](#billboard-editor-example) to see an example
 - **Font**: `TTF` format font file from `user\assets\fonts`
 - **Texture**: colored 24bit/32bit `PNG` format image file from `user\assets\textures\billboard_maps`
 
-## Audio editor
+# Audio Editor
 Click [here](#audio-editor-example) to see an example
 - You can create/edit/delete audio that can be placed in a scene or **placed/played** with scripting
 - **Audio data**: `WAV` format audio file from `user\assets\audio`
@@ -193,7 +194,7 @@ Click [here](#audio-editor-example) to see an example
 - 3D audio has stereo panning
 - Audio can be added to the **music** playlist
 
-## Scene editor
+# Scene Editor
 Click [here](#scene-editor-example) to see an example
 ### Environment
 - Sky: you can select **only 1** sky, created in the environment editor
@@ -236,7 +237,7 @@ Click [here](#scene-editor-example) to see an example
 - You can change the editor movement speed, which will be saved for next time
 - You can set the minimum distance by which level of detailed models will change their rendering
 
-## Script editor
+# Script Editor
 Click [here](#script-editor-example) to see an example
 - You can create/edit/rename/delete scripts that will be executed in a certain order
 - You can use the **mouse** to navigate through the code or use the **arrow keys**
@@ -245,14 +246,14 @@ Click [here](#script-editor-example) to see an example
 - You can use CTRL + C to **copy** a **line**
 - You can use CTRL + V to **paste** a **line**
 
-## Project settings
+# Project Settings
 - MSAA qualiity (default: 4)
 - Shadow qualiity (default: 2048)
 - Reflection qualiity (default: 256)
 - Refraction qualiity (default: 256)
 - Max audio channels (default: 128)
 
-## FabScript
+# FabScript
 - FabScript is a custom **interpreted** scripting language created for FabiEngine3D.
 - Experience with coding is a prerequisite (Python, Java, C++, C#, Javascript, etc.).
 - Scripts are run from the first line to the last line, from left to right.
@@ -385,6 +386,23 @@ ELSE:
     fe3d:print("i am higher than 42!")
 ```
 ### Loops
+- Use a `LOOP` statement if you want to run a block of code multiple times
+- Once a loop is started, you can only get out using the `BREAK` statement
+- You can use loops for iterating over a LIST for example
+#### Example code
+```
+LIST myList = {"hello","beautiful", "world"}
+INT index = 0
+LOOP:
+    IF index IS 2:
+        BREAK
+    fe3d:print(myList[index])
+    
+/// Console output:
+/// > hello
+/// > beautiful
+/// > world
+```
 ### Executing other scripts
 - For every script **type** (init, update, destroy) there is an `execution_entry` META defined
 - From there you can decide the **order of execution** yourself
@@ -401,17 +419,41 @@ fe3d:print("goodbye world")
 /// Code in print_script.fe3d
 fe3d:print("hello world")
 
-/// After end of program the console output will be:
+/// Console output:
 /// > hello world
 /// > goodbye world
 ```
+### Functions
+- You can call functions that are built-in FabiEngine3D
+- There are 3 types of functions: `fe3d` functions, `math` functions, `misc` functions
+#### Example code
+```
+STR myString = "i am printed"
+fe3d:print(myString)
+
+/// Console output:
+/// > i am printed
+```
+### Tips & tricks
+- You can set the value of a `BOOL` variable to the result of a condition using: `... *name* = (<condition>)`
+- You can use the `PASS` statement as an empty placeholder for a logical statement or loop
+
+# Function List
 ### Engine functions
 ### Math functions
 ### Miscellaneous functions
-### Tips & tricks
-- You can set the value of a `BOOL` variable to the result of a condition using: `... *name* = (<condition>)`
+- `misc:concat_strings`(STR firstString, STR secondString) ---> STR
+  > Concatenates 2 strings together and returns the result.
+- `misc:get_list_size`(STR listName) ---> INT
+  > Counts the total of list items and returns the amount. The listname must be put in a string value.
+- `misc:get_string_size`(STR string) ---> INT
+  > Counts the total of string characters and returns the amount.
+- `misc:get_string_part`(STR string, INT startIndex, INT count) ---> STR
+  > Cut a part from a string and return the cut part. Example: "test", startIndex = 1, count = 2, returns:"est"
+- `misc:get_unique_integer`(INT min, INT max) ---> INT
+  > Return a unique random integer between min and max
 
-## Game execution
+# Game Execution
 ### Inside engine interface
 ![execution](engine/readme/execution.png)
 - You can play/pause/resume/stop the game preview
@@ -423,7 +465,7 @@ fe3d:print("hello world")
 - Set `selected_game` to the name of the project/game you want to run
 - Start FabiEngine3D
 
-## Miscellaneous
+# Miscellaneous
 ### Tips & tricks
 - You can create your own custom **subfolders** within the main folder of `user\assets`
 - All rotational **degrees** cannot be higher than 360 or lower than -360 (for example 500 will be 140)
@@ -445,7 +487,7 @@ fe3d:print("hello world")
 - `window_borderless`: boolean value; toggle window border visibility
 - `selected_game`: string value; select name of project/game to be run on FabiEngine3D launch
 
-## Screenshots
+# Screenshots
 ### Engine interface example
 ![interface](engine/readme/interface.png)
 ### Sky editor example

@@ -18,10 +18,10 @@ The engine only uses 2 libraries: OpenGL 4.5 & SDL2. It is written in C++17 and 
 12. [Script Editor](#script-editor)
 13. [Project Settings](#project-settings)
 14. [FabScript](#fabscript)
-14. [Function List](#function-list)
-14. [Game Execution](#game-execution)
-14. [Miscellaneous](#miscellaneous)
-14. [Screenshots](#screenshots)
+15. [Function List](#function-list)
+16. [Game Execution](#game-execution)
+17. [Miscellaneous](#miscellaneous)
+18. [Screenshots](#screenshots)
 
 # Features
 ### Asset Loading
@@ -449,9 +449,9 @@ fe3d:print(myString)
 - `misc:get_string_size`(STR string) ---> INT
   > Counts the total of string characters and returns the amount.
 - `misc:get_string_part`(STR string, INT startIndex, INT count) ---> STR
-  > Cut a part from a string and return the cut part. Example: "test", startIndex = 1, count = 2, returns:"est"
+  > Cuts a part from a string and return the cut part. Example: string = "test", startIndex = 1, count = 2, returns:"est".
 - `misc:get_unique_integer`(INT min, INT max) ---> INT
-  > Return a unique random integer between min and max
+  > Returns a unique random integer between min and max.
 
 # Game Execution
 ### Inside engine interface

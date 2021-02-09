@@ -443,15 +443,21 @@ fe3d:print(myString)
 ### Math functions
 ### Miscellaneous functions
 - `misc:concat_strings`(STR firstString, STR secondString) ---> STR
-  > Concatenates 2 strings together and returns the result.
+  > Concatenates **firstString** and **secondString** together and returns the result.
 - `misc:get_list_size`(STR listName) ---> INT
-  > Counts the total of list items and returns the amount. The listname must be put in a string value.
+  > Counts the total of list items and returns the amount. **listName** must be put in a string value.
 - `misc:get_string_size`(STR string) ---> INT
-  > Counts the total of string characters and returns the amount.
+  > Counts the total of **string** characters and returns the amount.
 - `misc:get_string_part`(STR string, INT startIndex, INT count) ---> STR
-  > Cuts a part from a string and return the cut part. Example: string = "test", startIndex = 1, count = 2, returns:"est".
+  > Cuts a part from a string and return the cut part. Example: **string** = "test", **startIndex** = 1, **count** = 2, returns:"est".
 - `misc:get_unique_integer`(INT min, INT max) ---> INT
-  > Returns a unique random integer between min and max.
+  > Returns a unique random integer between **min** and **max**.
+- `misc:get_random_integer`(INT min, INT max) ---> INT
+  > Returns a random integer between **min** and **max**.
+- `misc:get_random_decimal`(DEC min, DEC max) ---> DEC
+  > Returns a random decimal between **min** and **max**.
+- `misc:time_interval`(STR name, INT frameInterval) ---> BOOL
+  > Returns true every **frameInterval** frames for the unique **name**
 
 # Game Execution
 ### Inside engine interface

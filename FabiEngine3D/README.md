@@ -458,50 +458,60 @@ fe3d:print(myString)
 #### Text
 #### Miscellaneous
 ### Math functions
-- `math:tan(`DEC` degrees)` ---> `DEC`
+- `math:tan`(`DEC` degrees) ---> `DEC`  
   Returns the tangent of **degrees**.
-- `math:sin`(`DEC` degrees) ---> `DEC`
+- `math:sin`(`DEC` degrees) ---> `DEC`  
   Returns the sine of **degrees**.
-- `math:cos`(`DEC` degrees) ---> `DEC`
+- `math:cos`(`DEC` degrees) ---> `DEC`  
   Returns the cosine of **degrees**.
-- `math:atan`(`DEC` value) ---> `DEC`
+- `math:atan`(`DEC` value) ---> `DEC`  
   Returns the arc tangent of **value**.
-- `math:asin`(`DEC` value) ---> `DEC`
+- `math:asin`(`DEC` value) ---> `DEC`  
   Returns the arc sine of **value**.
-- `math:acos`(`DEC` value) ---> `DEC`
+- `math:acos`(`DEC` value) ---> `DEC`  
   Returns the arc cosine of **value**.
-- `math:atan2`(`DEC` value1, `DEC` value2) ---> `DEC`
+- `math:atan2`(`DEC` value1, `DEC` value2) ---> `DEC`  
   Returns the arc tangent of **value1** and **value2**.
-- `math:pow`(`INT`/`DEC` base, `INT`/`DEC` exponent) ---> `INT`/`DEC`
-  Returns the result of **base** to the power of **exponent**. Can be either INT or DEC.
-- `math:min`(`INT`/`DEC` first, `INT`/`DEC` second) ---> `INT`/`DEC`
-  Returns the lower value of **first** and **second**. Can be either INT or DEC.
-- `math:max`(`INT`/`DEC` first, `INT`/`DEC` second) ---> `INT`/`DEC`
-  Returns the higher value of **first** and **second**. Can be either INT or DEC.
-- `math:clamp`(`INT`/`DEC` value, `INT`/`DEC` min, `INT`/`DEC` max) ---> `INT`/`DEC`
-  Returns the clamped **value** between **min** and **max**. Can be either INT or DEC.
+- `math:pow`(`INT base, `INT` exponent) ---> `INT`  
+  Returns the result of **base** to the power of **exponent**.
+- `math:pow`(`DEC base, `DEC` exponent) ---> `DEC`  
+  Returns the result of **base** to the power of **exponent**.
+- `math:min`(`INT` first, `INT` second) ---> `INT`  
+  Returns the lower value of **first** and **second**.
+- `math:min`(`DEC` first, `DEC` second) ---> `DEC`  
+  Returns the lower value of **first** and **second**.
+- `math:max`(`INT` first, `INT` second) ---> `INT`  
+  Returns the higher value of **first** and **second**.
+- `math:max`(`DEC` first, `DEC` second) ---> `DEC`  
+  Returns the higher value of **first** and **second**.
+- `math:clamp`(`INT` value, `INT` min, `INT` max) ---> `INT`  
+  Returns the clamped **value** between **min** and **max**.
+- `math:clamp`(`DEC` value, `DEC` min, `DEC` max) ---> `DEC`  
+  Returns the clamped **value** between **min** and **max**.
 - `math:sqrt`(`DEC` value) ---> `DEC`
   Returns the square root of **value**.
-- `math:abs`(`INT`/`DEC` value) ---> `INT`/`DEC`
-  Returns the absolute value of **value**. Can be either INT or DEC.
-- `math:distance`(`VEC3` pos1, `VEC3` pos2) ---> `INT`/`DEC`
+- `math:abs`(`INT` value) ---> `INT`  
+  Returns the absolute value of **value**.
+- `math:abs`(`DEC` value) ---> `DEC`  
+  Returns the absolute value of **value**.
+- `math:distance`(`VEC3` pos1, `VEC3` pos2) ---> `DEC`  
   Returns the absolute distance between **pos1** and **pos2**.
 ### Miscellaneous functions
-- `misc:concat_strings`(`STR` firstString, `STR` secondString) ---> `STR`
+- `misc:concat_strings`(`STR` firstString, `STR` secondString) ---> `STR`  
   Concatenates **firstString** and **secondString** together and returns the result.
-- `misc:get_list_size`(`STR` listName) ---> INT
+- `misc:get_list_size`(`STR` listName) ---> `INT`  
   Counts the total of list items and returns the amount. **listName** must be put in a string value.
-- `misc:get_string_size`(`STR` string) ---> INT
+- `misc:get_string_size`(`STR` string) ---> `INT`  
   Counts the total of **string** characters and returns the amount.
-- `misc:get_string_part`(`STR` string, INT startIndex, INT count) ---> `STR`
+- `misc:get_string_part`(`STR` string, `INT` startIndex, `INT` count) ---> `STR`  
   Cuts a part from a string and return the cut part. Example: **string** = "test", **startIndex** = 1, **count** = 2, returns:"est".
-- `misc:get_unique_integer`(INT min, INT max) ---> INT
+- `misc:get_unique_integer`(INT min, INT max) ---> `INT`  
   Returns a unique random integer between **min** and **max**.
-- `misc:get_random_integer`(INT min, INT max) ---> INT
+- `misc:get_random_integer`(INT min, INT max) ---> `INT`  
   Returns a random integer between **min** and **max**.
-- `misc:get_random_decimal`(DEC min, DEC max) ---> DEC
+- `misc:get_random_decimal`(DEC min, DEC max) ---> `DEC`  
   Returns a random decimal between **min** and **max**.
-- `misc:time_interval`(`STR` name, INT frameInterval) ---> BOOL
+- `misc:time_interval`(`STR` name, INT frameInterval) ---> `BOOL`  
   Returns true every **frameInterval** frames for the unique **name**
 
 # Game Execution

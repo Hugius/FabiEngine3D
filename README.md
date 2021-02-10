@@ -506,8 +506,8 @@ fe3d:print(myString)
 - `fe3d:camera_set_max_pitch`(`DEC` degrees) ---> `NONE`  
   Sets the maximum camera pitch in **degrees**.
 #### Physics
-- `fe3d:raycast_into_model`(`STR` model, `STR` aabb, `BOOL` occludable) ---> `STR`  
-  Returns the ID of the model that is selected. All models which ID starts with **model** will be checked (leave empty for all models). Only the **aabb** part will be checked (leave empty for all parts). **occludable** means if the raycast can be blocked by other AABBs. 
+- `fe3d:raycast_into_model`(`STR` model, `STR` aabbpart, `BOOL` occludable) ---> `STR`  
+  Returns the ID of the model that is selected. All models which ID starts with **model** will be checked (leave empty for all models). Only the **aabbpart** will be checked (leave empty for all parts). **occludable** means if the raycast can be blocked by other AABBs. 
 - `fe3d:raycast_into_models`() ---> `STR`  
   Returns the ID of any model that is selected.
 - `fe3d:raycast_into_billboard`(`STR` billboard,  `BOOL` occludable) ---> `STR`  
@@ -526,20 +526,20 @@ fe3d:print(myString)
   Enables collision detection & response between the camera and AABBs. You can specify which directions (**x** and/or **y** and/or **z**) of collision need to be checked.
 - `fe3d:collision_disable_camera_aabb_response`() ---> `NONE`  
   Disables collision detection & response between the camera and AABBs.
-- `fe3d:collision_check_camera_model`(`STR` model, `STR` aabb, `STR` direction) ---> `NONE`  
-  Returns the ID of the model that has collided with the camera. All models which ID starts with **model** will be checked (leave empty for all models). Only the **aabb** part will be checked (leave empty for all parts).
-- `fe3d:collision_check_camera_models`(`DEC` degrees) ---> `NONE`  
-  Sets the maximum camera pitch in **degrees**.
-- `fe3d:collision_check_camera_aabb`(`DEC` degrees) ---> `NONE`  
-  Sets the maximum camera pitch in **degrees**.
-- `fe3d:collision_check_camera_aabbs`(`DEC` degrees) ---> `NONE`  
-  Sets the maximum camera pitch in **degrees**.
-- `fe3d:collision_check_model_models`(`DEC` degrees) ---> `NONE`  
-  Sets the maximum camera pitch in **degrees**.
-- `fe3d:collision_check_model_billboards`(`DEC` degrees) ---> `NONE`  
-  Sets the maximum camera pitch in **degrees**.
-- `fe3d:collision_check_model_aabbs`(`DEC` degrees) ---> `NONE`  
-  Sets the maximum camera pitch in **degrees**.
+- `fe3d:collision_check_camera_model`(`STR` model, `STR` aabbpart, `STR` direction) ---> `STR`  
+  Returns the ID of the model that has collided with the camera. All models which ID starts with **model** will be checked (leave empty for all models). Only the **aabbpart** part will be checked (leave empty for all parts). You can specify in which **direction** you want to check. It can be either "X", "Y", "Z" or empty ("").
+- `fe3d:collision_check_camera_models`(`STR` direction) ---> `STR`  
+  Return the ID of any model that has collided with the camera. You can specify in which **direction** you want to check. It can be either "X", "Y", "Z" or empty ("").
+- `fe3d:collision_check_camera_aabb`(`STR` aabbpart, `STR` direction) ---> `STR`  
+  Returns the ID of the AABB that has collided with the camera. All AABBs which ID starts with **aabbpart** will be checked (leave empty for all AABBs). You can specify in which **direction** you want to check. It can be either "X", "Y", "Z" or empty ("").
+- `fe3d:collision_check_camera_aabbs`(`STR` direction) ---> `STR`  
+  Return the ID of any AABB that has collided with the camera. You can specify in which **direction** you want to check. It can be either "X", "Y", "Z" or empty ("").
+- `fe3d:collision_check_model_models`(`STR` model1, `STR` aabbpart1, `STR` model2, `STR` aabbpart2) ---> `STR`  
+  Returns the ID of the model that has collided with the **aabbpart1** of **model1**. All models which ID starts with **model2** will be checked (leave empty for all models). Only the **aabbpart2** will be checked (leave empty for all parts).
+- `fe3d:collision_check_model_billboards`(`STR` model, `STR` aabbpart, `STR` billboard) ---> `STR`  
+  Returns the ID of the billboard that has collided with the **aabbpart** of **model**. All billboards which ID starts with **billboard** will be checked (leave empty for all billboards).
+- `fe3d:collision_check_model_aabbs`(`STR` model, `STR` aabbpart, `STR` aabb) ---> `STR`  
+  Returns the ID of the AABB that has collided with the **aabbpart** of **model**. All AABBs which ID starts with **aabb** will be checked (leave empty for all AABBs).
 #### Graphics
 #### Sky
 #### Terrain

@@ -14,7 +14,7 @@
 class ScriptInterpreter
 {
 public:
-	ScriptInterpreter(FabiEngine3D& fe3d, Script& script, SceneEditor& sceneEditor, ModelEditor& modelEditor, 
+	ScriptInterpreter(FabiEngine3D& fe3d, Script& script, SceneEditor& sceneEditor, ModelEditor& modelEditor,
 		AnimationEditor& animationEditor, BillboardEditor& billboardEditor, AudioEditor& audioEditor, EnvironmentEditor& environmentEditor);
 
 	void load();
@@ -130,37 +130,37 @@ private:
 	string _initEntryID = "";
 	string _updateEntryID = "";
 	string _destroyEntryID = "";
-	const string _metaKeyword			= "META";
-	const string _executeKeyword		= "EXEC";
-	const string _loopKeyword			= "LOOP";
-	const string _breakKeyword			= "BREAK";
-	const string _ifKeyword				= "IF";
-	const string _elifKeyword			= "ELIF";
-	const string _elseKeyword			= "ELSE";
-	const string _globalKeyword			= "GLOB";
-	const string _constKeyword			= "CONST";
-	const string _editKeyword			= "EDIT";
-	const string _listKeyword			= "LIST";
-	const string _vec3Keyword			= "VEC3";
-	const string _stringKeyword			= "STR";
-	const string _decimalKeyword		= "DEC";
-	const string _integerKeyword		= "INT";
-	const string _booleanKeyword		= "BOOL";
-	const string _isKeyword				= "IS";
-	const string _notKeyword			= "NOT";
-	const string _andKeyword			= "AND";
-	const string _orKeyword				= "OR";
-	const string _moreKeyword			= "MORE";
-	const string _lessKeyword			= "LESS";
-	const string _additionKeyword	    = "INCR";
-	const string _subtractionKeyword	= "DECR";
+	const string _metaKeyword = "META";
+	const string _executeKeyword = "EXEC";
+	const string _loopKeyword = "LOOP";
+	const string _breakKeyword = "BREAK";
+	const string _ifKeyword = "IF";
+	const string _elifKeyword = "ELIF";
+	const string _elseKeyword = "ELSE";
+	const string _globalKeyword = "GLOB";
+	const string _constKeyword = "CONST";
+	const string _editKeyword = "EDIT";
+	const string _listKeyword = "LIST";
+	const string _vec3Keyword = "VEC3";
+	const string _stringKeyword = "STR";
+	const string _decimalKeyword = "DEC";
+	const string _integerKeyword = "INT";
+	const string _booleanKeyword = "BOOL";
+	const string _isKeyword = "IS";
+	const string _notKeyword = "NOT";
+	const string _andKeyword = "AND";
+	const string _orKeyword = "OR";
+	const string _moreKeyword = "MORE";
+	const string _lessKeyword = "LESS";
+	const string _additionKeyword = "INCR";
+	const string _subtractionKeyword = "DECR";
 	const string _multiplicationKeyword = "MUL";
-	const string _divisionKeyword		= "DIV";
-	const string _negationKeyword		= "NEG";
-	const string _castingKeyword	    = "CAST";
-	const string _pushingKeyword		= "PUSH";
-	const string _pullingKeyword		= "PULL";
-	const string _passKeyword			= "PASS";
+	const string _divisionKeyword = "DIV";
+	const string _negationKeyword = "NEG";
+	const string _castingKeyword = "CAST";
+	const string _pushingKeyword = "PUSH";
+	const string _pullingKeyword = "PULL";
+	const string _passKeyword = "PASS";
 
 	// Integers
 	const unsigned int _spacesPerIndent = 4;
@@ -205,19 +205,6 @@ private:
 		{"KEY_X", InputType::KEY_X},
 		{"KEY_Y", InputType::KEY_Y},
 		{"KEY_Z", InputType::KEY_Z},
-		{"KEY_LSHIFT", InputType::KEY_LSHIFT},
-		{"KEY_RSHIFT", InputType::KEY_RSHIFT},
-		{"KEY_LCTRL", InputType::KEY_LCTRL},
-		{"KEY_RCTRL", InputType::KEY_RCTRL},
-		{"KEY_SPACE", InputType::KEY_SPACE},
-		{"KEY_ENTER", InputType::KEY_ENTER},
-		{"KEY_BACKSPACE", InputType::KEY_BACKSPACE},
-		{"KEY_CAPSLOCK", InputType::KEY_CAPSLOCK},
-		{"KEY_TAB", InputType::KEY_TAB},
-		{"KEY_LEFT", InputType::KEY_LEFT},
-		{"KEY_RIGHT", InputType::KEY_RIGHT},
-		{"KEY_UP", InputType::KEY_UP},
-		{"KEY_DOWN", InputType::KEY_DOWN},
 		{"KEY_0", InputType::KEY_0},
 		{"KEY_1", InputType::KEY_1},
 		{"KEY_2", InputType::KEY_2},
@@ -228,6 +215,63 @@ private:
 		{"KEY_7", InputType::KEY_7},
 		{"KEY_8", InputType::KEY_8},
 		{"KEY_9", InputType::KEY_9},
+		{"KEY_ENTER", InputType::KEY_ENTER},
+		{"KEY_ESCAPE", InputType::KEY_ESCAPE},
+		{"KEY_BACKSPACE", InputType::KEY_BACKSPACE},
+		{"KEY_TAB", InputType::KEY_TAB},
+		{"KEY_LALT", InputType::KEY_LALT},
+		{"KEY_RALT", InputType::KEY_RALT},
+		{"KEY_LCTRL", InputType::KEY_LCTRL},
+		{"KEY_RCTRL", InputType::KEY_RCTRL},
+		{"KEY_LSHIFT", InputType::KEY_LSHIFT},
+		{"KEY_RSHIFT", InputType::KEY_RSHIFT},
+		{"KEY_CAPSLOCK", InputType::KEY_CAPSLOCK},
+		{"KEY_F1", InputType::KEY_F1},
+		{"KEY_F2", InputType::KEY_F2},
+		{"KEY_F3", InputType::KEY_F3},
+		{"KEY_F4", InputType::KEY_F4},
+		{"KEY_F5", InputType::KEY_F5},
+		{"KEY_F6", InputType::KEY_F6},
+		{"KEY_F7", InputType::KEY_F7},
+		{"KEY_F8", InputType::KEY_F8},
+		{"KEY_F9", InputType::KEY_F9},
+		{"KEY_F1", InputType::KEY_F10},
+		{"KEY_F11", InputType::KEY_F11},
+		{"KEY_F12", InputType::KEY_F12},
+		{"KEY_RIGHT", InputType::KEY_RIGHT},
+		{"KEY_LEFT", InputType::KEY_LEFT},
+		{"KEY_DOWN", InputType::KEY_DOWN},
+		{"KEY_UP", InputType::KEY_UP},
+		{"KEY_DELETE", InputType::KEY_DELETE},
+		{"KEY_COLON", InputType::KEY_COLON},
+		{"KEY_SEMICOLON", InputType::KEY_SEMICOLON},
+		{"KEY_LESS", InputType::KEY_LESS},
+		{"KEY_EQUALS", InputType::KEY_EQUALS},
+		{"KEY_GREATER", InputType::KEY_GREATER},
+		{"KEY_QUESTION", InputType::KEY_QUESTION},
+		{"KEY_AT", InputType::KEY_AT},
+		{"KEY_LEFTBRACKET", InputType::KEY_LEFTBRACKET},
+		{"KEY_BACKSLASH", InputType::KEY_BACKSLASH},
+		{"KEY_RIGHTBRACKET", InputType::KEY_RIGHTBRACKET},
+		{"KEY_CARET", InputType::KEY_CARET},
+		{"KEY_UNDERSCORE", InputType::KEY_UNDERSCORE},
+		{"KEY_BACKQUOTE", InputType::KEY_BACKQUOTE},
+		{"KEY_SPACE", InputType::KEY_SPACE},
+		{"KEY_EXCLAMATION", InputType::KEY_EXCLAMATION},
+		{"KEY_DOUBLEQUOTE", InputType::KEY_DOUBLEQUOTE},
+		{"KEY_HASH", InputType::KEY_HASH},
+		{"KEY_PERCENT", InputType::KEY_PERCENT},
+		{"KEY_DOLLAR", InputType::KEY_DOLLAR},
+		{"KEY_AMPERSAND", InputType::KEY_AMPERSAND},
+		{"KEY_QUOTE", InputType::KEY_QUOTE},
+		{"KEY_LEFTPARENTHESIS", InputType::KEY_LEFTPARENTHESIS},
+		{"KEY_RIGHTPARENTHESIS", InputType::KEY_RIGHTPARENTHESIS},
+		{"KEY_ASTERISK", InputType::KEY_ASTERISK},
+		{"KEY_PLUS", InputType::KEY_PLUS},
+		{"KEY_COMMA", InputType::KEY_COMMA},
+		{"KEY_MINUS", InputType::KEY_MINUS},
+		{"KEY_PERIOD", InputType::KEY_PERIOD},
+		{"KEY_SLASH", InputType::KEY_SLASH}
 	};
 
 	static inline const map<string, InputType> _mouseInputStringMap =

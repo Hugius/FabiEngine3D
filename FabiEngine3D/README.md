@@ -441,6 +441,20 @@ fe3d:print(myString)
 # Function List
 ### Engine functions
 #### Input
+- `fe3d:input_is_key_down`(`STR` key) ---> `BOOL`  
+  Returns true is a keyboard **key** is being pushed down.
+- `fe3d:input_is_key_pressed`(`STR` key) ---> `BOOL`  
+  Returns true is a keyboard **key** is pressed.
+- `fe3d:input_is_key_toggled`(`STR` key) ---> `BOOL`  
+  Returns true is a keyboard **key** is toggled by a press. You can find all key names [here](../)
+- `fe3d:input_is_mouse_down`(`STR` button) ---> `BOOL`  
+  Returns true is a mouse **button** is being pushed down.
+- `fe3d:input_is_mouse_pressed`(`STR` button) ---> `BOOL`  
+  Returns true is a mouse **button** is pressed.
+- `fe3d:input_is_mouse_toggled`(`STR` button) ---> `BOOL`  
+  Returns true is a mouse **button** is toggled by a press.
+- `fe3d:input_get_mousewheel_direction`() ---> `INT`  
+  Returns the direction of the scrolling wheel. 1 = up, -1 = down, 0 = not scrolling.
 #### Camera
 #### Physics
 #### Graphics
@@ -550,24 +564,24 @@ fe3d:print(myString)
 
 # Screenshots
 ### Engine interface example
-![interface](engine/readme/interface.png)
+![interface](FabiEngine/engine/readme/interface.png)
 ### Sky editor example
-![sky](engine/readme/sky_editor.png)
+![sky](FabiEngine/engine/readme/sky_editor.png)
 ### Terrain editor example
-![terrain](engine/readme/terrain_editor.png)
+![terrain](FabiEngine/engine/readme/terrain_editor.png)
 ### Water editor example
-![water](engine/readme/water_editor.png)
+![water](FabiEngine/engine/readme/water_editor.png)
 ### Model editor example
-![model](engine/readme/model_editor.png)
+![model](FabiEngine/engine/readme/model_editor.png)
 ### Animation editor example
-![animation](engine/readme/animation_editor.png)
+![animation](FabiEngine/engine/readme/animation_editor.png)
 ### Billboard editor example
-![billboard](engine/readme/billboard_editor.png)
+![billboard](FabiEngine/engine/readme/billboard_editor.png)
 ### Audio editor example
-![audio](engine/readme/audio_editor.png)
+![audio](FabiEngine/engine/readme/audio_editor.png)
 ### Scene editor example
-![scene](engine/readme/scene_editor.png)
+![scene](FabiEngine/engine/readme/scene_editor.png)
 ### Script editor example
-![script](engine/readme/script_editor.png)
+![script](FabiEngine/engine/readme/script_editor.png)
 ### Performance statistics example
-![performance](engine/readme/performance.png)
+![performance](FabiEngine/engine/readme/performance.png)

@@ -435,7 +435,7 @@ fe3d:print(myString)
 /// > i am printed
 ```
 ### Tips & tricks
-- You can set the value of a `BOOL` variable to the result of a condition using: `... *name* = (<condition>)`
+- You can set the value of a `BOOL` variable to the result of a condition using: `... <name> = (<condition>)`
 - You can use the `PASS` statement as an empty placeholder for a logical statement or loop
 
 # Function List
@@ -479,7 +479,7 @@ fe3d:print(myString)
 - `fe3d:camera_get_yaw`() ---> `DEC`  
   Returns the camera yaw in degrees.
 - `fe3d:camera_set_pitch`(`DEC` degrees) ---> `NONE`  
-  Sets the camera pitch in **degrees*.
+  Sets the camera pitch in **degrees**.
 - `fe3d:camera_get_pitch`() ---> `DEC`  
   Returns the camera pitch in degrees.
 - `fe3d:camera_set_fov`(`DEC` degrees) ---> `NONE`  

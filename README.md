@@ -1,3 +1,4 @@
+
 # FabiEngine3D
 FabiEngine3D is a small game engine for simple 3D games.  
 It contains various features such as: asset loading, 2D & 3D rendering, audio, user input, physics, scripting and an engine GUI to work with.  
@@ -505,6 +506,40 @@ fe3d:print(myString)
 - `fe3d:camera_set_max_pitch`(`DEC` degrees) ---> `NONE`  
   Sets the maximum camera pitch in **degrees**.
 #### Physics
+- `fe3d:raycast_into_model`(`STR` model, `STR` aabb, `BOOL` occludable) ---> `STR`  
+  Returns the ID of the model that is selected. All models which ID starts with **model** will be checked (leave empty for all models). Only the **aabb** part will be checked (leave empty for all parts). **occludable** means if the raycast can be blocked by other AABBs. 
+- `fe3d:raycast_into_models`() ---> `STR`  
+  Returns the ID of any model that is selected.
+- `fe3d:raycast_into_billboard`(`STR` billboard,  `BOOL` occludable) ---> `STR`  
+  Returns the ID of the billboard that is selected. All billboards which ID starts with **billboards** will be checked (leave empty for all billboards). **occludable** means if the raycast can be blocked by other AABBs. 
+- `fe3d:raycast_into_billboards`() ---> `STR`  
+  Returns the ID of any billboard that is selected.
+- `fe3d:collision_enable_camera_terrain_response`(`DEC` height,  `DEC` speed) ---> `NONE`  
+  Enables camera collision with the terrain surface (if existing). **height** is the minimum height the camera should be above the terrain. **speed** is the speed at which the camera corrects its height based on the terrain surface.
+- `fe3d:collision_disable_camera_terrain_response`() ---> `NONE`  
+  Disables camera collision with the terrain surface (if existing).
+- `fe3d:collision_is_camera_under_terrain`() ---> `BOOL`  
+  Returns true if the camera is under the terrain surface (if existing).
+- `fe3d:collision_set_camera_box`(`DEC` bottom, `DEC` top, `DEC` left, `DEC` right, `DEC` front, `DEC` back) ---> `NONE`  
+  Defines the dimensions of the bounding box around the camera. All parameters are offsets from the camera position.
+- `fe3d:collision_enable_camera_aabb_response`(`BOOL` x, `BOOL` y, `BOOL` z) ---> `NONE`  
+  Enables collision detection & response between the camera and AABBs. You can specify which directions (**x** and/or **y** and/or **z**) of collision need to be checked.
+- `fe3d:collision_disable_camera_aabb_response`() ---> `NONE`  
+  Disables collision detection & response between the camera and AABBs.
+- `fe3d:collision_check_camera_model`(`STR` model, `STR` aabb, `STR` direction) ---> `NONE`  
+  Returns the ID of the model that has collided with the camera. All models which ID starts with **model** will be checked (leave empty for all models). Only the **aabb** part will be checked (leave empty for all parts).
+- `fe3d:collision_check_camera_models`(`DEC` degrees) ---> `NONE`  
+  Sets the maximum camera pitch in **degrees**.
+- `fe3d:collision_check_camera_aabb`(`DEC` degrees) ---> `NONE`  
+  Sets the maximum camera pitch in **degrees**.
+- `fe3d:collision_check_camera_aabbs`(`DEC` degrees) ---> `NONE`  
+  Sets the maximum camera pitch in **degrees**.
+- `fe3d:collision_check_model_models`(`DEC` degrees) ---> `NONE`  
+  Sets the maximum camera pitch in **degrees**.
+- `fe3d:collision_check_model_billboards`(`DEC` degrees) ---> `NONE`  
+  Sets the maximum camera pitch in **degrees**.
+- `fe3d:collision_check_model_aabbs`(`DEC` degrees) ---> `NONE`  
+  Sets the maximum camera pitch in **degrees**.
 #### Graphics
 #### Sky
 #### Terrain

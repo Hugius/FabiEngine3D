@@ -133,20 +133,28 @@ bool ScriptInterpreter::_executeFe3dCameraFunction(const string& functionName, v
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
 		}
 	}
-	else if (functionName == "fe3d:camera_enable_lookat") // Enable lookat view
+	else if (functionName == "fe3d:camera_enable_lookat_view") // Enable lookat view
 	{
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			_fe3d.camera_enableLookat();
+			_fe3d.camera_enableLookatView();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
-	else if (functionName == "fe3d:camera_disable_lookat") // Disable lookat view
+	else if (functionName == "fe3d:camera_disable_lookat_view") // Disable lookat view
 	{
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			_fe3d.camera_disableLookat();
+			_fe3d.camera_disableLookatView();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+		}
+	}
+	else if (functionName == "fe3d:camera_is_lookat_view_enabled") // Check if lookat view is enabled
+	{
+		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			auto result = _fe3d.camera_isLookatViewEnabled();
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 		}
 	}
 	else if (functionName == "fe3d:camera_enable_first_person_view") // Enable first person view
@@ -163,6 +171,14 @@ bool ScriptInterpreter::_executeFe3dCameraFunction(const string& functionName, v
 		{
 			_fe3d.camera_disableFirstPersonView();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+		}
+	}
+	else if (functionName == "fe3d:camera_is_first_person_view_enabled") // Check if first person view is enabled
+	{
+		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			auto result = _fe3d.camera_isFirstPersonViewEnabled();
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 		}
 	}
 	else if (functionName == "fe3d:camera_set_cursor_speed") // Set cursor speed

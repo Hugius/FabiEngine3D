@@ -12,14 +12,14 @@ void FabiEngine3D::camera_load(float fov, float nearZ, float farZ, Vec3 startPos
 	_core->_cameraManager.setFarZ(farZ);
 }
 
-void FabiEngine3D::camera_enableLookat()
+void FabiEngine3D::camera_enableLookatView()
 {
-	_core->_cameraManager.enableLookat();
+	_core->_cameraManager.enableLookatView();
 }
 
-void FabiEngine3D::camera_disableLookat()
+void FabiEngine3D::camera_disableLookatView()
 {
-	_core->_cameraManager.disableLookat();
+	_core->_cameraManager.disableLookatView();
 }
 
 void FabiEngine3D::camera_enableFirstPersonView()
@@ -177,9 +177,9 @@ Vec3 FabiEngine3D::camera_getLookatPosition()
 	return _core->_cameraManager.getLookatPosition();
 }
 
-bool FabiEngine3D::camera_isLookatEnabled()
+bool FabiEngine3D::camera_isLookatViewEnabled()
 {
-	return _core->_cameraManager.isLookatEnabled();
+	return _core->_cameraManager.isLookatViewEnabled();
 }
 
 bool FabiEngine3D::camera_isFirstPersonViewEnabled()

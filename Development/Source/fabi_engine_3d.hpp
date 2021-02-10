@@ -49,8 +49,8 @@ public:
 
 	// Camera interface - setters
 	void camera_load(float fov, float nearZ, float farZ, Vec3 startPosition, float yaw = 0.0f, float pitch = 0.0f);
-	void camera_enableLookat();
-	void camera_disableLookat();
+	void camera_enableLookatView();
+	void camera_disableLookatView();
 	void camera_enableFirstPersonView();
 	void camera_disableFirstPersonView();
 	void camera_enableFreeMovement();
@@ -73,7 +73,7 @@ public:
 	void camera_center();
 
 	// Camera interface - getters
-	bool  camera_isLookatEnabled();
+	bool  camera_isLookatViewEnabled();
 	bool  camera_isFirstPersonViewEnabled();
 	bool  camera_isFreeMovementEnabled();
 	Vec3  camera_getPosition();

@@ -27,8 +27,8 @@ public:
 	void setMaxPitch(float value);
 
 	// Other
-	void enableLookat();
-	void disableLookat();
+	void enableLookatView();
+	void disableLookatView();
 	void enableFirstPersonView();
 	void disableFirstPersonView();
 	void enableFreeMovement();
@@ -56,7 +56,7 @@ public:
 	const float  getMouseSensitivity()      const;
 	const float  getMouseOffset()           const;
 	const float  getMaxPitch()				const;
-	const bool   isLookatEnabled()			const;
+	const bool   isLookatViewEnabled()		const;
 	const bool   isFirstPersonViewEnabled() const;
 	const bool   isFreeMovementEnabled()	const;
 
@@ -92,7 +92,7 @@ private:
 	float _maxPitch = 0.0f;
 
 	// Booleans
-	bool _isLookatEabled		   = false;
+	bool _isLookatViewEabled		   = false;
 	bool _isFirstPersonViewEnabled = false;
 	bool _isFreeMovementEnabled    = true;
 	bool _mustCenter               = false;

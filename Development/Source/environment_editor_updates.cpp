@@ -13,7 +13,7 @@ void EnvironmentEditor::update()
 			_fe3d.camera_setPosition(Vec3(0.0f));
 			_fe3d.camera_setYaw(0.0f);
 			_fe3d.camera_setPitch(0.0f);
-			_fe3d.camera_disableLookat();
+			_fe3d.camera_disableLookatView();
 
 			// Select the default sky
 			_fe3d.skyEntity_select("@@engineBackground");

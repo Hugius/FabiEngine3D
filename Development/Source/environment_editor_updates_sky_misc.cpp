@@ -182,7 +182,7 @@ void EnvironmentEditor::_updateSkyCamera()
 			{
 				_fe3d.gfx_enableMotionBlur(0.2f);
 				_fe3d.camera_enableFirstPersonView();
-				_fe3d.camera_disableLookat();
+				_fe3d.camera_disableLookatView();
 				_fe3d.guiEntity_hide("@@cursor");
 			}
 		}

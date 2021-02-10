@@ -259,7 +259,7 @@ void SceneEditor::_updateCamera()
 				if (_fe3d.misc_isCursorInsideViewport())
 				{
 					_fe3d.camera_enableFirstPersonView();
-					_fe3d.camera_disableLookat();
+					_fe3d.camera_disableLookatView();
 				}
 
 				// Disable cursor while in FPS mode

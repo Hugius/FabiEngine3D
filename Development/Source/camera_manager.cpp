@@ -36,7 +36,7 @@ void CameraManager::reset()
 	_maxPitch = 90.0f;
 
 	// Booleans
-	_isLookatEabled = false;
+	_isLookatViewEabled = false;
 	_isFirstPersonViewEnabled = false;
 	_isFreeMovementEnabled = true;
 	_mustCenter = false;
@@ -116,7 +116,7 @@ void CameraManager::updateMatrices()
 	_position.z = std::clamp(_position.z, -_farZ, _farZ);
 
 	// Lookat front vector
-	if(_isLookatEabled)
+	if(_isLookatViewEabled)
 	{
 		Vec3 offset = Vec3(0.00001f); // Small offset, otherwise screen goes black in certain circumstances
 		_front = (_lookatPosition + offset) - _position;
@@ -181,14 +181,14 @@ void CameraManager::translateFollowZY(float speed) // Forward movement
 	}
 }
 
-void CameraManager::enableLookat()
+void CameraManager::enableLookatView()
 {
-	_isLookatEabled = true;
+	_isLookatViewEabled = true;
 }
 
-void CameraManager::disableLookat()
+void CameraManager::disableLookatView()
 {
-	_isLookatEabled = false;
+	_isLookatViewEabled = false;
 }
 
 void CameraManager::enableFirstPersonView()
@@ -325,9 +325,9 @@ const bool CameraManager::isFreeMovementEnabled() const
 	return _isFreeMovementEnabled;
 }
 
-const bool CameraManager::isLookatEnabled() const
+const bool CameraManager::isLookatViewEnabled() const
 {
-	return _isLookatEabled;
+	return _isLookatViewEabled;
 }
 
 void CameraManager::translate(Vec3 translation)

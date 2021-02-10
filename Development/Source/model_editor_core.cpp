@@ -90,7 +90,7 @@ void ModelEditor::load()
 
 	// Camera
 	_fe3d.camera_load(90.0f, 0.1f, 10000.0f, _defaultCameraPosition);
-	_fe3d.camera_enableLookat();
+	_fe3d.camera_enableLookatView();
 
 	// Enable graphics
 	_fe3d.gfx_enableAmbientLighting(Vec3(1.0f), 0.75f);

@@ -490,10 +490,14 @@ fe3d:print(myString)
   Enable lookat camera view. The camera will ALWAYS be looking at the lookat position.
 - `fe3d:camera_disable_lookat_view`() ---> `NONE`  
   Disable lookat camera view.
+- `fe3d:camera_is_lookat_view_enabled`() ---> `BOOL`  
+  Returns true if lookat camera view is enabled.
 - `fe3d:camera_enable_first_person_view`() ---> `NONE`  
   Enable first person camera view. Cursor movement will determine where the camera will be looking at.
 - `fe3d:camera_disable_first_person_view`() ---> `NONE`  
   Disable first person camera view.
+- `fe3d:camera_is_first_person_view_enabled`() ---> `BOOL`  
+  Returns true if first person camera view is enabled.
 - `fe3d:camera_set_cursor_speed`(`DEC` speed) ---> `NONE`  
   Sets the **speed** at which the cursor moves.
 - `fe3d:camera_center_cursor`() ---> `NONE`  
@@ -570,7 +574,7 @@ fe3d:print(myString)
 - `misc:get_random_decimal`(`DEC` min, `DEC` max) ---> `DEC`  
   Returns a random decimal between **min** and **max**.
 - `misc:time_interval`(`STR` name, `INT` frames) ---> `BOOL`  
-  Returns true every **frames** for the unique **name**
+  Returns true every **frames** for the unique **name**.
 
 # Game Execution
 ### Inside engine interface
@@ -590,6 +594,7 @@ fe3d:print(myString)
 - All rotational **degrees** cannot be higher than 360 or lower than -360 (for example 500 will be 140)
 - AABB's will transform based on their rotation, but only in 90 degree steps (0, 90, 180, 270 degrees)
 - The top viewport has a button called "**uncache**" which forces the engine to load an asset again, even if it was cached
+- You can clear the console output by pressing **C** when hovering the console window
 ### Performance
 - Click [here](#performance-statistics-example) to see an example
 - You can use the performance statistics to analyze your **game's performance**

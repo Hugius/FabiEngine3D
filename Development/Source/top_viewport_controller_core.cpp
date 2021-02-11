@@ -250,7 +250,7 @@ void TopViewportController::_updateMiscScreenManagement()
 		}
 		else if (screen->getButton("documentation")->isHovered())
 		{
-			ShellExecute(0, 0, "https://github.com/ConsolePeasant92/FabiEngine3D/blob/master/FabiEngine3D/README.md", 0, 0, SW_SHOW);
+			ShellExecute(0, 0, "https://github.com/ConsolePeasant92/FabiEngine3D/blob/master/README.md", 0, 0, SW_SHOW);
 		}
 	}
 }

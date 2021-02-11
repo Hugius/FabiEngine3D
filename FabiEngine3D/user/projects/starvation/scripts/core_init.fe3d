@@ -1,13 +1,13 @@
-6 18
+11 13
 META script_type_init
 META execution_entry
 
 fe3d:scene_load("home")
 
 EXEC bag_init
-EXEC building_init
-EXEC crafting_init_main
-EXEC crafting_init_hud
+EXEC build_init
+EXEC craft_init_main
+EXEC craft_init_hud
 EXEC inventory_init
 EXEC misc_init
 EXEC npc_init

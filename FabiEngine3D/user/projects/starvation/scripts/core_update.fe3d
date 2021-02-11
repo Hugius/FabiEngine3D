@@ -1,4 +1,4 @@
-50 25
+30 8
 META script_type_update
 META execution_entry
 
@@ -25,16 +25,17 @@ EXEC animation_player
 EXEC animation_tool
 
 /// Using tools
-EXEC gathering_update
-EXEC fighting_update
-EXEC mining_update
-EXEC cutting_update
-EXEC digging_update
-EXEC plowing_update
-EXEC harvesting_update
-EXEC building_update
+EXEC gather_update
+EXEC fight_update
+EXEC mine_update
+EXEC cut_update
+EXEC dig_update
+EXEC plow_update
+EXEC harvest_update
+EXEC build_update_place
+EXEC build_update_growth
 /// Torch update?
-EXEC fishing_update
+EXEC fish_update
 
 /// NPC interaction
 IF currentWorld IS "starvia_outside":
@@ -50,8 +51,8 @@ IF currentWorld IS "home":
 
 /// Crafting
 IF currentWorld IS "home":
-    EXEC crafting_process
-    EXEC crafting_misc
+    EXEC craft_process
+    EXEC craft_misc
 
 /// Time
 EXEC time_update

@@ -89,9 +89,9 @@ void FabiEngine3D::aabbEntity_setVisible(const string& ID, bool visible)
 	_core->_aabbEntityManager.getEntity(ID)->setVisible(visible);
 }
 
-void FabiEngine3D::aabbEntity_setPosition(const string& ID, Vec3 position)
+void FabiEngine3D::aabbEntity_setPosition(const string& ID, Vec3 position, bool noLocal)
 {
-	if (_core->_aabbEntityManager.getEntity(ID)->getParentID() == "") // Standalone entity
+	if (_core->_aabbEntityManager.getEntity(ID)->getParentID() == "" || noLocal) // Standalone entity
 	{
 		_core->_aabbEntityManager.getEntity(ID)->setTranslation(position);
 	}
@@ -101,9 +101,9 @@ void FabiEngine3D::aabbEntity_setPosition(const string& ID, Vec3 position)
 	}
 }
 
-void FabiEngine3D::aabbEntity_setSize(const string& ID, Vec3 size)
+void FabiEngine3D::aabbEntity_setSize(const string& ID, Vec3 size, bool noLocal)
 {
-	if (_core->_aabbEntityManager.getEntity(ID)->getParentID() == "") // Standalone entity
+	if (_core->_aabbEntityManager.getEntity(ID)->getParentID() == "" || noLocal) // Standalone entity
 	{
 		_core->_aabbEntityManager.getEntity(ID)->setScaling(size);
 	}
@@ -113,9 +113,9 @@ void FabiEngine3D::aabbEntity_setSize(const string& ID, Vec3 size)
 	}
 }
 
-Vec3 FabiEngine3D::aabbEntity_getPosition(const string& ID)
+Vec3 FabiEngine3D::aabbEntity_getPosition(const string& ID, bool noLocal)
 {
-	if (_core->_aabbEntityManager.getEntity(ID)->getParentID() == "") // Standalone entity
+	if (_core->_aabbEntityManager.getEntity(ID)->getParentID() == "" || noLocal) // Standalone entity
 	{
 		return _core->_aabbEntityManager.getEntity(ID)->getTranslation();
 	}
@@ -125,9 +125,9 @@ Vec3 FabiEngine3D::aabbEntity_getPosition(const string& ID)
 	}
 }
 
-Vec3 FabiEngine3D::aabbEntity_getSize(const string& ID)
+Vec3 FabiEngine3D::aabbEntity_getSize(const string& ID, bool noLocal)
 {
-	if (_core->_aabbEntityManager.getEntity(ID)->getParentID() == "") // Standalone entity
+	if (_core->_aabbEntityManager.getEntity(ID)->getParentID() == "" || noLocal) // Standalone entity
 	{
 		return _core->_aabbEntityManager.getEntity(ID)->getScaling();
 	}

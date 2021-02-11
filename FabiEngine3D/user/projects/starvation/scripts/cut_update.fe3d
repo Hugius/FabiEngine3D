@@ -1,0 +1,74 @@
+3 16
+META script_type_update
+
+/// Check if aiming at tree & extract number
+STR checkID = ""
+LIST cuttables = {"tree2","tree6","tree7"}
+INT size = 3
+INT index = 0
+STR hoveredID = ""
+LOOP:
+    IF index IS size:
+        BREAK
+    EDIT hoveredID = fe3d:raycast_into_model(cuttables[index], "trunk", <true>)
+    IF hoveredID NOT "":
+        BREAK
+    INCR index 1
+
+/// Update tree hover
+BOOL isHovered = <false>
+VEC3 camPos = fe3d:camera_get_position()
+STR toolID = _inventory[_equipIndex]
+fe3d:text_set_visible("cut", <false>)
+IF hoveredID NOT "" AND _fallingTreeID IS "":
+    VEC3 treePos = fe3d:model_get_position(hoveredID)
+    DEC distance = math:distance(treePos, camPos)
+    IF distance LESS _maxTreeReach:
+        EDIT isHovered = <true>
+        IF toolID IS "axe_stone" OR toolID IS "axe_iron":
+            IF _isInvOpen IS <true>:
+                fe3d:text_set_visible("cut", <true>)
+
+/// Check if cutting animation finished
+IF _wasAxePlaying IS <true> AND _isAxePlaying IS <false> AND _fallingTreeID IS "":
+    IF isHovered IS <true>:
+        fe3d:model_start_animation(hoveredID, "tree_fall", 1)
+        fe3d:model_set_aabb_responsive(hoveredID, <false>)
+        EDIT _fallingTreeID = hoveredID
+        DECR _durabilities[2] _durabilityHit
+
+/// Tree falling updates
+IF _fallingTreeID NOT "":
+    BOOL treeAnim = fe3d:model_is_animation_started(_fallingTreeID, "tree_fall")
+    IF treeAnim IS <false>:
+        VEC3 treePos = fe3d:model_get_position(_fallingTreeID)
+        fe3d:model_delete(_fallingTreeID)
+        INT logID = misc:get_unique_integer(0, 1000)
+        CAST logID STR
+        EDIT logID = misc:concat_strings("log", logID)
+        PUSH _logIDs logID
+        EDIT _fallingLogID = logID
+        EDIT _fallingLogTargetHeight = treePos.y
+        INT logNumber = misc:get_random_integer(1, 4)
+        CAST logNumber STR
+        STR logModelID = misc:concat_strings("log", logNumber)
+        EDIT _fallingTreeID = ""
+        INCR treePos.y 5.0
+        fe3d:model_place(logID, logModelID, treePos.x, treePos.y, treePos.z)
+
+/// Log falling updates
+IF _fallingLogID NOT "":
+    VEC3 currentPos = fe3d:model_get_position(_fallingLogID)
+    IF currentPos.y MORE _fallingLogTargetHeight:
+        fe3d:model_move(_fallingLogID, 0.0, -0.1, 0.0)
+    ELSE:
+        EDIT _fallingLogID = ""
+
+/// Log picking updates
+EDIT hoveredID = fe3d:raycast_into_model("log", "", <true>)
+IF hoveredID NOT "" AND _wasPickupPlaying IS <true> AND _isPickupPlaying IS <false>:
+    VEC3 logPos = fe3d:model_get_position(hoveredID)
+    DEC distance = math:distance(logPos, camPos)
+    IF distance LESS _maxPickupReach:
+        fe3d:model_delete(hoveredID)
+        INCR _bag[0] 3

@@ -93,7 +93,7 @@ bool ScriptInterpreter::_executeFe3dAabbEntityFunction(const string& functionNam
 			if (_validateFe3dAabbEntity(arguments[0].getString()))
 			{
 				_fe3d.aabbEntity_setPosition(arguments[0].getString(),
-					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
+					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()), true);
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}
@@ -108,7 +108,7 @@ bool ScriptInterpreter::_executeFe3dAabbEntityFunction(const string& functionNam
 			// Validate existing AABB ID
 			if (_validateFe3dAabbEntity(arguments[0].getString()))
 			{
-				auto result = _fe3d.aabbEntity_getPosition(arguments[0].getString());
+				auto result = _fe3d.aabbEntity_getPosition(arguments[0].getString(), true);
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));
 			}
 		}
@@ -124,7 +124,7 @@ bool ScriptInterpreter::_executeFe3dAabbEntityFunction(const string& functionNam
 			if (_validateFe3dAabbEntity(arguments[0].getString()))
 			{
 				_fe3d.aabbEntity_setSize(arguments[0].getString(),
-					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
+					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()), true);
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}
@@ -139,7 +139,7 @@ bool ScriptInterpreter::_executeFe3dAabbEntityFunction(const string& functionNam
 			// Validate existing AABB ID
 			if (_validateFe3dAabbEntity(arguments[0].getString()))
 			{
-				auto result = _fe3d.aabbEntity_getSize(arguments[0].getString());
+				auto result = _fe3d.aabbEntity_getSize(arguments[0].getString(), true);
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));
 			}
 		}

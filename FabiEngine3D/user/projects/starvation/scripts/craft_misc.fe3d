@@ -1,0 +1,32 @@
+7 36
+META script_type_update
+
+/// Update workbench hover
+fe3d:text_set_visible("craft", <false>)
+BOOL isHovered = <false>
+STR hoveredID = fe3d:raycast_into_model("workbench", "", <true>)
+VEC3 camPos = fe3d:camera_get_position()
+IF hoveredID NOT "" AND _isBuilding IS <false>:
+    VEC3 workbenchPos = fe3d:model_get_position(hoveredID)
+    DEC distance = math:distance(workbenchPos, camPos)
+    IF distance LESS _maxWorkbenchReach AND _isCrafting IS <false>:
+        EDIT isHovered = <true>
+        fe3d:text_set_visible("craft", <true>)
+
+/// Update crafting menu - open & close
+BOOL ePressed = fe3d:input_is_key_pressed("KEY_E")
+IF ePressed IS <true> AND _isBuilding IS <false>:
+    IF isHovered IS <true> AND _isCrafting IS <false>:
+        EDIT _isCrafting = <true>
+        fe3d:cursor_show()
+        fe3d:model_set_visible(_craftables[_craftIndex], <true>)
+        fe3d:text_set_visible(_craftables[_craftIndex], <true>)
+        fe3d:billboard_set_visible("craft_confirm", <true>)
+        fe3d:billboard_set_visible("craft_cancel", <true>)
+    ELIF _isCrafting IS <true>:
+        EDIT _isCrafting = <false>
+        fe3d:cursor_hide()
+        fe3d:model_set_visible(_craftables[_craftIndex], <false>)
+        fe3d:text_set_visible(_craftables[_craftIndex], <false>)
+        fe3d:billboard_set_visible("craft_confirm", <false>)
+        fe3d:billboard_set_visible("craft_cancel", <false>)

@@ -425,12 +425,12 @@ public:
 	void aabbEntity_show(const string& ID);
 	void aabbEntity_setResponsive(const string& ID, bool responsive);
 	void aabbEntity_setVisible(const string& ID, bool visible);
-	void aabbEntity_setPosition(const string& ID, Vec3 position);
-	void aabbEntity_setSize(const string& ID, Vec3 size);
+	void aabbEntity_setPosition(const string& ID, Vec3 position, bool noLocal = false);
+	void aabbEntity_setSize(const string& ID, Vec3 size, bool noLocal = false);
 
 	// AABB entity interface - getters
-	Vec3 aabbEntity_getPosition(const string& ID);
-	Vec3 aabbEntity_getSize(const string& ID);
+	Vec3 aabbEntity_getPosition(const string& ID, bool noLocal = false);
+	Vec3 aabbEntity_getSize(const string& ID, bool noLocal = false);
 	bool aabbEntity_isResponsive(const string& ID);
 	bool aabbEntity_isExisting(const string& ID);
 	bool aabbEntity_isVisible(const string& ID);

@@ -143,7 +143,7 @@ void ModelEditor::unload()
 	_loadedModelIDs.clear();
 	_meshFileNames.clear();
 	_cameraLookatPosition = Vec3(0.0f);
-	_totalCursorDifference = Vec2(0.0f);
+	_totalCursorDifference = Vec2(0.0f, 0.5f);
 	_cameraAcceleration = Vec2(0.0f);
 	_lastCursorPos = Vec2(0.0f);
 	_cameraDistance = 5.0f;

@@ -1,4 +1,4 @@
-31 46
+37 61
 META script_type_init
 
 /// Globals
@@ -10,7 +10,7 @@ PUSH _buildables "storage_display"
 PUSH _buildables "well_display"
 PUSH _buildables "pen_display"
 GLOB LIST _buildOffsets = {8.0, 9.25, 11.85, 8.0, 3.5, 6.5}
-GLOB LIST _buildHeights = {7.5, 10.0, 12.5, 5.0, 5.0, 3.0}
+GLOB LIST _buildHeights = {}
 GLOB LIST _buildCounters = {0,0,0,0,0,0}
 GLOB BOOL _isBuilding = <false>
 GLOB DEC _buildRotation = 0.0
@@ -31,3 +31,17 @@ fe3d:model_place("well_display", "well2", 0.0, 0.0, 0.0)
 fe3d:model_set_visible("well_display", <false>)
 fe3d:model_place("pen_display", "pen", 0.0, 0.0, 0.0)
 fe3d:model_set_visible("pen_display", <false>)
+
+/// AABB heights
+VEC3 smallHeight = fe3d:aabb_get_size("small_house_display_front")
+VEC3 mediumHeight = fe3d:aabb_get_size("medium_house_display_front")
+VEC3 bigHeight = fe3d:aabb_get_size("big_house_display_front")
+VEC3 storageHeight = fe3d:aabb_get_size("storage_display_main")
+VEC3 wellHeight = fe3d:aabb_get_size("well_display_well")
+VEC3 penHeight = fe3d:aabb_get_size("pen_display_front")
+PUSH _buildHeights smallHeight.y
+PUSH _buildHeights mediumHeight.y
+PUSH _buildHeights bigHeight.y
+PUSH _buildHeights storageHeight.y
+PUSH _buildHeights wellHeight.y
+PUSH _buildHeights penHeight.y

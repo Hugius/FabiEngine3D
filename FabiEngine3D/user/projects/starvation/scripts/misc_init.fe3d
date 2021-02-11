@@ -1,11 +1,11 @@
-37 27
+6 35
 META script_type_init
 
 /// Globals
 GLOB DEC _blackAlpha = 1.0
-GLOB CONST DEC _maxPickupReach = 5.0
+GLOB CONST DEC _maxPickupReach = 5.5
 GLOB CONST DEC _maxTreeReach = 4.0
-GLOB CONST DEC _maxStoneReach = 5.0
+GLOB CONST DEC _maxStoneReach = 5.5
 GLOB STR _fallingTreeID = ""
 GLOB STR _fallingLogID = ""
 GLOB LIST _logIDs = {}

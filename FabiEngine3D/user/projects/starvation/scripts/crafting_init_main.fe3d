@@ -1,4 +1,4 @@
-44 72
+12 38
 META script_type_init
 
 /// Globals
@@ -9,7 +9,7 @@ GLOB LIST _craftables = {}
 GLOB LIST _craftablesText = {}
 GLOB LIST _craftablesIndex = {0,0,1,1,2,2,3,3,4,5,6,6,7,8}
 GLOB LIST _craftablesWoodPrice = {2,2,2,2,2,2,2,2,2,3,2,2,2,3}
-GLOB LIST _craftablesStonePrice = {3,0,3,0,3,0,1,0,0,0,1,0,0,0}
+GLOB LIST _craftablesStonePrice = {3,0,3,0,3,0,1,0,0,0,2,0,0,0}
 GLOB LIST _craftablesIronPrice = {0,3,0,3,0,3,0,1,1,3,0,2,0,0}
 PUSH _craftables "sword_stone_display"
 PUSH _craftables "sword_iron_display"
@@ -25,19 +25,19 @@ PUSH _craftables "hammer_stone_display"
 PUSH _craftables "hammer_iron_display"
 PUSH _craftables "torch_display"
 PUSH _craftables "fishrod_display"
-PUSH _craftablesText "Stone sword (1 x wood, 3 x stone)"
-PUSH _craftablesText "Iron sword (1 x wood, 3 x iron)"
-PUSH _craftablesText "Stone pickaxe (1 x wood, 3 x stone)"
-PUSH _craftablesText "Iron pickaxe (1 x wood, 3 x iron)"
-PUSH _craftablesText "Stone axe (1 x wood, 3 x stone)"
-PUSH _craftablesText "Iron axe (1 x wood, 3 x iron)"
-PUSH _craftablesText "Stone shovel (1 x wood, 1 x stone)"
-PUSH _craftablesText "Iron shovel (1 x wood, 1 x iron)"
-PUSH _craftablesText "Hoe (1 x wood, 1 x iron)"
-PUSH _craftablesText "Scythe (2 x wood, 3 x iron)"
-PUSH _craftablesText "Stone hammer (1 x wood, 2 x stone)"
-PUSH _craftablesText "Iron hammer (1 x wood, 2 x iron)"
-PUSH _craftablesText "Torch (1 x wood)"
+PUSH _craftablesText "Stone sword (2 x wood, 3 x stone)"
+PUSH _craftablesText "Iron sword (2 x wood, 3 x iron)"
+PUSH _craftablesText "Stone pickaxe (2 x wood, 3 x stone)"
+PUSH _craftablesText "Iron pickaxe (2 x wood, 3 x iron)"
+PUSH _craftablesText "Stone axe (2 x wood, 3 x stone)"
+PUSH _craftablesText "Iron axe (2 x wood, 3 x iron)"
+PUSH _craftablesText "Stone shovel (2 x wood, 1 x stone)"
+PUSH _craftablesText "Iron shovel (2 x wood, 1 x iron)"
+PUSH _craftablesText "Hoe (2 x wood, 1 x iron)"
+PUSH _craftablesText "Scythe (3 x wood, 3 x iron)"
+PUSH _craftablesText "Stone hammer (2 x wood, 2 x stone)"
+PUSH _craftablesText "Iron hammer (2 x wood, 2 x iron)"
+PUSH _craftablesText "Torch (2 x wood)"
 PUSH _craftablesText "Fishing rod (3 x wood)"
 
 /// Models

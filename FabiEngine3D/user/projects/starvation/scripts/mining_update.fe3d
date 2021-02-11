@@ -1,4 +1,4 @@
-9 40
+20 26
 META script_type_update
 
 /// Update stone hover
@@ -14,10 +14,12 @@ IF hoveredID NOT "" AND stonesException IS "":
     DEC stoneDistance = math:distance(stonePos, camPos)
     DEC stoneReach = _maxStoneReach
     STR subString = misc:get_string_part(hoveredID, 0, 6)
-    IF subString IS "stone4":
-        MUL stoneReach 1.2
-    ELIF subString IS "stone5":
+    IF subString IS "stone1":
         MUL stoneReach 1.5
+    IF subString IS "stone3":
+        MUL stoneReach 1.5
+    ELIF subString IS "stone5":
+        MUL stoneReach 1.6
         IF toolID NOT "pickaxe_iron":
             EDIT allowed = <false>
     IF stoneDistance LESS stoneReach AND allowed IS <true>:

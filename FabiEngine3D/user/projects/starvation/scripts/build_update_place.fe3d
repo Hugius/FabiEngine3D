@@ -1,4 +1,4 @@
-83 59
+74 28
 META script_type_update
 
 /// Temporary values
@@ -73,22 +73,19 @@ IF _isBuilding IS <true> AND lmbPressed IS <true>:
         STR previewID = temp[_buildIndex]
         fe3d:model_place(newID, previewID, buildingPos.x, 0.0, buildingPos.z)
         fe3d:model_set_rotation(newID, 0.0, _buildRotation, 0.0)
-        DEC height = _buildHeights[_buildIndex]
+        IF _buildIndex IS 0:
+            VEC3 size = fe3d:aabb_get_size("small_house_display_front_left")
+        IF _buildIndex IS 1:
+            VEC3 size = fe3d:aabb_get_size("medium_house_display_front")
+        IF _buildIndex IS 2:
+            VEC3 size = fe3d:aabb_get_size("big_house_display_back")
+        IF _buildIndex IS 3:
+            VEC3 size = fe3d:aabb_get_size("storage_display_main")
+        IF _buildIndex IS 4:
+            VEC3 size = fe3d:aabb_get_size("well_display_well")
+        IF _buildIndex IS 5:
+            VEC3 size = fe3d:aabb_get_size("pen_display_front")
+        DEC height = size.y
         MUL height 0.1
         fe3d:model_set_max_height(newID, height)
         INCR _buildCounters[_buildIndex] 1
-
-/// AABB heights
-EDIT _buildHeights = {}
-VEC3 smallHeight = fe3d:aabb_get_size("small_house_display_front_left")
-VEC3 mediumHeight = fe3d:aabb_get_size("medium_house_display_front")
-VEC3 bigHeight = fe3d:aabb_get_size("big_house_display_back")
-VEC3 storageHeight = fe3d:aabb_get_size("storage_display_main")
-VEC3 wellHeight = fe3d:aabb_get_size("well_display_well")
-VEC3 penHeight = fe3d:aabb_get_size("pen_display_front")
-PUSH _buildHeights smallHeight.y
-PUSH _buildHeights mediumHeight.y
-PUSH _buildHeights bigHeight.y
-PUSH _buildHeights storageHeight.y
-PUSH _buildHeights wellHeight.y
-PUSH _buildHeights penHeight.y

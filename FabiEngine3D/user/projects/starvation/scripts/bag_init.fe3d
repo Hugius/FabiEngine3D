@@ -1,11 +1,11 @@
-7 0
+6 34
 META script_type_init
 
 /// Globals
-GLOB LIST _bag = {0, 0, 0, 0, 0, 0, 0, 5, 0}
+GLOB LIST _bag = {10, 10, 10, 10, 10, 10, 10, 10, 10}
 GLOB LIST _bagWeights = {2.0, 0.5, 0.25, 0.01, 0.5, 0.5, 0.5, 1.0, 0.025}
 GLOB DEC _totalBagWeight = 0.0
-GLOB CONST DEC _maxBagWeight = 30.0
+GLOB CONST DEC _maxBagWeight = 300.0
 
 /// Bag icons
 fe3d:image_place("scroll_bag", "scroll_bag.png", 0.925, 0.25, 0.0, 0.175, 1.2)

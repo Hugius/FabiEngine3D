@@ -347,7 +347,7 @@ float getShadowValue()
 				for(int y = -1; y <= 1; y++)
 				{
 					float pcfDepth = texture(u_sampler_shadowMap, projCoords.xy + vec2(x, y) * vec2(texelSize)).r; 
-					shadow += (currentDepth - bias > pcfDepth) ? 0.5f : 1.0f;        
+					shadow += (currentDepth - bias > pcfDepth) ? 0.6f : 1.0f;        
 				}    
 			}
             

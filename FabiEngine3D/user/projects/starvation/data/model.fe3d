@@ -38,7 +38,7 @@
 @male1 user\assets\meshes\characters\male1.obj ? ? ? ? 0.57 0.57 0.57 0 0 0 0 1 1 1 0.6 1 1 1 1 ? 0 male 0 0 0.2 2 5.5 1.9
 @mushroom1 user\assets\meshes\foliage\mushroom1.obj user\assets\textures\diffuse_maps\foliage\mushroom1.png ? ? ? 1 1 1 0 1 0 0 0 1 1 1 1 1 1 1 ? 0 mushroom 0 0 0 1.7 1.6 1.7
 @mushroom2 user\assets\meshes\foliage\mushroom2.obj user\assets\textures\diffuse_maps\foliage\mushroom2.png ? ? ? 1.25 1.25 1.25 0 1 0 0 0 1 1 1 1 1 1 1 ? 0 mushroom 0 0 0 1 1.5 1
-@pen user\assets\meshes\misc\pen.obj user\assets\textures\diffuse_maps\misc\pen.png ? ? ? 1.25 2 1.25 0 1 0 0 1 1 1 0.75 1 1 1 1 ? 0 front 0 0 3.5 7.6 1 0.2 left -3.5 0 0 0.2 1.1 7.5 back 0 0 -3.5 7.5 1.1 0.2 right 3.5 0 0 0.2 1.1 7.5
+@pen user\assets\meshes\misc\pen.obj user\assets\textures\diffuse_maps\misc\pen.png ? ? ? 1.25 2 1.25 0 1 0 0 1 1 1 0.75 1 1 1 1 ? 0 left -3.5 0 0 0.2 1.1 7.5 front 0 0 3.5 7.6 1 0.2 back 0 0 -3.5 7.5 1.1 0.2 right 3.5 0 0 0.2 1.1 7.5
 @pickaxe_iron user\assets\meshes\tools\pickaxe_iron.obj user\assets\textures\diffuse_maps\tools\pickaxe_iron.png ? user\assets\textures\reflection_maps\tools\pickaxe_iron.png user\assets\textures\normal_maps\tools\pickaxe_iron.png 0.5 0.5 0.5 0 0 0 1 1 1 1 0.5 1 1 1 1 ? 0 pickaxe 0 0 0.1 0.4 2.9 2.4
 @pickaxe_stone user\assets\meshes\tools\pickaxe_stone.obj user\assets\textures\diffuse_maps\tools\pickaxe_stone.png ? ? user\assets\textures\normal_maps\tools\pickaxe_stone.png 0.5 0.5 0.5 0 0 0 0 1 1 1 0.5 1 1 1 1 ? 0 pickaxe 0 0 0 0.2 2.8 2.1
 @portcullis user\assets\meshes\misc\portcullis.obj user\assets\textures\diffuse_maps\misc\metal.png ? user\assets\textures\reflection_maps\misc\metal.png ? 1.25 1.25 1.25 0 1 0 1 1 1 1 0.25 1 1 1 1 ? 0 portcullis 0 0 0 0.4 4 3
@@ -75,7 +75,8 @@
 @tree4 user\assets\meshes\trees\tree4.obj ? ? ? ? 2.25 2.25 2.25 0 1 1 0 0 1 1 1 1 1 1 1 ? 0 trunk -0.05 0 0 0.9 2.15 0.9 leaves 0 2.15 0 3.1 4.95 2.5
 @tree5 user\assets\meshes\trees\tree5.obj ? ? ? ? 1.5 1.5 1.5 0 1 1 0 1 1 1 0.5 1 1 1 1 ? 0 trunk 0 0 0 0.6 3.4 0.5 leaves 0 3.4 0 4.8 3.8 5.3
 @tree6 user\assets\meshes\trees\tree6.obj ? ? ? ? 1.25 1 1.25 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 leaves 0 8.8 0 3.85 8.30001 3.6 trunk 0 0 0 0.85 8.80001 0.8
-@tree7 user\assets\meshes\trees\tree7.obj ? ? ? ? 4.5 4.5 4.5 0 1 1 0 0 1 1 0.75 1 1 1 1 ? 0 leaves 0 1.18 0 2.24 3.95 2.37 trunk 0.03 0 -0.01 0.15 1.2 0.15
+@tree7 user\assets\meshes\trees\tree7.obj ? ? ? ? 4.5 4.5 4.5 0 1 1 0 0 1 1 0.75 1 1 1 1 ? 0 trunk 0.03 0 -0.01 0.15 1.2 0.15 leaves 0 1.18 0 2.24 3.95 2.37
+@tree8 user\assets\meshes\trees\tree8.obj ? ? ? ? 2.5 2.5 2.5 0 1 1 0 1 1 1 0.6 1 1 1 1 ? 0 leaves -0.2 3.4 -0.25 3.2 4.35 3.5 trunk 0.05 0 0.1 0.4 3.4 0.4
 @wagon user\assets\meshes\misc\wagon.obj user\assets\textures\diffuse_maps\misc\wagon.png ? ? ? 1.75 1.75 1.75 0 1 0 0 1 1 1 0.75 1 1 1 1 ? 0 wagon 0 0 -0.7 1.7 1.32 3.2
 @wall user\assets\meshes\buildings\wall.obj ? ? ? ? 1.25 1.25 1.25 0 1 0 0 1 1 1 0.5 1 1 1 1 ? 0 wall 0 0 -0.5 21.3 14 2.8
 @warehouse user\assets\meshes\buildings\warehouse.obj ? ? ? ? 1 1 1 0 1 0 0 0 1 1 1 1 1 1 1 ? 0

@@ -1,0 +1,53 @@
+45 52
+META script_type_update
+
+/// Check if a built building is selected
+INT listSize = misc:get_list_size("_buildables")
+INT index = 0
+STR hoveredID = ""
+LOOP:
+    IF index IS listSize:
+        BREAK
+    EDIT hoveredID = fe3d:raycast_into_model(_buildables[index], "", <true>)
+    IF hoveredID NOT "":
+        BREAK
+    INCR index 1
+
+/// Retrieve max height
+IF hoveredID NOT "":
+    DEC height = fe3d:model_get_max_height(hoveredID)
+    STR idPart = misc:get_string_part(hoveredID, 0, 2)
+    IF idPart IS "sm":
+        INT hoveredIndex = 0
+        VEC3 size = fe3d:aabb_get_size("small_house_display_front_left")
+    ELIF idPart IS "me":
+        INT hoveredIndex = 1
+        VEC3 size = fe3d:aabb_get_size("medium_house_display_front")
+    ELIF idPart IS "bi":
+        INT hoveredIndex = 2
+        VEC3 size = fe3d:aabb_get_size("big_house_display_back")
+    ELIF idPart IS "st":
+        INT hoveredIndex = 3
+        VEC3 size = fe3d:aabb_get_size("storage_display_main")
+    ELIF idPart IS "we":
+        INT hoveredIndex = 4
+        VEC3 size = fe3d:aabb_get_size("well_display_well")
+    ELIF idPart IS "pe":
+        INT hoveredIndex = 5
+        VEC3 size = fe3d:aabb_get_size("pen_display_front")
+
+/// Update building process
+STR toolID = _inventory[_equipIndex]
+fe3d:text_set_visible("build", <false>)
+IF toolID IS "hammer_stone" OR toolID IS "hammer_iron":
+    IF _isInvOpen IS <true> AND hoveredID NOT "":
+        VEC3 camPos = fe3d:camera_get_position()
+        VEC3 buildingPos = fe3d:model_get_position(hoveredID)
+        DEC distance = math:distance(buildingPos, camPos)
+        IF distance LESS _buildOffsets[hoveredIndex] AND height LESS size.y:
+            fe3d:text_set_visible("build", <true>)
+            IF _wasHammerPlaying IS <true> AND _isHammerPlaying IS <false>:
+                DEC heightIncrease = size.y
+                MUL heightIncrease 0.1
+                INCR height heightIncrease
+                fe3d:model_set_max_height(hoveredID, height)

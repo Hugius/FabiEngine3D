@@ -28,6 +28,23 @@ bool ScriptInterpreter::_executeFe3dTerrainEntityFunction(const string& function
 			}
 		}
 	}
+	else if (functionName == "fe3d:terrain_get_pixel_height") // Get the pixel height on the terrain
+	{
+		auto types = { ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
+
+		// Validate arguments
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		{
+			// Validate terrain existence
+			if (_validateFe3dTerrainEntity())
+			{
+				float halfTerrainSize = _fe3d.terrainEntity_getSize(_fe3d.terrainEntity_getSelectedID()) / 2.0f;
+				auto result = _fe3d.terrainEntity_getPixelHeight(_fe3d.terrainEntity_getSelectedID(), 
+					arguments[0].getDecimal() + halfTerrainSize, arguments[1].getDecimal() + halfTerrainSize);
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
+			}
+		}
+	}
 	else
 	{
 		return false;

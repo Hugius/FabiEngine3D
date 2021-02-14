@@ -1,4 +1,4 @@
-0 23
+25 19
 META script_type_update
 
 /// Update tool & pickup animations status
@@ -24,7 +24,7 @@ EDIT _isPickupPlaying = fe3d:model_is_animation_started("player", "pickup")
 
 /// Check if any tool animation is playing
 EDIT _isToolPlaying = <false>
-IF _isPickaxePlaying IS <true> OR _isAxePlaying IS <true>:
+IF _isSwordPlaying IS <true> OR _isPickaxePlaying IS <true> OR _isAxePlaying IS <true>:
     EDIT _isToolPlaying = <true>
 IF _isShovelPlaying IS <true> OR _isHoePlaying IS <true> OR _isScythePlaying IS <true>:
     EDIT _isToolPlaying = <true>

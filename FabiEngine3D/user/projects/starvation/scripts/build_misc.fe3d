@@ -1,0 +1,14 @@
+4 54
+META script_type_update
+
+/// Update HUD visibility
+fe3d:image_set_visible("scroll_build", _isBuilding)
+fe3d:image_set_visible("wood_price_build", _isBuilding)
+fe3d:image_set_visible("stone_price_build", _isBuilding)
+fe3d:image_set_visible("clay_price_build", _isBuilding)
+fe3d:image_set_visible("iron_price_build", _isBuilding)
+fe3d:text_set_visible("wood_price_build", _isBuilding)
+fe3d:text_set_visible("stone_price_build", _isBuilding)
+fe3d:text_set_visible("clay_price_build", _isBuilding)
+fe3d:text_set_visible("iron_price_build", _isBuilding)
+fe3d:text_set_visible(_buildables[_buildIndex], _isBuilding)

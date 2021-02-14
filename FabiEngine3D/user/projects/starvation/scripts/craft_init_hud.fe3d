@@ -1,4 +1,4 @@
-59 78
+36 41
 META script_type_init
 
 /// Craftables
@@ -35,7 +35,7 @@ PUSH _craftablesText "Fishing rod"
 
 /// HUD
 STR f = "font.ttf"
-fe3d:image_place("scroll_craft", "scroll_craft.png", 0.0, -0.35, 0.0, 0.75, 0.75)
+fe3d:image_place("scroll_craft", "scroll3.png", 0.0, -0.35, 0.0, 0.75, 0.75)
 fe3d:image_place("wood_price_craft", "wood.png", -0.05, -0.25, 0.0, 0.1, 0.1)
 fe3d:image_place("stone_price_craft", "stone.png", -0.05, -0.4, 0.0, 0.1, 0.1)
 fe3d:image_place("iron_price_craft", "iron.png", -0.05, -0.55, 0.0, 0.1, 0.1)

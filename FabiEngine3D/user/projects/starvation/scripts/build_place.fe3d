@@ -1,4 +1,4 @@
-4 0
+35 24
 META script_type_update
 
 /// Temporary values
@@ -23,8 +23,9 @@ IF _isBuilding IS <true> AND rPressed IS <true>:
     ELSE:
         INCR _buildRotation 90.0
 
-/// Hide previous building
+/// Hide previous building + text
 fe3d:model_set_visible(_buildables[_buildIndex], <false>)
+fe3d:text_set_visible(_buildables[_buildIndex], <false>)
 
 /// Update building choosing
 IF _isBuilding IS <true>:

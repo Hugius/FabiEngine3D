@@ -1,4 +1,4 @@
-12 38
+42 53
 META script_type_init
 
 /// Globals
@@ -41,7 +41,7 @@ PUSH _craftablesText "Torch (2 x wood)"
 PUSH _craftablesText "Fishing rod (3 x wood)"
 
 /// Models
-fe3d:model_place("workbench", "workbench", -6.0, 0.0, -6.0)
+fe3d:model_place("workbench", "workbench", -130.0, 35.0, -105.0)
 fe3d:model_set_rotation("workbench", 0.0, 90.0, 0.0)
 fe3d:model_place("sword_stone_display", "sword_stone", -4.5, 1.75, -6.0)
 fe3d:model_place("sword_iron_display", "sword_iron", -4.5, 1.75, -6.0)

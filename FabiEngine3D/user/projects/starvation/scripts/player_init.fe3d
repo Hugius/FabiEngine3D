@@ -1,4 +1,4 @@
-56 34
+56 37
 META script_type_init
 
 /// Globals
@@ -55,7 +55,7 @@ fe3d:image_place("temperature", "temperature_icon.png", -0.775, 0.35, 0.0, 0.07,
 
 /// Camera
 fe3d:cursor_hide()
-fe3d:camera_set_position(-5.0, 4.5, -15.0)
+fe3d:camera_set_position(-140.0, 35.0, -110.0)
 fe3d:camera_set_yaw(90.0)
 fe3d:camera_set_pitch(0.0)
 fe3d:camera_enable_first_person_view()

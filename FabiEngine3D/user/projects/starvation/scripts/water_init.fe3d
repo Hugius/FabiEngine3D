@@ -1,4 +1,4 @@
-13 31
+11 35
 META script_type_init
 
 /// Globals
@@ -10,6 +10,5 @@ GLOB DEC _wetlensAlpha = 0.0
 fe3d:image_place("underwater", "underwater.png", 0.0, 0.0, 0.0, 2.0, 2.0)
 fe3d:image_place("wetlens", "wetlens.png", 0.0, 0.0, 0.0, 2.0, 2.0)
 fe3d:image_set_alpha("underwater", 0.65)
-fe3d:image_set_alpha("wetlens", 0.5)
+fe3d:image_set_alpha("wetlens", 0.0)
 fe3d:image_set_visible("underwater", <false>)
-fe3d:image_set_visible("wetlens", <false>)

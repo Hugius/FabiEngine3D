@@ -76,10 +76,8 @@
 @tree5 user\assets\meshes\trees\tree5.obj ? ? ? ? 1.5 1.5 1.5 0 1 1 0 1 1 1 0.5 1 1 1 1 ? 0 trunk 0 0 0 0.6 3.4 0.5 leaves 0 3.4 0 4.8 3.8 5.3
 @tree6 user\assets\meshes\trees\tree6.obj ? ? ? ? 1.25 1 1.25 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 leaves 0 8.8 0 3.85 8.30001 3.6 trunk 0 0 0 0.85 8.80001 0.8
 @tree7 user\assets\meshes\trees\tree7.obj ? ? ? ? 4.5 4.5 4.5 0 1 1 0 0 1 1 0.75 1 1 1 1 ? 0 trunk 0.03 0 -0.01 0.15 1.2 0.15 leaves 0 1.18 0 2.24 3.95 2.37
-@tree8 user\assets\meshes\trees\tree8.obj ? ? ? ? 2.5 2.5 2.5 0 1 1 0 1 1 1 0.6 1 1 1 1 ? 0 leaves -0.2 3.4 -0.25 3.2 4.35 3.5 trunk 0.05 0 0.1 0.4 3.4 0.4
 @wagon user\assets\meshes\misc\wagon.obj user\assets\textures\diffuse_maps\misc\wagon.png ? ? ? 1.75 1.75 1.75 0 1 0 0 1 1 1 0.75 1 1 1 1 ? 0 wagon 0 0 -0.7 1.7 1.32 3.2
 @wall user\assets\meshes\buildings\wall.obj ? ? ? ? 1.25 1.25 1.25 0 1 0 0 1 1 1 0.5 1 1 1 1 ? 0 wall 0 0 -0.5 21.3 14 2.8
-@warehouse user\assets\meshes\buildings\warehouse.obj ? ? ? ? 1 1 1 0 1 0 0 0 1 1 1 1 1 1 1 ? 0
 @waterwheel user\assets\meshes\misc\waterwheel.obj ? ? ? ? 1.25 1.25 1.25 0 1 0 0 0 1 1 1 1 1 1 1 ? 0 waterwheel 0 0 0 2.5 3.65 4.2
 @well1 user\assets\meshes\misc\well1.obj user\assets\textures\diffuse_maps\misc\well1.png ? ? user\assets\textures\normal_maps\misc\well1.png 3 3 3 0 1 0 0 0 1 1 1 1 1 1 1 ? 0 well1 0.03 0 -0.01 1.19 1.61 1.64
 @well2 user\assets\meshes\misc\well2.obj ? ? ? ? 1.4 1.4 1.4 0 1 0 1 1 1 1 0.75 1 1 1 1 ? 0 well 7.45058e-09 0 -0.3 2.45 3.5 3.2

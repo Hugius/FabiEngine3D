@@ -1,5 +1,37 @@
-3 18
+63 47
 META script_type_init
+
+/// Craftables
+PUSH _craftables "sword_stone_display"
+PUSH _craftables "sword_iron_display"
+PUSH _craftables "pickaxe_stone_display"
+PUSH _craftables "pickaxe_iron_display"
+PUSH _craftables "axe_stone_display"
+PUSH _craftables "axe_iron_display"
+PUSH _craftables "shovel_stone_display"
+PUSH _craftables "shovel_iron_display"
+PUSH _craftables "hoe_display"
+PUSH _craftables "scythe_display"
+PUSH _craftables "hammer_stone_display"
+PUSH _craftables "hammer_iron_display"
+PUSH _craftables "torch_display"
+PUSH _craftables "fishrod_display"
+
+/// Text content
+PUSH _craftablesText "Stone sword (2 x wood, 3 x stone)"
+PUSH _craftablesText "Iron sword (2 x wood, 3 x iron)"
+PUSH _craftablesText "Stone pickaxe (2 x wood, 3 x stone)"
+PUSH _craftablesText "Iron pickaxe (2 x wood, 3 x iron)"
+PUSH _craftablesText "Stone axe (2 x wood, 3 x stone)"
+PUSH _craftablesText "Iron axe (2 x wood, 3 x iron)"
+PUSH _craftablesText "Stone shovel (2 x wood, 1 x stone)"
+PUSH _craftablesText "Iron shovel (2 x wood, 1 x iron)"
+PUSH _craftablesText "Hoe (2 x wood, 1 x iron)"
+PUSH _craftablesText "Scythe (3 x wood, 3 x iron)"
+PUSH _craftablesText "Stone hammer (2 x wood, 2 x stone)"
+PUSH _craftablesText "Iron hammer (2 x wood, 2 x iron)"
+PUSH _craftablesText "Torch (2 x wood)"
+PUSH _craftablesText "Fishing rod (3 x wood)"
 
 /// HUD
 STR f = "font.ttf"
@@ -31,11 +63,3 @@ fe3d:text_set_visible(_craftables[10], <false>)
 fe3d:text_set_visible(_craftables[11], <false>)
 fe3d:text_set_visible(_craftables[12], <false>)
 fe3d:text_set_visible(_craftables[13], <false>)
-
-/// Billboards
-fe3d:billboard_place("craft_confirm", "craft", -5.0, 2.75, -6.0)
-fe3d:billboard_place("craft_cancel", "cancel", -7.0, 2.75, -6.0)
-fe3d:billboard_set_rotation("craft_confirm", 0.0, 180.0, 0.0)
-fe3d:billboard_set_rotation("craft_cancel", 0.0, 180.0, 0.0)
-fe3d:billboard_set_visible("craft_confirm", <false>)
-fe3d:billboard_set_visible("craft_cancel", <false>)

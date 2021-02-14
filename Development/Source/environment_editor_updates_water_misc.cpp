@@ -192,7 +192,7 @@ void EnvironmentEditor::_updateWaterCamera()
 			Vec3 waterPosition = _fe3d.waterEntity_getPosition(waterID);
 			float waterSize = _fe3d.waterEntity_getSize(waterID);
 			float x = waterPosition.x + (waterSize / 2.0f) * sin(_totalCameraRotation);
-			float y = waterPosition.y + (waterPosition.y + (waterSize / 16.0f));
+			float y = waterPosition.y + (waterSize / 8.0f);
 			float z = waterPosition.z + (waterSize / 2.0f) * cos(_totalCameraRotation);
 
 			// Update camera position

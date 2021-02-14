@@ -1,14 +1,16 @@
-31 45
+16 5
 META script_type_update
 
 /// Some values
+STR currentWorld = fe3d:scene_get_current()
 DEC height = fe3d:water_get_height()
 VEC3 camPos = fe3d:camera_get_position()
 
 /// Check if player is underwater or not
 IF camPos.y LESS height:
-    fe3d:camera_move(0.01, 0.0, -0.005)
     EDIT _isUnderWater = <true>
+    IF currentWorld IS "starvia_outside":
+        fe3d:camera_move(0.01, 0.0, -0.005)
     fe3d:image_set_visible("underwater", <true>)
     IF _wasUnderWater IS <false>:
         EDIT _wasUnderWater = <true>

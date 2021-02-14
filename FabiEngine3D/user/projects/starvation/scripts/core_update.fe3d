@@ -1,4 +1,4 @@
-34 25
+44 4
 META script_type_update
 META execution_entry
 
@@ -42,7 +42,7 @@ IF currentWorld IS "starvia_outside":
     EXEC npc_update
 
 /// Water
-IF currentWorld IS "starvia_outside":
+IF currentWorld IS "home" OR currentWorld IS "starvia_outside":
     EXEC water_update
 
 /// Pickup

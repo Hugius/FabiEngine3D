@@ -1,4 +1,4 @@
-44 4
+33 10
 META script_type_update
 META execution_entry
 
@@ -32,8 +32,8 @@ EXEC cut_update
 EXEC dig_update
 EXEC plow_update
 EXEC harvest_update
-EXEC build_update_place
-EXEC build_update_process
+EXEC build_place
+EXEC build_process
 /// Torch update?
 EXEC fish_update
 

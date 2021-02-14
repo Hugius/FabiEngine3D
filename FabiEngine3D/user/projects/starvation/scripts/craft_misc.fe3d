@@ -1,4 +1,4 @@
-7 36
+55 46
 META script_type_update
 
 /// Update workbench hover
@@ -20,6 +20,13 @@ IF ePressed IS <true> AND _isBuilding IS <false>:
         EDIT _isCrafting = <true>
         fe3d:cursor_show()
         fe3d:model_set_visible(_craftables[_craftIndex], <true>)
+        fe3d:image_set_visible("scroll_craft", <true>)
+        fe3d:image_set_visible("wood_price_craft", <true>)
+        fe3d:image_set_visible("stone_price_craft", <true>)
+        fe3d:image_set_visible("iron_price_craft", <true>)
+        fe3d:text_set_visible("wood_price_craft", <true>)
+        fe3d:text_set_visible("stone_price_craft", <true>)
+        fe3d:text_set_visible("iron_price_craft", <true>)
         fe3d:text_set_visible(_craftables[_craftIndex], <true>)
         fe3d:billboard_set_visible("craft_confirm", <true>)
         fe3d:billboard_set_visible("craft_cancel", <true>)
@@ -27,6 +34,24 @@ IF ePressed IS <true> AND _isBuilding IS <false>:
         EDIT _isCrafting = <false>
         fe3d:cursor_hide()
         fe3d:model_set_visible(_craftables[_craftIndex], <false>)
+        fe3d:image_set_visible("scroll_craft", <false>)
+        fe3d:image_set_visible("wood_price_craft", <false>)
+        fe3d:image_set_visible("stone_price_craft", <false>)
+        fe3d:image_set_visible("iron_price_craft", <false>)
+        fe3d:text_set_visible("wood_price_craft", <false>)
+        fe3d:text_set_visible("stone_price_craft", <false>)
+        fe3d:text_set_visible("iron_price_craft", <false>)
         fe3d:text_set_visible(_craftables[_craftIndex], <false>)
         fe3d:billboard_set_visible("craft_confirm", <false>)
         fe3d:billboard_set_visible("craft_cancel", <false>)
+
+/// Update price tag
+INT woodPrice = _craftablesWoodPrice[_craftIndex]
+INT stonePrice = _craftablesStonePrice[_craftIndex]
+INT ironPrice = _craftablesIronPrice[_craftIndex]
+CAST woodPrice STR
+CAST stonePrice STR
+CAST ironPrice STR
+fe3d:text_set_content("wood_price_craft", woodPrice)
+fe3d:text_set_content("stone_price_craft", stonePrice)
+fe3d:text_set_content("iron_price_craft", ironPrice)

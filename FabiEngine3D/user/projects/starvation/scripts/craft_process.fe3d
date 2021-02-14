@@ -1,4 +1,4 @@
-67 23
+30 53
 META script_type_update
 
 /// Prepare crafting process
@@ -59,7 +59,13 @@ IF _isCrafting IS <true>:
         EDIT _isCrafting = <false>
         fe3d:cursor_hide()
         fe3d:model_set_visible(_craftables[_craftIndex], <false>)
-        fe3d:text_set_visible(_craftables[_craftIndex], <false>)
+        fe3d:image_set_visible("scroll_craft", <false>)
+        fe3d:image_set_visible("wood_price_craft", <false>)
+        fe3d:image_set_visible("stone_price_craft", <false>)
+        fe3d:image_set_visible("iron_price_craft", <false>)
+        fe3d:text_set_visible("wood_price_craft", <false>)
+        fe3d:text_set_visible("stone_price_craft", <false>)
+        fe3d:text_set_visible("iron_price_craft", <false>)
         fe3d:billboard_set_visible("craft_confirm", <false>)
         fe3d:billboard_set_visible("craft_cancel", <false>)
     ELIF scrollDir NOT 0:

@@ -1,4 +1,4 @@
-54 35
+26 62
 META script_type_update
 
 /// Check if a built building is selected
@@ -19,10 +19,10 @@ IF hoveredID NOT "":
     STR idPart = misc:get_string_part(hoveredID, 0, 2)
     IF idPart IS "sm":
         INT hoveredIndex = 0
-        VEC3 size = fe3d:aabb_get_size("small_house_display_front_left")
+        VEC3 size = fe3d:aabb_get_size("small_house_display_back")
     ELIF idPart IS "me":
         INT hoveredIndex = 1
-        VEC3 size = fe3d:aabb_get_size("medium_house_display_front")
+        VEC3 size = fe3d:aabb_get_size("medium_house_display_back")
     ELIF idPart IS "bi":
         INT hoveredIndex = 2
         VEC3 size = fe3d:aabb_get_size("big_house_display_back")

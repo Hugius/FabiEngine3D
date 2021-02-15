@@ -1,9 +1,10 @@
-7 19
+5 15
 META script_type_init
 META execution_entry
 
 fe3d:scene_load("home")
 
+EXEC water_init
 EXEC bag_init
 EXEC build_init_main
 EXEC build_init_hud
@@ -14,4 +15,3 @@ EXEC misc_init
 EXEC npc_init
 EXEC player_init
 EXEC time_init
-EXEC water_init

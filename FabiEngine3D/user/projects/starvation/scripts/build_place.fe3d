@@ -1,4 +1,4 @@
-96 27
+91 22
 META script_type_update
 
 /// Temporary values
@@ -78,9 +78,9 @@ IF _isBuilding IS <true> AND lmbPressed IS <true>:
         fe3d:model_place(newID, previewID, buildPos.x, buildingY, buildPos.z)
         fe3d:model_set_rotation(newID, 0.0, _buildRotation, 0.0)
         IF _buildIndex IS 0:
-            VEC3 size = fe3d:aabb_get_size("small_house_display_front_left")
+            VEC3 size = fe3d:aabb_get_size("small_house_display_back")
         IF _buildIndex IS 1:
-            VEC3 size = fe3d:aabb_get_size("medium_house_display_front")
+            VEC3 size = fe3d:aabb_get_size("medium_house_display_back")
         IF _buildIndex IS 2:
             VEC3 size = fe3d:aabb_get_size("big_house_display_back")
         IF _buildIndex IS 3:
@@ -90,7 +90,7 @@ IF _isBuilding IS <true> AND lmbPressed IS <true>:
         IF _buildIndex IS 5:
             VEC3 size = fe3d:aabb_get_size("pen_display_front")
         DEC height = size.y
-        MUL height 0.1
+        MUL height 1.0
         fe3d:model_set_max_height(newID, height)
         INCR _buildCounters[_buildIndex] 1
         DECR _bag[0] _buildablesWoodPrice[_buildIndex]

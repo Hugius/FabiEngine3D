@@ -1,4 +1,4 @@
-53 23
+48 28
 META script_type_update
 
 /// Update health icon color
@@ -45,6 +45,8 @@ EDIT _oxygen = math:clamp(_oxygen, 0.0, 1.0)
 
 /// Update temperature
 IF _isUnderWater IS <true>:
+    DECR _temperature 0.00015
+ELIF _isDayTime IS <false>:
     DECR _temperature 0.00015
 ELSE:
     INCR _temperature 0.00001

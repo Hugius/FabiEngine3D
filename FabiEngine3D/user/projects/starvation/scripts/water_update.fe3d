@@ -1,4 +1,4 @@
-4 36
+36 66
 META script_type_update
 
 /// Some values
@@ -32,4 +32,7 @@ fe3d:image_set_alpha("wetlens", _wetlensAlpha)
 /// Update water color
 DEC blueIntensity = 1.0
 DECR blueIntensity _skyMixValue
+DEC lightness = blueIntensity
+INCR lightness 0.25
 fe3d:water_set_color(0.0, 0.0, blueIntensity)
+fe3d:image_set_color("underwater", lightness, lightness, lightness)

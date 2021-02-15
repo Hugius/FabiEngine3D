@@ -1,4 +1,4 @@
-29 21
+37 45
 META script_type_update
 
 /// Torch position
@@ -31,3 +31,9 @@ IF currentWorld IS "home":
     IF signID NOT "":
         fe3d:scene_load("starvia_outside")
         fe3d:camera_set_position(0.0, 9.0, 140.0)
+
+/// Update crosshair visiblity
+IF _isCrafting IS <true> OR _isBuilding IS <true>:
+    fe3d:image_set_visible("crosshair", <false>)
+ELSE:
+    fe3d:image_set_visible("crosshair", <true>)

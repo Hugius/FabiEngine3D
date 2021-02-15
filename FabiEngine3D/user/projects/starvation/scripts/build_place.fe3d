@@ -1,4 +1,4 @@
-35 24
+96 27
 META script_type_update
 
 /// Temporary values
@@ -62,7 +62,7 @@ IF _isBuilding IS <true>:
 /// Update building validation color
 IF _isBuilding IS <true>:
     STR valid = fe3d:collision_check_model_models(_buildables[_buildIndex], "", "", "")
-    IF valid NOT "" OR buildingY LESS waterHeight:
+    IF valid NOT "" OR buildingY LESS waterHeight OR _canAffordBuilding IS <false>:
         fe3d:model_set_color(_buildables[_buildIndex], 1.0, 0.0, 0.0)
     ELSE:
         fe3d:model_set_color(_buildables[_buildIndex], 0.0, 1.0, 0.0)
@@ -93,3 +93,7 @@ IF _isBuilding IS <true> AND lmbPressed IS <true>:
         MUL height 0.1
         fe3d:model_set_max_height(newID, height)
         INCR _buildCounters[_buildIndex] 1
+        DECR _bag[0] _buildablesWoodPrice[_buildIndex]
+        DECR _bag[1] _buildablesStonePrice[_buildIndex]
+        DECR _bag[2] _buildablesClayPrice[_buildIndex]
+        DECR _bag[7] _buildablesIronPrice[_buildIndex]

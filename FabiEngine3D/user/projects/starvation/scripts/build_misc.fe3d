@@ -1,4 +1,4 @@
-4 54
+38 29
 META script_type_update
 
 /// Update HUD visibility
@@ -12,3 +12,29 @@ fe3d:text_set_visible("stone_price_build", _isBuilding)
 fe3d:text_set_visible("clay_price_build", _isBuilding)
 fe3d:text_set_visible("iron_price_build", _isBuilding)
 fe3d:text_set_visible(_buildables[_buildIndex], _isBuilding)
+
+/// Update price tag
+INT woodPrice = _buildablesWoodPrice[_buildIndex]
+INT stonePrice = _buildablesStonePrice[_buildIndex]
+INT clayPrice = _buildablesClayPrice[_buildIndex]
+INT ironPrice = _buildablesIronPrice[_buildIndex]
+CAST woodPrice STR
+CAST stonePrice STR
+CAST clayPrice STR
+CAST ironPrice STR
+fe3d:text_set_content("wood_price_build", woodPrice)
+fe3d:text_set_content("stone_price_build", stonePrice)
+fe3d:text_set_content("clay_price_build", ironPrice)
+fe3d:text_set_content("iron_price_build", ironPrice)
+
+/// Check if player has the required resources
+INT wp = _buildablesWoodPrice[_buildIndex]
+INT sp = _buildablesStonePrice[_buildIndex]
+INT cp = _buildablesClayPrice[_buildIndex]
+INT ip = _buildablesIronPrice[_buildIndex]
+DECR wp 1
+DECR sp 1
+DECR cp 1
+DECR ip 1
+BOOL can = (_bag[0] MORE wp AND _bag[1] MORE sp AND _bag[2] MORE cp AND _bag[7] MORE ip)
+EDIT _canAffordBuilding = can

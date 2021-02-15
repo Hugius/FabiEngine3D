@@ -1,4 +1,4 @@
-45 52
+54 35
 META script_type_update
 
 /// Check if a built building is selected
@@ -40,7 +40,7 @@ IF hoveredID NOT "":
 STR toolID = _inventory[_equipIndex]
 fe3d:text_set_visible("build", <false>)
 IF toolID IS "hammer_stone" OR toolID IS "hammer_iron":
-    IF _isInvOpen IS <true> AND hoveredID NOT "":
+    IF _isInvOpen IS <true> AND hoveredID NOT "" AND _canAffordBuilding IS <true>:
         VEC3 camPos = fe3d:camera_get_position()
         VEC3 buildingPos = fe3d:model_get_position(hoveredID)
         DEC distance = math:distance(buildingPos, camPos)
@@ -51,3 +51,7 @@ IF toolID IS "hammer_stone" OR toolID IS "hammer_iron":
                 MUL heightIncrease 0.1
                 INCR height heightIncrease
                 fe3d:model_set_max_height(hoveredID, height)
+                DECR _bag[0] _buildablesWoodPrice[_buildIndex]
+                DECR _bag[1] _buildablesStonePrice[_buildIndex]
+                DECR _bag[2] _buildablesClayPrice[_buildIndex]
+                DECR _bag[7] _buildablesIronPrice[_buildIndex]

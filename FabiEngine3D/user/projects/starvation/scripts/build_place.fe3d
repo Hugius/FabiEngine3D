@@ -1,4 +1,4 @@
-87 22
+69 10
 META script_type_update
 
 /// Temporary values
@@ -65,26 +65,32 @@ IF _isBuilding IS <true> AND lmbPressed IS <true>:
         INT counter = _buildCounters[_buildIndex]
         CAST counter STR
         STR newID = misc:concat_strings(_buildables[_buildIndex], counter)
-        LIST temp = {"house14","house2","house13","storage","well2","pen"}
-        STR previewID = temp[_buildIndex]
-        fe3d:model_place(newID, previewID, buildPos.x, buildingY, buildPos.z)
-        fe3d:model_set_rotation(newID, 0.0, _buildRotation, 0.0)
         IF _buildIndex IS 0:
             VEC3 size = fe3d:aabb_get_size("small_house_display_back")
-        IF _buildIndex IS 1:
+            STR previewID = "house14"
+        ELIF _buildIndex IS 1:
             VEC3 size = fe3d:aabb_get_size("medium_house_display_back")
-        IF _buildIndex IS 2:
+            STR previewID = "house2"
+        ELIF _buildIndex IS 2:
             VEC3 size = fe3d:aabb_get_size("big_house_display_back")
-        IF _buildIndex IS 3:
+            STR previewID = "house13"
+        ELIF _buildIndex IS 3:
             VEC3 size = fe3d:aabb_get_size("storage_display_main")
-        IF _buildIndex IS 4:
+            STR previewID = "storage"
+        ELIF _buildIndex IS 4:
             VEC3 size = fe3d:aabb_get_size("well_display_well")
-        IF _buildIndex IS 5:
+            STR previewID = "well2"
+        ELIF _buildIndex IS 5:
             VEC3 size = fe3d:aabb_get_size("pen_display_front")
-        IF _buildIndex IS 6:
-            VEC3 size = fe3d:aabb_get_size("mill_display_front")
-        IF _buildIndex IS 7:
+            STR previewID = "pen"
+        ELIF _buildIndex IS 6:
+            VEC3 size = fe3d:aabb_get_size("mill_display_mill")
+            STR previewID = "mill"
+        ELIF _buildIndex IS 7:
             VEC3 size = fe3d:aabb_get_size("church_display_front")
+            STR previewID = "church"
+        fe3d:model_place(newID, previewID, buildPos.x, buildingY, buildPos.z)
+        fe3d:model_set_rotation(newID, 0.0, _buildRotation, 0.0)
         DEC height = size.y
         MUL height 0.1
         fe3d:model_set_max_height(newID, height)

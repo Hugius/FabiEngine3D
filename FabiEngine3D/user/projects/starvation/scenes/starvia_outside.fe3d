@@ -146,7 +146,7 @@ MODEL 866819577@wall -59.1121 6.37255 -24 0 0 0 1.25 1.25 1.25 user\assets\meshe
 MODEL 1520137174@tower1 -76.7326 6.37255 -22 0 0 0 1 1 1 user\assets\meshes\buildings\tower1.obj ? ? ? ? 0 0 1 0 0 1 1 1 0.5 1 1 1 1 ? 0 ? tower 0 0 0 9.1 34 9
 MODEL 677704261@wall 92.1286 6.37255 -24 0 0 0 1.25 1.25 1.25 user\assets\meshes\buildings\wall.obj ? ? ? ? 0 0 1 0 0 1 1 1 0.5 1 1 1 1 ? 0 ? wall 0 0 -0.5 21.3 14 2.8
 MODEL 186187849@tower1 136.302 6.37254 -22 0 0 0 1 1 1 user\assets\meshes\buildings\tower1.obj ? ? ? ? 0 0 1 0 0 1 1 1 0.5 1 1 1 1 ? 0 ? tower 0 0 0 9.1 34 9
-MODEL 1357367651@windmill -14.5435 6 22.9003 0 65 0 5.8 5.8 5.8 user\assets\meshes\buildings\windmill.obj ? ? ? ? 0 0 1 0 1 1 1 1 0.5 1 1 1 1 ? 0 windmill_rotation windmill 0 0 -0.03 1.9 3.6 1.9 tower 0 0 0 0.0999999 0.0499999 0.0599999
+MODEL 1357367651@mill -14.5435 6 22.9003 0 65 0 5.8 5.8 5.8 user\assets\meshes\buildings\mill.obj ? ? ? ? 0 0 1 0 1 1 1 1 0.5 1 1 1 1 ? 0 mill_rotation mill 0 0 -0.03 1.9 3.6 1.9 tower 0 0 0 0.0999999 0.0499999 0.0599999
 MODEL 1099082448@timber 91.8458 6.37255 11 0 90 0 1.75 1.75 1.75 user\assets\meshes\misc\timber.obj ? ? ? ? 0 0 1 0 0 1 1 1 0.5 1 1 1 1 ? 0 ? timber 0 0 0 5.6 0.95 0.9
 MODEL 1638265278@statue1 24.3 6.37255 -15 0 180 0 1.2 1.2 1.2 user\assets\meshes\misc\statue1.obj user\assets\textures\diffuse_maps\misc\statue1.png ? ? user\assets\textures\normal_maps\misc\statue1.png 0 0 0 0 1 1 1 1 0.5 1 1 1 1 ? 0 ? statue 0 0 0 2.4 5.8 2.8
 MODEL 87009552@soil 80.7289 6.37254 5.83277 0 0 0 10 10 10 user\assets\meshes\misc\plane.obj user\assets\textures\diffuse_maps\misc\soil.png ? ? user\assets\textures\normal_maps\misc\soil.png 0 0 1 0 0 1 1 1 0.75 1 1 1 5 ? 0 ?

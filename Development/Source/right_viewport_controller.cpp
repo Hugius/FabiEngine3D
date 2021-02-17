@@ -10,7 +10,7 @@ void RightViewportController::initialize()
 	float textHeight = 0.1f;
 
 	// Right-viewport: mainWindow
-	_gui.getViewport("right")->addWindow("main", Vec2(0.0f), Vec2(1.9f, 2.0f), RightViewportController::frameColor);
+	_gui.getViewport("right")->addWindow("main", Vec2(0.0f), Vec2(1.9f, 2.0f), RightViewportController::FRAME_COLOR);
 
 	// Private window instance of right viewport
 	auto rightWindow = _gui.getViewport("right")->getWindow("main");

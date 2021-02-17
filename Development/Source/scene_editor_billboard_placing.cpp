@@ -21,7 +21,7 @@ void SceneEditor::_updateBillboardPlacing()
 					_fe3d.billboardEntity_show(_currentPreviewBillboardName);
 
 					// Update preview billboard position
-					if (_fe3d.terrainEntity_isValidMousePoint())
+					if (_fe3d.terrainEntity_isCursorPosition3dValid())
 					{
 						Vec2 size = _fe3d.billboardEntity_getSize(_currentPreviewBillboardName);
 						newPosition = _fe3d.terrainEntity_getCursorPosition3D() + Vec3(0.0f, size.y / 2.0f, 0.0f);
@@ -30,7 +30,7 @@ void SceneEditor::_updateBillboardPlacing()
 				}
 
 				// Placing billboard
-				if ((_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) && _fe3d.terrainEntity_isValidMousePoint()) // If user pressed LMB
+				if ((_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) && _fe3d.terrainEntity_isCursorPosition3dValid()) // If user pressed LMB
 					|| _fe3d.terrainEntity_getSelectedID() == "")  // Can be bypassed if terrain does not exist
 				{
 					// Add new billboard

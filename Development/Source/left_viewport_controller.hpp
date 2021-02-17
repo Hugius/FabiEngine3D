@@ -29,11 +29,11 @@ public:
 	ScriptEditor& getScriptEditor();
 	SettingsEditor& getSettingsEditor();
 
-	static inline const Vec3 frameColor = Vec3(0.4f);
-	static inline const Vec3 buttonColor = Vec3(0.25f, 0.25f, 1.0f);
-	static inline const Vec3 buttonHoverColor = Vec3(0.75f, 0.75f, 1.0f);
-	static inline const Vec3 textColor = Vec3(1.0f);
-	static inline const Vec3 textHoverColor = Vec3(0.0f);
+	static inline const Vec3 FRAME_COLOR = Vec3(0.4f);
+	static inline const Vec3 BUTTON_COLOR = Vec3(0.25f, 0.25f, 1.0f);
+	static inline const Vec3 BUTTON_HOVER_COLOR = Vec3(0.75f, 0.75f, 1.0f);
+	static inline const Vec3 TEXT_COLOR = Vec3(1.0f);
+	static inline const Vec3 TEXT_HOVER_COLOR = Vec3(0.0f);
 
 private:
 	EnvironmentEditor _environmentEditor;

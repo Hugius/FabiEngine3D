@@ -25,7 +25,7 @@ TopViewportController::TopViewportController(FabiEngine3D& fe3d, EngineGuiManage
 void TopViewportController::initialize()
 {
 	// Top-viewport windows
-	_gui.getViewport("top")->addWindow("projectWindow", Vec2(-0.25f, 0.0f), Vec2(0.9875f, 1.5f), TVPC::frameColor);
+	_gui.getViewport("top")->addWindow("projectWindow", Vec2(-0.25f, 0.0f), Vec2(0.9875f, 1.5f), TVPC::FRAME_COLOR);
 	_gui.getViewport("top")->addWindow("gameWindow", Vec2(0.125f, 0.0f), Vec2(0.4875f, 1.5f), Vec3(0.25f));
 	_gui.getViewport("top")->addWindow("miscWindow", Vec2(0.375f, 0.0f), Vec2(0.4875f, 1.5f), Vec3(0.25f));
 	_projectWindow = _gui.getViewport("top")->getWindow("projectWindow");
@@ -36,11 +36,11 @@ void TopViewportController::initialize()
 	_projectWindow->addScreen("main");
 	_projectWindow->setActiveScreen("main");
 	auto screen = _projectWindow->getScreen("main");
-	screen->addButton("newProject", Vec2(-0.767f, 0.0f), Vec2(0.15f, 1.25f), TVPC::buttonColor, TVPC::buttonHoverColor, "NEW", TVPC::textColor, TVPC::textHoverColor);
-	screen->addButton("loadProject", Vec2(-0.384f, 0.0f), Vec2(0.2f, 1.25f), TVPC::buttonColor, TVPC::buttonHoverColor, "LOAD", TVPC::textColor, TVPC::textHoverColor);
-	screen->addButton("saveProject", Vec2(0.0f, 0.0f), Vec2(0.2f, 1.25f), TVPC::buttonColor, TVPC::buttonHoverColor, "SAVE", TVPC::textColor, TVPC::textHoverColor);
-	screen->addButton("deleteProject", Vec2(0.384f, 0.0f), Vec2(0.3f, 1.25f), TVPC::buttonColor, TVPC::buttonHoverColor, "DELETE", TVPC::textColor, TVPC::textHoverColor);
-	screen->addButton("quitEngine", Vec2(0.767f, 0.0f), Vec2(0.2f, 1.25f), TVPC::buttonColor, TVPC::buttonHoverColor, "QUIT", TVPC::textColor, TVPC::textHoverColor);
+	screen->addButton("newProject", Vec2(-0.767f, 0.0f), Vec2(0.15f, 1.25f), TVPC::BUTTON_COLOR, TVPC::BUTTON_HOVER_COLOR, "NEW", TVPC::TEXT_COLOR, TVPC::TEXT_HOVER_COLOR);
+	screen->addButton("loadProject", Vec2(-0.384f, 0.0f), Vec2(0.2f, 1.25f), TVPC::BUTTON_COLOR, TVPC::BUTTON_HOVER_COLOR, "LOAD", TVPC::TEXT_COLOR, TVPC::TEXT_HOVER_COLOR);
+	screen->addButton("saveProject", Vec2(0.0f, 0.0f), Vec2(0.2f, 1.25f), TVPC::BUTTON_COLOR, TVPC::BUTTON_HOVER_COLOR, "SAVE", TVPC::TEXT_COLOR, TVPC::TEXT_HOVER_COLOR);
+	screen->addButton("deleteProject", Vec2(0.384f, 0.0f), Vec2(0.3f, 1.25f), TVPC::BUTTON_COLOR, TVPC::BUTTON_HOVER_COLOR, "DELETE", TVPC::TEXT_COLOR, TVPC::TEXT_HOVER_COLOR);
+	screen->addButton("quitEngine", Vec2(0.767f, 0.0f), Vec2(0.2f, 1.25f), TVPC::BUTTON_COLOR, TVPC::BUTTON_HOVER_COLOR, "QUIT", TVPC::TEXT_COLOR, TVPC::TEXT_HOVER_COLOR);
 
 	// Top-viewport: gameWindow
 	_gameWindow->addScreen("main");
@@ -55,8 +55,8 @@ void TopViewportController::initialize()
 	_miscWindow->addScreen("main");
 	_miscWindow->setActiveScreen("main");
 	screen = _miscWindow->getScreen("main");
-	screen->addButton("uncache", Vec2(-0.55f, 0.0f), Vec2(0.5f, 1.25f), TVPC::buttonColor, TVPC::buttonHoverColor, "UNCACHE", TVPC::textColor, TVPC::textHoverColor);
-	screen->addButton("documentation", Vec2(0.35f, 0.0f), Vec2(0.9f, 1.25f), TVPC::buttonColor, TVPC::buttonHoverColor, "DOCUMENTATION", TVPC::textColor, TVPC::textHoverColor);
+	screen->addButton("uncache", Vec2(-0.55f, 0.0f), Vec2(0.5f, 1.25f), TVPC::BUTTON_COLOR, TVPC::BUTTON_HOVER_COLOR, "UNCACHE", TVPC::TEXT_COLOR, TVPC::TEXT_HOVER_COLOR);
+	screen->addButton("documentation", Vec2(0.35f, 0.0f), Vec2(0.9f, 1.25f), TVPC::BUTTON_COLOR, TVPC::BUTTON_HOVER_COLOR, "DOCUMENTATION", TVPC::TEXT_COLOR, TVPC::TEXT_HOVER_COLOR);
 }
 
 void TopViewportController::update()

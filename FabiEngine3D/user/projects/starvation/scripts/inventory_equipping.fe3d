@@ -1,5 +1,13 @@
-26 74
+3 28
 META script_type_update
+
+/// Check if player wants to open/close inventory
+IF _isToolPlaying IS <false>:
+    EDIT _isInvOpen = fe3d:input_is_key_toggled("KEY_I")
+
+/// Check if player is allowed to have the inventory open
+IF _isCrafting IS <true> OR _isBuilding IS <true>:
+    EDIT _isInvOpen = <false>
 
 /// Check if any tool animation is playing
 BOOL isAnimPlaying = <false>

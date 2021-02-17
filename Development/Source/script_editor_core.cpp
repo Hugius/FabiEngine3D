@@ -23,11 +23,11 @@ void ScriptEditor::initializeGUI()
 	string screenID = "scriptEditorMenuMain";
 	leftWindow->addScreen(screenID);
 	leftWindow->getScreen(screenID)->addTextfield("lineCount", Vec2(0.0f, 0.75f), Vec2(GW("Line count: 1000"), 0.1f), "Line count: 1000", Vec3(1.0f));
-	leftWindow->getScreen(screenID)->addButton("createScript", Vec2(0.0f, 0.45f), Vec2(GW("New script"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "New script", LVPC::textColor, LVPC::textHoverColor);
-	leftWindow->getScreen(screenID)->addButton("editScript", Vec2(0.0f, 0.15f), Vec2(GW("Edit script"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Edit script", LVPC::textColor, LVPC::textHoverColor);
-	leftWindow->getScreen(screenID)->addButton("renameScript", Vec2(0.0f, -0.15f), Vec2(GW("Rename script"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Rename script", LVPC::textColor, LVPC::textHoverColor);
-	leftWindow->getScreen(screenID)->addButton("deleteScript", Vec2(0.0f, -0.45f), Vec2(GW("Delete script"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Delete script", LVPC::textColor, LVPC::textHoverColor);
-	leftWindow->getScreen(screenID)->addButton("back", Vec2(0.0f, -0.75f), Vec2(GW("Go back"), 0.1f), LVPC::buttonColor, LVPC::buttonHoverColor, "Go back", LVPC::textColor, LVPC::textHoverColor);
+	leftWindow->getScreen(screenID)->addButton("createScript", Vec2(0.0f, 0.45f), Vec2(GW("New script"), 0.1f), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "New script", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen(screenID)->addButton("editScript", Vec2(0.0f, 0.15f), Vec2(GW("Edit script"), 0.1f), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Edit script", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen(screenID)->addButton("renameScript", Vec2(0.0f, -0.15f), Vec2(GW("Rename script"), 0.1f), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Rename script", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen(screenID)->addButton("deleteScript", Vec2(0.0f, -0.45f), Vec2(GW("Delete script"), 0.1f), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Delete script", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen(screenID)->addButton("back", Vec2(0.0f, -0.75f), Vec2(GW("Go back"), 0.1f), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 }
 
 void ScriptEditor::load()

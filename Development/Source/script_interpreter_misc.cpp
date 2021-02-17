@@ -269,7 +269,7 @@ bool ScriptInterpreter::_validateScopeChange(unsigned int countedSpaces, const s
 
 bool ScriptInterpreter::_validateKeyInputString(const string& inputString)
 {
-	if (_keyInputStringMap.find(inputString) == _keyInputStringMap.end())
+	if (KEY_INPUT_STRING_MAP.find(inputString) == KEY_INPUT_STRING_MAP.end())
 	{
 		_throwScriptError("invalid keyboard key!");
 		return false;
@@ -280,7 +280,7 @@ bool ScriptInterpreter::_validateKeyInputString(const string& inputString)
 
 bool ScriptInterpreter::_validateMouseInputString(const string& inputString)
 {
-	if (_mouseInputStringMap.find(inputString) == _mouseInputStringMap.end())
+	if (MOUSE_INPUT_STRING_MAP.find(inputString) == MOUSE_INPUT_STRING_MAP.end())
 	{
 		_throwScriptError("invalid mouse button!");
 		return false;

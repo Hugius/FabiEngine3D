@@ -1,9 +1,9 @@
-3 50
+5 30
 META script_type_update
 
 /// Opening or closing building menu
 BOOL cPressed = fe3d:input_is_key_pressed("KEY_C")
-IF cPressed IS <true> AND _isCrafting IS <false>:
+IF cPressed IS <true> AND _isCrafting IS <false> AND _isToolPlaying IS <false>:
     IF _isBuilding IS <false>:
         EDIT _isBuilding = <true>
     ELSE:

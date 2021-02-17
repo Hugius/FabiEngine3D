@@ -17,7 +17,7 @@ BottomViewportController::BottomViewportController(FabiEngine3D& fe3d, EngineGui
 void BottomViewportController::initialize()
 {
 	// Bottom-viewport: statistics
-	_gui.getViewport("bottom")->addWindow("statistics", Vec2(-0.25f, 0.0f), Vec2(0.9875f, 1.8f), BottomViewportController::frameColor);
+	_gui.getViewport("bottom")->addWindow("statistics", Vec2(-0.25f, 0.0f), Vec2(0.9875f, 1.8f), BottomViewportController::FRAME_COLOR);
 	_gui.getViewport("bottom")->getWindow("statistics")->addScreen("main");
 	_gui.getViewport("bottom")->getWindow("statistics")->setActiveScreen("main");
 	_statsScreen = _gui.getViewport("bottom")->getWindow("statistics")->getScreen("main");
@@ -56,7 +56,7 @@ void BottomViewportController::initialize()
 	}
 
 	// Console window
-	_gui.getViewport("bottom")->addWindow("console", Vec2(0.25f, 0.0f), Vec2(0.9875f, 1.8f), BottomViewportController::frameColor);
+	_gui.getViewport("bottom")->addWindow("console", Vec2(0.25f, 0.0f), Vec2(0.9875f, 1.8f), BottomViewportController::FRAME_COLOR);
 	_gui.getViewport("bottom")->getWindow("console")->addScreen("main");
 	_gui.getViewport("bottom")->getWindow("console")->setActiveScreen("main");
 }

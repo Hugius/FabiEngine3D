@@ -1,4 +1,4 @@
-7 63
+14 78
 META script_type_update
 
 /// Update workbench hover
@@ -13,7 +13,7 @@ IF hoveredID NOT "" AND _isBuilding IS <false>:
 
 /// Update crafting menu - open & close
 BOOL ePressed = fe3d:input_is_key_pressed("KEY_E")
-IF ePressed IS <true> AND _isBuilding IS <false>:
+IF ePressed IS <true> AND _isBuilding IS <false> AND _isToolPlaying IS <false>:
     IF isHovered IS <true> AND _isCrafting IS <false>:
         EDIT _isCrafting = <true>
         fe3d:cursor_show()

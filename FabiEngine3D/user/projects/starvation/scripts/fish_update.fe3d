@@ -1,8 +1,9 @@
-32 59
+27 86
 META script_type_update
 
 /// Temporary values
 STR currentWorld = fe3d:scene_get_current()
+STR toolID = _inventory[_equipIndex]
 VEC3 terrainPos = fe3d:terrain_get_cursor_position()
 VEC3 camPos = fe3d:camera_get_position()
 DEC waterY = fe3d:water_get_height()
@@ -25,9 +26,9 @@ IF currentWorld IS "home":
     DEC maxCamY = 33.0
 ELIF currentWorld IS "starvia_outside":
     DEC maxCamY = 8.0
-BOOL isAllowed = (terrainPos.y LESS waterY AND camPos.y LESS maxCamY)
+BOOL a = (terrainPos.y LESS waterY AND camPos.y LESS maxCamY AND terrainPos.y NOT 0.0)
 fe3d:text_set_visible("fish", <false>)
-IF isAllowed IS <true>:
+IF a IS <true>:
     IF _isFishing IS <true>:
         BOOL isPlaying = fe3d:model_is_animation_playing("fishrod", "fishrod_throw")
         IF isPlaying IS <false>:
@@ -36,5 +37,5 @@ IF isAllowed IS <true>:
                 fe3d:model_resume_animation("fishrod", "fishrod_throw")
                 INCR _bag[5] 1
                 DECR _durabilities[8] _durabilityHit
-    ELSE:
+    ELIF toolID IS "fishrod" AND _isInvOpen IS <true>:
         fe3d:text_set_visible("fish", <true>)

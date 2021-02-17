@@ -119,9 +119,9 @@ Vec3 FabiEngine3D::terrainEntity_getCursorPosition3D()
 	return _core->_mousePicker.getTerrainPoint();
 }
 
-bool FabiEngine3D::terrainEntity_isValidMousePoint()
+bool FabiEngine3D::terrainEntity_isCursorPosition3dValid()
 {
-	return _core->_mousePicker.isValidTerrainPoint();
+	return (_core->_mousePicker.getTerrainPoint() != Vec3(0.0f));
 }
 
 float FabiEngine3D::terrainEntity_getPixelHeight(const string& ID, float x, float z)

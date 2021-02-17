@@ -1,4 +1,4 @@
-35 15
+32 9
 META script_type_update
 META execution_entry
 
@@ -31,7 +31,7 @@ EXEC mine_update
 EXEC cut_update
 EXEC dig_update
 EXEC plow_update
-EXEC harvest_update
+EXEC reap_update
 EXEC build_place
 EXEC build_process
 EXEC build_misc

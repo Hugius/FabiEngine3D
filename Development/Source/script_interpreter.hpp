@@ -177,7 +177,7 @@ private:
 	bool _startedInitialization = false;
 
 	// String to input type map
-	static inline const map<string, InputType> _keyInputStringMap =
+	static inline const map<string, InputType> KEY_INPUT_STRING_MAP =
 	{
 		{"KEY_A", InputType::KEY_A},
 		{"KEY_B", InputType::KEY_B},
@@ -274,7 +274,7 @@ private:
 		{"KEY_SLASH", InputType::KEY_SLASH}
 	};
 
-	static inline const map<string, InputType> _mouseInputStringMap =
+	static inline const map<string, InputType> MOUSE_INPUT_STRING_MAP =
 	{
 		{"BUTTON_LEFT", InputType::MOUSE_BUTTON_LEFT},
 		{"BUTTON_MIDDLE", InputType::MOUSE_BUTTON_MIDDLE},

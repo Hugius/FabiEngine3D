@@ -27,7 +27,7 @@ public:
 	}
 
 private:
-	static constexpr float PI = 3.14159265358979323846264338327f;
-	static constexpr float DEG2RAD = 0.01745329251994329576923690768489f;
-	static constexpr float RAD2DEG = 57.295779513082320876798154814278f;
+	static inline const float PI = 3.14159265358979323846264338327f;
+	static inline const float DEG2RAD = 0.01745329251994329576923690768489f;
+	static inline const float RAD2DEG = 57.295779513082320876798154814278f;
 };

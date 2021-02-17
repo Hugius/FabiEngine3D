@@ -15,8 +15,6 @@ public:
 	Vec3 getRay();
 	Vec3 getTerrainPoint();
 
-	bool isValidTerrainPoint();
-
 private:
 	RenderBus& _renderBus;
 
@@ -25,11 +23,12 @@ private:
 	Vec4 _convertToViewSpace(Vec4 value);
 	Vec3 _convertToWorldSpace(Vec4 value);
 	Vec3 _getPointOnRay(Vec3 ray, float distance);
-	Vec3 _binarySearch(int count, float start, float finish, Vec3 ray, TerrainEntityManager& terrainManager);
-	bool _notUnderTerrain(float start, float finish, Vec3 ray, TerrainEntityManager& terrainManager);
+	Vec3 _calculateTerrainPoint(int count, float start, float end, Vec3 ray, TerrainEntityManager& terrainManager);
+
+	bool _isNotUnderTerrain(float start, float end, Vec3 ray, TerrainEntityManager& terrainManager);
 
 	Vec3 _ray = Vec3(0.0f);
 	Vec3 _terrainPoint = Vec3(0.0f);
 
-	bool _isValidTerrainPoint = false;
+	static inline const unsigned int RECURSION_COUNT = 256;
 };

@@ -162,7 +162,7 @@ public:
 	bool terrainEntity_isNormalMappedB(const string& ID);
 	bool terrainEntity_isSpecularLighted(const string& ID);
 	bool terrainEntity_isInside(const string& ID, float x, float z);
-	bool terrainEntity_isValidMousePoint();
+	bool terrainEntity_isCursorPosition3dValid();
 	string terrainEntity_getSelectedID();
 	vector<string> terrainEntity_getAllIDs();
 	const string& terrainEntity_getDiffuseMapPath(const string& ID);

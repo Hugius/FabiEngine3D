@@ -312,8 +312,8 @@ float TerrainEntityManager::_getPixelHeight(float x, float z, float size, float 
 
 bool TerrainEntityManager::isInside(const string& ID, float x, float z)
 {
-	// Return true if point within terrain bounds
-	if (x > 0 || x < getEntity(ID)->getSize() || z > 0 || z < getEntity(ID)->getSize())
+	// Return true if point is within terrain bounds
+	if (x > 0 && x < getEntity(ID)->getSize() && z > 0 && z < getEntity(ID)->getSize())
 	{
 		return true;
 	}

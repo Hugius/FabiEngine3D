@@ -5,9 +5,6 @@
 
 #include <algorithm>
 
-const int   RECURSION_COUNT = 256;
-const float RAY_RANGE       = 512;
-
 MousePicker::MousePicker(RenderBus& renderBus) :
 	_renderBus(renderBus)
 {
@@ -24,30 +21,30 @@ void MousePicker::update(Ivec2 mousePos, TerrainEntityManager& terrainManager)
 	if (terrainManager.getSelectedTerrain() != nullptr)
 	{
 		// Check if looking at terrain
-		if (_notUnderTerrain(0, RAY_RANGE, mouseRay, terrainManager))
+		if (_isNotUnderTerrain(0, terrainManager.getSelectedTerrain()->getSize(), mouseRay, terrainManager))
 		{
-			_terrainPoint = _binarySearch(0, 0, RAY_RANGE, mouseRay, terrainManager);
-			_isValidTerrainPoint = true;
+			_terrainPoint = _calculateTerrainPoint(0, 0, terrainManager.getSelectedTerrain()->getSize(), mouseRay, terrainManager);
 		}
-		else // Looking at sky
+		else
 		{
 			_terrainPoint = Vec3(0.0f);
-			_isValidTerrainPoint = false;
 		}
 	}
 	else
 	{
-		_isValidTerrainPoint = false;
+		_terrainPoint = Vec3(0.0f);
 	}
 }
 
-float MousePicker::checkCursorInBox(Vec3 lb, Vec3 rt, Vec3 cameraPos) // From some stackoverflow post i forgot
+float MousePicker::checkCursorInBox(Vec3 lb, Vec3 rt, Vec3 cameraPos) // From some stackoverflow post I forgot
 {
+	// Direction fraction
 	Vec3 dirfrac;
 	dirfrac.x = 1.0f / _ray.x;
 	dirfrac.y = 1.0f / _ray.y;
 	dirfrac.z = 1.0f / _ray.z;
 
+	// Define AABB
 	float t1 = (lb.x - cameraPos.x) * dirfrac.x;
 	float t2 = (rt.x - cameraPos.x) * dirfrac.x;
 	float t3 = (lb.y - cameraPos.y) * dirfrac.y;
@@ -58,18 +55,19 @@ float MousePicker::checkCursorInBox(Vec3 lb, Vec3 rt, Vec3 cameraPos) // From so
 	float tmin = std::max(std::max(std::min(t1, t2), std::min(t3, t4)), std::min(t5, t6));
 	float tmax = std::min(std::min(std::max(t1, t2), std::max(t3, t4)), std::max(t5, t6));
 
-	// if tmax < 0, ray (line) is intersecting AABB, but the whole AABB is behind us
+	// AABB is behind
 	if (tmax < 0)
 	{
 		return -1.0f;
 	}
 
-	// if tmin > tmax, ray doesn't intersect AABB
+	// No intersection
 	if (tmin > tmax)
 	{
 		return -1.0f;
 	}
 	
+	// Intersection
 	return tmin;
 }
 
@@ -79,6 +77,7 @@ Vec3 MousePicker::_getMouseRay(Ivec2 mousePos)
 	Vec4 clipCoords = Vec4(NDC.x, NDC.y, -1.0f, 1.0f);
 	Vec4 viewCoords = _convertToViewSpace(clipCoords);
 	Vec3 worldCoords = _convertToWorldSpace(viewCoords);
+
 	return worldCoords;
 }
 
@@ -86,6 +85,7 @@ Vec2 MousePicker::_converToNDC(Ivec2 val)
 {
 	float x = ((2.0f * val.x) / Config::getInst().getWindowWidth ()) - 1.0f;
 	float y = ((2.0f * val.y) / Config::getInst().getWindowHeight()) - 1.0f;
+
 	return Vec2(x, y);
 }
 
@@ -94,6 +94,7 @@ Vec4 MousePicker::_convertToViewSpace(Vec4 value)
 	Matrix44 invertedProjection = _renderBus.getProjectionMatrix();
 	invertedProjection.invert();
 	Vec4 viewCoords = invertedProjection * value;
+
 	return Vec4(viewCoords.x, viewCoords.y, -1.0f, 0.0f);
 }
 
@@ -103,6 +104,7 @@ Vec3 MousePicker::_convertToWorldSpace(Vec4 value)
 	invertedView.invert();
 	Vec4 worldCoords = invertedView * value;
 	worldCoords.normalize();
+
 	return Vec3(worldCoords.x, worldCoords.y, worldCoords.z);
 }
 
@@ -110,13 +112,14 @@ Vec3 MousePicker::_getPointOnRay(Vec3 ray, float distance)
 {
 	Vec3 cameraPos = _renderBus.getCameraPosition();
 	Vec3 scaledRay = Vec3(ray.x * distance, ray.y * distance, ray.z * distance);
+
 	return cameraPos + scaledRay;
 }
 
-bool MousePicker::_notUnderTerrain(float start, float finish, Vec3 ray, TerrainEntityManager & terrainManager)
+bool MousePicker::_isNotUnderTerrain(float start, float end, Vec3 ray, TerrainEntityManager& terrainManager)
 {
 	Vec3 startPoint = _getPointOnRay(ray, start);
-	Vec3 endPoint   = _getPointOnRay(ray, finish);
+	Vec3 endPoint   = _getPointOnRay(ray, end);
 
 	float startHeight = terrainManager.getPixelHeight(
 		terrainManager.getSelectedTerrain()->getID(),
@@ -125,40 +128,26 @@ bool MousePicker::_notUnderTerrain(float start, float finish, Vec3 ray, TerrainE
 
 	float endHeight = terrainManager.getPixelHeight(
 		terrainManager.getSelectedTerrain()->getID(),
-		endPoint.x + terrainManager.getSelectedTerrain()->getSize() / 2.0f, 
-		endPoint.z + terrainManager.getSelectedTerrain()->getSize() / 2.0f);
+		endPoint.x + (terrainManager.getSelectedTerrain()->getSize() / 2.0f), 
+		endPoint.z + (terrainManager.getSelectedTerrain()->getSize() / 2.0f));
 	
 	return (startPoint.y > startHeight && endPoint.y < endHeight);
 }
 
-Vec3 MousePicker::getRay()
-{
-	return _ray;
-}
-
-Vec3 MousePicker::getTerrainPoint()
-{
-	return _terrainPoint;
-}
-
-bool MousePicker::isValidTerrainPoint()
-{
-	return _isValidTerrainPoint;
-}
-
-Vec3 MousePicker::_binarySearch(int count, float start, float finish, Vec3 ray, TerrainEntityManager& terrainManager)
+Vec3 MousePicker::_calculateTerrainPoint(int count, float start, float end, Vec3 ray, TerrainEntityManager& terrainManager)
 {
 	// Binary search algorithm
-	float half = start + ((finish - start) / 2.0f);
+	float half = start + ((end - start) / 2.0f);
 	if (count >= RECURSION_COUNT) 
 	{
+		// Calculate final point
 		Vec3 endPoint = _getPointOnRay(ray, half);
-		
+
 		// Check if selected point is inside the terrain size
 		if (terrainManager.isInside(
 			terrainManager.getSelectedTerrain()->getID(),
-			endPoint.x + terrainManager.getSelectedTerrain()->getSize() / 2.0f, 
-			endPoint.z + terrainManager.getSelectedTerrain()->getSize() / 2.0f))
+			endPoint.x + (terrainManager.getSelectedTerrain()->getSize() / 2.0f), 
+			endPoint.z + (terrainManager.getSelectedTerrain()->getSize() / 2.0f)))
 		{
 			return endPoint;
 		}
@@ -169,12 +158,22 @@ Vec3 MousePicker::_binarySearch(int count, float start, float finish, Vec3 ray, 
 	}
 
 	// Recursion
-	if (_notUnderTerrain(start, half, ray, terrainManager))
+	if (_isNotUnderTerrain(start, half, ray, terrainManager))
 	{
-		return _binarySearch(count + 1, start, half, ray, terrainManager);
+		return _calculateTerrainPoint(count + 1, start, half, ray, terrainManager);
 	}
 	else 
 	{
-		return _binarySearch(count + 1, half, finish, ray, terrainManager);
+		return _calculateTerrainPoint(count + 1, half, end, ray, terrainManager);
 	}
+}
+
+Vec3 MousePicker::getRay()
+{
+	return _ray;
+}
+
+Vec3 MousePicker::getTerrainPoint()
+{
+	return _terrainPoint;
 }

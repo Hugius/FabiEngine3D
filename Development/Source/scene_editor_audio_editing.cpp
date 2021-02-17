@@ -20,7 +20,7 @@ void SceneEditor::_updateAudioEditing()
 		// User must not be in placement mode
 		if (_currentPreviewModelName == "" && _currentPreviewBillboardName == "" && !_isPlacingPointlight && _currentPreviewAudioName == "")
 		{
-			string hoveredAabbID = _fe3d.collision_checkCursorInAny();
+			string hoveredAabbID = _fe3d.collision_checkCursorInAny().first;
 
 			// Check if user selected a speaker model
 			for (auto& entityID : _fe3d.gameEntity_getAllIDs())

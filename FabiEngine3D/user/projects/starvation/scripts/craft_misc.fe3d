@@ -1,15 +1,13 @@
-42 19
+7 63
 META script_type_update
 
 /// Update workbench hover
 fe3d:text_set_visible("craft", <false>)
 BOOL isHovered = <false>
 STR hoveredID = fe3d:raycast_into_model("workbench", "", <true>)
-VEC3 camPos = fe3d:camera_get_position()
 IF hoveredID NOT "" AND _isBuilding IS <false>:
-    VEC3 workbenchPos = fe3d:model_get_position(hoveredID)
-    DEC distance = math:distance(workbenchPos, camPos)
-    IF distance LESS _maxWorkbenchReach AND _isCrafting IS <false>:
+    DEC distance = fe3d:raycast_into_model_distance("workbench", "", <true>)
+    IF distance LESS _maxReach AND _isCrafting IS <false>:
         EDIT isHovered = <true>
         fe3d:text_set_visible("craft", <true>)
 

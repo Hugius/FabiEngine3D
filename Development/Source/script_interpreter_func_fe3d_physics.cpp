@@ -10,14 +10,17 @@ bool ScriptInterpreter::_executeFe3dPhysicsFunction(const string& functionName, 
 		// Validate arguments
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
+			// Temporary values
+			string result = "";
+
 			// Find aabbEntity ID
 			string searchID = arguments[0].getString() + (!arguments[1].getString().empty() ? ("_" + arguments[1].getString()) : "");
-			auto result = _fe3d.collision_checkCursorInEntities(searchID, arguments[2].getBoolean());
+			auto foundAabbID = _fe3d.collision_checkCursorInEntities(searchID, arguments[2].getBoolean()).first;
 
 			// Retrieve bound gameEntity ID
-			if (!result.empty() && (_fe3d.aabbEntity_getParentType(result) == AabbParentType::GAME_ENTITY))
+			if (!foundAabbID.empty() && (_fe3d.aabbEntity_getParentType(foundAabbID) == AabbParentType::GAME_ENTITY))
 			{
-				result = _fe3d.aabbEntity_getParentID(result);
+				result = _fe3d.aabbEntity_getParentID(foundAabbID);
 			}
 
 			// Return
@@ -29,12 +32,16 @@ bool ScriptInterpreter::_executeFe3dPhysicsFunction(const string& functionName, 
 		// Validate arguments
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			auto result = _fe3d.collision_checkCursorInAny();
+			// Temporary values
+			string result = "";
+
+			// Find aabbEntity ID
+			auto foundAabbID = _fe3d.collision_checkCursorInAny().first;
 
 			// Check if aabbEntity entity has a parent gameEntity
-			if (!result.empty() && _fe3d.aabbEntity_getParentType(result) == AabbParentType::GAME_ENTITY)
+			if (!foundAabbID.empty() && _fe3d.aabbEntity_getParentType(foundAabbID) == AabbParentType::GAME_ENTITY)
 			{
-				result = _fe3d.aabbEntity_getParentID(result);
+				result = _fe3d.aabbEntity_getParentID(foundAabbID);
 			}
 
 			// Return
@@ -48,13 +55,16 @@ bool ScriptInterpreter::_executeFe3dPhysicsFunction(const string& functionName, 
 		// Validate arguments
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
+			// Temporary values
+			string result = "";
+
 			// Find aabbEntity ID
-			auto result = _fe3d.collision_checkCursorInEntities(arguments[0].getString(), arguments[1].getBoolean());
+			auto foundAabbID = _fe3d.collision_checkCursorInEntities(arguments[0].getString(), arguments[1].getBoolean()).first;
 
 			// Retrieve bound billboardEntity ID
-			if (!result.empty() && (_fe3d.aabbEntity_getParentType(result) == AabbParentType::BILLBOARD_ENTITY))
+			if (!foundAabbID.empty() && (_fe3d.aabbEntity_getParentType(foundAabbID) == AabbParentType::BILLBOARD_ENTITY))
 			{
-				result = _fe3d.aabbEntity_getParentID(result);
+				result = _fe3d.aabbEntity_getParentID(foundAabbID);
 			}
 
 			// Return
@@ -66,16 +76,101 @@ bool ScriptInterpreter::_executeFe3dPhysicsFunction(const string& functionName, 
 		// Validate arguments
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			auto result = _fe3d.collision_checkCursorInAny();
+			// Temporary values
+			string result = "";
+
+			// Find aabbEntity ID
+			auto foundAabbID = _fe3d.collision_checkCursorInAny().first;
 
 			// Check if aabbEntity entity has a parent billboardEntity
-			if (!result.empty() && _fe3d.aabbEntity_getParentType(result) == AabbParentType::BILLBOARD_ENTITY)
+			if (!foundAabbID.empty() && _fe3d.aabbEntity_getParentType(foundAabbID) == AabbParentType::BILLBOARD_ENTITY)
 			{
-				result = _fe3d.aabbEntity_getParentID(result);
+				result = _fe3d.aabbEntity_getParentID(foundAabbID);
 			}
 
 			// Return
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result));
+		}
+	}
+	else if (functionName == "fe3d:raycast_into_model_distance") // Raycasting into multiple gameEntities and retrieving the distance
+	{
+		auto types = { ScriptValueType::STRING, ScriptValueType::STRING, ScriptValueType::BOOLEAN }; // GameEntityID + aabbPartID + canBeOccluded
+
+		// Validate arguments
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		{
+			// Find aabbEntity ID
+			string searchID = arguments[0].getString() + (!arguments[1].getString().empty() ? ("_" + arguments[1].getString()) : "");
+			auto intersection = _fe3d.collision_checkCursorInEntities(searchID, arguments[2].getBoolean());
+			float result = (std::numeric_limits<float>::max)();
+
+			// Retrieve bound gameEntity ID
+			if (!intersection.first.empty() && (_fe3d.aabbEntity_getParentType(intersection.first) == AabbParentType::GAME_ENTITY))
+			{
+				result = intersection.second;
+			}
+
+			// Return
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
+		}
+	}
+	else if (functionName == "fe3d:raycast_into_models_distance") // Raycasting into all gameEntities and retrieving the distance
+	{
+		// Validate arguments
+		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			// Find aabbEntity ID
+			auto intersection = _fe3d.collision_checkCursorInAny();
+			float result = (std::numeric_limits<float>::max)();
+
+			// Check if aabbEntity entity has a parent gameEntity
+			if (!intersection.first.empty() && _fe3d.aabbEntity_getParentType(intersection.first) == AabbParentType::GAME_ENTITY)
+			{
+				result = intersection.second;
+			}
+
+			// Return
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
+		}
+	}
+	else if (functionName == "fe3d:raycast_into_billboard_distance") // Raycasting into multiple billboardEntities and retrieving the distance
+	{
+		auto types = { ScriptValueType::STRING, ScriptValueType::BOOLEAN }; // BillboardEntityID + canBeOccluded
+
+		// Validate arguments
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		{
+			// Find aabbEntity ID
+			auto intersection = _fe3d.collision_checkCursorInEntities(arguments[0].getString(), arguments[1].getBoolean());
+			float result = (std::numeric_limits<float>::max)();
+
+			// Retrieve bound billboardEntity ID
+			if (!intersection.first.empty() && (_fe3d.aabbEntity_getParentType(intersection.first) == AabbParentType::BILLBOARD_ENTITY))
+			{
+				result = intersection.second;
+			}
+
+			// Return
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
+		}
+	}
+	else if (functionName == "fe3d:raycast_into_billboards_distance") // Raycasting into all billboardEntities and retrieving the distance
+	{
+		// Validate arguments
+		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			// Find aabbEntity ID
+			auto intersection = _fe3d.collision_checkCursorInAny();
+			float result = (std::numeric_limits<float>::max)();
+
+			// Check if aabbEntity entity has a parent billboardEntity
+			if (!intersection.first.empty() && _fe3d.aabbEntity_getParentType(intersection.first) == AabbParentType::BILLBOARD_ENTITY)
+			{
+				result = intersection.second;
+			}
+
+			// Return
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
 		}
 	}
 	else if (functionName == "fe3d:collision_enable_camera_terrain_response") // Enable collision response between camera & terrain
@@ -164,6 +259,7 @@ bool ScriptInterpreter::_executeFe3dPhysicsFunction(const string& functionName, 
 				return true;
 			}
 
+			// Temporary values
 			string result = "";
 
 			// Find aabbEntity
@@ -206,6 +302,7 @@ bool ScriptInterpreter::_executeFe3dPhysicsFunction(const string& functionName, 
 				return true;
 			}
 
+			// Temporary values
 			string result = "";
 
 			// Find aabbEntity
@@ -249,6 +346,7 @@ bool ScriptInterpreter::_executeFe3dPhysicsFunction(const string& functionName, 
 			// Validate existing aabbEntity ID
 			if (_validateFe3dAabbEntity(arguments[0].getString()))
 			{
+				// Temporary values
 				bool result = false;
 
 				// Check if requested aabbEntity is existing
@@ -291,6 +389,7 @@ bool ScriptInterpreter::_executeFe3dPhysicsFunction(const string& functionName, 
 				return true;
 			}
 
+			// Temporary values
 			bool result = false;
 
 			// Find aabbEntity
@@ -327,6 +426,7 @@ bool ScriptInterpreter::_executeFe3dPhysicsFunction(const string& functionName, 
 		// Validate arguments
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
+			// Temporary values
 			string result = "";
 
 			// Check if no aabbEntity part is specified
@@ -383,6 +483,7 @@ bool ScriptInterpreter::_executeFe3dPhysicsFunction(const string& functionName, 
 		// Validate arguments
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
+			// Temporary values
 			string result = "";
 
 			// Check if no aabbEntity part is specified
@@ -437,6 +538,7 @@ bool ScriptInterpreter::_executeFe3dPhysicsFunction(const string& functionName, 
 		// Validate arguments
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
+			// Temporary values
 			string result = "";
 
 			// Check if no aabbEntity part is specified

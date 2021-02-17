@@ -447,9 +447,9 @@ public:
 	void collision_disableCameraTerrainResponse();
 
 	// Global collision interface - getters
-	const string collision_checkCursorInAny();
-	bool		 collision_checkCursorInEntity(const string& ID, bool canBeOccluded);
-	const string collision_checkCursorInEntities(const string& ID, bool canBeOccluded, const string& exception = "");
+	pair<const string, float> collision_checkCursorInAny();
+	pair<bool, float>		  collision_checkCursorInEntity(const string& ID, bool canBeOccluded);
+	pair<const string, float> collision_checkCursorInEntities(const string& ID, bool canBeOccluded, const string& exception = "");
 	bool		 collision_checkCameraWithTerrain();
 	bool		 collision_checkCameraWithEntity(const string& ID);
 	const string collision_checkCameraWithAny();
@@ -825,4 +825,6 @@ private:
 	bool _isRaycastUpdated = false;
 
 	string _hoveredAabbID = "";
+
+	float _hoveredAabbDistance = -1.0f;
 };

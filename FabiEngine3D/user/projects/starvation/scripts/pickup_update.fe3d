@@ -1,4 +1,4 @@
-4 0
+18 81
 META script_type_update
 
 /// Compose pickuppable items
@@ -10,17 +10,15 @@ INT size = misc:get_list_size("pickuppables")
 INT index = 0
 STR hoveredID = ""
 STR itemName = ""
-VEC3 camPos = fe3d:camera_get_position()
 LOOP:
     IF index IS size:
         BREAK
     ELSE:
-        EDIT hoveredID = fe3d:raycast_into_model(pickuppables[index], "", <true>)
+        EDIT itemName = pickuppables[index]
+        EDIT hoveredID = fe3d:raycast_into_model(itemName, "", <true>)
         IF hoveredID NOT "":
-            VEC3 itemPos = fe3d:model_get_position(hoveredID)
-            DEC distance = math:distance(itemPos, camPos)
-            IF distance LESS _maxPickupReach:
-                EDIT itemName = pickuppables[index]
+            DEC distance = fe3d:raycast_into_model_distance(itemName, "", <true>)
+            IF distance LESS _maxReach:
                 fe3d:text_set_visible("pickup", <true>)
                 BREAK
     INCR index 1

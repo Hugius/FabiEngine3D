@@ -1,14 +1,16 @@
-41 60
+49 82
 META script_type_update
 
 /// Check if a built building is selected
 INT listSize = misc:get_list_size("_buildables")
 INT index = 0
 STR hoveredID = ""
+DEC distance = 0.0
 LOOP:
     IF index IS listSize:
         BREAK
     EDIT hoveredID = fe3d:raycast_into_model(_buildables[index], "", <true>)
+    EDIT distance = fe3d:raycast_into_model_distance(_buildables[index], "", <true>)
     IF hoveredID NOT "":
         BREAK
     INCR index 1
@@ -47,10 +49,7 @@ STR toolID = _inventory[_equipIndex]
 fe3d:text_set_visible("build", <false>)
 IF toolID IS "hammer_stone" OR toolID IS "hammer_iron":
     IF _isInvOpen IS <true> AND hoveredID NOT "" AND _canAffordBuilding IS <true>:
-        VEC3 camPos = fe3d:camera_get_position()
-        VEC3 buildingPos = fe3d:model_get_position(hoveredID)
-        DEC distance = math:distance(buildingPos, camPos)
-        IF distance LESS _buildOffsets[hoveredIndex] AND height LESS size.y:
+        IF distance LESS _maxReach AND height LESS size.y:
             fe3d:text_set_visible("build", <true>)
             IF _wasHammerPlaying IS <true> AND _isHammerPlaying IS <false>:
                 DEC heightIncrease = size.y

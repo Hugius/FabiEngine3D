@@ -1,7 +1,7 @@
-36 66
+2 13
 META script_type_update
 
-/// Some values
+/// Temporary values
 STR currentWorld = fe3d:scene_get_current()
 DEC height = fe3d:water_get_height()
 VEC3 camPos = fe3d:camera_get_position()

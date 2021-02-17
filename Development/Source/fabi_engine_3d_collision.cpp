@@ -216,7 +216,7 @@ void FabiEngine3D::collision_disableCameraTerrainResponse()
 	_core->_collisionResolver.disableTerrainResponse();
 }
 
-const string FabiEngine3D::collision_checkCursorInAny()
+pair<const string, float> FabiEngine3D::collision_checkCursorInAny()
 {
 	// Temporary values
 	float closestDistance = (std::numeric_limits<float>::max)();
@@ -248,6 +248,7 @@ const string FabiEngine3D::collision_checkCursorInAny()
 				{
 					closestDistance = distance;
 					_hoveredAabbID = entity->getID();
+					_hoveredAabbDistance = closestDistance;
 				}
 			}
 		}
@@ -255,10 +256,17 @@ const string FabiEngine3D::collision_checkCursorInAny()
 
 	// Return
 	_isRaycastUpdated = true;
-	return _hoveredAabbID;
+	if (_hoveredAabbID.empty())
+	{
+		return make_pair("", -1.0f);
+	}
+	else
+	{
+		return make_pair(_hoveredAabbID, _hoveredAabbDistance);
+	}
 }
 
-bool FabiEngine3D::collision_checkCursorInEntity(const string& ID, bool canBeOccluded)
+pair<bool, float> FabiEngine3D::collision_checkCursorInEntity(const string& ID, bool canBeOccluded)
 {
 	// Check whether the AABB can be raycasted if it's occluded by another AABB
 	if (canBeOccluded)
@@ -272,11 +280,12 @@ bool FabiEngine3D::collision_checkCursorInEntity(const string& ID, bool canBeOcc
 		// Check if hovered AABB still exists
 		if (_core->_aabbEntityManager.isExisting(_hoveredAabbID))
 		{
-			return (ID == _hoveredAabbID);
+			auto result = (ID == _hoveredAabbID);
+			return make_pair(result, _hoveredAabbDistance);
 		}
 		else
 		{
-			return false;
+			return make_pair(false, -1.0f);
 		}
 	}
 	else
@@ -284,6 +293,7 @@ bool FabiEngine3D::collision_checkCursorInEntity(const string& ID, bool canBeOcc
 		auto entity = _core->_aabbEntityManager.getEntity(ID);
 		if (entity->isResponsive() && entity->isVisible())
 		{
+			// Prepare intersection box
 			Vec3 lb, rt;
 			lb.x = (entity->getTranslation().x - entity->getScaling().x / 2.0f);
 			lb.y = (entity->getTranslation().y);
@@ -292,12 +302,17 @@ bool FabiEngine3D::collision_checkCursorInEntity(const string& ID, bool canBeOcc
 			rt.y = (entity->getTranslation().y + entity->getScaling().y);
 			rt.z = (entity->getTranslation().z - entity->getScaling().z / 2.0f);
 
-			return _core->_mousePicker.checkCursorInBox(lb, rt, _core->_cameraManager.getPosition()) != -1.0f;
+			// Calculate intersection & distance
+			float distance = _core->_mousePicker.checkCursorInBox(lb, rt, _core->_cameraManager.getPosition());
+			bool result = (distance != -1.0f);
+
+			// Return
+			return make_pair(result, distance);
 		}
 	}
 }
 
-const string FabiEngine3D::collision_checkCursorInEntities(const string& ID, bool canBeOccluded, const string& exception)
+pair<const string, float> FabiEngine3D::collision_checkCursorInEntities(const string& ID, bool canBeOccluded, const string& exception)
 {
 	// Check whether the AABB can be raycasted if it's occluded by another AABB
 	if (canBeOccluded)
@@ -311,7 +326,7 @@ const string FabiEngine3D::collision_checkCursorInEntities(const string& ID, boo
 		// Check if hovered AABB is empty or nonexisting
 		if (_hoveredAabbID.empty() || !_core->_aabbEntityManager.isExisting(_hoveredAabbID))
 		{
-			return "";
+			return make_pair("", -1.0f);
 		}
 
 		// Check if ID matches (a part of) hovered AABB ID
@@ -320,10 +335,12 @@ const string FabiEngine3D::collision_checkCursorInEntities(const string& ID, boo
 			auto subString = _hoveredAabbID.substr(0, ID.size());
 			if (subString == ID && _hoveredAabbID != exception)
 			{
-				return _hoveredAabbID;
+				return make_pair(_hoveredAabbID, _hoveredAabbDistance);
 			}
 		}
-		return "";
+
+		// ID not found
+		return make_pair("", -1.0f);
 	}
 	else
 	{
@@ -364,8 +381,15 @@ const string FabiEngine3D::collision_checkCursorInEntities(const string& ID, boo
 			}
 		}
 
-		// No intersection
-		return closestBoxID;
+		// Return
+		if (closestBoxID.empty())
+		{
+			return make_pair("", -1.0f);
+		}
+		else
+		{
+			return make_pair(closestBoxID, closestDistance);
+		}
 	}
 }
 

@@ -23,7 +23,7 @@ void SceneEditor::_updateBillboardEditing()
 				// Must not be preview entity
 				if (entityID[0] != '@')
 				{
-					auto hoveredAabbID = _fe3d.collision_checkCursorInAny();
+					auto hoveredAabbID = _fe3d.collision_checkCursorInAny().first;
 					bool hovered = (hoveredAabbID.size() >= entityID.size()) && (hoveredAabbID.substr(0, entityID.size()) == entityID);
 
 					// Cursor must be in 3D space, no GUI interruptions, no RMB holding down

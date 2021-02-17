@@ -1,4 +1,4 @@
-20 26
+11 25
 META script_type_update
 
 /// Update stone hover
@@ -7,22 +7,15 @@ BOOL isHovered = <false>
 BOOL allowed = <true>
 STR toolID = _inventory[_equipIndex]
 STR hoveredID = fe3d:raycast_into_model("stone", "", <true>)
+DEC distance = fe3d:raycast_into_model_distance("stone", "", <true>)
 STR stonesException = fe3d:raycast_into_model("stones", "", <true>)
-VEC3 camPos = fe3d:camera_get_position()
 IF hoveredID NOT "" AND stonesException IS "":
     VEC3 stonePos = fe3d:model_get_position(hoveredID)
-    DEC stoneDistance = math:distance(stonePos, camPos)
-    DEC stoneReach = _maxStoneReach
     STR subString = misc:get_string_part(hoveredID, 0, 6)
-    IF subString IS "stone1":
-        MUL stoneReach 1.5
-    IF subString IS "stone3":
-        MUL stoneReach 1.5
-    ELIF subString IS "stone5":
-        MUL stoneReach 1.6
+    IF subString IS "stone5":
         IF toolID NOT "pickaxe_iron":
             EDIT allowed = <false>
-    IF stoneDistance LESS stoneReach AND allowed IS <true>:
+    IF distance LESS _maxReach AND allowed IS <true>:
         EDIT isHovered = <true>
         IF toolID IS "pickaxe_stone" OR toolID IS "pickaxe_iron":
             IF _isInvOpen IS <true>:
@@ -38,9 +31,8 @@ IF _wasPickaxePlaying IS <true> AND _isPickaxePlaying IS <false>:
         PUSH _stonesIDs stonesID
         EDIT _fallingStonesID = stonesID
         EDIT _fallingStonesTargetHeight = stonePos.y
-        VEC3 sPos = stonePos
-        INCR sPos.y 5.0
-        fe3d:model_place(stonesID, "stones", sPos.x, sPos.y, sPos.z)
+        INCR stonePos.y 5.0
+        fe3d:model_place(stonesID, "stones", stonePos.x, stonePos.y, stonePos.z)
         IF subString IS "stone5":
             fe3d:model_set_size(stonesID, 1.2, 1.2, 1.2)
         DECR _durabilities[1] _durabilityHit
@@ -55,9 +47,8 @@ IF _fallingStonesID NOT "":
 
 /// Stones picking updates
 EDIT hoveredID = fe3d:raycast_into_model("stones", "", <true>)
+EDIT distance = fe3d:raycast_into_model_distance("stones", "", <true>)
 IF hoveredID NOT "" AND _wasPickupPlaying IS <true> AND _isPickupPlaying IS <false>:
-    VEC3 stonesPos = fe3d:model_get_position(hoveredID)
-    DEC stonesDistance = math:distance(stonesPos, camPos)
-    IF stonesDistance LESS _maxPickupReach:
+    IF distance LESS _maxReach:
         fe3d:model_delete(hoveredID)
         INCR _bag[1] 6

@@ -20,7 +20,7 @@ void SceneEditor::_updateModelEditing()
 		if (_currentPreviewModelName == "" && _currentPreviewBillboardName == "" && !_isPlacingPointlight && _currentPreviewAudioName == "")
 		{
 			// Check which entity is selected
-			auto hoveredID = _fe3d.collision_checkCursorInAny();
+			auto hoveredID = _fe3d.collision_checkCursorInAny().first;
 
 			// Check if user selected a model
 			for (auto& entityID : _fe3d.gameEntity_getAllIDs())

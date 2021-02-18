@@ -445,9 +445,6 @@
     <ClCompile Include="Source\environment_editor_updates_water_misc.cpp">
       <Filter>src\Editor System\Environment Editor\Updates</Filter>
     </ClCompile>
-    <ClCompile Include="Source\mouse_picker.cpp">
-      <Filter>src\Miscellaneous\Other</Filter>
-    </ClCompile>
     <ClCompile Include="Source\audio_editor_updates.cpp">
       <Filter>src\Editor System\Audio Editor\Updates</Filter>
     </ClCompile>
@@ -621,6 +618,9 @@
     </ClCompile>
     <ClCompile Include="Source\script_interpreter_func_fe3d_terrain.cpp">
       <Filter>src\Scripting System\Execution\Interpreter\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ray_caster.cpp">
+      <Filter>src\Miscellaneous\Other</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -903,9 +903,6 @@
     <ClInclude Include="Source\environment_editor.hpp">
       <Filter>src\Editor System\Environment Editor\Core</Filter>
     </ClInclude>
-    <ClInclude Include="Source\mouse_picker.hpp">
-      <Filter>src\Miscellaneous\Other</Filter>
-    </ClInclude>
     <ClInclude Include="Source\environment_type.hpp">
       <Filter>src\Miscellaneous\Enums</Filter>
     </ClInclude>
@@ -977,6 +974,9 @@
     </ClInclude>
     <ClInclude Include="Source\mesh_loader.hpp">
       <Filter>src\Asset Management System\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ray_caster.hpp">
+      <Filter>src\Miscellaneous\Other</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

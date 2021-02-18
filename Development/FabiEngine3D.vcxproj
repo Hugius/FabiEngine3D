@@ -236,7 +236,7 @@
     <ClInclude Include="Source\light_entity.hpp" />
     <ClInclude Include="Source\light_entity_manager.hpp" />
     <ClInclude Include="Source\logger.hpp" />
-    <ClInclude Include="Source\mouse_picker.hpp" />
+    <ClInclude Include="Source\ray_caster.hpp" />
     <ClInclude Include="Source\mesh_loader.hpp" />
     <ClInclude Include="Source\opengl_buffer.hpp" />
     <ClInclude Include="Source\post_renderer.hpp" />
@@ -428,7 +428,7 @@
     <ClCompile Include="Source\main.cpp" />
     <ClCompile Include="Source\render_engine_capture.cpp" />
     <ClCompile Include="Source\render_engine_draw.cpp" />
-    <ClCompile Include="Source\mouse_picker.cpp" />
+    <ClCompile Include="Source\ray_caster.cpp" />
     <ClCompile Include="Source\render_bus.cpp" />
     <ClCompile Include="Source\sky_entity.cpp" />
     <ClCompile Include="Source\sky_entity_manager.cpp" />

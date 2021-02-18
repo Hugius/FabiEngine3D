@@ -194,7 +194,7 @@ void CoreEngine::_updateApplication()
 
 		// Raycast updates
 		_timer.start("raycastUpdate");
-		_mousePicker.update(Ivec2(relativeCursorPosition), _terrainEntityManager);
+		_rayCaster.update(Ivec2(relativeCursorPosition), _terrainEntityManager);
 		_timer.stop();
 
 		// Collision updates

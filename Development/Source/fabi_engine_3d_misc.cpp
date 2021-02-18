@@ -136,7 +136,7 @@ void FabiEngine3D::misc_disableDebugRendering()
 
 void FabiEngine3D::misc_setCursorPosition(Ivec2 pos)
 {
-	_core->_mousePicker.update(pos, _core->_terrainEntityManager);
+	_core->_rayCaster.update(pos, _core->_terrainEntityManager);
 	_core->_windowManager.setCursorPos(pos);
 }
 

@@ -1,17 +1,17 @@
-#include "mouse_picker.hpp"
+#include "ray_caster.hpp"
 #include "render_bus.hpp"
 #include "configuration.hpp"
 #include "logger.hpp"
 
 #include <algorithm>
 
-MousePicker::MousePicker(RenderBus& renderBus) :
+RayCaster::RayCaster(RenderBus& renderBus) :
 	_renderBus(renderBus)
 {
 
 }
 
-void MousePicker::update(Ivec2 mousePos, TerrainEntityManager& terrainManager)
+void RayCaster::update(Ivec2 mousePos, TerrainEntityManager& terrainManager)
 {
 	// Simple raycasting
 	Vec3 mouseRay = _getMouseRay(Ivec2(mousePos.x, Config::getInst().getWindowHeight() - mousePos.y));
@@ -24,11 +24,11 @@ void MousePicker::update(Ivec2 mousePos, TerrainEntityManager& terrainManager)
 	}
 	else
 	{
-		_terrainPoint = Vec3(0.0f);
+		_terrainPoint = Vec3(-1.0f);
 	}
 }
 
-float MousePicker::checkCursorInBox(Vec3 lb, Vec3 rt, Vec3 cameraPos) // From some stackoverflow post I forgot
+float RayCaster::checkCursorInBox(Vec3 lb, Vec3 rt, Vec3 cameraPos) // From some stackoverflow post I forgot
 {
 	// Direction fraction
 	Vec3 dirfrac;
@@ -63,7 +63,7 @@ float MousePicker::checkCursorInBox(Vec3 lb, Vec3 rt, Vec3 cameraPos) // From so
 	return tmin;
 }
 
-Vec3 MousePicker::_getMouseRay(Ivec2 mousePos)
+Vec3 RayCaster::_getMouseRay(Ivec2 mousePos)
 {
 	Vec2 NDC = _converToNDC(mousePos);
 	Vec4 clipCoords = Vec4(NDC.x, NDC.y, -1.0f, 1.0f);
@@ -73,7 +73,7 @@ Vec3 MousePicker::_getMouseRay(Ivec2 mousePos)
 	return worldCoords;
 }
 
-Vec2 MousePicker::_converToNDC(Ivec2 val)
+Vec2 RayCaster::_converToNDC(Ivec2 val)
 {
 	float x = ((2.0f * val.x) / Config::getInst().getWindowWidth ()) - 1.0f;
 	float y = ((2.0f * val.y) / Config::getInst().getWindowHeight()) - 1.0f;
@@ -81,7 +81,7 @@ Vec2 MousePicker::_converToNDC(Ivec2 val)
 	return Vec2(x, y);
 }
 
-Vec4 MousePicker::_convertToViewSpace(Vec4 value)
+Vec4 RayCaster::_convertToViewSpace(Vec4 value)
 {
 	Matrix44 invertedProjection = _renderBus.getProjectionMatrix();
 	invertedProjection.invert();
@@ -90,7 +90,7 @@ Vec4 MousePicker::_convertToViewSpace(Vec4 value)
 	return Vec4(viewCoords.x, viewCoords.y, -1.0f, 0.0f);
 }
 
-Vec3 MousePicker::_convertToWorldSpace(Vec4 value)
+Vec3 RayCaster::_convertToWorldSpace(Vec4 value)
 {
 	Matrix44 invertedView = _renderBus.getViewMatrix();
 	invertedView.invert();
@@ -100,7 +100,7 @@ Vec3 MousePicker::_convertToWorldSpace(Vec4 value)
 	return Vec3(worldCoords.x, worldCoords.y, worldCoords.z);
 }
 
-Vec3 MousePicker::_getPointOnRay(float distance)
+Vec3 RayCaster::_getPointOnRay(float distance)
 {
 	Vec3 cameraPos = _renderBus.getCameraPosition();
 	Vec3 scaledRay = _ray * distance;
@@ -108,7 +108,7 @@ Vec3 MousePicker::_getPointOnRay(float distance)
 	return cameraPos + scaledRay;
 }
 
-bool MousePicker::_isUnderTerrain(float start, float end, TerrainEntityManager& terrainManager)
+bool RayCaster::_isUnderTerrain(float start, float end, TerrainEntityManager& terrainManager)
 {
 	Vec3 startPoint = _getPointOnRay(start);
 	Vec3 endPoint   = _getPointOnRay(end);
@@ -126,7 +126,7 @@ bool MousePicker::_isUnderTerrain(float start, float end, TerrainEntityManager& 
 	return (startPoint.y > startHeight && endPoint.y < endHeight);
 }
 
-Vec3 MousePicker::_calculateTerrainPoint(float maxDistance, TerrainEntityManager& terrainManager)
+Vec3 RayCaster::_calculateTerrainPoint(float maxDistance, TerrainEntityManager& terrainManager)
 {
 	float total = 0.0f;
 
@@ -148,7 +148,7 @@ Vec3 MousePicker::_calculateTerrainPoint(float maxDistance, TerrainEntityManager
 			}
 			else
 			{
-				return Vec3(0.0f);
+				return Vec3(-1.0f);
 			}
 		}
 		else
@@ -157,15 +157,15 @@ Vec3 MousePicker::_calculateTerrainPoint(float maxDistance, TerrainEntityManager
 		}
 	}
 
-	return Vec3(0.0f);
+	return Vec3(-1.0f);
 }
 
-Vec3 MousePicker::getRay()
+Vec3 RayCaster::getRay()
 {
 	return _ray;
 }
 
-Vec3 MousePicker::getTerrainPoint()
+Vec3 RayCaster::getTerrainPoint()
 {
 	return _terrainPoint;
 }

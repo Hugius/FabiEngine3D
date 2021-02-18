@@ -28,6 +28,19 @@ bool ScriptInterpreter::_executeFe3dTerrainEntityFunction(const string& function
 			}
 		}
 	}
+	else if (functionName == "fe3d:terrain_is_cursor_position_valid") // Check if the cursor position on the terrain is valid
+	{
+		// Validate arguments
+		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			// Validate terrain existence
+			if (_validateFe3dTerrainEntity())
+			{
+				auto result = _fe3d.terrainEntity_isCursorPosition3dValid();
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
+			}
+		}
+	}
 	else if (functionName == "fe3d:terrain_get_pixel_height") // Get the pixel height on the terrain
 	{
 		auto types = { ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };

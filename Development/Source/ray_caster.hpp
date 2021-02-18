@@ -2,11 +2,11 @@
 
 #include "terrain_entity_manager.hpp"
 
-class MousePicker final
+class RayCaster final
 {
 public:
-	MousePicker(RenderBus& renderBus);
-	~MousePicker() = default;
+	RayCaster(RenderBus& renderBus);
+	~RayCaster() = default;
 
 	void update(Ivec2 mousePos, TerrainEntityManager& terrainManager);
 

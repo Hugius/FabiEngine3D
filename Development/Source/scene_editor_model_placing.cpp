@@ -15,7 +15,7 @@ void SceneEditor::_updateModelPlacing()
 				Vec3 newPosition = Vec3(0.0f);
 
 				// Check if a terrain is loaded
-				if (_fe3d.terrainEntity_getSelectedID() != "")
+				if (_fe3d.terrainEntity_getSelectedID() != "" && _fe3d.terrainEntity_isCursorPosition3dValid())
 				{
 					// Show preview model
 					_fe3d.gameEntity_show(_currentPreviewModelName);
@@ -25,7 +25,7 @@ void SceneEditor::_updateModelPlacing()
 					{
 						newPosition = _fe3d.terrainEntity_getCursorPosition3D();
 
-						// Instnaced entity has different positioning
+						// Instanced entity has different positioning
 						if (_fe3d.gameEntity_isInstanced(_currentPreviewModelName))
 						{
 							_fe3d.gameEntity_setInstanced(_currentPreviewModelName, true, { newPosition });
@@ -35,6 +35,11 @@ void SceneEditor::_updateModelPlacing()
 							_fe3d.gameEntity_setPosition(_currentPreviewModelName, newPosition);
 						}
 					}
+				}
+				else
+				{
+					// Hide preview model
+					_fe3d.gameEntity_hide(_currentPreviewModelName);
 				}
 
 				// Placing model

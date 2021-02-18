@@ -15,12 +15,12 @@ void SceneEditor::_updateAudioPlacing()
 				Vec3 newPosition = Vec3(0.0f);
 
 				// Check if a terrain is loaded
-				if (_fe3d.terrainEntity_getSelectedID() != "")
+				if (_fe3d.terrainEntity_getSelectedID() != "" && _fe3d.terrainEntity_isCursorPosition3dValid())
 				{
 					// Update preview audiocaster position
 					newPosition = _fe3d.terrainEntity_getCursorPosition3D() + Vec3(0.0f, 1.0f, 0.0f);
 
-					// Show & play preview audiocaster
+					// Play preview audiocaster
 					if (_fe3d.audioEntity_isPaused(_currentPreviewAudioName))
 					{
 						_fe3d.audioEntity_resume(_currentPreviewAudioName);
@@ -29,10 +29,23 @@ void SceneEditor::_updateAudioPlacing()
 					{
 						_fe3d.audioEntity_play(_currentPreviewAudioName, -1, 50, true);
 					}
+
+					// Show preview audiocaster
 					_fe3d.audioEntity_setPosition(_currentPreviewAudioName, newPosition);
 					_fe3d.audioEntity_setMaxDistance(_currentPreviewAudioName, _defaultAudioMaxDistance);
 					_fe3d.gameEntity_show(_previewSpeakerID);
 					_fe3d.gameEntity_setPosition(_previewSpeakerID, newPosition);
+				}
+				else
+				{
+					// Hide preview speaker
+					_fe3d.gameEntity_hide(_previewSpeakerID);
+
+					// Pause audio playback
+					if (_fe3d.audioEntity_isPlaying(_currentPreviewAudioName))
+					{
+						_fe3d.audioEntity_pause(_currentPreviewAudioName);
+					}
 				}
 
 				// Placing audiocaster

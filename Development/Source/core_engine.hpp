@@ -19,7 +19,7 @@
 #include "gui_entity_manager.hpp"
 #include "text_entity_manager.hpp"
 #include "shadow_manager.hpp"
-#include "mouse_picker.hpp"
+#include "ray_caster.hpp"
 #include "model_editor.hpp"
 #include "environment_editor.hpp"
 #include "collision_resolver.hpp"
@@ -55,7 +55,7 @@ private:
 	GuiEntityManager       _guiEntityManager;
 	TextEntityManager      _textEntityManager;
 	ShadowManager          _shadowManager;
-	MousePicker            _mousePicker;
+	RayCaster            _rayCaster;
 	CollisionDetector      _collisionDetector;
 	CollisionResolver      _collisionResolver;
 	Timer                  _timer;

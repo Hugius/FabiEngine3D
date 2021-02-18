@@ -15,18 +15,20 @@ void SceneEditor::_updateBillboardPlacing()
 				Vec3 newPosition = Vec3(0.0f);
 
 				// Check if a terrain is loaded
-				if (_fe3d.terrainEntity_getSelectedID() != "")
+				if (_fe3d.terrainEntity_getSelectedID() != "" && _fe3d.terrainEntity_isCursorPosition3dValid())
 				{
 					// Show preview billboard
 					_fe3d.billboardEntity_show(_currentPreviewBillboardName);
 
 					// Update preview billboard position
-					if (_fe3d.terrainEntity_isCursorPosition3dValid())
-					{
-						Vec2 size = _fe3d.billboardEntity_getSize(_currentPreviewBillboardName);
-						newPosition = _fe3d.terrainEntity_getCursorPosition3D() + Vec3(0.0f, size.y / 2.0f, 0.0f);
-						_fe3d.billboardEntity_setPosition(_currentPreviewBillboardName, newPosition);
-					}
+					Vec2 size = _fe3d.billboardEntity_getSize(_currentPreviewBillboardName);
+					newPosition = _fe3d.terrainEntity_getCursorPosition3D() + Vec3(0.0f, size.y / 2.0f, 0.0f);
+					_fe3d.billboardEntity_setPosition(_currentPreviewBillboardName, newPosition);
+				}
+				else
+				{
+					// Hide preview billboard
+					_fe3d.billboardEntity_hide(_currentPreviewBillboardName);
 				}
 
 				// Placing billboard

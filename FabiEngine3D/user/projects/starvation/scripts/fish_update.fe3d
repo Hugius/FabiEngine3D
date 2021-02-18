@@ -1,12 +1,13 @@
-38 86
+2 20
 META script_type_update
 
 /// Temporary values
 STR currentWorld = fe3d:scene_get_current()
 STR toolID = _inventory[_equipIndex]
-VEC3 terrainPos = fe3d:terrain_get_cursor_position()
+VEC3 terrainPoint = fe3d:terrain_get_cursor_position()
 VEC3 camPos = fe3d:camera_get_position()
 DEC waterY = fe3d:water_get_height()
+BOOL isValid = fe3d:terrain_is_cursor_position_valid()
 
 /// Check if throwing is finished
 IF _isFishrodPlaying IS <true>:
@@ -26,7 +27,7 @@ IF currentWorld IS "home":
     DEC maxCamY = 33.0
 ELIF currentWorld IS "starvia_outside":
     DEC maxCamY = 8.0
-BOOL a = (terrainPos.y LESS waterY AND camPos.y LESS maxCamY AND terrainPos.y NOT 0.0)
+BOOL a = (terrainPoint.y LESS waterY AND camPos.y LESS maxCamY AND isValid IS <true>)
 fe3d:text_set_visible("fish", <false>)
 IF a IS <true>:
     IF _isFishing IS <true>:

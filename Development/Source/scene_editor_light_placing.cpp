@@ -15,7 +15,7 @@ void SceneEditor::_updateLightPlacing()
 				Vec3 newPosition = Vec3(0.0f);
 
 				// Check if a terrain is loaded
-				if (_fe3d.terrainEntity_getSelectedID() != "")
+				if (_fe3d.terrainEntity_getSelectedID() != "" && _fe3d.terrainEntity_isCursorPosition3dValid())
 				{
 					// Update preview pointlight position
 					newPosition = _fe3d.terrainEntity_getCursorPosition3D() + Vec3(0.0f, 1.0f, 0.0f);
@@ -25,6 +25,12 @@ void SceneEditor::_updateLightPlacing()
 					_fe3d.gameEntity_show(_previewPointlightID);
 					_fe3d.lightEntity_setPosition(_previewPointlightID, newPosition);
 					_fe3d.gameEntity_setPosition(_previewPointlightID, newPosition);
+				}
+				else
+				{
+					// Hide preview pointlight
+					_fe3d.gameEntity_hide(_previewPointlightID);
+					_fe3d.lightEntity_hide(_previewPointlightID);
 				}
 
 				// Placing pointlight

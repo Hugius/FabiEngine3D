@@ -312,7 +312,7 @@ Click [here](#script-editor-example) to see an example
 - You can **add** a new value to the list using: `PUSH <name> <value>`
 - You can **delete** an existing value from the list using: `PULL <name> <index>`
 - Remember: an index starts from **0**!
-- NOTE: you **cannot** access a VEC3 decimal from a list directly
+- You **cannot** access a VEC3 decimal from a list directly
 #### Example code
 ```
 /// Variable syntax for each type
@@ -364,11 +364,16 @@ NEG myInteger
 /// Now myInteger will be -8
 ```
 ### Logic operations
-#### Logic types
+#### Comparison operators
 - To check if two values are **the same**: `<value> IS <value>`
 - To check if two values are **different**: `<value> NOT <value>`
 - To check if one value is **higher** than the other: `<value> MORE <value>` (only works for `INT` and `DEC` values)
 - To check if one value is **lower** than the other: `<value> LESS <value>` (only works for `INT` and `DEC` values)
+- You cannot use different comparison value types (example: `5 IS 5.0` will not work, but `5 IS 5` will do)
+#### Logic operators
+- To check if **all** the comparison statements are true: `<comparison> AND <comparison>`
+- To check if ***any** of the comparison statements are true: `<comparison> OR <comparison>`
+- You **cannot** combine the `AND` and `OR` keywords in one logic statement
 #### Logic statements
 - There are 3 types: if-statement, elif-statement, else-statement
 - Every logic statement **must** end with a `:`
@@ -379,12 +384,14 @@ NEG myInteger
 #### Example code
 ```
 INT age = 41
-IF test IS 42:
-    fe3d:print("i am 42!")
+IF age IS 41 AND "hello" IS "world":
+    fe3d:print("You should not see this message!")
+ELIF test IS 42:
+    fe3d:print("I am 42!")
 ELIF age LESS 42:
-    fe3d:print("i am younger than 42!")
+    fe3d:print("I am younger than 42!")
 ELSE:
-    fe3d:print("i am higher than 42!")
+    fe3d:print("I am higher than 42!")
 ```
 ### Loops
 - Use a `LOOP` statement if you want to run a block of code multiple times
@@ -427,17 +434,23 @@ fe3d:print("hello world")
 ### Functions
 - You can call functions that are built-in FabiEngine3D
 - There are 3 types of functions: `fe3d` functions, `math` functions, `misc` functions
+- Functions **can** return a value, which can be saved in a variable
 #### Example code
 ```
 STR myString = "i am printed"
+fe3d:camera_set_position(1.0, 2.0, 3.0)
+VEC3 camPos = fe3d:camera_get_position()
 fe3d:print(myString)
+fe3d:print(camPos.x)
 
 /// Console output:
 /// > i am printed
+/// > 1.0
 ```
 ### Tips & tricks
 - You can set the value of a `BOOL` variable to the result of a condition using: `... <name> = (<condition>)`
 - You can use the `PASS` statement as an empty placeholder for a logical statement or loop
+- Be careful with loops as they can become indefinite. Luckily this will get detected eventually.
 
 # Function List
 ### Engine functions
@@ -506,14 +519,23 @@ fe3d:print(myString)
 - `fe3d:camera_set_max_pitch`(`DEC` degrees) ---> `NONE`  
   Sets the maximum camera pitch in **degrees**.
 #### Physics
+> The default raycast distance if not intersecting is the maximum availible decimal number
 - `fe3d:raycast_into_model`(`STR` model, `STR` aabbpart, `BOOL` occludable) ---> `STR`  
-  Returns the ID of the model that is selected. All models which ID starts with **model** will be checked (leave empty for all models). Only the **aabbpart** will be checked (leave empty for all parts). **occludable** means if the raycast can be blocked by other AABBs. 
+  Returns the ID of the model that is selected. All models which ID starts with **model** will be checked (leave empty for all models). Only the **aabbpart** will be checked (leave empty for all parts). **occludable** means if the raycast can be blocked by other AABBs.
 - `fe3d:raycast_into_models`() ---> `STR`  
   Returns the ID of any model that is selected.
 - `fe3d:raycast_into_billboard`(`STR` billboard,  `BOOL` occludable) ---> `STR`  
-  Returns the ID of the billboard that is selected. All billboards which ID starts with **billboards** will be checked (leave empty for all billboards). **occludable** means if the raycast can be blocked by other AABBs. 
+  Returns the ID of the billboard that is selected. All billboards which ID starts with **billboards** will be checked (leave empty for all billboards). **occludable** means if the raycast can be blocked by other AABBs.
 - `fe3d:raycast_into_billboards`() ---> `STR`  
   Returns the ID of any billboard that is selected.
+- `fe3d:raycast_into_model_distance`(`STR` model, `STR` aabbpart, `BOOL` occludable) ---> `DEC`  
+  Returns the distance to the model that is selected. All models which ID starts with **model** will be checked (leave empty for all models). Only the **aabbpart** will be checked (leave empty for all parts). **occludable** means if the raycast can be blocked by other AABBs. Returns -1.0 if the model is not selected.
+- `fe3d:raycast_into_models_distance`() ---> `DEC`  
+  Returns the distance to any model that is selected. Returns -1.0 if no model is selected.
+- `fe3d:raycast_into_billboard_distance`(`STR` billboard,  `BOOL` occludable) ---> `DEC`  
+  Returns the distance to the billboard that is selected. All billboards which ID starts with **billboards** will be checked (leave empty for all billboards). **occludable** means if the raycast can be blocked by other AABBs. Returns -1.0 if the billboard is not selected.
+- `fe3d:raycast_into_billboards_distance`() ---> `DEC`  
+  Returns the distance to any billboard that is selected. Returns -1.0 if the billboard is not selected.
 - `fe3d:collision_enable_camera_terrain_response`(`DEC` height,  `DEC` speed) ---> `NONE`  
   Enables camera collision with the terrain surface (if existing). **height** is the minimum height the camera should be above the terrain. **speed** is the speed at which the camera corrects its height based on the terrain surface.
 - `fe3d:collision_disable_camera_terrain_response`() ---> `NONE`  
@@ -541,8 +563,15 @@ fe3d:print(myString)
 - `fe3d:collision_check_model_aabbs`(`STR` model, `STR` aabbpart, `STR` aabb) ---> `STR`  
   Returns the ID of the AABB that has collided with the **aabbpart** of **model**. All AABBs which ID starts with **aabb** will be checked (leave empty for all AABBs).
 #### Graphics
+
 #### Sky
 #### Terrain
+- `fe3d:terrain_get_cursor_position`() ---> `VEC3`  
+  Returns the 3D raycasted position of the cursor that intersects with the terrain. Returns -1.0 if not intersecting with terrain.
+- `fe3d:terrain_is_cursor_position_valid`() ---> `BOOL`  
+  Returns true if 3D cursor position is valid.
+- `fe3d:terrain_get_pixel_height`(`DEC` x, `DEC` z) ---> `DEC`  
+  Returns the height of the pixel in the height map based on X and Z. Returns 0.0 if **x** or **z** is invalid.
 #### Water
 #### Model
 #### Animations
@@ -629,7 +658,13 @@ fe3d:print(myString)
 - All rotational **degrees** cannot be higher than 360 or lower than -360 (for example 500 will be 140)
 - AABB's will transform based on their rotation, but only in 90 degree steps (0, 90, 180, 270 degrees)
 - The top viewport has a button called "**uncache**" which forces the engine to load an asset again, even if it was cached
-- You can clear the console output by pressing **C** when hovering the console window
+- You can **clear** the console output by pressing **C** when hovering the **console window**
+- Internal engine updates happen **after** the scripting updates (keep this is mind when working with bound AABBs)
+- You **can** individually access (bound) AABBs that are placed through **scripting**
+- You **cannot** individually access bound AABBs from a **scene**
+- FabiEngine3D does **not** support a camera roll, because of the infamous Gimbal Lock
+- FabiEngine3D **does** come with first person camera support, but **not** third person
+- Camera pitch angle is clamped between -90.0 and 90.0
 ### Performance
 - Click [here](#performance-statistics-example) to see an example
 - You can use the performance statistics to analyze your **game's performance**

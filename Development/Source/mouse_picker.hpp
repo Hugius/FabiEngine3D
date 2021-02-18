@@ -22,10 +22,10 @@ private:
 	Vec2 _converToNDC(Ivec2 val);
 	Vec4 _convertToViewSpace(Vec4 value);
 	Vec3 _convertToWorldSpace(Vec4 value);
-	Vec3 _getPointOnRay(Vec3 ray, float distance);
-	Vec3 _calculateTerrainPoint(int count, float start, float end, Vec3 ray, TerrainEntityManager& terrainManager);
+	Vec3 _getPointOnRay(float distance);
+	Vec3 _calculateTerrainPoint(float maxDistance, TerrainEntityManager& terrainManager);
 
-	bool _isNotUnderTerrain(float start, float end, Vec3 ray, TerrainEntityManager& terrainManager);
+	bool _isUnderTerrain(float start, float end, TerrainEntityManager& terrainManager);
 
 	Vec3 _ray = Vec3(0.0f);
 	Vec3 _terrainPoint = Vec3(0.0f);

@@ -1,4 +1,4 @@
-20 40
+20 39
 META script_type_update
 
 /// Update stone hover
@@ -19,7 +19,7 @@ IF hoveredID NOT "" AND stonesException IS "":
         EDIT isHovered = <true>
         STR ps = "pickaxe_stone"
         STR pi = "pickaxe_iron"
-        IF toolID IS ps OR toolID IS pi":
+        IF toolID IS ps OR toolID IS pi:
             IF _isInvOpen IS <true>:
                 fe3d:text_set_visible("mine", <true>)
 

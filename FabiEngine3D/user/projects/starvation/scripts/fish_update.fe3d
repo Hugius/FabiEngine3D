@@ -1,4 +1,4 @@
-27 86
+38 86
 META script_type_update
 
 /// Temporary values
@@ -37,5 +37,5 @@ IF a IS <true>:
                 fe3d:model_resume_animation("fishrod", "fishrod_throw")
                 INCR _bag[5] 1
                 DECR _durabilities[8] _durabilityHit
-    ELIF toolID IS "fishrod" AND _isInvOpen IS <true>:
+    ELIF toolID IS "fishrod" AND _isInvOpen IS <true> AND _isFishrodPlaying IS <false>:
         fe3d:text_set_visible("fish", <true>)

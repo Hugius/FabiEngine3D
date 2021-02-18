@@ -1,4 +1,4 @@
-14 78
+9 30
 META script_type_update
 
 /// Update workbench hover
@@ -7,6 +7,8 @@ BOOL isHovered = <false>
 STR hoveredID = fe3d:raycast_into_model("workbench", "", <true>)
 IF hoveredID NOT "" AND _isBuilding IS <false>:
     DEC distance = fe3d:raycast_into_model_distance("workbench", "", <true>)
+    IF distance IS -1.0:
+        EDIT distance = 1000.0
     IF distance LESS _maxReach AND _isCrafting IS <false>:
         EDIT isHovered = <true>
         fe3d:text_set_visible("craft", <true>)

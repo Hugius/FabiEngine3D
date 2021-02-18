@@ -1,4 +1,4 @@
-19 39
+20 16
 META script_type_update
 
 /// Compose pickuppable items
@@ -18,6 +18,8 @@ LOOP:
         EDIT hoveredID = fe3d:raycast_into_model(itemName, "", <true>)
         IF hoveredID NOT "":
             DEC distance = fe3d:raycast_into_model_distance(itemName, "", <true>)
+            IF distance IS -1.0:
+                EDIT distance = 1000.0
             IF distance LESS _maxReach:
                 fe3d:text_set_visible("pickup", <true>)
                 BREAK

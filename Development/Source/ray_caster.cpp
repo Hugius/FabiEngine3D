@@ -5,22 +5,23 @@
 
 #include <algorithm>
 
-RayCaster::RayCaster(RenderBus& renderBus) :
-	_renderBus(renderBus)
+RayCaster::RayCaster(RenderBus& renderBus, TerrainEntityManager& terrainManager) :
+	_renderBus(renderBus),
+	_terrainManager(terrainManager)
 {
 
 }
 
-void RayCaster::update(Ivec2 mousePos, TerrainEntityManager& terrainManager)
+void RayCaster::update(Ivec2 mousePos)
 {
-	// Simple raycasting
+	// Update raycasting
 	Vec3 mouseRay = _getMouseRay(Ivec2(mousePos.x, Config::getInst().getWindowHeight() - mousePos.y));
 	_ray = mouseRay;
 
-	// Check if a terrain is selected
-	if (terrainManager.getSelectedTerrain() != nullptr)
+	// Update mouse picking on terrain
+	if (_terrainManager.getSelectedTerrain() != nullptr)
 	{
-		_terrainPoint = _calculateTerrainPoint(terrainManager.getSelectedTerrain()->getSize() * 2.0f, terrainManager);
+		_terrainPoint = _calculateTerrainPoint(_terrainManager.getSelectedTerrain()->getSize() / 10.0f);
 	}
 	else
 	{
@@ -108,52 +109,50 @@ Vec3 RayCaster::_getPointOnRay(float distance)
 	return cameraPos + scaledRay;
 }
 
-bool RayCaster::_isUnderTerrain(float start, float end, TerrainEntityManager& terrainManager)
+bool RayCaster::_isUnderTerrain(float distance)
 {
-	Vec3 startPoint = _getPointOnRay(start);
-	Vec3 endPoint   = _getPointOnRay(end);
+	// Scale ray
+	Vec3 scaledRay = _getPointOnRay(distance);
 
-	float startHeight = terrainManager.getPixelHeight(
-		terrainManager.getSelectedTerrain()->getID(),
-		startPoint.x + terrainManager.getSelectedTerrain()->getSize() / 2.0f, 
-		startPoint.z + terrainManager.getSelectedTerrain()->getSize() / 2.0f);
+	// Retrieve height
+	auto selectedTerrain = _terrainManager.getSelectedTerrain();
+	float terrainHeight = _terrainManager.getPixelHeight(
+		selectedTerrain->getID(),
+		scaledRay.x + (selectedTerrain->getSize() / 2.0f), 
+		scaledRay.z + (selectedTerrain->getSize() / 2.0f));
 
-	float endHeight = terrainManager.getPixelHeight(
-		terrainManager.getSelectedTerrain()->getID(),
-		endPoint.x + (terrainManager.getSelectedTerrain()->getSize() / 2.0f), 
-		endPoint.z + (terrainManager.getSelectedTerrain()->getSize() / 2.0f));
-
-	return (startPoint.y > startHeight && endPoint.y < endHeight);
+	// Return
+	return (scaledRay.y < terrainHeight);
 }
 
-Vec3 RayCaster::_calculateTerrainPoint(float maxDistance, TerrainEntityManager& terrainManager)
+Vec3 RayCaster::_calculateTerrainPoint(float maxDistance)
 {
-	float total = 0.0f;
+	// Temporary values
+	float distance = 0.0f;
+	float step = 0.1f;
 
 	// Try to find point on terrain
-	while (total < maxDistance)
+	while (distance < maxDistance)
 	{
 		// Intersected with terrain
-		if (_isUnderTerrain(0.0f, total, terrainManager))
+		if (_isUnderTerrain(distance))
 		{
-			Vec3 endPoint = _getPointOnRay(total - 0.05f);
+			// Calculate point on terrain
+			Vec3 endPoint = _getPointOnRay(distance - (step / 2.0f));
 
 			// Check if selected point is inside the terrain size
-			if (terrainManager.isInside(
-				terrainManager.getSelectedTerrain()->getID(),
-				endPoint.x + (terrainManager.getSelectedTerrain()->getSize() / 2.0f),
-				endPoint.z + (terrainManager.getSelectedTerrain()->getSize() / 2.0f)))
+			auto selectedTerrain = _terrainManager.getSelectedTerrain();
+			if (_terrainManager.isInside(
+				selectedTerrain->getID(),
+				endPoint.x + (selectedTerrain->getSize() / 2.0f),
+				endPoint.z + (selectedTerrain->getSize() / 2.0f)))
 			{
 				return endPoint;
-			}
-			else
-			{
-				return Vec3(-1.0f);
 			}
 		}
 		else
 		{
-			total += 0.1f;
+			distance += step;
 		}
 	}
 

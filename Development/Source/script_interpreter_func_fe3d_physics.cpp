@@ -102,7 +102,7 @@ bool ScriptInterpreter::_executeFe3dPhysicsFunction(const string& functionName, 
 			// Find aabbEntity ID
 			string searchID = arguments[0].getString() + (!arguments[1].getString().empty() ? ("_" + arguments[1].getString()) : "");
 			auto intersection = _fe3d.collision_checkCursorInEntities(searchID, arguments[2].getBoolean());
-			float result = (std::numeric_limits<float>::max)();
+			float result = -1.0f;
 
 			// Retrieve bound gameEntity ID
 			if (!intersection.first.empty() && (_fe3d.aabbEntity_getParentType(intersection.first) == AabbParentType::GAME_ENTITY))
@@ -121,7 +121,7 @@ bool ScriptInterpreter::_executeFe3dPhysicsFunction(const string& functionName, 
 		{
 			// Find aabbEntity ID
 			auto intersection = _fe3d.collision_checkCursorInAny();
-			float result = (std::numeric_limits<float>::max)();
+			float result = -1.0f;
 
 			// Check if aabbEntity entity has a parent gameEntity
 			if (!intersection.first.empty() && _fe3d.aabbEntity_getParentType(intersection.first) == AabbParentType::GAME_ENTITY)
@@ -142,7 +142,7 @@ bool ScriptInterpreter::_executeFe3dPhysicsFunction(const string& functionName, 
 		{
 			// Find aabbEntity ID
 			auto intersection = _fe3d.collision_checkCursorInEntities(arguments[0].getString(), arguments[1].getBoolean());
-			float result = (std::numeric_limits<float>::max)();
+			float result = -1.0f;
 
 			// Retrieve bound billboardEntity ID
 			if (!intersection.first.empty() && (_fe3d.aabbEntity_getParentType(intersection.first) == AabbParentType::BILLBOARD_ENTITY))
@@ -161,7 +161,7 @@ bool ScriptInterpreter::_executeFe3dPhysicsFunction(const string& functionName, 
 		{
 			// Find aabbEntity ID
 			auto intersection = _fe3d.collision_checkCursorInAny();
-			float result = (std::numeric_limits<float>::max)();
+			float result = -1.0f;
 
 			// Check if aabbEntity entity has a parent billboardEntity
 			if (!intersection.first.empty() && _fe3d.aabbEntity_getParentType(intersection.first) == AabbParentType::BILLBOARD_ENTITY)

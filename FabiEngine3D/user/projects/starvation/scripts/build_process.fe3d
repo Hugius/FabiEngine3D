@@ -1,4 +1,4 @@
-49 82
+13 30
 META script_type_update
 
 /// Check if a built building is selected
@@ -11,6 +11,8 @@ LOOP:
         BREAK
     EDIT hoveredID = fe3d:raycast_into_model(_buildables[index], "", <true>)
     EDIT distance = fe3d:raycast_into_model_distance(_buildables[index], "", <true>)
+    IF distance IS -1.0:
+        EDIT distance = 1000.0
     IF hoveredID NOT "":
         BREAK
     INCR index 1

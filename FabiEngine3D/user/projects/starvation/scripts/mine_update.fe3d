@@ -1,4 +1,4 @@
-20 39
+9 20
 META script_type_update
 
 /// Update stone hover
@@ -8,6 +8,8 @@ BOOL allowed = <true>
 STR toolID = _inventory[_equipIndex]
 STR hoveredID = fe3d:raycast_into_model("stone", "", <true>)
 DEC distance = fe3d:raycast_into_model_distance("stone", "", <true>)
+IF distance IS -1.0:
+    EDIT distance = 1000.0
 STR stonesException = fe3d:raycast_into_model("stones", "", <true>)
 IF hoveredID NOT "" AND stonesException IS "":
     VEC3 stonePos = fe3d:model_get_position(hoveredID)
@@ -50,6 +52,8 @@ IF _fallingStonesID NOT "":
 /// Stones picking updates
 EDIT hoveredID = fe3d:raycast_into_model("stones", "", <true>)
 EDIT distance = fe3d:raycast_into_model_distance("stones", "", <true>)
+IF distance IS -1.0:
+    EDIT distance = 1000.0
 IF hoveredID NOT "" AND _wasPickupPlaying IS <true> AND _isPickupPlaying IS <false>:
     IF distance LESS _maxReach:
         fe3d:model_delete(hoveredID)

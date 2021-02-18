@@ -24,7 +24,7 @@ CoreEngine::CoreEngine(FabiEngine3D& fe3d) :
 	_guiEntityManager(_meshLoader, _textureLoader, _renderBus),
 	_textEntityManager(_meshLoader, _textureLoader, _renderBus),
 	_shadowManager(),
-	_rayCaster(_renderBus),
+	_rayCaster(_renderBus, _terrainEntityManager),
 	_collisionDetector(),
 	_collisionResolver(_collisionDetector),
 	_timer(),

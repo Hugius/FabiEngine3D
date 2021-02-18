@@ -68,15 +68,12 @@ vec3 applyFog(vec3 color)
         // Calculate distance in world space
         float distance = length(f_pos.xyz - u_cameraPosition);
 
-        // Determine if in fog range
-        if(distance > u_fogMaxDistance)
-        {
-            return mix(color, u_fogColor, u_fogDefaultFactor);
-        }
-        else
-        {
-            return mix(u_fogColor, color, min(u_fogMinDistance / distance, 1.0f));
-        }
+        // Calculate fog intensity
+		float difference = u_fogMaxDistance - u_fogMinDistance;
+		float part = (distance - u_fogMinDistance) / difference;
+		part = clamp(part, 0.0f, 1.0f);
+		float factor = part * u_fogDefaultFactor;
+		return mix(color, u_fogColor, factor);
 	}
 	else
 	{

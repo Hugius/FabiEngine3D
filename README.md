@@ -471,6 +471,7 @@ fe3d:print(camPos.x)
   Returns true is a mouse **button** is toggled by a press.
 - `fe3d:input_get_mousewheel_direction`() ---> `INT`  
   Returns the direction of the scrolling wheel. 1 = up, -1 = down, 0 = not scrolling.
+
 #### Camera
 - `fe3d:camera_move`(`DEC` x, `DEC` y, `DEC` z) ---> `NONE`  
   Moves the XYZ camera position with speed **xyz**.
@@ -518,8 +519,18 @@ fe3d:print(camPos.x)
   Moves the cursor position to the middle of the screen.
 - `fe3d:camera_set_max_pitch`(`DEC` degrees) ---> `NONE`  
   Sets the maximum camera pitch in **degrees**.
-#### Physics
-> The default raycast distance if not intersecting is the maximum availible decimal number
+
+#### Raycasting
+- `fe3d:raycast_enable_terrain_positioning`(`DEC` distance, `DEC` precision) ---> `NONE`  
+  Enables raycasting on terrain. Only works when a terrain is selected. **distance** is the maximum distance from the camera towards a point on the terrain. **precision** is how   precise the raycast should be. These values have impact on the performance!
+- `fe3d:raycast_disable_terrain_positioning`() ---> `NONE`  
+  Disables raycasting on terrain.
+- `fe3d:raycast_get_vector`() ---> `VEC3`  
+  Returns the raycast vector (from 2D cursor position to 3D ray).
+- `fe3d:raycast_get_position_on_terrain`() ---> `VEC3`  
+  Returns the 3D raycasted position of the cursor that intersects with the terrain. Returns -1.0 if not intersecting with terrain.
+- `fe3d:raycast_is_position_on_terrain_valid`() ---> `BOOL`  
+  Returns true if 3D cursor position is valid.
 - `fe3d:raycast_into_model`(`STR` model, `STR` aabbpart, `BOOL` occludable) ---> `STR`  
   Returns the ID of the model that is selected. All models which ID starts with **model** will be checked (leave empty for all models). Only the **aabbpart** will be checked (leave empty for all parts). **occludable** means if the raycast can be blocked by other AABBs.
 - `fe3d:raycast_into_models`() ---> `STR`  
@@ -536,6 +547,8 @@ fe3d:print(camPos.x)
   Returns the distance to the billboard that is selected. All billboards which ID starts with **billboards** will be checked (leave empty for all billboards). **occludable** means if the raycast can be blocked by other AABBs. Returns -1.0 if the billboard is not selected.
 - `fe3d:raycast_into_billboards_distance`() ---> `DEC`  
   Returns the distance to any billboard that is selected. Returns -1.0 if the billboard is not selected.
+  
+#### Collision
 - `fe3d:collision_enable_camera_terrain_response`(`DEC` height,  `DEC` speed) ---> `NONE`  
   Enables camera collision with the terrain surface (if existing). **height** is the minimum height the camera should be above the terrain. **speed** is the speed at which the camera corrects its height based on the terrain surface.
 - `fe3d:collision_disable_camera_terrain_response`() ---> `NONE`  
@@ -562,27 +575,63 @@ fe3d:print(camPos.x)
   Returns the ID of the billboard that has collided with the **aabbpart** of **model**. All billboards which ID starts with **billboard** will be checked (leave empty for all billboards).
 - `fe3d:collision_check_model_aabbs`(`STR` model, `STR` aabbpart, `STR` aabb) ---> `STR`  
   Returns the ID of the AABB that has collided with the **aabbpart** of **model**. All AABBs which ID starts with **aabb** will be checked (leave empty for all AABBs).
+
 #### Graphics
 
 #### Sky
+- `fe3d:sky_mix_with_current`(`STR` skyID) ---> `NONE`  
+  Blends the selected sky texture with the texture of **skyID**.
+- `fe3d:sky_set_mix_value`(`DEC` value) ---> `NONE`  
+  Sets the mix **value** to blend the 2 sky textures. The value must be between 0.0 and 1.0 (0% and 100% respectively).
+- `fe3d:sky_get_mix_value`() ---> `DEC`  
+  Returns the mix value of the selected sky.
+- `fe3d:sky_set_rotation_speed`(`DEC` speed) ---> `NONE`  
+  Sets the rotation **speed** of the selected sky.
+- `fe3d:sky_get_rotation_speed`() ---> `DEC`  
+  Returns the rotation **speed** of the selected sky.
+
 #### Terrain
-- `fe3d:terrain_get_cursor_position`() ---> `VEC3`  
-  Returns the 3D raycasted position of the cursor that intersects with the terrain. Returns -1.0 if not intersecting with terrain.
-- `fe3d:terrain_is_cursor_position_valid`() ---> `BOOL`  
-  Returns true if 3D cursor position is valid.
+- `fe3d:terrain_get_max_height`() ---> `DEC`  
+  Returns the maximum height of the selected terrain (based on the heightmap pixels values).
+- `fe3d:terrain_get_size`() ---> `DEC`  
+  Returns size of the selected terrain.
 - `fe3d:terrain_get_pixel_height`(`DEC` x, `DEC` z) ---> `DEC`  
-  Returns the height of the pixel in the height map based on X and Z. Returns 0.0 if **x** or **z** is invalid.
+  Returns the height of the pixel in the selected terrain height map based on X and Z. Returns 0.0 if **x** or **z** is invalid.
+
 #### Water
+- `fe3d:water_set_speed`(`DEC` x, `DEC` z) ---> `NONE`  
+  Sets the rippling/waving speed of the selected water in the **x** direction and **z** direction.
+- `fe3d:water_get_speed_x`() ---> `DEC`  
+  Returns the rippling/waving speed of the selected water in the X direction.
+- `fe3d:water_get_speed_z`() ---> `DEC`  
+  Returns the rippling/waving speed of the selected water in the Z direction.
+- `fe3d:water_get_height`() ---> `DEC`  
+  Returns the height (Y position) of the selected water.
+- `fe3d:water_set_color`(`DEC` r, `DEC` g, `DEC` b) ---> `NONE`  
+  Sets the color of the selected water based on the **r g b** channels.
+- `fe3d:water_get_color`() ---> `VEC3`  
+  Returns the color of the selected water.
+
 #### Model
+
 #### Animations
+
 #### Billboard
+
 #### AABB
+
 #### Light
+
 #### Audio
+
 #### Music
+
 #### Image
+
 #### Text
+
 #### Miscellaneous
+
 ### Math functions
 - `math:tan`(`DEC` degrees) ---> `DEC`  
   Returns the tangent of **degrees**.

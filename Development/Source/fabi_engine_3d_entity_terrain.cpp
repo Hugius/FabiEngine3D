@@ -114,16 +114,6 @@ bool FabiEngine3D::terrainEntity_isInside(const string& ID, float x, float z)
 	return _core->_terrainEntityManager.isInside(ID, x, z);
 }
 
-Vec3 FabiEngine3D::terrainEntity_getCursorPosition3D()
-{
-	return _core->_rayCaster.getTerrainPoint();
-}
-
-bool FabiEngine3D::terrainEntity_isCursorPosition3dValid()
-{
-	return (_core->_rayCaster.getTerrainPoint() != Vec3(-1.0f));
-}
-
 float FabiEngine3D::terrainEntity_getPixelHeight(const string& ID, float x, float z)
 {
 	return _core->_terrainEntityManager.getPixelHeight(ID, x, z);

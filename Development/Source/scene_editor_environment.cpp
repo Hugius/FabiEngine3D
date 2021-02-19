@@ -155,6 +155,16 @@ void SceneEditor::_updateTerrainMenu()
 			// Buttons hoverability
 			screen->getButton("delete")->setHoverable(_currentTerrainID != "");
 		}
+
+		// Terrain raycasting
+		if (_fe3d.terrainEntity_getSelectedID().empty())
+		{
+			_fe3d.misc_disableTerrainRaycasting();
+		}
+		else
+		{
+			_fe3d.misc_enableTerrainRaycasting(_fe3d.terrainEntity_getSize(_fe3d.terrainEntity_getSelectedID()), 0.1f);
+		}
 	}
 }
 

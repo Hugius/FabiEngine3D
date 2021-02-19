@@ -18,15 +18,37 @@ void RayCaster::update(Ivec2 mousePos)
 	Vec3 mouseRay = _getMouseRay(Ivec2(mousePos.x, Config::getInst().getWindowHeight() - mousePos.y));
 	_ray = mouseRay;
 
-	// Update mouse picking on terrain
-	if (_terrainManager.getSelectedTerrain() != nullptr)
+	// Update cursor positioning on terrain
+	if (_isTerrainPointingEnabled)
 	{
-		_terrainPoint = _calculateTerrainPoint(_terrainManager.getSelectedTerrain()->getSize() / 10.0f);
+		if (_terrainManager.getSelectedTerrain() != nullptr)
+		{
+			_terrainPoint = _calculateTerrainPoint();
+		}
+		else
+		{
+			_terrainPoint = Vec3(-1.0f);
+		}
 	}
 	else
 	{
 		_terrainPoint = Vec3(-1.0f);
 	}
+}
+
+void RayCaster::setTerrainPointingEnabled(bool enabled)
+{
+	_isTerrainPointingEnabled = enabled;
+}
+
+void RayCaster::setTerrainPointingDistance(float distance)
+{
+	_terrainPointingDistance = distance;
+}
+
+void RayCaster::setTerrainPointingPrecision(float precision)
+{
+	_terrainPointingPrecision = precision;
 }
 
 float RayCaster::checkCursorInBox(Vec3 lb, Vec3 rt, Vec3 cameraPos) // From some stackoverflow post I forgot
@@ -125,20 +147,19 @@ bool RayCaster::_isUnderTerrain(float distance)
 	return (scaledRay.y < terrainHeight);
 }
 
-Vec3 RayCaster::_calculateTerrainPoint(float maxDistance)
+Vec3 RayCaster::_calculateTerrainPoint()
 {
 	// Temporary values
 	float distance = 0.0f;
-	float step = 0.1f;
 
 	// Try to find point on terrain
-	while (distance < maxDistance)
+	while (distance < _terrainPointingDistance)
 	{
 		// Intersected with terrain
 		if (_isUnderTerrain(distance))
 		{
 			// Calculate point on terrain
-			Vec3 endPoint = _getPointOnRay(distance - (step / 2.0f));
+			Vec3 endPoint = _getPointOnRay(distance - (_terrainPointingPrecision / 2.0f));
 
 			// Check if selected point is inside the terrain size
 			auto selectedTerrain = _terrainManager.getSelectedTerrain();
@@ -152,7 +173,7 @@ Vec3 RayCaster::_calculateTerrainPoint(float maxDistance)
 		}
 		else
 		{
-			distance += step;
+			distance += _terrainPointingPrecision;
 		}
 	}
 

@@ -15,10 +15,10 @@ void SceneEditor::_updateLightPlacing()
 				Vec3 newPosition = Vec3(0.0f);
 
 				// Check if a terrain is loaded
-				if (_fe3d.terrainEntity_getSelectedID() != "" && _fe3d.terrainEntity_isCursorPosition3dValid())
+				if (_fe3d.terrainEntity_getSelectedID() != "" && _fe3d.misc_isRaycastPositionOnTerrainValid())
 				{
 					// Update preview pointlight position
-					newPosition = _fe3d.terrainEntity_getCursorPosition3D() + Vec3(0.0f, 1.0f, 0.0f);
+					newPosition = _fe3d.misc_getRaycastPositionOnTerrain() + Vec3(0.0f, 1.0f, 0.0f);
 
 					// Show preview pointlight
 					_fe3d.lightEntity_show(_previewPointlightID);
@@ -34,7 +34,7 @@ void SceneEditor::_updateLightPlacing()
 				}
 
 				// Placing pointlight
-				if ((_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) && _fe3d.terrainEntity_isCursorPosition3dValid()) // If user pressed LMB
+				if ((_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) && _fe3d.misc_isRaycastPositionOnTerrainValid()) // If user pressed LMB
 					|| _fe3d.terrainEntity_getSelectedID() == "") // Can be bypassed if terrain does not exist
 				{
 					// Add new pointlight

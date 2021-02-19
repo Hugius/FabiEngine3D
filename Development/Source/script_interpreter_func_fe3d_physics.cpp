@@ -3,7 +3,66 @@
 bool ScriptInterpreter::_executeFe3dPhysicsFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine type of function
-	if (functionName == "fe3d:raycast_into_model") // Raycasting into multiple gameEntities
+	if (functionName == "fe3d:raycast_enable_terrain_positioning") // Enable raycasting
+	{
+		auto types = { ScriptValueType::DECIMAL, ScriptValueType::DECIMAL }; // Distance + precision
+
+		// Validate arguments
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		{
+			_fe3d.misc_enableTerrainRaycasting(arguments[0].getDecimal(), arguments[1].getDecimal());
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+		}
+	}
+	else if (functionName == "fe3d:raycast_disable_terrain_positioning") // Disable raycasting
+	{
+		// Validate arguments
+		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			_fe3d.misc_disableTerrainRaycasting();
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+		}
+	}
+	else if (functionName == "fe3d:raycast_get_vector") // Get the raycast vector
+	{
+		// Validate arguments
+		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			// Validate terrain existence
+			if (_validateFe3dTerrainEntity())
+			{
+				auto result = _fe3d.misc_getRaycastVector();
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));
+			}
+		}
+	}
+	else if (functionName == "fe3d:raycast_get_position_on_terrain") // Get the cursor position on the terrain
+	{
+		// Validate arguments
+		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			// Validate terrain existence
+			if (_validateFe3dTerrainEntity())
+			{
+				auto result = _fe3d.misc_getRaycastPositionOnTerrain();
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));
+			}
+		}
+	}
+	else if (functionName == "fe3d:raycast_is_position_on_terrain_valid") // Check if the position on the terrain is valid
+	{
+		// Validate arguments
+		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			// Validate terrain existence
+			if (_validateFe3dTerrainEntity())
+			{
+				auto result = _fe3d.misc_isRaycastPositionOnTerrainValid();
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
+			}
+		}
+	}
+	else if (functionName == "fe3d:raycast_into_model") // Raycasting into multiple gameEntities
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::STRING, ScriptValueType::BOOLEAN }; // GameEntityID + aabbPartID + canBeOccluded
 

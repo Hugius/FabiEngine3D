@@ -1,13 +1,13 @@
-2 20
+8 56
 META script_type_update
 
 /// Temporary values
 STR currentWorld = fe3d:scene_get_current()
 STR toolID = _inventory[_equipIndex]
-VEC3 terrainPoint = fe3d:terrain_get_cursor_position()
+VEC3 terrainPoint = fe3d:raycast_get_position_on_terrain()
 VEC3 camPos = fe3d:camera_get_position()
 DEC waterY = fe3d:water_get_height()
-BOOL isValid = fe3d:terrain_is_cursor_position_valid()
+BOOL isValid = fe3d:raycast_is_position_on_terrain_valid()
 
 /// Check if throwing is finished
 IF _isFishrodPlaying IS <true>:

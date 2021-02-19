@@ -1,4 +1,4 @@
-32 38
+47 48
 META script_type_init
 
 /// Globals
@@ -45,3 +45,5 @@ fe3d:billboard_place("torch", "fire", 0.0, 0.0, 0.0)
 fe3d:billboard_start_animation("torch", -1)
 fe3d:billboard_set_aabb_responsive("torch", <false>)
 fe3d:billboard_set_size("torch", 1.75, 1.5)
+
+fe3d:raycast_enable_terrain_positioning(30.0, 0.1)

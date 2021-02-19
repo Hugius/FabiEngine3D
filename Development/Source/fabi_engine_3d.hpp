@@ -162,7 +162,6 @@ public:
 	bool terrainEntity_isNormalMappedB(const string& ID);
 	bool terrainEntity_isSpecularLighted(const string& ID);
 	bool terrainEntity_isInside(const string& ID, float x, float z);
-	bool terrainEntity_isCursorPosition3dValid();
 	string terrainEntity_getSelectedID();
 	vector<string> terrainEntity_getAllIDs();
 	const string& terrainEntity_getDiffuseMapPath(const string& ID);
@@ -185,7 +184,6 @@ public:
 	float terrainEntity_getPixelHeight(const string& ID, float x, float z);
 	float terrainEntity_getSpecularLightingFactor(const string& ID);
 	float terrainEntity_getSpecularLightingIntensity(const string& ID);
-	Vec3 terrainEntity_getCursorPosition3D();
 
 	// Water entity interface - setters
 	void waterEntity_add(const string& ID);
@@ -755,6 +753,8 @@ public:
 	void misc_disableAabbFrameRendering();
 	void misc_enableDebugRendering();
 	void misc_disableDebugRendering();
+	void misc_enableTerrainRaycasting(float distance, float precision);
+	void misc_disableTerrainRaycasting();
 	void misc_showCursor();
 	void misc_hideCursor();
 	void misc_setCursorPosition(Ivec2 pos);
@@ -796,20 +796,23 @@ public:
 	string misc_getCpuName();
 	string misc_getGpuName();
 	string misc_getOpenglVersion();
-	Vec2 misc_convertToNDC(Vec2 pos);
-	Vec2 misc_convertFromNDC(Vec2 pos);
-	Vec2 misc_convertFromScreenCoords(Ivec2 pos);
 	Ivec2 misc_convertToScreenCoords(Vec2 pos);
 	Ivec2 misc_getCursorPosition();
 	Ivec2 misc_getWindowSize();
 	Ivec2 misc_getViewportPosition();
 	Ivec2 misc_getViewportSize();
+	Vec2 misc_convertToNDC(Vec2 pos);
+	Vec2 misc_convertFromNDC(Vec2 pos);
+	Vec2 misc_convertFromScreenCoords(Ivec2 pos);
+	Vec3 misc_getRaycastVector();
+	Vec3 misc_getRaycastPositionOnTerrain();
 	bool misc_isCursorVisible();
 	bool misc_isCursorInsideViewport();
 	bool misc_isCursorInsideWindow();
 	bool misc_isDirectory(const string& filePath);
 	bool misc_isFileExisting(const string& filePath);
 	bool misc_checkInterval(const string& key, int frameCount);
+	bool misc_isRaycastPositionOnTerrainValid();
 	vector<pair<string, int>> misc_getUpdateProfilingStatistics();
 	vector<pair<string, int>> misc_getRenderProfilingStatistics();
 

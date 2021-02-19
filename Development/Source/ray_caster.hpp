@@ -9,6 +9,9 @@ public:
 	~RayCaster() = default;
 
 	void update(Ivec2 mousePos);
+	void setTerrainPointingEnabled(bool enabled);
+	void setTerrainPointingDistance(float distance);
+	void setTerrainPointingPrecision(float precision);
 
 	float checkCursorInBox(Vec3 lb, Vec3 rt, Vec3 cameraPos);
 
@@ -23,7 +26,7 @@ private:
 	Vec4 _convertToViewSpace(Vec4 value);
 	Vec3 _convertToWorldSpace(Vec4 value);
 	Vec3 _getPointOnRay(float distance);
-	Vec3 _calculateTerrainPoint(float maxDistance);
+	Vec3 _calculateTerrainPoint();
 
 	bool _isUnderTerrain(float distance);
 
@@ -31,4 +34,9 @@ private:
 	Vec3 _terrainPoint = Vec3(0.0f);
 
 	TerrainEntityManager& _terrainManager;
+
+	bool _isTerrainPointingEnabled = false;
+
+	float _terrainPointingDistance = 0.0f;
+	float _terrainPointingPrecision = 0.0f;
 };

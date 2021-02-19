@@ -134,6 +134,18 @@ void FabiEngine3D::misc_disableDebugRendering()
 	_core->_renderBus.setDebugRenderingEnabled(false);
 }
 
+void FabiEngine3D::misc_enableTerrainRaycasting(float distance, float precision)
+{
+	_core->_rayCaster.setTerrainPointingEnabled(true);
+	_core->_rayCaster.setTerrainPointingDistance(distance);
+	_core->_rayCaster.setTerrainPointingPrecision(precision);
+}
+
+void FabiEngine3D::misc_disableTerrainRaycasting()
+{
+	_core->_rayCaster.setTerrainPointingEnabled(false);
+}
+
 void FabiEngine3D::misc_setCursorPosition(Ivec2 pos)
 {
 	_core->_rayCaster.update(pos);
@@ -367,6 +379,21 @@ Vec2 FabiEngine3D::misc_convertFromScreenCoords(Ivec2 pos)
 	float y = float(pos.y) / float(misc_getWindowHeight());
 
 	return Vec2(x, y);
+}
+
+Vec3 FabiEngine3D::misc_getRaycastVector()
+{
+	return _core->_rayCaster.getRay();
+}
+
+Vec3 FabiEngine3D::misc_getRaycastPositionOnTerrain()
+{
+	return _core->_rayCaster.getTerrainPoint();
+}
+
+bool FabiEngine3D::misc_isRaycastPositionOnTerrainValid()
+{
+	return (_core->_rayCaster.getTerrainPoint() != Vec3(-1.0f));
 }
 
 Ivec2 FabiEngine3D::misc_getCursorPosition()

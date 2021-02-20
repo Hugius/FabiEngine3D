@@ -681,6 +681,64 @@ fe3d:print(camPos.x)
   Returns the color of the selected water.
 
 #### Model
+- `fe3d:model_is_existing`() ---> `BOOL`  
+  Returns true if model is existing.
+- `fe3d:model_get_all_names`() ---> `LIST`  
+  Returns a list of strings with the full IDs of all models.
+- `fe3d:model_find_full_ids`(`STR` part) ---> `LIST`  
+  Returns a list of strings with the full IDs of all models which ID starts with **part**.
+- `fe3d:model_place`(`STR` newID, `STR` previewID, `DEC` x, `DEC` y, `DEC` z) ---> `NONE`  
+  Places a new model with **newID** (cannot start with @) based on model with **previewID** at position **xyz**.
+- `fe3d:model_delete`(`STR` ID) ---> `NOME`  
+  Deletes model with **ID** if existing.
+- `fe3d:model_set_visible`(`STR` ID, `BOOL` visible) ---> `NONE`  
+  Sets the visibility of model with **ID** to **visible**.
+- `fe3d:model_is_visible`(`STR` ID) ---> `BOOL`  
+  Returns true if model with **ID** is visible.
+- `fe3d:model_set_position`(`STR` ID, `DEC` x, `DEC` y, `DEC` z) ---> `NONE`  
+  Sets the position as **xyz** of model with **ID**.
+- `fe3d:model_move`(`STR` ID, `DEC` x, `DEC` y, `DEC` z) ---> `NONE`  
+  Moves the model with factor **xyz** of model with **ID**.
+- `fe3d:model_get_position`(`STR` ID) ---> `VEC3`  
+  Returns the position of model with **ID**.
+- `fe3d:model_set_rotation_origin`(`STR` ID, `DEC` x, `DEC` y, `DEC` z) ---> `NONE`  
+  Sets the rotation origin of model with **ID** to **xyz** in local space. The model will be rotated around this origin. An xyz of 0 means the rotation will be centered.
+- `fe3d:model_get_rotation_origin`() ---> `VEC3`  
+  Returns the rotation origin of model with **ID**.
+- `fe3d:model_set_rotation`(`STR` ID, `DEC` x, `DEC` y, `DEC` z) ---> `NONE`  
+  Sets the rotation as **xyz** of model with **ID**.
+- `fe3d:model_rotate`(`STR` ID, `DEC` x, `DEC` y, `DEC` z) ---> `NONE`  
+  Rotates the model with factor **xyz** of model with **ID**.
+- `fe3d:model_get_rotation`(`STR` ID) ---> `VEC3`  
+  Returns the rotation of model with **ID**.
+- `fe3d:model_set_size`(`STR` ID, `DEC` x, `DEC` y, `DEC` z) ---> `NONE`  
+  Sets the size as **xyz** of model with **ID**.
+- `fe3d:model_scale`(`STR` ID, `DEC` x, `DEC` y, `DEC` z) ---> `NONE`  
+  Scales the model with factor **xyz** of model with **ID**.
+- `fe3d:model_get_size`(`STR` ID) ---> `VEC3`  
+  Returns the size of model with **ID**.
+- `fe3d:model_set_color`(`STR` ID, `DEC` r, `DEC` g, `DEC` b) ---> `NONE`  
+  Sets the color as **rgb** of model with **ID**.
+- `fe3d:model_get_color`(`STR` ID) ---> `VEC3`  
+  Returns the color of model with **ID**.
+- `fe3d:model_set_min_height`(`STR` ID, `DEC` height) ---> `NONE`  
+  Sets the local minimum **height** of model with **ID**. The height is relative to the model position.
+- `fe3d:model_get_min_height`(`STR` ID) ---> `DEC`  
+  Returns the minimum local height of model with **ID**.
+- `fe3d:model_set_max_height`(`STR` ID, `DEC` height) ---> `NONE`  
+  Sets the local maximum **height** of model with **ID**. The height is relative to the model position.
+- `fe3d:model_get_max_height`(`STR` ID) ---> `DEC`  
+  Returns the maximum local height of model with **ID**.
+- `fe3d:model_set_lightness`(`STR` ID, `DEC` lightness) ---> `NONE`  
+  Sets the **lightness** of model with **ID**.
+- `fe3d:model_get_lightness`(`STR` ID) ---> `DEC`  
+  Returns the lightness of model with **ID**.
+- `fe3d:model_set_aabb_responsive`(`STR` ID, `BOOL` responsive) ---> `NONE`  
+  Sets the AABB responsiveness to **responsive** of model with **ID**. This includes collision & raycasting response.
+- `fe3d:model_set_alpha`(`STR` ID, `DEC` alpha) ---> `NONE`  
+  Sets the **alpha** value for transparency of model with **ID**. Keep in mind FabiEngine3D does not support transparency sorting!
+- `fe3d:model_get_alpha`(`STR` ID) ---> `DEC`  
+  Returns the alpha of model with **ID**.
 
 #### Animations
 

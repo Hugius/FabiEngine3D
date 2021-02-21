@@ -688,7 +688,7 @@ fe3d:print(camPos.x)
 - `fe3d:model_find_full_ids`(`STR` part) ---> `LIST`  
   Returns a list of strings with the full IDs of all models which ID starts with **part**.
 - `fe3d:model_place`(`STR` newID, `STR` previewID, `DEC` x, `DEC` y, `DEC` z) ---> `NONE`  
-  Places a new model with **newID** (cannot start with @) based on model with **previewID** at position **xyz**.
+  Places a new model with **newID** (cannot start with @) based on model with **previewID** at position as **xyz**.
 - `fe3d:model_delete`(`STR` ID) ---> `NOME`  
   Deletes model with **ID** if existing.
 - `fe3d:model_set_visible`(`STR` ID, `BOOL` visible) ---> `NONE`  
@@ -734,7 +734,7 @@ fe3d:print(camPos.x)
 - `fe3d:model_get_lightness`(`STR` ID) ---> `DEC`  
   Returns the lightness of model with **ID**.
 - `fe3d:model_set_aabb_responsive`(`STR` ID, `BOOL` responsive) ---> `NONE`  
-  Sets the AABB responsiveness to **responsive** of model with **ID**. This includes collision & raycasting response.
+  Sets the model's parent AABB responsiveness to **responsive** of model with **ID**. This includes collision & raycasting response.
 - `fe3d:model_set_alpha`(`STR` ID, `DEC` alpha) ---> `NONE`  
   Sets the **alpha** value for transparency of model with **ID**. Keep in mind FabiEngine3D does not support transparency sorting!
 - `fe3d:model_get_alpha`(`STR` ID) ---> `DEC`  
@@ -770,7 +770,7 @@ fe3d:print(camPos.x)
 - `fe3d:billboard_find_full_ids`(`STR` part) ---> `LIST`  
   Returns a list of strings with the full IDs of all billboards which ID starts with **part**.
 - `fe3d:billboard_place`(`STR` newID, `STR` previewID, `DEC` x, `DEC` y, `DEC` z) ---> `NONE`  
-  Places a new billboard with **newID** (cannot start with @) based on billboard with **previewID** at position **xyz**.
+  Places a new billboard with **newID** (cannot start with @) based on billboard with **previewID** at position as **xyz**.
 - `fe3d:billboard_delete`(`STR` ID) ---> `NOME`  
   Deletes billboard with **ID** if existing.
 - `fe3d:billboard_set_visible`(`STR` ID, `BOOL` visible) ---> `NONE`  
@@ -814,7 +814,7 @@ fe3d:print(camPos.x)
 - `fe3d:billboard_get_lightness`(`STR` ID) ---> `DEC`  
   Returns the lightness of billboard with **ID**.
 - `fe3d:billboard_set_aabb_responsive`(`STR` ID, `BOOL` responsive) ---> `NONE`  
-  Sets the AABB responsiveness to **responsive** of billboard with **ID**. This includes collision & raycasting response.
+  Sets the billboard's parent AABB responsiveness to **responsive** of billboard with **ID**. This includes collision & raycasting response.
 - `fe3d:billboard_set_camera_facing_x`(`STR` ID, `BOOL` facing) ---> `NONE`  
   Sets camera **facing** in the X direction for billboard with **ID**.
 - `fe3d:billboard_is_facing_camera_x`(`STR` ID) ---> `BOOL`  
@@ -837,8 +837,64 @@ fe3d:print(camPos.x)
   Returns the text content of billboard with **ID**.
 
 #### AABB
+- `fe3d:aabb_is_existing`() ---> `BOOL`  
+  Returns true if AABB is existing.
+- `fe3d:aabb_get_all_names`() ---> `LIST`  
+  Returns a list of strings with the full IDs of all AABB.
+- `fe3d:aabb_place`(`STR` newID, `DEC` x, `DEC` y, `DEC` z, `DEC` width, `DEC` height, `DEC` depth) ---> `NONE`  
+  Places a new AABB with **newID** (cannot start with @) with size of **width**, **height**, **depth** at position as **xyz**.
+- `fe3d:aabb_delete`(`STR` ID) ---> `NOME`  
+  Deletes AABB with **ID** if existing.
+- `fe3d:aabb_set_visible`(`STR` ID, `BOOL` visible) ---> `NONE`  
+  Sets the visibility of AABB with **ID** to **visible**.
+- `fe3d:aabb_is_visible`(`STR` ID) ---> `BOOL`  
+  Returns true if AABB with **ID** is visible.
+- `fe3d:aabb_set_position`(`STR` ID, `DEC` x, `DEC` y, `DEC` z) ---> `NONE`  
+  Sets the position as **xyz** of AABB with **ID**.
+- `fe3d:aabb_move`(`STR` ID, `DEC` x, `DEC` y, `DEC` z) ---> `NONE`  
+  Moves the AABB with factor **xyz** of AABB with **ID**.
+- `fe3d:aabb_get_position`(`STR` ID) ---> `VEC3`  
+  Returns the position of AABB with **ID**.
+- `fe3d:aabb_set_size`(`STR` ID, `DEC` x, `DEC` y, `DEC` z) ---> `NONE`  
+  Sets the size as **xyz** of AABB with **ID**.
+- `fe3d:aabb_scale`(`STR` ID, `DEC` x, `DEC` y, `DEC` z) ---> `NONE`  
+  Scales the AABB with factor **xyz** of AABB with **ID**.
+- `fe3d:aabb_get_size`(`STR` ID) ---> `VEC3`  
+  Returns the size of AABB with **ID**.
+- `fe3d:aabb_set_responsive`(`STR` ID, `BOOL` responsive) ---> `NONE`  
+  Sets the AABB responsiveness to **responsive** of AABB with **ID**. This includes collision & raycasting response.
 
 #### Light
+- `fe3d:light_is_existing`() ---> `BOOL`  
+  Returns true if light is existing.
+- `fe3d:light_get_all_names`() ---> `LIST`  
+  Returns a list of strings with the full IDs of all light.
+- `fe3d:light_place`(`STR` newID, `DEC` x, `DEC` y, `DEC` z, `DEC` r, `DEC` g, `DEC` b, `DEC` intensity, `DEC` distance) ---> `NONE`  
+  Places a new light with **newID** (cannot start with @) at position as **xyz** with color as **rgb**. It also has an **intensity** and maximum **distance**.
+- `fe3d:light_delete`(`STR` ID) ---> `NOME`  
+  Deletes light with **ID** if existing.
+- `fe3d:light_set_visible`(`STR` ID, `BOOL` visible) ---> `NONE`  
+  Sets the visibility of light with **ID** to **visible**.
+- `fe3d:light_is_visible`(`STR` ID) ---> `BOOL`  
+  Returns true if light with **ID** is visible.
+- `fe3d:light_set_position`(`STR` ID, `DEC` x, `DEC` y, `DEC` z) ---> `NONE`  
+  Sets the position as **xyz** of light with **ID**.
+- `fe3d:light_move`(`STR` ID, `DEC` x, `DEC` y, `DEC` z) ---> `NONE`  
+  Moves the light with factor **xyz** of light with **ID**.
+- `fe3d:light_get_position`(`STR` ID) ---> `VEC3`  
+  Returns the position of light with **ID**.
+- `fe3d:light_set_color`(`STR` ID, `DEC` r, `DEC` g, `DEC` b) ---> `NONE`  
+  Sets the color as **rgb** of light with **ID**.
+- `fe3d:light_get_color`(`STR` ID) ---> `DEC`  
+  Returns the color of light with **ID**.
+- `fe3d:light_set_intensity`(`STR` ID, `DEC` intensity) ---> `NONE`  
+  Sets the **intensity** of light with **ID**.
+- `fe3d:light_get_intensity`(`STR` ID) ---> `DEC`  
+  Returns the intensity of light with **ID**.
+- `fe3d:light_set_distance`(`STR` ID, `DEC` distance) ---> `NONE`  
+  Sets the **distance** of light with **ID**.
+- `fe3d:light_get_distance`(`STR` ID) ---> `DEC`  
+  Returns the distance of light with **ID**.
 
 #### Audio
 

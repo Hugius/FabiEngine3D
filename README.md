@@ -206,6 +206,7 @@ Click [here](#scene-editor-example) to see an example
 - If a terrain is selected, the model will be placed **on top** of the terrain
 - If no terrain is selected, the model will be placed at **XYZ(0,0,0)**
 - Every placed model can be **edited** (position, rotation, size, animation, deleting, freezing into local space)
+- Placed models are not meant for individual interactions through scripting (only by group).
 ### Billboards
 - You can place **multiple** billboards in the scene
 - If a terrain is selected, the billboard will be placed **on top** of the terrain
@@ -213,6 +214,7 @@ Click [here](#scene-editor-example) to see an example
 - Every placed billboard can be **edited** (position, rotation, size, deleting)
 - Billboards will **NOT** be affected by scene lighting
 - Every billboard's **AABB** will be scaled based on their rotation
+- Placed billboards are not meant for individual interactions through scripting (only by group).
 ### Lights
 - You can add **ambient lighting** which has a custom color & intensity
 - You can add **directional lighting** which has a custom color, intensity and position
@@ -221,11 +223,13 @@ Click [here](#scene-editor-example) to see an example
 - If a terrain is selected, the point light will be placed **on top** of the terrain
 - If no terrain is selected, the point light will be placed at **XYZ(0,0,0)**
 - Every placed point light can be **edited** (position, max distance, intensity, color, deleting)
+- Placed lights are not meant for individual interactions through scripting.
 ### Audio
 - You can place **multiple** 3D audio casters in the scene
 - If a terrain is selected, the audio caster will be placed **on top** of the terrain
 - If no terrain is selected, the audio caster will be placed at **XYZ(0,0,0)**
 - Every placed audio caster can be **edited** (position, max volume, max distance, deleting)
+- Placed audio casters are not meant for individual interactions through scripting.
 ### Graphics
 - You can add **shadows** to scene based on (casting position, box size, box center, option to follow camera + interval)
 - You can enable **motion blur** with a custom strength
@@ -494,7 +498,7 @@ fe3d:print(camPos.x)
 - `fe3d:camera_get_yaw`() ---> `DEC`  
   Returns the camera yaw in degrees.
 - `fe3d:camera_set_pitch`(`DEC` degrees) ---> `NONE`  
-  Sets the camera pitch in **degrees**.
+  Sets the camera pitch in **degrees**. The angle will be clamped between -90.0 and 90.0.
 - `fe3d:camera_get_pitch`() ---> `DEC`  
   Returns the camera pitch in degrees.
 - `fe3d:camera_set_fov`(`DEC` degrees) ---> `NONE`  
@@ -1136,7 +1140,6 @@ fe3d:print(camPos.x)
 - You **cannot** individually access bound AABBs from a **scene**
 - FabiEngine3D does **not** support a camera roll, because of the infamous Gimbal Lock
 - FabiEngine3D **does** come with first person camera support, but **not** third person
-- Camera pitch angle is clamped between -90.0 and 90.0
 ### Performance
 - Click [here](#performance-statistics-example) to see an example
 - You can use the performance statistics to analyze your **game's performance**

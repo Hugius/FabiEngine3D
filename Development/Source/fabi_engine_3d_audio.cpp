@@ -121,6 +121,11 @@ void FabiEngine3D::audioEntity_setPosition(const std::string& ID, Vec3 position)
 	_core->_audioManager.getChunk(ID).setPosition(position);
 }
 
+void FabiEngine3D::audioEntity_move(const string& ID, Vec3 factor)
+{
+	_core->_audioManager.getChunk(ID).translate(factor);
+}
+
 void FabiEngine3D::audioEntity_setMaxDistance(const std::string& ID, float maxDistance)
 {
 	_core->_audioManager.getChunk(ID).setMaxDistance(maxDistance);

@@ -12,14 +12,14 @@ public:
 
 	// Updates
 	void updateModelMatrix();
-	void translate(Vec3 value);
-	void scale(Vec3 value);
 
 	// Setters
 	void setLocalTranslation(Vec3 value);
 	void setLocalScaling(Vec3 value);
 	void setTranslation(Vec3 value);
 	void setScaling(Vec3 value);
+	void translate(Vec3 value);
+	void scale(Vec3 value);
 	void setParent(const string& ID, AabbParentType type);
 	void setCollisionDirection(const Direction& direction);
 	void setResponsive(bool value);

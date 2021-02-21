@@ -240,7 +240,7 @@ bool ScriptInterpreter::_executeFe3dLightingFunction(const string& functionName,
 
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
-			_fe3d.gfx_enableFog(arguments[0].getDecimal(), _fe3d.gfx_getFogMaxDistance(), _fe3d.gfx_getFogDefaultFactor(), _fe3d.gfx_getFogColor());
+			_fe3d.gfx_enableFog(arguments[0].getDecimal(), _fe3d.gfx_getFogMaxDistance(), _fe3d.gfx_getFogThickness(), _fe3d.gfx_getFogColor());
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
@@ -258,7 +258,7 @@ bool ScriptInterpreter::_executeFe3dLightingFunction(const string& functionName,
 
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
-			_fe3d.gfx_enableFog(_fe3d.gfx_getFogMinDistance(), arguments[0].getDecimal(), _fe3d.gfx_getFogDefaultFactor(), _fe3d.gfx_getFogColor());
+			_fe3d.gfx_enableFog(_fe3d.gfx_getFogMinDistance(), arguments[0].getDecimal(), _fe3d.gfx_getFogThickness(), _fe3d.gfx_getFogColor());
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
@@ -270,7 +270,7 @@ bool ScriptInterpreter::_executeFe3dLightingFunction(const string& functionName,
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL));
 		}
 	}
-	else if (functionName == "fe3d:graphics_set_fog_default_factor") // Set fog default factor
+	else if (functionName == "fe3d:graphics_set_fog_thickness") // Set fog thickness
 	{
 		auto types = { ScriptValueType::DECIMAL };
 
@@ -280,11 +280,11 @@ bool ScriptInterpreter::_executeFe3dLightingFunction(const string& functionName,
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
-	else if (functionName == "fe3d:graphics_get_fog_default_factor") // Get fog defaultfactor
+	else if (functionName == "fe3d:graphics_get_fog_thickness") // Get fog thickness
 	{
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			auto result = _fe3d.gfx_getFogDefaultFactor();
+			auto result = _fe3d.gfx_getFogThickness();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL));
 		}
 	}
@@ -294,7 +294,7 @@ bool ScriptInterpreter::_executeFe3dLightingFunction(const string& functionName,
 
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
-			_fe3d.gfx_enableFog(_fe3d.gfx_getFogMinDistance(), _fe3d.gfx_getFogMaxDistance(), _fe3d.gfx_getFogDefaultFactor(),
+			_fe3d.gfx_enableFog(_fe3d.gfx_getFogMinDistance(), _fe3d.gfx_getFogMaxDistance(), _fe3d.gfx_getFogThickness(),
 				Vec3(arguments[0].getDecimal(), arguments[1].getDecimal(), arguments[2].getDecimal()));
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}

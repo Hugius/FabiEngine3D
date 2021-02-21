@@ -245,9 +245,9 @@ void RenderBus::setFogMaxDistance(float value)
 	_fogMaxDistance = value;
 }
 
-void RenderBus::setFogDefaultFactor(float value)
+void RenderBus::setFogThickness(float value)
 {
-	_fogDefaultFactor = value;
+	_fogThickness = value;
 }
 
 void RenderBus::setBloomIntensity(float value)
@@ -708,9 +708,9 @@ const float RenderBus::getFogMaxDistance() const
 	return _fogMaxDistance;
 }
 
-const float RenderBus::getFogDefaultFactor() const
+const float RenderBus::getFogThickness() const
 {
-	return _fogDefaultFactor;
+	return _fogThickness;
 }
 
 const float RenderBus::getBloomIntensity() const

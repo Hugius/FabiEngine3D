@@ -34,6 +34,24 @@ bool ScriptInterpreter::_executeFe3dLightEntityFunction(const string& functionNa
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 		}
 	}
+	else if (functionName == "fe3d:light_get_all_ids") // Get all lightEntity IDs
+	{
+		// Validate arguments
+		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			auto result = _fe3d.lightEntity_getAllIDs();
+
+			// For every light
+			for (auto& ID : result)
+			{
+				// Only non-preview lights
+				if (ID.front() != '@')
+				{
+					returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, ID));
+				}
+			}
+		}
+	}
 	else if (functionName == "fe3d:light_place") // Create lightEntity
 	{
 		auto types =
@@ -136,6 +154,22 @@ bool ScriptInterpreter::_executeFe3dLightEntityFunction(const string& functionNa
 			if (_validateFe3dLightEntity(arguments[0].getString()))
 			{
 				_fe3d.lightEntity_setPosition(arguments[0].getString(),
+					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			}
+		}
+	}
+	else if (functionName == "fe3d:light_move") // Move lightEntity position
+	{
+		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
+
+		// Validate arguments
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existing light ID
+			if (_validateFe3dLightEntity(arguments[0].getString()))
+			{
+				_fe3d.lightEntity_move(arguments[0].getString(),
 					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
@@ -244,24 +278,6 @@ bool ScriptInterpreter::_executeFe3dLightEntityFunction(const string& functionNa
 			{
 				auto result = _fe3d.lightEntity_getDistanceFactor(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
-			}
-		}
-	}
-	else if (functionName == "fe3d:light_get_all_names") // Get all lightEntity names
-	{
-		// Validate arguments
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
-		{
-			auto result = _fe3d.lightEntity_getAllIDs();
-
-			// For every light
-			for (auto& ID : result)
-			{
-				// Only non-preview lights
-				if (ID.front() != '@')
-				{
-					returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, ID));
-				}
 			}
 		}
 	}

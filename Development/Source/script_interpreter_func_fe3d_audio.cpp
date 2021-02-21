@@ -49,6 +49,24 @@ bool ScriptInterpreter::_executeFe3dAudioEntityFunction(const string& functionNa
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 		}
 	}
+	else if (functionName == "fe3d:audio_get_all_ids") // Get all audioEntity IDs
+	{
+		// Validate arguments
+		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			auto result = _fe3d.audioEntity_getAllIDs();
+
+			// For every audio
+			for (auto& ID : result)
+			{
+				// Only non-preview audios
+				if (ID.front() != '@')
+				{
+					returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, ID));
+				}
+			}
+		}
+	}
 	else if (functionName == "fe3d:audio_place2D") // Create 2D audioEntity
 	{
 		auto types =
@@ -393,24 +411,6 @@ bool ScriptInterpreter::_executeFe3dAudioEntityFunction(const string& functionNa
 			{
 				auto result = _fe3d.audioEntity_getMaxDistance(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
-			}
-		}
-	}
-	else if (functionName == "fe3d:audio_get_all_names") // Get all audioEntity names
-	{
-		// Validate arguments
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
-		{
-			auto result = _fe3d.audioEntity_getAllIDs();
-
-			// For every audio
-			for (auto& ID : result)
-			{
-				// Only non-preview audios
-				if (ID.front() != '@')
-				{
-					returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, ID));
-				}
 			}
 		}
 	}

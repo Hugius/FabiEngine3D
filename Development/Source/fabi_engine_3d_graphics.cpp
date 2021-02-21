@@ -35,12 +35,12 @@ void FabiEngine3D::gfx_enableSpotLighting(Vec3 color, float intensity, float ang
 	_core->_renderBus.setMaxSpotLightDistance(distance);
 }
 
-void FabiEngine3D::gfx_enableFog(float minDistance, float maxDistance, float defaultFactor, Vec3 color)
+void FabiEngine3D::gfx_enableFog(float minDistance, float maxDistance, float thickness, Vec3 color)
 {
 	_core->_renderBus.setFogEnabled(true);
 	_core->_renderBus.setFogMinDistance(minDistance);
 	_core->_renderBus.setFogMaxDistance(maxDistance);
-	_core->_renderBus.setFogDefaultFactor(defaultFactor);
+	_core->_renderBus.setFogThickness(thickness);
 	_core->_renderBus.setFogColor(color);
 }
 
@@ -176,7 +176,7 @@ void FabiEngine3D::gfx_disableFog(bool resetProperties)
 	{
 		_core->_renderBus.setFogMinDistance(0.0f);
 		_core->_renderBus.setFogMaxDistance(0.0f);
-		_core->_renderBus.setFogDefaultFactor(0.0f);
+		_core->_renderBus.setFogThickness(0.0f);
 		_core->_renderBus.setFogColor(Vec3(0.0f));
 	}
 }
@@ -454,9 +454,9 @@ float FabiEngine3D::gfx_getFogMaxDistance()
 	return _core->_renderBus.getFogMaxDistance();
 }
 
-float FabiEngine3D::gfx_getFogDefaultFactor()
+float FabiEngine3D::gfx_getFogThickness()
 {
-	return _core->_renderBus.getFogDefaultFactor();
+	return _core->_renderBus.getFogThickness();
 }
 
 Vec3 FabiEngine3D::gfx_getFogColor()

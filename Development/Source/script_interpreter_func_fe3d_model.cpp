@@ -49,31 +49,20 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 		}
 	}
-	else if (functionName == "fe3d:model_find_full_ids") // Find full gameEntity IDs
+	else if (functionName == "fe3d:model_get_all_ids") // Get all gameEntity IDs
 	{
-		auto types = { ScriptValueType::STRING };
-
 		// Validate arguments
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			// Cannot request a preview entity
-			if (arguments[0].getString().front() == '@')
-			{
-				_throwScriptError("Requested model ID cannot start with '@'");
-				return true;
-			}
+			auto result = _fe3d.gameEntity_getAllIDs();
 
-			// Find full gameEntity IDs based on part ID
-			for (auto& ID : _fe3d.gameEntity_getAllIDs())
+			// For every model
+			for (auto& ID : result)
 			{
-				// If substring matches
-				if (arguments[0].getString() == ID.substr(0, arguments[0].getString().size()))
+				// Only non-preview models
+				if (ID.front() != '@')
 				{
-					// Only non-preview models
-					if (ID.front() != '@')
-					{
-						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, ID));
-					}
+					returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, ID));
 				}
 			}
 		}
@@ -165,24 +154,6 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 			{
 				auto result = _fe3d.gameEntity_isVisible(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
-			}
-		}
-	}
-	else if (functionName == "fe3d:model_get_all_names") // Get all gameEntity names
-	{
-		// Validate arguments
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
-		{
-			auto result = _fe3d.gameEntity_getAllIDs();
-
-			// For every model
-			for (auto& ID : result)
-			{
-				// Only non-preview models
-				if (ID.front() != '@')
-				{
-					returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, ID));
-				}
 			}
 		}
 	}

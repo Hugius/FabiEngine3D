@@ -37,7 +37,7 @@ uniform float u_farZ;
 uniform float u_transparency;
 uniform float u_fogMinDistance;
 uniform float u_fogMaxDistance;
-uniform float u_fogDefaultFactor;
+uniform float u_fogThickness;
 uniform float u_pointLightIntensities[MAX_POINT_LIGHT_COUNT];
 uniform float u_pointLightDistanceFactors[MAX_POINT_LIGHT_COUNT];
 
@@ -241,7 +241,8 @@ vec3 applyFog(vec3 color)
 		float difference = u_fogMaxDistance - u_fogMinDistance;
 		float part = (distance - u_fogMinDistance) / difference;
 		part = clamp(part, 0.0f, 1.0f);
-		float factor = part * u_fogDefaultFactor;
+		float thickness = clamp(u_fogThickness, 0.0f, 1.0f);
+		float factor = part * thickness;
 		return mix(color, u_fogColor, factor);
 	}
 	

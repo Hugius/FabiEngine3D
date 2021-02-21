@@ -78,20 +78,20 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
-	else if (functionName == "fe3d:scene_get_current")
-	{
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
-		{
-			auto result = _sceneEditor.getLoadedSceneID();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result));
-		}
-	}
 	else if (functionName == "fe3d:scene_clear") // Clear all entities and reset scene
 	{
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			_sceneEditor.clearScene();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+		}
+	}
+	else if (functionName == "fe3d:scene_get_current_id")
+	{
+		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			auto result = _sceneEditor.getLoadedSceneID();
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result));
 		}
 	}
 	else if (functionName == "fe3d:cursor_show") // Show cursor

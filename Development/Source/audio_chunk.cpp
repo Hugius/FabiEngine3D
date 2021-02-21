@@ -35,20 +35,25 @@ Mix_Chunk* AudioChunk::getMixChunk() const
 	return _chunk;
 }
 
-void AudioChunk::setPosition(Vec3 position)
+void AudioChunk::setPosition(Vec3 value)
 {
-	_position = position;
+	_position = value;
 	_hasPosition = true;
 }
 
-void AudioChunk::setMaxDistance(float distance)
+void AudioChunk::translate(Vec3 value)
 {
-	_maxDistance = distance;
+	_position += value;
 }
 
-void AudioChunk::setMaxVolume(float volume)
+void AudioChunk::setMaxDistance(float value)
 {
-	_maxVolume = volume;
+	_maxDistance = value;
+}
+
+void AudioChunk::setMaxVolume(float value)
+{
+	_maxVolume = value;
 }
 
 Vec3 AudioChunk::getPosition() const

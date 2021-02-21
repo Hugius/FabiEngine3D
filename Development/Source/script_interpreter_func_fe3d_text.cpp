@@ -42,6 +42,24 @@ bool ScriptInterpreter::_executeFe3dTextEntityFunction(const string& functionNam
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 		}
 	}
+	else if (functionName == "fe3d:text_get_all_ids") // Get all textEntity IDs
+	{
+		// Validate arguments
+		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			auto result = _fe3d.textEntity_getAllIDs();
+
+			// For every text
+			for (auto& ID : result)
+			{
+				// Only non-preview texts
+				if (ID.front() != '@')
+				{
+					returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, ID));
+				}
+			}
+		}
+	}
 	else if (functionName == "fe3d:text_place") // Create textEntity
 	{
 		auto types =
@@ -378,24 +396,6 @@ bool ScriptInterpreter::_executeFe3dTextEntityFunction(const string& functionNam
 			{
 				auto result = _fe3d.textEntity_getTextContent(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result));
-			}
-		}
-	}
-	else if (functionName == "fe3d:text_get_all_names") // Get all textEntity names
-	{
-		// Validate arguments
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
-		{
-			auto result = _fe3d.textEntity_getAllIDs();
-
-			// For every text
-			for (auto& ID : result)
-			{
-				// Only non-preview texts
-				if (ID.front() != '@')
-				{
-					returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, ID));
-				}
 			}
 		}
 	}

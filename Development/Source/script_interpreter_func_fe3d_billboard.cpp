@@ -49,31 +49,20 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 		}
 	}
-	else if (functionName == "fe3d:billboard_find_full_ids") // Find full billboardEntity IDs
+	else if (functionName == "fe3d:billboard_get_all_ids") // Get all billboardEntity IDs
 	{
-		auto types = { ScriptValueType::STRING };
-
 		// Validate arguments
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			// Cannot request a preview entity
-			if (arguments[0].getString().front() == '@')
-			{
-				_throwScriptError("Requested billboard ID cannot start with '@'");
-				return true;
-			}
+			auto result = _fe3d.billboardEntity_getAllIDs();
 
-			// Find full billboardEntity IDs based on part ID
-			for (auto& ID : _fe3d.billboardEntity_getAllIDs())
+			// For every billboard
+			for (auto& ID : result)
 			{
-				// If substring matches
-				if (arguments[0].getString() == ID.substr(0, arguments[0].getString().size()))
+				// Only non-preview billboards
+				if (ID.front() != '@')
 				{
-					// Only non-preview billboards
-					if (ID.front() != '@')
-					{
-						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, ID));
-					}
+					returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, ID));
 				}
 			}
 		}
@@ -166,24 +155,6 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			{
 				auto result = _fe3d.billboardEntity_isVisible(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
-			}
-		}
-	}
-	else if (functionName == "fe3d:billboard_get_all_names") // Get all billboardEntity names
-	{
-		// Validate arguments
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
-		{
-			auto result = _fe3d.billboardEntity_getAllIDs();
-
-			// For every billboard
-			for (auto& ID : result)
-			{
-				// Only non-preview billboards
-				if (ID.front() != '@')
-				{
-					returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, ID));
-				}
 			}
 		}
 	}
@@ -298,7 +269,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 	}
 	else if (functionName == "fe3d:billboard_scale") // Scale billboardEntity
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
+		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
 		// Validate arguments
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
@@ -306,8 +277,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			// Validate existing billboard ID
 			if (_validateFe3dBillboardEntity(arguments[0].getString()))
 			{
-				_fe3d.billboardEntity_scale(arguments[0].getString(),
-					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
+				_fe3d.billboardEntity_scale(arguments[0].getString(), Vec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}

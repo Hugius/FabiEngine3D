@@ -57,7 +57,7 @@ public:
 	void setMaxSpotLightDistance(float value);
 	void setFogMinDistance(float value);
 	void setFogMaxDistance(float value);
-	void setFogDefaultFactor(float value);
+	void setFogThickness(float value);
 	void setBloomIntensity(float value);
 	void setBloomBrightnessTreshold(float value);
 	void setCameraYaw(float value);
@@ -165,7 +165,7 @@ public:
 	const float getMaxSpotLightDistance()	   const;
 	const float getFogMinDistance()			   const;
 	const float getFogMaxDistance()			   const;
-	const float getFogDefaultFactor()		   const;
+	const float getFogThickness()		   const;
 	const float getBloomIntensity()			   const;
 	const float getBloomBrightnessTreshold()   const;
 	const float getCameraYaw()				   const;
@@ -273,7 +273,7 @@ private:
 	float _maxSpotLightDistance		 = 0.0f;
 	float _fogMinDistance            = 0.0f;
 	float _fogMaxDistance			 = 0.0f;
-	float _fogDefaultFactor			 = 0.0f;
+	float _fogThickness			 = 0.0f;
 	float _bloomIntensity            = 0.0f;
 	float _bloomBrightnessTreshold   = 0.0f;
 	float _cameraYaw                 = 0.0f;

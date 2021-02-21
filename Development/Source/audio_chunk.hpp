@@ -13,9 +13,10 @@ public:
 	AudioChunk(const string& ID, const string& filePath, Mix_Chunk* chunk);
 	AudioChunk(const string& ID, const string& filePath, Mix_Chunk* chunk, Vec3 position, float maxVolume, float maxDistance);
 
-	void setPosition(Vec3 position);
-	void setMaxDistance(float distance);
-	void setMaxVolume(float volume);
+	void setPosition(Vec3 value);
+	void translate(Vec3 value);
+	void setMaxDistance(float value);
+	void setMaxVolume(float value);
 
 	const string& getID() const;
 	const string& getFilePath() const;

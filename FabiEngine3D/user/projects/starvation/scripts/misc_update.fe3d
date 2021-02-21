@@ -25,7 +25,7 @@ fe3d:image_set_alpha("black", _blackAlpha)
 DECR _blackAlpha 0.0025
 
 /// Travelling to Starvia
-STR currentWorld = fe3d:scene_get_current()
+STR currentWorld = fe3d:scene_get_current_id()
 IF currentWorld IS "home":
     STR signID = fe3d:collision_check_camera_model("sign", "", "")
     IF signID NOT "":

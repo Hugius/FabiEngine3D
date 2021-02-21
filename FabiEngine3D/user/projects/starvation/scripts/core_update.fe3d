@@ -2,7 +2,7 @@
 META script_type_update
 META execution_entry
 
-STR currentWorld = fe3d:scene_get_current()
+STR currentWorld = fe3d:scene_get_current_id()
 
 /// Bag inventory
 EXEC bag_update

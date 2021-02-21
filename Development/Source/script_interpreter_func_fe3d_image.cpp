@@ -42,6 +42,24 @@ bool ScriptInterpreter::_executeFe3dGuiEntityFunction(const string& functionName
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 		}
 	}
+	else if (functionName == "fe3d:image_get_all_ids") // Get all guiEntity IDs
+	{
+		// Validate arguments
+		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			auto result = _fe3d.guiEntity_getAllIDs();
+
+			// For every image
+			for (auto& ID : result)
+			{
+				// Only non-preview images
+				if (ID.front() != '@')
+				{
+					returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, ID));
+				}
+			}
+		}
+	}
 	else if (functionName == "fe3d:image_place") // Create guiEntity
 	{
 		auto types =
@@ -344,24 +362,6 @@ bool ScriptInterpreter::_executeFe3dGuiEntityFunction(const string& functionName
 			{
 				auto result = _fe3d.guiEntity_getColor(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));
-			}
-		}
-	}
-	else if (functionName == "fe3d:image_get_all_names") // Get all guiEntity names
-	{
-		// Validate arguments
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
-		{
-			auto result = _fe3d.guiEntity_getAllIDs();
-
-			// For every image
-			for (auto& ID : result)
-			{
-				// Only non-preview images
-				if (ID.front() != '@')
-				{
-					returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, ID));
-				}
 			}
 		}
 	}

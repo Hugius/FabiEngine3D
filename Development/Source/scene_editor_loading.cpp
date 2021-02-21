@@ -574,10 +574,10 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 			else if (entityType == "GRAPHICS_FOG")
 			{
 				bool enabled;
-				float minDistance, maxDistance, defaultFactor;
+				float minDistance, maxDistance, thickness;
 				Vec3 color;
-				iss >> enabled >> minDistance >> maxDistance >> defaultFactor >> color.r >> color.g >> color.b;
-				_fe3d.gfx_enableFog(minDistance, maxDistance, defaultFactor, color);
+				iss >> enabled >> minDistance >> maxDistance >> thickness >> color.r >> color.g >> color.b;
+				_fe3d.gfx_enableFog(minDistance, maxDistance, thickness, color);
 			}
 			else if (entityType == "GRAPHICS_LENSFLARE")
 			{

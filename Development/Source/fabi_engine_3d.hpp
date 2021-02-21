@@ -341,7 +341,7 @@ public:
 	void billboardEntity_show(const string& ID);
 	void billboardEntity_move(const string& ID, Vec3 factor);
 	void billboardEntity_rotate(const string& ID, Vec3 factor);
-	void billboardEntity_scale(const string& ID, Vec3 factor);
+	void billboardEntity_scale(const string& ID, Vec2 factor);
 	void billboardEntity_setPosition(const string& ID, Vec3 position);
 	void billboardEntity_setRotation(const string& ID, Vec3 rotation);
 	void billboardEntity_setSize(const string& ID, Vec2 size);
@@ -425,6 +425,8 @@ public:
 	void aabbEntity_setVisible(const string& ID, bool visible);
 	void aabbEntity_setPosition(const string& ID, Vec3 position, bool noLocal = false);
 	void aabbEntity_setSize(const string& ID, Vec3 size, bool noLocal = false);
+	void aabbEntity_move(const string& ID, Vec3 factor, bool noLocal = false);
+	void aabbEntity_scale(const string& ID, Vec3 factor, bool noLocal = false);
 
 	// AABB entity interface - getters
 	Vec3 aabbEntity_getPosition(const string& ID, bool noLocal = false);
@@ -464,6 +466,7 @@ public:
 	void lightEntity_hide(const string& ID);
 	void lightEntity_show(const string& ID);
 	void lightEntity_setPosition(const string& ID, Vec3 position);
+	void lightEntity_move(const string& ID, Vec3 factor);
 	void lightEntity_setColor(const string& ID, Vec3 color);
 	void lightEntity_setIntensity(const string& ID, float intensity);
 	void lightEntity_setDistanceFactor(const string& ID, float factor);
@@ -562,6 +565,7 @@ public:
 	void audioEntity_stop(const string& ID, int fadeMillis = 0);
 	void audioEntity_stopAll();
 	void audioEntity_setPosition(const string& ID, Vec3 position);
+	void audioEntity_move(const string& ID, Vec3 factor);
 	void audioEntity_setVolume(const string& ID, float volume);
 	void audioEntity_setMaxVolume(const string& ID, float volume);
 	void audioEntity_setMaxDistance(const string& ID, float maxDistance);
@@ -609,7 +613,7 @@ public:
 	void gfx_enableSpecularLighting();
 	void gfx_enablePointLighting();
 	void gfx_enableSpotLighting(Vec3 color, float intensity, float angle, float distance);
-	void gfx_enableFog(float minDistance, float maxDistance, float defaultFactor, Vec3 color);
+	void gfx_enableFog(float minDistance, float maxDistance, float thickness, Vec3 color);
 	void gfx_enableSkyReflections(float factor);
 	void gfx_enableSceneReflections(float factor);
 	void gfx_enableLightMapping();
@@ -675,7 +679,7 @@ public:
 	float gfx_getSpotLightingDistance();
 	float gfx_getFogMinDistance();
 	float gfx_getFogMaxDistance();
-	float gfx_getFogDefaultFactor();
+	float gfx_getFogThickness();
 	float gfx_getSkyReflectionFactor();
 	float gfx_getSceneReflectionHeight();
 	float gfx_getSceneReflectionFactor();

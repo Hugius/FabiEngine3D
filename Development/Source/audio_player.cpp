@@ -74,7 +74,7 @@ void AudioPlayer::update(CameraManager& camera, std::vector<AudioChunk>& chunks,
 		Mix_HaltMusic();
 	}
 
-	// Update point chunks
+	// Update 3D chunks
 	for (auto& chunk : chunks)
 	{
 		if (chunk.is3D())

@@ -101,6 +101,30 @@ void FabiEngine3D::aabbEntity_setPosition(const string& ID, Vec3 position, bool 
 	}
 }
 
+void FabiEngine3D::aabbEntity_move(const string& ID, Vec3 factor, bool noLocal)
+{
+	if (_core->_aabbEntityManager.getEntity(ID)->getParentID() == "" || noLocal) // Standalone entity
+	{
+		_core->_aabbEntityManager.getEntity(ID)->translate(factor);
+	}
+	else // Bound entity
+	{
+		_core->_aabbEntityManager.getEntity(ID)->translate(factor);
+	}
+}
+
+void FabiEngine3D::aabbEntity_scale(const string& ID, Vec3 factor, bool noLocal)
+{
+	if (_core->_aabbEntityManager.getEntity(ID)->getParentID() == "" || noLocal) // Standalone entity
+	{
+		_core->_aabbEntityManager.getEntity(ID)->scale(factor);
+	}
+	else // Bound entity
+	{
+		_core->_aabbEntityManager.getEntity(ID)->scale(factor);
+	}
+}
+
 void FabiEngine3D::aabbEntity_setSize(const string& ID, Vec3 size, bool noLocal)
 {
 	if (_core->_aabbEntityManager.getEntity(ID)->getParentID() == "" || noLocal) // Standalone entity

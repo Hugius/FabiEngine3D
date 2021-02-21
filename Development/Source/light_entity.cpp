@@ -1,23 +1,28 @@
 #include "light_entity.hpp"
 
-void LightEntity::setPosition(Vec3 position)
+void LightEntity::setPosition(Vec3 value)
 {
-	_position = position;
+	_position = value;
 }
 
-void LightEntity::setColor(Vec3 color)
+void LightEntity::translate(Vec3 value)
 {
-	_color = color;
+	_position += value;
 }
 
-void LightEntity::setIntensity(float intensity)
+void LightEntity::setColor(Vec3 value)
 {
-	_intensity = intensity;
+	_color = value;
 }
 
-void LightEntity::setDistanceFactor(float distance)
+void LightEntity::setIntensity(float value)
 {
-	_distanceFactor = distance;
+	_intensity = value;
+}
+
+void LightEntity::setDistanceFactor(float value)
+{
+	_distanceFactor = value;
 }
 
 const Vec3 LightEntity::getPosition() const

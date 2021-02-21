@@ -70,19 +70,6 @@ bool ScriptInterpreter::_executeFe3dWaterEntityFunction(const string& functionNa
 			}
 		}
 	}
-	else if (functionName == "fe3d:water_get_color") // Set waterEntity color
-	{
-		// Validate arguments
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
-		{
-			// Validate water existence
-			if (_validateFe3dWaterEntity())
-			{
-				auto result = _fe3d.waterEntity_getSpeed(_fe3d.waterEntity_getSelectedID()).y;
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
-			}
-		}
-	}
 	else if (functionName == "fe3d:water_set_color") // Set waterEntity color
 	{
 		auto types = { ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };

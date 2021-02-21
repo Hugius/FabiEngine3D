@@ -8,10 +8,11 @@ public:
 	using BaseEntity::BaseEntity;
 	~LightEntity() = default;
 
-	void setPosition(Vec3 position);
-	void setColor(Vec3 color);
-	void setIntensity(float intensity);
-	void setDistanceFactor(float distance);
+	void setPosition(Vec3 value);
+	void translate(Vec3 value);
+	void setColor(Vec3 value);
+	void setIntensity(float value);
+	void setDistanceFactor(float value);
 
 	const Vec3 getPosition() const;
 	const Vec3 getColor() const;

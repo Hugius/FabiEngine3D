@@ -19,7 +19,7 @@ uniform vec3 u_fogColor;
 // Float uniforms
 uniform float u_fogMinDistance;
 uniform float u_fogMaxDistance;
-uniform float u_fogDefaultFactor;
+uniform float u_fogThickness;
 uniform float u_lightness;
 uniform float u_minAlpha;
 
@@ -72,7 +72,7 @@ vec3 applyFog(vec3 color)
 		float difference = u_fogMaxDistance - u_fogMinDistance;
 		float part = (distance - u_fogMinDistance) / difference;
 		part = clamp(part, 0.0f, 1.0f);
-		float factor = part * u_fogDefaultFactor;
+		float factor = part * u_fogThickness;
 		return mix(color, u_fogColor, factor);
 	}
 	else

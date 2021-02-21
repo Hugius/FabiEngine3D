@@ -306,7 +306,7 @@ void SceneEditor::_updateFogGraphicsSettingsMenu()
 		bool enabled = _fe3d.gfx_isFogEnabled();
 		float minDistance = _fe3d.gfx_getFogMinDistance();
 		float maxDistance = _fe3d.gfx_getFogMaxDistance();
-		float defaultFactor = _fe3d.gfx_getFogDefaultFactor();
+		float thickness = _fe3d.gfx_getFogThickness();
 		Vec3 color = _fe3d.gfx_getFogColor();
 
 		// GUI management
@@ -328,9 +328,9 @@ void SceneEditor::_updateFogGraphicsSettingsMenu()
 			{
 				_gui.getGlobalScreen()->addValueForm("maxDistance", "Max distance", maxDistance, Vec2(0.0f), Vec2(0.2f, 0.1f));
 			}
-			else if (screen->getButton("defaultFactor")->isHovered())
+			else if (screen->getButton("thickness")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("defaultFactor", "Default factor (0-100%)", defaultFactor * 100.0f, Vec2(0.0f), Vec2(0.2f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("thickness", "Thickness (0-100%)", thickness * 100.0f, Vec2(0.0f), Vec2(0.2f, 0.1f));
 			}
 			else if (screen->getButton("color")->isHovered())
 			{
@@ -349,10 +349,10 @@ void SceneEditor::_updateFogGraphicsSettingsMenu()
 		// Max distance value
 		_gui.getGlobalScreen()->checkValueForm("maxDistance", maxDistance);
 
-		// Default factor distance value
-		defaultFactor *= 100.0f;
-		_gui.getGlobalScreen()->checkValueForm("defaultFactor", defaultFactor);
-		defaultFactor = std::clamp(defaultFactor / 100.0f, 0.0f, 1.0f);
+		// Thickness value
+		thickness *= 100.0f;
+		_gui.getGlobalScreen()->checkValueForm("thickness", thickness);
+		thickness = std::clamp(thickness / 100.0f, 0.0f, 1.0f);
 
 		// Color values
 		color *= 255.0f;
@@ -366,7 +366,7 @@ void SceneEditor::_updateFogGraphicsSettingsMenu()
 		// Enable or disable DOF
 		if (enabled)
 		{
-			_fe3d.gfx_enableFog(minDistance, maxDistance, defaultFactor, color);
+			_fe3d.gfx_enableFog(minDistance, maxDistance, thickness, color);
 		}
 		else
 		{
@@ -376,7 +376,7 @@ void SceneEditor::_updateFogGraphicsSettingsMenu()
 		// Update buttons hoverability
 		screen->getButton("minDistance")->setHoverable(enabled);
 		screen->getButton("maxDistance")->setHoverable(enabled);
-		screen->getButton("defaultFactor")->setHoverable(enabled);
+		screen->getButton("thickness")->setHoverable(enabled);
 		screen->getButton("color")->setHoverable(enabled);
 	}
 }

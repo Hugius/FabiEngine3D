@@ -211,7 +211,7 @@ void SceneEditor::initializeGUI()
 	leftWindow->getScreen(screenID)->addButton("enabled", Vec2(0.0f, 0.75f), Vec2(GW("Enabled: NO"), 0.1f), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Enabled: NO", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen(screenID)->addButton("minDistance", Vec2(0.0f, 0.45f), Vec2(GW("Min distance"), 0.1f), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Min distance", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen(screenID)->addButton("maxDistance", Vec2(0.0f, 0.15f), Vec2(GW("Max distance"), 0.1f), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Max distance", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen(screenID)->addButton("defaultFactor", Vec2(0.0f, -0.15f), Vec2(GW("Default factor"), 0.1f), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Default factor", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen(screenID)->addButton("thickness", Vec2(0.0f, -0.15f), Vec2(GW("Thickness"), 0.1f), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Thickness", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen(screenID)->addButton("color", Vec2(0.0f, -0.45f), Vec2(GW("Color"), 0.1f), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Color", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen(screenID)->addButton("back", Vec2(0.0f, -0.75f), Vec2(GW("Go back"), 0.1f), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 

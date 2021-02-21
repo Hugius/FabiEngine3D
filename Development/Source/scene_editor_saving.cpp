@@ -578,9 +578,9 @@ void SceneEditor::saveSceneToFile()
 			{
 				float minDistance = _fe3d.gfx_getFogMinDistance();
 				float maxDistance = _fe3d.gfx_getFogMaxDistance();
-				float defaultFactor = _fe3d.gfx_getFogDefaultFactor();
+				float thickness = _fe3d.gfx_getFogThickness();
 				Vec3 color = _fe3d.gfx_getFogColor();
-				file << "GRAPHICS_FOG " << enabled << " " << minDistance << " " << maxDistance << " " << defaultFactor << " " << _fe3d.misc_vec2str(color) << std::endl;
+				file << "GRAPHICS_FOG " << enabled << " " << minDistance << " " << maxDistance << " " << thickness << " " << _fe3d.misc_vec2str(color) << std::endl;
 			}
 
 			// Lens flare settings

@@ -741,8 +741,100 @@ fe3d:print(camPos.x)
   Returns the alpha of model with **ID**.
 
 #### Animations
+- `fe3d:model_start_animation`(`STR` modelID, `STR` animationID, `INT` loops) ---> `NONE`  
+  Starts the animation with **animationID** on model with **modelID** and repeat it **loops** times.
+- `fe3d:model_is_animation_started`(`STR` modelID, `STR` animationID) ---> `BOOL`  
+  Returns true if animation with **animationID** was started (can be paused or playing) on model with **modelID**.
+- `fe3d:model_is_animation_playing`(`STR` modelID, `STR` animationID) ---> `BOOL`  
+  Returns true if animation with **animationID** is currently playing (not paused) on model with **modelID**.
+- `fe3d:model_is_animation_paused`(`STR` modelID, `STR` animationID) ---> `BOOL`  
+  Returns true if animation with **animationID** is currently paused (not playing) on model with **modelID**.
+- `fe3d:model_pause_animation`(`STR` modelID, `STR` animationID) ---> `NONE`  
+  Pauses the animation with **animationID** on model with **modelID**. Only possible when animation is currently playing.
+- `fe3d:model_resume_animation`(`STR` modelID, `STR` animationID) ---> `NONE`  
+  Resumes the animation with **animationID** on model with **modelID**. Only possible when animation is currently paused.
+- `fe3d:model_fade_animation`(`STR` modelID, `STR` animationID, `INT` frameStep) ---> `NONE`  
+  Fades the animation with **animationID** on model with **modelID** to an end. Every **frameStep** amount of frames the animation will stop. Only possible when animation is currently playing.
+- `fe3d:model_stop_animation`(`STR` modelID, `STR` animationID) ---> `NONE`  
+  Stops the animation with **animationID** on model with **modelID**.  Only possible when animation is currently playing.
+- `fe3d:model_set_animation_speed`(`STR` modelID, `STR` animationID, `DEC` speed) ---> `NONE`  
+  Sets the animation **speed** of animation with **animationID** on model with **modelID**.
+- `fe3d:model_get_animation_frame_index`(`STR` modelID, `STR` animationID) ---> `INT`  
+  Returns the current animation frame index of animation with **animationID** on model with **modelID**. An index starts at 0!
 
 #### Billboard
+- `fe3d:billboard_is_existing`() ---> `BOOL`  
+  Returns true if billboard is existing.
+- `fe3d:billboard_get_all_names`() ---> `LIST`  
+  Returns a list of strings with the full IDs of all billboards.
+- `fe3d:billboard_find_full_ids`(`STR` part) ---> `LIST`  
+  Returns a list of strings with the full IDs of all billboards which ID starts with **part**.
+- `fe3d:billboard_place`(`STR` newID, `STR` previewID, `DEC` x, `DEC` y, `DEC` z) ---> `NONE`  
+  Places a new billboard with **newID** (cannot start with @) based on billboard with **previewID** at position **xyz**.
+- `fe3d:billboard_delete`(`STR` ID) ---> `NOME`  
+  Deletes billboard with **ID** if existing.
+- `fe3d:billboard_set_visible`(`STR` ID, `BOOL` visible) ---> `NONE`  
+  Sets the visibility of billboard with **ID** to **visible**.
+- `fe3d:billboard_is_visible`(`STR` ID) ---> `BOOL`  
+  Returns true if billboard with **ID** is visible.
+- `fe3d:billboard_set_position`(`STR` ID, `DEC` x, `DEC` y, `DEC` z) ---> `NONE`  
+  Sets the position as **xyz** of billboard with **ID**.
+- `fe3d:billboard_move`(`STR` ID, `DEC` x, `DEC` y, `DEC` z) ---> `NONE`  
+  Moves the billboard with factor **xyz** of billboard with **ID**.
+- `fe3d:billboard_get_position`(`STR` ID) ---> `VEC3`  
+  Returns the position of billboard with **ID**.
+- `fe3d:billboard_set_rotation`(`STR` ID, `DEC` x, `DEC` y, `DEC` z) ---> `NONE`  
+  Sets the rotation as **xyz** of billboard with **ID**.
+- `fe3d:billboard_rotate`(`STR` ID, `DEC` x, `DEC` y, `DEC` z) ---> `NONE`  
+  Rotates the billboard with factor **xyz** of billboard with **ID**.
+- `fe3d:billboard_get_rotation`(`STR` ID) ---> `VEC3`  
+  Returns the rotation of billboard with **ID**.
+- `fe3d:billboard_set_size`(`STR` ID, `DEC` x, `DEC` y) ---> `NONE`  
+  Sets the size as **xy** of billboard with **ID**.
+- `fe3d:billboard_scale`(`STR` ID, `DEC` x, `DEC` y) ---> `NONE`  
+  Scales the billboard with factor **xy** of billboard with **ID**.
+- `fe3d:billboard_get_width`(`STR` ID) ---> `DEC`  
+  Returns the width of billboard with **ID**.
+- `fe3d:billboard_get_height`(`STR` ID) ---> `DEC`  
+  Returns the height of billboard with **ID**.
+- `fe3d:billboard_set_color`(`STR` ID, `DEC` r, `DEC` g, `DEC` b) ---> `NONE`  
+  Sets the color as **rgb** of billboard with **ID**.
+- `fe3d:billboard_get_color`(`STR` ID) ---> `VEC3`  
+  Returns the color of billboard with **ID**.
+- `fe3d:billboard_set_min_height`(`STR` ID, `DEC` height) ---> `NONE`  
+  Sets the local minimum **height** of billboard with **ID**. The height is relative to the billboard position.
+- `fe3d:billboard_get_min_height`(`STR` ID) ---> `DEC`  
+  Returns the minimum local height of billboard with **ID**.
+- `fe3d:billboard_set_max_height`(`STR` ID, `DEC` height) ---> `NONE`  
+  Sets the local maximum **height** of billboard with **ID**. The height is relative to the billboard position.
+- `fe3d:billboard_get_max_height`(`STR` ID) ---> `DEC`  
+  Returns the maximum local height of billboard with **ID**.
+- `fe3d:billboard_set_lightness`(`STR` ID, `DEC` lightness) ---> `NONE`  
+  Sets the **lightness** of billboard with **ID**.
+- `fe3d:billboard_get_lightness`(`STR` ID) ---> `DEC`  
+  Returns the lightness of billboard with **ID**.
+- `fe3d:billboard_set_aabb_responsive`(`STR` ID, `BOOL` responsive) ---> `NONE`  
+  Sets the AABB responsiveness to **responsive** of billboard with **ID**. This includes collision & raycasting response.
+- `fe3d:billboard_set_camera_facing_x`(`STR` ID, `BOOL` facing) ---> `NONE`  
+  Sets camera **facing** in the X direction for billboard with **ID**.
+- `fe3d:billboard_is_facing_camera_x`(`STR` ID) ---> `BOOL`  
+  Returns true if billboard with **ID** is facing the camera in the X direction.
+- `fe3d:billboard_set_camera_facing_y`(`STR` ID, `BOOL` facing) ---> `NONE`  
+  Sets camera **facing** in the Y direction for billboard with **ID**.
+- `fe3d:billboard_is_facing_camera_y`(`STR` ID) ---> `BOOL`  
+  Returns true if billboard with **ID** is facing the camera in the Y direction.
+- `fe3d:billboard_start_animation`(`STR` ID, `INT` loops) ---> `NONE`  
+  Starts the sprite animation of billboard with **ID** and repeat it **loops** times.
+- `fe3d:billboard_is_animation_playing`(`STR` ID) ---> `BOOL`  
+  Returns true if animation of billboard with **ID** is playing.
+- `fe3d:billboard_stop_animation`(`STR` ID) ---> `NONE`  
+  Stops the sprite animation of billboard with **ID**.
+- `fe3d:billboard_is_animation_finished`(`STR` ID) ---> `BOOL`  
+  Returns true if animation of billboard with **ID** is finished.
+- `fe3d:billboard_set_text`(`STR` ID, `STR` text) ---> `NONE`  
+  Sets the text content of billboard with **ID**.
+- `fe3d:billboard_get_text`(`STR` ID) ---> `STR`  
+  Returns the text content of billboard with **ID**.
 
 #### AABB
 

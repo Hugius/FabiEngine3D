@@ -685,8 +685,6 @@ fe3d:print(camPos.x)
   Returns true if model is existing.
 - `fe3d:model_get_all_ids`() ---> `LIST`  
   Returns a list of strings with the full IDs of all models.
-- `fe3d:model_find_full_ids`(`STR` part) ---> `LIST`  
-  Returns a list of strings with the full IDs of all models which ID starts with **part**.
 - `fe3d:model_place`(`STR` newID, `STR` previewID, `DEC` x, `DEC` y, `DEC` z) ---> `NONE`  
   Places a new model with **newID** (cannot start with @) based on model with **previewID** at position as **xyz**.
 - `fe3d:model_delete`(`STR` ID) ---> `NONE`  
@@ -767,8 +765,6 @@ fe3d:print(camPos.x)
   Returns true if billboard is existing.
 - `fe3d:billboard_get_all_ids`() ---> `LIST`  
   Returns a list of strings with the full IDs of all billboards.
-- `fe3d:billboard_find_full_ids`(`STR` part) ---> `LIST`  
-  Returns a list of strings with the full IDs of all billboards which ID starts with **part**.
 - `fe3d:billboard_place`(`STR` newID, `STR` previewID, `DEC` x, `DEC` y, `DEC` z) ---> `NONE`  
   Places a new billboard with **newID** (cannot start with @) based on billboard with **previewID** at position as **xyz**.
 - `fe3d:billboard_delete`(`STR` ID) ---> `NONE`  
@@ -901,8 +897,6 @@ fe3d:print(camPos.x)
   Returns true if audio is existing.
 - `fe3d:audio_get_all_names`() ---> `LIST`  
   Returns a list of strings with the full IDs of all audios.
-- `fe3d:audio_find_full_ids`(`STR` part) ---> `LIST`  
-  Returns a list of strings with the full IDs of all audios which ID starts with **part**.
 - `fe3d:audio_place2D`(`STR` newID, `STR` previewID) ---> `NONE`  
   Places a new 2D audio with **newID** (cannot start with @) based on audio with **previewID**.
 - `fe3d:audio_place3D`(`STR` newID, `STR` previewID, `DEC` x, `DEC` y, `DEC` z, `DEC` volume, `DEC` distance) ---> `NONE`  
@@ -1041,6 +1035,24 @@ fe3d:print(camPos.x)
   Returns the alpha value of text with **ID**.
 
 #### Miscellaneous
+- `fe3d:game_pause`() ---> `NONE`  
+  Pauses all internal game/engine updates if playing (except for the scripting of course).
+- `fe3d:game_unpause`() ---> `NONE`  
+  Unpauses all internal game/engine updates if paused.
+- `fe3d:game_stop`() ---> `NONE`  
+  Stops the game.
+- `fe3d:print`(`VEC3/STR/DEC/INT/BOOL` message) ---> `NONE`  
+  Prints a value to the console (both internal & external). Accepts various message types.
+- `fe3d:scene_load`(`STR` ID) ---> `NONE`  
+  Loads the scene with **ID** into the game. Any previously loaded scene will be cleared.
+- `fe3d:scene_clear`() ---> `NONE`  
+  Deletes (or resets) all stuff in the currently loaded scene (such as models, billboard, graphics, etc).
+- `fe3d:scene_get_current_id`() ---> `STR`  
+  Returns ID of currently loaded scene.
+- `fe3d:cursor_show`() ---> `NONE`  
+  Makes mouse cursor visible.
+- `fe3d:cursor_hide`() ---> `NONE`  
+  Makes mouse cursor invisible.
 
 ### Math functions
 - `math:tan`(`DEC` degrees) ---> `DEC`  
@@ -1081,6 +1093,7 @@ fe3d:print(camPos.x)
   Returns the absolute value of **value**.
 - `math:distance`(`VEC3` first, `VEC3` second) ---> `DEC`  
   Returns the absolute distance between **first** and **second**.
+
 ### Miscellaneous functions
 - `misc:concat_strings`(`STR` first, `STR` second) ---> `STR`  
   Returns **first** and **second** concatenated together.

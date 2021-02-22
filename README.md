@@ -687,8 +687,10 @@ fe3d:print(camPos.x)
 #### Model
 - `fe3d:model_is_existing`() ---> `BOOL`  
   Returns true if model is existing.
+- `fe3d:model_find_ids`(`STR` subID) ---> `LIST`  
+  Returns a list of strings with the IDs of all models which IDs start with **subID**.
 - `fe3d:model_get_all_ids`() ---> `LIST`  
-  Returns a list of strings with the full IDs of all models.
+  Returns a list of strings with the IDs of all models.
 - `fe3d:model_place`(`STR` newID, `STR` previewID, `DEC` x, `DEC` y, `DEC` z) ---> `NONE`  
   Places a new model with **newID** (cannot start with @) based on model with **previewID** at position as **xyz**.
 - `fe3d:model_delete`(`STR` ID) ---> `NONE`  
@@ -767,6 +769,8 @@ fe3d:print(camPos.x)
 #### Billboard
 - `fe3d:billboard_is_existing`() ---> `BOOL`  
   Returns true if billboard is existing.
+- `fe3d:billboard_find_ids`(`STR` subID) ---> `LIST`  
+  Returns a list of strings with the IDs of all billboards which IDs start with **subID**.
 - `fe3d:billboard_get_all_ids`() ---> `LIST`  
   Returns a list of strings with the full IDs of all billboards.
 - `fe3d:billboard_place`(`STR` newID, `STR` previewID, `DEC` x, `DEC` y, `DEC` z) ---> `NONE`  
@@ -839,6 +843,8 @@ fe3d:print(camPos.x)
 #### AABB
 - `fe3d:aabb_is_existing`() ---> `BOOL`  
   Returns true if AABB is existing.
+- `fe3d:aabb_find_ids`(`STR` subID) ---> `LIST`  
+  Returns a list of strings with the IDs of all AABBs which IDs start with **subID**.
 - `fe3d:aabb_get_all_ids`() ---> `LIST`  
   Returns a list of strings with the full IDs of all AABB.
 - `fe3d:aabb_place`(`STR` newID, `DEC` x, `DEC` y, `DEC` z, `DEC` width, `DEC` height, `DEC` depth) ---> `NONE`  
@@ -867,6 +873,8 @@ fe3d:print(camPos.x)
 #### Light
 - `fe3d:light_is_existing`() ---> `BOOL`  
   Returns true if light is existing.
+- `fe3d:light_find_ids`(`STR` subID) ---> `LIST`  
+  Returns a list of strings with the IDs of all lights which IDs start with **subID**.
 - `fe3d:light_get_all_ids`() ---> `LIST`  
   Returns a list of strings with the full IDs of all light.
 - `fe3d:light_place`(`STR` newID, `DEC` x, `DEC` y, `DEC` z, `DEC` r, `DEC` g, `DEC` b, `DEC` intensity, `DEC` distance) ---> `NONE`  
@@ -899,7 +907,9 @@ fe3d:print(camPos.x)
 #### Audio
 - `fe3d:audio_is_existing`() ---> `BOOL`  
   Returns true if audio is existing.
-- `fe3d:audio_get_all_names`() ---> `LIST`  
+- `fe3d:audio_find_ids`(`STR` subID) ---> `LIST`  
+  Returns a list of strings with the IDs of all audio which IDs start with **subID**.
+- `fe3d:audio_get_all_ids`() ---> `LIST`  
   Returns a list of strings with the full IDs of all audios.
 - `fe3d:audio_place2D`(`STR` newID, `STR` previewID) ---> `NONE`  
   Places a new 2D audio with **newID** (cannot start with @) based on audio with **previewID**.
@@ -949,6 +959,8 @@ fe3d:print(camPos.x)
 #### Image
 - `fe3d:image_is_existing`() ---> `BOOL`  
   Returns true if image is existing.
+- `fe3d:image_find_ids`(`STR` subID) ---> `LIST`  
+  Returns a list of strings with the IDs of all images which IDs start with **subID**.
 - `fe3d:image_get_all_ids`() ---> `LIST`  
   Returns a list of strings with the full IDs of all images.
 - `fe3d:image_place`(`STR` newID, `STR` texturePath, `DEC` x, `DEC` y, `DEC` rotation, `DEC` width, `DEC` height) ---> `NONE`  
@@ -993,6 +1005,8 @@ fe3d:print(camPos.x)
 #### Text
 - `fe3d:text_is_existing`() ---> `BOOL`  
   Returns true if text is existing.
+- `fe3d:text_find_ids`(`STR` subID) ---> `LIST`  
+  Returns a list of strings with the IDs of all text which IDs start with **subID**.
 - `fe3d:text_get_all_ids`() ---> `LIST`  
   Returns a list of strings with the full IDs of all texts.
 - `fe3d:text_place`(`STR` newID, `STR` fontPath, `STR` content, `DEC` x, `DEC` y, `DEC` rotation, `DEC` width, `DEC` height) ---> `NONE`  

@@ -1,4 +1,4 @@
-48 28
+58 5
 META script_type_update
 
 /// Update health icon color
@@ -44,21 +44,21 @@ ELSE:
 EDIT _oxygen = math:clamp(_oxygen, 0.0, 1.0)
 
 /// Update temperature
+BOOL torchEquipped = (_isInvOpen IS <true> AND _inventory[_equipIndex] IS "torch")
+INCR _temperature 0.00001
 IF _isUnderWater IS <true>:
     DECR _temperature 0.0005
-ELIF _isInvOpen IS <true> AND _equipIndex IS 7 AND _inventory[_equipIndex] NOT "":
-    INCR _temperature 0.0005
-ELIF _isDayTime IS <false>:
-    DECR _temperature 0.00015
-ELSE:
-    INCR _temperature 0.00001
+IF _isDayTime IS <false>:
+    DECR _temperature 0.0005
+IF torchEquipped IS <true>:
+    INCR _temperature 0.001
 EDIT _temperature = math:clamp(_temperature, 0.0, 1.0)
 
 /// Update health
 IF _hunger IS 0.0 OR _thirst IS 0.0 OR _oxygen IS 0.0 OR _temperature IS 0.0:
     DECR _health 0.0005
 ELSE:
-    INCR _health 0.00001
+    INCR _health 0.00005
 EDIT _health = math:clamp(_health, 0.0, 1.0)
 
 /// Check if player died

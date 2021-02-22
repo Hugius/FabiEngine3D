@@ -1,16 +1,16 @@
-13 30
+11 64
 META script_type_update
 
 /// Check if a built building is selected
-INT listSize = misc:get_list_size("_buildables")
+INT listSize = misc:get_list_size("_buildNames")
 INT index = 0
 STR hoveredID = ""
 DEC distance = 0.0
 LOOP:
     IF index IS listSize:
         BREAK
-    EDIT hoveredID = fe3d:raycast_into_model(_buildables[index], "", <true>)
-    EDIT distance = fe3d:raycast_into_model_distance(_buildables[index], "", <true>)
+    EDIT hoveredID = fe3d:raycast_into_model(_buildNames[index], "", <true>)
+    EDIT distance = fe3d:raycast_into_model_distance(_buildNames[index], "", <true>)
     IF distance IS -1.0:
         EDIT distance = 1000.0
     IF hoveredID NOT "":
@@ -51,14 +51,30 @@ STR toolID = _inventory[_equipIndex]
 fe3d:text_set_visible("build", <false>)
 IF toolID IS "hammer_stone" OR toolID IS "hammer_iron":
     IF _isInvOpen IS <true> AND hoveredID NOT "" AND _canAffordBuilding IS <true>:
-        IF distance LESS _maxReach AND height LESS size.y:
+        INT wp = _buildablesWoodPrice[hoveredIndex]
+        INT sp = _buildablesStonePrice[hoveredIndex]
+        INT cp = _buildablesClayPrice[hoveredIndex]
+        INT ip = _buildablesIronPrice[hoveredIndex]
+        DECR wp 1
+        DECR sp 1
+        DECR cp 1
+        DECR ip 1
+        BOOL afford1 = (_bag[0] MORE wp AND _bag[1] MORE sp)
+        BOOL afford2 = (_bag[2] MORE cp AND _bag[7] MORE ip)
+        BOOL canAfford = (afford1 IS <true> AND afford2 IS <true>)
+        IF distance LESS _maxReach AND height LESS size.y AND canAfford IS <true>:
             fe3d:text_set_visible("build", <true>)
             IF _wasHammerPlaying IS <true> AND _isHammerPlaying IS <false>:
                 DEC heightIncrease = size.y
-                MUL heightIncrease 0.1
+                MUL heightIncrease 0.1000001
                 INCR height heightIncrease
                 fe3d:model_set_max_height(hoveredID, height)
-                DECR _bag[0] _buildablesWoodPrice[_buildIndex]
-                DECR _bag[1] _buildablesStonePrice[_buildIndex]
-                DECR _bag[2] _buildablesClayPrice[_buildIndex]
-                DECR _bag[7] _buildablesIronPrice[_buildIndex]
+                DECR _bag[0] _buildablesWoodPrice[hoveredIndex]
+                DECR _bag[1] _buildablesStonePrice[hoveredIndex]
+                DECR _bag[2] _buildablesClayPrice[hoveredIndex]
+                DECR _bag[7] _buildablesIronPrice[hoveredIndex]
+                /// Check if building is finished
+                IF height IS size.y OR height MORE size.y:
+                    STR bedID = misc:concat_strings("bed:", hoveredID)
+                    VEC3 bedPos = fe3d:model_get_position(hoveredID)
+                    fe3d:model_place(bedID, "bed", bedPos.x, bedPos.y, bedPos.z)

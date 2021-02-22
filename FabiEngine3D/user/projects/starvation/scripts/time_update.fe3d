@@ -1,4 +1,4 @@
-12 28
+12 27
 META script_type_update
 
 /// Update time passing
@@ -11,13 +11,19 @@ IF _passedTime MORE 100.0:
         EDIT _mustBeDayTime = <true>
 ELSE:
     IF _isTimeCycling IS <false>:
-        INCR _passedTime 0.05
+        DEC timeSpeed = 0.15
+        MUL timeSpeed _timeMultiplier
+        INCR _passedTime timeSpeed
 
 /// Update day-night cycle
-CONST DEC ambSpeed = 0.00015
-CONST DEC dirSpeed = 0.0001225
-CONST DEC skySpeed = 0.00025
-CONST DEC heightSpeed = 0.35
+DEC ambSpeed = 0.00015
+DEC dirSpeed = 0.0001225
+DEC skySpeed = 0.00025
+DEC heightSpeed = 0.35
+MUL ambSpeed _timeMultiplier
+MUL dirSpeed _timeMultiplier
+MUL skySpeed _timeMultiplier
+MUL heightSpeed _timeMultiplier
 IF _isTimeCycling IS <true>:
     IF _mustBeDayTime IS <true>:
         INCR _ambLightIntensity ambSpeed
@@ -61,7 +67,7 @@ fe3d:graphics_set_directional_light_position(dirPos.x, dirPos.y, dirPos.z)
 fe3d:graphics_set_fog_color(fogIntensity, fogIntensity, fogIntensity)
 
 /// Update fire billboards
-CONST LIST billboards = fe3d:billboard_find_full_ids("fire")
+CONST LIST billboards = fe3d:billboard_find_ids("fire")
 INT index = 0
 INT size = misc:get_list_size("billboards")
 LOOP:

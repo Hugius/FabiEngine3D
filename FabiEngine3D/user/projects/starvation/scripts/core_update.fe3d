@@ -1,4 +1,4 @@
-32 9
+13 10
 META script_type_update
 META execution_entry
 
@@ -59,4 +59,5 @@ IF currentWorld IS "home":
 EXEC time_update
 
 /// Miscellaneous
+EXEC sleep_update
 EXEC misc_update

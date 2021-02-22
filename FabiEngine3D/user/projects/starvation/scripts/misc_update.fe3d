@@ -1,9 +1,9 @@
-37 45
+1 0
 META script_type_update
 
 /// Torch position
 BOOL equipped = (_equipIndex IS 7 AND _inventory[_equipIndex] NOT "")
-IF equipped IS <true>:
+IF equipped IS <true> AND _isInvOpen IS <true>:
     VEC3 torchPos = fe3d:model_get_position("torch")
     VEC3 firePos = torchPos
     INCR torchPos.y 2.0
@@ -12,7 +12,7 @@ IF equipped IS <true>:
     fe3d:billboard_set_position("torch", firePos.x, firePos.y, firePos.z)
 
 /// Check if it's nighttime
-IF _isDayTime IS <false> AND equipped IS <true>:
+IF _isDayTime IS <false> AND equipped IS <true> AND _isInvOpen IS <true>:
     fe3d:light_set_visible("torch", <true>)
     fe3d:billboard_set_visible("torch", <true>)
     DECR _durabilities[7] 0.0001
@@ -22,7 +22,10 @@ ELSE:
 
 /// Black intro fading
 fe3d:image_set_alpha("black", _blackAlpha)
-DECR _blackAlpha 0.0025
+IF _blackAlpha LESS _targetBlackAlpha:
+    INCR _blackAlpha 0.0025
+ELSE:
+    DECR _blackAlpha 0.0025
 
 /// Travelling to Starvia
 STR currentWorld = fe3d:scene_get_current_id()

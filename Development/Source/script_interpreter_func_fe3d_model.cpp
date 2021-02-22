@@ -49,6 +49,35 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 		}
 	}
+	else if (functionName == "fe3d:model_find_ids") // Find full gameEntity IDs
+	{
+		auto types = { ScriptValueType::STRING };
+
+		// Validate arguments
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		{
+			// Cannot request a preview entity
+			if (arguments[0].getString().front() == '@')
+			{
+				_throwScriptError("Requested model ID cannot start with '@'");
+				return true;
+			}
+
+			// Find full gameEntity IDs based on part ID
+			for (auto& ID : _fe3d.gameEntity_getAllIDs())
+			{
+				// If substring matches
+				if (arguments[0].getString() == ID.substr(0, arguments[0].getString().size()))
+				{
+					// Only non-preview models
+					if (ID.front() != '@')
+					{
+						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, ID));
+					}
+				}
+			}
+		}
+	}
 	else if (functionName == "fe3d:model_get_all_ids") // Get all gameEntity IDs
 	{
 		// Validate arguments

@@ -34,6 +34,35 @@ bool ScriptInterpreter::_executeFe3dAabbEntityFunction(const string& functionNam
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 		}
 	}
+	else if (functionName == "fe3d:aabb_find_ids") // Find full aabbEntity IDs
+	{
+		auto types = { ScriptValueType::STRING };
+
+		// Validate arguments
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		{
+			// Cannot request a preview entity
+			if (arguments[0].getString().front() == '@')
+			{
+				_throwScriptError("Requested AABB ID cannot start with '@'");
+				return true;
+			}
+
+			// Find full aabbEntity IDs based on part ID
+			for (auto& ID : _fe3d.aabbEntity_getAllIDs())
+			{
+				// If substring matches
+				if (arguments[0].getString() == ID.substr(0, arguments[0].getString().size()))
+				{
+					// Only non-preview AABBs
+					if (ID.front() != '@')
+					{
+						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, ID));
+					}
+				}
+			}
+		}
+	}
 	else if (functionName == "fe3d:aabb_get_all_ids") // Get all aabbEntity IDs
 	{
 		// Validate arguments

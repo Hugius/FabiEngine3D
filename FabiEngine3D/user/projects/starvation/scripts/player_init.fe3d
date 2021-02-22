@@ -1,4 +1,4 @@
-43 42
+40 17
 META script_type_init
 
 /// Globals
@@ -39,6 +39,7 @@ GLOB BOOL _isFalling = <false>
 GLOB BOOL _isWalking = <false>
 GLOB BOOL _isRunning = <false>
 GLOB BOOL _isFishing = <false>
+GLOB BOOL _isAbleToMove = <false>
 GLOB BOOL _mayJump = <false>
 
 /// Player HUD

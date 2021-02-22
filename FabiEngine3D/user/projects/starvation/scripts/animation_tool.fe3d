@@ -1,4 +1,4 @@
-64 87
+73 12
 META script_type_update
 
 /// Determine tool animation type
@@ -64,17 +64,15 @@ IF equipped IS <true> AND allowed IS <true>:
     IF animID NOT "" AND _isJumping IS <false> AND _isFalling IS <false>:
         BOOL lmbPressed = fe3d:input_is_mouse_pressed("BUTTON_LEFT")
         IF lmbPressed IS <true> AND _isUnderWater IS <false> AND _isBuilding IS <false>:
-            IF _isToolPlaying IS <false> AND _isPickupPlaying IS <false>:
-                IF _isTalking IS <false> AND _isCrafting IS <false>:
-                    fe3d:model_start_animation(toolID, animID, 1)
+            IF _isAbleToMove IS <true>:
+                fe3d:model_start_animation(toolID, animID, 1)
 
 /// Tool bobbing animation
 BOOL isBobbing = fe3d:model_is_animation_started(toolID, "tool_bobbing")
 IF equipped IS <true> AND allowed IS <true> AND _isWalking IS <true>:
-    IF _isToolPlaying IS <false> AND _isPickupPlaying IS <false>:
-        IF _isTalking IS <false> AND _isCrafting IS <false>:
-            IF isBobbing IS <false> AND toolID NOT "torch":
-                fe3d:model_start_animation(toolID, "tool_bobbing", 1)
+    IF _isAbleToMove IS <true>:
+        IF isBobbing IS <false> AND toolID NOT "torch":
+            fe3d:model_start_animation(toolID, "tool_bobbing", 1)
 
 /// Tool bobbing speed
 IF isBobbing IS <true>:

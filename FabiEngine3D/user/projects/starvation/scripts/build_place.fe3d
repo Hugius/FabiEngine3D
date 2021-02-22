@@ -1,4 +1,4 @@
-60 29
+89 12
 META script_type_update
 
 /// Temporary values
@@ -64,7 +64,7 @@ IF _isBuilding IS <true> AND lmbPressed IS <true>:
     IF valid IS "":
         INT counter = _buildCounters[_buildIndex]
         CAST counter STR
-        STR newID = misc:concat_strings(_buildables[_buildIndex], counter)
+        STR newID = misc:concat_strings(_buildNames[_buildIndex], counter)
         IF _buildIndex IS 0:
             VEC3 size = fe3d:aabb_get_size("small_house_display_back")
             STR previewID = "house14"

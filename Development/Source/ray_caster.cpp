@@ -170,6 +170,10 @@ Vec3 RayCaster::_calculateTerrainPoint()
 			{
 				return endPoint;
 			}
+			else
+			{
+				break;
+			}
 		}
 		else
 		{

@@ -42,6 +42,35 @@ bool ScriptInterpreter::_executeFe3dTextEntityFunction(const string& functionNam
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 		}
 	}
+	else if (functionName == "fe3d:text_find_ids") // Find full textEntity IDs
+	{
+		auto types = { ScriptValueType::STRING };
+
+		// Validate arguments
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		{
+			// Cannot request a preview entity
+			if (arguments[0].getString().front() == '@')
+			{
+				_throwScriptError("Requested text ID cannot start with '@'");
+				return true;
+			}
+
+			// Find full textEntity IDs based on part ID
+			for (auto& ID : _fe3d.textEntity_getAllIDs())
+			{
+				// If substring matches
+				if (arguments[0].getString() == ID.substr(0, arguments[0].getString().size()))
+				{
+					// Only non-preview text
+					if (ID.front() != '@')
+					{
+						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, ID));
+					}
+				}
+			}
+		}
+	}
 	else if (functionName == "fe3d:text_get_all_ids") // Get all textEntity IDs
 	{
 		// Validate arguments

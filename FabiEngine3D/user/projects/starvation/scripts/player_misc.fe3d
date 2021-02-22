@@ -1,14 +1,17 @@
-0 23
+5 12
 META script_type_update
 
-/// Disable camera movement when animation is playing
-BOOL condition1 = (_isToolPlaying IS <true> OR _isPickupPlaying IS <true>)
-BOOL condition2 = (_isTalking IS <true> OR _isCrafting IS <true>)
-IF condition1 IS <true> OR condition2 IS <true>:
-    fe3d:camera_disable_first_person_view()
-ELSE:
-    fe3d:camera_enable_first_person_view()
+BOOL con1 = (_isToolPlaying IS <false> AND _isPickupPlaying IS <false>)
+BOOL con2 = (_isTalking IS <false> AND _isCrafting IS <false>)
+BOOL con3 = (_isSleeping IS <false>)
+EDIT _isAbleToMove = (con1 IS <true> AND con2 IS <true> AND con3 IS <true>)
 
-/// Center cursor when pickup is playing
+/// Camera movement
+IF _isAbleToMove IS <true>:
+    fe3d:camera_enable_first_person_view()
+ELSE:
+    fe3d:camera_disable_first_person_view()
+
+/// Centering cursor
 IF _isPickupPlaying IS <true> OR _isToolPlaying IS <true>:
     fe3d:camera_center_cursor()

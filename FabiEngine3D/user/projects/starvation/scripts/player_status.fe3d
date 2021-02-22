@@ -45,7 +45,9 @@ EDIT _oxygen = math:clamp(_oxygen, 0.0, 1.0)
 
 /// Update temperature
 IF _isUnderWater IS <true>:
-    DECR _temperature 0.00015
+    DECR _temperature 0.0005
+ELIF _isInvOpen IS <true> AND _equipIndex IS 7 AND _inventory[_equipIndex] NOT "":
+    INCR _temperature 0.0005
 ELIF _isDayTime IS <false>:
     DECR _temperature 0.00015
 ELSE:

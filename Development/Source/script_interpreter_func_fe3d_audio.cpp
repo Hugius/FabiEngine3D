@@ -49,6 +49,35 @@ bool ScriptInterpreter::_executeFe3dAudioEntityFunction(const string& functionNa
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 		}
 	}
+	else if (functionName == "fe3d:audio_find_ids") // Find full audioEntity IDs
+	{
+		auto types = { ScriptValueType::STRING };
+
+		// Validate arguments
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		{
+			// Cannot request a preview entity
+			if (arguments[0].getString().front() == '@')
+			{
+				_throwScriptError("Requested audio ID cannot start with '@'");
+				return true;
+			}
+
+			// Find full audioEntity IDs based on part ID
+			for (auto& ID : _fe3d.audioEntity_getAllIDs())
+			{
+				// If substring matches
+				if (arguments[0].getString() == ID.substr(0, arguments[0].getString().size()))
+				{
+					// Only non-preview audio
+					if (ID.front() != '@')
+					{
+						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, ID));
+					}
+				}
+			}
+		}
+	}
 	else if (functionName == "fe3d:audio_get_all_ids") // Get all audioEntity IDs
 	{
 		// Validate arguments

@@ -1,4 +1,4 @@
-58 31
+40 10
 META script_type_update
 
 /// Temporary values
@@ -39,9 +39,7 @@ ELSE:
         INCR _stamina 0.001
 
 /// Update camera movement
-BOOL condition1 = (_isToolPlaying IS <false> AND _isPickupPlaying IS <false>)
-BOOL condition2 = (_isTalking IS <false> AND _isCrafting IS <false>)
-IF condition1 IS <true> AND condition2 IS <true>:
+IF _isAbleToMove IS <true>:
     IF left IS <true> AND _movingAcc.x MORE minSpeed:
         DECR _movingAcc.x accSpeed
     IF right IS <true> AND _movingAcc.x LESS maxSpeed:

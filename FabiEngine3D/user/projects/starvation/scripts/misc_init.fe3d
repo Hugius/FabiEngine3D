@@ -1,4 +1,4 @@
-4 30
+36 28
 META script_type_init
 
 /// Globals
@@ -22,6 +22,7 @@ fe3d:text_place("pickup", f, "Press F to pickup", 0.0, -0.2, 0.0, 0.44, 0.075)
 fe3d:text_place("craft", f, "Press E to craft", 0.0, -0.2, 0.0, 0.42, 0.075)
 fe3d:text_place("talk", f, "Press E to talk", 0.0, -0.2, 0.0, 0.4, 0.075)
 fe3d:text_place("sleep", f, "Press E to sleep", 0.0, -0.2, 0.0, 0.42, 0.075)
+fe3d:text_place("drink", f, "Press E to drink", 0.0, -0.2, 0.0, 0.42, 0.075)
 fe3d:text_place("sow", f, "Press E to sow", 0.0, -0.2, 0.0, 0.38, 0.075)
 fe3d:text_place("mine", f, "Press LMB to mine", 0.0, -0.2, 0.0, 0.44, 0.075)
 fe3d:text_place("cut", f, "Press LMB to cut", 0.0, -0.2, 0.0, 0.42, 0.075)
@@ -34,6 +35,7 @@ fe3d:text_set_visible("pickup", <false>)
 fe3d:text_set_visible("craft", <false>)
 fe3d:text_set_visible("talk", <false>)
 fe3d:text_set_visible("sleep", <false>)
+fe3d:text_set_visible("drink", <false>)
 fe3d:text_set_visible("sow", <false>)
 fe3d:text_set_visible("mine", <false>)
 fe3d:text_set_visible("cut", <false>)

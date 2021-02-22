@@ -46,6 +46,21 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 
 		// Retrieve line text
 		string scriptLineText = scriptFile->getLineText(lineIndex);
+		stringstream scriptLineTextStream = stringstream(scriptLineText);
+		string noWhiteSpace;
+		scriptLineTextStream >> noWhiteSpace;
+
+		// Ignore empty lines
+		if (noWhiteSpace.empty())
+		{
+			continue;
+		}
+
+		// Ignore comments
+		if (noWhiteSpace.substr(0, 3) == "///")
+		{
+			continue;
+		}
 		
 		// Count front spaces
 		unsigned int countedSpaces = _countFrontSpaces(scriptLineText);
@@ -115,18 +130,6 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 		else // Current line in correct scope
 		{
 			_passedScopeChanger = false;
-		}
-
-		// Ignore empty lines
-		if (scriptLineText.empty())
-		{
-			continue;
-		}
-
-		// Ignore comments
-		if (scriptLineText.substr(0, 3) == "///")
-		{
-			continue;
 		}
 
 		// Determine keyword type

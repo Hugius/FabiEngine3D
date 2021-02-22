@@ -1,4 +1,4 @@
-58 5
+30 17
 META script_type_update
 
 /// Update health icon color
@@ -30,7 +30,7 @@ DECR _hunger 0.000025
 EDIT _hunger = math:clamp(_hunger, 0.0, 1.0)
 
 /// Update thirst
-DECR _thirst 0.000025
+DECR _thirst 0.00025
 EDIT _thirst = math:clamp(_thirst, 0.0, 1.0)
 
 /// Update stamina

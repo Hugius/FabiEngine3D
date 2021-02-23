@@ -737,8 +737,10 @@ fe3d:print(camPos.x)
   Sets the **lightness** of model with **ID**.
 - `fe3d:model_get_lightness`(`STR` ID) ---> `DEC`  
   Returns the lightness of model with **ID**.
-- `fe3d:model_set_aabb_responsive`(`STR` ID, `BOOL` responsive) ---> `NONE`  
-  Sets the model's parent AABB responsiveness to **responsive** of model with **ID**. This includes collision & raycasting response.
+- `fe3d:model_set_aabb_raycast_responsive`(`STR` ID, `BOOL` responsive) ---> `NONE`  
+  Sets the model's parent AABB raycasting responsiveness to **responsive** of model with **ID**.
+- `fe3d:model_set_aabb_collision_responsive`(`STR` ID, `BOOL` responsive) ---> `NONE`  
+  Sets the model's parent AABB collision responsiveness to **responsive** of model with **ID**.
 - `fe3d:model_set_alpha`(`STR` ID, `DEC` alpha) ---> `NONE`  
   Sets the **alpha** value for transparency of model with **ID**. Keep in mind FabiEngine3D does not support transparency sorting!
 - `fe3d:model_get_alpha`(`STR` ID) ---> `DEC`  
@@ -817,8 +819,10 @@ fe3d:print(camPos.x)
   Sets the **lightness** of billboard with **ID**.
 - `fe3d:billboard_get_lightness`(`STR` ID) ---> `DEC`  
   Returns the lightness of billboard with **ID**.
-- `fe3d:billboard_set_aabb_responsive`(`STR` ID, `BOOL` responsive) ---> `NONE`  
-  Sets the billboard's parent AABB responsiveness to **responsive** of billboard with **ID**. This includes collision & raycasting response.
+- `fe3d:billboard_set_aabb_raycast_responsive`(`STR` ID, `BOOL` responsive) ---> `NONE`  
+  Sets the billboard's parent AABB raycasting responsiveness to **responsive** of billboard with **ID**.
+- `fe3d:billboard_set_aabb_collision_responsive`(`STR` ID, `BOOL` responsive) ---> `NONE`  
+  Sets the billboard's parent AABB collision responsiveness to **responsive** of billboard with **ID**.
 - `fe3d:billboard_set_camera_facing_x`(`STR` ID, `BOOL` facing) ---> `NONE`  
   Sets camera **facing** in the X direction for billboard with **ID**.
 - `fe3d:billboard_is_facing_camera_x`(`STR` ID) ---> `BOOL`  
@@ -867,8 +871,10 @@ fe3d:print(camPos.x)
   Scales the AABB with factor **xyz** of AABB with **ID**.
 - `fe3d:aabb_get_size`(`STR` ID) ---> `VEC3`  
   Returns the size of AABB with **ID**.
-- `fe3d:aabb_set_responsive`(`STR` ID, `BOOL` responsive) ---> `NONE`  
-  Sets the AABB responsiveness to **responsive** of AABB with **ID**. This includes collision & raycasting response.
+- `fe3d:aabb_set_raycast_responsive`(`STR` ID, `BOOL` responsive) ---> `NONE`  
+  Sets the AABB raycasting responsiveness to **responsive** of AABB with **ID**.
+- `fe3d:aabb_set_collision_responsive`(`STR` ID, `BOOL` responsive) ---> `NONE`  
+  Sets the AABB collision responsiveness to **responsive** of AABB with **ID**.
 
 #### Light
 - `fe3d:light_is_existing`() ---> `BOOL`  

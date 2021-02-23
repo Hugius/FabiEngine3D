@@ -1,4 +1,4 @@
-11 33
+29 16
 META script_type_update
 
 /// Temporary values
@@ -23,3 +23,28 @@ IF _wasHoePlaying IS <true> AND _isHoePlaying IS <false>:
         EDIT newID = misc:concat_strings("corn", newID)
         fe3d:model_place(newID, "corn", camPos.x, feetY, camPos.z)
         fe3d:model_set_aabb_collision_responsive(newID, <false>)
+        STR aabbID = misc:concat_strings(newID, "_corn")
+        VEC3 size = fe3d:aabb_get_size(aabbID)
+        MUL size.y 0.025
+        fe3d:model_set_max_height(newID, size.y)
+
+/// Update corn growing
+LIST cornIDs = fe3d:model_find_ids("corn")
+INT length = misc:get_list_size("cornIDs")
+INT index = 0
+STR cornID = ""
+STR cornAabbID = ""
+VEC3 cornSize = [0.0 0.0 0.0]
+DEC height = 0.0
+LOOP:
+    IF index IS length:
+        BREAK
+    ELSE:
+        EDIT cornID = cornIDs[index]
+        EDIT cornAabbID = misc:concat_strings(cornID, "_corn")
+        EDIT cornSize = fe3d:aabb_get_size(cornAabbID)
+        EDIT height = fe3d:model_get_max_height(cornID)
+        IF height LESS cornSize.y:
+            INCR height 0.001
+            fe3d:model_set_max_height(cornID, height)
+        INCR index 1

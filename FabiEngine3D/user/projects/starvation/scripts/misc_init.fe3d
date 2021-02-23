@@ -1,4 +1,4 @@
-48 31
+43 0
 META script_type_init
 
 /// Globals
@@ -18,7 +18,7 @@ GLOB BOOL _isSleeping = <false>
 STR f = "font.ttf"
 fe3d:image_place("crosshair", "crosshair.png", 0.0, 0.0, 0.0, 0.0325, 0.05)
 fe3d:image_place("black", "black.png", 0.0, 0.0, 0.0, 2.0, 2.0)
-fe3d:text_place("pickup", f, "Press E to pickup", 0.0, -0.2, 0.0, 0.44, 0.075)
+fe3d:text_place("pickup", f, "Press F to pickup", 0.0, -0.2, 0.0, 0.44, 0.075)
 fe3d:text_place("craft", f, "Press E to craft", 0.0, -0.2, 0.0, 0.42, 0.075)
 fe3d:text_place("talk", f, "Press E to talk", 0.0, -0.2, 0.0, 0.4, 0.075)
 fe3d:text_place("sleep", f, "Press E to sleep", 0.0, -0.2, 0.0, 0.42, 0.075)

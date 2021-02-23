@@ -110,7 +110,7 @@ bool ScriptInterpreter::_executeFe3dAabbEntityFunction(const string& functionNam
 			// Add AABB
 			_fe3d.aabbEntity_add(arguments[0].getString(), 
 				Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()),
-				Vec3(arguments[4].getDecimal(), arguments[5].getDecimal(), arguments[6].getDecimal()), true);
+				Vec3(arguments[4].getDecimal(), arguments[5].getDecimal(), arguments[6].getDecimal()), true, true);
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
@@ -223,7 +223,7 @@ bool ScriptInterpreter::_executeFe3dAabbEntityFunction(const string& functionNam
 			}
 		}
 	}
-	else if (functionName == "fe3d:aabb_set_responsive") // Set aabbEntity responsiveness
+	else if (functionName == "fe3d:aabb_set_raycast_responsive") // Set aabbEntity raycasting responsiveness
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::BOOLEAN };
 
@@ -233,8 +233,25 @@ bool ScriptInterpreter::_executeFe3dAabbEntityFunction(const string& functionNam
 			// Validate existing AABB ID
 			if (_validateFe3dAabbEntity(arguments[0].getString()))
 			{
-				_fe3d.aabbEntity_setResponsive(arguments[0].getString(), arguments[1].getBoolean());
+				_fe3d.aabbEntity_setRaycastResponsive(arguments[0].getString(), arguments[1].getBoolean());
 				
+				// Return
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			}
+		}
+	}
+	else if (functionName == "fe3d:aabb_set_collision_responsive") // Set aabbEntity collision responsiveness
+	{
+		auto types = { ScriptValueType::STRING, ScriptValueType::BOOLEAN };
+
+		// Validate arguments
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existing AABB ID
+			if (_validateFe3dAabbEntity(arguments[0].getString()))
+			{
+				_fe3d.aabbEntity_setCollisionResponsive(arguments[0].getString(), arguments[1].getBoolean());
+
 				// Return
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}

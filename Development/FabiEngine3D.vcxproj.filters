@@ -622,6 +622,9 @@
     <ClCompile Include="Source\ray_caster.cpp">
       <Filter>src\Miscellaneous\Other</Filter>
     </ClCompile>
+    <ClCompile Include="Source\fabi_engine_3d_entity_aabb.cpp">
+      <Filter>src\Core System\Interface\Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\texture_loader.hpp">

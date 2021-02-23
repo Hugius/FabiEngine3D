@@ -26,7 +26,7 @@ void CollisionResolver::update(
 		for (auto& [keyID, box] : boxes)
 		{
 			// If responsive to camera collision
-			if (box->isResponsive() && box->isVisible())
+			if (box->isCollisionResponsive() && box->isVisible())
 			{
 				auto direction = box->getCollisionDirection();
 				auto result = _collisionDetector.check(*box, currentCameraPos, _cameraAabbBottom, _cameraAabbTop, 

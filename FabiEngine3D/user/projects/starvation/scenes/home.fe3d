@@ -284,7 +284,7 @@ MODEL 801560819@tree7 -145.172 31.2471 1.08957 0 0 0 5 5 5 user\assets\meshes\tr
 MODEL 116365143@tree7 -101.141 30.8706 -34.8464 0 0 0 5 5 5 user\assets\meshes\trees\tree7.obj ? ? ? ? 0 0 1 1 0 1 1 1 0.75 1 1 1 1 ? 0 ? trunk -1.86265e-09 0 0 0.22 1.18 0.21 leaves 0 1.18 0 1.79 3.25 1.77
 MODEL 56050089@tree7 -155.641 30.8706 -9.28828 0 0 0 5 8 5 user\assets\meshes\trees\tree7.obj ? ? ? ? 0 0 1 1 0 1 1 1 0.75 1 1 1 1 ? 0 ? trunk -1.86265e-09 0 0 0.22 1.18 0.21 leaves 0 1.18 0 1.79 3.25 1.77
 MODEL 479074354@mushroom1 -115.435 31.2471 -11.1146 0 0 0 1 1 1 user\assets\meshes\foliage\mushroom1.obj user\assets\textures\diffuse_maps\foliage\mushroom1.png ? ? ? 0 0 1 0 0 0 1 1 1 1 1 1 1 ? 0 ? mushroom 0 0 0 1.7 1.6 1.7
-MODEL 1033881086@tree6 -132.74 31.2471 -40.3316 0 0 0 1.25 1 1.25 user\assets\meshes\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
+MODEL 1033881086@tree6 -132.74 31.2471 -40.3316 0 0 0 1.25 1 1.25 user\assets\meshes\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? leaves 0 8.8 0 3.85 8.30001 3.6 trunk 0 0 0 0.85 8.80001 0.8
 MODEL 316737937@tree6 -159.336 31.2471 -55.6831 0 0 0 1.6 1.6 1.6 user\assets\meshes\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? leaves 0 8.8 0 3.85 8.30001 3.6 trunk 0 0 0 0.85 8.80001 0.8
 MODEL 1786215290@tree6 -117.345 31.2471 -22.6264 0 0 0 1.25 1 1.25 user\assets\meshes\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
 MODEL 556164852@stone5 176.069 31.2471 90.7984 0 0 0 1.5 1.5 1.5 user\assets\meshes\stones\stone5.obj user\assets\textures\diffuse_maps\stones\stone5.png ? ? ? 0 0 1 0 0 1 1 1 0.75 1 1 1 1 ? 0 ? rock -0.3 0 0.05 6.2 5.2 7
@@ -304,7 +304,7 @@ MODEL 2087692904@tree6 -119.8 31.2471 -6.57907 0 0 0 1.6 1.6 1.6 user\assets\mes
 MODEL 2116195954@tree6 -54.4836 31.2471 -13.5635 0 0 0 1.25 1 1.25 user\assets\meshes\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
 MODEL 613953322@tree7 -65.8414 31.247 -15.8877 0 0 0 5 6 5 user\assets\meshes\trees\tree7.obj ? ? ? ? 0 0 1 1 0 1 1 1 0.75 1 1 1 1 ? 0 ? leaves 0 1.18 0 1.79 3.25 1.77 trunk -1.86265e-09 0 0 0.22 1.18 0.21
 MODEL 441767984@mushroom2 -155.663 31.2471 -20.7784 0 0 0 1.25 1.25 1.25 user\assets\meshes\foliage\mushroom2.obj user\assets\textures\diffuse_maps\foliage\mushroom2.png ? ? ? 0 0 1 0 0 0 1 1 1 1 1 1 1 ? 0 ? mushroom 0 0 0 1 1.5 1
-MODEL 108726879@tree6 -133.131 31.2471 2.53177 0 0 0 1.6 1.6 1.6 user\assets\meshes\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
+MODEL 108726879@tree6 -133.131 31.2471 2.53177 0 0 0 1.6 1.6 1.6 user\assets\meshes\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? leaves 0 8.8 0 3.85 8.30001 3.6 trunk 0 0 0 0.85 8.80001 0.8
 MODEL 604462998@stone1 -13.3863 31.247 -1.49715 0 0 0 7 7 7 user\assets\meshes\stones\stone1.obj user\assets\textures\diffuse_maps\stones\stone1.png ? ? ? 0 0 1 0 0 0 1 1 1 1 1 1 1 ? 0 ? stone 0 0 -0.09 1.21 0.95 1.39
 MODEL 203560858@tree6 -141.394 31.2471 -56.6211 0 0 0 1.24 1 1.24 user\assets\meshes\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
 MODEL 1210720165@tree6 -158.402 31.2471 -25.5741 0 0 0 1.25 1 1.25 user\assets\meshes\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
@@ -487,9 +487,9 @@ AMBIENT_LIGHT 1 1 1 0.75
 DIRECTIONAL_LIGHT 0 1000 -750 1 1 1 1 150 100
 LOD_DISTANCE 1000
 EDITOR_SPEED 10
-EDITOR_POSITION -113.56 100.042 -18.8351
-EDITOR_YAW 97.6993
-EDITOR_PITCH -82.9154
+EDITOR_POSITION -138.509 44.4425 -74.5868
+EDITOR_YAW 220.139
+EDITOR_PITCH -60.9154
 GRAPHICS_SHADOWS 1 75 0.000000 75.000000 -50.000000 0.000000 30.000000 0.000000 1 100
 GRAPHICS_MOTIONBLUR 1 0.25
 GRAPHICS_DOF 1 1 5 3

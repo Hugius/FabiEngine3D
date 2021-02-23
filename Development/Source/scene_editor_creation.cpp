@@ -353,7 +353,8 @@ void SceneEditor::placeModel(const string& newID, const string& previewID, Vec3 
 		for (auto& previewAabbID : _fe3d.aabbEntity_getBoundIDs(previewID, true, false))
 		{
 			string newAabbID = newEntityID + "_" + previewAabbID.substr(string(previewID + "_").size());
-			_fe3d.aabbEntity_bindToGameEntity(newEntityID, _fe3d.aabbEntity_getPosition(previewAabbID), _fe3d.aabbEntity_getSize(previewAabbID), true, newAabbID);
+			_fe3d.aabbEntity_bindToGameEntity(newEntityID, _fe3d.aabbEntity_getPosition(previewAabbID), 
+				_fe3d.aabbEntity_getSize(previewAabbID), true, true, newAabbID);
 		}
 
 		// Model properties
@@ -426,11 +427,11 @@ void SceneEditor::_placeModel(bool scriptExecution, const string& modelName, con
 	{
 		if (scriptExecution) // modelname_aabbname@123
 		{
-			_fe3d.aabbEntity_bindToGameEntity(newID, aabbPositions[i], aabbSizes[i], true, modelName + "_" + aabbNames[i] + "@" + modelNumber);
+			_fe3d.aabbEntity_bindToGameEntity(newID, aabbPositions[i], aabbSizes[i], true, true, modelName + "_" + aabbNames[i] + "@" + modelNumber);
 		}
 		else // 123@modelname_aabbname
 		{
-			_fe3d.aabbEntity_bindToGameEntity(newID, aabbPositions[i], aabbSizes[i], true, newID + "_" + aabbNames[i]);
+			_fe3d.aabbEntity_bindToGameEntity(newID, aabbPositions[i], aabbSizes[i], true, true, newID + "_" + aabbNames[i]);
 		}
 	}
 
@@ -538,7 +539,7 @@ void SceneEditor::placeBillboard(const string& newID, const string& previewID, V
 	}
 
 	// Bind AABB entity to BILLBOARD entity
-	_fe3d.aabbEntity_bindToBillboardEntity(newID, true);
+	_fe3d.aabbEntity_bindToBillboardEntity(newID, true, true);
 
 	// Miscellaneous
 	_fe3d.billboardEntity_setTransparent(newID, _fe3d.billboardEntity_isTransparent(previewID));
@@ -586,11 +587,11 @@ void SceneEditor::_placeBillboard(bool scriptExecution, const string& billboardN
 	// Bind AABB entity to BILLBOARD entity
 	if (scriptExecution) // billboardname@123
 	{
-		_fe3d.aabbEntity_bindToBillboardEntity(newID, true, billboardName + "@" + billboardNumber);
+		_fe3d.aabbEntity_bindToBillboardEntity(newID, true, true, billboardName + "@" + billboardNumber);
 	}
 	else // 123@billboardname
 	{
-		_fe3d.aabbEntity_bindToBillboardEntity(newID, true, billboardNumber + "@" + billboardName);
+		_fe3d.aabbEntity_bindToBillboardEntity(newID, true, true, billboardNumber + "@" + billboardName);
 	}
 
 	// Miscellaneous

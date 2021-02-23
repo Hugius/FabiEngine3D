@@ -1,4 +1,4 @@
-70 4
+36 8
 META script_type_update
 
 /// Check if aiming at tree & extract number
@@ -34,7 +34,8 @@ IF hoveredID NOT "" AND _fallingTreeID IS "":
 IF _wasAxePlaying IS <true> AND _isAxePlaying IS <false> AND _fallingTreeID IS "":
     IF isHovered IS <true>:
         fe3d:model_start_animation(hoveredID, "tree_fall", 1)
-        fe3d:model_set_aabb_responsive(hoveredID, <false>)
+        fe3d:model_set_aabb_raycast_responsive(hoveredID, <false>)
+        fe3d:model_set_aabb_collision_responsive(hoveredID, <false>)
         EDIT _fallingTreeID = hoveredID
         DECR _durabilities[2] _durabilityHit
 

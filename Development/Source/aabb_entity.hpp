@@ -21,8 +21,9 @@ public:
 	void translate(Vec3 value);
 	void scale(Vec3 value);
 	void setParent(const string& ID, AabbParentType type);
-	void setCollisionDirection(const Direction& direction);
-	void setResponsive(bool value);
+	void setCollisionDirection(const Direction& value);
+	void setRaycastResponsive(bool value);
+	void setCollisionResponsive(bool value);
 
 	// Getters
 	const Matrix44 & getModelMatrix() const;
@@ -33,7 +34,8 @@ public:
 	const string& getParentID() const;
 	const AabbParentType& getParentType() const;
 	const Direction& getCollisionDirection() const;
-	const bool isResponsive() const;
+	const bool isRaycastResponsive() const;
+	const bool isCollisionResponsive() const;
 
 private:
 	Matrix44 _modelMatrix = Matrix44(1.0f);
@@ -48,5 +50,6 @@ private:
 	AabbParentType _parentType = AabbParentType::NONE;
 	Direction _collisionDirection = Direction::NONE;
 
-	bool _responsive = false;
+	bool _isRaycastResponsive = false;
+	bool _isCollisionResponsive = false;
 };

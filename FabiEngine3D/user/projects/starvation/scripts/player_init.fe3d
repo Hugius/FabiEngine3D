@@ -1,4 +1,4 @@
-6 22
+74 27
 META script_type_init
 
 /// Globals
@@ -73,4 +73,5 @@ fe3d:collision_enable_camera_aabb_response(<true>, <false>, <true>)
 fe3d:collision_enable_camera_terrain_response(_playerHeight, 0.05)
 fe3d:model_place("player", "skeleton", 0.0, 0.0, 0.0)
 fe3d:model_set_max_height("player", 2.5)
-fe3d:model_set_aabb_responsive("player", <false>)
+fe3d:model_set_aabb_raycast_responsive("player", <false>)
+fe3d:model_set_aabb_collision_responsive("player", <false>)

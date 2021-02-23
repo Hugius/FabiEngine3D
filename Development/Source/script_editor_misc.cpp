@@ -36,7 +36,7 @@ void ScriptEditor::_reloadScriptTextDisplay(bool reloadAabbs)
 			// Create line number AABB
 			Vec3 aabbPosition = lineNumberPosition - Vec3(0.0f, _textCharacterSize.y / 2.0f, _aabbDepth);
 			Vec3 aabbSize = Vec3(_textCharacterSize.x * static_cast<float>(_maxCharactersPerLine * 2) * 1.1f, _textCharacterSize.y, _aabbDepth);
-			_fe3d.aabbEntity_add(lineNumberID, aabbPosition, aabbSize, true);
+			_fe3d.aabbEntity_add(lineNumberID, aabbPosition, aabbSize, true, true);
 			
 			// Create line text display BILLBOARD
 			_fe3d.billboardEntity_add(lineTextID, lineTextString, _fontPath, _characterColor, lineTextPosition, Vec3(0.0f), lineTextSize, false, false);
@@ -55,7 +55,7 @@ void ScriptEditor::_reloadScriptTextDisplay(bool reloadAabbs)
 				{
 					Vec3 aabbPosition = characterPosition - Vec3(0.0f, _textCharacterSize.y / 2.0f, 0.0f);
 					Vec3 aabbSize = Vec3(_textCharacterSize.x, _textCharacterSize.y, _aabbDepth);
-					_fe3d.aabbEntity_add(characterID, aabbPosition, aabbSize, true);
+					_fe3d.aabbEntity_add(characterID, aabbPosition, aabbSize, true, true);
 				}
 			}
 		}

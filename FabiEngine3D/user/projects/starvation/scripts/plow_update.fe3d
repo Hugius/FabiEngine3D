@@ -1,2 +1,25 @@
-0 23
+11 33
 META script_type_update
+
+/// Temporary values
+VEC3 camPos = fe3d:camera_get_position()
+DEC feetY = fe3d:terrain_get_pixel_height(camPos.x, camPos.z)
+DEC waterY = fe3d:water_get_height()
+
+/// Update plowing text
+fe3d:text_set_visible("plow", <false>)
+BOOL isHovered = <false>
+STR toolID = _inventory[_equipIndex]
+IF feetY MORE waterY AND camPos.y LESS 34.0:
+    IF toolID IS "hoe" AND _isInvOpen IS <true>:
+        fe3d:text_set_visible("plow", <true>)
+        EDIT isHovered = <true>
+
+/// Check if plowing animation was finished
+IF _wasHoePlaying IS <true> AND _isHoePlaying IS <false>:
+    IF isHovered IS <true>:
+        INT newID = misc:get_unique_integer(0, 1000)
+        CAST newID STR
+        EDIT newID = misc:concat_strings("corn", newID)
+        fe3d:model_place(newID, "corn", camPos.x, feetY, camPos.z)
+        fe3d:model_set_aabb_collision_responsive(newID, <false>)

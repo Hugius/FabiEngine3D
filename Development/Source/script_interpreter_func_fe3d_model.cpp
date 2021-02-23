@@ -479,7 +479,7 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 			}
 		}
 	}
-	else if (functionName == "fe3d:model_set_aabb_responsive") // Set gameEntity AABB responsiveness
+	else if (functionName == "fe3d:model_set_aabb_raycast_responsive") // Set gameEntity AABB raycasting responsiveness
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::BOOLEAN };
 
@@ -502,9 +502,40 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 				// Set responsiveness
 				for (auto& ID : aabbIDs)
 				{
-					_fe3d.aabbEntity_setResponsive(ID, arguments[1].getBoolean());
+					_fe3d.aabbEntity_setRaycastResponsive(ID, arguments[1].getBoolean());
 				}
 				
+				// Return
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			}
+		}
+	}
+	else if (functionName == "fe3d:model_set_aabb_collision_responsive") // Set gameEntity AABB collision responsiveness
+	{
+		auto types = { ScriptValueType::STRING, ScriptValueType::BOOLEAN };
+
+		// Validate arguments
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existing model ID
+			if (_validateFe3dGameEntity(arguments[0].getString()))
+			{
+				// Retrieve all bound AABB IDs
+				auto aabbIDs = _fe3d.aabbEntity_getBoundIDs(arguments[0].getString(), true, false);
+
+				// Check if gameEntity has no AABBs
+				if (aabbIDs.empty())
+				{
+					_throwScriptError("Model has no bound AABBs!");
+					return true;
+				}
+
+				// Set responsiveness
+				for (auto& ID : aabbIDs)
+				{
+					_fe3d.aabbEntity_setCollisionResponsive(ID, arguments[1].getBoolean());
+				}
+
 				// Return
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}

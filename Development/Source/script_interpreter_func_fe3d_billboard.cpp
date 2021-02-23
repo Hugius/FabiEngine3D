@@ -462,7 +462,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			}
 		}
 	}
-	else if (functionName == "fe3d:billboard_set_aabb_responsive") // Set billboardEntity AABB responsiveness
+	else if (functionName == "fe3d:billboard_set_aabb_raycast_responsive") // Set billboardEntity AABB raycasting responsiveness
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::BOOLEAN };
 
@@ -485,7 +485,38 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 				// Set responsiveness
 				for (auto& ID : aabbIDs)
 				{
-					_fe3d.aabbEntity_setResponsive(ID, arguments[1].getBoolean());
+					_fe3d.aabbEntity_setRaycastResponsive(ID, arguments[1].getBoolean());
+				}
+
+				// Return
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			}
+		}
+	}
+	else if (functionName == "fe3d:billboard_set_aabb_collision_responsive") // Set billboardEntity AABB collision responsiveness
+	{
+		auto types = { ScriptValueType::STRING, ScriptValueType::BOOLEAN };
+
+		// Validate arguments
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existing billboard ID
+			if (_validateFe3dBillboardEntity(arguments[0].getString()))
+			{
+				// Retrieve all bound AABB IDs
+				auto aabbIDs = _fe3d.aabbEntity_getBoundIDs(arguments[0].getString(), false, true);
+
+				// Check if billboardEntity has no AABBs
+				if (aabbIDs.empty())
+				{
+					_throwScriptError("Billboard has no bound AABBs!");
+					return true;
+				}
+
+				// Set responsiveness
+				for (auto& ID : aabbIDs)
+				{
+					_fe3d.aabbEntity_setCollisionResponsive(ID, arguments[1].getBoolean());
 				}
 
 				// Return

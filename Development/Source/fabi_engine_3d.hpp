@@ -414,14 +414,15 @@ public:
 	int billboardEntity_getAnimationFramestep(const string& ID);
 
 	// AABB entity interface - setters
-	void aabbEntity_add(const string& ID, Vec3 position, Vec3 size, bool responsive, bool visible = true);
-	void aabbEntity_bindToGameEntity(const string& parentID, Vec3 position, Vec3 size, bool responsive, const string& customAabbID = "");
-	void aabbEntity_bindToBillboardEntity(const string& parentID, bool responsive, const string& customAabbID = "");
+	void aabbEntity_add(const string& ID, Vec3 position, Vec3 size, bool raycastResponsive, bool collisionResponsive, bool visible = true);
+	void aabbEntity_bindToGameEntity(const string& parentID, Vec3 position, Vec3 size, bool raycastResponsive, bool collisionResponsive, const string& customAabbID = "");
+	void aabbEntity_bindToBillboardEntity(const string& parentID, bool raycastResponsive, bool collisionResponsive, const string& customAabbID = "");
 	void aabbEntity_deleteAll();
 	void aabbEntity_delete(const string& ID);
 	void aabbEntity_hide(const string& ID);
 	void aabbEntity_show(const string& ID);
-	void aabbEntity_setResponsive(const string& ID, bool responsive);
+	void aabbEntity_setRaycastResponsive(const string& ID, bool responsive);
+	void aabbEntity_setCollisionResponsive(const string& ID, bool responsive);
 	void aabbEntity_setVisible(const string& ID, bool visible);
 	void aabbEntity_setPosition(const string& ID, Vec3 position, bool noLocal = false);
 	void aabbEntity_setSize(const string& ID, Vec3 size, bool noLocal = false);
@@ -431,7 +432,8 @@ public:
 	// AABB entity interface - getters
 	Vec3 aabbEntity_getPosition(const string& ID, bool noLocal = false);
 	Vec3 aabbEntity_getSize(const string& ID, bool noLocal = false);
-	bool aabbEntity_isResponsive(const string& ID);
+	bool aabbEntity_isRaycastResponsive(const string& ID);
+	bool aabbEntity_isCollisionResponsive(const string& ID);
 	bool aabbEntity_isExisting(const string& ID);
 	bool aabbEntity_isVisible(const string& ID);
 	vector<string> aabbEntity_getBoundIDs(const string& parentID, bool gameEntity, bool billboardEntity);

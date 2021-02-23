@@ -119,7 +119,8 @@ void SceneEditor::_updateModelEditing()
 						// AABB
 						for (auto& aabbID : _fe3d.aabbEntity_getBoundIDs(_activeModelID, true, false))
 						{
-							_fe3d.aabbEntity_setResponsive(aabbID, !_fe3d.gameEntity_isStaticToCamera(_activeModelID));
+							_fe3d.aabbEntity_setRaycastResponsive(aabbID, !_fe3d.gameEntity_isStaticToCamera(_activeModelID));
+							_fe3d.aabbEntity_setCollisionResponsive(aabbID, !_fe3d.gameEntity_isStaticToCamera(_activeModelID));
 						}
 					}
 					else if (rightWindow->getScreen("modelPropertiesMenu")->getButton("delete")->isHovered()) // Delete button

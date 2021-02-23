@@ -120,7 +120,7 @@ void ModelEditor::_updateModelEditingAabb()
 		else
 		{
 			// Add new AABB
-			_fe3d.aabbEntity_bindToGameEntity(_currentModelID, Vec3(0.0f), Vec3(1.0f), true, _currentModelID + "_" + newName);
+			_fe3d.aabbEntity_bindToGameEntity(_currentModelID, Vec3(0.0f), Vec3(1.0f), true, true, _currentModelID + "_" + newName);
 			_currentAabbID = newName;
 
 			// Reset editing

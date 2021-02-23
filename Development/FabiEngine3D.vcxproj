@@ -309,6 +309,7 @@
     <ClCompile Include="Source\bottom_viewport_controller.cpp" />
     <ClCompile Include="Source\engine_gui_global_screen_misc.cpp" />
     <ClCompile Include="Source\engine_gui_scrollinglist.cpp" />
+    <ClCompile Include="Source\fabi_engine_3d_entity_aabb.cpp" />
     <ClCompile Include="Source\ivector2.cpp" />
     <ClCompile Include="Source\ivector3.cpp" />
     <ClCompile Include="Source\matrix33.cpp" />

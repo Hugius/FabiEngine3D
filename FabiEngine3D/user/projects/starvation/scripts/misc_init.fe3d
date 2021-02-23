@@ -1,4 +1,4 @@
-36 28
+48 31
 META script_type_init
 
 /// Globals
@@ -18,12 +18,11 @@ GLOB BOOL _isSleeping = <false>
 STR f = "font.ttf"
 fe3d:image_place("crosshair", "crosshair.png", 0.0, 0.0, 0.0, 0.0325, 0.05)
 fe3d:image_place("black", "black.png", 0.0, 0.0, 0.0, 2.0, 2.0)
-fe3d:text_place("pickup", f, "Press F to pickup", 0.0, -0.2, 0.0, 0.44, 0.075)
+fe3d:text_place("pickup", f, "Press E to pickup", 0.0, -0.2, 0.0, 0.44, 0.075)
 fe3d:text_place("craft", f, "Press E to craft", 0.0, -0.2, 0.0, 0.42, 0.075)
 fe3d:text_place("talk", f, "Press E to talk", 0.0, -0.2, 0.0, 0.4, 0.075)
 fe3d:text_place("sleep", f, "Press E to sleep", 0.0, -0.2, 0.0, 0.42, 0.075)
 fe3d:text_place("drink", f, "Press E to drink", 0.0, -0.2, 0.0, 0.42, 0.075)
-fe3d:text_place("sow", f, "Press E to sow", 0.0, -0.2, 0.0, 0.38, 0.075)
 fe3d:text_place("mine", f, "Press LMB to mine", 0.0, -0.2, 0.0, 0.44, 0.075)
 fe3d:text_place("cut", f, "Press LMB to cut", 0.0, -0.2, 0.0, 0.42, 0.075)
 fe3d:text_place("dig", f, "Press LMB to dig", 0.0, -0.2, 0.0, 0.42, 0.075)
@@ -36,7 +35,6 @@ fe3d:text_set_visible("craft", <false>)
 fe3d:text_set_visible("talk", <false>)
 fe3d:text_set_visible("sleep", <false>)
 fe3d:text_set_visible("drink", <false>)
-fe3d:text_set_visible("sow", <false>)
 fe3d:text_set_visible("mine", <false>)
 fe3d:text_set_visible("cut", <false>)
 fe3d:text_set_visible("dig", <false>)
@@ -49,7 +47,7 @@ fe3d:text_set_visible("fish", <false>)
 fe3d:light_place("torch", 0.0, 0.0, 0.0, 1.0, 0.85, 0.0, 1.25, 1.0)
 fe3d:billboard_place("torch", "fire", 0.0, 0.0, 0.0)
 fe3d:billboard_start_animation("torch", -1)
-fe3d:billboard_set_aabb_responsive("torch", <false>)
+fe3d:billboard_set_aabb_raycast_responsive("torch", <false>)
 fe3d:billboard_set_size("torch", 1.75, 1.5)
 
 /// Miscellaneous

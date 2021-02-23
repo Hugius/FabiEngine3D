@@ -50,7 +50,7 @@ void SceneEditor::_updateLightPlacing()
 					// Add light entity
 					_fe3d.gameEntity_add("@" + newID, "engine\\meshes\\lamp.obj", newPosition, Vec3(0.0f), _defaultLightbulbSize);
 					_fe3d.gameEntity_setShadowed("@" + newID, false);
-					_fe3d.aabbEntity_bindToGameEntity("@" + newID, Vec3(0.0f), _defaultLightbulbAabbSize, true);
+					_fe3d.aabbEntity_bindToGameEntity("@" + newID, Vec3(0.0f), _defaultLightbulbAabbSize, true, true);
 					_fe3d.lightEntity_add(newID, newPosition);
 					_loadedLightIDs.push_back(newID);
 

@@ -1,4 +1,4 @@
-47 54
+45 41
 META script_type_update
 
 /// Prepare crafting process
@@ -43,7 +43,8 @@ IF _isCrafting IS <true>:
         BOOL existing = fe3d:model_is_existing(itemName)
         IF existing IS <false>:
             fe3d:model_place(itemName, itemName, 0.0, 0.0, 0.0)
-            fe3d:model_set_aabb_responsive(itemName, <false>)
+            fe3d:model_set_aabb_raycast_responsive(itemName, <false>)
+            fe3d:model_set_aabb_collision_responsive(itemName, <false>)
         EDIT _equipIndex = _craftablesIndex[_craftIndex]
         EDIT _inventory[_equipIndex] = itemName
         DECR _bag[0] _craftablesWoodPrice[_craftIndex]

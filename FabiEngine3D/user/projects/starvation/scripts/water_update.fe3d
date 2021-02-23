@@ -1,4 +1,4 @@
-2 13
+13 39
 META script_type_update
 
 /// Temporary values
@@ -12,12 +12,21 @@ IF camPos.y LESS height:
     IF currentWorld IS "starvia_outside":
         fe3d:camera_move(0.01, 0.0, -0.005)
     fe3d:image_set_visible("underwater", <true>)
+    fe3d:image_rotate("underwater", 0.01)
+    fe3d:graphics_set_fog_min_distance(5.0)
+    fe3d:graphics_set_fog_max_distance(15.0)
+    fe3d:graphics_set_fog_thickness(1.0)
+    fe3d:graphics_set_fog_color(0.25, 0.25, 0.5)
     IF _wasUnderWater IS <false>:
         EDIT _wasUnderWater = <true>
         EDIT _wetlensAlpha = 0.0
 ELSE:
     EDIT _isUnderWater = <false>
     fe3d:image_set_visible("underwater", <false>)
+    fe3d:graphics_set_fog_min_distance(75.0)
+    fe3d:graphics_set_fog_max_distance(150.0)
+    fe3d:graphics_set_fog_thickness(0.75)
+    fe3d:graphics_set_fog_color(0.5, 0.5, 0.5)
     IF _wasUnderWater IS <true>:
         EDIT _wetlensAlpha = 0.5
         EDIT _wasUnderWater = <false>

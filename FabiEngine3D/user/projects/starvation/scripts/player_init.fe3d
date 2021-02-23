@@ -1,4 +1,4 @@
-12 28
+6 22
 META script_type_init
 
 /// Globals
@@ -8,8 +8,10 @@ GLOB CONST DEC _playerHeight = 2.75
 GLOB DEC _health = 1.0
 GLOB DEC _hunger = 1.0
 GLOB DEC _thirst = 1.0
-GLOB DEC _stamina = 10.0
+GLOB DEC _stamina = 1.0
 GLOB DEC _oxygen = 1.0
+GLOB DEC _sickness = 0.0
+GLOB DEC _hygiene = 1.0
 GLOB DEC _temperature = 1.0
 GLOB DEC _jumpingSpeed = 0.1
 GLOB DEC _fallingSpeed = 0.05
@@ -43,16 +45,18 @@ GLOB BOOL _isAbleToMove = <false>
 GLOB BOOL _mayJump = <false>
 
 /// Player HUD
-fe3d:image_place("scroll_player", "scroll1.png", -0.85, 0.6, 0.0, 0.3, 0.8)
-fe3d:image_place("player", "player.png", -0.85, 0.755, 0.0, 0.175, 0.275)
-fe3d:text_place("name", "font.ttf", "Sir Skeletus", -0.85, 0.585, 0.0, 0.175, 0.05)
+fe3d:image_place("scroll_player", "scroll1.png", -0.85, 0.5, 0.0, 0.3, 1.0)
+fe3d:image_place("player", "player.png", -0.85, 0.725, 0.0, 0.175, 0.275)
+fe3d:text_place("name", "font.ttf", "Sir Skeletus", -0.85, 0.55, 0.0, 0.175, 0.05)
 fe3d:text_set_color("name", 0.0, 0.0, 0.0)
-fe3d:image_place("health", "health_icon.png", -0.925, 0.5, 0.0, 0.07, 0.09)
-fe3d:image_place("hunger", "hunger_icon.png", -0.85, 0.5, 0.0, 0.07, 0.095)
-fe3d:image_place("thirst", "thirst_icon.png", -0.775, 0.5, 0.0, 0.07, 0.09)
-fe3d:image_place("stamina", "stamina_icon.png", -0.925, 0.35, 0.0, 0.07, 0.09)
-fe3d:image_place("oxygen", "oxygen_icon.png", -0.85, 0.35, 0.0, 0.07, 0.095)
-fe3d:image_place("temperature", "temperature_icon.png", -0.775, 0.35, 0.0, 0.07, 0.09)
+fe3d:image_place("health", "health_icon.png", -0.925, 0.475, 0.0, 0.07, 0.09)
+fe3d:image_place("hunger", "hunger_icon.png", -0.85, 0.475, 0.0, 0.07, 0.095)
+fe3d:image_place("thirst", "thirst_icon.png", -0.775, 0.475, 0.0, 0.07, 0.09)
+fe3d:image_place("stamina", "stamina_icon.png", -0.925, 0.325, 0.0, 0.07, 0.09)
+fe3d:image_place("oxygen", "oxygen_icon.png", -0.85, 0.325, 0.0, 0.07, 0.095)
+fe3d:image_place("temperature", "temperature_icon.png", -0.775, 0.325, 0.0, 0.07, 0.09)
+fe3d:image_place("hygiene", "hygiene_icon.png", -0.925, 0.175, 0.0, 0.07, 0.09)
+fe3d:image_place("sickness", "sickness_icon.png", -0.85, 0.175, 0.0, 0.07, 0.09)
 
 /// Camera
 fe3d:cursor_hide()

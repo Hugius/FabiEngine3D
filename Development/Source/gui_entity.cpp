@@ -3,7 +3,7 @@
 void GuiEntity::updateModelMatrix()
 {
 	Matrix44 translationMatrix = Matrix44::createTranslation(_translation.x, _translation.y, 0.0f);
-	Matrix44 rotationMatrix = Matrix44::createRotationZ(Math::degreesToRadians(_rotation));
+	Matrix44 rotationMatrix = Matrix44::createRotationX(Math::degreesToRadians(_rotation));
 	Matrix44 scalingMatrix = Matrix44::createScaling(_scaling.x, _scaling.y, 1.0f);
 
 	_modelMatrix = translationMatrix * rotationMatrix * scalingMatrix;

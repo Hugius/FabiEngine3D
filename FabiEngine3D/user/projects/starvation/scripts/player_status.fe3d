@@ -1,4 +1,4 @@
-30 17
+48 5
 META script_type_update
 
 /// Update health icon color
@@ -25,12 +25,20 @@ fe3d:image_set_color("oxygen", oxygenColor, oxygenColor, oxygenColor)
 DEC tempColor = _temperature
 fe3d:image_set_color("temperature", tempColor, tempColor, 1.0)
 
+/// Update hygiene icon color
+DEC hygieneColor = _hygiene
+fe3d:image_set_color("hygiene", hygieneColor, hygieneColor, hygieneColor)
+
+/// Update sickness icon alpha
+DEC sicknessAlpha = _sickness
+fe3d:image_set_alpha("sickness", sicknessAlpha)
+
 /// Update hunger
 DECR _hunger 0.000025
 EDIT _hunger = math:clamp(_hunger, 0.0, 1.0)
 
 /// Update thirst
-DECR _thirst 0.00025
+DECR _thirst 0.000025
 EDIT _thirst = math:clamp(_thirst, 0.0, 1.0)
 
 /// Update stamina
@@ -49,18 +57,33 @@ INCR _temperature 0.00001
 IF _isUnderWater IS <true>:
     DECR _temperature 0.0005
 IF _isDayTime IS <false>:
-    DECR _temperature 0.0005
-IF torchEquipped IS <true>:
-    INCR _temperature 0.001
+    IF torchEquipped IS <true> AND _isUnderWater IS <false>:
+        INCR _temperature 0.001
+    ELSE:
+        DECR _temperature 0.0005
 EDIT _temperature = math:clamp(_temperature, 0.0, 1.0)
 
+/// Update hygiene
+DECR _hygiene 0.000025
+EDIT _hygiene = math:clamp(_hygiene, 0.0, 1.0)
+
+/// Update sickness
+IF _hygiene IS 0.0:
+    INCR _sickness 0.0001
+EDIT _sickness = math:clamp(_sickness, 0.0, 1.0)
+
 /// Update health
-IF _hunger IS 0.0 OR _thirst IS 0.0 OR _oxygen IS 0.0 OR _temperature IS 0.0:
+DEC hu = _hunger
+DEC th = _thirst
+DEC ox = _oxygen
+DEC te = _temperature
+DEC si = _sickness
+IF hu IS 0.0 OR th IS 0.0 OR ox IS 0.0 OR te IS 0.0 OR si IS 1.0:
     DECR _health 0.0005
 ELSE:
     INCR _health 0.00005
 EDIT _health = math:clamp(_health, 0.0, 1.0)
 
 /// Check if player died
-IF _health IS 0.0 OR _health LESS 0.0:
+IF _health IS 0.0:
     fe3d:game_stop()

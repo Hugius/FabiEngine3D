@@ -1,4 +1,4 @@
-13 10
+49 0
 META script_type_update
 META execution_entry
 
@@ -42,6 +42,9 @@ EXEC fish_update
 IF currentWorld IS "starvia_outside":
     EXEC npc_update
 
+/// Time
+EXEC time_update
+
 /// Water
 IF currentWorld IS "home" OR currentWorld IS "starvia_outside":
     EXEC water_update
@@ -54,9 +57,6 @@ IF currentWorld IS "home":
 IF currentWorld IS "home":
     EXEC craft_process
     EXEC craft_misc
-
-/// Time
-EXEC time_update
 
 /// Miscellaneous
 EXEC sleep_update

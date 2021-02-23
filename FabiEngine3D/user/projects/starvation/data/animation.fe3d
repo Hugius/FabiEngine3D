@@ -5,7 +5,7 @@ axe_cut @axe_stone 1 ? 20 0 0 0 0 0 0.5 1 1 1 ? 20 0 -30 0 0 0 -0.5 0 1 1 ? 20 0
 pickaxe_mine @pickaxe_iron 1 ? 0 0 -35 0 0 0 -0.15 1 1 1 ? 0 0 75 0 0 0 4.5 0 1 1 ? 0 0 0 0 0 0 -1 0 1
 shovel_dig @shovel_stone 1 ? 0 -1.5 0 0 0 0 -0.02 0 0 1 ? 0 0 -55 0 0 0 -0.5 1 1 1 ? 0 0 0 0 0 0 0.01 1 0 1 ? 0 90 -55 0 0 0 1 0 1 1 ? 0 90 0 0 0 0 1 0 1 1 ? 0 0 0 0 0 0 -1 0 1
 pickup @skeleton 6 ? 0 0 0 0 0 0 0 0 0 body 0 0 0 0 0 0 0 0 0 left_leg 0 0 0 0 0 0 0 0 0 right_arm 0 0 0 0 0 0 0 0 1 left_arm 0 0 -80 0 3.4 -0.2 -2 0 1 right_leg 0 0 0 0 0 0 0 0 0 6 ? 0 0 0 0 0 0 0 0 0 body 0 0 0 0 0 0 0 0 0 left_leg 0 0 0 0 0 0 0 0 0 right_arm 0 0 0 0 0 0 0 0 1 left_arm 0 0 0 0 3.4 -0.2 2 0 1 right_leg 0 0 0 0 0 0 0 0 0
-mill_rotation @windmill 3 ? 0 0 0 0 0 0 0 0 0 wicks 360 0 0 0 2.935 0 0.2 0 1 building 0 0 0 0 0 0 0 0 0
+mill_rotation @mill 3 ? 0 0 0 0 0 0 0 0 0 wicks 360 0 0 0 2.935 0 0.2 0 1 building 0 0 0 0 0 0 0 0 0
 waterwheel_rotation @waterwheel 3 ? 0 0 0 0 0 0 0 0 0 standard 0 0 0 0 0 0 0 0 0 wheel 0 0 -360 0 1.5 0 -0.25 0 1
 saw_moving @saw 1 ? 0.5 0 0 0 0 0 0.005 0 0 1 ? 0 0 0 0 0 0 -0.005 0 0 1 ? -0.5 0 0 0 0 0 -0.005 0 0 1 ? 0 0 0 0 0 0 0.005 0 0
 tool_bobbing @axe_iron 1 ? 0 0 7 0 0 0 0.075 0 1 1 ? 0 0 0 0 0 0 -0.075 0 1

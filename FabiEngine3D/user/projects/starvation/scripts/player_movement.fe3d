@@ -1,4 +1,4 @@
-40 10
+36 22
 META script_type_update
 
 /// Temporary values
@@ -35,7 +35,7 @@ IF shift IS <true> AND up IS <true>:
         EDIT _isRunning = <false>
 ELSE:
     EDIT _isRunning = <false>
-    IF _stamina LESS 10.0 AND _isToolPlaying IS <false>:
+    IF _stamina LESS 1.0 AND _isToolPlaying IS <false>:
         INCR _stamina 0.001
 
 /// Update camera movement

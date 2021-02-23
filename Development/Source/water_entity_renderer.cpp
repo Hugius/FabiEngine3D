@@ -16,7 +16,7 @@ void WaterEntityRenderer::bind()
 	_shader.uploadUniform("u_cameraPosition",			 _renderBus.getCameraPosition());
 	_shader.uploadUniform("u_fogMinDistance",			 _renderBus.getFogMinDistance());
 	_shader.uploadUniform("u_fogMaxDistance",			 _renderBus.getFogMaxDistance());
-	_shader.uploadUniform("u_fogThickness",			 _renderBus.getFogThickness());
+	_shader.uploadUniform("u_fogThickness",				 _renderBus.getFogThickness());
 	_shader.uploadUniform("u_fogColor",					 _renderBus.getFogColor());
 	_shader.uploadUniform("u_isFogEnabled",				 _renderBus.isFogEnabled());
 	_shader.uploadUniform("u_isEffectsEnabled",			 _renderBus.isWaterEffectsEnabled());

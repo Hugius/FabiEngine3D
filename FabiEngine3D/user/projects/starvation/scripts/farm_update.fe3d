@@ -1,4 +1,4 @@
-47 32
+66 68
 META script_type_update
 
 /// Temporary values
@@ -6,19 +6,20 @@ VEC3 camPos = fe3d:camera_get_position()
 DEC pitch = fe3d:camera_get_pitch()
 DEC feetY = fe3d:terrain_get_pixel_height(camPos.x, camPos.z)
 DEC waterY = fe3d:water_get_height()
+STR toolID = _inventory[_equipIndex]
+BOOL isLookingDown = <false>
+BOOL isHovered = <false>
 
 /// Update plowing text
 fe3d:text_set_visible("plow", <false>)
-BOOL isHovered = <false>
-STR toolID = _inventory[_equipIndex]
 IF feetY MORE waterY AND camPos.y LESS 34.0 AND pitch LESS -25.0:
     IF toolID IS "hoe" AND _isInvOpen IS <true>:
         fe3d:text_set_visible("plow", <true>)
-        EDIT isHovered = <true>
+        EDIT isLookingDown = <true>
 
 /// Check if plowing animation was finished
 IF _wasHoePlaying IS <true> AND _isHoePlaying IS <false>:
-    IF isHovered IS <true>:
+    IF isLookingDown IS <true>:
         INT newID = misc:get_unique_integer(0, 1000)
         CAST newID STR
         EDIT newID = misc:concat_strings("wheat", newID)
@@ -29,7 +30,7 @@ IF _wasHoePlaying IS <true> AND _isHoePlaying IS <false>:
         MUL size.y 0.025
         fe3d:model_set_max_height(newID, size.y)
 
-/// Update corn growing
+/// Update wheat growing
 LIST wheatIDs = fe3d:model_find_ids("wheat")
 INT length = misc:get_list_size("wheatIDs")
 INT index = 0
@@ -49,3 +50,21 @@ LOOP:
             INCR wheatHeight 0.01
             fe3d:model_set_max_height(wheatID, wheatHeight)
         INCR index 1
+
+/// Update wheat hover
+STR hoveredID = fe3d:raycast_into_model("wheat", "", <true>)
+DEC distance = fe3d:raycast_into_model_distance("wheat", "", <true>)
+IF distance IS -1.0:
+    EDIT distance = 1000.0
+fe3d:text_set_visible("reap", <false>)
+IF hoveredID NOT "":
+    IF distance LESS _maxReach:
+        EDIT isHovered = <true>
+        IF toolID IS "scythe":
+            IF _isInvOpen IS <true>:
+                fe3d:text_set_visible("reap", <true>)
+
+/// Update wheat reaping
+IF isHovered IS <true> AND _wasScythePlaying IS <true> AND _isScythePlaying IS <false>:
+    fe3d:model_delete(hoveredID)
+    INCR _bag[4] 9

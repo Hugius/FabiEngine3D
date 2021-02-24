@@ -1,4 +1,4 @@
-13 39
+46 55
 META script_type_update
 
 /// Temporary values
@@ -16,7 +16,6 @@ IF camPos.y LESS height:
     fe3d:graphics_set_fog_min_distance(5.0)
     fe3d:graphics_set_fog_max_distance(15.0)
     fe3d:graphics_set_fog_thickness(1.0)
-    fe3d:graphics_set_fog_color(0.25, 0.25, 0.5)
     IF _wasUnderWater IS <false>:
         EDIT _wasUnderWater = <true>
         EDIT _wetlensAlpha = 0.0
@@ -26,7 +25,6 @@ ELSE:
     fe3d:graphics_set_fog_min_distance(75.0)
     fe3d:graphics_set_fog_max_distance(150.0)
     fe3d:graphics_set_fog_thickness(0.75)
-    fe3d:graphics_set_fog_color(0.5, 0.5, 0.5)
     IF _wasUnderWater IS <true>:
         EDIT _wetlensAlpha = 0.5
         EDIT _wasUnderWater = <false>
@@ -45,3 +43,6 @@ DEC lightness = blueIntensity
 INCR lightness 0.25
 fe3d:water_set_color(0.0, 0.0, blueIntensity)
 fe3d:image_set_color("underwater", lightness, lightness, lightness)
+IF _isUnderWater IS <true>:
+    MUL blueIntensity 0.25
+    fe3d:graphics_set_fog_color(0.0, 0.0, blueIntensity)

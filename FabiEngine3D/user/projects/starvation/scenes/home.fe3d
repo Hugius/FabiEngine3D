@@ -1,6 +1,6 @@
 SKY day user\assets\textures\cube_maps\day_right.png user\assets\textures\cube_maps\day_left.png user\assets\textures\cube_maps\day_top.png user\assets\textures\cube_maps\day_bottom.png user\assets\textures\cube_maps\day_back.png user\assets\textures\cube_maps\day_front.png 0.002 0.75 1 1 1
 TERRAIN home user\assets\textures\height_maps\home.bmp ? 96 1 0.9 1 user\assets\textures\blend_maps\home.png user\assets\textures\diffuse_maps\terrain\grass.png user\assets\textures\diffuse_maps\terrain\mud.png user\assets\textures\diffuse_maps\terrain\ground.png 48 128 64 1 1 1 1 ? user\assets\textures\normal_maps\terrain\grass.png user\assets\textures\normal_maps\terrain\mud.png user\assets\textures\normal_maps\terrain\ground.png 1 8 1
-WATER lake user\assets\textures\dudv_maps\water.png user\assets\textures\normal_maps\water\wave1.png ? 0 1 0 1 1 0.25098 0.25098 1 32 -140 30.4 -108 6 1 0.0001 0.0003 0.2 64 1
+WATER lake user\assets\textures\dudv_maps\water.png user\assets\textures\normal_maps\water\wave1.png ? 0 1 0 1 0 0.25098 0.25098 1 32 -140 30.4 -108 6 1 0.0001 0.0003 0.2 64 1
 MODEL 196847080@log4 -162.153 31.2766 -98.4555 0 0 0 0.8 0.8 0.8 user\assets\meshes\misc\log4.obj user\assets\textures\diffuse_maps\misc\log4.png ? ? user\assets\textures\normal_maps\misc\log4.png 0 0 1 0 0 1 4 1 0.8 1 1 1 1 ? 0 ? log -0.1 0 0.4 6.2 3.1 4.4
 MODEL 697476017@log2 -164.74 31.2696 -102.698 0 0 0 2.5 2.5 2.5 user\assets\meshes\misc\log2.obj user\assets\textures\diffuse_maps\misc\log2.png ? ? user\assets\textures\normal_maps\misc\log2.png 0 0 1 0 0 1 4 1 0.7 1 1 1 1 ? 0 ? log -0.15 0 -0.15 1.75 0.7 2.3
 MODEL 1838849439@hills 0 -1 0 0 0 0 4 10.4 4 user\assets\meshes\misc\hills.obj user\assets\textures\diffuse_maps\terrain\rock.png ? ? ? 0 0 0 0 0 0 1 1 1 1 1 1 8 ? 0 ?
@@ -10,9 +10,9 @@ AMBIENT_LIGHT 1 1 1 0.75
 DIRECTIONAL_LIGHT 0 1000 -750 1 1 1 1 125 100
 LOD_DISTANCE 1000
 EDITOR_SPEED 5
-EDITOR_POSITION -144.667 33.862 -89.0308
-EDITOR_YAW -150.62
-EDITOR_PITCH -17.8399
+EDITOR_POSITION -142.876 35.562 -88.9853
+EDITOR_YAW -73.22
+EDITOR_PITCH -28.5999
 GRAPHICS_SHADOWS 1 75 0.000000 75.000000 -50.000000 0.000000 30.000000 0.000000 1 100
 GRAPHICS_MOTIONBLUR 1 0.25
 GRAPHICS_DOF 1 1 5 3

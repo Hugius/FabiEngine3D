@@ -1,26 +1,12 @@
-36 8
+2 21
 META script_type_update
-
-/// Check if aiming at tree & extract number
-STR checkID = ""
-LIST cuttables = {"tree2","tree6","tree7"}
-INT size = 3
-INT index = 0
-STR hoveredID = ""
-DEC distance = 0.0
-LOOP:
-    IF index IS size:
-        BREAK
-    EDIT hoveredID = fe3d:raycast_into_model(cuttables[index], "trunk", <true>)
-    EDIT distance = fe3d:raycast_into_model_distance(cuttables[index], "trunk", <true>)
-    IF distance IS -1.0:
-        EDIT distance = 1000.0
-    IF hoveredID NOT "":
-        BREAK
-    INCR index 1
 
 /// Update tree hover
 BOOL isHovered = <false>
+STR hoveredID = fe3d:raycast_into_model("tree", "trunk", <true>)
+DEC distance = fe3d:raycast_into_model_distance("tree", "trunk", <true>)
+IF distance IS -1.0:
+    EDIT distance = 1000.0
 STR toolID = _inventory[_equipIndex]
 fe3d:text_set_visible("cut", <false>)
 IF hoveredID NOT "" AND _fallingTreeID IS "":

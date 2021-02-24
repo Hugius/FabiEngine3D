@@ -1160,6 +1160,7 @@ fe3d:print(camPos.x)
 - You **cannot** individually access bound AABBs from a **scene**
 - FabiEngine3D does **not** support a camera roll, because of the infamous Gimbal Lock
 - FabiEngine3D **does** come with first person camera support, but **not** third person
+- There is a VERY rare **bug** when using the first person camera system; if the cursor does not center anymore and the camera keeps spinning very fast, click on the **window border** once. This bug does not occur in fullscreen mode.
 ### Performance
 - Click [here](#performance-statistics-example) to see an example
 - You can use the performance statistics to analyze your **game's performance**

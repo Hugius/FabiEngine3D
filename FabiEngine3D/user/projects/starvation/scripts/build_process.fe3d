@@ -1,4 +1,4 @@
-82 37
+77 27
 META script_type_update
 
 /// Check if a built building is selected
@@ -62,7 +62,7 @@ IF toolID IS "hammer_stone" OR toolID IS "hammer_iron":
         DECR cp 1
         DECR ip 1
         BOOL afford1 = (_bag[0] MORE wp AND _bag[1] MORE sp)
-        BOOL afford2 = (_bag[2] MORE cp AND _bag[7] MORE ip)
+        BOOL afford2 = (_bag[2] MORE cp AND _bag[8] MORE ip)
         BOOL canAfford = (afford1 IS <true> AND afford2 IS <true>)
         /// Check if building in reach, not finished, affordable
         IF distance LESS _maxReach AND height LESS size.y AND canAfford IS <true>:
@@ -76,7 +76,7 @@ IF toolID IS "hammer_stone" OR toolID IS "hammer_iron":
                 DECR _bag[0] _buildablesWoodPrice[hoveredIndex]
                 DECR _bag[1] _buildablesStonePrice[hoveredIndex]
                 DECR _bag[2] _buildablesClayPrice[hoveredIndex]
-                DECR _bag[7] _buildablesIronPrice[hoveredIndex]
+                DECR _bag[8] _buildablesIronPrice[hoveredIndex]
                 /// Check if building is a house
                 IF idPart IS "sm" OR idPart IS "me" OR idPart IS "bi":
                     /// Check if building is finished

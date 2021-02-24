@@ -1,4 +1,4 @@
-10 47
+25 29
 META script_type_update
 
 /// Check if player wants to open/close bag
@@ -21,8 +21,10 @@ fe3d:image_set_visible("clay", bToggled)
 fe3d:text_set_visible("clay_count", bToggled)
 fe3d:image_set_visible("seeds", bToggled)
 fe3d:text_set_visible("seeds_count", bToggled)
-fe3d:image_set_visible("corn", bToggled)
-fe3d:text_set_visible("corn_count", bToggled)
+fe3d:image_set_visible("wheat", bToggled)
+fe3d:text_set_visible("wheat_count", bToggled)
+fe3d:image_set_visible("bread", bToggled)
+fe3d:text_set_visible("bread_count", bToggled)
 fe3d:image_set_visible("fish", bToggled)
 fe3d:text_set_visible("fish_count", bToggled)
 fe3d:image_set_visible("meat", bToggled)
@@ -33,7 +35,8 @@ fe3d:image_set_visible("coin", bToggled)
 fe3d:text_set_visible("coin_count", bToggled)
 
 /// Calculate total bag items AND show bag text
-LIST textNames = {"wood_count","stone_count","clay_count","seeds_count","corn_count"}
+LIST textNames = {"wood_count","stone_count","clay_count","seeds_count","wheat_count"}
+PUSH textNames "bread_count"
 PUSH textNames "fish_count"
 PUSH textNames "meat_count"
 PUSH textNames "iron_count"

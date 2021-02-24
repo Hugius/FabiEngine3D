@@ -1,8 +1,9 @@
-29 16
+47 32
 META script_type_update
 
 /// Temporary values
 VEC3 camPos = fe3d:camera_get_position()
+DEC pitch = fe3d:camera_get_pitch()
 DEC feetY = fe3d:terrain_get_pixel_height(camPos.x, camPos.z)
 DEC waterY = fe3d:water_get_height()
 
@@ -10,7 +11,7 @@ DEC waterY = fe3d:water_get_height()
 fe3d:text_set_visible("plow", <false>)
 BOOL isHovered = <false>
 STR toolID = _inventory[_equipIndex]
-IF feetY MORE waterY AND camPos.y LESS 34.0:
+IF feetY MORE waterY AND camPos.y LESS 34.0 AND pitch LESS -25.0:
     IF toolID IS "hoe" AND _isInvOpen IS <true>:
         fe3d:text_set_visible("plow", <true>)
         EDIT isHovered = <true>
@@ -20,31 +21,31 @@ IF _wasHoePlaying IS <true> AND _isHoePlaying IS <false>:
     IF isHovered IS <true>:
         INT newID = misc:get_unique_integer(0, 1000)
         CAST newID STR
-        EDIT newID = misc:concat_strings("corn", newID)
-        fe3d:model_place(newID, "corn", camPos.x, feetY, camPos.z)
+        EDIT newID = misc:concat_strings("wheat", newID)
+        fe3d:model_place(newID, "wheat", camPos.x, feetY, camPos.z)
         fe3d:model_set_aabb_collision_responsive(newID, <false>)
-        STR aabbID = misc:concat_strings(newID, "_corn")
+        STR aabbID = misc:concat_strings(newID, "_wheat")
         VEC3 size = fe3d:aabb_get_size(aabbID)
         MUL size.y 0.025
         fe3d:model_set_max_height(newID, size.y)
 
 /// Update corn growing
-LIST cornIDs = fe3d:model_find_ids("corn")
-INT length = misc:get_list_size("cornIDs")
+LIST wheatIDs = fe3d:model_find_ids("wheat")
+INT length = misc:get_list_size("wheatIDs")
 INT index = 0
-STR cornID = ""
-STR cornAabbID = ""
-VEC3 cornSize = [0.0 0.0 0.0]
-DEC height = 0.0
+STR wheatID = ""
+STR wheatAabbID = ""
+VEC3 wheatSize = [0.0 0.0 0.0]
+DEC wheatHeight = 0.0
 LOOP:
     IF index IS length:
         BREAK
     ELSE:
-        EDIT cornID = cornIDs[index]
-        EDIT cornAabbID = misc:concat_strings(cornID, "_corn")
-        EDIT cornSize = fe3d:aabb_get_size(cornAabbID)
-        EDIT height = fe3d:model_get_max_height(cornID)
-        IF height LESS cornSize.y:
-            INCR height 0.001
-            fe3d:model_set_max_height(cornID, height)
+        EDIT wheatID = wheatIDs[index]
+        EDIT wheatAabbID = misc:concat_strings(wheatID, "_wheat")
+        EDIT wheatSize = fe3d:aabb_get_size(wheatAabbID)
+        EDIT wheatHeight = fe3d:model_get_max_height(wheatID)
+        IF wheatHeight LESS wheatSize.y:
+            INCR wheatHeight 0.01
+            fe3d:model_set_max_height(wheatID, wheatHeight)
         INCR index 1

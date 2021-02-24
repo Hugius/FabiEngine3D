@@ -1,4 +1,4 @@
-45 41
+54 48
 META script_type_update
 
 /// Prepare crafting process
@@ -17,7 +17,7 @@ IF _isCrafting IS <true> AND confirmed IS <true>:
     DECR wp 1
     DECR sp 1
     DECR ip 1
-    EDIT confirmed = (_bag[0] MORE wp AND _bag[1] MORE sp AND _bag[7] MORE ip)
+    EDIT confirmed = (_bag[0] MORE wp AND _bag[1] MORE sp AND _bag[8] MORE ip)
 
 /// Buttons hovering
 IF confirmed IS <true> AND _isCrafting IS <true>:
@@ -49,11 +49,11 @@ IF _isCrafting IS <true>:
         EDIT _inventory[_equipIndex] = itemName
         DECR _bag[0] _craftablesWoodPrice[_craftIndex]
         DECR _bag[1] _craftablesStonePrice[_craftIndex]
-        DECR _bag[7] _craftablesIronPrice[_craftIndex]
+        DECR _bag[8] _craftablesIronPrice[_craftIndex]
         /// Iron tools have much longer durability
         INT i = _craftIndex
         IF i IS 1 OR i IS 3 OR i IS 5 OR i IS 7 OR i IS 8 OR i IS 9 OR i IS 11:
-            EDIT _durabilities[_equipIndex] = 100.0
+            EDIT _durabilities[_equipIndex] = 10.0
         ELSE:
             EDIT _durabilities[_equipIndex] = 1.0
     ELIF cancelled IS <true> AND lmbPressed IS <true>:

@@ -1,4 +1,4 @@
-8 56
+37 27
 META script_type_update
 
 /// Temporary values
@@ -36,7 +36,7 @@ IF a IS <true>:
             INT randomInt = misc:get_random_integer(0, 1500)
             IF randomInt IS 0:
                 fe3d:model_resume_animation("fishrod", "fishrod_throw")
-                INCR _bag[5] 1
+                INCR _bag[6] 1
                 DECR _durabilities[8] _durabilityHit
     ELIF toolID IS "fishrod" AND _isInvOpen IS <true> AND _isFishrodPlaying IS <false>:
         fe3d:text_set_visible("fish", <true>)

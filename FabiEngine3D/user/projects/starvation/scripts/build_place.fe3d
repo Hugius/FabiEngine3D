@@ -1,4 +1,4 @@
-89 12
+99 19
 META script_type_update
 
 /// Temporary values
@@ -98,4 +98,4 @@ IF _isBuilding IS <true> AND lmbPressed IS <true>:
         DECR _bag[0] _buildablesWoodPrice[_buildIndex]
         DECR _bag[1] _buildablesStonePrice[_buildIndex]
         DECR _bag[2] _buildablesClayPrice[_buildIndex]
-        DECR _bag[7] _buildablesIronPrice[_buildIndex]
+        DECR _bag[8] _buildablesIronPrice[_buildIndex]

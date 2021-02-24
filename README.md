@@ -1150,32 +1150,35 @@ fe3d:print(camPos.x)
 
 # Miscellaneous
 ### Tips & tricks
-- You can create your own custom **subfolders** within the main folder of `user\assets`
-- All rotational **degrees** cannot be higher than 360 or lower than -360 (for example 500 will be 140)
-- AABB's will transform based on their rotation, but only in 90 degree steps (0, 90, 180, 270 degrees)
-- The top viewport has a button called "**uncache**" which forces the engine to load an asset again, even if it was cached
-- You can **clear** the console output by pressing **C** when hovering the **console window**
-- Internal engine updates happen **after** the scripting updates (keep this is mind when working with bound AABBs)
-- You **can** individually access (bound) AABBs that are placed through **scripting**
-- You **cannot** individually access bound AABBs from a **scene**
-- FabiEngine3D does **not** support a camera roll, because of the infamous Gimbal Lock
-- FabiEngine3D **does** come with first person camera support, but **not** third person
+- You can create your own custom **subfolders** within the main folder of `user\assets`.
+- Internal engine updates happen **after** the scripting updates
+- All rotational **degrees** cannot be higher than 360 or lower than -360 (for example 500 will be 140).
+- The top viewport has a button called "**uncache**" which forces the engine to load an asset again, even if it was cached.
+- You can **clear** the console output by pressing **C** when hovering the **console window**.
+- FabiEngine3D does **not** support a camera roll, because of the infamous Gimbal Lock.
+- FabiEngine3D **does** come with first person camera support, but **not** third person.
+### AABB system
+- AABB's will transform based on their rotation, but only in 90 degree steps (0, 90, 180, 270 degrees).
+- You **can** individually access (bound) AABBs that are placed through **scripting**.
+- You **cannot** individually access bound AABBs from a **scene**.
+- If you want to access an AABB bound to a model, the ID is composed like this: **modelID + "_" + aabbName**.
+### Known issues
 - There is a VERY rare **bug** when using the first person camera system; if the cursor does not center anymore and the camera keeps spinning very fast, click on the **window border** once. This bug does not occur in fullscreen mode.
 ### Performance
-- Click [here](#performance-statistics-example) to see an example
-- You can use the performance statistics to analyze your **game's performance**
-- The amounts of entities are the **total** amounts
-- The amount of triangles is the **realtime** amount being rendered every frame
-- `coreUpdate` includes all function calls and calculations in your update scripts
-- `bufferSwap` means the actual buffering on the output screen
-- Use LOD entities to improve your performance
-- Lower the graphics quality in the project settings to improve your performance
+- Click [here](#performance-statistics-example) to see an example.
+- You can use the performance statistics to analyze your **game's performance**.
+- The amounts of entities are the **total** amounts.
+- The amount of triangles is the **realtime** amount being rendered every frame.
+- `coreUpdate` includes all function calls and calculations in your update scripts.
+- `bufferSwap` means the actual buffering on the output screen.
+- Use LOD entities to improve your performance.
+- Lower the graphics quality in the project settings to improve your performance.
 ### Config file
-- The config file (`config.fe3d`) has multiple **settings** for the application appearance
-- `window_size_multiplier`: decimal value between 0.0 and 1.0; 1.0 means the full monitor resolution
-- `window_fullscreen`: boolean value; toggle window fullscreen
-- `window_borderless`: boolean value; toggle window border visibility
-- `selected_game`: string value; select name of project/game to be run on FabiEngine3D launch
+- The config file (`config.fe3d`) has multiple **settings** for the application appearance.
+- `window_size_multiplier`: decimal value between 0.0 and 1.0; 1.0 means the full monitor resolution.
+- `window_fullscreen`: boolean value; toggle window fullscreen.
+- `window_borderless`: boolean value; toggle window border visibility.
+- `selected_game`: string value; select name of project/game to be run on FabiEngine3D launch.
 
 # Screenshots
 ### Engine interface example

@@ -10,7 +10,6 @@ public:
 	ModelEditor(FabiEngine3D& fe3d, EngineGuiManager& gui);
 	~ModelEditor() = default;
 
-	void initializeGUI();
 	void load();
 	void unload();
 	void update();
@@ -25,6 +24,8 @@ public:
 	const vector<string>& getLoadedModelIDs();
 
 private:
+	void _loadGUI();
+	void _unloadGUI();
 	bool _addModel(const string& modelName, string meshPath, string diffuseMapPath, string lightMapPath, string reflectionMapPath, string normalMapPath,
 		Vec3 size, bool isFaceCulled, bool isShadowed, bool isTransparent, bool isSpecular, int reflectionType,
 		float specularFactor, float specularIntensity, float lightness, Vec3 color, float uvRepeat, string lodEntityID, bool isInstanced,

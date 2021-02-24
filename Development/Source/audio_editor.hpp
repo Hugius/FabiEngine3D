@@ -9,7 +9,6 @@ public:
 	AudioEditor(FabiEngine3D& fe3d, EngineGuiManager& gui);
 	~AudioEditor() = default;
 
-	void initializeGUI();
 	void load();
 	void unload();
 	void update();
@@ -23,6 +22,8 @@ public:
 	const vector<string>& getLoadedAudioIDs();
 
 private:
+	void _loadGUI();
+	void _unloadGUI();
 	void _updateMainMenu();
 	void _updateAudioCreation();
 	void _updateAudioChoosing();

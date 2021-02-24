@@ -7,8 +7,10 @@ class EngineGuiWindow final
 {
 public:
 	EngineGuiWindow(FabiEngine3D& fe3d, const string& parentID, const string& ID, Vec2 position, Vec2 size, Vec3 color);
+	~EngineGuiWindow();
 
 	void addScreen(const string& ID);
+	void deleteScreen(const string& ID);
 	void setActiveScreen(const string& ID);
 	void update(bool hoverable);
 

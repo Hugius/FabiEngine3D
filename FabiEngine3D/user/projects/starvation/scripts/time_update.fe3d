@@ -1,4 +1,4 @@
-66 0
+66 4
 META script_type_update
 
 /// Update time passing
@@ -64,7 +64,8 @@ fe3d:sky_set_mix_value(_skyMixValue)
 fe3d:graphics_set_ambient_light_intensity(_ambLightIntensity)
 fe3d:graphics_set_directional_light_intensity(_dirLightIntensity)
 fe3d:graphics_set_directional_light_position(dirPos.x, dirPos.y, dirPos.z)
-fe3d:graphics_set_fog_color(fogIntensity, fogIntensity, fogIntensity)
+IF _isUnderWater IS <false>:
+    fe3d:graphics_set_fog_color(fogIntensity, fogIntensity, fogIntensity)
 
 /// Update fire billboards
 CONST LIST billboards = fe3d:billboard_find_ids("fire")

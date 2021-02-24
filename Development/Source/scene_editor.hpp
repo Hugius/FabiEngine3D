@@ -19,7 +19,6 @@ public:
 		ModelEditor& modelEditor, AnimationEditor& animationEditor, BillboardEditor& billboardEditor, AudioEditor& audioEditor);
 	~SceneEditor() = default;
 
-	void initializeGUI();
 	void load();
 	void unload();
 	void update();
@@ -36,6 +35,10 @@ public:
 	const string& getLoadedSceneID();
 
 private:
+	// GUI
+	void _loadGUI();
+	void _unloadGUI();
+
 	// Environment updates
 	void _updateMainEnvironmentMenu();
 	void _updateSkyMenu();

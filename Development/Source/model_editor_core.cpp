@@ -14,7 +14,7 @@ ModelEditor::ModelEditor(FabiEngine3D& fe3d, EngineGuiManager& gui) :
 
 }
 
-void ModelEditor::initializeGUI()
+void ModelEditor::_loadGUI()
 {
 	// Private window instance of left viewport
 	auto leftWindow = _gui.getViewport("left")->getWindow("main");
@@ -83,8 +83,23 @@ void ModelEditor::initializeGUI()
 	leftWindow->getScreen("modelEditorMenuAabb")->addButton("back", Vec2(0.0f, -0.83f), Vec2(GW("Go back"), 0.1f), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 }
 
+void ModelEditor::_unloadGUI()
+{
+	auto leftWindow = _gui.getViewport("left")->getWindow("main");
+	leftWindow->deleteScreen("modelEditorMenuMain");
+	leftWindow->deleteScreen("modelEditorMenuChoice");
+	leftWindow->deleteScreen("modelEditorMenuMesh");
+	leftWindow->deleteScreen("modelEditorMenuOptions");
+	leftWindow->deleteScreen("modelEditorMenuLighting");
+	leftWindow->deleteScreen("modelEditorMenuSize");
+	leftWindow->deleteScreen("modelEditorMenuAabb");
+}
+
 void ModelEditor::load()
 {
+	// GUI
+	_loadGUI();
+
 	// Load all mesh filenames from assets folder
 	_loadMeshFileNames();
 
@@ -123,6 +138,9 @@ void ModelEditor::load()
 
 void ModelEditor::unload()
 {
+	// GUI
+	_unloadGUI();
+
 	// Disable graphics
 	_fe3d.gfx_disableAmbientLighting(true);
 	_fe3d.gfx_disableDirectionalLighting(true);

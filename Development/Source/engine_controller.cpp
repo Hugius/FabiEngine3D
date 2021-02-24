@@ -41,7 +41,7 @@ void EngineController::FE3D_CONTROLLER_INIT()
 		_leftViewportController.getSettingsEditor().setCurrentProjectID(engine_getSelectedGame());
 
 		// Import settings
-		_leftViewportController.getSettingsEditor().load();
+		_leftViewportController.getSettingsEditor().loadSettings();
 
 		// Permanent graphical effects
 		gfx_enableMSAA();

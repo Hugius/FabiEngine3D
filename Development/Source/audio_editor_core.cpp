@@ -10,7 +10,7 @@ AudioEditor::AudioEditor(FabiEngine3D& fe3d, EngineGuiManager& gui) :
 
 }
 
-void AudioEditor::initializeGUI()
+void AudioEditor::_loadGUI()
 {
 	// Private window instance of left viewport
 	auto leftWindow = _gui.getViewport("left")->getWindow("main");
@@ -32,8 +32,18 @@ void AudioEditor::initializeGUI()
 	leftWindow->getScreen("audioEditorMenuChoice")->addButton("back", Vec2(0.0f, -0.75f), Vec2(GW("Go back"), 0.1f), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 }
 
+void AudioEditor::_unloadGUI()
+{
+	auto leftWindow = _gui.getViewport("left")->getWindow("main");
+	leftWindow->deleteScreen("audioEditorMenuMain");
+	leftWindow->deleteScreen("audioEditorMenuChoice");
+}
+
 void AudioEditor::load()
 {
+	// GUI
+	_loadGUI();
+
 	// Load all audio entities
 	loadAudioEntitiesFromFile();
 
@@ -49,6 +59,9 @@ void AudioEditor::load()
 
 void AudioEditor::unload()
 {
+	// GUI
+	_unloadGUI();
+
 	// Delete everything
 	_fe3d.billboardEntity_delete("@@audioStatus");
 	_fe3d.audioEntity_deleteAll();

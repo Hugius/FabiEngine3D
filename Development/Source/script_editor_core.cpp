@@ -14,7 +14,7 @@ ScriptEditor::ScriptEditor(FabiEngine3D& fe3d, EngineGuiManager& gui, SceneEdito
 
 }
 
-void ScriptEditor::initializeGUI()
+void ScriptEditor::_loadGUI()
 {	
 	// Private window instance of left viewport
 	auto leftWindow = _gui.getViewport("left")->getWindow("main");
@@ -30,8 +30,17 @@ void ScriptEditor::initializeGUI()
 	leftWindow->getScreen(screenID)->addButton("back", Vec2(0.0f, -0.75f), Vec2(GW("Go back"), 0.1f), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 }
 
+void ScriptEditor::_unloadGUI()
+{
+	auto leftWindow = _gui.getViewport("left")->getWindow("main");
+	leftWindow->deleteScreen("scriptEditorMenuMain");
+}
+
 void ScriptEditor::load()
 {
+	// GUI
+	_loadGUI();
+
 	// Camera
 	_fe3d.camera_load(70.0f, 0.1f, 10000.0f, _cameraStartingPosition, -90.0f);
 
@@ -58,6 +67,9 @@ void ScriptEditor::load()
 
 void ScriptEditor::unload()
 {
+	// GUI
+	_unloadGUI();
+
 	// Graphics
 	_fe3d.gfx_disableDirectionalLighting(true);
 	_fe3d.gfx_disableSpecularLighting(true);

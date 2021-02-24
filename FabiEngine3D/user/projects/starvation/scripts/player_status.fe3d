@@ -1,4 +1,4 @@
-48 5
+54 22
 META script_type_update
 
 /// Update health icon color
@@ -53,7 +53,7 @@ EDIT _oxygen = math:clamp(_oxygen, 0.0, 1.0)
 
 /// Update temperature
 BOOL torchEquipped = (_isInvOpen IS <true> AND _inventory[_equipIndex] IS "torch")
-INCR _temperature 0.00001
+INCR _temperature 0.0001
 IF _isUnderWater IS <true>:
     DECR _temperature 0.0005
 IF _isDayTime IS <false>:

@@ -30,16 +30,6 @@ void LeftViewportController::initialize()
 	_gui.getViewport("left")->getWindow("main")->getScreen("main")->addButton("sceneEditor", Vec2(0.0f, -0.36f), Vec2(GW("3D scenes"), 0.1f), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "3D scenes", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	_gui.getViewport("left")->getWindow("main")->getScreen("main")->addButton("scriptEditor", Vec2(0.0f, -0.59f), Vec2(GW("Scripting"), 0.1f), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Scripting", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	_gui.getViewport("left")->getWindow("main")->getScreen("main")->addButton("settingsEditor", Vec2(0.0f, -0.83f), Vec2(GW("Settings"), 0.1f), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Settings", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	
-	// Initialize editors GUI
-	_environmentEditor.initializeGUI();
-	_modelEditor.initializeGUI();
-	_animationEditor.initializeGUI();
-	_billboardEditor.initializeGUI();
-	_audioEditor.initializeGUI();
-	_sceneEditor.initializeGUI();
-	_scriptEditor.initializeGUI();
-	_settingsEditor.initializeGUI();
 }
 
 void LeftViewportController::update()
@@ -115,7 +105,7 @@ void LeftViewportController::update()
 	if (_lastActiveEditorScreen == "scriptEditorMenuMain" && window->getActiveScreen()->getID() != "scriptEditorMenuMain")
 	{
 		// Reload settings (MSAA in particular)
-		_settingsEditor.load();
+		_settingsEditor.loadSettings();
 		_lastActiveEditorScreen = "";
 	}
 }

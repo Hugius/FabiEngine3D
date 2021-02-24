@@ -9,7 +9,7 @@ public:
 	SettingsEditor(FabiEngine3D& fe3d, EngineGuiManager& gui);
 	~SettingsEditor() = default;
 
-	void initializeGUI();
+	void loadSettings();
 	void load();
 	void unload();
 	void update();
@@ -17,6 +17,9 @@ public:
 	void save(bool newFile);
 
 private:
+	void _loadGUI();
+	void _unloadGUI();
+
 	FabiEngine3D& _fe3d;
 	EngineGuiManager& _gui;
 

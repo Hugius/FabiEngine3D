@@ -9,7 +9,6 @@ public:
 	BillboardEditor(FabiEngine3D& fe3d, EngineGuiManager& gui);
 	~BillboardEditor() = default;
 
-	void initializeGUI();
 	void load();
 	void unload();
 	void update();
@@ -23,6 +22,8 @@ public:
 	const vector<string>& getLoadedBillboardIDs();
 
 private:
+	void _loadGUI();
+	void _unloadGUI();
 	void _updateBillboardManagement();
 	void _updateBillboardCreation();
 	void _updateBillboardChoosing();

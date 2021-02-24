@@ -18,5 +18,6 @@ private:
 	FabiEngine3D& _fe3d;
 
 	shared_ptr<EngineGuiGlobalScreen> _globalScreen;
+
 	std::vector<shared_ptr<EngineGuiViewport>> _viewports;
 };

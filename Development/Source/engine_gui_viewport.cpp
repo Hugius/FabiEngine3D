@@ -8,6 +8,11 @@ EngineGuiViewport::EngineGuiViewport(FabiEngine3D& fe3d, const string& ID, Vec2 
 	fe3d.guiEntity_add(_entityID, color, position, 0.0f, size, true);
 }
 
+EngineGuiViewport::~EngineGuiViewport()
+{
+	_fe3d.guiEntity_delete(_entityID);
+}
+
 void EngineGuiViewport::update(bool hoverable)
 {
 	for (auto& window : _windows)
@@ -56,6 +61,18 @@ void EngineGuiViewport::addWindow(const string& ID, Vec2 position, Vec2 size, Ve
 	Vec2 windowPosition = viewportPosition + (position * viewportSize);
 	Vec2 windowSize = (size / 2.0f) * viewportSize;
 	_windows.push_back(make_shared<EngineGuiWindow>(_fe3d, _ID, ID, windowPosition, windowSize, color));
+}
+
+void EngineGuiViewport::deleteWindow(const string& ID)
+{
+	for (unsigned int i = 0; i < _windows.size(); i++)
+	{
+		if (_windows[i]->getID() == ID)
+		{
+			_windows.erase(_windows.begin() + i);
+			break;
+		}
+	}
 }
 
 vector<shared_ptr<EngineGuiWindow>>& EngineGuiViewport::getWindows()

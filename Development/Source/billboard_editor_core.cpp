@@ -10,7 +10,7 @@ BillboardEditor::BillboardEditor(FabiEngine3D& fe3d, EngineGuiManager& gui) :
 
 }
 
-void BillboardEditor::initializeGUI()
+void BillboardEditor::_loadGUI()
 {
 	// Private window instance of left viewport
 	auto leftWindow = _gui.getViewport("left")->getWindow("main");
@@ -61,8 +61,22 @@ void BillboardEditor::initializeGUI()
 	leftWindow->getScreen("billboardEditorMenuText")->addButton("back", Vec2(0.0f, -0.63f), Vec2(GW("Go back"), 0.1f), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 }
 
+void BillboardEditor::_unloadGUI()
+{
+	auto leftWindow = _gui.getViewport("left")->getWindow("main");
+	leftWindow->deleteScreen("billboardEditorMenuMain");
+	leftWindow->deleteScreen("billboardEditorMenuChoice");
+	leftWindow->deleteScreen("billboardEditorMenuMesh");
+	leftWindow->deleteScreen("billboardEditorMenuAppearance");
+	leftWindow->deleteScreen("billboardEditorMenuAnimation");
+	leftWindow->deleteScreen("billboardEditorMenuText");
+}
+
 void BillboardEditor::load()
 {
+	// GUI
+	_loadGUI();
+
 	// Camera
 	_fe3d.camera_load(90.0f, 0.1f, 10000.0f, _defaultCameraPosition, -90.0f);
 	_fe3d.camera_enableLookatView();
@@ -94,6 +108,9 @@ void BillboardEditor::load()
 
 void BillboardEditor::unload()
 {
+	// GUI
+	_unloadGUI();
+
 	// Disable graphics
 	_fe3d.gfx_disableAmbientLighting(true);
 	_fe3d.gfx_disableDirectionalLighting(true);

@@ -13,7 +13,7 @@ SettingsEditor::SettingsEditor(FabiEngine3D& fe3d, EngineGuiManager& gui) :
 
 }
 
-void SettingsEditor::initializeGUI()
+void SettingsEditor::_loadGUI()
 {
 	// Private window instance of left viewport
 	auto leftWindow = _gui.getViewport("left")->getWindow("main");
@@ -30,12 +30,18 @@ void SettingsEditor::initializeGUI()
 	leftWindow->getScreen(screenID)->addButton("back", Vec2(0.0f, -0.75f), Vec2(GW("Go back"), 0.1f), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 }
 
-void SettingsEditor::load()
+void SettingsEditor::_unloadGUI()
+{
+	auto leftWindow = _gui.getViewport("left")->getWindow("main");
+	leftWindow->deleteScreen("settingsEditorMenuMain");
+}
+
+void SettingsEditor::loadSettings()
 {
 	// Error checking
 	if (_currentProjectID == "")
 	{
-		_fe3d.logger_throwError("No current project loaded --> SettingsEditor::load()");
+		_fe3d.logger_throwError("No current project loaded --> SettingsEditor::loadSettings()");
 	}
 
 	// Compose full file path
@@ -68,12 +74,23 @@ void SettingsEditor::load()
 	{
 		_fe3d.logger_throwWarning("Project \"" + _currentProjectID + "\" corrupted: settings.fe3d missing!");
 	}
+}
 
+void SettingsEditor::load()
+{
+	// GUI
+	_loadGUI();
+
+	// Settings
+	loadSettings();
+	
+	// Miscellaneous
 	_isEditorLoaded = true;
 }
 
 void SettingsEditor::unload()
 {
+	_unloadGUI();
 	_isEditorLoaded = false;
 }
 

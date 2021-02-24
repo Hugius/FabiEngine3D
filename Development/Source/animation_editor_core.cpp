@@ -11,7 +11,7 @@ AnimationEditor::AnimationEditor(FabiEngine3D& fe3d, EngineGuiManager& gui, Mode
 
 }
 
-void AnimationEditor::initializeGUI()
+void AnimationEditor::_loadGUI()
 {
 	// Private window instance of left viewport
 	auto leftWindow = _gui.getViewport("left")->getWindow("main");
@@ -46,9 +46,20 @@ void AnimationEditor::initializeGUI()
 	leftWindow->getScreen("animationEditorMenuFrame")->addButton("back", Vec2(0.0f, -0.7875f), Vec2(GW("Go back"), 0.1f), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 }
 
+void AnimationEditor::_unloadGUI()
+{
+	auto leftWindow = _gui.getViewport("left")->getWindow("main");
+	leftWindow->deleteScreen("animationEditorMenuMain");
+	leftWindow->deleteScreen("animationEditorMenuChoice");
+	leftWindow->deleteScreen("animationEditorMenuFrame");
+}
+
 void AnimationEditor::load()
 {
 	_isEditorLoading = true;
+
+	// GUI
+	_loadGUI();
 
 	// Camera
 	_fe3d.camera_load(90.0f, 0.1f, 10000.0f, _defaultCameraPosition, -90.0f);
@@ -81,6 +92,9 @@ void AnimationEditor::load()
 
 void AnimationEditor::unload()
 {
+	// GUI
+	_unloadGUI();
+
 	// Disable graphics
 	_fe3d.gfx_disableAmbientLighting(true);
 	_fe3d.gfx_disableDirectionalLighting(true);

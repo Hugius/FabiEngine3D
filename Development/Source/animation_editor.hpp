@@ -11,7 +11,6 @@ public:
 	AnimationEditor(FabiEngine3D& fe3d, EngineGuiManager& gui, ModelEditor& modelEditor);
 	~AnimationEditor() = default;
 
-	void initializeGUI();
 	void load();
 	void unload();
 	void update();
@@ -36,6 +35,8 @@ public:
 	const vector<string> getPlayingAnimationNames(const string& modelID);
 
 private:
+	void _loadGUI();
+	void _unloadGUI();
 	void _updateAnimationExecution();
 	void _updateManagementScreen();
 	void _updateAnimationCreation();

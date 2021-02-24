@@ -97,7 +97,7 @@ void TopViewportController::_updateProjectCreation()
 				_updateProjectChange();
 
 				// Load settings for this project
-				_settingsEditor.load();
+				_settingsEditor.loadSettings();
 
 				// Logging
 				_fe3d.logger_throwInfo("New project \"" + _currentProjectID + "\" created!");
@@ -123,7 +123,7 @@ void TopViewportController::_updateProjectLoading()
 			_updateProjectChange();
 
 			// Load settings for this project
-			_settingsEditor.load();
+			_settingsEditor.loadSettings();
 
 			// Preload all big assets of this project
 			vector<string> texturePaths;

@@ -11,6 +11,11 @@ EngineGuiWindow::EngineGuiWindow(FabiEngine3D& fe3d, const string& parentID, con
 	fe3d.guiEntity_add(_entityID, color, position, 0.0f, size, true);
 }
 
+EngineGuiWindow::~EngineGuiWindow()
+{
+	_fe3d.guiEntity_delete(_entityID);
+}
+
 void EngineGuiWindow::update(bool hoverable)
 {
 	for (auto& screen : _screens)
@@ -83,6 +88,25 @@ void EngineGuiWindow::addScreen(const string& ID)
 	Vec2 windowSize = _fe3d.guiEntity_getSize(_entityID);
 	_screens.push_back(make_shared<EngineGuiScreen>(_fe3d, _parentID + "_" + _ID, ID, windowPosition, windowSize));
 	getScreen(ID)->hide();
+}
+
+void EngineGuiWindow::deleteScreen(const string& ID)
+{
+	// Find screen
+	for (unsigned int i = 0; i < _screens.size(); i++)
+	{
+		if (_screens[i]->getID() == ID)
+		{
+			_screens.erase(_screens.begin() + i);
+			break;
+		}
+	}
+
+	// No active screen
+	if (ID == _activeScreenID)
+	{
+		_activeScreenID = "";
+	}
 }
 
 void EngineGuiWindow::setActiveScreen(const string& ID)

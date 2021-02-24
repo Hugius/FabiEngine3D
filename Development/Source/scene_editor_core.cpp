@@ -16,7 +16,7 @@ SceneEditor::SceneEditor(FabiEngine3D& fe3d, EngineGuiManager& gui, EnvironmentE
 
 }
 
-void SceneEditor::initializeGUI()
+void SceneEditor::_loadGUI()
 {
 	// Temporary values
 	auto leftWindow = _gui.getViewport("left")->getWindow("main");
@@ -338,8 +338,48 @@ void SceneEditor::initializeGUI()
 	rightWindow->getScreen(screenID)->addButton("delete", Vec2(0.0f, -0.175f), Vec2(1.5f, 0.1f), Vec3(0.75f, 0.0f, 0.0f), Vec3(1.0f, 0.25f, 0.25f), "Delete", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 }
 
+void SceneEditor::_unloadGUI()
+{
+	auto leftWindow = _gui.getViewport("left")->getWindow("main");
+	auto rightWindow = _gui.getViewport("right")->getWindow("main");
+	leftWindow->deleteScreen("sceneEditorMenuMain");
+	leftWindow->deleteScreen("sceneEditorMenuChoice");
+	leftWindow->deleteScreen("sceneEditorMenuEnvironment");
+	leftWindow->deleteScreen("sceneEditorMenuEnvironmentSky");
+	leftWindow->deleteScreen("sceneEditorMenuEnvironmentTerrain");
+	leftWindow->deleteScreen("sceneEditorMenuEnvironmentWater");
+	leftWindow->deleteScreen("sceneEditorMenuModel");
+	leftWindow->deleteScreen("sceneEditorMenuModelPlace");
+	leftWindow->deleteScreen("sceneEditorMenuModelChoice");
+	leftWindow->deleteScreen("sceneEditorMenuBillboard");
+	leftWindow->deleteScreen("sceneEditorMenuBillboardPlace");
+	leftWindow->deleteScreen("sceneEditorMenuBillboardChoice");
+	leftWindow->deleteScreen("sceneEditorMenuLighting");
+	leftWindow->deleteScreen("sceneEditorMenuLightingAmbient");
+	leftWindow->deleteScreen("sceneEditorMenuLightingDirectional");
+	leftWindow->deleteScreen("sceneEditorMenuLightingPoint");
+	leftWindow->deleteScreen("sceneEditorMenuAudio");
+	leftWindow->deleteScreen("sceneEditorMenuAudioPlace");
+	leftWindow->deleteScreen("sceneEditorMenuAudioChoice");
+	leftWindow->deleteScreen("sceneEditorMenuSettings");
+	leftWindow->deleteScreen("sceneEditorMenuSettingsGraphics");
+	leftWindow->deleteScreen("sceneEditorMenuSettingsGraphicsShadows");
+	leftWindow->deleteScreen("sceneEditorMenuSettingsGraphicsMotionblur");
+	leftWindow->deleteScreen("sceneEditorMenuSettingsGraphicsDof");
+	leftWindow->deleteScreen("sceneEditorMenuSettingsGraphicsFog");
+	leftWindow->deleteScreen("sceneEditorMenuSettingsGraphicsLensFlare");
+	leftWindow->deleteScreen("sceneEditorMenuSettingsGraphicsSkyHDR");
+	rightWindow->deleteScreen("modelPropertiesMenu");
+	rightWindow->deleteScreen("billboardPropertiesMenu");
+	rightWindow->deleteScreen("pointlightPropertiesMenu");
+	rightWindow->deleteScreen("audioPropertiesMenu");
+}
+
 void SceneEditor::load()
 {
+	// GUI
+	_loadGUI();
+
 	// Default camera
 	_fe3d.camera_load(90.0f, 0.1f, 10000.0f, Vec3(0.0f));
 
@@ -422,6 +462,9 @@ void SceneEditor::load()
 
 void SceneEditor::unload()
 {	
+	// GUI
+	_unloadGUI();
+
 	// Clear scene
 	clearScene();
 
@@ -482,12 +525,6 @@ void SceneEditor::unload()
 	_gui.getGlobalScreen()->deleteTextfield("selectedAudioName");
 
 	// Miscellaneous
-	_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuModelPlace")->getScrollingList("models")->deleteButtons();
-	_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuModelChoice")->getScrollingList("models")->deleteButtons();
-	_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuBillboardPlace")->getScrollingList("billboards")->deleteButtons();
-	_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuBillboardChoice")->getScrollingList("billboards")->deleteButtons();
-	_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuAudioPlace")->getScrollingList("audiocasters")->deleteButtons();
-	_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuAudioChoice")->getScrollingList("audiocasters")->deleteButtons();
 	_fe3d.collision_disableCameraResponse();
 	_fe3d.misc_disableAabbFrameRendering();
 	_fe3d.misc_disableWireframeRendering();

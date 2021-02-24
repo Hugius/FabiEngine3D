@@ -10,7 +10,6 @@ public:
 	EnvironmentEditor(FabiEngine3D& fe3d, EngineGuiManager& gui);
 	~EnvironmentEditor() = default;
 
-	void initializeGUI();
 	void load();
 	void save();
 	void unload();
@@ -36,6 +35,10 @@ public:
 	bool isLoaded();
 
 private:
+	// Core functions
+	void _loadGUI();
+	void _unloadGUI();
+
 	// Sky functions
 	void _updateSkyEditor();
 	void _updateSkyMenuMain();

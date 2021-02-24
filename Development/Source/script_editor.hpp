@@ -12,7 +12,6 @@ public:
 		AnimationEditor& animationEditor, BillboardEditor& billboardEditor, AudioEditor& audioEditor, EnvironmentEditor& environmentEditor);
 	~ScriptEditor() = default;
 
-	void initializeGUI();
 	void load();
 	void unload();
 	void update();
@@ -26,6 +25,8 @@ public:
 	bool isWritingScript();
 
 private:
+	void _loadGUI();
+	void _unloadGUI();
 	void _updateGUI();
 	void _updateTextWriter();
 	void _updateTextSelector(string& newCharacters, unsigned int& cursorLineIndex,

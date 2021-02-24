@@ -10,7 +10,7 @@ EnvironmentEditor::EnvironmentEditor(FabiEngine3D& fe3d, EngineGuiManager& gui) 
 
 }
 
-void EnvironmentEditor::initializeGUI()
+void EnvironmentEditor::_loadGUI()
 {
 	// Private window instance of left viewport
 	auto leftWindow = _gui.getViewport("left")->getWindow("main");
@@ -144,8 +144,31 @@ void EnvironmentEditor::initializeGUI()
 	leftWindow->getScreen("waterEditorMenuOptions")->addButton("back", Vec2(0.0f, -0.7875f), Vec2(GW("Go back"), 0.1f), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 }
 
+void EnvironmentEditor::_unloadGUI()
+{
+	auto leftWindow = _gui.getViewport("left")->getWindow("main");
+	leftWindow->deleteScreen("environmentEditorMenu");
+	leftWindow->deleteScreen("skyEditorMenuMain");
+	leftWindow->deleteScreen("skyEditorMenuChoice");
+	leftWindow->deleteScreen("skyEditorMenuMesh");
+	leftWindow->deleteScreen("skyEditorMenuOptions");
+	leftWindow->deleteScreen("terrainEditorMenuMain");
+	leftWindow->deleteScreen("terrainEditorMenuChoice");
+	leftWindow->deleteScreen("terrainEditorMenuMesh");
+	leftWindow->deleteScreen("terrainEditorMenuBlendMap");
+	leftWindow->deleteScreen("terrainEditorMenuLighting");
+	leftWindow->deleteScreen("waterEditorMenuMain");
+	leftWindow->deleteScreen("waterEditorMenuChoice");
+	leftWindow->deleteScreen("waterEditorMenuMesh");
+	leftWindow->deleteScreen("waterEditorMenuEffects");
+	leftWindow->deleteScreen("waterEditorMenuOptions");
+}
+
 void EnvironmentEditor::load()
 {
+	// GUI
+	_loadGUI();
+
 	// Default camera
 	_fe3d.camera_load(90.0f, 0.1f, 10000.0f, Vec3(0.0f));
 	
@@ -180,6 +203,9 @@ void EnvironmentEditor::save()
 
 void EnvironmentEditor::unload()
 {
+	// GUI
+	_unloadGUI();
+
 	// Disable graphics
 	_fe3d.gfx_disableAmbientLighting(true);
 	_fe3d.gfx_disableDirectionalLighting(true);

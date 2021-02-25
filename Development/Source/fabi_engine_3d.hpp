@@ -621,7 +621,7 @@ public:
 	void gfx_enableLightMapping();
 	void gfx_enableNormalMapping();
 	void gfx_enableMSAA();
-	void gfx_enableShadows(Vec3 eye, Vec3 center, float size, float reach, bool followingCamera, int interval = 0);
+	void gfx_enableShadows(Vec3 eye, Vec3 center, float size, float reach, float lightness, bool followingCamera, bool softShadowing, int interval = 0);
 	void gfx_enableBloom(float intensity, float brightnessTreshold, int blurSize);
 	void gfx_enableWaterEffects();
 	void gfx_enableSkyHDR(float brightnessFactor);
@@ -668,6 +668,7 @@ public:
 	bool gfx_isMotionBlurEnabled();
 	bool gfx_isLensFlareEnabled();
 	bool gfx_isShadowFollowingCamera();
+	bool gfx_isSoftShadowingEnabled();
 	int gfx_getMsaaQuality();
 	int gfx_getShadowQuality();
 	int gfx_getReflectionQuality();
@@ -687,6 +688,7 @@ public:
 	float gfx_getSceneReflectionFactor();
 	float gfx_getShadowSize();
 	float gfx_getShadowReach();
+	float gfx_getShadowLightness();
 	float gfx_getBloomIntensity();
 	float gfx_getBloomBrightnessTreshold();
 	float gfx_getSkyHdrBrightnessFactor();

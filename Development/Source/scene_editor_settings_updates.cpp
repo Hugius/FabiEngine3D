@@ -96,10 +96,12 @@ void SceneEditor::_updateShadowGraphicsSettingsMenu()
 	{
 		// Temporary values
 		bool enabled = _fe3d.gfx_isShadowsEnabled();
+		bool isFollowingCamera = _fe3d.gfx_isShadowFollowingCamera();
+		bool isSoftShadowed = _fe3d.gfx_isSoftShadowingEnabled();
 		float size = _fe3d.gfx_getShadowSize();
+		float lightness = _fe3d.gfx_getShadowLightness();
 		Vec3 position = _fe3d.gfx_getShadowEyePosition();
 		Vec3 center = _fe3d.gfx_getShadowCenter();
-		bool isFollowingCamera = _fe3d.gfx_isShadowFollowingCamera();
 		int interval = _fe3d.gfx_getShadowInterval();
 
 		// GUI management
@@ -116,27 +118,35 @@ void SceneEditor::_updateShadowGraphicsSettingsMenu()
 			}
 			else if (screen->getButton("size")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("size", "Size", _fe3d.gfx_getShadowSize(), Vec2(0.0f, 0.0f), Vec2(0.2f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("size", "Size", size, Vec2(0.0f, 0.0f), Vec2(0.2f, 0.1f));
 			}
 			else if (screen->getButton("position")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("positionX", "X", _fe3d.gfx_getShadowEyePosition().x, Vec2(-0.25f, 0.0f), Vec2(0.2f, 0.1f));
-				_gui.getGlobalScreen()->addValueForm("positionY", "Y", _fe3d.gfx_getShadowEyePosition().y, Vec2(0.0f, 0.0f), Vec2(0.2f, 0.1f));
-				_gui.getGlobalScreen()->addValueForm("positionZ", "Z", _fe3d.gfx_getShadowEyePosition().z, Vec2(0.25f, 0.0f), Vec2(0.2f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("positionX", "X", position.x, Vec2(-0.25f, 0.0f), Vec2(0.2f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("positionY", "Y", position.y, Vec2(0.0f, 0.0f), Vec2(0.2f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("positionZ", "Z", position.z, Vec2(0.25f, 0.0f), Vec2(0.2f, 0.1f));
 			}
 			else if (screen->getButton("center")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("centerX", "X", _fe3d.gfx_getShadowCenter().x, Vec2(-0.25f, 0.0f), Vec2(0.2f, 0.1f));
-				_gui.getGlobalScreen()->addValueForm("centerY", "Y", _fe3d.gfx_getShadowCenter().y, Vec2(0.0f, 0.0f), Vec2(0.2f, 0.1f));
-				_gui.getGlobalScreen()->addValueForm("centerZ", "Z", _fe3d.gfx_getShadowCenter().z, Vec2(0.25f, 0.0f), Vec2(0.2f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("centerX", "X", center.x, Vec2(-0.25f, 0.0f), Vec2(0.2f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("centerY", "Y", center.y, Vec2(0.0f, 0.0f), Vec2(0.2f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("centerZ", "Z", center.z, Vec2(0.25f, 0.0f), Vec2(0.2f, 0.1f));
 			}
 			else if (screen->getButton("follow")->isHovered())
 			{
 				isFollowingCamera = !isFollowingCamera;
 			}
+			else if (screen->getButton("soft")->isHovered())
+			{
+				isSoftShadowed = !isSoftShadowed;
+			}
+			else if (screen->getButton("lightness")->isHovered())
+			{
+				_gui.getGlobalScreen()->addValueForm("lightness", "Lightness (%)", lightness * 100.0f, Vec2(0.0f, 0.0f), Vec2(0.2f, 0.1f));
+			}
 			else if (screen->getButton("interval")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("interval", "Frame interval", _fe3d.gfx_getShadowInterval(), Vec2(0.0f, 0.0f), Vec2(0.2f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("interval", "Frame interval", interval, Vec2(0.0f, 0.0f), Vec2(0.2f, 0.1f));
 			}
 		}
 
@@ -159,13 +169,22 @@ void SceneEditor::_updateShadowGraphicsSettingsMenu()
 		// Following button content
 		_fe3d.textEntity_setTextContent(screen->getButton("follow")->getTextfield()->getEntityID(), isFollowingCamera ? "Follow cam: ON" : "Follow cam: OFF");
 
+		// Following button content
+		_fe3d.textEntity_setTextContent(screen->getButton("soft")->getTextfield()->getEntityID(), isSoftShadowed ? "Soft: ON" : "Soft: OFF");
+
+		// Lightness value
+		if (_gui.getGlobalScreen()->checkValueForm("lightness", lightness))
+		{
+			lightness /= 100.0f;
+		}
+
 		// Interval value
 		_gui.getGlobalScreen()->checkValueForm("interval", interval);
 
 		// Enable or disable shadows
 		if (enabled)
 		{
-			_fe3d.gfx_enableShadows(position, center, size, size * 1.5f, isFollowingCamera, interval);
+			_fe3d.gfx_enableShadows(position, center, size, size * 2.0f, lightness, isFollowingCamera, isSoftShadowed, interval);
 		}
 		else
 		{

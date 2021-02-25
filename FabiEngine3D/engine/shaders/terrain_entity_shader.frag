@@ -54,6 +54,7 @@ uniform float u_specularLightIntensity;
 uniform float u_maxSpotlightAngle;
 uniform float u_spotLightIntensity;
 uniform float u_maxSpotLightDistance;
+uniform float u_shadowLightness;
 
 // Boolean uniforms
 uniform bool u_isBlendMapped;
@@ -70,6 +71,7 @@ uniform bool u_isSpotLightEnabled;
 uniform bool u_isFogEnabled;
 uniform bool u_isShadowsEnabled;
 uniform bool u_isShadowFrameRenderEnabled;
+uniform bool u_isSoftShadowingEnabled;
 uniform bool u_isSpecularLightEnabled;
 uniform bool u_hasDiffuseMap;
 uniform bool u_hasNormalMap;
@@ -107,9 +109,8 @@ void main()
 
 	// Calculate lighting
     float shadow		   = getShadowValue();
-	bool noShadowOcclusion = (shadow == 1.0f);
 	vec3 ambient		   = getAmbientLighting();
-	vec3 directional	   = getDirectionalLighting(normal, noShadowOcclusion);
+	vec3 directional	   = getDirectionalLighting(normal, u_isSoftShadowingEnabled ? true : (shadow == 1.0f));
 	vec3 point			   = getPointLighting(normal);
 	vec3 spot			   = getSpotLighting(normal);
 
@@ -388,8 +389,8 @@ float getShadowValue()
 		// Check if fragment is within shadow area
 		if
 		(
-			abs(f_pos.x - u_shadowAreaCenter.x) <= (halfSize) && 
-			abs(f_pos.z - u_shadowAreaCenter.z) <= (halfSize)
+			abs(f_pos.x - u_shadowAreaCenter.x) <= halfSize && 
+			abs(f_pos.z - u_shadowAreaCenter.z) <= halfSize
 		)
 		{
 			// Variables
@@ -441,7 +442,7 @@ float getShadowValue()
 				for(int y = -1; y <= 1; y++)
 				{
 					float pcfDepth = texture(u_sampler_shadowMap, projCoords.xy + vec2(x, y) * vec2(texelSize)).r; 
-					shadow += (currentDepth - texelSize > pcfDepth) ? 0.6f : 1.0f;        
+					shadow += (currentDepth - texelSize > pcfDepth) ? u_shadowLightness : 1.0f;        
 				}    
 			}
             
@@ -470,7 +471,14 @@ float getShadowValue()
 			}
 
 			// Return shadow value
-			return mix(shadow, 1.0f, alpha);
+			if(u_isSoftShadowingEnabled)
+			{
+				return mix(shadow, 1.0f, alpha);
+			}
+			else
+			{
+				return shadow;
+			}
 		}
 
 		// No shadow

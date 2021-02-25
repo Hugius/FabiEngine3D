@@ -546,12 +546,14 @@ void SceneEditor::saveSceneToFile()
 			if (enabled)
 			{
 				float size = _fe3d.gfx_getShadowSize();
+				float lightness = _fe3d.gfx_getShadowLightness();
 				position = _fe3d.gfx_getShadowEyePosition();
 				Vec3 center = _fe3d.gfx_getShadowCenter();
 				bool isFollowingCamera = _fe3d.gfx_isShadowFollowingCamera();
+				bool isSoftShadowed = _fe3d.gfx_isSoftShadowingEnabled();
 				int interval = _fe3d.gfx_getShadowInterval();
-				file << "GRAPHICS_SHADOWS " << enabled << " " << size << " " << _fe3d.misc_vec2str(position) << " " <<
-					_fe3d.misc_vec2str(center) << " " << isFollowingCamera << " " << interval << std::endl;
+				file << "GRAPHICS_SHADOWS " << enabled << " " << size << " " << lightness << " " << _fe3d.misc_vec2str(position) << " " <<
+					_fe3d.misc_vec2str(center) << " " << isFollowingCamera << " " << isSoftShadowed << " " << interval << std::endl;
 			}
 
 			// Motion blur settings

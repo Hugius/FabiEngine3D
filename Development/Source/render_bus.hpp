@@ -72,6 +72,7 @@ public:
 	void setSceneReflectionFactor(float value);
 	void setShadowAreaSize(float value);
 	void setShadowAreaReach(float value);
+	void setShadowLightness(float value);
 	void setLensFlareAlpha(float value);
 	void setLensFlareIntensity(float value);
 	void setLensFlareMultiplier(float value);
@@ -113,6 +114,7 @@ public:
 	void setAabbFrameRenderingEnabled(bool value);
 	void setDebugRenderingEnabled(bool value);
 	void setShadowFrameRenderingEnabled(bool value);
+	void setSoftShadowingEnabled(bool value);
 	void setTriangleCountingEnabled(bool value);
 	void setDofDynamic(bool value);
 
@@ -165,7 +167,7 @@ public:
 	const float getMaxSpotLightDistance()	   const;
 	const float getFogMinDistance()			   const;
 	const float getFogMaxDistance()			   const;
-	const float getFogThickness()		   const;
+	const float getFogThickness()			   const;
 	const float getBloomIntensity()			   const;
 	const float getBloomBrightnessTreshold()   const;
 	const float getCameraYaw()				   const;
@@ -180,6 +182,7 @@ public:
 	const float getSceneReflectionFactor()	   const;
 	const float getShadowAreaSize()			   const;
 	const float getShadowAreaReach()		   const;
+	const float getShadowLightness()		   const;
 	const float getLensFlareAlpha()			   const;
 	const float getLensFlareIntensity()		   const;
 	const float getLensFlareMultiplier()	   const;
@@ -219,6 +222,7 @@ public:
 	const bool isWireframeRenderingEnabled()   const;
 	const bool isAabbFrameRenderingEnabled()   const;
 	const bool isShadowFrameRenderingEnabled() const;
+	const bool isSoftShadowingEnabled()		   const;
 	const bool isDebugRenderingEnabled()       const;
 	const bool isTriangleCountingEnabled()	   const;
 	const bool isDofDynamic()				   const;
@@ -273,7 +277,7 @@ private:
 	float _maxSpotLightDistance		 = 0.0f;
 	float _fogMinDistance            = 0.0f;
 	float _fogMaxDistance			 = 0.0f;
-	float _fogThickness			 = 0.0f;
+	float _fogThickness				 = 0.0f;
 	float _bloomIntensity            = 0.0f;
 	float _bloomBrightnessTreshold   = 0.0f;
 	float _cameraYaw                 = 0.0f;
@@ -288,6 +292,7 @@ private:
 	float _sceneReflectionFactor     = 0.0f;
 	float _shadowAreaSize			 = 0.0f;
 	float _shadowAreaReach			 = 0.0f;
+	float _shadowLightness			 = 0.0f;
 	float _lensFlareAlpha			 = 0.0f;
 	float _lensFlareIntensity		 = 0.0f;
 	float _lensFlareMultiplier		 = 0.0f;
@@ -327,6 +332,7 @@ private:
 	bool _isWireframeRenderingEnabled   = false;
 	bool _isAabbFrameRenderingEnabled   = false;
 	bool _isShadowFrameRenderingEnabled	= false;
+	bool _isSoftShadowingEnabled		= false;
 	bool _isDebugRenderingEnabled		= false;
 	bool _isTriangleCountingEnabled		= false;
 	bool _isDofDynamic					= false;

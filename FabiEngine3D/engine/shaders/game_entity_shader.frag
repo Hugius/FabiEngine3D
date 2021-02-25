@@ -61,6 +61,7 @@ uniform float u_maxSpotLightDistance;
 uniform float u_skyMixValue;
 uniform float u_mainSkyLightness;
 uniform float u_mixSkyLightness;
+uniform float u_shadowLightness;
 
 // Boolean uniforms
 uniform bool u_isTransparent;
@@ -70,6 +71,8 @@ uniform bool u_isSkyReflective;
 uniform bool u_isSceneReflective;
 uniform bool u_isSpecularLighted;
 uniform bool u_isShadowed;
+uniform bool u_isShadowFrameRenderEnabled;
+uniform bool u_isSoftShadowingEnabled;
 uniform bool u_isAmbientLightEnabled;
 uniform bool u_isDirectionalLightEnabled;
 uniform bool u_isSpecularLightEnabled;
@@ -85,7 +88,6 @@ uniform bool u_hasDiffuseMap;
 uniform bool u_hasLightMap;
 uniform bool u_hasNormalMap;
 uniform bool u_hasReflectionMap;
-uniform bool u_isShadowFrameRenderEnabled;
 
 // Integer uniforms
 uniform int u_shadowMapSize;
@@ -116,9 +118,8 @@ void main()
 
 	// Calculate lighting
     float shadow		   = getShadowValue();
-	bool noShadowOcclusion = (shadow == 1.0f);
 	vec3 ambient		   = getAmbientLighting();
-	vec3 directional	   = getDirectionalLighting(normal, noShadowOcclusion);
+	vec3 directional	   = getDirectionalLighting(normal, u_isSoftShadowingEnabled ? true : (shadow == 1.0f));
 	vec3 point			   = getPointLighting(normal);
     vec3 spot			   = getSpotLighting(normal);
 
@@ -333,7 +334,7 @@ float getShadowValue()
 			vec3 projCoords     = (f_shadowPos.xyz / f_shadowPos.w) * 0.5f + 0.5f;
 			float currentDepth  = projCoords.z;
 			float texelSize     = 1.0f / float(u_shadowMapSize);
-			float bias = 0.00075f;
+			float bias			= 0.00075f;
 
 			// Skip fragments outside of the depth map
 			if (projCoords.z > 1.0f)
@@ -347,7 +348,7 @@ float getShadowValue()
 				for(int y = -1; y <= 1; y++)
 				{
 					float pcfDepth = texture(u_sampler_shadowMap, projCoords.xy + vec2(x, y) * vec2(texelSize)).r; 
-					shadow += (currentDepth - bias > pcfDepth) ? 0.6f : 1.0f;        
+					shadow += (currentDepth - bias > pcfDepth) ? u_shadowLightness : 1.0f;        
 				}    
 			}
             
@@ -376,7 +377,14 @@ float getShadowValue()
 			}
 
 			// Return shadow value
-			return mix(shadow, 1.0f, alpha);
+			if(u_isSoftShadowingEnabled)
+			{
+				return mix(shadow, 1.0f, alpha);
+			}
+			else
+			{
+				return shadow;
+			}
 		}
 
 		// No shadow

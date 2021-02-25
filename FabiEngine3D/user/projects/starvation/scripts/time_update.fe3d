@@ -1,4 +1,4 @@
-19 21
+12 27
 META script_type_update
 
 /// Update time passing
@@ -11,7 +11,7 @@ IF _passedTime MORE 100.0:
         EDIT _mustBeDayTime = <true>
 ELSE:
     IF _isTimeCycling IS <false>:
-        DEC timeSpeed = 0.1
+        DEC timeSpeed = 0.01
         MUL timeSpeed _timeMultiplier
         INCR _passedTime timeSpeed
 

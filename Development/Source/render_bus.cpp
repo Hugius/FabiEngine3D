@@ -170,6 +170,11 @@ void RenderBus::setShadowAreaReach(float value)
 	_shadowAreaReach = value;
 }
 
+void RenderBus::setShadowLightness(float value)
+{
+	_shadowLightness = value;
+}
+
 void RenderBus::setLensFlareAlpha(float value)
 {
 	_lensFlareAlpha = value;
@@ -443,6 +448,11 @@ void RenderBus::setShadowFrameRenderingEnabled(bool value)
 	_isShadowFrameRenderingEnabled = value;
 }
 
+void RenderBus::setSoftShadowingEnabled(bool value)
+{
+	_isSoftShadowingEnabled = value;
+}
+
 void RenderBus::setTriangleCountingEnabled(bool value)
 {
 	_isTriangleCountingEnabled = value;
@@ -631,6 +641,11 @@ const float RenderBus::getShadowAreaSize() const
 const float RenderBus::getShadowAreaReach() const
 {
 	return _shadowAreaReach;
+}
+
+const float RenderBus::getShadowLightness() const
+{
+	return _shadowLightness;
 }
 
 const float RenderBus::getLensFlareAlpha() const
@@ -891,6 +906,11 @@ const bool RenderBus::isAabbFrameRenderingEnabled() const
 const bool RenderBus::isShadowFrameRenderingEnabled() const
 {
 	return _isShadowFrameRenderingEnabled;
+}
+
+const bool RenderBus::isSoftShadowingEnabled() const
+{
+	return _isSoftShadowingEnabled;
 }
 
 const bool RenderBus::isDebugRenderingEnabled() const

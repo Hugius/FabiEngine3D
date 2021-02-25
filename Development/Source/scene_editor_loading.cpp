@@ -550,12 +550,14 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 			else if (entityType == "GRAPHICS_SHADOWS")
 			{
 				bool enabled;
-				float size;
+				float size, lightness;
 				Vec3 position, center;
 				bool isFollowingCamera;
+				bool isSoftShadowed;
 				int interval;
-				iss >> enabled >> size >> position.x >> position.y >> position.z >> center.x >> center.y >> center.z >> isFollowingCamera >> interval;
-				_fe3d.gfx_enableShadows(position, center, size, size * 1.5f, isFollowingCamera, interval);
+				iss >> enabled >> size >> lightness >> position.x >> position.y >> position.z >> 
+					center.x >> center.y >> center.z >> isFollowingCamera >> isSoftShadowed >> interval;
+				_fe3d.gfx_enableShadows(position, center, size, size * 2.0f, lightness, isFollowingCamera, isSoftShadowed, interval);
 			}
 			else if (entityType == "GRAPHICS_MOTIONBLUR")
 			{

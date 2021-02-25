@@ -1,4 +1,4 @@
-77 27
+89 76
 META script_type_update
 
 /// Check if a built building is selected
@@ -62,7 +62,7 @@ IF toolID IS "hammer_stone" OR toolID IS "hammer_iron":
         DECR cp 1
         DECR ip 1
         BOOL afford1 = (_bag[0] MORE wp AND _bag[1] MORE sp)
-        BOOL afford2 = (_bag[2] MORE cp AND _bag[8] MORE ip)
+        BOOL afford2 = (_bag[2] MORE cp AND _bag[9] MORE ip)
         BOOL canAfford = (afford1 IS <true> AND afford2 IS <true>)
         /// Check if building in reach, not finished, affordable
         IF distance LESS _maxReach AND height LESS size.y AND canAfford IS <true>:
@@ -76,12 +76,16 @@ IF toolID IS "hammer_stone" OR toolID IS "hammer_iron":
                 DECR _bag[0] _buildablesWoodPrice[hoveredIndex]
                 DECR _bag[1] _buildablesStonePrice[hoveredIndex]
                 DECR _bag[2] _buildablesClayPrice[hoveredIndex]
-                DECR _bag[8] _buildablesIronPrice[hoveredIndex]
-                /// Check if building is a house
-                IF idPart IS "sm" OR idPart IS "me" OR idPart IS "bi":
-                    /// Check if building is finished
-                    IF height IS size.y OR height MORE size.y:
+                DECR _bag[9] _buildablesIronPrice[hoveredIndex]
+                /// Check if building is finished
+                IF height IS size.y OR height MORE size.y:
+                    /// Check if building is a house
+                    IF idPart IS "sm" OR idPart IS "me" OR idPart IS "bi":
                         /// Spawn bed
                         STR bedID = misc:concat_strings("bed:", hoveredID)
                         VEC3 bedPos = fe3d:model_get_position(hoveredID)
                         fe3d:model_place(bedID, "bed", bedPos.x, bedPos.y, bedPos.z)
+                    /// Check if building is a mill
+                    IF idPart IS "mi":
+                        /// Start mill animation
+                        fe3d:model_start_animation(hoveredID, "mill_rotation", -1)

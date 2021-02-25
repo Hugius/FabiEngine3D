@@ -1,4 +1,4 @@
-57 0
+33 15
 META script_type_update
 META execution_entry
 
@@ -26,7 +26,6 @@ EXEC animation_tool
 
 /// Using tools
 EXEC gather_update
-EXEC fight_update
 EXEC mine_update
 EXEC cut_update
 EXEC dig_update
@@ -34,7 +33,6 @@ EXEC farm_update
 EXEC build_place
 EXEC build_process
 EXEC build_misc
-/// Torch update?
 EXEC fish_update
 
 /// NPC interaction

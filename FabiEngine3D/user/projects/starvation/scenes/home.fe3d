@@ -3,19 +3,17 @@ TERRAIN home user\assets\textures\height_maps\home.bmp ? 96 1 0.9 1 user\assets\
 WATER lake user\assets\textures\dudv_maps\water.png user\assets\textures\normal_maps\water\wave1.png ? 0 1 0 1 0 0.25098 0.25098 1 32 -140 30.4 -108 6 1 0.0001 0.0003 0.2 64 1
 MODEL 196847080@log4 -162.153 31.2766 -98.4555 0 0 0 0.8 0.8 0.8 user\assets\meshes\misc\log4.obj user\assets\textures\diffuse_maps\misc\log4.png ? ? user\assets\textures\normal_maps\misc\log4.png 0 0 1 0 0 1 4 1 0.8 1 1 1 1 ? 0 ? log -0.1 0 0.4 6.2 3.1 4.4
 MODEL 697476017@log2 -164.74 31.2696 -102.698 0 0 0 2.5 2.5 2.5 user\assets\meshes\misc\log2.obj user\assets\textures\diffuse_maps\misc\log2.png ? ? user\assets\textures\normal_maps\misc\log2.png 0 0 1 0 0 1 4 1 0.7 1 1 1 1 ? 0 ? log -0.15 0 -0.15 1.75 0.7 2.3
-MODEL 552628260@tree2 -160.375 31.2742 -74.624 0 0 0 2 2 2 user\assets\meshes\trees\tree2.obj user\assets\textures\diffuse_maps\trees\tree_bush_2.png ? ? user\assets\textures\normal_maps\trees\tree_bush_2.png 0 0 1 1 0 0 1 1 0.7 1 1 1 1 ? 0 ? trunk 0 0 0 0.7 4.6 0.8 leaves 0 4.6 0 4.2 8.2 4.1
 MODEL 1838849439@hills 0 -1 0 0 0 0 4 10.4 4 user\assets\meshes\misc\hills.obj user\assets\textures\diffuse_maps\terrain\rock.png ? ? ? 0 0 0 0 0 0 1 1 1 1 1 1 8 ? 0 ?
 MODEL 1482583820@claypile -159.129 30.7185 -108.692 0 0 0 0.75 0.5 0.75 user\assets\meshes\misc\claypile.obj user\assets\textures\diffuse_maps\misc\claypile.png ? ? user\assets\textures\normal_maps\misc\claypile.png 0 0 1 0 0 1 1 1.5 0.4 1 1 1 1 ? 0 ? claypile -0.1 0 0.2 8.59999 2.5 9.39999
 MODEL 1661068481@stones -169.517 31.2332 -98.1159 0 0 0 1.25 1.25 1.25 user\assets\meshes\stones\stones.obj user\assets\textures\diffuse_maps\stones\stones.png ? ? ? 0 0 1 0 0 0 1 1 1 1 1 1 1 ? 0 ? stones 0.4 0 0.2 5.1 1.3 5.5
-MODEL 347706562@stone1 -146.755 31.2647 -71.132 0 0 0 7 7 7 user\assets\meshes\stones\stone1.obj user\assets\textures\diffuse_maps\stones\stone1.png ? ? ? 0 0 1 0 0 0 1 1 1 1 1 1 1 ? 0 ? stone 0 0 -0.09 1.21 0.95 1.39
 AMBIENT_LIGHT 1 1 1 0.75
 DIRECTIONAL_LIGHT 0 1000 -750 1 1 1 1 125 100
 LOD_DISTANCE 1000
 EDITOR_SPEED 5
-EDITOR_POSITION -151.574 38.0618 -79.3663
-EDITOR_YAW 136.42
-EDITOR_PITCH -39.6398
-GRAPHICS_SHADOWS 1 75 0.3 0.000000 75.000000 -50.000000 0.000000 30.000000 0.000000 1 1 100
+EDITOR_POSITION -148.99 44.8617 -103.591
+EDITOR_YAW 124.74
+EDITOR_PITCH -57.2399
+GRAPHICS_SHADOWS 1 100 0.3 0.000000 75.000000 -50.000000 0.000000 30.000000 0.000000 1 1 100
 GRAPHICS_MOTIONBLUR 1 0.25
 GRAPHICS_DOF 1 1 5 3
 GRAPHICS_FOG 1 75 150 0.75 0.501961 0.501961 0.501961

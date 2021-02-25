@@ -44,5 +44,5 @@ DECR wp 1
 DECR sp 1
 DECR cp 1
 DECR ip 1
-BOOL can = (_bag[0] MORE wp AND _bag[1] MORE sp AND _bag[2] MORE cp AND _bag[8] MORE ip)
+BOOL can = (_bag[0] MORE wp AND _bag[1] MORE sp AND _bag[2] MORE cp AND _bag[9] MORE ip)
 EDIT _canAffordBuilding = can

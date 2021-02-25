@@ -7,7 +7,6 @@
 @bridge user\assets\meshes\buildings\bridge.obj user\assets\textures\diffuse_maps\buildings\bridge.png ? ? user\assets\textures\normal_maps\buildings\bridge.png 1.5 1.5 1.5 0 1 0 0 1 1 1 0.8 1 1 1 1 ? 0 right -1.35 -7.45058e-09 0 0.45 1.2 13 bridge 0 0 0 3.15 0.18 13 left 1.35 0 0 0.44 1.2 13
 @church user\assets\meshes\buildings\church.obj ? ? ? ? 2 2 2 0 1 0 1 1 1 1 0.6 1 1 1 1 ? 0 main 2.07 0 0 12.5 7.7 5.76 side -2.17 0 -3.65 2.63 4.6 2.6 tower 7.17 -1.72108e-06 0 2.3 18.05 3.2 back -6.38 0 0 4.4 5.6 4.2
 @claypile user\assets\meshes\misc\claypile.obj user\assets\textures\diffuse_maps\misc\claypile.png ? ? user\assets\textures\normal_maps\misc\claypile.png 0.75 0.5 0.75 0 1 0 0 1 1 1.5 0.4 1 1 1 1 ? 0 claypile -0.1 0 0.2 8.59999 2.5 9.39999
-@wheat user\assets\meshes\misc\wheat.obj user\assets\textures\diffuse_maps\misc\wheat.png ? ? ? 2.25 2.25 2.25 0 1 0 0 1 1 1 1 1 1 1 1 ? 0 wheat 0.02 0 -0.07 2.6 1.69 2.57
 @crate1 user\assets\meshes\misc\crate1.obj user\assets\textures\diffuse_maps\misc\crate1.png ? ? user\assets\textures\normal_maps\misc\crate1.png 2 2 2 0 1 0 0 1 1 1 0.5 1 1 1 1 ? 0 crate 0 0 0 0.9 0.9 0.9
 @fern user\assets\meshes\foliage\fern.obj user\assets\textures\diffuse_maps\foliage\fern.png ? ? ? 0.4 0.4 0.4 0 1 1 0 0 1 1 1 1 1 1 1 ? 0 plant 0 0 0 9 3.9 7.89999
 @fishrod user\assets\meshes\tools\fishrod.obj ? ? ? ? 1 1 1 0 0 0 0 0 1 1 1 1 1 1 1 ? 0 fishrod 0.03 -0.46 0.74 0.2 1.94 1.68
@@ -38,7 +37,7 @@
 @log3 user\assets\meshes\misc\log3.obj user\assets\textures\diffuse_maps\misc\log3.png ? ? user\assets\textures\normal_maps\misc\log3.png 1.5 1.5 1.25 0 1 0 0 1 1 1 0.5 1 1 1 1 ? 0 log 0.2 0 -0.1 2.2 1.4 7.2
 @log4 user\assets\meshes\misc\log4.obj user\assets\textures\diffuse_maps\misc\log4.png ? ? user\assets\textures\normal_maps\misc\log4.png 0.8 0.8 0.8 0 1 0 0 1 4 1 0.8 1 1 1 1 ? 0 log -0.1 0 0.4 6.2 3.1 4.4
 @male1 user\assets\meshes\characters\male1.obj ? ? ? ? 0.57 0.57 0.57 0 0 0 0 1 1 1 0.6 1 1 1 1 ? 0 male 0 0 0.2 2 5.5 1.9
-@mill user\assets\meshes\buildings\mill.obj ? ? ? ? 5 5 5 0 1 0 1 1 1 1 0.5 1 1 1 1 ? 0 mill 0 0 -0.03 1.9 3.6 1.9
+@mill user\assets\meshes\buildings\mill.obj ? ? ? ? 5.5 5.5 5.5 0 1 0 1 1 1 1 0.5 1 1 1 1 ? 0 mill 0 0 -0.03 1.9 5.15 1.9
 @mushroom1 user\assets\meshes\foliage\mushroom1.obj user\assets\textures\diffuse_maps\foliage\mushroom1.png ? ? ? 1 1 1 0 1 0 0 0 1 1 1 1 1 1 1 ? 0 mushroom 0 0 0 1.7 1.6 1.7
 @mushroom2 user\assets\meshes\foliage\mushroom2.obj user\assets\textures\diffuse_maps\foliage\mushroom2.png ? ? ? 1.25 1.25 1.25 0 1 0 0 0 1 1 1 1 1 1 1 ? 0 mushroom 0 0 0 1 1.5 1
 @pen user\assets\meshes\misc\pen.obj user\assets\textures\diffuse_maps\misc\pen.png ? ? ? 1.25 2 1.25 0 1 0 0 1 1 1 0.75 1 1 1 1 ? 0 left -3.5 0 0 0.2 1.1 7.5 front 0 0 3.5 7.6 1 0.2 back 0 0 -3.5 7.5 1.1 0.2 right 3.5 0 0 0.2 1.1 7.5
@@ -83,5 +82,6 @@
 @waterwheel user\assets\meshes\misc\waterwheel.obj ? ? ? ? 1.25 1.25 1.25 0 1 0 0 0 1 1 1 1 1 1 1 ? 0 waterwheel 0 0 0 2.5 3.65 4.2
 @well1 user\assets\meshes\misc\well1.obj user\assets\textures\diffuse_maps\misc\well1.png ? ? user\assets\textures\normal_maps\misc\well1.png 3 3 3 0 1 0 0 0 1 1 1 1 1 1 1 ? 0 well1 0.03 0 -0.01 1.19 1.61 1.64
 @well2 user\assets\meshes\misc\well2.obj ? ? ? ? 1.4 1.4 1.4 0 1 0 1 1 1 1 0.75 1 1 1 1 ? 0 well 7.45058e-09 0 -0.3 2.45 3.5 3.2
+@wheat user\assets\meshes\misc\wheat.obj user\assets\textures\diffuse_maps\misc\wheat.png ? ? ? 2.25 2.25 2.25 0 1 0 0 1 1 1 1 1 1 1 1 ? 0 wheat 0.02 0 -0.07 2.6 1.69 2.57
 @workbench user\assets\meshes\misc\workbench.obj ? ? ? ? 0.75 0.75 0.75 0 1 0 1 1 1 0.75 0.5 1 1 1 1 ? 0 workbench 0 0 0 1.89 2.5 6
 @worklog user\assets\meshes\misc\worklog.obj user\assets\textures\diffuse_maps\misc\worklog.png ? ? user\assets\textures\normal_maps\misc\worklog.png 1 1 1 0 1 0 0 1 1 1 0.5 1 1 1 1 ? 0 worklog 0.1 0 0.1 2.6 2.2 2.5

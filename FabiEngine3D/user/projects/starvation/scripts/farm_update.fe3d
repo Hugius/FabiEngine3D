@@ -1,19 +1,23 @@
-66 68
+87 30
 META script_type_update
 
 /// Temporary values
+STR toolID = _inventory[_equipIndex]
+STR wheatAabbID = ""
 VEC3 camPos = fe3d:camera_get_position()
+VEC3 wheatSize = [0.0 0.0 0.0]
+DEC wheatHeight = 0.0
 DEC pitch = fe3d:camera_get_pitch()
 DEC feetY = fe3d:terrain_get_pixel_height(camPos.x, camPos.z)
 DEC waterY = fe3d:water_get_height()
-STR toolID = _inventory[_equipIndex]
+BOOL ePressed = fe3d:input_is_key_pressed("KEY_E")
 BOOL isLookingDown = <false>
 BOOL isHovered = <false>
 
 /// Update plowing text
 fe3d:text_set_visible("plow", <false>)
 IF feetY MORE waterY AND camPos.y LESS 34.0 AND pitch LESS -25.0:
-    IF toolID IS "hoe" AND _isInvOpen IS <true>:
+    IF toolID IS "hoe" AND _isInvOpen IS <true> AND _bag[3] MORE 11:
         fe3d:text_set_visible("plow", <true>)
         EDIT isLookingDown = <true>
 
@@ -29,15 +33,13 @@ IF _wasHoePlaying IS <true> AND _isHoePlaying IS <false>:
         VEC3 size = fe3d:aabb_get_size(aabbID)
         MUL size.y 0.025
         fe3d:model_set_max_height(newID, size.y)
+        DECR _bag[3] 12
 
 /// Update wheat growing
 LIST wheatIDs = fe3d:model_find_ids("wheat")
 INT length = misc:get_list_size("wheatIDs")
 INT index = 0
 STR wheatID = ""
-STR wheatAabbID = ""
-VEC3 wheatSize = [0.0 0.0 0.0]
-DEC wheatHeight = 0.0
 LOOP:
     IF index IS length:
         BREAK
@@ -58,7 +60,10 @@ IF distance IS -1.0:
     EDIT distance = 1000.0
 fe3d:text_set_visible("reap", <false>)
 IF hoveredID NOT "":
-    IF distance LESS _maxReach:
+    EDIT wheatAabbID = misc:concat_strings(hoveredID, "_wheat")
+    EDIT wheatSize = fe3d:aabb_get_size(wheatAabbID)
+    EDIT wheatHeight = fe3d:model_get_max_height(hoveredID)
+    IF distance LESS _maxReach AND wheatHeight MORE wheatSize.y:
         EDIT isHovered = <true>
         IF toolID IS "scythe":
             IF _isInvOpen IS <true>:
@@ -67,4 +72,20 @@ IF hoveredID NOT "":
 /// Update wheat reaping
 IF isHovered IS <true> AND _wasScythePlaying IS <true> AND _isScythePlaying IS <false>:
     fe3d:model_delete(hoveredID)
-    INCR _bag[4] 9
+    INCR _bag[4] 12
+
+/// Update wheat grinding
+fe3d:text_set_visible("grind", <false>)
+EDIT hoveredID = fe3d:raycast_into_model("mill", "", <true>)
+IF hoveredID NOT "" AND _isBuilding IS <false>:
+    STR millAabbID = misc:concat_strings(hoveredID, "_mill")
+    VEC3 millSize = fe3d:aabb_get_size(millAabbID)
+    DEC millHeight = fe3d:model_get_max_height(hoveredID)
+    DEC millDistance = fe3d:raycast_into_model_distance("mill", "", <true>)
+    IF millDistance IS -1.0:
+        EDIT millDistance = 1000.0
+    IF millDistance LESS _maxReach AND millHeight MORE millSize.y AND _bag[4] MORE 11:
+        fe3d:text_set_visible("grind", <true>)
+        IF ePressed IS <true>:
+            DECR _bag[4] 12
+            INCR _bag[5] 12

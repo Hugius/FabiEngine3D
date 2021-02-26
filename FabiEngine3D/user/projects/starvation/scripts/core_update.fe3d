@@ -1,4 +1,4 @@
-52 0
+55 0
 META script_type_update
 META execution_entry
 
@@ -24,16 +24,19 @@ EXEC animation_misc
 EXEC animation_player
 EXEC animation_tool
 
-/// Using tools
+/// Resources
 EXEC gather_update
 EXEC mine_update
 EXEC cut_update
 EXEC dig_update
+EXEC fish_update
 EXEC farm_update
-EXEC build_place
+
+/// Building
+EXEC build_place_choose
+EXEC build_place_confirm
 EXEC build_process
 EXEC build_misc
-EXEC fish_update
 
 /// NPC interaction
 IF currentWorld IS "starvia_outside":

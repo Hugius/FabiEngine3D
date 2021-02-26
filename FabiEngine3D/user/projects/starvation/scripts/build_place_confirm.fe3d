@@ -1,0 +1,50 @@
+39 65
+META script_type_update
+
+/// Temporary values
+BOOL lmbPressed = fe3d:input_is_mouse_pressed("BUTTON_LEFT")
+
+/// Update building placement
+IF _isBuilding IS <true> AND lmbPressed IS <true>:
+    IF _isBuildPlaceValid IS <true>:
+        INT counter = _buildCounters[_buildIndex]
+        CAST counter STR
+        STR newID = misc:concat_strings(_buildNames[_buildIndex], counter)
+        IF _buildIndex IS 0:
+            VEC3 size = fe3d:aabb_get_size("small_house_display_back")
+            STR previewID = "house14"
+        ELIF _buildIndex IS 1:
+            VEC3 size = fe3d:aabb_get_size("medium_house_display_back")
+            STR previewID = "house2"
+        ELIF _buildIndex IS 2:
+            VEC3 size = fe3d:aabb_get_size("big_house_display_back")
+            STR previewID = "house13"
+        ELIF _buildIndex IS 3:
+            VEC3 size = fe3d:aabb_get_size("storage_display_main")
+            STR previewID = "storage"
+        ELIF _buildIndex IS 4:
+            VEC3 size = fe3d:aabb_get_size("well_display_well")
+            STR previewID = "well2"
+        ELIF _buildIndex IS 5:
+            VEC3 size = fe3d:aabb_get_size("pen_display_front")
+            STR previewID = "pen"
+        ELIF _buildIndex IS 6:
+            VEC3 size = fe3d:aabb_get_size("mill_display_mill")
+            STR previewID = "mill"
+        ELIF _buildIndex IS 7:
+            VEC3 size = fe3d:aabb_get_size("church_display_tower")
+            STR previewID = "church"
+        ELIF _buildIndex IS 8:
+            VEC3 size = fe3d:aabb_get_size("oven_display_oven")
+            STR previewID = "oven"
+        VEC3 buildPos = _buildPosition
+        fe3d:model_place(newID, previewID, buildPos.x, buildPos.y, buildPos.z)
+        fe3d:model_set_rotation(newID, 0.0, _buildRotation, 0.0)
+        DEC height = size.y
+        MUL height 0.1
+        fe3d:model_set_max_height(newID, height)
+        INCR _buildCounters[_buildIndex] 1
+        DECR _bag[0] _buildablesWoodPrice[_buildIndex]
+        DECR _bag[1] _buildablesStonePrice[_buildIndex]
+        DECR _bag[2] _buildablesClayPrice[_buildIndex]
+        DECR _bag[8] _buildablesIronPrice[_buildIndex]

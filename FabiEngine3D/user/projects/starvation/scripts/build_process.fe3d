@@ -1,4 +1,4 @@
-89 76
+46 22
 META script_type_update
 
 /// Check if a built building is selected
@@ -45,6 +45,9 @@ IF hoveredID NOT "":
     ELIF idPart IS "ch":
         INT hoveredIndex = 7
         VEC3 size = fe3d:aabb_get_size("church_display_tower")
+    ELIF idPart IS "ov":
+        INT hoveredIndex = 8
+        VEC3 size = fe3d:aabb_get_size("oven_display_oven")
 
 /// Update building process
 STR toolID = _inventory[_equipIndex]

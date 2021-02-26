@@ -1,0 +1,63 @@
+48 34
+META script_type_update
+
+/// Temporary values
+VEC3 camPos = fe3d:camera_get_position()
+DEC waterHeight = fe3d:water_get_height()
+INT scrollDir = fe3d:input_get_mousewheel_direction()
+BOOL rPressed = fe3d:input_is_key_pressed("KEY_R")
+
+/// Update rotation
+IF _isBuilding IS <true> AND rPressed IS <true>:
+    IF _buildRotation IS 270.0:
+        EDIT _buildRotation = 0.0
+    ELSE:
+        INCR _buildRotation 90.0
+
+/// Hide previous building + text
+fe3d:model_set_visible(_buildables[_buildIndex], <false>)
+fe3d:text_set_visible(_buildables[_buildIndex], <false>)
+
+/// Update building choosing
+IF _isBuilding IS <true>:
+    IF scrollDir IS -1:
+        IF _buildIndex IS 0:
+            EDIT _buildIndex = _maxBuildIndex
+        ELSE:
+            DECR _buildIndex 1
+    ELIF scrollDir IS 1:
+        IF _buildIndex IS _maxBuildIndex:
+            EDIT _buildIndex = 0
+        ELSE:
+            INCR _buildIndex 1
+
+/// Show current building
+IF _isBuilding IS <true>:
+    fe3d:model_set_visible(_buildables[_buildIndex], <true>)
+
+/// Update building position & rotation
+IF _isBuilding IS <true>:
+    EDIT _buildPosition = camPos
+    IF _buildRotation IS 0.0:
+        DECR _buildPosition.x _buildOffsets[_buildIndex]
+    ELIF _buildRotation IS 90.0:
+        INCR _buildPosition.z _buildOffsets[_buildIndex]
+    ELIF _buildRotation IS 180.0:
+        INCR _buildPosition.x _buildOffsets[_buildIndex]
+    ELIF _buildRotation IS 270.0:
+        DECR _buildPosition.z _buildOffsets[_buildIndex]
+    DEC buildY = fe3d:terrain_get_pixel_height(_buildPosition.x, _buildPosition.z)
+    EDIT _buildPosition.y = buildY
+    VEC3 bPos = _buildPosition
+    fe3d:model_set_position(_buildables[_buildIndex], bPos.x, bPos.y, bPos.z)
+    fe3d:model_set_rotation(_buildables[_buildIndex], 0.0, _buildRotation, 0.0)
+
+/// Update building validation color
+IF _isBuilding IS <true>:
+    STR valid = fe3d:collision_check_model_models(_buildables[_buildIndex], "", "", "")
+    IF valid NOT "" OR buildY LESS waterHeight OR _canAffordBuilding IS <false>:
+        fe3d:model_set_color(_buildables[_buildIndex], 1.0, 0.0, 0.0)
+        EDIT _isBuildPlaceValid = <false>
+    ELSE:
+        fe3d:model_set_color(_buildables[_buildIndex], 0.0, 1.0, 0.0)
+        EDIT _isBuildPlaceValid = <true>

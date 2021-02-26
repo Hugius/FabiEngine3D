@@ -180,13 +180,13 @@ MODEL 497108309@house3 81.8456 6.37255 40.8663 0 0 0 2 2 2 user\assets\meshes\bu
 MODEL 1396442966@wagon 67.4043 6.37255 45.838 0 0 0 1.75 1.75 1.75 user\assets\meshes\misc\wagon.obj user\assets\textures\diffuse_maps\misc\wagon.png ? ? ? 0 0 1 0 0 1 1 1 0.75 1 1 1 1 ? 0 ? wagon 0 0 -0.7 1.7 1.32 3.2
 MODEL 1546455832@sign 44.0108 6.37255 97.4966 0 0 0 0.6 0.75 0.75 user\assets\meshes\misc\sign.obj user\assets\textures\diffuse_maps\misc\sign.png ? ? user\assets\textures\normal_maps\misc\sign.png 0 0 0 0 0 1 1 1 0.7 1 1 1 1 ? 0 ? sign 0 0 0.02 1.5 4 0.4
 MODEL 180075387@barn -4.3531 6.37255 74.6848 0 90 0 1.1 1.1 1.1 user\assets\meshes\buildings\barn.obj ? ? ? ? 0 0 1 0 0 1 1 1 0.5 1 1 1 1 ? 0 ? barn 0.1 0 0.1 14 13.3 10.9
-BILLBOARD 521088961@fire 35 11 -19 0 0.712288 -0 5 3 1 1 1 0 1 user\assets\textures\billboard_maps\fire1.png 1 ? ? 1 6 6 3 2.5
-BILLBOARD 1705446200@fire 52 11 71 0 -14.5407 -0 5 3 1 1 1 0 1 user\assets\textures\billboard_maps\fire1.png 1 ? ? 1 6 6 3 2.5
-BILLBOARD 385894073@fire -9.04673 11 12.6441 0 21.4532 -0 5 3 1 1 1 0 1 user\assets\textures\billboard_maps\fire1.png 1 ? ? 1 6 6 3 2.5
-BILLBOARD 654255707@fire 62.8829 11 45.7324 0 -17.281 -0 5 3 1 1 1 0 1 user\assets\textures\billboard_maps\fire1.png 1 ? ? 1 6 6 3 2.5
-BILLBOARD 1790011452@fire 25 11 -19 0 4.56284 -0 5 3 1 1 1 0 1 user\assets\textures\billboard_maps\fire1.png 1 ? ? 1 6 6 3 2.5
-BILLBOARD 1233497612@fire 60.1718 11 14.0814 0 -11.4328 -0 5 3 1 1 1 0 1 user\assets\textures\billboard_maps\fire1.png 1 ? ? 1 6 6 3 2.5
-BILLBOARD 756379894@fire 19.0739 11 62.0151 0 14.7685 -0 5 3 1 1 1 0 1 user\assets\textures\billboard_maps\fire1.png 1 ? ? 1 6 6 3 2.5
+BILLBOARD 521088961@fire1 35 11 -19 0 0.712288 -0 5 3 1 1 1 0 1 user\assets\textures\billboard_maps\fire1.png 1 ? ? 1 6 6 3 2.5
+BILLBOARD 1705446200@fire1 52 11 71 0 -14.5407 -0 5 3 1 1 1 0 1 user\assets\textures\billboard_maps\fire1.png 1 ? ? 1 6 6 3 2.5
+BILLBOARD 385894073@fire1 -9.04673 11 12.6441 0 21.4532 -0 5 3 1 1 1 0 1 user\assets\textures\billboard_maps\fire1.png 1 ? ? 1 6 6 3 2.5
+BILLBOARD 654255707@fire1 62.8829 11 45.7324 0 -17.281 -0 5 3 1 1 1 0 1 user\assets\textures\billboard_maps\fire1.png 1 ? ? 1 6 6 3 2.5
+BILLBOARD 1790011452@fire1 25 11 -19 0 4.56284 -0 5 3 1 1 1 0 1 user\assets\textures\billboard_maps\fire1.png 1 ? ? 1 6 6 3 2.5
+BILLBOARD 1233497612@fire1 60.1718 11 14.0814 0 -11.4328 -0 5 3 1 1 1 0 1 user\assets\textures\billboard_maps\fire1.png 1 ? ? 1 6 6 3 2.5
+BILLBOARD 756379894@fire1 19.0739 11 62.0151 0 14.7685 -0 5 3 1 1 1 0 1 user\assets\textures\billboard_maps\fire1.png 1 ? ? 1 6 6 3 2.5
 AMBIENT_LIGHT 1 1 1 0.75
 DIRECTIONAL_LIGHT 1000 1000 1000 1 1 1 1 150 100
 POINT_LIGHT pointlight1804680928 35 9 -19 1 1 0.501961 2 1

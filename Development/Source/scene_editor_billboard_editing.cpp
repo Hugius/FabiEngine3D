@@ -178,7 +178,7 @@ void SceneEditor::_updateBillboardEditing()
 				{
 					// Handle GUI input
 					Vec2 oldSize = size;
-					float factor = 25.0f;
+					float factor = 100.0f;
 					_handleValueChanging("billboardPropertiesMenu", "xPlus", "x", size.x, _customEditorSpeed / 100.0f, factor);
 					_handleValueChanging("billboardPropertiesMenu", "xMinus", "x", size.x, -_customEditorSpeed / 100.0f, factor);
 					_handleValueChanging("billboardPropertiesMenu", "yPlus", "y", size.y, _customEditorSpeed / 100.0f, factor);

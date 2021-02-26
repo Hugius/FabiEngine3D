@@ -1,4 +1,4 @@
-4 50
+53 46
 META script_type_update
 
 /// Temporary values
@@ -53,7 +53,6 @@ IF hoveredID NOT "" AND _isBuilding IS <false>:
         EDIT wellDistance = 1000.0
     IF wellDistance LESS _maxReach AND height MORE size.y:
         fe3d:text_set_visible("drink", <true>)
-        BOOL ePressed = fe3d:input_is_key_pressed("KEY_E")
         IF ePressed IS <true>:
             INCR _thirst 0.25
 

@@ -58,8 +58,8 @@ void BillboardEditor::_updateBillboardEditing()
 					}
 					else if (screen->getButton("size")->isHovered())
 					{
-						_gui.getGlobalScreen()->addValueForm("sizeX", "X", _fe3d.billboardEntity_getSize(_currentBillboardID).x * 10.0f, Vec2(-0.25f, 0.0f), Vec2(0.3f, 0.1f));
-						_gui.getGlobalScreen()->addValueForm("sizeY", "Y", _fe3d.billboardEntity_getSize(_currentBillboardID).y * 10.0f, Vec2(0.25f, 0.0f), Vec2(0.3f, 0.1f));
+						_gui.getGlobalScreen()->addValueForm("sizeX", "X", _fe3d.billboardEntity_getSize(_currentBillboardID).x * 100.0f, Vec2(-0.25f, 0.0f), Vec2(0.3f, 0.1f));
+						_gui.getGlobalScreen()->addValueForm("sizeY", "Y", _fe3d.billboardEntity_getSize(_currentBillboardID).y * 100.0f, Vec2(0.25f, 0.0f), Vec2(0.3f, 0.1f));
 					}
 					else if (screen->getButton("facingX")->isHovered())
 					{
@@ -73,11 +73,13 @@ void BillboardEditor::_updateBillboardEditing()
 					}
 				}
 
-				// Setting billboard size
-				Vec2 newSize = _fe3d.billboardEntity_getSize(_currentBillboardID) * 10.0f;
+				// Setting billboard size & position
+				Vec2 newSize = _fe3d.billboardEntity_getSize(_currentBillboardID) * 100.0f;
 				_gui.getGlobalScreen()->checkValueForm("sizeX", newSize.x, { 0.0f });
 				_gui.getGlobalScreen()->checkValueForm("sizeY", newSize.y, { 0.0f });
-				_fe3d.billboardEntity_setSize(_currentBillboardID, newSize / 10.0f);
+				newSize /= 100.0f;
+				_fe3d.billboardEntity_setSize(_currentBillboardID, newSize);
+				_fe3d.billboardEntity_setPosition(_currentBillboardID, _billboardPosition + Vec3(0.0f, newSize.y / 2.0f, 0.0f));
 
 				// Update facing buttons text
 				string textEntityIDx = screen->getButton("facingX")->getTextfield()->getEntityID();

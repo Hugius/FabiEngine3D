@@ -1,4 +1,4 @@
-46 22
+98 59
 META script_type_update
 
 /// Check if a built building is selected
@@ -92,3 +92,10 @@ IF toolID IS "hammer_stone" OR toolID IS "hammer_iron":
                     IF idPart IS "mi":
                         /// Start mill animation
                         fe3d:model_start_animation(hoveredID, "mill_rotation", -1)
+                    IF idPart IS "ov":
+                        VEC3 pos = fe3d:model_get_position(hoveredID)
+                        INCR pos.y 3.5
+                        fe3d:billboard_place("fir", "fire2", pos.x, pos.y, pos.z)
+                        fe3d:billboard_set_rotation("fir", 0.0, 90.0, 0.0)
+                        fe3d:billboard_start_animation("fir", -1)
+                        fe3d:print(pos)

@@ -146,12 +146,15 @@ void AabbEntityManager::update(
 					float rotationZ = fabsf(parentEntity->getRotation().z);
 					Vec3 parentSize = parentEntity->getScaling();
 					float maxParentSize = std::max(parentSize.x, parentSize.y);
-					Vec3 newAabbSize = Vec3(parentSize.x, parentSize.y, 0.1f);
+					Vec3 newAabbSize = Vec3(parentSize.x, parentSize.y, 0.0f);
 
 					// Determine rotation direction
 					if (rotationX != 0.0f)
 					{
-						newAabbSize.z = fabsf(sinf(Math::degreesToRadians(rotationX)) * parentSize.y);
+						newAabbSize.x = fabsf(sinf(Math::degreesToRadians(rotationX)) * parentSize.y) +
+							fabsf(cosf(Math::degreesToRadians(rotationX)) * parentSize.x);
+						newAabbSize.y = fabsf(sinf(Math::degreesToRadians(rotationX)) * parentSize.x)
+							+ fabsf(cosf(Math::degreesToRadians(rotationX)) * parentSize.y);
 					}
 					else if (rotationY != 0.0f)
 					{
@@ -160,11 +163,13 @@ void AabbEntityManager::update(
 					}
 					else if (rotationZ != 0.0f)
 					{
-						newAabbSize.x = fabsf(sinf(Math::degreesToRadians(rotationZ)) * parentSize.y) +
-							fabsf(cosf(Math::degreesToRadians(rotationZ)) * parentSize.x);
-						newAabbSize.y = fabsf(sinf(Math::degreesToRadians(rotationZ)) * parentSize.x)
-							+ fabsf(cosf(Math::degreesToRadians(rotationZ)) * parentSize.y);
+						newAabbSize.z = fabsf(sinf(Math::degreesToRadians(rotationZ)) * parentSize.y);
 					}
+
+					// AABB must still be a box
+					newAabbSize.x = std::max(newAabbSize.x, 0.1f);
+					newAabbSize.y = std::max(newAabbSize.y, 0.1f);
+					newAabbSize.z = std::max(newAabbSize.z, 0.1f);
 
 					// Update scaling (based on parent rotation)
 					entity->setScaling(newAabbSize);

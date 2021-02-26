@@ -1,4 +1,4 @@
-12 0
+74 48
 META script_type_init
 
 /// Globals
@@ -73,6 +73,7 @@ fe3d:model_set_aabb_raycast_responsive("torch_display", <false>)
 fe3d:model_set_aabb_raycast_responsive("fishrod_display", <false>)
 
 /// Billboards
+fe3d:billboard_place("fire", "fire2", -144.0, 34.0, -83.0)
 fe3d:billboard_place("craft_confirm", "craft", -144.0, 34.0, -83.0)
 fe3d:billboard_place("craft_cancel", "cancel", -146.0, 34.0, -83.0)
 fe3d:billboard_set_rotation("craft_confirm", 0.0, 180.0, 0.0)

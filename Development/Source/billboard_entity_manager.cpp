@@ -9,12 +9,12 @@ BillboardEntityManager::BillboardEntityManager(MeshLoader& meshLoader, TextureLo
 {
 	float plane_data[] =
 	{
-		-0.5f,  0.5f, 0.0f, 0.0f, 1.0f,
-		-0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
-		 0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
-		 0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
-		 0.5f,  0.5f, 0.0f, 1.0f, 1.0f,
-		-0.5f,  0.5f, 0.0f, 0.0f, 1.0f
+		-0.5f, 1.0f, 0.0f, 0.0f, 1.0f,
+		-0.5f, 0.0f, 0.0f, 0.0f, 0.0f,
+		 0.5f, 0.0f, 0.0f, 1.0f, 0.0f,
+		 0.5f, 0.0f, 0.0f, 1.0f, 0.0f,
+		 0.5f, 1.0f, 0.0f, 1.0f, 1.0f,
+		-0.5f, 1.0f, 0.0f, 0.0f, 1.0f
 	};
 
 	_openglBuffer = new OpenGLBuffer(BufferType::SURFACE, plane_data, sizeof(plane_data) / sizeof(float));

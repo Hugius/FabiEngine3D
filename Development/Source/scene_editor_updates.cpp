@@ -295,11 +295,11 @@ void SceneEditor::_updateCamera()
 				// Y movement
 				if (_fe3d.input_getKeyDown(InputType::KEY_SPACE))
 				{
-					_fe3d.camera_translate(Vec3(0.0f, _customEditorSpeed / 50.0f, 0.0f));
+					_fe3d.camera_translate(Vec3(0.0f, _customEditorSpeed / 75.0f, 0.0f));
 				}
 				else if (_fe3d.input_getKeyDown(InputType::KEY_LSHIFT))
 				{
-					_fe3d.camera_translate(Vec3(0.0f, -(_customEditorSpeed / 50.0f), 0.0f));
+					_fe3d.camera_translate(Vec3(0.0f, -(_customEditorSpeed / 75.0f), 0.0f));
 				}
 
 				// Z movement

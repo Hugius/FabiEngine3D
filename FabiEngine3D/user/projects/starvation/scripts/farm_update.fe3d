@@ -1,4 +1,4 @@
-13 24
+12 24
 META script_type_update
 
 /// Temporary values
@@ -10,7 +10,6 @@ DEC wheatHeight = 0.0
 DEC pitch = fe3d:camera_get_pitch()
 DEC feetY = fe3d:terrain_get_pixel_height(camPos.x, camPos.z)
 DEC waterY = fe3d:water_get_height()
-BOOL ePressed = fe3d:input_is_key_pressed("KEY_E")
 BOOL isLookingDown = <false>
 BOOL isHovered = <false>
 INT leastWheatCount = _wheatCount
@@ -78,20 +77,3 @@ IF hoveredID NOT "":
 IF isHovered IS <true> AND _wasScythePlaying IS <true> AND _isScythePlaying IS <false>:
     fe3d:model_delete(hoveredID)
     INCR _bag[4] _wheatCount
-
-/// Update wheat grinding
-fe3d:text_set_visible("grind", <false>)
-EDIT hoveredID = fe3d:raycast_into_model("mill", "", <true>)
-IF hoveredID NOT "" AND _isBuilding IS <false>:
-    STR millAabbID = misc:concat_strings(hoveredID, "_mill")
-    VEC3 millSize = fe3d:aabb_get_size(millAabbID)
-    DEC millHeight = fe3d:model_get_max_height(hoveredID)
-    DEC millDistance = fe3d:raycast_into_model_distance("mill", "", <true>)
-    IF millDistance IS -1.0:
-        EDIT millDistance = 1000.0
-    IF millDistance LESS _maxReach AND millHeight MORE millSize.y:
-        IF _bag[4] MORE leastWheatCount:
-            fe3d:text_set_visible("grind", <true>)
-            IF ePressed IS <true>:
-                DECR _bag[4] _wheatCount
-                INCR _bag[5] _wheatCount

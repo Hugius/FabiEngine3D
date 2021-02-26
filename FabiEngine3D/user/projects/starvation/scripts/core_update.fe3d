@@ -1,4 +1,4 @@
-55 0
+37 18
 META script_type_update
 META execution_entry
 
@@ -24,7 +24,7 @@ EXEC animation_misc
 EXEC animation_player
 EXEC animation_tool
 
-/// Resources
+/// Resourcing
 EXEC gather_update
 EXEC mine_update
 EXEC cut_update
@@ -35,6 +35,7 @@ EXEC farm_update
 /// Building
 EXEC build_place_choose
 EXEC build_place_confirm
+EXEC build_hover
 EXEC build_process
 EXEC build_misc
 
@@ -60,4 +61,5 @@ EXEC time_cycle
 EXEC time_sleep
 
 /// Miscellaneous
+EXEC bake_update
 EXEC misc_update

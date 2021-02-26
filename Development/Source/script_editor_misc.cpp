@@ -12,7 +12,8 @@ void ScriptEditor::_reloadScriptTextDisplay(bool reloadAabbs)
 		float lineCount = static_cast<float>(_script.getScriptFile(_currentScriptFileID)->getLineCount());
 		Vec2 separatorSize = Vec2((_textCharacterSize.x / 4.0f), (lineCount * _verticalLineOffset));
 		Vec3 separatorPosition = _scriptTextStartingPosition + Vec3(_horizontalLineOffset / 2.0f, -(((lineCount - 1) / 2.0f) * _verticalLineOffset), 0.0f);
-		_fe3d.billboardEntity_add("separator", _separatorColor, separatorPosition, Vec3(0.0f), separatorSize, false, false);
+		_fe3d.billboardEntity_add("separator", _separatorColor, separatorPosition - Vec3(0.0f, separatorSize.y / 2.0f, 0.0f), 
+			Vec3(0.0f), separatorSize, false, false);
 
 		// Create visible billboards for display and invisible billboards for logic
 		for (unsigned int lineIndex = 0; lineIndex < lineCount; lineIndex++)
@@ -31,7 +32,8 @@ void ScriptEditor::_reloadScriptTextDisplay(bool reloadAabbs)
 				Vec3(_horizontalLineOffset, 0.0f, 0.0f);
 
 			// Create line number BILLBOARD
-			_fe3d.billboardEntity_add(lineNumberID, lineNumberString, _fontPath, _lineNumberColor, lineNumberPosition, Vec3(0.0f), lineNumberSize, 0, 0);
+			_fe3d.billboardEntity_add(lineNumberID, lineNumberString, _fontPath, _lineNumberColor, 
+				lineNumberPosition - Vec3(0.0f, lineNumberSize.y / 2.0f, 0.0f), Vec3(0.0f), lineNumberSize, 0, 0);
 			
 			// Create line number AABB
 			Vec3 aabbPosition = lineNumberPosition - Vec3(0.0f, _textCharacterSize.y / 2.0f, _aabbDepth);
@@ -39,7 +41,8 @@ void ScriptEditor::_reloadScriptTextDisplay(bool reloadAabbs)
 			_fe3d.aabbEntity_add(lineNumberID, aabbPosition, aabbSize, true, true);
 			
 			// Create line text display BILLBOARD
-			_fe3d.billboardEntity_add(lineTextID, lineTextString, _fontPath, _characterColor, lineTextPosition, Vec3(0.0f), lineTextSize, false, false);
+			_fe3d.billboardEntity_add(lineTextID, lineTextString, _fontPath, _characterColor, 
+				lineTextPosition - Vec3(0.0f, lineTextSize.y / 2.0f, 0.0f), Vec3(0.0f), lineTextSize, false, false);
 
 			// Loop over every character
 			for (unsigned int charIndex = 0; charIndex < lineTextString.size(); charIndex++)
@@ -48,7 +51,8 @@ void ScriptEditor::_reloadScriptTextDisplay(bool reloadAabbs)
 				string characterID = lineNumberID + "_" + to_string(charIndex);
 				float characterX = _horizontalLineOffset + (_horizontalCharacterOffset * static_cast<float>(charIndex));
 				Vec3 characterPosition = _scriptTextStartingPosition + Vec3(characterX, -_verticalLineOffset * static_cast<float>(lineIndex), 0.0f);
-				_fe3d.billboardEntity_add(characterID, Vec3(0.0f), characterPosition, Vec3(0.0f), _textCharacterSize, false, false, false);
+				_fe3d.billboardEntity_add(characterID, Vec3(0.0f), characterPosition - Vec3(0.0f, _textCharacterSize.y / 2.0f, 0.0f), 
+					Vec3(0.0f), _textCharacterSize, false, false, false);
 
 				// Create new character AABB for logic
 				if (reloadAabbs)

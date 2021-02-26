@@ -1,4 +1,4 @@
-13 40
+15 39
 META script_type_init
 
 /// Globals
@@ -12,13 +12,16 @@ GLOB LIST _buildNames = {}
 GLOB LIST _buildOffsets = {8.0, 9.25, 11.85, 7.75, 5.0, 8.0, 8.0, 20.0, 5.0}
 GLOB LIST _buildHeights = {}
 GLOB LIST _buildCounters = {0,0,0,0,0,0,0,0,0}
+GLOB STR _hoveredBuildingID = ""
 GLOB VEC3 _buildPosition = [0.0 0.0 0.0]
+GLOB DEC _hoveredBuildingDistance = 0.0
 GLOB DEC _buildRotation = 0.0
 GLOB INT _buildIndex = 0
 GLOB INT _maxBuildIndex = 8
 GLOB BOOL _isBuilding = <false>
 GLOB BOOL _isBuildPlaceValid = <false>
 GLOB BOOL _canAffordBuilding = <false>
+
 /// Names
 PUSH _buildNames "small_house"
 PUSH _buildNames "medium_house"

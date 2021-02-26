@@ -63,31 +63,43 @@ void BillboardEditor::_updateBillboardEditing()
 					}
 					else if (screen->getButton("facingX")->isHovered())
 					{
-						bool isFacedX = !_fe3d.billboardEntity_isFacingCameraX(_currentBillboardID);
-						_fe3d.billboardEntity_setCameraFacingX(_currentBillboardID, isFacedX);
+						bool isFacingX = !_fe3d.billboardEntity_isFacingCameraX(_currentBillboardID);
+						_fe3d.billboardEntity_setCameraFacingX(_currentBillboardID, isFacingX);
 					}
 					else if (screen->getButton("facingY")->isHovered())
 					{
-						bool isFacedY = !_fe3d.billboardEntity_isFacingCameraY(_currentBillboardID);
-						_fe3d.billboardEntity_setCameraFacingY(_currentBillboardID, isFacedY);
+						bool isFacingY = !_fe3d.billboardEntity_isFacingCameraY(_currentBillboardID);
+						_fe3d.billboardEntity_setCameraFacingY(_currentBillboardID, isFacingY);
 					}
 				}
 
-				// Setting billboard size & position
+				// Setting billboard size
 				Vec2 newSize = _fe3d.billboardEntity_getSize(_currentBillboardID) * 100.0f;
 				_gui.getGlobalScreen()->checkValueForm("sizeX", newSize.x, { 0.0f });
 				_gui.getGlobalScreen()->checkValueForm("sizeY", newSize.y, { 0.0f });
 				newSize /= 100.0f;
 				_fe3d.billboardEntity_setSize(_currentBillboardID, newSize);
-				_fe3d.billboardEntity_setPosition(_currentBillboardID, _billboardPosition + Vec3(0.0f, newSize.y / 2.0f, 0.0f));
 
 				// Update facing buttons text
 				string textEntityIDx = screen->getButton("facingX")->getTextfield()->getEntityID();
 				string textEntityIDy = screen->getButton("facingY")->getTextfield()->getEntityID();
-				bool isFacedX = _fe3d.billboardEntity_isFacingCameraX(_currentBillboardID);
-				bool isFacedY = _fe3d.billboardEntity_isFacingCameraY(_currentBillboardID);
-				_fe3d.textEntity_setTextContent(textEntityIDx, isFacedX ? "Facing X: ON" : "Facing X: OFF");
-				_fe3d.textEntity_setTextContent(textEntityIDy, isFacedY ? "Facing Y: ON" : "Facing Y: OFF");
+				bool isFacingX = _fe3d.billboardEntity_isFacingCameraX(_currentBillboardID);
+				bool isFacingY = _fe3d.billboardEntity_isFacingCameraY(_currentBillboardID);
+				_fe3d.textEntity_setTextContent(textEntityIDx, isFacingX ? "Facing X: ON" : "Facing X: OFF");
+				_fe3d.textEntity_setTextContent(textEntityIDy, isFacingY ? "Facing Y: ON" : "Facing Y: OFF");
+
+				// Reset rotations if not facing camera
+				Vec3 rotation = _fe3d.billboardEntity_getRotation(_currentBillboardID);
+				if (!isFacingX)
+				{
+					rotation.x = 0.0f;
+					rotation.z = 0.0f;
+				}
+				if (!isFacingY)
+				{
+					rotation.y = 0.0f;
+				}
+				_fe3d.billboardEntity_setRotation(_currentBillboardID, rotation);
 			}
 			else if (screen->getID() == "billboardEditorMenuAppearance")
 			{

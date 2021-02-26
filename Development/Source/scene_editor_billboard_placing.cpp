@@ -22,7 +22,7 @@ void SceneEditor::_updateBillboardPlacing()
 
 					// Update preview billboard position
 					Vec2 size = _fe3d.billboardEntity_getSize(_currentPreviewBillboardName);
-					newPosition = _fe3d.misc_getRaycastPositionOnTerrain() + Vec3(0.0f, size.y / 2.0f, 0.0f);
+					newPosition = _fe3d.misc_getRaycastPositionOnTerrain();
 					_fe3d.billboardEntity_setPosition(_currentPreviewBillboardName, newPosition);
 				}
 				else

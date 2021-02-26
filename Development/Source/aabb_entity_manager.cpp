@@ -138,23 +138,24 @@ void AabbEntityManager::update(
 				auto foundPair = billboardEntities.find(entity->getParentID());
 				if (foundPair != billboardEntities.end())
 				{
+					// Temporary values
 					auto parentEntity = foundPair->second;
-
-					// Retrieve parent rotation & size
 					float rotationX = fabsf(parentEntity->getRotation().x);
 					float rotationY = fabsf(parentEntity->getRotation().y);
 					float rotationZ = fabsf(parentEntity->getRotation().z);
 					Vec3 parentSize = parentEntity->getScaling();
 					float maxParentSize = std::max(parentSize.x, parentSize.y);
 					Vec3 newAabbSize = Vec3(parentSize.x, parentSize.y, 0.0f);
+					float yOffset = 0.0f;
 
 					// Determine rotation direction
 					if (rotationX != 0.0f)
 					{
-						newAabbSize.x = fabsf(sinf(Math::degreesToRadians(rotationX)) * parentSize.y) +
-							fabsf(cosf(Math::degreesToRadians(rotationX)) * parentSize.x);
-						newAabbSize.y = fabsf(sinf(Math::degreesToRadians(rotationX)) * parentSize.x)
-							+ fabsf(cosf(Math::degreesToRadians(rotationX)) * parentSize.y);
+						float sinRotation = fabsf(sinf(Math::degreesToRadians(rotationX)));
+						float cosRotation = fabsf(cosf(Math::degreesToRadians(rotationX)));
+						newAabbSize.x = (sinRotation * parentSize.y) + (cosRotation * parentSize.x);
+						newAabbSize.y = (sinRotation * parentSize.x) + (cosRotation * parentSize.y);
+						yOffset = -((newAabbSize.y - parentSize.y) / 2.0f);
 					}
 					else if (rotationY != 0.0f)
 					{
@@ -175,8 +176,7 @@ void AabbEntityManager::update(
 					entity->setScaling(newAabbSize);
 
 					// Update translation (based on parent translation + scaling)
-					Vec3 halfSizeOffset = Vec3(0.0f, (parentEntity->getScaling().y / 2.0f), 0.0f);
-					entity->setTranslation(parentEntity->getTranslation() + entity->getLocalTranslation() - halfSizeOffset);
+					entity->setTranslation(parentEntity->getTranslation() + entity->getLocalTranslation() + Vec3(0.0f, yOffset, 0.0f));
 
 					// Update visibility
 					entity->setVisible(parentEntity->isVisible());

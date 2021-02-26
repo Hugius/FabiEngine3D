@@ -2,14 +2,31 @@
 
 void BillboardEntity::updateModelMatrix()
 {
+	// Identity matrix
+	_modelMatrix = Matrix44(1.0f);
+
+	// Translation matrix
 	Matrix44 translationMatrix = Matrix44::createTranslation(_translation.x, _translation.y, _translation.z);
+	_modelMatrix = _modelMatrix * translationMatrix;
+	
+	// Rotation origin matrix - translate
+	Matrix44 rotationOriginMatrix = Matrix44::createTranslation(0.0f, (_scaling.y / 2.0f), 0.0f);
+	_modelMatrix = _modelMatrix * rotationOriginMatrix;
+
+	// Rotation matrix
 	Matrix44 rotationMatrix = Matrix44::createRotation(
 		Math::degreesToRadians(_rotation.x),
 		Math::degreesToRadians(_rotation.y),
 		Math::degreesToRadians(_rotation.z));
-	Matrix44 scalingMatrix = Matrix44::createScaling(_scaling.x, _scaling.y, _scaling.z);
+	_modelMatrix = _modelMatrix * rotationMatrix;
 
-	_modelMatrix = translationMatrix * rotationMatrix * scalingMatrix;
+	// Rotation origin matrix - translate back
+	rotationOriginMatrix = Matrix44::createTranslation(0.0f, -(_scaling.y / 2.0f), 0.0f);
+	_modelMatrix = _modelMatrix * rotationOriginMatrix;
+
+	// Scaling matrix
+	Matrix44 scalingMatrix = Matrix44::createScaling(_scaling.x, _scaling.y, _scaling.z);
+	_modelMatrix = _modelMatrix * scalingMatrix;
 }
 
 void BillboardEntity::setCameraFacingX(bool value)

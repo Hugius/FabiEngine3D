@@ -1,23 +1,9 @@
-98 59
+84 61
 META script_type_update
 
-/// Check if a built building is selected
-INT listSize = misc:get_list_size("_buildNames")
-INT index = 0
-STR hoveredID = ""
-DEC distance = 0.0
-LOOP:
-    IF index IS listSize:
-        BREAK
-    EDIT hoveredID = fe3d:raycast_into_model(_buildNames[index], "", <true>)
-    EDIT distance = fe3d:raycast_into_model_distance(_buildNames[index], "", <true>)
-    IF distance IS -1.0:
-        EDIT distance = 1000.0
-    IF hoveredID NOT "":
-        BREAK
-    INCR index 1
-
-/// Retrieve max height
+/// Retrieve hovered building properties
+STR hoveredID = _hoveredBuildingID
+DEC distance = _hoveredBuildingDistance
 IF hoveredID NOT "":
     DEC height = fe3d:model_get_max_height(hoveredID)
     STR idPart = misc:get_string_part(hoveredID, 0, 2)
@@ -80,22 +66,21 @@ IF toolID IS "hammer_stone" OR toolID IS "hammer_iron":
                 DECR _bag[1] _buildablesStonePrice[hoveredIndex]
                 DECR _bag[2] _buildablesClayPrice[hoveredIndex]
                 DECR _bag[9] _buildablesIronPrice[hoveredIndex]
+                DECR _durabilities[6] _durabilityHit
                 /// Check if building is finished
                 IF height IS size.y OR height MORE size.y:
-                    /// Check if building is a house
+                    /// Determine building type
                     IF idPart IS "sm" OR idPart IS "me" OR idPart IS "bi":
                         /// Spawn bed
                         STR bedID = misc:concat_strings("bed:", hoveredID)
                         VEC3 bedPos = fe3d:model_get_position(hoveredID)
                         fe3d:model_place(bedID, "bed", bedPos.x, bedPos.y, bedPos.z)
-                    /// Check if building is a mill
-                    IF idPart IS "mi":
+                    ELIF idPart IS "mi":
                         /// Start mill animation
                         fe3d:model_start_animation(hoveredID, "mill_rotation", -1)
-                    IF idPart IS "ov":
+                    ELIF idPart IS "ov":
+                        STR fireID = misc:concat_strings("fire:", hoveredID)
                         VEC3 pos = fe3d:model_get_position(hoveredID)
-                        INCR pos.y 3.5
-                        fe3d:billboard_place("fir", "fire2", pos.x, pos.y, pos.z)
-                        fe3d:billboard_set_rotation("fir", 0.0, 90.0, 0.0)
-                        fe3d:billboard_start_animation("fir", -1)
-                        fe3d:print(pos)
+                        INCR pos.y 1.0
+                        fe3d:billboard_place(fireID, "fire2", pos.x, pos.y, pos.z)
+                        fe3d:billboard_start_animation(fireID, -1)

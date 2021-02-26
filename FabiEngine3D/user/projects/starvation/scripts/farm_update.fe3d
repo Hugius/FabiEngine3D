@@ -1,4 +1,4 @@
-87 30
+13 24
 META script_type_update
 
 /// Temporary values
@@ -13,15 +13,17 @@ DEC waterY = fe3d:water_get_height()
 BOOL ePressed = fe3d:input_is_key_pressed("KEY_E")
 BOOL isLookingDown = <false>
 BOOL isHovered = <false>
+INT leastWheatCount = _wheatCount
+DECR leastWheatCount 1
 
-/// Update plowing text
+/// Update plowing hover
 fe3d:text_set_visible("plow", <false>)
 IF feetY MORE waterY AND camPos.y LESS 34.0 AND pitch LESS -25.0:
-    IF toolID IS "hoe" AND _isInvOpen IS <true> AND _bag[3] MORE 11:
+    IF toolID IS "hoe" AND _isInvOpen IS <true> AND _bag[3] MORE leastWheatCount:
         fe3d:text_set_visible("plow", <true>)
         EDIT isLookingDown = <true>
 
-/// Check if plowing animation was finished
+/// Update wheat plowing
 IF _wasHoePlaying IS <true> AND _isHoePlaying IS <false>:
     IF isLookingDown IS <true>:
         INT newID = misc:get_unique_integer(0, 1000)
@@ -33,13 +35,14 @@ IF _wasHoePlaying IS <true> AND _isHoePlaying IS <false>:
         VEC3 size = fe3d:aabb_get_size(aabbID)
         MUL size.y 0.025
         fe3d:model_set_max_height(newID, size.y)
-        DECR _bag[3] 12
+        DECR _bag[3] _wheatCount
 
 /// Update wheat growing
 LIST wheatIDs = fe3d:model_find_ids("wheat")
+STR wheatID = ""
+DEC speed = 0.0
 INT length = misc:get_list_size("wheatIDs")
 INT index = 0
-STR wheatID = ""
 LOOP:
     IF index IS length:
         BREAK
@@ -49,7 +52,9 @@ LOOP:
         EDIT wheatSize = fe3d:aabb_get_size(wheatAabbID)
         EDIT wheatHeight = fe3d:model_get_max_height(wheatID)
         IF wheatHeight LESS wheatSize.y:
-            INCR wheatHeight 0.01
+            EDIT speed = _wheatGrowingSpeed
+            MUL speed _timeMultiplier
+            INCR wheatHeight speed
             fe3d:model_set_max_height(wheatID, wheatHeight)
         INCR index 1
 
@@ -72,7 +77,7 @@ IF hoveredID NOT "":
 /// Update wheat reaping
 IF isHovered IS <true> AND _wasScythePlaying IS <true> AND _isScythePlaying IS <false>:
     fe3d:model_delete(hoveredID)
-    INCR _bag[4] 12
+    INCR _bag[4] _wheatCount
 
 /// Update wheat grinding
 fe3d:text_set_visible("grind", <false>)
@@ -84,8 +89,9 @@ IF hoveredID NOT "" AND _isBuilding IS <false>:
     DEC millDistance = fe3d:raycast_into_model_distance("mill", "", <true>)
     IF millDistance IS -1.0:
         EDIT millDistance = 1000.0
-    IF millDistance LESS _maxReach AND millHeight MORE millSize.y AND _bag[4] MORE 11:
-        fe3d:text_set_visible("grind", <true>)
-        IF ePressed IS <true>:
-            DECR _bag[4] 12
-            INCR _bag[5] 12
+    IF millDistance LESS _maxReach AND millHeight MORE millSize.y:
+        IF _bag[4] MORE leastWheatCount:
+            fe3d:text_set_visible("grind", <true>)
+            IF ePressed IS <true>:
+                DECR _bag[4] _wheatCount
+                INCR _bag[5] _wheatCount

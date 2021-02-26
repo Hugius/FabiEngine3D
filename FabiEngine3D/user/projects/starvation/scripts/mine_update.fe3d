@@ -1,4 +1,4 @@
-9 20
+57 32
 META script_type_update
 
 /// Update stone hover
@@ -56,5 +56,5 @@ IF distance IS -1.0:
     EDIT distance = 1000.0
 IF hoveredID NOT "" AND _wasPickupPlaying IS <true> AND _isPickupPlaying IS <false>:
     IF distance LESS _maxReach:
+        INCR _bag[1] _stoneCount
         fe3d:model_delete(hoveredID)
-        INCR _bag[1] 6

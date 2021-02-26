@@ -1,4 +1,4 @@
-8 54
+18 30
 META script_type_update
 
 /// Check if player standing on claypile
@@ -14,5 +14,7 @@ IF toolID IS "shovel_stone" OR toolID IS "shovel_iron":
 /// Check if digging animation finished
 IF _wasShovelPlaying IS <true> AND _isShovelPlaying IS <false>:
     IF clayID NOT "":
-        INCR _bag[2] 5
+        INT amount = misc:get_random_integer(5, 15)
+        INCR _bag[2] amount
         DECR _durabilities[3] _durabilityHit
+        fe3d:model_delete(clayID)

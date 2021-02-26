@@ -1,6 +1,7 @@
-5 12
+2 20
 META script_type_update
 
+/// Temporary values
 BOOL con1 = (_isToolPlaying IS <false> AND _isPickupPlaying IS <false>)
 BOOL con2 = (_isTalking IS <false> AND _isCrafting IS <false>)
 BOOL con3 = (_isSleeping IS <false>)

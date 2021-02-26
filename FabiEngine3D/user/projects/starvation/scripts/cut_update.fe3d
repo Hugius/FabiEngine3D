@@ -1,4 +1,4 @@
-2 21
+62 36
 META script_type_update
 
 /// Update tree hover
@@ -59,5 +59,6 @@ IF distance IS -1.0:
     EDIT distance = 1000.0
 IF hoveredID NOT "" AND _wasPickupPlaying IS <true> AND _isPickupPlaying IS <false>:
     IF distance LESS _maxReach:
+        INT amount = misc:get_random_integer(2, 5)
+        INCR _bag[0] amount
         fe3d:model_delete(hoveredID)
-        INCR _bag[0] 3

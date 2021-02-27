@@ -22,7 +22,8 @@ The engine only uses 2 libraries: OpenGL 4.5 & SDL2. It is written in C++17 and 
 15. [Function List](#function-list)
 16. [Game Execution](#game-execution)
 17. [Miscellaneous](#miscellaneous)
-18. [Screenshots](#screenshots)
+18. [Background](#background)
+19. [Screenshots](#screenshots)
 
 # Features
 ### Asset Loading
@@ -72,9 +73,9 @@ The engine GUI is divided into 5 sections:
 
 # Folder Structures
 The engine root directory has 3 folders:
-- `bin\`: this folder holds the .exe file and all corresponding DLLs (do **NOT** touch)
-- `engine\`: this folder holds all engine resources such as libraries & shaders (do **NOT** touch)
-- `user\`: this folder is where all your game assets are stored. It also holds the project files
+- `bin\`: this folder holds the **.exe** file and all corresponding DLLs (do **NOT** touch)
+- `engine\`: this folder holds all **engine resources** such as libraries & shaders (do **NOT** touch)
+- `user\`: this folder is where all your **game assets** are stored. It also holds the project files
 
 # Development Order
 - **Project management**
@@ -1152,9 +1153,14 @@ fe3d:print(camPos.x)
 ### Tips & tricks
 - You can create your own custom **subfolders** within the main folder of `user\assets`.
 - Internal engine updates happen **after** the scripting updates
-- All rotational **degrees** cannot be higher than 360 or lower than -360 (for example 500 will be 140).
 - The top viewport has a button called "**uncache**" which forces the engine to load an asset again, even if it was cached.
 - You can **clear** the console output by pressing **C** when hovering the **console window**.
+### Rotations
+- Beware of the [Gimbal lock](https://en.wikipedia.org/wiki/Gimbal_lock) when rotating objects in all 3 (XYZ) directions!
+- All rotational **degrees** cannot be higher than 360 or lower than -360 (for example 500 will be 140).
+- X rotations go **towards** the direction of the X axis
+- Z rotations go **towards** the direction of the Z axis
+- Y rotations go **around** the direction of the Y axis
 - FabiEngine3D does **not** support a camera roll, because of the infamous Gimbal Lock.
 - FabiEngine3D **does** come with first person camera support, but **not** third person.
 ### AABB system
@@ -1171,7 +1177,7 @@ fe3d:print(camPos.x)
 - The amount of triangles is the **realtime** amount being rendered every frame.
 - `coreUpdate` includes all function calls and calculations in your update scripts.
 - `bufferSwap` means the actual buffering on the output screen.
-- Use LOD entities to improve your performance.
+- Use LOD models to improve your performance.
 - Lower the graphics quality in the project settings to improve your performance.
 ### Config file
 - The config file (`config.fe3d`) has multiple **settings** for the application appearance.
@@ -1179,6 +1185,22 @@ fe3d:print(camPos.x)
 - `window_fullscreen`: boolean value; toggle window fullscreen.
 - `window_borderless`: boolean value; toggle window border visibility.
 - `selected_game`: string value; select name of project/game to be run on FabiEngine3D launch.
+
+# Background
+- Model: a complex 3D object in 3D space, constisting of a mesh.
+- Billboard: a 2D quad in 3D space.
+- Collision: intersection between 2 things (for example: between the camera and a model).
+- AABB: Axis Aligned Bounding Box, a 3D box used for collision.
+- Raycasting: the process of "shooting" a ray from the camera position towards where the camera is looking.
+- LOD model: Level Of Detail model, a less-detailed version of a model.
+- Ambient lighting: the overall lightness of a scene.
+- Directional lighting: diffuse lighting based on a directional light source (for example: the sun).
+- Point lighting: individual light casters that show light around them (for example: a torch).
+- Spot lighting: a spot light casted from the camera position towards where the camera is looking (for example: a flashlight).
+- DOF: Depth Of Field, a post-processing effect that blurs all non-focused pixels.
+- Motion blur: pixels will be blurred in the first person camera direction of motion.
+- Lens flare: a post-processing flare overlay will be shown when the camera is looking at the directional lighting position (for example: the sun)
+- Sky HDR: an effect that effects the brightness of the sky based on the camera pitch angle.
 
 # Screenshots
 ### Engine interface example

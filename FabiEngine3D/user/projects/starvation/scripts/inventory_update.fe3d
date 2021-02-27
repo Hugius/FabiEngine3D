@@ -1,4 +1,4 @@
-27 25
+90 0
 META script_type_update
 
 /// Check if player wants to open/close inventory
@@ -88,12 +88,13 @@ EDIT _lastEquipIndex = _equipIndex
 
 /// Update tool durabilities
 INT index = 0
-INT size = 9
+DEC minDurability = _durabilityHit
+DIV minDurability 2.0
 LOOP:
-    IF index IS size:
+    IF index IS 9:
         BREAK
     ELSE:
-        IF _durabilities[index] LESS _durabilityHit AND _inventory[index] NOT "":
+        IF _durabilities[index] LESS minDurability AND _inventory[index] NOT "":
             fe3d:model_set_visible(_inventory[index], <false>)
             EDIT _inventory[index] = ""
             EDIT _durabilities[index] = 0.0

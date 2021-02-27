@@ -154,17 +154,6 @@ void SceneEditor::_updateBillboardEditing()
 				}
 				else if (_transformation == TransformationType::ROTATION)
 				{
-					// Only 1 rotation direction
-					_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("xMinus")->setHoverable(rotation.z == 0.0f && rotation.y == 0.0f);
-					_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("xPlus")->setHoverable(rotation.z == 0.0f && rotation.y == 0.0f);
-					_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getWriteField("x")->setHoverable(rotation.z == 0.0f && rotation.y == 0.0f);
-					_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("yMinus")->setHoverable(rotation.x == 0.0f && rotation.z == 0.0f);
-					_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("yPlus")->setHoverable(rotation.x == 0.0f && rotation.z == 0.0f);
-					_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getWriteField("y")->setHoverable(rotation.x == 0.0f && rotation.z == 0.0f);
-					_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("zMinus")->setHoverable(rotation.x == 0.0f && rotation.y == 0.0f);
-					_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getButton("zPlus")->setHoverable(rotation.x == 0.0f && rotation.y == 0.0f);
-					_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getWriteField("z")->setHoverable(rotation.x == 0.0f && rotation.y == 0.0f);
-
 					// Handle GUI input
 					_handleValueChanging("billboardPropertiesMenu", "xPlus", "x", rotation.x, _customEditorSpeed / 50.0f);
 					_handleValueChanging("billboardPropertiesMenu", "xMinus", "x", rotation.x, -_customEditorSpeed / 50.0f);

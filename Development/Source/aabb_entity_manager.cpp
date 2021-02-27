@@ -140,37 +140,33 @@ void AabbEntityManager::update(
 				{
 					// Temporary values
 					auto parentEntity = foundPair->second;
+					Vec3 parentSize = parentEntity->getScaling();
+					Vec3 newAabbSize = Vec3(parentSize.x, parentSize.y, 0.0f);
 					float rotationX = fabsf(parentEntity->getRotation().x);
 					float rotationY = fabsf(parentEntity->getRotation().y);
 					float rotationZ = fabsf(parentEntity->getRotation().z);
-					Vec3 parentSize = parentEntity->getScaling();
-					float maxParentSize = std::max(parentSize.x, parentSize.y);
-					Vec3 newAabbSize = Vec3(parentSize.x, parentSize.y, 0.0f);
-					float yOffset = 0.0f;
 
-					// Determine rotation direction
-					if (rotationX != 0.0f)
-					{
-						float sinRotation = fabsf(sinf(Math::degreesToRadians(rotationX)));
-						float cosRotation = fabsf(cosf(Math::degreesToRadians(rotationX)));
-						newAabbSize.x = (sinRotation * parentSize.y) + (cosRotation * parentSize.x);
-						newAabbSize.y = (sinRotation * parentSize.x) + (cosRotation * parentSize.y);
-						yOffset = -((newAabbSize.y - parentSize.y) / 2.0f);
-					}
-					else if (rotationY != 0.0f)
-					{
-						newAabbSize.x = fabsf(cosf(Math::degreesToRadians(rotationY)) * parentSize.x);
-						newAabbSize.z = fabsf(sinf(Math::degreesToRadians(rotationY)) * parentSize.x);
-					}
-					else if (rotationZ != 0.0f)
-					{
-						newAabbSize.z = fabsf(sinf(Math::degreesToRadians(rotationZ)) * parentSize.y);
-					}
+					// Calculate AABB size based on rotation
+					float sinRotation = fabsf(sinf(Math::degreesToRadians(rotationX)));
+					float cosRotation = fabsf(cosf(Math::degreesToRadians(rotationX)));
+					float xRotationX = (cosRotation * parentSize.x) + (sinRotation * parentSize.y);
+					float xRotationY = (sinRotation * parentSize.x) + (cosRotation * parentSize.y);
+					float yRotationX = fabsf(cosf(Math::degreesToRadians(rotationY)) * parentSize.x);
+					float yRotationZ = fabsf(sinf(Math::degreesToRadians(rotationY)) * parentSize.x);
+					float zRotationZ = fabsf(sinf(Math::degreesToRadians(rotationZ)) * parentSize.y);
+					
+					// Take the greatest sizes to cover the billboard
+					newAabbSize.x = std::max(xRotationX, yRotationX);
+					newAabbSize.y = xRotationY;
+					newAabbSize.z = std::max(yRotationZ, zRotationZ);
 
-					// AABB must still be a box
+					// AABB must still be a box (cannot be flat)
 					newAabbSize.x = std::max(newAabbSize.x, 0.1f);
 					newAabbSize.y = std::max(newAabbSize.y, 0.1f);
 					newAabbSize.z = std::max(newAabbSize.z, 0.1f);
+
+					// Calculate Y offset, because rotation is around center while billboard is not centered
+					float yOffset = -((newAabbSize.y - parentSize.y) / 2.0f);
 
 					// Update scaling (based on parent rotation)
 					entity->setScaling(newAabbSize);

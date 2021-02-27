@@ -1,4 +1,4 @@
-67 0
+68 16
 META script_type_init
 
 /// Globals
@@ -67,7 +67,7 @@ fe3d:camera_enable_first_person_view()
 fe3d:camera_set_cursor_speed(5.0)
 fe3d:camera_set_max_pitch(75.0)
 
-/// Player + physics
+/// Player model + physics
 fe3d:collision_set_camera_box(_playerHeight, 0.0, 0.5, 0.5, 0.5, 0.5)
 fe3d:collision_enable_camera_aabb_response(<true>, <false>, <true>)
 fe3d:collision_enable_camera_terrain_response(_playerHeight, 0.05)

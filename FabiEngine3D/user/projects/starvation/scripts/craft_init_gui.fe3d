@@ -1,21 +1,5 @@
-72 51
+56 51
 META script_type_init
-
-/// Craftables
-PUSH _craftables "sword_stone_display"
-PUSH _craftables "sword_iron_display"
-PUSH _craftables "pickaxe_stone_display"
-PUSH _craftables "pickaxe_iron_display"
-PUSH _craftables "axe_stone_display"
-PUSH _craftables "axe_iron_display"
-PUSH _craftables "shovel_stone_display"
-PUSH _craftables "shovel_iron_display"
-PUSH _craftables "hoe_display"
-PUSH _craftables "scythe_display"
-PUSH _craftables "hammer_stone_display"
-PUSH _craftables "hammer_iron_display"
-PUSH _craftables "torch_display"
-PUSH _craftables "fishrod_display"
 
 /// Text content
 PUSH _craftablesText "Stone sword"
@@ -33,7 +17,7 @@ PUSH _craftablesText "Iron hammer"
 PUSH _craftablesText "Torch"
 PUSH _craftablesText "Fishing rod"
 
-/// HUD
+/// GUI
 STR f = "font.ttf"
 fe3d:image_place("scroll_craft", "scroll3.png", 0.0, -0.55, 0.0, 0.75, 0.75)
 fe3d:image_place("wood_price_craft", "wood.png", -0.05, -0.45, 0.0, 0.1, 0.1)

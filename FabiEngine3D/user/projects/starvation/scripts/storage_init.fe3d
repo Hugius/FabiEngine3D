@@ -1,0 +1,9 @@
+4 68
+META script_type_init
+
+/// GUI
+STR f = "font.ttf"
+fe3d:image_place("scroll_storage", "scroll3.png", 0.0, 0.0, 0.0, 1.25, 0.75)
+fe3d:image_place("wood_count_storage", "wood.png", -0.15, -0.55, 0.0, 0.1, 0.1)
+fe3d:image_place("stone_count_storage", "stone.png", -0.15, -0.75, 0.0, 0.1, 0.1)
+fe3d:image_place("clay_count_storage", "clay.png", 0.05, -0.55, 0.0, 0.1, 0.1)

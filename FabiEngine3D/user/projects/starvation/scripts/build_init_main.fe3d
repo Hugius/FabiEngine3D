@@ -1,4 +1,4 @@
-45 23
+32 31
 META script_type_init
 
 /// Globals
@@ -32,17 +32,6 @@ PUSH _buildables "pen_display"
 PUSH _buildables "mill_display"
 PUSH _buildables "church_display"
 PUSH _buildables "oven_display"
-
-/// Buildables display text
-PUSH _buildablesText "Wooden Hut"
-PUSH _buildablesText "Wooden Cabin"
-PUSH _buildablesText "Wooden House"
-PUSH _buildablesText "Storage"
-PUSH _buildablesText "Well"
-PUSH _buildablesText "Animal Pen"
-PUSH _buildablesText "Grain Mill"
-PUSH _buildablesText "Church"
-PUSH _buildablesText "Baking Oven"
 
 /// Buildables ID names
 PUSH _buildNames "small_house"

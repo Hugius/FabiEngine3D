@@ -1,4 +1,4 @@
-73 14
+28 0
 META script_type_init
 
 /// Globals
@@ -11,6 +11,22 @@ GLOB LIST _craftablesIndex = {0,0,1,1,2,2,3,3,4,5,6,6,7,8}
 GLOB LIST _craftablesWoodPrice = {2,2,2,2,2,2,2,2,2,3,2,2,2,3}
 GLOB LIST _craftablesStonePrice = {3,0,3,0,3,0,1,0,0,0,2,0,0,0}
 GLOB LIST _craftablesIronPrice = {0,3,0,3,0,3,0,1,1,3,0,2,0,0}
+
+/// Craftables
+PUSH _craftables "sword_stone_display"
+PUSH _craftables "sword_iron_display"
+PUSH _craftables "pickaxe_stone_display"
+PUSH _craftables "pickaxe_iron_display"
+PUSH _craftables "axe_stone_display"
+PUSH _craftables "axe_iron_display"
+PUSH _craftables "shovel_stone_display"
+PUSH _craftables "shovel_iron_display"
+PUSH _craftables "hoe_display"
+PUSH _craftables "scythe_display"
+PUSH _craftables "hammer_stone_display"
+PUSH _craftables "hammer_iron_display"
+PUSH _craftables "torch_display"
+PUSH _craftables "fishrod_display"
 
 /// Models
 fe3d:model_place("workbench", "workbench", -145.0, 31.25, -83.0)

@@ -1,4 +1,4 @@
-10 21
+34 23
 META script_type_update
 META execution_entry
 
@@ -30,6 +30,10 @@ IF currentWorld IS "home":
     EXEC mine_update
     EXEC cut_update
     EXEC dig_update
+
+/// Storage system
+IF currentWorld IS "home":
+    EXEC storage_update
 
 /// Food
 IF currentWorld IS "home":

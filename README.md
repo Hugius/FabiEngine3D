@@ -21,8 +21,8 @@ The engine only uses 2 libraries: OpenGL 4.5 & SDL2. It is written in C++17 and 
 14. [FabScript](#fabscript)
 15. [Function List](#function-list)
 16. [Game Execution](#game-execution)
-17. [Miscellaneous](#miscellaneous)
-18. [Background](#background)
+17. [Background](#background)
+18. [Miscellaneous](#miscellaneous)
 19. [Screenshots](#screenshots)
 
 # Features
@@ -1149,6 +1149,22 @@ fe3d:print(camPos.x)
 - Set `selected_game` to the name of the project/game you want to run
 - Start FabiEngine3D
 
+# Background
+- **Model**: a complex 3D object in 3D space, constisting of a mesh.
+- **Billboard**: a 2D quad in 3D space.
+- **Collision**: intersection between 2 things (for example: between the camera and a model).
+- **AABB: Axis Aligned Bounding Box, a 3D box used for collision.
+- **Raycasting: the process of "shooting" a ray from the camera position towards where the camera is looking.
+- **LOD model**: Level Of Detail model, a less-detailed version of a model.
+- **Ambient lighting**: the overall lightness of a scene.
+- **Directional lighting**: diffuse lighting based on a directional light source (for example: the sun).
+- **Point lighting**: individual light casters that show light around them (for example: a torch).
+- **Spot lighting**: a spot light casted from the camera position towards where the camera is looking (for example: a flashlight).
+- **DOF**: Depth Of Field, a post-processing effect that blurs all non-focused pixels.
+- **Motion blur**: pixels will be blurred in the first person camera direction of motion.
+- **Lens flare**: a post-processing flare overlay will be shown when the camera is looking at the directional lighting position (for example: the sun)
+- **Sky HDR**: an effect that effects the brightness of the sky based on the camera pitch angle.
+
 # Miscellaneous
 ### Tips & tricks
 - You can create your own custom **subfolders** within the main folder of `user\assets`.
@@ -1164,7 +1180,9 @@ fe3d:print(camPos.x)
 - FabiEngine3D does **not** support a camera roll, because of the infamous Gimbal Lock.
 - FabiEngine3D **does** come with first person camera support, but **not** third person.
 ### AABB system
-- AABB's will transform based on their rotation, but only in 90 degree steps (0, 90, 180, 270 degrees).
+- Bound **model AABBs** are adjusted to the transformation (position, rotation, size) of the model **automatically**. They will only rotate in **1 direction** (the direction with the greatest angle of rotation).
+- Bound **billboard AABBs** are adjusted to the transformation (position, rotation, size) of the billboard **automatically**. They will rotate in **any** direction (XYZ combined as well).
+- **"Rotated"** AABBs will be translated and/or scaled in **90 degrees** directions (0, 90, 180, 270).
 - You **can** individually access (bound) AABBs that are placed through **scripting**.
 - You **cannot** individually access bound AABBs from a **scene**.
 - If you want to access an AABB bound to a model, the ID is composed like this: **modelID + "_" + aabbName**.
@@ -1185,22 +1203,6 @@ fe3d:print(camPos.x)
 - `window_fullscreen`: boolean value; toggle window fullscreen.
 - `window_borderless`: boolean value; toggle window border visibility.
 - `selected_game`: string value; select name of project/game to be run on FabiEngine3D launch.
-
-# Background
-- Model: a complex 3D object in 3D space, constisting of a mesh.
-- Billboard: a 2D quad in 3D space.
-- Collision: intersection between 2 things (for example: between the camera and a model).
-- AABB: Axis Aligned Bounding Box, a 3D box used for collision.
-- Raycasting: the process of "shooting" a ray from the camera position towards where the camera is looking.
-- LOD model: Level Of Detail model, a less-detailed version of a model.
-- Ambient lighting: the overall lightness of a scene.
-- Directional lighting: diffuse lighting based on a directional light source (for example: the sun).
-- Point lighting: individual light casters that show light around them (for example: a torch).
-- Spot lighting: a spot light casted from the camera position towards where the camera is looking (for example: a flashlight).
-- DOF: Depth Of Field, a post-processing effect that blurs all non-focused pixels.
-- Motion blur: pixels will be blurred in the first person camera direction of motion.
-- Lens flare: a post-processing flare overlay will be shown when the camera is looking at the directional lighting position (for example: the sun)
-- Sky HDR: an effect that effects the brightness of the sky based on the camera pitch angle.
 
 # Screenshots
 ### Engine interface example

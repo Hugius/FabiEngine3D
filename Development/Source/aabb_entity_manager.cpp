@@ -91,19 +91,48 @@ void AabbEntityManager::update(
 					// Game entity must not be LODded
 					if (!parentEntity->isLevelOfDetailed())
 					{
-						// Calculate rotation (based on parent rotation)
-						float rotation = parentEntity->getRotation().y;
+						// Retrieve maximum rotation & direction (based on parent rotation)
+						Direction rotationDirection = Direction::NONE;
+						Vec3 parentRotation = parentEntity->getRotation();
+						float rotation = 0.0f;
+						if (fabsf(parentRotation.x) > fabsf(parentRotation.y) && fabsf(parentRotation.x) > fabsf(parentRotation.z))
+						{
+							rotationDirection = Direction::X;
+							rotation = parentRotation.x;
+						}
+						else if (fabsf(parentRotation.y) > fabsf(parentRotation.x) && fabsf(parentRotation.y) > fabsf(parentRotation.z))
+						{
+							rotationDirection = Direction::Y;
+							rotation = parentRotation.y;
+						}
+						else if (fabsf(parentRotation.z) > fabsf(parentRotation.x) && fabsf(parentRotation.z) > fabsf(parentRotation.y))
+						{
+							rotationDirection = Direction::Z;
+							rotation = parentRotation.z;
+						}
 
 						// Update scaling (based on parent scaling & AABB rotation)
-						entity->setScaling(entity->getLocalScaling() * parentEntity->getScaling());
-						Vec3 newScaling = entity->getScaling();
+						Vec3 localScaling = (entity->getLocalScaling() * parentEntity->getScaling());
+						entity->setScaling(localScaling);
 						if ((fabsf(rotation) > 45.0f && fabsf(rotation) < 135.0f) || (fabsf(rotation) > 225.0f && fabsf(rotation) < 315.0f))
 						{
-							entity->setScaling(Vec3(newScaling.z, newScaling.y, newScaling.x));
+							// Determine rotation direction
+							if (rotationDirection == Direction::X)
+							{
+								entity->setScaling(Vec3(localScaling.y, localScaling.x, localScaling.z));
+							}
+							else if (rotationDirection == Direction::Y)
+							{
+								entity->setScaling(Vec3(localScaling.z, localScaling.y, localScaling.x));
+							}
+							else if (rotationDirection == Direction::Z)
+							{
+								entity->setScaling(Vec3(localScaling.x, localScaling.z, localScaling.y));
+							}
 						}
 
 						// Update translation (based on parent translation + rotation + scaling)
-						auto localTranslation = (entity->getLocalTranslation() * parentEntity->getScaling());
+						Vec3 localTranslation = (entity->getLocalTranslation() * parentEntity->getScaling());
 						float roundedRotation = 
 							(rotation > 45.0f && rotation < 135.0f) ? 90.0f : // 90 degrees rounded
 							(rotation >= 135.0f && rotation <= 225.0f) ? 180.0f : // 180 degrees rounded
@@ -114,11 +143,39 @@ void AabbEntityManager::update(
 							0.0f; // No rotation
 						if (roundedRotation != 0.0f)
 						{
-							Matrix44 rotationMatrix = Matrix44::createRotationY(Math::degreesToRadians(roundedRotation));
+							/* Note:
+								X & Z directions are different, because the model is rotated around Vec3(0.0f) but is standing on Y 0.0f (local).
+								The AABB is ALSO standing on Y 0.0f (local), so it needs a negative Y offset after the rotation.
+							*/
+
+							// Temporary values
+							Matrix44 rotationMatrix = Matrix44(1.0f);
+							Vec3 localOffset = Vec3(0.0f, (entity->getLocalScaling().y / 2.0f), 0.0f);
+							bool isMirrored = (roundedRotation == -180.0f || roundedRotation == 180.0f);
+							localTranslation = (rotationDirection == Direction::Y) ? localTranslation : 
+								(entity->getLocalTranslation() + localOffset) * parentEntity->getScaling();
+							float yOffset = (rotationDirection == Direction::Y) ? 0.0f : 
+								-((isMirrored ? localScaling.y : localScaling.x) / 2.0f);
+
+							// Determine rotation direction
+							if (rotationDirection == Direction::X)
+							{
+								rotationMatrix = Matrix44::createRotationX(Math::degreesToRadians(roundedRotation));					
+							}
+							else if (rotationDirection == Direction::Y)
+							{
+								rotationMatrix = Matrix44::createRotationY(Math::degreesToRadians(roundedRotation));
+							}
+							else if (rotationDirection == Direction::Z)
+							{
+								rotationMatrix = Matrix44::createRotationZ(Math::degreesToRadians(roundedRotation));
+							}
+
+							// Apply rotation
 							Vec4 result = rotationMatrix * Vec4(localTranslation.x, localTranslation.y, localTranslation.z, 1.0f);
-							entity->setTranslation(parentEntity->getTranslation() + Vec3(result.x, result.y, result.z));
+							entity->setTranslation(parentEntity->getTranslation() + Vec3(result.x, result.y + yOffset, result.z));
 						}
-						else
+						else // No rotation
 						{
 							entity->setTranslation(parentEntity->getTranslation() + localTranslation);
 						}

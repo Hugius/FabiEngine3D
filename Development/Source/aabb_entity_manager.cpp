@@ -102,7 +102,7 @@ void AabbEntityManager::update(
 							entity->setScaling(Vec3(newScaling.z, newScaling.y, newScaling.x));
 						}
 
-						// Update translation (based on parent translation + scaling)
+						// Update translation (based on parent translation + rotation + scaling)
 						auto localTranslation = (entity->getLocalTranslation() * parentEntity->getScaling());
 						float roundedRotation = 
 							(rotation > 45.0f && rotation < 135.0f) ? 90.0f : // 90 degrees rounded

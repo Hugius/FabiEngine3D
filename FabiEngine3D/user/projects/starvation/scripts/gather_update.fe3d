@@ -1,29 +1,20 @@
-21 62
+15 8
 META script_type_update
 
 /// Check if player is looking at a plant
-INT seedAmount = 12
-STR hoveredID = fe3d:raycast_into_model("shrub", "", <true>)
-DEC distance = fe3d:raycast_into_model_distance("shrub", "", <true>)
+STR hoveredID = fe3d:raycast_into_model("fern", "", <true>)
+DEC distance = fe3d:raycast_into_model_distance("fern", "", <true>)
 IF hoveredID IS "":
-    EDIT seedAmount = 9
-    EDIT hoveredID = fe3d:raycast_into_model("bamboo", "", <true>)
-    EDIT distance = fe3d:raycast_into_model_distance("bamboo", "", <true>)
-IF hoveredID IS "":
-    EDIT seedAmount = 6
-    EDIT hoveredID = fe3d:raycast_into_model("fern", "", <true>)
-    EDIT distance = fe3d:raycast_into_model_distance("fern", "", <true>)
-IF hoveredID IS "":
-    EDIT seedAmount = 3
     EDIT hoveredID = fe3d:raycast_into_model("flower", "", <true>)
     EDIT distance = fe3d:raycast_into_model_distance("flower", "", <true>)
 IF hoveredID IS "":
-    EDIT seedAmount = 3
     EDIT hoveredID = fe3d:raycast_into_model("mushroom", "", <true>)
     EDIT distance = fe3d:raycast_into_model_distance("mushroom", "", <true>)
 
-/// Plant picking updates
+/// Check if player picked a plant
 IF hoveredID NOT "" AND _wasPickupPlaying IS <true> AND _isPickupPlaying IS <false>:
+    IF distance IS -1.0:
+        EDIT distance = 1000.0
     IF distance LESS _maxReach:
+        INCR _bag[3] _seedCount
         fe3d:model_delete(hoveredID)
-        INCR _bag[3] seedAmount

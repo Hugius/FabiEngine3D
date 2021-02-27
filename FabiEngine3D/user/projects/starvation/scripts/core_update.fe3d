@@ -1,15 +1,15 @@
-37 18
+10 21
 META script_type_update
 META execution_entry
 
+/// Retrieve current world ID: home, starvia_outside, starvia_inside
 STR currentWorld = fe3d:scene_get_current_id()
 
 /// Bag inventory
 EXEC bag_update
 
 /// Tools inventory
-EXEC inventory_equipping
-EXEC inventory_durability
+EXEC inventory_update
 EXEC inventory_misc
 
 /// Player
@@ -24,24 +24,28 @@ EXEC animation_misc
 EXEC animation_player
 EXEC animation_tool
 
-/// Resourcing
-EXEC gather_update
-EXEC mine_update
-EXEC cut_update
-EXEC dig_update
-EXEC fish_update
-EXEC farm_update
+/// Resources
+IF currentWorld IS "home":
+    EXEC gather_update
+    EXEC mine_update
+    EXEC cut_update
+    EXEC dig_update
+
+/// Food
+IF currentWorld IS "home":
+    EXEC fish_update
+    EXEC farm_update
+    EXEC bake_update
 
 /// Building
-EXEC build_place_choose
-EXEC build_place_confirm
-EXEC build_hover
-EXEC build_process
-EXEC build_misc
+IF currentWorld IS "home":
+    EXEC build_place_choose
+    EXEC build_place_confirm
+    EXEC build_process
+    EXEC build_misc
 
 /// NPC interaction
-IF currentWorld IS "starvia_outside":
-    EXEC npc_update
+EXEC npc_update
 
 /// Water
 IF currentWorld IS "home" OR currentWorld IS "starvia_outside":
@@ -56,10 +60,9 @@ IF currentWorld IS "home":
     EXEC craft_process
     EXEC craft_misc
 
-/// Time
+/// Time & weather
 EXEC time_cycle
 EXEC time_sleep
 
 /// Miscellaneous
-EXEC bake_update
 EXEC misc_update

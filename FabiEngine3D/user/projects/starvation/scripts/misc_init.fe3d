@@ -1,4 +1,4 @@
-27 21
+16 30
 META script_type_init
 
 /// Globals
@@ -13,10 +13,14 @@ GLOB DEC _blackAlpha = 1.0
 GLOB DEC _fallingLogTargetHeight = 0.0
 GLOB DEC _fallingStonesTargetHeight = 0.0
 GLOB DEC _wheatGrowingSpeed = 0.0001
-GLOB CONST INT _wheatCount = 12
+GLOB CONST INT _logCount = 4
 GLOB CONST INT _stoneCount = 6
+GLOB CONST INT _clayCount = 10
+GLOB CONST INT _seedsCount = 5
+GLOB CONST INT _wheatCount = 12
+GLOB CONST INT _fishCount = 1
 
-/// HUD
+/// Interaction UI
 STR f = "font.ttf"
 fe3d:image_place("crosshair", "crosshair.png", 0.0, 0.0, 0.0, 0.0325, 0.05)
 fe3d:image_place("black", "black.png", 0.0, 0.0, 0.0, 2.0, 2.0)
@@ -49,7 +53,7 @@ fe3d:text_set_visible("reap", <false>)
 fe3d:text_set_visible("build", <false>)
 fe3d:text_set_visible("fish", <false>)
 
-/// Torch light
+/// Torch
 fe3d:light_place("torch", 0.0, 0.0, 0.0, 1.0, 0.85, 0.0, 1.25, 1.0)
 fe3d:billboard_place("torch", "fire1", 0.0, 0.0, 0.0)
 fe3d:billboard_start_animation("torch", -1)

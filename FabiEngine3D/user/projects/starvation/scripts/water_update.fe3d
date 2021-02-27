@@ -1,4 +1,4 @@
-46 55
+50 4
 META script_type_update
 
 /// Temporary values
@@ -9,22 +9,27 @@ VEC3 camPos = fe3d:camera_get_position()
 /// Check if player is underwater or not
 IF camPos.y LESS height:
     EDIT _isUnderWater = <true>
+    /// River in Stariva has strong current
     IF currentWorld IS "starvia_outside":
         fe3d:camera_move(0.01, 0.0, -0.005)
+    /// Enable underwater effects
     fe3d:image_set_visible("underwater", <true>)
     fe3d:image_rotate("underwater", 0.01)
     fe3d:graphics_set_fog_min_distance(5.0)
     fe3d:graphics_set_fog_max_distance(15.0)
     fe3d:graphics_set_fog_thickness(1.0)
+    /// No wet lens effect
     IF _wasUnderWater IS <false>:
         EDIT _wasUnderWater = <true>
         EDIT _wetlensAlpha = 0.0
 ELSE:
     EDIT _isUnderWater = <false>
+    /// Disable underwater effects
     fe3d:image_set_visible("underwater", <false>)
     fe3d:graphics_set_fog_min_distance(75.0)
     fe3d:graphics_set_fog_max_distance(150.0)
     fe3d:graphics_set_fog_thickness(0.75)
+    /// Enable wet lens effect
     IF _wasUnderWater IS <true>:
         EDIT _wetlensAlpha = 0.5
         EDIT _wasUnderWater = <false>
@@ -36,13 +41,14 @@ ELSE:
     DECR _wetlensAlpha 0.001
 fe3d:image_set_alpha("wetlens", _wetlensAlpha)
 
-/// Update water color
+/// Update water color based on time
 DEC blueIntensity = 1.0
 DECR blueIntensity _skyMixValue
 DEC lightness = blueIntensity
 INCR lightness 0.25
 fe3d:water_set_color(0.0, 0.0, blueIntensity)
-fe3d:image_set_color("underwater", lightness, lightness, lightness)
+/// Also update underwater color
 IF _isUnderWater IS <true>:
+    fe3d:image_set_color("underwater", lightness, lightness, lightness)
     MUL blueIntensity 0.25
     fe3d:graphics_set_fog_color(0.0, 0.0, blueIntensity)

@@ -1,4 +1,4 @@
-15 39
+45 23
 META script_type_init
 
 /// Globals
@@ -22,7 +22,29 @@ GLOB BOOL _isBuilding = <false>
 GLOB BOOL _isBuildPlaceValid = <false>
 GLOB BOOL _canAffordBuilding = <false>
 
-/// Names
+/// Buildables ID
+PUSH _buildables "small_house_display"
+PUSH _buildables "medium_house_display"
+PUSH _buildables "big_house_display"
+PUSH _buildables "storage_display"
+PUSH _buildables "well_display"
+PUSH _buildables "pen_display"
+PUSH _buildables "mill_display"
+PUSH _buildables "church_display"
+PUSH _buildables "oven_display"
+
+/// Buildables display text
+PUSH _buildablesText "Wooden Hut"
+PUSH _buildablesText "Wooden Cabin"
+PUSH _buildablesText "Wooden House"
+PUSH _buildablesText "Storage"
+PUSH _buildablesText "Well"
+PUSH _buildablesText "Animal Pen"
+PUSH _buildablesText "Grain Mill"
+PUSH _buildablesText "Church"
+PUSH _buildablesText "Baking Oven"
+
+/// Buildables ID names
 PUSH _buildNames "small_house"
 PUSH _buildNames "medium_house"
 PUSH _buildNames "big_house"

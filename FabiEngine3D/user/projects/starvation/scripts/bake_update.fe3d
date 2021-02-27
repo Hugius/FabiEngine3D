@@ -1,4 +1,4 @@
-41 27
+38 30
 META script_type_update
 
 /// Temporary values
@@ -16,9 +16,11 @@ IF hoveredID NOT "" AND _isBuilding IS <false>:
     DEC millDistance = fe3d:raycast_into_model_distance("mill", "", <true>)
     IF millDistance IS -1.0:
         EDIT millDistance = 1000.0
+    /// Check if mill is fully built and hovered
     IF millDistance LESS _maxReach AND millHeight MORE millSize.y:
         IF _bag[4] MORE leastWheatCount:
             fe3d:text_set_visible("grind", <true>)
+            /// Convert wheat into flour
             IF ePressed IS <true>:
                 DECR _bag[4] _wheatCount
                 INT flourCount = _wheatCount
@@ -35,9 +37,11 @@ IF hoveredID NOT "" AND _isBuilding IS <false>:
     DEC ovenDistance = fe3d:raycast_into_model_distance("oven", "", <true>)
     IF ovenDistance IS -1.0:
         EDIT ovenDistance = 1000.0
+    /// If oven is fully built and hovered
     IF ovenDistance LESS _maxReach AND ovenHeight MORE ovenSize.y:
         IF _bag[5] MORE 0:
             fe3d:text_set_visible("bake", <true>)
+            /// Convert 1 flour into 1 bread
             IF ePressed IS <true>:
                 DECR _bag[5] 1
                 INCR _bag[6] 1

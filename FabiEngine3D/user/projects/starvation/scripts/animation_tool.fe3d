@@ -1,7 +1,7 @@
-73 12
+61 24
 META script_type_update
 
-/// Determine tool animation type
+/// Determine tool animation type & offset
 STR animID = ""
 IF _equipIndex IS 0:
     EDIT animID = "sword_hit"
@@ -37,7 +37,7 @@ DEC yaw = fe3d:camera_get_yaw()
 NEG yaw
 INCR yaw 90.0
 
-/// Update tool position, rotation, animation if equipped
+/// Update tool position & rotation
 STR toolID = _inventory[_equipIndex]
 BOOL equipped = (toolID NOT "")
 BOOL allowed = (_isToolPlaying IS <false> AND _isInvOpen IS <true>)
@@ -47,6 +47,7 @@ IF equipped IS <true> AND allowed IS <true>:
     DEC cosRot = math:cos(yaw)
     MUL sinRot 0.8
     MUL cosRot 0.8
+    /// Position
     VEC3 toolPos = camPos
     INCR toolPos.x sinRot
     INCR toolPos.z cosRot

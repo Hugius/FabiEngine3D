@@ -1,4 +1,4 @@
-57 32
+31 39
 META script_type_update
 
 /// Update stone hover
@@ -28,7 +28,9 @@ IF hoveredID NOT "" AND stonesException IS "":
 /// Check if mining animation finished
 IF _wasPickaxePlaying IS <true> AND _isPickaxePlaying IS <false>:
     IF isHovered IS <true> AND allowed IS <true>:
+        /// Delete stone model
         fe3d:model_delete(hoveredID)
+        /// Compose ID for stones model
         INT stonesID = misc:get_unique_integer(0, 1000)
         CAST stonesID STR
         EDIT stonesID = misc:concat_strings("stones", stonesID)
@@ -36,6 +38,7 @@ IF _wasPickaxePlaying IS <true> AND _isPickaxePlaying IS <false>:
         EDIT _fallingStonesID = stonesID
         EDIT _fallingStonesTargetHeight = stonePos.y
         INCR stonePos.y 5.0
+        /// Place stones model
         fe3d:model_place(stonesID, "stones", stonePos.x, stonePos.y, stonePos.z)
         IF subString IS "stone5":
             fe3d:model_set_size(stonesID, 1.2, 1.2, 1.2)

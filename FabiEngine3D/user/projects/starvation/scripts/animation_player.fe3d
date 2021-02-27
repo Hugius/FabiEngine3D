@@ -1,4 +1,4 @@
-35 20
+37 0
 META script_type_update
 
 /// Skeleton position & rotation
@@ -14,12 +14,14 @@ fe3d:model_set_rotation("player", 0.0, yaw, 0.0)
 BOOL isWalkPlaying = fe3d:model_is_animation_started("player", "walk")
 IF _isToolPlaying IS <true> OR _isTalking IS <true> OR _isCrafting IS <true>:
     IF isWalkPlaying IS <true>:
+        /// Fade animation to a stop
         fe3d:model_fade_animation("player", "walk", 1)
 ELIF _isPickupPlaying IS <false> AND _isAbleToMove IS <true>:
     IF _isWalking IS <true> AND isWalkPlaying IS <false>:
+        /// Start walking animation
         fe3d:model_start_animation("player", "walk", -1)
-    /// Update walking speed
     IF isWalkPlaying IS <true>:
+        /// Update walking animation speed
         DEC speed = 1.0
         IF _totalBagWeight MORE _maxBagWeight:
             DEC weightFactor = _maxBagWeight
@@ -30,6 +32,7 @@ ELIF _isPickupPlaying IS <false> AND _isAbleToMove IS <true>:
         IF _isRunning IS <true>:
             MUL speed 2.0
         IF _isWalking IS <false>:
+            /// Fade walking animation fast when stopped walking
             fe3d:model_fade_animation("player", "walk", 1)
             MUL speed 2.0
         fe3d:model_set_animation_speed("player", "walk", speed)

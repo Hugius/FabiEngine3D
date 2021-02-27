@@ -1,4 +1,4 @@
-77 0
+79 0
 META script_type_update
 
 /// Check if player wants to open/close bag
@@ -36,7 +36,7 @@ fe3d:text_set_visible("iron_count", bToggled)
 fe3d:image_set_visible("coin", bToggled)
 fe3d:text_set_visible("coin_count", bToggled)
 
-/// Calculate total bag items AND show bag text
+/// Update bag items text
 LIST textNames = {"wood_count","stone_count","clay_count","seeds_count","wheat_count"}
 PUSH textNames "flour_count"
 PUSH textNames "bread_count"
@@ -54,6 +54,7 @@ LOOP:
     IF index IS size:
         BREAK
     ELSE:
+        /// Calculate total bag weight
         EDIT itemCount = _bag[index]
         CAST itemCount DEC
         EDIT weight = itemCount
@@ -61,6 +62,7 @@ LOOP:
         INCR _totalBagWeight weight
         CAST itemCount INT
         CAST itemCount STR
+        /// Update amount of digits
         EDIT strSize = misc:get_string_size(itemCount)
         IF strSize IS 1:
             EDIT itemCount = misc:concat_strings("00", itemCount)

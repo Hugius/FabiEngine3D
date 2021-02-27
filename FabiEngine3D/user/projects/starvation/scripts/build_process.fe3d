@@ -1,4 +1,4 @@
-84 61
+86 38
 META script_type_update
 
 /// Retrieve hovered building properties
@@ -53,15 +53,17 @@ IF toolID IS "hammer_stone" OR toolID IS "hammer_iron":
         BOOL afford1 = (_bag[0] MORE wp AND _bag[1] MORE sp)
         BOOL afford2 = (_bag[2] MORE cp AND _bag[9] MORE ip)
         BOOL canAfford = (afford1 IS <true> AND afford2 IS <true>)
-        /// Check if building in reach, not finished, affordable
+        /// Check if building in reach, not finished yet, affordable
         IF distance LESS _maxReach AND height LESS size.y AND canAfford IS <true>:
             fe3d:text_set_visible("build", <true>)
             /// Check if player used hammer
             IF _wasHammerPlaying IS <true> AND _isHammerPlaying IS <false>:
+                /// Increase building height
                 DEC heightIncrease = size.y
                 MUL heightIncrease 0.1000001
                 INCR height heightIncrease
                 fe3d:model_set_max_height(hoveredID, height)
+                /// Pay the price
                 DECR _bag[0] _buildablesWoodPrice[hoveredIndex]
                 DECR _bag[1] _buildablesStonePrice[hoveredIndex]
                 DECR _bag[2] _buildablesClayPrice[hoveredIndex]
@@ -79,8 +81,13 @@ IF toolID IS "hammer_stone" OR toolID IS "hammer_iron":
                         /// Start mill animation
                         fe3d:model_start_animation(hoveredID, "mill_rotation", -1)
                     ELIF idPart IS "ov":
+                        /// Add fire & smoke to the oven
                         STR fireID = misc:concat_strings("fire:", hoveredID)
+                        STR smokeID = misc:concat_strings("smoke:", hoveredID)
                         VEC3 pos = fe3d:model_get_position(hoveredID)
-                        INCR pos.y 1.0
+                        INCR pos.y 0.5
                         fe3d:billboard_place(fireID, "fire2", pos.x, pos.y, pos.z)
                         fe3d:billboard_start_animation(fireID, -1)
+                        INCR pos.y 3.0
+                        fe3d:billboard_place(smokeID, "smoke", pos.x, pos.y, pos.z)
+                        fe3d:billboard_start_animation(smokeID, -1)

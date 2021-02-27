@@ -1,4 +1,4 @@
-45 78
+9 0
 META script_type_update
 
 /// Opening or closing building menu
@@ -21,7 +21,7 @@ fe3d:text_set_visible("clay_price_build", _isBuilding)
 fe3d:text_set_visible("iron_price_build", _isBuilding)
 fe3d:text_set_visible(_buildables[_buildIndex], _isBuilding)
 
-/// Update price tag
+/// Update price tag scroll
 INT woodPrice = _buildablesWoodPrice[_buildIndex]
 INT stonePrice = _buildablesStonePrice[_buildIndex]
 INT clayPrice = _buildablesClayPrice[_buildIndex]
@@ -35,7 +35,7 @@ fe3d:text_set_content("stone_price_build", stonePrice)
 fe3d:text_set_content("clay_price_build", ironPrice)
 fe3d:text_set_content("iron_price_build", ironPrice)
 
-/// Check if player has the required resources
+/// Check if player has the required resources to place a building
 INT wp = _buildablesWoodPrice[_buildIndex]
 INT sp = _buildablesStonePrice[_buildIndex]
 INT cp = _buildablesClayPrice[_buildIndex]
@@ -46,3 +46,21 @@ DECR cp 1
 DECR ip 1
 BOOL can = (_bag[0] MORE wp AND _bag[1] MORE sp AND _bag[2] MORE cp AND _bag[9] MORE ip)
 EDIT _canAffordBuilding = can
+
+/// Check if a built building is selected
+STR hoveredID = ""
+DEC distance = 0.0
+INT listSize = misc:get_list_size("_buildNames")
+INT index = 0
+LOOP:
+    IF index IS listSize:
+        BREAK
+    EDIT hoveredID = fe3d:raycast_into_model(_buildNames[index], "", <true>)
+    EDIT distance = fe3d:raycast_into_model_distance(_buildNames[index], "", <true>)
+    IF distance IS -1.0:
+        EDIT distance = 1000.0
+    IF hoveredID NOT "":
+        EDIT _hoveredBuildingID = hoveredID
+        EDIT _hoveredBuildingDistance = distance
+        BREAK
+    INCR index 1

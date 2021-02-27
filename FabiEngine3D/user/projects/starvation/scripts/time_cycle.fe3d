@@ -1,32 +1,40 @@
-16 22
+28 31
 META script_type_update
 
-/// Update time passing
+/// Temporary values
+DEC fogIntensity = 0.5
+DEC fogDecreaser = 0.4
+DEC ambSpeed = 0.00005
+DEC dirSpeed = 0.00005
+DEC skySpeed = 0.0001
+DEC heightSpeed = 0.25
+
+/// Check if time is ready for cycle
 IF _passedTime MORE 100.0:
     EDIT _passedTime = 0.0
     EDIT _isTimeCycling = <true>
+    /// Determine if night or day
     IF _mustBeDayTime IS <true>:
         EDIT _mustBeDayTime = <false>
     ELSE:
         EDIT _mustBeDayTime = <true>
 ELSE:
+    /// Update time passing
     IF _isTimeCycling IS <false>:
         INCR _passedTime _timeSpeed
 
 /// Update day-night cycle
-DEC ambSpeed = 0.00005
-DEC dirSpeed = 0.00005
-DEC skySpeed = 0.0001
-DEC heightSpeed = 0.25
 MUL ambSpeed _timeMultiplier
 MUL dirSpeed _timeMultiplier
 MUL skySpeed _timeMultiplier
 MUL heightSpeed _timeMultiplier
 IF _isTimeCycling IS <true>:
     IF _mustBeDayTime IS <true>:
+        /// Update lighting
         INCR _ambLightIntensity ambSpeed
         INCR _dirLightIntensity dirSpeed
         DECR _skyMixValue skySpeed
+        /// Update lightsource height
         IF _skyMixValue LESS 0.5:
             INCR _dirLightPos.y heightSpeed
             INCR _dirLightPos.z heightSpeed
@@ -34,22 +42,27 @@ IF _isTimeCycling IS <true>:
             DECR _dirLightPos.y heightSpeed
             DECR _dirLightPos.z heightSpeed
     ELSE:
+        /// Update lighting
         DECR _ambLightIntensity ambSpeed
         DECR _dirLightIntensity dirSpeed
         INCR _skyMixValue skySpeed
+        /// Update lightsource height
         IF _skyMixValue MORE 0.5:
             INCR _dirLightPos.y heightSpeed
             INCR _dirLightPos.z heightSpeed
         ELSE:
             DECR _dirLightPos.y heightSpeed
             DECR _dirLightPos.z heightSpeed
+    /// Check if cycle finished
     IF _skyMixValue LESS 0.0 OR _skyMixValue MORE 1.0:
         EDIT _isTimeCycling = <false>
         IF _mustBeDayTime IS <true>:
+            /// No lightmapping or point lighting during daytime
             fe3d:graphics_disable_light_mapping()
             fe3d:graphics_disable_point_lighting()
             EDIT _areLightsOn = <false>
             EDIT _isDayTime = <true>
+            /// Reset values
             EDIT _skyMixValue = 0.0
             EDIT _ambLightIntensity = _initAmbLightIntensity
             EDIT _dirLightIntensity = _initDirLightIntensity
@@ -61,8 +74,6 @@ IF _isTimeCycling IS <true>:
             EDIT _isDayTime = <false>
 
 /// Apply cycle values
-DEC fogIntensity = 0.5
-DEC fogDecreaser = 0.4
 MUL fogDecreaser _skyMixValue
 DECR fogIntensity fogDecreaser
 VEC3 dirPos = _dirLightPos
@@ -73,8 +84,8 @@ fe3d:graphics_set_directional_light_position(dirPos.x, dirPos.y, dirPos.z)
 IF _isUnderWater IS <false>:
     fe3d:graphics_set_fog_color(fogIntensity, fogIntensity, fogIntensity)
 
-/// Update fire billboards
-CONST LIST billboards = fe3d:billboard_find_ids("fire")
+/// Update fire billboards - trading world
+CONST LIST billboards = fe3d:billboard_find_ids("fire1")
 INT index = 0
 INT size = misc:get_list_size("billboards")
 LOOP:

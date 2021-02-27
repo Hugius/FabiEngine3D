@@ -1,4 +1,4 @@
-48 34
+41 32
 META script_type_update
 
 /// Temporary values
@@ -18,7 +18,7 @@ IF _isBuilding IS <true> AND rPressed IS <true>:
 fe3d:model_set_visible(_buildables[_buildIndex], <false>)
 fe3d:text_set_visible(_buildables[_buildIndex], <false>)
 
-/// Update building choosing
+/// Update selected building index
 IF _isBuilding IS <true>:
     IF scrollDir IS -1:
         IF _buildIndex IS 0:

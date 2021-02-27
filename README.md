@@ -1153,8 +1153,8 @@ fe3d:print(camPos.x)
 - **Model**: a complex 3D object in 3D space, constisting of a mesh.
 - **Billboard**: a 2D quad in 3D space.
 - **Collision**: intersection between 2 things (for example: between the camera and a model).
-- **AABB: Axis Aligned Bounding Box, a 3D box used for collision.
-- **Raycasting: the process of "shooting" a ray from the camera position towards where the camera is looking.
+- **AABB**: Axis Aligned Bounding Box, a 3D box used for collision.
+- **Raycasting**: the process of "shooting" a ray from the camera position towards where the camera is looking.
 - **LOD model**: Level Of Detail model, a less-detailed version of a model.
 - **Ambient lighting**: the overall lightness of a scene.
 - **Directional lighting**: diffuse lighting based on a directional light source (for example: the sun).
@@ -1182,7 +1182,7 @@ fe3d:print(camPos.x)
 ### AABB system
 - Bound **model AABBs** are adjusted to the transformation (position, rotation, size) of the model **automatically**. They will only rotate in **1 direction** (the direction with the greatest angle of rotation).
 - Bound **billboard AABBs** are adjusted to the transformation (position, rotation, size) of the billboard **automatically**. They will rotate in **any** direction (XYZ combined as well).
-- **"Rotated"** AABBs will be translated and/or scaled in **90 degrees** directions (0, 90, 180, 270).
+- **"Rotated"** AABBs will be translated and/or scaled in **90 degrees** directions (0, 90, 180, 270, etc).
 - You **can** individually access (bound) AABBs that are placed through **scripting**.
 - You **cannot** individually access bound AABBs from a **scene**.
 - If you want to access an AABB bound to a model, the ID is composed like this: **modelID + "_" + aabbName**.

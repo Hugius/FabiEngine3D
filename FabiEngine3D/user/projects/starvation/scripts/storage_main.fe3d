@@ -1,4 +1,4 @@
-23 35
+28 0
 META script_type_update
 
 /// Temporary values
@@ -7,7 +7,7 @@ BOOL ePressed = fe3d:input_is_key_pressed("KEY_E")
 /// Update storage hover
 fe3d:text_set_visible("storage", <false>)
 BOOL isHovered = <false>
-STR hoveredID = fe3d:raycast_into_model("storage", "", <true>)
+STR hoveredID = fe3d:raycast_into_model("storage", "door", <true>)
 IF hoveredID NOT "" AND _isBuilding IS <false>:
     DEC distance = fe3d:raycast_into_model_distance("storage", "", <true>)
     IF distance IS -1.0:
@@ -26,3 +26,5 @@ IF ePressed IS <true>:
         fe3d:cursor_hide()
 
 /// Update storage menu interaction
+IF _isInStorage IS <true>:
+

@@ -178,23 +178,14 @@ void CoreEngine::_updateApplication()
 	// Only update 3D if engine not paused
 	if (!_isPaused)
 	{
-		// Calculate viewport position Y offset, because GUI borders are not all of the same size
-		_timer.start("cameraUpdate");
-		Ivec2 offset = Ivec2(Config::getInst().getVpPos().x, Config::getInst().getWindowSize().y - (Config::getInst().getVpPos().y + Config::getInst().getVpSize().y));
-
-		// Apply Y offset to cursor position
-		Vec2 relativeCursorPosition = Vec2(_windowManager.getCursorPos()) - Vec2(offset);
-
-		// Convert fullscreen coords to viewport coords
-		relativeCursorPosition = (relativeCursorPosition / Vec2(Config::getInst().getVpSize())) * Vec2(Config::getInst().getWindowSize());
-
 		// Camera updates
+		_timer.start("cameraUpdate");
 		_cameraManager.update(lastCursorPosition);
 		_timer.stop();
 
 		// Raycast updates
 		_timer.start("raycastUpdate");
-		_rayCaster.update(Ivec2(relativeCursorPosition));
+		_rayCaster.update(_fe3d.misc_getCursorPositionRelativeToViewport());
 		_timer.stop();
 
 		// Collision updates

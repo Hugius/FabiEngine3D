@@ -67,7 +67,7 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
-	else if (functionName == "fe3d:scene_load") // Load specific scene from file
+	else if (functionName == "fe3d:scene_load")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -78,7 +78,7 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
-	else if (functionName == "fe3d:scene_clear") // Clear all entities and reset scene
+	else if (functionName == "fe3d:scene_clear")
 	{
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
@@ -94,7 +94,7 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result));
 		}
 	}
-	else if (functionName == "fe3d:cursor_show") // Show cursor
+	else if (functionName == "fe3d:cursor_show")
 	{
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
@@ -102,12 +102,44 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
-	else if (functionName == "fe3d:cursor_hide") // Hide cursor
+	else if (functionName == "fe3d:cursor_hide")
 	{
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			_fe3d.misc_hideCursor();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+		}
+	}
+	else if (functionName == "fe3d:cursor_get_position_x")
+	{
+		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			auto result = _fe3d.misc_convertToNDC(_fe3d.misc_convertFromScreenCoords(_fe3d.misc_getCursorPositionRelativeToViewport())).x;
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
+		}
+	}
+	else if (functionName == "fe3d:cursor_get_position_y")
+	{
+		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			auto result = _fe3d.misc_convertToNDC(_fe3d.misc_convertFromScreenCoords(_fe3d.misc_getCursorPositionRelativeToViewport())).y;
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
+		}
+	}
+	else if (functionName == "fe3d:window_get_width")
+	{
+		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			auto result = _fe3d.misc_getWindowWidth();
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::INTEGER, result));
+		}
+	}
+	else if (functionName == "fe3d:window_get_height")
+	{
+		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			auto result = _fe3d.misc_getWindowHeight();
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::INTEGER, result));
 		}
 	}
 	else

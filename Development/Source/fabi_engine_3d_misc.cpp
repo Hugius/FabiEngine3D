@@ -41,7 +41,7 @@ int FabiEngine3D::misc_getRandomInt(int min, int max)
 int FabiEngine3D::misc_getMsTimeSinceEpoch()
 {
 	using namespace std::chrono;
-	return int(duration_cast<milliseconds>(system_clock::now().time_since_epoch()).count());
+	return static_cast<int>(duration_cast<milliseconds>(system_clock::now().time_since_epoch()).count());
 }
 
 int FabiEngine3D::misc_getTriangleCount()
@@ -56,7 +56,7 @@ float FabiEngine3D::misc_getRandomFloat(float min, float max)
 
 float FabiEngine3D::misc_getAspectRatio()
 {
-	return float(misc_getWindowWidth()) / float(misc_getWindowHeight());
+	return static_cast<float>(misc_getWindowWidth()) / static_cast<float>(misc_getWindowHeight());
 }
 
 float FabiEngine3D::misc_getFPS()
@@ -367,16 +367,43 @@ Vec2 FabiEngine3D::misc_convertFromNDC(Vec2 pos)
 
 Ivec2 FabiEngine3D::misc_convertToScreenCoords(Vec2 pos)
 {
-	float x = float(pos.x) * float(misc_getWindowWidth());
-	float y = float(pos.y) * float(misc_getWindowHeight());
+	float x = static_cast<float>(pos.x) * static_cast<float>(misc_getWindowWidth());
+	float y = static_cast<float>(pos.y) * static_cast<float>(misc_getWindowHeight());
 
-	return Ivec2(int(x), int(y));
+	return Ivec2(static_cast<int>(x), static_cast<int>(y));
+}
+
+Ivec2 FabiEngine3D::misc_getCursorPosition()
+{
+	Ivec2 mousePos = _core->_windowManager.getCursorPos();
+
+	return Ivec2(mousePos.x, misc_getWindowHeight() - mousePos.y);
+}
+
+Ivec2 FabiEngine3D::misc_getCursorPositionRelativeToViewport()
+{
+	// Temporary values
+	auto windowSize = Config::getInst().getWindowSize();
+	auto viewportPosition = Config::getInst().getVpPos();
+	auto viewportSize = Config::getInst().getVpSize();
+
+	// Calculate viewport position Y offset, because GUI borders are not all of the same size
+	Ivec2 offset = Ivec2(viewportPosition.x, windowSize.y - (viewportPosition.y + viewportSize.y));
+
+	// Apply Y offset to cursor position
+	Vec2 relativeCursorPosition = Vec2(_core->_windowManager.getCursorPos()) - Vec2(offset);
+
+	// Convert fullscreen coords to viewport coords
+	relativeCursorPosition = (relativeCursorPosition / Vec2(viewportSize)) * Vec2(windowSize);
+
+	// Return
+	return Ivec2(relativeCursorPosition.x, misc_getWindowHeight() - relativeCursorPosition.y);
 }
 
 Vec2 FabiEngine3D::misc_convertFromScreenCoords(Ivec2 pos)
 {
-	float x = float(pos.x) / float(misc_getWindowWidth());
-	float y = float(pos.y) / float(misc_getWindowHeight());
+	float x = static_cast<float>(pos.x) / static_cast<float>(misc_getWindowWidth());
+	float y = static_cast<float>(pos.y) / static_cast<float>(misc_getWindowHeight());
 
 	return Vec2(x, y);
 }
@@ -394,13 +421,6 @@ Vec3 FabiEngine3D::misc_getRaycastPositionOnTerrain()
 bool FabiEngine3D::misc_isRaycastPositionOnTerrainValid()
 {
 	return (_core->_rayCaster.getTerrainPoint() != Vec3(-1.0f));
-}
-
-Ivec2 FabiEngine3D::misc_getCursorPosition()
-{
-	Ivec2 mousePos = _core->_windowManager.getCursorPos();
-
-	return Ivec2(mousePos.x, misc_getWindowHeight() - mousePos.y);
 }
 
 Ivec2 FabiEngine3D::misc_getWindowSize()

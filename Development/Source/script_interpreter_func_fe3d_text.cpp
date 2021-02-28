@@ -145,6 +145,15 @@ bool ScriptInterpreter::_executeFe3dTextEntityFunction(const string& functionNam
 				true,
 				true);
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+
+			// In-engine viewport boundaries
+			if (_fe3d.engine_getSelectedGame().empty())
+			{
+				auto minPos = _fe3d.misc_convertToNDC(_fe3d.misc_convertFromScreenCoords(_fe3d.misc_getViewportPosition()));
+				auto maxPos = _fe3d.misc_convertToNDC(_fe3d.misc_convertFromScreenCoords(_fe3d.misc_getViewportPosition() + _fe3d.misc_getViewportSize()));
+				_fe3d.textEntity_setMinPosition(arguments[0].getString(), minPos);
+				_fe3d.textEntity_setMaxPosition(arguments[0].getString(), maxPos);
+			}
 		}
 	}
 	else if (functionName == "fe3d:text_delete") // Delete textEntity

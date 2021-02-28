@@ -219,6 +219,14 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 						}
 					}
 				}
+				else if (functionName == "math:pi") // PI
+				{
+					if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+					{
+						auto result = _fe3d.misc_getPI();
+						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
+					}
+				}
 				else if (functionName == "math:distance") // DISTANCE
 				{
 					auto types = { ScriptValueType::VEC3, ScriptValueType::VEC3 };

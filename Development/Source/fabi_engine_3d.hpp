@@ -804,8 +804,9 @@ public:
 	string misc_getCpuName();
 	string misc_getGpuName();
 	string misc_getOpenglVersion();
-	Ivec2 misc_convertToScreenCoords(Vec2 pos);
 	Ivec2 misc_getCursorPosition();
+	Ivec2 misc_getCursorPositionRelativeToViewport();
+	Ivec2 misc_convertToScreenCoords(Vec2 pos);
 	Ivec2 misc_getWindowSize();
 	Ivec2 misc_getViewportPosition();
 	Ivec2 misc_getViewportSize();

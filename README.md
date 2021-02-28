@@ -21,9 +21,8 @@ The engine only uses 2 libraries: OpenGL 4.5 & SDL2. It is written in C++17 and 
 14. [FabScript](#fabscript)
 15. [Function List](#function-list)
 16. [Game Execution](#game-execution)
-17. [Background](#background)
-18. [Miscellaneous](#miscellaneous)
-19. [Screenshots](#screenshots)
+17. [Appendix](#miscellaneous)
+18. [Screenshots](#screenshots)
 
 # Features
 ### Asset Loading
@@ -1061,9 +1060,9 @@ fe3d:print(camPos.x)
   Makes mouse cursor visible.
 - `fe3d:cursor_hide`() ---> `NONE`  
   Makes mouse cursor invisible.
-- `fe3d:cursor_get_x`() ---> `DEC`  
+- `fe3d:cursor_get_position_x`() ---> `DEC`  
   Returns the X position of the cursor (between -1.0 and 1.0).
-- `fe3d:cursor_get_y`() ---> `DEC`  
+- `fe3d:cursor_get_position_y`() ---> `DEC`  
   Returns the Y position of the cursor (between -1.0 and 1.0).
 - `fe3d:window_get_width`() ---> `INT`  
   Returns window width in pixels.
@@ -1142,7 +1141,8 @@ fe3d:print(camPos.x)
 - Set `selected_game` to the name of the project/game you want to run
 - Start FabiEngine3D
 
-# Background
+# Appendix
+### Terms
 - **Model**: a complex 3D object in 3D space, constisting of a mesh.
 - **Billboard**: a 2D quad in 3D space.
 - **Collision**: intersection between 2 things (for example: between the camera and a model).
@@ -1157,8 +1157,6 @@ fe3d:print(camPos.x)
 - **Motion blur**: pixels will be blurred in the first person camera direction of motion.
 - **Lens flare**: a post-processing flare overlay will be shown when the camera is looking at the directional lighting position (for example: the sun)
 - **Sky HDR**: an effect that effects the brightness of the sky based on the camera pitch angle.
-
-# Miscellaneous
 ### General information
 - It is best practice to make sure the **center** of your **mesh file** is **XYZ(0,0,0)** and the mesh itself is **above** the center.
 - The **3D coordinate system** works on decimals with **XYZ(0.0, 0.0, 0.0)** as **center** coordinate. They can go in **any** direction (positive & negative).

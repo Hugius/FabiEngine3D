@@ -476,7 +476,6 @@ fe3d:print(camPos.x)
   Returns true is a mouse **button** is toggled by a press.
 - `fe3d:input_get_mousewheel_direction`() ---> `INT`  
   Returns the direction of the scrolling wheel. 1 = up, -1 = down, 0 = not scrolling.
-
 #### Camera
 - `fe3d:camera_move`(`DEC` x, `DEC` y, `DEC` z) ---> `NONE`  
   Moves the XYZ camera position with speed **xyz**.
@@ -524,7 +523,6 @@ fe3d:print(camPos.x)
   Moves the cursor position to the middle of the screen.
 - `fe3d:camera_set_max_pitch`(`DEC` degrees) ---> `NONE`  
   Sets the maximum camera pitch in **degrees**.
-
 #### Raycasting
 - `fe3d:raycast_enable_terrain_positioning`(`DEC` distance, `DEC` precision) ---> `NONE`  
   Enables raycasting on terrain. Only works when a terrain is selected. **distance** is the maximum distance from the camera towards a point on the terrain. **precision** is how   precise the raycast should be. These values have impact on the performance!
@@ -552,7 +550,6 @@ fe3d:print(camPos.x)
   Returns the distance to the billboard that is selected. All billboards which ID starts with **billboards** will be checked (leave empty for all billboards). **occludable** means if the raycast can be blocked by other AABBs. Returns -1.0 if the billboard is not selected.
 - `fe3d:raycast_into_billboards_distance`() ---> `DEC`  
   Returns the distance to any billboard that is selected. Returns -1.0 if the billboard is not selected.
-  
 #### Collision
 - `fe3d:collision_enable_camera_terrain_response`(`DEC` height,  `DEC` speed) ---> `NONE`  
   Enables camera collision with the terrain surface (if existing). **height** is the minimum height the camera should be above the terrain. **speed** is the speed at which the camera corrects its height based on the terrain surface.
@@ -580,7 +577,6 @@ fe3d:print(camPos.x)
   Returns the ID of the billboard that has collided with the **aabbpart** of **model**. All billboards which ID starts with **billboard** will be checked (leave empty for all billboards).
 - `fe3d:collision_check_model_aabbs`(`STR` model, `STR` aabbpart, `STR` aabb) ---> `STR`  
   Returns the ID of the AABB that has collided with the **aabbpart** of **model**. All AABBs which ID starts with **aabb** will be checked (leave empty for all AABBs).
-
 #### Graphics
 - `fe3d:graphics_set_ambient_light_color`(`DEC` r, `DEC` g, `DEC` b) ---> `NONE`  
   Sets ambient lighting color as **rgb**.
@@ -650,7 +646,6 @@ fe3d:print(camPos.x)
   Enables point lighting.
 - `fe3d:graphics_disable_point_lighting`() ---> `NONE`  
   Disables point lighting.
-
 #### Sky
 - `fe3d:sky_mix_with_current`(`STR` skyID) ---> `NONE`  
   Blends the selected sky texture with the texture of **skyID**.
@@ -662,7 +657,6 @@ fe3d:print(camPos.x)
   Sets the rotation **speed** of the selected sky.
 - `fe3d:sky_get_rotation_speed`() ---> `DEC`  
   Returns the rotation **speed** of the selected sky.
-
 #### Terrain
 - `fe3d:terrain_get_max_height`() ---> `DEC`  
   Returns the maximum height of the selected terrain (based on the heightmap pixels values).
@@ -670,7 +664,6 @@ fe3d:print(camPos.x)
   Returns size of the selected terrain.
 - `fe3d:terrain_get_pixel_height`(`DEC` x, `DEC` z) ---> `DEC`  
   Returns the height of the pixel in the selected terrain height map based on X and Z. Returns 0.0 if **x** or **z** is invalid.
-
 #### Water
 - `fe3d:water_set_speed`(`DEC` x, `DEC` z) ---> `NONE`  
   Sets the rippling/waving speed of the selected water in the **x** direction and **z** direction.
@@ -684,7 +677,6 @@ fe3d:print(camPos.x)
   Sets the color of the selected water based on the **r g b** channels.
 - `fe3d:water_get_color`() ---> `VEC3`  
   Returns the color of the selected water.
-
 #### Model
 - `fe3d:model_is_existing`() ---> `BOOL`  
   Returns true if model is existing.
@@ -746,8 +738,7 @@ fe3d:print(camPos.x)
   Sets the **alpha** value for transparency of model with **ID**. Keep in mind FabiEngine3D does not support transparency sorting!
 - `fe3d:model_get_alpha`(`STR` ID) ---> `DEC`  
   Returns the alpha value of model with **ID**.
-
-#### Animations
+#### Animation
 - `fe3d:model_start_animation`(`STR` modelID, `STR` animationID, `INT` loops) ---> `NONE`  
   Starts the animation with **animationID** on model with **modelID** and repeat it **loops** times.
 - `fe3d:model_is_animation_started`(`STR` modelID, `STR` animationID) ---> `BOOL`  
@@ -768,7 +759,6 @@ fe3d:print(camPos.x)
   Sets the animation **speed** of animation with **animationID** on model with **modelID**.
 - `fe3d:model_get_animation_frame_index`(`STR` modelID, `STR` animationID) ---> `INT`  
   Returns the current animation frame index of animation with **animationID** on model with **modelID**. An index starts at 0!
-
 #### Billboard
 - `fe3d:billboard_is_existing`() ---> `BOOL`  
   Returns true if billboard is existing.
@@ -844,7 +834,6 @@ fe3d:print(camPos.x)
   Sets the text content of billboard with **ID**.
 - `fe3d:billboard_get_text`(`STR` ID) ---> `STR`  
   Returns the text content of billboard with **ID**.
-
 #### AABB
 - `fe3d:aabb_is_existing`() ---> `BOOL`  
   Returns true if AABB is existing.
@@ -876,7 +865,6 @@ fe3d:print(camPos.x)
   Sets the AABB raycasting responsiveness to **responsive** of AABB with **ID**.
 - `fe3d:aabb_set_collision_responsive`(`STR` ID, `BOOL` responsive) ---> `NONE`  
   Sets the AABB collision responsiveness to **responsive** of AABB with **ID**.
-
 #### Light
 - `fe3d:light_is_existing`() ---> `BOOL`  
   Returns true if light is existing.
@@ -910,7 +898,6 @@ fe3d:print(camPos.x)
   Sets the **distance** of light with **ID**.
 - `fe3d:light_get_distance`(`STR` ID) ---> `DEC`  
   Returns the distance of light with **ID**.
-
 #### Audio
 - `fe3d:audio_is_existing`() ---> `BOOL`  
   Returns true if audio is existing.
@@ -944,7 +931,6 @@ fe3d:print(camPos.x)
   Sets the maximum **distance** of 3D audio with **ID**.
 - `fe3d:audio_get_max_distance`(`STR` ID) ---> `DEC`  
   Returns the maximum distance of 3D audio with **ID**.
-
 #### Music
 - `fe3d:music_add_to_playlist`(`STR` previewID) ---> `NONE`  
   Adds music to the playlist based on audio with **previewID**.
@@ -962,7 +948,6 @@ fe3d:print(camPos.x)
   Returns true if music is paused.
 - `fe3d:music_resume`() ---> `NONE`  
   Resumes paused music.
-
 #### Image
 - `fe3d:image_is_existing`() ---> `BOOL`  
   Returns true if image is existing.
@@ -1008,7 +993,6 @@ fe3d:print(camPos.x)
   Sets the **alpha** value for transparency of image with **ID**.
 - `fe3d:image_get_alpha`(`STR` ID) ---> `DEC`  
   Returns the alpha value of image with **ID**.
-
 #### Text
 - `fe3d:text_is_existing`() ---> `BOOL`  
   Returns true if text is existing.
@@ -1058,7 +1042,6 @@ fe3d:print(camPos.x)
   Sets the **alpha** value for transparency of text with **ID**.
 - `fe3d:text_get_alpha`(`STR` ID) ---> `DEC`  
   Returns the alpha value of text with **ID**.
-
 #### Miscellaneous
 - `fe3d:game_pause`() ---> `NONE`  
   Pauses all internal game/engine updates if playing (except for the scripting of course).
@@ -1078,6 +1061,14 @@ fe3d:print(camPos.x)
   Makes mouse cursor visible.
 - `fe3d:cursor_hide`() ---> `NONE`  
   Makes mouse cursor invisible.
+- `fe3d:cursor_get_x`() ---> `DEC`  
+  Returns the X position of the cursor (between -1.0 and 1.0).
+- `fe3d:cursor_get_y`() ---> `DEC`  
+  Returns the Y position of the cursor (between -1.0 and 1.0).
+- `fe3d:window_get_width`() ---> `INT`  
+  Returns window width in pixels.
+- `fe3d:window_get_height`() ---> `INT`  
+  Returns window height in pixels.
 
 ### Math functions
 - `math:tan`(`DEC` degrees) ---> `DEC`  
@@ -1116,6 +1107,8 @@ fe3d:print(camPos.x)
   Returns the absolute value of **value**.
 - `math:abs`(`DEC` value) ---> `DEC`  
   Returns the absolute value of **value**.
+- `math:pi`() ---> `DEC`  
+- Returns a high-precision value of pi.
 - `math:distance`(`VEC3` first, `VEC3` second) ---> `DEC`  
   Returns the absolute distance between **first** and **second**.
 
@@ -1166,11 +1159,10 @@ fe3d:print(camPos.x)
 - **Sky HDR**: an effect that effects the brightness of the sky based on the camera pitch angle.
 
 # Miscellaneous
-### Tips & tricks
-- You can create your own custom **subfolders** within the main folder of `user\assets`.
-- Internal engine updates happen **after** the scripting updates
-- The top viewport has a button called "**uncache**" which forces the engine to load an asset again, even if it was cached.
-- You can **clear** the console output by pressing **C** when hovering the **console window**.
+### General information
+- It is best practice to make sure the **center** of your **mesh file** is **XYZ(0,0,0)** and the mesh itself is **above** the center.
+- The **3D coordinate system** works on decimals with **XYZ(0.0, 0.0, 0.0)** as **center** coordinate. They can go in **any** direction (positive & negative).
+- The **2D coordinate system** works on decimals with **XY(0.0, 0.0)** as **center** coordinate. The range is between **-1.0 and 1.0** from left to right & bottom to top.
 ### Rotations
 - Beware of the [Gimbal lock](https://en.wikipedia.org/wiki/Gimbal_lock) when rotating objects in all 3 (XYZ) directions!
 - All rotational **degrees** cannot be higher than 360 or lower than -360 (for example 500 will be 140).
@@ -1186,6 +1178,11 @@ fe3d:print(camPos.x)
 - You **can** individually access (bound) AABBs that are placed through **scripting**.
 - You **cannot** individually access bound AABBs from a **scene**.
 - If you want to access an AABB bound to a model, the ID is composed like this: **modelID + "_" + aabbName**.
+### Tips & tricks
+- You can create your own custom **subfolders** within the main folder of `user\assets`.
+- Internal engine updates happen **after** the scripting updates.
+- The top viewport has a button called "**uncache**" which forces the engine to load an asset again, even if it was cached.
+- You can **clear** the console output by pressing **C** when hovering the **console window**.
 ### Known issues
 - There is a VERY rare **bug** when using the first person camera system; if the cursor does not center anymore and the camera keeps spinning very fast, click on the **window border** once. This bug does not occur in fullscreen mode.
 ### Performance

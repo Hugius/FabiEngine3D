@@ -21,7 +21,7 @@ The engine only uses 2 libraries: OpenGL 4.5 & SDL2. It is written in C++17 and 
 14. [FabScript](#fabscript)
 15. [Function List](#function-list)
 16. [Game Execution](#game-execution)
-17. [Appendix](#miscellaneous)
+17. [Appendix](#appendix)
 18. [Screenshots](#screenshots)
 
 # Features

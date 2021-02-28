@@ -1,12 +1,36 @@
-46 74
+4 18
 META script_type_init
 
 /// Globals
 GLOB LIST _storage = {100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100}
+GLOB LIST _storageButtonIDs = {}
 GLOB BOOL _isInStorage = <false>
 
-/// GUI
-STR f = "font.ttf"
+/// Button IDs
+PUSH _storageButtonIDs "wood_plus_storage"
+PUSH _storageButtonIDs "wood_minus_storage"
+PUSH _storageButtonIDs "stone_plus_storage"
+PUSH _storageButtonIDs "stone_minus_storage"
+PUSH _storageButtonIDs "clay_plus_storage"
+PUSH _storageButtonIDs "clay_minus_storage"
+PUSH _storageButtonIDs "seeds_plus_storage"
+PUSH _storageButtonIDs "seeds_minus_storage"
+PUSH _storageButtonIDs "wheat_plus_storage"
+PUSH _storageButtonIDs "wheat_minus_storage"
+PUSH _storageButtonIDs "flour_plus_storage"
+PUSH _storageButtonIDs "flour_minus_storage"
+PUSH _storageButtonIDs "bread_plus_storage"
+PUSH _storageButtonIDs "bread_minus_storage"
+PUSH _storageButtonIDs "fish_plus_storage"
+PUSH _storageButtonIDs "fish_minus_storage"
+PUSH _storageButtonIDs "meat_plus_storage"
+PUSH _storageButtonIDs "meat_minus_storage"
+PUSH _storageButtonIDs "iron_plus_storage"
+PUSH _storageButtonIDs "iron_minus_storage"
+PUSH _storageButtonIDs "coin_plus_storage"
+PUSH _storageButtonIDs "coin_minus_storage"
+
+/// Images
 fe3d:image_place("scroll_storage", "scroll3.png", 0.0, 0.0, 0.0, 1.4, 1.0)
 fe3d:image_place("wood_storage", "wood.png", -0.5, -0.05, 0.0, 0.1, 0.1)
 fe3d:image_place("stone_storage", "stone.png", -0.4, -0.05, 0.0, 0.1, 0.1)
@@ -41,6 +65,9 @@ fe3d:image_place("iron_plus_storage", "plus.png", 0.4, 0.15, 0.0, 0.05, 0.05)
 fe3d:image_place("iron_minus_storage", "minus.png", 0.4, -0.15, 0.0, 0.05, 0.05)
 fe3d:image_place("coin_plus_storage", "plus.png", 0.5, 0.15, 0.0, 0.05, 0.05)
 fe3d:image_place("coin_minus_storage", "minus.png", 0.5, -0.15, 0.0, 0.05, 0.05)
+
+/// Text
+STR f = "font.ttf"
 fe3d:text_place("title_storage", f, "Resource storage", 0.0, 0.35, 0.0, 0.35, 0.1)
 fe3d:text_set_color("title_storage", 0.0, 0.0, 0.0)
 fe3d:text_place("wood_count_storage", f, "0", -0.5, 0.05, 0.0, 0.06, 0.075)

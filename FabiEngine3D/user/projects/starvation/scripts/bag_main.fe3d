@@ -1,4 +1,4 @@
-36 0
+62 41
 META script_type_update
 
 /// Check if player wants to open/close bag
@@ -37,18 +37,6 @@ fe3d:image_set_visible("coin_bag", bToggled)
 fe3d:text_set_visible("coin_count_bag", bToggled)
 
 /// Update bag items text
-LIST textNames = {}
-PUSH textNames "wood_count_bag"
-PUSH textNames "stone_count_bag"
-PUSH textNames "clay_count_bag"
-PUSH textNames "seeds_count_bag"
-PUSH textNames "wheat_count_bag"
-PUSH textNames "flour_count_bag"
-PUSH textNames "bread_count_bag"
-PUSH textNames "fish_count_bag"
-PUSH textNames "meat_count_bag"
-PUSH textNames "iron_count_bag"
-PUSH textNames "coin_count_bag"
 INT size = misc:get_list_size("_bag")
 INT index = 0
 INT itemCount = 0
@@ -73,7 +61,7 @@ LOOP:
             EDIT itemCount = misc:concat_strings("00", itemCount)
         ELIF strSize IS 2:
             EDIT itemCount = misc:concat_strings("0", itemCount)
-        fe3d:text_set_content(textNames[index], itemCount)
+        fe3d:text_set_content(_bagTextIDs[index], itemCount)
         CAST itemCount INT
         INCR index 1
 

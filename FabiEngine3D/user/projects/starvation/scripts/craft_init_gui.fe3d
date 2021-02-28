@@ -1,7 +1,7 @@
-21 77
+2 17
 META script_type_init
 
-/// Text content
+/// Text display content
 PUSH _craftablesText "Stone sword"
 PUSH _craftablesText "Iron sword"
 PUSH _craftablesText "Stone pickaxe"
@@ -17,18 +17,21 @@ PUSH _craftablesText "Iron hammer"
 PUSH _craftablesText "Torch"
 PUSH _craftablesText "Fishing rod"
 
-/// GUI
-STR f = "font.ttf"
+/// Images
 fe3d:image_place("scroll_craft", "scroll3.png", 0.0, -0.55, 0.0, 0.75, 0.75)
 fe3d:image_place("wood_price_craft", "wood.png", -0.05, -0.45, 0.0, 0.1, 0.1)
 fe3d:image_place("stone_price_craft", "stone.png", -0.05, -0.6, 0.0, 0.1, 0.1)
 fe3d:image_place("iron_price_craft", "iron.png", -0.05, -0.75, 0.0, 0.1, 0.1)
+fe3d:image_set_visible("scroll_craft", <false>)
+fe3d:image_set_visible("wood_price_craft", <false>)
+fe3d:image_set_visible("stone_price_craft", <false>)
+fe3d:image_set_visible("iron_price_craft", <false>)
+
+/// Text
+STR f = "font.ttf"
 fe3d:text_place("wood_price_craft", f, "0", 0.05, -0.45, 0.0, 0.03, 0.05)
 fe3d:text_place("stone_price_craft", f, "0", 0.05, -0.6, 0.0, 0.03, 0.05)
 fe3d:text_place("iron_price_craft", f, "0", 0.05, -0.75, 0.0, 0.03, 0.05)
-fe3d:text_set_color("wood_price_craft", 0.0, 0.0, 0.0)
-fe3d:text_set_color("stone_price_craft", 0.0, 0.0, 0.0)
-fe3d:text_set_color("iron_price_craft", 0.0, 0.0, 0.0)
 fe3d:text_place(_craftables[0], f, _craftablesText[0], 0.0, -0.35, 0.0, 0.33, 0.05)
 fe3d:text_place(_craftables[1], f, _craftablesText[1], 0.0, -0.35, 0.0, 0.3, 0.05)
 fe3d:text_place(_craftables[2], f, _craftablesText[2], 0.0, -0.35, 0.0, 0.39, 0.05)
@@ -43,6 +46,9 @@ fe3d:text_place(_craftables[10], f, _craftablesText[10], 0.0, -0.35, 0.0, 0.36, 
 fe3d:text_place(_craftables[11], f, _craftablesText[11], 0.0, -0.35, 0.0, 0.33, 0.05)
 fe3d:text_place(_craftables[12], f, _craftablesText[12], 0.0, -0.35, 0.0, 0.15, 0.05)
 fe3d:text_place(_craftables[13], f, _craftablesText[13], 0.0, -0.35, 0.0, 0.33, 0.05)
+fe3d:text_set_color("wood_price_craft", 0.0, 0.0, 0.0)
+fe3d:text_set_color("stone_price_craft", 0.0, 0.0, 0.0)
+fe3d:text_set_color("iron_price_craft", 0.0, 0.0, 0.0)
 fe3d:text_set_color(_craftables[0], 0.0, 0.0, 0.0)
 fe3d:text_set_color(_craftables[1], 0.0, 0.0, 0.0)
 fe3d:text_set_color(_craftables[2], 0.0, 0.0, 0.0)
@@ -57,10 +63,6 @@ fe3d:text_set_color(_craftables[10], 0.0, 0.0, 0.0)
 fe3d:text_set_color(_craftables[11], 0.0, 0.0, 0.0)
 fe3d:text_set_color(_craftables[12], 0.0, 0.0, 0.0)
 fe3d:text_set_color(_craftables[13], 0.0, 0.0, 0.0)
-fe3d:image_set_visible("scroll_craft", <false>)
-fe3d:image_set_visible("wood_price_craft", <false>)
-fe3d:image_set_visible("stone_price_craft", <false>)
-fe3d:image_set_visible("iron_price_craft", <false>)
 fe3d:text_set_visible("wood_price_craft", <false>)
 fe3d:text_set_visible("stone_price_craft", <false>)
 fe3d:text_set_visible("iron_price_craft", <false>)

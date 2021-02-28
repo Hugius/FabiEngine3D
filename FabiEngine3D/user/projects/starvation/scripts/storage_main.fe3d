@@ -1,4 +1,4 @@
-28 8
+60 15
 META script_type_update
 
 /// Temporary values
@@ -27,4 +27,39 @@ IF ePressed IS <true>:
 
 /// Update storage menu interaction
 IF _isInStorage IS <true>:
-    PASS
+    STR buttonID = ""
+    DEC buttonWidth = 0.0
+    DEC buttonHeight = 0.0
+    DEC buttonX = 0.0
+    DEC buttonY = 0.0
+    DEC cursorX = 0.0
+    DEC cursorY = 0.0
+    DEC xDifference = 0.0
+    DEC yDifference = 0.0
+    INT index = 0
+    INT size = misc:get_list_size("_storageButtonIDs")
+    LOOP:
+        IF index IS size:
+            BREAK
+        ELSE:
+            EDIT buttonID = _storageButtonIDs[index]
+            EDIT buttonWidth = fe3d:image_get_width(buttonID)
+            EDIT buttonHeight = fe3d:image_get_height(buttonID)
+            EDIT buttonX = fe3d:image_get_position_x(buttonID)
+            EDIT buttonY = fe3d:image_get_position_y(buttonID)
+            EDIT cursorX = fe3d:cursor_get_position_x()
+            EDIT cursorY = fe3d:cursor_get_position_y()
+            EDIT xDifference = buttonX
+            DECR xDifference cursorX
+            EDIT xDifference = math:abs(xDifference)
+            EDIT yDifference = buttonY
+            DECR yDifference cursorY
+            EDIT yDifference = math:abs(yDifference)
+            ///fe3d:print(buttonX)
+            ///fe3d:print(buttonY)
+            ///fe3d:print(cursorX)
+            ///fe3d:print(cursorY)
+            ///fe3d:print("")
+            IF xDifference LESS buttonWidth AND yDifference LESS buttonHeight:
+                fe3d:image_set_color(buttonID, 0.0, 0.0, 0.0)
+            INCR index 1

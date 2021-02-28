@@ -1,13 +1,27 @@
-25 78
+42 30
 META script_type_init
 
 /// Globals
-GLOB LIST _bag = {100, 100, 100, 25, 100, 100, 100, 100, 100, 100, 100}
+GLOB LIST _bag = {100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100}
+GLOB LIST _bagTextIDs = {}
 GLOB LIST _bagWeights = {2.0, 0.5, 0.25, 0.01, 0.1, 0.1, 0.5, 0.5, 0.5, 1.0, 0.025}
 GLOB DEC _totalBagWeight = 0.0
 GLOB CONST DEC _maxBagWeight = 3000.0
 
-/// Bag icons
+/// Bag text IDs
+PUSH _bagTextIDs "wood_count_bag"
+PUSH _bagTextIDs "stone_count_bag"
+PUSH _bagTextIDs "clay_count_bag"
+PUSH _bagTextIDs "seeds_count_bag"
+PUSH _bagTextIDs "wheat_count_bag"
+PUSH _bagTextIDs "flour_count_bag"
+PUSH _bagTextIDs "bread_count_bag"
+PUSH _bagTextIDs "fish_count_bag"
+PUSH _bagTextIDs "meat_count_bag"
+PUSH _bagTextIDs "iron_count_bag"
+PUSH _bagTextIDs "coin_count_bag"
+
+/// Images
 fe3d:image_place("scroll_bag", "scroll2.png", 0.925, 0.15, 0.0, 0.19, 1.45)
 fe3d:image_place("bag_closed", "bag_closed.png", 0.9, 0.85, 0.0, 0.2, 0.3)
 fe3d:image_place("bag_open", "bag_open.png", 0.9, 0.85, 0.0, 0.2, 0.3)
@@ -23,19 +37,20 @@ fe3d:image_place("meat_bag", "meat.png", 0.96, -0.15, 0.0, 0.07, 0.09)
 fe3d:image_place("iron_bag", "iron.png", 0.96, -0.25, 0.0, 0.07, 0.09)
 fe3d:image_place("coin_bag", "coin.png", 0.96, -0.35, 0.0, 0.07, 0.09)
 
-/// Bag text
-fe3d:text_place("bag_weight", "font.ttf", "22.0", 0.92, 0.92, 0.0, 0.09, 0.05)
-fe3d:text_place("wood_count_bag", "font.ttf", "0", 0.89, 0.65, 0.0, 0.045, 0.05)
-fe3d:text_place("stone_count_bag", "font.ttf", "0", 0.89, 0.55, 0.0, 0.045, 0.05)
-fe3d:text_place("clay_count_bag", "font.ttf", "0", 0.89, 0.45, 0.0, 0.045, 0.05)
-fe3d:text_place("seeds_count_bag", "font.ttf", "0", 0.89, 0.35, 0.0, 0.045, 0.05)
-fe3d:text_place("wheat_count_bag", "font.ttf", "0", 0.89, 0.25, 0.0, 0.045, 0.05)
-fe3d:text_place("flour_count_bag", "font.ttf", "0", 0.89, 0.15, 0.0, 0.045, 0.05)
-fe3d:text_place("bread_count_bag", "font.ttf", "0", 0.89, 0.05, 0.0, 0.045, 0.05)
-fe3d:text_place("fish_count_bag", "font.ttf", "0", 0.89, -0.05, 0.0, 0.045, 0.05)
-fe3d:text_place("meat_count_bag", "font.ttf", "0", 0.89, -0.15, 0.0, 0.045, 0.05)
-fe3d:text_place("iron_count_bag", "font.ttf", "0", 0.89, -0.25, 0.0, 0.045, 0.05)
-fe3d:text_place("coin_count_bag", "font.ttf", "0", 0.89, -0.35, 0.0, 0.045, 0.05)
+/// Text
+STR f = "font.ttf"
+fe3d:text_place("bag_weight", f, "22.0", 0.92, 0.92, 0.0, 0.09, 0.05)
+fe3d:text_place(_bagTextIDs[0], f, "0", 0.89, 0.65, 0.0, 0.045, 0.05)
+fe3d:text_place(_bagTextIDs[1], f, "0", 0.89, 0.55, 0.0, 0.045, 0.05)
+fe3d:text_place(_bagTextIDs[2], f, "0", 0.89, 0.45, 0.0, 0.045, 0.05)
+fe3d:text_place(_bagTextIDs[3], f, "0", 0.89, 0.35, 0.0, 0.045, 0.05)
+fe3d:text_place(_bagTextIDs[4], f, "0", 0.89, 0.25, 0.0, 0.045, 0.05)
+fe3d:text_place(_bagTextIDs[5], f, "0", 0.89, 0.15, 0.0, 0.045, 0.05)
+fe3d:text_place(_bagTextIDs[6], f, "0", 0.89, 0.05, 0.0, 0.045, 0.05)
+fe3d:text_place(_bagTextIDs[7], f, "0", 0.89, -0.05, 0.0, 0.045, 0.05)
+fe3d:text_place(_bagTextIDs[8], f, "0", 0.89, -0.15, 0.0, 0.045, 0.05)
+fe3d:text_place(_bagTextIDs[9], f, "0", 0.89, -0.25, 0.0, 0.045, 0.05)
+fe3d:text_place(_bagTextIDs[10], f, "0", 0.89, -0.35, 0.0, 0.045, 0.05)
 fe3d:text_set_color("wood_count_bag", 0.0, 0.0, 0.0)
 fe3d:text_set_color("stone_count_bag", 0.0, 0.0, 0.0)
 fe3d:text_set_color("clay_count_bag", 0.0, 0.0, 0.0)

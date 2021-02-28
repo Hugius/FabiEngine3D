@@ -1,4 +1,4 @@
-12 0
+5 35
 META script_type_init
 
 /// Buildables display text
@@ -12,21 +12,23 @@ PUSH _buildablesText "Grain Mill"
 PUSH _buildablesText "Church"
 PUSH _buildablesText "Baking Oven"
 
-/// GUI
-STR f = "font.ttf"
+/// Images
 fe3d:image_place("scroll_build", "scroll3.png", 0.0, -0.6, 0.0, 0.75, 0.6)
 fe3d:image_place("wood_price_build", "wood.png", -0.15, -0.55, 0.0, 0.1, 0.1)
 fe3d:image_place("stone_price_build", "stone.png", -0.15, -0.75, 0.0, 0.1, 0.1)
 fe3d:image_place("clay_price_build", "clay.png", 0.05, -0.55, 0.0, 0.1, 0.1)
 fe3d:image_place("iron_price_build", "iron.png", 0.05, -0.75, 0.0, 0.1, 0.1)
+fe3d:image_set_visible("scroll_build", <false>)
+fe3d:image_set_visible("wood_price_build", <false>)
+fe3d:image_set_visible("stone_price_build", <false>)
+fe3d:image_set_visible("iron_price_build", <false>)
+
+/// Text
+STR f = "font.ttf"
 fe3d:text_place("wood_price_build", f, "0", -0.05, -0.55, 0.0, 0.03, 0.05)
 fe3d:text_place("stone_price_build", f, "0", -0.05, -0.75, 0.0, 0.03, 0.05)
 fe3d:text_place("clay_price_build", f, "0", 0.15, -0.55, 0.0, 0.03, 0.05)
 fe3d:text_place("iron_price_build", f, "0", 0.15, -0.75, 0.0, 0.03, 0.05)
-fe3d:text_set_color("wood_price_build", 0.0, 0.0, 0.0)
-fe3d:text_set_color("stone_price_build", 0.0, 0.0, 0.0)
-fe3d:text_set_color("clay_price_build", 0.0, 0.0, 0.0)
-fe3d:text_set_color("iron_price_build", 0.0, 0.0, 0.0)
 fe3d:text_place(_buildables[0], f, _buildablesText[0], 0.0, -0.45, 0.0, 0.3, 0.05)
 fe3d:text_place(_buildables[1], f, _buildablesText[1], 0.0, -0.45, 0.0, 0.36, 0.05)
 fe3d:text_place(_buildables[2], f, _buildablesText[2], 0.0, -0.45, 0.0, 0.36, 0.05)
@@ -36,6 +38,10 @@ fe3d:text_place(_buildables[5], f, _buildablesText[5], 0.0, -0.45, 0.0, 0.3, 0.0
 fe3d:text_place(_buildables[6], f, _buildablesText[6], 0.0, -0.45, 0.0, 0.27, 0.05)
 fe3d:text_place(_buildables[7], f, _buildablesText[7], 0.0, -0.45, 0.0, 0.18, 0.05)
 fe3d:text_place(_buildables[8], f, _buildablesText[8], 0.0, -0.45, 0.0, 0.33, 0.05)
+fe3d:text_set_color("wood_price_build", 0.0, 0.0, 0.0)
+fe3d:text_set_color("stone_price_build", 0.0, 0.0, 0.0)
+fe3d:text_set_color("clay_price_build", 0.0, 0.0, 0.0)
+fe3d:text_set_color("iron_price_build", 0.0, 0.0, 0.0)
 fe3d:text_set_color(_buildables[0], 0.0, 0.0, 0.0)
 fe3d:text_set_color(_buildables[1], 0.0, 0.0, 0.0)
 fe3d:text_set_color(_buildables[2], 0.0, 0.0, 0.0)
@@ -45,10 +51,6 @@ fe3d:text_set_color(_buildables[5], 0.0, 0.0, 0.0)
 fe3d:text_set_color(_buildables[6], 0.0, 0.0, 0.0)
 fe3d:text_set_color(_buildables[7], 0.0, 0.0, 0.0)
 fe3d:text_set_color(_buildables[8], 0.0, 0.0, 0.0)
-fe3d:image_set_visible("scroll_build", <false>)
-fe3d:image_set_visible("wood_price_build", <false>)
-fe3d:image_set_visible("stone_price_build", <false>)
-fe3d:image_set_visible("iron_price_build", <false>)
 fe3d:text_set_visible("wood_price_build", <false>)
 fe3d:text_set_visible("stone_price_build", <false>)
 fe3d:text_set_visible("iron_price_build", <false>)

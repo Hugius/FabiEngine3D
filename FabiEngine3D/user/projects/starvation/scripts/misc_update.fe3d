@@ -1,4 +1,4 @@
-41 47
+38 75
 META script_type_update
 
 /// Temporary values
@@ -37,7 +37,7 @@ IF currentWorld IS "home":
         fe3d:camera_set_position(0.0, 9.0, 140.0)
 
 /// Update crosshair visiblity
-IF _isCrafting IS <true> OR _isBuilding IS <true>:
+IF _isCrafting IS <true> OR _isBuilding IS <true> OR _isInStorage IS <true>:
     fe3d:image_set_visible("crosshair", <false>)
 ELSE:
     fe3d:image_set_visible("crosshair", <true>)

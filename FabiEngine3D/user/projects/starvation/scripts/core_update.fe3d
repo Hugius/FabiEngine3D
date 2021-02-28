@@ -1,4 +1,4 @@
-34 23
+35 20
 META script_type_update
 META execution_entry
 
@@ -33,7 +33,8 @@ IF currentWorld IS "home":
 
 /// Storage system
 IF currentWorld IS "home":
-    EXEC storage_update
+    EXEC storage_main
+    EXEC storage_gui
 
 /// Food
 IF currentWorld IS "home":

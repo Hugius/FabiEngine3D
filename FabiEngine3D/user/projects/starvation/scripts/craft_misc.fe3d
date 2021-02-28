@@ -1,5 +1,8 @@
-4 1
+16 0
 META script_type_update
+
+/// Temporary values
+BOOL ePressed = fe3d:input_is_key_pressed("KEY_E")
 
 /// Update workbench hover
 fe3d:text_set_visible("craft", <false>)
@@ -13,9 +16,8 @@ IF hoveredID NOT "" AND _isBuilding IS <false>:
         EDIT isHovered = <true>
         fe3d:text_set_visible("craft", <true>)
 
-/// Update crafting menu - open & close
-BOOL ePressed = fe3d:input_is_key_pressed("KEY_E")
-IF ePressed IS <true> AND _isBuilding IS <false> AND _isToolPlaying IS <false>:
+/// Update crafting menu open & close
+IF ePressed IS <true> AND _isToolPlaying IS <false>:
     IF isHovered IS <true> AND _isCrafting IS <false>:
         EDIT _isCrafting = <true>
         fe3d:cursor_show()

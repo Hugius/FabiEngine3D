@@ -1,5 +1,5 @@
-@cancel 1 1 1 1 1 1 1 user\assets\textures\billboard_maps\cancel.png 1 ? ? 0 0 0 0 1
-@craft 1 1 1 1 1 0 0 user\assets\textures\billboard_maps\craft.png 1 ? ? 0 0 0 0 1
+@cancel 1 1 1 1 1 0 1 user\assets\textures\billboard_maps\cancel.png 1 ? ? 0 0 0 0 1
+@craft 1 1 1 1 1 0 1 user\assets\textures\billboard_maps\craft.png 1 ? ? 0 0 0 0 1
 @fire1 2.5 2.5 1 1 1 0 1 user\assets\textures\billboard_maps\fire1.png 1 ? ? 1 6 6 3 2.5
 @fire2 4.5 4.5 1 1 1 0 1 user\assets\textures\billboard_maps\fire2.png 1 ? ? 1 4 8 4 0.75
 @smoke 4 7.5 1 1 1 0 1 user\assets\textures\billboard_maps\smoke.png 1 ? ? 1 8 8 7 0.5

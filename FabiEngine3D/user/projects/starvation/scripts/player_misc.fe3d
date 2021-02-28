@@ -1,10 +1,10 @@
-2 20
+5 63
 META script_type_update
 
 /// Temporary values
 BOOL con1 = (_isToolPlaying IS <false> AND _isPickupPlaying IS <false>)
 BOOL con2 = (_isTalking IS <false> AND _isCrafting IS <false>)
-BOOL con3 = (_isSleeping IS <false>)
+BOOL con3 = (_isSleeping IS <false> AND _isInStorage IS <false>)
 EDIT _isAbleToMove = (con1 IS <true> AND con2 IS <true> AND con3 IS <true>)
 
 /// Camera movement

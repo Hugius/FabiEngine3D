@@ -50,12 +50,6 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 		string noWhiteSpace;
 		scriptLineTextStream >> noWhiteSpace;
 
-		// Ignore empty lines
-		if (noWhiteSpace.empty())
-		{
-			continue;
-		}
-
 		// Ignore comments
 		if (noWhiteSpace.substr(0, 3) == "///")
 		{
@@ -132,6 +126,21 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 			_passedScopeChanger = false;
 		}
 
+		// Ignore empty lines
+		if (scriptLineText.empty())
+		{
+			continue;
+		}
+
+		// Cannot start a new statement at the end of the script
+		if (lineIndex == scriptFile->getLineCount() - 1 &&
+			(scriptLineText.substr(0, _loopKeyword.size()) == _loopKeyword || scriptLineText.substr(0, _ifKeyword.size()) == _ifKeyword ||
+			scriptLineText.substr(0, _elifKeyword.size()) == _elifKeyword || scriptLineText.substr(0, _elseKeyword.size()) == _elseKeyword))
+		{
+			_throwScriptError("no statement allowed as the last line!");
+			return;
+		}
+
 		// Determine keyword type
 		if (scriptLineText.substr(0, 5) == "fe3d:") // Engine function
 		{
@@ -185,12 +194,21 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 				return;
 			}
 		}
-		else if (scriptLineText == (_loopKeyword + ":")) // Loop statement
+		else if (scriptLineText.substr(0, _loopKeyword.size()) == _loopKeyword) // Loop statement
 		{
-			loopScopeDepths.push_back(scopeDepth); // Save loop's scope depth
-			loopLineIndices.push_back(lineIndex); // Save loop's line index
-			scopeDepth++; // New depth layer
-			_scopeHasChanged = true;
+			// Check if "loop" statement ends with colon
+			if (scriptLineText == (_loopKeyword + ":"))
+			{
+				loopScopeDepths.push_back(scopeDepth); // Save loop's scope depth
+				loopLineIndices.push_back(lineIndex); // Save loop's line index
+				scopeDepth++; // New depth layer
+				_scopeHasChanged = true;
+			}
+			else
+			{
+				_throwScriptError("loop statement must end with colon!");
+				return;
+			}
 		}
 		else if (scriptLineText.substr(0, _ifKeyword.size() + 1) == _ifKeyword + " ") // If statement
 		{
@@ -310,9 +328,9 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 		}
 		else if // Create local variable
 			(
-				scriptLineText.substr(0, _constKeyword.size() + 1)	 == _constKeyword + " "	  ||
-				scriptLineText.substr(0, _listKeyword.size() + 1)	 == _listKeyword + " "	  ||
-				scriptLineText.substr(0, _vec3Keyword.size() + 1)	 == _vec3Keyword + " "	  ||
+				scriptLineText.substr(0, _constKeyword.size()   + 1) == _constKeyword   + " " ||
+				scriptLineText.substr(0, _listKeyword.size()    + 1) == _listKeyword    + " " ||
+				scriptLineText.substr(0, _vec3Keyword.size()    + 1) == _vec3Keyword    + " " ||
 				scriptLineText.substr(0, _stringKeyword.size()  + 1) == _stringKeyword  + " " ||
 				scriptLineText.substr(0, _decimalKeyword.size() + 1) == _decimalKeyword + " " ||
 				scriptLineText.substr(0, _integerKeyword.size() + 1) == _integerKeyword + " " ||

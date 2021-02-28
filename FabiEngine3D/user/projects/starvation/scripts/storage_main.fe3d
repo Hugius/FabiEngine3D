@@ -1,4 +1,4 @@
-28 0
+28 8
 META script_type_update
 
 /// Temporary values
@@ -27,4 +27,4 @@ IF ePressed IS <true>:
 
 /// Update storage menu interaction
 IF _isInStorage IS <true>:
-
+    PASS

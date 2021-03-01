@@ -109,3 +109,34 @@ const vector<string> Script::getAllScriptFileIDs()
 
 	return result;
 }
+
+const vector<pair<string, unsigned int>> Script::findKeyword(const string& keyword)
+{
+	// Temporary values
+	vector<pair<string, unsigned int>> result;
+
+	// For every scriptfile
+	for (auto& file : _scriptFiles)
+	{
+		// For every line
+		for (unsigned int lineNumber = 0; lineNumber < file->getLines().size(); lineNumber++)
+		{
+			// Temporary values
+			string line = file->getLines()[lineNumber];
+
+			// For every line
+			for (unsigned int i = 0; i < line.size(); i++)
+			{
+				// Check if keyword occurs
+				if (line.substr(i, keyword.size()) == keyword)
+				{
+					result.push_back(make_pair(file->getID(), lineNumber + 1));
+					break;
+				}
+			}
+		}
+	}
+
+	// Return
+	return result;
+}

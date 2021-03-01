@@ -24,6 +24,10 @@ void ScriptEditor::_updateGUI()
 				{
 					_gui.getGlobalScreen()->addAnswerForm("exitScriptEditor", "Save changes?", Vec2(0.0f, 0.25f));
 				}
+				else if (screen->getButton("search")->isHovered())
+				{
+					_gui.getGlobalScreen()->addValueForm("search", "Search keyword", "", Vec2(0.0f), Vec2(0.5f, 0.1f));
+				}
 				else if (screen->getButton("createScript")->isHovered())
 				{
 					_gui.getGlobalScreen()->addValueForm("scriptCreate", "New script name", "", Vec2(0.0f), Vec2(0.5f, 0.1f));
@@ -141,7 +145,28 @@ void ScriptEditor::_updateMiscellaneous()
 		_scrollingAcceleration *= 0.95f;
 		_fe3d.camera_translate(Vec3(0.0f, _scrollingAcceleration, 0.0f));
 
-		// Check if user filled wants to create a new script
+		// Check if user wants to search a keyword
+		string keyword;
+		if (_gui.getGlobalScreen()->checkValueForm("search", keyword))
+		{
+			auto result = _script.findKeyword(keyword);
+
+			// Check if keyword found nowhere
+			if (result.empty())
+			{
+				_fe3d.logger_throwInfo("Keyword \"" + keyword + "\" not found in scripts!");
+			}
+			else
+			{
+				// Print all lines in which the keyword occurred 
+				for (const auto& [fileID, lineNumber] : result)
+				{
+					_fe3d.logger_throwInfo("Keyword \"" + keyword + "\" found in script \"" + fileID + "\" @ line " + to_string(lineNumber));
+				}
+			}
+		}
+
+		// Check if user wants to create a new script
 		string newName;
 		if (_gui.getGlobalScreen()->checkValueForm("scriptCreate", newName))
 		{
@@ -179,7 +204,7 @@ void ScriptEditor::_updateMiscellaneous()
 			_gui.getGlobalScreen()->removeChoiceForm("scriptFileList");
 		}
 
-		// Check if user filled wants to rename a script
+		// Check if user wants to rename a script
 		if (_gui.getGlobalScreen()->checkValueForm("scriptRename", newName))
 		{
 			auto existingNames = _script.getAllScriptFileIDs();

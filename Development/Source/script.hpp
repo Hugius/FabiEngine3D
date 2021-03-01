@@ -20,6 +20,7 @@ public:
 	shared_ptr<ScriptFile> getScriptFile(const string& ID);
 
 	const vector<string> getAllScriptFileIDs();
+	const vector<pair<string, unsigned int>> findKeyword(const string& keyword);
 
 private:
 	FabiEngine3D& _fe3d;

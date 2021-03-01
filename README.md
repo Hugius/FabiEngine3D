@@ -97,7 +97,7 @@ The engine root directory has 3 folders:
   > This is where you can setup mostly graphical properties of your game such as shadow quality, reflection quality, etc
 
 # Project Management
-- You can create, edit/load, save and delete a project
+- You can **create/edit/save/delete** a project
 - Every **project** is a different **game** and must have a **unique** name
 - A project has its own folder in the engine `user\projects\` directory
 - An important note is to **NOT** change anything in this directory!
@@ -106,7 +106,7 @@ The engine root directory has 3 folders:
 # Environment Editor
 ### Sky
 Click [here](#sky-editor-example) to see an example
-- You can create/edit/delete sky environments that can be placed in a scene
+- You can **create/edit/delete** sky environments that can be placed in a scene
 - The sky environment is rendered as a **skybox**, which has 6 different texturs
 - You can load these 6 images from `user\assets\textures\cube_maps\`
 - The image format must be a colored 24bit `PNG`
@@ -114,7 +114,7 @@ Click [here](#sky-editor-example) to see an example
 - Properties include: lightness, color, rotation speed
 ### Terrain
 Click [here](#terrain-editor-example) to see an example
-- You can create/edit/delete terrain environments that can be placed in a scene
+- You can **create/edit/delete** terrain environments that can be placed in a scene
 - The terrain environment is generated with a **height map** texture
 - A terrain can have a **diffuse map** texture, but can also be textured using a **blend mapping**
 - In total a terrain can be textured with up to 4 different textures!
@@ -126,7 +126,7 @@ Click [here](#terrain-editor-example) to see an example
 - **Normal maps**: colored 24bit `PNG` format image file from `user\assets\textures\normal_maps\`
 ### Water
 Click [here](#water-editor-example) to see an example
-- You can create/edit/delete water environments that can be placed in a scene
+- You can **create/edit/delete** water environments that can be placed in a scene
 - The water environment is simply a **flat plane** in 3D space
 - Properties include: position, size, wave height, specular factor & intensity, wave/ripple speed, UV-repeat, color, edge transparency
 - You also have the option to show a created terrain while creating a water environment, mainly for having a reference
@@ -139,7 +139,7 @@ Click [here](#water-editor-example) to see an example
 
 # Model Editor
 Click [here](#model-editor-example) to see an example
-- You can create/edit/delete models that can be placed in scene or placed with scripting
+- You can **create/edit/delete** models that can be placed in scene or placed with scripting
 - A model must **at least** consist of a mesh
 - Textures can be added to the model as well as a custom color
 - Properties include: size, culling, alpha removal, instanced rendering, color, UV-repeat, level of detail
@@ -164,7 +164,7 @@ Click [here](#model-editor-example) to see an example
 
 # Animation Editor
 Click [here](#animation-editor-example) to see an example
-- You can create/edit/delete animations that can be applied to **models** with scripting or in the scene editor
+- You can **create/edit/delete** animations that can be applied to **models** with scripting or in the scene editor
 - You can select a **preview model** for the animation playback
 - An animation consists of 1 or more **keyframes**
 - Every keyframe has a different **target** transformation
@@ -175,7 +175,7 @@ Click [here](#animation-editor-example) to see an example
 
 # Billboard Editor
 Click [here](#billboard-editor-example) to see an example
-- You can create/edit/delete billboards that can be placed in a scene or placed with scripting
+- You can **create/edit/delete** billboards that can be placed in a scene or placed with scripting
 - There are 2 types of billboards: text & non-text/textured
 - A text billboard consists of custom (colored) text using a custom loaded **font**
 - A non-text billboard can have a **texture** and/or custom **color**
@@ -188,7 +188,7 @@ Click [here](#billboard-editor-example) to see an example
 
 # Audio Editor
 Click [here](#audio-editor-example) to see an example
-- You can create/edit/delete audio that can be placed in a scene or **placed/played** with scripting
+- You can **create/edit/delete** audio that can be placed in a scene or **placed/played** with scripting
 - **Audio data**: `WAV` format audio file from `user\assets\audio`
 - Audio can be played in **2D**
 - Audio can be played in **3D** (position, max distance, max volume)
@@ -244,7 +244,8 @@ Click [here](#scene-editor-example) to see an example
 
 # Script Editor
 Click [here](#script-editor-example) to see an example
-- You can create/edit/rename/delete scripts that will be executed in a certain order
+- You can **create/edit/rename/delete** scripts that will be executed in a certain order
+- You can **search** scripts for a certain **keyword**. The search results will be **printed** (script ID & line number).
 - You can use the **mouse** to navigate through the code or use the **arrow keys**
 - Script files have a line **limit of 100**, to force you to create small but well-structured scripts
 - You can **scroll** through lines using the mousewheel

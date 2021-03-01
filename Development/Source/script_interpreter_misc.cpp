@@ -329,6 +329,66 @@ void ScriptInterpreter::_checkEngineWarnings()
 	}
 }
 
+Vec2 ScriptInterpreter::_convertGuiPositionToViewport(Vec2 position)
+{
+	if (_fe3d.engine_getSelectedGame().empty())
+	{
+		auto sizeMultiplier = Vec2(_fe3d.misc_getViewportSize()) /
+			Vec2(static_cast<float>(_fe3d.misc_getWindowWidth()), static_cast<float>(_fe3d.misc_getWindowHeight()));
+		auto positionMultiplier = Vec2(_fe3d.misc_getViewportPosition()) /
+			Vec2(static_cast<float>(_fe3d.misc_getWindowWidth()), static_cast<float>(_fe3d.misc_getWindowHeight()));
+		position *= sizeMultiplier;
+		auto offset = Vec2(1.0f) - Vec2((positionMultiplier.x * 2.0f) + sizeMultiplier.x, (positionMultiplier.y * 2.0f) + sizeMultiplier.y);
+		position += Vec2(fabsf(offset.x), fabsf(offset.y));
+	}
+
+	return position;
+}
+
+Vec2 ScriptInterpreter::_convertGuiPositionFromViewport(Vec2 position)
+{
+	if (_fe3d.engine_getSelectedGame().empty())
+	{
+		auto sizeMultiplier = Vec2(_fe3d.misc_getViewportSize()) /
+			Vec2(static_cast<float>(_fe3d.misc_getWindowWidth()), static_cast<float>(_fe3d.misc_getWindowHeight()));
+		auto positionMultiplier = Vec2(_fe3d.misc_getViewportPosition()) /
+			Vec2(static_cast<float>(_fe3d.misc_getWindowWidth()), static_cast<float>(_fe3d.misc_getWindowHeight()));
+		auto offset = Vec2(1.0f) - Vec2((positionMultiplier.x * 2.0f) + sizeMultiplier.x, (positionMultiplier.y * 2.0f) + sizeMultiplier.y);
+		position -= Vec2(fabsf(offset.x), fabsf(offset.y));
+		sizeMultiplier = Vec2(static_cast<float>(_fe3d.misc_getWindowWidth()), static_cast<float>(_fe3d.misc_getWindowHeight())) /
+			Vec2(_fe3d.misc_getViewportSize());
+		positionMultiplier = Vec2(static_cast<float>(_fe3d.misc_getWindowWidth()), static_cast<float>(_fe3d.misc_getWindowHeight())) /
+			Vec2(_fe3d.misc_getViewportPosition());
+		position *= sizeMultiplier;
+	}
+
+	return position;
+}
+
+Vec2 ScriptInterpreter::_convertGuiSizeToViewport(Vec2 size)
+{
+	if (_fe3d.engine_getSelectedGame().empty())
+	{
+		auto sizeMultiplier = Vec2(_fe3d.misc_getViewportSize()) /
+			Vec2(static_cast<float>(_fe3d.misc_getWindowWidth()), static_cast<float>(_fe3d.misc_getWindowHeight()));
+		size = size * sizeMultiplier;
+	}
+
+	return size;
+}
+
+Vec2 ScriptInterpreter::_convertGuiSizeFromViewport(Vec2 size)
+{
+	if (_fe3d.engine_getSelectedGame().empty())
+	{
+		auto sizeMultiplier = Vec2(static_cast<float>(_fe3d.misc_getWindowWidth()), static_cast<float>(_fe3d.misc_getWindowHeight())) /
+			Vec2(_fe3d.misc_getViewportSize());
+		size = size * sizeMultiplier;
+	}
+
+	return size;
+}
+
 bool ScriptInterpreter::hasThrownError()
 {
 	return _hasThrownError;

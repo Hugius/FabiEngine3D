@@ -1,4 +1,4 @@
-77 32
+34 48
 META script_type_update
 
 /// Prepare crafting process
@@ -19,17 +19,21 @@ IF _isCrafting IS <true> AND confirmed IS <true>:
     DECR ip 1
     EDIT confirmed = (_bag[0] MORE wp AND _bag[1] MORE sp AND _bag[9] MORE ip)
 
-/// Confirm & cancel buttons hovering
+/// Confirm button hovering
 IF confirmed IS <true> AND _isCrafting IS <true>:
     fe3d:billboard_set_size("craft_confirm", 1.25, 1.25)
     fe3d:billboard_set_color("craft_confirm", 1.0, 1.0, 1.0)
 ELSE:
     fe3d:billboard_set_size("craft_confirm", 1.0, 1.0)
     fe3d:billboard_set_color("craft_confirm", 0.0, 0.0, 0.0)
+
+/// Cancel button hovering
 IF cancelled IS <true> AND _isCrafting IS <true>:
     fe3d:billboard_set_size("craft_cancel", 1.25, 1.25)
+    fe3d:billboard_set_color("craft_cancel", 1.0, 0.0, 0.0)
 ELSE:
     fe3d:billboard_set_size("craft_cancel", 1.0, 1.0)
+    fe3d:billboard_set_color("craft_cancel", 0.25, 0.0, 0.0)
 
 /// Update crafting menu interaction
 IF _isCrafting IS <true>:

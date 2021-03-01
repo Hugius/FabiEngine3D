@@ -1,40 +1,43 @@
-62 41
+78 34
 META script_type_update
 
 /// Check if player wants to open/close bag
-BOOL bToggled = fe3d:input_is_key_toggled("KEY_B")
-IF bToggled IS <true>:
-    fe3d:image_set_visible("bag_open", <true>)
-    fe3d:image_set_visible("scroll_bag", <true>)
-    fe3d:image_set_visible("bag_closed", <false>)
-ELSE:
-    fe3d:image_set_visible("bag_open", <false>)
-    fe3d:image_set_visible("scroll_bag", <false>)
-    fe3d:image_set_visible("bag_closed", <true>)
+BOOL bPressed = fe3d:input_is_key_pressed("KEY_B")
+IF bPressed IS <true>:
+    IF _isBagOpen IS <true>:
+        EDIT _isBagOpen = <false>
+        fe3d:image_set_visible("bag_open", <false>)
+        fe3d:image_set_visible("scroll_bag", <false>)
+        fe3d:image_set_visible("bag_closed", <true>)
+    ELSE:
+        EDIT _isBagOpen = <true>
+        fe3d:image_set_visible("bag_open", <true>)
+        fe3d:image_set_visible("scroll_bag", <true>)
+        fe3d:image_set_visible("bag_closed", <false>)
 
 /// Update bag items visibility
-fe3d:image_set_visible("wood_bag", bToggled)
-fe3d:text_set_visible("wood_count_bag", bToggled)
-fe3d:image_set_visible("stone_bag", bToggled)
-fe3d:text_set_visible("stone_count_bag", bToggled)
-fe3d:image_set_visible("clay_bag", bToggled)
-fe3d:text_set_visible("clay_count_bag", bToggled)
-fe3d:image_set_visible("seeds_bag", bToggled)
-fe3d:text_set_visible("seeds_count_bag", bToggled)
-fe3d:image_set_visible("wheat_bag", bToggled)
-fe3d:text_set_visible("wheat_count_bag", bToggled)
-fe3d:image_set_visible("flour_bag", bToggled)
-fe3d:text_set_visible("flour_count_bag", bToggled)
-fe3d:image_set_visible("bread_bag", bToggled)
-fe3d:text_set_visible("bread_count_bag", bToggled)
-fe3d:image_set_visible("fish_bag", bToggled)
-fe3d:text_set_visible("fish_count_bag", bToggled)
-fe3d:image_set_visible("meat_bag", bToggled)
-fe3d:text_set_visible("meat_count_bag", bToggled)
-fe3d:image_set_visible("iron_bag", bToggled)
-fe3d:text_set_visible("iron_count_bag", bToggled)
-fe3d:image_set_visible("coin_bag", bToggled)
-fe3d:text_set_visible("coin_count_bag", bToggled)
+fe3d:image_set_visible("wood_bag", _isBagOpen)
+fe3d:text_set_visible("wood_count_bag", _isBagOpen)
+fe3d:image_set_visible("stone_bag", _isBagOpen)
+fe3d:text_set_visible("stone_count_bag", _isBagOpen)
+fe3d:image_set_visible("clay_bag", _isBagOpen)
+fe3d:text_set_visible("clay_count_bag", _isBagOpen)
+fe3d:image_set_visible("seeds_bag", _isBagOpen)
+fe3d:text_set_visible("seeds_count_bag", _isBagOpen)
+fe3d:image_set_visible("wheat_bag", _isBagOpen)
+fe3d:text_set_visible("wheat_count_bag", _isBagOpen)
+fe3d:image_set_visible("flour_bag", _isBagOpen)
+fe3d:text_set_visible("flour_count_bag", _isBagOpen)
+fe3d:image_set_visible("bread_bag", _isBagOpen)
+fe3d:text_set_visible("bread_count_bag", _isBagOpen)
+fe3d:image_set_visible("fish_bag", _isBagOpen)
+fe3d:text_set_visible("fish_count_bag", _isBagOpen)
+fe3d:image_set_visible("meat_bag", _isBagOpen)
+fe3d:text_set_visible("meat_count_bag", _isBagOpen)
+fe3d:image_set_visible("iron_bag", _isBagOpen)
+fe3d:text_set_visible("iron_count_bag", _isBagOpen)
+fe3d:image_set_visible("coin_bag", _isBagOpen)
+fe3d:text_set_visible("coin_count_bag", _isBagOpen)
 
 /// Update bag items text
 INT size = misc:get_list_size("_bag")
@@ -73,8 +76,7 @@ DECR inverseColor totalWeight
 fe3d:image_set_color("bag_open", 1.0, inverseColor, inverseColor)
 
 /// Update bag weight text
-BOOL isBagOpen = fe3d:image_is_visible("bag_open")
-fe3d:text_set_visible("bag_weight", isBagOpen)
+fe3d:text_set_visible("bag_weight", _isBagOpen)
 EDIT totalWeight = _totalBagWeight
 CAST totalWeight STR
 EDIT totalWeight = misc:get_string_part(totalWeight, 0, 4)

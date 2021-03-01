@@ -104,6 +104,10 @@ private:
 	bool _validateMouseInputString(const string& inputString);
 	void _throwScriptError(const string& message);
 	void _checkEngineWarnings();
+	Vec2 _convertGuiPositionToViewport(Vec2 position);
+	Vec2 _convertGuiPositionFromViewport(Vec2 position);
+	Vec2 _convertGuiSizeToViewport(Vec2 size);
+	Vec2 _convertGuiSizeFromViewport(Vec2 size);
 
 	// Instances
 	FabiEngine3D& _fe3d;

@@ -121,27 +121,15 @@ bool ScriptInterpreter::_executeFe3dTextEntityFunction(const string& functionNam
 			// Compose full texture path
 			auto fontPath = string("user\\assets\\fonts\\") + arguments[1].getString();
 
-			// Calculate size in viewport
-			auto sizeMultiplier = Vec2(_fe3d.misc_getViewportSize()) /
-				Vec2(static_cast<float>(_fe3d.misc_getWindowWidth()), static_cast<float>(_fe3d.misc_getWindowHeight()));
-			auto size = Vec2(arguments[6].getDecimal(), arguments[7].getDecimal()) * sizeMultiplier;
-
-			// Calculate position in viewport
-			auto positionMultiplier = Vec2(_fe3d.misc_getViewportPosition()) /
-				Vec2(static_cast<float>(_fe3d.misc_getWindowWidth()), static_cast<float>(_fe3d.misc_getWindowHeight()));
-			auto position = Vec2(arguments[3].getDecimal(), arguments[4].getDecimal()) * sizeMultiplier;
-			auto offset = Vec2(1.0f) - Vec2((positionMultiplier.x * 2.0f) + sizeMultiplier.x, (positionMultiplier.y * 2.0f) + sizeMultiplier.y);
-			position += Vec2(fabsf(offset.x), fabsf(offset.y));
-
 			// Add text
 			_fe3d.textEntity_add(
 				arguments[0].getString(),
 				arguments[2].getString(),
 				fontPath,
 				Vec3(1.0f),
-				position,
+				_convertGuiPositionToViewport(Vec2(arguments[3].getDecimal(), arguments[4].getDecimal())),
 				arguments[5].getDecimal(),
-				size,
+				_convertGuiSizeToViewport(Vec2(arguments[6].getDecimal(), arguments[7].getDecimal())),
 				true,
 				true);
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
@@ -221,7 +209,8 @@ bool ScriptInterpreter::_executeFe3dTextEntityFunction(const string& functionNam
 			// Validate existing text ID
 			if (_validateFe3dTextEntity(arguments[0].getString()))
 			{
-				_fe3d.textEntity_setPosition(arguments[0].getString(), Vec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
+				Vec2 position = _convertGuiPositionToViewport(Vec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
+				_fe3d.textEntity_setPosition(arguments[0].getString(), position);
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}
@@ -236,7 +225,8 @@ bool ScriptInterpreter::_executeFe3dTextEntityFunction(const string& functionNam
 			// Validate existing text ID
 			if (_validateFe3dTextEntity(arguments[0].getString()))
 			{
-				_fe3d.textEntity_move(arguments[0].getString(), Vec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
+				Vec2 factor = _convertGuiSizeToViewport(Vec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
+				_fe3d.textEntity_move(arguments[0].getString(), factor);
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}
@@ -251,8 +241,8 @@ bool ScriptInterpreter::_executeFe3dTextEntityFunction(const string& functionNam
 			// Validate existing text ID
 			if (_validateFe3dTextEntity(arguments[0].getString()))
 			{
-				auto result = _fe3d.textEntity_getPosition(arguments[0].getString()).x;
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
+				auto result = _fe3d.textEntity_getPosition(arguments[0].getString());
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, _convertGuiPositionFromViewport(result).x));
 			}
 		}
 	}
@@ -266,8 +256,8 @@ bool ScriptInterpreter::_executeFe3dTextEntityFunction(const string& functionNam
 			// Validate existing text ID
 			if (_validateFe3dTextEntity(arguments[0].getString()))
 			{
-				auto result = _fe3d.textEntity_getPosition(arguments[0].getString()).y;
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
+				auto result = _fe3d.textEntity_getPosition(arguments[0].getString());
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, _convertGuiPositionFromViewport(result).y));
 			}
 		}
 	}
@@ -326,7 +316,8 @@ bool ScriptInterpreter::_executeFe3dTextEntityFunction(const string& functionNam
 			// Validate existing text ID
 			if (_validateFe3dTextEntity(arguments[0].getString()))
 			{
-				_fe3d.textEntity_setSize(arguments[0].getString(), Vec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
+				Vec2 size = _convertGuiSizeToViewport(Vec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
+				_fe3d.textEntity_setSize(arguments[0].getString(), size);
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}
@@ -341,7 +332,8 @@ bool ScriptInterpreter::_executeFe3dTextEntityFunction(const string& functionNam
 			// Validate existing text ID
 			if (_validateFe3dTextEntity(arguments[0].getString()))
 			{
-				_fe3d.textEntity_scale(arguments[0].getString(), Vec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
+				Vec2 factor = _convertGuiSizeToViewport(Vec2(arguments[1].getDecimal(), arguments[2].getDecimal()));
+				_fe3d.textEntity_scale(arguments[0].getString(), factor);
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}
@@ -356,8 +348,8 @@ bool ScriptInterpreter::_executeFe3dTextEntityFunction(const string& functionNam
 			// Validate existing text ID
 			if (_validateFe3dTextEntity(arguments[0].getString()))
 			{
-				auto result = _fe3d.textEntity_getSize(arguments[0].getString()).x;
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
+				auto result = _fe3d.textEntity_getSize(arguments[0].getString());
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, _convertGuiSizeFromViewport(result).x));
 			}
 		}
 	}
@@ -371,8 +363,8 @@ bool ScriptInterpreter::_executeFe3dTextEntityFunction(const string& functionNam
 			// Validate existing text ID
 			if (_validateFe3dTextEntity(arguments[0].getString()))
 			{
-				auto result = _fe3d.textEntity_getSize(arguments[0].getString()).y;
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
+				auto result = _fe3d.textEntity_getSize(arguments[0].getString());
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, _convertGuiSizeFromViewport(result).y));
 			}
 		}
 	}

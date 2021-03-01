@@ -1,4 +1,4 @@
-60 15
+57 52
 META script_type_update
 
 /// Temporary values
@@ -44,7 +44,9 @@ IF _isInStorage IS <true>:
         ELSE:
             EDIT buttonID = _storageButtonIDs[index]
             EDIT buttonWidth = fe3d:image_get_width(buttonID)
+            MUL buttonWidth 0.5
             EDIT buttonHeight = fe3d:image_get_height(buttonID)
+            MUL buttonHeight 0.5
             EDIT buttonX = fe3d:image_get_position_x(buttonID)
             EDIT buttonY = fe3d:image_get_position_y(buttonID)
             EDIT cursorX = fe3d:cursor_get_position_x()
@@ -55,11 +57,8 @@ IF _isInStorage IS <true>:
             EDIT yDifference = buttonY
             DECR yDifference cursorY
             EDIT yDifference = math:abs(yDifference)
-            ///fe3d:print(buttonX)
-            ///fe3d:print(buttonY)
-            ///fe3d:print(cursorX)
-            ///fe3d:print(cursorY)
-            ///fe3d:print("")
             IF xDifference LESS buttonWidth AND yDifference LESS buttonHeight:
-                fe3d:image_set_color(buttonID, 0.0, 0.0, 0.0)
+                fe3d:image_set_color(buttonID, 0.0, 0.5, 0.0)
+            ELSE:
+                fe3d:image_set_color(buttonID, 1.0, 1.0, 1.0)
             INCR index 1

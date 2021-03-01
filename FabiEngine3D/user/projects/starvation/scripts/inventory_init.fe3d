@@ -1,4 +1,4 @@
-6 24
+8 28
 META script_type_init
 
 /// Globals
@@ -7,7 +7,7 @@ GLOB LIST _durabilities = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 }
 GLOB CONST DEC _durabilityHit = 0.1
 GLOB INT _equipIndex = 0
 GLOB INT _lastEquipIndex = 0
-GLOB BOOL _isInvOpen = <false>
+GLOB BOOL _isInvOpen = <true>
 
 /// Inventory slots
 fe3d:image_place("slot1", "slot.png", -0.5,   -0.85, 0.0, 0.125, 0.2)

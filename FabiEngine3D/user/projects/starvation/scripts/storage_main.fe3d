@@ -1,4 +1,4 @@
-57 52
+14 14
 META script_type_update
 
 /// Temporary values
@@ -13,8 +13,9 @@ IF hoveredID NOT "" AND _isBuilding IS <false>:
     IF distance IS -1.0:
         EDIT distance = 1000.0
     IF distance LESS _maxReach AND _isInStorage IS <false>:
-        EDIT isHovered = <true>
-        fe3d:text_set_visible("storage", <true>)
+        IF _isToolPlaying IS <false>:
+            EDIT isHovered = <true>
+            fe3d:text_set_visible("storage", <true>)
 
 /// Update storage menu open & close
 IF ePressed IS <true>:

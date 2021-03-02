@@ -87,7 +87,7 @@ private:
 	float _pitch = 0.0f;
 	float _nearZ = 0.0f;
 	float _farZ = 0.0f;
-	float _mouseSensitivity = 1.0f;
+	float _mouseSensitivity = 0.01f;
 	float _mouseOffset = 0.0f;
 	float _maxPitch = 0.0f;
 

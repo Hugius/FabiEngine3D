@@ -234,14 +234,14 @@ void FabiEngine3D::misc_cacheAudioMultiThreaded(const vector<string>& filePaths)
 	_core->_audioLoader.cacheChunksMultiThreaded(filePaths);
 }
 
-string FabiEngine3D::misc_getWinExplorerFilename(const string& startingDir, const string& fileType)
+string FabiEngine3D::misc_getWinExplorerFilename(const string& startingDirectory, const string& fileType)
 {
 	// Prepare filter C-string
 	string filter = fileType;
 	filter.push_back('\0');
 	filter += "*." + fileType + '\0';
-	auto startingDirectoryString = string(misc_getRootDirectory() + startingDir);
-	auto startingDirectory = startingDirectoryString.c_str();
+	auto startingDirectoryString = string(misc_getRootDirectory() + startingDirectory);
+	auto startingDirectoryStringC = startingDirectoryString.c_str();
 
 	// Open file explorer
 	OPENFILENAME ofn;
@@ -258,7 +258,7 @@ string FabiEngine3D::misc_getWinExplorerFilename(const string& startingDir, cons
 	ofn.lpstrFileTitle = titleBuffer;
 	ofn.lpstrFileTitle[0] = '\0';
 	ofn.nMaxFileTitle = sizeof(titleBuffer);
-	ofn.lpstrInitialDir = startingDirectory; // Starting directory
+	ofn.lpstrInitialDir = startingDirectoryStringC; // Starting directory
 	ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
 	GetOpenFileName(&ofn);
 
@@ -382,22 +382,30 @@ Ivec2 FabiEngine3D::misc_getCursorPosition()
 
 Ivec2 FabiEngine3D::misc_getCursorPositionRelativeToViewport()
 {
-	// Temporary values
-	auto windowSize = Config::getInst().getWindowSize();
-	auto viewportPosition = Config::getInst().getVpPos();
-	auto viewportSize = Config::getInst().getVpSize();
+	if (engine_getSelectedGame().empty())
+	{
+		// Temporary values
+		auto windowSize = Config::getInst().getWindowSize();
+		auto viewportPosition = Config::getInst().getVpPos();
+		auto viewportSize = Config::getInst().getVpSize();
 
-	// Calculate viewport position Y offset, because GUI borders are not all of the same size
-	Ivec2 offset = Ivec2(viewportPosition.x, windowSize.y - (viewportPosition.y + viewportSize.y));
+		// Calculate viewport position Y offset, because GUI borders are not all of the same size
+		Ivec2 offset = Ivec2(viewportPosition.x, windowSize.y - (viewportPosition.y + viewportSize.y));
 
-	// Apply Y offset to cursor position
-	Vec2 relativeCursorPosition = Vec2(_core->_windowManager.getCursorPos()) - Vec2(offset);
+		// Apply Y offset to cursor position
+		Vec2 relativeCursorPosition = Vec2(_core->_windowManager.getCursorPos()) - Vec2(offset);
 
-	// Convert fullscreen coords to viewport coords
-	relativeCursorPosition = (relativeCursorPosition / Vec2(viewportSize)) * Vec2(windowSize);
+		// Convert fullscreen coords to viewport coords
+		relativeCursorPosition = (relativeCursorPosition / Vec2(viewportSize)) * Vec2(windowSize);
 
-	// Return
-	return Ivec2(relativeCursorPosition.x, misc_getWindowHeight() - relativeCursorPosition.y);
+		// Return
+		Ivec2 result = Ivec2(relativeCursorPosition);
+		return Ivec2(result.x, misc_getWindowHeight() - result.y);
+	}
+	else
+	{
+		return misc_getCursorPosition();
+	}
 }
 
 Vec2 FabiEngine3D::misc_convertFromScreenCoords(Ivec2 pos)

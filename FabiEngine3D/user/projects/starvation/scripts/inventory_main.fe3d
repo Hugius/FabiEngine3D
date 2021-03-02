@@ -1,9 +1,13 @@
-82 0
+3 75
 META script_type_update
 
 /// Check if player is allowed to have the inventory open
-IF _isCrafting IS <true> OR _isBuilding IS <true>:
-    EDIT _isInvOpen = <false>
+IF _isCrafting IS <true> OR _isBuilding IS <true> OR _isInStorage IS <true>:
+    IF _isInvOpen IS <true>:
+        EDIT _wasInvOpen = _isInvOpen
+        EDIT _isInvOpen = <false>
+ELSE:
+    EDIT _isInvOpen = _wasInvOpen
 
 /// Check if any tool animation is playing
 BOOL isAnimPlaying = <false>

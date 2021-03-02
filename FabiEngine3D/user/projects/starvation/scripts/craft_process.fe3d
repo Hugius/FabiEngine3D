@@ -30,10 +30,10 @@ ELSE:
 /// Cancel button hovering
 IF cancelled IS <true> AND _isCrafting IS <true>:
     fe3d:billboard_set_size("craft_cancel", 1.25, 1.25)
-    fe3d:billboard_set_color("craft_cancel", 1.0, 0.0, 0.0)
+    fe3d:billboard_set_color("craft_cancel", 1.0, 0.1, 0.1)
 ELSE:
     fe3d:billboard_set_size("craft_cancel", 1.0, 1.0)
-    fe3d:billboard_set_color("craft_cancel", 0.25, 0.0, 0.0)
+    fe3d:billboard_set_color("craft_cancel", 0.2, 0.0, 0.0)
 
 /// Update crafting menu interaction
 IF _isCrafting IS <true>:

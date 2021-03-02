@@ -1,4 +1,4 @@
-68 16
+60 18
 META script_type_init
 
 /// Globals
@@ -64,7 +64,7 @@ fe3d:camera_set_position(-140.0, 35.0, -87.5)
 fe3d:camera_set_yaw(180.0)
 fe3d:camera_set_pitch(0.0)
 fe3d:camera_enable_first_person_view()
-fe3d:camera_set_cursor_speed(5.0)
+fe3d:camera_set_cursor_speed(0.05)
 fe3d:camera_set_max_pitch(75.0)
 
 /// Player model + physics

@@ -76,8 +76,8 @@ void CameraManager::update(Ivec2 lastCursorPosition)
 		float yOffset = static_cast<float>(yMiddle - currenCursorPosition.y);
 
 		// Applying mouse sensitivity
-		xOffset *= (_mouseSensitivity) / 100.0f;
-		yOffset *= (_mouseSensitivity) / 100.0f;
+		xOffset *= _mouseSensitivity;
+		yOffset *= _mouseSensitivity;
 
 		// Calculate overall mouse offset
 		_mouseOffset = (xOffset + yOffset) / 2.0f;

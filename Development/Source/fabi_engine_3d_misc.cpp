@@ -79,6 +79,11 @@ float FabiEngine3D::misc_radiansToDegrees(float angle)
 	return Math::radiansToDegrees(angle);
 }
 
+float FabiEngine3D::misc_stopMillisecondTimer()
+{
+	return _core->_timer.stop();
+}
+
 void FabiEngine3D::misc_showCursor()
 {
 	_core->_windowManager.showCursor();
@@ -232,6 +237,11 @@ void FabiEngine3D::misc_cacheTexturesMultiThreaded3D(const vector<array<string, 
 void FabiEngine3D::misc_cacheAudioMultiThreaded(const vector<string>& filePaths)
 {
 	_core->_audioLoader.cacheChunksMultiThreaded(filePaths);
+}
+
+void FabiEngine3D::misc_startMillisecondTimer()
+{
+	_core->_timer.start();
 }
 
 string FabiEngine3D::misc_getWinExplorerFilename(const string& startingDirectory, const string& fileType)

@@ -29,7 +29,9 @@ public:
 	bool isAnimationStarted(const string& animationID, const string& modelID);
 	bool isAnimationPlaying(const string& animationID, const string& modelID);
 	bool isAnimationPaused(const string& animationID, const string& modelID);
+
 	unsigned int getAnimationFrameIndex(const string& animationID, const string& modelID);
+
 	const vector<string> getLoadedAnimationIDs();
 	const vector<string> getPlayingAnimationNames();
 	const vector<string> getPlayingAnimationNames(const string& modelID);

@@ -781,6 +781,7 @@ public:
 	void misc_cacheTexturesMultiThreaded2D(const vector<string>& filePaths);
 	void misc_cacheTexturesMultiThreaded3D(const vector<array<string, 6>>& filePaths);
 	void misc_cacheAudioMultiThreaded(const vector<string>& filePaths);
+	void misc_startMillisecondTimer();
 
 	// Miscellaneous interface - getters
 	int misc_getUniqueInt(int min, int max);
@@ -795,6 +796,7 @@ public:
 	float misc_getPI();
 	float misc_degreesToRadians(float angle);
 	float misc_radiansToDegrees(float angle);
+	float misc_stopMillisecondTimer();
 	string misc_getWinExplorerFilename(const string& startingDirectory, const string& fileType);
 	string misc_vec2str(Ivec2 vec);
 	string misc_vec2str(Vec2 vec);

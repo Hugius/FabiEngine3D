@@ -19,7 +19,7 @@ public:
 
 	void load();
 	void executeInitialization();
-	void executeUpdate();
+	void executeUpdate(bool debug);
 	void executeDestruction();
 	void unload();
 
@@ -119,6 +119,9 @@ private:
 	AudioEditor& _audioEditor;
 	EnvironmentEditor& _environmentEditor;
 
+	// Dictionaries
+	map<string, float> _debuggingTimes;
+
 	// Stacks
 	vector<vector<ScriptVariable>> _localVariablesStack;
 	vector<string> _currentScriptIDsStack;
@@ -179,6 +182,7 @@ private:
 	bool _scopeHasChanged = false;
 	bool _passedScopeChanger = false;
 	bool _startedInitialization = false;
+	bool _isDebugging = false;
 
 	// String to input type map
 	static inline const map<string, InputType> KEY_INPUT_STRING_MAP =

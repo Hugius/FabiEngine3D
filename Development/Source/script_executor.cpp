@@ -24,14 +24,14 @@ void ScriptExecutor::load()
 	_validateExecution();
 }
 
-void ScriptExecutor::update()
+void ScriptExecutor::update(bool debug)
 {
 	if (_isInitialized && _isRunning)
 	{
 		// Skip first frame, then update fulltime
-		if (!_skipUpdate)
+		if (!_skipUpdate || debug)
 		{
-			_scriptInterpreter.executeUpdate();
+			_scriptInterpreter.executeUpdate(debug);
 		}
 		else
 		{

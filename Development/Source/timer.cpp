@@ -1,20 +1,46 @@
 #include "Timer.hpp"
 
-// Start measuring time
-void Timer::start(const string& ID)
+void Timer::start()
 {
+	// Stop last
+	if (_isTiming)
+	{
+		stop();
+	}
+
+	// Start new
 	QueryPerformanceFrequency(&_frequency);
 	QueryPerformanceCounter(&_time1);
+	_isTiming = true;
+}
+
+float Timer::stop()
+{
+	QueryPerformanceCounter(&_time2);
+	_isTiming = false;
+	return static_cast<float>((_time2.QuadPart - _time1.QuadPart) * 1000.0f / _frequency.QuadPart);
+}
+
+void Timer::startDeltaPart(const string& ID)
+{
+	// Stop last
+	if (!_currentID.empty())
+	{
+		stopDeltaPart();
+	}
+
+	// Start new
+	QueryPerformanceFrequency(&_specificFrequency);
+	QueryPerformanceCounter(&_specificTime1);
 	_currentID = ID;
 }
 
-// Calculate the delta time
-void Timer::stop()
+void Timer::stopDeltaPart()
 {
 	if (!_currentID.empty())
 	{
-		QueryPerformanceCounter(&_time2);
-		_deltaParts[_currentID] = static_cast<float>((_time2.QuadPart - _time1.QuadPart) * 1000.0f / _frequency.QuadPart);
+		QueryPerformanceCounter(&_specificTime2);
+		_deltaParts[_currentID] = static_cast<float>((_specificTime2.QuadPart - _specificTime1.QuadPart) * 1000.0f / _specificFrequency.QuadPart);
 	}
 }
 

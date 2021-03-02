@@ -9,7 +9,7 @@ public:
 		AnimationEditor& animationEditor, BillboardEditor& billboardEditor, AudioEditor& audioEditor, EnvironmentEditor& environmentEditor);
 
 	void load();
-	void update();
+	void update(bool debug);
 	void pause();
 	void unpause();
 	void unload();

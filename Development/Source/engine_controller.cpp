@@ -78,7 +78,7 @@ void EngineController::FE3D_CONTROLLER_UPDATE()
 			_leftViewportController.getAnimationEditor().update();
 
 			// Update script execution
-			_leftViewportController.getScriptEditor().getScriptExecutor(false).update();
+			_leftViewportController.getScriptEditor().getScriptExecutor(false).update(false);
 		}
 		else // Error has been thrown
 		{

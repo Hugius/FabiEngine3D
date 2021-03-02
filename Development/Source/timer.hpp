@@ -14,8 +14,10 @@ public:
 	Timer()  = default;
 	~Timer() = default;
 
-	void start(const string& ID);
-	void stop();
+	void start();
+	float stop();
+	void startDeltaPart(const string& ID);
+	void stopDeltaPart();
 
 	float getDeltaPart(const string& ID);
 	float getDeltaPartSum();
@@ -27,11 +29,17 @@ public:
 
 private:
 	LARGE_INTEGER _frequency;
-	LARGE_INTEGER _time1, _time2;
+	LARGE_INTEGER _time1;
+	LARGE_INTEGER _time2;
+	LARGE_INTEGER _specificFrequency;
+	LARGE_INTEGER _specificTime1;
+	LARGE_INTEGER _specificTime2;
 
 	std::map<string, float> _deltaParts;
 
 	string _currentID = "";
 
 	int _passedFrameCount = 0;
+
+	bool _isTiming = false;
 };

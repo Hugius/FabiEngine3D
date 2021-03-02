@@ -1,4 +1,4 @@
-15 8
+17 27
 META script_type_update
 
 /// Check if player is looking at a plant
@@ -16,5 +16,5 @@ IF hoveredID NOT "" AND _wasPickupPlaying IS <true> AND _isPickupPlaying IS <fal
     IF distance IS -1.0:
         EDIT distance = 1000.0
     IF distance LESS _maxReach:
-        INCR _bag[3] _seedCount
+        INCR _bag[3] _seedsCount
         fe3d:model_delete(hoveredID)

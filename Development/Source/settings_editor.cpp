@@ -158,6 +158,7 @@ void SettingsEditor::update()
 			{
 				if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 				{
+					unload();
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
 				}
 				else if (screen->getButton("msaaQuality")->isHovered())

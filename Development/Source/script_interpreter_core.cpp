@@ -180,11 +180,35 @@ void ScriptInterpreter::executeInitialization()
 	}
 }
 
-void ScriptInterpreter::executeUpdate()
+void ScriptInterpreter::executeUpdate(bool debug)
 {
 	if (_updateEntryID != "")
 	{
+		// Start debugging if specified
+		_isDebugging = debug;
+		_debuggingTimes.clear();
+
+		// Execute update scripting
 		_executeScript(_updateEntryID, ScriptType::UPDATE);
+
+		// Log debugging results
+		if (_isDebugging)
+		{
+			// Calculate total debugging time
+			float totalTime = 0.0f;
+			for (auto& [scriptID, time] : _debuggingTimes)
+			{
+				totalTime += time;
+			}
+
+			// Print times
+			_fe3d.logger_throwDebug("Debugging results:");
+			for (auto& [scriptID, time] : _debuggingTimes)
+			{
+				float percentage = (time / totalTime) * 100.0f;
+				_fe3d.logger_throwDebug("Script \"" + scriptID + "\" ---> " + to_string(percentage) + "%");
+			}
+		}
 	}
 }
 
@@ -282,6 +306,7 @@ void ScriptInterpreter::unload()
 	_fe3d.misc_setVsync(true);
 
 	// Reset all variables
+	_debuggingTimes.clear();
 	_initScriptIDs.clear();
 	_updateScriptIDs.clear();
 	_destroyScriptIDs.clear();
@@ -294,4 +319,5 @@ void ScriptInterpreter::unload()
 	_gameMustStop = false;
 	_scopeHasChanged = false;
 	_passedScopeChanger = false;
+	_isDebugging = false;
 }

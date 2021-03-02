@@ -46,10 +46,11 @@ void TopViewportController::initialize()
 	_gameWindow->addScreen("main");
 	_gameWindow->setActiveScreen("main");
 	screen = _gameWindow->getScreen("main");
-	screen->addButton("play", Vec2(-0.6f, 0.0f), Vec2(0.2f, 1.75f), "play.png", Vec3(2.0f));
-	screen->addButton("pause", Vec2(-0.2f, 0.0f), Vec2(0.2f, 1.75f), "pause.png", Vec3(2.0f));
-	screen->addButton("restart", Vec2(0.2f, 0.0f), Vec2(0.2f, 1.75f), "restart.png", Vec3(2.0f));
-	screen->addButton("stop", Vec2(0.6f, 0.0f), Vec2(0.2f, 1.75f), "stop.png", Vec3(2.0f));
+	screen->addButton("play", Vec2(-0.73f, 0.0f), Vec2(0.2f, 1.75f), "play.png", Vec3(2.0f));
+	screen->addButton("pause", Vec2(-0.36f, 0.0f), Vec2(0.2f, 1.75f), "pause.png", Vec3(2.0f));
+	screen->addButton("restart", Vec2(0.0f, 0.0f), Vec2(0.2f, 1.75f), "restart.png", Vec3(2.0f));
+	screen->addButton("stop", Vec2(0.36f, 0.0f), Vec2(0.2f, 1.75f), "stop.png", Vec3(2.0f));
+	screen->addButton("debug", Vec2(0.73f, 0.0f), Vec2(0.2f, 1.75f), "debug.png", Vec3(2.0f));
 
 	// Top-viewport: miscWindow
 	_miscWindow->addScreen("main");
@@ -145,6 +146,7 @@ void TopViewportController::_updateGameScreenManagement()
 		gameScreen->getButton("pause")->setHoverable(false);
 		gameScreen->getButton("restart")->setHoverable(false);
 		gameScreen->getButton("stop")->setHoverable(false);
+		gameScreen->getButton("debug")->setHoverable(false);
 	}
 	else
 	{
@@ -176,6 +178,12 @@ void TopViewportController::_updateGameScreenManagement()
 			{
 				SCRIPT_EXECUTOR.unload();
 			}
+			else if (gameScreen->getButton("debug")->isHovered())
+			{
+				SCRIPT_EXECUTOR.unpause();
+				SCRIPT_EXECUTOR.update(true);
+				SCRIPT_EXECUTOR.pause();
+			}
 		}
 
 		// Update game buttons hoverability
@@ -184,6 +192,7 @@ void TopViewportController::_updateGameScreenManagement()
 		gameScreen->getButton("pause")->setHoverable(isInMainMenu && SCRIPT_EXECUTOR.isRunning());
 		gameScreen->getButton("restart")->setHoverable(isInMainMenu && SCRIPT_EXECUTOR.isInitialized());
 		gameScreen->getButton("stop")->setHoverable(isInMainMenu && SCRIPT_EXECUTOR.isInitialized());
+		gameScreen->getButton("debug")->setHoverable(isInMainMenu && SCRIPT_EXECUTOR.isInitialized());
 
 		// Update other buttons hoverability
 		if (SCRIPT_EXECUTOR.isInitialized())
@@ -214,7 +223,7 @@ void TopViewportController::_updateGameScreenManagement()
 		}
 
 		// Executing game script (if possible)
-		SCRIPT_EXECUTOR.update();
+		SCRIPT_EXECUTOR.update(false);
 	}
 }
 

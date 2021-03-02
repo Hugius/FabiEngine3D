@@ -95,18 +95,18 @@ void RenderEngine::renderScene(EntityBus * entityBus, CameraManager& camera)
 		_renderBus.setSceneReflectionsEnabled(sceneReflectionsEnabled && !waterReflectionsNeeded);
 
 		// Pre-rendering
-		_timer.start("reflectionPreRender");
+		_timer.startDeltaPart("reflectionPreRender");
 		_captureSceneReflections(camera);
-		_timer.stop();
-		_timer.start("refractionPreRender");
+		_timer.stopDeltaPart();
+		_timer.startDeltaPart("refractionPreRender");
 		_captureSceneRefractions();
-		_timer.stop();
-		_timer.start("shadowPreRender");
+		_timer.stopDeltaPart();
+		_timer.startDeltaPart("shadowPreRender");
 		_captureShadows();
-		_timer.stop();
-		_timer.start("depthPreRender");
+		_timer.stopDeltaPart();
+		_timer.startDeltaPart("depthPreRender");
 		_captureSceneDepth();
-		_timer.stop();
+		_timer.stopDeltaPart();
 
 		// Bind screen framebuffer
 		if (_renderBus.isMsaaEnabled())
@@ -121,28 +121,28 @@ void RenderEngine::renderScene(EntityBus * entityBus, CameraManager& camera)
 		// 3D rendering
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		_renderBus.setTriangleCountingEnabled(true);
-		_timer.start("skyEntityRender");
+		_timer.startDeltaPart("skyEntityRender");
 		_renderSkyEntity();
-		_timer.stop();
-		_timer.start("terrainEntityRender");
+		_timer.stopDeltaPart();
+		_timer.startDeltaPart("terrainEntityRender");
 		_renderTerrainEntity();
-		_timer.stop();
-		_timer.start("waterEntityRender");
+		_timer.stopDeltaPart();
+		_timer.startDeltaPart("waterEntityRender");
 		_renderWaterEntity();
-		_timer.stop();
-		_timer.start("gameEntityRender");
+		_timer.stopDeltaPart();
+		_timer.startDeltaPart("gameEntityRender");
 		_renderGameEntities();
-		_timer.stop();
-		_timer.start("billboardEntityRender");
+		_timer.stopDeltaPart();
+		_timer.startDeltaPart("billboardEntityRender");
 		_renderBillboardEntities();
-		_timer.stop();
-		_timer.start("aabbEntityRender");
+		_timer.stopDeltaPart();
+		_timer.startDeltaPart("aabbEntityRender");
 		_renderAabbEntities();
-		_timer.stop();
+		_timer.stopDeltaPart();
 		_renderBus.setTriangleCountingEnabled(false);
 
 		// Unbind screen framebuffer
-		_timer.start("postProcessing");
+		_timer.startDeltaPart("postProcessing");
 		if (_renderBus.isMsaaEnabled())
 		{
 			_msaaFramebuffer.processAAData(&_aaProcessorFramebuffer);
@@ -181,10 +181,10 @@ void RenderEngine::renderScene(EntityBus * entityBus, CameraManager& camera)
 			glViewport(0, 0, Config::getInst().getWindowWidth(), Config::getInst().getWindowHeight());
 			
 		}
-		_timer.stop();
+		_timer.stopDeltaPart();
 
 		// Render GUI entities
-		_timer.start("guiTextEntityRender");
+		_timer.startDeltaPart("guiTextEntityRender");
 		_renderBus.setTriangleCountingEnabled(true);
 		_renderGuiEntities();
 
@@ -194,7 +194,7 @@ void RenderEngine::renderScene(EntityBus * entityBus, CameraManager& camera)
 		// Render custom cursor entity
 		_renderCustomCursor();
 		_renderBus.setTriangleCountingEnabled(false);
-		_timer.stop();
+		_timer.stopDeltaPart();
 
 		// Update reflection priorities
 		_renderBus.setSceneReflectionsEnabled(sceneReflectionsEnabled);

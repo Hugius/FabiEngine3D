@@ -2,6 +2,19 @@
 
 void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType scriptType)
 {
+	// Start debug timing
+	if (_isDebugging)
+	{
+		// First time
+		if (_debuggingTimes.find(scriptID) == _debuggingTimes.end())
+		{
+			_debuggingTimes.insert(make_pair(scriptID, 0.0f));
+		}
+
+		// Start timer
+		_fe3d.misc_startMillisecondTimer();
+	}
+
 	// Temporary local values for this script run
 	vector<unsigned int> loopLineIndices;
 	vector<unsigned int> loopScopeDepths;
@@ -186,7 +199,20 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 				(scriptType == ScriptType::UPDATE) ? _updateScriptIDs : _destroyScriptIDs;
 			if (std::find(scriptList.begin(), scriptList.end(), scriptToExecute) != scriptList.end())
 			{
+				// Pause timer
+				if (_isDebugging)
+				{
+					_debuggingTimes[scriptID] += _fe3d.misc_stopMillisecondTimer();
+				}
+
+				// Execute script
 				_executeScript(scriptToExecute, scriptType);
+
+				// Resume timer
+				if (_isDebugging)
+				{
+					_fe3d.misc_startMillisecondTimer();
+				}
 			}
 			else
 			{
@@ -410,4 +436,10 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 	_currentLineIndexStack.pop_back();
 	_localVariablesStack.pop_back();
 	_executionDepth--;
+
+	// Stop timer
+	if (_isDebugging)
+	{
+		_debuggingTimes[scriptID] += _fe3d.misc_stopMillisecondTimer();
+	}
 }

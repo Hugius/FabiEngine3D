@@ -169,69 +169,69 @@ void CoreEngine::_updateApplication()
 	}
 
 	// User updates
-	_timer.start("coreUpdate");
+	_timer.startDeltaPart("coreUpdate");
 	_fe3d._isRaycastUpdated = false;
 	_fe3d._hoveredAabbID = "";
 	_fe3d.FE3D_CONTROLLER_UPDATE();
-	_timer.stop();
+	_timer.stopDeltaPart();
 
 	// Only update 3D if engine not paused
 	if (!_isPaused)
 	{
 		// Camera updates
-		_timer.start("cameraUpdate");
+		_timer.startDeltaPart("cameraUpdate");
 		_cameraManager.update(lastCursorPosition);
-		_timer.stop();
+		_timer.stopDeltaPart();
 
 		// Raycast updates
-		_timer.start("raycastUpdate");
+		_timer.startDeltaPart("raycastUpdate");
 		_rayCaster.update(_fe3d.misc_getCursorPositionRelativeToViewport());
-		_timer.stop();
+		_timer.stopDeltaPart();
 
 		// Collision updates
-		_timer.start("collisionUpdate");
+		_timer.startDeltaPart("collisionUpdate");
 		_collisionResolver.update(_aabbEntityManager.getEntities(), _terrainEntityManager, _cameraManager);
-		_timer.stop();
+		_timer.stopDeltaPart();
 
 		// 3D entity updates
-		_timer.start("skyEntityUpdate");
+		_timer.startDeltaPart("skyEntityUpdate");
 		_skyEntityManager.update();
-		_timer.stop();
-		_timer.start("waterEntityUpdate");
+		_timer.stopDeltaPart();
+		_timer.startDeltaPart("waterEntityUpdate");
 		_waterEntityManager.update();
-		_timer.stop();
-		_timer.start("gameEntityUpdate");
+		_timer.stopDeltaPart();
+		_timer.startDeltaPart("gameEntityUpdate");
 		_gameEntityManager.update();
-		_timer.stop();
-		_timer.start("billboardEntityUpdate");
+		_timer.stopDeltaPart();
+		_timer.startDeltaPart("billboardEntityUpdate");
 		_billboardEntityManager.update();
-		_timer.stop();
-		_timer.start("aabbEntityUpdate");
+		_timer.stopDeltaPart();
+		_timer.startDeltaPart("aabbEntityUpdate");
 		_aabbEntityManager.update(_gameEntityManager.getEntities(), _billboardEntityManager.getEntities());
-		_timer.stop();
+		_timer.stopDeltaPart();
 
 		// Shadow updates
-		_timer.start("shadowUpdate");
+		_timer.startDeltaPart("shadowUpdate");
 		_shadowManager.update(_renderBus);
 		_cameraManager.updateMatrices();
-		_timer.stop();
+		_timer.stopDeltaPart();
 
 		// Audio updates
-		_timer.start("audioUpdate");
+		_timer.startDeltaPart("audioUpdate");
 		_audioPlayer.update(_cameraManager, _audioManager.getChunks(), _audioManager.getMusic());
-		_timer.stop();
+		_timer.stopDeltaPart();
 	}
 
 	// Always update 2D logic
-	_timer.start("guiUpdate");
+	_timer.startDeltaPart("guiUpdate");
 	_guiEntityManager.update();
 	_textEntityManager.update();
-	_timer.stop();
+	_timer.stopDeltaPart();
 
 	// Updates miscellaneous
-	_timer.start("miscUpdate");
+	_timer.startDeltaPart("miscUpdate");
 	_updateWindowFading();
-	_timer.stop();
+	_timer.stopDeltaPart();
 
 	// Save last cursor position
 	lastCursorPosition = _windowManager.getCursorPos();
@@ -254,7 +254,7 @@ void CoreEngine::_renderApplication()
 	_renderEngine.renderScene(&entityBus, _cameraManager);
 
 	// Swap GPU buffer
-	_timer.start("bufferSwap");
+	_timer.startDeltaPart("bufferSwap");
 	_windowManager.swapBackBuffer();
-	_timer.stop();
+	_timer.stopDeltaPart();
 }

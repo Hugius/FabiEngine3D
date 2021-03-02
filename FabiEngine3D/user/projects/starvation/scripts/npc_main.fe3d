@@ -1,9 +1,9 @@
-41 6
+13 21
 META script_type_update
 
 /// NPC rotation
 LIST names = {"aurelius"}
-INT size = misc:get_list_size("names")
+INT listSize = misc:get_list_size("names")
 INT index = 0
 STR hoveredID = ""
 STR name = ""
@@ -12,7 +12,7 @@ VEC3 npcPos = [0.0 0.0 0.0]
 VEC3 direction = [0.0 0.0 0.0]
 DEC npcRot = 0.0
 LOOP:
-    IF index IS size:
+    IF index IS listSize:
         BREAK
     ELSE:
         EDIT name = misc:concat_strings("npc_", names[index])

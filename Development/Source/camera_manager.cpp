@@ -31,7 +31,7 @@ void CameraManager::reset()
 	_pitch = 0.0f;
 	_nearZ = 0.0f;
 	_farZ = 0.0f;
-	_mouseSensitivity = 1.0f;
+	_mouseSensitivity = 0.01f;
 	_mouseOffset = 0.0f;
 	_maxPitch = 90.0f;
 

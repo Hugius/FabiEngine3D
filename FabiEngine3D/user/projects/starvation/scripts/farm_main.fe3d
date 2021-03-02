@@ -1,4 +1,4 @@
-76 35
+47 24
 META script_type_update
 
 /// Temporary values
@@ -43,10 +43,10 @@ IF _wasHoePlaying IS <true> AND _isHoePlaying IS <false>:
 LIST wheatIDs = fe3d:model_find_ids("wheat")
 STR wheatID = ""
 DEC speed = 0.0
-INT length = misc:get_list_size("wheatIDs")
+INT listSize = misc:get_list_size("wheatIDs")
 INT index = 0
 LOOP:
-    IF index IS length:
+    IF index IS listSize:
         BREAK
     ELSE:
         EDIT wheatID = wheatIDs[index]

@@ -219,7 +219,7 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 						}
 					}
 				}
-				else if (functionName == "math:pi") // PI
+				else if (functionName == "math:get_pi")
 				{
 					if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 					{
@@ -227,7 +227,17 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
 					}
 				}
-				else if (functionName == "math:distance") // DISTANCE
+				else if (functionName == "math:is_even")
+				{
+					auto types = { ScriptValueType::INTEGER };
+
+					if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+					{
+						auto result = (arguments[0].getInteger() % 2) == 0;
+						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
+					}
+				}
+				else if (functionName == "math:distance")
 				{
 					auto types = { ScriptValueType::VEC3, ScriptValueType::VEC3 };
 

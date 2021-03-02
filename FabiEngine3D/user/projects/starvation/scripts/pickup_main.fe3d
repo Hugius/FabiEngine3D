@@ -1,4 +1,4 @@
-20 16
+12 21
 META script_type_update
 
 /// Compose pickuppable items
@@ -6,12 +6,12 @@ LIST pickuppables = {"log","stones","shrub","bamboo","fern","mushroom","flower"}
 
 /// Pickupabbles hover
 fe3d:text_set_visible("pickup", <false>)
-INT size = misc:get_list_size("pickuppables")
+INT listSize = misc:get_list_size("pickuppables")
 INT index = 0
 STR hoveredID = ""
 STR itemName = ""
 LOOP:
-    IF index IS size:
+    IF index IS listSize:
         BREAK
     ELSE:
         EDIT itemName = pickuppables[index]

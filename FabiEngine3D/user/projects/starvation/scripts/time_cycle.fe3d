@@ -1,4 +1,4 @@
-28 31
+90 21
 META script_type_update
 
 /// Temporary values
@@ -87,9 +87,9 @@ IF _isUnderWater IS <false>:
 /// Update fire billboards - trading world
 CONST LIST billboards = fe3d:billboard_find_ids("fire1")
 INT index = 0
-INT size = misc:get_list_size("billboards")
+INT listSize = misc:get_list_size("billboards")
 LOOP:
-    IF index IS size:
+    IF index IS listSize:
         BREAK
     fe3d:billboard_set_visible(billboards[index], _areLightsOn)
     INCR index 1

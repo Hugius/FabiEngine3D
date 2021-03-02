@@ -1,4 +1,4 @@
-23 13
+20 38
 META script_type_init
 
 /// Globals
@@ -10,7 +10,6 @@ GLOB LIST _buildablesClayPrice = {0,0,0,3,0,0,2,5,0}
 GLOB LIST _buildablesIronPrice = {0,0,0,0,1,0,1,2,1}
 GLOB LIST _buildNames = {}
 GLOB LIST _buildOffsets = {8.0, 9.25, 11.85, 7.75, 5.0, 8.0, 8.0, 20.0, 5.0}
-GLOB LIST _buildHeights = {}
 GLOB LIST _buildCounters = {0,0,0,0,0,0,0,0,0}
 GLOB STR _hoveredBuildingID = ""
 GLOB VEC3 _buildPosition = [0.0 0.0 0.0]

@@ -1,19 +1,22 @@
-14 14
+45 25
 META script_type_update
 
 /// Temporary values
+BOOL lmbPressed = fe3d:input_is_mouse_pressed("BUTTON_LEFT")
 BOOL ePressed = fe3d:input_is_key_pressed("KEY_E")
 
 /// Update storage hover
 fe3d:text_set_visible("storage", <false>)
 BOOL isHovered = <false>
-STR hoveredID = fe3d:raycast_into_model("storage", "door", <true>)
+STR hoveredID = fe3d:raycast_into_model("storage0", "door", <true>)
 IF hoveredID NOT "" AND _isBuilding IS <false>:
-    DEC distance = fe3d:raycast_into_model_distance("storage", "", <true>)
+    DEC distance = fe3d:raycast_into_model_distance("storage0", "door", <true>)
     IF distance IS -1.0:
         EDIT distance = 1000.0
     IF distance LESS _maxReach AND _isInStorage IS <false>:
-        IF _isToolPlaying IS <false>:
+        VEC3 size = fe3d:aabb_get_size("storage_display_main")
+        DEC height = fe3d:model_get_max_height(hoveredID)
+        IF height MORE size.y AND _isToolPlaying IS <false>:
             EDIT isHovered = <true>
             fe3d:text_set_visible("storage", <true>)
 
@@ -26,7 +29,7 @@ IF ePressed IS <true>:
         EDIT _isInStorage = <false>
         fe3d:cursor_hide()
 
-/// Update storage menu interaction
+/// Update storage menu buttons hover
 IF _isInStorage IS <true>:
     STR buttonID = ""
     DEC buttonWidth = 0.0
@@ -38,9 +41,10 @@ IF _isInStorage IS <true>:
     DEC xDifference = 0.0
     DEC yDifference = 0.0
     INT index = 0
-    INT size = misc:get_list_size("_storageButtonIDs")
+    INT listSize = misc:get_list_size("_storageButtonIDs")
+    BOOL isButtonHovered = <false>
     LOOP:
-        IF index IS size:
+        IF index IS listSize:
             BREAK
         ELSE:
             EDIT buttonID = _storageButtonIDs[index]
@@ -60,6 +64,23 @@ IF _isInStorage IS <true>:
             EDIT yDifference = math:abs(yDifference)
             IF xDifference LESS buttonWidth AND yDifference LESS buttonHeight:
                 fe3d:image_set_color(buttonID, 0.0, 0.5, 0.0)
+                EDIT isButtonHovered = <true>
+                BREAK
             ELSE:
                 fe3d:image_set_color(buttonID, 1.0, 1.0, 1.0)
             INCR index 1
+    /// Update storage menu buttons click
+    IF isButtonHovered IS <true> AND lmbPressed IS <true>:
+        BOOL isEven = math:is_even(index)
+        /// Even = plus, not even = minus
+        IF isEven IS <true>:
+            DIV index 2
+            IF _bag[index] MORE 0:
+                DECR _bag[index] 1
+                INCR _storage[index] 1
+        ELSE:
+            DECR index 1
+            DIV index 2
+            IF _storage[index] MORE 0:
+                DECR _storage[index] 1
+                INCR _bag[index] 1

@@ -1,22 +1,23 @@
-17 17
+18 21
 META script_type_init
 META execution_entry
 
 /// Load home world
 fe3d:scene_load("home")
 
-/// No GUI
+/// No GUI elements
 EXEC npc_init
 EXEC time_init
 EXEC misc_init
 
-/// GUI ordered
+/// GUI in correct order
 EXEC water_init
 EXEC build_init_main
 EXEC build_init_gui
 EXEC craft_init_main
 EXEC craft_init_gui
-EXEC storage_init
+EXEC storage_init_main
+EXEC storage_init_gui
 EXEC inventory_init
 EXEC bag_init
 EXEC player_init

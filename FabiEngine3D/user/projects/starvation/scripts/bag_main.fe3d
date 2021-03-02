@@ -1,4 +1,4 @@
-78 34
+48 21
 META script_type_update
 
 /// Check if player wants to open/close bag
@@ -40,14 +40,14 @@ fe3d:image_set_visible("coin_bag", _isBagOpen)
 fe3d:text_set_visible("coin_count_bag", _isBagOpen)
 
 /// Update bag items text
-INT size = misc:get_list_size("_bag")
+INT listSize = misc:get_list_size("_bag")
 INT index = 0
 INT itemCount = 0
 INT strSize = 0
 DEC weight = 0.0
 EDIT _totalBagWeight = 0.0
 LOOP:
-    IF index IS size:
+    IF index IS listSize:
         BREAK
     ELSE:
         /// Calculate total bag weight

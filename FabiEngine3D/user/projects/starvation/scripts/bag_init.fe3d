@@ -1,8 +1,8 @@
-8 28
+3 55
 META script_type_init
 
 /// Globals
-GLOB LIST _bag = {100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100}
+GLOB LIST _bag = {50, 50, 50, 10, 10, 10, 10, 10, 10, 10, 10}
 GLOB LIST _bagTextIDs = {}
 GLOB LIST _bagWeights = {2.0, 0.5, 0.25, 0.01, 0.1, 0.1, 0.5, 0.5, 0.5, 1.0, 0.025}
 GLOB CONST DEC _maxBagWeight = 3000.0

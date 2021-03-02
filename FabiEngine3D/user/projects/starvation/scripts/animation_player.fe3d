@@ -1,4 +1,4 @@
-37 0
+15 4
 META script_type_update
 
 /// Skeleton position & rotation
@@ -12,10 +12,9 @@ fe3d:model_set_rotation("player", 0.0, yaw, 0.0)
 
 /// Walking animation
 BOOL isWalkPlaying = fe3d:model_is_animation_started("player", "walk")
-IF _isToolPlaying IS <true> OR _isTalking IS <true> OR _isCrafting IS <true>:
-    IF isWalkPlaying IS <true>:
-        /// Fade animation to a stop
-        fe3d:model_fade_animation("player", "walk", 1)
+IF _isAbleToMove IS <false> AND isWalkPlaying IS <true>:
+    /// Fade animation to a stop
+    fe3d:model_fade_animation("player", "walk", 1)
 ELIF _isPickupPlaying IS <false> AND _isAbleToMove IS <true>:
     IF _isWalking IS <true> AND isWalkPlaying IS <false>:
         /// Start walking animation

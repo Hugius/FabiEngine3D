@@ -1,4 +1,4 @@
-41 32
+57 31
 META script_type_update
 
 /// Temporary values
@@ -55,7 +55,9 @@ IF _isBuilding IS <true>:
 /// Update building validation color
 IF _isBuilding IS <true>:
     STR valid = fe3d:collision_check_model_models(_buildables[_buildIndex], "", "", "")
-    IF valid NOT "" OR buildY LESS waterHeight OR _canAffordBuilding IS <false>:
+    BOOL afford = _canAffordBuilding
+    BOOL stor = _isStorageBuilt
+    IF valid NOT "" OR buildY LESS waterHeight OR afford IS <false> OR stor IS <true>:
         fe3d:model_set_color(_buildables[_buildIndex], 1.0, 0.0, 0.0)
         EDIT _isBuildPlaceValid = <false>
     ELSE:

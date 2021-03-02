@@ -1107,8 +1107,10 @@ fe3d:print(camPos.x)
   Returns the absolute value of **value**.
 - `math:abs`(`DEC` value) ---> `DEC`  
   Returns the absolute value of **value**.
-- `math:pi`() ---> `DEC`  
+- `math:get_pi`() ---> `DEC`  
 - Returns a high-precision value of pi.
+- `math:is_even`(`INT` value) ---> `BOOL`  
+- Returns true if **value** is an even number.
 - `math:distance`(`VEC3` first, `VEC3` second) ---> `DEC`  
   Returns the absolute distance between **first** and **second**.
 

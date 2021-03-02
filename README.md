@@ -1069,6 +1069,10 @@ fe3d:print(camPos.x)
   Returns window width in pixels.
 - `fe3d:window_get_height`() ---> `INT`  
   Returns window height in pixels.
+- `fe3d:timer_start`() ---> `NONE`  
+  Starts a timer to measure passing time. Works like a stopwatch.
+- `fe3d:timer_stop`() ---> `DEC`  
+  Returns measured time in milliseconds.
 
 ### Math functions
 - `math:tan`(`DEC` degrees) ---> `DEC`  

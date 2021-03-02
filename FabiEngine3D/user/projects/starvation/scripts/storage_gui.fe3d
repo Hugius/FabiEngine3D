@@ -1,4 +1,4 @@
-57 21
+70 11
 META script_type_update
 
 /// Update storage items visibility
@@ -61,8 +61,6 @@ LOOP:
     ELSE:
         /// Update amount of digits
         EDIT itemCount = _storage[index]
-        IF itemCount LESS 0:
-            fe3d:print(itemCount)
         CAST itemCount STR
         EDIT strSize = misc:get_string_size(itemCount)
         IF strSize IS 1:

@@ -208,6 +208,7 @@ void ScriptInterpreter::executeUpdate(bool debug)
 				float percentage = (time / totalTime) * 100.0f;
 				_fe3d.logger_throwDebug("Script \"" + scriptID + "\" ---> " + to_string(percentage) + "%");
 			}
+			_fe3d.logger_throwDebug("");
 		}
 	}
 }

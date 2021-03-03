@@ -1,4 +1,4 @@
-47 30
+20 26
 META script_type_init
 
 /// Globals
@@ -19,6 +19,7 @@ GLOB CONST INT _clayCount = 10
 GLOB CONST INT _seedsCount = 5
 GLOB CONST INT _wheatCount = 12
 GLOB CONST INT _fishCount = 1
+GLOB INT _survivalTime = 0
 
 /// Interaction UI
 STR f = "font.ttf"

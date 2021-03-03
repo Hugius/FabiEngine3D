@@ -1,4 +1,4 @@
-3 55
+9 14
 META script_type_init
 
 /// Globals
@@ -8,6 +8,7 @@ GLOB LIST _bagWeights = {2.0, 0.5, 0.25, 0.01, 0.1, 0.1, 0.5, 0.5, 0.5, 1.0, 0.0
 GLOB CONST DEC _maxBagWeight = 3000.0
 GLOB DEC _totalBagWeight = 0.0
 GLOB BOOL _isBagOpen = <true>
+GLOB BOOL _wasBagOpen = <true>
 
 /// Bag text IDs
 PUSH _bagTextIDs "wood_count_bag"

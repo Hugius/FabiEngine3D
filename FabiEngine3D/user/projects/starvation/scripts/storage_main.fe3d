@@ -1,9 +1,10 @@
-45 25
+5 9
 META script_type_update
 
 /// Temporary values
 BOOL lmbPressed = fe3d:input_is_mouse_pressed("BUTTON_LEFT")
 BOOL ePressed = fe3d:input_is_key_pressed("KEY_E")
+EDIT _wasInStorage = _isInStorage
 
 /// Update storage hover
 fe3d:text_set_visible("storage", <false>)

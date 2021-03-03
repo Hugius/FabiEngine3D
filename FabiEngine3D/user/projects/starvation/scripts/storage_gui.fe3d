@@ -1,72 +1,74 @@
-70 11
+3 55
 META script_type_update
 
 /// Update storage items visibility
-fe3d:image_set_visible("scroll_storage", _isInStorage)
-fe3d:text_set_visible("title_storage", _isInStorage)
-fe3d:image_set_visible("wood_storage", _isInStorage)
-fe3d:image_set_visible("wood_plus_storage", _isInStorage)
-fe3d:image_set_visible("wood_minus_storage", _isInStorage)
-fe3d:text_set_visible("wood_count_storage", _isInStorage)
-fe3d:image_set_visible("stone_storage", _isInStorage)
-fe3d:image_set_visible("stone_plus_storage", _isInStorage)
-fe3d:image_set_visible("stone_minus_storage", _isInStorage)
-fe3d:text_set_visible("stone_count_storage", _isInStorage)
-fe3d:image_set_visible("clay_storage", _isInStorage)
-fe3d:image_set_visible("clay_plus_storage", _isInStorage)
-fe3d:image_set_visible("clay_minus_storage", _isInStorage)
-fe3d:text_set_visible("clay_count_storage", _isInStorage)
-fe3d:image_set_visible("seeds_storage", _isInStorage)
-fe3d:image_set_visible("seeds_plus_storage", _isInStorage)
-fe3d:image_set_visible("seeds_minus_storage", _isInStorage)
-fe3d:text_set_visible("seeds_count_storage", _isInStorage)
-fe3d:image_set_visible("wheat_storage", _isInStorage)
-fe3d:image_set_visible("wheat_plus_storage", _isInStorage)
-fe3d:image_set_visible("wheat_minus_storage", _isInStorage)
-fe3d:text_set_visible("wheat_count_storage", _isInStorage)
-fe3d:image_set_visible("flour_storage", _isInStorage)
-fe3d:image_set_visible("flour_plus_storage", _isInStorage)
-fe3d:image_set_visible("flour_minus_storage", _isInStorage)
-fe3d:text_set_visible("flour_count_storage", _isInStorage)
-fe3d:image_set_visible("bread_storage", _isInStorage)
-fe3d:image_set_visible("bread_plus_storage", _isInStorage)
-fe3d:image_set_visible("bread_minus_storage", _isInStorage)
-fe3d:text_set_visible("bread_count_storage", _isInStorage)
-fe3d:image_set_visible("fish_storage", _isInStorage)
-fe3d:image_set_visible("fish_plus_storage", _isInStorage)
-fe3d:image_set_visible("fish_minus_storage", _isInStorage)
-fe3d:text_set_visible("fish_count_storage", _isInStorage)
-fe3d:image_set_visible("meat_storage", _isInStorage)
-fe3d:image_set_visible("meat_plus_storage", _isInStorage)
-fe3d:image_set_visible("meat_minus_storage", _isInStorage)
-fe3d:text_set_visible("meat_count_storage", _isInStorage)
-fe3d:image_set_visible("iron_storage", _isInStorage)
-fe3d:image_set_visible("iron_plus_storage", _isInStorage)
-fe3d:image_set_visible("iron_minus_storage", _isInStorage)
-fe3d:text_set_visible("iron_count_storage", _isInStorage)
-fe3d:image_set_visible("coin_storage", _isInStorage)
-fe3d:image_set_visible("coin_plus_storage", _isInStorage)
-fe3d:image_set_visible("coin_minus_storage", _isInStorage)
-fe3d:text_set_visible("coin_count_storage", _isInStorage)
-fe3d:text_set_visible("exit_storage", _isInStorage)
+IF _isInStorage NOT _wasInStorage OR _survivalTime IS 0:
+    fe3d:image_set_visible("scroll_storage", _isInStorage)
+    fe3d:text_set_visible("title_storage", _isInStorage)
+    fe3d:image_set_visible("wood_storage", _isInStorage)
+    fe3d:image_set_visible("wood_plus_storage", _isInStorage)
+    fe3d:image_set_visible("wood_minus_storage", _isInStorage)
+    fe3d:text_set_visible("wood_count_storage", _isInStorage)
+    fe3d:image_set_visible("stone_storage", _isInStorage)
+    fe3d:image_set_visible("stone_plus_storage", _isInStorage)
+    fe3d:image_set_visible("stone_minus_storage", _isInStorage)
+    fe3d:text_set_visible("stone_count_storage", _isInStorage)
+    fe3d:image_set_visible("clay_storage", _isInStorage)
+    fe3d:image_set_visible("clay_plus_storage", _isInStorage)
+    fe3d:image_set_visible("clay_minus_storage", _isInStorage)
+    fe3d:text_set_visible("clay_count_storage", _isInStorage)
+    fe3d:image_set_visible("seeds_storage", _isInStorage)
+    fe3d:image_set_visible("seeds_plus_storage", _isInStorage)
+    fe3d:image_set_visible("seeds_minus_storage", _isInStorage)
+    fe3d:text_set_visible("seeds_count_storage", _isInStorage)
+    fe3d:image_set_visible("wheat_storage", _isInStorage)
+    fe3d:image_set_visible("wheat_plus_storage", _isInStorage)
+    fe3d:image_set_visible("wheat_minus_storage", _isInStorage)
+    fe3d:text_set_visible("wheat_count_storage", _isInStorage)
+    fe3d:image_set_visible("flour_storage", _isInStorage)
+    fe3d:image_set_visible("flour_plus_storage", _isInStorage)
+    fe3d:image_set_visible("flour_minus_storage", _isInStorage)
+    fe3d:text_set_visible("flour_count_storage", _isInStorage)
+    fe3d:image_set_visible("bread_storage", _isInStorage)
+    fe3d:image_set_visible("bread_plus_storage", _isInStorage)
+    fe3d:image_set_visible("bread_minus_storage", _isInStorage)
+    fe3d:text_set_visible("bread_count_storage", _isInStorage)
+    fe3d:image_set_visible("fish_storage", _isInStorage)
+    fe3d:image_set_visible("fish_plus_storage", _isInStorage)
+    fe3d:image_set_visible("fish_minus_storage", _isInStorage)
+    fe3d:text_set_visible("fish_count_storage", _isInStorage)
+    fe3d:image_set_visible("meat_storage", _isInStorage)
+    fe3d:image_set_visible("meat_plus_storage", _isInStorage)
+    fe3d:image_set_visible("meat_minus_storage", _isInStorage)
+    fe3d:text_set_visible("meat_count_storage", _isInStorage)
+    fe3d:image_set_visible("iron_storage", _isInStorage)
+    fe3d:image_set_visible("iron_plus_storage", _isInStorage)
+    fe3d:image_set_visible("iron_minus_storage", _isInStorage)
+    fe3d:text_set_visible("iron_count_storage", _isInStorage)
+    fe3d:image_set_visible("coin_storage", _isInStorage)
+    fe3d:image_set_visible("coin_plus_storage", _isInStorage)
+    fe3d:image_set_visible("coin_minus_storage", _isInStorage)
+    fe3d:text_set_visible("coin_count_storage", _isInStorage)
+    fe3d:text_set_visible("exit_storage", _isInStorage)
 
 /// Update storage items text
-INT listSize = misc:get_list_size("_storage")
-INT index = 0
-INT itemCount = 0
-INT strSize = 0
-LOOP:
-    IF index IS listSize:
-        BREAK
-    ELSE:
-        /// Update amount of digits
-        EDIT itemCount = _storage[index]
-        CAST itemCount STR
-        EDIT strSize = misc:get_string_size(itemCount)
-        IF strSize IS 1:
-            EDIT itemCount = misc:concat_strings("00", itemCount)
-        ELIF strSize IS 2:
-            EDIT itemCount = misc:concat_strings("0", itemCount)
-        fe3d:text_set_content(_storageTextIDs[index], itemCount)
-        CAST itemCount INT
-        INCR index 1
+IF _isInStorage IS <true>:
+    INT listSize = misc:get_list_size("_storage")
+    INT index = 0
+    INT itemCount = 0
+    INT strSize = 0
+    LOOP:
+        IF index IS listSize:
+            BREAK
+        ELSE:
+            /// Update amount of digits
+            EDIT itemCount = _storage[index]
+            CAST itemCount STR
+            EDIT strSize = misc:get_string_size(itemCount)
+            IF strSize IS 1:
+                EDIT itemCount = misc:concat_strings("00", itemCount)
+            ELIF strSize IS 2:
+                EDIT itemCount = misc:concat_strings("0", itemCount)
+            fe3d:text_set_content(_storageTextIDs[index], itemCount)
+            CAST itemCount INT
+            INCR index 1

@@ -1,4 +1,4 @@
-19 62
+34 59
 META script_type_update
 
 /// Retrieve hovered building properties
@@ -34,60 +34,55 @@ IF hoveredID NOT "":
     ELIF idPart IS "ov":
         INT hoveredIndex = 8
         VEC3 size = fe3d:aabb_get_size("oven_display_oven")
-
-/// Update building process
-STR toolID = _inventory[_equipIndex]
-fe3d:text_set_visible("build", <false>)
-IF toolID IS "hammer_stone" OR toolID IS "hammer_iron":
-    /// Check if hovering building
-    IF _isInvOpen IS <true> AND hoveredID NOT "":
-        /// Calculate price
-        INT wp = _buildablesWoodPrice[hoveredIndex]
-        INT sp = _buildablesStonePrice[hoveredIndex]
-        INT cp = _buildablesClayPrice[hoveredIndex]
-        INT ip = _buildablesIronPrice[hoveredIndex]
-        DECR wp 1
-        DECR sp 1
-        DECR cp 1
-        DECR ip 1
-        BOOL afford1 = (_bag[0] MORE wp AND _bag[1] MORE sp)
-        BOOL afford2 = (_bag[2] MORE cp AND _bag[9] MORE ip)
-        BOOL canAfford = (afford1 IS <true> AND afford2 IS <true>)
-        /// Check if building in reach, not finished yet, affordable
-        IF distance LESS _maxReach AND height LESS size.y AND canAfford IS <true>:
-            fe3d:text_set_visible("build", <true>)
-            /// Check if player used hammer
-            IF _wasHammerPlaying IS <true> AND _isHammerPlaying IS <false>:
-                /// Increase building height
-                DEC heightIncrease = size.y
-                MUL heightIncrease 0.1000001
-                INCR height heightIncrease
-                fe3d:model_set_max_height(hoveredID, height)
-                /// Pay the price
-                DECR _bag[0] _buildablesWoodPrice[hoveredIndex]
-                DECR _bag[1] _buildablesStonePrice[hoveredIndex]
-                DECR _bag[2] _buildablesClayPrice[hoveredIndex]
-                DECR _bag[9] _buildablesIronPrice[hoveredIndex]
-                DECR _durabilities[6] _durabilityHit
-                /// Check if building is finished
-                IF height IS size.y OR height MORE size.y:
-                    /// Determine building type
-                    IF idPart IS "sm" OR idPart IS "me" OR idPart IS "bi":
-                        /// Spawn bed
-                        STR bedID = misc:concat_strings("bed:", hoveredID)
-                        VEC3 bedPos = fe3d:model_get_position(hoveredID)
-                        fe3d:model_place(bedID, "bed", bedPos.x, bedPos.y, bedPos.z)
-                    ELIF idPart IS "mi":
-                        /// Start mill animation
-                        fe3d:model_start_animation(hoveredID, "mill_rotation", -1)
-                    ELIF idPart IS "ov":
-                        /// Add fire & smoke to the oven
-                        STR fireID = misc:concat_strings("fire:", hoveredID)
-                        STR smokeID = misc:concat_strings("smoke:", hoveredID)
-                        VEC3 pos = fe3d:model_get_position(hoveredID)
-                        INCR pos.y 0.5
-                        fe3d:billboard_place(fireID, "fire2", pos.x, pos.y, pos.z)
-                        fe3d:billboard_start_animation(fireID, -1)
-                        INCR pos.y 3.0
-                        fe3d:billboard_place(smokeID, "smoke", pos.x, pos.y, pos.z)
-                        fe3d:billboard_start_animation(smokeID, -1)
+    /// Update building process
+    fe3d:text_set_visible("build", <false>)
+    /// Calculate price
+    INT wp = _buildablesWoodPrice[hoveredIndex]
+    INT sp = _buildablesStonePrice[hoveredIndex]
+    INT cp = _buildablesClayPrice[hoveredIndex]
+    INT ip = _buildablesIronPrice[hoveredIndex]
+    DECR wp 1
+    DECR sp 1
+    DECR cp 1
+    DECR ip 1
+    BOOL afford1 = (_bag[0] MORE wp AND _bag[1] MORE sp)
+    BOOL afford2 = (_bag[2] MORE cp AND _bag[9] MORE ip)
+    BOOL canAfford = (afford1 IS <true> AND afford2 IS <true>)
+    /// Check if building in reach, not finished yet, affordable
+    IF distance LESS _maxReach AND height LESS size.y AND canAfford IS <true>:
+        fe3d:text_set_visible("build", <true>)
+        /// Check if player used hammer
+        IF _wasHammerPlaying IS <true> AND _isHammerPlaying IS <false>:
+            /// Increase building height
+            DEC heightIncrease = size.y
+            MUL heightIncrease 0.1000001
+            INCR height heightIncrease
+            fe3d:model_set_max_height(hoveredID, height)
+            /// Pay the price
+            DECR _bag[0] _buildablesWoodPrice[hoveredIndex]
+            DECR _bag[1] _buildablesStonePrice[hoveredIndex]
+            DECR _bag[2] _buildablesClayPrice[hoveredIndex]
+            DECR _bag[9] _buildablesIronPrice[hoveredIndex]
+            DECR _durabilities[6] _durabilityHit
+            /// Check if building is finished
+            IF height IS size.y OR height MORE size.y:
+                /// Determine building type
+                IF idPart IS "sm" OR idPart IS "me" OR idPart IS "bi":
+                    /// Spawn bed
+                    STR bedID = misc:concat_strings("bed:", hoveredID)
+                    VEC3 bedPos = fe3d:model_get_position(hoveredID)
+                    fe3d:model_place(bedID, "bed", bedPos.x, bedPos.y, bedPos.z)
+                ELIF idPart IS "mi":
+                    /// Start mill animation
+                    fe3d:model_start_animation(hoveredID, "mill_rotation", -1)
+                ELIF idPart IS "ov":
+                    /// Add fire & smoke to the oven
+                    STR fireID = misc:concat_strings("fire:", hoveredID)
+                    STR smokeID = misc:concat_strings("smoke:", hoveredID)
+                    VEC3 pos = fe3d:model_get_position(hoveredID)
+                    INCR pos.y 0.5
+                    fe3d:billboard_place(fireID, "fire2", pos.x, pos.y, pos.z)
+                    fe3d:billboard_start_animation(fireID, -1)
+                    INCR pos.y 3.0
+                    fe3d:billboard_place(smokeID, "smoke", pos.x, pos.y, pos.z)
+                    fe3d:billboard_start_animation(smokeID, -1)

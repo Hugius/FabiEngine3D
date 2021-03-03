@@ -1,4 +1,4 @@
-38 75
+64 20
 META script_type_update
 
 /// Temporary values
@@ -61,3 +61,6 @@ VEC3 camPos = fe3d:camera_get_position()
 DEC waterY = fe3d:water_get_height()
 IF camPos.y LESS waterY:
     INCR _hygiene 0.001
+
+/// Increase survival time
+INCR _survivalTime 1

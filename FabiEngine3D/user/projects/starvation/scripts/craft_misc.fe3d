@@ -1,4 +1,4 @@
-12 30
+66 31
 META script_type_update
 
 /// Temporary values
@@ -26,25 +26,43 @@ IF ePressed IS <true>:
         fe3d:cursor_hide()
 
 /// Update HUD visibility
-fe3d:model_set_visible(_craftables[_craftIndex], _isCrafting)
-fe3d:image_set_visible("scroll_craft", _isCrafting)
-fe3d:image_set_visible("wood_price_craft", _isCrafting)
-fe3d:image_set_visible("stone_price_craft", _isCrafting)
-fe3d:image_set_visible("iron_price_craft", _isCrafting)
-fe3d:text_set_visible("wood_price_craft", _isCrafting)
-fe3d:text_set_visible("stone_price_craft", _isCrafting)
-fe3d:text_set_visible("iron_price_craft", _isCrafting)
-fe3d:text_set_visible(_craftables[_craftIndex], _isCrafting)
-fe3d:billboard_set_visible("craft_confirm", _isCrafting)
-fe3d:billboard_set_visible("craft_cancel", _isCrafting)
+IF _wasCrafting NOT _isCrafting OR _survivalTime IS 0:
+    fe3d:model_set_visible(_craftables[_craftIndex], _isCrafting)
+    fe3d:image_set_visible("scroll_craft", _isCrafting)
+    fe3d:image_set_visible("wood_price_craft", _isCrafting)
+    fe3d:image_set_visible("stone_price_craft", _isCrafting)
+    fe3d:image_set_visible("iron_price_craft", _isCrafting)
+    fe3d:text_set_visible("wood_price_craft", _isCrafting)
+    fe3d:text_set_visible("stone_price_craft", _isCrafting)
+    fe3d:text_set_visible("iron_price_craft", _isCrafting)
+    fe3d:billboard_set_visible("craft_confirm", _isCrafting)
+    fe3d:billboard_set_visible("craft_cancel", _isCrafting)
+    fe3d:text_set_visible(_craftables[0], <false>)
+    fe3d:text_set_visible(_craftables[1], <false>)
+    fe3d:text_set_visible(_craftables[2], <false>)
+    fe3d:text_set_visible(_craftables[3], <false>)
+    fe3d:text_set_visible(_craftables[4], <false>)
+    fe3d:text_set_visible(_craftables[5], <false>)
+    fe3d:text_set_visible(_craftables[6], <false>)
+    fe3d:text_set_visible(_craftables[7], <false>)
+    fe3d:text_set_visible(_craftables[8], <false>)
+    fe3d:text_set_visible(_craftables[9], <false>)
+    fe3d:text_set_visible(_craftables[10], <false>)
+    fe3d:text_set_visible(_craftables[11], <false>)
+    fe3d:text_set_visible(_craftables[12], <false>)
+    fe3d:text_set_visible(_craftables[13], <false>)
+    fe3d:text_set_visible(_craftables[_craftIndex], _isCrafting)
 
 /// Update price tag
-INT woodPrice = _craftablesWoodPrice[_craftIndex]
-INT stonePrice = _craftablesStonePrice[_craftIndex]
-INT ironPrice = _craftablesIronPrice[_craftIndex]
-CAST woodPrice STR
-CAST stonePrice STR
-CAST ironPrice STR
-fe3d:text_set_content("wood_price_craft", woodPrice)
-fe3d:text_set_content("stone_price_craft", stonePrice)
-fe3d:text_set_content("iron_price_craft", ironPrice)
+IF _isCrafting IS <true>:
+    INT woodPrice = _craftablesWoodPrice[_craftIndex]
+    INT stonePrice = _craftablesStonePrice[_craftIndex]
+    INT ironPrice = _craftablesIronPrice[_craftIndex]
+    CAST woodPrice STR
+    CAST stonePrice STR
+    CAST ironPrice STR
+    fe3d:text_set_content("wood_price_craft", woodPrice)
+    fe3d:text_set_content("stone_price_craft", stonePrice)
+    fe3d:text_set_content("iron_price_craft", ironPrice)
+
+EDIT _wasCrafting = _isCrafting

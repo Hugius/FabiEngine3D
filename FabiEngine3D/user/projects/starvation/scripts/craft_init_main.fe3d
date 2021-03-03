@@ -1,9 +1,10 @@
-28 0
+5 14
 META script_type_init
 
 /// Globals
 GLOB CONST DEC _maxWorkbenchReach = 4.0
 GLOB BOOL _isCrafting = <false>
+GLOB BOOL _wasCrafting = <false>
 GLOB INT _craftIndex = 0
 GLOB LIST _craftables = {}
 GLOB LIST _craftablesText = {}

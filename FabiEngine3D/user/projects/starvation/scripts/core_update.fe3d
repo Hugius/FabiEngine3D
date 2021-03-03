@@ -1,4 +1,4 @@
-33 25
+65 8
 META script_type_update
 META execution_entry
 
@@ -62,8 +62,9 @@ IF currentWorld IS "home":
 
 /// Crafting
 IF currentWorld IS "home":
-    EXEC craft_process
     EXEC craft_misc
+    IF _isCrafting IS <true>:
+        EXEC craft_process
 
 /// Time & weather
 EXEC time_cycle

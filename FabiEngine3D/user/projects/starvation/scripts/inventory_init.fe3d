@@ -48,18 +48,3 @@ fe3d:image_place("hammer_iron", "hammer_iron.png", 0.25,  -0.85, 0.0, 0.125, 0.2
 fe3d:image_place("torch", "torch.png", 0.375,  -0.85, 0.0, 0.125, 0.2)
 fe3d:image_place("fishrod", "fishrod.png", 0.5,  -0.85, 0.0, 0.125, 0.2)
 
-/// Invisible by default
-fe3d:image_set_visible("sword_stone", <false>)
-fe3d:image_set_visible("sword_iron", <false>)
-fe3d:image_set_visible("pickaxe_stone", <false>)
-fe3d:image_set_visible("pickaxe_iron", <false>)
-fe3d:image_set_visible("axe_stone", <false>)
-fe3d:image_set_visible("axe_iron", <false>)
-fe3d:image_set_visible("shovel_stone", <false>)
-fe3d:image_set_visible("shovel_iron", <false>)
-fe3d:image_set_visible("hoe", <false>)
-fe3d:image_set_visible("scythe", <false>)
-fe3d:image_set_visible("hammer_stone", <false>)
-fe3d:image_set_visible("hammer_iron", <false>)
-fe3d:image_set_visible("torch", <false>)
-fe3d:image_set_visible("fishrod", <false>)

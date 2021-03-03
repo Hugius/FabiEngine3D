@@ -1,4 +1,4 @@
-9 12
+7 32
 META script_type_init
 
 /// Globals
@@ -6,6 +6,7 @@ GLOB LIST _storage = {0,0,0,0,0,0,0,0,0,0,0}
 GLOB LIST _storageTextIDs = {}
 GLOB LIST _storageButtonIDs = {}
 GLOB BOOL _isInStorage = <false>
+GLOB BOOL _wasInStorage = <false>
 GLOB BOOL _isStorageBuilt = <false>
 
 /// Text IDs

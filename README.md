@@ -1139,9 +1139,10 @@ fe3d:print(camPos.x)
 # Game Execution
 ### Inside engine interface
 ![execution](FabiEngine3D/engine/readme/execution.png)
-- You can play/pause/resume/stop the game preview.
+- You can play/pause/resume/stop/debug the game preview.
 - All changes made with the scripting will be reset when the preview exits.
 - You can pause the gameplay with **ESCAPE**.
+- If the game is paused you can start a **debugging** frame which prints a **performance** report about your **code**.
 ### Outside engine interface
 - Exit FabiEngine3D.
 - Open the **config** file (`config.fe3d`).

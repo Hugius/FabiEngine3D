@@ -1,4 +1,4 @@
-9 14
+10 32
 META script_type_init
 
 /// Globals
@@ -9,6 +9,7 @@ GLOB INT _equipIndex = 0
 GLOB INT _lastEquipIndex = 0
 GLOB BOOL _isInvOpen = <true>
 GLOB BOOL _wasInvOpen = <true>
+GLOB BOOL _invMustClose = <false>
 
 /// Inventory slots
 fe3d:image_place("slot1", "slot.png", -0.5,   -0.85, 0.0, 0.125, 0.2)
@@ -47,4 +48,3 @@ fe3d:image_place("hammer_stone", "hammer_stone.png", 0.25,  -0.85, 0.0, 0.125, 0
 fe3d:image_place("hammer_iron", "hammer_iron.png", 0.25,  -0.85, 0.0, 0.125, 0.2)
 fe3d:image_place("torch", "torch.png", 0.375,  -0.85, 0.0, 0.125, 0.2)
 fe3d:image_place("fishrod", "fishrod.png", 0.5,  -0.85, 0.0, 0.125, 0.2)
-

@@ -1,37 +1,32 @@
-57 51
+27 4
 META script_type_update
 
-/// Update health icon color
-DEC healthColor = _health
-fe3d:image_set_color("health", healthColor, healthColor, healthColor)
-
-/// Update hunger icon color
-DEC hungerColor = _hunger
-fe3d:image_set_color("hunger", hungerColor, hungerColor, hungerColor)
-
-/// Update thirst icon color
-DEC thirstColor = _thirst
-fe3d:image_set_color("thirst", thirstColor, thirstColor, thirstColor)
-
-/// Update stamina icon color
-DEC staminaColor = _stamina
-fe3d:image_set_color("stamina", staminaColor, staminaColor, staminaColor)
-
-/// Update oxygen icon color
-DEC oxygenColor = _oxygen
-fe3d:image_set_color("oxygen", oxygenColor, oxygenColor, oxygenColor)
-
-/// Update temperature icon color
-DEC tempColor = _temperature
-fe3d:image_set_color("temperature", tempColor, tempColor, 1.0)
-
-/// Update hygiene icon color
-DEC hygieneColor = _hygiene
-fe3d:image_set_color("hygiene", hygieneColor, hygieneColor, hygieneColor)
-
-/// Update sickness icon alpha
-DEC sicknessAlpha = _sickness
-fe3d:image_set_alpha("sickness", sicknessAlpha)
+BOOL interval = misc:time_interval("status", 50)
+IF interval IS <true>:
+    /// Update health icon color
+    DEC healthColor = _health
+    fe3d:image_set_color("health", healthColor, healthColor, healthColor)
+    /// Update hunger icon color
+    DEC hungerColor = _hunger
+    fe3d:image_set_color("hunger", hungerColor, hungerColor, hungerColor)
+    /// Update thirst icon color
+    DEC thirstColor = _thirst
+    fe3d:image_set_color("thirst", thirstColor, thirstColor, thirstColor)
+    /// Update stamina icon color
+    DEC staminaColor = _stamina
+    fe3d:image_set_color("stamina", staminaColor, staminaColor, staminaColor)
+    /// Update oxygen icon color
+    DEC oxygenColor = _oxygen
+    fe3d:image_set_color("oxygen", oxygenColor, oxygenColor, oxygenColor)
+    /// Update temperature icon color
+    DEC tempColor = _temperature
+    fe3d:image_set_color("temperature", tempColor, tempColor, 1.0)
+    /// Update hygiene icon color
+    DEC hygieneColor = _hygiene
+    fe3d:image_set_color("hygiene", hygieneColor, hygieneColor, hygieneColor)
+    /// Update sickness icon alpha
+    DEC sicknessAlpha = _sickness
+    fe3d:image_set_alpha("sickness", sicknessAlpha)
 
 /// Update hunger
 DECR _hunger 0.000025

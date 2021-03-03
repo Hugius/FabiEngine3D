@@ -52,6 +52,12 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 					}
 				}
 
+				// Correct hover position
+				if (hoveredLineIndex > _script.getScriptFile(_currentScriptFileID)->getLineCount() - 1)
+				{
+					hoveredLineIndex = _script.getScriptFile(_currentScriptFileID)->getLineCount();
+				}
+
 				// Correct cursor position
 				if (cursorLineIndex > _script.getScriptFile(_currentScriptFileID)->getLineCount() - 1)
 				{

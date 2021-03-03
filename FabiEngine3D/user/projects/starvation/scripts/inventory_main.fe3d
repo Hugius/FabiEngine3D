@@ -1,13 +1,5 @@
-7 5
+0 23
 META script_type_update
-
-/// Check if player is allowed to have the inventory open
-IF _isCrafting IS <true> OR _isBuilding IS <true> OR _isInStorage IS <true>:
-    IF _isInvOpen IS <true>:
-        EDIT _wasInvOpen = _isInvOpen
-        EDIT _isInvOpen = <false>
-ELSE:
-    EDIT _isInvOpen = _wasInvOpen
 
 /// Check if any tool animation is playing
 BOOL isAnimPlaying = <false>
@@ -85,17 +77,3 @@ CAST newIndex STR
 STR newSlotID = misc:concat_strings("slot", newIndex)
 fe3d:image_set_color(newSlotID, 0.4, 0.6, 0.4)
 EDIT _lastEquipIndex = _equipIndex
-
-/// Update tool durabilities
-INT index = 0
-DEC minDurability = _durabilityHit
-DIV minDurability 2.0
-LOOP:
-    IF index IS 9:
-        BREAK
-    ELSE:
-        IF _durabilities[index] LESS minDurability AND _inventory[index] NOT "":
-            fe3d:model_set_visible(_inventory[index], <false>)
-            EDIT _inventory[index] = ""
-            EDIT _durabilities[index] = 0.0
-        INCR index 1

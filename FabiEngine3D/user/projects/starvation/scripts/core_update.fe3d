@@ -1,4 +1,4 @@
-65 8
+11 18
 META script_type_update
 META execution_entry
 
@@ -10,6 +10,7 @@ EXEC bag_main
 
 /// Tools inventory
 EXEC inventory_main
+EXEC inventory_gui
 EXEC inventory_misc
 
 /// Player

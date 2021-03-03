@@ -646,7 +646,7 @@ public:
 	void gfx_disableDOF(bool resetProperties = false);
 	void gfx_disableMotionBlur(bool resetProperties = false);
 	void gfx_disableLensFlare(bool resetProperties = false);
-
+	
 	// Graphics interface - getters
 	bool gfx_isMsaaEnabled();
 	bool gfx_isAmbientLightingEnabled();

@@ -1,26 +1,9 @@
-67 5
+78 17
 META script_type_update
 
 /// Temporary values
 STR currentWorld = fe3d:scene_get_current_id()
 BOOL ePressed = fe3d:input_is_key_pressed("KEY_E")
-
-/// Update torch lighting
-BOOL equipped = (_equipIndex IS 7 AND _inventory[_equipIndex] NOT "")
-fe3d:light_set_visible("torch", <false>)
-fe3d:billboard_set_visible("torch", <false>)
-IF equipped IS <true> AND _isInvOpen IS <true>:
-    VEC3 torchPos = fe3d:model_get_position("torch")
-    VEC3 firePos = torchPos
-    INCR torchPos.y 2.0
-    INCR firePos.y 1.8
-    fe3d:light_set_position("torch", torchPos.x, torchPos.y, torchPos.z)
-    fe3d:billboard_set_position("torch", firePos.x, firePos.y, firePos.z)
-    /// Check if it's nighttime
-    IF _isDayTime IS <false> AND _isUnderWater IS <false>:
-        fe3d:light_set_visible("torch", <true>)
-        fe3d:billboard_set_visible("torch", <true>)
-        DECR _durabilities[7] 0.0001
 
 /// Update black overlay
 fe3d:image_set_alpha("black", _blackAlpha)
@@ -62,6 +45,21 @@ DEC waterY = fe3d:water_get_height()
 IF camPos.y LESS waterY:
     INCR _hygiene 0.001
 
+/// Check if player wants to open/close survival time
+EDIT _wasTimeOpen = _isTimeOpen
+BOOL tPressed = fe3d:input_is_key_pressed("KEY_T")
+IF tPressed IS <true>:
+    IF _isTimeOpen IS <true>:
+        EDIT _isTimeOpen = <false>
+    ELSE:
+        EDIT _isTimeOpen = <true>
+
+/// Update survival time visibility
+IF _wasTimeOpen NOT _isTimeOpen OR _survivalTime IS 0:
+    fe3d:image_set_visible("scroll_time", _isTimeOpen)
+    fe3d:text_set_visible("title_time", _isTimeOpen)
+    fe3d:text_set_visible("time", _isTimeOpen)
+
 /// Update survival time
 DEC elapsedMS = fe3d:timer_stop()
 INCR _elapsedMS elapsedMS
@@ -70,3 +68,15 @@ EDIT _survivalTime = _elapsedMS
 MUL _survivalTime 0.001
 CAST _survivalTime INT
 fe3d:timer_start()
+
+/// Update survival time text
+IF _isTimeOpen IS <true>:
+    CAST _survivalTime STR
+    STR text = misc:concat_strings("You wasted ", _survivalTime)
+    EDIT text = misc:concat_strings(text, " seconds of your life!")
+    CAST _survivalTime INT
+    INT size = misc:get_string_size(text)
+    CAST size DEC
+    MUL size 0.02
+    fe3d:text_set_content("time", text)
+    fe3d:text_set_size("time", size, 0.05)

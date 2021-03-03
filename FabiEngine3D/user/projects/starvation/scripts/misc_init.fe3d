@@ -1,4 +1,4 @@
-14 25
+32 58
 META script_type_init
 
 /// Globals
@@ -21,11 +21,18 @@ GLOB CONST INT _seedsCount = 5
 GLOB CONST INT _wheatCount = 12
 GLOB CONST INT _fishCount = 1
 GLOB INT _survivalTime = 0
+GLOB BOOL _isTimeOpen = <false>
+GLOB BOOL _wasTimeOpen = <false>
 
-/// Interaction UI
-STR f = "font.ttf"
+/// Images
 fe3d:image_place("crosshair", "crosshair.png", 0.0, 0.0, 0.0, 0.0325, 0.05)
 fe3d:image_place("black", "black.png", 0.0, 0.0, 0.0, 2.0, 2.0)
+fe3d:image_place("scroll_time", "scroll3.png", 0.0, 0.5, 0.0, 1.0, 0.5)
+
+/// Text
+STR f = "font.ttf"
+fe3d:text_place("title_time", f, "Survival Time", 0.0, 0.6, 0.0, 0.425, 0.075)
+fe3d:text_place("time", f, "", 0.0, 0.5, 0.0, 0.0, 0.0)
 fe3d:text_place("pickup", f, "Press F to pickup", 0.0, -0.2, 0.0, 0.425, 0.075)
 fe3d:text_place("craft", f, "Press E to craft", 0.0, -0.2, 0.0, 0.4, 0.075)
 fe3d:text_place("talk", f, "Press E to talk", 0.0, -0.2, 0.0, 0.375, 0.075)
@@ -41,6 +48,8 @@ fe3d:text_place("plow", f, "Press LMB to plow", 0.0, -0.2, 0.0, 0.425, 0.075)
 fe3d:text_place("reap", f, "Press LMB to reap", 0.0, -0.2, 0.0, 0.425, 0.075)
 fe3d:text_place("build", f, "Press LMB to build", 0.0, -0.2, 0.0, 0.45, 0.075)
 fe3d:text_place("fish", f, "Press LMB to fish", 0.0, -0.2, 0.0, 0.425, 0.075)
+fe3d:text_set_color("title_time", 0.0, 0.0, 0.0)
+fe3d:text_set_color("time", 0.0, 0.0, 0.0)
 fe3d:text_set_visible("pickup", <false>)
 fe3d:text_set_visible("craft", <false>)
 fe3d:text_set_visible("talk", <false>)

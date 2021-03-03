@@ -1,4 +1,4 @@
-7 0
+39 36
 META script_type_update
 
 /// Temporary values
@@ -16,3 +16,26 @@ ELSE:
 /// Centering cursor
 IF _isPickupPlaying IS <true> OR _isToolPlaying IS <true>:
     fe3d:camera_center_cursor()
+
+/// Check if player wants to open/close inventory
+EDIT _wasStatusOpen = _isStatusOpen
+BOOL pPressed = fe3d:input_is_key_pressed("KEY_P")
+IF pPressed IS <true>:
+    IF _isStatusOpen IS <true>:
+        EDIT _isStatusOpen = <false>
+    ELSE:
+        EDIT _isStatusOpen = <true>
+
+/// Update GUI visbility
+IF _isStatusOpen NOT _wasStatusOpen OR _survivalTime IS 0:
+    fe3d:image_set_visible("scroll_player", _isStatusOpen)
+    fe3d:image_set_visible("player", _isStatusOpen)
+    fe3d:text_set_visible("name", _isStatusOpen)
+    fe3d:image_set_visible("health", _isStatusOpen)
+    fe3d:image_set_visible("hunger", _isStatusOpen)
+    fe3d:image_set_visible("thirst", _isStatusOpen)
+    fe3d:image_set_visible("stamina", _isStatusOpen)
+    fe3d:image_set_visible("oxygen", _isStatusOpen)
+    fe3d:image_set_visible("temperature", _isStatusOpen)
+    fe3d:image_set_visible("hygiene", _isStatusOpen)
+    fe3d:image_set_visible("sickness", _isStatusOpen)

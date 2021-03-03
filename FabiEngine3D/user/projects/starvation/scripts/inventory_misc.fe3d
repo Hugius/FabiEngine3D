@@ -1,10 +1,8 @@
-19 4
+1 0
 META script_type_update
 
-/// Temporary values
-EDIT _wasInvOpen = _isInvOpen
-
 /// Check if player wants to open/close inventory
+EDIT _wasInvOpen = _isInvOpen
 BOOL iPressed = fe3d:input_is_key_pressed("KEY_I")
 IF iPressed IS <true> AND _isToolPlaying IS <false>:
     IF _isInvOpen IS <true>:

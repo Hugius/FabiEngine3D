@@ -1,4 +1,4 @@
-18 21
+16 14
 META script_type_init
 META execution_entry
 
@@ -8,7 +8,6 @@ fe3d:scene_load("home")
 /// No GUI elements
 EXEC npc_init
 EXEC time_init
-EXEC misc_init
 
 /// GUI in correct order
 EXEC water_init
@@ -16,6 +15,7 @@ EXEC build_init_main
 EXEC build_init_gui
 EXEC craft_init_main
 EXEC craft_init_gui
+EXEC misc_init
 EXEC storage_init_main
 EXEC storage_init_gui
 EXEC inventory_init

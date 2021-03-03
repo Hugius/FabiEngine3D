@@ -16,9 +16,16 @@ void Timer::start()
 
 float Timer::stop()
 {
-	QueryPerformanceCounter(&_time2);
-	_isTiming = false;
-	return static_cast<float>((_time2.QuadPart - _time1.QuadPart) * 1000.0f / _frequency.QuadPart);
+	if (_isTiming)
+	{
+		QueryPerformanceCounter(&_time2);
+		_isTiming = false;
+		return static_cast<float>((_time2.QuadPart - _time1.QuadPart) * 1000.0f / _frequency.QuadPart);
+	}
+	else
+	{
+		return 0.0f;
+	}
 }
 
 void Timer::startDeltaPart(const string& ID)

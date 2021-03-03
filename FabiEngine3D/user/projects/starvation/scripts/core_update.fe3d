@@ -1,4 +1,4 @@
-11 18
+25 20
 META script_type_update
 META execution_entry
 
@@ -24,6 +24,7 @@ EXEC player_misc
 EXEC animation_misc
 EXEC animation_player
 EXEC animation_tool
+EXEC animation_torch
 
 /// Resources
 IF currentWorld IS "home":

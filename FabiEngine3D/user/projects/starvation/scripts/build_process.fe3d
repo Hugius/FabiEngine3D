@@ -1,4 +1,4 @@
-96 56
+90 60
 META script_type_update
 
 /// Retrieve hovered building properties
@@ -67,19 +67,15 @@ IF hoveredID NOT "":
             DECR _bag[2] _buildablesClayPrice[hoveredIndex]
             DECR _bag[9] _buildablesIronPrice[hoveredIndex]
             DECR _durabilities[6] _durabilityHit
-            /// Check if building is finished
+            /// Check if building is finished & apply effects
             IF height IS size.y OR height MORE size.y:
-                /// Determine building type
                 IF idPart IS "sm" OR idPart IS "me" OR idPart IS "bi":
-                    /// Spawn bed
                     STR bedID = misc:concat_strings("bed:", hoveredID)
                     VEC3 bedPos = fe3d:model_get_position(hoveredID)
                     fe3d:model_place(bedID, "bed", bedPos.x, bedPos.y, bedPos.z)
                 ELIF idPart IS "mi":
-                    /// Start mill animation
                     fe3d:model_start_animation(hoveredID, "mill_rotation", -1)
                 ELIF idPart IS "ov":
-                    /// Add fire & smoke to the oven
                     STR fireID = misc:concat_strings("fire:", hoveredID)
                     STR smokeID = misc:concat_strings("smoke:", hoveredID)
                     VEC3 pos = fe3d:model_get_position(hoveredID)
@@ -90,12 +86,15 @@ IF hoveredID NOT "":
                     fe3d:billboard_place(smokeID, "smoke", pos.x, pos.y, pos.z)
                     fe3d:billboard_start_animation(smokeID, -1)
                 ELIF idPart IS "ca":
-                    /// Add fires to the campfire
-                    STR fireID1 = misc:concat_strings("fire1:", hoveredID)
-                    STR fireID2 = misc:concat_strings("fire2:", hoveredID)
+                    STR firstFireID = misc:concat_strings("fire3_1:", hoveredID)
+                    STR secondFireID = misc:concat_strings("fire3_2:", hoveredID)
                     VEC3 pos = fe3d:model_get_position(hoveredID)
-                    fe3d:billboard_place(fireID1, "fire3", pos.x, pos.y, pos.z)
-                    fe3d:billboard_place(fireID2, "fire3", pos.x, pos.y, pos.z)
-                    fe3d:billboard_set_rotation(fireID2, 0.0, 90.0, 0.0)
-                    fe3d:billboard_start_animation(fireID1, -1)
-                    fe3d:billboard_start_animation(fireID2, -1)
+                    fe3d:billboard_place(firstFireID, "fire3", pos.x, pos.y, pos.z)
+                    fe3d:billboard_place(secondFireID, "fire3", pos.x, pos.y, pos.z)
+                    fe3d:billboard_set_rotation(firstFireID, 0.0, 90.0, 0.0)
+                    fe3d:billboard_set_aabb_collision_responsive(firstFireID, <false>)
+                    fe3d:billboard_set_aabb_collision_responsive(secondFireID, <false>)
+                    fe3d:billboard_start_animation(firstFireID, -1)
+                    fe3d:billboard_start_animation(secondFireID, -1)
+                    STR ID = hoveredID
+                    fe3d:light_place(ID, pos.x, pos.y, pos.z, 1.0, 0.85, 0.0, 1.0, 5.0)

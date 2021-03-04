@@ -2,37 +2,37 @@ SKY day user\assets\textures\cube_maps\day_right.png user\assets\textures\cube_m
 TERRAIN home user\assets\textures\height_maps\home.bmp ? 96 1 0.9 1 user\assets\textures\blend_maps\home.png user\assets\textures\diffuse_maps\terrain\grass.png user\assets\textures\diffuse_maps\terrain\mud.png user\assets\textures\diffuse_maps\terrain\ground.png 48 128 64 1 1 1 1 ? user\assets\textures\normal_maps\terrain\grass.png user\assets\textures\normal_maps\terrain\mud.png user\assets\textures\normal_maps\terrain\ground.png 1 8 1
 WATER lake user\assets\textures\dudv_maps\water.png user\assets\textures\normal_maps\water\wave1.png ? 0 1 0 1 0 0.25098 0.25098 1 32 -140 30.4 -108 6 1 0.0001 0.0003 0.2 64 1
 MODEL 304942782@tree6 -7.06711 31.247 11.9367 0 0 0 1.25 1 1.25 user\assets\meshes\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? leaves 0 8.8 0 3.85 8.30001 3.6 trunk 0 0 0 0.85 8.80001 0.8
+MODEL 695996379@tree6 144.662 31.6235 23.7235 0 0 0 1.6 1.8 1.6 user\assets\meshes\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? leaves 0 8.8 0 3.85 8.30001 3.6 trunk 0 0 0 0.85 8.80001 0.8
+MODEL 190558150@tree2 90.8244 31.2471 -2.21654 0 0 0 2 2.4 2 user\assets\meshes\trees\tree2.obj user\assets\textures\diffuse_maps\trees\tree_bush_2.png ? ? user\assets\textures\normal_maps\trees\tree_bush_2.png 0 0 1 1 0 0 1 1 0.7 1 1 1 1 ? 0 ? trunk 0 0 0 0.7 4.6 0.8 leaves 0 4.6 0 4.2 8.2 4.1
+MODEL 1013712644@tree6 137.817 31.247 62.5106 0 0 0 1.25 1 1.25 user\assets\meshes\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
 MODEL 422137956@tree6 -130.784 31.2471 -31.8634 0 0 0 1.6 1.6 1.6 user\assets\meshes\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? leaves 0 8.8 0 3.85 8.30001 3.6 trunk 0 0 0 0.85 8.80001 0.8
+MODEL 1781520186@tree6 -16.8057 31.2471 -37.9625 0 0 0 1.6 1.6 1.6 user\assets\meshes\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? leaves 0 8.8 0 3.85 8.30001 3.6 trunk 0 0 0 0.85 8.80001 0.8
 MODEL 207285132@tree7 -5.34332 31.2471 1.36428 0 0 0 5 6 5 user\assets\meshes\trees\tree7.obj ? ? ? ? 0 0 1 1 0 1 1 1 0.75 1 1 1 1 ? 0 ? leaves 0 1.18 0 1.79 3.25 1.77 trunk -1.86265e-09 0 0 0.22 1.18 0.21
+MODEL 1405219796@tree7 157.436 31.2471 64.5113 0 0 0 5 8 5 user\assets\meshes\trees\tree7.obj ? ? ? ? 0 0 1 1 0 1 1 1 0.75 1 1 1 1 ? 0 ? leaves 0 1.18 0 1.79 3.25 1.77 trunk -1.86265e-09 0 0 0.22 1.18 0.21
+MODEL 1714829437@tree7 -166.171 31.2471 -48.6412 0 0 0 5 5 5 user\assets\meshes\trees\tree7.obj ? ? ? ? 0 0 1 1 0 1 1 1 0.75 1 1 1 1 ? 0 ? trunk -1.86265e-09 0 0 0.22 1.18 0.21 leaves 0 1.18 0 1.79 3.25 1.77
 MODEL 966616105@tree6 -112.115 31.2471 12.1942 0 0 0 1.6 1.6 1.6 user\assets\meshes\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? leaves 0 8.8 0 3.85 8.30001 3.6 trunk 0 0 0 0.85 8.80001 0.8
 MODEL 548135231@tree2 -47.8535 31.2471 -8.70404 0 0 0 2 2 2 user\assets\meshes\trees\tree2.obj user\assets\textures\diffuse_maps\trees\tree_bush_2.png ? ? user\assets\textures\normal_maps\trees\tree_bush_2.png 0 0 1 1 0 0 1 1 0.7 1 1 1 1 ? 0 ? leaves 0 4.6 0 4.2 8.2 4.1 trunk 0 0 0 0.7 4.6 0.8
+MODEL 12130148@tree7 78.3457 31.2471 20.5984 0 0 0 5 5 5 user\assets\meshes\trees\tree7.obj ? ? ? ? 0 0 1 1 0 1 1 1 0.75 1 1 1 1 ? 0 ? trunk -1.86265e-09 0 0 0.22 1.18 0.21 leaves 0 1.18 0 1.79 3.25 1.77
+MODEL 405701836@tree2 -132.605 31.247 -53.5041 0 0 0 2 2 2 user\assets\meshes\trees\tree2.obj user\assets\textures\diffuse_maps\trees\tree_bush_2.png ? ? user\assets\textures\normal_maps\trees\tree_bush_2.png 0 0 1 1 0 0 1 1 0.7 1 1 1 1 ? 0 ? trunk 0 0 0 0.7 4.6 0.8 leaves 0 4.6 0 4.2 8.2 4.1
 MODEL 1698221979@tree2 146.695 31.247 68.7265 0 0 0 2 2 2 user\assets\meshes\trees\tree2.obj user\assets\textures\diffuse_maps\trees\tree_bush_2.png ? ? user\assets\textures\normal_maps\trees\tree_bush_2.png 0 0 1 1 0 0 1 1 0.7 1 1 1 1 ? 0 ? trunk 0 0 0 0.7 4.6 0.8 leaves 0 4.6 0 4.2 8.2 4.1
 MODEL 995526106@tree2 52.5034 31.2471 37.1952 0 0 0 2 2 2 user\assets\meshes\trees\tree2.obj user\assets\textures\diffuse_maps\trees\tree_bush_2.png ? ? user\assets\textures\normal_maps\trees\tree_bush_2.png 0 0 1 1 0 0 1 1 0.7 1 1 1 1 ? 0 ? trunk 0 0 0 0.7 4.6 0.8 leaves 0 4.6 0 4.2 8.2 4.1
+MODEL 1204515572@tree2 -90.2812 31.2471 -36.9686 0 0 0 2 2 2 user\assets\meshes\trees\tree2.obj user\assets\textures\diffuse_maps\trees\tree_bush_2.png ? ? user\assets\textures\normal_maps\trees\tree_bush_2.png 0 0 1 1 0 0 1 1 0.7 1 1 1 1 ? 0 ? trunk 0 0 0 0.7 4.6 0.8 leaves 0 4.6 0 4.2 8.2 4.1
 MODEL 1255261479@tree7 172.134 31.2471 92.8393 0 0 0 5 6 5 user\assets\meshes\trees\tree7.obj ? ? ? ? 0 0 1 1 0 1 1 1 0.75 1 1 1 1 ? 0 ? trunk -1.86265e-09 0 0 0.22 1.18 0.21 leaves 0 1.18 0 1.79 3.25 1.77
 MODEL 1286597759@tree6 -135.495 31.2471 -14.9642 0 0 0 1.25 1 1.25 user\assets\meshes\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
 MODEL 1136606918@tree2 103.845 31.2471 39.4644 0 0 0 2 2.4 2 user\assets\meshes\trees\tree2.obj user\assets\textures\diffuse_maps\trees\tree_bush_2.png ? ? user\assets\textures\normal_maps\trees\tree_bush_2.png 0 0 1 1 0 0 1 1 0.7 1 1 1 1 ? 0 ? leaves 0 4.6 0 4.2 8.2 4.1 trunk 0 0 0 0.7 4.6 0.8
 MODEL 629714026@tree6 -121.522 30.8706 13.7088 0 0 0 1.25 1 1.25 user\assets\meshes\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
 MODEL 1125879154@tree6 16.4505 31.2471 -10.0748 0 0 0 1.25 1 1.25 user\assets\meshes\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
 MODEL 1512232304@tree6 149.546 31.2471 44.5398 0 0 0 1.25 1 1.25 user\assets\meshes\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
-MODEL 612200271@tree6 43.6591 30.8706 -12.842 0 0 0 1.25 1 1.25 user\assets\meshes\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? leaves 0 8.8 0 3.85 8.30001 3.6 trunk 0 0 0 0.85 8.80001 0.8
-MODEL 405701836@tree2 -132.605 31.247 -53.5041 0 0 0 2 2 2 user\assets\meshes\trees\tree2.obj user\assets\textures\diffuse_maps\trees\tree_bush_2.png ? ? user\assets\textures\normal_maps\trees\tree_bush_2.png 0 0 1 1 0 0 1 1 0.7 1 1 1 1 ? 0 ? trunk 0 0 0 0.7 4.6 0.8 leaves 0 4.6 0 4.2 8.2 4.1
-MODEL 695996379@tree6 144.662 31.6235 23.7235 0 0 0 1.6 1.8 1.6 user\assets\meshes\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? leaves 0 8.8 0 3.85 8.30001 3.6 trunk 0 0 0 0.85 8.80001 0.8
-MODEL 190558150@tree2 90.8244 31.2471 -2.21654 0 0 0 2 2.4 2 user\assets\meshes\trees\tree2.obj user\assets\textures\diffuse_maps\trees\tree_bush_2.png ? ? user\assets\textures\normal_maps\trees\tree_bush_2.png 0 0 1 1 0 0 1 1 0.7 1 1 1 1 ? 0 ? trunk 0 0 0 0.7 4.6 0.8 leaves 0 4.6 0 4.2 8.2 4.1
-MODEL 1013712644@tree6 137.817 31.247 62.5106 0 0 0 1.25 1 1.25 user\assets\meshes\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
-MODEL 1781520186@tree6 -16.8057 31.2471 -37.9625 0 0 0 1.6 1.6 1.6 user\assets\meshes\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? leaves 0 8.8 0 3.85 8.30001 3.6 trunk 0 0 0 0.85 8.80001 0.8
-MODEL 1714829437@tree7 -166.171 31.2471 -48.6412 0 0 0 5 5 5 user\assets\meshes\trees\tree7.obj ? ? ? ? 0 0 1 1 0 1 1 1 0.75 1 1 1 1 ? 0 ? trunk -1.86265e-09 0 0 0.22 1.18 0.21 leaves 0 1.18 0 1.79 3.25 1.77
-MODEL 12130148@tree7 78.3457 31.2471 20.5984 0 0 0 5 5 5 user\assets\meshes\trees\tree7.obj ? ? ? ? 0 0 1 1 0 1 1 1 0.75 1 1 1 1 ? 0 ? trunk -1.86265e-09 0 0 0.22 1.18 0.21 leaves 0 1.18 0 1.79 3.25 1.77
-MODEL 1405219796@tree7 157.436 31.2471 64.5113 0 0 0 5 8 5 user\assets\meshes\trees\tree7.obj ? ? ? ? 0 0 1 1 0 1 1 1 0.75 1 1 1 1 ? 0 ? leaves 0 1.18 0 1.79 3.25 1.77 trunk -1.86265e-09 0 0 0.22 1.18 0.21
-MODEL 1204515572@tree2 -90.2812 31.2471 -36.9686 0 0 0 2 2 2 user\assets\meshes\trees\tree2.obj user\assets\textures\diffuse_maps\trees\tree_bush_2.png ? ? user\assets\textures\normal_maps\trees\tree_bush_2.png 0 0 1 1 0 0 1 1 0.7 1 1 1 1 ? 0 ? trunk 0 0 0 0.7 4.6 0.8 leaves 0 4.6 0 4.2 8.2 4.1
 MODEL 650591088@tree7 -154.99 31.2471 -33.0647 0 0 0 5 5 5 user\assets\meshes\trees\tree7.obj ? ? ? ? 0 0 1 1 0 1 1 1 0.75 1 1 1 1 ? 0 ? trunk -1.86265e-09 0 0 0.22 1.18 0.21 leaves 0 1.18 0 1.79 3.25 1.77
 MODEL 897065390@tree6 127.411 31.247 52.9249 0 0 0 1.25 1 1.25 user\assets\meshes\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
+MODEL 612200271@tree6 43.6591 30.8706 -12.842 0 0 0 1.25 1 1.25 user\assets\meshes\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? leaves 0 8.8 0 3.85 8.30001 3.6 trunk 0 0 0 0.85 8.80001 0.8
 MODEL 1382814680@tree6 -100.66 31.247 -3.71797 0 0 0 1.25 1 1.25 user\assets\meshes\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? leaves 0 8.8 0 3.85 8.30001 3.6 trunk 0 0 0 0.85 8.80001 0.8
 MODEL 1423920906@tree7 77.9962 31.2471 5.23901 0 0 0 5 6 5 user\assets\meshes\trees\tree7.obj ? ? ? ? 0 0 1 1 0 1 1 1 0.75 1 1 1 1 ? 0 ? trunk -1.86265e-09 0 0 0.22 1.18 0.21 leaves 0 1.18 0 1.79 3.25 1.77
 MODEL 814139783@tree6 -40.1385 31.2471 -30.7178 0 0 0 1.25 1 1.25 user\assets\meshes\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
 MODEL 471445929@tree2 65.3334 31.2471 -6.22228 0 0 0 2 2 2 user\assets\meshes\trees\tree2.obj user\assets\textures\diffuse_maps\trees\tree_bush_2.png ? ? user\assets\textures\normal_maps\trees\tree_bush_2.png 0 0 1 1 0 0 1 1 0.7 1 1 1 1 ? 0 ? leaves 0 4.6 0 4.2 8.2 4.1 trunk 0 0 0 0.7 4.6 0.8
 MODEL 121080388@tree6 86.8182 31.247 42.1135 0 0 0 1.6 1.6 1.6 user\assets\meshes\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? leaves 0 8.8 0 3.85 8.30001 3.6 trunk 0 0 0 0.85 8.80001 0.8
 MODEL 1838849439@hills 0 -1 0 0 0 0 4 10.4 4 user\assets\meshes\misc\hills.obj user\assets\textures\diffuse_maps\terrain\rock.png ? ? ? 0 0 0 0 0 0 1 1 1 1 1 1 8 ? 0 ?
-MODEL 2022142597@tree2 -168.519 31.2471 -60.0283 0 0 0 2 2 2 user\assets\meshes\trees\tree2.obj user\assets\textures\diffuse_maps\trees\tree_bush_2.png ? ? user\assets\textures\normal_maps\trees\tree_bush_2.png 0 0 1 1 0 0 1 1 0.7 1 1 1 1 ? 0 ? trunk 0 0 0 0.7 4.6 0.8 leaves 0 4.6 0 4.2 8.2 4.1
+MODEL 2022142597@tree2 -168.519 31.2471 -60.0283 0 0 0 2 2 2 user\assets\meshes\trees\tree2.obj user\assets\textures\diffuse_maps\trees\tree_bush_2.png ? ? user\assets\textures\normal_maps\trees\tree_bush_2.png 0 0 1 1 0 0 1 1 0.7 1 1 1 1 ? 0 ? leaves 0 4.6 0 4.2 8.2 4.1 trunk 0 0 0 0.7 4.6 0.8
 MODEL 2076935308@tree7 -23.6158 31.247 -15.1384 0 0 0 5 5 5 user\assets\meshes\trees\tree7.obj ? ? ? ? 0 0 1 1 0 1 1 1 0.75 1 1 1 1 ? 0 ? leaves 0 1.18 0 1.79 3.25 1.77 trunk -1.86265e-09 0 0 0.22 1.18 0.21
 MODEL 1417431017@tree7 113.905 31.2471 27.9055 0 0 0 5 5 5 user\assets\meshes\trees\tree7.obj ? ? ? ? 0 0 1 1 0 1 1 1 0.75 1 1 1 1 ? 0 ? trunk -1.86265e-09 0 0 0.22 1.18 0.21 leaves 0 1.18 0 1.79 3.25 1.77
 MODEL 2029311322@tree6 -4.60346 31.247 -31.9683 0 0 0 1.25 1 1.25 user\assets\meshes\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
@@ -61,8 +61,8 @@ MODEL 75160163@tree2 89.7535 31.247 16.3877 0 0 0 2 2 2 user\assets\meshes\trees
 MODEL 1450511263@tree2 32.4141 31.2471 -10.0236 0 0 0 2 2.4 2 user\assets\meshes\trees\tree2.obj user\assets\textures\diffuse_maps\trees\tree_bush_2.png ? ? user\assets\textures\normal_maps\trees\tree_bush_2.png 0 0 1 1 0 0 1 1 0.7 1 1 1 1 ? 0 ? trunk 0 0 0 0.7 4.6 0.8 leaves 0 4.6 0 4.2 8.2 4.1
 MODEL 205066176@tree7 106.201 30.8706 2.41957 0 0 0 5 6 5 user\assets\meshes\trees\tree7.obj ? ? ? ? 0 0 1 1 0 1 1 1 0.75 1 1 1 1 ? 0 ? trunk -1.86265e-09 0 0 0.22 1.18 0.21 leaves 0 1.18 0 1.79 3.25 1.77
 MODEL 1079495527@tree2 -56.453 30.8705 -50.955 0 0 0 2 2 2 user\assets\meshes\trees\tree2.obj user\assets\textures\diffuse_maps\trees\tree_bush_2.png ? ? user\assets\textures\normal_maps\trees\tree_bush_2.png 0 0 1 1 0 0 1 1 0.7 1 1 1 1 ? 0 ? trunk 0 0 0 0.7 4.6 0.8 leaves 0 4.6 0 4.2 8.2 4.1
-MODEL 337678037@tree6 83.4481 31.2471 62.2461 0 0 0 1.6 1.6 1.6 user\assets\meshes\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? leaves 0 8.8 0 3.85 8.30001 3.6 trunk 0 0 0 0.85 8.80001 0.8
-MODEL 1332752003@tree2 -101.291 31.2471 5.21576 0 0 0 2 2 2 user\assets\meshes\trees\tree2.obj user\assets\textures\diffuse_maps\trees\tree_bush_2.png ? ? user\assets\textures\normal_maps\trees\tree_bush_2.png 0 0 1 1 0 0 1 1 0.7 1 1 1 1 ? 0 ? trunk 0 0 0 0.7 4.6 0.8 leaves 0 4.6 0 4.2 8.2 4.1
+MODEL 337678037@tree6 83.4481 31.2471 62.2461 0 0 0 1.6 1.6 1.6 user\assets\meshes\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
+MODEL 1332752003@tree2 -101.291 31.2471 5.21576 0 0 0 2 2 2 user\assets\meshes\trees\tree2.obj user\assets\textures\diffuse_maps\trees\tree_bush_2.png ? ? user\assets\textures\normal_maps\trees\tree_bush_2.png 0 0 1 1 0 0 1 1 0.7 1 1 1 1 ? 0 ? leaves 0 4.6 0 4.2 8.2 4.1 trunk 0 0 0 0.7 4.6 0.8
 MODEL 1245229634@tree6 -164.918 31.2471 -37.0407 0 0 0 1.25 1 1.25 user\assets\meshes\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? leaves 0 8.8 0 3.85 8.30001 3.6 trunk 0 0 0 0.85 8.80001 0.8
 MODEL 80289132@tree2 28.3172 31.2471 35.6345 0 0 0 2 2.4 2 user\assets\meshes\trees\tree2.obj user\assets\textures\diffuse_maps\trees\tree_bush_2.png ? ? user\assets\textures\normal_maps\trees\tree_bush_2.png 0 0 1 1 0 0 1 1 0.7 1 1 1 1 ? 0 ? trunk 0 0 0 0.7 4.6 0.8 leaves 0 4.6 0 4.2 8.2 4.1
 MODEL 385597952@tree7 -116.768 30.8706 -32.9442 0 0 0 5 5 5 user\assets\meshes\trees\tree7.obj ? ? ? ? 0 0 1 1 0 1 1 1 0.75 1 1 1 1 ? 0 ? trunk -1.86265e-09 0 0 0.22 1.18 0.21 leaves 0 1.18 0 1.79 3.25 1.77
@@ -144,15 +144,15 @@ MODEL 1301379388@tree7 -46.2322 31.2471 -22.0756 0 0 0 5 5 5 user\assets\meshes\
 MODEL 132051116@tree7 -27.9936 31.2471 -35.4277 0 0 0 5 5 5 user\assets\meshes\trees\tree7.obj ? ? ? ? 0 0 1 1 0 1 1 1 0.75 1 1 1 1 ? 0 ? leaves 0 1.18 0 1.79 3.25 1.77 trunk -1.86265e-09 0 0 0.22 1.18 0.21
 MODEL 1631772575@tree7 7.06753 31.2471 -10.2599 0 0 0 5 6 5 user\assets\meshes\trees\tree7.obj ? ? ? ? 0 0 1 1 0 1 1 1 0.75 1 1 1 1 ? 0 ? trunk -1.86265e-09 0 0 0.22 1.18 0.21 leaves 0 1.18 0 1.79 3.25 1.77
 MODEL 1667813225@tree6 101.249 31.2471 65.1308 0 0 0 1.6 1.6 1.6 user\assets\meshes\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
-MODEL 578462027@tree7 15.8796 31.2471 12.2019 0 0 0 5 8 5 user\assets\meshes\trees\tree7.obj ? ? ? ? 0 0 1 1 0 1 1 1 0.75 1 1 1 1 ? 0 ? trunk -1.86265e-09 0 0 0.22 1.18 0.21 leaves 0 1.18 0 1.79 3.25 1.77
-MODEL 666907104@tree7 170.653 30.8706 55.8465 0 0 0 5 5 5 user\assets\meshes\trees\tree7.obj ? ? ? ? 0 0 1 1 0 1 1 1 0.75 1 1 1 1 ? 0 ? trunk -1.86265e-09 0 0 0.22 1.18 0.21 leaves 0 1.18 0 1.79 3.25 1.77
+MODEL 578462027@tree7 15.8796 31.2471 12.2019 0 0 0 5 8 5 user\assets\meshes\trees\tree7.obj ? ? ? ? 0 0 1 1 0 1 1 1 0.75 1 1 1 1 ? 0 ? leaves 0 1.18 0 1.79 3.25 1.77 trunk -1.86265e-09 0 0 0.22 1.18 0.21
+MODEL 666907104@tree7 170.653 30.8706 55.8465 0 0 0 5 5 5 user\assets\meshes\trees\tree7.obj ? ? ? ? 0 0 1 1 0 1 1 1 0.75 1 1 1 1 ? 0 ? leaves 0 1.18 0 1.79 3.25 1.77 trunk -1.86265e-09 0 0 0.22 1.18 0.21
 MODEL 1513467137@tree7 36.6619 31.2471 6.51518 0 0 0 5 6 5 user\assets\meshes\trees\tree7.obj ? ? ? ? 0 0 1 1 0 1 1 1 0.75 1 1 1 1 ? 0 ? trunk -1.86265e-09 0 0 0.22 1.18 0.21 leaves 0 1.18 0 1.79 3.25 1.77
 MODEL 644696937@tree7 22.5212 31.2471 -16.5861 0 0 0 5 5 5 user\assets\meshes\trees\tree7.obj ? ? ? ? 0 0 1 1 0 1 1 1 0.75 1 1 1 1 ? 0 ? leaves 0 1.18 0 1.79 3.25 1.77 trunk -1.86265e-09 0 0 0.22 1.18 0.21
 MODEL 2010329718@tree7 61.9759 31.2471 7.01433 0 0 0 5 8 5 user\assets\meshes\trees\tree7.obj ? ? ? ? 0 0 1 1 0 1 1 1 0.75 1 1 1 1 ? 0 ? trunk -1.86265e-09 0 0 0.22 1.18 0.21 leaves 0 1.18 0 1.79 3.25 1.77
 MODEL 1866761@tree7 80.1039 31.2471 -9.21004 0 0 0 5 5 5 user\assets\meshes\trees\tree7.obj ? ? ? ? 0 0 1 1 0 1 1 1 0.75 1 1 1 1 ? 0 ? trunk -1.86265e-09 0 0 0.22 1.18 0.21 leaves 0 1.18 0 1.79 3.25 1.77
 MODEL 1850274585@tree7 97.8756 31.247 8.16274 0 0 0 5 5 5 user\assets\meshes\trees\tree7.obj ? ? ? ? 0 0 1 1 0 1 1 1 0.75 1 1 1 1 ? 0 ? trunk -1.86265e-09 0 0 0.22 1.18 0.21 leaves 0 1.18 0 1.79 3.25 1.77
 MODEL 932926139@tree7 100.766 31.2471 27.7421 0 0 0 5 8 5 user\assets\meshes\trees\tree7.obj ? ? ? ? 0 0 1 1 0 1 1 1 0.75 1 1 1 1 ? 0 ? leaves 0 1.18 0 1.79 3.25 1.77 trunk -1.86265e-09 0 0 0.22 1.18 0.21
-MODEL 1190971110@tree2 75.6475 31.2471 30.7528 0 0 0 2 2.4 2 user\assets\meshes\trees\tree2.obj user\assets\textures\diffuse_maps\trees\tree_bush_2.png ? ? user\assets\textures\normal_maps\trees\tree_bush_2.png 0 0 1 1 0 0 1 1 0.7 1 1 1 1 ? 0 ? leaves 0 4.6 0 4.2 8.2 4.1 trunk 0 0 0 0.7 4.6 0.8
+MODEL 1190971110@tree2 75.6475 31.2471 30.7528 0 0 0 2 2.4 2 user\assets\meshes\trees\tree2.obj user\assets\textures\diffuse_maps\trees\tree_bush_2.png ? ? user\assets\textures\normal_maps\trees\tree_bush_2.png 0 0 1 1 0 0 1 1 0.7 1 1 1 1 ? 0 ? trunk 0 0 0 0.7 4.6 0.8 leaves 0 4.6 0 4.2 8.2 4.1
 MODEL 466013304@tree7 110.451 31.0597 61 0 0 0 5 8 5 user\assets\meshes\trees\tree7.obj ? ? ? ? 0 0 1 1 0 1 1 1 0.75 1 1 1 1 ? 0 ? trunk -1.86265e-09 0 0 0.22 1.18 0.21 leaves 0 1.18 0 1.79 3.25 1.77
 MODEL 738010214@tree7 146.141 31.247 99.2502 0 0 0 5 5 5 user\assets\meshes\trees\tree7.obj ? ? ? ? 0 0 1 1 0 1 1 1 0.75 1 1 1 1 ? 0 ? trunk -1.86265e-09 0 0 0.22 1.18 0.21 leaves 0 1.18 0 1.79 3.25 1.77
 MODEL 276201529@tree2 158.18 31.2471 78.0416 0 0 0 2 2 2 user\assets\meshes\trees\tree2.obj user\assets\textures\diffuse_maps\trees\tree_bush_2.png ? ? user\assets\textures\normal_maps\trees\tree_bush_2.png 0 0 1 1 0 0 1 1 0.7 1 1 1 1 ? 0 ? trunk 0 0 0 0.7 4.6 0.8 leaves 0 4.6 0 4.2 8.2 4.1
@@ -164,7 +164,7 @@ MODEL 1921836170@tree6 117.579 31.6235 67.0442 0 0 0 1.25 1 1.25 user\assets\mes
 MODEL 172462417@tree6 105.977 31.2471 51.4337 0 0 0 1.25 1 1.25 user\assets\meshes\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
 MODEL 754143276@tree6 95.1229 31.2471 40.3653 0 0 0 1.25 1 1.25 user\assets\meshes\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
 MODEL 2027347088@tree6 99.8411 31.2471 18.3209 0 0 0 1.25 1 1.25 user\assets\meshes\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? leaves 0 8.8 0 3.85 8.30001 3.6 trunk 0 0 0 0.85 8.80001 0.8
-MODEL 1144041588@tree6 54.2049 31.2471 16.7037 0 0 0 1.25 1 1.25 user\assets\meshes\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? leaves 0 8.8 0 3.85 8.30001 3.6 trunk 0 0 0 0.85 8.80001 0.8
+MODEL 1144041588@tree6 54.2049 31.2471 16.7037 0 0 0 1.25 1 1.25 user\assets\meshes\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
 MODEL 180892976@tree6 41.2524 31.2471 35.8349 0 0 0 1.25 1 1.25 user\assets\meshes\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? leaves 0 8.8 0 3.85 8.30001 3.6 trunk 0 0 0 0.85 8.80001 0.8
 MODEL 2132015856@tree7 -35.5629 31.2471 -10.8475 0 0 0 5 8 5 user\assets\meshes\trees\tree7.obj ? ? ? ? 0 0 1 1 0 1 1 1 0.75 1 1 1 1 ? 0 ? leaves 0 1.18 0 1.79 3.25 1.77 trunk -1.86265e-09 0 0 0.22 1.18 0.21
 MODEL 1415318254@tree6 32.83 31.2471 26.0152 0 0 0 1.25 1 1.25 user\assets\meshes\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? leaves 0 8.8 0 3.85 8.30001 3.6 trunk 0 0 0 0.85 8.80001 0.8
@@ -172,10 +172,10 @@ MODEL 1105326376@tree6 17.4699 31.247 33.9559 0 0 0 1.25 1 1.25 user\assets\mesh
 MODEL 8428718@tree6 -175.553 31.2471 -51.9007 0 0 0 1.25 1 1.25 user\assets\meshes\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
 MODEL 477950821@tree7 -4.17417 31.2471 27.5295 0 0 0 5 5 5 user\assets\meshes\trees\tree7.obj ? ? ? ? 0 0 1 1 0 1 1 1 0.75 1 1 1 1 ? 0 ? trunk -1.86265e-09 0 0 0.22 1.18 0.21 leaves 0 1.18 0 1.79 3.25 1.77
 MODEL 927584079@tree6 7.16805 31.247 -0.921736 0 0 0 1.25 1 1.25 user\assets\meshes\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
-MODEL 2126199438@tree6 9.89631 31.2471 -31.4675 0 0 0 1.25 1 1.25 user\assets\meshes\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? leaves 0 8.8 0 3.85 8.30001 3.6 trunk 0 0 0 0.85 8.80001 0.8
+MODEL 2126199438@tree6 9.89631 31.2471 -31.4675 0 0 0 1.25 1 1.25 user\assets\meshes\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
 MODEL 854299081@tree6 -10.4129 31.2471 -20.2959 0 0 0 1.25 1 1.25 user\assets\meshes\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
 MODEL 376194351@tree6 178.681 30.8706 112.829 0 0 0 1.6 1.6 1.6 user\assets\meshes\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? leaves 0 8.8 0 3.85 8.30001 3.6 trunk 0 0 0 0.85 8.80001 0.8
-MODEL 53641145@tree6 -42.9926 31.2471 -2.38647 0 0 0 1.25 1 1.25 user\assets\meshes\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
+MODEL 53641145@tree6 -42.9926 31.2471 -2.38647 0 0 0 1.25 1 1.25 user\assets\meshes\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? leaves 0 8.8 0 3.85 8.30001 3.6 trunk 0 0 0 0.85 8.80001 0.8
 MODEL 1694040064@tree6 -130.889 30.8706 9.4167 0 0 0 1.25 1 1.25 user\assets\meshes\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
 MODEL 1901858494@tree7 -27.3105 31.2471 10.1484 0 0 0 5 5 5 user\assets\meshes\trees\tree7.obj ? ? ? ? 0 0 1 1 0 1 1 1 0.75 1 1 1 1 ? 0 ? trunk -1.86265e-09 0 0 0.22 1.18 0.21 leaves 0 1.18 0 1.79 3.25 1.77
 MODEL 1127644395@tree6 -20.6699 31.2471 -5.70398 0 0 0 1.6 1.6 1.6 user\assets\meshes\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? leaves 0 8.8 0 3.85 8.30001 3.6 trunk 0 0 0 0.85 8.80001 0.8
@@ -189,7 +189,7 @@ MODEL 2008507748@tree6 -89.9017 31.2471 -45.7684 0 0 0 1.25 1 1.25 user\assets\m
 MODEL 801560819@tree7 -145.172 31.2471 1.08957 0 0 0 5 5 5 user\assets\meshes\trees\tree7.obj ? ? ? ? 0 0 1 1 0 1 1 1 0.75 1 1 1 1 ? 0 ? trunk -1.86265e-09 0 0 0.22 1.18 0.21 leaves 0 1.18 0 1.79 3.25 1.77
 MODEL 116365143@tree7 -101.141 30.8706 -34.8464 0 0 0 5 5 5 user\assets\meshes\trees\tree7.obj ? ? ? ? 0 0 1 1 0 1 1 1 0.75 1 1 1 1 ? 0 ? trunk -1.86265e-09 0 0 0.22 1.18 0.21 leaves 0 1.18 0 1.79 3.25 1.77
 MODEL 56050089@tree7 -155.641 30.8706 -9.28828 0 0 0 5 8 5 user\assets\meshes\trees\tree7.obj ? ? ? ? 0 0 1 1 0 1 1 1 0.75 1 1 1 1 ? 0 ? trunk -1.86265e-09 0 0 0.22 1.18 0.21 leaves 0 1.18 0 1.79 3.25 1.77
-MODEL 1033881086@tree6 -132.74 31.2471 -40.3316 0 0 0 1.25 1 1.25 user\assets\meshes\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
+MODEL 1033881086@tree6 -132.74 31.2471 -40.3316 0 0 0 1.25 1 1.25 user\assets\meshes\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? leaves 0 8.8 0 3.85 8.30001 3.6 trunk 0 0 0 0.85 8.80001 0.8
 MODEL 316737937@tree6 -159.336 31.2471 -55.6831 0 0 0 1.6 1.6 1.6 user\assets\meshes\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? leaves 0 8.8 0 3.85 8.30001 3.6 trunk 0 0 0 0.85 8.80001 0.8
 MODEL 1786215290@tree6 -117.345 31.2471 -22.6264 0 0 0 1.25 1 1.25 user\assets\meshes\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
 MODEL 229258028@tree6 -149.914 31.247 -52.0762 0 0 0 1.25 1 1.25 user\assets\meshes\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? leaves 0 8.8 0 3.85 8.30001 3.6 trunk 0 0 0 0.85 8.80001 0.8
@@ -203,9 +203,9 @@ MODEL 1742918533@tree6 -49.1113 31.2471 -31.37 0 0 0 1.6 1.6 1.6 user\assets\mes
 MODEL 2087692904@tree6 -119.8 31.2471 -6.57907 0 0 0 1.6 1.6 1.6 user\assets\meshes\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
 MODEL 2116195954@tree6 -54.4836 31.2471 -13.5635 0 0 0 1.25 1 1.25 user\assets\meshes\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
 MODEL 613953322@tree7 -65.8414 31.247 -15.8877 0 0 0 5 6 5 user\assets\meshes\trees\tree7.obj ? ? ? ? 0 0 1 1 0 1 1 1 0.75 1 1 1 1 ? 0 ? leaves 0 1.18 0 1.79 3.25 1.77 trunk -1.86265e-09 0 0 0.22 1.18 0.21
-MODEL 108726879@tree6 -133.131 31.2471 2.53177 0 0 0 1.6 1.6 1.6 user\assets\meshes\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
+MODEL 108726879@tree6 -133.131 31.2471 2.53177 0 0 0 1.6 1.6 1.6 user\assets\meshes\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? leaves 0 8.8 0 3.85 8.30001 3.6 trunk 0 0 0 0.85 8.80001 0.8
 MODEL 203560858@tree6 -141.394 31.2471 -56.6211 0 0 0 1.24 1 1.24 user\assets\meshes\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
-MODEL 1210720165@tree6 -158.402 31.2471 -25.5741 0 0 0 1.25 1 1.25 user\assets\meshes\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
+MODEL 1210720165@tree6 -158.402 31.2471 -25.5741 0 0 0 1.25 1 1.25 user\assets\meshes\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? leaves 0 8.8 0 3.85 8.30001 3.6 trunk 0 0 0 0.85 8.80001 0.8
 MODEL 753860702@tree6 162.288 31.247 58.3128 0 0 0 1.25 1 1.25 user\assets\meshes\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
 MODEL 1496596769@tree6 165.531 31.2471 84.3859 0 0 0 1.25 1 1.25 user\assets\meshes\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? leaves 0 8.8 0 3.85 8.30001 3.6 trunk 0 0 0 0.85 8.80001 0.8
 MODEL 1604692666@tree6 159.238 31.2471 116.592 0 0 0 1.25 1 1.25 user\assets\meshes\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? leaves 0 8.8 0 3.85 8.30001 3.6 trunk 0 0 0 0.85 8.80001 0.8
@@ -224,9 +224,9 @@ AMBIENT_LIGHT 1 1 1 0.75
 DIRECTIONAL_LIGHT 0 1500 -1000 1 1 1 1 200 100
 LOD_DISTANCE 1000
 EDITOR_SPEED 10
-EDITOR_POSITION -153.766 39.9952 -79.7216
-EDITOR_YAW 96.0991
-EDITOR_PITCH -25.24
+EDITOR_POSITION -159.101 41.4619 -97.7635
+EDITOR_YAW 82.819
+EDITOR_PITCH -39.64
 GRAPHICS_SHADOWS 1 100 0.3 0.000000 75.000000 -50.000000 0.000000 30.000000 0.000000 1 1 100
 GRAPHICS_MOTIONBLUR 1 0.25
 GRAPHICS_DOF 1 1 5 3

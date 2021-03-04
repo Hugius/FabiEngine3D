@@ -1,0 +1,54 @@
+31 29
+META script_type_update
+
+/// Temporary values
+BOOL pPressed = fe3d:input_is_key_pressed("KEY_P")
+BOOL tPressed = fe3d:input_is_key_pressed("KEY_T")
+
+/// Check if player wants to open/close status
+EDIT _wasStatusOpen = _isStatusOpen
+IF pPressed IS <true>:
+    IF _isStatusOpen IS <true>:
+        EDIT _isStatusOpen = <false>
+    ELSE:
+        EDIT _isStatusOpen = <true>
+
+/// Update status visbility
+IF _isStatusOpen NOT _wasStatusOpen OR _survivalTime IS 0:
+    fe3d:image_set_visible("scroll_player", _isStatusOpen)
+    fe3d:image_set_visible("player", _isStatusOpen)
+    fe3d:text_set_visible("name", _isStatusOpen)
+    fe3d:image_set_visible("health", _isStatusOpen)
+    fe3d:image_set_visible("hunger", _isStatusOpen)
+    fe3d:image_set_visible("thirst", _isStatusOpen)
+    fe3d:image_set_visible("stamina", _isStatusOpen)
+    fe3d:image_set_visible("oxygen", _isStatusOpen)
+    fe3d:image_set_visible("temperature", _isStatusOpen)
+    fe3d:image_set_visible("hygiene", _isStatusOpen)
+    fe3d:image_set_visible("sickness", _isStatusOpen)
+
+/// Check if player wants to open/close survival time
+EDIT _wasTimeOpen = _isTimeOpen
+IF tPressed IS <true>:
+    IF _isTimeOpen IS <true>:
+        EDIT _isTimeOpen = <false>
+    ELSE:
+        EDIT _isTimeOpen = <true>
+
+/// Update survival time text
+IF _isTimeOpen IS <true>:
+    CAST _survivalTime STR
+    STR text = misc:concat_strings("You wasted ", _survivalTime)
+    EDIT text = misc:concat_strings(text, " seconds of your life!")
+    CAST _survivalTime INT
+    INT size = misc:get_string_size(text)
+    CAST size DEC
+    MUL size 0.02
+    fe3d:text_set_content("time", text)
+    fe3d:text_set_size("time", size, 0.05)
+
+/// Update survival time visibility
+IF _wasTimeOpen NOT _isTimeOpen OR _survivalTime IS 0:
+    fe3d:image_set_visible("scroll_time", _isTimeOpen)
+    fe3d:text_set_visible("title_time", _isTimeOpen)
+    fe3d:text_set_visible("time", _isTimeOpen)

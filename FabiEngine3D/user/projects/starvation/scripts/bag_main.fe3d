@@ -1,11 +1,11 @@
-18 0
+6 29
 META script_type_update
 
 /// Temporary values
-EDIT _wasBagOpen = _isBagOpen
+BOOL bPressed = fe3d:input_is_key_pressed("KEY_B")
 
 /// Check if player wants to open/close bag
-BOOL bPressed = fe3d:input_is_key_pressed("KEY_B")
+EDIT _wasBagOpen = _isBagOpen
 IF bPressed IS <true>:
     IF _isBagOpen IS <true>:
         EDIT _isBagOpen = <false>

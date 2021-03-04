@@ -1,4 +1,4 @@
-38 42
+36 69
 META script_type_update
 
 /// Temporary values
@@ -34,6 +34,9 @@ IF _isBuilding IS <true> AND lmbPressed IS <true>:
         ELIF _buildIndex IS 8:
             VEC3 size = fe3d:aabb_get_size("oven_display_oven")
             STR previewID = "oven"
+        ELIF _buildIndex IS 9:
+            VEC3 size = fe3d:aabb_get_size("campfire_display_campfire")
+            STR previewID = "campfire"
         INT counter = _buildCounters[_buildIndex]
         CAST counter STR
         STR newID = misc:concat_strings(_buildNames[_buildIndex], counter)

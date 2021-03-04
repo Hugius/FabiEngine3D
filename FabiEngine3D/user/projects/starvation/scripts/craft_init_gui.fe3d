@@ -1,4 +1,4 @@
-2 17
+60 0
 META script_type_init
 
 /// Text display content
@@ -59,3 +59,17 @@ fe3d:text_set_color(_craftables[10], 0.0, 0.0, 0.0)
 fe3d:text_set_color(_craftables[11], 0.0, 0.0, 0.0)
 fe3d:text_set_color(_craftables[12], 0.0, 0.0, 0.0)
 fe3d:text_set_color(_craftables[13], 0.0, 0.0, 0.0)
+fe3d:text_set_visible(_craftables[0], <false>)
+fe3d:text_set_visible(_craftables[1], <false>)
+fe3d:text_set_visible(_craftables[2], <false>)
+fe3d:text_set_visible(_craftables[3], <false>)
+fe3d:text_set_visible(_craftables[4], <false>)
+fe3d:text_set_visible(_craftables[5], <false>)
+fe3d:text_set_visible(_craftables[6], <false>)
+fe3d:text_set_visible(_craftables[7], <false>)
+fe3d:text_set_visible(_craftables[8], <false>)
+fe3d:text_set_visible(_craftables[9], <false>)
+fe3d:text_set_visible(_craftables[10], <false>)
+fe3d:text_set_visible(_craftables[11], <false>)
+fe3d:text_set_visible(_craftables[12], <false>)
+fe3d:text_set_visible(_craftables[13], <false>)

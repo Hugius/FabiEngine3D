@@ -1,22 +1,22 @@
-19 14
+66 46
 META script_type_init
 
 /// Globals
 GLOB LIST _buildables = {}
 GLOB LIST _buildablesText = {}
-GLOB LIST _buildablesWoodPrice = {1,3,5,3,1,1,7,6,1}
-GLOB LIST _buildablesStonePrice = {0,0,0,3,1,0,4,8,3}
-GLOB LIST _buildablesClayPrice = {0,0,0,3,0,0,2,5,0}
-GLOB LIST _buildablesIronPrice = {0,0,0,0,1,0,1,2,1}
+GLOB LIST _buildablesWoodPrice = {1,3,5,3,1,1,7,6,1,1}
+GLOB LIST _buildablesStonePrice = {0,0,0,3,1,0,4,8,3,1}
+GLOB LIST _buildablesClayPrice = {0,0,0,3,0,0,2,5,0,1}
+GLOB LIST _buildablesIronPrice = {0,0,0,0,1,0,1,2,1,0}
 GLOB LIST _buildNames = {}
-GLOB LIST _buildOffsets = {8.0, 9.25, 11.85, 7.75, 5.0, 8.0, 8.0, 20.0, 5.0}
-GLOB LIST _buildCounters = {0,0,0,0,0,0,0,0,0}
+GLOB LIST _buildOffsets = {8.0,9.25,11.85,7.75,5.0,8.0,8.0,20.0,5.0,5.0}
+GLOB LIST _buildCounters = {0,0,0,0,0,0,0,0,0,0}
 GLOB STR _hoveredBuildingID = ""
 GLOB VEC3 _buildPosition = [0.0 0.0 0.0]
 GLOB DEC _hoveredBuildingDistance = 0.0
 GLOB DEC _buildRotation = 0.0
 GLOB INT _buildIndex = 0
-GLOB INT _maxBuildIndex = 8
+GLOB INT _maxBuildIndex = 9
 GLOB BOOL _isBuilding = <false>
 GLOB BOOL _wasBuilding = <false>
 GLOB BOOL _isBuildPlaceValid = <false>
@@ -32,6 +32,7 @@ PUSH _buildables "pen_display"
 PUSH _buildables "mill_display"
 PUSH _buildables "church_display"
 PUSH _buildables "oven_display"
+PUSH _buildables "campfire_display"
 
 /// Buildables IDs
 PUSH _buildNames "small_house"
@@ -43,6 +44,7 @@ PUSH _buildNames "pen"
 PUSH _buildNames "mill"
 PUSH _buildNames "church"
 PUSH _buildNames "oven"
+PUSH _buildNames "campfire"
 
 /// Models
 fe3d:model_place("small_house_display", "house14", 0.0, 0.0, 0.0)
@@ -63,3 +65,5 @@ fe3d:model_place("church_display", "church", 0.0, 0.0, 0.0)
 fe3d:model_set_visible("church_display", <false>)
 fe3d:model_place("oven_display", "oven", 0.0, 0.0, 0.0)
 fe3d:model_set_visible("oven_display", <false>)
+fe3d:model_place("campfire_display", "campfire", 0.0, 0.0, 0.0)
+fe3d:model_set_visible("campfire_display", <false>)

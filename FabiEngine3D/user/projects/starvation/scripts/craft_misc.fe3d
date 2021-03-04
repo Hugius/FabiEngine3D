@@ -1,4 +1,4 @@
-66 31
+37 59
 META script_type_update
 
 /// Temporary values
@@ -37,20 +37,6 @@ IF _wasCrafting NOT _isCrafting OR _survivalTime IS 0:
     fe3d:text_set_visible("iron_price_craft", _isCrafting)
     fe3d:billboard_set_visible("craft_confirm", _isCrafting)
     fe3d:billboard_set_visible("craft_cancel", _isCrafting)
-    fe3d:text_set_visible(_craftables[0], <false>)
-    fe3d:text_set_visible(_craftables[1], <false>)
-    fe3d:text_set_visible(_craftables[2], <false>)
-    fe3d:text_set_visible(_craftables[3], <false>)
-    fe3d:text_set_visible(_craftables[4], <false>)
-    fe3d:text_set_visible(_craftables[5], <false>)
-    fe3d:text_set_visible(_craftables[6], <false>)
-    fe3d:text_set_visible(_craftables[7], <false>)
-    fe3d:text_set_visible(_craftables[8], <false>)
-    fe3d:text_set_visible(_craftables[9], <false>)
-    fe3d:text_set_visible(_craftables[10], <false>)
-    fe3d:text_set_visible(_craftables[11], <false>)
-    fe3d:text_set_visible(_craftables[12], <false>)
-    fe3d:text_set_visible(_craftables[13], <false>)
     fe3d:text_set_visible(_craftables[_craftIndex], _isCrafting)
 
 /// Update price tag

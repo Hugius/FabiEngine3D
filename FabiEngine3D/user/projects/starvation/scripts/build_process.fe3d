@@ -1,4 +1,4 @@
-34 59
+96 56
 META script_type_update
 
 /// Retrieve hovered building properties
@@ -34,6 +34,9 @@ IF hoveredID NOT "":
     ELIF idPart IS "ov":
         INT hoveredIndex = 8
         VEC3 size = fe3d:aabb_get_size("oven_display_oven")
+    ELIF idPart IS "ca":
+        INT hoveredIndex = 9
+        VEC3 size = fe3d:aabb_get_size("campfire_display_campfire")
     /// Update building process
     fe3d:text_set_visible("build", <false>)
     /// Calculate price
@@ -86,3 +89,13 @@ IF hoveredID NOT "":
                     INCR pos.y 3.0
                     fe3d:billboard_place(smokeID, "smoke", pos.x, pos.y, pos.z)
                     fe3d:billboard_start_animation(smokeID, -1)
+                ELIF idPart IS "ca":
+                    /// Add fires to the campfire
+                    STR fireID1 = misc:concat_strings("fire1:", hoveredID)
+                    STR fireID2 = misc:concat_strings("fire2:", hoveredID)
+                    VEC3 pos = fe3d:model_get_position(hoveredID)
+                    fe3d:billboard_place(fireID1, "fire3", pos.x, pos.y, pos.z)
+                    fe3d:billboard_place(fireID2, "fire3", pos.x, pos.y, pos.z)
+                    fe3d:billboard_set_rotation(fireID2, 0.0, 90.0, 0.0)
+                    fe3d:billboard_start_animation(fireID1, -1)
+                    fe3d:billboard_start_animation(fireID2, -1)

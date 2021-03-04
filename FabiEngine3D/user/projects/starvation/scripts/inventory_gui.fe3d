@@ -1,4 +1,4 @@
-57 52
+1 0
 META script_type_update
 
 IF _isInvOpen IS <true>:
@@ -75,17 +75,3 @@ IF _wasInvOpen NOT _isInvOpen OR _survivalTime IS 0:
     fe3d:image_set_visible("hammer_icon", _isInvOpen)
     fe3d:image_set_visible("torch_icon", _isInvOpen)
     fe3d:image_set_visible("fishrod_icon", _isInvOpen)
-    fe3d:image_set_visible("sword_stone", _isInvOpen)
-    fe3d:image_set_visible("sword_iron", _isInvOpen)
-    fe3d:image_set_visible("pickaxe_stone", _isInvOpen)
-    fe3d:image_set_visible("pickaxe_iron", _isInvOpen)
-    fe3d:image_set_visible("axe_stone", _isInvOpen)
-    fe3d:image_set_visible("axe_iron", _isInvOpen)
-    fe3d:image_set_visible("shovel_stone", _isInvOpen)
-    fe3d:image_set_visible("shovel_iron", _isInvOpen)
-    fe3d:image_set_visible("hoe", _isInvOpen)
-    fe3d:image_set_visible("scythe", _isInvOpen)
-    fe3d:image_set_visible("hammer_stone", _isInvOpen)
-    fe3d:image_set_visible("hammer_iron", _isInvOpen)
-    fe3d:image_set_visible("torch", _isInvOpen)
-    fe3d:image_set_visible("fishrod", _isInvOpen)

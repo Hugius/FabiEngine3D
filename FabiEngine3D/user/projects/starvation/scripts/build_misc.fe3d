@@ -1,4 +1,4 @@
-24 4
+23 58
 META script_type_update
 
 /// Temporary values
@@ -23,15 +23,6 @@ IF _wasBuilding NOT _isBuilding OR _survivalTime IS 0:
     fe3d:text_set_visible("stone_price_build", _isBuilding)
     fe3d:text_set_visible("clay_price_build", _isBuilding)
     fe3d:text_set_visible("iron_price_build", _isBuilding)
-    fe3d:text_set_visible(_buildables[0], <false>)
-    fe3d:text_set_visible(_buildables[1], <false>)
-    fe3d:text_set_visible(_buildables[2], <false>)
-    fe3d:text_set_visible(_buildables[3], <false>)
-    fe3d:text_set_visible(_buildables[4], <false>)
-    fe3d:text_set_visible(_buildables[5], <false>)
-    fe3d:text_set_visible(_buildables[6], <false>)
-    fe3d:text_set_visible(_buildables[7], <false>)
-    fe3d:text_set_visible(_buildables[8], <false>)
 
 /// Check if currently placing building
 IF _isBuilding IS <true>:

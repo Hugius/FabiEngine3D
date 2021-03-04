@@ -1,4 +1,4 @@
-5 35
+60 35
 META script_type_init
 
 /// Buildables display text
@@ -11,6 +11,7 @@ PUSH _buildablesText "Animal Pen"
 PUSH _buildablesText "Grain Mill"
 PUSH _buildablesText "Church"
 PUSH _buildablesText "Baking Oven"
+PUSH _buildablesText "Campfire"
 
 /// Images
 fe3d:image_place("scroll_build", "scroll3.png", 0.0, -0.6, 0.0, 0.75, 0.6)
@@ -34,6 +35,7 @@ fe3d:text_place(_buildables[5], f, _buildablesText[5], 0.0, -0.45, 0.0, 0.3, 0.0
 fe3d:text_place(_buildables[6], f, _buildablesText[6], 0.0, -0.45, 0.0, 0.27, 0.05)
 fe3d:text_place(_buildables[7], f, _buildablesText[7], 0.0, -0.45, 0.0, 0.18, 0.05)
 fe3d:text_place(_buildables[8], f, _buildablesText[8], 0.0, -0.45, 0.0, 0.33, 0.05)
+fe3d:text_place(_buildables[9], f, _buildablesText[9], 0.0, -0.45, 0.0, 0.24, 0.05)
 fe3d:text_set_color("wood_price_build", 0.0, 0.0, 0.0)
 fe3d:text_set_color("stone_price_build", 0.0, 0.0, 0.0)
 fe3d:text_set_color("clay_price_build", 0.0, 0.0, 0.0)
@@ -47,3 +49,14 @@ fe3d:text_set_color(_buildables[5], 0.0, 0.0, 0.0)
 fe3d:text_set_color(_buildables[6], 0.0, 0.0, 0.0)
 fe3d:text_set_color(_buildables[7], 0.0, 0.0, 0.0)
 fe3d:text_set_color(_buildables[8], 0.0, 0.0, 0.0)
+fe3d:text_set_color(_buildables[9], 0.0, 0.0, 0.0)
+fe3d:text_set_visible(_buildables[0], <false>)
+fe3d:text_set_visible(_buildables[1], <false>)
+fe3d:text_set_visible(_buildables[2], <false>)
+fe3d:text_set_visible(_buildables[3], <false>)
+fe3d:text_set_visible(_buildables[4], <false>)
+fe3d:text_set_visible(_buildables[5], <false>)
+fe3d:text_set_visible(_buildables[6], <false>)
+fe3d:text_set_visible(_buildables[7], <false>)
+fe3d:text_set_visible(_buildables[8], <false>)
+fe3d:text_set_visible(_buildables[9], <false>)

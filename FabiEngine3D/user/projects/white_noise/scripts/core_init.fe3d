@@ -1,6 +1,0 @@
-1 20
-META script_type_init
-META execution_entry
-
-EXEC player_init
-EXEC misc_init

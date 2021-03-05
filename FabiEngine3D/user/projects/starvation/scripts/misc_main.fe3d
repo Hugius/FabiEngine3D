@@ -1,9 +1,26 @@
-16 43
+6 16
 META script_type_update
 
 /// Temporary values
 STR currentWorld = fe3d:scene_get_current_id()
 BOOL ePressed = fe3d:input_is_key_pressed("KEY_E")
+
+/// Update torch
+BOOL equipped = (_equipIndex IS 7 AND _inventory[_equipIndex] NOT "")
+fe3d:light_set_visible("torch", <false>)
+fe3d:billboard_set_visible("torch", <false>)
+IF equipped IS <true> AND _isInvOpen IS <true>:
+    VEC3 torchPos = fe3d:model_get_position("torch")
+    VEC3 firePos = torchPos
+    INCR torchPos.y 2.0
+    INCR firePos.y 1.8
+    fe3d:light_set_position("torch", torchPos.x, torchPos.y, torchPos.z)
+    fe3d:billboard_set_position("torch", firePos.x, firePos.y, firePos.z)
+    /// Check if it's nighttime
+    IF _isDayTime IS <false> AND _isUnderWater IS <false>:
+        fe3d:light_set_visible("torch", <true>)
+        fe3d:billboard_set_visible("torch", <true>)
+        DECR _durabilities[7] 0.0001
 
 /// Update black overlay
 fe3d:image_set_alpha("black", _blackAlpha)

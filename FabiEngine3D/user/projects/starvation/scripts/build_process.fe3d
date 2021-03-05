@@ -1,4 +1,4 @@
-90 60
+99 84
 META script_type_update
 
 /// Retrieve hovered building properties
@@ -97,4 +97,5 @@ IF hoveredID NOT "":
                     fe3d:billboard_start_animation(firstFireID, -1)
                     fe3d:billboard_start_animation(secondFireID, -1)
                     STR ID = hoveredID
-                    fe3d:light_place(ID, pos.x, pos.y, pos.z, 1.0, 0.85, 0.0, 1.0, 5.0)
+                    INCR pos.y 3.0
+                    fe3d:light_place(ID, pos.x, pos.y, pos.z, 1.0, 0.85, 0.0, 1.5, 3.0)

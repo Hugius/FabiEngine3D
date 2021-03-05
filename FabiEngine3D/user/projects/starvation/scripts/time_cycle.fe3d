@@ -1,4 +1,4 @@
-86 54
+83 73
 META script_type_update
 
 /// Temporary values
@@ -83,13 +83,3 @@ fe3d:graphics_set_directional_light_intensity(_dirLightIntensity)
 fe3d:graphics_set_directional_light_position(dirPos.x, dirPos.y, dirPos.z)
 IF _isUnderWater IS <false>:
     fe3d:graphics_set_fog_color(fogIntensity, fogIntensity, fogIntensity)
-
-/// Update fire billboards - trading world
-CONST LIST billboards = fe3d:billboard_find_ids("fire1")
-INT index = 0
-INT listSize = misc:get_list_size("billboards")
-LOOP:
-    IF index IS listSize:
-        BREAK
-    fe3d:billboard_set_visible(billboards[index], _areLightsOn)
-    INCR index 1

@@ -200,8 +200,8 @@ Matrix44 Matrix44::createRotation(float x, float y, float z)
 {
 	Matrix44 newMatrix;
 
-	newMatrix = newMatrix * createRotationX(x);
 	newMatrix = newMatrix * createRotationY(y);
+	newMatrix = newMatrix * createRotationX(x);
 	newMatrix = newMatrix * createRotationZ(z);
 
 	return newMatrix;

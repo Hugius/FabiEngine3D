@@ -1,5 +1,7 @@
 #include "script_interpreter.hpp"
 
+#include <fstream>
+
 bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine type of function
@@ -156,6 +158,74 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 		{
 			auto result = _fe3d.misc_stopMillisecondTimer();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
+		}
+	}
+	else if (functionName == "fe3d:file_read")
+	{
+		auto types = { ScriptValueType::STRING };
+
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		{
+			// Check if file exists
+			if (_fe3d.misc_isFileExisting(arguments[0].getString()))
+			{
+				// Open file
+				std::ifstream file(arguments[0].getString());
+				string line;
+
+				// Add lines to list
+				while (std::getline(file, line))
+				{
+					returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, line));
+				}
+
+				// Close file
+				file.close();
+			}
+			else
+			{
+				_throwScriptError("Cannot read from file \"" + arguments[0].getString() + "\"!");
+			}
+		}
+	}
+	else if (functionName == "fe3d:file_write")
+	{
+		auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
+
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		{
+			// Check if file exists
+			if (_fe3d.misc_isFileExisting(arguments[0].getString()))
+			{
+				// Write line to file
+				std::ofstream file(arguments[0].getString(), std::ios::app);
+				file << arguments[1].getString();
+				file.close();
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			}
+			else
+			{
+				_throwScriptError("Cannot write to file \"" + arguments[0].getString() + "\"!");
+			}
+		}
+	}
+	else if (functionName == "fe3d:file_clear")
+	{
+		auto types = { ScriptValueType::STRING };
+
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		{
+			// Check if file exists
+			if (_fe3d.misc_isFileExisting(arguments[0].getString()))
+			{
+				std::ofstream file(arguments[0].getString(), std::ios::trunc);
+				file.close();
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			}
+			else
+			{
+				_throwScriptError("Cannot clear file \"" + arguments[0].getString() + "\"!");
+			}
 		}
 	}
 	else

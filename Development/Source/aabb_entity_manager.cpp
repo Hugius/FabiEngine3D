@@ -213,54 +213,29 @@ void AabbEntityManager::update(
 					referenceRotationX = (referenceRotationX <= 45.0f) ? referenceRotationX : (90.0f - referenceRotationX);
 					referenceRotationY = (referenceRotationY <= 45.0f) ? referenceRotationY : (90.0f - referenceRotationY);
 					referenceRotationZ = (referenceRotationZ <= 45.0f) ? referenceRotationZ : (90.0f - referenceRotationZ);
-					float referenceFactorX = referenceRotationX / 45.0f;
-					float referenceFactorY = referenceRotationY / 45.0f;
-					float referenceFactorZ = referenceRotationZ / 45.0f;
-
-					// Trigonometry
-					float xSinRotation = fabsf(sinf(Math::degreesToRadians(rotationX)));
-					float xCosRotation = fabsf(cosf(Math::degreesToRadians(rotationX)));
-					float ySinRotation = fabsf(sinf(Math::degreesToRadians(rotationY)));
-					float yCosRotation = fabsf(cosf(Math::degreesToRadians(rotationY)));
-					float zSinRotation = fabsf(sinf(Math::degreesToRadians(rotationZ)));
-					float zCosRotation = fabsf(cosf(Math::degreesToRadians(rotationZ)));
-
-					// Calculate AABB size based on rotation
-					float xRotationX = (xCosRotation * parentSize.x) + (xSinRotation * parentSize.y);
-					float xRotationY = (xSinRotation * parentSize.x) + (xCosRotation * parentSize.y);
-					float yRotationX = (yCosRotation * parentSize.x);
-					float yRotationZ = (ySinRotation * parentSize.x);
-					float zRotationY = (zCosRotation * parentSize.y);
-					float zRotationZ = (zSinRotation * parentSize.y);
 					
-					// Take the greatest sizes to cover the billboard
-					if (referenceRotationX > referenceRotationY)
+					// Determine direction to use
+					if (referenceRotationX > referenceRotationY && referenceRotationX > referenceRotationZ)
 					{
-						newAabbSize.x = xRotationX;
+						float xSinRotation = fabsf(sinf(Math::degreesToRadians(rotationX)));
+						float xCosRotation = fabsf(cosf(Math::degreesToRadians(rotationX)));
+						newAabbSize.x = (xCosRotation * parentSize.x) + (xSinRotation * parentSize.y);
+						newAabbSize.y = (xSinRotation * parentSize.x) + (xCosRotation * parentSize.y);
 					}
-					else
+					else if (referenceRotationY > referenceRotationX && referenceRotationY > referenceRotationZ)
 					{
-						newAabbSize.x = yRotationX;
+						float ySinRotation = fabsf(sinf(Math::degreesToRadians(rotationY)));
+						float yCosRotation = fabsf(cosf(Math::degreesToRadians(rotationY)));
+						newAabbSize.x = (yCosRotation * parentSize.x);
+						newAabbSize.z = (ySinRotation * parentSize.x);
 					}
-
-					if (referenceRotationX > referenceRotationZ)
+					else if (referenceRotationZ > referenceRotationX && referenceRotationZ > referenceRotationY)
 					{
-						newAabbSize.y = xRotationY;
+						float zSinRotation = fabsf(sinf(Math::degreesToRadians(rotationZ)));
+						float zCosRotation = fabsf(cosf(Math::degreesToRadians(rotationZ)));
+						newAabbSize.y = (zCosRotation * parentSize.y);
+						newAabbSize.z = (zSinRotation * parentSize.y);
 					}
-					else
-					{
-						newAabbSize.y = zRotationY;
-					}
-
-					if (referenceRotationY > referenceRotationZ)
-					{
-						newAabbSize.z = yRotationZ;
-					}
-					else
-					{
-						newAabbSize.z = zRotationZ;
-					}
-
 
 					// AABB must still be a box (cannot be flat)
 					newAabbSize.x = std::max(newAabbSize.x, 0.1f);

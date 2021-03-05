@@ -13,7 +13,7 @@ const vector<string> BillboardEditor::getAllTexturePathsFromFile()
 	}
 
 	// Compose full file path
-	string filePath = _fe3d.misc_getRootDirectory() + "projects\\" + _currentProjectID + "\\entities\\billboard.fe3d";
+	string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : ("projects\\" + _currentProjectID)) + "\\entities\\billboard.fe3d";
 
 	// Check if billboard file exists
 	if (_fe3d.misc_isFileExisting(filePath))
@@ -84,7 +84,7 @@ void BillboardEditor::loadBillboardEntitiesFromFile()
 	_loadedBillboardIDs.clear();
 
 	// Compose full file path
-	string filePath = _fe3d.misc_getRootDirectory() + "projects\\" + _currentProjectID + "\\entities\\billboard.fe3d";
+	string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : ("projects\\" + _currentProjectID)) + "\\entities\\billboard.fe3d";
 
 	// Check if billboard file exists
 	if (_fe3d.misc_isFileExisting(filePath))
@@ -189,7 +189,7 @@ void BillboardEditor::saveBillboardEntitiesToFile()
 
 		// Create or overwrite billboard file
 		std::ofstream file;
-		file.open(_fe3d.misc_getRootDirectory() + "projects\\" + _currentProjectID + "\\entities\\billboard.fe3d");
+		file.open(_fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : ("projects\\" + _currentProjectID)) + "\\entities\\billboard.fe3d");
 
 		// Write billboard data into file
 		for (auto& billboardID : _loadedBillboardIDs)

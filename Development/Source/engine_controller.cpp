@@ -17,6 +17,16 @@ void EngineController::FE3D_CONTROLLER_INIT()
 {
 	if (engine_isGameExported()) // Game preview
 	{
+		// Set name of game (project) to run
+		_leftViewportController.getEnvironmentEditor().setCurrentProjectID(engine_getGameTitle());
+		_leftViewportController.getModelEditor().setCurrentProjectID(engine_getGameTitle());
+		_leftViewportController.getAnimationEditor().setCurrentProjectID(engine_getGameTitle());
+		_leftViewportController.getBillboardEditor().setCurrentProjectID(engine_getGameTitle());
+		_leftViewportController.getAudioEditor().setCurrentProjectID(engine_getGameTitle());
+		_leftViewportController.getScriptEditor().setCurrentProjectID(engine_getGameTitle());
+		_leftViewportController.getSceneEditor().setCurrentProjectID(engine_getGameTitle());
+		_leftViewportController.getSettingsEditor().setCurrentProjectID(engine_getGameTitle());
+
 		// Import settings
 		_leftViewportController.getSettingsEditor().loadSettings();
 

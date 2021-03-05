@@ -17,7 +17,7 @@ void ScriptEditor::loadScriptsFromFile()
 
 	// Retrieve all filenames in the scripts folder
 	vector<string> scriptFilenames;
-	string directoryPath = _fe3d.misc_getRootDirectory() + "projects\\" + _currentProjectID + "\\scripts\\";
+	string directoryPath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : ("projects\\" + _currentProjectID)) + "\\scripts\\";
 	for (const auto& entry : std::filesystem::directory_iterator(directoryPath))
 	{
 		// Extract filename
@@ -73,7 +73,7 @@ void ScriptEditor::saveScriptsToFile()
 			_fe3d.logger_throwError("No current project loaded --> ScriptEditor::saveScriptsToFile()");
 		}
 
-		string directoryPath = _fe3d.misc_getRootDirectory() + "projects\\" + _currentProjectID + "\\scripts\\";
+		string directoryPath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : ("projects\\" + _currentProjectID)) + "\\scripts\\";
 
 		// Delete all text files containing deleted scripts
 		for (auto& scriptName : _scriptFileNamesToDelete)

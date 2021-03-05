@@ -40,12 +40,13 @@ public:
 	virtual ~FabiEngine3D();
 
 	// Engine interface
-	void engine_start();
-	void engine_pause();
-	void engine_resume();
-	void engine_stop();
-	bool engine_isPaused();
-	bool engine_isGameExported();
+	void   engine_start();
+	void   engine_pause();
+	void   engine_resume();
+	void   engine_stop();
+	bool   engine_isPaused();
+	bool   engine_isGameExported();
+	string engine_getGameTitle();
 
 	// Camera interface - setters
 	void camera_load(float fov, float nearZ, float farZ, Vec3 startPosition, float yaw = 0.0f, float pitch = 0.0f);

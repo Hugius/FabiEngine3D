@@ -27,6 +27,7 @@ Config::Config()
 	_processOption(file, _isWindowFullscreen, "window_fullscreen");
 	_processOption(file, _isWindowBorderless, "window_borderless");
 	_processOption(file, _windowTitle, "window_title");
+	_processOption(file, _gameTitle, "game_title");
 	_processOption(file, _isGameExported, "game_exported");
 	
 	// Save monitor dimensions
@@ -155,6 +156,11 @@ void Config::_processOption(std::ifstream& file, bool& option, string criteria)
 	{
 		Logger::throwError("Configuration file @ option \"" + criteria + "\": invalid option name!");
 	}
+}
+
+string Config::getGameTitle() const
+{
+	return _gameTitle;
 }
 
 string Config::getWindowTitle() const

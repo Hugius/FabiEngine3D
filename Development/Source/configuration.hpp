@@ -24,6 +24,7 @@ public:
 	void operator=(Config const&) = delete;
 
 	// Interface functions
+	string getGameTitle()		 const;
 	string getWindowTitle()		 const;
 	Ivec2  getMonitorSize()      const;
 	Ivec2  getWindowSize()       const;
@@ -45,6 +46,7 @@ private:
 	void _processOption(ifstream& file, int& option, string criteria);
 	void _processOption(ifstream& file, bool& option, string criteria);
 	
+	string _gameTitle = "";
 	string _windowTitle = "";
 	Ivec2  _monitorSize = Ivec2(0);
 	Ivec2  _windowSize = Ivec2(0);

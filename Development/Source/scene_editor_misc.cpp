@@ -17,7 +17,7 @@ bool SceneEditor::isSceneExisting(const string& fileName)
 	}
 
 	// Compose full file path
-	string filePath = _fe3d.misc_getRootDirectory() + "projects\\" + _currentProjectID + "\\scenes\\" + fileName + ".fe3d";
+	string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : ("projects\\" + _currentProjectID)) + "\\scenes\\" + fileName + ".fe3d";
 
 	// Check if scene file exists
 	return (_fe3d.misc_isFileExisting(filePath));
@@ -159,7 +159,7 @@ vector<string> SceneEditor::_loadSceneNames()
 {
 	// Temporary values
 	vector<string> sceneNames;
-	string directoryPath = _fe3d.misc_getRootDirectory() + "projects\\" + _currentProjectID + "\\scenes\\";
+	string directoryPath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : ("projects\\" + _currentProjectID)) + "\\scenes\\";
 
 	// Check if scenes directory exists
 	if (_fe3d.misc_isDirectory(directoryPath))
@@ -183,7 +183,7 @@ vector<string> SceneEditor::_loadSceneNames()
 void SceneEditor::_deleteSceneFile(const string& sceneName)
 {
 	// Check if scene file is still existing
-	string filePath = _fe3d.misc_getRootDirectory() + "projects\\" + _currentProjectID + "\\scenes\\" + sceneName + ".fe3d";
+	string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : ("projects\\" + _currentProjectID)) + "\\scenes\\" + sceneName + ".fe3d";
 	if (_fe3d.misc_isFileExisting(filePath))
 	{
 		std::filesystem::remove_all(filePath);

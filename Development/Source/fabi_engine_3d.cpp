@@ -41,3 +41,8 @@ bool FabiEngine3D::engine_isGameExported()
 {
 	return Config::getInst().isGameExported();
 }
+
+string FabiEngine3D::engine_getGameTitle()
+{
+	return Config::getInst().getGameTitle();
+}

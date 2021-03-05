@@ -1150,7 +1150,7 @@ fe3d:print(camPos.x)
 - Start FabiEngine3D.
 
 # Appendix
-### Terms
+### Term definitions
 - **Model**: a complex 3D object in 3D space, constisting of a mesh.
 - **Billboard**: a 2D quad in 3D space.
 - **Collision**: intersection between 2 things (for example: between the camera and a model).
@@ -1171,6 +1171,7 @@ fe3d:print(camPos.x)
 - The **2D coordinate system** works on decimals with **XY(0.0, 0.0)** as **center** coordinate. The range is between **-1.0 and 1.0** from left to right & bottom to top.
 ### Rotations
 - Beware of the [Gimbal lock](https://en.wikipedia.org/wiki/Gimbal_lock) when rotating objects in all 3 (XYZ) directions!
+- Rotations of **models** & **billboards** are **Y-based**. This means that X & Z rotations are **relative** to the Y rotation, which is very useful in a lot of gameplay situations.
 - All rotational **degrees** cannot be higher than 360 or lower than -360 (for example 500 will be 140).
 - X rotations go **towards** the direction of the X axis.
 - Z rotations go **towards** the direction of the Z axis.
@@ -1192,7 +1193,7 @@ fe3d:print(camPos.x)
 ### Known issues
 - There is a VERY rare **bug** when using the first person camera system; if the cursor does not center anymore and the camera keeps spinning very fast, click on the **window border** once. This bug does not occur in fullscreen mode.
 ### Performance
-- Click [here](#performance-statistics-example) to see an example.
+- Click [here](#performance-statistics-example) to see an example of the performance profiler window.
 - You can use the performance statistics to analyze your **game's performance**.
 - The amounts of entities are the **total** amounts.
 - The amount of triangles is the **realtime** amount being rendered every frame.

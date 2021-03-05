@@ -427,7 +427,7 @@ void SceneEditor::_updateLensFlareGraphicsSettingsMenu()
 			{
 				// Get the chosen filename
 				const string rootDirectory = _fe3d.misc_getRootDirectory();
-				const string targetDirectory = string("user\\assets\\textures\\flare_maps\\");
+				const string targetDirectory = string("game_assets\\textures\\flare_maps\\");
 				const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "PNG");
 
 				// Check if user chose a filename

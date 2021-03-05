@@ -37,7 +37,7 @@ void SceneEditor::_updateAudioEditing()
 						_selectAudio(SELECTED_AUDIO_ID);
 
 						// Change cursor
-						_fe3d.guiEntity_changeTexture("@@cursor", "engine\\textures\\cursor_pointing.png");
+						_fe3d.guiEntity_changeTexture("@@cursor", "engine_assets\\textures\\cursor_pointing.png");
 
 						// Check if user clicked speaker
 						if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))

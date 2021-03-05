@@ -1,0 +1,5 @@
+3 18
+META script_type_destroy
+META execution_entry
+
+fe3d:scene_clear()

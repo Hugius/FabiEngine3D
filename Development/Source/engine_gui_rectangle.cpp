@@ -21,7 +21,7 @@ EngineGuiRectangle::EngineGuiRectangle(FabiEngine3D& fe3d, const string& parentI
 	_originalSize(size),
 	_originalColor(Vec3(1.0f))
 {
-	_fe3d.guiEntity_add(_entityID, "engine\\textures\\" + texturePath, position, 0.0f, size, isCentered);
+	_fe3d.guiEntity_add(_entityID, "engine_assets\\textures\\" + texturePath, position, 0.0f, size, isCentered);
 }
 
 EngineGuiRectangle::~EngineGuiRectangle()

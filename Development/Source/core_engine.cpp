@@ -55,7 +55,7 @@ void CoreEngine::_setupApplication()
 	// Create engine logo
 	shared_ptr<GuiEntity> logo = make_shared<GuiEntity>("logo");
 	logo->addOglBuffer(new OpenGLBuffer(0.0f, 0.0f, 2.0f, 2.0f, true, false));
-	logo->setTexture(_textureLoader.getTexture2D("engine\\textures\\logo.png", false, false, false));
+	logo->setTexture(_textureLoader.getTexture2D("engine_assets\\textures\\logo.png", false, false, false));
 
 	// Calculate logo resolution
 	SDL_DisplayMode DM;
@@ -76,7 +76,7 @@ void CoreEngine::_setupApplication()
 	// Create vignettte effect
 	Vec2 pos = _fe3d.misc_convertToNDC(_fe3d.misc_convertFromScreenCoords(Config::getInst().getVpPos()));
 	Vec2 size = ((Vec2(Config::getInst().getVpSize()) / Vec2(Config::getInst().getWindowSize())) * 2.0f) + Vec2(0.0f, 0.005f);
-	_fe3d.guiEntity_add("@vignette", "engine\\textures\\vignette.png", pos, 0.0f, size, false);
+	_fe3d.guiEntity_add("@vignette", "engine_assets\\textures\\vignette.png", pos, 0.0f, size, false);
 
 	// Initialize engine controller
 	_fe3d.FE3D_CONTROLLER_INIT();

@@ -236,7 +236,7 @@ void EnvironmentEditor::_updateWaterMenuEffects()
 			{
 				// Get the chosen filename
 				const string rootDirectory = _fe3d.misc_getRootDirectory();
-				const string targetDirectory = string("user\\assets\\textures\\dudv_maps\\");
+				const string targetDirectory = string("game_assets\\textures\\dudv_maps\\");
 				const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "PNG");
 
 				// Check if user chose a filename
@@ -260,7 +260,7 @@ void EnvironmentEditor::_updateWaterMenuEffects()
 			{
 				// Get the chosen filename
 				const string rootDirectory = _fe3d.misc_getRootDirectory();
-				const string targetDirectory = string("user\\assets\\textures\\normal_maps\\");
+				const string targetDirectory = string("game_assets\\textures\\normal_maps\\");
 				const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "PNG");
 
 				// Check if user chose a filename
@@ -284,7 +284,7 @@ void EnvironmentEditor::_updateWaterMenuEffects()
 			{
 				// Get the chosen filename
 				const string rootDirectory = _fe3d.misc_getRootDirectory();
-				const string targetDirectory = string("user\\assets\\textures\\displacement_maps\\");
+				const string targetDirectory = string("game_assets\\textures\\displacement_maps\\");
 				const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "PNG");
 
 				// Check if user chose a filename

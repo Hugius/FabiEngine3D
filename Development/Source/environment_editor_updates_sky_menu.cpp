@@ -90,7 +90,7 @@ void EnvironmentEditor::_updateSkyMenuMesh()
 			{
 				// Get the chosen filename
 				const string rootDirectory = _fe3d.misc_getRootDirectory();
-				const string targetDirectory = string("user\\assets\\textures\\cube_maps\\");
+				const string targetDirectory = string("game_assets\\textures\\cube_maps\\");
 				const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "PNG");
 
 				// Check if user chose a filename
@@ -114,7 +114,7 @@ void EnvironmentEditor::_updateSkyMenuMesh()
 			{
 				// Get the chosen filename
 				const string rootDirectory = _fe3d.misc_getRootDirectory();
-				const string targetDirectory = string("user\\assets\\textures\\cube_maps\\");
+				const string targetDirectory = string("game_assets\\textures\\cube_maps\\");
 				const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "PNG");
 
 				// Check if user chose a filename
@@ -138,7 +138,7 @@ void EnvironmentEditor::_updateSkyMenuMesh()
 			{
 				// Get the chosen filename
 				const string rootDirectory = _fe3d.misc_getRootDirectory();
-				const string targetDirectory = string("user\\assets\\textures\\cube_maps\\");
+				const string targetDirectory = string("game_assets\\textures\\cube_maps\\");
 				const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "PNG");
 
 				// Check if user chose a filename
@@ -162,7 +162,7 @@ void EnvironmentEditor::_updateSkyMenuMesh()
 			{
 				// Get the chosen filename
 				const string rootDirectory = _fe3d.misc_getRootDirectory();
-				const string targetDirectory = string("user\\assets\\textures\\cube_maps\\");
+				const string targetDirectory = string("game_assets\\textures\\cube_maps\\");
 				const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "PNG");
 
 				// Check if user chose a filename
@@ -186,7 +186,7 @@ void EnvironmentEditor::_updateSkyMenuMesh()
 			{
 				// Get the chosen filename
 				const string rootDirectory = _fe3d.misc_getRootDirectory();
-				const string targetDirectory = string("user\\assets\\textures\\cube_maps\\");
+				const string targetDirectory = string("game_assets\\textures\\cube_maps\\");
 				const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "PNG");
 
 				// Check if user chose a filename
@@ -210,7 +210,7 @@ void EnvironmentEditor::_updateSkyMenuMesh()
 			{
 				// Get the chosen filename
 				const string rootDirectory = _fe3d.misc_getRootDirectory();
-				const string targetDirectory = string("user\\assets\\textures\\cube_maps\\");
+				const string targetDirectory = string("game_assets\\textures\\cube_maps\\");
 				const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "PNG");
 
 				// Check if user chose a filename

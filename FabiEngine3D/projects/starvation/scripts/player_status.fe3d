@@ -1,0 +1,84 @@
+27 4
+META script_type_update
+
+BOOL interval = misc:time_interval("status", 50)
+IF interval IS <true>:
+    /// Update health icon color
+    DEC healthColor = _health
+    fe3d:image_set_color("health", healthColor, healthColor, healthColor)
+    /// Update hunger icon color
+    DEC hungerColor = _hunger
+    fe3d:image_set_color("hunger", hungerColor, hungerColor, hungerColor)
+    /// Update thirst icon color
+    DEC thirstColor = _thirst
+    fe3d:image_set_color("thirst", thirstColor, thirstColor, thirstColor)
+    /// Update stamina icon color
+    DEC staminaColor = _stamina
+    fe3d:image_set_color("stamina", staminaColor, staminaColor, staminaColor)
+    /// Update oxygen icon color
+    DEC oxygenColor = _oxygen
+    fe3d:image_set_color("oxygen", oxygenColor, oxygenColor, oxygenColor)
+    /// Update temperature icon color
+    DEC tempColor = _temperature
+    fe3d:image_set_color("temperature", tempColor, tempColor, 1.0)
+    /// Update hygiene icon color
+    DEC hygieneColor = _hygiene
+    fe3d:image_set_color("hygiene", hygieneColor, hygieneColor, hygieneColor)
+    /// Update sickness icon alpha
+    DEC sicknessAlpha = _sickness
+    fe3d:image_set_alpha("sickness", sicknessAlpha)
+
+/// Update hunger
+DECR _hunger 0.000025
+EDIT _hunger = math:clamp(_hunger, 0.0, 1.0)
+
+/// Update thirst
+DECR _thirst 0.000025
+EDIT _thirst = math:clamp(_thirst, 0.0, 1.0)
+
+/// Update stamina
+EDIT _stamina = math:clamp(_stamina, 0.0, 10.0)
+
+/// Update oxygen
+IF _isUnderWater IS <true>:
+    DECR _oxygen 0.0003
+ELSE:
+    INCR _oxygen 0.001
+EDIT _oxygen = math:clamp(_oxygen, 0.0, 1.0)
+
+/// Update temperature
+BOOL torchEquipped = (_isInvOpen IS <true> AND _inventory[_equipIndex] IS "torch")
+INCR _temperature 0.0001
+IF _isUnderWater IS <true>:
+    DECR _temperature 0.0005
+IF _isDayTime IS <false> AND _isSleeping IS <false>:
+    IF torchEquipped IS <true> AND _isUnderWater IS <false>:
+        INCR _temperature 0.001
+    ELSE:
+        DECR _temperature 0.0005
+EDIT _temperature = math:clamp(_temperature, 0.0, 1.0)
+
+/// Update hygiene
+DECR _hygiene 0.000025
+EDIT _hygiene = math:clamp(_hygiene, 0.0, 1.0)
+
+/// Update sickness
+IF _hygiene IS 0.0:
+    INCR _sickness 0.0001
+EDIT _sickness = math:clamp(_sickness, 0.0, 1.0)
+
+/// Update health
+DEC hu = _hunger
+DEC th = _thirst
+DEC ox = _oxygen
+DEC te = _temperature
+DEC si = _sickness
+IF hu IS 0.0 OR th IS 0.0 OR ox IS 0.0 OR te IS 0.0 OR si IS 1.0:
+    DECR _health 0.0005
+ELSE:
+    INCR _health 0.00005
+EDIT _health = math:clamp(_health, 0.0, 1.0)
+
+/// Check if player died
+IF _health IS 0.0:
+    fe3d:game_stop()

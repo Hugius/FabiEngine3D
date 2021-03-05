@@ -119,7 +119,7 @@ bool ScriptInterpreter::_executeFe3dTextEntityFunction(const string& functionNam
 			}
 
 			// Compose full texture path
-			auto fontPath = string("user\\assets\\fonts\\") + arguments[1].getString();
+			auto fontPath = string("game_assets\\fonts\\") + arguments[1].getString();
 
 			// Add text
 			_fe3d.textEntity_add(

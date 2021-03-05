@@ -123,7 +123,7 @@ void BillboardEditor::_updateBillboardEditing()
 					{
 						// Get the chosen filename
 						const string rootDirectory = _fe3d.misc_getRootDirectory();
-						const string targetDirectory = string("user\\assets\\textures\\billboard_maps\\");
+						const string targetDirectory = string("game_assets\\textures\\billboard_maps\\");
 						const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "PNG");
 
 						// Check if user did not cancel
@@ -236,7 +236,7 @@ void BillboardEditor::_updateBillboardEditing()
 					{
 						// Get the chosen filename
 						const string rootDirectory = _fe3d.misc_getRootDirectory();
-						const string targetDirectory = string("user\\assets\\fonts\\");
+						const string targetDirectory = string("game_assets\\fonts\\");
 						const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "TTF");
 
 						// Check if user did not cancel

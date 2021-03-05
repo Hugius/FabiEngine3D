@@ -83,11 +83,11 @@
     <LibraryPath>$(SolutionDir)FabiEngine3D\Engine\libraries\lib\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>$(SolutionDir)..\FabiEngine3D\bin\</OutDir>
+    <OutDir>$(SolutionDir)..\FabiEngine3D\binaries\</OutDir>
     <TargetName>FabiEngine3D</TargetName>
     <IntDir>$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)..\FabiEngine3D\Engine\libraries\includes\;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)..\FabiEngine3D\Engine\libraries\lib\;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)..\FabiEngine3D\libraries\includes\;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)..\FabiEngine3D\libraries\lib\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -480,39 +480,39 @@
     <ClCompile Include="Source\environment_editor_updates_water_misc.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\FabiEngine3D\engine\shaders\aabb_entity_shader.frag" />
-    <None Include="..\FabiEngine3D\Engine\Shaders\aabb_entity_shader.vert" />
-    <None Include="..\FabiEngine3D\Engine\Shaders\billboard_entity_shader.frag" />
-    <None Include="..\FabiEngine3D\Engine\Shaders\billboard_entity_shader.vert" />
-    <None Include="..\FabiEngine3D\Engine\Shaders\bloom_hdr_shader.frag" />
-    <None Include="..\FabiEngine3D\Engine\Shaders\bloom_hdr_shader.vert" />
-    <None Include="..\FabiEngine3D\Engine\Shaders\blur_shader.frag" />
-    <None Include="..\FabiEngine3D\Engine\Shaders\blur_shader.vert" />
-    <None Include="..\FabiEngine3D\Engine\Shaders\depth_shader.frag" />
-    <None Include="..\FabiEngine3D\Engine\Shaders\depth_shader.vert" />
-    <None Include="..\FabiEngine3D\Engine\Shaders\final_shader.frag" />
-    <None Include="..\FabiEngine3D\Engine\Shaders\final_shader.vert" />
-    <None Include="..\FabiEngine3D\Engine\Shaders\game_entity_shader.frag" />
-    <None Include="..\FabiEngine3D\Engine\Shaders\game_entity_shader.vert" />
-    <None Include="..\FabiEngine3D\Engine\Shaders\gui_entity_shader.frag" />
-    <None Include="..\FabiEngine3D\Engine\Shaders\gui_entity_shader.vert" />
-    <None Include="..\FabiEngine3D\Engine\Shaders\post_shader.frag" />
-    <None Include="..\FabiEngine3D\Engine\Shaders\post_shader.vert" />
-    <None Include="..\FabiEngine3D\Engine\Shaders\shadow_shader.frag" />
-    <None Include="..\FabiEngine3D\Engine\Shaders\shadow_shader.vert" />
-    <None Include="..\FabiEngine3D\Engine\Shaders\sky_entity_shader.frag" />
-    <None Include="..\FabiEngine3D\Engine\Shaders\sky_entity_shader.vert" />
-    <None Include="..\FabiEngine3D\Engine\Shaders\terrain_entity_shader.frag" />
-    <None Include="..\FabiEngine3D\Engine\Shaders\terrain_entity_shader.vert" />
-    <None Include="..\FabiEngine3D\Engine\Shaders\water_entity_shader.frag" />
-    <None Include="..\FabiEngine3D\Engine\Shaders\water_entity_shader.vert" />
+    <None Include="..\FabiEngine3D\shaders\aabb_entity_shader.frag" />
+    <None Include="..\FabiEngine3D\shaders\aabb_entity_shader.vert" />
+    <None Include="..\FabiEngine3D\shaders\billboard_entity_shader.frag" />
+    <None Include="..\FabiEngine3D\shaders\billboard_entity_shader.vert" />
+    <None Include="..\FabiEngine3D\shaders\bloom_hdr_shader.frag" />
+    <None Include="..\FabiEngine3D\shaders\bloom_hdr_shader.vert" />
+    <None Include="..\FabiEngine3D\shaders\blur_shader.frag" />
+    <None Include="..\FabiEngine3D\shaders\blur_shader.vert" />
+    <None Include="..\FabiEngine3D\shaders\depth_shader.frag" />
+    <None Include="..\FabiEngine3D\shaders\depth_shader.vert" />
+    <None Include="..\FabiEngine3D\shaders\final_shader.frag" />
+    <None Include="..\FabiEngine3D\shaders\final_shader.vert" />
+    <None Include="..\FabiEngine3D\shaders\game_entity_shader.frag" />
+    <None Include="..\FabiEngine3D\shaders\game_entity_shader.vert" />
+    <None Include="..\FabiEngine3D\shaders\gui_entity_shader.frag" />
+    <None Include="..\FabiEngine3D\shaders\gui_entity_shader.vert" />
+    <None Include="..\FabiEngine3D\shaders\post_shader.frag" />
+    <None Include="..\FabiEngine3D\shaders\post_shader.vert" />
+    <None Include="..\FabiEngine3D\shaders\shadow_shader.frag" />
+    <None Include="..\FabiEngine3D\shaders\shadow_shader.vert" />
+    <None Include="..\FabiEngine3D\shaders\sky_entity_shader.frag" />
+    <None Include="..\FabiEngine3D\shaders\sky_entity_shader.vert" />
+    <None Include="..\FabiEngine3D\shaders\terrain_entity_shader.frag" />
+    <None Include="..\FabiEngine3D\shaders\terrain_entity_shader.vert" />
+    <None Include="..\FabiEngine3D\shaders\water_entity_shader.frag" />
+    <None Include="..\FabiEngine3D\shaders\water_entity_shader.vert" />
     <None Include="Source\script_value.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="..\FabiEngine3D\engine\icon\AppIcon.rc" />
+    <ResourceCompile Include="..\FabiEngine3D\engine_assets\icon\AppIcon.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\FabiEngine3D\engine\icon\logo.ico" />
+    <Image Include="..\FabiEngine3D\engine_assets\icon\logo.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

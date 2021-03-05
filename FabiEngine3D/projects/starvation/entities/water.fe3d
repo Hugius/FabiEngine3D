@@ -1,0 +1,2 @@
+@lake game_assets\textures\dudv_maps\water.png game_assets\textures\normal_maps\water\wave1.png ? 0 1 0 1 0 0.25098 0.25098 1 32 -140 30.4 -108 6 1 0.0001 0.0003 0.2 64 1
+@river game_assets\textures\dudv_maps\water.png game_assets\textures\normal_maps\water\wave5.png game_assets\textures\displacement_maps\water.png 1 1 1 1 0 0 0 1 325 5 4.5 -25 64 1.25 -0.001 0.0005 0.25 128 2

@@ -8,7 +8,7 @@ void ScriptEditor::_updateTextWriter()
 		// Change cursor texture
 		if (_fe3d.misc_isCursorInsideViewport())
 		{
-			_fe3d.guiEntity_changeTexture("@@cursor", "engine\\textures\\cursor_text.png");
+			_fe3d.guiEntity_changeTexture("@@cursor", "engine_assets\\textures\\cursor_text.png");
 		}
 
 		// Reload all AABB entities when LMB is pressed

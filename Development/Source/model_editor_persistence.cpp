@@ -14,7 +14,7 @@ const vector<string> ModelEditor::getAllTexturePathsFromFile()
 	}
 
 	// Compose full file path
-	string filePath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectID + "\\data\\model.fe3d";
+	string filePath = _fe3d.misc_getRootDirectory() + "projects\\" + _currentProjectID + "\\entities\\model.fe3d";
 
 	// Check if model file exists
 	if (_fe3d.misc_isFileExisting(filePath))
@@ -100,7 +100,7 @@ void ModelEditor::loadGameEntitiesFromFile()
 	_loadedModelIDs.clear();
 
 	// Compose full file path
-	string filePath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectID + "\\data\\model.fe3d";
+	string filePath = _fe3d.misc_getRootDirectory() + "projects\\" + _currentProjectID + "\\entities\\model.fe3d";
 
 	// Check if model file exists
 	if (_fe3d.misc_isFileExisting(filePath))
@@ -217,7 +217,7 @@ void ModelEditor::saveGameEntitiesToFile()
 
 		// Create or overwrite models file
 		std::ofstream file;
-		file.open(_fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectID + "\\data\\model.fe3d");
+		file.open(_fe3d.misc_getRootDirectory() + "projects\\" + _currentProjectID + "\\entities\\model.fe3d");
 
 		// Write model data into file
 		for (auto& modelID : _loadedModelIDs)

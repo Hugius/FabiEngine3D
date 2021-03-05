@@ -1,0 +1,47 @@
+15 28
+META script_type_update
+
+/// Temporary values
+BOOL ePressed = fe3d:input_is_key_pressed("KEY_E")
+INT leastWheatCount = _wheatCount
+DECR leastWheatCount 1
+
+/// Update wheat grinding
+fe3d:text_set_visible("grind", <false>)
+STR hoveredID = fe3d:raycast_into_model("mill", "", <true>)
+IF hoveredID NOT "" AND _isBuilding IS <false>:
+    STR millAabbID = misc:concat_strings(hoveredID, "_mill")
+    VEC3 millSize = fe3d:aabb_get_size(millAabbID)
+    DEC millHeight = fe3d:model_get_max_height(hoveredID)
+    DEC millDistance = fe3d:raycast_into_model_distance("mill", "", <true>)
+    IF millDistance IS -1.0:
+        EDIT millDistance = 1000.0
+    /// Check if mill is fully built and hovered
+    IF millDistance LESS _maxReach AND millHeight MORE millSize.y:
+        IF _bag[4] MORE leastWheatCount:
+            fe3d:text_set_visible("grind", <true>)
+            /// Convert wheat into flour
+            IF ePressed IS <true>:
+                DECR _bag[4] _wheatCount
+                INT flourCount = _wheatCount
+                DIV flourCount 3
+                INCR _bag[5] flourCount
+
+/// Update bread baking
+fe3d:text_set_visible("bake", <false>)
+EDIT hoveredID = fe3d:raycast_into_model("oven", "", <true>)
+IF hoveredID NOT "" AND _isBuilding IS <false>:
+    STR ovenAabbID = misc:concat_strings(hoveredID, "_oven")
+    VEC3 ovenSize = fe3d:aabb_get_size(ovenAabbID)
+    DEC ovenHeight = fe3d:model_get_max_height(hoveredID)
+    DEC ovenDistance = fe3d:raycast_into_model_distance("oven", "", <true>)
+    IF ovenDistance IS -1.0:
+        EDIT ovenDistance = 1000.0
+    /// If oven is fully built and hovered
+    IF ovenDistance LESS _maxReach AND ovenHeight MORE ovenSize.y:
+        IF _bag[5] MORE 0:
+            fe3d:text_set_visible("bake", <true>)
+            /// Convert 1 flour into 1 bread
+            IF ePressed IS <true>:
+                DECR _bag[5] 1
+                INCR _bag[6] 1

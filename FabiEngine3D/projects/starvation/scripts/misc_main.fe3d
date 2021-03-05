@@ -1,0 +1,52 @@
+6 16
+META script_type_update
+
+/// Temporary values
+STR currentWorld = fe3d:scene_get_current_id()
+BOOL ePressed = fe3d:input_is_key_pressed("KEY_E")
+
+/// Update torch
+BOOL equipped = (_equipIndex IS 7 AND _inventory[_equipIndex] NOT "")
+fe3d:light_set_visible("torch", <false>)
+fe3d:billboard_set_visible("torch", <false>)
+IF equipped IS <true> AND _isInvOpen IS <true>:
+    VEC3 torchPos = fe3d:model_get_position("torch")
+    VEC3 firePos = torchPos
+    INCR torchPos.y 2.0
+    INCR firePos.y 1.8
+    fe3d:light_set_position("torch", torchPos.x, torchPos.y, torchPos.z)
+    fe3d:billboard_set_position("torch", firePos.x, firePos.y, firePos.z)
+    /// Check if it's nighttime
+    IF _isDayTime IS <false> AND _isUnderWater IS <false>:
+        fe3d:light_set_visible("torch", <true>)
+        fe3d:billboard_set_visible("torch", <true>)
+        DECR _durabilities[7] 0.0001
+
+/// Update black overlay
+fe3d:image_set_alpha("black", _blackAlpha)
+IF _blackAlpha LESS _targetBlackAlpha:
+    INCR _blackAlpha 0.0025
+ELSE:
+    DECR _blackAlpha 0.0025
+
+/// Update travelling
+IF currentWorld IS "home":
+    STR signID = fe3d:collision_check_camera_model("sign", "", "")
+    IF signID NOT "" AND ePressed IS <true>:
+        fe3d:scene_load("starvia_outside")
+        fe3d:camera_set_position(0.0, 9.0, 140.0)
+
+/// Update crosshair visiblity
+IF _isCrafting IS <true> OR _isBuilding IS <true> OR _isInStorage IS <true>:
+    fe3d:image_set_visible("crosshair", <false>)
+ELSE:
+    fe3d:image_set_visible("crosshair", <true>)
+
+/// Update survival time
+DEC elapsedMS = fe3d:timer_stop()
+INCR _elapsedMS elapsedMS
+CAST _survivalTime DEC
+EDIT _survivalTime = _elapsedMS
+MUL _survivalTime 0.001
+CAST _survivalTime INT
+fe3d:timer_start()

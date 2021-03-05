@@ -245,7 +245,7 @@ void RenderEngine::_renderCustomCursor()
 void RenderEngine::_renderDebugScreens()
 {
 	// Temporary values
-	const string fontPath = "engine\\fonts\\font.ttf";
+	const string fontPath = "engine_assets\\fonts\\font.ttf";
 	const Vec3 color = Vec3(0.5f);
 	const float charWidth = 0.025f;
 	const float charHeight = 0.1f;

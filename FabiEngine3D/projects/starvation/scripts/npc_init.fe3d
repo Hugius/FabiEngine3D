@@ -1,0 +1,28 @@
+11 7
+META script_type_init
+
+/// Globals
+GLOB CONST DEC _maxNpcReach = 3.5
+GLOB BOOL _isTalking = <false>
+GLOB STR _talkingNpcID = ""
+GLOB INT _dialogueIndex = 0
+
+/// Models
+fe3d:model_place("npc_aurelius", "male1", 6.0, 6.35, 136.0)
+
+/// HUD
+STR aurelius0 = "Greetings stranger, welcome to Starvia valley!"
+STR aurelius1 = "My name is Aurelius. I am the king's adviser."
+STR aurelius2 = "You should visit the king, he is looking for new land lords."
+STR aurelius3 = "King Arenvald is resided in the Royal Castle up ahead."
+STR aurelius4 = "Safe travels, sir"
+fe3d:text_place("npc_aurelius0", "font.ttf", aurelius0, 0.0, -0.5, 0.0, 1.0, 0.05)
+fe3d:text_place("npc_aurelius1", "font.ttf", aurelius1, 0.0, -0.5, 0.0, 0.95, 0.05)
+fe3d:text_place("npc_aurelius2", "font.ttf", aurelius2, 0.0, -0.5, 0.0, 1.2, 0.05)
+fe3d:text_place("npc_aurelius3", "font.ttf", aurelius3, 0.0, -0.5, 0.0, 1.1, 0.05)
+fe3d:text_place("npc_aurelius4", "font.ttf", aurelius4, 0.0, -0.5, 0.0, 0.4, 0.05)
+fe3d:text_set_visible("npc_aurelius0", <false>)
+fe3d:text_set_visible("npc_aurelius1", <false>)
+fe3d:text_set_visible("npc_aurelius2", <false>)
+fe3d:text_set_visible("npc_aurelius3", <false>)
+fe3d:text_set_visible("npc_aurelius4", <false>)

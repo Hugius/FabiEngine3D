@@ -28,7 +28,7 @@ const string Tools::getRootDirectory()
 	rootDir = std::filesystem::absolute(rootDir).string();
 
 	// Cut to engine root directory
-	rootDir = rootDir.substr(0, rootDir.size() - string("bin\\FabiEngine3D.exe").size());
+	rootDir = rootDir.substr(0, rootDir.size() - string("binaries\\FabiEngine3D.exe").size());
 
 	// Return
 	return rootDir;

@@ -1,0 +1,71 @@
+69 50
+META script_type_init
+
+/// Globals
+GLOB LIST _logIDs = {}
+GLOB LIST _stonesIDs = {}
+GLOB STR _fallingTreeID = ""
+GLOB STR _fallingLogID = ""
+GLOB STR _fallingStonesID = ""
+GLOB CONST DEC _maxReach = 2.25
+GLOB DEC _targetBlackAlpha = 0.0
+GLOB DEC _blackAlpha = 1.0
+GLOB DEC _fallingLogTargetHeight = 0.0
+GLOB DEC _fallingStonesTargetHeight = 0.0
+GLOB DEC _wheatGrowingSpeed = 0.0001
+GLOB DEC _elapsedMS = 0.0
+GLOB CONST INT _logCount = 4
+GLOB CONST INT _stoneCount = 6
+GLOB CONST INT _clayCount = 10
+GLOB CONST INT _seedsCount = 5
+GLOB CONST INT _wheatCount = 12
+GLOB CONST INT _fishCount = 1
+GLOB INT _survivalTime = 0
+
+/// Images
+fe3d:image_place("crosshair", "crosshair.png", 0.0, 0.0, 0.0, 0.0325, 0.05)
+fe3d:image_place("black", "black.png", 0.0, 0.0, 0.0, 2.0, 2.0)
+
+/// Text
+STR f = "font.ttf"
+fe3d:text_place("pickup", f, "Press F to pickup", 0.0, -0.2, 0.0, 0.425, 0.075)
+fe3d:text_place("craft", f, "Press E to craft", 0.0, -0.2, 0.0, 0.4, 0.075)
+fe3d:text_place("talk", f, "Press E to talk", 0.0, -0.2, 0.0, 0.375, 0.075)
+fe3d:text_place("sleep", f, "Press E to sleep", 0.0, -0.2, 0.0, 0.4, 0.075)
+fe3d:text_place("drink", f, "Press E to drink", 0.0, -0.2, 0.0, 0.4, 0.075)
+fe3d:text_place("grind", f, "Press E to grind", 0.0, -0.2, 0.0, 0.4, 0.075)
+fe3d:text_place("bake", f, "Press E to bake", 0.0, -0.2, 0.0, 0.375, 0.075)
+fe3d:text_place("storage", f, "Press E to open storage", 0.0, -0.2, 0.0, 0.575, 0.075)
+fe3d:text_place("mine", f, "Press LMB to mine", 0.0, -0.2, 0.0, 0.425, 0.075)
+fe3d:text_place("cut", f, "Press LMB to cut", 0.0, -0.2, 0.0, 0.4, 0.075)
+fe3d:text_place("dig", f, "Press LMB to dig", 0.0, -0.2, 0.0, 0.4, 0.075)
+fe3d:text_place("plow", f, "Press LMB to plow", 0.0, -0.2, 0.0, 0.425, 0.075)
+fe3d:text_place("reap", f, "Press LMB to reap", 0.0, -0.2, 0.0, 0.425, 0.075)
+fe3d:text_place("build", f, "Press LMB to build", 0.0, -0.2, 0.0, 0.45, 0.075)
+fe3d:text_place("fish", f, "Press LMB to fish", 0.0, -0.2, 0.0, 0.425, 0.075)
+fe3d:text_set_visible("pickup", <false>)
+fe3d:text_set_visible("craft", <false>)
+fe3d:text_set_visible("talk", <false>)
+fe3d:text_set_visible("sleep", <false>)
+fe3d:text_set_visible("drink", <false>)
+fe3d:text_set_visible("grind", <false>)
+fe3d:text_set_visible("bake", <false>)
+fe3d:text_set_visible("storage", <false>)
+fe3d:text_set_visible("mine", <false>)
+fe3d:text_set_visible("cut", <false>)
+fe3d:text_set_visible("dig", <false>)
+fe3d:text_set_visible("plow", <false>)
+fe3d:text_set_visible("reap", <false>)
+fe3d:text_set_visible("build", <false>)
+fe3d:text_set_visible("fish", <false>)
+
+/// Torch
+fe3d:light_place("torch", 0.0, 0.0, 0.0, 1.0, 0.85, 0.0, 1.25, 1.0)
+fe3d:billboard_place("torch", "fire1", 0.0, 0.0, 0.0)
+fe3d:billboard_start_animation("torch", -1)
+fe3d:billboard_set_aabb_raycast_responsive("torch", <false>)
+fe3d:billboard_set_aabb_collision_responsive("torch", <false>)
+fe3d:billboard_set_size("torch", 1.75, 1.5)
+
+/// Miscellaneous
+fe3d:raycast_enable_terrain_positioning(30.0, 0.1)

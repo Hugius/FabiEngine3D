@@ -101,7 +101,7 @@ void EngineController::_initializeMiscellaneous()
 	camera_load(90.0f, 0.1f, 10000.0f, Vec3(0.0f));
 
 	// Default engine background
-	string textureFolderPath = "engine\\textures\\";
+	string textureFolderPath = "engine_assets\\textures\\";
 	skyEntity_add("@@engineBackground");
 	skyEntity_setDiffuseMaps("@@engineBackground", {
 		textureFolderPath + "background_right.png",
@@ -114,7 +114,7 @@ void EngineController::_initializeMiscellaneous()
 	skyEntity_setRotationSpeed("@@engineBackground", 0.002f);
 
 	// Custom cursor texture
-	guiEntity_add("@@cursor", "engine\\textures\\cursor_default.png", Vec2(0.0f), 0.0f, Vec2(0.075f, 0.075f * misc_getAspectRatio()), true);
+	guiEntity_add("@@cursor", "engine_assets\\textures\\cursor_default.png", Vec2(0.0f), 0.0f, Vec2(0.075f, 0.075f * misc_getAspectRatio()), true);
 	misc_setCustomCursor("@@cursor");
 	misc_hideCursor();
 }
@@ -137,7 +137,7 @@ void EngineController::_updateMiscellaneous()
 
 	// Update custom cursor
 	guiEntity_setPosition("@@cursor", misc_convertToNDC(misc_convertFromScreenCoords(misc_getCursorPosition())));
-	guiEntity_changeTexture("@@cursor", "engine\\textures\\cursor_default.png");
+	guiEntity_changeTexture("@@cursor", "engine_assets\\textures\\cursor_default.png");
 	misc_isCursorInsideWindow() ? guiEntity_show("@@cursor") : guiEntity_hide("@@cursor");
 }
 

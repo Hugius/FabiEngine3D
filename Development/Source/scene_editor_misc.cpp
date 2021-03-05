@@ -17,7 +17,7 @@ bool SceneEditor::isSceneExisting(const string& fileName)
 	}
 
 	// Compose full file path
-	string filePath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectID + "\\scenes\\" + fileName + ".fe3d";
+	string filePath = _fe3d.misc_getRootDirectory() + "projects\\" + _currentProjectID + "\\scenes\\" + fileName + ".fe3d";
 
 	// Check if scene file exists
 	return (_fe3d.misc_isFileExisting(filePath));
@@ -38,7 +38,7 @@ void SceneEditor::_selectModel(const string& modelID)
 	_selectedModelID = modelID;
 
 	// Change cursor
-	_fe3d.guiEntity_changeTexture("@@cursor", "engine\\textures\\cursor_pointing.png");
+	_fe3d.guiEntity_changeTexture("@@cursor", "engine_assets\\textures\\cursor_pointing.png");
 
 	// Check if nothing is active
 	if (_activeModelID == "" && _activeBillboardID == "" && _activeLightBulbID == "" && _activeSpeakerID == "")
@@ -79,7 +79,7 @@ void SceneEditor::_selectBillboard(const string& billboardID)
 	_selectedBillboardID = billboardID;
 
 	// Change cursor
-	_fe3d.guiEntity_changeTexture("@@cursor", "engine\\textures\\cursor_pointing.png");
+	_fe3d.guiEntity_changeTexture("@@cursor", "engine_assets\\textures\\cursor_pointing.png");
 
 	// Check if nothing is active
 	if (_activeBillboardID == "" && _activeModelID == "" && _activeLightBulbID == "" && _activeSpeakerID == "")
@@ -120,7 +120,7 @@ void SceneEditor::_selectAudio(const string& audioID)
 	_selectedSpeakerID = "@speaker_" + audioID;
 
 	// Change cursor
-	_fe3d.guiEntity_changeTexture("@@cursor", "engine\\textures\\cursor_pointing.png");
+	_fe3d.guiEntity_changeTexture("@@cursor", "engine_assets\\textures\\cursor_pointing.png");
 
 	// Check if nothing is active
 	if (_activeBillboardID == "" && _activeModelID == "" && _activeLightBulbID == "" && _activeSpeakerID == "")
@@ -159,7 +159,7 @@ vector<string> SceneEditor::_loadSceneNames()
 {
 	// Temporary values
 	vector<string> sceneNames;
-	string directoryPath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectID + "\\scenes\\";
+	string directoryPath = _fe3d.misc_getRootDirectory() + "projects\\" + _currentProjectID + "\\scenes\\";
 
 	// Check if scenes directory exists
 	if (_fe3d.misc_isDirectory(directoryPath))
@@ -183,7 +183,7 @@ vector<string> SceneEditor::_loadSceneNames()
 void SceneEditor::_deleteSceneFile(const string& sceneName)
 {
 	// Check if scene file is still existing
-	string filePath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectID + "\\scenes\\" + sceneName + ".fe3d";
+	string filePath = _fe3d.misc_getRootDirectory() + "projects\\" + _currentProjectID + "\\scenes\\" + sceneName + ".fe3d";
 	if (_fe3d.misc_isFileExisting(filePath))
 	{
 		std::filesystem::remove_all(filePath);

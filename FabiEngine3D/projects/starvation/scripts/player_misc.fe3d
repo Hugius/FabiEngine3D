@@ -1,0 +1,40 @@
+38 23
+META script_type_update
+
+/// Temporary values
+BOOL con1 = (_isToolPlaying IS <false> AND _isPickupPlaying IS <false>)
+BOOL con2 = (_isTalking IS <false> AND _isCrafting IS <false>)
+BOOL con3 = (_isSleeping IS <false> AND _isInStorage IS <false>)
+EDIT _isAbleToMove = (con1 IS <true> AND con2 IS <true> AND con3 IS <true>)
+
+/// Camera movement
+IF _isAbleToMove IS <true>:
+    fe3d:camera_enable_first_person_view()
+ELSE:
+    fe3d:camera_disable_first_person_view()
+
+/// Centering cursor
+IF _isPickupPlaying IS <true> OR _isToolPlaying IS <true>:
+    fe3d:camera_center_cursor()
+
+/// Update eating
+
+/// Update drinking
+fe3d:text_set_visible("drink", <false>)
+STR hoveredID = fe3d:raycast_into_model("well", "", <true>)
+IF hoveredID NOT "" AND _isBuilding IS <false>:
+    DEC height = fe3d:model_get_max_height(hoveredID)
+    VEC3 size = fe3d:aabb_get_size("well_display_well")
+    DEC wellDistance = fe3d:raycast_into_model_distance("well", "", <true>)
+    IF wellDistance IS -1.0:
+        EDIT wellDistance = 1000.0
+    IF wellDistance LESS _maxReach AND height MORE size.y:
+        fe3d:text_set_visible("drink", <true>)
+        IF ePressed IS <true>:
+            INCR _thirst 0.25
+
+/// Update washing
+VEC3 camPos = fe3d:camera_get_position()
+DEC waterY = fe3d:water_get_height()
+IF camPos.y LESS waterY:
+    INCR _hygiene 0.001

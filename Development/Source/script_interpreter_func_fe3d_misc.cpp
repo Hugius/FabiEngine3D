@@ -167,7 +167,7 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types) && _validateCurrentProject())
 		{
 			// Compose file path
-			string directoryPath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectID + "\\saves\\";
+			string directoryPath = _fe3d.misc_getRootDirectory() + "projects\\" + _currentProjectID + "\\saves\\";
 			string filePath = directoryPath + arguments[0].getString();
 
 			// Check if file exists
@@ -199,7 +199,7 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types) && _validateCurrentProject())
 		{
 			// Compose file path
-			string directoryPath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectID + "\\saves\\";
+			string directoryPath = _fe3d.misc_getRootDirectory() + "projects\\" + _currentProjectID + "\\saves\\";
 			string filePath = directoryPath + arguments[0].getString();
 
 			// Write line to file
@@ -216,7 +216,7 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types) && _validateCurrentProject())
 		{
 			// Compose file path
-			string directoryPath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectID + "\\saves\\";
+			string directoryPath = _fe3d.misc_getRootDirectory() + "projects\\" + _currentProjectID + "\\saves\\";
 			string filePath = directoryPath + arguments[0].getString();
 
 			// Check if file exists

@@ -313,7 +313,7 @@ bool ScriptInterpreter::_validateCurrentProject()
 	}
 
 	// Check if saves folder still exists
-	if (!_fe3d.misc_isDirectory(_fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectID + "\\saves\\"))
+	if (!_fe3d.misc_isDirectory(_fe3d.misc_getRootDirectory() + "projects\\" + _currentProjectID + "\\saves\\"))
 	{
 		_fe3d.logger_throwWarning("Project \"" + _currentProjectID + "\" corrupted: saves folder missing!");
 		return false;

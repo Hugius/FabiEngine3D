@@ -49,7 +49,7 @@ void TopViewportController::_updateProjectCreation()
 		if (_gui.getGlobalScreen()->checkValueForm("newProjectName", newProjectName))
 		{
 			// Get directory path for the new project
-			string newDirectoryPath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + newProjectName;
+			string newDirectoryPath = _fe3d.misc_getRootDirectory() + "projects\\" + newProjectName;
 
 			// Check if project already exists
 			if (_fe3d.misc_isFileExisting(newDirectoryPath) && _fe3d.misc_isDirectory(newDirectoryPath))
@@ -66,27 +66,29 @@ void TopViewportController::_updateProjectCreation()
 			}
 			else // Project is non-existent
 			{
-				// Create new project directory & subfolders
-				auto temp1 = _mkdir(newDirectoryPath.c_str());
-				auto temp2 = _mkdir((newDirectoryPath + "\\data").c_str());
-				auto temp3 = _mkdir((newDirectoryPath + "\\saves").c_str());
-				auto temp4 = _mkdir((newDirectoryPath + "\\scenes").c_str());
-				auto temp5 = _mkdir((newDirectoryPath + "\\scripts").c_str());
+				// Generate new project directory
+				auto temp = _mkdir(newDirectoryPath.c_str());
+
+				// Generate project subfolders
+				temp = _mkdir((newDirectoryPath + "\\entities").c_str());
+				temp = _mkdir((newDirectoryPath + "\\saves").c_str());
+				temp = _mkdir((newDirectoryPath + "\\scenes").c_str());
+				temp = _mkdir((newDirectoryPath + "\\scripts").c_str());
 
 				// Create new empty project files
-				auto file = std::ofstream(string(newDirectoryPath + "\\data\\animation.fe3d"));
+				auto file = std::ofstream(string(newDirectoryPath + "\\entities\\animation.fe3d"));
 				file.close();
-				file = std::ofstream(string(newDirectoryPath + "\\data\\audio.fe3d"));
+				file = std::ofstream(string(newDirectoryPath + "\\entities\\audio.fe3d"));
 				file.close();
-				file = std::ofstream(string(newDirectoryPath + "\\data\\billboard.fe3d"));
+				file = std::ofstream(string(newDirectoryPath + "\\entities\\billboard.fe3d"));
 				file.close();
-				file = std::ofstream(string(newDirectoryPath + "\\data\\model.fe3d"));
+				file = std::ofstream(string(newDirectoryPath + "\\entities\\model.fe3d"));
 				file.close();
-				file = std::ofstream(string(newDirectoryPath + "\\data\\sky.fe3d"));
+				file = std::ofstream(string(newDirectoryPath + "\\entities\\sky.fe3d"));
 				file.close();
-				file = std::ofstream(string(newDirectoryPath + "\\data\\terrain.fe3d"));
+				file = std::ofstream(string(newDirectoryPath + "\\entities\\terrain.fe3d"));
 				file.close();
-				file = std::ofstream(string(newDirectoryPath + "\\data\\water.fe3d"));
+				file = std::ofstream(string(newDirectoryPath + "\\entities\\water.fe3d"));
 				file.close();
 
 				// Create settings file
@@ -189,7 +191,7 @@ void TopViewportController::_updateProjectDeletion()
 			}
 
 			// Check if project folder is still existing
-			string directoryPath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + chosenButtonID;
+			string directoryPath = _fe3d.misc_getRootDirectory() + "projects\\" + chosenButtonID;
 			if (_fe3d.misc_isFileExisting(directoryPath) && _fe3d.misc_isDirectory(directoryPath))
 			{
 				// Deleting project folder
@@ -218,7 +220,7 @@ void TopViewportController::_updateProjectDeletion()
 void TopViewportController::_prepareProjectChoosing()
 {
 	// Get new path
-	string userDirectoryPath = _fe3d.misc_getRootDirectory() + "user\\projects\\";
+	string userDirectoryPath = _fe3d.misc_getRootDirectory() + "projects\\";
 
 	// Check if projects directory exists
 	if (_fe3d.misc_isDirectory(userDirectoryPath))

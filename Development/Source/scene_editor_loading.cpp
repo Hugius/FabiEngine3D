@@ -13,7 +13,7 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 	}
 
 	// Check if scene directory still exists
-	string directoryPath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectID + "\\scenes\\";
+	string directoryPath = _fe3d.misc_getRootDirectory() + "projects\\" + _currentProjectID + "\\scenes\\";
 	if (!_fe3d.misc_isDirectory(directoryPath))
 	{
 		_fe3d.logger_throwWarning("Project \"" + _currentProjectID + "\" corrupted: scenes folder missing!");
@@ -457,7 +457,7 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 
 				// Apply
 				_fe3d.gfx_enableDirectionalLighting(directionalLightingPosition, directionalLightingColor, directionalLightingIntensity);
-				_fe3d.billboardEntity_add("@@lightSource", "engine\\textures\\light_source.png", directionalLightingPosition, Vec3(0.0f), Vec2(billboardSize), true, true, true, true);
+				_fe3d.billboardEntity_add("@@lightSource", "engine_assets\\textures\\light_source.png", directionalLightingPosition, Vec3(0.0f), Vec2(billboardSize), true, true, true, true);
 				_fe3d.billboardEntity_setLightness("@@lightSource", billboardLightness);
 				_fe3d.billboardEntity_setColor("@@lightSource", directionalLightingColor);
 				_fe3d.billboardEntity_setDepthMapIncluded("@@lightSource", false);
@@ -475,7 +475,7 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 				// Add lightbulbs
 				if (_isEditorLoaded)
 				{
-					_fe3d.gameEntity_add("@" + ID, "engine\\meshes\\lamp.obj", position, Vec3(0.0f), DEFAULT_LIGHTBULB_SIZE);
+					_fe3d.gameEntity_add("@" + ID, "engine_assets\\meshes\\lamp.obj", position, Vec3(0.0f), DEFAULT_LIGHTBULB_SIZE);
 					_fe3d.gameEntity_setShadowed("@" + ID, false);
 					_fe3d.gameEntity_setColor("@" + ID, color);
 					_fe3d.aabbEntity_bindToGameEntity("@" + ID, Vec3(0.0f), DEFAULT_LIGHTBULB_AABB_SIZE, true, true);
@@ -502,7 +502,7 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 				// Add speaker
 				if (_isEditorLoaded)
 				{
-					_fe3d.gameEntity_add("@speaker_" + ID, "engine\\meshes\\speaker.obj", position, Vec3(0.0f), DEFAULT_SPEAKER_SIZE);
+					_fe3d.gameEntity_add("@speaker_" + ID, "engine_assets\\meshes\\speaker.obj", position, Vec3(0.0f), DEFAULT_SPEAKER_SIZE);
 					_fe3d.gameEntity_setShadowed("@speaker_" + ID, false);
 					_fe3d.aabbEntity_bindToGameEntity("@speaker_" + ID, Vec3(0.0f), DEFAULT_SPEAKER_AABB_SIZE, true, true);
 				}

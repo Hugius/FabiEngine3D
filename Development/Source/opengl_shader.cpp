@@ -24,8 +24,8 @@ OpenGLShader::OpenGLShader(const string& vertexFileName, const string& fragmentF
 	// Open the shader text files
 	try 
 	{
-		vShaderFile.open(rootDir + "engine\\shaders\\" + _vertexFileName);
-		fShaderFile.open(rootDir + "engine\\shaders\\" + _fragmentFileName);
+		vShaderFile.open(rootDir + "shaders\\" + _vertexFileName);
+		fShaderFile.open(rootDir + "shaders\\" + _fragmentFileName);
 		std::stringstream vShaderStream, fShaderStream;
 		vShaderStream << vShaderFile.rdbuf();
 		fShaderStream << fShaderFile.rdbuf();
@@ -102,8 +102,8 @@ void OpenGLShader::_createProgram(const GLchar * vShaderCode, const GLchar * fSh
 	glDeleteShader(fragment);
 
 	// Logging
-	Logger::throwInfo("Loaded vertex shader: \"engine\\shaders\\" + _vertexFileName + "\"");
-	Logger::throwInfo("Loaded fragment shader: \"engine\\shaders\\" + _fragmentFileName + "\"");
+	Logger::throwInfo("Loaded vertex shader: \"shaders\\" + _vertexFileName + "\"");
+	Logger::throwInfo("Loaded fragment shader: \"shaders\\" + _fragmentFileName + "\"");
 }
 
 void OpenGLShader::bind()

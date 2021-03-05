@@ -54,7 +54,7 @@ void ModelEditor::_loadMeshFileNames()
 	}
 
 	// Determine full mesh directory
-	string meshDirectoryPath = _fe3d.misc_getRootDirectory() + "user\\assets\\meshes\\";
+	string meshDirectoryPath = _fe3d.misc_getRootDirectory() + "game_assets\\meshes\\";
 	int endOfNameIndex = 0;
 
 	// Get all filenames
@@ -81,7 +81,7 @@ void ModelEditor::_loadMesh()
 {
 	// Get the chosen filename
 	const string rootDirectory = _fe3d.misc_getRootDirectory();
-	const string targetDirectory = string("user\\assets\\meshes\\");
+	const string targetDirectory = string("game_assets\\meshes\\");
 	const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "OBJ");
 
 	// Check if not cancelled
@@ -141,7 +141,7 @@ void ModelEditor::_loadDiffuseMap()
 {
 	// Get the chosen filename
 	const string rootDirectory = _fe3d.misc_getRootDirectory();
-	const string targetDirectory = string("user\\assets\\textures\\diffuse_maps\\");
+	const string targetDirectory = string("game_assets\\textures\\diffuse_maps\\");
 	const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "PNG");
 
 	// Check if user chose a filename
@@ -166,7 +166,7 @@ void ModelEditor::_loadLightMap()
 {
 	// Get the chosen filename
 	const string rootDirectory = _fe3d.misc_getRootDirectory();
-	const string targetDirectory = string("user\\assets\\textures\\light_maps\\");
+	const string targetDirectory = string("game_assets\\textures\\light_maps\\");
 	const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "PNG");
 
 	// Check if user chose a filename
@@ -192,7 +192,7 @@ void ModelEditor::_loadReflectionMap()
 {
 	// Get the chosen filename
 	const string rootDirectory = _fe3d.misc_getRootDirectory();
-	const string targetDirectory = string("user\\assets\\textures\\reflection_maps\\");
+	const string targetDirectory = string("game_assets\\textures\\reflection_maps\\");
 	const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "PNG");
 
 	// Check if user chose a filename
@@ -217,7 +217,7 @@ void ModelEditor::_loadNormalMap()
 {
 	// Get the chosen filename
 	const string rootDirectory = _fe3d.misc_getRootDirectory();
-	const string targetDirectory = string("user\\assets\\textures\\normal_maps\\");
+	const string targetDirectory = string("game_assets\\textures\\normal_maps\\");
 	const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "PNG");
 
 	// Check if user chose a filename

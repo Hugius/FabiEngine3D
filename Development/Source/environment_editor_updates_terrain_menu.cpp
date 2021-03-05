@@ -96,7 +96,7 @@ void EnvironmentEditor::_updateTerrainMenuMesh()
 			{
 				// Get the chosen filename
 				const string rootDirectory = _fe3d.misc_getRootDirectory();
-				const string targetDirectory = string("user\\assets\\textures\\height_maps\\");
+				const string targetDirectory = string("game_assets\\textures\\height_maps\\");
 				const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "BMP");
 
 				// Check if user chose a filename
@@ -131,7 +131,7 @@ void EnvironmentEditor::_updateTerrainMenuMesh()
 			{
 				// Get the chosen filename
 				const string rootDirectory = _fe3d.misc_getRootDirectory();
-				const string targetDirectory = string("user\\assets\\textures\\diffuse_maps\\");
+				const string targetDirectory = string("game_assets\\textures\\diffuse_maps\\");
 				const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "PNG");
 
 				// Check if user chose a filename
@@ -207,7 +207,7 @@ void EnvironmentEditor::_updateTerrainMenuBlendMap()
 			{
 				// Get the chosen filename
 				const string rootDirectory = _fe3d.misc_getRootDirectory();
-				const string targetDirectory = string("user\\assets\\textures\\blend_maps\\");
+				const string targetDirectory = string("game_assets\\textures\\blend_maps\\");
 				const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "PNG");
 
 				// Check if user chose a filename
@@ -232,7 +232,7 @@ void EnvironmentEditor::_updateTerrainMenuBlendMap()
 			{
 				// Get the chosen filename
 				const string rootDirectory = _fe3d.misc_getRootDirectory();
-				const string targetDirectory = string("user\\assets\\textures\\diffuse_maps\\");
+				const string targetDirectory = string("game_assets\\textures\\diffuse_maps\\");
 				const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "PNG");
 
 				// Check if user chose a filename
@@ -256,7 +256,7 @@ void EnvironmentEditor::_updateTerrainMenuBlendMap()
 			{
 				// Get the chosen filename
 				const string rootDirectory = _fe3d.misc_getRootDirectory();
-				const string targetDirectory = string("user\\assets\\textures\\diffuse_maps\\");
+				const string targetDirectory = string("game_assets\\textures\\diffuse_maps\\");
 				const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "PNG");
 
 				// Check if user chose a filename
@@ -280,7 +280,7 @@ void EnvironmentEditor::_updateTerrainMenuBlendMap()
 			{
 				// Get the chosen filename
 				const string rootDirectory = _fe3d.misc_getRootDirectory();
-				const string targetDirectory = string("user\\assets\\textures\\diffuse_maps\\");
+				const string targetDirectory = string("game_assets\\textures\\diffuse_maps\\");
 				const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "PNG");
 
 				// Check if user chose a filename
@@ -371,7 +371,7 @@ void EnvironmentEditor::_updateTerrainMenuLighting()
 			{
 				// Get the chosen filename
 				const string rootDirectory = _fe3d.misc_getRootDirectory();
-				const string targetDirectory = string("user\\assets\\textures\\normal_maps\\");
+				const string targetDirectory = string("game_assets\\textures\\normal_maps\\");
 				const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "PNG");
 
 				// Check if user chose a filename
@@ -396,7 +396,7 @@ void EnvironmentEditor::_updateTerrainMenuLighting()
 			{
 				// Get the chosen filename
 				const string rootDirectory = _fe3d.misc_getRootDirectory();
-				const string targetDirectory = string("user\\assets\\textures\\normal_maps\\");
+				const string targetDirectory = string("game_assets\\textures\\normal_maps\\");
 				const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "PNG");
 
 				// Check if user chose a filename
@@ -421,7 +421,7 @@ void EnvironmentEditor::_updateTerrainMenuLighting()
 			{
 				// Get the chosen filename
 				const string rootDirectory = _fe3d.misc_getRootDirectory();
-				const string targetDirectory = string("user\\assets\\textures\\normal_maps\\");
+				const string targetDirectory = string("game_assets\\textures\\normal_maps\\");
 				const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "PNG");
 
 				// Check if user chose a filename
@@ -446,7 +446,7 @@ void EnvironmentEditor::_updateTerrainMenuLighting()
 			{
 				// Get the chosen filename
 				const string rootDirectory = _fe3d.misc_getRootDirectory();
-				const string targetDirectory = string("user\\assets\\textures\\normal_maps\\");
+				const string targetDirectory = string("game_assets\\textures\\normal_maps\\");
 				const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "PNG");
 
 				// Check if user chose a filename

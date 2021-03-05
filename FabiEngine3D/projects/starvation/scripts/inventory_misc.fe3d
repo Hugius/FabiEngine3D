@@ -1,0 +1,38 @@
+3 50
+META script_type_update
+
+/// Temporary values
+BOOL iPressed = fe3d:input_is_key_pressed("KEY_I")
+
+/// Check if player wants to open/close inventory
+EDIT _wasInvOpen = _isInvOpen
+IF iPressed IS <true> AND _isToolPlaying IS <false>:
+    IF _isInvOpen IS <true>:
+        EDIT _isInvOpen = <false>
+    ELSE:
+        EDIT _isInvOpen = <true>
+
+/// Check if player is allowed to have the inventory open
+IF _isCrafting IS <true> OR _isBuilding IS <true> OR _isInStorage IS <true>:
+    IF _isInvOpen IS <true>:
+        EDIT _invMustClose = <true>
+        EDIT _isInvOpen = <false>
+ELIF _invMustClose IS <true>:
+    EDIT _invMustClose = <false>
+    EDIT _isInvOpen = <true>
+
+/// Update tool durabilities
+BOOL interval = misc:time_interval("durability", 50)
+IF interval IS <true>:
+    INT index = 0
+    DEC minDurability = _durabilityHit
+    DIV minDurability 2.0
+    LOOP:
+        IF index IS 9:
+            BREAK
+        ELSE:
+            IF _durabilities[index] LESS minDurability AND _inventory[index] NOT "":
+                fe3d:model_set_visible(_inventory[index], <false>)
+                EDIT _inventory[index] = ""
+                EDIT _durabilities[index] = 0.0
+            INCR index 1

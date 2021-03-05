@@ -309,10 +309,10 @@ vector<MeshPart> MeshLoader::_loadMesh(const string& filePath, bool calculateTan
 				newPart.name = selectedPartName;
 
 				// Set texture map paths
-				newPart.diffuseMapPath = tempDiffuseMapPath.empty() ? "" : string("user\\assets\\textures\\diffuse_maps\\" + tempDiffuseMapPath);
-				newPart.lightMapPath = tempLightMapPath.empty() ? "" : string("user\\assets\\textures\\light_maps\\" + tempLightMapPath);
-				newPart.normalMapPath = tempNormalMapPath.empty() ? "" : string("user\\assets\\textures\\normal_maps\\" + tempNormalMapPath);
-				newPart.reflectionMapPath = tempReflectionMapPath.empty() ? "" : string("user\\assets\\textures\\reflection_maps\\" + tempReflectionMapPath);
+				newPart.diffuseMapPath = tempDiffuseMapPath.empty() ? "" : string("game_assets\\textures\\diffuse_maps\\" + tempDiffuseMapPath);
+				newPart.lightMapPath = tempLightMapPath.empty() ? "" : string("game_assets\\textures\\light_maps\\" + tempLightMapPath);
+				newPart.normalMapPath = tempNormalMapPath.empty() ? "" : string("game_assets\\textures\\normal_maps\\" + tempNormalMapPath);
+				newPart.reflectionMapPath = tempReflectionMapPath.empty() ? "" : string("game_assets\\textures\\reflection_maps\\" + tempReflectionMapPath);
 
 				// Add new mesh part
 				meshParts.push_back(newPart);

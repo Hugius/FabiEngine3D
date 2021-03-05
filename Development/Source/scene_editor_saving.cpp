@@ -14,7 +14,7 @@ void SceneEditor::saveSceneToFile()
 		}
 
 		// Check if scene directory still exists
-		string directoryPath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectID + "\\scenes\\";
+		string directoryPath = _fe3d.misc_getRootDirectory() + "projects\\" + _currentProjectID + "\\scenes\\";
 		if (!_fe3d.misc_isDirectory(directoryPath))
 		{
 			_fe3d.logger_throwWarning("Project \"" + _currentProjectID + "\" corrupted: scenes folder missing!");
@@ -25,7 +25,7 @@ void SceneEditor::saveSceneToFile()
 		{
 			// Create or overwrite models file
 			std::ofstream file;
-			file.open(_fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectID + "\\scenes\\" + _currentSceneID + ".fe3d");
+			file.open(_fe3d.misc_getRootDirectory() + "projects\\" + _currentProjectID + "\\scenes\\" + _currentSceneID + ".fe3d");
 
 			// Save LOD IDs
 			vector<string> lodIDs;

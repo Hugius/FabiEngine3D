@@ -35,7 +35,7 @@ void AudioEditor::_updateAudioEditing()
 				{
 					// Get the chosen filename
 					const string rootDirectory = _fe3d.misc_getRootDirectory();
-					const string targetDirectory = string("user\\assets\\audio\\");
+					const string targetDirectory = string("game_assets\\audio\\");
 					const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "WAV");
 
 					// Check if user did not cancel

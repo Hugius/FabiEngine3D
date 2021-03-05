@@ -157,25 +157,24 @@ void SceneEditor::_activateAudio(const string& audioID)
 
 vector<string> SceneEditor::_loadSceneNames()
 {
+	// Temporary values
 	vector<string> sceneNames;
-
-	// Compose folder path
-	string sceneDirectoryPath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectID + "\\scenes\\";
+	string directoryPath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectID + "\\scenes\\";
 
 	// Check if scenes directory exists
-	if (_fe3d.misc_isDirectory(sceneDirectoryPath))
+	if (_fe3d.misc_isDirectory(directoryPath))
 	{
 		// Get all project names
-		for (const auto& entry : std::filesystem::directory_iterator(sceneDirectoryPath))
+		for (const auto& entry : std::filesystem::directory_iterator(directoryPath))
 		{
 			string sceneName = string(entry.path().u8string());
-			sceneName.erase(0, sceneDirectoryPath.size());
+			sceneName.erase(0, directoryPath.size());
 			sceneNames.push_back(sceneName.substr(0, sceneName.size() - 5));
 		}
 	}
 	else
 	{
-		_fe3d.logger_throwWarning("Project folder corrupted of project \"" + _currentProjectID + "\"!");
+		_fe3d.logger_throwWarning("Project \"" + _currentProjectID + "\" corrupted: scenes folder missing!");
 	}
 
 	return sceneNames;
@@ -215,7 +214,7 @@ void SceneEditor::_updateModelBlinking(const string& modelID, int& multiplier)
 
 		// Set model lightness
 		float range = _initialModelLightness[modelID];
-		float speed = (_modelBlinkingSpeed * static_cast<float>(multiplier) * range);
+		float speed = (MODEL_BLINKING_SPEED * static_cast<float>(multiplier) * range);
 		_fe3d.gameEntity_setLightness(modelID, _fe3d.gameEntity_getLightness(modelID) + speed);
 	}
 }
@@ -240,7 +239,7 @@ void SceneEditor::_updateBillboardBlinking(const string& billboardID, int& multi
 
 		// Set billboard lightness
 		float range = _initialBillboardLightness[billboardID];
-		float speed = (_billboardBlinkingSpeed * static_cast<float>(multiplier) * range);
+		float speed = (BILLBOARD_BLINKING_SPEED * static_cast<float>(multiplier) * range);
 		_fe3d.billboardEntity_setLightness(billboardID, _fe3d.billboardEntity_getLightness(billboardID) + speed);
 	}
 }
@@ -257,14 +256,14 @@ void SceneEditor::_updateLightbulbAnimation(const string& modelID, int& multipli
 	if (modelID != "")
 	{
 		// Check if model size reached bounds
-		if (_fe3d.gameEntity_getSize(modelID).x > _defaultLightbulbSize.x * 1.5f || 
-			_fe3d.gameEntity_getSize(modelID).x < _defaultLightbulbSize.x)
+		if (_fe3d.gameEntity_getSize(modelID).x > DEFAULT_LIGHTBULB_SIZE.x * 1.5f || 
+			_fe3d.gameEntity_getSize(modelID).x < DEFAULT_LIGHTBULB_SIZE.x)
 		{
 			multiplier *= -1;
 		}
 
 		// Set model size
-		float speed = (_lightbulbAnimationSpeed * static_cast<float>(multiplier));
+		float speed = (LIGHTBULB_ANIMATION_SPEED * static_cast<float>(multiplier));
 		_fe3d.gameEntity_setSize(modelID, _fe3d.gameEntity_getSize(modelID) + Vec3(speed));
 		_fe3d.aabbEntity_setSize(modelID, _fe3d.aabbEntity_getSize(modelID) + Vec3(speed));
 	}
@@ -282,14 +281,14 @@ void SceneEditor::_updateSpeakerAnimation(const string& modelID, int& multiplier
 	if (modelID != "")
 	{
 		// Check if model size reached bounds
-		if (_fe3d.gameEntity_getSize(modelID).x > _defaultSpeakerSize.x * 1.5f ||
-			_fe3d.gameEntity_getSize(modelID).x < _defaultSpeakerSize.x)
+		if (_fe3d.gameEntity_getSize(modelID).x > DEFAULT_SPEAKER_SIZE.x * 1.5f ||
+			_fe3d.gameEntity_getSize(modelID).x < DEFAULT_SPEAKER_SIZE.x)
 		{
 			multiplier *= -1;
 		}
 
 		// Set model size
-		float speed = (_speakerAnimationSpeed * static_cast<float>(multiplier));
+		float speed = (SPEAKER_ANIMATION_SPEED * static_cast<float>(multiplier));
 		_fe3d.gameEntity_setSize(modelID, _fe3d.gameEntity_getSize(modelID) + Vec3(speed));
 		_fe3d.aabbEntity_setSize(modelID, _fe3d.aabbEntity_getSize(modelID) + Vec3(speed));
 	}

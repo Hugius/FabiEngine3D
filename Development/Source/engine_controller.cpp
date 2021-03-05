@@ -10,36 +10,13 @@ EngineController::EngineController() :
 		_leftViewportController.getScriptEditor(), _leftViewportController.getAudioEditor(), _leftViewportController.getSettingsEditor()),
 	_bottomViewportController(*this, _gui, _topViewportController, _leftViewportController.getScriptEditor())
 {
-	// Check if project exists
-	string directoryPath = misc_getRootDirectory() + "user\\projects\\" + engine_getSelectedGame();
-	if (!misc_isFileExisting(directoryPath) || !misc_isDirectory(directoryPath))
-	{
-		logger_throwError("Game preview project with name \"" + engine_getSelectedGame() + "\" does not exist!");
-	}
+
 }
 
 void EngineController::FE3D_CONTROLLER_INIT()
 {
-	if (engine_getSelectedGame().empty()) // Engine preview
+	if (engine_isGameExported()) // Game preview
 	{
-		_initializeMiscellaneous();
-		_rightViewportController.initialize();
-		_bottomViewportController.initialize();
-		_topViewportController.initialize();
-		_leftViewportController.initialize();
-	}
-	else // Game preview
-	{
-		// Set name of game (project) to run
-		_leftViewportController.getEnvironmentEditor().setCurrentProjectID(engine_getSelectedGame());
-		_leftViewportController.getModelEditor().setCurrentProjectID(engine_getSelectedGame());
-		_leftViewportController.getAnimationEditor().setCurrentProjectID(engine_getSelectedGame());
-		_leftViewportController.getBillboardEditor().setCurrentProjectID(engine_getSelectedGame());
-		_leftViewportController.getAudioEditor().setCurrentProjectID(engine_getSelectedGame());
-		_leftViewportController.getScriptEditor().setCurrentProjectID(engine_getSelectedGame());
-		_leftViewportController.getSceneEditor().setCurrentProjectID(engine_getSelectedGame());
-		_leftViewportController.getSettingsEditor().setCurrentProjectID(engine_getSelectedGame());
-
 		// Import settings
 		_leftViewportController.getSettingsEditor().loadSettings();
 
@@ -57,20 +34,19 @@ void EngineController::FE3D_CONTROLLER_INIT()
 		// I have no idea why, but this fixes a very nasty performance bug
 		logger_clearMessageStack();
 	}
+	else // Engine preview
+	{
+		_initializeMiscellaneous();
+		_rightViewportController.initialize();
+		_bottomViewportController.initialize();
+		_topViewportController.initialize();
+		_leftViewportController.initialize();
+	}
 }
 
 void EngineController::FE3D_CONTROLLER_UPDATE()
 {
-	if (engine_getSelectedGame().empty()) // Engine preview
-	{
-		_updateMiscellaneous();
-		_gui.update();
-		_topViewportController.update();
-		_leftViewportController.update();
-		_rightViewportController.update();
-		_bottomViewportController.update();
-	}
-	else // Game preview
+	if (engine_isGameExported()) // Game preview
 	{
 		if (_leftViewportController.getScriptEditor().getScriptExecutor(false).isRunning()) // Still running
 		{
@@ -86,12 +62,21 @@ void EngineController::FE3D_CONTROLLER_UPDATE()
 			_promptOnExit = true;
 		}
 	}
+	else // Engine preview
+	{
+		_updateMiscellaneous();
+		_gui.update();
+		_topViewportController.update();
+		_leftViewportController.update();
+		_rightViewportController.update();
+		_bottomViewportController.update();
+	}
 }
 
 void EngineController::FE3D_CONTROLLER_DESTROY()
 {
 	// Game preview
-	if (!engine_getSelectedGame().empty())
+	if (engine_isGameExported())
 	{
 		// Check if script was running
 		if (_leftViewportController.getScriptEditor().getScriptExecutor(false).isRunning())

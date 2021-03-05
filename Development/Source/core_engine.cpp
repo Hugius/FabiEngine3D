@@ -22,17 +22,17 @@ void CoreEngine::_start()
 		auto current = std::chrono::high_resolution_clock::now();
 
 		// Check if the delay is getting too much
-		if (lag > (Config::getInst().getUpdateMsPerFrame() * 10.0f))
+		if (lag > (Config::MS_PER_UPDATE * 10.0f))
 		{
-			lag = Config::getInst().getUpdateMsPerFrame();
+			lag = Config::MS_PER_UPDATE;
 		}
 
 		// Update 144 times per second
-		while (lag >= Config::getInst().getUpdateMsPerFrame())
+		while (lag >= Config::MS_PER_UPDATE)
 		{
 			_inputHandler.f_checkInput();
 			_updateApplication();
-			lag -= Config::getInst().getUpdateMsPerFrame();
+			lag -= Config::MS_PER_UPDATE;
 			_timer.increasePassedFrameCount();
 		}
 
@@ -90,25 +90,25 @@ void CoreEngine::_setupApplication()
 	{
 		_windowManager.enableFullscreen();
 	}
-	if (Config::getInst().isWindowBorderless())
-	{
-		_windowManager.hideBorder();
-	}
-	else
+	if (!Config::getInst().isWindowBorderless())
 	{
 		_windowManager.showBorder();
 	}
+	if (Config::getInst().isGameExported())
+	{
+		_windowManager.setTitle(Config::getInst().getWindowTitle());
+	}
 
 	// Only if in engine preview
-	if (Config::getInst().getSelectedGame().empty())
-	{
-		// Start smooth window fade in
-		_windowManager.setOpacity(0.0f);
-	}
-	else
+	if (Config::getInst().isGameExported())
 	{
 		// No fade in
 		_windowManager.setOpacity(1.0f);
+	}
+	else
+	{
+		// Start smooth window fade in
+		_windowManager.setOpacity(0.0f);
 	}
 }
 

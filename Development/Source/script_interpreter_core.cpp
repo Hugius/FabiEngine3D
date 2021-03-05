@@ -130,7 +130,7 @@ void ScriptInterpreter::load()
 	_checkEngineWarnings();
 
 	// Preload all big assets of this project, only in game preview
-	if (!_fe3d.engine_getSelectedGame().empty())
+	if (_fe3d.engine_isGameExported())
 	{
 		vector<string> texturePaths;
 

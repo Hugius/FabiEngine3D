@@ -72,7 +72,7 @@ void SceneEditor::_updateAudioPlacingMenu()
 						{
 							// Set new preview audiocaster
 							_currentPreviewAudioName = audioName;
-							_fe3d.gameEntity_show(_previewSpeakerID);
+							_fe3d.gameEntity_show(PREVIEW_SPEAKER_ID);
 							string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedAudioName")->getEntityID();
 							_fe3d.textEntity_show(textEntityID);
 							_fe3d.textEntity_setTextContent(textEntityID, "Audio: " + _currentPreviewAudioName.substr(1), 0.025f);

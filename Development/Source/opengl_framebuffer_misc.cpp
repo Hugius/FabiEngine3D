@@ -15,7 +15,7 @@ void OpenGLFramebuffer::bind()
 ///////////////////////
 void OpenGLFramebuffer::unbind()
 {
-	glViewport(0, 0, Config::getInst().getWindowWidth(), Config::getInst().getWindowHeight());
+	glViewport(0, 0, Config::getInst().getWindowSize().x, Config::getInst().getWindowSize().y);
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 

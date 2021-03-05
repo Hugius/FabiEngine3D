@@ -41,7 +41,6 @@ WindowManager::WindowManager()
 	{
 		Logger::throwError(reinterpret_cast<char const *>(glewGetErrorString(initGlew)));
 	}
-	//Logger::throwInfo("Using GLEW version " + string(reinterpret_cast<char const *>(glewGetString(GLEW_VERSION))));
 
 	// Image stuff
 	Logger::throwInfo("Initializing SDL_Image...");

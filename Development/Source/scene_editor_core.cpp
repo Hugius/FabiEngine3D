@@ -433,15 +433,15 @@ void SceneEditor::load()
 	_fe3d.billboardEntity_setDepthMapIncluded("@@lightSource", false);
 
 	// Preview pointlight loading
-	_fe3d.lightEntity_add(_previewPointlightID);
-	_fe3d.lightEntity_hide(_previewPointlightID);
-	_fe3d.gameEntity_add(_previewPointlightID, _lightBulbModelPath, Vec3(0.0f), Vec3(0.0f), _defaultLightbulbSize, false);
-	_fe3d.gameEntity_setShadowed(_previewPointlightID, false);
+	_fe3d.lightEntity_add(PREVIEW_POINTLIGHT_ID);
+	_fe3d.lightEntity_hide(PREVIEW_POINTLIGHT_ID);
+	_fe3d.gameEntity_add(PREVIEW_POINTLIGHT_ID, LIGHTBULB_MODEL_PATH, Vec3(0.0f), Vec3(0.0f), DEFAULT_LIGHTBULB_SIZE, false);
+	_fe3d.gameEntity_setShadowed(PREVIEW_POINTLIGHT_ID, false);
 
 	// Preview audio loading
 	_audioEditor.loadAudioEntitiesFromFile();
-	_fe3d.gameEntity_add(_previewSpeakerID, _speakerModelPath, Vec3(0.0f), Vec3(0.0f), _defaultSpeakerSize, false);
-	_fe3d.gameEntity_setShadowed(_previewSpeakerID, false);
+	_fe3d.gameEntity_add(PREVIEW_SPEAKER_ID, SPEAKER_MODEL_PATH, Vec3(0.0f), Vec3(0.0f), DEFAULT_SPEAKER_SIZE, false);
+	_fe3d.gameEntity_setShadowed(PREVIEW_SPEAKER_ID, false);
 	for (auto& audioName : _audioEditor.getLoadedAudioIDs())
 	{
 		_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuAudioPlace")->getScrollingList("audiocasters")->

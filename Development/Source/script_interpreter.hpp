@@ -22,6 +22,7 @@ public:
 	void executeUpdate(bool debug);
 	void executeDestruction();
 	void unload();
+	void setCurrentProjectID(const string& projectName);
 
 	bool hasThrownError();
 	bool gameMustStop();
@@ -102,12 +103,13 @@ private:
 	bool _validateScopeChange(unsigned int countedSpaces, const string& scriptLineText, unsigned int& scopeDepth);
 	bool _validateKeyInputString(const string& inputString);
 	bool _validateMouseInputString(const string& inputString);
-	void _throwScriptError(const string& message);
-	void _checkEngineWarnings();
+	bool _validateCurrentProject();
 	Vec2 _convertGuiPositionToViewport(Vec2 position);
 	Vec2 _convertGuiPositionFromViewport(Vec2 position);
 	Vec2 _convertGuiSizeToViewport(Vec2 size);
 	Vec2 _convertGuiSizeFromViewport(Vec2 size);
+	void _throwScriptError(const string& message);
+	void _checkEngineWarnings();
 
 	// Instances
 	FabiEngine3D& _fe3d;
@@ -134,6 +136,7 @@ private:
 	vector<ScriptVariable> _globalVariables;
 
 	// Strings
+	string _currentProjectID = "";
 	string _initEntryID = "";
 	string _updateEntryID = "";
 	string _destroyEntryID = "";

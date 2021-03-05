@@ -63,8 +63,8 @@ void SceneEditor::_updateAudioEditing()
 						// Don't reset if speaker is active
 						if (entityID != _activeSpeakerID && _selectedSpeakerID == "")
 						{
-							_fe3d.gameEntity_setSize(entityID, _defaultSpeakerSize);
-							_fe3d.aabbEntity_setSize(entityID, _defaultSpeakerAabbSize);
+							_fe3d.gameEntity_setSize(entityID, DEFAULT_SPEAKER_SIZE);
+							_fe3d.aabbEntity_setSize(entityID, DEFAULT_SPEAKER_AABB_SIZE);
 						}
 					}
 				}
@@ -112,10 +112,10 @@ void SceneEditor::_updateAudioEditing()
 				float maxDistance = _fe3d.audioEntity_getMaxDistance(ACTIVE_AUDIO_ID);
 				
 				// Update value filling and changing
-				_handleValueChanging("audioPropertiesMenu", "distancePlus", "distance", maxDistance, _audioDistanceChangingSpeed, 1.0f, 0.0f);
-				_handleValueChanging("audioPropertiesMenu", "distanceMinus", "distance", maxDistance, -_audioDistanceChangingSpeed, 1.0f, 0.0f);
-				_handleValueChanging("audioPropertiesMenu", "volumePlus", "volume", maxVolume, _audioVolumeChangingSpeed, 100.0f, 0.0f, 1.0f);
-				_handleValueChanging("audioPropertiesMenu", "volumeMinus", "volume", maxVolume, -_audioVolumeChangingSpeed, 100.0f, 0.0f, 1.0f);
+				_handleValueChanging("audioPropertiesMenu", "distancePlus", "distance", maxDistance, AUDIO_DISTANCE_CHANGING_SPEED, 1.0f, 0.0f);
+				_handleValueChanging("audioPropertiesMenu", "distanceMinus", "distance", maxDistance, -AUDIO_DISTANCE_CHANGING_SPEED, 1.0f, 0.0f);
+				_handleValueChanging("audioPropertiesMenu", "volumePlus", "volume", maxVolume, AUDIO_VOLUME_CHANGING_SPEED, 100.0f, 0.0f, 1.0f);
+				_handleValueChanging("audioPropertiesMenu", "volumeMinus", "volume", maxVolume, -AUDIO_VOLUME_CHANGING_SPEED, 100.0f, 0.0f, 1.0f);
 				_handleValueChanging("audioPropertiesMenu", "xPlus", "x", position.x, _customEditorSpeed / 100.0f);
 				_handleValueChanging("audioPropertiesMenu", "xMinus", "x", position.x, -_customEditorSpeed / 100.0f);
 				_handleValueChanging("audioPropertiesMenu", "yPlus", "y", position.y, _customEditorSpeed / 100.0f);

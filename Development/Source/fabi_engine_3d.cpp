@@ -37,7 +37,7 @@ bool FabiEngine3D::engine_isPaused()
 	return _core->_isPaused;
 }
 
-string FabiEngine3D::engine_getSelectedGame()
+bool FabiEngine3D::engine_isGameExported()
 {
-	return Config::getInst().getSelectedGame();
+	return Config::getInst().isGameExported();
 }

@@ -13,6 +13,7 @@ public:
 	void pause();
 	void unpause();
 	void unload();
+	void setCurrentProjectID(const string& projectName);
 
 	bool isScriptEmpty();
 	bool isInitialized();

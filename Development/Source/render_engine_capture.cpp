@@ -399,7 +399,7 @@ void RenderEngine::_captureMotionBlur(CameraManager& camera)
 	float elapsedMS = static_cast<float>(timeDifference.count()) * 1000.0f;
 
 	// If 1 frame passed
-	if (elapsedMS >= Config::getInst().getUpdateMsPerFrame() || firstTime)
+	if (elapsedMS >= Config::MS_PER_UPDATE || firstTime)
 	{
 		// Set for next frame
 		previousMS = currentMS;

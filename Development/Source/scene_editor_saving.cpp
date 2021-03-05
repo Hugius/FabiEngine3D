@@ -13,6 +13,13 @@ void SceneEditor::saveSceneToFile()
 			_fe3d.logger_throwError("No current project loaded --> SceneEditor::saveSceneToFile()");
 		}
 
+		// Check if scene directory still exists
+		string directoryPath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectID + "\\scenes\\";
+		if (!_fe3d.misc_isDirectory(directoryPath))
+		{
+			_fe3d.logger_throwWarning("Project \"" + _currentProjectID + "\" corrupted: scenes folder missing!");
+		}
+
 		// Check if a scene is currently being edited
 		if (_currentSceneID != "")
 		{

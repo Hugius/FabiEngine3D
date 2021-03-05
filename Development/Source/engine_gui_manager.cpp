@@ -4,7 +4,7 @@ EngineGuiManager::EngineGuiManager(FabiEngine3D& fe3d) :
 	_fe3d(fe3d)
 {
 	// Check if loading engine preview
-	if (fe3d.engine_getSelectedGame().empty())
+	if (!_fe3d.engine_isGameExported())
 	{
 		// Global screen
 		_globalScreen = make_shared<EngineGuiGlobalScreen>(_fe3d);

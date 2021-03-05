@@ -21,16 +21,16 @@ void SceneEditor::_updateLightPlacing()
 					newPosition = _fe3d.misc_getRaycastPositionOnTerrain() + Vec3(0.0f, 1.0f, 0.0f);
 
 					// Show preview pointlight
-					_fe3d.lightEntity_show(_previewPointlightID);
-					_fe3d.gameEntity_show(_previewPointlightID);
-					_fe3d.lightEntity_setPosition(_previewPointlightID, newPosition);
-					_fe3d.gameEntity_setPosition(_previewPointlightID, newPosition);
+					_fe3d.lightEntity_show(PREVIEW_POINTLIGHT_ID);
+					_fe3d.gameEntity_show(PREVIEW_POINTLIGHT_ID);
+					_fe3d.lightEntity_setPosition(PREVIEW_POINTLIGHT_ID, newPosition);
+					_fe3d.gameEntity_setPosition(PREVIEW_POINTLIGHT_ID, newPosition);
 				}
 				else
 				{
 					// Hide preview pointlight
-					_fe3d.gameEntity_hide(_previewPointlightID);
-					_fe3d.lightEntity_hide(_previewPointlightID);
+					_fe3d.gameEntity_hide(PREVIEW_POINTLIGHT_ID);
+					_fe3d.lightEntity_hide(PREVIEW_POINTLIGHT_ID);
 				}
 
 				// Placing pointlight
@@ -48,33 +48,33 @@ void SceneEditor::_updateLightPlacing()
 					}
 
 					// Add light entity
-					_fe3d.gameEntity_add("@" + newID, "engine\\meshes\\lamp.obj", newPosition, Vec3(0.0f), _defaultLightbulbSize);
+					_fe3d.gameEntity_add("@" + newID, "engine\\meshes\\lamp.obj", newPosition, Vec3(0.0f), DEFAULT_LIGHTBULB_SIZE);
 					_fe3d.gameEntity_setShadowed("@" + newID, false);
-					_fe3d.aabbEntity_bindToGameEntity("@" + newID, Vec3(0.0f), _defaultLightbulbAabbSize, true, true);
+					_fe3d.aabbEntity_bindToGameEntity("@" + newID, Vec3(0.0f), DEFAULT_LIGHTBULB_AABB_SIZE, true, true);
 					_fe3d.lightEntity_add(newID, newPosition);
 					_loadedLightIDs.push_back(newID);
 
 					// Disable placement mode if no terrain availible to choose position from
 					if (_fe3d.terrainEntity_getSelectedID() == "")
 					{
-						_fe3d.gameEntity_hide(_previewPointlightID);
-						_fe3d.lightEntity_hide(_previewPointlightID);
+						_fe3d.gameEntity_hide(PREVIEW_POINTLIGHT_ID);
+						_fe3d.lightEntity_hide(PREVIEW_POINTLIGHT_ID);
 						_isPlacingPointlight = false;
 					}
 				}
 				else if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_MIDDLE)) // Cancelling pointlight placement
 				{
 					// Hide preview pointlight
-					_fe3d.gameEntity_hide(_previewPointlightID);
-					_fe3d.lightEntity_hide(_previewPointlightID);
+					_fe3d.gameEntity_hide(PREVIEW_POINTLIGHT_ID);
+					_fe3d.lightEntity_hide(PREVIEW_POINTLIGHT_ID);
 					_isPlacingPointlight = false;
 				}
 			}
 			else
 			{
 				// Hide preview pointlight
-				_fe3d.gameEntity_hide(_previewPointlightID);
-				_fe3d.lightEntity_hide(_previewPointlightID);
+				_fe3d.gameEntity_hide(PREVIEW_POINTLIGHT_ID);
+				_fe3d.lightEntity_hide(PREVIEW_POINTLIGHT_ID);
 			}
 		}
 	}

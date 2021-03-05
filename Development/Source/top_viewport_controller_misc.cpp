@@ -69,8 +69,9 @@ void TopViewportController::_updateProjectCreation()
 				// Create new project directory & subfolders
 				auto temp1 = _mkdir(newDirectoryPath.c_str());
 				auto temp2 = _mkdir((newDirectoryPath + "\\data").c_str());
-				auto temp3 = _mkdir((newDirectoryPath + "\\scenes").c_str());
-				auto temp4 = _mkdir((newDirectoryPath + "\\scripts").c_str());
+				auto temp3 = _mkdir((newDirectoryPath + "\\saves").c_str());
+				auto temp4 = _mkdir((newDirectoryPath + "\\scenes").c_str());
+				auto temp5 = _mkdir((newDirectoryPath + "\\scripts").c_str());
 
 				// Create new empty project files
 				auto file = std::ofstream(string(newDirectoryPath + "\\data\\animation.fe3d"));

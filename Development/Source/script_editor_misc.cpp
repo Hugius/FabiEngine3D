@@ -102,6 +102,7 @@ ScriptExecutor& ScriptEditor::getScriptExecutor(bool reloadScript)
 void ScriptEditor::setCurrentProjectID(const string& projectName)
 {
 	_currentProjectID = projectName;
+	_scriptExecutor.setCurrentProjectID(projectName);
 }
 
 bool ScriptEditor::isLoaded()

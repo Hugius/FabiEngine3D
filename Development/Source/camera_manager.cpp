@@ -8,7 +8,7 @@ CameraManager::CameraManager(RenderBus& renderBus, WindowManager& windowManager)
 	_renderBus(renderBus),
 	_windowManager(windowManager)
 {
-	_aspectRatio = static_cast<float>(Config::getInst().getWindowWidth()) / static_cast<float>(Config::getInst().getWindowHeight());
+	_aspectRatio = static_cast<float>(Config::getInst().getWindowSize().x) / static_cast<float>(Config::getInst().getWindowSize().y);
 }
 
 void CameraManager::reset()

@@ -25,13 +25,13 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 	{
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			if (_fe3d.engine_getSelectedGame().empty()) // Engine preview
+			if (_fe3d.engine_isGameExported()) // Game preview
 			{
-				_gameMustStop = true;
+				_fe3d.engine_stop();
 			}
 			else // Engine preview
 			{
-				_fe3d.engine_stop();
+				_gameMustStop = true;
 			}
 			
 			// Return
@@ -132,7 +132,7 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 	{
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			auto result = _fe3d.misc_getWindowWidth();
+			auto result = _fe3d.misc_getWindowSize().x;
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::INTEGER, result));
 		}
 	}
@@ -140,7 +140,7 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 	{
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			auto result = _fe3d.misc_getWindowHeight();
+			auto result = _fe3d.misc_getWindowSize().y;
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::INTEGER, result));
 		}
 	}
@@ -164,13 +164,17 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 	{
 		auto types = { ScriptValueType::STRING };
 
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types) && _validateCurrentProject())
 		{
+			// Compose file path
+			string directoryPath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectID + "\\saves\\";
+			string filePath = directoryPath + arguments[0].getString();
+
 			// Check if file exists
-			if (_fe3d.misc_isFileExisting(arguments[0].getString()))
+			if (_fe3d.misc_isFileExisting(filePath))
 			{
 				// Open file
-				std::ifstream file(arguments[0].getString());
+				std::ifstream file(filePath);
 				string line;
 
 				// Add lines to list
@@ -192,33 +196,33 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
 
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types) && _validateCurrentProject())
 		{
-			// Check if file exists
-			if (_fe3d.misc_isFileExisting(arguments[0].getString()))
-			{
-				// Write line to file
-				std::ofstream file(arguments[0].getString(), std::ios::app);
-				file << arguments[1].getString();
-				file.close();
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
-			}
-			else
-			{
-				_throwScriptError("Cannot write to file \"" + arguments[0].getString() + "\"!");
-			}
+			// Compose file path
+			string directoryPath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectID + "\\saves\\";
+			string filePath = directoryPath + arguments[0].getString();
+
+			// Write line to file
+			std::ofstream file(filePath, std::ios::app);
+			file << arguments[1].getString();
+			file.close();
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
 	else if (functionName == "fe3d:file_clear")
 	{
 		auto types = { ScriptValueType::STRING };
 
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types) && _validateCurrentProject())
 		{
+			// Compose file path
+			string directoryPath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectID + "\\saves\\";
+			string filePath = directoryPath + arguments[0].getString();
+
 			// Check if file exists
-			if (_fe3d.misc_isFileExisting(arguments[0].getString()))
+			if (_fe3d.misc_isFileExisting(filePath))
 			{
-				std::ofstream file(arguments[0].getString(), std::ios::trunc);
+				std::ofstream file(filePath, std::ios::trunc);
 				file.close();
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}

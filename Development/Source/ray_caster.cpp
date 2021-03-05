@@ -98,8 +98,8 @@ Vec3 RayCaster::_getMouseRay(Ivec2 cursorPosition)
 
 Vec2 RayCaster::_converToNDC(Ivec2 val)
 {
-	float x = ((2.0f * val.x) / Config::getInst().getWindowWidth ()) - 1.0f;
-	float y = ((2.0f * val.y) / Config::getInst().getWindowHeight()) - 1.0f;
+	float x = ((2.0f * val.x) / Config::getInst().getWindowSize().x) - 1.0f;
+	float y = ((2.0f * val.y) / Config::getInst().getWindowSize().y) - 1.0f;
 
 	return Vec2(x, y);
 }

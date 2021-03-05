@@ -42,7 +42,7 @@ CoreEngine::~CoreEngine()
 void CoreEngine::_updateWindowFading()
 {
 	// Only if in engine preview
-	if (Config::getInst().getSelectedGame().empty())
+	if (!Config::getInst().isGameExported())
 	{
 		static float opacity = 0.0f;
 

@@ -2,6 +2,21 @@
 
 #include <sstream>
 
+void ScriptInterpreter::setCurrentProjectID(const string& projectName)
+{
+	_currentProjectID = projectName;
+}
+
+bool ScriptInterpreter::hasThrownError()
+{
+	return _hasThrownError;
+}
+
+bool ScriptInterpreter::gameMustStop()
+{
+	return _gameMustStop;
+}
+
 bool ScriptInterpreter::_isListValue(const string& valueString)
 {
 	// Check if value has enough characters
@@ -289,6 +304,24 @@ bool ScriptInterpreter::_validateMouseInputString(const string& inputString)
 	return true;
 }
 
+bool ScriptInterpreter::_validateCurrentProject()
+{
+	// Error checking
+	if (_currentProjectID == "")
+	{
+		_fe3d.logger_throwError("No current project loaded --> ScriptEditor::loadScriptsFromFile()");
+	}
+
+	// Check if saves folder still exists
+	if (!_fe3d.misc_isDirectory(_fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectID + "\\saves\\"))
+	{
+		_fe3d.logger_throwWarning("Project \"" + _currentProjectID + "\" corrupted: saves folder missing!");
+		return false;
+	}
+
+	return true;
+}
+
 ScriptConditionStatement* ScriptInterpreter::_getLastConditionStatement(vector<ScriptConditionStatement>& statements, unsigned int scopeDepth)
 {
 	unsigned int i = statements.size();
@@ -331,12 +364,12 @@ void ScriptInterpreter::_checkEngineWarnings()
 
 Vec2 ScriptInterpreter::_convertGuiPositionToViewport(Vec2 position)
 {
-	if (_fe3d.engine_getSelectedGame().empty())
+	if (!_fe3d.engine_isGameExported())
 	{
 		auto sizeMultiplier = Vec2(_fe3d.misc_getViewportSize()) /
-			Vec2(static_cast<float>(_fe3d.misc_getWindowWidth()), static_cast<float>(_fe3d.misc_getWindowHeight()));
+			Vec2(static_cast<float>(_fe3d.misc_getWindowSize().x), static_cast<float>(_fe3d.misc_getWindowSize().y));
 		auto positionMultiplier = Vec2(_fe3d.misc_getViewportPosition()) /
-			Vec2(static_cast<float>(_fe3d.misc_getWindowWidth()), static_cast<float>(_fe3d.misc_getWindowHeight()));
+			Vec2(static_cast<float>(_fe3d.misc_getWindowSize().x), static_cast<float>(_fe3d.misc_getWindowSize().y));
 		position *= sizeMultiplier;
 		auto offset = Vec2(1.0f) - Vec2((positionMultiplier.x * 2.0f) + sizeMultiplier.x, (positionMultiplier.y * 2.0f) + sizeMultiplier.y);
 		position += Vec2(fabsf(offset.x), fabsf(offset.y));
@@ -347,17 +380,17 @@ Vec2 ScriptInterpreter::_convertGuiPositionToViewport(Vec2 position)
 
 Vec2 ScriptInterpreter::_convertGuiPositionFromViewport(Vec2 position)
 {
-	if (_fe3d.engine_getSelectedGame().empty())
+	if (!_fe3d.engine_isGameExported())
 	{
 		auto sizeMultiplier = Vec2(_fe3d.misc_getViewportSize()) /
-			Vec2(static_cast<float>(_fe3d.misc_getWindowWidth()), static_cast<float>(_fe3d.misc_getWindowHeight()));
+			Vec2(static_cast<float>(_fe3d.misc_getWindowSize().x), static_cast<float>(_fe3d.misc_getWindowSize().y));
 		auto positionMultiplier = Vec2(_fe3d.misc_getViewportPosition()) /
-			Vec2(static_cast<float>(_fe3d.misc_getWindowWidth()), static_cast<float>(_fe3d.misc_getWindowHeight()));
+			Vec2(static_cast<float>(_fe3d.misc_getWindowSize().x), static_cast<float>(_fe3d.misc_getWindowSize().y));
 		auto offset = Vec2(1.0f) - Vec2((positionMultiplier.x * 2.0f) + sizeMultiplier.x, (positionMultiplier.y * 2.0f) + sizeMultiplier.y);
 		position -= Vec2(fabsf(offset.x), fabsf(offset.y));
-		sizeMultiplier = Vec2(static_cast<float>(_fe3d.misc_getWindowWidth()), static_cast<float>(_fe3d.misc_getWindowHeight())) /
+		sizeMultiplier = Vec2(static_cast<float>(_fe3d.misc_getWindowSize().x), static_cast<float>(_fe3d.misc_getWindowSize().y)) /
 			Vec2(_fe3d.misc_getViewportSize());
-		positionMultiplier = Vec2(static_cast<float>(_fe3d.misc_getWindowWidth()), static_cast<float>(_fe3d.misc_getWindowHeight())) /
+		positionMultiplier = Vec2(static_cast<float>(_fe3d.misc_getWindowSize().x), static_cast<float>(_fe3d.misc_getWindowSize().y)) /
 			Vec2(_fe3d.misc_getViewportPosition());
 		position *= sizeMultiplier;
 	}
@@ -367,10 +400,10 @@ Vec2 ScriptInterpreter::_convertGuiPositionFromViewport(Vec2 position)
 
 Vec2 ScriptInterpreter::_convertGuiSizeToViewport(Vec2 size)
 {
-	if (_fe3d.engine_getSelectedGame().empty())
+	if (!_fe3d.engine_isGameExported())
 	{
 		auto sizeMultiplier = Vec2(_fe3d.misc_getViewportSize()) /
-			Vec2(static_cast<float>(_fe3d.misc_getWindowWidth()), static_cast<float>(_fe3d.misc_getWindowHeight()));
+			Vec2(static_cast<float>(_fe3d.misc_getWindowSize().x), static_cast<float>(_fe3d.misc_getWindowSize().y));
 		size = size * sizeMultiplier;
 	}
 
@@ -379,22 +412,12 @@ Vec2 ScriptInterpreter::_convertGuiSizeToViewport(Vec2 size)
 
 Vec2 ScriptInterpreter::_convertGuiSizeFromViewport(Vec2 size)
 {
-	if (_fe3d.engine_getSelectedGame().empty())
+	if (!_fe3d.engine_isGameExported())
 	{
-		auto sizeMultiplier = Vec2(static_cast<float>(_fe3d.misc_getWindowWidth()), static_cast<float>(_fe3d.misc_getWindowHeight())) /
+		auto sizeMultiplier = Vec2(static_cast<float>(_fe3d.misc_getWindowSize().x), static_cast<float>(_fe3d.misc_getWindowSize().y)) /
 			Vec2(_fe3d.misc_getViewportSize());
 		size = size * sizeMultiplier;
 	}
 
 	return size;
-}
-
-bool ScriptInterpreter::hasThrownError()
-{
-	return _hasThrownError;
-}
-
-bool ScriptInterpreter::gameMustStop()
-{
-	return _gameMustStop;
 }

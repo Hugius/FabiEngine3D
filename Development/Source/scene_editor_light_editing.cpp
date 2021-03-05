@@ -53,8 +53,8 @@ void SceneEditor::_updateLightEditing()
 						// Don't reset if lightbulb is active
 						if (entityID != ACTIVE_BULB_ID)
 						{
-							_fe3d.gameEntity_setSize(entityID, _defaultLightbulbSize);
-							_fe3d.aabbEntity_setSize(entityID, _defaultLightbulbAabbSize);
+							_fe3d.gameEntity_setSize(entityID, DEFAULT_LIGHTBULB_SIZE);
+							_fe3d.aabbEntity_setSize(entityID, DEFAULT_LIGHTBULB_AABB_SIZE);
 						}
 					}
 				}
@@ -103,22 +103,22 @@ void SceneEditor::_updateLightEditing()
 				float distance = _fe3d.lightEntity_getDistanceFactor(ACTIVE_LIGHT_ID);
 
 				// Update value filling and changing
-				_handleValueChanging("pointlightPropertiesMenu", "distancePlus", "distance", distance, _lightingChangingSpeed, 10.0f, 0.0f);
-				_handleValueChanging("pointlightPropertiesMenu", "distanceMinus", "distance", distance, -_lightingChangingSpeed, 10.0f, 0.0f);
-				_handleValueChanging("pointlightPropertiesMenu", "intensityPlus", "intensity", intensity, _lightingChangingSpeed, 10.0f, 0.0f);
-				_handleValueChanging("pointlightPropertiesMenu", "intensityMinus", "intensity", intensity, -_lightingChangingSpeed, 10.0f, 0.0f);
+				_handleValueChanging("pointlightPropertiesMenu", "distancePlus", "distance", distance, LIGHTING_CHANGING_SPEED, 10.0f, 0.0f);
+				_handleValueChanging("pointlightPropertiesMenu", "distanceMinus", "distance", distance, -LIGHTING_CHANGING_SPEED, 10.0f, 0.0f);
+				_handleValueChanging("pointlightPropertiesMenu", "intensityPlus", "intensity", intensity, LIGHTING_CHANGING_SPEED, 10.0f, 0.0f);
+				_handleValueChanging("pointlightPropertiesMenu", "intensityMinus", "intensity", intensity, -LIGHTING_CHANGING_SPEED, 10.0f, 0.0f);
 				_handleValueChanging("pointlightPropertiesMenu", "xPlus", "x", position.x, _customEditorSpeed / 100.0f);
 				_handleValueChanging("pointlightPropertiesMenu", "xMinus", "x", position.x, -_customEditorSpeed / 100.0f);
 				_handleValueChanging("pointlightPropertiesMenu", "yPlus", "y", position.y, _customEditorSpeed / 100.0f);
 				_handleValueChanging("pointlightPropertiesMenu", "yMinus", "y", position.y, -_customEditorSpeed / 100.0f);
 				_handleValueChanging("pointlightPropertiesMenu", "zPlus", "z", position.z, _customEditorSpeed / 100.0f);
 				_handleValueChanging("pointlightPropertiesMenu", "zMinus", "z", position.z, -_customEditorSpeed / 100.0f);
-				_handleValueChanging("pointlightPropertiesMenu", "rPlus", "r", color.r, _lightingColorChangingSpeed, 255.0f, 0.0f, 1.0f);
-				_handleValueChanging("pointlightPropertiesMenu", "rMinus", "r", color.r, -_lightingColorChangingSpeed, 255.0f, 0.0f, 1.0f);
-				_handleValueChanging("pointlightPropertiesMenu", "gPlus", "g", color.g, _lightingColorChangingSpeed, 255.0f, 0.0f, 1.0f);
-				_handleValueChanging("pointlightPropertiesMenu", "gMinus", "g", color.g, -_lightingColorChangingSpeed, 255.0f, 0.0f, 1.0f);
-				_handleValueChanging("pointlightPropertiesMenu", "bPlus", "b", color.b, _lightingColorChangingSpeed, 255.0f, 0.0f, 1.0f);
-				_handleValueChanging("pointlightPropertiesMenu", "bMinus", "b", color.b, -_lightingColorChangingSpeed, 255.0f, 0.0f, 1.0f);
+				_handleValueChanging("pointlightPropertiesMenu", "rPlus", "r", color.r, LIGHTING_COLOR_CHANGING_SPEED, 255.0f, 0.0f, 1.0f);
+				_handleValueChanging("pointlightPropertiesMenu", "rMinus", "r", color.r, -LIGHTING_COLOR_CHANGING_SPEED, 255.0f, 0.0f, 1.0f);
+				_handleValueChanging("pointlightPropertiesMenu", "gPlus", "g", color.g, LIGHTING_COLOR_CHANGING_SPEED, 255.0f, 0.0f, 1.0f);
+				_handleValueChanging("pointlightPropertiesMenu", "gMinus", "g", color.g, -LIGHTING_COLOR_CHANGING_SPEED, 255.0f, 0.0f, 1.0f);
+				_handleValueChanging("pointlightPropertiesMenu", "bPlus", "b", color.b, LIGHTING_COLOR_CHANGING_SPEED, 255.0f, 0.0f, 1.0f);
+				_handleValueChanging("pointlightPropertiesMenu", "bMinus", "b", color.b, -LIGHTING_COLOR_CHANGING_SPEED, 255.0f, 0.0f, 1.0f);
 				
 				// Apply new values
 				_fe3d.gameEntity_setPosition(ACTIVE_BULB_ID, position);

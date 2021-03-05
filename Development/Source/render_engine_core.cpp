@@ -81,7 +81,7 @@ void RenderEngine::renderScene(EntityBus * entityBus, CameraManager& camera)
 		_renderGameEntities();
 		_renderBillboardEntities();
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-		glViewport(0, 0, Config::getInst().getWindowWidth(), Config::getInst().getWindowHeight());
+		glViewport(0, 0, Config::getInst().getWindowSize().x, Config::getInst().getWindowSize().y);
 		_renderGuiEntities();
 		_renderTextEntities();
 		_renderCustomCursor();
@@ -172,13 +172,13 @@ void RenderEngine::renderScene(EntityBus * entityBus, CameraManager& camera)
 		{
 			glViewport(Config::getInst().getVpPos().x, Config::getInst().getVpPos().y, Config::getInst().getVpSize().x, Config::getInst().getVpSize().y + 1);
 			_renderDebugScreens();
-			glViewport(0, 0, Config::getInst().getWindowWidth(), Config::getInst().getWindowHeight());
+			glViewport(0, 0, Config::getInst().getWindowSize().x, Config::getInst().getWindowSize().y);
 		}
 		else // Render final postprocessed texture
 		{
 			glViewport(Config::getInst().getVpPos().x, Config::getInst().getVpPos().y, Config::getInst().getVpSize().x, Config::getInst().getVpSize().y +0);
 			_renderFinalSceneTexture();
-			glViewport(0, 0, Config::getInst().getWindowWidth(), Config::getInst().getWindowHeight());
+			glViewport(0, 0, Config::getInst().getWindowSize().x, Config::getInst().getWindowSize().y);
 			
 		}
 		_timer.stopDeltaPart();

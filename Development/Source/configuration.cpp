@@ -22,37 +22,39 @@ Config::Config()
 	}
 
 	// Store config file content
-	_processOption(file, _windowSizeMultiplier, "window_size_multiplier");
+	float windowSizeMultiplier = 0.0f;
+	_processOption(file, windowSizeMultiplier, "window_size_multiplier");
 	_processOption(file, _isWindowFullscreen, "window_fullscreen");
 	_processOption(file, _isWindowBorderless, "window_borderless");
-	_processOption(file, _selectedGame, "selected_game");
+	_processOption(file, _windowTitle, "window_title");
+	_processOption(file, _isGameExported, "game_exported");
 	
 	// Save monitor dimensions
 	SDL_DisplayMode DM;
 	SDL_GetDesktopDisplayMode(0, &DM);
-	_monitorWidth = DM.w;
-	_monitorHeight = DM.h;
+	_monitorSize.x = DM.w;
+	_monitorSize.y = DM.h;
 
-	// Set window dimensions
-	_windowWidth = static_cast<int>(static_cast<float>(DM.w) * _windowSizeMultiplier);
-	_windowHeight = static_cast<int>(static_cast<float>(DM.h) * _windowSizeMultiplier);
-
-	// Set viewport dimensions
-	if (_selectedGame.empty()) // Engine preview
+	// Set window & viewport dimensions
+	if (_isGameExported) // Game preview
 	{
-		// Set viewport dimensions
-		_viewportPosition.x = static_cast<int>(0.125f * static_cast<float>(_windowWidth));
-		_viewportPosition.y = static_cast<int>(0.2f * static_cast<float>(_windowHeight));
-		_viewportSize.x = static_cast<int>(0.75f * static_cast<float>(_windowWidth));
-		_viewportSize.y = static_cast<int>(0.75f * static_cast<float>(_windowHeight));
-	}
-	else // Game preview
-	{
-		// Set viewport dimensions
+		_windowSize.x = static_cast<int>(static_cast<float>(DM.w) * windowSizeMultiplier);
+		_windowSize.y = static_cast<int>(static_cast<float>(DM.h) * windowSizeMultiplier);
+		_viewportSize.x = static_cast<int>(static_cast<float>(_windowSize.x));
+		_viewportSize.y = static_cast<int>(static_cast<float>(_windowSize.y));
 		_viewportPosition.x = 0;
 		_viewportPosition.y = 0;
-		_viewportSize.x = static_cast<int>(static_cast<float>(_windowWidth));
-		_viewportSize.y = static_cast<int>(static_cast<float>(_windowHeight));
+	}
+	else // Engine preview
+	{
+		_isWindowFullscreen = false;
+		_isWindowBorderless = false;
+		_windowSize.x = static_cast<int>(static_cast<float>(DM.w) * 0.9f);
+		_windowSize.y = static_cast<int>(static_cast<float>(DM.h) * 0.9f);
+		_viewportSize.x = static_cast<int>(0.75f * static_cast<float>(_windowSize.x));
+		_viewportSize.y = static_cast<int>(0.75f * static_cast<float>(_windowSize.y));
+		_viewportPosition.x = static_cast<int>(0.125f * static_cast<float>(_windowSize.x));
+		_viewportPosition.y = static_cast<int>(0.2f * static_cast<float>(_windowSize.y));
 	}
 }
 
@@ -155,34 +157,19 @@ void Config::_processOption(std::ifstream& file, bool& option, string criteria)
 	}
 }
 
+string Config::getWindowTitle() const
+{
+	return _windowTitle;
+}
+
 Ivec2 Config::getMonitorSize() const
 {
-	return Ivec2(_monitorWidth, _monitorHeight);
-}
-
-int Config::getMonitorWidth() const
-{
-	return _monitorWidth;
-}
-
-int Config::getMonitorHeight() const
-{
-	return _monitorHeight;
+	return _monitorSize;
 }
 
 Ivec2 Config::getWindowSize() const
 { 
-	return Ivec2(_windowWidth, _windowHeight); 
-}
-
-int Config::getWindowWidth() const 
-{
-	return _windowWidth;
-}
-
-int Config::getWindowHeight() const 
-{
-	return _windowHeight; 
+	return _windowSize;
 }
 
 Ivec2 Config::getVpPos() const
@@ -195,16 +182,6 @@ Ivec2 Config::getVpSize() const
 	return _viewportSize;
 }
 
-float Config::getUpdateMsPerFrame() const
-{
-	return _updateMsPerFrame;
-}
-
-string Config::getSelectedGame() const
-{
-	return _selectedGame;
-}
-
 bool Config::isWindowFullscreen() const
 {
 	return _isWindowFullscreen;
@@ -213,4 +190,9 @@ bool Config::isWindowFullscreen() const
 bool Config::isWindowBorderless() const
 {
 	return _isWindowBorderless;
+}
+
+bool Config::isGameExported() const
+{
+	return _isGameExported;
 }

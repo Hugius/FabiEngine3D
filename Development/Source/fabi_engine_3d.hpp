@@ -45,7 +45,7 @@ public:
 	void engine_resume();
 	void engine_stop();
 	bool engine_isPaused();
-	string engine_getSelectedGame();
+	bool engine_isGameExported();
 
 	// Camera interface - setters
 	void camera_load(float fov, float nearZ, float farZ, Vec3 startPosition, float yaw = 0.0f, float pitch = 0.0f);
@@ -785,8 +785,6 @@ public:
 
 	// Miscellaneous interface - getters
 	int misc_getUniqueInt(int min, int max);
-	int misc_getWindowWidth();
-	int misc_getWindowHeight();
 	int misc_getRandomInt(int min, int max);
 	int misc_getMsTimeSinceEpoch();
 	int misc_getTriangleCount();
@@ -809,9 +807,9 @@ public:
 	Ivec2 misc_getCursorPosition();
 	Ivec2 misc_getCursorPositionRelativeToViewport();
 	Ivec2 misc_convertToScreenCoords(Vec2 pos);
-	Ivec2 misc_getWindowSize();
 	Ivec2 misc_getViewportPosition();
 	Ivec2 misc_getViewportSize();
+	Ivec2 misc_getWindowSize();
 	Vec2 misc_convertToNDC(Vec2 pos);
 	Vec2 misc_convertFromNDC(Vec2 pos);
 	Vec2 misc_convertFromScreenCoords(Ivec2 pos);

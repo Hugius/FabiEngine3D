@@ -127,7 +127,7 @@ bool ScriptInterpreter::_executeFe3dGuiEntityFunction(const string& functionName
 				true);
 
 			// In-engine viewport boundaries
-			if (_fe3d.engine_getSelectedGame().empty())
+			if (!_fe3d.engine_isGameExported())
 			{
 				auto minPos = _fe3d.misc_convertToNDC(_fe3d.misc_convertFromScreenCoords(_fe3d.misc_getViewportPosition()));
 				auto maxPos = _fe3d.misc_convertToNDC(_fe3d.misc_convertFromScreenCoords(_fe3d.misc_getViewportPosition() + _fe3d.misc_getViewportSize()));

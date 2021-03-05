@@ -12,10 +12,15 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 		_fe3d.logger_throwError("No current project loaded --> SceneEditor::loadSceneFromFile()");
 	}
 
-	// Compose full file path
-	string filePath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectID + "\\scenes\\" + fileName + ".fe3d";
+	// Check if scene directory still exists
+	string directoryPath = _fe3d.misc_getRootDirectory() + "user\\projects\\" + _currentProjectID + "\\scenes\\";
+	if (!_fe3d.misc_isDirectory(directoryPath))
+	{
+		_fe3d.logger_throwWarning("Project \"" + _currentProjectID + "\" corrupted: scenes folder missing!");
+	}
 
 	// Check if scene file exists
+	string filePath = directoryPath + fileName + ".fe3d";
 	if (_fe3d.misc_isFileExisting(filePath))
 	{
 		_loadedSceneID = fileName;
@@ -470,10 +475,10 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 				// Add lightbulbs
 				if (_isEditorLoaded)
 				{
-					_fe3d.gameEntity_add("@" + ID, "engine\\meshes\\lamp.obj", position, Vec3(0.0f), _defaultLightbulbSize);
+					_fe3d.gameEntity_add("@" + ID, "engine\\meshes\\lamp.obj", position, Vec3(0.0f), DEFAULT_LIGHTBULB_SIZE);
 					_fe3d.gameEntity_setShadowed("@" + ID, false);
 					_fe3d.gameEntity_setColor("@" + ID, color);
-					_fe3d.aabbEntity_bindToGameEntity("@" + ID, Vec3(0.0f), _defaultLightbulbAabbSize, true, true);
+					_fe3d.aabbEntity_bindToGameEntity("@" + ID, Vec3(0.0f), DEFAULT_LIGHTBULB_AABB_SIZE, true, true);
 				}
 
 				// Add light
@@ -497,9 +502,9 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 				// Add speaker
 				if (_isEditorLoaded)
 				{
-					_fe3d.gameEntity_add("@speaker_" + ID, "engine\\meshes\\speaker.obj", position, Vec3(0.0f), _defaultSpeakerSize);
+					_fe3d.gameEntity_add("@speaker_" + ID, "engine\\meshes\\speaker.obj", position, Vec3(0.0f), DEFAULT_SPEAKER_SIZE);
 					_fe3d.gameEntity_setShadowed("@speaker_" + ID, false);
-					_fe3d.aabbEntity_bindToGameEntity("@speaker_" + ID, Vec3(0.0f), _defaultSpeakerAabbSize, true, true);
+					_fe3d.aabbEntity_bindToGameEntity("@speaker_" + ID, Vec3(0.0f), DEFAULT_SPEAKER_AABB_SIZE, true, true);
 				}
 
 				// Add audio

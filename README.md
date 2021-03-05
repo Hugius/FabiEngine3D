@@ -1180,7 +1180,7 @@ fe3d:print(camPos.x)
 - FabiEngine3D **does** come with first person camera support, but **not** third person.
 ### AABB system
 - Bound **model AABBs** are adjusted to the transformation (position, rotation, size) of the model **automatically**. They will only rotate in **1 direction** (the direction with the greatest angle of rotation).
-- Bound **billboard AABBs** are adjusted to the transformation (position, rotation, size) of the billboard **automatically**. They will rotate in **any** direction (XYZ combined as well).
+- Bound **billboard AABBs** are adjusted to the transformation (position, rotation, size) of the billboard **automatically**. They will rotate only in **1 direction** (the direction with the greatest angle of rotation).
 - **"Rotated"** AABBs will be translated and/or scaled in **90 degrees** directions (0, 90, 180, 270, etc).
 - You **can** individually access (bound) AABBs that are placed through **scripting**.
 - You **cannot** individually access bound AABBs from a **scene**.

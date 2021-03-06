@@ -1,4 +1,4 @@
-50 4
+50 27
 META script_type_update
 
 /// Temporary values
@@ -11,35 +11,36 @@ IF camPos.y LESS height:
     EDIT _isUnderWater = <true>
     /// River in Stariva has strong current
     IF currentWorld IS "starvia_outside":
-        fe3d:camera_move(0.01, 0.0, -0.005)
+        NEG _riverStrength
+        fe3d:camera_move(0.01, 0.0, _riverStrength)
+        NEG _riverStrength
     /// Enable underwater effects
     fe3d:image_set_visible("underwater", <true>)
-    fe3d:image_rotate("underwater", 0.01)
-    fe3d:graphics_set_fog_min_distance(5.0)
-    fe3d:graphics_set_fog_max_distance(15.0)
-    fe3d:graphics_set_fog_thickness(1.0)
+    fe3d:graphics_set_fog_min_distance(_underwaterFogMinDistance)
+    fe3d:graphics_set_fog_max_distance(_underwaterFogMaxDistance)
+    fe3d:graphics_set_fog_thickness(_underwaterFogThickness)
     /// No wet lens effect
     IF _wasUnderWater IS <false>:
         EDIT _wasUnderWater = <true>
-        EDIT _wetlensAlpha = 0.0
+        EDIT _wetLensAlpha = 0.0
 ELSE:
     EDIT _isUnderWater = <false>
     /// Disable underwater effects
     fe3d:image_set_visible("underwater", <false>)
-    fe3d:graphics_set_fog_min_distance(75.0)
-    fe3d:graphics_set_fog_max_distance(150.0)
-    fe3d:graphics_set_fog_thickness(0.75)
+    fe3d:graphics_set_fog_min_distance(_initialFogMinDistance)
+    fe3d:graphics_set_fog_max_distance(_initialFogMaxDistance)
+    fe3d:graphics_set_fog_thickness(_initialFogThickness)
     /// Enable wet lens effect
     IF _wasUnderWater IS <true>:
-        EDIT _wetlensAlpha = 0.5
+        EDIT _wetLensAlpha = 0.5
         EDIT _wasUnderWater = <false>
 
 /// Update wet lens effect
-IF _wetlensAlpha LESS 0.0:
-    EDIT _wetlensAlpha = 0.0
+IF _wetLensAlpha LESS 0.0:
+    EDIT _wetLensAlpha = 0.0
 ELSE:
-    DECR _wetlensAlpha 0.001
-fe3d:image_set_alpha("wetlens", _wetlensAlpha)
+    DECR _wetLensAlpha _wetLensSpeed
+fe3d:image_set_alpha("wetLens", _wetLensAlpha)
 
 /// Update water color based on time
 DEC blueIntensity = 1.0

@@ -1,4 +1,4 @@
-8 32
+44 17
 META script_type_update
 
 /// Temporary values
@@ -40,6 +40,7 @@ IF confirmed IS <true> AND lmbPressed IS <true>:
     /// Hide old tool
     IF _inventory[_equipIndex] NOT "":
         fe3d:model_set_visible(_inventory[_equipIndex], <false>)
+    /// Remove "_display" to extract item name
     STR itemName = _craftables[_craftIndex]
     INT length = misc:get_string_size(itemName)
     DECR length 8
@@ -60,6 +61,7 @@ IF confirmed IS <true> AND lmbPressed IS <true>:
     /// Determine tool durability
     INT i = _craftIndex
     IF i IS 1 OR i IS 3 OR i IS 5 OR i IS 7 OR i IS 8 OR i IS 9 OR i IS 11:
+        /// Iron lasts longer
         EDIT _durabilities[_equipIndex] = 10.0
     ELSE:
         EDIT _durabilities[_equipIndex] = 1.0

@@ -1,4 +1,4 @@
-8 0
+37 63
 META script_type_update
 
 /// Temporary values
@@ -36,7 +36,7 @@ IF a IS <true>:
         BOOL isPlaying = fe3d:model_is_animation_playing("fishrod", "fishrod_throw")
         IF isPlaying IS <false>:
             /// A small chance for the fish to bite
-            INT randomInt = misc:get_random_integer(0, 1500)
+            INT randomInt = misc:get_random_integer(0, _fishingChance)
             IF randomInt IS 0:
                 /// Fishing done, add fish to inventory
                 fe3d:model_resume_animation("fishrod", "fishrod_throw")

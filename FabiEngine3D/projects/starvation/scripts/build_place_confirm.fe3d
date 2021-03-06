@@ -1,4 +1,4 @@
-36 69
+45 12
 META script_type_update
 
 /// Temporary values
@@ -39,7 +39,12 @@ IF _isBuilding IS <true> AND lmbPressed IS <true>:
             STR previewID = "campfire"
         INT counter = _buildCounters[_buildIndex]
         CAST counter STR
-        STR newID = misc:concat_strings(_buildNames[_buildIndex], counter)
+        /// Remove "_display" to extract item name
+        STR newID = _buildables[_buildIndex]
+        INT length = misc:get_string_size(newID)
+        DECR length 8
+        EDIT newID = misc:get_string_part(newID, 0, length)
+        EDIT newID = misc:concat_strings(newID, counter)
         INCR _buildCounters[_buildIndex] 1
         VEC3 buildPos = _buildPosition
         fe3d:model_place(newID, previewID, buildPos.x, buildPos.y, buildPos.z)

@@ -1,52 +1,5 @@
-83 66
+40 59
 META script_type_init
-
-/// Globals
-GLOB VEC3 _movingAcc = [0.0 0.0 0.0]
-GLOB VEC3 _movingSpeed = [0.0 0.0 0.0]
-GLOB CONST DEC _playerHeight = 2.75
-GLOB DEC _health = 1.0
-GLOB DEC _hunger = 1.0
-GLOB DEC _thirst = 1.0
-GLOB DEC _stamina = 1.0
-GLOB DEC _oxygen = 1.0
-GLOB DEC _sickness = 0.0
-GLOB DEC _hygiene = 1.0
-GLOB DEC _temperature = 1.0
-GLOB DEC _jumpingSpeed = 0.1
-GLOB DEC _fallingSpeed = 0.05
-GLOB DEC _totalBobbing = 0.0
-GLOB DEC _bobbingDirection = 1.0
-GLOB BOOL _wasSwordPlaying = <false>
-GLOB BOOL _wasPickaxePlaying = <false>
-GLOB BOOL _wasAxePlaying = <false>
-GLOB BOOL _wasShovelPlaying = <false>
-GLOB BOOL _wasHoePlaying = <false>
-GLOB BOOL _wasScythePlaying = <false>
-GLOB BOOL _wasHammerPlaying = <false>
-GLOB BOOL _wasFishrodPlaying = <false>
-GLOB BOOL _wasPickupPlaying = <false>
-GLOB BOOL _isSwordPlaying = <false>
-GLOB BOOL _isPickaxePlaying = <false>
-GLOB BOOL _isAxePlaying = <false>
-GLOB BOOL _isShovelPlaying = <false>
-GLOB BOOL _isHoePlaying = <false>
-GLOB BOOL _isScythePlaying = <false>
-GLOB BOOL _isHammerPlaying = <false>
-GLOB BOOL _isFishrodPlaying = <false>
-GLOB BOOL _isToolPlaying = <false>
-GLOB BOOL _isPickupPlaying = <false>
-GLOB BOOL _isJumping = <false>
-GLOB BOOL _isFalling = <false>
-GLOB BOOL _isWalking = <false>
-GLOB BOOL _isRunning = <false>
-GLOB BOOL _isFishing = <false>
-GLOB BOOL _isAbleToMove = <false>
-GLOB BOOL _mayJump = <false>
-GLOB BOOL _isStatusOpen = <true>
-GLOB BOOL _wasStatusOpen = <true>
-GLOB BOOL _isTimeOpen = <false>
-GLOB BOOL _wasTimeOpen = <false>
 
 /// Images
 fe3d:image_place("scroll_time", "scroll3.png", 0.0, 0.5, 0.0, 1.0, 0.5)

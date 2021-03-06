@@ -1,4 +1,4 @@
-31 39
+38 41
 META script_type_update
 
 /// Update stone hover
@@ -37,7 +37,7 @@ IF _wasPickaxePlaying IS <true> AND _isPickaxePlaying IS <false>:
         PUSH _stonesIDs stonesID
         EDIT _fallingStonesID = stonesID
         EDIT _fallingStonesTargetHeight = stonePos.y
-        INCR stonePos.y 5.0
+        INCR stonePos.y _stonesFallHeight
         /// Place stones model
         fe3d:model_place(stonesID, "stones", stonePos.x, stonePos.y, stonePos.z)
         IF subString IS "stone5":

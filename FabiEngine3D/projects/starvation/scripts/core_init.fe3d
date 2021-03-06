@@ -1,4 +1,4 @@
-7 14
+6 19
 META script_type_init
 META execution_entry
 
@@ -6,7 +6,6 @@ META execution_entry
 fe3d:scene_load("home")
 
 /// No GUI elements
-EXEC constants
 EXEC npc_init
 EXEC time_init
 
@@ -21,4 +20,5 @@ EXEC storage_init_main
 EXEC storage_init_gui
 EXEC inventory_init
 EXEC bag_init
-EXEC player_init
+EXEC player_init_main
+EXEC player_init_misc

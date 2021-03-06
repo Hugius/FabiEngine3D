@@ -1,4 +1,4 @@
-83 73
+3 22
 META script_type_update
 
 /// Temporary values
@@ -10,7 +10,7 @@ DEC skySpeed = 0.0001
 DEC heightSpeed = 0.25
 
 /// Check if time is ready for cycle
-IF _passedTime MORE 100.0:
+IF _passedTime MORE _maxPassedTime:
     EDIT _passedTime = 0.0
     EDIT _isTimeCycling = <true>
     /// Determine if night or day

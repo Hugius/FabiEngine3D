@@ -1,10 +1,10 @@
-16 10
+22 42
 META script_type_update
 
 /// Bobbing speed
 DEC bobbingSpeed = 0.0
 IF _isWalking IS <true>:
-    EDIT bobbingSpeed = 0.035
+    EDIT bobbingSpeed = _bobbingSpeed
 IF _totalBagWeight MORE _maxBagWeight:
     DEC weightFactor = _maxBagWeight
     DIV weightFactor _totalBagWeight
@@ -21,6 +21,6 @@ IF _isAbleToMove IS <true>:
     DEC newPitch = fe3d:camera_get_pitch()
     INCR newPitch bobbingSpeed
     fe3d:camera_set_pitch(newPitch)
-    IF _totalBobbing MORE 3.0:
+    IF _totalBobbing MORE _maxBobbingAngle:
         EDIT _totalBobbing = 0.0
         MUL _bobbingDirection -1.0

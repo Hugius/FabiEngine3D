@@ -1,4 +1,4 @@
-35 49
+23 36
 META script_type_update
 
 /// Temporary values
@@ -22,6 +22,8 @@ IF currentWorld IS "home":
     VEC3 camPos = fe3d:camera_get_position()
     VEC3 billboardPos = [0.0 0.0 0.0]
     DEC distance = 0.0
+    DEC heatFactor = _temperatureFireFactor
+    MUL heatFactor 0.5
     INT index = 0
     INT listSize = misc:get_list_size("billboards")
     LOOP:
@@ -34,5 +36,5 @@ IF currentWorld IS "home":
             EDIT billboardPos = fe3d:billboard_get_position(billboards[index])
             EDIT distance = math:distance(camPos, billboardPos)
             IF distance LESS _maxCampfireHeatDistance AND _areLightsOn IS <true>:
-                INCR _temperature _fireHeatFactor
+                INCR _temperature heatFactor
             INCR index 1

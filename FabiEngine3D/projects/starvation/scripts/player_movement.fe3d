@@ -1,4 +1,4 @@
-69 31
+9 39
 META script_type_update
 
 /// Temporary values
@@ -8,9 +8,10 @@ BOOL left = fe3d:input_is_key_down("KEY_A")
 BOOL right = fe3d:input_is_key_down("KEY_D")
 BOOL shift = fe3d:input_is_key_down("KEY_LSHIFT")
 EDIT _isWalking = (up IS <true> OR down IS <true> OR left IS <true> OR right IS <true>)
-DEC accSpeed = 0.0001
-DEC minSpeed = -0.0025
-DEC maxSpeed = 0.0025
+DEC accSpeed = _playerAccelerationSpeed
+DEC minSpeed = _maxPlayerSpeed
+NEG minSpeed
+DEC maxSpeed = _maxPlayerSpeed
 
 /// Movement must be slowed when carrying too much
 IF _totalBagWeight MORE _maxBagWeight:
@@ -31,14 +32,14 @@ IF shift IS <true> AND up IS <true>:
         MUL minSpeed 2.0
         MUL maxSpeed 2.0
         EDIT _isRunning = <true>
-        DECR _stamina 0.001
+        DECR _stamina _staminaRunFactor
     ELSE:
         EDIT _isRunning = <false>
 ELSE:
     EDIT _isRunning = <false>
     /// Regain stamina from not running
     IF _stamina LESS 1.0 AND _isToolPlaying IS <false>:
-        INCR _stamina 0.001
+        INCR _stamina _staminaWalkFactor
 
 /// Update camera movement
 IF _isAbleToMove IS <true>:

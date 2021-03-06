@@ -1,4 +1,4 @@
-55 29
+78 35
 META script_type_update
 
 BOOL interval = misc:time_interval("status", 50)
@@ -29,11 +29,11 @@ IF interval IS <true>:
     fe3d:image_set_alpha("sickness", sicknessAlpha)
 
 /// Update hunger
-DECR _hunger 0.000025
+DECR _hunger _hungerFactor
 EDIT _hunger = math:clamp(_hunger, 0.0, 1.0)
 
 /// Update thirst
-DECR _thirst 0.000025
+DECR _thirst _thirstFactor
 EDIT _thirst = math:clamp(_thirst, 0.0, 1.0)
 
 /// Update stamina
@@ -41,31 +41,31 @@ EDIT _stamina = math:clamp(_stamina, 0.0, 10.0)
 
 /// Update oxygen
 IF _isUnderWater IS <true>:
-    DECR _oxygen 0.0003
+    DECR _oxygen _oxygenFactor
 ELSE:
-    INCR _oxygen 0.001
+    INCR _oxygen _oxygenBreathFactor
 EDIT _oxygen = math:clamp(_oxygen, 0.0, 1.0)
 
 /// Update temperature
 BOOL torchEquipped = (_isInvOpen IS <true> AND _inventory[_equipIndex] IS "torch")
 IF _isDayTime IS <true>:
-    INCR _temperature 0.0001
+    INCR _temperature _temperatureDayFactor
 IF _isUnderWater IS <true>:
-    DECR _temperature 0.0005
+    DECR _temperature _temperatureWaterFactor
 IF _isDayTime IS <false> AND _isSleeping IS <false>:
     IF torchEquipped IS <true> AND _isUnderWater IS <false>:
-        INCR _temperature 0.001
+        INCR _temperature _temperatureFireFactor
     ELSE:
-        DECR _temperature 0.0005
+        DECR _temperature _temperatureNightFactor
 EDIT _temperature = math:clamp(_temperature, 0.0, 1.0)
 
 /// Update hygiene
-DECR _hygiene 0.000025
+DECR _hygiene _hygieneFactor
 EDIT _hygiene = math:clamp(_hygiene, 0.0, 1.0)
 
 /// Update sickness
 IF _hygiene IS 0.0:
-    INCR _sickness 0.0001
+    INCR _sickness _sicknessFactor
 EDIT _sickness = math:clamp(_sickness, 0.0, 1.0)
 
 /// Update health
@@ -75,9 +75,9 @@ DEC ox = _oxygen
 DEC te = _temperature
 DEC si = _sickness
 IF hu IS 0.0 OR th IS 0.0 OR ox IS 0.0 OR te IS 0.0 OR si IS 1.0:
-    DECR _health 0.0005
+    DECR _health _healthFactor
 ELSE:
-    INCR _health 0.00005
+    INCR _health _healthRegenFactor
 EDIT _health = math:clamp(_health, 0.0, 1.0)
 
 /// Check if player died

@@ -1,4 +1,4 @@
-5 56
+10 55
 META script_type_update
 
 /// Temporary values
@@ -7,23 +7,29 @@ VEC3 camPos = fe3d:camera_get_position()
 STR yCollision = fe3d:collision_check_camera_models("Y")
 
 /// Initiate jump
-IF _isAbleToMove IS <true> AND _stamina MORE 0.19 AND _isUnderWater IS <false>:
+DEC minStamina = _staminaJumpFactor
+MUL minStamina 0.99
+IF _isAbleToMove IS <true> AND _stamina MORE minStamina AND _isUnderWater IS <false>:
     IF jump IS <true> AND _isJumping IS <false> AND _mayJump IS <true>:
         EDIT _isJumping = <true>
         EDIT _mayJump = <false>
-        DECR _stamina 0.2
+        DECR _stamina _staminaJumpFactor
 
 /// Jumping movement
 IF _isJumping IS <true>:
-    IF _jumpingSpeed LESS 0.01:
+    DEC minJumpingSpeed = _initialJumpingSpeed
+    MUL minJumpingSpeed 0.1
+    IF _jumpingSpeed LESS minJumpingSpeed:
         /// Ascending is finished
         EDIT _isJumping = <false>
-        EDIT _jumpingSpeed = 0.1
+        EDIT _jumpingSpeed = _initialJumpingSpeed
     ELIF yCollision NOT "" AND jump IS <false>:
         /// Player hit an AABB
         EDIT _isJumping = <false>
-        EDIT _jumpingSpeed = 0.1
-        fe3d:camera_move(0.0, -0.1, 0.0)
+        EDIT _jumpingSpeed = _initialJumpingSpeed
+        NEG _initialJumpingSpeed
+        fe3d:camera_move(0.0, _initialJumpingSpeed, 0.0)
+        NEG _initialJumpingSpeed
     ELSE:
         /// Slow jump ascending
         MUL _jumpingSpeed 0.95
@@ -32,7 +38,7 @@ ELSE:
     BOOL underGround = fe3d:collision_is_camera_under_terrain()
     IF underGround IS <true> OR yCollision NOT "":
         /// Player touched the ground
-        EDIT _fallingSpeed = 0.05
+        EDIT _fallingSpeed = _initialFallingSpeed
         EDIT _mayJump = <true>
         EDIT _isFalling = <false>
     ELSE:

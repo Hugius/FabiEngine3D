@@ -1,4 +1,4 @@
-14 22
+30 39
 META script_type_update
 
 /// Temporary values
@@ -20,14 +20,16 @@ IF equipped IS <true> AND _isInvOpen IS <true>:
     IF _areLightsOn IS <true> AND _isUnderWater IS <false>:
         fe3d:light_set_visible("torch", <true>)
         fe3d:billboard_set_visible("torch", <true>)
-        DECR _durabilities[7] 0.0001
+        DEC durabilityHit = _durabilityHit
+        MUL durabilityHit 0.01
+        DECR _durabilities[7] durabilityHit
 
 /// Update black overlay
 fe3d:image_set_alpha("black", _blackAlpha)
 IF _blackAlpha LESS _targetBlackAlpha:
-    INCR _blackAlpha 0.0025
+    INCR _blackAlpha _blackOverlaySpeed
 ELSE:
-    DECR _blackAlpha 0.0025
+    DECR _blackAlpha _blackOverlaySpeed
 
 /// Update travelling
 IF currentWorld IS "home":

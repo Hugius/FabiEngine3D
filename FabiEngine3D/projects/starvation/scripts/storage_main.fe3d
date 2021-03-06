@@ -1,4 +1,4 @@
-5 9
+66 72
 META script_type_update
 
 /// Temporary values
@@ -33,6 +33,7 @@ IF ePressed IS <true>:
 /// Update storage menu buttons hover
 IF _isInStorage IS <true>:
     STR buttonID = ""
+    VEC3 color = _storageButtonColor
     DEC buttonWidth = 0.0
     DEC buttonHeight = 0.0
     DEC buttonX = 0.0
@@ -64,7 +65,7 @@ IF _isInStorage IS <true>:
             DECR yDifference cursorY
             EDIT yDifference = math:abs(yDifference)
             IF xDifference LESS buttonWidth AND yDifference LESS buttonHeight:
-                fe3d:image_set_color(buttonID, 0.0, 0.5, 0.0)
+                fe3d:image_set_color(buttonID, color.r, color.g, color.b)
                 EDIT isButtonHovered = <true>
                 BREAK
             ELSE:

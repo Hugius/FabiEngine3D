@@ -1,4 +1,4 @@
-6 20
+47 37
 META script_type_update
 
 /// Update tree hover
@@ -46,7 +46,7 @@ IF _fallingTreeID NOT "":
         CAST logNumber STR
         STR logModelID = misc:concat_strings("log", logNumber)
         EDIT _fallingTreeID = ""
-        INCR treePos.y 5.0
+        INCR treePos.y _logFallHeight
         /// Place log model
         fe3d:model_place(logID, logModelID, treePos.x, treePos.y, treePos.z)
 

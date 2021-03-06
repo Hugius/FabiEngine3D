@@ -10,9 +10,9 @@ void ScriptEditor::_reloadScriptTextDisplay(bool reloadAabbs)
 
 		// Create line separator BILLBOARD
 		float lineCount = static_cast<float>(_script.getScriptFile(_currentScriptFileID)->getLineCount());
-		Vec2 separatorSize = Vec2((_textCharacterSize.x / 4.0f), (lineCount * _verticalLineOffset));
-		Vec3 separatorPosition = _scriptTextStartingPosition + Vec3(_horizontalLineOffset / 2.0f, -(((lineCount - 1) / 2.0f) * _verticalLineOffset), 0.0f);
-		_fe3d.billboardEntity_add("separator", _separatorColor, separatorPosition - Vec3(0.0f, separatorSize.y / 2.0f, 0.0f), 
+		Vec2 separatorSize = Vec2((TEXT_CHARACTER_SIZE.x / 4.0f), (lineCount * VERTICAL_LINE_OFFSET));
+		Vec3 separatorPosition = SCRIPT_TEXT_STARTING_POSITION + Vec3(HORIZONTAL_LINE_OFFSET / 2.0f, -(((lineCount - 1) / 2.0f) * VERTICAL_LINE_OFFSET), 0.0f);
+		_fe3d.billboardEntity_add("separator", SEPARATOR_COLOR, separatorPosition - Vec3(0.0f, separatorSize.y / 2.0f, 0.0f), 
 			Vec3(0.0f), separatorSize, false, false);
 
 		// Create visible billboards for display and invisible billboards for logic
@@ -23,25 +23,25 @@ void ScriptEditor::_reloadScriptTextDisplay(bool reloadAabbs)
 			string lineTextID = "text_" + lineNumberID;
 			string lineNumberString = to_string(lineIndex + 1);
 			string lineTextString = _script.getScriptFile(_currentScriptFileID)->getLineText(lineIndex);
-			Vec2 lineNumberSize = Vec2(lineNumberString.size() * _textCharacterSize.x, _textCharacterSize.y);
-			Vec2 lineTextSize = Vec2(lineTextString.size() * _textCharacterSize.x, _textCharacterSize.y);
-			Vec3 lineNumberPosition = _scriptTextStartingPosition -
-				Vec3((lineNumberString.size() - 1) * (_textCharacterSize.x / 2.0f), _verticalLineOffset * static_cast<float>(lineIndex), 0.0f);
-			Vec3 lineTextPosition = _scriptTextStartingPosition +
-				Vec3((lineTextString.size() - 1) * (_textCharacterSize.x / 2.0f), -_verticalLineOffset * static_cast<float>(lineIndex), 0.0f) +
-				Vec3(_horizontalLineOffset, 0.0f, 0.0f);
+			Vec2 lineNumberSize = Vec2(lineNumberString.size() * TEXT_CHARACTER_SIZE.x, TEXT_CHARACTER_SIZE.y);
+			Vec2 lineTextSize = Vec2(lineTextString.size() * TEXT_CHARACTER_SIZE.x, TEXT_CHARACTER_SIZE.y);
+			Vec3 lineNumberPosition = SCRIPT_TEXT_STARTING_POSITION -
+				Vec3((lineNumberString.size() - 1) * (TEXT_CHARACTER_SIZE.x / 2.0f), VERTICAL_LINE_OFFSET * static_cast<float>(lineIndex), 0.0f);
+			Vec3 lineTextPosition = SCRIPT_TEXT_STARTING_POSITION +
+				Vec3((lineTextString.size() - 1) * (TEXT_CHARACTER_SIZE.x / 2.0f), -VERTICAL_LINE_OFFSET * static_cast<float>(lineIndex), 0.0f) +
+				Vec3(HORIZONTAL_LINE_OFFSET, 0.0f, 0.0f);
 
 			// Create line number BILLBOARD
-			_fe3d.billboardEntity_add(lineNumberID, lineNumberString, _fontPath, _lineNumberColor, 
+			_fe3d.billboardEntity_add(lineNumberID, lineNumberString, FONT_PATH, LINE_NUMBER_COLOR, 
 				lineNumberPosition - Vec3(0.0f, lineNumberSize.y / 2.0f, 0.0f), Vec3(0.0f), lineNumberSize, 0, 0);
 			
 			// Create line number AABB
-			Vec3 aabbPosition = lineNumberPosition - Vec3(0.0f, _textCharacterSize.y / 2.0f, _aabbDepth);
-			Vec3 aabbSize = Vec3(_textCharacterSize.x * static_cast<float>(_maxCharactersPerLine * 2) * 1.1f, _textCharacterSize.y, _aabbDepth);
+			Vec3 aabbPosition = lineNumberPosition - Vec3(0.0f, TEXT_CHARACTER_SIZE.y / 2.0f, AABB_DEPTH);
+			Vec3 aabbSize = Vec3(TEXT_CHARACTER_SIZE.x * static_cast<float>(MAX_CHARACTERS_PER_LINE * 2) * 1.1f, TEXT_CHARACTER_SIZE.y, AABB_DEPTH);
 			_fe3d.aabbEntity_add(lineNumberID, aabbPosition, aabbSize, true, true);
 			
 			// Create line text display BILLBOARD
-			_fe3d.billboardEntity_add(lineTextID, lineTextString, _fontPath, _characterColor, 
+			_fe3d.billboardEntity_add(lineTextID, lineTextString, FONT_PATH, CHARACTER_COLOR, 
 				lineTextPosition - Vec3(0.0f, lineTextSize.y / 2.0f, 0.0f), Vec3(0.0f), lineTextSize, false, false);
 
 			// Loop over every character
@@ -49,16 +49,16 @@ void ScriptEditor::_reloadScriptTextDisplay(bool reloadAabbs)
 			{
 				// Create new character BILLBOARD for logic
 				string characterID = lineNumberID + "_" + to_string(charIndex);
-				float characterX = _horizontalLineOffset + (_horizontalCharacterOffset * static_cast<float>(charIndex));
-				Vec3 characterPosition = _scriptTextStartingPosition + Vec3(characterX, -_verticalLineOffset * static_cast<float>(lineIndex), 0.0f);
-				_fe3d.billboardEntity_add(characterID, Vec3(0.0f), characterPosition - Vec3(0.0f, _textCharacterSize.y / 2.0f, 0.0f), 
-					Vec3(0.0f), _textCharacterSize, false, false, false);
+				float characterX = HORIZONTAL_LINE_OFFSET + (HORIZONTAL_CHARACTER_OFFSET * static_cast<float>(charIndex));
+				Vec3 characterPosition = SCRIPT_TEXT_STARTING_POSITION + Vec3(characterX, -VERTICAL_LINE_OFFSET * static_cast<float>(lineIndex), 0.0f);
+				_fe3d.billboardEntity_add(characterID, Vec3(0.0f), characterPosition - Vec3(0.0f, TEXT_CHARACTER_SIZE.y / 2.0f, 0.0f), 
+					Vec3(0.0f), TEXT_CHARACTER_SIZE, false, false, false);
 
 				// Create new character AABB for logic
 				if (reloadAabbs)
 				{
-					Vec3 aabbPosition = characterPosition - Vec3(0.0f, _textCharacterSize.y / 2.0f, 0.0f);
-					Vec3 aabbSize = Vec3(_textCharacterSize.x, _textCharacterSize.y, _aabbDepth);
+					Vec3 aabbPosition = characterPosition - Vec3(0.0f, TEXT_CHARACTER_SIZE.y / 2.0f, 0.0f);
+					Vec3 aabbSize = Vec3(TEXT_CHARACTER_SIZE.x, TEXT_CHARACTER_SIZE.y, AABB_DEPTH);
 					_fe3d.aabbEntity_add(characterID, aabbPosition, aabbSize, true, true);
 				}
 			}

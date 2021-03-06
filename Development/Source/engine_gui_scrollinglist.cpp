@@ -120,7 +120,7 @@ void EngineGuiScrollingList::_updateScolling()
 		{
 			if (mousePos.y > _originalPosition.y - (_originalSize.y / 2.0f) && mousePos.y < _originalPosition.y + (_originalSize.y / 2.0f))
 			{
-				float scrollingAcceleration = (float(-_fe3d.input_getMouseWheelY()) / _scrollWheelDivider);
+				float scrollingAcceleration = (float(-_fe3d.input_getMouseWheelY()) / SCROLL_WHEEL_DIVIDER);
 				_scrollingSpeed += scrollingAcceleration;
 			}
 		}

@@ -30,9 +30,11 @@ public:
 private:
 	GLuint _fbo = 0;
 	GLuint _rbo = 0;
+
 	std::vector<GLuint> _textures;
 
 	int _aaSamples = 0;
+
 	Ivec2 _position = Ivec2(0);
 	Ivec2 _size = Ivec2(0);
 

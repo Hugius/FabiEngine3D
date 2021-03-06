@@ -67,7 +67,7 @@ void ScriptEditor::_updateTextWriter()
 		// Timer for continuous actions
 		if (_activeActionKey == InputType::NONE)
 		{
-			for (InputType actionKey : _actionKeys) // Check all possible action keys
+			for (InputType actionKey : ACTION_KEYS) // Check all possible action keys
 			{
 				if (_fe3d.input_getKeyPressed(actionKey)) // Check if action key is pressed
 				{
@@ -80,7 +80,7 @@ void ScriptEditor::_updateTextWriter()
 		else
 		{
 			// Check if waited long enough for continuous action
-			if (_passedFrames == _continuousTextActionFrameMinimum)
+			if (_passedFrames == CONTINUOUS_TEXT_ACTION_FRAME_MINIMUM)
 			{
 				_continuousActionAllowed = true;
 				_passedFrames = 0;
@@ -127,12 +127,12 @@ void ScriptEditor::_updateTextWriter()
 			if (_firstSelectedLineIndex == -1)
 			{
 				// Check if not exceeding the line limit
-				if (_script.getScriptFile(_currentScriptFileID)->getLineCount() < _maxLineAmount)
+				if (_script.getScriptFile(_currentScriptFileID)->getLineCount() < MAX_LINE_AMOUNT)
 				{
 					// Check if single or fast new line action
 					if (_singleActionAllowed || _continuousActionAllowed)
 					{
-						if (_fe3d.misc_checkInterval("textAction", _continuousTextActionInterval) || _singleActionAllowed)
+						if (_fe3d.misc_checkInterval("textAction", CONTINUOUS_TEXT_ACTION_INTERVAL) || _singleActionAllowed)
 						{
 							_singleActionAllowed = false;
 
@@ -161,7 +161,7 @@ void ScriptEditor::_updateTextWriter()
 			// Check if single or fast cursor move
 			if (_singleActionAllowed || _continuousActionAllowed)
 			{
-				if (_fe3d.misc_checkInterval("textAction", _continuousTextActionInterval) || _singleActionAllowed)
+				if (_fe3d.misc_checkInterval("textAction", CONTINUOUS_TEXT_ACTION_INTERVAL) || _singleActionAllowed)
 				{
 					_singleActionAllowed = false;
 
@@ -185,7 +185,7 @@ void ScriptEditor::_updateTextWriter()
 			// Check if single or fast cursor move
 			if (_singleActionAllowed || _continuousActionAllowed)
 			{
-				if (_fe3d.misc_checkInterval("textAction", _continuousTextActionInterval) || _singleActionAllowed)
+				if (_fe3d.misc_checkInterval("textAction", CONTINUOUS_TEXT_ACTION_INTERVAL) || _singleActionAllowed)
 				{
 					_singleActionAllowed = false;
 
@@ -211,7 +211,7 @@ void ScriptEditor::_updateTextWriter()
 			// Check if single or fast cursor move
 			if (_singleActionAllowed || _continuousActionAllowed)
 			{
-				if (_fe3d.misc_checkInterval("textAction", _continuousTextActionInterval) || _singleActionAllowed)
+				if (_fe3d.misc_checkInterval("textAction", CONTINUOUS_TEXT_ACTION_INTERVAL) || _singleActionAllowed)
 				{
 					_singleActionAllowed = false;
 
@@ -233,7 +233,7 @@ void ScriptEditor::_updateTextWriter()
 			// Check if single or fast cursor move
 			if (_singleActionAllowed || _continuousActionAllowed)
 			{
-				if (_fe3d.misc_checkInterval("textAction", _continuousTextActionInterval) || _singleActionAllowed)
+				if (_fe3d.misc_checkInterval("textAction", CONTINUOUS_TEXT_ACTION_INTERVAL) || _singleActionAllowed)
 				{
 					_singleActionAllowed = false;
 
@@ -260,7 +260,7 @@ void ScriptEditor::_updateTextWriter()
 			if (!_fe3d.input_getKeyDown(InputType::KEY_LCTRL))
 			{
 				// Letter characters
-				for (auto& c : _letterCharacters)
+				for (auto& c : LETTER_CHARACTERS)
 				{
 					// Check if character is pressed on keyboard
 					if (_fe3d.input_getKeyPressed(InputType(c)))
@@ -290,7 +290,7 @@ void ScriptEditor::_updateTextWriter()
 				}
 
 				// Number characters
-				for (auto& element : _numberCharacters)
+				for (auto& element : NUMBER_CHARACTERS)
 				{
 					// Check if character is pressed on keyboard
 					if (_fe3d.input_getKeyPressed(InputType(element.first)))
@@ -308,7 +308,7 @@ void ScriptEditor::_updateTextWriter()
 				}
 
 				// Special characters
-				for (auto& element : _specialCharacters)
+				for (auto& element : SPECIAL_CHARACTERS)
 				{
 					// Check if character is pressed on keyboard
 					if (_fe3d.input_getKeyPressed(InputType(element.first)))
@@ -341,7 +341,7 @@ void ScriptEditor::_updateTextWriter()
 					// Check if single or fast remove
 					if (_singleActionAllowed || _continuousActionAllowed)
 					{
-						if (_fe3d.misc_checkInterval("textAction", _continuousTextActionInterval) || _singleActionAllowed)
+						if (_fe3d.misc_checkInterval("textAction", CONTINUOUS_TEXT_ACTION_INTERVAL) || _singleActionAllowed)
 						{
 							_singleActionAllowed = false;
 
@@ -372,7 +372,7 @@ void ScriptEditor::_updateTextWriter()
 									string textToMerge = _script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex + 1);
 
 									// Check if lines together is not exceeding the character limit
-									if ((currentLineText.size() + textToMerge.size()) <= _maxCharactersPerLine)
+									if ((currentLineText.size() + textToMerge.size()) <= MAX_CHARACTERS_PER_LINE)
 									{
 										// Remove line
 										_script.getScriptFile(_currentScriptFileID)->removeLine(cursorLineIndex + 1);
@@ -403,7 +403,7 @@ void ScriptEditor::_updateTextWriter()
 			}
 
 			// Check if not exceeding character limit of current line
-			if (currentLineText.size() < _maxCharactersPerLine)
+			if (currentLineText.size() < MAX_CHARACTERS_PER_LINE)
 			{
 				// Check if user is not selecting text
 				if (_firstSelectedLineIndex == -1)
@@ -447,9 +447,9 @@ void ScriptEditor::_updateTextWriter()
 		}
 
 		// Update blinking cursor
-		static unsigned int passedBarFrames = _maxPassedBarFrames;
+		static unsigned int passedBarFrames = MAX_PASSED_BAR_FRAMES;
 		static bool barEnabled = true;
-		if (passedBarFrames >= _maxPassedBarFrames)
+		if (passedBarFrames >= MAX_PASSED_BAR_FRAMES)
 		{
 			passedBarFrames = 0;
 
@@ -464,7 +464,7 @@ void ScriptEditor::_updateTextWriter()
 		// If cursor billboard not existing, create new one
 		if (!_fe3d.billboardEntity_isExisting("cursor"))
 		{
-			_fe3d.billboardEntity_add("cursor", "", _fontPath, Vec3(1.0f), Vec3(0.0f), Vec3(0.0f), _textCharacterSize, 0, 0);
+			_fe3d.billboardEntity_add("cursor", "", FONT_PATH, Vec3(1.0f), Vec3(0.0f), Vec3(0.0f), TEXT_CHARACTER_SIZE, 0, 0);
 		}
 
 		// Update cursor billboard text & position
@@ -472,13 +472,13 @@ void ScriptEditor::_updateTextWriter()
 		if (cursorCharIndex == 0) // Default line position
 		{
 			Vec3 linePosition = _fe3d.billboardEntity_getPosition(to_string(cursorLineIndex));
-			position = Vec3(_scriptTextStartingPosition.x + _horizontalLineOffset - _horizontalCharacterOffset, linePosition.y, linePosition.z);
+			position = Vec3(SCRIPT_TEXT_STARTING_POSITION.x + HORIZONTAL_LINE_OFFSET - HORIZONTAL_CHARACTER_OFFSET, linePosition.y, linePosition.z);
 		}
 		else // Mid-text position
 		{
 			position = _fe3d.billboardEntity_getPosition(to_string(cursorLineIndex) + "_" + to_string(cursorCharIndex - 1));
 		}
-		position += Vec3(_textCharacterSize.x / 2.0f, 0.0f, 0.0f);
+		position += Vec3(TEXT_CHARACTER_SIZE.x / 2.0f, 0.0f, 0.0f);
 		_fe3d.billboardEntity_setPosition("cursor", position);
 		bool showBar = ((barEnabled && _firstSelectedLineIndex == -1) || _activeActionKey != InputType::NONE);
 		_fe3d.billboardEntity_setTextContent("cursor", (showBar ? "|" : " "));

@@ -13,7 +13,7 @@ EngineGuiWriteField::EngineGuiWriteField(
 	_minusAllowed(minusAllowed)
 {
 	// Initial text content
-	_fe3d.textEntity_setTextContent(_textfield->getEntityID(), "|", _charWidth);
+	_fe3d.textEntity_setTextContent(_textfield->getEntityID(), "|", CHAR_WIDTH);
 }
 
 void EngineGuiWriteField::update(bool hoverable)
@@ -45,12 +45,12 @@ void EngineGuiWriteField::_updateTyping()
 {
 	if (_isActive)
 	{
-		static int passedBarFrames = _maxPassedBarFrames;
-		static int passedBackspaceFrames = _maxPassedBackspaceFrames;
+		static int passedBarFrames = MAX_PASSED_BAR_FRAMES;
+		static int passedBackspaceFrames = MAX_PASSED_BACKSPACE_FRAMES;
 		static bool barEnabled = true;
 
 		// Update bar animation time
-		if (passedBarFrames >= _maxPassedBarFrames)
+		if (passedBarFrames >= MAX_PASSED_BAR_FRAMES)
 		{
 			passedBarFrames = 0;
 			
@@ -63,7 +63,7 @@ void EngineGuiWriteField::_updateTyping()
 		}
 
 		// Check if not writing out of border
-		if ((float(_currentTextContent.size()) * _charWidth) < _textfield->getOriginalSize().x)
+		if ((float(_currentTextContent.size()) * CHAR_WIDTH) < _textfield->getOriginalSize().x)
 		{
 			// Letter characters
 			string letterCharacters = " abcdefghijklmnopqrstuvwxyz";
@@ -193,7 +193,7 @@ void EngineGuiWriteField::_updateTyping()
 		if (_fe3d.input_getKeyDown(InputType::KEY_BACKSPACE))
 		{
 			// Check if enough time passed
-			if (passedBackspaceFrames >= _maxPassedBackspaceFrames)
+			if (passedBackspaceFrames >= MAX_PASSED_BACKSPACE_FRAMES)
 			{
 				passedBackspaceFrames = 0;
 
@@ -213,11 +213,11 @@ void EngineGuiWriteField::_updateTyping()
 		}
 		else
 		{
-			passedBackspaceFrames = _maxPassedBackspaceFrames;
+			passedBackspaceFrames = MAX_PASSED_BACKSPACE_FRAMES;
 		}
 
 		// Update text content with or without bar
-		_fe3d.textEntity_setTextContent(_textfield->getEntityID(), _currentTextContent + (barEnabled ? "|" : " "), _charWidth);
+		_fe3d.textEntity_setTextContent(_textfield->getEntityID(), _currentTextContent + (barEnabled ? "|" : " "), CHAR_WIDTH);
 
 		// Input confirmation
 		if (_fe3d.input_getKeyPressed(InputType::KEY_ENTER))
@@ -232,7 +232,7 @@ void EngineGuiWriteField::_updateTyping()
 	else
 	{
 		// Update text content
-		_fe3d.textEntity_setTextContent(_textfield->getEntityID(), _currentTextContent, _charWidth);
+		_fe3d.textEntity_setTextContent(_textfield->getEntityID(), _currentTextContent, CHAR_WIDTH);
 		_confirmedInput = false;
 	}
 }

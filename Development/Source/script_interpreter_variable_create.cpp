@@ -48,12 +48,12 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 	}
 
 	// Check if variable type is valid
-	if (typeString == _listKeyword    ||
-		typeString == _vec3Keyword    || 
-		typeString == _stringKeyword  || 
-		typeString == _decimalKeyword || 
-		typeString == _integerKeyword || 
-		typeString == _booleanKeyword)
+	if (typeString == LIST_KEYWORD    ||
+		typeString == VEC3_KEYWORD    || 
+		typeString == STRING_KEYWORD  || 
+		typeString == DECIMAL_KEYWORD || 
+		typeString == INTEGER_KEYWORD || 
+		typeString == BOOLEAN_KEYWORD)
 	{
 		// Validate variable name
 		bool validName = !nameString.empty() &&
@@ -64,10 +64,10 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 			(isalnum(nameString.front()) || nameString.front() == '_');
 
 		// Forbidden variable names
-		for (auto& word : { _metaKeyword, _executeKeyword, _loopKeyword, _breakKeyword, _ifKeyword, _elifKeyword, _elseKeyword, _globalKeyword,
-			_constKeyword, _editKeyword, _listKeyword, _vec3Keyword, _stringKeyword, _decimalKeyword, _integerKeyword, _booleanKeyword, _isKeyword,
-			_notKeyword, _andKeyword, _orKeyword, _moreKeyword, _lessKeyword, _additionKeyword, _subtractionKeyword, _multiplicationKeyword, 
-			_divisionKeyword, _negationKeyword, _castingKeyword, _pushingKeyword, _pullingKeyword, _passKeyword })
+		for (auto& word : { META_KEYWORD, EXECUTE_KEYWORD, LOOP_KEYWORD, BREAK_KEYWORD, IF_KEYWORD, ELIF_KEYWORD, ELSE_KEYWORD, GLOBAL_KEYWORD,
+			CONST_KEYWORD, EDIT_KEYWORD, LIST_KEYWORD, VEC3_KEYWORD, STRING_KEYWORD, DECIMAL_KEYWORD, INTEGER_KEYWORD, BOOLEAN_KEYWORD, IS_KEYWORD,
+			NOT_KEYWORD, AND_KEYWORD, OR_KEYWORD, MORE_KEYWORD, LESS_KEYWORD, ADDITION_KEYWORD, SUBTRACTION_KEYWORD, MULTIPLICATION_KEYWORD, 
+			DIVISION_KEYWORD, NEGATION_KEYWORD, CASTING_KEYWORD, PUSHING_KEYWORD, PULLING_KEYWORD, PASS_KEYWORD })
 		{
 			validName = validName && (nameString != word);
 		}
@@ -149,7 +149,7 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 				}
 
 				// Check if value is of the right type
-				if (typeString == _listKeyword && _isListValue(valueString)) // LIST
+				if (typeString == LIST_KEYWORD && _isListValue(valueString)) // LIST
 				{
 					// Removing the "" around the string content
 					string listString = valueString.substr(1);
@@ -159,12 +159,12 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 					auto values = _extractValuesFromListString(listString);
 					variableList.push_back(ScriptVariable(_fe3d, scope, ScriptVariableType::MULTIPLE, nameString, isConstant, values));
 				}
-				else if (typeString == _vec3Keyword && _isVec3Value(valueString)) // VEC3
+				else if (typeString == VEC3_KEYWORD && _isVec3Value(valueString)) // VEC3
 				{
 					auto value = ScriptValue(_fe3d, ScriptValueType::VEC3, _extractVec3FromString(valueString));
 					variableList.push_back(ScriptVariable(_fe3d, scope, ScriptVariableType::SINGLE, nameString, isConstant, { value }));
 				}
-				else if (typeString == _stringKeyword && _isStringValue(valueString)) // STRING
+				else if (typeString == STRING_KEYWORD && _isStringValue(valueString)) // STRING
 				{
 					// Removing the "" around the string content
 					valueString.erase(valueString.begin());
@@ -174,22 +174,22 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 					auto value = ScriptValue(_fe3d, ScriptValueType::STRING, valueString);
 					variableList.push_back(ScriptVariable(_fe3d, scope, ScriptVariableType::SINGLE, nameString, isConstant, { value }));
 				}
-				else if (typeString == _decimalKeyword && _isDecimalValue(valueString)) // DECIMAL
+				else if (typeString == DECIMAL_KEYWORD && _isDecimalValue(valueString)) // DECIMAL
 				{
 					auto value = ScriptValue(_fe3d, ScriptValueType::DECIMAL, stof(valueString));
 					variableList.push_back(ScriptVariable(_fe3d, scope, ScriptVariableType::SINGLE, nameString, isConstant, { value }));
 				}
-				else if (typeString == _integerKeyword && _isIntegerValue(valueString)) // INTEGER
+				else if (typeString == INTEGER_KEYWORD && _isIntegerValue(valueString)) // INTEGER
 				{
 					auto value = ScriptValue(_fe3d, ScriptValueType::INTEGER, stoi(valueString));
 					variableList.push_back(ScriptVariable(_fe3d, scope, ScriptVariableType::SINGLE, nameString, isConstant, { value }));
 				}
-				else if (typeString == _booleanKeyword && _isBooleanValue(valueString)) // BOOLEAN - normal
+				else if (typeString == BOOLEAN_KEYWORD && _isBooleanValue(valueString)) // BOOLEAN - normal
 				{
 					auto value = ScriptValue(_fe3d, ScriptValueType::BOOLEAN, (valueString == "<true>"));
 					variableList.push_back(ScriptVariable(_fe3d, scope, ScriptVariableType::SINGLE, nameString, isConstant, { value }));
 				}
-				else if (typeString == _booleanKeyword && (valueString.front() == '(' && valueString.back() == ')')) // BOOLEAN - condition
+				else if (typeString == BOOLEAN_KEYWORD && (valueString.front() == '(' && valueString.back() == ')')) // BOOLEAN - condition
 				{
 					// Removing the ( ) around the string content
 					valueString.erase(valueString.begin());
@@ -213,7 +213,7 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 						return;
 					}
 
-					if (typeString == _listKeyword) // Check if variable is an array
+					if (typeString == LIST_KEYWORD) // Check if variable is an array
 					{
 						variableList.push_back(ScriptVariable(_fe3d, scope, ScriptVariableType::MULTIPLE, nameString, isConstant, values));
 					}
@@ -226,11 +226,11 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 						_throwScriptError("function returned too many values!");
 					}
 					else if
-						(((typeString == _vec3Keyword)	 && (values[0].getType() == ScriptValueType::VEC3))    || 
-						((typeString == _stringKeyword)  && (values[0].getType() == ScriptValueType::STRING))  ||
-						((typeString == _decimalKeyword) && (values[0].getType() == ScriptValueType::DECIMAL)) ||
-						((typeString == _integerKeyword) && (values[0].getType() == ScriptValueType::INTEGER)) ||
-						((typeString == _booleanKeyword) && (values[0].getType() == ScriptValueType::BOOLEAN)))
+						(((typeString == VEC3_KEYWORD)	 && (values[0].getType() == ScriptValueType::VEC3))    || 
+						((typeString == STRING_KEYWORD)  && (values[0].getType() == ScriptValueType::STRING))  ||
+						((typeString == DECIMAL_KEYWORD) && (values[0].getType() == ScriptValueType::DECIMAL)) ||
+						((typeString == INTEGER_KEYWORD) && (values[0].getType() == ScriptValueType::INTEGER)) ||
+						((typeString == BOOLEAN_KEYWORD) && (values[0].getType() == ScriptValueType::BOOLEAN)))
 					{
 						variableList.push_back(ScriptVariable(_fe3d, scope, ScriptVariableType::SINGLE, nameString, isConstant, values));
 					} 
@@ -305,7 +305,7 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 						}
 					
 						// Check if using part of vec3 variable as value
-						if (typeString == _decimalKeyword && vec3Parts != Ivec3(0))
+						if (typeString == DECIMAL_KEYWORD && vec3Parts != Ivec3(0))
 						{ 
 							// Determine part of vec3 variable
 							if (vec3Parts.x)
@@ -329,11 +329,11 @@ void ScriptInterpreter::_processVariableCreation(const string& scriptLine, Scrip
 						}
 						else if // Check if the value types match
 							((otherVariable.getType() == ScriptVariableType::SINGLE || isAccessingList) &&
-							((typeString == _vec3Keyword   && otherVariable.getValue(valueIndex).getType() == ScriptValueType::VEC3)	||
-							(typeString == _stringKeyword  && otherVariable.getValue(valueIndex).getType() == ScriptValueType::STRING)  ||
-							(typeString == _decimalKeyword && otherVariable.getValue(valueIndex).getType() == ScriptValueType::DECIMAL) ||
-							(typeString == _integerKeyword && otherVariable.getValue(valueIndex).getType() == ScriptValueType::INTEGER) ||
-							(typeString == _booleanKeyword && otherVariable.getValue(valueIndex).getType() == ScriptValueType::BOOLEAN)))
+							((typeString == VEC3_KEYWORD   && otherVariable.getValue(valueIndex).getType() == ScriptValueType::VEC3)	||
+							(typeString == STRING_KEYWORD  && otherVariable.getValue(valueIndex).getType() == ScriptValueType::STRING)  ||
+							(typeString == DECIMAL_KEYWORD && otherVariable.getValue(valueIndex).getType() == ScriptValueType::DECIMAL) ||
+							(typeString == INTEGER_KEYWORD && otherVariable.getValue(valueIndex).getType() == ScriptValueType::INTEGER) ||
+							(typeString == BOOLEAN_KEYWORD && otherVariable.getValue(valueIndex).getType() == ScriptValueType::BOOLEAN)))
 						{
 							variableList.push_back(ScriptVariable(_fe3d, scope, ScriptVariableType::SINGLE, nameString, isConstant, 
 								{ otherVariable.getValue(valueIndex) }));

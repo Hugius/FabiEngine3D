@@ -31,7 +31,7 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 	_executionDepth++;
 
 	// Detect infinite recursion
-	if (_executionDepth >= _maxExecutionDepth)
+	if (_executionDepth >= MAX_EXECUTION_DEPTH)
 	{
 		_fe3d.logger_throwWarning("too many script execution layers, perhaps infinite recursion?");
 	}
@@ -77,7 +77,7 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 		}
 		
 		// Check if indentation syntax is correct
-		if ((countedSpaces % _spacesPerIndent) == 0)
+		if ((countedSpaces % SPACES_PER_INDENT) == 0)
 		{
 			scriptLineText.erase(0, countedSpaces); // Remove front spaces
 		}
@@ -88,7 +88,7 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 		}
 
 		// Calculate current scope depth
-		unsigned int currentLineScopeDepth = countedSpaces / _spacesPerIndent;
+		unsigned int currentLineScopeDepth = countedSpaces / SPACES_PER_INDENT;
 		
 		// Detect end of loop
 		bool endOfLoop = false;
@@ -96,7 +96,7 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 		{
 			if (currentLineScopeDepth <= loopScopeDepths.back()) // End of current loop scope
 			{
-				if (totalLoops >= _maxLoopsPerFrame) // Infinite loop
+				if (totalLoops >= MAX_LOOPS_PER_FRAME) // Infinite loop
 				{
 					_throwScriptError("maximum amount of loops reached, perhaps infinite looping?");
 					return;
@@ -112,7 +112,7 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 			}
 			else if (lineIndex == scriptFile->getLineCount() - 1) // End of script
 			{
-				if (totalLoops >= _maxLoopsPerFrame) // Infinite loop
+				if (totalLoops >= MAX_LOOPS_PER_FRAME) // Infinite loop
 				{
 					_throwScriptError("maximum amount of loops reached, perhaps infinite looping?");
 					return;
@@ -147,8 +147,8 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 
 		// Cannot start a new statement at the end of the script
 		if (lineIndex == scriptFile->getLineCount() - 1 &&
-			(scriptLineText.substr(0, _loopKeyword.size()) == _loopKeyword || scriptLineText.substr(0, _ifKeyword.size()) == _ifKeyword ||
-			scriptLineText.substr(0, _elifKeyword.size()) == _elifKeyword || scriptLineText.substr(0, _elseKeyword.size()) == _elseKeyword))
+			(scriptLineText.substr(0, LOOP_KEYWORD.size()) == LOOP_KEYWORD || scriptLineText.substr(0, IF_KEYWORD.size()) == IF_KEYWORD ||
+			scriptLineText.substr(0, ELIF_KEYWORD.size()) == ELIF_KEYWORD || scriptLineText.substr(0, ELSE_KEYWORD.size()) == ELSE_KEYWORD))
 		{
 			_throwScriptError("no statement allowed as the last line!");
 			return;
@@ -167,7 +167,7 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 		{
 			_processMiscellaneousFunctionCall(scriptLineText);
 		}
-		else if (scriptLineText.substr(0, _executeKeyword.size() + 1) == _executeKeyword + " ") // Execute another script
+		else if (scriptLineText.substr(0, EXECUTE_KEYWORD.size() + 1) == EXECUTE_KEYWORD + " ") // Execute another script
 		{
 			// Determine scriptname to execute and current script type
 			std::istringstream iss(scriptLineText);
@@ -220,10 +220,10 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 				return;
 			}
 		}
-		else if (scriptLineText.substr(0, _loopKeyword.size()) == _loopKeyword) // Loop statement
+		else if (scriptLineText.substr(0, LOOP_KEYWORD.size()) == LOOP_KEYWORD) // Loop statement
 		{
 			// Check if "loop" statement ends with colon
-			if (scriptLineText == (_loopKeyword + ":"))
+			if (scriptLineText == (LOOP_KEYWORD + ":"))
 			{
 				loopScopeDepths.push_back(scopeDepth); // Save loop's scope depth
 				loopLineIndices.push_back(lineIndex); // Save loop's line index
@@ -236,13 +236,13 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 				return;
 			}
 		}
-		else if (scriptLineText.substr(0, _ifKeyword.size() + 1) == _ifKeyword + " ") // If statement
+		else if (scriptLineText.substr(0, IF_KEYWORD.size() + 1) == IF_KEYWORD + " ") // If statement
 		{
 			// Check if "if" statement ends with colon
 			if (scriptLineText.back() == ':')
 			{
 				// Extract condition string
-				string conditionString = scriptLineText.substr((_ifKeyword.size() + 1), scriptLineText.size() - (_ifKeyword.size() + 2));
+				string conditionString = scriptLineText.substr((IF_KEYWORD.size() + 1), scriptLineText.size() - (IF_KEYWORD.size() + 2));
 
 				// Check the condition of the if statement
 				if (_checkConditionString(conditionString))
@@ -263,7 +263,7 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 				return;
 			}
 		}
-		else if (scriptLineText.substr(0, _elifKeyword.size() + 1) == _elifKeyword + " ") // Else if statement
+		else if (scriptLineText.substr(0, ELIF_KEYWORD.size() + 1) == ELIF_KEYWORD + " ") // Else if statement
 		{
 			// Check if "elif" statement ends with colon
 			if (scriptLineText.back() == ':')
@@ -275,7 +275,7 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 				{
 
 					// Extract condition string
-					string conditionString = scriptLineText.substr((_elifKeyword.size() + 1), scriptLineText.size() - (_elifKeyword.size() + 2));
+					string conditionString = scriptLineText.substr((ELIF_KEYWORD.size() + 1), scriptLineText.size() - (ELIF_KEYWORD.size() + 2));
 
 					// Set to elif statement
 					_getLastConditionStatement(conditionStatements, scopeDepth)->type = ScriptConditionType::ELIF;
@@ -305,7 +305,7 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 				return;
 			}
 		}
-		else if (scriptLineText.substr(0, _elseKeyword.size()) == _elseKeyword) // Else statement
+		else if (scriptLineText.substr(0, ELSE_KEYWORD.size()) == ELSE_KEYWORD) // Else statement
 		{
 			// Check if "else" statement ends with colon
 			if (scriptLineText.back() == ':')
@@ -317,7 +317,7 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 				{
 
 					// Check if the statement does not have a condition
-					if (scriptLineText.size() == (_elseKeyword.size() + 1))
+					if (scriptLineText.size() == (ELSE_KEYWORD.size() + 1))
 					{
 						// Set to else statement
 						_getLastConditionStatement(conditionStatements, scopeDepth)->type = ScriptConditionType::ELSE;
@@ -354,56 +354,56 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 		}
 		else if // Create local variable
 			(
-				scriptLineText.substr(0, _constKeyword.size()   + 1) == _constKeyword   + " " ||
-				scriptLineText.substr(0, _listKeyword.size()    + 1) == _listKeyword    + " " ||
-				scriptLineText.substr(0, _vec3Keyword.size()    + 1) == _vec3Keyword    + " " ||
-				scriptLineText.substr(0, _stringKeyword.size()  + 1) == _stringKeyword  + " " ||
-				scriptLineText.substr(0, _decimalKeyword.size() + 1) == _decimalKeyword + " " ||
-				scriptLineText.substr(0, _integerKeyword.size() + 1) == _integerKeyword + " " ||
-				scriptLineText.substr(0, _booleanKeyword.size() + 1) == _booleanKeyword + " "
+				scriptLineText.substr(0, CONST_KEYWORD.size()   + 1) == CONST_KEYWORD   + " " ||
+				scriptLineText.substr(0, LIST_KEYWORD.size()    + 1) == LIST_KEYWORD    + " " ||
+				scriptLineText.substr(0, VEC3_KEYWORD.size()    + 1) == VEC3_KEYWORD    + " " ||
+				scriptLineText.substr(0, STRING_KEYWORD.size()  + 1) == STRING_KEYWORD  + " " ||
+				scriptLineText.substr(0, DECIMAL_KEYWORD.size() + 1) == DECIMAL_KEYWORD + " " ||
+				scriptLineText.substr(0, INTEGER_KEYWORD.size() + 1) == INTEGER_KEYWORD + " " ||
+				scriptLineText.substr(0, BOOLEAN_KEYWORD.size() + 1) == BOOLEAN_KEYWORD + " "
 			)
 		{
 			_processVariableCreation(scriptLineText, ScriptVariableScope::LOCAL);
 		}
-		else if (scriptLineText.substr(0, _globalKeyword.size() + 1) == _globalKeyword + " ") // Create global variable
+		else if (scriptLineText.substr(0, GLOBAL_KEYWORD.size() + 1) == GLOBAL_KEYWORD + " ") // Create global variable
 		{
 			_processVariableCreation(scriptLineText, ScriptVariableScope::GLOBAL);
 		}
-		else if (scriptLineText.substr(0, _editKeyword.size() + 1) == _editKeyword + " ") // Edit existing variable
+		else if (scriptLineText.substr(0, EDIT_KEYWORD.size() + 1) == EDIT_KEYWORD + " ") // Edit existing variable
 		{
 			_processVariableAlteration(scriptLineText);
 		}
 		else if //Variable arithmetic
 			(
-				scriptLineText.substr(0, _additionKeyword.size() + 1) == _additionKeyword + " "				||
-				scriptLineText.substr(0, _subtractionKeyword.size() + 1) == _subtractionKeyword + " "		||
-				scriptLineText.substr(0, _multiplicationKeyword.size() + 1) == _multiplicationKeyword + " " ||
-				scriptLineText.substr(0, _divisionKeyword.size() + 1) == _divisionKeyword + " "				||
-				scriptLineText.substr(0, _negationKeyword.size() + 1) == _negationKeyword + " "
+				scriptLineText.substr(0, ADDITION_KEYWORD.size() + 1) == ADDITION_KEYWORD + " "				||
+				scriptLineText.substr(0, SUBTRACTION_KEYWORD.size() + 1) == SUBTRACTION_KEYWORD + " "		||
+				scriptLineText.substr(0, MULTIPLICATION_KEYWORD.size() + 1) == MULTIPLICATION_KEYWORD + " " ||
+				scriptLineText.substr(0, DIVISION_KEYWORD.size() + 1) == DIVISION_KEYWORD + " "				||
+				scriptLineText.substr(0, NEGATION_KEYWORD.size() + 1) == NEGATION_KEYWORD + " "
 			)
 		{
 			_processVariableArithmetic(scriptLineText);
 		}
-		else if (scriptLineText.substr(0, _castingKeyword.size() + 1) == _castingKeyword + " ") // Variable type casting
+		else if (scriptLineText.substr(0, CASTING_KEYWORD.size() + 1) == CASTING_KEYWORD + " ") // Variable type casting
 		{
 			_processVariableTypecast(scriptLineText);
 		}
-		else if (scriptLineText.substr(0, _pushingKeyword.size() + 1) == _pushingKeyword + " ") // Adding to list
+		else if (scriptLineText.substr(0, PUSHING_KEYWORD.size() + 1) == PUSHING_KEYWORD + " ") // Adding to list
 		{
 			_processListPush(scriptLineText);
 		}
-		else if (scriptLineText.substr(0, _pullingKeyword.size() + 1) == _pullingKeyword + " ") // Removing from list
+		else if (scriptLineText.substr(0, PULLING_KEYWORD.size() + 1) == PULLING_KEYWORD + " ") // Removing from list
 		{
 			_processListPull(scriptLineText);
 		}
-		else if (scriptLineText == _breakKeyword) // Breaking out of loop
+		else if (scriptLineText == BREAK_KEYWORD) // Breaking out of loop
 		{
 			scopeDepth = loopScopeDepths.back();
 			loopLineIndices.pop_back();
 			loopScopeDepths.pop_back();
 			_passedScopeChanger = true;
 		}
-		else if (scriptLineText == _passKeyword) // Passing current script line
+		else if (scriptLineText == PASS_KEYWORD) // Passing current script line
 		{
 			// <--- Purposely left blank
 		}

@@ -1,7 +1,7 @@
 #include "engine_gui_button.hpp"
 
 EngineGuiButton::EngineGuiButton(FabiEngine3D& fe3d, const string& parentID, const string& ID, Vec2 position, Vec2 size, Vec3 color, Vec3 hoverColor,
-	string textContent, Vec3 textColor, Vec3 textHoverColor, bool sizeIncreaseEnabled, bool colorChangeEnabled) :
+	string textContent, Vec3 textColor, Vec3 textHoverColor, bool sizeChangeEnabled, bool colorChangeEnabled) :
 	_fe3d(fe3d),
 	_ID(ID),
 	_parentID(parentID),
@@ -10,7 +10,7 @@ EngineGuiButton::EngineGuiButton(FabiEngine3D& fe3d, const string& parentID, con
 		Vec2(size.x * 0.8f, size.y * 0.7f), textContent, textColor)),
 	_hoverColor(hoverColor),
 	_textHoverColor(textHoverColor),
-	_sizeIncreaseEnabled(sizeIncreaseEnabled),
+	_sizeChangeEnabled(sizeChangeEnabled),
 	_colorChangeEnabled(colorChangeEnabled)
 {
 
@@ -23,7 +23,7 @@ EngineGuiButton::EngineGuiButton(FabiEngine3D& fe3d, const string& parentID, con
 	_parentID(parentID),
 	_rectangle(make_shared<EngineGuiRectangle>(fe3d, parentID + "_button", ID, position, size, texturePath)),
 	_hoverColor(hoverColor),
-	_sizeIncreaseEnabled(sizeIncreaseEnabled),
+	_sizeChangeEnabled(sizeIncreaseEnabled),
 	_colorChangeEnabled(colorChangeEnabled)
 {
 
@@ -57,17 +57,17 @@ void EngineGuiButton::_updateHovering(bool hoverable)
 					_isHovered = true;
 
 					// Update increased size
-					if (_sizeIncreaseEnabled)
+					if (_sizeChangeEnabled)
 					{
 						// Temporary values
 						string rectangleID = _rectangle->getEntityID();
 
 						// Slowly increase rectangle size
-						if (_fe3d.guiEntity_getSize(rectangleID).x < (_rectangle->getOriginalSize() * _totalSizeIncrease).x &&
-							_fe3d.guiEntity_getSize(rectangleID).y < (_rectangle->getOriginalSize() * _totalSizeIncrease).y)
+						if (_fe3d.guiEntity_getSize(rectangleID).x < (_rectangle->getOriginalSize() * TOTAL_SIZE_INCREASE).x &&
+							_fe3d.guiEntity_getSize(rectangleID).y < (_rectangle->getOriginalSize() * TOTAL_SIZE_INCREASE).y)
 						{
 							// Rectangle
-							_fe3d.guiEntity_setSize(rectangleID, _fe3d.guiEntity_getSize(rectangleID) * _increaseFactor);
+							_fe3d.guiEntity_setSize(rectangleID, _fe3d.guiEntity_getSize(rectangleID) * INCREASE_FACTOR);
 						}
 
 						// Slowly increase textfield size
@@ -75,10 +75,10 @@ void EngineGuiButton::_updateHovering(bool hoverable)
 						{
 							string textfieldID = _textfield->getEntityID();
 
-							if (_fe3d.textEntity_getSize(rectangleID).x < (_textfield->getOriginalSize() * _totalSizeIncrease).x &&
-								_fe3d.textEntity_getSize(rectangleID).y < (_textfield->getOriginalSize() * _totalSizeIncrease).y)
+							if (_fe3d.textEntity_getSize(rectangleID).x < (_textfield->getOriginalSize() * TOTAL_SIZE_INCREASE).x &&
+								_fe3d.textEntity_getSize(rectangleID).y < (_textfield->getOriginalSize() * TOTAL_SIZE_INCREASE).y)
 							{
-								_fe3d.textEntity_setSize(textfieldID, _fe3d.textEntity_getSize(textfieldID) * _increaseFactor);
+								_fe3d.textEntity_setSize(textfieldID, _fe3d.textEntity_getSize(textfieldID) * INCREASE_FACTOR);
 							}
 						}
 					}
@@ -110,7 +110,7 @@ void EngineGuiButton::_updateHovering(bool hoverable)
 				_fe3d.guiEntity_getSize(rectangleID).y > _rectangle->getOriginalSize().y)
 			{
 				// Rectangle
-				_fe3d.guiEntity_setSize(rectangleID, _fe3d.guiEntity_getSize(rectangleID) * _decreaseFactor);
+				_fe3d.guiEntity_setSize(rectangleID, _fe3d.guiEntity_getSize(rectangleID) * DECREASE_FACTOR);
 			}
 
 			// Set rectangle to default color
@@ -125,7 +125,7 @@ void EngineGuiButton::_updateHovering(bool hoverable)
 				if (_fe3d.textEntity_getSize(rectangleID).x > _textfield->getOriginalSize().x &&
 					_fe3d.textEntity_getSize(rectangleID).y > _textfield->getOriginalSize().y)
 				{
-					_fe3d.textEntity_setSize(textfieldID, _fe3d.textEntity_getSize(textfieldID) * _decreaseFactor);
+					_fe3d.textEntity_setSize(textfieldID, _fe3d.textEntity_getSize(textfieldID) * DECREASE_FACTOR);
 				}
 
 				// Set to default color

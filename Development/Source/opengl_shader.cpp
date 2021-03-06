@@ -40,14 +40,9 @@ OpenGLShader::OpenGLShader(const string& vertexFileName, const string& fragmentF
 	}
 
 	const GLchar* vShaderCode = vertexCode.c_str();
-	const GLchar * fShaderCode = fragmentCode.c_str();
+	const GLchar* fShaderCode = fragmentCode.c_str();
 
 	_createProgram(vShaderCode, fShaderCode);
-}
-
-OpenGLShader::~OpenGLShader()
-{
-
 }
 
 void OpenGLShader::_createProgram(const GLchar * vShaderCode, const GLchar * fShaderCode)

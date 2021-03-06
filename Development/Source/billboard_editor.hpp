@@ -40,11 +40,11 @@ private:
 	bool _isEditorLoaded = false;
 
 	// Vectors
-	const Vec3 _defaultCameraPosition = Vec3(0.0f, 2.5f, 5.0f);
-	const Vec3 _billboardPosition = Vec3(0.0f, 2.5f, 0.0f);
+	static inline const Vec3 DEFAULT_CAMERA_POSITION = Vec3(0.0f, 2.5f, 5.0f);
+	static inline const Vec3 BILLBOARD_POSITION = Vec3(0.0f, 2.5f, 0.0f);
 
 	// Floats
-	const float _scrollWheelDivider = 250.0f;
+	static inline const float SCROLL_WHEEL_DIVIDER = 250.0f;
 	float _cameraRotationSpeed = 0.0f;
 	float _totalCameraRotation = 0.0f;
 

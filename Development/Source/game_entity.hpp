@@ -105,18 +105,18 @@ public:
 	const bool isSceneReflective() const;
 	const bool isSpecularLighted() const;
 	const bool isShadowed() const;
-	const bool hasDiffuseMap() const;
-	const bool hasLightMap() const;
-	const bool hasReflectionMap() const;
-	const bool hasNormalMap() const;
 	const bool isCameraStatic() const;
 	const bool isDepthMapIncluded() const;
 	const bool isLevelOfDetailed() const;
 	const bool isWireframed() const;
+	const bool hasDiffuseMap() const;
+	const bool hasLightMap() const;
+	const bool hasReflectionMap() const;
+	const bool hasNormalMap() const;
 
 private:
 	unsigned int _getPartIndex(string partName);
-	Vec3 _calculateAverage(vector<Vec3> elements);
+	Vec3 _calculateAverageValue(vector<Vec3> elements);
 
 	vector<string> _partNames;
 	vector<Matrix44> _modelMatrices;

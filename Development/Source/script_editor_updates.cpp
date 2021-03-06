@@ -89,36 +89,36 @@ void ScriptEditor::_updateMiscellaneous()
 			if (!_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isCursorInsideViewport())
 			{
 				// Camera movement input
-				if (_fe3d.input_getMouseWheelY() == -1 && lineCount > (_maxVisibleLines - 1))
+				if (_fe3d.input_getMouseWheelY() == -1 && lineCount > (MAX_VISIBLE_LINES - 1))
 				{
-					_scrollingAcceleration -= _scrollingSpeed;
+					_scrollingAcceleration -= SCROLLING_SPEED;
 				}
 				else if (_fe3d.input_getMouseWheelY() == 1)
 				{
-					_scrollingAcceleration += _scrollingSpeed;
+					_scrollingAcceleration += SCROLLING_SPEED;
 				}
 			}
 
 			// Camera must not go out of screen (upwards)
-			if (_fe3d.camera_getPosition().y > _cameraStartingPosition.y)
+			if (_fe3d.camera_getPosition().y > DEFAULT_CAMERA_POSITION.y)
 			{
 				_scrollingAcceleration = 0.0f;
-				_fe3d.camera_setPosition(_cameraStartingPosition);
+				_fe3d.camera_setPosition(DEFAULT_CAMERA_POSITION);
 			}
-			else if (_fe3d.camera_getPosition().y == _cameraStartingPosition.y && _scrollingAcceleration > 0.0f) // Trying to scroll up
+			else if (_fe3d.camera_getPosition().y == DEFAULT_CAMERA_POSITION.y && _scrollingAcceleration > 0.0f) // Trying to scroll up
 			{
 				_scrollingAcceleration = 0.0f;
 			}
 
 			// Check if code is out of screen
-			if (lineCount > (_maxVisibleLines - 1))
+			if (lineCount > (MAX_VISIBLE_LINES - 1))
 			{
-				if (_fe3d.camera_getPosition().y < (lastLineHeight + _cameraOffset)) // Camera must not go out of screen
+				if (_fe3d.camera_getPosition().y < (lastLineHeight + CAMERA_OFFSET)) // Camera must not go out of screen
 				{
 					_scrollingAcceleration = 0.0f;
-					_fe3d.camera_setPosition(Vec3(_cameraStartingPosition.x, lastLineHeight + _cameraOffset, _cameraStartingPosition.z));
+					_fe3d.camera_setPosition(Vec3(DEFAULT_CAMERA_POSITION.x, lastLineHeight + CAMERA_OFFSET, DEFAULT_CAMERA_POSITION.z));
 				}
-				else if (_fe3d.camera_getPosition().y == (lastLineHeight + _cameraOffset) && _scrollingAcceleration < 0.0f) // Trying to scroll down
+				else if (_fe3d.camera_getPosition().y == (lastLineHeight + CAMERA_OFFSET) && _scrollingAcceleration < 0.0f) // Trying to scroll down
 				{
 					_scrollingAcceleration = 0.0f;
 				}
@@ -126,22 +126,22 @@ void ScriptEditor::_updateMiscellaneous()
 			else // Reset camera position if too little amount of lines
 			{
 				_scrollingAcceleration = 0.0f;
-				_fe3d.camera_setPosition(_cameraStartingPosition);
+				_fe3d.camera_setPosition(DEFAULT_CAMERA_POSITION);
 			}
 
 			// Synchronize camera position whenever writers adds or removes a line
 			static unsigned int lastLineIndex = currentLineIndex;
-			if ((currentLineIndex > (_maxVisibleLines - 1)) && (currentLineIndex != lastLineIndex) && (currentLineIndex == lineCount - 1))
+			if ((currentLineIndex > (MAX_VISIBLE_LINES - 1)) && (currentLineIndex != lastLineIndex) && (currentLineIndex == lineCount - 1))
 			{
 				_scrollingAcceleration = 0.0f;
 				float currentLineHeight = _fe3d.billboardEntity_getPosition(to_string(currentLineIndex)).y;
-				_fe3d.camera_setPosition(Vec3(_cameraStartingPosition.x, currentLineHeight + _cameraOffset, _cameraStartingPosition.z));
+				_fe3d.camera_setPosition(Vec3(DEFAULT_CAMERA_POSITION.x, currentLineHeight + CAMERA_OFFSET, DEFAULT_CAMERA_POSITION.z));
 			}
 			lastLineIndex = currentLineIndex;
 		}
 
 		// Smooth camera movement
-		_scrollingAcceleration = std::clamp(_scrollingAcceleration, -_maxScrollingAcceleration, _maxScrollingAcceleration);
+		_scrollingAcceleration = std::clamp(_scrollingAcceleration, -MAX_SCROLLING_ACCELERATION, MAX_SCROLLING_ACCELERATION);
 		_scrollingAcceleration *= 0.95f;
 		_fe3d.camera_translate(Vec3(0.0f, _scrollingAcceleration, 0.0f));
 

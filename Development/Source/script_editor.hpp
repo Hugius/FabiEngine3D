@@ -60,30 +60,29 @@ private:
 	unsigned int _passedFrames = 0;
 	
 	// Editor constants
-	const string _fontPath = "engine_assets\\fonts\\font.ttf";
-	const Vec3 _cameraStartingPosition = Vec3(0.0f, 0.0f, 10.0f);
-	const Vec3 _scriptTextStartingPosition = Vec3(-11.0f, 6.0f, 0.5f);
-	const Vec3 _lineNumberColor = Vec3(0.0f, 1.0f, 0.0f);
-	const Vec3 _characterColor = Vec3(1.0f);
-	const Vec3 _selectionColor = Vec3(0.15f);
-	const Vec3 _separatorColor = Vec3(1.0f, 0.85f, 0.0f);
-	const Vec2 _textCharacterSize = Vec2(0.25f, 0.75f);
-	const unsigned int _continuousTextActionFrameMinimum = 75;
-	const unsigned int _continuousTextActionInterval = 5;
-	const unsigned int _maxPassedBarFrames = 50;
-	const unsigned int _maxCharactersPerLine = 88;
-	const unsigned int _maxLineAmount = 100;
-	const unsigned int _maxVisibleLines = 13;
-	const float _scrollingSpeed = 0.1f;
-	const float _maxScrollingAcceleration = 10.0f;
-	const float _horizontalCharacterOffset = 0.25f;
-	const float _verticalLineOffset = 1.0f;
-	const float _horizontalLineOffset = 1.0f;
-	const float _cameraOffset = (_verticalLineOffset * (_maxVisibleLines / 2.0f)) - (_textCharacterSize.y / 2.0f);
-	const float _aabbDepth = 0.05f;
-	const string _allWritableCharacters = " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*().,/;\'[]\\-=><?:\"{}|_+";
-	const string _letterCharacters = " abcdefghijklmnopqrstuvwxyz";
-	const vector<pair<char, char>> _numberCharacters =
+	static inline const string FONT_PATH = "engine_assets\\fonts\\font.ttf";
+	static inline const Vec3 DEFAULT_CAMERA_POSITION = Vec3(0.0f, 0.0f, 10.0f);
+	static inline const Vec3 SCRIPT_TEXT_STARTING_POSITION = Vec3(-11.0f, 6.0f, 0.5f);
+	static inline const Vec3 LINE_NUMBER_COLOR = Vec3(0.0f, 1.0f, 0.0f);
+	static inline const Vec3 CHARACTER_COLOR = Vec3(1.0f);
+	static inline const Vec3 SELECTION_COLOR = Vec3(0.15f);
+	static inline const Vec3 SEPARATOR_COLOR = Vec3(1.0f, 0.85f, 0.0f);
+	static inline const Vec2 TEXT_CHARACTER_SIZE = Vec2(0.25f, 0.75f);
+	static inline const unsigned int CONTINUOUS_TEXT_ACTION_FRAME_MINIMUM = 75;
+	static inline const unsigned int CONTINUOUS_TEXT_ACTION_INTERVAL = 5;
+	static inline const unsigned int MAX_PASSED_BAR_FRAMES = 50;
+	static inline const unsigned int MAX_CHARACTERS_PER_LINE = 88;
+	static inline const unsigned int MAX_LINE_AMOUNT = 100;
+	static inline const unsigned int MAX_VISIBLE_LINES = 13;
+	static inline const float SCROLLING_SPEED = 0.1f;
+	static inline const float MAX_SCROLLING_ACCELERATION = 10.0f;
+	static inline const float HORIZONTAL_CHARACTER_OFFSET = 0.25f;
+	static inline const float VERTICAL_LINE_OFFSET = 1.0f;
+	static inline const float HORIZONTAL_LINE_OFFSET = 1.0f;
+	static inline const float CAMERA_OFFSET = (VERTICAL_LINE_OFFSET * (MAX_VISIBLE_LINES / 2.0f)) - (TEXT_CHARACTER_SIZE.y / 2.0f);
+	static inline const float AABB_DEPTH = 0.05f;
+	static inline const string LETTER_CHARACTERS = " abcdefghijklmnopqrstuvwxyz";
+	static inline const vector<pair<char, char>> NUMBER_CHARACTERS =
 	{
 		{'0', ')'},
 		{'1', '!'},
@@ -96,7 +95,7 @@ private:
 		{'8', '*'},
 		{'9', '('}
 	};
-	const vector<pair<char, char>> _specialCharacters =
+	static inline const vector<pair<char, char>> SPECIAL_CHARACTERS =
 	{
 		{'.', '>'  },
 		{',', '<'  },
@@ -109,7 +108,7 @@ private:
 		{'-', '_'  },
 		{'=', '+'  }
 	};
-	const vector<InputType> _actionKeys =
+	static inline const vector<InputType> ACTION_KEYS =
 	{ 
 		InputType::KEY_ENTER, InputType::KEY_BACKSPACE, InputType::KEY_DELETE, 
 		InputType::KEY_LEFT, InputType::KEY_RIGHT, InputType::KEY_UP, InputType::KEY_DOWN

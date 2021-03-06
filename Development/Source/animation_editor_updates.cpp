@@ -235,7 +235,7 @@ void AnimationEditor::_updateCamera()
 		if (!_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isCursorInsideViewport())
 		{
 			// Add to acceleration
-			_cameraScrollingAcceleration += (float(-_fe3d.input_getMouseWheelY() / _scrollWheelDivider) * _cameraSpeed);
+			_cameraScrollingAcceleration += (float(-_fe3d.input_getMouseWheelY() / SCROLL_WHEEL_DIVIDER) * _cameraSpeed);
 		}
 		_cameraScrollingAcceleration *= 0.975f; // Slowing down (smoothing)
 
@@ -268,7 +268,7 @@ void AnimationEditor::_updateCamera()
 
 		// Calculate new camera position
 		float x = (_cameraDistance * sin(_totalCursorDifference.x));
-		float y = _minCameraHeight + (_cameraDistance * _totalCursorDifference.y);
+		float y = MIN_CAMERA_HEIGHT + (_cameraDistance * _totalCursorDifference.y);
 		float z = (_cameraDistance * cos(_totalCursorDifference.x));
 
 		// Update camera position

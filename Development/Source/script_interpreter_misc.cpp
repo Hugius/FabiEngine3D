@@ -255,7 +255,7 @@ unsigned int ScriptInterpreter::_countFrontSpaces(const string& scriptLineText)
 bool ScriptInterpreter::_validateScopeChange(unsigned int countedSpaces, const string& scriptLineText, unsigned int& scopeDepth)
 {
 	// Calculate scope depth of current scriptline
-	unsigned int currentLineScopeDepth = countedSpaces / _spacesPerIndent;
+	unsigned int currentLineScopeDepth = countedSpaces / SPACES_PER_INDENT;
 
 	// Check if there is any code right after a scope change
 	if (_scopeHasChanged && ((currentLineScopeDepth != scopeDepth) || scriptLineText.substr(0, 3) == "///"))

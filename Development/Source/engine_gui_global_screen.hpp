@@ -90,11 +90,11 @@ private:
 	vector<shared_ptr<EngineGuiRectangle>> _rectangles;
 	vector<shared_ptr<EngineGuiTextfield>> _textfields;
 
-	const Vec3 _scrollListColor = Vec3(0.3f);
-	const Vec3 _buttonColor = Vec3(0.0f, 0.25f, 0.0f);
-	const Vec3 _buttonHoverColor = Vec3(0.0f, 0.25f, 0.0f);
-	const Vec3 _textColor = Vec3(1.0f);
-	const Vec3 _textHoverColor = Vec3(0.0f);
+	static inline const Vec3 SCROLL_LIST_COLOR = Vec3(0.3f);
+	static inline const Vec3 BUTTON_COLOR = Vec3(0.0f, 0.25f, 0.0f);
+	static inline const Vec3 BUTTON_HOVER_COLOR = Vec3(0.0f, 0.25f, 0.0f);
+	static inline const Vec3 TEXT_COLOR = Vec3(1.0f);
+	static inline const Vec3 TEXT_HOVER_COLOR = Vec3(0.0f);
 
 	vector<string> _valueFormIDs;
 	string _choiceFormID = "";

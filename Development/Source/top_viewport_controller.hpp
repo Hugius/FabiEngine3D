@@ -1,6 +1,6 @@
 #pragma once
 
-#include "viewport_controller.hpp"
+#include "base_viewport_controller.hpp"
 #include "environment_editor.hpp"
 #include "model_editor.hpp"
 #include "billboard_editor.hpp"
@@ -11,7 +11,7 @@
 
 #define TVPC TopViewportController
 
-class TopViewportController final : public ViewportController
+class TopViewportController final : public BaseViewportController
 {
 public:
 	TopViewportController(FabiEngine3D& fe3d, EngineGuiManager& gui, 
@@ -43,7 +43,7 @@ private:
 	void _updateProjectDeletion();
 	void _prepareProjectChoosing();
 	void _saveCurrentProject();
-	void _updateProjectChange();
+	void _applyProjectChange();
 
 	EnvironmentEditor& _environmentEditor;
 	ModelEditor& _modelEditor;

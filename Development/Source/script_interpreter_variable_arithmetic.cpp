@@ -19,14 +19,14 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 	}
 
 	// Only extract value if not negating
-	if (operatorString != _negationKeyword)
+	if (operatorString != NEGATION_KEYWORD)
 	{
 		iss >> valueString;
 	}
 
 	// Check if valid arithmetic keyword
-	if (operatorString != _additionKeyword && operatorString != _subtractionKeyword && operatorString != _multiplicationKeyword &&
-		operatorString != _divisionKeyword && operatorString != _negationKeyword)
+	if (operatorString != ADDITION_KEYWORD && operatorString != SUBTRACTION_KEYWORD && operatorString != MULTIPLICATION_KEYWORD &&
+		operatorString != DIVISION_KEYWORD && operatorString != NEGATION_KEYWORD)
 	{
 		_throwScriptError("invalid arithmetic operator!");
 		return;
@@ -119,7 +119,7 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 	}
 
 	// Negation arithmetic operation
-	if (operatorString == _negationKeyword)
+	if (operatorString == NEGATION_KEYWORD)
 	{
 		if (variableOne.getValue(valueIndexOne).getType() == ScriptValueType::INTEGER) // INTEGER variable
 		{
@@ -257,19 +257,19 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 			int result = variableOne.getValue(valueIndexOne).getInteger();
 
 			// Determine arithmetic type
-			if (operatorString == _additionKeyword)
+			if (operatorString == ADDITION_KEYWORD)
 			{
 				result += value.getInteger();
 			}
-			else if (operatorString == _subtractionKeyword)
+			else if (operatorString == SUBTRACTION_KEYWORD)
 			{
 				result -= value.getInteger();
 			}
-			else if (operatorString == _multiplicationKeyword)
+			else if (operatorString == MULTIPLICATION_KEYWORD)
 			{
 				result *= value.getInteger();
 			}
-			else if (operatorString == _divisionKeyword)
+			else if (operatorString == DIVISION_KEYWORD)
 			{
 				result /= value.getInteger();
 			}
@@ -283,19 +283,19 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 			float result = variableOne.getValue(valueIndexOne).getDecimal();
 
 			// Determine arithmetic type
-			if (operatorString == _additionKeyword)
+			if (operatorString == ADDITION_KEYWORD)
 			{
 				result += value.getDecimal();
 			}
-			else if (operatorString == _subtractionKeyword)
+			else if (operatorString == SUBTRACTION_KEYWORD)
 			{
 				result -= value.getDecimal();
 			}
-			else if (operatorString == _multiplicationKeyword)
+			else if (operatorString == MULTIPLICATION_KEYWORD)
 			{
 				result *= value.getDecimal();
 			}
-			else if (operatorString == _divisionKeyword)
+			else if (operatorString == DIVISION_KEYWORD)
 			{
 				result /= value.getDecimal();
 			}
@@ -310,19 +310,19 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 			Vec3 result = variableOne.getValue(valueIndexOne).getVec3();
 
 			// Determine arithmetic type
-			if (operatorString == _additionKeyword)
+			if (operatorString == ADDITION_KEYWORD)
 			{
 				result += value.getDecimal();
 			}
-			else if (operatorString == _subtractionKeyword)
+			else if (operatorString == SUBTRACTION_KEYWORD)
 			{
 				result -= value.getDecimal();
 			}
-			else if (operatorString == _multiplicationKeyword)
+			else if (operatorString == MULTIPLICATION_KEYWORD)
 			{
 				result *= value.getDecimal();
 			}
-			else if (operatorString == _divisionKeyword)
+			else if (operatorString == DIVISION_KEYWORD)
 			{
 				result /= value.getDecimal();
 			}
@@ -352,19 +352,19 @@ void ScriptInterpreter::_processVariableArithmetic(const string& scriptLine)
 			Vec3 result = variableOne.getValue(valueIndexOne).getVec3();
 
 			// Determine arithmetic type
-			if (operatorString == _additionKeyword)
+			if (operatorString == ADDITION_KEYWORD)
 			{
 				result += value.getVec3();
 			}
-			else if (operatorString == _subtractionKeyword)
+			else if (operatorString == SUBTRACTION_KEYWORD)
 			{
 				result -= value.getVec3();
 			}
-			else if (operatorString == _multiplicationKeyword)
+			else if (operatorString == MULTIPLICATION_KEYWORD)
 			{
 				result *= value.getVec3();
 			}
-			else if (operatorString == _divisionKeyword)
+			else if (operatorString == DIVISION_KEYWORD)
 			{
 				result /= value.getVec3();
 			}

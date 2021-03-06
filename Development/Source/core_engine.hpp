@@ -8,7 +8,7 @@
 #include "render_bus.hpp"
 #include "window_manager.hpp"
 #include "camera_manager.hpp"
-#include "render_engine.hpp"
+#include "render_manager.hpp"
 #include "sky_entity_manager.hpp"
 #include "terrain_entity_manager.hpp"
 #include "water_entity_manager.hpp"
@@ -44,7 +44,7 @@ private:
 	InputHandler           _inputHandler;
 	RenderBus			   _renderBus;
 	CameraManager          _cameraManager;
-	RenderEngine           _renderEngine;
+	RenderManager          _renderManager;
 	SkyEntityManager       _skyEntityManager;
 	TerrainEntityManager   _terrainEntityManager;
 	WaterEntityManager     _waterEntityManager;
@@ -55,7 +55,7 @@ private:
 	GuiEntityManager       _guiEntityManager;
 	TextEntityManager      _textEntityManager;
 	ShadowManager          _shadowManager;
-	RayCaster            _rayCaster;
+	RayCaster              _rayCaster;
 	CollisionDetector      _collisionDetector;
 	CollisionResolver      _collisionResolver;
 	Timer                  _timer;

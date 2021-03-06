@@ -13,6 +13,8 @@ struct ScriptConditionStatement final
 	}
 
 	const unsigned int scopeDepth;
+
 	bool conditionResult;
+
 	ScriptConditionType type;
 };

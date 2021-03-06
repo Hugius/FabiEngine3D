@@ -185,7 +185,7 @@ void EngineGuiGlobalScreen::addChoiceForm(const string& ID, string title, Vec2 p
 		// Add GUI elements
 		addRectangle(ID, position + Vec2(0.0f, 0.475f), Vec2(title.size() * 0.0275f, 0.125f), Vec3(0.0f));
 		addTextfield(ID, position + Vec2(0.0f, 0.475f), Vec2(title.size() * 0.025f, 0.1f), title, Vec3(1.0f));
-		addScrollingList(ID, position, Vec2(0.5, 0.75f), Vec3(_scrollListColor), _buttonColor, _buttonHoverColor, _textColor, _textHoverColor, Vec2(0.1f, 0.25f));
+		addScrollingList(ID, position, Vec2(0.5, 0.75f), Vec3(SCROLL_LIST_COLOR), BUTTON_COLOR, BUTTON_HOVER_COLOR, TEXT_COLOR, TEXT_HOVER_COLOR, Vec2(0.1f, 0.25f));
 		addButton("choice_form_cancel", position + Vec2(0.0f, -0.45f), Vec2(0.15f, 0.1f), Vec3(0.5f, 0.0f, 0.0f), Vec3(1.0f, 0.0f, 0.0f), "Cancel", Vec3(1.0f), Vec3(0.0f));
 
 		// Add buttons to scrolling list

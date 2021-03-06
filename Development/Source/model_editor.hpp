@@ -62,7 +62,7 @@ private:
 	vector<string> _meshFileNames;
 
 	// Vectors
-	const Vec3 DEFAULT_CAMERA_POSITION = Vec3(0.0f, 5.0f, 5.0f);
+	static inline const Vec3 DEFAULT_CAMERA_POSITION = Vec3(0.0f, 5.0f, 5.0f);
 	Vec3 _cameraLookatPosition = Vec3(0.0f);
 	Vec2 _totalCursorDifference = Vec2(0.0f, 0.5f);
 	Vec2 _cameraAcceleration = Vec2(0.0f);
@@ -73,8 +73,8 @@ private:
 	float _cameraScrollingAcceleration = 0.0f;
 	float _aabbTransformationSpeed = 0.1f;
 	float _cameraSpeed = 0.1f;
-	const float MIN_CAMERA_HEIGHT = 0.01f;
-	const float SCROLL_WHEEL_DIVIDER = 5.0f;
+	static inline const float MIN_CAMERA_HEIGHT = 0.01f;
+	static inline const float SCROLL_WHEEL_DIVIDER = 5.0f;
 
 	// Booleans
 	bool _isCreatingModel = false;

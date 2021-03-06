@@ -10,7 +10,7 @@ public:
 	EngineGuiButton(FabiEngine3D& fe3d, const string& parentID, const string& ID, Vec2 position, Vec2 size, Vec3 color, Vec3 hoverColor,
 		string textContent, Vec3 textColor, Vec3 textHoverColor, bool sizeIncreaseEnabled = true, bool colorChangeEnabled = true);
 	EngineGuiButton(FabiEngine3D& fe3d, const string& parentID, const string& ID, Vec2 position, Vec2 size,
-		const string& texturePath, Vec3 hoverColor, bool sizeIncreaseEnabled = true, bool colorChangeEnabled = true);
+		const string& texturePath, Vec3 hoverColor, bool sizeChangeEnabled = true, bool colorChangeEnabled = true);
 
 	virtual void update(bool hoverable);
 	void show();
@@ -43,10 +43,10 @@ protected:
 	void _updateHovering(bool hoverable);
 
 private:
-	const bool _sizeIncreaseEnabled = true;
-	const bool _colorChangeEnabled  = true;
+	const bool _sizeChangeEnabled;
+	const bool _colorChangeEnabled;
 
-	const float _totalSizeIncrease = 1.1f;
-	const float _increaseFactor = 1.003f;
-	const float _decreaseFactor = 0.997f;
+	static inline const float TOTAL_SIZE_INCREASE = 1.1f;
+	static inline const float INCREASE_FACTOR = 1.003f;
+	static inline const float DECREASE_FACTOR = 0.997f;
 };

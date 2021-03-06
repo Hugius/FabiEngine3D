@@ -97,7 +97,7 @@ void TopViewportController::_updateProjectCreation()
 
 				// Load current project
 				_currentProjectID = newProjectName;
-				_updateProjectChange();
+				_applyProjectChange();
 
 				// Load settings for this project
 				_settingsEditor.loadSettings();
@@ -123,7 +123,7 @@ void TopViewportController::_updateProjectLoading()
 		{
 			// Load current project
 			_currentProjectID = clickedButtonID;
-			_updateProjectChange();
+			_applyProjectChange();
 
 			// Load settings for this project
 			_settingsEditor.loadSettings();
@@ -187,7 +187,7 @@ void TopViewportController::_updateProjectDeletion()
 			{
 				// Unload current project
 				_currentProjectID = "";
-				_updateProjectChange();
+				_applyProjectChange();
 			}
 
 			// Check if project folder is still existing
@@ -241,4 +241,69 @@ void TopViewportController::_prepareProjectChoosing()
 	{
 		_fe3d.logger_throwError("User folder is corrupted!");
 	}
+}
+
+void TopViewportController::_applyProjectChange()
+{
+	// Change window title
+	if (_currentProjectID == "")
+	{
+		_fe3d.misc_setWindowTitle("FabiEngine3D");
+	}
+	else
+	{
+		_fe3d.misc_setWindowTitle("FabiEngine3D - " + _currentProjectID);
+	}
+
+	// Go back to main menu
+	_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
+
+	// Unload environment editor
+	if (_environmentEditor.isLoaded())
+	{
+		_environmentEditor.unload();
+	}
+
+	// Unload model editor
+	if (_modelEditor.isLoaded())
+	{
+		_modelEditor.unload();
+	}
+
+	// Unload animation editor
+	if (_animationEditor.isLoaded())
+	{
+		_animationEditor.unload();
+	}
+
+	// Unload billboard editor
+	if (_billboardEditor.isLoaded())
+	{
+		_billboardEditor.unload();
+	}
+
+	// Unload audio editor
+	if (_audioEditor.isLoaded())
+	{
+		_audioEditor.unload();
+	}
+
+	// Unload scene editor
+	if (_sceneEditor.isLoaded())
+	{
+		_sceneEditor.unload();
+	}
+
+	// Unload script editor (loaded by default)
+	_scriptEditor.unload();
+
+	// Pass loaded project name
+	_environmentEditor.setCurrentProjectID(_currentProjectID);
+	_modelEditor.setCurrentProjectID(_currentProjectID);
+	_animationEditor.setCurrentProjectID(_currentProjectID);
+	_billboardEditor.setCurrentProjectID(_currentProjectID);
+	_audioEditor.setCurrentProjectID(_currentProjectID);
+	_sceneEditor.setCurrentProjectID(_currentProjectID);
+	_scriptEditor.setCurrentProjectID(_currentProjectID);
+	_settingsEditor.setCurrentProjectID(_currentProjectID);
 }

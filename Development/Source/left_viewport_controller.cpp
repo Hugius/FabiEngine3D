@@ -3,7 +3,7 @@
 #define GW(text) LVPC::calcTextWidth(text, 0.125f, 1.8f)
 
 LeftViewportController::LeftViewportController(FabiEngine3D& fe3d, EngineGuiManager& gui) :
-	ViewportController(fe3d, gui),
+	BaseViewportController(fe3d, gui),
 	_environmentEditor(fe3d, gui),
 	_modelEditor(fe3d, gui),
 	_animationEditor(fe3d, gui, _modelEditor),

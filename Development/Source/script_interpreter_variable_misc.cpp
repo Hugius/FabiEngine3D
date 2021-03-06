@@ -36,31 +36,31 @@ void ScriptInterpreter::_processVariableTypecast(const string& scriptLine)
 	}
 
 	// Determine to which new type the variable must cast
-	if ((variable.getValue().getType() == ScriptValueType::INTEGER) && (typeString == _decimalKeyword)) // From integer to decimal
+	if ((variable.getValue().getType() == ScriptValueType::INTEGER) && (typeString == DECIMAL_KEYWORD)) // From integer to decimal
 	{
 		variable.changeValue(ScriptValue(_fe3d, ScriptValueType::DECIMAL, static_cast<float>(variable.getValue().getInteger())));
 	}
-	else if ((variable.getValue().getType() == ScriptValueType::DECIMAL) && (typeString == _integerKeyword)) // From decimal to integer
+	else if ((variable.getValue().getType() == ScriptValueType::DECIMAL) && (typeString == INTEGER_KEYWORD)) // From decimal to integer
 	{
 		variable.changeValue(ScriptValue(_fe3d, ScriptValueType::INTEGER, static_cast<int>(variable.getValue().getDecimal())));
 	}
-	else if ((variable.getValue().getType() == ScriptValueType::BOOLEAN) && (typeString == _integerKeyword)) // From boolean to integer
+	else if ((variable.getValue().getType() == ScriptValueType::BOOLEAN) && (typeString == INTEGER_KEYWORD)) // From boolean to integer
 	{
 		variable.changeValue(ScriptValue(_fe3d, ScriptValueType::INTEGER, static_cast<int>(variable.getValue().getBoolean())));
 	}
-	else if ((variable.getValue().getType() == ScriptValueType::INTEGER) && (typeString == _booleanKeyword)) // From integer to boolean
+	else if ((variable.getValue().getType() == ScriptValueType::INTEGER) && (typeString == BOOLEAN_KEYWORD)) // From integer to boolean
 	{
 		variable.changeValue(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, static_cast<bool>(variable.getValue().getInteger())));
 	}
-	else if ((variable.getValue().getType() == ScriptValueType::INTEGER) && (typeString == _stringKeyword)) // From integer to string
+	else if ((variable.getValue().getType() == ScriptValueType::INTEGER) && (typeString == STRING_KEYWORD)) // From integer to string
 	{
 		variable.changeValue(ScriptValue(_fe3d, ScriptValueType::STRING, to_string(variable.getValue().getInteger())));
 	}
-	else if ((variable.getValue().getType() == ScriptValueType::DECIMAL) && (typeString == _stringKeyword)) // From decimal to string
+	else if ((variable.getValue().getType() == ScriptValueType::DECIMAL) && (typeString == STRING_KEYWORD)) // From decimal to string
 	{
 		variable.changeValue(ScriptValue(_fe3d, ScriptValueType::STRING, to_string(variable.getValue().getDecimal())));
 	}
-	else if ((variable.getValue().getType() == ScriptValueType::STRING) && (typeString == _integerKeyword)) // From string to integer
+	else if ((variable.getValue().getType() == ScriptValueType::STRING) && (typeString == INTEGER_KEYWORD)) // From string to integer
 	{
 		// Check if string can be casted
 		if (_isIntegerValue(variable.getValue().getString()))
@@ -73,7 +73,7 @@ void ScriptInterpreter::_processVariableTypecast(const string& scriptLine)
 			return;
 		}
 	}
-	else if ((variable.getValue().getType() == ScriptValueType::STRING) && (typeString == _decimalKeyword)) // From string to decimal
+	else if ((variable.getValue().getType() == ScriptValueType::STRING) && (typeString == DECIMAL_KEYWORD)) // From string to decimal
 	{
 		// Check if string can be casted
 		if (_isDecimalValue(variable.getValue().getString()))

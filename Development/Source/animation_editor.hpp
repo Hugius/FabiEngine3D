@@ -71,7 +71,7 @@ private:
 	string _currentPartName	   = "";
 
 	// Vectors
-	const Vec3 _defaultCameraPosition = Vec3(0.0f, 5.0f, 5.0f);
+	static inline const Vec3 DEFAULT_CAMERA_POSITION = Vec3(0.0f, 5.0f, 5.0f);
 	Vec3 _cameraLookatPosition = Vec3(0.0f);
 	Vec2 _totalCursorDifference = Vec2(0.0f, 0.5f);
 	Vec2 _cameraAcceleration = Vec2(0.0f);
@@ -83,12 +83,11 @@ private:
 	float _partColorStrength = 0.0f;
 	float _colorChangingSpeed = 0.05f;
 	float _cameraSpeed = 0.1f;
-	const float _minCameraDistance = 1.0f;
-	const float _minCameraHeight = 1.0f;
-	const float _scrollWheelDivider = 5.0f;
+	static inline const float MIN_CAMERA_HEIGHT = 1.0f;
+	static inline const float SCROLL_WHEEL_DIVIDER = 5.0f;
 
 	// Integers
-	const unsigned int _maxFrameCount = 100;
+	static inline const unsigned int MAX_FRAME_COUNT = 100;
 	unsigned int _currentFrameIndex = 0;
 
 	// Booleans

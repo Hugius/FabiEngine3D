@@ -12,7 +12,7 @@ class OpenGLShader final
 {
 public:
 	OpenGLShader(const string& vertexFileName, const string& fragmentFileName);
-	~OpenGLShader();
+	~OpenGLShader() = default;
 
 	void bind();
 	void unbind();
@@ -24,9 +24,12 @@ public:
 	}
 
 private:
-	GLuint _program;
 	void _createProgram(const GLchar * vShaderCode, const GLchar * fShaderCode);
+
+	GLuint _program;
+
 	map<string, GLint> _uniformMap;
+
 	string _vertexFileName;
 	string _fragmentFileName;
 	string _name;

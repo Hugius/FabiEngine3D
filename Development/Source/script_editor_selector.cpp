@@ -72,7 +72,7 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 				if (_fe3d.input_getKeyPressed(InputType::KEY_ENTER))
 				{
 					// Check if not exceeding the line limit
-					if (_script.getScriptFile(_currentScriptFileID)->getLineCount() < _maxLineAmount)
+					if (_script.getScriptFile(_currentScriptFileID)->getLineCount() < MAX_LINE_AMOUNT)
 					{
 						_script.getScriptFile(_currentScriptFileID)->insertNewLine(cursorLineIndex, "");
 						cursorLineIndex++;
@@ -108,14 +108,14 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 				if (_fe3d.billboardEntity_getTextContent(textID).empty())
 				{
 					Vec3 lineTextPosition = _fe3d.billboardEntity_getPosition(textID) - Vec3(0.0f, 0.0f, 0.05f);
-					lineTextPosition.x = _scriptTextStartingPosition.x + _horizontalLineOffset;
-					_fe3d.billboardEntity_add(selectionID, _selectionColor, lineTextPosition, Vec3(0.0f), _textCharacterSize, false, false);
+					lineTextPosition.x = SCRIPT_TEXT_STARTING_POSITION.x + HORIZONTAL_LINE_OFFSET;
+					_fe3d.billboardEntity_add(selectionID, SELECTION_COLOR, lineTextPosition, Vec3(0.0f), TEXT_CHARACTER_SIZE, false, false);
 				}
 				else // Line is not empty
 				{
 					Vec3 lineTextPosition = _fe3d.billboardEntity_getPosition(textID) - Vec3(0.0f, 0.0f, 0.05f);
 					Vec2 lineTextSize = _fe3d.billboardEntity_getSize(textID);
-					_fe3d.billboardEntity_add(selectionID, _selectionColor, lineTextPosition, Vec3(0.0f), lineTextSize, false, false);
+					_fe3d.billboardEntity_add(selectionID, SELECTION_COLOR, lineTextPosition, Vec3(0.0f), lineTextSize, false, false);
 				}
 			}
 
@@ -192,7 +192,7 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 						}
 
 						// Try to create new line
-						if (_script.getScriptFile(_currentScriptFileID)->getLineCount() < _maxLineAmount)
+						if (_script.getScriptFile(_currentScriptFileID)->getLineCount() < MAX_LINE_AMOUNT)
 						{
 							_script.getScriptFile(_currentScriptFileID)->insertNewLine(cursorLineIndex + i, _copyClipboard[i]);
 							pastedAmount++;
@@ -208,7 +208,7 @@ void ScriptEditor::_updateTextSelector(string& newCharacters, unsigned int& curs
 					{
 						// Change cursor position
 						cursorLineIndex += (pastedAmount - static_cast<int>(firstLineEmpty));
-						cursorLineIndex = std::min(cursorLineIndex, (_maxLineAmount - 1));
+						cursorLineIndex = std::min(cursorLineIndex, (MAX_LINE_AMOUNT - 1));
 						cursorCharIndex = _script.getScriptFile(_currentScriptFileID)->getLineText(cursorLineIndex).size();
 
 						// Make sure the script gets re-rendered

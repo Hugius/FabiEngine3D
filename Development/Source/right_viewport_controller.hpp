@@ -1,13 +1,13 @@
 #pragma once
 
-#include "viewport_controller.hpp"
+#include "base_viewport_controller.hpp"
 
 #define RVPC RightViewportController
 
-class RightViewportController final : public ViewportController
+class RightViewportController final : public BaseViewportController
 {
 public:
-	using ViewportController::ViewportController;
+	using BaseViewportController::BaseViewportController;
 
 	void initialize() override;
 	void update() override;

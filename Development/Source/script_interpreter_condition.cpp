@@ -207,7 +207,7 @@ bool ScriptInterpreter::_checkConditionString(string conditionString)
 		}
 		else if(mustBeComparisonOperator)
 		{
-			if (elementString == _notKeyword || elementString == _isKeyword || elementString == _moreKeyword || elementString == _lessKeyword)
+			if (elementString == NOT_KEYWORD || elementString == IS_KEYWORD || elementString == MORE_KEYWORD || elementString == LESS_KEYWORD)
 			{
 				comparisonOperator = elementString;
 				mustBeComparisonOperator = false;
@@ -221,7 +221,7 @@ bool ScriptInterpreter::_checkConditionString(string conditionString)
 		}
 		else if (mustBeLogicalOperator)
 		{
-			if (elementString == _andKeyword || elementString == _orKeyword)
+			if (elementString == AND_KEYWORD || elementString == OR_KEYWORD)
 			{
 				logicalOperators.push_back(elementString);
 				mustBeLogicalOperator = false;
@@ -256,11 +256,11 @@ bool ScriptInterpreter::_checkConditionString(string conditionString)
 			return false;
 		}
 
-		if (logicalOperators[i - 1] == _andKeyword) // AND
+		if (logicalOperators[i - 1] == AND_KEYWORD) // AND
 		{
 			finalCondition = finalCondition && conditions[i];
 		}
-		else if(logicalOperators[i - 1] == _orKeyword) // OR
+		else if(logicalOperators[i - 1] == OR_KEYWORD) // OR
 		{
 			finalCondition = finalCondition || conditions[i];
 		}
@@ -279,14 +279,14 @@ bool ScriptInterpreter::_validateCondition(ScriptValue& firstValue, string compa
 	}
 	
 	// Check if not trying to compare string values with the wrong operator
-	if ((comparisonOperator == _moreKeyword || comparisonOperator == _lessKeyword) && firstValue.getType() == ScriptValueType::STRING)
+	if ((comparisonOperator == MORE_KEYWORD || comparisonOperator == LESS_KEYWORD) && firstValue.getType() == ScriptValueType::STRING)
 	{
 		_throwScriptError("invalid comparison operator for string values!");
 		return false;
 	}
 
 	// Check if not trying to compare boolean values with the wrong operator
-	if ((comparisonOperator == _moreKeyword || comparisonOperator == _lessKeyword) && firstValue.getType() == ScriptValueType::BOOLEAN)
+	if ((comparisonOperator == MORE_KEYWORD || comparisonOperator == LESS_KEYWORD) && firstValue.getType() == ScriptValueType::BOOLEAN)
 	{
 		_throwScriptError("invalid comparison operator for boolean values!");
 		return false;
@@ -298,7 +298,7 @@ bool ScriptInterpreter::_validateCondition(ScriptValue& firstValue, string compa
 
 bool ScriptInterpreter::_compareValues(ScriptValue& firstValue, string comparisonOperator, ScriptValue& secondValue)
 {
-	if (comparisonOperator == _isKeyword)
+	if (comparisonOperator == IS_KEYWORD)
 	{
 		if (firstValue.getType() == ScriptValueType::VEC3)
 		{
@@ -321,7 +321,7 @@ bool ScriptInterpreter::_compareValues(ScriptValue& firstValue, string compariso
 			return (firstValue.getBoolean() == secondValue.getBoolean());
 		}
 	}
-	else if (comparisonOperator == _notKeyword)
+	else if (comparisonOperator == NOT_KEYWORD)
 	{
 		if (firstValue.getType() == ScriptValueType::VEC3)
 		{
@@ -344,7 +344,7 @@ bool ScriptInterpreter::_compareValues(ScriptValue& firstValue, string compariso
 			return (firstValue.getBoolean() != secondValue.getBoolean());
 		}
 	}
-	else if (comparisonOperator == _moreKeyword)
+	else if (comparisonOperator == MORE_KEYWORD)
 	{
 		if (firstValue.getType() == ScriptValueType::DECIMAL)
 		{
@@ -355,7 +355,7 @@ bool ScriptInterpreter::_compareValues(ScriptValue& firstValue, string compariso
 			return (firstValue.getInteger() > secondValue.getInteger());
 		}
 	}
-	else if (comparisonOperator == _lessKeyword)
+	else if (comparisonOperator == LESS_KEYWORD)
 	{
 		if (firstValue.getType() == ScriptValueType::DECIMAL)
 		{

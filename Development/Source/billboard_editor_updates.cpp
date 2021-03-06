@@ -98,7 +98,7 @@ void BillboardEditor::_updateBillboardCreation()
 							_loadedBillboardIDs.push_back(newBillboardName);
 
 							// Miscellaneous
-							_fe3d.billboardEntity_add(newBillboardName, Vec3(1.0f),	_billboardPosition, Vec3(0.0f), Vec2(1.0f), false, false);
+							_fe3d.billboardEntity_add(newBillboardName, Vec3(1.0f),	BILLBOARD_POSITION, Vec3(0.0f), Vec2(1.0f), false, false);
 							_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID(), "Billboard: " +
 								_currentBillboardID.substr(1), 0.025f);
 							_fe3d.textEntity_show(_gui.getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID());
@@ -229,12 +229,12 @@ void BillboardEditor::_updateBillboardCamera()
 		{
 			Vec2 billboardSize = _fe3d.billboardEntity_getSize((_currentBillboardID != "") ? _currentBillboardID : _hoveredBillboardID);
 			float cameraDistance = (std::max(billboardSize.x, billboardSize.y));
-			float cameraHeight = _billboardPosition.y + (billboardSize.y / 2.0f);
+			float cameraHeight = BILLBOARD_POSITION.y + (billboardSize.y / 2.0f);
 
 			// Get scroll wheel input
 			if (!_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isCursorInsideViewport())
 			{
-				float rotationAcceleration = float(_fe3d.input_getMouseWheelY()) / _scrollWheelDivider;
+				float rotationAcceleration = float(_fe3d.input_getMouseWheelY()) / SCROLL_WHEEL_DIVIDER;
 				_cameraRotationSpeed += rotationAcceleration;
 			}
 			_cameraRotationSpeed *= 0.975f;
@@ -252,8 +252,8 @@ void BillboardEditor::_updateBillboardCamera()
 		else
 		{
 			// Set default camera
-			_fe3d.camera_setPosition(_defaultCameraPosition);
-			_fe3d.camera_setLookatPosition(_billboardPosition);
+			_fe3d.camera_setPosition(DEFAULT_CAMERA_POSITION);
+			_fe3d.camera_setLookatPosition(BILLBOARD_POSITION);
 		}
 	}
 }

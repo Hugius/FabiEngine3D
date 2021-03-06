@@ -159,7 +159,7 @@ private:
 	int _selectedModelLightnessMultiplier = 1;
 	int _activeModelLightnessMultiplier = 1;
 	bool _dontResetSelectedModel = false;
-	const float MODEL_BLINKING_SPEED = 0.025f;
+	static inline const float MODEL_BLINKING_SPEED = 0.025f;
 
 	// Billboard variables
 	vector<string> _loadedBillboardIDs;
@@ -170,18 +170,18 @@ private:
 	int _selectedBillboardLightnessMultiplier = 1;
 	int _activeBillboardLightnessMultiplier = 1;
 	bool _dontResetSelectedBillboard = false;
-	const float BILLBOARD_BLINKING_SPEED = 0.025f;
+	static inline const float BILLBOARD_BLINKING_SPEED = 0.025f;
 
 	// Lighting variables
 	vector<string> _loadedLightIDs;
 	bool _isPlacingPointlight = false;
-	const string PREVIEW_POINTLIGHT_ID = "@@previewPointlight";
-	const string LIGHTBULB_MODEL_PATH = "engine_assets\\meshes\\lamp.obj";
-	const Vec3 DEFAULT_LIGHTBULB_SIZE = Vec3(1.0f);
-	const Vec3 DEFAULT_LIGHTBULB_AABB_SIZE = Vec3(0.7f, 1.15f, 0.7f);
-	const float LIGHTBULB_ANIMATION_SPEED = 0.01f;
-	const float LIGHTING_CHANGING_SPEED = 0.01f;
-	const float LIGHTING_COLOR_CHANGING_SPEED = 0.005f;
+	static inline const string PREVIEW_POINTLIGHT_ID = "@@previewPointlight";
+	static inline const string LIGHTBULB_MODEL_PATH = "engine_assets\\meshes\\lamp.obj";
+	static inline const Vec3 DEFAULT_LIGHTBULB_SIZE = Vec3(1.0f);
+	static inline const Vec3 DEFAULT_LIGHTBULB_AABB_SIZE = Vec3(0.7f, 1.15f, 0.7f);
+	static inline const float LIGHTBULB_ANIMATION_SPEED = 0.01f;
+	static inline const float LIGHTING_CHANGING_SPEED = 0.01f;
+	static inline const float LIGHTING_COLOR_CHANGING_SPEED = 0.005f;
 	int _selectedLightSizeMultiplier = 1;
 	int _activeLightSizeMultiplier = 1;
 	string _selectedLightBulbID = "";
@@ -192,14 +192,14 @@ private:
 	string _currentPreviewAudioName = "";
 	string _selectedSpeakerID = "";
 	string _activeSpeakerID = "";
-	const string PREVIEW_SPEAKER_ID = "@previewSpeaker";
-	const string SPEAKER_MODEL_PATH = "engine_assets\\meshes\\speaker.obj";
-	const Vec3 DEFAULT_SPEAKER_SIZE = Vec3(1.0f);
-	const Vec3 DEFAULT_SPEAKER_AABB_SIZE = Vec3(1.25f, 1.3f, 1.0f);
-	const float DEFAULT_AUDIO_MAX_DISTANCE = 25.0f;
-	const float SPEAKER_ANIMATION_SPEED = 0.01f;
-	const float AUDIO_VOLUME_CHANGING_SPEED = 0.01f;
-	const float AUDIO_DISTANCE_CHANGING_SPEED = 0.05f;
+	static inline const string PREVIEW_SPEAKER_ID = "@previewSpeaker";
+	static inline const string SPEAKER_MODEL_PATH = "engine_assets\\meshes\\speaker.obj";
+	static inline const Vec3 DEFAULT_SPEAKER_SIZE = Vec3(1.0f);
+	static inline const Vec3 DEFAULT_SPEAKER_AABB_SIZE = Vec3(1.25f, 1.3f, 1.0f);
+	static inline const float DEFAULT_AUDIO_MAX_DISTANCE = 25.0f;
+	static inline const float SPEAKER_ANIMATION_SPEED = 0.01f;
+	static inline const float AUDIO_VOLUME_CHANGING_SPEED = 0.01f;
+	static inline const float AUDIO_DISTANCE_CHANGING_SPEED = 0.05f;
 	int _selectedAudioSizeMultiplier = 1;
 	int _activeAudioSizeMultiplier = 1;
 	bool _dontResetSelectedAudio = false;

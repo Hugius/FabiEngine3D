@@ -35,11 +35,11 @@ private:
 	const bool _noLetters;
 	const bool _minusAllowed;
 
-	const int _maxPassedBarFrames = 50;
-	const int _maxPassedBackspaceFrames = 20;
+	static inline const int MAX_PASSED_BAR_FRAMES = 50;
+	static inline const int MAX_PASSED_BACKSPACE_FRAMES = 20;
 
 	string _lastTextContent = "";
 	string _currentTextContent = "";
 
-	const float _charWidth = 0.02f;
+	static inline const float CHAR_WIDTH = 0.02f;
 };

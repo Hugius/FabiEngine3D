@@ -1,6 +1,6 @@
 #pragma once
 
-#include "viewport_controller.hpp"
+#include "base_viewport_controller.hpp"
 #include "environment_editor.hpp"
 #include "model_editor.hpp"
 #include "billboard_editor.hpp"
@@ -12,7 +12,7 @@
 
 #define LVPC LeftViewportController
 
-class LeftViewportController final : public ViewportController
+class LeftViewportController final : public BaseViewportController
 {
 public:
 	LeftViewportController(FabiEngine3D& fe3d, EngineGuiManager& gui);

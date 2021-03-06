@@ -70,15 +70,15 @@ private:
 	Matrix44 _projectionMatrix = Matrix44(1.0f);
 
 	// Vectors
-	const Vec3 _up = Vec3(0.0f, 1.0f, 0.0f);
+	static inline const Vec3 UP = Vec3(0.0f, 1.0f, 0.0f);
 	Vec3 _right = Vec3(0.0f);
 	Vec3 _front = Vec3(0.0f);
 	Vec3 _position = Vec3(0.0f);
 	Vec3 _lookatPosition = Vec3(0.0f);
 
 	// Floats
-	const float _maxYawAcceleration = 15.0f;
-	const float _maxPitchAcceleration = 15.0f;
+	static inline const float MAX_YAW_ACCELERATION = 15.0f;
+	static inline const float MAX_PITCH_ACCELERATION = 15.0f;
 	float _fov = 0.0f;
 	float _aspectRatio = 0.0f;
 	float _yawAcceleration = 0.0f;
@@ -92,7 +92,7 @@ private:
 	float _maxPitch = 0.0f;
 
 	// Booleans
-	bool _isLookatViewEabled		   = false;
+	bool _isLookatViewEabled	   = false;
 	bool _isFirstPersonViewEnabled = false;
 	bool _isFreeMovementEnabled    = true;
 	bool _mustCenter               = false;

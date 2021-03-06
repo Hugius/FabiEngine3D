@@ -185,7 +185,7 @@ void EnvironmentEditor::_updateTerrainCamera()
 			// Get scroll wheel input
 			if (!_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isCursorInsideViewport())
 			{
-				float rotationAcceleration = float(_fe3d.input_getMouseWheelY()) / _scrollWheelDivider;
+				float rotationAcceleration = float(_fe3d.input_getMouseWheelY()) / SCROLL_WHEEL_DIVIDER;
 				_cameraRotationSpeed += rotationAcceleration;
 			}
 			_cameraRotationSpeed *= 0.975f;

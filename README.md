@@ -1158,8 +1158,9 @@ fe3d:print(camPos.x)
 - Copy `FabiEngine3D\config.fe3d` to `<your_directory>`.
 - Copy `FabiEngine3D\game_assets` to `<your_directory>` (only the assets for your game).
 - Copy **ALL** contents from `FabiEngine3D\projects\<your_project>` to `<your_directory>`.
-- Rename `<your_directory>\binaries\FabiEngine3D.exe` to your liking.
 - In `<your_directory>\config.fe3d`, set the `game_exported` option to `true` and change the other options to your liking.
+- Rename `<your_directory>\binaries\FabiEngine3D.exe` to your liking.
+- Open `<your_directory>\binaries\<your_game>.exe` to start your game!
 ### Config file
 - The config file (`config.fe3d`) has multiple **settings** for the game.
 - `window_size_multiplier`: decimal value between 0.0 and 1.0; 1.0 means the full monitor resolution.

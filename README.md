@@ -21,8 +21,9 @@ The engine only uses 2 libraries: OpenGL 4.5 & SDL2. It is written in C++17 and 
 14. [FabScript](#fabscript)
 15. [Function List](#function-list)
 16. [Game Execution](#game-execution)
-17. [Appendix](#appendix)
-18. [Screenshots](#screenshots)
+17. [Game Exporting](#game-exporting)
+18. [Appendix](#appendix)
+19. [Screenshots](#screenshots)
 
 # Features
 ### Asset Loading
@@ -245,7 +246,7 @@ Click [here](#scene-editor-example) to see an example
 # Script Editor
 Click [here](#script-editor-example) to see an example
 - You can **create/edit/rename/delete** scripts that will be executed in a certain order.
-- You can **search** scripts for a certain **keyword**. The search results will be **printed** (script ID & line number).
+- You can **search** scripts for a certain **keyword** (case sensitive). The search results will be **printed** (script ID & line number).
 - You can use the **mouse** to navigate through the code or use the **arrow keys**.
 - Script files have a line **limit of 100**, to force you to create small but well-structured scripts.
 - You can **scroll** through lines using the mousewheel.
@@ -1148,6 +1149,16 @@ fe3d:print(camPos.x)
 - Open the **config** file (`config.fe3d`).
 - Set `selected_game` to the name of the project/game you want to run.
 - Start FabiEngine3D.
+
+# Game exporting
+- Create a new **directory** for your game somewhere on your PC.
+- Copy **"FabiEngine3D\binaries"** to <your_directory>.
+- Copy **"FabiEngine3D\shaders"** to <your_directory>.
+- Copy **"FabiEngine3D\config.fe3d"** to <your_directory>.
+- Copy **"FabiEngine3D\game_assets"** to <your_directory> (only the assets for your game).
+- Copy **ALL** contents from **"FabiEngine3D\projects\<your_project>"** to your game directory root.
+- Rename **"<your_directory>\binaries\FabiEngine3D.exe"** to your liking.
+- In **"<your_directory>\config.fe3d"**, set the **"game_exported"** option to **true** and change the other options to your liking.
 
 # Appendix
 ### Term definitions

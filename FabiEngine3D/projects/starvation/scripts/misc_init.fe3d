@@ -1,4 +1,4 @@
-69 50
+14 25
 META script_type_init
 
 /// Globals
@@ -14,12 +14,6 @@ GLOB DEC _fallingLogTargetHeight = 0.0
 GLOB DEC _fallingStonesTargetHeight = 0.0
 GLOB DEC _wheatGrowingSpeed = 0.0001
 GLOB DEC _elapsedMS = 0.0
-GLOB CONST INT _logCount = 4
-GLOB CONST INT _stoneCount = 6
-GLOB CONST INT _clayCount = 10
-GLOB CONST INT _seedsCount = 5
-GLOB CONST INT _wheatCount = 12
-GLOB CONST INT _fishCount = 1
 GLOB INT _survivalTime = 0
 
 /// Images

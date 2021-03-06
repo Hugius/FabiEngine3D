@@ -1,4 +1,4 @@
-11 29
+12 26
 META script_type_init
 
 /// Globals
@@ -11,7 +11,7 @@ GLOB CONST DEC _initDirLightIntensity = _dirLightIntensity
 GLOB CONST VEC3 _initDirLightPos = _dirLightPos
 GLOB DEC _passedTime = 0.0
 GLOB DEC _timeMultiplier = 10.0
-GLOB DEC _timeSpeed = 0.1
+GLOB DEC _timeSpeed = 0.05
 GLOB BOOL _mustBeDayTime = <true>
 GLOB BOOL _isDayTime = <true>
 GLOB BOOL _isTimeCycling = <false>

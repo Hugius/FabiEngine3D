@@ -209,6 +209,23 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
+	else if (functionName == "fe3d:file_newline")
+	{
+		auto types = { ScriptValueType::STRING };
+
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types) && _validateCurrentProject())
+		{
+			// Compose file path
+			string directoryPath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : ("projects\\" + _currentProjectID)) + "\\saves\\";
+			string filePath = directoryPath + arguments[0].getString();
+
+			// Write line to file
+			std::ofstream file(filePath, std::ios::app);
+			file << std::endl;
+			file.close();
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+		}
+	}
 	else if (functionName == "fe3d:file_clear")
 	{
 		auto types = { ScriptValueType::STRING };

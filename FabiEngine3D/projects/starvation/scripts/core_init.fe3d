@@ -1,13 +1,12 @@
-3 37
+7 14
 META script_type_init
 META execution_entry
-
-fe3d:file_write("test.txt", "hoi123")
 
 /// Load home world
 fe3d:scene_load("home")
 
 /// No GUI elements
+EXEC constants
 EXEC npc_init
 EXEC time_init
 

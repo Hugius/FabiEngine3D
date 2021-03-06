@@ -1,4 +1,4 @@
-15 11
+35 49
 META script_type_update
 
 /// Temporary values
@@ -19,11 +19,20 @@ IF currentWorld IS "starvia_outside":
 /// Update fire billboards at home
 IF currentWorld IS "home":
     CONST LIST billboards = fe3d:billboard_find_ids("fire3")
+    VEC3 camPos = fe3d:camera_get_position()
+    VEC3 billboardPos = [0.0 0.0 0.0]
+    DEC distance = 0.0
     INT index = 0
     INT listSize = misc:get_list_size("billboards")
     LOOP:
         IF index IS listSize:
             BREAK
         ELSE:
+            /// Fire visibility
             fe3d:billboard_set_visible(billboards[index], _areLightsOn)
+            /// Fire heat
+            EDIT billboardPos = fe3d:billboard_get_position(billboards[index])
+            EDIT distance = math:distance(camPos, billboardPos)
+            IF distance LESS _maxCampfireHeatDistance AND _areLightsOn IS <true>:
+                INCR _temperature _fireHeatFactor
             INCR index 1

@@ -1,10 +1,11 @@
-99 84
+9 22
 META script_type_update
 
-/// Retrieve hovered building properties
+fe3d:text_set_visible("build", <false>)
 STR hoveredID = _hoveredBuildingID
 DEC distance = _hoveredBuildingDistance
 IF hoveredID NOT "":
+    /// Retrieve hovered building properties
     DEC height = fe3d:model_get_max_height(hoveredID)
     STR idPart = misc:get_string_part(hoveredID, 0, 2)
     IF idPart IS "sm":
@@ -37,8 +38,6 @@ IF hoveredID NOT "":
     ELIF idPart IS "ca":
         INT hoveredIndex = 9
         VEC3 size = fe3d:aabb_get_size("campfire_display_campfire")
-    /// Update building process
-    fe3d:text_set_visible("build", <false>)
     /// Calculate price
     INT wp = _buildablesWoodPrice[hoveredIndex]
     INT sp = _buildablesStonePrice[hoveredIndex]

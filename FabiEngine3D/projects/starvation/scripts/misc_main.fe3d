@@ -1,4 +1,4 @@
-6 16
+14 22
 META script_type_update
 
 /// Temporary values
@@ -13,11 +13,11 @@ IF equipped IS <true> AND _isInvOpen IS <true>:
     VEC3 torchPos = fe3d:model_get_position("torch")
     VEC3 firePos = torchPos
     INCR torchPos.y 2.0
-    INCR firePos.y 1.8
+    INCR firePos.y 1.0
     fe3d:light_set_position("torch", torchPos.x, torchPos.y, torchPos.z)
     fe3d:billboard_set_position("torch", firePos.x, firePos.y, firePos.z)
     /// Check if it's nighttime
-    IF _isDayTime IS <false> AND _isUnderWater IS <false>:
+    IF _areLightsOn IS <true> AND _isUnderWater IS <false>:
         fe3d:light_set_visible("torch", <true>)
         fe3d:billboard_set_visible("torch", <true>)
         DECR _durabilities[7] 0.0001

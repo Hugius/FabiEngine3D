@@ -1,4 +1,4 @@
-27 4
+55 29
 META script_type_update
 
 BOOL interval = misc:time_interval("status", 50)
@@ -48,7 +48,8 @@ EDIT _oxygen = math:clamp(_oxygen, 0.0, 1.0)
 
 /// Update temperature
 BOOL torchEquipped = (_isInvOpen IS <true> AND _inventory[_equipIndex] IS "torch")
-INCR _temperature 0.0001
+IF _isDayTime IS <true>:
+    INCR _temperature 0.0001
 IF _isUnderWater IS <true>:
     DECR _temperature 0.0005
 IF _isDayTime IS <false> AND _isSleeping IS <false>:

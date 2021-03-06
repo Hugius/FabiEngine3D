@@ -102,14 +102,14 @@ The engine root directory has 3 folders:
 - Every **project** is a different **game** and must have a **unique** name.
 - A project has its own folder in the engine `user\projects\` directory.
 - An important note is to **NOT** change anything in this directory!
-- The only directory that you can change is the `user\assets\`folder.
+- The only directory that you can change is the `game_assets\`folder.
 
 # Environment Editor
 ### Sky
 Click [here](#sky-editor-example) to see an example
 - You can **create/edit/delete** sky environments that can be placed in a scene.
 - The sky environment is rendered as a **skybox**, which has 6 different textures.
-- You can load these 6 images from `user\assets\textures\cube_maps\`.
+- You can load these 6 images from `game_assets\textures\cube_maps\`.
 - The image format must be a colored 24bit `PNG`.
 - The image resolutions must be the same.
 - Properties include: lightness, color, rotation speed.
@@ -121,10 +121,10 @@ Click [here](#terrain-editor-example) to see an example
 - In total a terrain can be textured with up to 4 different textures!
 - All of these rendered textures can be improved with **normal mapping**.
 - Properties include: max height, UV-repeat, lighting.
-- **Height map**: grayscale 24bit `BMP` format image file from `user\assets\textures\height_maps\`.
-- **Blend map**: colored 24bit `PNG` file format image from `user\assets\textures\blend_maps\`.
-- **Diffuse maps**: colored 24bit `PNG` format image file from `user\assets\textures\diffuse_maps\`.
-- **Normal maps**: colored 24bit `PNG` format image file from `user\assets\textures\normal_maps\`.
+- **Height map**: grayscale 24bit `BMP` format image file from `game_assets\textures\height_maps\`.
+- **Blend map**: colored 24bit `PNG` file format image from `game_assets\textures\blend_maps\`.
+- **Diffuse maps**: colored 24bit `PNG` format image file from `game_assets\textures\diffuse_maps\`.
+- **Normal maps**: colored 24bit `PNG` format image file from `game_assets\textures\normal_maps\`.
 ### Water
 Click [here](#water-editor-example) to see an example
 - You can **create/edit/delete** water environments that can be placed in a scene.
@@ -134,9 +134,9 @@ Click [here](#water-editor-example) to see an example
 - Custom color (RGB).
 - Sky & terrain reflection (on/off, only shown when above water surface).
 - Water refraction (on/off, **Warning**: huge performance impact!).
-- Rippling effect (on/off, **DUDV map** needed: colored 24bit `PNG` format image from `user\assets\textures\dudv_maps\`).
-- Waves (on/off, **displacement map** needed: grayscale 24bit `PNG` format image from `user\assets\textures\displacement_maps\`).
-- Specular reflection (on/off, **normal map** needed: colored 24bit `PNG` format image from `user\assets\textures\normal_maps\`).
+- Rippling effect (on/off, **DUDV map** needed: colored 24bit `PNG` format image from `game_assets\textures\dudv_maps\`).
+- Waves (on/off, **displacement map** needed: grayscale 24bit `PNG` format image from `game_assets\textures\displacement_maps\`).
+- Specular reflection (on/off, **normal map** needed: colored 24bit `PNG` format image from `game_assets\textures\normal_maps\`).
 
 # Model Editor
 Click [here](#model-editor-example) to see an example
@@ -149,11 +149,11 @@ Click [here](#model-editor-example) to see an example
 - All AABBs are bound to the model's transformation (translation, rotation, scaling).
 - A mesh should be modeled so that the center is at the **lowest** vertex.
 ### Normal mesh
-- **Mesh**: `OBJ` format mesh file from `user\assets\meshes`.
-- **Diffuse map**: colored 24bit/32bit `PNG` format image file from `user\assets\textures\diffuse_maps\`.
-- **Light map**: colored 24bit `PNG` format image file from `user\assets\textures\light_maps\`.
-- **Reflection map**: colored 24bit `PNG` format image file from `user\assets\textures\reflection_maps\`.
-- **Normal map**: colored 24bit `PNG` format image file from `user\assets\textures\normal_maps\`.
+- **Mesh**: `OBJ` format mesh file from `game_assets\meshes`.
+- **Diffuse map**: colored 24bit/32bit `PNG` format image file from `game_assets\textures\diffuse_maps\`.
+- **Light map**: colored 24bit `PNG` format image file from `game_assets\textures\light_maps\`.
+- **Reflection map**: colored 24bit `PNG` format image file from `game_assets\textures\reflection_maps\`.
+- **Normal map**: colored 24bit `PNG` format image file from `game_assets\textures\normal_maps\`.
 ### Multitextured/multiparted mesh
 - A mesh can consist of **multiple parts** (including textures for every part).
 - In the **.obj** file, you need to specify when a certain part of vertices starts.
@@ -184,13 +184,13 @@ Click [here](#billboard-editor-example) to see an example
 - Properties include: lightness, color, alpha removal, facing camera X/Y.
 - When billboard texture is animated, you must specify the amount of rows & columns. You can also set the animation speed.
 - Every billboard has its own flat AABB based on their size.
-- **Font**: `TTF` format font file from `user\assets\fonts`.
-- **Texture**: colored 24bit/32bit `PNG` format image file from `user\assets\textures\billboard_maps`.
+- **Font**: `TTF` format font file from `game_assets\fonts`.
+- **Texture**: colored 24bit/32bit `PNG` format image file from `game_assets\textures\billboard_maps`.
 
 # Audio Editor
 Click [here](#audio-editor-example) to see an example
 - You can **create/edit/delete** audio that can be placed in a scene or **placed/played** with scripting.
-- **Audio data**: `WAV` format audio file from `user\assets\audio`.
+- **Audio data**: `WAV` format audio file from `game_assets\audio`.
 - Audio can be played in **2D**.
 - Audio can be played in **3D** (position, max distance, max volume).
 - 3D audio has stereo panning.
@@ -238,7 +238,7 @@ Click [here](#scene-editor-example) to see an example
 - You can enable **fog** based on (min distance, max distance, intensity, color).
 - You can enable **dynamic skyHDR** based on (max extra intensity).
 - You can enable a **lens flare** for directional lighting based on (flare map, intensity, multiplier).
-- **Flare map**: colored 24bit `PNG` format image file from `user\assets\textures\flare_maps`.
+- **Flare map**: colored 24bit `PNG` format image file from `game_assets\textures\flare_maps`.
 ### Other settings
 - You can change the editor movement speed, which will be saved for next time.
 - You can set the minimum distance by which level of detailed models will change their rendering.
@@ -1074,7 +1074,14 @@ fe3d:print(camPos.x)
   Starts a timer to measure passing time. Works like a stopwatch.
 - `fe3d:timer_stop`() ---> `DEC`  
   Returns measured time in milliseconds.
-
+- `fe3d:file_read`(`STR` filePath) ---> `LIST`  
+  Opens an existing **filePath** in `projects\<your_project>\saves\` and returns all lines as a list.
+- `fe3d:file_write`(`STR` filePath, `STR` content) ---> `NONE`  
+  Opens/creates a **filePath** in `projects\<your_project>\saves\` and writes **content** to it.
+- `fe3d:file_newline`(`STR` filePath) ---> `NONE`  
+  Opens an existing **filePath** in `projects\<your_project>\saves\` and writes a new line to it.
+- `fe3d:file_clear`(`STR` filePath) ---> `NONE`  
+  Opens an existing **filePath** in `projects\<your_project>\saves\` and removes all content.
 ### Math functions
 - `math:tan`(`DEC` degrees) ---> `DEC`  
   Returns the tangent of **degrees**.
@@ -1118,7 +1125,6 @@ fe3d:print(camPos.x)
 - Returns true if **value** is an even number.
 - `math:distance`(`VEC3` first, `VEC3` second) ---> `DEC`  
   Returns the absolute distance between **first** and **second**.
-
 ### Miscellaneous functions
 - `misc:concat_strings`(`STR` first, `STR` second) ---> `STR`  
   Returns **first** and **second** concatenated together.
@@ -1138,27 +1144,30 @@ fe3d:print(camPos.x)
   Returns true every **frames** for the unique **name**.
 
 # Game Execution
-### Inside engine interface
 ![execution](FabiEngine3D/engine/readme/execution.png)
-- You can play/pause/resume/stop/debug the game preview.
-- All changes made with the scripting will be reset when the preview exits.
+- You can **play/pause/resume/stop/debug** the game preview.
+- All **changes** made through scripting will be **reset** when the preview is stopped.
 - You can pause the gameplay with **ESCAPE**.
 - If the game is paused you can start a **debugging** frame which prints a **performance** report about your **code**.
-### Outside engine interface
-- Exit FabiEngine3D.
-- Open the **config** file (`config.fe3d`).
-- Set `selected_game` to the name of the project/game you want to run.
-- Start FabiEngine3D.
 
 # Game exporting
+### Steps
 - Create a new **directory** for your game somewhere on your PC.
-- Copy **"FabiEngine3D\binaries"** to <your_directory>.
-- Copy **"FabiEngine3D\shaders"** to <your_directory>.
-- Copy **"FabiEngine3D\config.fe3d"** to <your_directory>.
-- Copy **"FabiEngine3D\game_assets"** to <your_directory> (only the assets for your game).
-- Copy **ALL** contents from **"FabiEngine3D\projects\<your_project>"** to your game directory root.
-- Rename **"<your_directory>\binaries\FabiEngine3D.exe"** to your liking.
-- In **"<your_directory>\config.fe3d"**, set the **"game_exported"** option to **true** and change the other options to your liking.
+- Copy `FabiEngine3D\binaries` to `<your_directory>`.
+- Copy `FabiEngine3D\shaders` to `<your_directory>`.
+- Copy `FabiEngine3D\config.fe3d` to `<your_directory>`.
+- Copy `FabiEngine3D\game_assets` to `<your_directory>` (only the assets for your game).
+- Copy **ALL** contents from `FabiEngine3D\projects\<your_project>` to `<your_directory>`.
+- Rename `<your_directory>\binaries\FabiEngine3D.exe` to your liking.
+- In `<your_directory>\config.fe3d`, set the `game_exported` option to `true` and change the other options to your liking.
+### Config file
+- The config file (`config.fe3d`) has multiple **settings** for the game.
+- `window_size_multiplier`: decimal value between 0.0 and 1.0; 1.0 means the full monitor resolution.
+- `window_fullscreen`: boolean value; toggle window fullscreen.
+- `window_borderless`: boolean value; toggle window border visibility.
+- `window_title`: string value; title of the game window.
+- `game_title`: string value; title of your game/project.
+- `game_exported`: boolean value; set to true if game is exported.
 
 # Appendix
 ### Term definitions
@@ -1212,12 +1221,6 @@ fe3d:print(camPos.x)
 - `bufferSwap` means the actual buffering on the output screen.
 - Use LOD models to improve your performance.
 - Lower the graphics quality in the project settings to improve your performance.
-### Config file
-- The config file (`config.fe3d`) has multiple **settings** for the application appearance.
-- `window_size_multiplier`: decimal value between 0.0 and 1.0; 1.0 means the full monitor resolution.
-- `window_fullscreen`: boolean value; toggle window fullscreen.
-- `window_borderless`: boolean value; toggle window border visibility.
-- `selected_game`: string value; select name of project/game to be run on FabiEngine3D launch.
 
 # Screenshots
 ### Engine interface example

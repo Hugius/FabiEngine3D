@@ -1,4 +1,4 @@
-25 3
+25 0
 META script_type_init
 META execution_entry
 
@@ -24,4 +24,4 @@ EXEC player_init_main
 EXEC player_init_misc
 
 /// Load game progress
-///EXEC persistence_load
+EXEC persistence_load

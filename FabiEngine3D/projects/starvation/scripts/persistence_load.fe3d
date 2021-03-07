@@ -1,7 +1,23 @@
-4 13
+18 21
 META script_type_init
 
+/// Survival time
 LIST lines = fe3d:file_read("progress.txt")
-STR time = lines[0]
-CAST time DEC
-EDIT _elapsedMS = time
+STR line = lines[0]
+CAST line DEC
+EDIT _elapsedMS = line
+CAST line STR
+
+/// Bag
+EDIT lines = fe3d:file_read("bag.txt")
+INT length = misc:get_list_size("_bag")
+INT index = 0
+LOOP:
+    IF index IS length:
+        BREAK
+    ELSE:
+        EDIT line = lines[index]
+        CAST line INT
+        EDIT _bag[index] = line
+        CAST line STR
+        INCR index 1

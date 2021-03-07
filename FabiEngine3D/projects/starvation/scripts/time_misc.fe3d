@@ -1,4 +1,4 @@
-23 36
+47 18
 META script_type_update
 
 /// Temporary values
@@ -38,3 +38,12 @@ IF currentWorld IS "home":
             IF distance LESS _maxCampfireHeatDistance AND _areLightsOn IS <true>:
                 INCR _temperature heatFactor
             INCR index 1
+
+/// Update survival time
+DEC elapsedMS = fe3d:timer_stop()
+INCR _elapsedMS elapsedMS
+CAST _survivalTime DEC
+EDIT _survivalTime = _elapsedMS
+MUL _survivalTime 0.001
+CAST _survivalTime INT
+fe3d:timer_start()

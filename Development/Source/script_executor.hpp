@@ -29,5 +29,6 @@ private:
 	bool _isInitialized = false;
 	bool _isRunning = false;
 	bool _wasCursorVisible = false;
+	bool _wasMillisecondTimerStarted = false;
 	bool _skipUpdate = false;
 };

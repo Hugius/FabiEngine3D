@@ -194,22 +194,47 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 	}
 	else if (functionName == "fe3d:file_write")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
+		auto types = { ScriptValueType::STRING };
 
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types) && _validateCurrentProject())
+		if (_validateListValueAmount(arguments, 2) && _validateCurrentProject())
 		{
 			// Compose file path
 			string directoryPath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : ("projects\\" + _currentProjectID)) + "\\saves\\";
 			string filePath = directoryPath + arguments[0].getString();
 
-			// Write line to file
+			// Open file
 			std::ofstream file(filePath, std::ios::app);
-			file << arguments[1].getString();
+
+			// Determine which type of value to print
+			if (arguments[1].getType() == ScriptValueType::VEC3)
+			{
+				file << arguments[1].getVec3().x << " " << arguments[1].getVec3().y << " " << arguments[1].getVec3().z;
+			}
+			else if (arguments[1].getType() == ScriptValueType::STRING)
+			{
+				file << arguments[1].getString();
+			}
+			else if (arguments[1].getType() == ScriptValueType::DECIMAL)
+			{
+				file << arguments[1].getDecimal();
+			}
+			else if (arguments[1].getType() == ScriptValueType::INTEGER)
+			{
+				file << arguments[1].getInteger();
+			}
+			else if (arguments[1].getType() == ScriptValueType::BOOLEAN)
+			{
+				file << (arguments[1].getBoolean() ? "true" : "false");
+			}
+
+			// Close file
 			file.close();
+
+			// Return
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
-	else if (functionName == "fe3d:file_newline")
+	else if (functionName == "fe3d:file_add_new_line")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -247,6 +272,21 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 			{
 				_throwScriptError("Cannot clear file \"" + arguments[0].getString() + "\"!");
 			}
+		}
+	}
+	else if (functionName == "fe3d:file_is_existing")
+	{
+		auto types = { ScriptValueType::STRING };
+
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types) && _validateCurrentProject())
+		{
+			// Compose file path
+			string directoryPath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : ("projects\\" + _currentProjectID)) + "\\saves\\";
+			string filePath = directoryPath + arguments[0].getString();
+
+			// Return
+			auto result = _fe3d.misc_isFileExisting(filePath);
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 		}
 	}
 	else

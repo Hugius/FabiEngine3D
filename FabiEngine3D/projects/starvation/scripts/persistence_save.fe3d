@@ -1,0 +1,18 @@
+15 9
+META script_type_destroy
+
+DEC time = _elapsedMS
+CAST time STR
+BOOL existing = fe3d:file_is_existing("progress.txt")
+IF existing IS <true>:
+    fe3d:file_clear("progress.txt")
+fe3d:file_write("progress.txt", time)
+
+/// Bag
+INT length = misc:get_list_size("_bag")
+INT index = 0
+LOOP:
+    IF index IS length:
+        BREAK
+    ELSE:
+        fe3d:file_write("progress.txt", time)

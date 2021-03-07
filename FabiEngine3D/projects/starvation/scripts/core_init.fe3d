@@ -1,4 +1,4 @@
-6 19
+25 3
 META script_type_init
 META execution_entry
 
@@ -22,3 +22,6 @@ EXEC inventory_init
 EXEC bag_init
 EXEC player_init_main
 EXEC player_init_misc
+
+/// Load game progress
+///EXEC persistence_load

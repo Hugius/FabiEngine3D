@@ -78,7 +78,9 @@ void ScriptExecutor::pause()
 	{
 		// Pause engine updates & script execution
 		_wasCursorVisible = _fe3d.misc_isCursorVisible();
+		_wasMillisecondTimerStarted = _fe3d.misc_isMillisecondTimerStarted();
 		_fe3d.misc_hideCursor();
+		_fe3d.misc_stopMillisecondTimer();
 		_fe3d.audioEntity_pauseAll();
 		_fe3d.music_pause();
 		_fe3d.engine_pause();
@@ -94,6 +96,12 @@ void ScriptExecutor::unpause()
 		if (_wasCursorVisible)
 		{
 			_fe3d.misc_showCursor();
+		}
+
+		// Reset millisecond timer
+		if (_wasMillisecondTimerStarted)
+		{
+			_fe3d.misc_startMillisecondTimer();
 		}
 
 		// Resume game logic

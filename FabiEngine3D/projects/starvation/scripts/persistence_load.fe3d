@@ -1,0 +1,7 @@
+4 13
+META script_type_init
+
+LIST lines = fe3d:file_read("progress.txt")
+STR time = lines[0]
+CAST time DEC
+EDIT _elapsedMS = time

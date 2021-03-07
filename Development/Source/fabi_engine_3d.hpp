@@ -823,6 +823,7 @@ public:
 	bool misc_isFileExisting(const string& filePath);
 	bool misc_checkInterval(const string& key, int frameCount);
 	bool misc_isRaycastPositionOnTerrainValid();
+	bool misc_isMillisecondTimerStarted();
 	vector<pair<string, int>> misc_getUpdateProfilingStatistics();
 	vector<pair<string, int>> misc_getRenderProfilingStatistics();
 

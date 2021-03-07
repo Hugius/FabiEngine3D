@@ -1,5 +1,5 @@
-3 18
+3 21
 META script_type_destroy
 META execution_entry
 
-fe3d:scene_clear()
+EXEC persistence_save

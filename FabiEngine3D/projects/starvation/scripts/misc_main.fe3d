@@ -1,4 +1,4 @@
-30 39
+43 47
 META script_type_update
 
 /// Temporary values
@@ -43,12 +43,3 @@ IF _isCrafting IS <true> OR _isBuilding IS <true> OR _isInStorage IS <true>:
     fe3d:image_set_visible("crosshair", <false>)
 ELSE:
     fe3d:image_set_visible("crosshair", <true>)
-
-/// Update survival time
-DEC elapsedMS = fe3d:timer_stop()
-INCR _elapsedMS elapsedMS
-CAST _survivalTime DEC
-EDIT _survivalTime = _elapsedMS
-MUL _survivalTime 0.001
-CAST _survivalTime INT
-fe3d:timer_start()

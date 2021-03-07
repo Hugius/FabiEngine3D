@@ -15,17 +15,18 @@ public:
 	~Timer() = default;
 
 	void start();
-	float stop();
 	void startDeltaPart(const string& ID);
 	void stopDeltaPart();
-
-	float getDeltaPart(const string& ID);
-	float getDeltaPartSum();
-
 	void sleep(int microseconds);
 	void increasePassedFrameCount();
 
+	float stop();
+	float getDeltaPart(const string& ID);
+	float getDeltaPartSum();
+
 	int getPassedFrameCount();
+
+	bool isTiming();
 
 private:
 	LARGE_INTEGER _frequency;

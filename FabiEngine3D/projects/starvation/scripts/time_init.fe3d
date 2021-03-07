@@ -1,4 +1,4 @@
-10 31
+14 26
 META script_type_init
 
 /// Globals
@@ -12,8 +12,8 @@ GLOB DEC _dirLightIntensity = _initDirLightIntensity
 GLOB VEC3 _dirLightPos = _initDirLightPos
 GLOB DEC _skyMixValue = 0.0
 GLOB DEC _passedTime = 0.0
-GLOB DEC _timeMultiplier = 10.0
-GLOB DEC _timeSpeed = 0.05
+GLOB DEC _timeMultiplier = 1.0
+GLOB DEC _timeSpeed = 0.005
 GLOB BOOL _mustBeDayTime = <true>
 GLOB BOOL _isDayTime = <true>
 GLOB BOOL _isTimeCycling = <false>

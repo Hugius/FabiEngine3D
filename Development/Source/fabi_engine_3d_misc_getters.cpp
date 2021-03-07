@@ -271,6 +271,11 @@ bool FabiEngine3D::misc_isRaycastPositionOnTerrainValid()
 	return (_core->_rayCaster.getTerrainPoint() != Vec3(-1.0f));
 }
 
+bool FabiEngine3D::misc_isMillisecondTimerStarted()
+{
+	return _core->_timer.isTiming();
+}
+
 Ivec2 FabiEngine3D::misc_getWindowSize()
 {
 	return Config::getInst().getWindowSize();

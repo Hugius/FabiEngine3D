@@ -91,3 +91,8 @@ int Timer::getPassedFrameCount()
 {
 	return _passedFrameCount;
 }
+
+bool Timer::isTiming()
+{
+	return _isTiming;
+}

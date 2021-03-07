@@ -301,6 +301,7 @@ void ScriptInterpreter::unload()
 
 	// Miscellaneous
 	_fe3d.misc_disableTerrainRaycasting();
+	_fe3d.misc_stopMillisecondTimer();
 	_fe3d.input_clearMouseToggles();
 	_fe3d.input_clearKeyToggles();
 	_fe3d.input_setKeyTogglingLocked(false);

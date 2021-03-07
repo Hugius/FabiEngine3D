@@ -1082,6 +1082,8 @@ fe3d:print(camPos.x)
   Opens an existing **filePath** in `projects\<your_project>\saves\` and writes a new line to it.
 - `fe3d:file_clear`(`STR` filePath) ---> `NONE`  
   Opens an existing **filePath** in `projects\<your_project>\saves\` and removes all content.
+- `fe3d:file_is_existing`(`STR` filePath) ---> `BOOL`  
+  Returns true if **filePath** in `projects\<your_project>\saves\` is existing.
 ### Math functions
 - `math:tan`(`DEC` degrees) ---> `DEC`  
   Returns the tangent of **degrees**.

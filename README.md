@@ -1227,24 +1227,24 @@ fe3d:print(camPos.x)
 
 # Screenshots
 ### Engine interface example
-![interface](FabiEngine3D/engine/readme/interface.png)
+![interface](FabiEngine3D/engine_assets/readme/interface.png)
 ### Sky editor example
-![sky](FabiEngine3D/engine/readme/sky_editor.png)
+![sky](FabiEngine3D/engine_assets/readme/sky_editor.png)
 ### Terrain editor example
-![terrain](FabiEngine3D/engine/readme/terrain_editor.png)
+![terrain](FabiEngine3D/engine_assets/readme/terrain_editor.png)
 ### Water editor example
-![water](FabiEngine3D/engine/readme/water_editor.png)
+![water](FabiEngine3D/engine_assets/readme/water_editor.png)
 ### Model editor example
-![model](FabiEngine3D/engine/readme/model_editor.png)
+![model](FabiEngine3D/engine_assets/readme/model_editor.png)
 ### Animation editor example
-![animation](FabiEngine3D/engine/readme/animation_editor.png)
+![animation](FabiEngine3D/engine_assets/readme/animation_editor.png)
 ### Billboard editor example
-![billboard](FabiEngine3D/engine/readme/billboard_editor.png)
+![billboard](FabiEngine3D/engine_assets/readme/billboard_editor.png)
 ### Audio editor example
-![audio](FabiEngine3D/engine/readme/audio_editor.png)
+![audio](FabiEngine3D/engine_assets/readme/audio_editor.png)
 ### Scene editor example
-![scene](FabiEngine3D/engine/readme/scene_editor.png)
+![scene](FabiEngine3D/engine_assets/readme/scene_editor.png)
 ### Script editor example
-![script](FabiEngine3D/engine/readme/script_editor.png)
+![script](FabiEngine3D/engine_assets/readme/script_editor.png)
 ### Performance statistics example
-![performance](FabiEngine3D/engine/readme/performance.png)
+![performance](FabiEngine3D/engine_assets/readme/performance.png)

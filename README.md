@@ -1075,7 +1075,7 @@ fe3d:print(camPos.x)
 - `fe3d:timer_stop`() ---> `DEC`  
   Returns measured time in milliseconds.
 - `fe3d:file_read`(`STR` filePath) ---> `LIST`  
-  Opens an existing **filePath** in `projects\<your_project>\saves\` and returns all lines as a list.
+  Opens an existing **filePath** in `projects\<your_project>\saves\` and returns all lines as a list of strings.
 - `fe3d:file_write`(`STR` filePath, `VEC3/STR/DEC/INT/BOOL` content) ---> `NONE`  
   Opens/creates a **filePath** in `projects\<your_project>\saves\` and writes **content** to it.
 - `fe3d:file_add_new_line`(`STR` filePath) ---> `NONE`  

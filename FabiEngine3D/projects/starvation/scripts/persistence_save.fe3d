@@ -1,4 +1,4 @@
-3 53
+11 36
 META script_type_destroy
 
 /// Clear previous files
@@ -8,7 +8,9 @@ IF existing IS <true>:
     fe3d:file_clear("bag.txt")
 
 /// Survival time
-fe3d:file_write("progress.txt", _elapsedMS)
+DEC time = _elapsedMS
+CAST time INT
+fe3d:file_write("progress.txt", time)
 
 /// Bag
 INT length = misc:get_list_size("_bag")

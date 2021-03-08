@@ -88,5 +88,5 @@
 @well1 game_assets\meshes\misc\well1.obj game_assets\textures\diffuse_maps\misc\well1.png ? ? game_assets\textures\normal_maps\misc\well1.png 3 3 3 0 1 0 0 0 1 1 1 1 1 1 1 ? 0 well1 0.03 0 -0.01 1.19 1.61 1.64
 @well2 game_assets\meshes\misc\well2.obj ? ? ? ? 1.4 1.4 1.4 0 1 0 1 1 1 1 0.75 1 1 1 1 ? 0 well 7.45058e-09 0 -0.3 2.45 3.5 3.2
 @wheat game_assets\meshes\misc\wheat.obj game_assets\textures\diffuse_maps\misc\wheat.png ? ? ? 2.25 2.25 2.25 0 1 0 0 1 1 1 1 1 1 1 1 ? 0 wheat 0.02 0 -0.07 2.6 1.69 2.57
-@workbench game_assets\meshes\misc\workbench.obj ? ? ? ? 0.75 0.75 0.75 0 1 0 1 1 1 0.75 0.5 1 1 1 1 ? 0 workbench 0 0 0 1.89 2.5 6
+@workbench game_assets\meshes\misc\workbench.obj ? ? ? ? 0.75 0.75 0.75 0 1 0 1 1 1 0.5 0.5 1 1 1 1 ? 0 workbench 0 0 0 1.89 2.5 6
 @worklog game_assets\meshes\misc\worklog.obj game_assets\textures\diffuse_maps\misc\worklog.png ? ? game_assets\textures\normal_maps\misc\worklog.png 1 1 1 0 1 0 0 1 1 1 0.5 1 1 1 1 ? 0 worklog 0.1 0 0.1 2.6 2.2 2.5

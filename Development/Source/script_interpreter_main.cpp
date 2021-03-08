@@ -167,6 +167,7 @@ void ScriptInterpreter::load()
 	_audioEditor.loadAudioEntitiesFromFile();
 
 	// Miscellaneous
+	_fe3d.camera_load(90.0f, 0.1f, 10000.0f, Vec3(0.0f));
 	_fe3d.input_clearMouseToggles();
 	_fe3d.input_clearKeyToggles();
 	_fe3d.misc_setVsync(false);

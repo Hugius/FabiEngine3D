@@ -1,4 +1,4 @@
-37 63
+26 19
 META script_type_update
 
 /// Temporary values
@@ -25,7 +25,7 @@ ELSE:
 
 /// Update fish catching process
 IF currentWorld IS "home":
-    DEC maxCamY = 33.0
+    DEC maxCamY = 7.0
 ELIF currentWorld IS "starvia_outside":
     DEC maxCamY = 8.0
 BOOL a = (terrainPoint.y LESS waterY AND camPos.y LESS maxCamY AND isValid IS <true>)

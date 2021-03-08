@@ -39,7 +39,7 @@
 @log1 game_assets\meshes\misc\log1.obj game_assets\textures\diffuse_maps\misc\log1.png ? ? ? 0.8 0.8 0.8 0 1 0 0 1 4 1 0.7 1 1 1 1 ? 0 log 0 0 0 4.5 2.15 11.85
 @log2 game_assets\meshes\misc\log2.obj game_assets\textures\diffuse_maps\misc\log2.png ? ? game_assets\textures\normal_maps\misc\log2.png 2.5 2.5 2.5 0 1 0 0 1 4 1 0.7 1 1 1 1 ? 0 log -0.15 0 -0.15 1.75 0.7 2.3
 @log3 game_assets\meshes\misc\log3.obj game_assets\textures\diffuse_maps\misc\log3.png ? ? game_assets\textures\normal_maps\misc\log3.png 1.5 1.5 1.25 0 1 0 0 1 1 1 0.5 1 1 1 1 ? 0 log 0.2 0 -0.1 2.2 1.4 7.2
-@log4 game_assets\meshes\misc\log4.obj game_assets\textures\diffuse_maps\misc\log4.png ? ? game_assets\textures\normal_maps\misc\log4.png 0.8 0.8 0.8 0 1 0 0 1 4 1 0.8 1 1 1 1 ? 0 log -0.1 0 0.4 6.2 3.1 4.4
+@log4 game_assets\meshes\misc\log4.obj game_assets\textures\diffuse_maps\misc\log4.png ? ? game_assets\textures\normal_maps\misc\log4.png 0.8 0.8 0.8 0 1 0 0 1 4 1 0.75 1 1 1 1 ? 0 log -0.1 0 0.4 6.2 3.1 4.4
 @male1 game_assets\meshes\characters\male1.obj ? ? ? ? 0.55 0.55 0.55 0 0 0 0 1 1 1 0.6 1 1 1 1 ? 0 male1 0 0 0 2 5.6 2
 @male2 game_assets\meshes\characters\male2.obj ? ? ? ? 0.82 0.82 0.82 0 1 0 0 0 1 1 0.5 1 1 1 1 ? 0 male2 0 0 0 1.8 3.75 1.75
 @mill game_assets\meshes\buildings\mill.obj ? ? ? ? 5.5 5.5 5.5 0 1 0 1 1 1 1 0.5 1 1 1 1 ? 0 mill 0 0 -0.03 1.9 5.15 1.9

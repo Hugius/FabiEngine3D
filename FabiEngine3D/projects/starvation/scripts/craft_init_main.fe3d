@@ -1,4 +1,4 @@
-34 58
+41 60
 META script_type_init
 
 /// Globals
@@ -34,19 +34,19 @@ PUSH _craftables "fishrod_display"
 fe3d:model_place("workbench", "workbench", -83.0, 4.75, 2.0)
 fe3d:model_set_rotation("workbench", 0.0, 90.0, 0.0)
 fe3d:model_place("sword_stone_display", "sword_stone", -81.5, 6.5, 2.0)
-fe3d:model_place("sword_iron_display", "sword_iron", -143.5, 33.0, -83.0)
-fe3d:model_place("pickaxe_stone_display", "pickaxe_stone", -143.5, 33.0, -83.0)
-fe3d:model_place("pickaxe_iron_display", "pickaxe_iron", -143.5, 33.0, -83.0)
-fe3d:model_place("axe_stone_display", "axe_stone", -143.5, 33.0, -83.0)
-fe3d:model_place("axe_iron_display", "axe_iron", -143.5, 33.0, -83.0)
-fe3d:model_place("shovel_stone_display", "shovel_stone", -145.25, 33.0, -83.0)
-fe3d:model_place("shovel_iron_display", "shovel_iron", -145.25, 33.0, -83.0)
-fe3d:model_place("hoe_display", "hoe", -143.5, 33.0, -83.0)
-fe3d:model_place("scythe_display", "scythe", -143.5, 33.0, -83.0)
-fe3d:model_place("hammer_stone_display", "hammer_stone", -143.5, 33.05, -83.0)
-fe3d:model_place("hammer_iron_display", "hammer_iron", -143.5, 33.025, -83.0)
-fe3d:model_place("torch_display", "torch", -143.5, 33.0, -83.0)
-fe3d:model_place("fishrod_display", "fishrod", -143.5, 33.0, -83.0)
+fe3d:model_place("sword_iron_display", "sword_iron", -81.5, 6.5, 2.0)
+fe3d:model_place("pickaxe_stone_display", "pickaxe_stone", -81.5, 6.5, 2.0)
+fe3d:model_place("pickaxe_iron_display", "pickaxe_iron", -81.5, 6.5, 2.0)
+fe3d:model_place("axe_stone_display", "axe_stone", -81.5, 6.5, 2.0)
+fe3d:model_place("axe_iron_display", "axe_iron", -81.5, 6.5, 2.0)
+fe3d:model_place("shovel_stone_display", "shovel_stone", -83.25, 6.5, 2.0)
+fe3d:model_place("shovel_iron_display", "shovel_iron", -83.25, 6.5, 2.0)
+fe3d:model_place("hoe_display", "hoe", -81.5, 6.5, 2.0)
+fe3d:model_place("scythe_display", "scythe", -81.5, 6.5, 2.0)
+fe3d:model_place("hammer_stone_display", "hammer_stone", -81.5, 6.55, 2.0)
+fe3d:model_place("hammer_iron_display", "hammer_iron", -81.5, 6.525, 2.0)
+fe3d:model_place("torch_display", "torch", -81.5, 6.5, 2.0)
+fe3d:model_place("fishrod_display", "fishrod", -81.5, 6.5, 2.0)
 fe3d:model_set_rotation("sword_stone_display", 90.0, 0.0, 0.0)
 fe3d:model_set_rotation("sword_iron_display", 90.0, 0.0, 0.0)
 fe3d:model_set_rotation("pickaxe_stone_display", 90.0, 0.0, 0.0)

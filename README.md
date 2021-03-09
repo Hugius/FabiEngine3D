@@ -536,11 +536,11 @@ fe3d:print(camPos.x)
 - `fe3d:raycast_is_position_on_terrain_valid`() ---> `BOOL`  
   Returns true if 3D cursor position is valid.
 - `fe3d:raycast_into_model`(`STR` model, `STR` aabbpart, `BOOL` occludable) ---> `STR`  
-  Returns the ID of the model that is selected. All models which ID starts with **model** will be checked (leave empty for all models). Only the **aabbpart** will be checked (leave empty for all parts). **occludable** means if the raycast can be blocked by other AABBs.
+  Returns the ID of the model that is selected. All models which ID starts with **ID** will be checked (leave empty for all models). Only the **aabbpart** will be checked (leave empty for all parts). **occludable** means if the raycast can be blocked by other AABBs.
 - `fe3d:raycast_into_models`() ---> `STR`  
   Returns the ID of any model that is selected.
 - `fe3d:raycast_into_billboard`(`STR` billboard,  `BOOL` occludable) ---> `STR`  
-  Returns the ID of the billboard that is selected. All billboards which ID starts with **billboards** will be checked (leave empty for all billboards). **occludable** means if the raycast can be blocked by other AABBs.
+  Returns the ID of the billboard that is selected. All billboards which ID starts with **ID** will be checked (leave empty for all billboards). **occludable** means if the raycast can be blocked by other AABBs.
 - `fe3d:raycast_into_billboards`() ---> `STR`  
   Returns the ID of any billboard that is selected.
 - `fe3d:raycast_into_model_distance`(`STR` model, `STR` aabbpart, `BOOL` occludable) ---> `DEC`  

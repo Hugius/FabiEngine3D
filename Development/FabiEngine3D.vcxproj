@@ -392,6 +392,7 @@
     <ClCompile Include="Source\script_interpreter_func_fe3d_billboard.cpp" />
     <ClCompile Include="Source\script_interpreter_func_fe3d_image.cpp" />
     <ClCompile Include="Source\script_interpreter_func_fe3d_light.cpp" />
+    <ClCompile Include="Source\script_interpreter_func_fe3d_raycast.cpp" />
     <ClCompile Include="Source\script_interpreter_func_fe3d_sky.cpp" />
     <ClCompile Include="Source\script_interpreter_func_fe3d_terrain.cpp" />
     <ClCompile Include="Source\script_interpreter_func_fe3d_text.cpp" />
@@ -404,7 +405,7 @@
     <ClCompile Include="Source\script_interpreter_main.cpp" />
     <ClCompile Include="Source\script_interpreter_execution.cpp" />
     <ClCompile Include="Source\script_interpreter_func_fe3d_camera.cpp" />
-    <ClCompile Include="Source\script_interpreter_func_fe3d_physics.cpp" />
+    <ClCompile Include="Source\script_interpreter_func_fe3d_collision.cpp" />
     <ClCompile Include="Source\script_interpreter_func_fe3d_main.cpp" />
     <ClCompile Include="Source\script_interpreter_condition.cpp" />
     <ClCompile Include="Source\script_interpreter_func_fe3d_model.cpp" />

@@ -78,10 +78,10 @@ void BillboardEditor::_updateBillboardCreation()
 			// Check if user filled in a new name
 			if (_gui.getGlobalScreen()->checkValueForm("newBillboardName", newBillboardName, { _currentBillboardID }))
 			{
-				// Check if name starts with @ sign
-				if (newBillboardName[0] != '@')
+				// @ sign not allowed
+				if (newBillboardName.find('@') == string::npos)
 				{
-					// Check if name contains spaces
+					// Spaces not allowed
 					if (newBillboardName.find(' ') == string::npos)
 					{
 						// Add @ sign to new name
@@ -117,7 +117,7 @@ void BillboardEditor::_updateBillboardCreation()
 				}
 				else
 				{
-					_fe3d.logger_throwWarning("New billboard name cannot begin with '@'!");
+					_fe3d.logger_throwWarning("New billboard name cannot contain '@'!");
 				}
 			}
 		}

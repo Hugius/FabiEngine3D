@@ -1,4 +1,4 @@
-38 41
+40 80
 META script_type_update
 
 /// Update stone hover
@@ -40,8 +40,6 @@ IF _wasPickaxePlaying IS <true> AND _isPickaxePlaying IS <false>:
         INCR stonePos.y _stonesFallHeight
         /// Place stones model
         fe3d:model_place(stonesID, "stones", stonePos.x, stonePos.y, stonePos.z)
-        IF subString IS "stone5":
-            fe3d:model_set_size(stonesID, 1.2, 1.2, 1.2)
         DECR _durabilities[1] _durabilityHit
 
 /// Stones falling updates

@@ -33,7 +33,10 @@ void SceneEditor::_updateMainAudioMenu()
 						if (audioID[0] != '@')
 						{
 							// Removing the unique number from the audioID
-							string audioName = audioID.substr(audioID.find('@') + 1);
+							std::reverse(audioID.begin(), audioID.end());
+							string audioName = audioID.substr(audioID.find('_') + 1);
+							std::reverse(audioName.begin(), audioName.end());
+							std::reverse(audioID.begin(), audioID.end());
 
 							// Add new button
 							_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuAudioChoice")->

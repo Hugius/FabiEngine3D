@@ -200,7 +200,7 @@ void ModelEditor::_updateModelCreation()
 				}
 				else
 				{
-					_fe3d.logger_throwWarning("New model name cannot begin with '@'!");
+					_fe3d.logger_throwWarning("New model name cannot contain '@'!");
 				}
 			}
 		}

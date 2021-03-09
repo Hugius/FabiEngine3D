@@ -104,12 +104,12 @@ private:
 	void _placeWater(const string& newID, Vec3 position, float size, bool isWaving, bool isRippling, bool isSpecularLighted, bool isReflective,
 		bool isRefractive, float waveHeightFactor, float specularFactor, float specularIntensity, float transparency, Vec3 color, float uvRepeat,
 		Vec2 speed, const string& dudvMapPath, const string& normalMapPath, const string& displacementMapPath);
-	void _placeModel(bool scriptExecution, const string& modelName, const string& modelNumber, Vec3 position, Vec3 rotation, Vec3 size, 
+	void _placeModel(const string& modelID, Vec3 position, Vec3 rotation, Vec3 size,
 		const string& meshPath, const string& diffuseMapPath, const string& lightMapPath, const string& reflectionMapPath, const string& normalMapPath, 
 		bool isFrozen, bool isFaceCulled, bool isShadowed, bool isTransparent, bool isSpecular, int reflectionType, float specularFactor,
 		float specularIntensity, float lightness, Vec3 color, float uvRepeat, const string& lodEntityID, bool isInstanced,
 		vector<Vec3> instancedOffsets, vector<string> aabbNames, vector<Vec3> aabbPositions, vector<Vec3> aabbSizes, string animationID);
-	void _placeBillboard(bool scriptExecution, const string& billboardName, const string& billboardNumber,
+	void _placeBillboard(const string& billboardID,
 		const string& diffusePath, const string& fontPath, const string& textContent,
 		Vec3 position, Vec3 rotation, Vec2 size, Vec3 color, bool facingX, bool facingY, bool isTransparent,
 		bool isAnimated, int animationRows, int animationColumns, int animationFramestep, float lightness);

@@ -33,7 +33,10 @@ void SceneEditor::_updateMainBillboardMenu()
 						if (billboardID[0] != '@')
 						{
 							// Removing the unique number from the billboardID
-							string billboardName = billboardID.substr(billboardID.find('@') + 1);
+							std::reverse(billboardID.begin(), billboardID.end());
+							string billboardName = billboardID.substr(billboardID.find('_') + 1);
+							std::reverse(billboardName.begin(), billboardName.end());
+							std::reverse(billboardID.begin(), billboardID.end());
 
 							// Add new button
 							_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuBillboardChoice")->getScrollingList("billboards")->addButton(billboardID, billboardName);

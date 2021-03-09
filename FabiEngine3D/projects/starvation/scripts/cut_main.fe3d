@@ -1,4 +1,4 @@
-3 24
+10 0
 META script_type_update
 
 /// Update tree hover
@@ -9,9 +9,9 @@ IF distance IS -1.0:
     EDIT distance = 1000.0
 STR toolID = _inventory[_equipIndex]
 fe3d:text_set_visible("cut", <false>)
+
 /// Looking at tree trunk
 IF hoveredID NOT "" AND _fallingTreeID IS "":
-    fe3d:print("hoi")
     IF distance LESS _maxReach:
         EDIT isHovered = <true>
         /// Must have an axe equipped

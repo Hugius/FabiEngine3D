@@ -356,13 +356,8 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 				std::replace(lodEntityID.begin(), lodEntityID.end(), '?', ' ');
 				std::replace(animationID.begin(), animationID.end(), '?', ' ');
 
-				// Extract model name and number from ID
-				unsigned int atPos = std::distance(modelID.begin(), std::find(modelID.begin(), modelID.end(), '@'));
-				string modelNumber = modelID.substr(0, atPos);
-				string modelName = modelID.substr(atPos + 1);
-
 				// Add the model
-				_placeModel(!_isEditorLoaded, modelName, modelNumber, position, rotation, size, meshPath, diffuseMapPath, lightMapPath, 
+				_placeModel(modelID, position, rotation, size, meshPath, diffuseMapPath, lightMapPath,
 					reflectionMapPath, normalMapPath, isFrozen, isFaceculled, isShadowed, isTransparent, isSpecular, reflectionType, specularFactor,
 					specularIntensity, lightness, color, uvRepeat, lodEntityID, 
 					isInstanced, instancedOffsets, aabbNames, aabbPositions, aabbSizes, animationID);
@@ -370,7 +365,7 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 				// Hide LOD entity (running script)
 				if (makeInvisible)
 				{
-					_fe3d.gameEntity_hide(modelName + "@" + modelNumber);
+					_fe3d.gameEntity_hide(modelID);
 				}
 			}
 			else if (entityType == "BILLBOARD")
@@ -417,13 +412,8 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 				std::replace(fontPath.begin(), fontPath.end(), '?', ' ');
 				std::replace(textContent.begin(), textContent.end(), '?', ' ');
 
-				// Extract billboard name and number from ID
-				unsigned int atPos = std::distance(billboardID.begin(), std::find(billboardID.begin(), billboardID.end(), '@'));
-				string billboardNumber = billboardID.substr(0, atPos);
-				string billboardName = billboardID.substr(atPos + 1);
-
 				// Add the billboard
-				_placeBillboard(!_isEditorLoaded, billboardName, billboardNumber, diffusePath, fontPath, textContent, position, rotation, size, color, facingX, facingY, isTransparent, isAnimated,
+				_placeBillboard(billboardID, diffusePath, fontPath, textContent, position, rotation, size, color, facingX, facingY, isTransparent, isAnimated,
 					animationRows, animationColumns, animationFramestep, lightness);
 			}
 			else if (entityType == "AMBIENT_LIGHT")

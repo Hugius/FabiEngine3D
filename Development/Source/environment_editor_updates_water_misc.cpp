@@ -27,10 +27,10 @@ void EnvironmentEditor::_updateWaterCreation()
 			// Create new water
 			if (_gui.getGlobalScreen()->checkValueForm("newWaterName", newWaterName, {}))
 			{
-				// Check if name starts with @ sign
-				if (newWaterName[0] != '@')
+				// @ sign not allowed
+				if (newWaterName.find('@') == string::npos)
 				{
-					// Check if name contains spaces
+					// Spaces not allowed
 					if (newWaterName.find(' ') == string::npos)
 					{
 						// Add @ sign to new name
@@ -62,7 +62,7 @@ void EnvironmentEditor::_updateWaterCreation()
 				}
 				else
 				{
-					_fe3d.logger_throwWarning("New water name cannot begin with '@'!");
+					_fe3d.logger_throwWarning("New water name cannot contain '@'!");
 				}
 			}
 		}

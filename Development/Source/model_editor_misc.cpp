@@ -279,7 +279,7 @@ bool ModelEditor::_addModel(const string& modelName, string meshPath, string dif
 			// Add AABBs
 			for (unsigned int i = 0; i < aabbNames.size(); i++)
 			{
-				_fe3d.aabbEntity_bindToGameEntity(modelName, aabbPositions[i], aabbSizes[i], true, true, modelName + "_" + aabbNames[i]);
+				_fe3d.aabbEntity_bindToGameEntity(modelName, aabbPositions[i], aabbSizes[i], true, true, modelName + "@" + aabbNames[i]);
 			}
 
 			// Diffuse map

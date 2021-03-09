@@ -126,7 +126,7 @@ void ModelEditor::_updateModelEditingAabb()
 				if (newAabbName.find(' ') == string::npos)
 				{
 					// Add new AABB
-					_fe3d.aabbEntity_bindToGameEntity(_currentModelID, Vec3(0.0f), Vec3(1.0f), true, true, _currentModelID + "_" + newAabbName);
+					_fe3d.aabbEntity_bindToGameEntity(_currentModelID, Vec3(0.0f), Vec3(1.0f), true, true, _currentModelID + "@" + newAabbName);
 					_currentAabbID = newAabbName;
 
 					// Reset editing
@@ -139,6 +139,14 @@ void ModelEditor::_updateModelEditingAabb()
 						"AABB: " + _currentAabbID, 0.025f);
 					_fe3d.textEntity_show(_gui.getGlobalScreen()->getTextfield("selectedAabbName")->getEntityID());
 				}
+				else
+				{
+					_fe3d.logger_throwWarning("New AABB name cannot contain any spaces!");
+				}
+			}
+			else
+			{
+				_fe3d.logger_throwWarning("New AABB name cannot contain '@'!");
 			}
 		}
 	}

@@ -54,7 +54,7 @@ void SceneEditor::_updateAudioPlacing()
 				{
 					// Add new audiocaster
 				begin: int randomSerial = _fe3d.misc_getUniqueInt(0, INT_MAX);
-					string newID = to_string(randomSerial) + "@" + _currentPreviewAudioName.substr(1);
+					string newID = _currentPreviewAudioName.substr(1) + "_" + to_string(randomSerial);
 
 					// Check if ID not already exists
 					if (_fe3d.audioEntity_isExisting(newID))

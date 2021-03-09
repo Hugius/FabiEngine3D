@@ -26,10 +26,10 @@ void EnvironmentEditor::_updateSkyCreation()
 			// Create new sky
 			if (_gui.getGlobalScreen()->checkValueForm("newSkyName", newSkyName, {}))
 			{
-				// Check if name starts with @ sign
-				if (newSkyName[0] != '@')
+				// @ sign not allowed
+				if (newSkyName.find('@') == string::npos)
 				{
-					// Check if name contains spaces
+					// Spaces not allowed
 					if (newSkyName.find(' ') == string::npos)
 					{
 						// Add @ sign to new name
@@ -61,7 +61,7 @@ void EnvironmentEditor::_updateSkyCreation()
 				}
 				else
 				{
-					_fe3d.logger_throwWarning("New sky name cannot begin with '@'!");
+					_fe3d.logger_throwWarning("New sky name cannot contain '@'!");
 				}
 			}
 		}

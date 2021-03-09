@@ -39,7 +39,7 @@ void SceneEditor::_updateLightPlacing()
 				{
 					// Add new pointlight
 				begin: int randomSerial = _fe3d.misc_getUniqueInt(0, INT_MAX);
-					string newID = "pointlight" + to_string(randomSerial);
+					string newID = "pointlight_" + to_string(randomSerial);
 
 					// Check if ID not already exists
 					if (_fe3d.lightEntity_isExisting(newID))

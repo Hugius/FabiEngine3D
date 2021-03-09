@@ -27,10 +27,10 @@ void EnvironmentEditor::_updateTerrainCreation()
 			// Create new terrain
 			if (_gui.getGlobalScreen()->checkValueForm("newTerrainName", newTerrainName, {}))
 			{
-				// Check if name starts with @ sign
-				if (newTerrainName[0] != '@')
+				// @ sign not allowed
+				if (newTerrainName.find('@') == string::npos)
 				{
-					// Check if name contains spaces
+					// Spaces not allowed
 					if (newTerrainName.find(' ') == string::npos)
 					{
 						// Add @ sign to new name
@@ -60,7 +60,7 @@ void EnvironmentEditor::_updateTerrainCreation()
 				}
 				else
 				{
-					_fe3d.logger_throwWarning("New terrain name cannot begin with '@'!");
+					_fe3d.logger_throwWarning("New terrain name cannot contain '@'!");
 				}
 			}
 		}

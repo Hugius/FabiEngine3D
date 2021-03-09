@@ -44,7 +44,10 @@ void SceneEditor::_selectModel(const string& modelID)
 	if (_activeModelID == "" && _activeBillboardID == "" && _activeLightBulbID == "" && _activeSpeakerID == "")
 	{
 		// Removing the unique number from the modelID and updating the text content
-		string modelName = modelID.substr(modelID.find('@') + 1);
+		string tempID = modelID;
+		std::reverse(tempID.begin(), tempID.end());
+		string modelName = tempID.substr(tempID.find('_') + 1);
+		std::reverse(modelName.begin(), modelName.end());
 		string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedModelName")->getEntityID();
 		_fe3d.textEntity_show(textEntityID);
 		_fe3d.textEntity_setTextContent(textEntityID, "Selected model: " + modelName, 0.025f);
@@ -68,7 +71,10 @@ void SceneEditor::_activateModel(const string& modelID)
 	_gui.getViewport("right")->getWindow("main")->getScreen("modelPropertiesMenu")->getWriteField("z")->setTextContent(to_string(static_cast<int>(position.z)));
 
 	// Removing the unique number from the modelID and updating the text content
-	string modelName = modelID.substr(modelID.find('@') + 1);
+	string tempID = modelID;
+	std::reverse(tempID.begin(), tempID.end());
+	string modelName = tempID.substr(tempID.find('_') + 1);
+	std::reverse(modelName.begin(), modelName.end());
 	string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedModelName")->getEntityID();
 	_fe3d.textEntity_show(textEntityID);
 	_fe3d.textEntity_setTextContent(textEntityID, "Active model: " + modelName, 0.025f);
@@ -85,7 +91,10 @@ void SceneEditor::_selectBillboard(const string& billboardID)
 	if (_activeBillboardID == "" && _activeModelID == "" && _activeLightBulbID == "" && _activeSpeakerID == "")
 	{
 		// Removing the unique number from the billboardID and updating the text content
-		string billboardName = billboardID.substr(billboardID.find('@') + 1);
+		string tempID = billboardID;
+		std::reverse(tempID.begin(), tempID.end());
+		string billboardName = tempID.substr(tempID.find('_') + 1);
+		std::reverse(billboardName.begin(), billboardName.end());
 		string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID();
 		_fe3d.textEntity_show(textEntityID);
 		_fe3d.textEntity_setTextContent(textEntityID, "Selected billboard: " + billboardName, 0.025f);
@@ -109,7 +118,10 @@ void SceneEditor::_activateBillboard(const string& billboardID)
 	_gui.getViewport("right")->getWindow("main")->getScreen("billboardPropertiesMenu")->getWriteField("z")->setTextContent(to_string(static_cast<int>(position.z)));
 
 	// Removing the unique number from the billboardID and updating the text content
-	string billboardName = billboardID.substr(billboardID.find('@') + 1);
+	string tempID = billboardID;
+	std::reverse(tempID.begin(), tempID.end());
+	string billboardName = tempID.substr(tempID.find('_') + 1);
+	std::reverse(billboardName.begin(), billboardName.end());
 	string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedBillboardName")->getEntityID();
 	_fe3d.textEntity_show(textEntityID);
 	_fe3d.textEntity_setTextContent(textEntityID, "Active billboard: " + billboardName, 0.025f);
@@ -126,7 +138,10 @@ void SceneEditor::_selectAudio(const string& audioID)
 	if (_activeBillboardID == "" && _activeModelID == "" && _activeLightBulbID == "" && _activeSpeakerID == "")
 	{
 		// Removing the unique number from the audioID and updating the text content
-		string audioName = audioID.substr(audioID.find('@') + 1);
+		string tempID = audioID;
+		std::reverse(tempID.begin(), tempID.end());
+		string audioName = tempID.substr(tempID.find('_') + 1);
+		std::reverse(audioName.begin(), audioName.end());
 		string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedAudioName")->getEntityID();
 		_fe3d.textEntity_show(textEntityID);
 		_fe3d.textEntity_setTextContent(textEntityID, "Selected audio: " + audioName, 0.025f);
@@ -148,8 +163,11 @@ void SceneEditor::_activateAudio(const string& audioID)
 	_gui.getViewport("right")->getWindow("main")->getScreen("audioPropertiesMenu")->getWriteField("volume")->setTextContent(to_string(static_cast<int>(maxVolume * 100.0f)));
 	_gui.getViewport("right")->getWindow("main")->getScreen("audioPropertiesMenu")->getWriteField("distance")->setTextContent(to_string(static_cast<int>(maxDistance)));
 
-	// Removing the unique number from the billboardID and updating the text content
-	string audioName = audioID.substr(audioID.find('@') + 1);
+	// Removing the unique number from the audioID and updating the text content
+	string tempID = audioID;
+	std::reverse(tempID.begin(), tempID.end());
+	string audioName = tempID.substr(tempID.find('_') + 1);
+	std::reverse(audioName.begin(), audioName.end());
 	string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedAudioName")->getEntityID();
 	_fe3d.textEntity_show(textEntityID);
 	_fe3d.textEntity_setTextContent(textEntityID, "Active audio: " + audioName, 0.025f);

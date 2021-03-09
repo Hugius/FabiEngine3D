@@ -38,7 +38,7 @@ void SceneEditor::_updateBillboardPlacing()
 					// Add new billboard
 				begin: int randomSerial = _fe3d.misc_getUniqueInt(0, INT_MAX);
 					string newID = _currentPreviewBillboardName.substr(1); // Remove the '@'
-					newID = to_string(randomSerial) + "@" + newID; // Adding a number to make it unique
+					newID = newID + "_" + to_string(randomSerial); // Adding a number to make it unique
 
 					// Check if ID not already exists
 					if (_fe3d.billboardEntity_isExisting(newID))

@@ -71,19 +71,66 @@ bool ScriptInterpreter::_executeFe3dPhysicsFunction(const string& functionName, 
 		{
 			// Temporary values
 			string result = "";
+			string partID = "";
 
 			// Find aabbEntity ID
-			string searchID = arguments[0].getString() + (!arguments[1].getString().empty() ? ("_" + arguments[1].getString()) : "");
-			auto foundAabbID = _fe3d.collision_checkCursorInEntities(searchID, arguments[2].getBoolean()).first;
+			auto foundAabbID = _fe3d.collision_checkCursorInEntities(arguments[0].getString(), arguments[2].getBoolean()).first;
 
 			// Retrieve bound gameEntity ID
 			if (!foundAabbID.empty() && (_fe3d.aabbEntity_getParentType(foundAabbID) == AabbParentType::GAME_ENTITY))
 			{
-				result = _fe3d.aabbEntity_getParentID(foundAabbID);
+				if (arguments[1].getString().empty()) // No specific AABB part
+				{
+					result = _fe3d.aabbEntity_getParentID(foundAabbID);
+				}
+				else // Specific AABB part
+				{
+					if (foundAabbID.find('@') != std::string::npos) // Scene model
+					{
+						partID = foundAabbID.substr(0, foundAabbID.find('@'));
+					}
+					else // Placed model
+					{
+						partID = foundAabbID;
+					}
+
+					// Extract AABB part ID
+					std::reverse(partID.begin(), partID.end());
+					partID = partID.substr(0, foundAabbID.find('_'));
+					std::reverse(partID.begin(), partID.end());
+
+					// Check if AABB part ID's match
+					if (partID == arguments[1].getString())
+					{
+						result = _fe3d.aabbEntity_getParentID(foundAabbID);
+					}
+				}
 			}
 
 			// Return
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result));
+		}
+	}
+	else if (functionName == "fe3d:raycast_into_model_distance") // Raycasting into multiple gameEntities and retrieving the distance
+	{
+		auto types = { ScriptValueType::STRING, ScriptValueType::STRING, ScriptValueType::BOOLEAN }; // GameEntityID + aabbPartID + canBeOccluded
+
+		// Validate arguments
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		{
+			// Find aabbEntity ID
+			string searchID = arguments[0].getString() + (!arguments[1].getString().empty() ? ("_" + arguments[1].getString()) : "");
+			auto intersection = _fe3d.collision_checkCursorInEntities(searchID, arguments[2].getBoolean());
+			float result = -1.0f;
+
+			// Retrieve bound gameEntity ID
+			if (!intersection.first.empty() && (_fe3d.aabbEntity_getParentType(intersection.first) == AabbParentType::GAME_ENTITY))
+			{
+				result = intersection.second;
+			}
+
+			// Return
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
 		}
 	}
 	else if (functionName == "fe3d:raycast_into_models") // Raycasting into all gameEntities
@@ -105,6 +152,25 @@ bool ScriptInterpreter::_executeFe3dPhysicsFunction(const string& functionName, 
 
 			// Return
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result));
+		}
+	}
+	else if (functionName == "fe3d:raycast_into_models_distance") // Raycasting into all gameEntities and retrieving the distance
+	{
+		// Validate arguments
+		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			// Find aabbEntity ID
+			auto intersection = _fe3d.collision_checkCursorInAny();
+			float result = -1.0f;
+
+			// Check if aabbEntity entity has a parent gameEntity
+			if (!intersection.first.empty() && _fe3d.aabbEntity_getParentType(intersection.first) == AabbParentType::GAME_ENTITY)
+			{
+				result = intersection.second;
+			}
+
+			// Return
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
 		}
 	}
 	else if (functionName == "fe3d:raycast_into_billboard") // Raycasting into multiple billboardEntities
@@ -149,47 +215,6 @@ bool ScriptInterpreter::_executeFe3dPhysicsFunction(const string& functionName, 
 
 			// Return
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result));
-		}
-	}
-	else if (functionName == "fe3d:raycast_into_model_distance") // Raycasting into multiple gameEntities and retrieving the distance
-	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::STRING, ScriptValueType::BOOLEAN }; // GameEntityID + aabbPartID + canBeOccluded
-
-		// Validate arguments
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
-		{
-			// Find aabbEntity ID
-			string searchID = arguments[0].getString() + (!arguments[1].getString().empty() ? ("_" + arguments[1].getString()) : "");
-			auto intersection = _fe3d.collision_checkCursorInEntities(searchID, arguments[2].getBoolean());
-			float result = -1.0f;
-
-			// Retrieve bound gameEntity ID
-			if (!intersection.first.empty() && (_fe3d.aabbEntity_getParentType(intersection.first) == AabbParentType::GAME_ENTITY))
-			{
-				result = intersection.second;
-			}
-
-			// Return
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
-		}
-	}
-	else if (functionName == "fe3d:raycast_into_models_distance") // Raycasting into all gameEntities and retrieving the distance
-	{
-		// Validate arguments
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
-		{
-			// Find aabbEntity ID
-			auto intersection = _fe3d.collision_checkCursorInAny();
-			float result = -1.0f;
-
-			// Check if aabbEntity entity has a parent gameEntity
-			if (!intersection.first.empty() && _fe3d.aabbEntity_getParentType(intersection.first) == AabbParentType::GAME_ENTITY)
-			{
-				result = intersection.second;
-			}
-
-			// Return
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
 		}
 	}
 	else if (functionName == "fe3d:raycast_into_billboard_distance") // Raycasting into multiple billboardEntities and retrieving the distance

@@ -170,10 +170,10 @@ void ModelEditor::_updateModelCreation()
 			// Create new model
 			if (_gui.getGlobalScreen()->checkValueForm("newModelName", newModelName, {}))
 			{
-				// Starting with at-sign not allowed
-				if (newModelName[0] != '@')
+				// @ sign not allowed
+				if (newModelName.find('@') == string::npos)
 				{
-					// Check if name contains spaces
+					// Spaces not allowed
 					if (newModelName.find(' ') == string::npos)
 					{
 						// Add model and check if not already existing

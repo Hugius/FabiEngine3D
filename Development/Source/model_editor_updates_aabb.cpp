@@ -110,28 +110,36 @@ void ModelEditor::_updateModelEditingAabb()
 	}
 
 	// Create AABB
-	string newName;
-	if (_gui.getGlobalScreen()->checkValueForm("newAabbName", newName, {}))
+	string newAabbName;
+	if (_gui.getGlobalScreen()->checkValueForm("newAabbName", newAabbName, {}))
 	{
-		if (_fe3d.aabbEntity_isExisting(_currentModelID + "_" + newName)) // Check if already exists
+		if (_fe3d.aabbEntity_isExisting(_currentModelID + "_" + newAabbName)) // Check if already exists
 		{
-			_fe3d.logger_throwWarning("New AABB \"" + newName + "\" of model \"" + _currentModelID.substr(1) + "\" already exists!");
+			_fe3d.logger_throwWarning("New AABB \"" + newAabbName + "\" of model \"" + _currentModelID.substr(1) + "\" already exists!");
 		}
 		else
 		{
-			// Add new AABB
-			_fe3d.aabbEntity_bindToGameEntity(_currentModelID, Vec3(0.0f), Vec3(1.0f), true, true, _currentModelID + "_" + newName);
-			_currentAabbID = newName;
+			// @ sign not allowed
+			if (newAabbName.find('@') == string::npos)
+			{
+				// Spaces not allowed
+				if (newAabbName.find(' ') == string::npos)
+				{
+					// Add new AABB
+					_fe3d.aabbEntity_bindToGameEntity(_currentModelID, Vec3(0.0f), Vec3(1.0f), true, true, _currentModelID + "_" + newAabbName);
+					_currentAabbID = newAabbName;
 
-			// Reset editing
-			_movingToggled = false;
-			_resizingToggled = false;
-			_transformationDirection = Direction::X;
+					// Reset editing
+					_movingToggled = false;
+					_resizingToggled = false;
+					_transformationDirection = Direction::X;
 
-			// Show AABB title
-			_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedAabbName")->getEntityID(),
-				"AABB: " + _currentAabbID, 0.025f);
-			_fe3d.textEntity_show(_gui.getGlobalScreen()->getTextfield("selectedAabbName")->getEntityID());
+					// Show AABB title
+					_fe3d.textEntity_setTextContent(_gui.getGlobalScreen()->getTextfield("selectedAabbName")->getEntityID(),
+						"AABB: " + _currentAabbID, 0.025f);
+					_fe3d.textEntity_show(_gui.getGlobalScreen()->getTextfield("selectedAabbName")->getEntityID());
+				}
+			}
 		}
 	}
 

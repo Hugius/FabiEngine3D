@@ -1,4 +1,4 @@
-10 55
+30 25
 META script_type_update
 
 /// Temporary values
@@ -27,9 +27,9 @@ IF _isJumping IS <true>:
         /// Player hit an AABB
         EDIT _isJumping = <false>
         EDIT _jumpingSpeed = _initialJumpingSpeed
-        NEG _initialJumpingSpeed
-        fe3d:camera_move(0.0, _initialJumpingSpeed, 0.0)
-        NEG _initialJumpingSpeed
+        NEG _jumpingSpeed
+        fe3d:camera_move(0.0, _jumpingSpeed, 0.0)
+        NEG _jumpingSpeed
     ELSE:
         /// Slow jump ascending
         MUL _jumpingSpeed 0.95

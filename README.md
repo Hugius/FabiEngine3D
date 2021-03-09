@@ -148,6 +148,9 @@ Click [here](#model-editor-example) to see an example
 - You can also add 1 or more **AABBs** to the model. Every individual box has a position and size.
 - All AABBs are bound to the model's transformation (translation, rotation, scaling).
 - A mesh should be modeled so that the center is at the **lowest** vertex.
+- If you enable the "alpha removal" property, all transparent pixels in the diffuse map(s) will not be rendered. This is useful for transparent backgrounds for example.
+- If you enable the "instancing" property, the model will be rendered VERY efficiently if in large numbers. This option will also disable AABB's for this model.
+- The "level of detail" property is the name of another model representing a lower quality version of the current model.
 ### Normal mesh
 - **Mesh**: `OBJ` format mesh file from `game_assets\meshes`.
 - **Diffuse map**: colored 24bit/32bit `PNG` format image file from `game_assets\textures\diffuse_maps\`.
@@ -1207,7 +1210,7 @@ fe3d:print(camPos.x)
 - **"Rotated"** AABBs will be translated and/or scaled in **90 degrees** directions (0, 90, 180, 270, etc).
 - You **can** individually access (bound) AABBs that are placed through **scripting**.
 - You **cannot** individually access bound AABBs from a **scene**.
-- If you want to access an AABB bound to a model, the ID is composed like this: **modelID + "_" + aabbName**.
+- If you want to access an AABB bound to a model, the ID is composed like this: **modelID + "@" + aabbName**.
 ### Tips & tricks
 - You can create your own custom **subfolders** within the main folder of `user\assets`.
 - Internal engine updates happen **after** the scripting updates.

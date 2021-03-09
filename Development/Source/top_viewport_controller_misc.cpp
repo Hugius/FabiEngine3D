@@ -70,25 +70,25 @@ void TopViewportController::_updateProjectCreation()
 				auto temp = _mkdir(newDirectoryPath.c_str());
 
 				// Generate project subfolders
-				temp = _mkdir((newDirectoryPath + "\\entities").c_str());
+				temp = _mkdir((newDirectoryPath + "\\data").c_str());
 				temp = _mkdir((newDirectoryPath + "\\saves").c_str());
 				temp = _mkdir((newDirectoryPath + "\\scenes").c_str());
 				temp = _mkdir((newDirectoryPath + "\\scripts").c_str());
 
 				// Create new empty project files
-				auto file = std::ofstream(string(newDirectoryPath + "\\entities\\animation.fe3d"));
+				auto file = std::ofstream(string(newDirectoryPath + "\\data\\animation.fe3d"));
 				file.close();
-				file = std::ofstream(string(newDirectoryPath + "\\entities\\audio.fe3d"));
+				file = std::ofstream(string(newDirectoryPath + "\\data\\audio.fe3d"));
 				file.close();
-				file = std::ofstream(string(newDirectoryPath + "\\entities\\billboard.fe3d"));
+				file = std::ofstream(string(newDirectoryPath + "\\data\\billboard.fe3d"));
 				file.close();
-				file = std::ofstream(string(newDirectoryPath + "\\entities\\model.fe3d"));
+				file = std::ofstream(string(newDirectoryPath + "\\data\\model.fe3d"));
 				file.close();
-				file = std::ofstream(string(newDirectoryPath + "\\entities\\sky.fe3d"));
+				file = std::ofstream(string(newDirectoryPath + "\\data\\sky.fe3d"));
 				file.close();
-				file = std::ofstream(string(newDirectoryPath + "\\entities\\terrain.fe3d"));
+				file = std::ofstream(string(newDirectoryPath + "\\data\\terrain.fe3d"));
 				file.close();
-				file = std::ofstream(string(newDirectoryPath + "\\entities\\water.fe3d"));
+				file = std::ofstream(string(newDirectoryPath + "\\data\\water.fe3d"));
 				file.close();
 
 				// Create settings file

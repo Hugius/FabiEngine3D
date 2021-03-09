@@ -13,7 +13,7 @@ const vector<string> EnvironmentEditor::getAllTerrainTexturePathsFromFile()
 	}
 
 	// Compose full file path
-	string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : ("projects\\" + _currentProjectID)) + "\\entities\\terrain.fe3d";
+	string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : ("projects\\" + _currentProjectID)) + "\\data\\terrain.fe3d";
 
 	// Load terrain file
 	if (_fe3d.misc_isFileExisting(filePath))
@@ -120,7 +120,7 @@ void EnvironmentEditor::loadTerrainEntitiesFromFile()
 	_loadedTerrainIDs.clear();
 
 	// Compose full terrain file path
-	string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : ("projects\\" + _currentProjectID)) + "\\entities\\terrain.fe3d";
+	string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : ("projects\\" + _currentProjectID)) + "\\data\\terrain.fe3d";
 
 	// Check if terrain file exists
 	if (_fe3d.misc_isFileExisting(filePath))
@@ -252,7 +252,7 @@ void EnvironmentEditor::saveTerrainEntitiesToFile()
 		}
 
 		// Compose full terrain file path
-		string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : ("projects\\" + _currentProjectID)) + "\\entities\\terrain.fe3d";
+		string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : ("projects\\" + _currentProjectID)) + "\\data\\terrain.fe3d";
 
 		// Load file
 		std::ofstream file(filePath);

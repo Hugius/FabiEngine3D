@@ -32,7 +32,7 @@ void ModelEditor::_updateModelEditingAabb()
 				vector<string> aabbNames = _fe3d.aabbEntity_getBoundIDs(_currentModelID, true, false);
 				for (auto& name : aabbNames)
 				{
-					name = name.substr(string(_currentModelID + "_").size());
+					name = name.substr(string(_currentModelID + "@").size());
 				}
 
 				// Show choicelist
@@ -43,7 +43,7 @@ void ModelEditor::_updateModelEditingAabb()
 				_movingToggled = false;
 				_resizingToggled = false;
 				_transformationDirection = Direction::X;
-				_fe3d.aabbEntity_delete(_currentModelID + "_" + _currentAabbID);
+				_fe3d.aabbEntity_delete(_currentModelID + "@" + _currentAabbID);
 				_currentAabbID = "";
 				_fe3d.textEntity_hide(_gui.getGlobalScreen()->getTextfield("selectedAabbName")->getEntityID());
 			}
@@ -86,7 +86,7 @@ void ModelEditor::_updateModelEditingAabb()
 	// Update AABB visibility
 	for (auto& entityID : _fe3d.aabbEntity_getAllIDs())
 	{
-		if (entityID == _currentModelID + "_" + _currentAabbID)
+		if (entityID == (_currentModelID + "@" + _currentAabbID))
 		{
 			_fe3d.aabbEntity_show(entityID);
 		}
@@ -113,7 +113,7 @@ void ModelEditor::_updateModelEditingAabb()
 	string newAabbName;
 	if (_gui.getGlobalScreen()->checkValueForm("newAabbName", newAabbName, {}))
 	{
-		if (_fe3d.aabbEntity_isExisting(_currentModelID + "_" + newAabbName)) // Check if already exists
+		if (_fe3d.aabbEntity_isExisting(_currentModelID + "@" + newAabbName)) // Check if already exists
 		{
 			_fe3d.logger_throwWarning("New AABB \"" + newAabbName + "\" of model \"" + _currentModelID.substr(1) + "\" already exists!");
 		}
@@ -195,7 +195,7 @@ void ModelEditor::_updateModelEditingAabb()
 		// Show hovered AABB
 		if (hoveredAabbID != "")
 		{
-			_fe3d.aabbEntity_show(_currentModelID + "_" + hoveredAabbID);
+			_fe3d.aabbEntity_show(_currentModelID + "@" + hoveredAabbID);
 		}
 	}
 
@@ -206,7 +206,7 @@ void ModelEditor::_updateModelEditingAabb()
 		if (_movingToggled)
 		{
 			float scrollingDirection = float(_fe3d.input_getMouseWheelY());
-			Vec3 newPosition = _fe3d.aabbEntity_getPosition(_currentModelID + "_" + _currentAabbID);
+			Vec3 newPosition = _fe3d.aabbEntity_getPosition(_currentModelID + "@" + _currentAabbID);
 
 			// Determine direction
 			switch (_transformationDirection)
@@ -225,14 +225,14 @@ void ModelEditor::_updateModelEditingAabb()
 			}
 
 			// Apply new size
-			_fe3d.aabbEntity_setPosition(_currentModelID + "_" + _currentAabbID, newPosition);
+			_fe3d.aabbEntity_setPosition(_currentModelID + "@" + _currentAabbID, newPosition);
 		}
 
 		// Update resizing through cursor
 		if (_resizingToggled)
 		{
 			float scrollingDirection = float(_fe3d.input_getMouseWheelY());
-			Vec3 newSize = _fe3d.aabbEntity_getSize(_currentModelID + "_" + _currentAabbID);
+			Vec3 newSize = _fe3d.aabbEntity_getSize(_currentModelID + "@" + _currentAabbID);
 
 			// Check if able to scroll
 			if (!_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isCursorInsideViewport())
@@ -260,7 +260,7 @@ void ModelEditor::_updateModelEditingAabb()
 			}
 
 			// Apply new size
-			_fe3d.aabbEntity_setSize(_currentModelID + "_" + _currentAabbID, newSize);
+			_fe3d.aabbEntity_setSize(_currentModelID + "@" + _currentAabbID, newSize);
 		}
 	}
 }

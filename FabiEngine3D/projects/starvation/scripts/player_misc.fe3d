@@ -1,4 +1,4 @@
-39 37
+44 22
 META script_type_update
 
 /// Temporary values
@@ -39,3 +39,8 @@ VEC3 camPos = fe3d:camera_get_position()
 DEC waterY = fe3d:water_get_height()
 IF camPos.y LESS waterY:
     INCR _hygiene _hygieneWaterFactor
+
+/// Update fire damage
+STR aabbID = fe3d:collision_check_camera_model("campfire", "logs", "")
+IF aabbID NOT "":
+    fe3d:print(aabbID)

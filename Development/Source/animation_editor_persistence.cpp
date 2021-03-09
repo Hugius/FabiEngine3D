@@ -15,7 +15,7 @@ void AnimationEditor::loadAnimationsFromFile()
 	_animations.clear();
 
 	// Compose full file path
-	string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : ("projects\\" + _currentProjectID)) + "\\entities\\animation.fe3d";
+	string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : ("projects\\" + _currentProjectID)) + "\\data\\animation.fe3d";
 
 	// Check if animation file exists
 	if (_fe3d.misc_isFileExisting(filePath))
@@ -187,7 +187,7 @@ void AnimationEditor::saveAnimationsToFile()
 		}
 
 		// Compose full file path
-		string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : ("projects\\" + _currentProjectID)) + "\\entities\\animation.fe3d";
+		string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : ("projects\\" + _currentProjectID)) + "\\data\\animation.fe3d";
 
 		// Create or overwrite animation file
 		std::ofstream file;

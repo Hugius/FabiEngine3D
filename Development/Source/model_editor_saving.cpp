@@ -16,7 +16,7 @@ void ModelEditor::saveGameEntitiesToFile()
 
 		// Create or overwrite models file
 		std::ofstream file;
-		file.open(_fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : ("projects\\" + _currentProjectID)) + "\\entities\\model.fe3d");
+		file.open(_fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : ("projects\\" + _currentProjectID)) + "\\data\\model.fe3d");
 
 		// Write model data into file
 		for (auto& modelID : _loadedModelIDs)

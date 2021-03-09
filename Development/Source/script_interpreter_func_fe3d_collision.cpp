@@ -91,15 +91,12 @@ bool ScriptInterpreter::_executeFe3dCollisionFunction(const string& functionName
 
 			// Find aabbEntity
 			string result = "";
-			string searchID = arguments[0].getString() + (!arguments[1].getString().empty() ? ("_" + arguments[1].getString()) : "");
-			string partID = "";
-			auto foundAabbID = _fe3d.collision_checkCameraWithEntities(searchID);
+			auto foundAabbID = _fe3d.collision_checkCameraWithEntities(arguments[0].getString());
 
 			// Retrieve bound gameEntity ID
 			if (!foundAabbID.empty() && (_fe3d.aabbEntity_getParentType(foundAabbID) == AabbParentType::GAME_ENTITY))
 			{
 				// Check direction
-				string searchID = arguments[0].getString() + (!arguments[1].getString().empty() ? ("_" + arguments[1].getString()) : "");
 				auto directionX = _fe3d.collision_checkCameraWithEntityDirection(foundAabbID, Direction::X);
 				auto directionY = _fe3d.collision_checkCameraWithEntityDirection(foundAabbID, Direction::Y);
 				auto directionZ = _fe3d.collision_checkCameraWithEntityDirection(foundAabbID, Direction::Z);
@@ -115,8 +112,9 @@ bool ScriptInterpreter::_executeFe3dCollisionFunction(const string& functionName
 					else // Specific AABB part
 					{
 						// Extract AABB part ID
+						string partID = foundAabbID;
 						std::reverse(partID.begin(), partID.end());
-						partID = partID.substr(0, foundAabbID.find('@'));
+						partID = partID.substr(0, partID.find('@'));
 						std::reverse(partID.begin(), partID.end());
 
 						// Check if AABB part ID's match
@@ -289,9 +287,9 @@ bool ScriptInterpreter::_executeFe3dCollisionFunction(const string& functionName
 						else // Specific AABB part
 						{
 							// Extract AABB part ID
-							string partID = arguments[3].getString();
+							string partID = foundAabbID;
 							std::reverse(partID.begin(), partID.end());
-							partID = partID.substr(0, foundAabbID.find('@'));
+							partID = partID.substr(0, partID.find('@'));
 							std::reverse(partID.begin(), partID.end());
 
 							// Check if AABB part ID's match
@@ -329,9 +327,9 @@ bool ScriptInterpreter::_executeFe3dCollisionFunction(const string& functionName
 					else // Specific AABB part
 					{
 						// Extract AABB part ID
-						string partID = arguments[3].getString();
+						string partID = foundAabbID;
 						std::reverse(partID.begin(), partID.end());
-						partID = partID.substr(0, foundAabbID.find('@'));
+						partID = partID.substr(0, partID.find('@'));
 						std::reverse(partID.begin(), partID.end());
 
 						// Check if AABB part ID's match

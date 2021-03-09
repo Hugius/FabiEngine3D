@@ -83,9 +83,9 @@ bool ScriptInterpreter::_executeFe3dRaycastFunction(const string& functionName, 
 				else // Specific AABB part
 				{
 					// Extract AABB part ID
-					string partID = arguments[1].getString();
+					string partID = foundAabbID;
 					std::reverse(partID.begin(), partID.end());
-					partID = partID.substr(0, foundAabbID.find('@'));
+					partID = partID.substr(0, partID.find('@'));
 					std::reverse(partID.begin(), partID.end());
 
 					// Check if AABB part ID's match
@@ -110,26 +110,28 @@ bool ScriptInterpreter::_executeFe3dRaycastFunction(const string& functionName, 
 			// Find aabbEntity ID
 			float result = -1.0f;
 			auto intersection = _fe3d.collision_checkCursorInEntities(arguments[0].getString(), arguments[2].getBoolean());
+			string foundAabbID = intersection.first;
+			float foundDistance = intersection.second;
 
 			// Retrieve bound gameEntity ID
-			if (!intersection.first.empty() && (_fe3d.aabbEntity_getParentType(intersection.first) == AabbParentType::GAME_ENTITY))
+			if (!foundAabbID.empty() && (_fe3d.aabbEntity_getParentType(foundAabbID) == AabbParentType::GAME_ENTITY))
 			{
 				if (arguments[1].getString().empty()) // No specific AABB part
 				{
-					result = intersection.second;
+					result = foundDistance;
 				}
 				else // Specific AABB part
 				{
 					// Extract AABB part ID
-					string partID = arguments[1].getString();
+					string partID = foundAabbID;
 					std::reverse(partID.begin(), partID.end());
-					partID = partID.substr(0, intersection.first.find('@'));
+					partID = partID.substr(0, partID.find('@'));
 					std::reverse(partID.begin(), partID.end());
 
 					// Check if AABB part ID's match
 					if (partID == arguments[1].getString())
 					{
-						result = intersection.second;
+						result = foundDistance;
 					}
 				}
 			}

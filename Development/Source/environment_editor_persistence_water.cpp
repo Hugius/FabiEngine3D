@@ -13,7 +13,7 @@ const vector<string> EnvironmentEditor::getAllWaterTexturePathsFromFile()
 	}
 
 	// Compose full file path
-	string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : ("projects\\" + _currentProjectID)) + "\\entities\\water.fe3d";
+	string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : ("projects\\" + _currentProjectID)) + "\\data\\water.fe3d";
 
 	// Load water file
 	if (_fe3d.misc_isFileExisting(filePath))
@@ -86,7 +86,7 @@ void EnvironmentEditor::loadWaterEntitiesFromFile()
 	_loadedWaterIDs.clear();
 
 	// Compose full file path
-	string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : ("projects\\" + _currentProjectID)) + "\\entities\\water.fe3d";
+	string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : ("projects\\" + _currentProjectID)) + "\\data\\water.fe3d";
 
 	// Load water file
 	if (_fe3d.misc_isFileExisting(filePath))
@@ -193,7 +193,7 @@ void EnvironmentEditor::saveWaterEntitiesToFile()
 		}
 
 		// Compose full file path
-		string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : ("projects\\" + _currentProjectID)) + "\\entities\\water.fe3d";
+		string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : ("projects\\" + _currentProjectID)) + "\\data\\water.fe3d";
 
 		// Load file
 		std::ofstream file(filePath);

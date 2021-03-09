@@ -1,4 +1,4 @@
-45 12
+9 64
 META script_type_update
 
 /// Temporary values
@@ -8,34 +8,34 @@ BOOL lmbPressed = fe3d:input_is_mouse_pressed("BUTTON_LEFT")
 IF _isBuilding IS <true> AND lmbPressed IS <true>:
     IF _isBuildPlaceValid IS <true>:
         IF _buildIndex IS 0:
-            VEC3 size = fe3d:aabb_get_size("small_house_display_back")
+            VEC3 size = fe3d:aabb_get_size("small_house_display@back")
             STR previewID = "house14"
         ELIF _buildIndex IS 1:
-            VEC3 size = fe3d:aabb_get_size("medium_house_display_back")
+            VEC3 size = fe3d:aabb_get_size("medium_house_display@back")
             STR previewID = "house2"
         ELIF _buildIndex IS 2:
-            VEC3 size = fe3d:aabb_get_size("big_house_display_back")
+            VEC3 size = fe3d:aabb_get_size("big_house_display@back")
             STR previewID = "house13"
         ELIF _buildIndex IS 3:
-            VEC3 size = fe3d:aabb_get_size("storage_display_main")
+            VEC3 size = fe3d:aabb_get_size("storage_display@main")
             STR previewID = "storage"
         ELIF _buildIndex IS 4:
-            VEC3 size = fe3d:aabb_get_size("well_display_well")
+            VEC3 size = fe3d:aabb_get_size("well_display@well")
             STR previewID = "well2"
         ELIF _buildIndex IS 5:
-            VEC3 size = fe3d:aabb_get_size("pen_display_front")
+            VEC3 size = fe3d:aabb_get_size("pen_display@front")
             STR previewID = "pen"
         ELIF _buildIndex IS 6:
-            VEC3 size = fe3d:aabb_get_size("mill_display_mill")
+            VEC3 size = fe3d:aabb_get_size("mill_display@mill")
             STR previewID = "mill"
         ELIF _buildIndex IS 7:
-            VEC3 size = fe3d:aabb_get_size("church_display_tower")
+            VEC3 size = fe3d:aabb_get_size("church_display@tower")
             STR previewID = "church"
         ELIF _buildIndex IS 8:
-            VEC3 size = fe3d:aabb_get_size("oven_display_oven")
+            VEC3 size = fe3d:aabb_get_size("oven_display@oven")
             STR previewID = "oven"
         ELIF _buildIndex IS 9:
-            VEC3 size = fe3d:aabb_get_size("campfire_display_campfire")
+            VEC3 size = fe3d:aabb_get_size("campfire_display@logs")
             STR previewID = "campfire"
         INT counter = _buildCounters[_buildIndex]
         CAST counter STR

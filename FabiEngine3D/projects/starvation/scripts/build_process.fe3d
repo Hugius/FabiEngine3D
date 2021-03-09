@@ -1,4 +1,4 @@
-9 22
+85 36
 META script_type_update
 
 fe3d:text_set_visible("build", <false>)
@@ -10,34 +10,34 @@ IF hoveredID NOT "":
     STR idPart = misc:get_string_part(hoveredID, 0, 2)
     IF idPart IS "sm":
         INT hoveredIndex = 0
-        VEC3 size = fe3d:aabb_get_size("small_house_display_back")
+        VEC3 size = fe3d:aabb_get_size("small_house_display@back")
     ELIF idPart IS "me":
         INT hoveredIndex = 1
-        VEC3 size = fe3d:aabb_get_size("medium_house_display_back")
+        VEC3 size = fe3d:aabb_get_size("medium_house_display@back")
     ELIF idPart IS "bi":
         INT hoveredIndex = 2
-        VEC3 size = fe3d:aabb_get_size("big_house_display_back")
+        VEC3 size = fe3d:aabb_get_size("big_house_display@back")
     ELIF idPart IS "st":
         INT hoveredIndex = 3
-        VEC3 size = fe3d:aabb_get_size("storage_display_main")
+        VEC3 size = fe3d:aabb_get_size("storage_display@main")
     ELIF idPart IS "we":
         INT hoveredIndex = 4
-        VEC3 size = fe3d:aabb_get_size("well_display_well")
+        VEC3 size = fe3d:aabb_get_size("well_display@well")
     ELIF idPart IS "pe":
         INT hoveredIndex = 5
-        VEC3 size = fe3d:aabb_get_size("pen_display_front")
+        VEC3 size = fe3d:aabb_get_size("pen_display@front")
     ELIF idPart IS "mi":
         INT hoveredIndex = 6
-        VEC3 size = fe3d:aabb_get_size("mill_display_mill")
+        VEC3 size = fe3d:aabb_get_size("mill_display@mill")
     ELIF idPart IS "ch":
         INT hoveredIndex = 7
-        VEC3 size = fe3d:aabb_get_size("church_display_tower")
+        VEC3 size = fe3d:aabb_get_size("church_display@tower")
     ELIF idPart IS "ov":
         INT hoveredIndex = 8
-        VEC3 size = fe3d:aabb_get_size("oven_display_oven")
+        VEC3 size = fe3d:aabb_get_size("oven_display@oven")
     ELIF idPart IS "ca":
         INT hoveredIndex = 9
-        VEC3 size = fe3d:aabb_get_size("campfire_display_campfire")
+        VEC3 size = fe3d:aabb_get_size("campfire_display@logs")
     /// Calculate price
     INT wp = _buildablesWoodPrice[hoveredIndex]
     INT sp = _buildablesStonePrice[hoveredIndex]

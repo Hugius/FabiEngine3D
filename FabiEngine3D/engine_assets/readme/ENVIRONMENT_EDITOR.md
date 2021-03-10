@@ -58,6 +58,8 @@
 - **Displacement map**: grayscaled 24bit `PNG` format image from `game_assets\textures\displacement_maps\`.
 - **Normal map**: colored 24bit `PNG` format image from `game_assets\textures\normal_maps\`.
 ### Properties
+- **Position**: the XYZ position of the water plane in scene space. **Range** -inf to inf.
+- **Size**: the XZ size of the water plane in scene space. **Range** 0 to inf.
 - **UV repeat**: the amount of times the diffuse map texture is repeated. **Range**: 0 to inf.
 - **Reflective**: enable or disable sky/terrain reflectivity on the water. **Range**: ON or OFF.
 - **Refractive**: enable or disable terrain/model/billboard refractivity on the water. **Range**: ON or OFF.

@@ -10,8 +10,8 @@
 - The image format **must** be a colored 24bit `PNG`.
 - The image resolutions **must** be exactly the same.
 ### Properties
-- **Lightness**: the brightness of the sky textures. **Range**: 0 to inf.
-- **Color**: the RGB color that will be mixed with the sky textures. **Range**: 0 to 255.
+- **Lightness**: the brightness of the sky fragments. **Range**: 0 to inf.
+- **Color**: the RGB color that will be mixed with the sky fragments. **Range**: 0 to 255.
 - **Rotation speed**: the speed of rotation around the Y axis. **Range**: -inf to inf.
 
 # Terrain
@@ -40,7 +40,7 @@
 - **Specular**: enable or disable specular lighting on the terrain. **Range**: ON or OFF.
 - **Spec factor**: the shininess of the specular lighting. **Range**: 0 to 256.
 - **Spec intensity**: the intensity of the specular lighting. **Range**: 0 to inf.
-- **Lightness**: the brightness of the sky textures. **Range**: 0 to inf.
+- **Lightness**: the brightness of the terrain fragments. **Range**: 0 to inf.
 
 # Water
 ![water](water_editor.png)
@@ -68,7 +68,7 @@
 - **Specular**: enable or disable specular lighting on the water. **Range**: ON or OFF.
 - **Water speed**: the speed with which the water rippling/waving moves. **Range**: -inf to inf.
 - **Transparency**: the percentage of how transparent the water plane is. This applies mostly for edges. **Range**: 0 to 100.
-- **Color**: the RGB color that will be mixed with the water rendering. **Range**: 0 to 255.
+- **Color**: the RGB color that will be mixed with the water fragments. **Range**: 0 to 255.
 - **Spec factor**: the shininess of the specular lighting. **Range**: 0 to 256.
 - **Spec intesity**: the intensity of the specular lighting. **Range**: 0 to inf.
 - **Wave height**: the height of the waves. **Range**: 0 to inf.

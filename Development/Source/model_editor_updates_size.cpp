@@ -22,7 +22,7 @@ void ModelEditor::_updateModelEditingSize()
 				_fe3d.textEntity_setTextContent(screen->getButton("direction")->getTextfield()->getEntityID(), "Direction: X");
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuChoice");
 			}
-			else if (screen->getButton("setSize")->isHovered())
+			else if (screen->getButton("size")->isHovered())
 			{
 				_gui.getGlobalScreen()->addValueForm("sizeX", "X", currentSize.x * 100.0f, Vec2(-0.25f, 0.0f), Vec2(0.2f, 0.1f));
 				_gui.getGlobalScreen()->addValueForm("sizeY", "Y", currentSize.y * 100.0f, Vec2(0.0f, 0.0f), Vec2(0.2f, 0.1f));

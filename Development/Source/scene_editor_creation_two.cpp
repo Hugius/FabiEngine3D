@@ -3,7 +3,7 @@
 void SceneEditor::placeModel(const string& newID, const string& previewID, Vec3 position)
 {
 	// Compose full entity ID
-	const string newEntityID = _fe3d.gameEntity_isInstanced(previewID) ? "instanced@" + previewID.substr(1) : newID;
+	const string newEntityID = _fe3d.gameEntity_isInstanced(previewID) ? previewID.substr(1) : newID;
 
 	// If editing scene, save ID
 	if (!_currentSceneID.empty())

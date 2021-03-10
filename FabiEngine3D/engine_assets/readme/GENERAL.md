@@ -27,9 +27,8 @@
 - Controller input
 - Custom "FabScript" functional interpreted gameplay programming language.
 
-
 # Engine Interface
-![interface](FabiEngine3D/engine_assets/readme/interface.png)
+![interface](interface.png)
 The engine GUI is divided into 5 sections:
 - Left viewport: editor menus and project settings
 - Top viewport: project management & game preview management
@@ -39,13 +38,13 @@ The engine GUI is divided into 5 sections:
 
 # Folder Structures
 The engine root directory holds 6 folders and 1 file:
-- `binaries\`: this folder holds the **.exe** file and all corresponding DLLs (do **NOT** touch).
-- `engine_assets\`: this folder holds all **engine resources** such as libraries & shaders (do **NOT** touch).
-- `game_assets\`: this folder is where all your **game assets** are stored. It also holds the project files.
-- `libraries\`: this folder holds the **.exe** file and all corresponding DLLs (do **NOT** touch).
-- `projects\`: this folder holds the **.exe** file and all corresponding DLLs (do **NOT** touch).
-- `shaders\`: this folder holds the **.exe** file and all corresponding DLLs (do **NOT** touch).
-- `config.fe3d`: test
+- `binaries\`: holds the **.exe file** and library DLLs (do **NOT** touch).
+- `engine_assets\`: holds all **engine resources** (do **NOT** touch).
+- `game_assets\`:  holds all your **game resources**.
+- `libraries\`: holds all **libraries** (do **NOT** touch).
+- `projects\`: holds all of your **projects** (do **NOT** touch).
+- `shaders\`: holds all **shader files** (do **NOT** touch).
+- `config.fe3d`: technical configuration for game exporting.
 
 # Development Order
 - **Project management**
@@ -67,14 +66,14 @@ The engine root directory holds 6 folders and 1 file:
 - **Project settings**
   > This is where you can setup mostly graphical properties of your game such as shadow quality, reflection quality, etc.
 
-# Project Management
+# Project Management (top viewport)
 - You can **create/edit/save/delete** a project.
+- 1 project = 1 game.
 - Every **project** is a different **game** and must have a **unique** name.
-- A project has its own folder in the engine `user\projects\` directory.
+- A project has its own folder in the engine `projects\` directory.
 - An important note is to **NOT** change anything in this directory!
-- The only directory that you can change is the `game_assets\`folder.
 
-# Project Settings
+# Project Settings (left viewport)
 - MSAA quality (default: 4).
 - Shadow quality (default: 2048).
 - Reflection quality (default: 256).

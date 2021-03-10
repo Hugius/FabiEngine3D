@@ -1,34 +1,64 @@
 # Sky
-![sky](FabiEngine3D/engine_assets/readme/sky_editor.png)
-- You can **create/edit/delete** sky environments that can be placed in a scene.
+![sky](sky_editor.png)
+### General
+- You can **create/edit/delete** sky environments.
+- Every created sky environment can be placed in a **scene** later on.
 - The sky environment is rendered as a **skybox**, which has 6 different textures.
 - You can load these 6 images from `game_assets\textures\cube_maps\`.
-- The image format must be a colored 24bit `PNG`.
-- The image resolutions must be the same.
-- Properties include: lightness, color, rotation speed.
+- The image format **must** be a colored 24bit `PNG`.
+- The image resolutions **must** be exactly the same.
+- You can activate a **first-person camera** with **RMB** and move it with your **mouse**.
+### Properties
+- **Lightness**: the brightness of the sky textures. **Range**: 0 to inf.
+- **Color**: the RGB color that will be mixed with the sky textures. **Range**: 0 to 255.
+- **Rotation speed**: the speed of rotation around the Y axis. **Range**: -inf to inf.
 
 # Terrain
-![terrain](FabiEngine3D/engine_assets/readme/terrain_editor.png)
-- You can **create/edit/delete** terrain environments that can be placed in a scene.
-- The terrain environment is generated with a **height map** texture.
-- A terrain can have a **diffuse map** texture, but can also be textured using a **blend mapping**.
-- In total a terrain can be textured with up to 4 different textures!
-- All of these rendered textures can be improved with **normal mapping**.
-- Properties include: max height, UV-repeat, lighting.
-- **Height map**: grayscale 24bit `BMP` format image file from `game_assets\textures\height_maps\`.
-- **Blend map**: colored 24bit `PNG` file format image from `game_assets\textures\blend_maps\`.
-- **Diffuse maps**: colored 24bit `PNG` format image file from `game_assets\textures\diffuse_maps\`.
-- **Normal maps**: colored 24bit `PNG` format image file from `game_assets\textures\normal_maps\`.
+![terrain](terrain_editor.png)
+### General
+- You can **create/edit/delete** terrain environments.
+- Every created terrain environment can be placed in a **scene** later on.
+### Texturing
+- The terrain environment is generated through a **height map** texture (grayscale 24bit `BMP` format image file from `game_assets\textures\height_maps\`).
+- The terrain can have a base **diffuse map** texture (colored 24bit `PNG` format image file from `game_assets\textures\diffuse_maps\`).
+- Multitexturing can be done through a **blend map** (colored 24bit `PNG` file format image from `game_assets\textures\blend_maps\`).
+- Every color **channel** (R,G,B) of the blend map **represents** a different **diffuse map**. This means that you can use **up to 4** different diffuse maps!
+- The rendering of **every diffuse map** can be improved with a **normal map** (colored 24bit `PNG` format image file from `game_assets\textures\normal_maps\`).
+- In total you can use **10 different textures** for terrain rendering (1x heightmap, 1x blendmap, 4x diffusemap, 4x normalmap).
+- You can rotate the **camera** around the terrain by using your mouse **scroll wheel**.
+### Properties
+- **Max height**: the maximum height of the terrain, which is calculated based on the height map pixel intensities. **Range**: 0 to inf.
+- **UV repeat**: the amount of times the main diffuse map texture is repeated. **Range**: 0 to inf.
+- **Red UV**: the amount of times the diffuse map texture of the **RED** blend map channel is repeated. **Range**: 0 to inf.
+- **Green UV**: the amount of times the diffuse map texture of the **GREEN** blend map channel is repeated. **Range**: 0 to inf.
+- **Blue UV**: the amount of times the diffuse map texture of the **BLUE** blend map channel is repeated. **Range**: 0 to inf.
+- **Specular**: enable or disable specular lighting on the terrain. **Range**: ON or OFF.
+- **Spec factor**: the shininess of the specular lighting. **Range**: 0 to 256.
+- **Spec intensity**: the intensity of the specular lighting. **Range**: 0 to inf.
+- **Lightness**: the brightness of the sky textures. **Range**: 0 to inf.
 
 # Water
-![water](FabiEngine3D/engine_assets/readme/water_editor.png)
-- You can **create/edit/delete** water environments that can be placed in a scene.
+![water](water_editor.png)
+### General
+- You can **create/edit/delete** water environments.
+- Every created water environment can be placed in a **scene** later on.
 - The water environment is simply a **flat plane** in 3D space.
-- Properties include: position, size, wave height, specular factor & intensity, wave/ripple speed, UV-repeat, color, edge transparency.
-- You also have the option to show a created terrain while creating a water environment, mainly for having a reference.
-- Custom color (RGB).
-- Sky & terrain reflection (on/off, only shown when above water surface).
-- Water refraction (on/off, **Warning**: huge performance impact!).
-- Rippling effect (on/off, **DUDV map** needed: colored 24bit `PNG` format image from `game_assets\textures\dudv_maps\`).
-- Waves (on/off, **displacement map** needed: grayscale 24bit `PNG` format image from `game_assets\textures\displacement_maps\`).
-- Specular reflection (on/off, **normal map** needed: colored 24bit `PNG` format image from `game_assets\textures\normal_maps\`).
+- You have the option to show a created terrain while creating a water environment, mainly for having a reference.
+- You can rotate the **camera** around the water by using your mouse **scroll wheel**.
+### Texturing
+- To enable the rippling effect, you need a **DUDV map** (colored 24bit `PNG` format image from `game_assets\textures\dudv_maps\`).
+- To enable the waving effect, you need a **displacement map** (grayscale 24bit `PNG` format image from `game_assets\textures\displacement_maps\`).
+- To enable specular lighting, you need a **normal map** (colored 24bit `PNG` format image from `game_assets\textures\normal_maps\`).
+### Properties
+- **UV repeat**: the amount of times the diffuse map texture is repeated **Range**: 0 to inf.
+- **Reflective**: enable or disable sky/terrain reflectivity on the water **Range**: ON or OFF.
+- **Refractive**: enable or disable terrain/model/billboard refractivity on the water (**Range**: ON or OFF.
+- **Waving**: enable or disable waving effect on the water **Range**: ON or OFF.
+- **Rippling**: enable or disable rippling effect on the water **Range**: ON or OFF.
+- **Specular**: enable or disable specular lighting on the water **Range**: ON or OFF.
+- **Water speed**: the speed with which the water rippling/waving moves **Range**: -inf to inf.
+- **Transparency**: the percentage of how transparent the water plane is. This applies mostly for edges. **Range**: 0 to 100.
+- **Color**: the RGB color that will be mixed with the water rendering **Range**: 0 to 255.
+- **Spec factor**: the shininess of the specular lighting. **Range**: 0 to 256.
+- **Spec intesity**: the intensity of the specular lighting. **Range**: 0 to inf.
+- **Wave height**: the height of the waves. **Range**: 0 to inf.

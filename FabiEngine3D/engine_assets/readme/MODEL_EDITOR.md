@@ -1,23 +1,17 @@
 # Model Editor
-![model](FabiEngine3D/engine_assets/readme/model_editor.png)
-- You can **create/edit/delete** models that can be placed in scene or placed with scripting.
+![model](model_editor.png)
+### General
+- You can **create/edit/delete** models.
+- Every created model can be placed in a **scene** later on.
 - A model must **at least** consist of a mesh.
-- Textures can be added to the model as well as a custom color.
-- Properties include: size, culling, alpha removal, instanced rendering, color, UV-repeat, level of detail.
-- Lighting: specular reflection (+ factor & intensity), lightness, shadowed, sky reflection, scene reflection.
-- You can also add 1 or more **AABBs** to the model. Every individual box has a position and size.
-- All AABBs are bound to the model's transformation (translation, rotation, scaling).
-- A mesh should be modeled so that the center is at the **lowest** vertex.
-- If you enable the "alpha removal" property, all transparent pixels in the diffuse map(s) will not be rendered. This is useful for transparent backgrounds for example.
-- If you enable the "instancing" property, the model will be rendered VERY efficiently if in large numbers. This option will also disable AABB's for this model.
-- The "level of detail" property is the name of another model representing a lower quality version of the current model.
-### Normal mesh
+- The mesh should be modeled so that the center is at the **lowest** vertex.
 - **Mesh**: `OBJ` format mesh file from `game_assets\meshes`.
+### Texturing
 - **Diffuse map**: colored 24bit/32bit `PNG` format image file from `game_assets\textures\diffuse_maps\`.
 - **Light map**: colored 24bit `PNG` format image file from `game_assets\textures\light_maps\`.
 - **Reflection map**: colored 24bit `PNG` format image file from `game_assets\textures\reflection_maps\`.
 - **Normal map**: colored 24bit `PNG` format image file from `game_assets\textures\normal_maps\`.
-### Multitextured/multiparted mesh
+### Multiparted mesh
 - A mesh can consist of **multiple parts** (including textures for every part).
 - In the **.obj** file, you need to specify when a certain part of vertices starts.
 - You can start a new mesh part by writing `FE3D_PART <name>` in the OBJ file.
@@ -25,3 +19,22 @@
 - You can bind a **light** map to the part by writing `FE3D_LIGHT_MAP <path><filename>` on the next line.
 - You can bind a **reflection** map to the part by writing `FE3D_REFLECTION_MAP <path><filename>` on the next line.
 - You can bind a **normal** map to the part by writing `FE3D_NORMAL_MAP <path><filename>` on the next line.
+- The `<path`> starts from the directory `game_assets\textures\<texture_type>\`.
+### AABB
+- You can bind 1 or more **AABBs** to the model using the AABB editor within the model editor.
+- Every individual AABB has its own local **position and size** that you can alter.
+- All AABBs are **bound** to the model's **transformation** (translation, rotation, scaling), so the AABBs will transform with the model.
+### Properties
+- **Size**: size multiplier of the mesh. **Range**: 0 to inf.
+- **Reflection**: enable or disable reflection of sky or scene. **Range**: sky or scene or OFF.
+- **Shadowed**: enable or disable shadow rendering on the model. **Range**: ON or OFF.
+- **Culling**: enable or disable the face culling optimization. **Range**: ON or OFF.
+- **Alpha**: enable or disable transparent pixels removal from diffuse map(s). **Range**: ON or OFF.
+- **Specular**: enable or disable specular lighting on the model. **Range**: ON or OFF.
+- **Spec factor**: the shininess of the specular lighting. **Range**: 0 to 256.
+- **Spec intensity**: the intensity of the specular lighting. **Range**: 0 to inf.
+- **Lightness**: the brightness of the model fragments. **Range**: 0 to inf.
+- **Color**: the RGB color that will be mixed with the model rendering. **Range**: 0 to 255.
+- **UV repeat**: the amount of times the diffuse map texture is repeated. **Range**: 0 to inf.
+- **instanced**: enable or disable instanced rendering. This means that the model can be rendered VERY efficiently in large numbers. This option will also disable AABB's for this model. **Range**: ON or OFF.
+- **Level of detail**: the name of another created model representing a lower quality version of the current model. If the model is placed in a scene and is farther than the LOD distance, the mesh will be replaced with the specified level of detail mesh.

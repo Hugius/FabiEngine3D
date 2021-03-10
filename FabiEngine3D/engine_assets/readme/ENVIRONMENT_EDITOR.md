@@ -60,7 +60,7 @@
 ### Properties
 - **UV repeat**: the amount of times the diffuse map texture is repeated. **Range**: 0 to inf.
 - **Reflective**: enable or disable sky/terrain reflectivity on the water. **Range**: ON or OFF.
-- **Refractive**: enable or disable terrain/model/billboard refractivity on the water.**Range**: ON or OFF.
+- **Refractive**: enable or disable terrain/model/billboard refractivity on the water. **Range**: ON or OFF.
 - **Waving**: enable or disable waving effect on the water. **Range**: ON or OFF.
 - **Rippling**: enable or disable rippling effect on the water. **Range**: ON or OFF.
 - **Specular**: enable or disable specular lighting on the water. **Range**: ON or OFF.

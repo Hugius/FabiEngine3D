@@ -187,6 +187,7 @@ void EnvironmentEditor::_updateWaterMenuMesh()
 		// Update size changes
 		if (_gui.getGlobalScreen()->checkValueForm("size", waterSize, { 0.0f }))
 		{
+			waterSize = std::max(0.0f, waterSize);
 			_fe3d.waterEntity_setSize(_currentWaterID, waterSize);
 		}
 
@@ -385,25 +386,25 @@ void EnvironmentEditor::_updateWaterMenuOptions()
 			}
 			else if (screen->getButton("transparency")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("transparency", "Transparency (0-100%)", transparency * 100.0f, Vec2(0.0f), Vec2(0.3f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("transparency", "Transparency", transparency * 100.0f, Vec2(0.0f), Vec2(0.3f, 0.1f));
 			}
 			else if (screen->getButton("color")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("colorR", "R(0-255)", color.r * 255.0f, Vec2(-0.25f, 0.0f), Vec2(0.15f, 0.1f));
-				_gui.getGlobalScreen()->addValueForm("colorG", "G(0-255)", color.g * 255.0f, Vec2(0.0f, 0.0f), Vec2(0.15f, 0.1f));
-				_gui.getGlobalScreen()->addValueForm("colorB", "B(0-255)", color.b * 255.0f, Vec2(0.25f, 0.0f), Vec2(0.15f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("colorR", "R", color.r * 255.0f, Vec2(-0.25f, 0.0f), Vec2(0.15f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("colorG", "G", color.g * 255.0f, Vec2(0.0f, 0.0f), Vec2(0.15f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("colorB", "B", color.b * 255.0f, Vec2(0.25f, 0.0f), Vec2(0.15f, 0.1f));
 			}
 			else if (screen->getButton("specularFactor")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("specularFactor", "Specular factor (0 - 256)", specularFactor, Vec2(0.0f), Vec2(0.3f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("specularFactor", "Specular factor", specularFactor, Vec2(0.0f), Vec2(0.3f, 0.1f));
 			}
 			else if (screen->getButton("specularIntensity")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("specularIntensity", "Specular intensity (%)", specularIntensity * 100.0f, Vec2(0.0f), Vec2(0.3f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("specularIntensity", "Specular intensity", specularIntensity * 100.0f, Vec2(0.0f), Vec2(0.3f, 0.1f));
 			}
 			else if (screen->getButton("waveHeight")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("waveHeight", "Wave height factor (%)", waveHeightFactor * 100.0f, Vec2(0.0f), Vec2(0.3f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("waveHeight", "Wave height factor", waveHeightFactor * 100.0f, Vec2(0.0f), Vec2(0.3f, 0.1f));
 			}
 		}
 
@@ -459,14 +460,14 @@ void EnvironmentEditor::_updateWaterMenuOptions()
 		// Check if specular intensity value confirmed
 		if (_gui.getGlobalScreen()->checkValueForm("specularIntensity", specularIntensity))
 		{
-			specularIntensity /= 100.0f;
+			specularIntensity = std::max(0.0f, specularIntensity / 100.0f);
 			_fe3d.waterEntity_setSpecularLightingIntensity(_currentWaterID, specularIntensity);
 		}
 
 		// Check if wave height value confirmed
 		if (_gui.getGlobalScreen()->checkValueForm("waveHeight", waveHeightFactor))
 		{
-			waveHeightFactor /= 100.0f;
+			waveHeightFactor = std::max(0.0f, waveHeightFactor / 100.0f);
 			_fe3d.waterEntity_setWaveHeightFactor(_currentWaterID, waveHeightFactor);
 		}
 	}

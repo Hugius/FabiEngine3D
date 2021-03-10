@@ -258,13 +258,13 @@ void EnvironmentEditor::_updateSkyMenuOptions()
 			}
 			else if (screen->getButton("lightness")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("lightness", "Lightness (%)", skyLightness * 100.0f, Vec2(0.0f), Vec2(0.3f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("lightness", "Lightness", skyLightness * 100.0f, Vec2(0.0f), Vec2(0.3f, 0.1f));
 			}
 			else if (screen->getButton("color")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("colorR", "R(0-255)", skyColor.r * 255.0f, Vec2(-0.25f, 0.0f), Vec2(0.15f, 0.1f));
-				_gui.getGlobalScreen()->addValueForm("colorG", "G(0-255)", skyColor.g * 255.0f, Vec2(0.0f, 0.0f), Vec2(0.15f, 0.1f));
-				_gui.getGlobalScreen()->addValueForm("colorB", "B(0-255)", skyColor.b * 255.0f, Vec2(0.25f, 0.0f), Vec2(0.15f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("colorR", "R", skyColor.r * 255.0f, Vec2(-0.25f, 0.0f), Vec2(0.15f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("colorG", "G", skyColor.g * 255.0f, Vec2(0.0f, 0.0f), Vec2(0.15f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("colorB", "B", skyColor.b * 255.0f, Vec2(0.25f, 0.0f), Vec2(0.15f, 0.1f));
 			}
 		}
 
@@ -277,7 +277,7 @@ void EnvironmentEditor::_updateSkyMenuOptions()
 		// Lightness value conversion
 		if (_gui.getGlobalScreen()->checkValueForm("lightness", skyLightness))
 		{
-			skyLightness = std::clamp(skyLightness / 100.0f, 0.0f, 1.0f);
+			skyLightness = std::max(0.0f, skyLightness / 100.0f);
 		}
 
 		// Color R values conversion

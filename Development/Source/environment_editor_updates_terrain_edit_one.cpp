@@ -176,6 +176,7 @@ void EnvironmentEditor::_updateTerrainMenuMesh()
 			float maxHeight = _fe3d.terrainEntity_getMaxHeight(_currentTerrainID);
 			if (_gui.getGlobalScreen()->checkValueForm("maxHeight", maxHeight))
 			{
+				maxHeight = std::max(0.0f, maxHeight);
 				_fe3d.terrainEntity_setMaxHeight(_currentTerrainID, maxHeight);
 			}
 
@@ -183,8 +184,8 @@ void EnvironmentEditor::_updateTerrainMenuMesh()
 			float uvRepeat = _fe3d.terrainEntity_getUvRepeat(_currentTerrainID);
 			if (_gui.getGlobalScreen()->checkValueForm("uvRepeat", uvRepeat))
 			{
+				uvRepeat = std::max(0.0f, uvRepeat);
 				_fe3d.terrainEntity_setUvRepeat(_currentTerrainID, uvRepeat);
-
 			}
 		}
 	}

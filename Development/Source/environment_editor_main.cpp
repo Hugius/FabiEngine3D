@@ -138,8 +138,8 @@ void EnvironmentEditor::_loadGUI()
 	leftWindow->getScreen("waterEditorMenuOptions")->addButton("speed", Vec2(0.0f, 0.7875f), Vec2(GW("Water speed"), 0.1f), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Water speed", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen("waterEditorMenuOptions")->addButton("transparency", Vec2(0.0f, 0.525f), Vec2(GW("Transparency"), 0.1f), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Transparency", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen("waterEditorMenuOptions")->addButton("color", Vec2(0.0f, 0.2625f), Vec2(GW("Color"), 0.1f), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Color", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("waterEditorMenuOptions")->addButton("specularFactor", Vec2(0.0f, 0.0f), Vec2(GW("Specular factor"), 0.1f), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Specular factor", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
-	leftWindow->getScreen("waterEditorMenuOptions")->addButton("specularIntensity", Vec2(0.0f, -0.2625f), Vec2(GW("Specular intensity"), 0.1f), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Specular intensity", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("waterEditorMenuOptions")->addButton("specularFactor", Vec2(0.0f, 0.0f), Vec2(GW("Spec factor"), 0.1f), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Specular factor", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
+	leftWindow->getScreen("waterEditorMenuOptions")->addButton("specularIntensity", Vec2(0.0f, -0.2625f), Vec2(GW("Spec intensity"), 0.1f), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Specular intensity", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen("waterEditorMenuOptions")->addButton("waveHeight", Vec2(0.0f, -0.525f), Vec2(GW("Wave height"), 0.1f), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Wave height", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 	leftWindow->getScreen("waterEditorMenuOptions")->addButton("back", Vec2(0.0f, -0.7875f), Vec2(GW("Go back"), 0.1f), LVPC::BUTTON_COLOR, LVPC::BUTTON_HOVER_COLOR, "Go back", LVPC::TEXT_COLOR, LVPC::TEXT_HOVER_COLOR);
 }

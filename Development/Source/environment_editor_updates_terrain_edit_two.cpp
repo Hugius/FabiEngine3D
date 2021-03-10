@@ -133,6 +133,7 @@ void EnvironmentEditor::_updateTerrainMenuBlendMap()
 		float blendRepeatR = _fe3d.terrainEntity_getBlendRepeatR(_currentTerrainID);
 		if (_gui.getGlobalScreen()->checkValueForm("redRepeat", blendRepeatR))
 		{
+			blendRepeatR = std::max(0.0f, blendRepeatR);
 			_fe3d.terrainEntity_setBlendRepeatR(_currentTerrainID, blendRepeatR);
 		}
 
@@ -140,6 +141,7 @@ void EnvironmentEditor::_updateTerrainMenuBlendMap()
 		float blendRepeatG = _fe3d.terrainEntity_getBlendRepeatG(_currentTerrainID);
 		if (_gui.getGlobalScreen()->checkValueForm("greenRepeat", blendRepeatG))
 		{
+			blendRepeatG = std::max(0.0f, blendRepeatG);
 			_fe3d.terrainEntity_setBlendRepeatG(_currentTerrainID, blendRepeatG);
 		}
 
@@ -147,6 +149,7 @@ void EnvironmentEditor::_updateTerrainMenuBlendMap()
 		float blendRepeatB = _fe3d.terrainEntity_getBlendRepeatB(_currentTerrainID);
 		if (_gui.getGlobalScreen()->checkValueForm("blueRepeat", blendRepeatB))
 		{
+			blendRepeatB = std::max(0.0f, blendRepeatB);
 			_fe3d.terrainEntity_setBlendRepeatB(_currentTerrainID, blendRepeatB);
 		}
 
@@ -286,17 +289,17 @@ void EnvironmentEditor::_updateTerrainMenuLighting()
 			else if (screen->getButton("specularFactor")->isHovered())
 			{
 				float factor = _fe3d.terrainEntity_getSpecularLightingFactor(_currentTerrainID);
-				_gui.getGlobalScreen()->addValueForm("specularFactor", "Spec factor(0-256)", factor, Vec2(0.0f), Vec2(0.3f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("specularFactor", "Specular factor", factor, Vec2(0.0f), Vec2(0.3f, 0.1f));
 			}
 			else if (screen->getButton("specularIntensity")->isHovered())
 			{
 				float intensity = _fe3d.terrainEntity_getSpecularLightingIntensity(_currentTerrainID);
-				_gui.getGlobalScreen()->addValueForm("specularIntensity", "Spec intensity(%)", intensity * 100.0f, Vec2(0.0f), Vec2(0.3f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("specularIntensity", "Specular intensity", intensity * 100.0f, Vec2(0.0f), Vec2(0.3f, 0.1f));
 			}
 			else if (screen->getButton("lightness")->isHovered())
 			{
 				float lightness = _fe3d.terrainEntity_getLightness(_currentTerrainID);
-				_gui.getGlobalScreen()->addValueForm("lightness", "Lightness (%)", lightness * 100.0f, Vec2(0.0f), Vec2(0.3f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("lightness", "Lightness", lightness * 100.0f, Vec2(0.0f), Vec2(0.3f, 0.1f));
 			}
 		}
 
@@ -322,7 +325,7 @@ void EnvironmentEditor::_updateTerrainMenuLighting()
 		float intensity = _fe3d.terrainEntity_getSpecularLightingIntensity(_currentTerrainID);
 		if (_gui.getGlobalScreen()->checkValueForm("specularIntensity", intensity))
 		{
-			intensity /= 100.0f;
+			intensity = std::max(0.0f, intensity / 100.0f);
 			_fe3d.terrainEntity_setSpecularLightingIntensity(_currentTerrainID, intensity);
 		}
 
@@ -330,7 +333,7 @@ void EnvironmentEditor::_updateTerrainMenuLighting()
 		float lightness = _fe3d.terrainEntity_getLightness(_currentTerrainID);
 		if (_gui.getGlobalScreen()->checkValueForm("lightness", lightness))
 		{
-			lightness /= 100.0f;
+			lightness = std::max(0.0f, lightness / 100.0f);
 			_fe3d.terrainEntity_setLightness(_currentTerrainID, lightness);
 		}
 	}

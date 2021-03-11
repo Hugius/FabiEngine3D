@@ -15,7 +15,6 @@
 ![aabb](../images/aabb.png)
 - **LOD model**: Level Of Detail model, a less-detailed version of a model.  
 ![lod](../images/lod.png)
-### Graphical Effects
 - **Ambient lighting**: the overall lightness of a scene.  
 ![ambient_lighting](../images/ambient_light.png)
 - **Directional lighting**: diffuse lighting based on a directional light source (example: the sun).  
@@ -38,7 +37,6 @@
 ![lens_flare](../images/lens_flare.png)
 - **Sky HDR**: an effect that effects the brightness of the sky based on the camera pitch angle.  
 ![sky_hdr](../images/sky_hdr.png)
-### Texturing
 - **Diffuse mapping**: using a texture to give color to a model.  
 ![diffuse_mapping](../images/diffuse_mapping.png)
 - **Light mapping**: using a texture to make parts of a model brighter.  
@@ -51,7 +49,7 @@
 ![height_mapping](../images/height_mapping.png)
 - **Blend mapping**: using a texture to blend multiple textures onto a terrain.  
 ![blend_mapping](../images/blend_mapping.png)
-- **DUDV mapping**: using a texture to distort the texture of a water surface (example: ripples/waves).  
+- **DUDV mapping**: using a texture to distort the texture of a water surface (example: water ripples).  
 ![dudv_mapping](../images/dudv_mapping.png)
 - **Displacement mapping**: using a texture to create waves in the water surface mesh.  
 ![displacement_mapping](../images/displacement_mapping.png)

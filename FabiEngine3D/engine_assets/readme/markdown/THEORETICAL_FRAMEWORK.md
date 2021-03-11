@@ -1,4 +1,10 @@
 # Theoretical Framework
+- **C++**: a powerful and fast programming language used a lot in game development.
+- **OpenGL**: a 3D graphics library.
+- **SDL2**: a multimedia library that supports things like rendering, asset loading, input, etc.
+- **Translation**: this word is equal to "movement".
+- **Scaling**: this word is equal to "size".
+- **Transformation**: the combination of translation, rotation, scaling.
 - **Collision**: intersection between 2 things (for example: between the camera and a model).
 - **Raycasting**: the process of "shooting" a ray from the camera position towards where the camera is looking.
 - **Model**: a complex 3D object in 3D space, constisting of a mesh.  
@@ -12,11 +18,11 @@
 ### Graphical Effects
 - **Ambient lighting**: the overall lightness of a scene.  
 ![ambient_lighting](../images/ambient_light.png)
-- **Directional lighting**: diffuse lighting based on a directional light source (for example: the sun).  
+- **Directional lighting**: diffuse lighting based on a directional light source (example: the sun).  
 ![directional_lighting](../images/directional_light.png)
-- **Point lighting**: individual light casters that show light around them (for example: a torch).  
+- **Point lighting**: individual light casters that show light around them (example: a torch).  
 ![point_lighting](../images/point_light.png)
-- **Spot lighting**: a spot light casted from the camera position towards where the camera is looking (for example: a flashlight).  
+- **Spot lighting**: a spot light casted from the camera position towards where the camera is looking (example: a flashlight).  
 ![spot_lighting](../images/spot_light.png)
 - **Specular lighting**: specular lighting is a light reflection from any light caster.  
 ![specular_lighting](../images/specular_light.png)
@@ -28,16 +34,24 @@
 ![shadows](../images/shadows.png)
 - **Motion blur**: pixels will be blurred in the first person camera direction of motion.  
 ![motion_blur](../images/motion_blur.png)
-- **Lens flare**: a post-processing flare overlay will be shown when the camera is looking at the directional lighting position (for example: the sun).  
+- **Lens flare**: a post-processing flare overlay will be shown when the camera is looking at a directional lighting caster.
 ![lens_flare](../images/lens_flare.png)
 - **Sky HDR**: an effect that effects the brightness of the sky based on the camera pitch angle.  
 ![sky_hdr](../images/sky_hdr.png)
 ### Texturing
-- **Diffuse mapping**:
-- **Light mapping**:
-- **Reflection mapping**:
-- **Normal mapping**:
-- **Height mapping**:
-- **Blend mapping**:
-- **DUDV mapping**:
-- **Displacement mapping**:
+- **Diffuse mapping**: using a texture to give color to a model.  
+![diffuse_mapping](../images/diffuse_mapping.png)
+- **Light mapping**: using a texture to make parts of a model brighter.  
+![light_mapping](../images/light_mapping.png)
+- **Reflection mapping**: using a texture to make parts of a model reflective.  
+![reflection_mapping](../images/reflection_mapping.png)
+- **Normal mapping**: using a texture to improve lighting effects on a model.  
+![normal_mapping](../images/normal_mapping.png)
+- **Height mapping**: using a grayscale texture to generate a terrain.  
+![height_mapping](../images/height_mapping.png)
+- **Blend mapping**: using a texture to blend multiple textures onto a terrain.  
+![blend_mapping](../images/blend_mapping.png)
+- **DUDV mapping**: using a texture to distort the texture of a water surface (example: ripples/waves).  
+![dudv_mapping](../images/dudv_mapping.png)
+- **Displacement mapping**: using a texture to create waves in the water surface mesh.  
+![displacement_mapping](../images/displacement_mapping.png)

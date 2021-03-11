@@ -145,11 +145,16 @@ bool ScriptInterpreter::_executeFe3dLightingFunction(const string& functionName,
 		// Validate arguments
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
+			bool wasEnabled = _fe3d.gfx_isSpotLightingEnabled();
 			_fe3d.gfx_enableSpotLighting(
 				Vec3(arguments[0].getDecimal(), arguments[1].getDecimal(), arguments[2].getDecimal()),
 				_fe3d.gfx_getSpotLightingIntensity(),
 				_fe3d.gfx_getSpotLightingAngle(),
 				_fe3d.gfx_getSpotLightingDistance());
+			if (!wasEnabled)
+			{
+				_fe3d.gfx_disableSpotLighting();
+			}
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
@@ -169,11 +174,16 @@ bool ScriptInterpreter::_executeFe3dLightingFunction(const string& functionName,
 		// Validate arguments
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
+			bool wasEnabled = _fe3d.gfx_isSpotLightingEnabled();
 			_fe3d.gfx_enableSpotLighting(
 				_fe3d.gfx_getSpotLightingColor(),
 				arguments[0].getDecimal(),
 				_fe3d.gfx_getSpotLightingAngle(),
 				_fe3d.gfx_getSpotLightingDistance());
+			if (!wasEnabled)
+			{
+				_fe3d.gfx_disableSpotLighting();
+			}
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
@@ -193,11 +203,16 @@ bool ScriptInterpreter::_executeFe3dLightingFunction(const string& functionName,
 		// Validate arguments
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
+			bool wasEnabled = _fe3d.gfx_isSpotLightingEnabled();
 			_fe3d.gfx_enableSpotLighting(
 				_fe3d.gfx_getSpotLightingColor(),
 				_fe3d.gfx_getSpotLightingIntensity(),
 				arguments[0].getDecimal(),
 				_fe3d.gfx_getSpotLightingDistance());
+			if (!wasEnabled)
+			{
+				_fe3d.gfx_disableSpotLighting();
+			}
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
@@ -217,11 +232,16 @@ bool ScriptInterpreter::_executeFe3dLightingFunction(const string& functionName,
 		// Validate arguments
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
+			bool wasEnabled = _fe3d.gfx_isSpotLightingEnabled();
 			_fe3d.gfx_enableSpotLighting(
 				_fe3d.gfx_getSpotLightingColor(),
 				_fe3d.gfx_getSpotLightingIntensity(),
 				_fe3d.gfx_getSpotLightingAngle(),
 				arguments[0].getDecimal());
+			if (!wasEnabled)
+			{
+				_fe3d.gfx_disableSpotLighting();
+			}
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}

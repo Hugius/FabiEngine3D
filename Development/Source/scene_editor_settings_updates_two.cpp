@@ -224,7 +224,7 @@ void SceneEditor::_updateLensFlareGraphicsSettingsMenu()
 			multiplier /= 100.0f;
 		}
 
-		// Enable or disable skyHDR
+		// Enable or disable lens flare
 		if (enabled)
 		{
 			_fe3d.gfx_enableLensFlare(flareMapPath, intensity, multiplier);

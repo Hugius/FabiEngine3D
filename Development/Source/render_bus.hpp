@@ -258,16 +258,16 @@ private:
 	// Vector3
 	Vec3 _cameraPosition		   = Vec3(0.0f);
 	Vec3 _cameraFront			   = Vec3(0.0f);
-	Vec3 _ambientLightColor		   = Vec3(1.0f);
-	Vec3 _directionalLightColor    = Vec3(1.0f);
 	Vec3 _directionalLightPosition = Vec3(0.0f);
-	Vec3 _spotLightColor		   = Vec3(1.0f);
 	Vec3 _shadowEyePosition		   = Vec3(0.0f);
 	Vec3 _shadowAreaCenter		   = Vec3(0.0f);
-	Vec3 _fogColor				   = Vec3(1.0f);
 	Vec3 _flareSourcePosition	   = Vec3(0.0f);
-	Vec3 _mainSkyColor			   = Vec3(0.0f);
-	Vec3 _mixSkyColor			   = Vec3(0.0f);
+	Vec3 _ambientLightColor		   = Vec3(1.0f);
+	Vec3 _directionalLightColor	   = Vec3(1.0f);
+	Vec3 _spotLightColor		   = Vec3(1.0f);
+	Vec3 _fogColor				   = Vec3(1.0f);
+	Vec3 _mainSkyColor			   = Vec3(1.0f);
+	Vec3 _mixSkyColor			   = Vec3(1.0f);
 
 	// Floats
 	float _ambientLightIntensity     = 0.0f;

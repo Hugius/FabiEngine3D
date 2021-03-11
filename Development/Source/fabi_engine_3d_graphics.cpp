@@ -250,7 +250,11 @@ void FabiEngine3D::gfx_disableWaterEffects(bool resetProperties)
 void FabiEngine3D::gfx_disableSkyHDR(bool resetProperties)
 {
 	_core->_renderBus.setSkyHdrEnabled(false);
-	_core->_skyEntityManager.setBrightnessFactor(0.0f);
+
+	if (resetProperties)
+	{
+		_core->_skyEntityManager.setBrightnessFactor(0.0f);
+	}
 }
 
 void FabiEngine3D::gfx_disableDOF(bool resetProperties)

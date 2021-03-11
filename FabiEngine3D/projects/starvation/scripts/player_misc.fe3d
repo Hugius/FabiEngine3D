@@ -1,4 +1,4 @@
-44 22
+47 0
 META script_type_update
 
 /// Temporary values
@@ -25,7 +25,7 @@ fe3d:text_set_visible("drink", <false>)
 STR hoveredID = fe3d:raycast_into_model("well", "", <true>)
 IF hoveredID NOT "" AND _isBuilding IS <false>:
     DEC height = fe3d:model_get_max_height(hoveredID)
-    VEC3 size = fe3d:aabb_get_size("well_display_well")
+    VEC3 size = fe3d:aabb_get_size("well_display@well")
     DEC wellDistance = fe3d:raycast_into_model_distance("well", "", <true>)
     IF wellDistance IS -1.0:
         EDIT wellDistance = 1000.0
@@ -43,4 +43,8 @@ IF camPos.y LESS waterY:
 /// Update fire damage
 STR aabbID = fe3d:collision_check_camera_model("campfire", "logs", "")
 IF aabbID NOT "":
-    fe3d:print(aabbID)
+    EDIT _isOnFire = <true>
+ELIF camPos.y LESS waterY:
+    EDIT _isOnFire = <false>
+IF _isOnFire IS <true>:
+    DECR _health _healthFireFactor

@@ -75,5 +75,37 @@ void GuiEntityManager::update()
 		{
 			entity->updateModelMatrix();
 		}
+
+		// Update sprite animation
+		if (entity->hasSpriteAnimation() && entity->getAnimationRepeats() != entity->getMaxAnimationRepeats())
+		{
+			if (entity->getPassedFrames() >= entity->getMaxFramestep()) // Is allowed to update
+			{
+				entity->resetPassedFrames(); // Reset counter
+
+				if (entity->getSpriteColumnIndex() >= entity->getTotalSpriteColumns() - 1) // Reached total columns
+				{
+					entity->setSpriteColumnIndex(0); // Reset column index
+
+					if (entity->getSpriteRowIndex() >= entity->getTotalSpriteRows() - 1) // Reached total rows
+					{
+						entity->increaseAnimationRepeats();
+						entity->setSpriteRowIndex(0); // Reset row index (animation finished)
+					}
+					else // Next row
+					{
+						entity->setSpriteRowIndex(entity->getSpriteRowIndex() + 1);
+					}
+				}
+				else // Next column
+				{
+					entity->setSpriteColumnIndex(entity->getSpriteColumnIndex() + 1);
+				}
+			}
+			else // Increase counter
+			{
+				entity->increasePassedFrames();
+			}
+		}
 	}
 }

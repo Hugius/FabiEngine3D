@@ -30,6 +30,18 @@ public:
 	void setMaxPosition(Vec2 value);
 	void setDepth(unsigned int value);
 
+	// Animation
+	void playSpriteAnimation(int maxAnimationRepeats);
+	void stopSpriteAnimation();
+	void setSpriteRowIndex(int value);
+	void setSpriteColumnIndex(int value);
+	void setTotalSpriteRows(int value);
+	void setTotalSpriteColumns(int value);
+	void setMaxFramestep(int value);
+	void increasePassedFrames();
+	void resetPassedFrames();
+	void increaseAnimationRepeats();
+
 	// Texture & color
 	const GLuint getTexture() const;
 	const Vec3 getColor() const;
@@ -48,6 +60,17 @@ public:
 	const Vec2 getMaxPosition() const;
 	const unsigned int getDepth() const;
 
+	// Animation
+	const bool hasSpriteAnimation() const;
+	const int getPassedFrames() const;
+	const int getMaxFramestep() const;
+	const int getTotalSpriteRows() const;
+	const int getTotalSpriteColumns() const;
+	const int getSpriteRowIndex() const;
+	const int getSpriteColumnIndex() const;
+	const int getAnimationRepeats() const;
+	const int getMaxAnimationRepeats() const;
+
 	// Other
 	void setDepthEntity(bool value);
 	const bool isDepthEntity() const;
@@ -59,17 +82,26 @@ private:
 
 	Vec3 _color = Vec3(1.0f);
 
-	Vec2  _translation = Vec2(0.0f);
-	float _rotation    = 0.0f;
-	Vec2  _scaling     = Vec2(1.0f);
-
+	Vec2 _translation = Vec2(0.0f);
+	Vec2 _scaling     = Vec2(1.0f);
 	Vec2 _minPosition = Vec2(-1.0f);
 	Vec2 _maxPosition = Vec2(1.0f);
 
+	float _rotation = 0.0f;
 	float _alpha = 1.0f;
+
+	int _maxFramestep = 0;
+	int _passedFrames = 0;
+	int _totalSpriteRows = 0;
+	int _totalSpriteColumns = 0;
+	int _spriteRowIndex = 0;
+	int _spriteColumnIndex = 0;
+	int _animationRepeats = 0;
+	int _maxAnimationRepeats = 0;
 
 	unsigned int _depth = 0;
 
+	bool _hasSpriteAnimation   = false;
 	bool _mirroredHorizontally = false;
 	bool _mirroredVertically   = false;
 	bool _isDepthEntity        = false;

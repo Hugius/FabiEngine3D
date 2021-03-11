@@ -1,4 +1,4 @@
-26 42
+7 40
 META script_type_init
 
 /// Globals
@@ -6,6 +6,7 @@ GLOB CONST DEC _staminaWalkFactor = 0.001
 GLOB CONST DEC _staminaRunFactor = 0.001
 GLOB CONST DEC _staminaJumpFactor = 0.2
 GLOB CONST DEC _healthFactor = 0.0005
+GLOB CONST DEC _healthFireFactor = 0.0005
 GLOB CONST DEC _healthRegenFactor = 0.00005
 GLOB CONST DEC _hygieneFactor = 0.000025
 GLOB CONST DEC _sicknessFactor = 0.0001
@@ -64,6 +65,7 @@ GLOB BOOL _isFalling = <false>
 GLOB BOOL _isWalking = <false>
 GLOB BOOL _isRunning = <false>
 GLOB BOOL _isFishing = <false>
+GLOB BOOL _isOnFire = <false>
 GLOB BOOL _isAbleToMove = <false>
 GLOB BOOL _mayJump = <false>
 GLOB BOOL _isStatusOpen = <true>

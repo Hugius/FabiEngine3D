@@ -1,5 +1,5 @@
 # Game Execution
-![execution](FabiEngine3D/engine_assets/readme/execution.png)
+![execution](../images/execution.png)
 - You can **play/pause/resume/stop/debug** the game preview.
 - All **changes** made through scripting will be **reset** when the preview is stopped.
 - You can pause the gameplay with **ESCAPE**.

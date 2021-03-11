@@ -6,6 +6,15 @@
 - A model must **at least** consist of a mesh.
 - The mesh should be modeled so that the center is at the **lowest** vertex.
 - **Mesh**: `OBJ` format mesh file from `game_assets\meshes`.
+- The size of the mesh can be altered to your liking in the "size" menu.
+- You can toggle the reference box with the `R` key.
+- You can toggle debug rendering with the `H` key.
+- You can toggle wireframe rendering with the `F` key.
+- You can zoom the camera with the mouse scroll wheel.
+- Hold the `MMB` button to move the camera with your mouse.
+- Use the `SPACE` key to move the camera **up** and use the `LSHIFT` key to move the camera **down**.
+- Use the `UP` and `DOWN` keys to change the camera zooming speed.
+- The new model name **cannot consist** of the '@' character, which is reserved by the internal engine.
 ### Texturing
 - **Diffuse map**: colored 24bit/32bit `PNG` format image file from `game_assets\textures\diffuse_maps\`.
 - **Light map**: colored 24bit `PNG` format image file from `game_assets\textures\light_maps\`.
@@ -20,12 +29,12 @@
 - You can bind a **reflection** map to the part by writing `FE3D_REFLECTION_MAP <path><filename>` on the next line.
 - You can bind a **normal** map to the part by writing `FE3D_NORMAL_MAP <path><filename>` on the next line.
 - The `<path`> starts from the directory `game_assets\textures\<texture_type>\`.
-### AABB
+### AABB editor
 - You can bind 1 or more **AABBs** to the model using the AABB editor within the model editor.
-- Every individual AABB has its own local **position and size** that you can alter.
+- Every individual AABB has its own local **position and size** that you can alter with a customizable **speed**.
 - All AABBs are **bound** to the model's **transformation** (translation, rotation, scaling), so the AABBs will transform with the model.
 ### Properties
-- **Size**: size multiplier of the mesh. **Range**: 0 to inf.
+- **Mesh size**: size multiplier of the mesh. **Range**: 0 to inf.
 - **Reflection**: enable or disable reflection of sky or scene. **Range**: sky or scene or OFF.
 - **Shadowed**: enable or disable shadow rendering on the model. **Range**: ON or OFF.
 - **Culling**: enable or disable the face culling optimization. **Range**: ON or OFF.
@@ -37,4 +46,4 @@
 - **Color**: the RGB color that will be mixed with the model rendering. **Range**: 0 to 255.
 - **UV repeat**: the amount of times the diffuse map texture is repeated. **Range**: 0 to inf.
 - **instanced**: enable or disable instanced rendering. This means that the model can be rendered VERY efficiently in large numbers. This option will also disable AABB's for this model. **Range**: ON or OFF.
-- **Level of detail**: the name of another created model representing a lower quality version of the current model. If the model is placed in a scene and is farther than the LOD distance, the mesh will be replaced with the specified level of detail mesh.
+- **Level of detail**: the name of another created model representing a lower quality version of the current model. If the model is placed in a scene and is farther than the LOD distance, the mesh will be replaced with the specified level of detail mesh. If you want to remove the LOD, fill in "@" as LOD name.

@@ -75,12 +75,15 @@ void ModelEditor::_updateModelEditingOptions()
 		string lodID = "";
 		if (_gui.getGlobalScreen()->checkValueForm("lodID", lodID, { }))
 		{
-			// Check if LOD entity exists
-			if (std::find(_loadedModelIDs.begin(), _loadedModelIDs.end(), "@" + lodID) == _loadedModelIDs.end())
+			if (lodID == "@") // No LOD entity
+			{
+				_fe3d.gameEntity_setLevelOfDetailEntity(_currentModelID, "");
+			}
+			else if (std::find(_loadedModelIDs.begin(), _loadedModelIDs.end(), "@" + lodID) == _loadedModelIDs.end()) // Check LOD entity
 			{
 				_fe3d.logger_throwWarning("Cannot find LOD entity name: \"" + lodID + "\"");
 			}
-			else
+			else // Set LOD entity
 			{
 				_fe3d.gameEntity_setLevelOfDetailEntity(_currentModelID, "@" + lodID);
 			}

@@ -28,7 +28,7 @@
 - Custom "FabScript" functional interpreted gameplay programming language.
 
 # Engine Interface
-![interface](interface.png)
+![interface](../images/interface.png)
 The engine GUI is divided into 5 sections:
 - Left viewport: editor menus and project settings
 - Top viewport: project management & game preview management

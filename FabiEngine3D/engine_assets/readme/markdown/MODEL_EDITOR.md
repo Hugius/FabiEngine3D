@@ -1,5 +1,5 @@
 # Model Editor
-![model](model_editor.png)
+![model](../images/model_editor.png)
 ### General
 - You can **create/edit/delete** models.
 - Every created model can be placed in a **scene** later on.
@@ -30,6 +30,7 @@
 - You can bind a **normal** map to the part by writing `FE3D_NORMAL_MAP <path><filename>` on the next line.
 - The `<path`> starts from the directory `game_assets\textures\<texture_type>\`.
 ### AABB editor
+![aabb](../images/aabb_editor.png)
 - You can bind 1 or more **AABBs** to the model using the AABB editor within the model editor.
 - Every individual AABB has its own local **position and size** that you can alter with a customizable **speed**.
 - All AABBs are **bound** to the model's **transformation** (translation, rotation, scaling), so the AABBs will transform with the model.

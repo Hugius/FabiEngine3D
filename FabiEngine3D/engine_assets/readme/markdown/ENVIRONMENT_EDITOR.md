@@ -1,5 +1,5 @@
 # Sky
-![sky](sky_editor.png)
+![sky](../images/sky_editor.png)
 ### General
 - You can **create/edit/delete** sky environments.
 - Every created sky environment can be placed in a **scene** later on.
@@ -15,7 +15,7 @@
 - **Rotation speed**: the speed of rotation around the Y axis. **Range**: -inf to inf.
 
 # Terrain
-![terrain](terrain_editor.png)
+![terrain](../images/terrain_editor.png)
 ### General
 - You can **create/edit/delete** terrain environments.
 - Every created terrain environment can be placed in a **scene** later on.
@@ -43,7 +43,7 @@
 - **Lightness**: the brightness of the terrain fragments. **Range**: 0 to inf.
 
 # Water
-![water](water_editor.png)
+![water](../images/water_editor.png)
 ### General
 - You can **create/edit/delete** water environments.
 - Every created water environment can be placed in a **scene** later on.

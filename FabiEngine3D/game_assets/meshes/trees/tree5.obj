@@ -105,8 +105,8 @@ vn -0.0108 -0.5756 -0.8177
 vn 0.7513 -0.6598 0.0119
 vn -0.7449 0.6669 0.0190
 FE3D_PART trunk
-FE3D_DIFFUSE_MAP trees\tree5_trunk.png
-FE3D_NORMAL_MAP trees\tree5_trunk.png
+FE3D_DIFFUSE_MAP trees\tree578_trunk.png
+FE3D_NORMAL_MAP trees\tree578_trunk.png
 s 1
 f 26/1/1 4/2/2 12/3/3
 f 14/4/4 15/5/5 25/6/6
@@ -156,9 +156,6 @@ f 12/3/3 4/2/2 14/44/4
 f 9/45/21 26/1/1 12/3/3
 f 10/11/11 26/48/1 9/46/21
 f 2/47/17 11/54/26 26/48/1
-FE3D_PART trunk
-FE3D_DIFFUSE_MAP trees\tree5_trunk.png
-FE3D_NORMAL_MAP trees\tree5_trunk.png
 v 2.734582 3.971674 0.494382
 v 1.761030 4.016357 1.966669
 v 4.001431 2.993072 1.371553
@@ -2256,8 +2253,8 @@ vn -0.7339 -0.5761 -0.3598
 vn -0.9345 -0.3259 0.1433
 vn -0.3982 -0.7216 -0.5663
 FE3D_PART leaves
-FE3D_DIFFUSE_MAP trees\tree5_leaves.png
-FE3D_NORMAL_MAP trees\tree5_leaves.png
+FE3D_DIFFUSE_MAP trees\tree58_leaves.png
+FE3D_NORMAL_MAP trees\tree58_leaves.png
 s 1
 f 33/55/27 34/56/28 35/57/29
 f 31/58/30 34/56/28 29/59/31

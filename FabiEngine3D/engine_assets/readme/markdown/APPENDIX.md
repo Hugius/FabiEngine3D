@@ -42,7 +42,7 @@
 ### Known issues
 - There is a VERY rare **bug** when using the first person camera system; if the cursor does not center anymore and the camera keeps spinning very fast, click on the **window border** once. This bug does not occur in fullscreen mode.
 ### Performance
-![performance](FabiEngine3D/engine_assets/readme/performance.png)
+![performance](../images/performance.png)
 - You can use the performance statistics to analyze your **game's performance**.
 - The amounts of entities are the **total** amounts.
 - The amount of triangles is the **realtime** amount being rendered every frame.

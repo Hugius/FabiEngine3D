@@ -33,11 +33,9 @@
 ![shadows](../images/shadows.png)
 - **Motion blur**: pixels will be blurred in the first person camera direction of motion.  
 ![motion_blur](../images/motion_blur.png)
-- **Lens flare**: a post-processing flare overlay will be shown when the camera is looking at a directional lighting caster.
-![lens_flare](../images/lens_flare.png)
 - **Sky HDR**: an effect that effects the brightness of the sky based on the camera pitch angle.  
 ![sky_hdr](../images/sky_hdr.png)
-- **Diffuse mapping**: using a texture to give color to a model.  
+- **Diffuse mapping**: using a texture to give a variety of colors to a model.  
 ![diffuse_mapping](../images/diffuse_mapping.png)
 - **Light mapping**: using a texture to make parts of a model brighter.  
 ![light_mapping](../images/light_mapping.png)
@@ -53,3 +51,9 @@
 ![dudv_mapping](../images/dudv_mapping.png)
 - **Displacement mapping**: using a texture to create waves in the water surface mesh.  
 ![displacement_mapping](../images/displacement_mapping.png)
+- **Billboard mapping**: using a texture to give a variety of colors to a billboard.  
+![billboard_mapping](../images/billboard_mapping.png)
+- **Image mapping**: using a texture to give a variety of colors to a GUI image.  
+![image_mapping](../images/image_mapping.png)
+- **Flare mapping**: using a texture to achieve a lens flare effect when the camera is looking at a directional lighting caster.  
+![flare_mapping](../images/flare_mapping.png)

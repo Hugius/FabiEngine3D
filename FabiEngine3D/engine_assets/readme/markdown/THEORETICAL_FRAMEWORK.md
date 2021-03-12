@@ -51,9 +51,11 @@
 ![dudv_mapping](../images/dudv_mapping.png)
 - **Displacement mapping**: using a texture to create waves in the water surface mesh.  
 ![displacement_mapping](../images/displacement_mapping.png)
+- **Flare mapping**: using a texture to achieve a lens flare effect when the camera is looking at a directional lighting caster.  
+![flare_mapping](../images/flare_mapping.png)
+- **Cube mapping**: using a texture to give a variety of colors to a 3D cube map.  
+![cube_mapping](../images/cube_mapping.png)
 - **Billboard mapping**: using a texture to give a variety of colors to a billboard.  
 ![billboard_mapping](../images/billboard_mapping.png)
 - **Image mapping**: using a texture to give a variety of colors to a GUI image.  
 ![image_mapping](../images/image_mapping.png)
-- **Flare mapping**: using a texture to achieve a lens flare effect when the camera is looking at a directional lighting caster.  
-![flare_mapping](../images/flare_mapping.png)

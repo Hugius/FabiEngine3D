@@ -177,8 +177,9 @@ void CoreEngine::_updateApplication()
 		_timer.stopDeltaPart();
 	}
 
-	// Always update 2D logic
+	// Always update 2D logic (except for sprite animations)
 	_timer.startDeltaPart("guiUpdate");
+	(!_isPaused) ? _guiEntityManager.updateSpriteAnimations() : (void)0;
 	_guiEntityManager.update();
 	_textEntityManager.update();
 	_timer.stopDeltaPart();

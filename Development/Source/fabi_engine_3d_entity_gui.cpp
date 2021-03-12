@@ -165,3 +165,55 @@ bool FabiEngine3D::guiEntity_isCentered(const string& ID)
 {
 	return _core->_guiEntityManager.getEntity(ID)->isCentered();
 }
+
+void FabiEngine3D::guiEntity_playSpriteAnimation(const string& ID, int maxAnimationRepeats)
+{
+	_core->_guiEntityManager.getEntity(ID)->playSpriteAnimation(maxAnimationRepeats);
+}
+
+void FabiEngine3D::guiEntity_stopSpriteAnimation(const string& ID)
+{
+	_core->_guiEntityManager.getEntity(ID)->stopSpriteAnimation();
+}
+
+void FabiEngine3D::guiEntity_setAnimationRows(const string& ID, int rows)
+{
+	_core->_guiEntityManager.getEntity(ID)->setTotalSpriteRows(rows);
+}
+
+void FabiEngine3D::guiEntity_setAnimationColumns(const string& ID, int columns)
+{
+	_core->_guiEntityManager.getEntity(ID)->setTotalSpriteColumns(columns);
+}
+
+void FabiEngine3D::guiEntity_setAnimationFramestep(const string& ID, int framestep)
+{
+	_core->_guiEntityManager.getEntity(ID)->setMaxFramestep(framestep);
+}
+
+bool FabiEngine3D::guiEntity_isAnimationFinished(const string& ID)
+{
+	int repeats = _core->_guiEntityManager.getEntity(ID)->getAnimationRepeats();
+	int maxRepeats = _core->_guiEntityManager.getEntity(ID)->getMaxAnimationRepeats();
+	return (repeats == maxRepeats);
+}
+
+bool FabiEngine3D::guiEntity_isAnimationPlaying(const string& ID)
+{
+	return _core->_guiEntityManager.getEntity(ID)->hasSpriteAnimation();
+}
+
+int FabiEngine3D::guiEntity_getAnimationRows(const string& ID)
+{
+	return _core->_guiEntityManager.getEntity(ID)->getTotalSpriteRows();
+}
+
+int FabiEngine3D::guiEntity_getAnimationColumns(const string& ID)
+{
+	return _core->_guiEntityManager.getEntity(ID)->getTotalSpriteColumns();
+}
+
+int FabiEngine3D::guiEntity_getAnimationFramestep(const string& ID)
+{
+	return _core->_guiEntityManager.getEntity(ID)->getMaxFramestep();
+}

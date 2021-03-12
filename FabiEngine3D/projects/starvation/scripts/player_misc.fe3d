@@ -1,4 +1,4 @@
-47 0
+43 42
 META script_type_update
 
 /// Temporary values
@@ -42,9 +42,14 @@ IF camPos.y LESS waterY:
 
 /// Update fire damage
 STR aabbID = fe3d:collision_check_camera_model("campfire", "logs", "")
-IF aabbID NOT "":
+IF aabbID NOT "" AND _isDayTime IS <false>:
+    IF _isOnFire IS <false>:
+        fe3d:image_start_animation("fire", 4, 8, 3, -1)
+        fe3d:image_set_visible("fire", <true>)
     EDIT _isOnFire = <true>
 ELIF camPos.y LESS waterY:
     EDIT _isOnFire = <false>
+    fe3d:image_stop_animation("fire")
+    fe3d:image_set_visible("fire", <false>)
 IF _isOnFire IS <true>:
     DECR _health _healthFireFactor

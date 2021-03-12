@@ -66,17 +66,10 @@ void GuiEntityManager::addGuiEntity(const string& ID, Vec3 color, Vec2 translati
 	entity->setColor(color);
 }
 
-void GuiEntityManager::update()
+void GuiEntityManager::updateSpriteAnimations()
 {
 	for (auto& [keyID, entity] : _getGuiEntities())
 	{
-		// Calculate model matrix
-		if (entity->isVisible())
-		{
-			entity->updateModelMatrix();
-		}
-
-		// Update sprite animation
 		if (entity->hasSpriteAnimation() && entity->getAnimationRepeats() != entity->getMaxAnimationRepeats())
 		{
 			if (entity->getPassedFrames() >= entity->getMaxFramestep()) // Is allowed to update
@@ -106,6 +99,18 @@ void GuiEntityManager::update()
 			{
 				entity->increasePassedFrames();
 			}
+		}
+	}
+}
+
+void GuiEntityManager::update()
+{
+	for (auto& [keyID, entity] : _getGuiEntities())
+	{
+		// Calculate model matrix
+		if (entity->isVisible())
+		{
+			entity->updateModelMatrix();
 		}
 	}
 }

@@ -15,6 +15,7 @@ public:
 	void addGuiEntity(const string& ID, const string& texturePath, Vec2 translation, float rotation, Vec2 scaling, bool engine, bool isCentered);
 	void addGuiEntity(const string& ID, Vec3 color, Vec2 translation, float rotation, Vec2 scaling, bool isCentered);
 	void update() override;
+	void updateSpriteAnimations();
 
 private:
 	OpenGLBuffer* _centeredOpenglBuffer = nullptr;

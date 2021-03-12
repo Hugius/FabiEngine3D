@@ -120,7 +120,7 @@ void BillboardEntityManager::update()
 			entity->updateModelMatrix();
 		}
 
-		// Update sprite animation
+		// Update sprite animations
 		if (entity->hasSpriteAnimation() && entity->getAnimationRepeats() != entity->getMaxAnimationRepeats())
 		{
 			if (entity->getPassedFrames() >= entity->getMaxFramestep()) // Is allowed to update

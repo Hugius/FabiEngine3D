@@ -31,7 +31,18 @@ void GuiEntityRenderer::render(const shared_ptr<GuiEntity> entity)
 		((entity->getTranslation().y - entity->getScaling().y) < entity->getMaxPosition().y) &&
 		((entity->getTranslation().y + entity->getScaling().y) > entity->getMinPosition().y))
 	{
+		// Sprite animation
+		Vec2 uvMultiplier = Vec2(1.0f);
+		Vec2 uvAdder = Vec2(0.0f);
+		if (entity->hasSpriteAnimation())
+		{
+			uvMultiplier = Vec2(1.0f / float(entity->getTotalSpriteColumns()), 1.0f / float(entity->getTotalSpriteRows()));
+			uvAdder = Vec2(float(entity->getSpriteColumnIndex()) * uvMultiplier.x, float(entity->getSpriteRowIndex()) * uvMultiplier.y);
+		}
+
 		// Shader uniforms
+		_shader.uploadUniform("u_uvAdder", uvAdder);
+		_shader.uploadUniform("u_uvMultiplier", uvMultiplier);
 		_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix());
 		_shader.uploadUniform("u_isMirroredHorizontally", entity->isMirroredHorizonally());
 		_shader.uploadUniform("u_isMirroredVertically", entity->isMirroredVertically());

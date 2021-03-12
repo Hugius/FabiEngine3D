@@ -424,6 +424,76 @@ bool ScriptInterpreter::_executeFe3dGuiEntityFunction(const string& functionName
 			}
 		}
 	}
+	else if (functionName == "fe3d:image_start_animation") // Start guiEntity sprite animation
+	{
+		auto types =
+		{
+			ScriptValueType::STRING,
+			ScriptValueType::INTEGER,
+			ScriptValueType::INTEGER,
+			ScriptValueType::INTEGER,
+			ScriptValueType::INTEGER
+		};
+
+		// Validate arguments
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existing image ID
+			if (_validateFe3dGuiEntity(arguments[0].getString()))
+			{
+				_fe3d.guiEntity_setAnimationRows(arguments[0].getString(), arguments[1].getInteger());
+				_fe3d.guiEntity_setAnimationColumns(arguments[0].getString(), arguments[2].getInteger());
+				_fe3d.guiEntity_setAnimationFramestep(arguments[0].getString(), arguments[3].getInteger());
+				_fe3d.guiEntity_playSpriteAnimation(arguments[0].getString(), arguments[4].getInteger());
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			}
+		}
+	}
+	else if (functionName == "fe3d:image_is_animation_playing") // Check if guiEntity sprite animation is playing
+	{
+		auto types = { ScriptValueType::STRING };
+
+		// Validate arguments
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existing image ID
+			if (_validateFe3dGuiEntity(arguments[0].getString()))
+			{
+				auto result = _fe3d.guiEntity_isAnimationPlaying(arguments[0].getString());
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
+			}
+		}
+	}
+	else if (functionName == "fe3d:image_stop_animation") // Stop guiEntity sprite animation
+	{
+		auto types = { ScriptValueType::STRING };
+
+		// Validate arguments
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existing image ID
+			if (_validateFe3dGuiEntity(arguments[0].getString()))
+			{
+				auto result = _fe3d.guiEntity_getAlpha(arguments[0].getString());
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
+			}
+		}
+	}
+	else if (functionName == "fe3d:image_is_animation_finished") // Check if guiEntity sprite animation is finished
+	{
+		auto types = { ScriptValueType::STRING };
+
+		// Validate arguments
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existing image ID
+			if (_validateFe3dGuiEntity(arguments[0].getString()))
+			{
+				auto result = _fe3d.guiEntity_isAnimationFinished(arguments[0].getString());
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
+			}
+		}
+	}
 	else
 	{
 		return false;

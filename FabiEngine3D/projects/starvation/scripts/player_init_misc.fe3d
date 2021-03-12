@@ -1,7 +1,8 @@
-26 28
+3 46
 META script_type_init
 
 /// Images
+fe3d:image_place("fire", "fire.png", 0.0, -0.3, 0.0, 4.5, 3.0)
 fe3d:image_place("scroll_time", "scroll3.png", 0.0, 0.5, 0.0, 1.0, 0.5)
 fe3d:image_place("scroll_player", "scroll1.png", -0.85, 0.5, 0.0, 0.3, 1.0)
 fe3d:image_place("player", "player.png", -0.85, 0.725, 0.0, 0.175, 0.275)
@@ -13,6 +14,7 @@ fe3d:image_place("oxygen", "oxygen_icon.png", -0.85, 0.325, 0.0, 0.07, 0.095)
 fe3d:image_place("temperature", "temperature_icon.png", -0.775, 0.325, 0.0, 0.07, 0.09)
 fe3d:image_place("hygiene", "hygiene_icon.png", -0.925, 0.175, 0.0, 0.07, 0.09)
 fe3d:image_place("sickness", "sickness_icon.png", -0.85, 0.175, 0.0, 0.07, 0.09)
+fe3d:image_set_visible("fire", <false>)
 
 /// Text
 STR f = "font.ttf"

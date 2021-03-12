@@ -503,11 +503,18 @@ public:
 	void guiEntity_setAlpha(const string& ID, float alpha);
 	void guiEntity_setMinPosition(const string& ID, Vec2 minPos);
 	void guiEntity_setMaxPosition(const string& ID, Vec2 maxPos);
+	void guiEntity_playSpriteAnimation(const string& ID, int maxAnimationRepeats);
+	void guiEntity_stopSpriteAnimation(const string& ID);
+	void guiEntity_setAnimationRows(const string& ID, int rows);
+	void guiEntity_setAnimationColumns(const string& ID, int columns);
+	void guiEntity_setAnimationFramestep(const string& ID, int framestep);
 
 	// Gui entity interface - getters
 	bool guiEntity_isExisting(const string& ID);
 	bool guiEntity_isVisible(const string& ID);
 	bool guiEntity_isCentered(const string& ID);
+	bool guiEntity_isAnimationFinished(const string& ID);
+	bool guiEntity_isAnimationPlaying(const string& ID);
 	Vec2 guiEntity_getPosition(const string& ID);
 	Vec2 guiEntity_getSize(const string& ID);
 	Vec2 guiEntity_getMinPosition(const string& ID);
@@ -515,6 +522,9 @@ public:
 	Vec3 guiEntity_getColor(const string& ID);
 	float guiEntity_getRotation(const string& ID);
 	float guiEntity_getAlpha(const string& ID);
+	int guiEntity_getAnimationRows(const string& ID);
+	int guiEntity_getAnimationColumns(const string& ID);
+	int guiEntity_getAnimationFramestep(const string& ID);
 	vector<string> guiEntity_getAllIDs();
 
 	// Text entity interface - setters

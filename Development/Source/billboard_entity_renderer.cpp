@@ -54,13 +54,13 @@ void BillboardEntityRenderer::render(const shared_ptr<BillboardEntity> entity)
 		}
 
 		// Shader uniforms
+		_shader.uploadUniform("u_uvAdder", uvAdder);
+		_shader.uploadUniform("u_uvMultiplier", uvMultiplier);
 		_shader.uploadUniform("u_modelMatrix", entity->getModelMatrix());
 		_shader.uploadUniform("u_isAlphaObject", entity->isTransparent());
 		_shader.uploadUniform("u_hasTexture", entity->getDiffuseMap() != 0);
 		_shader.uploadUniform("u_color", entity->getColor());
 		_shader.uploadUniform("u_lightness", entity->getLightness());
-		_shader.uploadUniform("u_uvAdder", uvAdder);
-		_shader.uploadUniform("u_uvMultiplier", uvMultiplier);
 		_shader.uploadUniform("u_currentY", entity->getTranslation().y);
 		_shader.uploadUniform("u_minHeight", entity->getMinHeight());
 		_shader.uploadUniform("u_maxHeight", entity->getMaxHeight());

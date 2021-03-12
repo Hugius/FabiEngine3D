@@ -30,6 +30,7 @@ MODEL tree2_1695863392 31.0547 4.92649 2.05251 0 0 0 2 2 2 game_assets\meshes\tr
 MODEL flower_1366847259 49.9386 4.91151 -5.00832 0 0 0 4.5 5 4.5 game_assets\meshes\foliage\flower.obj game_assets\textures\diffuse_maps\foliage\flower.png ? ? ? 0 0 1 0 0 0 1 1 1 1 1 1 1 ? 0 ? plant 0.02 0 -3.72529e-09 0.54 0.34 0.3
 MODEL flower_1932139560 -37.2554 4.86912 -11.7273 0 0 0 4.5 5 4.5 game_assets\meshes\foliage\flower.obj game_assets\textures\diffuse_maps\foliage\flower.png ? ? ? 0 0 1 0 0 0 1 1 1 1 1 1 1 ? 0 ? plant 0.02 0 -3.72529e-09 0.54 0.34 0.3
 MODEL tree2_1430790883 -22.8999 4.86339 -33.4547 0 0 0 2 2 2 game_assets\meshes\trees\tree2.obj game_assets\textures\diffuse_maps\trees\tree_bush_2.png ? ? game_assets\textures\normal_maps\trees\tree_bush_2.png 0 0 1 1 0 0 1 1 0.7 1 1 1 1 ? 0 ? leaves 0 4.6 0 4.2 8.2 4.1 trunk -0.03 0 0.02 1.03 4.6 0.98
+MODEL tree6_1228969535 31.8953 4.90207 41.3161 0 0 0 1.25 1 1.25 game_assets\meshes\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
 MODEL tree7_1634301404 -17.2887 4.86699 34.9731 0 0 0 5 7 5 game_assets\meshes\trees\tree7.obj ? ? ? ? 0 0 1 1 0 1 1 1 0.75 1 1 1 1 ? 0 ? leaves 0 1.18 0 1.79 3.25 1.77 trunk -1.86265e-09 0 0 0.22 1.18 0.21
 MODEL tree7_2045208442 7.76697 6.01875 89.5243 0 0 0 5 7 5 game_assets\meshes\trees\tree7.obj ? ? ? ? 0 0 1 1 0 1 1 1 0.75 1 1 1 1 ? 0 ? trunk -1.86265e-09 0 0 0.22 1.18 0.21 leaves 0 1.18 0 1.79 3.25 1.77
 MODEL tree2_143897921 -64.9766 4.88526 3.51295 0 0 0 2 2 2 game_assets\meshes\trees\tree2.obj game_assets\textures\diffuse_maps\trees\tree_bush_2.png ? ? game_assets\textures\normal_maps\trees\tree_bush_2.png 0 0 1 1 0 0 1 1 0.7 1 1 1 1 ? 0 ? trunk -0.03 0 0.02 1.03 4.6 0.98 leaves 0 4.6 0 4.2 8.2 4.1
@@ -111,7 +112,6 @@ MODEL tree6_862214303 -1.67242 4.92407 7.51425 0 0 0 1.25 1 1.25 game_assets\mes
 MODEL tree2_1739369993 59.9085 4.86142 -2.03922 0 0 0 2 2.5 2 game_assets\meshes\trees\tree2.obj game_assets\textures\diffuse_maps\trees\tree_bush_2.png ? ? game_assets\textures\normal_maps\trees\tree_bush_2.png 0 0 1 1 0 0 1 1 0.7 1 1 1 1 ? 0 ? trunk -0.03 0 0.02 1.03 4.6 0.98 leaves 0 4.6 0 4.2 8.2 4.1
 MODEL tree7_1506101195 22.6918 4.91735 69.9914 0 0 0 5 5 5 game_assets\meshes\trees\tree7.obj ? ? ? ? 0 0 1 1 0 1 1 1 0.75 1 1 1 1 ? 0 ? leaves 0 1.18 0 1.79 3.25 1.77 trunk -1.86265e-09 0 0 0.22 1.18 0.21
 MODEL tree2_999727975 49.7721 4.9262 30.7807 0 0 0 2 2 2 game_assets\meshes\trees\tree2.obj game_assets\textures\diffuse_maps\trees\tree_bush_2.png ? ? game_assets\textures\normal_maps\trees\tree_bush_2.png 0 0 1 1 0 0 1 1 0.7 1 1 1 1 ? 0 ? leaves 0 4.6 0 4.2 8.2 4.1 trunk -0.03 0 0.02 1.03 4.6 0.98
-MODEL tree6_1228969535 31.8953 4.90207 41.3161 0 0 0 1.25 1 1.25 game_assets\meshes\trees\tree6.obj ? ? ? ? 0 0 1 1 0 0 1 1 0.5 1 1 1 1 ? 0 ? trunk 0 0 0 0.85 8.80001 0.8 leaves 0 8.8 0 3.85 8.30001 3.6
 MODEL tree2_832750247 48.5233 5.66546 65.3967 0 0 0 2 2.5 2 game_assets\meshes\trees\tree2.obj game_assets\textures\diffuse_maps\trees\tree_bush_2.png ? ? game_assets\textures\normal_maps\trees\tree_bush_2.png 0 0 1 1 0 0 1 1 0.7 1 1 1 1 ? 0 ? trunk -0.03 0 0.02 1.03 4.6 0.98 leaves 0 4.6 0 4.2 8.2 4.1
 MODEL tree7_2109198755 56.6008 4.84744 9.45626 0 0 0 5 5 5 game_assets\meshes\trees\tree7.obj ? ? ? ? 0 0 1 1 0 1 1 1 0.75 1 1 1 1 ? 0 ? trunk -1.86265e-09 0 0 0.22 1.18 0.21 leaves 0 1.18 0 1.79 3.25 1.77
 MODEL tree2_698896722 34.3601 4.90934 68.8524 0 0 0 2 2 2 game_assets\meshes\trees\tree2.obj game_assets\textures\diffuse_maps\trees\tree_bush_2.png ? ? game_assets\textures\normal_maps\trees\tree_bush_2.png 0 0 1 1 0 0 1 1 0.7 1 1 1 1 ? 0 ? leaves 0 4.6 0 4.2 8.2 4.1 trunk -0.03 0 0.02 1.03 4.6 0.98
@@ -201,12 +201,12 @@ AMBIENT_LIGHT 1 1 1 1
 DIRECTIONAL_LIGHT 0 1500 -1000 1 1 1 1 200 100
 LOD_DISTANCE 1000
 EDITOR_SPEED 10
-EDITOR_POSITION -66.8565 10.5286 -23.8631
-EDITOR_YAW 45.9
-EDITOR_PITCH -13.4553
+EDITOR_POSITION -59.5237 10.5286 -15.0111
+EDITOR_YAW -112.54
+EDITOR_PITCH 31.1449
 GRAPHICS_SHADOWS 1 100 0.3 0.000000 75.000000 -50.000000 0.000000 30.000000 0.000000 1 1 100
 GRAPHICS_MOTIONBLUR 1 0.25
 GRAPHICS_DOF 1 1 5 3
 GRAPHICS_FOG 1 125 250 0.75 0.501961 0.501961 0.501961
-GRAPHICS_LENSFLARE 1 game_assets\textures\flare_maps\flare.png 1.5 1
+GRAPHICS_LENSFLARE 1 game_assets\textures\flare_maps\sun_flare.png 1.5 1
 GRAPHICS_SKYHDR 1 0.5

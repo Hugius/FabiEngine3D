@@ -231,32 +231,32 @@ void SceneEditor::clearScene()
 	// Delete LIGHT entities
 	for (auto& ID : _loadedLightIDs)
 	{
-		// Delete light
 		if (_fe3d.lightEntity_isExisting(ID))
 		{
+			// Delete light
 			_fe3d.lightEntity_delete(ID);
-		}
 
-		// Remove corresponding lightbulb model
-		if (!_currentSceneID.empty())
-		{
-			_fe3d.gameEntity_delete("@" + ID);
+			// Remove corresponding lightbulb model
+			if (!_currentSceneID.empty())
+			{
+				_fe3d.gameEntity_delete("@" + ID);
+			}
 		}
 	}
 
 	// Delete AUDIO entities
 	for (auto& ID : _loadedAudioIDs)
 	{
-		// Delete audio
 		if (_fe3d.audioEntity_isExisting(ID))
 		{
+			// Delete audio
 			_fe3d.audioEntity_delete(ID);
-		}
 
-		// Remove corresponding speaker model
-		if (!_currentSceneID.empty())
-		{
-			_fe3d.gameEntity_delete("@speaker_" + ID);
+			// Remove corresponding speaker model
+			if (!_currentSceneID.empty())
+			{
+				_fe3d.gameEntity_delete("@speaker_" + ID);
+			}
 		}
 	}
 

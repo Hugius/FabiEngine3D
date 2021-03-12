@@ -158,6 +158,8 @@ void SceneEditor::_updateLensFlareGraphicsSettingsMenu()
 	if (screen->getID() == "sceneEditorMenuSettingsGraphicsLensFlare")
 	{
 		// Temporary values
+		const string rootDirectory = _fe3d.misc_getRootDirectory();
+		const string targetDirectory = string("game_assets\\textures\\flare_maps\\");
 		bool enabled = _fe3d.gfx_isLensFlareEnabled();
 		string flareMapPath = _fe3d.gfx_getLensFlareMapPath();
 		float intensity = _fe3d.gfx_getLensFlareIntensity();
@@ -177,8 +179,6 @@ void SceneEditor::_updateLensFlareGraphicsSettingsMenu()
 			else if (screen->getButton("loadFlareMap")->isHovered())
 			{
 				// Get the chosen filename
-				const string rootDirectory = _fe3d.misc_getRootDirectory();
-				const string targetDirectory = string("game_assets\\textures\\flare_maps\\");
 				const string filePath = _fe3d.misc_getWinExplorerFilename(targetDirectory, "PNG");
 
 				// Check if user chose a filename
@@ -188,9 +188,9 @@ void SceneEditor::_updateLensFlareGraphicsSettingsMenu()
 					if (filePath.size() > (rootDirectory.size() + targetDirectory.size()) &&
 						filePath.substr(rootDirectory.size(), targetDirectory.size()) == targetDirectory)
 					{
-						const string newFilePath = filePath.substr(rootDirectory.size());
-						_fe3d.misc_clearTextureCache2D(newFilePath);
-						_fe3d.gfx_enableLensFlare(newFilePath, intensity, multiplier);
+						flareMapPath = filePath.substr(rootDirectory.size());
+						_fe3d.misc_clearTextureCache2D(flareMapPath);
+						_fe3d.gfx_enableLensFlare(flareMapPath, intensity, multiplier);
 						_fe3d.gfx_disableLensFlare();
 					}
 					else
@@ -225,7 +225,7 @@ void SceneEditor::_updateLensFlareGraphicsSettingsMenu()
 		}
 
 		// Enable or disable lens flare
-		if (enabled)
+		if (enabled && _fe3d.misc_isFileExisting(rootDirectory + flareMapPath))
 		{
 			_fe3d.gfx_enableLensFlare(flareMapPath, intensity, multiplier);
 		}
@@ -235,7 +235,7 @@ void SceneEditor::_updateLensFlareGraphicsSettingsMenu()
 		}
 
 		// Update buttons hoverability
-		screen->getButton("enabled")->setHoverable(flareMapPath != "");
+		screen->getButton("enabled")->setHoverable(_fe3d.misc_isFileExisting(rootDirectory + flareMapPath));
 		screen->getButton("intensity")->setHoverable(enabled);
 		screen->getButton("multiplier")->setHoverable(enabled);
 	}

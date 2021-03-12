@@ -120,7 +120,7 @@ bool ScriptInterpreter::_executeFe3dGuiEntityFunction(const string& functionName
 			// Add image
 			_fe3d.guiEntity_add(
 				arguments[0].getString(),
-				string("game_assets\\textures\\gui_maps\\") + arguments[1].getString(),
+				string("game_assets\\textures\\image_maps\\") + arguments[1].getString(),
 				_convertGuiPositionToViewport(Vec2(arguments[2].getDecimal(), arguments[3].getDecimal())),
 				arguments[4].getDecimal(),
 				_convertGuiSizeToViewport(Vec2(arguments[5].getDecimal(), arguments[6].getDecimal())),

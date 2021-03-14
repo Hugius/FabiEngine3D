@@ -257,7 +257,7 @@ void SceneEditor::placeBillboard(const string& newID, const string& previewID, V
 		_fe3d.billboardEntity_setAnimationRows(newID, _fe3d.billboardEntity_getAnimationRows(previewID));
 		_fe3d.billboardEntity_setAnimationColumns(newID, _fe3d.billboardEntity_getAnimationColumns(previewID));
 		_fe3d.billboardEntity_setAnimationFramestep(newID, _fe3d.billboardEntity_getAnimationFramestep(previewID));
-		_fe3d.billboardEntity_playSpriteAnimation(newID, -1);
+		_fe3d.billboardEntity_playAnimation(newID, -1);
 	}
 
 	// Bind AABB entity to BILLBOARD entity
@@ -290,7 +290,7 @@ void SceneEditor::_placeBillboard(const string& billboardID,
 			_fe3d.billboardEntity_setAnimationFramestep(billboardID, animationFramestep);
 			_fe3d.billboardEntity_setAnimationRows(billboardID, animationRows);
 			_fe3d.billboardEntity_setAnimationColumns(billboardID, animationColumns);
-			_fe3d.billboardEntity_playSpriteAnimation(billboardID, -1);
+			_fe3d.billboardEntity_playAnimation(billboardID, -1);
 		}
 	}
 	else if (fontPath != "") // Text billboard

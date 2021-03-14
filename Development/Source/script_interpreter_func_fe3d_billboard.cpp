@@ -127,7 +127,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			{
 				_sceneEditor.placeBillboard(arguments[0].getString(), "@" + arguments[1].getString(),
 					Vec3(arguments[2].getDecimal(), arguments[3].getDecimal(), arguments[4].getDecimal()));
-				_fe3d.billboardEntity_stopSpriteAnimation(arguments[0].getString());
+				_fe3d.billboardEntity_stopAnimation(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}
@@ -584,7 +584,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			}
 		}
 	}
-	else if (functionName == "fe3d:billboard_start_animation") // Start billboardEntity sprite animation
+	else if (functionName == "fe3d:billboard_start_animation") // Start billboardEntity animation
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::INTEGER };
 
@@ -594,8 +594,68 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			// Validate existing billboard ID
 			if (_validateFe3dBillboardEntity(arguments[0].getString()))
 			{
-				_fe3d.billboardEntity_playSpriteAnimation(arguments[0].getString(), arguments[1].getInteger());
+				_fe3d.billboardEntity_playAnimation(arguments[0].getString(), arguments[1].getInteger());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			}
+		}
+	}
+	else if (functionName == "fe3d:billboard_pause_animation") // Pause billboardEntity animation
+	{
+		auto types = { ScriptValueType::STRING };
+
+		// Validate arguments
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existing billboard ID
+			if (_validateFe3dBillboardEntity(arguments[0].getString()))
+			{
+				_fe3d.billboardEntity_pauseAnimation(arguments[0].getString());
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			}
+		}
+	}
+	else if (functionName == "fe3d:billboard_resume_animation") // Resume billboardEntity animation
+	{
+		auto types = { ScriptValueType::STRING };
+
+		// Validate arguments
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existing billboard ID
+			if (_validateFe3dBillboardEntity(arguments[0].getString()))
+			{
+				_fe3d.billboardEntity_resumeAnimation(arguments[0].getString());
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			}
+		}
+	}
+	else if (functionName == "fe3d:billboard_stop_animation") // Stop billboardEntity animation
+	{
+		auto types = { ScriptValueType::STRING };
+
+		// Validate arguments
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existing billboard ID
+			if (_validateFe3dBillboardEntity(arguments[0].getString()))
+			{
+				_fe3d.billboardEntity_stopAnimation(arguments[0].getString());
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			}
+		}
+	}
+	else if (functionName == "fe3d:billboard_is_animation_finished") // Check if billboardEntity animation is finished
+	{
+		auto types = { ScriptValueType::STRING };
+
+		// Validate arguments
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		{
+			// Validate existing billboard ID
+			if (_validateFe3dBillboardEntity(arguments[0].getString()))
+			{
+				auto result = _fe3d.billboardEntity_isAnimationFinished(arguments[0].getString());
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 			}
 		}
 	}
@@ -614,7 +674,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			}
 		}
 	}
-	else if (functionName == "fe3d:billboard_stop_animation") // Stop billboardEntity animation
+	else if (functionName == "fe3d:billboard_is_animation_paused") // Check if billboardEntity animation is paused
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -624,22 +684,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			// Validate existing billboard ID
 			if (_validateFe3dBillboardEntity(arguments[0].getString()))
 			{
-				_fe3d.billboardEntity_stopSpriteAnimation(arguments[0].getString());
-				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
-			}
-		}
-	}
-	else if (functionName == "fe3d:billboard_is_animation_finished") // Check if billboardEntity animation is finished
-	{
-		auto types = { ScriptValueType::STRING };
-
-		// Validate arguments
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
-		{
-			// Validate existing billboard ID
-			if (_validateFe3dBillboardEntity(arguments[0].getString()))
-			{
-				auto result = _fe3d.billboardEntity_isAnimationFinished(arguments[0].getString());
+				auto result = _fe3d.billboardEntity_isAnimationPaused(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 			}
 		}

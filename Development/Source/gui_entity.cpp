@@ -92,100 +92,115 @@ void GuiEntity::setDepth(unsigned int value)
 
 void GuiEntity::playSpriteAnimation(int maxAnimationRepeats)
 {
-	_hasSpriteAnimation = true;
-	_passedFrames = 0;
-	_animationRepeats = 0;
-	_maxAnimationRepeats = maxAnimationRepeats;
+	_isSpriteAnimationPlaying = true;
+	_passedSpriteAnimationFrames = 0;
+	_spriteAnimationRepeats = 0;
+	_maxSpriteAnimationRepeats = maxAnimationRepeats;
 }
 
-void GuiEntity::stopSpriteAnimation()
+void GuiEntity::pauseSpriteAnimation()
 {
-	_hasSpriteAnimation = false;
+	_isSpriteAnimationPaused = true;
 }
 
-void GuiEntity::setSpriteRowIndex(int value)
+void GuiEntity::resumeSpriteAnimation()
 {
-	_spriteRowIndex = value;
+	_isSpriteAnimationPaused = false;
 }
 
-void GuiEntity::setSpriteColumnIndex(int value)
+void GuiEntity::stopSpriteAnimationAnimation()
 {
-	_spriteColumnIndex = value;
+	_isSpriteAnimationPlaying = false;
 }
 
-void GuiEntity::setTotalSpriteRows(int value)
+void GuiEntity::setSpriteAnimationRowIndex(int value)
 {
-	_totalSpriteRows = value;
+	_spriteAnimationRowIndex = value;
 }
 
-void GuiEntity::setTotalSpriteColumns(int value)
+void GuiEntity::setSpriteAnimationColumnIndex(int value)
 {
-	_totalSpriteColumns = value;
+	_spriteAnimationColumnIndex = value;
 }
 
-void GuiEntity::setMaxFramestep(int value)
+void GuiEntity::setTotalSpriteAnimationRows(int value)
 {
-	_maxFramestep = value;
+	_totalSpriteAnimationRows = value;
 }
 
-void GuiEntity::increasePassedFrames()
+void GuiEntity::setTotalSpriteAnimationColumns(int value)
 {
-	_passedFrames++;
+	_totalSpriteAnimationColumns = value;
 }
 
-void GuiEntity::resetPassedFrames()
+void GuiEntity::setMaxSpriteAnimationFramestep(int value)
 {
-	_passedFrames = 0;
+	_maxSpriteAnimationFramestep = value;
 }
 
-void GuiEntity::increaseAnimationRepeats()
+void GuiEntity::increasePassedSpriteAnimationFrames()
 {
-	_animationRepeats++;
+	_passedSpriteAnimationFrames++;
 }
 
-const bool GuiEntity::hasSpriteAnimation() const
+void GuiEntity::resetPassedSpriteAnimationFrames()
 {
-	return _hasSpriteAnimation;
+	_passedSpriteAnimationFrames = 0;
 }
 
-const int GuiEntity::getPassedFrames() const
+void GuiEntity::increaseSpriteAnimationRepeats()
 {
-	return _passedFrames;
+	_spriteAnimationRepeats++;
 }
 
-const int GuiEntity::getMaxFramestep() const
+const bool GuiEntity::isSpriteAnimationPlaying() const
 {
-	return _maxFramestep;
+	return _isSpriteAnimationPlaying;
 }
 
-const int GuiEntity::getTotalSpriteRows() const
+const bool GuiEntity::isSpriteAnimationPaused() const
 {
-	return _totalSpriteRows;
+	return _isSpriteAnimationPaused;
 }
 
-const int GuiEntity::getTotalSpriteColumns() const
+const int GuiEntity::getPassedSpriteAnimationFrames() const
 {
-	return _totalSpriteColumns;
+	return _passedSpriteAnimationFrames;
 }
 
-const int GuiEntity::getSpriteRowIndex() const
+const int GuiEntity::getMaxSpriteAnimationFramestep() const
 {
-	return _spriteRowIndex;
+	return _maxSpriteAnimationFramestep;
 }
 
-const int GuiEntity::getSpriteColumnIndex() const
+const int GuiEntity::getTotalSpriteAnimationRows() const
 {
-	return _spriteColumnIndex;
+	return _totalSpriteAnimationRows;
 }
 
-const int GuiEntity::getAnimationRepeats() const
+const int GuiEntity::getTotalSpriteAnimationColumns() const
 {
-	return _animationRepeats;
+	return _totalSpriteAnimationColumns;
 }
 
-const int GuiEntity::getMaxAnimationRepeats() const
+const int GuiEntity::getSpriteAnimationRowIndex() const
 {
-	return _maxAnimationRepeats;
+	return _spriteAnimationRowIndex;
+}
+
+const int GuiEntity::getSpriteAnimationColumnIndex() const
+{
+	return _spriteAnimationColumnIndex;
+}
+
+const int GuiEntity::getSpriteAnimationRepeats() const
+{
+	return _spriteAnimationRepeats;
+}
+
+const int GuiEntity::getMaxSpriteAnimationRepeats() const
+{
+	return _maxSpriteAnimationRepeats;
 }
 
 const GLuint GuiEntity::getTexture() const

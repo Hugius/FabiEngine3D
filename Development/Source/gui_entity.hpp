@@ -32,15 +32,17 @@ public:
 
 	// Animation
 	void playSpriteAnimation(int maxAnimationRepeats);
-	void stopSpriteAnimation();
-	void setSpriteRowIndex(int value);
-	void setSpriteColumnIndex(int value);
-	void setTotalSpriteRows(int value);
-	void setTotalSpriteColumns(int value);
-	void setMaxFramestep(int value);
-	void increasePassedFrames();
-	void resetPassedFrames();
-	void increaseAnimationRepeats();
+	void pauseSpriteAnimation();
+	void resumeSpriteAnimation();
+	void stopSpriteAnimationAnimation();
+	void setSpriteAnimationRowIndex(int value);
+	void setSpriteAnimationColumnIndex(int value);
+	void setTotalSpriteAnimationRows(int value);
+	void setTotalSpriteAnimationColumns(int value);
+	void setMaxSpriteAnimationFramestep(int value);
+	void increasePassedSpriteAnimationFrames();
+	void resetPassedSpriteAnimationFrames();
+	void increaseSpriteAnimationRepeats();
 
 	// Texture & color
 	const GLuint getTexture() const;
@@ -61,15 +63,16 @@ public:
 	const unsigned int getDepth() const;
 
 	// Animation
-	const bool hasSpriteAnimation() const;
-	const int getPassedFrames() const;
-	const int getMaxFramestep() const;
-	const int getTotalSpriteRows() const;
-	const int getTotalSpriteColumns() const;
-	const int getSpriteRowIndex() const;
-	const int getSpriteColumnIndex() const;
-	const int getAnimationRepeats() const;
-	const int getMaxAnimationRepeats() const;
+	const bool isSpriteAnimationPlaying() const;
+	const bool isSpriteAnimationPaused() const;
+	const int getPassedSpriteAnimationFrames() const;
+	const int getMaxSpriteAnimationFramestep() const;
+	const int getTotalSpriteAnimationRows() const;
+	const int getTotalSpriteAnimationColumns() const;
+	const int getSpriteAnimationRowIndex() const;
+	const int getSpriteAnimationColumnIndex() const;
+	const int getSpriteAnimationRepeats() const;
+	const int getMaxSpriteAnimationRepeats() const;
 
 	// Other
 	void setDepthEntity(bool value);
@@ -88,22 +91,23 @@ private:
 	Vec2 _maxPosition = Vec2(1.0f);
 
 	float _rotation = 0.0f;
-	float _alpha = 1.0f;
+	float _alpha    = 1.0f;
 
-	int _maxFramestep = 0;
-	int _passedFrames = 0;
-	int _totalSpriteRows = 0;
-	int _totalSpriteColumns = 0;
-	int _spriteRowIndex = 0;
-	int _spriteColumnIndex = 0;
-	int _animationRepeats = 0;
-	int _maxAnimationRepeats = 0;
+	int _maxSpriteAnimationFramestep = 0;
+	int _passedSpriteAnimationFrames = 0;
+	int _totalSpriteAnimationRows    = 0;
+	int _totalSpriteAnimationColumns = 0;
+	int _spriteAnimationRowIndex	 = 0;
+	int _spriteAnimationColumnIndex  = 0;
+	int _spriteAnimationRepeats		 = 0;
+	int _maxSpriteAnimationRepeats   = 0;
 
 	unsigned int _depth = 0;
 
-	bool _hasSpriteAnimation   = false;
-	bool _mirroredHorizontally = false;
-	bool _mirroredVertically   = false;
-	bool _isDepthEntity        = false;
-	bool _isCentered		   = false;
+	bool _isSpriteAnimationPlaying = false;
+	bool _isSpriteAnimationPaused  = false;
+	bool _mirroredHorizontally	   = false;
+	bool _mirroredVertically	   = false;
+	bool _isDepthEntity			   = false;
+	bool _isCentered			   = false;
 };

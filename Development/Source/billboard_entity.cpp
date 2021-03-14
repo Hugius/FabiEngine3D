@@ -121,55 +121,65 @@ void BillboardEntity::setDepthMapIncluded(bool value)
 
 void BillboardEntity::playSpriteAnimation(int maxAnimationRepeats)
 {
-	_hasSpriteAnimation = true;
-	_passedFrames = 0;
-	_animationRepeats = 0;
-	_maxAnimationRepeats = maxAnimationRepeats;
+	_isSpriteAnimationPlaying = true;
+	_passedSpriteAnimationFrames = 0;
+	_spriteAnimationRepeats = 0;
+	_maxSpriteAnimationRepeats = maxAnimationRepeats;
+}
+
+void BillboardEntity::pauseSpriteAnimation()
+{
+	_isSpriteAnimationPaused = true;
+}
+
+void BillboardEntity::resumeSpriteAnimation()
+{
+	_isSpriteAnimationPaused = false;
 }
 
 void BillboardEntity::stopSpriteAnimation()
 {
-	_hasSpriteAnimation = false;
+	_isSpriteAnimationPlaying = false;
 }
 
-void BillboardEntity::setSpriteRowIndex(int value)
+void BillboardEntity::setSpriteAnimationRowIndex(int value)
 {
-	_spriteRowIndex = value;
+	_spriteAnimationRowIndex = value;
 }
 
-void BillboardEntity::setSpriteColumnIndex(int value)
+void BillboardEntity::setSpriteAnimationColumnIndex(int value)
 {
-	_spriteColumnIndex = value;
+	_spriteAnimationColumnIndex = value;
 }
 
-void BillboardEntity::setTotalSpriteRows(int value)
+void BillboardEntity::setTotalSpriteAnimationRows(int value)
 {
-	_totalSpriteRows = value;
+	_totalSpriteAnimationRows = value;
 }
 
-void BillboardEntity::setTotalSpriteColumns(int value)
+void BillboardEntity::setTotalSpriteAnimationColumns(int value)
 {
-	_totalSpriteColumns = value;
+	_totalSpriteAnimationColumns = value;
 }
 
-void BillboardEntity::setMaxFramestep(int value)
+void BillboardEntity::setMaxSpriteAnimationFramestep(int value)
 {
-	_maxFramestep = value;
+	_maxSpriteAnimationFramestep = value;
 }
 
-void BillboardEntity::increasePassedFrames()
+void BillboardEntity::increasePassedSpriteAnimationFrames()
 {
-	_passedFrames++;
+	_passedSpriteAnimationFrames++;
 }
 
-void BillboardEntity::resetPassedFrames()
+void BillboardEntity::resetPassedSpriteAnimationFrames()
 {
-	_passedFrames = 0;
+	_passedSpriteAnimationFrames = 0;
 }
 
-void BillboardEntity::increaseAnimationRepeats()
+void BillboardEntity::increaseSpriteAnimationRepeats()
 {
-	_animationRepeats++;
+	_spriteAnimationRepeats++;
 }
 
 void BillboardEntity::setLightness(float value)
@@ -252,44 +262,44 @@ const float BillboardEntity::getMaxHeight() const
 	return _maxHeight;
 }
 
-const int BillboardEntity::getPassedFrames() const
+const int BillboardEntity::getPassedSpriteAnimationFrames() const
 {
-	return _passedFrames;
+	return _passedSpriteAnimationFrames;
 }
 
-const int BillboardEntity::getMaxFramestep() const
+const int BillboardEntity::getMaxSpriteAnimationFramestep() const
 {
-	return _maxFramestep;
+	return _maxSpriteAnimationFramestep;
 }
 
-const int BillboardEntity::getTotalSpriteRows() const
+const int BillboardEntity::getTotalSpriteAnimationRows() const
 {
-	return _totalSpriteRows;
+	return _totalSpriteAnimationRows;
 }
 
-const int BillboardEntity::getTotalSpriteColumns() const
+const int BillboardEntity::getTotalSpriteAnimationColumns() const
 {
-	return _totalSpriteColumns;
+	return _totalSpriteAnimationColumns;
 }
 
-const int BillboardEntity::getSpriteRowIndex() const
+const int BillboardEntity::getSpriteAnimationRowIndex() const
 {
-	return _spriteRowIndex;
+	return _spriteAnimationRowIndex;
 }
 
-const int BillboardEntity::getSpriteColumnIndex() const
+const int BillboardEntity::getSpriteAnimationColumnIndex() const
 {
-	return _spriteColumnIndex;
+	return _spriteAnimationColumnIndex;
 }
 
-const int BillboardEntity::getAnimationRepeats() const
+const int BillboardEntity::getSpriteAnimationRepeats() const
 {
-	return _animationRepeats;
+	return _spriteAnimationRepeats;
 }
 
-const int BillboardEntity::getMaxAnimationRepeats() const
+const int BillboardEntity::getMaxSpriteAnimationRepeats() const
 {
-	return _maxAnimationRepeats;
+	return _maxSpriteAnimationRepeats;
 }
 
 const bool BillboardEntity::isTransparent() const
@@ -297,9 +307,14 @@ const bool BillboardEntity::isTransparent() const
 	return _isTransparent;
 }
 
-const bool BillboardEntity::hasSpriteAnimation() const
+const bool BillboardEntity::isSpriteAnimationPlaying() const
 {
-	return _hasSpriteAnimation;
+	return _isSpriteAnimationPlaying;
+}
+
+const bool BillboardEntity::isSpriteAnimationPaused() const
+{
+	return _isSpriteAnimationPaused;
 }
 
 const bool BillboardEntity::isCameraFacingX() const

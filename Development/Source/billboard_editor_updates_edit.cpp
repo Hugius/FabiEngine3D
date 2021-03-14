@@ -188,7 +188,7 @@ void BillboardEditor::_updateBillboardEditing()
 					}
 					else if (screen->getButton("animate")->isHovered())
 					{
-						_fe3d.billboardEntity_playSpriteAnimation(_currentBillboardID, -1);
+						_fe3d.billboardEntity_playAnimation(_currentBillboardID, -1);
 					}
 					else if (screen->getButton("rows")->isHovered())
 					{
@@ -215,7 +215,7 @@ void BillboardEditor::_updateBillboardEditing()
 				{
 					if (playing) // Only if animation is already playing
 					{
-						_fe3d.billboardEntity_playSpriteAnimation(_currentBillboardID, -1);
+						_fe3d.billboardEntity_playAnimation(_currentBillboardID, -1);
 					}
 				}
 

@@ -70,34 +70,35 @@ void GuiEntityManager::updateSpriteAnimations()
 {
 	for (auto& [keyID, entity] : _getGuiEntities())
 	{
-		if (entity->hasSpriteAnimation() && entity->getAnimationRepeats() != entity->getMaxAnimationRepeats())
+		if (entity->isSpriteAnimationPlaying() && !entity->isSpriteAnimationPaused() &&
+			entity->getSpriteAnimationRepeats() != entity->getMaxSpriteAnimationRepeats())
 		{
-			if (entity->getPassedFrames() >= entity->getMaxFramestep()) // Is allowed to update
+			if (entity->getPassedSpriteAnimationFrames() >= entity->getMaxSpriteAnimationFramestep()) // Is allowed to update
 			{
-				entity->resetPassedFrames(); // Reset counter
+				entity->resetPassedSpriteAnimationFrames(); // Reset counter
 
-				if (entity->getSpriteColumnIndex() >= entity->getTotalSpriteColumns() - 1) // Reached total columns
+				if (entity->getSpriteAnimationColumnIndex() >= entity->getTotalSpriteAnimationColumns() - 1) // Reached total columns
 				{
-					entity->setSpriteColumnIndex(0); // Reset column index
+					entity->setSpriteAnimationColumnIndex(0); // Reset column index
 
-					if (entity->getSpriteRowIndex() >= entity->getTotalSpriteRows() - 1) // Reached total rows
+					if (entity->getSpriteAnimationRowIndex() >= entity->getTotalSpriteAnimationRows() - 1) // Reached total rows
 					{
-						entity->increaseAnimationRepeats();
-						entity->setSpriteRowIndex(0); // Reset row index (animation finished)
+						entity->increaseSpriteAnimationRepeats();
+						entity->setSpriteAnimationRowIndex(0); // Reset row index (animation finished)
 					}
 					else // Next row
 					{
-						entity->setSpriteRowIndex(entity->getSpriteRowIndex() + 1);
+						entity->setSpriteAnimationRowIndex(entity->getSpriteAnimationRowIndex() + 1);
 					}
 				}
 				else // Next column
 				{
-					entity->setSpriteColumnIndex(entity->getSpriteColumnIndex() + 1);
+					entity->setSpriteAnimationColumnIndex(entity->getSpriteAnimationColumnIndex() + 1);
 				}
 			}
 			else // Increase counter
 			{
-				entity->increasePassedFrames();
+				entity->increasePassedSpriteAnimationFrames();
 			}
 		}
 	}

@@ -401,8 +401,10 @@ public:
 	const string& billboardEntity_getTextContent(const string& ID);
 	
 	// Billboard entity interface (animation) - setters
-	void billboardEntity_playSpriteAnimation(const string& ID, int maxAnimationRepeats);
-	void billboardEntity_stopSpriteAnimation(const string& ID);
+	void billboardEntity_playAnimation(const string& ID, int maxAnimationRepeats);
+	void billboardEntity_pauseAnimation(const string& ID);
+	void billboardEntity_resumeAnimation(const string& ID);
+	void billboardEntity_stopAnimation(const string& ID);
 	void billboardEntity_setAnimationRows(const string& ID, int rows);
 	void billboardEntity_setAnimationColumns(const string& ID, int columns);
 	void billboardEntity_setAnimationFramestep(const string& ID, int framestep);
@@ -410,6 +412,7 @@ public:
 	// Billboard entity interface (animation) - getters
 	bool billboardEntity_isAnimationFinished(const string& ID);
 	bool billboardEntity_isAnimationPlaying(const string& ID);
+	bool billboardEntity_isAnimationPaused(const string& ID);
 	int billboardEntity_getAnimationRows(const string& ID);
 	int billboardEntity_getAnimationColumns(const string& ID);
 	int billboardEntity_getAnimationFramestep(const string& ID);
@@ -503,8 +506,10 @@ public:
 	void guiEntity_setAlpha(const string& ID, float alpha);
 	void guiEntity_setMinPosition(const string& ID, Vec2 minPos);
 	void guiEntity_setMaxPosition(const string& ID, Vec2 maxPos);
-	void guiEntity_playSpriteAnimation(const string& ID, int maxAnimationRepeats);
-	void guiEntity_stopSpriteAnimation(const string& ID);
+	void guiEntity_playAnimation(const string& ID, int maxAnimationRepeats);
+	void guiEntity_pauseAnimation(const string& ID);
+	void guiEntity_resumeAnimation(const string& ID);
+	void guiEntity_stopAnimation(const string& ID);
 	void guiEntity_setAnimationRows(const string& ID, int rows);
 	void guiEntity_setAnimationColumns(const string& ID, int columns);
 	void guiEntity_setAnimationFramestep(const string& ID, int framestep);
@@ -515,6 +520,7 @@ public:
 	bool guiEntity_isCentered(const string& ID);
 	bool guiEntity_isAnimationFinished(const string& ID);
 	bool guiEntity_isAnimationPlaying(const string& ID);
+	bool guiEntity_isAnimationPaused(const string& ID);
 	Vec2 guiEntity_getPosition(const string& ID);
 	Vec2 guiEntity_getSize(const string& ID);
 	Vec2 guiEntity_getMinPosition(const string& ID);

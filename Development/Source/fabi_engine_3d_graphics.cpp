@@ -552,7 +552,7 @@ float FabiEngine3D::gfx_getSkyHdrBrightnessFactor()
 	return _core->_skyEntityManager.getBrightnessFactor();
 }
 
-float FabiEngine3D::gfx_getDofMaxDistance()
+float FabiEngine3D::gfx_getaMaxDofDistance()
 {
 	return _core->_renderBus.getDofMaxDistance();
 }

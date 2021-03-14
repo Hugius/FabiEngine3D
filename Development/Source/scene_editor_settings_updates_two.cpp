@@ -12,7 +12,7 @@ void SceneEditor::_updateDofGraphicsSettingsMenu()
 		bool enabled = _fe3d.gfx_isDofEnabled();
 		bool dynamic = _fe3d.gfx_isDofDynamic();
 		float blurDistance = _fe3d.gfx_getDofBlurDistance();
-		float maxDistance = _fe3d.gfx_getDofMaxDistance();
+		float maxDistance = _fe3d.gfx_getaMaxDofDistance();
 
 		// GUI management
 		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))

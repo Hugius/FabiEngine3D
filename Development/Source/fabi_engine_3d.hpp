@@ -709,7 +709,7 @@ public:
 	float gfx_getBloomIntensity();
 	float gfx_getBloomBrightnessTreshold();
 	float gfx_getSkyHdrBrightnessFactor();
-	float gfx_getDofMaxDistance();
+	float gfx_getaMaxDofDistance();
 	float gfx_getDofBlurDistance();
 	float gfx_getLensFlareIntensity();
 	float gfx_getLensFlareMultiplier();

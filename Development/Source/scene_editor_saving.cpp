@@ -577,7 +577,7 @@ void SceneEditor::saveSceneToFile()
 			{
 				bool dynamic = _fe3d.gfx_isDofDynamic();
 				float blurDistance = _fe3d.gfx_getDofBlurDistance();
-				float maxDistance = _fe3d.gfx_getDofMaxDistance();
+				float maxDistance = _fe3d.gfx_getaMaxDofDistance();
 				file << "GRAPHICS_DOF " << enabled << " " << dynamic << " " << blurDistance << " " << maxDistance << std::endl;
 			}
 

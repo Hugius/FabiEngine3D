@@ -679,6 +679,9 @@
     <ClCompile Include="Source\script_interpreter_func_fe3d_text.cpp">
       <Filter>src\Scripting System\Execution\Interpreter\Function\Entities\Miscellaneous</Filter>
     </ClCompile>
+    <ClCompile Include="Source\script_interpreter_func_fe3d_lighting.cpp">
+      <Filter>src\Scripting System\Execution\Interpreter\Function\Miscellaneous</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\texture_loader.hpp">

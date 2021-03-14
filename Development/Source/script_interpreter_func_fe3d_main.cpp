@@ -47,6 +47,7 @@ vector<ScriptValue> ScriptInterpreter::_processEngineFunctionCall(const string& 
 				executed = executed || _executeFe3dRaycastFunction(functionName, arguments, returnValues);
 				executed = executed || _executeFe3dCollisionFunction(functionName, arguments, returnValues);
 				executed = executed || _executeFe3dLightingFunction(functionName, arguments, returnValues);
+				executed = executed || _executeFe3dGraphicsFunction(functionName, arguments, returnValues);
 				executed = executed || _executeFe3dMusicFunction(functionName, arguments, returnValues);
 				executed = executed || _executeFe3dMiscFunction(functionName, arguments, returnValues);
 

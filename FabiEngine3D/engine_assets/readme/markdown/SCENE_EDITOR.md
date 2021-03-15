@@ -1,46 +1,62 @@
 # Scene Editor
-![scene](FabiEngine3D/engine_assets/readme/scene_editor.png)
+![scene](../images/scene_editor.png)
 ### Environment
 - Sky: you can select **only 1** sky, created in the environment editor.
 - Terrain: you can select **only 1** terrain, created in the environment editor.
 - Water: you can select **only 1** water, created in the environment editor.
 ### Models
-- You can place **multiple** models in the scene.
+- You can **place and delete** models in the scene.
 - If a terrain is selected, the model will be placed **on top** of the terrain.
 - If no terrain is selected, the model will be placed at **XYZ(0,0,0)**.
-- Every placed model can be **edited** (position, rotation, size, animation, deleting, freezing into local space).
-- Placed models are not meant for individual interactions through scripting (only by group).
+- Every placed model has a **position** (**Range**: -inf to inf) that can be **edited**.
+- Every placed model has a **rotation** (**Range**: -360 to 360) that can be **edited**.
+- Every placed model has a **size** (**Range**: 0 to inf) that can be **edited**.
+- You can attach an (endless) **animation** to a placed model.
+- You can **"freeze"** into local space rendering, which means its position is not affected by camera movement.
 ### Billboards
-- You can place **multiple** billboards in the scene.
+- You can **place and delete** billboards in the scene.
 - If a terrain is selected, the billboard will be placed **on top** of the terrain.
 - If no terrain is selected, the billboard will be placed at **XYZ(0,0,0)**.
-- Every placed billboard can be **edited** (position, rotation, size, deleting).
+- Every placed billboard has a **position** (**Range**: -inf to inf) that can be **edited**.
+- Every placed billboard has a **rotation** (**Range**: -360 to 360) that can be **edited**.
+- Every placed billboard has a **size** (**Range**: 0 to inf) that can be **edited**.
 - Billboards will **NOT** be affected by scene lighting.
-- Every billboard's **AABB** will be scaled based on their rotation.
-- Placed billboards are not meant for individual interactions through scripting (only by group).
 ### Lights
-- You can add **ambient lighting** which has a custom color & intensity.
-- You can add **directional lighting** which has a custom color, intensity and position.
-- Directional lighting also has the option to show a lightsource circle billboard (with custom intensity).
-- You can place **multiple point lights** in the scene.
+- You can add **ambient lighting** which has a **color** (**Range**: 0 to 255) & **intensity** (**Range**: 0 to inf).
+- You can add **directional lighting** which has a **color** (**Range**: 0 to 255) & **intensity** (**Range**: 0 to inf) & **position** (**Range**: -inf to inf).
+- Directional lighting has the option to show a **light source billboard**, which has a **size** (**Range**: 0 to inf) & **intensity** (**Range**: 0 to inf).
+- You can **place and delete** point lights in the scene.
 - If a terrain is selected, the point light will be placed **on top** of the terrain.
 - If no terrain is selected, the point light will be placed at **XYZ(0,0,0)**.
-- Every placed point light can be **edited** (position, max distance, intensity, color, deleting).
-- Placed lights are not meant for individual interactions through scripting.
+- Every placed point light has a **position** (**Range**: -inf to inf) that can be **edited**.
+- Every placed point light has a **maximum distance** (**Range**: 0 to inf) that can be **edited**.
+- Every placed point light has a **color** (**Range**: 0 to 255) that can be **edited**.
 ### Audio
-- You can place **multiple** 3D audio casters in the scene
+- You can **place and delete** 3D audio casters in the scene.
 - If a terrain is selected, the audio caster will be placed **on top** of the terrain.
 - If no terrain is selected, the audio caster will be placed at **XYZ(0,0,0)**.
-- Every placed audio caster can be **edited** (position, max volume, max distance, deleting).
-- Placed audio casters are not meant for individual interactions through scripting.
-### Graphics
-- You can add **shadows** to scene based on (casting position, box size, box center, option to follow camera + interval).
-- You can enable **motion blur** with a custom strength.
-- You can enable dynamic Depth Of Field (**DOF**) based on (min distance, blur distance) or enable a static **distant blur**.
+- Every placed audio caster has a **position** (**Range**: -inf to inf) that can be **edited**.
+- Every placed audio caster has a **maximum volume** (**Range**: 0 to 100) that can be **edited**.
+- Every placed audio caster has a **maximum distance** (**Range**: 0 to inf) that can be **edited**.
+### Settings
+- You can change the editor **camera** movement speed (**Range**: 0 to inf).
+- You can set the **minimum distance** by which **level of detailed models** will change their rendering (**Range**: 0 to inf).
+### Shadows
+- You can add **directional shadows** to the scene from casted from a **position** (**Range**: -inf to inf).
+- Shadows are rendered within boxed borders with a certain **size** (**Range**: 0 to inf).
+- You can determine the direction of the shadows by setting the **center position** (**Range**: -inf to inf).
+- There is an option to make the shadow box **follow the camera** at a certain **interval** (**Range**: 0 to inf) measured in frames.
+- Additionally you can choose to enable **soft shadows** and andjust the **lightness** (**Range**: 0 to inf) of the shadows.
+### Motion blur
+- You can enable **motion blur** with a custom **strength** (**Range**: 0 to inf).
+### Depth Of Field (DOF)
+- You can enable dynamic **Depth Of Field** or enable a static **distant blur**.
+- The distance to objects for dynamic DOF can be adjusted with the **DOF distance** (**Range**: 0 to inf) property.
+- You can change he distance from which the blur starts with the **blur distance** (**Range**: 0 to inf) property.
+### Fog
 - You can enable **fog** based on (min distance, max distance, intensity, color).
-- You can enable **dynamic skyHDR** based on (max extra intensity).
+### Sky HDR effect
+- You can enable **dynamic sky HDR** based on (max extra intensity).
+### Lens Flare
 - You can enable a **lens flare** for directional lighting based on (flare map, intensity, multiplier).
 - **Flare map**: colored 24bit `PNG` format image file from `game_assets\textures\flare_maps`.
-### Other settings
-- You can change the editor movement speed, which will be saved for next time.
-- You can set the minimum distance by which level of detailed models will change their rendering.

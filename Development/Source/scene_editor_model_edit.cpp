@@ -222,13 +222,12 @@ void SceneEditor::_updateModelEditing()
 				}
 				else if (_transformation == TransformationType::SCALING)
 				{
-					const float FACTOR = 100.0f;
-					_handleValueChanging("modelPropertiesMenu", "xPlus", "x", size.x, _customEditorSpeed / 100.0f, FACTOR);
-					_handleValueChanging("modelPropertiesMenu", "xMinus", "x", size.x, -_customEditorSpeed / 100.0f, FACTOR);
-					_handleValueChanging("modelPropertiesMenu", "yPlus", "y", size.y, _customEditorSpeed / 100.0f, FACTOR);
-					_handleValueChanging("modelPropertiesMenu", "yMinus", "y", size.y, -_customEditorSpeed / 100.0f, FACTOR);
-					_handleValueChanging("modelPropertiesMenu", "zPlus", "z", size.z, _customEditorSpeed / 100.0f, FACTOR);
-					_handleValueChanging("modelPropertiesMenu", "zMinus", "z", size.z, -_customEditorSpeed / 100.0f, FACTOR);
+					_handleValueChanging("modelPropertiesMenu", "xPlus", "x", size.x, _customEditorSpeed / 100.0f, MODEL_SIZE_MULTIPLIER, 0.0f);
+					_handleValueChanging("modelPropertiesMenu", "xMinus", "x", size.x, -_customEditorSpeed / 100.0f, MODEL_SIZE_MULTIPLIER, 0.0f);
+					_handleValueChanging("modelPropertiesMenu", "yPlus", "y", size.y, _customEditorSpeed / 100.0f, MODEL_SIZE_MULTIPLIER, 0.0f);
+					_handleValueChanging("modelPropertiesMenu", "yMinus", "y", size.y, -_customEditorSpeed / 100.0f, MODEL_SIZE_MULTIPLIER, 0.0f);
+					_handleValueChanging("modelPropertiesMenu", "zPlus", "z", size.z, _customEditorSpeed / 100.0f, MODEL_SIZE_MULTIPLIER, 0.0f);
+					_handleValueChanging("modelPropertiesMenu", "zMinus", "z", size.z, -_customEditorSpeed / 100.0f, MODEL_SIZE_MULTIPLIER, 0.0f);
 				}
 
 				// Update transformations if changed

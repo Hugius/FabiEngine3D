@@ -55,20 +55,20 @@ void SceneEditor::_updateAmbientLightingMenu()
 				}
 				else if (screen->getButton("color")->isHovered())
 				{
-					_gui.getGlobalScreen()->addValueForm("ambientColorR", "R(0-255)", ambientLightingColor.r * 255.0f, Vec2(-0.25f, 0.0f), Vec2(0.2f, 0.1f));
-					_gui.getGlobalScreen()->addValueForm("ambientColorG", "G(0-255)", ambientLightingColor.g * 255.0f, Vec2(0.0f, 0.0f), Vec2(0.2f, 0.1f));
-					_gui.getGlobalScreen()->addValueForm("ambientColorB", "B(0-255)", ambientLightingColor.b * 255.0f, Vec2(0.25f, 0.0f), Vec2(0.2f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("ambientColorR", "R", ambientLightingColor.r * 255.0f, Vec2(-0.25f, 0.0f), Vec2(0.2f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("ambientColorG", "G", ambientLightingColor.g * 255.0f, Vec2(0.0f, 0.0f), Vec2(0.2f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("ambientColorB", "B", ambientLightingColor.b * 255.0f, Vec2(0.25f, 0.0f), Vec2(0.2f, 0.1f));
 				}
 				else if (screen->getButton("intensity")->isHovered())
 				{
-					_gui.getGlobalScreen()->addValueForm("ambientIntensity", "Ambient intensity (%)", ambientLightingIntensity * 100.0f, Vec2(0.0f), Vec2(0.3f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("ambientIntensity", "Ambient intensity", ambientLightingIntensity * 100.0f, Vec2(0.0f), Vec2(0.3f, 0.1f));
 				}
 			}
 
 			// Ambient value conversion
 			if (_gui.getGlobalScreen()->checkValueForm("ambientIntensity", ambientLightingIntensity))
 			{
-				ambientLightingIntensity /= 100.0f;
+				ambientLightingIntensity = std::max(0.0f, ambientLightingIntensity / 100.0f);
 			}
 
 			// Color R values conversion
@@ -119,9 +119,9 @@ void SceneEditor::_updateDirectionalLightingMenu()
 				}
 				else if (screen->getButton("color")->isHovered())
 				{
-					_gui.getGlobalScreen()->addValueForm("directionalColorR", "R(0-255)", directionalLightingColor.r * 255.0f, Vec2(-0.25f, 0.0f), Vec2(0.2f, 0.1f));
-					_gui.getGlobalScreen()->addValueForm("directionalColorG", "G(0-255)", directionalLightingColor.g * 255.0f, Vec2(0.0f, 0.0f), Vec2(0.2f, 0.1f));
-					_gui.getGlobalScreen()->addValueForm("directionalColorB", "B(0-255)", directionalLightingColor.b * 255.0f, Vec2(0.25f, 0.0f), Vec2(0.2f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("directionalColorR", "R", directionalLightingColor.r * 255.0f, Vec2(-0.25f, 0.0f), Vec2(0.2f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("directionalColorG", "G", directionalLightingColor.g * 255.0f, Vec2(0.0f, 0.0f), Vec2(0.2f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("directionalColorB", "B", directionalLightingColor.b * 255.0f, Vec2(0.25f, 0.0f), Vec2(0.2f, 0.1f));
 				}
 				else if (screen->getButton("position")->isHovered())
 				{
@@ -131,7 +131,7 @@ void SceneEditor::_updateDirectionalLightingMenu()
 				}
 				else if (screen->getButton("intensity")->isHovered())
 				{
-					_gui.getGlobalScreen()->addValueForm("directionalIntensity", "Directional intensity(%)", directionalLightingIntensity * 100.0f, Vec2(0.0f), Vec2(0.3f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("directionalIntensity", "Directional intensity", directionalLightingIntensity * 100.0f, Vec2(0.0f), Vec2(0.3f, 0.1f));
 				}
 				else if (screen->getButton("billboardSize")->isHovered())
 				{
@@ -139,7 +139,7 @@ void SceneEditor::_updateDirectionalLightingMenu()
 				}
 				else if (screen->getButton("billboardLightness")->isHovered())
 				{
-					_gui.getGlobalScreen()->addValueForm("billboardLightness", "Billboard lightness (%)", billboardLightness * 100.0f, Vec2(0.0f), Vec2(0.3f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("billboardLightness", "Billboard lightness", billboardLightness * 100.0f, Vec2(0.0f), Vec2(0.3f, 0.1f));
 				}
 			}
 
@@ -169,16 +169,17 @@ void SceneEditor::_updateDirectionalLightingMenu()
 			// Directional intensity value conversion
 			if (_gui.getGlobalScreen()->checkValueForm("directionalIntensity", directionalLightingIntensity))
 			{
-				directionalLightingIntensity /= 100.0f;
+				directionalLightingIntensity = std::max(0.0f, directionalLightingIntensity / 100.0f);
 			}
 
 			// Update billboard size value
 			_gui.getGlobalScreen()->checkValueForm("billboardSize", billboardSize);
+			billboardSize = std::max(0.0f, billboardSize);
 
 			// Update billboard lightness value
 			if (_gui.getGlobalScreen()->checkValueForm("billboardLightness", billboardLightness))
 			{
-				billboardLightness /= 100.0f;
+				billboardLightness = std::max(0.0f, billboardLightness / 100.0f);
 			}
 
 			// Update directional lighting

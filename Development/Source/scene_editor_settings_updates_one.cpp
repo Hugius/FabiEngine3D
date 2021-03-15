@@ -36,10 +36,12 @@ void SceneEditor::_updateMainSettingsMenu()
 
 			// Setting custom camera speed
 			_gui.getGlobalScreen()->checkValueForm("setSpeed", _customEditorSpeed, {});
+			_customEditorSpeed = std::max(0.0f, _customEditorSpeed);
 
 			// Setting LOD distance
 			if (_gui.getGlobalScreen()->checkValueForm("lodDistance", lodDistance, {}))
 			{
+				lodDistance = std::max(0.0f, lodDistance);
 				_fe3d.gameEntity_setLevelOfDetailDistance(lodDistance);
 			}
 		}
@@ -142,7 +144,7 @@ void SceneEditor::_updateShadowGraphicsSettingsMenu()
 			}
 			else if (screen->getButton("lightness")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("lightness", "Lightness (%)", lightness * 100.0f, Vec2(0.0f, 0.0f), Vec2(0.2f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("lightness", "Lightness", lightness * 100.0f, Vec2(0.0f, 0.0f), Vec2(0.2f, 0.1f));
 			}
 			else if (screen->getButton("interval")->isHovered())
 			{
@@ -155,6 +157,7 @@ void SceneEditor::_updateShadowGraphicsSettingsMenu()
 
 		// Size value
 		_gui.getGlobalScreen()->checkValueForm("size", size);
+		size = std::max(0.0f, size);
 
 		// Position values
 		_gui.getGlobalScreen()->checkValueForm("positionX", position.x);
@@ -175,11 +178,12 @@ void SceneEditor::_updateShadowGraphicsSettingsMenu()
 		// Lightness value
 		if (_gui.getGlobalScreen()->checkValueForm("lightness", lightness))
 		{
-			lightness /= 100.0f;
+			lightness = std::max(0.0f, lightness / 100.0f);
 		}
 
 		// Interval value
 		_gui.getGlobalScreen()->checkValueForm("interval", interval);
+		interval = std::max(0, interval);
 
 		// Enable or disable shadows
 		if (enabled)
@@ -223,7 +227,7 @@ void SceneEditor::_updateMotionblurGraphicsSettingsMenu()
 			}
 			else if (screen->getButton("strength")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("strength", "Strength (%)", strength * 100.0f, Vec2(0.0f), Vec2(0.2f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("strength", "Strength", strength * 100.0f, Vec2(0.0f), Vec2(0.2f, 0.1f));
 			}
 		}
 		
@@ -233,7 +237,7 @@ void SceneEditor::_updateMotionblurGraphicsSettingsMenu()
 		// Strength value
 		if (_gui.getGlobalScreen()->checkValueForm("strength", strength))
 		{
-			strength /= 100.0f;
+			strength = std::max(0.0f, strength / 100.0f);
 		}
 
 		// Enable or disable motionblur

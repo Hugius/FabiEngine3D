@@ -45,9 +45,11 @@ void SceneEditor::_updateDofGraphicsSettingsMenu()
 
 		// Blur distance value
 		_gui.getGlobalScreen()->checkValueForm("blurDistance", blurDistance);
+		blurDistance = std::max(0.0f, blurDistance);
 
 		// Max distance value
 		_gui.getGlobalScreen()->checkValueForm("maxDistance", maxDistance);
+		maxDistance = std::max(0.0f, maxDistance);
 
 		// Enable or disable DOF
 		if (enabled)
@@ -100,13 +102,13 @@ void SceneEditor::_updateFogGraphicsSettingsMenu()
 			}
 			else if (screen->getButton("thickness")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("thickness", "Thickness (0-100%)", thickness * 100.0f, Vec2(0.0f), Vec2(0.2f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("thickness", "Thickness", thickness * 100.0f, Vec2(0.0f), Vec2(0.2f, 0.1f));
 			}
 			else if (screen->getButton("color")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("colorR", "R(0-255)", color.r * 255.0f, Vec2(-0.25f, 0.0f), Vec2(0.2f, 0.1f));
-				_gui.getGlobalScreen()->addValueForm("colorG", "G(0-255)", color.g * 255.0f, Vec2(0.0f, 0.0f), Vec2(0.2f, 0.1f));
-				_gui.getGlobalScreen()->addValueForm("colorB", "B(0-255)", color.b * 255.0f, Vec2(0.25f, 0.0f), Vec2(0.2f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("colorR", "R", color.r * 255.0f, Vec2(-0.25f, 0.0f), Vec2(0.2f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("colorG", "G", color.g * 255.0f, Vec2(0.0f, 0.0f), Vec2(0.2f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("colorB", "B", color.b * 255.0f, Vec2(0.25f, 0.0f), Vec2(0.2f, 0.1f));
 			}
 		}
 
@@ -115,9 +117,11 @@ void SceneEditor::_updateFogGraphicsSettingsMenu()
 
 		// Min distance value
 		_gui.getGlobalScreen()->checkValueForm("minDistance", minDistance);
+		minDistance = std::max(0.0f, minDistance);
 
 		// Max distance value
 		_gui.getGlobalScreen()->checkValueForm("maxDistance", maxDistance);
+		maxDistance = std::max(0.0f, maxDistance);
 
 		// Thickness value
 		thickness *= 100.0f;
@@ -201,11 +205,11 @@ void SceneEditor::_updateLensFlareGraphicsSettingsMenu()
 			}
 			else if (screen->getButton("intensity")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("intensity", "Flare intensity (%)", intensity * 100.0f, Vec2(0.0f), Vec2(0.2f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("intensity", "Flare intensity", intensity * 100.0f, Vec2(0.0f), Vec2(0.2f, 0.1f));
 			}
 			else if (screen->getButton("multiplier")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("multiplier", "Size multiplier (%)", multiplier * 100.0f, Vec2(0.0f), Vec2(0.2f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("multiplier", "Size multiplier", multiplier * 100.0f, Vec2(0.0f), Vec2(0.2f, 0.1f));
 			}
 		}
 
@@ -215,13 +219,13 @@ void SceneEditor::_updateLensFlareGraphicsSettingsMenu()
 		// Intensity value
 		if (_gui.getGlobalScreen()->checkValueForm("intensity", intensity))
 		{
-			intensity /= 100.0f;
+			intensity = std::max(0.0f, intensity / 100.0f);
 		}
 
 		// Multiplier value
 		if (_gui.getGlobalScreen()->checkValueForm("multiplier", multiplier))
 		{
-			multiplier /= 100.0f;
+			multiplier = std::max(0.0f, multiplier / 100.0f);
 		}
 
 		// Enable or disable lens flare
@@ -264,7 +268,7 @@ void SceneEditor::_updateskyHdrGraphicsSettingsMenu()
 			}
 			else if (screen->getButton("intensity")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("intensity", "Extra intensity (%)", intensity * 100.0f, Vec2(0.0f), Vec2(0.2f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("intensity", "Extra intensity", intensity * 100.0f, Vec2(0.0f), Vec2(0.2f, 0.1f));
 			}
 		}
 
@@ -274,7 +278,7 @@ void SceneEditor::_updateskyHdrGraphicsSettingsMenu()
 		// Extra intensity value
 		if (_gui.getGlobalScreen()->checkValueForm("intensity", intensity))
 		{
-			intensity /= 100.0f;
+			intensity = std::max(0.0f, intensity / 100.0f);
 		}
 
 		// Enable or disable skyHDR

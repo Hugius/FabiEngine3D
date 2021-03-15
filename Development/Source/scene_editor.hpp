@@ -160,6 +160,7 @@ private:
 	int _activeModelLightnessMultiplier = 1;
 	bool _dontResetSelectedModel = false;
 	static inline const float MODEL_BLINKING_SPEED = 0.025f;
+	static inline const float MODEL_SIZE_MULTIPLIER = 100.0f;
 
 	// Billboard variables
 	vector<string> _loadedBillboardIDs;
@@ -171,6 +172,7 @@ private:
 	int _activeBillboardLightnessMultiplier = 1;
 	bool _dontResetSelectedBillboard = false;
 	static inline const float BILLBOARD_BLINKING_SPEED = 0.025f;
+	static inline const float BILLBOARD_SIZE_MULTIPLIER = 100.0f;
 
 	// Lighting variables
 	vector<string> _loadedLightIDs;

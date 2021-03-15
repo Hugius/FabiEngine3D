@@ -582,6 +582,8 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 				string flareMapPath;
 				float intensity, multiplier;
 				iss >> enabled >> flareMapPath >> intensity >> multiplier;
+				flareMapPath = (flareMapPath == "?") ? "" : flareMapPath;
+				std::replace(flareMapPath.begin(), flareMapPath.end(), '?', ' ');
 				_fe3d.gfx_enableLensFlare(flareMapPath, intensity, multiplier);
 			}
 			else if (entityType == "GRAPHICS_SKYHDR")

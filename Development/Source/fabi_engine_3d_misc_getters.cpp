@@ -98,7 +98,7 @@ string FabiEngine3D::misc_getWinExplorerFilename(const string& startingDirectory
 	ofn.lpstrFileTitle = titleBuffer;
 	ofn.lpstrFileTitle[0] = '\0';
 	ofn.nMaxFileTitle = sizeof(titleBuffer);
-	ofn.lpstrInitialDir = startingDirectoryStringC; // Starting directory
+	ofn.lpstrInitialDir = startingDirectoryStringC;
 	ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
 	GetOpenFileName(&ofn);
 

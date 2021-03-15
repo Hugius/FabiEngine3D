@@ -516,8 +516,8 @@ void SceneEditor::saveSceneToFile()
 					auto distance = _fe3d.audioEntity_getMaxDistance(audioID);
 
 					// Perform empty string & space conversions
-					audioPath = (audioPath == "?") ? "" : audioPath;
-					std::replace(audioPath.begin(), audioPath.end(), '?', ' ');
+					audioPath = (audioPath == "") ? "?" : audioPath;
+					std::replace(audioPath.begin(), audioPath.end(), ' ', '?');
 
 					// Write line to file
 					file <<
@@ -599,6 +599,8 @@ void SceneEditor::saveSceneToFile()
 				string flareMapPath = _fe3d.gfx_getLensFlareMapPath();
 				float intensity = _fe3d.gfx_getLensFlareIntensity();
 				float multiplier = _fe3d.gfx_getLensFlareMultiplier();
+				flareMapPath = (flareMapPath == "") ? "?" : flareMapPath;
+				std::replace(flareMapPath.begin(), flareMapPath.end(), ' ', '?');
 				file << "GRAPHICS_LENSFLARE " << enabled << " " << flareMapPath << " " << intensity << " " << multiplier << std::endl;
 			}
 

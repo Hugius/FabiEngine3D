@@ -42,7 +42,7 @@
 - You can change the editor **camera** movement speed (**Range**: 0 to inf).
 - You can set the **minimum distance** by which **level of detailed models** will change their rendering (**Range**: 0 to inf).
 ### Shadows
-- You can add **directional shadows** to the scene from casted from a **position** (**Range**: -inf to inf).
+- You can enable **directional shadows** casted from a certain **position** (**Range**: -inf to inf).
 - Shadows are rendered within boxed borders with a certain **size** (**Range**: 0 to inf).
 - You can determine the direction of the shadows by setting the **center position** (**Range**: -inf to inf).
 - There is an option to make the shadow box **follow the camera** at a certain **interval** (**Range**: 0 to inf) measured in frames.
@@ -54,9 +54,12 @@
 - The distance to objects for dynamic DOF can be adjusted with the **DOF distance** (**Range**: 0 to inf) property.
 - You can change he distance from which the blur starts with the **blur distance** (**Range**: 0 to inf) property.
 ### Fog
-- You can enable **fog** based on (min distance, max distance, intensity, color).
-### Sky HDR effect
-- You can enable **dynamic sky HDR** based on (max extra intensity).
+- You can enable **fog** based on a **minimum distance** (**Range**: 0 to inf) & **maximum distance** (**Range**: 0 to inf).
+- Additionally you can set the **fog intensity** (**Range**: 0 to inf) & **fog color** (**Range**: 0 to 255).
 ### Lens Flare
-- You can enable a **lens flare** for directional lighting based on (flare map, intensity, multiplier).
+- You can enable a **lens flare** for directional lighting based on a **flare map texture**.
+- The brightness of the flare can be adjusted with the **intensity** (**Range**: 0 to inf) property.
+- You can change how fast the flare fades with the **multiplier** (**Range**: 0 to inf) property).
 - **Flare map**: colored 24bit `PNG` format image file from `game_assets\textures\flare_maps`.
+### Dynamic sky HDR
+- You can enable **dynamic sky HDR** based on extra **intensity** (**Range**: 0 to inf) that is added to the sky rendering.

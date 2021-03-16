@@ -14,3 +14,7 @@
 - Rotational transformations can each have a different **rotation origin**.
 - If the model has **multiple parts**, each part has its own transformation every keyframe.
 - The **last** animation keyframe should be the same as the **initial** frame, for a full animation.
+### Properties
+- **Transformation**: the speed of the transformation change. **Range**: -inf to inf.
+- **Rotation origin**: the origin point which is rotated around. **Range**: -inf to inf.
+- **Speed**: the speed of the transformation change. **Range**: -inf to inf.

@@ -63,7 +63,7 @@ void EngineGuiWriteField::_updateTyping()
 		}
 
 		// Check if not writing out of border
-		if ((float(_currentTextContent.size()) * CHAR_WIDTH) < _textfield->getOriginalSize().x)
+		if ((static_cast<float>(_currentTextContent.size() + 1) * CHAR_WIDTH) < _textfield->getOriginalSize().x)
 		{
 			// Letter characters
 			string letterCharacters = " abcdefghijklmnopqrstuvwxyz";

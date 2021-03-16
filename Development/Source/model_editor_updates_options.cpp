@@ -29,13 +29,13 @@ void ModelEditor::_updateModelEditingOptions()
 			}
 			else if (screen->getButton("color")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("colorR", "R", _fe3d.gameEntity_getColor(_currentModelID).r * 255.0f, Vec2(-0.25f, 0.0f), Vec2(0.2f, 0.1f));
-				_gui.getGlobalScreen()->addValueForm("colorG", "G", _fe3d.gameEntity_getColor(_currentModelID).g * 255.0f, Vec2(0.0f, 0.0f), Vec2(0.2f, 0.1f));
-				_gui.getGlobalScreen()->addValueForm("colorB", "B", _fe3d.gameEntity_getColor(_currentModelID).b * 255.0f, Vec2(0.25f, 0.0f), Vec2(0.2f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("colorR", "R", _fe3d.gameEntity_getColor(_currentModelID).r * 255.0f, Vec2(-0.25f, 0.0f), Vec2(0.15f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("colorG", "G", _fe3d.gameEntity_getColor(_currentModelID).g * 255.0f, Vec2(0.0f, 0.0f), Vec2(0.15f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("colorB", "B", _fe3d.gameEntity_getColor(_currentModelID).b * 255.0f, Vec2(0.25f, 0.0f), Vec2(0.15f, 0.1f));
 			}
 			else if (screen->getButton("uvRepeat")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("uvRepeat", "UV Repeat", _fe3d.gameEntity_getUvRepeat(_currentModelID), Vec2(0.0f, 0.0f), Vec2(0.2f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("uvRepeat", "UV Repeat", _fe3d.gameEntity_getUvRepeat(_currentModelID), Vec2(0.0f, 0.0f), Vec2(0.15f, 0.1f));
 			}
 			else if (screen->getButton("lodID")->isHovered())
 			{

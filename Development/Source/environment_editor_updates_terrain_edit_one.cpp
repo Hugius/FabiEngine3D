@@ -154,12 +154,12 @@ void EnvironmentEditor::_updateTerrainMenuMesh()
 			else if (screen->getButton("maxHeight")->isHovered())
 			{
 				float maxHeight = _fe3d.terrainEntity_getMaxHeight(_currentTerrainID);
-				_gui.getGlobalScreen()->addValueForm("maxHeight", "Max height", maxHeight, Vec2(0.0f), Vec2(0.3f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("maxHeight", "Max height", maxHeight, Vec2(0.0f), Vec2(0.15f, 0.1f));
 			}
 			else if (screen->getButton("uvRepeat")->isHovered())
 			{
 				float uvRepeat = _fe3d.terrainEntity_getUvRepeat(_currentTerrainID);
-				_gui.getGlobalScreen()->addValueForm("uvRepeat", "UV repeat", uvRepeat, Vec2(0.0f), Vec2(0.3f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("uvRepeat", "UV repeat", uvRepeat, Vec2(0.0f), Vec2(0.15f, 0.1f));
 			}
 		}
 

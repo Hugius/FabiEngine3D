@@ -26,11 +26,11 @@ void SceneEditor::_updateMainSettingsMenu()
 				}
 				else if (screen->getButton("setSpeed")->isHovered())
 				{
-					_gui.getGlobalScreen()->addValueForm("setSpeed", "Camera speed", _customEditorSpeed, Vec2(0.0f), Vec2(0.3f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("setSpeed", "Camera speed", _customEditorSpeed, Vec2(0.0f), Vec2(0.15f, 0.1f));
 				}
 				else if (screen->getButton("lodDistance")->isHovered())
 				{
-					_gui.getGlobalScreen()->addValueForm("lodDistance", "LOD Distance", lodDistance, Vec2(0.0f), Vec2(0.3f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("lodDistance", "LOD Distance", lodDistance, Vec2(0.0f), Vec2(0.15f, 0.1f));
 				}
 			}
 
@@ -120,19 +120,19 @@ void SceneEditor::_updateShadowGraphicsSettingsMenu()
 			}
 			else if (screen->getButton("size")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("size", "Size", size, Vec2(0.0f, 0.0f), Vec2(0.2f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("size", "Size", size, Vec2(0.0f, 0.0f), Vec2(0.15f, 0.1f));
 			}
 			else if (screen->getButton("position")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("positionX", "X", position.x, Vec2(-0.25f, 0.0f), Vec2(0.2f, 0.1f));
-				_gui.getGlobalScreen()->addValueForm("positionY", "Y", position.y, Vec2(0.0f, 0.0f), Vec2(0.2f, 0.1f));
-				_gui.getGlobalScreen()->addValueForm("positionZ", "Z", position.z, Vec2(0.25f, 0.0f), Vec2(0.2f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("positionX", "X", position.x, Vec2(-0.25f, 0.0f), Vec2(0.15f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("positionY", "Y", position.y, Vec2(0.0f, 0.0f), Vec2(0.15f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("positionZ", "Z", position.z, Vec2(0.25f, 0.0f), Vec2(0.15f, 0.1f));
 			}
 			else if (screen->getButton("center")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("centerX", "X", center.x, Vec2(-0.25f, 0.0f), Vec2(0.2f, 0.1f));
-				_gui.getGlobalScreen()->addValueForm("centerY", "Y", center.y, Vec2(0.0f, 0.0f), Vec2(0.2f, 0.1f));
-				_gui.getGlobalScreen()->addValueForm("centerZ", "Z", center.z, Vec2(0.25f, 0.0f), Vec2(0.2f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("centerX", "X", center.x, Vec2(-0.25f, 0.0f), Vec2(0.15f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("centerY", "Y", center.y, Vec2(0.0f, 0.0f), Vec2(0.15f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("centerZ", "Z", center.z, Vec2(0.25f, 0.0f), Vec2(0.15f, 0.1f));
 			}
 			else if (screen->getButton("follow")->isHovered())
 			{
@@ -144,11 +144,11 @@ void SceneEditor::_updateShadowGraphicsSettingsMenu()
 			}
 			else if (screen->getButton("lightness")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("lightness", "Lightness", lightness * 100.0f, Vec2(0.0f, 0.0f), Vec2(0.2f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("lightness", "Lightness", lightness * 100.0f, Vec2(0.0f, 0.0f), Vec2(0.15f, 0.1f));
 			}
 			else if (screen->getButton("interval")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("interval", "Frame interval", interval, Vec2(0.0f, 0.0f), Vec2(0.2f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("interval", "Frame interval", interval, Vec2(0.0f, 0.0f), Vec2(0.15f, 0.1f));
 			}
 		}
 
@@ -227,7 +227,7 @@ void SceneEditor::_updateMotionblurGraphicsSettingsMenu()
 			}
 			else if (screen->getButton("strength")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("strength", "Strength", strength * 100.0f, Vec2(0.0f), Vec2(0.2f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("strength", "Strength", strength * 100.0f, Vec2(0.0f), Vec2(0.15f, 0.1f));
 			}
 		}
 		

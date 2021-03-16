@@ -161,13 +161,13 @@ void EnvironmentEditor::_updateWaterMenuMesh()
 			}
 			else if (screen->getButton("position")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("positionX", "X", waterPosition.x, Vec2(-0.25f, 0.0f), Vec2(0.2f, 0.1f));
-				_gui.getGlobalScreen()->addValueForm("positionY", "Y", waterPosition.y, Vec2(0.0f, 0.0f), Vec2(0.2f, 0.1f));
-				_gui.getGlobalScreen()->addValueForm("positionZ", "Z", waterPosition.z, Vec2(0.25f, 0.0f), Vec2(0.2f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("positionX", "X", waterPosition.x, Vec2(-0.25f, 0.0f), Vec2(0.15f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("positionY", "Y", waterPosition.y, Vec2(0.0f, 0.0f), Vec2(0.15f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("positionZ", "Z", waterPosition.z, Vec2(0.25f, 0.0f), Vec2(0.15f, 0.1f));
 			}
 			else if (screen->getButton("size")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("size", "Size", waterSize, Vec2(0.0f), Vec2(0.3f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("size", "Size", waterSize, Vec2(0.0f), Vec2(0.15f, 0.1f));
 			}			
 		}
 
@@ -231,7 +231,7 @@ void EnvironmentEditor::_updateWaterMenuEffects()
 			}
 			else if (screen->getButton("uvRepeat")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("uvRepeat", "UV repeat", uvRepeat, Vec2(0.0f), Vec2(0.3f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("uvRepeat", "UV repeat", uvRepeat, Vec2(0.0f), Vec2(0.15f, 0.1f));
 			}
 			else if (screen->getButton("dudvMap")->isHovered())
 			{
@@ -381,12 +381,12 @@ void EnvironmentEditor::_updateWaterMenuOptions()
 			}
 			else if (screen->getButton("speed")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("speedX", "X", speed.x * 100000.0f, Vec2(-0.15f, 0.0f), Vec2(0.2f, 0.1f));
-				_gui.getGlobalScreen()->addValueForm("speedZ", "Z", speed.y * 100000.0f, Vec2(0.15f, 0.0f), Vec2(0.2f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("speedX", "X", speed.x * 100000.0f, Vec2(-0.15f, 0.0f), Vec2(0.15f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("speedZ", "Z", speed.y * 100000.0f, Vec2(0.15f, 0.0f), Vec2(0.15f, 0.1f));
 			}
 			else if (screen->getButton("transparency")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("transparency", "Transparency", transparency * 100.0f, Vec2(0.0f), Vec2(0.3f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("transparency", "Transparency", transparency * 100.0f, Vec2(0.0f), Vec2(0.15f, 0.1f));
 			}
 			else if (screen->getButton("color")->isHovered())
 			{
@@ -396,15 +396,15 @@ void EnvironmentEditor::_updateWaterMenuOptions()
 			}
 			else if (screen->getButton("specularFactor")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("specularFactor", "Specular factor", specularFactor, Vec2(0.0f), Vec2(0.3f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("specularFactor", "Specular factor", specularFactor, Vec2(0.0f), Vec2(0.15f, 0.1f));
 			}
 			else if (screen->getButton("specularIntensity")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("specularIntensity", "Specular intensity", specularIntensity * 100.0f, Vec2(0.0f), Vec2(0.3f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("specularIntensity", "Specular intensity", specularIntensity * 100.0f, Vec2(0.0f), Vec2(0.15f, 0.1f));
 			}
 			else if (screen->getButton("waveHeight")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("waveHeight", "Wave height factor", waveHeightFactor * 100.0f, Vec2(0.0f), Vec2(0.3f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("waveHeight", "Wave height factor", waveHeightFactor * 100.0f, Vec2(0.0f), Vec2(0.15f, 0.1f));
 			}
 		}
 

@@ -1,4 +1,4 @@
-3 22
+39 61
 META script_type_update
 
 /// Temporary values
@@ -38,6 +38,7 @@ IF _isTimeCycling IS <true>:
         IF _skyMixValue LESS 0.5:
             INCR _dirLightPos.y heightSpeed
             INCR _dirLightPos.z heightSpeed
+            fe3d:graphics_set_lens_flare_map("sun_flare.png")
         ELSE:
             DECR _dirLightPos.y heightSpeed
             DECR _dirLightPos.z heightSpeed
@@ -50,6 +51,7 @@ IF _isTimeCycling IS <true>:
         IF _skyMixValue MORE 0.5:
             INCR _dirLightPos.y heightSpeed
             INCR _dirLightPos.z heightSpeed
+            fe3d:graphics_set_lens_flare_map("lens_dirt.png")
         ELSE:
             DECR _dirLightPos.y heightSpeed
             DECR _dirLightPos.z heightSpeed

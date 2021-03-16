@@ -24,9 +24,9 @@ void ModelEditor::_updateModelEditingSize()
 			}
 			else if (screen->getButton("size")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("sizeX", "X", currentSize.x * 100.0f, Vec2(-0.25f, 0.0f), Vec2(0.2f, 0.1f));
-				_gui.getGlobalScreen()->addValueForm("sizeY", "Y", currentSize.y * 100.0f, Vec2(0.0f, 0.0f), Vec2(0.2f, 0.1f));
-				_gui.getGlobalScreen()->addValueForm("sizeZ", "Z", currentSize.z * 100.0f, Vec2(0.25f, 0.0f), Vec2(0.2f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("sizeX", "X", currentSize.x * 100.0f, Vec2(-0.25f, 0.0f), Vec2(0.15f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("sizeY", "Y", currentSize.y * 100.0f, Vec2(0.0f, 0.0f), Vec2(0.15f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("sizeZ", "Z", currentSize.z * 100.0f, Vec2(0.25f, 0.0f), Vec2(0.15f, 0.1f));
 			}
 			else if (screen->getButton("toggleResize")->isHovered())
 			{

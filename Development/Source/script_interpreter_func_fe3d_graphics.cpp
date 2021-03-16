@@ -335,7 +335,9 @@ bool ScriptInterpreter::_executeFe3dGraphicsFunction(const string& functionName,
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
 			bool wasEnabled = _fe3d.gfx_isLensFlareEnabled();
-			_fe3d.gfx_enableLensFlare(arguments[0].getString(), _fe3d.gfx_getLensFlareIntensity(), _fe3d.gfx_getLensFlareMultiplier());
+			const string targetDirectory = string("game_assets\\textures\\flare_maps\\");
+			const string filePath = targetDirectory + arguments[0].getString();
+			_fe3d.gfx_enableLensFlare(filePath, _fe3d.gfx_getLensFlareIntensity(), _fe3d.gfx_getLensFlareMultiplier());
 			if (!wasEnabled)
 			{
 				_fe3d.gfx_disableLensFlare();

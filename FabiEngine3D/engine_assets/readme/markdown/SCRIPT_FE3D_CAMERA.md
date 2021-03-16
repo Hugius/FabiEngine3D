@@ -1,4 +1,4 @@
-#### Camera
+# Camera
 - `fe3d:camera_move`(`DEC` x, `DEC` y, `DEC` z) ---> `NONE`  
   Moves the XYZ camera position with speed **xyz**.
 - `fe3d:camera_set_position`(`DEC` x, `DEC` y, `DEC` z) ---> `NONE`  

@@ -1,4 +1,4 @@
-#### Audio
+# Audio
 - `fe3d:audio_is_existing`() ---> `BOOL`  
   Returns true if audio is existing.
 - `fe3d:audio_find_ids`(`STR` subID) ---> `LIST`  
@@ -32,7 +32,7 @@
 - `fe3d:audio_get_max_distance`(`STR` ID) ---> `DEC`  
   Returns the maximum distance of 3D audio with **ID**.
   
-  #### Music
+# Music
 - `fe3d:music_add_to_playlist`(`STR` previewID) ---> `NONE`  
   Adds music to the playlist based on audio with **previewID**.
 - `fe3d:music_clear_playlist`() ---> `NONE`  

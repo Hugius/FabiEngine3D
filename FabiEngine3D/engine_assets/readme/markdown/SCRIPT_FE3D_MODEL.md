@@ -1,4 +1,4 @@
-#### Model
+# Model
 - `fe3d:model_is_existing`() ---> `BOOL`  
   Returns true if model is existing.
 - `fe3d:model_find_ids`(`STR` subID) ---> `LIST`  
@@ -6,7 +6,7 @@
 - `fe3d:model_get_all_ids`() ---> `LIST`  
   Returns a list of strings with the IDs of all models.
 - `fe3d:model_place`(`STR` newID, `STR` previewID, `DEC` x, `DEC` y, `DEC` z) ---> `NONE`  
-  Places a new model with **newID** (cannot start with @) based on model with **previewID** at position as **xyz**.
+  Places a new model with **newID** (cannot start with @) based on model with **previewID** at position as **xyz**. If the preview model is instanced, the position will be added to the offsets. There can only be 1 instanced model placed in the scene, which has the ID of the first time it is placed (either by scene editor or through this function).
 - `fe3d:model_delete`(`STR` ID) ---> `NONE`  
   Deletes model with **ID** if existing.
 - `fe3d:model_set_visible`(`STR` ID, `BOOL` visible) ---> `NONE`  
@@ -60,7 +60,7 @@
 - `fe3d:model_get_alpha`(`STR` ID) ---> `DEC`  
   Returns the alpha value of model with **ID**.
   
-  #### Animation
+# Animation
 - `fe3d:model_start_animation`(`STR` modelID, `STR` animationID, `INT` loops) ---> `NONE`  
   Starts the animation with **animationID** on model with **modelID** and repeat it **loops** times.
 - `fe3d:model_is_animation_started`(`STR` modelID, `STR` animationID) ---> `BOOL`  

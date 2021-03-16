@@ -1,4 +1,4 @@
-#### Miscellaneous
+# Miscellaneous
 - `fe3d:game_pause`() ---> `NONE`  
   Pauses all internal game/engine updates if playing (except for the scripting of course).
 - `fe3d:game_unpause`() ---> `NONE`  

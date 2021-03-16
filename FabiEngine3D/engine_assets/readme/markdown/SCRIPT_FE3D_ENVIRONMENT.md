@@ -1,3 +1,4 @@
+# Environment
 #### Sky
 - `fe3d:sky_mix_with_current`(`STR` skyID) ---> `NONE`  
   Blends the selected sky texture with the texture of **skyID**.

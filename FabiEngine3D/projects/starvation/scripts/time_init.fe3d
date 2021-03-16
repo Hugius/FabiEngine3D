@@ -1,12 +1,12 @@
-14 26
+20 0
 META script_type_init
 
 /// Globals
 GLOB CONST DEC _maxPassedTime = 100.0
 GLOB CONST DEC _sleepTimeMultiplier = 10.0
-GLOB CONST DEC _initAmbLightIntensity = fe3d:graphics_get_ambient_light_intensity()
-GLOB CONST DEC _initDirLightIntensity = fe3d:graphics_get_directional_light_intensity()
-GLOB CONST VEC3 _initDirLightPos = fe3d:graphics_get_directional_light_position()
+GLOB CONST DEC _initAmbLightIntensity = fe3d:lighting_get_ambient_intensity()
+GLOB CONST DEC _initDirLightIntensity = fe3d:lighting_get_directional_intensity()
+GLOB CONST VEC3 _initDirLightPos = fe3d:lighting_get_directional_position()
 GLOB DEC _ambLightIntensity = _initAmbLightIntensity
 GLOB DEC _dirLightIntensity = _initDirLightIntensity
 GLOB VEC3 _dirLightPos = _initDirLightPos
@@ -22,5 +22,5 @@ GLOB BOOL _isSleeping = <false>
 
 /// Graphics
 fe3d:graphics_disable_light_mapping()
-fe3d:graphics_disable_point_lighting()
+fe3d:lighting_disable_points()
 fe3d:sky_mix_with_current("night")

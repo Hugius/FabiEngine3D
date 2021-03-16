@@ -59,7 +59,7 @@ IF _isTimeCycling IS <true>:
         IF _mustBeDayTime IS <true>:
             /// No lightmapping or point lighting during daytime
             fe3d:graphics_disable_light_mapping()
-            fe3d:graphics_disable_point_lighting()
+            fe3d:lighting_disable_points()
             EDIT _areLightsOn = <false>
             EDIT _isDayTime = <true>
             /// Reset values
@@ -69,7 +69,7 @@ IF _isTimeCycling IS <true>:
             EDIT _dirLightPos = _initDirLightPos
         ELSE:
             fe3d:graphics_enable_light_mapping()
-            fe3d:graphics_enable_point_lighting()
+            fe3d:lighting_enable_points()
             EDIT _areLightsOn = <true>
             EDIT _isDayTime = <false>
 
@@ -78,8 +78,8 @@ MUL fogDecreaser _skyMixValue
 DECR fogIntensity fogDecreaser
 VEC3 dirPos = _dirLightPos
 fe3d:sky_set_mix_value(_skyMixValue)
-fe3d:graphics_set_ambient_light_intensity(_ambLightIntensity)
-fe3d:graphics_set_directional_light_intensity(_dirLightIntensity)
-fe3d:graphics_set_directional_light_position(dirPos.x, dirPos.y, dirPos.z)
+fe3d:lighting_set_ambient_intensity(_ambLightIntensity)
+fe3d:lighting_set_directional_intensity(_dirLightIntensity)
+fe3d:lighting_set_directional_position(dirPos.x, dirPos.y, dirPos.z)
 IF _isUnderWater IS <false>:
     fe3d:graphics_set_fog_color(fogIntensity, fogIntensity, fogIntensity)

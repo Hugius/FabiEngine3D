@@ -208,7 +208,10 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 			// Determine which type of value to print
 			if (arguments[1].getType() == ScriptValueType::VEC3)
 			{
-				file << arguments[1].getVec3().x << " " << arguments[1].getVec3().y << " " << arguments[1].getVec3().z;
+				file << "[" + 
+					to_string(arguments[1].getVec3().x) << " " <<
+					to_string(arguments[1].getVec3().y) << " " <<
+					to_string(arguments[1].getVec3().z) + "]";
 			}
 			else if (arguments[1].getType() == ScriptValueType::STRING)
 			{
@@ -220,11 +223,11 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 			}
 			else if (arguments[1].getType() == ScriptValueType::INTEGER)
 			{
-				file << arguments[1].getInteger();
+				file << to_string(arguments[1].getInteger());
 			}
 			else if (arguments[1].getType() == ScriptValueType::BOOLEAN)
 			{
-				file << (arguments[1].getBoolean() ? "true" : "false");
+				file << (arguments[1].getBoolean() ? "<true>" : "<false>");
 			}
 
 			// Close file

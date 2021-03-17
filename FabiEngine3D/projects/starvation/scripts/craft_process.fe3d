@@ -1,4 +1,4 @@
-77 28
+45 61
 META script_type_update
 
 /// Temporary values
@@ -45,12 +45,6 @@ IF confirmed IS <true> AND lmbPressed IS <true>:
     INT length = misc:get_string_size(itemName)
     DECR length 8
     EDIT itemName = misc:get_string_part(itemName, 0, length)
-    BOOL existing = fe3d:model_is_existing(itemName)
-    /// Create new tool, if not already in inventory
-    IF existing IS <false>:
-        fe3d:model_place(itemName, itemName, 0.0, 0.0, 0.0)
-        fe3d:model_set_aabb_raycast_responsive(itemName, <false>)
-        fe3d:model_set_aabb_collision_responsive(itemName, <false>)
     /// Equip tool
     EDIT _equipIndex = _craftablesIndex[_craftIndex]
     EDIT _inventory[_equipIndex] = itemName

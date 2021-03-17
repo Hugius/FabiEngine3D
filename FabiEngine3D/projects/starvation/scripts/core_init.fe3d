@@ -1,4 +1,4 @@
-25 0
+26 0
 META script_type_init
 META execution_entry
 
@@ -18,7 +18,8 @@ EXEC craft_init_gui
 EXEC misc_init
 EXEC storage_init_main
 EXEC storage_init_gui
-EXEC inventory_init
+EXEC inventory_init_main
+EXEC inventory_init_gui
 EXEC bag_init
 EXEC player_init_main
 EXEC player_init_misc

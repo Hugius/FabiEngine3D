@@ -1,18 +1,43 @@
-6 13
+24 4
 META script_type_init
 
 /// Survival time
 LIST lines = fe3d:file_read("progress.txt")
 STR line = lines[0]
-CAST line INT
 CAST line DEC
 EDIT _elapsedMS = line
 CAST line STR
 
+/// Inventory
+EDIT lines = fe3d:file_read("inventory.txt")
+INT length = misc:get_list_size("_inventory")
+INT index = 0
+LOOP:
+    IF index IS length:
+        BREAK
+    ELSE:
+        EDIT line = lines[index]
+        EDIT _inventory[index] = line
+        INCR index 1
+
+/// Durabilities
+EDIT lines = fe3d:file_read("durabilities.txt")
+EDIT length = misc:get_list_size("_durabilities")
+EDIT index = 0
+LOOP:
+    IF index IS length:
+        BREAK
+    ELSE:
+        EDIT line = lines[index]
+        CAST line DEC
+        EDIT _durabilities[index] = line
+        CAST line STR
+        INCR index 1
+
 /// Bag
 EDIT lines = fe3d:file_read("bag.txt")
-INT length = misc:get_list_size("_bag")
-INT index = 0
+EDIT length = misc:get_list_size("_bag")
+EDIT index = 0
 LOOP:
     IF index IS length:
         BREAK

@@ -1,4 +1,4 @@
-11 36
+32 44
 META script_type_destroy
 
 /// Clear previous files
@@ -6,15 +6,37 @@ BOOL existing = fe3d:file_is_existing("progress.txt")
 IF existing IS <true>:
     fe3d:file_clear("progress.txt")
     fe3d:file_clear("bag.txt")
+    fe3d:file_clear("inventory.txt")
+    fe3d:file_clear("durabilities.txt")
 
 /// Survival time
-DEC time = _elapsedMS
-CAST time INT
-fe3d:file_write("progress.txt", time)
+fe3d:file_write("progress.txt", _elapsedMS)
+
+/// Inventory
+INT length = misc:get_list_size("_inventory")
+INT index = 0
+LOOP:
+    IF index IS length:
+        BREAK
+    ELSE:
+        fe3d:file_write("inventory.txt", _inventory[index])
+        fe3d:file_add_new_line("inventory.txt")
+        INCR index 1
+
+/// Durabilities
+EDIT length = misc:get_list_size("_durabilities")
+EDIT index = 0
+LOOP:
+    IF index IS length:
+        BREAK
+    ELSE:
+        fe3d:file_write("durabilities.txt", _durabilities[index])
+        fe3d:file_add_new_line("durabilities.txt")
+        INCR index 1
 
 /// Bag
-INT length = misc:get_list_size("_bag")
-INT index = 0
+EDIT length = misc:get_list_size("_bag")
+EDIT index = 0
 LOOP:
     IF index IS length:
         BREAK

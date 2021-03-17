@@ -216,7 +216,7 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 			}
 			else if (arguments[1].getType() == ScriptValueType::DECIMAL)
 			{
-				file << arguments[1].getDecimal();
+				file << to_string(arguments[1].getDecimal());
 			}
 			else if (arguments[1].getType() == ScriptValueType::INTEGER)
 			{

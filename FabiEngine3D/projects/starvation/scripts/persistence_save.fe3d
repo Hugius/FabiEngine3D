@@ -1,4 +1,4 @@
-32 44
+36 25
 META script_type_destroy
 
 /// Clear previous files
@@ -7,40 +7,64 @@ IF existing IS <true>:
     fe3d:file_clear("progress.txt")
     fe3d:file_clear("bag.txt")
     fe3d:file_clear("inventory.txt")
-    fe3d:file_clear("durabilities.txt")
+    fe3d:file_clear("player.txt")
 
 /// Survival time
 fe3d:file_write("progress.txt", _elapsedMS)
 
 /// Inventory
 INT length = misc:get_list_size("_inventory")
+INT maxIndex = length
+MUL maxIndex 2
 INT index = 0
 LOOP:
-    IF index IS length:
+    IF index IS maxIndex:
         BREAK
     ELSE:
-        fe3d:file_write("inventory.txt", _inventory[index])
+        IF index IS length OR index MORE length:
+            DECR index length
+            fe3d:file_write("inventory.txt", _durabilities[index])
+            INCR index length
+        ELSE:
+            fe3d:file_write("inventory.txt", _inventory[index])
         fe3d:file_add_new_line("inventory.txt")
         INCR index 1
-
-/// Durabilities
-EDIT length = misc:get_list_size("_durabilities")
-EDIT index = 0
-LOOP:
-    IF index IS length:
-        BREAK
-    ELSE:
-        fe3d:file_write("durabilities.txt", _durabilities[index])
-        fe3d:file_add_new_line("durabilities.txt")
-        INCR index 1
+fe3d:file_write("inventory.txt", _equipIndex)
 
 /// Bag
-EDIT length = misc:get_list_size("_bag")
+EDIT maxIndex = misc:get_list_size("_bag")
 EDIT index = 0
 LOOP:
-    IF index IS length:
+    IF index IS maxIndex:
         BREAK
     ELSE:
         fe3d:file_write("bag.txt", _bag[index])
         fe3d:file_add_new_line("bag.txt")
         INCR index 1
+
+/// Player
+VEC3 camPos = fe3d:camera_get_position()
+DEC camYaw = fe3d:camera_get_yaw()
+DEC camPitch = fe3d:camera_get_pitch()
+fe3d:file_write("player.txt", camPos)
+fe3d:file_add_new_line("player.txt")
+fe3d:file_write("player.txt", camYaw)
+fe3d:file_add_new_line("player.txt")
+fe3d:file_write("player.txt", camPitch)
+fe3d:file_add_new_line("player.txt")
+fe3d:file_write("player.txt", _health)
+fe3d:file_add_new_line("player.txt")
+fe3d:file_write("player.txt", _hunger)
+fe3d:file_add_new_line("player.txt")
+fe3d:file_write("player.txt", _thirst)
+fe3d:file_add_new_line("player.txt")
+fe3d:file_write("player.txt", _stamina)
+fe3d:file_add_new_line("player.txt")
+fe3d:file_write("player.txt", _oxygen)
+fe3d:file_add_new_line("player.txt")
+fe3d:file_write("player.txt", _temperature)
+fe3d:file_add_new_line("player.txt")
+fe3d:file_write("player.txt", _hygiene)
+fe3d:file_add_new_line("player.txt")
+fe3d:file_write("player.txt", _sickness)
+fe3d:file_add_new_line("player.txt")

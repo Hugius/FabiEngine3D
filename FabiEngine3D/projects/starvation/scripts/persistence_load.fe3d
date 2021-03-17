@@ -1,4 +1,4 @@
-24 4
+94 13
 META script_type_init
 
 /// Survival time
@@ -8,38 +8,38 @@ CAST line DEC
 EDIT _elapsedMS = line
 CAST line STR
 
-/// Inventory
+/// Inventory (items + durabilities)
 EDIT lines = fe3d:file_read("inventory.txt")
 INT length = misc:get_list_size("_inventory")
+INT maxIndex = length
+MUL maxIndex 2
 INT index = 0
 LOOP:
-    IF index IS length:
+    IF index IS maxIndex:
         BREAK
     ELSE:
         EDIT line = lines[index]
-        EDIT _inventory[index] = line
+        IF index IS length OR index MORE length:
+            CAST line DEC
+            DECR index length
+            EDIT _durabilities[index] = line
+            INCR index length
+            CAST line STR
+        ELSE:
+            EDIT _inventory[index] = line
         INCR index 1
-
-/// Durabilities
-EDIT lines = fe3d:file_read("durabilities.txt")
-EDIT length = misc:get_list_size("_durabilities")
-EDIT index = 0
-LOOP:
-    IF index IS length:
-        BREAK
-    ELSE:
-        EDIT line = lines[index]
-        CAST line DEC
-        EDIT _durabilities[index] = line
-        CAST line STR
-        INCR index 1
+/// Equip index
+EDIT line = lines[maxIndex]
+CAST line INT
+EDIT _equipIndex = line
+CAST line STR
 
 /// Bag
 EDIT lines = fe3d:file_read("bag.txt")
-EDIT length = misc:get_list_size("_bag")
+EDIT maxIndex = misc:get_list_size("_bag")
 EDIT index = 0
 LOOP:
-    IF index IS length:
+    IF index IS maxIndex:
         BREAK
     ELSE:
         EDIT line = lines[index]
@@ -47,3 +47,50 @@ LOOP:
         EDIT _bag[index] = line
         CAST line STR
         INCR index 1
+
+/// Player
+EDIT lines = fe3d:file_read("player.txt")
+EDIT line = lines[0]
+CAST line VEC3
+fe3d:camera_set_position(line.x, line.y, line.z)
+CAST line STR
+EDIT line = lines[1]
+CAST line DEC
+fe3d:camera_set_yaw(line)
+CAST line STR
+EDIT line = lines[2]
+CAST line DEC
+fe3d:camera_set_pitch(line)
+CAST line STR
+EDIT line = lines[3]
+CAST line DEC
+EDIT _health = line
+CAST line STR
+EDIT line = lines[4]
+CAST line DEC
+EDIT _hunger = line
+CAST line STR
+EDIT line = lines[5]
+CAST line DEC
+EDIT _thirst = line
+CAST line STR
+EDIT line = lines[6]
+CAST line DEC
+EDIT _stamina = line
+CAST line STR
+EDIT line = lines[7]
+CAST line DEC
+EDIT _oxygen = line
+CAST line STR
+EDIT line = lines[8]
+CAST line DEC
+EDIT _temperature = line
+CAST line STR
+EDIT line = lines[9]
+CAST line DEC
+EDIT _hygiene = line
+CAST line STR
+EDIT line = lines[10]
+CAST line DEC
+EDIT _sickness = line
+CAST line STR

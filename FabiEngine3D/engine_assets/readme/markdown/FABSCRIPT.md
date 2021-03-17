@@ -37,8 +37,10 @@
 - You can **cast** a variable to a different type using: `CAST <name> <type>`.
 - You can cast from INT to DEC and vice versa.
 - You can cast from INT to BOOL and vice versa.
+- You can cast from BOOL to STR and vice versa (if possible).
 - You can cast from INT to STR and vice versa (if possible).
 - You can cast from DEC to STR and vice versa (if possible).
+- You can cast from VEC3 to STR and vice versa (if possible).
 #### Basic values
 - Types to choose from: `VEC3` (vector3), `STR` (string), `INT` (integer), `DEC` (decimal), `BOOL` (boolean).
 - A boolean can only be true or false just like binary (example: `<true>` or `<false>`) (NOTE: the < and > are in this case **NOT** placeholders).

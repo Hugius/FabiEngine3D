@@ -29,6 +29,14 @@
   Starts a timer to measure passing time. Works like a stopwatch.
 - `fe3d:timer_stop`() ---> `DEC`  
   Returns measured time in milliseconds.
+- `fe3d:directory_is_existing`(`STR` directoryPath) ---> `BOOL`  
+  Returns true if **directoryPath** in `projects\<your_project>\saves\` is existing.
+- `fe3d:directory_create`(`STR` directoryPath) ---> `NONE`  
+  Creates a new **directoryPath** in `projects\<your_project>\saves\`.
+- `fe3d:directory_delete`(`STR` directoryPath) ---> `NONE`  
+  Deletes an existing **directoryPath** in `projects\<your_project>\saves\`.
+- `fe3d:file_is_existing`(`STR` filePath) ---> `BOOL`  
+  Returns true if **filePath** in `projects\<your_project>\saves\` is existing.
 - `fe3d:file_read`(`STR` filePath) ---> `LIST`  
   Opens an existing **filePath** in `projects\<your_project>\saves\` and returns all lines as a list of strings.
 - `fe3d:file_write`(`STR` filePath, `VEC3/STR/DEC/INT/BOOL` content) ---> `NONE`  
@@ -37,5 +45,5 @@
   Opens an existing **filePath** in `projects\<your_project>\saves\` and writes a new line to it.
 - `fe3d:file_clear`(`STR` filePath) ---> `NONE`  
   Opens an existing **filePath** in `projects\<your_project>\saves\` and removes all content.
-- `fe3d:file_is_existing`(`STR` filePath) ---> `BOOL`  
-  Returns true if **filePath** in `projects\<your_project>\saves\` is existing.
+- `fe3d:file_delete`(`STR` filePath) ---> `NONE`  
+  Deletes an existing **filePath** in `projects\<your_project>\saves\`.

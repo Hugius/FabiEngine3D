@@ -1,77 +1,66 @@
-25 19
+5 5
 META script_type_update
 META execution_entry
 
-/// Retrieve current world ID: home, starvia_outside, starvia_inside
-STR currentWorld = fe3d:scene_get_current_id()
-
-/// Bag inventory
-EXEC bag_main
-
-/// Tools inventory
-EXEC inventory_main
-EXEC inventory_gui
-EXEC inventory_misc
-
-/// Player
-EXEC player_status
-EXEC player_jump
-EXEC player_movement
-EXEC player_bobbing
-EXEC player_gui
-EXEC player_misc
-
-/// Animations
-EXEC animation_misc
-EXEC animation_player
-EXEC animation_tool
-
-/// Resources
-IF currentWorld IS "home":
-    EXEC gather_main
-    EXEC mine_main
-    EXEC cut_main
-    EXEC dig_main
-
-/// Storage system
-IF currentWorld IS "home":
-    EXEC storage_main
-    EXEC storage_gui
-
-/// Food
-IF currentWorld IS "home":
-    EXEC fish_main
-    EXEC farm_main
-    EXEC bake_main
-
-/// Building
-IF currentWorld IS "home":
-    EXEC build_place_choose
-    EXEC build_place_confirm
-    EXEC build_process
-    EXEC build_misc
-
-/// NPC interaction
-EXEC npc_main
-
-/// Water
-IF currentWorld IS "home" OR currentWorld IS "starvia_outside":
-    EXEC water_main
-
-/// Pickup
-IF currentWorld IS "home":
-    EXEC pickup_main
-
-/// Crafting
-IF currentWorld IS "home":
-    EXEC craft_misc
-    IF _isCrafting IS <true>:
-        EXEC craft_process
-
-/// Time & weather
-EXEC time_cycle
-EXEC time_sleep
-EXEC time_misc
-
-/// Miscellaneous
-EXEC misc_main
+IF _isInMenu IS <true>:
+    EXEC menu_update
+ELSE:
+    /// Retrieve current world ID: home, starvia_outside, starvia_inside
+    STR currentWorld = fe3d:scene_get_current_id()
+    /// Bag inventory
+    EXEC bag_main
+    /// Tools inventory
+    EXEC inventory_main
+    EXEC inventory_gui
+    EXEC inventory_misc
+    /// Player
+    EXEC player_status
+    EXEC player_jump
+    EXEC player_movement
+    EXEC player_bobbing
+    EXEC player_gui
+    EXEC player_misc
+    /// Animations
+    EXEC animation_misc
+    EXEC animation_player
+    EXEC animation_tool
+    /// Resources
+    IF currentWorld IS "home":
+        EXEC gather_main
+        EXEC mine_main
+        EXEC cut_main
+        EXEC dig_main
+    /// Storage system
+    IF currentWorld IS "home":
+        EXEC storage_main
+        EXEC storage_gui
+    /// Food
+    IF currentWorld IS "home":
+        EXEC fish_main
+        EXEC farm_main
+        EXEC bake_main
+    /// Building
+    IF currentWorld IS "home":
+        EXEC build_place_choose
+        EXEC build_place_confirm
+        EXEC build_process
+        EXEC build_misc
+    /// NPC interaction
+    EXEC npc_main
+    /// Water
+    IF currentWorld IS "home" OR currentWorld IS "starvia_outside":
+        EXEC water_main
+    /// Pickup
+    IF currentWorld IS "home":
+        EXEC pickup_main
+    /// Crafting
+    IF currentWorld IS "home":
+        EXEC craft_misc
+        IF _isCrafting IS <true>:
+            EXEC craft_process
+    /// Time & weather
+    EXEC time_cycle
+    EXEC time_sleep
+    EXEC time_misc
+    /// Miscellaneous
+    EXEC misc_main

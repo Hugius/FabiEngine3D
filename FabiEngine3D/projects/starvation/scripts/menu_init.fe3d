@@ -1,0 +1,14 @@
+3 28
+META script_type_init
+
+/// Globals
+GLOB BOOL _isInMenu = <true>
+
+/// Images
+fe3d:image_place("scroll_menu", "scroll1.png", 0.0, 0.0, 0.0, 1.5, 1.75)
+fe3d:image_place("button_newgame", "scroll3.png", 0.0, 0.0, 0.0, 1.0, 0.3)
+
+/// Text
+STR f = "font.ttf"
+fe3d:text_place("title_menu", f, "Starvation", 0.0, 0.0, 0.0, 0.35, 0.1)
+fe3d:text_place("button_newgame", f, "New game", -0.5, -0.25, 0.0, 0.06, 0.075)

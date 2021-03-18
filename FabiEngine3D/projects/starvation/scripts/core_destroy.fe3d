@@ -1,5 +1,5 @@
-3 21
+3 3
 META script_type_destroy
 META execution_entry
 
-EXEC persistence_save
+///EXEC persistence_save

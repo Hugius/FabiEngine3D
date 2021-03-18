@@ -151,6 +151,9 @@ void ScriptInterpreter::load()
 		_fe3d.misc_cacheAudioMultiThreaded(audioPaths); // Pre-cache audio files
 	}
 
+	// Disable engine sky background
+	_fe3d.skyEntity_select("");
+
 	// Load skies
 	_environmentEditor.loadSkyEntitiesFromFile();
 

@@ -1,0 +1,25 @@
+21 25
+META script_type_update
+
+IF <true> IS <false>:
+    /// Load home world
+    fe3d:scene_load("home")
+    /// No GUI elements
+    EXEC npc_init
+    EXEC time_init
+    /// GUI in correct order
+    EXEC water_init
+    EXEC build_init_main
+    EXEC build_init_gui
+    EXEC craft_init_main
+    EXEC craft_init_gui
+    EXEC misc_init
+    EXEC storage_init_main
+    EXEC storage_init_gui
+    EXEC inventory_init_main
+    EXEC inventory_init_gui
+    EXEC bag_init
+    EXEC player_init_main
+    EXEC player_init_misc
+    /// Load game progress
+    EXEC persistence_load

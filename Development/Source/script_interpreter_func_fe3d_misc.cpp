@@ -1,6 +1,9 @@
 #include "script_interpreter.hpp"
 
 #include <fstream>
+#include <algorithm>
+#include <direct.h>
+#include <filesystem>
 
 bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
@@ -117,7 +120,7 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			auto result = _fe3d.misc_convertToNDC(_fe3d.misc_convertFromScreenCoords(_fe3d.misc_getCursorPositionRelativeToViewport())).x;
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, std::clamp(result, -1.0f, 1.0f)));
 		}
 	}
 	else if (functionName == "fe3d:cursor_get_position_y")
@@ -125,7 +128,7 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			auto result = _fe3d.misc_convertToNDC(_fe3d.misc_convertFromScreenCoords(_fe3d.misc_getCursorPositionRelativeToViewport())).y;
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, std::clamp(result, -1.0f, 1.0f)));
 		}
 	}
 	else if (functionName == "fe3d:window_get_width")
@@ -158,6 +161,81 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 		{
 			auto result = _fe3d.misc_stopMillisecondTimer();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
+		}
+	}
+	else if (functionName == "fe3d:directory_is_existing")
+	{
+		auto types = { ScriptValueType::STRING };
+
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types) && _validateCurrentProject())
+		{
+			// Compose directory paths
+			string directoryPath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : ("projects\\" + _currentProjectID)) + "\\saves\\";
+			string newDirectoryPath = string(directoryPath + arguments[0].getString());
+
+			// Return
+			auto result = (_fe3d.misc_isFileExisting(newDirectoryPath) && _fe3d.misc_isDirectory(newDirectoryPath));
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
+		}
+	}
+	else if (functionName == "fe3d:directory_create")
+	{
+		auto types = { ScriptValueType::STRING };
+
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types) && _validateCurrentProject())
+		{
+			// Compose directory paths
+			string directoryPath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : ("projects\\" + _currentProjectID)) + "\\saves\\";
+			string newDirectoryPath = string(directoryPath + arguments[0].getString());
+
+			// Try to create new directory
+			auto status = _mkdir(newDirectoryPath.c_str());
+
+			// Check for error
+			if (status == -1)
+			{
+				_throwScriptError("Cannot create directory \"" + arguments[0].getString() + "\"!");
+			}
+
+			// Return
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+		}
+	}
+	else if (functionName == "fe3d:directory_delete")
+	{
+		auto types = { ScriptValueType::STRING };
+
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types) && _validateCurrentProject())
+		{
+			// Compose directory paths
+			string directoryPath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : ("projects\\" + _currentProjectID)) + "\\saves\\";
+			string newDirectoryPath = string(directoryPath + arguments[0].getString());
+
+			// Check if directory exists
+			if (_fe3d.misc_isFileExisting(newDirectoryPath) && _fe3d.misc_isDirectory(newDirectoryPath))
+			{
+				std::filesystem::remove_all(newDirectoryPath);
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			}
+			else
+			{
+				_throwScriptError("Cannot delete directory \"" + arguments[0].getString() + "\"!");
+			}
+		}
+	}
+	else if (functionName == "fe3d:file_is_existing")
+	{
+		auto types = { ScriptValueType::STRING };
+
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types) && _validateCurrentProject())
+		{
+			// Compose file path
+			string directoryPath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : ("projects\\" + _currentProjectID)) + "\\saves\\";
+			string filePath = directoryPath + arguments[0].getString();
+
+			// Return
+			auto result = _fe3d.misc_isFileExisting(filePath);
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 		}
 	}
 	else if (functionName == "fe3d:file_read")
@@ -277,7 +355,7 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 			}
 		}
 	}
-	else if (functionName == "fe3d:file_is_existing")
+	else if (functionName == "fe3d:file_delete")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -287,9 +365,16 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 			string directoryPath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : ("projects\\" + _currentProjectID)) + "\\saves\\";
 			string filePath = directoryPath + arguments[0].getString();
 
-			// Return
-			auto result = _fe3d.misc_isFileExisting(filePath);
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
+			// Check if file exists
+			if (_fe3d.misc_isFileExisting(filePath))
+			{
+				auto status = std::remove(filePath.c_str());
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			}
+			else
+			{
+				_throwScriptError("Cannot delete file \"" + arguments[0].getString() + "\"!");
+			}
 		}
 	}
 	else

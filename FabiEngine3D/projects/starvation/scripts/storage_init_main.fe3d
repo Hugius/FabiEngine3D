@@ -1,5 +1,5 @@
-3 51
-META script_type_init
+0 23
+META script_type_update
 
 /// Globals
 GLOB CONST VEC3 _storageButtonColor = [0.0 0.5 0.0]

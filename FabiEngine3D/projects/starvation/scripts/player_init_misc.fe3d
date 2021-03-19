@@ -1,5 +1,5 @@
-3 46
-META script_type_init
+0 23
+META script_type_update
 
 /// Images
 fe3d:image_place("fire", "fire.png", 0.0, -0.3, 0.0, 4.5, 3.0)

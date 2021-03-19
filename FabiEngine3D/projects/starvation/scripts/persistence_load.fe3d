@@ -1,5 +1,5 @@
-94 13
-META script_type_init
+0 23
+META script_type_update
 
 /// Survival time
 LIST lines = fe3d:file_read("progress.txt")

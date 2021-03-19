@@ -1,5 +1,5 @@
-8 54
-META script_type_init
+0 23
+META script_type_update
 
 /// Globals
 GLOB LIST _buildables = {}

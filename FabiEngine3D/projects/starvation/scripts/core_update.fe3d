@@ -1,9 +1,10 @@
-5 5
+4 25
 META script_type_update
 META execution_entry
 
 IF _isInMenu IS <true>:
-    EXEC menu_update
+    EXEC menu_update_main
+    EXEC menu_update_gui
 ELSE:
     /// Retrieve current world ID: home, starvia_outside, starvia_inside
     STR currentWorld = fe3d:scene_get_current_id()

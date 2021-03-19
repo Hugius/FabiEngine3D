@@ -1,4 +1,4 @@
-78 35
+83 20
 META script_type_update
 
 BOOL interval = misc:time_interval("status", 50)

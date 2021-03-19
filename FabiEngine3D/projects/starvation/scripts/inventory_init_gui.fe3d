@@ -1,5 +1,5 @@
-38 72
-META script_type_init
+0 23
+META script_type_update
 
 /// Inventory slots
 fe3d:image_place("slot1", "slot.png", -0.5,   -0.85, 0.0, 0.125, 0.2)

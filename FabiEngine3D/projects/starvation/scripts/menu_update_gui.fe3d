@@ -1,10 +1,9 @@
-63 30
+4 42
 META script_type_update
 
 /// Temporary values
 DEC cursorX = fe3d:cursor_get_position_x()
 DEC cursorY = fe3d:cursor_get_position_y()
-BOOL lmbPressed = fe3d:input_is_mouse_pressed("BUTTON_LEFT")
 
 /// Dynamic background
 DEC backgroundX = cursorX
@@ -67,31 +66,3 @@ LOOP:
             fe3d:text_set_size(buttonID, textWidth, textHeight)
             EDIT _hoveredMenuButtonID = ""
         INCR index 1
-
-/// Handle buttons click
-IF lmbPressed IS <true>:
-    IF _hoveredMenuButtonID IS "menu_newgame":
-        fe3d:print("hoi")
-
-IF <true> IS <false>:
-    /// Load home world
-    fe3d:scene_load("home")
-    /// No GUI elements
-    EXEC npc_init
-    EXEC time_init
-    /// GUI in correct order
-    EXEC water_init
-    EXEC build_init_main
-    EXEC build_init_gui
-    EXEC craft_init_main
-    EXEC craft_init_gui
-    EXEC misc_init
-    EXEC storage_init_main
-    EXEC storage_init_gui
-    EXEC inventory_init_main
-    EXEC inventory_init_gui
-    EXEC bag_init
-    EXEC player_init_main
-    EXEC player_init_misc
-    /// Load game progress
-    EXEC persistence_load

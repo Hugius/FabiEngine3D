@@ -1,5 +1,5 @@
-3 37
-META script_type_init
+0 23
+META script_type_update
 
 /// Globals
 GLOB CONST DEC _riverStrength = 0.005

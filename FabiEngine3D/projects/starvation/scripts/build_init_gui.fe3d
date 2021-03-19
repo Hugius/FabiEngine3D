@@ -1,5 +1,5 @@
-60 35
-META script_type_init
+0 23
+META script_type_update
 
 /// Buildables display text
 PUSH _buildablesText "Wooden Hut"

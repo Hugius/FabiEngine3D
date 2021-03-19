@@ -1,5 +1,5 @@
-39 18
-META script_type_init
+0 23
+META script_type_update
 
 /// Images
 fe3d:image_place("scroll_storage", "scroll3.png", 0.0, -0.3, 0.0, 1.4, 1.0)

@@ -8,9 +8,15 @@
 - `fe3d:print`(`VEC3/STR/DEC/INT/BOOL` message) ---> `NONE`  
   Prints a value to the console (both internal & external). Accepts various message types.
 - `fe3d:scene_load`(`STR` ID) ---> `NONE`  
-  Loads the scene with **ID** into the game. Any previously loaded scene will be cleared.
+  Loads an editor scene with **ID** into the game. Any previously loaded scene will be cleared.
+- `fe3d:scene_load_custom`(`STR` ID) ---> `NONE`  
+  Loads a customly saved scene with **ID** into the game. Any previously loaded scene will be cleared.
+- `fe3d:scene_save_custom`(`STR` ID) ---> `NONE`  
+  Saves all existing environment, models, billboards and graphics to a custom scene as **ID**.
+- `fe3d:scene_delete_custom`(`STR` ID) ---> `NONE`  
+  Deletes customly saved scene with **ID**.
 - `fe3d:scene_clear`() ---> `NONE`  
-  Deletes (or resets) all stuff in the currently loaded scene (such as models, billboard, graphics, etc).
+  Deletes all environment, models, billboards and graphics from the currently loaded scene.
 - `fe3d:scene_get_current_id`() ---> `STR`  
   Returns ID of currently loaded scene.
 - `fe3d:cursor_show`() ---> `NONE`  

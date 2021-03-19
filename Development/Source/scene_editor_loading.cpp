@@ -4,25 +4,29 @@
 #include <sstream>
 #include <algorithm>
 
-void SceneEditor::loadSceneFromFile(const string& fileName)
+void SceneEditor::loadSceneFromFile(bool isCustomScene, const string& fileName)
 {
 	// Error checking
-	if (_currentProjectID == "")
+	if (_currentProjectID == "" && !isCustomScene)
 	{
 		_fe3d.logger_throwError("No current project loaded --> SceneEditor::loadSceneFromFile()");
 	}
 
 	// Check if scene directory still exists
 	string directoryPath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : ("projects\\" + _currentProjectID)) + "\\scenes\\";
-	if (!_fe3d.misc_isDirectory(directoryPath))
+	if (!_fe3d.misc_isDirectory(directoryPath) ||
+		!_fe3d.misc_isDirectory(directoryPath + "custom\\") ||
+		!_fe3d.misc_isDirectory(directoryPath + "editor\\"))
 	{
-		_fe3d.logger_throwWarning("Project \"" + _currentProjectID + "\" corrupted: scenes folder missing!");
+		_fe3d.logger_throwWarning("Project \"" + _currentProjectID + "\" corrupted: scenes folder(s) missing!");
 	}
 
 	// Check if scene file exists
-	string filePath = directoryPath + fileName + ".fe3d";
-	if (_fe3d.misc_isFileExisting(filePath))
+	string fullFileName = (isCustomScene ? ("custom\\" + fileName) : ("editor\\" + fileName));
+	string fullFilePath = (directoryPath + fullFileName + ".fe3d");
+	if (_fe3d.misc_isFileExisting(fullFilePath))
 	{
+		// Set miscellaneous stuff
 		_loadedSceneID = fileName;
 		_loadedSkyID = "";
 		_loadedTerrainID = "";
@@ -54,7 +58,7 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 		_fe3d.gfx_enableWaterEffects();
 
 		// Load scene file
-		std::ifstream file(filePath);
+		std::ifstream file(fullFilePath);
 		string line;
 
 		// Read model data
@@ -510,37 +514,25 @@ void SceneEditor::loadSceneFromFile(const string& fileName)
 			}
 			else if (entityType == "EDITOR_SPEED")
 			{
-				if (_isEditorLoaded)
-				{
-					iss >> _customEditorSpeed;
-				}
+				iss >> _customEditorSpeed;
 			}
 			else if (entityType == "EDITOR_POSITION")
 			{
-				if (_isEditorLoaded)
-				{
-					Vec3 position;
-					iss >> position.x >> position.y >> position.z;
-					_fe3d.camera_setPosition(position);
-				}
+				Vec3 position;
+				iss >> position.x >> position.y >> position.z;
+				_fe3d.camera_setPosition(position);
 			}
 			else if (entityType == "EDITOR_YAW")
 			{
-				if (_isEditorLoaded)
-				{
-					float yaw;
-					iss >> yaw;
-					_fe3d.camera_setYaw(yaw);
-				}
+				float yaw;
+				iss >> yaw;
+				_fe3d.camera_setYaw(yaw);
 			}
 			else if (entityType == "EDITOR_PITCH")
 			{
-				if (_isEditorLoaded)
-				{
-					float pitch;
-					iss >> pitch;
-					_fe3d.camera_setPitch(pitch);
-				}
+				float pitch;
+				iss >> pitch;
+				_fe3d.camera_setPitch(pitch);
 			}
 			else if (entityType == "GRAPHICS_SHADOWS")
 			{

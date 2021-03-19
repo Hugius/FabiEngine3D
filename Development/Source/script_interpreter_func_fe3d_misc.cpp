@@ -79,8 +79,52 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
 			_sceneEditor.clearScene();
-			_sceneEditor.loadSceneFromFile(arguments[0].getString());
+			_sceneEditor.loadSceneFromFile(false, arguments[0].getString());
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+		}
+	}
+	else if (functionName == "fe3d:scene_load_custom")
+	{
+		auto types = { ScriptValueType::STRING };
+
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		{
+			_sceneEditor.clearScene();
+			_sceneEditor.loadSceneFromFile(true, arguments[0].getString());
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+		}
+	}
+	else if (functionName == "fe3d:scene_save_custom")
+	{
+		auto types = { ScriptValueType::STRING };
+
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		{
+			_sceneEditor.saveSceneToFile(true, arguments[0].getString());
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+		}
+	}
+	else if (functionName == "fe3d:scene_delete_custom")
+	{
+		auto types = { ScriptValueType::STRING };
+
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		{
+			// Compose file path
+			string directoryPath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : 
+				("projects\\" + _currentProjectID)) + "\\scenes\\custom\\";
+			string filePath = directoryPath + arguments[0].getString() + ".fe3d";
+
+			// Check if file exists
+			if (_fe3d.misc_isFileExisting(filePath))
+			{
+				auto status = std::remove(filePath.c_str());
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			}
+			else
+			{
+				_throwScriptError("Cannot delete custom scene \"" + arguments[0].getString() + "\"!");
+			}
 		}
 	}
 	else if (functionName == "fe3d:scene_clear")
@@ -170,7 +214,8 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types) && _validateCurrentProject())
 		{
 			// Compose directory paths
-			string directoryPath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : ("projects\\" + _currentProjectID)) + "\\saves\\";
+			string directoryPath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : 
+				("projects\\" + _currentProjectID)) + "\\saves\\";
 			string newDirectoryPath = string(directoryPath + arguments[0].getString());
 
 			// Return
@@ -185,7 +230,8 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types) && _validateCurrentProject())
 		{
 			// Compose directory paths
-			string directoryPath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : ("projects\\" + _currentProjectID)) + "\\saves\\";
+			string directoryPath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : 
+				("projects\\" + _currentProjectID)) + "\\saves\\";
 			string newDirectoryPath = string(directoryPath + arguments[0].getString());
 
 			// Try to create new directory
@@ -208,7 +254,8 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types) && _validateCurrentProject())
 		{
 			// Compose directory paths
-			string directoryPath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : ("projects\\" + _currentProjectID)) + "\\saves\\";
+			string directoryPath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : 
+				("projects\\" + _currentProjectID)) + "\\saves\\";
 			string newDirectoryPath = string(directoryPath + arguments[0].getString());
 
 			// Check if directory exists
@@ -230,7 +277,8 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types) && _validateCurrentProject())
 		{
 			// Compose file path
-			string directoryPath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : ("projects\\" + _currentProjectID)) + "\\saves\\";
+			string directoryPath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : 
+				("projects\\" + _currentProjectID)) + "\\saves\\";
 			string filePath = directoryPath + arguments[0].getString();
 
 			// Return
@@ -245,7 +293,8 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types) && _validateCurrentProject())
 		{
 			// Compose file path
-			string directoryPath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : ("projects\\" + _currentProjectID)) + "\\saves\\";
+			string directoryPath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : 
+				("projects\\" + _currentProjectID)) + "\\saves\\";
 			string filePath = directoryPath + arguments[0].getString();
 
 			// Check if file exists
@@ -277,7 +326,8 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 		if (_validateListValueAmount(arguments, 2) && _validateCurrentProject())
 		{
 			// Compose file path
-			string directoryPath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : ("projects\\" + _currentProjectID)) + "\\saves\\";
+			string directoryPath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : 
+				("projects\\" + _currentProjectID)) + "\\saves\\";
 			string filePath = directoryPath + arguments[0].getString();
 
 			// Open file
@@ -322,7 +372,8 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types) && _validateCurrentProject())
 		{
 			// Compose file path
-			string directoryPath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : ("projects\\" + _currentProjectID)) + "\\saves\\";
+			string directoryPath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : 
+				("projects\\" + _currentProjectID)) + "\\saves\\";
 			string filePath = directoryPath + arguments[0].getString();
 
 			// Write line to file
@@ -339,7 +390,8 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types) && _validateCurrentProject())
 		{
 			// Compose file path
-			string directoryPath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : ("projects\\" + _currentProjectID)) + "\\saves\\";
+			string directoryPath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : 
+				("projects\\" + _currentProjectID)) + "\\saves\\";
 			string filePath = directoryPath + arguments[0].getString();
 
 			// Check if file exists
@@ -362,7 +414,8 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types) && _validateCurrentProject())
 		{
 			// Compose file path
-			string directoryPath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : ("projects\\" + _currentProjectID)) + "\\saves\\";
+			string directoryPath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : 
+				("projects\\" + _currentProjectID)) + "\\saves\\";
 			string filePath = directoryPath + arguments[0].getString();
 
 			// Check if file exists

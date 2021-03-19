@@ -106,9 +106,6 @@
     <ClCompile Include="Source\scene_editor_light_updates.cpp">
       <Filter>src\Editor System\Scene Editor\Lighting</Filter>
     </ClCompile>
-    <ClCompile Include="Source\scene_editor_billboard_placing.cpp">
-      <Filter>src\Editor System\Scene Editor\Billboards</Filter>
-    </ClCompile>
     <ClCompile Include="Source\scene_editor_billboard_updates.cpp">
       <Filter>src\Editor System\Scene Editor\Billboards</Filter>
     </ClCompile>
@@ -681,6 +678,9 @@
     </ClCompile>
     <ClCompile Include="Source\script_interpreter_func_fe3d_lighting.cpp">
       <Filter>src\Scripting System\Execution\Interpreter\Function\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\scene_editor_billboard_placing.cpp">
+      <Filter>src\Editor System\Scene Editor\Billboards</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

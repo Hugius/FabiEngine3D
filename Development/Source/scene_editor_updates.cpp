@@ -121,7 +121,7 @@ void SceneEditor::_updateMainMenu()
 					// Load selected scene for editing
 					if (_isChoosingScene)
 					{
-						loadSceneFromFile(_currentSceneID);
+						loadSceneFromFile(false, _currentSceneID);
 						_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuChoice");
 					}
 					else if (_isDeletingScene) // Prepare deletion confirmation
@@ -203,7 +203,7 @@ void SceneEditor::_updateChoiceMenu()
 			if (_gui.getGlobalScreen()->isAnswerFormConfirmed("exitSceneEditor"))
 			{
 				// Save before closing
-				saveSceneToFile();
+				saveSceneToFile(false);
 
 				// Clear whole scene
 				clearScene();

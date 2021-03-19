@@ -1,4 +1,4 @@
-44 52
+13 40
 META script_type_update
 
 /// Temporary values
@@ -12,8 +12,7 @@ IF lmbPressed IS <true>:
         IF newGame IS <true>:
             fe3d:scene_load("home")
         ELSE:
-            /// load saved world
-            PASS
+            fe3d:scene_load_custom("home")
         EXEC npc_init
         EXEC time_init
         EXEC water_init

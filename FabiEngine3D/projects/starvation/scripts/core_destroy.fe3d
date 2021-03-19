@@ -1,5 +1,6 @@
-3 0
+4 4
 META script_type_destroy
 META execution_entry
 
-EXEC persistence_save
+IF _isInMenu IS <false>:
+    EXEC persistence_save

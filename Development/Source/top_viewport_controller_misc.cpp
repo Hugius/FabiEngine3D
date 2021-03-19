@@ -73,6 +73,8 @@ void TopViewportController::_updateProjectCreation()
 				temp = _mkdir((newDirectoryPath + "\\data").c_str());
 				temp = _mkdir((newDirectoryPath + "\\saves").c_str());
 				temp = _mkdir((newDirectoryPath + "\\scenes").c_str());
+				temp = _mkdir((newDirectoryPath + "\\scenes\\custom").c_str());
+				temp = _mkdir((newDirectoryPath + "\\scenes\\editor").c_str());
 				temp = _mkdir((newDirectoryPath + "\\scripts").c_str());
 
 				// Create new empty project files

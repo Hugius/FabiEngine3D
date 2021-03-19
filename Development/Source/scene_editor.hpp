@@ -23,8 +23,8 @@ public:
 	void unload();
 	void update();
 	void setCurrentProjectID(const string&projectName);
-	void loadSceneFromFile(const string& fileName);
-	void saveSceneToFile();
+	void loadSceneFromFile(bool isCustomScene, const string& fileName);
+	void saveSceneToFile(bool isCustomScene, const string& customFileName = "");
 	void clearScene();
 	void placeModel(const string& newID, const string& previewID, Vec3 position);
 	void placeBillboard(const string& newID, const string& previewID, Vec3 position);

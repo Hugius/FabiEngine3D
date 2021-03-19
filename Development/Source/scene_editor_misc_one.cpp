@@ -177,7 +177,7 @@ vector<string> SceneEditor::_loadSceneNames()
 {
 	// Temporary values
 	vector<string> sceneNames;
-	string directoryPath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : ("projects\\" + _currentProjectID)) + "\\scenes\\";
+	string directoryPath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : ("projects\\" + _currentProjectID)) + "\\scenes\\editor\\";
 
 	// Check if scenes directory exists
 	if (_fe3d.misc_isDirectory(directoryPath))

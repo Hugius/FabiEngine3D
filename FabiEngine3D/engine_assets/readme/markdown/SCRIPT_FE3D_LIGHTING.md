@@ -19,6 +19,10 @@
   Sets directional lighting **intensity**.
 - `fe3d:lighting_get_directional_intensity`() ---> `DEC`  
   Returns directional lighting intensity.
+- `fe3d:lighting_set_directional_billboard_size`(`DEC` size) ---> `NONE`  
+  Sets directional lighting billboard **size**.
+- `fe3d:lighting_get_directional_billboard_size`() ---> `DEC`  
+  Returns directional lighting billboard size.
 - `fe3d:lighting_enable_spot`() ---> `NONE`  
   Enables spot lighting from camera.
 - `fe3d:lighting_disable_spot`() ---> `NONE`  

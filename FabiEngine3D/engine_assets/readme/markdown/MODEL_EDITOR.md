@@ -1,6 +1,7 @@
 # Model Editor
 ![model](../images/model_editor.png)
 ### General
+- All models will be saved in `projects\<your_project>\data\model.fe3d`.
 - You can **create/edit/delete** models.
 - Every created model can be placed in a **scene** later on.
 - A model must **at least** consist of a mesh.

@@ -2,6 +2,7 @@
 ![animation_editor](../images/animation_editor.png)
 ![frame_editor](../images/frame_editor.png)
 ### General
+- All animations will be saved in `projects\<your_project>\data\animation.fe3d`.
 - You can **create/edit/delete** animations for **models**.
 - Every created animation can be applied to models through **scripting**.
 - You can select a **preview model** for the animation playback.

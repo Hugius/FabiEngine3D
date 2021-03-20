@@ -1,6 +1,7 @@
 # Billboard Editor
 ![billboard](../images/billboard_editor.png)
 ### General
+- All billboard will be saved in `projects\<your_project>\data\billboard.fe3d`.
 - You can **create/edit/delete** billboards.
 - Every created billboard can be placed in a **scene** later on.
 - Every billboard has its own flat **AABB** based on their size.

@@ -8,6 +8,7 @@
 - **Mesh**: `OBJ` format mesh file from `game_assets\meshes`.
 - It is good practice to make sure the **center** of your **mesh file** is **XYZ(0,0,0)** and the mesh itself is **above** the center.
 - The **size** of the mesh can be altered to your liking in the "size" menu.
+- The new model name **cannot consist** of the '@' character, because is it reserved by the internal engine for ID composition.
 - You can toggle the **reference box** with the `R` key.
 - You can toggle **debug rendering** with the `H` key.
 - You can toggle **wireframe rendering** with the `F` key.
@@ -15,7 +16,6 @@
 - Hold the `MMB` button to **move the camera** with your mouse.
 - Use the `SPACE` key to move the camera **up** and use the `LSHIFT` key to move the camera **down**.
 - Use the `UP` and `DOWN` keys to change the camera **zooming speed**.
-- The new model name **cannot consist** of the '@' character, because is it reserved by the internal engine for ID composition.
 ### Texturing
 - **Diffuse map**: colored 24bit/32bit `PNG` format image file from `game_assets\textures\diffuse_maps\`.
 - **Light map**: colored 24bit `PNG` format image file from `game_assets\textures\light_maps\`.

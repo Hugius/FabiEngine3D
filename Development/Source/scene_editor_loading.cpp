@@ -449,12 +449,14 @@ void SceneEditor::loadSceneFromFile(bool isCustomScene, const string& fileName)
 					_fe3d.billboardEntity_delete("@@lightSource");
 				}
 
-				// Apply
+				// Apply values
 				_fe3d.gfx_enableDirectionalLighting(directionalLightingPosition, directionalLightingColor, directionalLightingIntensity);
-				_fe3d.billboardEntity_add("@@lightSource", "engine_assets\\textures\\light_source.png", directionalLightingPosition, Vec3(0.0f), Vec2(billboardSize), true, true, true, true);
+				_fe3d.billboardEntity_setPosition("@@lightSource", directionalLightingPosition);
+				_fe3d.billboardEntity_setSize("@@lightSource", Vec2(billboardSize));
 				_fe3d.billboardEntity_setLightness("@@lightSource", billboardLightness);
 				_fe3d.billboardEntity_setColor("@@lightSource", directionalLightingColor);
 				_fe3d.billboardEntity_setDepthMapIncluded("@@lightSource", false);
+				_fe3d.billboardEntity_show("@@lightSource");
 			}
 			else if (entityType == "POINT_LIGHT")
 			{

@@ -23,8 +23,18 @@ public:
 	void unload();
 	void update();
 	void setCurrentProjectID(const string&projectName);
+	void createCustomScene(const string& sceneID);
+	void addLightingToCustomScene();
+	void addGraphicsToCustomScene();
+	void addSkyToCustomScene();
+	void addTerrainToCustomScene();
+	void addWaterToCustomScene();
+	void addModelToCustomScene(const string& modelID);
+	void addBillboardToCustomScene(const string& billboardID);
+	void addLightToCustomScene(const string& lightID);
+	void addAudioToCustomScene(const string& audioID);
 	void loadSceneFromFile(bool isCustomScene, const string& fileName);
-	void saveSceneToFile(bool isCustomScene, const string& customFileName = "");
+	void saveSceneToFile(bool isCustomScene);
 	void clearScene();
 	void placeModel(const string& newID, const string& previewID, Vec3 position);
 	void placeBillboard(const string& newID, const string& previewID, Vec3 position);
@@ -138,6 +148,18 @@ private:
 	AnimationEditor& _animationEditor;
 	BillboardEditor& _billboardEditor;
 	AudioEditor& _audioEditor;
+
+	// Custom scene variables
+	string _customSceneID = "";
+	bool _hasCustomSceneLighting = false;
+	bool _hasCustomSceneGraphics = false;
+	bool _hasCustomSceneSky = false;
+	bool _hasCustomSceneTerrain = false;
+	bool _hasCustomSceneWater = false;
+	vector<string> _customSceneModelIDs;
+	vector<string> _customSceneBillboardIDs;
+	vector<string> _customSceneLightIDs;
+	vector<string> _customSceneAudioIDs;
 
 	// Environment variables
 	string _loadedSkyID = "";

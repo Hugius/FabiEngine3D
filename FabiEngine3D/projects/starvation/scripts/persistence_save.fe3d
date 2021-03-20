@@ -1,8 +1,12 @@
-3 30
+3 17
 META script_type_destroy
 
 /// Save custom scene
-fe3d:scene_save_custom("home")
+fe3d:scene_create_custom("home")
+fe3d:scene_add_custom_sky()
+fe3d:scene_add_custom_terrain()
+fe3d:scene_add_custom_water()
+fe3d:scene_save_custom()
 
 /// Clear previous files
 BOOL existing = fe3d:file_is_existing("progress.txt")

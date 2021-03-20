@@ -270,3 +270,126 @@ void SceneEditor::clearScene()
 	_loadedLightIDs.clear();
 	_loadedAudioIDs.clear();
 }
+
+void SceneEditor::createCustomScene(const string& sceneID)
+{
+	_customSceneID = sceneID;
+	_hasCustomSceneLighting = false;
+	_hasCustomSceneGraphics = false;
+	_hasCustomSceneSky = false;
+	_hasCustomSceneTerrain = false;
+	_hasCustomSceneWater = false;
+	_hasCustomSceneGraphics = false;
+	_customSceneModelIDs.clear();
+	_customSceneBillboardIDs.clear();
+	_customSceneLightIDs.clear();
+	_customSceneAudioIDs.clear();
+}
+
+void SceneEditor::addLightingToCustomScene()
+{
+	if (!_customSceneID.empty())
+	{
+		_hasCustomSceneLighting = true;
+	}
+	else
+	{
+		_fe3d.logger_throwWarning("Cannot add lighting to custom scene: not existing!");
+	}
+}
+
+void SceneEditor::addGraphicsToCustomScene()
+{
+	if (!_customSceneID.empty())
+	{
+		_hasCustomSceneGraphics = true;
+	}
+	else
+	{
+		_fe3d.logger_throwWarning("Cannot add graphics to custom scene: not existing!");
+	}
+}
+
+void SceneEditor::addSkyToCustomScene()
+{
+	if (!_customSceneID.empty())
+	{
+		_hasCustomSceneSky = true;
+	}
+	else
+	{
+		_fe3d.logger_throwWarning("Cannot add sky to custom scene: not existing!");
+	}
+}
+
+void SceneEditor::addTerrainToCustomScene()
+{
+	if (!_customSceneID.empty())
+	{
+		_hasCustomSceneTerrain = true;
+	}
+	else
+	{
+		_fe3d.logger_throwWarning("Cannot add terrain to custom scene: not existing!");
+	}
+}
+
+void SceneEditor::addWaterToCustomScene()
+{
+	if (!_customSceneID.empty())
+	{
+		_hasCustomSceneWater = true;
+	}
+	else
+	{
+		_fe3d.logger_throwWarning("Cannot add water to custom scene: not existing!");
+	}
+}
+
+void SceneEditor::addModelToCustomScene(const string& modelID)
+{
+	if (!_customSceneID.empty())
+	{
+		_customSceneModelIDs.push_back(modelID);
+	}
+	else
+	{
+		_fe3d.logger_throwWarning("Cannot add model to custom scene: not existing!");
+	}
+}
+
+void SceneEditor::addBillboardToCustomScene(const string& billboardID)
+{
+	if (!_customSceneID.empty())
+	{
+		_customSceneBillboardIDs.push_back(billboardID);
+	}
+	else
+	{
+		_fe3d.logger_throwWarning("Cannot add billboard to custom scene: not existing!");
+	}
+}
+
+void SceneEditor::addLightToCustomScene(const string& lightID)
+{
+	if (!_customSceneID.empty())
+	{
+		_customSceneLightIDs.push_back(lightID);
+	}
+	else
+	{
+		_fe3d.logger_throwWarning("Cannot add light to custom scene: not existing!");
+	}
+}
+
+void SceneEditor::addAudioToCustomScene(const string& audioID)
+{
+	if (!_customSceneID.empty())
+	{
+		_customSceneAudioIDs.push_back(audioID);
+	}
+	else
+	{
+		_fe3d.logger_throwWarning("Cannot add audio to custom scene: not existing!");
+	}
+}

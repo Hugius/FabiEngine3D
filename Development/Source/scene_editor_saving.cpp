@@ -3,12 +3,16 @@
 #include <fstream>
 #include <algorithm>
 
-void SceneEditor::saveSceneToFile(bool isCustomScene, const string& customFileName)
+void SceneEditor::saveSceneToFile(bool isCustomScene)
 {
 	// Error checking
 	if (_currentProjectID == "" && !isCustomScene)
 	{
 		_fe3d.logger_throwError("No current project loaded --> SceneEditor::saveSceneToFile()");
+	}
+	else if (isCustomScene && _customSceneID.empty())
+	{
+		_fe3d.logger_throwWarning("Cannot save custom scene: not existing!");
 	}
 
 	// Check if scene directory still exists
@@ -24,29 +28,33 @@ void SceneEditor::saveSceneToFile(bool isCustomScene, const string& customFileNa
 	if (!_currentSceneID.empty() || isCustomScene)
 	{
 		// Create or overwrite file
-		string fullFileName = (isCustomScene ? ("custom\\" + customFileName) : ("editor\\" + _currentSceneID));
+		string fullFileName = (isCustomScene ? ("custom\\" + _customSceneID) : ("editor\\" + _currentSceneID));
 		string fullFilePath = (directoryPath + fullFileName + ".fe3d");
 		std::ofstream file(fullFilePath);
 
 		// Save LOD IDs
 		vector<string> lodIDs;
-		for (auto& entityID : _fe3d.gameEntity_getAllIDs())
+		for (auto& modelID : _fe3d.gameEntity_getAllIDs())
 		{
-			// Check if not preview model
-			if (entityID[0] != '@')
+			// Temporary values
+			bool isCustomSceneModel = std::find(_customSceneModelIDs.begin(), _customSceneModelIDs.end(), modelID) != _customSceneModelIDs.end();
+
+			// Check if allowed to save
+			if (modelID[0] != '@' && (!isCustomScene || (isCustomScene && isCustomSceneModel)))
 			{
 				// Check if entity has LOD ID
-				if (_fe3d.gameEntity_getLevelOfDetailEntityID(entityID) != "")
+				if (!_fe3d.gameEntity_getLevelOfDetailEntityID(modelID).empty())
 				{
-					lodIDs.push_back(_fe3d.gameEntity_getLevelOfDetailEntityID(entityID));
+					lodIDs.push_back(_fe3d.gameEntity_getLevelOfDetailEntityID(modelID));
 				}
 			}
 		}
 
 		// Write SKY entity data into file
 		string skyID = _fe3d.skyEntity_getSelectedID();
-		if (!skyID.empty())
+		if ((!skyID.empty() && !isCustomScene) || (!skyID.empty() && isCustomScene && _hasCustomSceneSky))
 		{
+			// Temporary values
 			auto diffuseMapPaths = _fe3d.skyEntity_getDiffuseMapPaths(skyID);
 			float rotationSpeed = _fe3d.skyEntity_getRotationSpeed(skyID);
 			float lightness = _fe3d.skyEntity_getOriginalLightness(skyID);
@@ -79,7 +87,7 @@ void SceneEditor::saveSceneToFile(bool isCustomScene, const string& customFileNa
 
 		// Write TERRAIN entity data into file
 		string terrainID = _fe3d.terrainEntity_getSelectedID();
-		if (!terrainID.empty())
+		if ((!terrainID.empty() && !isCustomScene) || (!terrainID.empty() && isCustomScene && _hasCustomSceneTerrain))
 		{
 			// Values
 			string heightMapPath = _fe3d.terrainEntity_getHeightMapPath(terrainID);
@@ -161,7 +169,7 @@ void SceneEditor::saveSceneToFile(bool isCustomScene, const string& customFileNa
 
 		// Write WATER entity data into file
 		string waterID = _fe3d.waterEntity_getSelectedID();
-		if (!waterID.empty())
+		if ((!waterID.empty() && !isCustomScene) || (!waterID.empty() && isCustomScene && _hasCustomSceneWater))
 		{
 			// Values
 			string dudvMapPath = _fe3d.waterEntity_getDudvMapPath(waterID);
@@ -221,8 +229,13 @@ void SceneEditor::saveSceneToFile(bool isCustomScene, const string& customFileNa
 		// Write GAME entities data into file
 		for (auto& modelID : _fe3d.gameEntity_getAllIDs())
 		{
-			// Check if not a preview model or an LOD entity
-			if (modelID[0] != '@' || std::find(lodIDs.begin(), lodIDs.end(), modelID) != lodIDs.end())
+			// Temporary values
+			bool isLodModel = std::find(lodIDs.begin(), lodIDs.end(), modelID) != lodIDs.end();
+			bool isCustomSceneModel = 
+				std::find(_customSceneModelIDs.begin(), _customSceneModelIDs.end(), modelID) != _customSceneModelIDs.end();
+
+			// Check if allowed to save
+			if ((modelID[0] != '@' || isLodModel) && (!isCustomScene || (isCustomScene && isCustomSceneModel)))
 			{
 				// Check if model has bound animation
 				if (!_animationEditor.getPlayingAnimationNames(modelID).empty())
@@ -395,8 +408,12 @@ void SceneEditor::saveSceneToFile(bool isCustomScene, const string& customFileNa
 		// Write BILLBOARD entities data into file
 		for (auto& billboardID : _fe3d.billboardEntity_getAllIDs())
 		{
-			// Check if not a preview entity
-			if (billboardID[0] != '@')
+			// Temporary values
+			bool isCustomSceneBillboard = 
+				std::find(_customSceneBillboardIDs.begin(), _customSceneBillboardIDs.end(), billboardID) != _customSceneBillboardIDs.end();
+
+			// Check if allowed to save
+			if (billboardID[0] != '@' && (!isCustomScene || (isCustomScene && isCustomSceneBillboard)))
 			{
 				// Retrieve all valus
 				auto position = _fe3d.billboardEntity_getPosition(billboardID);
@@ -452,41 +469,49 @@ void SceneEditor::saveSceneToFile(bool isCustomScene, const string& customFileNa
 			}
 		}
 
-		// Ambient lighting
-		Vec3 ambientLightingColor = _fe3d.gfx_getAmbientLightingColor();
-		float ambientLightingIntensity = _fe3d.gfx_getAmbientLightingIntensity();
+		// Check if allowed to save
+		if (!isCustomScene || (isCustomScene && _hasCustomSceneLighting))
+		{
+			// Ambient lighting
+			Vec3 ambientLightingColor = _fe3d.gfx_getAmbientLightingColor();
+			float ambientLightingIntensity = _fe3d.gfx_getAmbientLightingIntensity();
 
-		file <<
-			"AMBIENT_LIGHT " <<
-			ambientLightingColor.r << " " <<
-			ambientLightingColor.g << " " <<
-			ambientLightingColor.b << " " <<
-			ambientLightingIntensity << std::endl;
+			file <<
+				"AMBIENT_LIGHT " <<
+				ambientLightingColor.r << " " <<
+				ambientLightingColor.g << " " <<
+				ambientLightingColor.b << " " <<
+				ambientLightingIntensity << std::endl;
 
-		// Directional lighting
-		Vec3 directionalLightingColor = _fe3d.gfx_getDirectionalLightingColor();
-		Vec3 directionalLightingPosition = _fe3d.gfx_getDirectionalLightingPosition();
-		float directionalLightingIntensity = _fe3d.gfx_getDirectionalLightingIntensity();
-		float billboardSize = _fe3d.billboardEntity_getSize("@@lightSource").x;
-		float billboardLightness = _fe3d.billboardEntity_getLightness("@@lightSource");
+			// Directional lighting
+			Vec3 directionalLightingColor = _fe3d.gfx_getDirectionalLightingColor();
+			Vec3 directionalLightingPosition = _fe3d.gfx_getDirectionalLightingPosition();
+			float directionalLightingIntensity = _fe3d.gfx_getDirectionalLightingIntensity();
+			float billboardSize = _fe3d.billboardEntity_getSize("@@lightSource").x;
+			float billboardLightness = _fe3d.billboardEntity_getLightness("@@lightSource");
 
-		file <<
-			"DIRECTIONAL_LIGHT " <<
-			directionalLightingPosition.x << " " <<
-			directionalLightingPosition.y << " " <<
-			directionalLightingPosition.z << " " <<
-			directionalLightingColor.r << " " <<
-			directionalLightingColor.g << " " <<
-			directionalLightingColor.b << " " <<
-			directionalLightingIntensity << " " <<
-			billboardSize << " " <<
-			billboardLightness << std::endl;
+			file <<
+				"DIRECTIONAL_LIGHT " <<
+				directionalLightingPosition.x << " " <<
+				directionalLightingPosition.y << " " <<
+				directionalLightingPosition.z << " " <<
+				directionalLightingColor.r << " " <<
+				directionalLightingColor.g << " " <<
+				directionalLightingColor.b << " " <<
+				directionalLightingIntensity << " " <<
+				billboardSize << " " <<
+				billboardLightness << std::endl;
+		}
 
 		// Point lights
 		for (auto& lightID : _fe3d.lightEntity_getAllIDs())
 		{
-			// Check if not preview light
-			if (lightID[0] != '@')
+			// Temporary values
+			bool isCustomSceneLight =
+				std::find(_customSceneLightIDs.begin(), _customSceneLightIDs.end(), lightID) != _customSceneLightIDs.end();
+
+			// Check if allowed to save
+			if (lightID[0] != '@' && (!isCustomScene || (isCustomScene && isCustomSceneLight)))
 			{
 				auto position = _fe3d.lightEntity_getPosition(lightID);
 				auto color = _fe3d.lightEntity_getColor(lightID);
@@ -511,8 +536,12 @@ void SceneEditor::saveSceneToFile(bool isCustomScene, const string& customFileNa
 		// Audio casters
 		for (auto& audioID : _fe3d.audioEntity_getAllIDs())
 		{
-			// Check if not preview audio
-			if (audioID[0] != '@')
+			// Temporary values
+			bool isCustomSceneAudio =
+				std::find(_customSceneAudioIDs.begin(), _customSceneAudioIDs.end(), audioID) != _customSceneAudioIDs.end();
+
+			// Check if allowed to save
+			if (audioID[0] != '@' && (!isCustomScene || (isCustomScene && isCustomSceneAudio)))
 			{
 				string audioPath = _fe3d.audioEntity_getFilePath(audioID);
 				auto position = _fe3d.audioEntity_getPosition(audioID);
@@ -536,10 +565,10 @@ void SceneEditor::saveSceneToFile(bool isCustomScene, const string& customFileNa
 			}
 		}
 
-		// LOD distance
+		// LOD distance settings
 		file << "LOD_DISTANCE " << _fe3d.gameEntity_getLevelOfDetailDistance() << std::endl;
 
-		// Editor properties
+		// Editor settings
 		if (_isEditorLoaded)
 		{
 			// Editor camera speed
@@ -556,69 +585,73 @@ void SceneEditor::saveSceneToFile(bool isCustomScene, const string& customFileNa
 			file << "EDITOR_PITCH " << _fe3d.camera_getPitch() << std::endl;
 		}
 
-		// Shadow settings
-		bool enabled = _fe3d.gfx_isShadowsEnabled();
-		if (enabled)
+		// Check if allowed to save
+		if (!isCustomScene || (isCustomScene && _hasCustomSceneGraphics))
 		{
-			float size = _fe3d.gfx_getShadowSize();
-			float lightness = _fe3d.gfx_getShadowLightness();
-			Vec3 position = _fe3d.gfx_getShadowEyePosition();
-			Vec3 center = _fe3d.gfx_getShadowCenter();
-			bool isFollowingCamera = _fe3d.gfx_isShadowFollowingCamera();
-			bool isSoftShadowed = _fe3d.gfx_isSoftShadowingEnabled();
-			int interval = _fe3d.gfx_getShadowInterval();
-			file << "GRAPHICS_SHADOWS " << enabled << " " << size << " " << lightness << " " << _fe3d.misc_vec2str(position) << " " <<
-				_fe3d.misc_vec2str(center) << " " << isFollowingCamera << " " << isSoftShadowed << " " << interval << std::endl;
-		}
+			// Shadow settings
+			bool enabled = _fe3d.gfx_isShadowsEnabled();
+			if (enabled)
+			{
+				float size = _fe3d.gfx_getShadowSize();
+				float lightness = _fe3d.gfx_getShadowLightness();
+				Vec3 position = _fe3d.gfx_getShadowEyePosition();
+				Vec3 center = _fe3d.gfx_getShadowCenter();
+				bool isFollowingCamera = _fe3d.gfx_isShadowFollowingCamera();
+				bool isSoftShadowed = _fe3d.gfx_isSoftShadowingEnabled();
+				int interval = _fe3d.gfx_getShadowInterval();
+				file << "GRAPHICS_SHADOWS " << enabled << " " << size << " " << lightness << " " << _fe3d.misc_vec2str(position) << " " <<
+					_fe3d.misc_vec2str(center) << " " << isFollowingCamera << " " << isSoftShadowed << " " << interval << std::endl;
+			}
 
-		// Motion blur settings
-		enabled = _fe3d.gfx_isMotionBlurEnabled();
-		if (enabled)
-		{
-			float strength = _fe3d.gfx_getMotionBlurStrength();
-			file << "GRAPHICS_MOTIONBLUR " << enabled << " " << strength << std::endl;
-		}
+			// Motion blur settings
+			enabled = _fe3d.gfx_isMotionBlurEnabled();
+			if (enabled)
+			{
+				float strength = _fe3d.gfx_getMotionBlurStrength();
+				file << "GRAPHICS_MOTIONBLUR " << enabled << " " << strength << std::endl;
+			}
 
-		// DOF settings
-		enabled = _fe3d.gfx_isDofEnabled();
-		if (enabled)
-		{
-			bool dynamic = _fe3d.gfx_isDofDynamic();
-			float blurDistance = _fe3d.gfx_getDofBlurDistance();
-			float maxDistance = _fe3d.gfx_getaMaxDofDistance();
-			file << "GRAPHICS_DOF " << enabled << " " << dynamic << " " << blurDistance << " " << maxDistance << std::endl;
-		}
+			// DOF settings
+			enabled = _fe3d.gfx_isDofEnabled();
+			if (enabled)
+			{
+				bool dynamic = _fe3d.gfx_isDofDynamic();
+				float blurDistance = _fe3d.gfx_getDofBlurDistance();
+				float maxDistance = _fe3d.gfx_getaMaxDofDistance();
+				file << "GRAPHICS_DOF " << enabled << " " << dynamic << " " << blurDistance << " " << maxDistance << std::endl;
+			}
 
-		// Fog settings
-		enabled = _fe3d.gfx_isFogEnabled();
-		if (enabled)
-		{
-			float minDistance = _fe3d.gfx_getFogMinDistance();
-			float maxDistance = _fe3d.gfx_getFogMaxDistance();
-			float thickness = _fe3d.gfx_getFogThickness();
-			Vec3 color = _fe3d.gfx_getFogColor();
-			file << "GRAPHICS_FOG " << enabled << " " << minDistance << " " << maxDistance << " " << thickness << " " << _fe3d.misc_vec2str(color) << std::endl;
-		}
+			// Fog settings
+			enabled = _fe3d.gfx_isFogEnabled();
+			if (enabled)
+			{
+				float minDistance = _fe3d.gfx_getFogMinDistance();
+				float maxDistance = _fe3d.gfx_getFogMaxDistance();
+				float thickness = _fe3d.gfx_getFogThickness();
+				Vec3 color = _fe3d.gfx_getFogColor();
+				file << "GRAPHICS_FOG " << enabled << " " << minDistance << " " << maxDistance << " " << thickness << " " << _fe3d.misc_vec2str(color) << std::endl;
+			}
 
-		// Lens flare settings
-		enabled = _fe3d.gfx_isLensFlareEnabled();
-		if (enabled)
-		{
-			string flareMapPath = _fe3d.gfx_getLensFlareMapPath();
-			float intensity = _fe3d.gfx_getLensFlareIntensity();
-			float multiplier = _fe3d.gfx_getLensFlareMultiplier();
-			flareMapPath = (flareMapPath == "") ? "?" : flareMapPath;
-			std::replace(flareMapPath.begin(), flareMapPath.end(), ' ', '?');
-			file << "GRAPHICS_LENSFLARE " << enabled << " " << flareMapPath << " " << intensity << " " << multiplier << std::endl;
-		}
+			// Lens flare settings
+			enabled = _fe3d.gfx_isLensFlareEnabled();
+			if (enabled)
+			{
+				string flareMapPath = _fe3d.gfx_getLensFlareMapPath();
+				float intensity = _fe3d.gfx_getLensFlareIntensity();
+				float multiplier = _fe3d.gfx_getLensFlareMultiplier();
+				flareMapPath = (flareMapPath == "") ? "?" : flareMapPath;
+				std::replace(flareMapPath.begin(), flareMapPath.end(), ' ', '?');
+				file << "GRAPHICS_LENSFLARE " << enabled << " " << flareMapPath << " " << intensity << " " << multiplier << std::endl;
+			}
 
-		// Sky HDR settings
-		enabled = _fe3d.gfx_isSkyHdrEnabled();
-		if (enabled)
-		{
-			float intensity = _fe3d.gfx_getSkyHdrBrightnessFactor();
-			file << "GRAPHICS_SKYHDR " << enabled << " " << intensity << std::endl;
-		}
+			// Sky HDR settings
+			enabled = _fe3d.gfx_isSkyHdrEnabled();
+			if (enabled)
+			{
+				float intensity = _fe3d.gfx_getSkyHdrBrightnessFactor();
+				file << "GRAPHICS_SKYHDR " << enabled << " " << intensity << std::endl;
+			}
+		}		
 
 		// Close file
 		file.close();
@@ -627,6 +660,22 @@ void SceneEditor::saveSceneToFile(bool isCustomScene, const string& customFileNa
 		if (_isEditorLoaded)
 		{
 			_fe3d.logger_throwInfo("Scene data from project \"" + _currentProjectID + "\" saved!");
+		}
+
+		// Reset custom scene builder
+		if (isCustomScene)
+		{
+			_customSceneID = "";
+			_hasCustomSceneLighting = false;
+			_hasCustomSceneGraphics = false;
+			_hasCustomSceneSky = false;
+			_hasCustomSceneTerrain = false;
+			_hasCustomSceneWater = false;
+			_hasCustomSceneGraphics = false;
+			_customSceneModelIDs.clear();
+			_customSceneBillboardIDs.clear();
+			_customSceneLightIDs.clear();
+			_customSceneAudioIDs.clear();
 		}
 	}
 }

@@ -108,7 +108,6 @@ void SceneEditor::_updateDirectionalLightingMenu()
 			Vec3 directionalLightingPosition = _fe3d.gfx_getDirectionalLightingPosition();
 			float directionalLightingIntensity = _fe3d.gfx_getDirectionalLightingIntensity();
 			float billboardSize = _fe3d.billboardEntity_getSize("@@lightSource").x;
-			float billboardLightness = _fe3d.billboardEntity_getLightness("@@lightSource");
 
 			// GUI management
 			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
@@ -136,10 +135,6 @@ void SceneEditor::_updateDirectionalLightingMenu()
 				else if (screen->getButton("billboardSize")->isHovered())
 				{
 					_gui.getGlobalScreen()->addValueForm("billboardSize", "Billboard size", billboardSize, Vec2(0.0f), Vec2(0.15f, 0.1f));
-				}
-				else if (screen->getButton("billboardLightness")->isHovered())
-				{
-					_gui.getGlobalScreen()->addValueForm("billboardLightness", "Billboard lightness", billboardLightness * 100.0f, Vec2(0.0f), Vec2(0.15f, 0.1f));
 				}
 			}
 
@@ -176,19 +171,12 @@ void SceneEditor::_updateDirectionalLightingMenu()
 			_gui.getGlobalScreen()->checkValueForm("billboardSize", billboardSize);
 			billboardSize = std::max(0.0f, billboardSize);
 
-			// Update billboard lightness value
-			if (_gui.getGlobalScreen()->checkValueForm("billboardLightness", billboardLightness))
-			{
-				billboardLightness = std::max(0.0f, billboardLightness / 100.0f);
-			}
-
 			// Update directional lighting
 			_fe3d.gfx_enableDirectionalLighting(directionalLightingPosition, directionalLightingColor, directionalLightingIntensity);
 
 			// Update lightsource billboard
 			_fe3d.billboardEntity_setPosition("@@lightSource", directionalLightingPosition);
 			_fe3d.billboardEntity_setSize("@@lightSource",  Vec2(billboardSize));
-			_fe3d.billboardEntity_setLightness("@@lightSource", billboardLightness);
 			_fe3d.billboardEntity_setColor("@@lightSource", directionalLightingColor);
 		}
 	}

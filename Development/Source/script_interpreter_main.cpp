@@ -170,6 +170,10 @@ void ScriptInterpreter::load()
 	_audioEditor.loadAudioEntitiesFromFile();
 
 	// Miscellaneous
+	const string texturePath = "engine_assets\\textures\\light_source.png";
+	_fe3d.billboardEntity_add("@@lightSource", texturePath, Vec3(0.0f), Vec3(0.0f), Vec2(0.0f), true, true, true, true);
+	_fe3d.billboardEntity_setDepthMapIncluded("@@lightSource", false);
+	_fe3d.billboardEntity_setLightness("@@lightSource", 10000.0f);
 	_fe3d.camera_load(90.0f, 0.1f, 10000.0f, Vec3(0.0f));
 	_fe3d.input_clearMouseToggles();
 	_fe3d.input_clearKeyToggles();

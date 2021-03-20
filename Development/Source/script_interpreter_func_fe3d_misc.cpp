@@ -153,16 +153,6 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
-	else if (functionName == "fe3d:scene_add_custom_light")
-	{
-		auto types = { ScriptValueType::STRING };
-
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
-		{
-			_sceneEditor.addLightToCustomScene(arguments[0].getString());
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
-		}
-	}
 	else if (functionName == "fe3d:scene_add_custom_audio")
 	{
 		auto types = { ScriptValueType::STRING };
@@ -170,6 +160,16 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
 			_sceneEditor.addAudioToCustomScene(arguments[0].getString());
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+		}
+	}
+	else if (functionName == "fe3d:scene_add_custom_light")
+	{
+		auto types = { ScriptValueType::STRING };
+
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		{
+			_sceneEditor.addLightToCustomScene(arguments[0].getString());
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}

@@ -241,10 +241,13 @@ void SceneEditor::saveSceneToFile(bool isCustomScene)
 				if (!_animationEditor.getPlayingAnimationNames(modelID).empty())
 				{
 					// Reset main transformation
-					_fe3d.gameEntity_setPosition(modelID, _initialModelPosition[modelID]);
-					_fe3d.gameEntity_setRotationOrigin(modelID, Vec3(0.0f));
-					_fe3d.gameEntity_setRotation(modelID, _initialModelRotation[modelID]);
-					_fe3d.gameEntity_setSize(modelID, _initialModelSize[modelID]);
+					if (!isCustomScene)
+					{
+						_fe3d.gameEntity_setPosition(modelID, _initialModelPosition[modelID]);
+						_fe3d.gameEntity_setRotationOrigin(modelID, Vec3(0.0f));
+						_fe3d.gameEntity_setRotation(modelID, _initialModelRotation[modelID]);
+						_fe3d.gameEntity_setSize(modelID, _initialModelSize[modelID]);
+					}
 
 					// Reset part transformations
 					for (auto& partName : _fe3d.gameEntity_getPartNames(modelID))
@@ -276,7 +279,7 @@ void SceneEditor::saveSceneToFile(bool isCustomScene)
 				auto isSpecular = _fe3d.gameEntity_isSpecularLighted(modelID);
 				auto specularFactor = _fe3d.gameEntity_getSpecularFactor(modelID);
 				auto specularIntensity = _fe3d.gameEntity_getSpecularIntensity(modelID);
-				auto lightness = _initialModelLightness[modelID];
+				auto lightness = isCustomScene ? _fe3d.gameEntity_getLightness(modelID) : _initialModelLightness[modelID];
 				auto color = _fe3d.gameEntity_getColor(modelID);
 				auto uvRepeat = _fe3d.gameEntity_getUvRepeat(modelID);
 				auto lodID = _fe3d.gameEntity_getLevelOfDetailEntityID(modelID);
@@ -430,7 +433,7 @@ void SceneEditor::saveSceneToFile(bool isCustomScene)
 				auto animationRows = _fe3d.billboardEntity_getAnimationRows(billboardID);
 				auto animationColumns = _fe3d.billboardEntity_getAnimationColumns(billboardID);
 				auto animationFramestep = _fe3d.billboardEntity_getAnimationFramestep(billboardID);
-				auto lightness = _initialBillboardLightness[billboardID];
+				auto lightness = isCustomScene ? _fe3d.billboardEntity_getLightness(billboardID) : _initialBillboardLightness[billboardID];
 
 				// Perform empty string & space conversions
 				diffusePath = (diffusePath == "") ? "?" : diffusePath;
@@ -466,6 +469,38 @@ void SceneEditor::saveSceneToFile(bool isCustomScene)
 					animationColumns << " " <<
 					animationFramestep << " " <<
 					lightness << std::endl;
+			}
+		}
+
+		// Audio casters
+		for (auto& audioID : _fe3d.audioEntity_getAllIDs())
+		{
+			// Temporary values
+			bool isCustomSceneAudio =
+				std::find(_customSceneAudioIDs.begin(), _customSceneAudioIDs.end(), audioID) != _customSceneAudioIDs.end();
+
+			// Check if allowed to save
+			if (audioID[0] != '@' && (!isCustomScene || (isCustomScene && isCustomSceneAudio)))
+			{
+				string audioPath = _fe3d.audioEntity_getFilePath(audioID);
+				auto position = _fe3d.audioEntity_getPosition(audioID);
+				auto volume = _fe3d.audioEntity_getMaxVolume(audioID);
+				auto distance = _fe3d.audioEntity_getMaxDistance(audioID);
+
+				// Perform empty string & space conversions
+				audioPath = (audioPath == "") ? "?" : audioPath;
+				std::replace(audioPath.begin(), audioPath.end(), ' ', '?');
+
+				// Write line to file
+				file <<
+					"AUDIO " <<
+					audioID << " " <<
+					audioPath << " " <<
+					position.x << " " <<
+					position.y << " " <<
+					position.z << " " <<
+					volume << " " <<
+					distance << std::endl;
 			}
 		}
 
@@ -529,38 +564,6 @@ void SceneEditor::saveSceneToFile(bool isCustomScene)
 					color.g << " " <<
 					color.b << " " <<
 					intensity << " " <<
-					distance << std::endl;
-			}
-		}
-
-		// Audio casters
-		for (auto& audioID : _fe3d.audioEntity_getAllIDs())
-		{
-			// Temporary values
-			bool isCustomSceneAudio =
-				std::find(_customSceneAudioIDs.begin(), _customSceneAudioIDs.end(), audioID) != _customSceneAudioIDs.end();
-
-			// Check if allowed to save
-			if (audioID[0] != '@' && (!isCustomScene || (isCustomScene && isCustomSceneAudio)))
-			{
-				string audioPath = _fe3d.audioEntity_getFilePath(audioID);
-				auto position = _fe3d.audioEntity_getPosition(audioID);
-				auto volume = _fe3d.audioEntity_getMaxVolume(audioID);
-				auto distance = _fe3d.audioEntity_getMaxDistance(audioID);
-
-				// Perform empty string & space conversions
-				audioPath = (audioPath == "") ? "?" : audioPath;
-				std::replace(audioPath.begin(), audioPath.end(), ' ', '?');
-
-				// Write line to file
-				file <<
-					"AUDIO " <<
-					audioID << " " <<
-					audioPath << " " <<
-					position.x << " " <<
-					position.y << " " <<
-					position.z << " " <<
-					volume << " " <<
 					distance << std::endl;
 			}
 		}

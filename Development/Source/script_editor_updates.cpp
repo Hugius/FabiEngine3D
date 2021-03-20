@@ -155,6 +155,7 @@ void ScriptEditor::_updateMiscellaneous()
 			if (result.empty())
 			{
 				_fe3d.logger_throwInfo("Keyword \"" + keyword + "\" not found in scripts!");
+				_fe3d.logger_throwInfo("");
 			}
 			else
 			{
@@ -163,6 +164,7 @@ void ScriptEditor::_updateMiscellaneous()
 				{
 					_fe3d.logger_throwInfo("Keyword \"" + keyword + "\" found in script \"" + fileID + "\" @ line " + to_string(lineNumber));
 				}
+				_fe3d.logger_throwInfo("");
 			}
 		}
 

@@ -116,7 +116,7 @@ void SceneEditor::loadSceneFromFile(bool isCustomScene, const string& fileName)
 			else if (entityType == "TERRAIN")
 			{
 				// Values
-				string terrainID, heightMapPath, diffuseMapPath, normalMapPath, 
+				string terrainID, heightMapPath, diffuseMapPath, normalMapPath,
 					normalMapPathR, normalMapPathG, normalMapPathB,
 					blendMapPath, blendMapPathR, blendMapPathG, blendMapPathB;
 				float maxHeight, uvRepeat, lightness, blendRepeatR, blendRepeatG, blendRepeatB, specularFactor, specularIntensity;
@@ -181,7 +181,7 @@ void SceneEditor::loadSceneFromFile(bool isCustomScene, const string& fileName)
 				// Add new terrain entity
 				_placeTerrain(terrainID, heightMapPath, maxHeight, uvRepeat, isBlendMapped, lightness,
 					blendRepeatR, blendRepeatG, blendRepeatB, isNormalMapped, isNormalMappedR, isNormalMappedG, isNormalMappedB,
-					isSpecular, specularFactor, specularIntensity, diffuseMapPath, normalMapPath, normalMapPathR, normalMapPathG, 
+					isSpecular, specularFactor, specularIntensity, diffuseMapPath, normalMapPath, normalMapPathR, normalMapPathG,
 					normalMapPathB, blendMapPath, blendMapPathR, blendMapPathG, blendMapPathB);
 			}
 			else if (entityType == "WATER")
@@ -363,7 +363,7 @@ void SceneEditor::loadSceneFromFile(bool isCustomScene, const string& fileName)
 				// Add the model
 				_placeModel(modelID, position, rotation, size, meshPath, diffuseMapPath, lightMapPath,
 					reflectionMapPath, normalMapPath, isFrozen, isFaceculled, isShadowed, isTransparent, isSpecular, reflectionType, specularFactor,
-					specularIntensity, lightness, color, uvRepeat, lodEntityID, 
+					specularIntensity, lightness, color, uvRepeat, lodEntityID,
 					isInstanced, instancedOffsets, aabbNames, aabbPositions, aabbSizes, animationID);
 
 				// Hide LOD entity (running script)
@@ -420,6 +420,33 @@ void SceneEditor::loadSceneFromFile(bool isCustomScene, const string& fileName)
 				_placeBillboard(billboardID, diffusePath, fontPath, textContent, position, rotation, size, color, facingX, facingY, isTransparent, isAnimated,
 					animationRows, animationColumns, animationFramestep, lightness);
 			}
+			else if (entityType == "AUDIO")
+			{
+				// Values
+				string ID, audioPath;
+				Vec3 position;
+				float maxVolume, maxDistance;
+
+				// Extract line data
+				iss >> ID >> audioPath >> position.x >> position.y >> position.z >> maxVolume >> maxDistance;
+
+				// Perform empty string & space conversions
+				audioPath = (audioPath == "?") ? "" : audioPath;
+				std::replace(audioPath.begin(), audioPath.end(), '?', ' ');
+
+				// Add speaker
+				if (_isEditorLoaded)
+				{
+					_fe3d.gameEntity_add("@speaker_" + ID, "engine_assets\\meshes\\speaker.obj", position, Vec3(0.0f), DEFAULT_SPEAKER_SIZE);
+					_fe3d.gameEntity_setShadowed("@speaker_" + ID, false);
+					_fe3d.aabbEntity_bindToGameEntity("@speaker_" + ID, Vec3(0.0f), DEFAULT_SPEAKER_AABB_SIZE, true, true);
+				}
+
+				// Add audio
+				_fe3d.audioEntity_add3D(ID, audioPath, position, maxVolume, maxDistance);
+				_fe3d.audioEntity_play(ID, -1, 0.0f);
+				_loadedAudioIDs.push_back(ID);
+			}
 			else if (entityType == "AMBIENT_LIGHT")
 			{
 				// Values
@@ -432,7 +459,7 @@ void SceneEditor::loadSceneFromFile(bool isCustomScene, const string& fileName)
 				// Apply
 				_fe3d.gfx_enableAmbientLighting(ambientLightingColor, ambientLightingIntensity);
 			}
-			else if (entityType == "DIRECTIONAL_LIGHT") 
+			else if (entityType == "DIRECTIONAL_LIGHT")
 			{
 				// Values
 				Vec3 directionalLightingPosition, directionalLightingColor;
@@ -477,33 +504,6 @@ void SceneEditor::loadSceneFromFile(bool isCustomScene, const string& fileName)
 				_fe3d.lightEntity_add(ID, position, color, intensity, distance);
 				_loadedLightIDs.push_back(ID);
 			}
-			else if (entityType == "AUDIO")
-			{
-				// Values
-				string ID, audioPath;
-				Vec3 position;
-				float maxVolume, maxDistance;
-
-				// Extract line data
-				iss >> ID >> audioPath >> position.x >> position.y >> position.z >> maxVolume >> maxDistance;
-
-				// Perform empty string & space conversions
-				audioPath = (audioPath == "?") ? "" : audioPath;
-				std::replace(audioPath.begin(), audioPath.end(), '?', ' ');
-
-				// Add speaker
-				if (_isEditorLoaded)
-				{
-					_fe3d.gameEntity_add("@speaker_" + ID, "engine_assets\\meshes\\speaker.obj", position, Vec3(0.0f), DEFAULT_SPEAKER_SIZE);
-					_fe3d.gameEntity_setShadowed("@speaker_" + ID, false);
-					_fe3d.aabbEntity_bindToGameEntity("@speaker_" + ID, Vec3(0.0f), DEFAULT_SPEAKER_AABB_SIZE, true, true);
-				}
-
-				// Add audio
-				_fe3d.audioEntity_add3D(ID, audioPath, position, maxVolume, maxDistance);
-				_fe3d.audioEntity_play(ID, -1, 0.0f);
-				_loadedAudioIDs.push_back(ID);
-			}
 			else if (entityType == "LOD_DISTANCE")
 			{
 				float lodDistance;
@@ -540,7 +540,7 @@ void SceneEditor::loadSceneFromFile(bool isCustomScene, const string& fileName)
 				bool isFollowingCamera;
 				bool isSoftShadowed;
 				int interval;
-				iss >> enabled >> size >> lightness >> position.x >> position.y >> position.z >> 
+				iss >> enabled >> size >> lightness >> position.x >> position.y >> position.z >>
 					center.x >> center.y >> center.z >> isFollowingCamera >> isSoftShadowed >> interval;
 				_fe3d.gfx_enableShadows(position, center, size, size * 2.0f, lightness, isFollowingCamera, isSoftShadowed, interval);
 			}

@@ -1,13 +1,26 @@
-8 30
+39 4
 META script_type_destroy
 
-/// Save custom scene
+/// Create custom scene
 fe3d:scene_create_custom("home")
 fe3d:scene_add_custom_sky()
 fe3d:scene_add_custom_terrain()
 fe3d:scene_add_custom_water()
 fe3d:scene_add_custom_lighting()
 fe3d:scene_add_custom_graphics()
+
+/// Retrieve tree IDs
+LIST trees = fe3d:model_find_ids("tree")
+INT length = misc:get_list_size("trees")
+INT index = 0
+LOOP:
+    IF index IS length:
+        BREAK
+    ELSE:
+        fe3d:scene_add_custom_model(trees[index])
+        INCR index 1
+
+/// Save custom scene
 fe3d:scene_save_custom()
 
 /// Clear previous files
@@ -22,10 +35,10 @@ IF existing IS <true>:
 fe3d:file_write("progress.txt", _elapsedMS)
 
 /// Inventory
-INT length = misc:get_list_size("_inventory")
+EDIT length = misc:get_list_size("_inventory")
 INT maxIndex = length
 MUL maxIndex 2
-INT index = 0
+EDIT index = 0
 LOOP:
     IF index IS maxIndex:
         BREAK

@@ -19,6 +19,7 @@
 ### General
 - You can **create/edit/delete** terrain environments.
 - Every created terrain environment can be placed in a **scene** later on.
+- You can rotate the **camera** around the terrain by using your mouse **scroll wheel**.
 ### Texturing
 - The terrain environment is generated through a **height map** texture.
 - The terrain can have a base **diffuse map** texture.
@@ -26,7 +27,6 @@
 - Every color **channel** (R,G,B) of the blend map **represents** a different **diffuse map**.
 - The rendering of **every diffuse map** can be improved with a **normal map**.
 - In total you can use **10 different textures** for terrain rendering (1x heightmap, 1x blendmap, 4x diffusemap, 4x normalmap).
-- You can rotate the **camera** around the terrain by using your mouse **scroll wheel**.
 - **Height map**: grayscaled 24bit `BMP` format image file from `game_assets\textures\height_maps\`.
 - **Blend map**: colored 24bit `PNG` format image file from `game_assets\textures\blend_maps\`.
 - **Diffuse maps**: colored 24bit `PNG` format image file from `game_assets\textures\diffuse_maps\`.

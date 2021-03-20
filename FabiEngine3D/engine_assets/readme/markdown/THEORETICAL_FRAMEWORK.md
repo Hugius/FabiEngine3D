@@ -25,7 +25,7 @@
 ![spot_lighting](../images/spot_light.png)
 - **Specular lighting**: specular lighting is a light reflection from any light caster.  
 ![specular_lighting](../images/specular_light.png)
-- **DOF**: Depth Of Field, a post-processing effect that blurs all non-focused pixels.  
+- **Depth Of Field**: Abbreviated as "DOF", a post-processing effect that blurs all non-focused pixels.  
 ![dof](../images/dof.png)
 - **Fog**: the whole scene can have a foggy effect.  
 ![fog](../images/fog.png)

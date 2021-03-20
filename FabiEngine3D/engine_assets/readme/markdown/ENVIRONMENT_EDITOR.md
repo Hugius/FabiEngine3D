@@ -18,6 +18,7 @@
 # Terrain
 ![terrain](../images/terrain_editor.png)
 ### General
+- All terrain environment will be saved in `projects\<your_project>\data\terrain.fe3d`.
 - You can **create/edit/delete** terrain environments.
 - Every created terrain environment can be placed in a **scene** later on.
 - You can rotate the **camera** around the terrain by using your mouse **scroll wheel**.
@@ -46,6 +47,7 @@
 # Water
 ![water](../images/water_editor.png)
 ### General
+- All water environments will be saved in `projects\<your_project>\data\water.fe3d`.
 - You can **create/edit/delete** water environments.
 - Every created water environment can be placed in a **scene** later on.
 - The water environment is simply a **flat plane** in 3D space.

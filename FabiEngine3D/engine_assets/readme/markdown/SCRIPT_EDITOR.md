@@ -1,5 +1,6 @@
 # Script Editor
 ![script](../images/script_editor.png)
+- All scripts will be saved in `projects\<your_project>\scripts\`.
 - You can **create/edit/rename/delete** scripts that will be executed in a certain order.
 - You can **search** scripts for a certain **keyword** (case sensitive). The search results will be **printed** (script ID & line number).
 - You can use the **mouse** to navigate through the code or use the **arrow keys**.

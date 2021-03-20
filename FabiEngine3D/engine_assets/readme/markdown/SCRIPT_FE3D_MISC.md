@@ -9,16 +9,36 @@
   Prints a value to the console (both internal & external). Accepts various message types.
 - `fe3d:scene_load`(`STR` ID) ---> `NONE`  
   Loads an editor scene with **ID** into the game. Any previously loaded scene will be cleared.
-- `fe3d:scene_load_custom`(`STR` ID) ---> `NONE`  
-  Loads a customly saved scene with **ID** into the game. Any previously loaded scene will be cleared.
-- `fe3d:scene_save_custom`(`STR` ID) ---> `NONE`  
-  Saves all existing environment, models, billboards and graphics to a custom scene as **ID**.
-- `fe3d:scene_delete_custom`(`STR` ID) ---> `NONE`  
-  Deletes customly saved scene with **ID**.
-- `fe3d:scene_clear`() ---> `NONE`  
-  Deletes all environment, models, billboards and graphics from the currently loaded scene.
 - `fe3d:scene_get_current_id`() ---> `STR`  
   Returns ID of currently loaded scene.
+- `fe3d:scene_clear`() ---> `NONE`  
+  Deletes all environment, models, billboards and graphics from the currently loaded scene.
+- `fe3d:scene_create_custom`(`STR` ID) ---> `NONE`  
+  Creates a new custom scene as **ID**.
+- `fe3d:scene_add_custom_sky`() ---> `NONE`  
+  Queues sky environment to be saved in the custom scene (does not have to exist yet).
+- `fe3d:scene_add_custom_terrain`() ---> `NONE`  
+  Queues terrain environment to be saved in the custom scene (does not have to exist yet).
+- `fe3d:scene_add_custom_water`() ---> `NONE`  
+  Queues water environment to be saved in the custom scene (does not have to exist yet).
+- `fe3d:scene_add_custom_model`(`STR` modelID) ---> `NONE`  
+  Queues **modelID** to be saved in the custom scene (does not have to exist yet).
+- `fe3d:scene_add_custom_billboard`(`STR` billboardID) ---> `NONE`  
+  Queues **billboardID** to be saved in the custom scene (does not have to exist yet).
+- `fe3d:scene_add_custom_light`(`STR` lightID) ---> `NONE`  
+  Queues **lightID** to be saved in the custom scene (does not have to exist yet).
+- `fe3d:scene_add_custom_audio`(`STR` audioID) ---> `NONE`  
+  Queues **audioID** to be saved in the custom scene (does not have to exist yet).
+- `fe3d:scene_add_custom_lighting`() ---> `NONE`  
+  Queues ambient + directional lighting to be saved in the custom scene.
+- `fe3d:scene_add_custom_graphics`() ---> `NONE`  
+  Queues all graphics to be saved in the custom scene.
+- `fe3d:scene_save_custom`() ---> `NONE`  
+  Saves current custom scene to a file as ID in `projects\<your_project>\scenes\custom\`.
+- `fe3d:scene_load_custom`(`STR` ID) ---> `NONE`  
+  Loads a customly saved scene with **ID** into the game. Any previously loaded scene will be cleared.
+- `fe3d:scene_delete_custom`(`STR` ID) ---> `NONE`  
+  Deletes customly saved scene with **ID**.
 - `fe3d:cursor_show`() ---> `NONE`  
   Makes mouse cursor visible.
 - `fe3d:cursor_hide`() ---> `NONE`  

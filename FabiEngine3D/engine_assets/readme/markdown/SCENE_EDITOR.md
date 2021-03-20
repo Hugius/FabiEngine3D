@@ -1,5 +1,15 @@
 # Scene Editor
 ![scene](../images/scene_editor.png)
+### General
+- All scenes will be saved in `projects\<your_project>\scenes\editor\`.
+- Use the `WASD` keys to move around.
+- Use the `SPACE` key to move **up**.
+- Use the `LSHIFT` key to move **down**.
+- Hold `RMB` and move the mouse to look around.
+- Click on a placed model to select it (if it has a correct AABB).
+- You can toggle **debug rendering** with the `H` key.
+- You can toggle **wireframe rendering** with the `F` key.
+- You can toggle **AABB rendering** with the `B` key.
 ### Environment
 - Sky: you can select **only 1** sky, created in the environment editor.
 - Terrain: you can select **only 1** terrain, created in the environment editor.

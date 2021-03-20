@@ -12,7 +12,7 @@ void SceneEditor::saveSceneToFile(bool isCustomScene)
 	}
 	else if (isCustomScene && _customSceneID.empty())
 	{
-		_fe3d.logger_throwWarning("Cannot save custom scene: not existing!");
+		_fe3d.logger_throwWarning("Cannot save custom scene!");
 	}
 
 	// Check if scene directory still exists

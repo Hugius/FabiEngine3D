@@ -1,4 +1,4 @@
-6 25
+27 40
 META script_type_init
 
 /// Globals
@@ -26,8 +26,8 @@ fe3d:image_place("menu_quit", "scroll3.png", 0.0, -0.8, 0.0, 0.5, 0.2)
 STR f = "font.ttf"
 fe3d:text_place("menu_newgame", f, "New game", 0.0, 0.4, 0.0, 0.32, 0.075)
 fe3d:text_place("menu_loadgame", f, "Load game", 0.0, 0.1, 0.0, 0.36, 0.075)
-fe3d:text_place("menu_sound", f, "Sound: ON", 0.0, -0.2, 0.0, 0.36, 0.075)
-fe3d:text_place("menu_music", f, "Music: ON", 0.0, -0.5, 0.0, 0.36, 0.075)
+fe3d:text_place("menu_sound", f, "Sound:ON", 0.0, -0.2, 0.0, 0.36, 0.075)
+fe3d:text_place("menu_music", f, "Music:ON", 0.0, -0.5, 0.0, 0.36, 0.075)
 fe3d:text_place("menu_quit", f, "Quit", 0.0, -0.8, 0.0, 0.16, 0.075)
 fe3d:text_set_color("menu_newgame", 0.0, 0.0, 0.0)
 fe3d:text_set_color("menu_loadgame", 0.0, 0.0, 0.0)

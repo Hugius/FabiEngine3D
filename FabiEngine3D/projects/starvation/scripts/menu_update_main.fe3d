@@ -1,4 +1,4 @@
-13 40
+48 55
 META script_type_update
 
 /// Temporary values
@@ -47,20 +47,20 @@ IF lmbPressed IS <true>:
     ELIF _hoveredMenuButtonID IS "menu_sound":
         IF _isSoundEnabled IS <true>:
             EDIT _isSoundEnabled = <false>
-            fe3d:text_set_content("menu_sound", "Sound: OFF")
-            fe3d:text_set_size("menu_sound", 0.4, 0.075)
+            fe3d:text_set_content("menu_sound", "Sound:OFF")
+            fe3d:text_set_size("menu_sound", 0.5, 0.075)
         ELSE:
             EDIT _isSoundEnabled = <true>
-            fe3d:text_set_content("menu_sound", "Sound: ON")
-            fe3d:text_set_size("menu_sound", 0.36, 0.075)
+            fe3d:text_set_content("menu_sound", "Sound:ON")
+            fe3d:text_set_size("menu_sound", 0.45, 0.075)
     ELIF _hoveredMenuButtonID IS "menu_music":
         IF _isMusicEnabled IS <true>:
             EDIT _isMusicEnabled = <false>
-            fe3d:text_set_content("menu_music", "Music: OFF")
-            fe3d:text_set_size("menu_music", 0.4, 0.075)
+            fe3d:text_set_content("menu_music", "Music:OFF")
+            fe3d:text_set_size("menu_music", 0.5, 0.075)
         ELSE:
             EDIT _isMusicEnabled = <true>
-            fe3d:text_set_content("menu_music", "Music: ON")
-            fe3d:text_set_size("menu_music", 0.36, 0.075)
+            fe3d:text_set_content("menu_music", "Music:ON")
+            fe3d:text_set_size("menu_music", 0.45, 0.075)
     ELIF _hoveredMenuButtonID IS "menu_quit":
         fe3d:game_stop()

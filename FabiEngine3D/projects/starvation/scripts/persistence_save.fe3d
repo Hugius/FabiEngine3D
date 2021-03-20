@@ -1,4 +1,4 @@
-3 17
+8 30
 META script_type_destroy
 
 /// Save custom scene
@@ -6,6 +6,8 @@ fe3d:scene_create_custom("home")
 fe3d:scene_add_custom_sky()
 fe3d:scene_add_custom_terrain()
 fe3d:scene_add_custom_water()
+fe3d:scene_add_custom_lighting()
+fe3d:scene_add_custom_graphics()
 fe3d:scene_save_custom()
 
 /// Clear previous files

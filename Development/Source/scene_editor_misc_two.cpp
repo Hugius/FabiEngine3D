@@ -294,7 +294,7 @@ void SceneEditor::addLightingToCustomScene()
 	}
 	else
 	{
-		_fe3d.logger_throwWarning("Cannot add lighting to custom scene: not existing!");
+		_fe3d.logger_throwWarning("Cannot add lighting to custom scene!");
 	}
 }
 
@@ -306,7 +306,7 @@ void SceneEditor::addGraphicsToCustomScene()
 	}
 	else
 	{
-		_fe3d.logger_throwWarning("Cannot add graphics to custom scene: not existing!");
+		_fe3d.logger_throwWarning("Cannot add graphics to custom scene!");
 	}
 }
 
@@ -318,7 +318,7 @@ void SceneEditor::addSkyToCustomScene()
 	}
 	else
 	{
-		_fe3d.logger_throwWarning("Cannot add sky to custom scene: not existing!");
+		_fe3d.logger_throwWarning("Cannot add sky to custom scene!");
 	}
 }
 
@@ -330,7 +330,7 @@ void SceneEditor::addTerrainToCustomScene()
 	}
 	else
 	{
-		_fe3d.logger_throwWarning("Cannot add terrain to custom scene: not existing!");
+		_fe3d.logger_throwWarning("Cannot add terrain to custom scene!");
 	}
 }
 
@@ -342,7 +342,7 @@ void SceneEditor::addWaterToCustomScene()
 	}
 	else
 	{
-		_fe3d.logger_throwWarning("Cannot add water to custom scene: not existing!");
+		_fe3d.logger_throwWarning("Cannot add water to custom scene!");
 	}
 }
 
@@ -354,7 +354,7 @@ void SceneEditor::addModelToCustomScene(const string& modelID)
 	}
 	else
 	{
-		_fe3d.logger_throwWarning("Cannot add model to custom scene: not existing!");
+		_fe3d.logger_throwWarning("Cannot add model to custom scene!");
 	}
 }
 
@@ -366,7 +366,7 @@ void SceneEditor::addBillboardToCustomScene(const string& billboardID)
 	}
 	else
 	{
-		_fe3d.logger_throwWarning("Cannot add billboard to custom scene: not existing!");
+		_fe3d.logger_throwWarning("Cannot add billboard to custom scene!");
 	}
 }
 
@@ -378,7 +378,7 @@ void SceneEditor::addLightToCustomScene(const string& lightID)
 	}
 	else
 	{
-		_fe3d.logger_throwWarning("Cannot add light to custom scene: not existing!");
+		_fe3d.logger_throwWarning("Cannot add light to custom scene!");
 	}
 }
 
@@ -390,6 +390,6 @@ void SceneEditor::addAudioToCustomScene(const string& audioID)
 	}
 	else
 	{
-		_fe3d.logger_throwWarning("Cannot add audio to custom scene: not existing!");
+		_fe3d.logger_throwWarning("Cannot add audio to custom scene!");
 	}
 }

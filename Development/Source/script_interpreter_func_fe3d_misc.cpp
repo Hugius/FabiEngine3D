@@ -83,15 +83,20 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
-	else if (functionName == "fe3d:scene_load_custom")
+	else if (functionName == "fe3d:scene_clear")
 	{
-		auto types = { ScriptValueType::STRING };
-
-		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			_sceneEditor.clearScene();
-			_sceneEditor.loadSceneFromFile(true, arguments[0].getString());
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+		}
+	}
+	else if (functionName == "fe3d:scene_get_current_id")
+	{
+		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			auto result = _sceneEditor.getLoadedSceneID();
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result));
 		}
 	}
 	else if (functionName == "fe3d:scene_create_custom")
@@ -192,6 +197,17 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
+	else if (functionName == "fe3d:scene_load_custom")
+	{
+		auto types = { ScriptValueType::STRING };
+
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		{
+			_sceneEditor.clearScene();
+			_sceneEditor.loadSceneFromFile(true, arguments[0].getString());
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+		}
+	}
 	else if (functionName == "fe3d:scene_delete_custom")
 	{
 		auto types = { ScriptValueType::STRING };
@@ -213,22 +229,6 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 			{
 				_throwScriptError("Cannot delete custom scene \"" + arguments[0].getString() + "\"!");
 			}
-		}
-	}
-	else if (functionName == "fe3d:scene_clear")
-	{
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
-		{
-			_sceneEditor.clearScene();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
-		}
-	}
-	else if (functionName == "fe3d:scene_get_current_id")
-	{
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
-		{
-			auto result = _sceneEditor.getLoadedSceneID();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result));
 		}
 	}
 	else if (functionName == "fe3d:cursor_show")

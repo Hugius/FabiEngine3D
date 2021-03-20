@@ -443,14 +443,10 @@ void SceneEditor::loadSceneFromFile(bool isCustomScene, const string& fileName)
 					directionalLightingColor.r >> directionalLightingColor.g >> directionalLightingColor.b >>
 					directionalLightingIntensity >> billboardSize >> billboardLightness;
 
-				// Delete preview billboard
-				if (_fe3d.billboardEntity_isExisting("@@lightSource"))
-				{
-					_fe3d.billboardEntity_delete("@@lightSource");
-				}
-
-				// Apply values
+				// Add directional lighting
 				_fe3d.gfx_enableDirectionalLighting(directionalLightingPosition, directionalLightingColor, directionalLightingIntensity);
+
+				// Add lightsource billboard
 				_fe3d.billboardEntity_setPosition("@@lightSource", directionalLightingPosition);
 				_fe3d.billboardEntity_setSize("@@lightSource", Vec2(billboardSize));
 				_fe3d.billboardEntity_setLightness("@@lightSource", billboardLightness);
@@ -597,6 +593,6 @@ void SceneEditor::loadSceneFromFile(bool isCustomScene, const string& fileName)
 	}
 	else
 	{
-		_fe3d.logger_throwWarning("Could not load scene file \"" + fileName + "\"!");
+		_fe3d.logger_throwWarning("Could not load scene \"" + fileName + "\"!");
 	}
 }

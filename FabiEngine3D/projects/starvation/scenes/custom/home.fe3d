@@ -1,4 +1,12 @@
 SKY day game_assets\textures\cube_maps\day_right.png game_assets\textures\cube_maps\day_left.png game_assets\textures\cube_maps\day_top.png game_assets\textures\cube_maps\day_bottom.png game_assets\textures\cube_maps\day_back.png game_assets\textures\cube_maps\day_front.png 0.002 0.75 1 1 1
 TERRAIN home game_assets\textures\height_maps\home.bmp ? 96 1 1 1 game_assets\textures\blend_maps\home.png game_assets\textures\diffuse_maps\terrain\mud.png game_assets\textures\diffuse_maps\terrain\ground.png game_assets\textures\diffuse_maps\terrain\rock.png 128 64 64 1 1 1 1 ? game_assets\textures\normal_maps\terrain\mud.png game_assets\textures\normal_maps\terrain\ground.png game_assets\textures\normal_maps\terrain\rock.png 1 8 1
 WATER lake game_assets\textures\dudv_maps\water.png game_assets\textures\normal_maps\water\wave1.png ? 0 1 0 1 0 0 0 1 40 -45 4.2 -57 8 1 0.0001 0.0003 0.2 64 1
+AMBIENT_LIGHT 1 1 1 0.75
+DIRECTIONAL_LIGHT 0 1500 -1000 1 1 1 1 200 100
 LOD_DISTANCE 1000
+GRAPHICS_SHADOWS 1 100 0.3 0.000000 75.000000 -50.000000 0.000000 30.000000 0.000000 1 1 100
+GRAPHICS_MOTIONBLUR 1 0.25
+GRAPHICS_DOF 1 1 5 3
+GRAPHICS_FOG 1 75 150 0.75 0.500000 0.500000 0.500000
+GRAPHICS_LENSFLARE 1 game_assets\textures\flare_maps\sun_flare.png 2.5 1.5
+GRAPHICS_SKYHDR 1 0.5

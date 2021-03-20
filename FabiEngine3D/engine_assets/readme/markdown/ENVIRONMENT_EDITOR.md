@@ -1,6 +1,7 @@
 # Sky
 ![sky](../images/sky_editor.png)
 ### General
+- All sky environments will be saved in `projects\<your_project>\data\sky.fe3d`.
 - You can **create/edit/delete** sky environments.
 - Every created sky environment can be placed in a **scene** later on.
 - The sky environment is rendered as a **skybox**, which has 6 different images: left, right, bottom, top, back, front.

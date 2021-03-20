@@ -66,14 +66,16 @@ The engine root directory holds 6 folders and 1 file:
 - **Project settings**
   > This is where you can setup mostly graphical properties of your game such as shadow quality, reflection quality, etc.
 
-# Project Management (top viewport)
-- You can **create/edit/save/delete** a project.
+# Project Management
+- You can **create/edit/save/delete** a project in the top viewport.
 - 1 project = 1 game.
 - Every **project** is a different **game** and must have a **unique** name.
 - A project has its own folder in the engine `projects\` directory.
 - An important note is to **NOT** change anything in this directory!
 
-# Project Settings (left viewport)
+# Project Settings
+- Every project/game has its own settings.
+- All settings will be saved in `projects\<your_project>\game_settings.fe3d`.
 - MSAA quality (default: 4).
 - Shadow quality (default: 2048).
 - Reflection quality (default: 256).

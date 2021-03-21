@@ -14,6 +14,7 @@ public:
 	ScriptVariableType getType();
 	bool isConstant();
 	ScriptValue& getValue(unsigned int index = 0);
+	vector<shared_ptr<ScriptValue>>& getValues();
 	unsigned int getValueCount();
 
 	void changeValues(vector<ScriptValue> values);

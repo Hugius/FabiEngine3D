@@ -79,6 +79,11 @@ ScriptValue& ScriptVariable::getValue(unsigned int index)
 	return *_values[index];
 }
 
+vector<shared_ptr<ScriptValue>>& ScriptVariable::getValues()
+{
+	return _values;
+}
+
 unsigned int ScriptVariable::getValueCount()
 {
 	return _values.size();

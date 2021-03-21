@@ -1,0 +1,28 @@
+15 38
+META script_type_destroy
+
+/// Create custom scene
+fe3d:scene_create_custom("home")
+fe3d:scene_add_custom_sky()
+fe3d:scene_add_custom_terrain()
+fe3d:scene_add_custom_water()
+fe3d:scene_add_custom_lighting()
+fe3d:scene_add_custom_graphics()
+
+/// Retrieve model IDs
+LIST trees = fe3d:model_find_ids("tree")
+LIST stones = fe3d:model_find_ids("stone")
+LIST models = {}
+EDIT models = misc:concat_lists("models", "trees")
+EDIT models = misc:concat_lists("models", "stones")
+INT length = misc:get_list_size("models")
+INT index = 0
+LOOP:
+    IF index IS length:
+        BREAK
+    ELSE:
+        fe3d:scene_add_custom_model(models[index])
+        INCR index 1
+
+/// Save custom scene
+fe3d:scene_save_custom()

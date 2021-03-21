@@ -38,6 +38,55 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, arguments[0].getString() + arguments[1].getString()));
 					}
 				}
+				else if (functionName == "misc:concat_lists")
+				{
+					auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
+
+					if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+					{
+						auto firstName = arguments[0].getString();
+						auto secondName = arguments[1].getString();
+
+						// Check if first list exists
+						if (!_isLocalVariableExisting(firstName) && !_isGlobalVariableExisting(firstName))
+						{
+							_throwScriptError("list variable \"" + firstName + "\" not found!");
+							return returnValues;
+						}
+
+						// Check if second list exists
+						if (!_isLocalVariableExisting(secondName) && !_isGlobalVariableExisting(secondName))
+						{
+							_throwScriptError("list variable \"" + secondName + "\" not found!");
+							return returnValues;
+						}
+
+						// Check if first variable is a list
+						auto firstListVariable = _isLocalVariableExisting(firstName) ? _getLocalVariable(firstName) : _getGlobalVariable(firstName);
+						if (firstListVariable.getType() == ScriptVariableType::SINGLE)
+						{
+							_throwScriptError("variable \"" + firstName + "\" is not a list!");
+							return returnValues;
+						}
+
+						// Check if second variable is a list
+						auto secondListVariable = _isLocalVariableExisting(secondName) ? _getLocalVariable(secondName) : _getGlobalVariable(secondName);
+						if (secondListVariable.getType() == ScriptVariableType::SINGLE)
+						{
+							_throwScriptError("variable \"" + secondName + "\" is not a list!");
+							return returnValues;
+						}
+
+						// Return concatenated lists
+						auto firstListValues = firstListVariable.getValues();
+						auto secondListValues = secondListVariable.getValues();
+						firstListValues.insert(firstListValues.end(), secondListValues.begin(), secondListValues.end());
+						for (auto& value : firstListValues)
+						{
+							returnValues.push_back(*value);
+						}
+					}
+				}
 				else if (functionName == "misc:get_list_size") // Get the size of a list variable
 				{
 					auto types = { ScriptValueType::STRING };
@@ -66,7 +115,7 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::INTEGER, static_cast<int>(result)));
 					}
 				}
-				else if (functionName == "misc:get_string_size") // Get the size of a string variable
+				else if (functionName == "misc:get_string_size")
 				{
 					auto types = { ScriptValueType::STRING };
 
@@ -77,7 +126,7 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::INTEGER, static_cast<int>(result)));
 					}
 				}
-				else if (functionName == "misc:get_string_part") // Cut a part from a string
+				else if (functionName == "misc:get_string_part")
 				{
 					auto types = { ScriptValueType::STRING, ScriptValueType::INTEGER, ScriptValueType::INTEGER };
 
@@ -95,7 +144,7 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 						}
 					}
 				}
-				else if (functionName == "misc:get_unique_integer") // Unique integer
+				else if (functionName == "misc:get_unique_integer")
 				{
 					auto types =
 					{

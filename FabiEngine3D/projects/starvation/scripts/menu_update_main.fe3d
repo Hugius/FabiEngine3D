@@ -1,4 +1,4 @@
-48 55
+31 26
 META script_type_update
 
 /// Temporary values
@@ -29,7 +29,8 @@ IF lmbPressed IS <true>:
         EXEC player_init_main
         EXEC player_init_misc
         IF loadGame IS <true>:
-            EXEC persistence_load
+            EXEC load_player
+            EXEC load_misc
         /// Close menu
         EDIT _isInMenu = <false>
         fe3d:image_set_visible("menu_background", <false>)

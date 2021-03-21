@@ -1,4 +1,4 @@
-71 43
+82 12
 META script_type_update
 
 /// Temporary values
@@ -61,6 +61,8 @@ IF _isBuilding IS <true>:
 STR toolID = _inventory[_equipIndex]
 STR raycastID = ""
 INT length = 0
+EDIT _hoveredBuildingID = ""
+EDIT _hoveredBuildingDistance = 0.0
 IF toolID IS "hammer_stone" OR toolID IS "hammer_iron":
     STR hoveredID = ""
     DEC distance = 0.0
@@ -75,12 +77,13 @@ IF toolID IS "hammer_stone" OR toolID IS "hammer_iron":
         DECR length 8
         EDIT raycastID = misc:get_string_part(raycastID, 0, length)
         /// Check raycasting
-        EDIT hoveredID = fe3d:raycast_into_model(raycastID, "", <true>)
         EDIT distance = fe3d:raycast_into_model_distance(raycastID, "", <true>)
         IF distance IS -1.0:
             EDIT distance = 1000.0
-        IF hoveredID NOT "" AND _isInvOpen IS <true>:
-            EDIT _hoveredBuildingID = hoveredID
-            EDIT _hoveredBuildingDistance = distance
-            BREAK
+        ELSE:
+            EDIT hoveredID = fe3d:raycast_into_model(raycastID, "", <true>)
+            IF hoveredID NOT "" AND _isInvOpen IS <true>:
+                EDIT _hoveredBuildingID = hoveredID
+                EDIT _hoveredBuildingDistance = distance
+                BREAK
         INCR index 1

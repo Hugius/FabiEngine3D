@@ -1,8 +1,8 @@
-11 17
+2 0
 META script_type_destroy
 META execution_entry
 
-IF _isInMenu IS <false>:
+IF _isAllowedToSave IS <true>:
     /// Clear previous files
     BOOL existing = fe3d:file_is_existing("progress.txt")
     IF existing IS <true>:

@@ -1,4 +1,4 @@
-0 23
+27 36
 META script_type_update
 
 /// Globals
@@ -26,6 +26,7 @@ GLOB DEC _fallingStonesTargetHeight = 0.0
 GLOB DEC _wheatGrowingSpeed = 0.0001
 GLOB DEC _elapsedMS = 0.0
 GLOB INT _survivalTime = 0
+GLOB BOOL _isAllowedToSave = <false>
 
 /// Images
 fe3d:image_place("crosshair", "crosshair.png", 0.0, 0.0, 0.0, 0.0325, 0.05)

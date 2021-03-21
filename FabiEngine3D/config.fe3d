@@ -1,6 +1,6 @@
 window_size_multiplier = 1.0
-window_fullscreen 	   = false
-window_borderless 	   = false
-window_title 		   = Starvation
-game_title 		       = starvation
-game_exported  		   = false
+window_fullscreen      = false
+window_borderless      = false
+window_title           = MyGame
+game_title             = mygame
+game_exported          = false

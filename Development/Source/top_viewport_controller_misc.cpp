@@ -241,7 +241,7 @@ void TopViewportController::_prepareProjectChoosing()
 	}
 	else
 	{
-		_fe3d.logger_throwError("User folder is corrupted!");
+		_fe3d.logger_throwError("Projects folder is missing!");
 	}
 }
 

@@ -66,12 +66,19 @@ void CoreEngine::_setupApplication()
 
 	// Render logo
 	Vec3 keyingColor = Vec3(0.2f);
-	glClearColor(keyingColor.r, keyingColor.g, keyingColor.b, 0.0f);
-	_windowManager.enableColorKeying(keyingColor);
-	_windowManager.setSize(logoResolution);
-	_windowManager.showWindow();
-	_renderManager.renderEngineLogo(logo, nullptr, logoResolution);
-	_windowManager.swapBackBuffer();
+	if (Config::getInst().isGameExported())
+	{
+		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+	}
+	else
+	{
+		glClearColor(keyingColor.r, keyingColor.g, keyingColor.b, 0.0f);
+		_windowManager.enableColorKeying(keyingColor);
+		_windowManager.setSize(logoResolution);
+		_windowManager.showWindow();
+		_renderManager.renderEngineLogo(logo, nullptr, logoResolution);
+		_windowManager.swapBackBuffer();
+	}
 
 	// Create vignettte effect
 	Vec2 pos = _fe3d.misc_convertToNDC(_fe3d.misc_convertFromScreenCoords(Config::getInst().getVpPos()));
@@ -82,22 +89,17 @@ void CoreEngine::_setupApplication()
 	_fe3d.FE3D_CONTROLLER_INIT();
 
 	// Hide logo
-	_windowManager.disableColorKeying(keyingColor);
+	if (!Config::getInst().isGameExported())
+	{
+		_windowManager.disableColorKeying(keyingColor);
+	}
 
 	// Set window properties
 	_windowManager.setSize(Config::getInst().getWindowSize());
-	if (Config::getInst().isWindowFullscreen())
-	{
-		_windowManager.enableFullscreen();
-	}
-	if (!Config::getInst().isWindowBorderless())
-	{
-		_windowManager.showBorder();
-	}
-	if (Config::getInst().isGameExported())
-	{
-		_windowManager.setTitle(Config::getInst().getWindowTitle());
-	}
+	Config::getInst().isWindowFullscreen() ? _windowManager.enableFullscreen() : void(0);
+	!Config::getInst().isWindowBorderless() ? _windowManager.showBorder() : void(0);
+	Config::getInst().isGameExported() ? _windowManager.setTitle(Config::getInst().getWindowTitle()) : void(0);
+	_windowManager.showWindow();
 
 	// Only if in engine preview
 	if (Config::getInst().isGameExported())

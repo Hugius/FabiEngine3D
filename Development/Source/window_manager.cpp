@@ -94,6 +94,11 @@ void WindowManager::setTitle(const string& title)
 void WindowManager::setSize(Ivec2 size)
 {
 	SDL_SetWindowSize(_window, size.x, size.y);
+	center();
+}
+
+void WindowManager::center()
+{
 	SDL_SetWindowPosition(_window, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
 }
 

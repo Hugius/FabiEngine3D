@@ -53,8 +53,10 @@ void RenderManager::renderEngineLogo(shared_ptr<GuiEntity> logo, shared_ptr<Text
 	// Bind
 	_guiEntityRenderer.bind();
 
-	// Render logo + text
+	// Render logo
 	_guiEntityRenderer.render(logo);
+
+	// Render text
 	if (text != nullptr)
 	{
 		_guiEntityRenderer.render(text);

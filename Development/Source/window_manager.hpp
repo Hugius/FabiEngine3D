@@ -13,6 +13,7 @@ public:
 	
 	void setTitle(const std::string & title);
 	void setSize(Ivec2 size);
+	void center();
 	void setOpacity(float value);
 	void enableColorKeying(Vec3 color);
 	void disableColorKeying(Vec3 color);

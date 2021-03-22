@@ -20,7 +20,7 @@ ScriptInterpreter::ScriptInterpreter(FabiEngine3D& fe3d, Script& script, SceneEd
 void ScriptInterpreter::load()
 {
 	// Save current amount of logged messages
-	_lastLoggerMessageCount = _fe3d.logger_getMessageStack().size();
+	_lastLoggerMessageCount = _fe3d.logger_getMessageCount();
 
 	// For every scriptfile
 	for (auto& scriptID : _script.getAllScriptFileIDs())

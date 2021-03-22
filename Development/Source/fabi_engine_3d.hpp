@@ -759,6 +759,10 @@ public:
 	{
 		return Logger::getMessageStack();
 	}
+	inline unsigned int logger_getMessageCount()
+	{
+		return Logger::getMessageCount();
+	}
 	inline void logger_setMessageStack(const vector<string>& customMessages)
 	{
 		return Logger::setMessageStack(customMessages);

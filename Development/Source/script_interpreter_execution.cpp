@@ -52,7 +52,7 @@ void ScriptInterpreter::_executeScript(const string& scriptID, ScriptType script
 	for (unsigned int lineIndex = 0; lineIndex < scriptFile->getLineCount(); lineIndex++)
 	{
 		// Save current amount of logged messages
-		_lastLoggerMessageCount = _fe3d.logger_getMessageStack().size();
+		_lastLoggerMessageCount = _fe3d.logger_getMessageCount();
 
 		// Save index of line of script currently being executed
 		_currentLineIndexStack.back() = lineIndex;

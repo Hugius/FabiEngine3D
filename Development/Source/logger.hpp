@@ -56,6 +56,11 @@ public:
 		return _messageStack;
 	}
 
+	inline static unsigned int getMessageCount()
+	{
+		return _messageCount;
+	}
+
 	inline static void setMessageStack(const vector<string>& customMessages)
 	{
 		_messageStack = customMessages;
@@ -63,13 +68,15 @@ public:
 
 	inline static void clearMessageStack()
 	{
-		return _messageStack.clear();
+		_messageCount = 0;
+		_messageStack.clear();
 	}
 
 private:
 	inline static string _level_string[4] = { "Info", "Error", "Debug", "Warn" };
 
 	inline static std::vector<string> _messageStack;
+	inline static unsigned int _messageCount = 0;
 
 	template<typename T, typename...Rest> 
 	inline static void _printPrefix(MessageType type, T first, Rest&&...rest)
@@ -104,6 +111,7 @@ private:
 		// Add to stack
 		ss << " > ";
 		_messageStack.push_back(ss.str());
+		_messageCount++;
 
 		// Print message body
 		_printMessage(first, rest...);
@@ -126,5 +134,6 @@ private:
 		
 		// Add to stack
 		_messageStack.back() += ss.str();
+		_messageCount++;
 	}
 };

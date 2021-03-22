@@ -345,11 +345,12 @@ void ScriptInterpreter::_throwScriptError(const string& message)
 
 void ScriptInterpreter::_checkEngineWarnings()
 {
-	auto messageStack = _fe3d.logger_getMessageStack();
-
 	// Check if any new messages were logged
-	if (messageStack.size() > _lastLoggerMessageCount)
+	if (_fe3d.logger_getMessageCount() > _lastLoggerMessageCount)
 	{
+		// Retrieve all logged messages
+		auto messageStack = _fe3d.logger_getMessageStack();
+
 		// Loop over all new messages
 		for (unsigned int i = _lastLoggerMessageCount - 1; i < messageStack.size(); i++)
 		{

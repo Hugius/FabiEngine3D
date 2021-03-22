@@ -41,9 +41,7 @@ The engine root directory holds 6 folders and 1 file:
 - `binaries\`: holds the **.exe file** and library DLLs (do **NOT** touch).
 - `engine_assets\`: holds all **engine resources** (do **NOT** touch).
 - `game_assets\`:  holds all your **game resources**.
-- `libraries\`: holds all **libraries** (do **NOT** touch).
 - `projects\`: holds all of your **projects** (do **NOT** touch).
-- `shaders\`: holds all **shader files** (do **NOT** touch).
 - `config.fe3d`: technical configuration for game exporting.
 
 # Development Order

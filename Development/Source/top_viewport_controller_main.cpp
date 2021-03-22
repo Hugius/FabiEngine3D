@@ -85,7 +85,7 @@ void TopViewportController::_updateProjectScreenManagement()
 			}
 			else if (screen->getButton("loadProject")->isHovered())
 			{
-				_prepareProjectChoosing();
+				_prepareProjectLoading();
 				_loadingProject = true;
 			}
 			else if (screen->getButton("saveProject")->isHovered())
@@ -94,7 +94,7 @@ void TopViewportController::_updateProjectScreenManagement()
 			}
 			else if (screen->getButton("deleteProject")->isHovered())
 			{
-				_prepareProjectChoosing();
+				_prepareProjectLoading();
 				_deletingProject = true;
 			}
 			else if (screen->getButton("quitEngine")->isHovered())

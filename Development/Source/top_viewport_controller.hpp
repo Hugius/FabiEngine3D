@@ -41,7 +41,7 @@ private:
 	void _updateProjectCreation();
 	void _updateProjectLoading();
 	void _updateProjectDeletion();
-	void _prepareProjectChoosing();
+	void _prepareProjectLoading();
 	void _saveCurrentProject();
 	void _applyProjectChange();
 

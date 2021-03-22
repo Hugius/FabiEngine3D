@@ -114,6 +114,37 @@ void TopViewportController::_updateProjectCreation()
 	}
 }
 
+void TopViewportController::_prepareProjectLoading()
+{
+	// Get new path
+	string userDirectoryPath = _fe3d.misc_getRootDirectory() + "projects\\";
+
+	// Check if projects directory exists
+	if (_fe3d.misc_isDirectory(userDirectoryPath))
+	{
+		// Get all project names
+		vector<string> projectNames;
+		for (const auto& entry : std::filesystem::directory_iterator(userDirectoryPath))
+		{
+			// Extract project name
+			string projectPath = string(entry.path().u8string());
+			if (_fe3d.misc_isDirectory(projectPath))
+			{
+				string projectName = projectPath;
+				projectName.erase(0, userDirectoryPath.size());
+				projectNames.push_back(projectName);
+			}
+		}
+
+		// Add buttons
+		_gui.getGlobalScreen()->addChoiceForm("projectList", "Select project", Vec2(0.0f), projectNames);
+	}
+	else
+	{
+		_fe3d.logger_throwError("Projects folder is missing!");
+	}
+}
+
 void TopViewportController::_updateProjectLoading()
 {
 	if (_loadingProject)
@@ -216,32 +247,6 @@ void TopViewportController::_updateProjectDeletion()
 			_deletingProject = false;
 			chosenButtonID = "";
 		}
-	}
-}
-
-void TopViewportController::_prepareProjectChoosing()
-{
-	// Get new path
-	string userDirectoryPath = _fe3d.misc_getRootDirectory() + "projects\\";
-
-	// Check if projects directory exists
-	if (_fe3d.misc_isDirectory(userDirectoryPath))
-	{
-		// Get all project names
-		vector<string> projectNames;
-		for (const auto& entry : std::filesystem::directory_iterator(userDirectoryPath))
-		{
-			string projectName = string(entry.path().u8string());
-			projectName.erase(0, userDirectoryPath.size());
-			projectNames.push_back(projectName);
-		}
-
-		// Add buttons
-		_gui.getGlobalScreen()->addChoiceForm("projectList", "Select project", Vec2(0.0f), projectNames);
-	}
-	else
-	{
-		_fe3d.logger_throwError("Projects folder is missing!");
 	}
 }
 

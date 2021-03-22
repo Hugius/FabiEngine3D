@@ -22,10 +22,10 @@ OpenGLShader::OpenGLShader(const string& vertexFileName, const string& fragmentF
 	string rootDir = Tools::getInst().getRootDirectory();
 
 	// Open the shader text files
-	try 
+	try
 	{
-		vShaderFile.open(rootDir + "shaders\\" + _vertexFileName);
-		fShaderFile.open(rootDir + "shaders\\" + _fragmentFileName);
+		vShaderFile.open(rootDir + "engine_assets\\shaders\\" + _vertexFileName);
+		fShaderFile.open(rootDir + "engine_assets\\shaders\\" + _fragmentFileName);
 		std::stringstream vShaderStream, fShaderStream;
 		vShaderStream << vShaderFile.rdbuf();
 		fShaderStream << fShaderFile.rdbuf();
@@ -34,7 +34,7 @@ OpenGLShader::OpenGLShader(const string& vertexFileName, const string& fragmentF
 		vertexCode = vShaderStream.str();
 		fragmentCode = fShaderStream.str();
 	}
-	catch (std::ifstream::failure e) 
+	catch (std::ifstream::failure e)
 	{
 		Logger::throwError("Shader text files could not be opened!");
 	}

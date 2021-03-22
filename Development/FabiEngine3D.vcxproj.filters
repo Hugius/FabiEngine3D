@@ -1414,83 +1414,83 @@
     <None Include="Source\script_value.hpp">
       <Filter>src\Scripting System\Data Structures</Filter>
     </None>
-    <None Include="..\FabiEngine3D\shaders\final_shader.vert">
-      <Filter>src\Rendering System\Shaders\Miscellaneous Shaders</Filter>
-    </None>
-    <None Include="..\FabiEngine3D\shaders\post_shader.frag">
-      <Filter>src\Rendering System\Shaders\Miscellaneous Shaders</Filter>
-    </None>
-    <None Include="..\FabiEngine3D\shaders\post_shader.vert">
-      <Filter>src\Rendering System\Shaders\Miscellaneous Shaders</Filter>
-    </None>
-    <None Include="..\FabiEngine3D\shaders\shadow_shader.frag">
-      <Filter>src\Rendering System\Shaders\Miscellaneous Shaders</Filter>
-    </None>
-    <None Include="..\FabiEngine3D\shaders\shadow_shader.vert">
-      <Filter>src\Rendering System\Shaders\Miscellaneous Shaders</Filter>
-    </None>
-    <None Include="..\FabiEngine3D\shaders\bloom_hdr_shader.frag">
-      <Filter>src\Rendering System\Shaders\Miscellaneous Shaders</Filter>
-    </None>
-    <None Include="..\FabiEngine3D\shaders\bloom_hdr_shader.vert">
-      <Filter>src\Rendering System\Shaders\Miscellaneous Shaders</Filter>
-    </None>
-    <None Include="..\FabiEngine3D\shaders\blur_shader.frag">
-      <Filter>src\Rendering System\Shaders\Miscellaneous Shaders</Filter>
-    </None>
-    <None Include="..\FabiEngine3D\shaders\blur_shader.vert">
-      <Filter>src\Rendering System\Shaders\Miscellaneous Shaders</Filter>
-    </None>
-    <None Include="..\FabiEngine3D\shaders\depth_shader.frag">
-      <Filter>src\Rendering System\Shaders\Miscellaneous Shaders</Filter>
-    </None>
-    <None Include="..\FabiEngine3D\shaders\depth_shader.vert">
-      <Filter>src\Rendering System\Shaders\Miscellaneous Shaders</Filter>
-    </None>
-    <None Include="..\FabiEngine3D\shaders\final_shader.frag">
-      <Filter>src\Rendering System\Shaders\Miscellaneous Shaders</Filter>
-    </None>
-    <None Include="..\FabiEngine3D\shaders\sky_entity_shader.frag">
+    <None Include="..\FabiEngine3D\engine_assets\shaders\sky_entity_shader.vert">
       <Filter>src\Rendering System\Shaders\Entity Shaders\Environment</Filter>
     </None>
-    <None Include="..\FabiEngine3D\shaders\sky_entity_shader.vert">
+    <None Include="..\FabiEngine3D\engine_assets\shaders\terrain_entity_shader.frag">
       <Filter>src\Rendering System\Shaders\Entity Shaders\Environment</Filter>
     </None>
-    <None Include="..\FabiEngine3D\shaders\terrain_entity_shader.frag">
+    <None Include="..\FabiEngine3D\engine_assets\shaders\terrain_entity_shader.vert">
       <Filter>src\Rendering System\Shaders\Entity Shaders\Environment</Filter>
     </None>
-    <None Include="..\FabiEngine3D\shaders\terrain_entity_shader.vert">
+    <None Include="..\FabiEngine3D\engine_assets\shaders\water_entity_shader.frag">
       <Filter>src\Rendering System\Shaders\Entity Shaders\Environment</Filter>
     </None>
-    <None Include="..\FabiEngine3D\shaders\water_entity_shader.frag">
+    <None Include="..\FabiEngine3D\engine_assets\shaders\water_entity_shader.vert">
       <Filter>src\Rendering System\Shaders\Entity Shaders\Environment</Filter>
     </None>
-    <None Include="..\FabiEngine3D\shaders\water_entity_shader.vert">
+    <None Include="..\FabiEngine3D\engine_assets\shaders\sky_entity_shader.frag">
       <Filter>src\Rendering System\Shaders\Entity Shaders\Environment</Filter>
     </None>
-    <None Include="..\FabiEngine3D\shaders\aabb_entity_shader.frag">
+    <None Include="..\FabiEngine3D\engine_assets\shaders\aabb_entity_shader.vert">
       <Filter>src\Rendering System\Shaders\Entity Shaders\Miscellaneous</Filter>
     </None>
-    <None Include="..\FabiEngine3D\shaders\aabb_entity_shader.vert">
+    <None Include="..\FabiEngine3D\engine_assets\shaders\billboard_entity_shader.frag">
       <Filter>src\Rendering System\Shaders\Entity Shaders\Miscellaneous</Filter>
     </None>
-    <None Include="..\FabiEngine3D\shaders\billboard_entity_shader.frag">
+    <None Include="..\FabiEngine3D\engine_assets\shaders\billboard_entity_shader.vert">
       <Filter>src\Rendering System\Shaders\Entity Shaders\Miscellaneous</Filter>
     </None>
-    <None Include="..\FabiEngine3D\shaders\billboard_entity_shader.vert">
+    <None Include="..\FabiEngine3D\engine_assets\shaders\game_entity_shader.frag">
       <Filter>src\Rendering System\Shaders\Entity Shaders\Miscellaneous</Filter>
     </None>
-    <None Include="..\FabiEngine3D\shaders\game_entity_shader.frag">
+    <None Include="..\FabiEngine3D\engine_assets\shaders\game_entity_shader.vert">
       <Filter>src\Rendering System\Shaders\Entity Shaders\Miscellaneous</Filter>
     </None>
-    <None Include="..\FabiEngine3D\shaders\game_entity_shader.vert">
+    <None Include="..\FabiEngine3D\engine_assets\shaders\gui_entity_shader.frag">
       <Filter>src\Rendering System\Shaders\Entity Shaders\Miscellaneous</Filter>
     </None>
-    <None Include="..\FabiEngine3D\shaders\gui_entity_shader.frag">
+    <None Include="..\FabiEngine3D\engine_assets\shaders\gui_entity_shader.vert">
       <Filter>src\Rendering System\Shaders\Entity Shaders\Miscellaneous</Filter>
     </None>
-    <None Include="..\FabiEngine3D\shaders\gui_entity_shader.vert">
+    <None Include="..\FabiEngine3D\engine_assets\shaders\aabb_entity_shader.frag">
       <Filter>src\Rendering System\Shaders\Entity Shaders\Miscellaneous</Filter>
+    </None>
+    <None Include="..\FabiEngine3D\engine_assets\shaders\depth_shader.frag">
+      <Filter>src\Rendering System\Shaders\Miscellaneous Shaders</Filter>
+    </None>
+    <None Include="..\FabiEngine3D\engine_assets\shaders\depth_shader.vert">
+      <Filter>src\Rendering System\Shaders\Miscellaneous Shaders</Filter>
+    </None>
+    <None Include="..\FabiEngine3D\engine_assets\shaders\final_shader.frag">
+      <Filter>src\Rendering System\Shaders\Miscellaneous Shaders</Filter>
+    </None>
+    <None Include="..\FabiEngine3D\engine_assets\shaders\final_shader.vert">
+      <Filter>src\Rendering System\Shaders\Miscellaneous Shaders</Filter>
+    </None>
+    <None Include="..\FabiEngine3D\engine_assets\shaders\post_shader.frag">
+      <Filter>src\Rendering System\Shaders\Miscellaneous Shaders</Filter>
+    </None>
+    <None Include="..\FabiEngine3D\engine_assets\shaders\post_shader.vert">
+      <Filter>src\Rendering System\Shaders\Miscellaneous Shaders</Filter>
+    </None>
+    <None Include="..\FabiEngine3D\engine_assets\shaders\shadow_shader.frag">
+      <Filter>src\Rendering System\Shaders\Miscellaneous Shaders</Filter>
+    </None>
+    <None Include="..\FabiEngine3D\engine_assets\shaders\shadow_shader.vert">
+      <Filter>src\Rendering System\Shaders\Miscellaneous Shaders</Filter>
+    </None>
+    <None Include="..\FabiEngine3D\engine_assets\shaders\bloom_hdr_shader.frag">
+      <Filter>src\Rendering System\Shaders\Miscellaneous Shaders</Filter>
+    </None>
+    <None Include="..\FabiEngine3D\engine_assets\shaders\bloom_hdr_shader.vert">
+      <Filter>src\Rendering System\Shaders\Miscellaneous Shaders</Filter>
+    </None>
+    <None Include="..\FabiEngine3D\engine_assets\shaders\blur_shader.frag">
+      <Filter>src\Rendering System\Shaders\Miscellaneous Shaders</Filter>
+    </None>
+    <None Include="..\FabiEngine3D\engine_assets\shaders\blur_shader.vert">
+      <Filter>src\Rendering System\Shaders\Miscellaneous Shaders</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

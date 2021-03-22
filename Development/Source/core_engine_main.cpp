@@ -80,11 +80,6 @@ void CoreEngine::_setupApplication()
 		_windowManager.swapBackBuffer();
 	}
 
-	// Create vignettte effect
-	Vec2 pos = _fe3d.misc_convertToNDC(_fe3d.misc_convertFromScreenCoords(Config::getInst().getVpPos()));
-	Vec2 size = ((Vec2(Config::getInst().getVpSize()) / Vec2(Config::getInst().getWindowSize())) * 2.0f) + Vec2(0.0f, 0.005f);
-	_fe3d.guiEntity_add("@vignette", "engine_assets\\textures\\vignette.png", pos, 0.0f, size, false);
-
 	// Initialize engine controller
 	_fe3d.FE3D_CONTROLLER_INIT();
 

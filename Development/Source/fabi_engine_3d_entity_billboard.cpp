@@ -228,32 +228,6 @@ void FabiEngine3D::billboardEntity_setLightness(const string& ID, float lightnes
 	_core->_billboardEntityManager.getEntity(ID)->setLightness(lightness);
 }
 
-void FabiEngine3D::billboardEntity_setInstanced(const string& ID, bool instanced, vector<Vec3> offsets)
-{
-	if (instanced) // Add instancing
-	{
-		for (auto& buffer : _core->_billboardEntityManager.getEntity(ID)->getOglBuffers())
-		{
-			if (buffer->isInstanced())
-			{
-				buffer->removeInstancing();
-			}
-
-			buffer->addInstancing(offsets);
-		}
-	}
-	else // Remove instancing
-	{
-		for (auto& buffer : _core->_billboardEntityManager.getEntity(ID)->getOglBuffers())
-		{
-			if (buffer->isInstanced())
-			{
-				buffer->removeInstancing();
-			}
-		}
-	}
-}
-
 bool FabiEngine3D::billboardEntity_isFacingCameraX(const string& ID)
 {
 	return _core->_billboardEntityManager.getEntity(ID)->isCameraFacingX();

@@ -263,7 +263,7 @@ void SceneEditor::loadSceneFromFile(bool isCustomScene, const string& fileName)
 				string meshPath, diffuseMapPath, lightMapPath, reflectionMapPath, normalMapPath, lodEntityID, animationID;
 				Vec3 position, rotation, size, color;
 				int reflectionType;
-				float uvRepeat, specularFactor, specularIntensity, lightness;
+				float uvRepeat, specularFactor, specularIntensity, lightness, minHeight, maxHeight, alpha;
 				bool isFaceculled, isShadowed, isTransparent, isSpecular, isFrozen, isInstanced;
 				vector<Vec3> instancedOffsets;
 				vector<string> aabbNames;
@@ -301,7 +301,10 @@ void SceneEditor::loadSceneFromFile(bool isCustomScene, const string& fileName)
 					uvRepeat >>
 					lodEntityID >>
 					isInstanced >>
-					animationID;
+					animationID >>
+					minHeight >> 
+					maxHeight >>
+					alpha;
 
 				// Extract instanced offset data from file
 				while (isInstanced)
@@ -364,7 +367,7 @@ void SceneEditor::loadSceneFromFile(bool isCustomScene, const string& fileName)
 				_placeModel(modelID, position, rotation, size, meshPath, diffuseMapPath, lightMapPath,
 					reflectionMapPath, normalMapPath, isFrozen, isFaceculled, isShadowed, isTransparent, isSpecular, reflectionType, specularFactor,
 					specularIntensity, lightness, color, uvRepeat, lodEntityID,
-					isInstanced, instancedOffsets, aabbNames, aabbPositions, aabbSizes, animationID);
+					isInstanced, instancedOffsets, aabbNames, aabbPositions, aabbSizes, animationID, minHeight, maxHeight, alpha);
 
 				// Hide LOD entity (running script)
 				if (makeInvisible)
@@ -378,7 +381,7 @@ void SceneEditor::loadSceneFromFile(bool isCustomScene, const string& fileName)
 				string billboardID, diffusePath, fontPath, textContent;
 				Vec3 position, rotation, color;
 				Vec2 size;
-				float lightness;
+				float lightness, minHeight, maxHeight;
 				bool facingX, facingY, isTransparent, isAnimated;
 				int animationRows, animationColumns, animationFramestep;
 
@@ -406,7 +409,9 @@ void SceneEditor::loadSceneFromFile(bool isCustomScene, const string& fileName)
 					animationRows >>
 					animationColumns >>
 					animationFramestep >>
-					lightness;
+					lightness >>
+					minHeight >>
+					maxHeight;
 
 				// Perform empty string & space conversions
 				diffusePath = (diffusePath == "?") ? "" : diffusePath;
@@ -418,7 +423,7 @@ void SceneEditor::loadSceneFromFile(bool isCustomScene, const string& fileName)
 
 				// Add the billboard
 				_placeBillboard(billboardID, diffusePath, fontPath, textContent, position, rotation, size, color, facingX, facingY, isTransparent, isAnimated,
-					animationRows, animationColumns, animationFramestep, lightness);
+					animationRows, animationColumns, animationFramestep, lightness, minHeight, maxHeight);
 			}
 			else if (entityType == "AUDIO")
 			{

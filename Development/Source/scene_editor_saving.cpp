@@ -287,6 +287,9 @@ void SceneEditor::saveSceneToFile(bool isCustomScene)
 				auto instancedOffsets = _fe3d.gameEntity_getInstancedOffsets(modelID);
 				auto animationID = _animationEditor.getPlayingAnimationNames(modelID).empty() ? "" :
 					_animationEditor.getPlayingAnimationNames(modelID).front();
+				auto minHeight = _fe3d.gameEntity_getMinHeight(modelID);
+				auto maxHeight = _fe3d.gameEntity_getMaxHeight(modelID);
+				auto alpha = _fe3d.gameEntity_getAlpha(modelID);
 
 				// Reflection type
 				int reflectionType;
@@ -362,7 +365,10 @@ void SceneEditor::saveSceneToFile(bool isCustomScene)
 					uvRepeat << " " <<
 					lodID << " " <<
 					isInstanced << " " <<
-					animationID;
+					animationID << " " <<
+					minHeight << " " <<
+					maxHeight << " " <<
+					alpha;
 
 				// Write instanced offset data
 				if (isInstanced)
@@ -434,6 +440,8 @@ void SceneEditor::saveSceneToFile(bool isCustomScene)
 				auto animationColumns = _fe3d.billboardEntity_getAnimationColumns(billboardID);
 				auto animationFramestep = _fe3d.billboardEntity_getAnimationFramestep(billboardID);
 				auto lightness = isCustomScene ? _fe3d.billboardEntity_getLightness(billboardID) : _initialBillboardLightness[billboardID];
+				auto minHeight = _fe3d.billboardEntity_getMinHeight(billboardID);
+				auto maxHeight = _fe3d.billboardEntity_getMaxHeight(billboardID);
 
 				// Perform empty string & space conversions
 				diffusePath = (diffusePath == "") ? "?" : diffusePath;
@@ -468,7 +476,9 @@ void SceneEditor::saveSceneToFile(bool isCustomScene)
 					animationRows << " " <<
 					animationColumns << " " <<
 					animationFramestep << " " <<
-					lightness << std::endl;
+					lightness << "" <<
+					minHeight << " " <<
+					maxHeight << std::endl;
 			}
 		}
 

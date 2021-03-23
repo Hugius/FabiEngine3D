@@ -118,11 +118,12 @@ private:
 		const string& meshPath, const string& diffuseMapPath, const string& lightMapPath, const string& reflectionMapPath, const string& normalMapPath, 
 		bool isFrozen, bool isFaceCulled, bool isShadowed, bool isTransparent, bool isSpecular, int reflectionType, float specularFactor,
 		float specularIntensity, float lightness, Vec3 color, float uvRepeat, const string& lodEntityID, bool isInstanced,
-		vector<Vec3> instancedOffsets, vector<string> aabbNames, vector<Vec3> aabbPositions, vector<Vec3> aabbSizes, string animationID);
+		vector<Vec3> instancedOffsets, vector<string> aabbNames, vector<Vec3> aabbPositions, vector<Vec3> aabbSizes, 
+		string animationID, float minHeight, float maxHeight, float alpha);
 	void _placeBillboard(const string& billboardID,
 		const string& diffusePath, const string& fontPath, const string& textContent,
 		Vec3 position, Vec3 rotation, Vec2 size, Vec3 color, bool facingX, bool facingY, bool isTransparent,
-		bool isAnimated, int animationRows, int animationColumns, int animationFramestep, float lightness);
+		bool isAnimated, int animationRows, int animationColumns, int animationFramestep, float lightness, float minHeight, float maxHeight);
 
 	// Miscellaneous
 	vector<string> _loadSceneNames();

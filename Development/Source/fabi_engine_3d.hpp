@@ -353,7 +353,6 @@ public:
 	void billboardEntity_setMinHeight(const string& ID, float height);
 	void billboardEntity_setMaxHeight(const string& ID, float height);
 	void billboardEntity_setLightness(const string& ID, float lightness);
-	void billboardEntity_setInstanced(const string& ID, bool instanced, vector<Vec3> offsets);
 
 	// Billboard entity interface (core) - getters
 	float billboardEntity_getLightness(const string& ID);

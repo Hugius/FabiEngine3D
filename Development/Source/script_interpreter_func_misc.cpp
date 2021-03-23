@@ -133,15 +133,16 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 					if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 					{
 						// Validate index
-						if (arguments[1].getInteger() < static_cast<int>(arguments[0].getString().size()) && arguments[1].getInteger() >= 0)
+						if ((arguments[1].getInteger() < 0) ||
+							(arguments[1].getInteger() > static_cast<int>(arguments[0].getString().size())) ||
+							(arguments[2].getInteger() < 0))
 						{
-							auto result = arguments[0].getString().substr(arguments[1].getInteger(), arguments[2].getInteger());
-							returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result));
+							_throwScriptError("incorrect string part index/indices!");
+							return returnValues;
 						}
-						else
-						{
-							returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, ""));
-						}
+
+						auto result = arguments[0].getString().substr(arguments[1].getInteger(), arguments[2].getInteger());
+						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result));
 					}
 				}
 				else if (functionName == "misc:get_unique_integer")

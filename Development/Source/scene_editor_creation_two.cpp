@@ -145,7 +145,8 @@ void SceneEditor::_placeModel(const string& modelID, Vec3 position, Vec3 rotatio
 	const string& meshPath, const string& diffuseMapPath, const string& lightMapPath, const string& reflectionMapPath, const string& normalMapPath, 
 	bool isFrozen, bool isFaceCulled, bool isShadowed, bool isTransparent, bool isSpecular, int reflectionType, float specularFactor,
 	float specularIntensity, float lightness, Vec3 color, float uvRepeat, const string& lodEntityID, bool isInstanced,
-	vector<Vec3> instancedOffsets, vector<string> aabbNames, vector<Vec3> aabbPositions, vector<Vec3> aabbSizes, string animationID)
+	vector<Vec3> instancedOffsets, vector<string> aabbNames, vector<Vec3> aabbPositions, vector<Vec3> aabbSizes, 
+	string animationID, float minHeight, float maxHeight, float alpha)
 {
 	// Add GAME entity
 	_fe3d.gameEntity_add(modelID, meshPath, position, rotation, size);
@@ -170,6 +171,9 @@ void SceneEditor::_placeModel(const string& modelID, Vec3 position, Vec3 rotatio
 	_fe3d.gameEntity_setUvRepeat(modelID, uvRepeat);
 	_fe3d.gameEntity_setLevelOfDetailEntity(modelID, lodEntityID);
 	_fe3d.gameEntity_setInstanced(modelID, isInstanced, instancedOffsets);
+	_fe3d.gameEntity_setMinHeight(modelID, minHeight);
+	_fe3d.gameEntity_setMaxHeight(modelID, maxHeight);
+	_fe3d.gameEntity_setAlpha(modelID, alpha);
 
 	// Reflection type
 	if (reflectionType == 1)
@@ -277,7 +281,7 @@ void SceneEditor::placeBillboard(const string& newID, const string& previewID, V
 void SceneEditor::_placeBillboard(const string& billboardID,
 	const string& diffusePath, const string& fontPath, const string& textContent,
 	Vec3 position, Vec3 rotation, Vec2 size, Vec3 color, bool facingX, bool facingY, bool isTransparent,
-	bool isAnimated, int animationRows, int animationColumns, int animationFramestep, float lightness)
+	bool isAnimated, int animationRows, int animationColumns, int animationFramestep, float lightness, float minHeight, float maxHeight)
 {
 	if (diffusePath != "") // Textured billboard
 	{
@@ -307,6 +311,8 @@ void SceneEditor::_placeBillboard(const string& billboardID,
 
 	// Miscellaneous
 	_fe3d.billboardEntity_setLightness(billboardID, lightness);
+	_fe3d.billboardEntity_setMinHeight(billboardID, minHeight);
+	_fe3d.billboardEntity_setMaxHeight(billboardID, maxHeight);
 	_loadedBillboardIDs.push_back(billboardID);
 
 	// Save original lightness

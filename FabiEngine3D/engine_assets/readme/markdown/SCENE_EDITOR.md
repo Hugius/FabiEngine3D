@@ -30,7 +30,6 @@
 - Every placed billboard has a **position** (**Range**: -inf to inf) that can be **edited**.
 - Every placed billboard has a **rotation** (**Range**: -360 to 360) that can be **edited**.
 - Every placed billboard has a **size** (**Range**: 0 to inf) that can be **edited**.
-- Billboards will **NOT** be affected by scene lighting.
 ### Audio
 - You can **place and delete** 3D audio casters in the scene.
 - If a terrain is selected, the audio caster will be placed **on top** of the terrain.
@@ -47,6 +46,7 @@
 - If no terrain is selected, the point light will be placed at **XYZ(0,0,0)**.
 - Every placed point light has a **position** (**Range**: -inf to inf) that can be **edited**.
 - Every placed point light has a **maximum distance** (**Range**: 0 to inf) that can be **edited**.
+- Every placed point light has an **intensity** (**Range**: 0 to inf) that can be **edited**.
 - Every placed point light has a **color** (**Range**: 0 to 255) that can be **edited**.
 ### Settings
 - You can change the editor **camera** movement speed (**Range**: 0 to inf).

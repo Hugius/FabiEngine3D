@@ -39,3 +39,4 @@
 - Make use of **LOD models** to improve your performance on **high-poly models**.
 - **Lower the graphics quality** in the project settings to improve your **graphics performance**.
 - The water refraction effect has a **huge** impact on performance, because all models & billboards have to be rendered **twice**.
+- The in-engine console window **can** have impact on performance during in-engine gameplay runtime, because of scripting error checks. The higher the amount of console messages, the bigger the performance impact. To resolve this, simply clear the console messages.

@@ -77,7 +77,7 @@ void SceneEditor::_updateSkyMenu()
 				if (selectedButtonID != "")
 				{
 					_currentSkyID = selectedButtonID;
-					copyPreviewSky(_currentSkyID, "@" + selectedButtonID);
+					_copyPreviewSky(_currentSkyID, "@" + selectedButtonID);
 					_gui.getGlobalScreen()->removeChoiceForm("skyList");
 				}
 				else if (_gui.getGlobalScreen()->isChoiceFormCancelled("skyList"))
@@ -140,7 +140,7 @@ void SceneEditor::_updateTerrainMenu()
 				if (selectedButtonID != "")
 				{
 					_currentTerrainID = selectedButtonID;
-					copyPreviewTerrain(_currentTerrainID, "@" + selectedButtonID);
+					_copyPreviewTerrain(_currentTerrainID, "@" + selectedButtonID);
 					_gui.getGlobalScreen()->removeChoiceForm("terrainList");
 				}
 				else if (_gui.getGlobalScreen()->isChoiceFormCancelled("terrainList"))
@@ -213,7 +213,7 @@ void SceneEditor::_updateWaterMenu()
 				if (selectedButtonID != "")
 				{
 					_currentWaterID = selectedButtonID;
-					copyPreviewWater(_currentWaterID, "@" + selectedButtonID);
+					_copyPreviewWater(_currentWaterID, "@" + selectedButtonID);
 					_gui.getGlobalScreen()->removeChoiceForm("waterList");
 				}
 				else if (_gui.getGlobalScreen()->isChoiceFormCancelled("waterList"))

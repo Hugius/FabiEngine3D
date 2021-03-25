@@ -15,7 +15,7 @@ bool ScriptInterpreter::_validateFe3dWaterEntity()
 bool ScriptInterpreter::_executeFe3dWaterEntityFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine type of function
-	if (functionName == "fe3d:water_set_speed") // Set waterEntity speed
+	if (functionName == "fe3d:water_set_speed")
 	{
 		auto types = { ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
@@ -31,7 +31,7 @@ bool ScriptInterpreter::_executeFe3dWaterEntityFunction(const string& functionNa
 			}
 		}
 	}
-	else if (functionName == "fe3d:water_get_speed_x") // Get waterEntity speed X
+	else if (functionName == "fe3d:water_get_speed_x")
 	{
 		// Validate arguments
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
@@ -44,7 +44,7 @@ bool ScriptInterpreter::_executeFe3dWaterEntityFunction(const string& functionNa
 			}
 		}
 	}
-	else if (functionName == "fe3d:water_get_speed_z") // Get waterEntity speed Z
+	else if (functionName == "fe3d:water_get_speed_z")
 	{
 		// Validate arguments
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
@@ -57,7 +57,7 @@ bool ScriptInterpreter::_executeFe3dWaterEntityFunction(const string& functionNa
 			}
 		}
 	}
-	else if (functionName == "fe3d:water_get_height") // Get waterEntity height
+	else if (functionName == "fe3d:water_get_height")
 	{
 		// Validate arguments
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
@@ -70,7 +70,7 @@ bool ScriptInterpreter::_executeFe3dWaterEntityFunction(const string& functionNa
 			}
 		}
 	}
-	else if (functionName == "fe3d:water_set_color") // Set waterEntity color
+	else if (functionName == "fe3d:water_set_color")
 	{
 		auto types = { ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
@@ -88,7 +88,7 @@ bool ScriptInterpreter::_executeFe3dWaterEntityFunction(const string& functionNa
 			}
 		}
 	}
-	else if (functionName == "fe3d:water_get_color") // Get waterEntity color
+	else if (functionName == "fe3d:water_get_color")
 	{
 		// Validate arguments
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
@@ -98,6 +98,34 @@ bool ScriptInterpreter::_executeFe3dWaterEntityFunction(const string& functionNa
 			{
 				auto result = _fe3d.waterEntity_getColor(_fe3d.waterEntity_getSelectedID());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));
+			}
+		}
+	}
+	else if (functionName == "fe3d:water_set_transparency")
+	{
+		auto types = { ScriptValueType::DECIMAL };
+
+		// Validate arguments
+		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
+		{
+			// Validate water existence
+			if (_validateFe3dWaterEntity())
+			{
+				_fe3d.waterEntity_setTransparency(_fe3d.waterEntity_getSelectedID(), arguments[0].getDecimal());
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+			}
+		}
+	}
+	else if (functionName == "fe3d:water_get_transparency")
+	{
+		// Validate arguments
+		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			// Validate water existence
+			if (_validateFe3dWaterEntity())
+			{
+				auto result = _fe3d.waterEntity_getTransparency(_fe3d.waterEntity_getSelectedID());
+				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
 			}
 		}
 	}

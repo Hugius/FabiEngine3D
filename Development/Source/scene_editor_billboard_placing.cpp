@@ -47,7 +47,7 @@ void SceneEditor::_updateBillboardPlacing()
 					}
 
 					// Add billboard
-					copyPreviewBillboard(newID, _currentPreviewBillboardName, newPosition);
+					_copyPreviewBillboard(newID, _currentPreviewBillboardName, newPosition);
 
 					// Disable placement mode if no terrain availible to choose position from
 					if (_fe3d.terrainEntity_getSelectedID() == "")

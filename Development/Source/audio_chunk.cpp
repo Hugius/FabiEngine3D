@@ -15,7 +15,7 @@ AudioChunk::AudioChunk(const string& ID, const string& filePath, Mix_Chunk* chun
 	_position(position),
 	_maxVolume(maxVolume),
 	_maxDistance(maxDistance),
-	_hasPosition(true)
+	_is3D(true)
 {
 
 }
@@ -38,7 +38,6 @@ Mix_Chunk* AudioChunk::getMixChunk() const
 void AudioChunk::setPosition(Vec3 value)
 {
 	_position = value;
-	_hasPosition = true;
 }
 
 void AudioChunk::translate(Vec3 value)
@@ -73,5 +72,5 @@ float AudioChunk::getMaxVolume() const
 
 bool AudioChunk::is3D() const
 {
-	return _hasPosition;
+	return _is3D;
 }

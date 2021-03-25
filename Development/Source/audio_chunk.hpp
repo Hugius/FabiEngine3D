@@ -41,5 +41,5 @@ private:
 	float _maxDistance = 0.0f;
 	float _maxVolume = 1.0f;
 
-	bool _hasPosition = false;
+	bool _is3D = false;
 };

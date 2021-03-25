@@ -193,7 +193,7 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 	{
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			//_sceneEditor.saveEditorSceneToFile(true);
+			_sceneEditor.saveCustomSceneToFile();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
@@ -204,7 +204,7 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
 			_sceneEditor.clearCurrentScene();
-			//_sceneEditor.loadEditorSceneFromFile(true, arguments[0].getString());
+			_sceneEditor.loadCustomSceneFromFile(arguments[0].getString());
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}

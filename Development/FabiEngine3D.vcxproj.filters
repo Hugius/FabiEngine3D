@@ -388,10 +388,7 @@
     <ClCompile Include="Source\environment_editor_updates_terrain_edit_two.cpp">
       <Filter>src\Editor System\Environment Editor\Updates\Terrain</Filter>
     </ClCompile>
-    <ClCompile Include="Source\scene_editor_creation_place.cpp">
-      <Filter>src\Editor System\Scene Editor\Miscellaneous</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\scene_editor_creation_copy.cpp">
+    <ClCompile Include="Source\scene_editor_creation.cpp">
       <Filter>src\Editor System\Scene Editor\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="Source\scene_editor_misc_one.cpp">

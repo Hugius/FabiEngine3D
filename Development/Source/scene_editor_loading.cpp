@@ -24,7 +24,7 @@ void SceneEditor::loadEditorSceneFromFile(const string& fileName)
 	string fullFilePath = string(directoryPath + "editor\\" + fileName + ".fe3d");
 	if (_fe3d.misc_isFileExisting(fullFilePath))
 	{
-		// Set miscellaneous stuff
+		// Clear last scene data
 		_loadedSceneID = fileName;
 		_loadedSkyID = "";
 		_loadedTerrainID = "";
@@ -62,24 +62,27 @@ void SceneEditor::loadEditorSceneFromFile(const string& fileName)
 		// Read model data
 		while (std::getline(file, line))
 		{
-			// Placeholder variables
-			string entityType;
-
 			// For file extraction
 			std::istringstream iss(line);
 
 			// Extract type from file
-			iss >> entityType;
+			string entityType;
+			iss >>
+				entityType;
 
 			// Load entity according to type
 			if (entityType == "SKY")
 			{
+				// Data placeholders
+				string skyID, previewID;
+
 				// Extract data
-				string skyID;
-				iss >> skyID;
+				iss >>
+					skyID >>
+					previewID;
 
 				// Add sky
-				copyPreviewSky(skyID, "@" + skyID);
+				_copyPreviewSky(skyID, previewID);
 
 				// Miscellaneous
 				if (_isEditorLoaded)
@@ -89,12 +92,16 @@ void SceneEditor::loadEditorSceneFromFile(const string& fileName)
 			}
 			else if (entityType == "TERRAIN")
 			{
+				// Data placeholders
+				string terrainID, previewID;
+
 				// Extract data
-				string terrainID;
-				iss >> terrainID;
+				iss >>
+					terrainID >>
+					previewID;
 
 				// Add terrain
-				copyPreviewTerrain(terrainID, "@" + terrainID);
+				_copyPreviewTerrain(terrainID, previewID);
 
 				// Miscellaneous
 				if (_isEditorLoaded)
@@ -104,12 +111,16 @@ void SceneEditor::loadEditorSceneFromFile(const string& fileName)
 			}
 			else if (entityType == "WATER")
 			{
+				// Data placeholders
+				string waterID, previewID;
+
 				// Extract data
-				string waterID;
-				iss >> waterID;
+				iss >>
+					waterID >>
+					previewID;
 
 				// Add water
-				copyPreviewWater(waterID, "@" + waterID);
+				_copyPreviewWater(waterID, previewID);
 
 				// Miscellaneous
 				if (_isEditorLoaded)
@@ -125,7 +136,8 @@ void SceneEditor::loadEditorSceneFromFile(const string& fileName)
 				bool isFrozen;
 
 				// Extract ID
-				iss >> modelID;
+				iss >>
+					modelID;
 
 				// If LOD entity, only load if executing game
 				bool makeInvisible = false;
@@ -142,7 +154,7 @@ void SceneEditor::loadEditorSceneFromFile(const string& fileName)
 					}
 				}
 
-				// Extract data
+				// Extract main data
 				iss >>
 					previewID >>
 					position.x >>
@@ -162,17 +174,54 @@ void SceneEditor::loadEditorSceneFromFile(const string& fileName)
 				std::replace(animationID.begin(), animationID.end(), '?', ' ');
 
 				// Add model
-				copyPreviewModel(modelID, previewID, position);
-
-				// Setting properties
+				_copyPreviewModel(modelID, previewID, position);
 				_fe3d.modelEntity_setRotation(modelID, rotation);
 				_fe3d.modelEntity_setSize(modelID, size);
 				_fe3d.modelEntity_setStaticToCamera(modelID, isFrozen);
 				
+				// Save original transformation
+				if (_isEditorLoaded)
+				{
+					_initialModelPosition[modelID] = position;
+					_initialModelRotation[modelID] = rotation;
+					_initialModelSize[modelID]	   = size;
+				}
+
 				// Play animation
 				if (!animationID.empty())
 				{
 					_animationEditor.startAnimation(animationID, modelID, -1);
+				}
+
+				// Extract instanced offsets
+				if (_fe3d.modelEntity_isInstanced(modelID))
+				{
+					vector<Vec3> instancedOffsets;
+					while (true)
+					{
+						// Check if file has offset data left
+						string nextElement;
+						iss >>
+							nextElement;
+
+						// Check if item is a number
+						if (nextElement == "") // End of line, because instanced model cannot have AABB
+						{
+							break;
+						}
+						else // Add offset
+						{
+							Vec3 offset;
+							offset.x = stof(nextElement);
+							iss >>
+								offset.y >>
+								offset.z;
+							instancedOffsets.push_back(offset);
+						}
+					}
+
+					// Add offsets
+					_fe3d.modelEntity_setInstanced(modelID, true, instancedOffsets);
 				}
 
 				// Hide model if LOD (and executing game)
@@ -202,9 +251,7 @@ void SceneEditor::loadEditorSceneFromFile(const string& fileName)
 					size.y;
 
 				// Add billboard
-				copyPreviewBillboard(billboardID, previewID, position);
-
-				// Setting properties
+				_copyPreviewBillboard(billboardID, previewID, position);
 				_fe3d.billboardEntity_setRotation(billboardID, rotation);
 				_fe3d.billboardEntity_setSize(billboardID, size);
 			}
@@ -225,8 +272,18 @@ void SceneEditor::loadEditorSceneFromFile(const string& fileName)
 					maxVolume >>
 					maxDistance;
 
+				// Add speaker if in editor
+				if (_isEditorLoaded)
+				{
+					_fe3d.modelEntity_add("@speaker_" + audioID, "engine_assets\\meshes\\speaker.obj", position, Vec3(0.0f), DEFAULT_SPEAKER_SIZE);
+					_fe3d.modelEntity_setShadowed("@speaker_" + audioID, false);
+					_fe3d.aabbEntity_bindToModelEntity("@speaker_" + audioID, Vec3(0.0f), DEFAULT_SPEAKER_AABB_SIZE, true, true);
+				}
+
 				// Add audio
-				copyPreviewAudio(audioID, previewID, position);
+				_fe3d.audioEntity_add3D(audioID, _fe3d.audioEntity_getFilePath(previewID), position, maxVolume, maxDistance);
+				_fe3d.audioEntity_play(audioID, -1, 0.0f);
+				_loadedAudioIDs.insert(make_pair(audioID, previewID));
 			}
 			else if (entityType == "AMBIENT_LIGHT")
 			{
@@ -235,7 +292,11 @@ void SceneEditor::loadEditorSceneFromFile(const string& fileName)
 				float ambientLightingIntensity;
 
 				// Extract
-				iss >> ambientLightingColor.r >> ambientLightingColor.g >> ambientLightingColor.b >> ambientLightingIntensity;
+				iss >>
+					ambientLightingColor.r >>
+					ambientLightingColor.g >>
+					ambientLightingColor.b >>
+					ambientLightingIntensity;
 
 				// Apply
 				_fe3d.gfx_enableAmbientLighting(ambientLightingColor, ambientLightingIntensity);
@@ -261,7 +322,7 @@ void SceneEditor::loadEditorSceneFromFile(const string& fileName)
 				// Add directional lighting
 				_fe3d.gfx_enableDirectionalLighting(directionalLightingPosition, directionalLightingColor, directionalLightingIntensity);
 
-				// Add lightsource billboard
+				// Set lightsource billboard
 				_fe3d.billboardEntity_setPosition("@@lightSource", directionalLightingPosition);
 				_fe3d.billboardEntity_setSize("@@lightSource", Vec2(billboardSize));
 				_fe3d.billboardEntity_setLightness("@@lightSource", billboardLightness);
@@ -296,88 +357,176 @@ void SceneEditor::loadEditorSceneFromFile(const string& fileName)
 					_fe3d.modelEntity_setColor("@" + lightID, color);
 					_fe3d.aabbEntity_bindToModelEntity("@" + lightID, Vec3(0.0f), DEFAULT_LIGHTBULB_AABB_SIZE, true, true);
 				}
-
+				std::cout << "hoi";
 				// Add point light
 				_fe3d.lightEntity_add(lightID, position, color, intensity, distance);
 				_loadedLightIDs.push_back(lightID);
 			}
 			else if (entityType == "LOD_DISTANCE")
 			{
+				// Data placeholders
 				float lodDistance;
-				iss >> lodDistance;
+
+				// Extract data
+				iss >>
+					lodDistance;
+
+				// Set distance
 				_fe3d.misc_setLevelOfDetailDistance(lodDistance);
 			}
 			else if (entityType == "EDITOR_SPEED")
 			{
-				iss >> _customEditorSpeed;
+				// Extract data
+				iss >>
+					_customEditorSpeed;
 			}
 			else if (entityType == "EDITOR_POSITION")
 			{
+				// Data placeholders
 				Vec3 position;
-				iss >> position.x >> position.y >> position.z;
+
+				// Extract data
+				iss >>
+					position.x >>
+					position.y >>
+					position.z;
+
+				// Set position
 				_fe3d.camera_setPosition(position);
 			}
 			else if (entityType == "EDITOR_YAW")
 			{
+				// Data placeholders
 				float yaw;
-				iss >> yaw;
+				iss >>
+					yaw;
+
+				// Set yaw
 				_fe3d.camera_setYaw(yaw);
 			}
 			else if (entityType == "EDITOR_PITCH")
 			{
+				// Data placeholders
 				float pitch;
-				iss >> pitch;
+
+				// Extract data
+				iss >>
+					pitch;
+
+				// Set pitch
 				_fe3d.camera_setPitch(pitch);
 			}
 			else if (entityType == "GRAPHICS_SHADOWS")
 			{
+				// Data placeholders
 				bool enabled;
 				float size, lightness;
 				Vec3 position, center;
 				bool isFollowingCamera;
 				bool isSoftShadowed;
 				int interval;
-				iss >> enabled >> size >> lightness >> position.x >> position.y >> position.z >>
-					center.x >> center.y >> center.z >> isFollowingCamera >> isSoftShadowed >> interval;
+
+				// Extract data
+				iss >>
+					enabled >>
+					size >>
+					lightness >>
+					position.x >>
+					position.y >>
+					position.z >>
+					center.x >>
+					center.y >>
+					center.z >>
+					isFollowingCamera >>
+					isSoftShadowed >>
+					interval;
+
+				// Enable shadows
 				_fe3d.gfx_enableShadows(position, center, size, size * 2.0f, lightness, isFollowingCamera, isSoftShadowed, interval);
 			}
 			else if (entityType == "GRAPHICS_MOTIONBLUR")
 			{
+				// Data placeholders
 				bool enabled;
 				float strength;
-				iss >> enabled >> strength;
+
+				// Extract data
+				iss >>
+					enabled >> 
+					strength;
+
+				// Enable motion blur
 				_fe3d.gfx_enableMotionBlur(strength);
 			}
 			else if (entityType == "GRAPHICS_DOF")
 			{
+				// Data placeholders
 				bool enabled, dynamic;
 				float blurDistance, maxDistance;
-				iss >> enabled >> dynamic >> blurDistance >> maxDistance;
+
+				// Extract data
+				iss >>
+					enabled >>
+					dynamic >>
+					blurDistance >>
+					maxDistance;
+
+				// Enable DOF
 				_fe3d.gfx_enableDOF(dynamic, maxDistance, blurDistance);
 			}
 			else if (entityType == "GRAPHICS_FOG")
 			{
+				// Data placeholders
 				bool enabled;
 				float minDistance, maxDistance, thickness;
 				Vec3 color;
-				iss >> enabled >> minDistance >> maxDistance >> thickness >> color.r >> color.g >> color.b;
+
+				// Extract data
+				iss >>
+					enabled >>
+					minDistance >>
+					maxDistance >>
+					thickness >>
+					color.r >>
+					color.g >>
+					color.b;
+
+				// Enable fog
 				_fe3d.gfx_enableFog(minDistance, maxDistance, thickness, color);
 			}
 			else if (entityType == "GRAPHICS_LENSFLARE")
 			{
+				// Data placeholders
 				bool enabled;
 				string flareMapPath;
 				float intensity, multiplier;
-				iss >> enabled >> flareMapPath >> intensity >> multiplier;
+
+				// Extract data
+				iss >>
+					enabled >>
+					flareMapPath >>
+					intensity >>
+					multiplier;
+
+				// Perform empty string & space conversions
 				flareMapPath = (flareMapPath == "?") ? "" : flareMapPath;
 				std::replace(flareMapPath.begin(), flareMapPath.end(), '?', ' ');
+
+				// Enable lens flare
 				_fe3d.gfx_enableLensFlare(flareMapPath, intensity, multiplier);
 			}
 			else if (entityType == "GRAPHICS_SKYHDR")
 			{
+				// Data placeholders
 				bool enabled;
 				float intensity;
-				iss >> enabled >> intensity;
+
+				// Extract data
+				iss >>
+					enabled >>
+					intensity;
+				
+				// Enable skyHDR
 				_fe3d.gfx_enableSkyHDR(intensity);
 			}
 		}

@@ -90,11 +90,6 @@ void FabiEngine3D::aabbEntity_setCollisionResponsive(const string& ID, bool resp
 	_core->_aabbEntityManager.getEntity(ID)->setCollisionResponsive(responsive);
 }
 
-void FabiEngine3D::aabbEntity_setVisible(const string& ID, bool visible)
-{
-	_core->_aabbEntityManager.getEntity(ID)->setVisible(visible);
-}
-
 void FabiEngine3D::aabbEntity_setPosition(const string& ID, Vec3 position, bool noLocal)
 {
 	if (_core->_aabbEntityManager.getEntity(ID)->getParentID() == "" || noLocal) // Standalone entity

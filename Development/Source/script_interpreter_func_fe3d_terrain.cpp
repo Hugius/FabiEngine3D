@@ -15,7 +15,7 @@ bool ScriptInterpreter::_validateFe3dTerrainEntity()
 bool ScriptInterpreter::_executeFe3dTerrainEntityFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine type of function
-	if (functionName == "fe3d:terrain_get_pixel_height") // Get the pixel height on the terrain
+	if (functionName == "fe3d:terrain_get_pixel_height")
 	{
 		auto types = { ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
@@ -32,7 +32,7 @@ bool ScriptInterpreter::_executeFe3dTerrainEntityFunction(const string& function
 			}
 		}
 	}
-	else if (functionName == "fe3d:terrain_get_max_height") // Get maximum height of the terrain
+	else if (functionName == "fe3d:terrain_get_max_height")
 	{
 		// Validate arguments
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
@@ -45,7 +45,7 @@ bool ScriptInterpreter::_executeFe3dTerrainEntityFunction(const string& function
 			}
 		}
 	}
-	else if (functionName == "fe3d:terrain_get_size") // Get size of the terrain
+	else if (functionName == "fe3d:terrain_get_size")
 	{
 		// Validate arguments
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))

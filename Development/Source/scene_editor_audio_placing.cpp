@@ -74,7 +74,7 @@ void SceneEditor::_updateAudioPlacing()
 					_fe3d.aabbEntity_bindToModelEntity("@speaker_" + newID, Vec3(0.0f), DEFAULT_SPEAKER_AABB_SIZE, true, true);
 					_fe3d.audioEntity_add3D(newID, _fe3d.audioEntity_getFilePath(_currentPreviewAudioName), newPosition, 0.5f, DEFAULT_AUDIO_MAX_DISTANCE);
 					_fe3d.audioEntity_play(newID, -1, 0.5f);
-					_loadedAudioIDs.push_back(newID);
+					_loadedAudioIDs.insert(make_pair(newID, _currentPreviewAudioName));
 
 					// Disable placement mode if no terrain availible to choose position from
 					if (_fe3d.terrainEntity_getSelectedID() == "")

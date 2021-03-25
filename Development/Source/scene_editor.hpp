@@ -42,15 +42,9 @@ public:
 	void loadCustomSceneFromFile(const string& fileName);
 	void saveCustomSceneToFile();
 
-	// Creation
-	void copyPreviewSky(const string& newID, const string& previewID);
-	void copyPreviewTerrain(const string& newID, const string& previewID);
-	void copyPreviewWater(const string& newID, const string& previewID);
+	// Miscellaneous
 	void copyPreviewModel(const string& newID, const string& previewID, Vec3 position);
 	void copyPreviewBillboard(const string& newID, const string& previewID, Vec3 position);
-	void copyPreviewAudio(const string& newID, const string& previewID, Vec3 position);
-
-	// Miscellaneous
 	void clearCurrentScene();
 	void setCurrentProjectID(const string& projectName);
 	bool isLoaded();
@@ -113,27 +107,12 @@ private:
 	void _updateCamera();
 	void _updateMiscellaneous();
 
-	// Creation functions
-	void _placeSky(const string& newID, const array<string, 6>& diffuseMapPaths, float lightness, float rotationSpeed, Vec3 color);
-	void _placeTerrain(const string& newID, const string& heightMapPath, float maxHeight, float uvRepeat, bool isBlendMapped, float lightness,
-		float blendRepeatR, float blendRepeatG, float blendRepeatB, bool isNormalMapped, bool isNormalMappedR, bool isNormalMappedG,
-		bool isNormalMappedB, bool isSpecular, float specularFactor,
-		float specularIntensity, const string& diffuseMapPath, const string& normalMapPath, const string& normalMapPathR,
-		const string& normalMapPathG, const string& normalMapPathB, const string& blendMapPath,
-		const string& blendMapPathR, const string& blendMapPathG, const string& blendMapPathB);
-	void _placeWater(const string& newID, Vec3 position, float size, bool isWaving, bool isRippling, bool isSpecularLighted, bool isReflective,
-		bool isRefractive, float waveHeightFactor, float specularFactor, float specularIntensity, float transparency, Vec3 color, float uvRepeat,
-		Vec2 speed, const string& dudvMapPath, const string& normalMapPath, const string& displacementMapPath);
-	void _placeModel(const string& modelID, Vec3 position, Vec3 rotation, Vec3 size,
-		const string& meshPath, const string& diffuseMapPath, const string& lightMapPath, const string& reflectionMapPath, const string& normalMapPath, 
-		bool isFrozen, bool isFaceCulled, bool isShadowed, bool isTransparent, bool isSpecular, int reflectionType, float specularFactor,
-		float specularIntensity, float lightness, Vec3 color, float uvRepeat, const string& lodEntityID, bool isInstanced,
-		vector<Vec3> instancedOffsets, vector<string> aabbNames, vector<Vec3> aabbPositions, vector<Vec3> aabbSizes, 
-		string animationID, float minHeight, float maxHeight, float alpha);
-	void _placeBillboard(const string& billboardID,
-		const string& diffusePath, const string& fontPath, const string& textContent,
-		Vec3 position, Vec3 rotation, Vec2 size, Vec3 color, bool facingX, bool facingY, bool isTransparent,
-		bool isAnimated, int animationRows, int animationColumns, int animationFramestep, float lightness, float minHeight, float maxHeight);
+	// Creation
+	void _copyPreviewSky(const string& newID, const string& previewID, bool addToScene = true);
+	void _copyPreviewTerrain(const string& newID, const string& previewID, bool addToScene = true);
+	void _copyPreviewWater(const string& newID, const string& previewID, bool addToScene = true);
+	void _copyPreviewModel(const string& newID, const string& previewID, Vec3 position, bool addToScene = true);
+	void _copyPreviewBillboard(const string& newID, const string& previewID, Vec3 position, bool addToScene = true);
 
 	// Miscellaneous
 	vector<string> _loadSceneNames();
@@ -181,7 +160,7 @@ private:
 	string _currentWaterID = "";
 
 	// Model variables
-	vector<string> _loadedModelIDs;
+	map<string, string> _loadedModelIDs;
 	map<string, float> _initialModelLightness;
 	map<string, Vec3> _initialModelPosition;
 	map<string, Vec3> _initialModelRotation;
@@ -196,7 +175,7 @@ private:
 	static inline const float MODEL_SIZE_MULTIPLIER = 100.0f;
 
 	// Billboard variables
-	vector<string> _loadedBillboardIDs;
+	map<string, string> _loadedBillboardIDs;
 	map<string, float> _initialBillboardLightness;
 	string _currentPreviewBillboardName = "";
 	string _selectedBillboardID = "";
@@ -206,6 +185,23 @@ private:
 	bool _dontResetSelectedBillboard = false;
 	static inline const float BILLBOARD_BLINKING_SPEED = 0.025f;
 	static inline const float BILLBOARD_SIZE_MULTIPLIER = 100.0f;
+
+	// Audio variables
+	map<string, string> _loadedAudioIDs;
+	string _currentPreviewAudioName = "";
+	string _selectedSpeakerID = "";
+	string _activeSpeakerID = "";
+	static inline const string PREVIEW_SPEAKER_ID = "@previewSpeaker";
+	static inline const string SPEAKER_MODEL_PATH = "engine_assets\\meshes\\speaker.obj";
+	static inline const Vec3 DEFAULT_SPEAKER_SIZE = Vec3(1.0f);
+	static inline const Vec3 DEFAULT_SPEAKER_AABB_SIZE = Vec3(1.25f, 1.3f, 1.0f);
+	static inline const float DEFAULT_AUDIO_MAX_DISTANCE = 25.0f;
+	static inline const float SPEAKER_ANIMATION_SPEED = 0.01f;
+	static inline const float AUDIO_VOLUME_CHANGING_SPEED = 0.01f;
+	static inline const float AUDIO_DISTANCE_CHANGING_SPEED = 0.05f;
+	int _selectedAudioSizeMultiplier = 1;
+	int _activeAudioSizeMultiplier = 1;
+	bool _dontResetSelectedAudio = false;
 
 	// Lighting variables
 	vector<string> _loadedLightIDs;
@@ -221,23 +217,6 @@ private:
 	int _activeLightSizeMultiplier = 1;
 	string _selectedLightBulbID = "";
 	string _activeLightBulbID = "";
-
-	// Audio variables
-	vector<string> _loadedAudioIDs;
-	string _currentPreviewAudioName = "";
-	string _selectedSpeakerID = "";
-	string _activeSpeakerID = "";
-	static inline const string PREVIEW_SPEAKER_ID = "@previewSpeaker";
-	static inline const string SPEAKER_MODEL_PATH = "engine_assets\\meshes\\speaker.obj";
-	static inline const Vec3 DEFAULT_SPEAKER_SIZE = Vec3(1.0f);
-	static inline const Vec3 DEFAULT_SPEAKER_AABB_SIZE = Vec3(1.25f, 1.3f, 1.0f);
-	static inline const float DEFAULT_AUDIO_MAX_DISTANCE = 25.0f;
-	static inline const float SPEAKER_ANIMATION_SPEED = 0.01f;
-	static inline const float AUDIO_VOLUME_CHANGING_SPEED = 0.01f;
-	static inline const float AUDIO_DISTANCE_CHANGING_SPEED = 0.05f;
-	int _selectedAudioSizeMultiplier = 1;
-	int _activeAudioSizeMultiplier = 1;
-	bool _dontResetSelectedAudio = false;
 
 	// Miscellaneous
 	string _loadedSceneID = "";

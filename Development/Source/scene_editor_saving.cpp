@@ -5,8 +5,8 @@
 
 void SceneEditor::saveEditorSceneToFile()
 {
-	// Editor must be loaded
-	if (!_isEditorLoaded || _currentSceneID.empty())
+	// Must be editing a scene
+	if (_currentSceneID.empty())
 	{
 		return;
 	}
@@ -34,9 +34,6 @@ void SceneEditor::saveEditorSceneToFile()
 	vector<string> lodIDs;
 	for (auto& modelID : _fe3d.modelEntity_getAllIDs())
 	{
-		// Temporary values
-		bool isCustomSceneModel = std::find(_customSceneModelIDs.begin(), _customSceneModelIDs.end(), modelID) != _customSceneModelIDs.end();
-
 		// Check if not preview entity
 		if (modelID[0] != '@')
 		{
@@ -56,21 +53,42 @@ void SceneEditor::saveEditorSceneToFile()
 	string skyID = _fe3d.skyEntity_getSelectedID();
 	if (!skyID.empty())
 	{
-		file << "SKY " << skyID << " " << std::endl;
+		// Data to save
+		string previewID = "@" + skyID;
+
+		// Write data
+		file <<
+			"SKY " <<
+			skyID << " " <<
+			previewID << std::endl;
 	}
 
 	// Terrain
 	string terrainID = _fe3d.terrainEntity_getSelectedID();
 	if (!terrainID.empty())
 	{
-		file << "TERRAIN " << terrainID << " " << std::endl;
+		// Data to save
+		string previewID = "@" + terrainID;
+
+		// Write data
+		file <<
+			"TERRAIN " <<
+			terrainID << " " <<
+			previewID << std::endl;
 	}
 
 	// Water
 	string waterID = _fe3d.waterEntity_getSelectedID();
 	if (!waterID.empty())
 	{
-		file << "WATER " << waterID << " " << std::endl;
+		// Data to save
+		string previewID = "@" + waterID;
+
+		// Write data
+		file <<
+			"WATER " <<
+			waterID << " " <<
+			previewID << std::endl;
 	}
 
 	// Models
@@ -122,7 +140,7 @@ void SceneEditor::saveEditorSceneToFile()
 			std::reverse(previewID.begin(), previewID.end());
 			previewID = "@" + previewID;
 
-			// Write data
+			// Write main data
 			file <<
 				"MODEL " <<
 				modelID << " " <<
@@ -137,7 +155,36 @@ void SceneEditor::saveEditorSceneToFile()
 				size.y << " " <<
 				size.z << " " <<
 				isFrozen << " " <<
-				animationID << std::endl;
+				animationID;
+
+			// Write instanced offset
+			if (_fe3d.modelEntity_isInstanced(modelID))
+			{
+				// Check if model has any offsets
+				auto instancedOffsets = _fe3d.modelEntity_getInstancedOffsets(modelID);
+				if (!instancedOffsets.empty())
+				{
+					file << " ";
+				}
+
+				// Write offsets
+				for (unsigned int i = 0; i < instancedOffsets.size(); i++)
+				{
+					file <<
+						instancedOffsets[i].x << " " <<
+						instancedOffsets[i].y << " " <<
+						instancedOffsets[i].z;
+
+					// Add space
+					if (i != (instancedOffsets.size() - 1))
+					{
+						file << " ";
+					}
+				}
+			}
+
+			// New line
+			file << std::endl;
 		}
 	}
 
@@ -183,8 +230,8 @@ void SceneEditor::saveEditorSceneToFile()
 		{
 			// Retrieve data
 			auto position = _fe3d.audioEntity_getPosition(audioID);
-			auto volume = _fe3d.audioEntity_getMaxVolume(audioID);
-			auto distance = _fe3d.audioEntity_getMaxDistance(audioID);
+			auto maxVolume = _fe3d.audioEntity_getMaxVolume(audioID);
+			auto maxDistance = _fe3d.audioEntity_getMaxDistance(audioID);
 
 			// Extract preview ID
 			string tempID = audioID;
@@ -201,8 +248,8 @@ void SceneEditor::saveEditorSceneToFile()
 				position.x << " " <<
 				position.y << " " <<
 				position.z << " " <<
-				volume << " " <<
-				distance << std::endl;
+				maxVolume << " " <<
+				maxDistance << std::endl;
 		}
 	}
 

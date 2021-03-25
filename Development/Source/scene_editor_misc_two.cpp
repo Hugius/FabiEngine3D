@@ -142,6 +142,16 @@ void SceneEditor::_updateMiscellaneous()
 	}
 }
 
+void SceneEditor::copyPreviewModel(const string& newID, const string& previewID, Vec3 position)
+{
+	_copyPreviewModel(newID, previewID, position, false);
+}
+
+void SceneEditor::copyPreviewBillboard(const string& newID, const string& previewID, Vec3 position)
+{
+	_copyPreviewBillboard(newID, previewID, position, false);
+}
+
 void SceneEditor::clearCurrentScene()
 {
 	// Disable graphics
@@ -196,7 +206,7 @@ void SceneEditor::clearCurrentScene()
 	}
 
 	// Delete GAME entities
-	for (auto& ID : _loadedModelIDs)
+	for (auto& [ID, previewID] : _loadedModelIDs)
 	{
 		// Delete model
 		if (_fe3d.modelEntity_isExisting(ID))
@@ -213,12 +223,28 @@ void SceneEditor::clearCurrentScene()
 	}
 
 	// Delete BILLBOARD entities
-	for (auto& ID : _loadedBillboardIDs)
+	for (auto& [ID, previewID] : _loadedBillboardIDs)
 	{
 		// Delete billboard
 		if (_fe3d.billboardEntity_isExisting(ID))
 		{
 			_fe3d.billboardEntity_delete(ID);
+		}
+	}
+
+	// Delete AUDIO entities
+	for (auto& [ID, previewID] : _loadedAudioIDs)
+	{
+		if (_fe3d.audioEntity_isExisting(ID))
+		{
+			// Delete audio
+			_fe3d.audioEntity_delete(ID);
+
+			// Remove corresponding speaker model
+			if (!_currentSceneID.empty())
+			{
+				_fe3d.modelEntity_delete("@speaker_" + ID);
+			}
 		}
 	}
 
@@ -240,22 +266,6 @@ void SceneEditor::clearCurrentScene()
 			if (!_currentSceneID.empty())
 			{
 				_fe3d.modelEntity_delete("@" + ID);
-			}
-		}
-	}
-
-	// Delete AUDIO entities
-	for (auto& ID : _loadedAudioIDs)
-	{
-		if (_fe3d.audioEntity_isExisting(ID))
-		{
-			// Delete audio
-			_fe3d.audioEntity_delete(ID);
-
-			// Remove corresponding speaker model
-			if (!_currentSceneID.empty())
-			{
-				_fe3d.modelEntity_delete("@speaker_" + ID);
 			}
 		}
 	}

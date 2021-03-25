@@ -77,9 +77,11 @@ void AudioPlayer::update(CameraManager& camera, std::vector<AudioChunk>& chunks,
 	// Update 3D chunks
 	for (auto& chunk : chunks)
 	{
+		// Check if 3D chunk
 		if (chunk.is3D())
 		{
-			if (isChunkPlaying(chunk)) // If emitting sound
+			// Check if emitting sound
+			if (isChunkPlaying(chunk))
 			{
 				// Distance
 				auto cameraPos = camera.getPosition(); // Camera position

@@ -1,6 +1,6 @@
 #include "scene_editor.hpp"
 
-void SceneEditor::copyPreviewSky(const string& newID, const string& previewID)
+void SceneEditor::_copyPreviewSky(const string& newID, const string& previewID, bool addToScene)
 {
 	// Delete old
 	if (_fe3d.skyEntity_isExisting(newID))
@@ -16,10 +16,14 @@ void SceneEditor::copyPreviewSky(const string& newID, const string& previewID)
 	_fe3d.skyEntity_setColor(newID, _fe3d.skyEntity_getColor(previewID));
 	_fe3d.skyEntity_select(newID);
 
-	_loadedSkyID = newID;
+	// Save ID
+	if (addToScene)
+	{
+		_loadedSkyID = newID;
+	}
 }
 
-void SceneEditor::copyPreviewTerrain(const string& newID, const string& previewID)
+void SceneEditor::_copyPreviewTerrain(const string& newID, const string& previewID, bool addToScene)
 {
 	// Delete old
 	if (_fe3d.terrainEntity_isExisting(newID))
@@ -101,10 +105,14 @@ void SceneEditor::copyPreviewTerrain(const string& newID, const string& previewI
 		_fe3d.terrainEntity_setDiffuseMapB(newID, _fe3d.terrainEntity_getBlendMapPathB(previewID));
 	}
 
-	_loadedTerrainID = newID;
+	// Save ID
+	if (addToScene)
+	{
+		_loadedTerrainID = newID;
+	}
 }
 
-void SceneEditor::copyPreviewWater(const string& newID, const string& previewID)
+void SceneEditor::_copyPreviewWater(const string& newID, const string& previewID, bool addToScene)
 {
 	// Delete old
 	if (_fe3d.waterEntity_isExisting(newID))
@@ -150,10 +158,14 @@ void SceneEditor::copyPreviewWater(const string& newID, const string& previewID)
 		_fe3d.waterEntity_setDisplacementMap(newID, _fe3d.waterEntity_getDisplacementMapPath(previewID));
 	}
 
-	_loadedWaterID = newID;
+	// Save ID
+	if (addToScene)
+	{
+		_loadedWaterID = newID;
+	}
 }
 
-void SceneEditor::copyPreviewModel(const string& newID, const string& previewID, Vec3 position)
+void SceneEditor::_copyPreviewModel(const string& newID, const string& previewID, Vec3 position, bool addToScene)
 {
 	// Compose full entity ID
 	const string newEntityID = _fe3d.modelEntity_isInstanced(previewID) ? previewID.substr(1) : newID;
@@ -287,10 +299,14 @@ void SceneEditor::copyPreviewModel(const string& newID, const string& previewID,
 		}
 	}
 
-	_loadedModelIDs.push_back(newEntityID);
+	// Save ID
+	if (addToScene)
+	{
+		_loadedModelIDs.insert(make_pair(newEntityID, previewID));
+	}
 }
 
-void SceneEditor::copyPreviewBillboard(const string& newID, const string& previewID, Vec3 position)
+void SceneEditor::_copyPreviewBillboard(const string& newID, const string& previewID, Vec3 position, bool addToScene)
 {
 	// Temporary values
 	auto color = _fe3d.billboardEntity_getColor(previewID);
@@ -334,23 +350,9 @@ void SceneEditor::copyPreviewBillboard(const string& newID, const string& previe
 		_initialBillboardLightness[newID] = _fe3d.billboardEntity_getLightness(previewID);
 	}
 
-	_loadedBillboardIDs.push_back(newID);
-}
-
-void SceneEditor::copyPreviewAudio(const string& newID, const string& previewID, Vec3 position)
-{
-	// Add speaker if in editor
-	if (_isEditorLoaded)
+	// Save ID
+	if (addToScene)
 	{
-		_fe3d.modelEntity_add("@speaker_" + newID, "engine_assets\\meshes\\speaker.obj", position, Vec3(0.0f), DEFAULT_SPEAKER_SIZE);
-		_fe3d.modelEntity_setShadowed("@speaker_" + newID, false);
-		_fe3d.aabbEntity_bindToModelEntity("@speaker_" + newID, Vec3(0.0f), DEFAULT_SPEAKER_AABB_SIZE, true, true);
+		_loadedBillboardIDs.insert(make_pair(newID, previewID));
 	}
-
-	// Add audio
-	_fe3d.audioEntity_add3D(newID, _fe3d.audioEntity_getFilePath(previewID), position,
-		_fe3d.audioEntity_getMaxVolume(previewID), _fe3d.audioEntity_getMaxDistance(previewID));
-	_fe3d.audioEntity_play(newID, -1, 0.0f);
-
-	_loadedAudioIDs.push_back(newID);
 }

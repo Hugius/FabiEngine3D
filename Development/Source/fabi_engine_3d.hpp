@@ -424,7 +424,6 @@ public:
 	void aabbEntity_show(const string& ID);
 	void aabbEntity_setRaycastResponsive(const string& ID, bool responsive);
 	void aabbEntity_setCollisionResponsive(const string& ID, bool responsive);
-	void aabbEntity_setVisible(const string& ID, bool visible);
 	void aabbEntity_setPosition(const string& ID, Vec3 position, bool noLocal = false);
 	void aabbEntity_setSize(const string& ID, Vec3 size, bool noLocal = false);
 	void aabbEntity_move(const string& ID, Vec3 factor, bool noLocal = false);
@@ -597,6 +596,7 @@ public:
 	bool audioEntity_isPlaying(const string& ID);
 	bool audioEntity_isPaused(const string& ID);
 	bool audioEntity_isLoaded(const string& ID);
+	bool audioEntity_is3D(const string& ID);
 	int audioEntity_getUsedChannelCount();
 
 	// Music entity interface - setters

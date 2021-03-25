@@ -14,8 +14,8 @@
   Sets the **lightness** of the selected sky.
 - `fe3d:sky_get_lightness`() ---> `DEC`  
   Returns the lightness of the selected sky.
-- `fe3d:sky_set_color`(`VEC3` color) ---> `NONE`  
-  Sets the **color** of the selected sky.
+- `fe3d:sky_set_color`(`DEC` r, `DEC` g, `DEC` b) ---> `NONE`  
+  Sets the color as **rgb** of the selected sky.
 - `fe3d:sky_get_color`() ---> `VEC3`  
   Returns the color of the selected sky.
 #### Terrain

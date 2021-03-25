@@ -9,7 +9,15 @@
 - `fe3d:sky_set_rotation_speed`(`DEC` speed) ---> `NONE`  
   Sets the rotation **speed** of the selected sky.
 - `fe3d:sky_get_rotation_speed`() ---> `DEC`  
-  Returns the rotation **speed** of the selected sky.
+  Returns the rotation speed of the selected sky.
+- `fe3d:sky_set_lightness`(`DEC` lightness) ---> `NONE`  
+  Sets the **lightness** of the selected sky.
+- `fe3d:sky_get_lightness`() ---> `DEC`  
+  Returns the lightness of the selected sky.
+- `fe3d:sky_set_color`(`VEC3` color) ---> `NONE`  
+  Sets the **color** of the selected sky.
+- `fe3d:sky_get_color`() ---> `VEC3`  
+  Returns the color of the selected sky.
 #### Terrain
 - `fe3d:terrain_get_max_height`() ---> `DEC`  
   Returns the maximum height of the selected terrain (based on the heightmap pixels values).

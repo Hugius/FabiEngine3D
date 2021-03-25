@@ -13,7 +13,7 @@ void AudioEditor::_updateAudioEditing()
 			bool isPlaying = isExisting && _fe3d.audioEntity_isPlaying(_currentAudioID);
 			bool isPaused = isExisting && _fe3d.audioEntity_isPaused(_currentAudioID);
 			bool isLoaded = isExisting && _fe3d.audioEntity_isLoaded(_currentAudioID);
-
+			
 			// GUI management
 			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
 			{

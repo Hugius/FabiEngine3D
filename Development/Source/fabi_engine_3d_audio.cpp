@@ -11,6 +11,7 @@ void FabiEngine3D::audioEntity_deleteAll()
 
 void FabiEngine3D::audioEntity_stopAll()
 {
+	audioEntity_resumeAll();
 	_core->_audioPlayer.stopAllChunks();
 }
 
@@ -46,6 +47,11 @@ float FabiEngine3D::music_getVolume()
 
 void FabiEngine3D::music_clearPlaylist()
 {
+	if (music_isPaused())
+	{
+		music_resume();
+	}
+
 	_core->_audioPlayer.stopMusic();
 	_core->_audioManager.deleteMusic();
 }
@@ -68,14 +74,24 @@ void FabiEngine3D::audioEntity_add3D(const std::string& ID, const std::string& f
 
 void FabiEngine3D::audioEntity_delete(const std::string& ID)
 {
-	if (_core->_audioManager.isChunkExisting(ID)) // If chunk exists
+	// Check if chunk exists
+	if (_core->_audioManager.isChunkExisting(ID))
 	{
-		if (_core->_audioPlayer.isChunkPlaying(_core->_audioManager.getChunk(ID))) // If chunk is playing
+		// Check if chunk is playing
+		if (_core->_audioPlayer.isChunkPlaying(_core->_audioManager.getChunk(ID)))
 		{
+			// Resume playback if paused
+			if (_core->_audioPlayer.isChunkPaused(_core->_audioManager.getChunk(ID)))
+			{
+				_core->_audioPlayer.resumeChunk(_core->_audioManager.getChunk(ID));
+			}
+
+			// Stop playback
 			_core->_audioPlayer.stopChunk(_core->_audioManager.getChunk(ID), 0);
 		}
 	}
 
+	// Delete audio chunk
 	_core->_audioManager.deleteChunk(ID);
 }
 
@@ -107,6 +123,13 @@ void FabiEngine3D::audioEntity_resumeAll()
 
 void FabiEngine3D::audioEntity_stop(const std::string& ID, int fadeMillis)
 {
+	// Resume playback if paused
+	if (_core->_audioPlayer.isChunkPaused(_core->_audioManager.getChunk(ID)))
+	{
+		_core->_audioPlayer.resumeChunk(_core->_audioManager.getChunk(ID));
+	}
+
+	// Stop playback
 	_core->_audioPlayer.stopChunk(_core->_audioManager.getChunk(ID), fadeMillis);
 }
 

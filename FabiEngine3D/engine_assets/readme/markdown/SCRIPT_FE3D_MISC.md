@@ -12,7 +12,7 @@
 - `fe3d:scene_get_current_id`() ---> `STR`  
   Returns ID of currently loaded scene.
 - `fe3d:scene_clear`() ---> `NONE`  
-  Deletes all environment, models, billboards and graphics from the currently loaded scene.
+  Deletes all sky, terrain, water, models, billboards, audio, lights from the currently loaded scene.
 - `fe3d:scene_create_custom`(`STR` ID) ---> `NONE`  
   Creates a new custom scene as **ID**.
 - `fe3d:scene_add_custom_sky`() ---> `NONE`  

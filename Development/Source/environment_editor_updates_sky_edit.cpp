@@ -267,7 +267,7 @@ void EnvironmentEditor::_updateSkyMenuOptions()
 				_gui.getGlobalScreen()->addValueForm("colorB", "B", skyColor.b * 255.0f, Vec2(0.25f, 0.0f), Vec2(0.15f, 0.1f));
 			}
 		}
-		std::cout << skyRotationSpeed << std::endl;
+
 		// Speed value conversion
 		if (_gui.getGlobalScreen()->checkValueForm("rotationSpeed", skyRotationSpeed))
 		{

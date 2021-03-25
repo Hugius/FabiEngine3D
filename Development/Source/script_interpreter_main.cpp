@@ -151,30 +151,45 @@ void ScriptInterpreter::load()
 		_fe3d.misc_cacheAudioMultiThreaded(audioPaths); // Pre-cache audio files
 	}
 
-	// Disable engine sky background
+	// No sky at default
 	_fe3d.skyEntity_select("");
 
-	// Load skies
+	// Load preview environments
 	_environmentEditor.loadSkyEntitiesFromFile();
+	_environmentEditor.loadTerrainEntitiesFromFile();
+	_environmentEditor.loadWaterEntitiesFromFile();
 
-	// Load models
+	// Load preview models
 	_modelEditor.loadGameEntitiesFromFile();
 
-	// Load animations
+	// Load preview animations
 	_animationEditor.loadAnimationsFromFile();
 
-	// Load billboards
+	// Load preview billboards
 	_billboardEditor.loadBillboardEntitiesFromFile();
 
-	// Load audio
+	// Load preview audio
 	_audioEditor.loadAudioEntitiesFromFile();
 
-	// Miscellaneous
+	// Default camera
+	_fe3d.camera_load(90.0f, 0.1f, 10000.0f, Vec3(0.0f));
+
+	// Directional light source
 	const string texturePath = "engine_assets\\textures\\light_source.png";
 	_fe3d.billboardEntity_add("@@lightSource", texturePath, Vec3(0.0f), Vec3(0.0f), Vec2(0.0f), true, true, true, true);
 	_fe3d.billboardEntity_setDepthMapIncluded("@@lightSource", false);
 	_fe3d.billboardEntity_setLightness("@@lightSource", 10000.0f);
-	_fe3d.camera_load(90.0f, 0.1f, 10000.0f, Vec3(0.0f));
+
+	// Default graphics
+	_fe3d.gfx_enableSpecularLighting();
+	_fe3d.gfx_enablePointLighting();
+	_fe3d.gfx_enableSkyReflections(0.5f);
+	_fe3d.gfx_enableSceneReflections(0.5f);
+	_fe3d.gfx_enableLightMapping();
+	_fe3d.gfx_enableNormalMapping();
+	_fe3d.gfx_enableWaterEffects();
+
+	// Miscellaneous
 	_fe3d.input_clearMouseToggles();
 	_fe3d.input_clearKeyToggles();
 	_fe3d.misc_setVsync(false);

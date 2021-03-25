@@ -171,110 +171,108 @@ void AnimationEditor::loadAnimationsFromFile()
 	}
 }
 
-void AnimationEditor::stopAllAnimations()
-{
-	_playingAnimations.clear();
-}
-
 void AnimationEditor::saveAnimationsToFile()
 {
-	if (_isEditorLoaded)
+	// Editor must be loaded
+	if (!_isEditorLoaded)
 	{
-		// Error checking
-		if (_currentProjectID == "")
+		return;
+	}
+
+	// Error checking
+	if (_currentProjectID == "")
+	{
+		_fe3d.logger_throwError("No current project loaded --> AnimationEditor::saveAnimationsToFile()");
+	}
+
+	// Compose full file path
+	string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : ("projects\\" + _currentProjectID)) + "\\data\\animation.fe3d";
+
+	// Create or overwrite animation file
+	std::ofstream file;
+	file.open(filePath);
+
+	// Write animation data into file
+	for (auto& animation : _animations)
+	{
+		// Only if animation has data
+		if (!animation->previewModelID.empty() || !animation->oldPreviewModelID.empty())
 		{
-			_fe3d.logger_throwError("No current project loaded --> AnimationEditor::saveAnimationsToFile()");
-		}
+			// Retrieve all values
+			auto animationID = animation->ID;
+			auto previewModelID = animation->previewModelID.empty() ? animation->oldPreviewModelID : animation->previewModelID;
 
-		// Compose full file path
-		string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : ("projects\\" + _currentProjectID)) + "\\data\\animation.fe3d";
+			// Export  general data
+			file <<
+				animationID << " " <<
+				previewModelID;
 
-		// Create or overwrite animation file
-		std::ofstream file;
-		file.open(filePath);
-
-		// Write animation data into file
-		for (auto& animation : _animations)
-		{
-			// Only if animation has data
-			if (!animation->previewModelID.empty() || !animation->oldPreviewModelID.empty())
+			// Export frame data
+			if (animation->frames.size() > 1)
 			{
-				// Retrieve all values
-				auto animationID = animation->ID;
-				auto previewModelID = animation->previewModelID.empty() ? animation->oldPreviewModelID : animation->previewModelID;
+				// Add space
+				file << " ";
 
-				// Export  general data
-				file <<
-					animationID << " " <<
-					previewModelID;
-
-				// Export frame data
-				if (animation->frames.size() > 1)
+				// For every frame
+				for (unsigned int i = 1; i < animation->frames.size(); i++)
 				{
-					// Add space
-					file << " ";
+					// Write the amount of model parts
+					file << animation->partNames.size() << " ";
 
-					// For every frame
-					for (unsigned int i = 1; i < animation->frames.size(); i++)
+					// For every model part
+					unsigned int partIndex = 0;
+					for (auto partName : animation->partNames)
 					{
-						// Write the amount of model parts
-						file << animation->partNames.size() << " ";
+						// Retrieve data
+						const auto& targetTransformation = animation->frames[i].targetTransformations[partName];
+						const auto& rotationOrigin = animation->frames[i].rotationOrigins[partName];
+						const auto& speed = animation->frames[i].speeds[partName];
+						const auto& speedType = static_cast<int>(animation->frames[i].speedTypes[partName]);
+						const auto& transformationType = static_cast<int>(animation->frames[i].transformationTypes[partName]);
 
-						// For every model part
-						unsigned int partIndex = 0;
-						for (auto partName : animation->partNames)
+						// Questionmark means empty partname
+						if (partName.empty())
 						{
-							// Retrieve data
-							const auto& targetTransformation = animation->frames[i].targetTransformations[partName];
-							const auto& rotationOrigin = animation->frames[i].rotationOrigins[partName];
-							const auto& speed = animation->frames[i].speeds[partName];
-							const auto& speedType = static_cast<int>(animation->frames[i].speedTypes[partName]);
-							const auto& transformationType = static_cast<int>(animation->frames[i].transformationTypes[partName]);
-
-							// Questionmark means empty partname
-							if (partName.empty())
-							{
-								partName = "?";
-							}
-
-							// Write data
-							file <<
-								partName << " " <<
-								targetTransformation.x << " " <<
-								targetTransformation.y << " " <<
-								targetTransformation.z << " " <<
-								rotationOrigin.x << " " <<
-								rotationOrigin.y << " " <<
-								rotationOrigin.z << " " <<
-								speed << " " <<
-								speedType << " " <<
-								transformationType;
-
-							// Add space
-							if (partIndex != (animation->partNames.size() - 1))
-							{
-								file << " ";
-							}
-							partIndex++;
+							partName = "?";
 						}
 
+						// Write data
+						file <<
+							partName << " " <<
+							targetTransformation.x << " " <<
+							targetTransformation.y << " " <<
+							targetTransformation.z << " " <<
+							rotationOrigin.x << " " <<
+							rotationOrigin.y << " " <<
+							rotationOrigin.z << " " <<
+							speed << " " <<
+							speedType << " " <<
+							transformationType;
+
 						// Add space
-						if (i != (animation->frames.size() - 1))
+						if (partIndex != (animation->partNames.size() - 1))
 						{
 							file << " ";
 						}
+						partIndex++;
+					}
+
+					// Add space
+					if (i != (animation->frames.size() - 1))
+					{
+						file << " ";
 					}
 				}
-
-				// Add newline
-				file << std::endl;
 			}
+
+			// Add newline
+			file << std::endl;
 		}
-
-		// Close file
-		file.close();
-
-		// Logging
-		_fe3d.logger_throwInfo("Animation data from project \"" + _currentProjectID + "\" saved!");
 	}
+
+	// Close file
+	file.close();
+
+	// Logging
+	_fe3d.logger_throwInfo("Animation data from project \"" + _currentProjectID + "\" saved!");
 }

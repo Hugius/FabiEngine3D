@@ -184,83 +184,86 @@ void EnvironmentEditor::unloadWaterEntities()
 
 void EnvironmentEditor::saveWaterEntitiesToFile()
 {
-	if (_isEditorLoaded)
+	// Editor must be loaded
+	if (!_isEditorLoaded)
 	{
-		// Error checking
-		if (_currentProjectID == "")
-		{
-			_fe3d.logger_throwError("No current project loaded --> EnvironmentEditor::saveWaterEntitiesToFile()");
-		}
-
-		// Compose full file path
-		string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : ("projects\\" + _currentProjectID)) + "\\data\\water.fe3d";
-
-		// Load file
-		std::ofstream file(filePath);
-
-		// Write every water to file
-		for (auto& waterID : _loadedWaterIDs)
-		{
-			// Values
-			string dudvMapPath = _fe3d.waterEntity_getDudvMapPath(waterID);
-			string normalMapPath = _fe3d.waterEntity_getNormalMapPath(waterID);
-			string displacementMapPath = _fe3d.waterEntity_getDisplacementMapPath(waterID);
-			bool isWaving = _fe3d.waterEntity_isWaving(waterID);
-			bool isRippling = _fe3d.waterEntity_isRippling(waterID);
-			bool isSpecularLighted = _fe3d.waterEntity_isSpecularLighted(waterID);
-			bool isReflective = _fe3d.waterEntity_isReflective(waterID);
-			bool isRefractive = _fe3d.waterEntity_isRefractive(waterID);
-			Vec3 color = _fe3d.waterEntity_getColor(waterID);
-			float size = _fe3d.waterEntity_getSize(waterID);
-			Vec3 position = _fe3d.waterEntity_getPosition(waterID);
-			float uvRepeat = _fe3d.waterEntity_getUvRepeat(waterID);
-			float waveHeightFactor = _fe3d.waterEntity_getWaveHeightFactor(waterID);
-			Vec2 speed = _fe3d.waterEntity_getSpeed(waterID);
-			float transparency = _fe3d.waterEntity_getTransparency(waterID);
-			float specularFactor = _fe3d.waterEntity_getSpecularLightingFactor(waterID);
-			float specularIntensity = _fe3d.waterEntity_getSpecularLightingIntensity(waterID);
-
-			// Perform empty string & space conversions
-			dudvMapPath = (dudvMapPath == "" ? "?" : dudvMapPath);
-			normalMapPath = (normalMapPath == "" ? "?" : normalMapPath);
-			displacementMapPath = (displacementMapPath == "" ? "?" : displacementMapPath);
-			std::replace(dudvMapPath.begin(), dudvMapPath.end(), ' ', '?');
-			std::replace(normalMapPath.begin(), normalMapPath.end(), ' ', '?');
-			std::replace(displacementMapPath.begin(), displacementMapPath.end(), ' ', '?');
-
-			// Write data to file
-			file <<
-				waterID << " " <<
-				dudvMapPath << " " <<
-				normalMapPath << " " <<
-				displacementMapPath << " " <<
-				isWaving << " " <<
-				isRippling << " " <<
-				isSpecularLighted << " " <<
-				isReflective << " " <<
-				isRefractive << " " <<
-				color.r << " " <<
-				color.g << " " <<
-				color.b << " " <<
-				size << " " <<
-				position.x << " " <<
-				position.y << " " <<
-				position.z << " " <<
-				uvRepeat << " " <<
-				waveHeightFactor << " " <<
-				speed.x << " " <<
-				speed.y << " " <<
-				transparency << " " <<
-				specularFactor << " " <<
-				specularIntensity << std::endl;
-		}
-
-		// Close file
-		file.close();
-
-		// Logging
-		_fe3d.logger_throwInfo("Water data from project \"" + _currentProjectID + "\" saved!");
+		return;
 	}
+
+	// Error checking
+	if (_currentProjectID == "")
+	{
+		_fe3d.logger_throwError("No current project loaded --> EnvironmentEditor::saveWaterEntitiesToFile()");
+	}
+
+	// Compose full file path
+	string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : ("projects\\" + _currentProjectID)) + "\\data\\water.fe3d";
+
+	// Load file
+	std::ofstream file(filePath);
+
+	// Write every water to file
+	for (auto& waterID : _loadedWaterIDs)
+	{
+		// Values
+		string dudvMapPath = _fe3d.waterEntity_getDudvMapPath(waterID);
+		string normalMapPath = _fe3d.waterEntity_getNormalMapPath(waterID);
+		string displacementMapPath = _fe3d.waterEntity_getDisplacementMapPath(waterID);
+		bool isWaving = _fe3d.waterEntity_isWaving(waterID);
+		bool isRippling = _fe3d.waterEntity_isRippling(waterID);
+		bool isSpecularLighted = _fe3d.waterEntity_isSpecularLighted(waterID);
+		bool isReflective = _fe3d.waterEntity_isReflective(waterID);
+		bool isRefractive = _fe3d.waterEntity_isRefractive(waterID);
+		Vec3 color = _fe3d.waterEntity_getColor(waterID);
+		float size = _fe3d.waterEntity_getSize(waterID);
+		Vec3 position = _fe3d.waterEntity_getPosition(waterID);
+		float uvRepeat = _fe3d.waterEntity_getUvRepeat(waterID);
+		float waveHeightFactor = _fe3d.waterEntity_getWaveHeightFactor(waterID);
+		Vec2 speed = _fe3d.waterEntity_getSpeed(waterID);
+		float transparency = _fe3d.waterEntity_getTransparency(waterID);
+		float specularFactor = _fe3d.waterEntity_getSpecularLightingFactor(waterID);
+		float specularIntensity = _fe3d.waterEntity_getSpecularLightingIntensity(waterID);
+
+		// Perform empty string & space conversions
+		dudvMapPath = (dudvMapPath == "" ? "?" : dudvMapPath);
+		normalMapPath = (normalMapPath == "" ? "?" : normalMapPath);
+		displacementMapPath = (displacementMapPath == "" ? "?" : displacementMapPath);
+		std::replace(dudvMapPath.begin(), dudvMapPath.end(), ' ', '?');
+		std::replace(normalMapPath.begin(), normalMapPath.end(), ' ', '?');
+		std::replace(displacementMapPath.begin(), displacementMapPath.end(), ' ', '?');
+
+		// Write data to file
+		file <<
+			waterID << " " <<
+			dudvMapPath << " " <<
+			normalMapPath << " " <<
+			displacementMapPath << " " <<
+			isWaving << " " <<
+			isRippling << " " <<
+			isSpecularLighted << " " <<
+			isReflective << " " <<
+			isRefractive << " " <<
+			color.r << " " <<
+			color.g << " " <<
+			color.b << " " <<
+			size << " " <<
+			position.x << " " <<
+			position.y << " " <<
+			position.z << " " <<
+			uvRepeat << " " <<
+			waveHeightFactor << " " <<
+			speed.x << " " <<
+			speed.y << " " <<
+			transparency << " " <<
+			specularFactor << " " <<
+			specularIntensity << std::endl;
+	}
+
+	// Close file
+	file.close();
+
+	// Logging
+	_fe3d.logger_throwInfo("Water data from project \"" + _currentProjectID + "\" saved!");
 }
 
 const vector<string>& EnvironmentEditor::getLoadedWaterIDs()

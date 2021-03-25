@@ -125,7 +125,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			// Validate preview billboard ID
 			if (_validateFe3dBillboardEntity("@" + arguments[1].getString(), true))
 			{
-				_sceneEditor.placeBillboard(arguments[0].getString(), "@" + arguments[1].getString(),
+				_sceneEditor.copyPreviewBillboard(arguments[0].getString(), "@" + arguments[1].getString(),
 					Vec3(arguments[2].getDecimal(), arguments[3].getDecimal(), arguments[4].getDecimal()));
 				_fe3d.billboardEntity_stopAnimation(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));

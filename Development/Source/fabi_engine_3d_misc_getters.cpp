@@ -74,6 +74,11 @@ float FabiEngine3D::misc_stopMillisecondTimer()
 	return _core->_timer.stop();
 }
 
+float FabiEngine3D::misc_getLevelOfDetailDistance()
+{
+	return _core->_gameEntityManager.getLodDistance();
+}
+
 string FabiEngine3D::misc_getWinExplorerFilename(const string& startingDirectory, const string& fileType)
 {
 	// Prepare filter C-string
@@ -333,17 +338,18 @@ bool FabiEngine3D::misc_isCursorInsideWindow()
 	return false;
 }
 
-bool FabiEngine3D::misc_isDirectory(const string& filePath)
+bool FabiEngine3D::misc_isDirectoryExisting(const string& filePath)
 {
 	struct stat fileInfo;
-	stat(filePath.c_str(), &fileInfo);
-	return (fileInfo.st_mode & S_IFDIR);
+	int result = stat(filePath.c_str(), &fileInfo);
+	return (result == 0 && (fileInfo.st_mode & S_IFDIR));
 }
 
 bool FabiEngine3D::misc_isFileExisting(const string& filePath)
 {
 	struct stat fileInfo;
-	return stat(filePath.c_str(), &fileInfo) == 0;
+	bool isExisting = stat(filePath.c_str(), &fileInfo) == 0;
+	return (isExisting && !misc_isDirectoryExisting(filePath));
 }
 
 bool FabiEngine3D::misc_checkInterval(const string& key, int frameCount)

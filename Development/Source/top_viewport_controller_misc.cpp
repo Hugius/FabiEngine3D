@@ -52,7 +52,7 @@ void TopViewportController::_updateProjectCreation()
 			string newDirectoryPath = _fe3d.misc_getRootDirectory() + "projects\\" + newProjectName;
 
 			// Check if project already exists
-			if (_fe3d.misc_isFileExisting(newDirectoryPath) && _fe3d.misc_isDirectory(newDirectoryPath))
+			if (_fe3d.misc_isDirectoryExisting(newDirectoryPath))
 			{
 				_fe3d.logger_throwWarning("Project \"" + newProjectName + "\"" + " already exists!");
 			}
@@ -120,7 +120,7 @@ void TopViewportController::_prepareProjectLoading()
 	string userDirectoryPath = _fe3d.misc_getRootDirectory() + "projects\\";
 
 	// Check if projects directory exists
-	if (_fe3d.misc_isDirectory(userDirectoryPath))
+	if (_fe3d.misc_isDirectoryExisting(userDirectoryPath))
 	{
 		// Get all project names
 		vector<string> projectNames;
@@ -128,7 +128,7 @@ void TopViewportController::_prepareProjectLoading()
 		{
 			// Extract project name
 			string projectPath = string(entry.path().u8string());
-			if (_fe3d.misc_isDirectory(projectPath))
+			if (_fe3d.misc_isDirectoryExisting(projectPath))
 			{
 				string projectName = projectPath;
 				projectName.erase(0, userDirectoryPath.size());
@@ -225,7 +225,7 @@ void TopViewportController::_updateProjectDeletion()
 
 			// Check if project folder is still existing
 			string directoryPath = _fe3d.misc_getRootDirectory() + "projects\\" + chosenButtonID;
-			if (_fe3d.misc_isFileExisting(directoryPath) && _fe3d.misc_isDirectory(directoryPath))
+			if (_fe3d.misc_isDirectoryExisting(directoryPath))
 			{
 				// Deleting project folder
 				std::filesystem::remove_all(directoryPath);

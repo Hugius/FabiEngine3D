@@ -78,8 +78,8 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
-			_sceneEditor.clearScene();
-			_sceneEditor.loadSceneFromFile(false, arguments[0].getString());
+			_sceneEditor.clearCurrentScene();
+			_sceneEditor.loadEditorSceneFromFile(arguments[0].getString());
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
@@ -87,7 +87,7 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 	{
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			_sceneEditor.clearScene();
+			_sceneEditor.clearCurrentScene();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
@@ -193,7 +193,7 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 	{
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			_sceneEditor.saveSceneToFile(true);
+			//_sceneEditor.saveEditorSceneToFile(true);
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
@@ -203,8 +203,8 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
-			_sceneEditor.clearScene();
-			_sceneEditor.loadSceneFromFile(true, arguments[0].getString());
+			_sceneEditor.clearCurrentScene();
+			//_sceneEditor.loadEditorSceneFromFile(true, arguments[0].getString());
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
@@ -307,7 +307,7 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 			string newDirectoryPath = string(directoryPath + arguments[0].getString());
 
 			// Return
-			auto result = (_fe3d.misc_isFileExisting(newDirectoryPath) && _fe3d.misc_isDirectory(newDirectoryPath));
+			auto result =  _fe3d.misc_isDirectoryExisting(newDirectoryPath);
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 		}
 	}
@@ -347,7 +347,7 @@ bool ScriptInterpreter::_executeFe3dMiscFunction(const string& functionName, vec
 			string newDirectoryPath = string(directoryPath + arguments[0].getString());
 
 			// Check if directory exists
-			if (_fe3d.misc_isFileExisting(newDirectoryPath) && _fe3d.misc_isDirectory(newDirectoryPath))
+			if (_fe3d.misc_isDirectoryExisting(newDirectoryPath))
 			{
 				std::filesystem::remove_all(newDirectoryPath);
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));

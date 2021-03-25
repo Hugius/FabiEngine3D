@@ -19,10 +19,16 @@ public:
 		ModelEditor& modelEditor, AnimationEditor& animationEditor, BillboardEditor& billboardEditor, AudioEditor& audioEditor);
 	~SceneEditor() = default;
 
+	// Core
 	void load();
 	void unload();
 	void update();
-	void setCurrentProjectID(const string&projectName);
+
+	// Editor scene
+	void loadEditorSceneFromFile(const string& fileName);
+	void saveEditorSceneToFile();
+
+	// Custom scene
 	void createCustomScene(const string& sceneID);
 	void addLightingToCustomScene();
 	void addGraphicsToCustomScene();
@@ -33,15 +39,22 @@ public:
 	void addBillboardToCustomScene(const string& billboardID);
 	void addLightToCustomScene(const string& lightID);
 	void addAudioToCustomScene(const string& audioID);
-	void loadSceneFromFile(bool isCustomScene, const string& fileName);
-	void saveSceneToFile(bool isCustomScene);
-	void clearScene();
-	void placeModel(const string& newID, const string& previewID, Vec3 position);
-	void placeBillboard(const string& newID, const string& previewID, Vec3 position);
+	void loadCustomSceneFromFile(const string& fileName);
+	void saveCustomSceneToFile();
 
+	// Creation
+	void copyPreviewSky(const string& newID, const string& previewID);
+	void copyPreviewTerrain(const string& newID, const string& previewID);
+	void copyPreviewWater(const string& newID, const string& previewID);
+	void copyPreviewModel(const string& newID, const string& previewID, Vec3 position);
+	void copyPreviewBillboard(const string& newID, const string& previewID, Vec3 position);
+	void copyPreviewAudio(const string& newID, const string& previewID, Vec3 position);
+
+	// Miscellaneous
+	void clearCurrentScene();
+	void setCurrentProjectID(const string& projectName);
 	bool isLoaded();
 	bool isSceneExisting(const string& fileName);
-
 	const string& getLoadedSceneID();
 
 private:
@@ -101,16 +114,13 @@ private:
 	void _updateMiscellaneous();
 
 	// Creation functions
-	void _placeSky(const string& newID, const string& previewID);
 	void _placeSky(const string& newID, const array<string, 6>& diffuseMapPaths, float lightness, float rotationSpeed, Vec3 color);
-	void _placeTerrain(const string& newID, const string& previewID);
 	void _placeTerrain(const string& newID, const string& heightMapPath, float maxHeight, float uvRepeat, bool isBlendMapped, float lightness,
 		float blendRepeatR, float blendRepeatG, float blendRepeatB, bool isNormalMapped, bool isNormalMappedR, bool isNormalMappedG,
 		bool isNormalMappedB, bool isSpecular, float specularFactor,
 		float specularIntensity, const string& diffuseMapPath, const string& normalMapPath, const string& normalMapPathR,
 		const string& normalMapPathG, const string& normalMapPathB, const string& blendMapPath,
 		const string& blendMapPathR, const string& blendMapPathG, const string& blendMapPathB);
-	void _placeWater(const string& newID, const string& previewID);
 	void _placeWater(const string& newID, Vec3 position, float size, bool isWaving, bool isRippling, bool isSpecularLighted, bool isReflective,
 		bool isRefractive, float waveHeightFactor, float specularFactor, float specularIntensity, float transparency, Vec3 color, float uvRepeat,
 		Vec2 speed, const string& dudvMapPath, const string& normalMapPath, const string& displacementMapPath);

@@ -142,7 +142,7 @@ void SceneEditor::_updateMiscellaneous()
 	}
 }
 
-void SceneEditor::clearScene()
+void SceneEditor::clearCurrentScene()
 {
 	// Disable graphics
 	_fe3d.gfx_disableAmbientLighting(true);
@@ -267,8 +267,8 @@ void SceneEditor::clearScene()
 	_loadedWaterID = "";
 	_loadedModelIDs.clear();
 	_loadedBillboardIDs.clear();
-	_loadedLightIDs.clear();
 	_loadedAudioIDs.clear();
+	_loadedLightIDs.clear();
 }
 
 void SceneEditor::createCustomScene(const string& sceneID)

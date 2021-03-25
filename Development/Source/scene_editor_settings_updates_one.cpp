@@ -11,7 +11,7 @@ void SceneEditor::_updateMainSettingsMenu()
 		if (screen->getID() == "sceneEditorMenuSettings")
 		{
 			// Temporary values
-			float lodDistance = _fe3d.gameEntity_getLevelOfDetailDistance();
+			float lodDistance = _fe3d.misc_getLevelOfDetailDistance();
 
 			// GUI management
 			if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
@@ -42,7 +42,7 @@ void SceneEditor::_updateMainSettingsMenu()
 			if (_gui.getGlobalScreen()->checkValueForm("lodDistance", lodDistance, {}))
 			{
 				lodDistance = std::max(0.0f, lodDistance);
-				_fe3d.gameEntity_setLevelOfDetailDistance(lodDistance);
+				_fe3d.misc_setLevelOfDetailDistance(lodDistance);
 			}
 		}
 	}

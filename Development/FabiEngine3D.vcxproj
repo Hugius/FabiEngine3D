@@ -335,9 +335,10 @@
     <ClCompile Include="Source\scene_editor_audio_placing.cpp" />
     <ClCompile Include="Source\scene_editor_audio_updates.cpp" />
     <ClCompile Include="Source\scene_editor_billboard_edit.cpp" />
+    <ClCompile Include="Source\scene_editor_loading_custom.cpp" />
     <ClCompile Include="Source\scene_editor_main.cpp" />
-    <ClCompile Include="Source\scene_editor_creation_one.cpp" />
-    <ClCompile Include="Source\scene_editor_creation_two.cpp" />
+    <ClCompile Include="Source\scene_editor_creation_copy.cpp" />
+    <ClCompile Include="Source\scene_editor_creation_place.cpp" />
     <ClCompile Include="Source\scene_editor_environment.cpp" />
     <ClCompile Include="Source\scene_editor_gui.cpp" />
     <ClCompile Include="Source\scene_editor_light_edit.cpp" />
@@ -347,6 +348,7 @@
     <ClCompile Include="Source\scene_editor_model_edit.cpp" />
     <ClCompile Include="Source\scene_editor_model_placing.cpp" />
     <ClCompile Include="Source\scene_editor_saving.cpp" />
+    <ClCompile Include="Source\scene_editor_saving_custom.cpp" />
     <ClCompile Include="Source\scene_editor_settings_updates_one.cpp" />
     <ClCompile Include="Source\scene_editor_settings_updates_two.cpp" />
     <ClCompile Include="Source\scene_editor_updates.cpp" />

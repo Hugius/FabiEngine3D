@@ -243,106 +243,109 @@ void EnvironmentEditor::unloadTerrainEntities()
 
 void EnvironmentEditor::saveTerrainEntitiesToFile()
 {
-	if (_isEditorLoaded)
+	// Editor must be loaded
+	if (!_isEditorLoaded)
 	{
-		// Error checking
-		if (_currentProjectID == "")
-		{
-			_fe3d.logger_throwError("No current project loaded --> EnvironmentEditor::saveTerrainEntitiesToFile()");
-		}
-
-		// Compose full terrain file path
-		string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : ("projects\\" + _currentProjectID)) + "\\data\\terrain.fe3d";
-
-		// Load file
-		std::ofstream file(filePath);
-			
-		// Write every terrain to file
-		for (auto& terrainID : _loadedTerrainIDs)
-		{
-			// Values
-			string heightMapPath = _fe3d.terrainEntity_getHeightMapPath(terrainID);
-			string diffuseMapPath = _fe3d.terrainEntity_getDiffuseMapPath(terrainID);
-			string normalMapPath = _fe3d.terrainEntity_getNormalMapPath(terrainID);
-			string blendMapPath = _fe3d.terrainEntity_getBlendMapPath(terrainID);
-			string blendMapPathR = _fe3d.terrainEntity_getBlendMapPathR(terrainID);
-			string blendMapPathG = _fe3d.terrainEntity_getBlendMapPathG(terrainID);
-			string blendMapPathB = _fe3d.terrainEntity_getBlendMapPathB(terrainID);
-			string normalMapPathR = _fe3d.terrainEntity_getNormalMapPathR(terrainID);
-			string normalMapPathG = _fe3d.terrainEntity_getNormalMapPathG(terrainID);
-			string normalMapPathB = _fe3d.terrainEntity_getNormalMapPathB(terrainID);
-			float maxHeight = _fe3d.terrainEntity_getMaxHeight(terrainID);
-			float uvRepeat = _fe3d.terrainEntity_getUvRepeat(terrainID);
-			float lightness = _fe3d.terrainEntity_getLightness(terrainID);
-			float specularFactor = _fe3d.terrainEntity_getSpecularLightingFactor(terrainID);
-			float specularIntensity = _fe3d.terrainEntity_getSpecularLightingIntensity(terrainID);
-			float blendRepeatR = _fe3d.terrainEntity_getBlendRepeatR(terrainID);
-			float blendRepeatG = _fe3d.terrainEntity_getBlendRepeatG(terrainID);
-			float blendRepeatB = _fe3d.terrainEntity_getBlendRepeatB(terrainID);
-			bool isBlendMapped = _fe3d.terrainEntity_isBlendMapped(terrainID);
-			bool isNormalMapped = _fe3d.terrainEntity_isNormalMapped(terrainID);
-			bool isNormalMappedR = _fe3d.terrainEntity_isNormalMappedR(terrainID);
-			bool isNormalMappedG = _fe3d.terrainEntity_isNormalMappedG(terrainID);
-			bool isNormalMappedB = _fe3d.terrainEntity_isNormalMappedB(terrainID);
-			bool isSpecular = _fe3d.terrainEntity_isSpecularLighted(terrainID);
-
-			// Perform empty string & space conversions
-			heightMapPath = (heightMapPath == "") ? "?" : heightMapPath;
-			diffuseMapPath = (diffuseMapPath == "") ? "?" : diffuseMapPath;
-			normalMapPath = (normalMapPath == "") ? "?" : normalMapPath;
-			blendMapPath = (blendMapPath == "") ? "?" : blendMapPath;
-			blendMapPathR = (blendMapPathR == "") ? "?" : blendMapPathR;
-			blendMapPathG = (blendMapPathG == "") ? "?" : blendMapPathG;
-			blendMapPathB = (blendMapPathB == "") ? "?" : blendMapPathB;
-			normalMapPathR = (normalMapPathR == "") ? "?" : normalMapPathR;
-			normalMapPathG = (normalMapPathG == "") ? "?" : normalMapPathG;
-			normalMapPathB = (normalMapPathB == "") ? "?" : normalMapPathB;
-			std::replace(heightMapPath.begin(), heightMapPath.end(), ' ', '?');
-			std::replace(diffuseMapPath.begin(), diffuseMapPath.end(), ' ', '?');
-			std::replace(normalMapPath.begin(), normalMapPath.end(), ' ', '?');
-			std::replace(blendMapPath.begin(), blendMapPath.end(), ' ', '?');
-			std::replace(blendMapPathR.begin(), blendMapPathR.end(), ' ', '?');
-			std::replace(blendMapPathG.begin(), blendMapPathG.end(), ' ', '?');
-			std::replace(blendMapPathB.begin(), blendMapPathB.end(), ' ', '?');
-			std::replace(normalMapPathR.begin(), normalMapPathR.end(), ' ', '?');
-			std::replace(normalMapPathG.begin(), normalMapPathG.end(), ' ', '?');
-			std::replace(normalMapPathB.begin(), normalMapPathB.end(), ' ', '?');
-
-			// Write terrain data to file
-			file <<
-				terrainID << " " <<
-				heightMapPath << " " <<
-				diffuseMapPath << " " <<
-				maxHeight << " " <<
-				uvRepeat << " " <<
-				lightness << " " <<
-				isBlendMapped << " " <<
-				blendMapPath << " " <<
-				blendMapPathR << " " <<
-				blendMapPathG << " " <<
-				blendMapPathB << " " <<
-				blendRepeatR << " " <<
-				blendRepeatG << " " <<
-				blendRepeatB << " " <<
-				isNormalMapped << " " <<
-				isNormalMappedR << " " <<
-				isNormalMappedG << " " <<
-				isNormalMappedB << " " <<
-				normalMapPath << " " <<
-				normalMapPathR << " " <<
-				normalMapPathG << " " <<
-				normalMapPathB << " " <<
-				isSpecular << " " <<
-				specularFactor << " " <<
-				specularIntensity << std::endl;
-		}
-
-		// Close file
-		file.close();
-
-		// Logging
-		_fe3d.logger_throwInfo("Terrain data from project \"" + _currentProjectID + "\" saved!");
+		return;
 	}
+
+	// Error checking
+	if (_currentProjectID == "")
+	{
+		_fe3d.logger_throwError("No current project loaded --> EnvironmentEditor::saveTerrainEntitiesToFile()");
+	}
+
+	// Compose full terrain file path
+	string filePath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : ("projects\\" + _currentProjectID)) + "\\data\\terrain.fe3d";
+
+	// Load file
+	std::ofstream file(filePath);
+
+	// Write every terrain to file
+	for (auto& terrainID : _loadedTerrainIDs)
+	{
+		// Values
+		string heightMapPath = _fe3d.terrainEntity_getHeightMapPath(terrainID);
+		string diffuseMapPath = _fe3d.terrainEntity_getDiffuseMapPath(terrainID);
+		string normalMapPath = _fe3d.terrainEntity_getNormalMapPath(terrainID);
+		string blendMapPath = _fe3d.terrainEntity_getBlendMapPath(terrainID);
+		string blendMapPathR = _fe3d.terrainEntity_getBlendMapPathR(terrainID);
+		string blendMapPathG = _fe3d.terrainEntity_getBlendMapPathG(terrainID);
+		string blendMapPathB = _fe3d.terrainEntity_getBlendMapPathB(terrainID);
+		string normalMapPathR = _fe3d.terrainEntity_getNormalMapPathR(terrainID);
+		string normalMapPathG = _fe3d.terrainEntity_getNormalMapPathG(terrainID);
+		string normalMapPathB = _fe3d.terrainEntity_getNormalMapPathB(terrainID);
+		float maxHeight = _fe3d.terrainEntity_getMaxHeight(terrainID);
+		float uvRepeat = _fe3d.terrainEntity_getUvRepeat(terrainID);
+		float lightness = _fe3d.terrainEntity_getLightness(terrainID);
+		float specularFactor = _fe3d.terrainEntity_getSpecularLightingFactor(terrainID);
+		float specularIntensity = _fe3d.terrainEntity_getSpecularLightingIntensity(terrainID);
+		float blendRepeatR = _fe3d.terrainEntity_getBlendRepeatR(terrainID);
+		float blendRepeatG = _fe3d.terrainEntity_getBlendRepeatG(terrainID);
+		float blendRepeatB = _fe3d.terrainEntity_getBlendRepeatB(terrainID);
+		bool isBlendMapped = _fe3d.terrainEntity_isBlendMapped(terrainID);
+		bool isNormalMapped = _fe3d.terrainEntity_isNormalMapped(terrainID);
+		bool isNormalMappedR = _fe3d.terrainEntity_isNormalMappedR(terrainID);
+		bool isNormalMappedG = _fe3d.terrainEntity_isNormalMappedG(terrainID);
+		bool isNormalMappedB = _fe3d.terrainEntity_isNormalMappedB(terrainID);
+		bool isSpecular = _fe3d.terrainEntity_isSpecularLighted(terrainID);
+
+		// Perform empty string & space conversions
+		heightMapPath = (heightMapPath == "") ? "?" : heightMapPath;
+		diffuseMapPath = (diffuseMapPath == "") ? "?" : diffuseMapPath;
+		normalMapPath = (normalMapPath == "") ? "?" : normalMapPath;
+		blendMapPath = (blendMapPath == "") ? "?" : blendMapPath;
+		blendMapPathR = (blendMapPathR == "") ? "?" : blendMapPathR;
+		blendMapPathG = (blendMapPathG == "") ? "?" : blendMapPathG;
+		blendMapPathB = (blendMapPathB == "") ? "?" : blendMapPathB;
+		normalMapPathR = (normalMapPathR == "") ? "?" : normalMapPathR;
+		normalMapPathG = (normalMapPathG == "") ? "?" : normalMapPathG;
+		normalMapPathB = (normalMapPathB == "") ? "?" : normalMapPathB;
+		std::replace(heightMapPath.begin(), heightMapPath.end(), ' ', '?');
+		std::replace(diffuseMapPath.begin(), diffuseMapPath.end(), ' ', '?');
+		std::replace(normalMapPath.begin(), normalMapPath.end(), ' ', '?');
+		std::replace(blendMapPath.begin(), blendMapPath.end(), ' ', '?');
+		std::replace(blendMapPathR.begin(), blendMapPathR.end(), ' ', '?');
+		std::replace(blendMapPathG.begin(), blendMapPathG.end(), ' ', '?');
+		std::replace(blendMapPathB.begin(), blendMapPathB.end(), ' ', '?');
+		std::replace(normalMapPathR.begin(), normalMapPathR.end(), ' ', '?');
+		std::replace(normalMapPathG.begin(), normalMapPathG.end(), ' ', '?');
+		std::replace(normalMapPathB.begin(), normalMapPathB.end(), ' ', '?');
+
+		// Write terrain data to file
+		file <<
+			terrainID << " " <<
+			heightMapPath << " " <<
+			diffuseMapPath << " " <<
+			maxHeight << " " <<
+			uvRepeat << " " <<
+			lightness << " " <<
+			isBlendMapped << " " <<
+			blendMapPath << " " <<
+			blendMapPathR << " " <<
+			blendMapPathG << " " <<
+			blendMapPathB << " " <<
+			blendRepeatR << " " <<
+			blendRepeatG << " " <<
+			blendRepeatB << " " <<
+			isNormalMapped << " " <<
+			isNormalMappedR << " " <<
+			isNormalMappedG << " " <<
+			isNormalMappedB << " " <<
+			normalMapPath << " " <<
+			normalMapPathR << " " <<
+			normalMapPathG << " " <<
+			normalMapPathB << " " <<
+			isSpecular << " " <<
+			specularFactor << " " <<
+			specularIntensity << std::endl;
+	}
+
+	// Close file
+	file.close();
+
+	// Logging
+	_fe3d.logger_throwInfo("Terrain data from project \"" + _currentProjectID + "\" saved!");
 }
 
 const vector<string>& EnvironmentEditor::getLoadedTerrainIDs()

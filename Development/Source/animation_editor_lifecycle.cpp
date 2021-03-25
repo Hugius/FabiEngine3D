@@ -292,3 +292,8 @@ unsigned int AnimationEditor::getAnimationFrameIndex(const string& animationID, 
 
 	return false;
 }
+
+void AnimationEditor::stopAllAnimations()
+{
+	_playingAnimations.clear();
+}

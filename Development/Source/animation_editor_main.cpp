@@ -75,7 +75,7 @@ void AnimationEditor::load()
 
 	// Load models
 	_modelEditor.loadGameEntitiesFromFile();
-	_fe3d.gameEntity_setLevelOfDetailDistance(10000.0f);
+	_fe3d.misc_setLevelOfDetailDistance(10000.0f);
 
 	// Load animations
 	loadAnimationsFromFile();

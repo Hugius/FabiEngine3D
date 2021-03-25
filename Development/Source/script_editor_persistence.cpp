@@ -64,7 +64,7 @@ void ScriptEditor::loadScriptsFromFile()
 
 void ScriptEditor::saveScriptsToFile()
 {
-	// Check if project is loaded properly
+	// Editor must be loaded
 	if (_isEditorLoaded)
 	{
 		// Error checking

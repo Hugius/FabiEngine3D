@@ -185,10 +185,10 @@
       <Filter>src\Editor System\Model Editor\Updates</Filter>
     </ClCompile>
     <ClCompile Include="Source\scene_editor_loading.cpp">
-      <Filter>src\Editor System\Scene Editor\Persistency</Filter>
+      <Filter>src\Editor System\Scene Editor\Persistence</Filter>
     </ClCompile>
     <ClCompile Include="Source\scene_editor_saving.cpp">
-      <Filter>src\Editor System\Scene Editor\Persistency</Filter>
+      <Filter>src\Editor System\Scene Editor\Persistence</Filter>
     </ClCompile>
     <ClCompile Include="Source\script_editor_persistence.cpp">
       <Filter>src\Editor System\Script Editor\Core</Filter>
@@ -388,10 +388,10 @@
     <ClCompile Include="Source\environment_editor_updates_terrain_edit_two.cpp">
       <Filter>src\Editor System\Environment Editor\Updates\Terrain</Filter>
     </ClCompile>
-    <ClCompile Include="Source\scene_editor_creation_two.cpp">
+    <ClCompile Include="Source\scene_editor_creation_place.cpp">
       <Filter>src\Editor System\Scene Editor\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="Source\scene_editor_creation_one.cpp">
+    <ClCompile Include="Source\scene_editor_creation_copy.cpp">
       <Filter>src\Editor System\Scene Editor\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="Source\scene_editor_misc_one.cpp">
@@ -681,6 +681,12 @@
     </ClCompile>
     <ClCompile Include="Source\scene_editor_billboard_placing.cpp">
       <Filter>src\Editor System\Scene Editor\Billboards</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\scene_editor_saving_custom.cpp">
+      <Filter>src\Editor System\Scene Editor\Persistence</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\scene_editor_loading_custom.cpp">
+      <Filter>src\Editor System\Scene Editor\Persistence</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1211,9 +1217,6 @@
     <Filter Include="src\Scripting System\Execution">
       <UniqueIdentifier>{584f8315-779f-4805-ad43-c607476a8f16}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\Editor System\Scene Editor\Persistency">
-      <UniqueIdentifier>{9f1c1ad7-904f-45b3-893c-2c27f98b34dc}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\Editor System\Scene Editor\Miscellaneous">
       <UniqueIdentifier>{ebabbbff-7f2b-4a8c-87aa-692a4554d711}</UniqueIdentifier>
     </Filter>
@@ -1408,6 +1411,9 @@
     </Filter>
     <Filter Include="src\Scripting System\Execution\Interpreter\Function\Entities\Miscellaneous">
       <UniqueIdentifier>{4a046f0c-9016-4b37-ade9-23ea7b3e4c2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Editor System\Scene Editor\Persistence">
+      <UniqueIdentifier>{9f1c1ad7-904f-45b3-893c-2c27f98b34dc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

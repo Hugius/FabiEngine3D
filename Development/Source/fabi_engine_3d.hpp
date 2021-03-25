@@ -279,7 +279,6 @@ public:
 	void		   gameEntity_setMinHeight(const string& ID, float height);
 	void		   gameEntity_setMaxHeight(const string& ID, float height);
 	void		   gameEntity_setUvRepeat(const string& ID, float repeat);
-	void		   gameEntity_setLevelOfDetailDistance(float distance);
 	void		   gameEntity_setInstanced(const string& ID, bool instanced, vector<Vec3> offsets);
 
 	// Game entity interface - getters
@@ -306,7 +305,6 @@ public:
 	float		   gameEntity_getMinHeight(const string& ID);
 	float		   gameEntity_getMaxHeight(const string& ID);
 	float		   gameEntity_getUvRepeat(const string& ID);
-	float		   gameEntity_getLevelOfDetailDistance();
 	Vec3		   gameEntity_getPosition(const string& ID, const string& partName = "");
 	Vec3		   gameEntity_getRotation(const string& ID, const string& partName = "");
 	Vec3		   gameEntity_getRotationOrigin(const string& ID, const string& partName = "");
@@ -802,6 +800,7 @@ public:
 	void misc_cacheTexturesMultiThreaded3D(const vector<array<string, 6>>& filePaths);
 	void misc_cacheAudioMultiThreaded(const vector<string>& filePaths);
 	void misc_startMillisecondTimer();
+	void misc_setLevelOfDetailDistance(float distance);
 
 	// Miscellaneous interface - getters
 	int misc_getUniqueInt(int min, int max);
@@ -815,6 +814,7 @@ public:
 	float misc_degreesToRadians(float angle);
 	float misc_radiansToDegrees(float angle);
 	float misc_stopMillisecondTimer();
+	float misc_getLevelOfDetailDistance();
 	string misc_getWinExplorerFilename(const string& startingDirectory, const string& fileType);
 	string misc_vec2str(Ivec2 vec);
 	string misc_vec2str(Vec2 vec);
@@ -838,7 +838,7 @@ public:
 	bool misc_isCursorVisible();
 	bool misc_isCursorInsideViewport();
 	bool misc_isCursorInsideWindow();
-	bool misc_isDirectory(const string& filePath);
+	bool misc_isDirectoryExisting(const string& filePath);
 	bool misc_isFileExisting(const string& filePath);
 	bool misc_checkInterval(const string& key, int frameCount);
 	bool misc_isRaycastPositionOnTerrainValid();

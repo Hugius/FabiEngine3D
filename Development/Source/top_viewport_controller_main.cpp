@@ -10,13 +10,13 @@ TopViewportController::TopViewportController(FabiEngine3D& fe3d, EngineGuiManage
 	SceneEditor& sceneEditor, AnimationEditor& animationEditor, ScriptEditor& scriptEditor, 
 	AudioEditor& audioEditor, SettingsEditor& settingsEditor) :
 	BaseViewportController(fe3d, gui),
-	_modelEditor(modelEditor),
 	_environmentEditor(environmentEditor),
-	_billboardEditor(billboardEditor),
-	_sceneEditor(sceneEditor),
+	_modelEditor(modelEditor),
 	_animationEditor(animationEditor),
-	_scriptEditor(scriptEditor),
+	_billboardEditor(billboardEditor),
 	_audioEditor(audioEditor),
+	_sceneEditor(sceneEditor),
+	_scriptEditor(scriptEditor),
 	_settingsEditor(settingsEditor)
 {
 
@@ -275,11 +275,11 @@ void TopViewportController::_saveCurrentProject()
 	// Save everything
 	_environmentEditor.save();
 	_modelEditor.saveGameEntitiesToFile();
-	_billboardEditor.saveBillboardEntitiesToFile();
-	_sceneEditor.saveSceneToFile(false);
 	_animationEditor.saveAnimationsToFile();
-	_scriptEditor.saveScriptsToFile();
+	_billboardEditor.saveBillboardEntitiesToFile();
 	_audioEditor.saveAudioEntitiesToFile();
+	_sceneEditor.saveEditorSceneToFile();
+	_scriptEditor.saveScriptsToFile();
 
 	// Logging
 	_fe3d.logger_throwInfo("Project \"" + _currentProjectID + "\" saved!");

@@ -110,36 +110,39 @@ void AudioEditor::loadAudioEntitiesFromFile()
 
 void AudioEditor::saveAudioEntitiesToFile()
 {
-	if (_isEditorLoaded)
+	// Editor must be loaded
+	if (!_isEditorLoaded)
 	{
-		// Error checking
-		if (_currentProjectID == "")
-		{
-			_fe3d.logger_throwError("No current project loaded --> AudioEditor::saveAudioEntitiesToFile()");
-		}
-
-		// Create or overwrite audio file
-		std::ofstream file;
-		file.open(_fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : ("projects\\" + _currentProjectID)) + "\\data\\audio.fe3d");
-
-		// Write audio data into file
-		for (auto& audioID : _loadedAudioIDs)
-		{
-			// Retrieve all values
-			auto audioPath = _fe3d.audioEntity_getFilePath(audioID);
-
-			// Perform empty string & space conversions
-			audioPath = (audioPath == "") ? "?" : audioPath;
-			std::replace(audioPath.begin(), audioPath.end(), ' ', '?');
-
-			// Export data
-			file << audioID << " " << audioPath << std::endl;
-		}
-
-		// Close file
-		file.close();
-
-		// Logging
-		_fe3d.logger_throwInfo("Audio data from project \"" + _currentProjectID + "\" saved!");
+		return;
 	}
+
+	// Error checking
+	if (_currentProjectID == "")
+	{
+		_fe3d.logger_throwError("No current project loaded --> AudioEditor::saveAudioEntitiesToFile()");
+	}
+
+	// Create or overwrite audio file
+	std::ofstream file;
+	file.open(_fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" : ("projects\\" + _currentProjectID)) + "\\data\\audio.fe3d");
+
+	// Write audio data into file
+	for (auto& audioID : _loadedAudioIDs)
+	{
+		// Retrieve all values
+		auto audioPath = _fe3d.audioEntity_getFilePath(audioID);
+
+		// Perform empty string & space conversions
+		audioPath = (audioPath == "") ? "?" : audioPath;
+		std::replace(audioPath.begin(), audioPath.end(), ' ', '?');
+
+		// Export data
+		file << audioID << " " << audioPath << std::endl;
+	}
+
+	// Close file
+	file.close();
+
+	// Logging
+	_fe3d.logger_throwInfo("Audio data from project \"" + _currentProjectID + "\" saved!");
 }

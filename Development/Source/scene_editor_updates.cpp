@@ -121,7 +121,7 @@ void SceneEditor::_updateMainMenu()
 					// Load selected scene for editing
 					if (_isChoosingScene)
 					{
-						loadSceneFromFile(false, _currentSceneID);
+						loadEditorSceneFromFile(_currentSceneID);
 						_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuChoice");
 					}
 					else if (_isDeletingScene) // Prepare deletion confirmation
@@ -203,10 +203,10 @@ void SceneEditor::_updateChoiceMenu()
 			if (_gui.getGlobalScreen()->isAnswerFormConfirmed("exitSceneEditor"))
 			{
 				// Save before closing
-				saveSceneToFile(false);
+				saveEditorSceneToFile();
 
 				// Clear whole scene
-				clearScene();
+				clearCurrentScene();
 
 				// Default skybox
 				_fe3d.skyEntity_select("@@engineBackground");
@@ -226,7 +226,7 @@ void SceneEditor::_updateChoiceMenu()
 			else if (_gui.getGlobalScreen()->isAnswerFormDenied("exitSceneEditor"))
 			{
 				// Clear whole scene
-				clearScene();
+				clearCurrentScene();
 
 				// Default skybox
 				_fe3d.skyEntity_select("@@engineBackground");

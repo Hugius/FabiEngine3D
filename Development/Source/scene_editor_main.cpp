@@ -108,7 +108,7 @@ void SceneEditor::unload()
 	_unloadGUI();
 
 	// Clear scene
-	clearScene();
+	clearCurrentScene();
 
 	// Unload environment preview entities
 	_environmentEditor.unloadSkyEntities();

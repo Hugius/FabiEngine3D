@@ -125,7 +125,7 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 			// Validate preview model ID
 			if (_validateFe3dGameEntity("@" + arguments[1].getString(), true))
 			{
-				_sceneEditor.placeModel(arguments[0].getString(), "@" + arguments[1].getString(),
+				_sceneEditor.copyPreviewModel(arguments[0].getString(), "@" + arguments[1].getString(),
 					Vec3(arguments[2].getDecimal(), arguments[3].getDecimal(), arguments[4].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}

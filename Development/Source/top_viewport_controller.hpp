@@ -48,10 +48,10 @@ private:
 	EnvironmentEditor& _environmentEditor;
 	ModelEditor& _modelEditor;
 	BillboardEditor& _billboardEditor;
-	SceneEditor& _sceneEditor;
 	AnimationEditor& _animationEditor;
-	ScriptEditor& _scriptEditor;
 	AudioEditor& _audioEditor;
+	SceneEditor& _sceneEditor;
+	ScriptEditor& _scriptEditor;
 	SettingsEditor& _settingsEditor;
 
 	shared_ptr<EngineGuiWindow> _projectWindow = nullptr;

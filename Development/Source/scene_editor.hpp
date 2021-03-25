@@ -226,5 +226,5 @@ private:
 	bool _isChoosingScene = false;
 	bool _isDeletingScene = false;
 	TransformationType _transformation = TransformationType::TRANSLATION;
-	float _customEditorSpeed = 1.0f;
+	float _editorSpeed = 1.0f;
 };

@@ -26,7 +26,7 @@ void SceneEditor::_updateMainSettingsMenu()
 				}
 				else if (screen->getButton("setSpeed")->isHovered())
 				{
-					_gui.getGlobalScreen()->addValueForm("setSpeed", "Camera speed", _customEditorSpeed, Vec2(0.0f), Vec2(0.15f, 0.1f));
+					_gui.getGlobalScreen()->addValueForm("setSpeed", "Camera speed", _editorSpeed, Vec2(0.0f), Vec2(0.15f, 0.1f));
 				}
 				else if (screen->getButton("lodDistance")->isHovered())
 				{
@@ -35,8 +35,8 @@ void SceneEditor::_updateMainSettingsMenu()
 			}
 
 			// Setting custom camera speed
-			_gui.getGlobalScreen()->checkValueForm("setSpeed", _customEditorSpeed, {});
-			_customEditorSpeed = std::max(0.0f, _customEditorSpeed);
+			_gui.getGlobalScreen()->checkValueForm("setSpeed", _editorSpeed, {});
+			_editorSpeed = std::max(0.0f, _editorSpeed);
 
 			// Setting LOD distance
 			if (_gui.getGlobalScreen()->checkValueForm("lodDistance", lodDistance, {}))

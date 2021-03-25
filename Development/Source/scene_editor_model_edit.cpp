@@ -204,30 +204,30 @@ void SceneEditor::_updateModelEditing()
 				// Apply new model position / rotation / size
 				if (_transformation == TransformationType::TRANSLATION)
 				{
-					_handleValueChanging("modelPropertiesMenu", "xPlus", "x", position.x, _customEditorSpeed / 100.0f);
-					_handleValueChanging("modelPropertiesMenu", "xMinus", "x", position.x, -_customEditorSpeed / 100.0f);
-					_handleValueChanging("modelPropertiesMenu", "yPlus", "y", position.y, _customEditorSpeed / 100.0f);
-					_handleValueChanging("modelPropertiesMenu", "yMinus", "y", position.y, -_customEditorSpeed / 100.0f);
-					_handleValueChanging("modelPropertiesMenu", "zPlus", "z", position.z, _customEditorSpeed / 100.0f);
-					_handleValueChanging("modelPropertiesMenu", "zMinus", "z", position.z, -_customEditorSpeed / 100.0f);
+					_handleValueChanging("modelPropertiesMenu", "xPlus", "x", position.x, _editorSpeed / 100.0f);
+					_handleValueChanging("modelPropertiesMenu", "xMinus", "x", position.x, -_editorSpeed / 100.0f);
+					_handleValueChanging("modelPropertiesMenu", "yPlus", "y", position.y, _editorSpeed / 100.0f);
+					_handleValueChanging("modelPropertiesMenu", "yMinus", "y", position.y, -_editorSpeed / 100.0f);
+					_handleValueChanging("modelPropertiesMenu", "zPlus", "z", position.z, _editorSpeed / 100.0f);
+					_handleValueChanging("modelPropertiesMenu", "zMinus", "z", position.z, -_editorSpeed / 100.0f);
 				}
 				else if (_transformation == TransformationType::ROTATION)
 				{
-					_handleValueChanging("modelPropertiesMenu", "xPlus", "x", rotation.x, _customEditorSpeed / 50.0f);
-					_handleValueChanging("modelPropertiesMenu", "xMinus", "x", rotation.x, -_customEditorSpeed / 50.0f);
-					_handleValueChanging("modelPropertiesMenu", "yPlus", "y", rotation.y, _customEditorSpeed / 50.0f);
-					_handleValueChanging("modelPropertiesMenu", "yMinus", "y", rotation.y, -_customEditorSpeed / 50.0f);
-					_handleValueChanging("modelPropertiesMenu", "zPlus", "z", rotation.z, _customEditorSpeed / 50.0f);
-					_handleValueChanging("modelPropertiesMenu", "zMinus", "z", rotation.z, -_customEditorSpeed / 50.0f);
+					_handleValueChanging("modelPropertiesMenu", "xPlus", "x", rotation.x, _editorSpeed / 50.0f);
+					_handleValueChanging("modelPropertiesMenu", "xMinus", "x", rotation.x, -_editorSpeed / 50.0f);
+					_handleValueChanging("modelPropertiesMenu", "yPlus", "y", rotation.y, _editorSpeed / 50.0f);
+					_handleValueChanging("modelPropertiesMenu", "yMinus", "y", rotation.y, -_editorSpeed / 50.0f);
+					_handleValueChanging("modelPropertiesMenu", "zPlus", "z", rotation.z, _editorSpeed / 50.0f);
+					_handleValueChanging("modelPropertiesMenu", "zMinus", "z", rotation.z, -_editorSpeed / 50.0f);
 				}
 				else if (_transformation == TransformationType::SCALING)
 				{
-					_handleValueChanging("modelPropertiesMenu", "xPlus", "x", size.x, _customEditorSpeed / 100.0f, MODEL_SIZE_MULTIPLIER, 0.0f);
-					_handleValueChanging("modelPropertiesMenu", "xMinus", "x", size.x, -_customEditorSpeed / 100.0f, MODEL_SIZE_MULTIPLIER, 0.0f);
-					_handleValueChanging("modelPropertiesMenu", "yPlus", "y", size.y, _customEditorSpeed / 100.0f, MODEL_SIZE_MULTIPLIER, 0.0f);
-					_handleValueChanging("modelPropertiesMenu", "yMinus", "y", size.y, -_customEditorSpeed / 100.0f, MODEL_SIZE_MULTIPLIER, 0.0f);
-					_handleValueChanging("modelPropertiesMenu", "zPlus", "z", size.z, _customEditorSpeed / 100.0f, MODEL_SIZE_MULTIPLIER, 0.0f);
-					_handleValueChanging("modelPropertiesMenu", "zMinus", "z", size.z, -_customEditorSpeed / 100.0f, MODEL_SIZE_MULTIPLIER, 0.0f);
+					_handleValueChanging("modelPropertiesMenu", "xPlus", "x", size.x, _editorSpeed / 100.0f, MODEL_SIZE_MULTIPLIER, 0.0f);
+					_handleValueChanging("modelPropertiesMenu", "xMinus", "x", size.x, -_editorSpeed / 100.0f, MODEL_SIZE_MULTIPLIER, 0.0f);
+					_handleValueChanging("modelPropertiesMenu", "yPlus", "y", size.y, _editorSpeed / 100.0f, MODEL_SIZE_MULTIPLIER, 0.0f);
+					_handleValueChanging("modelPropertiesMenu", "yMinus", "y", size.y, -_editorSpeed / 100.0f, MODEL_SIZE_MULTIPLIER, 0.0f);
+					_handleValueChanging("modelPropertiesMenu", "zPlus", "z", size.z, _editorSpeed / 100.0f, MODEL_SIZE_MULTIPLIER, 0.0f);
+					_handleValueChanging("modelPropertiesMenu", "zMinus", "z", size.z, -_editorSpeed / 100.0f, MODEL_SIZE_MULTIPLIER, 0.0f);
 				}
 
 				// Update transformations if changed

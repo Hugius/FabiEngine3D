@@ -107,12 +107,12 @@ void SceneEditor::_updateLightEditing()
 				_handleValueChanging("pointlightPropertiesMenu", "distanceMinus", "distance", distance, -LIGHTING_CHANGING_SPEED, 10.0f, 0.0f);
 				_handleValueChanging("pointlightPropertiesMenu", "intensityPlus", "intensity", intensity, LIGHTING_CHANGING_SPEED, 10.0f, 0.0f);
 				_handleValueChanging("pointlightPropertiesMenu", "intensityMinus", "intensity", intensity, -LIGHTING_CHANGING_SPEED, 10.0f, 0.0f);
-				_handleValueChanging("pointlightPropertiesMenu", "xPlus", "x", position.x, _customEditorSpeed / 100.0f);
-				_handleValueChanging("pointlightPropertiesMenu", "xMinus", "x", position.x, -_customEditorSpeed / 100.0f);
-				_handleValueChanging("pointlightPropertiesMenu", "yPlus", "y", position.y, _customEditorSpeed / 100.0f);
-				_handleValueChanging("pointlightPropertiesMenu", "yMinus", "y", position.y, -_customEditorSpeed / 100.0f);
-				_handleValueChanging("pointlightPropertiesMenu", "zPlus", "z", position.z, _customEditorSpeed / 100.0f);
-				_handleValueChanging("pointlightPropertiesMenu", "zMinus", "z", position.z, -_customEditorSpeed / 100.0f);
+				_handleValueChanging("pointlightPropertiesMenu", "xPlus", "x", position.x, _editorSpeed / 100.0f);
+				_handleValueChanging("pointlightPropertiesMenu", "xMinus", "x", position.x, -_editorSpeed / 100.0f);
+				_handleValueChanging("pointlightPropertiesMenu", "yPlus", "y", position.y, _editorSpeed / 100.0f);
+				_handleValueChanging("pointlightPropertiesMenu", "yMinus", "y", position.y, -_editorSpeed / 100.0f);
+				_handleValueChanging("pointlightPropertiesMenu", "zPlus", "z", position.z, _editorSpeed / 100.0f);
+				_handleValueChanging("pointlightPropertiesMenu", "zMinus", "z", position.z, -_editorSpeed / 100.0f);
 				_handleValueChanging("pointlightPropertiesMenu", "rPlus", "r", color.r, LIGHTING_COLOR_CHANGING_SPEED, 255.0f, 0.0f, 1.0f);
 				_handleValueChanging("pointlightPropertiesMenu", "rMinus", "r", color.r, -LIGHTING_COLOR_CHANGING_SPEED, 255.0f, 0.0f, 1.0f);
 				_handleValueChanging("pointlightPropertiesMenu", "gPlus", "g", color.g, LIGHTING_COLOR_CHANGING_SPEED, 255.0f, 0.0f, 1.0f);

@@ -116,12 +116,12 @@ void SceneEditor::_updateAudioEditing()
 				_handleValueChanging("audioPropertiesMenu", "distanceMinus", "distance", maxDistance, -AUDIO_DISTANCE_CHANGING_SPEED, 1.0f, 0.0f);
 				_handleValueChanging("audioPropertiesMenu", "volumePlus", "volume", maxVolume, AUDIO_VOLUME_CHANGING_SPEED, 100.0f, 0.0f, 1.0f);
 				_handleValueChanging("audioPropertiesMenu", "volumeMinus", "volume", maxVolume, -AUDIO_VOLUME_CHANGING_SPEED, 100.0f, 0.0f, 1.0f);
-				_handleValueChanging("audioPropertiesMenu", "xPlus", "x", position.x, _customEditorSpeed / 100.0f);
-				_handleValueChanging("audioPropertiesMenu", "xMinus", "x", position.x, -_customEditorSpeed / 100.0f);
-				_handleValueChanging("audioPropertiesMenu", "yPlus", "y", position.y, _customEditorSpeed / 100.0f);
-				_handleValueChanging("audioPropertiesMenu", "yMinus", "y", position.y, -_customEditorSpeed / 100.0f);
-				_handleValueChanging("audioPropertiesMenu", "zPlus", "z", position.z, _customEditorSpeed / 100.0f);
-				_handleValueChanging("audioPropertiesMenu", "zMinus", "z", position.z, -_customEditorSpeed / 100.0f);
+				_handleValueChanging("audioPropertiesMenu", "xPlus", "x", position.x, _editorSpeed / 100.0f);
+				_handleValueChanging("audioPropertiesMenu", "xMinus", "x", position.x, -_editorSpeed / 100.0f);
+				_handleValueChanging("audioPropertiesMenu", "yPlus", "y", position.y, _editorSpeed / 100.0f);
+				_handleValueChanging("audioPropertiesMenu", "yMinus", "y", position.y, -_editorSpeed / 100.0f);
+				_handleValueChanging("audioPropertiesMenu", "zPlus", "z", position.z, _editorSpeed / 100.0f);
+				_handleValueChanging("audioPropertiesMenu", "zMinus", "z", position.z, -_editorSpeed / 100.0f);
 				
 				// Apply new values
 				_fe3d.modelEntity_setPosition(_activeSpeakerID, position);

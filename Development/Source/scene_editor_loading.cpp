@@ -33,27 +33,28 @@ void SceneEditor::loadEditorSceneFromFile(const string& fileName)
 		_loadedBillboardIDs.clear();
 		_loadedAudioIDs.clear();
 		_loadedLightIDs.clear();
-
-		// No sky at default
-		_fe3d.skyEntity_select("");
-
-		// Default camera
+		
+		// Default properties for scene editor
 		if (_isEditorLoaded)
 		{
+			// No sky at default
+			_fe3d.skyEntity_select("");
+
+			// Default camera
 			_fe3d.camera_load(90.0f, 0.1f, 10000.0f, Vec3(0.0f));
+
+			// Disable vsync
+			_fe3d.misc_setVsync(false);
+
+			// Default graphics
+			_fe3d.gfx_enableSpecularLighting();
+			_fe3d.gfx_enablePointLighting();
+			_fe3d.gfx_enableSkyReflections(0.5f);
+			_fe3d.gfx_enableSceneReflections(0.5f);
+			_fe3d.gfx_enableLightMapping();
+			_fe3d.gfx_enableNormalMapping();
+			_fe3d.gfx_enableWaterEffects();
 		}
-
-		// Disable vsync
-		_fe3d.misc_setVsync(false);
-
-		// Default graphics
-		_fe3d.gfx_enableSpecularLighting();
-		_fe3d.gfx_enablePointLighting();
-		_fe3d.gfx_enableSkyReflections(0.5f);
-		_fe3d.gfx_enableSceneReflections(0.5f);
-		_fe3d.gfx_enableLightMapping();
-		_fe3d.gfx_enableNormalMapping();
-		_fe3d.gfx_enableWaterEffects();
 
 		// Load scene file
 		std::ifstream file(fullFilePath);
@@ -357,7 +358,7 @@ void SceneEditor::loadEditorSceneFromFile(const string& fileName)
 					_fe3d.modelEntity_setColor("@" + lightID, color);
 					_fe3d.aabbEntity_bindToModelEntity("@" + lightID, Vec3(0.0f), DEFAULT_LIGHTBULB_AABB_SIZE, true, true);
 				}
-				std::cout << "hoi";
+
 				// Add point light
 				_fe3d.lightEntity_add(lightID, position, color, intensity, distance);
 				_loadedLightIDs.push_back(lightID);
@@ -378,7 +379,7 @@ void SceneEditor::loadEditorSceneFromFile(const string& fileName)
 			{
 				// Extract data
 				iss >>
-					_customEditorSpeed;
+					_editorSpeed;
 			}
 			else if (entityType == "EDITOR_POSITION")
 			{

@@ -18,13 +18,13 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 	// Check if scene directory still exists
 	string directoryPath = _fe3d.misc_getRootDirectory() + (_fe3d.engine_isGameExported() ? "" :
 		("projects\\" + _currentProjectID)) + "\\scenes\\";
-	if (!_fe3d.misc_isDirectoryExisting(directoryPath) || !_fe3d.misc_isDirectoryExisting(directoryPath + "editor\\"))
+	if (!_fe3d.misc_isDirectoryExisting(directoryPath) || !_fe3d.misc_isDirectoryExisting(directoryPath + "custom\\"))
 	{
 		_fe3d.logger_throwWarning("Project \"" + _currentProjectID + "\" corrupted: scenes folder(s) missing!");
 	}
 
 	// Check if scene file exists
-	string fullFilePath = string(directoryPath + "editor\\" + fileName + ".fe3d");
+	string fullFilePath = string(directoryPath + "custom\\" + fileName + ".fe3d");
 	if (_fe3d.misc_isFileExisting(fullFilePath))
 	{
 		// Clear last scene data
@@ -57,8 +57,8 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 			{
 				// Data placeholders
 				string skyID, previewID;
-				float rotationSpeed, lightness;
 				Vec3 color;
+				float rotationSpeed, lightness;
 
 				// Extract data
 				iss >>
@@ -75,7 +75,6 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 				_fe3d.skyEntity_setRotationSpeed(skyID, rotationSpeed);
 				_fe3d.skyEntity_setLightness(skyID, lightness);
 				_fe3d.skyEntity_setColor(skyID, color);
-				std::cout << _fe3d.skyEntity_getSelectedID() << std::endl;
 			}
 			else if (entityType == "TERRAIN")
 			{
@@ -128,7 +127,7 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 					modelID;
 
 				// Check if LOD entitty
-				bool makeInvisible = modelID[0] == '@';
+				bool makeInvisible = (modelID[0] == '@');
 
 				// Extract main data
 				iss >>
@@ -365,48 +364,6 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 
 				// Set distance
 				_fe3d.misc_setLevelOfDetailDistance(lodDistance);
-			}
-			else if (entityType == "EDITOR_SPEED")
-			{
-				// Extract data
-				iss >>
-					_customEditorSpeed;
-			}
-			else if (entityType == "EDITOR_POSITION")
-			{
-				// Data placeholders
-				Vec3 position;
-
-				// Extract data
-				iss >>
-					position.x >>
-					position.y >>
-					position.z;
-
-				// Set position
-				_fe3d.camera_setPosition(position);
-			}
-			else if (entityType == "EDITOR_YAW")
-			{
-				// Data placeholders
-				float yaw;
-				iss >>
-					yaw;
-
-				// Set yaw
-				_fe3d.camera_setYaw(yaw);
-			}
-			else if (entityType == "EDITOR_PITCH")
-			{
-				// Data placeholders
-				float pitch;
-
-				// Extract data
-				iss >>
-					pitch;
-
-				// Set pitch
-				_fe3d.camera_setPitch(pitch);
 			}
 			else if (entityType == "GRAPHICS_SHADOWS")
 			{

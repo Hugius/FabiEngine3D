@@ -143,31 +143,31 @@ void SceneEditor::_updateBillboardEditing()
 				// Apply new billboard position / rotation / size
 				if (_transformation == TransformationType::TRANSLATION)
 				{
-					_handleValueChanging("billboardPropertiesMenu", "xPlus", "x", position.x, _customEditorSpeed / 100.0f);
-					_handleValueChanging("billboardPropertiesMenu", "xMinus", "x", position.x, -_customEditorSpeed / 100.0f);
-					_handleValueChanging("billboardPropertiesMenu", "yPlus", "y", position.y, _customEditorSpeed / 100.0f);
-					_handleValueChanging("billboardPropertiesMenu", "yMinus", "y", position.y, -_customEditorSpeed / 100.0f);
-					_handleValueChanging("billboardPropertiesMenu", "zPlus", "z", position.z, _customEditorSpeed / 100.0f);
-					_handleValueChanging("billboardPropertiesMenu", "zMinus", "z", position.z, -_customEditorSpeed / 100.0f);
+					_handleValueChanging("billboardPropertiesMenu", "xPlus", "x", position.x, _editorSpeed / 100.0f);
+					_handleValueChanging("billboardPropertiesMenu", "xMinus", "x", position.x, -_editorSpeed / 100.0f);
+					_handleValueChanging("billboardPropertiesMenu", "yPlus", "y", position.y, _editorSpeed / 100.0f);
+					_handleValueChanging("billboardPropertiesMenu", "yMinus", "y", position.y, -_editorSpeed / 100.0f);
+					_handleValueChanging("billboardPropertiesMenu", "zPlus", "z", position.z, _editorSpeed / 100.0f);
+					_handleValueChanging("billboardPropertiesMenu", "zMinus", "z", position.z, -_editorSpeed / 100.0f);
 					_fe3d.billboardEntity_setPosition(_activeBillboardID, position);
 				}
 				else if (_transformation == TransformationType::ROTATION)
 				{
-					_handleValueChanging("billboardPropertiesMenu", "xPlus", "x", rotation.x, _customEditorSpeed / 50.0f);
-					_handleValueChanging("billboardPropertiesMenu", "xMinus", "x", rotation.x, -_customEditorSpeed / 50.0f);
-					_handleValueChanging("billboardPropertiesMenu", "yPlus", "y", rotation.y, _customEditorSpeed / 50.0f);
-					_handleValueChanging("billboardPropertiesMenu", "yMinus", "y", rotation.y, -_customEditorSpeed / 50.0f);
-					_handleValueChanging("billboardPropertiesMenu", "zPlus", "z", rotation.z, _customEditorSpeed / 50.0f);
-					_handleValueChanging("billboardPropertiesMenu", "zMinus", "z", rotation.z, -_customEditorSpeed / 50.0f);
+					_handleValueChanging("billboardPropertiesMenu", "xPlus", "x", rotation.x, _editorSpeed / 50.0f);
+					_handleValueChanging("billboardPropertiesMenu", "xMinus", "x", rotation.x, -_editorSpeed / 50.0f);
+					_handleValueChanging("billboardPropertiesMenu", "yPlus", "y", rotation.y, _editorSpeed / 50.0f);
+					_handleValueChanging("billboardPropertiesMenu", "yMinus", "y", rotation.y, -_editorSpeed / 50.0f);
+					_handleValueChanging("billboardPropertiesMenu", "zPlus", "z", rotation.z, _editorSpeed / 50.0f);
+					_handleValueChanging("billboardPropertiesMenu", "zMinus", "z", rotation.z, -_editorSpeed / 50.0f);
 					_fe3d.billboardEntity_setRotation(_activeBillboardID, rotation);
 				}
 				else if (_transformation == TransformationType::SCALING)
 				{
 					Vec2 oldSize = size;
-					_handleValueChanging("billboardPropertiesMenu", "xPlus", "x", size.x, _customEditorSpeed / 100.0f, BILLBOARD_SIZE_MULTIPLIER, 0.0f);
-					_handleValueChanging("billboardPropertiesMenu", "xMinus", "x", size.x, -_customEditorSpeed / 100.0f, BILLBOARD_SIZE_MULTIPLIER, 0.0f);
-					_handleValueChanging("billboardPropertiesMenu", "yPlus", "y", size.y, _customEditorSpeed / 100.0f, BILLBOARD_SIZE_MULTIPLIER, 0.0f);
-					_handleValueChanging("billboardPropertiesMenu", "yMinus", "y", size.y, -_customEditorSpeed / 100.0f, BILLBOARD_SIZE_MULTIPLIER, 0.0f);
+					_handleValueChanging("billboardPropertiesMenu", "xPlus", "x", size.x, _editorSpeed / 100.0f, BILLBOARD_SIZE_MULTIPLIER, 0.0f);
+					_handleValueChanging("billboardPropertiesMenu", "xMinus", "x", size.x, -_editorSpeed / 100.0f, BILLBOARD_SIZE_MULTIPLIER, 0.0f);
+					_handleValueChanging("billboardPropertiesMenu", "yPlus", "y", size.y, _editorSpeed / 100.0f, BILLBOARD_SIZE_MULTIPLIER, 0.0f);
+					_handleValueChanging("billboardPropertiesMenu", "yMinus", "y", size.y, -_editorSpeed / 100.0f, BILLBOARD_SIZE_MULTIPLIER, 0.0f);
 					_fe3d.billboardEntity_setSize(_activeBillboardID, size);
 				}
 			}

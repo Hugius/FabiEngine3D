@@ -102,7 +102,7 @@ void SceneEditor::saveCustomSceneToFile()
 		file <<
 			"WATER " <<
 			waterID << " " <<
-			previewID <<
+			previewID << " " <<
 			color.r << " " <<
 			color.g << " " <<
 			color.b << " " <<

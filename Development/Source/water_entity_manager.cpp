@@ -47,7 +47,7 @@ void WaterEntityManager::addWaterEntity(const string& ID)
 	_createEntity(ID);
 }
 
-void WaterEntityManager::generateModel(const string& ID)
+void WaterEntityManager::generateMesh(const string& ID)
 {
 	// Variables
 	auto entity = getEntity(ID);

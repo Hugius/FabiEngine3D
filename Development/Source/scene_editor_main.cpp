@@ -40,11 +40,11 @@ void SceneEditor::load()
 	_environmentEditor.loadWaterEntitiesFromFile();
 
 	// Preview models loading
-	_modelEditor.loadGameEntitiesFromFile();
+	_modelEditor.loadModelEntitiesFromFile();
 	for (auto& modelName : _modelEditor.getLoadedModelIDs())
 	{
-		// Check if there is a GAME entity present
-		if (_fe3d.gameEntity_isExisting(modelName))
+		// Check if there is a MODEL entity present
+		if (_fe3d.modelEntity_isExisting(modelName))
 		{
 			_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuModelPlace")->getScrollingList("models")->
 				addButton(modelName, modelName.substr(1));
@@ -75,13 +75,13 @@ void SceneEditor::load()
 	// Preview pointlight loading
 	_fe3d.lightEntity_add(PREVIEW_POINTLIGHT_ID);
 	_fe3d.lightEntity_hide(PREVIEW_POINTLIGHT_ID);
-	_fe3d.gameEntity_add(PREVIEW_POINTLIGHT_ID, LIGHTBULB_MODEL_PATH, Vec3(0.0f), Vec3(0.0f), DEFAULT_LIGHTBULB_SIZE, false);
-	_fe3d.gameEntity_setShadowed(PREVIEW_POINTLIGHT_ID, false);
+	_fe3d.modelEntity_add(PREVIEW_POINTLIGHT_ID, LIGHTBULB_MODEL_PATH, Vec3(0.0f), Vec3(0.0f), DEFAULT_LIGHTBULB_SIZE, false);
+	_fe3d.modelEntity_setShadowed(PREVIEW_POINTLIGHT_ID, false);
 
 	// Preview audio loading
 	_audioEditor.loadAudioEntitiesFromFile();
-	_fe3d.gameEntity_add(PREVIEW_SPEAKER_ID, SPEAKER_MODEL_PATH, Vec3(0.0f), Vec3(0.0f), DEFAULT_SPEAKER_SIZE, false);
-	_fe3d.gameEntity_setShadowed(PREVIEW_SPEAKER_ID, false);
+	_fe3d.modelEntity_add(PREVIEW_SPEAKER_ID, SPEAKER_MODEL_PATH, Vec3(0.0f), Vec3(0.0f), DEFAULT_SPEAKER_SIZE, false);
+	_fe3d.modelEntity_setShadowed(PREVIEW_SPEAKER_ID, false);
 	for (auto& audioName : _audioEditor.getLoadedAudioIDs())
 	{
 		_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuAudioPlace")->getScrollingList("audiocasters")->
@@ -117,7 +117,7 @@ void SceneEditor::unload()
 
 	// Delete other preview entities
 	_fe3d.audioEntity_deleteAll();
-	_fe3d.gameEntity_deleteAll();
+	_fe3d.modelEntity_deleteAll();
 	_fe3d.billboardEntity_deleteAll();
 	_fe3d.lightEntity_deleteAll();
 

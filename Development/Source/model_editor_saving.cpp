@@ -4,7 +4,7 @@
 #include <fstream>
 #include <algorithm>
 
-void ModelEditor::saveGameEntitiesToFile()
+void ModelEditor::saveModelEntitiesToFile()
 {
 	// Editor must be loaded
 	if (!_isEditorLoaded)
@@ -15,7 +15,7 @@ void ModelEditor::saveGameEntitiesToFile()
 	// Error checking
 	if (_currentProjectID == "")
 	{
-		_fe3d.logger_throwError("No current project loaded --> ModelEditor::saveGameEntitiesToFile()");
+		_fe3d.logger_throwError("No current project loaded --> ModelEditor::saveModelEntitiesToFile()");
 	}
 
 	// Create or overwrite models file
@@ -26,34 +26,34 @@ void ModelEditor::saveGameEntitiesToFile()
 	for (auto& modelID : _loadedModelIDs)
 	{
 		// Check if a 3D entity for this model is existing
-		if (_fe3d.gameEntity_isExisting(modelID))
+		if (_fe3d.modelEntity_isExisting(modelID))
 		{
 			// General data
-			auto meshPath = _fe3d.gameEntity_getMeshPath(modelID);
-			auto diffuseMapPath = _fe3d.gameEntity_getDiffuseMapPath(modelID);
-			auto lightMapPath = _fe3d.gameEntity_getLightMapPath(modelID);
-			auto reflectionMapPath = _fe3d.gameEntity_getReflectionMapPath(modelID);
-			auto normalMapPath = _fe3d.gameEntity_getNormalMapPath(modelID);
-			auto modelSize = _fe3d.gameEntity_getSize(modelID);
-			auto isFaceCulled = _fe3d.gameEntity_isFaceCulled(modelID);
-			auto isShadowed = _fe3d.gameEntity_isShadowed(modelID);
-			auto isTransparent = _fe3d.gameEntity_isTransparent(modelID);
-			auto isSpecular = _fe3d.gameEntity_isSpecularLighted(modelID);
-			auto specularFactor = _fe3d.gameEntity_getSpecularFactor(modelID);
-			auto specularStrength = _fe3d.gameEntity_getSpecularIntensity(modelID);
-			auto lightness = _fe3d.gameEntity_getLightness(modelID);
-			auto color = _fe3d.gameEntity_getColor(modelID);
-			auto uvRepeat = _fe3d.gameEntity_getUvRepeat(modelID);
-			auto lodEntityID = _fe3d.gameEntity_getLevelOfDetailEntityID(modelID);
-			auto isInstanced = _fe3d.gameEntity_isInstanced(modelID);
+			auto meshPath = _fe3d.modelEntity_getMeshPath(modelID);
+			auto diffuseMapPath = _fe3d.modelEntity_getDiffuseMapPath(modelID);
+			auto lightMapPath = _fe3d.modelEntity_getLightMapPath(modelID);
+			auto reflectionMapPath = _fe3d.modelEntity_getReflectionMapPath(modelID);
+			auto normalMapPath = _fe3d.modelEntity_getNormalMapPath(modelID);
+			auto modelSize = _fe3d.modelEntity_getSize(modelID);
+			auto isFaceCulled = _fe3d.modelEntity_isFaceCulled(modelID);
+			auto isShadowed = _fe3d.modelEntity_isShadowed(modelID);
+			auto isTransparent = _fe3d.modelEntity_isTransparent(modelID);
+			auto isSpecular = _fe3d.modelEntity_isSpecularLighted(modelID);
+			auto specularFactor = _fe3d.modelEntity_getSpecularFactor(modelID);
+			auto specularStrength = _fe3d.modelEntity_getSpecularIntensity(modelID);
+			auto lightness = _fe3d.modelEntity_getLightness(modelID);
+			auto color = _fe3d.modelEntity_getColor(modelID);
+			auto uvRepeat = _fe3d.modelEntity_getUvRepeat(modelID);
+			auto lodEntityID = _fe3d.modelEntity_getLevelOfDetailEntityID(modelID);
+			auto isInstanced = _fe3d.modelEntity_isInstanced(modelID);
 
 			// Reflection type
 			int reflectionType;
-			if (_fe3d.gameEntity_isSceneReflective(modelID))
+			if (_fe3d.modelEntity_isSceneReflective(modelID))
 			{
 				reflectionType = 2;
 			}
-			else if (_fe3d.gameEntity_isSkyReflective(modelID))
+			else if (_fe3d.modelEntity_isSkyReflective(modelID))
 			{
 				reflectionType = 1;
 			}

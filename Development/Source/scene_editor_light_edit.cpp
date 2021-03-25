@@ -15,7 +15,7 @@ void SceneEditor::_updateLightEditing()
 			string hoveredAabbID = _fe3d.collision_checkCursorInAny().first;
 
 			// Check if user selected a lightbulb model
-			for (auto& entityID : _fe3d.gameEntity_getAllIDs())
+			for (auto& entityID : _fe3d.modelEntity_getAllIDs())
 			{
 				// Must be light preview entity
 				if (entityID.substr(0, 11) == "@pointlight")
@@ -41,7 +41,7 @@ void SceneEditor::_updateLightEditing()
 								_transformation = TransformationType::TRANSLATION;
 
 								// Filling writefields
-								Vec3 position = _fe3d.gameEntity_getPosition(ACTIVE_BULB_ID);
+								Vec3 position = _fe3d.modelEntity_getPosition(ACTIVE_BULB_ID);
 								_gui.getViewport("right")->getWindow("main")->getScreen("pointlightPropertiesMenu")->getWriteField("x")->setTextContent(to_string(static_cast<int>(position.x)));
 								_gui.getViewport("right")->getWindow("main")->getScreen("pointlightPropertiesMenu")->getWriteField("y")->setTextContent(to_string(static_cast<int>(position.y)));
 								_gui.getViewport("right")->getWindow("main")->getScreen("pointlightPropertiesMenu")->getWriteField("z")->setTextContent(to_string(static_cast<int>(position.z)));
@@ -53,7 +53,7 @@ void SceneEditor::_updateLightEditing()
 						// Don't reset if lightbulb is active
 						if (entityID != ACTIVE_BULB_ID)
 						{
-							_fe3d.gameEntity_setSize(entityID, DEFAULT_LIGHTBULB_SIZE);
+							_fe3d.modelEntity_setSize(entityID, DEFAULT_LIGHTBULB_SIZE);
 							_fe3d.aabbEntity_setSize(entityID, DEFAULT_LIGHTBULB_AABB_SIZE);
 						}
 					}
@@ -88,7 +88,7 @@ void SceneEditor::_updateLightEditing()
 				{
 					if (_gui.getViewport("right")->getWindow("main")->getScreen("pointlightPropertiesMenu")->getButton("delete")->isHovered()) // Delete button
 					{
-						_fe3d.gameEntity_delete(ACTIVE_BULB_ID);
+						_fe3d.modelEntity_delete(ACTIVE_BULB_ID);
 						_fe3d.lightEntity_delete(ACTIVE_LIGHT_ID);
 						_gui.getViewport("right")->getWindow("main")->setActiveScreen("sceneEditorControls");
 						ACTIVE_BULB_ID = "";
@@ -121,9 +121,9 @@ void SceneEditor::_updateLightEditing()
 				_handleValueChanging("pointlightPropertiesMenu", "bMinus", "b", color.b, -LIGHTING_COLOR_CHANGING_SPEED, 255.0f, 0.0f, 1.0f);
 				
 				// Apply new values
-				_fe3d.gameEntity_setPosition(ACTIVE_BULB_ID, position);
+				_fe3d.modelEntity_setPosition(ACTIVE_BULB_ID, position);
 				_fe3d.lightEntity_setPosition(ACTIVE_LIGHT_ID, position);
-				_fe3d.gameEntity_setColor(ACTIVE_BULB_ID, color);
+				_fe3d.modelEntity_setColor(ACTIVE_BULB_ID, color);
 				_fe3d.lightEntity_setColor(ACTIVE_LIGHT_ID, color);
 				_fe3d.lightEntity_setIntensity(ACTIVE_LIGHT_ID, intensity);
 				_fe3d.lightEntity_setDistanceFactor(ACTIVE_LIGHT_ID, distance);

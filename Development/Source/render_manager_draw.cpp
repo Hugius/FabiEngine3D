@@ -56,26 +56,26 @@ void RenderManager::_renderWaterEntity()
 	}
 }
 
-void RenderManager::_renderGameEntities()
+void RenderManager::_renderModelEntities()
 {
-	if (!_entityBus->getGameEntities().empty())
+	if (!_entityBus->getModelEntities().empty())
 	{
 		// Bind
-		_gameEntityRenderer.bind();
+		_modelEntityRenderer.bind();
 
 		// Render lights
-		_gameEntityRenderer.renderLightEntities(_entityBus->getLightEntities());
+		_modelEntityRenderer.renderLightEntities(_entityBus->getLightEntities());
 
 		// Render GAME entities
-		auto allGameEntities = _entityBus->getGameEntities();
-		for (auto& [keyID, gameEntity] : allGameEntities)
+		auto allModelEntities = _entityBus->getModelEntities();
+		for (auto& [keyID, modelEntity] : allModelEntities)
 		{
 			// Check if LOD entity needs to be rendered
-			if (gameEntity->isLevelOfDetailed())
+			if (modelEntity->isLevelOfDetailed())
 			{
 				// Try to find LOD entity
-				auto foundPair = allGameEntities.find(gameEntity->getLodEntityID());
-				if (foundPair != allGameEntities.end())
+				auto foundPair = allModelEntities.find(modelEntity->getLodEntityID());
+				if (foundPair != allModelEntities.end())
 				{
 					auto lodEntity = foundPair->second;
 
@@ -86,14 +86,14 @@ void RenderManager::_renderGameEntities()
 					bool originalVisibility = lodEntity->isVisible();
 
 					// Change transformation
-					lodEntity->setTranslation(gameEntity->getTranslation());
-					lodEntity->setRotation(gameEntity->getRotation());
-					lodEntity->setScaling((gameEntity->getScaling() / gameEntity->getOriginalScaling()) * originalSize);
-					lodEntity->setVisible(gameEntity->isVisible());
+					lodEntity->setTranslation(modelEntity->getTranslation());
+					lodEntity->setRotation(modelEntity->getRotation());
+					lodEntity->setScaling((modelEntity->getScaling() / modelEntity->getOriginalScaling()) * originalSize);
+					lodEntity->setVisible(modelEntity->isVisible());
 					lodEntity->updateModelMatrix();
 
 					// Render LOD entity
-					_gameEntityRenderer.render(lodEntity);
+					_modelEntityRenderer.render(lodEntity);
 
 					// Revert to original transformation
 					lodEntity->setTranslation(originalPosition);
@@ -104,17 +104,17 @@ void RenderManager::_renderGameEntities()
 				}
 				else
 				{
-					Logger::throwError("GAME entity \"" + gameEntity->getID() + "\" has a nonexisting LOD entity \"" + gameEntity->getLodEntityID() + "\"");
+					Logger::throwError("MODEL entity \"" + modelEntity->getID() + "\" has a nonexisting LOD entity \"" + modelEntity->getLodEntityID() + "\"");
 				}
 			}
 			else // Render high-quality entity
 			{
-				_gameEntityRenderer.render(gameEntity);
+				_modelEntityRenderer.render(modelEntity);
 			}
 		}
 
 		// Unbind
-		_gameEntityRenderer.unbind();
+		_modelEntityRenderer.unbind();
 	}
 }
 

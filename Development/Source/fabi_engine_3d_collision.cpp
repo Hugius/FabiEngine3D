@@ -35,8 +35,8 @@ pair<const string, float> FabiEngine3D::collision_checkCursorInAny()
 	for (auto [keyID, entity] : _core->_aabbEntityManager.getEntities())
 	{
 		// Check if parent entity is not level of detailed
-		if (!(entity->getParentType() == AabbParentType::GAME_ENTITY &&
-			_core->_gameEntityManager.getEntity(entity->getParentID())->isLevelOfDetailed()))
+		if (!(entity->getParentType() == AabbParentType::MODEL_ENTITY &&
+			_core->_modelEntityManager.getEntity(entity->getParentID())->isLevelOfDetailed()))
 		{
 			// Check if AABB is responsive
 			if (entity->isRaycastResponsive() && entity->isVisible())

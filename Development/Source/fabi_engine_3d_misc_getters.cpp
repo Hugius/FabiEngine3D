@@ -76,7 +76,7 @@ float FabiEngine3D::misc_stopMillisecondTimer()
 
 float FabiEngine3D::misc_getLevelOfDetailDistance()
 {
-	return _core->_gameEntityManager.getLodDistance();
+	return _core->_modelEntityManager.getLodDistance();
 }
 
 string FabiEngine3D::misc_getWinExplorerFilename(const string& startingDirectory, const string& fileType)
@@ -388,7 +388,7 @@ vector<pair<string, int>> FabiEngine3D::misc_getUpdateProfilingStatistics()
 		pair<string, int>("collisionUpdate", 0),
 		pair<string, int>("skyEntityUpdate", 0),
 		pair<string, int>("waterEntityUpdate", 0),
-		pair<string, int>("gameEntityUpdate", 0),
+		pair<string, int>("modelEntityUpdate", 0),
 		pair<string, int>("billboardEntityUpdate", 0),
 		pair<string, int>("aabbEntityUpdate", 0),
 		pair<string, int>("guiEntityUpdate", 0),
@@ -419,7 +419,7 @@ vector<pair<string, int>> FabiEngine3D::misc_getRenderProfilingStatistics()
 		pair<string, int>("skyEntityRender", 0),
 		pair<string, int>("terrainEntityRender", 0),
 		pair<string, int>("waterEntityRender", 0),
-		pair<string, int>("gameEntityRender", 0),
+		pair<string, int>("modelEntityRender", 0),
 		pair<string, int>("billboardEntityRender", 0),
 		pair<string, int>("aabbEntityRender", 0),
 		pair<string, int>("guiTextEntityRender", 0),

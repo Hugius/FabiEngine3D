@@ -6,7 +6,7 @@
 void FabiEngine3D::waterEntity_add(const string& ID)
 {
 	_core->_waterEntityManager.addWaterEntity(ID);
-	_core->_waterEntityManager.generateModel(ID);
+	_core->_waterEntityManager.generateMesh(ID);
 }
 
 void FabiEngine3D::waterEntity_deleteAll()
@@ -90,7 +90,7 @@ void FabiEngine3D::waterEntity_setPosition(const string& ID, Vec3 position)
 void FabiEngine3D::waterEntity_setSize(const string& ID, float size)
 {
 	_core->_waterEntityManager.getEntity(ID)->setSize(size);
-	_core->_waterEntityManager.generateModel(ID);
+	_core->_waterEntityManager.generateMesh(ID);
 }
 
 void FabiEngine3D::waterEntity_setWaving(const string& ID, bool enabled)

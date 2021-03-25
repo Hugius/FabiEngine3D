@@ -9,13 +9,13 @@ void RenderManager::_captureSceneReflections(CameraManager& camera)
 	bool waterReflectionsNeeded = (_renderBus.isWaterEffectsEnabled() && _entityBus->getWaterEntity() != nullptr) &&
 		_entityBus->getWaterEntity()->isReflective();
 
-	// Search for a reflective GAME entity
+	// Search for a reflective MODEL entity
 	bool anyReflectiveEntityFound = false;
 	if (!waterReflectionsNeeded)
 	{
-		for (auto& [keyID, gameEntity]: _entityBus->getGameEntities())
+		for (auto& [keyID, modelEntity]: _entityBus->getModelEntities())
 		{
-			if (gameEntity->isSceneReflective() && gameEntity->isVisible())
+			if (modelEntity->isSceneReflective() && modelEntity->isVisible())
 			{
 				anyReflectiveEntityFound = true;
 				break;
@@ -37,15 +37,15 @@ void RenderManager::_captureSceneReflections(CameraManager& camera)
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		// Save and hide reflective GAME entities
-		vector<string> reflectiveGameEntityIDs;
+		vector<string> reflectiveModelEntityIDs;
 		if (sceneReflectionsNeeded)
 		{
-			for (auto& [keyID, gameEntity]: _entityBus->getGameEntities())
+			for (auto& [keyID, modelEntity]: _entityBus->getModelEntities())
 			{
-				if (gameEntity->isSceneReflective() && gameEntity->isVisible())
+				if (modelEntity->isSceneReflective() && modelEntity->isVisible())
 				{
-					gameEntity->setVisible(false);
-					reflectiveGameEntityIDs.push_back(gameEntity->getID());
+					modelEntity->setVisible(false);
+					reflectiveModelEntityIDs.push_back(modelEntity->getID());
 				}
 			}
 		}
@@ -85,7 +85,7 @@ void RenderManager::_captureSceneReflections(CameraManager& camera)
 		// Render game & billboard entities only for scene reflections
 		if (sceneReflectionsNeeded)
 		{
-			_renderGameEntities();
+			_renderModelEntities();
 			_renderBillboardEntities();
 		}
 
@@ -107,13 +107,13 @@ void RenderManager::_captureSceneReflections(CameraManager& camera)
 		// Restore reflective GAME entities
 		if (sceneReflectionsNeeded)
 		{
-			for (auto& [keyID, gameEntity] : _entityBus->getGameEntities()) // Loop over all GAME entities
+			for (auto& [keyID, modelEntity] : _entityBus->getModelEntities()) // Loop over all GAME entities
 			{
-				for (auto& reflectiveID : reflectiveGameEntityIDs) // Loop over all reflective GAME entities
+				for (auto& reflectiveID : reflectiveModelEntityIDs) // Loop over all reflective GAME entities
 				{
-					if (gameEntity->getID() == reflectiveID) // Check if IDs match
+					if (modelEntity->getID() == reflectiveID) // Check if IDs match
 					{
-						gameEntity->setVisible(true);
+						modelEntity->setVisible(true);
 					}
 				}
 			}
@@ -143,7 +143,7 @@ void RenderManager::_captureSceneRefractions()
 		// Render whole scene
 		_renderSkyEntity();
 		_renderTerrainEntity();
-		_renderGameEntities();
+		_renderModelEntities();
 		_renderBillboardEntities();
 
 		// Unbind
@@ -165,15 +165,15 @@ void RenderManager::_captureShadows()
 		_shadowRenderer.bind();
 
 		// Render GAME entities
-		auto allGameEntities = _entityBus->getGameEntities();
-		for (auto& [keyID, gameEntity] : allGameEntities)
+		auto allModelEntities = _entityBus->getModelEntities();
+		for (auto& [keyID, modelEntity] : allModelEntities)
 		{
 			// Check if LOD entity needs to be rendered
-			if (gameEntity->isLevelOfDetailed())
+			if (modelEntity->isLevelOfDetailed())
 			{
 				// Try to find LOD entity
-				auto foundPair = allGameEntities.find(gameEntity->getLodEntityID());
-				if (foundPair != allGameEntities.end())
+				auto foundPair = allModelEntities.find(modelEntity->getLodEntityID());
+				if (foundPair != allModelEntities.end())
 				{
 					auto lodEntity = foundPair->second;
 
@@ -184,10 +184,10 @@ void RenderManager::_captureShadows()
 					bool originalVisibility = lodEntity->isVisible();
 
 					// Change transformation
-					lodEntity->setTranslation(gameEntity->getTranslation());
-					lodEntity->setRotation(gameEntity->getRotation());
-					lodEntity->setScaling((gameEntity->getScaling() / gameEntity->getOriginalScaling()) * originalSize);
-					lodEntity->setVisible(gameEntity->isVisible());
+					lodEntity->setTranslation(modelEntity->getTranslation());
+					lodEntity->setRotation(modelEntity->getRotation());
+					lodEntity->setScaling((modelEntity->getScaling() / modelEntity->getOriginalScaling()) * originalSize);
+					lodEntity->setVisible(modelEntity->isVisible());
 					lodEntity->updateModelMatrix();
 
 					// Render LOD entity
@@ -202,12 +202,12 @@ void RenderManager::_captureShadows()
 				}
 				else
 				{
-					Logger::throwError("GAME entity \"" + gameEntity->getID() + "\" has a nonexisting LOD entity \"" + gameEntity->getLodEntityID() + "\"");
+					Logger::throwError("MODEL entity \"" + modelEntity->getID() + "\" has a nonexisting LOD entity \"" + modelEntity->getLodEntityID() + "\"");
 				}
 			}
 			else // Render high-quality entity
 			{
-				_shadowRenderer.render(gameEntity);
+				_shadowRenderer.render(modelEntity);
 			}
 		}
 

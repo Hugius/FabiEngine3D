@@ -31,7 +31,7 @@ void BottomViewportController::initialize()
 	_statsScreen->addTextfield("cameraYawPitch", Vec2(-1.0f, 0.1f), Vec2(0.0f), "", Vec3(1.0f), false, true);
 	_statsScreen->addTextfield("cursorPosition", Vec2(-1.0f, -0.05f), Vec2(0.0f), "", Vec3(1.0f), false, true);
 	_statsScreen->addTextfield("triangleCount", Vec2(-1.0f, -0.2f), Vec2(0.0f), "", Vec3(1.0f), false, true);
-	_statsScreen->addTextfield("gameEntityCount", Vec2(-1.0f, -0.35f), Vec2(0.0f), "", Vec3(1.0f), false, true);
+	_statsScreen->addTextfield("modelEntityCount", Vec2(-1.0f, -0.35f), Vec2(0.0f), "", Vec3(1.0f), false, true);
 	_statsScreen->addTextfield("billboardEntityCount", Vec2(-1.0f, -0.5f), Vec2(0.0f), "", Vec3(1.0f), false, true);
 	_statsScreen->addTextfield("lightEntityCount", Vec2(-1.0f, -0.65f), Vec2(0.0f), "", Vec3(1.0f), false, true);
 	_statsScreen->addTextfield("aabbEntityCount", Vec2(-1.0f, -0.8f), Vec2(0.0f), "", Vec3(1.0f), false, true);
@@ -145,11 +145,11 @@ void BottomViewportController::update()
 		_fe3d.textEntity_setTextContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 
-	// Update game entity count
-	if (_fe3d.misc_checkInterval("gameEntityCount", 10))
+	// Update model entity count
+	if (_fe3d.misc_checkInterval("modelEntityCount", 10))
 	{
-		string textID = _statsScreen->getTextfield("gameEntityCount")->getEntityID();
-		string text = "Game entities: " + to_string(_fe3d.gameEntity_getAllIDs().size());
+		string textID = _statsScreen->getTextfield("modelEntityCount")->getEntityID();
+		string text = "Game entities: " + to_string(_fe3d.modelEntity_getAllIDs().size());
 		_fe3d.textEntity_setTextContent(textID, text, CHAR_SIZE.x, CHAR_SIZE.y);
 	}
 

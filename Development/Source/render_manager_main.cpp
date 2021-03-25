@@ -13,7 +13,7 @@ RenderManager::RenderManager(RenderBus& renderBus, Timer& timer, TextureLoader& 
 	_skyEntityRenderer        ("sky_entity_shader.vert",       "sky_entity_shader.frag",       renderBus),
 	_terrainEntityRenderer    ("terrain_entity_shader.vert",   "terrain_entity_shader.frag",   renderBus),
 	_waterEntityRenderer      ("water_entity_shader.vert",     "water_entity_shader.frag",     renderBus),
-	_gameEntityRenderer       ("game_entity_shader.vert",      "game_entity_shader.frag",      renderBus),
+	_modelEntityRenderer       ("model_entity_shader.vert",     "model_entity_shader.frag",     renderBus),
 	_billboardEntityRenderer  ("billboard_entity_shader.vert", "billboard_entity_shader.frag", renderBus),
 	_aabbEntityRenderer       ("aabb_entity_shader.vert",      "aabb_entity_shader.frag",      renderBus),
 	_guiEntityRenderer        ("gui_entity_shader.vert",       "gui_entity_shader.frag",       renderBus),
@@ -80,7 +80,7 @@ void RenderManager::renderScene(EntityBus * entityBus, CameraManager& camera)
 		_renderSkyEntity();
 		_renderTerrainEntity();
 		_renderWaterEntity();
-		_renderGameEntities();
+		_renderModelEntities();
 		_renderBillboardEntities();
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 		glViewport(0, 0, Config::getInst().getWindowSize().x, Config::getInst().getWindowSize().y);
@@ -132,8 +132,8 @@ void RenderManager::renderScene(EntityBus * entityBus, CameraManager& camera)
 		_timer.startDeltaPart("waterEntityRender");
 		_renderWaterEntity();
 		_timer.stopDeltaPart();
-		_timer.startDeltaPart("gameEntityRender");
-		_renderGameEntities();
+		_timer.startDeltaPart("modelEntityRender");
+		_renderModelEntities();
 		_timer.stopDeltaPart();
 		_timer.startDeltaPart("billboardEntityRender");
 		_renderBillboardEntities();

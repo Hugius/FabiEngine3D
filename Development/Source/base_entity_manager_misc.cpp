@@ -17,9 +17,9 @@ bool BaseEntityManager::isExisting(const string& ID)
 		{
 			return (_getWaterEntity(ID) != nullptr);
 		}
-		case(EntityType::GAME):
+		case(EntityType::MODEL):
 		{
-			return (_getGameEntity(ID) != nullptr);
+			return (_getModelEntity(ID) != nullptr);
 		}
 		case(EntityType::BILLBOARD):
 		{
@@ -56,9 +56,9 @@ unordered_map<string, shared_ptr<BillboardEntity>>& BaseEntityManager::_getBillb
 	return _billboardEntities;
 }
 
-unordered_map<string, shared_ptr<GameEntity>>& BaseEntityManager::_getGameEntities()
+unordered_map<string, shared_ptr<ModelEntity>>& BaseEntityManager::_getModelEntities()
 {
-	return _gameEntities;
+	return _modelEntities;
 }
 
 unordered_map<string, shared_ptr<GuiEntity>>& BaseEntityManager::_getGuiEntities()
@@ -119,11 +119,11 @@ shared_ptr<BillboardEntity> BaseEntityManager::_getBillboardEntity(const string&
 	}
 }
 
-shared_ptr<GameEntity> BaseEntityManager::_getGameEntity(const string& ID)
+shared_ptr<ModelEntity> BaseEntityManager::_getModelEntity(const string& ID)
 {
-	auto it = _gameEntities.find(ID);
+	auto it = _modelEntities.find(ID);
 
-	if (it == _gameEntities.end())
+	if (it == _modelEntities.end())
 	{
 		return nullptr;
 	}

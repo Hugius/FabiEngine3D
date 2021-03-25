@@ -1,6 +1,6 @@
 #include "script_interpreter.hpp"
 
-bool ScriptInterpreter::_validateFe3dGameEntity(const string& ID, bool previewEntity)
+bool ScriptInterpreter::_validateFe3dModelEntity(const string& ID, bool previewEntity)
 {
 	// Cannot request/delete a preview entity
 	if (!previewEntity && ID.front() == '@')
@@ -10,7 +10,7 @@ bool ScriptInterpreter::_validateFe3dGameEntity(const string& ID, bool previewEn
 	}
 
 	// Check if entity exists
-	if (!_fe3d.gameEntity_isExisting(ID))
+	if (!_fe3d.modelEntity_isExisting(ID))
 	{
 		if (previewEntity)
 		{
@@ -27,10 +27,10 @@ bool ScriptInterpreter::_validateFe3dGameEntity(const string& ID, bool previewEn
 	return true;
 }
 
-bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
+bool ScriptInterpreter::_executeFe3dModelEntityFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine type of function
-	if (functionName == "fe3d:model_is_existing") // Get gameEntity existence
+	if (functionName == "fe3d:model_is_existing") // Get modelEntity existence
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -45,11 +45,11 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 			}
 
 			// Check if existing
-			auto result = _fe3d.gameEntity_isExisting(arguments[0].getString());
+			auto result = _fe3d.modelEntity_isExisting(arguments[0].getString());
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 		}
 	}
-	else if (functionName == "fe3d:model_find_ids") // Find full gameEntity IDs
+	else if (functionName == "fe3d:model_find_ids") // Find full modelEntity IDs
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -63,8 +63,8 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 				return true;
 			}
 
-			// Find full gameEntity IDs based on part ID
-			for (auto& ID : _fe3d.gameEntity_getAllIDs())
+			// Find full modelEntity IDs based on part ID
+			for (auto& ID : _fe3d.modelEntity_getAllIDs())
 			{
 				// If substring matches
 				if (arguments[0].getString() == ID.substr(0, arguments[0].getString().size()))
@@ -78,12 +78,12 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 			}
 		}
 	}
-	else if (functionName == "fe3d:model_get_all_ids") // Get all gameEntity IDs
+	else if (functionName == "fe3d:model_get_all_ids") // Get all modelEntity IDs
 	{
 		// Validate arguments
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
-			auto result = _fe3d.gameEntity_getAllIDs();
+			auto result = _fe3d.modelEntity_getAllIDs();
 
 			// For every model
 			for (auto& ID : result)
@@ -96,12 +96,12 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 			}
 		}
 	}
-	else if (functionName == "fe3d:model_place") // Create gameEntity
+	else if (functionName == "fe3d:model_place") // Create modelEntity
 	{
 		auto types =
 		{
-			ScriptValueType::STRING, // New gameEntity ID
-			ScriptValueType::STRING, // Preview gameEntity ID
+			ScriptValueType::STRING, // New modelEntity ID
+			ScriptValueType::STRING, // Preview modelEntity ID
 			ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL // Position
 		};
 
@@ -115,15 +115,15 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 				return true;
 			}
 
-			// Check if gameEntity already exists
-			if (_fe3d.gameEntity_isExisting(arguments[0].getString()))
+			// Check if modelEntity already exists
+			if (_fe3d.modelEntity_isExisting(arguments[0].getString()))
 			{
 				_throwScriptError("Model with ID \"" + arguments[0].getString() + "\" already exists!");
 				return true;
 			}
 
 			// Validate preview model ID
-			if (_validateFe3dGameEntity("@" + arguments[1].getString(), true))
+			if (_validateFe3dModelEntity("@" + arguments[1].getString(), true))
 			{
 				_sceneEditor.copyPreviewModel(arguments[0].getString(), "@" + arguments[1].getString(),
 					Vec3(arguments[2].getDecimal(), arguments[3].getDecimal(), arguments[4].getDecimal()));
@@ -131,7 +131,7 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 			}
 		}
 	}
-	else if (functionName == "fe3d:model_delete") // Delete gameEntity
+	else if (functionName == "fe3d:model_delete") // Delete modelEntity
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -139,14 +139,14 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing model ID
-			if (_validateFe3dGameEntity(arguments[0].getString()))
+			if (_validateFe3dModelEntity(arguments[0].getString()))
 			{
-				_fe3d.gameEntity_delete(arguments[0].getString());
+				_fe3d.modelEntity_delete(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}
 	}
-	else if (functionName == "fe3d:model_set_visible") // Set gameEntity visibility
+	else if (functionName == "fe3d:model_set_visible") // Set modelEntity visibility
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::BOOLEAN };
 
@@ -154,16 +154,16 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing model ID
-			if (_validateFe3dGameEntity(arguments[0].getString()))
+			if (_validateFe3dModelEntity(arguments[0].getString()))
 			{
 				// Determine if model must be visible or not
 				if (arguments[1].getBoolean())
 				{
-					_fe3d.gameEntity_show(arguments[0].getString());
+					_fe3d.modelEntity_show(arguments[0].getString());
 				}
 				else
 				{
-					_fe3d.gameEntity_hide(arguments[0].getString());
+					_fe3d.modelEntity_hide(arguments[0].getString());
 				}
 
 				// Return
@@ -171,7 +171,7 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 			}
 		}
 	}
-	else if (functionName == "fe3d:model_is_visible") // Get gameEntity visibility
+	else if (functionName == "fe3d:model_is_visible") // Get modelEntity visibility
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -179,14 +179,14 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing model ID
-			if (_validateFe3dGameEntity(arguments[0].getString()))
+			if (_validateFe3dModelEntity(arguments[0].getString()))
 			{
-				auto result = _fe3d.gameEntity_isVisible(arguments[0].getString());
+				auto result = _fe3d.modelEntity_isVisible(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 			}
 		}
 	}
-	else if (functionName == "fe3d:model_set_position") // Set gameEntity position
+	else if (functionName == "fe3d:model_set_position") // Set modelEntity position
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
@@ -194,15 +194,15 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing model ID
-			if (_validateFe3dGameEntity(arguments[0].getString()))
+			if (_validateFe3dModelEntity(arguments[0].getString()))
 			{
-				_fe3d.gameEntity_setPosition(arguments[0].getString(),
+				_fe3d.modelEntity_setPosition(arguments[0].getString(),
 					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}
 	}
-	else if (functionName == "fe3d:model_move") // Move gameEntity
+	else if (functionName == "fe3d:model_move") // Move modelEntity
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
@@ -210,15 +210,15 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing model ID
-			if (_validateFe3dGameEntity(arguments[0].getString()))
+			if (_validateFe3dModelEntity(arguments[0].getString()))
 			{
-				_fe3d.gameEntity_move(arguments[0].getString(),
+				_fe3d.modelEntity_move(arguments[0].getString(),
 					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}
 	}
-	else if (functionName == "fe3d:model_get_position") // Get gameEntity position
+	else if (functionName == "fe3d:model_get_position") // Get modelEntity position
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -226,14 +226,14 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing model ID
-			if (_validateFe3dGameEntity(arguments[0].getString()))
+			if (_validateFe3dModelEntity(arguments[0].getString()))
 			{
-				auto result = _fe3d.gameEntity_getPosition(arguments[0].getString());
+				auto result = _fe3d.modelEntity_getPosition(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));
 			}
 		}
 	}
-	else if (functionName == "fe3d:model_set_rotation_origin") // Set gameEntity rotation oriign
+	else if (functionName == "fe3d:model_set_rotation_origin") // Set modelEntity rotation oriign
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
@@ -241,15 +241,15 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing model ID
-			if (_validateFe3dGameEntity(arguments[0].getString()))
+			if (_validateFe3dModelEntity(arguments[0].getString()))
 			{
-				_fe3d.gameEntity_setRotationOrigin(arguments[0].getString(),
+				_fe3d.modelEntity_setRotationOrigin(arguments[0].getString(),
 					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}
 	}
-	else if (functionName == "fe3d:model_get_rotation_origin") // Get gameEntity rotation origin
+	else if (functionName == "fe3d:model_get_rotation_origin") // Get modelEntity rotation origin
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -257,14 +257,14 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing model ID
-			if (_validateFe3dGameEntity(arguments[0].getString()))
+			if (_validateFe3dModelEntity(arguments[0].getString()))
 			{
-				auto result = _fe3d.gameEntity_getRotationOrigin(arguments[0].getString());
+				auto result = _fe3d.modelEntity_getRotationOrigin(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));
 			}
 		}
 	}
-	else if (functionName == "fe3d:model_set_rotation") // Set gameEntity rotation
+	else if (functionName == "fe3d:model_set_rotation") // Set modelEntity rotation
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
@@ -272,15 +272,15 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing model ID
-			if (_validateFe3dGameEntity(arguments[0].getString()))
+			if (_validateFe3dModelEntity(arguments[0].getString()))
 			{
-				_fe3d.gameEntity_setRotation(arguments[0].getString(),
+				_fe3d.modelEntity_setRotation(arguments[0].getString(),
 					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}
 	}
-	else if (functionName == "fe3d:model_rotate") // Rotate gameEntity
+	else if (functionName == "fe3d:model_rotate") // Rotate modelEntity
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
@@ -288,15 +288,15 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing model ID
-			if (_validateFe3dGameEntity(arguments[0].getString()))
+			if (_validateFe3dModelEntity(arguments[0].getString()))
 			{
-				_fe3d.gameEntity_rotate(arguments[0].getString(),
+				_fe3d.modelEntity_rotate(arguments[0].getString(),
 					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}
 	}
-	else if (functionName == "fe3d:model_get_rotation") // Get gameEntity rotation
+	else if (functionName == "fe3d:model_get_rotation") // Get modelEntity rotation
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -304,14 +304,14 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing model ID
-			if (_validateFe3dGameEntity(arguments[0].getString()))
+			if (_validateFe3dModelEntity(arguments[0].getString()))
 			{
-				auto result = _fe3d.gameEntity_getRotation(arguments[0].getString());
+				auto result = _fe3d.modelEntity_getRotation(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));
 			}
 		}
 	}
-	else if (functionName == "fe3d:model_set_size") // Set gameEntity size
+	else if (functionName == "fe3d:model_set_size") // Set modelEntity size
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
@@ -319,15 +319,15 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing model ID
-			if (_validateFe3dGameEntity(arguments[0].getString()))
+			if (_validateFe3dModelEntity(arguments[0].getString()))
 			{
-				_fe3d.gameEntity_setSize(arguments[0].getString(),
+				_fe3d.modelEntity_setSize(arguments[0].getString(),
 					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}
 	}
-	else if (functionName == "fe3d:model_scale") // Scale gameEntity
+	else if (functionName == "fe3d:model_scale") // Scale modelEntity
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
@@ -335,15 +335,15 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing model ID
-			if (_validateFe3dGameEntity(arguments[0].getString()))
+			if (_validateFe3dModelEntity(arguments[0].getString()))
 			{
-				_fe3d.gameEntity_scale(arguments[0].getString(),
+				_fe3d.modelEntity_scale(arguments[0].getString(),
 					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}
 	}
-	else if (functionName == "fe3d:model_get_size") // Get gameEntity size
+	else if (functionName == "fe3d:model_get_size") // Get modelEntity size
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -351,14 +351,14 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing model ID
-			if (_validateFe3dGameEntity(arguments[0].getString()))
+			if (_validateFe3dModelEntity(arguments[0].getString()))
 			{
-				auto result = _fe3d.gameEntity_getSize(arguments[0].getString());
+				auto result = _fe3d.modelEntity_getSize(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));
 			}
 		}
 	}
-	else if (functionName == "fe3d:model_set_color") // Set gameEntity color
+	else if (functionName == "fe3d:model_set_color") // Set modelEntity color
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
@@ -366,15 +366,15 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing model ID
-			if (_validateFe3dGameEntity(arguments[0].getString()))
+			if (_validateFe3dModelEntity(arguments[0].getString()))
 			{
-				_fe3d.gameEntity_setColor(arguments[0].getString(),
+				_fe3d.modelEntity_setColor(arguments[0].getString(),
 					Vec3(arguments[1].getDecimal(), arguments[2].getDecimal(), arguments[3].getDecimal()));
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}
 	}
-	else if (functionName == "fe3d:model_get_color") // Get gameEntity color
+	else if (functionName == "fe3d:model_get_color") // Get modelEntity color
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -382,14 +382,14 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing model ID
-			if (_validateFe3dGameEntity(arguments[0].getString()))
+			if (_validateFe3dModelEntity(arguments[0].getString()))
 			{
-				auto result = _fe3d.gameEntity_getColor(arguments[0].getString());
+				auto result = _fe3d.modelEntity_getColor(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));
 			}
 		}
 	}
-	else if (functionName == "fe3d:model_set_min_height") // Set gameEntity minimum height
+	else if (functionName == "fe3d:model_set_min_height") // Set modelEntity minimum height
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL };
 
@@ -397,14 +397,14 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing model ID
-			if (_validateFe3dGameEntity(arguments[0].getString()))
+			if (_validateFe3dModelEntity(arguments[0].getString()))
 			{
-				_fe3d.gameEntity_setMinHeight(arguments[0].getString(), arguments[1].getDecimal());
+				_fe3d.modelEntity_setMinHeight(arguments[0].getString(), arguments[1].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}
 	}
-	else if (functionName == "fe3d:model_get_min_height") // Get gameEntity minimum height
+	else if (functionName == "fe3d:model_get_min_height") // Get modelEntity minimum height
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -412,14 +412,14 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing model ID
-			if (_validateFe3dGameEntity(arguments[0].getString()))
+			if (_validateFe3dModelEntity(arguments[0].getString()))
 			{
-				auto result = _fe3d.gameEntity_getMinHeight(arguments[0].getString());
+				auto result = _fe3d.modelEntity_getMinHeight(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
 			}
 		}
 	}
-	else if (functionName == "fe3d:model_set_max_height") // Set gameEntity maximum height
+	else if (functionName == "fe3d:model_set_max_height") // Set modelEntity maximum height
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL };
 
@@ -427,14 +427,14 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing model ID
-			if (_validateFe3dGameEntity(arguments[0].getString()))
+			if (_validateFe3dModelEntity(arguments[0].getString()))
 			{
-				_fe3d.gameEntity_setMaxHeight(arguments[0].getString(), arguments[1].getDecimal());
+				_fe3d.modelEntity_setMaxHeight(arguments[0].getString(), arguments[1].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}
 	}
-	else if (functionName == "fe3d:model_get_max_height") // Get gameEntity maximum height
+	else if (functionName == "fe3d:model_get_max_height") // Get modelEntity maximum height
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -442,14 +442,14 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing model ID
-			if (_validateFe3dGameEntity(arguments[0].getString()))
+			if (_validateFe3dModelEntity(arguments[0].getString()))
 			{
-				auto result = _fe3d.gameEntity_getMaxHeight(arguments[0].getString());
+				auto result = _fe3d.modelEntity_getMaxHeight(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
 			}
 		}
 	}
-	else if (functionName == "fe3d:model_set_lightness") // Set gameEntity lightness
+	else if (functionName == "fe3d:model_set_lightness") // Set modelEntity lightness
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL };
 
@@ -457,14 +457,14 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing model ID
-			if (_validateFe3dGameEntity(arguments[0].getString()))
+			if (_validateFe3dModelEntity(arguments[0].getString()))
 			{
-				_fe3d.gameEntity_setLightness(arguments[0].getString(), arguments[1].getDecimal());
+				_fe3d.modelEntity_setLightness(arguments[0].getString(), arguments[1].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}
 	}
-	else if (functionName == "fe3d:model_get_lightness") // Get gameEntity lightness
+	else if (functionName == "fe3d:model_get_lightness") // Get modelEntity lightness
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -472,14 +472,14 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing model ID
-			if (_validateFe3dGameEntity(arguments[0].getString()))
+			if (_validateFe3dModelEntity(arguments[0].getString()))
 			{
-				auto result = _fe3d.gameEntity_getLightness(arguments[0].getString());
+				auto result = _fe3d.modelEntity_getLightness(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
 			}
 		}
 	}
-	else if (functionName == "fe3d:model_set_aabb_raycast_responsive") // Set gameEntity AABB raycasting responsiveness
+	else if (functionName == "fe3d:model_set_aabb_raycast_responsive") // Set modelEntity AABB raycasting responsiveness
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::BOOLEAN };
 
@@ -487,12 +487,12 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing model ID
-			if (_validateFe3dGameEntity(arguments[0].getString()))
+			if (_validateFe3dModelEntity(arguments[0].getString()))
 			{
 				// Retrieve all bound AABB IDs
 				auto aabbIDs = _fe3d.aabbEntity_getBoundIDs(arguments[0].getString(), true, false);
 
-				// Check if gameEntity has no AABBs
+				// Check if modelEntity has no AABBs
 				if (aabbIDs.empty())
 				{
 					_throwScriptError("Model has no bound AABBs!");
@@ -510,7 +510,7 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 			}
 		}
 	}
-	else if (functionName == "fe3d:model_set_aabb_collision_responsive") // Set gameEntity AABB collision responsiveness
+	else if (functionName == "fe3d:model_set_aabb_collision_responsive") // Set modelEntity AABB collision responsiveness
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::BOOLEAN };
 
@@ -518,12 +518,12 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing model ID
-			if (_validateFe3dGameEntity(arguments[0].getString()))
+			if (_validateFe3dModelEntity(arguments[0].getString()))
 			{
 				// Retrieve all bound AABB IDs
 				auto aabbIDs = _fe3d.aabbEntity_getBoundIDs(arguments[0].getString(), true, false);
 
-				// Check if gameEntity has no AABBs
+				// Check if modelEntity has no AABBs
 				if (aabbIDs.empty())
 				{
 					_throwScriptError("Model has no bound AABBs!");
@@ -541,7 +541,7 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 			}
 		}
 	}
-	else if (functionName == "fe3d:model_set_alpha") // Set gameEntity alpha
+	else if (functionName == "fe3d:model_set_alpha") // Set modelEntity alpha
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL };
 
@@ -549,14 +549,14 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing model ID
-			if (_validateFe3dGameEntity(arguments[0].getString()))
+			if (_validateFe3dModelEntity(arguments[0].getString()))
 			{
-				_fe3d.gameEntity_setAlpha(arguments[0].getString(), arguments[1].getDecimal());
+				_fe3d.modelEntity_setAlpha(arguments[0].getString(), arguments[1].getDecimal());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 			}
 		}
 	}
-	else if (functionName == "fe3d:model_get_alpha") // Get gameEntity alpha
+	else if (functionName == "fe3d:model_get_alpha") // Get modelEntity alpha
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -564,9 +564,9 @@ bool ScriptInterpreter::_executeFe3dGameEntityFunction(const string& functionNam
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
 		{
 			// Validate existing model ID
-			if (_validateFe3dGameEntity(arguments[0].getString()))
+			if (_validateFe3dModelEntity(arguments[0].getString()))
 			{
-				auto result = _fe3d.gameEntity_getAlpha(arguments[0].getString());
+				auto result = _fe3d.modelEntity_getAlpha(arguments[0].getString());
 				returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
 			}
 		}

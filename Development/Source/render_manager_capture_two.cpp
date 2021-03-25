@@ -50,18 +50,18 @@ void RenderManager::_captureSceneDepth()
 		}
 
 		// Render GAME entities
-		auto allGameEntities = _entityBus->getGameEntities();
-		for (auto& [keyID, gameEntity] : allGameEntities)
+		auto allModelEntities = _entityBus->getModelEntities();
+		for (auto& [keyID, modelEntity] : allModelEntities)
 		{
 			// Check if entity must be included in depth map
-			if (gameEntity->isDepthMapIncluded())
+			if (modelEntity->isDepthMapIncluded())
 			{
 				// Check if LOD entity needs to be rendered
-				if (gameEntity->isLevelOfDetailed())
+				if (modelEntity->isLevelOfDetailed())
 				{
 					// Try to find LOD entity
-					auto foundPair = allGameEntities.find(gameEntity->getLodEntityID());
-					if (foundPair != allGameEntities.end())
+					auto foundPair = allModelEntities.find(modelEntity->getLodEntityID());
+					if (foundPair != allModelEntities.end())
 					{
 						auto lodEntity = foundPair->second;
 
@@ -72,10 +72,10 @@ void RenderManager::_captureSceneDepth()
 						bool originalVisibility = lodEntity->isVisible();
 
 						// Change transformation
-						lodEntity->setTranslation(gameEntity->getTranslation());
-						lodEntity->setRotation(gameEntity->getRotation());
-						lodEntity->setScaling((gameEntity->getScaling() / gameEntity->getOriginalScaling()) * originalSize);
-						lodEntity->setVisible(gameEntity->isVisible());
+						lodEntity->setTranslation(modelEntity->getTranslation());
+						lodEntity->setRotation(modelEntity->getRotation());
+						lodEntity->setScaling((modelEntity->getScaling() / modelEntity->getOriginalScaling()) * originalSize);
+						lodEntity->setVisible(modelEntity->isVisible());
 						lodEntity->updateModelMatrix();
 
 						// Render LOD entity
@@ -90,12 +90,12 @@ void RenderManager::_captureSceneDepth()
 					}
 					else
 					{
-						Logger::throwError("GAME entity \"" + gameEntity->getID() + "\" has a nonexisting LOD entity \"" + gameEntity->getLodEntityID() + "\"");
+						Logger::throwError("MODEL entity \"" + modelEntity->getID() + "\" has a nonexisting LOD entity \"" + modelEntity->getLodEntityID() + "\"");
 					}
 				}
 				else // Render high-quality entity
 				{
-					_depthRenderer.render(gameEntity, clippingY, isUnderWater);
+					_depthRenderer.render(modelEntity, clippingY, isUnderWater);
 				}
 			}
 		}

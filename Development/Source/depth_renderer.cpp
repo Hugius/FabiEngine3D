@@ -100,7 +100,7 @@ void DepthRenderer::render(const shared_ptr<WaterEntity> entity)
 	}
 }
 
-void DepthRenderer::render(const shared_ptr<GameEntity> entity, float clippingY, bool isUnderWater)
+void DepthRenderer::render(const shared_ptr<ModelEntity> entity, float clippingY, bool isUnderWater)
 {
 	if (entity->isVisible())
 	{

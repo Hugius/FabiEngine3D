@@ -15,7 +15,7 @@ public:
 
 	void selectWater(const string& ID);
 	void addWaterEntity(const string& ID);
-	void generateModel(const string& ID);
+	void generateMesh(const string& ID);
 	void update() override;
 
 private:

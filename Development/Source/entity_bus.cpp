@@ -6,7 +6,7 @@ EntityBus::EntityBus
 	const shared_ptr<SkyEntity> mixSkyEntity,
 	const shared_ptr<TerrainEntity> terrainEntity,
 	const shared_ptr<WaterEntity> waterEntity,
-	const unordered_map<string, shared_ptr<GameEntity>>      & gameEntities,
+	const unordered_map<string, shared_ptr<ModelEntity>>     & modelEntities,
 	const unordered_map<string, shared_ptr<BillboardEntity>> & billboardEntities,
 	const unordered_map<string, shared_ptr<AabbEntity>>      & aabbEntities,
 	const unordered_map<string, shared_ptr<LightEntity>>     & lightEntities,
@@ -17,7 +17,7 @@ EntityBus::EntityBus
 	_mixSkyEntity(mixSkyEntity),
 	_terrainEntity(terrainEntity),
 	_waterEntity(waterEntity),
-	_gameEntities(gameEntities),
+	_modelEntities(modelEntities),
 	_billboardEntities(billboardEntities),
 	_aabbEntities(aabbEntities),
 	_lightEntities(lightEntities),
@@ -37,9 +37,9 @@ const shared_ptr<SkyEntity> EntityBus::getMixSkyEntity() const
 	return _mixSkyEntity;
 }
 
-const unordered_map<string, shared_ptr<GameEntity>> & EntityBus::getGameEntities() const
+const unordered_map<string, shared_ptr<ModelEntity>> & EntityBus::getModelEntities() const
 {
-	return _gameEntities;
+	return _modelEntities;
 }
 
 const unordered_map<string, shared_ptr<BillboardEntity>> & EntityBus::getBillboardEntities() const

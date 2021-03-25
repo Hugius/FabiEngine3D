@@ -120,40 +120,40 @@ void SceneEditor::_placeModel(const string& modelID, Vec3 position, Vec3 rotatio
 	vector<Vec3> instancedOffsets, vector<string> aabbNames, vector<Vec3> aabbPositions, vector<Vec3> aabbSizes, 
 	string animationID, float minHeight, float maxHeight, float alpha)
 {
-	// Add GAME entity
-	_fe3d.gameEntity_add(modelID, meshPath, position, rotation, size);
+	// Add MODEL entity
+	_fe3d.modelEntity_add(modelID, meshPath, position, rotation, size);
 
 	// Add AABBs
 	for (unsigned int i = 0; i < aabbNames.size(); i++)
 	{
-		_fe3d.aabbEntity_bindToGameEntity(modelID, aabbPositions[i], aabbSizes[i], true, true, modelID + "@" + aabbNames[i]);
+		_fe3d.aabbEntity_bindToModelEntity(modelID, aabbPositions[i], aabbSizes[i], true, true, modelID + "@" + aabbNames[i]);
 	}
 
 	// Model properties
-	_fe3d.gameEntity_setStaticToCamera(modelID, isFrozen);
-	_fe3d.gameEntity_setFaceCulled(modelID, isFaceCulled);
-	_fe3d.gameEntity_setShadowed(modelID, isShadowed);
-	_fe3d.gameEntity_setTransparent(modelID, isTransparent);
-	_fe3d.gameEntity_setSpecularLighted(modelID, isSpecular);
-	_fe3d.gameEntity_setSpecularFactor(modelID, specularFactor);
-	_fe3d.gameEntity_setSpecularIntensity(modelID, specularIntensity);
-	_fe3d.gameEntity_setLightness(modelID, lightness);
-	_fe3d.gameEntity_setColor(modelID, color);
-	_fe3d.gameEntity_setUvRepeat(modelID, uvRepeat);
-	_fe3d.gameEntity_setLevelOfDetailEntity(modelID, lodEntityID);
-	_fe3d.gameEntity_setInstanced(modelID, isInstanced, instancedOffsets);
-	_fe3d.gameEntity_setMinHeight(modelID, minHeight);
-	_fe3d.gameEntity_setMaxHeight(modelID, maxHeight);
-	_fe3d.gameEntity_setAlpha(modelID, alpha);
+	_fe3d.modelEntity_setStaticToCamera(modelID, isFrozen);
+	_fe3d.modelEntity_setFaceCulled(modelID, isFaceCulled);
+	_fe3d.modelEntity_setShadowed(modelID, isShadowed);
+	_fe3d.modelEntity_setTransparent(modelID, isTransparent);
+	_fe3d.modelEntity_setSpecularLighted(modelID, isSpecular);
+	_fe3d.modelEntity_setSpecularFactor(modelID, specularFactor);
+	_fe3d.modelEntity_setSpecularIntensity(modelID, specularIntensity);
+	_fe3d.modelEntity_setLightness(modelID, lightness);
+	_fe3d.modelEntity_setColor(modelID, color);
+	_fe3d.modelEntity_setUvRepeat(modelID, uvRepeat);
+	_fe3d.modelEntity_setLevelOfDetailEntity(modelID, lodEntityID);
+	_fe3d.modelEntity_setInstanced(modelID, isInstanced, instancedOffsets);
+	_fe3d.modelEntity_setMinHeight(modelID, minHeight);
+	_fe3d.modelEntity_setMaxHeight(modelID, maxHeight);
+	_fe3d.modelEntity_setAlpha(modelID, alpha);
 
 	// Reflection type
 	if (reflectionType == 1)
 	{
-		_fe3d.gameEntity_setSkyReflective(modelID, true);
+		_fe3d.modelEntity_setSkyReflective(modelID, true);
 	}
 	else if (reflectionType == 2)
 	{
-		_fe3d.gameEntity_setSceneReflective(modelID, true);
+		_fe3d.modelEntity_setSceneReflective(modelID, true);
 	}
 
 	// Save original lightness & transformation
@@ -168,27 +168,27 @@ void SceneEditor::_placeModel(const string& modelID, Vec3 position, Vec3 rotatio
 	// Diffuse map
 	if (diffuseMapPath != "")
 	{
-		_fe3d.gameEntity_setDiffuseMap(modelID, diffuseMapPath);
+		_fe3d.modelEntity_setDiffuseMap(modelID, diffuseMapPath);
 	}
 
 	// Light map
 	if (lightMapPath != "")
 	{
-		_fe3d.gameEntity_setLightMap(modelID, lightMapPath);
-		_fe3d.gameEntity_setLightMapped(modelID, true);
+		_fe3d.modelEntity_setLightMap(modelID, lightMapPath);
+		_fe3d.modelEntity_setLightMapped(modelID, true);
 	}
 
 	// Reflection map
 	if (reflectionMapPath != "")
 	{
-		_fe3d.gameEntity_setReflectionMap(modelID, reflectionMapPath);
+		_fe3d.modelEntity_setReflectionMap(modelID, reflectionMapPath);
 	}
 
 	// Normal map
 	if (normalMapPath != "")
 	{
-		_fe3d.gameEntity_setNormalMap(modelID, normalMapPath);
-		_fe3d.gameEntity_setNormalMapped(modelID, true);
+		_fe3d.modelEntity_setNormalMap(modelID, normalMapPath);
+		_fe3d.modelEntity_setNormalMapped(modelID, true);
 	}
 
 	// Play animation

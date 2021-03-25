@@ -77,7 +77,7 @@ void ScriptEditor::unload()
 	_fe3d.gfx_disableNormalMapping(true);
 
 	// Delete added entities
-	_fe3d.gameEntity_deleteAll();
+	_fe3d.modelEntity_deleteAll();
 	_fe3d.billboardEntity_deleteAll();
 	_fe3d.aabbEntity_deleteAll();
 	_fe3d.lightEntity_deleteAll();

@@ -152,14 +152,14 @@ void CoreEngine::_updateApplication()
 		_timer.startDeltaPart("waterEntityUpdate");
 		_waterEntityManager.update();
 		_timer.stopDeltaPart();
-		_timer.startDeltaPart("gameEntityUpdate");
-		_gameEntityManager.update();
+		_timer.startDeltaPart("modelEntityUpdate");
+		_modelEntityManager.update();
 		_timer.stopDeltaPart();
 		_timer.startDeltaPart("billboardEntityUpdate");
 		_billboardEntityManager.update();
 		_timer.stopDeltaPart();
 		_timer.startDeltaPart("aabbEntityUpdate");
-		_aabbEntityManager.update(_gameEntityManager.getEntities(), _billboardEntityManager.getEntities());
+		_aabbEntityManager.update(_modelEntityManager.getEntities(), _billboardEntityManager.getEntities());
 		_timer.stopDeltaPart();
 
 		// Shadow updates
@@ -199,7 +199,7 @@ void CoreEngine::_renderApplication()
 	EntityBus entityBus
 	(
 		_skyEntityManager.getSelectedMainSky(), _skyEntityManager.getSelectedMixSky(), _terrainEntityManager.getSelectedTerrain(),
-		_waterEntityManager.getSelectedWater(), _gameEntityManager.getEntities(), _billboardEntityManager.getEntities(), 
+		_waterEntityManager.getSelectedWater(), _modelEntityManager.getEntities(), _billboardEntityManager.getEntities(), 
 		_aabbEntityManager.getEntities(), _lightEntityManager.getEntities(), _guiEntityManager.getEntities(), _textEntityManager.getEntities()
 	);
 

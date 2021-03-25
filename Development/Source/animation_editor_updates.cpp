@@ -146,7 +146,7 @@ void AnimationEditor::_updateAnimationChoice()
 						// Show preview model
 						if (!_getAnimation(_currentAnimationID)->previewModelID.empty())
 						{
-							_fe3d.gameEntity_show(_getAnimation(_currentAnimationID)->previewModelID);
+							_fe3d.modelEntity_show(_getAnimation(_currentAnimationID)->previewModelID);
 						}
 					}
 

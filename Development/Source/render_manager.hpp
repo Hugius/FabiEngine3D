@@ -6,7 +6,7 @@
 #include "sky_entity_renderer.hpp"
 #include "terrain_entity_renderer.hpp"
 #include "water_entity_renderer.hpp"
-#include "game_entity_renderer.hpp"
+#include "model_entity_renderer.hpp"
 #include "billboard_entity_renderer.hpp"
 #include "aabb_entity_renderer.hpp"
 #include "gui_entity_renderer.hpp"
@@ -53,7 +53,7 @@ private:
 	SkyEntityRenderer        _skyEntityRenderer;
 	TerrainEntityRenderer    _terrainEntityRenderer;
 	WaterEntityRenderer      _waterEntityRenderer;
-	GameEntityRenderer       _gameEntityRenderer;
+	ModelEntityRenderer       _modelEntityRenderer;
 	BillboardEntityRenderer	 _billboardEntityRenderer;
 	AabbEntityRenderer       _aabbEntityRenderer;
 	GuiEntityRenderer        _guiEntityRenderer;
@@ -90,7 +90,7 @@ private:
 	void _renderSkyEntity();
 	void _renderTerrainEntity();
 	void _renderWaterEntity();
-	void _renderGameEntities();
+	void _renderModelEntities();
 	void _renderBillboardEntities();
 	void _renderAabbEntities();
 	void _renderFinalSceneTexture();

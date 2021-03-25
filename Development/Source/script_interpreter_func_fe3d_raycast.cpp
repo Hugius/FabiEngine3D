@@ -62,9 +62,9 @@ bool ScriptInterpreter::_executeFe3dRaycastFunction(const string& functionName, 
 			}
 		}
 	}
-	else if (functionName == "fe3d:raycast_into_model") // Raycasting into multiple gameEntities
+	else if (functionName == "fe3d:raycast_into_model") // Raycasting into multiple modelEntities
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::STRING, ScriptValueType::BOOLEAN }; // GameEntityID + aabbPartID + canBeOccluded
+		auto types = { ScriptValueType::STRING, ScriptValueType::STRING, ScriptValueType::BOOLEAN }; // ModelEntityID + aabbPartID + canBeOccluded
 
 		// Validate arguments
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
@@ -73,8 +73,8 @@ bool ScriptInterpreter::_executeFe3dRaycastFunction(const string& functionName, 
 			string result = "";
 			auto foundAabbID = _fe3d.collision_checkCursorInEntities(arguments[0].getString(), arguments[2].getBoolean()).first;
 
-			// Retrieve bound gameEntity ID
-			if (!foundAabbID.empty() && (_fe3d.aabbEntity_getParentType(foundAabbID) == AabbParentType::GAME_ENTITY))
+			// Retrieve bound modelEntity ID
+			if (!foundAabbID.empty() && (_fe3d.aabbEntity_getParentType(foundAabbID) == AabbParentType::MODEL_ENTITY))
 			{
 				if (arguments[1].getString().empty()) // No specific AABB part
 				{
@@ -100,9 +100,9 @@ bool ScriptInterpreter::_executeFe3dRaycastFunction(const string& functionName, 
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result));
 		}
 	}
-	else if (functionName == "fe3d:raycast_into_model_distance") // Raycasting into multiple gameEntities and retrieving the distance
+	else if (functionName == "fe3d:raycast_into_model_distance")
 	{
-		auto types = { ScriptValueType::STRING, ScriptValueType::STRING, ScriptValueType::BOOLEAN }; // GameEntityID + aabbPartID + canBeOccluded
+		auto types = { ScriptValueType::STRING, ScriptValueType::STRING, ScriptValueType::BOOLEAN }; // ModelEntityID + aabbPartID + canBeOccluded
 
 		// Validate arguments
 		if (_validateListValueAmount(arguments, types.size()) && _validateListValueTypes(arguments, types))
@@ -113,8 +113,8 @@ bool ScriptInterpreter::_executeFe3dRaycastFunction(const string& functionName, 
 			string foundAabbID = intersection.first;
 			float foundDistance = intersection.second;
 
-			// Retrieve bound gameEntity ID
-			if (!foundAabbID.empty() && (_fe3d.aabbEntity_getParentType(foundAabbID) == AabbParentType::GAME_ENTITY))
+			// Retrieve bound modelEntity ID
+			if (!foundAabbID.empty() && (_fe3d.aabbEntity_getParentType(foundAabbID) == AabbParentType::MODEL_ENTITY))
 			{
 				if (arguments[1].getString().empty()) // No specific AABB part
 				{
@@ -140,7 +140,7 @@ bool ScriptInterpreter::_executeFe3dRaycastFunction(const string& functionName, 
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
 		}
 	}
-	else if (functionName == "fe3d:raycast_into_models") // Raycasting into all gameEntities
+	else if (functionName == "fe3d:raycast_into_models")
 	{
 		// Validate arguments
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
@@ -149,8 +149,8 @@ bool ScriptInterpreter::_executeFe3dRaycastFunction(const string& functionName, 
 			string result = "";
 			auto foundAabbID = _fe3d.collision_checkCursorInAny().first;
 
-			// Check if aabbEntity entity has a parent gameEntity
-			if (!foundAabbID.empty() && _fe3d.aabbEntity_getParentType(foundAabbID) == AabbParentType::GAME_ENTITY)
+			// Check if aabbEntity entity has a parent modelEntity
+			if (!foundAabbID.empty() && _fe3d.aabbEntity_getParentType(foundAabbID) == AabbParentType::MODEL_ENTITY)
 			{
 				result = _fe3d.aabbEntity_getParentID(foundAabbID);
 			}
@@ -159,7 +159,7 @@ bool ScriptInterpreter::_executeFe3dRaycastFunction(const string& functionName, 
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result));
 		}
 	}
-	else if (functionName == "fe3d:raycast_into_models_distance") // Raycasting into all gameEntities and retrieving the distance
+	else if (functionName == "fe3d:raycast_into_models_distance")
 	{
 		// Validate arguments
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
@@ -168,8 +168,8 @@ bool ScriptInterpreter::_executeFe3dRaycastFunction(const string& functionName, 
 			float result = -1.0f;
 			auto intersection = _fe3d.collision_checkCursorInAny();
 
-			// Check if aabbEntity entity has a parent gameEntity
-			if (!intersection.first.empty() && _fe3d.aabbEntity_getParentType(intersection.first) == AabbParentType::GAME_ENTITY)
+			// Check if aabbEntity entity has a parent modelEntity
+			if (!intersection.first.empty() && _fe3d.aabbEntity_getParentType(intersection.first) == AabbParentType::MODEL_ENTITY)
 			{
 				result = intersection.second;
 			}
@@ -178,7 +178,7 @@ bool ScriptInterpreter::_executeFe3dRaycastFunction(const string& functionName, 
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
 		}
 	}
-	else if (functionName == "fe3d:raycast_into_billboard") // Raycasting into multiple billboardEntities
+	else if (functionName == "fe3d:raycast_into_billboard")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::BOOLEAN }; // BillboardEntityID + canBeOccluded
 
@@ -199,7 +199,7 @@ bool ScriptInterpreter::_executeFe3dRaycastFunction(const string& functionName, 
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result));
 		}
 	}
-	else if (functionName == "fe3d:raycast_into_billboards") // Raycasting into all billboardEntities
+	else if (functionName == "fe3d:raycast_into_billboards")
 	{
 		// Validate arguments
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
@@ -218,7 +218,7 @@ bool ScriptInterpreter::_executeFe3dRaycastFunction(const string& functionName, 
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::STRING, result));
 		}
 	}
-	else if (functionName == "fe3d:raycast_into_billboard_distance") // Raycasting into multiple billboardEntities and retrieving the distance
+	else if (functionName == "fe3d:raycast_into_billboard_distance")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::BOOLEAN }; // BillboardEntityID + canBeOccluded
 
@@ -239,7 +239,7 @@ bool ScriptInterpreter::_executeFe3dRaycastFunction(const string& functionName, 
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
 		}
 	}
-	else if (functionName == "fe3d:raycast_into_billboards_distance") // Raycasting into all billboardEntities and retrieving the distance
+	else if (functionName == "fe3d:raycast_into_billboards_distance")
 	{
 		// Validate arguments
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))

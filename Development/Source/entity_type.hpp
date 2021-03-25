@@ -5,7 +5,7 @@ enum class EntityType
 	SKY,
 	TERRAIN,
 	WATER,
-	GAME,
+	MODEL,
 	BILLBOARD,
 	AABB,
 	LIGHT,

@@ -47,13 +47,13 @@ void BaseEntityManager::_createEntity(const string& ID)
 			return;
 		}
 
-		case(EntityType::GAME):
+		case(EntityType::MODEL):
 		{
-			if (_getGameEntity(ID) != nullptr)
+			if (_getModelEntity(ID) != nullptr)
 			{
-				Logger::throwError("Could not create GAME entity: \"" + ID + "\" already exists!");
+				Logger::throwError("Could not create MODEL entity: \"" + ID + "\" already exists!");
 			}
-			_gameEntities.insert(make_pair(ID, make_shared<GameEntity>(ID)));
+			_modelEntities.insert(make_pair(ID, make_shared<ModelEntity>(ID)));
 			return;
 		}
 
@@ -147,9 +147,9 @@ void BaseEntityManager::deleteEntity(const string& ID)
 			break;
 		}
 
-		case(EntityType::GAME):
+		case(EntityType::MODEL):
 		{
-			if (_gameEntities.erase(ID))
+			if (_modelEntities.erase(ID))
 			{
 				return;
 			}
@@ -211,7 +211,7 @@ void BaseEntityManager::deleteEntity(const string& ID)
 	// Temporary type2string map
 	std::map<EntityType, string> temp;
 	temp[EntityType::SKY] = "SKY"; temp[EntityType::TERRAIN] = "TERRAIN"; temp[EntityType::WATER] = "WATER";
-	temp[EntityType::GAME] = "GAME"; temp[EntityType::BILLBOARD] = "BILLBOARD"; temp[EntityType::AABB] = "AABB";
+	temp[EntityType::MODEL] = "MODEL"; temp[EntityType::BILLBOARD] = "BILLBOARD"; temp[EntityType::AABB] = "AABB";
 	temp[EntityType::LIGHT] = "LIGHT"; temp[EntityType::GUI] = "GUI"; temp[EntityType::TEXT] = "TEXT";
 
 	// Error logging
@@ -222,7 +222,7 @@ void BaseEntityManager::deleteAllEntities()
 {
 	_aabbEntities.clear();
 	_billboardEntities.clear();
-	_gameEntities.clear();
+	_modelEntities.clear();
 	_guiEntities.clear();
 	_lightEntities.clear();
 	_skyEntities.clear();

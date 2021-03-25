@@ -28,11 +28,11 @@ void BillboardEditor::_updateMiscellaneous()
 		// Update reference model visibility
 		if (_fe3d.input_getKeyToggled(InputType::KEY_R))
 		{
-			_fe3d.gameEntity_hide("@@cube");
+			_fe3d.modelEntity_hide("@@cube");
 		}
 		else
 		{
-			_fe3d.gameEntity_show("@@cube");
+			_fe3d.modelEntity_show("@@cube");
 		}
 
 		// Debug rendering

@@ -274,7 +274,7 @@ void TopViewportController::_saveCurrentProject()
 
 	// Save everything
 	_environmentEditor.save();
-	_modelEditor.saveGameEntitiesToFile();
+	_modelEditor.saveModelEntitiesToFile();
 	_animationEditor.saveAnimationsToFile();
 	_billboardEditor.saveBillboardEntitiesToFile();
 	_audioEditor.saveAudioEntitiesToFile();

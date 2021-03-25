@@ -32,7 +32,7 @@ void SceneEditor::saveEditorSceneToFile()
 
 	// Save all LOD model IDs
 	vector<string> lodIDs;
-	for (auto& modelID : _fe3d.gameEntity_getAllIDs())
+	for (auto& modelID : _fe3d.modelEntity_getAllIDs())
 	{
 		// Temporary values
 		bool isCustomSceneModel = std::find(_customSceneModelIDs.begin(), _customSceneModelIDs.end(), modelID) != _customSceneModelIDs.end();
@@ -41,12 +41,12 @@ void SceneEditor::saveEditorSceneToFile()
 		if (modelID[0] != '@')
 		{
 			// Check if entity has LOD model
-			if (!_fe3d.gameEntity_getLevelOfDetailEntityID(modelID).empty())
+			if (!_fe3d.modelEntity_getLevelOfDetailEntityID(modelID).empty())
 			{
 				// Check if ID not already added to list
 				if (std::find(lodIDs.begin(), lodIDs.end(), modelID) == lodIDs.end())
 				{
-					lodIDs.push_back(_fe3d.gameEntity_getLevelOfDetailEntityID(modelID));
+					lodIDs.push_back(_fe3d.modelEntity_getLevelOfDetailEntityID(modelID));
 				}
 			}
 		}
@@ -74,7 +74,7 @@ void SceneEditor::saveEditorSceneToFile()
 	}
 
 	// Models
-	for (auto& modelID : _fe3d.gameEntity_getAllIDs())
+	for (auto& modelID : _fe3d.modelEntity_getAllIDs())
 	{
 		// Check if allowed to save
 		bool isLodModel = std::find(lodIDs.begin(), lodIDs.end(), modelID) != lodIDs.end();
@@ -84,30 +84,30 @@ void SceneEditor::saveEditorSceneToFile()
 			if (!_animationEditor.getPlayingAnimationNames(modelID).empty())
 			{
 				// Reset main transformation
-				_fe3d.gameEntity_setPosition(modelID, _initialModelPosition[modelID]);
-				_fe3d.gameEntity_setRotationOrigin(modelID, Vec3(0.0f));
-				_fe3d.gameEntity_setRotation(modelID, _initialModelRotation[modelID]);
-				_fe3d.gameEntity_setSize(modelID, _initialModelSize[modelID]);
+				_fe3d.modelEntity_setPosition(modelID, _initialModelPosition[modelID]);
+				_fe3d.modelEntity_setRotationOrigin(modelID, Vec3(0.0f));
+				_fe3d.modelEntity_setRotation(modelID, _initialModelRotation[modelID]);
+				_fe3d.modelEntity_setSize(modelID, _initialModelSize[modelID]);
 
 				// Reset part transformations
-				for (auto& partName : _fe3d.gameEntity_getPartNames(modelID))
+				for (auto& partName : _fe3d.modelEntity_getPartNames(modelID))
 				{
 					// Only named parts
 					if (!partName.empty())
 					{
-						_fe3d.gameEntity_setPosition(modelID, Vec3(0.0f), partName);
-						_fe3d.gameEntity_setRotationOrigin(modelID, Vec3(0.0f), partName);
-						_fe3d.gameEntity_setRotation(modelID, Vec3(0.0f), partName);
-						_fe3d.gameEntity_setSize(modelID, Vec3(1.0f), partName);
+						_fe3d.modelEntity_setPosition(modelID, Vec3(0.0f), partName);
+						_fe3d.modelEntity_setRotationOrigin(modelID, Vec3(0.0f), partName);
+						_fe3d.modelEntity_setRotation(modelID, Vec3(0.0f), partName);
+						_fe3d.modelEntity_setSize(modelID, Vec3(1.0f), partName);
 					}
 				}
 			}
 
 			// Data to save
-			auto position = _fe3d.gameEntity_getPosition(modelID);
-			auto rotation = _fe3d.gameEntity_getRotation(modelID);
-			auto size = _fe3d.gameEntity_getSize(modelID);
-			auto isFrozen = _fe3d.gameEntity_isStaticToCamera(modelID);
+			auto position = _fe3d.modelEntity_getPosition(modelID);
+			auto rotation = _fe3d.modelEntity_getRotation(modelID);
+			auto size = _fe3d.modelEntity_getSize(modelID);
+			auto isFrozen = _fe3d.modelEntity_isStaticToCamera(modelID);
 			auto animationID = (_animationEditor.getPlayingAnimationNames(modelID).empty()) ? "" :
 				_animationEditor.getPlayingAnimationNames(modelID).front();
 

@@ -7,7 +7,7 @@ void ModelEditor::_updateModelEditingAabb()
 	if(screen->getID() == "modelEditorMenuAabb")
 	{
 		// Temporary values
-		Vec3 currentSize = _fe3d.gameEntity_getSize(_currentModelID);
+		Vec3 currentSize = _fe3d.modelEntity_getSize(_currentModelID);
 
 		// GUI management
 		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
@@ -126,7 +126,7 @@ void ModelEditor::_updateModelEditingAabb()
 				if (newAabbName.find(' ') == string::npos)
 				{
 					// Add new AABB
-					_fe3d.aabbEntity_bindToGameEntity(_currentModelID, Vec3(0.0f), Vec3(1.0f), true, true, _currentModelID + "@" + newAabbName);
+					_fe3d.aabbEntity_bindToModelEntity(_currentModelID, Vec3(0.0f), Vec3(1.0f), true, true, _currentModelID + "@" + newAabbName);
 					_currentAabbID = newAabbName;
 
 					// Reset editing

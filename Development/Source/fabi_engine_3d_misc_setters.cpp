@@ -168,5 +168,5 @@ void FabiEngine3D::misc_startMillisecondTimer()
 
 void FabiEngine3D::misc_setLevelOfDetailDistance(float distance)
 {
-	_core->_gameEntityManager.setLodDistance(distance);
+	_core->_modelEntityManager.setLodDistance(distance);
 }

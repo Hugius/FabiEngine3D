@@ -12,7 +12,7 @@
 #include "sky_entity_manager.hpp"
 #include "terrain_entity_manager.hpp"
 #include "water_entity_manager.hpp"
-#include "game_entity_manager.hpp"
+#include "model_entity_manager.hpp"
 #include "billboard_entity_manager.hpp"
 #include "aabb_entity_manager.hpp"
 #include "light_entity_manager.hpp"
@@ -48,7 +48,7 @@ private:
 	SkyEntityManager       _skyEntityManager;
 	TerrainEntityManager   _terrainEntityManager;
 	WaterEntityManager     _waterEntityManager;
-	GameEntityManager      _gameEntityManager;
+	ModelEntityManager      _modelEntityManager;
 	BillboardEntityManager _billboardEntityManager;
 	AabbEntityManager      _aabbEntityManager;
 	LightEntityManager     _lightEntityManager;

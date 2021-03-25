@@ -1,7 +1,7 @@
 #pragma once
 
 #include "base_entity_renderer.hpp"
-#include "game_entity.hpp"
+#include "model_entity.hpp"
 #include "terrain_entity.hpp"
 
 class ShadowRenderer final : public BaseEntityRenderer
@@ -12,5 +12,5 @@ public:
 
 	void bind()   override;
 	void unbind() override;
-	void render(const shared_ptr<GameEntity> entity);
+	void render(const shared_ptr<ModelEntity> entity);
 };

@@ -2,7 +2,7 @@
 
 enum class AabbParentType
 {
-	GAME_ENTITY,
+	MODEL_ENTITY,
 	BILLBOARD_ENTITY,
 	NONE
 };

@@ -22,14 +22,14 @@ void SceneEditor::_updateLightPlacing()
 
 					// Show preview pointlight
 					_fe3d.lightEntity_show(PREVIEW_POINTLIGHT_ID);
-					_fe3d.gameEntity_show(PREVIEW_POINTLIGHT_ID);
+					_fe3d.modelEntity_show(PREVIEW_POINTLIGHT_ID);
 					_fe3d.lightEntity_setPosition(PREVIEW_POINTLIGHT_ID, newPosition);
-					_fe3d.gameEntity_setPosition(PREVIEW_POINTLIGHT_ID, newPosition);
+					_fe3d.modelEntity_setPosition(PREVIEW_POINTLIGHT_ID, newPosition);
 				}
 				else
 				{
 					// Hide preview pointlight
-					_fe3d.gameEntity_hide(PREVIEW_POINTLIGHT_ID);
+					_fe3d.modelEntity_hide(PREVIEW_POINTLIGHT_ID);
 					_fe3d.lightEntity_hide(PREVIEW_POINTLIGHT_ID);
 				}
 
@@ -48,16 +48,16 @@ void SceneEditor::_updateLightPlacing()
 					}
 
 					// Add light entity
-					_fe3d.gameEntity_add("@" + newID, "engine_assets\\meshes\\lamp.obj", newPosition, Vec3(0.0f), DEFAULT_LIGHTBULB_SIZE);
-					_fe3d.gameEntity_setShadowed("@" + newID, false);
-					_fe3d.aabbEntity_bindToGameEntity("@" + newID, Vec3(0.0f), DEFAULT_LIGHTBULB_AABB_SIZE, true, true);
+					_fe3d.modelEntity_add("@" + newID, "engine_assets\\meshes\\lamp.obj", newPosition, Vec3(0.0f), DEFAULT_LIGHTBULB_SIZE);
+					_fe3d.modelEntity_setShadowed("@" + newID, false);
+					_fe3d.aabbEntity_bindToModelEntity("@" + newID, Vec3(0.0f), DEFAULT_LIGHTBULB_AABB_SIZE, true, true);
 					_fe3d.lightEntity_add(newID, newPosition);
 					_loadedLightIDs.push_back(newID);
 
 					// Disable placement mode if no terrain availible to choose position from
 					if (_fe3d.terrainEntity_getSelectedID() == "")
 					{
-						_fe3d.gameEntity_hide(PREVIEW_POINTLIGHT_ID);
+						_fe3d.modelEntity_hide(PREVIEW_POINTLIGHT_ID);
 						_fe3d.lightEntity_hide(PREVIEW_POINTLIGHT_ID);
 						_isPlacingPointlight = false;
 					}
@@ -65,7 +65,7 @@ void SceneEditor::_updateLightPlacing()
 				else if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_MIDDLE)) // Cancelling pointlight placement
 				{
 					// Hide preview pointlight
-					_fe3d.gameEntity_hide(PREVIEW_POINTLIGHT_ID);
+					_fe3d.modelEntity_hide(PREVIEW_POINTLIGHT_ID);
 					_fe3d.lightEntity_hide(PREVIEW_POINTLIGHT_ID);
 					_isPlacingPointlight = false;
 				}
@@ -73,7 +73,7 @@ void SceneEditor::_updateLightPlacing()
 			else
 			{
 				// Hide preview pointlight
-				_fe3d.gameEntity_hide(PREVIEW_POINTLIGHT_ID);
+				_fe3d.modelEntity_hide(PREVIEW_POINTLIGHT_ID);
 				_fe3d.lightEntity_hide(PREVIEW_POINTLIGHT_ID);
 			}
 		}

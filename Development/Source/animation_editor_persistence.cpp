@@ -121,7 +121,7 @@ void AnimationEditor::loadAnimationsFromFile()
 			if (_isEditorLoading)
 			{
 				// Check if preview model is still existing
-				if (_fe3d.gameEntity_isExisting(newAnimation->previewModelID))
+				if (_fe3d.modelEntity_isExisting(newAnimation->previewModelID))
 				{
 					// Check if parts are present
 					bool hasAllParts = true;
@@ -130,15 +130,15 @@ void AnimationEditor::loadAnimationsFromFile()
 						// Part cannot be empty
 						if (!partName.empty())
 						{
-							hasAllParts = hasAllParts && _fe3d.gameEntity_hasPart(newAnimation->previewModelID, partName);
+							hasAllParts = hasAllParts && _fe3d.modelEntity_hasPart(newAnimation->previewModelID, partName);
 						}
 					}
 
 					// Check if preview model still has all the parts
 					if (hasAllParts)
 					{
-						newAnimation->initialScaling = _fe3d.gameEntity_getSize(newAnimation->previewModelID);
-						newAnimation->initialColor = _fe3d.gameEntity_getColor(newAnimation->previewModelID);
+						newAnimation->initialScaling = _fe3d.modelEntity_getSize(newAnimation->previewModelID);
+						newAnimation->initialColor = _fe3d.modelEntity_getColor(newAnimation->previewModelID);
 					}
 					else // Clear preview model
 					{

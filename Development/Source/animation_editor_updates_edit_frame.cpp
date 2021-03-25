@@ -26,7 +26,7 @@ void AnimationEditor::_updateFrameScreen()
 				if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused())) // Back button
 				{
 					_currentPartName = "";
-					_fe3d.gameEntity_setColor(currentAnimation->previewModelID, currentAnimation->initialColor, "");
+					_fe3d.modelEntity_setColor(currentAnimation->previewModelID, currentAnimation->initialColor, "");
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("animationEditorMenuChoice");
 				}
 				else if (screen->getButton("transformation")->isHovered())
@@ -85,8 +85,8 @@ void AnimationEditor::_updateFrameScreen()
 			// Emphasize selected model part
 			if (!_currentPartName.empty())
 			{
-				_fe3d.gameEntity_setColor(currentAnimation->previewModelID, currentAnimation->initialColor, "");
-				_fe3d.gameEntity_setColor(currentAnimation->previewModelID, currentAnimation->initialColor * _partColorStrength, _currentPartName);
+				_fe3d.modelEntity_setColor(currentAnimation->previewModelID, currentAnimation->initialColor, "");
+				_fe3d.modelEntity_setColor(currentAnimation->previewModelID, currentAnimation->initialColor * _partColorStrength, _currentPartName);
 			}
 
 			// Update color strength
@@ -153,7 +153,7 @@ void AnimationEditor::_updateFrameScreen()
 				if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT))
 				{
 					// Check if selected part exists on preview model
-					if (_fe3d.gameEntity_hasPart(currentAnimation->previewModelID, selectedButtonID))
+					if (_fe3d.modelEntity_hasPart(currentAnimation->previewModelID, selectedButtonID))
 					{
 						_currentPartName = selectedButtonID;
 						_gui.getGlobalScreen()->removeChoiceForm("parts");

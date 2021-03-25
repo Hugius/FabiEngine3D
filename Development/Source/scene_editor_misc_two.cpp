@@ -15,8 +15,8 @@ void SceneEditor::_updateModelBlinking(const string& modelID, int& multiplier)
 	if (modelID != "")
 	{
 		// Check if lightness reached bounds
-		if (_fe3d.gameEntity_getLightness(modelID) > _initialModelLightness[modelID] ||
-			_fe3d.gameEntity_getLightness(modelID) < 0.0f)
+		if (_fe3d.modelEntity_getLightness(modelID) > _initialModelLightness[modelID] ||
+			_fe3d.modelEntity_getLightness(modelID) < 0.0f)
 		{
 			multiplier *= -1;
 		}
@@ -24,7 +24,7 @@ void SceneEditor::_updateModelBlinking(const string& modelID, int& multiplier)
 		// Set model lightness
 		float range = _initialModelLightness[modelID];
 		float speed = (MODEL_BLINKING_SPEED * static_cast<float>(multiplier) * range);
-		_fe3d.gameEntity_setLightness(modelID, _fe3d.gameEntity_getLightness(modelID) + speed);
+		_fe3d.modelEntity_setLightness(modelID, _fe3d.modelEntity_getLightness(modelID) + speed);
 	}
 }
 
@@ -65,15 +65,15 @@ void SceneEditor::_updateLightbulbAnimation(const string& modelID, int& multipli
 	if (modelID != "")
 	{
 		// Check if model size reached bounds
-		if (_fe3d.gameEntity_getSize(modelID).x > DEFAULT_LIGHTBULB_SIZE.x * 1.5f || 
-			_fe3d.gameEntity_getSize(modelID).x < DEFAULT_LIGHTBULB_SIZE.x)
+		if (_fe3d.modelEntity_getSize(modelID).x > DEFAULT_LIGHTBULB_SIZE.x * 1.5f || 
+			_fe3d.modelEntity_getSize(modelID).x < DEFAULT_LIGHTBULB_SIZE.x)
 		{
 			multiplier *= -1;
 		}
 
 		// Set model size
 		float speed = (LIGHTBULB_ANIMATION_SPEED * static_cast<float>(multiplier));
-		_fe3d.gameEntity_setSize(modelID, _fe3d.gameEntity_getSize(modelID) + Vec3(speed));
+		_fe3d.modelEntity_setSize(modelID, _fe3d.modelEntity_getSize(modelID) + Vec3(speed));
 		_fe3d.aabbEntity_setSize(modelID, _fe3d.aabbEntity_getSize(modelID) + Vec3(speed));
 	}
 }
@@ -90,15 +90,15 @@ void SceneEditor::_updateSpeakerAnimation(const string& modelID, int& multiplier
 	if (modelID != "")
 	{
 		// Check if model size reached bounds
-		if (_fe3d.gameEntity_getSize(modelID).x > DEFAULT_SPEAKER_SIZE.x * 1.5f ||
-			_fe3d.gameEntity_getSize(modelID).x < DEFAULT_SPEAKER_SIZE.x)
+		if (_fe3d.modelEntity_getSize(modelID).x > DEFAULT_SPEAKER_SIZE.x * 1.5f ||
+			_fe3d.modelEntity_getSize(modelID).x < DEFAULT_SPEAKER_SIZE.x)
 		{
 			multiplier *= -1;
 		}
 
 		// Set model size
 		float speed = (SPEAKER_ANIMATION_SPEED * static_cast<float>(multiplier));
-		_fe3d.gameEntity_setSize(modelID, _fe3d.gameEntity_getSize(modelID) + Vec3(speed));
+		_fe3d.modelEntity_setSize(modelID, _fe3d.modelEntity_getSize(modelID) + Vec3(speed));
 		_fe3d.aabbEntity_setSize(modelID, _fe3d.aabbEntity_getSize(modelID) + Vec3(speed));
 	}
 }
@@ -199,9 +199,9 @@ void SceneEditor::clearCurrentScene()
 	for (auto& ID : _loadedModelIDs)
 	{
 		// Delete model
-		if (_fe3d.gameEntity_isExisting(ID))
+		if (_fe3d.modelEntity_isExisting(ID))
 		{
-			_fe3d.gameEntity_delete(ID);
+			_fe3d.modelEntity_delete(ID);
 		}
 
 		// Stop animation
@@ -239,7 +239,7 @@ void SceneEditor::clearCurrentScene()
 			// Remove corresponding lightbulb model
 			if (!_currentSceneID.empty())
 			{
-				_fe3d.gameEntity_delete("@" + ID);
+				_fe3d.modelEntity_delete("@" + ID);
 			}
 		}
 	}
@@ -255,7 +255,7 @@ void SceneEditor::clearCurrentScene()
 			// Remove corresponding speaker model
 			if (!_currentSceneID.empty())
 			{
-				_fe3d.gameEntity_delete("@speaker_" + ID);
+				_fe3d.modelEntity_delete("@speaker_" + ID);
 			}
 		}
 	}

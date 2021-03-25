@@ -23,23 +23,23 @@ void AnimationEditor::_updateEditingScreen()
 					}
 
 					// Reset preview model transformation
-					if (_fe3d.gameEntity_isExisting(currentAnimation->previewModelID))
+					if (_fe3d.modelEntity_isExisting(currentAnimation->previewModelID))
 					{
 						// For every model part
 						for (const auto& partName : currentAnimation->partNames)
 						{
-							_fe3d.gameEntity_setPosition(currentAnimation->previewModelID, Vec3(0.0f), partName);
-							_fe3d.gameEntity_setRotationOrigin(currentAnimation->previewModelID, Vec3(0.0f), partName);
-							_fe3d.gameEntity_setRotation(currentAnimation->previewModelID, Vec3(0.0f), partName);
+							_fe3d.modelEntity_setPosition(currentAnimation->previewModelID, Vec3(0.0f), partName);
+							_fe3d.modelEntity_setRotationOrigin(currentAnimation->previewModelID, Vec3(0.0f), partName);
+							_fe3d.modelEntity_setRotation(currentAnimation->previewModelID, Vec3(0.0f), partName);
 							
 							// Only whole model size must be original
 							if (partName.empty())
 							{
-								_fe3d.gameEntity_setSize(currentAnimation->previewModelID, currentAnimation->initialScaling, partName);
+								_fe3d.modelEntity_setSize(currentAnimation->previewModelID, currentAnimation->initialScaling, partName);
 							}
 							else
 							{
-								_fe3d.gameEntity_setSize(currentAnimation->previewModelID, Vec3(1.0f), partName);
+								_fe3d.modelEntity_setSize(currentAnimation->previewModelID, Vec3(1.0f), partName);
 							}
 						}
 					}
@@ -55,7 +55,7 @@ void AnimationEditor::_updateEditingScreen()
 					// Hide preview model
 					if (!currentAnimation->previewModelID.empty())
 					{
-						_fe3d.gameEntity_hide(currentAnimation->previewModelID);
+						_fe3d.modelEntity_hide(currentAnimation->previewModelID);
 					}
 				}
 				else if (screen->getButton("preview")->isHovered())
@@ -69,18 +69,18 @@ void AnimationEditor::_updateEditingScreen()
 					// Reset preview model transformation
 					for (const auto& partName : currentAnimation->partNames)
 					{
-						_fe3d.gameEntity_setPosition(currentAnimation->previewModelID, Vec3(0.0f), partName);
-						_fe3d.gameEntity_setRotationOrigin(currentAnimation->previewModelID, Vec3(0.0f), partName);
-						_fe3d.gameEntity_setRotation(currentAnimation->previewModelID, Vec3(0.0f), partName);
+						_fe3d.modelEntity_setPosition(currentAnimation->previewModelID, Vec3(0.0f), partName);
+						_fe3d.modelEntity_setRotationOrigin(currentAnimation->previewModelID, Vec3(0.0f), partName);
+						_fe3d.modelEntity_setRotation(currentAnimation->previewModelID, Vec3(0.0f), partName);
 
 						// Only whole model size must be original
 						if (partName.empty())
 						{
-							_fe3d.gameEntity_setSize(currentAnimation->previewModelID, currentAnimation->initialScaling, partName);
+							_fe3d.modelEntity_setSize(currentAnimation->previewModelID, currentAnimation->initialScaling, partName);
 						}
 						else
 						{
-							_fe3d.gameEntity_setSize(currentAnimation->previewModelID, Vec3(1.0f), partName);
+							_fe3d.modelEntity_setSize(currentAnimation->previewModelID, Vec3(1.0f), partName);
 						}
 					}
 
@@ -93,21 +93,21 @@ void AnimationEditor::_updateEditingScreen()
 					stopAnimation(_currentAnimationID, currentAnimation->previewModelID);
 
 					// Reset preview model transformation
-					_fe3d.gameEntity_setSize(currentAnimation->previewModelID, currentAnimation->initialScaling, "");
+					_fe3d.modelEntity_setSize(currentAnimation->previewModelID, currentAnimation->initialScaling, "");
 					for (const auto& partName : currentAnimation->partNames)
 					{
-						_fe3d.gameEntity_setPosition(currentAnimation->previewModelID, Vec3(0.0f), partName);
-						_fe3d.gameEntity_setRotationOrigin(currentAnimation->previewModelID, Vec3(0.0f), partName);
-						_fe3d.gameEntity_setRotation(currentAnimation->previewModelID, Vec3(0.0f), partName);
+						_fe3d.modelEntity_setPosition(currentAnimation->previewModelID, Vec3(0.0f), partName);
+						_fe3d.modelEntity_setRotationOrigin(currentAnimation->previewModelID, Vec3(0.0f), partName);
+						_fe3d.modelEntity_setRotation(currentAnimation->previewModelID, Vec3(0.0f), partName);
 						
 						// Only whole model size must be original
 						if (partName.empty())
 						{
-							_fe3d.gameEntity_setSize(currentAnimation->previewModelID, currentAnimation->initialScaling, partName);
+							_fe3d.modelEntity_setSize(currentAnimation->previewModelID, currentAnimation->initialScaling, partName);
 						}
 						else
 						{
-							_fe3d.gameEntity_setSize(currentAnimation->previewModelID, Vec3(1.0f), partName);
+							_fe3d.modelEntity_setSize(currentAnimation->previewModelID, Vec3(1.0f), partName);
 						}
 					}
 				}
@@ -117,7 +117,7 @@ void AnimationEditor::_updateEditingScreen()
 					auto lastFrameCopy = currentAnimation->frames.back();
 
 					// Check if model has multiple parts
-					if (!currentAnimation->previewModelID.empty() && _fe3d.gameEntity_isMultiParted(currentAnimation->previewModelID))
+					if (!currentAnimation->previewModelID.empty() && _fe3d.modelEntity_isMultiParted(currentAnimation->previewModelID))
 					{
 						// Check if last frame is the default frame
 						if (currentAnimation->frames.size() == 1)
@@ -212,7 +212,7 @@ void AnimationEditor::_updateEditingScreen()
 						// Part cannot be empty
 						if (!partName.empty())
 						{
-							hasAllParts = hasAllParts && _fe3d.gameEntity_hasPart(selectedModelID, partName);
+							hasAllParts = hasAllParts && _fe3d.modelEntity_hasPart(selectedModelID, partName);
 						}
 					}
 
@@ -228,23 +228,23 @@ void AnimationEditor::_updateEditingScreen()
 					{
 						if (!currentAnimation->previewModelID.empty())
 						{
-							_fe3d.gameEntity_hide(currentAnimation->previewModelID);
+							_fe3d.modelEntity_hide(currentAnimation->previewModelID);
 						}
 					}
 
 					// Show new model
-					_fe3d.gameEntity_show(selectedModelID);
+					_fe3d.modelEntity_show(selectedModelID);
 
 					// Change values
 					currentAnimation->previewModelID = selectedModelID;
-					currentAnimation->initialScaling = _fe3d.gameEntity_getSize(currentAnimation->previewModelID);
-					currentAnimation->initialColor = _fe3d.gameEntity_getColor(currentAnimation->previewModelID);
+					currentAnimation->initialScaling = _fe3d.modelEntity_getSize(currentAnimation->previewModelID);
+					currentAnimation->initialColor = _fe3d.modelEntity_getColor(currentAnimation->previewModelID);
 
 					// First time choosing preview model, add all partnames for this animation
 					if (currentAnimation->frames.size() == 1)
 					{
 						// Retrieve partnames from model
-						for (auto partName : _fe3d.gameEntity_getPartNames(currentAnimation->previewModelID))
+						for (auto partName : _fe3d.modelEntity_getPartNames(currentAnimation->previewModelID))
 						{
 							// Cannot add whole-model partname again
 							if (!partName.empty())

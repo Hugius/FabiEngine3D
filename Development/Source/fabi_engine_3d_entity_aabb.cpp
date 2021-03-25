@@ -7,29 +7,29 @@ void FabiEngine3D::aabbEntity_add(const string& ID, Vec3 position, Vec3 size, bo
 	_core->_aabbEntityManager.getEntity(ID)->setVisible(visible);
 }
 
-void FabiEngine3D::aabbEntity_bindToGameEntity(const string& parentID, Vec3 position, Vec3 size, 
+void FabiEngine3D::aabbEntity_bindToModelEntity(const string& parentID, Vec3 position, Vec3 size, 
 	bool raycastResponsive, bool collisionResponsive, const string& customAabbID)
 {
 	if (customAabbID.empty()) // Use parent ID
 	{
-		if (_core->_gameEntityManager.isExisting(parentID))
+		if (_core->_modelEntityManager.isExisting(parentID))
 		{
-			_core->_aabbEntityManager.bindAabbEntity(parentID, parentID, AabbParentType::GAME_ENTITY, position, size, raycastResponsive, collisionResponsive);
+			_core->_aabbEntityManager.bindAabbEntity(parentID, parentID, AabbParentType::MODEL_ENTITY, position, size, raycastResponsive, collisionResponsive);
 		}
 		else
 		{
-			logger_throwError("Tried to bind AABB entity to non-existing GAME entity \"" + parentID + "\"");
+			logger_throwError("Tried to bind AABB entity to non-existing MODEL entity \"" + parentID + "\"");
 		}
 	}
 	else // Use custom ID
 	{
-		if (_core->_gameEntityManager.isExisting(parentID))
+		if (_core->_modelEntityManager.isExisting(parentID))
 		{
-			_core->_aabbEntityManager.bindAabbEntity(customAabbID, parentID, AabbParentType::GAME_ENTITY, position, size, raycastResponsive, collisionResponsive);
+			_core->_aabbEntityManager.bindAabbEntity(customAabbID, parentID, AabbParentType::MODEL_ENTITY, position, size, raycastResponsive, collisionResponsive);
 		}
 		else
 		{
-			logger_throwError("Tried to bind AABB entity \"" + customAabbID + "\" to non-existing GAME entity \"" + parentID + "\"");
+			logger_throwError("Tried to bind AABB entity \"" + customAabbID + "\" to non-existing MODEL entity \"" + parentID + "\"");
 		}
 	}
 }
@@ -187,14 +187,14 @@ bool FabiEngine3D::aabbEntity_isVisible(const string& ID)
 	return _core->_aabbEntityManager.getEntity(ID)->isVisible();
 }
 
-vector<string> FabiEngine3D::aabbEntity_getBoundIDs(const string& parentID, bool gameEntity, bool billboardEntity)
+vector<string> FabiEngine3D::aabbEntity_getBoundIDs(const string& parentID, bool modelEntity, bool billboardEntity)
 {
 	vector<string> IDs;
 
 	for (auto [keyID, entity] : _core->_aabbEntityManager.getEntities())
 	{
 		if (parentID == entity->getParentID() &&
-			((entity->getParentType() == AabbParentType::GAME_ENTITY && gameEntity) ||
+			((entity->getParentType() == AabbParentType::MODEL_ENTITY && modelEntity) ||
 				(entity->getParentType() == AabbParentType::BILLBOARD_ENTITY && billboardEntity)))
 		{
 			IDs.push_back(entity->getID());

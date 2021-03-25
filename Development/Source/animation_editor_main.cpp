@@ -74,7 +74,7 @@ void AnimationEditor::load()
 	_fe3d.gfx_enableSpecularLighting();
 
 	// Load models
-	_modelEditor.loadGameEntitiesFromFile();
+	_modelEditor.loadModelEntitiesFromFile();
 	_fe3d.misc_setLevelOfDetailDistance(10000.0f);
 
 	// Load animations
@@ -105,7 +105,7 @@ void AnimationEditor::unload()
 	_fe3d.gfx_disableSpecularLighting(true);
 
 	// Delete models
-	_fe3d.gameEntity_deleteAll();
+	_fe3d.modelEntity_deleteAll();
 
 	// Delete animation extfields
 	_gui.getGlobalScreen()->deleteTextfield("selectedAnimationName");

@@ -160,7 +160,7 @@ void ScriptInterpreter::load()
 	_environmentEditor.loadWaterEntitiesFromFile();
 
 	// Load preview models
-	_modelEditor.loadGameEntitiesFromFile();
+	_modelEditor.loadModelEntitiesFromFile();
 
 	// Load preview animations
 	_animationEditor.loadAnimationsFromFile();
@@ -260,7 +260,7 @@ void ScriptInterpreter::unload()
 	// Delete all other entities
 	_fe3d.terrainEntity_deleteAll();
 	_fe3d.waterEntity_deleteAll();
-	_fe3d.gameEntity_deleteAll();
+	_fe3d.modelEntity_deleteAll();
 	_fe3d.billboardEntity_deleteAll();
 	_fe3d.aabbEntity_deleteAll();
 	_fe3d.lightEntity_deleteAll();

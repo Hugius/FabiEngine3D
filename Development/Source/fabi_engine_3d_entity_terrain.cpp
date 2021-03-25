@@ -3,7 +3,7 @@
 
 void FabiEngine3D::terrainEntity_add(const string& ID, const string& heightMapPath)
 {
-	_core->_terrainEntityManager.addTerrain(ID);
+	_core->_terrainEntityManager.addTerrainEntity(ID);
 	terrainEntity_setHeightmap(ID, heightMapPath);
 }
 
@@ -17,7 +17,7 @@ void FabiEngine3D::terrainEntity_setHeightmap(const string& ID, const string& he
 		_core->_terrainEntityManager.getEntity(ID)->setHeightMapPath(heightMapPath);
 		_core->_terrainEntityManager.getEntity(ID)->setPixelValues(*pixelValues);
 		_core->_terrainEntityManager.getEntity(ID)->setSize(static_cast<float>(sqrt(pixelValues->size())));
-		_core->_terrainEntityManager.generateModel(ID);
+		_core->_terrainEntityManager.generateMesh(ID);
 	}
 }
 
@@ -235,7 +235,7 @@ void FabiEngine3D::terrainEntity_setMaxHeight(const string& ID, float height)
 	// Check if terrain mesh is loaded
 	if (!_core->_terrainEntityManager.getEntity(ID)->getPixelValues().empty())
 	{	
-		_core->_terrainEntityManager.generateModel(ID);
+		_core->_terrainEntityManager.generateMesh(ID);
 
 		// Load normal mapping again
 		if (_core->_terrainEntityManager.getEntity(ID)->isNormalMapped())
@@ -252,7 +252,7 @@ void FabiEngine3D::terrainEntity_setUvRepeat(const string& ID, float repeat)
 	// Check if terrain mesh is loaded
 	if (!_core->_terrainEntityManager.getEntity(ID)->getPixelValues().empty())
 	{
-		_core->_terrainEntityManager.generateModel(ID);
+		_core->_terrainEntityManager.generateMesh(ID);
 	}
 }
 

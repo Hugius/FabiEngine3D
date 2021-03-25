@@ -23,7 +23,7 @@ void SceneEditor::_updateAudioEditing()
 			string hoveredAabbID = _fe3d.collision_checkCursorInAny().first;
 
 			// Check if user selected a speaker model
-			for (auto& entityID : _fe3d.gameEntity_getAllIDs())
+			for (auto& entityID : _fe3d.modelEntity_getAllIDs())
 			{
 				// Must be audio preview entity
 				if (entityID.substr(0, string("@speaker").size()) == "@speaker")
@@ -51,7 +51,7 @@ void SceneEditor::_updateAudioEditing()
 								_transformation = TransformationType::TRANSLATION;
 
 								// Filling writefields
-								Vec3 position = _fe3d.gameEntity_getPosition(_activeSpeakerID);
+								Vec3 position = _fe3d.modelEntity_getPosition(_activeSpeakerID);
 								_gui.getViewport("right")->getWindow("main")->getScreen("audioPropertiesMenu")->getWriteField("x")->setTextContent(to_string(static_cast<int>(position.x)));
 								_gui.getViewport("right")->getWindow("main")->getScreen("audioPropertiesMenu")->getWriteField("y")->setTextContent(to_string(static_cast<int>(position.y)));
 								_gui.getViewport("right")->getWindow("main")->getScreen("audioPropertiesMenu")->getWriteField("z")->setTextContent(to_string(static_cast<int>(position.z)));
@@ -63,7 +63,7 @@ void SceneEditor::_updateAudioEditing()
 						// Don't reset if speaker is active
 						if (entityID != _activeSpeakerID && _selectedSpeakerID == "")
 						{
-							_fe3d.gameEntity_setSize(entityID, DEFAULT_SPEAKER_SIZE);
+							_fe3d.modelEntity_setSize(entityID, DEFAULT_SPEAKER_SIZE);
 							_fe3d.aabbEntity_setSize(entityID, DEFAULT_SPEAKER_AABB_SIZE);
 						}
 					}
@@ -98,7 +98,7 @@ void SceneEditor::_updateAudioEditing()
 				{
 					if (_gui.getViewport("right")->getWindow("main")->getScreen("audioPropertiesMenu")->getButton("delete")->isHovered()) // Delete button
 					{
-						_fe3d.gameEntity_delete(_activeSpeakerID);
+						_fe3d.modelEntity_delete(_activeSpeakerID);
 						_fe3d.audioEntity_delete(ACTIVE_AUDIO_ID);
 						_gui.getViewport("right")->getWindow("main")->setActiveScreen("sceneEditorControls");
 						_activeSpeakerID = "";
@@ -124,7 +124,7 @@ void SceneEditor::_updateAudioEditing()
 				_handleValueChanging("audioPropertiesMenu", "zMinus", "z", position.z, -_customEditorSpeed / 100.0f);
 				
 				// Apply new values
-				_fe3d.gameEntity_setPosition(_activeSpeakerID, position);
+				_fe3d.modelEntity_setPosition(_activeSpeakerID, position);
 				_fe3d.audioEntity_setPosition(ACTIVE_AUDIO_ID, position);
 				_fe3d.audioEntity_setMaxVolume(ACTIVE_AUDIO_ID, maxVolume);
 				_fe3d.audioEntity_setMaxDistance(ACTIVE_AUDIO_ID, maxDistance);

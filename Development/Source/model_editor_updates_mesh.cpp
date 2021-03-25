@@ -38,11 +38,11 @@ void ModelEditor::_updateModelEditingMesh()
 		}
 
 		// Check if mesh exists
-		bool existing = _fe3d.gameEntity_isExisting(_currentModelID);
+		bool existing = _fe3d.modelEntity_isExisting(_currentModelID);
 		bool hoverable = false;
 		if (existing)
 		{
-			hoverable = existing && !_fe3d.gameEntity_isMultiParted(_currentModelID);
+			hoverable = existing && !_fe3d.modelEntity_isMultiParted(_currentModelID);
 		}
 
 		// Editing buttons hoverability

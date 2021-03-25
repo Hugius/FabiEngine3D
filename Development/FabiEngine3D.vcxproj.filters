@@ -487,7 +487,7 @@
     <ClCompile Include="Source\billboard_entity_renderer.cpp">
       <Filter>src\Rendering System\Renderers\Entity Renderers\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="Source\game_entity_renderer.cpp">
+    <ClCompile Include="Source\model_entity_renderer.cpp">
       <Filter>src\Rendering System\Renderers\Entity Renderers\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="Source\gui_entity_renderer.cpp">
@@ -532,7 +532,7 @@
     <ClCompile Include="Source\billboard_entity_manager.cpp">
       <Filter>src\Entity System\Managers\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="Source\game_entity_manager.cpp">
+    <ClCompile Include="Source\model_entity_manager.cpp">
       <Filter>src\Entity System\Managers\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="Source\gui_entity_manager.cpp">
@@ -568,10 +568,10 @@
     <ClCompile Include="Source\billboard_entity.cpp">
       <Filter>src\Entity System\Data Structures\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="Source\game_entity_setters.cpp">
+    <ClCompile Include="Source\model_entity_setters.cpp">
       <Filter>src\Entity System\Data Structures\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="Source\game_entity_getters.cpp">
+    <ClCompile Include="Source\model_entity_getters.cpp">
       <Filter>src\Entity System\Data Structures\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="Source\gui_entity.cpp">
@@ -622,7 +622,7 @@
     <ClCompile Include="Source\fabi_engine_3d_entity_billboard.cpp">
       <Filter>src\Core System\Interface\Entities\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="Source\fabi_engine_3d_entity_game.cpp">
+    <ClCompile Include="Source\fabi_engine_3d_entity_model.cpp">
       <Filter>src\Core System\Interface\Entities\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="Source\fabi_engine_3d_entity_gui.cpp">
@@ -960,7 +960,7 @@
     <ClInclude Include="Source\billboard_entity_renderer.hpp">
       <Filter>src\Rendering System\Renderers\Entity Renderers\Miscellaneous</Filter>
     </ClInclude>
-    <ClInclude Include="Source\game_entity_renderer.hpp">
+    <ClInclude Include="Source\model_entity_renderer.hpp">
       <Filter>src\Rendering System\Renderers\Entity Renderers\Miscellaneous</Filter>
     </ClInclude>
     <ClInclude Include="Source\gui_entity_renderer.hpp">
@@ -981,7 +981,7 @@
     <ClInclude Include="Source\billboard_entity_manager.hpp">
       <Filter>src\Entity System\Managers\Miscellaneous</Filter>
     </ClInclude>
-    <ClInclude Include="Source\game_entity_manager.hpp">
+    <ClInclude Include="Source\model_entity_manager.hpp">
       <Filter>src\Entity System\Managers\Miscellaneous</Filter>
     </ClInclude>
     <ClInclude Include="Source\gui_entity_manager.hpp">
@@ -1011,7 +1011,7 @@
     <ClInclude Include="Source\billboard_entity.hpp">
       <Filter>src\Entity System\Data Structures\Miscellaneous</Filter>
     </ClInclude>
-    <ClInclude Include="Source\game_entity.hpp">
+    <ClInclude Include="Source\model_entity.hpp">
       <Filter>src\Entity System\Data Structures\Miscellaneous</Filter>
     </ClInclude>
     <ClInclude Include="Source\gui_entity.hpp">
@@ -1447,10 +1447,10 @@
     <None Include="..\FabiEngine3D\engine_assets\shaders\billboard_entity_shader.vert">
       <Filter>src\Rendering System\Shaders\Entity Shaders\Miscellaneous</Filter>
     </None>
-    <None Include="..\FabiEngine3D\engine_assets\shaders\game_entity_shader.frag">
+    <None Include="..\FabiEngine3D\engine_assets\shaders\model_entity_shader.frag">
       <Filter>src\Rendering System\Shaders\Entity Shaders\Miscellaneous</Filter>
     </None>
-    <None Include="..\FabiEngine3D\engine_assets\shaders\game_entity_shader.vert">
+    <None Include="..\FabiEngine3D\engine_assets\shaders\model_entity_shader.vert">
       <Filter>src\Rendering System\Shaders\Entity Shaders\Miscellaneous</Filter>
     </None>
     <None Include="..\FabiEngine3D\engine_assets\shaders\gui_entity_shader.frag">

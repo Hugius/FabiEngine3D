@@ -17,29 +17,29 @@ void ModelEditor::_updateModelEditingOptions()
 			}
 			else if (screen->getButton("isFaceculled")->isHovered())
 			{
-				_fe3d.gameEntity_setFaceCulled(_currentModelID, !_fe3d.gameEntity_isFaceCulled(_currentModelID));
+				_fe3d.modelEntity_setFaceCulled(_currentModelID, !_fe3d.modelEntity_isFaceCulled(_currentModelID));
 			}
 			else if (screen->getButton("isTransparent")->isHovered())
 			{
-				_fe3d.gameEntity_setTransparent(_currentModelID, !_fe3d.gameEntity_isTransparent(_currentModelID));
+				_fe3d.modelEntity_setTransparent(_currentModelID, !_fe3d.modelEntity_isTransparent(_currentModelID));
 			}
 			else if (screen->getButton("isInstanced")->isHovered())
 			{
-				_fe3d.gameEntity_setInstanced(_currentModelID, !_fe3d.gameEntity_isInstanced(_currentModelID), { Vec3(0.0f) });
+				_fe3d.modelEntity_setInstanced(_currentModelID, !_fe3d.modelEntity_isInstanced(_currentModelID), { Vec3(0.0f) });
 			}
 			else if (screen->getButton("color")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("colorR", "R", _fe3d.gameEntity_getColor(_currentModelID).r * 255.0f, Vec2(-0.25f, 0.0f), Vec2(0.15f, 0.1f));
-				_gui.getGlobalScreen()->addValueForm("colorG", "G", _fe3d.gameEntity_getColor(_currentModelID).g * 255.0f, Vec2(0.0f, 0.0f), Vec2(0.15f, 0.1f));
-				_gui.getGlobalScreen()->addValueForm("colorB", "B", _fe3d.gameEntity_getColor(_currentModelID).b * 255.0f, Vec2(0.25f, 0.0f), Vec2(0.15f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("colorR", "R", _fe3d.modelEntity_getColor(_currentModelID).r * 255.0f, Vec2(-0.25f, 0.0f), Vec2(0.15f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("colorG", "G", _fe3d.modelEntity_getColor(_currentModelID).g * 255.0f, Vec2(0.0f, 0.0f), Vec2(0.15f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("colorB", "B", _fe3d.modelEntity_getColor(_currentModelID).b * 255.0f, Vec2(0.25f, 0.0f), Vec2(0.15f, 0.1f));
 			}
 			else if (screen->getButton("uvRepeat")->isHovered())
 			{
-				_gui.getGlobalScreen()->addValueForm("uvRepeat", "UV Repeat", _fe3d.gameEntity_getUvRepeat(_currentModelID), Vec2(0.0f, 0.0f), Vec2(0.15f, 0.1f));
+				_gui.getGlobalScreen()->addValueForm("uvRepeat", "UV Repeat", _fe3d.modelEntity_getUvRepeat(_currentModelID), Vec2(0.0f, 0.0f), Vec2(0.15f, 0.1f));
 			}
 			else if (screen->getButton("lodID")->isHovered())
 			{
-				string lodID = _fe3d.gameEntity_getLevelOfDetailEntityID(_currentModelID);
+				string lodID = _fe3d.modelEntity_getLevelOfDetailEntityID(_currentModelID);
 				lodID = (lodID == "") ? lodID : lodID.substr(1, lodID.size() - 1);
 				_gui.getGlobalScreen()->addValueForm("lodID", "LOD entity ID", lodID, Vec2(0.0f, 0.0f), Vec2(0.4f, 0.1f));
 			}
@@ -47,29 +47,29 @@ void ModelEditor::_updateModelEditingOptions()
 
 		// Update GUI button contents
 		auto faceculledID = screen->getButton("isFaceculled")->getTextfield()->getEntityID();
-		auto isCulled = _fe3d.gameEntity_isFaceCulled(_currentModelID);
+		auto isCulled = _fe3d.modelEntity_isFaceCulled(_currentModelID);
 		auto transparentID = screen->getButton("isTransparent")->getTextfield()->getEntityID();
-		auto isTransparent = _fe3d.gameEntity_isTransparent(_currentModelID);
+		auto isTransparent = _fe3d.modelEntity_isTransparent(_currentModelID);
 		auto instancedID = screen->getButton("isInstanced")->getTextfield()->getEntityID();
-		auto isInstanced = _fe3d.gameEntity_isInstanced(_currentModelID);
+		auto isInstanced = _fe3d.modelEntity_isInstanced(_currentModelID);
 		_fe3d.textEntity_setTextContent(faceculledID, isCulled ? "Culling: ON" : "Culling: OFF");
 		_fe3d.textEntity_setTextContent(transparentID, isTransparent ? "Alpha: ON" : "Alpha: OFF");
 		_fe3d.textEntity_setTextContent(instancedID, isInstanced ? "Instanced: ON" : "Instanced: OFF");
 
 		// Setting model color
-		Vec3 newColor = _fe3d.gameEntity_getColor(_currentModelID) * 255.0f;
+		Vec3 newColor = _fe3d.modelEntity_getColor(_currentModelID) * 255.0f;
 		_gui.getGlobalScreen()->checkValueForm("colorR", newColor.r, { });
 		_gui.getGlobalScreen()->checkValueForm("colorG", newColor.g, { });
 		_gui.getGlobalScreen()->checkValueForm("colorB", newColor.b, { });
 		newColor.r = std::clamp(newColor.r / 255.0f, 0.0f, 1.0f);
 		newColor.g = std::clamp(newColor.g / 255.0f, 0.0f, 1.0f);
 		newColor.b = std::clamp(newColor.b / 255.0f, 0.0f, 1.0f);
-		_fe3d.gameEntity_setColor(_currentModelID, newColor);
+		_fe3d.modelEntity_setColor(_currentModelID, newColor);
 
 		// Setting model UV repeat
-		float newUvRepeat = _fe3d.gameEntity_getUvRepeat(_currentModelID);
+		float newUvRepeat = _fe3d.modelEntity_getUvRepeat(_currentModelID);
 		_gui.getGlobalScreen()->checkValueForm("uvRepeat", newUvRepeat, { });
-		_fe3d.gameEntity_setUvRepeat(_currentModelID, newUvRepeat);
+		_fe3d.modelEntity_setUvRepeat(_currentModelID, newUvRepeat);
 
 		// Setting LOD entityID
 		string lodID = "";
@@ -77,7 +77,7 @@ void ModelEditor::_updateModelEditingOptions()
 		{
 			if (lodID == "@") // No LOD entity
 			{
-				_fe3d.gameEntity_setLevelOfDetailEntity(_currentModelID, "");
+				_fe3d.modelEntity_setLevelOfDetailEntity(_currentModelID, "");
 			}
 			else if (std::find(_loadedModelIDs.begin(), _loadedModelIDs.end(), "@" + lodID) == _loadedModelIDs.end()) // Check LOD entity
 			{
@@ -85,7 +85,7 @@ void ModelEditor::_updateModelEditingOptions()
 			}
 			else // Set LOD entity
 			{
-				_fe3d.gameEntity_setLevelOfDetailEntity(_currentModelID, "@" + lodID);
+				_fe3d.modelEntity_setLevelOfDetailEntity(_currentModelID, "@" + lodID);
 			}
 		}
 	}

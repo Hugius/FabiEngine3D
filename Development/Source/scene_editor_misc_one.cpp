@@ -66,7 +66,7 @@ void SceneEditor::_activateModel(const string& modelID)
 	_gui.getViewport("right")->getWindow("main")->getScreen("modelPropertiesMenu")->getButton("scaling")->setHoverable(true);
 
 	// Filling writefields
-	Vec3 position = _fe3d.gameEntity_getPosition(_activeModelID);
+	Vec3 position = _fe3d.modelEntity_getPosition(_activeModelID);
 	_gui.getViewport("right")->getWindow("main")->getScreen("modelPropertiesMenu")->getWriteField("x")->setTextContent(to_string(static_cast<int>(position.x)));
 	_gui.getViewport("right")->getWindow("main")->getScreen("modelPropertiesMenu")->getWriteField("y")->setTextContent(to_string(static_cast<int>(position.y)));
 	_gui.getViewport("right")->getWindow("main")->getScreen("modelPropertiesMenu")->getWriteField("z")->setTextContent(to_string(static_cast<int>(position.z)));

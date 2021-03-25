@@ -71,7 +71,7 @@ void AabbEntityManager::bindAabbEntity(const string& ID, const string& parentID,
 }
 
 void AabbEntityManager::update(
-	const unordered_map<string, shared_ptr<GameEntity>>& gameEntities, 
+	const unordered_map<string, shared_ptr<ModelEntity>>& modelEntities, 
 	const unordered_map<string, shared_ptr<BillboardEntity>>& billboardEntities)
 {
 	for (auto& [keyID, entity] : _getAabbEntities())
@@ -80,16 +80,16 @@ void AabbEntityManager::update(
 		if (entity->getParentID() != "")
 		{
 			// Determine parent type
-			if (entity->getParentType() == AabbParentType::GAME_ENTITY)
+			if (entity->getParentType() == AabbParentType::MODEL_ENTITY)
 			{
 				// Try to find the parent entity
-				auto foundPair = gameEntities.find(entity->getParentID());
-				if(foundPair != gameEntities.end())
+				auto foundPair = modelEntities.find(entity->getParentID());
+				if(foundPair != modelEntities.end())
 				{
 					// Retrieve parent entity
 					auto parentEntity = foundPair->second;
 
-					// Game entity must not be LODded
+					// Model entity must not be LODded
 					if (!parentEntity->isLevelOfDetailed())
 					{
 						// Retrieve maximum rotation & direction (based on parent rotation)
@@ -187,7 +187,7 @@ void AabbEntityManager::update(
 				}
 				else
 				{
-					Logger::throwError("AABB entity \"" + entity->getID() + "\" bound to nonexisting GAME entity \"" + entity->getParentID() + "\"");
+					Logger::throwError("AABB entity \"" + entity->getID() + "\" bound to nonexisting MODEL entity \"" + entity->getParentID() + "\"");
 				}
 			}
 			else if(entity->getParentType() == AabbParentType::BILLBOARD_ENTITY)

@@ -9,7 +9,7 @@ void AnimationEditor::startAnimation(const string& animationID, const string& mo
 	if (_isAnimationExisting(animationID))
 	{
 		// Check if model trying to animate exists
-		if (_fe3d.gameEntity_isExisting(modelID))
+		if (_fe3d.modelEntity_isExisting(modelID))
 		{
 			// Check if animation has not already started
 			if (!isAnimationStarted(animationID, modelID))
@@ -21,7 +21,7 @@ void AnimationEditor::startAnimation(const string& animationID, const string& mo
 					auto animation = _getAnimation(animationID);
 					animation->animatedModelID = modelID;
 					animation->timesToPlay = timesToPlay;
-					animation->initialScaling = _fe3d.gameEntity_getSize(modelID);
+					animation->initialScaling = _fe3d.modelEntity_getSize(modelID);
 
 					// Check if model has all the parts
 					bool hasAllParts = true;
@@ -30,7 +30,7 @@ void AnimationEditor::startAnimation(const string& animationID, const string& mo
 						// Part cannot be empty
 						if (!partName.empty())
 						{
-							hasAllParts = hasAllParts && _fe3d.gameEntity_hasPart(modelID, partName);
+							hasAllParts = hasAllParts && _fe3d.modelEntity_hasPart(modelID, partName);
 						}
 					}
 

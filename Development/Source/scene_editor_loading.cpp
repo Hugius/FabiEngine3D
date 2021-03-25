@@ -165,9 +165,9 @@ void SceneEditor::loadEditorSceneFromFile(const string& fileName)
 				copyPreviewModel(modelID, previewID, position);
 
 				// Setting properties
-				_fe3d.gameEntity_setRotation(modelID, rotation);
-				_fe3d.gameEntity_setSize(modelID, size);
-				_fe3d.gameEntity_setStaticToCamera(modelID, isFrozen);
+				_fe3d.modelEntity_setRotation(modelID, rotation);
+				_fe3d.modelEntity_setSize(modelID, size);
+				_fe3d.modelEntity_setStaticToCamera(modelID, isFrozen);
 				
 				// Play animation
 				if (!animationID.empty())
@@ -178,7 +178,7 @@ void SceneEditor::loadEditorSceneFromFile(const string& fileName)
 				// Hide model if LOD (and executing game)
 				if (makeInvisible)
 				{
-					_fe3d.gameEntity_hide(modelID);
+					_fe3d.modelEntity_hide(modelID);
 				}
 			}
 			else if (entityType == "BILLBOARD")
@@ -291,10 +291,10 @@ void SceneEditor::loadEditorSceneFromFile(const string& fileName)
 				// Add lightbulb
 				if (_isEditorLoaded)
 				{
-					_fe3d.gameEntity_add("@" + lightID, "engine_assets\\meshes\\lamp.obj", position, Vec3(0.0f), DEFAULT_LIGHTBULB_SIZE);
-					_fe3d.gameEntity_setShadowed("@" + lightID, false);
-					_fe3d.gameEntity_setColor("@" + lightID, color);
-					_fe3d.aabbEntity_bindToGameEntity("@" + lightID, Vec3(0.0f), DEFAULT_LIGHTBULB_AABB_SIZE, true, true);
+					_fe3d.modelEntity_add("@" + lightID, "engine_assets\\meshes\\lamp.obj", position, Vec3(0.0f), DEFAULT_LIGHTBULB_SIZE);
+					_fe3d.modelEntity_setShadowed("@" + lightID, false);
+					_fe3d.modelEntity_setColor("@" + lightID, color);
+					_fe3d.aabbEntity_bindToModelEntity("@" + lightID, Vec3(0.0f), DEFAULT_LIGHTBULB_AABB_SIZE, true, true);
 				}
 
 				// Add point light

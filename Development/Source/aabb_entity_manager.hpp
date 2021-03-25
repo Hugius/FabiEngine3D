@@ -18,7 +18,7 @@ public:
 
 	void update() override {}
 	void update(
-		const unordered_map<string, shared_ptr<GameEntity>>& gameEntities, 
+		const unordered_map<string, shared_ptr<ModelEntity>>& modelEntities, 
 		const unordered_map<string, shared_ptr<BillboardEntity>>& billboardEntities);
 
 private:

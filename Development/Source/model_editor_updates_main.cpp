@@ -52,7 +52,7 @@ void ModelEditor::_updateManagementScreen()
 			// Check if user wants to save changes
 			if (_gui.getGlobalScreen()->isAnswerFormConfirmed("exitModelEditor"))
 			{
-				saveGameEntitiesToFile();
+				saveModelEntitiesToFile();
 				unload();
 				_gui.getViewport("left")->getWindow("main")->setActiveScreen("main");
 			}
@@ -78,10 +78,10 @@ void ModelEditor::_updateEditingScreen()
 			{
 				if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 				{
-					// Hide game entity
-					if (_fe3d.gameEntity_isExisting(_currentModelID))
+					// Hide model entity
+					if (_fe3d.modelEntity_isExisting(_currentModelID))
 					{
-						_fe3d.gameEntity_hide(_currentModelID);
+						_fe3d.modelEntity_hide(_currentModelID);
 					}
 
 					// Reset variables and go back to main screen
@@ -104,14 +104,14 @@ void ModelEditor::_updateEditingScreen()
 				}
 				else if (screen->getButton("size")->isHovered())
 				{
-					if (_fe3d.gameEntity_isExisting(_currentModelID))
+					if (_fe3d.modelEntity_isExisting(_currentModelID))
 					{
 						_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuSize");
 					}
 				}
 				else if (screen->getButton("aabb")->isHovered())
 				{
-					if (_fe3d.gameEntity_isExisting(_currentModelID))
+					if (_fe3d.modelEntity_isExisting(_currentModelID))
 					{
 						_gui.getViewport("left")->getWindow("main")->setActiveScreen("modelEditorMenuAabb");
 						_fe3d.misc_enableAabbFrameRendering();
@@ -120,21 +120,21 @@ void ModelEditor::_updateEditingScreen()
 			}
 
 			// Check if mesh exists
-			bool existing = _fe3d.gameEntity_isExisting(_currentModelID);
+			bool existing = _fe3d.modelEntity_isExisting(_currentModelID);
 			bool hoverable = false;
 			if (existing)
 			{
 				hoverable = true;
 
 				// Show mesh
-				_fe3d.gameEntity_show(_currentModelID);
+				_fe3d.modelEntity_show(_currentModelID);
 			}
 
 			// Editing buttons hoverability
 			screen->getButton("options")->setHoverable(hoverable);
 			screen->getButton("lighting")->setHoverable(hoverable);
 			screen->getButton("size")->setHoverable(hoverable);
-			screen->getButton("aabb")->setHoverable(hoverable && !_fe3d.gameEntity_isInstanced(_currentModelID));
+			screen->getButton("aabb")->setHoverable(hoverable && !_fe3d.modelEntity_isInstanced(_currentModelID));
 		}
 		else if (screen->getID() == "modelEditorMenuMesh")
 		{
@@ -219,10 +219,10 @@ void ModelEditor::_updateModelChoosing()
 			// Hide last model
 			if (_hoveredModelID != "")
 			{
-				// Check if model has game entity
-				if (_fe3d.gameEntity_isExisting(_hoveredModelID))
+				// Check if model has mesh
+				if (_fe3d.modelEntity_isExisting(_hoveredModelID))
 				{
-					_fe3d.gameEntity_hide(_hoveredModelID);
+					_fe3d.modelEntity_hide(_hoveredModelID);
 				}
 			}
 
@@ -244,10 +244,10 @@ void ModelEditor::_updateModelChoosing()
 						_fe3d.textEntity_show(_gui.getGlobalScreen()->getTextfield("selectedModelName")->getEntityID());
 					}
 
-					// Check if model has game entity
-					if (_fe3d.gameEntity_isExisting(_currentModelID))
+					// Check if model has mesh
+					if (_fe3d.modelEntity_isExisting(_currentModelID))
 					{
-						_fe3d.gameEntity_show(_currentModelID);
+						_fe3d.modelEntity_show(_currentModelID);
 					}
 
 					// Miscellaneous
@@ -275,10 +275,10 @@ void ModelEditor::_updateModelChoosing()
 			// Show hovered model
 			if (_hoveredModelID != "")
 			{
-				// Check if model has game entity
-				if (_fe3d.gameEntity_isExisting(_hoveredModelID))
+				// Check if model has mesh
+				if (_fe3d.modelEntity_isExisting(_hoveredModelID))
 				{
-					_fe3d.gameEntity_show(_hoveredModelID);
+					_fe3d.modelEntity_show(_hoveredModelID);
 				}
 			}
 		}
@@ -296,9 +296,9 @@ void ModelEditor::_updateModelRemoval()
 			if (_gui.getGlobalScreen()->isAnswerFormConfirmed("deleteModel"))
 			{
 				// Delete entity
-				if (_fe3d.gameEntity_isExisting(_currentModelID))
+				if (_fe3d.modelEntity_isExisting(_currentModelID))
 				{
-					_fe3d.gameEntity_delete(_currentModelID);
+					_fe3d.modelEntity_delete(_currentModelID);
 				}
 
 				// Delete from name record
@@ -308,10 +308,10 @@ void ModelEditor::_updateModelRemoval()
 			}
 			else if (_gui.getGlobalScreen()->isAnswerFormDenied("deleteModel"))
 			{
-				// Check if model has game entity
-				if (_fe3d.gameEntity_isExisting(_currentModelID))
+				// Check if model has mesh
+				if (_fe3d.modelEntity_isExisting(_currentModelID))
 				{
-					_fe3d.gameEntity_hide(_currentModelID);
+					_fe3d.modelEntity_hide(_currentModelID);
 				}
 
 				_isDeletingModel = false;

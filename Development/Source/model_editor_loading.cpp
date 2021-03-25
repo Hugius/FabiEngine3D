@@ -10,7 +10,7 @@ const vector<string> ModelEditor::getAllTexturePathsFromFile()
 	// Error checking
 	if (_currentProjectID == "")
 	{
-		_fe3d.logger_throwError("No current project loaded --> ModelEditor::preLoadGameEntitiesFromFile()");
+		_fe3d.logger_throwError("No current project loaded --> ModelEditor::preLoadModelEntitiesFromFile()");
 	}
 
 	// Compose full file path
@@ -88,12 +88,12 @@ const vector<string> ModelEditor::getAllTexturePathsFromFile()
 	return {};
 }
 
-void ModelEditor::loadGameEntitiesFromFile()
+void ModelEditor::loadModelEntitiesFromFile()
 {
 	// Error checking
 	if (_currentProjectID == "")
 	{
-		_fe3d.logger_throwError("No current project loaded --> ModelEditor::loadGameEntitiesFromFile()");
+		_fe3d.logger_throwError("No current project loaded --> ModelEditor::loadModelEntitiesFromFile()");
 	}
 
 	// Clear names list from previous loads

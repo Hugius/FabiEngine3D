@@ -74,11 +74,11 @@ public:
 	void camera_center();
 
 	// Camera interface - getters
-	bool  camera_isLookatViewEnabled();
-	bool  camera_isFirstPersonViewEnabled();
-	bool  camera_isFreeMovementEnabled();
-	Vec3  camera_getPosition();
-	Vec3  camera_getLookatPosition();
+	bool camera_isLookatViewEnabled();
+	bool camera_isFirstPersonViewEnabled();
+	bool camera_isFreeMovementEnabled();
+	Vec3 camera_getPosition();
+	Vec3 camera_getLookatPosition();
 	float camera_getFOV();
 	float getAspectRatio();
 	float camera_getMouseSensitivity();
@@ -212,118 +212,118 @@ public:
 	void waterEntity_setUvRepeat(const string& ID, float repeat);
 
 	// Water entity interface - getters
-	bool   waterEntity_isExisting(const string& ID);
-	bool   waterEntity_isVisible(const string& ID);
-	bool   waterEntity_isWaving(const string& ID);
-	bool   waterEntity_isRippling(const string& ID);
-	bool   waterEntity_isSpecularLighted(const string& ID);
-	bool   waterEntity_isReflective(const string& ID);
-	bool   waterEntity_isRefractive(const string& ID);
-	Vec2  waterEntity_getSpeed(const string& ID);
-	Vec3   waterEntity_getPosition(const string& ID);
-	Vec3   waterEntity_getColor(const string& ID);
-	float  waterEntity_getSize(const string& ID);
-	float  waterEntity_getUvRepeat(const string& ID);
-	float  waterEntity_getWaveHeightFactor(const string& ID);
-	float  waterEntity_getSpecularLightingFactor(const string& ID);
-	float  waterEntity_getSpecularLightingIntensity(const string& ID);
-	float  waterEntity_getTransparency(const string& ID);
+	bool waterEntity_isExisting(const string& ID);
+	bool waterEntity_isVisible(const string& ID);
+	bool waterEntity_isWaving(const string& ID);
+	bool waterEntity_isRippling(const string& ID);
+	bool waterEntity_isSpecularLighted(const string& ID);
+	bool waterEntity_isReflective(const string& ID);
+	bool waterEntity_isRefractive(const string& ID);
+	Vec2 waterEntity_getSpeed(const string& ID);
+	Vec3 waterEntity_getPosition(const string& ID);
+	Vec3 waterEntity_getColor(const string& ID);
+	float waterEntity_getSize(const string& ID);
+	float waterEntity_getUvRepeat(const string& ID);
+	float waterEntity_getWaveHeightFactor(const string& ID);
+	float waterEntity_getSpecularLightingFactor(const string& ID);
+	float waterEntity_getSpecularLightingIntensity(const string& ID);
+	float waterEntity_getTransparency(const string& ID);
 	const string& waterEntity_getDudvMapPath(const string& ID);
 	const string& waterEntity_getNormalMapPath(const string& ID);
 	const string& waterEntity_getDisplacementMapPath(const string& ID);
 	string waterEntity_getSelectedID();
 	vector<string> waterEntity_getAllIDs();
 
-	// Game entity interface - setters
-	void gameEntity_add
+	// Model entity interface - setters
+	void modelEntity_add
 	(
 		const string& ID, const string& meshPath,
 		Vec3 position, Vec3 rotation, Vec3 size, bool visible = true
 	);
-	void		   gameEntity_deleteAll();
-	void		   gameEntity_delete(const string& ID);
-	void		   gameEntity_deleteGroup(const string& ID);
-	void		   gameEntity_hideAll();
-	void		   gameEntity_showAll();
-	void		   gameEntity_hide(const string& ID);
-	void		   gameEntity_show(const string& ID);
-	void		   gameEntity_loadModel(const string& ID, const string& meshPath);
-	void		   gameEntity_setDiffuseMap(const string& ID, const string& texturePath);
-	void		   gameEntity_setLightMap(const string& ID, const string& texturePath);
-	void		   gameEntity_setNormalMap(const string& ID, const string& texturePath);
-	void		   gameEntity_setReflectionMap(const string& ID, const string& texturePath);
-	void		   gameEntity_setLevelOfDetailEntity(const string& ID, const string& lodID);
-	void		   gameEntity_setTransparent(const string& ID, bool enabled);
-	void		   gameEntity_setFaceCulled(const string& ID, bool enabled);
-	void		   gameEntity_setLightMapped(const string& ID, bool enabled);
-	void		   gameEntity_setNormalMapped(const string& ID, bool enabled);
-	void		   gameEntity_setSkyReflective(const string& ID, bool enabled);
-	void		   gameEntity_setSpecularLighted(const string& ID, bool enabled);
-	void		   gameEntity_setSceneReflective(const string& ID, bool enabled);
-	void		   gameEntity_setShadowed(const string& ID, bool enabled);
-	void		   gameEntity_setDepthMapIncluded(const string& ID, bool enabled);
-	void		   gameEntity_setStaticToCamera(const string& ID, bool enabled);
-	void		   gameEntity_setWireframed(const string& ID, bool enabled);
-	void		   gameEntity_move(const string& ID, Vec3 factor, const string& partName = "");
-	void		   gameEntity_rotate(const string& ID, Vec3 factor, const string& partName = "");
-	void		   gameEntity_scale(const string& ID, Vec3 factor, const string& partName = "");
-	void		   gameEntity_setPosition(const string& ID, Vec3 position, const string& partName = "");
-	void		   gameEntity_setRotation(const string& ID, Vec3 rotation, const string& partName = "");
-	void		   gameEntity_setRotationOrigin(const string& ID, Vec3 rotationOrigin, const string& partName = "");
-	void		   gameEntity_setSize(const string& ID, Vec3 size, const string& partName = "");
-	void		   gameEntity_setSpecularFactor(const string& ID, float intensity);
-	void		   gameEntity_setSpecularIntensity(const string& ID, float intensity);
-	void		   gameEntity_setLightness(const string& ID, float lightness);
-	void		   gameEntity_setAlpha(const string& ID, float alpha);
-	void		   gameEntity_setColor(const string& ID, Vec3 color, const string& partName = "");
-	void		   gameEntity_setMinHeight(const string& ID, float height);
-	void		   gameEntity_setMaxHeight(const string& ID, float height);
-	void		   gameEntity_setUvRepeat(const string& ID, float repeat);
-	void		   gameEntity_setInstanced(const string& ID, bool instanced, vector<Vec3> offsets);
+	void modelEntity_deleteAll();
+	void modelEntity_delete(const string& ID);
+	void modelEntity_deleteGroup(const string& ID);
+	void modelEntity_hideAll();
+	void modelEntity_showAll();
+	void modelEntity_hide(const string& ID);
+	void modelEntity_show(const string& ID);
+	void modelEntity_loadModel(const string& ID, const string& meshPath);
+	void modelEntity_setDiffuseMap(const string& ID, const string& texturePath);
+	void modelEntity_setLightMap(const string& ID, const string& texturePath);
+	void modelEntity_setNormalMap(const string& ID, const string& texturePath);
+	void modelEntity_setReflectionMap(const string& ID, const string& texturePath);
+	void modelEntity_setLevelOfDetailEntity(const string& ID, const string& lodID);
+	void modelEntity_setTransparent(const string& ID, bool enabled);
+	void modelEntity_setFaceCulled(const string& ID, bool enabled);
+	void modelEntity_setLightMapped(const string& ID, bool enabled);
+	void modelEntity_setNormalMapped(const string& ID, bool enabled);
+	void modelEntity_setSkyReflective(const string& ID, bool enabled);
+	void modelEntity_setSpecularLighted(const string& ID, bool enabled);
+	void modelEntity_setSceneReflective(const string& ID, bool enabled);
+	void modelEntity_setShadowed(const string& ID, bool enabled);
+	void modelEntity_setDepthMapIncluded(const string& ID, bool enabled);
+	void modelEntity_setStaticToCamera(const string& ID, bool enabled);
+	void modelEntity_setWireframed(const string& ID, bool enabled);
+	void modelEntity_move(const string& ID, Vec3 factor, const string& partName = "");
+	void modelEntity_rotate(const string& ID, Vec3 factor, const string& partName = "");
+	void modelEntity_scale(const string& ID, Vec3 factor, const string& partName = "");
+	void modelEntity_setPosition(const string& ID, Vec3 position, const string& partName = "");
+	void modelEntity_setRotation(const string& ID, Vec3 rotation, const string& partName = "");
+	void modelEntity_setRotationOrigin(const string& ID, Vec3 rotationOrigin, const string& partName = "");
+	void modelEntity_setSize(const string& ID, Vec3 size, const string& partName = "");
+	void modelEntity_setSpecularFactor(const string& ID, float intensity);
+	void modelEntity_setSpecularIntensity(const string& ID, float intensity);
+	void modelEntity_setLightness(const string& ID, float lightness);
+	void modelEntity_setAlpha(const string& ID, float alpha);
+	void modelEntity_setColor(const string& ID, Vec3 color, const string& partName = "");
+	void modelEntity_setMinHeight(const string& ID, float height);
+	void modelEntity_setMaxHeight(const string& ID, float height);
+	void modelEntity_setUvRepeat(const string& ID, float repeat);
+	void modelEntity_setInstanced(const string& ID, bool instanced, vector<Vec3> offsets);
 
-	// Game entity interface - getters
-	bool		   gameEntity_isExisting(const string& ID);
-	bool		   gameEntity_isVisible(const string& ID);
-	bool		   gameEntity_isInstanced(const string& ID);
-	bool		   gameEntity_isMultiParted(const string& ID);
-	bool		   gameEntity_isTransparent(const string& ID);
-	bool		   gameEntity_isFaceCulled(const string& ID);
-	bool		   gameEntity_isLightMapped(const string& ID);
-	bool		   gameEntity_isNormalMapped(const string& ID);
-	bool		   gameEntity_isSkyReflective(const string& ID);
-	bool		   gameEntity_isSpecularLighted(const string& ID);
-	bool		   gameEntity_isSceneReflective(const string& ID);
-	bool		   gameEntity_isShadowed(const string& ID);
-	bool		   gameEntity_isStaticToCamera(const string& ID);
-	bool		   gameEntity_isWireframed(const string& ID);
-	bool		   gameEntity_isDepthMapIncluded(const string& ID);
-	bool		   gameEntity_hasPart(const string& ID, const string& partName);
-	float		   gameEntity_getLightness(const string& ID);
-	float		   gameEntity_getSpecularFactor(const string& ID);
-	float		   gameEntity_getSpecularIntensity(const string& ID);
-	float		   gameEntity_getAlpha(const string& ID);
-	float		   gameEntity_getMinHeight(const string& ID);
-	float		   gameEntity_getMaxHeight(const string& ID);
-	float		   gameEntity_getUvRepeat(const string& ID);
-	Vec3		   gameEntity_getPosition(const string& ID, const string& partName = "");
-	Vec3		   gameEntity_getRotation(const string& ID, const string& partName = "");
-	Vec3		   gameEntity_getRotationOrigin(const string& ID, const string& partName = "");
-	Vec3		   gameEntity_getSize(const string& ID, const string& partName = "");
-	Vec3		   gameEntity_getColor(const string& ID, const string& partName = "");
-	string		   gameEntity_getMeshPath(const string& ID);
-	string		   gameEntity_getDiffuseMapPath(const string& ID);
-	string		   gameEntity_getLightMapPath(const string& ID);
-	string		   gameEntity_getNormalMapPath(const string& ID);
-	string		   gameEntity_getReflectionMapPath(const string& ID);
-	string		   gameEntity_getLevelOfDetailEntityID(const string& ID);
-	const vector<Vec3>    gameEntity_getInstancedOffsets(const string& ID);
-	const vector<string>& gameEntity_getDiffuseMapPaths(const string& ID);
-	const vector<string>& gameEntity_getLightMapPaths(const string& ID);
-	const vector<string>& gameEntity_getReflectionMapPaths(const string& ID);
-	const vector<string>& gameEntity_getNormalMapPaths(const string& ID);
-	const vector<string>& gameEntity_getPartNames(const string& ID);
-	vector<string> gameEntity_getAllIDs();
-	vector<string> gameEntity_getGroupIDs(const string& ID);
+	// Model entity interface - getters
+	bool modelEntity_isExisting(const string& ID);
+	bool modelEntity_isVisible(const string& ID);
+	bool modelEntity_isInstanced(const string& ID);
+	bool modelEntity_isMultiParted(const string& ID);
+	bool modelEntity_isTransparent(const string& ID);
+	bool modelEntity_isFaceCulled(const string& ID);
+	bool modelEntity_isLightMapped(const string& ID);
+	bool modelEntity_isNormalMapped(const string& ID);
+	bool modelEntity_isSkyReflective(const string& ID);
+	bool modelEntity_isSpecularLighted(const string& ID);
+	bool modelEntity_isSceneReflective(const string& ID);
+	bool modelEntity_isShadowed(const string& ID);
+	bool modelEntity_isStaticToCamera(const string& ID);
+	bool modelEntity_isWireframed(const string& ID);
+	bool modelEntity_isDepthMapIncluded(const string& ID);
+	bool modelEntity_hasPart(const string& ID, const string& partName);
+	float modelEntity_getLightness(const string& ID);
+	float modelEntity_getSpecularFactor(const string& ID);
+	float modelEntity_getSpecularIntensity(const string& ID);
+	float modelEntity_getAlpha(const string& ID);
+	float modelEntity_getMinHeight(const string& ID);
+	float modelEntity_getMaxHeight(const string& ID);
+	float modelEntity_getUvRepeat(const string& ID);
+	Vec3 modelEntity_getPosition(const string& ID, const string& partName = "");
+	Vec3 modelEntity_getRotation(const string& ID, const string& partName = "");
+	Vec3 modelEntity_getRotationOrigin(const string& ID, const string& partName = "");
+	Vec3 modelEntity_getSize(const string& ID, const string& partName = "");
+	Vec3 modelEntity_getColor(const string& ID, const string& partName = "");
+	string modelEntity_getMeshPath(const string& ID);
+	string modelEntity_getDiffuseMapPath(const string& ID);
+	string modelEntity_getLightMapPath(const string& ID);
+	string modelEntity_getNormalMapPath(const string& ID);
+	string modelEntity_getReflectionMapPath(const string& ID);
+	string modelEntity_getLevelOfDetailEntityID(const string& ID);
+	const vector<Vec3>    modelEntity_getInstancedOffsets(const string& ID);
+	const vector<string>& modelEntity_getDiffuseMapPaths(const string& ID);
+	const vector<string>& modelEntity_getLightMapPaths(const string& ID);
+	const vector<string>& modelEntity_getReflectionMapPaths(const string& ID);
+	const vector<string>& modelEntity_getNormalMapPaths(const string& ID);
+	const vector<string>& modelEntity_getPartNames(const string& ID);
+	vector<string> modelEntity_getAllIDs();
+	vector<string> modelEntity_getGroupIDs(const string& ID);
 
 	// Billboard entity interface (core) - setters
 	void billboardEntity_add
@@ -356,16 +356,16 @@ public:
 	float billboardEntity_getLightness(const string& ID);
 	float billboardEntity_getMinHeight(const string& ID);
 	float billboardEntity_getMaxHeight(const string& ID);
-	bool  billboardEntity_isExisting(const string& ID);
-	bool  billboardEntity_isVisible(const string& ID);
-	bool  billboardEntity_isFacingCameraX(const string& ID);
-	bool  billboardEntity_isFacingCameraY(const string& ID);
-	bool  billboardEntity_isDepthMapIncluded(const string& ID);
-	bool  billboardEntity_isInstanced(const string& ID);
-	Vec3  billboardEntity_getPosition(const string& ID);
-	Vec3  billboardEntity_getRotation(const string& ID);
-	Vec2  billboardEntity_getSize(const string& ID);
-	Vec3  billboardEntity_getColor(const string& ID);
+	bool billboardEntity_isExisting(const string& ID);
+	bool billboardEntity_isVisible(const string& ID);
+	bool billboardEntity_isFacingCameraX(const string& ID);
+	bool billboardEntity_isFacingCameraY(const string& ID);
+	bool billboardEntity_isDepthMapIncluded(const string& ID);
+	bool billboardEntity_isInstanced(const string& ID);
+	Vec3 billboardEntity_getPosition(const string& ID);
+	Vec3 billboardEntity_getRotation(const string& ID);
+	Vec2 billboardEntity_getSize(const string& ID);
+	Vec3 billboardEntity_getColor(const string& ID);
 	vector<string> billboardEntity_getAllIDs();
 	vector<Vec3>   billboardEntity_getInstancedOffsets(const string& ID);
 
@@ -416,7 +416,7 @@ public:
 
 	// AABB entity interface - setters
 	void aabbEntity_add(const string& ID, Vec3 position, Vec3 size, bool raycastResponsive, bool collisionResponsive, bool visible = true);
-	void aabbEntity_bindToGameEntity(const string& parentID, Vec3 position, Vec3 size, bool raycastResponsive, bool collisionResponsive, const string& customAabbID = "");
+	void aabbEntity_bindToModelEntity(const string& parentID, Vec3 position, Vec3 size, bool raycastResponsive, bool collisionResponsive, const string& customAabbID = "");
 	void aabbEntity_bindToBillboardEntity(const string& parentID, bool raycastResponsive, bool collisionResponsive, const string& customAabbID = "");
 	void aabbEntity_deleteAll();
 	void aabbEntity_delete(const string& ID);
@@ -437,7 +437,7 @@ public:
 	bool aabbEntity_isCollisionResponsive(const string& ID);
 	bool aabbEntity_isExisting(const string& ID);
 	bool aabbEntity_isVisible(const string& ID);
-	vector<string> aabbEntity_getBoundIDs(const string& parentID, bool gameEntity, bool billboardEntity);
+	vector<string> aabbEntity_getBoundIDs(const string& parentID, bool modelEntity, bool billboardEntity);
 	vector<string> aabbEntity_getAllIDs();
 	string aabbEntity_getParentID(const string& ID);
 	AabbParentType aabbEntity_getParentType(const string& ID);
@@ -589,15 +589,15 @@ public:
 	// Audio entity interface - getters
 	vector<string> audioEntity_getAllIDs();
 	string audioEntity_getFilePath(const string& ID);
-	Vec3   audioEntity_getPosition(const string& ID);
-	float  audioEntity_getMaxDistance(const string& ID);
-	float  audioEntity_getVolume(const string& ID);
-	float  audioEntity_getMaxVolume(const string& ID);
-	bool   audioEntity_isExisting(const string& ID);
-	bool   audioEntity_isPlaying(const string& ID);
-	bool   audioEntity_isPaused(const string& ID);
-	bool   audioEntity_isLoaded(const string& ID);
-	int    audioEntity_getUsedChannelCount();
+	Vec3 audioEntity_getPosition(const string& ID);
+	float audioEntity_getMaxDistance(const string& ID);
+	float audioEntity_getVolume(const string& ID);
+	float audioEntity_getMaxVolume(const string& ID);
+	bool audioEntity_isExisting(const string& ID);
+	bool audioEntity_isPlaying(const string& ID);
+	bool audioEntity_isPaused(const string& ID);
+	bool audioEntity_isLoaded(const string& ID);
+	int audioEntity_getUsedChannelCount();
 
 	// Music entity interface - setters
 	void music_addToPlaylist(const string& audioPath);
@@ -607,8 +607,8 @@ public:
 	void music_resume();
 
 	// Music interface - getters
-	bool  music_isPlaying();
-	bool  music_isPaused();
+	bool music_isPlaying();
+	bool music_isPaused();
 	float music_getVolume();
 
 	// Sound interface - setters
@@ -732,8 +732,8 @@ public:
 	bool input_getMouseDown(InputType mouseButton);
 	bool input_getMousePressed(InputType mouseButton);
 	bool input_getMouseToggled(InputType mouseButton);
-	int  input_getMouseWheelX();
-	int  input_getMouseWheelY();
+	int input_getMouseWheelX();
+	int input_getMouseWheelY();
 
 	// Logger interface
 	template<typename T, typename...Rest> inline void logger_throwInfo(T first, Rest...rest)

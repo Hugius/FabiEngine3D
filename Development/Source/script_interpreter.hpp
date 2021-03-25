@@ -76,7 +76,7 @@ private:
 	bool _executeFe3dSkyEntityFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	bool _executeFe3dTerrainEntityFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	bool _executeFe3dWaterEntityFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
-	bool _executeFe3dGameEntityFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
+	bool _executeFe3dModelEntityFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	bool _executeFe3dBillboardEntityFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	bool _executeFe3dAabbEntityFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
 	bool _executeFe3dLightEntityFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues);
@@ -91,7 +91,7 @@ private:
 	bool _validateFe3dSkyEntity();
 	bool _validateFe3dTerrainEntity();
 	bool _validateFe3dWaterEntity();
-	bool _validateFe3dGameEntity(const string& ID, bool previewEntity = false);
+	bool _validateFe3dModelEntity(const string& ID, bool previewEntity = false);
 	bool _validateFe3dBillboardEntity(const string& ID, bool previewEntity = false);
 	bool _validateFe3dAabbEntity(const string& ID);
 	bool _validateFe3dLightEntity(const string& ID);

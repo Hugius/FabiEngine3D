@@ -27,7 +27,7 @@ void SceneEditor::_updateMainModelMenu()
 					_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuModelChoice")->getScrollingList("models")->deleteButtons();
 
 					// Add every placed model name
-					for (auto& modelID : _fe3d.gameEntity_getAllIDs())
+					for (auto& modelID : _fe3d.modelEntity_getAllIDs())
 					{
 						// Check if model is not a preview model
 						if (modelID[0] != '@')
@@ -68,8 +68,8 @@ void SceneEditor::_updateModelPlacingMenu()
 					// Loop over every created model
 					for (auto& modelName : _modelEditor.getLoadedModelIDs())
 					{
-						// Check if model has a game entity
-						if (_fe3d.gameEntity_isExisting(modelName))
+						// Check if model has mesh
+						if (_fe3d.modelEntity_isExisting(modelName))
 						{
 							// Check if button is hovered
 							if (screen->getScrollingList("models")->getButton(modelName)->isHovered())
@@ -77,12 +77,12 @@ void SceneEditor::_updateModelPlacingMenu()
 								// Hide old preview model
 								if (_currentPreviewModelName != "")
 								{
-									_fe3d.gameEntity_hide(_currentPreviewModelName);
+									_fe3d.modelEntity_hide(_currentPreviewModelName);
 								}
 
 								// Set new preview model
 								_currentPreviewModelName = modelName;
-								_fe3d.gameEntity_show(_currentPreviewModelName);
+								_fe3d.modelEntity_show(_currentPreviewModelName);
 								string textEntityID = _gui.getGlobalScreen()->getTextfield("selectedModelName")->getEntityID();
 								_fe3d.textEntity_show(textEntityID);
 								_fe3d.textEntity_setTextContent(textEntityID, "Model: " + _currentPreviewModelName.substr(1), 0.025f);
@@ -110,7 +110,7 @@ void SceneEditor::_updateModelChoosingMenu()
 			for (auto& button : _gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuModelChoice")->getScrollingList("models")->getButtons())
 			{
 				// Check if model is still existing
-				if (!_fe3d.gameEntity_isExisting(button->getID()))
+				if (!_fe3d.modelEntity_isExisting(button->getID()))
 				{
 					// Delete button
 					_gui.getViewport("left")->getWindow("main")->getScreen("sceneEditorMenuModelChoice")->getScrollingList("models")->deleteButton(button->getID());
@@ -119,7 +119,7 @@ void SceneEditor::_updateModelChoosingMenu()
 			}
 
 			// Loop over every placed model
-			for (auto& modelName : _fe3d.gameEntity_getAllIDs())
+			for (auto& modelName : _fe3d.modelEntity_getAllIDs())
 			{
 				// Check if model is not a preview model
 				if (modelName[0] != '@')

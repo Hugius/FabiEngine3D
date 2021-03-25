@@ -9,7 +9,7 @@ void ModelEditor::_updateModelEditingSize()
 	if (screen->getID() == "modelEditorMenuSize")
 	{
 		// Temporary values
-		Vec3 currentSize = _fe3d.gameEntity_getSize(_currentModelID);
+		Vec3 currentSize = _fe3d.modelEntity_getSize(_currentModelID);
 
 		// GUI management
 		if (_fe3d.input_getMousePressed(InputType::MOUSE_BUTTON_LEFT) || _fe3d.input_getKeyPressed(InputType::KEY_ESCAPE))
@@ -51,7 +51,7 @@ void ModelEditor::_updateModelEditingSize()
 		if (_resizingToggled)
 		{
 			float scrollSpeed = float(_fe3d.input_getMouseWheelY()) * 0.05f;
-			Vec3 newSize = _fe3d.gameEntity_getSize(_currentModelID);
+			Vec3 newSize = _fe3d.modelEntity_getSize(_currentModelID);
 
 			// Check if able to scroll
 			if (!_gui.getGlobalScreen()->isFocused() && _fe3d.misc_isCursorInsideViewport())
@@ -79,28 +79,28 @@ void ModelEditor::_updateModelEditingSize()
 			}
 
 			// Apply new size
-			_fe3d.gameEntity_setSize(_currentModelID, newSize);
+			_fe3d.modelEntity_setSize(_currentModelID, newSize);
 		}
 
 		// Update size X
 		if (_gui.getGlobalScreen()->checkValueForm("sizeX", currentSize.x))
 		{
 			currentSize.x /= 100.0f;
-			_fe3d.gameEntity_setSize(_currentModelID, currentSize);
+			_fe3d.modelEntity_setSize(_currentModelID, currentSize);
 		}
 
 		// Update size Y
 		if (_gui.getGlobalScreen()->checkValueForm("sizeY", currentSize.y))
 		{
 			currentSize.y /= 100.0f;
-			_fe3d.gameEntity_setSize(_currentModelID, currentSize);
+			_fe3d.modelEntity_setSize(_currentModelID, currentSize);
 		}
 
 		// Update size Z
 		if (_gui.getGlobalScreen()->checkValueForm("sizeZ", currentSize.z))
 		{
 			currentSize.z /= 100.0f;
-			_fe3d.gameEntity_setSize(_currentModelID, currentSize);
+			_fe3d.modelEntity_setSize(_currentModelID, currentSize);
 		}
 	}
 }

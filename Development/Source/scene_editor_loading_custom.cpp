@@ -362,7 +362,7 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 	//			// Hide LOD entity (running script)
 	//			if (makeInvisible)
 	//			{
-	//				_fe3d.gameEntity_hide(modelID);
+	//				_fe3d.modelEntity_hide(modelID);
 	//			}
 	//		}
 	//		else if (entityType == "BILLBOARD")
@@ -432,9 +432,9 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 	//			// Add speaker
 	//			if (_isEditorLoaded)
 	//			{
-	//				_fe3d.gameEntity_add("@speaker_" + ID, "engine_assets\\meshes\\speaker.obj", position, Vec3(0.0f), DEFAULT_SPEAKER_SIZE);
-	//				_fe3d.gameEntity_setShadowed("@speaker_" + ID, false);
-	//				_fe3d.aabbEntity_bindToGameEntity("@speaker_" + ID, Vec3(0.0f), DEFAULT_SPEAKER_AABB_SIZE, true, true);
+	//				_fe3d.modelEntity_add("@speaker_" + ID, "engine_assets\\meshes\\speaker.obj", position, Vec3(0.0f), DEFAULT_SPEAKER_SIZE);
+	//				_fe3d.modelEntity_setShadowed("@speaker_" + ID, false);
+	//				_fe3d.aabbEntity_bindToModelEntity("@speaker_" + ID, Vec3(0.0f), DEFAULT_SPEAKER_AABB_SIZE, true, true);
 	//			}
 
 	//			// Add audio
@@ -489,10 +489,10 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 	//			// Add lightbulbs
 	//			if (_isEditorLoaded)
 	//			{
-	//				_fe3d.gameEntity_add("@" + ID, "engine_assets\\meshes\\lamp.obj", position, Vec3(0.0f), DEFAULT_LIGHTBULB_SIZE);
-	//				_fe3d.gameEntity_setShadowed("@" + ID, false);
-	//				_fe3d.gameEntity_setColor("@" + ID, color);
-	//				_fe3d.aabbEntity_bindToGameEntity("@" + ID, Vec3(0.0f), DEFAULT_LIGHTBULB_AABB_SIZE, true, true);
+	//				_fe3d.modelEntity_add("@" + ID, "engine_assets\\meshes\\lamp.obj", position, Vec3(0.0f), DEFAULT_LIGHTBULB_SIZE);
+	//				_fe3d.modelEntity_setShadowed("@" + ID, false);
+	//				_fe3d.modelEntity_setColor("@" + ID, color);
+	//				_fe3d.aabbEntity_bindToModelEntity("@" + ID, Vec3(0.0f), DEFAULT_LIGHTBULB_AABB_SIZE, true, true);
 	//			}
 
 	//			// Add light

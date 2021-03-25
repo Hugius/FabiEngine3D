@@ -14,8 +14,8 @@ public:
 	void unload();
 	void update();
 	void setCurrentProjectID(const string& projectName);
-	void loadGameEntitiesFromFile();
-	void saveGameEntitiesToFile();
+	void loadModelEntitiesFromFile();
+	void saveModelEntitiesToFile();
 
 	bool isLoaded();
 

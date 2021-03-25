@@ -31,7 +31,7 @@ void SceneEditor::saveCustomSceneToFile()
 
 	//	// Save LOD IDs
 	//	vector<string> lodIDs;
-	//	for (auto& modelID : _fe3d.gameEntity_getAllIDs())
+	//	for (auto& modelID : _fe3d.modelEntity_getAllIDs())
 	//	{
 	//		// Temporary values
 	//		bool isCustomSceneModel = std::find(_customSceneModelIDs.begin(), _customSceneModelIDs.end(), modelID) != _customSceneModelIDs.end();
@@ -40,9 +40,9 @@ void SceneEditor::saveCustomSceneToFile()
 	//		if (modelID[0] != '@' && (!isCustomScene || (isCustomScene && isCustomSceneModel)))
 	//		{
 	//			// Check if entity has LOD ID
-	//			if (!_fe3d.gameEntity_getLevelOfDetailEntityID(modelID).empty())
+	//			if (!_fe3d.modelEntity_getLevelOfDetailEntityID(modelID).empty())
 	//			{
-	//				lodIDs.push_back(_fe3d.gameEntity_getLevelOfDetailEntityID(modelID));
+	//				lodIDs.push_back(_fe3d.modelEntity_getLevelOfDetailEntityID(modelID));
 	//			}
 	//		}
 	//	}
@@ -224,7 +224,7 @@ void SceneEditor::saveCustomSceneToFile()
 	//	}
 
 	//	// Write GAME entities data into file
-	//	for (auto& modelID : _fe3d.gameEntity_getAllIDs())
+	//	for (auto& modelID : _fe3d.modelEntity_getAllIDs())
 	//	{
 	//		// Temporary values
 	//		bool isLodModel = std::find(lodIDs.begin(), lodIDs.end(), modelID) != lodIDs.end();
@@ -237,40 +237,40 @@ void SceneEditor::saveCustomSceneToFile()
 	//			
 
 	//			// General data
-	//			auto position = _fe3d.gameEntity_getPosition(modelID);
-	//			auto rotation = _fe3d.gameEntity_getRotation(modelID);
-	//			auto size = _fe3d.gameEntity_getSize(modelID);
-	//			auto meshPath = _fe3d.gameEntity_getMeshPath(modelID);
-	//			auto diffuseMapPath = _fe3d.gameEntity_getDiffuseMapPath(modelID);
-	//			auto lightMapPath = _fe3d.gameEntity_getLightMapPath(modelID);
-	//			auto reflectionMapPath = _fe3d.gameEntity_getReflectionMapPath(modelID);
-	//			auto normalMapPath = _fe3d.gameEntity_getNormalMapPath(modelID);
-	//			auto isFrozen = _fe3d.gameEntity_isStaticToCamera(modelID);
-	//			auto isFaceCulled = _fe3d.gameEntity_isFaceCulled(modelID);
-	//			auto isShadowed = _fe3d.gameEntity_isShadowed(modelID);
-	//			auto isTransparent = _fe3d.gameEntity_isTransparent(modelID);
-	//			auto isSpecular = _fe3d.gameEntity_isSpecularLighted(modelID);
-	//			auto specularFactor = _fe3d.gameEntity_getSpecularFactor(modelID);
-	//			auto specularIntensity = _fe3d.gameEntity_getSpecularIntensity(modelID);
-	//			auto lightness = isCustomScene ? _fe3d.gameEntity_getLightness(modelID) : _initialModelLightness[modelID];
-	//			auto color = _fe3d.gameEntity_getColor(modelID);
-	//			auto uvRepeat = _fe3d.gameEntity_getUvRepeat(modelID);
-	//			auto lodID = _fe3d.gameEntity_getLevelOfDetailEntityID(modelID);
-	//			auto isInstanced = _fe3d.gameEntity_isInstanced(modelID);
-	//			auto instancedOffsets = _fe3d.gameEntity_getInstancedOffsets(modelID);
+	//			auto position = _fe3d.modelEntity_getPosition(modelID);
+	//			auto rotation = _fe3d.modelEntity_getRotation(modelID);
+	//			auto size = _fe3d.modelEntity_getSize(modelID);
+	//			auto meshPath = _fe3d.modelEntity_getMeshPath(modelID);
+	//			auto diffuseMapPath = _fe3d.modelEntity_getDiffuseMapPath(modelID);
+	//			auto lightMapPath = _fe3d.modelEntity_getLightMapPath(modelID);
+	//			auto reflectionMapPath = _fe3d.modelEntity_getReflectionMapPath(modelID);
+	//			auto normalMapPath = _fe3d.modelEntity_getNormalMapPath(modelID);
+	//			auto isFrozen = _fe3d.modelEntity_isStaticToCamera(modelID);
+	//			auto isFaceCulled = _fe3d.modelEntity_isFaceCulled(modelID);
+	//			auto isShadowed = _fe3d.modelEntity_isShadowed(modelID);
+	//			auto isTransparent = _fe3d.modelEntity_isTransparent(modelID);
+	//			auto isSpecular = _fe3d.modelEntity_isSpecularLighted(modelID);
+	//			auto specularFactor = _fe3d.modelEntity_getSpecularFactor(modelID);
+	//			auto specularIntensity = _fe3d.modelEntity_getSpecularIntensity(modelID);
+	//			auto lightness = isCustomScene ? _fe3d.modelEntity_getLightness(modelID) : _initialModelLightness[modelID];
+	//			auto color = _fe3d.modelEntity_getColor(modelID);
+	//			auto uvRepeat = _fe3d.modelEntity_getUvRepeat(modelID);
+	//			auto lodID = _fe3d.modelEntity_getLevelOfDetailEntityID(modelID);
+	//			auto isInstanced = _fe3d.modelEntity_isInstanced(modelID);
+	//			auto instancedOffsets = _fe3d.modelEntity_getInstancedOffsets(modelID);
 	//			auto animationID = (isCustomScene || _animationEditor.getPlayingAnimationNames(modelID).empty()) ? "" :
 	//				_animationEditor.getPlayingAnimationNames(modelID).front();
-	//			auto minHeight = _fe3d.gameEntity_getMinHeight(modelID);
-	//			auto maxHeight = _fe3d.gameEntity_getMaxHeight(modelID);
-	//			auto alpha = _fe3d.gameEntity_getAlpha(modelID);
+	//			auto minHeight = _fe3d.modelEntity_getMinHeight(modelID);
+	//			auto maxHeight = _fe3d.modelEntity_getMaxHeight(modelID);
+	//			auto alpha = _fe3d.modelEntity_getAlpha(modelID);
 
 	//			// Reflection type
 	//			int reflectionType;
-	//			if (_fe3d.gameEntity_isSceneReflective(modelID))
+	//			if (_fe3d.modelEntity_isSceneReflective(modelID))
 	//			{
 	//				reflectionType = 2;
 	//			}
-	//			else if (_fe3d.gameEntity_isSkyReflective(modelID))
+	//			else if (_fe3d.modelEntity_isSkyReflective(modelID))
 	//			{
 	//				reflectionType = 1;
 	//			}
@@ -388,7 +388,7 @@ void SceneEditor::saveCustomSceneToFile()
 	//	}
 
 	//	// Write playing animations on MODEL entities data into file
-	//	for (auto& modelID : _fe3d.gameEntity_getAllIDs())
+	//	for (auto& modelID : _fe3d.modelEntity_getAllIDs())
 	//	{
 	//		for (auto& animationName : _animationEditor.getPlayingAnimationNames(modelID))
 	//		{

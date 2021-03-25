@@ -117,16 +117,16 @@ void ModelEditor::load()
 	_fe3d.gfx_enableSpecularLighting();
 	
 	// 3D Environment
-	_fe3d.gameEntity_add("@@cube", "engine_assets\\meshes\\cube.obj", Vec3(0.0f), Vec3(0.0f), Vec3(1.0f));
-	_fe3d.gameEntity_setDiffuseMap("@@cube", "engine_assets\\textures\\cube.png");
-	_fe3d.gameEntity_setFaceCulled("@@cube", true);
-	_fe3d.gameEntity_add("@@grid", "engine_assets\\meshes\\plane.obj", Vec3(0.0f), Vec3(0.0f), Vec3(50.0f, 1.0f, 50.0f));
-	_fe3d.gameEntity_setDiffuseMap("@@grid", "engine_assets\\textures\\grid.png");
-	_fe3d.gameEntity_setUvRepeat("@@grid", 5.0f);
-	_fe3d.gameEntity_setTransparent("@@grid", true);
+	_fe3d.modelEntity_add("@@cube", "engine_assets\\meshes\\cube.obj", Vec3(0.0f), Vec3(0.0f), Vec3(1.0f));
+	_fe3d.modelEntity_setDiffuseMap("@@cube", "engine_assets\\textures\\cube.png");
+	_fe3d.modelEntity_setFaceCulled("@@cube", true);
+	_fe3d.modelEntity_add("@@grid", "engine_assets\\meshes\\plane.obj", Vec3(0.0f), Vec3(0.0f), Vec3(50.0f, 1.0f, 50.0f));
+	_fe3d.modelEntity_setDiffuseMap("@@grid", "engine_assets\\textures\\grid.png");
+	_fe3d.modelEntity_setUvRepeat("@@grid", 5.0f);
+	_fe3d.modelEntity_setTransparent("@@grid", true);
 
 	// Miscellaneous
-	loadGameEntitiesFromFile();
+	loadModelEntitiesFromFile();
 	_gui.getGlobalScreen()->addTextfield("selectedModelName", Vec2(0.0f, 0.85f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
 	_gui.getGlobalScreen()->addTextfield("selectedAabbName", Vec2(0.0f, 0.75f), Vec2(0.5f, 0.1f), "", Vec3(1.0f));
 	_fe3d.misc_setLevelOfDetailDistance(10000.0f);
@@ -152,7 +152,7 @@ void ModelEditor::unload()
 	_fe3d.gfx_disableSpecularLighting(true);
 
 	// Delete models
-	_fe3d.gameEntity_deleteAll();
+	_fe3d.modelEntity_deleteAll();
 
 	// Properties
 	_currentModelID = "";

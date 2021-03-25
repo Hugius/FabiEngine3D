@@ -87,13 +87,13 @@ void BillboardEditor::load()
 	_fe3d.gfx_enableShadows(Vec3(10.0f, 10.0f, 10.0f), Vec3(0.0f), 25.0f, 50.0f, 0.5, false, true);
 	
 	// 3D Environment
-	_fe3d.gameEntity_add("@@cube", "engine_assets\\meshes\\cube.obj", Vec3(0.0f), Vec3(0.0f), Vec3(1.0f, 1.0f, 1.0f));
-	_fe3d.gameEntity_setDiffuseMap("@@cube", "engine_assets\\textures\\cube.png");
-	_fe3d.gameEntity_setFaceCulled("@@cube", true);
-	_fe3d.gameEntity_add("@@grid", "engine_assets\\meshes\\plane.obj", Vec3(0.0f), Vec3(0.0f), Vec3(50.0f, 1.0f, 50.0f));
-	_fe3d.gameEntity_setDiffuseMap("@@grid", "engine_assets\\textures\\grid.png");
-	_fe3d.gameEntity_setUvRepeat("@@grid", 5.0f);
-	_fe3d.gameEntity_setTransparent("@@grid", true);
+	_fe3d.modelEntity_add("@@cube", "engine_assets\\meshes\\cube.obj", Vec3(0.0f), Vec3(0.0f), Vec3(1.0f, 1.0f, 1.0f));
+	_fe3d.modelEntity_setDiffuseMap("@@cube", "engine_assets\\textures\\cube.png");
+	_fe3d.modelEntity_setFaceCulled("@@cube", true);
+	_fe3d.modelEntity_add("@@grid", "engine_assets\\meshes\\plane.obj", Vec3(0.0f), Vec3(0.0f), Vec3(50.0f, 1.0f, 50.0f));
+	_fe3d.modelEntity_setDiffuseMap("@@grid", "engine_assets\\textures\\grid.png");
+	_fe3d.modelEntity_setUvRepeat("@@grid", 5.0f);
+	_fe3d.modelEntity_setTransparent("@@grid", true);
 
 	// Load billboards from file
 	loadBillboardEntitiesFromFile();
@@ -117,8 +117,8 @@ void BillboardEditor::unload()
 	_fe3d.gfx_disableShadows(true);
 
 	// 3D environment
-	_fe3d.gameEntity_delete("@@cube");
-	_fe3d.gameEntity_delete("@@grid");
+	_fe3d.modelEntity_delete("@@cube");
+	_fe3d.modelEntity_delete("@@grid");
 
 	// Delete billboards
 	_fe3d.billboardEntity_deleteAll();

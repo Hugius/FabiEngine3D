@@ -23,7 +23,7 @@ void SceneEditor::_updateModelEditing()
 			auto hoveredID = _fe3d.collision_checkCursorInAny().first;
 
 			// Check if user selected a model
-			for (auto& entityID : _fe3d.gameEntity_getAllIDs())
+			for (auto& entityID : _fe3d.modelEntity_getAllIDs())
 			{
 				// Must not be preview entity
 				if (entityID[0] != '@')
@@ -52,7 +52,7 @@ void SceneEditor::_updateModelEditing()
 						// Don't reset if model is active or selected
 						if (entityID != _activeModelID && entityID != _selectedModelID)
 						{
-							_fe3d.gameEntity_setLightness(entityID, _initialModelLightness[entityID]);
+							_fe3d.modelEntity_setLightness(entityID, _initialModelLightness[entityID]);
 						}
 					}
 				}
@@ -114,18 +114,18 @@ void SceneEditor::_updateModelEditing()
 					else if (rightWindow->getScreen("modelPropertiesMenu")->getButton("freeze")->isHovered()) // Freeze button
 					{
 						// Model
-						_fe3d.gameEntity_setStaticToCamera(_activeModelID, !_fe3d.gameEntity_isStaticToCamera(_activeModelID));
+						_fe3d.modelEntity_setStaticToCamera(_activeModelID, !_fe3d.modelEntity_isStaticToCamera(_activeModelID));
 
 						// AABB
 						for (auto& aabbID : _fe3d.aabbEntity_getBoundIDs(_activeModelID, true, false))
 						{
-							_fe3d.aabbEntity_setRaycastResponsive(aabbID, !_fe3d.gameEntity_isStaticToCamera(_activeModelID));
-							_fe3d.aabbEntity_setCollisionResponsive(aabbID, !_fe3d.gameEntity_isStaticToCamera(_activeModelID));
+							_fe3d.aabbEntity_setRaycastResponsive(aabbID, !_fe3d.modelEntity_isStaticToCamera(_activeModelID));
+							_fe3d.aabbEntity_setCollisionResponsive(aabbID, !_fe3d.modelEntity_isStaticToCamera(_activeModelID));
 						}
 					}
 					else if (rightWindow->getScreen("modelPropertiesMenu")->getButton("delete")->isHovered()) // Delete button
 					{
-						_fe3d.gameEntity_delete(_activeModelID);
+						_fe3d.modelEntity_delete(_activeModelID);
 						rightWindow->setActiveScreen("sceneEditorControls");
 						_activeModelID = "";
 						return;
@@ -149,21 +149,21 @@ void SceneEditor::_updateModelEditing()
 						_animationEditor.stopAnimation(lastAnimationID.back(), _activeModelID);
 
 						// Reset main transformation
-						_fe3d.gameEntity_setPosition(_activeModelID, _initialModelPosition[_activeModelID]);
-						_fe3d.gameEntity_setRotationOrigin(_activeModelID, Vec3(0.0f));
-						_fe3d.gameEntity_setRotation(_activeModelID, _initialModelRotation[_activeModelID]);
-						_fe3d.gameEntity_setSize(_activeModelID, _initialModelSize[_activeModelID]);
+						_fe3d.modelEntity_setPosition(_activeModelID, _initialModelPosition[_activeModelID]);
+						_fe3d.modelEntity_setRotationOrigin(_activeModelID, Vec3(0.0f));
+						_fe3d.modelEntity_setRotation(_activeModelID, _initialModelRotation[_activeModelID]);
+						_fe3d.modelEntity_setSize(_activeModelID, _initialModelSize[_activeModelID]);
 
 						// Reset part transformations
-						for (auto& partName : _fe3d.gameEntity_getPartNames(_activeModelID))
+						for (auto& partName : _fe3d.modelEntity_getPartNames(_activeModelID))
 						{
 							// Only named parts
 							if (!partName.empty())
 							{
-								_fe3d.gameEntity_setPosition(_activeModelID, Vec3(0.0f), partName);
-								_fe3d.gameEntity_setRotationOrigin(_activeModelID, Vec3(0.0f), partName);
-								_fe3d.gameEntity_setRotation(_activeModelID, Vec3(0.0f), partName);
-								_fe3d.gameEntity_setSize(_activeModelID, Vec3(1.0f), partName);
+								_fe3d.modelEntity_setPosition(_activeModelID, Vec3(0.0f), partName);
+								_fe3d.modelEntity_setRotationOrigin(_activeModelID, Vec3(0.0f), partName);
+								_fe3d.modelEntity_setRotation(_activeModelID, Vec3(0.0f), partName);
+								_fe3d.modelEntity_setSize(_activeModelID, Vec3(1.0f), partName);
 							}
 						}
 					}
@@ -181,22 +181,22 @@ void SceneEditor::_updateModelEditing()
 
 				// Update freeze button
 				auto freezeID = rightWindow->getScreen("modelPropertiesMenu")->getButton("freeze")->getTextfield()->getEntityID();
-				bool isFrozen = _fe3d.gameEntity_isStaticToCamera(_activeModelID);
+				bool isFrozen = _fe3d.modelEntity_isStaticToCamera(_activeModelID);
 				_fe3d.textEntity_setTextContent(freezeID, isFrozen ? "Unfreeze" : "Freeze");
 
 				// Alternative way of deleting
 				if (_fe3d.input_getKeyPressed(InputType::KEY_DELETE))
 				{
-					_fe3d.gameEntity_delete(_activeModelID);
+					_fe3d.modelEntity_delete(_activeModelID);
 					rightWindow->setActiveScreen("sceneEditorControls");
 					_activeModelID = "";
 					return;
 				}
 
 				// Get entity transformation
-				Vec3 position = _fe3d.gameEntity_getPosition(_activeModelID);
-				Vec3 rotation = _fe3d.gameEntity_getRotation(_activeModelID);
-				Vec3 size = _fe3d.gameEntity_getSize(_activeModelID);
+				Vec3 position = _fe3d.modelEntity_getPosition(_activeModelID);
+				Vec3 rotation = _fe3d.modelEntity_getRotation(_activeModelID);
+				Vec3 size = _fe3d.modelEntity_getSize(_activeModelID);
 				Vec3 oldPosition = position;
 				Vec3 oldRotation = rotation;
 				Vec3 oldSize = size;
@@ -259,21 +259,21 @@ void SceneEditor::_updateModelEditing()
 						}
 
 						// Set new transformations
-						_fe3d.gameEntity_setPosition(_activeModelID, _initialModelPosition[_activeModelID]);
-						_fe3d.gameEntity_setRotationOrigin(_activeModelID, Vec3(0.0f));
-						_fe3d.gameEntity_setRotation(_activeModelID, _initialModelRotation[_activeModelID]);
-						_fe3d.gameEntity_setSize(_activeModelID, _initialModelSize[_activeModelID]);
+						_fe3d.modelEntity_setPosition(_activeModelID, _initialModelPosition[_activeModelID]);
+						_fe3d.modelEntity_setRotationOrigin(_activeModelID, Vec3(0.0f));
+						_fe3d.modelEntity_setRotation(_activeModelID, _initialModelRotation[_activeModelID]);
+						_fe3d.modelEntity_setSize(_activeModelID, _initialModelSize[_activeModelID]);
 
 						// Reset part transformations
-						for (auto& partName : _fe3d.gameEntity_getPartNames(_activeModelID))
+						for (auto& partName : _fe3d.modelEntity_getPartNames(_activeModelID))
 						{
 							// Only named parts
 							if (!partName.empty())
 							{
-								_fe3d.gameEntity_setPosition(_activeModelID, Vec3(0.0f), partName);
-								_fe3d.gameEntity_setRotationOrigin(_activeModelID, Vec3(0.0f), partName);
-								_fe3d.gameEntity_setRotation(_activeModelID, Vec3(0.0f), partName);
-								_fe3d.gameEntity_setSize(_activeModelID, Vec3(1.0f), partName);
+								_fe3d.modelEntity_setPosition(_activeModelID, Vec3(0.0f), partName);
+								_fe3d.modelEntity_setRotationOrigin(_activeModelID, Vec3(0.0f), partName);
+								_fe3d.modelEntity_setRotation(_activeModelID, Vec3(0.0f), partName);
+								_fe3d.modelEntity_setSize(_activeModelID, Vec3(1.0f), partName);
 							}
 						}
 
@@ -284,15 +284,15 @@ void SceneEditor::_updateModelEditing()
 					{
 						// Update position
 						_initialModelPosition[_activeModelID] = position;
-						_fe3d.gameEntity_setPosition(_activeModelID, position);
+						_fe3d.modelEntity_setPosition(_activeModelID, position);
 
 						// Update rotation
 						_initialModelRotation[_activeModelID] = rotation;
-						_fe3d.gameEntity_setRotation(_activeModelID, rotation);
+						_fe3d.modelEntity_setRotation(_activeModelID, rotation);
 
 						// Update size
 						_initialModelSize[_activeModelID] = size;
-						_fe3d.gameEntity_setSize(_activeModelID, size);
+						_fe3d.modelEntity_setSize(_activeModelID, size);
 					}
 				}
 			}
@@ -318,13 +318,13 @@ void SceneEditor::_updateModelEditing()
 			if (rightWindow->getActiveScreen()->getID() != "main")
 			{
 				// Reset when user wants to place models again
-				for (auto& entityID : _fe3d.gameEntity_getAllIDs())
+				for (auto& entityID : _fe3d.modelEntity_getAllIDs())
 				{
 					// Check if not preview entity
 					if (entityID[0] != '@')
 					{
 						rightWindow->setActiveScreen("sceneEditorControls");
-						_fe3d.gameEntity_setLightness(entityID, _initialModelLightness[entityID]);
+						_fe3d.modelEntity_setLightness(entityID, _initialModelLightness[entityID]);
 						_selectedModelLightnessMultiplier = 1;
 						_activeModelID = "";
 						_selectedModelID = "";

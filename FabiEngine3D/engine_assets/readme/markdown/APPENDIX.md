@@ -20,6 +20,8 @@
 - **"Rotated"** AABBs will be translated and/or scaled in **90 degrees** directions (0, 90, 180, 270, etc).
 - If you want to access an individual **AABB** bound to a **model**, the ID is composed like this: **modelID + "@" + aabbName**.
 - If you want to access an individual **AABB** bound to a **bilboard**, the ID is composed like this: **billboardID + "@" + aabbName**.
+### Miscellaneous
+- Billboards are **NOT** affected by any lighting. They are only affected by DOF & fog.
 ### Tips & tricks
 - You can create your own custom **subfolders** within the main folder of `user\assets`.
 - Internal engine updates happen **after** the scripting updates.

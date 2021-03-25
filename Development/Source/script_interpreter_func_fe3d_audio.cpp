@@ -207,7 +207,7 @@ bool ScriptInterpreter::_executeFe3dAudioEntityFunction(const string& functionNa
 			}
 		}
 	}
-	else if (functionName == "fe3d:audio_is_playing") // Check if audioEntity is playing
+	else if (functionName == "fe3d:audio_is_playing")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -222,7 +222,7 @@ bool ScriptInterpreter::_executeFe3dAudioEntityFunction(const string& functionNa
 			}
 		}
 	}
-	else if (functionName == "fe3d:audio_pause") // Pause audioEntity
+	else if (functionName == "fe3d:audio_pause")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -237,7 +237,7 @@ bool ScriptInterpreter::_executeFe3dAudioEntityFunction(const string& functionNa
 			}
 		}
 	}
-	else if (functionName == "fe3d:audio_pause_all") // Pause all audioEntities
+	else if (functionName == "fe3d:audio_pause_all")
 	{
 		// Validate arguments
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
@@ -250,7 +250,7 @@ bool ScriptInterpreter::_executeFe3dAudioEntityFunction(const string& functionNa
 			}
 		}
 	}
-	else if (functionName == "fe3d:audio_is_paused") // Check if audioEntity is paused
+	else if (functionName == "fe3d:audio_is_paused")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -265,7 +265,7 @@ bool ScriptInterpreter::_executeFe3dAudioEntityFunction(const string& functionNa
 			}
 		}
 	}
-	else if (functionName == "fe3d:audio_resume") // Resume audioEntity
+	else if (functionName == "fe3d:audio_resume")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -280,7 +280,7 @@ bool ScriptInterpreter::_executeFe3dAudioEntityFunction(const string& functionNa
 			}
 		}
 	}
-	else if (functionName == "fe3d:audio_resume_all") // Resume all audioEntities
+	else if (functionName == "fe3d:audio_resume_all")
 	{
 		// Validate arguments
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
@@ -293,7 +293,7 @@ bool ScriptInterpreter::_executeFe3dAudioEntityFunction(const string& functionNa
 			}
 		}
 	}
-	else if (functionName == "fe3d:audio_stop") // Stop audioEntity
+	else if (functionName == "fe3d:audio_stop")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -308,7 +308,7 @@ bool ScriptInterpreter::_executeFe3dAudioEntityFunction(const string& functionNa
 			}
 		}
 	}
-	else if (functionName == "fe3d:audio_stop_all") // Stop all audioEntities
+	else if (functionName == "fe3d:audio_stop_all")
 	{
 		// Validate arguments
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
@@ -321,7 +321,7 @@ bool ScriptInterpreter::_executeFe3dAudioEntityFunction(const string& functionNa
 			}
 		}
 	}
-	else if (functionName == "fe3d:audio_set_volume") // Set audioEntity volume
+	else if (functionName == "fe3d:audio_set_volume")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL };
 
@@ -344,7 +344,7 @@ bool ScriptInterpreter::_executeFe3dAudioEntityFunction(const string& functionNa
 			}
 		}
 	}
-	else if (functionName == "fe3d:audio_get_volume") // Get audioEntity volume
+	else if (functionName == "fe3d:audio_get_volume")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -359,7 +359,7 @@ bool ScriptInterpreter::_executeFe3dAudioEntityFunction(const string& functionNa
 			}
 		}
 	}
-	else if (functionName == "fe3d:audio_set_position") // Set audioEntity position
+	else if (functionName == "fe3d:audio_set_position")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
@@ -384,7 +384,7 @@ bool ScriptInterpreter::_executeFe3dAudioEntityFunction(const string& functionNa
 			}
 		}
 	}
-	else if (functionName == "fe3d:audio_get_position") // Get audioEntity position
+	else if (functionName == "fe3d:audio_get_position")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -406,7 +406,7 @@ bool ScriptInterpreter::_executeFe3dAudioEntityFunction(const string& functionNa
 			}
 		}
 	}
-	else if (functionName == "fe3d:audio_set_max_volume") // Set max audioEntity volume
+	else if (functionName == "fe3d:audio_set_max_volume")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL };
 
@@ -429,7 +429,7 @@ bool ScriptInterpreter::_executeFe3dAudioEntityFunction(const string& functionNa
 			}
 		}
 	}
-	else if (functionName == "fe3d:audio_get_max_volume") // Get max audioEntity volume
+	else if (functionName == "fe3d:audio_get_max_volume")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -452,7 +452,7 @@ bool ScriptInterpreter::_executeFe3dAudioEntityFunction(const string& functionNa
 			}
 		}
 	}
-	else if (functionName == "fe3d:audio_set_max_distance") // Set max audioEntity distance
+	else if (functionName == "fe3d:audio_set_max_distance")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL };
 
@@ -475,7 +475,7 @@ bool ScriptInterpreter::_executeFe3dAudioEntityFunction(const string& functionNa
 			}
 		}
 	}
-	else if (functionName == "fe3d:audio_get_max_distance") // Get max audioEntity distance
+	else if (functionName == "fe3d:audio_get_max_distance")
 	{
 		auto types = { ScriptValueType::STRING };
 

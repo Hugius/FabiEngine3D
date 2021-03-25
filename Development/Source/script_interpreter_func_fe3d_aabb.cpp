@@ -22,7 +22,7 @@ bool ScriptInterpreter::_validateFe3dAabbEntity(const string& ID)
 bool ScriptInterpreter::_executeFe3dAabbEntityFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine type of function
-	if (functionName == "fe3d:aabb_is_existing") // Get aabbEntity existence
+	if (functionName == "fe3d:aabb_is_existing")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -34,7 +34,7 @@ bool ScriptInterpreter::_executeFe3dAabbEntityFunction(const string& functionNam
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 		}
 	}
-	else if (functionName == "fe3d:aabb_find_ids") // Find full aabbEntity IDs
+	else if (functionName == "fe3d:aabb_find_ids")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -63,7 +63,7 @@ bool ScriptInterpreter::_executeFe3dAabbEntityFunction(const string& functionNam
 			}
 		}
 	}
-	else if (functionName == "fe3d:aabb_get_all_ids") // Get all aabbEntity IDs
+	else if (functionName == "fe3d:aabb_get_all_ids")
 	{
 		// Validate arguments
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
@@ -81,7 +81,7 @@ bool ScriptInterpreter::_executeFe3dAabbEntityFunction(const string& functionNam
 			}
 		}
 	}
-	else if (functionName == "fe3d:aabb_place") // Create aabbEntity
+	else if (functionName == "fe3d:aabb_place")
 	{
 		auto types =
 		{
@@ -114,7 +114,7 @@ bool ScriptInterpreter::_executeFe3dAabbEntityFunction(const string& functionNam
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
-	else if (functionName == "fe3d:aabb_delete") // Delete aabbEntity
+	else if (functionName == "fe3d:aabb_delete")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -129,7 +129,7 @@ bool ScriptInterpreter::_executeFe3dAabbEntityFunction(const string& functionNam
 			}
 		}
 	}
-	else if (functionName == "fe3d:aabb_set_position") // Set aabbEntity position
+	else if (functionName == "fe3d:aabb_set_position")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
@@ -145,7 +145,7 @@ bool ScriptInterpreter::_executeFe3dAabbEntityFunction(const string& functionNam
 			}
 		}
 	}
-	else if (functionName == "fe3d:aabb_move") // Move aabbEntity position
+	else if (functionName == "fe3d:aabb_move")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
@@ -161,7 +161,7 @@ bool ScriptInterpreter::_executeFe3dAabbEntityFunction(const string& functionNam
 			}
 		}
 	}
-	else if (functionName == "fe3d:aabb_get_position") // Get aabbEntity position
+	else if (functionName == "fe3d:aabb_get_position")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -176,7 +176,7 @@ bool ScriptInterpreter::_executeFe3dAabbEntityFunction(const string& functionNam
 			}
 		}
 	}
-	else if (functionName == "fe3d:aabb_set_size") // Set aabbEntity size
+	else if (functionName == "fe3d:aabb_set_size")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
@@ -192,7 +192,7 @@ bool ScriptInterpreter::_executeFe3dAabbEntityFunction(const string& functionNam
 			}
 		}
 	}
-	else if (functionName == "fe3d:aabb_scale") // Scale aabbEntity size
+	else if (functionName == "fe3d:aabb_scale")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
@@ -208,7 +208,7 @@ bool ScriptInterpreter::_executeFe3dAabbEntityFunction(const string& functionNam
 			}
 		}
 	}
-	else if (functionName == "fe3d:aabb_get_size") // Get aabbEntity size
+	else if (functionName == "fe3d:aabb_get_size")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -223,7 +223,7 @@ bool ScriptInterpreter::_executeFe3dAabbEntityFunction(const string& functionNam
 			}
 		}
 	}
-	else if (functionName == "fe3d:aabb_set_raycast_responsive") // Set aabbEntity raycasting responsiveness
+	else if (functionName == "fe3d:aabb_set_raycast_responsive")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::BOOLEAN };
 
@@ -240,7 +240,7 @@ bool ScriptInterpreter::_executeFe3dAabbEntityFunction(const string& functionNam
 			}
 		}
 	}
-	else if (functionName == "fe3d:aabb_set_collision_responsive") // Set aabbEntity collision responsiveness
+	else if (functionName == "fe3d:aabb_set_collision_responsive")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::BOOLEAN };
 

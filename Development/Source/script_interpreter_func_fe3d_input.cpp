@@ -3,7 +3,7 @@
 bool ScriptInterpreter::_executeFe3dInputFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine type of function
-	if (functionName == "fe3d:input_is_key_down") // Hold keyboard key down
+	if (functionName == "fe3d:input_is_key_down")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -16,7 +16,7 @@ bool ScriptInterpreter::_executeFe3dInputFunction(const string& functionName, ve
 			}
 		}
 	}
-	else if (functionName == "fe3d:input_is_key_pressed") // Press keyboard key
+	else if (functionName == "fe3d:input_is_key_pressed")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -29,7 +29,7 @@ bool ScriptInterpreter::_executeFe3dInputFunction(const string& functionName, ve
 			}
 		}
 	}
-	else if (functionName == "fe3d:input_is_key_toggled") // Togglepress keyboard key
+	else if (functionName == "fe3d:input_is_key_toggled")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -42,7 +42,7 @@ bool ScriptInterpreter::_executeFe3dInputFunction(const string& functionName, ve
 			}
 		}
 	}
-	else if (functionName == "fe3d:input_is_mouse_down") // Hold mouse button down
+	else if (functionName == "fe3d:input_is_mouse_down")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -55,7 +55,7 @@ bool ScriptInterpreter::_executeFe3dInputFunction(const string& functionName, ve
 			}
 		}
 	}
-	else if (functionName == "fe3d:input_is_mouse_pressed") // Press mouse
+	else if (functionName == "fe3d:input_is_mouse_pressed")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -68,7 +68,7 @@ bool ScriptInterpreter::_executeFe3dInputFunction(const string& functionName, ve
 			}
 		}
 	}
-	else if (functionName == "fe3d:input_is_mouse_toggled") // Togglepress mouse
+	else if (functionName == "fe3d:input_is_mouse_toggled")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -81,7 +81,7 @@ bool ScriptInterpreter::_executeFe3dInputFunction(const string& functionName, ve
 			}
 		}
 	}
-	else if (functionName == "fe3d:input_get_mousewheel_direction") // Mousewheel direction
+	else if (functionName == "fe3d:input_get_mousewheel_direction")
 	{
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{

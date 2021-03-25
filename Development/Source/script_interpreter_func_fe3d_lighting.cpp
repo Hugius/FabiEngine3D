@@ -3,7 +3,7 @@
 bool ScriptInterpreter::_executeFe3dLightingFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine type of function
-	if (functionName == "fe3d:lighting_set_ambient_color") // Set ambient lighting color
+	if (functionName == "fe3d:lighting_set_ambient_color")
 	{
 		auto types = { ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
@@ -16,7 +16,7 @@ bool ScriptInterpreter::_executeFe3dLightingFunction(const string& functionName,
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
-	else if (functionName == "fe3d:lighting_get_ambient_color") // Get ambient lighting color
+	else if (functionName == "fe3d:lighting_get_ambient_color")
 	{
 		// Validate arguments
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
@@ -25,7 +25,7 @@ bool ScriptInterpreter::_executeFe3dLightingFunction(const string& functionName,
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));
 		}
 	}
-	else if (functionName == "fe3d:lighting_set_ambient_intensity") // Set ambient lighting intensity
+	else if (functionName == "fe3d:lighting_set_ambient_intensity")
 	{
 		auto types = { ScriptValueType::DECIMAL };
 
@@ -36,7 +36,7 @@ bool ScriptInterpreter::_executeFe3dLightingFunction(const string& functionName,
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
-	else if (functionName == "fe3d:lighting_get_ambient_intensity") // Get ambient lighting intensity
+	else if (functionName == "fe3d:lighting_get_ambient_intensity")
 	{
 		// Validate arguments
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
@@ -45,7 +45,7 @@ bool ScriptInterpreter::_executeFe3dLightingFunction(const string& functionName,
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
 		}
 	}
-	else if (functionName == "fe3d:lighting_set_directional_position") // Set directional lighting position
+	else if (functionName == "fe3d:lighting_set_directional_position")
 	{
 		auto types = { ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
@@ -61,7 +61,7 @@ bool ScriptInterpreter::_executeFe3dLightingFunction(const string& functionName,
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
-	else if (functionName == "fe3d:lighting_get_directional_position") // Get directional lighting position
+	else if (functionName == "fe3d:lighting_get_directional_position")
 	{
 		// Validate arguments
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
@@ -70,7 +70,7 @@ bool ScriptInterpreter::_executeFe3dLightingFunction(const string& functionName,
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));
 		}
 	}
-	else if (functionName == "fe3d:lighting_set_directional_color") // Set directional lighting color
+	else if (functionName == "fe3d:lighting_set_directional_color")
 	{
 		auto types = { ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
@@ -84,7 +84,7 @@ bool ScriptInterpreter::_executeFe3dLightingFunction(const string& functionName,
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
-	else if (functionName == "fe3d:lighting_get_directional_color") // Get directional lighting color
+	else if (functionName == "fe3d:lighting_get_directional_color")
 	{
 		// Validate arguments
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
@@ -93,7 +93,7 @@ bool ScriptInterpreter::_executeFe3dLightingFunction(const string& functionName,
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));
 		}
 	}
-	else if (functionName == "fe3d:lighting_set_directional_intensity") // Set directional lighting intensity
+	else if (functionName == "fe3d:lighting_set_directional_intensity")
 	{
 		auto types = { ScriptValueType::DECIMAL };
 
@@ -107,7 +107,7 @@ bool ScriptInterpreter::_executeFe3dLightingFunction(const string& functionName,
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
-	else if (functionName == "fe3d:lighting_get_directional_intensity") // Get directional lighting intensity
+	else if (functionName == "fe3d:lighting_get_directional_intensity")
 	{
 		// Validate arguments
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
@@ -282,7 +282,7 @@ bool ScriptInterpreter::_executeFe3dLightingFunction(const string& functionName,
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
-	else if (functionName == "fe3d:lighting_disable_points") // Disable pointlighting
+	else if (functionName == "fe3d:lighting_disable_points")
 	{
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{

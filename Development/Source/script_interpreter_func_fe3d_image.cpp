@@ -23,7 +23,7 @@ bool ScriptInterpreter::_validateFe3dGuiEntity(const string& ID)
 bool ScriptInterpreter::_executeFe3dGuiEntityFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine type of function
-	if (functionName == "fe3d:image_is_existing") // Get guiEntity existence
+	if (functionName == "fe3d:image_is_existing")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -42,7 +42,7 @@ bool ScriptInterpreter::_executeFe3dGuiEntityFunction(const string& functionName
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 		}
 	}
-	else if (functionName == "fe3d:image_find_ids") // Find full guiEntity IDs
+	else if (functionName == "fe3d:image_find_ids")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -71,7 +71,7 @@ bool ScriptInterpreter::_executeFe3dGuiEntityFunction(const string& functionName
 			}
 		}
 	}
-	else if (functionName == "fe3d:image_get_all_ids") // Get all guiEntity IDs
+	else if (functionName == "fe3d:image_get_all_ids")
 	{
 		// Validate arguments
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
@@ -89,7 +89,7 @@ bool ScriptInterpreter::_executeFe3dGuiEntityFunction(const string& functionName
 			}
 		}
 	}
-	else if (functionName == "fe3d:image_place") // Create guiEntity
+	else if (functionName == "fe3d:image_place")
 	{
 		auto types =
 		{
@@ -139,7 +139,7 @@ bool ScriptInterpreter::_executeFe3dGuiEntityFunction(const string& functionName
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
-	else if (functionName == "fe3d:image_delete") // Delete guiEntity
+	else if (functionName == "fe3d:image_delete")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -154,7 +154,7 @@ bool ScriptInterpreter::_executeFe3dGuiEntityFunction(const string& functionName
 			}
 		}
 	}
-	else if (functionName == "fe3d:image_set_visible") // Set guiEntity visibility
+	else if (functionName == "fe3d:image_set_visible")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::BOOLEAN };
 
@@ -179,7 +179,7 @@ bool ScriptInterpreter::_executeFe3dGuiEntityFunction(const string& functionName
 			}
 		}
 	}
-	else if (functionName == "fe3d:image_is_visible") // Get guiEntity visibility
+	else if (functionName == "fe3d:image_is_visible")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -194,7 +194,7 @@ bool ScriptInterpreter::_executeFe3dGuiEntityFunction(const string& functionName
 			}
 		}
 	}
-	else if (functionName == "fe3d:image_set_position") // Set guiEntity position
+	else if (functionName == "fe3d:image_set_position")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
@@ -210,7 +210,7 @@ bool ScriptInterpreter::_executeFe3dGuiEntityFunction(const string& functionName
 			}
 		}
 	}
-	else if (functionName == "fe3d:image_move") // Move guiEntity
+	else if (functionName == "fe3d:image_move")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
@@ -226,7 +226,7 @@ bool ScriptInterpreter::_executeFe3dGuiEntityFunction(const string& functionName
 			}
 		}
 	}
-	else if (functionName == "fe3d:image_get_position_x") // Get guiEntity position X
+	else if (functionName == "fe3d:image_get_position_x")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -241,7 +241,7 @@ bool ScriptInterpreter::_executeFe3dGuiEntityFunction(const string& functionName
 			}
 		}
 	}
-	else if (functionName == "fe3d:image_get_position_y") // Get guiEntity position Y
+	else if (functionName == "fe3d:image_get_position_y")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -256,7 +256,7 @@ bool ScriptInterpreter::_executeFe3dGuiEntityFunction(const string& functionName
 			}
 		}
 	}
-	else if (functionName == "fe3d:image_set_rotation") // Set guiEntity rotation
+	else if (functionName == "fe3d:image_set_rotation")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL };
 
@@ -271,7 +271,7 @@ bool ScriptInterpreter::_executeFe3dGuiEntityFunction(const string& functionName
 			}
 		}
 	}
-	else if (functionName == "fe3d:image_rotate") // Rotate guiEntity
+	else if (functionName == "fe3d:image_rotate")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL };
 
@@ -286,7 +286,7 @@ bool ScriptInterpreter::_executeFe3dGuiEntityFunction(const string& functionName
 			}
 		}
 	}
-	else if (functionName == "fe3d:image_get_rotation") // Get guiEntity rotation
+	else if (functionName == "fe3d:image_get_rotation")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -301,7 +301,7 @@ bool ScriptInterpreter::_executeFe3dGuiEntityFunction(const string& functionName
 			}
 		}
 	}
-	else if (functionName == "fe3d:image_set_size") // Set guiEntity size
+	else if (functionName == "fe3d:image_set_size")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
@@ -317,7 +317,7 @@ bool ScriptInterpreter::_executeFe3dGuiEntityFunction(const string& functionName
 			}
 		}
 	}
-	else if (functionName == "fe3d:image_scale") // Scale guiEntity
+	else if (functionName == "fe3d:image_scale")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
@@ -333,7 +333,7 @@ bool ScriptInterpreter::_executeFe3dGuiEntityFunction(const string& functionName
 			}
 		}
 	}
-	else if (functionName == "fe3d:image_get_width") // Get guiEntity width
+	else if (functionName == "fe3d:image_get_width")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -348,7 +348,7 @@ bool ScriptInterpreter::_executeFe3dGuiEntityFunction(const string& functionName
 			}
 		}
 	}
-	else if (functionName == "fe3d:image_get_height") // Get guiEntity height
+	else if (functionName == "fe3d:image_get_height")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -363,7 +363,7 @@ bool ScriptInterpreter::_executeFe3dGuiEntityFunction(const string& functionName
 			}
 		}
 	}
-	else if (functionName == "fe3d:image_set_color") // Set guiEntity color
+	else if (functionName == "fe3d:image_set_color")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
@@ -379,7 +379,7 @@ bool ScriptInterpreter::_executeFe3dGuiEntityFunction(const string& functionName
 			}
 		}
 	}
-	else if (functionName == "fe3d:image_get_color") // Get guiEntity color
+	else if (functionName == "fe3d:image_get_color")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -394,7 +394,7 @@ bool ScriptInterpreter::_executeFe3dGuiEntityFunction(const string& functionName
 			}
 		}
 	}
-	else if (functionName == "fe3d:image_set_alpha") // Set guiEntity alpha
+	else if (functionName == "fe3d:image_set_alpha")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL };
 
@@ -409,7 +409,7 @@ bool ScriptInterpreter::_executeFe3dGuiEntityFunction(const string& functionName
 			}
 		}
 	}
-	else if (functionName == "fe3d:image_get_alpha") // Get guiEntity alpha
+	else if (functionName == "fe3d:image_get_alpha")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -424,7 +424,7 @@ bool ScriptInterpreter::_executeFe3dGuiEntityFunction(const string& functionName
 			}
 		}
 	}
-	else if (functionName == "fe3d:image_start_animation") // Start guiEntity animation
+	else if (functionName == "fe3d:image_start_animation")
 	{
 		auto types =
 		{
@@ -449,7 +449,7 @@ bool ScriptInterpreter::_executeFe3dGuiEntityFunction(const string& functionName
 			}
 		}
 	}
-	else if (functionName == "fe3d:image_pause_animation") // Pause guiEntity animation
+	else if (functionName == "fe3d:image_pause_animation")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -464,7 +464,7 @@ bool ScriptInterpreter::_executeFe3dGuiEntityFunction(const string& functionName
 			}
 		}
 	}
-	else if (functionName == "fe3d:image_resume_animation") // Resume guiEntity animation
+	else if (functionName == "fe3d:image_resume_animation")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -479,7 +479,7 @@ bool ScriptInterpreter::_executeFe3dGuiEntityFunction(const string& functionName
 			}
 		}
 	}
-	else if (functionName == "fe3d:image_stop_animation") // Stop guiEntity animation
+	else if (functionName == "fe3d:image_stop_animation")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -494,7 +494,7 @@ bool ScriptInterpreter::_executeFe3dGuiEntityFunction(const string& functionName
 			}
 		}
 	}
-	else if (functionName == "fe3d:image_is_animation_finished") // Check if guiEntity animation is finished
+	else if (functionName == "fe3d:image_is_animation_finished")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -509,7 +509,7 @@ bool ScriptInterpreter::_executeFe3dGuiEntityFunction(const string& functionName
 			}
 		}
 	}
-	else if (functionName == "fe3d:image_is_animation_playing") // Check if guiEntity animation is playing
+	else if (functionName == "fe3d:image_is_animation_playing")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -524,7 +524,7 @@ bool ScriptInterpreter::_executeFe3dGuiEntityFunction(const string& functionName
 			}
 		}
 	}
-	else if (functionName == "fe3d:image_is_animation_paused") // Check if guiEntity animation is paused
+	else if (functionName == "fe3d:image_is_animation_paused")
 	{
 		auto types = { ScriptValueType::STRING };
 

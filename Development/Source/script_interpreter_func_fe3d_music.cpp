@@ -3,7 +3,7 @@
 bool ScriptInterpreter::_executeFe3dMusicFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine type of function
-	if (functionName == "fe3d:music_add_to_playlist") // Add music to playlist
+	if (functionName == "fe3d:music_add_to_playlist")
 	{
 		auto types =
 		{
@@ -22,7 +22,7 @@ bool ScriptInterpreter::_executeFe3dMusicFunction(const string& functionName, ve
 			}
 		}
 	}
-	else if (functionName == "fe3d:music_clear_playlist") // Clear music playlist
+	else if (functionName == "fe3d:music_clear_playlist")
 	{
 		// Validate arguments
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
@@ -31,7 +31,7 @@ bool ScriptInterpreter::_executeFe3dMusicFunction(const string& functionName, ve
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
-	else if (functionName == "fe3d:music_set_volume") // Set music volume
+	else if (functionName == "fe3d:music_set_volume")
 	{
 		auto types = { ScriptValueType::DECIMAL };
 
@@ -42,7 +42,7 @@ bool ScriptInterpreter::_executeFe3dMusicFunction(const string& functionName, ve
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
-	else if (functionName == "fe3d:music_get_volume") // Get music volume
+	else if (functionName == "fe3d:music_get_volume")
 	{
 		// Validate arguments
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
@@ -51,7 +51,7 @@ bool ScriptInterpreter::_executeFe3dMusicFunction(const string& functionName, ve
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
 		}
 	}
-	else if (functionName == "fe3d:music_is_playing") // Check if music is playing
+	else if (functionName == "fe3d:music_is_playing")
 	{
 		// Validate arguments
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
@@ -60,7 +60,7 @@ bool ScriptInterpreter::_executeFe3dMusicFunction(const string& functionName, ve
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 		}
 	}
-	else if (functionName == "fe3d:music_pause") // Pause music
+	else if (functionName == "fe3d:music_pause")
 	{
 		// Validate arguments
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
@@ -69,7 +69,7 @@ bool ScriptInterpreter::_executeFe3dMusicFunction(const string& functionName, ve
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
-	else if (functionName == "fe3d:music_is_paused") // Check if music is paused
+	else if (functionName == "fe3d:music_is_paused")
 	{
 		// Validate arguments
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
@@ -78,7 +78,7 @@ bool ScriptInterpreter::_executeFe3dMusicFunction(const string& functionName, ve
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 		}
 	}
-	else if (functionName == "fe3d:music_resume") // Resume music
+	else if (functionName == "fe3d:music_resume")
 	{
 		// Validate arguments
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))

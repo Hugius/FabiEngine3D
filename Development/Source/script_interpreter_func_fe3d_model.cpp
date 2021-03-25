@@ -30,7 +30,7 @@ bool ScriptInterpreter::_validateFe3dModelEntity(const string& ID, bool previewE
 bool ScriptInterpreter::_executeFe3dModelEntityFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine type of function
-	if (functionName == "fe3d:model_is_existing") // Get modelEntity existence
+	if (functionName == "fe3d:model_is_existing")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -49,7 +49,7 @@ bool ScriptInterpreter::_executeFe3dModelEntityFunction(const string& functionNa
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 		}
 	}
-	else if (functionName == "fe3d:model_find_ids") // Find full modelEntity IDs
+	else if (functionName == "fe3d:model_find_ids")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -78,7 +78,7 @@ bool ScriptInterpreter::_executeFe3dModelEntityFunction(const string& functionNa
 			}
 		}
 	}
-	else if (functionName == "fe3d:model_get_all_ids") // Get all modelEntity IDs
+	else if (functionName == "fe3d:model_get_all_ids")
 	{
 		// Validate arguments
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
@@ -96,7 +96,7 @@ bool ScriptInterpreter::_executeFe3dModelEntityFunction(const string& functionNa
 			}
 		}
 	}
-	else if (functionName == "fe3d:model_place") // Create modelEntity
+	else if (functionName == "fe3d:model_place")
 	{
 		auto types =
 		{
@@ -131,7 +131,7 @@ bool ScriptInterpreter::_executeFe3dModelEntityFunction(const string& functionNa
 			}
 		}
 	}
-	else if (functionName == "fe3d:model_delete") // Delete modelEntity
+	else if (functionName == "fe3d:model_delete")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -146,7 +146,7 @@ bool ScriptInterpreter::_executeFe3dModelEntityFunction(const string& functionNa
 			}
 		}
 	}
-	else if (functionName == "fe3d:model_set_visible") // Set modelEntity visibility
+	else if (functionName == "fe3d:model_set_visible")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::BOOLEAN };
 
@@ -171,7 +171,7 @@ bool ScriptInterpreter::_executeFe3dModelEntityFunction(const string& functionNa
 			}
 		}
 	}
-	else if (functionName == "fe3d:model_is_visible") // Get modelEntity visibility
+	else if (functionName == "fe3d:model_is_visible")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -186,7 +186,7 @@ bool ScriptInterpreter::_executeFe3dModelEntityFunction(const string& functionNa
 			}
 		}
 	}
-	else if (functionName == "fe3d:model_set_position") // Set modelEntity position
+	else if (functionName == "fe3d:model_set_position")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
@@ -202,7 +202,7 @@ bool ScriptInterpreter::_executeFe3dModelEntityFunction(const string& functionNa
 			}
 		}
 	}
-	else if (functionName == "fe3d:model_move") // Move modelEntity
+	else if (functionName == "fe3d:model_move")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
@@ -218,7 +218,7 @@ bool ScriptInterpreter::_executeFe3dModelEntityFunction(const string& functionNa
 			}
 		}
 	}
-	else if (functionName == "fe3d:model_get_position") // Get modelEntity position
+	else if (functionName == "fe3d:model_get_position")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -233,7 +233,7 @@ bool ScriptInterpreter::_executeFe3dModelEntityFunction(const string& functionNa
 			}
 		}
 	}
-	else if (functionName == "fe3d:model_set_rotation_origin") // Set modelEntity rotation oriign
+	else if (functionName == "fe3d:model_set_rotation_origin")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
@@ -249,7 +249,7 @@ bool ScriptInterpreter::_executeFe3dModelEntityFunction(const string& functionNa
 			}
 		}
 	}
-	else if (functionName == "fe3d:model_get_rotation_origin") // Get modelEntity rotation origin
+	else if (functionName == "fe3d:model_get_rotation_origin")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -264,7 +264,7 @@ bool ScriptInterpreter::_executeFe3dModelEntityFunction(const string& functionNa
 			}
 		}
 	}
-	else if (functionName == "fe3d:model_set_rotation") // Set modelEntity rotation
+	else if (functionName == "fe3d:model_set_rotation")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
@@ -280,7 +280,7 @@ bool ScriptInterpreter::_executeFe3dModelEntityFunction(const string& functionNa
 			}
 		}
 	}
-	else if (functionName == "fe3d:model_rotate") // Rotate modelEntity
+	else if (functionName == "fe3d:model_rotate")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
@@ -296,7 +296,7 @@ bool ScriptInterpreter::_executeFe3dModelEntityFunction(const string& functionNa
 			}
 		}
 	}
-	else if (functionName == "fe3d:model_get_rotation") // Get modelEntity rotation
+	else if (functionName == "fe3d:model_get_rotation")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -311,7 +311,7 @@ bool ScriptInterpreter::_executeFe3dModelEntityFunction(const string& functionNa
 			}
 		}
 	}
-	else if (functionName == "fe3d:model_set_size") // Set modelEntity size
+	else if (functionName == "fe3d:model_set_size")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
@@ -327,7 +327,7 @@ bool ScriptInterpreter::_executeFe3dModelEntityFunction(const string& functionNa
 			}
 		}
 	}
-	else if (functionName == "fe3d:model_scale") // Scale modelEntity
+	else if (functionName == "fe3d:model_scale")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
@@ -343,7 +343,7 @@ bool ScriptInterpreter::_executeFe3dModelEntityFunction(const string& functionNa
 			}
 		}
 	}
-	else if (functionName == "fe3d:model_get_size") // Get modelEntity size
+	else if (functionName == "fe3d:model_get_size")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -358,7 +358,7 @@ bool ScriptInterpreter::_executeFe3dModelEntityFunction(const string& functionNa
 			}
 		}
 	}
-	else if (functionName == "fe3d:model_set_color") // Set modelEntity color
+	else if (functionName == "fe3d:model_set_color")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
@@ -374,7 +374,7 @@ bool ScriptInterpreter::_executeFe3dModelEntityFunction(const string& functionNa
 			}
 		}
 	}
-	else if (functionName == "fe3d:model_get_color") // Get modelEntity color
+	else if (functionName == "fe3d:model_get_color")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -389,7 +389,7 @@ bool ScriptInterpreter::_executeFe3dModelEntityFunction(const string& functionNa
 			}
 		}
 	}
-	else if (functionName == "fe3d:model_set_min_height") // Set modelEntity minimum height
+	else if (functionName == "fe3d:model_set_min_height")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL };
 
@@ -404,7 +404,7 @@ bool ScriptInterpreter::_executeFe3dModelEntityFunction(const string& functionNa
 			}
 		}
 	}
-	else if (functionName == "fe3d:model_get_min_height") // Get modelEntity minimum height
+	else if (functionName == "fe3d:model_get_min_height")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -419,7 +419,7 @@ bool ScriptInterpreter::_executeFe3dModelEntityFunction(const string& functionNa
 			}
 		}
 	}
-	else if (functionName == "fe3d:model_set_max_height") // Set modelEntity maximum height
+	else if (functionName == "fe3d:model_set_max_height")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL };
 
@@ -434,7 +434,7 @@ bool ScriptInterpreter::_executeFe3dModelEntityFunction(const string& functionNa
 			}
 		}
 	}
-	else if (functionName == "fe3d:model_get_max_height") // Get modelEntity maximum height
+	else if (functionName == "fe3d:model_get_max_height")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -449,7 +449,7 @@ bool ScriptInterpreter::_executeFe3dModelEntityFunction(const string& functionNa
 			}
 		}
 	}
-	else if (functionName == "fe3d:model_set_lightness") // Set modelEntity lightness
+	else if (functionName == "fe3d:model_set_lightness")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL };
 
@@ -464,7 +464,7 @@ bool ScriptInterpreter::_executeFe3dModelEntityFunction(const string& functionNa
 			}
 		}
 	}
-	else if (functionName == "fe3d:model_get_lightness") // Get modelEntity lightness
+	else if (functionName == "fe3d:model_get_lightness")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -479,7 +479,7 @@ bool ScriptInterpreter::_executeFe3dModelEntityFunction(const string& functionNa
 			}
 		}
 	}
-	else if (functionName == "fe3d:model_set_aabb_raycast_responsive") // Set modelEntity AABB raycasting responsiveness
+	else if (functionName == "fe3d:model_set_aabb_raycast_responsive")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::BOOLEAN };
 
@@ -510,7 +510,7 @@ bool ScriptInterpreter::_executeFe3dModelEntityFunction(const string& functionNa
 			}
 		}
 	}
-	else if (functionName == "fe3d:model_set_aabb_collision_responsive") // Set modelEntity AABB collision responsiveness
+	else if (functionName == "fe3d:model_set_aabb_collision_responsive")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::BOOLEAN };
 
@@ -541,7 +541,7 @@ bool ScriptInterpreter::_executeFe3dModelEntityFunction(const string& functionNa
 			}
 		}
 	}
-	else if (functionName == "fe3d:model_set_alpha") // Set modelEntity alpha
+	else if (functionName == "fe3d:model_set_alpha")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL };
 
@@ -556,7 +556,7 @@ bool ScriptInterpreter::_executeFe3dModelEntityFunction(const string& functionNa
 			}
 		}
 	}
-	else if (functionName == "fe3d:model_get_alpha") // Get modelEntity alpha
+	else if (functionName == "fe3d:model_get_alpha")
 	{
 		auto types = { ScriptValueType::STRING };
 

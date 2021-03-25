@@ -3,7 +3,7 @@
 bool ScriptInterpreter::_executeFe3dCollisionFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine type of function
-	if (functionName == "fe3d:collision_enable_camera_terrain_response") // Enable collision response between camera & terrain
+	if (functionName == "fe3d:collision_enable_camera_terrain_response")
 	{
 		auto types = { ScriptValueType::DECIMAL, ScriptValueType::DECIMAL }; // CameraHeight + cameraSpeed
 

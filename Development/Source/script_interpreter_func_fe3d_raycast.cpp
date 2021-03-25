@@ -3,7 +3,7 @@
 bool ScriptInterpreter::_executeFe3dRaycastFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine type of function
-	if (functionName == "fe3d:raycast_enable_terrain_positioning") // Enable raycasting
+	if (functionName == "fe3d:raycast_enable_terrain_positioning")
 	{
 		auto types = { ScriptValueType::DECIMAL, ScriptValueType::DECIMAL }; // Distance + precision
 
@@ -14,7 +14,7 @@ bool ScriptInterpreter::_executeFe3dRaycastFunction(const string& functionName, 
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
-	else if (functionName == "fe3d:raycast_disable_terrain_positioning") // Disable raycasting
+	else if (functionName == "fe3d:raycast_disable_terrain_positioning")
 	{
 		// Validate arguments
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
@@ -23,7 +23,7 @@ bool ScriptInterpreter::_executeFe3dRaycastFunction(const string& functionName, 
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
-	else if (functionName == "fe3d:raycast_get_vector") // Get the raycast vector
+	else if (functionName == "fe3d:raycast_get_vector")
 	{
 		// Validate arguments
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
@@ -36,7 +36,7 @@ bool ScriptInterpreter::_executeFe3dRaycastFunction(const string& functionName, 
 			}
 		}
 	}
-	else if (functionName == "fe3d:raycast_get_position_on_terrain") // Get the cursor position on the terrain
+	else if (functionName == "fe3d:raycast_get_position_on_terrain")
 	{
 		// Validate arguments
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
@@ -49,7 +49,7 @@ bool ScriptInterpreter::_executeFe3dRaycastFunction(const string& functionName, 
 			}
 		}
 	}
-	else if (functionName == "fe3d:raycast_is_position_on_terrain_valid") // Check if the position on the terrain is valid
+	else if (functionName == "fe3d:raycast_is_position_on_terrain_valid")
 	{
 		// Validate arguments
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
@@ -62,7 +62,7 @@ bool ScriptInterpreter::_executeFe3dRaycastFunction(const string& functionName, 
 			}
 		}
 	}
-	else if (functionName == "fe3d:raycast_into_model") // Raycasting into multiple modelEntities
+	else if (functionName == "fe3d:raycast_into_model")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::STRING, ScriptValueType::BOOLEAN }; // ModelEntityID + aabbPartID + canBeOccluded
 

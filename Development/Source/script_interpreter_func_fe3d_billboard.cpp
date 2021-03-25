@@ -30,7 +30,7 @@ bool ScriptInterpreter::_validateFe3dBillboardEntity(const string& ID, bool prev
 bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine type of function
-	if (functionName == "fe3d:billboard_is_existing") // Get billboardEntity existence
+	if (functionName == "fe3d:billboard_is_existing")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -49,7 +49,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 		}
 	}
-	else if (functionName == "fe3d:billboard_find_ids") // Find full billboardEntity IDs
+	else if (functionName == "fe3d:billboard_find_ids")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -78,7 +78,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			}
 		}
 	}
-	else if (functionName == "fe3d:billboard_get_all_ids") // Get all billboardEntity IDs
+	else if (functionName == "fe3d:billboard_get_all_ids")
 	{
 		// Validate arguments
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
@@ -96,7 +96,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			}
 		}
 	}
-	else if (functionName == "fe3d:billboard_place") // Create billboardEntity
+	else if (functionName == "fe3d:billboard_place")
 	{
 		auto types =
 		{
@@ -132,7 +132,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			}
 		}
 	}
-	else if (functionName == "fe3d:billboard_delete") // Delete billboardEntity
+	else if (functionName == "fe3d:billboard_delete")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -147,7 +147,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			}
 		}
 	}
-	else if (functionName == "fe3d:billboard_set_visible") // Set billboardEntity visibility
+	else if (functionName == "fe3d:billboard_set_visible")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::BOOLEAN };
 
@@ -172,7 +172,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			}
 		}
 	}
-	else if (functionName == "fe3d:billboard_is_visible") // Get billboardEntity visibility
+	else if (functionName == "fe3d:billboard_is_visible")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -187,7 +187,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			}
 		}
 	}
-	else if (functionName == "fe3d:billboard_set_position") // Set billboardEntity position
+	else if (functionName == "fe3d:billboard_set_position")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
@@ -203,7 +203,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			}
 		}
 	}
-	else if (functionName == "fe3d:billboard_move") // Move billboardEntity
+	else if (functionName == "fe3d:billboard_move")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
@@ -219,7 +219,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			}
 		}
 	}
-	else if (functionName == "fe3d:billboard_get_position") // Get billboardEntity position
+	else if (functionName == "fe3d:billboard_get_position")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -234,7 +234,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			}
 		}
 	}
-	else if (functionName == "fe3d:billboard_set_rotation") // Set billboardEntity rotation
+	else if (functionName == "fe3d:billboard_set_rotation")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
@@ -250,7 +250,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			}
 		}
 	}
-	else if (functionName == "fe3d:billboard_rotate") // Rotate billboardEntity
+	else if (functionName == "fe3d:billboard_rotate")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
@@ -266,7 +266,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			}
 		}
 	}
-	else if (functionName == "fe3d:billboard_get_rotation") // Get billboardEntity rotation
+	else if (functionName == "fe3d:billboard_get_rotation")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -281,7 +281,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			}
 		}
 	}
-	else if (functionName == "fe3d:billboard_set_size") // Set billboardEntity size
+	else if (functionName == "fe3d:billboard_set_size")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
@@ -296,7 +296,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			}
 		}
 	}
-	else if (functionName == "fe3d:billboard_scale") // Scale billboardEntity
+	else if (functionName == "fe3d:billboard_scale")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
@@ -311,7 +311,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			}
 		}
 	}
-	else if (functionName == "fe3d:billboard_get_width") // Get billboardEntity width
+	else if (functionName == "fe3d:billboard_get_width")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -326,7 +326,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			}
 		}
 	}
-	else if (functionName == "fe3d:billboard_get_height") // Get billboardEntity height
+	else if (functionName == "fe3d:billboard_get_height")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -341,7 +341,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			}
 		}
 	}
-	else if (functionName == "fe3d:billboard_set_color") // Set billboardEntity color
+	else if (functionName == "fe3d:billboard_set_color")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
@@ -357,7 +357,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			}
 		}
 	}
-	else if (functionName == "fe3d:billboard_get_color") // Get billboardEntity color
+	else if (functionName == "fe3d:billboard_get_color")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -372,7 +372,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			}
 		}
 	}
-	else if (functionName == "fe3d:billboard_set_min_height") // Set billboardEntity minimum height
+	else if (functionName == "fe3d:billboard_set_min_height")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL };
 
@@ -387,7 +387,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			}
 		}
 	}
-	else if (functionName == "fe3d:billboard_get_min_height") // Get billboardEntity minimum height
+	else if (functionName == "fe3d:billboard_get_min_height")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -402,7 +402,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			}
 		}
 	}
-	else if (functionName == "fe3d:billboard_set_max_height") // Set billboardEntity maximum height
+	else if (functionName == "fe3d:billboard_set_max_height")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL };
 
@@ -417,7 +417,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			}
 		}
 	}
-	else if (functionName == "fe3d:billboard_get_max_height") // Get billboardEntity maximum height
+	else if (functionName == "fe3d:billboard_get_max_height")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -432,7 +432,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			}
 		}
 	}
-	else if (functionName == "fe3d:billboard_set_lightness") // Set billboardEntity lightness
+	else if (functionName == "fe3d:billboard_set_lightness")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL };
 
@@ -447,7 +447,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			}
 		}
 	}
-	else if (functionName == "fe3d:billboard_get_lightness") // Get billboardEntity lightness
+	else if (functionName == "fe3d:billboard_get_lightness")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -462,7 +462,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			}
 		}
 	}
-	else if (functionName == "fe3d:billboard_set_aabb_raycast_responsive") // Set billboardEntity AABB raycasting responsiveness
+	else if (functionName == "fe3d:billboard_set_aabb_raycast_responsive")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::BOOLEAN };
 
@@ -493,7 +493,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			}
 		}
 	}
-	else if (functionName == "fe3d:billboard_set_aabb_collision_responsive") // Set billboardEntity AABB collision responsiveness
+	else if (functionName == "fe3d:billboard_set_aabb_collision_responsive")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::BOOLEAN };
 
@@ -524,7 +524,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			}
 		}
 	}
-	else if (functionName == "fe3d:billboard_set_camera_facing_x") // Set billboardEntity camera facing X
+	else if (functionName == "fe3d:billboard_set_camera_facing_x")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::BOOLEAN };
 
@@ -539,7 +539,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			}
 		}
 	}
-	else if (functionName == "fe3d:billboard_is_facing_camera_x") // Check if billboardEntity is facing camera X
+	else if (functionName == "fe3d:billboard_is_facing_camera_x")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -554,7 +554,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			}
 		}
 	}
-	else if (functionName == "fe3d:billboard_set_camera_facing_y") // Set billboardEntity camera facing Y
+	else if (functionName == "fe3d:billboard_set_camera_facing_y")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::BOOLEAN };
 
@@ -569,7 +569,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			}
 		}
 	}
-	else if (functionName == "fe3d:billboard_is_facing_camera_y") // Check if billboardEntity is facing camera Y
+	else if (functionName == "fe3d:billboard_is_facing_camera_y")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -584,7 +584,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			}
 		}
 	}
-	else if (functionName == "fe3d:billboard_start_animation") // Start billboardEntity animation
+	else if (functionName == "fe3d:billboard_start_animation")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::INTEGER };
 
@@ -599,7 +599,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			}
 		}
 	}
-	else if (functionName == "fe3d:billboard_pause_animation") // Pause billboardEntity animation
+	else if (functionName == "fe3d:billboard_pause_animation")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -614,7 +614,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			}
 		}
 	}
-	else if (functionName == "fe3d:billboard_resume_animation") // Resume billboardEntity animation
+	else if (functionName == "fe3d:billboard_resume_animation")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -629,7 +629,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			}
 		}
 	}
-	else if (functionName == "fe3d:billboard_stop_animation") // Stop billboardEntity animation
+	else if (functionName == "fe3d:billboard_stop_animation")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -644,7 +644,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			}
 		}
 	}
-	else if (functionName == "fe3d:billboard_is_animation_finished") // Check if billboardEntity animation is finished
+	else if (functionName == "fe3d:billboard_is_animation_finished")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -659,7 +659,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			}
 		}
 	}
-	else if (functionName == "fe3d:billboard_is_animation_playing") // Check if billboardEntity animation is playing
+	else if (functionName == "fe3d:billboard_is_animation_playing")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -674,7 +674,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			}
 		}
 	}
-	else if (functionName == "fe3d:billboard_is_animation_paused") // Check if billboardEntity animation is paused
+	else if (functionName == "fe3d:billboard_is_animation_paused")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -689,7 +689,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			}
 		}
 	}
-	else if (functionName == "fe3d:billboard_set_text") // Set billboardEntity text
+	else if (functionName == "fe3d:billboard_set_text")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
 
@@ -713,7 +713,7 @@ bool ScriptInterpreter::_executeFe3dBillboardEntityFunction(const string& functi
 			}
 		}
 	}
-	else if (functionName == "fe3d:billboard_get_text") // Get billboardEntity text
+	else if (functionName == "fe3d:billboard_get_text")
 	{
 		auto types = { ScriptValueType::STRING };
 

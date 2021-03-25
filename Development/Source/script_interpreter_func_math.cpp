@@ -31,7 +31,7 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 				auto functionName = scriptLine.substr(0, parenthesisIndex);
 
 				// Determine type of function	
-				if (functionName == "math:tan") // TAN
+				if (functionName == "math:tan")
 				{
 					auto types = { ScriptValueType::DECIMAL };
 
@@ -41,7 +41,7 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, std::tan(angle)));
 					}
 				}
-				else if (functionName == "math:sin") // SIN
+				else if (functionName == "math:sin")
 				{
 					auto types = { ScriptValueType::DECIMAL };
 
@@ -51,7 +51,7 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, std::sin(angle)));
 					}
 				}
-				else if (functionName == "math:cos") // COS
+				else if (functionName == "math:cos")
 				{
 					auto types = { ScriptValueType::DECIMAL };
 
@@ -61,7 +61,7 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, std::cos(angle)));
 					}
 				}
-				else if (functionName == "math:atan") // ATAN
+				else if (functionName == "math:atan")
 				{
 					auto types = { ScriptValueType::DECIMAL };
 
@@ -72,7 +72,7 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
 					}
 				}
-				else if (functionName == "math:asin") // ASIN
+				else if (functionName == "math:asin")
 				{
 					auto types = { ScriptValueType::DECIMAL };
 
@@ -83,7 +83,7 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
 					}
 				}
-				else if (functionName == "math:acos") // ACOS
+				else if (functionName == "math:acos")
 				{
 					auto types = { ScriptValueType::DECIMAL };
 
@@ -94,7 +94,7 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
 					}
 				}
-				else if (functionName == "math:atan2") // ATAN2
+				else if (functionName == "math:atan2")
 				{
 					auto types = { ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
@@ -105,7 +105,7 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
 					}
 				}
-				else if (functionName == "math:pow") // POWER
+				else if (functionName == "math:pow")
 				{
 					if (_validateListValueAmount(arguments, 2))
 					{
@@ -125,7 +125,7 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 						}
 					}
 				}
-				else if (functionName == "math:min") // MIN
+				else if (functionName == "math:min")
 				{
 					if (_validateListValueAmount(arguments, 2))
 					{
@@ -145,7 +145,7 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 						}
 					}
 				}
-				else if (functionName == "math:max") // MAX
+				else if (functionName == "math:max")
 				{
 					if (_validateListValueAmount(arguments, 2))
 					{
@@ -165,7 +165,7 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 						}
 					}
 				}
-				else if (functionName == "math:clamp") // CLAMP
+				else if (functionName == "math:clamp")
 				{
 					if (_validateListValueAmount(arguments, 3))
 					{
@@ -190,7 +190,7 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 						}
 					}
 				}
-				else if (functionName == "math:sqrt") // SQUAREROOT
+				else if (functionName == "math:sqrt")
 				{
 					auto types = { ScriptValueType::DECIMAL };
 
@@ -199,7 +199,7 @@ vector<ScriptValue> ScriptInterpreter::_processMathematicalFunctionCall(const st
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, std::sqrtf(arguments[0].getDecimal())));
 					}
 				}
-				else if (functionName == "math:abs") // ABSOLUTE
+				else if (functionName == "math:abs")
 				{
 					// Validate amount of arguments
 					if (_validateListValueAmount(arguments, 1))

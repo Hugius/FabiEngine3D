@@ -23,7 +23,7 @@ bool ScriptInterpreter::_validateFe3dTextEntity(const string& ID)
 bool ScriptInterpreter::_executeFe3dTextEntityFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine type of function
-	if (functionName == "fe3d:text_is_existing") // Get textEntity existence
+	if (functionName == "fe3d:text_is_existing")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -42,7 +42,7 @@ bool ScriptInterpreter::_executeFe3dTextEntityFunction(const string& functionNam
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 		}
 	}
-	else if (functionName == "fe3d:text_find_ids") // Find full textEntity IDs
+	else if (functionName == "fe3d:text_find_ids")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -71,7 +71,7 @@ bool ScriptInterpreter::_executeFe3dTextEntityFunction(const string& functionNam
 			}
 		}
 	}
-	else if (functionName == "fe3d:text_get_all_ids") // Get all textEntity IDs
+	else if (functionName == "fe3d:text_get_all_ids")
 	{
 		// Validate arguments
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
@@ -89,7 +89,7 @@ bool ScriptInterpreter::_executeFe3dTextEntityFunction(const string& functionNam
 			}
 		}
 	}
-	else if (functionName == "fe3d:text_place") // Create textEntity
+	else if (functionName == "fe3d:text_place")
 	{
 		auto types =
 		{
@@ -144,7 +144,7 @@ bool ScriptInterpreter::_executeFe3dTextEntityFunction(const string& functionNam
 			}
 		}
 	}
-	else if (functionName == "fe3d:text_delete") // Delete textEntity
+	else if (functionName == "fe3d:text_delete")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -159,7 +159,7 @@ bool ScriptInterpreter::_executeFe3dTextEntityFunction(const string& functionNam
 			}
 		}
 	}
-	else if (functionName == "fe3d:text_set_visible") // Set textEntity visibility
+	else if (functionName == "fe3d:text_set_visible")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::BOOLEAN };
 
@@ -184,7 +184,7 @@ bool ScriptInterpreter::_executeFe3dTextEntityFunction(const string& functionNam
 			}
 		}
 	}
-	else if (functionName == "fe3d:text_is_visible") // Get textEntity visibility
+	else if (functionName == "fe3d:text_is_visible")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -199,7 +199,7 @@ bool ScriptInterpreter::_executeFe3dTextEntityFunction(const string& functionNam
 			}
 		}
 	}
-	else if (functionName == "fe3d:text_set_position") // Set textEntity position
+	else if (functionName == "fe3d:text_set_position")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
@@ -215,7 +215,7 @@ bool ScriptInterpreter::_executeFe3dTextEntityFunction(const string& functionNam
 			}
 		}
 	}
-	else if (functionName == "fe3d:text_move") // Move textEntity
+	else if (functionName == "fe3d:text_move")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
@@ -231,7 +231,7 @@ bool ScriptInterpreter::_executeFe3dTextEntityFunction(const string& functionNam
 			}
 		}
 	}
-	else if (functionName == "fe3d:text_get_position_x") // Get textEntity position X
+	else if (functionName == "fe3d:text_get_position_x")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -246,7 +246,7 @@ bool ScriptInterpreter::_executeFe3dTextEntityFunction(const string& functionNam
 			}
 		}
 	}
-	else if (functionName == "fe3d:text_get_position_y") // Get textEntity position Y
+	else if (functionName == "fe3d:text_get_position_y")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -261,7 +261,7 @@ bool ScriptInterpreter::_executeFe3dTextEntityFunction(const string& functionNam
 			}
 		}
 	}
-	else if (functionName == "fe3d:text_set_rotation") // Set textEntity rotation
+	else if (functionName == "fe3d:text_set_rotation")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL };
 
@@ -276,7 +276,7 @@ bool ScriptInterpreter::_executeFe3dTextEntityFunction(const string& functionNam
 			}
 		}
 	}
-	else if (functionName == "fe3d:text_rotate") // Rotate textEntity
+	else if (functionName == "fe3d:text_rotate")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL };
 
@@ -291,7 +291,7 @@ bool ScriptInterpreter::_executeFe3dTextEntityFunction(const string& functionNam
 			}
 		}
 	}
-	else if (functionName == "fe3d:text_get_rotation") // Get textEntity rotation
+	else if (functionName == "fe3d:text_get_rotation")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -306,7 +306,7 @@ bool ScriptInterpreter::_executeFe3dTextEntityFunction(const string& functionNam
 			}
 		}
 	}
-	else if (functionName == "fe3d:text_set_size") // Set textEntity size
+	else if (functionName == "fe3d:text_set_size")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
@@ -322,7 +322,7 @@ bool ScriptInterpreter::_executeFe3dTextEntityFunction(const string& functionNam
 			}
 		}
 	}
-	else if (functionName == "fe3d:text_scale") // Scale textEntity
+	else if (functionName == "fe3d:text_scale")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
@@ -338,7 +338,7 @@ bool ScriptInterpreter::_executeFe3dTextEntityFunction(const string& functionNam
 			}
 		}
 	}
-	else if (functionName == "fe3d:text_get_width") // Get textEntity width
+	else if (functionName == "fe3d:text_get_width")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -353,7 +353,7 @@ bool ScriptInterpreter::_executeFe3dTextEntityFunction(const string& functionNam
 			}
 		}
 	}
-	else if (functionName == "fe3d:text_get_height") // Get textEntity height
+	else if (functionName == "fe3d:text_get_height")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -368,7 +368,7 @@ bool ScriptInterpreter::_executeFe3dTextEntityFunction(const string& functionNam
 			}
 		}
 	}
-	else if (functionName == "fe3d:text_set_color") // Set textEntity color
+	else if (functionName == "fe3d:text_set_color")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
@@ -384,7 +384,7 @@ bool ScriptInterpreter::_executeFe3dTextEntityFunction(const string& functionNam
 			}
 		}
 	}
-	else if (functionName == "fe3d:text_get_color") // Get textEntity color
+	else if (functionName == "fe3d:text_get_color")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -399,7 +399,7 @@ bool ScriptInterpreter::_executeFe3dTextEntityFunction(const string& functionNam
 			}
 		}
 	}
-	else if (functionName == "fe3d:text_set_content") // Set textEntity content
+	else if (functionName == "fe3d:text_set_content")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::STRING };
 
@@ -414,7 +414,7 @@ bool ScriptInterpreter::_executeFe3dTextEntityFunction(const string& functionNam
 			}
 		}
 	}
-	else if (functionName == "fe3d:text_get_content") // Get textEntity content
+	else if (functionName == "fe3d:text_get_content")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -429,7 +429,7 @@ bool ScriptInterpreter::_executeFe3dTextEntityFunction(const string& functionNam
 			}
 		}
 	}
-	else if (functionName == "fe3d:text_set_alpha") // Set textEntity alpha
+	else if (functionName == "fe3d:text_set_alpha")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL };
 
@@ -444,7 +444,7 @@ bool ScriptInterpreter::_executeFe3dTextEntityFunction(const string& functionNam
 			}
 		}
 	}
-	else if (functionName == "fe3d:text_get_alpha") // Get textEntity alpha
+	else if (functionName == "fe3d:text_get_alpha")
 	{
 		auto types = { ScriptValueType::STRING };
 

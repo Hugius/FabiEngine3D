@@ -87,7 +87,7 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 						}
 					}
 				}
-				else if (functionName == "misc:get_list_size") // Get the size of a list variable
+				else if (functionName == "misc:get_list_size")
 				{
 					auto types = { ScriptValueType::STRING };
 
@@ -159,7 +159,7 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::INTEGER, result));
 					}
 				}
-				else if (functionName == "misc:get_random_integer") // Random integer
+				else if (functionName == "misc:get_random_integer")
 				{
 					auto types =
 					{
@@ -173,7 +173,7 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::INTEGER, result));
 					}
 				}
-				else if (functionName == "misc:get_random_decimal") // Random float
+				else if (functionName == "misc:get_random_decimal")
 				{
 					auto types =
 					{
@@ -187,7 +187,7 @@ vector<ScriptValue> ScriptInterpreter::_processMiscellaneousFunctionCall(const s
 						returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
 					}
 				}
-				else if (functionName == "misc:time_interval") // Time interval
+				else if (functionName == "misc:time_interval")
 				{
 					auto types = { ScriptValueType::STRING, ScriptValueType::INTEGER };
 

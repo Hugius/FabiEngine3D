@@ -22,7 +22,7 @@ bool ScriptInterpreter::_validateFe3dLightEntity(const string& ID)
 bool ScriptInterpreter::_executeFe3dLightEntityFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine type of function
-	if (functionName == "fe3d:light_is_existing") // Get lightEntity existence
+	if (functionName == "fe3d:light_is_existing")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -34,7 +34,7 @@ bool ScriptInterpreter::_executeFe3dLightEntityFunction(const string& functionNa
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::BOOLEAN, result));
 		}
 	}
-	else if (functionName == "fe3d:light_find_ids") // Find full lightEntity IDs
+	else if (functionName == "fe3d:light_find_ids")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -63,7 +63,7 @@ bool ScriptInterpreter::_executeFe3dLightEntityFunction(const string& functionNa
 			}
 		}
 	}
-	else if (functionName == "fe3d:light_get_all_ids") // Get all lightEntity IDs
+	else if (functionName == "fe3d:light_get_all_ids")
 	{
 		// Validate arguments
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
@@ -81,7 +81,7 @@ bool ScriptInterpreter::_executeFe3dLightEntityFunction(const string& functionNa
 			}
 		}
 	}
-	else if (functionName == "fe3d:light_place") // Create lightEntity
+	else if (functionName == "fe3d:light_place")
 	{
 		auto types =
 		{
@@ -118,7 +118,7 @@ bool ScriptInterpreter::_executeFe3dLightEntityFunction(const string& functionNa
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
-	else if (functionName == "fe3d:light_delete") // Delete lightEntity
+	else if (functionName == "fe3d:light_delete")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -133,7 +133,7 @@ bool ScriptInterpreter::_executeFe3dLightEntityFunction(const string& functionNa
 			}
 		}
 	}
-	else if (functionName == "fe3d:light_set_visible") // Set lightEntity visibility
+	else if (functionName == "fe3d:light_set_visible")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::BOOLEAN };
 
@@ -157,7 +157,7 @@ bool ScriptInterpreter::_executeFe3dLightEntityFunction(const string& functionNa
 			}
 		}
 	}
-	else if (functionName == "fe3d:light_is_visible") // Get lightEntity visibility
+	else if (functionName == "fe3d:light_is_visible")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -172,7 +172,7 @@ bool ScriptInterpreter::_executeFe3dLightEntityFunction(const string& functionNa
 			}
 		}
 	}
-	else if (functionName == "fe3d:light_set_position") // Set lightEntity position
+	else if (functionName == "fe3d:light_set_position")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
@@ -188,7 +188,7 @@ bool ScriptInterpreter::_executeFe3dLightEntityFunction(const string& functionNa
 			}
 		}
 	}
-	else if (functionName == "fe3d:light_move") // Move lightEntity position
+	else if (functionName == "fe3d:light_move")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
@@ -204,7 +204,7 @@ bool ScriptInterpreter::_executeFe3dLightEntityFunction(const string& functionNa
 			}
 		}
 	}
-	else if (functionName == "fe3d:light_get_position") // Get lightEntity position
+	else if (functionName == "fe3d:light_get_position")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -219,7 +219,7 @@ bool ScriptInterpreter::_executeFe3dLightEntityFunction(const string& functionNa
 			}
 		}
 	}
-	else if (functionName == "fe3d:light_set_color") // Set lightEntity color
+	else if (functionName == "fe3d:light_set_color")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
 
@@ -235,7 +235,7 @@ bool ScriptInterpreter::_executeFe3dLightEntityFunction(const string& functionNa
 			}
 		}
 	}
-	else if (functionName == "fe3d:light_get_color") // Get lightEntity color
+	else if (functionName == "fe3d:light_get_color")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -250,7 +250,7 @@ bool ScriptInterpreter::_executeFe3dLightEntityFunction(const string& functionNa
 			}
 		}
 	}
-	else if (functionName == "fe3d:light_set_intensity") // Set lightEntity intensity
+	else if (functionName == "fe3d:light_set_intensity")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL };
 
@@ -265,7 +265,7 @@ bool ScriptInterpreter::_executeFe3dLightEntityFunction(const string& functionNa
 			}
 		}
 	}
-	else if (functionName == "fe3d:light_get_intensity") // Get lightEntity intensity
+	else if (functionName == "fe3d:light_get_intensity")
 	{
 		auto types = { ScriptValueType::STRING };
 
@@ -280,7 +280,7 @@ bool ScriptInterpreter::_executeFe3dLightEntityFunction(const string& functionNa
 			}
 		}
 	}
-	else if (functionName == "fe3d:light_set_distance") // Set lightEntity distance
+	else if (functionName == "fe3d:light_set_distance")
 	{
 		auto types = { ScriptValueType::STRING, ScriptValueType::DECIMAL };
 
@@ -295,7 +295,7 @@ bool ScriptInterpreter::_executeFe3dLightEntityFunction(const string& functionNa
 			}
 		}
 	}
-	else if (functionName == "fe3d:light_get_distance") // Get lightEntity distance
+	else if (functionName == "fe3d:light_get_distance")
 	{
 		auto types = { ScriptValueType::STRING };
 

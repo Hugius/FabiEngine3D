@@ -3,8 +3,6 @@
   Places a new 2D audio with **newID** (cannot start with @) based on audio with **previewID**.
 - `fe3d:audio_set_volume`(`STR` ID, `DEC` volume) ---> `NONE`  
   Sets the **volume** of audio with **ID**.
-- `fe3d:audio_get_volume`(`STR` ID) ---> `DEC`  
-  Returns the volume of audio with **ID**.
 
 # Audio (only 3D)
 - `fe3d:audio_place3D`(`STR` newID, `STR` previewID, `DEC` x, `DEC` y, `DEC` z, `DEC` volume, `DEC` distance) ---> `NONE`  
@@ -53,6 +51,8 @@
   Stops all playing audio.
 - `fe3d:audio_is_3D`(`STR` ID) ---> `BOOL`  
   Returns true if audio with **ID** is 3D audio.
+- `fe3d:audio_get_volume`(`STR` ID) ---> `DEC`  
+  Returns the volume of audio with **ID**.
   
 # Music
 - `fe3d:music_add_to_playlist`(`STR` previewID) ---> `NONE`  

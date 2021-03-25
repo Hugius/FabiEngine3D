@@ -33,8 +33,6 @@
   Returns a list of strings with the full IDs of all audios.
 - `fe3d:audio_delete`(`STR` ID) ---> `NONE`  
   Deletes audio with **ID** if existing.
-- `fe3d:audio_delete_all`() ---> `NONE`  
-  Deletes all audio.
 - `fe3d:audio_is_playing`(`STR` ID) ---> `BOOL`  
   Returns true if audio with **ID** is playing.
 - `fe3d:audio_play`(`STR` ID, `INT` loops, `DEC` volume) ---> `NONE`  

@@ -8,3 +8,7 @@
 - Audio can be played in **3D** (position, max distance, max volume).
 - 3D audio has **stereo panning**.
 - Audio can be added to the **music playlist**.
+- You can play the selected audio with the `SPACE` key.
+- You can pause the selected audio with the `P` key.
+- You can resume the selected audio with the `R` key.
+- You can stop the selected audio with the `S` key.

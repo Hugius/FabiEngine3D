@@ -38,3 +38,7 @@
   Sets the color of the selected water based on the **r g b** channels.
 - `fe3d:water_get_color`() ---> `VEC3`  
   Returns the color of the selected water.
+- `fe3d:water_set_transparency`(`DEC` transparency) ---> `NONE`  
+  Sets the **transparency** of the selected water.
+- `fe3d:water_get_transparency`() ---> `DEC`  
+  Returns the transparency of the selected water.

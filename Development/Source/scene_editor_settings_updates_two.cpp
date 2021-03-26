@@ -9,7 +9,7 @@ void SceneEditor::_updateDofGraphicsSettingsMenu()
 	if (screen->getID() == "sceneEditorMenuSettingsGraphicsDof")
 	{
 		// Temporary values
-		bool enabled = _fe3d.gfx_isDofEnabled();
+		bool isEnabled = _fe3d.gfx_isDofEnabled();
 		bool dynamic = _fe3d.gfx_isDofDynamic();
 		float blurDistance = _fe3d.gfx_getDofBlurDistance();
 		float maxDistance = _fe3d.gfx_getaMaxDofDistance();
@@ -23,7 +23,7 @@ void SceneEditor::_updateDofGraphicsSettingsMenu()
 			}
 			else if (screen->getButton("enabled")->isHovered())
 			{
-				enabled = !enabled;
+				isEnabled = !isEnabled;
 			}
 			else if (screen->getButton("dynamic")->isHovered())
 			{
@@ -40,7 +40,7 @@ void SceneEditor::_updateDofGraphicsSettingsMenu()
 		}
 
 		// Enabled button content
-		_fe3d.textEntity_setTextContent(screen->getButton("enabled")->getTextfield()->getEntityID(), enabled ? "Enabled: YES" : "Enabled: NO");
+		_fe3d.textEntity_setTextContent(screen->getButton("enabled")->getTextfield()->getEntityID(), isEnabled ? "Enabled: YES" : "Enabled: NO");
 		_fe3d.textEntity_setTextContent(screen->getButton("dynamic")->getTextfield()->getEntityID(), dynamic ? "Dynamic: YES" : "Dynamic: NO");
 
 		// Blur distance value
@@ -52,7 +52,7 @@ void SceneEditor::_updateDofGraphicsSettingsMenu()
 		maxDistance = std::max(0.0f, maxDistance);
 
 		// Enable or disable DOF
-		if (enabled)
+		if (isEnabled)
 		{
 			_fe3d.gfx_enableDOF(dynamic, maxDistance, blurDistance);
 		}
@@ -62,9 +62,9 @@ void SceneEditor::_updateDofGraphicsSettingsMenu()
 		}
 
 		// Update buttons hoverability
-		screen->getButton("dynamic")->setHoverable(enabled);
-		screen->getButton("blurDistance")->setHoverable(enabled);
-		screen->getButton("maxDistance")->setHoverable(enabled && dynamic);
+		screen->getButton("dynamic")->setHoverable(isEnabled);
+		screen->getButton("blurDistance")->setHoverable(isEnabled);
+		screen->getButton("maxDistance")->setHoverable(isEnabled && dynamic);
 	}
 }
 
@@ -75,7 +75,7 @@ void SceneEditor::_updateFogGraphicsSettingsMenu()
 	if (screen->getID() == "sceneEditorMenuSettingsGraphicsFog")
 	{
 		// Temporary values
-		bool enabled = _fe3d.gfx_isFogEnabled();
+		bool isEnabled = _fe3d.gfx_isFogEnabled();
 		float minDistance = _fe3d.gfx_getFogMinDistance();
 		float maxDistance = _fe3d.gfx_getFogMaxDistance();
 		float thickness = _fe3d.gfx_getFogThickness();
@@ -90,7 +90,7 @@ void SceneEditor::_updateFogGraphicsSettingsMenu()
 			}
 			else if (screen->getButton("enabled")->isHovered())
 			{
-				enabled = !enabled;
+				isEnabled = !isEnabled;
 			}
 			else if (screen->getButton("minDistance")->isHovered())
 			{
@@ -113,7 +113,7 @@ void SceneEditor::_updateFogGraphicsSettingsMenu()
 		}
 
 		// Enabled button content
-		_fe3d.textEntity_setTextContent(screen->getButton("enabled")->getTextfield()->getEntityID(), enabled ? "Enabled: YES" : "Enabled: NO");
+		_fe3d.textEntity_setTextContent(screen->getButton("enabled")->getTextfield()->getEntityID(), isEnabled ? "Enabled: YES" : "Enabled: NO");
 
 		// Min distance value
 		_gui.getGlobalScreen()->checkValueForm("minDistance", minDistance);
@@ -138,7 +138,7 @@ void SceneEditor::_updateFogGraphicsSettingsMenu()
 		color.b = std::clamp(color.b / 255.0f, 0.0f, 1.0f);
 
 		// Enable or disable DOF
-		if (enabled)
+		if (isEnabled)
 		{
 			_fe3d.gfx_enableFog(minDistance, maxDistance, thickness, color);
 		}
@@ -148,10 +148,10 @@ void SceneEditor::_updateFogGraphicsSettingsMenu()
 		}
 
 		// Update buttons hoverability
-		screen->getButton("minDistance")->setHoverable(enabled);
-		screen->getButton("maxDistance")->setHoverable(enabled);
-		screen->getButton("thickness")->setHoverable(enabled);
-		screen->getButton("color")->setHoverable(enabled);
+		screen->getButton("minDistance")->setHoverable(isEnabled);
+		screen->getButton("maxDistance")->setHoverable(isEnabled);
+		screen->getButton("thickness")->setHoverable(isEnabled);
+		screen->getButton("color")->setHoverable(isEnabled);
 	}
 }
 
@@ -164,7 +164,7 @@ void SceneEditor::_updateLensFlareGraphicsSettingsMenu()
 		// Temporary values
 		const string rootDirectory = _fe3d.misc_getRootDirectory();
 		const string targetDirectory = string("game_assets\\textures\\flare_maps\\");
-		bool enabled = _fe3d.gfx_isLensFlareEnabled();
+		bool isEnabled = _fe3d.gfx_isLensFlareEnabled();
 		string flareMapPath = _fe3d.gfx_getLensFlareMapPath();
 		float intensity = _fe3d.gfx_getLensFlareIntensity();
 		float multiplier = _fe3d.gfx_getLensFlareMultiplier();
@@ -178,7 +178,7 @@ void SceneEditor::_updateLensFlareGraphicsSettingsMenu()
 			}
 			else if (screen->getButton("enabled")->isHovered())
 			{
-				enabled = !enabled;
+				isEnabled = !isEnabled;
 			}
 			else if (screen->getButton("loadFlareMap")->isHovered())
 			{
@@ -214,7 +214,7 @@ void SceneEditor::_updateLensFlareGraphicsSettingsMenu()
 		}
 
 		// Enabled button content
-		_fe3d.textEntity_setTextContent(screen->getButton("enabled")->getTextfield()->getEntityID(), enabled ? "Enabled: YES" : "Enabled: NO");
+		_fe3d.textEntity_setTextContent(screen->getButton("enabled")->getTextfield()->getEntityID(), isEnabled ? "Enabled: YES" : "Enabled: NO");
 
 		// Intensity value
 		if (_gui.getGlobalScreen()->checkValueForm("intensity", intensity))
@@ -229,7 +229,7 @@ void SceneEditor::_updateLensFlareGraphicsSettingsMenu()
 		}
 
 		// Enable or disable lens flare
-		if (enabled && _fe3d.misc_isFileExisting(rootDirectory + flareMapPath))
+		if (isEnabled && _fe3d.misc_isFileExisting(rootDirectory + flareMapPath))
 		{
 			_fe3d.gfx_enableLensFlare(flareMapPath, intensity, multiplier);
 		}
@@ -240,8 +240,8 @@ void SceneEditor::_updateLensFlareGraphicsSettingsMenu()
 
 		// Update buttons hoverability
 		screen->getButton("enabled")->setHoverable(_fe3d.misc_isFileExisting(rootDirectory + flareMapPath));
-		screen->getButton("intensity")->setHoverable(enabled);
-		screen->getButton("multiplier")->setHoverable(enabled);
+		screen->getButton("intensity")->setHoverable(isEnabled);
+		screen->getButton("multiplier")->setHoverable(isEnabled);
 	}
 }
 
@@ -252,7 +252,7 @@ void SceneEditor::_updateskyHdrGraphicsSettingsMenu()
 	if (screen->getID() == "sceneEditorMenuSettingsGraphicsSkyHDR")
 	{
 		// Temporary values
-		bool enabled = _fe3d.gfx_isSkyHdrEnabled();
+		bool isEnabled = _fe3d.gfx_isSkyHdrEnabled();
 		float intensity = _fe3d.gfx_getSkyHdrBrightnessFactor();
 
 		// GUI management
@@ -264,7 +264,7 @@ void SceneEditor::_updateskyHdrGraphicsSettingsMenu()
 			}
 			else if (screen->getButton("enabled")->isHovered())
 			{
-				enabled = !enabled;
+				isEnabled = !isEnabled;
 			}
 			else if (screen->getButton("intensity")->isHovered())
 			{
@@ -273,7 +273,7 @@ void SceneEditor::_updateskyHdrGraphicsSettingsMenu()
 		}
 
 		// Enabled button content
-		_fe3d.textEntity_setTextContent(screen->getButton("enabled")->getTextfield()->getEntityID(), enabled ? "Enabled: YES" : "Enabled: NO");
+		_fe3d.textEntity_setTextContent(screen->getButton("enabled")->getTextfield()->getEntityID(), isEnabled ? "Enabled: YES" : "Enabled: NO");
 
 		// Extra intensity value
 		if (_gui.getGlobalScreen()->checkValueForm("intensity", intensity))
@@ -282,7 +282,7 @@ void SceneEditor::_updateskyHdrGraphicsSettingsMenu()
 		}
 
 		// Enable or disable skyHDR
-		if (enabled)
+		if (isEnabled)
 		{
 			_fe3d.gfx_enableSkyHDR(intensity);
 		}
@@ -292,6 +292,6 @@ void SceneEditor::_updateskyHdrGraphicsSettingsMenu()
 		}
 
 		// Update buttons hoverability
-		screen->getButton("intensity")->setHoverable(enabled);
+		screen->getButton("intensity")->setHoverable(isEnabled);
 	}
 }

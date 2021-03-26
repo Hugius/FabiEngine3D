@@ -368,7 +368,6 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 			else if (entityType == "GRAPHICS_SHADOWS")
 			{
 				// Data placeholders
-				bool enabled;
 				float size, lightness;
 				Vec3 position, center;
 				bool isFollowingCamera;
@@ -377,7 +376,6 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 
 				// Extract data
 				iss >>
-					enabled >>
 					size >>
 					lightness >>
 					position.x >>
@@ -396,13 +394,10 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 			else if (entityType == "GRAPHICS_MOTIONBLUR")
 			{
 				// Data placeholders
-				bool enabled;
 				float strength;
 
 				// Extract data
-				iss >>
-					enabled >>
-					strength;
+				iss >> strength;
 
 				// Enable motion blur
 				_fe3d.gfx_enableMotionBlur(strength);
@@ -410,35 +405,23 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 			else if (entityType == "GRAPHICS_DOF")
 			{
 				// Data placeholders
-				bool enabled, dynamic;
+				bool isDynamic;
 				float blurDistance, maxDistance;
 
 				// Extract data
-				iss >>
-					enabled >>
-					dynamic >>
-					blurDistance >>
-					maxDistance;
+				iss >> isDynamic >> blurDistance >> maxDistance;
 
 				// Enable DOF
-				_fe3d.gfx_enableDOF(dynamic, maxDistance, blurDistance);
+				_fe3d.gfx_enableDOF(isDynamic, maxDistance, blurDistance);
 			}
 			else if (entityType == "GRAPHICS_FOG")
 			{
 				// Data placeholders
-				bool enabled;
 				float minDistance, maxDistance, thickness;
 				Vec3 color;
 
 				// Extract data
-				iss >>
-					enabled >>
-					minDistance >>
-					maxDistance >>
-					thickness >>
-					color.r >>
-					color.g >>
-					color.b;
+				iss >> minDistance >> maxDistance >> thickness >> color.r >> color.g >> color.b;
 
 				// Enable fog
 				_fe3d.gfx_enableFog(minDistance, maxDistance, thickness, color);
@@ -446,16 +429,11 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 			else if (entityType == "GRAPHICS_LENSFLARE")
 			{
 				// Data placeholders
-				bool enabled;
 				string flareMapPath;
 				float intensity, multiplier;
 
 				// Extract data
-				iss >>
-					enabled >>
-					flareMapPath >>
-					intensity >>
-					multiplier;
+				iss >> flareMapPath >> intensity >> multiplier;
 
 				// Perform empty string & space conversions
 				flareMapPath = (flareMapPath == "?") ? "" : flareMapPath;
@@ -467,13 +445,10 @@ void SceneEditor::loadCustomSceneFromFile(const string& fileName)
 			else if (entityType == "GRAPHICS_SKYHDR")
 			{
 				// Data placeholders
-				bool enabled;
 				float intensity;
 
 				// Extract data
-				iss >>
-					enabled >>
-					intensity;
+				iss >> intensity;
 
 				// Enable skyHDR
 				_fe3d.gfx_enableSkyHDR(intensity);

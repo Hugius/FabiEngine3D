@@ -25,7 +25,6 @@ void SceneEditor::load()
 	_fe3d.camera_load(90.0f, 0.1f, 10000.0f, Vec3(0.0f));
 
 	// Default graphics
-	_fe3d.gfx_enableAmbientLighting(Vec3(1.0f), 0.5f);
 	_fe3d.gfx_enableSpecularLighting();
 	_fe3d.gfx_enablePointLighting();
 	_fe3d.gfx_enableSkyReflections(0.5f);
@@ -109,6 +108,15 @@ void SceneEditor::unload()
 
 	// Clear scene
 	clearCurrentScene();
+
+	// Disable graphics
+	_fe3d.gfx_disableSpecularLighting(true);
+	_fe3d.gfx_disablePointLighting(true);
+	_fe3d.gfx_disableSkyReflections(true);
+	_fe3d.gfx_disableSceneReflections(true);
+	_fe3d.gfx_disableLightMapping(true);
+	_fe3d.gfx_disableNormalMapping(true);
+	_fe3d.gfx_disableWaterEffects(true);
 
 	// Unload environment preview entities
 	_environmentEditor.unloadSkyEntities();

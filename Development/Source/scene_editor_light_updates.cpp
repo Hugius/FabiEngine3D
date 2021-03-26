@@ -43,6 +43,7 @@ void SceneEditor::_updateAmbientLightingMenu()
 		if (screen->getID() == "sceneEditorMenuLightingAmbient")
 		{
 			// Temporary values
+			bool isEnabled = _fe3d.gfx_isAmbientLightingEnabled();
 			Vec3 ambientLightingColor = _fe3d.gfx_getAmbientLightingColor();
 			float ambientLightingIntensity = _fe3d.gfx_getAmbientLightingIntensity();
 
@@ -52,6 +53,10 @@ void SceneEditor::_updateAmbientLightingMenu()
 				if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuLighting");
+				}
+				else if (screen->getButton("enabled")->isHovered())
+				{
+					isEnabled = !isEnabled;
 				}
 				else if (screen->getButton("color")->isHovered())
 				{
@@ -65,32 +70,46 @@ void SceneEditor::_updateAmbientLightingMenu()
 				}
 			}
 
-			// Ambient value conversion
-			if (_gui.getGlobalScreen()->checkValueForm("ambientIntensity", ambientLightingIntensity))
-			{
-				ambientLightingIntensity = std::max(0.0f, ambientLightingIntensity / 100.0f);
-			}
+			// Enabled button content
+			_fe3d.textEntity_setTextContent(screen->getButton("enabled")->getTextfield()->getEntityID(), isEnabled ? "Enabled: YES" : "Enabled: NO");
 
-			// Color R values conversion
+			// Color R value conversion
 			if (_gui.getGlobalScreen()->checkValueForm("ambientColorR", ambientLightingColor.r))
 			{
 				ambientLightingColor.r = std::clamp(ambientLightingColor.r / 255.0f, 0.0f, 1.0f);
 			}
 
-			// Color G values conversion
+			// Color G value conversion
 			if (_gui.getGlobalScreen()->checkValueForm("ambientColorG", ambientLightingColor.g))
 			{
 				ambientLightingColor.g = std::clamp(ambientLightingColor.g / 255.0f, 0.0f, 1.0f);
 			}
 
-			// Color B values conversion
+			// Color B value conversion
 			if (_gui.getGlobalScreen()->checkValueForm("ambientColorB", ambientLightingColor.b))
 			{
 				ambientLightingColor.b = std::clamp(ambientLightingColor.b / 255.0f, 0.0f, 1.0f);
 			}
 
-			// Update ambient lighting
-			_fe3d.gfx_enableAmbientLighting(ambientLightingColor, ambientLightingIntensity);
+			// Ambient intensity value conversion
+			if (_gui.getGlobalScreen()->checkValueForm("ambientIntensity", ambientLightingIntensity))
+			{
+				ambientLightingIntensity = std::max(0.0f, ambientLightingIntensity / 100.0f);
+			}
+
+			// Enable or disable ambient lighting
+			if (isEnabled)
+			{
+				_fe3d.gfx_enableAmbientLighting(ambientLightingColor, ambientLightingIntensity);
+			}
+			else
+			{
+				_fe3d.gfx_disableAmbientLighting();
+			}
+
+			// Update buttons hoverability
+			screen->getButton("color")->setHoverable(isEnabled);
+			screen->getButton("intensity")->setHoverable(isEnabled);
 		}
 	}
 }
@@ -104,6 +123,7 @@ void SceneEditor::_updateDirectionalLightingMenu()
 		if (screen->getID() == "sceneEditorMenuLightingDirectional")
 		{
 			// Temporary values
+			bool isEnabled = _fe3d.gfx_isDirectionalLightingEnabled();
 			Vec3 directionalLightingColor = _fe3d.gfx_getDirectionalLightingColor();
 			Vec3 directionalLightingPosition = _fe3d.gfx_getDirectionalLightingPosition();
 			float directionalLightingIntensity = _fe3d.gfx_getDirectionalLightingIntensity();
@@ -115,6 +135,10 @@ void SceneEditor::_updateDirectionalLightingMenu()
 				if (screen->getButton("back")->isHovered() || (_fe3d.input_getKeyPressed(InputType::KEY_ESCAPE) && !_gui.getGlobalScreen()->isFocused()))
 				{
 					_gui.getViewport("left")->getWindow("main")->setActiveScreen("sceneEditorMenuLighting");
+				}
+				else if (screen->getButton("enabled")->isHovered())
+				{
+					isEnabled = !isEnabled;
 				}
 				else if (screen->getButton("color")->isHovered())
 				{
@@ -138,19 +162,22 @@ void SceneEditor::_updateDirectionalLightingMenu()
 				}
 			}
 
-			// Color R values conversion
+			// Enabled button content
+			_fe3d.textEntity_setTextContent(screen->getButton("enabled")->getTextfield()->getEntityID(), isEnabled ? "Enabled: YES" : "Enabled: NO");
+
+			// Color R value conversion
 			if (_gui.getGlobalScreen()->checkValueForm("directionalColorR", directionalLightingColor.r))
 			{
 				directionalLightingColor.r = std::clamp(directionalLightingColor.r / 255.0f, 0.0f, 1.0f);
 			}
 
-			// Color G values conversion
+			// Color G value conversion
 			if (_gui.getGlobalScreen()->checkValueForm("directionalColorG", directionalLightingColor.g))
 			{
 				directionalLightingColor.g = std::clamp(directionalLightingColor.g / 255.0f, 0.0f, 1.0f);
 			}
 
-			// Color B values conversion
+			// Color B value conversion
 			if (_gui.getGlobalScreen()->checkValueForm("directionalColorB", directionalLightingColor.b))
 			{
 				directionalLightingColor.b = std::clamp(directionalLightingColor.b / 255.0f, 0.0f, 1.0f);
@@ -171,13 +198,25 @@ void SceneEditor::_updateDirectionalLightingMenu()
 			_gui.getGlobalScreen()->checkValueForm("billboardSize", billboardSize);
 			billboardSize = std::max(0.0f, billboardSize);
 
-			// Update directional lighting
-			_fe3d.gfx_enableDirectionalLighting(directionalLightingPosition, directionalLightingColor, directionalLightingIntensity);
-
 			// Update lightsource billboard
 			_fe3d.billboardEntity_setPosition("@@lightSource", directionalLightingPosition);
-			_fe3d.billboardEntity_setSize("@@lightSource",  Vec2(billboardSize));
+			_fe3d.billboardEntity_setSize("@@lightSource", Vec2(billboardSize));
 			_fe3d.billboardEntity_setColor("@@lightSource", directionalLightingColor);
+
+			// Enable or disable directional lighting
+			if (isEnabled)
+			{
+				_fe3d.gfx_enableDirectionalLighting(directionalLightingPosition, directionalLightingColor, directionalLightingIntensity);
+			}
+			else
+			{
+				_fe3d.gfx_disableDirectionalLighting();
+			}
+
+			// Update buttons hoverability
+			screen->getButton("color")->setHoverable(isEnabled);
+			screen->getButton("position")->setHoverable(isEnabled);
+			screen->getButton("intensity")->setHoverable(isEnabled);
 		}
 	}
 }

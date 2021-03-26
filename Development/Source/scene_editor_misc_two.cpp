@@ -154,20 +154,13 @@ void SceneEditor::copyPreviewBillboard(const string& newID, const string& previe
 
 void SceneEditor::clearCurrentScene()
 {
-	// Disable graphics
+	// Disable scene graphics
 	if (_isEditorLoaded)
 	{
 		_fe3d.gfx_disableAmbientLighting(true);
 		_fe3d.gfx_disableDirectionalLighting(true);
-		_fe3d.gfx_disableSpecularLighting(true);
-		_fe3d.gfx_disablePointLighting(true);
 		_fe3d.gfx_disableFog(true);
-		_fe3d.gfx_disableSkyReflections(true);
-		_fe3d.gfx_disableSceneReflections(true);
-		_fe3d.gfx_disableLightMapping(true);
-		_fe3d.gfx_disableNormalMapping(true);
 		_fe3d.gfx_disableShadows(true);
-		_fe3d.gfx_disableWaterEffects(true);
 		_fe3d.gfx_disableSkyHDR(true);
 		_fe3d.gfx_disableDOF(true);
 		_fe3d.gfx_disableMotionBlur(true);

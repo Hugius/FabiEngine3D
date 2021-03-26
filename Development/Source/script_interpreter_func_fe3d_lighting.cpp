@@ -3,6 +3,26 @@
 bool ScriptInterpreter::_executeFe3dLightingFunction(const string& functionName, vector<ScriptValue>& arguments, vector<ScriptValue>& returnValues)
 {
 	// Determine type of function
+	if (functionName == "fe3d:lighting_enable_ambient")
+	{
+		// Validate arguments
+		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			_fe3d.gfx_enableAmbientLighting(
+				_fe3d.gfx_getAmbientLightingColor(),
+				_fe3d.gfx_getAmbientLightingIntensity());
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+		}
+	}
+	else if (functionName == "fe3d:lighting_disable_ambient")
+	{
+		// Validate arguments
+		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			_fe3d.gfx_disableAmbientLighting();
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+		}
+	}
 	if (functionName == "fe3d:lighting_set_ambient_color")
 	{
 		auto types = { ScriptValueType::DECIMAL, ScriptValueType::DECIMAL, ScriptValueType::DECIMAL };
@@ -43,6 +63,27 @@ bool ScriptInterpreter::_executeFe3dLightingFunction(const string& functionName,
 		{
 			auto result = _fe3d.gfx_getAmbientLightingIntensity();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::DECIMAL, result));
+		}
+	}
+	else if (functionName == "fe3d:lighting_enable_directional")
+	{
+		// Validate arguments
+		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			_fe3d.gfx_enableDirectionalLighting(
+				_fe3d.gfx_getDirectionalLightingPosition(),
+				_fe3d.gfx_getDirectionalLightingColor(),
+				_fe3d.gfx_getDirectionalLightingIntensity());
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+		}
+	}
+	else if (functionName == "fe3d:lighting_disable_directional")
+	{
+		// Validate arguments
+		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			_fe3d.gfx_disableDirectionalLighting();
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}
 	else if (functionName == "fe3d:lighting_set_directional_position")
@@ -287,6 +328,22 @@ bool ScriptInterpreter::_executeFe3dLightingFunction(const string& functionName,
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
 		{
 			_fe3d.gfx_disablePointLighting();
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+		}
+	}
+	else if (functionName == "fe3d:lighting_enable_light_mapping")
+	{
+		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			_fe3d.gfx_enableLightMapping();
+			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
+		}
+	}
+	else if (functionName == "fe3d:lighting_disable_light_mapping")
+	{
+		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
+		{
+			_fe3d.gfx_disableLightMapping();
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
 		}
 	}

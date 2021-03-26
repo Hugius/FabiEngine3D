@@ -33,28 +33,6 @@ void SceneEditor::loadEditorSceneFromFile(const string& fileName)
 		_loadedBillboardIDs.clear();
 		_loadedAudioIDs.clear();
 		_loadedLightIDs.clear();
-		
-		// Default properties for scene editor
-		if (_isEditorLoaded)
-		{
-			// No sky at default
-			_fe3d.skyEntity_select("");
-
-			// Default camera
-			_fe3d.camera_load(90.0f, 0.1f, 10000.0f, Vec3(0.0f));
-
-			// Disable vsync
-			_fe3d.misc_setVsync(false);
-
-			// Default graphics
-			_fe3d.gfx_enableSpecularLighting();
-			_fe3d.gfx_enablePointLighting();
-			_fe3d.gfx_enableSkyReflections(0.5f);
-			_fe3d.gfx_enableSceneReflections(0.5f);
-			_fe3d.gfx_enableLightMapping();
-			_fe3d.gfx_enableNormalMapping();
-			_fe3d.gfx_enableWaterEffects();
-		}
 
 		// Load scene file
 		std::ifstream file(fullFilePath);
@@ -68,8 +46,7 @@ void SceneEditor::loadEditorSceneFromFile(const string& fileName)
 
 			// Extract type from file
 			string entityType;
-			iss >>
-				entityType;
+			iss >> entityType;
 
 			// Load entity according to type
 			if (entityType == "SKY")
@@ -78,9 +55,7 @@ void SceneEditor::loadEditorSceneFromFile(const string& fileName)
 				string skyID, previewID;
 
 				// Extract data
-				iss >>
-					skyID >>
-					previewID;
+				iss >> skyID >> previewID;
 
 				// Add sky
 				_copyPreviewSky(skyID, previewID);
@@ -97,9 +72,7 @@ void SceneEditor::loadEditorSceneFromFile(const string& fileName)
 				string terrainID, previewID;
 
 				// Extract data
-				iss >>
-					terrainID >>
-					previewID;
+				iss >> terrainID >> previewID;
 
 				// Add terrain
 				_copyPreviewTerrain(terrainID, previewID);
@@ -116,9 +89,7 @@ void SceneEditor::loadEditorSceneFromFile(const string& fileName)
 				string waterID, previewID;
 
 				// Extract data
-				iss >>
-					waterID >>
-					previewID;
+				iss >> waterID >> previewID;
 
 				// Add water
 				_copyPreviewWater(waterID, previewID);
@@ -137,8 +108,7 @@ void SceneEditor::loadEditorSceneFromFile(const string& fileName)
 				bool isFrozen;
 
 				// Extract ID
-				iss >>
-					modelID;
+				iss >> modelID;
 
 				// If LOD entity, only load if executing game
 				bool makeInvisible = false;
@@ -202,8 +172,7 @@ void SceneEditor::loadEditorSceneFromFile(const string& fileName)
 					{
 						// Check if file has offset data left
 						string nextElement;
-						iss >>
-							nextElement;
+						iss >> nextElement;
 
 						// Check if item is a number
 						if (nextElement == "") // End of line, because instanced model cannot have AABB
@@ -214,9 +183,7 @@ void SceneEditor::loadEditorSceneFromFile(const string& fileName)
 						{
 							Vec3 offset;
 							offset.x = stof(nextElement);
-							iss >>
-								offset.y >>
-								offset.z;
+							iss >> offset.y >> offset.z;
 							instancedOffsets.push_back(offset);
 						}
 					}
@@ -299,7 +266,7 @@ void SceneEditor::loadEditorSceneFromFile(const string& fileName)
 					ambientLightingColor.b >>
 					ambientLightingIntensity;
 
-				// Apply
+				// Add ambient lighting
 				_fe3d.gfx_enableAmbientLighting(ambientLightingColor, ambientLightingIntensity);
 			}
 			else if (entityType == "DIRECTIONAL_LIGHT")
@@ -369,8 +336,7 @@ void SceneEditor::loadEditorSceneFromFile(const string& fileName)
 				float lodDistance;
 
 				// Extract data
-				iss >>
-					lodDistance;
+				iss >> lodDistance;
 
 				// Set distance
 				_fe3d.misc_setLevelOfDetailDistance(lodDistance);
@@ -378,8 +344,7 @@ void SceneEditor::loadEditorSceneFromFile(const string& fileName)
 			else if (entityType == "EDITOR_SPEED")
 			{
 				// Extract data
-				iss >>
-					_editorSpeed;
+				iss >> _editorSpeed;
 			}
 			else if (entityType == "EDITOR_POSITION")
 			{
@@ -387,10 +352,7 @@ void SceneEditor::loadEditorSceneFromFile(const string& fileName)
 				Vec3 position;
 
 				// Extract data
-				iss >>
-					position.x >>
-					position.y >>
-					position.z;
+				iss >> position.x >> position.y >> position.z;
 
 				// Set position
 				_fe3d.camera_setPosition(position);
@@ -399,8 +361,9 @@ void SceneEditor::loadEditorSceneFromFile(const string& fileName)
 			{
 				// Data placeholders
 				float yaw;
-				iss >>
-					yaw;
+
+				// Extract data
+				iss >> yaw;
 
 				// Set yaw
 				_fe3d.camera_setYaw(yaw);
@@ -411,8 +374,7 @@ void SceneEditor::loadEditorSceneFromFile(const string& fileName)
 				float pitch;
 
 				// Extract data
-				iss >>
-					pitch;
+				iss >> pitch;
 
 				// Set pitch
 				_fe3d.camera_setPitch(pitch);
@@ -420,7 +382,6 @@ void SceneEditor::loadEditorSceneFromFile(const string& fileName)
 			else if (entityType == "GRAPHICS_SHADOWS")
 			{
 				// Data placeholders
-				bool enabled;
 				float size, lightness;
 				Vec3 position, center;
 				bool isFollowingCamera;
@@ -429,7 +390,6 @@ void SceneEditor::loadEditorSceneFromFile(const string& fileName)
 
 				// Extract data
 				iss >>
-					enabled >>
 					size >>
 					lightness >>
 					position.x >>
@@ -448,13 +408,10 @@ void SceneEditor::loadEditorSceneFromFile(const string& fileName)
 			else if (entityType == "GRAPHICS_MOTIONBLUR")
 			{
 				// Data placeholders
-				bool enabled;
 				float strength;
 
 				// Extract data
-				iss >>
-					enabled >> 
-					strength;
+				iss >> strength;
 
 				// Enable motion blur
 				_fe3d.gfx_enableMotionBlur(strength);
@@ -462,35 +419,23 @@ void SceneEditor::loadEditorSceneFromFile(const string& fileName)
 			else if (entityType == "GRAPHICS_DOF")
 			{
 				// Data placeholders
-				bool enabled, dynamic;
+				bool isDynamic;
 				float blurDistance, maxDistance;
 
 				// Extract data
-				iss >>
-					enabled >>
-					dynamic >>
-					blurDistance >>
-					maxDistance;
+				iss >> isDynamic >> blurDistance >> maxDistance;
 
 				// Enable DOF
-				_fe3d.gfx_enableDOF(dynamic, maxDistance, blurDistance);
+				_fe3d.gfx_enableDOF(isDynamic, maxDistance, blurDistance);
 			}
 			else if (entityType == "GRAPHICS_FOG")
 			{
 				// Data placeholders
-				bool enabled;
 				float minDistance, maxDistance, thickness;
 				Vec3 color;
 
 				// Extract data
-				iss >>
-					enabled >>
-					minDistance >>
-					maxDistance >>
-					thickness >>
-					color.r >>
-					color.g >>
-					color.b;
+				iss >> minDistance >> maxDistance >> thickness >> color.r >> color.g >> color.b;
 
 				// Enable fog
 				_fe3d.gfx_enableFog(minDistance, maxDistance, thickness, color);
@@ -498,16 +443,11 @@ void SceneEditor::loadEditorSceneFromFile(const string& fileName)
 			else if (entityType == "GRAPHICS_LENSFLARE")
 			{
 				// Data placeholders
-				bool enabled;
 				string flareMapPath;
 				float intensity, multiplier;
 
 				// Extract data
-				iss >>
-					enabled >>
-					flareMapPath >>
-					intensity >>
-					multiplier;
+				iss >> flareMapPath >> intensity >> multiplier;
 
 				// Perform empty string & space conversions
 				flareMapPath = (flareMapPath == "?") ? "" : flareMapPath;
@@ -519,13 +459,10 @@ void SceneEditor::loadEditorSceneFromFile(const string& fileName)
 			else if (entityType == "GRAPHICS_SKYHDR")
 			{
 				// Data placeholders
-				bool enabled;
 				float intensity;
 
 				// Extract data
-				iss >>
-					enabled >>
-					intensity;
+				iss >> intensity;
 				
 				// Enable skyHDR
 				_fe3d.gfx_enableSkyHDR(intensity);

@@ -218,22 +218,6 @@ bool ScriptInterpreter::_executeFe3dGraphicsFunction(const string& functionName,
 			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::VEC3, result));
 		}
 	}
-	else if (functionName == "fe3d:graphics_enable_light_mapping")
-	{
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
-		{
-			_fe3d.gfx_enableLightMapping();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
-		}
-	}
-	else if (functionName == "fe3d:graphics_disable_light_mapping")
-	{
-		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))
-		{
-			_fe3d.gfx_disableLightMapping();
-			returnValues.push_back(ScriptValue(_fe3d, ScriptValueType::EMPTY));
-		}
-	}
 	else if (functionName == "fe3d:graphics_enable_sky_hdr")
 	{
 		if (_validateListValueAmount(arguments, 0) && _validateListValueTypes(arguments, {}))

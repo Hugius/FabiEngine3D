@@ -57,6 +57,14 @@
   Starts a timer to measure passing time. Works like a stopwatch.
 - `fe3d:timer_stop`() ---> `DEC`  
   Returns measured time in milliseconds.
+- `fe3d:wireframe_enable_rendering`() ---> `NONE`  
+  Enable wireframe rendering.
+- `fe3d:wireframe_disable_rendering`() ---> `NONE`  
+  Disable wireframe rendering.
+- `fe3d:aabbs_enable_rendering`() ---> `NONE`  
+  Enable frame rendering of AABBs.
+- `fe3d:aabbs_disable_rendering`() ---> `NONE`  
+  Disable frame rendering of AABBs.
 - `fe3d:directory_is_existing`(`STR` directoryPath) ---> `BOOL`  
   Returns true if **directoryPath** in `projects\<your_project>\saves\` is existing.
 - `fe3d:directory_create`(`STR` directoryPath) ---> `NONE`  

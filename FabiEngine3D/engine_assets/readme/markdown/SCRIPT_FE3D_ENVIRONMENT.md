@@ -11,11 +11,11 @@
 - `fe3d:sky_get_rotation_speed`() ---> `DEC`  
   Returns the rotation speed of the selected sky.
 - `fe3d:sky_set_lightness`(`DEC` lightness) ---> `NONE`  
-  Sets the **lightness** of the selected sky. Cannot be lower than 0.0.
+  Sets the **lightness** of the selected sky.
 - `fe3d:sky_get_lightness`() ---> `DEC`  
   Returns the lightness of the selected sky.
 - `fe3d:sky_set_color`(`DEC` r, `DEC` g, `DEC` b) ---> `NONE`  
-  Sets the color as **rgb** of the selected sky. The values must be between 0.0 and 1.0 (0% and 100% respectively).
+  Sets the color as **rgb** of the selected sky.
 - `fe3d:sky_get_color`() ---> `VEC3`  
   Returns the color of the selected sky.
 #### Terrain
@@ -35,10 +35,10 @@
 - `fe3d:water_get_height`() ---> `DEC`  
   Returns the height (Y position) of the selected water.
 - `fe3d:water_set_color`(`DEC` r, `DEC` g, `DEC` b) ---> `NONE`  
-  Sets the color as **rgb** of the selected water. The values must be between 0.0 and 1.0 (0% and 100% respectively).
+  Sets the color as **rgb** of the selected water.
 - `fe3d:water_get_color`() ---> `VEC3`  
   Returns the color of the selected water.
 - `fe3d:water_set_transparency`(`DEC` transparency) ---> `NONE`  
-  Sets the **transparency** of the selected water. Cannot be lower than 0.0.
+  Sets the **transparency** of the selected water.
 - `fe3d:water_get_transparency`() ---> `DEC`  
   Returns the transparency of the selected water.

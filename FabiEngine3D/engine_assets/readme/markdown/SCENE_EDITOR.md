@@ -2,6 +2,7 @@
 ![scene](../images/scene_editor.png)
 ### General
 - All scenes will be saved in `projects\<your_project>\scenes\editor\`.
+- **Everything** that you **place** in a scene (environment, model, billboard, audio, light) is **connected** to the **editors**. Only the things you change in the scene editor will be saved into the scene. For example: if you have a scene full of **green trees** and you change the color of that model to **red** in the **model editor**, those trees in the scene will become **red as well**.
 - Use the `WASD` keys to move around.
 - Use the `SPACE` key to move **up**.
 - Use the `LSHIFT` key to move **down**.

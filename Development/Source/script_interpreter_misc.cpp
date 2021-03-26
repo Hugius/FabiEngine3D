@@ -120,14 +120,14 @@ void ScriptInterpreter::_throwScriptError(const string& message)
 void ScriptInterpreter::_checkEngineWarnings()
 {
 	// Check if any new messages were logged
-	if (_fe3d.logger_getMessageCount() > _lastLoggerMessageCount)
+	auto messageCount = _fe3d.logger_getMessageCount();
+	if (messageCount > _lastLoggerMessageCount)
 	{
 		// Retrieve all logged messages
 		auto messageStack = _fe3d.logger_getMessageStack();
 
-		std::cout << "hoi";
 		// Loop over all new messages
-		for (unsigned int i = _lastLoggerMessageCount - 1; i < messageStack.size(); i++)
+		for (unsigned int i = _lastLoggerMessageCount - 1; i < messageCount; i++)
 		{
 			// Check if logged message is a warning
 			if (messageStack[i].substr(0, string("[Warn]").size()) == "[Warn]")

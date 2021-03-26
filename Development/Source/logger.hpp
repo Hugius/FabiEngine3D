@@ -111,7 +111,6 @@ private:
 		// Add to stack
 		ss << " > ";
 		_messageStack.push_back(ss.str());
-		_messageCount++;
 
 		// Print message body
 		_printMessage(first, rest...);

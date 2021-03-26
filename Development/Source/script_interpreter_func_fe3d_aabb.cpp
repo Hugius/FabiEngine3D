@@ -147,6 +147,13 @@ bool ScriptInterpreter::_executeFe3dAabbEntityFunction(const string& functionNam
 			// Validate existing AABB ID
 			if (_validateFe3dAabbEntity(arguments[0].getString()))
 			{
+				// Cannot change a bound entity
+				if (!_fe3d.aabbEntity_getParentID(arguments[0].getString()).empty())
+				{
+					_throwScriptError("Cannot change an AABB that is bound to a model or billboard!");
+					return true;
+				}
+
 				// Determine if AABB must be visible or not
 				if (arguments[1].getBoolean())
 				{

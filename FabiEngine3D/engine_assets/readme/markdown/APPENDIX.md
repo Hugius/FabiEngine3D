@@ -22,6 +22,11 @@
 - If you want to access an individual **AABB** bound to a **bilboard**, the ID is composed like this: **billboardID + "@" + aabbName**.
 ### Miscellaneous
 - Billboards are **NOT** affected by any lighting or shadows. They are only affected by DOF & fog.
+- Color values (r,g,b) are always clamped between 0.0 and 1.0 (0% and 100% respectively).
+- Alpha/transparency values are always clamped between 0.0 and 1.0 (0% and 100% respectively).
+- Size values cannot go lower than 0.0 (a size 0.0 means nothing exists).
+- Lightness/intensity/brightness values cannot go lower than 0.0 (there cannot be less light than complete darkness).
+- Distance values are always absolute (cannot go lower than 0.0).
 ### Tips & tricks
 - You can create your own custom **subfolders** within the main folder of `user\assets`.
 - Internal engine updates happen **after** the scripting updates.

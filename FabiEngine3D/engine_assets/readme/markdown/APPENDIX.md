@@ -21,12 +21,19 @@
 - If you want to access an individual **AABB** bound to a **model**, the ID is composed like this: **modelID + "@" + aabbName**.
 - If you want to access an individual **AABB** bound to a **bilboard**, the ID is composed like this: **billboardID + "@" + aabbName**.
 ### Miscellaneous
-- Billboards are **NOT** affected by any lighting or shadows. They are only affected by DOF & fog.
-- Color values (r,g,b) are always clamped between 0.0 and 1.0 (0% and 100% respectively).
-- Alpha/transparency values are always clamped between 0.0 and 1.0 (0% and 100% respectively).
-- Size values cannot go lower than 0.0 (a size 0.0 means nothing exists).
-- Lightness/intensity/brightness values cannot go lower than 0.0 (there cannot be less light than complete darkness).
-- Distance values are always absolute (cannot go lower than 0.0).
+- **Billboards** are **NOT** affected by any lighting or shadows. They are only affected by DOF & fog.
+- **Color** values (r,g,b) are clamped between 0.0 and 1.0 (0% and 100% respectively).
+- **Alpha/transparency** values are clamped between 0.0 and 1.0 (0% and 100% respectively).
+- **Mix** values are clamped between 0.0 and 1.0 (0% and 100% respectively).
+- **Size/width/height** values cannot be lower than 0.0 (a size 0.0 means nothing exists).
+- **Lightness/intensity/brightness** values cannot be lower than 0.0 (there cannot be less light than complete darkness).
+- **Distance** values are absolute (cannot be lower than 0.0).
+- **UV repeat** values cannot be lower than 0 (something cannot repeat negative).
+- **Factor** values cannot be lower than 0.0 (you cannot take the power of a negative value).
+- **Index** values cannot be lower than 0 (because a negative index does not exist).
+- **Rotation angle** values cannot be higher than 360 or lower than -360 (example: 500 degrees will be 140 degrees)
+- Furthermore there are some miscellaneous values that cannot be lower than 0.0 (**sprite row/column amount & framestep**, **lens flare multiplier**, **motion blur strength**).
+- Furthermore there are some miscellaneous values that are clamped between 0.0 and 1.0 (**fog thickness**).
 ### Tips & tricks
 - You can create your own custom **subfolders** within the main folder of `user\assets`.
 - Internal engine updates happen **after** the scripting updates.

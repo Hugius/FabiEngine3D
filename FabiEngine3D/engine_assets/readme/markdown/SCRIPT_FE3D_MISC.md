@@ -32,7 +32,7 @@
 - `fe3d:scene_add_custom_lighting`() ---> `NONE`  
   Queues ambient lighting + directional lighting to be saved in the custom scene.
 - `fe3d:scene_add_custom_graphics`() ---> `NONE`  
-  Queues all graphics to be saved in the custom scene.
+  Queues graphical settings (shadows, motion blur, DOF, fog, lens flare, skyHDR) to be saved in the custom scene.
 - `fe3d:scene_save_custom`() ---> `NONE`  
   Saves current custom scene to a file as ID in `projects\<your_project>\scenes\custom\`.
 - `fe3d:scene_load_custom`(`STR` ID) ---> `NONE`  
